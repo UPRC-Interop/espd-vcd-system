@@ -1,0 +1,32 @@
+/**
+ * Author: Panagiotis NICOLAOU
+ * Email: pnikola@unipi.gr
+ */
+dependencies {
+    /* logging */
+    compile project(':logging')
+
+    /* hibernate */
+    compile("org.hibernate:hibernate-core:${project.hibernate_version}") {
+        exclude group: 'antlr', module: 'antlr'
+        exclude group: 'dom4j', module: 'dom4j'
+        exclude group: 'org.apache.geronimo.specs', module: 'geronimo-jta_1.1_spec'
+        exclude group: 'org.javassist', module: 'javassist'
+        exclude group: 'org.jboss', module: 'jandex'
+        exclude group: 'org.jboss.logging', module: 'jboss-logging'
+    }
+
+    /* postgresql */
+//    compile "org.postgresql:postgresql:${project.postgresql_version}"
+
+    // TestNG is also supported by the Gradle Test task. Just change the
+    // testCompile dependency to testCompile 'org.testng:testng:6.8.1' and add
+    // 'test.useTestNG()' to your build script.
+    testCompile 'junit:junit:4.12'
+}
+
+task copyTask(type: Copy) {
+    from "build/libs/persistence-${version}.jar"
+    into '../artifacts'
+//    rename "persistence-${version}.jar", 'persistence.jar'
+}

@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	eDocument	:	ESPDResponse . Syntax Binding based on OASIS UBL-2.1 
+	version			:	1.0
+	Last update	: 	20150918Fr
+	Author			:	Enric Staromiejski <enric.staromiejski.torregrosa@everis.com>
+	Project Owner: 	DG GROW, European Commission
+	-->
+<xsd:schema xmlns="urn:grow:names:specification:ubl:schema:xsd:ESPDResponse-1" xmlns:espd="urn:grow:names:specification:ubl:schema:xsd:ESPD-CommonAggregateComponents-1" xmlns:espd-cbc="urn:grow:names:specification:ubl:schema:xsd:ESPD-CommonBasicComponents-1" xmlns:ccv="urn:isa:names:specification:ubl:schema:xsd:CCV-CommonAggregateComponents-1" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:ccts="urn:un:unece:uncefact:documentation:2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:grow:names:specification:ubl:schema:xsd:ESPDResponse-1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xsd:import namespace="urn:grow:names:specification:ubl:schema:xsd:ESPD-CommonAggregateComponents-1" schemaLocation="../common/ESPD-CommonAggregateComponents-1.0.xsd"/>
+	<xsd:import namespace="urn:grow:names:specification:ubl:schema:xsd:ESPD-CommonBasicComponents-1" schemaLocation="../common/ESPD-CommonBasicComponents-1.0.xsd"/>
+	<xsd:import namespace="urn:isa:names:specification:ubl:schema:xsd:CCV-CommonAggregateComponents-1" schemaLocation="../common/CCV-CommonAggregateComponents-1.0.xsd"/>
+	<xsd:import namespace="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" schemaLocation="../common/UBL-CommonAggregateComponents-2.1.xsd"/>
+	<xsd:import namespace="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" schemaLocation="../common/UBL-CommonBasicComponents-2.1.xsd"/>
+	<xsd:element name="ESPDResponse" type="ESPDResponseType"/>
+	<xsd:complexType name="ESPDResponseType">
+		<xsd:annotation>
+			<xsd:documentation>
+				<ccts:Component>
+					<ccts:ComponentType>ABIE</ccts:ComponentType>
+					<ccts:DictionaryEntryName>ESPDResponse. Details</ccts:DictionaryEntryName>
+					<ccts:Definition>A document whereby an Economic Operator states wether it fulfills or not the criteria required to tender for a specific procurement project and to specify where to access the evidences that prove the fulfillment of those criteria.</ccts:Definition>
+					<ccts:ObjectClass>ESPDResponse</ccts:ObjectClass>
+				</ccts:Component>
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element ref="cbc:UBLVersionID" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<ccts:Component>
+							<ccts:ComponentType>BBIE</ccts:ComponentType>
+							<ccts:DictionaryEntryName>ESPDResponse. UBL Version Identifier. Identifier</ccts:DictionaryEntryName>
+							<ccts:Definition>Identifies the earliest version of the UBL 2 schema for this document type that defines all of the elements that might be encountered in the current instance.</ccts:Definition>
+							<ccts:Cardinality>0..1</ccts:Cardinality>
+							<ccts:ObjectClass>ESPDResponse</ccts:ObjectClass>
+							<ccts:PropertyTerm>UBL Version Identifier</ccts:PropertyTerm>
+							<ccts:RepresentationTerm>Identifier</ccts:RepresentationTerm>
+							<ccts:DataType>Identifier. Type</ccts:DataType>
+							<ccts:Examples>2.1</ccts:Examples>
+						</ccts:Component>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="cbc:CustomizationID" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<ccts:Component>
+							<ccts:ComponentType>BBIE</ccts:ComponentType>
+							<ccts:DictionaryEntryName>ESPDResponse. Customization Identifier. Identifier</ccts:DictionaryEntryName>
+							<ccts:Definition>Identifies a user-defined customization of UBL for a specific use.</ccts:Definition>
+							<ccts:Cardinality>0..1</ccts:Cardinality>
+							<ccts:ObjectClass>ESPDResponse</ccts:ObjectClass>
+							<ccts:PropertyTerm>Customization Identifier</ccts:PropertyTerm>
+							<ccts:RepresentationTerm>Identifier</ccts:RepresentationTerm>
+							<ccts:DataType>Identifier. Type</ccts:DataType>
+							<ccts:Examples>GROW</ccts:Examples>
+						</ccts:Component>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="cbc:ProfileID" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<ccts:Component>
+							<ccts:ComponentType>BBIE</ccts:ComponentType>
+							<ccts:DictionaryEntryName>ESPDResponse. Profile Identifier. Identifier</ccts:DictionaryEntryName>
+							<ccts:Definition>Identifies a user-defined profile of the customization of UBL being used.</ccts:Definition>
+							<ccts:Cardinality>0..1</ccts:Cardinality>
+							<ccts:ObjectClass>ESPDResponse</ccts:ObjectClass>
+							<ccts:PropertyTerm>Profile Identifier</ccts:PropertyTerm>
+							<ccts:RepresentationTerm>Identifier</ccts:RepresentationTerm>
+							<ccts:DataType>Identifier. Type</ccts:DataType>
+							<ccts:Examples>Directive 2014/24/EU ESPD</ccts:Examples>
+						</ccts:Component>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="cbc:ProfileExecutionID" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<ccts:Component>
+							<ccts:ComponentType>BBIE</ccts:ComponentType>
+							<ccts:DictionaryEntryName>ESPDResponse. Profile Execution Identifier. Identifier</ccts:DictionaryEntryName>
+							<ccts:Definition>Identifies an instance of executing a profile, to associate all transactions in a collaboration.</ccts:Definition>
+							<ccts:Cardinality>0..1</ccts:Cardinality>
+							<ccts:ObjectClass>ESPDResponse</ccts:ObjectClass>
+							<ccts:PropertyTerm>Profile Execution Identifier</ccts:PropertyTerm>
+							<ccts:RepresentationTerm>Identifier</ccts:RepresentationTerm>
+							<ccts:DataType>Identifier. Type</ccts:DataType>
+							<ccts:Examples>BIICoretrdm070ESPDResponse</ccts:Examples>
+						</ccts:Component>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="cbc:ID">
+				<xsd:annotation>
+					<xsd:documentation>
+						<ccts:Component>
+							<ccts:ComponentType>BBIE</ccts:ComponentType>
+							<ccts:DictionaryEntryName>ESPDResponse. Identifier</ccts:DictionaryEntryName>
+							<ccts:Definition>Identifier of a document. A transaction instance must contain an identifier. The identifier enables positive referencing the document instance for various purposes including referencing between transactions that are part of the same process.</ccts:Definition>
+							<ccts:Cardinality>1</ccts:Cardinality>
+							<ccts:ObjectClass>ESPDResponse</ccts:ObjectClass>
+							<ccts:PropertyTerm>Identifier</ccts:PropertyTerm>
+							<ccts:RepresentationTerm>Identifier</ccts:RepresentationTerm>
+							<ccts:DataType>Identifier. Type</ccts:DataType>
+						</ccts:Component>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="cbc:CopyIndicator" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<ccts:Component>
+							<ccts:ComponentType>BBIE</ccts:ComponentType>
+							<ccts:DictionaryEntryName>ESPDResponse. Copy_ Indicator. Indicator</ccts:DictionaryEntryName>
+							<ccts:Definition>Indicates whether this document is a copy (true) or not (false).</ccts:Definition>
+							<ccts:Cardinality>0..1</ccts:Cardinality>
+							<ccts:ObjectClass>ESPDResponse</ccts:ObjectClass>
+							<ccts:PropertyTermQualifier>Copy</ccts:PropertyTermQualifier>
+							<ccts:PropertyTerm>Indicator</ccts:PropertyTerm>
+							<ccts:RepresentationTerm>Indicator</ccts:RepresentationTerm>
+							<ccts:DataType>Indicator. Type</ccts:DataType>
+						</ccts:Component>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="cbc:UUID" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<ccts:Component>
+							<ccts:ComponentType>BBIE</ccts:ComponentType>
+							<ccts:DictionaryEntryName>ESPDResponse. UUID. Identifier</ccts:DictionaryEntryName>
+							<ccts:Definition>A universally unique identifier for an instance of this document.</ccts:Definition>
+							<ccts:Cardinality>0..1</ccts:Cardinality>
+							<ccts:ObjectClass>ESPDResponse</ccts:ObjectClass>
+							<ccts:PropertyTerm>UUID</ccts:PropertyTerm>
+							<ccts:RepresentationTerm>Identifier</ccts:RepresentationTerm>
+							<ccts:DataType>Identifier. Type</ccts:DataType>
+						</ccts:Component>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Beware that the UBL-2.1 IssueDate cardinality contradicts the CEN/BII Requirement -->
+			<xsd:element ref="cbc:IssueDate">
+				<xsd:annotation>
+					<xsd:documentation>
+						<ccts:Component>
+							<ccts:ComponentType>BBIE</ccts:ComponentType>
+							<ccts:DictionaryEntryName>ESPDResponse. Issue Date. Date</ccts:DictionaryEntryName>
+							<ccts:Definition>The date, assigned by the sender, on which this document was issued.</ccts:Definition>
+							<ccts:Cardinality>1</ccts:Cardinality>
+							<ccts:ObjectClass>ESPDResponse</ccts:ObjectClass>
+							<ccts:PropertyTerm>Issue Date</ccts:PropertyTerm>
+							<ccts:RepresentationTerm>Date</ccts:RepresentationTerm>
+							<ccts:DataType>Date. Type</ccts:DataType>
+						</ccts:Component>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="cbc:IssueTime" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<ccts:Component>
+							<ccts:ComponentType>BBIE</ccts:ComponentType>
+							<ccts:DictionaryEntryName>ESPDResponse. Issue Time. Time</ccts:DictionaryEntryName>
+							<ccts:Definition>The time, assigned by the sender, at which this document was issued.</ccts:Definition>
+							<ccts:Cardinality>0..1</ccts:Cardinality>
+							<ccts:ObjectClass>ESPDResponse</ccts:ObjectClass>
+							<ccts:PropertyTerm>Issue Time</ccts:PropertyTerm>
+							<ccts:RepresentationTerm>Time</ccts:RepresentationTerm>
+							<ccts:DataType>Time. Type</ccts:DataType>
+						</ccts:Component>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- e-Sens VCD requires cardinality 0..1, but this contradicts the original UBL-2.1, DG GROW and CEN/BII cardinality 1 requirement -->
+			<xsd:element ref="cbc:ContractFolderID">
+				<xsd:annotation>
+					<xsd:documentation>
+						<ccts:Component>
+							<ccts:ComponentType>BBIE</ccts:ComponentType>
+							<ccts:DictionaryEntryName>ESPDResponse. Contract Folder Identifier. Identifier</ccts:DictionaryEntryName>
+							<ccts:Definition>An identifier that is specified by the buyer and used as a reference number for all documents in the procurement process. It is also known as procurement project identifier, or procurement reference number. A reference to the procurement process to which this Qualification document is delivered as a response.</ccts:Definition>
+							<ccts:Cardinality>1</ccts:Cardinality>
+							<ccts:ObjectClass>ESPDResponse</ccts:ObjectClass>
+							<ccts:PropertyTerm>Contract Folder Identifier</ccts:PropertyTerm>
+							<ccts:RepresentationTerm>Identifier</ccts:RepresentationTerm>
+							<ccts:DataType>Identifier. Type</ccts:DataType>
+						</ccts:Component>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="espd-cbc:EconomicOperatorGroupName" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<ccts:Component>
+							<ccts:ComponentType>BBIE</ccts:ComponentType>
+							<ccts:DictionaryEntryName>ESPDResponse. Group Name. Name</ccts:DictionaryEntryName>
+							<ccts:Definition>An identifier that is specified by the buyer and used as a reference number for all documents in the procurement process. It is also known as procurement project identifier, or procurement reference number. A reference to the procurement process to which this Qualification document is delivered as a response.</ccts:Definition>
+							<ccts:Cardinality>1</ccts:Cardinality>
+							<ccts:ObjectClass>ESPDResponse</ccts:ObjectClass>
+							<ccts:PropertyTerm>Contract Folder Identifier</ccts:PropertyTerm>
+							<ccts:RepresentationTerm>Identifier</ccts:RepresentationTerm>
+							<ccts:DataType>Identifier. Type</ccts:DataType>
+						</ccts:Component>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="cac:ContractingParty">
+				<xsd:annotation>
+					<xsd:documentation>
+						<ccts:Component>
+							<ccts:ComponentType>ASBIE</ccts:ComponentType>
+							<ccts:DictionaryEntryName>ESPDResponse. Contracting Party</ccts:DictionaryEntryName>
+							<ccts:Definition>The contracting authority or contracting entity who is buying supplies, services or public works using a tendering procedure as described in the applicable directive (Directives 2014/24/EU, 2014/25/EU).</ccts:Definition>
+							<ccts:Cardinality>1</ccts:Cardinality>
+							<ccts:ObjectClass>ESPDResponse</ccts:ObjectClass>
+							<ccts:PropertyTerm>Contracting Party</ccts:PropertyTerm>
+							<ccts:AssociatedObjectClass>Contracting Party</ccts:AssociatedObjectClass>
+							<ccts:RepresentationTerm>Contracting Party</ccts:RepresentationTerm>
+						</ccts:Component>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="cac:ServiceProviderParty" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<ccts:Component>
+							<ccts:ComponentType>ASBIE</ccts:ComponentType>
+							<ccts:DictionaryEntryName>ESPDResponse. Service Provider Party</ccts:DictionaryEntryName>
+							<ccts:Definition>An authoritative data source, like a Base Registry, that fills in the ESPD with the data of the Economic Operator.</ccts:Definition>
+							<ccts:Cardinality>0..1</ccts:Cardinality>
+							<ccts:ObjectClass>ESPDResponse</ccts:ObjectClass>
+							<ccts:PropertyTerm>Service Provider Party</ccts:PropertyTerm>
+							<ccts:AssociatedObjectClass>Service Provider Party</ccts:AssociatedObjectClass>
+							<ccts:RepresentationTerm>Service Provider Party</ccts:RepresentationTerm>
+						</ccts:Component>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="espd:EconomicOperatorParty">
+				<xsd:annotation>
+					<xsd:documentation>
+						<ccts:Component>
+							<ccts:ComponentType>ASBIE</ccts:ComponentType>
+							<ccts:DictionaryEntryName>ESPDResponse. Economic Operator</ccts:DictionaryEntryName>
+							<ccts:Definition>Any natural or legal person or public entity or group of such persons and/or entities, including any temporary association of undertakings. Usage which offers the execution of works and/or a work, the supply of products or the provision of services on the market.
+Information about the party submitting the qualification.</ccts:Definition>
+							<ccts:Cardinality>1</ccts:Cardinality>
+							<ccts:ObjectClass>ESPDResponse</ccts:ObjectClass>
+							<ccts:PropertyTerm>Economic Operator Party</ccts:PropertyTerm>
+							<ccts:AssociatedObjectClass>Economic Operator Party</ccts:AssociatedObjectClass>
+							<ccts:RepresentationTerm>Economic Operator Party</ccts:RepresentationTerm>
+						</ccts:Component>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="cac:ProcurementProjectLot" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>
+						<ccts:Component>
+							<ccts:ComponentType>ASBIE</ccts:ComponentType>
+							<ccts:DictionaryEntryName>ESPDResponse. Procurement Project Lot</ccts:DictionaryEntryName>
+							<ccts:Definition>One of the parts of a procurement project that is being subdivided to allow the contracting party to award different lots to different economic operators under different contracts. If the Procurement Project has no lots the Procurement Project is then represented by a unique Lot 1.</ccts:Definition>
+							<ccts:Cardinality>1..n</ccts:Cardinality>
+							<ccts:ObjectClass>ESPDResponse</ccts:ObjectClass>
+							<ccts:PropertyTerm>Procurement Project Lot</ccts:PropertyTerm>
+							<ccts:AssociatedObjectClass>Procurement Project Lot</ccts:AssociatedObjectClass>
+							<ccts:RepresentationTerm>Procurement Project Lot</ccts:RepresentationTerm>
+						</ccts:Component>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="ccv:Criterion" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>
+						<ccts:Component>
+							<ccts:ComponentType>ASBIE</ccts:ComponentType>
+							<ccts:DictionaryEntryName>ESPDResponse. Criterion</ccts:DictionaryEntryName>
+							<ccts:Definition>Specific condition that the Economic Operator has to fulfill in order to be considered as a candidate in a procurement process.</ccts:Definition>
+							<ccts:Cardinality>1..n</ccts:Cardinality>
+							<ccts:ObjectClass>ESPDResponse</ccts:ObjectClass>
+							<ccts:PropertyTerm>Criterion</ccts:PropertyTerm>
+							<ccts:AssociatedObjectClass>Criterion</ccts:AssociatedObjectClass>
+							<ccts:RepresentationTerm>Criterion</ccts:RepresentationTerm>
+						</ccts:Component>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

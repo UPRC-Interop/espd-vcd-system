@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	eDocument	:	ESPD-CommonAggregateComponents. Syntax Binding based on OASIS UBL-2.1
+	version			:	1.0
+	Last update	: 	20150918Fr
+	Author			:	Enric Staromiejski <enric.staromiejski.torregrosa@everis.com>
+	Project Owner: 	DG GROW, European Commission
+	-->
+<xsd:schema xmlns="urn:grow:names:specification:ubl:schema:xsd:ESPD-CommonAggregateComponents-1" xmlns:espd-cbc="urn:grow:names:specification:ubl:schema:xsd:ESPD-CommonBasicComponents-1" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:ccts="urn:un:unece:uncefact:documentation:2" xmlns:ccv="urn:isa:names:specification:ubl:schema:xsd:CCV-CommonAggregateComponents-1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:grow:names:specification:ubl:schema:xsd:ESPD-CommonAggregateComponents-1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xsd:import namespace="urn:grow:names:specification:ubl:schema:xsd:ESPD-CommonBasicComponents-1" schemaLocation="ESPD-CommonBasicComponents-1.0.xsd"/>
+	<xsd:import namespace="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" schemaLocation="UBL-CommonAggregateComponents-2.1.xsd"/>
+	<xsd:import namespace="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" schemaLocation="UBL-CommonBasicComponents-2.1.xsd"/>
+	<xsd:import namespace="urn:isa:names:specification:ubl:schema:xsd:CCV-CommonAggregateComponents-1" schemaLocation="CCV-CommonAggregateComponents-1.0.xsd"/>
+	<!-- Element declaration -->
+	<xsd:element name="Criterion" type="ccv:CriterionType"/>
+	<xsd:element name="EconomicOperatorParty" type="EconomicOperatorPartyType"/>
+	<xsd:element name="RepresentativeNaturalPerson" type="NaturalPersonType"/>
+	<xsd:element name="PostalAddress" type="cac:AddressType"/>
+	<xsd:element name="ProcurementProjectLot" type="cac:ProcurementProjectLotType"/>
+	<xsd:element name="ServiceProviderParty" type="cac:PartyType"/>
+	<!-- Element definition -->
+	<xsd:complexType name="EconomicOperatorPartyType">
+		<xsd:annotation>
+			<xsd:documentation>
+				<ccts:Component>
+					<ccts:ComponentType>ABIE</ccts:ComponentType>
+					<ccts:DictionaryEntryName>Economic Operator Party. Details</ccts:DictionaryEntryName>
+					<ccts:Definition>A class to associate any natural or legal person or public entity or group of such persons and/or entities, including any temporary association of undertakings. Usage which offers the execution of works and/or a work, the supply of products or the provision of services on the market.</ccts:Definition>
+					<ccts:ObjectClass>Economic Operator Party</ccts:ObjectClass>
+				</ccts:Component>
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element ref="espd-cbc:EconomicOperatorRoleCode" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<ccts:Component>
+							<ccts:ComponentType>BBIE</ccts:ComponentType>
+							<ccts:DictionaryEntryName>Economic Operator Party. Economic Operator_ Role Code. Code</ccts:DictionaryEntryName>
+							<ccts:Definition>The role of the economic operator when bidding from a consortium. (main contractor, subcontractor , additional)</ccts:Definition>
+							<ccts:Cardinality>0..1</ccts:Cardinality>
+							<ccts:ObjectClass>Economic Operator Party</ccts:ObjectClass>
+							<ccts:PropertyTerm>Role Code</ccts:PropertyTerm>
+							<ccts:RepresentationTerm>Code</ccts:RepresentationTerm>
+							<ccts:DataType>Code. Type</ccts:DataType>
+						</ccts:Component>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="espd-cbc:NationalDataBaseURIID" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<ccts:Component>
+							<ccts:ComponentType>BBIE</ccts:ComponentType>
+							<ccts:DictionaryEntryName>Economic Operator Party. National Database_ URI. Identifier</ccts:DictionaryEntryName>
+							<ccts:Definition>Unrestricted and full direct access to tools and devices used for electronic communication is possible at this URL.</ccts:Definition>
+							<ccts:Cardinality>0..1</ccts:Cardinality>
+							<ccts:ObjectClass>Economic Operator Party</ccts:ObjectClass>
+							<ccts:PropertyTerm>URI Identifier</ccts:PropertyTerm>
+							<ccts:RepresentationTerm>Identifier</ccts:RepresentationTerm>
+							<ccts:DataType>Identifier. Type</ccts:DataType>
+							<ccts:Examples>https://dgpe.minhanc.es/rolece/espd/EO?id=121434324</ccts:Examples>
+						</ccts:Component>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="espd-cbc:NationalDatabaseAccessCredentials" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<ccts:Component>
+							<ccts:ComponentType>BBIE</ccts:ComponentType>
+							<ccts:DictionaryEntryName>Economic Operator Party. National Database_ Access Credentials. Text</ccts:DictionaryEntryName>
+							<ccts:Definition>Unrestricted and full direct access to tools and devices used for electronic communication is possible at this URL.</ccts:Definition>
+							<ccts:Cardinality>0..1</ccts:Cardinality>
+							<ccts:ObjectClass>Economic Operator Party</ccts:ObjectClass>
+							<ccts:PropertyTerm>Access Credentials</ccts:PropertyTerm>
+							<ccts:RepresentationTerm>Text</ccts:RepresentationTerm>
+							<ccts:DataType>Text. Type</ccts:DataType>
+							<ccts:Examples>User: Guest_; Password: KuKiKuKi@22</ccts:Examples>
+						</ccts:Component>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="espd-cbc:SMEIndicator" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<ccts:Component>
+							<ccts:ComponentType>BBIE</ccts:ComponentType>
+							<ccts:DictionaryEntryName>Economic Operator Party. SME_ Indicator. Indicator</ccts:DictionaryEntryName>
+							<ccts:Definition>An indicator that this economic operator is an SME (true) or not (false).</ccts:Definition>
+							<ccts:Cardinality>0..1</ccts:Cardinality>
+							<ccts:ObjectClass>Economic Operator Party</ccts:ObjectClass>
+							<ccts:PropertyTerm>SME Indicator</ccts:PropertyTerm>
+							<ccts:RepresentationTerm>Indicator</ccts:RepresentationTerm>
+							<ccts:DataType>Indicator. Type</ccts:DataType>
+						</ccts:Component>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="cac:Party" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<ccts:Component>
+							<ccts:ComponentType>ASBIE</ccts:ComponentType>
+							<ccts:DictionaryEntryName>Economic Operator Party. Party</ccts:DictionaryEntryName>
+							<ccts:Definition>The economic party party itself.</ccts:Definition>
+							<ccts:Cardinality>1</ccts:Cardinality>
+							<ccts:ObjectClass>Economic Operator Party</ccts:ObjectClass>
+							<ccts:PropertyTerm>Party</ccts:PropertyTerm>
+							<ccts:RepresentationTerm>Party</ccts:RepresentationTerm>
+							<ccts:AssociatedObject>Party</ccts:AssociatedObject>
+						</ccts:Component>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="NaturalPersonType">
+		<xsd:annotation>
+			<xsd:documentation>
+				<ccts:Component>
+					<ccts:ComponentType>ABIE</ccts:ComponentType>
+					<ccts:DictionaryEntryName>Natural Person. Details</ccts:DictionaryEntryName>
+					<ccts:Definition>"A class to associate information about individuals who in one way or the other represent the economic operator."</ccts:Definition>
+					<ccts:ObjectClass>Natural Person</ccts:ObjectClass>
+				</ccts:Component>
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element ref="espd-cbc:NaturalPersonRoleCode" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<ccts:Component>
+							<ccts:ComponentType>BBIE</ccts:ComponentType>
+							<ccts:DictionaryEntryName>Natural Person. Natural Person_ Role Code. Code</ccts:DictionaryEntryName>
+							<ccts:Definition>Role of the natural person.</ccts:Definition>
+							<ccts:Cardinality>0..1</ccts:Cardinality>
+							<ccts:ObjectClass>Economic Operator Party</ccts:ObjectClass>
+							<ccts:PropertyTerm>Role Code</ccts:PropertyTerm>
+							<ccts:RepresentationTerm>Code</ccts:RepresentationTerm>
+							<ccts:DataType>Code. Type</ccts:DataType>
+						</ccts:Component>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="espd-cbc:NaturalPersonRegistrationCountryCode" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<ccts:Component>
+							<ccts:ComponentType>BBIE</ccts:ComponentType>
+							<ccts:DictionaryEntryName>Natural Person. Registration_ Country Code. Code</ccts:DictionaryEntryName>
+							<ccts:Definition>Country of registration  of the natural person.</ccts:Definition>
+							<ccts:Cardinality>0..1</ccts:Cardinality>
+							<ccts:ObjectClass>Economic Operator Party</ccts:ObjectClass>
+							<ccts:PropertyTerm>Country Code</ccts:PropertyTerm>
+							<ccts:RepresentationTerm>Code</ccts:RepresentationTerm>
+							<ccts:DataType>Code. Type</ccts:DataType>
+						</ccts:Component>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="cac:Person">
+				<xsd:annotation>
+					<xsd:documentation>
+						<ccts:Component>
+							<ccts:ComponentType>ASBIE</ccts:ComponentType>
+							<ccts:DictionaryEntryName>Natural Person. Person</ccts:DictionaryEntryName>
+							<ccts:Definition>The person himself or herself.</ccts:Definition>
+							<ccts:Cardinality>1</ccts:Cardinality>
+							<ccts:ObjectClass>Economic Operator Party</ccts:ObjectClass>
+							<ccts:PropertyTerm>Person</ccts:PropertyTerm>
+							<ccts:RepresentationTerm>Person</ccts:RepresentationTerm>
+							<ccts:AssociatedObject>Person</ccts:AssociatedObject>
+						</ccts:Component>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="cac:PowerOfAttorney" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<ccts:Component>
+							<ccts:ComponentType>ASBIE</ccts:ComponentType>
+							<ccts:DictionaryEntryName>Natural Person. Power Of Attorney</ccts:DictionaryEntryName>
+							<ccts:Definition>A power of attorney associated with this natural person.</ccts:Definition>
+							<ccts:Cardinality>0..1</ccts:Cardinality>
+							<ccts:ObjectClass>Economic Operator Party</ccts:ObjectClass>
+							<ccts:PropertyTerm>Power Of Attorney</ccts:PropertyTerm>
+							<ccts:RepresentationTerm>Power Of Attorney</ccts:RepresentationTerm>
+							<ccts:AssociatedObject>Power Of Attorney</ccts:AssociatedObject>
+						</ccts:Component>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

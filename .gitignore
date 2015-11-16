@@ -1,0 +1,10 @@
+#
+# Author: Panagiotis NICOLAOU
+# Email: pnikola@unipi.gr
+#
+syntax: glob
+!.gradle/**
+!.idea/**
+!.vagrant/**
+!**.iml
+!build

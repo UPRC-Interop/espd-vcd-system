@@ -1,0 +1,10 @@
+#
+# Author: Panagiotis NICOLAOU
+# Email: pnikola@unipi.gr
+#
+syntax: glob
+# Ignore everything in this directory
+**
+# Except this file
+!.gitignore
+!eu/esens/espdvcd/schema

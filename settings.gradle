@@ -1,0 +1,5 @@
+/**
+ * Author: Panagiotis NICOLAOU
+ * Email: pnikola@unipi.gr
+ */
+include ":logging", ":common-util", ":schema", ":model", ":compiler", ":persistence", ":ui"

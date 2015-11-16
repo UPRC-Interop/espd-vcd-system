@@ -1,0 +1,46 @@
+/**
+ * Author: Panagiotis NICOLAOU
+ * Email: pnikola@unipi.gr
+ */
+apply plugin: 'war'
+
+/**
+ * Run gradle task jettyEclipseRun to start jetty
+ * and jettyEclipseStop to stop it.
+ */
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath ('com.sahlbach.gradle:gradle-jetty-eclipse-plugin:1.9.+')
+    }
+}
+
+apply plugin: 'jettyEclipse'
+
+jettyEclipse {
+    contextPath = '/ui'
+    httpPort = 8080
+    stopPort = 8090
+    stopKey = 'stop'
+    automaticReload = true
+    rebuildIntervalInSeconds = 2
+    scanIntervalInSeconds = 2
+}
+
+dependencies {
+    compile project(':logging')
+
+    // TestNG is also supported by the Gradle Test task. Just change the
+    // testCompile dependency to testCompile 'org.testng:testng:6.8.1' and add
+    // 'test.useTestNG()' to your build script.
+    testCompile 'junit:junit:4.12'
+}
+
+task copyTask(type: Copy) {
+    from "build/libs/ui-${version}.war"
+    into '../artifacts'
+    rename "ui-${version}.war", 'ui.war'
+}

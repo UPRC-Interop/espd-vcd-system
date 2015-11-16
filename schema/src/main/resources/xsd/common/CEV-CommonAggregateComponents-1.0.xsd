@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Core Evidence Vocabulary - Syntax Binding based on OASIS UBL-2.1 
+	Version				:	1.0
+	Last update		: 	20150918Fr.
+	Author				:	Enric Staromiejski <enric.staromiejski.torregrosa@everis.com>
+	Project Owner	:	DG GROW, European Commission
+	-->
+<xsd:schema xmlns="urn:isa:names:specification:ubl:schema:xsd:CEV-CommonAggregateComponents-1" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cev-cbc="urn:isa:names:specification:ubl:schema:xsd:CEV-CommonBasicComponents-1" xmlns:ccts="urn:un:unece:uncefact:documentation:2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:isa:names:specification:ubl:schema:xsd:CEV-CommonAggregateComponents-1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xsd:import namespace="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" schemaLocation="UBL-CommonAggregateComponents-2.1.xsd"/>
+	<xsd:import namespace="urn:isa:names:specification:ubl:schema:xsd:CEV-CommonBasicComponents-1" schemaLocation="CEV-CommonBasicComponents-1.0.xsd"/>
+	<!-- Element declaration -->
+	<xsd:element name="Evidence" type="EvidenceType"/>
+	<xsd:element name="EvidenceDocumentReference" type="cac:DocumentReferenceType"/>
+	<xsd:element name="EvidenceIssuerParty" type="cac:PartyType"/>
+	<!-- Element definition -->
+	<xsd:complexType name="EvidenceType">
+		<xsd:annotation>
+			<xsd:documentation>
+				<ccts:Component>
+					<ccts:ComponentType>ABIE</ccts:ComponentType>
+					<ccts:DictionaryEntryName>Evidence. Details</ccts:DictionaryEntryName>
+					<ccts:Definition>A class to associate a document or a URL pointing to a document which contain evidences supporting an administrative fact..</ccts:Definition>
+					<ccts:ObjectClass>Evidence</ccts:ObjectClass>
+				</ccts:Component>
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element ref="cev-cbc:EvidenceID" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<ccts:Component>
+							<ccts:ComponentType>BBIE</ccts:ComponentType>
+							<ccts:DictionaryEntryName>Evidence. Evidence Identifier. Identifier</ccts:DictionaryEntryName>
+							<ccts:Definition>Identifier for an evidence.</ccts:Definition>
+							<ccts:Cardinality>0..1</ccts:Cardinality>
+							<ccts:ObjectClass>Evidence</ccts:ObjectClass>
+							<ccts:PropertyTerm>Evidence</ccts:PropertyTerm>
+							<ccts:RepresentationTerm>Identifier</ccts:RepresentationTerm>
+							<ccts:DataType>Identifier. Type</ccts:DataType>
+						</ccts:Component>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="cev-cbc:EvidenceTypeCode" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<ccts:Component>
+							<ccts:ComponentType>BBIE</ccts:ComponentType>
+							<ccts:DictionaryEntryName>Evidence. Evidence Type Code. Code</ccts:DictionaryEntryName>
+							<ccts:Definition>Type code for an evidence.</ccts:Definition>
+							<ccts:Cardinality>0..1</ccts:Cardinality>
+							<ccts:ObjectClass>Evidence</ccts:ObjectClass>
+							<ccts:PropertyTerm>Evidence Type</ccts:PropertyTerm>
+							<ccts:RepresentationTerm>Code</ccts:RepresentationTerm>
+							<ccts:DataType>Code. Type</ccts:DataType>
+						</ccts:Component>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="cev-cbc:EvidenceName" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<ccts:Component>
+							<ccts:ComponentType>BBIE</ccts:ComponentType>
+							<ccts:DictionaryEntryName>Evidence. Evidence Name. Name</ccts:DictionaryEntryName>
+							<ccts:Definition>The name of an evidence.</ccts:Definition>
+							<ccts:Cardinality>0..1</ccts:Cardinality>
+							<ccts:ObjectClass>Evidence</ccts:ObjectClass>
+							<ccts:PropertyTerm>Evidence Name</ccts:PropertyTerm>
+							<ccts:RepresentationTerm>Name</ccts:RepresentationTerm>
+							<ccts:DataType>Name. Type</ccts:DataType>
+						</ccts:Component>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="cev-cbc:EmbeddedEvidenceIndicator" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<ccts:Component>
+							<ccts:ComponentType>BBIE</ccts:ComponentType>
+							<ccts:DictionaryEntryName>Evidence. Embedded Evidence Indicator. Indicator</ccts:DictionaryEntryName>
+							<ccts:Definition>Indicates whether the evidence is embedded within the document reference (true) or referenced via a URL (false).</ccts:Definition>
+							<ccts:Cardinality>0..1</ccts:Cardinality>
+							<ccts:ObjectClass>Evidence</ccts:ObjectClass>
+							<ccts:PropertyTerm>Embedded Evidence</ccts:PropertyTerm>
+							<ccts:RepresentationTerm>Indicator</ccts:RepresentationTerm>
+							<ccts:DataType>Indicator. Type</ccts:DataType>
+						</ccts:Component>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="cev-cbc:EvidenceDescription" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>
+						<ccts:Component>
+							<ccts:ComponentType>BBIE</ccts:ComponentType>
+							<ccts:DictionaryEntryName>Evidence. Evidence Description. Text</ccts:DictionaryEntryName>
+							<ccts:Definition>A textual description of the evidence.</ccts:Definition>
+							<ccts:Cardinality>0..n</ccts:Cardinality>
+							<ccts:ObjectClass>Evidence</ccts:ObjectClass>
+							<ccts:PropertyTerm>Evidence Description</ccts:PropertyTerm>
+							<ccts:RepresentationTerm>Text</ccts:RepresentationTerm>
+							<ccts:DataType>Text. Type</ccts:DataType>
+						</ccts:Component>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="EvidenceIssuerParty" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<ccts:Component>
+							<ccts:ComponentType>ASBIE</ccts:ComponentType>
+							<ccts:DictionaryEntryName>Evidence. Evidence_ Issuer Party. Party</ccts:DictionaryEntryName>
+							<ccts:Definition>The party that issued the evidence.</ccts:Definition>
+							<ccts:Cardinality>0..1</ccts:Cardinality>
+							<ccts:ObjectClass>Evidence</ccts:ObjectClass>
+							<ccts:PropertyTermQualifier>Evidence Issuer</ccts:PropertyTermQualifier>
+							<ccts:PropertyTerm>Party</ccts:PropertyTerm>
+							<ccts:RepresentationTerm>Party</ccts:RepresentationTerm>
+							<ccts:AssociatedObjectClass>Party</ccts:AssociatedObjectClass>
+						</ccts:Component>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="EvidenceDocumentReference" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>
+						<ccts:Component>
+							<ccts:ComponentType>ASBIE</ccts:ComponentType>
+							<ccts:DictionaryEntryName>Evidence. Evidence_ Document Reference. Document Reference</ccts:DictionaryEntryName>
+							<ccts:Definition>The external URL pointing at the evidence or the embedded document that contains the evidence.</ccts:Definition>
+							<ccts:Cardinality>0..n</ccts:Cardinality>
+							<ccts:ObjectClass>Evidence</ccts:ObjectClass>
+							<ccts:PropertyTermQualifier>Evidence</ccts:PropertyTermQualifier>
+							<ccts:PropertyTerm>Document Reference</ccts:PropertyTerm>
+							<ccts:RepresentationTerm>Document Reference</ccts:RepresentationTerm>
+							<ccts:AssociatedObjectClass>Document Reference</ccts:AssociatedObjectClass>
+						</ccts:Component>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

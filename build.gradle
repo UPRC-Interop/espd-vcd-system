@@ -1,0 +1,30 @@
+/**
+ * Author: Panagiotis NICOLAOU
+ * Email: pnikola@unipi.gr
+ */
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'maven'
+
+    version = '1.0.0-SNAPSHOT'
+    group = 'eu.esens.espdvcd'
+
+    project.ext.slf4j_version = '1.7.13'
+    project.ext.log4j2_version = '2.4.1'
+    project.ext.jaxb_impl_version = '2.2.7'
+    project.ext.jaxb_api_version = '2.2.12'
+    project.ext.hibernate_version = '5.0.3.Final'
+    project.ext.postgresql_version = '9.4-1205-jdbc42'
+
+    repositories {
+//        mavenLocal()
+        mavenCentral()
+    }
+
+    dependencies {
+        // TestNG is also supported by the Gradle Test task. Just change the
+        // testCompile dependency to testCompile 'org.testng:testng:6.8.1' and add
+        // 'test.useTestNG()' to your build script.
+        testCompile 'junit:junit:4.12'
+    }
+}
