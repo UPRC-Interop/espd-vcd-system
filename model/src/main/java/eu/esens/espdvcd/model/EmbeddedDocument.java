@@ -18,7 +18,7 @@ public interface EmbeddedDocument extends Serializable {
 
 
     /**
-     * @return The id of the parent owner ({@link ESPDResponse} or {@link VCDResponse}).
+     * @return The ID of the parent owner ({@link ESPDResponse} or {@link VCDResponse}).
      */
     Long getParentId();
 
