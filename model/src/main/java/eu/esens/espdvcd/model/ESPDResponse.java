@@ -9,4 +9,20 @@ import java.io.Serializable;
  */
 public interface ESPDResponse extends Serializable {
 
+    /**
+     * @return The id of the {@link ESPDResponse}.
+     */
+    Long getId();
+
+    /**
+     * Available model types are in ESPDResponseModelType.
+     *
+     * @return the model type
+     */
+    ESPDResponseModelType getModelType();
+
+    /**
+     * @param type
+     */
+    void setModelType(ESPDResponseModelType modelType);
 }

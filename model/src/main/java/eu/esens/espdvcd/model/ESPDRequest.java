@@ -8,4 +8,21 @@ import java.io.Serializable;
  * @author Panagiotis NICOLAOU <pnikola@unipi.gr>
  */
 public interface ESPDRequest extends Serializable {
+
+    /**
+     * @return The id of the {@link ESPDRequest}.
+     */
+    Long getId();
+
+    /**
+     * Available model types are in ESPDRequestModelType.
+     *
+     * @return the model type
+     */
+    ESPDRequestModelType getModelType();
+
+    /**
+     * @param type
+     */
+    void setModelType(ESPDRequestModelType modelType);
 }
