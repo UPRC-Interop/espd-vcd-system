@@ -1,9 +1,9 @@
-package eu.esens.espdvcd.model.internal;
+package eu.esens.espdvcd.model;
 
 /**
  * TODO: Add description.
  *
  * @author Panagiotis NICOLAOU <pnikola@unipi.gr>
  */
-public class ESPDResponseImpl {
+public class ESPDRequestImpl {
 }

@@ -13,25 +13,25 @@ public enum XSD {
     ESPD_RESPONSE("grow.names.specification.ubl.schema.xsd.espdresponse_1", "xsd/maindoc/ESPDResponse-1.0.xsd");
 
         private static final Logger LOG = LoggerFactory.getLogger(XSD.class);
-    private final String javaPackage;
-    private final String path;
+    private final String namespaceURI;
+    private final String xsdPath;
 
-    XSD(String javaPackage, String path) {
-        this.javaPackage = javaPackage;
-        this.path = path;
+    XSD(String namespaceURI, String xsdPath) {
+        this.namespaceURI = namespaceURI;
+        this.xsdPath = xsdPath;
     }
 
-    public String javaPackage() {
-        return javaPackage;
+    public String namespaceURI() {
+        return namespaceURI;
     }
 
-    public String path() {
-        return path;
+    public String xsdPath() {
+        return xsdPath;
     }
 
     public static void main(String argv[]) {
         LOG.info("Testing Log4J2 logger with SLF4J facade.");
-        LOG.info(ESPD_REQUEST.path());
+        LOG.info(ESPD_REQUEST.xsdPath());
     }
 }
 

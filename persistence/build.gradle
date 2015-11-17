@@ -17,7 +17,7 @@ dependencies {
     }
 
     /* postgresql */
-//    compile "org.postgresql:postgresql:${project.postgresql_version}"
+    compile "org.postgresql:postgresql:${project.postgresql_version}"
 
     // TestNG is also supported by the Gradle Test task. Just change the
     // testCompile dependency to testCompile 'org.testng:testng:6.8.1' and add
