@@ -1,4 +1,4 @@
-package eu.esens.espdvcd.model;
+package eu.esens.espdvcd.model.types;
 
 /**
  * EmbeddedDocumentModelType enum listing available model types of EmbeddedDocument.

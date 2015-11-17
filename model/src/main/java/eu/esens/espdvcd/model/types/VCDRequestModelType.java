@@ -1,4 +1,4 @@
-package eu.esens.espdvcd.model;
+package eu.esens.espdvcd.model.types;
 
 /**
  * VCDRequestModelType enum listing available model types of VCDRequest.
@@ -6,5 +6,5 @@ package eu.esens.espdvcd.model;
  * @author Panagiotis NICOLAOU <pnikola@unipi.gr>
  */
 public enum VCDRequestModelType {
-    VCD_DRAFT, VCD_REQUEST_TMPL, VCD_REQUEST
+    VCD_REQUEST_DRAFT, VCD_REQUEST_TMPL, VCD_REQUEST_FULL
 }

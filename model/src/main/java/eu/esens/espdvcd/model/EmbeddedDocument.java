@@ -1,5 +1,7 @@
 package eu.esens.espdvcd.model;
 
+import eu.esens.espdvcd.model.types.EmbeddedDocumentModelType;
+
 import java.io.Serializable;
 
 /**
@@ -10,13 +12,13 @@ import java.io.Serializable;
 public interface EmbeddedDocument extends Serializable {
 
     /**
-     * @return The id of the {@link EmbeddedDocument}.
+     * @return The ID of the {@link EmbeddedDocument}.
      */
     Long getId();
 
 
     /**
-     * @return The id of the parent owner ({@link VCDResponse}).
+     * @return The id of the parent owner ({@link ESPDResponse} or {@link VCDResponse}).
      */
     Long getParentId();
 
@@ -27,24 +29,24 @@ public interface EmbeddedDocument extends Serializable {
 
     /**
      * @return The filename of the document
-     * uniquely identifies document in the {@link VCDResponse}.
+     * uniquely identifies document in the {@link ESPDResponse} or {@link VCDResponse}.
      */
     String getFileName();
 
     /**
      * @return The URI of the document
-     * uniquely identifies document in the {@link VCDResponse}.
+     * uniquely identifies document in the {@link ESPDResponse} or {@link VCDResponse}.
      */
     String getUri();
 
     /**
-     * @return The file size.
+     * @return The file size of the document.
      */
     Long getSize();
 
 
     /**
-     * @return The type of the embedded document.
+     * @return The model type of the embedded document.
      */
-    String getType();
+    EmbeddedDocumentModelType getModelType();
 }

@@ -1,4 +1,4 @@
-package eu.esens.espdvcd.model;
+package eu.esens.espdvcd.model.types;
 
 /**
  * VCDResponseModelType enum listing available model types of VCDResponse.
@@ -6,5 +6,5 @@ package eu.esens.espdvcd.model;
  * @author Panagiotis NICOLAOU <pnikola@unipi.gr>
  */
 public enum VCDResponseModelType {
-    VCD_RESPONSE_TMPL, VCD_RESPONSE
+    VCD_RESPONSE_TMPL, VCD_RESPONSE_FULL
 }

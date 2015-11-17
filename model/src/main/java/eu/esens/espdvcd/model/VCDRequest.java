@@ -1,5 +1,8 @@
 package eu.esens.espdvcd.model;
 
+import eu.esens.espdvcd.model.types.VCDRequestModelType;
+import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
+
 import java.io.Serializable;
 
 /**
@@ -8,9 +11,8 @@ import java.io.Serializable;
  * @author Panagiotis NICOLAOU <pnikola@unipi.gr>
  */
 public interface VCDRequest extends Serializable {
-
     /**
-     * @return The id of the {@link VCDRequest}.
+     * @return The ID of the {@link VCDRequest}.
      */
     Long getId();
 
@@ -22,7 +24,17 @@ public interface VCDRequest extends Serializable {
     VCDRequestModelType getModelType();
 
     /**
-     * @param type
+     * @param modelType
      */
     void setModelType(VCDRequestModelType modelType);
+
+    /**
+     * @return The {@link ESPDRequestType} of the {@link VCDRequest}.
+     */
+    ESPDRequestType getVcdRequestType();
+
+    /**
+     * @param vcdRequestType
+     */
+    void setVcdRequestType(ESPDRequestType vcdRequestType);
 }

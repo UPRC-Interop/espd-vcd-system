@@ -1,4 +1,4 @@
-package eu.esens.espdvcd.model;
+package eu.esens.espdvcd.model.types;
 
 /**
  * ESPDRequestModelType enum listing available model types of ESPDRequest.
@@ -6,5 +6,5 @@ package eu.esens.espdvcd.model;
  * @author Panagiotis NICOLAOU <pnikola@unipi.gr>
  */
 public enum ESPDRequestModelType {
-    ESPD_DRAFT, ESPD_REQUEST_TMPL, ESPD_REQUEST
+    ESPD_REQUEST_DRAFT, ESPD_REQUEST_TMPL, ESPD_REQUEST_FULL
 }

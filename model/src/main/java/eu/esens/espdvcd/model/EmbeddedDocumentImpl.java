@@ -1,5 +1,7 @@
 package eu.esens.espdvcd.model;
 
+import eu.esens.espdvcd.model.types.EmbeddedDocumentModelType;
+
 /**
  * TODO: Add description.
  *
@@ -37,7 +39,7 @@ public class EmbeddedDocumentImpl implements EmbeddedDocument {
     }
 
     @Override
-    public String getType() {
+    public EmbeddedDocumentModelType getModelType() {
         return null;
     }
 }
