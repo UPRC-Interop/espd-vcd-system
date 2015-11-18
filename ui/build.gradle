@@ -5,8 +5,8 @@
 apply plugin: 'war'
 
 /**
- * Run gradle task jettyEclipseRun to start jetty
- * and jettyEclipseStop to stop it.
+ * Run gradle task jettyRun to start jetty
+ * and jettyStop to stop it.
  */
 buildscript {
     repositories {
@@ -14,20 +14,32 @@ buildscript {
     }
 
     dependencies {
-        classpath ('com.sahlbach.gradle:gradle-jetty-eclipse-plugin:1.9.+')
+        classpath 'org.akhikhl.gretty:gretty:+'
     }
 }
 
-apply plugin: 'jettyEclipse'
+repositories {
+    jcenter()
+}
 
-jettyEclipse {
+apply plugin: 'org.akhikhl.gretty'
+
+gretty {
+    port = 8080
     contextPath = '/ui'
-    httpPort = 8080
-    stopPort = 8090
-    stopKey = 'stop'
-    automaticReload = true
-    rebuildIntervalInSeconds = 2
-    scanIntervalInSeconds = 2
+    scanInterval = 1
+    scanDirs = 'src/main/webapp'
+    fastReload = true
+    recompileOnSourceChange = true
+    reloadOnClassChange = true
+    reloadOnConfigChange = true
+    reloadOnLibChange = true
+    inplaceMode = 'soft'
+    loggingLevel = 'INFO'
+    consoleLogEnabled = true
+    fileLogEnabled = true
+    logDir = "${project.buildDir}"
+    logFileName = "${project.name}"
 }
 
 dependencies {

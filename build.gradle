@@ -2,6 +2,17 @@
  * Author: Panagiotis NICOLAOU
  * Email: pnikola@unipi.gr
  */
+// build aliases: define a synonym here if you want a shortcut to run multiple targets
+def buildAliases = [
+        'rebuild': ['clean', 'xjc', 'build', 'ui:jettyStart']
+]
+def expandedTaskList = []
+gradle.startParameter.taskNames.each {
+    expandedTaskList << (buildAliases[it] ? buildAliases[it] : it)
+}
+gradle.startParameter.taskNames = expandedTaskList.flatten()
+println "\n${gradle.startParameter.taskNames}\n"
+
 subprojects {
     apply plugin: 'java'
     apply plugin: 'maven'
@@ -43,8 +54,8 @@ subprojects {
 // for project logging
 // everywhere except in-memory-db and logging projects
 configure(subprojects
-        - project(':logging')) {
-    println "applying java plugin to $project"
+        - project(':logging')
+        - project(':ui')) {
     dependencies {
         compile project(':logging')
     }
@@ -57,7 +68,6 @@ configure(subprojects
         - project(':logging')
         - project(':persistence')
         - project(':schema')) {
-    println "applying java plugin to $project"
     dependencies {
         testCompile 'junit:junit:4.12'
     }
