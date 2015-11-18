@@ -31,8 +31,6 @@ jettyEclipse {
 }
 
 dependencies {
-    /* logging */
-    compile project(':logging')
 }
 
 task copyTask(type: Copy) {

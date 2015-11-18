@@ -3,10 +3,21 @@
  * Email: pnikola@unipi.gr
  */
 dependencies {
-    compile "org.slf4j:slf4j-api:${project.slf4j_version}"                          /* SLF4J API */
-    compile "org.apache.logging.log4j:log4j-slf4j-impl:${project.log4j2_version}"   /* Binding for Log4J2 */
-    compile "org.apache.logging.log4j:log4j-core:${project.log4j2_version}"         /* Log4j Core implementation required for binding */
-    compile "org.apache.logging.log4j:log4j-api:${project.log4j2_version}"          /* Log4j API implementation required for binding */
+    /* SLF4J API */
+    //noinspection GroovyAssignabilityCheck
+    compile libraries.slf4j_api
+
+    /* Binding for Log4J2 */
+    //noinspection GroovyAssignabilityCheck
+    compile libraries.log4j_slf4j_impl
+
+    /* Log4j Core implementation required for binding */
+    //noinspection GroovyAssignabilityCheck
+    compile libraries.log4j_core
+
+    /* Log4j API implementation required for binding */
+    //noinspection GroovyAssignabilityCheck
+    compile libraries.log4j_api
 }
 
 task copyTask(type: Copy) {

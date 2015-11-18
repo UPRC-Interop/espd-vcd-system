@@ -3,9 +3,8 @@
  * Email: pnikola@unipi.gr
  */
 dependencies {
-    compile project(':schema')
     compile project(':persistence')
-    compile project(':in-memory-db')
+    compile project(':schema')
 }
 
 task copyTask(type: Copy) {

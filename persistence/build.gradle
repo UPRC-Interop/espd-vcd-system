@@ -3,11 +3,8 @@
  * Email: pnikola@unipi.gr
  */
 dependencies {
-    /* logging */
-//    compile project(':logging')
-
     /* hibernate */
-    compile("org.hibernate:hibernate-core:${project.hibernate_version}") {
+    compile(libraries.hibernate_core) {
         exclude group: 'antlr', module: 'antlr'
         exclude group: 'dom4j', module: 'dom4j'
         exclude group: 'org.apache.geronimo.specs', module: 'geronimo-jta_1.1_spec'
@@ -17,7 +14,8 @@ dependencies {
     }
 
     /* postgresql */
-    compile "org.postgresql:postgresql:${project.postgresql_version}"
+    //noinspection GroovyAssignabilityCheck
+    compile libraries.postgresql
 }
 
 task copyTask(type: Copy) {
