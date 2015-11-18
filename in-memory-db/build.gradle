@@ -6,7 +6,7 @@ dependencies {
 }
 
 task copyTask(type: Copy) {
-    from "build/libs/common-util-${version}.jar"
+    from "build/libs/in-memory-db-${version}.jar"
     into '../artifacts'
-//    rename "common-util-${version}.jar", 'common-util.jar'
+//    rename "in-memory-db-${version}.jar", 'in-memory-db.jar'
 }

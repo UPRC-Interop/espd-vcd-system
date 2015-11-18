@@ -15,9 +15,6 @@ buildscript {
 apply plugin: 'com.github.jacobono.jaxb'
 
 dependencies {
-    /* logging */
-    compile project(':logging')
-
     jaxb "com.sun.xml.bind:jaxb-xjc:${project.jaxb_impl_version}"
     jaxb "com.sun.xml.bind:jaxb-impl:${project.jaxb_impl_version}"
     jaxb "javax.xml.bind:jaxb-api:${project.jaxb_api_version}"
