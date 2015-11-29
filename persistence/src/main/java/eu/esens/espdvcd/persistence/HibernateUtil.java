@@ -13,30 +13,44 @@ import org.slf4j.LoggerFactory;
  */
 public class HibernateUtil {
     private static final Logger LOG = LoggerFactory.getLogger(HibernateUtil.class);
-    private static final String HIBERNATE_ESPDVCD_CFG = "hibernate.espdvcd.cfg.xml";
-    private static final SessionFactory sessionFactory;
-    private static StandardServiceRegistryBuilder standardServiceRegistryBuilder;
+    private static final SessionFactory sessionFactoryForRDBMS;
+    private static final SessionFactory sessionFactoryForInMemoryDB;
 
     static {
         try {
             Configuration configuration =
-                    new Configuration().configure(HibernateUtil.HIBERNATE_ESPDVCD_CFG);
+                    new Configuration().configure(DB.RDBMS.hibernateConfiguration());
+            StandardServiceRegistryBuilder standardServiceRegistryBuilder =
+                    new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
+            sessionFactoryForRDBMS = configuration.buildSessionFactory(
+                    standardServiceRegistryBuilder.build());
+
+            configuration =
+                    new Configuration().configure(DB.IN_MEMORY_DB.hibernateConfiguration());
             standardServiceRegistryBuilder =
                     new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
-            sessionFactory = configuration.buildSessionFactory(
+            sessionFactoryForInMemoryDB = configuration.buildSessionFactory(
                     standardServiceRegistryBuilder.build());
         } catch (Throwable ex) {
-            LOG.error("Initial SessionFactories creation failed." + ex);
+            LOG.error("Initial SessionFactories creation failed. {}", ex);
             throw new ExceptionInInitializerError(ex);
         }
     }
 
-    public static SessionFactory getSessionFactory() {
-        return sessionFactory;
+    public static SessionFactory getSessionFactoryForRDBMS() {
+        return sessionFactoryForRDBMS;
     }
 
-    public static void shutdown() {
+    public static SessionFactory getSessionFactoryForInMemoryDB() {
+        return sessionFactoryForInMemoryDB;
+    }
+
+    public static void shutdownRDBMS() {
         // Close caches and connection pools
-        getSessionFactory().close();
+        getSessionFactoryForRDBMS().close();
+    }
+
+    public static void shutdownInMemoryDB() {
+        getSessionFactoryForInMemoryDB().close();
     }
 }

@@ -16,6 +16,10 @@ dependencies {
     /* postgresql */
     //noinspection GroovyAssignabilityCheck
     compile libraries.postgresql
+
+    /* h2 */
+    //noinspection GroovyAssignabilityCheck
+    compile libraries.h2
 }
 
 task copyTask(type: Copy) {

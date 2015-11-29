@@ -12,7 +12,7 @@ public enum XSD {
     ESPD_REQUEST("grow.names.specification.ubl.schema.xsd.espdrequest_1", "xsd/maindoc/ESPDRequest-1.0.xsd"),
     ESPD_RESPONSE("grow.names.specification.ubl.schema.xsd.espdresponse_1", "xsd/maindoc/ESPDResponse-1.0.xsd");
 
-        private static final Logger LOG = LoggerFactory.getLogger(XSD.class);
+    private static final Logger LOG = LoggerFactory.getLogger(XSD.class);
     private final String namespaceURI;
     private final String xsdPath;
 

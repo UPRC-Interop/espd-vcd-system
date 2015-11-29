@@ -4,7 +4,8 @@
  */
 // build aliases: define a synonym here if you want a shortcut to run multiple targets
 def buildAliases = [
-        'rebuild': ['clean', 'xjc', 'build', 'ui:jettyStart']
+        'reload' : ['clean', 'xjc', 'build', 'ui:jettyStart'],
+        'rebuild': ['clean', 'xjc', 'build']
 ]
 def expandedTaskList = []
 gradle.startParameter.taskNames.each {
@@ -26,6 +27,7 @@ subprojects {
     project.ext.jaxb_api_version = '2.2.12'
     project.ext.hibernate_version = '5.0.3.Final'
     project.ext.postgresql_version = '9.4-1205-jdbc42'
+    project.ext.h2_version = '1.4.190'
 
     project.ext.libraries = [
             /* logging */
@@ -39,6 +41,9 @@ subprojects {
 
             /* postgresql */
             postgresql      : "org.postgresql:postgresql:${project.postgresql_version}",
+
+            /* h2 */
+            h2              : "com.h2database:h2:${project.h2_version}",
     ]
 
     repositories {
