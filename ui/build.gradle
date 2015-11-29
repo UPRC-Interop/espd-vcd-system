@@ -28,7 +28,6 @@ gretty {
     port = 8080
     contextPath = '/ui'
     scanInterval = 1
-    scanDirs = 'src/main/webapp'
     fastReload = true
     recompileOnSourceChange = true
     reloadOnClassChange = true
