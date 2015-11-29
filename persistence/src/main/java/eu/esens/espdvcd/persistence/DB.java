@@ -7,7 +7,7 @@ package eu.esens.espdvcd.persistence;
  */
 public enum DB {
     RDBMS("hibernate.rdbms.cfg.xml"),
-    IN_MEMORY_DB("hibernate.in_memory.cfg.xml");
+    IN_MEMORY_DB("hibernate.in_memory_db.cfg.xml");
 
     private final String hibernateConfiguration;
 
