@@ -10,7 +10,10 @@ apply plugin: 'war'
  */
 buildscript {
     repositories {
-        jcenter()
+//        jcenter()
+        jcenter {
+            url "http://jcenter.bintray.com/"
+        }
     }
 
     dependencies {
@@ -49,3 +52,5 @@ task copyTask(type: Copy) {
     into '../artifacts'
     rename "ui-${version}.war", 'ui.war'
 }
+
+build.dependsOn copyTask

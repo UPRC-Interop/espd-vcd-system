@@ -25,3 +25,5 @@ task copyTask(type: Copy) {
     into '../artifacts'
 //    rename "logging-${version}.jar", 'logging.jar'
 }
+
+build.dependsOn copyTask

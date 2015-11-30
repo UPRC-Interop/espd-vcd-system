@@ -10,3 +10,5 @@ task copyTask(type: Copy) {
     into '../artifacts'
 //    rename "common-util-${version}.jar", 'common-util.jar'
 }
+
+build.dependsOn copyTask

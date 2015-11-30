@@ -10,3 +10,5 @@ task copyTask(type: Copy) {
     into '../artifacts'
 //    rename "compiler-${version}.jar", 'compiler.jar'
 }
+
+build.dependsOn copyTask

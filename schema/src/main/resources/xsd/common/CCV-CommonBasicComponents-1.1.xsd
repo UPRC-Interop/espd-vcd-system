@@ -1,26 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 	Core Criterion Vocabulary - Based on the [ISA's] Core Criterion Data Model. Syntax Binding based on OASIS UBL-2.1 
-	Version				:	1.0
-	Last update		: 	20150918Fr
+	Version				:	1.1
+	Last update		: 	20151001Th
 	Author				:	Enric Staromiejski <enric.staromiejski.torregrosa@everis.com>
 	Project Owner	:	DG GROW, European Commission
 	-->
-<xsd:schema xmlns="urn:isa:names:specification:ubl:schema:xsd:CCV-CommonBasicComponents-1" xmlns:qdt="urn:oasis:names:specification:ubl:schema:xsd:QualifiedDataTypes-2" xmlns:udt="urn:oasis:names:specification:ubl:schema:xsd:UnqualifiedDataTypes-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:isa:names:specification:ubl:schema:xsd:CCV-CommonBasicComponents-1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+<xsd:schema xmlns="urn:isa:names:specification:ubl:schema:xsd:CCV-CommonBasicComponents-1" xmlns:qdt="urn:oasis:names:specification:ubl:schema:xsd:QualifiedDataTypes-2" xmlns:udt="urn:oasis:names:specification:ubl:schema:xsd:UnqualifiedDataTypes-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:isa:names:specification:ubl:schema:xsd:CCV-CommonBasicComponents-1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1">
 	<xsd:import namespace="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" schemaLocation="UBL-CommonBasicComponents-2.1.xsd"/>
 	<xsd:import namespace="urn:oasis:names:specification:ubl:schema:xsd:UnqualifiedDataTypes-2" schemaLocation="UBL-UnqualifiedDataTypes-2.1.xsd"/>
 	<!-- Element declaration -->
-	<xsd:element name="CriterionFulfillmentIndicator" type="IndicatorType"/>
+	<xsd:element name="CriterionFulfillmentIndicator" type="IndicatorType" default="false" nillable="true"/>
 	<xsd:element name="CriterionFulfillmentMotivation" type="cbc:TextType"/>
 	<xsd:element name="CriterionFulfillmentAmount" type="cbc:AmountType"/>
-	<xsd:element name="CriterionFulfillmentDescriptionDescription" type="cbc:DescriptionType"/>
+	<xsd:element name="CriterionFulfillmentDate" type="cbc:DateType"/>
+	<xsd:element name="CriterionFulfillmentDescription" type="cbc:DescriptionType"/>
+	<xsd:element name="CriterionFulfillmentEventTypeCode" type="cbc:TypeCodeType"/>
+	<xsd:element name="CriterionFulfillmentEventTypeDescription" type="cbc:DescriptionType"/>
 	<xsd:element name="CriterionFulfillmentQuantity" type="cbc:QuantityType"/>
 	<xsd:element name="CriterionFulfillmentPercent" type="cbc:PercentType"/>
 	<xsd:element name="CriterionID" type="cbc:IDType"/>
 	<xsd:element name="CriterionName" type="cbc:NameType"/>
 	<xsd:element name="CriterionDescription" type="cbc:DescriptionType"/>
 	<xsd:element name="CriterionRequirementAmountDescription" type="cbc:DescriptionType"/>
-	<xsd:element name="CriterionRequirementAmountTypeCode" type="cbc:AmountType"/>
+	<xsd:element name="CriterionRequirementAmountTypeCode" type="cbc:TypeCodeType"/>
 	<xsd:element name="CriterionRequirementDescription" type="cbc:DescriptionType"/>
 	<xsd:element name="CriterionRequirementEventTypeCode" type="cbc:TypeCodeType"/>
 	<xsd:element name="CriterionRequirementEventDescription" type="cbc:DescriptionType"/>
@@ -41,15 +44,15 @@
 	<xsd:element name="DependencyIdentifierReferenceID" type="cbc:IDType"/>
 	<xsd:element name="EventTypeCode" type="cbc:TypeCodeType"/>
 	<xsd:element name="EventTypeDescription" type="cbc:DescriptionType"/>
+	<xsd:element name="LegislationArticle" type="cbc:TextType"/>
+	<xsd:element name="LegislationDescription" type="cbc:DescriptionType"/>
+	<xsd:element name="JurisdictionLevelCode" type="cbc:TypeCodeType"/>
+	<xsd:element name="LegislationTitle" type="cbc:TextType"/>
+	<xsd:element name="LegislationURIID" type="cbc:IDType"/>
 	<xsd:element name="PeriodTypeCode" type="cbc:TypeCodeType"/>
 	<xsd:element name="PeriodTypeDescription" type="cbc:DescriptionType"/>
 	<xsd:element name="QuantityTypeCode" type="cbc:TypeCodeType"/>
 	<xsd:element name="QuantityTypeDescription" type="cbc:DescriptionType"/>
-	<xsd:element name="RegulationTitle" type="cbc:TextType"/>
-	<xsd:element name="RegulationArticle" type="cbc:TextType"/>
-	<xsd:element name="RegulationDescription" type="cbc:DescriptionType"/>
-	<xsd:element name="RegulationJurisdictionLevel" type="cbc:TypeCodeType"/>
-	<xsd:element name="RegulationURIID" type="cbc:IDType"/>
 	<!-- Elements definition -->
 	<xsd:complexType name="IndicatorType">
 		<xsd:simpleContent>

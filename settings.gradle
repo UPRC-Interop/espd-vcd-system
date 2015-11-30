@@ -2,4 +2,4 @@
  * Author: Panagiotis NICOLAOU
  * Email: pnikola@unipi.gr
  */
-include ':common-util', ':compiler', ':logging', ':model', ':persistence', ':schema', ':ui'
+include ':common-util', ':compiler', ':logging', ':model', ':schema', ':ui'

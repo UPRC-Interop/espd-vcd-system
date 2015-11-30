@@ -4,8 +4,8 @@
  */
 // build aliases: define a synonym here if you want a shortcut to run multiple targets
 def buildAliases = [
-        'reload' : ['clean', 'xjc', 'build', 'ui:jettyStart'],
-        'rebuild': ['clean', 'xjc', 'build']
+        'reload' : ['clean', 'build', 'ui:jettyStart'],
+        'rebuild': ['clean', 'build']
 ]
 def expandedTaskList = []
 gradle.startParameter.taskNames.each {
@@ -23,8 +23,8 @@ subprojects {
 
     project.ext.slf4j_version = '1.7.13'
     project.ext.log4j2_version = '2.4.1'
-    project.ext.jaxb_impl_version = '2.2.7'
-    project.ext.jaxb_api_version = '2.2.12'
+    project.ext.jaxb_impl_version = '2.2.11'
+    project.ext.jaxb_api_version = '2.2.12-b141001.1542'
     project.ext.hibernate_version = '5.0.3.Final'
     project.ext.postgresql_version = '9.4-1205-jdbc42'
     project.ext.h2_version = '1.4.190'
@@ -48,7 +48,10 @@ subprojects {
 
     repositories {
 //        mavenLocal()
-        mavenCentral()
+//        mavenCentral()
+        maven  {
+            url "http://repo1.maven.org/maven2"
+        }
     }
 
     dependencies {
@@ -71,7 +74,6 @@ configure(subprojects
 // everywhere except a few projects
 configure(subprojects
         - project(':logging')
-        - project(':persistence')
         - project(':schema')) {
     dependencies {
         testCompile 'junit:junit:4.12'
