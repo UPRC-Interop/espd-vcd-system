@@ -13,8 +13,8 @@ public class ESPDRequestImplTest {
 
     @Test
     public void testCreateESPDRequest() {
-        GenericDAO<ESPDRequestImpl> espdRequestDAO = new GenericDAO<>(DB.RDBMS);
-        ESPDRequestImpl espdRequest = new ESPDRequestImpl();
-        espdRequestDAO.persist(espdRequest);
+//        GenericDAO<ESPDRequestImpl> espdRequestDAO = new GenericDAO<>(DB.RDBMS);
+//        ESPDRequestImpl espdRequest = new ESPDRequestImpl();
+//        espdRequestDAO.persist(espdRequest);
     }
 }
