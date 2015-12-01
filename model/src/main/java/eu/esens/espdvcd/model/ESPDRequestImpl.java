@@ -71,9 +71,4 @@ public class ESPDRequestImpl implements ESPDRequest {
     public void setEspdRequestType(ESPDRequestType espdRequestType) {
         this.espdRequestType = espdRequestType;
     }
-
-    public static void main(String argv[]) {
-        GenericDAO<ESPDRequestImpl> espdRequestDAO = new GenericDAO<>(DB.RDBMS);
-        espdRequestDAO.persist(new ESPDRequestImpl());
-    }
 }

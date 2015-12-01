@@ -9,10 +9,10 @@ configurations {
 dependencies {
     /* hibernate */
     compile(libraries.hibernate_core) {
-        exclude group: 'antlr', module: 'antlr'
+//        exclude group: 'antlr', module: 'antlr'
 //        exclude group: 'dom4j', module: 'dom4j'
 //        exclude group: 'org.apache.geronimo.specs', module: 'geronimo-jta_1.1_spec'
-        exclude group: 'org.javassist', module: 'javassist'
+//        exclude group: 'org.javassist', module: 'javassist'
 //        exclude group: 'org.jboss', module: 'jandex'
 //        exclude group: 'org.jboss.logging', module: 'jboss-logging'
     }
@@ -24,7 +24,7 @@ dependencies {
     compile 'org.jvnet.jaxb2_commons:jaxb2-basics-ant:0.9.5'
     compile 'org.jvnet.jaxb2_commons:jaxb2-basics-annotate:1.0.2'
     compile 'org.jvnet.hyperjaxb3:hyperjaxb3-ejb-plugin:0.6.1'
-    compile 'javax.persistence:persistence-api:1.0'
+    compile 'org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final'
 
     xjc "com.sun.xml.bind:jaxb-core:${project.jaxb_impl_version}"
     xjc "com.sun.xml.bind:jaxb-xjc:${project.jaxb_impl_version}"

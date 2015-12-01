@@ -22,6 +22,7 @@
 
         <!-- table mappings -->
         <mapping class="grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType"/>
+        <mapping class="oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.IDType"/>
         <mapping class="eu.esens.espdvcd.model.ESPDRequestImpl"/>
     </session-factory>
 </hibernate-configuration>
