@@ -1,4 +1,4 @@
-package eu.esens.espdvcd.persistence;
+package eu.esens.espdvcd.model.dao;
 
 import java.io.Serializable;
 import java.util.List;

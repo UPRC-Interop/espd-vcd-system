@@ -2,6 +2,63 @@
  * Author: Panagiotis NICOLAOU
  * Email: pnikola@unipi.gr
  */
+configurations {
+    xjc
+}
+
+dependencies {
+    /* hibernate */
+    compile(libraries.hibernate_core) {
+        exclude group: 'antlr', module: 'antlr'
+//        exclude group: 'dom4j', module: 'dom4j'
+//        exclude group: 'org.apache.geronimo.specs', module: 'geronimo-jta_1.1_spec'
+        exclude group: 'org.javassist', module: 'javassist'
+//        exclude group: 'org.jboss', module: 'jandex'
+//        exclude group: 'org.jboss.logging', module: 'jboss-logging'
+    }
+    compile "com.sun.xml.bind:jaxb-core:${project.jaxb_impl_version}"
+    compile "com.sun.xml.bind:jaxb-xjc:${project.jaxb_impl_version}"
+    compile "com.sun.xml.bind:jaxb-impl:${project.jaxb_impl_version}"
+    compile "javax.xml.bind:jaxb-api:${project.jaxb_api_version}"
+    compile 'org.jvnet.jaxb2_commons:jaxb2-basics:0.6.3'
+    compile 'org.jvnet.jaxb2_commons:jaxb2-basics-ant:0.9.5'
+    compile 'org.jvnet.jaxb2_commons:jaxb2-basics-annotate:1.0.2'
+    compile 'org.jvnet.hyperjaxb3:hyperjaxb3-ejb-plugin:0.6.1'
+    compile 'javax.persistence:persistence-api:1.0'
+
+    xjc "com.sun.xml.bind:jaxb-core:${project.jaxb_impl_version}"
+    xjc "com.sun.xml.bind:jaxb-xjc:${project.jaxb_impl_version}"
+    xjc "com.sun.xml.bind:jaxb-impl:${project.jaxb_impl_version}"
+    xjc "javax.xml.bind:jaxb-api:${project.jaxb_api_version}"
+    xjc 'org.jvnet.jaxb2_commons:jaxb2-basics:0.6.3'
+    xjc 'org.jvnet.jaxb2_commons:jaxb2-basics-ant:0.9.5'
+    xjc 'org.jvnet.jaxb2_commons:jaxb2-basics-annotate:1.0.2'
+    xjc 'org.jvnet.hyperjaxb3:hyperjaxb3-ejb-plugin:0.6.1'
+}
+
+//gradle.projectsEvaluated {
+//    tasks.withType(JavaCompile) {
+//        options.compilerArgs << "-Xlint:unchecked"
+//    }
+//}
+
+task xjc {
+    ant.taskdef(name: 'xjc',
+//            classname: 'com.sun.tools.xjc.XJCTask',
+            classname: 'org.jvnet.jaxb2_commons.xjc.XJC2Task',
+            classpath: configurations.xjc.asPath)
+    ant.xjc( destdir: "$projectDir/src/main/java", extension: true) {
+        classpath {
+            pathelement(path: configurations.compile.asPath)
+        }
+        schema(dir: "$projectDir/src/main/resources/xsd", includes: "**/*.xsd")
+//        arg(value: "-Xequals")
+//        arg(value: "-XhashCode")
+//        arg(value: "-XtoString")
+        arg(value: "-Xannotate")
+        arg(value: "-Xhyperjaxb3-ejb")
+    }
+}
 
 task copyTask(type: Copy) {
     from "$buildDir/libs/schema-${version}.jar"
@@ -9,6 +66,5 @@ task copyTask(type: Copy) {
 //    rename "schema-${version}.jar", 'schema.jar'
 }
 
+compileJava.dependsOn xjc
 build.dependsOn copyTask
-
-

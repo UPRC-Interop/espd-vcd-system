@@ -1,4 +1,4 @@
-package eu.esens.espdvcd.persistence;
+package eu.esens.espdvcd.model.persistence;
 
 /**
  * TODO: Add description.

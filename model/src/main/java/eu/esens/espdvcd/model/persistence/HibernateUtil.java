@@ -1,5 +1,7 @@
-package eu.esens.espdvcd.persistence;
+package eu.esens.espdvcd.model.persistence;
 
+import eu.esens.espdvcd.model.ESPDRequestImpl;
+import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -14,25 +16,27 @@ import org.slf4j.LoggerFactory;
 public class HibernateUtil {
     private static final Logger LOG = LoggerFactory.getLogger(HibernateUtil.class);
     private static final SessionFactory sessionFactoryForRDBMS;
-    private static final SessionFactory sessionFactoryForInMemoryDB;
+//    private static final SessionFactory sessionFactoryForInMemoryDB;
 
     static {
         try {
             Configuration configuration =
                     new Configuration().configure(DB.RDBMS.hibernateConfiguration());
+            configuration.addAnnotatedClass(ESPDRequestImpl.class);
+            configuration.addAnnotatedClass(ESPDRequestType.class);
             StandardServiceRegistryBuilder standardServiceRegistryBuilder =
                     new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
             sessionFactoryForRDBMS = configuration.buildSessionFactory(
                     standardServiceRegistryBuilder.build());
 
-            configuration =
-                    new Configuration().configure(DB.IN_MEMORY_DB.hibernateConfiguration());
-            standardServiceRegistryBuilder =
-                    new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
-            sessionFactoryForInMemoryDB = configuration.buildSessionFactory(
-                    standardServiceRegistryBuilder.build());
+//            configuration =
+//                    new Configuration().configure(DB.IN_MEMORY_DB.hibernateConfiguration());
+//            standardServiceRegistryBuilder =
+//                    new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
+//            sessionFactoryForInMemoryDB = configuration.buildSessionFactory(
+//                    standardServiceRegistryBuilder.build())
         } catch (Throwable ex) {
-            LOG.error("Initial SessionFactories creation failed. {}", ex);
+            LOG.error("Initial SessionFactories creation failed. " + ex);
             throw new ExceptionInInitializerError(ex);
         }
     }
@@ -41,16 +45,16 @@ public class HibernateUtil {
         return sessionFactoryForRDBMS;
     }
 
-    public static SessionFactory getSessionFactoryForInMemoryDB() {
-        return sessionFactoryForInMemoryDB;
-    }
+//    public static SessionFactory getSessionFactoryForInMemoryDB() {
+//        return sessionFactoryForInMemoryDB;
+//    }
 
     public static void shutdownRDBMS() {
         // Close caches and connection pools
         getSessionFactoryForRDBMS().close();
     }
 
-    public static void shutdownInMemoryDB() {
-        getSessionFactoryForInMemoryDB().close();
-    }
+//    public static void shutdownInMemoryDB() {
+//        getSessionFactoryForInMemoryDB().close();
+//    }
 }

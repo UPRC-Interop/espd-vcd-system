@@ -24,7 +24,7 @@ subprojects {
     project.ext.slf4j_version = '1.7.13'
     project.ext.log4j2_version = '2.4.1'
     project.ext.jaxb_impl_version = '2.2.11'
-    project.ext.jaxb_api_version = '2.2.12-b141001.1542'
+    project.ext.jaxb_api_version = '2.2.12'
     project.ext.hibernate_version = '5.0.3.Final'
     project.ext.postgresql_version = '9.4-1205-jdbc42'
     project.ext.h2_version = '1.4.190'

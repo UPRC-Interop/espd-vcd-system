@@ -1,5 +1,7 @@
-package eu.esens.espdvcd.persistence;
+package eu.esens.espdvcd.model.dao;
 
+import eu.esens.espdvcd.model.persistence.DB;
+import eu.esens.espdvcd.model.persistence.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -31,10 +33,10 @@ public class GenericDAO<T> implements DAOInterface<T, Serializable> {
                 currentSession = HibernateUtil.getSessionFactoryForRDBMS().openSession();
                 LOG.debug("Session opened. [RDBMS]");
                 break;
-            case IN_MEMORY_DB:
-                currentSession = HibernateUtil.getSessionFactoryForInMemoryDB().openSession();
-                LOG.debug("Session opened. [IN_MEMORY]");
-                break;
+//            case IN_MEMORY_DB:
+//                currentSession = HibernateUtil.getSessionFactoryForInMemoryDB().openSession();
+//                LOG.debug("Session opened. [IN_MEMORY]");
+//                break;
         }
 //        currentSession.setFlushMode(FlushMode.MANUAL);
 //        ManagedSessionContext.bind(currentSession);

@@ -1,7 +1,6 @@
 package eu.esens.espdvcd.model;
 
 import eu.esens.espdvcd.model.types.ESPDRequestModelType;
-import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
 
 import java.io.Serializable;
 
@@ -29,12 +28,12 @@ public interface ESPDRequest extends Serializable {
     void setModelType(ESPDRequestModelType modelType);
 
     /**
-     * @return The {@link ESPDRequestType} of the {@link ESPDRequest}.
+     * @return The {@link grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType} of the {@link ESPDRequest}.
      */
-    ESPDRequestType getEspdRequestType();
+    grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType getEspdRequestType();
 
     /**
      * @param espdRequestType
      */
-    void setEspdRequestType(ESPDRequestType espdRequestType);
+    void setEspdRequestType(grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType espdRequestType);
 }
