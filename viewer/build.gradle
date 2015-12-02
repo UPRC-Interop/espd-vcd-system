@@ -29,7 +29,7 @@ apply plugin: 'org.akhikhl.gretty'
 
 gretty {
     port = 8080
-    contextPath = '/ui'
+    contextPath = '/viewer'
     scanInterval = 1
     fastReload = true
     recompileOnSourceChange = true
@@ -48,9 +48,9 @@ dependencies {
 }
 
 task copyTask(type: Copy) {
-    from "build/libs/ui-${version}.war"
+    from "build/libs/viewer-${version}.war"
     into '../artifacts'
-    rename "ui-${version}.war", 'ui.war'
+    rename "viewer-${version}.war", 'viewer.war'
 }
 
-build.dependsOn copyTask
+build.dependsOn clean, copyTask

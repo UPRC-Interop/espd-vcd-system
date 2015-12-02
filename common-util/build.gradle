@@ -11,4 +11,4 @@ task copyTask(type: Copy) {
 //    rename "common-util-${version}.jar", 'common-util.jar'
 }
 
-build.dependsOn copyTask
+build.dependsOn clean, copyTask

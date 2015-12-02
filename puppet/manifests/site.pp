@@ -8,9 +8,10 @@ node default {
   # configure tomcat
   $catalina_home = '/home/espdvcd/tomcat'
 
-  $tomcat6_flag = 'OFF'
-  $tomcat7_flag = 'OFF'
+  $tomcat6_flag = 'ON'
+  $tomcat7_flag = 'ON'
   $tomcat8_flag = 'ON'
+  $tomcat9_flag = 'ON'
 
   # tomcat 6
   $tomcat6 = 'tomcat6'
@@ -18,7 +19,7 @@ node default {
   $port6 = 26000
   $redirectPort6 = 16443
   $portAJP6 = 16009
-  $url6 = 'http://apache.forthnet.gr/tomcat/tomcat-6/v6.0.44/bin/apache-tomcat-6.0.44.tar.gz'
+  $url6 = 'http://apache.tsl.gr/tomcat/tomcat-6/v6.0.44/bin/apache-tomcat-6.0.44.tar.gz'
 
   # tomcat 7
   $tomcat7 = 'tomcat7'
@@ -26,7 +27,7 @@ node default {
   $port7 = 27000
   $redirectPort7 = 17443
   $portAJP7 = 17009
-  $url7 = 'http://mirrors.myaegean.gr/apache/tomcat/tomcat-7/v7.0.65/bin/apache-tomcat-7.0.65.tar.gz'
+  $url7 = 'http://apache.forthnet.gr/tomcat/tomcat-7/v7.0.65/bin/apache-tomcat-7.0.65.tar.gz'
 
   # tomcat 8
   $tomcat8 = 'tomcat8'
@@ -34,7 +35,15 @@ node default {
   $port8 = 28000
   $redirectPort8 = 18443
   $portAJP8 = 18009
-  $url8 = 'http://apache.forthnet.gr/tomcat/tomcat-8/v8.0.28/bin/apache-tomcat-8.0.28.tar.gz'
+  $url8 = 'http://apache.otenet.gr/dist/tomcat/tomcat-8/v8.0.29/bin/apache-tomcat-8.0.29.tar.gz'
+
+  # tomcat 9
+  $tomcat9 = 'tomcat9'
+  $serverPort9 = 19005
+  $port9 = 29000
+  $redirectPort9 = 19443
+  $portAJP9 = 19009
+  $url9 = 'http://apache.forthnet.gr/tomcat/tomcat-9/v9.0.0.M1/bin/apache-tomcat-9.0.0.M1.tar.gz'
 
   class { 'tomcat':
     catalina_home => $catalina_home,
@@ -77,10 +86,17 @@ node default {
       catalina_base => "$catalina_home/$tomcat6",
     }
 
-    # symlink for auto-deployment of ui.war file
-    file { "/home/espdvcd/tomcat/$tomcat6/webapps/ui.war":
+    # symlink for auto-deployment of designer.war file
+    file { "/home/espdvcd/tomcat/$tomcat6/webapps/designer.war":
       ensure  => 'link',
-      target  => '/tmp/artifacts/ui.war',
+      target  => '/tmp/artifacts/designer.war',
+      require => Class['tomcat'],
+    }
+
+    # symlink for auto-deployment of viewer.war file
+    file { "/home/espdvcd/tomcat/$tomcat6/webapps/viewer.war":
+      ensure  => 'link',
+      target  => '/tmp/artifacts/viewer.war',
       require => Class['tomcat'],
     }
   }
@@ -114,10 +130,17 @@ node default {
       catalina_base => "$catalina_home/$tomcat7",
     }
 
-    # symlink for auto-deployment of ui.war file
-    file { "/home/espdvcd/tomcat/$tomcat7/webapps/ui.war":
+    # symlink for auto-deployment of designer.war file
+    file { "/home/espdvcd/tomcat/$tomcat7/webapps/designer.war":
       ensure  => 'link',
-      target  => '/tmp/artifacts/ui.war',
+      target  => '/tmp/artifacts/designer.war',
+      require => Class['tomcat'],
+    }
+
+    # symlink for auto-deployment of viewer.war file
+    file { "/home/espdvcd/tomcat/$tomcat7/webapps/viewer.war":
+      ensure  => 'link',
+      target  => '/tmp/artifacts/viewer.war',
       require => Class['tomcat'],
     }
   }
@@ -151,10 +174,61 @@ node default {
       catalina_base => "$catalina_home/$tomcat8",
     }
 
-    # symlink for auto-deployment of ui.war file
-    file { "/home/espdvcd/tomcat/$tomcat8/webapps/ui.war":
+    # symlink for auto-deployment of designer.war file
+    file { "/home/espdvcd/tomcat/$tomcat8/webapps/designer.war":
       ensure  => 'link',
-      target  => '/tmp/artifacts/ui.war',
+      target  => '/tmp/artifacts/designer.war',
+      require => Class['tomcat'],
+    }
+
+    # symlink for auto-deployment of viewer.war file
+    file { "/home/espdvcd/tomcat/$tomcat8/webapps/viewer.war":
+      ensure  => 'link',
+      target  => '/tmp/artifacts/viewer.war',
+      require => Class['tomcat'],
+    }
+  }
+
+  if($tomcat9_flag == 'ON') {
+    tomcat::instance { $tomcat9:
+      source_url    => $url9,
+      catalina_base => "$catalina_home/$tomcat9",
+    }->
+    tomcat::config::server { $tomcat9:
+      catalina_base => "$catalina_home/$tomcat9",
+      port          => $serverPort9,
+    }->
+    tomcat::config::server::connector { "$tomcat9-http":
+      catalina_base         => "$catalina_home/$tomcat9",
+      port                  => $port9,
+      protocol              => 'HTTP/1.1',
+      additional_attributes => {
+        'redirectPort' => $redirectPort9,
+      },
+    }->
+    tomcat::config::server::connector { "$tomcat9-ajp":
+      catalina_base         => "$catalina_home/$tomcat9",
+      port                  => $portAJP9,
+      protocol              => 'AJP/1.3',
+      additional_attributes => {
+        'redirectPort' => $redirectPort9,
+      },
+    }->
+    tomcat::service { $tomcat9:
+      catalina_base => "$catalina_home/$tomcat9",
+    }
+
+    # symlink for auto-deployment of designer.war file
+    file { "/home/espdvcd/tomcat/$tomcat9/webapps/designer.war":
+      ensure  => 'link',
+      target  => '/tmp/artifacts/designer.war',
+      require => Class['tomcat'],
+    }
+
+    # symlink for auto-deployment of viewer.war file
+    file { "/home/espdvcd/tomcat/$tomcat9/webapps/viewer.war":
+      ensure  => 'link',
+      target  => '/tmp/artifacts/viewer.war',
       require => Class['tomcat'],
     }
   }

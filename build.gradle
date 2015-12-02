@@ -4,8 +4,8 @@
  */
 // build aliases: define a synonym here if you want a shortcut to run multiple targets
 def buildAliases = [
-        'reload' : ['clean', 'build', 'ui:jettyStart'],
-        'rebuild': ['clean', 'build']
+        'reload' : ['clean', 'xjc', 'build', 'designer:jettyStart'],
+        'rebuild': ['clean', 'xjc', 'build']
 ]
 def expandedTaskList = []
 gradle.startParameter.taskNames.each {
@@ -24,6 +24,7 @@ subprojects {
     project.ext.slf4j_version = '1.7.13'
     project.ext.log4j2_version = '2.4.1'
     project.ext.jaxb_impl_version = '2.2.11'
+//    project.ext.jaxb_api_version = '2.2.12-b141001.1542'
     project.ext.jaxb_api_version = '2.2.12'
     project.ext.hibernate_version = '5.0.3.Final'
     project.ext.postgresql_version = '9.4-1205-jdbc42'
@@ -63,7 +64,7 @@ subprojects {
 // everywhere except in-memory-db and logging projects
 configure(subprojects
         - project(':logging')
-        - project(':ui')) {
+        - project(':designer')) {
     dependencies {
         compile project(':logging')
     }
@@ -78,4 +79,8 @@ configure(subprojects
     dependencies {
         testCompile 'junit:junit:4.12'
     }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.9'
 }

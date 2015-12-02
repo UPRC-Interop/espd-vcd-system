@@ -1,0 +1,56 @@
+/**
+ * Author: Panagiotis NICOLAOU
+ * Email: pnikola@unipi.gr
+ */
+apply plugin: 'war'
+
+/**
+ * Run gradle task jettyRun to start jetty
+ * and jettyStop to stop it.
+ */
+buildscript {
+    repositories {
+//        jcenter()
+        jcenter {
+            url "http://jcenter.bintray.com/"
+        }
+    }
+
+    dependencies {
+        classpath 'org.akhikhl.gretty:gretty:+'
+    }
+}
+
+repositories {
+    jcenter()
+}
+
+apply plugin: 'org.akhikhl.gretty'
+
+gretty {
+    port = 8080
+    contextPath = '/designer'
+    scanInterval = 1
+    fastReload = true
+    recompileOnSourceChange = true
+    reloadOnClassChange = true
+    reloadOnConfigChange = true
+    reloadOnLibChange = true
+    inplaceMode = 'soft'
+    loggingLevel = 'INFO'
+    consoleLogEnabled = true
+    fileLogEnabled = true
+    logDir = "${project.buildDir}"
+    logFileName = "${project.name}"
+}
+
+dependencies {
+}
+
+task copyTask(type: Copy) {
+    from "build/libs/designer-${version}.war"
+    into '../artifacts'
+    rename "designer-${version}.war", 'designer.war'
+}
+
+build.dependsOn clean, copyTask

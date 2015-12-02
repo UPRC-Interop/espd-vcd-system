@@ -11,4 +11,4 @@ task copyTask(type: Copy) {
 //    rename "compiler-${version}.jar", 'compiler.jar'
 }
 
-build.dependsOn copyTask
+build.dependsOn clean, copyTask

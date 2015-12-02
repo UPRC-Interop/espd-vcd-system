@@ -21,6 +21,7 @@ Vagrant.configure(2) do |config|
   config.vm.network "forwarded_port", guest: 26000, host: 26000 # for tomcat 6
   config.vm.network "forwarded_port", guest: 27000, host: 27000 # for tomcat 7
   config.vm.network "forwarded_port", guest: 28000, host: 28000 # for tomcat 8
+  config.vm.network "forwarded_port", guest: 29000, host: 29000 # for tomcat 9
   config.vm.network "forwarded_port", guest: 5432, host: 65432 # for postgresql 9.4
 
   # sync directories
