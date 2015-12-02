@@ -32,7 +32,7 @@ dependencies {
     xjc "javax.xml.bind:jaxb-api:${project.jaxb_api_version}"
     xjc 'org.jvnet.jaxb2_commons:jaxb2-basics:0.6.3'
     xjc 'org.jvnet.jaxb2_commons:jaxb2-basics-ant:0.9.5'
-    xjc 'org.jvnet.jaxb2_commons:jaxb2-basics-annotate:1.0.2'
+//    xjc 'org.jvnet.jaxb2_commons:jaxb2-basics-annotate:1.0.2'
     xjc 'org.jvnet.hyperjaxb3:hyperjaxb3-ejb-plugin:0.6.1'
 }
 
@@ -44,7 +44,6 @@ dependencies {
 
 task xjc {
     ant.taskdef(name: 'xjc',
-//            classname: 'com.sun.tools.xjc.XJCTask',
             classname: 'org.jvnet.jaxb2_commons.xjc.XJC2Task',
             classpath: configurations.xjc.asPath)
     ant.xjc( destdir: "$projectDir/src/main/java", extension: true) {
@@ -52,13 +51,15 @@ task xjc {
             pathelement(path: configurations.compile.asPath)
         }
         schema(dir: "$projectDir/src/main/resources/xsd", includes: "**/*.xsd")
-//        arg(value: "-Xequals")
-//        arg(value: "-XhashCode")
-//        arg(value: "-XtoString")
+        arg(value: "-Xequals")
+        arg(value: "-XhashCode")
+        arg(value: "-XtoString")
         arg(value: "-Xannotate")
-        arg(value: "-Xhyperjaxb3-ejb")
+//        arg(value: "-Xhyperjaxb3-ejb")
     }
 }
+
+compileJava.dependsOn xjc
 
 task copyTask(type: Copy) {
     from "$buildDir/libs/schema-${version}.jar"
@@ -66,5 +67,4 @@ task copyTask(type: Copy) {
 //    rename "schema-${version}.jar", 'schema.jar'
 }
 
-compileJava.dependsOn xjc
 build.dependsOn copyTask
