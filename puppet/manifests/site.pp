@@ -19,7 +19,7 @@ node default {
   $port6 = 26000
   $redirectPort6 = 16443
   $portAJP6 = 16009
-  $url6 = 'http://apache.tsl.gr/tomcat/tomcat-6/v6.0.44/bin/apache-tomcat-6.0.44.tar.gz'
+  $url6 = 'http://apache.otenet.gr/dist/tomcat/tomcat-6/v6.0.44/bin/apache-tomcat-6.0.44.tar.gz'
 
   # tomcat 7
   $tomcat7 = 'tomcat7'
@@ -27,7 +27,7 @@ node default {
   $port7 = 27000
   $redirectPort7 = 17443
   $portAJP7 = 17009
-  $url7 = 'http://apache.forthnet.gr/tomcat/tomcat-7/v7.0.65/bin/apache-tomcat-7.0.65.tar.gz'
+  $url7 = 'http://apache.otenet.gr/dist/tomcat/tomcat-7/v7.0.67/bin/apache-tomcat-7.0.67.tar.gz'
 
   # tomcat 8
   $tomcat8 = 'tomcat8'
@@ -35,7 +35,7 @@ node default {
   $port8 = 28000
   $redirectPort8 = 18443
   $portAJP8 = 18009
-  $url8 = 'http://apache.otenet.gr/dist/tomcat/tomcat-8/v8.0.29/bin/apache-tomcat-8.0.29.tar.gz'
+  $url8 = 'http://apache.otenet.gr/dist/tomcat/tomcat-8/v8.0.30/bin/apache-tomcat-8.0.30.tar.gz'
 
   # tomcat 9
   $tomcat9 = 'tomcat9'

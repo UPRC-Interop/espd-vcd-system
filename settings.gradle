@@ -2,4 +2,4 @@
  * Author: Panagiotis NICOLAOU
  * Email: pnikola@unipi.gr
  */
-include ':schema', ':model', ':compiler', ':designer', ':viewer', ':logging', ':common-util'
+include ':schema', ':model', ':builder', ':designer', ':viewer', ':logging', ':common-util'

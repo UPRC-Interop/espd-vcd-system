@@ -6,9 +6,9 @@ dependencies {
 }
 
 task copyTask(type: Copy) {
-    from "build/libs/compiler-${version}.jar"
+    from "build/libs/builder-${version}.jar"
     into '../artifacts'
-//    rename "compiler-${version}.jar", 'compiler.jar'
+//    rename "builder-${version}.jar", 'builder.jar'
 }
 
 build.dependsOn clean, copyTask

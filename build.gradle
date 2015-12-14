@@ -63,8 +63,7 @@ subprojects {
 // for project logging
 // everywhere except in-memory-db and logging projects
 configure(subprojects
-        - project(':logging')
-        - project(':designer')) {
+        - project(':logging')) {
     dependencies {
         compile project(':logging')
     }
