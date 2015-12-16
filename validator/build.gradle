@@ -1,0 +1,14 @@
+/**
+ * Author: Panagiotis NICOLAOU
+ * Email: pnikola@unipi.gr
+ */
+dependencies {
+}
+
+task copyTask(type: Copy) {
+    from "build/libs/validator-${version}.jar"
+    into '../artifacts'
+//    rename "validator-${version}.jar", 'validator.jar'
+}
+
+build.dependsOn clean, copyTask

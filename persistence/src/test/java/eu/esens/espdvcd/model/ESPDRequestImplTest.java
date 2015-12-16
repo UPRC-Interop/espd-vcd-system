@@ -1,7 +1,7 @@
 package eu.esens.espdvcd.model;
 
-import eu.esens.espdvcd.model.dao.GenericDAO;
-import eu.esens.espdvcd.model.persistence.DB;
+import eu.esens.espdvcd.persistence.dao.GenericDAO;
+import eu.esens.espdvcd.persistence.DB;
 import org.junit.Test;
 
 /**

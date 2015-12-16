@@ -1,0 +1,14 @@
+/**
+ * Author: Panagiotis NICOLAOU
+ * Email: pnikola@unipi.gr
+ */
+dependencies {
+}
+
+task copyTask(type: Copy) {
+    from "build/libs/retriever-${version}.jar"
+    into '../artifacts'
+//    rename "retriever-${version}.jar", 'retriever.jar'
+}
+
+build.dependsOn clean, copyTask

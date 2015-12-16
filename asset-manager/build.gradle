@@ -1,0 +1,14 @@
+/**
+ * Author: Panagiotis NICOLAOU
+ * Email: pnikola@unipi.gr
+ */
+dependencies {
+}
+
+task copyTask(type: Copy) {
+    from "build/libs/asset-manager-${version}.jar"
+    into '../artifacts'
+//    rename "asset-manager-${version}.jar", 'asset-manager.jar'
+}
+
+build.dependsOn clean, copyTask

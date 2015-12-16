@@ -1,7 +1,5 @@
 package eu.esens.espdvcd.model;
 
-import eu.esens.espdvcd.model.dao.GenericDAO;
-import eu.esens.espdvcd.model.persistence.DB;
 import eu.esens.espdvcd.model.types.ESPDRequestModelType;
 import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
 import org.hibernate.annotations.Cache;

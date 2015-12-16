@@ -1,0 +1,14 @@
+/**
+ * Author: Panagiotis NICOLAOU
+ * Email: pnikola@unipi.gr
+ */
+dependencies {
+}
+
+task copyTask(type: Copy) {
+    from "build/libs/rest-api-${version}.jar"
+    into '../artifacts'
+//    rename "rest-api-${version}.jar", 'rest-api.jar'
+}
+
+build.dependsOn clean, copyTask

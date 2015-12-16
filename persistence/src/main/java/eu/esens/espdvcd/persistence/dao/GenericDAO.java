@@ -1,7 +1,7 @@
-package eu.esens.espdvcd.model.dao;
+package eu.esens.espdvcd.persistence.dao;
 
-import eu.esens.espdvcd.model.persistence.DB;
-import eu.esens.espdvcd.model.persistence.HibernateUtil;
+import eu.esens.espdvcd.persistence.DB;
+import eu.esens.espdvcd.persistence.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;

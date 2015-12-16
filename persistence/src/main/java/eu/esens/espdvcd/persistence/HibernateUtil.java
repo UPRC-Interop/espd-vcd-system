@@ -1,7 +1,5 @@
-package eu.esens.espdvcd.model.persistence;
+package eu.esens.espdvcd.persistence;
 
-import eu.esens.espdvcd.model.ESPDRequestImpl;
-import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -22,8 +20,6 @@ public class HibernateUtil {
         try {
             Configuration configuration =
                     new Configuration().configure(DB.RDBMS.hibernateConfiguration());
-            configuration.addAnnotatedClass(ESPDRequestImpl.class);
-            configuration.addAnnotatedClass(ESPDRequestType.class);
             StandardServiceRegistryBuilder standardServiceRegistryBuilder =
                     new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
             sessionFactoryForRDBMS = configuration.buildSessionFactory(
