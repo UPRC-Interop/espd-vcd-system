@@ -18,7 +18,7 @@ subprojects {
     apply plugin: 'java'
     apply plugin: 'maven'
 
-    version = '1.0.0-SNAPSHOT'
+    version = '0.1.0-SNAPSHOT'
     group = 'eu.esens.espdvcd'
 
     project.ext.slf4j_version = '1.7.13'
