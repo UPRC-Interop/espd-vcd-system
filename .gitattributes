@@ -5,6 +5,7 @@
 # to native line endings on checkout.
 *.java text
 *.xml text
+*.xsd text
 *.html text
 *.htm text
 *.css text
