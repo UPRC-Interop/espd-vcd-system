@@ -4,7 +4,7 @@
  */
 // build aliases: define a synonym here if you want a shortcut to run multiple targets
 def buildAliases = [
-        'reload' : ['clean', 'xjc', 'build','designer:jettyStart'],
+        'reload' : ['clean', 'xjc', 'build',   'designer:jettyStart'],
         'rebuild': ['clean', 'xjc', 'build']
 ]
 def expandedTaskList = []
