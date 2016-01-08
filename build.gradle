@@ -14,7 +14,7 @@ gradle.startParameter.taskNames.each {
 gradle.startParameter.taskNames = expandedTaskList.flatten()
 println "\n${gradle.startParameter.taskNames}\n"
 
-subprojects {
+subprojects { project ->
     apply plugin: 'java'
     apply plugin: 'maven'
 
@@ -57,6 +57,16 @@ subprojects {
 
     dependencies {
     }
+
+//    afterEvaluate {
+//        project.build.getTaskDependencies().each { buildDependency ->
+//            buildDependency.getDependencies(project.build).each { taskDependency ->
+//                if(taskDependency.name == "clean") {
+//                    taskDependency.setEnabled(false)
+//                }
+//            }
+//        }
+//    }
 }
 
 // global definition of compile dependency

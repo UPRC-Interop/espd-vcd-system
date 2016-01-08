@@ -39,4 +39,4 @@ task copyTask(type: Copy) {
 //    rename "schema-${version}.jar", 'schema.jar'
 }
 
-build.dependsOn clean, xjc, copyTask
+build.dependsOn xjc, copyTask

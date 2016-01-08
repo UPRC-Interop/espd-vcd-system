@@ -53,4 +53,4 @@ task copyTask(type: Copy) {
     rename "viewer-${version}.war", 'viewer.war'
 }
 
-build.dependsOn clean, copyTask
+build.dependsOn copyTask

@@ -11,4 +11,4 @@ task copyTask(type: Copy) {
 //    rename "retriever-${version}.jar", 'retriever.jar'
 }
 
-build.dependsOn clean, copyTask
+build.dependsOn copyTask

@@ -11,4 +11,4 @@ task copyTask(type: Copy) {
 //    rename "user-manager-${version}.jar", 'user-manager.jar'
 }
 
-build.dependsOn clean, copyTask
+build.dependsOn copyTask
