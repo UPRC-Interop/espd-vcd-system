@@ -57,16 +57,6 @@ subprojects { project ->
 
     dependencies {
     }
-
-//    afterEvaluate {
-//        project.build.getTaskDependencies().each { buildDependency ->
-//            buildDependency.getDependencies(project.build).each { taskDependency ->
-//                if(taskDependency.name == "clean") {
-//                    taskDependency.setEnabled(false)
-//                }
-//            }
-//        }
-//    }
 }
 
 // global definition of compile dependency
