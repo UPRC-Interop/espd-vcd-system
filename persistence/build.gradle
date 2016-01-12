@@ -22,4 +22,4 @@ task copyTask(type: Copy) {
 //    rename "persistence-${version}.jar", 'persistence.jar'
 }
 
-build.dependsOn clean, copyTask
+build.dependsOn copyTask

@@ -14,7 +14,7 @@ gradle.startParameter.taskNames.each {
 gradle.startParameter.taskNames = expandedTaskList.flatten()
 println "\n${gradle.startParameter.taskNames}\n"
 
-subprojects {
+subprojects { project ->
     apply plugin: 'java'
     apply plugin: 'maven'
 
