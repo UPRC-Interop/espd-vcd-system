@@ -16,22 +16,16 @@ import com.vaadin.ui.Notification;
 import com.vaadin.annotations.Title;
 import com.vaadin.annotations.Theme;
 
-@Title("My UI")
-@Theme("designer")
+@Title("Almost something useful")
+@Theme("valo")
 public class HelloWorld extends UI {
     @Override
     protected void init(VaadinRequest request) {
         VerticalLayout content = new VerticalLayout();
-        setContent(content);
 
-        content.addComponent(new Label("Hello, world!"));
-        content.addComponent(new Label("Hello, world!"));
-        content.addComponent(new Label("Hello, world!"));
-        content.addComponent(new Label("Hello, world!"));
-        content.addComponent(new Label("Hello, world!"));
-        content.addComponent(new Label("Hello, world!"));
-        content.addComponent(new Label("Hello, world!"));
-        content.addComponent(new Label("Hello, world!"));
+        content.setSizeFull();
+        content.setMargin(true);
+
         content.addComponent(new Label("Hello, world!"));
         content.addComponent(new Button("Push me!", new ClickListener() {
             @Override
@@ -39,5 +33,7 @@ public class HelloWorld extends UI {
                 Notification.show("Pushed!");
             }
         }));
+
+        setContent(content);
     }
 }

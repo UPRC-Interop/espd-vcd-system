@@ -47,6 +47,8 @@ gretty {
 dependencies {
     compile 'com.vaadin:vaadin-server:7.6.0'
     compile 'com.vaadin:vaadin-client-compiled:7.6.0'
+    compile 'com.vaadin:vaadin-client-compiler:7.6.0'
+    compile 'com.vaadin:vaadin-themes:7.6.0'
 }
 
 task copyTask(type: Copy) {
