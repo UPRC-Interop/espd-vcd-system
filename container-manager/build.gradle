@@ -11,4 +11,4 @@ task copyTask(type: Copy) {
 //    rename "container-manager-${version}.jar", 'container-manager.jar'
 }
 
-build.dependsOn clean, copyTask
+build.dependsOn copyTask
