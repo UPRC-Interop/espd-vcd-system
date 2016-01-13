@@ -28,7 +28,7 @@ repositories {
 apply plugin: 'org.akhikhl.gretty'
 
 gretty {
-    port                    = 8080
+    port                    = 8090
     contextPath             = '/designer'
     scanInterval            = 1
     fastReload              = true

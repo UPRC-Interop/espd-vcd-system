@@ -11,6 +11,9 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.TextField;
+import com.vaadin.ui.PasswordField;
+import com.vaadin.ui.ProgressBar;
 import com.vaadin.ui.Notification;
 
 import com.vaadin.annotations.Title;
@@ -34,6 +37,19 @@ public class HelloWorld extends UI {
             }
         }));
 
+        // Add the login component
+        LoginComponent loginComponent = new LoginComponent();
+        loginComponent.setOnLoginCallback((username, password) -> {
+            // Mockup username and password verification
+            if (username.equals("abc") && password.equals("123")) {
+                Notification.show("Login successful!");
+            } else {
+                Notification.show("Login failed!");
+            }
+        });
+        content.addComponent(loginComponent);
+
+        // Apply the contents to the UI
         setContent(content);
     }
 }
