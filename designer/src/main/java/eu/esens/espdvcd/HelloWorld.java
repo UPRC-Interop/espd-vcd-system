@@ -66,6 +66,10 @@ public class HelloWorld extends UI {
         navigator.addView(MAINVIEW,  main);
         navigator.addView(STARTVIEW, start);
 
+        // Add the register component
+        RegisterComponent registerComponent = new RegisterComponent();
+        content.addComponent(registerComponent);
+
         // Apply the contents to the UI
         //setContent(content);
     }
