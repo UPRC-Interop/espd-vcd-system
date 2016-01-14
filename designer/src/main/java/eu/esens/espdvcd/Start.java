@@ -43,8 +43,6 @@ public class Start extends VerticalLayout implements View {
             } else {
                 Notification.show("Login failed!");
             }
-
-            navigator.navigateTo(HelloWorld.MAINVIEW);
         });
 
         addComponent(loginComponent);

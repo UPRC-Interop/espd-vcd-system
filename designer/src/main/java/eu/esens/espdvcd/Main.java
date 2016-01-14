@@ -33,6 +33,9 @@ public class Main extends VerticalLayout implements View {
                 navigator.navigateTo(HelloWorld.STARTVIEW);
             }
         }));
+
+        RegisterComponent registerComponent = new RegisterComponent();
+        addComponent(registerComponent);
     }
 
     @Override
