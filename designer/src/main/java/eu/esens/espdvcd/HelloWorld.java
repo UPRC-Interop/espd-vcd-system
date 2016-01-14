@@ -49,6 +49,10 @@ public class HelloWorld extends UI {
         });
         content.addComponent(loginComponent);
 
+        // Add the register component
+        RegisterComponent registerComponent = new RegisterComponent();
+        content.addComponent(registerComponent);
+
         // Apply the contents to the UI
         setContent(content);
     }

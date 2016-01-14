@@ -4,74 +4,32 @@
 
 package eu.esens.espdvcd;
 
-import com.vaadin.ui.Button;
+import com.vaadin.ui.*;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.CustomComponent;
-import com.vaadin.ui.TextField;
-import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.Panel;
-import com.vaadin.ui.PasswordField;
-import com.vaadin.ui.Notification;
 
 public class LoginComponent extends CustomComponent {
 
-    private TextField usernameTextField;
-    private PasswordField passwordPasswordField;
     private Button loginButton;
-
-    public interface LoginListener {
-        void callback(String username, String password);
-    }
+    private LoginFormWindow loginFormWindow;
+    private LoginFormWindow.LoginListener loginListener;
 
     public LoginComponent() {
-        // Create a panel and set this panel as the root for this component
-        Panel panel = new Panel("Login Component");
-        setCompositionRoot(panel);
-
-        // Create the layout for this component
-        VerticalLayout content = new VerticalLayout();
-        content.setMargin(true);
-        panel.setContent(content);
-
-        // Create username field
-        usernameTextField = new TextField("Username");
-        usernameTextField.setWidth("100%");
-        usernameTextField.setInputPrompt("Write here!");
-        content.addComponent(usernameTextField);
-
-        // Create password field
-        passwordPasswordField = new PasswordField("Password");
-        passwordPasswordField.setWidth("100%");
-        passwordPasswordField.setInputPrompt("Write here!");
-        content.addComponent(passwordPasswordField);
-
         // Create login button
         loginButton = new Button("Login");
+        setCompositionRoot(loginButton);
         loginButton.setWidth("100%");
-        content.addComponent(loginButton);
-    }
+        loginButton.addClickListener((event) -> {
+            // Create the login form window and open it in the UI
+            loginFormWindow = new LoginFormWindow();
+            if(loginListener != null)
+                loginFormWindow.setOnLoginCallback(loginListener);
 
-    public void setOnLoginCallback(final LoginListener loginListener) {
-        getLoginButton().addClickListener(new ClickListener() {
-            @Override
-            public void buttonClick(ClickEvent event) {
-                String username = getUsernameTextField().getValue();
-                String password = getPasswordPasswordField().getValue();
-                loginListener.callback(username, password);
-            }
+            UI.getCurrent().addWindow(loginFormWindow);
         });
     }
 
-    public TextField getUsernameTextField() {
-        return usernameTextField;
-    }
-
-    public PasswordField getPasswordPasswordField() {
-        return passwordPasswordField;
-    }
-
-    public Button getLoginButton() {
-        return loginButton;
+    public void setOnLoginCallback(final LoginFormWindow.LoginListener loginListener) {
+        this.loginListener = loginListener;
     }
 }
