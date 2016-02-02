@@ -23,7 +23,7 @@ dependencies {
 
 jaxb {
     xsdDir = 'schema/src/main/resources/schema'
-//    episodesDir = 'schema/src/main/resources/schema/episodes'
+    episodesDir = 'schema/src/main/resources/schema/episodes'
 }
 
 task copyTask(type: Copy) {
