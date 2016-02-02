@@ -15,7 +15,7 @@ import javax.servlet.annotation.*;
 
 @VaadinServletConfiguration(
     productionMode = false,
-    ui = HelloWorld.class
+    ui = Designer.class
 )
 
 public class RootServlet extends VaadinServlet {}
