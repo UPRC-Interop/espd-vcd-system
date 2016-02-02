@@ -17,20 +17,13 @@ apply plugin: 'com.github.jacobono.jaxb'
 dependencies {
     jaxb "com.sun.xml.bind:jaxb-core:${project.jaxb_impl_version}"
     jaxb "com.sun.xml.bind:jaxb-xjc:${project.jaxb_impl_version}"
-    jaxb 'org.jvnet.jaxb2_commons:jaxb2-basics-ant:0.9.5'
-    jaxb 'org.jvnet.jaxb2_commons:jaxb2-basics-annotate:1.0.2'
-    jaxb 'org.jvnet.jaxb2_commons:jaxb2-basics:0.6.3'
-
-    compile 'org.jvnet.jaxb2_commons:jaxb2-basics-runtime:0.9.4'
+    jaxb "com.sun.xml.bind:jaxb-impl:${project.jaxb_impl_version}"
+    jaxb "javax.xml.bind:jaxb-api:${project.jaxb_impl_version}"
 }
 
 jaxb {
-    xsdDir = 'schema/src/main/resources/xsd'
-    episodesDir = 'schema/src/main/resources/episodes'
-    xjc {
-        taskClassname = 'org.jvnet.jaxb2_commons.xjc.XJC2Task'
-        args = ['-Xequals', '-XhashCode', '-XtoString', '-Xannotate']
-    }
+    xsdDir = 'schema/src/main/resources/schema'
+    episodesDir = 'schema/src/main/resources/schema/episodes'
 }
 
 task copyTask(type: Copy) {
