@@ -20,8 +20,6 @@ public class DetailsForm extends CustomComponent {
     Button cancel = new Button("Cancel", FontAwesome.REMOVE);
     Button next = new Button("Next", FontAwesome.ARROW_RIGHT);
 
-    private static final List<String> countryCodes = new ArrayList<String>(Arrays.asList("SE", "NO", "FI", "DK"));
-
     public DetailsForm(Navigator navigator) {
         this.navigator = navigator;
 
@@ -31,20 +29,24 @@ public class DetailsForm extends CustomComponent {
         layout.addComponent(new Label("Identify of the procurer"));
 
         TextField nameTextfield = new TextField("Official Name");
+        nameTextfield.setInputPrompt("Write official name");
         layout.addComponent(nameTextfield);
 
-        ComboBox titleCombobox = new ComboBox("Country", countryCodes);
-        layout.addComponent(titleCombobox);
+        CountryComboBox countryComboBox = new CountryComboBox("Country", "Sweden");
+        layout.addComponent(countryComboBox);
 
         layout.addComponent(new Label("Information about the procurement procedure"));
 
         TextField titleTextfield = new TextField("Title");
+        titleTextfield.setInputPrompt("Write title");
         layout.addComponent(titleTextfield);
 
         TextField shortDescriptionTextfield = new TextField("Short description");
+        shortDescriptionTextfield.setInputPrompt("Write description");
         layout.addComponent(shortDescriptionTextfield);
 
         TextField referenceTextfield = new TextField("File reference number attributed by the contracting authority or contracting entity (if applicable)");
+        referenceTextfield.setInputPrompt("Write file reference");
         layout.addComponent(referenceTextfield);
 
         // Create button list
