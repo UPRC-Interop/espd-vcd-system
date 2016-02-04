@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 /**
  * XSD enum used by ESPD and VCD models.
  *
- * @author Panagiotis NICOLAOU <pnikola@unipi.gr>
  */
 public enum XSD {
     ESPD_REQUEST("grow.names.specification.ubl.schema.xsd.espdrequest_1", "xsd/maindoc/ESPDRequest-1.0.xsd"),
