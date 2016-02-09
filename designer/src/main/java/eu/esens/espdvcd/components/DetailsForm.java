@@ -32,36 +32,7 @@ public class DetailsForm extends CustomComponent {
 
         VerticalLayout formLayout = new VerticalLayout();
         FormFactory.CreateForm(formLayout, FormFactory.SampleEspdTemplate());
-
         layout.addComponent(formLayout);
-
-        layout.addComponent(new Label("Identify of the procurer"));
-
-        TextField nameTextfield = new TextField("Official Name");
-        nameTextfield.setStyleName("box_input");
-        nameTextfield.setInputPrompt("Write official name");
-        layout.addComponent(nameTextfield);
-
-        CountryComboBox countryComboBox = new CountryComboBox("Country", "Sweden");
-        countryComboBox.setStyleName("box_input");
-        layout.addComponent(countryComboBox);
-
-        layout.addComponent(new Label("Information about the procurement procedure"));
-
-        TextField titleTextfield = new TextField("Title");
-        titleTextfield.setStyleName("box_input");
-        titleTextfield.setInputPrompt("Write title");
-        layout.addComponent(titleTextfield);
-
-        TextField shortDescriptionTextfield = new TextField("Short description");
-        shortDescriptionTextfield.setStyleName("box_input");
-        shortDescriptionTextfield.setInputPrompt("Write description");
-        layout.addComponent(shortDescriptionTextfield);
-
-        TextField referenceTextfield = new TextField("File reference number attributed by the contracting authority or contracting entity (if applicable)");
-        referenceTextfield.setStyleName("box_input");
-        referenceTextfield.setInputPrompt("Write file reference");
-        layout.addComponent(referenceTextfield);
 
         // Create button list
         HorizontalLayout buttonList = new HorizontalLayout();
@@ -79,4 +50,3 @@ public class DetailsForm extends CustomComponent {
         layout.addComponent(buttonList);
     }
 }
-
