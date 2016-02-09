@@ -19,7 +19,7 @@ public class Master extends VerticalLayout {
     public VerticalLayout content = new VerticalLayout();
     Image logo = new Image("", new ThemeResource("img/logo.png"));
 
-    public Master(Navigator navigator) {
+    public Master() {
         super();
 
         fullLayout.addComponent(logo, "logo");

@@ -24,6 +24,7 @@ public class DetailsForm extends CustomComponent {
     Button cancel = new Button("Cancel", FontAwesome.REMOVE);
     Button next = new Button("Next", FontAwesome.ARROW_RIGHT);
 
+    @SuppressWarnings("unchecked")
     public DetailsForm(Navigator navigator) {
         this.navigator = navigator;
 
@@ -31,7 +32,11 @@ public class DetailsForm extends CustomComponent {
         setCompositionRoot(layout);
 
         VerticalLayout formLayout = new VerticalLayout();
-        FormFactory.CreateForm(formLayout, FormFactory.SampleEspdTemplate());
+
+        ElementContainer<ElementContainer> espdTemplate = FormFactory.SampleEspdTemplate();
+        for (ElementContainer<ElementContainer> element : espdTemplate.getDefaultContent()) {
+            FormFactory.CreateForm(formLayout, element);
+        }
         layout.addComponent(formLayout);
 
         // Create button list

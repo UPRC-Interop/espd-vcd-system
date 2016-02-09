@@ -11,7 +11,7 @@ import eu.esens.espdvcd.components.StartForm;
 public class Start extends Master implements View {
     private Navigator navigator = null;
     public Start(Navigator navigator) {
-        super(navigator);
+        super();
         this.navigator = navigator;
 
         StartForm startForm = new StartForm(navigator);

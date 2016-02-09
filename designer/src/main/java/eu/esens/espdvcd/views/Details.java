@@ -13,7 +13,7 @@ import eu.esens.espdvcd.components.DetailsForm;
 public class Details extends Master implements View {
     private Navigator navigator = null;
     public Details(Navigator navigator) {
-        super(navigator);
+        super();
         this.navigator = navigator;
 
         DetailsForm detailsForm = new DetailsForm(navigator);
