@@ -14,6 +14,7 @@ import java.util.*;
  * Created by ixuz on 2/9/16.
  */
 public class FormFactory {
+    @SuppressWarnings("unchecked")
     public static AbstractOrderedLayout CreateForm(AbstractOrderedLayout layout, ElementContainer<ElementContainer> element) {
 
         if (element.getElementType() == ElementType.COMPOSITE) {
@@ -42,7 +43,7 @@ public class FormFactory {
             // Construct a label listing the number of children elements
             if (element.getDefaultContent() != null) {
                 // Loop each child element
-                for (ElementContainer el : element.getDefaultContent()) {
+                for (ElementContainer<ElementContainer> el : element.getDefaultContent()) {
                     CreateForm(content, el);
                 }
             }
