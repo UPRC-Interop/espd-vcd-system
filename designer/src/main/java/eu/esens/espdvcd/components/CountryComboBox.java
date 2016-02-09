@@ -1,3 +1,7 @@
+/**
+ * Created by ixuz on 2/3/16.
+ */
+
 package eu.esens.espdvcd.components;
 
 import com.vaadin.data.util.IndexedContainer;
@@ -6,9 +10,6 @@ import com.vaadin.ui.ComboBox;
 
 import java.util.*;
 
-/**
- * Created by ixuz on 2/3/16.
- */
 public class CountryComboBox extends ComboBox {
 
     public CountryComboBox(String title, String defaultValue) {

@@ -1,21 +1,22 @@
-package eu.esens.espdvcd.views;
+/**
+ * Created by ixuz on 1/12/16.
+ */
 
-import com.vaadin.ui.Label;
-import com.vaadin.ui.VerticalLayout;
+package eu.esens.espdvcd.views;
 
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
-import eu.esens.espdvcd.components.StartForm;
+import eu.esens.espdvcd.Form;
+import eu.esens.espdvcd.FormFactory;
 
 public class Start extends Master implements View {
     private Navigator navigator = null;
     public Start(Navigator navigator) {
-        super();
         this.navigator = navigator;
 
-        StartForm startForm = new StartForm(navigator);
-        content.addComponent(startForm);
+        Form form = new Form(FormFactory.SampleEspdTemplate());
+        content.addComponent(form);
     }
 
     @Override

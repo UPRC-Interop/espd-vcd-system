@@ -1,18 +1,23 @@
-package eu.esens.espdvcd;
-
-import com.vaadin.data.util.IndexedContainer;
-import com.vaadin.server.ThemeResource;
-import com.vaadin.ui.*;
-import eu.esens.espdvcd.model.uifacade.TestElementContainer;
-import eu.esens.espdvcd.model.uifacade.ElementContainer;
-import eu.esens.espdvcd.model.uifacade.ElementContainerImpl;
-import eu.esens.espdvcd.model.uifacade.ElementType;
-
-import java.util.*;
-
 /**
  * Created by ixuz on 2/9/16.
  */
+
+package eu.esens.espdvcd;
+
+import eu.esens.espdvcd.model.uifacade.ElementContainer;
+import eu.esens.espdvcd.model.uifacade.ElementContainerImpl;
+import eu.esens.espdvcd.model.uifacade.ElementType;
+import com.vaadin.data.util.IndexedContainer;
+import com.vaadin.ui.AbstractOrderedLayout;
+import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.Panel;
+import com.vaadin.ui.Label;
+import com.vaadin.ui.TextField;
+import com.vaadin.ui.ComboBox;
+import java.util.Arrays;
+import java.util.List;
+import java.util.LinkedList;
+
 public class FormFactory {
     @SuppressWarnings("unchecked")
     public static AbstractOrderedLayout CreateForm(AbstractOrderedLayout layout, ElementContainer<ElementContainer> element) {
