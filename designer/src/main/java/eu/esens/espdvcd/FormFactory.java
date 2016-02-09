@@ -37,7 +37,9 @@ public class FormFactory {
 
             // Construct a label from the Short description
             if (element.getShortDescription() != null) {
-                content.addComponent(new Label(element.getShortDescription()));
+                if (!element.getShortDescription().isEmpty()) {
+                    content.addComponent(new Label(element.getShortDescription()));
+                }
             }
 
             // Construct a label from the Detailed description
@@ -52,6 +54,12 @@ public class FormFactory {
                     CreateForm(content, el);
                 }
             }
+        }
+
+        if (element.getElementType() == ElementType.STATICTEXT) {
+            Label label = new Label(element.getDetailedDescription());
+            label.setStyleName("form-static-text");
+            layout.addComponent(label);
         }
 
         if (element.getElementType() == ElementType.TEXTFIELD) {
@@ -86,6 +94,7 @@ public class FormFactory {
         );
 
         // create the 4 input masks (based on DG GROW ESPD system)
+        espdTemplateElements.add(createDetails());
         espdTemplateElements.add(createProcedureMask());
         espdTemplateElements.add(createExclusionCriteriaMask());
         espdTemplateElements.add(createSelectionCriteriaMask());
@@ -93,6 +102,79 @@ public class FormFactory {
 
         return espdTemplate;
     }
+
+    /**
+     * Create Procedure mask.
+     *
+     * @return
+     */
+    private static ElementContainer createDetails() {
+        List<ElementContainer> topLevelElements = new LinkedList<>();
+
+        // create top-level frame
+        ElementContainer<ElementContainer> topLevelElement = new ElementContainerImpl<ElementContainer>(
+                ElementType.COMPOSITE,
+                "",
+                "Welcome to the ESPD service",
+                "",
+                null,
+                null,
+                true,
+                true,
+                topLevelElements, null
+        );
+
+        topLevelElements.add(new ElementContainerImpl<String>(
+                ElementType.STATICTEXT,
+                null,
+                null,
+                null,
+                "European Single Procurement Document (ESPD) is a self-declaration of the businesses' financial status, abilities and suitability for a public procurement procedure. It is available in all EU languages and used as a preliminary evidence of fulfilment of the conditions required in public procurement procedures across the EU. Thanks to the ESPD, the tenderers no longer have to provide full documentary evidence and different forms previously used in the EU procurement, which means a significant simplification of access to cross-border tendering opportunities. From October 2018 onwards the ESPD shall be provided exclusively in an electronic form. The European Commission provides a free web service for the buyers, bidders and other parties interested in filling in the ESPD electronically. The online form can be filled in, printed and then sent to the buyer together with the rest of the bid. If the procedure is run electronically, the ESPD can be exported, stored and submitted electronically. The ESPD provided in a previous public procurement procedure can be reused as long as the information remains correct. Bidders may be excluded from the procedure or be subject to prosecution if the information in the ESPD is seriously misrepresented, withheld or cannot be complemented with supporting documents.",
+                null,
+                true,
+                true,
+                null, null
+        ));
+
+        topLevelElements.add(new ElementContainerImpl<String>(
+                ElementType.SELECTIONLIST,
+                "",
+                "Who are you?",
+                null,
+                null,
+                null,
+                true,
+                true,
+                Arrays.asList(new String[]{"I am a contracting authority", "I am an economic operator"}), null
+        ));
+
+        topLevelElements.add(new ElementContainerImpl<String>(
+                ElementType.SELECTIONLIST,
+                "",
+                "What would you like to do?",
+                null,
+                null,
+                null,
+                true,
+                true,
+                Arrays.asList(new String[]{"Create a new ESPD", "Reuse an existing ESPD", "Review ESPD"}), null
+        ));
+
+        topLevelElements.add(new ElementContainerImpl<String>(
+                ElementType.SELECTIONLIST,
+                "",
+                "Where are you from?",
+                null,
+                null,
+                null,
+                true,
+                true,
+                Arrays.asList(new String[]{"Germany", "Greece", "Sweden"}), null
+        ));
+
+        return topLevelElement;
+    }
+
     /**
      * Create Procedure mask.
      *
