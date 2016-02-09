@@ -162,7 +162,7 @@ public class TestElementContainer {
 		List<ElementContainer> procurmentProcedureElements = new LinkedList<>();
 		topLevelElements.add(new ElementContainerImpl<ElementContainer>(
 				ElementType.COMPOSITE, 
-				"1.3", 
+				"1.3",
 				"Information about the procurement procedure", 
 				null, 
 				null, 

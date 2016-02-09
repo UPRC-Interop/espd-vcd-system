@@ -7,7 +7,11 @@ import eu.esens.espdvcd.Designer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
+
+import eu.esens.espdvcd.FormFactory;
+import eu.esens.espdvcd.model.uifacade.*;
 
 /**
  * Created by ixuz on 2/2/16.
@@ -25,6 +29,11 @@ public class DetailsForm extends CustomComponent {
 
         layout = new VerticalLayout();
         setCompositionRoot(layout);
+
+        VerticalLayout formLayout = new VerticalLayout();
+        FormFactory.CreateForm(formLayout, FormFactory.SampleEspdTemplate());
+
+        layout.addComponent(formLayout);
 
         layout.addComponent(new Label("Identify of the procurer"));
 
