@@ -2,7 +2,7 @@
  * Created by ixuz on 2/10/16.
  */
 
-package eu.esens.espdvcd.designer;
+package eu.esens.espdvcd.designer.components;
 
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.PasswordField;
@@ -11,6 +11,7 @@ import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Window;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Notification;
+import com.vaadin.ui.Label;
 
 public class LoginFormWindow extends Window {
 
@@ -26,12 +27,17 @@ public class LoginFormWindow extends Window {
     public LoginFormWindow() {
         // Create a sub-window and set the content
         this.center();
+        this.setClosable(false);
+        this.setDraggable(false);
+        this.setResizable(false);
         this.setModal(true);
 
         // Create the layout for this window
         VerticalLayout content = new VerticalLayout();
         content.setMargin(true);
         this.setContent(content);
+
+        content.addComponent(new Label("Welcome, please login"));
 
         // Username text field
         usernameTextField = new TextField("Username");

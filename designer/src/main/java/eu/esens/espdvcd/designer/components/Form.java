@@ -2,8 +2,9 @@
  * Created by ixuz on 2/9/16.
  */
 
-package eu.esens.espdvcd.designer;
+package eu.esens.espdvcd.designer.components;
 
+import eu.esens.espdvcd.designer.FormFactory;
 import eu.esens.espdvcd.model.uifacade.ElementContainer;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.VerticalLayout;
