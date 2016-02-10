@@ -14,6 +14,7 @@ import com.vaadin.ui.Panel;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.ComboBox;
+import com.vaadin.ui.OptionGroup;
 import java.util.Arrays;
 import java.util.List;
 import java.util.LinkedList;
@@ -74,6 +75,13 @@ public class FormFactory {
             layout.addComponent(comboBox);
         }
 
+        if (element.getElementType() == ElementType.RADIOLIST) {
+            OptionGroup optionGroup = new OptionGroup(element.getID() + " " + element.getName());
+            IndexedContainer ic = new IndexedContainer(element.getDefaultContent());
+            optionGroup.setContainerDataSource(ic);
+            layout.addComponent(optionGroup);
+        }
+
         return layout;
     }
 
@@ -104,7 +112,7 @@ public class FormFactory {
     }
 
     /**
-     * Create Procedure mask.
+     * Create Details
      *
      * @return
      */
@@ -137,7 +145,7 @@ public class FormFactory {
         ));
 
         topLevelElements.add(new ElementContainerImpl<String>(
-                ElementType.SELECTIONLIST,
+                ElementType.RADIOLIST,
                 "",
                 "Who are you?",
                 null,
@@ -149,7 +157,7 @@ public class FormFactory {
         ));
 
         topLevelElements.add(new ElementContainerImpl<String>(
-                ElementType.SELECTIONLIST,
+                ElementType.RADIOLIST,
                 "",
                 "What would you like to do?",
                 null,
