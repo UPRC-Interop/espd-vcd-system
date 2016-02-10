@@ -2,7 +2,7 @@
  * Created by ixuz on 1/12/16.
  */
 
-package eu.esens.espdvcd;
+package eu.esens.espdvcd.designer;
 
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinServlet;

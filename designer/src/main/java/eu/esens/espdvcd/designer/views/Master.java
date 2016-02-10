@@ -2,7 +2,7 @@
  * Created by ixuz on 2/2/16.
  */
 
-package eu.esens.espdvcd.views;
+package eu.esens.espdvcd.designer.views;
 
 import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.VerticalLayout;

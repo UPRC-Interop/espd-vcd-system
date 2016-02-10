@@ -2,7 +2,7 @@
  * Created by ixuz on 2/9/16.
  */
 
-package eu.esens.espdvcd;
+package eu.esens.espdvcd.designer;
 
 import eu.esens.espdvcd.model.uifacade.ElementContainer;
 import eu.esens.espdvcd.model.uifacade.ElementContainerImpl;

@@ -2,7 +2,7 @@
  * Created by ixuz on 1/12/16.
  */
 
-package eu.esens.espdvcd;
+package eu.esens.espdvcd.designer;
 
 import com.vaadin.server.VaadinRequest;
 
@@ -11,7 +11,8 @@ import com.vaadin.ui.UI;
 
 import com.vaadin.annotations.Title;
 import com.vaadin.annotations.Theme;
-import eu.esens.espdvcd.views.Start;
+import eu.esens.espdvcd.designer.LoginFormWindow;
+import eu.esens.espdvcd.designer.views.*;
 
 @Title("Designer")
 @Theme("designertheme")
@@ -21,6 +22,7 @@ public class Designer extends UI {
 
     @Override
     protected void init(VaadinRequest request) {
+
         Navigator navigator  = new Navigator(this, this);
 
         Start start = new Start(navigator);
