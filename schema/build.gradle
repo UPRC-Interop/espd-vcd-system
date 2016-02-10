@@ -52,10 +52,11 @@ task copyTask(type: Copy) {
 
 
 compileJava.dependsOn xjc
+ 
 modifyPom {
      project {
-         name 'eSENS ESPD Schema'
-         description 'This is the e-SENS ESPD Schema created JAXB Classes.'
+         name 'e-SENS ESPD VCD System'
+         description 'This is the e-SENS ESPD VCD Sample Implementation'
 //         url 'https://github.com/bmuschko/gradle-nexus-plugin'
          inceptionYear '2015'
 
