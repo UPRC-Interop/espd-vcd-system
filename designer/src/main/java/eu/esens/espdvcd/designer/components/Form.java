@@ -17,6 +17,11 @@ import com.vaadin.ui.Button.ClickEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Form based upon an ElementContainer
+ *
+ * @see eu.esens.espdvcd.model.uifacade.ElementContainer
+ */
 public class Form extends CustomComponent {
 
     private VerticalLayout layout = new VerticalLayout();
@@ -32,6 +37,14 @@ public class Form extends CustomComponent {
     private List<VerticalLayout> pages = new ArrayList<>();
     private int currentPageIndex = 0;
 
+    /**
+     * Constructs a fully functional Vaadin7 custom component that includes:
+     * Pages, navigational buttons, progressbar and informational text
+     * based upon a provided ElementContainer.
+     *
+     * @param espdTemplate
+     * @see eu.esens.espdvcd.model.uifacade.ElementContainer
+     */
     public Form(ElementContainer<ElementContainer> espdTemplate) {
         setCompositionRoot(layout);
 
@@ -67,6 +80,11 @@ public class Form extends CustomComponent {
         displayPage(0);
     }
 
+    /**
+     * Displays page by index.
+     *
+     * @param pageIndex index of the page to display.
+     */
     public void displayPage(int pageIndex) {
         // Make sure the requested page index is not out-of-bounds
         if (pageIndex < 0 || pageIndex >= pages.size()) {
@@ -116,6 +134,10 @@ public class Form extends CustomComponent {
         progressBar.setValue((float)currentPageIndex / pages.size());
     }
 
+    /**
+     * Flips to the next page of the form.
+     * If there is no next page, this method will have no effect.
+     */
     public void displayNextPage() {
         currentPageIndex++;
         if (currentPageIndex >= pages.size()) {
@@ -125,6 +147,10 @@ public class Form extends CustomComponent {
         displayPage(currentPageIndex);
     }
 
+    /**
+     * Flips to the previous page of the form.
+     * If there is no previous page, this method will have no effect.
+     */
     public void displayPreviousPage() {
         currentPageIndex--;
         if (currentPageIndex < 0) {
@@ -134,19 +160,49 @@ public class Form extends CustomComponent {
         displayPage(currentPageIndex);
     }
 
-    public void onPrevious(ClickEvent event) {
+    /**
+     * When the user have clicked the Previous button, this method is invoked.
+     * Displays the previous page of the form.
+     * If there is no previous page, this method will have no effect.
+     *
+     * @param event Vaadin7 Button click event
+     * @see com.vaadin.ui.Button.ClickEvent
+     */
+    private void onPrevious(ClickEvent event) {
         displayPreviousPage();
     }
 
-    public void onCancel(ClickEvent event) {
+    /**
+     * When the user have clicked the Cancel button, this method is invoked.
+     * TODO: Implement logic for restarting/leaving the form page.
+     *
+     * @param event Vaadin7 Button click event
+     * @see com.vaadin.ui.Button.ClickEvent
+     */
+    private void onCancel(ClickEvent event) {
         System.out.println("Cancel process");
     }
 
-    public void onNext(ClickEvent event) {
+    /**
+     * When the user have clicked the Next button, this method is invoked.
+     * Displays the next page of the form.
+     * If there is no next page, this method will have no effect.
+     *
+     * @param event Vaadin7 Button click event
+     * @see com.vaadin.ui.Button.ClickEvent
+     */
+    private void onNext(ClickEvent event) {
         displayNextPage();
     }
 
-    public void onExport(ClickEvent event) {
+    /**
+     * When the user have clicked the Export button, this method is invoked.
+     * TODO: Implement logic for exporting all form data to xml.
+     *
+     * @param event Vaadin7 Button click event
+     * @see com.vaadin.ui.Button.ClickEvent
+     */
+    private void onExport(ClickEvent event) {
         System.out.println("Export xml");
     }
 }

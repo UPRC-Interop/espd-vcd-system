@@ -20,6 +20,14 @@ import java.util.List;
 import java.util.LinkedList;
 
 public class FormFactory {
+    /**
+     * Constructs a Vaadin7 form based upon the provided ElementContainer.
+     * The generated form is automatically added to the layout.
+     *
+     * @param layout the form will automatically be added to this Vaadin7-layout
+     * @param element describes the form that will be generated
+     * @see eu.esens.espdvcd.model.uifacade.ElementContainer
+     */
     @SuppressWarnings("unchecked")
     public static AbstractOrderedLayout CreateForm(AbstractOrderedLayout layout, ElementContainer<ElementContainer> element) {
 
@@ -85,6 +93,12 @@ public class FormFactory {
         return layout;
     }
 
+    /**
+     * Sample construct of an ESPDVCD template.
+     * This method is temporary and will be replaced by the backend ESPDVCD builder.
+     *
+     * @return ElementContainer
+     */
     public static ElementContainer<ElementContainer> SampleEspdTemplate() {
         // prepare data structure for ESPD Template
         List<ElementContainer> espdTemplateElements = new LinkedList<>();
@@ -112,9 +126,10 @@ public class FormFactory {
     }
 
     /**
-     * Create Details
+     * Sample construct of an ESPDVCD details model.
+     * This method is temporary and will be replaced by the backend ESPDVCD builder.
      *
-     * @return
+     * @return ElementContainer
      */
     private static ElementContainer createDetails() {
         List<ElementContainer> topLevelElements = new LinkedList<>();
@@ -184,9 +199,10 @@ public class FormFactory {
     }
 
     /**
-     * Create Procedure mask.
+     * Sample construct of an ESPDVCD procedure model.
+     * This method is temporary and will be replaced by the backend ESPDVCD builder.
      *
-     * @return
+     * @return ElementContainer
      */
     private static ElementContainer createProcedureMask() {
         List<ElementContainer> topLevelElements = new LinkedList<>();
@@ -305,10 +321,10 @@ public class FormFactory {
     }
 
     /**
-     * Create mask for Exclusion Criteria.
-     * tbd.
+     * Sample construct of an ESPDVCD exclusion criteria model.
+     * This method is temporary and will be replaced by the backend ESPDVCD builder.
      *
-     * @return
+     * @return ElementContainer
      */
     private static ElementContainer createExclusionCriteriaMask() {
         List<ElementContainer> topLevelElements = new LinkedList<>();
@@ -330,10 +346,10 @@ public class FormFactory {
     }
 
     /**
-     * Create mask for Selection Criteria.
-     * tbd.
+     * Sample construct of an ESPDVCD selection criteria model.
+     * This method is temporary and will be replaced by the backend ESPDVCD builder.
      *
-     * @return
+     * @return ElementContainer
      */
     private static ElementContainer createSelectionCriteriaMask() {
         List<ElementContainer> topLevelElements = new LinkedList<>();
@@ -355,10 +371,10 @@ public class FormFactory {
     }
 
     /**
-     * Create mask for additional information.
-     * tbd.
+     * Sample construct of an ESPDVCD additional information model.
+     * This method is temporary and will be replaced by the backend ESPDVCD builder.
      *
-     * @return
+     * @return ElementContainer
      */
     private static ElementContainer createFinishMask() {
         List<ElementContainer> topLevelElements = new LinkedList<>();

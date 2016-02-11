@@ -12,9 +12,13 @@ import com.vaadin.ui.Window;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.CustomLayout;
 
 public class LoginFormWindow extends Window {
 
+    private VerticalLayout layout;
+    private CustomLayout customLayout;
+    private Label infoLabel;
     private TextField usernameTextField;
     private PasswordField passwordPasswordField;
     private Button loginButton;
@@ -25,7 +29,8 @@ public class LoginFormWindow extends Window {
     }
 
     public LoginFormWindow() {
-        // Create a sub-window and set the content
+
+        // Create a sub-window and set the layout
         this.center();
         this.setClosable(false);
         this.setDraggable(false);
@@ -33,23 +38,34 @@ public class LoginFormWindow extends Window {
         this.setModal(true);
 
         // Create the layout for this window
-        VerticalLayout content = new VerticalLayout();
-        content.setMargin(true);
-        this.setContent(content);
+        layout = new VerticalLayout();
+        this.setContent(layout);
+        layout.setMargin(true);
 
-        content.addComponent(new Label("Welcome, please login"));
+        customLayout = new CustomLayout("loginForm");
+        layout.addComponent(customLayout);
+
+        // Login information field
+        infoLabel = new Label("Welcome, please login");
+        infoLabel.setStyleName("login-info-text");
+        customLayout.addComponent(infoLabel, "info");
 
         // Username text field
-        usernameTextField = new TextField("Username");
-        content.addComponent(usernameTextField);
+        usernameTextField = new TextField("");
+        usernameTextField.setInputPrompt("Username");
+        usernameTextField.setStyleName("login-username-field");
+        customLayout.addComponent(usernameTextField, "username");
 
         // Password text field
-        passwordPasswordField = new PasswordField("Password");
-        content.addComponent(passwordPasswordField);
+        passwordPasswordField = new PasswordField("");
+        passwordPasswordField.setInputPrompt("Password");
+        passwordPasswordField.setStyleName("login-password-field");
+        customLayout.addComponent(passwordPasswordField, "password");
 
         // Login button
         loginButton = new Button("Login");
-        content.addComponent(loginButton);
+        loginButton.setStyleName("login-login-button");
+        customLayout.addComponent(loginButton, "login");
 
         // Set the default login callback
         setOnLoginCallback((username, password) -> {
