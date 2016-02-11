@@ -1,7 +1,3 @@
-#
-# Author: Panagiotis NICOLAOU
-# Email: pnikola@unipi.gr
-#
 /.gradle/
 /.idea/
 /.vagrant/
@@ -9,3 +5,5 @@
 *.iml
 build/
 gradle.properties
+/.nb-gradle-properties
+/schema/nbproject/
