@@ -26,16 +26,30 @@ public class FormFactory {
      *
      * @param layout the form will automatically be added to this Vaadin7-layout
      * @param element describes the form that will be generated
+     */
+    public static AbstractOrderedLayout CreateForm(AbstractOrderedLayout layout, ElementContainer<ElementContainer> element) {
+        return CreateFormRecursive(layout, element, 0);
+    }
+
+    /**
+     * Constructs a Vaadin7 form based upon the provided ElementContainer.
+     * The generated form is automatically added to the layout.
+     * When calling this method, usually the level should be set to 0 which indicates the root of the structure.
+     *
+     * @param layout the form will automatically be added to this Vaadin7-layout
+     * @param element describes the form that will be generated
+     * @param level keeps track of the depth of each ElementContainer, this is used for the css style identifier names
      * @see eu.esens.espdvcd.model.uifacade.ElementContainer
      */
     @SuppressWarnings("unchecked")
-    public static AbstractOrderedLayout CreateForm(AbstractOrderedLayout layout, ElementContainer<ElementContainer> element) {
+    public static AbstractOrderedLayout CreateFormRecursive(AbstractOrderedLayout layout, ElementContainer<ElementContainer> element, int level) {
 
         if (element.getElementType() == ElementType.COMPOSITE) {
             VerticalLayout content = new VerticalLayout();
             content.setMargin(true);
 
             Panel panel = new Panel("");
+            panel.setStyleName("form-depth-" + level + "-panel");
             layout.addComponent(panel);
             panel.setContent(content);
 
@@ -60,24 +74,26 @@ public class FormFactory {
             if (element.getDefaultContent() != null) {
                 // Loop each child element
                 for (ElementContainer<ElementContainer> el : element.getDefaultContent()) {
-                    CreateForm(content, el);
+                    CreateFormRecursive(content, el, new Integer(level)+1);
                 }
             }
         }
 
         if (element.getElementType() == ElementType.STATICTEXT) {
             Label label = new Label(element.getDetailedDescription());
-            label.setStyleName("form-static-text");
+            label.setStyleName("form-depth-" + level + "-static-text");
             layout.addComponent(label);
         }
 
         if (element.getElementType() == ElementType.TEXTFIELD) {
             TextField textField = new TextField(element.getID() + " " + element.getName());
+            textField.setStyleName("form-depth-" + level + "-text-field");
             layout.addComponent(textField);
         }
 
         if (element.getElementType() == ElementType.SELECTIONLIST) {
             ComboBox comboBox = new ComboBox(element.getID() + " " + element.getName());
+            comboBox.setStyleName("form-depth-" + level + "-drop-down");
             IndexedContainer ic = new IndexedContainer(element.getDefaultContent());
             comboBox.setContainerDataSource(ic);
             layout.addComponent(comboBox);
@@ -85,6 +101,7 @@ public class FormFactory {
 
         if (element.getElementType() == ElementType.RADIOLIST) {
             OptionGroup optionGroup = new OptionGroup(element.getID() + " " + element.getName());
+            optionGroup.setStyleName("form-depth-" + level + "-radio-list");
             IndexedContainer ic = new IndexedContainer(element.getDefaultContent());
             optionGroup.setContainerDataSource(ic);
             layout.addComponent(optionGroup);
