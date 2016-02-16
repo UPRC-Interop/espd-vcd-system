@@ -9,6 +9,7 @@ import eu.esens.espdvcd.designer.components.CountryComboBox;
 import eu.esens.espdvcd.model.uifacade.ElementContainer;
 import eu.esens.espdvcd.model.uifacade.ElementContainerImpl;
 import eu.esens.espdvcd.model.uifacade.ElementType;
+import eu.esens.espdvcd.model.uifacade.ElementBuilder;
 import com.vaadin.data.util.IndexedContainer;
 import com.vaadin.ui.AbstractOrderedLayout;
 import com.vaadin.ui.VerticalLayout;
@@ -18,10 +19,9 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.OptionGroup;
 import com.vaadin.server.ThemeResource;
-import java.util.Arrays;
-import java.util.List;
-import java.util.LinkedList;
-import java.util.Collection;
+
+import javax.lang.model.element.Element;
+import java.util.*;
 
 public class FormFactory {
     /**
@@ -136,23 +136,17 @@ public class FormFactory {
      *
      * @return ElementContainer
      */
+    @SuppressWarnings("unchecked")
     public static ElementContainer<ElementContainer> SampleEspdTemplate() {
         // prepare data structure for ESPD Template
         List<ElementContainer> espdTemplateElements = new LinkedList<>();
 
-        ElementContainer<ElementContainer> espdTemplate = new ElementContainerImpl<ElementContainer>(
-                ElementType.COMPOSITE,
-                "",
-                "ESPD Template",
-                "Service to fill out and reuse the ESPD Template",
-                null,
-                null,
-                true,
-                true,
-                espdTemplateElements, null
-        );
+        ElementContainer espdTemplate = new ElementBuilder()
+                .id("1.0")
+                .name("Name")
+                .defaultContent(espdTemplateElements)
+                .build();
 
-        // create the 4 input masks (based on DG GROW ESPD system)
         espdTemplateElements.add(createDetails());
         espdTemplateElements.add(createProcedureMask());
         espdTemplateElements.add(createExclusionCriteriaMask());
@@ -168,69 +162,34 @@ public class FormFactory {
      *
      * @return ElementContainer
      */
+    @SuppressWarnings("unchecked")
     private static ElementContainer createDetails() {
         List<ElementContainer> topLevelElements = new LinkedList<>();
 
-        // create top-level frame
-        ElementContainer<ElementContainer> topLevelElement = new ElementContainerImpl<ElementContainer>(
-                ElementType.COMPOSITE,
-                "",
-                "Welcome to the ESPD service",
-                "",
-                null,
-                null,
-                true,
-                true,
-                topLevelElements, null
-        );
-
-        topLevelElements.add(new ElementContainerImpl<String>(
-                ElementType.STATICTEXT,
-                null,
-                null,
-                null,
-                "European Single Procurement Document (ESPD) is a self-declaration of the businesses' financial status, abilities and suitability for a public procurement procedure. It is available in all EU languages and used as a preliminary evidence of fulfilment of the conditions required in public procurement procedures across the EU. Thanks to the ESPD, the tenderers no longer have to provide full documentary evidence and different forms previously used in the EU procurement, which means a significant simplification of access to cross-border tendering opportunities. From October 2018 onwards the ESPD shall be provided exclusively in an electronic form. The European Commission provides a free web service for the buyers, bidders and other parties interested in filling in the ESPD electronically. The online form can be filled in, printed and then sent to the buyer together with the rest of the bid. If the procedure is run electronically, the ESPD can be exported, stored and submitted electronically. The ESPD provided in a previous public procurement procedure can be reused as long as the information remains correct. Bidders may be excluded from the procedure or be subject to prosecution if the information in the ESPD is seriously misrepresented, withheld or cannot be complemented with supporting documents.",
-                null,
-                true,
-                true,
-                null, null
-        ));
-
-        topLevelElements.add(new ElementContainerImpl<String>(
-                ElementType.RADIOLIST,
-                "",
-                "Who are you?",
-                null,
-                null,
-                null,
-                true,
-                true,
-                Arrays.asList(new String[]{"I am a contracting authority", "I am an economic operator"}), null
-        ));
-
-        topLevelElements.add(new ElementContainerImpl<String>(
-                ElementType.RADIOLIST,
-                "",
-                "What would you like to do?",
-                null,
-                null,
-                null,
-                true,
-                true,
-                Arrays.asList(new String[]{"Create a new ESPD", "Reuse an existing ESPD", "Review ESPD"}), null
-        ));
-
-        topLevelElements.add(new ElementContainerImpl<String>(
-                ElementType.SELECTIONLIST,
-                "",
-                "Where are you from?",
-                null,
-                null,
-                null,
-                true,
-                true,
-                Arrays.asList(new String[]{"Germany", "Greece", "Sweden"}), null
-        ));
+        ElementContainer<ElementContainer> topLevelElement = new ElementBuilder()
+                .elementType(ElementType.COMPOSITE)
+                .name("Welcome to the ESPD service")
+                .defaultContent(topLevelElements)
+                .build();
+        topLevelElements.add(new ElementBuilder()
+                .elementType(ElementType.STATICTEXT)
+                .detailedDescription("European Single Procurement Document (ESPD) is a self-declaration of the businesses' financial status, abilities and suitability for a public procurement procedure. It is available in all EU languages and used as a preliminary evidence of fulfilment of the conditions required in public procurement procedures across the EU. Thanks to the ESPD, the tenderers no longer have to provide full documentary evidence and different forms previously used in the EU procurement, which means a significant simplification of access to cross-border tendering opportunities. From October 2018 onwards the ESPD shall be provided exclusively in an electronic form. The European Commission provides a free web service for the buyers, bidders and other parties interested in filling in the ESPD electronically. The online form can be filled in, printed and then sent to the buyer together with the rest of the bid. If the procedure is run electronically, the ESPD can be exported, stored and submitted electronically. The ESPD provided in a previous public procurement procedure can be reused as long as the information remains correct. Bidders may be excluded from the procedure or be subject to prosecution if the information in the ESPD is seriously misrepresented, withheld or cannot be complemented with supporting documents.")
+                .build());
+        topLevelElements.add(new ElementBuilder()
+                .elementType(ElementType.RADIOLIST)
+                .name("Who are you?")
+                .defaultContent(Arrays.asList("I am a contracting authority", "I am an economic operator"))
+                .build());
+        topLevelElements.add(new ElementBuilder()
+                .elementType(ElementType.RADIOLIST)
+                .name("What would you like to do?")
+                .defaultContent(Arrays.asList("Create a new ESPD", "Reuse an existing ESPD", "Review ESPD"))
+                .build());
+        topLevelElements.add(new ElementBuilder()
+                .elementType(ElementType.SELECTIONLIST)
+                .name("Where are you from?")
+                .defaultContent(Arrays.asList("Germany", "Greece", "Sweden"))
+                .build());
 
         return topLevelElement;
     }
