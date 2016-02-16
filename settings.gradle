@@ -4,6 +4,7 @@
  */
 include ':asset-manager',
         ':builder',
+        ':codelists',
         ':common-util',
         ':container-manager',
         ':designer',
