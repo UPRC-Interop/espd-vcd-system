@@ -44,10 +44,12 @@ public class FormFactory {
     @SuppressWarnings("unchecked")
     public static AbstractOrderedLayout CreateFormRecursive(AbstractOrderedLayout layout, ElementContainer<ElementContainer> element, int level) {
 
+        // A composite element type that will may contain children elements.
         if (element.getElementType() == ElementType.COMPOSITE) {
             VerticalLayout content = new VerticalLayout();
             content.setMargin(true);
 
+            // Create a panel to store all the sub-content in this element
             Panel panel = new Panel("");
             panel.setStyleName("form-depth-" + level + "-panel");
             layout.addComponent(panel);
@@ -79,18 +81,22 @@ public class FormFactory {
             }
         }
 
+        // A static text element type, generate a basic Vaadin7 Label
         if (element.getElementType() == ElementType.STATICTEXT) {
             Label label = new Label(element.getDetailedDescription());
             label.setStyleName("form-depth-" + level + "-static-text");
             layout.addComponent(label);
         }
 
+        // A textfield element type, generate a basic Vaadin7 input field
         if (element.getElementType() == ElementType.TEXTFIELD) {
             TextField textField = new TextField(element.getID() + " " + element.getName());
             textField.setStyleName("form-depth-" + level + "-text-field");
             layout.addComponent(textField);
         }
 
+        // A selection list element type, generate a basic Vaadin7 drop-down menu
+        // TODO: Identify if this selection list is a country list, if so add flag-images to the items in the list.
         if (element.getElementType() == ElementType.SELECTIONLIST) {
             ComboBox comboBox = new ComboBox(element.getID() + " " + element.getName());
             comboBox.setStyleName("form-depth-" + level + "-drop-down");
@@ -99,6 +105,7 @@ public class FormFactory {
             layout.addComponent(comboBox);
         }
 
+        // A radio list element type, generate a basic Vaadin7 radio list menu
         if (element.getElementType() == ElementType.RADIOLIST) {
             OptionGroup optionGroup = new OptionGroup(element.getID() + " " + element.getName());
             optionGroup.setStyleName("form-depth-" + level + "-radio-list");

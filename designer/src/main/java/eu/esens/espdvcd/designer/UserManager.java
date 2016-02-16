@@ -4,10 +4,25 @@
 
 package eu.esens.espdvcd.designer;
 
-import eu.esens.espdvcd.designer.UserContext;
 import com.vaadin.server.VaadinSession;
 
-public class LoginManager {
+public class UserManager {
+    /**
+     * Attempt a login using username and password credentials
+     */
+    public static UserContext login(String username, String password) {
+        // Verify provided credentials
+        // TODO: Implement real credentials verification instead of mockup credential verification
+        if (username.equals("abc") && password.equals("123")) {
+            // Return a mockup UserContext
+            // TODO: Implement real UserContext instead of mockup UserContext
+            UserContext userContext = new UserContext("abc", "Alpha", "Bravo");
+            setAuthenticated(true, userContext);
+            return userContext;
+        }
+        return null;
+    }
+
     /**
      * Checks if the user session is fully authenticated and valid
      *
@@ -26,17 +41,19 @@ public class LoginManager {
      * Changes the state of the authentication.
      *
      * @param authenticated True sets the user session to be authenticated. False invalidates the authentication.
+     * @param userContext details about this specific user
      */
-    public static void setAuthenticated(boolean authenticated) {
+    private static void setAuthenticated(boolean authenticated, UserContext userContext) {
         VaadinSession session = VaadinSession.getCurrent();
-        session.setAttribute("auth", authenticated);
-
-        // TODO: Implement real UserContext instead of mockup UserContext
-        UserContext userContext = new UserContext("abc", "Alpha", "Bravo");
         session.setAttribute("auth", authenticated);
         session.setAttribute("userContext", userContext);
     }
 
+    /**
+     * Retrieve the current UserContext
+     *
+     * @return UserContext from the Session
+     */
     public static UserContext getUserContext() {
         VaadinSession session = VaadinSession.getCurrent();
         if (session != null) {
