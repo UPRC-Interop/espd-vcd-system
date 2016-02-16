@@ -4,8 +4,8 @@
  */
 // build aliases: define a synonym here if you want a shortcut to run multiple targets
 def buildAliases = [
-        'reload' : ['clean', 'xjc', 'build', 'designer:jettyStart'],
-        'rebuild': ['clean', 'xjc', 'build']
+        'reload' : ['clean', 'build', 'designer:jettyStart'],
+        'rebuild': ['clean', 'build']
 ]
 
 def expandedTaskList = []
@@ -46,7 +46,7 @@ subprojects { project ->
 
             /* h2 */
             h2              : "com.h2database:h2:${project.h2_version}",
-    ]
+    ]   
 
     repositories {
 //        mavenLocal()
@@ -54,19 +54,19 @@ subprojects { project ->
         maven  {
             url "http://repo1.maven.org/maven2"
         }
-    }
-
-    dependencies {
-    }
 }
-
+}
 // global definition of compile dependency
 // for project logging
 // everywhere except in-memory-db and logging projects
 configure(subprojects
-        - project(':logging')) {
+        - project(':logging'))
+    {
     dependencies {
-        compile project(':logging')
+        compile libraries.slf4j_api
+        compile libraries.log4j_slf4j_impl
+        compile libraries.log4j_core
+        compile libraries.log4j_api
     }
 }
 
@@ -82,5 +82,7 @@ configure(subprojects
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.10'
+    gradleVersion = '2.11'
 }
+
+
