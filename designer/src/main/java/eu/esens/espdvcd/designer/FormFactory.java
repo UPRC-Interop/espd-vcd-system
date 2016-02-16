@@ -4,6 +4,8 @@
 
 package eu.esens.espdvcd.designer;
 
+import eu.esens.espdvcd.codelist.CountryCodeGC;
+import eu.esens.espdvcd.designer.components.CountryComboBox;
 import eu.esens.espdvcd.model.uifacade.ElementContainer;
 import eu.esens.espdvcd.model.uifacade.ElementContainerImpl;
 import eu.esens.espdvcd.model.uifacade.ElementType;
@@ -15,9 +17,11 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.OptionGroup;
+import com.vaadin.server.ThemeResource;
 import java.util.Arrays;
 import java.util.List;
 import java.util.LinkedList;
+import java.util.Collection;
 
 public class FormFactory {
     /**
@@ -96,13 +100,22 @@ public class FormFactory {
         }
 
         // A selection list element type, generate a basic Vaadin7 drop-down menu
-        // TODO: Identify if this selection list is a country list, if so add flag-images to the items in the list.
         if (element.getElementType() == ElementType.SELECTIONLIST) {
-            ComboBox comboBox = new ComboBox(element.getID() + " " + element.getName());
-            comboBox.setStyleName("form-depth-" + level + "-drop-down");
-            IndexedContainer ic = new IndexedContainer(element.getDefaultContent());
-            comboBox.setContainerDataSource(ic);
+            CountryComboBox comboBox = new CountryComboBox(element.getID() + " " + element.getName(), "Sweden");
             layout.addComponent(comboBox);
+
+            IndexedContainer ic = new IndexedContainer(element.getDefaultContent());
+            for (int i=0; i<ic.size(); i++) {
+                String country = (String)ic.getIdByIndex(i);
+                String isoCode = "";
+                try {
+                    isoCode = CountryCodeGC.getISOCode(country.toUpperCase());
+                } catch (IllegalArgumentException e) {
+                    isoCode = "null";
+                }
+                comboBox.addIconItem(country, "img/flags_iso/24/" + isoCode.toLowerCase() + ".png");
+            }
+
         }
 
         // A radio list element type, generate a basic Vaadin7 radio list menu
