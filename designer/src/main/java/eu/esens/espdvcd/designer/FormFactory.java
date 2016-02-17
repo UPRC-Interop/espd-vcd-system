@@ -204,7 +204,7 @@ public class FormFactory {
         List<ElementContainer> topLevelElements = new LinkedList<>();
 
         // create top-level frame
-        ElementContainer<ElementContainer> topLevelElement = new ElementBuilder()
+        ElementContainer topLevelElement = new ElementBuilder()
                 .elementType(ElementType.COMPOSITE)
                 .id("1")
                 .name("Procedure")

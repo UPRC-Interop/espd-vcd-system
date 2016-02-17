@@ -65,11 +65,6 @@ public class Form extends CustomComponent {
             formLayout.addComponent(page);
         }
 
-        //VerticalLayout page = new VerticalLayout();
-        //FormFactory.CreateForm(page, espdTemplate);
-        //pages.add(page);
-        //formLayout.addComponent(page);
-
         // Compose the layout of this custom component
         progressLayout.addComponent(progressLabel);
         progressLayout.addComponent(progressBar);
