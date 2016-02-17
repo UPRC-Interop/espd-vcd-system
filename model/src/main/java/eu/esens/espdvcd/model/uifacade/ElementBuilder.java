@@ -83,15 +83,15 @@ public class ElementBuilder<T> {
 
     public ElementContainer build() {
         ElementContainer element = new ElementContainerImpl(elementType,
-                id,
-                name,
-                shortDescription,
-                detailedDescription,
-                hint,
-                visible,
-                editable,
-                defaultContent,
-                content);
+            id,
+            name,
+            shortDescription,
+            detailedDescription,
+            hint,
+            visible,
+            editable,
+            defaultContent,
+            content);
         return element;
     }
 }

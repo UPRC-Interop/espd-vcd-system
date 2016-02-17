@@ -204,114 +204,68 @@ public class FormFactory {
         List<ElementContainer> topLevelElements = new LinkedList<>();
 
         // create top-level frame
-        ElementContainer<ElementContainer> topLevelElement = new ElementContainerImpl<ElementContainer>(
-                ElementType.COMPOSITE,
-                "1",
-                "Procedure",
-                "Information concerning the contracting authority and the procurement procedure",
-                null,
-                null,
-                true,
-                true,
-                topLevelElements, null
-        );
+        ElementContainer<ElementContainer> topLevelElement = new ElementBuilder()
+                .elementType(ElementType.COMPOSITE)
+                .id("1")
+                .name("Procedure")
+                .shortDescription("Information concerning the contracting authority and the procurement procedure")
+                .defaultContent(topLevelElements)
+                .build();
 
         // create element "Information about publication"
-        topLevelElements.add(new ElementContainerImpl<String>(
-                ElementType.TEXTFIELD,
-                "1.1",
-                "Information about publication",
-                "For procurement procedures in which a call for competition has been published in the Official Journal of the European Union, the information required under Part I will be automatically retrieved, provided that the electronic ESPD-service is used to generate and fill in the ESPD. Reference of the relevant notice published in the Official Journal of the European Union:",
-                null, // omitted "In case publication of a notice in the Official Journal of the European Union is not required, please give other information allowing the procurement procedure to be unequivocally identified (e. g. reference of a publication at national level):"
-                null,
-                true,
-                true,
-                Arrays.asList(new String[]{"____/S ___-_______"}), "[][][][]/S [][][]-[][][][][][][]"
-        ));
+        topLevelElements.add(new ElementBuilder()
+                .elementType(ElementType.TEXTFIELD)
+                .id("1.1")
+                .name("Information about publication")
+                .shortDescription("For procurement procedures in which a call for competition has been published in the Official Journal of the European Union, the information required under Part I will be automatically retrieved, provided that the electronic ESPD-service is used to generate and fill in the ESPD. Reference of the relevant notice published in the Official Journal of the European Union:")
+                .defaultContent(Arrays.asList(new String[]{"____/S ___-_______"}))
+                .content("[][][][]/S [][][]-[][][][][][][]")
+                .build());
 
         // create element "Identify the procurer"
         List<ElementContainer> procurerElements = new LinkedList<>();
-        topLevelElements.add(new ElementContainerImpl<ElementContainer>(
-                ElementType.COMPOSITE,
-                "1.2",
-                "Identify the procurer",
-                null,
-                null,
-                null,
-                true,
-                true,
-                procurerElements, null
-        ));
-        procurerElements.add(new ElementContainerImpl<String>(
-                ElementType.TEXTFIELD,
-                "1.2.1",
-                "Official Name:",
-                null,
-                null,
-                null,
-                true,
-                true,
-                null, null
-        ));
-        procurerElements.add(new ElementContainerImpl<String>(
-                ElementType.SELECTIONLIST,
-                "1.2.2",
-                "Country:",
-                null,
-                null,
-                null,
-                true,
-                true,
-                Arrays.asList(new String[]{"Germany", "Greece", "Sweden"}), null
-        ));
+        procurerElements.add(new ElementBuilder()
+                .elementType(ElementType.COMPOSITE)
+                .id("1.2")
+                .name("Identify the procurer")
+                .defaultContent(procurerElements)
+                .build());
+        procurerElements.add(new ElementBuilder()
+                .elementType(ElementType.TEXTFIELD)
+                .id("1.2.1")
+                .name("Official Name:")
+                .build());
+        procurerElements.add(new ElementBuilder()
+                .elementType(ElementType.SELECTIONLIST)
+                .id("1.2.2")
+                .name("Country:")
+                .defaultContent(Arrays.asList(new String[]{"Germany", "Greece", "Sweden"}))
+                .build());
 
         // create element "Information about the procurement procedure"
         List<ElementContainer> procurmentProcedureElements = new LinkedList<>();
-        topLevelElements.add(new ElementContainerImpl<ElementContainer>(
-                ElementType.COMPOSITE,
-                "1.3",
-                "Information about the procurement procedure",
-                null,
-                null,
-                null,
-                true,
-                true,
-                procurmentProcedureElements, null
-        ));
+        topLevelElements.add(new ElementBuilder()
+                .elementType(ElementType.COMPOSITE)
+                .id("1.3")
+                .name("Information about the procurement procedure")
+                .defaultContent(procurmentProcedureElements)
+                .build());
 
-        procurmentProcedureElements.add(new ElementContainerImpl<String>(
-                ElementType.TEXTFIELD,
-                "1.3.1",
-                "Title:",
-                null,
-                null,
-                null,
-                true,
-                true,
-                null, null
-        ));
-        procurmentProcedureElements.add(new ElementContainerImpl<String>(
-                ElementType.TEXTFIELD,
-                "1.3.2",
-                "Short description:",
-                null,
-                null,
-                null,
-                true,
-                true,
-                null, null
-        ));
-        procurmentProcedureElements.add(new ElementContainerImpl<String>(
-                ElementType.TEXTFIELD,
-                "1.3.3",
-                "File reference number attributed by the contracting authority or contracting entity (if applicable):",
-                null,
-                null,
-                null,
-                true,
-                true,
-                null, null
-        ));
+        procurmentProcedureElements.add(new ElementBuilder()
+                .elementType(ElementType.TEXTFIELD)
+                .id("1.3.1")
+                .name("Title:")
+                .build());
+        procurmentProcedureElements.add(new ElementBuilder()
+                .elementType(ElementType.TEXTFIELD)
+                .id("1.3.2")
+                .name("Short description:")
+                .build());
+        procurmentProcedureElements.add(new ElementBuilder()
+                .elementType(ElementType.TEXTFIELD)
+                .id("1.3.3")
+                .name("File reference number attributed by the contracting authority or contracting entity (if applicable):")
+                .build());
 
         return topLevelElement;
     }
@@ -326,17 +280,13 @@ public class FormFactory {
         List<ElementContainer> topLevelElements = new LinkedList<>();
 
         // create top-level frame
-        ElementContainer<ElementContainer> topLevelElement = new ElementContainerImpl<ElementContainer>(
-                ElementType.COMPOSITE,
-                "2",
-                "Exclusion grounds",
-                "...to fill with content...",
-                null,
-                null,
-                true,
-                true,
-                topLevelElements, null
-        );
+        ElementContainer<ElementContainer> topLevelElement = new ElementBuilder()
+                .elementType(ElementType.COMPOSITE)
+                .id("2")
+                .name("Exclusion grounds")
+                .shortDescription("...to fill with content...")
+                .defaultContent(topLevelElements)
+                .build();
 
         return topLevelElement;
     }
@@ -351,17 +301,13 @@ public class FormFactory {
         List<ElementContainer> topLevelElements = new LinkedList<>();
 
         // create top-level frame
-        ElementContainer<ElementContainer> topLevelElement = new ElementContainerImpl<ElementContainer>(
-                ElementType.COMPOSITE,
-                "3",
-                "Selection criteria",
-                "...to fill with content...",
-                null,
-                null,
-                true,
-                true,
-                topLevelElements, null
-        );
+        ElementContainer<ElementContainer> topLevelElement = new ElementBuilder()
+                .elementType(ElementType.COMPOSITE)
+                .id("3")
+                .name("Selection criteria")
+                .shortDescription("...to fill with content...")
+                .defaultContent(topLevelElements)
+                .build();
 
         return topLevelElement;
     }
@@ -376,17 +322,13 @@ public class FormFactory {
         List<ElementContainer> topLevelElements = new LinkedList<>();
 
         // create top-level frame
-        ElementContainer<ElementContainer> topLevelElement = new ElementContainerImpl<ElementContainer>(
-                ElementType.COMPOSITE,
-                "4",
-                "Finish",
-                "...to fill with content...",
-                null,
-                null,
-                true,
-                true,
-                topLevelElements, null
-        );
+        ElementContainer<ElementContainer> topLevelElement = new ElementBuilder()
+                .elementType(ElementType.COMPOSITE)
+                .id("4")
+                .name("Finish")
+                .shortDescription("...to fill with content...")
+                .defaultContent(topLevelElements)
+                .build();
 
         return topLevelElement;
     }
