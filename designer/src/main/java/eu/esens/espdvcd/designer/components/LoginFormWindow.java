@@ -4,31 +4,25 @@
 
 package eu.esens.espdvcd.designer.components;
 
-import com.vaadin.ui.TextField;
-import com.vaadin.ui.PasswordField;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Button.ClickListener;
-import com.vaadin.ui.Window;
-import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.Notification;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.CustomLayout;
+import com.vaadin.navigator.Navigator;
+import com.vaadin.ui.*;
+import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.server.Page;
+import com.vaadin.shared.Position;
+import eu.esens.espdvcd.designer.UserManager;
 
 public class LoginFormWindow extends Window {
 
+    private Navigator navigator;
     private VerticalLayout layout;
     private CustomLayout customLayout;
     private Label infoLabel;
     private TextField usernameTextField;
     private PasswordField passwordPasswordField;
     private Button loginButton;
-    private ClickListener clickListener;
 
-    public interface LoginListener {
-        void callback(String username, String password);
-    }
-
-    public LoginFormWindow() {
+    public LoginFormWindow(Navigator navigator) {
+        this.navigator = navigator;
 
         // Create a sub-window and set the layout
         this.center();
@@ -68,30 +62,23 @@ public class LoginFormWindow extends Window {
         customLayout.addComponent(loginButton, "login");
 
         // Set the default login callback
-        setOnLoginCallback((username, password) -> {
-            Notification.show("Warning: No login callback!");
-        });
+        loginButton.addClickListener(this::onLogin);
     }
 
-    public void setOnLoginCallback(final LoginListener loginListener) {
-        getLoginButton().removeClickListener(clickListener);
-        clickListener = (event) -> {
-            String username = getUsernameTextField().getValue();
-            String password = getPasswordPasswordField().getValue();
-            loginListener.callback(username, password);
-        };
-        getLoginButton().addClickListener(this.clickListener);
-    }
+    public void onLogin(ClickEvent clickEvent) {
+        if (UserManager.login(usernameTextField.getValue(), passwordPasswordField.getValue()) != null) {
+            Notification notification = new Notification("Login successful!");
+            notification.setPosition(Position.TOP_CENTER);
+            notification.setDelayMsec(1000);
+            notification.show(Page.getCurrent());
 
-    public TextField getUsernameTextField() {
-        return usernameTextField;
-    }
-
-    public PasswordField getPasswordPasswordField() {
-        return passwordPasswordField;
-    }
-
-    public Button getLoginButton() {
-        return loginButton;
+            UI.getCurrent().removeWindow(this);
+            navigator.navigateTo("");
+        } else {
+            Notification notification = new Notification("Login failed, please try again!");
+            notification.setPosition(Position.TOP_CENTER);
+            notification.setDelayMsec(1000);
+            notification.show(Page.getCurrent());
+        }
     }
 }

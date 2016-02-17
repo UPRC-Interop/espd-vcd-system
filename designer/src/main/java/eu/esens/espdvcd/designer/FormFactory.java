@@ -4,9 +4,12 @@
 
 package eu.esens.espdvcd.designer;
 
+import eu.esens.espdvcd.codelist.CountryCodeGC;
+import eu.esens.espdvcd.designer.components.CountryComboBox;
 import eu.esens.espdvcd.model.uifacade.ElementContainer;
 import eu.esens.espdvcd.model.uifacade.ElementContainerImpl;
 import eu.esens.espdvcd.model.uifacade.ElementType;
+import eu.esens.espdvcd.model.uifacade.ElementBuilder;
 import com.vaadin.data.util.IndexedContainer;
 import com.vaadin.ui.AbstractOrderedLayout;
 import com.vaadin.ui.VerticalLayout;
@@ -15,9 +18,10 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.OptionGroup;
-import java.util.Arrays;
-import java.util.List;
-import java.util.LinkedList;
+import com.vaadin.server.ThemeResource;
+
+import javax.lang.model.element.Element;
+import java.util.*;
 
 public class FormFactory {
     /**
@@ -44,10 +48,12 @@ public class FormFactory {
     @SuppressWarnings("unchecked")
     public static AbstractOrderedLayout CreateFormRecursive(AbstractOrderedLayout layout, ElementContainer<ElementContainer> element, int level) {
 
+        // A composite element type that will may contain children elements.
         if (element.getElementType() == ElementType.COMPOSITE) {
             VerticalLayout content = new VerticalLayout();
             content.setMargin(true);
 
+            // Create a panel to store all the sub-content in this element
             Panel panel = new Panel("");
             panel.setStyleName("form-depth-" + level + "-panel");
             layout.addComponent(panel);
@@ -79,26 +85,40 @@ public class FormFactory {
             }
         }
 
+        // A static text element type, generate a basic Vaadin7 Label
         if (element.getElementType() == ElementType.STATICTEXT) {
             Label label = new Label(element.getDetailedDescription());
             label.setStyleName("form-depth-" + level + "-static-text");
             layout.addComponent(label);
         }
 
+        // A textfield element type, generate a basic Vaadin7 input field
         if (element.getElementType() == ElementType.TEXTFIELD) {
             TextField textField = new TextField(element.getID() + " " + element.getName());
             textField.setStyleName("form-depth-" + level + "-text-field");
             layout.addComponent(textField);
         }
 
+        // A selection list element type, generate a basic Vaadin7 drop-down menu
         if (element.getElementType() == ElementType.SELECTIONLIST) {
-            ComboBox comboBox = new ComboBox(element.getID() + " " + element.getName());
-            comboBox.setStyleName("form-depth-" + level + "-drop-down");
-            IndexedContainer ic = new IndexedContainer(element.getDefaultContent());
-            comboBox.setContainerDataSource(ic);
+            CountryComboBox comboBox = new CountryComboBox(element.getID() + " " + element.getName(), "Sweden");
             layout.addComponent(comboBox);
+
+            IndexedContainer ic = new IndexedContainer(element.getDefaultContent());
+            for (int i=0; i<ic.size(); i++) {
+                String country = (String)ic.getIdByIndex(i);
+                String isoCode = "";
+                try {
+                    isoCode = CountryCodeGC.getISOCode(country.toUpperCase());
+                } catch (IllegalArgumentException e) {
+                    isoCode = "null";
+                }
+                comboBox.addIconItem(country, "img/flags_iso/24/" + isoCode.toLowerCase() + ".png");
+            }
+
         }
 
+        // A radio list element type, generate a basic Vaadin7 radio list menu
         if (element.getElementType() == ElementType.RADIOLIST) {
             OptionGroup optionGroup = new OptionGroup(element.getID() + " " + element.getName());
             optionGroup.setStyleName("form-depth-" + level + "-radio-list");
@@ -116,23 +136,17 @@ public class FormFactory {
      *
      * @return ElementContainer
      */
+    @SuppressWarnings("unchecked")
     public static ElementContainer<ElementContainer> SampleEspdTemplate() {
         // prepare data structure for ESPD Template
         List<ElementContainer> espdTemplateElements = new LinkedList<>();
 
-        ElementContainer<ElementContainer> espdTemplate = new ElementContainerImpl<ElementContainer>(
-                ElementType.COMPOSITE,
-                "",
-                "ESPD Template",
-                "Service to fill out and reuse the ESPD Template",
-                null,
-                null,
-                true,
-                true,
-                espdTemplateElements, null
-        );
+        ElementContainer espdTemplate = new ElementBuilder()
+                .id("1.0")
+                .name("Name")
+                .defaultContent(espdTemplateElements)
+                .build();
 
-        // create the 4 input masks (based on DG GROW ESPD system)
         espdTemplateElements.add(createDetails());
         espdTemplateElements.add(createProcedureMask());
         espdTemplateElements.add(createExclusionCriteriaMask());
@@ -148,69 +162,34 @@ public class FormFactory {
      *
      * @return ElementContainer
      */
+    @SuppressWarnings("unchecked")
     private static ElementContainer createDetails() {
         List<ElementContainer> topLevelElements = new LinkedList<>();
 
-        // create top-level frame
-        ElementContainer<ElementContainer> topLevelElement = new ElementContainerImpl<ElementContainer>(
-                ElementType.COMPOSITE,
-                "",
-                "Welcome to the ESPD service",
-                "",
-                null,
-                null,
-                true,
-                true,
-                topLevelElements, null
-        );
-
-        topLevelElements.add(new ElementContainerImpl<String>(
-                ElementType.STATICTEXT,
-                null,
-                null,
-                null,
-                "European Single Procurement Document (ESPD) is a self-declaration of the businesses' financial status, abilities and suitability for a public procurement procedure. It is available in all EU languages and used as a preliminary evidence of fulfilment of the conditions required in public procurement procedures across the EU. Thanks to the ESPD, the tenderers no longer have to provide full documentary evidence and different forms previously used in the EU procurement, which means a significant simplification of access to cross-border tendering opportunities. From October 2018 onwards the ESPD shall be provided exclusively in an electronic form. The European Commission provides a free web service for the buyers, bidders and other parties interested in filling in the ESPD electronically. The online form can be filled in, printed and then sent to the buyer together with the rest of the bid. If the procedure is run electronically, the ESPD can be exported, stored and submitted electronically. The ESPD provided in a previous public procurement procedure can be reused as long as the information remains correct. Bidders may be excluded from the procedure or be subject to prosecution if the information in the ESPD is seriously misrepresented, withheld or cannot be complemented with supporting documents.",
-                null,
-                true,
-                true,
-                null, null
-        ));
-
-        topLevelElements.add(new ElementContainerImpl<String>(
-                ElementType.RADIOLIST,
-                "",
-                "Who are you?",
-                null,
-                null,
-                null,
-                true,
-                true,
-                Arrays.asList(new String[]{"I am a contracting authority", "I am an economic operator"}), null
-        ));
-
-        topLevelElements.add(new ElementContainerImpl<String>(
-                ElementType.RADIOLIST,
-                "",
-                "What would you like to do?",
-                null,
-                null,
-                null,
-                true,
-                true,
-                Arrays.asList(new String[]{"Create a new ESPD", "Reuse an existing ESPD", "Review ESPD"}), null
-        ));
-
-        topLevelElements.add(new ElementContainerImpl<String>(
-                ElementType.SELECTIONLIST,
-                "",
-                "Where are you from?",
-                null,
-                null,
-                null,
-                true,
-                true,
-                Arrays.asList(new String[]{"Germany", "Greece", "Sweden"}), null
-        ));
+        ElementContainer<ElementContainer> topLevelElement = new ElementBuilder()
+                .elementType(ElementType.COMPOSITE)
+                .name("Welcome to the ESPD service")
+                .defaultContent(topLevelElements)
+                .build();
+        topLevelElements.add(new ElementBuilder()
+                .elementType(ElementType.STATICTEXT)
+                .detailedDescription("European Single Procurement Document (ESPD) is a self-declaration of the businesses' financial status, abilities and suitability for a public procurement procedure. It is available in all EU languages and used as a preliminary evidence of fulfilment of the conditions required in public procurement procedures across the EU. Thanks to the ESPD, the tenderers no longer have to provide full documentary evidence and different forms previously used in the EU procurement, which means a significant simplification of access to cross-border tendering opportunities. From October 2018 onwards the ESPD shall be provided exclusively in an electronic form. The European Commission provides a free web service for the buyers, bidders and other parties interested in filling in the ESPD electronically. The online form can be filled in, printed and then sent to the buyer together with the rest of the bid. If the procedure is run electronically, the ESPD can be exported, stored and submitted electronically. The ESPD provided in a previous public procurement procedure can be reused as long as the information remains correct. Bidders may be excluded from the procedure or be subject to prosecution if the information in the ESPD is seriously misrepresented, withheld or cannot be complemented with supporting documents.")
+                .build());
+        topLevelElements.add(new ElementBuilder()
+                .elementType(ElementType.RADIOLIST)
+                .name("Who are you?")
+                .defaultContent(Arrays.asList("I am a contracting authority", "I am an economic operator"))
+                .build());
+        topLevelElements.add(new ElementBuilder()
+                .elementType(ElementType.RADIOLIST)
+                .name("What would you like to do?")
+                .defaultContent(Arrays.asList("Create a new ESPD", "Reuse an existing ESPD", "Review ESPD"))
+                .build());
+        topLevelElements.add(new ElementBuilder()
+                .elementType(ElementType.SELECTIONLIST)
+                .name("Where are you from?")
+                .defaultContent(Arrays.asList("Germany", "Greece", "Sweden"))
+                .build());
 
         return topLevelElement;
     }
@@ -225,114 +204,68 @@ public class FormFactory {
         List<ElementContainer> topLevelElements = new LinkedList<>();
 
         // create top-level frame
-        ElementContainer<ElementContainer> topLevelElement = new ElementContainerImpl<ElementContainer>(
-                ElementType.COMPOSITE,
-                "1",
-                "Procedure",
-                "Information concerning the contracting authority and the procurement procedure",
-                null,
-                null,
-                true,
-                true,
-                topLevelElements, null
-        );
+        ElementContainer topLevelElement = new ElementBuilder()
+                .elementType(ElementType.COMPOSITE)
+                .id("1")
+                .name("Procedure")
+                .shortDescription("Information concerning the contracting authority and the procurement procedure")
+                .defaultContent(topLevelElements)
+                .build();
 
         // create element "Information about publication"
-        topLevelElements.add(new ElementContainerImpl<String>(
-                ElementType.TEXTFIELD,
-                "1.1",
-                "Information about publication",
-                "For procurement procedures in which a call for competition has been published in the Official Journal of the European Union, the information required under Part I will be automatically retrieved, provided that the electronic ESPD-service is used to generate and fill in the ESPD. Reference of the relevant notice published in the Official Journal of the European Union:",
-                null, // omitted "In case publication of a notice in the Official Journal of the European Union is not required, please give other information allowing the procurement procedure to be unequivocally identified (e. g. reference of a publication at national level):"
-                null,
-                true,
-                true,
-                Arrays.asList(new String[]{"____/S ___-_______"}), "[][][][]/S [][][]-[][][][][][][]"
-        ));
+        topLevelElements.add(new ElementBuilder()
+                .elementType(ElementType.TEXTFIELD)
+                .id("1.1")
+                .name("Information about publication")
+                .shortDescription("For procurement procedures in which a call for competition has been published in the Official Journal of the European Union, the information required under Part I will be automatically retrieved, provided that the electronic ESPD-service is used to generate and fill in the ESPD. Reference of the relevant notice published in the Official Journal of the European Union:")
+                .defaultContent(Arrays.asList(new String[]{"____/S ___-_______"}))
+                .content("[][][][]/S [][][]-[][][][][][][]")
+                .build());
 
         // create element "Identify the procurer"
         List<ElementContainer> procurerElements = new LinkedList<>();
-        topLevelElements.add(new ElementContainerImpl<ElementContainer>(
-                ElementType.COMPOSITE,
-                "1.2",
-                "Identify the procurer",
-                null,
-                null,
-                null,
-                true,
-                true,
-                procurerElements, null
-        ));
-        procurerElements.add(new ElementContainerImpl<String>(
-                ElementType.TEXTFIELD,
-                "1.2.1",
-                "Official Name:",
-                null,
-                null,
-                null,
-                true,
-                true,
-                null, null
-        ));
-        procurerElements.add(new ElementContainerImpl<String>(
-                ElementType.SELECTIONLIST,
-                "1.2.2",
-                "Country:",
-                null,
-                null,
-                null,
-                true,
-                true,
-                Arrays.asList(new String[]{"Germany", "Greece", "Sweden"}), null
-        ));
+        procurerElements.add(new ElementBuilder()
+                .elementType(ElementType.COMPOSITE)
+                .id("1.2")
+                .name("Identify the procurer")
+                .defaultContent(procurerElements)
+                .build());
+        procurerElements.add(new ElementBuilder()
+                .elementType(ElementType.TEXTFIELD)
+                .id("1.2.1")
+                .name("Official Name:")
+                .build());
+        procurerElements.add(new ElementBuilder()
+                .elementType(ElementType.SELECTIONLIST)
+                .id("1.2.2")
+                .name("Country:")
+                .defaultContent(Arrays.asList(new String[]{"Germany", "Greece", "Sweden"}))
+                .build());
 
         // create element "Information about the procurement procedure"
         List<ElementContainer> procurmentProcedureElements = new LinkedList<>();
-        topLevelElements.add(new ElementContainerImpl<ElementContainer>(
-                ElementType.COMPOSITE,
-                "1.3",
-                "Information about the procurement procedure",
-                null,
-                null,
-                null,
-                true,
-                true,
-                procurmentProcedureElements, null
-        ));
+        topLevelElements.add(new ElementBuilder()
+                .elementType(ElementType.COMPOSITE)
+                .id("1.3")
+                .name("Information about the procurement procedure")
+                .defaultContent(procurmentProcedureElements)
+                .build());
 
-        procurmentProcedureElements.add(new ElementContainerImpl<String>(
-                ElementType.TEXTFIELD,
-                "1.3.1",
-                "Title:",
-                null,
-                null,
-                null,
-                true,
-                true,
-                null, null
-        ));
-        procurmentProcedureElements.add(new ElementContainerImpl<String>(
-                ElementType.TEXTFIELD,
-                "1.3.2",
-                "Short description:",
-                null,
-                null,
-                null,
-                true,
-                true,
-                null, null
-        ));
-        procurmentProcedureElements.add(new ElementContainerImpl<String>(
-                ElementType.TEXTFIELD,
-                "1.3.3",
-                "File reference number attributed by the contracting authority or contracting entity (if applicable):",
-                null,
-                null,
-                null,
-                true,
-                true,
-                null, null
-        ));
+        procurmentProcedureElements.add(new ElementBuilder()
+                .elementType(ElementType.TEXTFIELD)
+                .id("1.3.1")
+                .name("Title:")
+                .build());
+        procurmentProcedureElements.add(new ElementBuilder()
+                .elementType(ElementType.TEXTFIELD)
+                .id("1.3.2")
+                .name("Short description:")
+                .build());
+        procurmentProcedureElements.add(new ElementBuilder()
+                .elementType(ElementType.TEXTFIELD)
+                .id("1.3.3")
+                .name("File reference number attributed by the contracting authority or contracting entity (if applicable):")
+                .build());
 
         return topLevelElement;
     }
@@ -347,17 +280,13 @@ public class FormFactory {
         List<ElementContainer> topLevelElements = new LinkedList<>();
 
         // create top-level frame
-        ElementContainer<ElementContainer> topLevelElement = new ElementContainerImpl<ElementContainer>(
-                ElementType.COMPOSITE,
-                "2",
-                "Exclusion grounds",
-                "...to fill with content...",
-                null,
-                null,
-                true,
-                true,
-                topLevelElements, null
-        );
+        ElementContainer<ElementContainer> topLevelElement = new ElementBuilder()
+                .elementType(ElementType.COMPOSITE)
+                .id("2")
+                .name("Exclusion grounds")
+                .shortDescription("...to fill with content...")
+                .defaultContent(topLevelElements)
+                .build();
 
         return topLevelElement;
     }
@@ -372,17 +301,13 @@ public class FormFactory {
         List<ElementContainer> topLevelElements = new LinkedList<>();
 
         // create top-level frame
-        ElementContainer<ElementContainer> topLevelElement = new ElementContainerImpl<ElementContainer>(
-                ElementType.COMPOSITE,
-                "3",
-                "Selection criteria",
-                "...to fill with content...",
-                null,
-                null,
-                true,
-                true,
-                topLevelElements, null
-        );
+        ElementContainer<ElementContainer> topLevelElement = new ElementBuilder()
+                .elementType(ElementType.COMPOSITE)
+                .id("3")
+                .name("Selection criteria")
+                .shortDescription("...to fill with content...")
+                .defaultContent(topLevelElements)
+                .build();
 
         return topLevelElement;
     }
@@ -397,17 +322,13 @@ public class FormFactory {
         List<ElementContainer> topLevelElements = new LinkedList<>();
 
         // create top-level frame
-        ElementContainer<ElementContainer> topLevelElement = new ElementContainerImpl<ElementContainer>(
-                ElementType.COMPOSITE,
-                "4",
-                "Finish",
-                "...to fill with content...",
-                null,
-                null,
-                true,
-                true,
-                topLevelElements, null
-        );
+        ElementContainer<ElementContainer> topLevelElement = new ElementBuilder()
+                .elementType(ElementType.COMPOSITE)
+                .id("4")
+                .name("Finish")
+                .shortDescription("...to fill with content...")
+                .defaultContent(topLevelElements)
+                .build();
 
         return topLevelElement;
     }
