@@ -9,6 +9,9 @@ import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Image;
 import com.vaadin.ui.CustomLayout;
+import com.vaadin.ui.Label;
+import eu.esens.espdvcd.designer.UserContext;
+import eu.esens.espdvcd.designer.UserManager;
 
 /**
  * Sets up the base custom layout of the website.

@@ -16,7 +16,21 @@ public class UserManager {
         if (username.equals("abc") && password.equals("123")) {
             // Return a mockup UserContext
             // TODO: Implement real UserContext instead of mockup UserContext
-            UserContext userContext = new UserContext("abc", "Alpha", "Bravo");
+            UserContext userContext = new UserContext("abc", "Alpha", "Bravo", "CA");
+            setAuthenticated(true, userContext);
+            return userContext;
+        }
+        if (username.equals("CA") && password.equals("123")) {
+            // Return a mockup UserContext
+            // TODO: Implement real UserContext instead of mockup UserContext
+            UserContext userContext = new UserContext("CA", "Codey", "Angold", "CA");
+            setAuthenticated(true, userContext);
+            return userContext;
+        }
+        if (username.equals("EO") && password.equals("123")) {
+            // Return a mockup UserContext
+            // TODO: Implement real UserContext instead of mockup UserContext
+            UserContext userContext = new UserContext("EO", "Eric", "Olds", "EO");
             setAuthenticated(true, userContext);
             return userContext;
         }

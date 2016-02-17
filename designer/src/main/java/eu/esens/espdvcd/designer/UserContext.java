@@ -7,11 +7,13 @@ public class UserContext {
     private String username;
     private String firstName;
     private String lastName;
+    private String role;
 
-    UserContext(String username, String firstName, String lastName) {
+    UserContext(String username, String firstName, String lastName, String role) {
         setUsername(username);
         setFirstName(firstName);
         setLastName(lastName);
+        setRole(role);
     }
 
     public String getUsername() {
@@ -36,5 +38,13 @@ public class UserContext {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }
