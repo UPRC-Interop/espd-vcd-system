@@ -8,10 +8,18 @@ import java.io.InputStream;
 import java.io.StringWriter;
 import javax.xml.bind.JAXB;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.AddressType;
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.AttachmentType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ContractingPartyType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.CountryType;
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.DocumentReferenceType;
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ExternalReferenceType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PartyNameType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PartyType;
+import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ContractFolderIDType;
+import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.DescriptionType;
+import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.DocumentTypeCodeType;
+import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.FileNameType;
+import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.IDType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.IdentificationCodeType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.NameType;
 
@@ -41,13 +49,18 @@ public class ESPDBuilder {
        
         cd.setCACountry(reqType.getContractingParty()
                 .getParty().getPostalAddress().getCountry().getIdentificationCode().getValue());
-                
+        
+        //TODO: Need to add null checks here
+        cd.setProcurementProcedureFileReferenceNo(reqType.getContractFolderID().getValue());
+        cd.setProcurementProcedureTitle(reqType.getAdditionalDocumentReference().get(0).getAttachment().getExternalReference().getFileName().getValue());
+        cd.setProcurementProcedureDesc(reqType.getAdditionalDocumentReference().get(0).getAttachment().getExternalReference().getDescription().get(0).getValue());                
         return req;
          
     }
     
-    public String createXML(ESPDRequest req) {
+    public ESPDRequestType createXML(ESPDRequest req) {
         
+        // CA Details First
         ESPDRequestType reqType = new ESPDRequestType();
         reqType.setContractingParty(new ContractingPartyType());
         reqType.getContractingParty().setParty(new PartyType());
@@ -59,12 +72,46 @@ public class ESPDBuilder {
         reqType.getContractingParty().getParty().getPostalAddress().setCountry(new CountryType());
         reqType.getContractingParty().getParty().getPostalAddress().getCountry().setIdentificationCode(new IdentificationCodeType());
         reqType.getContractingParty().getParty().getPostalAddress().getCountry().getIdentificationCode().setValue(req.getCADetails().getCACountry());
-
         reqType.getContractingParty().getParty().getPartyName().add(pt);
 
+        if (req.getCADetails().getProcurementProcedureFileReferenceNo() != null) {
+           reqType.setContractFolderID(new ContractFolderIDType());
+           reqType.getContractFolderID().setValue(req.getCADetails().getProcurementProcedureFileReferenceNo());
+        }
         
+        //Adding the additional document reference
+        if (req.getCADetails().getProcurementProcedureTitle() != null) {
+            DocumentReferenceType dr = new DocumentReferenceType();
+            dr.setID(new IDType());
+            // Adding some default values. Will be elaborated later through either the model or the builder
+            dr.setDocumentTypeCode(new DocumentTypeCodeType());
+            dr.getDocumentTypeCode().setValue("TED_CN");
+            dr.getDocumentTypeCode().setListID("ReferencesTypeCodes");
+            dr.getDocumentTypeCode().setListAgencyID("EU-COM-GROW");
+            dr.getDocumentTypeCode().setListVersionID("1.0");
+            dr.setAttachment(new AttachmentType());
+            dr.getAttachment().setExternalReference(new ExternalReferenceType());
+            dr.getAttachment().getExternalReference().setFileName(new FileNameType());
+            dr.getAttachment().getExternalReference().getFileName().setValue(req.getCADetails().getProcurementProcedureTitle());
+
+            DescriptionType dt = new DescriptionType();
+            dt.setValue(req.getCADetails().getProcurementProcedureDesc());
+            dr.getAttachment().getExternalReference().getDescription().add(dt);
+
+           reqType.getAdditionalDocumentReference().add(dr);
+          
+        }
+        // TODO: Criterias, Requirement Groups, Requirements
+        
+        
+        // TODO: Evidences
+        
+        //Return the Object
+        return reqType;
+    }
+    public String createXMLasString(ESPDRequest req) {
         StringWriter result = new StringWriter();
-        JAXB.marshal(reqType, result);
+        JAXB.marshal(createXML(req), result);
         return result.toString();
     }
     
@@ -73,6 +120,5 @@ public class ESPDBuilder {
         // perfomance issues we will swicth back to the JAXB API Usage
         ESPDRequestType er = JAXB.unmarshal(is, ESPDRequestType.class);
         return er;
-    }
-    
+    }    
 }
