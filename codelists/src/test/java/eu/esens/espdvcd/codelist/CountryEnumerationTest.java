@@ -30,6 +30,7 @@ public class CountryEnumerationTest {
             
             Assert.assertEquals("MT", TendererRoleGC.getTendererRoleCode("Main tenderer"));
             Assert.assertEquals("Main tenderer", TendererRoleGC.getTendererRoleName("MT"));
+            
         }
     
 }
