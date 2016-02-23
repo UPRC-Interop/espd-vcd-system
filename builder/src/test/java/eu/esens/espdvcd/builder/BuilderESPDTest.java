@@ -2,9 +2,7 @@
 package eu.esens.espdvcd.builder;
 
 import eu.esens.espdvcd.model.ESPDRequest;
-import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
 import java.io.InputStream;
-import javax.xml.bind.JAXB;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
