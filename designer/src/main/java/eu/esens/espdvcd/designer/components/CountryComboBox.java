@@ -7,6 +7,7 @@ package eu.esens.espdvcd.designer.components;
 import com.vaadin.data.util.IndexedContainer;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.ComboBox;
+import eu.esens.espdvcd.codelist.CountryCodeGC;
 
 import java.util.*;
 import java.io.File;
@@ -22,6 +23,24 @@ public class CountryComboBox extends ComboBox {
 
         setContainerDataSource(ic);
         setValue(defaultValue);
+    }
+
+    public CountryComboBox(String title, List<String> countries) {
+        super(title);
+
+        IndexedContainer ic = new IndexedContainer(countries);
+        for (int i=0; i<ic.size(); i++) {
+            String country = (String)ic.getIdByIndex(i);
+            String isoCode = "";
+            try {
+                isoCode = CountryCodeGC.getISOCode(country.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                isoCode = "null";
+            }
+            addIconItem(country, "img/flags_iso/24/" + isoCode.toLowerCase() + ".png");
+        }
+
+        setContainerDataSource(ic);
     }
 
     public void addIconItem(String name, String iconPath) {
