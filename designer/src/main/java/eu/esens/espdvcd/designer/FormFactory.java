@@ -7,7 +7,6 @@ package eu.esens.espdvcd.designer;
 import eu.esens.espdvcd.codelist.CountryCodeGC;
 import eu.esens.espdvcd.designer.components.CountryComboBox;
 import eu.esens.espdvcd.model.uifacade.ElementContainer;
-import eu.esens.espdvcd.model.uifacade.ElementContainerImpl;
 import eu.esens.espdvcd.model.uifacade.ElementType;
 import eu.esens.espdvcd.model.uifacade.ElementBuilder;
 import com.vaadin.data.util.IndexedContainer;
@@ -16,11 +15,7 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.TextField;
-import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.OptionGroup;
-import com.vaadin.server.ThemeResource;
-
-import javax.lang.model.element.Element;
 import java.util.*;
 
 public class FormFactory {
@@ -79,9 +74,9 @@ public class FormFactory {
             // Construct a label listing the number of children elements
             if (element.getDefaultContent() != null) {
                 // Loop each child element
-                for (ElementContainer<ElementContainer> el : element.getDefaultContent()) {
-                    CreateFormRecursive(content, el, new Integer(level)+1);
-                }
+                element.getDefaultContent().stream().forEach((el) -> {
+                    CreateFormRecursive(content, el, level+1);
+                });
             }
         }
 
