@@ -21,25 +21,6 @@ public class Login extends Master implements View {
 
         loginFormWindow = new LoginFormWindow(navigator);
 
-        /*loginFormWindow.setOnLoginCallback((username, password) -> {
-            // Mockup username and password verification
-            if (username.equals("abc") && password.equals("123")) {
-                LoginManager.setAuthenticated(true);
-                Notification notification = new Notification("Login successful!");
-                notification.setPosition(Position.TOP_CENTER);
-                notification.setDelayMsec(2000);
-                notification.show(Page.getCurrent());
-
-                UI.getCurrent().removeWindow(loginFormWindow);
-                getNavigator().navigateTo("");
-            } else {
-                Notification notification = new Notification("Login failed, please try again!");
-                notification.setPosition(Position.TOP_CENTER);
-                notification.setDelayMsec(2000);
-                notification.show(Page.getCurrent());
-            }
-        });*/
-
         content.addComponent(new Label("You must login to use this service"));
     }
 
