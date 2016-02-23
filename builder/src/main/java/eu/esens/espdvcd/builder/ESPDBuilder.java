@@ -79,6 +79,7 @@ public class ESPDBuilder {
            reqType.getContractFolderID().setValue(req.getCADetails().getProcurementProcedureFileReferenceNo());
         }
         
+                
         //Adding the additional document reference
         if (req.getCADetails().getProcurementProcedureTitle() != null) {
             DocumentReferenceType dr = new DocumentReferenceType();
