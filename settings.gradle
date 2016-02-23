@@ -16,4 +16,5 @@ include ':asset-manager',
         ':schema',
         ':user-manager',
         ':validator',
-        ':viewer'
+        ':viewer',
+	':codelists'

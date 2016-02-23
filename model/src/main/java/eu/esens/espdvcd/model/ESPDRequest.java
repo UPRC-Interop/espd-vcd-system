@@ -22,6 +22,9 @@ public interface ESPDRequest extends Serializable {
      */
     ESPDRequestModelType getModelType();
 
+    CADetails getCADetails();
+    
+    void setCADetails(CADetails cd);          
     /**
      * @param modelType
      */
