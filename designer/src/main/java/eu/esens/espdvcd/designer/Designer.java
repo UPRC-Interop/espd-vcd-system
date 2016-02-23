@@ -19,6 +19,7 @@ import eu.esens.espdvcd.designer.views.*;
 public class Designer extends UI {
     public final static String VIEW_INDEX  = "";
     public final static String VIEW_LOGIN  = "login";
+    public final static String VIEW_SANDBOX  = "sandbox";
 
     @Override
     protected void init(VaadinRequest request) {
@@ -27,8 +28,10 @@ public class Designer extends UI {
 
         Start start = new Start(navigator);
         Login login = new Login(navigator);
+        Sandbox sandbox = new Sandbox(navigator);
 
         navigator.addView(VIEW_INDEX, start);
         navigator.addView(VIEW_LOGIN, login);
+        navigator.addView(VIEW_SANDBOX, sandbox);
     }
 }
