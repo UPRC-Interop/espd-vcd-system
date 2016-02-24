@@ -6,6 +6,8 @@ import java.io.Serializable;
  * Created by ixuz on 2/24/16.
  */
 public class Requirement implements Serializable {
+
+    private static final long serialVersionUID = 528517963577425517L;
     private String ID;
     private String responseDataType;
     private String description;
