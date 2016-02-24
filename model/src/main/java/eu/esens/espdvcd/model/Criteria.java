@@ -6,15 +6,16 @@ package eu.esens.espdvcd.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Criteria implements Serializable {
     String                      ID;
     String                      typeCode;
     String                      name;
     String                      description;
-    ArrayList<RequirementGroup> requirementGroups;
+    List<RequirementGroup> requirementGroups;
 
-    public Criteria(String ID, String typeCode, String name, String description, ArrayList<RequirementGroup> requirementGroups) {
+    public Criteria(String ID, String typeCode, String name, String description, List<RequirementGroup> requirementGroups) {
         this.ID = ID;
         this.typeCode = typeCode;
         this.name = name;
@@ -54,11 +55,11 @@ public class Criteria implements Serializable {
         this.description = description;
     }
 
-    public ArrayList<RequirementGroup> getRequirementGroups() {
+    public List<RequirementGroup> getRequirementGroups() {
         return requirementGroups;
     }
 
-    public void setRequirementGroups(ArrayList<RequirementGroup> requirementGroups) {
+    public void setRequirementGroups(List<RequirementGroup> requirementGroups) {
         this.requirementGroups = requirementGroups;
     }
 }
