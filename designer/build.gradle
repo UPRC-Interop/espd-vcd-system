@@ -45,6 +45,8 @@ gretty {
 }
 
 dependencies {
+    compile project(':builder')
+    compile project(':codelists')
     compile project(':model')
     compile 'com.vaadin:vaadin-server:7.6.0'
     compile 'com.vaadin:vaadin-client-compiled:7.6.0'

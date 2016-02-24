@@ -4,6 +4,7 @@
  */
 include ':asset-manager',
         ':builder',
+        ':codelists',
         ':common-util',
         ':container-manager',
         ':designer',
@@ -15,4 +16,5 @@ include ':asset-manager',
         ':schema',
         ':user-manager',
         ':validator',
-        ':viewer'
+        ':viewer',
+	':codelists'

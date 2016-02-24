@@ -40,10 +40,4 @@ jaxb {
     }
 }
 
-task copyTask(type: Copy) {
-    from "build/libs/schema-${version}.jar"
-    into '../artifacts'
-    //    rename "schema-${version}.jar", 'schema.jar'
-}
-
 compileJava.dependsOn xjc

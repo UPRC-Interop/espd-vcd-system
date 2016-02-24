@@ -28,6 +28,8 @@ public class ESPDRequestImpl implements ESPDRequest {
     @OneToOne(cascade = CascadeType.ALL)
 //    @Column(name = "espd_request")
     private ESPDRequestType espdRequestType;
+    
+    private CADetails caDetails;
 
     public ESPDRequestImpl(ESPDRequestModelType modelType, ESPDRequestType espdRequestType) {
         super();
@@ -68,5 +70,15 @@ public class ESPDRequestImpl implements ESPDRequest {
     @Override
     public void setEspdRequestType(ESPDRequestType espdRequestType) {
         this.espdRequestType = espdRequestType;
+    }
+
+    @Override
+    public CADetails getCADetails() {
+       return this.caDetails;
+    }
+
+    @Override
+    public void setCADetails(CADetails cd) {
+        this.caDetails = cd;
     }
 }
