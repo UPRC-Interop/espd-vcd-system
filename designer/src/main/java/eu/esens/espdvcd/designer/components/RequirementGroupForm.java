@@ -1,22 +1,28 @@
 package eu.esens.espdvcd.designer.components;
 
 import com.vaadin.ui.*;
+import eu.esens.espdvcd.model.Criteria;
 import eu.esens.espdvcd.model.RequirementGroup;
 import eu.esens.espdvcd.model.Requirement;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 
-import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by ixuz on 2/24/16.
  */
 
 public class RequirementGroupForm extends VerticalLayout {
+    private Criteria parentPojo = null;
+    private RequirementGroup requirementGroupRef = null;
     private HorizontalLayout titleLayout = new HorizontalLayout();
     private FormLayout contentLayout = new FormLayout();
     private TextField ID = new TextField("RequirementGroupForm ID");
 
-    public RequirementGroupForm(RequirementGroup requirementGroup) {
+    public RequirementGroupForm(Criteria parentPojo, RequirementGroup requirementGroup) {
+        this.parentPojo = parentPojo;
+        this.requirementGroupRef = requirementGroup;
         this.addComponent(titleLayout);
         this.addComponent(contentLayout);
         titleLayout.addComponent(new Label("REQUIREMENT GROUP"));
@@ -30,18 +36,31 @@ public class RequirementGroupForm extends VerticalLayout {
 
         // Add a sub form
         for (Requirement requirement : requirementGroup.getRequirements()) {
-            RequirementForm requirementForm = new RequirementForm(requirement);
+            RequirementForm requirementForm = new RequirementForm(requirementGroup, requirement);
             contentLayout.addComponent(requirementForm);
         }
 
         // Button that prints the values of the Bean/PROJ
-        titleLayout.addComponent(new Button("NEW", (Button.ClickEvent event) -> {
-            ArrayList<Requirement> requirements = requirementGroup.getRequirements();
+        this.addComponent(new Button("New requirement", (Button.ClickEvent event) -> {
+            List<Requirement> requirements = requirementGroup.getRequirements();
             Requirement requirement = new Requirement("", "", "");
             requirements.add(requirement);
 
-            RequirementForm requirementForm = new RequirementForm(requirement);
+            RequirementForm requirementForm = new RequirementForm(requirementGroup, requirement);
             contentLayout.addComponent(requirementForm);
+        }));
+
+        // Button that deletes this element from both the parentPojo and the parents layout
+        titleLayout.addComponent(new Button("Delete this requirement group", (Button.ClickEvent event) -> {
+            List<RequirementGroup> requirements = parentPojo.getRequirementGroups();
+            for (Iterator<RequirementGroup> iter = requirements.iterator(); iter.hasNext();) {
+                RequirementGroup item = iter.next();
+                if (item == requirementGroupRef) {
+                    iter.remove();
+                    AbstractLayout parentLayout = (AbstractLayout) this.getParent();
+                    parentLayout.removeComponent(this);
+                }
+            }
         }));
     }
 }

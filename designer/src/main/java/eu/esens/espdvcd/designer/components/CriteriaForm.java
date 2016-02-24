@@ -7,6 +7,8 @@ import eu.esens.espdvcd.model.RequirementGroup;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by ixuz on 2/24/16.
@@ -37,17 +39,17 @@ public class CriteriaForm extends VerticalLayout {
 
         // Add a sub form
         for (RequirementGroup requirementGroup : criteria.getRequirementGroups()) {
-            RequirementGroupForm requirementGroupForm = new RequirementGroupForm(requirementGroup);
+            RequirementGroupForm requirementGroupForm = new RequirementGroupForm(criteria, requirementGroup);
             contentLayout.addComponent(requirementGroupForm);
         }
 
         // Button that prints the values of the Bean/PROJ
-        titleLayout.addComponent(new Button("NEW", (Button.ClickEvent event) -> {
-            ArrayList<RequirementGroup> requirementGroups = criteria.getRequirementGroups();
+        this.addComponent(new Button("New requirement group", (Button.ClickEvent event) -> {
+            List<RequirementGroup> requirementGroups = criteria.getRequirementGroups();
             RequirementGroup requirementGroup = new RequirementGroup("", new ArrayList<Requirement>());
             requirementGroups.add(requirementGroup);
 
-            RequirementGroupForm requirementGroupForm = new RequirementGroupForm(requirementGroup);
+            RequirementGroupForm requirementGroupForm = new RequirementGroupForm(criteria, requirementGroup);
             contentLayout.addComponent(requirementGroupForm);
         }));
     }
