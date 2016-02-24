@@ -18,8 +18,8 @@ import eu.esens.espdvcd.designer.UserManager;
 import eu.esens.espdvcd.model.ESPDRequestImpl;
 
 public class Start extends Master implements View {
-    private Navigator navigator = null;
-    private Label authInfoLabel = new Label("");
+    private final Navigator navigator = null;
+    private final Label authInfoLabel = new Label("");
 
     public Start(Navigator navigator) {
         super(navigator);
@@ -56,7 +56,7 @@ public class Start extends Master implements View {
             case "CA": authInfo += "'Contractive Authority'"; break;
             case "EO": authInfo += "'Economic Operator'"; break;
             default: authInfo += "'Regular User'"; break;
-        };
+        }
 
         authInfoLabel.setCaption(authInfo);
         authInfoLabel.setVisible(true);

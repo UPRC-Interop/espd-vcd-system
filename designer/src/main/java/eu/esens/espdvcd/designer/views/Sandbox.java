@@ -5,10 +5,8 @@ import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
-
 import com.vaadin.ui.Layout;
 import java.util.ArrayList;
-
 import eu.esens.espdvcd.model.Criteria;
 import eu.esens.espdvcd.model.RequirementGroup;
 import eu.esens.espdvcd.model.Requirement;
@@ -72,91 +70,3 @@ public class Sandbox extends Master implements View {
 
     }
 }
-
-/*
-public class sandbox extends Master implements View {
-    private Navigator navigator = null;
-
-    public class TestForm extends FormLayout {
-        private TextField timestamp;
-
-        public TestForm() {
-            timestamp = new TextField("");
-            this.addComponent(timestamp);
-        }
-    }
-
-    public class Details {
-        String description;
-
-        public String getDescription() {
-            return description;
-        }
-
-        public void setDescription(String description) {
-            this.description = description;
-        }
-    }
-
-    public class Idea {
-        Details details;
-        String timestamp;
-
-        public Details getDetails() {
-            return details;
-        }
-
-        public void setDetails(Details details) {
-            this.details = details;
-        }
-
-        public String getTimestamp() {
-            return timestamp;
-        }
-
-        public void setTimestamp(String timestamp) {
-            this.timestamp = timestamp;
-        }
-    }
-
-    public sandbox(Navigator navigator) {
-        super(navigator);
-
-        content.addComponent(new Label("This is the sandbox!"));
-
-        TestForm testForm = new TestForm();
-
-        Details details = new Details();
-        details.setDescription("Much details wow!");
-
-        final BeanFieldGroup<Details> detailsContainer = new BeanFieldGroup<>(Details.class);
-        detailsContainer.setItemDataSource(details);
-        detailsContainer.setBuffered(false);
-
-        Idea idea = new Idea();
-        idea.setTimestamp("2016-02-24");
-        idea.setDetails(details);
-
-        final BeanFieldGroup<Idea> ideasContainer = new BeanFieldGroup<Idea>(Idea.class);
-        ideasContainer.bindMemberFields(testForm);
-        ideasContainer.setItemDataSource(idea);
-        ideasContainer.setBuffered(false);
-
-        content.addComponent(testForm);
-
-        // Display espd request xml button
-        content.addComponent(new Button("Print bean!",
-                (Button.ClickEvent event) -> {
-                    System.out.println("Timestamp: " + idea.getTimestamp());
-                    System.out.println("Details: " + idea.getDetails());
-                    System.out.println("Details.description: " + idea.getDetails().getDescription());
-                }
-        ));
-    }
-
-    @Override
-    public void enter(ViewChangeListener.ViewChangeEvent event) {
-
-    }
-}
-*/
