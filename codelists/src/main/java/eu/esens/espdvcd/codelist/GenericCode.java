@@ -5,6 +5,8 @@
  */
 package eu.esens.espdvcd.codelist;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 import javax.xml.bind.JAXBElement;
 import org.oasis_open.docs.codelist.ns.genericode._1.CodeListDocument;
 import org.oasis_open.docs.codelist.ns.genericode._1.Column;
@@ -41,4 +43,11 @@ public abstract class GenericCode {
         return getRowSimpleValueWithCode("code", id, "name");
     }
     
+    protected static final BiMap<String,String> getIdBiMap() {
+        
+        BiMap<String,String> idBiMap = HashBiMap.create();
+        
+        
+        return idBiMap;
+    }
 }

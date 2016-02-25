@@ -13,6 +13,9 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import org.oasis_open.docs.codelist.ns.genericode._1.CodeListDocument;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.EnumBiMap;
+
 /**
  *
  * @author Jerry Dimitriou <jerouris@unipi.gr>
@@ -36,7 +39,7 @@ public class CountryCodeGC extends GenericCode {
     }
     
     public static String getISOCode(String country) {
-        return getIdValueForData(country);
-           
+        return getIdValueForData(country);           
     }
+
 }
