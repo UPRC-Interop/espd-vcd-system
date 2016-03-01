@@ -4,9 +4,11 @@ import eu.esens.espdvcd.model.CADetails;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDRequestImpl;
 import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
+import grow.names.specification.ubl.schema.xsd.espdrequest_1.ObjectFactory;
 import java.io.InputStream;
 import java.io.StringWriter;
 import javax.xml.bind.JAXB;
+import javax.xml.bind.JAXBElement;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.AddressType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.AttachmentType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ContractingPartyType;
@@ -107,15 +109,20 @@ public class ESPDBuilder {
         
         // TODO: Evidences
         
-        //Return the Object
-        return reqType;
+        // Create the JAXB Element
+        
+         return reqType;
     }
     public String createXMLasString(ESPDRequest req) {
         StringWriter result = new StringWriter();
-        JAXB.marshal(createXML(req), result);
+        ObjectFactory of = new ObjectFactory();
+        
+        //Return the Object
+
+        JAXB.marshal(of.createESPDRequest(createXML(req)), result);
         return result.toString();
     }
-    
+     
     private ESPDRequestType read(InputStream is) {
         // Start with the convience methods provided by JAXB. If there are
         // perfomance issues we will swicth back to the JAXB API Usage
