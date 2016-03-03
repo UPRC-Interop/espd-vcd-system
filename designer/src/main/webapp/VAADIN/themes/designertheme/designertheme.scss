@@ -15,7 +15,7 @@
   }*/
 
   .v-slot {
-    margin: 5px;
+
   }
 
   .v-slot-box_info {
@@ -39,5 +39,86 @@
     background-color: #E6E6E6;
     padding: 16px;
     font-size: 12px;
+  }
+
+  .v-horizontallayout-topheader {
+    background-color: #efa134;
+  }
+
+  .v-image-topheaderEsensImage {
+    padding: 10px;
+  }
+
+  .v-label-topheaderWelcomeText {
+    color: #f4c583;
+    padding: 10px;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .Master {
+    background-color: #000000;
+  }
+
+  .navigatorPanel {
+    background-color: #4d4d4d;
+    border-radius: 0px;
+    border: 0px;
+  }
+
+  .v-verticallayout-navigatorContent {
+    background-color: #4d4d4d;
+  }
+
+  .mainPanel {
+    background-color: #f1f1f1;
+    border-radius: 0px;
+    border: 0px;
+  }
+
+  .mainContent {
+    padding: 10px;
+  }
+
+  .v-gridlayout-contentGrid {
+    padding-bottom: 76px;
+  }
+
+  .navigatorButtonDark {
+    background: #4d4d4d;
+    border-radius: 0px;
+    border: 0px;
+  }
+
+  .v-button-navigatorButtonDark {
+    background-image: none;
+    box-shadow: inset 0px 0px 0px 0px #000;
+    border: 0px solid #dcdcdc;
+    font-size: 18px;
+    color: #e3e3e3;
+    text-align: left;
+  }
+
+  .v-button-navigatorButtonLight {
+    @extend .v-button-navigatorButtonDark;
+    background-color: #5c5c5c;
+    color: #b3b3b3;
+  }
+
+  .navigatorHeaderTitle {
+    font-size: 32px;
+    font-weight: bold;
+    color: #b3b3b3;
+  }
+
+  .navigatorHeaderRole {
+    @extend .navigatorHeaderTitle;
+    font-size: 18px;
+    margin-top: -8px;
+    margin-bottom: 30px;
+  }
+
+  .navigatorHeaderLayout {
+  
   }
 }

@@ -21,7 +21,7 @@ public class Login extends Master implements View {
 
         loginFormWindow = new LoginFormWindow(navigator);
 
-        content.addComponent(new Label("You must login to use this service"));
+        mainContent.addComponent(new Label("You must login to use this service"));
     }
 
     @Override

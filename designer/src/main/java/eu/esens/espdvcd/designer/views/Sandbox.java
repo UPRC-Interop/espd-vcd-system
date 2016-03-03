@@ -46,10 +46,10 @@ public class Sandbox extends Master implements View {
 
         // Generate the critera form based on the provided Bean/PROJ
         CriteriaForm criteriaForm = new CriteriaForm(criteria);
-        content.addComponent(criteriaForm);
+        mainContent.addComponent(criteriaForm);
 
         // Button that prints the values of the Bean/PROJ
-        content.addComponent(new Button("Save", (ClickEvent event) -> {
+        mainContent.addComponent(new Button("Save", (ClickEvent event) -> {
             System.out.println("Criteria().ID: " + criteria.getID());
             System.out.println("Criteria().TypeCode: " + criteria.getTypeCode());
             System.out.println("Criteria().Name: " + criteria.getName());

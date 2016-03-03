@@ -25,10 +25,10 @@ public class Start extends Master implements View {
         super(navigator);
 
         ESPDRequestImpl espdRequest = new ESPDRequestImpl();
-        content.addComponent(new CADetailsForm(espdRequest));
+        mainContent.addComponent(new CADetailsForm(espdRequest));
 
         // Display espd request xml button
-        content.addComponent(new Button("Print ESPD Request XML!",
+        mainContent.addComponent(new Button("Print ESPD Request XML!",
                 (Button.ClickEvent event) -> {
                     ESPDBuilder espdBuilder = new ESPDBuilder();
                     String xml = espdBuilder.createXMLasString(espdRequest);
@@ -36,7 +36,7 @@ public class Start extends Master implements View {
                 }
         ));
 
-        content.addComponent(authInfoLabel);
+        mainContent.addComponent(authInfoLabel);
     }
 
     @Override
