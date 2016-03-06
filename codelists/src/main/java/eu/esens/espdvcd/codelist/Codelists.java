@@ -45,11 +45,11 @@ public enum Codelists {
         return (otherName == null) ? false : name.equals(otherName);
     }
 
-    protected final String getIdForData(String data) {
+    public final String getIdForData(String data) {
         return getInstance().getIdForData(data);
     }
 
-    protected final String getValueForId(String id) {
+    public final String getValueForId(String id) {
         return getInstance().getValueForId(id);
     }
 
