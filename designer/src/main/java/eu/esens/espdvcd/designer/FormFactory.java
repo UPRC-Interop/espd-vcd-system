@@ -4,7 +4,6 @@
 
 package eu.esens.espdvcd.designer;
 
-import eu.esens.espdvcd.codelist.CountryCodeGC;
 import eu.esens.espdvcd.designer.components.CountryComboBox;
 import eu.esens.espdvcd.model.uifacade.ElementContainer;
 import eu.esens.espdvcd.model.uifacade.ElementType;
@@ -16,6 +15,7 @@ import com.vaadin.ui.Panel;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.OptionGroup;
+import eu.esens.espdvcd.codelist.Codelists;
 import java.util.*;
 
 public class FormFactory {
@@ -104,7 +104,7 @@ public class FormFactory {
                 String country = (String)ic.getIdByIndex(i);
                 String isoCode = "";
                 try {
-                    isoCode = CountryCodeGC.getISOCode(country.toUpperCase());
+                    isoCode = Codelists.CountryIdentification.getIdForData(country.toUpperCase());
                 } catch (IllegalArgumentException e) {
                     isoCode = "null";
                 }
