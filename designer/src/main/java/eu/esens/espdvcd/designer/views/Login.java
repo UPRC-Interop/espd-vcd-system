@@ -9,15 +9,16 @@ import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.Label;
+import eu.esens.espdvcd.designer.Designer;
 import eu.esens.espdvcd.designer.components.LoginFormWindow;
 import eu.esens.espdvcd.designer.UserManager;
 
-public class Login extends Master implements View {
+public class Login extends Master {
     private Navigator navigator = null;
     private LoginFormWindow loginFormWindow;
 
     public Login(Navigator navigator) {
-        super(navigator);
+        super(navigator, false);
 
         loginFormWindow = new LoginFormWindow(navigator);
 
@@ -29,7 +30,7 @@ public class Login extends Master implements View {
         if (!UserManager.isAuthenticated()) {
             UI.getCurrent().addWindow(loginFormWindow);
         } else {
-            getNavigator().navigateTo("");
+            getNavigator().navigateTo(Designer.VIEW_DASHBOARD);
         }
     }
 }

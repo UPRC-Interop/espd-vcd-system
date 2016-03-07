@@ -6,6 +6,7 @@ import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Panel;
+import com.vaadin.ui.Label;
 import eu.esens.espdvcd.model.CADetails;
 import eu.esens.espdvcd.model.ESPDRequest;
 
@@ -28,6 +29,7 @@ public class CADetailsForm extends FormLayout {
     private TextField procurementProcedureFileReferenceNo;
 
     public CADetailsForm(ESPDRequest espdRequest) {
+        setCaption(null);
         panelIdentifyProcurer = new Panel("Identity of the procurer");
         layoutIdentifyProcurer = new VerticalLayout();
         panelInformationProcurementProcedure = new Panel("Information about the procurement procedure");
@@ -48,6 +50,7 @@ public class CADetailsForm extends FormLayout {
         layoutInformationProcurementProcedure.addComponent(procurementProcedureDesc);
         layoutInformationProcurementProcedure.addComponent(procurementProcedureFileReferenceNo);
 
+        panelIdentifyProcurer.setWidth("100%");
         layoutIdentifyProcurer.setMargin(true);
         layoutInformationProcurementProcedure.setMargin(true);
         caCountry.setCaption("Country:");

@@ -1,5 +1,6 @@
 package eu.esens.espdvcd.designer.components;
 
+import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.*;
 import eu.esens.espdvcd.model.Requirement;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
@@ -13,6 +14,8 @@ import java.util.List;
  */
 public class RequirementForm extends VerticalLayout {
     private RequirementGroup parentPojo = null;
+    private Panel panel = new Panel();
+    private VerticalLayout panelContent = new VerticalLayout();
     private Requirement requirementRef = null;
     private HorizontalLayout titleLayout = new HorizontalLayout();
     private FormLayout contentLayout = new FormLayout();
@@ -21,14 +24,20 @@ public class RequirementForm extends VerticalLayout {
     private TextField description = new TextField("Requirement Description");
 
     public RequirementForm(RequirementGroup parentPojo, Requirement requirement) {
+        this.addComponent(panel);
         this.parentPojo = parentPojo;
         this.requirementRef = requirement;
-        this.addComponent(titleLayout);
-        this.addComponent(contentLayout);
-        titleLayout.addComponent(new Label("REQUIREMENT"));
+        //panelContent.addComponent(titleLayout);
+        panelContent.addComponent(contentLayout);
+        //titleLayout.addComponent(new Label("REQUIREMENT"));
         contentLayout.addComponent(ID);
         contentLayout.addComponent(responseDataType);
         contentLayout.addComponent(description);
+
+        panel.setStyleName("requirementForm-panel");
+        panel.setContent(panelContent);
+        panel.setCaption("Requirement");
+        panel.setIcon(FontAwesome.CHEVRON_DOWN);
 
         // Bind the this forms fields
         final BeanFieldGroup<Requirement> requirementGroup = new BeanFieldGroup<>(Requirement.class);
@@ -36,8 +45,11 @@ public class RequirementForm extends VerticalLayout {
         requirementGroup.setBuffered(false);
         requirementGroup.bindMemberFields(this);
 
+        //panelContent.setCaption(null);
+        //contentLayout.setCaption(null);
+
         // Button that deletes this element from both the parentPojo and the parents layout
-        titleLayout.addComponent(new Button("Delete this requirement", (Button.ClickEvent event) -> {
+        /*titleLayout.addComponent(new Button("Delete this requirement", (Button.ClickEvent event) -> {
             List<Requirement> requirements = parentPojo.getRequirements();
             for (Iterator<Requirement> iter = requirements.iterator(); iter.hasNext();) {
                 Requirement item = iter.next();
@@ -47,6 +59,6 @@ public class RequirementForm extends VerticalLayout {
                     parentLayout.removeComponent(this);
                 }
             }
-        }));
+        }));*/
     }
 }

@@ -1,5 +1,6 @@
 package eu.esens.espdvcd.designer.components;
 
+import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.*;
 import eu.esens.espdvcd.model.Criteria;
 import eu.esens.espdvcd.model.RequirementGroup;
@@ -15,18 +16,26 @@ import java.util.List;
 
 public class RequirementGroupForm extends VerticalLayout {
     private Criteria parentPojo = null;
+    private Panel panel = new Panel();
+    private VerticalLayout panelContent = new VerticalLayout();
     private RequirementGroup requirementGroupRef = null;
     private HorizontalLayout titleLayout = new HorizontalLayout();
     private FormLayout contentLayout = new FormLayout();
     private TextField ID = new TextField("RequirementGroupForm ID");
 
     public RequirementGroupForm(Criteria parentPojo, RequirementGroup requirementGroup) {
+        this.addComponent(panel);
         this.parentPojo = parentPojo;
         this.requirementGroupRef = requirementGroup;
-        this.addComponent(titleLayout);
-        this.addComponent(contentLayout);
-        titleLayout.addComponent(new Label("REQUIREMENT GROUP"));
+        //panelContent.addComponent(titleLayout);
+        panelContent.addComponent(contentLayout);
+        //titleLayout.addComponent(new Label("REQUIREMENT GROUP"));
         contentLayout.addComponent(ID);
+
+        panel.setStyleName("requirementGroupForm-panel");
+        panel.setContent(panelContent);
+        panel.setCaption("Requirement group");
+        panel.setIcon(FontAwesome.CHEVRON_DOWN);
 
         // Bind the this forms fields
         final BeanFieldGroup<RequirementGroup> requirementGroupGroup = new BeanFieldGroup<>(RequirementGroup.class);
@@ -40,7 +49,7 @@ public class RequirementGroupForm extends VerticalLayout {
             contentLayout.addComponent(requirementForm);
         }
 
-        // Button that prints the values of the Bean/PROJ
+/*        // Button that prints the values of the Bean/PROJ
         this.addComponent(new Button("New requirement", (Button.ClickEvent event) -> {
             List<Requirement> requirements = requirementGroup.getRequirements();
             Requirement requirement = new Requirement("", "", "");
@@ -48,8 +57,8 @@ public class RequirementGroupForm extends VerticalLayout {
 
             RequirementForm requirementForm = new RequirementForm(requirementGroup, requirement);
             contentLayout.addComponent(requirementForm);
-        }));
-
+        }));*/
+/*
         // Button that deletes this element from both the parentPojo and the parents layout
         titleLayout.addComponent(new Button("Delete this requirement group", (Button.ClickEvent event) -> {
             List<RequirementGroup> requirements = parentPojo.getRequirementGroups();
@@ -61,6 +70,6 @@ public class RequirementGroupForm extends VerticalLayout {
                     parentLayout.removeComponent(this);
                 }
             }
-        }));
+        }));*/
     }
 }

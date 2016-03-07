@@ -18,8 +18,10 @@ import eu.esens.espdvcd.designer.views.*;
 
 public class Designer extends UI {
     public final static String VIEW_INDEX  = "";
+    public final static String VIEW_DASHBOARD  = "dashboard";
     public final static String VIEW_LOGIN  = "login";
     public final static String VIEW_SANDBOX  = "sandbox";
+    public final static String VIEW_ESPD_TEMPLATES  = "espd_templates";
 
     @Override
     protected void init(VaadinRequest request) {
@@ -27,11 +29,15 @@ public class Designer extends UI {
         Navigator navigator  = new Navigator(this, this);
 
         Start start = new Start(navigator);
+        Dashboard dashboard = new Dashboard(navigator);
         Login login = new Login(navigator);
         Sandbox sandbox = new Sandbox(navigator);
+        EspdTemplates espdTemplates = new EspdTemplates(navigator);
 
         navigator.addView(VIEW_INDEX, start);
+        navigator.addView(VIEW_DASHBOARD, dashboard);
         navigator.addView(VIEW_LOGIN, login);
         navigator.addView(VIEW_SANDBOX, sandbox);
+        navigator.addView(VIEW_ESPD_TEMPLATES, espdTemplates);
     }
 }

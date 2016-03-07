@@ -5,22 +5,25 @@
 package eu.esens.espdvcd.designer.views;
 
 import com.vaadin.navigator.Navigator;
+import com.vaadin.navigator.View;
+import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.*;
+import eu.esens.espdvcd.designer.Designer;
 import eu.esens.espdvcd.designer.UserContext;
 import eu.esens.espdvcd.designer.UserManager;
 import com.vaadin.server.Sizeable;
+import com.vaadin.server.FontAwesome;
 
 /**
  * Sets up the base custom layout of the website.
  * Subclasses inheriting can add components to the sections exposed by this class.
  */
-public class Master extends VerticalLayout {
+public class Master extends VerticalLayout implements View {
     private Navigator navigator = null;
     private CustomLayout fullLayout = new CustomLayout("master");
-    private Image topheaderEsensImage = new Image("", new ThemeResource("img/logo_esens.png"));
-    Label topheaderWelcomeText = new Label("Hello Alice");
+    private boolean forceAuthentication = false;
 
     // Exposed sections
     protected HorizontalLayout topheader = new HorizontalLayout();
@@ -29,10 +32,14 @@ public class Master extends VerticalLayout {
     protected VerticalLayout navigatorContent = new VerticalLayout();
     protected Panel mainPanel = new Panel();
     protected VerticalLayout mainContent = new VerticalLayout();
+    protected Image topheaderEsensImage = new Image("", new ThemeResource("img/logo_esens.png"));
+    protected Label topheaderWelcomeText = new Label("Hello Alice");
 
-    public Master(Navigator navigator) {
+    public Master(Navigator navigator, boolean forceAuthentication) {
         this.navigator = navigator;
+        this.forceAuthentication = forceAuthentication;
 
+        setCaption(null);
         setStyleName("Master");
         setHeight("100%");
 
@@ -80,8 +87,9 @@ public class Master extends VerticalLayout {
         navigatorPanel.getContent().setSizeUndefined();
         navigatorPanel.getContent().setWidth("100%");
 
-        mainContent.setStyleName("mainContent");
+        mainContent.setStyleName("master-mainContent");
         mainContent.setHeight("100%");
+        mainContent.setWidth("100%");
 
         mainPanel.setStyleName("mainPanel");
         mainPanel.setSizeFull();
@@ -112,137 +120,88 @@ public class Master extends VerticalLayout {
             navigatorContent.addComponent(navigatorHeaderLayout);
         }
         {
-            Button button = new Button("Start");
+            Button button = new Button("Start", FontAwesome.CIRCLE);
             button.setStyleName("navigatorButtonDark");
             button.setWidth("100%");
-            button.setHeight(50, Unit.PIXELS);
+            button.setHeight(60, Unit.PIXELS);
+            navigatorContent.addComponent(button);
+
+            button.addClickListener(this::onStart);
+        }
+        {
+            Button button = new Button("Notifications", FontAwesome.THUMB_TACK);
+            button.setStyleName("navigatorButtonDark");
+            button.setWidth("100%");
+            button.setHeight(60, Unit.PIXELS);
             navigatorContent.addComponent(button);
         }
         {
-            Button button = new Button("Notifications");
+            Button button = new Button("ESPD Templates", FontAwesome.FILE_O);
             button.setStyleName("navigatorButtonDark");
             button.setWidth("100%");
-            button.setHeight(50, Unit.PIXELS);
+            button.setHeight(60, Unit.PIXELS);
+            navigatorContent.addComponent(button);
+
+            button.addClickListener(this::onEspdTemplates);
+        }
+        {
+            Button button = new Button("ESPDs", FontAwesome.FILE);
+            button.setStyleName("navigatorButtonDark");
+            button.setWidth("100%");
+            button.setHeight(60, Unit.PIXELS);
             navigatorContent.addComponent(button);
         }
         {
-            Button button = new Button("ESPD Templates");
+            Button button = new Button("Sandbox", FontAwesome.PLAY);
             button.setStyleName("navigatorButtonDark");
             button.setWidth("100%");
-            button.setHeight(50, Unit.PIXELS);
+            button.setHeight(60, Unit.PIXELS);
             navigatorContent.addComponent(button);
+            button.addClickListener(this::onSandbox);
         }
         {
-            Button button = new Button("ESPDs");
-            button.setStyleName("navigatorButtonDark");
-            button.setWidth("100%");
-            button.setHeight(50, Unit.PIXELS);
-            navigatorContent.addComponent(button);
-        }
-        {
-            Button button = new Button("My Profile");
+            Button button = new Button("My Profile", FontAwesome.USER);
             button.setStyleName("navigatorButtonLight");
             button.setWidth("100%");
-            button.setHeight(50, Unit.PIXELS);
+            button.setHeight(60, Unit.PIXELS);
             navigatorContent.addComponent(button);
         }
         {
-            Button button = new Button("Pre-fill Settings");
+            Button button = new Button("Pre-fill Settings", FontAwesome.CHECK_SQUARE_O);
             button.setStyleName("navigatorButtonLight");
             button.setWidth("100%");
-            button.setHeight(50, Unit.PIXELS);
+            button.setHeight(60, Unit.PIXELS);
             navigatorContent.addComponent(button);
         }
         {
-            Button button = new Button("Dashboard Settings");
+            Button button = new Button("Dashboard Settings", FontAwesome.GEAR);
             button.setStyleName("navigatorButtonLight");
             button.setWidth("100%");
-            button.setHeight(50, Unit.PIXELS);
+            button.setHeight(60, Unit.PIXELS);
             navigatorContent.addComponent(button);
         }
-
-/*
-        setSizeFull();
-        setHeight("100%");
-
-        topheaderEsensImage.setSizeUndefined();
-
-        // Top header bar
-        fullLayout.setHeight("100%");
-        fullLayout.setStyleName("fullLayout");
-        fullLayout.addComponent(topheader, "topheader");
-        fullLayout.addComponent(content, "content");
-
-        // Setup the topheader layout
-        topheader.setStyleName("topheader");
-        topheader.setSizeFull();
-        // Setup the grid layout of the top header
-        GridLayout topheaderGrid = new GridLayout(2, 1);
-        topheaderGrid.setStyleName("topheaderGrid");
-        topheaderGrid.setWidth("100%");
-        // Add the logo to the topheader
-        topheaderEsensImage.setStyleName("topheaderEsensImage");
-        topheaderEsensImage.setCaption(null);
-        topheaderEsensImage.setWidth(200, Unit.PIXELS);
-        topheaderGrid.addComponent(topheaderEsensImage, 0, 0);
-        topheaderGrid.setComponentAlignment(topheaderEsensImage, Alignment.MIDDLE_LEFT);
-        // Add the welcome text to the topheader
-        Label topheaderWelcomeText = new Label("Hello Alice");
-        topheaderWelcomeText.setStyleName("topheaderWelcomeText");
-        topheaderWelcomeText.setSizeUndefined();
-        topheaderGrid.addComponent(topheaderWelcomeText, 1, 0);
-        topheaderGrid.setComponentAlignment(topheaderWelcomeText, Alignment.MIDDLE_RIGHT);
-        topheader.addComponent(topheaderGrid);
-
-        // Setup the content layout
-        content.setSizeFull();
-        content.setHeight("100%");
-        // Setup the grid layout of the main content
-        GridLayout contentGrid = new GridLayout(2, 1);
-        contentGrid.setStyleName("contentGrid");
-        contentGrid.setColumnExpandRatio(0, 0.17f);
-        contentGrid.setColumnExpandRatio(1, 0.83f);
-        contentGrid.setSizeFull();
-        contentGrid.setWidth("100%");
-        contentGrid.setHeight("100%");
-        // Setup the side navigator
-        VerticalLayout contentNavLayout = new VerticalLayout();
-        contentNavLayout.setStyleName("contentNavLayout");
-        contentNavLayout.setSizeFull();
-        contentGrid.addComponent(contentNavLayout, 0, 0);
-        contentGrid.setComponentAlignment(contentNavLayout, Alignment.TOP_LEFT);
-        // Setup the main content view
-        VerticalLayout contentMainLayout = new VerticalLayout();
-        contentMainLayout.setStyleName("contentMainLayout");
-        contentMainLayout.setSizeFull();
-        contentGrid.addComponent(contentMainLayout, 1, 0);
-        contentGrid.setComponentAlignment(contentMainLayout, Alignment.TOP_LEFT);
-        content.addComponent(contentGrid);
-
-        contentNavLayout.addComponent(new Label("Hello"));
-
-        // Add button to side navigation pane
-        Button contentNavNotificationsButton = new Button("Notifications");
-        contentNavNotificationsButton.setSizeFull();
-        contentNavLayout.addComponent(contentNavNotificationsButton);
-
-        // Add button to side navigation pane
-        Button contentNavESPDTemplatesButton = new Button("ESPD Templates");
-        contentNavESPDTemplatesButton.setSizeFull();
-        contentNavLayout.addComponent(contentNavESPDTemplatesButton);
-
-        // Add button to side navigation pane
-        Button contentNavESPDsButton = new Button("ESPDs");
-        contentNavESPDsButton.setSizeFull();
-        contentNavLayout.addComponent(contentNavESPDsButton);
-
-        contentMainLayout.addComponent(new Label("World"));
-
-        addComponent(fullLayout);
-        setExpandRatio(fullLayout, 1.0f);*/
     }
 
     public Navigator getNavigator() {
         return navigator;
+    }
+
+    @Override
+    public void enter(ViewChangeListener.ViewChangeEvent event) {
+        if (forceAuthentication && !UserManager.isAuthenticated()) {
+            //getNavigator().navigateTo(Designer.VIEW_LOGIN);
+        }
+    }
+
+    public void onStart(Button.ClickEvent clickEvent) {
+        getNavigator().navigateTo(Designer.VIEW_DASHBOARD);
+    }
+
+    public void onEspdTemplates(Button.ClickEvent clickEvent) {
+        getNavigator().navigateTo(Designer.VIEW_ESPD_TEMPLATES);
+    }
+
+    public void onSandbox(Button.ClickEvent clickEvent) {
+        getNavigator().navigateTo(Designer.VIEW_SANDBOX);
     }
 }

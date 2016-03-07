@@ -18,6 +18,10 @@
 
   }
 
+  .v-widget {
+    border-radius: 0px;
+  }
+
   .v-slot-box_info {
     margin: 5px;
     padding: 10px;
@@ -76,8 +80,9 @@
     border: 0px;
   }
 
-  .mainContent {
+  .master-mainContent {
     padding: 10px;
+    width: 100%;
   }
 
   .v-gridlayout-contentGrid {
@@ -94,7 +99,7 @@
     background-image: none;
     box-shadow: inset 0px 0px 0px 0px #000;
     border: 0px solid #dcdcdc;
-    font-size: 18px;
+    font-size: 22px;
     color: #e3e3e3;
     text-align: left;
   }
@@ -120,5 +125,64 @@
 
   .navigatorHeaderLayout {
   
+  }
+
+  .dashboard-gridLayout {
+    width: 100%;
+  }
+
+  .dashboard-columns {
+    //width: 100%;
+  }
+
+  .dashboard-newEspdTemplateButton {
+    background-image: none;
+    background-color: #569AC4;
+    box-shadow: inset 0px 0px 0px 0px #000;
+    border: 0px solid #569AC4;
+    font-size: 28px;
+    color: #e3e3e3;
+  }
+
+  .v-button-caption {
+    white-space: pre;
+  }
+
+  .v-panel-caption {
+    box-shadow: inset 0px 0px 0px 0px #000;
+    border: 0px solid #569AC4;
+    border-radius: 0px;
+    background: #569AC4;
+    color: #e3e3e3;
+    font-size: 18px;
+    font-weight: bold;
+    font-variant: small-caps;
+  }
+
+  .v-panel-caption-requirementGroupForm-panel {
+    @extend .v-panel-caption;
+    background: #63C456;
+    border: 0px solid #63C456;
+  }
+
+  .v-panel-caption-requirementForm-panel {
+    @extend .v-panel-caption;
+    background: #B756C4;
+    border: 0px solid #B756C4;
+  }
+
+  .FontAwesome {
+    width: 30px;
+  }
+
+  .v-formlayout > table {
+    padding: 14px;
+    width: 100%;
+  }
+
+  tbody > .v-formlayout-firstrow > .v-formlayout-captioncell,
+  tbody > .v-formlayout-firstrow > .v-formlayout-errorcell,
+  tbody > .v-formlayout-firstrow > .v-formlayout-contentcell {
+    padding-top: 0px !important;
   }
 }

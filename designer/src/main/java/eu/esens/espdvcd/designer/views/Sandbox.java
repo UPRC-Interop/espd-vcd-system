@@ -16,10 +16,10 @@ import eu.esens.espdvcd.designer.components.CriteriaForm;
  * Created by ixuz on 2/23/16.
  */
 
-public class Sandbox extends Master implements View {
+public class Sandbox extends Master {
 
     public Sandbox(Navigator navigator) {
-        super(navigator);
+        super(navigator, false);
 
         boundselect(content);
     }
@@ -67,6 +67,6 @@ public class Sandbox extends Master implements View {
 
     @Override
     public void enter(ViewChangeListener.ViewChangeEvent event) {
-
+        super.enter(event);
     }
 }

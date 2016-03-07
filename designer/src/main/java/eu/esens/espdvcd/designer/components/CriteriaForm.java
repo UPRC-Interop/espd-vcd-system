@@ -1,5 +1,6 @@
 package eu.esens.espdvcd.designer.components;
 
+import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.*;
 import eu.esens.espdvcd.model.Criteria;
 import eu.esens.espdvcd.model.Requirement;
@@ -15,6 +16,8 @@ import java.util.List;
  */
 
 public class CriteriaForm extends VerticalLayout {
+    private Panel panel = new Panel();
+    private VerticalLayout panelContent = new VerticalLayout();
     private HorizontalLayout titleLayout = new HorizontalLayout();
     private FormLayout contentLayout = new FormLayout();
     private TextField ID = new TextField("Critera ID");
@@ -23,13 +26,18 @@ public class CriteriaForm extends VerticalLayout {
     private TextField description = new TextField("Critera Description");
 
     public CriteriaForm(Criteria criteria) {
-        this.addComponent(titleLayout);
-        this.addComponent(contentLayout);
-        titleLayout.addComponent(new Label("CRITERIA"));
+        this.addComponent(panel);
+        //panelContent.addComponent(titleLayout);
+        panelContent.addComponent(contentLayout);
+        //titleLayout.addComponent(new Label("CRITERIA"));
         contentLayout.addComponent(ID);
         contentLayout.addComponent(typeCode);
         contentLayout.addComponent(name);
         contentLayout.addComponent(description);
+
+        panel.setContent(panelContent);
+        panel.setCaption("Criteria");
+        panel.setIcon(FontAwesome.CHEVRON_DOWN);
 
         // Bind the this forms fields
         final BeanFieldGroup<Criteria> criteriaGroup = new BeanFieldGroup<>(Criteria.class);
@@ -43,7 +51,7 @@ public class CriteriaForm extends VerticalLayout {
             contentLayout.addComponent(requirementGroupForm);
         }
 
-        // Button that prints the values of the Bean/PROJ
+/*        // Button that prints the values of the Bean/PROJ
         this.addComponent(new Button("New requirement group", (Button.ClickEvent event) -> {
             List<RequirementGroup> requirementGroups = criteria.getRequirementGroups();
             RequirementGroup requirementGroup = new RequirementGroup("", new ArrayList<Requirement>());
@@ -51,6 +59,6 @@ public class CriteriaForm extends VerticalLayout {
 
             RequirementGroupForm requirementGroupForm = new RequirementGroupForm(criteria, requirementGroup);
             contentLayout.addComponent(requirementGroupForm);
-        }));
+        }));*/
     }
 }
