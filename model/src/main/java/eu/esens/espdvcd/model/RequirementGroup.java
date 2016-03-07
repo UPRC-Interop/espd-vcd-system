@@ -13,6 +13,7 @@ public class RequirementGroup implements Serializable {
     private static final long serialVersionUID = -2179415621032376712L;    
     private String ID;
     private List<Requirement> requirements;
+    private List<RequirementGroup> requirementGroups;
 
     public RequirementGroup(String ID) {
         this.ID = ID;
@@ -40,5 +41,16 @@ public class RequirementGroup implements Serializable {
 
     public void setRequirements(List<Requirement> requirement) {
         this.requirements = requirement;
+    }
+
+    public void setRequirementGroups(List<RequirementGroup> childRg) {
+        this.requirementGroups = childRg;
+    }
+    
+    public List<RequirementGroup> getRequirementGroups() {
+        if (this.requirementGroups == null) {
+            this.requirementGroups = new ArrayList<>();
+        }
+        return this.requirementGroups;
     }
 }
