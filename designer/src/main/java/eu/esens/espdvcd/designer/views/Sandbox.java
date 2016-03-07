@@ -11,12 +11,15 @@ import eu.esens.espdvcd.model.Criteria;
 import eu.esens.espdvcd.model.RequirementGroup;
 import eu.esens.espdvcd.model.Requirement;
 import eu.esens.espdvcd.designer.components.CriteriaForm;
+import java.util.List;
 
 /**
  * Created by ixuz on 2/23/16.
  */
 
-public class Sandbox extends Master implements View {
+public final class Sandbox extends Master implements View {
+
+    private static final long serialVersionUID = -3712031177853996322L;
 
     public Sandbox(Navigator navigator) {
         super(navigator);
@@ -27,14 +30,14 @@ public class Sandbox extends Master implements View {
     void boundselect(Layout rootLayout) {
 
         // Prepare a POJO
-        ArrayList<Requirement> requirements1 = new ArrayList<>();
+        List<Requirement> requirements1 = new ArrayList<>();
         requirements1.add(new Requirement("7d35fb7c-da5b-4830-b598-4f347a04dceb", "DESCRIPTION", "Reason"));
 
         ArrayList<Requirement> requirements2 = new ArrayList<>();
         requirements2.add(new Requirement("974c8196-9d1c-419c-9ca9-45bb9f5fd59a", "INDICATOR", "Your answer?"));
         requirements2.add(new Requirement("ecf40999-7b64-4e10-b960-7f8ff8674cf6", "DATE", "Date of conviction"));
 
-        ArrayList<RequirementGroup> requirementGroups1 = new ArrayList<>();
+        List<RequirementGroup> requirementGroups1 = new ArrayList<>();
         requirementGroups1.add(new RequirementGroup("7c637c0c-7703-4389-ba52-02997a055bd7", requirements1));
         requirementGroups1.add(new RequirementGroup("41dd2e9b-1bfd-44c7-93ee-56bd74a4334b", requirements2));
 
@@ -54,14 +57,16 @@ public class Sandbox extends Master implements View {
             System.out.println("Criteria().TypeCode: " + criteria.getTypeCode());
             System.out.println("Criteria().Name: " + criteria.getName());
             System.out.println("Criteria().Description: " + criteria.getDescription());
-            for (RequirementGroup requirementGroup : criteria.getRequirementGroups()) {
+            criteria.getRequirementGroups().stream().map((requirementGroup) -> {
                 System.out.println("Criteria().RequirementGroup.ID: " + requirementGroup.getID());
+                return requirementGroup;
+            }).forEach((requirementGroup) -> {
                 for (Requirement requirement : requirementGroup.getRequirements()) {
                     System.out.println("Criteria().RequirementGroup().Requirement().ID: " + requirement.getID());
                     System.out.println("Criteria().RequirementGroup().Requirement().Description: " + requirement.getDescription());
                     System.out.println("Criteria().RequirementGroup().Requirement().ResponseDataType: " + requirement.getResponseDataType());
                 }
-            }
+            });
         }));
     }
 

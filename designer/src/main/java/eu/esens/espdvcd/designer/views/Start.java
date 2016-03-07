@@ -12,19 +12,21 @@ import com.vaadin.ui.Label;
 import eu.esens.espdvcd.builder.ESPDBuilder;
 import eu.esens.espdvcd.designer.UserContext;
 import eu.esens.espdvcd.designer.components.CADetailsForm;
-import eu.esens.espdvcd.designer.components.Form;
-import eu.esens.espdvcd.designer.FormFactory;
 import eu.esens.espdvcd.designer.UserManager;
-import eu.esens.espdvcd.model.ESPDRequestImpl;
+import eu.esens.espdvcd.model.ESPDRequest;
+import eu.esens.espdvcd.model.SimpleESPDRequest;
 
 public class Start extends Master implements View {
+
+    private static final long serialVersionUID = 2425920957238921278L;
+   
     private final Navigator navigator = null;
     private final Label authInfoLabel = new Label("");
 
     public Start(Navigator navigator) {
         super(navigator);
 
-        ESPDRequestImpl espdRequest = new ESPDRequestImpl();
+        ESPDRequest espdRequest = new SimpleESPDRequest();
         content.addComponent(new CADetailsForm(espdRequest));
 
         // Display espd request xml button
