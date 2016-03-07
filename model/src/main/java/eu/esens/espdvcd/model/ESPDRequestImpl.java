@@ -6,6 +6,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * JPA implementation of {@link ESPDRequest}.
@@ -30,6 +31,10 @@ public class ESPDRequestImpl implements ESPDRequest {
     private ESPDRequestType espdRequestType;
     
     private CADetails caDetails;
+
+    private List<SelectableCriterion> exclusionCriteria;
+
+    private List<SelectableCriterion> selectionCriteria;
 
     public ESPDRequestImpl(ESPDRequestModelType modelType, ESPDRequestType espdRequestType) {
         super();
@@ -80,5 +85,25 @@ public class ESPDRequestImpl implements ESPDRequest {
     @Override
     public void setCADetails(CADetails cd) {
         this.caDetails = cd;
+    }
+
+    @Override
+    public List<SelectableCriterion> getExclusionCriteria() {
+        return this.exclusionCriteria;
+    }
+
+    @Override
+    public void setExclusionCriteria(List<SelectableCriterion> exclusionCriteria) {
+        this.exclusionCriteria = exclusionCriteria;
+    }
+
+    @Override
+    public List<SelectableCriterion> getSelectionCriteria() {
+        return this.selectionCriteria;
+    }
+
+    @Override
+    public void setSelectionCriteria(List<SelectableCriterion> selectionCriteria) {
+        this.selectionCriteria = selectionCriteria;
     }
 }

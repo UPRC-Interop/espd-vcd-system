@@ -6,6 +6,7 @@ import eu.esens.espdvcd.model.Criteria;
 import eu.esens.espdvcd.model.RequirementGroup;
 import eu.esens.espdvcd.model.Requirement;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
+import eu.esens.espdvcd.model.SelectableCriterion;
 
 import java.util.Iterator;
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
  */
 
 public class RequirementGroupForm extends VerticalLayout {
-    private Criteria parentPojo = null;
+    private SelectableCriterion parentPojo = null;
     private Panel panel = new Panel();
     private VerticalLayout panelContent = new VerticalLayout();
     private RequirementGroup requirementGroupRef = null;
@@ -23,7 +24,7 @@ public class RequirementGroupForm extends VerticalLayout {
     private FormLayout contentLayout = new FormLayout();
     private TextField ID = new TextField("RequirementGroupForm ID");
 
-    public RequirementGroupForm(Criteria parentPojo, RequirementGroup requirementGroup) {
+    public RequirementGroupForm(SelectableCriterion parentPojo, RequirementGroup requirementGroup) {
         this.addComponent(panel);
         this.parentPojo = parentPojo;
         this.requirementGroupRef = requirementGroup;

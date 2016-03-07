@@ -15,7 +15,7 @@ import java.util.Arrays;
 /**
  * Created by ixuz on 2/23/16.
  */
-public class CADetailsForm extends FormLayout {
+public class CADetailsForm extends VerticalLayout {
     private Panel panelIdentifyProcurer;
     private VerticalLayout layoutIdentifyProcurer;
     private Panel panelInformationProcurementProcedure;
@@ -29,6 +29,7 @@ public class CADetailsForm extends FormLayout {
     private TextField procurementProcedureFileReferenceNo;
 
     public CADetailsForm(ESPDRequest espdRequest) {
+        setMargin(true);
         setCaption(null);
         panelIdentifyProcurer = new Panel("Identity of the procurer");
         layoutIdentifyProcurer = new VerticalLayout();

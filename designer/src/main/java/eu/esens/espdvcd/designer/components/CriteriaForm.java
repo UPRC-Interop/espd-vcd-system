@@ -2,9 +2,7 @@ package eu.esens.espdvcd.designer.components;
 
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.*;
-import eu.esens.espdvcd.model.Criteria;
-import eu.esens.espdvcd.model.Requirement;
-import eu.esens.espdvcd.model.RequirementGroup;
+import eu.esens.espdvcd.model.*;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 
 import java.util.ArrayList;
@@ -25,7 +23,8 @@ public class CriteriaForm extends VerticalLayout {
     private TextField name = new TextField("Critera Name");
     private TextField description = new TextField("Critera Description");
 
-    public CriteriaForm(Criteria criteria) {
+    public CriteriaForm(SelectableCriterion criterion) {
+        setMargin(true);
         this.addComponent(panel);
         //panelContent.addComponent(titleLayout);
         panelContent.addComponent(contentLayout);
@@ -40,14 +39,14 @@ public class CriteriaForm extends VerticalLayout {
         panel.setIcon(FontAwesome.CHEVRON_DOWN);
 
         // Bind the this forms fields
-        final BeanFieldGroup<Criteria> criteriaGroup = new BeanFieldGroup<>(Criteria.class);
-        criteriaGroup.setItemDataSource(criteria);
+        final BeanFieldGroup<SelectableCriterion> criteriaGroup = new BeanFieldGroup<>(SelectableCriterion.class);
+        criteriaGroup.setItemDataSource(criterion);
         criteriaGroup.setBuffered(false);
         criteriaGroup.bindMemberFields(this);
 
         // Add a sub form
-        for (RequirementGroup requirementGroup : criteria.getRequirementGroups()) {
-            RequirementGroupForm requirementGroupForm = new RequirementGroupForm(criteria, requirementGroup);
+        for (RequirementGroup requirementGroup : criterion.getRequirementGroups()) {
+            RequirementGroupForm requirementGroupForm = new RequirementGroupForm(criterion, requirementGroup);
             contentLayout.addComponent(requirementGroupForm);
         }
 

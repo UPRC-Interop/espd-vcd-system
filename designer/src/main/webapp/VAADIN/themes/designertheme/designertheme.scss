@@ -22,6 +22,10 @@
     border-radius: 0px;
   }
 
+  .master-mainContent > .v-slot > .v-widget {
+    width: 100%;
+  }
+
   .v-slot-box_info {
     margin: 5px;
     padding: 10px;
