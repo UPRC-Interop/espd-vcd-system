@@ -32,6 +32,8 @@ public class CADetailsForm extends VerticalLayout {
         setMargin(true);
         setSpacing(true);
         setCaption(null);
+        setWidth("100%");
+        setStyleName("caDetailsForm-layout");
         panelIdentifyProcurer = new Panel("Identity of the procurer");
         layoutIdentifyProcurer = new VerticalLayout();
         panelInformationProcurementProcedure = new Panel("Information about the procurement procedure");

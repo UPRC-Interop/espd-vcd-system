@@ -34,6 +34,9 @@ public class ESPDRequestForm extends VerticalLayout {
     public ESPDRequestForm(ESPDRequest espdRequest) {
         this.espdRequest = espdRequest;
 
+        setWidth("100%");
+        setStyleName("espdRequestForm-layout");
+
         pages.add(page1);
         pages.add(page2);
         pages.add(page3);
@@ -62,8 +65,11 @@ public class ESPDRequestForm extends VerticalLayout {
 
         page1.addComponent(new CADetailsForm(espdRequest));
 
-        for (SelectableCriterion criterion : espdRequest.getCriterionList()) {
+        for (SelectableCriterion criterion : espdRequest.getExclusionCriteriaList()) {
             page2.addComponent(new CriterionForm(criterion));
+        }
+        for (SelectableCriterion criterion : espdRequest.getSelectionCriteriaList()) {
+            page3.addComponent(new CriterionForm(criterion));
         }
 
         showPage(currentPageIndex);
@@ -78,6 +84,18 @@ public class ESPDRequestForm extends VerticalLayout {
                 page.setVisible(false);
             }
         }
+        updateButtonList();
+    }
+
+    private void updateButtonList() {
+        next.setEnabled((currentPageIndex+1 <= pages.size()-1));
+        next.setVisible((currentPageIndex + 1 <= pages.size() - 1));
+        previous.setEnabled((currentPageIndex-1 >= 0));
+        previous.setVisible((currentPageIndex-1 >= 0));
+        finish.setEnabled(!(currentPageIndex+1 <= pages.size()-1));
+        finish.setVisible(!(currentPageIndex + 1 <= pages.size() - 1));
+        printFullModelData.setEnabled(!(currentPageIndex+1 <= pages.size()-1));
+        printFullModelData.setVisible(!(currentPageIndex + 1 <= pages.size() - 1));
     }
 
     /**
@@ -141,7 +159,7 @@ public class ESPDRequestForm extends VerticalLayout {
         System.out.println("EspdRequest().CADetails().getProcurementProcedureTitle: " + espdRequest.getCADetails().getProcurementProcedureTitle());
         System.out.println("EspdRequest().CADetails().getProcurementProcedureDesc: " + espdRequest.getCADetails().getProcurementProcedureDesc());
         System.out.println("EspdRequest().CADetails().getProcurementProcedureFileReferenceNo: " + espdRequest.getCADetails().getProcurementProcedureFileReferenceNo());
-        for (SelectableCriterion criterion : espdRequest.getCriterionList()) {
+        for (SelectableCriterion criterion : espdRequest.getFullCriterionList()) {
             System.out.println("EspdRequest().Criterion().ID: " + criterion.getID());
             System.out.println("EspdRequest().Criterion().TypeCode: " + criterion.getTypeCode());
             System.out.println("EspdRequest().Criterion().Name: " + criterion.getName());

@@ -22,12 +22,14 @@ public class RequirementGroupForm extends VerticalLayout {
 
     public RequirementGroupForm(RequirementGroup requirementGroup) {
         setMargin(true);
+        setStyleName("requirementGroupForm-layout");
         addComponent(panel);
         panel.setContent(panelContent);
 
         panelContent.addComponent(ID);
 
         panelContent.setMargin(true);
+        panelContent.setStyleName("requirementGroupForm-panelContent");
 
         panel.setStyleName("requirementGroupForm-panel");
         panel.setCaption("Requirement group");

@@ -23,6 +23,7 @@ public class CriterionForm extends VerticalLayout {
 
     public CriterionForm(SelectableCriterion criterion) {
         setMargin(true);
+        setStyleName("criterionForm-layout");
         this.addComponent(panel);
         panelContent.addComponent(ID);
         panelContent.addComponent(typeCode);
@@ -30,6 +31,7 @@ public class CriterionForm extends VerticalLayout {
         panelContent.addComponent(description);
 
         panelContent.setMargin(true);
+        panelContent.setStyleName("criterionForm-panelContent");
 
         panel.setContent(panelContent);
         panel.setCaption("Criteria");

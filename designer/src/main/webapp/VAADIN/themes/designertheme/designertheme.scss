@@ -216,6 +216,7 @@
     box-shadow: inset 0px 0px 0px 0px #000;
     border: 0px solid #569AC4;
     color: #e3e3e3;
+    font-weight: bold;
   }
 
   .espdRequestForm-previous {
@@ -246,5 +247,27 @@
     @extend .espdRequestForm-formButton;
     background-color: #D8A42F;
     border: 0px solid #D8A42F;
+  }
+
+  .start-pageContent {
+    width: 100%;
+  }
+
+  .espdRequestForm-layout {
+    width: 100%;
+  }
+
+  .caDetailsForm-layout,
+  .caDetailsForm-layout > .v-slot,
+  .caDetailsForm-layout > .v-slot > .v-panel,
+  .criterionForm-layout,
+  .criterionForm-layout > .v-slot,
+  .criterionForm-layout > .v-slot > .v-panel,
+  .criterionForm-panelContent,
+  .legislationReferenceForm-panel,
+  .requirementGroupForm-panel,
+  .requirementGroupForm-panelContent,
+  .requirementForm-panel {
+    width: 100%;
   }
 }

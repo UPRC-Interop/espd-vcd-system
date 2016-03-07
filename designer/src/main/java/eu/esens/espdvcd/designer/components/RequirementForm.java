@@ -21,6 +21,7 @@ public class RequirementForm extends VerticalLayout {
 
     public RequirementForm(Requirement requirement) {
         setMargin(true);
+        setStyleName("requirementForm-layout");
         this.addComponent(panel);
         panelContent.addComponent(ID);
         panelContent.addComponent(responseDataType);

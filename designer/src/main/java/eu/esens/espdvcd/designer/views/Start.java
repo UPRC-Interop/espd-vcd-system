@@ -32,6 +32,9 @@ public class Start extends Master {
         mainContent.addComponent(pagePanel);
         pagePanel.setSizeFull();
 
+        pageContent.setWidth("100%");
+        pageContent.setSizeFull();
+        pageContent.setStyleName("start-pageContent");
         boundselect(pageContent);
     }
 
