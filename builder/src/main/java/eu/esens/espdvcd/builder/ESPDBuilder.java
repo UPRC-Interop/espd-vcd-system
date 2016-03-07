@@ -2,7 +2,7 @@ package eu.esens.espdvcd.builder;
 
 import eu.esens.espdvcd.model.CADetails;
 import eu.esens.espdvcd.model.ESPDRequest;
-import eu.esens.espdvcd.model.ESPDRequestImpl;
+import eu.esens.espdvcd.model.SimpleESPDRequest;
 import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
 import grow.names.specification.ubl.schema.xsd.espdrequest_1.ObjectFactory;
 import java.io.InputStream;
@@ -37,7 +37,7 @@ public class ESPDBuilder {
         ESPDRequestType reqType = read(xmlESPD);
          
         // Create the Model Object
-        ESPDRequest req = new ESPDRequestImpl();
+        ESPDRequest req = new SimpleESPDRequest();
         CADetails cd = new CADetails();
         req.setCADetails(cd);
         

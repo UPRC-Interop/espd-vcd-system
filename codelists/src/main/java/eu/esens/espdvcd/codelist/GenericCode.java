@@ -8,12 +8,8 @@ package eu.esens.espdvcd.codelist;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Maps;
-import java.util.List;
-import java.util.Map;
-import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
@@ -32,28 +28,38 @@ import org.oasis_open.docs.codelist.ns.genericode._1.SimpleCodeList;
  */
 public class GenericCode {
 
-    protected JAXBElement<CodeListDocument> GC;
+    protected final JAXBElement<CodeListDocument> GC;
+    protected final BiMap<String, String> clBiMap;
 
-    protected final BiMap<String,String> clBiMap;
-    
     protected GenericCode(String theCodelist) {
 
-         try {
+        XMLStreamReader xsr = null;
+        try {
             JAXBContext jaxbContext = JAXBContext.newInstance(CodeListDocument.class);
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
             XMLInputFactory fac = XMLInputFactory.newFactory();
-            XMLStreamReader xsr = fac.createXMLStreamReader(CodeListDocument.class.getResourceAsStream(theCodelist));
+            xsr = fac.createXMLStreamReader(CodeListDocument.class.getResourceAsStream(theCodelist));
+
             GC = jaxbUnmarshaller.unmarshal(xsr, CodeListDocument.class);
-            
-            //create the BiMap 
+
+            //create the BiMap that holds the default id <-> value mapping 
             clBiMap = createBiMap();
 
         } catch (JAXBException | XMLStreamException ex) {
             Logger.getLogger(GenericCode.class.getName()).log(Level.SEVERE, null, ex);
-            throw new RuntimeException("Error loading codelist: "+theCodelist);
+            throw new RuntimeException("Error loading codelist: " + theCodelist);
+        } finally {
+            if (xsr != null) {
+                try {
+                    xsr.close();
+                } catch (XMLStreamException ex) {
+                    Logger.getLogger(GenericCode.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
         }
     }
-    
+
     protected final String getRowSimpleValueWithCode(String id, String IdValue, String dataId) {
 
         SimpleCodeList sgc = GC.getValue().getSimpleCodeList();
@@ -79,9 +85,8 @@ public class GenericCode {
         return clBiMap.get(id);
     }
 
-    private final BiMap<String, String> createBiMap()
-    {
-        BiMap<String,String> biMap = HashBiMap.create();
+    private BiMap<String, String> createBiMap() {
+        BiMap<String, String> biMap = HashBiMap.create();
 
         SimpleCodeList sgc = GC.getValue().getSimpleCodeList();
         sgc.getRow().stream()
@@ -91,14 +96,15 @@ public class GenericCode {
                     String id = r.getValue().stream()
                             .filter(c -> ((Column) c.getColumnRef()).getId().equals("code"))
                             .findAny().get().getSimpleValue().getValue();
-                    
-                    String value =  r.getValue().stream()
+
+                    String value = r.getValue().stream()
                             .filter(c -> ((Column) c.getColumnRef()).getId().equals("name"))
                             .findAny().get().getSimpleValue().getValue();
                     biMap.put(id, value);
-        });
+                });
         return biMap;
     }
+
     public final BiMap<String, String> getBiMap() {
         return Maps.unmodifiableBiMap(clBiMap);
     }

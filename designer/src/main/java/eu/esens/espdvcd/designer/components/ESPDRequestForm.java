@@ -51,12 +51,8 @@ public class ESPDRequestForm extends VerticalLayout {
         CADetailsForm caDetailsForm = new CADetailsForm(espdRequest);
         page1.addComponent(caDetailsForm);
 
-        for (SelectableCriterion criterion : espdRequest.getExclusionCriteria()) {
+        for (SelectableCriterion criterion : espdRequest.getCriterionList()) {
             page2.addComponent(new CriteriaForm(criterion));
-        }
-
-        for (SelectableCriterion criterion : espdRequest.getSelectionCriteria()) {
-            page3.addComponent(new CriteriaForm(criterion));
         }
     }
 

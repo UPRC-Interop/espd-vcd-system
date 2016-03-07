@@ -17,6 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Start extends Master {
+
+    private static final long serialVersionUID = 2425920957238921278L;
+
     private final Label authInfoLabel = new Label("");
     private Panel pagePanel = new Panel();
     private VerticalLayout pageContent = new VerticalLayout();
@@ -39,14 +42,14 @@ public class Start extends Master {
         List<SelectableCriterion> selectionCriteria = new ArrayList<SelectableCriterion>();
 
         {
-            ArrayList<Requirement> requirements1 = new ArrayList<>();
+            List<Requirement> requirements1 = new ArrayList<>();
             requirements1.add(new Requirement("7d35fb7c-da5b-4830-b598-4f347a04dceb", "DESCRIPTION", "Reason"));
 
-            ArrayList<Requirement> requirements2 = new ArrayList<>();
+            List<Requirement> requirements2 = new ArrayList<>();
             requirements2.add(new Requirement("974c8196-9d1c-419c-9ca9-45bb9f5fd59a", "INDICATOR", "Your answer?"));
             requirements2.add(new Requirement("ecf40999-7b64-4e10-b960-7f8ff8674cf6", "DATE", "Date of conviction"));
 
-            ArrayList<RequirementGroup> requirementGroups1 = new ArrayList<>();
+            List<RequirementGroup> requirementGroups1 = new ArrayList<>();
             requirementGroups1.add(new RequirementGroup("7c637c0c-7703-4389-ba52-02997a055bd7", requirements1));
             requirementGroups1.add(new RequirementGroup("41dd2e9b-1bfd-44c7-93ee-56bd74a4334b", requirements2));
 
@@ -62,14 +65,14 @@ public class Start extends Master {
             exclusionCriteria.add(criterion);
         }
         {
-            ArrayList<Requirement> requirements1 = new ArrayList<>();
+            List<Requirement> requirements1 = new ArrayList<>();
             requirements1.add(new Requirement("7d35fb7c-da5b-4830-b598-4f347a04dceb", "DESCRIPTION", "Reason"));
 
-            ArrayList<Requirement> requirements2 = new ArrayList<>();
+            List<Requirement> requirements2 = new ArrayList<>();
             requirements2.add(new Requirement("974c8196-9d1c-419c-9ca9-45bb9f5fd59a", "INDICATOR", "Your answer?"));
             requirements2.add(new Requirement("ecf40999-7b64-4e10-b960-7f8ff8674cf6", "DATE", "Date of conviction"));
 
-            ArrayList<RequirementGroup> requirementGroups1 = new ArrayList<>();
+            List<RequirementGroup> requirementGroups1 = new ArrayList<>();
             requirementGroups1.add(new RequirementGroup("7c637c0c-7703-4389-ba52-02997a055bd7", requirements1));
             requirementGroups1.add(new RequirementGroup("41dd2e9b-1bfd-44c7-93ee-56bd74a4334b", requirements2));
 
@@ -92,18 +95,22 @@ public class Start extends Master {
         caDetails.setProcurementProcedureDesc("ProcurementProcedureDescription");
         caDetails.setProcurementProcedureFileReferenceNo("ProcurementProcedureFileReferenceNumber");
 
-        ESPDRequestImpl espdRequest = new ESPDRequestImpl();
+        ESPDRequest espdRequest = new SimpleESPDRequest();
         espdRequest.setCADetails(caDetails);
-        espdRequest.setExclusionCriteria(exclusionCriteria);
-        espdRequest.setSelectionCriteria(selectionCriteria);
+        espdRequest.setCriterionList(exclusionCriteria);
 
         // Cenerate the espd request form base on the provided espd request model
         ESPDRequestForm espdRequestForm = new ESPDRequestForm(espdRequest);
         rootLayout.addComponent(espdRequestForm);
 
-        // Generate the critera form based on the provided Bean/PROJ
-        //CriteriaForm criteriaForm = new CriteriaForm(criteria);
-        //mainContent.addComponent(criteriaForm);
+        // Display espd request xml button
+        rootLayout.addComponent(new Button("Print ESPD Request XML!",
+                (Button.ClickEvent event) -> {
+                    ESPDBuilder espdBuilder = new ESPDBuilder();
+                    String xml = espdBuilder.createXMLasString(espdRequest);
+                    System.out.println("Xml: " + xml);
+                }
+        ));
 
         // Button that prints the values of the Bean/PROJ
         rootLayout.addComponent(new Button("Save", (ClickEvent event) -> {

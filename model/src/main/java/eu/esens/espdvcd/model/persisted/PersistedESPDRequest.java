@@ -1,7 +1,11 @@
-package eu.esens.espdvcd.model;
+package eu.esens.espdvcd.model.persisted;
 
+import eu.esens.espdvcd.model.CADetails;
+import eu.esens.espdvcd.model.ESPDRequest;
+import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.types.ESPDRequestModelType;
 import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
+import java.util.List;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -16,7 +20,9 @@ import java.util.List;
 @Entity
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Table(schema = "espd_vcd", name = "espd_requests")
-public class ESPDRequestImpl implements ESPDRequest {
+public class PersistedESPDRequest implements ESPDRequest {
+
+    private static final long serialVersionUID = 880277112847573817L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -32,23 +38,19 @@ public class ESPDRequestImpl implements ESPDRequest {
     
     private CADetails caDetails;
 
-    private List<SelectableCriterion> exclusionCriteria;
-
-    private List<SelectableCriterion> selectionCriteria;
-
-    public ESPDRequestImpl(ESPDRequestModelType modelType, ESPDRequestType espdRequestType) {
+    public PersistedESPDRequest(ESPDRequestModelType modelType, ESPDRequestType espdRequestType) {
         super();
         this.modelType = modelType;
         this.espdRequestType = espdRequestType;
     }
 
-    public ESPDRequestImpl(ESPDRequestModelType modelType) {
+    public PersistedESPDRequest(ESPDRequestModelType modelType) {
         super();
         this.modelType = modelType;
         this.espdRequestType = new ESPDRequestType();
     }
 
-    public ESPDRequestImpl() {
+    public PersistedESPDRequest() {
         this.espdRequestType = new ESPDRequestType();
     }
 
@@ -88,22 +90,12 @@ public class ESPDRequestImpl implements ESPDRequest {
     }
 
     @Override
-    public List<SelectableCriterion> getExclusionCriteria() {
-        return this.exclusionCriteria;
+    public List<SelectableCriterion> getCriterionList() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void setExclusionCriteria(List<SelectableCriterion> exclusionCriteria) {
-        this.exclusionCriteria = exclusionCriteria;
-    }
-
-    @Override
-    public List<SelectableCriterion> getSelectionCriteria() {
-        return this.selectionCriteria;
-    }
-
-    @Override
-    public void setSelectionCriteria(List<SelectableCriterion> selectionCriteria) {
-        this.selectionCriteria = selectionCriteria;
+    public void setCriterionList(List<SelectableCriterion> criterionList) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

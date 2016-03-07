@@ -1,10 +1,14 @@
 package eu.esens.espdvcd.model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Jerry Dimitriou <jerouris@unipi.gr>
  */
-public class CADetails {
+public class CADetails implements Serializable{
+
+    private static final long serialVersionUID = -2251052431953226768L;
     
     private String caOfficialName;
     private String procurementProcedureTitle;
@@ -53,5 +57,5 @@ public class CADetails {
     public void setCACountry(String caCountry) {
         this.caCountry = caCountry;
     }
-    
+   
 }
