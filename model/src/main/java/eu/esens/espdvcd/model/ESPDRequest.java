@@ -1,8 +1,8 @@
 package eu.esens.espdvcd.model;
 
 import eu.esens.espdvcd.model.types.ESPDRequestModelType;
-
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * This interface is in charge to provide {@link ESPDRequest} data.
@@ -13,6 +13,7 @@ public interface ESPDRequest extends Serializable {
     /**
      * @return The ID of the {@link ESPDRequest}.
      */
+    
     Long getId();
 
     /**
@@ -20,11 +21,16 @@ public interface ESPDRequest extends Serializable {
      *
      * @return the model type
      */
-    ESPDRequestModelType getModelType();
+    public ESPDRequestModelType getModelType();
 
-    CADetails getCADetails();
+    public CADetails getCADetails();
     
+    public List<SelectableCriterion> getCriterionList(); 
+    
+    public void setCriterionList(List<SelectableCriterion> criterionList);        
+  
     void setCADetails(CADetails cd);          
+
     /**
      * @param modelType
      */
