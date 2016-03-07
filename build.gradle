@@ -50,10 +50,7 @@ subprojects { project ->
 
     repositories {
 //        mavenLocal()
-//        mavenCentral()
-        maven  {
-            url "http://repo1.maven.org/maven2"
-        }
+        mavenCentral()
 }
 }
 // global definition of compile dependency
@@ -66,8 +63,12 @@ configure(subprojects
         compile libraries.slf4j_api
         compile libraries.log4j_slf4j_impl
         compile libraries.log4j_core
-        compile libraries.log4j_api
+        compile libraries.log4j_api       
     }
+    dependencies {
+            compile 'com.google.guava:guava:14.0'
+    }
+    
 }
 
 // global definition of testCompile dependency

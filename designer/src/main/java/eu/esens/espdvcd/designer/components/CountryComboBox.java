@@ -7,7 +7,7 @@ package eu.esens.espdvcd.designer.components;
 import com.vaadin.data.util.IndexedContainer;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.ComboBox;
-import eu.esens.espdvcd.codelist.CountryCodeGC;
+import eu.esens.espdvcd.codelist.Codelists;
 
 import java.util.*;
 import java.io.File;
@@ -33,7 +33,7 @@ public class CountryComboBox extends ComboBox {
             String country = (String)ic.getIdByIndex(i);
             String isoCode = "";
             try {
-                isoCode = CountryCodeGC.getISOCode(country.toUpperCase());
+                isoCode = Codelists.CountryIdentification.getIdForData(country.toUpperCase());
             } catch (IllegalArgumentException e) {
                 isoCode = "null";
             }
