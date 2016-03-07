@@ -1,10 +1,7 @@
 package eu.esens.espdvcd.designer.views;
 
 import com.vaadin.navigator.Navigator;
-import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Layout;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +10,6 @@ import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 import eu.esens.espdvcd.designer.components.ESPDRequestForm;
 import eu.esens.espdvcd.model.*;
-import eu.esens.espdvcd.designer.components.CriteriaForm;
-import java.util.List;
 
 /**
  * Created by ixuz on 2/23/16.

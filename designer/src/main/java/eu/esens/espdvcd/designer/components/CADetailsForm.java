@@ -30,6 +30,7 @@ public class CADetailsForm extends VerticalLayout {
 
     public CADetailsForm(ESPDRequest espdRequest) {
         setMargin(true);
+        setSpacing(true);
         setCaption(null);
         panelIdentifyProcurer = new Panel("Identity of the procurer");
         layoutIdentifyProcurer = new VerticalLayout();
@@ -60,17 +61,11 @@ public class CADetailsForm extends VerticalLayout {
         procurementProcedureDesc.setCaption("Short Description:");
         procurementProcedureFileReferenceNo.setCaption("File reference number attributed by the contracting authority or contracting entity (if applicable):");
 
-        CADetails caDetails = new CADetails();
-        caDetails.setCACountry("Sweden");
-        caDetails.setCAOfficialName("");
-        caDetails.setProcurementProcedureTitle("");
-        caDetails.setProcurementProcedureDesc("");
-        caDetails.setProcurementProcedureFileReferenceNo("");
+        CADetails caDetails = espdRequest.getCADetails();
 
         final BeanFieldGroup<CADetails> binder = new BeanFieldGroup<CADetails>(CADetails.class);
         binder.bindMemberFields(this);
         binder.setItemDataSource(caDetails);
-        espdRequest.setCADetails(caDetails);
         binder.setBuffered(false);
     }
 }

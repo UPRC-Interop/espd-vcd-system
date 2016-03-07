@@ -90,7 +90,7 @@ public class Start extends Master {
 
         CADetails caDetails = new CADetails();
         caDetails.setCAOfficialName("CAOfficialName");
-        caDetails.setCACountry("SE");
+        caDetails.setCACountry("Sweden");
         caDetails.setProcurementProcedureTitle("ProcurementProcedureTitle");
         caDetails.setProcurementProcedureDesc("ProcurementProcedureDescription");
         caDetails.setProcurementProcedureFileReferenceNo("ProcurementProcedureFileReferenceNumber");
@@ -102,37 +102,6 @@ public class Start extends Master {
         // Cenerate the espd request form base on the provided espd request model
         ESPDRequestForm espdRequestForm = new ESPDRequestForm(espdRequest);
         rootLayout.addComponent(espdRequestForm);
-
-        // Display espd request xml button
-        rootLayout.addComponent(new Button("Print ESPD Request XML!",
-                (Button.ClickEvent event) -> {
-                    ESPDBuilder espdBuilder = new ESPDBuilder();
-                    String xml = espdBuilder.createXMLasString(espdRequest);
-                    System.out.println("Xml: " + xml);
-                }
-        ));
-
-        // Button that prints the values of the Bean/PROJ
-        rootLayout.addComponent(new Button("Save", (ClickEvent event) -> {
-
-            System.out.println("EspdRequest().CADetails().CACountry: " + espdRequest.getCADetails().getCACountry());
-            System.out.println("EspdRequest().CADetails().CAOfficialName: " + espdRequest.getCADetails().getCAOfficialName());
-            System.out.println("EspdRequest().CADetails().getProcurementProcedureTitle: " + espdRequest.getCADetails().getProcurementProcedureTitle());
-            System.out.println("EspdRequest().CADetails().getProcurementProcedureDesc: " + espdRequest.getCADetails().getProcurementProcedureDesc());
-            System.out.println("EspdRequest().CADetails().getProcurementProcedureFileReferenceNo: " + espdRequest.getCADetails().getProcurementProcedureFileReferenceNo());
-            /*System.out.println("Criteria().ID: " + criteria.getID());
-            System.out.println("Criteria().TypeCode: " + criteria.getTypeCode());
-            System.out.println("Criteria().Name: " + criteria.getName());
-            System.out.println("Criteria().Description: " + criteria.getDescription());
-            for (RequirementGroup requirementGroup : criteria.getRequirementGroups()) {
-                System.out.println("Criteria().RequirementGroup.ID: " + requirementGroup.getID());
-                for (Requirement requirement : requirementGroup.getRequirements()) {
-                    System.out.println("Criteria().RequirementGroup().Requirement().ID: " + requirement.getID());
-                    System.out.println("Criteria().RequirementGroup().Requirement().Description: " + requirement.getDescription());
-                    System.out.println("Criteria().RequirementGroup().Requirement().ResponseDataType: " + requirement.getResponseDataType());
-                }
-            }*/
-        }));
     }
 
     @Override

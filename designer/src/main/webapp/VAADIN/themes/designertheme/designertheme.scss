@@ -18,6 +18,22 @@
 
   }
 
+  .v-margin-top {
+    padding-top: 16px;
+  }
+
+  .v-margin-right {
+    padding-right: 15px;
+  }
+
+  .v-margin-bottom {
+    padding-bottom: 16px;
+  }
+
+  .v-margin-left {
+    padding-left: 15px;
+  }
+
   .v-widget {
     border-radius: 0px;
   }
@@ -175,7 +191,11 @@
     border: 0px solid #B756C4;
   }
 
-  .FontAwesome {
+  .v-button-navigatorButtonDark > .v-button-wrap > .FontAwesome {
+    width: 30px;
+  }
+
+  .v-button-navigatorButtonLight > .v-button-wrap > .FontAwesome {
     width: 30px;
   }
 
@@ -188,5 +208,43 @@
   tbody > .v-formlayout-firstrow > .v-formlayout-errorcell,
   tbody > .v-formlayout-firstrow > .v-formlayout-contentcell {
     padding-top: 0px !important;
+  }
+
+  .espdRequestForm-formButton {
+    background-image: none;
+    background-color: #569AC4;
+    box-shadow: inset 0px 0px 0px 0px #000;
+    border: 0px solid #569AC4;
+    color: #e3e3e3;
+  }
+
+  .espdRequestForm-previous {
+    @extend .espdRequestForm-formButton;
+    background-color: #569AC4;
+    border: 0px solid #569AC4;
+  }
+
+  .espdRequestForm-cancel {
+    @extend .espdRequestForm-formButton;
+    background-color: #C94747;
+    border: 0px solid #C94747;
+  }
+
+  .espdRequestForm-next {
+    @extend .espdRequestForm-formButton;
+    background-color: #36AB2E;
+    border: 0px solid #36AB2E;
+  }
+
+  .espdRequestForm-finish {
+    @extend .espdRequestForm-formButton;
+    background-color: #6C56C4;
+    border: 0px solid #6C56C4;
+  }
+
+  .espdRequestForm-printFullModelData {
+    @extend .espdRequestForm-formButton;
+    background-color: #D8A42F;
+    border: 0px solid #D8A42F;
   }
 }
