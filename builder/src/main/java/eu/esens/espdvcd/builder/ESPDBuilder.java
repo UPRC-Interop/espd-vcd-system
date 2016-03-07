@@ -1,14 +1,16 @@
 package eu.esens.espdvcd.builder;
 
+import com.sun.javafx.scene.control.SelectedCellsMap;
 import eu.esens.espdvcd.model.CADetails;
 import eu.esens.espdvcd.model.ESPDRequest;
-import eu.esens.espdvcd.model.ESPDRequestImpl;
+import eu.esens.espdvcd.model.persisted.PersistedESPDRequest;
+import eu.esens.espdvcd.model.SelectableCriterion;
 import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
 import grow.names.specification.ubl.schema.xsd.espdrequest_1.ObjectFactory;
 import java.io.InputStream;
 import java.io.StringWriter;
+import java.util.List;
 import javax.xml.bind.JAXB;
-import javax.xml.bind.JAXBElement;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.AddressType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.AttachmentType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ContractingPartyType;
@@ -30,38 +32,39 @@ import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.NameType
  * @author Jerry Dimitriou <jerouris@unipi.gr>
  */
 public class ESPDBuilder {
-    
+
     public ESPDRequest createFromXML(InputStream xmlESPD) throws Exception {
-         
+
         // Check and read the file in the JAXB Object
         ESPDRequestType reqType = read(xmlESPD);
-         
+
         // Create the Model Object
-        ESPDRequest req = new ESPDRequestImpl();
+        ESPDRequest req = new PersistedESPDRequest();
         CADetails cd = new CADetails();
         req.setCADetails(cd);
-        
+
         if (!reqType.getContractingParty()
                 .getParty().getPartyName().isEmpty()) {
-                    cd.setCAOfficialName(reqType.getContractingParty()
-                .getParty().getPartyName()
-                .get(0).getName().getValue());           
-        } else throw new Exception("Cannot find party name");
+            cd.setCAOfficialName(reqType.getContractingParty()
+                    .getParty().getPartyName()
+                    .get(0).getName().getValue());
+        } else {
+            throw new Exception("Cannot find party name");
+        }
 
-       
         cd.setCACountry(reqType.getContractingParty()
                 .getParty().getPostalAddress().getCountry().getIdentificationCode().getValue());
-        
+
         //TODO: Need to add null checks here
         cd.setProcurementProcedureFileReferenceNo(reqType.getContractFolderID().getValue());
         cd.setProcurementProcedureTitle(reqType.getAdditionalDocumentReference().get(0).getAttachment().getExternalReference().getFileName().getValue());
-        cd.setProcurementProcedureDesc(reqType.getAdditionalDocumentReference().get(0).getAttachment().getExternalReference().getDescription().get(0).getValue());                
+        cd.setProcurementProcedureDesc(reqType.getAdditionalDocumentReference().get(0).getAttachment().getExternalReference().getDescription().get(0).getValue());
         return req;
-         
+
     }
-    
+
     public ESPDRequestType createXML(ESPDRequest req) {
-        
+
         // CA Details First
         ESPDRequestType reqType = new ESPDRequestType();
         reqType.setContractingParty(new ContractingPartyType());
@@ -69,7 +72,7 @@ public class ESPDBuilder {
         PartyNameType pt = new PartyNameType();
         pt.setName(new NameType());
         pt.getName().setValue(req.getCADetails().getCAOfficialName());
-        
+
         reqType.getContractingParty().getParty().setPostalAddress(new AddressType());
         reqType.getContractingParty().getParty().getPostalAddress().setCountry(new CountryType());
         reqType.getContractingParty().getParty().getPostalAddress().getCountry().setIdentificationCode(new IdentificationCodeType());
@@ -77,11 +80,10 @@ public class ESPDBuilder {
         reqType.getContractingParty().getParty().getPartyName().add(pt);
 
         if (req.getCADetails().getProcurementProcedureFileReferenceNo() != null) {
-           reqType.setContractFolderID(new ContractFolderIDType());
-           reqType.getContractFolderID().setValue(req.getCADetails().getProcurementProcedureFileReferenceNo());
+            reqType.setContractFolderID(new ContractFolderIDType());
+            reqType.getContractFolderID().setValue(req.getCADetails().getProcurementProcedureFileReferenceNo());
         }
-        
-                
+
         //Adding the additional document reference
         if (req.getCADetails().getProcurementProcedureTitle() != null) {
             DocumentReferenceType dr = new DocumentReferenceType();
@@ -101,32 +103,35 @@ public class ESPDBuilder {
             dt.setValue(req.getCADetails().getProcurementProcedureDesc());
             dr.getAttachment().getExternalReference().getDescription().add(dt);
 
-           reqType.getAdditionalDocumentReference().add(dr);
-          
+            reqType.getAdditionalDocumentReference().add(dr);
+
         }
         // TODO: Criterias, Requirement Groups, Requirements
-        
-        
+
         // TODO: Evidences
-        
         // Create the JAXB Element
-        
-         return reqType;
+        return reqType;
     }
+
     public String createXMLasString(ESPDRequest req) {
         StringWriter result = new StringWriter();
         ObjectFactory of = new ObjectFactory();
-        
-        //Return the Object
 
+        //Return the Object
         JAXB.marshal(of.createESPDRequest(createXML(req)), result);
         return result.toString();
     }
-     
+
+    public List<SelectableCriterion> getCriteriaList() {
+        CriteriaExtractor cr = new ESPDCriteriaExtractor();
+        return cr.getFullList();
+    }
+
     private ESPDRequestType read(InputStream is) {
         // Start with the convience methods provided by JAXB. If there are
         // perfomance issues we will swicth back to the JAXB API Usage
         ESPDRequestType er = JAXB.unmarshal(is, ESPDRequestType.class);
         return er;
-    }    
+    }
+    
 }
