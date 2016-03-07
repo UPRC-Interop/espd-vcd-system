@@ -89,12 +89,27 @@ public class PersistedESPDRequest implements ESPDRequest {
     }
 
     @Override
-    public List<SelectableCriterion> getCriterionList() {
+    public List<SelectableCriterion> getFullCriterionList() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void setCriterionList(List<SelectableCriterion> criterionList) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<SelectableCriterion> getSelectionCriteriaList() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<SelectableCriterion> getExclusionCriteriaList() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<SelectableCriterion> getEORelatedCriteriaList() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

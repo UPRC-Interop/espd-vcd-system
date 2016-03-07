@@ -30,4 +30,19 @@ public class SimpleESPDResponse extends PersistedESPDRequest implements ESPDResp
     public ESPDResponseType getEspdResponseType() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public List<SelectableCriterion> getSelectionCriteriaList() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<SelectableCriterion> getExclusionCriteriaList() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<SelectableCriterion> getEORelatedCriteriaList() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
