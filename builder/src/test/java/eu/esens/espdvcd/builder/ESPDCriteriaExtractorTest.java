@@ -6,7 +6,11 @@
 package eu.esens.espdvcd.builder;
 
 import eu.esens.espdvcd.model.RequirementGroup;
+import eu.esens.espdvcd.model.SimpleESPDRequest;
+import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
+import javax.xml.bind.JAXB;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -26,6 +30,7 @@ public class ESPDCriteriaExtractorTest {
     /**
      * Test of getFullList method, of class ESPDCriteriaExtractor.
      */
+    @Ignore
     @Test
     public void testGetFullList() {
         ESPDCriteriaExtractor ce = new ESPDCriteriaExtractor();
@@ -55,7 +60,17 @@ public class ESPDCriteriaExtractorTest {
         });
         final int innerDepth = depth+1;
         rg.getRequirementGroups().forEach(rg1 -> traverseRequirementGroup(rg1, innerDepth));
-
     }
-
+    
+    @Test
+    public void loadTransformAndDisplayTest() {
+        
+        ESPDRequestType reqType = JAXB.unmarshal(ESPDCriteriaExtractorTest.class.getResourceAsStream("/espd-request.xml"),ESPDRequestType.class);
+        JAXB.marshal(reqType, System.out);
+        SimpleESPDRequest req = ModelFactory.extractESPDRequest(reqType);
+        
+        ESPDRequestType req2Type = SchemaFactory.extractESPDRequestType(req);
+        JAXB.marshal(req2Type, System.out);
+        
+    }
 }
