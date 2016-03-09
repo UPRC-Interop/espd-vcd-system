@@ -139,9 +139,9 @@ public interface SchemaFactory {
     
         ESPDRequestType reqType = new ESPDRequestType();
         reqType.getAdditionalDocumentReference().add(extractCADetailsDocumentReferece(req.getCADetails()));
-//        reqType.setContractingParty(extractContractingPartyType(req.getCADetails()));
+        reqType.setContractingParty(extractContractingPartyType(req.getCADetails()));
         reqType.getCriterion().addAll(req.getFullCriterionList().stream()
-   //           .filter(cr -> cr.isSelected())
+                .filter(cr -> cr.isSelected())
                 .map(cr -> extractCriterion(cr))
                 .collect(Collectors.toList()));
         return reqType;
