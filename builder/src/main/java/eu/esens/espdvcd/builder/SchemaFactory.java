@@ -20,6 +20,7 @@ import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.Docu
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ExternalReferenceType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PartyNameType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PartyType;
+import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ContractFolderIDType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.DescriptionType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.DocumentTypeCodeType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.FileNameType;
@@ -138,6 +139,12 @@ public interface SchemaFactory {
     public static ESPDRequestType extractESPDRequestType(ESPDRequest req) {
     
         ESPDRequestType reqType = new ESPDRequestType();
+        if (req.getCADetails().getProcurementProcedureFileReferenceNo() != null) {
+            reqType.setContractFolderID(new ContractFolderIDType());
+            reqType.getContractFolderID().setSchemeAgencyID("TeD");                   
+            reqType.getContractFolderID().setValue(req.getCADetails().getProcurementProcedureFileReferenceNo());
+        }
+        
         reqType.getAdditionalDocumentReference().add(extractCADetailsDocumentReferece(req.getCADetails()));
         reqType.setContractingParty(extractContractingPartyType(req.getCADetails()));
         reqType.getCriterion().addAll(req.getFullCriterionList().stream()
