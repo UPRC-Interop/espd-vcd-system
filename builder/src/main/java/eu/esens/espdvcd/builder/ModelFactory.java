@@ -72,6 +72,7 @@ public interface ModelFactory {
                 .collect(Collectors.toList());
                 
         SelectableCriterion selCr = new SelectableCriterion(id, typeCode, name, desc, lr, rgList);
+        selCr.setSelected(true);
         return selCr;
     }
     
