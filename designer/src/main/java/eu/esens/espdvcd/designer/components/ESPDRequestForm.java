@@ -5,6 +5,7 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.VerticalLayout;
 import eu.esens.espdvcd.builder.ESPDBuilder;
+import eu.esens.espdvcd.designer.Designer;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.Requirement;
 import eu.esens.espdvcd.model.RequirementGroup;

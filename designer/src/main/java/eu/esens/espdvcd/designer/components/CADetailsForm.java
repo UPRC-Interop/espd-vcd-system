@@ -59,9 +59,13 @@ public class CADetailsForm extends VerticalLayout {
         layoutInformationProcurementProcedure.setMargin(true);
         caCountry.setCaption("Country:");
         caOfficialName.setCaption("Official Name:");
+        caOfficialName.setNullRepresentation(" ");
         procurementProcedureTitle.setCaption("Title:");
+        procurementProcedureTitle.setNullRepresentation(" ");
         procurementProcedureDesc.setCaption("Short Description:");
+        procurementProcedureDesc.setNullRepresentation(" ");
         procurementProcedureFileReferenceNo.setCaption("File reference number attributed by the contracting authority or contracting entity (if applicable):");
+        procurementProcedureFileReferenceNo.setNullRepresentation(" ");
 
         CADetails caDetails = espdRequest.getCADetails();
 
