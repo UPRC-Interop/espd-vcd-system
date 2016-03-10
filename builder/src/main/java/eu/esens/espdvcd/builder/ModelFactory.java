@@ -1,27 +1,61 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package eu.esens.espdvcd.builder;
 
+import eu.esens.espdvcd.model.CADetails;
+import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.LegislationReference;
 import eu.esens.espdvcd.model.Requirement;
 import eu.esens.espdvcd.model.RequirementGroup;
 import eu.esens.espdvcd.model.SelectableCriterion;
+import eu.esens.espdvcd.model.SimpleESPDRequest;
+import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.CriterionType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.LegislationType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementGroupType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementType;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  *
  * @author Jerry Dimitriou <jerouris@unipi.gr>
  */
-public class ModelExtractor {
+public interface ModelFactory {
+    
+    public static SimpleESPDRequest extractESPDRequest(ESPDRequestType reqType) {
+        
+        SimpleESPDRequest req = new SimpleESPDRequest();
+        req.getFullCriterionList().addAll(reqType.getCriterion().stream()
+        .map(c -> extractSelectableCriterion(c))
+        .collect(Collectors.toList()));
+        
+        req.setCADetails(extractCADetails(reqType));
+        
+        return req;
+    }
+    
+    public static CADetails extractCADetails(ESPDRequestType reqType) {
+        
+        CADetails cd = new CADetails();
+        
+       
+        if (!reqType.getContractingParty()
+                .getParty().getPartyName().isEmpty()) {
+            cd.setCAOfficialName(reqType.getContractingParty()
+                    .getParty().getPartyName()
+                    .get(0).getName().getValue());
+        } 
+
+        cd.setCACountry(reqType.getContractingParty()
+                .getParty().getPostalAddress().getCountry().getIdentificationCode().getValue());
+
+        //TODO: Need to add null checks here
+        cd.setProcurementProcedureFileReferenceNo(reqType.getContractFolderID().getValue());
+        cd.setProcurementProcedureTitle(reqType.getAdditionalDocumentReference().get(0).getAttachment().getExternalReference().getFileName().getValue());
+        cd.setProcurementProcedureDesc(reqType.getAdditionalDocumentReference().get(0).getAttachment().getExternalReference().getDescription().get(0).getValue());
+        
+        return cd;
+        
+    }
     
     public static SelectableCriterion extractSelectableCriterion(CriterionType ct) {
         String id = ct.getID().getValue();
@@ -38,6 +72,7 @@ public class ModelExtractor {
                 .collect(Collectors.toList());
                 
         SelectableCriterion selCr = new SelectableCriterion(id, typeCode, name, desc, lr, rgList);
+        selCr.setSelected(true);
         return selCr;
     }
     
@@ -91,7 +126,7 @@ public class ModelExtractor {
         return lr;
     }
 
-    private static Requirement extractRequirement(RequirementType rt) {
+    public static Requirement extractRequirement(RequirementType rt) {
         Requirement r = new Requirement(
                 rt.getID().getValue(),
                 rt.getResponseDataType(),

@@ -16,19 +16,33 @@ import java.util.List;
 public class CriterionForm extends VerticalLayout {
     private Panel panel = new Panel();
     private VerticalLayout panelContent = new VerticalLayout();
-    private TextField ID = new TextField("Critera ID");
-    private TextField typeCode = new TextField("Critera TypeCode");
-    private TextField name = new TextField("Critera Name");
-    private TextField description = new TextField("Critera Description");
+    private CheckBox selected = new CheckBox("Select this criterion?");
+    private Label ID = new Label("Criterion ID");
+    private Label typeCode = new Label("Criterion TypeCode");
+    private Label name = new Label("Criterion Name");
+    private Label description = new Label("Criterion Description");
 
     public CriterionForm(SelectableCriterion criterion) {
         setMargin(true);
         setStyleName("criterionForm-layout");
         this.addComponent(panel);
+        panelContent.addComponent(selected);
         panelContent.addComponent(ID);
         panelContent.addComponent(typeCode);
         panelContent.addComponent(name);
         panelContent.addComponent(description);
+
+        ID.setCaption("Criterion ID");
+        ID.setValue(criterion.getID());
+
+        typeCode.setCaption("Criterion Type Code");
+        typeCode.setValue(criterion.getTypeCode());
+
+        name.setCaption("Criterion Name");
+        name.setValue(criterion.getName());
+
+        description.setCaption("Criterion Description");
+        description.setValue(criterion.getDescription());
 
         panelContent.setMargin(true);
         panelContent.setStyleName("criterionForm-panelContent");

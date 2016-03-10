@@ -22,8 +22,8 @@ public class Dashboard extends Master {
 
         newEspdTemplateButton.setStyleName("dashboard-newEspdTemplateButton");
         newEspdTemplateButton.addClickListener(this::onNewEspdTemplates);
-        newEspdTemplateButton.setWidth(500, Unit.PIXELS);
-        newEspdTemplateButton.setHeight(200, Unit.PIXELS);
+        newEspdTemplateButton.setWidth(400, Unit.PIXELS);
+        newEspdTemplateButton.setHeight(160, Unit.PIXELS);
     }
 
     @Override

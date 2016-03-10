@@ -9,6 +9,7 @@ import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.Requirement;
 import eu.esens.espdvcd.model.RequirementGroup;
 import eu.esens.espdvcd.model.SelectableCriterion;
+import java.util.Iterator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -141,6 +142,20 @@ public class ESPDRequestForm extends VerticalLayout {
      * @see com.vaadin.ui.Button.ClickEvent
      */
     private void onExport(Button.ClickEvent event) {
+        List<SelectableCriterion> criterionList = espdRequest.getFullCriterionList();
+        /*for (SelectableCriterion criterion : criterionList) {
+            if (!criterion.isSelected()) {
+
+                System.out.println("Criterion not selected!");
+            }
+        }*/
+        for (Iterator<SelectableCriterion> iter = criterionList.listIterator(); iter.hasNext(); ) {
+            SelectableCriterion criterion = iter.next();
+            if (!criterion.isSelected()) {
+                iter.remove();
+            }
+        }
+
         // Display espd request xml button
         ESPDBuilder espdBuilder = new ESPDBuilder();
         String xml = espdBuilder.createXMLasString(espdRequest);

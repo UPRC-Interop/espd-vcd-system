@@ -5,12 +5,8 @@ import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.ui.*;
 
 import java.util.Arrays;
-import java.util.Date;
 
 import eu.esens.espdvcd.designer.components.CountryComboBox;
-import eu.esens.espdvcd.designer.sandbox.PojoContainer;
-import eu.esens.espdvcd.designer.sandbox.ResponseDataDateForm;
-import eu.esens.espdvcd.designer.sandbox.PojoDate;
 
 /**
  * Created by ixuz on 2/23/16.
@@ -52,13 +48,6 @@ public class Sandbox extends Master {
         // DATE
         pageContent.addComponent(new Label("DATE"));
 
-        PojoContainer<?> pojoContainer = new PojoContainer<>(new PojoDate(new Date()));
-        if (pojoContainer.getPojo() instanceof PojoDate) {
-            PojoDate pojoDate = (PojoDate) pojoContainer.getPojo();
-            ResponseDataDateForm responseDataDateForm = new ResponseDataDateForm(pojoDate);
-            pageContent.addComponent(responseDataDateForm);
-        }
-
         // Just a button that prints stuff
         Button printButton = new Button("Print stuff");
         printButton.addClickListener(this::onPrint);
@@ -71,10 +60,6 @@ public class Sandbox extends Master {
     }
 
     private void onPrint(Button.ClickEvent event) {
-        /*if (pojoContainer.getPojo() instanceof PojoDate) {
-            PojoDate pojoDate = (PojoDate) pojoContainer.getPojo();
-            PojoDate responseDataDate = (PojoDate) pojoDate;
-            System.out.println("Print: " + responseDataDate.getDate());
-        }*/
+
     }
 }

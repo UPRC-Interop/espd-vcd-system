@@ -15,9 +15,9 @@ import java.util.List;
 public class RequirementForm extends VerticalLayout {
     private Panel panel = new Panel();
     private VerticalLayout panelContent = new VerticalLayout();
-    private TextField ID = new TextField("Requirement ID");
-    private TextField responseDataType = new TextField("Requirement DataType");
-    private TextField description = new TextField("Requirement Description");
+    private Label ID = new Label("Requirement ID");
+    private Label responseDataType = new Label("Requirement DataType");
+    private Label description = new Label("Requirement Description");
 
     public RequirementForm(Requirement requirement) {
         setMargin(true);
@@ -28,6 +28,15 @@ public class RequirementForm extends VerticalLayout {
         panelContent.addComponent(description);
 
         panelContent.setMargin(true);
+
+        ID.setCaption("Requirement ID");
+        ID.setValue(requirement.getID());
+
+        responseDataType.setCaption("Requirement Response Data Type");
+        responseDataType.setValue(requirement.getResponseDataType());
+
+        description.setCaption("Requirement Description");
+        description.setValue(requirement.getDescription());
 
         panel.setStyleName("requirementForm-panel");
         panel.setContent(panelContent);

@@ -18,7 +18,7 @@ import java.util.List;
 public class RequirementGroupForm extends VerticalLayout {
     private Panel panel = new Panel();
     private VerticalLayout panelContent = new VerticalLayout();
-    private TextField ID = new TextField("RequirementGroupForm ID");
+    private Label ID = new Label("RequirementGroupForm ID");
 
     public RequirementGroupForm(RequirementGroup requirementGroup) {
         setMargin(true);
@@ -30,6 +30,9 @@ public class RequirementGroupForm extends VerticalLayout {
 
         panelContent.setMargin(true);
         panelContent.setStyleName("requirementGroupForm-panelContent");
+
+        ID.setCaption("Requirement Group ID");
+        ID.setValue(requirementGroup.getID());
 
         panel.setStyleName("requirementGroupForm-panel");
         panel.setCaption("Requirement group");

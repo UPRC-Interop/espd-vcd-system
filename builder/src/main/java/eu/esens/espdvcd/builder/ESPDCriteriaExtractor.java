@@ -5,7 +5,6 @@
  */
 package eu.esens.espdvcd.builder;
 
-import eu.esens.espdvcd.model.Criterion;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.CriterionType;
@@ -30,7 +29,7 @@ public class ESPDCriteriaExtractor implements CriteriaExtractor {
     @Override
     public List<SelectableCriterion> getFullList() {
         return criterionTypeList.stream()
-                .map(c -> ModelExtractor.extractSelectableCriterion(c))
+                .map(c -> ModelFactory.extractSelectableCriterion(c))
                 .collect(Collectors.toList());                
     }
 

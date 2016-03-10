@@ -6,6 +6,7 @@ import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.Label;
 import eu.esens.espdvcd.model.LegislationReference;
 import eu.esens.espdvcd.model.RequirementGroup;
 
@@ -16,11 +17,11 @@ public class LegislationReferenceForm extends VerticalLayout {
 
     private Panel panel = new Panel();
     private VerticalLayout panelContent = new VerticalLayout();
-    private TextField title = new TextField("Title");
-    private TextField description = new TextField("Description");
-    private TextField jurisdictionLevelCode = new TextField("JurisdictionLevelCode");
-    private TextField article = new TextField("Article");
-    private TextField URI = new TextField("URI");
+    private Label title = new Label("Legislation Reference Title");
+    private Label description = new Label("Legislation Reference Description");
+    private Label jurisdictionLevelCode = new Label("Legislation Reference JurisdictionLevelCode");
+    private Label article = new Label("Legislation Reference Article");
+    private Label URI = new Label("Legislation Reference URI");
 
     public LegislationReferenceForm(LegislationReference legislationReference) {
         setMargin(true);
@@ -32,6 +33,21 @@ public class LegislationReferenceForm extends VerticalLayout {
         panelContent.addComponent(jurisdictionLevelCode);
         panelContent.addComponent(article);
         panelContent.addComponent(URI);
+
+        title.setCaption("Legislation Reference Title");
+        title.setValue(legislationReference.getTitle());
+
+        description.setCaption("Legislation Reference Description");
+        description.setValue(legislationReference.getDescription());
+
+        jurisdictionLevelCode.setCaption("Legislation Reference Jurisdiction Level Code");
+        jurisdictionLevelCode.setValue(legislationReference.getJurisdictionLevelCode());
+
+        article.setCaption("Legislation Reference Article");
+        article.setValue(legislationReference.getArticle());
+
+        URI.setCaption("Legislation Reference URI");
+        URI.setValue(legislationReference.getURI());
 
         panel.setStyleName("legislationReferenceForm-panel");
         panel.setContent(panelContent);
