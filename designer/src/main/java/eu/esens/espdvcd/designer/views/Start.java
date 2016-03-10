@@ -6,16 +6,10 @@ package eu.esens.espdvcd.designer.views;
 
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.ViewChangeListener;
-import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.*;
 import eu.esens.espdvcd.builder.ESPDBuilder;
-import eu.esens.espdvcd.codelist.Codelists;
-import eu.esens.espdvcd.designer.components.CADetailsForm;
 import eu.esens.espdvcd.designer.components.ESPDRequestForm;
 import eu.esens.espdvcd.model.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Start extends Master {
 

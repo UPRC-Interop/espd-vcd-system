@@ -2,11 +2,9 @@ package eu.esens.espdvcd.designer.components;
 
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.data.fieldgroup.PropertyId;
-import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Panel;
-import com.vaadin.ui.Label;
 import eu.esens.espdvcd.model.CADetails;
 import eu.esens.espdvcd.model.ESPDRequest;
 

@@ -2,14 +2,9 @@ package eu.esens.espdvcd.designer.components;
 
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.*;
-import eu.esens.espdvcd.model.Criteria;
 import eu.esens.espdvcd.model.RequirementGroup;
 import eu.esens.espdvcd.model.Requirement;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
-import eu.esens.espdvcd.model.SelectableCriterion;
-
-import java.util.Iterator;
-import java.util.List;
 
 /**
  * Created by ixuz on 2/24/16.

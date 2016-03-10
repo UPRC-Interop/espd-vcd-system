@@ -5,7 +5,6 @@
 package eu.esens.espdvcd.designer.views;
 
 import com.vaadin.navigator.Navigator;
-import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.Label;

@@ -8,12 +8,9 @@ import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.ThemeResource;
-import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.*;
 import eu.esens.espdvcd.designer.Designer;
-import eu.esens.espdvcd.designer.UserContext;
 import eu.esens.espdvcd.designer.UserManager;
-import com.vaadin.server.Sizeable;
 import com.vaadin.server.FontAwesome;
 
 /**

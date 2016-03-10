@@ -10,8 +10,6 @@ import com.vaadin.ui.ComboBox;
 import eu.esens.espdvcd.codelist.Codelists;
 
 import java.util.*;
-import java.io.File;
-import java.io.InputStream;
 
 public class CountryComboBox extends ComboBox {
 
