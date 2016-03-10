@@ -1,12 +1,9 @@
 package eu.esens.espdvcd.designer.views;
 
 import com.vaadin.navigator.Navigator;
-import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.ui.*;
-import com.vaadin.data.Item;
 import eu.esens.espdvcd.designer.Designer;
-import eu.esens.espdvcd.designer.UserManager;
 
 /**
  * Created by ixuz on 3/4/16.

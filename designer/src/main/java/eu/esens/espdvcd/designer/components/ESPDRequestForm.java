@@ -1,17 +1,16 @@
 package eu.esens.espdvcd.designer.components;
 
+import com.vaadin.server.FileDownloader;
 import com.vaadin.server.FontAwesome;
+import com.vaadin.server.StreamResource;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.VerticalLayout;
 import eu.esens.espdvcd.builder.ESPDBuilder;
-import eu.esens.espdvcd.designer.Designer;
 import eu.esens.espdvcd.model.ESPDRequest;
-import eu.esens.espdvcd.model.Requirement;
-import eu.esens.espdvcd.model.RequirementGroup;
 import eu.esens.espdvcd.model.SelectableCriterion;
-import java.util.Iterator;
-
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,8 +28,8 @@ public class ESPDRequestForm extends VerticalLayout {
     private Button previous = new Button("Previous", FontAwesome.ARROW_LEFT);
     private Button cancel = new Button("Cancel", FontAwesome.REMOVE);
     private Button next = new Button("Next", FontAwesome.ARROW_RIGHT);
-    private Button finish = new Button("Export", FontAwesome.DOWNLOAD);
-    private Button printFullModelData = new Button("Print full model data", FontAwesome.DOWNLOAD);
+    private Button exportConsole = new Button("Export to Console", FontAwesome.DOWNLOAD);
+    private Button exportFile = new Button("Export to File", FontAwesome.DOWNLOAD);
     private int currentPageIndex = 0;
 
     public ESPDRequestForm(ESPDRequest espdRequest) {
@@ -47,20 +46,19 @@ public class ESPDRequestForm extends VerticalLayout {
         buttonList.addComponent(previous);
         buttonList.addComponent(cancel);
         buttonList.addComponent(next);
-        buttonList.addComponent(finish);
-        buttonList.addComponent(printFullModelData);
+        buttonList.addComponent(exportConsole);
+        buttonList.addComponent(exportFile);
 
         previous.addClickListener(this::onPrevious);
         cancel.addClickListener(this::onCancel);
         next.addClickListener(this::onNext);
-        finish.addClickListener(this::onExport);
-        printFullModelData.addClickListener(this::onPrintFullModelData);
+        exportConsole.addClickListener(this::onExportConsole);
 
         previous.setStyleName("espdRequestForm-previous");
         cancel.setStyleName("espdRequestForm-cancel");
         next.setStyleName("espdRequestForm-next");
-        finish.setStyleName("espdRequestForm-finish");
-        printFullModelData.setStyleName("espdRequestForm-printFullModelData");
+        exportConsole.setStyleName("espdRequestForm-finish");
+        exportFile.setStyleName("espdRequestForm-finish");
 
         buttonList.setMargin(true);
         buttonList.setSpacing(true);
@@ -73,6 +71,20 @@ public class ESPDRequestForm extends VerticalLayout {
         for (SelectableCriterion criterion : espdRequest.getSelectionCriteriaList()) {
             page3.addComponent(new CriterionForm(criterion));
         }
+
+        // Hook the exportFile button up with a downloadable resource
+        StreamResource downloadableResource = new StreamResource(new StreamResource.StreamSource() {
+            @Override
+            public InputStream getStream() {
+                ESPDBuilder espdBuilder = new ESPDBuilder();
+                String xml = espdBuilder.createXMLasString(espdRequest);
+                byte[] xmlBytes = xml.getBytes();
+                return new ByteArrayInputStream(xmlBytes);
+
+            }
+        }, "espd_template.xml");
+        FileDownloader fileDownloader = new FileDownloader(downloadableResource);
+        fileDownloader.extend(exportFile);
 
         showPage(currentPageIndex);
     }
@@ -94,10 +106,10 @@ public class ESPDRequestForm extends VerticalLayout {
         next.setVisible((currentPageIndex + 1 <= pages.size() - 1));
         previous.setEnabled((currentPageIndex-1 >= 0));
         previous.setVisible((currentPageIndex-1 >= 0));
-        finish.setEnabled(!(currentPageIndex+1 <= pages.size()-1));
-        finish.setVisible(!(currentPageIndex + 1 <= pages.size() - 1));
-        printFullModelData.setEnabled(!(currentPageIndex+1 <= pages.size()-1));
-        printFullModelData.setVisible(!(currentPageIndex + 1 <= pages.size() - 1));
+        exportConsole.setEnabled(!(currentPageIndex + 1 <= pages.size() - 1));
+        exportConsole.setVisible(!(currentPageIndex + 1 <= pages.size() - 1));
+        exportFile.setEnabled(!(currentPageIndex + 1 <= pages.size() - 1));
+        exportFile.setVisible(!(currentPageIndex + 1 <= pages.size() - 1));
     }
 
     /**
@@ -137,90 +149,15 @@ public class ESPDRequestForm extends VerticalLayout {
 
     /**
      * When the user have clicked the Export button, this method is invoked.
-     * TODO: Implement logic for exporting all form data to xml.
+     * Exports the espd request xml to the system console
      *
      * @param event Vaadin7 Button click event
      * @see com.vaadin.ui.Button.ClickEvent
      */
-    private void onExport(Button.ClickEvent event) {
-        List<SelectableCriterion> criterionList = espdRequest.getFullCriterionList();
-        /*for (SelectableCriterion criterion : criterionList) {
-            if (!criterion.isSelected()) {
-
-                System.out.println("Criterion not selected!");
-            }
-        }*/
-        for (Iterator<SelectableCriterion> iter = criterionList.listIterator(); iter.hasNext(); ) {
-            SelectableCriterion criterion = iter.next();
-            if (!criterion.isSelected()) {
-                iter.remove();
-            }
-        }
-
+    private void onExportConsole(Button.ClickEvent event) {
         // Display espd request xml button
         ESPDBuilder espdBuilder = new ESPDBuilder();
         String xml = espdBuilder.createXMLasString(espdRequest);
         System.out.println("Xml: " + xml);
-    }
-
-    /**
-     * Prints all data contained in this espd model(temporary usage because at the time the xml export is not full implemented)
-     *
-     * @param event Vaadin7 Button click event
-     * @see com.vaadin.ui.Button.ClickEvent
-     */
-    private void onPrintFullModelData(Button.ClickEvent event) {
-        System.out.println("EspdRequest().CADetails().CACountry: " + espdRequest.getCADetails().getCACountry());
-        System.out.println("EspdRequest().CADetails().CAOfficialName: " + espdRequest.getCADetails().getCAOfficialName());
-        System.out.println("EspdRequest().CADetails().getProcurementProcedureTitle: " + espdRequest.getCADetails().getProcurementProcedureTitle());
-        System.out.println("EspdRequest().CADetails().getProcurementProcedureDesc: " + espdRequest.getCADetails().getProcurementProcedureDesc());
-        System.out.println("EspdRequest().CADetails().getProcurementProcedureFileReferenceNo: " + espdRequest.getCADetails().getProcurementProcedureFileReferenceNo());
-
-        System.out.println("Exclusion criteria list:");
-        for (SelectableCriterion criterion : espdRequest.getExclusionCriteriaList()) {
-            System.out.println("EspdRequest().Criterion().ID: " + criterion.getID());
-            System.out.println("EspdRequest().Criterion().TypeCode: " + criterion.getTypeCode());
-            System.out.println("EspdRequest().Criterion().Name: " + criterion.getName());
-            System.out.println("EspdRequest().Criterion().Description: " + criterion.getDescription());
-            if (criterion.getLegislationReference() != null) {
-                System.out.println("EspdRequest().Criterion().LegislationReference().Title: " + criterion.getLegislationReference().getTitle());
-                System.out.println("EspdRequest().Criterion().LegislationReference().Description: " + criterion.getLegislationReference().getDescription());
-                System.out.println("EspdRequest().Criterion().LegislationReference().JurisdictionLevelCode: " + criterion.getLegislationReference().getJurisdictionLevelCode());
-                System.out.println("EspdRequest().Criterion().LegislationReference().Article: " + criterion.getLegislationReference().getArticle());
-                System.out.println("EspdRequest().Criterion().LegislationReference().URI: " + criterion.getLegislationReference().getURI());
-            }
-            for (RequirementGroup requirementGroup : criterion.getRequirementGroups()) {
-                System.out.println("EspdRequest().Criteria().RequirementGroup().ID: " + requirementGroup.getID());
-                for (Requirement requirement : requirementGroup.getRequirements()) {
-                    System.out.println("EspdRequest().Criteria().RequirementGroup().Requirement().ID: " + requirement.getID());
-                    System.out.println("EspdRequest().Criteria().RequirementGroup().Requirement().ResponseDataType: " + requirement.getResponseDataType());
-                    System.out.println("EspdRequest().Criteria().RequirementGroup().Requirement().Description: " + requirement.getDescription());
-                }
-            }
-        }
-
-        System.out.println("Selection criteria list:");
-        for (SelectableCriterion criterion : espdRequest.getSelectionCriteriaList()) {
-            System.out.println("EspdRequest().Criterion().ID: " + criterion.getID());
-            System.out.println("EspdRequest().Criterion().TypeCode: " + criterion.getTypeCode());
-            System.out.println("EspdRequest().Criterion().Name: " + criterion.getName());
-            System.out.println("EspdRequest().Criterion().Description: " + criterion.getDescription());
-            if (criterion.getLegislationReference() != null) {
-                System.out.println("EspdRequest().Criterion().LegislationReference().Title: " + criterion.getLegislationReference().getTitle());
-                System.out.println("EspdRequest().Criterion().LegislationReference().Description: " + criterion.getLegislationReference().getDescription());
-                System.out.println("EspdRequest().Criterion().LegislationReference().JurisdictionLevelCode: " + criterion.getLegislationReference().getJurisdictionLevelCode());
-                System.out.println("EspdRequest().Criterion().LegislationReference().Article: " + criterion.getLegislationReference().getArticle());
-                System.out.println("EspdRequest().Criterion().LegislationReference().URI: " + criterion.getLegislationReference().getURI());
-            }
-            for (RequirementGroup requirementGroup : criterion.getRequirementGroups()) {
-                System.out.println("EspdRequest().Criteria().RequirementGroup().ID: " + requirementGroup.getID());
-                for (Requirement requirement : requirementGroup.getRequirements()) {
-                    System.out.println("EspdRequest().Criteria().RequirementGroup().Requirement().ID: " + requirement.getID());
-                    System.out.println("EspdRequest().Criteria().RequirementGroup().Requirement().ResponseDataType: " + requirement.getResponseDataType());
-                    System.out.println("EspdRequest().Criteria().RequirementGroup().Requirement().Description: " + requirement.getDescription());
-                }
-            }
-        }
-
     }
 }

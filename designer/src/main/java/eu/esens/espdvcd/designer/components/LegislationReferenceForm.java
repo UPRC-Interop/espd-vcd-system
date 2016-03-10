@@ -2,13 +2,10 @@ package eu.esens.espdvcd.designer.components;
 
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.server.FontAwesome;
-import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.Panel;
-import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Label;
 import eu.esens.espdvcd.model.LegislationReference;
-import eu.esens.espdvcd.model.RequirementGroup;
 
 /**
  * Created by ixuz on 3/7/16.

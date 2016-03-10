@@ -9,6 +9,7 @@ import com.vaadin.ui.*;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.server.Page;
 import com.vaadin.shared.Position;
+import eu.esens.espdvcd.designer.Designer;
 import eu.esens.espdvcd.designer.UserManager;
 
 public class LoginFormWindow extends Window {
@@ -73,7 +74,7 @@ public class LoginFormWindow extends Window {
             notification.show(Page.getCurrent());
 
             UI.getCurrent().removeWindow(this);
-            navigator.navigateTo("");
+            navigator.navigateTo(Designer.VIEW_DASHBOARD);
         } else {
             Notification notification = new Notification("Login failed, please try again!");
             notification.setPosition(Position.TOP_CENTER);
