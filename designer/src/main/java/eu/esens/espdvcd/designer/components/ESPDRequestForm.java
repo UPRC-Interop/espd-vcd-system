@@ -159,16 +159,20 @@ public class ESPDRequestForm extends VerticalLayout {
         System.out.println("EspdRequest().CADetails().getProcurementProcedureTitle: " + espdRequest.getCADetails().getProcurementProcedureTitle());
         System.out.println("EspdRequest().CADetails().getProcurementProcedureDesc: " + espdRequest.getCADetails().getProcurementProcedureDesc());
         System.out.println("EspdRequest().CADetails().getProcurementProcedureFileReferenceNo: " + espdRequest.getCADetails().getProcurementProcedureFileReferenceNo());
-        for (SelectableCriterion criterion : espdRequest.getFullCriterionList()) {
+
+        System.out.println("Exclusion criteria list:");
+        for (SelectableCriterion criterion : espdRequest.getExclusionCriteriaList()) {
             System.out.println("EspdRequest().Criterion().ID: " + criterion.getID());
             System.out.println("EspdRequest().Criterion().TypeCode: " + criterion.getTypeCode());
             System.out.println("EspdRequest().Criterion().Name: " + criterion.getName());
             System.out.println("EspdRequest().Criterion().Description: " + criterion.getDescription());
-            System.out.println("EspdRequest().Criterion().LegislationReference().Title: " + criterion.getLegislationReference().getTitle());
-            System.out.println("EspdRequest().Criterion().LegislationReference().Description: " + criterion.getLegislationReference().getDescription());
-            System.out.println("EspdRequest().Criterion().LegislationReference().JurisdictionLevelCode: " + criterion.getLegislationReference().getJurisdictionLevelCode());
-            System.out.println("EspdRequest().Criterion().LegislationReference().Article: " + criterion.getLegislationReference().getArticle());
-            System.out.println("EspdRequest().Criterion().LegislationReference().URI: " + criterion.getLegislationReference().getURI());
+            if (criterion.getLegislationReference() != null) {
+                System.out.println("EspdRequest().Criterion().LegislationReference().Title: " + criterion.getLegislationReference().getTitle());
+                System.out.println("EspdRequest().Criterion().LegislationReference().Description: " + criterion.getLegislationReference().getDescription());
+                System.out.println("EspdRequest().Criterion().LegislationReference().JurisdictionLevelCode: " + criterion.getLegislationReference().getJurisdictionLevelCode());
+                System.out.println("EspdRequest().Criterion().LegislationReference().Article: " + criterion.getLegislationReference().getArticle());
+                System.out.println("EspdRequest().Criterion().LegislationReference().URI: " + criterion.getLegislationReference().getURI());
+            }
             for (RequirementGroup requirementGroup : criterion.getRequirementGroups()) {
                 System.out.println("EspdRequest().Criteria().RequirementGroup().ID: " + requirementGroup.getID());
                 for (Requirement requirement : requirementGroup.getRequirements()) {
@@ -178,5 +182,29 @@ public class ESPDRequestForm extends VerticalLayout {
                 }
             }
         }
+
+        System.out.println("Selection criteria list:");
+        for (SelectableCriterion criterion : espdRequest.getSelectionCriteriaList()) {
+            System.out.println("EspdRequest().Criterion().ID: " + criterion.getID());
+            System.out.println("EspdRequest().Criterion().TypeCode: " + criterion.getTypeCode());
+            System.out.println("EspdRequest().Criterion().Name: " + criterion.getName());
+            System.out.println("EspdRequest().Criterion().Description: " + criterion.getDescription());
+            if (criterion.getLegislationReference() != null) {
+                System.out.println("EspdRequest().Criterion().LegislationReference().Title: " + criterion.getLegislationReference().getTitle());
+                System.out.println("EspdRequest().Criterion().LegislationReference().Description: " + criterion.getLegislationReference().getDescription());
+                System.out.println("EspdRequest().Criterion().LegislationReference().JurisdictionLevelCode: " + criterion.getLegislationReference().getJurisdictionLevelCode());
+                System.out.println("EspdRequest().Criterion().LegislationReference().Article: " + criterion.getLegislationReference().getArticle());
+                System.out.println("EspdRequest().Criterion().LegislationReference().URI: " + criterion.getLegislationReference().getURI());
+            }
+            for (RequirementGroup requirementGroup : criterion.getRequirementGroups()) {
+                System.out.println("EspdRequest().Criteria().RequirementGroup().ID: " + requirementGroup.getID());
+                for (Requirement requirement : requirementGroup.getRequirements()) {
+                    System.out.println("EspdRequest().Criteria().RequirementGroup().Requirement().ID: " + requirement.getID());
+                    System.out.println("EspdRequest().Criteria().RequirementGroup().Requirement().ResponseDataType: " + requirement.getResponseDataType());
+                    System.out.println("EspdRequest().Criteria().RequirementGroup().Requirement().Description: " + requirement.getDescription());
+                }
+            }
+        }
+
     }
 }

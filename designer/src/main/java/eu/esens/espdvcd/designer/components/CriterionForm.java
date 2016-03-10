@@ -43,9 +43,10 @@ public class CriterionForm extends VerticalLayout {
         criteriaGroup.setBuffered(false);
         criteriaGroup.bindMemberFields(this);
 
-        LegislationReferenceForm legislationReferenceForm = new LegislationReferenceForm(criterion.getLegislationReference());
-        panelContent.addComponent(legislationReferenceForm);
-
+        if (criterion.getLegislationReference() != null) {
+            LegislationReferenceForm legislationReferenceForm = new LegislationReferenceForm(criterion.getLegislationReference());
+            panelContent.addComponent(legislationReferenceForm);
+        }
         // Add a sub form
         for (RequirementGroup requirementGroup : criterion.getRequirementGroups()) {
             RequirementGroupForm requirementGroupForm = new RequirementGroupForm(requirementGroup);

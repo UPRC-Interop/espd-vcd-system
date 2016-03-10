@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 
 /**
- * JPA implementation of {@link ESPDRequest}.
+ * POJO implementation of {@link ESPDRequest}.
  *
  * @author Jerry Dimitriou <jerouris@unipi.gr>
  */
