@@ -6,8 +6,19 @@ import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
 import grow.names.specification.ubl.schema.xsd.espdrequest_1.ObjectFactory;
 import java.io.InputStream;
 import java.io.StringWriter;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.UUID;
 import javax.xml.bind.JAXB;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
+import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.CopyIndicatorType;
+import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.CustomizationIDType;
+import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.IssueDateType;
+import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.IssueTimeType;
+import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.UBLVersionIDType;
 
 /**
  *
@@ -29,9 +40,39 @@ public class ESPDBuilder {
 
     public ESPDRequestType createXML(ESPDRequest req) {
 
-        ESPDRequestType reqType = SchemaFactory.extractESPDRequestType(req);
+        ESPDRequestType reqType = finalize(SchemaFactory.extractESPDRequestType(req));
         return reqType;
         
+    }
+    
+    public ESPDRequestType finalize(ESPDRequestType reqType) {
+        
+        // Finalizes the ESPDRequest Type, adding the Date and Time of Issue etc
+        reqType.setUBLVersionID(SchemaFactory.createUBL21VersionIdType());
+        
+        reqType.setCustomizationID(SchemaFactory.createBIICustomizationIdType("urn:www.cenbii.eu:transaction:biitrns070:ver3.0"));
+        reqType.setVersionID(SchemaFactory.createVersionIDType("1"));
+
+        reqType.setCopyIndicator(new CopyIndicatorType());
+        reqType.getCopyIndicator().setValue(false);
+        
+
+        Date now = new Date();
+        GregorianCalendar c = new GregorianCalendar();
+        c.setTime(now);
+        
+        try {
+            XMLGregorianCalendar date2 = DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
+            reqType.setIssueDate(new IssueDateType());
+            reqType.getIssueDate().setValue(date2);
+            reqType.setIssueTime(new IssueTimeType());
+            reqType.getIssueTime().setValue(date2);
+        } catch (DatatypeConfigurationException e) {
+            
+        }
+        
+        reqType.setID(SchemaFactory.createISOIECIDType(UUID.randomUUID().toString()));
+        return reqType;
     }
 
     public String createXMLasString(ESPDRequest req) {
