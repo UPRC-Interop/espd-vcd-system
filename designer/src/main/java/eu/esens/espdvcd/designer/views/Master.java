@@ -29,6 +29,9 @@ public class Master extends VerticalLayout implements View {
     protected VerticalLayout navigatorContent = new VerticalLayout();
     protected Panel mainPanel = new Panel();
     protected VerticalLayout mainContent = new VerticalLayout();
+    protected Panel detailsPanel = new Panel();
+    protected VerticalLayout detailsContent = new VerticalLayout();
+
     protected Image topheaderEsensImage = new Image("", new ThemeResource("img/logo_esens.png"));
     protected Label topheaderWelcomeText = new Label("Hello Alice");
 
@@ -68,12 +71,13 @@ public class Master extends VerticalLayout implements View {
         content.setStyleName("content");
         content.setHeight("100%");
 
-        GridLayout contentGrid = new GridLayout(2,1);
+        GridLayout contentGrid = new GridLayout(3,1);
         contentGrid.setWidth("100%");
         contentGrid.setHeight("100%");
         contentGrid.setStyleName("contentGrid");
         contentGrid.setColumnExpandRatio(0, 0.17f);
-        contentGrid.setColumnExpandRatio(1, 0.83f);
+        contentGrid.setColumnExpandRatio(1, 0.46f);
+        contentGrid.setColumnExpandRatio(2, 0.17f);
 
         navigatorContent.setStyleName("navigatorContent");
         navigatorContent.setHeight("100%");
@@ -93,8 +97,18 @@ public class Master extends VerticalLayout implements View {
         mainPanel.setContent(mainContent);
         mainPanel.getContent().setSizeUndefined();
 
+        detailsPanel.setStyleName("detailsPanel");
+        detailsPanel.setSizeFull();
+        detailsPanel.setContent(detailsContent);
+        detailsPanel.getContent().setSizeUndefined();
+
+        //detailsContent.setHeight("100%");
+        detailsContent.setStyleName("master-detailsContent");
+        detailsContent.setWidth("100%");
+
         contentGrid.addComponent(navigatorPanel, 0, 0);
         contentGrid.addComponent(mainPanel, 1, 0);
+        contentGrid.addComponent(detailsPanel, 2, 0);
 
         content.addComponent(contentGrid);
 
@@ -181,6 +195,18 @@ public class Master extends VerticalLayout implements View {
 
     public Navigator getNavigator() {
         return navigator;
+    }
+
+    public VerticalLayout getNavigatorContent() {
+        return navigatorContent;
+    }
+
+    public VerticalLayout getMainContent() {
+        return mainContent;
+    }
+
+    public VerticalLayout getDetailsContent() {
+        return detailsContent;
     }
 
     @Override

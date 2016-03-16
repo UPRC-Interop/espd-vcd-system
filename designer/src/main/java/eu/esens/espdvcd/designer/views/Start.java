@@ -8,7 +8,10 @@ import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.ui.*;
 import eu.esens.espdvcd.builder.ESPDBuilder;
+import eu.esens.espdvcd.designer.Designer;
 import eu.esens.espdvcd.designer.components.ESPDRequestForm;
+import eu.esens.espdvcd.designer.components.LegislationReferenceForm;
+import eu.esens.espdvcd.designer.components.RequirementGroupForm;
 import eu.esens.espdvcd.model.*;
 
 public class Start extends Master {
@@ -18,6 +21,7 @@ public class Start extends Master {
     private final Label authInfoLabel = new Label("");
     private Panel pagePanel = new Panel();
     private VerticalLayout pageContent = new VerticalLayout();
+    private ESPDRequest espdRequest = null;
 
     public Start(Navigator navigator) {
         super(navigator, true);
@@ -35,12 +39,12 @@ public class Start extends Master {
         CADetails caDetails = new CADetails();
         caDetails.setCACountry("Sweden");
 
-        ESPDRequest espdRequest = new SimpleESPDRequest();
+        espdRequest = new SimpleESPDRequest();
         espdRequest.setCADetails(caDetails);
         espdRequest.setCriterionList(new ESPDBuilder().getCriteriaList());
 
         // Cenerate the espd request form base on the provided espd request model
-        ESPDRequestForm espdRequestForm = new ESPDRequestForm(espdRequest);
+        ESPDRequestForm espdRequestForm = new ESPDRequestForm(this, espdRequest);
         pageContent.addComponent(espdRequestForm);
     }
 

@@ -1,9 +1,14 @@
 package eu.esens.espdvcd.designer.components;
 
+import com.vaadin.event.LayoutEvents;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.*;
+import eu.esens.espdvcd.designer.Designer;
+import eu.esens.espdvcd.designer.views.Master;
+import eu.esens.espdvcd.designer.views.Start;
 import eu.esens.espdvcd.model.*;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
+import com.vaadin.event.LayoutEvents.LayoutClickListener;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -14,41 +19,47 @@ import java.util.List;
  */
 
 public class CriterionForm extends VerticalLayout {
+    private Master view;
+    private Criterion criterionReference = null;
     private Panel panel = new Panel();
     private VerticalLayout panelContent = new VerticalLayout();
     private CheckBox selected = new CheckBox("Select this criterion?");
-    private Label ID = new Label("Criterion ID");
-    private Label typeCode = new Label("Criterion TypeCode");
-    private Label name = new Label("Criterion Name");
+    //private Label ID = new Label("Criterion ID");
+    //private Label typeCode = new Label("Criterion TypeCode");
+    //private Label name = new Label("Criterion Name");
     private Label description = new Label("Criterion Description");
 
-    public CriterionForm(SelectableCriterion criterion) {
+    public CriterionForm(Master view, SelectableCriterion criterion) {
+        this.view = view;
+        this.criterionReference = criterion;
         setMargin(true);
         setStyleName("criterionForm-layout");
         this.addComponent(panel);
         panelContent.addComponent(selected);
-        panelContent.addComponent(ID);
-        panelContent.addComponent(typeCode);
-        panelContent.addComponent(name);
+        //panelContent.addComponent(ID);
+        //panelContent.addComponent(typeCode);
+        //panelContent.addComponent(name);
         panelContent.addComponent(description);
 
-        ID.setCaption("Criterion ID");
-        ID.setValue(criterion.getID());
+        this.addLayoutClickListener(this::onCriterionClick);
 
-        typeCode.setCaption("Criterion Type Code");
-        typeCode.setValue(criterion.getTypeCode());
+        //ID.setCaption("Criterion ID");
+        //ID.setValue(criterion.getID());
 
-        name.setCaption("Criterion Name");
-        name.setValue(criterion.getName());
+        //typeCode.setCaption("Criterion Type Code");
+        //typeCode.setValue(criterion.getTypeCode());
 
-        description.setCaption("Criterion Description");
+        //name.setCaption("Criterion Name");
+        //name.setValue(criterion.getName());
+
+        //description.setCaption("Criterion Description");
         description.setValue(criterion.getDescription());
 
         panelContent.setMargin(true);
         panelContent.setStyleName("criterionForm-panelContent");
 
         panel.setContent(panelContent);
-        panel.setCaption("Criteria");
+        panel.setCaption(criterion.getName());
         panel.setIcon(FontAwesome.CHEVRON_DOWN);
 
         // Bind the this forms fields
@@ -56,15 +67,16 @@ public class CriterionForm extends VerticalLayout {
         criteriaGroup.setItemDataSource(criterion);
         criteriaGroup.setBuffered(false);
         criteriaGroup.bindMemberFields(this);
+    }
 
-        if (criterion.getLegislationReference() != null) {
-            LegislationReferenceForm legislationReferenceForm = new LegislationReferenceForm(criterion.getLegislationReference());
-            panelContent.addComponent(legislationReferenceForm);
+    void onCriterionClick(LayoutEvents.LayoutClickEvent event) {
+        view.getDetailsContent().removeAllComponents();
+        if (criterionReference.getLegislationReference() != null) {
+            view.getDetailsContent().addComponent(new LegislationReferenceForm(criterionReference.getLegislationReference()));
         }
-        // Add a sub form
-        for (RequirementGroup requirementGroup : criterion.getRequirementGroups()) {
-            RequirementGroupForm requirementGroupForm = new RequirementGroupForm(requirementGroup);
-            panelContent.addComponent(requirementGroupForm);
+
+        for (RequirementGroup requirementGroup : criterionReference.getRequirementGroups()) {
+            view.getDetailsContent().addComponent(new RequirementGroupForm(requirementGroup));
         }
     }
 }

@@ -7,6 +7,7 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.VerticalLayout;
 import eu.esens.espdvcd.builder.ESPDBuilder;
+import eu.esens.espdvcd.designer.views.Master;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import java.io.ByteArrayInputStream;
@@ -19,6 +20,7 @@ import java.util.List;
  */
 public class ESPDRequestForm extends VerticalLayout {
 
+    private Master view;
     private ESPDRequest espdRequest = null;
     private VerticalLayout page1 = new VerticalLayout();
     private VerticalLayout page2 = new VerticalLayout();
@@ -32,7 +34,8 @@ public class ESPDRequestForm extends VerticalLayout {
     private Button exportFile = new Button("Export to File", FontAwesome.DOWNLOAD);
     private int currentPageIndex = 0;
 
-    public ESPDRequestForm(ESPDRequest espdRequest) {
+    public ESPDRequestForm(Master view, ESPDRequest espdRequest) {
+        this.view = view;
         this.espdRequest = espdRequest;
 
         setWidth("100%");
@@ -66,10 +69,10 @@ public class ESPDRequestForm extends VerticalLayout {
         page1.addComponent(new CADetailsForm(espdRequest));
 
         for (SelectableCriterion criterion : espdRequest.getExclusionCriteriaList()) {
-            page2.addComponent(new CriterionForm(criterion));
+            page2.addComponent(new CriterionForm(view, criterion));
         }
         for (SelectableCriterion criterion : espdRequest.getSelectionCriteriaList()) {
-            page3.addComponent(new CriterionForm(criterion));
+            page3.addComponent(new CriterionForm(view, criterion));
         }
 
         // Hook the exportFile button up with a downloadable resource

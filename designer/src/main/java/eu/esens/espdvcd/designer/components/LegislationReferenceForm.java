@@ -23,6 +23,8 @@ public class LegislationReferenceForm extends VerticalLayout {
     public LegislationReferenceForm(LegislationReference legislationReference) {
         setMargin(true);
         setStyleName("legislationReferenceForm-layout");
+        setWidth("100%");
+        panel.setWidth("100%");
         addComponent(panel);
         panel.setContent(panelContent);
         panelContent.addComponent(title);
