@@ -1,6 +1,3 @@
-/**
- * 
- */
 package eu.esens.espdvcd.model.uifacade;
 
 import java.util.Arrays;
@@ -10,7 +7,6 @@ import java.util.List;
 /**
  * Demonstation class to show the usage of ElementContainer.
  * 
- * @author Ulf Lotzmann
  *
  */
 public class TestElementContainer {

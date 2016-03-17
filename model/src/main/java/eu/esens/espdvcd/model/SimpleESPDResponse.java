@@ -9,7 +9,6 @@ import java.util.List;
 /**
  * TODO: Add description.
  *
- * @author Panagiotis NICOLAOU <pnikola@unipi.gr>
  */
 public class SimpleESPDResponse extends PersistedESPDRequest implements ESPDResponse {
 

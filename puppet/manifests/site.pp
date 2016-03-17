@@ -1,7 +1,3 @@
-#
-# Author: Panagiotis NICOLAOU
-# Email: pnikola@unipi.gr
-#
 node default {
   class { 'os': }
 

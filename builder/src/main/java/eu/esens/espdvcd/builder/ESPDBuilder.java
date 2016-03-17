@@ -15,14 +15,11 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.CopyIndicatorType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.CustomizationIDType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.IssueDateType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.IssueTimeType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.UBLVersionIDType;
 
 /**
  *
- * @author Jerry Dimitriou <jerouris@unipi.gr>
  */
 public class ESPDBuilder {
 
@@ -60,13 +57,13 @@ public class ESPDBuilder {
         Date now = new Date();
         GregorianCalendar c = new GregorianCalendar();
         c.setTime(now);
-        
+       
         try {
-            XMLGregorianCalendar date2 = DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
+            XMLGregorianCalendar date2 = DatatypeFactory.newInstance().newXMLGregorianCalendar();
             reqType.setIssueDate(new IssueDateType());
-            reqType.getIssueDate().setValue(date2);
+            reqType.getIssueDate().setValue(date2.normalize());
             reqType.setIssueTime(new IssueTimeType());
-            reqType.getIssueTime().setValue(date2);
+            reqType.getIssueTime().setValue(date2.normalize());
         } catch (DatatypeConfigurationException e) {
             
         }

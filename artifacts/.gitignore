@@ -1,7 +1,3 @@
-#
-# Author: Panagiotis NICOLAOU
-# Email: pnikola@unipi.gr
-#
 syntax: glob
 # Ignore everything in this directory
 *

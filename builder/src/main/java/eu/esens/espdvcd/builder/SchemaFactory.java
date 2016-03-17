@@ -34,10 +34,6 @@ import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.UBLVersi
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.URIType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.VersionIDType;
 
-/**
- *
- * @author Jerry Dimitriou <jerouris@unipi.gr>
- */
 public interface SchemaFactory {
 
     public static CriterionType extractCriterion(Criterion c) {

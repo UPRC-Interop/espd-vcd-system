@@ -1,12 +1,8 @@
-/**
- * 
- */
 package eu.esens.espdvcd.model.uifacade;
 
 import java.util.Collection;
 
 /**
- * @author Ulf Lotzmann
  *
  */
 public class ElementContainerImpl<T> implements ElementContainer<T> {

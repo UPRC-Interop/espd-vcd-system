@@ -4,7 +4,7 @@ import com.google.common.collect.BiMap;
 
 /**
  * Multiton implementation for Code Lists
- * @author Jerry Dimitriou <jerouris@unipi.gr>
+ * 
  */
 public enum Codelists {
     ActivityType ("/gc/ActivityTypeCode-CodeList.gc"),

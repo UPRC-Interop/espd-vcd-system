@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 /**
  * TODO: Add description.
  *
- * @author Panagiotis NICOLAOU <pnikola@unipi.gr>
  */
 public class HibernateUtil {
     private static final Logger LOG = LoggerFactory.getLogger(HibernateUtil.class);

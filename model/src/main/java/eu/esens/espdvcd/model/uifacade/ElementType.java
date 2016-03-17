@@ -1,6 +1,3 @@
-/**
- * 
- */
 package eu.esens.espdvcd.model.uifacade;
 
 /**
@@ -9,7 +6,6 @@ package eu.esens.espdvcd.model.uifacade;
  * 
  * TODO: needs to be discussed and extended
  * 
- * @author Ulf Lotzmann
  *
  */
 public enum ElementType {

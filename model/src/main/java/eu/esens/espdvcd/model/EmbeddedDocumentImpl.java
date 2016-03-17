@@ -5,7 +5,6 @@ import eu.esens.espdvcd.model.types.EmbeddedDocumentModelType;
 /**
  * TODO: Add description.
  *
- * @author Panagiotis NICOLAOU <pnikola@unipi.gr>
  */
 public class EmbeddedDocumentImpl implements EmbeddedDocument {
     @Override

@@ -1,12 +1,8 @@
-/**
- * 
- */
 package eu.esens.espdvcd.model.uifacade;
 
 import java.util.Collection;
 
 /**
- * @author Ulf Lotzmann
  *
  */
 public interface ElementContainer<T> {

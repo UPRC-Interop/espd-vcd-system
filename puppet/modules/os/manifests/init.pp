@@ -1,7 +1,3 @@
-#
-# Author: Panagiotis NICOLAOU
-# Email: pnikola@unipi.gr
-#
 class os {
   group { 'espdvcd':
     ensure => 'present',
