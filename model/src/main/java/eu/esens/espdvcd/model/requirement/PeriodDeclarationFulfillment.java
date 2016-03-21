@@ -1,4 +1,4 @@
-package eu.esens.espdvcd.model;
+package eu.esens.espdvcd.model.requirement;
 
 import java.util.List;
 import java.util.ArrayList;
