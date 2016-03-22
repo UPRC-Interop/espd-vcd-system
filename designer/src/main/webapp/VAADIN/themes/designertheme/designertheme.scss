@@ -21,7 +21,9 @@
   .v-margin-top {
     padding-top: 16px;
   }
-
+  .test {
+    background-color: yellowgreen;
+  }
   .v-margin-right {
     padding-right: 15px;
   }
@@ -119,7 +121,7 @@
     background-image: none;
     box-shadow: inset 0px 0px 0px 0px #000;
     border: 0px solid #dcdcdc;
-    font-size: 22px;
+    font-size: 15px;
     color: #e3e3e3;
     text-align: left;
   }
@@ -128,6 +130,7 @@
     @extend .v-button-navigatorButtonDark;
     background-color: #5c5c5c;
     color: #b3b3b3;
+    font-size: 13px;
   }
 
   .navigatorHeaderTitle {
@@ -138,7 +141,7 @@
 
   .navigatorHeaderRole {
     @extend .navigatorHeaderTitle;
-    font-size: 18px;
+    font-size: 15px;
     margin-top: -8px;
     margin-bottom: 30px;
   }
@@ -197,6 +200,7 @@
 
   .v-button-navigatorButtonLight > .v-button-wrap > .FontAwesome {
     width: 30px;
+    font-size: 15px;
   }
 
   .v-formlayout > table {
@@ -241,6 +245,7 @@
     @extend .espdRequestForm-formButton;
     background-color: #6C56C4;
     border: 0px solid #6C56C4;
+
   }
 
   .espdRequestForm-printFullModelData {
@@ -255,8 +260,8 @@
 
   .espdRequestForm-layout {
     width: 100%;
-  }
 
+  }
   .v-panel-detailsPanel,
   .caDetailsForm-layout,
   .caDetailsForm-layout > .v-slot,
@@ -269,7 +274,9 @@
   .legislationReferenceForm-layout,
   .requirementGroupForm-panel,
   .requirementGroupForm-panelContent,
+
   .requirementForm-panel {
     width: 100%;
+
   }
 }

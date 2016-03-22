@@ -5,6 +5,7 @@ import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Label;
+import eu.esens.espdvcd.model.Criterion;
 import eu.esens.espdvcd.model.LegislationReference;
 
 /**
@@ -19,19 +20,22 @@ public class LegislationReferenceForm extends VerticalLayout {
     private Label jurisdictionLevelCode = new Label("Legislation Reference JurisdictionLevelCode");
     private Label article = new Label("Legislation Reference Article");
     private Label URI = new Label("Legislation Reference URI");
+    private Label criterionName= new Label("Criterion Name");
 
-    public LegislationReferenceForm(LegislationReference legislationReference) {
+    public LegislationReferenceForm(LegislationReference legislationReference, Criterion criterionReference) {
         setMargin(true);
         setStyleName("legislationReferenceForm-layout");
         setWidth("100%");
         panel.setWidth("100%");
         addComponent(panel);
         panel.setContent(panelContent);
+        panelContent.addComponent(criterionName);
         panelContent.addComponent(title);
         panelContent.addComponent(description);
         panelContent.addComponent(jurisdictionLevelCode);
         panelContent.addComponent(article);
         panelContent.addComponent(URI);
+
 
         title.setCaption("Legislation Reference Title");
         title.setValue(legislationReference.getTitle());
@@ -44,6 +48,10 @@ public class LegislationReferenceForm extends VerticalLayout {
 
         article.setCaption("Legislation Reference Article");
         article.setValue(legislationReference.getArticle());
+
+        criterionName.setCaption("Criterion Name");
+        criterionName.setValue(criterionReference.getName());
+        criterionName.setStyleName("test");
 
         URI.setCaption("Legislation Reference URI");
         URI.setValue(legislationReference.getURI());
