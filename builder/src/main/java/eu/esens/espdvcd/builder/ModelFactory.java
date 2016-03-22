@@ -4,6 +4,7 @@ import eu.esens.espdvcd.model.CADetails;
 import eu.esens.espdvcd.model.LegislationReference;
 import eu.esens.espdvcd.model.Requirement;
 import eu.esens.espdvcd.model.RequirementGroup;
+import eu.esens.espdvcd.model.ResponseRequirement;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.SimpleESPDRequest;
 import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
@@ -122,7 +123,7 @@ public interface ModelFactory {
     }
 
     public static Requirement extractRequirement(RequirementType rt) {
-        Requirement r = new Requirement(
+        Requirement r = new ResponseRequirement(
                 rt.getID().getValue(),
                 rt.getResponseDataType(),
                 rt.getDescription().getValue());
