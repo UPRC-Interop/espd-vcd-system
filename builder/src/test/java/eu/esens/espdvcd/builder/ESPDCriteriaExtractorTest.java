@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package eu.esens.espdvcd.builder;
 
 import eu.esens.espdvcd.model.RequirementGroup;
@@ -13,10 +8,6 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-/**
- *
- * @author Jerry Dimitriou <jerouris@unipi.gr>
- */
 public class ESPDCriteriaExtractorTest {
 
     static int maxDepth = 1;

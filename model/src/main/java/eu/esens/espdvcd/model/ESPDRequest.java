@@ -7,7 +7,6 @@ import java.util.List;
 /**
  * This interface is in charge to provide {@link ESPDRequest} data.
  *
- * @author Panagiotis NICOLAOU <pnikola@unipi.gr>
  */
 public interface ESPDRequest extends Serializable {
     /**

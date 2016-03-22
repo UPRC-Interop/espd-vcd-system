@@ -7,7 +7,6 @@ import java.io.Serializable;
 /**
  * This interface is in charge to provide {@link EmbeddedDocument} data.
  *
- * @author Panagiotis NICOLAOU <pnikola@unipi.gr>
  */
 public interface EmbeddedDocument extends Serializable {
 

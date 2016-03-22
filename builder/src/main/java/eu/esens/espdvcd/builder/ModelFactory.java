@@ -1,7 +1,6 @@
 package eu.esens.espdvcd.builder;
 
 import eu.esens.espdvcd.model.CADetails;
-import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.LegislationReference;
 import eu.esens.espdvcd.model.Requirement;
 import eu.esens.espdvcd.model.RequirementGroup;
@@ -15,10 +14,6 @@ import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.Re
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- *
- * @author Jerry Dimitriou <jerouris@unipi.gr>
- */
 public interface ModelFactory {
     
     public static SimpleESPDRequest extractESPDRequest(ESPDRequestType reqType) {

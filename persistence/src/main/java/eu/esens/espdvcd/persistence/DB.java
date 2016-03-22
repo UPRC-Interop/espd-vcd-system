@@ -3,7 +3,6 @@ package eu.esens.espdvcd.persistence;
 /**
  * TODO: Add description.
  *
- * @author Panagiotis NICOLAOU <pnikola@unipi.gr>
  */
 public enum DB {
     RDBMS("hibernate.rdbms.cfg.xml"),

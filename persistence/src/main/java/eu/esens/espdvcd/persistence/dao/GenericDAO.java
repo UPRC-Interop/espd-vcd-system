@@ -15,7 +15,6 @@ import java.util.List;
 /**
  * TODO: Add description.
  *
- * @author Panagiotis NICOLAOU <pnikola@unipi.gr>
  */
 public class GenericDAO<T> implements DAOInterface<T, Serializable> {
     private static final Logger LOG = LoggerFactory.getLogger(GenericDAO.class);

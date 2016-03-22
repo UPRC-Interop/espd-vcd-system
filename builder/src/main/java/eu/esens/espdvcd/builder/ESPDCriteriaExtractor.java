@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package eu.esens.espdvcd.builder;
 
 import eu.esens.espdvcd.model.SelectableCriterion;
@@ -12,10 +7,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.xml.bind.JAXB;
 
-/**
- *
- * @author Jerry Dimitriou <jerouris@unipi.gr>
- */
 public class ESPDCriteriaExtractor implements CriteriaExtractor {
 
     private final List<CriterionType> criterionTypeList;

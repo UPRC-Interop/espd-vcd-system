@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 /**
  *
- * @author Jerry Dimitriou <jerouris@unipi.gr>
  */
 public class CADetails implements Serializable{
 

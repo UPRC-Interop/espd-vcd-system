@@ -7,10 +7,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-/**
- *
- * @author Jerry Dimitriou <jerouris@unipi.gr>
- */
 public class BuilderESPDTest {
     
     InputStream is;

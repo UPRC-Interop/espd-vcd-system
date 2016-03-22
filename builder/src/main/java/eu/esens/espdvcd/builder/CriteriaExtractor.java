@@ -1,14 +1,8 @@
 package eu.esens.espdvcd.builder;
 
-import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.SelectableCriterion;
-import java.io.InputStream;
 import java.util.List;
 
-/**
- *
- * @author Jerry Dimitriou <jerouris@unipi.gr>
- */
 
 public interface CriteriaExtractor {
     

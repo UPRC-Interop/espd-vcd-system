@@ -1,44 +1,29 @@
 package eu.esens.espdvcd.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
- * Created by ixuz on 2/24/16.
+ * Created by Ulf Lotzmann on 21/03/2016.
  */
-public class Requirement implements Serializable {
+public interface Requirement extends Serializable {
+    String getID();
 
-    private static final long serialVersionUID = 528517963577425517L;
-    private String ID;
-    private String responseDataType;
-    private String description;
+    void setID(String ID);
 
-    public Requirement(String ID, String responseDataType, String description) {
-        this.ID = ID;
-        this.responseDataType = responseDataType;
-        this.description = description;
-    }
+    String getResponseDataType();
 
-    public String getID() {
-        return ID;
-    }
+    void setResponseDataType(String responseDataType);
 
-    public void setID(String ID) {
-        this.ID = ID;
-    }
+    String getDescription();
 
-    public String getResponseDataType() {
-        return responseDataType;
-    }
+    void setDescription(String description);
 
-    public void setResponseDataType(String responseDataType) {
-        this.responseDataType = responseDataType;
-    }
+    RequirementResponse getResponse();
 
-    public String getDescription() {
-        return description;
-    }
+    void setResponse(RequirementResponse response);
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    List<Evidence> getEvidences();
+
+    void setEvidences(List<Evidence> evidences);
 }

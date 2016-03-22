@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 /**
  * POJO implementation of {@link ESPDRequest}.
  *
- * @author Jerry Dimitriou <jerouris@unipi.gr>
  */
 public class SimpleESPDRequest implements ESPDRequest {
 

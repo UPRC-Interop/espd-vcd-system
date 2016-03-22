@@ -21,6 +21,7 @@ import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.Exte
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PartyNameType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PartyType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ContractFolderIDType;
+import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.CustomizationIDType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.DescriptionType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.DocumentTypeCodeType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.FileNameType;
@@ -29,12 +30,10 @@ import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.Identifi
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.NameType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.TextType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.TypeCodeType;
+import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.UBLVersionIDType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.URIType;
+import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.VersionIDType;
 
-/**
- *
- * @author Jerry Dimitriou <jerouris@unipi.gr>
- */
 public interface SchemaFactory {
 
     public static CriterionType extractCriterion(Criterion c) {
@@ -180,6 +179,14 @@ public interface SchemaFactory {
         reqGroupIDType.setValue(id);
         return reqGroupIDType;
     }
+    
+    public static VersionIDType createVersionIDType(String id) {
+
+        VersionIDType versionID = new VersionIDType();
+        versionID.setSchemeAgencyID("EU-COM-GROW");
+        versionID.setValue(id);
+        return versionID;
+    }
 
     public static IDType createCriterionRelatedIDType(String id) {
         IDType reqGroupIDType = createCustomSchemeIDIDType(id, "CriterionRelatedIDs");
@@ -241,5 +248,27 @@ public interface SchemaFactory {
         reqGroupIDType.setSchemeID(schemeId);
         return reqGroupIDType;
     }
+    
+    public static UBLVersionIDType createUBL21VersionIdType() {
+        
+        UBLVersionIDType id = new UBLVersionIDType();
+        
+        id.setSchemeAgencyID("OASIS-UBL-TC");
+        id.setValue("2.1");       
+        return id;
+        
+    }
 
+    public static CustomizationIDType createBIICustomizationIdType(String id) {
+
+        CustomizationIDType cid = new CustomizationIDType();
+        
+        cid.setSchemeName("CustomizationID");
+        cid.setSchemeAgencyID("BII");
+        cid.setSchemeVersionID("1.0");
+        cid.setValue(id);
+        
+        return cid;
+        
+    }
 }

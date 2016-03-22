@@ -15,7 +15,6 @@ import java.util.List;
 /**
  * JPA implementation of {@link ESPDRequest}.
  *
- * @author Panagiotis NICOLAOU <pnikola@unipi.gr>
  */
 @Entity
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)

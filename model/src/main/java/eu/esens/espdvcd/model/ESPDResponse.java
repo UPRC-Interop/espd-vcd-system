@@ -9,7 +9,6 @@ import java.util.List;
 /**
  * This interface is in charge to provide {@link ESPDResponse} data.
  *
- * @author Jerry Dimitriou <jerouris@unipi.gr>
  */
 public interface ESPDResponse extends ESPDRequest,Serializable {
 

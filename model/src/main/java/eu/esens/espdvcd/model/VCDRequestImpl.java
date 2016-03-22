@@ -6,7 +6,6 @@ import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
 /**
  * TODO: Add description.
  *
- * @author Panagiotis NICOLAOU <pnikola@unipi.gr>
  */
 public class VCDRequestImpl implements VCDRequest {
     @Override

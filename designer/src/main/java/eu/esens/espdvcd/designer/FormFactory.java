@@ -1,7 +1,3 @@
-/**
- * Created by ixuz on 2/9/16.
- */
-
 package eu.esens.espdvcd.designer;
 
 import eu.esens.espdvcd.designer.components.CountryComboBox;

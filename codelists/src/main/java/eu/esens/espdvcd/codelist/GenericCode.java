@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package eu.esens.espdvcd.codelist;
 
 import com.google.common.collect.BiMap;
@@ -22,10 +17,6 @@ import org.oasis_open.docs.codelist.ns.genericode._1.Column;
 import org.oasis_open.docs.codelist.ns.genericode._1.Row;
 import org.oasis_open.docs.codelist.ns.genericode._1.SimpleCodeList;
 
-/**
- *
- * @author Jerry Dimitriou <jerouris@unipi.gr>
- */
 public class GenericCode {
 
     protected final JAXBElement<CodeListDocument> GC;
