@@ -4,7 +4,7 @@ import eu.esens.espdvcd.model.CADetails;
 import eu.esens.espdvcd.model.Criterion;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.LegislationReference;
-import eu.esens.espdvcd.model.Requirement;
+import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.RequirementGroup;
 import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.CriterionType;

@@ -2,20 +2,26 @@ package eu.esens.espdvcd.builder;
 
 import eu.esens.espdvcd.model.CADetails;
 import eu.esens.espdvcd.model.LegislationReference;
-import eu.esens.espdvcd.model.Requirement;
+import eu.esens.espdvcd.model.requirement.RequestRequirement;
+import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.RequirementGroup;
-import eu.esens.espdvcd.model.ResponseRequirement;
+import eu.esens.espdvcd.model.requirement.DescriptionResponse;
+import eu.esens.espdvcd.model.requirement.ResponseRequirement;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.SimpleESPDRequest;
+import eu.esens.espdvcd.model.requirement.Response;
 import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.CriterionType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.LegislationType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementGroupType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementType;
+import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.ResponseType;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public interface ModelFactory {
+  
+    enum espdType {ESPD_REQUEST, ESPD_RESPONSE};
     
     public static SimpleESPDRequest extractESPDRequest(ESPDRequestType reqType) {
         
@@ -77,7 +83,7 @@ public interface ModelFactory {
         String id = rgType.getID().getValue();
         RequirementGroup rg = new RequirementGroup(id);
         List<Requirement> rList = rgType.getRequirement().stream()
-                .map(r -> extractRequirement(r))
+                .map(r -> extractResponseRequirement(r))
                 .collect(Collectors.toList());
         List<RequirementGroup> childRg = rgType.getRequirementGroup().stream()
                 .map(t -> extractRequirementGroup(t))
@@ -122,11 +128,32 @@ public interface ModelFactory {
         return lr;
     }
 
-    public static Requirement extractRequirement(RequirementType rt) {
-        Requirement r = new ResponseRequirement(
+    public static Requirement extractRequestRequirement(RequirementType rt) {
+        Requirement r = new RequestRequirement(
                 rt.getID().getValue(),
                 rt.getResponseDataType(),
                 rt.getDescription().getValue());
         return r;
     }
+    
+    public static Requirement extractResponseRequirement(RequirementType rt) {
+        Requirement r = new ResponseRequirement(
+                rt.getID().getValue(),
+                rt.getResponseDataType(),
+                rt.getDescription().getValue());
+        
+        if(!rt.getResponse().isEmpty()) {
+            //TODO: Handle more than one responses?
+            r.setResponse(extractResponse(rt.getResponse().get(0)));
+        }
+        
+        return r;
+    }
+    
+    public static Response extractResponse(ResponseType rt){
+        
+        DescriptionResponse res = new DescriptionResponse();
+        return res;
+    }
+    
 }
