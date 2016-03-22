@@ -27,6 +27,7 @@ public class CriterionForm extends VerticalLayout {
     //private Label ID = new Label("Criterion ID");
     //private Label typeCode = new Label("Criterion TypeCode");
     //private Label name = new Label("Criterion Name");
+
     private Label description = new Label("Criterion Description");
 
     public CriterionForm(Master view, SelectableCriterion criterion) {
@@ -72,11 +73,15 @@ public class CriterionForm extends VerticalLayout {
     void onCriterionClick(LayoutEvents.LayoutClickEvent event) {
         view.getDetailsContent().removeAllComponents();
         if (criterionReference.getLegislationReference() != null) {
-            view.getDetailsContent().addComponent(new LegislationReferenceForm(criterionReference.getLegislationReference()));
+            view.getDetailsContent().addComponent(new LegislationReferenceForm(criterionReference.getLegislationReference(),criterionReference));
         }
 
         for (RequirementGroup requirementGroup : criterionReference.getRequirementGroups()) {
             view.getDetailsContent().addComponent(new RequirementGroupForm(requirementGroup));
         }
+
+
+
     }
+
 }

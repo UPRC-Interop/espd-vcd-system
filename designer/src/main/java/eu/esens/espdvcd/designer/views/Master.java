@@ -75,18 +75,26 @@ public class Master extends VerticalLayout implements View {
         contentGrid.setWidth("100%");
         contentGrid.setHeight("100%");
         contentGrid.setStyleName("contentGrid");
-        contentGrid.setColumnExpandRatio(0, 0.17f);
+        contentGrid.setColumnExpandRatio(0, 0.10f);
         contentGrid.setColumnExpandRatio(1, 0.46f);
         contentGrid.setColumnExpandRatio(2, 0.17f);
 
         navigatorContent.setStyleName("navigatorContent");
         navigatorContent.setHeight("100%");
+        //navigatorContent.setSizeFull();
+
 
         navigatorPanel.setStyleName("navigatorPanel");
         navigatorPanel.setSizeFull();
+
+
+
+
         navigatorPanel.setContent(navigatorContent);
         navigatorPanel.getContent().setSizeUndefined();
+        //navigatorPanel.getContent().setSizeFull();
         navigatorPanel.getContent().setWidth("100%");
+
 
         mainContent.setStyleName("master-mainContent");
         mainContent.setHeight("100%");
@@ -109,7 +117,6 @@ public class Master extends VerticalLayout implements View {
         contentGrid.addComponent(navigatorPanel, 0, 0);
         contentGrid.addComponent(mainPanel, 1, 0);
         contentGrid.addComponent(detailsPanel, 2, 0);
-
         content.addComponent(contentGrid);
 
         {

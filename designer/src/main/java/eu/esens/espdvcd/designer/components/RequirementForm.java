@@ -12,7 +12,7 @@ public class RequirementForm extends VerticalLayout {
     private Panel panel = new Panel();
     private VerticalLayout panelContent = new VerticalLayout();
     //private Label ID = new Label("Requirement ID");
-    //private Label responseDataType = new Label("Requirement DataType");
+    private Label responseDataType = new Label("Requirement DataType");
     private Label description = new Label("Requirement Description");
 
     public RequirementForm(Requirement requirement) {
@@ -20,7 +20,7 @@ public class RequirementForm extends VerticalLayout {
         setStyleName("requirementForm-layout");
         this.addComponent(panel);
         //panelContent.addComponent(ID);
-        //panelContent.addComponent(responseDataType);
+        panelContent.addComponent(responseDataType);
         panelContent.addComponent(description);
 
         panelContent.setMargin(true);
@@ -28,10 +28,10 @@ public class RequirementForm extends VerticalLayout {
         //ID.setCaption("Requirement ID");
         //ID.setValue(requirement.getID());
 
-        //responseDataType.setCaption("Requirement Response Data Type");
-        //responseDataType.setValue(requirement.getResponseDataType());
+        responseDataType.setCaption("Requirement Response Data Type");
+        responseDataType.setValue(requirement.getResponseDataType());
 
-        //description.setCaption("Requirement Description");
+        description.setCaption("Requirement Description");
         description.setValue(requirement.getDescription());
 
         panel.setStyleName("requirementForm-panel");

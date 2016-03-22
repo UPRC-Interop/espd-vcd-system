@@ -52,6 +52,11 @@ public class Sandbox extends Master {
         Button printButton = new Button("Print stuff");
         printButton.addClickListener(this::onPrint);
         pageContent.addComponent(printButton);
+
+        Label testLabel = new Label("Test Label");
+        testLabel.addStyleName("testingstyle");
+        testLabel.removeStyleName("testingstyle");
+        pageContent.addComponent(testLabel);
     }
 
     @Override
