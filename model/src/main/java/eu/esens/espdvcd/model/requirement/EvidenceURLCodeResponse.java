@@ -26,11 +26,18 @@ public class EvidenceURLCodeResponse extends Response implements Serializable {
      */
     private String description;
 
+    private String evidenceURLCode;
+
     public EvidenceURLCodeResponse() {
     }
 
     public EvidenceURLCodeResponse(String description) {
         this.description = description;
+    }
+
+    public EvidenceURLCodeResponse(String description, String evidenceURLCode) {
+        this.description = description;
+        this.evidenceURLCode = evidenceURLCode;
     }
 
     public String getDescription() {
@@ -41,4 +48,11 @@ public class EvidenceURLCodeResponse extends Response implements Serializable {
         this.description = description;
     }
 
+    public String getEvidenceURLCode() {
+        return evidenceURLCode;
+    }
+
+    public void setEvidenceURLCode(String evidenceURLCode) {
+        this.evidenceURLCode = evidenceURLCode;
+    }
 }

@@ -2,6 +2,7 @@ package eu.esens.espdvcd.model.requirement;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -26,11 +27,29 @@ public class DateResponse extends Response implements Serializable {
      */
     private String description;
 
+    /**
+     * Criterion fulfillment date
+     * <p>
+     * Declared date where  this criterion was fulfilled.
+     * <p>
+     * Data type: Date<br>
+     * Cardinality: 0..1<br>
+     * InfReqID: tir92-166<br>
+     * BusReqID: tbr92-018<br>
+     * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.Response.Date<br>
+     */
+    private GregorianCalendar date;
+
     public DateResponse() {
     }
 
     public DateResponse(String description) {
         this.description = description;
+    }
+
+    public DateResponse(String description, GregorianCalendar date) {
+        this.description = description;
+        this.date = date;
     }
 
     public String getDescription() {
@@ -41,4 +60,11 @@ public class DateResponse extends Response implements Serializable {
         this.description = description;
     }
 
+    public GregorianCalendar getDate() {
+        return date;
+    }
+
+    public void setDate(GregorianCalendar date) {
+        this.date = date;
+    }
 }

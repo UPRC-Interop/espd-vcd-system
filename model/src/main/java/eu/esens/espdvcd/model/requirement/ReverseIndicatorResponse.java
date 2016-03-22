@@ -1,15 +1,13 @@
 package eu.esens.espdvcd.model.requirement;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
- * Created by Ulf Lotzmann on 21/03/2016.
+ * Created by Ulf Lotzmann on 22/03/2016.
  */
-public class EvidenceURLResponse extends Response implements Serializable {
+public class ReverseIndicatorResponse extends Response implements Serializable {
 
-    private static final long serialVersionUID = -1738098273888763636L;
+    private static final long serialVersionUID = 1893521229468775082L;
 
     /**
      * Criterion response description
@@ -26,18 +24,19 @@ public class EvidenceURLResponse extends Response implements Serializable {
      */
     private String description;
 
-    private String evidenceURL;
 
-    public EvidenceURLResponse() {
+    private boolean reverseIndicator;
+
+    public ReverseIndicatorResponse() {
     }
 
-    public EvidenceURLResponse(String description) {
+    public ReverseIndicatorResponse(String description) {
         this.description = description;
     }
 
-    public EvidenceURLResponse(String description, String evidenceURL) {
+    public ReverseIndicatorResponse(String description, boolean reverseIndicator) {
         this.description = description;
-        this.evidenceURL = evidenceURL;
+        this.reverseIndicator = reverseIndicator;
     }
 
     public String getDescription() {
@@ -48,11 +47,11 @@ public class EvidenceURLResponse extends Response implements Serializable {
         this.description = description;
     }
 
-    public String getEvidenceURL() {
-        return evidenceURL;
+    public boolean isReverseIndicator() {
+        return reverseIndicator;
     }
 
-    public void setEvidenceURL(String evidenceURL) {
-        this.evidenceURL = evidenceURL;
+    public void setReverseIndicator(boolean reverseIndicator) {
+        this.reverseIndicator = reverseIndicator;
     }
 }

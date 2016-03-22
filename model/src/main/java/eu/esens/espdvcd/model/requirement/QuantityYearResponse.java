@@ -1,15 +1,13 @@
 package eu.esens.espdvcd.model.requirement;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
- * Created by Ulf Lotzmann on 21/03/2016.
+ * Created by Ulf Lotzmann on 22/03/2016.
  */
-public class EvidenceURLResponse extends Response implements Serializable {
+public class QuantityYearResponse extends Response implements Serializable {
 
-    private static final long serialVersionUID = -1738098273888763636L;
+    private static final long serialVersionUID = -9178109536250269929L;
 
     /**
      * Criterion response description
@@ -26,18 +24,18 @@ public class EvidenceURLResponse extends Response implements Serializable {
      */
     private String description;
 
-    private String evidenceURL;
+    private int year;
 
-    public EvidenceURLResponse() {
+    public QuantityYearResponse() {
     }
 
-    public EvidenceURLResponse(String description) {
+    public QuantityYearResponse(String description) {
         this.description = description;
     }
 
-    public EvidenceURLResponse(String description, String evidenceURL) {
+    public QuantityYearResponse(String description, int year) {
         this.description = description;
-        this.evidenceURL = evidenceURL;
+        this.year = year;
     }
 
     public String getDescription() {
@@ -48,11 +46,11 @@ public class EvidenceURLResponse extends Response implements Serializable {
         this.description = description;
     }
 
-    public String getEvidenceURL() {
-        return evidenceURL;
+    public int getYear() {
+        return year;
     }
 
-    public void setEvidenceURL(String evidenceURL) {
-        this.evidenceURL = evidenceURL;
+    public void setYear(int year) {
+        this.year = year;
     }
 }

@@ -47,7 +47,7 @@ public class PeriodDeclarationFulfillment {
      * BusReqID: tbr92-018, tbr92-005<br>
      * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.Response.Percent<br>
      */
-    private String percenatge;
+    private String percentage;
 
     /**
      * Criterion fulfillment description
@@ -145,7 +145,7 @@ public class PeriodDeclarationFulfillment {
 
     public PeriodDeclarationFulfillment(String amount,
                                         String quantity,
-                                        String percenatge,
+                                        String percentage,
                                         String description,
                                         GregorianCalendar date,
                                         String eventTypeCode,
@@ -153,7 +153,7 @@ public class PeriodDeclarationFulfillment {
                                         CriterionFulfillmentTimePeriod timePeriod) {
         this.amount = amount;
         this.quantity = quantity;
-        this.percenatge = percenatge;
+        this.percentage = percentage;
         this.description = description;
         this.date = date;
         this.eventTypeCode = eventTypeCode;
@@ -163,7 +163,7 @@ public class PeriodDeclarationFulfillment {
 
     public PeriodDeclarationFulfillment(String amount,
                                         String quantity,
-                                        String percenatge,
+                                        String percentage,
                                         String description,
                                         GregorianCalendar date,
                                         String eventTypeCode,
@@ -173,7 +173,7 @@ public class PeriodDeclarationFulfillment {
                                         List<String> affectedParties) {
         this.amount = amount;
         this.quantity = quantity;
-        this.percenatge = percenatge;
+        this.percentage = percentage;
         this.description = description;
         this.date = date;
         this.eventTypeCode = eventTypeCode;
@@ -199,12 +199,12 @@ public class PeriodDeclarationFulfillment {
         this.quantity = quantity;
     }
 
-    public String getPercenatge() {
-        return percenatge;
+    public String getPercentage() {
+        return percentage;
     }
 
-    public void setPercenatge(String percenatge) {
-        this.percenatge = percenatge;
+    public void setPercentage(String percentage) {
+        this.percentage = percentage;
     }
 
     public String getDescription() {
