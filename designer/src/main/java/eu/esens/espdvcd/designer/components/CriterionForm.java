@@ -71,17 +71,22 @@ public class CriterionForm extends VerticalLayout {
     }
 
     void onCriterionClick(LayoutEvents.LayoutClickEvent event) {
-        view.getDetailsContent().removeAllComponents();
-        if (criterionReference.getLegislationReference() != null) {
-            view.getDetailsContent().addComponent(new LegislationReferenceForm(criterionReference.getLegislationReference(),criterionReference));
+        if (event.getClickedComponent() instanceof Panel && event.getClickedComponent() == panel) {
+            if (!event.isDoubleClick()) {
+                panelContent.setVisible(!panelContent.isVisible());
+            }
+        } else {
+            view.getDetailsContent().removeAllComponents();
+            Label detailsTitle = new Label(criterionReference.getName());
+            detailsTitle.setStyleName("detailsTitle");
+            view.getDetailsContent().addComponent(detailsTitle);
+            if (criterionReference.getLegislationReference() != null) {
+                view.getDetailsContent().addComponent(new LegislationReferenceForm(criterionReference.getLegislationReference()));
+            }
+
+            for (RequirementGroup requirementGroup : criterionReference.getRequirementGroups()) {
+                view.getDetailsContent().addComponent(new RequirementGroupForm(requirementGroup));
+            }
         }
-
-        for (RequirementGroup requirementGroup : criterionReference.getRequirementGroups()) {
-            view.getDetailsContent().addComponent(new RequirementGroupForm(requirementGroup));
-        }
-
-
-
     }
-
 }

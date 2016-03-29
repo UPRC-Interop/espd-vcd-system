@@ -121,7 +121,7 @@
     background-image: none;
     box-shadow: inset 0px 0px 0px 0px #000;
     border: 0px solid #dcdcdc;
-    font-size: 15px;
+    font-size: 18px;
     color: #e3e3e3;
     text-align: left;
   }
@@ -130,7 +130,7 @@
     @extend .v-button-navigatorButtonDark;
     background-color: #5c5c5c;
     color: #b3b3b3;
-    font-size: 13px;
+    font-size: 18px;
   }
 
   .navigatorHeaderTitle {
@@ -260,7 +260,6 @@
 
   .espdRequestForm-layout {
     width: 100%;
-
   }
   .v-panel-detailsPanel,
   .caDetailsForm-layout,
@@ -277,6 +276,17 @@
 
   .requirementForm-panel {
     width: 100%;
+  }
 
+  .v-slot-detailsTitle {
+    background-color: #569AC4;
+  }
+
+  .v-label-detailsTitle {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    font-variant: small-caps;
+    color: #e3e3e3;
   }
 }
