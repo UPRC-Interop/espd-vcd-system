@@ -20,7 +20,9 @@ public class LegislationReferenceForm extends VerticalLayout {
     private Label jurisdictionLevelCode = new Label("Legislation Reference JurisdictionLevelCode");
     private Label article = new Label("Legislation Reference Article");
     private Label URI = new Label("Legislation Reference URI");
-    private Label criterionName= new Label("Criterion Name");
+    //private Label criterionName= new Label("Criterion Name");
+
+
 
     public LegislationReferenceForm(LegislationReference legislationReference, Criterion criterionReference) {
         setMargin(true);
@@ -29,7 +31,7 @@ public class LegislationReferenceForm extends VerticalLayout {
         panel.setWidth("100%");
         addComponent(panel);
         panel.setContent(panelContent);
-        panelContent.addComponent(criterionName);
+       // panelContent.addComponent(criterionName);
         panelContent.addComponent(title);
         panelContent.addComponent(description);
         panelContent.addComponent(jurisdictionLevelCode);
@@ -49,9 +51,7 @@ public class LegislationReferenceForm extends VerticalLayout {
         article.setCaption("Legislation Reference Article");
         article.setValue(legislationReference.getArticle());
 
-        criterionName.setCaption("Criterion Name");
-        criterionName.setValue(criterionReference.getName());
-        criterionName.setStyleName("test");
+
 
         URI.setCaption("Legislation Reference URI");
         URI.setValue(legislationReference.getURI());

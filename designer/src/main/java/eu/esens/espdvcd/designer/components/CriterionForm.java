@@ -24,9 +24,12 @@ public class CriterionForm extends VerticalLayout {
     private Panel panel = new Panel();
     private VerticalLayout panelContent = new VerticalLayout();
     private CheckBox selected = new CheckBox("Select this criterion?");
+
+    private VerticalLayout previous=new VerticalLayout();
     //private Label ID = new Label("Criterion ID");
     //private Label typeCode = new Label("Criterion TypeCode");
-    //private Label name = new Label("Criterion Name");
+    private Label name = new Label("Criterion Name");
+
 
     private Label description = new Label("Criterion Description");
 
@@ -73,6 +76,7 @@ public class CriterionForm extends VerticalLayout {
     void onCriterionClick(LayoutEvents.LayoutClickEvent event) {
         view.getDetailsContent().removeAllComponents();
         if (criterionReference.getLegislationReference() != null) {
+            view.getDetailsContent().addComponent(new CriterionCustomForm(criterionReference));
             view.getDetailsContent().addComponent(new LegislationReferenceForm(criterionReference.getLegislationReference(),criterionReference));
         }
 
@@ -80,8 +84,17 @@ public class CriterionForm extends VerticalLayout {
             view.getDetailsContent().addComponent(new RequirementGroupForm(requirementGroup));
         }
 
+       changeColour(panelContent);
 
+    }
 
+    void changeColour(VerticalLayout current)
+    {
+        panel.addStyleName("criterionForm-panelContent");
+        previous=current;
+
+        //previous.removeStyleName("test");
+        current.setStyleName("criterionForm-panelContent-selected");
     }
 
 }
