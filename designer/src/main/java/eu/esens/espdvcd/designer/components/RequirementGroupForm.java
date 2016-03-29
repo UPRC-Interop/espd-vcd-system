@@ -53,6 +53,12 @@ public class RequirementGroupForm extends VerticalLayout {
         if (event.getClickedComponent() instanceof Panel && event.getClickedComponent() == panel) {
             if (!event.isDoubleClick()) {
                 panelContent.setVisible(!panelContent.isVisible());
+
+                if (panelContent.isVisible()) {
+                    panel.setIcon(FontAwesome.CHEVRON_DOWN);
+                } else {
+                    panel.setIcon(FontAwesome.CHEVRON_RIGHT);
+                }
             }
         }
     }
