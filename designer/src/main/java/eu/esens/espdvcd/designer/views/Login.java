@@ -29,7 +29,7 @@ public class Login extends Master {
         if (!UserManager.isAuthenticated()) {
             UI.getCurrent().addWindow(loginFormWindow);
         } else {
-            getNavigator().navigateTo(Designer.VIEW_DASHBOARD);
+            getNavigator().navigateTo(Designer.VIEW_ESPD_TEMPLATE);
         }
     }
 }

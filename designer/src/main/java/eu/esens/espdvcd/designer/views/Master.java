@@ -138,22 +138,22 @@ public class Master extends VerticalLayout implements View {
             navigatorContent.addComponent(navigatorHeaderLayout);
         }
         {
-            Button button = new Button("Create New ESPD Template", FontAwesome.FILE_O);
+            Button button = new Button("ESPD Template", FontAwesome.FILE_O);
             button.setStyleName("navigatorButtonDark");
             button.setWidth("100%");
             button.setHeight(60, Unit.PIXELS);
             navigatorContent.addComponent(button);
 
-            button.addClickListener(this::onNewEspdTemplate);
+            button.addClickListener(this::onNavigatorEspdTemplate);
         }
         {
-            Button button = new Button("Create New ESPD", FontAwesome.FILE);
+            Button button = new Button("ESPD", FontAwesome.FILE);
             button.setStyleName("navigatorButtonDark");
             button.setWidth("100%");
             button.setHeight(60, Unit.PIXELS);
             navigatorContent.addComponent(button);
 
-            button.addClickListener(this::onNewEspd);
+            button.addClickListener(this::onNavigatorEspd);
         }
         {
             Button button = new Button("Sandbox", FontAwesome.PLAY);
@@ -161,7 +161,7 @@ public class Master extends VerticalLayout implements View {
             button.setWidth("100%");
             button.setHeight(60, Unit.PIXELS);
             navigatorContent.addComponent(button);
-            button.addClickListener(this::onSandbox);
+            button.addClickListener(this::onNavigatorSandbox);
         }
         {
             Button button = new Button("Log-out", FontAwesome.ARROW_LEFT);
@@ -169,7 +169,7 @@ public class Master extends VerticalLayout implements View {
             button.setWidth("100%");
             button.setHeight(60, Unit.PIXELS);
             navigatorContent.addComponent(button);
-            button.addClickListener(this::onLogout);
+            button.addClickListener(this::onNavigatorLogout);
         }
     }
 
@@ -196,19 +196,19 @@ public class Master extends VerticalLayout implements View {
         }
     }
 
-    public void onNewEspdTemplate(Button.ClickEvent clickEvent) {
-        getNavigator().navigateTo(Designer.VIEW_ESPD_TEMPLATES);
+    public void onNavigatorEspdTemplate(Button.ClickEvent clickEvent) {
+        getNavigator().navigateTo(Designer.VIEW_ESPD_TEMPLATE);
     }
 
-    public void onNewEspd(Button.ClickEvent clickEvent) {
-        getNavigator().navigateTo(Designer.VIEW_ESPD_TEMPLATES);
+    public void onNavigatorEspd(Button.ClickEvent clickEvent) {
+        getNavigator().navigateTo(Designer.VIEW_ESPD);
     }
 
-    public void onSandbox(Button.ClickEvent clickEvent) {
+    public void onNavigatorSandbox(Button.ClickEvent clickEvent) {
         getNavigator().navigateTo(Designer.VIEW_SANDBOX);
     }
 
-    public void onLogout(Button.ClickEvent clickEvent) {
+    public void onNavigatorLogout(Button.ClickEvent clickEvent) {
         UserManager.logout();
         getNavigator().navigateTo(Designer.VIEW_LOGIN);
     }

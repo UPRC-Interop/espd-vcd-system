@@ -79,7 +79,7 @@ public class LoginFormWindow extends Window {
             notification.show(Page.getCurrent());
 
             UI.getCurrent().removeWindow(this);
-            navigator.navigateTo(Designer.VIEW_DASHBOARD);
+            navigator.navigateTo(Designer.VIEW_ESPD_TEMPLATE);
         } else {
             Notification notification = new Notification("Login failed, please try again!");
             notification.setPosition(Position.TOP_CENTER);
