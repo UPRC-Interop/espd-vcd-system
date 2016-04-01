@@ -4,13 +4,13 @@
              xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
              xmlns:gc="http://docs.oasis-open.org/codelist/ns/genericode/1.0/">
    <Identification>
-      <ShortName>CriterionJurisdictionLevel</ShortName>
-      <LongName xml:lang="en">CRITERION REGULATION JURISDICTION LEVEL</LongName>
+      <ShortName>AmountTypeCodes</ShortName>
+      <LongName xml:lang="en">Amount Type Codes</LongName>
       <Version>1.0</Version>
       <CanonicalUri>Placeholder</CanonicalUri>
       <CanonicalVersionUri>Placeholder</CanonicalVersionUri>
       <Agency>
-         <LongName xml:lang="en">DG GROW (European Commission)</LongName>
+         <LongName xml:lang="en">EU-COM-GROW</LongName>
          <Identifier>EU-COM-GROW</Identifier>
       </Agency>
    </Identification>
@@ -31,42 +31,50 @@
    <SimpleCodeList>
       <Row>
          <Value ColumnRef="code">
-            <SimpleValue>EU_REGULATION</SimpleValue>
+            <SimpleValue>GENERAL_YEARLY_TURNOVER</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>European Regulation</SimpleValue>
+            <SimpleValue>General yearly turnover</SimpleValue>
          </Value>
       </Row>
       <Row>
          <Value ColumnRef="code">
-            <SimpleValue>EU_DIRECTIVE</SimpleValue>
+            <SimpleValue>AVERAGE_YEARLY_TURNOVER</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>European Directive</SimpleValue>
+            <SimpleValue>Average yearly turnover</SimpleValue>
          </Value>
       </Row>
       <Row>
          <Value ColumnRef="code">
-            <SimpleValue>EU_DECISION</SimpleValue>
+            <SimpleValue>YEARLY_SPECIFIC_TURNOVER_BUSINESS_AREA</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>European Decision</SimpleValue>
+            <SimpleValue>Yearly Specific Turnover  - Business Area</SimpleValue>
          </Value>
       </Row>
       <Row>
          <Value ColumnRef="code">
-            <SimpleValue>NATIONAL_LEGISLATION</SimpleValue>
+            <SimpleValue>AVERAGE_YEARLY_TURNOVER_BUSINESS_AREA</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>National Legislation</SimpleValue>
+            <SimpleValue>Average yearly turnover in the specific area of the EO</SimpleValue>
          </Value>
       </Row>
       <Row>
          <Value ColumnRef="code">
-            <SimpleValue>SUBNATIONAL_LEGISLATION</SimpleValue>
+            <SimpleValue>FINANCIAL_RATIO</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>Sub-national Legislation</SimpleValue>
+            <SimpleValue>Financial ratio</SimpleValue>
+         </Value>
+      </Row>
+      <Row>
+         <Value ColumnRef="code">
+            <SimpleValue>INDEMNITY_INSURANCE_AMOUNT</SimpleValue>
+         </Value>
+         <Value ColumnRef="name">
+            <SimpleValue>Indemnity Insurance Amount</SimpleValue>
          </Value>
       </Row>
    </SimpleCodeList>

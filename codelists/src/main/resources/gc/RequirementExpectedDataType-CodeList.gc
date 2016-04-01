@@ -39,7 +39,15 @@
       </Row>
       <Row>
          <Value ColumnRef="code">
-            <SimpleValue>COUNTRY_CODE</SimpleValue>
+            <SimpleValue>CODE</SimpleValue>
+         </Value>
+         <Value ColumnRef="name">
+            <SimpleValue>A code for an unespecified concept</SimpleValue>
+         </Value>
+      </Row>
+      <Row>
+         <Value ColumnRef="code">
+            <SimpleValue>CODE_COUNTRY</SimpleValue>
          </Value>
          <Value ColumnRef="name">
             <SimpleValue>Code identifying a country (Compulsory use of ISO 3166-1 alpha 2</SimpleValue>
@@ -63,6 +71,14 @@
       </Row>
       <Row>
          <Value ColumnRef="code">
+            <SimpleValue>EVIDENCE_URL</SimpleValue>
+         </Value>
+         <Value ColumnRef="name">
+            <SimpleValue>URL, namely pointing to an evidence</SimpleValue>
+         </Value>
+      </Row>
+      <Row>
+         <Value ColumnRef="code">
             <SimpleValue>INDICATOR</SimpleValue>
          </Value>
          <Value ColumnRef="name">
@@ -71,7 +87,7 @@
       </Row>
       <Row>
          <Value ColumnRef="code">
-            <SimpleValue>PERCENT</SimpleValue>
+            <SimpleValue>PERCENTAGE</SimpleValue>
          </Value>
          <Value ColumnRef="name">
             <SimpleValue>A decimal number representing a percent (e.g. 0.1)</SimpleValue>
@@ -87,18 +103,26 @@
       </Row>
       <Row>
          <Value ColumnRef="code">
-            <SimpleValue>QUANTITY</SimpleValue>
+            <SimpleValue>QUANTITY_INTEGER</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>A number representing a quantity in a specific unit of measure (e.g. 2 Kg.)</SimpleValue>
+            <SimpleValue>A number representing a quantity in a specific unit of measure. The unit has to be specified (e.g. Kg).</SimpleValue>
          </Value>
       </Row>
       <Row>
          <Value ColumnRef="code">
-            <SimpleValue>URL</SimpleValue>
+            <SimpleValue>QUANTITY_YEAR</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>URL, namely pointing to an evidence</SimpleValue>
+            <SimpleValue>A non-negative integer representing a year. The unit has to be specified as YEAR</SimpleValue>
+         </Value>
+      </Row>
+      <Row>
+         <Value ColumnRef="code">
+            <SimpleValue>QUANTITY</SimpleValue>
+         </Value>
+         <Value ColumnRef="name">
+            <SimpleValue>A number representing a generic quantity with no unit specified.</SimpleValue>
          </Value>
       </Row>
    </SimpleCodeList>
