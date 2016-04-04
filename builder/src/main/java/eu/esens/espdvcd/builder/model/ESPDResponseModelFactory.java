@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eu.esens.espdvcd.builder;
+package eu.esens.espdvcd.builder.model;
 
 import eu.esens.espdvcd.model.SimpleESPDResponse;
 import eu.esens.espdvcd.model.requirement.DescriptionResponse;
@@ -15,7 +15,10 @@ import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.Re
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.ResponseType;
 import java.util.stream.Collectors;
 
-public class ESPDResponseModelFactory implements ModelFactory {
+public class ESPDResponseModelFactory implements ModelExtractor {
+
+    ESPDResponseModelFactory() {
+    }
 
     public SimpleESPDResponse extractESPDResponse(ESPDResponseType resType) {
 

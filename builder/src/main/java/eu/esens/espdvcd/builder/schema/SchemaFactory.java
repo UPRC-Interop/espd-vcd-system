@@ -1,4 +1,4 @@
-package eu.esens.espdvcd.builder;
+package eu.esens.espdvcd.builder.schema;
 
 import eu.esens.espdvcd.model.CADetails;
 import eu.esens.espdvcd.model.Criterion;

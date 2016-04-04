@@ -1,5 +1,7 @@
 package eu.esens.espdvcd.builder;
 
+import eu.esens.espdvcd.builder.schema.SchemaFactory;
+import eu.esens.espdvcd.builder.model.ESPDRequestModelFactory;
 import eu.esens.espdvcd.model.RequirementGroup;
 import eu.esens.espdvcd.model.SimpleESPDRequest;
 import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
@@ -57,7 +59,9 @@ public class ESPDCriteriaExtractorTest {
     public void loadTransformAndDisplayTest() {
         
         ESPDRequestType reqType = JAXB.unmarshal(ESPDCriteriaExtractorTest.class.getResourceAsStream("/espd-request.xml"),ESPDRequestType.class);
-        SimpleESPDRequest req = ModelFactory.extractESPDRequest(reqType);
+        
+        ESPDRequestModelFactory f = new ESPDRequestModelFactory();
+        SimpleESPDRequest req = f.extractESPDRequest(reqType);
         
         ESPDRequestType req2Type = SchemaFactory.extractESPDRequestType(req);
         JAXB.marshal(req2Type, System.out);

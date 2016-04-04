@@ -1,4 +1,4 @@
-package eu.esens.espdvcd.builder;
+package eu.esens.espdvcd.builder.model;
 
 import eu.esens.espdvcd.model.CADetails;
 import eu.esens.espdvcd.model.LegislationReference;
@@ -6,7 +6,6 @@ import eu.esens.espdvcd.model.requirement.RequestRequirement;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.RequirementGroup;
 import eu.esens.espdvcd.model.SelectableCriterion;
-import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.CriterionType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.LegislationType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementGroupType;
@@ -17,7 +16,7 @@ import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.Cont
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.DocumentReferenceType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ContractFolderIDType;
 
-public interface ModelFactory {
+public interface ModelExtractor {
   
     default CADetails extractCADetails(ContractingPartyType caParty, 
                                        ContractFolderIDType contractFolderId,

@@ -1,5 +1,8 @@
 package eu.esens.espdvcd.builder;
 
+import eu.esens.espdvcd.builder.schema.SchemaFactory;
+import eu.esens.espdvcd.builder.model.ESPDRequestModelFactory;
+import eu.esens.espdvcd.builder.model.ModelFactory;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
@@ -29,8 +32,8 @@ public class ESPDBuilder {
         ESPDRequestType reqType = read(xmlESPD);
 
         // Create the Model Object
-        ESPDRequestModelFactory f = new ESPDRequestModelFactory();
-        ESPDRequest req = f.extractESPDRequest(reqType); 
+       
+        ESPDRequest req = ModelFactory.ESPD_REQUEST.extractESPDRequest(reqType); 
         
         return req;
 
