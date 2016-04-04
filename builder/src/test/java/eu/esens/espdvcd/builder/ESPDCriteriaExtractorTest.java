@@ -1,7 +1,6 @@
 package eu.esens.espdvcd.builder;
 
 import eu.esens.espdvcd.builder.schema.SchemaFactory;
-import eu.esens.espdvcd.builder.model.ESPDRequestModelFactory;
 import eu.esens.espdvcd.builder.model.ModelFactory;
 import eu.esens.espdvcd.model.RequirementGroup;
 import eu.esens.espdvcd.model.SimpleESPDRequest;
@@ -22,12 +21,12 @@ public class ESPDCriteriaExtractorTest {
     }
 
     /**
-     * Test of getFullList method, of class ESPDCriteriaExtractor.
+     * Test of getFullList method, of class PredefinedESPDCriteriaExtractor.
      */
     @Ignore
     @Test
     public void testGetFullList() {
-        ESPDCriteriaExtractor ce = new ESPDCriteriaExtractor();
+        PredefinedESPDCriteriaExtractor ce = new PredefinedESPDCriteriaExtractor();
         ce.getFullList().stream()
                 .forEach(c -> {
                     System.out.println(c.getID() + " " + c.getName() + " (" + c.getTypeCode() + ")");
