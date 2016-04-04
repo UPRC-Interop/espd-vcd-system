@@ -10,17 +10,20 @@ import javax.xml.bind.JAXB;
 public class ESPDCriteriaExtractor implements CriteriaExtractor {
 
     private final List<CriterionType> criterionTypeList;
-    private static final String ESPDREQUEST_RESOURCE = "/espd-request.xml"; 
+    private static final String ESPDREQUEST_RESOURCE = "/espd-request.xml";
+    private static final ESPDRequestModelFactory MODEL_FACTORY = new ESPDRequestModelFactory();
     
     public ESPDCriteriaExtractor() {
         ESPDRequestType requestTemplate = JAXB.unmarshal(CriteriaExtractor.class.getResourceAsStream(ESPDREQUEST_RESOURCE), ESPDRequestType.class);    
         criterionTypeList = requestTemplate.getCriterion();
+        
+        
     }
     
     @Override
     public List<SelectableCriterion> getFullList() {
         return criterionTypeList.stream()
-                .map(c -> ModelFactory.extractSelectableCriterion(c))
+                .map(c -> MODEL_FACTORY.extractSelectableCriterion(c))
                 .collect(Collectors.toList());                
     }
 

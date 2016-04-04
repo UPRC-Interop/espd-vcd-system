@@ -29,7 +29,8 @@ public class ESPDBuilder {
         ESPDRequestType reqType = read(xmlESPD);
 
         // Create the Model Object
-        ESPDRequest req = ModelFactory.extractESPDRequest(reqType); 
+        ESPDRequestModelFactory f = new ESPDRequestModelFactory();
+        ESPDRequest req = f.extractESPDRequest(reqType); 
         
         return req;
 
