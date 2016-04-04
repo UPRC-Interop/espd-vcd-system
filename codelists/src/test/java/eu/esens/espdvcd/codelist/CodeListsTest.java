@@ -33,8 +33,12 @@ public class CodeListsTest {
         @Test 
         public void testAllGC() {
         
-            for (Codelists c : Codelists.values()) {
-                Assert.assertNotNull(!c.getBiMap().isEmpty());
+            try {
+                for (Codelists c : Codelists.values()) {
+                    Assert.assertNotNull(!c.getBiMap().isEmpty());
+                }
+            } catch (Exception e) {
+                Assert.fail(e.getMessage());
             }
         }
 }

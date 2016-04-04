@@ -58,7 +58,7 @@ public class SimpleESPDRequestTest {
     @Test
     public void testGetSelectionCriteriaList() {
         assertTrue("Size mismatch", req.getSelectionCriteriaList().size() == 1);
-        assertTrue("Type mismatch", req.getSelectionCriteriaList().get(0).getTypeCode().contains("SELECTION"));
+        assertTrue("Type mismatch", req.getSelectionCriteriaList().get(0).getTypeCode().contains("SELECTION"));       
     }
 
     /**
