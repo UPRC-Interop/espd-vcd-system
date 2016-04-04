@@ -86,7 +86,7 @@ public class ESPDBuilder {
     }
 
     public List<SelectableCriterion> getCriteriaList() {
-        CriteriaExtractor cr = new ESPDCriteriaExtractor();
+        CriteriaExtractor cr = new PredefinedESPDCriteriaExtractor();
         return cr.getFullList();
     }
 
