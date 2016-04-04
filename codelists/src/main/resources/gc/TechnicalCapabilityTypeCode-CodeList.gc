@@ -218,7 +218,7 @@
             <SimpleValue>CanonicalVersionUri</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>Placeholder2</SimpleValue>
+            <SimpleValue>Placeholder for Canonical Version Uri</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -226,7 +226,7 @@
             <SimpleValue>LocationUri</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-             <SimpleValue>Placeholder</SimpleValue>
+             <SimpleValue>Placeholder for Location Uri</SimpleValue>
          </Value>
       </Row>
       <Row>
