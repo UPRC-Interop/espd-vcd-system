@@ -59,8 +59,8 @@ public interface ModelExtractor {
         
         return cd;
     }
-    
-    default SelectableCriterion extractSelectableCriterion(CriterionType ct) {
+   
+     default SelectableCriterion extractSelectableCriterion(CriterionType ct, boolean isSelected) {
         String id = ct.getID().getValue();
         String desc = ct.getDescription().getValue();
         String typeCode = ct.getTypeCode().getValue();
@@ -75,9 +75,14 @@ public interface ModelExtractor {
                 .collect(Collectors.toList());
                 
         SelectableCriterion selCr = new SelectableCriterion(id, typeCode, name, desc, lr, rgList);
-        selCr.setSelected(true);
+        selCr.setSelected(isSelected);
         return selCr;
     }
+     
+     default SelectableCriterion extractSelectableCriterion(CriterionType ct) {
+        return extractSelectableCriterion(ct, true);
+    }
+     
     
     default RequirementGroup extractRequirementGroup(RequirementGroupType rgType) {
        

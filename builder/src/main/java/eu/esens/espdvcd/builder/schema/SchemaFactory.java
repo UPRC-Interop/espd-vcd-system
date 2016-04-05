@@ -119,23 +119,28 @@ public interface SchemaFactory {
 
         DocumentReferenceType dr = new DocumentReferenceType();
 
-        if (cd != null && cd.getProcurementProcedureTitle() != null) {
+        if (cd != null) {
 
             if (cd.getProcurementPublicationNumber() != null) {
                 dr.setID(createISOIECIDType(cd.getProcurementPublicationNumber()));
             }
+
             dr.setDocumentTypeCode(createDocumentTypeCode("TED_CN"));
 
-            dr.setAttachment(new AttachmentType());
-            dr.getAttachment().setExternalReference(new ExternalReferenceType());
-            dr.getAttachment().getExternalReference().setFileName(new FileNameType());
+            if (cd.getProcurementProcedureTitle() != null || cd.getProcurementProcedureDesc() != null) {
+                dr.setAttachment(new AttachmentType());
 
-            dr.getAttachment().getExternalReference().getFileName().setValue(cd.getProcurementProcedureTitle());
+                if (cd.getProcurementProcedureTitle() != null) {
+                    dr.getAttachment().setExternalReference(new ExternalReferenceType());
+                    dr.getAttachment().getExternalReference().setFileName(new FileNameType());
+                    dr.getAttachment().getExternalReference().getFileName().setValue(cd.getProcurementProcedureTitle());
+                }
 
-            if (cd.getProcurementProcedureDesc() != null) {
-                DescriptionType dt = new DescriptionType();
-                dt.setValue(cd.getProcurementProcedureDesc());
-                dr.getAttachment().getExternalReference().getDescription().add(dt);
+                if (cd.getProcurementProcedureDesc() != null) {
+                    DescriptionType dt = new DescriptionType();
+                    dt.setValue(cd.getProcurementProcedureDesc());
+                    dr.getAttachment().getExternalReference().getDescription().add(dt);
+                }
             }
         }
         return dr;
