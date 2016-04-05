@@ -14,6 +14,7 @@ public class CADetails implements Serializable{
     private String procurementProcedureDesc;
     private String procurementProcedureFileReferenceNo;
     private String procurementProjectLot;
+    private String procurementPublicationNumber;
    
     //This could be changed to something that comes from an enumeration
     private String caCountry;
@@ -65,5 +66,12 @@ public class CADetails implements Serializable{
     public void setCACountry(String caCountry) {
         this.caCountry = caCountry;
     }
-   
+
+    public String getProcurementPublicationNumber() {
+        return procurementPublicationNumber;
+    }
+
+    public void setProcurementPublicationNumber(String procurementPublicationNumber) {
+        this.procurementPublicationNumber = procurementPublicationNumber;
+    }   
 }
