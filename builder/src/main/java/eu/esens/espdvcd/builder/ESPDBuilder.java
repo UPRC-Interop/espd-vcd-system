@@ -1,7 +1,6 @@
 package eu.esens.espdvcd.builder;
 
 import eu.esens.espdvcd.builder.schema.SchemaFactory;
-import eu.esens.espdvcd.builder.model.ESPDRequestModelFactory;
 import eu.esens.espdvcd.builder.model.ModelFactory;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.SelectableCriterion;
@@ -26,19 +25,24 @@ import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.IssueTim
  */
 public class ESPDBuilder {
 
+    private boolean insertAllCriteria = true;
+    
     public ESPDRequest createESPDRequestFromXML(InputStream xmlESPD) throws Exception {
 
         // Check and read the file in the JAXB Object
         ESPDRequestType reqType = read(xmlESPD);
 
-        // Create the Model Object
-       
+        // Create the Model Object      
         ESPDRequest req = ModelFactory.ESPD_REQUEST.extractESPDRequest(reqType); 
         
+        if (insertAllCriteria) {
+          CriteriaExtractor cr = new PredefinedESPDCriteriaExtractor();
+            req.setCriterionList(cr.getFullList(req.getFullCriterionList()));
+        }
         return req;
 
     }
-
+    
     public ESPDRequestType createXML(ESPDRequest req) {
 
         ESPDRequestType reqType = finalize(SchemaFactory.extractESPDRequestType(req));
@@ -97,4 +101,11 @@ public class ESPDBuilder {
         return er;
     }
     
+    public void setInsertAllCriteria(boolean insertAll) {
+        insertAllCriteria = insertAll;
+    }
+    
+    public boolean isInsertAllCriteria() {
+        return insertAllCriteria;
+    } 
 }

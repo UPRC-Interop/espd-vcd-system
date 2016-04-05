@@ -112,7 +112,7 @@ public class EspdTemplate extends Master {
                 try {
                     InputStream is = new FileInputStream(file);
                     ESPDBuilder espdBuilder = new ESPDBuilder();
-                    espdRequest = espdBuilder.createFromXML(is);
+                    espdRequest = espdBuilder.createESPDRequestFromXML(is);
                     espdRequestForm = new ESPDRequestForm(thisView, espdRequest);
                     mainContent.addComponent(espdRequestForm);
                     is.close();
