@@ -27,6 +27,7 @@ public class ESPDRequestModelFactory implements ModelExtractor {
         
         req.setCADetails(extractCADetails(reqType.getContractingParty(),
                                           reqType.getContractFolderID(),
+                                          reqType.getProcurementProjectLot().get(0),
                                           reqType.getAdditionalDocumentReference()));
         
         return req;

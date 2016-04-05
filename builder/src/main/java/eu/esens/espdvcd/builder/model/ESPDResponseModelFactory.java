@@ -38,6 +38,7 @@ public class ESPDResponseModelFactory implements ModelExtractor {
         
         res.setCADetails(extractCADetails(resType.getContractingParty(),
                 resType.getContractFolderID(),
+                resType.getProcurementProjectLot().get(0),
                 resType.getAdditionalDocumentReference()));
 
         return res;

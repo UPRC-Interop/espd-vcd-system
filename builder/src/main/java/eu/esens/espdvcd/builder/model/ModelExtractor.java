@@ -14,12 +14,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ContractingPartyType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.DocumentReferenceType;
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ExternalReferenceType;
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ProcurementProjectLotType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ContractFolderIDType;
 
 public interface ModelExtractor {
   
     default CADetails extractCADetails(ContractingPartyType caParty, 
                                        ContractFolderIDType contractFolderId,
+                                       ProcurementProjectLotType procurementProjectLot,
                                        List<DocumentReferenceType> additionalDocumentReferenceList) {
         
         CADetails cd = new CADetails();
@@ -33,13 +36,25 @@ public interface ModelExtractor {
         cd.setCACountry(caParty
                 .getParty().getPostalAddress().getCountry().getIdentificationCode().getValue());
 
-        //TODO: Need to add null checks here
-        cd.setProcurementProcedureFileReferenceNo(contractFolderId.getValue());
-        cd.setProcurementProcedureTitle(additionalDocumentReferenceList.get(0).getAttachment().getExternalReference().getFileName().getValue());
-        cd.setProcurementProcedureDesc(additionalDocumentReferenceList.get(0).getAttachment().getExternalReference().getDescription().get(0).getValue());
+        if (contractFolderId !=null && contractFolderId.getValue() != null) {
+            cd.setProcurementProcedureFileReferenceNo(contractFolderId.getValue());
+        }
+        if (!additionalDocumentReferenceList.isEmpty()) {
+            DocumentReferenceType ref = additionalDocumentReferenceList.get(0);
+            if (ref.getAttachment() != null && ref.getAttachment().getExternalReference() != null) {
+                ExternalReferenceType ert = ref.getAttachment().getExternalReference();
+                cd.setProcurementProcedureTitle(ert.getFileName().getValue());
+                if (!ert.getDescription().isEmpty()) {
+                    cd.setProcurementProcedureDesc(ert.getDescription().get(0).getValue());
+                }
+            }
+        }
+        
+        if (procurementProjectLot != null) {
+            cd.setProcurementProjectLot(procurementProjectLot.getID().getValue());
+        }
         
         return cd;
-        
     }
     
     default SelectableCriterion extractSelectableCriterion(CriterionType ct) {
