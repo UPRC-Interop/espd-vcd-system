@@ -63,13 +63,13 @@ public class ESPDBuilder {
         c.setTime(now);
        
         try {
-            XMLGregorianCalendar date2 = DatatypeFactory.newInstance().newXMLGregorianCalendar();
+            XMLGregorianCalendar date2 = DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
             reqType.setIssueDate(new IssueDateType());
             reqType.getIssueDate().setValue(date2.normalize());
             reqType.setIssueTime(new IssueTimeType());
             reqType.getIssueTime().setValue(date2.normalize());
         } catch (DatatypeConfigurationException e) {
-            
+            System.out.println("ERROR in DATES!");
         }
         
         reqType.setID(SchemaFactory.createISOIECIDType(UUID.randomUUID().toString()));
