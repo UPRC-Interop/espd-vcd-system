@@ -22,6 +22,7 @@ public class CADetailsForm extends VerticalLayout {
     private Panel panelInformationProcurementProcedure;
     private VerticalLayout layoutInformationProcurementProcedure;
     private Label informationAboutPublicationText = new Label("For procurement procedures in which a call for competition has been published in the Official Journal of the European Union, the information required under Part I will be automatically retrieved, provided that the electronic ESPD-service is used to generate and fill in the ESPD. Reference of the relevant notice published in the Official Journal of the European Union:");
+
     @PropertyId("CACountry")
     private CountryComboBox caCountry;
     @PropertyId("CAOfficialName")
@@ -29,6 +30,7 @@ public class CADetailsForm extends VerticalLayout {
     private TextField procurementProcedureTitle;
     private TextField procurementProcedureDesc;
     private TextField procurementProcedureFileReferenceNo;
+    private ProducurementPublicationNumberField procurementPublicationNumber;
 
     public CADetailsForm(ESPDRequest espdRequest) {
         setMargin(true);
@@ -47,6 +49,7 @@ public class CADetailsForm extends VerticalLayout {
         procurementProcedureTitle = new TextField();
         procurementProcedureDesc = new TextField();
         procurementProcedureFileReferenceNo = new TextField();
+        procurementPublicationNumber = new ProducurementPublicationNumberField("Notice number in the OJS:");
 
         this.addComponent(panelInformationAboutPublication);
         panelInformationAboutPublication.setContent(layoutInformationAboutPublication);
@@ -55,6 +58,7 @@ public class CADetailsForm extends VerticalLayout {
         this.addComponent(panelInformationProcurementProcedure);
         panelInformationProcurementProcedure.setContent(layoutInformationProcurementProcedure);
         layoutInformationAboutPublication.addComponent(informationAboutPublicationText);
+        layoutInformationAboutPublication.addComponent(procurementPublicationNumber);
         layoutIdentifyProcurer.addComponent(caCountry);
         layoutIdentifyProcurer.addComponent(caOfficialName);
         layoutInformationProcurementProcedure.addComponent(procurementProcedureTitle);

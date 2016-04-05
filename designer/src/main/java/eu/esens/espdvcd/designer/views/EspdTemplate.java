@@ -74,6 +74,7 @@ public class EspdTemplate extends Master {
 
         CADetails caDetails = new CADetails();
         caDetails.setCACountry("Sweden");
+        caDetails.setProcurementPublicationNumber("____/S ___-______");
 
         espdRequest = new SimpleESPDRequest();
         espdRequest.setCADetails(caDetails);
