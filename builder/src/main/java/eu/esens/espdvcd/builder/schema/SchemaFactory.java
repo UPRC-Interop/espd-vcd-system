@@ -121,7 +121,9 @@ public interface SchemaFactory {
 
         if (cd != null && cd.getProcurementProcedureTitle() != null) {
 
-            dr.setID(createISOIECIDType(cd.getProcurementProcedureFileReferenceNo()));
+            if (cd.getProcurementPublicationNumber() != null) {
+                dr.setID(createISOIECIDType(cd.getProcurementPublicationNumber()));
+            }
             dr.setDocumentTypeCode(createDocumentTypeCode("TED_CN"));
 
             dr.setAttachment(new AttachmentType());

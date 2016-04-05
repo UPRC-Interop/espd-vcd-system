@@ -27,7 +27,7 @@ public interface ModelExtractor {
         
         CADetails cd = new CADetails();
        
-        if (caParty.getParty().getPartyName().isEmpty()) {
+        if (!caParty.getParty().getPartyName().isEmpty()) {
             cd.setCAOfficialName(caParty
                     .getParty().getPartyName()
                     .get(0).getName().getValue());
@@ -41,6 +41,9 @@ public interface ModelExtractor {
         }
         if (!additionalDocumentReferenceList.isEmpty()) {
             DocumentReferenceType ref = additionalDocumentReferenceList.get(0);
+            if (ref.getID() != null) {
+               cd.setProcurementPublicationNumber(ref.getID().getValue());
+           }
             if (ref.getAttachment() != null && ref.getAttachment().getExternalReference() != null) {
                 ExternalReferenceType ert = ref.getAttachment().getExternalReference();
                 cd.setProcurementProcedureTitle(ert.getFileName().getValue());
