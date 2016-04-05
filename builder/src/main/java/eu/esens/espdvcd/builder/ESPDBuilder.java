@@ -26,7 +26,7 @@ import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.IssueTim
  */
 public class ESPDBuilder {
 
-    public ESPDRequest createFromXML(InputStream xmlESPD) throws Exception {
+    public ESPDRequest createESPDRequestFromXML(InputStream xmlESPD) throws Exception {
 
         // Check and read the file in the JAXB Object
         ESPDRequestType reqType = read(xmlESPD);
