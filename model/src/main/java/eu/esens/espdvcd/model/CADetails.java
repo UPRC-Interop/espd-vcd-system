@@ -13,9 +13,18 @@ public class CADetails implements Serializable{
     private String procurementProcedureTitle;
     private String procurementProcedureDesc;
     private String procurementProcedureFileReferenceNo;
+    private String procurementProjectLot;
    
     //This could be changed to something that comes from an enumeration
     private String caCountry;
+
+    public String getProcurementProjectLot() {
+        return procurementProjectLot;
+    }
+
+    public void setProcurementProjectLot(String procurementProjectLot) {
+        this.procurementProjectLot = procurementProjectLot;
+    }
 
     public String getCAOfficialName() {
         return caOfficialName;
