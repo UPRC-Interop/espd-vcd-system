@@ -14,6 +14,11 @@
     margin: 5px;
   }*/
 
+  .v-label
+  {
+     white-space: normal;
+  }
+
   .v-slot {
 
   }
@@ -76,7 +81,7 @@
   }
 
   .v-label-topheaderWelcomeText {
-    color: #f4c583;
+    color: #aaa;
     padding: 10px;
     font-size: 28px;
     font-weight: bold;
@@ -121,7 +126,7 @@
     background-image: none;
     box-shadow: inset 0px 0px 0px 0px #000;
     border: 0px solid #dcdcdc;
-    font-size: 18px;
+    font-size: 16px;
     color: #e3e3e3;
     text-align: left;
   }
@@ -130,7 +135,7 @@
     @extend .v-button-navigatorButtonDark;
     background-color: #5c5c5c;
     color: #b3b3b3;
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .navigatorHeaderTitle {
@@ -150,15 +155,15 @@
   
   }
 
-  .dashboard-gridLayout {
+  .espdTemplate-gridLayout {
     width: 100%;
   }
 
-  .dashboard-columns {
+  .espdTemplate-columns {
     //width: 100%;
   }
 
-  .dashboard-newEspdTemplateButton {
+  .espdTemplate-newEspdTemplateButton {
     background-image: none;
     background-color: #569AC4;
     box-shadow: inset 0px 0px 0px 0px #000;
@@ -288,5 +293,23 @@
     font-weight: bold;
     font-variant: small-caps;
     color: #e3e3e3;
+  }
+
+  .v-slot-EspdTemplate-panelLeft,
+  .v-slot-EspdTemplate-panelRight {
+    width: 50%;
+  }
+
+  .v-verticallayout-panelLeftLayout,
+  .v-verticallayout-panelRightLayout {
+    padding: 12px;
+  }
+
+  .v-button-espdTemplate-panelButton {
+    width: 100%;
+    margin-top: 16px;
+  }
+  .v-upload {
+    width: 100%;
   }
 }

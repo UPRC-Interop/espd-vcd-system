@@ -38,6 +38,14 @@ public class UserManager {
     }
 
     /**
+     * Logs out currently logged in user session
+     */
+    public static void logout() {
+        VaadinSession.getCurrent().setAttribute("auth", false);
+        VaadinSession.getCurrent().setAttribute("userContext", false);
+    }
+
+    /**
      * Checks if the user session is fully authenticated and valid
      *
      * @return true if the user session is verified to be valid

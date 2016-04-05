@@ -53,7 +53,7 @@ public class Sandbox extends Master {
         printButton.addClickListener(this::onPrint);
         pageContent.addComponent(printButton);
 
-        Label testLabel = new Label("Test Label");
+        Label testLabel = new Label("Test Labels");
         testLabel.addStyleName("testingstyle");
         testLabel.removeStyleName("testingstyle");
         pageContent.addComponent(testLabel);
