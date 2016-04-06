@@ -7,7 +7,6 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
-import eu.esens.espdvcd.model.SelectableCriterion;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
