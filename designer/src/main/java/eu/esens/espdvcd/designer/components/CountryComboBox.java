@@ -7,48 +7,38 @@ package eu.esens.espdvcd.designer.components;
 import com.vaadin.data.util.IndexedContainer;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.ComboBox;
+import com.vaadin.ui.UI;
 import eu.esens.espdvcd.codelist.Codelists;
+import org.apache.commons.lang3.text.WordUtils;
 
+import java.io.File;
+import java.io.InputStream;
 import java.util.*;
 
 public class CountryComboBox extends ComboBox {
 
-    private HashMap<String, String> countries = new HashMap<String, String>();
-    IndexedContainer ic = new IndexedContainer();
-
-    public CountryComboBox(String title, String defaultValue) {
+    public CountryComboBox(String title) {
         super(title);
 
-        setContainerDataSource(ic);
-        setValue(defaultValue);
-    }
+        Iterator<String> iterator = Codelists.CountryIdentification.getBiMap().values().iterator();
+        while (iterator.hasNext()) {
+            String countryName = iterator.next();
+            String countryId = Codelists.CountryIdentification.getIdForData(countryName);
+            addItem(countryId);
+            setItemCaption(countryId, WordUtils.capitalize(countryName.toLowerCase()));
+            String flagPath = "img/flags_iso/24/" + countryId.toLowerCase() + ".png";
 
-    public CountryComboBox(String title, List<String> countries) {
-        super(title);
-
-        IndexedContainer ic = new IndexedContainer(countries);
-        for (int i=0; i<ic.size(); i++) {
-            String country = (String)ic.getIdByIndex(i);
-            String isoCode = "";
-            try {
-                isoCode = Codelists.CountryIdentification.getIdForData(country.toUpperCase());
-            } catch (IllegalArgumentException e) {
-                isoCode = "null";
+            UI ui = UI.getCurrent();
+            InputStream s = ui.getSession().getService().getThemeResourceAsStream(ui, ui.getTheme(), flagPath);
+            if (s != null) {
+                ThemeResource iconResource = new ThemeResource("img/flags_iso/24/" + countryId.toLowerCase() + ".png");
+                setItemIcon(countryId, iconResource);
+            } else {
+                ThemeResource iconResource = new ThemeResource("img/flags_iso/24/null.png");
+                setItemIcon(countryId, iconResource);
             }
-            addIconItem(country, "img/flags_iso/24/" + isoCode.toLowerCase() + ".png");
         }
 
-        setContainerDataSource(ic);
-    }
-
-    public void addIconItem(String name, String iconPath) {
-        countries.put(name, iconPath);
-        ic.addItem(name);
-        ThemeResource iconResource = new ThemeResource(iconPath);
-        setItemIcon(name, iconResource);
-
-        if (ic.size() == 1) {
-            setValue(name);
-        }
+        this.setInputPrompt("Select country");
     }
 }

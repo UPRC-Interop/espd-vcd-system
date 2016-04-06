@@ -20,7 +20,7 @@ public class ProducurementPublicationNumberField extends TextField {
         thisField = this;
 
         this.setTextChangeEventMode(TextChangeEventMode.EAGER);
-
+        this.setNullRepresentation("");
         this.setInputPrompt("____/S ___-______");
 
         this.addTextChangeListener(new FieldEvents.TextChangeListener() {

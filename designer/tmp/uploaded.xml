@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <ns8:ESPDRequest xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:ns6="urn:isa:names:specification:ubl:schema:xsd:CEV-CommonBasicComponents-1" xmlns:ns5="urn:isa:names:specification:ubl:schema:xsd:CCV-CommonAggregateComponents-1" xmlns:ns8="urn:grow:names:specification:ubl:schema:xsd:ESPDRequest-1" xmlns:ns7="urn:isa:names:specification:ubl:schema:xsd:CEV-CommonAggregateComponents-1" xmlns:ns2="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns:ns4="urn:isa:names:specification:ubl:schema:xsd:CCV-CommonBasicComponents-1" xmlns:ns3="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2">
     <UBLVersionID schemeAgencyID="OASIS-UBL-TC">2.1</UBLVersionID>
-    <CustomizationID schemeName="CustomizationID" schemeAgencyID="BII" schemeVersionID="1.0">urn:www.cenbii.eu:transaction:biitrns070:ver3.0</CustomizationID>
-    <ID schemeID="ISO/IEC 9834-8:2008 - 4UUID" schemeAgencyID="EU-COM-GROW" schemeAgencyName="DG GROW (European Commission)" schemeVersionID="1.1">321c0ec8-cec6-4ff1-8d41-bf04ba642a5e</ID>
+    <CustomizationID schemeName="CustomizationID" schemeAgencyID="BII" schemeVersionID="3.0">urn:www.cenbii.eu:transaction:biitrns070:ver3.0</CustomizationID>
+    <ID schemeID="ISO/IEC 9834-8:2008 - 4UUID" schemeAgencyID="EU-COM-GROW" schemeAgencyName="DG GROW (European Commission)" schemeVersionID="1.1">84cf7710-72bd-4615-96ff-cedd50d4ff0e</ID>
     <CopyIndicator>false</CopyIndicator>
     <VersionID schemeAgencyID="EU-COM-GROW">1</VersionID>
-    <IssueDate></IssueDate>
-    <IssueTime></IssueTime>
-    <ContractFolderID schemeAgencyID="TeD">cc</ContractFolderID>
+    <IssueDate>2016-04-05Z</IssueDate>
+    <IssueTime>15:42:05.309Z</IssueTime>
+    <ContractFolderID schemeAgencyID="TeD"> ddddd</ContractFolderID>
     <ns3:ContractingParty>
         <ns3:Party>
             <ns3:PartyName>
-                <Name>aabbcc</Name>
+                <Name>aaaaa</Name>
             </ns3:PartyName>
             <ns3:PostalAddress>
                 <ns3:Country>
@@ -20,11 +20,14 @@
             </ns3:PostalAddress>
         </ns3:Party>
     </ns3:ContractingParty>
+    <ns3:ProcurementProjectLot>
+        <ID/>
+    </ns3:ProcurementProjectLot>
     <ns5:Criterion>
-        <ID schemeID="CriteriaID" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">005eb9ed-1347-4ca3-bb29-9bc0db64e1ab</ID>
+        <ID schemeID="CriteriaID" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">297d2323-3ede-424e-94bc-a91561e6f320</ID>
         <TypeCode listID="CriteriaTypeCode" listAgencyID="EU-COM-GROW" listVersionID="1.0">EXCLUSION.CRIMINAL_CONVICTIONS</TypeCode>
-        <Name>Participation in a criminal organisation</Name>
-        <Description>Has the economic operator itself or any person who is a member of its administrative, management or supervisory body or has powers of representation, decision or control therein been the subject of a conviction by final judgment for participation in a criminal orgnisation, by a conviction rendered at the most five years ago or in which an exclusion period set out directly in the conviction continues to be applicable? As defined in Article 2 of Council Framework Decision 2008/841/JHA of 24 October 2008 on the fight against organised crime (OJ L 300, 11.11.2008, p. 42).</Description>
+        <Name>Fraud</Name>
+        <Description>Has the economic operator itself or any person who is a member of its administrative, management or supervisory body or has powers of representation, decision or control therein been the subject of a conviction by final judgment for fraud, by a conviction rendered at the most five years ago or in which an exclusion period set out directly in the conviction continues to be applicable? Within the meaning of Article 1 of the Convention on the protection of the European Communities' financial interests (OJ C 316, 27.11.1995, p. 48).</Description>
         <ns5:LegislationReference>
             <ns4:Title>DIRECTIVE 2014/24/EU OF THE EUROPEAN PARLIAMENT AND OF THE COUNCIL of 26 February 2014 on public procurement and repealing Directive 2004/18/EC</ns4:Title>
             <Description>Directive 2014/24/EU</Description>
@@ -33,7 +36,7 @@
             <URI>http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32014L0024</URI>
         </ns5:LegislationReference>
         <ns5:RequirementGroup>
-            <ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7c637c0c-7703-4389-ba52-02997a055bd7</ID>
+            <ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">94ff6812-b9a6-40c7-9676-d9fb83b51d51</ID>
             <ns5:Requirement responseDataType="INDICATOR">
                 <ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">974c8196-9d1c-419c-9ca9-45bb9f5fd59a</ID>
                 <Description>Your answer?</Description>
@@ -96,6 +99,68 @@
         </ns5:LegislationReference>
         <ns5:RequirementGroup>
             <ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">2380efc6-2c86-4aa6-8645-c56cb87ad5a1</ID>
+            <ns5:Requirement responseDataType="INDICATOR">
+                <ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">974c8196-9d1c-419c-9ca9-45bb9f5fd59a</ID>
+                <Description>Your answer?</Description>
+            </ns5:Requirement>
+            <ns5:Requirement responseDataType="DATE">
+                <ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">ecf40999-7b64-4e10-b960-7f8ff8674cf6</ID>
+                <Description>Date of conviction</Description>
+            </ns5:Requirement>
+            <ns5:Requirement responseDataType="DESCRIPTION">
+                <ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7d35fb7c-da5b-4830-b598-4f347a04dceb</ID>
+                <Description>Reason</Description>
+            </ns5:Requirement>
+            <ns5:Requirement responseDataType="DESCRIPTION">
+                <ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">c5012430-14da-454c-9d01-34cedc6a7ded</ID>
+                <Description>Who has been convicted</Description>
+            </ns5:Requirement>
+            <ns5:Requirement responseDataType="PERIOD">
+                <ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">9ca9096f-edd2-4f19-b6b1-b55c83a2d5c8</ID>
+                <Description>Length of the period of exclusion</Description>
+            </ns5:Requirement>
+            <ns5:RequirementGroup>
+                <ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">41dd2e9b-1bfd-44c7-93ee-56bd74a4334b</ID>
+                <ns5:Requirement responseDataType="INDICATOR">
+                    <ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">20c5361b-7599-4ee6-b030-7f8323174d1e</ID>
+                    <Description>Have you taken measures to demonstrate your reliability ("Self-Cleaning")?</Description>
+                </ns5:Requirement>
+                <ns5:Requirement responseDataType="DESCRIPTION">
+                    <ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7b07904f-e080-401a-a3a1-9a3efeeda54b</ID>
+                    <Description>Please describe them</Description>
+                </ns5:Requirement>
+            </ns5:RequirementGroup>
+        </ns5:RequirementGroup>
+        <ns5:RequirementGroup>
+            <ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7458d42a-e581-4640-9283-34ceb3ad4345</ID>
+            <ns5:Requirement responseDataType="INDICATOR">
+                <ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">c1347b74-1872-4060-a6db-f4044edcd7c4</ID>
+                <Description>Is this information available electronically?</Description>
+            </ns5:Requirement>
+            <ns5:Requirement responseDataType="EVIDENCE_URL">
+                <ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">f4313bb6-21b6-499e-bdff-debe10e11d2c</ID>
+                <Description>URL</Description>
+            </ns5:Requirement>
+            <ns5:Requirement responseDataType="CODE">
+                <ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">1f1cd18e-3e01-4ca2-af4c-e2981924ba8d</ID>
+                <Description>Code</Description>
+            </ns5:Requirement>
+        </ns5:RequirementGroup>
+    </ns5:Criterion>
+    <ns5:Criterion>
+        <ID schemeID="CriteriaID" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">47112079-6fec-47a3-988f-e561668c3aef</ID>
+        <TypeCode listID="CriteriaTypeCode" listAgencyID="EU-COM-GROW" listVersionID="1.0">EXCLUSION.CRIMINAL_CONVICTIONS</TypeCode>
+        <Name>Money laundering or terrorist financing</Name>
+        <Description>Has the economic operator itself or any person who is a member of its administrative, management or supervisory body or has powers of representation, decision or control therein been the subject of a conviction by final judgment for money laundering or terrorist financing, by a conviction rendered at the most five years ago or in which an exclusion period set out directly in the conviction continues to be applicable? As defined in Article 1 of Directive 2005/60/EC of the European Parliament and of the Council of 26 October 2005 on the prevention of the use of the financial system for the purpose of money laundering and terrorist financing (OJ L 309, 25.11.2005, p. 15).</Description>
+        <ns5:LegislationReference>
+            <ns4:Title>DIRECTIVE 2014/24/EU OF THE EUROPEAN PARLIAMENT AND OF THE COUNCIL of 26 February 2014 on public procurement and repealing Directive 2004/18/EC</ns4:Title>
+            <Description>Directive 2014/24/EU</Description>
+            <ns4:JurisdictionLevelCode listID="CriterionJurisdictionLevelCode" listAgencyID="EU-COM-GROW" listVersionID="1.0">EU_DIRECTIVE</ns4:JurisdictionLevelCode>
+            <ns4:Article>57(1)</ns4:Article>
+            <URI>http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32014L0024</URI>
+        </ns5:LegislationReference>
+        <ns5:RequirementGroup>
+            <ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7a866000-53f4-47a9-a4b7-f9f4a81392bf</ID>
             <ns5:Requirement responseDataType="INDICATOR">
                 <ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">974c8196-9d1c-419c-9ca9-45bb9f5fd59a</ID>
                 <Description>Your answer?</Description>
@@ -948,40 +1013,71 @@
         </ns5:RequirementGroup>
     </ns5:Criterion>
     <ns5:Criterion>
-        <ID schemeID="CriteriaID" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">63adb07d-db1b-4ef0-a14e-a99785cf8cf6</ID>
-        <TypeCode listID="CriteriaTypeCode" listAgencyID="EU-COM-GROW" listVersionID="1.0">EXCLUSION.OTHER</TypeCode>
-        <Name>Purely national exclusion grounds</Name>
-        <Description>Other exclusion grounds that may be foreseen in the national legislation of the contracting authority’s or contracting entity’s Member State. Do the purely national grounds of exclusion, which are specified in the relevant notice or in the procurement documents, apply?</Description>
+        <ID schemeID="CriteriaID" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">6ee55a59-6adb-4c3a-b89f-e62a7ad7be7f</ID>
+        <TypeCode listID="CriteriaTypeCode" listAgencyID="EU-COM-GROW" listVersionID="1.0">SELECTION.SUITABILITY</TypeCode>
+        <Name>Enrolment in a relevant professional register</Name>
+        <Description>It is enrolled in relevant professional registers kept in the Member State of its establishment as described in Annex XI of Directive 2014/24/EU; economic operators from certain Member States may have to comply with other requirements set out in that Annex.</Description>
         <ns5:LegislationReference>
             <ns4:Title>DIRECTIVE 2014/24/EU OF THE EUROPEAN PARLIAMENT AND OF THE COUNCIL of 26 February 2014 on public procurement and repealing Directive 2004/18/EC</ns4:Title>
             <Description>Directive 2014/24/EU</Description>
             <ns4:JurisdictionLevelCode listID="CriterionJurisdictionLevelCode" listAgencyID="EU-COM-GROW" listVersionID="1.0">EU_DIRECTIVE</ns4:JurisdictionLevelCode>
-            <ns4:Article>57(4)</ns4:Article>
+            <ns4:Article>58(2)</ns4:Article>
             <URI>http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32014L0024</URI>
         </ns5:LegislationReference>
         <ns5:RequirementGroup>
-            <ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">cff842a7-c95d-4445-8c89-84fcd53aa181</ID>
+            <ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">1768de86-a6c8-48e4-bd8e-de2f2f7424d0</ID>
             <ns5:Requirement responseDataType="INDICATOR">
-                <ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">974c8196-9d1c-419c-9ca9-45bb9f5fd59a</ID>
+                <ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">15335c12-ad77-4728-b5ad-3c06a60d65a4</ID>
                 <Description>Your answer?</Description>
-            </ns5:Requirement>
-            <ns5:Requirement responseDataType="DESCRIPTION">
-                <ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">e098da8e-4717-4500-965f-f882d5b4e1ad</ID>
-                <Description>Please describe them</Description>
             </ns5:Requirement>
         </ns5:RequirementGroup>
         <ns5:RequirementGroup>
-            <ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7458d42a-e581-4640-9283-34ceb3ad4345</ID>
+            <ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">9026e403-3eb6-4705-a9e9-e21a1efc867d</ID>
             <ns5:Requirement responseDataType="INDICATOR">
-                <ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">c1347b74-1872-4060-a6db-f4044edcd7c4</ID>
+                <ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">9dae5670-cb75-4c97-901b-96ddac5a633a</ID>
                 <Description>Is this information available electronically?</Description>
             </ns5:Requirement>
             <ns5:Requirement responseDataType="EVIDENCE_URL">
-                <ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">f4313bb6-21b6-499e-bdff-debe10e11d2c</ID>
+                <ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">03bb1954-13ae-47d8-8ef8-b7fe0f22d700</ID>
                 <Description>URL</Description>
             </ns5:Requirement>
             <ns5:Requirement responseDataType="CODE">
-                <ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">1f1cd18e-3e01-4ca2-af4c-e2981924ba8d</ID>
+                <ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">e2d863a0-60cb-4e58-8c14-4c1595af48b7</ID>
+                <Description>Code</Description>
+            </ns5:Requirement>
+        </ns5:RequirementGroup>
+    </ns5:Criterion>
+    <ns5:Criterion>
+        <ID schemeID="CriteriaID" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">87b3fa26-3549-4f92-b8e0-3fd8f04bf5c7</ID>
+        <TypeCode listID="CriteriaTypeCode" listAgencyID="EU-COM-GROW" listVersionID="1.0">SELECTION.SUITABILITY</TypeCode>
+        <Name>Enrolment in a trade register</Name>
+        <Description>It is enrolled in trade registers kept in the Member State of its establishment as described in Annex XI of Directive 2014/24/EU; economic operators from certain Member States may have to comply with other requirements set out in that Annex.</Description>
+        <ns5:LegislationReference>
+            <ns4:Title>DIRECTIVE 2014/24/EU OF THE EUROPEAN PARLIAMENT AND OF THE COUNCIL of 26 February 2014 on public procurement and repealing Directive 2004/18/EC</ns4:Title>
+            <Description>Directive 2014/24/EU</Description>
+            <ns4:JurisdictionLevelCode listID="CriterionJurisdictionLevelCode" listAgencyID="EU-COM-GROW" listVersionID="1.0">EU_DIRECTIVE</ns4:JurisdictionLevelCode>
+            <ns4:Article>58(2)</ns4:Article>
+            <URI>http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32014L0024</URI>
+        </ns5:LegislationReference>
+        <ns5:RequirementGroup>
+            <ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">8fe21e2c-5490-474b-90e6-fe25a7d8c538</ID>
+            <ns5:Requirement responseDataType="INDICATOR">
+                <ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">15335c12-ad77-4728-b5ad-3c06a60d65a4</ID>
+                <Description>Your answer?</Description>
+            </ns5:Requirement>
+        </ns5:RequirementGroup>
+        <ns5:RequirementGroup>
+            <ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">9026e403-3eb6-4705-a9e9-e21a1efc867d</ID>
+            <ns5:Requirement responseDataType="INDICATOR">
+                <ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">9dae5670-cb75-4c97-901b-96ddac5a633a</ID>
+                <Description>Is this information available electronically?</Description>
+            </ns5:Requirement>
+            <ns5:Requirement responseDataType="EVIDENCE_URL">
+                <ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">03bb1954-13ae-47d8-8ef8-b7fe0f22d700</ID>
+                <Description>URL</Description>
+            </ns5:Requirement>
+            <ns5:Requirement responseDataType="CODE">
+                <ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">e2d863a0-60cb-4e58-8c14-4c1595af48b7</ID>
                 <Description>Code</Description>
             </ns5:Requirement>
         </ns5:RequirementGroup>
@@ -2361,6 +2457,96 @@
         </ns5:RequirementGroup>
     </ns5:Criterion>
     <ns5:Criterion>
+        <ID schemeID="CriteriaID" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">cc18c023-211d-484d-a32e-52f3f970285f</ID>
+        <TypeCode listID="CriteriaTypeCode" listAgencyID="EU-COM-GROW" listVersionID="1.0">SELECTION.TECHNICAL_PROFESSIONAL_ABILITY</TypeCode>
+        <Name>Tools, plant or technical equipment</Name>
+        <Description>The following tools, plant or technical equipment will be available to it for performing the contract:</Description>
+        <ns5:LegislationReference>
+            <ns4:Title>DIRECTIVE 2014/24/EU OF THE EUROPEAN PARLIAMENT AND OF THE COUNCIL of 26 February 2014 on public procurement and repealing Directive 2004/18/EC</ns4:Title>
+            <Description>On public procurement and repealing Directive 2004/18/EC</Description>
+            <ns4:JurisdictionLevelCode listID="CriterionJurisdictionLevelCode" listAgencyID="EU-COM-GROW" listVersionID="1.0">EU_DIRECTIVE</ns4:JurisdictionLevelCode>
+            <ns4:Article>58(4)</ns4:Article>
+            <URI>http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32014L0024</URI>
+        </ns5:LegislationReference>
+        <ns5:RequirementGroup>
+            <ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">eb18b241-7a11-415d-a04f-94fe0dae8e77</ID>
+            <ns5:Requirement responseDataType="DESCRIPTION">
+                <ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">51391308-0bf6-423c-95e2-d5a54aa31fb8</ID>
+                <Description>Please describe them</Description>
+            </ns5:Requirement>
+        </ns5:RequirementGroup>
+        <ns5:RequirementGroup>
+            <ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">9026e403-3eb6-4705-a9e9-e21a1efc867d</ID>
+            <ns5:Requirement responseDataType="INDICATOR">
+                <ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">9dae5670-cb75-4c97-901b-96ddac5a633a</ID>
+                <Description>Is this information available electronically?</Description>
+            </ns5:Requirement>
+            <ns5:Requirement responseDataType="EVIDENCE_URL">
+                <ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">03bb1954-13ae-47d8-8ef8-b7fe0f22d700</ID>
+                <Description>URL</Description>
+            </ns5:Requirement>
+            <ns5:Requirement responseDataType="CODE">
+                <ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">e2d863a0-60cb-4e58-8c14-4c1595af48b7</ID>
+                <Description>Code</Description>
+            </ns5:Requirement>
+        </ns5:RequirementGroup>
+    </ns5:Criterion>
+    <ns5:Criterion>
+        <ID schemeID="CriteriaID" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">612a1625-118d-4ea4-a6db-413184e7c0a8</ID>
+        <TypeCode listID="CriteriaTypeCode" listAgencyID="EU-COM-GROW" listVersionID="1.0">SELECTION.TECHNICAL_PROFESSIONAL_ABILITY</TypeCode>
+        <Name>Subcontracting proportion</Name>
+        <Description>The economic operator intends possibly to subcontract  the following proportion (i.e. percentage) of the contract. Please note that if the economic operator has decided to subcontract a part of the contract and relies on the subcontractor’s capacities to perform that part, then please fill in a separate ESPD for such subcontractors, see Part II, Section C above.</Description>
+        <ns5:LegislationReference>
+            <ns4:Title>DIRECTIVE 2014/24/EU OF THE EUROPEAN PARLIAMENT AND OF THE COUNCIL of 26 February 2014 on public procurement and repealing Directive 2004/18/EC</ns4:Title>
+            <Description>On public procurement and repealing Directive 2004/18/EC</Description>
+            <ns4:JurisdictionLevelCode listID="CriterionJurisdictionLevelCode" listAgencyID="EU-COM-GROW" listVersionID="1.0">EU_DIRECTIVE</ns4:JurisdictionLevelCode>
+            <ns4:Article>58(4)</ns4:Article>
+            <URI>http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32014L0024</URI>
+        </ns5:LegislationReference>
+        <ns5:RequirementGroup>
+            <ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">575f7550-8a2d-4bad-b9d8-be07ab570076</ID>
+            <ns5:Requirement responseDataType="DESCRIPTION">
+                <ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">3aaca389-4a7b-406b-a4b9-080845d127e7</ID>
+                <Description>Please specify</Description>
+            </ns5:Requirement>
+        </ns5:RequirementGroup>
+    </ns5:Criterion>
+    <ns5:Criterion>
+        <ID schemeID="CriteriaID" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">bdf0601d-2480-4250-b870-658d0ee95be6</ID>
+        <TypeCode listID="CriteriaTypeCode" listAgencyID="EU-COM-GROW" listVersionID="1.0">SELECTION.TECHNICAL_PROFESSIONAL_ABILITY</TypeCode>
+        <Name>For supply contracts: samples, descriptions or photographs without certification of authenticity</Name>
+        <Description>For public supply contracts: The economic operator will supply the required samples, descriptions or photographs of the products to be supplied, which do not need to be accompanied by certifications of authenticity.</Description>
+        <ns5:LegislationReference>
+            <ns4:Title>DIRECTIVE 2014/24/EU OF THE EUROPEAN PARLIAMENT AND OF THE COUNCIL of 26 February 2014 on public procurement and repealing Directive 2004/18/EC</ns4:Title>
+            <Description>On public procurement and repealing Directive 2004/18/EC</Description>
+            <ns4:JurisdictionLevelCode listID="CriterionJurisdictionLevelCode" listAgencyID="EU-COM-GROW" listVersionID="1.0">EU_DIRECTIVE</ns4:JurisdictionLevelCode>
+            <ns4:Article>58(4)</ns4:Article>
+            <URI>http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32014L0024</URI>
+        </ns5:LegislationReference>
+        <ns5:RequirementGroup>
+            <ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">cb73544d-e8bb-4cc6-819b-b8e04f1e240e</ID>
+            <ns5:Requirement responseDataType="INDICATOR">
+                <ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">15335c12-ad77-4728-b5ad-3c06a60d65a4</ID>
+                <Description>Your answer?</Description>
+            </ns5:Requirement>
+        </ns5:RequirementGroup>
+        <ns5:RequirementGroup>
+            <ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">9026e403-3eb6-4705-a9e9-e21a1efc867d</ID>
+            <ns5:Requirement responseDataType="INDICATOR">
+                <ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">9dae5670-cb75-4c97-901b-96ddac5a633a</ID>
+                <Description>Is this information available electronically?</Description>
+            </ns5:Requirement>
+            <ns5:Requirement responseDataType="EVIDENCE_URL">
+                <ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">03bb1954-13ae-47d8-8ef8-b7fe0f22d700</ID>
+                <Description>URL</Description>
+            </ns5:Requirement>
+            <ns5:Requirement responseDataType="CODE">
+                <ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">e2d863a0-60cb-4e58-8c14-4c1595af48b7</ID>
+                <Description>Code</Description>
+            </ns5:Requirement>
+        </ns5:RequirementGroup>
+    </ns5:Criterion>
+    <ns5:Criterion>
         <ID schemeID="CriteriaID" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7662b7a9-bcb8-4763-a0a7-7505d8e8470d</ID>
         <TypeCode listID="CriteriaTypeCode" listAgencyID="EU-COM-GROW" listVersionID="1.0">SELECTION.TECHNICAL_PROFESSIONAL_ABILITY</TypeCode>
         <Name>For supply contracts: samples, descriptions or photographs with certification of authenticity</Name>
@@ -2474,45 +2660,6 @@
         </ns5:RequirementGroup>
     </ns5:Criterion>
     <ns5:Criterion>
-        <ID schemeID="CriteriaID" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">8ed65e48-fd0d-444f-97bd-4f58da632999</ID>
-        <TypeCode listID="CriteriaTypeCode" listAgencyID="EU-COM-GROW" listVersionID="1.0">SELECTION.QUALITY_ASSURANCE</TypeCode>
-        <Name>Certificates by independent bodies about environmental management systems or standards</Name>
-        <Description>Will the economic operator be able to produce certificates drawn up by independent bodies attesting that the economic operator complies with the required environmental management systems or standards?</Description>
-        <ns5:LegislationReference>
-            <ns4:Title>DIRECTIVE 2014/24/EU OF THE EUROPEAN PARLIAMENT AND OF THE COUNCIL of 26 February 2014 on public procurement and repealing Directive 2004/18/EC</ns4:Title>
-            <Description>On public procurement and repealing Directive 2004/18/EC</Description>
-            <ns4:JurisdictionLevelCode listID="CriterionJurisdictionLevelCode" listAgencyID="EU-COM-GROW" listVersionID="1.0">EU_DIRECTIVE</ns4:JurisdictionLevelCode>
-            <ns4:Article>62(2)</ns4:Article>
-            <URI>http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32014L0024</URI>
-        </ns5:LegislationReference>
-        <ns5:RequirementGroup>
-            <ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">82a59ce2-9c59-4075-af08-843ad89a45ec</ID>
-            <ns5:Requirement responseDataType="INDICATOR">
-                <ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">15335c12-ad77-4728-b5ad-3c06a60d65a4</ID>
-                <Description>Your answer?</Description>
-            </ns5:Requirement>
-            <ns5:Requirement responseDataType="DESCRIPTION">
-                <ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">b0aace10-fd73-46d1-ae78-289ee5cd42ca</ID>
-                <Description>If not, please explain why and specify which other means of proof concerning the environmental management systems or standards can be provided:</Description>
-            </ns5:Requirement>
-        </ns5:RequirementGroup>
-        <ns5:RequirementGroup>
-            <ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">9026e403-3eb6-4705-a9e9-e21a1efc867d</ID>
-            <ns5:Requirement responseDataType="INDICATOR">
-                <ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">9dae5670-cb75-4c97-901b-96ddac5a633a</ID>
-                <Description>Is this information available electronically?</Description>
-            </ns5:Requirement>
-            <ns5:Requirement responseDataType="EVIDENCE_URL">
-                <ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">03bb1954-13ae-47d8-8ef8-b7fe0f22d700</ID>
-                <Description>URL</Description>
-            </ns5:Requirement>
-            <ns5:Requirement responseDataType="CODE">
-                <ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">e2d863a0-60cb-4e58-8c14-4c1595af48b7</ID>
-                <Description>Code</Description>
-            </ns5:Requirement>
-        </ns5:RequirementGroup>
-    </ns5:Criterion>
-    <ns5:Criterion>
         <ID schemeID="CriteriaID" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">9c70375e-1264-407e-8b50-b9736bc08901</ID>
         <TypeCode listID="CriteriaTypeCode" listAgencyID="EU-COM-GROW" listVersionID="1.0">REDUCTION_OF_CANDIDATES</TypeCode>
         <Name>It meets the objective and non discriminatory criteria or rules to be applied in order to limit the number of candidates in the following way: In case certain certificates or other forms of documentary evidence are required, please indicate for each whether the economic operator has the required documents:</Name>
@@ -2545,12 +2692,12 @@
         </ns5:RequirementGroup>
     </ns5:Criterion>
     <ns3:AdditionalDocumentReference>
-        <ID schemeID="ISO/IEC 9834-8:2008 - 4UUID" schemeAgencyID="EU-COM-GROW" schemeAgencyName="DG GROW (European Commission)" schemeVersionID="1.1"></ID>
+        <ID schemeID="ISO/IEC 9834-8:2008 - 4UUID" schemeAgencyID="EU-COM-GROW" schemeAgencyName="DG GROW (European Commission)" schemeVersionID="1.1">____/S ___-______</ID>
         <DocumentTypeCode listID="ReferencesTypeCodes" listAgencyID="EU-COM-GROW" listVersionID="1.0">TED_CN</DocumentTypeCode>
         <ns3:Attachment>
             <ns3:ExternalReference>
-                <FileName>aa</FileName>
-                <Description>bb</Description>
+                <FileName> bbbbb</FileName>
+                <Description> cccccc</Description>
             </ns3:ExternalReference>
         </ns3:Attachment>
     </ns3:AdditionalDocumentReference>

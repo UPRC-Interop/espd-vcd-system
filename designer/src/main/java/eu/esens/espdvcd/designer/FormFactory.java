@@ -92,7 +92,7 @@ public class FormFactory {
 
         // A selection list element type, generate a basic Vaadin7 drop-down menu
         if (element.getElementType() == ElementType.SELECTIONLIST) {
-            CountryComboBox comboBox = new CountryComboBox(element.getID() + " " + element.getName(), "Sweden");
+            CountryComboBox comboBox = new CountryComboBox(element.getID() + " " + element.getName());
             layout.addComponent(comboBox);
 
             IndexedContainer ic = new IndexedContainer(element.getDefaultContent());
@@ -104,7 +104,7 @@ public class FormFactory {
                 } catch (IllegalArgumentException e) {
                     isoCode = "null";
                 }
-                comboBox.addIconItem(country, "img/flags_iso/24/" + isoCode.toLowerCase() + ".png");
+//                comboBox.addIconItem(country, "img/flags_iso/24/" + isoCode.toLowerCase() + ".png");
             }
 
         }

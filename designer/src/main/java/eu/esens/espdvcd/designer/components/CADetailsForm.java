@@ -44,7 +44,7 @@ public class CADetailsForm extends VerticalLayout {
         layoutIdentifyProcurer = new VerticalLayout();
         panelInformationProcurementProcedure = new Panel("Information about the procurement procedure");
         layoutInformationProcurementProcedure = new VerticalLayout();
-        caCountry =  new CountryComboBox("Country:", Arrays.asList("Germany", "Greece", "Sweden"));
+        caCountry =  new CountryComboBox("Country:");
         caOfficialName = new TextField();
         procurementProcedureTitle = new TextField();
         procurementProcedureDesc = new TextField();
@@ -74,13 +74,13 @@ public class CADetailsForm extends VerticalLayout {
         informationAboutPublicationText.setWidth(100, Unit.PERCENTAGE);
         caCountry.setCaption("Country:");
         caOfficialName.setCaption("Official Name:");
-        caOfficialName.setNullRepresentation(" ");
+        caOfficialName.setNullRepresentation("");
         procurementProcedureTitle.setCaption("Title:");
-        procurementProcedureTitle.setNullRepresentation(" ");
+        procurementProcedureTitle.setNullRepresentation("");
         procurementProcedureDesc.setCaption("Short Description:");
-        procurementProcedureDesc.setNullRepresentation(" ");
+        procurementProcedureDesc.setNullRepresentation("");
         procurementProcedureFileReferenceNo.setCaption("File reference number attributed by the contracting authority or contracting entity (if applicable):");
-        procurementProcedureFileReferenceNo.setNullRepresentation(" ");
+        procurementProcedureFileReferenceNo.setNullRepresentation("");
 
         CADetails caDetails = espdRequest.getCADetails();
 
