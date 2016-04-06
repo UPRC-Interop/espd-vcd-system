@@ -165,9 +165,9 @@
 
   .espdTemplate-newEspdTemplateButton {
     background-image: none;
-    background-color: #569AC4;
+    background-color: #58A8DA;
     box-shadow: inset 0px 0px 0px 0px #000;
-    border: 0px solid #569AC4;
+    border: 0px solid #58A8DA;
     font-size: 28px;
     color: #e3e3e3;
   }
@@ -178,9 +178,9 @@
 
   .v-panel-caption {
     box-shadow: inset 0px 0px 0px 0px #000;
-    border: 0px solid #569AC4;
+    border: 0px solid #58A8DA;
     border-radius: 0px;
-    background: #569AC4;
+    background: #58A8DA;
     color: #e3e3e3;
     font-size: 18px;
     font-weight: bold;
@@ -309,7 +309,38 @@
     width: 100%;
     margin-top: 16px;
   }
+
   .v-upload {
     width: 100%;
+  }
+
+  .mainContentTitleText {
+    font-size: 28px;
+    margin: 6px;
+    font-weight: 400;
+    color: #808080;
+  }
+
+  .progressBarLayout {
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    border-bottom-color: #D2D2D2;
+    padding-bottom: 11px;
+  }
+
+  .v-slot-progressBarLabel {
+    color: #DDD;
+    background-color: #444;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .v-slot-progressBarLabelHighlighted {
+    color: #DDD;
+    background-color: #65A9DA;
+  }
+
+  .v-label-progressBarLabel {
+    padding: 12px;
   }
 }

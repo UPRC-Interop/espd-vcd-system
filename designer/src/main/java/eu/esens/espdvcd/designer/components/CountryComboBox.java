@@ -12,6 +12,7 @@ import eu.esens.espdvcd.codelist.Codelists;
 import org.apache.commons.lang3.text.WordUtils;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
 
@@ -33,6 +34,11 @@ public class CountryComboBox extends ComboBox {
             if (s != null) {
                 ThemeResource iconResource = new ThemeResource("img/flags_iso/24/" + countryId.toLowerCase() + ".png");
                 setItemIcon(countryId, iconResource);
+                try {
+                    s.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             } else {
                 ThemeResource iconResource = new ThemeResource("img/flags_iso/24/null.png");
                 setItemIcon(countryId, iconResource);
