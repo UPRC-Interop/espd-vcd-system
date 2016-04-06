@@ -1,5 +1,6 @@
-package eu.esens.espdvcd.model;
+package eu.esens.espdvcd.model.requirement;
 
+import eu.esens.espdvcd.model.Evidence;
 import java.io.Serializable;
 import java.util.List;
 
@@ -19,9 +20,9 @@ public interface Requirement extends Serializable {
 
     void setDescription(String description);
 
-    RequirementResponse getResponse();
+    Response getResponse();
 
-    void setResponse(RequirementResponse response);
+    void setResponse(Response response);
 
     List<Evidence> getEvidences();
 

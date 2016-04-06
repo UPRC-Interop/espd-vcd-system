@@ -1,8 +1,9 @@
 package eu.esens.espdvcd.designer.components;
 
+import com.vaadin.event.LayoutEvents;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.*;
-import eu.esens.espdvcd.model.Requirement;
+import eu.esens.espdvcd.model.requirement.Requirement;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 
 /**
@@ -25,6 +26,8 @@ public class RequirementForm extends VerticalLayout {
 
         panelContent.setMargin(true);
 
+        this.addLayoutClickListener(this::onRequirementClick);
+
         //ID.setCaption("Requirement ID");
         //ID.setValue(requirement.getID());
 
@@ -44,5 +47,13 @@ public class RequirementForm extends VerticalLayout {
         requirementGroup.setItemDataSource(requirement);
         requirementGroup.setBuffered(false);
         requirementGroup.bindMemberFields(this);
+    }
+
+    void onRequirementClick(LayoutEvents.LayoutClickEvent event) {
+        if (event.getClickedComponent() instanceof Panel && event.getClickedComponent() == panel) {
+            if (!event.isDoubleClick()) {
+                panelContent.setVisible(!panelContent.isVisible());
+            }
+        }
     }
 }

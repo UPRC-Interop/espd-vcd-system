@@ -24,8 +24,6 @@ public class CriterionForm extends VerticalLayout {
     private Panel panel = new Panel();
     private VerticalLayout panelContent = new VerticalLayout();
     private CheckBox selected = new CheckBox("Select this criterion?");
-
-    private VerticalLayout previous=new VerticalLayout();
     //private Label ID = new Label("Criterion ID");
     //private Label typeCode = new Label("Criterion TypeCode");
     private Label name = new Label("Criterion Name");
@@ -44,8 +42,11 @@ public class CriterionForm extends VerticalLayout {
         //panelContent.addComponent(typeCode);
         //panelContent.addComponent(name);
         panelContent.addComponent(description);
+        panelContent.addComponent(description);
+
 
         this.addLayoutClickListener(this::onCriterionClick);
+
 
         //ID.setCaption("Criterion ID");
         //ID.setValue(criterion.getID());
@@ -71,30 +72,49 @@ public class CriterionForm extends VerticalLayout {
         criteriaGroup.setItemDataSource(criterion);
         criteriaGroup.setBuffered(false);
         criteriaGroup.bindMemberFields(this);
+
+
+
     }
+
+
 
     void onCriterionClick(LayoutEvents.LayoutClickEvent event) {
-        view.getDetailsContent().removeAllComponents();
-        if (criterionReference.getLegislationReference() != null) {
-            view.getDetailsContent().addComponent(new CriterionCustomForm(criterionReference));
-            view.getDetailsContent().addComponent(new LegislationReferenceForm(criterionReference.getLegislationReference(),criterionReference));
+
+
+        changeColour(panelContent);
+
+        if (event.getClickedComponent() instanceof Panel && event.getClickedComponent() == panel) {
+            if (!event.isDoubleClick()) {
+                panelContent.setVisible(!panelContent.isVisible());
+            }
+
+        } else {
+            view.getDetailsContent().removeAllComponents();
+            Label detailsTitle = new Label(criterionReference.getName());
+            detailsTitle.setStyleName("detailsTitle");
+            view.getDetailsContent().addComponent(detailsTitle);
+            if (criterionReference.getLegislationReference() != null) {
+                view.getDetailsContent().addComponent(new LegislationReferenceForm(criterionReference.getLegislationReference()));
+            }
+
+            for (RequirementGroup requirementGroup : criterionReference.getRequirementGroups()) {
+                view.getDetailsContent().addComponent(new RequirementGroupForm(requirementGroup));
+            }
         }
-
-        for (RequirementGroup requirementGroup : criterionReference.getRequirementGroups()) {
-            view.getDetailsContent().addComponent(new RequirementGroupForm(requirementGroup));
-        }
-
-       changeColour(panelContent);
-
     }
-
     void changeColour(VerticalLayout current)
     {
         panel.addStyleName("criterionForm-panelContent");
-        previous=current;
+       // previous=current;
 
         //previous.removeStyleName("test");
         current.setStyleName("criterionForm-panelContent-selected");
     }
 
+
+    public void selectAll(boolean checkValue)
+    {
+        this.selected.setValue(checkValue);
+    }
 }

@@ -1,12 +1,14 @@
 package eu.esens.espdvcd.designer.components;
 
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
+import com.vaadin.event.LayoutEvents;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Label;
 import eu.esens.espdvcd.model.Criterion;
 import eu.esens.espdvcd.model.LegislationReference;
+import eu.esens.espdvcd.model.RequirementGroup;
 
 /**
  * Created by ixuz on 3/7/16.
@@ -20,24 +22,21 @@ public class LegislationReferenceForm extends VerticalLayout {
     private Label jurisdictionLevelCode = new Label("Legislation Reference JurisdictionLevelCode");
     private Label article = new Label("Legislation Reference Article");
     private Label URI = new Label("Legislation Reference URI");
-    //private Label criterionName= new Label("Criterion Name");
 
-
-
-    public LegislationReferenceForm(LegislationReference legislationReference, Criterion criterionReference) {
+    public LegislationReferenceForm(LegislationReference legislationReference) {
         setMargin(true);
         setStyleName("legislationReferenceForm-layout");
         setWidth("100%");
         panel.setWidth("100%");
         addComponent(panel);
         panel.setContent(panelContent);
-       // panelContent.addComponent(criterionName);
         panelContent.addComponent(title);
         panelContent.addComponent(description);
         panelContent.addComponent(jurisdictionLevelCode);
         panelContent.addComponent(article);
         panelContent.addComponent(URI);
 
+        this.addLayoutClickListener(this::onLegislationReferenceClick);
 
         title.setCaption("Legislation Reference Title");
         title.setValue(legislationReference.getTitle());
@@ -50,8 +49,6 @@ public class LegislationReferenceForm extends VerticalLayout {
 
         article.setCaption("Legislation Reference Article");
         article.setValue(legislationReference.getArticle());
-
-
 
         URI.setCaption("Legislation Reference URI");
         URI.setValue(legislationReference.getURI());
@@ -68,5 +65,13 @@ public class LegislationReferenceForm extends VerticalLayout {
         legislationReferenceGroup.setItemDataSource(legislationReference);
         legislationReferenceGroup.setBuffered(false);
         legislationReferenceGroup.bindMemberFields(this);
+    }
+
+    void onLegislationReferenceClick(LayoutEvents.LayoutClickEvent event) {
+        if (event.getClickedComponent() instanceof Panel && event.getClickedComponent() == panel) {
+            if (!event.isDoubleClick()) {
+                panelContent.setVisible(!panelContent.isVisible());
+            }
+        }
     }
 }

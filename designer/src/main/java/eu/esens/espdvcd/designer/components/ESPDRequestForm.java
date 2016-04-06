@@ -1,19 +1,25 @@
 package eu.esens.espdvcd.designer.components;
 
+import com.vaadin.data.Property;
 import com.vaadin.server.FileDownloader;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.StreamResource;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.VerticalLayout;
 import eu.esens.espdvcd.builder.ESPDBuilder;
+import eu.esens.espdvcd.codelist.Codelists;
 import eu.esens.espdvcd.designer.views.Master;
+import eu.esens.espdvcd.model.Criterion;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by ixuz on 3/7/16.
@@ -22,6 +28,8 @@ public class ESPDRequestForm extends VerticalLayout {
 
     private Master view;
     private ESPDRequest espdRequest = null;
+    private CriterionForm criterionForm;
+    CriterionGroupForm criterionGroupForm;
     private VerticalLayout page1 = new VerticalLayout();
     private VerticalLayout page2 = new VerticalLayout();
     private VerticalLayout page3 = new VerticalLayout();
@@ -32,7 +40,15 @@ public class ESPDRequestForm extends VerticalLayout {
     private Button next = new Button("Next", FontAwesome.ARROW_RIGHT);
     private Button exportConsole = new Button("Export to Console", FontAwesome.DOWNLOAD);
     private Button exportFile = new Button("Export to File", FontAwesome.DOWNLOAD);
+    private CheckBox selectAllExclusion=new CheckBox("Select all criterion");
+    private CheckBox selectAllSelection = new CheckBox("Select all criterion");
     private int currentPageIndex = 0;
+    private List<CriterionForm> exclusionCriterionForms = new ArrayList<CriterionForm>();
+    private List<CriterionForm> selectionCriterionForms = new ArrayList<CriterionForm>();
+    private HashMap<String,List<CriterionForm>> exclusionCriterionHash= new HashMap<String,List<CriterionForm>>();
+    private HashMap<String,List<CriterionForm>> selectionCriterionHash= new HashMap<String,List<CriterionForm>>();
+    private List<CriterionGroupForm> exclusionCriterionGroupForms = new ArrayList<>();
+    private List<CriterionGroupForm> selectionCriterionGroupForms = new ArrayList<>();
 
     public ESPDRequestForm(Master view, ESPDRequest espdRequest) {
         this.view = view;
@@ -40,10 +56,14 @@ public class ESPDRequestForm extends VerticalLayout {
 
         setWidth("100%");
         setStyleName("espdRequestForm-layout");
-
         pages.add(page1);
         pages.add(page2);
         pages.add(page3);
+        VerticalLayout v = new VerticalLayout();
+        v.setMargin(true);
+        v.addComponent(selectAllExclusion);
+        v.addComponent(selectAllSelection);
+        addComponent(v);
         for (VerticalLayout page : pages) { addComponent(page); }
         addComponent(buttonList);
         buttonList.addComponent(previous);
@@ -52,11 +72,25 @@ public class ESPDRequestForm extends VerticalLayout {
         buttonList.addComponent(exportConsole);
         buttonList.addComponent(exportFile);
 
+        selectAllExclusion.setValue(true);
+        selectAllSelection.setValue(true);
+
+
         previous.addClickListener(this::onPrevious);
         cancel.addClickListener(this::onCancel);
         next.addClickListener(this::onNext);
         exportConsole.addClickListener(this::onExportConsole);
 
+        selectAllExclusion.addValueChangeListener(this::valueChange);
+        selectAllSelection.addValueChangeListener(this::valueChange);
+        /*selectAll.addValueChangeListener(new Property.ValueChangeListener() {
+            @Override
+            public void valueChange(Property.ValueChangeEvent event) {
+                criterionForm.selectAll(false);
+            }
+        });*/
+        selectAllExclusion.setStyleName("espdRequestForm-checkbox");
+        selectAllSelection.setStyleName("espdRequestForm-checkbox");
         previous.setStyleName("espdRequestForm-previous");
         cancel.setStyleName("espdRequestForm-cancel");
         next.setStyleName("espdRequestForm-next");
@@ -68,12 +102,6 @@ public class ESPDRequestForm extends VerticalLayout {
 
         page1.addComponent(new CADetailsForm(espdRequest));
 
-        for (SelectableCriterion criterion : espdRequest.getExclusionCriteriaList()) {
-            page2.addComponent(new CriterionForm(view, criterion));
-        }
-        for (SelectableCriterion criterion : espdRequest.getSelectionCriteriaList()) {
-            page3.addComponent(new CriterionForm(view, criterion));
-        }
 
         // Hook the exportFile button up with a downloadable resource
         StreamResource downloadableResource = new StreamResource(new StreamResource.StreamSource() {
@@ -90,6 +118,67 @@ public class ESPDRequestForm extends VerticalLayout {
         fileDownloader.extend(exportFile);
 
         showPage(currentPageIndex);
+
+///////////////////////Criterion Grouping///////////////////
+
+        for (SelectableCriterion criterion : espdRequest.getExclusionCriteriaList()) {
+
+           if (!exclusionCriterionHash.containsKey(criterion.getTypeCode())) {
+               exclusionCriterionHash.put(criterion.getTypeCode(), new ArrayList<CriterionForm>());
+            }
+
+            CriterionForm criterionForm = new CriterionForm(view, criterion);
+            exclusionCriterionHash.get(criterion.getTypeCode()).add(criterionForm);
+        }
+
+        for (Map.Entry<String, List<CriterionForm>> entry : exclusionCriterionHash.entrySet()) {
+            String key = entry.getKey();
+            List<CriterionForm> criterionForms = entry.getValue();
+
+            String fullTypeCodeName = Codelists.CriteriaType.getValueForId(key);
+
+            if (fullTypeCodeName == null) {
+                System.out.println("Value not found for key: " + key);
+                // Fallback to display the type code instead of real name
+                fullTypeCodeName = key;
+            }
+
+            CriterionGroupForm criterionGroupForm = new CriterionGroupForm(fullTypeCodeName, criterionForms);
+            exclusionCriterionGroupForms.add(criterionGroupForm);
+            page2.addComponent(criterionGroupForm);
+        }
+
+
+
+        for (SelectableCriterion criterion : espdRequest.getSelectionCriteriaList()) {
+
+            if (!selectionCriterionHash.containsKey(criterion.getTypeCode())) {
+                selectionCriterionHash.put(criterion.getTypeCode(), new ArrayList<CriterionForm>());
+            }
+
+            CriterionForm criterionForm = new CriterionForm(view, criterion);
+            selectionCriterionHash.get(criterion.getTypeCode()).add(criterionForm);
+        }
+
+        for (Map.Entry<String, List<CriterionForm>> entry : selectionCriterionHash.entrySet()) {
+            String key = entry.getKey();
+            List<CriterionForm> criterionForms = entry.getValue();
+
+            String fullTypeCodeName = Codelists.CriteriaType.getValueForId(key);
+
+            if (fullTypeCodeName == null) {
+                System.out.println("Value not found for key: " + key);
+                // Fallback to display the type code instead of real name
+                fullTypeCodeName = key;
+            }
+
+            CriterionGroupForm criterionGroupForm = new CriterionGroupForm(fullTypeCodeName, criterionForms);
+            selectionCriterionGroupForms.add(criterionGroupForm);
+            page3.addComponent(new CriterionGroupForm(fullTypeCodeName, criterionForms));
+        }
+
+
+
     }
 
     private void showPage(int pageIndex) {
@@ -97,12 +186,17 @@ public class ESPDRequestForm extends VerticalLayout {
             VerticalLayout page = pages.get(i);
             if (i == pageIndex) {
                 page.setVisible(true);
+
             } else {
                 page.setVisible(false);
+
             }
         }
         updateButtonList();
+        updateCheckBox();
+
     }
+
 
     private void updateButtonList() {
         next.setEnabled((currentPageIndex+1 <= pages.size()-1));
@@ -114,6 +208,40 @@ public class ESPDRequestForm extends VerticalLayout {
         exportFile.setEnabled(!(currentPageIndex + 1 <= pages.size() - 1));
         exportFile.setVisible(!(currentPageIndex + 1 <= pages.size() - 1));
     }
+
+    private void updateCheckBox()
+    {
+        selectAllExclusion.setEnabled((currentPageIndex-1 == 0));
+        selectAllExclusion.setVisible((currentPageIndex-1 == 0));
+
+        selectAllSelection.setEnabled((currentPageIndex-1>0));
+        selectAllSelection.setVisible((currentPageIndex-1>0));
+    }
+
+
+
+    public void valueChange(Property.ValueChangeEvent event) {
+
+
+
+        if (currentPageIndex-1==0) {
+            for (CriterionGroupForm criterionGroupForm : exclusionCriterionGroupForms) {
+                criterionGroupForm.setSelectedOnAllCriteria(selectAllExclusion.getValue());
+            }
+        }
+        else
+        {
+            for (CriterionGroupForm criterionGroupForm : selectionCriterionGroupForms) {
+                criterionGroupForm.setSelectedOnAllCriteria(selectAllSelection.getValue());
+            }
+        }
+
+    }
+
+
+
+
+
 
     /**
      * Displays the previous page of the form.
@@ -163,4 +291,6 @@ public class ESPDRequestForm extends VerticalLayout {
         String xml = espdBuilder.createXMLasString(espdRequest);
         System.out.println("Xml: " + xml);
     }
+
+
 }

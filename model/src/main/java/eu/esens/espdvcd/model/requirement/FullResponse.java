@@ -1,4 +1,4 @@
-package eu.esens.espdvcd.model;
+package eu.esens.espdvcd.model.requirement;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by Ulf Lotzmann on 21/03/2016.
  */
-public class RequirementResponse implements Serializable {
+public class FullResponse implements Serializable {
 
     /**
      * Criterion response identifier
@@ -21,7 +21,7 @@ public class RequirementResponse implements Serializable {
      * Cardinality: 0..1<br>
      * InfReqID: tir92-158<br>
      * BusReqID: tbr92-018, tbr92-007, tbr92-005<br>
-     * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.Response.ID<br>
+ UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.DescriptionResponse.ID<br>
      */
     private String ID;
 
@@ -36,7 +36,7 @@ public class RequirementResponse implements Serializable {
      * Cardinality: 0..1<br>
      * InfReqID: tir92-159<br>
      * BusReqID: tbr92-018, tbr92-007, tbr92-005<br>
-     * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.Response.Description<br>
+ UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.DescriptionResponse.Description<br>
      */
     private String description;
 
@@ -49,7 +49,7 @@ public class RequirementResponse implements Serializable {
      * Cardinality: 0..1<br>
      * InfReqID: tir92-160<br>
      * BusReqID: tbr92-018, tbr92-007, tbr92-005<br>
-     * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.Response.Indicator<br>
+ UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.DescriptionResponse.Indicator<br>
      */
     private boolean fulfillmentIndicator;
 
@@ -63,31 +63,11 @@ public class RequirementResponse implements Serializable {
      * Cardinality: 0..n<br>
      * InfReqID: <br>
      * BusReqID: <br>
-     * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.Response<br>
+ UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.DescriptionResponse<br>
      */
     private List<PeriodDeclarationFulfillment> periodDeclarationFulfillments;
 
 
-    public RequirementResponse(String ID, String description, boolean fulfillmentIndicator) {
-        this.ID = ID;
-        this.description = description;
-        this.fulfillmentIndicator = fulfillmentIndicator;
-    }
-
-    public RequirementResponse(String ID, String description, boolean fulfillmentIndicator, List<PeriodDeclarationFulfillment> periodDeclarationFulfillments) {
-        this.ID = ID;
-        this.description = description;
-        this.fulfillmentIndicator = fulfillmentIndicator;
-        this.periodDeclarationFulfillments = periodDeclarationFulfillments;
-    }
-
-    public String getID() {
-        return ID;
-    }
-
-    public void setID(String ID) {
-        this.ID = ID;
-    }
 
     public String getDescription() {
         return description;

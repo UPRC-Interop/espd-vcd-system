@@ -1,5 +1,6 @@
-package eu.esens.espdvcd.model;
+package eu.esens.espdvcd.model.requirement;
 
+import eu.esens.espdvcd.model.Evidence;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +9,7 @@ import java.util.List;
  */
 public class ResponseRequirement extends RequestRequirement {
 
-
+    private static final long serialVersionUID = 2750116567195274279L;
 
     /**
      * Criterion requirement response
@@ -19,9 +20,9 @@ public class ResponseRequirement extends RequestRequirement {
      * Cardinality: 0..1<br>
      * InfReqID: <br>
      * BusReqID: <br>
-     * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.Response<br>
+     * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.DescriptionResponse<br>
      */
-    private RequirementResponse response;
+    private Response response;
 
 
     /**
@@ -33,7 +34,7 @@ public class ResponseRequirement extends RequestRequirement {
      * Cardinality: 0..n<br>
      * InfReqID: <br>
      * BusReqID: <br>
-     * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.Response.Evidence<br>
+ UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.DescriptionResponse.Evidence<br>
      */
     private List<Evidence> evidences;
 
@@ -41,19 +42,20 @@ public class ResponseRequirement extends RequestRequirement {
         super(ID, responseDataType, description);
     }
 
-    public ResponseRequirement(String ID, String responseDataType, String description, RequirementResponse response, List<Evidence> evidences) {
+    public ResponseRequirement(String ID, String responseDataType, String description, DescriptionResponse response, List<Evidence> evidences) {
         super(ID, responseDataType, description);
         this.response = response;
         this.evidences = evidences;
     }
 
+    
     @Override
-    public RequirementResponse getResponse() {
-        return response;
+    public Response getResponse() {
+        return this.response;
     }
-
+ 
     @Override
-    public void setResponse(RequirementResponse response) {
+    public void setResponse(Response response) {
         this.response = response;
     }
 

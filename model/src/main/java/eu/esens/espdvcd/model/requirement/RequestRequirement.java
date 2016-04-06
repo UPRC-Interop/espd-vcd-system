@@ -1,5 +1,6 @@
-package eu.esens.espdvcd.model;
+package eu.esens.espdvcd.model.requirement;
 
+import eu.esens.espdvcd.model.Evidence;
 import java.util.List;
 
 /**
@@ -49,12 +50,12 @@ public class RequestRequirement implements Requirement {
     }
 
     @Override
-    public RequirementResponse getResponse() {
+    public Response getResponse() {
         throw new UnsupportedOperationException("Not supported in ESPD request.");
     }
 
     @Override
-    public void setResponse(RequirementResponse response) {
+    public void setResponse(Response response) {
         throw new UnsupportedOperationException("Not supported in ESPD request.");
     }
 
