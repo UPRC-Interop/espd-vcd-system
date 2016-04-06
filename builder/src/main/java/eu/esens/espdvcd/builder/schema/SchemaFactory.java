@@ -1,4 +1,4 @@
-package eu.esens.espdvcd.builder;
+package eu.esens.espdvcd.builder.schema;
 
 import eu.esens.espdvcd.model.CADetails;
 import eu.esens.espdvcd.model.Criterion;
@@ -20,6 +20,7 @@ import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.Docu
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ExternalReferenceType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PartyNameType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PartyType;
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ProcurementProjectLotType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ContractFolderIDType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.CustomizationIDType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.DescriptionType;
@@ -37,31 +38,32 @@ import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.VersionI
 public interface SchemaFactory {
 
     public static CriterionType extractCriterion(Criterion c) {
-        
-        CriterionType ct = new CriterionType();
-        
-        if (c.getLegislationReference() != null)
-            ct.getLegislationReference().add(extractLegislationType(c.getLegislationReference()));
 
-        if (c.getDescription() != null ) {
+        CriterionType ct = new CriterionType();
+
+        if (c.getLegislationReference() != null) {
+            ct.getLegislationReference().add(extractLegislationType(c.getLegislationReference()));
+        }
+
+        if (c.getDescription() != null) {
             ct.setDescription(new DescriptionType());
             ct.getDescription().setValue(c.getDescription());
         }
-        
+
         ct.setID(createCriteriaIDType(c.getID()));
 
         ct.setName(new NameType());
         ct.getName().setValue(c.getName());
-        
+
         ct.setTypeCode(createCriteriaTypeCode(c.getTypeCode()));
-        
+
         ct.getRequirementGroup().addAll(c.getRequirementGroups().stream()
                 .map(rg -> extractRequirementGroupType(rg))
-        .collect(Collectors.toList()));
-        
+                .collect(Collectors.toList()));
+
         return ct;
     }
-    
+
     public static RequirementType extractRequirementType(Requirement r) {
 
         RequirementType req = new RequirementType();
@@ -86,7 +88,7 @@ public interface SchemaFactory {
         rgType.getRequirement().addAll(rg.getRequirements().stream()
                 .map(r1 -> extractRequirementType(r1))
                 .collect(Collectors.toList()));
-        
+
         rgType.setID(createDefaultIDType(rg.getID()));
 
         return rgType;
@@ -112,63 +114,72 @@ public interface SchemaFactory {
         return lt;
 
     }
+
     public static DocumentReferenceType extractCADetailsDocumentReferece(CADetails cd) {
 
         DocumentReferenceType dr = new DocumentReferenceType();
-        
-        if (cd != null && cd.getProcurementProcedureTitle() != null) {
-         
 
-            dr.setID(createISOIECIDType(""));
+        if (cd != null) {
+
+            if (cd.getProcurementPublicationNumber() != null) {
+                dr.setID(createISOIECIDType(cd.getProcurementPublicationNumber()));
+            }
+
             dr.setDocumentTypeCode(createDocumentTypeCode("TED_CN"));
 
-            dr.setAttachment(new AttachmentType());
-            dr.getAttachment().setExternalReference(new ExternalReferenceType());
-            dr.getAttachment().getExternalReference().setFileName(new FileNameType());
+            if (cd.getProcurementProcedureTitle() != null || cd.getProcurementProcedureDesc() != null) {
+                dr.setAttachment(new AttachmentType());
 
-                dr.getAttachment().getExternalReference().getFileName().setValue(cd.getProcurementProcedureTitle());
+                if (cd.getProcurementProcedureTitle() != null) {
+                    dr.getAttachment().setExternalReference(new ExternalReferenceType());
+                    dr.getAttachment().getExternalReference().setFileName(new FileNameType());
+                    dr.getAttachment().getExternalReference().getFileName().setValue(cd.getProcurementProcedureTitle());
+                }
 
-            DescriptionType dt = new DescriptionType();
-            dt.setValue(cd.getProcurementProcedureDesc());
-            dr.getAttachment().getExternalReference().getDescription().add(dt);
+                if (cd.getProcurementProcedureDesc() != null) {
+                    DescriptionType dt = new DescriptionType();
+                    dt.setValue(cd.getProcurementProcedureDesc());
+                    dr.getAttachment().getExternalReference().getDescription().add(dt);
+                }
+            }
         }
         return dr;
     }
-    
+
     public static ESPDRequestType extractESPDRequestType(ESPDRequest req) {
-    
+
         ESPDRequestType reqType = new ESPDRequestType();
         if (req.getCADetails().getProcurementProcedureFileReferenceNo() != null) {
             reqType.setContractFolderID(new ContractFolderIDType());
-            reqType.getContractFolderID().setSchemeAgencyID("TeD");                   
+            reqType.getContractFolderID().setSchemeAgencyID("TeD");
             reqType.getContractFolderID().setValue(req.getCADetails().getProcurementProcedureFileReferenceNo());
         }
-        
+
         reqType.getAdditionalDocumentReference().add(extractCADetailsDocumentReferece(req.getCADetails()));
         reqType.setContractingParty(extractContractingPartyType(req.getCADetails()));
+        reqType.getProcurementProjectLot().add(extractProcurementProjectLot(req.getCADetails()));
         reqType.getCriterion().addAll(req.getFullCriterionList().stream()
                 .filter(cr -> cr.isSelected())
                 .map(cr -> extractCriterion(cr))
                 .collect(Collectors.toList()));
         return reqType;
     }
-    
-    
+
     public static ContractingPartyType extractContractingPartyType(CADetails cd) {
-        
+
         ContractingPartyType cpp = new ContractingPartyType();
         PartyType pt = new PartyType();
         PartyNameType nt = new PartyNameType();
         nt.setName(new NameType());
         nt.getName().setValue(cd.getCAOfficialName());
         pt.getPartyName().add(nt);
-        
+
         pt.setPostalAddress(new AddressType());
         pt.getPostalAddress().setCountry(new CountryType());
         pt.getPostalAddress().getCountry().setIdentificationCode(createISOCountryIdCodeType(cd.getCACountry()));
         cpp.setParty(pt);
-        
-        return cpp;      
+
+        return cpp;
     }
 
     public static IDType createDefaultIDType(String id) {
@@ -179,7 +190,7 @@ public interface SchemaFactory {
         reqGroupIDType.setValue(id);
         return reqGroupIDType;
     }
-    
+
     public static VersionIDType createVersionIDType(String id) {
 
         VersionIDType versionID = new VersionIDType();
@@ -192,21 +203,21 @@ public interface SchemaFactory {
         IDType reqGroupIDType = createCustomSchemeIDIDType(id, "CriterionRelatedIDs");
         return reqGroupIDType;
     }
-    
+
     public static IDType createCriteriaIDType(String id) {
         IDType reqGroupIDType = createCustomSchemeIDIDType(id, "CriteriaID");
         return reqGroupIDType;
     }
-    
-     public static IDType createISOIECIDType(String id) {
+
+    public static IDType createISOIECIDType(String id) {
         IDType reqGroupIDType = createCustomSchemeIDIDType(id, "ISO/IEC 9834-8:2008 - 4UUID");
         reqGroupIDType.setSchemeAgencyName("DG GROW (European Commission)");
         reqGroupIDType.setSchemeVersionID("1.1");
         return reqGroupIDType;
     }
-    
+
     public static IdentificationCodeType createISOCountryIdCodeType(String id) {
-        
+
         IdentificationCodeType countryCodeType = new IdentificationCodeType();
         countryCodeType.setListAgencyID("ISO");
         countryCodeType.setListName("ISO 3166-1");
@@ -224,7 +235,7 @@ public interface SchemaFactory {
         tc.setValue(code);
         return tc;
     }
-    
+
     public static TypeCodeType createCriteriaTypeCode(String code) {
         TypeCodeType tc = new TypeCodeType();
         tc.setListAgencyID("EU-COM-GROW");
@@ -233,7 +244,7 @@ public interface SchemaFactory {
         tc.setValue(code);
         return tc;
     }
-    
+
     public static DocumentTypeCodeType createDocumentTypeCode(String code) {
         DocumentTypeCodeType dtc = new DocumentTypeCodeType();
         dtc.setListAgencyID("EU-COM-GROW");
@@ -242,33 +253,41 @@ public interface SchemaFactory {
         dtc.setValue(code);
         return dtc;
     }
-            
+
     public static IDType createCustomSchemeIDIDType(String id, String schemeId) {
         IDType reqGroupIDType = createDefaultIDType(id);
         reqGroupIDType.setSchemeID(schemeId);
         return reqGroupIDType;
     }
-    
+
     public static UBLVersionIDType createUBL21VersionIdType() {
-        
+
         UBLVersionIDType id = new UBLVersionIDType();
-        
+
         id.setSchemeAgencyID("OASIS-UBL-TC");
-        id.setValue("2.1");       
+        id.setValue("2.1");
         return id;
-        
+
     }
 
     public static CustomizationIDType createBIICustomizationIdType(String id) {
 
         CustomizationIDType cid = new CustomizationIDType();
-        
+
         cid.setSchemeName("CustomizationID");
         cid.setSchemeAgencyID("BII");
-        cid.setSchemeVersionID("1.0");
+        cid.setSchemeVersionID("3.0");
         cid.setValue(id);
-        
+
         return cid;
-        
+
+    }
+
+    public static ProcurementProjectLotType extractProcurementProjectLot(CADetails caDetails) {
+
+        ProcurementProjectLotType pplt = new ProcurementProjectLotType();
+        pplt.setID(new IDType());
+        pplt.getID().setValue(caDetails.getProcurementProjectLot());
+        return pplt;
     }
 }

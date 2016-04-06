@@ -7,3 +7,5 @@ build/
 gradle.properties
 /.nb-gradle-properties
 /schema/nbproject/
+/codelists/private/
+/codelists/nbproject/

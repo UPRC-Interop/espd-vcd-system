@@ -10,21 +10,6 @@ public class QuantityResponse extends Response implements Serializable {
     private static final long serialVersionUID = -3460346555246847660L;
 
     /**
-     * Criterion response description
-     * <p>
-     * A textual description of a criterion response that describes how an
-     * economic operators fulfills an specific criterion.
-     * <p>
-     * Data type: Text<br>
-     * Cardinality: 0..1<br>
-     * InfReqID: tir92-159<br>
-     * BusReqID: tbr92-018, tbr92-007, tbr92-005<br>
-     * UBL syntax path:
-     * ccv:Criterion.RequirementGroup.Requirement.DescriptionResponse.Description<br>
-     */
-    private String description;
-
-    /**
      * Criterion fulfillment quantity
      * <p>
      * UOM should be stated by using recommendation 20 v10 Declared quantity that fulfills this criterion.
@@ -40,21 +25,8 @@ public class QuantityResponse extends Response implements Serializable {
     public QuantityResponse() {
     }
 
-    public QuantityResponse(String description) {
-        this.description = description;
-    }
-
-    public QuantityResponse(String description, float quantity) {
-        this.description = description;
+    public QuantityResponse(float quantity) {
         this.quantity = quantity;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public float getQuantity() {

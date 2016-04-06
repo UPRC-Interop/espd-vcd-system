@@ -8,6 +8,7 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.*;
 import eu.esens.espdvcd.builder.ESPDBuilder;
 import eu.esens.espdvcd.codelist.Codelists;
 import eu.esens.espdvcd.designer.views.Master;
@@ -30,6 +31,8 @@ public class ESPDRequestForm extends VerticalLayout {
     private ESPDRequest espdRequest = null;
     private CriterionForm criterionForm;
     CriterionGroupForm criterionGroupForm;
+    private HorizontalLayout progressBarLayout = new HorizontalLayout();
+    private List<Label> progressBarLabels = new ArrayList<Label> ();
     private VerticalLayout page1 = new VerticalLayout();
     private VerticalLayout page2 = new VerticalLayout();
     private VerticalLayout page3 = new VerticalLayout();
@@ -56,6 +59,22 @@ public class ESPDRequestForm extends VerticalLayout {
 
         setWidth("100%");
         setStyleName("espdRequestForm-layout");
+
+        addComponent(progressBarLayout);
+        progressBarLayout.setStyleName("progressBarLayout");
+        progressBarLayout.setWidth("100%");
+        progressBarLayout.setSpacing(true);
+
+        progressBarLabels.add(new Label("Procedure"));
+        progressBarLabels.add(new Label("Exclusion"));
+        progressBarLabels.add(new Label("Selection"));
+        progressBarLabels.add(new Label("Finish"));
+
+        for (Label progressBarLabel : progressBarLabels) {
+            progressBarLayout.addComponent(progressBarLabel);
+            progressBarLabel.setStyleName("progressBarLabel");
+        }
+
         pages.add(page1);
         pages.add(page2);
         pages.add(page3);
@@ -182,6 +201,13 @@ public class ESPDRequestForm extends VerticalLayout {
     }
 
     private void showPage(int pageIndex) {
+        for (Label progressBarLabel : progressBarLabels) {
+            progressBarLabel.removeStyleName("progressBarLabelHighlighted");
+        }
+        if (pageIndex >= 0 && pageIndex < progressBarLabels.size()) {
+            progressBarLabels.get(pageIndex).addStyleName("progressBarLabelHighlighted");
+        }
+
         for (int i=0; i<pages.size(); i++) {
             VerticalLayout page = pages.get(i);
             if (i == pageIndex) {
@@ -194,7 +220,7 @@ public class ESPDRequestForm extends VerticalLayout {
         }
         updateButtonList();
         updateCheckBox();
-
+        view.getMainPanel().setScrollTop(0);
     }
 
 
@@ -221,8 +247,6 @@ public class ESPDRequestForm extends VerticalLayout {
 
 
     public void valueChange(Property.ValueChangeEvent event) {
-
-
 
         if (currentPageIndex-1==0) {
             for (CriterionGroupForm criterionGroupForm : exclusionCriterionGroupForms) {

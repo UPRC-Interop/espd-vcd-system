@@ -1,5 +1,7 @@
 package eu.esens.espdvcd.builder;
 
+import eu.esens.espdvcd.builder.schema.SchemaFactory;
+import eu.esens.espdvcd.builder.model.ModelFactory;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
@@ -23,18 +25,24 @@ import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.IssueTim
  */
 public class ESPDBuilder {
 
-    public ESPDRequest createFromXML(InputStream xmlESPD) throws Exception {
+    private boolean insertAllCriteria = true;
+    
+    public ESPDRequest createESPDRequestFromXML(InputStream xmlESPD) throws Exception {
 
         // Check and read the file in the JAXB Object
         ESPDRequestType reqType = read(xmlESPD);
 
-        // Create the Model Object
-        ESPDRequest req = ModelFactory.extractESPDRequest(reqType); 
+        // Create the Model Object      
+        ESPDRequest req = ModelFactory.ESPD_REQUEST.extractESPDRequest(reqType); 
         
+        if (insertAllCriteria) {
+          CriteriaExtractor cr = new PredefinedESPDCriteriaExtractor();
+            req.setCriterionList(cr.getFullList(req.getFullCriterionList()));
+        }
         return req;
 
     }
-
+    
     public ESPDRequestType createXML(ESPDRequest req) {
 
         ESPDRequestType reqType = finalize(SchemaFactory.extractESPDRequestType(req));
@@ -59,13 +67,13 @@ public class ESPDBuilder {
         c.setTime(now);
        
         try {
-            XMLGregorianCalendar date2 = DatatypeFactory.newInstance().newXMLGregorianCalendar();
+            XMLGregorianCalendar date2 = DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
             reqType.setIssueDate(new IssueDateType());
             reqType.getIssueDate().setValue(date2.normalize());
             reqType.setIssueTime(new IssueTimeType());
             reqType.getIssueTime().setValue(date2.normalize());
         } catch (DatatypeConfigurationException e) {
-            
+            System.out.println("ERROR in DATES!");
         }
         
         reqType.setID(SchemaFactory.createISOIECIDType(UUID.randomUUID().toString()));
@@ -82,7 +90,7 @@ public class ESPDBuilder {
     }
 
     public List<SelectableCriterion> getCriteriaList() {
-        CriteriaExtractor cr = new ESPDCriteriaExtractor();
+        CriteriaExtractor cr = new PredefinedESPDCriteriaExtractor();
         return cr.getFullList();
     }
 
@@ -93,4 +101,11 @@ public class ESPDBuilder {
         return er;
     }
     
+    public void setInsertAllCriteria(boolean insertAll) {
+        insertAllCriteria = insertAll;
+    }
+    
+    public boolean isInsertAllCriteria() {
+        return insertAllCriteria;
+    } 
 }

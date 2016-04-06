@@ -3,6 +3,7 @@ package eu.esens.espdvcd.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -178,5 +179,40 @@ public class Criterion implements Serializable {
     public void setLegislationReference(LegislationReference legislationReference) {
         this.legislationReference = legislationReference;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 29 * hash + Objects.hashCode(this.ID);
+        hash = 29 * hash + Objects.hashCode(this.typeCode);
+        hash = 29 * hash + Objects.hashCode(this.name);
+        hash = 29 * hash + Objects.hashCode(this.description);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Criterion other = (Criterion) obj;
+        
+        if (!Objects.equals(this.ID, other.ID)) {
+            return false;
+        }
+        
+        if (!Objects.equals(this.typeCode, other.typeCode)) {
+            return false;
+        }
+        
+        return true;
+    }
+    
     
 }

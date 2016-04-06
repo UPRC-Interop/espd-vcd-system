@@ -22,28 +22,15 @@ public class QuantityYearResponse extends Response implements Serializable {
      * UBL syntax path:
      * ccv:Criterion.RequirementGroup.Requirement.DescriptionResponse.Description<br>
      */
-    private String description;
-
-    private int year;
-
+    
+    int year;
+    
     public QuantityYearResponse() {
     }
 
-    public QuantityYearResponse(String description) {
-        this.description = description;
-    }
 
-    public QuantityYearResponse(String description, int year) {
-        this.description = description;
+    public QuantityYearResponse(int year) {
         this.year = year;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public int getYear() {

@@ -8,18 +8,22 @@ import com.google.common.collect.BiMap;
  */
 public enum Codelists {
     ActivityType ("/gc/ActivityTypeCode-CodeList.gc"),
+    AmountType("/gc/AmountTypeCodes-CodeList.gc"),
     ContractType ("/gc/ContractType-CodeList.gc"),
     CountryIdentification ("/gc/CountryIdentificationCode-2.1.gc"),
-    CriteriaType ("/gc/CriteriaTypeCode-CodeList.gc"),
+    CriteriaType ("/gc/CriteriaTypeCodes-CodeList.gc"),
     CriterionJurisdictionLevel ("/gc/CriterionJurisdictionLevel-CodeList.gc"),
-    CustomizationID("/gc/CustomizationID-Codelist.gc"),
-    EORole("/gc/EORoleCodes-Codelist.gc"),
-    LanguageCodeEU("/gc/LanguageCodeEU-Codelist.gc"),
+    CustomizationID("/gc/CustomizationID-CodeList.gc"),
+    EORole("/gc/EORoleCodes-CodeList.gc"),
+    LanguageCodeEU("/gc/LanguageCodeEU-CodeList.gc"),
+    PeriodMeasureType("/gc/PeriodMeasureTypeCodes-CodeList.gc"),
+    PeriodType("/gc/PeriodTypeCodes-CodeList.gc"),
     ProcedureType("/gc/ProcedureType-CodeList.gc"),
     ProfileExecutionID("/gc/ProfileExecutionID-CodeList.gc"),
     ProjectType("/gc/ProjectType-CodeList.gc"),
-    ResponseDataType("/gc/ResponseDataType-CodeList.gc"),
+    ResponseDataType("/gc/RequirementExpectedDataType-CodeList.gc"),
     ServicesProjectSubType("/gc/ServicesProjectSubType-CodeList.gc"),
+    TechnicalCapabilityType("/gc/TechnicalCapabilityTypeCode-CodeList.gc"),
     TenderingRole ("/gc/TendererRole-CodeList.gc");
 
     private final String name;       

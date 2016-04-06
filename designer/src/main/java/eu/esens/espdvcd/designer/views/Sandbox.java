@@ -43,7 +43,7 @@ public class Sandbox extends Master {
 
         // COUNTRY
         pageContent.addComponent(new Label("COUNTRY"));
-        pageContent.addComponent(new CountryComboBox("Select country", Arrays.asList("Sweden", "Germany", "Greece")));
+        pageContent.addComponent(new CountryComboBox("Select country"));
 
         // DATE
         pageContent.addComponent(new Label("DATE"));
@@ -53,7 +53,7 @@ public class Sandbox extends Master {
         printButton.addClickListener(this::onPrint);
         pageContent.addComponent(printButton);
 
-        Label testLabel = new Label("Test Label");
+        Label testLabel = new Label("Test Labels");
         testLabel.addStyleName("testingstyle");
         testLabel.removeStyleName("testingstyle");
         pageContent.addComponent(testLabel);
