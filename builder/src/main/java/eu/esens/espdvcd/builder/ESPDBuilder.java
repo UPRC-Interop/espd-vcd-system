@@ -3,9 +3,11 @@ package eu.esens.espdvcd.builder;
 import eu.esens.espdvcd.builder.schema.SchemaFactory;
 import eu.esens.espdvcd.builder.model.ModelFactory;
 import eu.esens.espdvcd.model.ESPDRequest;
+import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
 import grow.names.specification.ubl.schema.xsd.espdrequest_1.ObjectFactory;
+import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
 import java.io.InputStream;
 import java.io.StringWriter;
 import java.util.Date;
@@ -48,6 +50,11 @@ public class ESPDBuilder {
         ESPDRequestType reqType = finalize(SchemaFactory.extractESPDRequestType(req));
         return reqType;
         
+    }
+    
+    public ESPDResponseType createXML(ESPDResponse res) {
+       // ESPDRequestType reqType = finalize(SchemaFactory.extractESPDRequestType(req));
+        return new ESPDResponseType();
     }
     
     public ESPDRequestType finalize(ESPDRequestType reqType) {
