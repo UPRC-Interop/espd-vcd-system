@@ -34,6 +34,7 @@ public class Master extends VerticalLayout implements View {
 
     protected Image topheaderEsensImage = new Image("", new ThemeResource("img/logo_esens.png"));
     protected Label topheaderWelcomeText = new Label("Hello Alice");
+    protected Label mainContentTitleText = new Label("Title Text");
 
     public Master(Navigator navigator, boolean forceAuthentication) {
         this.navigator = navigator;
@@ -119,6 +120,9 @@ public class Master extends VerticalLayout implements View {
         contentGrid.addComponent(detailsPanel, 2, 0);
         content.addComponent(contentGrid);
 
+        //mainContent.addComponent(mainContentTitleText);
+        //mainContentTitleText.setStyleName("mainContentTitleText");
+
         {
             VerticalLayout navigatorHeaderLayout = new VerticalLayout();
             navigatorHeaderLayout.setStyleName("navigatorHeaderLayout");
@@ -175,6 +179,18 @@ public class Master extends VerticalLayout implements View {
 
     public Navigator getNavigator() {
         return navigator;
+    }
+
+    public Panel getMainPanel() {
+        return mainPanel;
+    }
+
+    public Panel getNavigatorPanel() {
+        return navigatorPanel;
+    }
+
+    public Panel getDetailsPanel() {
+        return detailsPanel;
     }
 
     public VerticalLayout getNavigatorContent() {

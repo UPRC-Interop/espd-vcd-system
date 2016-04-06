@@ -43,7 +43,7 @@ public class Sandbox extends Master {
 
         // COUNTRY
         pageContent.addComponent(new Label("COUNTRY"));
-        pageContent.addComponent(new CountryComboBox("Select country", Arrays.asList("Sweden", "Germany", "Greece")));
+        pageContent.addComponent(new CountryComboBox("Select country"));
 
         // DATE
         pageContent.addComponent(new Label("DATE"));

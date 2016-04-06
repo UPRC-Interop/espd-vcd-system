@@ -73,7 +73,6 @@ public class EspdTemplate extends Master {
         panels.setVisible(false);
 
         CADetails caDetails = new CADetails();
-        caDetails.setCACountry("Sweden");
 
         espdRequest = new SimpleESPDRequest();
         espdRequest.setCADetails(caDetails);
