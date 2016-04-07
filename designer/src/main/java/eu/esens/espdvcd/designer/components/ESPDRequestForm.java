@@ -33,6 +33,8 @@ public class ESPDRequestForm extends VerticalLayout {
     private VerticalLayout page1 = new VerticalLayout();
     private VerticalLayout page2 = new VerticalLayout();
     private VerticalLayout page3 = new VerticalLayout();
+    private VerticalLayout page4 = new VerticalLayout();
+    private VerticalLayout page5 = new VerticalLayout();
     private List<VerticalLayout> pages = new ArrayList<>();
     private HorizontalLayout buttonList = new HorizontalLayout();
     private Button previous = new Button("Previous", FontAwesome.ARROW_LEFT);
@@ -43,8 +45,8 @@ public class ESPDRequestForm extends VerticalLayout {
     private CheckBox selectAllExclusionCriteriaCheckbox = new CheckBox("Select all criterion");
     private CheckBox selectAllSelectionCriteriaCheckbox = new CheckBox("Select all criterion");
     private int currentPageIndex = 0;
-    private HashMap<String,List<CriterionForm>> exclusionCriterionHash= new HashMap<String,List<CriterionForm>>();
-    private HashMap<String,List<CriterionForm>> selectionCriterionHash= new HashMap<String,List<CriterionForm>>();
+    private HashMap<String,List<CriterionForm>> exclusionCriterionHash = new HashMap<String,List<CriterionForm>>();
+    private HashMap<String,List<CriterionForm>> selectionCriterionHash = new HashMap<String,List<CriterionForm>>();
     private List<CriterionGroupForm> exclusionCriterionGroupForms = new ArrayList<>();
     private List<CriterionGroupForm> selectionCriterionGroupForms = new ArrayList<>();
 
@@ -55,6 +57,8 @@ public class ESPDRequestForm extends VerticalLayout {
         setWidth("100%");
         setStyleName("espdRequestForm-layout");
 
+
+        // Progress bar
         addComponent(progressBarLayout);
         progressBarLayout.setStyleName("progressBarLayout");
         progressBarLayout.setWidth("100%");
@@ -63,6 +67,7 @@ public class ESPDRequestForm extends VerticalLayout {
         progressBarLabels.add(new Label("Procedure"));
         progressBarLabels.add(new Label("Exclusion"));
         progressBarLabels.add(new Label("Selection"));
+        progressBarLabels.add(new Label("Reduction of candidates"));
         progressBarLabels.add(new Label("Finish"));
 
         for (Label progressBarLabel : progressBarLabels) {
@@ -73,6 +78,8 @@ public class ESPDRequestForm extends VerticalLayout {
         pages.add(page1);
         pages.add(page2);
         pages.add(page3);
+        pages.add(page4);
+        pages.add(page5);
         for (VerticalLayout page : pages) { addComponent(page); }
         addComponent(buttonList);
 
@@ -194,7 +201,10 @@ public class ESPDRequestForm extends VerticalLayout {
         }
 
 
-        // Page 4 - Finish
+        // Page 4 - Reduction of candidates
+
+
+        // Page 5 - Finish
 
 
         showPage(currentPageIndex);
@@ -242,7 +252,7 @@ public class ESPDRequestForm extends VerticalLayout {
     public void onSelectAllExclusionCriteria(Property.ValueChangeEvent event) {
         for (CriterionGroupForm criterionGroupForm : exclusionCriterionGroupForms) {
             criterionGroupForm.setSelectedOnAllCriteria(selectAllExclusionCriteriaCheckbox.getValue());
-            }
+        }
     }
 
     /**
