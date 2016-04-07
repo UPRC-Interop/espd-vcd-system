@@ -11,6 +11,8 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.*;
 import eu.esens.espdvcd.builder.ESPDBuilder;
 import eu.esens.espdvcd.codelist.Codelists;
+import eu.esens.espdvcd.designer.Designer;
+import eu.esens.espdvcd.designer.views.EspdTemplate;
 import eu.esens.espdvcd.designer.views.Master;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.SelectableCriterion;
@@ -42,8 +44,8 @@ public class ESPDRequestForm extends VerticalLayout {
     private Button next = new Button("Next", FontAwesome.ARROW_RIGHT);
     private Button exportConsole = new Button("Export to Console", FontAwesome.DOWNLOAD);
     private Button exportFile = new Button("Export to File", FontAwesome.DOWNLOAD);
-    private CheckBox selectAllExclusionCriteriaCheckbox = new CheckBox("Select all criterion");
-    private CheckBox selectAllSelectionCriteriaCheckbox = new CheckBox("Select all criterion");
+    private CheckBox selectAllExclusionCriteriaCheckbox = new CheckBox("Select all exclusion criteria");
+    private CheckBox selectAllSelectionCriteriaCheckbox = new CheckBox("Select all selection criteria");
     private int currentPageIndex = 0;
     private HashMap<String,List<CriterionForm>> exclusionCriterionHash = new HashMap<String,List<CriterionForm>>();
     private HashMap<String,List<CriterionForm>> selectionCriterionHash = new HashMap<String,List<CriterionForm>>();
@@ -287,7 +289,10 @@ public class ESPDRequestForm extends VerticalLayout {
      * @see com.vaadin.ui.Button.ClickEvent
      */
     private void onCancel(Button.ClickEvent event) {
-        System.out.println("Cancel process");
+        if (view instanceof EspdTemplate) {
+            EspdTemplate espdTemplateView = (EspdTemplate)view;
+            espdTemplateView.resetView();
+        }
     }
 
     /**
