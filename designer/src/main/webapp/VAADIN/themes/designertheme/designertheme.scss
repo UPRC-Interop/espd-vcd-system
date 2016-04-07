@@ -26,8 +26,8 @@
   .v-margin-top {
     padding-top: 16px;
   }
-  .test {
-    background-color: yellowgreen;
+  .criterionForm-panelContent-selected{
+    background-color: #E9E9E9;
   }
   .v-margin-right {
     padding-right: 15px;
@@ -253,6 +253,17 @@
 
   }
 
+
+  .espdRequestForm-check {
+      //position: absolute;
+      clip: rect(0, 0, 0, 0);
+      left: 0.2em;
+      top: 0.2em;
+      z-index: 0;
+      margin: 0;
+
+  }
+
   .espdRequestForm-printFullModelData {
     @extend .espdRequestForm-formButton;
     background-color: #D8A42F;
@@ -342,5 +353,17 @@
 
   .v-label-progressBarLabel {
     padding: 12px;
+  }
+
+  .v-verticallayout-CriterionGroupForm {
+    width: 100%;
+  }
+
+  .v-panel-CriterionGroupFormPanel {
+    width: 100%;
+  }
+
+  .v-verticallayout-CriterionGroupFormPanelContent {
+    width: 100%;
   }
 }

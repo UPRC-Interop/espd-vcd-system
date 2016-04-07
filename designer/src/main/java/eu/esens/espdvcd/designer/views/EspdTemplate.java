@@ -5,6 +5,7 @@ import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.Page;
 import com.vaadin.ui.*;
 import eu.esens.espdvcd.builder.ESPDBuilder;
+import eu.esens.espdvcd.designer.components.CriterionForm;
 import eu.esens.espdvcd.designer.components.ESPDRequestForm;
 import eu.esens.espdvcd.model.CADetails;
 import eu.esens.espdvcd.model.ESPDRequest;
@@ -24,6 +25,7 @@ public class EspdTemplate extends Master {
     VerticalLayout panelRightLayout = new VerticalLayout();
     Button panelLeftButtonNew = new Button("Create new ESPD Template");
     Button panelRightButtonImport = new Button("Import existing ESPD Template");
+    private CriterionForm highlightedCriterion = null;
 
     public EspdTemplate(Navigator navigator) {
         super(navigator, true);
@@ -135,5 +137,13 @@ public class EspdTemplate extends Master {
         uploadPanelLayout.addComponent(upload);
         uploadPanel.setContent(uploadPanelLayout);
         panelRightLayout.addComponent(uploadPanel);
+    }
+
+    public CriterionForm getHighlightedCriterion() {
+        return highlightedCriterion;
+    }
+
+    public void setHighlightedCriterion(CriterionForm highlightedCriterion) {
+        this.highlightedCriterion = highlightedCriterion;
     }
 }

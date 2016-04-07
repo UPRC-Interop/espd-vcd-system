@@ -4,6 +4,7 @@ import com.vaadin.event.LayoutEvents;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.*;
 import eu.esens.espdvcd.designer.Designer;
+import eu.esens.espdvcd.designer.views.EspdTemplate;
 import eu.esens.espdvcd.designer.views.Master;
 import eu.esens.espdvcd.designer.views.Start;
 import eu.esens.espdvcd.model.*;
@@ -24,10 +25,6 @@ public class CriterionForm extends VerticalLayout {
     private Panel panel = new Panel();
     private VerticalLayout panelContent = new VerticalLayout();
     private CheckBox selected = new CheckBox("Select this criterion?");
-    //private Label ID = new Label("Criterion ID");
-    //private Label typeCode = new Label("Criterion TypeCode");
-    //private Label name = new Label("Criterion Name");
-
     private Label description = new Label("Criterion Description");
 
     public CriterionForm(Master view, SelectableCriterion criterion) {
@@ -37,23 +34,11 @@ public class CriterionForm extends VerticalLayout {
         setStyleName("criterionForm-layout");
         this.addComponent(panel);
         panelContent.addComponent(selected);
-        //panelContent.addComponent(ID);
-        //panelContent.addComponent(typeCode);
-        //panelContent.addComponent(name);
+        panelContent.addComponent(description);
         panelContent.addComponent(description);
 
         this.addLayoutClickListener(this::onCriterionClick);
 
-        //ID.setCaption("Criterion ID");
-        //ID.setValue(criterion.getID());
-
-        //typeCode.setCaption("Criterion Type Code");
-        //typeCode.setValue(criterion.getTypeCode());
-
-        //name.setCaption("Criterion Name");
-        //name.setValue(criterion.getName());
-
-        //description.setCaption("Criterion Description");
         description.setValue(criterion.getDescription());
 
         panelContent.setMargin(true);
@@ -70,7 +55,22 @@ public class CriterionForm extends VerticalLayout {
         criteriaGroup.bindMemberFields(this);
     }
 
+
+
     void onCriterionClick(LayoutEvents.LayoutClickEvent event) {
+
+        if (view instanceof EspdTemplate) {
+            EspdTemplate espdTemplateView = (EspdTemplate)view;
+            CriterionForm highlightedCriterion = espdTemplateView.getHighlightedCriterion();
+            if (highlightedCriterion != this) {
+                this.setHighlighted(true);
+                if (highlightedCriterion != null) {
+                    highlightedCriterion.setHighlighted(false);
+                }
+                espdTemplateView.setHighlightedCriterion(this);
+            }
+        }
+
         if (event.getClickedComponent() instanceof Panel && event.getClickedComponent() == panel) {
             if (!event.isDoubleClick()) {
                 panelContent.setVisible(!panelContent.isVisible());
@@ -81,6 +81,7 @@ public class CriterionForm extends VerticalLayout {
                     panel.setIcon(FontAwesome.CHEVRON_RIGHT);
                 }
             }
+
         } else {
             view.getDetailsContent().removeAllComponents();
             Label detailsTitle = new Label(criterionReference.getName());
@@ -94,5 +95,20 @@ public class CriterionForm extends VerticalLayout {
                 view.getDetailsContent().addComponent(new RequirementGroupForm(requirementGroup));
             }
         }
+    }
+
+    void setHighlighted(boolean highlighted) {
+        if (highlighted) {
+            panel.addStyleName("criterionForm-panelContent");
+            panelContent.setStyleName("criterionForm-panelContent-selected");
+        } else {
+            panel.removeStyleName("criterionForm-panelContent");
+            panelContent.removeStyleName("criterionForm-panelContent-selected");
+        }
+    }
+
+    public void setSelected(boolean checkValue)
+    {
+        this.selected.setValue(checkValue);
     }
 }
