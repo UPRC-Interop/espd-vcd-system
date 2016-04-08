@@ -51,6 +51,11 @@ public class ESPDRequestForm extends VerticalLayout {
     private HashMap<String,List<CriterionForm>> selectionCriterionHash = new HashMap<String,List<CriterionForm>>();
     private List<CriterionGroupForm> exclusionCriterionGroupForms = new ArrayList<>();
     private List<CriterionGroupForm> selectionCriterionGroupForms = new ArrayList<>();
+    Label page1CaptionLabel = new Label("Information concerning the procurement procedure");
+    Label page2CaptionLabel = new Label("Exclusion grounds criteria");
+    Label page3CaptionLabel = new Label("Selection criteria");
+    Label page4CaptionLabel = new Label("Reduction of candidates");
+    Label page5CaptionLabel = new Label("Finish and export");
 
     public ESPDRequestForm(Master view, ESPDRequest espdRequest) {
         this.view = view;
@@ -122,11 +127,16 @@ public class ESPDRequestForm extends VerticalLayout {
 
         // Page 1 - Procedure
         page1.setSpacing(true);
+        page1CaptionLabel.setStyleName("pageCaptionLabel");
+        page1.addComponent(page1CaptionLabel);
         page1.addComponent(new CADetailsForm(espdRequest));
 
 
         // Page 2 - Exclusion
         page2.setSpacing(true);
+
+        page2CaptionLabel.setStyleName("pageCaptionLabel");
+        page2.addComponent(page2CaptionLabel);
 
         VerticalLayout exclusionActionLayout = new VerticalLayout();
         exclusionActionLayout.setMargin(true);
@@ -167,6 +177,9 @@ public class ESPDRequestForm extends VerticalLayout {
         // Page 3 - Selection
         page3.setSpacing(true);
 
+        page3CaptionLabel.setStyleName("pageCaptionLabel");
+        page3.addComponent(page3CaptionLabel);
+
         VerticalLayout selectionActionLayout = new VerticalLayout();
         selectionActionLayout.setMargin(true);
         selectionActionLayout.addComponent(selectAllSelectionCriteriaCheckbox);
@@ -204,9 +217,13 @@ public class ESPDRequestForm extends VerticalLayout {
 
 
         // Page 4 - Reduction of candidates
+        page4CaptionLabel.setStyleName("pageCaptionLabel");
+        page4.addComponent(page4CaptionLabel);
 
 
         // Page 5 - Finish
+        page5CaptionLabel.setStyleName("pageCaptionLabel");
+        page5.addComponent(page5CaptionLabel);
 
 
         showPage(currentPageIndex);
