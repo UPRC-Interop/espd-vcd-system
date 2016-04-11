@@ -7,7 +7,6 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
-import eu.esens.espdvcd.model.SelectableCriterion;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -35,7 +34,7 @@ public class BuilderESPDTest {
         // We create an XML from our simple model 
         String XML = espdBuiler.createXMLasString(espd);
         Assert.assertNotNull(XML);
-     //   System.out.println(XML);
+        System.out.println(XML);
     }
 
     @Test

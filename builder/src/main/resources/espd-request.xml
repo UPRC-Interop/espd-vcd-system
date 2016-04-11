@@ -2,12 +2,12 @@
 <espd-req:ESPDRequest xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:ccv-cbc="urn:isa:names:specification:ubl:schema:xsd:CCV-CommonBasicComponents-1" xmlns:cev-cbc="urn:isa:names:specification:ubl:schema:xsd:CEV-CommonBasicComponents-1" xmlns:cev="urn:isa:names:specification:ubl:schema:xsd:CEV-CommonAggregateComponents-1" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns:ccv="urn:isa:names:specification:ubl:schema:xsd:CCV-CommonAggregateComponents-1" xmlns:espd-req="urn:grow:names:specification:ubl:schema:xsd:ESPDRequest-1">
    <cbc:UBLVersionID schemeAgencyID="OASIS-UBL-TC">2.1</cbc:UBLVersionID>
    <cbc:CustomizationID schemeName="CustomizationID" schemeAgencyID="BII" schemeVersionID="3.0">urn:www.cenbii.eu:transaction:biitrns070:ver3.0</cbc:CustomizationID>
-   <cbc:ID schemeID="ISO/IEC 9834-8:2008 - 4UUID" schemeAgencyID="EU-COM-GROW" schemeAgencyName="DG GROW (European Commission)" schemeVersionID="1.1">e595b15e-9e2b-4bbd-b944-3c118afd854f</cbc:ID>
+   <cbc:ID schemeID="ISO/IEC 9834-8:2008 - 4UUID" schemeAgencyID="EU-COM-GROW" schemeAgencyName="DG GROW (European Commission)" schemeVersionID="1.1">cf13514a-e248-46be-bea3-bacaf14bcce8</cbc:ID>
    <cbc:CopyIndicator>false</cbc:CopyIndicator>
    <cbc:VersionID schemeAgencyID="EU-COM-GROW">1</cbc:VersionID>
-   <cbc:IssueDate>2016-03-10</cbc:IssueDate>
-   <cbc:IssueTime>15:24:45</cbc:IssueTime>
-   <cbc:ContractFolderID schemeAgencyID="TeD">file reference</cbc:ContractFolderID>
+   <cbc:IssueDate>2016-04-07</cbc:IssueDate>
+   <cbc:IssueTime>15:31:59</cbc:IssueTime>
+   <cbc:ContractFolderID schemeAgencyID="TeD">wefwefwef</cbc:ContractFolderID>
    <cac:ContractingParty>
       <cac:Party>
          <cac:PartyName>
@@ -15,7 +15,7 @@
          </cac:PartyName>
          <cac:PostalAddress>
             <cac:Country>
-               <cbc:IdentificationCode listAgencyID="ISO" listName="ISO 3166-1" listVersionID="1.0">IE</cbc:IdentificationCode>
+               <cbc:IdentificationCode listAgencyID="ISO" listName="ISO 3166-1" listVersionID="1.0">GR</cbc:IdentificationCode>
             </cac:Country>
          </cac:PostalAddress>
          <cac:Contact/>
@@ -1138,41 +1138,15 @@
       </ccv:RequirementGroup>
    </ccv:Criterion>
    <ccv:Criterion>
-      <cbc:ID schemeID="CriteriaID" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">63adb07d-db1b-4ef0-a14e-a99785cf8cf6</cbc:ID>
-      <cbc:TypeCode listID="CriteriaTypeCode" listAgencyID="EU-COM-GROW" listVersionID="1.0">EXCLUSION.OTHER</cbc:TypeCode>
-      <cbc:Name>Purely national exclusion grounds</cbc:Name>
-      <cbc:Description>Other exclusion grounds that may be foreseen in the national legislation of the contracting authority’s or contracting entity’s Member State. Do the purely national grounds of exclusion, which are specified in the relevant notice or in the procurement documents, apply?</cbc:Description>
-      <ccv:LegislationReference>
-         <ccv-cbc:Title>DIRECTIVE 2014/24/EU OF THE EUROPEAN PARLIAMENT AND OF THE COUNCIL of 26 February 2014 on public procurement and repealing Directive 2004/18/EC</ccv-cbc:Title>
-         <cbc:Description>Directive 2014/24/EU</cbc:Description>
-         <ccv-cbc:JurisdictionLevelCode listID="CriterionJurisdictionLevelCode" listAgencyID="EU-COM-GROW" listVersionID="1.0">EU_DIRECTIVE</ccv-cbc:JurisdictionLevelCode>
-         <ccv-cbc:Article>57(4)</ccv-cbc:Article>
-         <cbc:URI>http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32014L0024</cbc:URI>
-      </ccv:LegislationReference>
+      <cbc:ID schemeID="CriteriaID" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7e7db838-eeac-46d9-ab39-42927486f22d</cbc:ID>
+      <cbc:TypeCode listID="CriteriaTypeCode" listAgencyID="EU-COM-GROW" listVersionID="1.0">SELECTION.ALL_CRITERIA_SATISFIED</cbc:TypeCode>
+      <cbc:Name>All selection criteria will be satisfied</cbc:Name>
+      <cbc:Description>It satisfies all the required selection criteria indicated in the relevant notice or in the procurement documents referred to in the notice.</cbc:Description>
       <ccv:RequirementGroup>
-         <cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">cff842a7-c95d-4445-8c89-84fcd53aa181</cbc:ID>
+         <cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">f3a6836d-2de2-4cd1-81ca-fb06178d05c5</cbc:ID>
          <ccv:Requirement responseDataType="INDICATOR">
-            <cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">974c8196-9d1c-419c-9ca9-45bb9f5fd59a</cbc:ID>
+            <cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">15335c12-ad77-4728-b5ad-3c06a60d65a4</cbc:ID>
             <cbc:Description>Your answer?</cbc:Description>
-         </ccv:Requirement>
-         <ccv:Requirement responseDataType="DESCRIPTION">
-            <cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">e098da8e-4717-4500-965f-f882d5b4e1ad</cbc:ID>
-            <cbc:Description>Please describe them</cbc:Description>
-         </ccv:Requirement>
-      </ccv:RequirementGroup>
-      <ccv:RequirementGroup>
-         <cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7458d42a-e581-4640-9283-34ceb3ad4345</cbc:ID>
-         <ccv:Requirement responseDataType="INDICATOR">
-            <cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">c1347b74-1872-4060-a6db-f4044edcd7c4</cbc:ID>
-            <cbc:Description>Is this information available electronically?</cbc:Description>
-         </ccv:Requirement>
-         <ccv:Requirement responseDataType="EVIDENCE_URL">
-            <cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">f4313bb6-21b6-499e-bdff-debe10e11d2c</cbc:ID>
-            <cbc:Description>URL</cbc:Description>
-         </ccv:Requirement>
-         <ccv:Requirement responseDataType="CODE">
-            <cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">1f1cd18e-3e01-4ca2-af4c-e2981924ba8d</cbc:ID>
-            <cbc:Description>Code</cbc:Description>
          </ccv:Requirement>
       </ccv:RequirementGroup>
    </ccv:Criterion>
@@ -2895,11 +2869,12 @@
       </ccv:RequirementGroup>
    </ccv:Criterion>
    <cac:AdditionalDocumentReference>
-      <cbc:ID schemeID="ISO/IEC 9834-8:2008 - 4UUID" schemeAgencyID="EU-COM-GROW" schemeAgencyName="DG GROW (European Commission)" schemeVersionID="1.1">1231/S 231-214234</cbc:ID>
+      <cbc:ID schemeID="ISO/IEC 9834-8:2008 - 4UUID" schemeAgencyID="EU-COM-GROW" schemeAgencyName="DG GROW (European Commission)" schemeVersionID="1.1"></cbc:ID>
       <cbc:DocumentTypeCode listID="ReferencesTypeCodes" listAgencyID="EU-COM-GROW" listVersionID="1.0">TED_CN</cbc:DocumentTypeCode>
       <cac:Attachment>
          <cac:ExternalReference>
             <cbc:FileName>Title</cbc:FileName>
+            <cbc:Description>werfwefwefwfwfwe</cbc:Description>
          </cac:ExternalReference>
       </cac:Attachment>
    </cac:AdditionalDocumentReference>
