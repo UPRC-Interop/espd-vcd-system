@@ -26,6 +26,7 @@ public class SimpleESPDRequest implements ESPDRequest {
     private static final String SELECTION_REGEXP = "^SELECTION.+";
     private static final String EXCLUSION_REGEXP = "^EXCLUSION.+";
     private static final String EO_RELATED_REGEXP = "^DATA_ON_ECONOMIC_OPERATOR*";
+    private static final String REDUCTION_OF_CANDIDATES_REGEXP = "^REDUCTION_OF_CANDIDATES*";
     
         
 
@@ -103,5 +104,10 @@ public class SimpleESPDRequest implements ESPDRequest {
                .filter(cr -> cr.getTypeCode().matches(filter))
                .collect(Collectors.toList());
        return Collections.unmodifiableList(crList);
+    }
+
+    @Override
+    public List<SelectableCriterion> getReductionOfCandidatesCriteriaList() {
+        return getFilteredCriteriaList(REDUCTION_OF_CANDIDATES_REGEXP);
     }
 }
