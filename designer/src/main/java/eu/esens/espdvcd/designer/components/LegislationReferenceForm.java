@@ -8,7 +8,7 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Label;
 import eu.esens.espdvcd.model.Criterion;
 import eu.esens.espdvcd.model.LegislationReference;
-import eu.esens.espdvcd.model.RequirementGroup;
+import eu.esens.espdvcd.model.requirement.RequirementGroup;
 
 /**
  * Created by ixuz on 3/7/16.

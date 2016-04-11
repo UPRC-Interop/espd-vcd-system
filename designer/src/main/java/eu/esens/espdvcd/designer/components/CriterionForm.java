@@ -1,5 +1,6 @@
 package eu.esens.espdvcd.designer.components;
 
+import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import com.vaadin.event.LayoutEvents;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.*;
