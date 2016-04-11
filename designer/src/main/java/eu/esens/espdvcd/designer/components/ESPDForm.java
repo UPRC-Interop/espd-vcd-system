@@ -56,6 +56,9 @@ public class ESPDForm extends VerticalLayout {
         progressBarLayout.setSpacing(true);
 
         addComponent(pagesLayout);
+        pagesLayout.setStyleName("pagesLayout");
+        pagesLayout.setWidth(100, Unit.PERCENTAGE);
+
         addComponent(buttonList);
 
         buttonList.addComponent(previous);
@@ -131,24 +134,25 @@ public class ESPDForm extends VerticalLayout {
     }
 
     public VerticalLayout newPage(String title, String TitleInProgressBar) {
-        VerticalLayout page = new VerticalLayout();
-        page.setSpacing(true);
+        VerticalLayout pageLayout = new VerticalLayout();
+        pageLayout.setSpacing(true);
+        pageLayout.setStyleName("pageLayout");
 
         Label pageCaptionLabel = new Label(title);
         pageCaptionLabel.setStyleName("pageCaptionLabel");
-        page.addComponent(pageCaptionLabel);
+        pageLayout.addComponent(pageCaptionLabel);
 
         Label pageTitleInProgressBarLabel = new Label(TitleInProgressBar);
         pageTitleInProgressBarLabel.setStyleName("progressBarLabel");
 
         progressBarLabels.add(pageTitleInProgressBarLabel);
         progressBarLayout.addComponent(pageTitleInProgressBarLabel);
-        pages.add(page);
-        pagesLayout.addComponent(page);
+        pages.add(pageLayout);
+        pagesLayout.addComponent(pageLayout);
 
         showPage(currentPageIndex);
 
-        return page;
+        return pageLayout;
     }
 
     /**
