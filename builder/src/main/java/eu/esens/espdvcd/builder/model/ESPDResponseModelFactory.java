@@ -21,10 +21,7 @@ import eu.esens.espdvcd.model.requirement.ResponseRequirement;
 import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.ResponseType;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.stream.Collectors;
-import sun.util.BuddhistCalendar;
 
 public class ESPDResponseModelFactory implements ModelExtractor {
 
