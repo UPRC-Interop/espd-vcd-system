@@ -1,32 +1,31 @@
 
 package eu.esens.espdvcd.builder.model;
 
-import eu.esens.espdvcd.builder.Responses;
+import eu.esens.espdvcd.model.requirement.response.Responses;
 import eu.esens.espdvcd.model.SimpleESPDResponse;
-import eu.esens.espdvcd.model.requirement.AmountResponse;
-import eu.esens.espdvcd.model.requirement.CountryCodeResponse;
-import eu.esens.espdvcd.model.requirement.DateResponse;
-import eu.esens.espdvcd.model.requirement.DescriptionResponse;
-import eu.esens.espdvcd.model.requirement.EvidenceURLCodeResponse;
-import eu.esens.espdvcd.model.requirement.EvidenceURLResponse;
-import eu.esens.espdvcd.model.requirement.IndicatorResponse;
-import eu.esens.espdvcd.model.requirement.PercentageResponse;
-import eu.esens.espdvcd.model.requirement.PeriodResponse;
-import eu.esens.espdvcd.model.requirement.QuantityIntegerResponse;
-import eu.esens.espdvcd.model.requirement.QuantityResponse;
-import eu.esens.espdvcd.model.requirement.QuantityYearResponse;
+import eu.esens.espdvcd.model.requirement.response.AmountResponse;
+import eu.esens.espdvcd.model.requirement.response.CountryCodeResponse;
+import eu.esens.espdvcd.model.requirement.response.DateResponse;
+import eu.esens.espdvcd.model.requirement.response.DescriptionResponse;
+import eu.esens.espdvcd.model.requirement.response.EvidenceURLCodeResponse;
+import eu.esens.espdvcd.model.requirement.response.EvidenceURLResponse;
+import eu.esens.espdvcd.model.requirement.response.IndicatorResponse;
+import eu.esens.espdvcd.model.requirement.response.PercentageResponse;
+import eu.esens.espdvcd.model.requirement.response.PeriodResponse;
+import eu.esens.espdvcd.model.requirement.response.QuantityIntegerResponse;
+import eu.esens.espdvcd.model.requirement.response.QuantityResponse;
+import eu.esens.espdvcd.model.requirement.response.QuantityYearResponse;
 import eu.esens.espdvcd.model.requirement.Requirement;
-import eu.esens.espdvcd.model.requirement.Response;
+import eu.esens.espdvcd.model.requirement.response.Response;
 import eu.esens.espdvcd.model.requirement.ResponseRequirement;
 import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.ResponseType;
 import java.util.stream.Collectors;
 
-public class ESPDResponseModelFactory implements ModelExtractor {
+public class ESPDResponseModelExtractor implements ModelExtractor {
 
-    ESPDResponseModelFactory() {
-    }
+    ESPDResponseModelExtractor() {};
 
     public SimpleESPDResponse extractESPDResponse(ESPDResponseType resType) {
 
@@ -48,7 +47,7 @@ public class ESPDResponseModelFactory implements ModelExtractor {
     public Requirement extractRequirement(RequirementType rt) {
         Requirement r = new ResponseRequirement(
                 rt.getID().getValue(),
-                rt.getResponseDataType(),
+                Responses.Type.valueOf(rt.getResponseDataType()),
                 rt.getDescription().getValue());
 
         if (!rt.getResponse().isEmpty()) {

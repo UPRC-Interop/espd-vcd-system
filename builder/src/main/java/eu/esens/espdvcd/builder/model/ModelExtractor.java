@@ -4,8 +4,10 @@ import eu.esens.espdvcd.model.CADetails;
 import eu.esens.espdvcd.model.LegislationReference;
 import eu.esens.espdvcd.model.requirement.RequestRequirement;
 import eu.esens.espdvcd.model.requirement.Requirement;
-import eu.esens.espdvcd.model.RequirementGroup;
+import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.SelectableCriterion;
+import eu.esens.espdvcd.model.requirement.response.Response;
+import eu.esens.espdvcd.model.requirement.response.Responses;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.CriterionType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.LegislationType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementGroupType;
@@ -137,7 +139,7 @@ public interface ModelExtractor {
     default Requirement extractRequirement(RequirementType rt) {
         Requirement r = new RequestRequirement(
                 rt.getID().getValue(),
-                rt.getResponseDataType(),
+                Responses.Type.valueOf(rt.getResponseDataType()),
                 rt.getDescription().getValue());
         return r;
     }    

@@ -11,10 +11,10 @@ import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
 import java.util.stream.Collectors;
 
 
-public class ESPDRequestModelFactory implements ModelExtractor {
+public class ESPDRequestModelExtractor implements ModelExtractor {
 
     /* package private constructor. Create only through factory */
-    ESPDRequestModelFactory() {}
+    ESPDRequestModelExtractor() {}
 
     
     public SimpleESPDRequest extractESPDRequest(ESPDRequestType reqType) {

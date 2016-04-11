@@ -1,6 +1,5 @@
 package eu.esens.espdvcd.builder;
 
-import eu.esens.espdvcd.builder.schema.SchemaFactory;
 import eu.esens.espdvcd.builder.model.ModelFactory;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDResponse;
@@ -23,6 +22,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.CopyIndicatorType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.IssueDateType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.IssueTimeType;
+import eu.esens.espdvcd.builder.schema.SchemaExtractor;
+import eu.esens.espdvcd.builder.schema.SchemaFactory;
 
 /**
  *
@@ -49,23 +50,23 @@ public class ESPDBuilder {
     
     public ESPDRequestType createXML(ESPDRequest req) {
 
-        ESPDRequestType reqType = finalize(SchemaFactory.extractESPDRequestType(req));
+        ESPDRequestType reqType = finalize(SchemaFactory.ESPD_REQUEST.extractESPDRequestType(req));
         return reqType;
         
     }
     
     public ESPDResponseType createXML(ESPDResponse res) {
-       // ESPDRequestType reqType = finalize(SchemaFactory.extractESPDRequestType(req));
+       // ESPDRequestType reqType = finalize(SchemaExtractor.extractESPDRequestType(req));
         return new ESPDResponseType();
     }
     
     public ESPDRequestType finalize(ESPDRequestType reqType) {
         
         // Finalizes the ESPDRequest Type, adding the Date and Time of Issue etc
-        reqType.setUBLVersionID(SchemaFactory.createUBL21VersionIdType());
+        reqType.setUBLVersionID(SchemaFactory.ESPD_REQUEST.createUBL21VersionIdType());
         
-        reqType.setCustomizationID(SchemaFactory.createBIICustomizationIdType("urn:www.cenbii.eu:transaction:biitrns070:ver3.0"));
-        reqType.setVersionID(SchemaFactory.createVersionIDType("1"));
+        reqType.setCustomizationID(SchemaFactory.ESPD_REQUEST.createBIICustomizationIdType("urn:www.cenbii.eu:transaction:biitrns070:ver3.0"));
+        reqType.setVersionID(SchemaFactory.ESPD_REQUEST.createVersionIDType("1"));
 
         reqType.setCopyIndicator(new CopyIndicatorType());
         reqType.getCopyIndicator().setValue(false);
@@ -97,7 +98,7 @@ public class ESPDBuilder {
             System.out.println("ERROR in DATES!");
         }
         
-        reqType.setID(SchemaFactory.createISOIECIDType(UUID.randomUUID().toString()));
+        reqType.setID(SchemaFactory.ESPD_REQUEST.createISOIECIDType(UUID.randomUUID().toString()));
         return reqType;
     }
 
