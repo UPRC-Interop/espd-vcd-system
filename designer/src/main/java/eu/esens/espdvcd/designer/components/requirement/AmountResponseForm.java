@@ -13,10 +13,13 @@ public class AmountResponseForm extends FormLayout {
     private TextField amount = new TextField("Amount: ");
     private TextField currency = new TextField("Currency: ");
 
-    public AmountResponseForm(AmountResponse amountResponse) {
+    public AmountResponseForm(AmountResponse amountResponse, String caption) {
         this.amountResponse = amountResponse;
         addComponent(amount);
         addComponent(currency);
+        setCaption(caption);
+        amount.setNullRepresentation("");
+        currency.setNullRepresentation("");
 
         // Bind fields
         final BeanFieldGroup<AmountResponse> binder = new BeanFieldGroup<>(AmountResponse.class);

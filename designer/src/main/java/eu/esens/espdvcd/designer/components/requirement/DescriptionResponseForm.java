@@ -12,9 +12,11 @@ public class DescriptionResponseForm extends FormLayout {
     private DescriptionResponse descriptionResponse = null;
     protected TextField description = new TextField("Description: ");
 
-    public DescriptionResponseForm(DescriptionResponse descriptionResponse) {
+    public DescriptionResponseForm(DescriptionResponse descriptionResponse, String caption) {
         this.descriptionResponse = descriptionResponse;
         addComponent(description);
+        setCaption(caption);
+        description.setNullRepresentation("");
 
         // Bind fields
         final BeanFieldGroup<DescriptionResponse> binder = new BeanFieldGroup<>(DescriptionResponse.class);

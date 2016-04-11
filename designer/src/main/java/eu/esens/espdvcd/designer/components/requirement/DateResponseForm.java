@@ -12,9 +12,10 @@ public class DateResponseForm extends FormLayout {
     private DateResponse dateResponse = null;
     private DateField date = new DateField("Date: ");
 
-    public DateResponseForm(DateResponse dateResponse) {
+    public DateResponseForm(DateResponse dateResponse, String caption) {
         this.dateResponse = dateResponse;
         addComponent(date);
+        setCaption(caption);
 
         // Bind fields
         final BeanFieldGroup<DateResponse> binder = new BeanFieldGroup<>(DateResponse.class);

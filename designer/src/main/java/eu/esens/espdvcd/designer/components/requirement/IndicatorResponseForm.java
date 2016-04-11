@@ -12,9 +12,10 @@ public class IndicatorResponseForm extends FormLayout {
     private IndicatorResponse indicatorResponse = null;
     protected CheckBox indicator = new CheckBox("Indicator: ");
 
-    public IndicatorResponseForm(IndicatorResponse indicatorResponse) {
+    public IndicatorResponseForm(IndicatorResponse indicatorResponse, String caption) {
         this.indicatorResponse = indicatorResponse;
         addComponent(indicator);
+        setCaption(caption);
 
         // Bind fields
         final BeanFieldGroup<IndicatorResponse> binder = new BeanFieldGroup<>(IndicatorResponse.class);

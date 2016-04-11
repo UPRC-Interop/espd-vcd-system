@@ -12,9 +12,11 @@ public class PercentageResponseForm extends FormLayout {
     private PercentageResponse percentageResponse = null;
     private TextField percentage = new TextField("Percentage: ");
 
-    public PercentageResponseForm(PercentageResponse percentageResponse) {
+    public PercentageResponseForm(PercentageResponse percentageResponse, String caption) {
         this.percentageResponse = percentageResponse;
         addComponent(percentage);
+        setCaption(caption);
+        percentage.setNullRepresentation("");
 
         // Bind fields
         final BeanFieldGroup<PercentageResponse> binder = new BeanFieldGroup<>(PercentageResponse.class);

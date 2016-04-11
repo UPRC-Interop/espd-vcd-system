@@ -12,9 +12,11 @@ public class QuantityIntegerResponseForm extends FormLayout {
     private QuantityIntegerResponse quantityIntegerResponse = null;
     private TextField quantity = new TextField("Quantity Integer: ");
 
-    public QuantityIntegerResponseForm(QuantityIntegerResponse quantityIntegerResponse) {
+    public QuantityIntegerResponseForm(QuantityIntegerResponse quantityIntegerResponse, String caption) {
         this.quantityIntegerResponse = quantityIntegerResponse;
         addComponent(quantity);
+        setCaption(caption);
+        quantity.setNullRepresentation("");
 
         // Bind fields
         final BeanFieldGroup<QuantityIntegerResponse> binder = new BeanFieldGroup<>(QuantityIntegerResponse.class);

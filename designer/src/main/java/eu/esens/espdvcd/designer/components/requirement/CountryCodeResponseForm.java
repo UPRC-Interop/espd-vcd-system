@@ -14,9 +14,10 @@ public class CountryCodeResponseForm extends FormLayout {
     private CountryCodeResponse countryCodeResponse = null;
     private CountryComboBox countryCode = new CountryComboBox("Country Code: ");
 
-    public CountryCodeResponseForm(CountryCodeResponse countryCodeResponse) {
+    public CountryCodeResponseForm(CountryCodeResponse countryCodeResponse, String caption) {
         this.countryCodeResponse = countryCodeResponse;
         addComponent(countryCode);
+        setCaption(caption);
 
         // Bind fields
         final BeanFieldGroup<CountryCodeResponse> binder = new BeanFieldGroup<>(CountryCodeResponse.class);

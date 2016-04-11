@@ -7,8 +7,9 @@ import eu.esens.espdvcd.model.requirement.DescriptionResponse;
  */
 public class PeriodResponseForm extends DescriptionResponseForm {
 
-    public PeriodResponseForm(DescriptionResponse descriptionResponse) {
-        super(descriptionResponse);
+    public PeriodResponseForm(DescriptionResponse descriptionResponse, String caption) {
+        super(descriptionResponse, caption);
         description.setCaption("Period: ");
+        description.setNullRepresentation("");
     }
 }

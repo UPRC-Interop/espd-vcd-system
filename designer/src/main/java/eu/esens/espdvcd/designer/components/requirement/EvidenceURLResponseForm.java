@@ -12,9 +12,11 @@ public class EvidenceURLResponseForm extends FormLayout {
     private EvidenceURLResponse evidenceURLResponse = null;
     private TextField evidenceURL = new TextField("Evidence URL: ");
 
-    public EvidenceURLResponseForm(EvidenceURLResponse evidenceURLResponse) {
+    public EvidenceURLResponseForm(EvidenceURLResponse evidenceURLResponse, String caption) {
         this.evidenceURLResponse = evidenceURLResponse;
         addComponent(evidenceURL);
+        setCaption(caption);
+        evidenceURL.setNullRepresentation("");
 
         // Bind fields
         final BeanFieldGroup<EvidenceURLResponse> binder = new BeanFieldGroup<>(EvidenceURLResponse.class);
