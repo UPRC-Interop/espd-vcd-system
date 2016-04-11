@@ -6,7 +6,7 @@ import com.vaadin.server.Page;
 import com.vaadin.ui.*;
 import eu.esens.espdvcd.builder.ESPDBuilder;
 import eu.esens.espdvcd.designer.components.CriterionForm;
-import eu.esens.espdvcd.designer.components.ESPDRequestForm;
+import eu.esens.espdvcd.designer.components.ESPDResponseForm;
 import eu.esens.espdvcd.model.CADetails;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.SimpleESPDRequest;
@@ -14,21 +14,18 @@ import eu.esens.espdvcd.model.SimpleESPDRequest;
 import java.io.*;
 
 /**
- * Created by ixuz on 3/4/16.
+ * Created by ixuz on 4/8/16.
  */
-public class EspdTemplate extends Master {
-
+public class Espd extends Master {
     private HorizontalLayout panels = null;
     private ESPDRequest espdRequest = null;
-    private ESPDRequestForm espdRequestForm = null;
-    VerticalLayout panelLeftLayout = new VerticalLayout();
+    private ESPDResponseForm espdResponseForm = null;
     VerticalLayout panelRightLayout = new VerticalLayout();
-    Button panelLeftButtonNew = new Button("Create new ESPD Template");
-    Button panelRightButtonImport = new Button("Import existing ESPD Template");
+    Button panelRightButtonImport = new Button("Import existing ESPD");
     private CriterionForm highlightedCriterion = null;
     private Panel uploadPanel = new Panel();
 
-    public EspdTemplate(Navigator navigator) {
+    public Espd(Navigator navigator) {
         super(navigator, true);
 
         panels = new HorizontalLayout();
@@ -36,30 +33,13 @@ public class EspdTemplate extends Master {
         panels.setWidth("100%");
         mainContent.addComponent(panels);
 
-        Panel panelLeft = new Panel("Create new ESPD Template");
-        panelLeft.setStyleName("EspdTemplate-panelLeft");
-        panelLeft.setWidth("50%");
-        panels.addComponent(panelLeft);
-
-        panelLeftLayout.setStyleName("panelLeftLayout");
-        panelLeft.setContent(panelLeftLayout);
-
-        Label panelLeftDescription = new Label("A description about creating a new espd template. More details goes here... More details goes here... More details goes here... More details goes here... More details goes here... More details goes here... More details goes here... More details goes here...");
-        panelLeftLayout.addComponent(panelLeftDescription);
-
-        panelLeftButtonNew.setStyleName("espdTemplate-panelButton");
-        panelLeftButtonNew.addClickListener(this::onNewEspdTemplate);
-        panelLeftLayout.addComponent(panelLeftButtonNew);
-
-        Panel panelRight = new Panel("Import existing ESPD Template");
-        panelRight.setStyleName("EspdTemplate-panelRight");
-        panelRight.setWidth("50%");
+        Panel panelRight = new Panel("Import existing ESPD");
         panels.addComponent(panelRight);
 
         panelRightLayout.setStyleName("panelRightLayout");
         panelRight.setContent(panelRightLayout);
 
-        Label panelRightDescription = new Label("A description about importing an existing espd template. More details goes here... More details goes here... More details goes here... More details goes here... More details goes here... More details goes here... More details goes here... More details goes here...");
+        Label panelRightDescription = new Label("A description about importing an existing espd. More details goes here... More details goes here... More details goes here... More details goes here... More details goes here... More details goes here... More details goes here... More details goes here...");
         panelRightLayout.addComponent(panelRightDescription);
 
         panelRightButtonImport.addClickListener(this::onImportEspdTemplate);
@@ -82,12 +62,12 @@ public class EspdTemplate extends Master {
         espdRequest.setCriterionList(new ESPDBuilder().getCriteriaList());
 
         // Cenerate the espd request form base on the provided espd request model
-        espdRequestForm = new ESPDRequestForm(this, espdRequest);
-        mainContent.addComponent(espdRequestForm);
+        espdResponseForm = new ESPDResponseForm(this, espdRequest);
+        mainContent.addComponent(espdResponseForm);
     }
 
     public void onImportEspdTemplate(Button.ClickEvent clickEvent) {
-        EspdTemplate thisView = this;
+        Espd thisView = this;
         panelRightButtonImport.setVisible(false);
 
         class EspdUploader2 implements Upload.Receiver, Upload.SucceededListener {
@@ -115,8 +95,8 @@ public class EspdTemplate extends Master {
                     InputStream is = new FileInputStream(file);
                     ESPDBuilder espdBuilder = new ESPDBuilder();
                     espdRequest = espdBuilder.createESPDRequestFromXML(is);
-                    espdRequestForm = new ESPDRequestForm(thisView, espdRequest);
-                    mainContent.addComponent(espdRequestForm);
+                    espdResponseForm = new ESPDResponseForm(thisView, espdRequest);
+                    mainContent.addComponent(espdResponseForm);
                     is.close();
                     panels.setVisible(false);
                 } catch (IOException e) {
@@ -150,7 +130,7 @@ public class EspdTemplate extends Master {
     public void resetView() {
         panels.setVisible(true);
         panelRightButtonImport.setVisible(true);
-        mainContent.removeComponent(espdRequestForm);
+        mainContent.removeComponent(espdResponseForm);
         panelRightLayout.removeComponent(uploadPanel);
         getDetailsContent().removeAllComponents();
     }
