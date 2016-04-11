@@ -10,12 +10,14 @@ import grow.names.specification.ubl.schema.xsd.espdrequest_1.ObjectFactory;
 import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
 import java.io.InputStream;
 import java.io.StringWriter;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.UUID;
 import javax.xml.bind.JAXB;
 import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeConstants;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.CopyIndicatorType;
@@ -74,11 +76,23 @@ public class ESPDBuilder {
         c.setTime(now);
        
         try {
-            XMLGregorianCalendar date2 = DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
+            // Creates the format according to the EC Application Requirement
+            XMLGregorianCalendar xmlDate = DatatypeFactory.newInstance()
+                    .newXMLGregorianCalendar(
+                            c.get(Calendar.YEAR),
+                            c.get(Calendar.MONTH)+1, 
+                            c.get(Calendar.DAY_OF_MONTH),
+                            c.get(Calendar.HOUR),
+                            c.get(Calendar.MINUTE),
+                            c.get(Calendar.SECOND),
+                            DatatypeConstants.FIELD_UNDEFINED,
+                            DatatypeConstants.FIELD_UNDEFINED                            
+                    );
+           
             reqType.setIssueDate(new IssueDateType());
-            reqType.getIssueDate().setValue(date2.normalize());
+            reqType.getIssueDate().setValue(xmlDate);
             reqType.setIssueTime(new IssueTimeType());
-            reqType.getIssueTime().setValue(date2.normalize());
+            reqType.getIssueTime().setValue(xmlDate);
         } catch (DatatypeConfigurationException e) {
             System.out.println("ERROR in DATES!");
         }
