@@ -76,47 +76,25 @@ public class ESPDRequestForm extends VerticalLayout {
         for (VerticalLayout page : pages) { addComponent(page); }
         addComponent(buttonList);
 
-        page1.setSpacing(true);
-        page2.setSpacing(true);
-        page3.setSpacing(true);
-
-        VerticalLayout exclusionActionLayout = new VerticalLayout();
-        exclusionActionLayout.setMargin(true);
-        exclusionActionLayout.addComponent(selectAllExclusionCriteriaCheckbox);
-        selectAllExclusionCriteriaCheckbox.setValue(true);
-        page2.addComponent(exclusionActionLayout);
-
-        VerticalLayout selectionActionLayout = new VerticalLayout();
-        selectionActionLayout.setMargin(true);
-        selectionActionLayout.addComponent(selectAllSelectionCriteriaCheckbox);
-        selectAllSelectionCriteriaCheckbox.setValue(true);
-        page3.addComponent(selectionActionLayout);
-
         buttonList.addComponent(previous);
         buttonList.addComponent(cancel);
         buttonList.addComponent(next);
         buttonList.addComponent(exportConsole);
         buttonList.addComponent(exportFile);
 
+        buttonList.setMargin(true);
+        buttonList.setSpacing(true);
+
         previous.addClickListener(this::onPrevious);
         cancel.addClickListener(this::onCancel);
         next.addClickListener(this::onNext);
         exportConsole.addClickListener(this::onExportConsole);
-        selectAllExclusionCriteriaCheckbox.addValueChangeListener(this::onSelectAllExclusionCriteria);
-        selectAllSelectionCriteriaCheckbox.addValueChangeListener(this::onSelectAllSelectionCriteria);
 
-        selectAllExclusionCriteriaCheckbox.setStyleName("espdRequestForm-checkbox");
-        selectAllSelectionCriteriaCheckbox.setStyleName("espdRequestForm-checkbox");
         previous.setStyleName("espdRequestForm-previous");
         cancel.setStyleName("espdRequestForm-cancel");
         next.setStyleName("espdRequestForm-next");
         exportConsole.setStyleName("espdRequestForm-finish");
         exportFile.setStyleName("espdRequestForm-finish");
-
-        buttonList.setMargin(true);
-        buttonList.setSpacing(true);
-
-        page1.addComponent(new CADetailsForm(espdRequest));
 
         // Hook the exportFile button up with a downloadable resource
         StreamResource downloadableResource = new StreamResource(new StreamResource.StreamSource() {
@@ -132,10 +110,28 @@ public class ESPDRequestForm extends VerticalLayout {
         FileDownloader fileDownloader = new FileDownloader(downloadableResource);
         fileDownloader.extend(exportFile);
 
+
+        // Page 1 - Procedure
+        page1.setSpacing(true);
+        page1.addComponent(new CADetailsForm(espdRequest));
+
+
+        // Page 2 - Exclusion
+        page2.setSpacing(true);
+
+        VerticalLayout exclusionActionLayout = new VerticalLayout();
+        exclusionActionLayout.setMargin(true);
+        exclusionActionLayout.addComponent(selectAllExclusionCriteriaCheckbox);
+        selectAllExclusionCriteriaCheckbox.setValue(true);
+        page2.addComponent(exclusionActionLayout);
+
+        selectAllExclusionCriteriaCheckbox.addValueChangeListener(this::onSelectAllExclusionCriteria);
+        selectAllExclusionCriteriaCheckbox.setStyleName("espdRequestForm-checkbox");
+
         for (SelectableCriterion criterion : espdRequest.getExclusionCriteriaList()) {
 
-           if (!exclusionCriterionHash.containsKey(criterion.getTypeCode())) {
-               exclusionCriterionHash.put(criterion.getTypeCode(), new ArrayList<CriterionForm>());
+            if (!exclusionCriterionHash.containsKey(criterion.getTypeCode())) {
+                exclusionCriterionHash.put(criterion.getTypeCode(), new ArrayList<CriterionForm>());
             }
 
             CriterionForm criterionForm = new CriterionForm(view, criterion);
@@ -157,6 +153,19 @@ public class ESPDRequestForm extends VerticalLayout {
             exclusionCriterionGroupForms.add(criterionGroupForm);
             page2.addComponent(criterionGroupForm);
         }
+
+
+        // Page 3 - Selection
+        page3.setSpacing(true);
+
+        VerticalLayout selectionActionLayout = new VerticalLayout();
+        selectionActionLayout.setMargin(true);
+        selectionActionLayout.addComponent(selectAllSelectionCriteriaCheckbox);
+        selectAllSelectionCriteriaCheckbox.setValue(true);
+        page3.addComponent(selectionActionLayout);
+
+        selectAllSelectionCriteriaCheckbox.addValueChangeListener(this::onSelectAllSelectionCriteria);
+        selectAllSelectionCriteriaCheckbox.setStyleName("espdRequestForm-checkbox");
 
         for (SelectableCriterion criterion : espdRequest.getSelectionCriteriaList()) {
 
@@ -183,6 +192,10 @@ public class ESPDRequestForm extends VerticalLayout {
             selectionCriterionGroupForms.add(criterionGroupForm);
             page3.addComponent(new CriterionGroupForm(fullTypeCodeName, criterionForms));
         }
+
+
+        // Page 4 - Finish
+
 
         showPage(currentPageIndex);
     }

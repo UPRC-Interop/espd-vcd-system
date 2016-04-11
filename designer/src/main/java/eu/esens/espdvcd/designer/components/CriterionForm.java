@@ -59,18 +59,6 @@ public class CriterionForm extends VerticalLayout {
 
     void onCriterionClick(LayoutEvents.LayoutClickEvent event) {
 
-        if (view instanceof EspdTemplate) {
-            EspdTemplate espdTemplateView = (EspdTemplate)view;
-            CriterionForm highlightedCriterion = espdTemplateView.getHighlightedCriterion();
-            if (highlightedCriterion != this) {
-                this.setHighlighted(true);
-                if (highlightedCriterion != null) {
-                    highlightedCriterion.setHighlighted(false);
-                }
-                espdTemplateView.setHighlightedCriterion(this);
-            }
-        }
-
         if (event.getClickedComponent() instanceof Panel && event.getClickedComponent() == panel) {
             if (!event.isDoubleClick()) {
                 panelContent.setVisible(!panelContent.isVisible());
@@ -81,7 +69,6 @@ public class CriterionForm extends VerticalLayout {
                     panel.setIcon(FontAwesome.CHEVRON_RIGHT);
                 }
             }
-
         } else {
             view.getDetailsContent().removeAllComponents();
             Label detailsTitle = new Label(criterionReference.getName());
@@ -94,16 +81,26 @@ public class CriterionForm extends VerticalLayout {
             for (RequirementGroup requirementGroup : criterionReference.getRequirementGroups()) {
                 view.getDetailsContent().addComponent(new RequirementGroupForm(requirementGroup));
             }
+
+            if (view instanceof EspdTemplate) {
+                EspdTemplate espdTemplateView = (EspdTemplate)view;
+                CriterionForm highlightedCriterion = espdTemplateView.getHighlightedCriterion();
+                if (highlightedCriterion != this) {
+                    this.setHighlighted(true);
+                    if (highlightedCriterion != null) {
+                        highlightedCriterion.setHighlighted(false);
+                    }
+                    espdTemplateView.setHighlightedCriterion(this);
+                }
+            }
         }
     }
 
     void setHighlighted(boolean highlighted) {
         if (highlighted) {
-            panel.addStyleName("criterionForm-panelContent");
-            panelContent.setStyleName("criterionForm-panelContent-selected");
+            panel.addStyleName("criterionForm-panelContent-selected");
         } else {
-            panel.removeStyleName("criterionForm-panelContent");
-            panelContent.removeStyleName("criterionForm-panelContent-selected");
+            panel.removeStyleName("criterionForm-panelContent-selected");
         }
     }
 
