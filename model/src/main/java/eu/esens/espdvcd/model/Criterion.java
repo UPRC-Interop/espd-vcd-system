@@ -1,5 +1,6 @@
 package eu.esens.espdvcd.model;
 
+import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,9 @@
 package eu.esens.espdvcd.model.requirement;
 
+import eu.esens.espdvcd.model.requirement.response.Response;
+import eu.esens.espdvcd.model.requirement.response.DescriptionResponse;
 import eu.esens.espdvcd.model.Evidence;
+import eu.esens.espdvcd.model.requirement.response.Responses;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,11 +41,11 @@ public class ResponseRequirement extends RequestRequirement {
      */
     private List<Evidence> evidences;
 
-    public ResponseRequirement(String ID, String responseDataType, String description) {
+    public ResponseRequirement(String ID, Responses.Type responseDataType, String description) {
         super(ID, responseDataType, description);
     }
 
-    public ResponseRequirement(String ID, String responseDataType, String description, DescriptionResponse response, List<Evidence> evidences) {
+    public ResponseRequirement(String ID, Responses.Type responseDataType, String description, DescriptionResponse response, List<Evidence> evidences) {
         super(ID, responseDataType, description);
         this.response = response;
         this.evidences = evidences;

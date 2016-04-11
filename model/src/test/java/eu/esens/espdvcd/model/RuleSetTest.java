@@ -1,6 +1,9 @@
 package eu.esens.espdvcd.model;
 
-import eu.esens.espdvcd.model.requirement.IndicatorResponse;
+import eu.esens.espdvcd.model.requirement.ruleset.RuleSetFactory;
+import eu.esens.espdvcd.model.requirement.ruleset.RuleSet;
+import eu.esens.espdvcd.model.requirement.RequirementGroup;
+import eu.esens.espdvcd.model.requirement.response.IndicatorResponse;
 import org.junit.Before;
 import org.junit.Test;
 

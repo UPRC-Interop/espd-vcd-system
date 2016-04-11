@@ -1,6 +1,8 @@
 package eu.esens.espdvcd.model.requirement;
 
+import eu.esens.espdvcd.model.requirement.response.Response;
 import eu.esens.espdvcd.model.Evidence;
+import eu.esens.espdvcd.model.requirement.response.Responses;
 import java.util.List;
 
 /**
@@ -10,10 +12,10 @@ public class RequestRequirement implements Requirement {
 
     private static final long serialVersionUID = 528517963577425517L;
     private String ID;
-    private String responseDataType;
+    private Responses.Type responseDataType;
     private String description;
 
-    public RequestRequirement(String ID, String responseDataType, String description) {
+    public RequestRequirement(String ID, Responses.Type responseDataType, String description) {
         this.ID = ID;
         this.responseDataType = responseDataType;
         this.description = description;
@@ -27,16 +29,6 @@ public class RequestRequirement implements Requirement {
     @Override
     public void setID(String ID) {
         this.ID = ID;
-    }
-
-    @Override
-    public String getResponseDataType() {
-        return responseDataType;
-    }
-
-    @Override
-    public void setResponseDataType(String responseDataType) {
-        this.responseDataType = responseDataType;
     }
 
     @Override
@@ -67,5 +59,15 @@ public class RequestRequirement implements Requirement {
     @Override
     public void setEvidences(List<Evidence> evidences) {
         throw new UnsupportedOperationException("Not supported in ESPD request.");
+    }
+
+    @Override
+    public void setResponseDataType(Responses.Type responseDataType) {
+        this.responseDataType = responseDataType;
+    }
+
+    @Override
+    public Responses.Type getResponseDataType() {
+      return this.responseDataType;
     }
 }

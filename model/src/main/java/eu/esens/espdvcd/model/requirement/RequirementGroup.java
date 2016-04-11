@@ -1,15 +1,10 @@
-package eu.esens.espdvcd.model;
+package eu.esens.espdvcd.model.requirement;
 
-import eu.esens.espdvcd.model.requirement.IndicatorResponse;
-import eu.esens.espdvcd.model.requirement.Requirement;
-import eu.esens.espdvcd.model.requirement.Response;
+import eu.esens.espdvcd.model.requirement.ruleset.RuleSet;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
 
 /**
  * Created by ixuz on 2/24/16.

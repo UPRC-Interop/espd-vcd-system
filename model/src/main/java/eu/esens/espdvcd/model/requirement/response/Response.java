@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eu.esens.espdvcd.model.requirement;
+package eu.esens.espdvcd.model.requirement.response;
 
 public abstract class Response {
 

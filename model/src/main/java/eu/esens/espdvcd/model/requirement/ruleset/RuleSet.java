@@ -1,4 +1,6 @@
-package eu.esens.espdvcd.model;
+package eu.esens.espdvcd.model.requirement.ruleset;
+
+import eu.esens.espdvcd.model.requirement.RequirementGroup;
 
 /**
  * Rule set interface that links a Response object (called indicator in this context) to

@@ -1,7 +1,8 @@
-package eu.esens.espdvcd.model;
+package eu.esens.espdvcd.model.requirement.ruleset;
 
-import eu.esens.espdvcd.model.requirement.IndicatorResponse;
-import eu.esens.espdvcd.model.requirement.Response;
+import eu.esens.espdvcd.model.requirement.RequirementGroup;
+import eu.esens.espdvcd.model.requirement.response.IndicatorResponse;
+import eu.esens.espdvcd.model.requirement.response.Response;
 
 import java.util.HashMap;
 import java.util.Map;

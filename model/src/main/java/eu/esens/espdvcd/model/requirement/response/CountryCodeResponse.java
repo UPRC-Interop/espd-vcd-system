@@ -1,4 +1,4 @@
-package eu.esens.espdvcd.model.requirement;
+package eu.esens.espdvcd.model.requirement.response;
 
 import java.io.Serializable;
 import java.util.ArrayList;
