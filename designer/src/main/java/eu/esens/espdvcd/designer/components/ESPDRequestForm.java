@@ -1,142 +1,41 @@
 package eu.esens.espdvcd.designer.components;
 
 import com.vaadin.data.Property;
-import com.vaadin.server.FileDownloader;
-import com.vaadin.server.FontAwesome;
-import com.vaadin.server.StreamResource;
-import com.vaadin.ui.Button;
 import com.vaadin.ui.CheckBox;
-import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.*;
-import eu.esens.espdvcd.builder.ESPDBuilder;
 import eu.esens.espdvcd.codelist.Codelists;
-import eu.esens.espdvcd.designer.Designer;
-import eu.esens.espdvcd.designer.views.EspdTemplate;
 import eu.esens.espdvcd.designer.views.Master;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.SelectableCriterion;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
- * Created by ixuz on 3/7/16.
+ * Created by ixuz on 4/8/16.
  */
-public class ESPDRequestForm extends VerticalLayout {
+public class ESPDRequestForm extends ESPDForm {
 
-    private Master view;
-    private ESPDRequest espdRequest = null;
-    private HorizontalLayout progressBarLayout = new HorizontalLayout();
-    private List<Label> progressBarLabels = new ArrayList<Label> ();
-    private VerticalLayout page1 = new VerticalLayout();
-    private VerticalLayout page2 = new VerticalLayout();
-    private VerticalLayout page3 = new VerticalLayout();
-    private VerticalLayout page4 = new VerticalLayout();
-    private VerticalLayout page5 = new VerticalLayout();
-    private List<VerticalLayout> pages = new ArrayList<>();
-    private HorizontalLayout buttonList = new HorizontalLayout();
-    private Button previous = new Button("Previous", FontAwesome.ARROW_LEFT);
-    private Button cancel = new Button("Cancel", FontAwesome.REMOVE);
-    private Button next = new Button("Next", FontAwesome.ARROW_RIGHT);
-    private Button exportConsole = new Button("Export to Console", FontAwesome.DOWNLOAD);
-    private Button exportFile = new Button("Export to File", FontAwesome.DOWNLOAD);
     private CheckBox selectAllExclusionCriteriaCheckbox = new CheckBox("Select all exclusion criteria");
     private CheckBox selectAllSelectionCriteriaCheckbox = new CheckBox("Select all selection criteria");
-    private int currentPageIndex = 0;
     private HashMap<String,List<CriterionForm>> exclusionCriterionHash = new HashMap<String,List<CriterionForm>>();
     private HashMap<String,List<CriterionForm>> selectionCriterionHash = new HashMap<String,List<CriterionForm>>();
     private List<CriterionGroupForm> exclusionCriterionGroupForms = new ArrayList<>();
     private List<CriterionGroupForm> selectionCriterionGroupForms = new ArrayList<>();
-    Label page1CaptionLabel = new Label("Information concerning the procurement procedure");
-    Label page2CaptionLabel = new Label("Exclusion grounds criteria");
-    Label page3CaptionLabel = new Label("Selection criteria");
-    Label page4CaptionLabel = new Label("Reduction of candidates");
-    Label page5CaptionLabel = new Label("Finish and export");
 
     public ESPDRequestForm(Master view, ESPDRequest espdRequest) {
-        this.view = view;
-        this.espdRequest = espdRequest;
-
-        setWidth("100%");
-        setStyleName("espdRequestForm-layout");
-
-
-        // Progress bar
-        addComponent(progressBarLayout);
-        progressBarLayout.setStyleName("progressBarLayout");
-        progressBarLayout.setWidth("100%");
-        progressBarLayout.setSpacing(true);
-
-        progressBarLabels.add(new Label("Procedure"));
-        progressBarLabels.add(new Label("Exclusion"));
-        progressBarLabels.add(new Label("Selection"));
-        progressBarLabels.add(new Label("Reduction of candidates"));
-        progressBarLabels.add(new Label("Finish"));
-
-        for (Label progressBarLabel : progressBarLabels) {
-            progressBarLayout.addComponent(progressBarLabel);
-            progressBarLabel.setStyleName("progressBarLabel");
-        }
-
-        pages.add(page1);
-        pages.add(page2);
-        pages.add(page3);
-        pages.add(page4);
-        pages.add(page5);
-        for (VerticalLayout page : pages) { addComponent(page); }
-        addComponent(buttonList);
-
-        buttonList.addComponent(previous);
-        buttonList.addComponent(cancel);
-        buttonList.addComponent(next);
-        buttonList.addComponent(exportConsole);
-        buttonList.addComponent(exportFile);
-
-        buttonList.setMargin(true);
-        buttonList.setSpacing(true);
-
-        previous.addClickListener(this::onPrevious);
-        cancel.addClickListener(this::onCancel);
-        next.addClickListener(this::onNext);
-        exportConsole.addClickListener(this::onExportConsole);
-
-        previous.setStyleName("espdRequestForm-previous");
-        cancel.setStyleName("espdRequestForm-cancel");
-        next.setStyleName("espdRequestForm-next");
-        exportConsole.setStyleName("espdRequestForm-finish");
-        exportFile.setStyleName("espdRequestForm-finish");
-
-        // Hook the exportFile button up with a downloadable resource
-        StreamResource downloadableResource = new StreamResource(new StreamResource.StreamSource() {
-            @Override
-            public InputStream getStream() {
-                ESPDBuilder espdBuilder = new ESPDBuilder();
-                String xml = espdBuilder.createXMLasString(espdRequest);
-                byte[] xmlBytes = xml.getBytes();
-                return new ByteArrayInputStream(xmlBytes);
-
-            }
-        }, "espd_template.xml");
-        FileDownloader fileDownloader = new FileDownloader(downloadableResource);
-        fileDownloader.extend(exportFile);
+        super(view, espdRequest);
 
 
         // Page 1 - Procedure
-        page1.setSpacing(true);
-        page1CaptionLabel.setStyleName("pageCaptionLabel");
-        page1.addComponent(page1CaptionLabel);
+        VerticalLayout page1 = newPage("Information concerning the procurement procedure", "Procedure");
         page1.addComponent(new CADetailsForm(espdRequest));
 
 
         // Page 2 - Exclusion
-        page2.setSpacing(true);
-
-        page2CaptionLabel.setStyleName("pageCaptionLabel");
-        page2.addComponent(page2CaptionLabel);
+        VerticalLayout page2 = newPage("Exclusion grounds criteria", "Exclusion");
 
         VerticalLayout exclusionActionLayout = new VerticalLayout();
         exclusionActionLayout.setMargin(true);
@@ -175,10 +74,7 @@ public class ESPDRequestForm extends VerticalLayout {
 
 
         // Page 3 - Selection
-        page3.setSpacing(true);
-
-        page3CaptionLabel.setStyleName("pageCaptionLabel");
-        page3.addComponent(page3CaptionLabel);
+        VerticalLayout page3 = newPage("Selection criteria", "Selection");
 
         VerticalLayout selectionActionLayout = new VerticalLayout();
         selectionActionLayout.setMargin(true);
@@ -217,49 +113,10 @@ public class ESPDRequestForm extends VerticalLayout {
 
 
         // Page 4 - Reduction of candidates
-        page4CaptionLabel.setStyleName("pageCaptionLabel");
-        page4.addComponent(page4CaptionLabel);
-
+        VerticalLayout page4 = newPage("Reduction of candidates", "Reduction of candidates");
 
         // Page 5 - Finish
-        page5CaptionLabel.setStyleName("pageCaptionLabel");
-        page5.addComponent(page5CaptionLabel);
-
-
-        showPage(currentPageIndex);
-    }
-
-    private void showPage(int pageIndex) {
-        for (Label progressBarLabel : progressBarLabels) {
-            progressBarLabel.removeStyleName("progressBarLabelHighlighted");
-        }
-        if (pageIndex >= 0 && pageIndex < progressBarLabels.size()) {
-            progressBarLabels.get(pageIndex).addStyleName("progressBarLabelHighlighted");
-        }
-
-        for (int i=0; i<pages.size(); i++) {
-            VerticalLayout page = pages.get(i);
-            if (i == pageIndex) {
-                page.setVisible(true);
-
-            } else {
-                page.setVisible(false);
-            }
-        }
-        updateButtonList();
-        view.getMainPanel().setScrollTop(0);
-    }
-
-
-    private void updateButtonList() {
-        next.setEnabled((currentPageIndex+1 <= pages.size()-1));
-        next.setVisible((currentPageIndex + 1 <= pages.size() - 1));
-        previous.setEnabled((currentPageIndex-1 >= 0));
-        previous.setVisible((currentPageIndex-1 >= 0));
-        exportConsole.setEnabled(!(currentPageIndex + 1 <= pages.size() - 1));
-        exportConsole.setVisible(!(currentPageIndex + 1 <= pages.size() - 1));
-        exportFile.setEnabled(!(currentPageIndex + 1 <= pages.size() - 1));
-        exportFile.setVisible(!(currentPageIndex + 1 <= pages.size() - 1));
+        VerticalLayout page5 = newPage("Finish", "Finish");
     }
 
     /**
@@ -285,58 +142,5 @@ public class ESPDRequestForm extends VerticalLayout {
             criterionGroupForm.setSelectedOnAllCriteria(selectAllSelectionCriteriaCheckbox.getValue());
         }
     }
-
-    /**
-     * Displays the previous page of the form.
-     * If there is no previous page, this method will have no effect.
-     *
-     * @param event Vaadin7 Button click event
-     * @see com.vaadin.ui.Button.ClickEvent
-     */
-    private void onPrevious(Button.ClickEvent event) {
-        currentPageIndex = (currentPageIndex-1 >= 0 ? currentPageIndex-1 : currentPageIndex);
-        showPage(currentPageIndex);
-    }
-
-    /**
-     * When the user have clicked the Cancel button, this method is invoked.
-     * TODO: Implement logic for restarting/leaving the form page.
-     *
-     * @param event Vaadin7 Button click event
-     * @see com.vaadin.ui.Button.ClickEvent
-     */
-    private void onCancel(Button.ClickEvent event) {
-        if (view instanceof EspdTemplate) {
-            EspdTemplate espdTemplateView = (EspdTemplate)view;
-            espdTemplateView.resetView();
-        }
-    }
-
-    /**
-     * Displays the next page of the form.
-     * If there is no next page, this method will have no effect.
-     *
-     * @param event Vaadin7 Button click event
-     * @see com.vaadin.ui.Button.ClickEvent
-     */
-    private void onNext(Button.ClickEvent event) {
-        currentPageIndex = (currentPageIndex+1 < pages.size() ? currentPageIndex+1 : currentPageIndex);
-        showPage(currentPageIndex);
-    }
-
-    /**
-     * When the user have clicked the Export button, this method is invoked.
-     * Exports the espd request xml to the system console
-     *
-     * @param event Vaadin7 Button click event
-     * @see com.vaadin.ui.Button.ClickEvent
-     */
-    private void onExportConsole(Button.ClickEvent event) {
-        // Display espd request xml button
-        ESPDBuilder espdBuilder = new ESPDBuilder();
-        String xml = espdBuilder.createXMLasString(espdRequest);
-        System.out.println("Xml: " + xml);
-    }
-
-
 }
+

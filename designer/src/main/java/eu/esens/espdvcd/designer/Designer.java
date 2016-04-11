@@ -31,12 +31,14 @@ public class Designer extends UI {
 
         Start start = new Start(navigator);
         EspdTemplate espdTemplate = new EspdTemplate(navigator);
+        Espd espd = new Espd(navigator);
         Login login = new Login(navigator);
         Sandbox sandbox = new Sandbox(navigator);
         EspdTemplates espdTemplates = new EspdTemplates(navigator);
 
         navigator.addView(VIEW_INDEX, start);
         navigator.addView(VIEW_ESPD_TEMPLATE, espdTemplate);
+        navigator.addView(VIEW_ESPD, espd);
         navigator.addView(VIEW_LOGIN, login);
         navigator.addView(VIEW_SANDBOX, sandbox);
         navigator.addView(VIEW_ESPD_TEMPLATES, espdTemplates);
