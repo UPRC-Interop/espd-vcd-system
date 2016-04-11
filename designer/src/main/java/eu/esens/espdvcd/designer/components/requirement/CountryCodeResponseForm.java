@@ -3,6 +3,7 @@ package eu.esens.espdvcd.designer.components.requirement;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.TextField;
+import eu.esens.espdvcd.designer.components.CountryComboBox;
 import eu.esens.espdvcd.model.requirement.AmountResponse;
 import eu.esens.espdvcd.model.requirement.CountryCodeResponse;
 
@@ -11,7 +12,7 @@ import eu.esens.espdvcd.model.requirement.CountryCodeResponse;
  */
 public class CountryCodeResponseForm extends FormLayout {
     private CountryCodeResponse countryCodeResponse = null;
-    private TextField countryCode = new TextField("Country Code: ");
+    private CountryComboBox countryCode = new CountryComboBox("Country Code: ");
 
     public CountryCodeResponseForm(CountryCodeResponse countryCodeResponse) {
         this.countryCodeResponse = countryCodeResponse;

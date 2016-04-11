@@ -64,6 +64,18 @@ public class Sandbox extends Master {
 
         // Requirement response forms
 
+        { // IndicatorResponse
+            IndicatorResponse indicatorResponse = (IndicatorResponse) Responses.createResponse(Responses.Type.INDICATOR);
+            IndicatorResponseForm indicatorResponseForm = new IndicatorResponseForm(indicatorResponse);
+            pageContent.addComponent(indicatorResponseForm);
+
+            Button testButton = new Button("Test IndicatorResponse");
+            testButton.addClickListener((clickEvent) -> {
+                System.out.println("- IndicatorResponse.indicator: " + indicatorResponse.isIndicator());
+            });
+            pageContent.addComponent(testButton);
+        }
+
         { // DescriptionResponse
             DescriptionResponse descriptionResponse = (DescriptionResponse) Responses.createResponse(Responses.Type.DESCRIPTION);
             DescriptionResponseForm descriptionResponseForm = new DescriptionResponseForm(descriptionResponse);
@@ -129,7 +141,7 @@ public class Sandbox extends Master {
             AmountResponseForm amountResponseForm = new AmountResponseForm(amountResponse);
             pageContent.addComponent(amountResponseForm);
 
-            Button testButton = new Button("Test QuantityIntegerResponse");
+            Button testButton = new Button("Test AmountResponse");
             testButton.addClickListener((clickEvent) -> {
                 System.out.println("- AmountResponse.amount: " + amountResponse.getAmount());
                 System.out.println("- AmountResponse.currency: " + amountResponse.getCurrency());
