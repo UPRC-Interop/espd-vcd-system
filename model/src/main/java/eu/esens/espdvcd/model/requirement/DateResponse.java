@@ -26,6 +26,7 @@ public class DateResponse extends Response implements Serializable {
     private GregorianCalendar date;
 
     public DateResponse() {
+
     }
 
     public DateResponse(GregorianCalendar date) {
