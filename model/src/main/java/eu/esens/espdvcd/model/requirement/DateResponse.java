@@ -1,9 +1,7 @@
 package eu.esens.espdvcd.model.requirement;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.GregorianCalendar;
-import java.util.List;
+import java.util.Date;
 
 /**
  * Created by Ulf Lotzmann on 21/03/2016.
@@ -23,21 +21,21 @@ public class DateResponse extends Response implements Serializable {
      * BusReqID: tbr92-018<br>
      * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.Response.Date<br>
      */
-    private GregorianCalendar date;
+    private Date date;
 
     public DateResponse() {
 
     }
 
-    public DateResponse(GregorianCalendar date) {
+    public DateResponse(Date date) {
         this.date = date;
     }
 
-    public GregorianCalendar getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(GregorianCalendar date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 }
