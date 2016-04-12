@@ -85,7 +85,6 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
         req.setDescription(new DescriptionType());
         req.getDescription().setValue(r.getDescription());
         req.setID(createCriterionRelatedIDType(r.getID()));
-
         req.getResponse().add(extractResponse(r.getResponse(), r.getResponseDataType()));
 
         return req;
@@ -94,6 +93,8 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
     private ResponseType extractResponse(Response response, Responses.Type respType) {
 
         ResponseType rType = new ResponseType();
+        if (response == null)
+            return rType;
 
         switch (respType) {
 
