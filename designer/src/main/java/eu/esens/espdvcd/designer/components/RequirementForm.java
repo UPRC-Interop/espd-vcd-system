@@ -19,12 +19,17 @@ public class RequirementForm extends VerticalLayout {
     public RequirementForm(Requirement requirement) {
         setMargin(true);
         setStyleName("requirementForm-layout");
+        setWidth("100%");
+        panel.setWidth("100%");
         this.addComponent(panel);
         //panelContent.addComponent(ID);
         panelContent.addComponent(responseDataType);
         panelContent.addComponent(description);
-
+        panelContent.setStyleName("requirementForm-panelContent");
         panelContent.setMargin(true);
+
+        responseDataType.addStyleName("requirementFormLabel");
+        description.addStyleName("requirementFormLabel");
 
         this.addLayoutClickListener(this::onRequirementClick);
 
@@ -37,10 +42,14 @@ public class RequirementForm extends VerticalLayout {
         description.setCaption("Requirement Description");
         description.setValue(requirement.getDescription());
 
-        panel.setStyleName("requirementForm-panel");
+        panel.setStyleName("requirementFormPanel");
         panel.setContent(panelContent);
         panel.setCaption("Requirement");
         panel.setIcon(FontAwesome.CHEVRON_DOWN);
+
+
+
+
 
         // Bind the this forms fields
         final BeanFieldGroup<Requirement> requirementGroup = new BeanFieldGroup<>(Requirement.class);

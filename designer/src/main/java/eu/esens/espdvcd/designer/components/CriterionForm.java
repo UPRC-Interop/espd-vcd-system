@@ -27,7 +27,7 @@ public class CriterionForm extends VerticalLayout {
     //private Label ID = new Label("Criterion ID");
     //private Label typeCode = new Label("Criterion TypeCode");
     private Label name = new Label("Criterion Name");
-
+    private int i=0;
 
     private Label description = new Label("Criterion Description");
 
@@ -82,7 +82,7 @@ public class CriterionForm extends VerticalLayout {
     void onCriterionClick(LayoutEvents.LayoutClickEvent event) {
 
 
-        changeColour(panelContent);
+
 
         if (event.getClickedComponent() instanceof Panel && event.getClickedComponent() == panel) {
             if (!event.isDoubleClick()) {
@@ -109,15 +109,6 @@ public class CriterionForm extends VerticalLayout {
             }
         }
     }
-    void changeColour(VerticalLayout current)
-    {
-        panel.addStyleName("criterionForm-panelContent");
-       // previous=current;
-
-        //previous.removeStyleName("test");
-        current.setStyleName("criterionForm-panelContent-selected");
-    }
-
 
     public void selectAll(boolean checkValue)
     {

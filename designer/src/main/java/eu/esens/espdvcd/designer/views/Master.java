@@ -77,8 +77,9 @@ public class Master extends VerticalLayout implements View {
         contentGrid.setHeight("100%");
         contentGrid.setStyleName("contentGrid");
         contentGrid.setColumnExpandRatio(0, 0.16f);
-        contentGrid.setColumnExpandRatio(1, 0.62f);
+        contentGrid.setColumnExpandRatio(1, 0.60f);
         contentGrid.setColumnExpandRatio(2, 0.22f);
+
 
         navigatorContent.setStyleName("navigatorContent");
         navigatorContent.setHeight("100%");

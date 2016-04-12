@@ -2,10 +2,7 @@ package eu.esens.espdvcd.designer.components;
 
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.data.fieldgroup.PropertyId;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.TextField;
-import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.Panel;
+import com.vaadin.ui.*;
 import eu.esens.espdvcd.model.CADetails;
 import eu.esens.espdvcd.model.ESPDRequest;
 
@@ -17,10 +14,13 @@ import java.util.Arrays;
 public class CADetailsForm extends VerticalLayout {
     private Panel panelInformationAboutPublication;
     private VerticalLayout layoutInformationAboutPublication;
+    private FormLayout layoutFormInformatinAboutPublication;
     private Panel panelIdentifyProcurer;
-    private VerticalLayout layoutIdentifyProcurer;
+    private HorizontalLayout layoutIdentifyProcurer;
+    private FormLayout layoutIdentifyProcurerOfficialName;
+    private FormLayout layoutIdentifyProcurerCountry;
     private Panel panelInformationProcurementProcedure;
-    private VerticalLayout layoutInformationProcurementProcedure;
+    private FormLayout layoutInformationProcurementProcedure;
     private Label informationAboutPublicationText = new Label("For procurement procedures in which a call for competition has been published in the Official Journal of the European Union, the information required under Part I will be automatically retrieved, provided that the electronic ESPD-service is used to generate and fill in the ESPD. Reference of the relevant notice published in the Official Journal of the European Union:");
 
     @PropertyId("CACountry")
@@ -28,7 +28,7 @@ public class CADetailsForm extends VerticalLayout {
     @PropertyId("CAOfficialName")
     private TextField caOfficialName;
     private TextField procurementProcedureTitle;
-    private TextField procurementProcedureDesc;
+    private TextArea procurementProcedureDesc;
     private TextField procurementProcedureFileReferenceNo;
     private ProducurementPublicationNumberField procurementPublicationNumber;
 
@@ -41,14 +41,19 @@ public class CADetailsForm extends VerticalLayout {
         panelInformationAboutPublication = new Panel("Information about publication");
         layoutInformationAboutPublication = new VerticalLayout();
         panelIdentifyProcurer = new Panel("Identity of the procurer");
-        layoutIdentifyProcurer = new VerticalLayout();
+        layoutIdentifyProcurer = new HorizontalLayout();
+        layoutIdentifyProcurerOfficialName = new FormLayout();
+        layoutIdentifyProcurerCountry = new FormLayout();
+
+        layoutFormInformatinAboutPublication=new FormLayout();
+
         panelInformationProcurementProcedure = new Panel("Information about the procurement procedure");
-        layoutInformationProcurementProcedure = new VerticalLayout();
+        layoutInformationProcurementProcedure = new FormLayout();
         caCountry =  new CountryComboBox("Country:");
         caOfficialName = new TextField();
         procurementProcedureTitle = new TextField();
-        procurementProcedureDesc = new TextField();
-        procurementProcedureFileReferenceNo = new TextField();
+        procurementProcedureDesc = new TextArea();
+        procurementProcedureFileReferenceNo = new TextField("File reference number attributed by the contracting \n authority or contracting entity (if applicable):");
         procurementPublicationNumber = new ProducurementPublicationNumberField("Notice number in the OJS:");
 
         this.addComponent(panelInformationAboutPublication);
@@ -58,9 +63,12 @@ public class CADetailsForm extends VerticalLayout {
         this.addComponent(panelInformationProcurementProcedure);
         panelInformationProcurementProcedure.setContent(layoutInformationProcurementProcedure);
         layoutInformationAboutPublication.addComponent(informationAboutPublicationText);
-        layoutInformationAboutPublication.addComponent(procurementPublicationNumber);
-        layoutIdentifyProcurer.addComponent(caCountry);
-        layoutIdentifyProcurer.addComponent(caOfficialName);
+        layoutFormInformatinAboutPublication.addComponent(procurementPublicationNumber);
+        layoutInformationAboutPublication.addComponent(layoutFormInformatinAboutPublication);
+        layoutIdentifyProcurer.addComponent(layoutIdentifyProcurerOfficialName);
+        layoutIdentifyProcurer.addComponent(layoutIdentifyProcurerCountry);
+        layoutIdentifyProcurerOfficialName.addComponent(caOfficialName);
+        layoutIdentifyProcurerCountry.addComponent(caCountry);
         layoutInformationProcurementProcedure.addComponent(procurementProcedureTitle);
         layoutInformationProcurementProcedure.addComponent(procurementProcedureDesc);
         layoutInformationProcurementProcedure.addComponent(procurementProcedureFileReferenceNo);
@@ -73,14 +81,33 @@ public class CADetailsForm extends VerticalLayout {
         layoutInformationProcurementProcedure.setMargin(true);
         informationAboutPublicationText.setWidth(100, Unit.PERCENTAGE);
         caCountry.setCaption("Country:");
+        caCountry.setStyleName("textFieldCaptionText");
         caOfficialName.setCaption("Official Name:");
         caOfficialName.setNullRepresentation("");
+        caOfficialName.setInputPrompt("Enter official name");
+        caOfficialName.setWidth("17em");
+        caOfficialName.setStyleName("textFieldCaptionText");
+
         procurementProcedureTitle.setCaption("Title:");
         procurementProcedureTitle.setNullRepresentation("");
+        procurementProcedureTitle.setInputPrompt("Enter title");
+        procurementProcedureTitle.setWidth("30em");
+        procurementProcedureTitle.setStyleName("textFieldCaptionText");
         procurementProcedureDesc.setCaption("Short Description:");
+        procurementProcedureDesc.setInputPrompt("Enter short description");
         procurementProcedureDesc.setNullRepresentation("");
-        procurementProcedureFileReferenceNo.setCaption("File reference number attributed by the contracting authority or contracting entity (if applicable):");
+        procurementProcedureDesc.setWidth("30em");
+        procurementProcedureDesc.setStyleName("textFieldCaptionText");
+        //procurementProcedureFileReferenceNo.setCaption("File reference number attributed by the contracting \n authority or contracting entity (if applicable):");
+        //procurementProcedureFileReferenceNo.setCaption("File reference number");
+
+        procurementProcedureFileReferenceNo.setStyleName("textCaption");
         procurementProcedureFileReferenceNo.setNullRepresentation("");
+        procurementProcedureFileReferenceNo.setInputPrompt("Enter file reference number");
+        procurementProcedureFileReferenceNo.setWidth("30em");
+        procurementProcedureFileReferenceNo.setStyleName("textFieldCaptionText");
+        procurementPublicationNumber.setWidth("30em");
+        procurementPublicationNumber.setStyleName("textFieldCaptionText");
 
         CADetails caDetails = espdRequest.getCADetails();
 

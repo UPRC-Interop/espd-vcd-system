@@ -157,8 +157,6 @@ public class ESPDRequestForm extends VerticalLayout {
             String fullTypeCodeName = Codelists.CriteriaType.getValueForId(key);
 
             if (fullTypeCodeName == null) {
-                System.out.println("Value not found for key: " + key);
-                // Fallback to display the type code instead of real name
                 fullTypeCodeName = key;
             }
 
@@ -186,8 +184,7 @@ public class ESPDRequestForm extends VerticalLayout {
             String fullTypeCodeName = Codelists.CriteriaType.getValueForId(key);
 
             if (fullTypeCodeName == null) {
-                System.out.println("Value not found for key: " + key);
-                // Fallback to display the type code instead of real name
+
                 fullTypeCodeName = key;
             }
 

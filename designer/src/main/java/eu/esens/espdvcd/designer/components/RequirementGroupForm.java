@@ -18,6 +18,8 @@ public class RequirementGroupForm extends VerticalLayout {
 
     public RequirementGroupForm(RequirementGroup requirementGroup) {
         setMargin(true);
+        setWidth("100%");
+        panel.setWidth("100%");
         setStyleName("requirementGroupForm-layout");
         addComponent(panel);
         panel.setContent(panelContent);
@@ -35,6 +37,8 @@ public class RequirementGroupForm extends VerticalLayout {
         panel.setStyleName("requirementGroupForm-panel");
         panel.setCaption("Requirement group");
         panel.setIcon(FontAwesome.CHEVRON_DOWN);
+        //panelContent.setSizeUndefined();
+
 
         // Bind the this forms fields
         final BeanFieldGroup<RequirementGroup> requirementGroupGroup = new BeanFieldGroup<>(RequirementGroup.class);
