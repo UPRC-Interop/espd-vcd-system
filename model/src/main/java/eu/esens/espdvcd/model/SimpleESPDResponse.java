@@ -19,7 +19,7 @@ public class SimpleESPDResponse extends SimpleESPDRequest implements ESPDRespons
         return eoDetails;
     }
 
-    public void setEoDetails(EODetails eoDetails) {
+    public void setEODetails(EODetails eoDetails) {
         this.eoDetails = eoDetails;
     }
     
