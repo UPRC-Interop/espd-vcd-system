@@ -8,7 +8,7 @@ import eu.esens.espdvcd.model.requirement.response.DescriptionResponse;
 /**
  * Created by ixuz on 4/11/16.
  */
-public class DescriptionResponseForm extends FormLayout {
+public class DescriptionResponseForm extends ResponseForm {
     private DescriptionResponse descriptionResponse = null;
     protected TextField description = new TextField("Description: ");
 

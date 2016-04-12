@@ -8,7 +8,7 @@ import eu.esens.espdvcd.model.requirement.response.QuantityYearResponse;
 /**
  * Created by ixuz on 4/11/16.
  */
-public class QuantityYearResponseForm extends FormLayout {
+public class QuantityYearResponseForm extends ResponseForm {
     private QuantityYearResponse quantityYearResponse = null;
     private TextField year = new TextField("Quantity Year: ");
 

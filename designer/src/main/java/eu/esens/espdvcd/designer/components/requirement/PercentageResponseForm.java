@@ -8,7 +8,7 @@ import eu.esens.espdvcd.model.requirement.response.PercentageResponse;
 /**
  * Created by ixuz on 4/11/16.
  */
-public class PercentageResponseForm extends FormLayout {
+public class PercentageResponseForm extends ResponseForm {
     private PercentageResponse percentageResponse = null;
     private TextField percentage = new TextField("Percentage: ");
 

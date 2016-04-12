@@ -8,7 +8,7 @@ import eu.esens.espdvcd.model.requirement.response.QuantityResponse;
 /**
  * Created by ixuz on 4/11/16.
  */
-public class QuantityResponseForm extends FormLayout {
+public class QuantityResponseForm extends ResponseForm {
     private QuantityResponse quantityResponse = null;
     private TextField quantity = new TextField("Quantity: ");
 

@@ -8,7 +8,7 @@ import eu.esens.espdvcd.model.requirement.response.AmountResponse;
 /**
  * Created by ixuz on 4/11/16.
  */
-public class AmountResponseForm extends FormLayout {
+public class AmountResponseForm extends ResponseForm {
     private AmountResponse amountResponse = null;
     private TextField amount = new TextField("Amount: ");
     private TextField currency = new TextField("Currency: ");

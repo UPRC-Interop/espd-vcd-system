@@ -8,7 +8,7 @@ import eu.esens.espdvcd.model.requirement.response.IndicatorResponse;
 /**
  * Created by ixuz on 4/11/16.
  */
-public class IndicatorResponseForm extends FormLayout {
+public class IndicatorResponseForm extends ResponseForm {
     private IndicatorResponse indicatorResponse = null;
     protected CheckBox indicator = new CheckBox("Indicator: ");
 

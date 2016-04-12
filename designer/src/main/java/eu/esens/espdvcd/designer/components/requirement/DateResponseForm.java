@@ -8,7 +8,7 @@ import eu.esens.espdvcd.model.requirement.response.DateResponse;
 /**
  * Created by ixuz on 4/11/16.
  */
-public class DateResponseForm extends FormLayout {
+public class DateResponseForm extends ResponseForm {
     private DateResponse dateResponse = null;
     private DateField date = new DateField("Date: ");
 
