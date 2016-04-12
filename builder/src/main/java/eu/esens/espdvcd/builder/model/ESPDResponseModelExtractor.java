@@ -45,11 +45,9 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
 
     @Override
     public Requirement extractRequirement(RequirementType rt) {
-        Requirement r = new ResponseRequirement(
-                rt.getID().getValue(),
-                Responses.Type.valueOf(rt.getResponseDataType()),
-                rt.getDescription().getValue());
-
+     
+        Requirement r = ModelExtractor.super.extractRequirement(rt);
+        
         if (!rt.getResponse().isEmpty()) {
             r.setResponse(extractResponse(rt.getResponse().get(0), Responses.Type.valueOf(rt.getResponseDataType())));
         }
@@ -63,73 +61,112 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
 
             case INDICATOR:
                 IndicatorResponse resp = new IndicatorResponse();
-                resp.setIndicator(res.getIndicator().isValue());
+                if (res.getIndicator() !=null) {
+                    resp.setIndicator(res.getIndicator().isValue());
+                }
                 return resp;
 
             case DATE:
                 DateResponse dResp = new DateResponse();
-                dResp.setDate(res.getDate().getValue().toGregorianCalendar().getTime());
+                if (res.getDate() != null && res.getDate().getValue() != null) {
+                    dResp.setDate(res.getDate().getValue().toGregorianCalendar().getTime());
+                }
                 return dResp;
+                
 
             case DESCRIPTION:
                 DescriptionResponse deResp = new DescriptionResponse();
-                deResp.setDescription(res.getDescription().getValue());
+                if (res.getDescription() != null && res.getDescription().getValue() != null) {
+                    deResp.setDescription(res.getDescription().getValue());
+                }
                 return deResp;
                 
             case QUANTITY:
                 QuantityResponse qResp = new QuantityResponse();
-                qResp.setQuantity(res.getQuantity().getValue().floatValue());
+                if (res.getQuantity() != null && res.getQuantity().getValue() != null) {
+                    qResp.setQuantity(res.getQuantity().getValue().floatValue());
+                }
                 return qResp;
 
             case QUANTITY_YEAR:
                 QuantityYearResponse qyResp = new QuantityYearResponse();
-                qyResp.setYear(res.getQuantity().getValue().intValueExact());
+                if (res.getQuantity() != null && res.getQuantity().getValue() != null) {
+                    qyResp.setYear(res.getQuantity().getValue().intValueExact());
+                }
                 return qyResp;
                 
             case QUANTITY_INTEGER:
                 QuantityIntegerResponse qiResp = new QuantityIntegerResponse();
-                qiResp.setQuantity(res.getQuantity().getValue().intValueExact());
+                if (res.getQuantity() != null && res.getQuantity().getValue() != null) {
+                    qiResp.setQuantity(res.getQuantity().getValue().intValueExact());
+                }
                 return qiResp;
 
             case AMOUNT:
                 AmountResponse aResp = new AmountResponse();
-                aResp.setAmount(res.getAmount().getValue().floatValue());
-                aResp.setCurrency(res.getAmount().getCurrencyID());
+                if (res.getAmount() != null && res.getAmount().getValue() != null) {
+                    aResp.setAmount(res.getAmount().getValue().floatValue());
+                    if (res.getAmount().getCurrencyID() != null) {  
+                        aResp.setCurrency(res.getAmount().getCurrencyID());
+                    }
+                }
+
                 return aResp;
                 
                 
             case CODE_COUNTRY:
                 CountryCodeResponse cResp = new CountryCodeResponse();
-                cResp.setCountryCode(res.getCode().getValue());
+                if (res.getCode() != null && res.getCode().getValue() != null) {
+                    cResp.setCountryCode(res.getCode().getValue());
+                }
                 return cResp;
                 
             case PERCENTAGE:
                 PercentageResponse pResp = new PercentageResponse();
-                pResp.setPercentage(res.getPercent().getValue().floatValue());
+                if (res.getPercent() != null && res.getPercent().getValue() != null) {
+                    pResp.setPercentage(res.getPercent().getValue().floatValue());
+                }
                 return pResp;
                 
             case PERIOD:
                 PeriodResponse perResp = new PeriodResponse();
                  //TODO: NULL Checks and empty list checks
-                perResp.setDescription(res.getPeriod().getDescription().get(0).getValue());
+                  if (res.getPeriod() != null 
+                          && !res.getPeriod().getDescription().isEmpty() 
+                          && res.getPeriod().getDescription().get(0).getValue() != null) {
+                
+                      perResp.setDescription(res.getPeriod().getDescription().get(0).getValue());
+                  }
                 return perResp;
                 
             case EVIDENCE_URL:
                 EvidenceURLResponse eResp = new EvidenceURLResponse();
                 //TODO: NULL Checks and empty list checks
-                eResp.setEvidenceURL(res.getEvidence()
+                if (!res.getEvidence().isEmpty() 
+                        && !res.getEvidence().get(0).getEvidenceDocumentReference().isEmpty()
+                        && res.getEvidence().get(0).getEvidenceDocumentReference().get(0).getAttachment() != null
+                        && res.getEvidence().get(0).getEvidenceDocumentReference().get(0).getAttachment().getExternalReference() != null
+                        && res.getEvidence().get(0).getEvidenceDocumentReference().get(0).getAttachment().getExternalReference().getURI() != null
+                        && res.getEvidence().get(0).getEvidenceDocumentReference().get(0).getAttachment().getExternalReference().getURI().getValue() != null)
+                {
+                
+                    eResp.setEvidenceURL(res.getEvidence()
                         .get(0)
                         .getEvidenceDocumentReference()
                         .get(0)
                         .getAttachment()
                         .getExternalReference()
                         .getURI().getValue());
+                }
                 
                 return eResp;
 
             case CODE:
                 EvidenceURLCodeResponse ecResp = new EvidenceURLCodeResponse();
-                ecResp.setEvidenceURLCode(res.getCode().getValue());
+                if (res.getCode() != null 
+                        && res.getCode().getValue() != null) {
+                    ecResp.setEvidenceURLCode(res.getCode().getValue());
+                }
                 return ecResp;
 
             default:

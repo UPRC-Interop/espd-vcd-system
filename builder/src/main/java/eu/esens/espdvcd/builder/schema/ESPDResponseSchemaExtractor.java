@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package eu.esens.espdvcd.builder.schema;
 
 import eu.esens.espdvcd.model.ESPDResponse;
@@ -51,15 +50,14 @@ import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.IDType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.PercentType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.QuantityType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.TypeCodeType;
-
+import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.URIType;
 
 public class ESPDResponseSchemaExtractor implements SchemaExtractor {
-    
 
     public ESPDResponseType extractESPDResponseType(ESPDResponse res) {
 
         ESPDResponseType resType = new ESPDResponseType();
- 
+
         if (res.getCADetails().getProcurementProcedureFileReferenceNo() != null) {
             resType.setContractFolderID(new ContractFolderIDType());
             resType.getContractFolderID().setSchemeAgencyID("TeD");
@@ -73,7 +71,7 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
                 .filter(cr -> cr.isSelected())
                 .map(cr -> extractCriterion(cr))
                 .collect(Collectors.toList()));
-        
+
         // TODO: ADD the EO Details
         return resType;
     }
@@ -87,109 +85,119 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
         req.setDescription(new DescriptionType());
         req.getDescription().setValue(r.getDescription());
         req.setID(createCriterionRelatedIDType(r.getID()));
-        
-        req.getResponse().add(extractResponse(r.getResponse(),r.getResponseDataType()));
+
+        req.getResponse().add(extractResponse(r.getResponse(), r.getResponseDataType()));
 
         return req;
     }
 
-    private ResponseType extractResponse(Response response,Responses.Type respType) {
-        
+    private ResponseType extractResponse(Response response, Responses.Type respType) {
+
         ResponseType rType = new ResponseType();
-        
-        switch(respType) {
+
+        switch (respType) {
 
             case DESCRIPTION:
-                rType.setDescription(new DescriptionType());
-                rType.getDescription().setValue(((DescriptionResponse)response).getDescription());
+                if (((DescriptionResponse) response).getDescription() != null) {
+                    rType.setDescription(new DescriptionType());
+                    rType.getDescription().setValue(((DescriptionResponse) response).getDescription());
+                }
                 return rType;
 
             case QUANTITY_YEAR:
-                rType.setQuantity(new QuantityType());
-                rType.getQuantity().setUnitCode("YEAR");
-                rType.getQuantity().setValue(BigDecimal.valueOf(((QuantityYearResponse)response).getYear()));
+                if (((QuantityYearResponse) response).getYear() != 0) {
+                    rType.setQuantity(new QuantityType());
+                    rType.getQuantity().setUnitCode("YEAR");
+                    rType.getQuantity().setValue(BigDecimal.valueOf(((QuantityYearResponse) response).getYear()));
+                }
                 return rType;
 
             case QUANTITY:
                 rType.setQuantity(new QuantityType());
-                rType.getQuantity().setValue(BigDecimal.valueOf(((QuantityResponse)response).getQuantity()));
+                rType.getQuantity().setValue(BigDecimal.valueOf(((QuantityResponse) response).getQuantity()));
                 return rType;
 
             case QUANTITY_INTEGER:
                 rType.setQuantity(new QuantityType());
-                rType.getQuantity().setValue(BigDecimal.valueOf(((QuantityIntegerResponse)response).getQuantity()));
+                rType.getQuantity().setValue(BigDecimal.valueOf(((QuantityIntegerResponse) response).getQuantity()));
                 return rType;
 
             case AMOUNT:
                 rType.setAmount(new AmountType());
-                rType.getAmount().setValue(BigDecimal.valueOf(((AmountResponse)response).getAmount()));
-                rType.getAmount().setCurrencyID(((AmountResponse)response).getCurrency());
+                rType.getAmount().setValue(BigDecimal.valueOf(((AmountResponse) response).getAmount()));
+                rType.getAmount().setCurrencyID(((AmountResponse) response).getCurrency());
                 return rType;
-                
+
             case INDICATOR:
                 rType.setIndicator(new IndicatorType());
-                rType.getIndicator().setValue(((IndicatorResponse)response).isIndicator());
+                rType.getIndicator().setValue(((IndicatorResponse) response).isIndicator());
                 return rType;
-                
+
             case PERIOD:
                 rType.setPeriod(new PeriodType());
                 DescriptionType dt = new DescriptionType();
-                dt.setValue(((PeriodResponse)response).getDescription());
+                dt.setValue(((PeriodResponse) response).getDescription());
                 rType.getPeriod().getDescription().add(dt);
                 return rType;
-                
+
             case PERCENTAGE:
                 rType.setPercent(new PercentType());
-                rType.getPercent().setValue(BigDecimal.valueOf(((PercentageResponse)response).getPercentage()));
+                rType.getPercent().setValue(BigDecimal.valueOf(((PercentageResponse) response).getPercentage()));
                 return rType;
-                
+
             case DATE:
-                Date respDate = ((DateResponse)response).getDate();
-                Calendar cal = new GregorianCalendar();
-                cal.setTime(respDate);
-            try {
-                XMLGregorianCalendar xcal = DatatypeFactory.newInstance()
-                        .newXMLGregorianCalendarDate(
-                            cal.get(Calendar.YEAR),
-                            cal.get(Calendar.MONTH)+1, 
-                            cal.get(Calendar.DAY_OF_MONTH),
-                            DatatypeConstants.FIELD_UNDEFINED);
-                rType.setDate(new DateType());
-                rType.getDate().setValue(xcal);
+                if (((DateResponse) response).getDate() != null) {
+                    Date respDate = ((DateResponse) response).getDate();
+                    Calendar cal = new GregorianCalendar();
+                    cal.setTime(respDate);
+                    try {
+                        XMLGregorianCalendar xcal = DatatypeFactory.newInstance()
+                                .newXMLGregorianCalendarDate(
+                                        cal.get(Calendar.YEAR),
+                                        cal.get(Calendar.MONTH) + 1,
+                                        cal.get(Calendar.DAY_OF_MONTH),
+                                        DatatypeConstants.FIELD_UNDEFINED);
+                        rType.setDate(new DateType());
+                        rType.getDate().setValue(xcal);
+
+                    } catch (DatatypeConfigurationException ex) {
+                        Logger.getLogger(ESPDResponseSchemaExtractor.class.getName()).log(Level.SEVERE, null, ex);
+                        return null;
+                    }
+                }
                 return rType;
-            } catch (DatatypeConfigurationException ex) {
-                Logger.getLogger(ESPDResponseSchemaExtractor.class.getName()).log(Level.SEVERE, null, ex);
-                return null;
-            }
-            
+
             case CODE:
                 rType.setCode(new TypeCodeType());
-                rType.getCode().setValue(((EvidenceURLCodeResponse)response).getEvidenceURLCode());
+                rType.getCode().setValue(((EvidenceURLCodeResponse) response).getEvidenceURLCode());
                 return rType;
-                
+
             case EVIDENCE_URL:
-                EvidenceType evType = new EvidenceType();
-                DocumentReferenceType drt = new DocumentReferenceType();
-                drt.setID(new IDType());
-                drt.getID().setValue(UUID.randomUUID().toString());
-                drt.setAttachment(new AttachmentType());
-                drt.getAttachment().setExternalReference(new ExternalReferenceType());
-                drt.getAttachment().getExternalReference().getURI().setValue(((EvidenceURLResponse)response).getEvidenceURL());
-                evType.getEvidenceDocumentReference().add(drt);
-                rType.getEvidence().add(evType);
+                if (((EvidenceURLResponse) response).getEvidenceURL() != null) { 
+                    EvidenceType evType = new EvidenceType();
+                    DocumentReferenceType drt = new DocumentReferenceType();
+                    drt.setID(new IDType());
+                    drt.getID().setValue(UUID.randomUUID().toString());
+                    drt.setAttachment(new AttachmentType());
+                    drt.getAttachment().setExternalReference(new ExternalReferenceType());
+                    drt.getAttachment().getExternalReference().setURI(new URIType());
+                    drt.getAttachment().getExternalReference().getURI().setValue(((EvidenceURLResponse) response).getEvidenceURL());
+                    evType.getEvidenceDocumentReference().add(drt);
+                    rType.getEvidence().add(evType);
+                }
                 return rType;
-                
+
             case CODE_COUNTRY:
                 rType.setCode(new TypeCodeType());
                 rType.getCode().setListAgencyID("ISO");
                 rType.getCode().setListID("ISO 3166-2");
                 rType.getCode().setListVersionID("1.0");
-                rType.getCode().setValue(((CountryCodeResponse)response).getCountryCode());
+                rType.getCode().setValue(((CountryCodeResponse) response).getCountryCode());
                 return rType;
 
             default:
                 return null;
         }
-        
+
     }
 }

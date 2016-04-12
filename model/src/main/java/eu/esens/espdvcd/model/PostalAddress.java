@@ -81,14 +81,6 @@ public class PostalAddress {
      */
     private String countryCode;
 
-    public PostalAddress(String addressLine1, String city, String postCode, String countrySubdivision, String countryCode) {
-        this.addressLine1 = addressLine1;
-        this.city = city;
-        this.postCode = postCode;
-        this.countrySubdivision = countrySubdivision;
-        this.countryCode = countryCode;
-    }
-
     public String getAddressLine1() {
         return addressLine1;
     }

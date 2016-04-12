@@ -11,13 +11,19 @@ import java.util.List;
  */
 public class SimpleESPDResponse extends SimpleESPDRequest implements ESPDResponse {
 
-    private static final long serialVersionUID = -3343982328572347289L;   
+    private static final long serialVersionUID = -3343982328572347289L;
     
-    @Override
-    public void setEspdResponseType(ESPDResponseType espdResponseType) {
+    protected EODetails eoDetails;
 
+    public EODetails getEoDetails() {
+        return eoDetails;
     }
 
+    public void setEoDetails(EODetails eoDetails) {
+        this.eoDetails = eoDetails;
+    }
+    
+    
     @Override
     public List<URL> getExternalDocuments() {
         return null;
@@ -25,6 +31,11 @@ public class SimpleESPDResponse extends SimpleESPDRequest implements ESPDRespons
 
     @Override
     public ESPDResponseType getEspdResponseType() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setEspdResponseType(ESPDResponseType espdResponseType) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

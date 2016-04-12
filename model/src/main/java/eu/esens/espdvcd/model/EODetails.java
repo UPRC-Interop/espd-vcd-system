@@ -16,7 +16,7 @@ import java.util.List;
  *
  * Created by Ulf Lotzmann on 21/03/2016.
  */
-public class EconomicOperator {
+public class EODetails {
 
 
     /**
@@ -175,39 +175,6 @@ public class EconomicOperator {
      * UBL syntax path: espd-cac:EconomicOperatorParty.<br>
      */
     private List<NaturalPerson> naturalPersons;
-
-    public EconomicOperator(String ID, String electronicAddressID, String registrationCountryCode,
-                            String name, String role, boolean smeIndicator, String nationalDatabaseURI,
-                            String nationalDatabaseAccessCredentials, PostalAddress postalAddress,
-                            ContactingDetails contactingDetails) {
-        this.ID = ID;
-        this.electronicAddressID = electronicAddressID;
-        this.registrationCountryCode = registrationCountryCode;
-        this.name = name;
-        this.role = role;
-        this.smeIndicator = smeIndicator;
-        this.nationalDatabaseURI = nationalDatabaseURI;
-        this.nationalDatabaseAccessCredentials = nationalDatabaseAccessCredentials;
-        this.postalAddress = postalAddress;
-        this.contactingDetails = contactingDetails;
-    }
-
-    public EconomicOperator(String ID, String electronicAddressID, String registrationCountryCode,
-                            String name, String role, boolean smeIndicator, String nationalDatabaseURI,
-                            String nationalDatabaseAccessCredentials, PostalAddress postalAddress,
-                            ContactingDetails contactingDetails, List<NaturalPerson> naturalPersons) {
-        this.ID = ID;
-        this.electronicAddressID = electronicAddressID;
-        this.registrationCountryCode = registrationCountryCode;
-        this.name = name;
-        this.role = role;
-        this.smeIndicator = smeIndicator;
-        this.nationalDatabaseURI = nationalDatabaseURI;
-        this.nationalDatabaseAccessCredentials = nationalDatabaseAccessCredentials;
-        this.postalAddress = postalAddress;
-        this.contactingDetails = contactingDetails;
-        this.naturalPersons = naturalPersons;
-    }
 
     public String getID() {
         return ID;
