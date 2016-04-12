@@ -210,6 +210,7 @@ public class ESPDResponseForm extends ESPDForm {
     protected void onExportConsole(Button.ClickEvent event) {
         // Display espd request xml button
         ESPDBuilder espdBuilder = new ESPDBuilder();
+        System.out.println("espdResponse: " + espdResponse);
         String xml = espdBuilder.createXMLasString(espdResponse);
         System.out.println("Xml: " + xml);
     }
