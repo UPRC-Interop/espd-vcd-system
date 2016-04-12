@@ -5,6 +5,7 @@ import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.Page;
 import com.vaadin.ui.*;
 import eu.esens.espdvcd.builder.ESPDBuilder;
+import eu.esens.espdvcd.designer.components.CriterionForm;
 import eu.esens.espdvcd.designer.components.ESPDRequestForm;
 import eu.esens.espdvcd.model.CADetails;
 import eu.esens.espdvcd.model.ESPDRequest;
@@ -24,6 +25,8 @@ public class EspdTemplate extends Master {
     VerticalLayout panelRightLayout = new VerticalLayout();
     Button panelLeftButtonNew = new Button("Create new ESPD Template");
     Button panelRightButtonImport = new Button("Import existing ESPD Template");
+    private CriterionForm highlightedCriterion = null;
+    private Panel uploadPanel = new Panel();
 
     public EspdTemplate(Navigator navigator) {
         super(navigator, true);
@@ -129,11 +132,26 @@ public class EspdTemplate extends Master {
         upload.setButtonCaption("Import");
         upload.addSucceededListener(receiver);
 
-        Panel uploadPanel = new Panel();
         VerticalLayout uploadPanelLayout = new VerticalLayout();
         uploadPanelLayout.setMargin(true);
         uploadPanelLayout.addComponent(upload);
         uploadPanel.setContent(uploadPanelLayout);
         panelRightLayout.addComponent(uploadPanel);
+    }
+
+    public CriterionForm getHighlightedCriterion() {
+        return highlightedCriterion;
+    }
+
+    public void setHighlightedCriterion(CriterionForm highlightedCriterion) {
+        this.highlightedCriterion = highlightedCriterion;
+    }
+
+    public void resetView() {
+        panels.setVisible(true);
+        panelRightButtonImport.setVisible(true);
+        mainContent.removeComponent(espdRequestForm);
+        panelRightLayout.removeComponent(uploadPanel);
+        getDetailsContent().removeAllComponents();
     }
 }

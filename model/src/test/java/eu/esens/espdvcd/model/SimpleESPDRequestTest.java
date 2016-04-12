@@ -36,9 +36,15 @@ public class SimpleESPDRequestTest {
                 UUID.randomUUID().toString(),
                 "DATA_ON_ECONOMIC_OPERATOR",
                 "Test EO Related", "Test Description", LegRef);
+        
+        SelectableCriterion rocCrit = new SelectableCriterion(
+                UUID.randomUUID().toString(),
+                "REDUCTION_OF_CANDIDATES",
+                "Test Reduction of Candidates", "Test Description", LegRef);
         req.getFullCriterionList().add(selectionCrit);
         req.getFullCriterionList().add(exclusionCrit);
         req.getFullCriterionList().add(eoCrit);
+        req.getFullCriterionList().add(rocCrit);
         
     }
 
@@ -49,7 +55,7 @@ public class SimpleESPDRequestTest {
      */
     @Test
     public void testSetCriterionList() {
-        assertTrue(req.getFullCriterionList().size() == 3);
+        assertTrue(req.getFullCriterionList().size() == 4);
     };
 
     /**
@@ -77,6 +83,12 @@ public class SimpleESPDRequestTest {
     public void testGetEORelatedCriteriaList() {
         assertTrue("Size mismatch", req.getEORelatedCriteriaList().size() == 1);
         assertTrue("Type mismatch", req.getEORelatedCriteriaList().get(0).getTypeCode().contains("DATA_ON_ECONOMIC_OPERATOR"));
+    }
+    
+    @Test
+    public void testGetReductionOfCandidatesCriteriaList() {
+        assertTrue("Size mismatch", req.getEORelatedCriteriaList().size() == 1);
+        assertTrue("Type mismatch", req.getReductionOfCandidatesCriteriaList().get(0).getTypeCode().contains("REDUCTION_OF_CANDIDATES"));
     }
     
 }

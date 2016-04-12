@@ -37,7 +37,7 @@ public class RequirementForm extends VerticalLayout {
         //ID.setValue(requirement.getID());
 
         responseDataType.setCaption("Requirement Response Data Type");
-        responseDataType.setValue(requirement.getResponseDataType());
+        responseDataType.setValue(requirement.getResponseDataType().name());
 
         description.setCaption("Requirement Description");
         description.setValue(requirement.getDescription());

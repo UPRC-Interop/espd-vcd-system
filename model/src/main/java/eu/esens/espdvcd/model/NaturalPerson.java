@@ -1,6 +1,6 @@
 package eu.esens.espdvcd.model;
 
-import java.util.GregorianCalendar;
+import java.util.Date;
 
 /**
  * 	NaturalPerson
@@ -81,7 +81,7 @@ public class NaturalPerson {
      * BusReqID: tbr92-009<br>
      * UBL syntax path: espd-cac:EconomicOperatorParty.Party.Person.BirthDate<br>
      */
-    private GregorianCalendar birthDate;
+    private Date birthDate;
 
 
     /**
@@ -126,19 +126,7 @@ public class NaturalPerson {
      * UBL syntax path: espd-cac: EconomicOperatorParty.Party.Person.ResidenceAddress<br>
      */
     private PostalAddress postalAddress;
-
-
-    public NaturalPerson(String name, String ID, String role, String birthPlace, GregorianCalendar birthDate, String registrationCountry, String powerOfAttorney, PostalAddress postalAddress) {
-        this.name = name;
-        this.ID = ID;
-        this.role = role;
-        this.birthPlace = birthPlace;
-        this.birthDate = birthDate;
-        this.registrationCountry = registrationCountry;
-        this.powerOfAttorney = powerOfAttorney;
-        this.postalAddress = postalAddress;
-    }
-
+    
     public String getName() {
         return name;
     }
@@ -171,11 +159,11 @@ public class NaturalPerson {
         this.birthPlace = birthPlace;
     }
 
-    public GregorianCalendar getBirthDate() {
+    public Date getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(GregorianCalendar birthDate) {
+    public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
 

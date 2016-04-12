@@ -9,3 +9,4 @@ gradle.properties
 /schema/nbproject/
 /codelists/private/
 /codelists/nbproject/
+/designer/tmp/

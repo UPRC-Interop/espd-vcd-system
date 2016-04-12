@@ -305,8 +305,6 @@
     width: 100%;
   }
 
-
-
   .requirementForm-panelContent{
     font-size: 10px;
   }
@@ -314,6 +312,7 @@
   .requirementForm-panel-caption{
     font-size: 10px;
   }
+
   .v-slot-detailsTitle {
     background-color: #569AC4;
   }
@@ -325,9 +324,7 @@
     font-variant: small-caps;
     color: #e3e3e3;
   }
-
-
-
+  
   .v-slot-EspdTemplate-panelLeft,
   .v-slot-EspdTemplate-panelRight {
     width: 50%;
@@ -382,10 +379,29 @@
     padding: 12px;
   }
 
-
   .v-caption-textFieldCaptionText-v-caption-hasdescription{
    word-wrap: normal;
   }
+  .v-verticallayout-CriterionGroupForm {
+    width: 100%;
+  }
 
+  .v-panel-CriterionGroupFormPanel {
+    width: 100%;
+  }
+
+  .v-verticallayout-CriterionGroupFormPanelContent {
+    width: 100%;
+  }
+
+  .v-slot-pageCaptionLabel {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 26px;
+  }
+
+  .v-verticallayout-pageLayout {
+    width: 100%;
+  }
 
 }
