@@ -29,14 +29,22 @@ public interface ModelExtractor {
         
         CADetails cd = new CADetails();
        
-        if (!caParty.getParty().getPartyName().isEmpty()) {
+        if (caParty != null && caParty.getParty() != null) {
+            
+            if (!caParty.getParty().getPartyName().isEmpty()) {
             cd.setCAOfficialName(caParty
                     .getParty().getPartyName()
                     .get(0).getName().getValue());
-        } 
-
-        cd.setCACountry(caParty
+            }
+            
+            if (caParty.getParty().getPostalAddress() != null 
+                    && caParty.getParty().getPostalAddress().getCountry() != null
+                    && caParty.getParty().getPostalAddress().getCountry().getIdentificationCode() != null) {
+                        cd.setCACountry(caParty
                 .getParty().getPostalAddress().getCountry().getIdentificationCode().getValue());
+            }
+            
+        } 
 
         if (contractFolderId !=null && contractFolderId.getValue() != null) {
             cd.setProcurementProcedureFileReferenceNo(contractFolderId.getValue());
@@ -48,7 +56,9 @@ public interface ModelExtractor {
            }
             if (ref.getAttachment() != null && ref.getAttachment().getExternalReference() != null) {
                 ExternalReferenceType ert = ref.getAttachment().getExternalReference();
-                cd.setProcurementProcedureTitle(ert.getFileName().getValue());
+                if (ert.getFileName() != null) {
+                    cd.setProcurementProcedureTitle(ert.getFileName().getValue());
+                }
                 if (!ert.getDescription().isEmpty()) {
                     cd.setProcurementProcedureDesc(ert.getDescription().get(0).getValue());
                 }
