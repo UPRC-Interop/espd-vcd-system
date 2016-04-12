@@ -39,7 +39,6 @@ public class Sandbox extends Master {
         pageContent.setMargin(true);
         pageContent.setSpacing(true);
 
-
         { // IndicatorResponse
             IndicatorResponse indicatorResponse = (IndicatorResponse) Responses.createResponse(Responses.Type.INDICATOR);
             IndicatorResponseForm indicatorResponseForm = new IndicatorResponseForm(indicatorResponse, "Indicator test case");

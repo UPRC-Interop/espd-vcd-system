@@ -200,7 +200,7 @@ public class ESPDForm extends VerticalLayout {
      * @param event Vaadin7 Button click event
      * @see com.vaadin.ui.Button.ClickEvent
      */
-    private void onExportConsole(Button.ClickEvent event) {
+    protected void onExportConsole(Button.ClickEvent event) {
         // Display espd request xml button
         ESPDBuilder espdBuilder = new ESPDBuilder();
         String xml = espdBuilder.createXMLasString(espdRequest);
