@@ -112,10 +112,10 @@ public class ESPDBuilder {
     
         public ESPDResponseType finalize(ESPDResponseType resType) {
         
-        // Finalizes the ESPDRequest Type, adding the Date and Time of Issue etc
+        // Finalizes the ESPDResponse Type, adding the Date and Time of Issue etc
         resType.setUBLVersionID(SchemaFactory.ESPD_RESPONSE.createUBL21VersionIdType());
         
-        resType.setCustomizationID(SchemaFactory.ESPD_RESPONSE.createBIICustomizationIdType("urn:www.cenbii.eu:transaction:biitrns070:ver3.0"));
+        resType.setCustomizationID(SchemaFactory.ESPD_RESPONSE.createBIICustomizationIdType("urn:www.cenbii.eu:transaction:biitrns092:ver3.0"));
         resType.setVersionID(SchemaFactory.ESPD_RESPONSE.createVersionIDType("1"));
 
         resType.setCopyIndicator(new CopyIndicatorType());
