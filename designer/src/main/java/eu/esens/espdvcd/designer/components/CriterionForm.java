@@ -1,5 +1,6 @@
 package eu.esens.espdvcd.designer.components;
 
+import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import com.vaadin.event.LayoutEvents;
 import com.vaadin.server.FontAwesome;
@@ -36,7 +37,11 @@ public class CriterionForm extends VerticalLayout {
         this.addComponent(panel);
         panelContent.addComponent(selected);
         panelContent.addComponent(description);
-        panelContent.addComponent(description);
+
+        for (RequirementGroup requirementGroup : criterion.getRequirementGroups()) {
+            RequirementGroupForm requirementGroupForm = new RequirementGroupForm(requirementGroup);
+            panelContent.addComponent(requirementGroupForm);
+        }
 
         this.addLayoutClickListener(this::onCriterionClick);
 
