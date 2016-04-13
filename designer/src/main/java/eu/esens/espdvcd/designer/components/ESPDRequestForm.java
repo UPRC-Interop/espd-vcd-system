@@ -66,10 +66,6 @@ public class ESPDRequestForm extends ESPDForm {
             String fullTypeCodeName = Codelists.CriteriaType.getValueForId(key);
 
             if (fullTypeCodeName == null) {
-<<<<<<< HEAD
-=======
-                // Fallback to display the type code instead of real name
->>>>>>> 1d0f2bd524f7ec1aad4a8a9c45eeee659d481069
                 fullTypeCodeName = key;
             }
 
