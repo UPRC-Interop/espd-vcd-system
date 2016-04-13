@@ -258,4 +258,12 @@ public class EODetails {
     public void setNaturalPersons(List<NaturalPerson> naturalPersons) {
         this.naturalPersons = naturalPersons;
     }
+
+    public ContactingDetails getContactingDetails() {
+        return contactingDetails;
+    }
+
+    public void setContactingDetails(ContactingDetails contactingDetails) {
+        this.contactingDetails = contactingDetails;
+    }
 }
