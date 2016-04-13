@@ -7,7 +7,7 @@
    <cbc:VersionID schemeAgencyID="EU-COM-GROW">1</cbc:VersionID>
    <cbc:IssueDate>2016-04-07</cbc:IssueDate>
    <cbc:IssueTime>15:31:59</cbc:IssueTime>
-   <cbc:ContractFolderID schemeAgencyID="TeD">wefwefwef</cbc:ContractFolderID>
+   <cbc:ContractFolderID schemeAgencyID="TeD">Folder ID of an ESPD Request!!</cbc:ContractFolderID>
    <cac:ContractingParty>
       <cac:Party>
          <cac:PartyName>

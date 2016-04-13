@@ -58,8 +58,9 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
 
         if (!rt.getResponse().isEmpty()) {
             r.setResponse(extractResponse(rt.getResponse().get(0), Responses.Type.valueOf(rt.getResponseDataType())));
+        } else { 
+            r.setResponse(Responses.createResponse(r.getResponseDataType()));
         }
-
         return r;
     }
 
