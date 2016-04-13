@@ -35,16 +35,7 @@ public class ESPDResponseForm extends ESPDForm {
         // Page 1 - Procedure
         VerticalLayout page1 = newPage("Information concerning the procurement procedure", "Procedure");
         page1.addComponent(new CADetailsForm(espdResponse));
-
-        { // EODetails test
-            EODetails eoDetails = new EODetails();
-            eoDetails.setPostalAddress(new PostalAddress());
-            NaturalPerson eoDetailsNaturalPerson1 = new NaturalPerson();
-            eoDetailsNaturalPerson1.setPostalAddress(new PostalAddress());
-            eoDetails.getNaturalPersons().add(eoDetailsNaturalPerson1);
-
-            page1.addComponent(new EODetailsForm(eoDetails));
-        }
+        page1.addComponent(new EODetailsForm(espdResponse.getEoDetails()));
 
         // Page 2 - Exclusion
         VerticalLayout page2 = newPage("Exclusion grounds criteria", "Exclusion");
@@ -64,7 +55,7 @@ public class ESPDResponseForm extends ESPDForm {
                 exclusionCriterionHash.put(criterion.getTypeCode(), new ArrayList<CriterionForm>());
             }
 
-            CriterionForm criterionForm = new CriterionForm(view, criterion);
+            CriterionForm criterionForm = new CriterionForm(view, criterion, true);
             exclusionCriterionHash.get(criterion.getTypeCode()).add(criterionForm);
         }
 
@@ -103,7 +94,7 @@ public class ESPDResponseForm extends ESPDForm {
                 selectionCriterionHash.put(criterion.getTypeCode(), new ArrayList<CriterionForm>());
             }
 
-            CriterionForm criterionForm = new CriterionForm(view, criterion);
+            CriterionForm criterionForm = new CriterionForm(view, criterion, true);
             selectionCriterionHash.get(criterion.getTypeCode()).add(criterionForm);
         }
 
@@ -142,7 +133,7 @@ public class ESPDResponseForm extends ESPDForm {
                 reductionCriterionHash.put(criterion.getTypeCode(), new ArrayList<CriterionForm>());
             }
 
-            CriterionForm criterionForm = new CriterionForm(view, criterion);
+            CriterionForm criterionForm = new CriterionForm(view, criterion, true);
             reductionCriterionHash.get(criterion.getTypeCode()).add(criterionForm);
         }
 

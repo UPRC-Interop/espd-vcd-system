@@ -29,7 +29,7 @@ public class CriterionForm extends VerticalLayout {
     private CheckBox selected = new CheckBox("Select this criterion?");
     private Label description = new Label("Criterion Description");
 
-    public CriterionForm(Master view, SelectableCriterion criterion) {
+    public CriterionForm(Master view, SelectableCriterion criterion, boolean useRequirements) {
         this.view = view;
         this.criterionReference = criterion;
         setMargin(true);
@@ -38,9 +38,11 @@ public class CriterionForm extends VerticalLayout {
         panelContent.addComponent(selected);
         panelContent.addComponent(description);
 
-        for (RequirementGroup requirementGroup : criterion.getRequirementGroups()) {
-            RequirementGroupForm requirementGroupForm = new RequirementGroupForm(requirementGroup);
-            panelContent.addComponent(requirementGroupForm);
+        if (useRequirements) {
+            for (RequirementGroup requirementGroup : criterion.getRequirementGroups()) {
+                RequirementGroupForm requirementGroupForm = new RequirementGroupForm(requirementGroup);
+                panelContent.addComponent(requirementGroupForm);
+            }
         }
 
         this.addLayoutClickListener(this::onCriterionClick);

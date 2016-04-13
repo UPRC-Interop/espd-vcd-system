@@ -7,10 +7,7 @@ import com.vaadin.ui.*;
 import eu.esens.espdvcd.builder.ESPDBuilder;
 import eu.esens.espdvcd.designer.components.CriterionForm;
 import eu.esens.espdvcd.designer.components.ESPDResponseForm;
-import eu.esens.espdvcd.model.CADetails;
-import eu.esens.espdvcd.model.ESPDRequest;
-import eu.esens.espdvcd.model.ESPDResponse;
-import eu.esens.espdvcd.model.SimpleESPDRequest;
+import eu.esens.espdvcd.model.*;
 
 import java.io.*;
 
@@ -82,6 +79,11 @@ public class Espd extends Master {
                     InputStream is = new FileInputStream(file);
                     ESPDBuilder espdBuilder = new ESPDBuilder();
                     espdResponse = espdBuilder.createESPDResponseFromXML(is);
+
+                    if (espdResponse.getEoDetails() == null) { // <- I must do this to upon import
+                        espdResponse.setEODetails(new EODetails()); // <- I must do this to upon import
+                    }
+
                     espdResponseForm = new ESPDResponseForm(thisView, espdResponse);
                     mainContent.addComponent(espdResponseForm);
                     is.close();

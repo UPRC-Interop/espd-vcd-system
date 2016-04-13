@@ -36,6 +36,7 @@ public class EODetailsForm extends Panel {
 
     public EODetailsForm(EODetails eoDetails) {
         this.eoDetails = eoDetails;
+        System.out.println("eoDetails: " + eoDetails);
 
         setStyleName("EODetailsForm");
         setCaption("Economic operator details");
@@ -54,7 +55,11 @@ public class EODetailsForm extends Panel {
         columnB.addComponent(smeIndicator);
         columnB.addComponent(nationalDatabaseURI);
         columnB.addComponent(nationalDatabaseAccessCredentials);
-        panelContent.addComponent(new PostalAddressForm(eoDetails.getPostalAddress()));
+
+        PostalAddress eoDetailsPostalAddress = eoDetails.getPostalAddress();
+        if (eoDetailsPostalAddress != null) {
+            panelContent.addComponent(new PostalAddressForm(eoDetailsPostalAddress));
+        }
 
         for (NaturalPerson naturalPerson : this.eoDetails.getNaturalPersons()) {
             panelContent.addComponent(new NaturalPersonForm(naturalPerson));

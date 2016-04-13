@@ -55,7 +55,7 @@ public class ESPDRequestForm extends ESPDForm {
                 exclusionCriterionHash.put(criterion.getTypeCode(), new ArrayList<CriterionForm>());
             }
 
-            CriterionForm criterionForm = new CriterionForm(view, criterion);
+            CriterionForm criterionForm = new CriterionForm(view, criterion, false);
             exclusionCriterionHash.get(criterion.getTypeCode()).add(criterionForm);
         }
 
@@ -94,7 +94,7 @@ public class ESPDRequestForm extends ESPDForm {
                 selectionCriterionHash.put(criterion.getTypeCode(), new ArrayList<CriterionForm>());
             }
 
-            CriterionForm criterionForm = new CriterionForm(view, criterion);
+            CriterionForm criterionForm = new CriterionForm(view, criterion, false);
             selectionCriterionHash.get(criterion.getTypeCode()).add(criterionForm);
         }
 
@@ -133,7 +133,7 @@ public class ESPDRequestForm extends ESPDForm {
                 reductionCriterionHash.put(criterion.getTypeCode(), new ArrayList<CriterionForm>());
             }
 
-            CriterionForm criterionForm = new CriterionForm(view, criterion);
+            CriterionForm criterionForm = new CriterionForm(view, criterion, false);
             reductionCriterionHash.get(criterion.getTypeCode()).add(criterionForm);
         }
 
