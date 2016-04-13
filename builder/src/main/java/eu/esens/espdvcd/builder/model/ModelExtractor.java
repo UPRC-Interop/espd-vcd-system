@@ -2,7 +2,6 @@ package eu.esens.espdvcd.builder.model;
 
 import eu.esens.espdvcd.model.CADetails;
 import eu.esens.espdvcd.model.LegislationReference;
-import eu.esens.espdvcd.model.requirement.RequestRequirement;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.SelectableCriterion;
