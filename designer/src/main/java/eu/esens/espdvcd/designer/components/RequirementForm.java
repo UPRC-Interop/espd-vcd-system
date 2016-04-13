@@ -25,6 +25,8 @@ public class RequirementForm extends VerticalLayout {
         panelContent.addComponent(responseDataType);
         panelContent.addComponent(description);
 
+        panelContent.addComponent(ResponseFormFactory.buildResponseForm(requirement));
+
         panelContent.setMargin(true);
 
         this.addLayoutClickListener(this::onRequirementClick);

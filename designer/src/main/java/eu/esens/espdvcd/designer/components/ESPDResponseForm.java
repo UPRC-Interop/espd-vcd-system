@@ -1,15 +1,11 @@
 package eu.esens.espdvcd.designer.components;
 
 import com.vaadin.data.Property;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.CheckBox;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.*;
 import eu.esens.espdvcd.builder.ESPDBuilder;
 import eu.esens.espdvcd.codelist.Codelists;
 import eu.esens.espdvcd.designer.views.Master;
-import eu.esens.espdvcd.model.ESPDResponse;
-import eu.esens.espdvcd.model.SelectableCriterion;
+import eu.esens.espdvcd.model.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,6 +36,15 @@ public class ESPDResponseForm extends ESPDForm {
         VerticalLayout page1 = newPage("Information concerning the procurement procedure", "Procedure");
         page1.addComponent(new CADetailsForm(espdResponse));
 
+        { // EODetails test
+            EODetails eoDetails = new EODetails();
+            eoDetails.setPostalAddress(new PostalAddress());
+            NaturalPerson eoDetailsNaturalPerson1 = new NaturalPerson();
+            eoDetailsNaturalPerson1.setPostalAddress(new PostalAddress());
+            eoDetails.getNaturalPersons().add(eoDetailsNaturalPerson1);
+
+            page1.addComponent(new EODetailsForm(eoDetails));
+        }
 
         // Page 2 - Exclusion
         VerticalLayout page2 = newPage("Exclusion grounds criteria", "Exclusion");
