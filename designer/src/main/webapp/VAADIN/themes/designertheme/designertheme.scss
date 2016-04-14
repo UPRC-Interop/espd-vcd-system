@@ -220,6 +220,12 @@
     padding-top: 0px !important;
   }
 
+  tbody > .v-formlayout-lastrow > .v-formlayout-captioncell,
+  tbody > .v-formlayout-lastrow > .v-formlayout-errorcell,
+  tbody > .v-formlayout-lastrow > .v-formlayout-contentcell {
+    padding-bottom: 0px !important;
+  }
+
   .espdRequestForm-formButton {
     background-image: none;
     background-color: #569AC4;
@@ -413,4 +419,55 @@
     width: 100%;
   }
 
+  .v-panel-EODetailsForm,
+  .v-verticallayout-EODetailsFormPanelContent {
+    width: 100%;
+  }
+
+  .v-panel-PostalAddressForm,
+  .v-verticallayout-PostalAddressFormPanelContent {
+    width: 100%;
+  }
+
+  .v-panel-NaturalPersonForm,
+  .v-verticallayout-NaturalPersonFormPanelContent {
+    width: 100%;
+  }
+
+  .v-verticallayout-requirementGroupForm-layout,
+  .v-verticallayout-requirementForm-layout {
+    width: 100%;
+  }
+
+  .v-panel-ContactingDetailsForm,
+  .v-verticallayout-ContactingDetailsFormPanelContent {
+    width: 100%;
+  }
+
+  .v-select-optiongroup-horizontal .v-select-option {
+      display: inline-block;
+  }
+
+  /* Avoid wrapping if the layout is too tight */
+  .v-select-optiongroup-horizontal {
+      white-space: nowrap;
+  }
+
+  /* Some extra spacing is needed */
+  .v-select-optiongroup-horizontal
+    .v-select-option.v-radiobutton {
+      padding-right: 10px;
+  }
+
+  .v-formlayout-row > .v-formlayout-captioncell {
+    width: 200px;
+  }
+
+  .v-formlayout-row > .v-formlayout-captioncell > div > span {
+    white-space: normal;
+  }
+
+  .v-formlayout > table {
+    padding: 0px;
+  }
 }

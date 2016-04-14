@@ -42,7 +42,7 @@ public class ESPDForm extends VerticalLayout {
     private int currentPageIndex = 0;
     private VerticalLayout pagesLayout = new VerticalLayout();
 
-    public ESPDForm(Master view, ESPDRequest espdRequest) {
+    public ESPDForm(Master view, ESPDRequest espdRequest, String exportFileName) {
         this.view = view;
         this.espdRequest = espdRequest;
 
@@ -91,7 +91,7 @@ public class ESPDForm extends VerticalLayout {
                 return new ByteArrayInputStream(xmlBytes);
 
             }
-        }, "espd_template.xml");
+        }, exportFileName);
         FileDownloader fileDownloader = new FileDownloader(downloadableResource);
         fileDownloader.extend(exportFile);
 
@@ -200,7 +200,7 @@ public class ESPDForm extends VerticalLayout {
      * @param event Vaadin7 Button click event
      * @see com.vaadin.ui.Button.ClickEvent
      */
-    private void onExportConsole(Button.ClickEvent event) {
+    protected void onExportConsole(Button.ClickEvent event) {
         // Display espd request xml button
         ESPDBuilder espdBuilder = new ESPDBuilder();
         String xml = espdBuilder.createXMLasString(espdRequest);

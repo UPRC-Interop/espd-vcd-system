@@ -4,6 +4,12 @@ import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.ui.*;
 
+import eu.esens.espdvcd.designer.components.CountryComboBox;
+import eu.esens.espdvcd.designer.components.EODetailsForm;
+import eu.esens.espdvcd.model.ContactingDetails;
+import eu.esens.espdvcd.model.EODetails;
+import eu.esens.espdvcd.model.NaturalPerson;
+import eu.esens.espdvcd.model.PostalAddress;
 import eu.esens.espdvcd.model.requirement.response.Responses;
 import eu.esens.espdvcd.designer.components.requirement.*;
 import eu.esens.espdvcd.model.requirement.response.AmountResponse;
@@ -38,7 +44,6 @@ public class Sandbox extends Master {
 
         pageContent.setMargin(true);
         pageContent.setSpacing(true);
-
 
         { // IndicatorResponse
             IndicatorResponse indicatorResponse = (IndicatorResponse) Responses.createResponse(Responses.Type.INDICATOR);

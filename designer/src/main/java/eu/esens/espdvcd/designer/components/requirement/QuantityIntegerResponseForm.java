@@ -8,14 +8,14 @@ import eu.esens.espdvcd.model.requirement.response.QuantityIntegerResponse;
 /**
  * Created by ixuz on 4/11/16.
  */
-public class QuantityIntegerResponseForm extends FormLayout {
+public class QuantityIntegerResponseForm extends ResponseForm {
     private QuantityIntegerResponse quantityIntegerResponse = null;
     private TextField quantity = new TextField("Quantity Integer: ");
 
     public QuantityIntegerResponseForm(QuantityIntegerResponse quantityIntegerResponse, String caption) {
         this.quantityIntegerResponse = quantityIntegerResponse;
         addComponent(quantity);
-        setCaption(caption);
+        quantity.setCaption(caption);
         quantity.setNullRepresentation("");
 
         // Bind fields

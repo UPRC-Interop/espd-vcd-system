@@ -27,7 +27,7 @@ public class ESPDRequestForm extends ESPDForm {
     private List<CriterionGroupForm> reductionCriterionGroupForms = new ArrayList<>();
 
     public ESPDRequestForm(Master view, ESPDRequest espdRequest) {
-        super(view, espdRequest);
+        super(view, espdRequest, "espd_template.xml");
 
 
         // Page 1 - Procedure
@@ -60,6 +60,7 @@ public class ESPDRequestForm extends ESPDForm {
 
         selectAllSelectionCriteriaCheckbox.addValueChangeListener(this::onSelectAllSelectionCriteria);
         selectAllSelectionCriteriaCheckbox.setStyleName("espdRequestForm-checkbox");
+
         criterionGroupForm(view, espdRequest.getSelectionCriteriaList(),selectionCriterionGroupForms,page3);
 
         // Page 4 - Reduction of candidates
@@ -92,7 +93,7 @@ public class ESPDRequestForm extends ESPDForm {
                 criterionHash.put(criterion.getTypeCode(), new ArrayList<CriterionForm>());
             }
 
-            CriterionForm criterionForm = new CriterionForm(view, criterion);
+            CriterionForm criterionForm = new CriterionForm(view, criterion, false);
             criterionHash.get(criterion.getTypeCode()).add(criterionForm);
         }
         for (Map.Entry<String, List<CriterionForm>> entry : criterionHash.entrySet()) {

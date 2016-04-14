@@ -1,5 +1,6 @@
 package eu.esens.espdvcd.designer.components;
 
+import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import com.vaadin.event.LayoutEvents;
 import com.vaadin.server.FontAwesome;
@@ -34,27 +35,57 @@ public class CriterionForm extends VerticalLayout {
 
 
     private Label description = new Label("Criterion Description");
+    private boolean useRequirements = true;
 
-    public CriterionForm(Master view, SelectableCriterion criterion) {
+    public CriterionForm(Master view, SelectableCriterion criterion, boolean useRequirements) {
         this.view = view;
         this.criterionReference = criterion;
+        this.useRequirements = useRequirements;
+
+        this.addComponent(panel);
+        panel.setContent(panelContent);
+
         setMargin(true);
         setStyleName("criterionForm-layout");
-        this.addComponent(panel);
-        panelContent.addComponent(selected);
-        panelContent.addComponent(description);
-        panelContent.addComponent(description);
+
+
+        // If this criterion form will contain the requirements it will need to be displayed with a more complex layout
+        if (useRequirements) {
+
+            HorizontalLayout columns = new HorizontalLayout();
+            VerticalLayout columnA = new VerticalLayout();
+            VerticalLayout columnB = new VerticalLayout();
+
+            panelContent.addComponent(columns);
+            columns.addComponent(columnA);
+            columns.addComponent(columnB);
+
+            columnA.addComponent(description);
+
+            columnA.setWidth(400, Unit.PIXELS);
+            columnB.setMargin(false);
+            columnB.setSpacing(false);
+            columnB.addStyleName("ignoreCaptionCellWidth");
+
+            for (RequirementGroup requirementGroup : criterion.getRequirementGroups()) {
+                RequirementGroupForm requirementGroupForm = new RequirementGroupForm(requirementGroup, this.useRequirements);
+                columnB.addComponent(requirementGroupForm);
+            }
+        } else { // The criterion form will contain a limited amount of details, therefore a more simplified layout is used.
+            panelContent.addComponent(selected);
+            panelContent.addComponent(description);
+        }
 
         this.addLayoutClickListener(this::onCriterionClick);
 
         description.setValue(criterion.getDescription());
 
+        panel.setCaption(criterion.getName());
+        panel.setIcon(FontAwesome.CHEVRON_DOWN);
+
         panelContent.setMargin(true);
         panelContent.setStyleName("criterionForm-panelContent");
 
-        panel.setContent(panelContent);
-        panel.setCaption(criterion.getName());
-        panel.setIcon(FontAwesome.CHEVRON_DOWN);
 
         // Bind the this forms fields
         final BeanFieldGroup<SelectableCriterion> criteriaGroup = new BeanFieldGroup<>(SelectableCriterion.class);
@@ -76,7 +107,7 @@ public class CriterionForm extends VerticalLayout {
                     panel.setIcon(FontAwesome.CHEVRON_RIGHT);
                 }
             }
-        } else {
+        } else if (!this.useRequirements) {
             view.getDetailsContent().removeAllComponents();
             Label detailsTitle = new Label(criterionReference.getName());
             detailsTitle.setStyleName("detailsTitle");
@@ -86,7 +117,7 @@ public class CriterionForm extends VerticalLayout {
             }
 
             for (RequirementGroup requirementGroup : criterionReference.getRequirementGroups()) {
-                view.getDetailsContent().addComponent(new RequirementGroupForm(requirementGroup));
+                view.getDetailsContent().addComponent(new RequirementGroupForm(requirementGroup, this.useRequirements));
             }
 
             if (view instanceof EspdTemplate) {

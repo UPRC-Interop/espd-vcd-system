@@ -8,14 +8,14 @@ import eu.esens.espdvcd.model.requirement.response.CountryCodeResponse;
 /**
  * Created by ixuz on 4/11/16.
  */
-public class CountryCodeResponseForm extends FormLayout {
+public class CountryCodeResponseForm extends ResponseForm {
     private CountryCodeResponse countryCodeResponse = null;
     private CountryComboBox countryCode = new CountryComboBox("Country Code: ");
 
     public CountryCodeResponseForm(CountryCodeResponse countryCodeResponse, String caption) {
         this.countryCodeResponse = countryCodeResponse;
         addComponent(countryCode);
-        setCaption(caption);
+        countryCode.setCaption(caption);
 
         // Bind fields
         final BeanFieldGroup<CountryCodeResponse> binder = new BeanFieldGroup<>(CountryCodeResponse.class);

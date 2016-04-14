@@ -8,14 +8,14 @@ import eu.esens.espdvcd.model.requirement.response.EvidenceURLCodeResponse;
 /**
  * Created by ixuz on 4/11/16.
  */
-public class EvidenceURLCodeResponseForm extends FormLayout {
+public class EvidenceURLCodeResponseForm extends ResponseForm {
     private EvidenceURLCodeResponse evidenceURLCodeResponse = null;
     private TextField evidenceURLCode = new TextField("Evidence URL Code: ");
 
     public EvidenceURLCodeResponseForm(EvidenceURLCodeResponse evidenceURLCodeResponse, String caption) {
         this.evidenceURLCodeResponse = evidenceURLCodeResponse;
         addComponent(evidenceURLCode);
-        setCaption(caption);
+        evidenceURLCode.setCaption(caption);
         evidenceURLCode.setNullRepresentation("");
 
         // Bind fields

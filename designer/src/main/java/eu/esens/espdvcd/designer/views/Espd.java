@@ -7,9 +7,7 @@ import com.vaadin.ui.*;
 import eu.esens.espdvcd.builder.ESPDBuilder;
 import eu.esens.espdvcd.designer.components.CriterionForm;
 import eu.esens.espdvcd.designer.components.ESPDResponseForm;
-import eu.esens.espdvcd.model.CADetails;
-import eu.esens.espdvcd.model.ESPDRequest;
-import eu.esens.espdvcd.model.SimpleESPDRequest;
+import eu.esens.espdvcd.model.*;
 
 import java.io.*;
 
@@ -18,7 +16,7 @@ import java.io.*;
  */
 public class Espd extends Master {
     private HorizontalLayout panels = null;
-    private ESPDRequest espdRequest = null;
+    private ESPDResponse espdResponse = null;
     private ESPDResponseForm espdResponseForm = null;
     VerticalLayout panelRightLayout = new VerticalLayout();
     Button panelRightButtonImport = new Button("Import existing ESPD");
@@ -52,20 +50,6 @@ public class Espd extends Master {
         super.enter(event);
     }
 
-    public void onNewEspdTemplate(Button.ClickEvent clickEvent) {
-        panels.setVisible(false);
-
-        CADetails caDetails = new CADetails();
-
-        espdRequest = new SimpleESPDRequest();
-        espdRequest.setCADetails(caDetails);
-        espdRequest.setCriterionList(new ESPDBuilder().getCriteriaList());
-
-        // Cenerate the espd request form base on the provided espd request model
-        espdResponseForm = new ESPDResponseForm(this, espdRequest);
-        mainContent.addComponent(espdResponseForm);
-    }
-
     public void onImportEspdTemplate(Button.ClickEvent clickEvent) {
         Espd thisView = this;
         panelRightButtonImport.setVisible(false);
@@ -94,8 +78,16 @@ public class Espd extends Master {
                 try {
                     InputStream is = new FileInputStream(file);
                     ESPDBuilder espdBuilder = new ESPDBuilder();
-                    espdRequest = espdBuilder.createESPDRequestFromXML(is);
-                    espdResponseForm = new ESPDResponseForm(thisView, espdRequest);
+                    espdResponse = espdBuilder.createESPDResponseFromXML(is);
+
+                    if (espdResponse.getEoDetails() == null) { // <- I must do this to upon import
+                        EODetails eoDetails = new EODetails();
+                        eoDetails.setContactingDetails(new ContactingDetails("", "", "", ""));
+                        eoDetails.setPostalAddress(new PostalAddress());
+                        espdResponse.setEODetails(eoDetails);
+                    }
+
+                    espdResponseForm = new ESPDResponseForm(thisView, espdResponse);
                     mainContent.addComponent(espdResponseForm);
                     is.close();
                     panels.setVisible(false);
