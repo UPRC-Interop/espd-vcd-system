@@ -29,7 +29,7 @@ public class ESPDResponseForm extends ESPDForm {
     private List<CriterionGroupForm> reductionCriterionGroupForms = new ArrayList<>();
 
     public ESPDResponseForm(Master view, ESPDResponse espdResponse) {
-        super(view, espdResponse);
+        super(view, espdResponse, "espd.xml");
         this.espdResponse = espdResponse;
 
         // Page 1 - Procedure
