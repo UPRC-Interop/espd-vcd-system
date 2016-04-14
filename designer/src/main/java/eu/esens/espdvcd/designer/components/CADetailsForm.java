@@ -53,7 +53,7 @@ public class CADetailsForm extends VerticalLayout {
         caOfficialName = new TextField();
         procurementProcedureTitle = new TextField();
         procurementProcedureDesc = new TextArea();
-        procurementProcedureFileReferenceNo = new TextField("File reference number attributed by the contracting \n authority or contracting entity (if applicable):");
+        procurementProcedureFileReferenceNo = new TextField();
         procurementPublicationNumber = new ProducurementPublicationNumberField("Notice number in the OJS:");
 
         this.addComponent(panelInformationAboutPublication);
@@ -91,20 +91,18 @@ public class CADetailsForm extends VerticalLayout {
         procurementProcedureTitle.setCaption("Title:");
         procurementProcedureTitle.setNullRepresentation("");
         procurementProcedureTitle.setInputPrompt("Enter title");
-        procurementProcedureTitle.setWidth("30em");
+        procurementProcedureTitle.setWidth("20em");
         procurementProcedureTitle.setStyleName("textFieldCaptionText");
         procurementProcedureDesc.setCaption("Short Description:");
         procurementProcedureDesc.setInputPrompt("Enter short description");
         procurementProcedureDesc.setNullRepresentation("");
-        procurementProcedureDesc.setWidth("30em");
+        procurementProcedureDesc.setWidth("20em");
         procurementProcedureDesc.setStyleName("textFieldCaptionText");
-        //procurementProcedureFileReferenceNo.setCaption("File reference number attributed by the contracting \n authority or contracting entity (if applicable):");
-        //procurementProcedureFileReferenceNo.setCaption("File reference number");
-
+        procurementProcedureFileReferenceNo.setCaption("File reference number attributed by the contracting authority or contracting entity (if applicable):");
         procurementProcedureFileReferenceNo.setStyleName("textCaption");
         procurementProcedureFileReferenceNo.setNullRepresentation("");
         procurementProcedureFileReferenceNo.setInputPrompt("Enter file reference number");
-        procurementProcedureFileReferenceNo.setWidth("30em");
+        procurementProcedureFileReferenceNo.setWidth("20em");
         procurementProcedureFileReferenceNo.setStyleName("textFieldCaptionText");
         procurementPublicationNumber.setWidth("30em");
         procurementPublicationNumber.setStyleName("textFieldCaptionText");

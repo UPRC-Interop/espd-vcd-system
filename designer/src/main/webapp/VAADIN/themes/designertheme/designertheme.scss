@@ -186,14 +186,7 @@
     font-weight: bold;
     font-variant: small-caps;
   }
-
-  .v-panel-caption-requirementFormPanel{
-    font-size:15px;
-  }
-
-  .v-caption-requirementFormLabel{
-    font-size: 8px;
-  }
+//for side panel//
 
   //.v-panel-caption-requirementGroupForm-panel {
   //  @extend .v-panel-caption;
@@ -305,13 +298,28 @@
     width: 100%;
   }
 
+  .requirementForm-layout{
+    padding-left: 1px;
+    padding-right:1px;
+    margin-left:0px;
+  }
+  .legislationReferenceForm-layout,
+  .requirementGroupForm-layout{
+    padding-left:1px;
+    padding-right:1px;
+  }
   .requirementForm-panelContent{
-    font-size: 10px;
+    font-size:14px;
   }
 
-  .requirementForm-panel-caption{
-    font-size: 10px;
+  .v-panel-caption-requirementFormPanel{
+    font-size:15px;
   }
+
+  .v-caption-requirementFormLabel{
+    font-size: 13px;
+  }
+
 
   .v-slot-detailsTitle {
     background-color: #569AC4;
@@ -354,7 +362,8 @@
     normal: pre;
   }
   .v-caption-textFieldCaptionText {
-   color: #58A8DA;
+    color: #58A8DA;
+    white-space: normal;
   }
   .progressBarLayout {
     border-bottom-style: solid;
