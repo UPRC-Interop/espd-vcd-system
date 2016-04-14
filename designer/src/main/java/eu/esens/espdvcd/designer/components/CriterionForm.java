@@ -64,9 +64,9 @@ public class CriterionForm extends VerticalLayout {
         } else { // The criterion form will contain a limited amount of details, therefore a more simplified layout is used.
             panelContent.addComponent(selected);
             panelContent.addComponent(description);
-
-            this.addLayoutClickListener(this::onCriterionClick);
         }
+
+        this.addLayoutClickListener(this::onCriterionClick);
 
         description.setValue(criterion.getDescription());
 
@@ -98,7 +98,7 @@ public class CriterionForm extends VerticalLayout {
                     panel.setIcon(FontAwesome.CHEVRON_RIGHT);
                 }
             }
-        } else {
+        } else if (!this.useRequirements) {
             view.getDetailsContent().removeAllComponents();
             Label detailsTitle = new Label(criterionReference.getName());
             detailsTitle.setStyleName("detailsTitle");
