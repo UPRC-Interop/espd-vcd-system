@@ -15,7 +15,7 @@ public class IndicatorResponseForm extends ResponseForm {
     public IndicatorResponseForm(IndicatorResponse indicatorResponse, String caption) {
         this.indicatorResponse = indicatorResponse;
         addComponent(indicator);
-        setCaption(caption);
+        indicator.setCaption(caption);
 
         // Bind fields
         final BeanFieldGroup<IndicatorResponse> binder = new BeanFieldGroup<>(IndicatorResponse.class);

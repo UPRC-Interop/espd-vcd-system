@@ -16,7 +16,7 @@ public class DescriptionResponseForm extends ResponseForm {
     public DescriptionResponseForm(DescriptionResponse descriptionResponse, String caption) {
         this.descriptionResponse = descriptionResponse;
         addComponent(description);
-        setCaption(caption);
+        description.setCaption(caption);
         description.setNullRepresentation("");
 
         // Bind fields

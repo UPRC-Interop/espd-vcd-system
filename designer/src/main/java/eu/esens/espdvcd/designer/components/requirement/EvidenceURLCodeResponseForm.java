@@ -15,7 +15,7 @@ public class EvidenceURLCodeResponseForm extends ResponseForm {
     public EvidenceURLCodeResponseForm(EvidenceURLCodeResponse evidenceURLCodeResponse, String caption) {
         this.evidenceURLCodeResponse = evidenceURLCodeResponse;
         addComponent(evidenceURLCode);
-        setCaption(caption);
+        evidenceURLCode.setCaption(caption);
         evidenceURLCode.setNullRepresentation("");
 
         // Bind fields

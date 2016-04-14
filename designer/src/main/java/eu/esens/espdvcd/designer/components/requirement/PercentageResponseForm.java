@@ -15,7 +15,7 @@ public class PercentageResponseForm extends ResponseForm {
     public PercentageResponseForm(PercentageResponse percentageResponse, String caption) {
         this.percentageResponse = percentageResponse;
         addComponent(percentage);
-        setCaption(caption);
+        percentage.setCaption(caption);
         percentage.setNullRepresentation("");
 
         // Bind fields

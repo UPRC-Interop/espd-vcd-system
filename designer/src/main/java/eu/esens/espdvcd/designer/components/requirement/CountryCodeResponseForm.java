@@ -15,7 +15,7 @@ public class CountryCodeResponseForm extends ResponseForm {
     public CountryCodeResponseForm(CountryCodeResponse countryCodeResponse, String caption) {
         this.countryCodeResponse = countryCodeResponse;
         addComponent(countryCode);
-        setCaption(caption);
+        countryCode.setCaption(caption);
 
         // Bind fields
         final BeanFieldGroup<CountryCodeResponse> binder = new BeanFieldGroup<>(CountryCodeResponse.class);

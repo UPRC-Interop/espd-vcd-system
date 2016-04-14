@@ -15,7 +15,7 @@ public class QuantityYearResponseForm extends ResponseForm {
     public QuantityYearResponseForm(QuantityYearResponse quantityYearResponse, String caption) {
         this.quantityYearResponse = quantityYearResponse;
         addComponent(year);
-        setCaption(caption);
+        year.setCaption(caption);
         year.setNullRepresentation("");
 
         // Bind fields

@@ -9,7 +9,7 @@ public class PeriodResponseForm extends DescriptionResponseForm {
 
     public PeriodResponseForm(DescriptionResponse descriptionResponse, String caption) {
         super(descriptionResponse, caption);
-        description.setCaption("Period: ");
+        description.setCaption(caption);
         description.setNullRepresentation("");
     }
 }

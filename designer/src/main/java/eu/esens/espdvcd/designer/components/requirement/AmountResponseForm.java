@@ -17,7 +17,7 @@ public class AmountResponseForm extends ResponseForm {
         this.amountResponse = amountResponse;
         addComponent(amount);
         addComponent(currency);
-        setCaption(caption);
+        amount.setCaption(caption);
         amount.setNullRepresentation("");
         currency.setNullRepresentation("");
 

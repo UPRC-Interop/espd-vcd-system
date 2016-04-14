@@ -17,7 +17,6 @@ public class RequirementForm extends VerticalLayout {
         setStyleName("requirementForm-layout");
         if (includeResponses) {
             ResponseForm responseForm = ResponseFormFactory.buildResponseForm(requirement);
-            responseForm.setCaption(requirement.getDescription());
             addComponent(responseForm);
         }
 

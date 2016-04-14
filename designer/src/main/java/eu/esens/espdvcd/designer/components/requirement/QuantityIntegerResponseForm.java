@@ -15,7 +15,7 @@ public class QuantityIntegerResponseForm extends ResponseForm {
     public QuantityIntegerResponseForm(QuantityIntegerResponse quantityIntegerResponse, String caption) {
         this.quantityIntegerResponse = quantityIntegerResponse;
         addComponent(quantity);
-        setCaption(caption);
+        quantity.setCaption(caption);
         quantity.setNullRepresentation("");
 
         // Bind fields
