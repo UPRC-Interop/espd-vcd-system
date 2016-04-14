@@ -2,6 +2,7 @@ package eu.esens.espdvcd.designer.components.requirement;
 
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.ui.FormLayout;
+import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
 import eu.esens.espdvcd.model.requirement.response.DescriptionResponse;
 
@@ -10,7 +11,7 @@ import eu.esens.espdvcd.model.requirement.response.DescriptionResponse;
  */
 public class DescriptionResponseForm extends ResponseForm {
     private DescriptionResponse descriptionResponse = null;
-    protected TextField description = new TextField("Description: ");
+    protected TextArea description = new TextArea("Description: ");
 
     public DescriptionResponseForm(DescriptionResponse descriptionResponse, String caption) {
         this.descriptionResponse = descriptionResponse;

@@ -35,29 +35,47 @@ public class CriterionForm extends VerticalLayout {
         this.criterionReference = criterion;
         this.useRequirements = useRequirements;
 
+        this.addComponent(panel);
+        panel.setContent(panelContent);
+
         setMargin(true);
         setStyleName("criterionForm-layout");
-        this.addComponent(panel);
-        panelContent.addComponent(selected);
-        panelContent.addComponent(description);
 
+
+        // If this criterion form will contain the requirements it will need to be displayed with a more complex layout
         if (useRequirements) {
+
+            HorizontalLayout columns = new HorizontalLayout();
+            VerticalLayout columnA = new VerticalLayout();
+            VerticalLayout columnB = new VerticalLayout();
+
+            panelContent.addComponent(columns);
+            columns.addComponent(columnA);
+            columns.addComponent(columnB);
+
+            columnA.addComponent(description);
+
+            columnA.setWidth(400, Unit.PIXELS);
+
             for (RequirementGroup requirementGroup : criterion.getRequirementGroups()) {
                 RequirementGroupForm requirementGroupForm = new RequirementGroupForm(requirementGroup, this.useRequirements);
-                panelContent.addComponent(requirementGroupForm);
+                columnB.addComponent(requirementGroupForm);
             }
+        } else { // The criterion form will contain a limited amount of details, therefore a more simplified layout is used.
+            panelContent.addComponent(selected);
+            panelContent.addComponent(description);
+
+            this.addLayoutClickListener(this::onCriterionClick);
         }
 
-        this.addLayoutClickListener(this::onCriterionClick);
-
         description.setValue(criterion.getDescription());
+
+        panel.setCaption(criterion.getName());
+        panel.setIcon(FontAwesome.CHEVRON_DOWN);
 
         panelContent.setMargin(true);
         panelContent.setStyleName("criterionForm-panelContent");
 
-        panel.setContent(panelContent);
-        panel.setCaption(criterion.getName());
-        panel.setIcon(FontAwesome.CHEVRON_DOWN);
 
         // Bind the this forms fields
         final BeanFieldGroup<SelectableCriterion> criteriaGroup = new BeanFieldGroup<>(SelectableCriterion.class);
