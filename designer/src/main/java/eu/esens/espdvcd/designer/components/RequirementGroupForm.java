@@ -11,7 +11,7 @@ import com.vaadin.data.fieldgroup.BeanFieldGroup;
  * Created by ixuz on 2/24/16.
  */
 
-public class RequirementGroupForm extends VerticalLayout {
+public class RequirementGroupForm extends FormLayout {
 
     public RequirementGroupForm(RequirementGroup requirementGroup, boolean includeResponses) {
         setMargin(true);
