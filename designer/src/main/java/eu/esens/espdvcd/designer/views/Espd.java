@@ -81,7 +81,10 @@ public class Espd extends Master {
                     espdResponse = espdBuilder.createESPDResponseFromXML(is);
 
                     if (espdResponse.getEoDetails() == null) { // <- I must do this to upon import
-                        espdResponse.setEODetails(new EODetails()); // <- I must do this to upon import
+                        EODetails eoDetails = new EODetails();
+                        eoDetails.setContactingDetails(new ContactingDetails("", "", "", ""));
+                        eoDetails.setPostalAddress(new PostalAddress());
+                        espdResponse.setEODetails(eoDetails);
                     }
 
                     espdResponseForm = new ESPDResponseForm(thisView, espdResponse);

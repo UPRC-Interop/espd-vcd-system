@@ -47,18 +47,23 @@ public class EODetailsForm extends Panel {
         columns.addComponent(columnA);
         columns.addComponent(columnB);
 
-        columnA.addComponent(ID);
-        columnA.addComponent(electronicAddressID);
-        columnA.addComponent(registrationCountryCode);
         columnA.addComponent(name);
+        columnA.addComponent(ID);
+        columnA.addComponent(registrationCountryCode);
+        columnA.addComponent(electronicAddressID);
         columnB.addComponent(role);
-        columnB.addComponent(smeIndicator);
         columnB.addComponent(nationalDatabaseURI);
         columnB.addComponent(nationalDatabaseAccessCredentials);
+        columnB.addComponent(smeIndicator);
 
         PostalAddress eoDetailsPostalAddress = eoDetails.getPostalAddress();
         if (eoDetailsPostalAddress != null) {
             panelContent.addComponent(new PostalAddressForm(eoDetailsPostalAddress));
+        }
+
+        ContactingDetails eoDetailsContactingDetails = eoDetails.getContactingDetails();
+        if (eoDetailsContactingDetails != null) {
+            panelContent.addComponent(new ContactingDetailsForm(eoDetailsContactingDetails));
         }
 
         for (NaturalPerson naturalPerson : this.eoDetails.getNaturalPersons()) {
@@ -80,5 +85,32 @@ public class EODetailsForm extends Panel {
         columnA.setMargin(false);
         columnB.setSpacing(true);
         columnB.setMargin(false);
+
+        ID.setNullRepresentation("");
+        ID.setInputPrompt("Please enter ID");
+        ID.setWidth(300, Unit.PIXELS);
+
+        electronicAddressID.setNullRepresentation("");
+        electronicAddressID.setInputPrompt("Electronic address ID");
+        electronicAddressID.setWidth(300, Unit.PIXELS);
+
+        registrationCountryCode.setInputPrompt("Select country");
+        registrationCountryCode.setWidth(300, Unit.PIXELS);
+
+        name.setNullRepresentation("");
+        name.setInputPrompt("Name");
+        name.setWidth(300, Unit.PIXELS);
+
+        role.setNullRepresentation("");
+        role.setInputPrompt("Role");
+        role.setWidth(400, Unit.PIXELS);
+
+        nationalDatabaseURI.setNullRepresentation("");
+        nationalDatabaseURI.setInputPrompt("National database URI");
+        nationalDatabaseURI.setWidth(400, Unit.PIXELS);
+
+        nationalDatabaseAccessCredentials.setNullRepresentation("");
+        nationalDatabaseAccessCredentials.setInputPrompt("National database access credentials");
+        nationalDatabaseAccessCredentials.setWidth(400, Unit.PIXELS);
     }
 }

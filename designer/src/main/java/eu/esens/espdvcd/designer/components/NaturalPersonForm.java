@@ -67,5 +67,30 @@ public class NaturalPersonForm extends Panel {
         columnA.setMargin(false);
         columnB.setSpacing(true);
         columnB.setMargin(false);
+
+        name.setNullRepresentation("");
+        name.setInputPrompt("Name");
+        name.setWidth(300, Unit.PIXELS);
+
+        ID.setNullRepresentation("");
+        ID.setInputPrompt("ID");
+        ID.setWidth(300, Unit.PIXELS);
+
+        role.setNullRepresentation("");
+        role.setInputPrompt("Role");
+        role.setWidth(300, Unit.PIXELS);
+
+        birthPlace.setNullRepresentation("");
+        birthPlace.setInputPrompt("Birth place");
+        birthPlace.setWidth(300, Unit.PIXELS);
+
+        birthDate.setWidth(300, Unit.PIXELS);
+
+        registrationCountry.setInputPrompt("Registration Country");
+        registrationCountry.setWidth(300, Unit.PIXELS);
+
+        powerOfAttorney.setNullRepresentation("");
+        powerOfAttorney.setInputPrompt("Power of attourney");
+        powerOfAttorney.setWidth(300, Unit.PIXELS);
     }
 }

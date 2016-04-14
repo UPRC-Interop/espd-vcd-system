@@ -28,10 +28,13 @@ public class CriterionForm extends VerticalLayout {
     private VerticalLayout panelContent = new VerticalLayout();
     private CheckBox selected = new CheckBox("Select this criterion?");
     private Label description = new Label("Criterion Description");
+    private boolean useRequirements = true;
 
     public CriterionForm(Master view, SelectableCriterion criterion, boolean useRequirements) {
         this.view = view;
         this.criterionReference = criterion;
+        this.useRequirements = useRequirements;
+
         setMargin(true);
         setStyleName("criterionForm-layout");
         this.addComponent(panel);
@@ -40,7 +43,7 @@ public class CriterionForm extends VerticalLayout {
 
         if (useRequirements) {
             for (RequirementGroup requirementGroup : criterion.getRequirementGroups()) {
-                RequirementGroupForm requirementGroupForm = new RequirementGroupForm(requirementGroup);
+                RequirementGroupForm requirementGroupForm = new RequirementGroupForm(requirementGroup, this.useRequirements);
                 panelContent.addComponent(requirementGroupForm);
             }
         }
@@ -87,7 +90,7 @@ public class CriterionForm extends VerticalLayout {
             }
 
             for (RequirementGroup requirementGroup : criterionReference.getRequirementGroups()) {
-                view.getDetailsContent().addComponent(new RequirementGroupForm(requirementGroup));
+                view.getDetailsContent().addComponent(new RequirementGroupForm(requirementGroup, this.useRequirements));
             }
 
             if (view instanceof EspdTemplate) {

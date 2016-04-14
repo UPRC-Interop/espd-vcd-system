@@ -219,6 +219,12 @@
     padding-top: 0px !important;
   }
 
+  tbody > .v-formlayout-lastrow > .v-formlayout-captioncell,
+  tbody > .v-formlayout-lastrow > .v-formlayout-errorcell,
+  tbody > .v-formlayout-lastrow > .v-formlayout-contentcell {
+    padding-bottom: 0px !important;
+  }
+
   .espdRequestForm-formButton {
     background-image: none;
     background-color: #569AC4;
@@ -396,6 +402,11 @@
 
   .v-verticallayout-requirementGroupForm-layout,
   .v-verticallayout-requirementForm-layout {
+    width: 100%;
+  }
+
+  .v-panel-ContactingDetailsForm,
+  .v-verticallayout-ContactingDetailsFormPanelContent {
     width: 100%;
   }
 }
