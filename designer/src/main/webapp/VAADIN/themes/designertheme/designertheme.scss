@@ -424,4 +424,16 @@
     .v-select-option.v-radiobutton {
       padding-right: 10px;
   }
+
+  .v-formlayout-row > .v-formlayout-captioncell {
+    width: 200px;
+  }
+
+  .v-formlayout-row > .v-formlayout-captioncell > div > span {
+    white-space: normal;
+  }
+
+  .v-formlayout > table {
+    padding: 0px;
+  }
 }

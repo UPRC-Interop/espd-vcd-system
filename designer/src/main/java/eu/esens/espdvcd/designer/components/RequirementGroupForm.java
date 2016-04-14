@@ -11,11 +11,13 @@ import com.vaadin.data.fieldgroup.BeanFieldGroup;
  * Created by ixuz on 2/24/16.
  */
 
-public class RequirementGroupForm extends FormLayout {
+public class RequirementGroupForm extends VerticalLayout {
 
     public RequirementGroupForm(RequirementGroup requirementGroup, boolean includeResponses) {
-        setMargin(true);
+        setMargin(false);
+        setSpacing(true);
         setStyleName("requirementGroupForm-layout");
+        addStyleName("ignoreCaptionCellWidth");
 
         // Bind the this forms fields
         final BeanFieldGroup<RequirementGroup> requirementGroupGroup = new BeanFieldGroup<>(RequirementGroup.class);

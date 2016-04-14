@@ -47,7 +47,7 @@ public class CriterionForm extends VerticalLayout {
 
             HorizontalLayout columns = new HorizontalLayout();
             VerticalLayout columnA = new VerticalLayout();
-            FormLayout columnB = new FormLayout();
+            VerticalLayout columnB = new VerticalLayout();
 
             panelContent.addComponent(columns);
             columns.addComponent(columnA);
@@ -57,6 +57,8 @@ public class CriterionForm extends VerticalLayout {
 
             columnA.setWidth(400, Unit.PIXELS);
             columnB.setMargin(false);
+            columnB.setSpacing(false);
+            columnB.addStyleName("ignoreCaptionCellWidth");
 
             for (RequirementGroup requirementGroup : criterion.getRequirementGroups()) {
                 RequirementGroupForm requirementGroupForm = new RequirementGroupForm(requirementGroup, this.useRequirements);
