@@ -29,8 +29,8 @@ public class Master extends VerticalLayout implements View {
     protected VerticalLayout navigatorContent = new VerticalLayout();
     protected Panel mainPanel = new Panel();
     protected VerticalLayout mainContent = new VerticalLayout();
-    protected Panel detailsPanel = new Panel();
-    protected VerticalLayout detailsContent = new VerticalLayout();
+    //protected Panel detailsPanel = new Panel();
+    //protected VerticalLayout detailsContent = new VerticalLayout();
 
     protected Image topheaderEsensImage = new Image("", new ThemeResource("img/logo_esens.png"));
     protected Label topheaderWelcomeText = new Label("Hello Alice");
@@ -78,8 +78,8 @@ public class Master extends VerticalLayout implements View {
         contentGrid.setStyleName("contentGrid");
 
         contentGrid.setColumnExpandRatio(0, 0.16f);
-        contentGrid.setColumnExpandRatio(1, 0.60f);
-        contentGrid.setColumnExpandRatio(2, 0.22f);
+        contentGrid.setColumnExpandRatio(1, 0.82f);
+        //contentGrid.setColumnExpandRatio(2, 0.22f);
 
         navigatorContent.setStyleName("navigatorContent");
         navigatorContent.setHeight("100%");
@@ -107,18 +107,18 @@ public class Master extends VerticalLayout implements View {
         mainPanel.setContent(mainContent);
         mainPanel.getContent().setSizeUndefined();
 
-        detailsPanel.setStyleName("detailsPanel");
-        detailsPanel.setSizeFull();
-        detailsPanel.setContent(detailsContent);
-        detailsPanel.getContent().setSizeUndefined();
+        //detailsPanel.setStyleName("detailsPanel");
+        //detailsPanel.setSizeFull();
+        //detailsPanel.setContent(detailsContent);
+        //detailsPanel.getContent().setSizeUndefined();
 
         //detailsContent.setHeight("100%");
-        detailsContent.setStyleName("master-detailsContent");
-        detailsContent.setWidth("100%");
+        //detailsContent.setStyleName("master-detailsContent");
+        //detailsContent.setWidth("100%");
 
         contentGrid.addComponent(navigatorPanel, 0, 0);
         contentGrid.addComponent(mainPanel, 1, 0);
-        contentGrid.addComponent(detailsPanel, 2, 0);
+        //contentGrid.addComponent(detailsPanel, 2, 0);
         content.addComponent(contentGrid);
 
         //mainContent.addComponent(mainContentTitleText);
@@ -190,9 +190,9 @@ public class Master extends VerticalLayout implements View {
         return navigatorPanel;
     }
 
-    public Panel getDetailsPanel() {
+/*    public Panel getDetailsPanel() {
         return detailsPanel;
-    }
+    }*/
 
     public VerticalLayout getNavigatorContent() {
         return navigatorContent;
@@ -202,9 +202,9 @@ public class Master extends VerticalLayout implements View {
         return mainContent;
     }
 
-    public VerticalLayout getDetailsContent() {
+/*    public VerticalLayout getDetailsContent() {
         return detailsContent;
-    }
+    }*/
 
     @Override
     public void enter(ViewChangeListener.ViewChangeEvent event) {
