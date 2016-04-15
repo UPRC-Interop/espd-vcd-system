@@ -48,6 +48,10 @@ public class CriterionForm extends VerticalLayout {
         setMargin(true);
         setStyleName("criterionForm-layout");
 
+        if (criterionReference.getTypeCode().equals("SELECTION.ECONOMIC_FINANCIAL_STANDING") || criterionReference.getTypeCode().equals("DATA_ON_ECONOMIC_OPERATOR")) {
+            criterionReference.setDescription(criterionReference.getName());
+            criterionReference.setName("Data on economic operator");
+        }
 
         // If this criterion form will contain the requirements it will need to be displayed with a more complex layout
         if (useRequirements) {
@@ -71,6 +75,10 @@ public class CriterionForm extends VerticalLayout {
                 RequirementGroupForm requirementGroupForm = new RequirementGroupForm(requirementGroup, this.useRequirements);
                 columnB.addComponent(requirementGroupForm);
             }
+
+            if (criterionReference.getLegislationReference() != null) {
+               panelContent.addComponent(new LegislationReferenceForm(criterionReference.getLegislationReference()));
+            }
         } else { // The criterion form will contain a limited amount of details, therefore a more simplified layout is used.
             panelContent.addComponent(selected);
             panelContent.addComponent(description);
@@ -85,7 +93,6 @@ public class CriterionForm extends VerticalLayout {
 
         panelContent.setMargin(true);
         panelContent.setStyleName("criterionForm-panelContent");
-
 
         // Bind the this forms fields
         final BeanFieldGroup<SelectableCriterion> criteriaGroup = new BeanFieldGroup<>(SelectableCriterion.class);
@@ -108,20 +115,20 @@ public class CriterionForm extends VerticalLayout {
                 }
             }
         } else if (!this.useRequirements) {
-            //view.getDetailsContent().removeAllComponents();
-            Label detailsTitle = new Label(criterionReference.getName());
-            detailsTitle.setStyleName("detailsTitle");
-            //view.getDetailsContent().addComponent(detailsTitle);
-            if (criterionReference.getLegislationReference() != null) {
-            //    view.getDetailsContent().addComponent(new LegislationReferenceForm(criterionReference.getLegislationReference()));
-            }
-
-            for (RequirementGroup requirementGroup : criterionReference.getRequirementGroups()) {
-            //    view.getDetailsContent().addComponent(new RequirementGroupForm(requirementGroup, this.useRequirements));
-            }
-
             if (view instanceof EspdTemplate) {
-                EspdTemplate espdTemplateView = (EspdTemplate)view;
+                EspdTemplate espdTemplateView = (EspdTemplate) view;
+                espdTemplateView.getDetailsContent().removeAllComponents();
+                Label detailsTitle = new Label(criterionReference.getName());
+                detailsTitle.setStyleName("detailsTitle");
+                espdTemplateView.getDetailsContent().addComponent(detailsTitle);
+                if (criterionReference.getLegislationReference() != null) {
+                    espdTemplateView.getDetailsContent().addComponent(new LegislationReferenceForm(criterionReference.getLegislationReference()));
+                }
+
+                for (RequirementGroup requirementGroup : criterionReference.getRequirementGroups()) {
+                    espdTemplateView.getDetailsContent().addComponent(new RequirementGroupForm(requirementGroup, this.useRequirements));
+                }
+
                 CriterionForm highlightedCriterion = espdTemplateView.getHighlightedCriterion();
                 if (highlightedCriterion != this) {
                     this.setHighlighted(true);

@@ -470,4 +470,19 @@
   .v-label-progressBarLabel {
     text-align: center;
   }
+
+  .master-mainContent > .v-slot > .v-gridlayout > .v-gridlayout-slot {
+    overflow: scroll;
+  }
+
+  .v-verticallayout-master-mainContent,
+  .v-verticallayout-master-mainContent > .v-slot,
+  .v-verticallayout-master-mainContent > .v-slot > .v-gridlayout,
+  .v-verticallayout-master-mainContent > .v-slot > .v-gridlayout > .v-gridlayout-slot {
+    height: 100% !important;
+  }
+
+  .v-verticallayout-master-mainContent {
+    overflow: auto;
+  }
 }
