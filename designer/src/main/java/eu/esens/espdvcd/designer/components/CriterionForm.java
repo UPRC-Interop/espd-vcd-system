@@ -112,20 +112,20 @@ public class CriterionForm extends VerticalLayout {
                 }
             }
         } else if (!this.useRequirements) {
-            //view.getDetailsContent().removeAllComponents();
-            Label detailsTitle = new Label(criterionReference.getName());
-            detailsTitle.setStyleName("detailsTitle");
-            //view.getDetailsContent().addComponent(detailsTitle);
-            if (criterionReference.getLegislationReference() != null) {
-            //    view.getDetailsContent().addComponent(new LegislationReferenceForm(criterionReference.getLegislationReference()));
-            }
-
-            for (RequirementGroup requirementGroup : criterionReference.getRequirementGroups()) {
-            //    view.getDetailsContent().addComponent(new RequirementGroupForm(requirementGroup, this.useRequirements));
-            }
-
             if (view instanceof EspdTemplate) {
-                EspdTemplate espdTemplateView = (EspdTemplate)view;
+                EspdTemplate espdTemplateView = (EspdTemplate) view;
+                espdTemplateView.getDetailsContent().removeAllComponents();
+                Label detailsTitle = new Label(criterionReference.getName());
+                detailsTitle.setStyleName("detailsTitle");
+                espdTemplateView.getDetailsContent().addComponent(detailsTitle);
+                if (criterionReference.getLegislationReference() != null) {
+                    espdTemplateView.getDetailsContent().addComponent(new LegislationReferenceForm(criterionReference.getLegislationReference()));
+                }
+
+                for (RequirementGroup requirementGroup : criterionReference.getRequirementGroups()) {
+                    espdTemplateView.getDetailsContent().addComponent(new RequirementGroupForm(requirementGroup, this.useRequirements));
+                }
+
                 CriterionForm highlightedCriterion = espdTemplateView.getHighlightedCriterion();
                 if (highlightedCriterion != this) {
                     this.setHighlighted(true);

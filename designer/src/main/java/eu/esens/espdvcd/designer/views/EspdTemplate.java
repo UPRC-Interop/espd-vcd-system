@@ -27,14 +27,35 @@ public class EspdTemplate extends Master {
     Button panelRightButtonImport = new Button("Import existing ESPD Template");
     private CriterionForm highlightedCriterion = null;
     private Panel uploadPanel = new Panel();
+    GridLayout gridLayout = new GridLayout(2,1);
+
+    protected Panel detailsPanel = new Panel();
+    protected VerticalLayout detailsContent = new VerticalLayout();
 
     public EspdTemplate(Navigator navigator) {
         super(navigator, true);
 
+        detailsPanel.setStyleName("detailsPanel");
+        detailsPanel.setSizeFull();
+        detailsPanel.setContent(detailsContent);
+        detailsPanel.getContent().setSizeUndefined();
+
+        detailsContent.setHeight("100%");
+        detailsContent.setStyleName("master-detailsContent");
+        detailsContent.setWidth("100%");
+
+        mainContent.setWidth("100%");
+        gridLayout.setWidth("100%");
+        gridLayout.setColumnExpandRatio(0, 0.7f);
+        gridLayout.setColumnExpandRatio(1, 0.3f);
+        gridLayout.addComponent(new Label("A"), 0, 0);
+        gridLayout.addComponent(detailsPanel, 1, 0);
+        mainContent.addComponent(gridLayout);
+
         panels = new HorizontalLayout();
         panels.setStyleName("EspdTemplate-panels");
         panels.setWidth("100%");
-        mainContent.addComponent(panels);
+        gridLayout.addComponent(panels, 0, 0);
 
         Panel panelLeft = new Panel("Create new ESPD Template");
         panelLeft.setStyleName("EspdTemplate-panelLeft");
@@ -83,7 +104,7 @@ public class EspdTemplate extends Master {
 
         // Cenerate the espd request form base on the provided espd request model
         espdRequestForm = new ESPDRequestForm(this, espdRequest);
-        mainContent.addComponent(espdRequestForm);
+        gridLayout.addComponent(espdRequestForm, 0, 0);
     }
 
     public void onImportEspdTemplate(Button.ClickEvent clickEvent) {
@@ -116,7 +137,7 @@ public class EspdTemplate extends Master {
                     ESPDBuilder espdBuilder = new ESPDBuilder();
                     espdRequest = espdBuilder.createESPDRequestFromXML(is);
                     espdRequestForm = new ESPDRequestForm(thisView, espdRequest);
-                    mainContent.addComponent(espdRequestForm);
+                    gridLayout.addComponent(espdRequestForm, 0, 0);
                     is.close();
                     panels.setVisible(false);
                 } catch (IOException e) {
@@ -150,8 +171,16 @@ public class EspdTemplate extends Master {
     public void resetView() {
         panels.setVisible(true);
         panelRightButtonImport.setVisible(true);
-        mainContent.removeComponent(espdRequestForm);
+        gridLayout.removeComponent(espdRequestForm);
         panelRightLayout.removeComponent(uploadPanel);
         //getDetailsContent().removeAllComponents();
+    }
+
+    public Panel getDetailsPanel() {
+        return detailsPanel;
+    }
+
+    public VerticalLayout getDetailsContent() {
+        return detailsContent;
     }
 }
