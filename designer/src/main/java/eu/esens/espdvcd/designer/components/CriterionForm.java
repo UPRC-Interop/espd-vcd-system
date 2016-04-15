@@ -48,6 +48,10 @@ public class CriterionForm extends VerticalLayout {
         setMargin(true);
         setStyleName("criterionForm-layout");
 
+        if (criterionReference.getTypeCode().equals("SELECTION.ECONOMIC_FINANCIAL_STANDING") || criterionReference.getTypeCode().equals("DATA_ON_ECONOMIC_OPERATOR")) {
+            criterionReference.setDescription(criterionReference.getName());
+            criterionReference.setName("Data on economic operator");
+        }
 
         // If this criterion form will contain the requirements it will need to be displayed with a more complex layout
         if (useRequirements) {
@@ -89,7 +93,6 @@ public class CriterionForm extends VerticalLayout {
 
         panelContent.setMargin(true);
         panelContent.setStyleName("criterionForm-panelContent");
-
 
         // Bind the this forms fields
         final BeanFieldGroup<SelectableCriterion> criteriaGroup = new BeanFieldGroup<>(SelectableCriterion.class);
