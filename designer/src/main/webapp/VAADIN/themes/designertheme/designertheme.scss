@@ -459,15 +459,15 @@
       padding-right: 10px;
   }
 
-  .v-formlayout-row > .v-formlayout-captioncell {
+  .v-formlayout-ResponseForm > table > tbody > .v-formlayout-row > .v-formlayout-captioncell {
     width: 200px;
   }
 
-  .v-formlayout-row > .v-formlayout-captioncell > div > span {
+  .v-formlayout-ResponseForm > table > tbody > .v-formlayout-row > .v-formlayout-captioncell > div > span {
     white-space: normal;
   }
 
-  .v-formlayout > table {
-    padding: 0px;
+  .v-label-progressBarLabel {
+    text-align: center;
   }
 }

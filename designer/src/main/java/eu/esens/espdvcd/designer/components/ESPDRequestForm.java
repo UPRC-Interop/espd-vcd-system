@@ -21,14 +21,15 @@ public class ESPDRequestForm extends ESPDForm {
 
     private CheckBox selectAllExclusionCriteriaCheckbox = new CheckBox("Select all exclusion criteria");
     private CheckBox selectAllSelectionCriteriaCheckbox = new CheckBox("Select all selection criteria");
-    private CheckBox selectAllReductionCriteriaCheckbox = new CheckBox("Select all selection criteria");
+    private CheckBox selectAllEconomicOperatorCriteriaCheckbox = new CheckBox("Select all economic operator criteria");
+    private CheckBox selectAllReductionCriteriaCheckbox = new CheckBox("Select all reduction of candidates criteria");
     private List<CriterionGroupForm> exclusionCriterionGroupForms = new ArrayList<>();
     private List<CriterionGroupForm> selectionCriterionGroupForms = new ArrayList<>();
+    private List<CriterionGroupForm> economicOperatorCriterionGroupForms = new ArrayList<>();
     private List<CriterionGroupForm> reductionCriterionGroupForms = new ArrayList<>();
 
     public ESPDRequestForm(Master view, ESPDRequest espdRequest) {
         super(view, espdRequest, "espd_template.xml");
-
 
         // Page 1 - Procedure
         VerticalLayout page1 = newPage("Information concerning the procurement procedure", "Procedure");
@@ -64,7 +65,7 @@ public class ESPDRequestForm extends ESPDForm {
         criterionGroupForm(view, espdRequest.getSelectionCriteriaList(),selectionCriterionGroupForms,page3);
 
         // Page 4 - Reduction of candidates
-        VerticalLayout page4 = newPage("Reduction of candidates", "Reduction of candidates");
+        VerticalLayout page4 = newPage("Reduction of candidates", "Candidates");
 
         VerticalLayout reductionActionLayout = new VerticalLayout();
         reductionActionLayout.setMargin(true);
@@ -76,10 +77,24 @@ public class ESPDRequestForm extends ESPDForm {
         selectAllReductionCriteriaCheckbox.setStyleName("espdRequestForm-checkbox");
 
 
-       criterionGroupForm(view, espdRequest.getReductionOfCandidatesCriteriaList(),reductionCriterionGroupForms,page4);
+        criterionGroupForm(view, espdRequest.getReductionOfCandidatesCriteriaList(),reductionCriterionGroupForms,page4);
 
-        // Page 5 - Finish
-        VerticalLayout page5 = newPage("Finish", "Finish");
+        // Page 5 - Data on economic operator
+        VerticalLayout page5 = newPage("Data on economic operator", "Economic operator");
+
+        VerticalLayout economicOperatorActionLayout = new VerticalLayout();
+        economicOperatorActionLayout.setMargin(true);
+        economicOperatorActionLayout.addComponent(selectAllEconomicOperatorCriteriaCheckbox);
+        selectAllEconomicOperatorCriteriaCheckbox.setValue(true);
+        page5.addComponent(economicOperatorActionLayout);
+
+        selectAllEconomicOperatorCriteriaCheckbox.addValueChangeListener(this::onSelectAllEconomicOperatorCriteria);
+        selectAllEconomicOperatorCriteriaCheckbox.setStyleName("espdRequestForm-checkbox");
+
+        criterionGroupForm(view, espdRequest.getEORelatedCriteriaList(),economicOperatorCriterionGroupForms,page5);
+        
+        // Page 6 - Finish
+        VerticalLayout page6 = newPage("Finish", "Finish");
     }
 
 
@@ -134,6 +149,18 @@ public class ESPDRequestForm extends ESPDForm {
     public void onSelectAllSelectionCriteria(Property.ValueChangeEvent event) {
         for (CriterionGroupForm criterionGroupForm : selectionCriterionGroupForms) {
             criterionGroupForm.setSelectedOnAllCriteria(selectAllSelectionCriteriaCheckbox.getValue());
+        }
+    }
+
+    /**
+     * Selects or deselects all economic operator criteria depending on
+     * the boolean value of the selectAllEconomicOperatorCriteria checkbox
+     *
+     * @param event Vaadin7 value change event
+     */
+    public void onSelectAllEconomicOperatorCriteria(Property.ValueChangeEvent event) {
+        for (CriterionGroupForm criterionGroupForm : economicOperatorCriterionGroupForms) {
+            criterionGroupForm.setSelectedOnAllCriteria(selectAllEconomicOperatorCriteriaCheckbox.getValue());
         }
     }
 
