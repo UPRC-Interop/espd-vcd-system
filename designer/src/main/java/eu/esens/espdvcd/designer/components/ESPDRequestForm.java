@@ -92,7 +92,7 @@ public class ESPDRequestForm extends ESPDForm {
         selectAllEconomicOperatorCriteriaCheckbox.setStyleName("espdRequestForm-checkbox");
 
         criterionGroupForm(view, espdRequest.getEORelatedCriteriaList(),economicOperatorCriterionGroupForms,page5);
-        
+
         // Page 6 - Finish
         VerticalLayout page6 = newPage("Finish", "Finish");
     }

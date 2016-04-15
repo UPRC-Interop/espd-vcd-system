@@ -20,12 +20,15 @@ public class ESPDResponseForm extends ESPDForm {
     private ESPDResponse espdResponse = null;
     private CheckBox selectAllExclusionCriteriaCheckbox = new CheckBox("Select all exclusion criteria");
     private CheckBox selectAllSelectionCriteriaCheckbox = new CheckBox("Select all selection criteria");
+    private CheckBox selectAllEconomicOperatorCriteriaCheckbox = new CheckBox("Select all economic operator criteria");
     private CheckBox selectAllReductionCriteriaCheckbox = new CheckBox("Select all selection criteria");
-    private HashMap<String,List<CriterionForm>> exclusionCriterionHash = new HashMap<String,List<CriterionForm>>();
-    private HashMap<String,List<CriterionForm>> selectionCriterionHash = new HashMap<String,List<CriterionForm>>();
-    private HashMap<String,List<CriterionForm>> reductionCriterionHash = new HashMap<String,List<CriterionForm>>();
+    private HashMap<String,List<CriterionForm>> exclusionCriterionHash = new HashMap<>();
+    private HashMap<String,List<CriterionForm>> selectionCriterionHash = new HashMap<>();
+    private HashMap<String,List<CriterionForm>> economicOperatorCriterionHash = new HashMap<>();
+    private HashMap<String,List<CriterionForm>> reductionCriterionHash = new HashMap<>();
     private List<CriterionGroupForm> exclusionCriterionGroupForms = new ArrayList<>();
     private List<CriterionGroupForm> selectionCriterionGroupForms = new ArrayList<>();
+    private List<CriterionGroupForm> economicOperatorCriterionGroupForms = new ArrayList<>();
     private List<CriterionGroupForm> reductionCriterionGroupForms = new ArrayList<>();
 
     public ESPDResponseForm(Master view, ESPDResponse espdResponse) {
@@ -36,6 +39,32 @@ public class ESPDResponseForm extends ESPDForm {
         VerticalLayout page1 = newPage("Information concerning the procurement procedure", "Procedure");
         page1.addComponent(new CADetailsForm(espdResponse));
         page1.addComponent(new EODetailsForm(espdResponse.getEoDetails()));
+
+        for (SelectableCriterion criterion : espdResponse.getEORelatedCriteriaList()) {
+
+            if (!economicOperatorCriterionHash.containsKey(criterion.getTypeCode())) {
+                economicOperatorCriterionHash.put(criterion.getTypeCode(), new ArrayList<CriterionForm>());
+            }
+
+            CriterionForm criterionForm = new CriterionForm(view, criterion, true);
+            economicOperatorCriterionHash.get(criterion.getTypeCode()).add(criterionForm);
+        }
+
+        for (Map.Entry<String, List<CriterionForm>> entry : economicOperatorCriterionHash.entrySet()) {
+            String key = entry.getKey();
+            List<CriterionForm> criterionForms = entry.getValue();
+
+            String fullTypeCodeName = Codelists.CriteriaType.getValueForId(key);
+
+            if (fullTypeCodeName == null) {
+                // Fallback to display the type code instead of real name
+                fullTypeCodeName = key;
+            }
+
+            CriterionGroupForm criterionGroupForm = new CriterionGroupForm(fullTypeCodeName, criterionForms);
+            economicOperatorCriterionGroupForms.add(criterionGroupForm);
+            page1.addComponent(criterionGroupForm);
+        }
 
         // Page 2 - Exclusion
         VerticalLayout page2 = newPage("Exclusion grounds criteria", "Exclusion");
