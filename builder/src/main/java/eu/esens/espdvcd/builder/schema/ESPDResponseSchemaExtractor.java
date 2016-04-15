@@ -5,6 +5,7 @@
  */
 package eu.esens.espdvcd.builder.schema;
 
+import eu.esens.espdvcd.model.EODetails;
 import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.model.requirement.response.DescriptionResponse;
 import eu.esens.espdvcd.model.requirement.response.IndicatorResponse;
@@ -42,12 +43,16 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.AttachmentType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.DocumentReferenceType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ExternalReferenceType;
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PartyIdentificationType;
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PartyNameType;
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PartyType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PeriodType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.AmountType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ContractFolderIDType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.DateType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.DescriptionType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.IDType;
+import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.NameType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.PercentType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.QuantityType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.TypeCodeType;
@@ -73,9 +78,8 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
                 .map(cr -> extractCriterion(cr))
                 .collect(Collectors.toList()));
 
-        // TODO: ADD the EO Details
+        resType.setEconomicOperatorParty(extracEODetails(res.getEoDetails()));
         
-        resType.setEconomicOperatorParty(extracEODetails(res));
         return resType;
     }
 
@@ -205,8 +209,33 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
 
     }
 
-    public EconomicOperatorPartyType extracEODetails(ESPDResponse res) {
-        return new EconomicOperatorPartyType();
-                
+    public EconomicOperatorPartyType extracEODetails(EODetails eod) {
+        
+        if (eod == null) return null;
+        
+        EconomicOperatorPartyType eopt = new EconomicOperatorPartyType();
+        eopt.setSMEIndicator(new grow.names.specification.ubl.schema.xsd.espd_commonbasiccomponents_1.IndicatorType());
+        eopt.getSMEIndicator().setValue(eod.isSmeIndicator());
+        
+        eopt.setParty(new PartyType());
+        
+        if (eod.getID() != null ) {
+            PartyIdentificationType pit = new PartyIdentificationType();
+            pit.setID(new IDType());
+            pit.getID().setValue(eod.getID());
+            eopt.getParty().getPartyIdentification().add(pit);
+        }
+        
+        if (eod.getName() != null) {
+            PartyNameType pnt = new PartyNameType();
+            pnt.setName(new NameType());
+            pnt.getName().setValue(eod.getName());
+            eopt.getParty().getPartyName().add(pnt);
+        }
+        
+        
+        
+        return eopt;
+
     }
 }
