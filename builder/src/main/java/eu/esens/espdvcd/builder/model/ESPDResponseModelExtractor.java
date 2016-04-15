@@ -27,10 +27,7 @@ import java.util.stream.Collectors;
 
 public class ESPDResponseModelExtractor implements ModelExtractor {
 
-    ESPDResponseModelExtractor() {
-    }
-
-    ;
+    ESPDResponseModelExtractor() {};
 
     public SimpleESPDResponse extractESPDResponse(ESPDResponseType resType) {
 

@@ -21,6 +21,7 @@ import eu.esens.espdvcd.model.requirement.response.QuantityResponse;
 import eu.esens.espdvcd.model.requirement.response.QuantityYearResponse;
 import eu.esens.espdvcd.model.requirement.response.Response;
 import eu.esens.espdvcd.model.requirement.response.Responses;
+import grow.names.specification.ubl.schema.xsd.espd_commonaggregatecomponents_1.EconomicOperatorPartyType;
 import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.ResponseType;
@@ -73,6 +74,8 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
                 .collect(Collectors.toList()));
 
         // TODO: ADD the EO Details
+        
+        resType.setEconomicOperatorParty(extracEODetails(res));
         return resType;
     }
 
@@ -200,5 +203,10 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
                 return null;
         }
 
+    }
+
+    public EconomicOperatorPartyType extracEODetails(ESPDResponse res) {
+        return new EconomicOperatorPartyType();
+                
     }
 }
