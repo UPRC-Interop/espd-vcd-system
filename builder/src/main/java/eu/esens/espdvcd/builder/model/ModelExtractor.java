@@ -6,7 +6,6 @@ import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.ResponseRequirement;
-import eu.esens.espdvcd.model.requirement.response.Response;
 import eu.esens.espdvcd.model.requirement.response.Responses;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.CriterionType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.LegislationType;
