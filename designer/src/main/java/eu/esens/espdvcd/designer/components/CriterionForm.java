@@ -71,6 +71,10 @@ public class CriterionForm extends VerticalLayout {
                 RequirementGroupForm requirementGroupForm = new RequirementGroupForm(requirementGroup, this.useRequirements);
                 columnB.addComponent(requirementGroupForm);
             }
+
+            if (criterionReference.getLegislationReference() != null) {
+               panelContent.addComponent(new LegislationReferenceForm(criterionReference.getLegislationReference()));
+            }
         } else { // The criterion form will contain a limited amount of details, therefore a more simplified layout is used.
             panelContent.addComponent(selected);
             panelContent.addComponent(description);
