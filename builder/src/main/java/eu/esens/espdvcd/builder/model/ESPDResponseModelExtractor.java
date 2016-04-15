@@ -1,5 +1,6 @@
 package eu.esens.espdvcd.builder.model;
 
+import eu.esens.espdvcd.model.ContactingDetails;
 import eu.esens.espdvcd.model.EODetails;
 import eu.esens.espdvcd.model.NaturalPerson;
 import eu.esens.espdvcd.model.PostalAddress;
@@ -224,7 +225,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                     }
 
                     if (eop.getParty().getContact() != null) {
-                        //TODO: Add Contact Details
+                        eoDetails.setContactingDetails(new ContactingDetails());
                     }
 
                 }
@@ -233,6 +234,9 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
             if (!eop.getRepresentativeNaturalPerson().isEmpty()) {
                 NaturalPerson np = new NaturalPerson();
                 np.setRole(eop.getRepresentativeNaturalPerson().get(0).getNaturalPersonRoleDescription().getValue());
+                
+            } else {
+                
             }
         }
 
