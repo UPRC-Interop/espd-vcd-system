@@ -77,7 +77,7 @@ public class CriterionForm extends VerticalLayout {
             }
 
             if (criterionReference.getLegislationReference() != null) {
-               panelContent.addComponent(new LegislationReferenceForm(criterionReference.getLegislationReference()));
+               columnA.addComponent(new LegislationReferenceForm(criterionReference.getLegislationReference()));
             }
         } else { // The criterion form will contain a limited amount of details, therefore a more simplified layout is used.
             panelContent.addComponent(selected);
