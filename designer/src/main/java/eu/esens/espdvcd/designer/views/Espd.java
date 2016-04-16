@@ -124,6 +124,5 @@ public class Espd extends Master {
         panelRightButtonImport.setVisible(true);
         mainContent.removeComponent(espdResponseForm);
         panelRightLayout.removeComponent(uploadPanel);
-        //getDetailsContent().removeAllComponents();
     }
 }

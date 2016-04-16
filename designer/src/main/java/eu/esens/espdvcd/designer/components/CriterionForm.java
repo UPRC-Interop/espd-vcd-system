@@ -126,7 +126,7 @@ public class CriterionForm extends VerticalLayout {
                 }
 
                 for (RequirementGroup requirementGroup : criterionReference.getRequirementGroups()) {
-                    espdTemplateView.getDetailsContent().addComponent(new RequirementGroupForm(requirementGroup, this.useRequirements));
+                    espdTemplateView.getDetailsContent().addComponent(new RequirementGroupForm(requirementGroup, true));
                 }
 
                 CriterionForm highlightedCriterion = espdTemplateView.getHighlightedCriterion();

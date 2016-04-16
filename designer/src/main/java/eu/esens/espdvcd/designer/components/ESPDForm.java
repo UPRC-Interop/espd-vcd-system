@@ -12,6 +12,7 @@ import com.vaadin.ui.*;
 import eu.esens.espdvcd.builder.ESPDBuilder;
 import eu.esens.espdvcd.codelist.Codelists;
 import eu.esens.espdvcd.designer.Designer;
+import eu.esens.espdvcd.designer.views.Espd;
 import eu.esens.espdvcd.designer.views.EspdTemplate;
 import eu.esens.espdvcd.designer.views.Master;
 import eu.esens.espdvcd.model.ESPDRequest;
@@ -178,6 +179,10 @@ public class ESPDForm extends VerticalLayout {
         if (view instanceof EspdTemplate) {
             EspdTemplate espdTemplateView = (EspdTemplate)view;
             espdTemplateView.resetView();
+        }
+        if (view instanceof Espd) {
+            Espd espdView = (Espd)view;
+            espdView.resetView();
         }
     }
 

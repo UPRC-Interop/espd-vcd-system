@@ -174,7 +174,8 @@ public class EspdTemplate extends Master {
         panelRightButtonImport.setVisible(true);
         gridLayout.removeComponent(espdRequestForm);
         panelRightLayout.removeComponent(uploadPanel);
-        //getDetailsContent().removeAllComponents();
+        getDetailsContent().removeAllComponents();
+        mainColumn.removeComponent(espdRequestForm);
     }
 
     public Panel getDetailsPanel() {
