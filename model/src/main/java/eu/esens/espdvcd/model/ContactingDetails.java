@@ -67,13 +67,6 @@ public class ContactingDetails {
     private String emailAddress;
 
 
-    public ContactingDetails(String contactPointName, String faxNumber, String telephoneNumber, String emailAddress) {
-        this.contactPointName = contactPointName;
-        this.faxNumber = faxNumber;
-        this.telephoneNumber = telephoneNumber;
-        this.emailAddress = emailAddress;
-    }
-
     public String getContactPointName() {
         return contactPointName;
     }
