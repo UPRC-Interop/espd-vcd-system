@@ -54,13 +54,13 @@ public class GenericCode {
     protected final String getRowSimpleValueWithCode(String id, String IdValue, String dataId) {
 
         SimpleCodeList sgc = GC.getValue().getSimpleCodeList();
-        return sgc.getRow().parallelStream()
-                .filter(r -> r.getValue().parallelStream() //Search in Rows
+        return sgc.getRow().stream()
+                .filter(r -> r.getValue().stream() //Search in Rows
                         .filter(c -> (c.getColumnRef() instanceof Column // For Columns
                                 && ((Column) c.getColumnRef()).getId().equals(id)) // With Id "code"
                                 && c.getSimpleValue().getValue().equals(IdValue)) // And Short name GR
                         .findAny().isPresent()).findAny().orElseThrow(IllegalArgumentException::new)
-                .getValue().parallelStream()
+                .getValue().stream()
                 .filter(c -> (c.getColumnRef() instanceof Column // For Columns
                         && ((Column) c.getColumnRef()).getId().equals(dataId)))
                 .findAny().orElseThrow(IllegalArgumentException::new).getSimpleValue().getValue();
@@ -81,7 +81,7 @@ public class GenericCode {
 
         SimpleCodeList sgc = GC.getValue().getSimpleCodeList();
         sgc.getRow().stream()
-                .filter(r -> r.getValue().parallelStream() //Search in Rows
+                .filter(r -> r.getValue().stream() //Search in Rows
                         .allMatch(c -> c.getColumnRef() instanceof Column)) // For Columns
                 .forEach((Row r) -> {
                     String id = r.getValue().stream()

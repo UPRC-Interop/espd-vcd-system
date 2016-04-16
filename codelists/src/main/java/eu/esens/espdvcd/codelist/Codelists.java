@@ -14,6 +14,7 @@ public enum Codelists {
     CriteriaType ("/gc/CriteriaTypeCodes-CodeList.gc"),
     CriterionJurisdictionLevel ("/gc/CriterionJurisdictionLevel-CodeList.gc"),
     CustomizationID("/gc/CustomizationID-CodeList.gc"),
+    Currency("/gc/currencyCode-2.1.gc"),
     EORole("/gc/EORoleCodes-CodeList.gc"),
     LanguageCodeEU("/gc/LanguageCodeEU-CodeList.gc"),
     PeriodMeasureType("/gc/PeriodMeasureTypeCodes-CodeList.gc"),
