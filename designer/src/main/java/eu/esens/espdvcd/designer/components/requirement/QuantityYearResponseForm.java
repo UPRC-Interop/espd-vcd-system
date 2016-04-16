@@ -17,6 +17,7 @@ public class QuantityYearResponseForm extends ResponseForm {
         addComponent(year);
         year.setCaption(caption);
         year.setNullRepresentation("");
+        year.setWidth(280, Unit.PIXELS);
 
         // Bind fields
         final BeanFieldGroup<QuantityYearResponse> binder = new BeanFieldGroup<>(QuantityYearResponse.class);

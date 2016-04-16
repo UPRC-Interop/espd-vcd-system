@@ -20,6 +20,8 @@ public class AmountResponseForm extends ResponseForm {
         addComponent(currency);
         amount.setCaption(caption);
         amount.setNullRepresentation("");
+        amount.setWidth(280, Unit.PIXELS);
+        currency.setWidth(280, Unit.PIXELS);
 
         // Bind fields
         final BeanFieldGroup<AmountResponse> binder = new BeanFieldGroup<>(AmountResponse.class);

@@ -11,5 +11,7 @@ public class PeriodResponseForm extends DescriptionResponseForm {
         super(descriptionResponse, caption);
         description.setCaption(caption);
         description.setNullRepresentation("");
+        description.setWidth(280, Unit.PIXELS);
+
     }
 }

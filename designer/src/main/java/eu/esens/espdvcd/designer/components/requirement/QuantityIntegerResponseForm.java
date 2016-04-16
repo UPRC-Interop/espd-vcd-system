@@ -17,6 +17,7 @@ public class QuantityIntegerResponseForm extends ResponseForm {
         addComponent(quantity);
         quantity.setCaption(caption);
         quantity.setNullRepresentation("");
+        quantity.setWidth(280, Unit.PIXELS);
 
         // Bind fields
         final BeanFieldGroup<QuantityIntegerResponse> binder = new BeanFieldGroup<>(QuantityIntegerResponse.class);

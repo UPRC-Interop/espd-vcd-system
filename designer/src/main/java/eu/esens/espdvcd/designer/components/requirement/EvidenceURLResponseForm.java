@@ -17,6 +17,7 @@ public class EvidenceURLResponseForm extends ResponseForm {
         addComponent(evidenceURL);
         evidenceURL.setCaption(caption);
         evidenceURL.setNullRepresentation("");
+        evidenceURL.setWidth(280, Unit.PIXELS);
 
         // Bind fields
         final BeanFieldGroup<EvidenceURLResponse> binder = new BeanFieldGroup<>(EvidenceURLResponse.class);

@@ -17,6 +17,7 @@ public class PercentageResponseForm extends ResponseForm {
         addComponent(percentage);
         percentage.setCaption(caption);
         percentage.setNullRepresentation("");
+        percentage.setWidth(280, Unit.PIXELS);
 
         // Bind fields
         final BeanFieldGroup<PercentageResponse> binder = new BeanFieldGroup<>(PercentageResponse.class);

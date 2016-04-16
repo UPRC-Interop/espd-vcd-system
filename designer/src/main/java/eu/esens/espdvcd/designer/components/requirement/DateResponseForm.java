@@ -16,6 +16,7 @@ public class DateResponseForm extends ResponseForm {
         this.dateResponse = dateResponse;
         addComponent(date);
         date.setCaption(caption);
+        date.setWidth(280, Unit.PIXELS);
 
         // Bind fields
         final BeanFieldGroup<DateResponse> binder = new BeanFieldGroup<>(DateResponse.class);

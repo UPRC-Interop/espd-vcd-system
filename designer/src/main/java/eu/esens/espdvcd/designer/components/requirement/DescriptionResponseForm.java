@@ -18,6 +18,7 @@ public class DescriptionResponseForm extends ResponseForm {
         addComponent(description);
         description.setCaption(caption);
         description.setNullRepresentation("");
+        description.setWidth(280, Unit.PIXELS);
 
         // Bind fields
         final BeanFieldGroup<DescriptionResponse> binder = new BeanFieldGroup<>(DescriptionResponse.class);
