@@ -3,6 +3,7 @@ package eu.esens.espdvcd.designer.components.requirement;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.TextField;
+import eu.esens.espdvcd.designer.components.CurrencyComboBox;
 import eu.esens.espdvcd.model.requirement.response.AmountResponse;
 
 /**
@@ -11,7 +12,7 @@ import eu.esens.espdvcd.model.requirement.response.AmountResponse;
 public class AmountResponseForm extends ResponseForm {
     private AmountResponse amountResponse = null;
     private TextField amount = new TextField("Amount: ");
-    private TextField currency = new TextField("Currency: ");
+    private CurrencyComboBox currency = new CurrencyComboBox("Currency: ");
 
     public AmountResponseForm(AmountResponse amountResponse, String caption) {
         this.amountResponse = amountResponse;
@@ -19,7 +20,6 @@ public class AmountResponseForm extends ResponseForm {
         addComponent(currency);
         amount.setCaption(caption);
         amount.setNullRepresentation("");
-        currency.setNullRepresentation("");
 
         // Bind fields
         final BeanFieldGroup<AmountResponse> binder = new BeanFieldGroup<>(AmountResponse.class);

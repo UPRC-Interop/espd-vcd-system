@@ -18,10 +18,6 @@ import java.util.Map;
 public class ESPDResponseForm extends ESPDForm {
 
     private ESPDResponse espdResponse = null;
-    private CheckBox selectAllExclusionCriteriaCheckbox = new CheckBox("Select all exclusion criteria");
-    private CheckBox selectAllSelectionCriteriaCheckbox = new CheckBox("Select all selection criteria");
-    private CheckBox selectAllEconomicOperatorCriteriaCheckbox = new CheckBox("Select all economic operator criteria");
-    private CheckBox selectAllReductionCriteriaCheckbox = new CheckBox("Select all selection criteria");
     private HashMap<String,List<CriterionForm>> exclusionCriterionHash = new HashMap<>();
     private HashMap<String,List<CriterionForm>> selectionCriterionHash = new HashMap<>();
     private HashMap<String,List<CriterionForm>> economicOperatorCriterionHash = new HashMap<>();
@@ -71,12 +67,7 @@ public class ESPDResponseForm extends ESPDForm {
 
         VerticalLayout exclusionActionLayout = new VerticalLayout();
         exclusionActionLayout.setMargin(true);
-        exclusionActionLayout.addComponent(selectAllExclusionCriteriaCheckbox);
-        selectAllExclusionCriteriaCheckbox.setValue(true);
         page2.addComponent(exclusionActionLayout);
-
-        selectAllExclusionCriteriaCheckbox.addValueChangeListener(this::onSelectAllExclusionCriteria);
-        selectAllExclusionCriteriaCheckbox.setStyleName("espdRequestForm-checkbox");
 
         for (SelectableCriterion criterion : espdResponse.getExclusionCriteriaList()) {
 
@@ -110,12 +101,7 @@ public class ESPDResponseForm extends ESPDForm {
 
         VerticalLayout selectionActionLayout = new VerticalLayout();
         selectionActionLayout.setMargin(true);
-        selectionActionLayout.addComponent(selectAllSelectionCriteriaCheckbox);
-        selectAllSelectionCriteriaCheckbox.setValue(true);
         page3.addComponent(selectionActionLayout);
-
-        selectAllSelectionCriteriaCheckbox.addValueChangeListener(this::onSelectAllSelectionCriteria);
-        selectAllSelectionCriteriaCheckbox.setStyleName("espdRequestForm-checkbox");
 
         for (SelectableCriterion criterion : espdResponse.getSelectionCriteriaList()) {
 
@@ -149,12 +135,7 @@ public class ESPDResponseForm extends ESPDForm {
 
         VerticalLayout reductionActionLayout = new VerticalLayout();
         reductionActionLayout.setMargin(true);
-        reductionActionLayout.addComponent(selectAllReductionCriteriaCheckbox);
-        selectAllReductionCriteriaCheckbox.setValue(true);
         page4.addComponent(reductionActionLayout);
-
-        selectAllReductionCriteriaCheckbox.addValueChangeListener(this::onSelectAllReductionCriteria);
-        selectAllReductionCriteriaCheckbox.setStyleName("espdRequestForm-checkbox");
 
         for (SelectableCriterion criterion : espdResponse.getReductionOfCandidatesCriteriaList()) {
 
@@ -185,44 +166,6 @@ public class ESPDResponseForm extends ESPDForm {
         // Page 5 - Finish
         VerticalLayout page5 = newPage("Finish", "Finish");
     }
-
-    /**
-     * Selects or deselects all exclusion criteria depending on
-     * the boolean value of the selectAllExclusionCriteriaCheckbox checkbox
-     *
-     * @param event Vaadin7 value change event
-     */
-    public void onSelectAllExclusionCriteria(Property.ValueChangeEvent event) {
-        for (CriterionGroupForm criterionGroupForm : exclusionCriterionGroupForms) {
-            criterionGroupForm.setSelectedOnAllCriteria(selectAllExclusionCriteriaCheckbox.getValue());
-        }
-    }
-
-    /**
-     * Selects or deselects all selection criteria depending on
-     * the boolean value of the selectAllSelectionCriteria checkbox
-     *
-     * @param event Vaadin7 value change event
-     */
-    public void onSelectAllSelectionCriteria(Property.ValueChangeEvent event) {
-        for (CriterionGroupForm criterionGroupForm : selectionCriterionGroupForms) {
-            criterionGroupForm.setSelectedOnAllCriteria(selectAllSelectionCriteriaCheckbox.getValue());
-        }
-    }
-
-    /**
-     * Selects or deselects all reduction criteria depending on
-     * the boolean value of the selectAllReductionCriteria checkbox
-     *
-     * @param event Vaadin7 value change event
-     */
-    public void onSelectAllReductionCriteria(Property.ValueChangeEvent event) {
-        for (CriterionGroupForm criterionGroupForm : reductionCriterionGroupForms) {
-            criterionGroupForm.setSelectedOnAllCriteria(selectAllReductionCriteriaCheckbox.getValue());
-        }
-    }
-
-
 
     /**
      * When the user have clicked the Export button, this method is invoked.
