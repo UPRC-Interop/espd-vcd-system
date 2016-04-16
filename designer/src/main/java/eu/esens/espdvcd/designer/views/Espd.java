@@ -82,7 +82,7 @@ public class Espd extends Master {
 
                     if (espdResponse.getEoDetails() == null) { // <- I must do this to upon import
                         EODetails eoDetails = new EODetails();
-                        eoDetails.setContactingDetails(new ContactingDetails("", "", "", ""));
+                        eoDetails.setContactingDetails(new ContactingDetails());
                         eoDetails.setPostalAddress(new PostalAddress());
                         espdResponse.setEODetails(eoDetails);
                     }
