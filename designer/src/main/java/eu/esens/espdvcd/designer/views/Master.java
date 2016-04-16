@@ -33,7 +33,7 @@ public class Master extends VerticalLayout implements View {
     //protected VerticalLayout detailsContent = new VerticalLayout();
 
     protected Image topheaderEsensImage = new Image("", new ThemeResource("img/logo_esens.png"));
-    protected Label topheaderWelcomeText = new Label("Hello Alice");
+    protected Label topheaderWelcomeText = new Label("ESPD/VCD Service");
     protected Label mainContentTitleText = new Label("Title Text");
 
     public Master(Navigator navigator, boolean forceAuthentication) {
