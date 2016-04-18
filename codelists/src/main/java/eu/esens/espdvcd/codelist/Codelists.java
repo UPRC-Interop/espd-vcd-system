@@ -11,6 +11,7 @@ public enum Codelists {
     AmountType("/gc/AmountTypeCodes-CodeList.gc"),
     ContractType ("/gc/ContractType-CodeList.gc"),
     CountryIdentification ("/gc/CountryIdentificationCode-2.1.gc"),
+    ECCountryIdentification("/gc/EuroCountryIdentificationCode-2.1"),
     CriteriaType ("/gc/CriteriaTypeCodes-CodeList.gc"),
     CriterionJurisdictionLevel ("/gc/CriterionJurisdictionLevel-CodeList.gc"),
     CustomizationID("/gc/CustomizationID-CodeList.gc"),
