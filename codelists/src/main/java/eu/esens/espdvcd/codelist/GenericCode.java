@@ -1,8 +1,9 @@
 package eu.esens.espdvcd.codelist;
 
 import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBiMap;
-import com.google.common.collect.Maps;
+import com.google.common.collect.ImmutableBiMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.bind.JAXBContext;
@@ -77,7 +78,8 @@ public class GenericCode {
     }
 
     private BiMap<String, String> createBiMap() {
-        BiMap<String, String> biMap = HashBiMap.create();
+        Map<String, String> countryMap = new LinkedHashMap<>();
+        
 
         SimpleCodeList sgc = GC.getValue().getSimpleCodeList();
         sgc.getRow().stream()
@@ -91,13 +93,14 @@ public class GenericCode {
                     String value = r.getValue().stream()
                             .filter(c -> ((Column) c.getColumnRef()).getId().equals("name"))
                             .findAny().get().getSimpleValue().getValue();
-                    biMap.put(id, value);
+                    countryMap.put(id, value);
                 });
+        BiMap<String, String> biMap = ImmutableBiMap.copyOf(countryMap);
         return biMap;
     }
 
     public final BiMap<String, String> getBiMap() {
-        return Maps.unmodifiableBiMap(clBiMap);
+        return clBiMap;
     }
 
 }
