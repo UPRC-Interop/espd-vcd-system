@@ -15,7 +15,20 @@ import java.util.Date;
 public class NaturalPerson {
 
     /**
-     * Natural person name
+     * Natural person Family Name
+     * <p>
+     * Name of the natural person.
+     * <p>
+     * Data type: Text<br>
+     * Cardinality: 1..1<br>
+     * InfReqID: tir92-055<br>
+     * BusReqID: tbr92-009<br>
+     * UBL syntax path: espd-cac:EconomicOperatorParty.Party.Person.FirstName<br>
+     */
+    private String firstName;
+    
+        /**
+     * Natural person firstName
      * <p>
      * Name of the natural person.
      * <p>
@@ -25,7 +38,7 @@ public class NaturalPerson {
      * BusReqID: tbr92-009<br>
      * UBL syntax path: espd-cac:EconomicOperatorParty.Party.Person.FamilyName<br>
      */
-    private String name;
+    private String familyName;
 
 
     /**
@@ -127,14 +140,25 @@ public class NaturalPerson {
      */
     private PostalAddress postalAddress;
     
-    public String getName() {
-        return name;
+    private ContactingDetails contactDetails;
+    
+    
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String name) {
+        this.firstName = name;
     }
 
+    public String getFamilyName() {
+        return familyName;
+    }
+
+    public void setFamilyName(String familyName) {
+        this.familyName = familyName;
+    }
+    
     public String getID() {
         return ID;
     }
@@ -190,4 +214,13 @@ public class NaturalPerson {
     public void setPostalAddress(PostalAddress postalAddress) {
         this.postalAddress = postalAddress;
     }
+
+    public ContactingDetails getContactDetails() {
+        return contactDetails;
+    }
+
+    public void setContactDetails(ContactingDetails contactDetails) {
+        this.contactDetails = contactDetails;
+    }
+    
 }
