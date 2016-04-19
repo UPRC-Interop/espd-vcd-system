@@ -78,7 +78,7 @@ public class GenericCode {
     }
 
     private BiMap<String, String> createBiMap() {
-        Map<String, String> countryMap = new LinkedHashMap<>();
+        Map<String, String> sourceMap = new LinkedHashMap<>();
         
 
         SimpleCodeList sgc = GC.getValue().getSimpleCodeList();
@@ -93,9 +93,9 @@ public class GenericCode {
                     String value = r.getValue().stream()
                             .filter(c -> ((Column) c.getColumnRef()).getId().equals("name"))
                             .findAny().get().getSimpleValue().getValue();
-                    countryMap.put(id, value);
+                    sourceMap.put(id, value);
                 });
-        BiMap<String, String> biMap = ImmutableBiMap.copyOf(countryMap);
+        BiMap<String, String> biMap = ImmutableBiMap.copyOf(sourceMap);
         return biMap;
     }
 
