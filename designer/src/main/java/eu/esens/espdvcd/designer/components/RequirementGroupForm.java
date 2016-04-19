@@ -3,7 +3,7 @@ package eu.esens.espdvcd.designer.components;
 import com.vaadin.event.LayoutEvents;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.*;
-import eu.esens.espdvcd.model.RequirementGroup;
+import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 
@@ -12,29 +12,21 @@ import com.vaadin.data.fieldgroup.BeanFieldGroup;
  */
 
 public class RequirementGroupForm extends VerticalLayout {
-    private Panel panel = new Panel();
-    private VerticalLayout panelContent = new VerticalLayout();
-    //private Label ID = new Label("RequirementGroupForm ID");
 
-    public RequirementGroupForm(RequirementGroup requirementGroup) {
-        setMargin(true);
+    public RequirementGroupForm(RequirementGroup requirementGroup, boolean includeResponses) {
+
+        setMargin(false);
+        setSpacing(true);
         setStyleName("requirementGroupForm-layout");
-        addComponent(panel);
-        panel.setContent(panelContent);
+        addStyleName("ignoreCaptionCellWidth");
+
+        setWidth("100%");
 
         //panelContent.addComponent(ID);
 
-        panelContent.setMargin(true);
-        panelContent.setStyleName("requirementGroupForm-panelContent");
-
-        this.addLayoutClickListener(this::onRequirementGroupClick);
-
         //ID.setCaption("Requirement Group ID");
         //ID.setValue(requirementGroup.getID());
-
-        panel.setStyleName("requirementGroupForm-panel");
-        panel.setCaption("Requirement group");
-        panel.setIcon(FontAwesome.CHEVRON_DOWN);
+        //panelContent.setSizeUndefined();
 
         // Bind the this forms fields
         final BeanFieldGroup<RequirementGroup> requirementGroupGroup = new BeanFieldGroup<>(RequirementGroup.class);
@@ -42,18 +34,16 @@ public class RequirementGroupForm extends VerticalLayout {
         requirementGroupGroup.setBuffered(false);
         requirementGroupGroup.bindMemberFields(this);
 
-        // Add a sub form
+        // Add a sub requirement forms
         for (Requirement requirement : requirementGroup.getRequirements()) {
-            RequirementForm requirementForm = new RequirementForm(requirement);
-            panelContent.addComponent(requirementForm);
+            RequirementForm requirementForm = new RequirementForm(requirement, includeResponses);
+            addComponent(requirementForm);
         }
-    }
 
-    void onRequirementGroupClick(LayoutEvents.LayoutClickEvent event) {
-        if (event.getClickedComponent() instanceof Panel && event.getClickedComponent() == panel) {
-            if (!event.isDoubleClick()) {
-                panelContent.setVisible(!panelContent.isVisible());
-            }
+        // Add a sub requirement group forms
+        for (RequirementGroup requirementGroupTemp : requirementGroup.getRequirementGroups()) {
+            RequirementGroupForm requirementGroupForm = new RequirementGroupForm(requirementGroupTemp, includeResponses);
+            addComponent(requirementGroupForm);
         }
     }
 }

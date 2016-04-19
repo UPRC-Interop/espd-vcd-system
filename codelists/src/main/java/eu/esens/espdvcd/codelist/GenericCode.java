@@ -1,8 +1,9 @@
 package eu.esens.espdvcd.codelist;
 
 import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBiMap;
-import com.google.common.collect.Maps;
+import com.google.common.collect.ImmutableBiMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.bind.JAXBContext;
@@ -54,13 +55,13 @@ public class GenericCode {
     protected final String getRowSimpleValueWithCode(String id, String IdValue, String dataId) {
 
         SimpleCodeList sgc = GC.getValue().getSimpleCodeList();
-        return sgc.getRow().parallelStream()
-                .filter(r -> r.getValue().parallelStream() //Search in Rows
+        return sgc.getRow().stream()
+                .filter(r -> r.getValue().stream() //Search in Rows
                         .filter(c -> (c.getColumnRef() instanceof Column // For Columns
                                 && ((Column) c.getColumnRef()).getId().equals(id)) // With Id "code"
                                 && c.getSimpleValue().getValue().equals(IdValue)) // And Short name GR
                         .findAny().isPresent()).findAny().orElseThrow(IllegalArgumentException::new)
-                .getValue().parallelStream()
+                .getValue().stream()
                 .filter(c -> (c.getColumnRef() instanceof Column // For Columns
                         && ((Column) c.getColumnRef()).getId().equals(dataId)))
                 .findAny().orElseThrow(IllegalArgumentException::new).getSimpleValue().getValue();
@@ -77,11 +78,12 @@ public class GenericCode {
     }
 
     private BiMap<String, String> createBiMap() {
-        BiMap<String, String> biMap = HashBiMap.create();
+        Map<String, String> countryMap = new LinkedHashMap<>();
+        
 
         SimpleCodeList sgc = GC.getValue().getSimpleCodeList();
         sgc.getRow().stream()
-                .filter(r -> r.getValue().parallelStream() //Search in Rows
+                .filter(r -> r.getValue().stream() //Search in Rows
                         .allMatch(c -> c.getColumnRef() instanceof Column)) // For Columns
                 .forEach((Row r) -> {
                     String id = r.getValue().stream()
@@ -91,13 +93,14 @@ public class GenericCode {
                     String value = r.getValue().stream()
                             .filter(c -> ((Column) c.getColumnRef()).getId().equals("name"))
                             .findAny().get().getSimpleValue().getValue();
-                    biMap.put(id, value);
+                    countryMap.put(id, value);
                 });
+        BiMap<String, String> biMap = ImmutableBiMap.copyOf(countryMap);
         return biMap;
     }
 
     public final BiMap<String, String> getBiMap() {
-        return Maps.unmodifiableBiMap(clBiMap);
+        return clBiMap;
     }
 
 }

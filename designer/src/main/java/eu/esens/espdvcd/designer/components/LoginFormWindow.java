@@ -67,14 +67,19 @@ public class LoginFormWindow extends Window {
     }
 
     public void onLogin(ClickEvent clickEvent) {
-        if (UserManager.login(usernameTextField.getValue(), passwordPasswordField.getValue()) != null) {
+        String username = usernameTextField.getValue();
+        String password = passwordPasswordField.getValue();
+        usernameTextField.clear();
+        passwordPasswordField.clear();
+
+        if (UserManager.login(username, password) != null) {
             Notification notification = new Notification("Login successful!");
             notification.setPosition(Position.TOP_CENTER);
             notification.setDelayMsec(1000);
             notification.show(Page.getCurrent());
 
             UI.getCurrent().removeWindow(this);
-            navigator.navigateTo(Designer.VIEW_DASHBOARD);
+            navigator.navigateTo(Designer.VIEW_ESPD_TEMPLATE);
         } else {
             Notification notification = new Notification("Login failed, please try again!");
             notification.setPosition(Position.TOP_CENTER);

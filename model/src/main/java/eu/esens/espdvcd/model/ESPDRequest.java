@@ -29,6 +29,7 @@ public interface ESPDRequest extends Serializable {
     public List<SelectableCriterion> getSelectionCriteriaList();
     public List<SelectableCriterion> getExclusionCriteriaList();
     public List<SelectableCriterion> getEORelatedCriteriaList();
+    public List<SelectableCriterion> getReductionOfCandidatesCriteriaList();
     
     public void setCriterionList(List<SelectableCriterion> criterionList);        
   

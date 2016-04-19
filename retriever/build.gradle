@@ -1,4 +1,5 @@
 dependencies {
+    compile project(':model')
 }
 
 task copyTask(type: Copy) {

@@ -29,11 +29,12 @@ public class Master extends VerticalLayout implements View {
     protected VerticalLayout navigatorContent = new VerticalLayout();
     protected Panel mainPanel = new Panel();
     protected VerticalLayout mainContent = new VerticalLayout();
-    protected Panel detailsPanel = new Panel();
-    protected VerticalLayout detailsContent = new VerticalLayout();
+    //protected Panel detailsPanel = new Panel();
+    //protected VerticalLayout detailsContent = new VerticalLayout();
 
     protected Image topheaderEsensImage = new Image("", new ThemeResource("img/logo_esens.png"));
-    protected Label topheaderWelcomeText = new Label("Hello Alice");
+    protected Label topheaderWelcomeText = new Label("ESPD/VCD Service");
+    protected Label mainContentTitleText = new Label("Title Text");
 
     public Master(Navigator navigator, boolean forceAuthentication) {
         this.navigator = navigator;
@@ -75,9 +76,10 @@ public class Master extends VerticalLayout implements View {
         contentGrid.setWidth("100%");
         contentGrid.setHeight("100%");
         contentGrid.setStyleName("contentGrid");
+
         contentGrid.setColumnExpandRatio(0, 0.16f);
-        contentGrid.setColumnExpandRatio(1, 0.68f);
-        contentGrid.setColumnExpandRatio(2, 0.16f);
+        contentGrid.setColumnExpandRatio(1, 0.82f);
+        //contentGrid.setColumnExpandRatio(2, 0.22f);
 
         navigatorContent.setStyleName("navigatorContent");
         navigatorContent.setHeight("100%");
@@ -105,19 +107,22 @@ public class Master extends VerticalLayout implements View {
         mainPanel.setContent(mainContent);
         mainPanel.getContent().setSizeUndefined();
 
-        detailsPanel.setStyleName("detailsPanel");
-        detailsPanel.setSizeFull();
-        detailsPanel.setContent(detailsContent);
-        detailsPanel.getContent().setSizeUndefined();
+        //detailsPanel.setStyleName("detailsPanel");
+        //detailsPanel.setSizeFull();
+        //detailsPanel.setContent(detailsContent);
+        //detailsPanel.getContent().setSizeUndefined();
 
         //detailsContent.setHeight("100%");
-        detailsContent.setStyleName("master-detailsContent");
-        detailsContent.setWidth("100%");
+        //detailsContent.setStyleName("master-detailsContent");
+        //detailsContent.setWidth("100%");
 
         contentGrid.addComponent(navigatorPanel, 0, 0);
         contentGrid.addComponent(mainPanel, 1, 0);
-        contentGrid.addComponent(detailsPanel, 2, 0);
+        //contentGrid.addComponent(detailsPanel, 2, 0);
         content.addComponent(contentGrid);
+
+        //mainContent.addComponent(mainContentTitleText);
+        //mainContentTitleText.setStyleName("mainContentTitleText");
 
         {
             VerticalLayout navigatorHeaderLayout = new VerticalLayout();
@@ -138,36 +143,22 @@ public class Master extends VerticalLayout implements View {
             navigatorContent.addComponent(navigatorHeaderLayout);
         }
         {
-            Button button = new Button("Start", FontAwesome.CIRCLE);
+            Button button = new Button("ESPD Template", FontAwesome.FILE_O);
             button.setStyleName("navigatorButtonDark");
             button.setWidth("100%");
             button.setHeight(60, Unit.PIXELS);
             navigatorContent.addComponent(button);
 
-            button.addClickListener(this::onStart);
+            button.addClickListener(this::onNavigatorEspdTemplate);
         }
         {
-            Button button = new Button("Notifications", FontAwesome.THUMB_TACK);
-            button.setStyleName("navigatorButtonDark");
-            button.setWidth("100%");
-            button.setHeight(60, Unit.PIXELS);
-            navigatorContent.addComponent(button);
-        }
-        {
-            Button button = new Button("ESPD Templates", FontAwesome.FILE_O);
+            Button button = new Button("ESPD", FontAwesome.FILE);
             button.setStyleName("navigatorButtonDark");
             button.setWidth("100%");
             button.setHeight(60, Unit.PIXELS);
             navigatorContent.addComponent(button);
 
-            button.addClickListener(this::onEspdTemplates);
-        }
-        {
-            Button button = new Button("ESPDs", FontAwesome.FILE);
-            button.setStyleName("navigatorButtonDark");
-            button.setWidth("100%");
-            button.setHeight(60, Unit.PIXELS);
-            navigatorContent.addComponent(button);
+            button.addClickListener(this::onNavigatorEspd);
         }
         {
             Button button = new Button("Sandbox", FontAwesome.PLAY);
@@ -175,34 +166,33 @@ public class Master extends VerticalLayout implements View {
             button.setWidth("100%");
             button.setHeight(60, Unit.PIXELS);
             navigatorContent.addComponent(button);
-            button.addClickListener(this::onSandbox);
+            button.addClickListener(this::onNavigatorSandbox);
         }
         {
-            Button button = new Button("My Profile", FontAwesome.USER);
-            button.setStyleName("navigatorButtonLight");
+            Button button = new Button("Log-out", FontAwesome.ARROW_LEFT);
+            button.setStyleName("navigatorButtonDark");
             button.setWidth("100%");
             button.setHeight(60, Unit.PIXELS);
             navigatorContent.addComponent(button);
-        }
-        {
-            Button button = new Button("Pre-fill Settings", FontAwesome.CHECK_SQUARE_O);
-            button.setStyleName("navigatorButtonLight");
-            button.setWidth("100%");
-            button.setHeight(60, Unit.PIXELS);
-            navigatorContent.addComponent(button);
-        }
-        {
-            Button button = new Button("Dashboard Settings", FontAwesome.GEAR);
-            button.setStyleName("navigatorButtonLight");
-            button.setWidth("100%");
-            button.setHeight(60, Unit.PIXELS);
-            navigatorContent.addComponent(button);
+            button.addClickListener(this::onNavigatorLogout);
         }
     }
 
     public Navigator getNavigator() {
         return navigator;
     }
+
+    public Panel getMainPanel() {
+        return mainPanel;
+    }
+
+    public Panel getNavigatorPanel() {
+        return navigatorPanel;
+    }
+
+/*    public Panel getDetailsPanel() {
+        return detailsPanel;
+    }*/
 
     public VerticalLayout getNavigatorContent() {
         return navigatorContent;
@@ -212,9 +202,9 @@ public class Master extends VerticalLayout implements View {
         return mainContent;
     }
 
-    public VerticalLayout getDetailsContent() {
+/*    public VerticalLayout getDetailsContent() {
         return detailsContent;
-    }
+    }*/
 
     @Override
     public void enter(ViewChangeListener.ViewChangeEvent event) {
@@ -223,15 +213,20 @@ public class Master extends VerticalLayout implements View {
         }
     }
 
-    public void onStart(Button.ClickEvent clickEvent) {
-        getNavigator().navigateTo(Designer.VIEW_DASHBOARD);
+    public void onNavigatorEspdTemplate(Button.ClickEvent clickEvent) {
+        getNavigator().navigateTo(Designer.VIEW_ESPD_TEMPLATE);
     }
 
-    public void onEspdTemplates(Button.ClickEvent clickEvent) {
-        getNavigator().navigateTo(Designer.VIEW_ESPD_TEMPLATES);
+    public void onNavigatorEspd(Button.ClickEvent clickEvent) {
+        getNavigator().navigateTo(Designer.VIEW_ESPD);
     }
 
-    public void onSandbox(Button.ClickEvent clickEvent) {
+    public void onNavigatorSandbox(Button.ClickEvent clickEvent) {
         getNavigator().navigateTo(Designer.VIEW_SANDBOX);
+    }
+
+    public void onNavigatorLogout(Button.ClickEvent clickEvent) {
+        UserManager.logout();
+        getNavigator().navigateTo(Designer.VIEW_LOGIN);
     }
 }

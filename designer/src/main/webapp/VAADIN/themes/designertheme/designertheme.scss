@@ -14,6 +14,11 @@
     margin: 5px;
   }*/
 
+  .v-label
+  {
+     white-space: normal;
+  }
+
   .v-slot {
 
   }
@@ -21,8 +26,8 @@
   .v-margin-top {
     padding-top: 16px;
   }
-  .test {
-    background-color: yellowgreen;
+  .criterionForm-panelContent-selected{
+    background-color: #E9E9E9;
   }
   .v-margin-right {
     padding-right: 15px;
@@ -76,7 +81,7 @@
   }
 
   .v-label-topheaderWelcomeText {
-    color: #f4c583;
+    color: #aaa;
     padding: 10px;
     font-size: 28px;
     font-weight: bold;
@@ -121,7 +126,7 @@
     background-image: none;
     box-shadow: inset 0px 0px 0px 0px #000;
     border: 0px solid #dcdcdc;
-    font-size: 18px;
+    font-size: 16px;
     color: #e3e3e3;
     text-align: left;
   }
@@ -130,7 +135,7 @@
     @extend .v-button-navigatorButtonDark;
     background-color: #5c5c5c;
     color: #b3b3b3;
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .navigatorHeaderTitle {
@@ -150,19 +155,19 @@
   
   }
 
-  .dashboard-gridLayout {
+  .espdTemplate-gridLayout {
     width: 100%;
   }
 
-  .dashboard-columns {
+  .espdTemplate-columns {
     //width: 100%;
   }
 
-  .dashboard-newEspdTemplateButton {
+  .espdTemplate-newEspdTemplateButton {
     background-image: none;
-    background-color: #569AC4;
+    background-color: #58A8DA;
     box-shadow: inset 0px 0px 0px 0px #000;
-    border: 0px solid #569AC4;
+    border: 0px solid #58A8DA;
     font-size: 28px;
     color: #e3e3e3;
   }
@@ -173,14 +178,15 @@
 
   .v-panel-caption {
     box-shadow: inset 0px 0px 0px 0px #000;
-    border: 0px solid #569AC4;
+    border: 0px solid #58A8DA;
     border-radius: 0px;
-    background: #569AC4;
+    background: #58A8DA;
     color: #e3e3e3;
     font-size: 18px;
     font-weight: bold;
     font-variant: small-caps;
   }
+//for side panel//
 
   //.v-panel-caption-requirementGroupForm-panel {
   //  @extend .v-panel-caption;
@@ -212,6 +218,12 @@
   tbody > .v-formlayout-firstrow > .v-formlayout-errorcell,
   tbody > .v-formlayout-firstrow > .v-formlayout-contentcell {
     padding-top: 0px !important;
+  }
+
+  tbody > .v-formlayout-lastrow > .v-formlayout-captioncell,
+  tbody > .v-formlayout-lastrow > .v-formlayout-errorcell,
+  tbody > .v-formlayout-lastrow > .v-formlayout-contentcell {
+    padding-bottom: 0px !important;
   }
 
   .espdRequestForm-formButton {
@@ -248,6 +260,17 @@
 
   }
 
+
+  .espdRequestForm-check {
+      //position: absolute;
+      clip: rect(0, 0, 0, 0);
+      left: 0.2em;
+      top: 0.2em;
+      z-index: 0;
+      margin: 0;
+
+  }
+
   .espdRequestForm-printFullModelData {
     @extend .espdRequestForm-formButton;
     background-color: #D8A42F;
@@ -271,12 +294,38 @@
   .criterionForm-panelContent,
   .legislationReferenceForm-panel,
   .legislationReferenceForm-layout,
+  .requirementForm-layout,
+  .requirementGroupForm-layout,
   .requirementGroupForm-panel,
   .requirementGroupForm-panelContent,
+  .requirementForm-panelContent,
 
   .requirementForm-panel {
     width: 100%;
   }
+
+  .requirementForm-layout{
+    padding-left: 1px;
+    padding-right:1px;
+    margin-left:0px;
+  }
+  .legislationReferenceForm-layout,
+  .requirementGroupForm-layout{
+    padding-left:1px;
+    padding-right:1px;
+  }
+  .requirementForm-panelContent{
+    font-size:14px;
+  }
+
+  .v-panel-caption-requirementFormPanel{
+    font-size:15px;
+  }
+
+  .v-caption-requirementFormLabel{
+    font-size: 13px;
+  }
+
 
   .v-slot-detailsTitle {
     background-color: #569AC4;
@@ -288,5 +337,152 @@
     font-weight: bold;
     font-variant: small-caps;
     color: #e3e3e3;
+  }
+
+  .v-slot-EspdTemplate-panelLeft,
+  .v-slot-EspdTemplate-panelRight {
+    width: 50%;
+  }
+
+  .v-verticallayout-panelLeftLayout,
+  .v-verticallayout-panelRightLayout {
+    padding: 12px;
+  }
+
+  .v-button-espdTemplate-panelButton {
+    width: 100%;
+    margin-top: 16px;
+  }
+
+  .v-upload {
+    width: 100%;
+  }
+
+  .mainContentTitleText {
+    font-size: 28px;
+    margin: 6px;
+    font-weight: 400;
+    color: #808080;
+  }
+  .textCaption{
+    normal: pre;
+  }
+  .v-caption-textFieldCaptionText {
+    color: #58A8DA;
+    white-space: normal;
+  }
+  .progressBarLayout {
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    border-bottom-color: #D2D2D2;
+    padding-bottom: 11px;
+  }
+
+  .v-slot-progressBarLabel {
+    color: #DDD;
+    background-color: #444;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .v-slot-progressBarLabelHighlighted {
+    color: #DDD;
+    background-color: #65A9DA;
+  }
+
+  .v-label-progressBarLabel {
+    padding: 12px;
+  }
+
+  .v-caption-textFieldCaptionText-v-caption-hasdescription{
+   word-wrap: normal;
+  }
+  .v-verticallayout-CriterionGroupForm {
+    width: 100%;
+  }
+
+  .v-panel-CriterionGroupFormPanel {
+    width: 100%;
+  }
+
+  .v-verticallayout-CriterionGroupFormPanelContent {
+    width: 100%;
+  }
+
+  .v-slot-pageCaptionLabel {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 26px;
+  }
+
+  .v-verticallayout-pageLayout {
+    width: 100%;
+  }
+
+  .v-panel-EODetailsForm,
+  .v-verticallayout-EODetailsFormPanelContent {
+    width: 100%;
+  }
+
+  .v-panel-PostalAddressForm,
+  .v-verticallayout-PostalAddressFormPanelContent {
+    width: 100%;
+  }
+
+  .v-panel-NaturalPersonForm,
+  .v-verticallayout-NaturalPersonFormPanelContent {
+    width: 100%;
+  }
+
+  .v-verticallayout-requirementGroupForm-layout,
+  .v-verticallayout-requirementForm-layout {
+    width: 100%;
+  }
+
+  .v-panel-ContactingDetailsForm,
+  .v-verticallayout-ContactingDetailsFormPanelContent {
+    width: 100%;
+  }
+
+  .v-select-optiongroup-horizontal .v-select-option {
+      display: inline-block;
+  }
+
+  /* Avoid wrapping if the layout is too tight */
+  .v-select-optiongroup-horizontal {
+      white-space: nowrap;
+  }
+
+  /* Some extra spacing is needed */
+  .v-select-optiongroup-horizontal
+    .v-select-option.v-radiobutton {
+      padding-right: 10px;
+  }
+
+  .v-formlayout-ResponseForm > table > tbody > .v-formlayout-row > .v-formlayout-captioncell {
+    width: 200px;
+  }
+
+  .v-formlayout-ResponseForm > table > tbody > .v-formlayout-row > .v-formlayout-captioncell > div > span {
+    white-space: normal;
+  }
+
+  .v-label-progressBarLabel {
+    text-align: center;
+  }
+
+  .master-mainContent > .v-slot > .v-gridlayout > .v-gridlayout-slot {
+    overflow: scroll;
+  }
+
+  .v-verticallayout-master-mainContent,
+  .v-verticallayout-master-mainContent > .v-slot,
+  .v-verticallayout-master-mainContent > .v-slot > .v-gridlayout,
+  .v-verticallayout-master-mainContent > .v-slot > .v-gridlayout > .v-gridlayout-slot {
+    height: 100% !important;
+  }
+
+  .v-verticallayout-master-mainContent {
+    overflow: auto;
   }
 }

@@ -1,166 +1,179 @@
 package eu.esens.espdvcd.designer.components;
 
-import com.vaadin.server.FileDownloader;
-import com.vaadin.server.FontAwesome;
-import com.vaadin.server.StreamResource;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.data.Property;
+import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.VerticalLayout;
-import eu.esens.espdvcd.builder.ESPDBuilder;
+import eu.esens.espdvcd.codelist.Codelists;
 import eu.esens.espdvcd.designer.views.Master;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.SelectableCriterion;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
+import org.hibernate.criterion.Criterion;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
- * Created by ixuz on 3/7/16.
+ * Created by ixuz on 4/8/16.
  */
-public class ESPDRequestForm extends VerticalLayout {
+public class ESPDRequestForm extends ESPDForm {
 
-    private Master view;
-    private ESPDRequest espdRequest = null;
-    private VerticalLayout page1 = new VerticalLayout();
-    private VerticalLayout page2 = new VerticalLayout();
-    private VerticalLayout page3 = new VerticalLayout();
-    private List<VerticalLayout> pages = new ArrayList<>();
-    private HorizontalLayout buttonList = new HorizontalLayout();
-    private Button previous = new Button("Previous", FontAwesome.ARROW_LEFT);
-    private Button cancel = new Button("Cancel", FontAwesome.REMOVE);
-    private Button next = new Button("Next", FontAwesome.ARROW_RIGHT);
-    private Button exportConsole = new Button("Export to Console", FontAwesome.DOWNLOAD);
-    private Button exportFile = new Button("Export to File", FontAwesome.DOWNLOAD);
-    private int currentPageIndex = 0;
+    private CheckBox selectAllExclusionCriteriaCheckbox = new CheckBox("Select all exclusion criteria");
+    private CheckBox selectAllSelectionCriteriaCheckbox = new CheckBox("Select all selection criteria");
+    private CheckBox selectAllEconomicOperatorCriteriaCheckbox = new CheckBox("Select all economic operator criteria");
+    private CheckBox selectAllReductionCriteriaCheckbox = new CheckBox("Select all reduction of candidates criteria");
+    private List<CriterionGroupForm> exclusionCriterionGroupForms = new ArrayList<>();
+    private List<CriterionGroupForm> selectionCriterionGroupForms = new ArrayList<>();
+    private List<CriterionGroupForm> economicOperatorCriterionGroupForms = new ArrayList<>();
+    private List<CriterionGroupForm> reductionCriterionGroupForms = new ArrayList<>();
 
     public ESPDRequestForm(Master view, ESPDRequest espdRequest) {
-        this.view = view;
-        this.espdRequest = espdRequest;
+        super(view, espdRequest, "espd_template.xml");
 
-        setWidth("100%");
-        setStyleName("espdRequestForm-layout");
-
-        pages.add(page1);
-        pages.add(page2);
-        pages.add(page3);
-        for (VerticalLayout page : pages) { addComponent(page); }
-        addComponent(buttonList);
-        buttonList.addComponent(previous);
-        buttonList.addComponent(cancel);
-        buttonList.addComponent(next);
-        buttonList.addComponent(exportConsole);
-        buttonList.addComponent(exportFile);
-
-        previous.addClickListener(this::onPrevious);
-        cancel.addClickListener(this::onCancel);
-        next.addClickListener(this::onNext);
-        exportConsole.addClickListener(this::onExportConsole);
-
-        previous.setStyleName("espdRequestForm-previous");
-        cancel.setStyleName("espdRequestForm-cancel");
-        next.setStyleName("espdRequestForm-next");
-        exportConsole.setStyleName("espdRequestForm-finish");
-        exportFile.setStyleName("espdRequestForm-finish");
-
-        buttonList.setMargin(true);
-        buttonList.setSpacing(true);
-
+        // Page 1 - Procedure
+        VerticalLayout page1 = newPage("Information concerning the procurement procedure", "Procedure");
         page1.addComponent(new CADetailsForm(espdRequest));
 
-        for (SelectableCriterion criterion : espdRequest.getExclusionCriteriaList()) {
-            page2.addComponent(new CriterionForm(view, criterion));
-        }
-        for (SelectableCriterion criterion : espdRequest.getSelectionCriteriaList()) {
-            page3.addComponent(new CriterionForm(view, criterion));
-        }
 
-        // Hook the exportFile button up with a downloadable resource
-        StreamResource downloadableResource = new StreamResource(new StreamResource.StreamSource() {
-            @Override
-            public InputStream getStream() {
-                ESPDBuilder espdBuilder = new ESPDBuilder();
-                String xml = espdBuilder.createXMLasString(espdRequest);
-                byte[] xmlBytes = xml.getBytes();
-                return new ByteArrayInputStream(xmlBytes);
+        // Page 2 - Exclusion
+        VerticalLayout page2 = newPage("Exclusion grounds criteria", "Exclusion");
 
+        VerticalLayout exclusionActionLayout = new VerticalLayout();
+        exclusionActionLayout.setMargin(true);
+        exclusionActionLayout.addComponent(selectAllExclusionCriteriaCheckbox);
+        selectAllExclusionCriteriaCheckbox.setValue(true);
+        page2.addComponent(exclusionActionLayout);
+
+        selectAllExclusionCriteriaCheckbox.addValueChangeListener(this::onSelectAllExclusionCriteria);
+        selectAllExclusionCriteriaCheckbox.setStyleName("espdRequestForm-checkbox");
+
+        criterionGroupForm(view, espdRequest.getExclusionCriteriaList(),exclusionCriterionGroupForms,page2);
+
+        // Page 3 - Selection
+        VerticalLayout page3 = newPage("Selection criteria", "Selection");
+
+        VerticalLayout selectionActionLayout = new VerticalLayout();
+        selectionActionLayout.setMargin(true);
+        selectionActionLayout.addComponent(selectAllSelectionCriteriaCheckbox);
+        selectAllSelectionCriteriaCheckbox.setValue(true);
+        page3.addComponent(selectionActionLayout);
+
+        selectAllSelectionCriteriaCheckbox.addValueChangeListener(this::onSelectAllSelectionCriteria);
+        selectAllSelectionCriteriaCheckbox.setStyleName("espdRequestForm-checkbox");
+
+        criterionGroupForm(view, espdRequest.getSelectionCriteriaList(),selectionCriterionGroupForms,page3);
+
+        // Page 4 - Reduction of candidates
+        VerticalLayout page4 = newPage("Reduction of candidates", "Candidates");
+
+        VerticalLayout reductionActionLayout = new VerticalLayout();
+        reductionActionLayout.setMargin(true);
+        reductionActionLayout.addComponent(selectAllReductionCriteriaCheckbox);
+        selectAllReductionCriteriaCheckbox.setValue(true);
+        page4.addComponent(reductionActionLayout);
+
+        selectAllReductionCriteriaCheckbox.addValueChangeListener(this::onSelectAllReductionCriteria);
+        selectAllReductionCriteriaCheckbox.setStyleName("espdRequestForm-checkbox");
+
+
+        criterionGroupForm(view, espdRequest.getReductionOfCandidatesCriteriaList(),reductionCriterionGroupForms,page4);
+
+        // Page 5 - Data on economic operator
+        VerticalLayout page5 = newPage("Data on economic operator", "Economic operator");
+
+        VerticalLayout economicOperatorActionLayout = new VerticalLayout();
+        economicOperatorActionLayout.setMargin(true);
+        economicOperatorActionLayout.addComponent(selectAllEconomicOperatorCriteriaCheckbox);
+        selectAllEconomicOperatorCriteriaCheckbox.setValue(true);
+        page5.addComponent(economicOperatorActionLayout);
+
+        selectAllEconomicOperatorCriteriaCheckbox.addValueChangeListener(this::onSelectAllEconomicOperatorCriteria);
+        selectAllEconomicOperatorCriteriaCheckbox.setStyleName("espdRequestForm-checkbox");
+
+        criterionGroupForm(view, espdRequest.getEORelatedCriteriaList(),economicOperatorCriterionGroupForms,page5);
+
+        // Page 6 - Finish
+        VerticalLayout page6 = newPage("Finish", "Finish");
+    }
+
+
+
+    public void criterionGroupForm(Master view, List<SelectableCriterion> criterionList, List<CriterionGroupForm> criterionGroupForms, VerticalLayout page)
+    {
+        HashMap<String,List<CriterionForm>> criterionHash = new HashMap<>();
+        for (SelectableCriterion criterion : criterionList) {
+
+            if (!criterionHash.containsKey(criterion.getTypeCode())) {
+                criterionHash.put(criterion.getTypeCode(), new ArrayList<CriterionForm>());
             }
-        }, "espd_template.xml");
-        FileDownloader fileDownloader = new FileDownloader(downloadableResource);
-        fileDownloader.extend(exportFile);
 
-        showPage(currentPageIndex);
-    }
-
-    private void showPage(int pageIndex) {
-        for (int i=0; i<pages.size(); i++) {
-            VerticalLayout page = pages.get(i);
-            if (i == pageIndex) {
-                page.setVisible(true);
-            } else {
-                page.setVisible(false);
-            }
+            CriterionForm criterionForm = new CriterionForm(view, criterion, false);
+            criterionHash.get(criterion.getTypeCode()).add(criterionForm);
         }
-        updateButtonList();
-    }
+        for (Map.Entry<String, List<CriterionForm>> entry : criterionHash.entrySet()) {
+            String key = entry.getKey();
+            List<CriterionForm> criterionForms = entry.getValue();
 
-    private void updateButtonList() {
-        next.setEnabled((currentPageIndex+1 <= pages.size()-1));
-        next.setVisible((currentPageIndex + 1 <= pages.size() - 1));
-        previous.setEnabled((currentPageIndex-1 >= 0));
-        previous.setVisible((currentPageIndex-1 >= 0));
-        exportConsole.setEnabled(!(currentPageIndex + 1 <= pages.size() - 1));
-        exportConsole.setVisible(!(currentPageIndex + 1 <= pages.size() - 1));
-        exportFile.setEnabled(!(currentPageIndex + 1 <= pages.size() - 1));
-        exportFile.setVisible(!(currentPageIndex + 1 <= pages.size() - 1));
-    }
+            String fullTypeCodeName = Codelists.CriteriaType.getValueForId(key);
 
-    /**
-     * Displays the previous page of the form.
-     * If there is no previous page, this method will have no effect.
-     *
-     * @param event Vaadin7 Button click event
-     * @see com.vaadin.ui.Button.ClickEvent
-     */
-    private void onPrevious(Button.ClickEvent event) {
-        currentPageIndex = (currentPageIndex-1 >= 0 ? currentPageIndex-1 : currentPageIndex);
-        showPage(currentPageIndex);
+            if (fullTypeCodeName == null) {
+                // Fallback to display the type code instead of real name
+                fullTypeCodeName = key;
+            }
+
+            CriterionGroupForm criterionGroupForm = new CriterionGroupForm(fullTypeCodeName, criterionForms);
+            criterionGroupForms.add(criterionGroupForm);
+            page.addComponent(new CriterionGroupForm(fullTypeCodeName, criterionForms));
+        }
     }
 
     /**
-     * When the user have clicked the Cancel button, this method is invoked.
-     * TODO: Implement logic for restarting/leaving the form page.
+     * Selects or deselects all exclusion criteria depending on
+     * the boolean value of the selectAllExclusionCriteriaCheckbox checkbox
      *
-     * @param event Vaadin7 Button click event
-     * @see com.vaadin.ui.Button.ClickEvent
+     * @param event Vaadin7 value change event
      */
-    private void onCancel(Button.ClickEvent event) {
-        System.out.println("Cancel process");
+    public void onSelectAllExclusionCriteria(Property.ValueChangeEvent event) {
+        for (CriterionGroupForm criterionGroupForm : exclusionCriterionGroupForms) {
+            criterionGroupForm.setSelectedOnAllCriteria(selectAllExclusionCriteriaCheckbox.getValue());
+        }
     }
 
     /**
-     * Displays the next page of the form.
-     * If there is no next page, this method will have no effect.
+     * Selects or deselects all selection criteria depending on
+     * the boolean value of the selectAllSelectionCriteria checkbox
      *
-     * @param event Vaadin7 Button click event
-     * @see com.vaadin.ui.Button.ClickEvent
+     * @param event Vaadin7 value change event
      */
-    private void onNext(Button.ClickEvent event) {
-        currentPageIndex = (currentPageIndex+1 < pages.size() ? currentPageIndex+1 : currentPageIndex);
-        showPage(currentPageIndex);
+    public void onSelectAllSelectionCriteria(Property.ValueChangeEvent event) {
+        for (CriterionGroupForm criterionGroupForm : selectionCriterionGroupForms) {
+            criterionGroupForm.setSelectedOnAllCriteria(selectAllSelectionCriteriaCheckbox.getValue());
+        }
     }
 
     /**
-     * When the user have clicked the Export button, this method is invoked.
-     * Exports the espd request xml to the system console
+     * Selects or deselects all economic operator criteria depending on
+     * the boolean value of the selectAllEconomicOperatorCriteria checkbox
      *
-     * @param event Vaadin7 Button click event
-     * @see com.vaadin.ui.Button.ClickEvent
+     * @param event Vaadin7 value change event
      */
-    private void onExportConsole(Button.ClickEvent event) {
-        // Display espd request xml button
-        ESPDBuilder espdBuilder = new ESPDBuilder();
-        String xml = espdBuilder.createXMLasString(espdRequest);
-        System.out.println("Xml: " + xml);
+    public void onSelectAllEconomicOperatorCriteria(Property.ValueChangeEvent event) {
+        for (CriterionGroupForm criterionGroupForm : economicOperatorCriterionGroupForms) {
+            criterionGroupForm.setSelectedOnAllCriteria(selectAllEconomicOperatorCriteriaCheckbox.getValue());
+        }
+    }
+
+    /**
+     * Selects or deselects all reduction criteria depending on
+     * the boolean value of the selectAllReductionCriteria checkbox
+     *
+     * @param event Vaadin7 value change event
+     */
+    public void onSelectAllReductionCriteria(Property.ValueChangeEvent event) {
+        for (CriterionGroupForm criterionGroupForm : reductionCriterionGroupForms) {
+            criterionGroupForm.setSelectedOnAllCriteria(selectAllReductionCriteriaCheckbox.getValue());
+        }
     }
 }
+
