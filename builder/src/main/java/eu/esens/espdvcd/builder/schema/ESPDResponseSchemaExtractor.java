@@ -181,25 +181,31 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
             pt.setBirthplaceName(new BirthplaceNameType());
             pt.getBirthplaceName().setValue(np.getBirthPlace());
             
-            pt.setContact(new ContactType());
-            pt.getContact().setTelephone(new TelephoneType());
-            pt.getContact().getTelephone().setValue(np.getContactDetails().getTelephoneNumber());
+            if (np.getContactDetails() != null) {
+                pt.setContact(new ContactType());
+                pt.getContact().setTelephone(new TelephoneType());
+                pt.getContact().getTelephone().setValue(np.getContactDetails().getTelephoneNumber());
             
-            pt.getContact().setElectronicMail(new ElectronicMailType());
-            pt.getContact().getElectronicMail().setValue(np.getContactDetails().getEmailAddress());
+              pt.getContact().setElectronicMail(new ElectronicMailType());
+              pt.getContact().getElectronicMail().setValue(np.getContactDetails().getEmailAddress());
+            }
+            
+            if (np.getPostalAddress() != null) {
 
-            pt.setResidenceAddress(new AddressType());
-            pt.getResidenceAddress().setPostbox(new PostboxType());
-            pt.getResidenceAddress().getPostbox().setValue(np.getPostalAddress().getPostCode());
-            
-            pt.getResidenceAddress().setStreetName(new StreetNameType());
-            pt.getResidenceAddress().getStreetName().setValue(np.getPostalAddress().getAddressLine1());
-            
-            pt.getResidenceAddress().setCityName(new CityNameType());
-            pt.getResidenceAddress().getCityName().setValue(np.getPostalAddress().getCity());
+                pt.setResidenceAddress(new AddressType());
+                pt.getResidenceAddress().setPostbox(new PostboxType());
+                pt.getResidenceAddress().getPostbox().setValue(np.getPostalAddress().getPostCode());
 
-            pt.getResidenceAddress().setCountry(new CountryType());
-            pt.getResidenceAddress().getCountry().setIdentificationCode(createISOCountryIdCodeType(np.getPostalAddress().getCountryCode()));
+                pt.getResidenceAddress().setStreetName(new StreetNameType());
+                pt.getResidenceAddress().getStreetName().setValue(np.getPostalAddress().getAddressLine1());
+
+                pt.getResidenceAddress().setCityName(new CityNameType());
+                pt.getResidenceAddress().getCityName().setValue(np.getPostalAddress().getCity());
+
+                pt.getResidenceAddress().setCountry(new CountryType());
+                pt.getResidenceAddress().getCountry().setIdentificationCode(createISOCountryIdCodeType(np.getPostalAddress().getCountryCode()));
+            }
+            
             apt.getPerson().add(pt);
             npt.getPowerOfAttorney().setAgentParty(apt);
             
