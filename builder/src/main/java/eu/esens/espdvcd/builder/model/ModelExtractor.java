@@ -49,17 +49,24 @@ public interface ModelExtractor {
             cd.setProcurementProcedureFileReferenceNo(contractFolderId.getValue());
         }
         if (!additionalDocumentReferenceList.isEmpty()) {
-            DocumentReferenceType ref = additionalDocumentReferenceList.get(0);
-            if (ref.getID() != null) {
-                cd.setProcurementPublicationNumber(ref.getID().getValue());
-            }
-            if (ref.getAttachment() != null && ref.getAttachment().getExternalReference() != null) {
-                ExternalReferenceType ert = ref.getAttachment().getExternalReference();
-                if (ert.getFileName() != null) {
-                    cd.setProcurementProcedureTitle(ert.getFileName().getValue());
+
+            // Find an entry with TED_CN Value
+            DocumentReferenceType ref = additionalDocumentReferenceList.stream()
+                    .filter(r -> r.getDocumentTypeCode() != null && r.getDocumentTypeCode().getValue().equals("TED_CN"))
+                    .findFirst().get();
+         
+            if (ref != null ) {
+                if (ref.getID() != null) {
+                    cd.setProcurementPublicationNumber(ref.getID().getValue());
                 }
-                if (!ert.getDescription().isEmpty()) {
-                    cd.setProcurementProcedureDesc(ert.getDescription().get(0).getValue());
+                if (ref.getAttachment() != null && ref.getAttachment().getExternalReference() != null) {
+                    ExternalReferenceType ert = ref.getAttachment().getExternalReference();
+                    if (ert.getFileName() != null) {
+                     cd.setProcurementProcedureTitle(ert.getFileName().getValue());
+                    }
+                    if (!ert.getDescription().isEmpty()) {
+                     cd.setProcurementProcedureDesc(ert.getDescription().get(0).getValue());
+                    }
                 }
             }
         }

@@ -6,28 +6,20 @@ import eu.esens.espdvcd.model.NaturalPerson;
 import eu.esens.espdvcd.model.PostalAddress;
 import eu.esens.espdvcd.model.requirement.response.Responses;
 import eu.esens.espdvcd.model.SimpleESPDResponse;
-import eu.esens.espdvcd.model.requirement.response.AmountResponse;
-import eu.esens.espdvcd.model.requirement.response.CountryCodeResponse;
-import eu.esens.espdvcd.model.requirement.response.DateResponse;
-import eu.esens.espdvcd.model.requirement.response.DescriptionResponse;
-import eu.esens.espdvcd.model.requirement.response.EvidenceURLCodeResponse;
-import eu.esens.espdvcd.model.requirement.response.EvidenceURLResponse;
-import eu.esens.espdvcd.model.requirement.response.IndicatorResponse;
-import eu.esens.espdvcd.model.requirement.response.PercentageResponse;
-import eu.esens.espdvcd.model.requirement.response.PeriodResponse;
-import eu.esens.espdvcd.model.requirement.response.QuantityIntegerResponse;
-import eu.esens.espdvcd.model.requirement.response.QuantityResponse;
-import eu.esens.espdvcd.model.requirement.response.QuantityYearResponse;
+import eu.esens.espdvcd.model.requirement.response.*;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.response.Response;
 import grow.names.specification.ubl.schema.xsd.espd_commonaggregatecomponents_1.EconomicOperatorPartyType;
+import grow.names.specification.ubl.schema.xsd.espd_commonaggregatecomponents_1.NaturalPersonType;
 import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.ResponseType;
 import java.util.stream.Collectors;
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PersonType;
 
 public class ESPDResponseModelExtractor implements ModelExtractor {
 
+    /* package private constructor. Create only through factory */
     ESPDResponseModelExtractor() {};
 
     public SimpleESPDResponse extractESPDResponse(ESPDResponseType resType) {
@@ -226,6 +218,17 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
 
                     if (eop.getParty().getContact() != null) {
                         eoDetails.setContactingDetails(new ContactingDetails());
+                        if (eop.getParty().getContact().getName() != null) {
+                            eoDetails.getContactingDetails().setContactPointName(eop.getParty().getContact().getName().getValue());
+                        }
+                        
+                        if (eop.getParty().getContact().getElectronicMail() != null) {
+                            eoDetails.getContactingDetails().setEmailAddress(eop.getParty().getContact().getElectronicMail().getValue());
+                        }
+                        
+                        if (eop.getParty().getContact().getTelephone() != null) {
+                            eoDetails.getContactingDetails().setTelephoneNumber(eop.getParty().getContact().getTelephone().getValue());
+                        }
                     }
 
                 }
@@ -233,10 +236,80 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
             
             if (!eop.getRepresentativeNaturalPerson().isEmpty()) {
                 NaturalPerson np = new NaturalPerson();
-                np.setRole(eop.getRepresentativeNaturalPerson().get(0).getNaturalPersonRoleDescription().getValue());
-                
+                /* We assume only one. We arbitrarily fetch the first one from the list */
+                NaturalPersonType npt = eop.getRepresentativeNaturalPerson().get(0);
+                np.setRole(npt.getNaturalPersonRoleDescription().getValue());
+                if (npt.getPowerOfAttorney() != null) {
+                    
+                    if (!npt.getPowerOfAttorney().getDescription().isEmpty()) {
+                        np.setPowerOfAttorney(npt.getPowerOfAttorney().getDescription().get(0).getValue());
+                    }
+                    /* in ESPD the only look for the person in agent party in power of attorney */ 
+                    if (npt.getPowerOfAttorney().getAgentParty() != null && !npt.getPowerOfAttorney().getAgentParty().getPerson().isEmpty()) {
+                        PersonType pt = npt.getPowerOfAttorney().getAgentParty().getPerson().get(0);
+                        
+                        if (pt.getFirstName() != null) {
+                           np.setFirstName(pt.getFirstName().getValue());
+                        }
+                        
+                        if (pt.getFamilyName()!= null) {
+                           np.setFamilyName(pt.getFamilyName().getValue());
+                        }
+                        
+                        if (pt.getBirthplaceName() != null) {
+                            np.setBirthPlace(pt.getBirthplaceName().getValue());
+                        }
+                        
+                        if (pt.getBirthDate() != null) {
+                            np.setBirthDate(pt.getBirthDate().getValue().toGregorianCalendar().getTime());
+                        }
+                        
+                        if (pt.getContact() != null) {
+                            ContactingDetails cd = new ContactingDetails();
+                            
+                            if (pt.getContact().getElectronicMail() != null) {
+                                cd.setEmailAddress(pt.getContact().getElectronicMail().getValue());
+                            }
+                            
+                            if (pt.getContact().getTelephone() != null) {
+                                cd.setTelephoneNumber(pt.getContact().getTelephone().getValue());
+                            }
+                            
+                            if (pt.getContact().getTelefax() != null) {
+                                cd.setFaxNumber(pt.getContact().getTelefax().getValue());
+                            }
+                            np.setContactDetails(cd);
+                        }
+                        
+                        if (pt.getResidenceAddress() != null) {
+                            
+                            PostalAddress pa = new PostalAddress();
+                            
+                            if (pt.getResidenceAddress().getPostbox() != null) {
+                                pa.setPostCode(pt.getResidenceAddress().getPostbox().getValue());
+                            }
+                            
+                            if (pt.getResidenceAddress().getCityName() != null) {
+                                pa.setCity(pt.getResidenceAddress().getCityName().getValue());
+                            }
+                            
+                            if (pt.getResidenceAddress().getStreetName()!= null) {
+                                pa.setAddressLine1(pt.getResidenceAddress().getStreetName().getValue());
+                            }
+                            
+                            if (pt.getResidenceAddress().getCountry() != null 
+                              && pt.getResidenceAddress().getCountry().getIdentificationCode() != null) {
+                                pa.setCountryCode(pt.getResidenceAddress().getCountry().getIdentificationCode().getValue());
+                            }
+                            
+                            np.setPostalAddress(pa);
+                        }
+                    }
+                    
+                }
+                eoDetails.getNaturalPersons().add(np);
             } else {
-                
+                eoDetails.getNaturalPersons().add(new NaturalPerson());
             }
         }
 
