@@ -238,7 +238,10 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 NaturalPerson np = new NaturalPerson();
                 /* We assume only one. We arbitrarily fetch the first one from the list */
                 NaturalPersonType npt = eop.getRepresentativeNaturalPerson().get(0);
-                np.setRole(npt.getNaturalPersonRoleDescription().getValue());
+                if (npt.getNaturalPersonRoleDescription() != null) {
+                    np.setRole(npt.getNaturalPersonRoleDescription().getValue());
+                }
+                
                 if (npt.getPowerOfAttorney() != null) {
                     
                     if (!npt.getPowerOfAttorney().getDescription().isEmpty()) {
