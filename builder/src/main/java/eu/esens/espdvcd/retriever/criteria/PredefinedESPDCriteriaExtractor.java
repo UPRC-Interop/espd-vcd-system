@@ -6,6 +6,7 @@ import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.CriterionType;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -30,7 +31,7 @@ public class PredefinedESPDCriteriaExtractor implements CriteriaExtractor {
 
     @Override
     public List<SelectableCriterion> getFullList(List<SelectableCriterion> initialList) {
-        Set<SelectableCriterion> initialSet = new HashSet<>();
+        Set<SelectableCriterion> initialSet = new LinkedHashSet<>();
         initialSet.addAll(initialList);
         Set<SelectableCriterion> fullSet = 
         criterionTypeList.stream()
