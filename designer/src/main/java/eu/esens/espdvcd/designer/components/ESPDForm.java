@@ -19,10 +19,14 @@ import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by ixuz on 3/7/16.
@@ -32,7 +36,7 @@ public class ESPDForm extends VerticalLayout {
     private Master view;
     private ESPDRequest espdRequest = null;
     private HorizontalLayout progressBarLayout = new HorizontalLayout();
-    private List<Label> progressBarLabels = new ArrayList<Label> ();
+    private List<Label> progressBarLabels = new ArrayList<Label>();
     private List<VerticalLayout> pages = new ArrayList<>();
     private HorizontalLayout buttonList = new HorizontalLayout();
     private Button previous = new Button("Previous", FontAwesome.ARROW_LEFT);
@@ -82,21 +86,22 @@ public class ESPDForm extends VerticalLayout {
         exportConsole.setStyleName("espdRequestForm-finish");
         exportFile.setStyleName("espdRequestForm-finish");
 
-        // Hook the exportFile button up with a downloadable resource
-        StreamResource downloadableResource = new StreamResource(new StreamResource.StreamSource() {
-            @Override
-            public InputStream getStream() {
-                ESPDBuilder espdBuilder = new ESPDBuilder();
-                String xml = espdBuilder.createXMLasString(espdRequest);
-                byte[] xmlBytes = xml.getBytes();
-                return new ByteArrayInputStream(xmlBytes);
-
+        StreamResource downloadableResource = new StreamResource(() -> {
+            
+            ESPDBuilder espdBuilder = new ESPDBuilder();
+            String xml = espdBuilder.createXMLasString(espdRequest);
+            byte[] xmlBytes = null;
+            try {
+                xmlBytes = xml.getBytes("UTF-8");
+            } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(ESPDForm.class.getName()).log(Level.SEVERE, null, ex);
             }
+            return new ByteArrayInputStream(xmlBytes);
+            
         }, exportFileName);
+
         FileDownloader fileDownloader = new FileDownloader(downloadableResource);
         fileDownloader.extend(exportFile);
-
-
 
         showPage(currentPageIndex);
     }
@@ -109,7 +114,7 @@ public class ESPDForm extends VerticalLayout {
             progressBarLabels.get(pageIndex).addStyleName("progressBarLabelHighlighted");
         }
 
-        for (int i=0; i<pages.size(); i++) {
+        for (int i = 0; i < pages.size(); i++) {
             VerticalLayout page = pages.get(i);
             if (i == pageIndex) {
                 page.setVisible(true);
@@ -122,9 +127,8 @@ public class ESPDForm extends VerticalLayout {
         view.getMainPanel().setScrollTop(0);
     }
 
-
     private void updateButtonList() {
-        next.setEnabled((currentPageIndex+1 <= pages.size()-1));
+        next.setEnabled((currentPageIndex + 1 <= pages.size() - 1));
         next.setVisible((currentPageIndex + 1 <= pages.size() - 1));
         previous.setEnabled((currentPageIndex - 1 >= 0));
         previous.setVisible((currentPageIndex - 1 >= 0));
@@ -157,14 +161,14 @@ public class ESPDForm extends VerticalLayout {
     }
 
     /**
-     * Displays the previous page of the form.
-     * If there is no previous page, this method will have no effect.
+     * Displays the previous page of the form. If there is no previous page,
+     * this method will have no effect.
      *
      * @param event Vaadin7 Button click event
      * @see com.vaadin.ui.Button.ClickEvent
      */
     private void onPrevious(Button.ClickEvent event) {
-        currentPageIndex = (currentPageIndex-1 >= 0 ? currentPageIndex-1 : currentPageIndex);
+        currentPageIndex = (currentPageIndex - 1 >= 0 ? currentPageIndex - 1 : currentPageIndex);
         showPage(currentPageIndex);
     }
 
@@ -177,24 +181,24 @@ public class ESPDForm extends VerticalLayout {
      */
     private void onCancel(Button.ClickEvent event) {
         if (view instanceof EspdTemplate) {
-            EspdTemplate espdTemplateView = (EspdTemplate)view;
+            EspdTemplate espdTemplateView = (EspdTemplate) view;
             espdTemplateView.resetView();
         }
         if (view instanceof Espd) {
-            Espd espdView = (Espd)view;
+            Espd espdView = (Espd) view;
             espdView.resetView();
         }
     }
 
     /**
-     * Displays the next page of the form.
-     * If there is no next page, this method will have no effect.
+     * Displays the next page of the form. If there is no next page, this method
+     * will have no effect.
      *
      * @param event Vaadin7 Button click event
      * @see com.vaadin.ui.Button.ClickEvent
      */
     private void onNext(Button.ClickEvent event) {
-        currentPageIndex = (currentPageIndex+1 < pages.size() ? currentPageIndex+1 : currentPageIndex);
+        currentPageIndex = (currentPageIndex + 1 < pages.size() ? currentPageIndex + 1 : currentPageIndex);
         showPage(currentPageIndex);
     }
 
