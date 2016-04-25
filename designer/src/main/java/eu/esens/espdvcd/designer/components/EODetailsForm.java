@@ -24,7 +24,7 @@ public class EODetailsForm extends Panel {
 
     private TextField ID = new TextField("ID:");
     private TextField electronicAddressID = new TextField("Electronic address id:");
-    private CountryComboBox registrationCountryCode = new CountryComboBox("Country:");
+    //private CountryComboBox registrationCountryCode = new CountryComboBox("Country:");
     private TextField name = new TextField("Name:");
     private TextField role = new TextField("Role:");
     private CheckBox smeIndicator = new CheckBox("SME:");
@@ -49,7 +49,7 @@ public class EODetailsForm extends Panel {
 
         columnA.addComponent(name);
         columnA.addComponent(ID);
-        columnA.addComponent(registrationCountryCode);
+        //columnA.addComponent(registrationCountryCode);
         columnA.addComponent(electronicAddressID);
         columnB.addComponent(role);
         columnB.addComponent(nationalDatabaseURI);
@@ -94,8 +94,8 @@ public class EODetailsForm extends Panel {
         electronicAddressID.setInputPrompt("Electronic address ID");
         electronicAddressID.setWidth(300, Unit.PIXELS);
 
-        registrationCountryCode.setInputPrompt("Select country");
-        registrationCountryCode.setWidth(300, Unit.PIXELS);
+        //registrationCountryCode.setInputPrompt("Select country");
+        //registrationCountryCode.setWidth(300, Unit.PIXELS);
 
         name.setNullRepresentation("");
         name.setInputPrompt("Name");
