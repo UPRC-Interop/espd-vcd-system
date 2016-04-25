@@ -125,8 +125,13 @@ public class CriterionForm extends VerticalLayout {
                     espdTemplateView.getDetailsContent().addComponent(new LegislationReferenceForm(criterionReference.getLegislationReference()));
                 }
 
+                Panel panel = new Panel();
+                VerticalLayout panelContent = new VerticalLayout();
+                panel.setCaption("Criterion requirements");
+                panel.setContent(panelContent);
+                espdTemplateView.getDetailsContent().addComponent(panel);
                 for (RequirementGroup requirementGroup : criterionReference.getRequirementGroups()) {
-                    espdTemplateView.getDetailsContent().addComponent(new RequirementGroupForm(requirementGroup, false));
+                    panelContent.addComponent(new RequirementGroupForm(requirementGroup, false));
                 }
 
                 CriterionForm highlightedCriterion = espdTemplateView.getHighlightedCriterion();

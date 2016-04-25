@@ -485,4 +485,8 @@
   .v-verticallayout-master-mainContent {
     overflow: auto;
   }
+
+  .v-formlayout-ReadOnlyResponseForm > table > tbody > .v-formlayout-row > .v-formlayout-contentcell {
+    width: inherit;
+  }
 }

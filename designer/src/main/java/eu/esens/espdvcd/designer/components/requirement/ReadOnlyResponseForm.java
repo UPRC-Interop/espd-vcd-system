@@ -10,12 +10,15 @@ import eu.esens.espdvcd.model.requirement.response.DescriptionResponse;
  * Created by ixuz on 4/25/16.
  */
 public class ReadOnlyResponseForm extends ResponseForm {
-    protected Label text = new Label("Text: ");
+    protected Label label = new Label("Text: ");
 
     public ReadOnlyResponseForm(String text, String caption) {
-        //addComponent(text);
-        //text.setCaption(caption);
-        //text.setNullRepresentation("");
-        //text.setWidth(280, Sizeable.Unit.PIXELS);
+        addStyleName("ReadOnlyResponseForm");
+        label.setCaption(caption);
+        label.setValue(text);
+        addComponent(label);
+        //label.setWidth(280, Sizeable.Unit.PIXELS);
+        label.setSizeUndefined();
+
     }
 }
