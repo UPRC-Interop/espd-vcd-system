@@ -145,6 +145,7 @@ public class ESPDForm extends VerticalLayout {
 
         Label pageCaptionLabel = new Label(title);
         pageCaptionLabel.setStyleName("pageCaptionLabel");
+        pageCaptionLabel.setSizeUndefined();
         pageLayout.addComponent(pageCaptionLabel);
 
         Label pageTitleInProgressBarLabel = new Label(TitleInProgressBar);
