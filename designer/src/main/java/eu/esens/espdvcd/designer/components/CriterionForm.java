@@ -129,6 +129,7 @@ public class CriterionForm extends VerticalLayout {
                 VerticalLayout panelContent = new VerticalLayout();
                 panel.setCaption("Criterion requirements");
                 panel.setContent(panelContent);
+                panelContent.setSpacing(true);
                 espdTemplateView.getDetailsContent().addComponent(panel);
                 for (RequirementGroup requirementGroup : criterionReference.getRequirementGroups()) {
                     panelContent.addComponent(new RequirementGroupForm(requirementGroup, false));

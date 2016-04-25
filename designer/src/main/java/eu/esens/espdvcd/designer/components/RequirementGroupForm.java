@@ -34,16 +34,24 @@ public class RequirementGroupForm extends VerticalLayout {
         requirementGroupGroup.setBuffered(false);
         requirementGroupGroup.bindMemberFields(this);
 
+
+        Panel panel = new Panel();
+        panel.setStyleName("RequirementGroupFormPanel");
+        VerticalLayout panelContent = new VerticalLayout();
+        panelContent.setSpacing(true);
+        panel.setContent(panelContent);
+        addComponent(panel);
+
         // Add a sub requirement forms
         for (Requirement requirement : requirementGroup.getRequirements()) {
             RequirementForm requirementForm = new RequirementForm(requirement, includeResponses);
-            addComponent(requirementForm);
+            panelContent.addComponent(requirementForm);
         }
 
         // Add a sub requirement group forms
         for (RequirementGroup requirementGroupTemp : requirementGroup.getRequirementGroups()) {
             RequirementGroupForm requirementGroupForm = new RequirementGroupForm(requirementGroupTemp, includeResponses);
-            addComponent(requirementGroupForm);
+            panelContent.addComponent(requirementGroupForm);
         }
     }
 }
