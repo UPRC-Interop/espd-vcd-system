@@ -21,20 +21,20 @@ public class NaturalPersonForm extends Panel {
     private FormLayout columnA = new FormLayout();
     private FormLayout columnB = new FormLayout();
 
-    private TextField name = new TextField("Name:");
-    private TextField ID = new TextField("ID:");
+    //private TextField name = new TextField("Name:");
+    //private TextField ID = new TextField("ID:");
     private TextField role = new TextField("Role:");
     private TextField birthPlace = new TextField("Birth place:");
     private DateField birthDate = new DateField("Birth date:");
-    private CountryComboBox registrationCountry = new CountryComboBox("Registration country:");
-    private TextField powerOfAttorney = new TextField("Power of attourney:");
+    //private CountryComboBox registrationCountry = new CountryComboBox("Registration country:");
+    private TextArea powerOfAttorney = new TextArea("Detailed information:");
     //private PostalAddressForm postalAddress = new TextField("Name:");
 
     public NaturalPersonForm(NaturalPerson naturalPerson) {
         this.naturalPerson = naturalPerson;
 
         setStyleName("NaturalPersonForm");
-        setCaption("Natural person form");
+        setCaption("Representative");
         setContent(panelContent);
         setWidth("100%");
 
@@ -42,12 +42,12 @@ public class NaturalPersonForm extends Panel {
         columns.addComponent(columnA);
         columns.addComponent(columnB);
 
-        columnA.addComponent(name);
-        columnA.addComponent(ID);
+        //columnA.addComponent(name);
+        //columnA.addComponent(ID);
         columnA.addComponent(role);
         columnA.addComponent(birthPlace);
-        columnB.addComponent(birthDate);
-        columnB.addComponent(registrationCountry);
+        columnA.addComponent(birthDate);
+        //columnB.addComponent(registrationCountry);
         columnB.addComponent(powerOfAttorney);
         panelContent.addComponent(new PostalAddressForm(this.naturalPerson.getPostalAddress()));
 
@@ -68,13 +68,13 @@ public class NaturalPersonForm extends Panel {
         columnB.setSpacing(true);
         columnB.setMargin(false);
 
-        name.setNullRepresentation("");
-        name.setInputPrompt("Name");
-        name.setWidth(300, Unit.PIXELS);
+        //name.setNullRepresentation("");
+        //name.setInputPrompt("Name");
+        //name.setWidth(300, Unit.PIXELS);
 
-        ID.setNullRepresentation("");
-        ID.setInputPrompt("ID");
-        ID.setWidth(300, Unit.PIXELS);
+        //ID.setNullRepresentation("");
+        //ID.setInputPrompt("ID");
+        //ID.setWidth(300, Unit.PIXELS);
 
         role.setNullRepresentation("");
         role.setInputPrompt("Role");
@@ -86,11 +86,11 @@ public class NaturalPersonForm extends Panel {
 
         birthDate.setWidth(300, Unit.PIXELS);
 
-        registrationCountry.setInputPrompt("Registration Country");
-        registrationCountry.setWidth(300, Unit.PIXELS);
+        //registrationCountry.setInputPrompt("Registration Country");
+        //registrationCountry.setWidth(300, Unit.PIXELS);
 
         powerOfAttorney.setNullRepresentation("");
-        powerOfAttorney.setInputPrompt("Power of attourney");
+        powerOfAttorney.setInputPrompt("Detailed information");
         powerOfAttorney.setWidth(300, Unit.PIXELS);
     }
 }
