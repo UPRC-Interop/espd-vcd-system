@@ -499,4 +499,12 @@
   .v-slot-requirementGroupForm-layout {
     padding: 6px;
   }
+
+  .v-verticallayout-criterionForm-panelContent > .v-slot > .v-horizontallayout {
+    width: 100%;
+  }
+
+  .v-verticallayout-criterionForm-panelContent > .v-slot > .v-horizontallayout > .v-slot {
+    width: 50%;
+  }
 }
