@@ -5,7 +5,6 @@ import eu.esens.espdvcd.model.SelectableCriterion;
 import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.CriterionType;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -40,7 +39,5 @@ public class PredefinedESPDCriteriaExtractor implements CriteriaExtractor {
         initialSet.addAll(fullSet);
         return new ArrayList<>(initialSet);
     }
-    
-    
     
 }

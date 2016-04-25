@@ -1,6 +1,5 @@
 package eu.esens.espdvcd.builder;
 
-import com.google.common.base.Charsets;
 import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.retriever.criteria.PredefinedESPDCriteriaExtractor;
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
@@ -26,11 +25,7 @@ import eu.esens.espdvcd.builder.schema.SchemaFactory;
 import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
 import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
 import java.io.BufferedInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -109,18 +104,7 @@ public class ESPDBuilder {
         c.setTime(now);
 
         try {
-            // Creates the format according to the EC Application Requirement
-            XMLGregorianCalendar xmlDate = DatatypeFactory.newInstance()
-                    .newXMLGregorianCalendar(
-                            c.get(Calendar.YEAR),
-                            c.get(Calendar.MONTH) + 1,
-                            c.get(Calendar.DAY_OF_MONTH),
-                            c.get(Calendar.HOUR),
-                            c.get(Calendar.MINUTE),
-                            c.get(Calendar.SECOND),
-                            DatatypeConstants.FIELD_UNDEFINED,
-                            DatatypeConstants.FIELD_UNDEFINED
-                    );
+            XMLGregorianCalendar xmlDate = createECCompliantDate(c);
 
             reqType.setIssueDate(new IssueDateType());
             reqType.getIssueDate().setValue(xmlDate);
@@ -150,19 +134,8 @@ public class ESPDBuilder {
         c.setTime(now);
 
         try {
-            // Creates the format according to the EC Application Requirement
-            XMLGregorianCalendar xmlDate = DatatypeFactory.newInstance()
-                    .newXMLGregorianCalendar(
-                            c.get(Calendar.YEAR),
-                            c.get(Calendar.MONTH) + 1,
-                            c.get(Calendar.DAY_OF_MONTH),
-                            c.get(Calendar.HOUR),
-                            c.get(Calendar.MINUTE),
-                            c.get(Calendar.SECOND),
-                            DatatypeConstants.FIELD_UNDEFINED,
-                            DatatypeConstants.FIELD_UNDEFINED
-                    );
-
+            XMLGregorianCalendar xmlDate = createECCompliantDate(c);
+            
             resType.setIssueDate(new IssueDateType());
             resType.getIssueDate().setValue(xmlDate);
             resType.setIssueTime(new IssueTimeType());
@@ -232,5 +205,21 @@ public class ESPDBuilder {
             bis = new BufferedInputStream(xmlESPD);
         }
         return bis;
+    }
+    
+    public XMLGregorianCalendar createECCompliantDate(GregorianCalendar c) throws DatatypeConfigurationException {
+        // Creates the format according to the EC Application Requirement
+        XMLGregorianCalendar xmlDate = DatatypeFactory.newInstance()
+                .newXMLGregorianCalendar(
+                        c.get(Calendar.YEAR),
+                        c.get(Calendar.MONTH) + 1,
+                        c.get(Calendar.DAY_OF_MONTH),
+                        c.get(Calendar.HOUR),
+                        c.get(Calendar.MINUTE),
+                        c.get(Calendar.SECOND),
+                        DatatypeConstants.FIELD_UNDEFINED,
+                        DatatypeConstants.FIELD_UNDEFINED
+                );
+        return xmlDate;
     }
 }
