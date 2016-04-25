@@ -199,6 +199,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
 
                 if (eop.getParty().getPostalAddress() != null) {
                     PostalAddress eoAddress = new PostalAddress();
+                    
                     if (eop.getParty().getPostalAddress().getStreetName() != null) {
                         eoAddress.setAddressLine1(eop.getParty().getPostalAddress().getStreetName().getValue());
                     }
@@ -215,6 +216,8 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                             && eop.getParty().getPostalAddress().getCountry().getIdentificationCode() != null) {
                         eoAddress.setCountryCode(eop.getParty().getPostalAddress().getCountry().getIdentificationCode().getValue());
                     }
+                    
+                    eoDetails.setPostalAddress(eoAddress);
 
                     if (eop.getParty().getContact() != null) {
                         eoDetails.setContactingDetails(new ContactingDetails());
