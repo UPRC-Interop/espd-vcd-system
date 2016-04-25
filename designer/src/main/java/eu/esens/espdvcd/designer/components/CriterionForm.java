@@ -66,7 +66,7 @@ public class CriterionForm extends VerticalLayout {
 
             columnA.addComponent(description);
 
-            columnA.setWidth(400, Unit.PIXELS);
+            columnA.setWidth(100, Unit.PERCENTAGE);
             columnB.setMargin(false);
             columnB.setSpacing(false);
             columnB.addStyleName("ignoreCaptionCellWidth");
