@@ -18,6 +18,8 @@ public class RequirementForm extends VerticalLayout {
         if (includeResponses) {
             ResponseForm responseForm = ResponseFormFactory.buildResponseForm(requirement);
             addComponent(responseForm);
+        } else {
+
         }
 
 
