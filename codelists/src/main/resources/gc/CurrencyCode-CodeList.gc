@@ -1,27 +1,28 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<gc:CodeList xmlns:gc="http://docs.oasis-open.org/codelist/ns/genericode/1.0/">
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gc:CodeList xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:fn="http://www.w3.org/2005/xpath-functions"
+             xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+             xmlns:gc="http://docs.oasis-open.org/codelist/ns/genericode/1.0/">
    <Identification>
       <ShortName>CurrencyCode</ShortName>
-      <LongName xml:lang="en">Currency Code</LongName>
-      <LongName Identifier="listID">ISO 4217 Alpha</LongName>
-      <Version>2012-01-12</Version>
-      <CanonicalUri>urn:un:unece:uncefact:codelist:standard:5:ISO42173A</CanonicalUri>
-      <CanonicalVersionUri>urn:un:unece:uncefact:codelist:standard:5:ISO42173A:2012-01-12</CanonicalVersionUri>
-      <LocationUri>http://docs.oasis-open.org/ubl/os-UBL-2.1/cl/gc/default/CurrencyCode-2.1.gc</LocationUri>
-      <AlternateFormatLocationUri MimeType="text/xml">http://www.unece.org/fileadmin/DAM/uncefact/codelist/standard/ISO_ISO3AlphaCurrencyCode_20120112.xsd</AlternateFormatLocationUri>
+      <LongName xml:lang="en">ISO 3 Alpha Currency Code</LongName>
+      <Version>ISO 4217 3A:2015</Version>
+      <CanonicalUri>Placeholder</CanonicalUri>
+      <CanonicalVersionUri>Placeholder</CanonicalVersionUri>
+      <LocationUri>http://www.unece.org/fileadmin/DAM/uncefact/codelist/standard/ISO_ISO3AlphaCurrencyCode_20120112.xsd</LocationUri>
       <Agency>
-         <LongName xml:lang="en">International Organization for Standardization</LongName>
-         <Identifier Identifier="http://www.unece.org/trade/untdid/d11a/tred/tred3055.htm">5</Identifier>
+         <LongName xml:lang="en">ISO</LongName>
+         <Identifier>ISO</Identifier>
       </Agency>
    </Identification>
    <ColumnSet>
       <Column Id="code" Use="required">
          <ShortName>Code</ShortName>
-         <Data Type="normalizedString"/>
+         <Data Type="normalizedString" Lang="en"/>
       </Column>
-      <Column Id="name" Use="required">
+      <Column Id="name" Use="optional">
          <ShortName>Name</ShortName>
-         <Data Type="string"/>
+         <Data Type="string" Lang="en"/>
       </Column>
       <Key Id="codeKey">
          <ShortName>CodeKey</ShortName>
@@ -34,7 +35,7 @@
             <SimpleValue>AED</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>UAE Dirham</SimpleValue>
+            <SimpleValue>United Arab Emirates dirham</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -66,7 +67,7 @@
             <SimpleValue>ANG</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>Netherlands Antillean Guilder</SimpleValue>
+            <SimpleValue>Netherlands Antillian Guilder</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -98,7 +99,7 @@
             <SimpleValue>AWG</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>Aruban Florin</SimpleValue>
+            <SimpleValue>Aruban Guilder</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -114,7 +115,7 @@
             <SimpleValue>BAM</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>Convertible Mark</SimpleValue>
+            <SimpleValue>Convertible Marks</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -130,7 +131,7 @@
             <SimpleValue>BDT</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>Taka</SimpleValue>
+            <SimpleValue>Bangladeshi Taka</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -154,7 +155,7 @@
             <SimpleValue>BIF</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>Burundi Franc</SimpleValue>
+            <SimpleValue>Burundian Franc</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -162,7 +163,7 @@
             <SimpleValue>BMD</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>Bermudian Dollar</SimpleValue>
+            <SimpleValue>Bermudian Dollar (customarily known as Bermuda Dollar)</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -186,7 +187,7 @@
             <SimpleValue>BOV</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>Mvdol</SimpleValue>
+            <SimpleValue>Bolivian Mvdol (Funds code)</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -250,7 +251,7 @@
             <SimpleValue>CDF</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>Congolese Franc</SimpleValue>
+            <SimpleValue>Franc Congolais</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -258,7 +259,7 @@
             <SimpleValue>CHE</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>WIR Euro</SimpleValue>
+            <SimpleValue>WIR Euro (complementary currency)</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -274,7 +275,7 @@
             <SimpleValue>CHW</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>WIR Franc</SimpleValue>
+            <SimpleValue>WIR Franc (complementary currency)</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -282,7 +283,7 @@
             <SimpleValue>CLF</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>Unidades de fomento</SimpleValue>
+            <SimpleValue>Unidades de formento (Funds code)</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -327,14 +328,6 @@
       </Row>
       <Row>
          <Value ColumnRef="code">
-            <SimpleValue>CUC</SimpleValue>
-         </Value>
-         <Value ColumnRef="name">
-            <SimpleValue>Peso Convertible</SimpleValue>
-         </Value>
-      </Row>
-      <Row>
-         <Value ColumnRef="code">
             <SimpleValue>CUP</SimpleValue>
          </Value>
          <Value ColumnRef="name">
@@ -347,6 +340,14 @@
          </Value>
          <Value ColumnRef="name">
             <SimpleValue>Cape Verde Escudo</SimpleValue>
+         </Value>
+      </Row>
+      <Row>
+         <Value ColumnRef="code">
+            <SimpleValue>CYP</SimpleValue>
+         </Value>
+         <Value ColumnRef="name">
+            <SimpleValue>Cyprus Pound</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -387,6 +388,14 @@
          </Value>
          <Value ColumnRef="name">
             <SimpleValue>Algerian Dinar</SimpleValue>
+         </Value>
+      </Row>
+      <Row>
+         <Value ColumnRef="code">
+            <SimpleValue>EEK</SimpleValue>
+         </Value>
+         <Value ColumnRef="name">
+            <SimpleValue>Kroon</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -458,7 +467,7 @@
             <SimpleValue>GHS</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>Ghana Cedi</SimpleValue>
+            <SimpleValue>Cedi</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -466,7 +475,7 @@
             <SimpleValue>GIP</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>Gibraltar Pound</SimpleValue>
+            <SimpleValue>Gibraltar pound</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -530,7 +539,7 @@
             <SimpleValue>HTG</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>Gourde</SimpleValue>
+            <SimpleValue>Haiti Gourde</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -554,7 +563,7 @@
             <SimpleValue>ILS</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>New Israeli Sheqel</SimpleValue>
+            <SimpleValue>New Israeli Shekel</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -610,7 +619,7 @@
             <SimpleValue>JPY</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>Yen</SimpleValue>
+            <SimpleValue>Japanese yen</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -658,7 +667,7 @@
             <SimpleValue>KRW</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>Won</SimpleValue>
+            <SimpleValue>South Korean Won</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -815,6 +824,14 @@
       </Row>
       <Row>
          <Value ColumnRef="code">
+            <SimpleValue>MTL</SimpleValue>
+         </Value>
+         <Value ColumnRef="name">
+            <SimpleValue>Maltese Lira</SimpleValue>
+         </Value>
+      </Row>
+      <Row>
+         <Value ColumnRef="code">
             <SimpleValue>MUR</SimpleValue>
          </Value>
          <Value ColumnRef="name">
@@ -850,7 +867,7 @@
             <SimpleValue>MXV</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>Mexican Unidad de Inversion (UDI)</SimpleValue>
+            <SimpleValue>Mexican Unidad de Inversion (UDI) (Funds code)</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -866,7 +883,7 @@
             <SimpleValue>MZN</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>Mozambique Metical</SimpleValue>
+            <SimpleValue>Metical</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -874,7 +891,7 @@
             <SimpleValue>NAD</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>Namibia Dollar</SimpleValue>
+            <SimpleValue>Namibian Dollar</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -994,7 +1011,7 @@
             <SimpleValue>RON</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>New Romanian Leu</SimpleValue>
+            <SimpleValue>Romanian New Leu</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1079,6 +1096,14 @@
       </Row>
       <Row>
          <Value ColumnRef="code">
+            <SimpleValue>SKK</SimpleValue>
+         </Value>
+         <Value ColumnRef="name">
+            <SimpleValue>Slovak Koruna</SimpleValue>
+         </Value>
+      </Row>
+      <Row>
+         <Value ColumnRef="code">
             <SimpleValue>SLL</SimpleValue>
          </Value>
          <Value ColumnRef="name">
@@ -1103,26 +1128,10 @@
       </Row>
       <Row>
          <Value ColumnRef="code">
-            <SimpleValue>SSP</SimpleValue>
-         </Value>
-         <Value ColumnRef="name">
-            <SimpleValue>South Sudanese Pound</SimpleValue>
-         </Value>
-      </Row>
-      <Row>
-         <Value ColumnRef="code">
             <SimpleValue>STD</SimpleValue>
          </Value>
          <Value ColumnRef="name">
             <SimpleValue>Dobra</SimpleValue>
-         </Value>
-      </Row>
-      <Row>
-         <Value ColumnRef="code">
-            <SimpleValue>SVC</SimpleValue>
-         </Value>
-         <Value ColumnRef="name">
-            <SimpleValue>El Salvador Colon</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1159,10 +1168,10 @@
       </Row>
       <Row>
          <Value ColumnRef="code">
-            <SimpleValue>TMT</SimpleValue>
+            <SimpleValue>TMM</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>Turkmenistan New Manat</SimpleValue>
+            <SimpleValue>Manat</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1178,7 +1187,7 @@
             <SimpleValue>TOP</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>Pa’anga</SimpleValue>
+            <SimpleValue>Pa'anga</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1186,7 +1195,7 @@
             <SimpleValue>TRY</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>Turkish Lira</SimpleValue>
+            <SimpleValue>New Turkish Lira</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1242,26 +1251,10 @@
             <SimpleValue>USN</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>US Dollar (Next day)</SimpleValue>
+            <SimpleValue/>
          </Value>
       </Row>
-      <Row>
-         <Value ColumnRef="code">
-            <SimpleValue>USS</SimpleValue>
-         </Value>
-         <Value ColumnRef="name">
-            <SimpleValue>US Dollar (Same day)</SimpleValue>
-         </Value>
-      </Row>
-      <Row>
-         <Value ColumnRef="code">
-            <SimpleValue>UYI</SimpleValue>
-         </Value>
-         <Value ColumnRef="name">
-            <SimpleValue>Uruguay Peso en Unidades Indexadas (URUIURUI)</SimpleValue>
-         </Value>
-      </Row>
-      <Row>
+       <Row>
          <Value ColumnRef="code">
             <SimpleValue>UYU</SimpleValue>
          </Value>
@@ -1274,15 +1267,15 @@
             <SimpleValue>UZS</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>Uzbekistan Sum</SimpleValue>
+            <SimpleValue>Uzbekistan Som</SimpleValue>
          </Value>
       </Row>
       <Row>
          <Value ColumnRef="code">
-            <SimpleValue>VEF</SimpleValue>
+            <SimpleValue>VEB</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>Bolivar Fuerte</SimpleValue>
+            <SimpleValue>Venezuelan bolívar</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1290,7 +1283,7 @@
             <SimpleValue>VND</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>Dong</SimpleValue>
+            <SimpleValue>Vietnamese đồng</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1306,7 +1299,7 @@
             <SimpleValue>WST</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>Tala</SimpleValue>
+            <SimpleValue>Samoan Tala</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1322,7 +1315,7 @@
             <SimpleValue>XAG</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>Silver</SimpleValue>
+            <SimpleValue>Silver (one Troy ounce)</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1330,7 +1323,7 @@
             <SimpleValue>XAU</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>Gold</SimpleValue>
+            <SimpleValue>Gold (one Troy ounce)</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1338,7 +1331,7 @@
             <SimpleValue>XBA</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>Bond Markets Unit European Composite Unit (EURCO)</SimpleValue>
+            <SimpleValue>European Composite Unit (EURCO) (Bonds market unit)</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1346,7 +1339,7 @@
             <SimpleValue>XBB</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>Bond Markets Unit European Monetary Unit (E.M.U.-6)</SimpleValue>
+            <SimpleValue>European Monetary Unit (E.M.U.-6) (Bonds market unit)</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1354,7 +1347,7 @@
             <SimpleValue>XBC</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>Bond Markets Unit European Unit of Account 9 (E.U.A.-9)</SimpleValue>
+            <SimpleValue>European Unit of Account 9 (E.U.A.-9) (Bonds market unit)</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1362,7 +1355,7 @@
             <SimpleValue>XBD</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>Bond Markets Unit European Unit of Account 17 (E.U.A.-17)</SimpleValue>
+            <SimpleValue>European Unit of Account 17 (E.U.A.-17) (Bonds market unit)</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1378,7 +1371,15 @@
             <SimpleValue>XDR</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>SDR (Special Drawing Right)</SimpleValue>
+            <SimpleValue>Special Drawing Rights</SimpleValue>
+         </Value>
+      </Row>
+      <Row>
+         <Value ColumnRef="code">
+            <SimpleValue>XFO</SimpleValue>
+         </Value>
+         <Value ColumnRef="name">
+            <SimpleValue>Gold franc (special settlement currency)</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1386,7 +1387,7 @@
             <SimpleValue>XFU</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>UIC-Franc</SimpleValue>
+            <SimpleValue>UIC franc (special settlement currency)</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1402,7 +1403,7 @@
             <SimpleValue>XPD</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>Palladium</SimpleValue>
+            <SimpleValue>Palladium (one Troy ounce)</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1410,7 +1411,7 @@
             <SimpleValue>XPF</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>CFP Franc</SimpleValue>
+            <SimpleValue>CFP franc</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1418,15 +1419,7 @@
             <SimpleValue>XPT</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>Platinum</SimpleValue>
-         </Value>
-      </Row>
-      <Row>
-         <Value ColumnRef="code">
-            <SimpleValue>XSU</SimpleValue>
-         </Value>
-         <Value ColumnRef="name">
-            <SimpleValue>Sucre</SimpleValue>
+            <SimpleValue>Platinum (one Troy ounce)</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1434,15 +1427,7 @@
             <SimpleValue>XTS</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>Codes specifically reserved for testing purposes</SimpleValue>
-         </Value>
-      </Row>
-      <Row>
-         <Value ColumnRef="code">
-            <SimpleValue>XUA</SimpleValue>
-         </Value>
-         <Value ColumnRef="name">
-            <SimpleValue>ADB Unit of Account</SimpleValue>
+            <SimpleValue>Code reserved for testing purposes</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1450,7 +1435,7 @@
             <SimpleValue>XXX</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>The codes assigned for transactions where no currency is involved</SimpleValue>
+            <SimpleValue>No currency</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1466,20 +1451,12 @@
             <SimpleValue>ZAR</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>Rand</SimpleValue>
+            <SimpleValue>South African Rand</SimpleValue>
          </Value>
       </Row>
       <Row>
          <Value ColumnRef="code">
-            <SimpleValue>ZMK</SimpleValue>
-         </Value>
-         <Value ColumnRef="name">
-            <SimpleValue>Zambian Kwacha</SimpleValue>
-         </Value>
-      </Row>
-      <Row>
-         <Value ColumnRef="code">
-            <SimpleValue>ZWL</SimpleValue>
+            <SimpleValue>ZWD</SimpleValue>
          </Value>
          <Value ColumnRef="name">
             <SimpleValue>Zimbabwe Dollar</SimpleValue>

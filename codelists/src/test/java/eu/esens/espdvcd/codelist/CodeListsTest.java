@@ -16,8 +16,8 @@ public class CodeListsTest {
     @Test 
         public void testGC() {
        
-            Assert.assertEquals("GREECE", Codelists.CountryIdentification.getValueForId("GR"));
-            Assert.assertEquals("GR", Codelists.CountryIdentification.getIdForData("GREECE"));
+            Assert.assertEquals("Greece", Codelists.CountryIdentification.getValueForId("GR"));
+            Assert.assertEquals("GR", Codelists.CountryIdentification.getIdForData("Greece"));
             
             Assert.assertEquals("MT", Codelists.TenderingRole.getIdForData("Main tenderer"));
             Assert.assertEquals("Main tenderer", Codelists.TenderingRole.getValueForId("MT"));
@@ -26,19 +26,21 @@ public class CodeListsTest {
         
         @Test 
         public void testBiMap() {
-            Assert.assertEquals("GREECE",Codelists.CountryIdentification.getBiMap().get("GR"));
-            Assert.assertEquals("GR",Codelists.CountryIdentification.getBiMap().inverse().get("GREECE"));
+            Assert.assertEquals("Greece",Codelists.CountryIdentification.getBiMap().get("GR"));
+            Assert.assertEquals("GR",Codelists.CountryIdentification.getBiMap().inverse().get("Greece"));
         }
     
         @Test 
         public void testAllGC() {
         
+            String theCodelist = "";
             try {
                 for (Codelists c : Codelists.values()) {
+                    theCodelist = c.name();
                     Assert.assertNotNull(!c.getBiMap().isEmpty());
                 }
             } catch (Exception e) {
-                Assert.fail(e.getMessage());
+                Assert.fail("Error in Codelist "+theCodelist+": "+e.getMessage());
             }
         }
 }

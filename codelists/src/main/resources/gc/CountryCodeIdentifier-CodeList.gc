@@ -1,26 +1,28 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<gc:CodeList xmlns:gc="http://docs.oasis-open.org/codelist/ns/genericode/1.0/">
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gc:CodeList xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:fn="http://www.w3.org/2005/xpath-functions"
+             xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+             xmlns:gc="http://docs.oasis-open.org/codelist/ns/genericode/1.0/">
    <Identification>
-      <ShortName>CountryIdentificationCode</ShortName>
-      <LongName xml:lang="en">Country Identification Code</LongName>
-      <Version>SecondEdition2006VI-12</Version>
-      <CanonicalUri>urn:un:unece:uncefact:identifierlist:standard:5:ISO316612A</CanonicalUri>
-      <CanonicalVersionUri>urn:un:unece:uncefact:identifierlist:standard:5:ISO316612A:SecondEdition2006VI-12</CanonicalVersionUri>
-      <LocationUri>http://docs.oasis-open.org/ubl/os-UBL-2.1/cl/gc/default/CountryIdentificationCode-2.1.gc</LocationUri>
-      <AlternateFormatLocationUri MimeType="text/xml">http://www.unece.org/fileadmin/DAM/uncefact/identifierlist/standard/ISO_ISOTwoletterCountryCode_SecondEdition2006VI-12.xsd</AlternateFormatLocationUri>
+      <ShortName>CountryCodeIdentifier</ShortName>
+      <LongName xml:lang="en">Two Letter Country Code Identifier</LongName>
+      <Version>ISO 3166-1 2A:2006</Version>
+      <CanonicalUri>Placeholder</CanonicalUri>
+      <CanonicalVersionUri>Placeholder</CanonicalVersionUri>
+      <LocationUri>http://www.unece.org/fileadmin/DAM/uncefact/identifierlist/standard/ISO_ISOTwoletterCountryCode_SecondEdition2006VI-12.xsd</LocationUri>
       <Agency>
-         <LongName xml:lang="en">International Organization for Standardization</LongName>
-         <Identifier Identifier="http://www.unece.org/trade/untdid/d11a/tred/tred3055.htm">5</Identifier>
+         <LongName xml:lang="en">ISO</LongName>
+         <Identifier>ISO</Identifier>
       </Agency>
    </Identification>
    <ColumnSet>
       <Column Id="code" Use="required">
          <ShortName>Code</ShortName>
-         <Data Type="normalizedString"/>
+         <Data Type="normalizedString" Lang="en"/>
       </Column>
-      <Column Id="name" Use="required">
+      <Column Id="name" Use="optional">
          <ShortName>Name</ShortName>
-         <Data Type="string"/>
+         <Data Type="string" Lang="en"/>
       </Column>
       <Key Id="codeKey">
          <ShortName>CodeKey</ShortName>
@@ -33,7 +35,7 @@
             <SimpleValue>AD</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>ANDORRA</SimpleValue>
+            <SimpleValue>Andorra</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -41,7 +43,7 @@
             <SimpleValue>AE</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>UNITED ARAB EMIRATES</SimpleValue>
+            <SimpleValue>United Arab Emirates</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -49,7 +51,7 @@
             <SimpleValue>AF</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>AFGHANISTAN</SimpleValue>
+            <SimpleValue>Afghanistan</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -57,7 +59,7 @@
             <SimpleValue>AG</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>ANTIGUA AND BARBUDA</SimpleValue>
+            <SimpleValue>Antigua and Barbuda</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -65,7 +67,7 @@
             <SimpleValue>AI</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>ANGUILLA</SimpleValue>
+            <SimpleValue>Anguilla</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -73,7 +75,7 @@
             <SimpleValue>AL</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>ALBANIA</SimpleValue>
+            <SimpleValue>Albania</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -81,7 +83,7 @@
             <SimpleValue>AM</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>ARMENIA</SimpleValue>
+            <SimpleValue>Armenia</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -89,7 +91,7 @@
             <SimpleValue>AO</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>ANGOLA</SimpleValue>
+            <SimpleValue>Angola</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -97,7 +99,7 @@
             <SimpleValue>AQ</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>ANTARCTICA</SimpleValue>
+            <SimpleValue>Antarctica</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -105,7 +107,7 @@
             <SimpleValue>AR</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>ARGENTINA</SimpleValue>
+            <SimpleValue>Argentina</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -113,7 +115,7 @@
             <SimpleValue>AS</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>AMERICAN SAMOA</SimpleValue>
+            <SimpleValue>American Samoa</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -121,7 +123,7 @@
             <SimpleValue>AT</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>AUSTRIA</SimpleValue>
+            <SimpleValue>Austria</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -129,7 +131,7 @@
             <SimpleValue>AU</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>AUSTRALIA</SimpleValue>
+            <SimpleValue>Australia</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -137,7 +139,7 @@
             <SimpleValue>AW</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>ARUBA</SimpleValue>
+            <SimpleValue>Aruba</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -145,7 +147,7 @@
             <SimpleValue>AX</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>ÅLAND ISLANDS</SimpleValue>
+            <SimpleValue>Åland Islands</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -153,7 +155,7 @@
             <SimpleValue>AZ</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>AZERBAIJAN</SimpleValue>
+            <SimpleValue>Azerbaijan</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -161,7 +163,7 @@
             <SimpleValue>BA</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>BOSNIA AND HERZEGOVINA</SimpleValue>
+            <SimpleValue>Bosnia and Herzegovina</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -169,7 +171,7 @@
             <SimpleValue>BB</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>BARBADOS</SimpleValue>
+            <SimpleValue>Barbados</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -177,7 +179,7 @@
             <SimpleValue>BD</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>BANGLADESH</SimpleValue>
+            <SimpleValue>Bangladesh</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -185,7 +187,7 @@
             <SimpleValue>BE</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>BELGIUM</SimpleValue>
+            <SimpleValue>Belgium</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -193,7 +195,7 @@
             <SimpleValue>BF</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>BURKINA FASO</SimpleValue>
+            <SimpleValue>Burkina Faso</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -201,7 +203,7 @@
             <SimpleValue>BG</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>BULGARIA</SimpleValue>
+            <SimpleValue>Bulgaria</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -209,7 +211,7 @@
             <SimpleValue>BH</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>BAHRAIN</SimpleValue>
+            <SimpleValue>Bahrain</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -217,7 +219,7 @@
             <SimpleValue>BI</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>BURUNDI</SimpleValue>
+            <SimpleValue>Burundi</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -225,7 +227,15 @@
             <SimpleValue>BJ</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>BENIN</SimpleValue>
+            <SimpleValue>Benin</SimpleValue>
+         </Value>
+      </Row>
+      <Row>
+         <Value ColumnRef="code">
+            <SimpleValue>BL</SimpleValue>
+         </Value>
+         <Value ColumnRef="name">
+            <SimpleValue>Saint Barthélemy</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -233,7 +243,7 @@
             <SimpleValue>BM</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>BERMUDA</SimpleValue>
+            <SimpleValue>Bermuda</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -241,7 +251,7 @@
             <SimpleValue>BN</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>BRUNEI DARUSSALAM</SimpleValue>
+            <SimpleValue>Brunei Darussalam</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -249,7 +259,7 @@
             <SimpleValue>BO</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>BOLIVIA, PLURINATIONAL STATE OF</SimpleValue>
+            <SimpleValue>Bolivia, Plurinational State of</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -257,7 +267,7 @@
             <SimpleValue>BQ</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>BONAIRE, SINT EUSTATIUS AND SABA</SimpleValue>
+            <SimpleValue>Bonaire, Sint Eustatius and Saba</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -265,7 +275,7 @@
             <SimpleValue>BR</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>BRAZIL</SimpleValue>
+            <SimpleValue>Brazil</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -273,7 +283,7 @@
             <SimpleValue>BS</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>BAHAMAS</SimpleValue>
+            <SimpleValue>Bahamas</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -281,7 +291,7 @@
             <SimpleValue>BT</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>BHUTAN</SimpleValue>
+            <SimpleValue>Bhutan</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -289,7 +299,7 @@
             <SimpleValue>BV</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>BOUVET ISLAND</SimpleValue>
+            <SimpleValue>Bouvet Island</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -297,7 +307,7 @@
             <SimpleValue>BW</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>BOTSWANA</SimpleValue>
+            <SimpleValue>Botswana</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -305,7 +315,7 @@
             <SimpleValue>BY</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>BELARUS</SimpleValue>
+            <SimpleValue>Belarus</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -313,7 +323,7 @@
             <SimpleValue>BZ</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>BELIZE</SimpleValue>
+            <SimpleValue>Belize</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -321,7 +331,7 @@
             <SimpleValue>CA</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>CANADA</SimpleValue>
+            <SimpleValue>Canada</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -329,7 +339,7 @@
             <SimpleValue>CC</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>COCOS (KEELING) ISLANDS</SimpleValue>
+            <SimpleValue>Cocos (Keeling) Islands</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -337,7 +347,7 @@
             <SimpleValue>CD</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>CONGO, THE DEMOCRATIC REPUBLIC OF THE</SimpleValue>
+            <SimpleValue>Congo, the Democratic Republic of the</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -345,7 +355,7 @@
             <SimpleValue>CF</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>CENTRAL AFRICAN REPUBLIC</SimpleValue>
+            <SimpleValue>Central African Republic</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -353,7 +363,7 @@
             <SimpleValue>CG</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>CONGO</SimpleValue>
+            <SimpleValue>Congo</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -361,7 +371,7 @@
             <SimpleValue>CH</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>SWITZERLAND</SimpleValue>
+            <SimpleValue>Switzerland</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -369,7 +379,7 @@
             <SimpleValue>CI</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>COTE D'IVOIRE</SimpleValue>
+            <SimpleValue>Côte d'Ivoire</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -377,7 +387,7 @@
             <SimpleValue>CK</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>COOK ISLANDS</SimpleValue>
+            <SimpleValue>Cook Islands</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -385,7 +395,7 @@
             <SimpleValue>CL</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>CHILE</SimpleValue>
+            <SimpleValue>Chile</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -393,7 +403,7 @@
             <SimpleValue>CM</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>CAMEROON</SimpleValue>
+            <SimpleValue>Cameroon</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -401,7 +411,7 @@
             <SimpleValue>CN</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>CHINA</SimpleValue>
+            <SimpleValue>China</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -409,7 +419,7 @@
             <SimpleValue>CO</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>COLOMBIA</SimpleValue>
+            <SimpleValue>Colombia</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -417,7 +427,7 @@
             <SimpleValue>CR</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>COSTA RICA</SimpleValue>
+            <SimpleValue>Costa Rica</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -425,7 +435,7 @@
             <SimpleValue>CU</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>CUBA</SimpleValue>
+            <SimpleValue>Cuba</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -433,7 +443,7 @@
             <SimpleValue>CV</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>CAPE VERDE</SimpleValue>
+            <SimpleValue>Cabo Verde</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -441,7 +451,7 @@
             <SimpleValue>CW</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>CURACAO</SimpleValue>
+            <SimpleValue>Curaçao</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -449,7 +459,7 @@
             <SimpleValue>CX</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>CHRISTMAS ISLAND</SimpleValue>
+            <SimpleValue>Christmas Island</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -457,7 +467,7 @@
             <SimpleValue>CY</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>CYPRUS</SimpleValue>
+            <SimpleValue>Cyprus</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -465,7 +475,7 @@
             <SimpleValue>CZ</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>CZECH REPUBLIC</SimpleValue>
+            <SimpleValue>Czech Republic</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -473,7 +483,7 @@
             <SimpleValue>DE</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>GERMANY</SimpleValue>
+            <SimpleValue>Germany</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -481,7 +491,7 @@
             <SimpleValue>DJ</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>DJIBOUTI</SimpleValue>
+            <SimpleValue>Djibouti</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -489,7 +499,7 @@
             <SimpleValue>DK</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>DENMARK</SimpleValue>
+            <SimpleValue>Denmark</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -497,7 +507,7 @@
             <SimpleValue>DM</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>DOMINICA</SimpleValue>
+            <SimpleValue>Dominica</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -505,7 +515,7 @@
             <SimpleValue>DO</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>DOMINICAN REPUBLIC</SimpleValue>
+            <SimpleValue>Dominican Republic</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -513,7 +523,7 @@
             <SimpleValue>DZ</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>ALGERIA</SimpleValue>
+            <SimpleValue>Algeria</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -521,7 +531,7 @@
             <SimpleValue>EC</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>ECUADOR</SimpleValue>
+            <SimpleValue>Ecuador</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -529,7 +539,7 @@
             <SimpleValue>EE</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>ESTONIA</SimpleValue>
+            <SimpleValue>Estonia</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -537,7 +547,7 @@
             <SimpleValue>EG</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>EGYPT</SimpleValue>
+            <SimpleValue>Egypt</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -545,7 +555,7 @@
             <SimpleValue>EH</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>WESTERN SAHARA</SimpleValue>
+            <SimpleValue>Western Sahara</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -553,7 +563,7 @@
             <SimpleValue>ER</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>ERITREA</SimpleValue>
+            <SimpleValue>Eritrea</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -561,7 +571,7 @@
             <SimpleValue>ES</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>SPAIN</SimpleValue>
+            <SimpleValue>Spain</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -569,7 +579,7 @@
             <SimpleValue>ET</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>ETHIOPIA</SimpleValue>
+            <SimpleValue>Ethiopia</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -577,7 +587,7 @@
             <SimpleValue>FI</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>FINLAND</SimpleValue>
+            <SimpleValue>Finland</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -585,7 +595,7 @@
             <SimpleValue>FJ</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>FIJI</SimpleValue>
+            <SimpleValue>Fiji</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -593,7 +603,7 @@
             <SimpleValue>FK</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>FALKLAND ISLANDS (MALVINAS)</SimpleValue>
+            <SimpleValue>Falkland Islands (Malvinas)</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -601,7 +611,7 @@
             <SimpleValue>FM</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>MICRONESIA, FEDERATED STATES OF</SimpleValue>
+            <SimpleValue>Micronesia, Federated States of</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -609,7 +619,7 @@
             <SimpleValue>FO</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>FAROE ISLANDS</SimpleValue>
+            <SimpleValue>Faroe Islands</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -617,7 +627,7 @@
             <SimpleValue>FR</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>FRANCE</SimpleValue>
+            <SimpleValue>France</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -625,7 +635,7 @@
             <SimpleValue>GA</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>GABON</SimpleValue>
+            <SimpleValue>Gabon</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -633,7 +643,7 @@
             <SimpleValue>GB</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>UNITED KINGDOM</SimpleValue>
+            <SimpleValue>United Kingdom of Great Britain and Northern Ireland</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -641,7 +651,7 @@
             <SimpleValue>GD</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>GRENADA</SimpleValue>
+            <SimpleValue>Grenada</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -649,7 +659,7 @@
             <SimpleValue>GE</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>GEORGIA</SimpleValue>
+            <SimpleValue>Georgia</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -657,7 +667,7 @@
             <SimpleValue>GF</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>FRENCH GUIANA</SimpleValue>
+            <SimpleValue>French Guiana</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -665,7 +675,7 @@
             <SimpleValue>GG</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>GUERNESEY</SimpleValue>
+            <SimpleValue>Guernsey</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -673,7 +683,7 @@
             <SimpleValue>GH</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>GHANA</SimpleValue>
+            <SimpleValue>Ghana</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -681,7 +691,7 @@
             <SimpleValue>GI</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>GIBRALTAR</SimpleValue>
+            <SimpleValue>Gibraltar</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -689,7 +699,7 @@
             <SimpleValue>GL</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>GREENLAND</SimpleValue>
+            <SimpleValue>Greenland</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -697,7 +707,7 @@
             <SimpleValue>GM</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>GAMBIA</SimpleValue>
+            <SimpleValue>Gambia</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -705,7 +715,7 @@
             <SimpleValue>GN</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>GUINEA</SimpleValue>
+            <SimpleValue>Guinea</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -713,7 +723,7 @@
             <SimpleValue>GP</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>GUADELOUPE</SimpleValue>
+            <SimpleValue>Guadeloupe</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -721,7 +731,7 @@
             <SimpleValue>GQ</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>EQUATORIAL GUINEA</SimpleValue>
+            <SimpleValue>Equatorial Guinea</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -729,7 +739,7 @@
             <SimpleValue>GR</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>GREECE</SimpleValue>
+            <SimpleValue>Greece</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -737,7 +747,7 @@
             <SimpleValue>GS</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>SOUTH GEORGIA AND THE SOUTH SANDWICH ISLANDS</SimpleValue>
+            <SimpleValue>South Georgia and the South Sandwich Islands</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -745,7 +755,7 @@
             <SimpleValue>GT</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>GUATEMALA</SimpleValue>
+            <SimpleValue>Guatemala</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -753,7 +763,7 @@
             <SimpleValue>GU</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>GUAM</SimpleValue>
+            <SimpleValue>Guam</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -761,7 +771,7 @@
             <SimpleValue>GW</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>GUINEA-BISSAU</SimpleValue>
+            <SimpleValue>Guinea-Bissau</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -769,7 +779,7 @@
             <SimpleValue>GY</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>GUYANA</SimpleValue>
+            <SimpleValue>Guyana</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -777,7 +787,7 @@
             <SimpleValue>HK</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>HONG KONG</SimpleValue>
+            <SimpleValue>Hong Kong</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -785,7 +795,7 @@
             <SimpleValue>HM</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>HEARD ISLAND AND MCDONALD ISLANDS</SimpleValue>
+            <SimpleValue>Heard Island and McDonald Islands</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -793,7 +803,7 @@
             <SimpleValue>HN</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>HONDURAS</SimpleValue>
+            <SimpleValue>Honduras</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -801,7 +811,7 @@
             <SimpleValue>HR</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>CROATIA</SimpleValue>
+            <SimpleValue>Croatia</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -809,7 +819,7 @@
             <SimpleValue>HT</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>HAITI</SimpleValue>
+            <SimpleValue>Haiti</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -817,7 +827,7 @@
             <SimpleValue>HU</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>HUNGARY</SimpleValue>
+            <SimpleValue>Hungary</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -825,7 +835,7 @@
             <SimpleValue>ID</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>INDONESIA</SimpleValue>
+            <SimpleValue>Indonesia</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -833,7 +843,7 @@
             <SimpleValue>IE</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>IRELAND</SimpleValue>
+            <SimpleValue>Ireland</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -841,7 +851,7 @@
             <SimpleValue>IL</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>ISRAEL</SimpleValue>
+            <SimpleValue>Israel</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -849,7 +859,7 @@
             <SimpleValue>IM</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>ISLE OF MAN</SimpleValue>
+            <SimpleValue>Isle of Man</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -857,7 +867,7 @@
             <SimpleValue>IN</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>INDIA</SimpleValue>
+            <SimpleValue>India</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -865,7 +875,7 @@
             <SimpleValue>IO</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>BRITISH INDIAN OCEAN TERRITORY</SimpleValue>
+            <SimpleValue>British Indian Ocean Territory</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -873,7 +883,7 @@
             <SimpleValue>IQ</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>IRAQ</SimpleValue>
+            <SimpleValue>Iraq</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -881,7 +891,7 @@
             <SimpleValue>IR</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>IRAN, ISLAMIC REPUBLIC OF</SimpleValue>
+            <SimpleValue>Iran, Islamic Republic of</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -889,7 +899,7 @@
             <SimpleValue>IS</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>ICELAND</SimpleValue>
+            <SimpleValue>Iceland</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -897,7 +907,7 @@
             <SimpleValue>IT</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>ITALY</SimpleValue>
+            <SimpleValue>Italy</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -905,7 +915,7 @@
             <SimpleValue>JE</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>JERSEY</SimpleValue>
+            <SimpleValue>Jersey</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -913,7 +923,7 @@
             <SimpleValue>JM</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>JAMAICA</SimpleValue>
+            <SimpleValue>Jamaica</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -921,7 +931,7 @@
             <SimpleValue>JO</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>JORDAN</SimpleValue>
+            <SimpleValue>Jordan</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -929,7 +939,7 @@
             <SimpleValue>JP</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>JAPAN</SimpleValue>
+            <SimpleValue>Japan</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -937,7 +947,7 @@
             <SimpleValue>KE</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>KENYA</SimpleValue>
+            <SimpleValue>Kenya</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -945,7 +955,7 @@
             <SimpleValue>KG</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>KYRGYZSTAN</SimpleValue>
+            <SimpleValue>Kyrgyzstan</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -953,7 +963,7 @@
             <SimpleValue>KH</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>CAMBODIA</SimpleValue>
+            <SimpleValue>Cambodia</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -961,7 +971,7 @@
             <SimpleValue>KI</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>KIRIBATI</SimpleValue>
+            <SimpleValue>Kiribati</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -969,7 +979,7 @@
             <SimpleValue>KM</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>COMOROS</SimpleValue>
+            <SimpleValue>Comoros</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -977,7 +987,7 @@
             <SimpleValue>KN</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>SAINT KITTS AND NEVIS</SimpleValue>
+            <SimpleValue>Saint Kitts and Nevis</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -985,7 +995,7 @@
             <SimpleValue>KP</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>KOREA, DEMOCRATIC PEOPLE'S REPUBLIC OF</SimpleValue>
+            <SimpleValue>Korea, Democratic People's Republic of</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -993,7 +1003,7 @@
             <SimpleValue>KR</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>KOREA, REPUBLIC OF</SimpleValue>
+            <SimpleValue>Korea, Republic of</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1001,7 +1011,7 @@
             <SimpleValue>KW</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>KUWAIT</SimpleValue>
+            <SimpleValue>Kuwait</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1009,7 +1019,7 @@
             <SimpleValue>KY</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>CAYMAN ISLANDS</SimpleValue>
+            <SimpleValue>Cayman Islands</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1017,7 +1027,7 @@
             <SimpleValue>KZ</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>KAZAKHSTAN</SimpleValue>
+            <SimpleValue>Kazakhstan</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1025,7 +1035,7 @@
             <SimpleValue>LA</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>LAO PEOPLE'S DEMOCRATIC REPUBLIC</SimpleValue>
+            <SimpleValue>Lao People's Democratic Republic</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1033,7 +1043,7 @@
             <SimpleValue>LB</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>LEBANON</SimpleValue>
+            <SimpleValue>Lebanon</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1041,7 +1051,7 @@
             <SimpleValue>LC</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>SAINT LUCIA</SimpleValue>
+            <SimpleValue>Saint Lucia</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1049,7 +1059,7 @@
             <SimpleValue>LI</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>LIECHTENSTEIN</SimpleValue>
+            <SimpleValue>Liechtenstein</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1057,7 +1067,7 @@
             <SimpleValue>LK</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>SRI LANKA</SimpleValue>
+            <SimpleValue>Sri Lanka</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1065,7 +1075,7 @@
             <SimpleValue>LR</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>LIBERIA</SimpleValue>
+            <SimpleValue>Liberia</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1073,7 +1083,7 @@
             <SimpleValue>LS</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>LESOTHO</SimpleValue>
+            <SimpleValue>Lesotho</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1081,7 +1091,7 @@
             <SimpleValue>LT</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>LITHUANIA</SimpleValue>
+            <SimpleValue>Lithuania</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1089,7 +1099,7 @@
             <SimpleValue>LU</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>LUXEMBOURG</SimpleValue>
+            <SimpleValue>Luxembourg</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1097,7 +1107,7 @@
             <SimpleValue>LV</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>LATVIA</SimpleValue>
+            <SimpleValue>Latvia</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1105,7 +1115,7 @@
             <SimpleValue>LY</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>LIBYA</SimpleValue>
+            <SimpleValue>Libya</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1113,7 +1123,7 @@
             <SimpleValue>MA</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>MOROCCO</SimpleValue>
+            <SimpleValue>Morocco</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1121,7 +1131,7 @@
             <SimpleValue>MC</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>MONACO</SimpleValue>
+            <SimpleValue>Monaco</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1129,7 +1139,7 @@
             <SimpleValue>MD</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>MOLDOVA, REPUBLIC OF</SimpleValue>
+            <SimpleValue>Moldova, Republic of</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1137,7 +1147,15 @@
             <SimpleValue>ME</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>MONTENEGRO</SimpleValue>
+            <SimpleValue>Montenegro</SimpleValue>
+         </Value>
+      </Row>
+      <Row>
+         <Value ColumnRef="code">
+            <SimpleValue>MF</SimpleValue>
+         </Value>
+         <Value ColumnRef="name">
+            <SimpleValue>Saint Martin (French part)</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1145,7 +1163,7 @@
             <SimpleValue>MG</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>MADAGASCAR</SimpleValue>
+            <SimpleValue>Madagascar</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1153,7 +1171,7 @@
             <SimpleValue>MH</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>MARSHALL ISLANDS</SimpleValue>
+            <SimpleValue>Marshall Islands</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1161,7 +1179,7 @@
             <SimpleValue>MK</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>MACEDONIA, THE FORMER YUGOSLAV REPUBLIC OF</SimpleValue>
+            <SimpleValue>Macedonia, the former Yugoslav Republic of</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1169,7 +1187,7 @@
             <SimpleValue>ML</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>MALI</SimpleValue>
+            <SimpleValue>Mali</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1177,7 +1195,7 @@
             <SimpleValue>MM</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>MYANMAR</SimpleValue>
+            <SimpleValue>Myanmar</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1185,7 +1203,7 @@
             <SimpleValue>MN</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>MONGOLIA</SimpleValue>
+            <SimpleValue>Mongolia</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1193,7 +1211,7 @@
             <SimpleValue>MO</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>MACAO</SimpleValue>
+            <SimpleValue>Macao</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1201,7 +1219,7 @@
             <SimpleValue>MP</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>NORTHERN MARIANA ISLANDS</SimpleValue>
+            <SimpleValue>Northern Mariana Islands</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1209,7 +1227,7 @@
             <SimpleValue>MQ</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>MARTINIQUE</SimpleValue>
+            <SimpleValue>Martinique</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1217,7 +1235,7 @@
             <SimpleValue>MR</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>MAURITANIA</SimpleValue>
+            <SimpleValue>Mauritania</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1225,7 +1243,7 @@
             <SimpleValue>MS</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>MONTSERRAT</SimpleValue>
+            <SimpleValue>Montserrat</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1233,7 +1251,7 @@
             <SimpleValue>MT</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>MALTA</SimpleValue>
+            <SimpleValue>Malta</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1241,7 +1259,7 @@
             <SimpleValue>MU</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>MAURITIUS</SimpleValue>
+            <SimpleValue>Mauritius</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1249,7 +1267,7 @@
             <SimpleValue>MV</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>MALDIVES</SimpleValue>
+            <SimpleValue>Maldives</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1257,7 +1275,7 @@
             <SimpleValue>MW</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>MALAWI</SimpleValue>
+            <SimpleValue>Malawi</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1265,7 +1283,7 @@
             <SimpleValue>MX</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>MEXICO</SimpleValue>
+            <SimpleValue>Mexico</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1273,7 +1291,7 @@
             <SimpleValue>MY</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>MALAYSIA</SimpleValue>
+            <SimpleValue>Malaysia</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1281,7 +1299,7 @@
             <SimpleValue>MZ</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>MOZAMBIQUE</SimpleValue>
+            <SimpleValue>Mozambique</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1289,7 +1307,7 @@
             <SimpleValue>NA</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>NAMIBIA</SimpleValue>
+            <SimpleValue>Namibia</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1297,7 +1315,7 @@
             <SimpleValue>NC</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>NEW CALEDONIA</SimpleValue>
+            <SimpleValue>New Caledonia</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1305,7 +1323,7 @@
             <SimpleValue>NE</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>NIGER</SimpleValue>
+            <SimpleValue>Niger</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1313,7 +1331,7 @@
             <SimpleValue>NF</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>NORFOLK ISLAND</SimpleValue>
+            <SimpleValue>Norfolk Island</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1321,7 +1339,7 @@
             <SimpleValue>NG</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>NIGERIA</SimpleValue>
+            <SimpleValue>Nigeria</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1329,7 +1347,7 @@
             <SimpleValue>NI</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>NICARAGUA</SimpleValue>
+            <SimpleValue>Nicaragua</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1337,7 +1355,7 @@
             <SimpleValue>NL</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>NETHERLANDS</SimpleValue>
+            <SimpleValue>Netherlands</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1345,7 +1363,7 @@
             <SimpleValue>NO</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>NORWAY</SimpleValue>
+            <SimpleValue>Norway</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1353,7 +1371,7 @@
             <SimpleValue>NP</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>NEPAL</SimpleValue>
+            <SimpleValue>Nepal</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1361,7 +1379,7 @@
             <SimpleValue>NR</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>NAURU</SimpleValue>
+            <SimpleValue>Nauru</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1369,7 +1387,7 @@
             <SimpleValue>NU</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>NIUE</SimpleValue>
+            <SimpleValue>Niue</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1377,7 +1395,7 @@
             <SimpleValue>NZ</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>NEW ZEALAND</SimpleValue>
+            <SimpleValue>New Zealand</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1385,7 +1403,7 @@
             <SimpleValue>OM</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>OMAN</SimpleValue>
+            <SimpleValue>Oman</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1393,7 +1411,7 @@
             <SimpleValue>PA</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>PANAMA</SimpleValue>
+            <SimpleValue>Panama</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1401,7 +1419,7 @@
             <SimpleValue>PE</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>PERU</SimpleValue>
+            <SimpleValue>Peru</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1409,7 +1427,7 @@
             <SimpleValue>PF</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>FRENCH POLYNESIA</SimpleValue>
+            <SimpleValue>French Polynesia</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1417,7 +1435,7 @@
             <SimpleValue>PG</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>PAPUA NEW GUINEA</SimpleValue>
+            <SimpleValue>Papua New Guinea</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1425,7 +1443,7 @@
             <SimpleValue>PH</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>PHILIPPINES</SimpleValue>
+            <SimpleValue>Philippines</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1433,7 +1451,7 @@
             <SimpleValue>PK</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>PAKISTAN</SimpleValue>
+            <SimpleValue>Pakistan</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1441,7 +1459,7 @@
             <SimpleValue>PL</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>POLAND</SimpleValue>
+            <SimpleValue>Poland</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1449,7 +1467,7 @@
             <SimpleValue>PM</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>SAINT PIERRE AND MIQUELON</SimpleValue>
+            <SimpleValue>Saint Pierre and Miquelon</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1457,7 +1475,7 @@
             <SimpleValue>PN</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>PITCAIRN</SimpleValue>
+            <SimpleValue>Pitcairn</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1465,7 +1483,7 @@
             <SimpleValue>PR</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>PUERTO RICO</SimpleValue>
+            <SimpleValue>Puerto Rico</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1473,7 +1491,7 @@
             <SimpleValue>PS</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>PALESTINIAN TERRITORY, OCCUPIED</SimpleValue>
+            <SimpleValue>Palestine, State of</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1481,7 +1499,7 @@
             <SimpleValue>PT</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>PORTUGAL</SimpleValue>
+            <SimpleValue>Portugal</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1489,7 +1507,7 @@
             <SimpleValue>PW</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>PALAU</SimpleValue>
+            <SimpleValue>Palau</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1497,7 +1515,7 @@
             <SimpleValue>PY</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>PARAGUAY</SimpleValue>
+            <SimpleValue>Paraguay</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1505,7 +1523,7 @@
             <SimpleValue>QA</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>QATAR</SimpleValue>
+            <SimpleValue>Qatar</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1513,7 +1531,7 @@
             <SimpleValue>RE</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>REUNION</SimpleValue>
+            <SimpleValue>Réunion</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1521,7 +1539,7 @@
             <SimpleValue>RO</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>ROMANIA</SimpleValue>
+            <SimpleValue>Romania</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1529,7 +1547,7 @@
             <SimpleValue>RS</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>SERBIA</SimpleValue>
+            <SimpleValue>Serbia</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1537,7 +1555,7 @@
             <SimpleValue>RU</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>RUSSIAN FEDERATION</SimpleValue>
+            <SimpleValue>Russian Federation</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1545,7 +1563,7 @@
             <SimpleValue>RW</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>RWANDA</SimpleValue>
+            <SimpleValue>Rwanda</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1553,7 +1571,7 @@
             <SimpleValue>SA</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>SAUDI ARABIA</SimpleValue>
+            <SimpleValue>Saudi Arabia</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1561,7 +1579,7 @@
             <SimpleValue>SB</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>SOLOMON ISLANDS</SimpleValue>
+            <SimpleValue>Solomon Islands</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1569,7 +1587,7 @@
             <SimpleValue>SC</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>SEYCHELLES</SimpleValue>
+            <SimpleValue>Seychelles</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1577,7 +1595,7 @@
             <SimpleValue>SD</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>SUDAN</SimpleValue>
+            <SimpleValue>Sudan</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1585,7 +1603,7 @@
             <SimpleValue>SE</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>SWEDEN</SimpleValue>
+            <SimpleValue>Sweden</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1593,7 +1611,7 @@
             <SimpleValue>SG</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>SINGAPORE</SimpleValue>
+            <SimpleValue>Singapore</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1601,7 +1619,7 @@
             <SimpleValue>SH</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>SAINT HELENA</SimpleValue>
+            <SimpleValue>Saint Helena, Ascension and Tristan da Cunha</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1609,7 +1627,7 @@
             <SimpleValue>SI</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>SLOVENIA</SimpleValue>
+            <SimpleValue>Slovenia</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1617,7 +1635,7 @@
             <SimpleValue>SJ</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>SVALBARD AND JAN MAYEN</SimpleValue>
+            <SimpleValue>Svalbard and Jan Mayen</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1625,7 +1643,7 @@
             <SimpleValue>SK</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>SLOVAKIA</SimpleValue>
+            <SimpleValue>Slovakia</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1633,7 +1651,7 @@
             <SimpleValue>SL</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>SIERRA LEONE</SimpleValue>
+            <SimpleValue>Sierra Leone</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1641,7 +1659,7 @@
             <SimpleValue>SM</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>SAN MARINO</SimpleValue>
+            <SimpleValue>San Marino</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1649,7 +1667,7 @@
             <SimpleValue>SN</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>SENEGAL</SimpleValue>
+            <SimpleValue>Senegal</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1657,7 +1675,7 @@
             <SimpleValue>SO</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>SOMALIA</SimpleValue>
+            <SimpleValue>Somalia</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1665,7 +1683,7 @@
             <SimpleValue>SR</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>SURINAME</SimpleValue>
+            <SimpleValue>Suriname</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1673,7 +1691,7 @@
             <SimpleValue>SS</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>SOUTH SUDAN</SimpleValue>
+            <SimpleValue>South Sudan</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1681,7 +1699,7 @@
             <SimpleValue>ST</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>SAO TOME AND PRINCIPE</SimpleValue>
+            <SimpleValue>Sao Tome and Principe</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1689,7 +1707,7 @@
             <SimpleValue>SV</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>EL SALVADOR</SimpleValue>
+            <SimpleValue>El Salvador</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1697,7 +1715,7 @@
             <SimpleValue>SX</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>SINT MAARTEN (DUTCH PART)</SimpleValue>
+            <SimpleValue>Sint Maarten (Dutch part)</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1705,7 +1723,7 @@
             <SimpleValue>SY</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>SYRIAN ARAB REPUBLIC</SimpleValue>
+            <SimpleValue>Syrian Arab Republic</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1713,7 +1731,7 @@
             <SimpleValue>SZ</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>SWAZILAND</SimpleValue>
+            <SimpleValue>Swaziland</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1721,7 +1739,7 @@
             <SimpleValue>TC</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>TURKS AND CAICOS ISLANDS</SimpleValue>
+            <SimpleValue>Turks and Caicos Islands</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1729,7 +1747,7 @@
             <SimpleValue>TD</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>CHAD</SimpleValue>
+            <SimpleValue>Chad</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1737,7 +1755,7 @@
             <SimpleValue>TF</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>FRENCH SOUTHERN TERRITORIES</SimpleValue>
+            <SimpleValue>French Southern Territories</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1745,7 +1763,7 @@
             <SimpleValue>TG</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>TOGO</SimpleValue>
+            <SimpleValue>Togo</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1753,7 +1771,7 @@
             <SimpleValue>TH</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>THAILAND</SimpleValue>
+            <SimpleValue>Thailand</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1761,7 +1779,7 @@
             <SimpleValue>TJ</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>TAJIKISTAN</SimpleValue>
+            <SimpleValue>Tajikistan</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1769,7 +1787,7 @@
             <SimpleValue>TK</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>TOKELAU</SimpleValue>
+            <SimpleValue>Tokelau</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1777,7 +1795,7 @@
             <SimpleValue>TL</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>TIMOR-LESTE</SimpleValue>
+            <SimpleValue>Timor-Leste</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1785,7 +1803,7 @@
             <SimpleValue>TM</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>TURKMENISTAN</SimpleValue>
+            <SimpleValue>Turkmenistan</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1793,7 +1811,7 @@
             <SimpleValue>TN</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>TUNISIA</SimpleValue>
+            <SimpleValue>Tunisia</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1801,7 +1819,7 @@
             <SimpleValue>TO</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>TONGA</SimpleValue>
+            <SimpleValue>Tonga</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1809,7 +1827,7 @@
             <SimpleValue>TR</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>TURKEY</SimpleValue>
+            <SimpleValue>Turkey</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1817,7 +1835,7 @@
             <SimpleValue>TT</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>TRINIDAD AND TOBAGO</SimpleValue>
+            <SimpleValue>Trinidad and Tobago</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1825,7 +1843,7 @@
             <SimpleValue>TV</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>TUVALU</SimpleValue>
+            <SimpleValue>Tuvalu</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1833,7 +1851,7 @@
             <SimpleValue>TW</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>TAIWAN, PROVINCE OF CHINA</SimpleValue>
+            <SimpleValue>Taiwan, Province of China</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1841,7 +1859,7 @@
             <SimpleValue>TZ</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>TANZANIA, UNITED REPUBLIC OF</SimpleValue>
+            <SimpleValue>Tanzania, United Republic of</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1849,7 +1867,7 @@
             <SimpleValue>UA</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>UKRAINE</SimpleValue>
+            <SimpleValue>Ukraine</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1857,7 +1875,7 @@
             <SimpleValue>UG</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>UGANDA</SimpleValue>
+            <SimpleValue>Uganda</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1865,7 +1883,7 @@
             <SimpleValue>UM</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>UNITED STATES MINOR OUTLYING ISLANDS</SimpleValue>
+            <SimpleValue>United States Minor Outlying Islands</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1873,7 +1891,7 @@
             <SimpleValue>US</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>UNITED STATES</SimpleValue>
+            <SimpleValue>United States of America</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1881,7 +1899,7 @@
             <SimpleValue>UY</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>URUGUAY</SimpleValue>
+            <SimpleValue>Uruguay</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1889,7 +1907,7 @@
             <SimpleValue>UZ</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>UZBEKISTAN</SimpleValue>
+            <SimpleValue>Uzbekistan</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1897,7 +1915,7 @@
             <SimpleValue>VA</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>HOLY SEE (VATICAN CITY STATE)</SimpleValue>
+            <SimpleValue>Holy See</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1905,7 +1923,7 @@
             <SimpleValue>VC</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>SAINT VINCENT AND THE GRENADINES</SimpleValue>
+            <SimpleValue>Saint Vincent and the Grenadines</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1913,7 +1931,7 @@
             <SimpleValue>VE</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>VENEZUELA, BOLIVARIAN REPUBLIC OF</SimpleValue>
+            <SimpleValue>Venezuela, Bolivarian Republic of</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1921,7 +1939,7 @@
             <SimpleValue>VG</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>VIRGIN ISLANDS, BRITISH</SimpleValue>
+            <SimpleValue>Virgin Islands, British</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1929,7 +1947,7 @@
             <SimpleValue>VI</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>VIRGIN ISLANDS, U.S.</SimpleValue>
+            <SimpleValue>Virgin Islands, U.S.</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1937,7 +1955,7 @@
             <SimpleValue>VN</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>VIET NAM</SimpleValue>
+            <SimpleValue>Viet Nam</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1945,7 +1963,7 @@
             <SimpleValue>VU</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>VANUATU</SimpleValue>
+            <SimpleValue>Vanuatu</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1953,7 +1971,7 @@
             <SimpleValue>WF</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>WALLIS AND FUTUNA</SimpleValue>
+            <SimpleValue>Wallis and Futuna</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1961,7 +1979,7 @@
             <SimpleValue>WS</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>SAMOA</SimpleValue>
+            <SimpleValue>Samoa</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1969,7 +1987,7 @@
             <SimpleValue>YE</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>YEMEN</SimpleValue>
+            <SimpleValue>Yemen</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1977,7 +1995,7 @@
             <SimpleValue>YT</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>MAYOTTE</SimpleValue>
+            <SimpleValue>Mayotte</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1985,7 +2003,7 @@
             <SimpleValue>ZA</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>SOUTH AFRICA</SimpleValue>
+            <SimpleValue>South Africa</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -1993,7 +2011,7 @@
             <SimpleValue>ZM</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>ZAMBIA</SimpleValue>
+            <SimpleValue>Zambia</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -2001,7 +2019,7 @@
             <SimpleValue>ZW</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>ZIMBABWE</SimpleValue>
+            <SimpleValue>Zimbabwe</SimpleValue>
          </Value>
       </Row>
    </SimpleCodeList>
