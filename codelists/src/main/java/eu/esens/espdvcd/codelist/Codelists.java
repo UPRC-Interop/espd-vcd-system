@@ -54,6 +54,14 @@ public enum Codelists {
     public final String getIdForData(String data) {
         return getInstance().getIdForData(data);
     }
+    
+    public final boolean containsId(String id) {
+        return getInstance().containsId(id);
+    }
+    
+    public final boolean containsValue(String value) {
+        return getInstance().containsValue(value);
+    }   
 
     public final String getValueForId(String id) {
         return getInstance().getValueForId(id);

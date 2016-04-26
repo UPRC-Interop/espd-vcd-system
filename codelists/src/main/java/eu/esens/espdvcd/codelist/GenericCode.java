@@ -76,6 +76,14 @@ public class GenericCode {
         //return getRowSimpleValueWithCode("code", id, "name");
         return clBiMap.get(id);
     }
+    
+    protected final boolean containsId(String id) {
+        return clBiMap.containsKey(id);
+    }
+    
+    protected final boolean containsValue(String value) {
+        return clBiMap.containsValue(value);
+    }
 
     private BiMap<String, String> createBiMap() {
         Map<String, String> sourceMap = new LinkedHashMap<>();
