@@ -9,6 +9,7 @@ import eu.esens.espdvcd.model.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,11 +18,13 @@ import java.util.Map;
  */
 public class ESPDResponseForm extends ESPDForm {
 
+    private static final long serialVersionUID = -5560648566867967260L;
+
     private ESPDResponse espdResponse = null;
-    private HashMap<String,List<CriterionForm>> exclusionCriterionHash = new HashMap<>();
-    private HashMap<String,List<CriterionForm>> selectionCriterionHash = new HashMap<>();
-    private HashMap<String,List<CriterionForm>> economicOperatorCriterionHash = new HashMap<>();
-    private HashMap<String,List<CriterionForm>> reductionCriterionHash = new HashMap<>();
+    private HashMap<String,List<CriterionForm>> exclusionCriterionHash = new LinkedHashMap<>();
+    private HashMap<String,List<CriterionForm>> selectionCriterionHash = new LinkedHashMap<>();
+    private HashMap<String,List<CriterionForm>> economicOperatorCriterionHash = new LinkedHashMap<>();
+    private HashMap<String,List<CriterionForm>> reductionCriterionHash = new LinkedHashMap<>();
     private List<CriterionGroupForm> exclusionCriterionGroupForms = new ArrayList<>();
     private List<CriterionGroupForm> selectionCriterionGroupForms = new ArrayList<>();
     private List<CriterionGroupForm> economicOperatorCriterionGroupForms = new ArrayList<>();

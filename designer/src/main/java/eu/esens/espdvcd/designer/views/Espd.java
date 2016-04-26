@@ -80,7 +80,7 @@ public class Espd extends Master {
                     ESPDBuilder espdBuilder = new ESPDBuilder();
                     espdResponse = espdBuilder.createESPDResponseFromXML(is);
 
-                    System.out.println("EO Country 1: " + espdResponse.getEoDetails().getRegistrationCountryCode());
+//                    System.out.println("EO Country 1: " + espdResponse.getEoDetails().getRegistrationCountryCode());
 
                     if (espdResponse.getEoDetails() == null) { // <- I must do this to upon import
                         EODetails eoDetails = new EODetails();
