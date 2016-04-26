@@ -1,8 +1,9 @@
 package eu.esens.espdvcd.model.requirement;
 
+import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.requirement.response.Response;
 import eu.esens.espdvcd.model.Evidence;
-import eu.esens.espdvcd.model.requirement.response.Responses;
+import eu.esens.espdvcd.model.requirement.response.ResponseFactory;
 import java.util.List;
 
 /**
@@ -12,10 +13,10 @@ public class RequestRequirement implements Requirement {
 
     private static final long serialVersionUID = 528517963577425517L;
     private String ID;
-    private Responses.Type responseDataType;
+    private ResponseTypeEnum responseDataType;
     private String description;
 
-    public RequestRequirement(String ID, Responses.Type responseDataType, String description) {
+    public RequestRequirement(String ID, ResponseTypeEnum responseDataType, String description) {
         this.ID = ID;
         this.responseDataType = responseDataType;
         this.description = description;
@@ -62,12 +63,12 @@ public class RequestRequirement implements Requirement {
     }
 
     @Override
-    public void setResponseDataType(Responses.Type responseDataType) {
+    public void setResponseDataType(ResponseTypeEnum responseDataType) {
         this.responseDataType = responseDataType;
     }
 
     @Override
-    public Responses.Type getResponseDataType() {
+    public ResponseTypeEnum getResponseDataType() {
       return this.responseDataType;
     }
 }

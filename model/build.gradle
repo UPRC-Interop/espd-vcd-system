@@ -1,5 +1,6 @@
 dependencies {
     compile project(':schema')
+    compile project(':codelists')
 
     /* hibernate */
     compile(libraries.hibernate_core) {

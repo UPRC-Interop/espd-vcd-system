@@ -5,6 +5,7 @@
  */
 package eu.esens.espdvcd.builder.schema;
 
+import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.EODetails;
 import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.model.requirement.response.DescriptionResponse;
@@ -230,7 +231,7 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
         return req;
     }
 
-    private ResponseType extractResponse(Response response, Responses.Type respType) {
+    private ResponseType extractResponse(Response response, ResponseTypeEnum respType) {
 
         ResponseType rType = new ResponseType();
         if (response == null)

@@ -3,14 +3,9 @@ package eu.esens.espdvcd.designer.views;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.ui.*;
+import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 
-import eu.esens.espdvcd.designer.components.CountryComboBox;
-import eu.esens.espdvcd.designer.components.EODetailsForm;
-import eu.esens.espdvcd.model.ContactingDetails;
-import eu.esens.espdvcd.model.EODetails;
-import eu.esens.espdvcd.model.NaturalPerson;
-import eu.esens.espdvcd.model.PostalAddress;
-import eu.esens.espdvcd.model.requirement.response.Responses;
+import eu.esens.espdvcd.model.requirement.response.ResponseFactory;
 import eu.esens.espdvcd.designer.components.requirement.*;
 import eu.esens.espdvcd.model.requirement.response.AmountResponse;
 import eu.esens.espdvcd.model.requirement.response.CountryCodeResponse;
@@ -46,7 +41,7 @@ public class Sandbox extends Master {
         pageContent.setSpacing(true);
 
         { // IndicatorResponse
-            IndicatorResponse indicatorResponse = (IndicatorResponse) Responses.createResponse(Responses.Type.INDICATOR);
+            IndicatorResponse indicatorResponse = (IndicatorResponse) ResponseFactory.createResponse(ResponseTypeEnum.INDICATOR);
             IndicatorResponseForm indicatorResponseForm = new IndicatorResponseForm(indicatorResponse, "Indicator test case");
             pageContent.addComponent(indicatorResponseForm);
 
@@ -58,7 +53,7 @@ public class Sandbox extends Master {
         }
 
         { // DescriptionResponse
-            DescriptionResponse descriptionResponse = (DescriptionResponse) Responses.createResponse(Responses.Type.DESCRIPTION);
+            DescriptionResponse descriptionResponse = (DescriptionResponse) ResponseFactory.createResponse(ResponseTypeEnum.DESCRIPTION);
             DescriptionResponseForm descriptionResponseForm = new DescriptionResponseForm(descriptionResponse, "DescriptionResponse test case");
             pageContent.addComponent(descriptionResponseForm);
 
@@ -70,7 +65,7 @@ public class Sandbox extends Master {
         }
 
         { // DateResponseForm
-            DateResponse dateResponse = (DateResponse) Responses.createResponse(Responses.Type.DATE);
+            DateResponse dateResponse = (DateResponse) ResponseFactory.createResponse(ResponseTypeEnum.DATE);
             DateResponseForm dateResponseForm = new DateResponseForm(dateResponse, "DateResponse test case");
             pageContent.addComponent(dateResponseForm);
 
@@ -82,7 +77,7 @@ public class Sandbox extends Master {
         }
 
         { // QuantityResponseForm
-            QuantityResponse quantityResponse = (QuantityResponse) Responses.createResponse(Responses.Type.QUANTITY);
+            QuantityResponse quantityResponse = (QuantityResponse) ResponseFactory.createResponse(ResponseTypeEnum.QUANTITY);
             QuantityResponseForm quantityResponseForm = new QuantityResponseForm(quantityResponse, "QuantityResponse test case");
             pageContent.addComponent(quantityResponseForm);
 
@@ -94,7 +89,7 @@ public class Sandbox extends Master {
         }
 
         { // QuantityYearResponseForm
-            QuantityYearResponse quantityYearResponse = (QuantityYearResponse) Responses.createResponse(Responses.Type.QUANTITY_YEAR);
+            QuantityYearResponse quantityYearResponse = (QuantityYearResponse) ResponseFactory.createResponse(ResponseTypeEnum.QUANTITY_YEAR);
             QuantityYearResponseForm quantityYearResponseForm = new QuantityYearResponseForm(quantityYearResponse, "QuantityYearResponse test case");
             pageContent.addComponent(quantityYearResponseForm);
 
@@ -106,7 +101,7 @@ public class Sandbox extends Master {
         }
 
         { // QuantityIntegerResponseForm
-            QuantityIntegerResponse quantityIntegerResponse = (QuantityIntegerResponse) Responses.createResponse(Responses.Type.QUANTITY_INTEGER);
+            QuantityIntegerResponse quantityIntegerResponse = (QuantityIntegerResponse) ResponseFactory.createResponse(ResponseTypeEnum.QUANTITY_INTEGER);
             QuantityIntegerResponseForm quantityIntegerResponseForm = new QuantityIntegerResponseForm(quantityIntegerResponse, "QuantityIntegerResponse test case");
             pageContent.addComponent(quantityIntegerResponseForm);
 
@@ -118,7 +113,7 @@ public class Sandbox extends Master {
         }
 
         { // AmountResponseForm
-            AmountResponse amountResponse = (AmountResponse) Responses.createResponse(Responses.Type.AMOUNT);
+            AmountResponse amountResponse = (AmountResponse) ResponseFactory.createResponse(ResponseTypeEnum.AMOUNT);
             AmountResponseForm amountResponseForm = new AmountResponseForm(amountResponse, "AmonuntResponse test case");
             pageContent.addComponent(amountResponseForm);
 
@@ -131,7 +126,7 @@ public class Sandbox extends Master {
         }
 
         { // CountryCodeResponseForm
-            CountryCodeResponse countryCodeResponse = (CountryCodeResponse) Responses.createResponse(Responses.Type.CODE_COUNTRY);
+            CountryCodeResponse countryCodeResponse = (CountryCodeResponse) ResponseFactory.createResponse(ResponseTypeEnum.CODE_COUNTRY);
             CountryCodeResponseForm countryCodeResponseForm = new CountryCodeResponseForm(countryCodeResponse, "CountryCodeResponse test case");
             pageContent.addComponent(countryCodeResponseForm);
 
@@ -143,7 +138,7 @@ public class Sandbox extends Master {
         }
 
         { // PercentageResponseForm
-            PercentageResponse percentageResponse = (PercentageResponse) Responses.createResponse(Responses.Type.PERCENTAGE);
+            PercentageResponse percentageResponse = (PercentageResponse) ResponseFactory.createResponse(ResponseTypeEnum.PERCENTAGE);
             PercentageResponseForm percentageResponseForm = new PercentageResponseForm(percentageResponse, "PercentageResponse test case");
             pageContent.addComponent(percentageResponseForm);
 
@@ -155,7 +150,7 @@ public class Sandbox extends Master {
         }
 
         { // PeriodResponseForm
-            PeriodResponse periodResponse = (PeriodResponse) Responses.createResponse(Responses.Type.PERIOD);
+            PeriodResponse periodResponse = (PeriodResponse) ResponseFactory.createResponse(ResponseTypeEnum.PERIOD);
             PeriodResponseForm percentageResponseForm = new PeriodResponseForm(periodResponse, "PeriodResponse test case");
             pageContent.addComponent(percentageResponseForm);
 
@@ -167,7 +162,7 @@ public class Sandbox extends Master {
         }
 
         { // EvidenceURLResponseForm
-            EvidenceURLResponse evidenceURLResponse = (EvidenceURLResponse) Responses.createResponse(Responses.Type.EVIDENCE_URL);
+            EvidenceURLResponse evidenceURLResponse = (EvidenceURLResponse) ResponseFactory.createResponse(ResponseTypeEnum.EVIDENCE_URL);
             EvidenceURLResponseForm evidenceURLResponseForm = new EvidenceURLResponseForm(evidenceURLResponse, "EvidenceURLResponse test case");
             pageContent.addComponent(evidenceURLResponseForm);
 
@@ -179,7 +174,7 @@ public class Sandbox extends Master {
         }
 
         { // EvidenceURLCodeResponseForm
-            EvidenceURLCodeResponse evidenceURLCodeResponse = (EvidenceURLCodeResponse) Responses.createResponse(Responses.Type.CODE);
+            EvidenceURLCodeResponse evidenceURLCodeResponse = (EvidenceURLCodeResponse) ResponseFactory.createResponse(ResponseTypeEnum.CODE);
             EvidenceURLCodeResponseForm evidenceURLCodeResponseForm = new EvidenceURLCodeResponseForm(evidenceURLCodeResponse, "EvidenceURLCodeResponse test case");
             pageContent.addComponent(evidenceURLCodeResponseForm);
 

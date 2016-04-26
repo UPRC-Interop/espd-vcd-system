@@ -1,6 +1,6 @@
 package eu.esens.espdvcd.codelist.enums;
 
-public enum ResponseEnum {
+public enum ResponseTypeEnum {
 
     INDICATOR,
     DATE,

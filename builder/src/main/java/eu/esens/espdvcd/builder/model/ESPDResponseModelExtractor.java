@@ -1,10 +1,11 @@
 package eu.esens.espdvcd.builder.model;
 
+import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.ContactingDetails;
 import eu.esens.espdvcd.model.EODetails;
 import eu.esens.espdvcd.model.NaturalPerson;
 import eu.esens.espdvcd.model.PostalAddress;
-import eu.esens.espdvcd.model.requirement.response.Responses;
+import eu.esens.espdvcd.model.requirement.response.ResponseFactory;
 import eu.esens.espdvcd.model.SimpleESPDResponse;
 import eu.esens.espdvcd.model.requirement.response.*;
 import eu.esens.espdvcd.model.requirement.Requirement;
@@ -41,20 +42,25 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
         return res;
     }
 
+    /**
+     *
+     * @param rt
+     * @return The Extracted @Requirement  
+     */
     @Override
     public Requirement extractRequirement(RequirementType rt) {
 
         Requirement r = ModelExtractor.super.extractRequirement(rt);
 
         if (!rt.getResponse().isEmpty()) {
-            r.setResponse(extractResponse(rt.getResponse().get(0), Responses.Type.valueOf(rt.getResponseDataType())));
+            r.setResponse(extractResponse(rt.getResponse().get(0), ResponseTypeEnum.valueOf(rt.getResponseDataType())));
         } else { 
-            r.setResponse(Responses.createResponse(r.getResponseDataType()));
+            r.setResponse(ResponseFactory.createResponse(r.getResponseDataType()));
         }
         return r;
     }
 
-    public Response extractResponse(ResponseType res, Responses.Type theType) {
+    public Response extractResponse(ResponseType res, ResponseTypeEnum theType) {
 
         switch (theType) {
 

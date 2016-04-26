@@ -50,7 +50,7 @@
          </cac:PowerOfAttorney>
       </espd-cac:RepresentativeNaturalPerson>
       <cac:Party>
-         <cbc:WebsiteURI>Saggariou 3</cbc:WebsiteURI>
+         <cbc:WebsiteURI>http://the.website.of.the.eo</cbc:WebsiteURI>
          <cac:PartyIdentification>
             <cbc:ID>123123123123</cbc:ID>
          </cac:PartyIdentification>

@@ -1,22 +1,23 @@
 package eu.esens.espdvcd.model.requirement;
 
+import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.requirement.response.Response;
 import eu.esens.espdvcd.model.Evidence;
-import eu.esens.espdvcd.model.requirement.response.Responses;
 import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Ulf Lotzmann on 21/03/2016.
  */
+
 public interface Requirement extends Serializable {
     String getID();
 
     void setID(String ID);
 
-    Responses.Type getResponseDataType();
+    ResponseTypeEnum getResponseDataType();
 
-    void setResponseDataType(Responses.Type responseDataType);
+    void setResponseDataType(ResponseTypeEnum responseDataType);
 
     String getDescription();
 

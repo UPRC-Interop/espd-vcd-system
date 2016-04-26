@@ -1,12 +1,12 @@
 package eu.esens.espdvcd.builder.model;
 
+import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.CADetails;
 import eu.esens.espdvcd.model.LegislationReference;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.ResponseRequirement;
-import eu.esens.espdvcd.model.requirement.response.Responses;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.CriterionType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.LegislationType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementGroupType;
@@ -161,7 +161,7 @@ public interface ModelExtractor {
         }
         Requirement r = new ResponseRequirement(
                 theId,
-                Responses.Type.valueOf(rt.getResponseDataType()),
+                ResponseTypeEnum.valueOf(rt.getResponseDataType()),
                 theDescription);
         return r;
     }

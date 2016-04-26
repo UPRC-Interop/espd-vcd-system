@@ -6,25 +6,11 @@
 
 package eu.esens.espdvcd.model.requirement.response;
 
-public class Responses {
+import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 
-    public enum Type {
-
-        INDICATOR,
-        DATE,
-        DESCRIPTION,
-        QUANTITY,
-        QUANTITY_YEAR,
-        QUANTITY_INTEGER,
-        AMOUNT,
-        CODE_COUNTRY,
-        PERCENTAGE,
-        PERIOD,
-        EVIDENCE_URL,
-        CODE;
-    }
+public class ResponseFactory {
     
-    public static Response createResponse(Type type) {
+    public static Response createResponse(ResponseTypeEnum type) {
         switch(type) {
 
             case INDICATOR:
