@@ -6,6 +6,7 @@ import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Label;
+import eu.esens.espdvcd.codelist.Codelists;
 import eu.esens.espdvcd.model.Criterion;
 import eu.esens.espdvcd.model.LegislationReference;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
@@ -45,7 +46,11 @@ public class LegislationReferenceForm extends VerticalLayout {
         description.setValue(legislationReference.getDescription());
 
         jurisdictionLevelCode.setCaption("Legislation Reference Jurisdiction Level Code");
-        jurisdictionLevelCode.setValue(legislationReference.getJurisdictionLevelCode());
+        String legislationReferenceLevelDescription = Codelists.CriterionJurisdictionLevel.getValueForId(legislationReference.getJurisdictionLevelCode());
+        if (legislationReferenceLevelDescription == null) {
+            legislationReferenceLevelDescription = legislationReference.getJurisdictionLevelCode();
+        }
+        jurisdictionLevelCode.setValue(legislationReferenceLevelDescription);
 
         article.setCaption("Legislation Reference Article");
         article.setValue(legislationReference.getArticle());
