@@ -39,6 +39,6 @@ public class CurrencyComboBox extends ComboBox {
             }*/
         }
 
-        this.setInputPrompt("Select currency");
+        this.setInputPrompt("Currency");
     }
 }
