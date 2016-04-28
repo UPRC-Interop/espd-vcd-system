@@ -85,6 +85,7 @@ public class NaturalPersonForm extends Panel {
         birthPlace.setWidth(300, Unit.PIXELS);
 
         birthDate.setWidth(300, Unit.PIXELS);
+        birthDate.setDateFormat("dd/MM/yyyy");
 
         //registrationCountry.setInputPrompt("Registration Country");
         //registrationCountry.setWidth(300, Unit.PIXELS);
