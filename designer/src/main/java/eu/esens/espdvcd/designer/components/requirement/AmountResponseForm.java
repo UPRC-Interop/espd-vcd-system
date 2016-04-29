@@ -1,12 +1,16 @@
 package eu.esens.espdvcd.designer.components.requirement;
 
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
+import com.vaadin.data.util.converter.StringToIntegerConverter;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import eu.esens.espdvcd.designer.components.CurrencyComboBox;
 import eu.esens.espdvcd.model.requirement.response.AmountResponse;
+
+import java.text.NumberFormat;
+import java.util.Locale;
 
 /**
  * Created by ixuz on 4/11/16.

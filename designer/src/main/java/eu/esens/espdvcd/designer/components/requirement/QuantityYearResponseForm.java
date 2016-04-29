@@ -1,9 +1,13 @@
 package eu.esens.espdvcd.designer.components.requirement;
 
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
+import com.vaadin.data.util.converter.StringToIntegerConverter;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.TextField;
 import eu.esens.espdvcd.model.requirement.response.QuantityYearResponse;
+
+import java.text.NumberFormat;
+import java.util.Locale;
 
 /**
  * Created by ixuz on 4/11/16.
@@ -18,6 +22,15 @@ public class QuantityYearResponseForm extends ResponseForm {
         year.setCaption(caption);
         year.setNullRepresentation("");
         year.setWidth(280, Unit.PIXELS);
+
+        StringToIntegerConverter plainIntegerConverter = new StringToIntegerConverter() {
+            protected java.text.NumberFormat getFormat(Locale locale) {
+                NumberFormat format = super.getFormat(locale);
+                format.setGroupingUsed(false);
+                return format;
+            };
+        };
+        year.setConverter(plainIntegerConverter);
 
         // Bind fields
         final BeanFieldGroup<QuantityYearResponse> binder = new BeanFieldGroup<>(QuantityYearResponse.class);
