@@ -12,7 +12,7 @@ public class QuantityYearResponseForm extends ResponseForm {
     private QuantityYearResponse quantityYearResponse = null;
     private TextField year = new TextField("Quantity Year: ");
 
-    public QuantityYearResponseForm(QuantityYearResponse quantityYearResponse, String caption) {
+    public QuantityYearResponseForm(QuantityYearResponse quantityYearResponse, String caption, boolean readOnly) {
         this.quantityYearResponse = quantityYearResponse;
         addComponent(year);
         year.setCaption(caption);
@@ -24,5 +24,6 @@ public class QuantityYearResponseForm extends ResponseForm {
         binder.bindMemberFields(this);
         binder.setItemDataSource(this.quantityYearResponse);
         binder.setBuffered(false);
+        binder.setReadOnly(readOnly);
     }
 }

@@ -40,16 +40,25 @@ public class CriterionForm extends VerticalLayout {
 
     private Label EODetailsDescription = new Label("Criterion Description");
 
-    public CriterionForm(Master view, SelectableCriterion criterion, boolean useRequirements) {
+    private boolean readOnly = false;
+
+    public CriterionForm(Master view, SelectableCriterion criterion, boolean useRequirements, boolean readOnly) {
         this.view = view;
         this.criterionReference = criterion;
         this.useRequirements = useRequirements;
+        this.readOnly = readOnly;
 
         this.addComponent(panel);
         panel.setContent(panelContent);
 
         setMargin(true);
         setStyleName("criterionForm-layout");
+
+        if (criterion.getTypeCode().equals("SELECTION.ECONOMIC_FINANCIAL_STANDING") || criterion.getTypeCode().equals("DATA_ON_ECONOMIC_OPERATOR")) {
+            panel.setCaption("Data on economic operator");
+        } else {
+            panel.setCaption(criterion.getName());
+        }
 
         // If this criterion form will contain the requirements it will need to be displayed with a more complex layout
         if (useRequirements) {
@@ -63,14 +72,10 @@ public class CriterionForm extends VerticalLayout {
             columns.addComponent(columnB);
 
             if (criterion.getTypeCode().equals("SELECTION.ECONOMIC_FINANCIAL_STANDING") || criterion.getTypeCode().equals("DATA_ON_ECONOMIC_OPERATOR")) {
-
                 EODetailsDescription.setValue(criterion.getName());
-
                 columnA.addComponent(EODetailsDescription);
-                panel.setCaption("Data on economic operator");
             } else {
                 columnA.addComponent(description);
-                panel.setCaption(criterion.getName());
             }
 
             columnA.setWidth(100, Unit.PERCENTAGE);
@@ -79,7 +84,7 @@ public class CriterionForm extends VerticalLayout {
             columnB.addStyleName("ignoreCaptionCellWidth");
 
             for (RequirementGroup requirementGroup : criterion.getRequirementGroups()) {
-                RequirementGroupForm requirementGroupForm = new RequirementGroupForm(requirementGroup, this.useRequirements);
+                RequirementGroupForm requirementGroupForm = new RequirementGroupForm(requirementGroup, this.useRequirements, readOnly);
                 columnB.addComponent(requirementGroupForm);
             }
 
@@ -105,7 +110,13 @@ public class CriterionForm extends VerticalLayout {
             criterionReference.setDescription(criterionReference.getName());
             criterionReference.setName("Data on economic operator");
         }*/
-        bindProperties(criterion);
+
+        // Bind the this forms fields
+        final BeanFieldGroup<SelectableCriterion> criteriaGroup = new BeanFieldGroup<>(SelectableCriterion.class);
+        criteriaGroup.setItemDataSource(criterion);
+        criteriaGroup.setBuffered(false);
+        criteriaGroup.bindMemberFields(this);
+        criteriaGroup.setReadOnly(readOnly);
 
     }
 
@@ -139,7 +150,7 @@ public class CriterionForm extends VerticalLayout {
                 panelContent.setSpacing(true);
                 espdTemplateView.getDetailsContent().addComponent(panel);
                 for (RequirementGroup requirementGroup : criterionReference.getRequirementGroups()) {
-                    panelContent.addComponent(new RequirementGroupForm(requirementGroup, false));
+                    panelContent.addComponent(new RequirementGroupForm(requirementGroup, false, readOnly));
                 }
 
                 CriterionForm highlightedCriterion = espdTemplateView.getHighlightedCriterion();
@@ -166,11 +177,4 @@ public class CriterionForm extends VerticalLayout {
         this.selected.setValue(checkValue);
     }
 
-    public void bindProperties(SelectableCriterion criterion) {
-        // Bind the this forms fields
-        final BeanFieldGroup<SelectableCriterion> criteriaGroup = new BeanFieldGroup<>(SelectableCriterion.class);
-        criteriaGroup.setItemDataSource(criterion);
-        criteriaGroup.setBuffered(false);
-        criteriaGroup.bindMemberFields(this);
-    }
 }

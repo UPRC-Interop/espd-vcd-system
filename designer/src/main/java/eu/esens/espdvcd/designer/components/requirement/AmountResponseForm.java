@@ -19,7 +19,7 @@ public class AmountResponseForm extends ResponseForm {
     private VerticalLayout columnA = new VerticalLayout();
     private VerticalLayout columnB = new VerticalLayout();
 
-    public AmountResponseForm(AmountResponse amountResponse, String caption) {
+    public AmountResponseForm(AmountResponse amountResponse, String caption, boolean readOnly) {
         this.amountResponse = amountResponse;
         addComponent(columns);
         columns.setCaption(caption);
@@ -42,5 +42,6 @@ public class AmountResponseForm extends ResponseForm {
         binder.bindMemberFields(this);
         binder.setItemDataSource(this.amountResponse);
         binder.setBuffered(false);
+        binder.setReadOnly(readOnly);
     }
 }

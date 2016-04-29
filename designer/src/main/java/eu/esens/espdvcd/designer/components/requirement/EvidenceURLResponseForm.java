@@ -12,7 +12,7 @@ public class EvidenceURLResponseForm extends ResponseForm {
     private EvidenceURLResponse evidenceURLResponse = null;
     private TextField evidenceURL = new TextField("Evidence URL: ");
 
-    public EvidenceURLResponseForm(EvidenceURLResponse evidenceURLResponse, String caption) {
+    public EvidenceURLResponseForm(EvidenceURLResponse evidenceURLResponse, String caption, boolean readOnly) {
         this.evidenceURLResponse = evidenceURLResponse;
         addComponent(evidenceURL);
         evidenceURL.setCaption(caption);
@@ -24,5 +24,6 @@ public class EvidenceURLResponseForm extends ResponseForm {
         binder.bindMemberFields(this);
         binder.setItemDataSource(this.evidenceURLResponse);
         binder.setBuffered(false);
+        binder.setReadOnly(readOnly);
     }
 }

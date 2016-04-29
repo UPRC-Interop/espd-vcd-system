@@ -28,12 +28,12 @@ public class ESPDRequestForm extends ESPDForm {
     private List<CriterionGroupForm> economicOperatorCriterionGroupForms = new ArrayList<>();
     private List<CriterionGroupForm> reductionCriterionGroupForms = new ArrayList<>();
 
-    public ESPDRequestForm(Master view, ESPDRequest espdRequest) {
+    public ESPDRequestForm(Master view, ESPDRequest espdRequest, boolean readOnly) {
         super(view, espdRequest, "espd_template.xml");
 
         // Page 1 - Procedure
         VerticalLayout page1 = newPage("Information concerning the procurement procedure", "Procedure");
-        page1.addComponent(new CADetailsForm(espdRequest));
+        page1.addComponent(new CADetailsForm(espdRequest, readOnly));
 
 
         // Page 2 - Exclusion
@@ -43,12 +43,13 @@ public class ESPDRequestForm extends ESPDForm {
         exclusionActionLayout.setMargin(true);
         exclusionActionLayout.addComponent(selectAllExclusionCriteriaCheckbox);
         selectAllExclusionCriteriaCheckbox.setValue(true);
+        selectAllExclusionCriteriaCheckbox.setReadOnly(readOnly);
         page2.addComponent(exclusionActionLayout);
 
         selectAllExclusionCriteriaCheckbox.addValueChangeListener(this::onSelectAllExclusionCriteria);
         selectAllExclusionCriteriaCheckbox.setStyleName("espdRequestForm-checkbox");
 
-        criterionGroupForm(view, espdRequest.getExclusionCriteriaList(),exclusionCriterionGroupForms,page2);
+        criterionGroupForm(view, espdRequest.getExclusionCriteriaList(),exclusionCriterionGroupForms,page2, readOnly);
 
         // Page 3 - Selection
         VerticalLayout page3 = newPage("Selection criteria", "Selection");
@@ -57,12 +58,13 @@ public class ESPDRequestForm extends ESPDForm {
         selectionActionLayout.setMargin(true);
         selectionActionLayout.addComponent(selectAllSelectionCriteriaCheckbox);
         selectAllSelectionCriteriaCheckbox.setValue(true);
+        selectAllSelectionCriteriaCheckbox.setReadOnly(readOnly);
         page3.addComponent(selectionActionLayout);
 
         selectAllSelectionCriteriaCheckbox.addValueChangeListener(this::onSelectAllSelectionCriteria);
         selectAllSelectionCriteriaCheckbox.setStyleName("espdRequestForm-checkbox");
 
-        criterionGroupForm(view, espdRequest.getSelectionCriteriaList(),selectionCriterionGroupForms,page3);
+        criterionGroupForm(view, espdRequest.getSelectionCriteriaList(),selectionCriterionGroupForms,page3, readOnly);
 
         // Page 4 - Reduction of candidates
         VerticalLayout page4 = newPage("Reduction of candidates", "Candidates");
@@ -71,13 +73,14 @@ public class ESPDRequestForm extends ESPDForm {
         reductionActionLayout.setMargin(true);
         reductionActionLayout.addComponent(selectAllReductionCriteriaCheckbox);
         selectAllReductionCriteriaCheckbox.setValue(true);
+        selectAllReductionCriteriaCheckbox.setReadOnly(readOnly);
         page4.addComponent(reductionActionLayout);
 
         selectAllReductionCriteriaCheckbox.addValueChangeListener(this::onSelectAllReductionCriteria);
         selectAllReductionCriteriaCheckbox.setStyleName("espdRequestForm-checkbox");
 
 
-        criterionGroupForm(view, espdRequest.getReductionOfCandidatesCriteriaList(),reductionCriterionGroupForms,page4);
+        criterionGroupForm(view, espdRequest.getReductionOfCandidatesCriteriaList(),reductionCriterionGroupForms,page4, readOnly);
 
         // Page 5 - Data on economic operator
         VerticalLayout page5 = newPage("Data on economic operator", "Economic operator");
@@ -86,12 +89,13 @@ public class ESPDRequestForm extends ESPDForm {
         economicOperatorActionLayout.setMargin(true);
         economicOperatorActionLayout.addComponent(selectAllEconomicOperatorCriteriaCheckbox);
         selectAllEconomicOperatorCriteriaCheckbox.setValue(true);
+        selectAllEconomicOperatorCriteriaCheckbox.setReadOnly(readOnly);
         page5.addComponent(economicOperatorActionLayout);
 
         selectAllEconomicOperatorCriteriaCheckbox.addValueChangeListener(this::onSelectAllEconomicOperatorCriteria);
         selectAllEconomicOperatorCriteriaCheckbox.setStyleName("espdRequestForm-checkbox");
 
-        criterionGroupForm(view, espdRequest.getEORelatedCriteriaList(),economicOperatorCriterionGroupForms,page5);
+        criterionGroupForm(view, espdRequest.getEORelatedCriteriaList(),economicOperatorCriterionGroupForms,page5, readOnly);
 
         // Page 6 - Finish
         VerticalLayout page6 = newPage("Finish", "Finish");
@@ -99,7 +103,7 @@ public class ESPDRequestForm extends ESPDForm {
 
 
 
-    public void criterionGroupForm(Master view, List<SelectableCriterion> criterionList, List<CriterionGroupForm> criterionGroupForms, VerticalLayout page)
+    public void criterionGroupForm(Master view, List<SelectableCriterion> criterionList, List<CriterionGroupForm> criterionGroupForms, VerticalLayout page, boolean readOnly)
     {
         HashMap<String,List<CriterionForm>> criterionHash = new HashMap<>();
         for (SelectableCriterion criterion : criterionList) {
@@ -108,7 +112,7 @@ public class ESPDRequestForm extends ESPDForm {
                 criterionHash.put(criterion.getTypeCode(), new ArrayList<CriterionForm>());
             }
 
-            CriterionForm criterionForm = new CriterionForm(view, criterion, false);
+            CriterionForm criterionForm = new CriterionForm(view, criterion, false, readOnly);
             criterionHash.get(criterion.getTypeCode()).add(criterionForm);
         }
         for (Map.Entry<String, List<CriterionForm>> entry : criterionHash.entrySet()) {

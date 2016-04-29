@@ -12,7 +12,7 @@ public class QuantityResponseForm extends ResponseForm {
     private QuantityResponse quantityResponse = null;
     private TextField quantity = new TextField("Quantity: ");
 
-    public QuantityResponseForm(QuantityResponse quantityResponse, String caption) {
+    public QuantityResponseForm(QuantityResponse quantityResponse, String caption, boolean readOnly) {
         this.quantityResponse = quantityResponse;
         addComponent(quantity);
         quantity.setCaption(caption);
@@ -25,5 +25,6 @@ public class QuantityResponseForm extends ResponseForm {
         binder.bindMemberFields(this);
         binder.setItemDataSource(this.quantityResponse);
         binder.setBuffered(false);
+        binder.setReadOnly(readOnly);
     }
 }

@@ -12,7 +12,7 @@ public class CountryCodeResponseForm extends ResponseForm {
     private CountryCodeResponse countryCodeResponse = null;
     private CountryComboBox countryCode = new CountryComboBox("Country Code: ");
 
-    public CountryCodeResponseForm(CountryCodeResponse countryCodeResponse, String caption) {
+    public CountryCodeResponseForm(CountryCodeResponse countryCodeResponse, String caption, boolean readOnly) {
         this.countryCodeResponse = countryCodeResponse;
         addComponent(countryCode);
         countryCode.setCaption(caption);
@@ -23,5 +23,6 @@ public class CountryCodeResponseForm extends ResponseForm {
         binder.bindMemberFields(this);
         binder.setItemDataSource(this.countryCodeResponse);
         binder.setBuffered(false);
+        binder.setReadOnly(readOnly);
     }
 }

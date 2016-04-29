@@ -22,7 +22,7 @@ public class ContactingDetailsForm extends Panel {
     private TextField telephoneNumber = new TextField("Phone number:");
     private TextField emailAddress = new TextField("Email:");
 
-    public ContactingDetailsForm(ContactingDetails contactingDetails) {
+    public ContactingDetailsForm(ContactingDetails contactingDetails, boolean readOnly) {
         this.contactingDetails = contactingDetails;
 
         setStyleName("ContactingDetailsForm");
@@ -43,6 +43,7 @@ public class ContactingDetailsForm extends Panel {
         binder.bindMemberFields(this);
         binder.setItemDataSource(this.contactingDetails);
         binder.setBuffered(false);
+        binder.setReadOnly(readOnly);
 
         panelContent.setStyleName("ContactingDetailsFormPanelContent");
         panelContent.setSpacing(true);

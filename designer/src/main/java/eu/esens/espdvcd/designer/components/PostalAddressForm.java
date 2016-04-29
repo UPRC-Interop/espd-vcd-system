@@ -24,7 +24,7 @@ public class PostalAddressForm extends Panel {
     private TextField countrySubdivision = new TextField("Country subdivision:");
     private CountryComboBox countryCode = new CountryComboBox("Country:");
 
-    public PostalAddressForm(PostalAddress postalAddress) {
+    public PostalAddressForm(PostalAddress postalAddress, boolean readOnly) {
         this.postalAddress = postalAddress;
 
         setStyleName("PostalAddressForm");
@@ -46,6 +46,7 @@ public class PostalAddressForm extends Panel {
         binder.bindMemberFields(this);
         binder.setItemDataSource(this.postalAddress);
         binder.setBuffered(false);
+        binder.setReadOnly(readOnly);
 
         setWidth("100%");
         panelContent.setStyleName("PostalAddressFormPanelContent");

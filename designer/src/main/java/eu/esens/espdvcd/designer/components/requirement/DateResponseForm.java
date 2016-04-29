@@ -12,7 +12,7 @@ public class DateResponseForm extends ResponseForm {
     private DateResponse dateResponse = null;
     private DateField date = new DateField("Date: ");
 
-    public DateResponseForm(DateResponse dateResponse, String caption) {
+    public DateResponseForm(DateResponse dateResponse, String caption, boolean readOnly) {
         this.dateResponse = dateResponse;
         addComponent(date);
         date.setCaption(caption);
@@ -24,6 +24,7 @@ public class DateResponseForm extends ResponseForm {
         binder.bindMemberFields(this);
         binder.setItemDataSource(this.dateResponse);
         binder.setBuffered(false);
+        binder.setReadOnly(readOnly);
     }
 }
 

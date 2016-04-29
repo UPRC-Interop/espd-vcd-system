@@ -91,7 +91,7 @@ public class Espd extends Master {
 
                     System.out.println("EO Country 2: " + espdResponse.getEoDetails().getRegistrationCountryCode());
 
-                    espdResponseForm = new ESPDResponseForm(thisView, espdResponse);
+                    espdResponseForm = new ESPDResponseForm(thisView, espdResponse, false);
                     mainContent.addComponent(espdResponseForm);
                     is.close();
                     panels.setVisible(false);

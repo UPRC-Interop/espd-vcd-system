@@ -13,7 +13,7 @@ public class IndicatorResponseForm extends ResponseForm {
     private IndicatorResponse indicatorResponse = null;
     protected OptionGroup indicator = new OptionGroup("Indicator: ");
 
-    public IndicatorResponseForm(IndicatorResponse indicatorResponse, String caption) {
+    public IndicatorResponseForm(IndicatorResponse indicatorResponse, String caption, boolean readOnly) {
         this.indicatorResponse = indicatorResponse;
 /*        addComponent(indicator);
         indicator.setCaption(caption);
@@ -34,5 +34,6 @@ public class IndicatorResponseForm extends ResponseForm {
         binder.bindMemberFields(this);
         binder.setItemDataSource(this.indicatorResponse);
         binder.setBuffered(false);
+        binder.setReadOnly(readOnly);
     }
 }

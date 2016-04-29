@@ -12,7 +12,7 @@ public class QuantityIntegerResponseForm extends ResponseForm {
     private QuantityIntegerResponse quantityIntegerResponse = null;
     private TextField quantity = new TextField("Quantity Integer: ");
 
-    public QuantityIntegerResponseForm(QuantityIntegerResponse quantityIntegerResponse, String caption) {
+    public QuantityIntegerResponseForm(QuantityIntegerResponse quantityIntegerResponse, String caption, boolean readOnly) {
         this.quantityIntegerResponse = quantityIntegerResponse;
         addComponent(quantity);
         quantity.setCaption(caption);
@@ -24,5 +24,6 @@ public class QuantityIntegerResponseForm extends ResponseForm {
         binder.bindMemberFields(this);
         binder.setItemDataSource(this.quantityIntegerResponse);
         binder.setBuffered(false);
+        binder.setReadOnly(readOnly);
     }
 }

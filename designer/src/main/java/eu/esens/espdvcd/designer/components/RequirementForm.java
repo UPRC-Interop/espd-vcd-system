@@ -14,10 +14,10 @@ import com.vaadin.data.fieldgroup.BeanFieldGroup;
  */
 public class RequirementForm extends VerticalLayout {
 
-    public RequirementForm(Requirement requirement, boolean includeResponses) {
+    public RequirementForm(Requirement requirement, boolean includeResponses, boolean readOnly) {
         setStyleName("requirementForm-layout");
         if (includeResponses) {
-            ResponseForm responseForm = ResponseFormFactory.buildResponseForm(requirement);
+            ResponseForm responseForm = ResponseFormFactory.buildResponseForm(requirement, readOnly);
             addComponent(responseForm);
         } else {
             ResponseForm responseForm = new ReadOnlyResponseForm(requirement.getResponseDataType().name(), requirement.getDescription());
@@ -33,5 +33,6 @@ public class RequirementForm extends VerticalLayout {
         requirementGroup.setItemDataSource(requirement);
         requirementGroup.setBuffered(false);
         requirementGroup.bindMemberFields(this);
+        requirementGroup.setReadOnly(readOnly);
     }
 }

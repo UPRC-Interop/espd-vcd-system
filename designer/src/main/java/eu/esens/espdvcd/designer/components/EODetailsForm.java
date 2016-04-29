@@ -34,7 +34,7 @@ public class EODetailsForm extends Panel {
     private ContactingDetails contactingDetails; // To be implemented
     private List<NaturalPerson> naturalPersons; // To be implemented
 
-    public EODetailsForm(EODetails eoDetails) {
+    public EODetailsForm(EODetails eoDetails, boolean readOnly) {
         this.eoDetails = eoDetails;
         System.out.println("eoDetails: " + eoDetails);
 
@@ -58,22 +58,23 @@ public class EODetailsForm extends Panel {
 
         PostalAddress eoDetailsPostalAddress = eoDetails.getPostalAddress();
         if (eoDetailsPostalAddress != null) {
-            panelContent.addComponent(new PostalAddressForm(eoDetailsPostalAddress));
+            panelContent.addComponent(new PostalAddressForm(eoDetailsPostalAddress, readOnly));
         }
 
         ContactingDetails eoDetailsContactingDetails = eoDetails.getContactingDetails();
         if (eoDetailsContactingDetails != null) {
-            panelContent.addComponent(new ContactingDetailsForm(eoDetailsContactingDetails));
+            panelContent.addComponent(new ContactingDetailsForm(eoDetailsContactingDetails, readOnly));
         }
 
         for (NaturalPerson naturalPerson : this.eoDetails.getNaturalPersons()) {
-            panelContent.addComponent(new NaturalPersonForm(naturalPerson));
+            panelContent.addComponent(new NaturalPersonForm(naturalPerson, readOnly));
         }
 
         final BeanFieldGroup<EODetails> binder = new BeanFieldGroup<>(EODetails.class);
         binder.bindMemberFields(this);
         binder.setItemDataSource(this.eoDetails);
         binder.setBuffered(false);
+        binder.setReadOnly(readOnly);
 
         panelContent.setStyleName("EODetailsFormPanelContent");
         panelContent.setSpacing(true);

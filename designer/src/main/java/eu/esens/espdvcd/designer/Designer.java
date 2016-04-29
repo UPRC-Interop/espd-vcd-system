@@ -23,6 +23,7 @@ public class Designer extends UI {
     public final static String VIEW_LOGIN  = "login";
     public final static String VIEW_SANDBOX  = "sandbox";
     public final static String VIEW_ESPD_TEMPLATES  = "espd_templates";
+    public final static String VIEW_VIEWER  = "viewer";
 
     @Override
     protected void init(VaadinRequest request) {
@@ -35,6 +36,7 @@ public class Designer extends UI {
         Login login = new Login(navigator);
         Sandbox sandbox = new Sandbox(navigator);
         EspdTemplates espdTemplates = new EspdTemplates(navigator);
+        Viewer viewer = new Viewer(navigator);
 
         navigator.addView(VIEW_INDEX, start);
         navigator.addView(VIEW_ESPD_TEMPLATE, espdTemplate);
@@ -42,5 +44,6 @@ public class Designer extends UI {
         navigator.addView(VIEW_LOGIN, login);
         navigator.addView(VIEW_SANDBOX, sandbox);
         navigator.addView(VIEW_ESPD_TEMPLATES, espdTemplates);
+        navigator.addView(VIEW_VIEWER, viewer);
     }
 }

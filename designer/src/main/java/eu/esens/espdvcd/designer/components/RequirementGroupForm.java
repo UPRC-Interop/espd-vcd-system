@@ -13,7 +13,7 @@ import com.vaadin.data.fieldgroup.BeanFieldGroup;
 
 public class RequirementGroupForm extends VerticalLayout {
 
-    public RequirementGroupForm(RequirementGroup requirementGroup, boolean includeResponses) {
+    public RequirementGroupForm(RequirementGroup requirementGroup, boolean includeResponses, boolean readOnly) {
 
         setMargin(false);
         setSpacing(true);
@@ -33,6 +33,7 @@ public class RequirementGroupForm extends VerticalLayout {
         requirementGroupGroup.setItemDataSource(requirementGroup);
         requirementGroupGroup.setBuffered(false);
         requirementGroupGroup.bindMemberFields(this);
+        requirementGroupGroup.setReadOnly(readOnly);
 
 
         Panel panel = new Panel();
@@ -44,13 +45,13 @@ public class RequirementGroupForm extends VerticalLayout {
 
         // Add a sub requirement forms
         for (Requirement requirement : requirementGroup.getRequirements()) {
-            RequirementForm requirementForm = new RequirementForm(requirement, includeResponses);
+            RequirementForm requirementForm = new RequirementForm(requirement, includeResponses, readOnly);
             panelContent.addComponent(requirementForm);
         }
 
         // Add a sub requirement group forms
         for (RequirementGroup requirementGroupTemp : requirementGroup.getRequirementGroups()) {
-            RequirementGroupForm requirementGroupForm = new RequirementGroupForm(requirementGroupTemp, includeResponses);
+            RequirementGroupForm requirementGroupForm = new RequirementGroupForm(requirementGroupTemp, includeResponses, readOnly);
             panelContent.addComponent(requirementGroupForm);
         }
     }

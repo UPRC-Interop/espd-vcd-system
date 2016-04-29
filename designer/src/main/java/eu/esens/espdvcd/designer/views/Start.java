@@ -44,7 +44,7 @@ public class Start extends Master {
         espdRequest.setCriterionList(new ESPDBuilder().getCriteriaList());
 
         // Cenerate the espd request form base on the provided espd request model
-        ESPDRequestForm espdRequestForm = new ESPDRequestForm(this, espdRequest);
+        ESPDRequestForm espdRequestForm = new ESPDRequestForm(this, espdRequest, true);
         pageContent.addComponent(espdRequestForm);
     }
 

@@ -12,7 +12,7 @@ public class PercentageResponseForm extends ResponseForm {
     private PercentageResponse percentageResponse = null;
     private TextField percentage = new TextField("Percentage: ");
 
-    public PercentageResponseForm(PercentageResponse percentageResponse, String caption) {
+    public PercentageResponseForm(PercentageResponse percentageResponse, String caption, boolean readOnly) {
         this.percentageResponse = percentageResponse;
         addComponent(percentage);
         percentage.setCaption(caption);
@@ -24,5 +24,6 @@ public class PercentageResponseForm extends ResponseForm {
         binder.bindMemberFields(this);
         binder.setItemDataSource(this.percentageResponse);
         binder.setBuffered(false);
+        binder.setReadOnly(readOnly);
     }
 }

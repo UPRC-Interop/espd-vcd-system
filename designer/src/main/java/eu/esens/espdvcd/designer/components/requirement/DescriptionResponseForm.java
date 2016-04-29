@@ -13,7 +13,7 @@ public class DescriptionResponseForm extends ResponseForm {
     private DescriptionResponse descriptionResponse = null;
     protected TextArea description = new TextArea("Description: ");
 
-    public DescriptionResponseForm(DescriptionResponse descriptionResponse, String caption) {
+    public DescriptionResponseForm(DescriptionResponse descriptionResponse, String caption, boolean readOnly) {
         this.descriptionResponse = descriptionResponse;
         addComponent(description);
         description.setCaption(caption);
@@ -25,5 +25,6 @@ public class DescriptionResponseForm extends ResponseForm {
         binder.bindMemberFields(this);
         binder.setItemDataSource(this.descriptionResponse);
         binder.setBuffered(false);
+        binder.setReadOnly(readOnly);
     }
 }

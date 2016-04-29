@@ -32,7 +32,7 @@ public class CADetailsForm extends VerticalLayout {
     private TextField procurementProcedureFileReferenceNo;
     private ProducurementPublicationNumberField procurementPublicationNumber;
 
-    public CADetailsForm(ESPDRequest espdRequest) {
+    public CADetailsForm(ESPDRequest espdRequest, boolean readOnly) {
         setMargin(true);
         setSpacing(true);
         setCaption(null);
@@ -113,5 +113,6 @@ public class CADetailsForm extends VerticalLayout {
         binder.bindMemberFields(this);
         binder.setItemDataSource(caDetails);
         binder.setBuffered(false);
+        binder.setReadOnly(readOnly);
     }
 }

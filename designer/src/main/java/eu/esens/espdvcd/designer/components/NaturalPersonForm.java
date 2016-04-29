@@ -30,7 +30,7 @@ public class NaturalPersonForm extends Panel {
     private TextArea powerOfAttorney = new TextArea("Detailed information:");
     //private PostalAddressForm postalAddress = new TextField("Name:");
 
-    public NaturalPersonForm(NaturalPerson naturalPerson) {
+    public NaturalPersonForm(NaturalPerson naturalPerson, boolean readOnly) {
         this.naturalPerson = naturalPerson;
 
         setStyleName("NaturalPersonForm");
@@ -49,12 +49,13 @@ public class NaturalPersonForm extends Panel {
         columnA.addComponent(birthDate);
         //columnB.addComponent(registrationCountry);
         columnB.addComponent(powerOfAttorney);
-        panelContent.addComponent(new PostalAddressForm(this.naturalPerson.getPostalAddress()));
+        panelContent.addComponent(new PostalAddressForm(this.naturalPerson.getPostalAddress(), readOnly));
 
         final BeanFieldGroup<NaturalPerson> binder = new BeanFieldGroup<>(NaturalPerson.class);
         binder.bindMemberFields(this);
         binder.setItemDataSource(this.naturalPerson);
         binder.setBuffered(false);
+        binder.setReadOnly(readOnly);
 
         setWidth("100%");
         panelContent.setStyleName("NaturalPersonFormPanelContent");

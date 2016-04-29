@@ -161,6 +161,15 @@ public class Master extends VerticalLayout implements View {
             button.addClickListener(this::onNavigatorEspd);
         }
         {
+            Button button = new Button("Viewer", FontAwesome.EYE);
+            button.setStyleName("navigatorButtonDark");
+            button.setWidth("100%");
+            button.setHeight(60, Unit.PIXELS);
+            navigatorContent.addComponent(button);
+
+            button.addClickListener(this::onNavigatorViewer);
+        }
+        {
             Button button = new Button("Sandbox", FontAwesome.PLAY);
             button.setStyleName("navigatorButtonDark");
             button.setWidth("100%");
@@ -219,6 +228,10 @@ public class Master extends VerticalLayout implements View {
 
     public void onNavigatorEspd(Button.ClickEvent clickEvent) {
         getNavigator().navigateTo(Designer.VIEW_ESPD);
+    }
+
+    public void onNavigatorViewer(Button.ClickEvent clickEvent) {
+        getNavigator().navigateTo(Designer.VIEW_VIEWER);
     }
 
     public void onNavigatorSandbox(Button.ClickEvent clickEvent) {
