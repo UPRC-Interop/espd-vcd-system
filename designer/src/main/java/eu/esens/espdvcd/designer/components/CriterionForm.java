@@ -1,5 +1,7 @@
 package eu.esens.espdvcd.designer.components;
 
+import com.vaadin.data.fieldgroup.PropertyId;
+import com.vaadin.data.util.ObjectProperty;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import com.vaadin.event.LayoutEvents;
@@ -33,9 +35,10 @@ public class CriterionForm extends VerticalLayout {
     private Label name = new Label("Criterion Name");
     private int i=0;
 
-
     private Label description = new Label("Criterion Description");
     private boolean useRequirements = true;
+
+    private Label EODetailsDescription = new Label("Criterion Description");
 
     public CriterionForm(Master view, SelectableCriterion criterion, boolean useRequirements) {
         this.view = view;
@@ -48,11 +51,6 @@ public class CriterionForm extends VerticalLayout {
         setMargin(true);
         setStyleName("criterionForm-layout");
 
-        if (criterionReference.getTypeCode().equals("SELECTION.ECONOMIC_FINANCIAL_STANDING") || criterionReference.getTypeCode().equals("DATA_ON_ECONOMIC_OPERATOR")) {
-            criterionReference.setDescription(criterionReference.getName());
-            criterionReference.setName("Data on economic operator");
-        }
-
         // If this criterion form will contain the requirements it will need to be displayed with a more complex layout
         if (useRequirements) {
 
@@ -64,7 +62,16 @@ public class CriterionForm extends VerticalLayout {
             columns.addComponent(columnA);
             columns.addComponent(columnB);
 
-            columnA.addComponent(description);
+            if (criterion.getTypeCode().equals("SELECTION.ECONOMIC_FINANCIAL_STANDING") || criterion.getTypeCode().equals("DATA_ON_ECONOMIC_OPERATOR")) {
+
+                EODetailsDescription.setValue(criterion.getName());
+
+                columnA.addComponent(EODetailsDescription);
+                panel.setCaption("Data on economic operator");
+            } else {
+                columnA.addComponent(description);
+                panel.setCaption(criterion.getName());
+            }
 
             columnA.setWidth(100, Unit.PERCENTAGE);
             columnB.setMargin(false);
@@ -88,19 +95,19 @@ public class CriterionForm extends VerticalLayout {
 
         description.setValue(criterion.getDescription());
 
-        panel.setCaption(criterion.getName());
         panel.setIcon(FontAwesome.CHEVRON_DOWN);
 
         panelContent.setMargin(true);
         panelContent.setStyleName("criterionForm-panelContent");
 
-        // Bind the this forms fields
-        final BeanFieldGroup<SelectableCriterion> criteriaGroup = new BeanFieldGroup<>(SelectableCriterion.class);
-        criteriaGroup.setItemDataSource(criterion);
-        criteriaGroup.setBuffered(false);
-        criteriaGroup.bindMemberFields(this);
-    }
 
+/*        if (criterionReference.getTypeCode().equals("SELECTION.ECONOMIC_FINANCIAL_STANDING") || criterionReference.getTypeCode().equals("DATA_ON_ECONOMIC_OPERATOR")) {
+            criterionReference.setDescription(criterionReference.getName());
+            criterionReference.setName("Data on economic operator");
+        }*/
+        bindProperties(criterion);
+
+    }
 
 
     void onCriterionClick(LayoutEvents.LayoutClickEvent event) {
@@ -157,5 +164,13 @@ public class CriterionForm extends VerticalLayout {
     public void setSelected(boolean checkValue)
     {
         this.selected.setValue(checkValue);
+    }
+
+    public void bindProperties(SelectableCriterion criterion) {
+        // Bind the this forms fields
+        final BeanFieldGroup<SelectableCriterion> criteriaGroup = new BeanFieldGroup<>(SelectableCriterion.class);
+        criteriaGroup.setItemDataSource(criterion);
+        criteriaGroup.setBuffered(false);
+        criteriaGroup.bindMemberFields(this);
     }
 }
