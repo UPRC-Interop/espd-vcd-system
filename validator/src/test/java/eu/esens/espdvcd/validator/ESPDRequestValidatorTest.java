@@ -1,5 +1,6 @@
 package eu.esens.espdvcd.validator;
 
+import jdk.nashorn.internal.objects.NativeArray;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,8 +19,11 @@ public class ESPDRequestValidatorTest {
     @Before
     public void setUp() {
         //isReqValid = BuilderESPDTest.class.getResourceAsStream("/espd-request.xml");
-        isReqValid = ESPDRequestValidatorTest.class.getResourceAsStream("/espd_template_ESENS-2.xml");
+        isReqValid = ESPDRequestValidatorTest.class.getResourceAsStream("/espd-request.xml");
         Assert.assertNotNull(isReqValid);
+
+        isReqInvalid = ESPDRequestValidatorTest.class.getResourceAsStream("/espd-request-invalid.xml");
+        Assert.assertNotNull(isReqInvalid);
 
         isRes = ESPDRequestValidatorTest.class.getResourceAsStream("/espd-response.xml");
         Assert.assertNotNull(isRes);
@@ -29,6 +33,14 @@ public class ESPDRequestValidatorTest {
     public void validateESPDRequest() throws Exception {
         ESPDRequestValidator validator = new ESPDRequestValidator(isReqValid);
         Assert.assertTrue(validator.isValid());
+
+        validator = new ESPDRequestValidator(isReqInvalid);
+        Assert.assertFalse(validator.isValid());
+        Assert.assertTrue(validator.getValidationMessages().size() > 1);
+        for (String event: validator.getValidationMessages()
+             ) {
+            System.out.println(event);
+        }
     }
 
 }

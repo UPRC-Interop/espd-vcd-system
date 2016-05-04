@@ -53,20 +53,20 @@ public class ESPDRequestValidator {
         // FIXME (UL): just test code to check the unmarchalling process, which is throwing an exception...
         //ESPDRequestType er = JAXB.unmarshal(is, ESPDRequestType.class); // this is working
 
-        JAXBContext jc = JAXBContext.newInstance( ESPDRequestType.class.getPackage().getName() );
+        /*JAXBContext jc = JAXBContext.newInstance( ESPDRequestType.class.getPackage().getName() );
         Unmarshaller u = jc.createUnmarshaller();
-        u.unmarshal( is );
+        u.unmarshal( is );*/
 
         // FIXME (UL): ... below is what I intended the method to look like (several approaches I wanted to test)
-/*
-        JAXBContext jc = JAXBContext.newInstance(getJaxbClass());
+
+        JAXBContext jc = JAXBContext.newInstance(getJaxbClass().getPackage().getName());
 
         Unmarshaller unmarshaller = jc.createUnmarshaller();
-        // unmarshaller.setSchema(schema);
-        // unmarshaller.setEventHandler(validationEvent -> validationMessages.add(validationEvent.getMessage() +
-        //        " (line " + validationEvent.getLocator().getLineNumber() +
-        //       ", column " + validationEvent.getLocator().getColumnNumber() + ")"));
-        unmarshaller.setEventHandler(new ValidationEventHandler() {
+        unmarshaller.setSchema(schema);
+        unmarshaller.setEventHandler(validationEvent -> validationMessages.add(validationEvent.getMessage() +
+               " (line " + validationEvent.getLocator().getLineNumber() +
+              ", column " + validationEvent.getLocator().getColumnNumber() + ")"));
+        /*unmarshaller.setEventHandler(new ValidationEventHandler() {
             @Override
             public boolean handleEvent(ValidationEvent validationEvent) {
                 // add all validation event messages to list for later evaluation
@@ -75,8 +75,8 @@ public class ESPDRequestValidator {
                         ", column " + validationEvent.getLocator().getColumnNumber() + ")");
                 return true;
             }
-        });
-        unmarshaller.unmarshal(is);*/
+        });*/
+        unmarshaller.unmarshal(is);
     }
 
     public boolean isValid() {
