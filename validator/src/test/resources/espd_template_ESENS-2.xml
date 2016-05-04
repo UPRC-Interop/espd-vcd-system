@@ -1,5 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<ns8:ESPDRequest xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:ns6="urn:isa:names:specification:ubl:schema:xsd:CEV-CommonBasicComponents-1" xmlns:ns5="urn:isa:names:specification:ubl:schema:xsd:CCV-CommonAggregateComponents-1" xmlns:ns8="urn:grow:names:specification:ubl:schema:xsd:ESPDRequest-1" xmlns:ns7="urn:isa:names:specification:ubl:schema:xsd:CEV-CommonAggregateComponents-1" xmlns:ns2="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns:ns4="urn:isa:names:specification:ubl:schema:xsd:CCV-CommonBasicComponents-1" xmlns:ns3="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2">
+<?xml version="1.0" encoding="UTF-8" ?>
+<ns8:ESPDRequest xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" 
+                 xmlns:ns6="urn:isa:names:specification:ubl:schema:xsd:CEV-CommonBasicComponents-1" 
+                 xmlns:ns5="urn:isa:names:specification:ubl:schema:xsd:CCV-CommonAggregateComponents-1" 
+                 xmlns:ns8="urn:grow:names:specification:ubl:schema:xsd:ESPDRequest-1" 
+                 xmlns:ns7="urn:isa:names:specification:ubl:schema:xsd:CEV-CommonAggregateComponents-1" 
+                 xmlns:ns2="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" 
+                 xmlns:ns4="urn:isa:names:specification:ubl:schema:xsd:CCV-CommonBasicComponents-1" 
+                 xmlns:ns3="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2">
     <UBLVersionID schemeAgencyID="OASIS-UBL-TC">2.1</UBLVersionID>
     <CustomizationID schemeName="CustomizationID" schemeAgencyID="BII" schemeVersionID="3.0">urn:www.cenbii.eu:transaction:biitrns070:ver3.0</CustomizationID>
     <ID schemeID="ISO/IEC 9834-8:2008 - 4UUID" schemeAgencyID="EU-COM-GROW" schemeAgencyName="DG GROW (European Commission)" schemeVersionID="1.1">4db74169-f323-457e-8613-fb4e06032614</ID>

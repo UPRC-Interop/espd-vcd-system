@@ -4,15 +4,12 @@ import eu.esens.espdvcd.schema.XSD;
 import org.xml.sax.SAXException;
 
 import java.io.InputStream;
-import java.io.File;
 import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.xml.XMLConstants;
 import javax.xml.bind.*;
-import javax.xml.bind.util.ValidationEventCollector;
-import javax.xml.transform.Source;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 
@@ -56,7 +53,7 @@ public class ESPDRequestValidator {
         // FIXME (UL): just test code to check the unmarchalling process, which is throwing an exception...
         //ESPDRequestType er = JAXB.unmarshal(is, ESPDRequestType.class); // this is working
 
-        JAXBContext jc = JAXBContext.newInstance( ESPDRequestType.class );
+        JAXBContext jc = JAXBContext.newInstance( ESPDRequestType.class.getPackage().getName() );
         Unmarshaller u = jc.createUnmarshaller();
         u.unmarshal( is );
 
