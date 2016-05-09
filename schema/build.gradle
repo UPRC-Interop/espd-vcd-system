@@ -1,3 +1,4 @@
+
 buildscript {
 
     repositories {
@@ -8,9 +9,8 @@ buildscript {
     }
 
     dependencies {
-        classpath 'org.openrepose:gradle-jaxb-plugin:2.0.2'
+        classpath 'org.openrepose:gradle-jaxb-plugin:2.2.1'
     }
-
 }
     
 def generatedDir = "${project.buildDir}/generated-sources/xjc"
@@ -32,18 +32,10 @@ dependencies {
     jaxb "javax.xml.bind:jaxb-api:${project.jaxb_impl_version}"
 }
 
-
-
 jaxb {
     xjc {
         destinationDir = "$generatedDir"
     }
-}
-
-task copyTask(type: Copy) {
-    from "build/libs/schema-${version}.jar"
-    into '../artifacts'
-    //    rename "schema-${version}.jar", 'schema.jar'
 }
 
 compileJava.dependsOn xjc
