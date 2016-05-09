@@ -10,7 +10,7 @@ public class SelectableCriterion extends Criterion {
 
     private static final long serialVersionUID = -4642428067998066099L;
 
-    private boolean selected;
+    protected boolean selected;
 
     public SelectableCriterion(String ID, String typeCode, String name, String description, LegislationReference legislationReference) {
         super(ID, typeCode, name, description, legislationReference);
@@ -27,7 +27,7 @@ public class SelectableCriterion extends Criterion {
         this.selected = selected;
     }
 
-    /**
+     /**
      *
      * @return
      */
