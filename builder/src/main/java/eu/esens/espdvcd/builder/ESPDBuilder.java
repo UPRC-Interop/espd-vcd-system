@@ -39,6 +39,12 @@ public class ESPDBuilder {
 
     private boolean insertAllCriteria = true;
 
+    /**
+     * Parses the input stream and creates an ESPDRequest model instance.
+     * @param xmlESPD The input stream of the XML document to be parsed 
+     * @return a prefilled ESPDRequest based on the input data 
+     * @throws BuilderException when the parsing from XML to ESPDRequest Model fails
+     */
     public ESPDRequest createESPDRequestFromXML(InputStream xmlESPD) throws BuilderException {
 
         ESPDRequest req;
@@ -61,7 +67,12 @@ public class ESPDBuilder {
         }
 
     }
-
+    /**
+     * Parses the input stream and creates an ESPDResponse model instance.
+     * @param xmlESPD The input stream of the XML document to be parsed 
+     * @return a prefilled ESPDRequest based on the input data 
+     * @throws BuilderException when the parsing from XML to ESPDResponse Model fails
+     */
     public ESPDResponse createESPDResponseFromXML(InputStream xmlESPDRes) throws BuilderException {
 
         ESPDResponse res;
@@ -79,17 +90,33 @@ public class ESPDBuilder {
         return res;
     }
 
+    /**
+     *
+     * @param req The ESPDRequest Model instance to be transformed to XML
+     * @return a JAXB ESPDRequestType instance from an ESPDRequest Model instance
+     */
     public ESPDRequestType createXML(ESPDRequest req) {
         ESPDRequestType reqType = finalize(SchemaFactory.ESPD_REQUEST.extractESPDRequestType(req));
         return reqType;
 
     }
-
+    /**
+     *
+     * @param res The ESPDResponse Model instance to be transformed to XML
+     * @return a JAXB ESPDResponseType instance from an ESPDResponse Model instance
+     */
     public ESPDResponseType createXML(ESPDResponse res) {
         ESPDResponseType resType = finalize(SchemaFactory.ESPD_RESPONSE.extractESPDResponseType(res));
         return resType;
     }
 
+    /**
+     * Finalizes an ESPDRequestType instance by adding the necessary data required 
+     * for publication. These include the UBL constants, transactions, issue date
+     * and issue time.
+     * @param reqType 
+     * @return the Finalized ESPDRequestType Instance
+     */
     public ESPDRequestType finalize(ESPDRequestType reqType) {
 
         // Finalizes the ESPDRequest Type, adding the Date and Time of Issue etc
@@ -119,7 +146,14 @@ public class ESPDBuilder {
         reqType.setID(SchemaFactory.ESPD_REQUEST.createISOIECIDType(UUID.randomUUID().toString()));
         return reqType;
     }
-
+       
+    /**
+     * Finalizes an ESPDResponseType instance by adding the necessary data required 
+     * for publication. These include the UBL constants, transactions, issue date
+     * and issue time.
+     * @param resType 
+     * @return the Finalized ESPDResponseType Instance
+     */
     public ESPDResponseType finalize(ESPDResponseType resType) {
 
         // Finalizes the ESPDResponse Type, adding the Date and Time of Issue etc
@@ -150,18 +184,23 @@ public class ESPDBuilder {
         return resType;
     }
 
-    public String createXMLasString(ESPDRequest doc) {
+     /**
+     * Transforms the ESPDRequest model instance to an XML ESPD Request String
+     * @param theReq The ESPD Request that we want transformed to XML
+     * @return the Finalized ESPDRequestType Instance
+     */
+    public String createXMLasString(ESPDRequest theReq) {
         StringWriter result = new StringWriter();
 
         //Return the Object
         try {
-            if (doc instanceof ESPDResponse) {
+            if (theReq instanceof ESPDResponse) {
                 grow.names.specification.ubl.schema.xsd.espdresponse_1.ObjectFactory of = new grow.names.specification.ubl.schema.xsd.espdresponse_1.ObjectFactory();
-                SchemaUtil.getMarshaller().marshal(of.createESPDResponse(createXML((ESPDResponse) doc)), result);
+                SchemaUtil.getMarshaller().marshal(of.createESPDResponse(createXML((ESPDResponse) theReq)), result);
 
             } else {
                 grow.names.specification.ubl.schema.xsd.espdrequest_1.ObjectFactory of = new grow.names.specification.ubl.schema.xsd.espdrequest_1.ObjectFactory();
-                SchemaUtil.getMarshaller().marshal(of.createESPDRequest(createXML(doc)), result);
+                SchemaUtil.getMarshaller().marshal(of.createESPDRequest(createXML(theReq)), result);
             }
         } catch (JAXBException ex) {
             Logger.getLogger(ESPDBuilder.class.getName()).log(Level.SEVERE, null, ex);
@@ -169,12 +208,16 @@ public class ESPDBuilder {
 
         return result.toString();
     }
-
+    
+    /**
+     * @return the full predefined criteria list of the Standard ESPD Form
+     */
     public List<SelectableCriterion> getCriteriaList() {
         CriteriaExtractor cr = new PredefinedESPDCriteriaExtractor();
         return cr.getFullList();
     }
 
+    
     private ESPDRequestType readESPDRequestFromStream(InputStream is) {
         try {
             // Start with the convience methods provided by JAXB. If there are
@@ -197,10 +240,24 @@ public class ESPDBuilder {
         }
     }
 
+    /**
+     *Sets the option to add all the criteria when creating an ESPD Request,
+     * even when the ESPD Request creation is creating from parsing an existing 
+     * ESPD Request. If set to true, the criteria not existing in the importing
+     * ESPD Request will be added unselected.
+     * @param insertAll True if builder will return all the criteria, false otherwise.
+     */
     public void setInsertAllCriteria(boolean insertAll) {
         insertAllCriteria = insertAll;
     }
 
+    /**
+     * Gets the option to add all the criteria when creating an ESPD Request,
+     * even when the ESPD Request creation is creating from parsing an existing 
+     * ESPD Request. If true, the criteria not existing in the importing
+     * ESPD Request will be added unselected.
+     * @return true if builder will return all the criteria, false otherwise.
+     */
     public boolean isInsertAllCriteria() {
         return insertAllCriteria;
     }
@@ -216,6 +273,13 @@ public class ESPDBuilder {
         return bis;
     }
 
+    /**
+     * Created an XMLGregorianCalendar instance that is compliant with the format
+     * required by ESPD Data model.
+     * @param c The date (GregorianCalendar) to be converted to ESPD Compliant XMLGregorianCalendar
+     * @return the XMLGregorianCalendar transformation of the input
+     * @throws DatatypeConfigurationException
+     */
     public XMLGregorianCalendar createECCompliantDate(GregorianCalendar c) throws DatatypeConfigurationException {
         // Creates the format according to the EC Application Requirement
         XMLGregorianCalendar xmlDate = DatatypeFactory.newInstance()
