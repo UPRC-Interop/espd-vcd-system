@@ -7,23 +7,73 @@ import com.google.common.collect.BiMap;
  * 
  */
 public enum Codelists {
+
+    /**
+     * Activity Type CodeList
+     */
     ActivityType ("/gc/ActivityTypeCode-CodeList.gc"),
+
+    /**
+     * Amount Type CodeList
+     */
     AmountType("/gc/AmountTypeCodes-CodeList.gc"),
+
+    /**
+     * Contract Type CodeList
+     */
     ContractType ("/gc/ContractType-CodeList.gc"),
+
+    /**
+    * Country Identification according to ISO 3A
+    */
     CountryIdentification ("/gc/CountryCodeIdentifier-CodeList.gc"),
+
+    /**
+     * ESPD Criteria Type taxonomy, flattened as a Codelist 
+     */
     CriteriaType ("/gc/CriteriaTypeCodes-CodeList.gc"),
+
+    /**
+    *Criterion Jurisdiction Level for the ESPD Criteria Codelist    
+    */
     CriterionJurisdictionLevel ("/gc/CriterionJurisdictionLevel-CodeList.gc"),
+
+    /**
+     * UBL Cusomization ID codelist, used for the ESPD Request and Response Artifacts
+     */
     CustomizationID("/gc/CustomizationID-CodeList.gc"),
+
+    /**
+     * Currency Codelist, ISO Compatible.
+     */
     Currency("/gc/CurrencyCode-CodeList.gc"),
+
+    /**
+     * Document Reference types, used by ESPD Request and Response to add specific
+     * external references required by the ESPD Data Model
+     */
     DocumentReferenceContentType("/gc/DocRefContentType-CodeList.gc"),
+
+    /**
+     * Economic Operator Role Codelist
+     */
     EORole("/gc/EORoleCodes-CodeList.gc"),
+
+    /**
+     * Language iso code Codelist
+     */
     LanguageCodeEU("/gc/LanguageCodeEU-CodeList.gc"),
+
+    /**
+     * Response Data type codelist, used to infer the type of response a requirement
+     * requires.
+     */
+    ResponseDataType("/gc/ResponseDataType-CodeList.gc"),
     PeriodMeasureType("/gc/PeriodMeasureTypeCodes-CodeList.gc"),
     PeriodType("/gc/PeriodTypeCodes-CodeList.gc"),
     ProcedureType("/gc/ProcedureType-CodeList.gc"),
     ProfileExecutionID("/gc/ProfileExecutionID-CodeList.gc"),
     ProjectType("/gc/ProjectType-CodeList.gc"),
-    ResponseDataType("/gc/ResponseDataType-CodeList.gc"),
     ServicesProjectSubType("/gc/ServicesProjectSubType-CodeList.gc"),
     TechnicalCapabilityType("/gc/TechnicalCapabilityTypeCode-CodeList.gc"),
     TenderingRole ("/gc/TendererRole-CodeList.gc");
