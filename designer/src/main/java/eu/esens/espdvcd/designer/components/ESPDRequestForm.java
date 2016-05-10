@@ -7,7 +7,6 @@ import eu.esens.espdvcd.codelist.Codelists;
 import eu.esens.espdvcd.designer.views.Master;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.SelectableCriterion;
-import org.hibernate.criterion.Criterion;
 
 import java.util.ArrayList;
 import java.util.HashMap;
