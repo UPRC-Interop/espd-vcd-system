@@ -69,7 +69,7 @@ public class ESPDBuilder {
     }
     /**
      * Parses the input stream and creates an ESPDResponse model instance.
-     * @param xmlESPD The input stream of the XML document to be parsed 
+     * @param xmlESPDRes The input stream of the XML document to be parsed 
      * @return a prefilled ESPDRequest based on the input data 
      * @throws BuilderException when the parsing from XML to ESPDResponse Model fails
      */
@@ -114,7 +114,7 @@ public class ESPDBuilder {
      * Finalizes an ESPDRequestType instance by adding the necessary data required 
      * for publication. These include the UBL constants, transactions, issue date
      * and issue time.
-     * @param reqType 
+     * @param reqType The JAXB ESPDRequestType that will be finalized.
      * @return the Finalized ESPDRequestType Instance
      */
     public ESPDRequestType finalize(ESPDRequestType reqType) {
@@ -151,7 +151,7 @@ public class ESPDBuilder {
      * Finalizes an ESPDResponseType instance by adding the necessary data required 
      * for publication. These include the UBL constants, transactions, issue date
      * and issue time.
-     * @param resType 
+     * @param resType The JAXB ESPDResponseType that will be finalized.
      * @return the Finalized ESPDResponseType Instance
      */
     public ESPDResponseType finalize(ESPDResponseType resType) {
@@ -278,7 +278,7 @@ public class ESPDBuilder {
      * required by ESPD Data model.
      * @param c The date (GregorianCalendar) to be converted to ESPD Compliant XMLGregorianCalendar
      * @return the XMLGregorianCalendar transformation of the input
-     * @throws DatatypeConfigurationException
+     * @throws DatatypeConfigurationException when input is invalid
      */
     public XMLGregorianCalendar createECCompliantDate(GregorianCalendar c) throws DatatypeConfigurationException {
         // Creates the format according to the EC Application Requirement
