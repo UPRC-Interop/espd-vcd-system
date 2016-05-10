@@ -28,6 +28,7 @@ public class SchemaUtil {
         Marshaller marshaller = JC.createMarshaller();
          try {
              marshaller.setProperty("com.sun.xml.bind.namespacePrefixMapper",new ESPDPrefixMapper());
+             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
         } catch( PropertyException e ) {
         }
         return marshaller;
