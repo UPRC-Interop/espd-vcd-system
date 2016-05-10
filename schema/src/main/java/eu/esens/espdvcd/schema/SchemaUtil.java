@@ -25,14 +25,10 @@ public class SchemaUtil {
         
     public static Marshaller getMarshaller() throws JAXBException {
 
-        System.out.println("Requesting Marshaller");
-        
         Marshaller marshaller = JC.createMarshaller();
          try {
-             System.out.println("Adding Mapper");
              marshaller.setProperty("com.sun.xml.bind.namespacePrefixMapper",new ESPDPrefixMapper());
         } catch( PropertyException e ) {
-             System.out.println("Could not add mapper");
         }
         return marshaller;
     }
