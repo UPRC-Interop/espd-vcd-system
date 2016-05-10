@@ -3,7 +3,7 @@ package eu.esens.espdvcd.codelist;
 import com.google.common.collect.BiMap;
 
 /**
- * Multiton implementation for Code Lists
+ * Multiton implementation for Code Lists  
  * 
  */
 public enum Codelists {
@@ -47,26 +47,54 @@ public enum Codelists {
         INSTANCE = new GenericCode(name); 
     }    
 
+    /**
+     *
+     * @param otherName
+     * @return true if the name of the codelist is equal with @param othername
+     * 
+     */
     public boolean equalsName(String otherName) {
         return (otherName == null) ? false : name.equals(otherName);
     }
 
+    /**
+     * @param data
+     * @return the Id of the codelist for the specific value
+     */
     public final String getIdForData(String data) {
         return getInstance().getIdForData(data);
     }
     
+    /**
+     *
+     * @param id 
+     * @return true if the codelist contains the specific id, false otherwise
+     */
     public final boolean containsId(String id) {
         return getInstance().containsId(id);
     }
-    
+
+    /**
+     *
+     * @param value 
+     * @return true if the codelist contains the specific value, false otherwise
+     */
     public final boolean containsValue(String value) {
         return getInstance().containsValue(value);
     }   
-
+    
+    /**
+     *
+     * @param id 
+     * @return the value mapped with the specific id in the codelist, null otherwise
+     */
     public final String getValueForId(String id) {
         return getInstance().getValueForId(id);
     }
 
+    /**
+     * @return the internal representation of the codelist as an immutable bimap
+     */   
     public final BiMap<String, String> getBiMap() {
         return getInstance().getBiMap();
     }

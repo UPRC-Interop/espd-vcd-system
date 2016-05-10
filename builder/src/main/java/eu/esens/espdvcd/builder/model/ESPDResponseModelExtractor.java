@@ -44,7 +44,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
 
     /**
      *
-     * @param rt
+     * @param rt The JAXB RequirementType class to be extracted
      * @return The Extracted @Requirement  
      */
     @Override
