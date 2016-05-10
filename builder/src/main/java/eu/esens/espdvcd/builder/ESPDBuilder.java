@@ -10,7 +10,6 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.UUID;
-import javax.xml.bind.JAXB;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeConstants;
 import javax.xml.datatype.DatatypeFactory;
@@ -21,6 +20,7 @@ import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.builder.schema.SchemaFactory;
+import eu.esens.espdvcd.schema.SchemaUtil;
 
 import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
 import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
@@ -28,6 +28,8 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.xml.bind.JAXBException;
+import javax.xml.transform.stream.StreamSource;
 
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.CopyIndicatorType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.IssueDateType;
@@ -55,7 +57,7 @@ public class ESPDBuilder {
 
         } catch (IOException ex) {
             Logger.getLogger(ESPDBuilder.class.getName()).log(Level.SEVERE, null, ex);
-            throw new BuilderException("Error in Reading XML Input Stream",ex);
+            throw new BuilderException("Error in Reading XML Input Stream", ex);
         }
 
     }
@@ -71,9 +73,9 @@ public class ESPDBuilder {
             res = ModelFactory.ESPD_RESPONSE.extractESPDResponse(resType);
         } catch (IOException ex) {
             Logger.getLogger(ESPDBuilder.class.getName()).log(Level.SEVERE, null, ex);
-            throw new BuilderException("Error in Reading Input Stream for ESPD Response",ex);
+            throw new BuilderException("Error in Reading Input Stream for ESPD Response", ex);
         }
-        
+
         return res;
     }
 
@@ -135,7 +137,7 @@ public class ESPDBuilder {
 
         try {
             XMLGregorianCalendar xmlDate = createECCompliantDate(c);
-            
+
             resType.setIssueDate(new IssueDateType());
             resType.getIssueDate().setValue(xmlDate);
             resType.setIssueTime(new IssueTimeType());
@@ -152,20 +154,19 @@ public class ESPDBuilder {
         StringWriter result = new StringWriter();
 
         //Return the Object
-        if (doc instanceof ESPDResponse) {
-            grow.names.specification.ubl.schema.xsd.espdresponse_1.ObjectFactory of = new grow.names.specification.ubl.schema.xsd.espdresponse_1.ObjectFactory();
-            JAXB.marshal(of.createESPDResponse(createXML((ESPDResponse) doc)), result);
-        } else {
-            grow.names.specification.ubl.schema.xsd.espdrequest_1.ObjectFactory of = new grow.names.specification.ubl.schema.xsd.espdrequest_1.ObjectFactory();
-            JAXB.marshal(of.createESPDRequest(createXML(doc)), result);
+        try {
+            if (doc instanceof ESPDResponse) {
+                grow.names.specification.ubl.schema.xsd.espdresponse_1.ObjectFactory of = new grow.names.specification.ubl.schema.xsd.espdresponse_1.ObjectFactory();
+                SchemaUtil.getMarshaller().marshal(of.createESPDResponse(createXML((ESPDResponse) doc)), result);
+
+            } else {
+                grow.names.specification.ubl.schema.xsd.espdrequest_1.ObjectFactory of = new grow.names.specification.ubl.schema.xsd.espdrequest_1.ObjectFactory();
+                SchemaUtil.getMarshaller().marshal(of.createESPDRequest(createXML(doc)), result);
+            }
+        } catch (JAXBException ex) {
+            Logger.getLogger(ESPDBuilder.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-//        try(  PrintWriter out = new PrintWriter("filename.txt", Charsets.UTF_8.toString())  ){
-//            out.println(result);
-//        } catch (FileNotFoundException | UnsupportedEncodingException ex) {
-//            Logger.getLogger(ESPDBuilder.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-                
+
         return result.toString();
     }
 
@@ -175,17 +176,25 @@ public class ESPDBuilder {
     }
 
     private ESPDRequestType readESPDRequestFromStream(InputStream is) {
-        // Start with the convience methods provided by JAXB. If there are
-        // perfomance issues we will swicth back to the JAXB API Usage
-        ESPDRequestType er = JAXB.unmarshal(is, ESPDRequestType.class);
-        return er;
+        try {
+            // Start with the convience methods provided by JAXB. If there are
+            // perfomance issues we will swicth back to the JAXB API Usage
+            return SchemaUtil.getUnmarshaller().unmarshal(new StreamSource(is), ESPDRequestType.class).getValue();
+        } catch (JAXBException ex) {
+            Logger.getLogger(ESPDBuilder.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 
     private ESPDResponseType readESPDResponseFromStream(InputStream is) {
-        // Start with the convience methods provided by JAXB. If there are
-        // perfomance issues we will swicth back to the JAXB API Usage
-        ESPDResponseType er = JAXB.unmarshal(is, ESPDResponseType.class);
-        return er;
+        try {
+            // Start with the convience methods provided by JAXB. If there are
+            // perfomance issues we will swicth back to the JAXB API Usage
+            return SchemaUtil.getUnmarshaller().unmarshal(new StreamSource(is), ESPDResponseType.class).getValue();
+        } catch (JAXBException ex) {
+            Logger.getLogger(ESPDBuilder.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 
     public void setInsertAllCriteria(boolean insertAll) {
@@ -197,7 +206,7 @@ public class ESPDBuilder {
     }
 
     private InputStream getBufferedInputStream(InputStream xmlESPD) {
-        // We require me marked input stream
+        // We require a marked input stream
         InputStream bis;
         if (xmlESPD.markSupported()) {
             bis = xmlESPD;
@@ -206,7 +215,7 @@ public class ESPDBuilder {
         }
         return bis;
     }
-    
+
     public XMLGregorianCalendar createECCompliantDate(GregorianCalendar c) throws DatatypeConfigurationException {
         // Creates the format according to the EC Application Requirement
         XMLGregorianCalendar xmlDate = DatatypeFactory.newInstance()
