@@ -1,4 +1,4 @@
-
+apply plugin: 'com.bmuschko.nexus'   
 buildscript {
 
     repositories {
@@ -7,9 +7,10 @@ buildscript {
             url "https://maven.research.rackspacecloud.com/content/repositories/public/"
         }
     }
-
     dependencies {
         classpath 'org.openrepose:gradle-jaxb-plugin:2.2.1'
+         classpath 'com.bmuschko:gradle-nexus-plugin:2.3.1'
+         classpath "com.sun.xml.bind:jaxb-impl:${project.jaxb_impl_version}"
     }
 }
     
@@ -30,6 +31,10 @@ dependencies {
     jaxb "com.sun.xml.bind:jaxb-xjc:${project.jaxb_impl_version}"
     jaxb "com.sun.xml.bind:jaxb-impl:${project.jaxb_impl_version}"
     jaxb "javax.xml.bind:jaxb-api:${project.jaxb_impl_version}"
+    
+    compile "com.sun.xml.bind:jaxb-impl:${project.jaxb_impl_version}"
+    compile "javax.xml.bind:jaxb-api:${project.jaxb_impl_version}"
+    compile "com.sun.xml.bind:jaxb-core:${project.jaxb_impl_version}"
 }
 
 jaxb {
