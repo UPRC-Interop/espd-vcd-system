@@ -10,6 +10,10 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.PropertyException;
 import javax.xml.bind.Unmarshaller;
 
+/**
+ *ESPD/VCD Schema Utility class. Provides factory methods for getting 
+ * marshallers and unmarshallers for the ESPD and VCD Objects.
+ */
 public class SchemaUtil {
 
     private static final JAXBContext JC;
@@ -23,6 +27,11 @@ public class SchemaUtil {
         }
     }   
         
+    /**
+     * Factory Method that gets a proper marshaller for the ESPD/VCD Artifacts
+     * @return an ESPD/VCD Marshaller
+     * @throws JAXBException when the marshaller cannot be initialized
+     */
     public static Marshaller getMarshaller() throws JAXBException {
 
         Marshaller marshaller = JC.createMarshaller();
@@ -34,6 +43,11 @@ public class SchemaUtil {
         return marshaller;
     }
     
+    /**
+     * Factory Method that gets a proper unmarshaller for the ESPD/VCD Artifacts
+     * @return an ESPD/VCD Marshaller
+     * @throws JAXBException when the marshaller cannot be initialized
+     */
     public static Unmarshaller getUnmarshaller() throws JAXBException {
 
         Unmarshaller unmarshaller = JC.createUnmarshaller();
