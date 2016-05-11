@@ -63,15 +63,31 @@
       </Row>
       <Row>
          <Value ColumnRef="code">
-            <SimpleValue>EXCLUSION.ENVIRONMENTAL</SimpleValue>
+            <SimpleValue>EXCLUSION.SOCIAL_LAW</SimpleValue>
          </Value>
          <Value ColumnRef="name">
-            <SimpleValue>Grounds for exclusion relating to the breaching of environmental, social and labour laws</SimpleValue>
+            <SimpleValue>Grounds for exclusion relating to the breaching of social laws</SimpleValue>
+         </Value>
+      </Row>
+            <Row>
+         <Value ColumnRef="code">
+            <SimpleValue>EXCLUSION.ENVIRONMENTAL_LAW</SimpleValue>
+         </Value>
+         <Value ColumnRef="name">
+            <SimpleValue>Grounds for exclusion relating to the breaching of environmental laws</SimpleValue>
+         </Value>
+      </Row>
+            <Row>
+         <Value ColumnRef="code">
+            <SimpleValue>EXCLUSION.LABOUR_LAW</SimpleValue>
+         </Value>
+         <Value ColumnRef="name">
+            <SimpleValue>Grounds for exclusion relating to the breaching of labour laws</SimpleValue>
          </Value>
       </Row>
       <Row>
          <Value ColumnRef="code">
-            <SimpleValue>EXCLUSION.INSOLVENCY</SimpleValue>
+            <SimpleValue>EXCLUSION.BANKRUPTCY_INSOLVENCY</SimpleValue>
          </Value>
          <Value ColumnRef="name">
             <SimpleValue>Grounds for exclusion for bankruptcy of insolvency</SimpleValue>
@@ -85,6 +101,14 @@
             <SimpleValue>Grounds for exclusion for misconduct</SimpleValue>
          </Value>
       </Row>
+            <Row>
+         <Value ColumnRef="code">
+            <SimpleValue>EXCLUSION.DISTORTING_MARKET</SimpleValue>
+         </Value>
+         <Value ColumnRef="name">
+            <SimpleValue>Grounds for exclusion for distorting of market</SimpleValue>
+         </Value>
+      </Row>
       <Row>
          <Value ColumnRef="code">
             <SimpleValue>EXCLUSION.CONFLICT_OF_INTEREST</SimpleValue>
@@ -95,7 +119,7 @@
       </Row>
       <Row>
          <Value ColumnRef="code">
-            <SimpleValue>EXCLUSION.OTHER Other exclusion grounds that may be foreseen in the national legislation of the contracting authority's or contracting entity's Member State     </SimpleValue>
+            <SimpleValue>EXCLUSION.OTHER</SimpleValue>
          </Value>
          <Value ColumnRef="name">
             <SimpleValue>Other exclusion grounds that may be foreseen in the national legislation of the contracting authority's or contracting entity's Member State      </SimpleValue>
@@ -147,6 +171,14 @@
          </Value>
          <Value ColumnRef="name">
             <SimpleValue>Selection criteria relating to the reduction of the number of qualified candidates</SimpleValue>
+         </Value>
+      </Row>
+            <Row>
+         <Value ColumnRef="code">
+            <SimpleValue>REDUCTION_OF_CANDIDATES</SimpleValue>
+         </Value>
+         <Value ColumnRef="name">
+            <SimpleValue>Criteria relating to the reduction of the number of qualified candidates</SimpleValue>
          </Value>
       </Row>
    </SimpleCodeList>
