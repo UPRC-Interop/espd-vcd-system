@@ -3,6 +3,8 @@ package eu.esens.espdvcd.model.requirement.response;
 import java.io.Serializable;
 
 /**
+ * Description response
+ *
  * Created by Ulf Lotzmann on 21/03/2016.
  */
 public class DescriptionResponse extends Response implements Serializable {

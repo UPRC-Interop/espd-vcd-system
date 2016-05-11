@@ -3,6 +3,10 @@ package eu.esens.espdvcd.model.requirement.response;
 import java.io.Serializable;
 
 /**
+ * Quantity response
+ *
+ * (part of Period declaration fulfilment)
+ *
  * Created by Ulf Lotzmann on 22/03/2016.
  */
 public class QuantityResponse extends Response implements Serializable {

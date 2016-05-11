@@ -9,6 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Criterion requirement
+ *
+ * Requirement to fulfill an specific criterion.
+ *
+ * Extends RequestRequirement by response and evidences.
+ *
  * Created by Ulf Lotzmann on 21/03/2016.
  */
 public class ResponseRequirement extends RequestRequirement {
@@ -38,7 +44,7 @@ public class ResponseRequirement extends RequestRequirement {
      * Cardinality: 0..n<br>
      * InfReqID: <br>
      * BusReqID: <br>
- UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.DescriptionResponse.Evidence<br>
+     * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.DescriptionResponse.Evidence<br>
      */
     private List<Evidence> evidences;
 

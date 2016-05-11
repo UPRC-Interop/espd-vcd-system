@@ -8,22 +8,6 @@ import java.util.ArrayList;
  */
 public class Evidence {
 
-
-
-    /**
-     * name
-     * <p>
-     * descr
-     * <p>
-     * Data type: <br>
-     * Cardinality: <br>
-     * InfReqID: <br>
-     * BusReqID: <br>
-     * UBL syntax path: <br>
-     */
-
-
-
     /**
      * Evidence identifier
      * <p>

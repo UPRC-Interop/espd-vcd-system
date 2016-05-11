@@ -7,6 +7,10 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
+ * Criterion requirement interface
+ *
+ * Requirement to fulfill an specific criterion.
+ *
  * Created by Ulf Lotzmann on 21/03/2016.
  */
 

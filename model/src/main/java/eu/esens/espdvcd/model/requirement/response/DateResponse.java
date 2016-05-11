@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
+ * Date response
+ *
  * Created by Ulf Lotzmann on 21/03/2016.
  */
 public class DateResponse extends Response implements Serializable {
@@ -13,7 +15,7 @@ public class DateResponse extends Response implements Serializable {
     /**
      * Criterion fulfillment date
      * <p>
-     * Declared date where  this criterion was fulfilled.
+     * Declared date where this criterion was fulfilled.
      * <p>
      * Data type: Date<br>
      * Cardinality: 0..1<br>

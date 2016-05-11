@@ -3,6 +3,10 @@ package eu.esens.espdvcd.model.requirement.response;
 import java.io.Serializable;
 
 /**
+ * Amount response
+ *
+ * (part of Period declaration fulfilment)
+ *
  * Created by Ulf Lotzmann on 21/03/2016.
  */
 public class AmountResponse extends Response implements Serializable {
@@ -21,6 +25,18 @@ public class AmountResponse extends Response implements Serializable {
      * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.Response.Amount<br>
      */
     private float amount;
+
+    /**
+     * Currency
+     * <p>
+     * (not specified in domain vocabulary)
+     * <p>
+     * Data type: <br>
+     * Cardinality: <br>
+     * InfReqID: <br>
+     * BusReqID: <br>
+     * UBL syntax path: <br>
+     */
     private String currency;
 
     
