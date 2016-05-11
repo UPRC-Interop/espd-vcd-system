@@ -218,7 +218,8 @@ public class Master extends VerticalLayout implements View {
     @Override
     public void enter(ViewChangeListener.ViewChangeEvent event) {
         if (forceAuthentication && !UserManager.isAuthenticated()) {
-            getNavigator().navigateTo(Designer.VIEW_LOGIN);
+            UserManager.login("abc", "123"); // Autologin to the test-user.
+            //getNavigator().navigateTo(Designer.VIEW_LOGIN);
         }
     }
 
