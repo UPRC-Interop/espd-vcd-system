@@ -16,50 +16,35 @@ import javax.xml.validation.SchemaFactory;
 import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
 
 /**
+ * ESPD schema validator.
+ *
  * Created by Ulf Lotzmann on 03/05/2016.
  */
-public class ESPDRequestValidator {
+public class ESPDSchemaValidator implements SchemaValidator {
 
     private List<String> validationMessages = new LinkedList<>();
+    private String xsdPath;
+    private Class jaxbClass;
 
-    public ESPDRequestValidator(InputStream is) throws SAXException, JAXBException {
+    protected ESPDSchemaValidator(InputStream is, String xsdPath, Class jaxbClass) throws SAXException, JAXBException {
+
+        this.xsdPath = xsdPath;
+        this.jaxbClass = jaxbClass;
 
         // initialise schema from the specified xsd
-        //SchemaFactory sf = SchemaFactory.newInstance("grow.names.specification.ubl.schema.xsd.espdrequest-1");
-        //SchemaFactory sf = SchemaFactory.newInstance(getXSD().namespaceURI());
         SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-
-        Schema schema;
-        //schema = sf.newSchema(new File(...getXSDPath()));
-        URL xsdURL = XSD.class.getResource(getXSDPath());
-        schema = sf.newSchema(xsdURL);
+        URL xsdURL = XSD.class.getResource(xsdPath);
+        Schema schema = sf.newSchema(xsdURL);
 
         // validate input stream against schema
         validateXML(is, schema);
     }
 
-    protected String getXSDPath() {
-        // FIXME: the path returned by XSD.ESPD_REQUEST.xsdPath() is probably incorrect, hence returning static string
-        //return XSD.ESPD_REQUEST.xsdPath();
-        return "/schema/maindoc/ESPDRequest-1.0.xsd";
-    }
-
-    protected Class getJaxbClass() {
-        return ESPDRequestType.class;
-    }
 
     private void validateXML(InputStream is, Schema schema) throws JAXBException {
 
-        // FIXME (UL): just test code to check the unmarchalling process, which is throwing an exception...
-        //ESPDRequestType er = JAXB.unmarshal(is, ESPDRequestType.class); // this is working
-
-        /*JAXBContext jc = JAXBContext.newInstance( ESPDRequestType.class.getPackage().getName() );
-        Unmarshaller u = jc.createUnmarshaller();
-        u.unmarshal( is );*/
-
-        // FIXME (UL): ... below is what I intended the method to look like (several approaches I wanted to test)
-
-        JAXBContext jc = JAXBContext.newInstance(getJaxbClass().getPackage().getName());
+        // validate the given input stream against the specified schema
+        JAXBContext jc = JAXBContext.newInstance(jaxbClass.getPackage().getName());
 
         Unmarshaller unmarshaller = jc.createUnmarshaller();
         unmarshaller.setSchema(schema);
@@ -76,18 +61,41 @@ public class ESPDRequestValidator {
                 return true;
             }
         });*/
-        unmarshaller.unmarshal(is);
+
+        try {
+            unmarshaller.unmarshal(is);
+        }
+        catch (Exception e) {
+            validationMessages.add(e.getMessage());
+        }
+
     }
 
+    /**
+     * Provides validation result.
+     * @return true, if validation was successful
+     */
+    @Override
     public boolean isValid() {
         // the xml should be valid if there are no validation events reported
         return validationMessages.isEmpty();
     }
 
+    /**
+     * Provides list of validation events.
+     * @return list of events where validation was not successful; empty, if validation was successful
+     */
+    @Override
     public List<String> getValidationMessages() {
         return validationMessages;
     }
 
+    /**
+     * Provides filtered list of validation events.
+     * @param keyWord, for which the list entries are filtered
+     * @return filtered list of validation events
+     */
+    @Override
     public List<String> getValidationMessagesFiltered(String keyWord) {
         return validationMessages.stream().filter(s -> s.contains(keyWord)).collect(Collectors.toList());
     }
