@@ -1,6 +1,7 @@
 package eu.esens.espdvcd.validator;
 
 import eu.esens.espdvcd.schema.XSD;
+import eu.esens.espdvcd.schema.SchemaUtil;
 import org.xml.sax.SAXException;
 
 import java.io.InputStream;
@@ -43,10 +44,10 @@ public class ESPDSchemaValidator implements SchemaValidator {
 
     private void validateXML(InputStream is, Schema schema) throws JAXBException {
 
-        // validate the given input stream against the specified schema
-        JAXBContext jc = JAXBContext.newInstance(jaxbClass.getPackage().getName());
+        // creating unmarshaller
+        Unmarshaller unmarshaller = SchemaUtil.getUnmarshaller();
 
-        Unmarshaller unmarshaller = jc.createUnmarshaller();
+        // setting schema
         unmarshaller.setSchema(schema);
         unmarshaller.setEventHandler(validationEvent -> validationMessages.add(validationEvent.getMessage() +
                " (line " + validationEvent.getLocator().getLineNumber() +
@@ -62,6 +63,7 @@ public class ESPDSchemaValidator implements SchemaValidator {
             }
         });*/
 
+        // validate the given input stream against the specified schema
         try {
             unmarshaller.unmarshal(is);
         }

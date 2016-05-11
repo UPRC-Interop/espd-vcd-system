@@ -58,7 +58,7 @@ public class ESPDSchemaValidatorTest {
         Assert.assertFalse(validator.isValid());
 
         Assert.assertTrue(validator.getValidationMessages().size() > 0);
-        Assert.assertTrue(validator.getValidationMessagesFiltered("ESPDRequest").size() > 0);
+        Assert.assertTrue(validator.getValidationMessagesFiltered("ESPDResponse").size() > 0);
 
         System.out.println("checkESPDRequestValidationForESPDResponse events:");
         for (String event: validator.getValidationMessages()) {
