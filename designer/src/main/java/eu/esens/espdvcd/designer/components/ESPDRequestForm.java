@@ -8,10 +8,7 @@ import eu.esens.espdvcd.designer.views.Master;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.SelectableCriterion;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by ixuz on 4/8/16.
@@ -104,7 +101,7 @@ public class ESPDRequestForm extends ESPDForm {
 
     public void criterionGroupForm(Master view, List<SelectableCriterion> criterionList, List<CriterionGroupForm> criterionGroupForms, VerticalLayout page, boolean readOnly)
     {
-        HashMap<String,List<CriterionForm>> criterionHash = new HashMap<>();
+        LinkedHashMap<String,List<CriterionForm>> criterionHash = new LinkedHashMap<>();
         for (SelectableCriterion criterion : criterionList) {
 
             if (!criterionHash.containsKey(criterion.getTypeCode())) {
