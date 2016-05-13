@@ -6,22 +6,22 @@ buildscript {
             url "https://maven.research.rackspacecloud.com/content/repositories/public/"
         }
     }
-
     dependencies {
-        classpath 'org.openrepose:gradle-jaxb-plugin:2.0.2'
+        classpath 'org.openrepose:gradle-jaxb-plugin:2.2.1'
+        classpath 'com.bmuschko:gradle-nexus-plugin:2.3.1'
+        classpath "com.sun.xml.bind:jaxb-impl:${project.jaxb_impl_version}"
     }
-
 }
     
 def generatedDir = "${project.buildDir}/generated-sources/xjc"
 
-    sourceSets {
-        main {
-            java {
-                srcDirs += "$generatedDir"
-            }
+sourceSets {
+    main {
+        java {
+            srcDirs += "$generatedDir"
         }
     }
+}
     
 apply plugin: 'org.openrepose.gradle.plugins.jaxb'
 
@@ -30,20 +30,16 @@ dependencies {
     jaxb "com.sun.xml.bind:jaxb-xjc:${project.jaxb_impl_version}"
     jaxb "com.sun.xml.bind:jaxb-impl:${project.jaxb_impl_version}"
     jaxb "javax.xml.bind:jaxb-api:${project.jaxb_impl_version}"
+    
+    compile "com.sun.xml.bind:jaxb-impl:${project.jaxb_impl_version}"
+    compile "javax.xml.bind:jaxb-api:${project.jaxb_impl_version}"
+    compile "com.sun.xml.bind:jaxb-core:${project.jaxb_impl_version}"
 }
-
-
 
 jaxb {
     xjc {
         destinationDir = "$generatedDir"
     }
-}
-
-task copyTask(type: Copy) {
-    from "build/libs/schema-${version}.jar"
-    into '../artifacts'
-    //    rename "schema-${version}.jar", 'schema.jar'
 }
 
 compileJava.dependsOn xjc
