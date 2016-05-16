@@ -4,7 +4,8 @@ import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.Page;
 import com.vaadin.ui.*;
-import eu.esens.espdvcd.builder.ESPDBuilder;
+import eu.esens.espdvcd.builder.ModelBuilder;
+import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.designer.components.CriterionForm;
 import eu.esens.espdvcd.designer.components.ESPDRequestForm;
 import eu.esens.espdvcd.model.CADetails;
@@ -12,6 +13,8 @@ import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.SimpleESPDRequest;
 
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by ixuz on 3/4/16.
@@ -95,17 +98,17 @@ public class EspdTemplate extends Master {
     }
 
     public void onNewEspdTemplate(Button.ClickEvent clickEvent) {
-        panels.setVisible(false);
-
-        CADetails caDetails = new CADetails();
-
-        espdRequest = new SimpleESPDRequest();
-        espdRequest.setCADetails(caDetails);
-        espdRequest.setCriterionList(new ESPDBuilder().getCriteriaList());
-
-        // Cenerate the espd request form base on the provided espd request model
-        espdRequestForm = new ESPDRequestForm(this, espdRequest, false);
-        mainColumn.addComponent(espdRequestForm);
+        try {
+            panels.setVisible(false);
+            
+            espdRequest = new ModelBuilder().addDefaultESPDCriteriaList().createESPDRequest();
+            
+            // Cenerate the espd request form base on the provided espd request model
+            espdRequestForm = new ESPDRequestForm(this, espdRequest, false);
+            mainColumn.addComponent(espdRequestForm);
+        } catch (BuilderException ex) {
+            Logger.getLogger(EspdTemplate.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void onImportEspdTemplate(Button.ClickEvent clickEvent) {
@@ -135,8 +138,8 @@ public class EspdTemplate extends Master {
 
                 try {
                     InputStream is = new FileInputStream(file);
-                    ESPDBuilder espdBuilder = new ESPDBuilder();
-                    espdRequest = espdBuilder.createESPDRequestFromXML(is);
+                    
+                    espdRequest = new ModelBuilder().importFrom(is).createESPDRequest();
                     espdRequestForm = new ESPDRequestForm(thisView, espdRequest, false);
                     mainColumn.addComponent(espdRequestForm);
                     is.close();

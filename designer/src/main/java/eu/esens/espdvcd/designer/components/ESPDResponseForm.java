@@ -1,8 +1,7 @@
 package eu.esens.espdvcd.designer.components;
 
-import com.vaadin.data.Property;
 import com.vaadin.ui.*;
-import eu.esens.espdvcd.builder.ESPDBuilder;
+import eu.esens.espdvcd.builder.XMLDocumentBuilder;
 import eu.esens.espdvcd.codelist.Codelists;
 import eu.esens.espdvcd.designer.views.Master;
 import eu.esens.espdvcd.model.*;
@@ -37,7 +36,7 @@ public class ESPDResponseForm extends ESPDForm {
         // Page 1 - Procedure
         VerticalLayout page1 = newPage("Information concerning the procurement procedure", "Procedure");
         page1.addComponent(new CADetailsForm(espdResponse, readOnly));
-        page1.addComponent(new EODetailsForm(espdResponse.getEoDetails(), readOnly));
+        page1.addComponent(new EODetailsForm(espdResponse.getEODetails(), readOnly));
 
         for (SelectableCriterion criterion : espdResponse.getEORelatedCriteriaList()) {
 
@@ -180,9 +179,8 @@ public class ESPDResponseForm extends ESPDForm {
     @Override
     protected void onExportConsole(Button.ClickEvent event) {
         // Display espd request xml button
-        ESPDBuilder espdBuilder = new ESPDBuilder();
         System.out.println("espdResponse: " + espdResponse);
-        String xml = espdBuilder.createXMLasString(espdResponse);
+        String xml = new XMLDocumentBuilder(espdResponse).getAsString();
         System.out.println("Xml: " + xml);
     }
 }
