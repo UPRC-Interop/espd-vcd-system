@@ -30,11 +30,16 @@ public class PredefinedESPDCriteriaExtractor implements CriteriaExtractor {
 
     @Override
     public List<SelectableCriterion> getFullList(List<SelectableCriterion> initialList) {
+        return getFullList(initialList, false);
+    }
+    
+     @Override
+    public List<SelectableCriterion> getFullList(List<SelectableCriterion> initialList, boolean addAsSelected) {
         Set<SelectableCriterion> initialSet = new LinkedHashSet<>();
         initialSet.addAll(initialList);
         Set<SelectableCriterion> fullSet = 
         criterionTypeList.stream()
-                .map(c -> ModelFactory.ESPD_REQUEST.extractSelectableCriterion(c, false))
+                .map(c -> ModelFactory.ESPD_REQUEST.extractSelectableCriterion(c, addAsSelected))
                 .collect(Collectors.toSet());
         initialSet.addAll(fullSet);
         return new ArrayList<>(initialSet);

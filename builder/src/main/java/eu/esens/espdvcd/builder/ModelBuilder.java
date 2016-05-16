@@ -1,6 +1,5 @@
 package eu.esens.espdvcd.builder;
 
-import com.sun.javafx.scene.control.skin.VirtualFlow;
 import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.builder.model.ModelFactory;
 import eu.esens.espdvcd.model.CADetails;
@@ -27,24 +26,23 @@ import java.util.logging.Logger;
 import javax.xml.bind.JAXBException;
 import javax.xml.transform.stream.StreamSource;
 
-
 public class ModelBuilder {
     
-    private EODetails eoDetails= null;
+    private EODetails eoDetails = null;
     private CADetails caDetails = null;
     private CriteriaExtractor criteriaExtractor = null;
     private InputStream importStream = null;
-            
+    
     public ModelBuilder importFrom(InputStream is) {
         importStream = getBufferedInputStream(is);
-        return this;       
+        return this;        
     }
-  
-    public ModelBuilder withCADetailsFrom(InputStream is) throws BuilderException {
     
+    public ModelBuilder withCADetailsFrom(InputStream is) throws BuilderException {
+        
         ESPDRequest req = createESPDRequestFromXML(is);
         caDetails = req.getCADetails();
-        return this;   
+        return this;        
     }
     
     public ModelBuilder withCADetailsFrom(ESPDRequest req) {
@@ -58,13 +56,13 @@ public class ModelBuilder {
     }
     
     public ModelBuilder withEODetailsFrom(InputStream is) throws BuilderException {
-           ESPDResponse res = createESPDResponseFromXML(is);
-           eoDetails = res.getEoDetails();    
-        return this;   
+        ESPDResponse res = createESPDResponseFromXML(is);
+        eoDetails = res.getEODetails();        
+        return this;        
     }
     
     public ModelBuilder withEODetailsFrom(ESPDResponse res) {
-        eoDetails = res.getEoDetails();
+        eoDetails = res.getEODetails();
         return this;
     }
     
@@ -73,25 +71,27 @@ public class ModelBuilder {
         return this;
     }
     
-    public ModelBuilder withDefaultESPDCriteriaList() {
-
-        criteriaExtractor  = new PredefinedESPDCriteriaExtractor();
-        return this;       
+    public ModelBuilder addDefaultESPDCriteriaList() {
+        
+        criteriaExtractor = new PredefinedESPDCriteriaExtractor();
+        return this;        
     }
     
     public ESPDRequest createESPDRequest() throws BuilderException {
         ESPDRequest req;
         if (importStream != null) {
             req = createESPDRequestFromXML(importStream);
-            req.setCriterionList(criteriaExtractor.getFullList(req.getFullCriterionList()));
+            if (criteriaExtractor != null) {
+                req.setCriterionList(criteriaExtractor.getFullList(req.getFullCriterionList()));
+            }
         } else {
-           req = new SimpleESPDRequest();
-           if (criteriaExtractor != null) {
-            req.setCriterionList(criteriaExtractor.getFullList());
-           } else {
-               req.setCriterionList(getEmptyCriteriaList());
-           }
-           req.setCADetails(createDefaultCADetails());
+            req = new SimpleESPDRequest();
+            if (criteriaExtractor != null) {
+                req.setCriterionList(criteriaExtractor.getFullList());
+            } else {
+                req.setCriterionList(getEmptyCriteriaList());
+            }
+            req.setCADetails(createDefaultCADetails());
         }
 
         //Overriding the default/imported ca details
@@ -106,36 +106,39 @@ public class ModelBuilder {
         ESPDResponse res;
         if (importStream != null) {
             res = createESPDResponseFromXML(importStream);
+            if (criteriaExtractor != null) {
+                res.setCriterionList(criteriaExtractor.getFullList(res.getFullCriterionList(), true));
+            }
         } else {
-           res = new SimpleESPDResponse();
-           if (criteriaExtractor != null) {
-            res.setCriterionList(criteriaExtractor.getFullList());
-           } else {
-               res.setCriterionList(getEmptyCriteriaList());
-           }
-           res.setCADetails(createDefaultCADetails());
-           res.setEODetails(createDefaultEODetails());
+            res = new SimpleESPDResponse();
+            if (criteriaExtractor != null) {
+                res.setCriterionList(criteriaExtractor.getFullList());
+            } else {
+                res.setCriterionList(getEmptyCriteriaList());
+            }
+            res.setCADetails(createDefaultCADetails());
+            res.setEODetails(createDefaultEODetails());
         }
         
         if (caDetails != null) {
-          res.setCADetails(caDetails);
+            res.setCADetails(caDetails);
         }
         
         if (eoDetails != null) {
-          res.setEODetails(eoDetails);
+            res.setEODetails(eoDetails);
         }
-
+        
         return res;
     }
-        
+    
     private InputStream getBufferedInputStream(InputStream xmlESPD) {
-    // We require a marked input stream
-    InputStream bis;
-    if (xmlESPD.markSupported()) {
-        bis = xmlESPD;
-    } else {
-        bis = new BufferedInputStream(xmlESPD);
-    }
+        // We require a marked input stream
+        InputStream bis;
+        if (xmlESPD.markSupported()) {
+            bis = xmlESPD;
+        } else {
+            bis = new BufferedInputStream(xmlESPD);
+        }
         return bis;
     }
     
@@ -143,7 +146,6 @@ public class ModelBuilder {
         CriteriaExtractor cr = new PredefinedESPDCriteriaExtractor();
         return cr.getFullList();
     }
-
     
     private ESPDRequestType readESPDRequestFromStream(InputStream is) {
         try {
@@ -155,7 +157,7 @@ public class ModelBuilder {
             return null;
         }
     }
-
+    
     private ESPDResponseType readESPDResponseFromStream(InputStream is) {
         try {
             // Start with the convience methods provided by JAXB. If there are
@@ -166,39 +168,44 @@ public class ModelBuilder {
             return null;
         }
     }
-    
+
     /**
      * Parses the input stream and creates an ESPDRequest model instance.
-     * @param xmlESPD The input stream of the XML document to be parsed 
-     * @return a prefilled ESPDRequest based on the input data 
-     * @throws BuilderException when the parsing from XML to ESPDRequest Model fails
+     *
+     * @param xmlESPD The input stream of the XML document to be parsed
+     * @return a prefilled ESPDRequest based on the input data
+     * @throws BuilderException when the parsing from XML to ESPDRequest Model
+     * fails
      */
     private ESPDRequest createESPDRequestFromXML(InputStream xmlESPD) throws BuilderException {
-
+        
         ESPDRequest req;
-
+        
         try (InputStream bis = getBufferedInputStream(xmlESPD)) {
             // Check and read the file in the JAXB Object
             ESPDRequestType reqType = readESPDRequestFromStream(bis);
             // Create the Model Object
             req = ModelFactory.ESPD_REQUEST.extractESPDRequest(reqType);
-
+            
             return req;
-
+            
         } catch (IOException ex) {
             Logger.getLogger(ESPDBuilder.class.getName()).log(Level.SEVERE, null, ex);
             throw new BuilderException("Error in Reading XML Input Stream", ex);
         }
-
+        
     }
+
     /**
      * Parses the input stream and creates an ESPDResponse model instance.
-     * @param xmlESPDRes The input stream of the XML document to be parsed 
-     * @return a prefilled ESPDRequest based on the input data 
-     * @throws BuilderException when the parsing from XML to ESPDResponse Model fails
+     *
+     * @param xmlESPDRes The input stream of the XML document to be parsed
+     * @return a prefilled ESPDRequest based on the input data
+     * @throws BuilderException when the parsing from XML to ESPDResponse Model
+     * fails
      */
     private ESPDResponse createESPDResponseFromXML(InputStream xmlESPDRes) throws BuilderException {
-
+        
         ESPDResponse res;
         // Check and read the file in the JAXB Object
         try (InputStream bis = getBufferedInputStream(xmlESPDRes)) {
@@ -210,22 +217,21 @@ public class ModelBuilder {
             Logger.getLogger(ESPDBuilder.class.getName()).log(Level.SEVERE, null, ex);
             throw new BuilderException("Error in Reading Input Stream for ESPD Response", ex);
         }
-
+        
         return res;
     }
     
     private EODetails createDefaultEODetails() {
-         // Empty EODetails (with initialized lists)
+        // Empty EODetails (with initialized lists)
         EODetails eod = new EODetails();
         eod.setContactingDetails(new ContactingDetails());
-        eod.setNaturalPersons(new VirtualFlow.ArrayLinkedList<>());
+        eod.setNaturalPersons(new ArrayList<>());
         eod.getNaturalPersons().add(new NaturalPerson());
         return eod;
-     }
-    
+    }
     
     private CADetails createDefaultCADetails() {
-       // Default initialization of the ESPDRequest and ESPDResponse Models.
+        // Default initialization of the ESPDRequest and ESPDResponse Models.
         // Empty CADetails
         
         return new CADetails();

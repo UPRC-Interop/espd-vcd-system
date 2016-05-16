@@ -83,7 +83,7 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
                 .map(cr -> extractCriterion(cr))
                 .collect(Collectors.toList()));
 
-        resType.setEconomicOperatorParty(extracEODetails(res.getEoDetails()));
+        resType.setEconomicOperatorParty(extracEODetails(res.getEODetails()));
         
         return resType;
     }
