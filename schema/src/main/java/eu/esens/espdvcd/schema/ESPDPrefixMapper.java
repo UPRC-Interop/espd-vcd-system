@@ -3,8 +3,10 @@ package eu.esens.espdvcd.schema;
 import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
 
 /**
- *
- * @author jerouris
+ * Prefix Mapper for the JAXB Classes. Used in {@link SchemaUtil} marshallers.
+ * <br>
+ * Uses the {@link XSD} enumeration to provide the mapping.
+ * 
  */
 public class ESPDPrefixMapper extends NamespacePrefixMapper {
 
