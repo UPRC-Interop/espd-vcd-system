@@ -18,6 +18,17 @@ import org.oasis_open.docs.codelist.ns.genericode._1.Column;
 import org.oasis_open.docs.codelist.ns.genericode._1.Row;
 import org.oasis_open.docs.codelist.ns.genericode._1.SimpleCodeList;
 
+/**
+ * GenericCode that is used to load simple Generic Code files and provide a generic
+ * API that maps the values used as IDs, which are essentially the codelist values
+ * with actual values that are presented 
+ * either on a form or a document. 
+ * 
+ * It is used as an abstract superclass of the 
+ * {@link eu.esens.espdvcd.codelist.Codelists} Codelists
+ *
+ * @version 1.0
+ */
 public class GenericCode {
 
     protected final JAXBElement<CodeListDocument> GC;
@@ -107,7 +118,7 @@ public class GenericCode {
         return biMap;
     }
 
-    public final BiMap<String, String> getBiMap() {
+    protected final BiMap<String, String> getBiMap() {
         return clBiMap;
     }
 
