@@ -46,31 +46,15 @@ configure (subprojects - project(':designer')) {
     archives sourcesJar
 }
 
-
-    publishing {
-        publications {
-            myPublication (MavenPublication) {
-                from components.java
-                artifact (javadocJar) { // (3)
-                    classifier = 'javadoc'
-                }
-                artifact (sourcesJar) { // (2)
-                    classifier = 'sources'
-                }
-            }
+uploadArchives {
+    repositories.mavenDeployer {
+        repository(url: "http://nexus.e-sens.gr/content/repositories/${project.version.endsWith('-SNAPSHOT') ? 'snapshots' : 'releases' }/") {
+            authentication(userName: nexusUsername, password: nexusPassword)
         }
-        repositories {
-            maven { 
-                credentials {
-                    username "$nexusUsername"
-                    password "$nexusPassword"
-                }
-                url "http://nexus.e-sens.gr/content/repositories/${project.version.endsWith('-SNAPSHOT') ? 'snapshots' : 'releases' }/"
-            }
-
-        }
-    }  
+    }
 }
+}
+
 // 
 // global definition of compile dependency
 // for project logging
