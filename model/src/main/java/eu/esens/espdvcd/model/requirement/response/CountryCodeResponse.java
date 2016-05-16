@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Country code response
+ *
  * Created by Ulf Lotzmann on 21/03/2016.
  */
 public class CountryCodeResponse extends Response implements Serializable {
