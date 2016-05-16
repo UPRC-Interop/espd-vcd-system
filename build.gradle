@@ -49,8 +49,8 @@ subprojects { project ->
 // global definition of compile dependency
 // for project logging
 // everywhere except in-memory-db and logging projects
-configure(subprojects
-    - project(':logging'))
+configure(subprojects)
+   // - project(':logging'))
 {
     dependencies {
         compile libraries.slf4j_api
@@ -68,7 +68,7 @@ configure(subprojects
 // for external library junit
 // everywhere except a few projects
 configure(subprojects
-    - project(':logging')
+  //  - project(':logging')
 ) {
     dependencies {
         testCompile 'junit:junit:4.12'

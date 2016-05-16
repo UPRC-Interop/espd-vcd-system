@@ -1,14 +1,6 @@
-include ':asset-manager',
-        ':builder',
+include ':builder',
         ':codelists',
-        ':common-util',
-        ':container-manager',
         ':designer',
-        ':logging',
         ':model',
-        ':retriever',
         ':schema',
-        ':user-manager',
-        ':validator',
-        ':viewer',
-	':codelists'
+        ':validator'
