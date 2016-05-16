@@ -26,11 +26,37 @@ subprojects { project ->
         mavenCentral()
         jcenter()
     }
-        
+    
+}
+
+// publishing definition
+configure (subprojects - project(':designer')) {
+    task javadocJar (type: Jar, dependsOn: javadoc) { // (1)
+        classifier = 'javadoc'
+        from javadoc.destinationDir
+    }
+
+    task sourcesJar (type : Jar) {
+        classifier = 'sources'
+        from sourceSets.main.allSource
+    }
+    
+    artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+
     publishing {
         publications {
             myPublication (MavenPublication) {
                 from components.java
+                artifact (javadocJar) { // (3)
+                    classifier = 'javadoc'
+                }
+                artifact (sourcesJar) { // (2)
+                    classifier = 'sources'
+                }
             }
         }
         repositories {
@@ -50,7 +76,7 @@ subprojects { project ->
 // for project logging
 // everywhere except in-memory-db and logging projects
 configure(subprojects)
-   // - project(':logging'))
+// - project(':logging'))
 {
     dependencies {
         compile libraries.slf4j_api
@@ -68,12 +94,13 @@ configure(subprojects)
 // for external library junit
 // everywhere except a few projects
 configure(subprojects
-  //  - project(':logging')
+    //  - project(':logging')
 ) {
     dependencies {
         testCompile 'junit:junit:4.12'
     }
 }
+
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.13'
