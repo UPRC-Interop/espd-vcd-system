@@ -26,18 +26,44 @@ import java.util.logging.Logger;
 import javax.xml.bind.JAXBException;
 import javax.xml.transform.stream.StreamSource;
 
+/**
+ * The ModelBuilder is a builder pattern implemented class, that is used for
+ * guided creation of ESPD Model POJOs.
+ * 
+ * @since 1.0
+ */
 public class ModelBuilder {
     
     private EODetails eoDetails = null;
     private CADetails caDetails = null;
     private CriteriaExtractor criteriaExtractor = null;
     private InputStream importStream = null;
-    
+   
+    /**
+     * Loads from an ESPD Request or an ESPD Response all the required data and
+     * are used as the defaults for the creation of the ESPD(Request/Response) POJO.
+     * 
+     * @param is The input stream that will be read to create the Model POJO. The
+     * input stream must point to a valid ESPD Request or ESPD Response XML Artefact
+     * 
+     * @return the same ModelBuilder instance for incremental creation of the required object.
+     */
     public ModelBuilder importFrom(InputStream is) {
         importStream = getBufferedInputStream(is);
         return this;        
     }
     
+    /**
+     * Overrides the CA Details of the created Model POJO with the ones found in the
+     * Provided input stream.
+     * 
+     * @param is The input stream that will be read to extract the CA Details from. The
+     * input stream must point to a valid ESPD Request or ESPD Response XML Artefact
+     * 
+     * @return the same ModelBuilder instance for incremental creation of the required object.
+ 
+     * @throws BuilderException if the input stream is on a valid ESPD Request or Response;
+     */
     public ModelBuilder withCADetailsFrom(InputStream is) throws BuilderException {
         
         ESPDRequest req = createESPDRequestFromXML(is);
@@ -45,38 +71,77 @@ public class ModelBuilder {
         return this;        
     }
     
-    public ModelBuilder withCADetailsFrom(ESPDRequest req) {
-        caDetails = req.getCADetails();
-        return this;
-    }
-    
+    /**
+     * Overrides the CA Details of the created Model POJO with the ones found in the
+     * Provided input stream.
+     * 
+     * @param caDetails The {@link CADetails} object hat will override the CA Details of 
+     * the created object
+     * 
+     * @return the same ModelBuilder instance for incremental creation of the required object.
+     * 
+     */
     public ModelBuilder withCADetailsFrom(CADetails caDetails) {
         this.caDetails = caDetails;
         return this;
     }
     
+    /**
+     * Overrides the EO Details of the created Model POJO with the ones found in the
+     * Provided input stream.
+     * 
+     * @param is The input stream that will be read to extract the EO Details from. The
+     * input stream must point to a valid ESPD Request or ESPD Response XML Artefact
+     * 
+     * @return the same ModelBuilder instance for incremental creation of the required object.
+ 
+     * @throws BuilderException if the input stream is on a valid ESPD Request or Response;
+     */
     public ModelBuilder withEODetailsFrom(InputStream is) throws BuilderException {
         ESPDResponse res = createESPDResponseFromXML(is);
         eoDetails = res.getEODetails();        
         return this;        
     }
     
-    public ModelBuilder withEODetailsFrom(ESPDResponse res) {
-        eoDetails = res.getEODetails();
-        return this;
-    }
-    
+    /**
+     * Overrides the CA Details of the created Model POJO with the ones found in the
+     * Provided input stream.
+     * 
+     * @param eoDetails The {@link EODetails} object hat will override the EO Details of 
+     * the created object
+     * 
+     * @return the same ModelBuilder instance for incremental creation of the required object.
+     * 
+     */
     public ModelBuilder withEODetailsFrom(EODetails eoDetails) {
         this.eoDetails = eoDetails;
         return this;
     }
     
+    /**
+     * Adds the default criteria list of the ESPD Form as it is defined by the 
+     * European Commission.<br>
+     * 
+     * If the created object is an new (not imported) ESPD Request, then the criteria
+     * added are pre-selected.<br>
+     * If the created object comes from an imported ESPD Artefact, then the default
+     * extra criteria added, are included as non-selected. <br>     * 
+     * If the created object is an ESPD Response, then the criteria added will always
+     * be pre-selected.
+     * 
+     * @return the same ModelBuilder instance for incremental creation of the required object.
+     */
     public ModelBuilder addDefaultESPDCriteriaList() {
         
         criteriaExtractor = new PredefinedESPDCriteriaExtractor();
         return this;        
     }
     
+    /**
+     * Terminal builder method that returns an {@link ESPDRequest} instance,
+     * @return the created ESPD Request
+     * @throws BuilderException if the import failed.
+     */
     public ESPDRequest createESPDRequest() throws BuilderException {
         ESPDRequest req;
         if (importStream != null) {
@@ -101,6 +166,11 @@ public class ModelBuilder {
         return req;
     }
     
+    /**
+     * Terminal builder method that returns an {@link ESPDResponse} instance,
+     * @return the created ESPD Response
+     * @throws BuilderException if the import failed.
+     */
     public ESPDResponse createESPDResponse() throws BuilderException {
         
         ESPDResponse res;

@@ -25,19 +25,40 @@ import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.CopyIndi
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.IssueDateType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.IssueTimeType;
 
+/**
+ * The XMLDocumentBuilder is a builder pattern implemented class that is used
+ * for guided creation of XML Document Artefacts out of ESPD Model Objects.
+ * 
+ * @since 1.0
+ */
 public class XMLDocumentBuilder {
     
     private final String theXML;
     
+    /**
+     * Creates an XMLDocumentBuilder based on {@link ESPDRequest} derived class input
+     * 
+     * @param req the {@link ESPDRequest} derived class that will be transformed
+     * as an XML Document
+     * 
+     */
     public XMLDocumentBuilder(ESPDRequest req) {
         theXML = createXMLasString(req);
     };
         
+    /**
+     * Transforms the XML Representation of the data to an input stream.
+     * @return the String representation of the XML Data as an input stream
+     */
     public InputStream getAsInputStream() {
         ByteArrayInputStream bis = new ByteArrayInputStream(theXML.getBytes(Charset.forName("UTF-8")));
         return bis;
     }
     
+    /**
+     * Transforms the XML Representation of the data to a string.
+     * @return the String representation of the XML Data
+     */
     public String getAsString() {   
         return theXML;
     }
@@ -107,7 +128,7 @@ public class XMLDocumentBuilder {
      * @param resType The JAXB ESPDResponseType that will be finalized.
      * @return the Finalized ESPDResponseType Instance
      */
-    public ESPDResponseType finalize(ESPDResponseType resType) {
+    private ESPDResponseType finalize(ESPDResponseType resType) {
 
         // Finalizes the ESPDResponse Type, adding the Date and Time of Issue etc
         resType.setUBLVersionID(SchemaFactory.ESPD_RESPONSE.createUBL21VersionIdType());
@@ -186,5 +207,4 @@ public class XMLDocumentBuilder {
         return result.toString();
     }
     
-           
 }
