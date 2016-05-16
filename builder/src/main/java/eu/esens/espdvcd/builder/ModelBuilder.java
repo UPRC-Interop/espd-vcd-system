@@ -153,7 +153,7 @@ public class ModelBuilder {
             // perfomance issues we will swicth back to the JAXB API Usage
             return SchemaUtil.getUnmarshaller().unmarshal(new StreamSource(is), ESPDRequestType.class).getValue();
         } catch (JAXBException ex) {
-            Logger.getLogger(ESPDBuilder.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ModelBuilder.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
@@ -164,7 +164,7 @@ public class ModelBuilder {
             // perfomance issues we will swicth back to the JAXB API Usage
             return SchemaUtil.getUnmarshaller().unmarshal(new StreamSource(is), ESPDResponseType.class).getValue();
         } catch (JAXBException ex) {
-            Logger.getLogger(ESPDBuilder.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ModelBuilder.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
@@ -190,7 +190,7 @@ public class ModelBuilder {
             return req;
             
         } catch (IOException ex) {
-            Logger.getLogger(ESPDBuilder.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ModelBuilder.class.getName()).log(Level.SEVERE, null, ex);
             throw new BuilderException("Error in Reading XML Input Stream", ex);
         }
         
@@ -214,7 +214,7 @@ public class ModelBuilder {
             // Create the Model Object
             res = ModelFactory.ESPD_RESPONSE.extractESPDResponse(resType);
         } catch (IOException ex) {
-            Logger.getLogger(ESPDBuilder.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ModelBuilder.class.getName()).log(Level.SEVERE, null, ex);
             throw new BuilderException("Error in Reading Input Stream for ESPD Response", ex);
         }
         
