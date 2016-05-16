@@ -74,30 +74,15 @@ configure (subprojects - project(':designer')) {
 // 
 // global definition of compile dependency
 // for project logging
-// everywhere except in-memory-db and logging projects
 configure(subprojects)
-// - project(':logging'))
 {
     dependencies {
         compile libraries.slf4j_api
         compile libraries.log4j_slf4j_impl
         compile libraries.log4j_core
         compile libraries.log4j_api       
-    }
-    dependencies {
-        compile 'com.google.guava:guava:14.0'
-    }
-    
-}
-
-// global definition of testCompile dependency
-// for external library junit
-// everywhere except a few projects
-configure(subprojects
-    //  - project(':logging')
-) {
-    dependencies {
         testCompile 'junit:junit:4.12'
+        compile 'com.google.guava:guava:14.0'
     }
 }
 
