@@ -3,6 +3,10 @@ package eu.esens.espdvcd.model.requirement.response;
 import java.io.Serializable;
 
 /**
+ * Percentage response
+ *
+ * (part of Period declaration fulfilment)
+ *
  * Created by Ulf Lotzmann on 22/03/2016.
  */
 public class PercentageResponse extends Response implements Serializable {
@@ -10,7 +14,7 @@ public class PercentageResponse extends Response implements Serializable {
     private static final long serialVersionUID = -7417383925707504848L;
 
     /**
-     * Criterion fulfillment percenatge
+     * Criterion fulfillment percentage
      * <p>
      * Declared percentage that fulfills this criterion.
      * <p>

@@ -7,14 +7,52 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Criterion requirement group
+ *
  * Created by ixuz on 2/24/16.
  */
 
 public class RequirementGroup implements Serializable {
 
-    private static final long serialVersionUID = -2179415621032376712L;    
+    private static final long serialVersionUID = -2179415621032376712L;
+
+    /**
+     * Criterion requirement group identifier
+     * <p>
+     * An identifier that allows to identify a group of requirements uniquely.
+     * <p>
+     * Data type: Text<br>
+     * Cardinality: 0..1<br>
+     * InfReqID: <br>
+     * BusReqID: tbr70-013, tbr70-004<br>
+     * UBL syntax path: ccv:Criterion.RequirementGroup.ID<br>
+     */
     private String ID;
+
+    /**
+     * Criterion requirements
+     * <p>
+     * Requirements to fulfill an specific criterion.
+     * <p>
+     * Data type: <br>
+     * Cardinality: 1..n<br>
+     * InfReqID: <br>
+     * BusReqID: <br>
+     * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement<br>
+     */
     private List<Requirement> requirements;
+
+    /**
+     * Criterion requirement group
+     * <p>
+     *
+     * <p>
+     * Data type: <br>
+     * Cardinality: 0..n<br>
+     * InfReqID: <br>
+     * BusReqID: <br>
+     * UBL syntax path: ccv:Criterion.RequirementGroup<br>
+     */
     private List<RequirementGroup> requirementGroups;
 
 

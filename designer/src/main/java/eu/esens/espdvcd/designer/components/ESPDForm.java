@@ -1,30 +1,21 @@
 package eu.esens.espdvcd.designer.components;
 
-import com.vaadin.data.Property;
 import com.vaadin.server.FileDownloader;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.StreamResource;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.*;
-import eu.esens.espdvcd.builder.ESPDBuilder;
-import eu.esens.espdvcd.codelist.Codelists;
-import eu.esens.espdvcd.designer.Designer;
+import eu.esens.espdvcd.builder.XMLDocumentBuilder;
 import eu.esens.espdvcd.designer.views.Espd;
 import eu.esens.espdvcd.designer.views.EspdTemplate;
 import eu.esens.espdvcd.designer.views.Master;
 import eu.esens.espdvcd.model.ESPDRequest;
-import eu.esens.espdvcd.model.SelectableCriterion;
 import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -87,17 +78,7 @@ public class ESPDForm extends VerticalLayout {
         exportFile.setStyleName("espdRequestForm-finish");
 
         StreamResource downloadableResource = new StreamResource(() -> {
-            
-            ESPDBuilder espdBuilder = new ESPDBuilder();
-            String xml = espdBuilder.createXMLasString(espdRequest);
-            byte[] xmlBytes = null;
-            try {
-                xmlBytes = xml.getBytes("UTF-8");
-            } catch (UnsupportedEncodingException ex) {
-                Logger.getLogger(ESPDForm.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            return new ByteArrayInputStream(xmlBytes);
-            
+            return (new XMLDocumentBuilder(espdRequest).getAsInputStream());            
         }, exportFileName);
 
         FileDownloader fileDownloader = new FileDownloader(downloadableResource);
@@ -212,8 +193,7 @@ public class ESPDForm extends VerticalLayout {
      */
     protected void onExportConsole(Button.ClickEvent event) {
         // Display espd request xml button
-        ESPDBuilder espdBuilder = new ESPDBuilder();
-        String xml = espdBuilder.createXMLasString(espdRequest);
+        String xml = new XMLDocumentBuilder(espdRequest).getAsString();
         System.out.println("Xml: " + xml);
     }
 }

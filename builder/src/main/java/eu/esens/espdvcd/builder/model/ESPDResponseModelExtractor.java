@@ -15,6 +15,7 @@ import grow.names.specification.ubl.schema.xsd.espd_commonaggregatecomponents_1.
 import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.ResponseType;
+import java.util.ArrayList;
 import java.util.stream.Collectors;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PersonType;
 
@@ -38,13 +39,17 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
 
         if (resType.getEconomicOperatorParty() != null) {
             res.setEODetails(extractEODetails(resType.getEconomicOperatorParty()));
+        } else {
+            res.setEODetails(new EODetails());
+            res.getEODetails().setNaturalPersons(new ArrayList<>());
+            res.getEODetails().getNaturalPersons().add(new NaturalPerson());            
         }
         return res;
     }
 
     /**
      *
-     * @param rt
+     * @param rt The JAXB RequirementType class to be extracted
      * @return The Extracted @Requirement  
      */
     @Override
@@ -323,6 +328,10 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
             } else {
                 eoDetails.getNaturalPersons().add(new NaturalPerson());
             }
+        } else {
+             eoDetails = new EODetails();
+             eoDetails.setNaturalPersons(new ArrayList<>());
+             eoDetails.getNaturalPersons().add(new NaturalPerson());  
         }
 
         return eoDetails;

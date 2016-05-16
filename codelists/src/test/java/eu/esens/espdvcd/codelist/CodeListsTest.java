@@ -27,7 +27,7 @@ public class CodeListsTest {
         @Test 
         public void testBiMap() {
             Assert.assertEquals("Greece",Codelists.CountryIdentification.getBiMap().get("GR"));
-            Assert.assertEquals("GR",Codelists.CountryIdentification.getBiMap().inverse().get("Greece"));
+            Assert.assertEquals("GR",Codelists.CountryIdentification.getBiMap().inverse().get("Greece"));            
         }
     
         @Test 

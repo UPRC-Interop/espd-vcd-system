@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface ESPDResponse extends ESPDRequest,Serializable {
 
-    public EODetails getEoDetails();
+    public EODetails getEODetails();
     
     public void setEODetails(EODetails eoDetails);
     /**

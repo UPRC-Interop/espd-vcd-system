@@ -93,7 +93,13 @@ public class CriterionForm extends VerticalLayout {
             }
         } else { // The criterion form will contain a limited amount of details, therefore a more simplified layout is used.
             panelContent.addComponent(selected);
-            panelContent.addComponent(description);
+
+            if (criterion.getTypeCode().equals("SELECTION.ECONOMIC_FINANCIAL_STANDING") || criterion.getTypeCode().equals("DATA_ON_ECONOMIC_OPERATOR")) {
+                EODetailsDescription.setValue(criterion.getName());
+                panelContent.addComponent(EODetailsDescription);
+            } else {
+                panelContent.addComponent(description);
+            }
         }
 
         this.addLayoutClickListener(this::onCriterionClick);

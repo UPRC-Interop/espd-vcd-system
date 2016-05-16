@@ -5,10 +5,70 @@ package eu.esens.espdvcd.model;
  */
 public class LegislationReference {
 
+
+    /**
+     * Legislation title
+     * <p>
+     * Title of the legislation.
+     * <p>
+     * Data type: Text<br>
+     * Cardinality: 0..1<br>
+     * InfReqID: tir92-130<br>
+     * BusReqID: tbr92-015, tbr92-016<br>
+     * UBL syntax path: ccv:Criterion.LegislationReference.Title<br>
+     */
     private String title;
+
+    /**
+     * Legislation description
+     * <p>
+     * Textual description of the legislation.
+     * <p>
+     * Data type: Text<br>
+     * Cardinality: 0..1<br>
+     * InfReqID: tir92-131<br>
+     * BusReqID: tbr92-015, tbr92-016<br>
+     * UBL syntax path: ccv:Criterion.LegislationReference.Description<br>
+     */
     private String description;
+
+    /**
+     * Jurisdiction level
+     * <p>
+     * Jurisdictional level of a particular legislation.
+     * <p>
+     * Data type: Text<br>
+     * Cardinality: 0..1<br>
+     * InfReqID: tir92-132<br>
+     * BusReqID: tbr92-015, tbr92-016<br>
+     * UBL syntax path: ccv:Criterion.LegislationReference.JurisdictionLevelCode<br>
+     */
     private String jurisdictionLevelCode;
+
+    /**
+     * Legislation article
+     * <p>
+     * Textual description of the article of the legislation.
+     * <p>
+     * Data type: Text<br>
+     * Cardinality: 0..1<br>
+     * InfReqID: tir92-133<br>
+     * BusReqID: tbr92-015, tbr92-016<br>
+     * UBL syntax path: ccv:Criterion.LegislationReference.Article<br>
+     */
     private String article;
+
+    /**
+     * Legislation URI
+     * <p>
+     * URI that points to a particular legislation	Identifier
+     * <p>
+     * Data type: <br>
+     * Cardinality: 0..1<br>
+     * InfReqID: tir92-134<br>
+     * BusReqID: tbr92-015, tbr92-016<br>
+     * UBL syntax path: ccv:Criterion.LegislationReference.URI<br>
+     */
     private String URI;
 
     public LegislationReference(String title, String description, String jurisdictionLevelCode, String article, String URI) {
