@@ -1,22 +1,9 @@
-// build aliases: define a synonym here if you want a shortcut to run multiple targets
-def buildAliases = [
-        'reload' : ['clean', 'build', 'designer:jettyStart'],
-        'rebuild': ['clean', 'build']
-]
-
-def expandedTaskList = []
-gradle.startParameter.taskNames.each {
-    expandedTaskList << (buildAliases[it] ? buildAliases[it] : it)
-}
-
-gradle.startParameter.taskNames = expandedTaskList.flatten()
-println "\n${gradle.startParameter.taskNames}\n"
-
 subprojects { project ->
     apply plugin: 'java'
     apply plugin: 'maven'
+    apply plugin: 'maven-publish'
 
-    version = '0.1.0-SNAPSHOT'
+    version = '1.0.0'
     group = 'eu.esens.espdvcd'
 
     project.ext.slf4j_version = '1.7.13'
@@ -28,58 +15,64 @@ subprojects { project ->
     project.ext.h2_version = '1.4.190'
 
     project.ext.libraries = [
-            /* logging */
-            slf4j_api       : "org.slf4j:slf4j-api:${project.slf4j_version}",
-            log4j_slf4j_impl: "org.apache.logging.log4j:log4j-slf4j-impl:${project.log4j2_version}",
-            log4j_core      : "org.apache.logging.log4j:log4j-core:${project.log4j2_version}",
-            log4j_api       : "org.apache.logging.log4j:log4j-api:${project.log4j2_version}",
-
-            /* hibernate */
-            hibernate_core  : "org.hibernate:hibernate-core:${project.hibernate_version}",
-
-            /* postgresql */
-            postgresql      : "org.postgresql:postgresql:${project.postgresql_version}",
-
-            /* h2 */
-            h2              : "com.h2database:h2:${project.h2_version}",
+        /* logging */
+        slf4j_api       : "org.slf4j:slf4j-api:${project.slf4j_version}",
+        log4j_slf4j_impl: "org.apache.logging.log4j:log4j-slf4j-impl:${project.log4j2_version}",
+        log4j_core      : "org.apache.logging.log4j:log4j-core:${project.log4j2_version}",
+        log4j_api       : "org.apache.logging.log4j:log4j-api:${project.log4j2_version}"
     ]   
 
     repositories {
-//        mavenLocal()
         mavenCentral()
+        jcenter()
+    }
+    
+}
+
+// publishing definition
+configure (subprojects - project(':designer')) {
+    task javadocJar (type: Jar, dependsOn: javadoc) { // (1)
+        classifier = 'javadoc'
+        from javadoc.destinationDir
+    }
+
+    task sourcesJar (type : Jar) {
+        classifier = 'sources'
+        from sourceSets.main.allSource
+    }
+    
+    artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+uploadArchives {
+    repositories.mavenDeployer {
+        repository(url: "http://nexus.e-sens.gr/content/repositories/${project.version.endsWith('-SNAPSHOT') ? 'snapshots' : 'releases' }/") {
+            authentication(userName: nexusUsername, password: nexusPassword)
+        }
+    }
 }
 }
+
+// 
 // global definition of compile dependency
 // for project logging
-// everywhere except in-memory-db and logging projects
-configure(subprojects
-        - project(':logging'))
-    {
+configure(subprojects)
+{
     dependencies {
         compile libraries.slf4j_api
         compile libraries.log4j_slf4j_impl
         compile libraries.log4j_core
         compile libraries.log4j_api       
+        testCompile 'junit:junit:4.12'
+        compile 'com.google.guava:guava:14.0'
     }
-    dependencies {
-            compile 'com.google.guava:guava:14.0'
-    }
-    
 }
 
-// global definition of testCompile dependency
-// for external library junit
-// everywhere except a few projects
-configure(subprojects
-        - project(':logging')
-        ) {
-    dependencies {
-        testCompile 'junit:junit:4.12'
-    }
-}
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.11'
+    gradleVersion = '2.13'
 }
 
 
