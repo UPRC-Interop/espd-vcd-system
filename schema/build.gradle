@@ -1,42 +1,44 @@
-/**
- * Author: Panagiotis NICOLAOU
- * Email: pnikola@unipi.gr
- */
 buildscript {
+
     repositories {
         jcenter()
+        maven {
+            url "https://maven.research.rackspacecloud.com/content/repositories/public/"
+        }
     }
-
     dependencies {
-        classpath 'com.github.jacobono:gradle-jaxb-plugin:1.3.6'
+        classpath 'org.openrepose:gradle-jaxb-plugin:2.2.1'
+        classpath "com.sun.xml.bind:jaxb-impl:${project.jaxb_impl_version}"
     }
 }
+    
+def generatedDir = "${project.buildDir}/generated-sources/xjc"
 
-apply plugin: 'com.github.jacobono.jaxb'
+sourceSets {
+    main {
+        java {
+            srcDirs += "$generatedDir"
+        }
+    }
+}
+    
+apply plugin: 'org.openrepose.gradle.plugins.jaxb'
 
 dependencies {
     jaxb "com.sun.xml.bind:jaxb-core:${project.jaxb_impl_version}"
     jaxb "com.sun.xml.bind:jaxb-xjc:${project.jaxb_impl_version}"
-    jaxb 'org.jvnet.jaxb2_commons:jaxb2-basics-ant:0.9.5'
-    jaxb 'org.jvnet.jaxb2_commons:jaxb2-basics-annotate:1.0.2'
-    jaxb 'org.jvnet.jaxb2_commons:jaxb2-basics:0.6.3'
-
-    compile 'org.jvnet.jaxb2_commons:jaxb2-basics-runtime:0.9.4'
+    jaxb "com.sun.xml.bind:jaxb-impl:${project.jaxb_impl_version}"
+    jaxb "javax.xml.bind:jaxb-api:${project.jaxb_impl_version}"
+    
+    compile "com.sun.xml.bind:jaxb-impl:${project.jaxb_impl_version}"
+    compile "javax.xml.bind:jaxb-api:${project.jaxb_impl_version}"
+    compile "com.sun.xml.bind:jaxb-core:${project.jaxb_impl_version}"
 }
 
 jaxb {
-    xsdDir = 'schema/src/main/resources/xsd'
-    episodesDir = 'schema/src/main/resources/episodes'
     xjc {
-        taskClassname = 'org.jvnet.jaxb2_commons.xjc.XJC2Task'
-        args = ['-Xequals', '-XhashCode', '-XtoString', '-Xannotate']
+        destinationDir = "$generatedDir"
     }
 }
 
-task copyTask(type: Copy) {
-    from "build/libs/schema-${version}.jar"
-    into '../artifacts'
-//    rename "schema-${version}.jar", 'schema.jar'
-}
-
-build.dependsOn clean, xjc, copyTask
+compileJava.dependsOn xjc

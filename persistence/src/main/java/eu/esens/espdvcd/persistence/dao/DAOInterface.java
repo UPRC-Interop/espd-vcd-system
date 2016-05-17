@@ -6,7 +6,6 @@ import java.util.List;
 /**
  * TODO: Add description.
  *
- * @author Panagiotis NICOLAOU <pnikola@unipi.gr>
  */
 public interface DAOInterface<T, Id extends Serializable> {
 

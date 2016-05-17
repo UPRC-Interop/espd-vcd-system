@@ -1,36 +1,4 @@
-/**
- * Author: Panagiotis NICOLAOU
- * Email: pnikola@unipi.gr
- */
 dependencies {
     compile project(':schema')
-
-    /* hibernate */
-    compile(libraries.hibernate_core) {
-//        exclude group: 'antlr', module: 'antlr'
-//        exclude group: 'dom4j', module: 'dom4j'
-//        exclude group: 'org.apache.geronimo.specs', module: 'geronimo-jta_1.1_spec'
-//        exclude group: 'org.javassist', module: 'javassist'
-//        exclude group: 'org.jboss', module: 'jandex'
-//        exclude group: 'org.jboss.logging', module: 'jboss-logging'
-    }
-
-    /* Java Transaction API */
-    compile 'javax.transaction:jta:1.1'
-
-    /* postgresql */
-    //noinspection GroovyAssignabilityCheck
-    compile libraries.postgresql
-
-    /* h2 */
-    //noinspection GroovyAssignabilityCheck
-    compile libraries.h2
+    compile project(':codelists')
 }
-
-task copyTask(type: Copy) {
-    from "build/libs/model-${version}.jar"
-    into '../artifacts'
-//    rename "model-${version}.jar", 'model.jar'
-}
-
-build.dependsOn clean, copyTask

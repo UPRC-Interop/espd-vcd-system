@@ -1,6 +1,5 @@
 package eu.esens.espdvcd.model;
 
-import eu.esens.espdvcd.model.types.ESPDResponseModelType;
 import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
 
 import java.io.Serializable;
@@ -10,30 +9,25 @@ import java.util.List;
 /**
  * This interface is in charge to provide {@link ESPDResponse} data.
  *
- * @author Panagiotis NICOLAOU <pnikola@unipi.gr>
  */
-public interface ESPDResponse extends Serializable {
-    /**
-     * @return The ID of the {@link ESPDResponse}.
-     */
-    Long getId();
+public interface ESPDResponse extends ESPDRequest,Serializable {
 
     /**
-     * Available model types are in ESPDResponseModelType.
-     *
-     * @return the model type
+     * 
+     * @return the EO Details assigned to the ESPD Response Object 
      */
-    ESPDResponseModelType getModelType();
-
+    public EODetails getEODetails();
+    
     /**
-     * @param modelType
+     * 
+     * @param eoDetails the {@link EODetails} to be assigned to the ESPD Response
+     * Object.
      */
-    void setModelType(ESPDResponseModelType modelType);
-
+    public void setEODetails(EODetails eoDetails);
     /**
      * @return The {@link ESPDResponseType} of the {@link ESPDResponse}.
      */
-    ESPDResponseType getEspdResponseType();
+    public ESPDResponseType getEspdResponseType();
 
     /**
      * @param espdResponseType
@@ -45,9 +39,4 @@ public interface ESPDResponse extends Serializable {
      */
     List<URL> getExternalDocuments();
 
-
-    /**
-     * @return list of {@link EmbeddedDocument} of the {@link ESPDResponse}.
-     */
-    List<EmbeddedDocument> getEmbeddedDocuments();
 }

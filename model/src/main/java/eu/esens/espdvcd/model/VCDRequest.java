@@ -8,7 +8,6 @@ import java.io.Serializable;
 /**
  * TODO: Add description.
  *
- * @author Panagiotis NICOLAOU <pnikola@unipi.gr>
  */
 public interface VCDRequest extends Serializable {
     /**

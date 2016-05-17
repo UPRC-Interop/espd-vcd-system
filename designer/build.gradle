@@ -1,7 +1,3 @@
-/**
- * Author: Panagiotis NICOLAOU
- * Email: pnikola@unipi.gr
- */
 apply plugin: 'war'
 
 /**
@@ -28,23 +24,30 @@ repositories {
 apply plugin: 'org.akhikhl.gretty'
 
 gretty {
-    port = 8080
-    contextPath = '/designer'
-    scanInterval = 1
-    fastReload = true
+    port                    = 8090
+    contextPath             = '/'
+    scanInterval            = 1
+    fastReload              = true
     recompileOnSourceChange = true
-    reloadOnClassChange = true
-    reloadOnConfigChange = true
-    reloadOnLibChange = true
-    inplaceMode = 'soft'
-    loggingLevel = 'INFO'
-    consoleLogEnabled = true
-    fileLogEnabled = true
-    logDir = "${project.buildDir}"
-    logFileName = "${project.name}"
+    reloadOnClassChange     = true
+    reloadOnConfigChange    = true
+    reloadOnLibChange       = true
+    inplaceMode             = 'soft'
+    loggingLevel            = 'INFO'
+    consoleLogEnabled       = true
+    fileLogEnabled          = true
+    logDir                  = "${project.buildDir}"
+    logFileName             = "${project.name}"
 }
 
 dependencies {
+    compile project(':builder')
+    compile project(':codelists')
+    compile project(':model')
+    compile 'com.vaadin:vaadin-server:7.6.0'
+    compile 'com.vaadin:vaadin-client-compiled:7.6.0'
+    compile 'com.vaadin:vaadin-client-compiler:7.6.0'
+    compile 'com.vaadin:vaadin-themes:7.6.0'
 }
 
 task copyTask(type: Copy) {
@@ -53,4 +56,4 @@ task copyTask(type: Copy) {
     rename "designer-${version}.war", 'designer.war'
 }
 
-build.dependsOn clean, copyTask
+build.dependsOn copyTask

@@ -1,8 +1,5 @@
-/**
- * Author: Panagiotis NICOLAOU
- * Email: pnikola@unipi.gr
- */
 dependencies {
+    compile project(':model')
 }
 
 task copyTask(type: Copy) {
@@ -11,4 +8,4 @@ task copyTask(type: Copy) {
 //    rename "retriever-${version}.jar", 'retriever.jar'
 }
 
-build.dependsOn clean, copyTask
+build.dependsOn copyTask

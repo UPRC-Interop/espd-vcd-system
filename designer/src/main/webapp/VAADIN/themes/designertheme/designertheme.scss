@@ -1,0 +1,510 @@
+@import "../valo/valo.scss";
+
+@mixin rounded($radius: 0.5em) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+
+@mixin designertheme {
+  @include valo;
+
+  /* Designer theme rules */
+  /*.v-button {
+    margin: 5px;
+  }*/
+
+  .v-label
+  {
+     white-space: normal;
+  }
+
+  .v-slot {
+
+  }
+
+  .v-margin-top {
+    padding-top: 16px;
+  }
+  .criterionForm-panelContent-selected{
+    background-color: #E9E9E9;
+  }
+  .v-margin-right {
+    padding-right: 15px;
+  }
+
+  .v-margin-bottom {
+    padding-bottom: 16px;
+  }
+
+  .v-margin-left {
+    padding-left: 15px;
+  }
+
+  .v-widget {
+    border-radius: 0px;
+  }
+
+  .master-mainContent > .v-slot > .v-widget {
+    width: 100%;
+  }
+
+  .v-slot-box_info {
+    margin: 5px;
+    padding: 10px;
+    background: #A5C1E8 url('img/') no-repeat 0px 0px;
+  }
+
+  .v-slot-box_input {
+    @include rounded(5px);
+    padding: 5px;
+    background-color: #E9E9E9;
+  }
+
+  .v-progressbar-wrapper {
+    height: 16px;
+  }
+
+  .v-label-form-depth-1-static-text {
+    //color: #474747;
+    background-color: #E6E6E6;
+    padding: 16px;
+    font-size: 12px;
+  }
+
+  .v-horizontallayout-topheader {
+    background-color: #D8D8D8;
+  }
+
+  .v-image-topheaderEsensImage {
+    padding: 10px;
+  }
+
+  .v-label-topheaderWelcomeText {
+    color: #aaa;
+    padding: 10px;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .Master {
+    background-color: #000000;
+  }
+
+  .navigatorPanel {
+    background-color: #4d4d4d;
+    border-radius: 0px;
+    border: 0px;
+  }
+
+  .v-verticallayout-navigatorContent {
+    background-color: #4d4d4d;
+  }
+
+  .mainPanel {
+    background-color: #f1f1f1;
+    border-radius: 0px;
+    border: 0px;
+  }
+
+  .master-mainContent {
+    padding: 10px;
+    width: 100%;
+  }
+
+  .v-gridlayout-contentGrid {
+    padding-bottom: 76px;
+  }
+
+  .navigatorButtonDark {
+    background: #4d4d4d;
+    border-radius: 0px;
+    border: 0px;
+  }
+
+  .v-button-navigatorButtonDark {
+    background-image: none;
+    box-shadow: inset 0px 0px 0px 0px #000;
+    border: 0px solid #dcdcdc;
+    font-size: 16px;
+    color: #e3e3e3;
+    text-align: left;
+  }
+
+  .v-button-navigatorButtonLight {
+    @extend .v-button-navigatorButtonDark;
+    background-color: #5c5c5c;
+    color: #b3b3b3;
+    font-size: 16px;
+  }
+
+  .navigatorHeaderTitle {
+    font-size: 32px;
+    font-weight: bold;
+    color: #b3b3b3;
+  }
+
+  .navigatorHeaderRole {
+    @extend .navigatorHeaderTitle;
+    font-size: 15px;
+    margin-top: -8px;
+    margin-bottom: 30px;
+  }
+
+  .navigatorHeaderLayout {
+  
+  }
+
+  .espdTemplate-gridLayout {
+    width: 100%;
+  }
+
+  .espdTemplate-columns {
+    //width: 100%;
+  }
+
+  .espdTemplate-newEspdTemplateButton {
+    background-image: none;
+    background-color: #58A8DA;
+    box-shadow: inset 0px 0px 0px 0px #000;
+    border: 0px solid #58A8DA;
+    font-size: 28px;
+    color: #e3e3e3;
+  }
+
+  .v-button-caption {
+    white-space: pre;
+  }
+
+  .v-panel-caption {
+    box-shadow: inset 0px 0px 0px 0px #000;
+    border: 0px solid #58A8DA;
+    border-radius: 0px;
+    background: #58A8DA;
+    color: #e3e3e3;
+    font-size: 18px;
+    font-weight: bold;
+    font-variant: small-caps;
+  }
+//for side panel//
+
+  //.v-panel-caption-requirementGroupForm-panel {
+  //  @extend .v-panel-caption;
+  //  background: #63C456;
+  //  border: 0px solid #63C456;
+  //}
+
+  //.v-panel-caption-requirementForm-panel {
+  //  @extend .v-panel-caption;
+  //  background: #B756C4;
+  //  border: 0px solid #B756C4;
+  //}
+
+  .v-button-navigatorButtonDark > .v-button-wrap > .FontAwesome {
+    width: 30px;
+  }
+
+  .v-button-navigatorButtonLight > .v-button-wrap > .FontAwesome {
+    width: 30px;
+    font-size: 15px;
+  }
+
+  .v-formlayout > table {
+    padding: 14px;
+    width: 100%;
+  }
+
+  tbody > .v-formlayout-firstrow > .v-formlayout-captioncell,
+  tbody > .v-formlayout-firstrow > .v-formlayout-errorcell,
+  tbody > .v-formlayout-firstrow > .v-formlayout-contentcell {
+    padding-top: 0px !important;
+  }
+
+  tbody > .v-formlayout-lastrow > .v-formlayout-captioncell,
+  tbody > .v-formlayout-lastrow > .v-formlayout-errorcell,
+  tbody > .v-formlayout-lastrow > .v-formlayout-contentcell {
+    padding-bottom: 0px !important;
+  }
+
+  .espdRequestForm-formButton {
+    background-image: none;
+    background-color: #569AC4;
+    box-shadow: inset 0px 0px 0px 0px #000;
+    border: 0px solid #569AC4;
+    color: #e3e3e3;
+    font-weight: bold;
+  }
+
+  .espdRequestForm-previous {
+    @extend .espdRequestForm-formButton;
+    background-color: #569AC4;
+    border: 0px solid #569AC4;
+  }
+
+  .espdRequestForm-cancel {
+    @extend .espdRequestForm-formButton;
+    background-color: #C94747;
+    border: 0px solid #C94747;
+  }
+
+  .espdRequestForm-next {
+    @extend .espdRequestForm-formButton;
+    background-color: #36AB2E;
+    border: 0px solid #36AB2E;
+  }
+
+  .espdRequestForm-finish {
+    @extend .espdRequestForm-formButton;
+    background-color: #6C56C4;
+    border: 0px solid #6C56C4;
+
+  }
+
+
+  .espdRequestForm-check {
+      //position: absolute;
+      clip: rect(0, 0, 0, 0);
+      left: 0.2em;
+      top: 0.2em;
+      z-index: 0;
+      margin: 0;
+
+  }
+
+  .espdRequestForm-printFullModelData {
+    @extend .espdRequestForm-formButton;
+    background-color: #D8A42F;
+    border: 0px solid #D8A42F;
+  }
+
+  .start-pageContent {
+    width: 100%;
+  }
+
+  .espdRequestForm-layout {
+    width: 100%;
+  }
+  .v-panel-detailsPanel,
+  .caDetailsForm-layout,
+  .caDetailsForm-layout > .v-slot,
+  .caDetailsForm-layout > .v-slot > .v-panel,
+  .criterionForm-layout,
+  .criterionForm-layout > .v-slot,
+  .criterionForm-layout > .v-slot > .v-panel,
+  .criterionForm-panelContent,
+  .legislationReferenceForm-panel,
+  .legislationReferenceForm-layout,
+  .requirementForm-layout,
+  .requirementGroupForm-layout,
+  .requirementGroupForm-panel,
+  .requirementGroupForm-panelContent,
+  .requirementForm-panelContent,
+
+  .requirementForm-panel {
+    width: 100%;
+  }
+
+  .requirementForm-layout{
+    padding-left: 1px;
+    padding-right:1px;
+    margin-left:0px;
+  }
+  .legislationReferenceForm-layout,
+  .requirementGroupForm-layout{
+    padding-left:1px;
+    padding-right:1px;
+  }
+  .requirementForm-panelContent{
+    font-size:14px;
+  }
+
+  .v-panel-caption-requirementFormPanel{
+    font-size:15px;
+  }
+
+  .v-caption-requirementFormLabel{
+    font-size: 13px;
+  }
+
+
+  .v-slot-detailsTitle {
+    background-color: #569AC4;
+  }
+
+  .v-label-detailsTitle {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    font-variant: small-caps;
+    color: #e3e3e3;
+  }
+
+  .v-slot-EspdTemplate-panelLeft,
+  .v-slot-EspdTemplate-panelRight {
+    width: 50%;
+  }
+
+  .v-verticallayout-panelLeftLayout,
+  .v-verticallayout-panelRightLayout {
+    padding: 12px;
+  }
+
+  .v-button-espdTemplate-panelButton {
+    width: 100%;
+    margin-top: 16px;
+  }
+
+  .v-upload {
+    width: 100%;
+  }
+
+  .mainContentTitleText {
+    font-size: 28px;
+    margin: 6px;
+    font-weight: 400;
+    color: #808080;
+  }
+  .textCaption{
+    normal: pre;
+  }
+  .v-caption-textFieldCaptionText {
+    color: #58A8DA;
+    white-space: normal;
+  }
+  .progressBarLayout {
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    border-bottom-color: #D2D2D2;
+    padding-bottom: 11px;
+  }
+
+  .v-slot-progressBarLabel {
+    color: #DDD;
+    background-color: #444;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .v-slot-progressBarLabelHighlighted {
+    color: #DDD;
+    background-color: #65A9DA;
+  }
+
+  .v-label-progressBarLabel {
+    padding: 12px;
+  }
+
+  .v-caption-textFieldCaptionText-v-caption-hasdescription{
+   word-wrap: normal;
+  }
+  .v-verticallayout-CriterionGroupForm {
+    width: 100%;
+  }
+
+  .v-panel-CriterionGroupFormPanel {
+    width: 100%;
+  }
+
+  .v-verticallayout-CriterionGroupFormPanelContent {
+    width: 100%;
+  }
+
+  .v-slot-pageCaptionLabel {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 26px;
+  }
+
+  .v-verticallayout-pageLayout {
+    width: 100%;
+  }
+
+  .v-panel-EODetailsForm,
+  .v-verticallayout-EODetailsFormPanelContent {
+    width: 100%;
+  }
+
+  .v-panel-PostalAddressForm,
+  .v-verticallayout-PostalAddressFormPanelContent {
+    width: 100%;
+  }
+
+  .v-panel-NaturalPersonForm,
+  .v-verticallayout-NaturalPersonFormPanelContent {
+    width: 100%;
+  }
+
+  .v-verticallayout-requirementGroupForm-layout,
+  .v-verticallayout-requirementForm-layout {
+    width: 100%;
+  }
+
+  .v-panel-ContactingDetailsForm,
+  .v-verticallayout-ContactingDetailsFormPanelContent {
+    width: 100%;
+  }
+
+  .v-select-optiongroup-horizontal .v-select-option {
+      display: inline-block;
+  }
+
+  /* Avoid wrapping if the layout is too tight */
+  .v-select-optiongroup-horizontal {
+      white-space: nowrap;
+  }
+
+  /* Some extra spacing is needed */
+  .v-select-optiongroup-horizontal
+    .v-select-option.v-radiobutton {
+      padding-right: 10px;
+  }
+
+  .v-formlayout-ResponseForm > table > tbody > .v-formlayout-row > .v-formlayout-captioncell {
+    width: 200px;
+  }
+
+  .v-formlayout-ResponseForm > table > tbody > .v-formlayout-row > .v-formlayout-captioncell > div > span {
+    white-space: normal;
+  }
+
+  .v-label-progressBarLabel {
+    text-align: center;
+  }
+
+  .master-mainContent > .v-slot > .v-gridlayout > .v-gridlayout-slot {
+    overflow: scroll;
+  }
+
+  .v-verticallayout-master-mainContent,
+  .v-verticallayout-master-mainContent > .v-slot,
+  .v-verticallayout-master-mainContent > .v-slot > .v-gridlayout,
+  .v-verticallayout-master-mainContent > .v-slot > .v-gridlayout > .v-gridlayout-slot {
+    height: 100% !important;
+  }
+
+  .v-verticallayout-master-mainContent {
+    overflow: auto;
+  }
+
+  .v-formlayout-ReadOnlyResponseForm > table > tbody > .v-formlayout-row > .v-formlayout-contentcell {
+    width: inherit;
+  }
+
+  .v-panel-RequirementGroupFormPanel {
+    padding: 6px !important;
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+  }
+
+  .v-slot-requirementGroupForm-layout {
+    padding: 6px;
+  }
+
+  .v-verticallayout-criterionForm-panelContent > .v-slot > .v-horizontallayout {
+    width: 100%;
+  }
+
+  .v-verticallayout-criterionForm-panelContent > .v-slot > .v-horizontallayout > .v-slot {
+    width: 50%;
+  }
+}

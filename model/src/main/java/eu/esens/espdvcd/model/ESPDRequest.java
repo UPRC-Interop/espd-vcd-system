@@ -1,18 +1,18 @@
 package eu.esens.espdvcd.model;
 
 import eu.esens.espdvcd.model.types.ESPDRequestModelType;
-
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * This interface is in charge to provide {@link ESPDRequest} data.
  *
- * @author Panagiotis NICOLAOU <pnikola@unipi.gr>
  */
 public interface ESPDRequest extends Serializable {
     /**
      * @return The ID of the {@link ESPDRequest}.
      */
+    
     Long getId();
 
     /**
@@ -20,7 +20,56 @@ public interface ESPDRequest extends Serializable {
      *
      * @return the model type
      */
-    ESPDRequestModelType getModelType();
+    public ESPDRequestModelType getModelType();
+
+    /**
+     *
+     * @return the {@link CADetails} of the ESPD Object
+     */
+    public CADetails getCADetails();
+    
+    /**
+     *
+     * @return the {@link SelectableCriterion} list of the ESPD Object
+     */
+    public List<SelectableCriterion> getFullCriterionList(); 
+    
+    /**
+     * @return an immutable {@link SelectableCriterion} list of the ESPD Object that 
+     * contains all the selection criteria.
+     */
+    public List<SelectableCriterion> getSelectionCriteriaList();
+    
+    /**
+     * @return an immutable {@link SelectableCriterion} list of the ESPD Object that 
+     * contains all the exclusion criteria.
+     */
+    public List<SelectableCriterion> getExclusionCriteriaList();
+    
+    /**
+     * @return an immutable {@link SelectableCriterion} list of the ESPD Object that 
+     * contains all the EO Related criteria.
+     */
+    public List<SelectableCriterion> getEORelatedCriteriaList();
+    
+    /**
+     * @return an immutable {@link SelectableCriterion} list of the ESPD Object that 
+     * contains all the Reduction of candidates selection criteria.
+     */
+    public List<SelectableCriterion> getReductionOfCandidatesCriteriaList();
+    
+    /**
+     * 
+     * @param criterionList the {@link SelectableCriterion} list that will be assigned to
+     * the ESPD Object
+     */
+    public void setCriterionList(List<SelectableCriterion> criterionList);        
+  
+    /**
+     * 
+     * @param cd The CA Details that will be assigned to the ESPD Object 
+     */
+    void setCADetails(CADetails cd);
 
     /**
      * @param modelType
