@@ -2,22 +2,15 @@ package eu.esens.espdvcd.designer.components;
 
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.ui.*;
-import eu.esens.espdvcd.model.EODetails;
 import eu.esens.espdvcd.model.PostalAddress;
 
-/**
- * Created by ixuz on 4/13/16.
- */
 public class PostalAddressForm extends Panel {
 
     private PostalAddress postalAddress = null;
-
     private VerticalLayout panelContent = new VerticalLayout();
-
     private HorizontalLayout columns = new HorizontalLayout();
     private FormLayout columnA = new FormLayout();
     private FormLayout columnB = new FormLayout();
-
     private TextField addressLine1 = new TextField("Address line:");
     private TextField city = new TextField("City:");
     private TextField postCode = new TextField("Post code:");

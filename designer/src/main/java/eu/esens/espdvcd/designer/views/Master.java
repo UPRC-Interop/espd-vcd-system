@@ -1,7 +1,3 @@
-/**
- * Created by ixuz on 2/2/16.
- */
-
 package eu.esens.espdvcd.designer.views;
 
 import com.vaadin.navigator.Navigator;
@@ -29,12 +25,8 @@ public class Master extends VerticalLayout implements View {
     protected VerticalLayout navigatorContent = new VerticalLayout();
     protected Panel mainPanel = new Panel();
     protected VerticalLayout mainContent = new VerticalLayout();
-    //protected Panel detailsPanel = new Panel();
-    //protected VerticalLayout detailsContent = new VerticalLayout();
-
     protected Image topheaderEsensImage = new Image("", new ThemeResource("img/logo_esens.png"));
     protected Label topheaderWelcomeText = new Label("ESPD/VCD Service");
-    protected Label mainContentTitleText = new Label("Title Text");
 
     public Master(Navigator navigator, boolean forceAuthentication) {
         this.navigator = navigator;
@@ -79,22 +71,13 @@ public class Master extends VerticalLayout implements View {
 
         contentGrid.setColumnExpandRatio(0, 0.16f);
         contentGrid.setColumnExpandRatio(1, 0.82f);
-        //contentGrid.setColumnExpandRatio(2, 0.22f);
 
         navigatorContent.setStyleName("navigatorContent");
         navigatorContent.setHeight("100%");
-        //navigatorContent.setSizeFull();
-
-
         navigatorPanel.setStyleName("navigatorPanel");
         navigatorPanel.setSizeFull();
-
-
-
-
         navigatorPanel.setContent(navigatorContent);
         navigatorPanel.getContent().setSizeUndefined();
-        //navigatorPanel.getContent().setSizeFull();
         navigatorPanel.getContent().setWidth("100%");
 
 
@@ -107,22 +90,9 @@ public class Master extends VerticalLayout implements View {
         mainPanel.setContent(mainContent);
         mainPanel.getContent().setSizeUndefined();
 
-        //detailsPanel.setStyleName("detailsPanel");
-        //detailsPanel.setSizeFull();
-        //detailsPanel.setContent(detailsContent);
-        //detailsPanel.getContent().setSizeUndefined();
-
-        //detailsContent.setHeight("100%");
-        //detailsContent.setStyleName("master-detailsContent");
-        //detailsContent.setWidth("100%");
-
         contentGrid.addComponent(navigatorPanel, 0, 0);
         contentGrid.addComponent(mainPanel, 1, 0);
-        //contentGrid.addComponent(detailsPanel, 2, 0);
         content.addComponent(contentGrid);
-
-        //mainContent.addComponent(mainContentTitleText);
-        //mainContentTitleText.setStyleName("mainContentTitleText");
 
         {
             VerticalLayout navigatorHeaderLayout = new VerticalLayout();
@@ -191,10 +161,6 @@ public class Master extends VerticalLayout implements View {
         return navigatorPanel;
     }
 
-/*    public Panel getDetailsPanel() {
-        return detailsPanel;
-    }*/
-
     public VerticalLayout getNavigatorContent() {
         return navigatorContent;
     }
@@ -202,10 +168,6 @@ public class Master extends VerticalLayout implements View {
     public VerticalLayout getMainContent() {
         return mainContent;
     }
-
-/*    public VerticalLayout getDetailsContent() {
-        return detailsContent;
-    }*/
 
     @Override
     public void enter(ViewChangeListener.ViewChangeEvent event) {

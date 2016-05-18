@@ -6,11 +6,6 @@ import com.vaadin.ui.*;
 import eu.esens.espdvcd.model.CADetails;
 import eu.esens.espdvcd.model.ESPDRequest;
 
-import java.util.Arrays;
-
-/**
- * Created by ixuz on 2/23/16.
- */
 public class CADetailsForm extends VerticalLayout {
     private Panel panelInformationAboutPublication;
     private VerticalLayout layoutInformationAboutPublication;

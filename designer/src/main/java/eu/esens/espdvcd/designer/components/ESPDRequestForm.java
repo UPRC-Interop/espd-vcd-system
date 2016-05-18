@@ -7,12 +7,8 @@ import eu.esens.espdvcd.codelist.Codelists;
 import eu.esens.espdvcd.designer.views.Master;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.SelectableCriterion;
-
 import java.util.*;
 
-/**
- * Created by ixuz on 4/8/16.
- */
 public class ESPDRequestForm extends ESPDForm {
 
     private CheckBox selectAllExclusionCriteriaCheckbox = new CheckBox("Select all exclusion criteria");

@@ -4,14 +4,11 @@
 
 package eu.esens.espdvcd.designer.components;
 
-import com.vaadin.data.util.IndexedContainer;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.UI;
 import eu.esens.espdvcd.codelist.Codelists;
 import org.apache.commons.lang3.text.WordUtils;
-
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;

@@ -1,7 +1,3 @@
-/**
- * Created by ixuz on 1/12/16.
- */
-
 package eu.esens.espdvcd.designer.views;
 
 import com.vaadin.navigator.Navigator;
@@ -27,7 +23,6 @@ public class Start extends Master {
         super(navigator, true);
 
         try {
-            //pageContent.addComponent(authInfoLabel);
             pagePanel.setContent(pageContent);
             mainContent.addComponent(pagePanel);
             pagePanel.setSizeFull();

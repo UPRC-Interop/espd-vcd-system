@@ -7,14 +7,10 @@ import eu.esens.espdvcd.designer.views.Master;
 import eu.esens.espdvcd.model.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by ixuz on 4/8/16.
- */
 public class ESPDResponseForm extends ESPDForm {
 
     private static final long serialVersionUID = -5560648566867967260L;

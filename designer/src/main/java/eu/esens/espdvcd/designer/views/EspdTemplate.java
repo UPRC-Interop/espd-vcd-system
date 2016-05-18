@@ -8,17 +8,11 @@ import eu.esens.espdvcd.builder.ModelBuilder;
 import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.designer.components.CriterionForm;
 import eu.esens.espdvcd.designer.components.ESPDRequestForm;
-import eu.esens.espdvcd.model.CADetails;
 import eu.esens.espdvcd.model.ESPDRequest;
-import eu.esens.espdvcd.model.SimpleESPDRequest;
-
 import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * Created by ixuz on 3/4/16.
- */
 public class EspdTemplate extends Master {
 
     private HorizontalLayout panels = null;

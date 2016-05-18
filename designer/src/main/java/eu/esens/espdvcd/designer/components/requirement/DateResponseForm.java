@@ -2,12 +2,8 @@ package eu.esens.espdvcd.designer.components.requirement;
 
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.ui.DateField;
-import com.vaadin.ui.FormLayout;
 import eu.esens.espdvcd.model.requirement.response.DateResponse;
 
-/**
- * Created by ixuz on 4/11/16.
- */
 public class DateResponseForm extends ResponseForm {
     private DateResponse dateResponse = null;
     private DateField date = new DateField("Date: ");
