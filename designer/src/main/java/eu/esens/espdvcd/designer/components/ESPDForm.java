@@ -12,16 +12,9 @@ import eu.esens.espdvcd.designer.views.Espd;
 import eu.esens.espdvcd.designer.views.EspdTemplate;
 import eu.esens.espdvcd.designer.views.Master;
 import eu.esens.espdvcd.model.ESPDRequest;
-import java.io.ByteArrayInputStream;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-/**
- * Created by ixuz on 3/7/16.
- */
 public class ESPDForm extends VerticalLayout {
 
     private Master view;

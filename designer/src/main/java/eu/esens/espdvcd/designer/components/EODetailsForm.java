@@ -6,12 +6,8 @@ import eu.esens.espdvcd.model.ContactingDetails;
 import eu.esens.espdvcd.model.EODetails;
 import eu.esens.espdvcd.model.NaturalPerson;
 import eu.esens.espdvcd.model.PostalAddress;
-
 import java.util.List;
 
-/**
- * Created by ixuz on 4/13/16.
- */
 public class EODetailsForm extends Panel {
 
     EODetails eoDetails = null;
@@ -24,7 +20,6 @@ public class EODetailsForm extends Panel {
 
     private TextField ID = new TextField("ID:");
     private TextField electronicAddressID = new TextField("Electronic address id:");
-    //private CountryComboBox registrationCountryCode = new CountryComboBox("Country:");
     private TextField name = new TextField("Name:");
     private TextField role = new TextField("Role:");
     private CheckBox smeIndicator = new CheckBox("SME:");
@@ -36,7 +31,6 @@ public class EODetailsForm extends Panel {
 
     public EODetailsForm(EODetails eoDetails, boolean readOnly) {
         this.eoDetails = eoDetails;
-        System.out.println("eoDetails: " + eoDetails);
 
         setStyleName("EODetailsForm");
         setCaption("Economic operator details");
@@ -49,7 +43,6 @@ public class EODetailsForm extends Panel {
 
         columnA.addComponent(name);
         columnA.addComponent(ID);
-        //columnA.addComponent(registrationCountryCode);
         columnA.addComponent(electronicAddressID);
         columnB.addComponent(role);
         columnB.addComponent(nationalDatabaseURI);
@@ -94,9 +87,6 @@ public class EODetailsForm extends Panel {
         electronicAddressID.setNullRepresentation("");
         electronicAddressID.setInputPrompt("Electronic address ID");
         electronicAddressID.setWidth(300, Unit.PIXELS);
-
-        //registrationCountryCode.setInputPrompt("Select country");
-        //registrationCountryCode.setWidth(300, Unit.PIXELS);
 
         name.setNullRepresentation("");
         name.setInputPrompt("Name");

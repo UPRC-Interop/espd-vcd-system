@@ -8,12 +8,8 @@ import eu.esens.espdvcd.builder.ModelBuilder;
 import eu.esens.espdvcd.designer.components.CriterionForm;
 import eu.esens.espdvcd.designer.components.ESPDResponseForm;
 import eu.esens.espdvcd.model.*;
-
 import java.io.*;
 
-/**
- * Created by ixuz on 4/8/16.
- */
 public class Espd extends Master {
     private HorizontalLayout panels = null;
     private ESPDResponse espdResponse = null;
@@ -80,24 +76,26 @@ public class Espd extends Master {
                     InputStream is = new FileInputStream(file);
                     espdResponse = new ModelBuilder().importFrom(is).createESPDResponse();
 
-//                    System.out.println("EO Country 1: " + espdResponse.getEoDetails().getRegistrationCountryCode());
-
-                    if (espdResponse.getEODetails() == null) { // <- I must do this to upon import
+                    if (espdResponse.getEODetails() == null) {
                         EODetails eoDetails = new EODetails();
                         eoDetails.setContactingDetails(new ContactingDetails());
                         eoDetails.setPostalAddress(new PostalAddress());
                         espdResponse.setEODetails(eoDetails);
                     }
 
-                    System.out.println("EO Country 2: " + espdResponse.getEODetails().getRegistrationCountryCode());
-
                     espdResponseForm = new ESPDResponseForm(thisView, espdResponse, false);
                     mainContent.addComponent(espdResponseForm);
                     is.close();
                     panels.setVisible(false);
                 } catch (IOException e) {
+                    Notification.show("Please ensure that the file is a valid ESPD Request or ESPD Response",
+                            "Import failed",
+                            Notification.Type.ERROR_MESSAGE);
                     e.printStackTrace();
                 } catch (Exception e) {
+                    Notification.show("Please ensure that the file is a valid ESPD Request or ESPD Response",
+                            "Import failed",
+                            Notification.Type.ERROR_MESSAGE);
                     e.printStackTrace();
                 }
             }

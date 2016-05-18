@@ -3,7 +3,7 @@ subprojects { project ->
     apply plugin: 'maven'
     apply plugin: 'maven-publish'
 
-    version = '1.0.0'
+    version = '1.1.0-SNAPSHOT'
     group = 'eu.esens.espdvcd'
 
     project.ext.slf4j_version = '1.7.13'
@@ -46,11 +46,10 @@ configure (subprojects - project(':designer')) {
         archives sourcesJar
     }
 
-    uploadArchives {
-        repositories.mavenDeployer {
-            repository(url: "http://nexus.e-sens.gr/content/repositories/${project.version.endsWith('-SNAPSHOT') ? 'snapshots' : 'releases' }/") {
-//                authentication(userName: nexusUsername, password: nexusPassword)
-            }
+uploadArchives {
+    repositories.mavenDeployer {
+        repository(url: "http://nexus.e-sens.gr/content/repositories/${project.version.endsWith('-SNAPSHOT') ? 'snapshots' : 'releases' }/") {
+            //authentication(userName: nexusUsername, password: nexusPassword)
         }
     }
 }

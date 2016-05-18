@@ -22,7 +22,6 @@ public class Designer extends UI {
     public final static String VIEW_ESPD = "espd";
     public final static String VIEW_LOGIN  = "login";
     public final static String VIEW_SANDBOX  = "sandbox";
-    public final static String VIEW_ESPD_TEMPLATES  = "espd_templates";
     public final static String VIEW_VIEWER  = "viewer";
 
     @Override
@@ -35,7 +34,6 @@ public class Designer extends UI {
         Espd espd = new Espd(navigator);
         Login login = new Login(navigator);
         Sandbox sandbox = new Sandbox(navigator);
-        EspdTemplates espdTemplates = new EspdTemplates(navigator);
         Viewer viewer = new Viewer(navigator);
 
         navigator.addView(VIEW_INDEX, start);
@@ -43,7 +41,6 @@ public class Designer extends UI {
         navigator.addView(VIEW_ESPD, espd);
         navigator.addView(VIEW_LOGIN, login);
         navigator.addView(VIEW_SANDBOX, sandbox);
-        navigator.addView(VIEW_ESPD_TEMPLATES, espdTemplates);
         navigator.addView(VIEW_VIEWER, viewer);
     }
 }

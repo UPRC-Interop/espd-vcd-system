@@ -3,15 +3,10 @@ package eu.esens.espdvcd.designer.components;
  import com.vaadin.event.LayoutEvents;
  import com.vaadin.server.FontAwesome;
  import com.vaadin.ui.*;
- import eu.esens.espdvcd.designer.views.Master;
- import eu.esens.espdvcd.model.*;
 
  import java.util.List;
 
 public class CriterionGroupForm extends VerticalLayout{
-    private Master view;
-    private ESPDRequestForm espdRequestForm=null;
-    private Criterion criterionReference = null;
     private Panel panel = new Panel();
     private VerticalLayout panelContent = new VerticalLayout();
     private List<CriterionForm> criterionForms;

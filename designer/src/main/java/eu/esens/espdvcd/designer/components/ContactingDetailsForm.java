@@ -4,9 +4,6 @@ import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.ui.*;
 import eu.esens.espdvcd.model.ContactingDetails;
 
-/**
- * Created by ixuz on 4/13/16.
- */
 public class ContactingDetailsForm extends Panel {
 
     ContactingDetails contactingDetails = null;

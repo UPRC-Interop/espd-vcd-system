@@ -11,7 +11,7 @@ buildscript {
         classpath "com.sun.xml.bind:jaxb-impl:${project.jaxb_impl_version}"
     }
 }
-    
+
 def generatedDir = "${project.buildDir}/generated-sources/xjc"
 
 sourceSets {
@@ -40,5 +40,6 @@ jaxb {
         destinationDir = "$generatedDir"
     }
 }
+
 
 compileJava.dependsOn xjc

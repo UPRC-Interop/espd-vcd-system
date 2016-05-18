@@ -507,4 +507,16 @@
   .v-verticallayout-criterionForm-panelContent > .v-slot > .v-horizontallayout > .v-slot {
     width: 50%;
   }
+
+  .v-verticallayout-startPageContent {
+    width: 100%;
+  }
+
+  .v-slot-startPageInfoText {
+    text-align: center;
+  }
+
+  .v-verticallayout-master-mainContent > .v-slot > .v-panel {
+    height: 100%;
+  }
 }

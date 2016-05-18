@@ -6,9 +6,6 @@ import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Table;
 
-/**
- * Created by ixuz on 3/4/16.
- */
 public class EspdTemplates extends Master {
 
     private Table table = new Table(null);

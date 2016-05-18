@@ -1,15 +1,9 @@
 package eu.esens.espdvcd.designer.components;
 
-import com.vaadin.event.LayoutEvents;
-import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.*;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
-
-/**
- * Created by ixuz on 2/24/16.
- */
 
 public class RequirementGroupForm extends VerticalLayout {
 
@@ -22,19 +16,12 @@ public class RequirementGroupForm extends VerticalLayout {
 
         setWidth("100%");
 
-        //panelContent.addComponent(ID);
-
-        //ID.setCaption("Requirement Group ID");
-        //ID.setValue(requirementGroup.getID());
-        //panelContent.setSizeUndefined();
-
         // Bind the this forms fields
         final BeanFieldGroup<RequirementGroup> requirementGroupGroup = new BeanFieldGroup<>(RequirementGroup.class);
         requirementGroupGroup.setItemDataSource(requirementGroup);
         requirementGroupGroup.setBuffered(false);
         requirementGroupGroup.bindMemberFields(this);
         requirementGroupGroup.setReadOnly(readOnly);
-
 
         Panel panel = new Panel();
         panel.setStyleName("RequirementGroupFormPanel");

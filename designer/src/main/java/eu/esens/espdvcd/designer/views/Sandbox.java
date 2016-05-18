@@ -4,7 +4,6 @@ import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.ui.*;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
-
 import eu.esens.espdvcd.model.requirement.response.ResponseFactory;
 import eu.esens.espdvcd.designer.components.requirement.*;
 import eu.esens.espdvcd.model.requirement.response.AmountResponse;
@@ -19,10 +18,6 @@ import eu.esens.espdvcd.model.requirement.response.PeriodResponse;
 import eu.esens.espdvcd.model.requirement.response.QuantityIntegerResponse;
 import eu.esens.espdvcd.model.requirement.response.QuantityResponse;
 import eu.esens.espdvcd.model.requirement.response.QuantityYearResponse;
-
-/**
- * Created by ixuz on 2/23/16.
- */
 
 public class Sandbox extends Master {
 
