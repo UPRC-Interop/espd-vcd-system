@@ -328,7 +328,7 @@ public class ModelBuilder {
               c.setDescription(oldName);
               // Since we have no name, we will add the Criteria type name as Criterion Name
               c.setName(Codelists.CriteriaType.getValueForId(c.getTypeCode()) +" (No Name)");
-                System.out.println("Workaround for: "+c.getID() +" "+c.getDescription());
+//                System.out.println("Workaround for: "+c.getID() +" "+c.getDescription());
             }
 //        }      
     }
