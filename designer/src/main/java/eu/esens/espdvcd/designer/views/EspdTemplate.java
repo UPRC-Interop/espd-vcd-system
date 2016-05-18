@@ -116,9 +116,9 @@ public class EspdTemplate extends Master {
                                               String mimeType) {
                 FileOutputStream fos = null; // Stream to write to
                 try {
-                    file = new File("tmp/uploaded.xml");
+                    file = File.createTempFile("espdTemplate", ".xml");
                     fos = new FileOutputStream(file);
-                } catch (final java.io.FileNotFoundException e) {
+                } catch (final java.io.IOException e) {
                     new Notification("Could not open file<br/>",
                             e.getMessage(),
                             Notification.Type.ERROR_MESSAGE)

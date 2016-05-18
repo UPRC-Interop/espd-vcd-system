@@ -2,6 +2,7 @@ package eu.esens.espdvcd.model;
 
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by Ulf Lotzmann on 05/03/2016.
@@ -11,6 +12,10 @@ public class SelectableCriterion extends Criterion {
     private static final long serialVersionUID = -4642428067998066099L;
 
     protected boolean selected;
+    
+    public SelectableCriterion() {
+        super();
+    }
 
     public SelectableCriterion(String ID, String typeCode, String name, String description, LegislationReference legislationReference) {
         super(ID, typeCode, name, description, legislationReference);
