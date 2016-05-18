@@ -170,14 +170,6 @@ public class Master extends VerticalLayout implements View {
             button.addClickListener(this::onNavigatorViewer);
         }
         {
-            Button button = new Button("Sandbox", FontAwesome.PLAY);
-            button.setStyleName("navigatorButtonDark");
-            button.setWidth("100%");
-            button.setHeight(60, Unit.PIXELS);
-            navigatorContent.addComponent(button);
-            button.addClickListener(this::onNavigatorSandbox);
-        }
-        {
             Button button = new Button("Log-out", FontAwesome.ARROW_LEFT);
             button.setStyleName("navigatorButtonDark");
             button.setWidth("100%");

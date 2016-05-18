@@ -49,7 +49,7 @@ configure (subprojects - project(':designer')) {
 uploadArchives {
     repositories.mavenDeployer {
         repository(url: "http://nexus.e-sens.gr/content/repositories/${project.version.endsWith('-SNAPSHOT') ? 'snapshots' : 'releases' }/") {
-            authentication(userName: nexusUsername, password: nexusPassword)
+            //authentication(userName: nexusUsername, password: nexusPassword)
         }
     }
 }
