@@ -3,6 +3,7 @@ package eu.esens.espdvcd.builder.model;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.ContactingDetails;
 import eu.esens.espdvcd.model.EODetails;
+import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.model.NaturalPerson;
 import eu.esens.espdvcd.model.PostalAddress;
 import eu.esens.espdvcd.model.requirement.response.ResponseFactory;
@@ -24,7 +25,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
     /* package private constructor. Create only through factory */
     ESPDResponseModelExtractor() {};
 
-    public SimpleESPDResponse extractESPDResponse(ESPDResponseType resType) {
+    public ESPDResponse extractESPDResponse(ESPDResponseType resType) {
 
         SimpleESPDResponse res = new SimpleESPDResponse();
 
