@@ -20,8 +20,6 @@ public class CriterionForm extends VerticalLayout {
     private Label description = new Label("Criterion Description");
     private boolean useRequirements = true;
 
-    private Label EODetailsDescription = new Label("Criterion Description");
-
     private boolean readOnly = false;
 
     public CriterionForm(Master view, SelectableCriterion criterion, boolean useRequirements, boolean readOnly) {
@@ -36,11 +34,7 @@ public class CriterionForm extends VerticalLayout {
         setMargin(true);
         setStyleName("criterionForm-layout");
 
-        if (criterion.getTypeCode().equals("SELECTION.ECONOMIC_FINANCIAL_STANDING") || criterion.getTypeCode().equals("DATA_ON_ECONOMIC_OPERATOR")) {
-            panel.setCaption("Data on economic operator");
-        } else {
-            panel.setCaption(criterion.getName());
-        }
+        panel.setCaption(criterion.getName());
 
         // If this criterion form will contain the requirements it will need to be displayed with a more complex layout
         if (useRequirements) {
@@ -53,12 +47,7 @@ public class CriterionForm extends VerticalLayout {
             columns.addComponent(columnA);
             columns.addComponent(columnB);
 
-            if (criterion.getTypeCode().equals("SELECTION.ECONOMIC_FINANCIAL_STANDING") || criterion.getTypeCode().equals("DATA_ON_ECONOMIC_OPERATOR")) {
-                EODetailsDescription.setValue(criterion.getName());
-                columnA.addComponent(EODetailsDescription);
-            } else {
-                columnA.addComponent(description);
-            }
+            columnA.addComponent(description);
 
             columnA.setWidth(100, Unit.PERCENTAGE);
             columnB.setMargin(false);
@@ -75,13 +64,7 @@ public class CriterionForm extends VerticalLayout {
             }
         } else { // The criterion form will contain a limited amount of details, therefore a more simplified layout is used.
             panelContent.addComponent(selected);
-
-            if (criterion.getTypeCode().equals("SELECTION.ECONOMIC_FINANCIAL_STANDING") || criterion.getTypeCode().equals("DATA_ON_ECONOMIC_OPERATOR")) {
-                EODetailsDescription.setValue(criterion.getName());
-                panelContent.addComponent(EODetailsDescription);
-            } else {
-                panelContent.addComponent(description);
-            }
+            panelContent.addComponent(description);
         }
 
         this.addLayoutClickListener(this::onCriterionClick);

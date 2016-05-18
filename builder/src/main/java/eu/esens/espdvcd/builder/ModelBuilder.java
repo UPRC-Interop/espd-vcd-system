@@ -2,8 +2,10 @@ package eu.esens.espdvcd.builder;
 
 import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.builder.model.ModelFactory;
+import eu.esens.espdvcd.codelist.Codelists;
 import eu.esens.espdvcd.model.CADetails;
 import eu.esens.espdvcd.model.ContactingDetails;
+import eu.esens.espdvcd.model.Criterion;
 import eu.esens.espdvcd.model.EODetails;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDResponse;
@@ -163,6 +165,10 @@ public class ModelBuilder {
         if (caDetails != null) {
             req.setCADetails(caDetails);
         }
+        
+        // Apply workaround
+        req.getFullCriterionList().forEach(this::applyCriteriaWorkaround);
+        
         return req;
     }
     
@@ -311,5 +317,19 @@ public class ModelBuilder {
     private List<SelectableCriterion> getEmptyCriteriaList() {
         // Empty Criteria List
         return new ArrayList<>();
+    }
+    
+    private void applyCriteriaWorkaround(Criterion c) {
+        
+//        if (c.getTypeCode().equals("SELECTION.ECONOMIC_FINANCIAL_STANDING") 
+//                || c.getTypeCode().equals("DATA_ON_ECONOMIC_OPERATOR")) {
+            if (c.getDescription().equals("")) {
+              String oldName = c.getName();
+              c.setDescription(oldName);
+              // Since we have no name, we will add the Criteria type name as Criterion Name
+              c.setName(Codelists.CriteriaType.getValueForId(c.getTypeCode()) +" (No Name)");
+                System.out.println("Workaround for: "+c.getID() +" "+c.getDescription());
+            }
+//        }      
     }
 }
