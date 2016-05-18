@@ -1,5 +1,6 @@
 package eu.esens.espdvcd.builder.model;
 
+import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.CADetails;
 import eu.esens.espdvcd.model.LegislationReference;
@@ -79,6 +80,7 @@ public interface ModelExtractor {
     }
 
     default SelectableCriterion extractSelectableCriterion(CriterionType ct, boolean isSelected) {
+
         String id = ct.getID().getValue();
         String desc = ct.getDescription().getValue();
         String typeCode = ct.getTypeCode().getValue();
@@ -102,8 +104,13 @@ public interface ModelExtractor {
 
     default RequirementGroup extractRequirementGroup(RequirementGroupType rgType) {
 
-        String id = rgType.getID().getValue();
-        RequirementGroup rg = new RequirementGroup(id);
+        RequirementGroup rg = null;
+        if (rgType.getID() != null) {
+            String id = rgType.getID().getValue();
+            rg = new RequirementGroup(id);
+        }
+        
+
         List<Requirement> rList = rgType.getRequirement().stream()
                 .map(r -> extractRequirement(r))
                 .collect(Collectors.toList());
