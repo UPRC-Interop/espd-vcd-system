@@ -7,6 +7,8 @@ build/
 gradle.properties
 /.nb-gradle-properties
 /schema/nbproject/
+/schema/src/main/resources/schema/episodes/
 /codelists/private/
 /codelists/nbproject/
 /designer/tmp/
+/persistence/logs/

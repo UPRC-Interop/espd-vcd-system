@@ -3,9 +3,6 @@ package eu.esens.espdvcd.designer.components.requirement;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.response.*;
 
-/**
- * Created by ixuz on 4/12/16.
- */
 public class ResponseFormFactory {
 
     public static ResponseForm buildResponseForm(Requirement requirement, boolean readOnly) {

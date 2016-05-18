@@ -1,8 +1,5 @@
 package eu.esens.espdvcd.designer;
 
-/**
- * Created by ixuz on 2/11/16.
- */
 public class UserContext {
     private String username;
     private String firstName;

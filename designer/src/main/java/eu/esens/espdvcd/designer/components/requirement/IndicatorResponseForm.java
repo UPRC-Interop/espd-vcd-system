@@ -1,23 +1,15 @@
 package eu.esens.espdvcd.designer.components.requirement;
 
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
-import com.vaadin.ui.CheckBox;
-import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.OptionGroup;
 import eu.esens.espdvcd.model.requirement.response.IndicatorResponse;
 
-/**
- * Created by ixuz on 4/11/16.
- */
 public class IndicatorResponseForm extends ResponseForm {
     private IndicatorResponse indicatorResponse = null;
     protected OptionGroup indicator = new OptionGroup("Indicator: ");
 
     public IndicatorResponseForm(IndicatorResponse indicatorResponse, String caption, boolean readOnly) {
         this.indicatorResponse = indicatorResponse;
-/*        addComponent(indicator);
-        indicator.setCaption(caption);
-*/
 
         indicator.setCaption(caption);
         indicator.setStyleName("horizontal");

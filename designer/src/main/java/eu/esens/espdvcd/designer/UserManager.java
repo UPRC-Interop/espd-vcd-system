@@ -1,7 +1,3 @@
-/**
- * Created by ixuz on 2/10/16.
- */
-
 package eu.esens.espdvcd.designer;
 
 import com.vaadin.server.VaadinSession;

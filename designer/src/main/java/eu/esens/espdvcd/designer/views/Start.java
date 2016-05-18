@@ -1,7 +1,3 @@
-/**
- * Created by ixuz on 1/12/16.
- */
-
 package eu.esens.espdvcd.designer.views;
 
 import com.vaadin.navigator.Navigator;
@@ -26,28 +22,23 @@ public class Start extends Master {
     public Start(Navigator navigator) {
         super(navigator, true);
 
-        try {
-            //pageContent.addComponent(authInfoLabel);
-            pagePanel.setContent(pageContent);
-            mainContent.addComponent(pagePanel);
-            pagePanel.setSizeFull();
-            
-            pageContent.setWidth("100%");
-            pageContent.setSizeFull();
-            pageContent.setStyleName("start-pageContent");
-            
-            
-            CADetails caDetails = new CADetails();
-            caDetails.setCACountry("Sweden");
-            
-            espdRequest = new ModelBuilder().withCADetailsFrom(caDetails).addDefaultESPDCriteriaList().createESPDRequest();
-            
-            // Cenerate the espd request form base on the provided espd request model
-            ESPDRequestForm espdRequestForm = new ESPDRequestForm(this, espdRequest, true);
-            pageContent.addComponent(espdRequestForm);
-        } catch (BuilderException ex) {
-            Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        pagePanel.setContent(pageContent);
+        mainContent.addComponent(pagePanel);
+        pagePanel.setSizeFull();
+
+        pageContent.setStyleName("startPageContent");
+        pageContent.setSizeFull();
+
+        Label welcomeTitle = new Label("Welcome to the ESPD/VCD Designer");
+        Label welcomeText = new Label("Please select an option from the menu on the left to proceed");
+
+        welcomeTitle.setStyleName("pageCaptionLabel");
+        welcomeText.setStyleName("startPageInfoText");
+        welcomeTitle.setSizeUndefined();
+        welcomeText.setSizeUndefined();
+
+        pageContent.addComponent(welcomeTitle);
+        pageContent.addComponent(welcomeText);
     }
 
     @Override

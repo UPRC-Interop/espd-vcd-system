@@ -7,13 +7,8 @@ import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Label;
 import eu.esens.espdvcd.codelist.Codelists;
-import eu.esens.espdvcd.model.Criterion;
 import eu.esens.espdvcd.model.LegislationReference;
-import eu.esens.espdvcd.model.requirement.RequirementGroup;
 
-/**
- * Created by ixuz on 3/7/16.
- */
 public class LegislationReferenceForm extends VerticalLayout {
 
     private Panel panel = new Panel();
