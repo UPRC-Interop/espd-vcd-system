@@ -42,17 +42,17 @@ configure (subprojects - project(':designer')) {
     }
     
     artifacts {
-    archives javadocJar
-    archives sourcesJar
-}
+        archives javadocJar
+        archives sourcesJar
+    }
 
-uploadArchives {
-    repositories.mavenDeployer {
-        repository(url: "http://nexus.e-sens.gr/content/repositories/${project.version.endsWith('-SNAPSHOT') ? 'snapshots' : 'releases' }/") {
-            authentication(userName: nexusUsername, password: nexusPassword)
+    uploadArchives {
+        repositories.mavenDeployer {
+            repository(url: "http://nexus.e-sens.gr/content/repositories/${project.version.endsWith('-SNAPSHOT') ? 'snapshots' : 'releases' }/") {
+//                authentication(userName: nexusUsername, password: nexusPassword)
+            }
         }
     }
-}
 }
 
 // 
