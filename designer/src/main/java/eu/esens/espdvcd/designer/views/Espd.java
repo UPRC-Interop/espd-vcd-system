@@ -96,8 +96,14 @@ public class Espd extends Master {
                     is.close();
                     panels.setVisible(false);
                 } catch (IOException e) {
+                    Notification.show("Please ensure that the file is a valid ESPD Request or ESPD Response",
+                            "Import failed",
+                            Notification.Type.ERROR_MESSAGE);
                     e.printStackTrace();
                 } catch (Exception e) {
+                    Notification.show("Please ensure that the file is a valid ESPD Request or ESPD Response",
+                            "Import failed",
+                            Notification.Type.ERROR_MESSAGE);
                     e.printStackTrace();
                 }
             }
