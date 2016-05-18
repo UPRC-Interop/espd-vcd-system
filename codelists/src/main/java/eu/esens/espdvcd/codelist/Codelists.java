@@ -3,7 +3,7 @@ package eu.esens.espdvcd.codelist;
 import com.google.common.collect.BiMap;
 
 /**
- * Multiton implementation for Code Lists  
+ * Multiton implementation for Code Lists
  * 
  */
 public enum Codelists {

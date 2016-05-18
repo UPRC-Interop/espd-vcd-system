@@ -1,4 +1,3 @@
-apply plugin: 'com.bmuschko.nexus'   
 buildscript {
 
     repositories {
@@ -9,20 +8,19 @@ buildscript {
     }
     dependencies {
         classpath 'org.openrepose:gradle-jaxb-plugin:2.2.1'
-         classpath 'com.bmuschko:gradle-nexus-plugin:2.3.1'
-         classpath "com.sun.xml.bind:jaxb-impl:${project.jaxb_impl_version}"
+        classpath "com.sun.xml.bind:jaxb-impl:${project.jaxb_impl_version}"
     }
 }
-    
+
 def generatedDir = "${project.buildDir}/generated-sources/xjc"
 
-    sourceSets {
-        main {
-            java {
-                srcDirs += "$generatedDir"
-            }
+sourceSets {
+    main {
+        java {
+            srcDirs += "$generatedDir"
         }
     }
+}
     
 apply plugin: 'org.openrepose.gradle.plugins.jaxb'
 
@@ -42,5 +40,6 @@ jaxb {
         destinationDir = "$generatedDir"
     }
 }
+
 
 compileJava.dependsOn xjc

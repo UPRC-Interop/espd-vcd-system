@@ -4,7 +4,7 @@ import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.Page;
 import com.vaadin.ui.*;
-import eu.esens.espdvcd.builder.ESPDBuilder;
+import eu.esens.espdvcd.builder.ModelBuilder;
 import eu.esens.espdvcd.designer.components.CriterionForm;
 import eu.esens.espdvcd.designer.components.ESPDResponseForm;
 import eu.esens.espdvcd.model.*;
@@ -76,20 +76,20 @@ public class Espd extends Master {
             public void uploadSucceeded(Upload.SucceededEvent event) {
 
                 try {
+                    
                     InputStream is = new FileInputStream(file);
-                    ESPDBuilder espdBuilder = new ESPDBuilder();
-                    espdResponse = espdBuilder.createESPDResponseFromXML(is);
+                    espdResponse = new ModelBuilder().importFrom(is).createESPDResponse();
 
 //                    System.out.println("EO Country 1: " + espdResponse.getEoDetails().getRegistrationCountryCode());
 
-                    if (espdResponse.getEoDetails() == null) { // <- I must do this to upon import
+                    if (espdResponse.getEODetails() == null) { // <- I must do this to upon import
                         EODetails eoDetails = new EODetails();
                         eoDetails.setContactingDetails(new ContactingDetails());
                         eoDetails.setPostalAddress(new PostalAddress());
                         espdResponse.setEODetails(eoDetails);
                     }
 
-                    System.out.println("EO Country 2: " + espdResponse.getEoDetails().getRegistrationCountryCode());
+                    System.out.println("EO Country 2: " + espdResponse.getEODetails().getRegistrationCountryCode());
 
                     espdResponseForm = new ESPDResponseForm(thisView, espdResponse, false);
                     mainContent.addComponent(espdResponseForm);

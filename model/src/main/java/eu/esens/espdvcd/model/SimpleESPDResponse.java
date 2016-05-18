@@ -15,7 +15,7 @@ public class SimpleESPDResponse extends SimpleESPDRequest implements ESPDRespons
     
     protected EODetails eoDetails;
 
-    public EODetails getEoDetails() {
+    public EODetails getEODetails() {
         return eoDetails;
     }
 

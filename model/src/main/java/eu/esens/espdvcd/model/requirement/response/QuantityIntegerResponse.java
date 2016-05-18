@@ -3,6 +3,10 @@ package eu.esens.espdvcd.model.requirement.response;
 import java.io.Serializable;
 
 /**
+ * Quantity response (integer)
+ *
+ * (part of Period declaration fulfilment)
+ *
  * Created by Ulf Lotzmann on 22/03/2016.
  */
 public class QuantityIntegerResponse extends Response implements Serializable {
@@ -20,7 +24,6 @@ public class QuantityIntegerResponse extends Response implements Serializable {
      * BusReqID: tbr92-018<br>
      * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.Response.Quantity<br>
      */
-
     private int quantity;
 
     public QuantityIntegerResponse() {

@@ -83,7 +83,7 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
                 .map(cr -> extractCriterion(cr))
                 .collect(Collectors.toList()));
 
-        resType.setEconomicOperatorParty(extracEODetails(res.getEoDetails()));
+        resType.setEconomicOperatorParty(extracEODetails(res.getEODetails()));
         
         return resType;
     }
@@ -162,21 +162,22 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
             
             pt.setFamilyName(new FamilyNameType());
             pt.getFamilyName().setValue(np.getFamilyName());
-            
-            try {
-            pt.setBirthDate(new BirthDateType());
-            Calendar cal = new GregorianCalendar();
-                    cal.setTime(np.getBirthDate());
-             XMLGregorianCalendar xcal;
-                xcal = DatatypeFactory.newInstance()
-                        .newXMLGregorianCalendarDate(
-                                cal.get(Calendar.YEAR),
-                                cal.get(Calendar.MONTH) + 1,
-                                cal.get(Calendar.DAY_OF_MONTH),
-                                DatatypeConstants.FIELD_UNDEFINED);
-                            pt.getBirthDate().setValue(xcal);
-            } catch (DatatypeConfigurationException ex) {
-                Logger.getLogger(ESPDResponseSchemaExtractor.class.getName()).log(Level.SEVERE, null, ex);
+            if (np.getBirthDate() != null ) {
+                try {
+                pt.setBirthDate(new BirthDateType());
+                Calendar cal = new GregorianCalendar();
+                        cal.setTime(np.getBirthDate());
+                 XMLGregorianCalendar xcal;
+                    xcal = DatatypeFactory.newInstance()
+                            .newXMLGregorianCalendarDate(
+                                    cal.get(Calendar.YEAR),
+                                    cal.get(Calendar.MONTH) + 1,
+                                    cal.get(Calendar.DAY_OF_MONTH),
+                                    DatatypeConstants.FIELD_UNDEFINED);
+                                pt.getBirthDate().setValue(xcal);
+                } catch (DatatypeConfigurationException ex) {
+                    Logger.getLogger(ESPDResponseSchemaExtractor.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
             
             pt.setBirthplaceName(new BirthplaceNameType());

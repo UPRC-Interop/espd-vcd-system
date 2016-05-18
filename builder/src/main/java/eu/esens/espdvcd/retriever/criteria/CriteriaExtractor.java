@@ -14,11 +14,17 @@ public interface CriteriaExtractor {
     
     /**
      *
+     * @return the full criteria list with the criteria in the initialList as not selected
+     * 
+     */
+    public List<SelectableCriterion> getFullList(List<SelectableCriterion> initialList); 
+    
+     /**
+     *
      * @param initialList if @isSelected is true, the criteria from the @initialList will be 
      * included as selected, otherwise they will be included as not selected 
      * @return the full criteria list with the criteria in the initialList as selected
      * 
      */
-    public List<SelectableCriterion> getFullList(List<SelectableCriterion> initialList); 
-    
+    public List<SelectableCriterion> getFullList(List<SelectableCriterion> initialList, boolean addAsSelected);
 }
