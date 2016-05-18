@@ -9,6 +9,8 @@ import eu.esens.espdvcd.designer.components.CriterionForm;
 import eu.esens.espdvcd.designer.components.ESPDResponseForm;
 import eu.esens.espdvcd.model.*;
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Espd extends Master {
     private HorizontalLayout panels = null;
@@ -57,9 +59,9 @@ public class Espd extends Master {
                                               String mimeType) {
                 FileOutputStream fos = null; // Stream to write to
                 try {
-                    file = new File("tmp/uploaded.xml");
+                    file = File.createTempFile("espd", ".xml");
                     fos = new FileOutputStream(file);
-                } catch (final java.io.FileNotFoundException e) {
+                } catch (final java.io.IOException e) {
                     new Notification("Could not open file<br/>",
                             e.getMessage(),
                             Notification.Type.ERROR_MESSAGE)

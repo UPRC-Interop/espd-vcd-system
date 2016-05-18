@@ -204,6 +204,9 @@ public class ModelBuilder {
             res.setEODetails(eoDetails);
         }
         
+                // Apply workaround
+        res.getFullCriterionList().forEach(this::applyCriteriaWorkaround);
+        
         return res;
     }
     
