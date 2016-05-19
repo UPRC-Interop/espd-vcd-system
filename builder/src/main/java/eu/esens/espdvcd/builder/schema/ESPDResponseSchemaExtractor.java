@@ -59,6 +59,7 @@ import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.PercentT
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.PostboxType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.QuantityType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.StreetNameType;
+import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.TelefaxType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.TelephoneType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.TypeCodeType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.URIType;
@@ -190,6 +191,10 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
             
               pt.getContact().setElectronicMail(new ElectronicMailType());
               pt.getContact().getElectronicMail().setValue(np.getContactDetails().getEmailAddress());
+              
+              pt.getContact().setTelefax(new TelefaxType());
+              pt.getContact().getTelefax().setValue(np.getContactDetails().getFaxNumber());
+
             }
             
             if (np.getPostalAddress() != null) {

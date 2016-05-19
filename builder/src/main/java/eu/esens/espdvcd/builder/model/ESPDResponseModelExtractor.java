@@ -41,10 +41,19 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
         if (resType.getEconomicOperatorParty() != null) {
             res.setEODetails(extractEODetails(resType.getEconomicOperatorParty()));
         } else {
-            res.setEODetails(new EODetails());
-            res.getEODetails().setNaturalPersons(new ArrayList<>());
-            res.getEODetails().getNaturalPersons().add(new NaturalPerson());            
+             EODetails eod = new EODetails();
+        eod.setContactingDetails(new ContactingDetails());
+        eod.setPostalAddress(new PostalAddress());
+        eod.setNaturalPersons(new ArrayList<>());
+
+        NaturalPerson np = new NaturalPerson();
+        np.setPostalAddress(new PostalAddress());
+        np.setContactDetails(new ContactingDetails());
+
+        eod.getNaturalPersons().add(np);
+            res.setEODetails(eod);
         }
+        
         return res;
     }
 
