@@ -141,6 +141,9 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
 
             ct.setElectronicMail(new ElectronicMailType());
             ct.getElectronicMail().setValue(eod.getContactingDetails().getEmailAddress());
+            
+            ct.setTelefax(new TelefaxType());
+            ct.getTelefax().setValue(eod.getContactingDetails().getFaxNumber());
 
             eopt.getParty().setContact(ct);
         }
