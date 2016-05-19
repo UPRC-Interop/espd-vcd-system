@@ -10,6 +10,7 @@ import eu.esens.espdvcd.model.EODetails;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.model.NaturalPerson;
+import eu.esens.espdvcd.model.PostalAddress;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.SimpleESPDRequest;
 import eu.esens.espdvcd.model.SimpleESPDResponse;
@@ -192,16 +193,21 @@ public class ModelBuilder {
             } else {
                 res.setCriterionList(getEmptyCriteriaList());
             }
-            res.setCADetails(createDefaultCADetails());
-            res.setEODetails(createDefaultEODetails());
+     
+
         }
         
         if (caDetails != null) {
             res.setCADetails(caDetails);
+        } else {
+                   res.setCADetails(createDefaultCADetails());           
         }
         
         if (eoDetails != null) {
             res.setEODetails(eoDetails);
+
+        } else { 
+                        res.setEODetails(createDefaultEODetails());
         }
         
                 // Apply workaround
@@ -302,10 +308,17 @@ public class ModelBuilder {
     
     private EODetails createDefaultEODetails() {
         // Empty EODetails (with initialized lists)
+        System.out.println("Creating default EO Details");
         EODetails eod = new EODetails();
         eod.setContactingDetails(new ContactingDetails());
+        eod.setPostalAddress(new PostalAddress());
         eod.setNaturalPersons(new ArrayList<>());
-        eod.getNaturalPersons().add(new NaturalPerson());
+
+        NaturalPerson np = new NaturalPerson();
+        np.setPostalAddress(new PostalAddress());
+        np.setContactDetails(new ContactingDetails());
+
+        eod.getNaturalPersons().add(np);
         return eod;
     }
     
