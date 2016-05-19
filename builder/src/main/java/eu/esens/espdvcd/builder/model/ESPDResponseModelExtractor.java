@@ -253,6 +253,10 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                         if (eop.getParty().getContact().getTelephone() != null) {
                             eoDetails.getContactingDetails().setTelephoneNumber(eop.getParty().getContact().getTelephone().getValue());
                         }
+                        
+                        if (eop.getParty().getContact().getTelefax() != null) {
+                            eoDetails.getContactingDetails().setFaxNumber(eop.getParty().getContact().getTelefax().getValue());
+                        }
                     }
 
                 }
