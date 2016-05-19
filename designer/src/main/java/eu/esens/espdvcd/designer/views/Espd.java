@@ -17,7 +17,7 @@ public class Espd extends Master {
     private ESPDResponse espdResponse = null;
     private ESPDResponseForm espdResponseForm = null;
     VerticalLayout panelRightLayout = new VerticalLayout();
-    Button panelRightButtonImport = new Button("Import existing ESPD");
+    Button panelRightButtonImport = new Button("Import ESPD Artifact");
     private CriterionForm highlightedCriterion = null;
     private Panel uploadPanel = new Panel();
 
@@ -29,13 +29,18 @@ public class Espd extends Master {
         panels.setWidth("100%");
         mainContent.addComponent(panels);
 
-        Panel panelRight = new Panel("Import existing ESPD");
+        Panel panelRight = new Panel("Create a Response by Importing an existing ESPD Artifact");
         panels.addComponent(panelRight);
 
         panelRightLayout.setStyleName("panelRightLayout");
         panelRight.setContent(panelRightLayout);
 
-        Label panelRightDescription = new Label("A description about importing an existing espd. More details goes here... More details goes here... More details goes here... More details goes here... More details goes here... More details goes here... More details goes here... More details goes here...");
+        Label panelRightDescription = new Label("For creating an ESPD Response, you must first import"
+                + " an ESPD XML Artifact (either an ESPD Request or an ESPD Response). "
+                + "The Criteria and Procurement details will be imported from an ESPD Request. "
+                + "When importing an ESPD Response, the Critera, Procurement and Economic Operator Details"
+                + "Will be imported");
+        
         panelRightLayout.addComponent(panelRightDescription);
 
         panelRightButtonImport.addClickListener(this::onImportEspdTemplate);

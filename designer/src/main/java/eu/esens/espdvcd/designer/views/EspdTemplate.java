@@ -21,7 +21,7 @@ public class EspdTemplate extends Master {
     VerticalLayout panelLeftLayout = new VerticalLayout();
     VerticalLayout panelRightLayout = new VerticalLayout();
     Button panelLeftButtonNew = new Button("Create new ESPD Template");
-    Button panelRightButtonImport = new Button("Import existing ESPD Template");
+    Button panelRightButtonImport = new Button("Import existing ESPD Artifact");
     private CriterionForm highlightedCriterion = null;
     private Panel uploadPanel = new Panel();
     GridLayout gridLayout = new GridLayout(2,1);
@@ -64,7 +64,10 @@ public class EspdTemplate extends Master {
         panelLeftLayout.setStyleName("panelLeftLayout");
         panelLeft.setContent(panelLeftLayout);
 
-        Label panelLeftDescription = new Label("A description about creating a new espd template. More details goes here... More details goes here... More details goes here... More details goes here... More details goes here... More details goes here... More details goes here... More details goes here...");
+        Label panelLeftDescription = new Label("You can create an ESPD Request from scratch. "
+                + "The ESPD Request created will have an empty procurement details structure. "
+                + "It will contain the default, predefined ESPD Criteria selection and exclusion criteria pre selected."
+                + "You can deselect any of the criteria you do not require in the UI");
         panelLeftLayout.addComponent(panelLeftDescription);
 
         panelLeftButtonNew.setStyleName("espdTemplate-panelButton");
@@ -78,7 +81,11 @@ public class EspdTemplate extends Master {
         panelRightLayout.setStyleName("panelRightLayout");
         panelRight.setContent(panelRightLayout);
 
-        Label panelRightDescription = new Label("A description about importing an existing espd template. More details goes here... More details goes here... More details goes here... More details goes here... More details goes here... More details goes here... More details goes here... More details goes here...");
+        Label panelRightDescription = new Label("You can create an ESPD Request by importing an existing ESPD XML Artifact. "
+                + "The ESPD Request created will have the procurement details structure of the imported artifact. "
+                + "It will contain the default, predefined ESPD Criteria selection and exclusion criteria. "
+                + "The criteria existing in the imported document will be pre-selected."
+                + "You can deselect any of the criteria you do not require in the UI");
         panelRightLayout.addComponent(panelRightDescription);
 
         panelRightButtonImport.addClickListener(this::onImportEspdTemplate);
