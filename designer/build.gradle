@@ -19,6 +19,9 @@ buildscript {
 
 repositories {
     jcenter()
+    maven {
+        url "http://maven.vaadin.com/vaadin-addons"
+    }
 }
 
 apply plugin: 'org.akhikhl.gretty'
@@ -48,6 +51,7 @@ dependencies {
     compile 'com.vaadin:vaadin-client-compiled:7.6.0'
     compile 'com.vaadin:vaadin-client-compiler:7.6.0'
     compile 'com.vaadin:vaadin-themes:7.6.0'
+    compile 'org.vaadin.addons:jain-i18N:1.1.9'
 }
 
 task copyTask(type: Copy) {
