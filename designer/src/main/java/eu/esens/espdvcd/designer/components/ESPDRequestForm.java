@@ -100,12 +100,12 @@ public class ESPDRequestForm extends ESPDForm {
         LinkedHashMap<String,List<CriterionForm>> criterionHash = new LinkedHashMap<>();
         for (SelectableCriterion criterion : criterionList) {
 
-            if (!criterionHash.containsKey(criterion.getTypeCode())) {
-                criterionHash.put(criterion.getTypeCode(), new ArrayList<CriterionForm>());
+            if (!criterionHash.containsKey(criterion.getCriterionGroup())) {
+                criterionHash.put(criterion.getCriterionGroup(), new ArrayList<>());
             }
 
             CriterionForm criterionForm = new CriterionForm(view, criterion, false, readOnly);
-            criterionHash.get(criterion.getTypeCode()).add(criterionForm);
+            criterionHash.get(criterion.getCriterionGroup()).add(criterionForm);
         }
         for (Map.Entry<String, List<CriterionForm>> entry : criterionHash.entrySet()) {
             String key = entry.getKey();

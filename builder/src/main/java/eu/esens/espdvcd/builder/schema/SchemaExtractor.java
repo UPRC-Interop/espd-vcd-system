@@ -109,7 +109,7 @@ public interface SchemaExtractor {
         if (cd != null) {
 
             if (cd.getProcurementPublicationNumber() != null) {
-                dr.setID(createISOIECIDType(cd.getProcurementPublicationNumber()));
+                dr.setID(createGROWTemporaryId(cd.getProcurementPublicationNumber()));
             }
 
             dr.setDocumentTypeCode(createDocumentTypeCode("TED_CN"));
@@ -179,6 +179,14 @@ public interface SchemaExtractor {
 
     default IDType createISOIECIDType(String id) {
         IDType reqGroupIDType = createCustomSchemeIDIDType(id, "ISO/IEC 9834-8:2008 - 4UUID");
+        reqGroupIDType.setSchemeAgencyName("DG GROW (European Commission)");
+        reqGroupIDType.setSchemeVersionID("1.1");
+        return reqGroupIDType;
+    }
+    
+    default IDType createGROWTemporaryId(String id) {
+        IDType reqGroupIDType = createCustomSchemeIDIDType(id, "COM-GROW-TEMPORARY-ID");
+        reqGroupIDType.setSchemeAgencyID("EU-COM-GROW");
         reqGroupIDType.setSchemeAgencyName("DG GROW (European Commission)");
         reqGroupIDType.setSchemeVersionID("1.1");
         return reqGroupIDType;

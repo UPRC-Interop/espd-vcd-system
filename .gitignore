@@ -12,3 +12,4 @@ gradle.properties
 /codelists/nbproject/
 /designer/tmp/
 /persistence/logs/
+/.nb-gradle/
