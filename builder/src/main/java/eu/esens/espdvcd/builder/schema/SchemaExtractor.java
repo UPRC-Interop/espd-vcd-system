@@ -126,6 +126,9 @@ public interface SchemaExtractor {
                 if (cd.getProcurementProcedureDesc() != null) {
                     DescriptionType dt = new DescriptionType();
                     dt.setValue(cd.getProcurementProcedureDesc());
+                    if (dr.getAttachment().getExternalReference() == null ) {
+                      dr.getAttachment().setExternalReference(new ExternalReferenceType());
+                    }
                     dr.getAttachment().getExternalReference().getDescription().add(dt);
                 }
             }
