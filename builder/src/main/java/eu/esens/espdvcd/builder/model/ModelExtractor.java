@@ -62,11 +62,17 @@ public interface ModelExtractor {
                 }
                 if (ref.getAttachment() != null && ref.getAttachment().getExternalReference() != null) {
                     ExternalReferenceType ert = ref.getAttachment().getExternalReference();
+                    
                     if (ert.getFileName() != null) {
                      cd.setProcurementProcedureTitle(ert.getFileName().getValue());
                     }
+                    
                     if (!ert.getDescription().isEmpty()) {
                      cd.setProcurementProcedureDesc(ert.getDescription().get(0).getValue());
+                    }
+                    
+                    if (ert.getURI() != null) {
+                        cd.setProcurementPublicationURI(ert.getURI().getValue());
                     }
                 }
             }

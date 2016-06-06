@@ -109,7 +109,7 @@ public interface SchemaExtractor {
         if (cd != null) {
 
             if (cd.getProcurementPublicationNumber() != null) {
-                dr.setID(createGROWTemporaryId(cd.getProcurementPublicationNumber()));
+                dr.setID(createISOIECIDType(cd.getProcurementPublicationNumber()));
             }
 
             dr.setDocumentTypeCode(createDocumentTypeCode("TED_CN"));
@@ -121,6 +121,11 @@ public interface SchemaExtractor {
                     dr.getAttachment().setExternalReference(new ExternalReferenceType());
                     dr.getAttachment().getExternalReference().setFileName(new FileNameType());
                     dr.getAttachment().getExternalReference().getFileName().setValue(cd.getProcurementProcedureTitle());
+                    if (cd.getProcurementPublicationURI() != null) {
+                        dr.getAttachment().getExternalReference().setURI(new URIType());
+                        dr.getAttachment().getExternalReference().getURI().setValue(cd.getProcurementPublicationURI());
+                    }
+
                 }
 
                 if (cd.getProcurementProcedureDesc() != null) {

@@ -14,7 +14,7 @@ import javax.xml.bind.JAXB;
 public class PredefinedESPDCriteriaExtractor implements CriteriaExtractor {
 
     private final List<CriterionType> criterionTypeList;
-    private static final String ESPDREQUEST_RESOURCE = "/espd-request-2016.06.xml";
+    private static final String ESPDREQUEST_RESOURCE = "/templates/espd-request-2016.06.xml";
     
     public PredefinedESPDCriteriaExtractor() {
         ESPDRequestType requestTemplate = JAXB.unmarshal(CriteriaExtractor.class.getResourceAsStream(ESPDREQUEST_RESOURCE), ESPDRequestType.class);    
