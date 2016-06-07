@@ -36,7 +36,13 @@ public class NaturalPersonForm extends Panel {
         columnA.addComponent(birthDate);
         columnB.addComponent(familyName);
         columnB.addComponent(powerOfAttorney);
-        panelContent.addComponent(new PostalAddressForm(this.naturalPerson.getPostalAddress(), readOnly));
+
+        if (this.naturalPerson.getPostalAddress() != null) {
+            panelContent.addComponent(new PostalAddressForm(this.naturalPerson.getPostalAddress(), readOnly));
+        }
+        if (this.naturalPerson.getContactDetails() != null) {
+            panelContent.addComponent(new ContactingDetailsForm(this.naturalPerson.getContactDetails(), readOnly));
+        }
 
         final BeanFieldGroup<NaturalPerson> binder = new BeanFieldGroup<>(NaturalPerson.class);
         binder.bindMemberFields(this);
