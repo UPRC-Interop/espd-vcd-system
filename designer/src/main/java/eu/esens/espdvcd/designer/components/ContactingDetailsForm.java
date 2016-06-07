@@ -19,7 +19,7 @@ public class ContactingDetailsForm extends Panel {
     private TextField telephoneNumber = new TextField("Phone number:");
     private TextField emailAddress = new TextField("Email:");
 
-    public ContactingDetailsForm(ContactingDetails contactingDetails, boolean readOnly) {
+    public ContactingDetailsForm(ContactingDetails contactingDetails, boolean readOnly, boolean useContactPointName) {
         this.contactingDetails = contactingDetails;
 
         setStyleName("ContactingDetailsForm");
@@ -31,7 +31,9 @@ public class ContactingDetailsForm extends Panel {
         columns.addComponent(columnA);
         columns.addComponent(columnB);
 
-        columnA.addComponent(contactPointName);
+        if (useContactPointName) {
+            columnA.addComponent(contactPointName);
+        }
         columnA.addComponent(emailAddress);
         columnB.addComponent(telephoneNumber);
         columnB.addComponent(faxNumber);
