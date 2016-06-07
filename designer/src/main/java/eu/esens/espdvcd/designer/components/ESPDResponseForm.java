@@ -36,12 +36,12 @@ public class ESPDResponseForm extends ESPDForm {
 
         for (SelectableCriterion criterion : espdResponse.getEORelatedCriteriaList()) {
 
-            if (!economicOperatorCriterionHash.containsKey(criterion.getTypeCode())) {
-                economicOperatorCriterionHash.put(criterion.getTypeCode(), new ArrayList<CriterionForm>());
+            if (!economicOperatorCriterionHash.containsKey(criterion.getCriterionGroup())) {
+                economicOperatorCriterionHash.put(criterion.getCriterionGroup(), new ArrayList<CriterionForm>());
             }
 
             CriterionForm criterionForm = new CriterionForm(view, criterion, true, readOnly);
-            economicOperatorCriterionHash.get(criterion.getTypeCode()).add(criterionForm);
+            economicOperatorCriterionHash.get(criterion.getCriterionGroup()).add(criterionForm);
         }
 
         for (Map.Entry<String, List<CriterionForm>> entry : economicOperatorCriterionHash.entrySet()) {
@@ -69,12 +69,12 @@ public class ESPDResponseForm extends ESPDForm {
 
         for (SelectableCriterion criterion : espdResponse.getExclusionCriteriaList()) {
 
-            if (!exclusionCriterionHash.containsKey(criterion.getTypeCode())) {
-                exclusionCriterionHash.put(criterion.getTypeCode(), new ArrayList<CriterionForm>());
+            if (!exclusionCriterionHash.containsKey(criterion.getCriterionGroup())) {
+                exclusionCriterionHash.put(criterion.getCriterionGroup(), new ArrayList<CriterionForm>());
             }
 
             CriterionForm criterionForm = new CriterionForm(view, criterion, true, readOnly);
-            exclusionCriterionHash.get(criterion.getTypeCode()).add(criterionForm);
+            exclusionCriterionHash.get(criterion.getCriterionGroup()).add(criterionForm);
         }
 
         for (Map.Entry<String, List<CriterionForm>> entry : exclusionCriterionHash.entrySet()) {
@@ -104,11 +104,11 @@ public class ESPDResponseForm extends ESPDForm {
         for (SelectableCriterion criterion : espdResponse.getSelectionCriteriaList()) {
 
             if (!selectionCriterionHash.containsKey(criterion.getTypeCode())) {
-                selectionCriterionHash.put(criterion.getTypeCode(), new ArrayList<CriterionForm>());
+                selectionCriterionHash.put(criterion.getCriterionGroup(), new ArrayList<CriterionForm>());
             }
 
             CriterionForm criterionForm = new CriterionForm(view, criterion, true, readOnly);
-            selectionCriterionHash.get(criterion.getTypeCode()).add(criterionForm);
+            selectionCriterionHash.get(criterion.getCriterionGroup()).add(criterionForm);
         }
 
         for (Map.Entry<String, List<CriterionForm>> entry : selectionCriterionHash.entrySet()) {
@@ -137,12 +137,12 @@ public class ESPDResponseForm extends ESPDForm {
 
         for (SelectableCriterion criterion : espdResponse.getReductionOfCandidatesCriteriaList()) {
 
-            if (!reductionCriterionHash.containsKey(criterion.getTypeCode())) {
-                reductionCriterionHash.put(criterion.getTypeCode(), new ArrayList<CriterionForm>());
+            if (!reductionCriterionHash.containsKey(criterion.getCriterionGroup())) {
+                reductionCriterionHash.put(criterion.getCriterionGroup(), new ArrayList<CriterionForm>());
             }
 
             CriterionForm criterionForm = new CriterionForm(view, criterion, true, readOnly);
-            reductionCriterionHash.get(criterion.getTypeCode()).add(criterionForm);
+            reductionCriterionHash.get(criterion.getCriterionGroup()).add(criterionForm);
         }
 
         for (Map.Entry<String, List<CriterionForm>> entry : reductionCriterionHash.entrySet()) {

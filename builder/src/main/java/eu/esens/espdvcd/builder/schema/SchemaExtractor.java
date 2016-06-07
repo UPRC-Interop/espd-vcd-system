@@ -121,11 +121,19 @@ public interface SchemaExtractor {
                     dr.getAttachment().setExternalReference(new ExternalReferenceType());
                     dr.getAttachment().getExternalReference().setFileName(new FileNameType());
                     dr.getAttachment().getExternalReference().getFileName().setValue(cd.getProcurementProcedureTitle());
+                    if (cd.getProcurementPublicationURI() != null) {
+                        dr.getAttachment().getExternalReference().setURI(new URIType());
+                        dr.getAttachment().getExternalReference().getURI().setValue(cd.getProcurementPublicationURI());
+                    }
+
                 }
 
                 if (cd.getProcurementProcedureDesc() != null) {
                     DescriptionType dt = new DescriptionType();
                     dt.setValue(cd.getProcurementProcedureDesc());
+                    if (dr.getAttachment().getExternalReference() == null ) {
+                      dr.getAttachment().setExternalReference(new ExternalReferenceType());
+                    }
                     dr.getAttachment().getExternalReference().getDescription().add(dt);
                 }
             }
@@ -179,6 +187,14 @@ public interface SchemaExtractor {
 
     default IDType createISOIECIDType(String id) {
         IDType reqGroupIDType = createCustomSchemeIDIDType(id, "ISO/IEC 9834-8:2008 - 4UUID");
+        reqGroupIDType.setSchemeAgencyName("DG GROW (European Commission)");
+        reqGroupIDType.setSchemeVersionID("1.1");
+        return reqGroupIDType;
+    }
+    
+    default IDType createGROWTemporaryId(String id) {
+        IDType reqGroupIDType = createCustomSchemeIDIDType(id, "COM-GROW-TEMPORARY-ID");
+        reqGroupIDType.setSchemeAgencyID("EU-COM-GROW");
         reqGroupIDType.setSchemeAgencyName("DG GROW (European Commission)");
         reqGroupIDType.setSchemeVersionID("1.1");
         return reqGroupIDType;

@@ -23,13 +23,11 @@ public class SimpleESPDRequest implements ESPDRequest {
     private CADetails caDetails;
     private List<SelectableCriterion> criterionList;
     
-    private static final String SELECTION_REGEXP = "^SELECTION.+";
-    private static final String EXCLUSION_REGEXP = "^EXCLUSION.+";
-    private static final String EO_RELATED_REGEXP = "^DATA_ON_ECONOMIC_OPERATOR*";
-    private static final String REDUCTION_OF_CANDIDATES_REGEXP = "^REDUCTION_OF_CANDIDATES*";
-    
+    private static final String SELECTION_REGEXP = "^CRITERION.SELECTION.+";
+    private static final String EXCLUSION_REGEXP = "^CRITERION.EXCLUSION.+";
+    private static final String EO_RELATED_REGEXP = "^CRITERION.OTHER.EO_DATA.+";
+    private static final String REDUCTION_OF_CANDIDATES_REGEXP = "^CRITERION.OTHER.EO_DATA.MEETS_THE_OBJECTIVE*";   
         
-
     public SimpleESPDRequest() {
         this.espdRequestType = new ESPDRequestType();
     }

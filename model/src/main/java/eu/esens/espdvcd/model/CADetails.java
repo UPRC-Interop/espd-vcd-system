@@ -112,7 +112,17 @@ public class CADetails implements Serializable{
      * UBL syntax path: cac:ContractingParty.Party.PostalAddress.Country.IdentificationCode<br>
      */
     private String caCountry;
+    
+    private String procurementPublicationURI;
 
+    public String getProcurementPublicationURI() {
+        return procurementPublicationURI;
+    }
+
+    public void setProcurementPublicationURI(String procurementPublicationURI) {
+        this.procurementPublicationURI = procurementPublicationURI;
+    }
+    
     public String getProcurementProjectLot() {
         return procurementProjectLot;
     }

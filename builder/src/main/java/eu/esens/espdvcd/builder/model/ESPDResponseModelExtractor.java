@@ -3,6 +3,7 @@ package eu.esens.espdvcd.builder.model;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.ContactingDetails;
 import eu.esens.espdvcd.model.EODetails;
+import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.model.NaturalPerson;
 import eu.esens.espdvcd.model.PostalAddress;
 import eu.esens.espdvcd.model.requirement.response.ResponseFactory;
@@ -24,7 +25,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
     /* package private constructor. Create only through factory */
     ESPDResponseModelExtractor() {};
 
-    public SimpleESPDResponse extractESPDResponse(ESPDResponseType resType) {
+    public ESPDResponse extractESPDResponse(ESPDResponseType resType) {
 
         SimpleESPDResponse res = new SimpleESPDResponse();
 
@@ -40,10 +41,19 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
         if (resType.getEconomicOperatorParty() != null) {
             res.setEODetails(extractEODetails(resType.getEconomicOperatorParty()));
         } else {
-            res.setEODetails(new EODetails());
-            res.getEODetails().setNaturalPersons(new ArrayList<>());
-            res.getEODetails().getNaturalPersons().add(new NaturalPerson());            
+             EODetails eod = new EODetails();
+        eod.setContactingDetails(new ContactingDetails());
+        eod.setPostalAddress(new PostalAddress());
+        eod.setNaturalPersons(new ArrayList<>());
+
+        NaturalPerson np = new NaturalPerson();
+        np.setPostalAddress(new PostalAddress());
+        np.setContactDetails(new ContactingDetails());
+
+        eod.getNaturalPersons().add(np);
+            res.setEODetails(eod);
         }
+        
         return res;
     }
 
@@ -242,6 +252,10 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                         
                         if (eop.getParty().getContact().getTelephone() != null) {
                             eoDetails.getContactingDetails().setTelephoneNumber(eop.getParty().getContact().getTelephone().getValue());
+                        }
+                        
+                        if (eop.getParty().getContact().getTelefax() != null) {
+                            eoDetails.getContactingDetails().setFaxNumber(eop.getParty().getContact().getTelefax().getValue());
                         }
                     }
 

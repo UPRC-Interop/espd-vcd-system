@@ -180,6 +180,19 @@ public class Criterion implements Serializable {
     public void setLegislationReference(LegislationReference legislationReference) {
         this.legislationReference = legislationReference;
     }
+    
+
+    public String getCriterionGroup() {
+          String[] ar= this.typeCode.split("\\.",4);
+        StringBuilder sb = new StringBuilder();
+        int size = 3;
+        if (ar.length < size) size = ar.length;
+        for (int i=0; i<size; i++) {
+            sb.append(ar[i]);
+            sb.append(".");
+        }
+        return sb.delete(sb.lastIndexOf("."), sb.length()).toString();
+    }
 
     @Override
     public int hashCode() {
@@ -203,15 +216,12 @@ public class Criterion implements Serializable {
             return false;
         }
         final Criterion other = (Criterion) obj;
-        
+                            
         if (!Objects.equals(this.ID, other.ID)) {
+
             return false;
         }
-        
-        if (!Objects.equals(this.typeCode, other.typeCode)) {
-            return false;
-        }
-        
+                
         return true;
     }
     
