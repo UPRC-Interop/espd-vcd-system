@@ -22,7 +22,7 @@ public class EODetailsForm extends Panel {
     private TextField electronicAddressID = new TextField("Electronic address id:");
     private TextField name = new TextField("Name:");
     private TextField role = new TextField("Role:");
-    private CheckBox smeIndicator = new CheckBox("SME:");
+    private OptionGroup smeIndicator = new OptionGroup("Indicator: ");
 
     private ContactingDetails contactingDetails; // To be implemented
     private List<NaturalPerson> naturalPersons; // To be implemented
@@ -44,6 +44,17 @@ public class EODetailsForm extends Panel {
         columnA.addComponent(electronicAddressID);
         columnB.addComponent(role);
         columnB.addComponent(smeIndicator);
+
+        smeIndicator.setCaption("SME:");
+        smeIndicator.setStyleName("horizontal");
+        boolean option1 = false;
+        boolean option2 = true;
+        smeIndicator.addItem(option1);
+        smeIndicator.addItem(option2);
+        smeIndicator.setItemCaption(option1, "No");
+        smeIndicator.setItemCaption(option2, "Yes");
+        columnB.addComponent(smeIndicator);
+
 
         PostalAddress eoDetailsPostalAddress = eoDetails.getPostalAddress();
         if (eoDetailsPostalAddress != null) {
