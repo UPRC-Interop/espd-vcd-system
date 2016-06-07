@@ -14,7 +14,6 @@ public class PostalAddressForm extends Panel {
     private TextField addressLine1 = new TextField("Address line:");
     private TextField city = new TextField("City:");
     private TextField postCode = new TextField("Post code:");
-    private TextField countrySubdivision = new TextField("Country subdivision:");
     private CountryComboBox countryCode = new CountryComboBox("Country:");
 
     public PostalAddressForm(PostalAddress postalAddress, boolean readOnly) {
@@ -31,9 +30,8 @@ public class PostalAddressForm extends Panel {
 
         columnA.addComponent(addressLine1);
         columnA.addComponent(city);
-        columnA.addComponent(postCode);
-        columnB.addComponent(countrySubdivision);
         columnB.addComponent(countryCode);
+        columnB.addComponent(postCode);
 
         final BeanFieldGroup<PostalAddress> binder = new BeanFieldGroup<>(PostalAddress.class);
         binder.bindMemberFields(this);
@@ -64,10 +62,6 @@ public class PostalAddressForm extends Panel {
         postCode.setNullRepresentation("");
         postCode.setInputPrompt("Post code");
         postCode.setWidth(400, Unit.PIXELS);
-
-        countrySubdivision.setNullRepresentation("");
-        countrySubdivision.setInputPrompt("Country subdivision");
-        countrySubdivision.setWidth(300, Unit.PIXELS);
 
         countryCode.setInputPrompt("Select country");
         countryCode.setWidth(300, Unit.PIXELS);
