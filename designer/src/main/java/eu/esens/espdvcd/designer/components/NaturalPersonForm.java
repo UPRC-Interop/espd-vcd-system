@@ -11,6 +11,8 @@ public class NaturalPersonForm extends Panel {
     private HorizontalLayout columns = new HorizontalLayout();
     private FormLayout columnA = new FormLayout();
     private FormLayout columnB = new FormLayout();
+    private TextField firstName = new TextField("First name:");
+    private TextField familyName = new TextField("Family name:");
     private TextField role = new TextField("Role:");
     private TextField birthPlace = new TextField("Birth place:");
     private DateField birthDate = new DateField("Birth date:");
@@ -28,9 +30,11 @@ public class NaturalPersonForm extends Panel {
         columns.addComponent(columnA);
         columns.addComponent(columnB);
 
+        columnA.addComponent(firstName);
         columnA.addComponent(role);
         columnA.addComponent(birthPlace);
         columnA.addComponent(birthDate);
+        columnB.addComponent(familyName);
         columnB.addComponent(powerOfAttorney);
         panelContent.addComponent(new PostalAddressForm(this.naturalPerson.getPostalAddress(), readOnly));
 
@@ -51,6 +55,14 @@ public class NaturalPersonForm extends Panel {
         columnA.setMargin(false);
         columnB.setSpacing(true);
         columnB.setMargin(false);
+
+        firstName.setNullRepresentation("");
+        firstName.setInputPrompt("First name");
+        firstName.setWidth(300, Unit.PIXELS);
+
+        familyName.setNullRepresentation("");
+        familyName.setInputPrompt("Family name");
+        familyName.setWidth(300, Unit.PIXELS);
 
         role.setNullRepresentation("");
         role.setInputPrompt("Role");
