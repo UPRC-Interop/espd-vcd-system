@@ -23,8 +23,6 @@ public class EODetailsForm extends Panel {
     private TextField name = new TextField("Name:");
     private TextField role = new TextField("Role:");
     private CheckBox smeIndicator = new CheckBox("SME:");
-    private TextField nationalDatabaseURI = new TextField("National database URI:");
-    private TextField nationalDatabaseAccessCredentials = new TextField("National database access credentials:");
 
     private ContactingDetails contactingDetails; // To be implemented
     private List<NaturalPerson> naturalPersons; // To be implemented
@@ -45,8 +43,6 @@ public class EODetailsForm extends Panel {
         columnA.addComponent(ID);
         columnA.addComponent(electronicAddressID);
         columnB.addComponent(role);
-        columnB.addComponent(nationalDatabaseURI);
-        columnB.addComponent(nationalDatabaseAccessCredentials);
         columnB.addComponent(smeIndicator);
 
         PostalAddress eoDetailsPostalAddress = eoDetails.getPostalAddress();
@@ -95,13 +91,5 @@ public class EODetailsForm extends Panel {
         role.setNullRepresentation("");
         role.setInputPrompt("Role");
         role.setWidth(400, Unit.PIXELS);
-
-        nationalDatabaseURI.setNullRepresentation("");
-        nationalDatabaseURI.setInputPrompt("National database URI");
-        nationalDatabaseURI.setWidth(400, Unit.PIXELS);
-
-        nationalDatabaseAccessCredentials.setNullRepresentation("");
-        nationalDatabaseAccessCredentials.setInputPrompt("National database access credentials");
-        nationalDatabaseAccessCredentials.setWidth(400, Unit.PIXELS);
     }
 }
