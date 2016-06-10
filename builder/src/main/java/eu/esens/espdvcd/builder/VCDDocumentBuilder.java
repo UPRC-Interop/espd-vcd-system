@@ -2,6 +2,12 @@ package eu.esens.espdvcd.builder;
 
 import eu.esens.espdvcd.model.ESPDRequest;
 
+import eu.esens.espdvcd.model.ESPDResponse;
+import eu.esens.espdvcd.model.SelectableCriterion;
+import eu.esens.espdvcd.model.requirement.Requirement;
+import eu.esens.espdvcd.model.requirement.RequirementGroup;
+import eu.esens.espdvcd.model.requirement.response.EvidenceURLResponse;
+import eu.esens.espdvcd.model.requirement.response.Response;
 import no.difi.asic.AsicWriterFactory;
 import no.difi.asic.AsicWriter;
 import no.difi.asic.MimeType;
@@ -9,6 +15,8 @@ import no.difi.asic.SignatureHelper;
 import no.difi.xsd.asic.model._1.AsicManifest;
 import org.etsi.uri._02918.v1_2.DataObjectReferenceType;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.net.URI;
@@ -23,9 +31,19 @@ public class VCDDocumentBuilder extends DocumentBuilder {
 
     private SignatureHelper signatureHelper;
 
+    /**
+     * List of documents attached to this ESPD to be part of the VCD.
+     */
+    private List<File> documents = new ArrayList<>();
+
     public VCDDocumentBuilder(ESPDRequest req, SignatureHelper signatureHelper) {
         super(req);
         this.signatureHelper = signatureHelper;
+
+        // extract references to evidence documents from ESPDResponse
+        if (req instanceof ESPDResponse) {
+            scanForDocuments((ESPDResponse)req);
+        }
     }
 
     /**
@@ -47,21 +65,20 @@ public class VCDDocumentBuilder extends DocumentBuilder {
         // Creates an AsicWriterFactory with default signature method
         AsicWriterFactory asicWriterFactory = AsicWriterFactory.newFactory();
 
+        // Creates the actual container with all the data objects (files) and signs it.
         try {
-            // Creates the actual container with all the data objects (files) and signs it.
             AsicWriter asicWriter = asicWriterFactory.newContainer(archiveOutputFile)
-                 .add(espdStream, "espd.xml", MimeType.forString("application/xml"))
-            // Adds an ordinary file, using the file name as the entry name
-            //.add(biiEnvelopeFile)
-            // Adds another file, explicitly naming the entry and specifying the MIME type
-            //.add(biiMessageFile, BII_MESSAGE_XML, MimeType.forString("application/xml"))
-            // Signing the contents of the archive, closes it for further changes.
-            //.sign(keystoreFile, keyStorePassword(), privateKeyPassword());
-            .sign(signatureHelper);
+                 .add(espdStream, "espd.xml", MimeType.forString("application/xml"));
+            for (File document : documents) {
+                asicWriter.add(document);
+            }
+            asicWriter.sign(signatureHelper);
         }
         catch (IOException ex) {
             Logger.getLogger(VCDDocumentBuilder.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        // Creates an input stream for the container.
         InputStream asic = null;
         try {
             asic = new FileInputStream(archiveOutputFile);
@@ -73,23 +90,40 @@ public class VCDDocumentBuilder extends DocumentBuilder {
     }
 
     /**
-     * Writes InputStream to file to be processed by ASiC library.
-     * @param in
-     * @param file
+     * Scan the espd for references to locally stored ("java.io.tmpdir" folder) documents
+     * @param espd
      */
-  /*  private void copyInputStreamToFile( InputStream in, File file ) {
-        try {
-            OutputStream out = new FileOutputStream(file);
-            byte[] buf = new byte[1024];
-            int len;
-            while((len=in.read(buf))>0){
-                out.write(buf,0,len);
+    private void scanForDocuments(ESPDResponse espd) {
+        for (SelectableCriterion cr : espd.getFullCriterionList()) {
+            for (RequirementGroup rg : cr.getRequirementGroups()) {
+                scanRequirementGroup(rg);
             }
-            out.close();
-            in.close();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
-    }*/
+    }
+
+    /**
+     * Recursively scan requirement groups for references to locally stored documents
+     * @param rg
+     */
+    private void scanRequirementGroup(RequirementGroup rg) {
+        for (RequirementGroup innerRg : rg.getRequirementGroups() ) {
+            scanRequirementGroup(innerRg);
+        }
+        for (Requirement rq : rg.getRequirements()) {
+            Response resp = rq.getResponse();
+            //if (rq.getResponseDataType().equals(ResponseTypeEnum.EVIDENCE_URL)) {
+            if (resp instanceof EvidenceURLResponse) {
+                String uriStr = ((EvidenceURLResponse)resp).getEvidenceURL();
+                if (uriStr != null) {
+                    URI uri = URI.create(uriStr);
+                    File document = new File(System.getProperty("java.io.tmpdir"), uri.getPath());
+                    if (document.exists()) {
+                        documents.add(document);
+                    }
+                }
+            }
+        }
+    }
+
 
 }

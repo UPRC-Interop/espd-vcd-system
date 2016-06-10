@@ -2,6 +2,11 @@ package eu.esens.espdvcd.builder;
 
 import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.model.ESPDResponse;
+import eu.esens.espdvcd.model.SelectableCriterion;
+import eu.esens.espdvcd.model.requirement.Requirement;
+import eu.esens.espdvcd.model.requirement.RequirementGroup;
+import eu.esens.espdvcd.model.requirement.response.EvidenceURLResponse;
+import eu.esens.espdvcd.model.requirement.response.Response;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,6 +18,8 @@ import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Ulf Lotzmann on 08/06/2016.
@@ -29,7 +36,7 @@ public class VCDDocumentBuilderTest {
     public void setUp() throws BuilderException, IOException {
         System.err.println("----------- tmp dir: " + System.getProperty("java.io.tmpdir"));
 
-        InputStream isRes = BuilderESPDTest.class.getResourceAsStream("/espd-response.xml");
+        InputStream isRes = BuilderESPDTest.class.getResourceAsStream("/espd-response_withEvidenceDocumentReferences.xml");
         Assert.assertNotNull(isRes);
 
         // create an ESPD request as content for the ASiC
@@ -37,9 +44,9 @@ public class VCDDocumentBuilderTest {
         Assert.assertNotNull(espd);
 
         // create the SignatureHelper for signing the ASiC
-        File keystoreFile = getKeyStoreFile();
-        signature = new SignatureHelper(keystoreFile, keyStorePassword(), privateKeyPassword());
+        signature = new SignatureHelper(getKeyStoreFile(), keyStorePassword(), privateKeyPassword());
     }
+
 
     @Test
     public void testVCDBuilderWithESPDResponse() {
@@ -74,7 +81,7 @@ public class VCDDocumentBuilderTest {
     }
 
     /**
-     * FIXME: temporary method for signing the ASiC - copied from no.difi.asic.TestUtil
+     * temporary method for signing the ASiC - copied from no.difi.asic.TestUtil
      * @return
      */
     private String keyStorePassword() {
@@ -82,7 +89,7 @@ public class VCDDocumentBuilderTest {
     }
 
     /**
-     * FIXME: temporary method for signing the ASiC - copied from no.difi.asic.TestUtil
+     * temporary method for signing the ASiC - copied from no.difi.asic.TestUtil
      * @return
      */
     private String privateKeyPassword() {
@@ -90,7 +97,7 @@ public class VCDDocumentBuilderTest {
     }
 
     /**
-     * FIXME: temporary method for signing the ASiC - copied from no.difi.asic.TestUtil
+     * temporary method for signing the ASiC - copied from no.difi.asic.TestUtil
      * @return
      */
     private String keyPairAlias() {
