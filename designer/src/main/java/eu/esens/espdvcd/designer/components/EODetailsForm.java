@@ -45,7 +45,7 @@ public class EODetailsForm extends Panel {
         columnB.addComponent(role);
         columnB.addComponent(smeIndicator);
 
-        smeIndicator.setCaption("SME:");
+        smeIndicator.setCaption("Is the economic operator a Micro, a Small or a Medium-Sized Enterprise:");
         smeIndicator.setStyleName("horizontal");
         boolean option1 = false;
         boolean option2 = true;
