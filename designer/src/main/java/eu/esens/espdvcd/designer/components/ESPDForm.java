@@ -11,6 +11,7 @@ import eu.esens.espdvcd.builder.XMLDocumentBuilder;
 import eu.esens.espdvcd.designer.views.Espd;
 import eu.esens.espdvcd.designer.views.EspdTemplate;
 import eu.esens.espdvcd.designer.views.Master;
+import eu.esens.espdvcd.designer.views.Viewer;
 import eu.esens.espdvcd.model.ESPDRequest;
 import java.util.ArrayList;
 import java.util.List;
@@ -161,6 +162,10 @@ public class ESPDForm extends VerticalLayout {
         }
         if (view instanceof Espd) {
             Espd espdView = (Espd) view;
+            espdView.resetView();
+        }
+        if (view instanceof Viewer) {
+            Viewer espdView = (Viewer) view;
             espdView.resetView();
         }
     }

@@ -237,14 +237,21 @@ public class Viewer extends Master {
 
     public void resetView() {
         panels.setVisible(true);
+        panelLeftButtonImport.setVisible(true);
         panelRightButtonImport.setVisible(true);
         gridLayout.removeComponent(espdRequestForm);
         gridLayout.removeComponent(espdResponseForm);
-        panelRightLayout.removeComponent(uploadPanelLeft);
+        panelLeftLayout.removeComponent(uploadPanelLeft);
         panelRightLayout.removeComponent(uploadPanelRight);
         getDetailsContent().removeAllComponents();
-        mainColumn.removeComponent(espdRequestForm);
-        mainColumn.removeComponent(espdResponseForm);
+        if (espdRequestForm != null) {
+            mainColumn.removeComponent(espdRequestForm);
+            espdRequestForm = null;
+        }
+        if (espdResponseForm != null) {
+            mainColumn.removeComponent(espdResponseForm);
+            espdResponseForm = null;
+        }
     }
 
     public Panel getDetailsPanel() {
