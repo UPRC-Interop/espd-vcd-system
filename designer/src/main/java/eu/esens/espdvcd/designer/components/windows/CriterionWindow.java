@@ -1,5 +1,7 @@
 package eu.esens.espdvcd.designer.components.windows;
 
+import com.vaadin.server.Page;
+import com.vaadin.shared.Position;
 import com.vaadin.ui.*;
 import eu.esens.espdvcd.codelist.Codelists;
 import eu.esens.espdvcd.designer.components.CriterionForm;
@@ -75,7 +77,10 @@ public class CriterionWindow extends Window {
         CriterionForm criterionForm = new CriterionForm(view, criterion, false, false);
         destinationLayout.addComponent(criterionForm);
         UI.getCurrent().removeWindow(this);
-        Notification.show("Your criterion has been added!");
+        Notification notification = new Notification("Your criterion has been added!");
+        notification.setPosition(Position.TOP_CENTER);
+        notification.setDelayMsec(1000);
+        notification.show(Page.getCurrent());
     }
 
     public void onClose(Button.ClickEvent clickEvent) {
