@@ -4,6 +4,7 @@ import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.ui.*;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
+import eu.esens.espdvcd.designer.components.windows.CriterionWindow;
 import eu.esens.espdvcd.model.requirement.response.ResponseFactory;
 import eu.esens.espdvcd.designer.components.requirement.*;
 import eu.esens.espdvcd.model.requirement.response.AmountResponse;

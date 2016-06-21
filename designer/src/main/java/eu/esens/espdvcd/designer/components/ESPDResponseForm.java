@@ -55,7 +55,7 @@ public class ESPDResponseForm extends ESPDForm {
                 fullTypeCodeName = key;
             }
 
-            CriterionGroupForm criterionGroupForm = new CriterionGroupForm(fullTypeCodeName, criterionForms);
+            CriterionGroupForm criterionGroupForm = new CriterionGroupForm(espdResponse, view, fullTypeCodeName, criterionForms);
             economicOperatorCriterionGroupForms.add(criterionGroupForm);
             page1.addComponent(criterionGroupForm);
         }
@@ -88,7 +88,7 @@ public class ESPDResponseForm extends ESPDForm {
                 fullTypeCodeName = key;
             }
 
-            CriterionGroupForm criterionGroupForm = new CriterionGroupForm(fullTypeCodeName, criterionForms);
+            CriterionGroupForm criterionGroupForm = new CriterionGroupForm(espdResponse, view, fullTypeCodeName, criterionForms);
             exclusionCriterionGroupForms.add(criterionGroupForm);
             page2.addComponent(criterionGroupForm);
         }
@@ -122,9 +122,9 @@ public class ESPDResponseForm extends ESPDForm {
                 fullTypeCodeName = key;
             }
 
-            CriterionGroupForm criterionGroupForm = new CriterionGroupForm(fullTypeCodeName, criterionForms);
+            CriterionGroupForm criterionGroupForm = new CriterionGroupForm(espdResponse, view, fullTypeCodeName, criterionForms);
             selectionCriterionGroupForms.add(criterionGroupForm);
-            page3.addComponent(new CriterionGroupForm(fullTypeCodeName, criterionForms));
+            page3.addComponent(new CriterionGroupForm(espdResponse, view, fullTypeCodeName, criterionForms));
         }
 
 
@@ -156,9 +156,9 @@ public class ESPDResponseForm extends ESPDForm {
                 fullTypeCodeName = key;
             }
 
-            CriterionGroupForm criterionGroupForm = new CriterionGroupForm(fullTypeCodeName, criterionForms);
+            CriterionGroupForm criterionGroupForm = new CriterionGroupForm(espdResponse, view, fullTypeCodeName, criterionForms);
             reductionCriterionGroupForms.add(criterionGroupForm);
-            page4.addComponent(new CriterionGroupForm(fullTypeCodeName, criterionForms));
+            page4.addComponent(new CriterionGroupForm(espdResponse, view, fullTypeCodeName, criterionForms));
         }
 
         // Page 5 - Finish
