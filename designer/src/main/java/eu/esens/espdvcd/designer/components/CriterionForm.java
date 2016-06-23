@@ -1,5 +1,7 @@
 package eu.esens.espdvcd.designer.components;
 
+import eu.esens.espdvcd.designer.DetailsPanel.DetailsPanel;
+import eu.esens.espdvcd.designer.DetailsPanel.DetailsPanelBuilder;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import com.vaadin.event.LayoutEvents;
 import com.vaadin.server.FontAwesome;
@@ -101,22 +103,19 @@ public class CriterionForm extends VerticalLayout {
             if (view instanceof EspdTemplate) {
                 EspdTemplate espdTemplateView = (EspdTemplate) view;
                 espdTemplateView.getDetailsContent().removeAllComponents();
-                Label detailsTitle = new Label(criterionReference.getName());
-                detailsTitle.setStyleName("detailsTitle");
-                espdTemplateView.getDetailsContent().addComponent(detailsTitle);
+
+                DetailsPanelBuilder detailsPanelBuilder = new DetailsPanelBuilder();
+
+                detailsPanelBuilder.setCaption(criterionReference.getName());
+
                 if (criterionReference.getLegislationReference() != null) {
-                    espdTemplateView.getDetailsContent().addComponent(new LegislationReferenceForm(criterionReference.getLegislationReference()));
+                    detailsPanelBuilder.setLegislationReference(criterionReference.getLegislationReference());
                 }
 
-                Panel panel = new Panel();
-                VerticalLayout panelContent = new VerticalLayout();
-                panel.setCaption("Criterion requirements");
-                panel.setContent(panelContent);
-                panelContent.setSpacing(true);
-                espdTemplateView.getDetailsContent().addComponent(panel);
-                for (RequirementGroup requirementGroup : criterionReference.getRequirementGroups()) {
-                    panelContent.addComponent(new RequirementGroupForm(requirementGroup, false, readOnly));
-                }
+                detailsPanelBuilder.setRequirementGroups(criterionReference.getRequirementGroups());
+
+                DetailsPanel detailsPanel = detailsPanelBuilder.build();
+                espdTemplateView.getDetailsContent().addComponent(detailsPanel);
 
                 CriterionForm highlightedCriterion = espdTemplateView.getHighlightedCriterion();
                 if (highlightedCriterion != this) {

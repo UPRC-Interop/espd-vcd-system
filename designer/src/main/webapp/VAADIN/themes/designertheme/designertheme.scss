@@ -518,4 +518,63 @@
   .v-verticallayout-master-mainContent > .v-slot > .v-panel {
     height: 100%;
   }
+
+  .v-horizontallayout-progressBarLayout > .v-expand {
+    display: flex;
+  }
+
+  .v-horizontallayout-progressBarLayout > .v-expand > .v-slot-progressBarLabel {
+    display: flex;
+    align-items: center;
+    height: initial;
+  }
+
+  .v-slot-detailsPanelRequirementGroup {
+    border: solid 1px rgba(0,189,95,0.31);
+  }
+
+  .v-slot-detailsPanelRequirement {
+    border: solid 1px rgba(184, 189, 0, 0.31);
+  }
+
+  .detailsPanelButton {
+    background-image: none;
+    background-color: #569AC4;
+    box-shadow: inset 0px 0px 0px 0px #000;
+    border: 0px solid #569AC4;
+    color: #e3e3e3;
+    font-weight: bold;
+    font-size: 14px;
+    height: 24px;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin: 4px;
+  }
+
+  .detailsPanelRequirementGroupNewButton {
+    @extend .detailsPanelButton;
+    background-color: #36AB2E;
+    border: 0px solid #36AB2E;
+  }
+
+  .detailsPanelRequirementNewButton {
+    @extend .detailsPanelButton;
+    background-color: #36AB2E;
+    border: 0px solid #36AB2E;
+  }
+
+  .detailsPanelRequirementGroupDeleteButton {
+    @extend .detailsPanelButton;
+    background-color: #C94747;
+    border: 0px solid #C94747;
+  }
+
+  .v-verticallayout-detailsPanelRequirementGroup {
+    background-color: #effcff;
+  }
+
+  .v-verticallayout-detailsPanelRequirement {
+    background-color: #fffef0;
+  }
+
 }
