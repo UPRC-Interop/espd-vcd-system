@@ -45,8 +45,8 @@ public class EspdTemplate extends Master {
         mainContent.setWidth("100%");
         gridLayout.setWidth("100%");
         gridLayout.setHeight("100%");
-        gridLayout.setColumnExpandRatio(0, 0.7f);
-        gridLayout.setColumnExpandRatio(1, 0.3f);
+        gridLayout.setColumnExpandRatio(0, 0.65f);
+        gridLayout.setColumnExpandRatio(1, 0.35f);
 
         gridLayout.addComponent(mainColumn, 0, 0);
         gridLayout.addComponent(detailsPanel, 1, 0);
