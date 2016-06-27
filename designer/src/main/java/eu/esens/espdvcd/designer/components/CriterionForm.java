@@ -104,7 +104,7 @@ public class CriterionForm extends VerticalLayout {
                 EspdTemplate espdTemplateView = (EspdTemplate) view;
                 espdTemplateView.getDetailsContent().removeAllComponents();
 
-                DetailsPanelBuilder detailsPanelBuilder = new DetailsPanelBuilder();
+/*                DetailsPanelBuilder detailsPanelBuilder = new DetailsPanelBuilder();
 
                 detailsPanelBuilder.setCaption(criterionReference.getName());
 
@@ -114,7 +114,9 @@ public class CriterionForm extends VerticalLayout {
 
                 detailsPanelBuilder.setRequirementGroups(criterionReference.getRequirementGroups());
 
-                DetailsPanel detailsPanel = detailsPanelBuilder.build();
+                DetailsPanel detailsPanel = detailsPanelBuilder.build();*/
+                DetailsPanel detailsPanel = new DetailsPanel(criterionReference);
+
                 espdTemplateView.getDetailsContent().addComponent(detailsPanel);
 
                 CriterionForm highlightedCriterion = espdTemplateView.getHighlightedCriterion();

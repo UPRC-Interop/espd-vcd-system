@@ -10,6 +10,7 @@ import eu.esens.espdvcd.designer.components.CriterionForm;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.RequestRequirement;
 import eu.esens.espdvcd.model.requirement.Requirement;
+import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import org.apache.commons.lang3.text.WordUtils;
 
 import java.util.Iterator;
@@ -20,6 +21,7 @@ import java.util.UUID;
  */
 public class RequirementWindow extends Window {
 
+    RequirementGroup requirementGroup;
     AbstractLayout destinationLayout = null;
     VerticalLayout windowLayout = new VerticalLayout();
 
@@ -33,7 +35,8 @@ public class RequirementWindow extends Window {
 
     UUID generatedUUID = UUID.randomUUID();
 
-    public RequirementWindow(AbstractLayout destinationLayout) {
+    public RequirementWindow(RequirementGroup requirementGroup, AbstractLayout destinationLayout) {
+        this.requirementGroup = requirementGroup;
         this.destinationLayout = destinationLayout;
 
         setCaption("Requirement window");
@@ -81,8 +84,10 @@ public class RequirementWindow extends Window {
     public void onSave(Button.ClickEvent clickEvent) {
 
         RequestRequirement requirement = new RequestRequirement(id.getValue(), (ResponseTypeEnum)type.getValue(), description.getValue());
-        DetailsPanelRequirement detailsPanelRequirement = new DetailsPanelRequirement(requirement);
+        DetailsPanelRequirement detailsPanelRequirement = new DetailsPanelRequirement(requirementGroup, requirement);
         destinationLayout.addComponent(detailsPanelRequirement);
+
+        requirementGroup.getRequirements().add(requirement);
 
         Notification notification = new Notification("Your requirement has been added!");
         notification.setPosition(Position.TOP_CENTER);

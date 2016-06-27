@@ -26,7 +26,7 @@ public class DetailsPanelBuilder {
         return this;
     }
 
-    public DetailsPanel build() {
+/*    public DetailsPanel build() {
         return new DetailsPanel(caption, legislationReference, requirementGroups);
-    }
+    }*/
 }

@@ -4,6 +4,7 @@ import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 import eu.esens.espdvcd.designer.components.LegislationReferenceForm;
 import eu.esens.espdvcd.designer.components.RequirementGroupForm;
+import eu.esens.espdvcd.model.Criterion;
 import eu.esens.espdvcd.model.LegislationReference;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 
@@ -17,9 +18,9 @@ public class DetailsPanel extends Panel {
     VerticalLayout legislationReferenceLayout = new VerticalLayout();
     VerticalLayout requirementGroupsLayout = new VerticalLayout();
 
-    public DetailsPanel(String caption, LegislationReference legislationReference, List<RequirementGroup> requirementGroupList) {
+    public DetailsPanel(Criterion criterion) {
         setContent(detailsPanelLayout);
-        setCaption(caption);
+        setCaption(criterion.getName());
 
         detailsPanelLayout.addComponent(legislationReferenceLayout);
         detailsPanelLayout.addComponent(requirementGroupsPanel);
@@ -29,14 +30,13 @@ public class DetailsPanel extends Panel {
         requirementGroupsLayout.setMargin(true);
         requirementGroupsLayout.setSpacing(true);
 
-        if (legislationReference != null) {
-            LegislationReferenceForm legislationReferenceForm = new LegislationReferenceForm(legislationReference);
+        if (criterion.getLegislationReference() != null) {
+            LegislationReferenceForm legislationReferenceForm = new LegislationReferenceForm(criterion.getLegislationReference());
             legislationReferenceLayout.addComponent(legislationReferenceForm);
         }
 
-        for (RequirementGroup requirementGroup : requirementGroupList) {
-            //requirementGroupsLayout.addComponent(new RequirementGroupForm(requirementGroup, false, true));
-            requirementGroupsLayout.addComponent(new DetailsPanelRequirementGroup(requirementGroup));
+        for (RequirementGroup requirementGroup : criterion.getRequirementGroups()) {
+            requirementGroupsLayout.addComponent(new DetailsPanelRequirementGroup(criterion, null, requirementGroup));
         }
     }
 

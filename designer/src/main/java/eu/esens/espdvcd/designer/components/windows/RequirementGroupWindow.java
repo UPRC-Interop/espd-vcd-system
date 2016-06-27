@@ -7,6 +7,7 @@ import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.designer.DetailsPanel.DetailsPanelRequirement;
 import eu.esens.espdvcd.designer.DetailsPanel.DetailsPanelRequirementGroup;
 import eu.esens.espdvcd.designer.components.CriterionForm;
+import eu.esens.espdvcd.model.Criterion;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.RequestRequirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
@@ -16,6 +17,8 @@ import eu.esens.espdvcd.model.requirement.RequirementGroup;
  */
 public class RequirementGroupWindow extends Window {
 
+    Criterion parentCriterion;
+    RequirementGroup parentRequirementGroup;
     AbstractLayout destinationLayout = null;
     VerticalLayout windowLayout = new VerticalLayout();
 
@@ -23,7 +26,9 @@ public class RequirementGroupWindow extends Window {
     Button saveButton = new Button("Save");
     Button closeButton = new Button("Close");
 
-    public RequirementGroupWindow(AbstractLayout destinationLayout) {
+    public RequirementGroupWindow(Criterion parentCriterion, RequirementGroup parentRequirementGroup, AbstractLayout destinationLayout) {
+        this.parentCriterion = parentCriterion;
+        this.parentRequirementGroup = parentRequirementGroup;
         this.destinationLayout = destinationLayout;
 
         setCaption("Requirement Group window");
@@ -48,7 +53,7 @@ public class RequirementGroupWindow extends Window {
 
     public void onSave(Button.ClickEvent clickEvent) {
         RequirementGroup requirementGroup = new RequirementGroup("123");
-        DetailsPanelRequirementGroup detailsPanelRequirementGroup = new DetailsPanelRequirementGroup(requirementGroup);
+        DetailsPanelRequirementGroup detailsPanelRequirementGroup = new DetailsPanelRequirementGroup(parentCriterion, parentRequirementGroup, requirementGroup);
         destinationLayout.addComponent(detailsPanelRequirementGroup);
 
         Notification notification = new Notification("Your requirement group has been added!");

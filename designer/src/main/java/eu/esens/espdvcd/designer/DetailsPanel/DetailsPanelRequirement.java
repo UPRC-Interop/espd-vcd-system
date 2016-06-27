@@ -5,12 +5,15 @@ import com.vaadin.ui.*;
 import eu.esens.espdvcd.codelist.Codelists;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.requirement.Requirement;
+import eu.esens.espdvcd.model.requirement.RequirementGroup;
 
 /**
  * Created by ixuz on 6/23/16.
  */
 public class DetailsPanelRequirement extends VerticalLayout {
 
+    RequirementGroup requirementGroup;
+    Requirement requirement;
     HorizontalLayout columns = new HorizontalLayout();
     VerticalLayout columnLeft = new VerticalLayout();
     VerticalLayout columnRight = new VerticalLayout();
@@ -18,7 +21,9 @@ public class DetailsPanelRequirement extends VerticalLayout {
 
     Button deleteRequirementButton = new Button("");
 
-    public DetailsPanelRequirement(Requirement requirement) {
+    public DetailsPanelRequirement(RequirementGroup requirementGroup, Requirement requirement) {
+        this.requirementGroup = requirementGroup;
+        this.requirement = requirement;
         setStyleName("detailsPanelRequirement");
 
         columns.setSizeFull();
@@ -49,9 +54,23 @@ public class DetailsPanelRequirement extends VerticalLayout {
         deleteRequirementButton.setIcon(FontAwesome.REMOVE);
 
         deleteRequirementButton.addClickListener((clickEvent) -> {
+            deleteRequirement();
+
             ComponentContainer parent = (ComponentContainer) getParent();
             parent.removeComponent(this);
         });
+    }
+
+    public void deleteRequirement() {
+        requirementGroup.getRequirements().remove(requirement);
+    }
+
+    public RequirementGroup getRequirementGroup() {
+        return requirementGroup;
+    }
+
+    public Requirement getRequirement() {
+        return requirement;
     }
 
     public static String requirementResponseDataTypeToString(ResponseTypeEnum responseType) {
