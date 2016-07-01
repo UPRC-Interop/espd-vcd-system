@@ -577,4 +577,25 @@
     background-color: #fffef0;
   }
 
+  .evidenceButton {
+    background-image: none;
+    background-color: #569AC4;
+    box-shadow: inset 0px 0px 0px 0px #000;
+    border: 0px solid #569AC4;
+    color: #e3e3e3;
+    font-weight: bold;
+    font-size: 14px;
+    height: 24px;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin: 4px;
+  }
+
+  .evidenceUrlResponseFormLayout {
+    background-color: #f1f1f1;
+  }
+
+  .evidenceTitleLabel {
+    font-weight: bold;
+  }
 }
