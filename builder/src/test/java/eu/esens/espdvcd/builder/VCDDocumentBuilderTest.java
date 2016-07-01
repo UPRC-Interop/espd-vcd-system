@@ -34,7 +34,8 @@ public class VCDDocumentBuilderTest {
 
     @Before
     public void setUp() throws BuilderException, IOException {
-        System.err.println("----------- tmp dir: " + System.getProperty("java.io.tmpdir"));
+        //System.err.println("----------- tmp dir: " + System.getProperty("java.io.tmpdir"));
+        //System.err.println("----------- local evidence URI: " + EvidenceHelper.transformEvidenceURIFromLocalResourceToASiCResource("file:/C:/Users/ULFLOT~1/AppData/Local/Temp/N073_Cover%20Final%20deliverable%20for%20CWA%203456%20eTendering.doc.pdf"));
 
         InputStream isRes = BuilderESPDTest.class.getResourceAsStream("/espd-response_withEvidenceDocumentReferences.xml");
         Assert.assertNotNull(isRes);

@@ -1507,7 +1507,7 @@
                         <cbc:ID>9c9c5e8d-259e-4f5c-8b57-6f0e136b6d23</cbc:ID>
                         <cac:Attachment>
                            <cac:ExternalReference>
-                              <cbc:URI>file:/N073_Cover%20Final%20deliverable%20for%20CWA%203456%20eTendering.doc.pdf</cbc:URI>
+                              <cbc:URI>file:/C:/Users/Ulf%20Lotzmann/IdeaProjects/espd-vcd-system/builder/src/test/resources/evidence%20documents/N073_Cover%20Final%20deliverable%20for%20CWA%203456%20eTendering.doc.pdf</cbc:URI>
                            </cac:ExternalReference>
                         </cac:Attachment>
                      </cev:EvidenceDocumentReference>
@@ -1601,7 +1601,7 @@
                         <cbc:ID>9c9c5e8d-259e-4f5c-8b57-6f0e136b6d23</cbc:ID>
                         <cac:Attachment>
                            <cac:ExternalReference>
-                              <cbc:URI>file:/CWA3456%20Part%20120%20Profile%2056%20-%20Virtual%20Company%20Dossier.doc</cbc:URI>
+                              <cbc:URI>file:/C:/Users/Ulf%20Lotzmann/IdeaProjects/espd-vcd-system/builder/src/test/resources/evidence%20documents/CWA3456%20Part%20120%20Profile%2056%20-%20Virtual%20Company%20Dossier.doc</cbc:URI>
                            </cac:ExternalReference>
                         </cac:Attachment>
                      </cev:EvidenceDocumentReference>

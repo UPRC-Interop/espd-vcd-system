@@ -34,7 +34,7 @@ public class VCDDocumentBuilder extends DocumentBuilder {
     /**
      * List of documents attached to this ESPD to be part of the VCD.
      */
-    private List<File> documents = new ArrayList<>();
+    private List<URI> documents = new ArrayList<>();
 
     public VCDDocumentBuilder(ESPDRequest req, SignatureHelper signatureHelper) {
         super(req);
@@ -65,12 +65,15 @@ public class VCDDocumentBuilder extends DocumentBuilder {
         // Creates an AsicWriterFactory with default signature method
         AsicWriterFactory asicWriterFactory = AsicWriterFactory.newFactory();
 
-        // Creates the actual container with all the data objects (files) and signs it.
+        // Creates the actual container with all the data objects (files) and signs it
         try {
+            // Add the XML business document
             AsicWriter asicWriter = asicWriterFactory.newContainer(archiveOutputFile)
                  .add(espdStream, "espd.xml", MimeType.forString("application/xml"));
-            for (File document : documents) {
-                asicWriter.add(document);
+
+            // Add all found evidence documents with modified file entry name
+            for (URI document : documents) {
+                asicWriter.add(new File(document), EvidenceHelper.getASiCResourcePath(document.toString()));
             }
             asicWriter.sign(signatureHelper);
         }
@@ -78,7 +81,7 @@ public class VCDDocumentBuilder extends DocumentBuilder {
             Logger.getLogger(VCDDocumentBuilder.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        // Creates an input stream for the container.
+        // Creates an input stream for the container
         InputStream asic = null;
         try {
             asic = new FileInputStream(archiveOutputFile);
@@ -115,11 +118,16 @@ public class VCDDocumentBuilder extends DocumentBuilder {
             if (resp instanceof EvidenceURLResponse) {
                 String uriStr = ((EvidenceURLResponse)resp).getEvidenceURL();
                 if (uriStr != null) {
-                    URI uri = URI.create(uriStr);
-                    File document = new File(System.getProperty("java.io.tmpdir"), uri.getPath());
-                    if (document.exists()) {
-                        documents.add(document);
+                    try {
+                        URI uri = URI.create(uriStr);
+                        File document = new File(uri);
+                        if (document.exists()) {
+                            documents.add(uri);
+                        }
+                    } catch (Exception ex) {
+                        // do nothing
                     }
+
                 }
             }
         }
