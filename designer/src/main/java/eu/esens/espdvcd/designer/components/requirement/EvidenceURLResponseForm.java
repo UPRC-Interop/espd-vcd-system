@@ -1,29 +1,37 @@
 package eu.esens.espdvcd.designer.components.requirement;
 
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
+import com.vaadin.server.FileDownloader;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.Page;
+import com.vaadin.server.StreamResource;
 import com.vaadin.shared.Position;
 import com.vaadin.ui.*;
 import eu.esens.espdvcd.builder.ModelBuilder;
+import eu.esens.espdvcd.builder.XMLDocumentBuilder;
 import eu.esens.espdvcd.designer.components.ESPDRequestForm;
 import eu.esens.espdvcd.model.requirement.response.EvidenceURLResponse;
 
 import java.io.*;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.UUID;
 
 public class EvidenceURLResponseForm extends ResponseForm {
     private EvidenceURLResponse evidenceURLResponse = null;
     private TextField evidenceURL = new TextField("Evidence URL: ");
     private Button uploadEvidenceButton = new Button("Upload evidence");
+    private Button downloadEvidenceButton = new Button("Download evidence");
     private VerticalLayout layout = new VerticalLayout();
     private VerticalLayout selectMethodLayout = new VerticalLayout();
     private VerticalLayout uploadLayout = new VerticalLayout();
     private VerticalLayout urlLayout = new VerticalLayout();
     private VerticalLayout completedLayout = new VerticalLayout();
+    private VerticalLayout downloadLayout = new VerticalLayout();
 
     private Button selectFileButton = new Button("Evidence File");
     private Button selectUrlButton = new Button("Evidence URL");
@@ -43,6 +51,7 @@ public class EvidenceURLResponseForm extends ResponseForm {
         layout.addComponent(uploadLayout);
         layout.addComponent(urlLayout);
         layout.addComponent(completedLayout);
+        layout.addComponent(downloadLayout);
 
         // Select method layout
         Label selectMethodLabel = new Label("Select method");
@@ -139,7 +148,53 @@ public class EvidenceURLResponseForm extends ResponseForm {
         completedLayout.addComponent(evidenceLabel);
         completedLayout.addComponent(filenameLabel);
 
-        showSelectMethodLayout();
+        if (!readOnly) {
+            showSelectMethodLayout();
+        } else {
+            showDownloadLayout();
+        }
+
+        // Download layout
+        downloadLayout.addComponent(downloadEvidenceButton);
+
+        StreamResource.StreamSource source = new StreamResource.StreamSource()
+        {
+            public java.io.InputStream getStream()
+            {
+                try
+                {
+                    String filePath = null;
+                    try {
+                        filePath = new URI(evidenceURLResponse.getEvidenceURL()).getPath();
+                        File file = new File(filePath);
+                        FileInputStream fileInputStream = new FileInputStream(file);
+                        return fileInputStream;
+                    } catch (URISyntaxException e) {
+                        e.printStackTrace();
+                    }
+                } catch (FileNotFoundException e)
+                {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                return null;
+            }
+        };
+
+        if (evidenceURLResponse != null && evidenceURLResponse.getEvidenceURL() != null) {
+            try {
+                String filename = new File(new URI(evidenceURLResponse.getEvidenceURL()).getPath()).getName();
+                StreamResource downloadableResponse = new StreamResource(source, filename);
+
+                FileDownloader fileDownloader = new FileDownloader(downloadableResponse);
+                fileDownloader.extend(downloadEvidenceButton);
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+        } else {
+            downloadEvidenceButton.setReadOnly(true);
+            downloadEvidenceButton.setCaption("No evidence");
+        }
 
         // Bind fields
         final BeanFieldGroup<EvidenceURLResponse> binder = new BeanFieldGroup<>(EvidenceURLResponse.class);
@@ -163,6 +218,8 @@ public class EvidenceURLResponseForm extends ResponseForm {
         urlLayout.setEnabled(false);
         completedLayout.setVisible(false);
         completedLayout.setEnabled(false);
+        downloadLayout.setVisible(false);
+        downloadLayout.setEnabled(false);
     }
 
     public void showUploadLayout() {
@@ -174,6 +231,8 @@ public class EvidenceURLResponseForm extends ResponseForm {
         urlLayout.setEnabled(false);
         completedLayout.setVisible(false);
         completedLayout.setEnabled(false);
+        downloadLayout.setVisible(false);
+        downloadLayout.setEnabled(false);
     }
 
     public void showUrlLayout() {
@@ -185,6 +244,8 @@ public class EvidenceURLResponseForm extends ResponseForm {
         urlLayout.setEnabled(true);
         completedLayout.setVisible(false);
         completedLayout.setEnabled(false);
+        downloadLayout.setVisible(false);
+        downloadLayout.setEnabled(false);
     }
 
     public void showCompletedLayout() {
@@ -196,5 +257,20 @@ public class EvidenceURLResponseForm extends ResponseForm {
         urlLayout.setEnabled(false);
         completedLayout.setVisible(true);
         completedLayout.setEnabled(true);
+        downloadLayout.setVisible(false);
+        downloadLayout.setEnabled(false);
+    }
+
+    public void showDownloadLayout() {
+        selectMethodLayout.setVisible(false);
+        selectMethodLayout.setEnabled(false);
+        uploadLayout.setVisible(false);
+        uploadLayout.setEnabled(false);
+        urlLayout.setVisible(false);
+        urlLayout.setEnabled(false);
+        completedLayout.setVisible(false);
+        completedLayout.setEnabled(false);
+        downloadLayout.setVisible(true);
+        downloadLayout.setEnabled(true);
     }
 }
