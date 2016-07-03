@@ -5,7 +5,7 @@ import eu.esens.espdvcd.model.requirement.response.*;
 
 public class ResponseFormFactory {
 
-    public static ResponseForm buildResponseForm(Requirement requirement, boolean readOnly) {
+    public static ResponseForm buildResponseForm(Requirement requirement, int displayEvidences, boolean readOnly) {
 
         Response requirementResponse = requirement.getResponse();
         String caption = requirement.getDescription();
@@ -53,7 +53,7 @@ public class ResponseFormFactory {
                 return periodResponseForm;
             case EVIDENCE_URL:
                 EvidenceURLResponse evidenceURLResponse = (EvidenceURLResponse) requirementResponse;
-                EvidenceURLResponseForm evidenceURLResponseForm = new EvidenceURLResponseForm(evidenceURLResponse, caption, readOnly);
+                EvidenceURLResponseForm evidenceURLResponseForm = new EvidenceURLResponseForm(evidenceURLResponse, caption, displayEvidences, readOnly);
                 return evidenceURLResponseForm;
             case CODE:
                 EvidenceURLCodeResponse evidenceURLCodeResponse = (EvidenceURLCodeResponse) requirementResponse;

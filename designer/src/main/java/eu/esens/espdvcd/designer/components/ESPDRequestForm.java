@@ -34,7 +34,7 @@ public class ESPDRequestForm extends ESPDForm {
 
     private CriterionGroupForm manuallyAddedCriteriaGroupForm;
 
-    public ESPDRequestForm(Master view, ESPDRequest espdRequest, boolean readOnly) {
+    public ESPDRequestForm(Master view, ESPDRequest espdRequest, int displayEvidences, boolean readOnly) {
         super(view, espdRequest, "espd_template.xml");
         this.view = view;
         this.espd = espd;
@@ -56,7 +56,7 @@ public class ESPDRequestForm extends ESPDForm {
         selectAllExclusionCriteriaCheckbox.setReadOnly(readOnly);
         page2.addComponent(exclusionActionLayout);
 
-        addNewCriterionButton(espdRequest, page2);
+        addNewCriterionButton(espdRequest, page2, displayEvidences);
 
         selectAllExclusionCriteriaCheckbox.addValueChangeListener(this::onSelectAllExclusionCriteria);
         selectAllExclusionCriteriaCheckbox.setStyleName("espdRequestForm-checkbox");
@@ -65,7 +65,7 @@ public class ESPDRequestForm extends ESPDForm {
         page2.addComponent(criterionGroups);
         criterionGroupForm(espdRequest, view, espdRequest.getExclusionCriteriaList(), exclusionCriterionGroupForms, criterionGroups, readOnly);
 
-        addNewCriterionButton(espdRequest, page2);
+        addNewCriterionButton(espdRequest, page2, displayEvidences);
 
         // Page 3 - Selection
         page3 = newPage("Selection criteria", "Selection");
@@ -77,14 +77,14 @@ public class ESPDRequestForm extends ESPDForm {
         selectAllSelectionCriteriaCheckbox.setReadOnly(readOnly);
         page3.addComponent(selectionActionLayout);
 
-        addNewCriterionButton(espdRequest, page3);
+        addNewCriterionButton(espdRequest, page3, displayEvidences);
 
         selectAllSelectionCriteriaCheckbox.addValueChangeListener(this::onSelectAllSelectionCriteria);
         selectAllSelectionCriteriaCheckbox.setStyleName("espdRequestForm-checkbox");
 
         criterionGroupForm(espdRequest, view, espdRequest.getSelectionCriteriaList(),selectionCriterionGroupForms,page3, readOnly);
 
-        addNewCriterionButton(espdRequest, page3);
+        addNewCriterionButton(espdRequest, page3, displayEvidences);
 
         // Page 4 - Reduction of candidates
         page4 = newPage("Reduction of candidates", "Candidates");
@@ -96,14 +96,14 @@ public class ESPDRequestForm extends ESPDForm {
         selectAllReductionCriteriaCheckbox.setReadOnly(readOnly);
         page4.addComponent(reductionActionLayout);
 
-        addNewCriterionButton(espdRequest, page4);
+        addNewCriterionButton(espdRequest, page4, displayEvidences);
 
         selectAllReductionCriteriaCheckbox.addValueChangeListener(this::onSelectAllReductionCriteria);
         selectAllReductionCriteriaCheckbox.setStyleName("espdRequestForm-checkbox");
 
         criterionGroupForm(espdRequest, view, espdRequest.getReductionOfCandidatesCriteriaList(),reductionCriterionGroupForms,page4, readOnly);
 
-        addNewCriterionButton(espdRequest, page4);
+        addNewCriterionButton(espdRequest, page4, displayEvidences);
 
         // Page 5 - Data on economic operator
         page5 = newPage("Data on economic operator", "Economic operator");
@@ -115,20 +115,20 @@ public class ESPDRequestForm extends ESPDForm {
         selectAllEconomicOperatorCriteriaCheckbox.setReadOnly(readOnly);
         page5.addComponent(economicOperatorActionLayout);
 
-        addNewCriterionButton(espdRequest, page5);
+        addNewCriterionButton(espdRequest, page5, displayEvidences);
 
         selectAllEconomicOperatorCriteriaCheckbox.addValueChangeListener(this::onSelectAllEconomicOperatorCriteria);
         selectAllEconomicOperatorCriteriaCheckbox.setStyleName("espdRequestForm-checkbox");
 
         criterionGroupForm(espdRequest, view, espdRequest.getEORelatedCriteriaList(),economicOperatorCriterionGroupForms,page5, readOnly);
 
-        addNewCriterionButton(espdRequest, page5);
+        addNewCriterionButton(espdRequest, page5, displayEvidences);
 
         // Page 6 - Manually added criteria
         page6 = newPage("Manually added criteria", "Extra criteria");
-        addNewCriterionButton(espdRequest, page6);
+        addNewCriterionButton(espdRequest, page6, displayEvidences);
         page6.addComponent(manuallyAddedCriteriaGroupForm);
-        addNewCriterionButton(espdRequest, page6);
+        addNewCriterionButton(espdRequest, page6, displayEvidences);
 
         // Page 7 - Finish
         page7 = newPage("Finish", "Finish");
@@ -143,7 +143,7 @@ public class ESPDRequestForm extends ESPDForm {
                 criterionHash.put(criterion.getCriterionGroup(), new ArrayList<>());
             }
 
-            CriterionForm criterionForm = new CriterionForm(view, criterion, false, readOnly);
+            CriterionForm criterionForm = new CriterionForm(view, criterion, false, -1, readOnly);
             criterionHash.get(criterion.getCriterionGroup()).add(criterionForm);
         }
         for (Map.Entry<String, List<CriterionForm>> entry : criterionHash.entrySet()) {
@@ -217,13 +217,13 @@ public class ESPDRequestForm extends ESPDForm {
         UI.getCurrent().addWindow(criterionGroupWindow);
     }
 
-    private void addNewCriterionButton(ESPDRequest espdRequest, AbstractLayout layout) {
+    private void addNewCriterionButton(ESPDRequest espdRequest, AbstractLayout layout, int displayEvidences) {
         Button newCriterionButton = new Button("Add criterion", FontAwesome.PLUS);
         newCriterionButton.setStyleName("espdRequestForm-formButton");
         layout.addComponent(newCriterionButton);
 
         newCriterionButton.addClickListener((clickEvent) -> {
-            CriterionWindow criterionWindow = new CriterionWindow(espdRequest, view, manuallyAddedCriteriaGroupForm.getCriteriaLayout());
+            CriterionWindow criterionWindow = new CriterionWindow(espdRequest, view, manuallyAddedCriteriaGroupForm.getCriteriaLayout(), displayEvidences);
             criterionWindow.setCaption("Criterion window");
             UI.getCurrent().addWindow(criterionWindow);
         });

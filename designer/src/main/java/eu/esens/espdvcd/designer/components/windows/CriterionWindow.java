@@ -27,11 +27,13 @@ public class CriterionWindow extends Window {
     TextField caption = new TextField("Caption:");
     TextArea description = new TextArea("Description:");
     ComboBox typecode = new ComboBox("Type:");
+    int displayEvidences;
 
-    public CriterionWindow(ESPDRequest espd, Master view, AbstractLayout destinationLayout) {
+    public CriterionWindow(ESPDRequest espd, Master view, AbstractLayout destinationLayout, int displayEvidences) {
         this.espd = espd;
         this.view = view;
         this.destinationLayout = destinationLayout;
+        this.displayEvidences = displayEvidences;
 
         setContent(windowLayout);
         setWidth(600, Unit.PIXELS);
@@ -74,7 +76,7 @@ public class CriterionWindow extends Window {
         criterion.setTypeCode((String)typecode.getValue());
         criterion.setSelected(true);
         espd.getFullCriterionList().add(criterion);
-        CriterionForm criterionForm = new CriterionForm(view, criterion, false, false);
+        CriterionForm criterionForm = new CriterionForm(view, criterion, false, displayEvidences, false);
         destinationLayout.addComponent(criterionForm);
         UI.getCurrent().removeWindow(this);
         Notification notification = new Notification("Your criterion has been added!");

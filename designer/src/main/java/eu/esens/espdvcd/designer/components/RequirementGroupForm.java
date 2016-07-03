@@ -1,13 +1,14 @@
 package eu.esens.espdvcd.designer.components;
 
 import com.vaadin.ui.*;
+import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 
 public class RequirementGroupForm extends VerticalLayout {
 
-    public RequirementGroupForm(RequirementGroup requirementGroup, boolean includeResponses, boolean readOnly) {
+    public RequirementGroupForm(RequirementGroup requirementGroup, boolean includeResponses, int displayEvidences, boolean readOnly) {
 
         setMargin(false);
         setSpacing(true);
@@ -30,16 +31,24 @@ public class RequirementGroupForm extends VerticalLayout {
         panel.setContent(panelContent);
         addComponent(panel);
 
+        int numberOfComponentsInPanel = 0;
         // Add a sub requirement forms
         for (Requirement requirement : requirementGroup.getRequirements()) {
-            RequirementForm requirementForm = new RequirementForm(requirement, includeResponses, readOnly);
-            panelContent.addComponent(requirementForm);
+            if (!(displayEvidences == 0 && requirement.getResponseDataType() == ResponseTypeEnum.EVIDENCE_URL)) {
+                RequirementForm requirementForm = new RequirementForm(requirement, includeResponses, displayEvidences, readOnly);
+                panelContent.addComponent(requirementForm);
+                numberOfComponentsInPanel++;
+            }
         }
 
         // Add a sub requirement group forms
         for (RequirementGroup requirementGroupTemp : requirementGroup.getRequirementGroups()) {
-            RequirementGroupForm requirementGroupForm = new RequirementGroupForm(requirementGroupTemp, includeResponses, readOnly);
+            RequirementGroupForm requirementGroupForm = new RequirementGroupForm(requirementGroupTemp, includeResponses, displayEvidences, readOnly);
             panelContent.addComponent(requirementGroupForm);
+            numberOfComponentsInPanel++;
+        }
+        if (numberOfComponentsInPanel == 0) {
+            removeComponent(panel);
         }
     }
 }

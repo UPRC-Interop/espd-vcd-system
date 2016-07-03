@@ -37,7 +37,7 @@ public class EvidenceURLResponseForm extends ResponseForm {
     private Button selectUrlButton = new Button("Evidence URL");
     private Label filenameLabel = new Label("");
 
-    public EvidenceURLResponseForm(EvidenceURLResponse evidenceURLResponse, String caption, boolean readOnly) {
+    public EvidenceURLResponseForm(EvidenceURLResponse evidenceURLResponse, String caption, int displayEvidences, boolean readOnly) {
         this.evidenceURLResponse = evidenceURLResponse;
 
 //        uploadEvidenceButton.addClickListener(this::onEvidenceUpload);
@@ -146,9 +146,9 @@ public class EvidenceURLResponseForm extends ResponseForm {
         completedLayout.addComponent(evidenceLabel);
         completedLayout.addComponent(filenameLabel);
 
-        if (!readOnly) {
+        if (displayEvidences == 1) {
             showSelectMethodLayout();
-        } else {
+        } else if (displayEvidences == 2) {
             showDownloadLayout();
         }
 
@@ -199,7 +199,11 @@ public class EvidenceURLResponseForm extends ResponseForm {
         binder.bindMemberFields(this);
         binder.setItemDataSource(this.evidenceURLResponse);
         binder.setBuffered(false);
-        binder.setReadOnly(readOnly);
+        if (displayEvidences == 1) {
+            binder.setReadOnly(false);
+        } else {
+            binder.setReadOnly(readOnly);
+        }
     }
 
     public void onEvidenceUpload(Button.ClickEvent clickEvent) {

@@ -159,7 +159,7 @@ public class Sandbox extends Master {
 
         { // EvidenceURLResponseForm
             EvidenceURLResponse evidenceURLResponse = (EvidenceURLResponse) ResponseFactory.createResponse(ResponseTypeEnum.EVIDENCE_URL);
-            EvidenceURLResponseForm evidenceURLResponseForm = new EvidenceURLResponseForm(evidenceURLResponse, "EvidenceURLResponse test case", false);
+            EvidenceURLResponseForm evidenceURLResponseForm = new EvidenceURLResponseForm(evidenceURLResponse, "EvidenceURLResponse test case", 1, false);
             pageContent.addComponent(evidenceURLResponseForm);
 
             Button testButton = new Button("Test EvidenceURLResponse");

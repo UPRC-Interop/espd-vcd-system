@@ -24,7 +24,7 @@ public class CriterionForm extends VerticalLayout {
 
     private boolean readOnly = false;
 
-    public CriterionForm(Master view, SelectableCriterion criterion, boolean useRequirements, boolean readOnly) {
+    public CriterionForm(Master view, SelectableCriterion criterion, boolean useRequirements, int displayEvidences, boolean readOnly) {
         this.view = view;
         this.criterionReference = criterion;
         this.useRequirements = useRequirements;
@@ -57,7 +57,7 @@ public class CriterionForm extends VerticalLayout {
             columnB.addStyleName("ignoreCaptionCellWidth");
 
             for (RequirementGroup requirementGroup : criterion.getRequirementGroups()) {
-                RequirementGroupForm requirementGroupForm = new RequirementGroupForm(requirementGroup, this.useRequirements, readOnly);
+                RequirementGroupForm requirementGroupForm = new RequirementGroupForm(requirementGroup, this.useRequirements, displayEvidences, readOnly);
                 columnB.addComponent(requirementGroupForm);
             }
 

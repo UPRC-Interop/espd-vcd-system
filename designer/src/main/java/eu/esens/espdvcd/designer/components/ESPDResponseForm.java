@@ -25,7 +25,7 @@ public class ESPDResponseForm extends ESPDForm {
     private List<CriterionGroupForm> economicOperatorCriterionGroupForms = new ArrayList<>();
     private List<CriterionGroupForm> reductionCriterionGroupForms = new ArrayList<>();
 
-    public ESPDResponseForm(Master view, ESPDResponse espdResponse, boolean readOnly) {
+    public ESPDResponseForm(Master view, ESPDResponse espdResponse, int displayEvidences, boolean readOnly) {
         super(view, espdResponse, "espd.xml");
         this.espdResponse = espdResponse;
 
@@ -40,7 +40,7 @@ public class ESPDResponseForm extends ESPDForm {
                 economicOperatorCriterionHash.put(criterion.getCriterionGroup(), new ArrayList<CriterionForm>());
             }
 
-            CriterionForm criterionForm = new CriterionForm(view, criterion, true, readOnly);
+            CriterionForm criterionForm = new CriterionForm(view, criterion, true, displayEvidences, readOnly);
             economicOperatorCriterionHash.get(criterion.getCriterionGroup()).add(criterionForm);
         }
 
@@ -73,7 +73,7 @@ public class ESPDResponseForm extends ESPDForm {
                 exclusionCriterionHash.put(criterion.getCriterionGroup(), new ArrayList<CriterionForm>());
             }
 
-            CriterionForm criterionForm = new CriterionForm(view, criterion, true, readOnly);
+            CriterionForm criterionForm = new CriterionForm(view, criterion, true, displayEvidences, readOnly);
             exclusionCriterionHash.get(criterion.getCriterionGroup()).add(criterionForm);
         }
 
@@ -107,7 +107,7 @@ public class ESPDResponseForm extends ESPDForm {
                 selectionCriterionHash.put(criterion.getCriterionGroup(), new ArrayList<CriterionForm>());
             }
 
-            CriterionForm criterionForm = new CriterionForm(view, criterion, true, readOnly);
+            CriterionForm criterionForm = new CriterionForm(view, criterion, true, displayEvidences, readOnly);
             selectionCriterionHash.get(criterion.getCriterionGroup()).add(criterionForm);
         }
 
@@ -141,7 +141,7 @@ public class ESPDResponseForm extends ESPDForm {
                 reductionCriterionHash.put(criterion.getCriterionGroup(), new ArrayList<CriterionForm>());
             }
 
-            CriterionForm criterionForm = new CriterionForm(view, criterion, true, readOnly);
+            CriterionForm criterionForm = new CriterionForm(view, criterion, true, displayEvidences, readOnly);
             reductionCriterionHash.get(criterion.getCriterionGroup()).add(criterionForm);
         }
 
