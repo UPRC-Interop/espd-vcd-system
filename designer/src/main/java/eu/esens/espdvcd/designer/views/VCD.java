@@ -25,7 +25,7 @@ public class VCD extends Master {
     VerticalLayout panelLeftLayout = new VerticalLayout();
     VerticalLayout panelRightLayout = new VerticalLayout();
     Button panelLeftButtonImport = new Button("View existing ESPD Template");
-    Button panelRightButtonImport = new Button("View existing ESPD");
+    Button panelRightButtonImport = new Button("Import ESPD");
     private CriterionForm highlightedCriterion = null;
     private Panel uploadPanelLeft = new Panel();
     private Panel uploadPanelRight = new Panel();
@@ -64,7 +64,7 @@ public class VCD extends Master {
 
         Panel panelLeft = new Panel("Inspect an ESPD Template");
         panelLeft.setStyleName("EspdTemplate-panelLeft");
-        panels.addComponent(panelLeft);
+        //panels.addComponent(panelLeft);
 
         panelLeftLayout.setStyleName("panelLeftLayout");
         panelLeft.setContent(panelLeftLayout);
@@ -76,14 +76,14 @@ public class VCD extends Master {
         panelLeftButtonImport.addClickListener(this::onImportEspdTemplate);
         panelLeftLayout.addComponent(panelLeftButtonImport);
 
-        Panel panelRight = new Panel("Inspect an ESPD");
+        Panel panelRight = new Panel("Import and create a VCD");
         panelRight.setStyleName("EspdTemplate-panelRight");
         panels.addComponent(panelRight);
 
         panelRightLayout.setStyleName("panelRightLayout");
         panelRight.setContent(panelRightLayout);
 
-        Label panelRightDescription = new Label("A description about viewing an existing espd. More details goes here... More details goes here... More details goes here... More details goes here... More details goes here... More details goes here... More details goes here... More details goes here...");
+        Label panelRightDescription = new Label("A description about creating a VCD from an existing ESPD. More details goes here... More details goes here... More details goes here... More details goes here... More details goes here... More details goes here... More details goes here... More details goes here...");
         panelRightLayout.addComponent(panelRightDescription);
 
         panelRightButtonImport.addClickListener(this::onImportEspd);
@@ -143,12 +143,12 @@ public class VCD extends Master {
                     is.close();
                     panels.setVisible(false);
                 } catch (IOException e) {
-                    Notification.show("Please ensure that the file is a valid ESPD Request or ESPD Response",
+                    Notification.show("Please ensure that the file is a valid ESPD Response",
                             "Import failed",
                             Notification.Type.ERROR_MESSAGE);
                     e.printStackTrace();
                 } catch (Exception e) {
-                    Notification.show("Please ensure that the file is a valid ESPD Request or ESPD Response",
+                    Notification.show("Please ensure that the file is a valid ESPD Response",
                             "Import failed",
                             Notification.Type.ERROR_MESSAGE);
                     e.printStackTrace();
@@ -202,12 +202,12 @@ public class VCD extends Master {
                     is.close();
                     panels.setVisible(false);
                 } catch (IOException e) {
-                    Notification.show("Please ensure that the file is a valid ESPD Request or ESPD Response",
+                    Notification.show("Please ensure that the file is a valid ESPD Response",
                             "Import failed",
                             Notification.Type.ERROR_MESSAGE);
                     e.printStackTrace();
                 } catch (Exception e) {
-                    Notification.show("Please ensure that the file is a valid ESPD Request or ESPD Response",
+                    Notification.show("Please ensure that the file is a valid ESPD Response",
                             "Import failed",
                             Notification.Type.ERROR_MESSAGE);
                     e.printStackTrace();

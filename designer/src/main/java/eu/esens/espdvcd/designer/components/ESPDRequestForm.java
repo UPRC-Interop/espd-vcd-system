@@ -132,6 +132,8 @@ public class ESPDRequestForm extends ESPDForm {
 
         // Page 7 - Finish
         page7 = newPage("Finish", "Finish");
+
+        setExportXmlResource();
     }
 
     public void criterionGroupForm(ESPDRequest espd, Master view, List<SelectableCriterion> criterionList, List<CriterionGroupForm> criterionGroupForms, VerticalLayout page, boolean readOnly)

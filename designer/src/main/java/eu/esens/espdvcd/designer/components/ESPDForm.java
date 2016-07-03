@@ -7,14 +7,25 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.*;
+import eu.esens.espdvcd.builder.VCDDocumentBuilder;
 import eu.esens.espdvcd.builder.XMLDocumentBuilder;
 import eu.esens.espdvcd.designer.views.Espd;
 import eu.esens.espdvcd.designer.views.EspdTemplate;
 import eu.esens.espdvcd.designer.views.Master;
 import eu.esens.espdvcd.designer.views.Viewer;
 import eu.esens.espdvcd.model.ESPDRequest;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import eu.esens.espdvcd.model.ESPDResponse;
+import no.difi.asic.SignatureHelper;
 
 public class ESPDForm extends VerticalLayout {
 
@@ -32,9 +43,14 @@ public class ESPDForm extends VerticalLayout {
     private int currentPageIndex = 0;
     private VerticalLayout pagesLayout = new VerticalLayout();
 
+    private String exportFileName;
+
+    private static final String KEY_STORE_RESOURCE_NAME = "kontaktinfo-client-test.jks";
+
     public ESPDForm(Master view, ESPDRequest espdRequest, String exportFileName) {
         this.view = view;
         this.espdRequest = espdRequest;
+        this.exportFileName = exportFileName;
 
         setWidth("100%");
         setStyleName("espdRequestForm-layout");
@@ -70,13 +86,6 @@ public class ESPDForm extends VerticalLayout {
         next.setStyleName("espdRequestForm-next");
         exportConsole.setStyleName("espdRequestForm-finish");
         exportFile.setStyleName("espdRequestForm-finish");
-
-        StreamResource downloadableResource = new StreamResource(() -> {
-            return (new XMLDocumentBuilder(espdRequest).getAsInputStream());            
-        }, exportFileName);
-
-        FileDownloader fileDownloader = new FileDownloader(downloadableResource);
-        fileDownloader.extend(exportFile);
 
         showPage(currentPageIndex);
     }
@@ -193,5 +202,77 @@ public class ESPDForm extends VerticalLayout {
         // Display espd request xml button
         String xml = new XMLDocumentBuilder(espdRequest).getAsString();
         System.out.println("Xml: " + xml);
+    }
+
+    protected void setExportXmlResource() {
+        StreamResource downloadableResource = new StreamResource(() -> {
+            return (new XMLDocumentBuilder(espdRequest).getAsInputStream());
+        }, exportFileName);
+
+        FileDownloader fileDownloader = new FileDownloader(downloadableResource);
+        fileDownloader.extend(exportFile);
+    }
+
+    protected void setExportAsicResource() {
+        StreamResource downloadableResource = new StreamResource(() -> {
+            InputStream asic = null;
+            try {
+                SignatureHelper signature = new SignatureHelper(getKeyStoreFile(), keyStorePassword(), privateKeyPassword());
+                VCDDocumentBuilder db = new VCDDocumentBuilder(espdRequest, signature);
+                asic = db.getAsInputStream();
+            } catch (IOException exception) {
+                exception.printStackTrace();
+            }
+
+            return (asic);
+        }, "VCD");
+
+        FileDownloader fileDownloader = new FileDownloader(downloadableResource);
+        fileDownloader.extend(exportFile);
+    }
+
+    /**
+     * temporary method for signing the ASiC - copied from no.difi.asic.TestUtil
+     * @return key store file
+     */
+    private File getKeyStoreFile() throws IllegalStateException {
+
+        URL keyStoreResourceURL = this.getClass().getClassLoader().getResource(KEY_STORE_RESOURCE_NAME);
+        try {
+            URI uri = keyStoreResourceURL.toURI();
+
+            File file = new File(uri);
+            if (!file.canRead()) {
+                throw new IllegalStateException("Unable to locate " + KEY_STORE_RESOURCE_NAME + " in class path");
+            }
+            return file;
+
+        } catch (URISyntaxException e) {
+            throw new IllegalStateException("Unable to convert URL of keystore " + KEY_STORE_RESOURCE_NAME + " into a URI");
+        }
+    }
+
+    /**
+     * temporary method for signing the ASiC - copied from no.difi.asic.TestUtil
+     * @return
+     */
+    private String keyStorePassword() {
+        return "changeit";
+    }
+
+    /**
+     * temporary method for signing the ASiC - copied from no.difi.asic.TestUtil
+     * @return
+     */
+    private String privateKeyPassword() {
+        return "changeit";
+    }
+
+    /**
+     * temporary method for signing the ASiC - copied from no.difi.asic.TestUtil
+     * @return
+     */
+    private String keyPairAlias() {
+        return "client_alias";
     }
 }
