@@ -94,8 +94,6 @@ public class EvidenceURLResponseForm extends ResponseForm {
                             Notification.Type.ERROR_MESSAGE)
                             .show(Page.getCurrent());
                     return null;
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
                 return fos;
             }
