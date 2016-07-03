@@ -131,7 +131,7 @@ public class Master extends VerticalLayout implements View {
             button.addClickListener(this::onNavigatorEspd);
         }
         {
-            Button button = new Button("VCD", FontAwesome.HAND_PAPER_O);
+            Button button = new Button("VCD", FontAwesome.ENVELOPE);
             button.setStyleName("navigatorButtonDark");
             button.setWidth("100%");
             button.setHeight(60, Unit.PIXELS);
