@@ -1,5 +1,6 @@
 package eu.esens.espdvcd.builder.schema;
 
+import eu.esens.espdvcd.builder.EvidenceHelper;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.EODetails;
 import eu.esens.espdvcd.model.ESPDResponse;
@@ -333,7 +334,13 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
                     drt.setAttachment(new AttachmentType());
                     drt.getAttachment().setExternalReference(new ExternalReferenceType());
                     drt.getAttachment().getExternalReference().setURI(new URIType());
-                    drt.getAttachment().getExternalReference().getURI().setValue(((EvidenceURLResponse) response).getEvidenceURL());
+                    //drt.getAttachment().getExternalReference().getURI().setValue(((EvidenceURLResponse) response).getEvidenceURL());
+                    // UL: modification for handling VCD resources
+                    drt.getAttachment().getExternalReference().getURI().setValue(
+                            EvidenceHelper.transformEvidenceURIFromLocalResourceToASiCResource(
+                                    ((EvidenceURLResponse) response).getEvidenceURL()
+                            )
+                    );
                     evType.getEvidenceDocumentReference().add(drt);
                     rType.getEvidence().add(evType);
                 }
