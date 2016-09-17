@@ -5,6 +5,7 @@
  */
 package eu.esens.espdvcd.retriever.criteria;
 
+import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.builder.model.ModelFactory;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.CriterionType;
@@ -23,7 +24,7 @@ import javax.xml.bind.JAXB;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import org.w3c.dom.DOMException;
+import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.DescriptionType;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -39,11 +40,16 @@ public class ECertisCriteriaExtractor implements CriteriaExtractor {
     private final List<CriterionType> criterionTypeList;
     private static final String ECERTIS_BASE_URL = "https://ec.europa.eu/growth/tools-databases/ecertisrest/";
     private static final String ECERTIS_AVAILABLE_CRITERIA = "criteria/";
-
+    private static final String DESC_NOT_PROVIDED = "Description not provided from e-Certis";
+    
     public ECertisCriteriaExtractor() throws IOException {
-        criterionTypeList = getCritiriaIDs()
+        criterionTypeList = getCriteriaIDs()
                 .stream()
-                .map(id -> getCritirion(id))
+                .map(id -> getCriterion(id))
+                .filter(ct -> ct != null)
+                // if description not provided from e-Certis (null)
+                // discard criterion
+                .filter(ct -> ct.getDescription() != null)
                 .collect(Collectors.toList());
     }
 
@@ -75,9 +81,9 @@ public class ECertisCriteriaExtractor implements CriteriaExtractor {
         return new ArrayList<>(initialSet);
     }
 
-    // get a specific criterion based on critirion id
-    // TO DO. see how to avoid null in return type
-    private CriterionType getCritirion(String cID) {
+    // Get a specific criterion based on critirion id
+    private CriterionType getCriterion(String cID) {
+        CriterionType ct = null;
         try {
             URL url = new URL(ECERTIS_BASE_URL + ECERTIS_AVAILABLE_CRITERIA + cID + "/");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -85,8 +91,8 @@ public class ECertisCriteriaExtractor implements CriteriaExtractor {
             connection.setRequestProperty("Accept", "application/xml");
 
             if (connection.getResponseCode() != 200) {
-                throw new RuntimeException("Failed : HTTP error code : " + connection.getResponseCode());
-            }
+                throw new BuilderException("Failed : HTTP error code : " + connection.getResponseCode());
+            } 
 
             BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             StringBuilder builder = new StringBuilder();
@@ -97,19 +103,30 @@ public class ECertisCriteriaExtractor implements CriteriaExtractor {
             }
 
             StringReader reader = new StringReader(builder.toString());
-            CriterionType ct = JAXB.unmarshal(reader, CriterionType.class);
-                        
-            return ct;
-
-        } catch (IOException e) {
-
-        }
-        return null;
+            ct = JAXB.unmarshal(reader, CriterionType.class);
+            
+            // if description not provided from e-Certis (null)
+            // set criterioType description to "Description not provided from e-Certis"
+//            if (ct.getDescription() == null) {
+//                // approach 1
+//                DescriptionType dt = new DescriptionType();
+//                dt.setValue(DESC_NOT_PROVIDED);
+//                dt.setLanguageID("en");
+//                dt.setLanguageLocaleID(null);
+//                ct.setDescription(dt);
+//            }
+                       
+            // close all streams
+            br.close();
+            
+        } catch (IOException | BuilderException e) {
+            
+        } 
+        return ct;
     }
 
-    // get all criteria ids (using DOM)
-    // TO DO. Do something when list is empty !!!
-    private List<String> getCritiriaIDs() {
+    // Get all criteria ids (using DOM)
+    private List<String> getCriteriaIDs() {
         List<String> criteriaIDs = new ArrayList<>();
         final String criterionElem = "ccv:Criterion";
         final String idElem = "cbc:ID";
@@ -131,8 +148,8 @@ public class ECertisCriteriaExtractor implements CriteriaExtractor {
                 }
             }
 
-        } catch (ParserConfigurationException | SAXException | IOException | DOMException e) {
-
+        } catch (ParserConfigurationException | SAXException | IOException e) {
+           
         }
         return criteriaIDs;
     }
