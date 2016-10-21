@@ -19,10 +19,7 @@ import org.junit.Test;
 public class ECertisCriteriaExtractorTest {
 
     static int maxDepth = 1;
-    private static final String ECERTIS_BASE_URL = "https://ec.europa.eu/growth/tools-databases/ecertisrest/";
-    private static final String ECERTIS_AVAILABLE_CRITERIA = "criteria/";
-    
-    
+        
     public ECertisCriteriaExtractorTest() {
     }
 
@@ -43,6 +40,7 @@ public class ECertisCriteriaExtractorTest {
                         sc.getRequirementGroups().forEach(rg -> traverseRequirementGroup(rg, 1));
                     });
             System.out.println("Max Depth: " + maxDepth);
+            System.out.println("Criterion #: " + ce.getFullList().size());
         } catch (IOException e) {
 
         }
