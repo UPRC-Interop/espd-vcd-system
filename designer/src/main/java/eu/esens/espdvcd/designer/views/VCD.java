@@ -27,8 +27,8 @@ public class VCD extends Master {
     Button panelLeftButtonImport = new Button("View existing ESPD Template");
     Button panelRightButtonImport = new Button("Import ESPD");
     private CriterionForm highlightedCriterion = null;
-    private Panel uploadPanelLeft = new Panel();
-    private Panel uploadPanelRight = new Panel();
+    private final Panel uploadPanelLeft = new Panel();
+    private final Panel uploadPanelRight = new Panel();
     GridLayout gridLayout = new GridLayout(2,1);
     VerticalLayout mainColumn = new VerticalLayout();
 
@@ -135,13 +135,11 @@ public class VCD extends Master {
 
             public void uploadSucceeded(Upload.SucceededEvent event) {
 
-                try {
-                    InputStream is = new FileInputStream(file);
-                    espdRequest = new ModelBuilder().importFrom(is).createESPDRequest();
-                    espdRequestForm = new ESPDRequestForm(thisView, espdRequest, 1, true);
-                    mainColumn.addComponent(espdRequestForm);
-                    is.close();
-                    panels.setVisible(false);
+                try (InputStream is = new FileInputStream(file)) {
+                        espdRequest = new ModelBuilder().importFrom(is).createESPDRequest();
+                        espdRequestForm = new ESPDRequestForm(thisView, espdRequest, 1, true);
+                        mainColumn.addComponent(espdRequestForm);
+                        panels.setVisible(false);
                 } catch (IOException e) {
                     Notification.show("Please ensure that the file is a valid ESPD Response",
                             "Import failed",
@@ -154,7 +152,7 @@ public class VCD extends Master {
                     e.printStackTrace();
                 }
             }
-        };
+        }
 
         EspdUploader2 receiver = new EspdUploader2();
         Upload upload = new Upload(null, receiver);
@@ -176,6 +174,7 @@ public class VCD extends Master {
         class EspdUploader2 implements Upload.Receiver, Upload.SucceededListener {
             public File file;
 
+            @Override
             public OutputStream receiveUpload(String filename,
                                               String mimeType) {
                 FileOutputStream fos = null; // Stream to write to
@@ -192,15 +191,14 @@ public class VCD extends Master {
                 return fos;
             }
 
+            @Override
             public void uploadSucceeded(Upload.SucceededEvent event) {
 
-                try {
-                    InputStream is = new FileInputStream(file);
-                    espdResponse = new ModelBuilder().importFrom(is).createESPDResponse();
-                    espdResponseForm = new ESPDResponseForm(thisView, espdResponse, 1, true);
-                    mainColumn.addComponent(espdResponseForm);
-                    is.close();
-                    panels.setVisible(false);
+                try (InputStream is = new FileInputStream(file)) {
+                        espdResponse = new ModelBuilder().importFrom(is).createESPDResponse();
+                        espdResponseForm = new ESPDResponseForm(thisView, espdResponse, 1, true);
+                        mainColumn.addComponent(espdResponseForm);
+                        panels.setVisible(false);
                 } catch (IOException e) {
                     Notification.show("Please ensure that the file is a valid ESPD Response",
                             "Import failed",
@@ -213,7 +211,7 @@ public class VCD extends Master {
                     e.printStackTrace();
                 }
             }
-        };
+        }
 
         EspdUploader2 receiver = new EspdUploader2();
         Upload upload = new Upload(null, receiver);
