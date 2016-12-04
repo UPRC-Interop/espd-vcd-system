@@ -27,19 +27,14 @@ public class CountryComboBox extends ComboBox {
             String flagPath = "img/flags_iso/24/" + countryId.toLowerCase() + ".png";
 
             UI ui = UI.getCurrent();
-            InputStream s = ui.getSession().getService().getThemeResourceAsStream(ui, ui.getTheme(), flagPath);
-            if (s != null) {
+            try (InputStream s = ui.getSession().getService().getThemeResourceAsStream(ui, ui.getTheme(), flagPath)) {
                 ThemeResource iconResource = new ThemeResource("img/flags_iso/24/" + countryId.toLowerCase() + ".png");
                 setItemIcon(countryId, iconResource);
-                try {
-                    s.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            } else {
+            } catch (IOException ex) {
                 ThemeResource iconResource = new ThemeResource("img/flags_iso/24/null.png");
                 setItemIcon(countryId, iconResource);
             }
+            
         }
 
         this.setInputPrompt("Select country");
