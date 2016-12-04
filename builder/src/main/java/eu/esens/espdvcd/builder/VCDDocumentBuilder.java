@@ -12,17 +12,12 @@ import no.difi.asic.AsicWriterFactory;
 import no.difi.asic.AsicWriter;
 import no.difi.asic.MimeType;
 import no.difi.asic.SignatureHelper;
-import no.difi.xsd.asic.model._1.AsicManifest;
-import org.etsi.uri._02918.v1_2.DataObjectReferenceType;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.net.URL;
 
 /**
  * Created by Ulf Lotzmann on 08/06/2016.
