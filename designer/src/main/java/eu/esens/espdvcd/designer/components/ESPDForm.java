@@ -225,7 +225,7 @@ public class ESPDForm extends VerticalLayout {
             }
 
             return (asic);
-        }, "VCD");
+        }, "VCD.asice");
 
         FileDownloader fileDownloader = new FileDownloader(downloadableResource);
         fileDownloader.extend(exportFile);

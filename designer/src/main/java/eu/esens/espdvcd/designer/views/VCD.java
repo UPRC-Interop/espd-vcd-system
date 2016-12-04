@@ -62,20 +62,6 @@ public class VCD extends Master {
         panels.setWidth("100%");
         mainColumn.addComponent(panels);
 
-        Panel panelLeft = new Panel("Inspect an ESPD Template");
-        panelLeft.setStyleName("EspdTemplate-panelLeft");
-        //panels.addComponent(panelLeft);
-
-        panelLeftLayout.setStyleName("panelLeftLayout");
-        panelLeft.setContent(panelLeftLayout);
-
-        Label panelLeftDescription = new Label("A description about viewing a existing espd template. More details goes here... More details goes here... More details goes here... More details goes here... More details goes here... More details goes here... More details goes here... More details goes here...");
-        panelLeftLayout.addComponent(panelLeftDescription);
-
-        panelLeftButtonImport.setStyleName("espdTemplate-panelButton");
-        panelLeftButtonImport.addClickListener(this::onImportEspdTemplate);
-        panelLeftLayout.addComponent(panelLeftButtonImport);
-
         Panel panelRight = new Panel("Import and create a VCD");
         panelRight.setStyleName("EspdTemplate-panelRight");
         panels.addComponent(panelRight);
@@ -166,7 +152,6 @@ public class VCD extends Master {
         panelLeftLayout.addComponent(uploadPanelLeft);
     }
 
-
     public void onImportEspd(Button.ClickEvent clickEvent) {
         VCD thisView = this;
         panelRightButtonImport.setVisible(false);
@@ -196,7 +181,7 @@ public class VCD extends Master {
 
                 try (InputStream is = new FileInputStream(file)) {
                         espdResponse = new ModelBuilder().importFrom(is).createESPDResponse();
-                        espdResponseForm = new ESPDResponseForm(thisView, espdResponse, 1, true);
+                        espdResponseForm = new ESPDResponseForm(thisView, espdResponse, 1, false);
                         mainColumn.addComponent(espdResponseForm);
                         panels.setVisible(false);
                 } catch (IOException e) {
