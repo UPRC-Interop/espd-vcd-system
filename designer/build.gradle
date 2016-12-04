@@ -41,6 +41,8 @@ gretty {
     fileLogEnabled          = true
     logDir                  = "${project.buildDir}"
     logFileName             = "${project.name}"
+    
+    jvmArgs= ['-Dorg.eclipse.jetty.annotations.maxWait=120']
 }
 
 dependencies {
