@@ -12,6 +12,7 @@ import eu.esens.espdvcd.builder.XMLDocumentBuilder;
 import eu.esens.espdvcd.designer.views.Espd;
 import eu.esens.espdvcd.designer.views.EspdTemplate;
 import eu.esens.espdvcd.designer.views.Master;
+import eu.esens.espdvcd.designer.views.VCD;
 import eu.esens.espdvcd.designer.views.Viewer;
 import eu.esens.espdvcd.model.ESPDRequest;
 
@@ -176,7 +177,12 @@ public class ESPDForm extends VerticalLayout {
         if (view instanceof Viewer) {
             Viewer espdView = (Viewer) view;
             espdView.resetView();
+        } 
+        if (view instanceof VCD) {
+            VCD vcdView = (VCD) view;
+            vcdView.resetView();
         }
+        
     }
 
     /**

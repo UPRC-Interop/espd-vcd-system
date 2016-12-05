@@ -51,7 +51,7 @@ public class ESPDResponseForm extends ESPDForm {
         for (SelectableCriterion criterion : espdResponse.getEORelatedCriteriaList()) {
 
             if (!economicOperatorCriterionHash.containsKey(criterion.getCriterionGroup())) {
-                economicOperatorCriterionHash.put(criterion.getCriterionGroup(), new ArrayList<CriterionForm>());
+                economicOperatorCriterionHash.put(criterion.getCriterionGroup(), new ArrayList<>());
             }
 
             CriterionForm criterionForm = new CriterionForm(view, criterion, true, displayEvidences, readOnly);
