@@ -117,12 +117,15 @@ public class ESPDResponseForm extends ESPDForm {
 
         for (SelectableCriterion criterion : espdResponse.getSelectionCriteriaList()) {
 
-            if (!selectionCriterionHash.containsKey(criterion.getTypeCode())) {
+            //if (!selectionCriterionHash.containsKey(criterion.getTypeCode())) {
+            // bugfix UL_2016-12-22: only one criterion per criterion group was displayed - wrong map key was used
+            if (!selectionCriterionHash.containsKey(criterion.getCriterionGroup())) {
                 selectionCriterionHash.put(criterion.getCriterionGroup(), new ArrayList<CriterionForm>());
             }
 
             CriterionForm criterionForm = new CriterionForm(view, criterion, true, displayEvidences, readOnly);
             selectionCriterionHash.get(criterion.getCriterionGroup()).add(criterionForm);
+
         }
 
         for (Map.Entry<String, List<CriterionForm>> entry : selectionCriterionHash.entrySet()) {
