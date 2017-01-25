@@ -1,15 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package eu.esens.espdvcd.retriever.criteria;
 
 import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.builder.model.ModelFactory;
 import eu.esens.espdvcd.builder.utils.Constants;
 import eu.esens.espdvcd.model.SelectableCriterion;
-import eu.esens.espdvcd.retriever.criteria.interfaces.IECertisService;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.CriterionType;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -29,17 +23,11 @@ import javax.xml.bind.JAXB;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.DescriptionType;
-import okhttp3.ResponseBody;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
 
 /**
  *
@@ -55,43 +43,35 @@ public class ECertisCriteriaExtractor implements CriteriaExtractor {
     public ECertisCriteriaExtractor() throws IOException {
         // ---------------------------------------------------------------------
         // Way 1 -> Not-Multithreading
-        numberOfCriteria = 0;
-        criterionTypeList = getCriteriaIDs()
-                .stream()
-                .map(id -> getCriterion(id))
-                .filter(ct -> ct != null)
-                // if description not provided from e-Certis (null)
-                // discard criterion
-                .filter(ct -> ct.getDescription() != null)
-                .collect(Collectors.toList());
+//        numberOfCriteria = 0;
+//        criterionTypeList = getCriteriaIDs()
+//                .stream()
+//                .map(id -> getCriterion(id))
+//                .filter(ct -> ct != null)
+//                // if description not provided from e-Certis (null)
+//                // discard criterion
+//                .filter(ct -> ct.getDescription() != null)
+//                .collect(Collectors.toList());
         // ---------------------------------------------------------------------
         
         // ---------------------------------------------------------------------
         // Way 2 -> Multithreading with Runnable and ExecutorService
-//        criterionTypeList = new ArrayList<>();
-//        
-//        ExecutorService executorService = Executors.newCachedThreadPool();
-//        List<String> criteriaIDs = getCriteriaIDs();
-//        numberOfCriteria = criteriaIDs.size();
-//        getCriteriaIDs()
-//                .stream()
-//                .forEach(cID -> executorService.execute(new GetCriterionTask(cID)));
-//        
-//        executorService.shutdown();
-//        try {
-//            executorService.awaitTermination(1, TimeUnit.MINUTES);
-//        } catch (InterruptedException e) {
-//            System.err.println("InterruptedException: " + e.getMessage());
-//        }
-        // ---------------------------------------------------------------------
-        // Way 3 -> Multithreading with Retrofit 2
-//        criterionTypeList = new ArrayList<>();
-//        List<String> criteriaIDs = getCriteriaIDs();
-//        numberOfCriteria = criteriaIDs.size();
-//        criteriaIDs
-//                .stream()
-//                .forEach(cID -> addCriterionR2(cID));
-        // ---------------------------------------------------------------------
+        criterionTypeList = new ArrayList<>();
+        
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        List<String> criteriaIDs = getCriteriaIDs();
+        numberOfCriteria = criteriaIDs.size();
+        getCriteriaIDs()
+                .stream()
+                .forEach(cID -> executorService.execute(new GetCriterionTask(cID)));
+        
+        executorService.shutdown();
+        try {
+            executorService.awaitTermination(1, TimeUnit.MINUTES);
+        } catch (InterruptedException e) {
+            System.err.println("InterruptedException: " + e.getMessage());
+        }
+     
     }
 
     @Override
@@ -235,43 +215,7 @@ public class ECertisCriteriaExtractor implements CriteriaExtractor {
     private synchronized void increaseDiscarded() {
         discarded++;
     }
-       
-//    private void addCriterionR2(String cID) {
-//        Retrofit retrofit = new Retrofit.Builder()
-//                .baseUrl(Constants.ECERTIS_URL)
-//                .build();
-//        IECertisService eCertisService = retrofit.create(IECertisService.class);
-//        Call<ResponseBody> getCriterionCall = eCertisService.getCriterionR2(cID);
-//        getCriterionCall.enqueue(new Callback<ResponseBody>() {
-//            @Override
-//            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-//                if (response.isSuccessful()) {
-//                    // task available
-//                    try {
-//                        String criterion = response.body().string();
-//                        StringReader reader = new StringReader(criterion);
-//                        CriterionType ct = JAXB.unmarshal(reader, CriterionType.class);
-//                        if (ct != null && ct.getDescription() != null) {
-//                            addCriterion(ct);
-//                        } else {
-//                            increaseDiscarded();
-//                        }
-//                    } catch (IOException e) {
-//                        System.err.println("IOException: " + e.getMessage());
-//                    }
-//                } else {
-//                    // error response, no access to resource?
-//                    System.err.println("error response, no access to resource?");
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ResponseBody> call, Throwable t) {
-//                
-//            }
-//        });
-//    }
-    
+   
     private class GetCriterionTask implements Runnable {
         
         private String cID;
