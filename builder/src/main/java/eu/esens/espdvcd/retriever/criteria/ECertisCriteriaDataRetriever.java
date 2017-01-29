@@ -3,8 +3,9 @@ package eu.esens.espdvcd.retriever.criteria;
 import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.builder.utils.Constants;
 import eu.esens.espdvcd.codelist.Codelists;
-import eu.esens.espdvcd.model.requirement.RequirementGroup;
+
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.CriterionType;
+import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementGroupType;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -36,32 +37,41 @@ public class ECertisCriteriaDataRetriever implements CriteriaDataRetriever {
         euCriteriaIds = getEuCriteriaIds();
     }
     
+    /**
+     * 
+     * @param euCriterionId
+     * @param countryCode
+     * @return 
+     */
     @Override
     public List<CriterionType> getNationalCriterionMapping(String euCriterionId, String countryCode) {
         List<CriterionType> nationalCriteria = new ArrayList<>();
-        if (isCountryCodeExists(countryCode) && isEuCriterionIdExists(euCriterionId)) {
+        
+        boolean isCountryCodeExists = isCountryCodeExists(countryCode);
+        boolean isEuCriterionIdExists = isEuCriterionIdExists(euCriterionId);
+        
+        if (isCountryCodeExists && isEuCriterionIdExists) {
+            // get national criteria ids
+            // use them in order to get national criteria data
             nationalCriteria = getNationalCriteriaIdsByCountryCode(countryCode)
                     .stream()
                     .map(nationalCriterionId -> getCriterion(nationalCriterionId))
                     .collect(Collectors.toList());
         } else {
-            System.out.println("Country code does not exists...");
+            if (!isCountryCodeExists) System.out.println("Country code " + countryCode + " does not exist...");
+            if (!isEuCriterionIdExists) System.out.println("EU criterion id " + euCriterionId + " does not exist...");            
         }
+        
         return nationalCriteria;
     }
-
+        
+    /**
+     * Get a specific criterion based on critirion id
+     * @param criterionId
+     * @return 
+     */
     @Override
-    public List<CriterionType> getCriteria(String euCriterionId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<RequirementGroup> getEvidences(String euCriterionId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    // Get a specific criterion based on critirion id
-    private CriterionType getCriterion(String criterionId) {
+    public CriterionType getCriterion(String criterionId) {
         CriterionType ct = null;
         try {
             URL url = new URL(Constants.ECERTIS_URL + Constants.AVAILABLE_CRITERIA + criterionId + "/");
@@ -91,7 +101,37 @@ public class ECertisCriteriaDataRetriever implements CriteriaDataRetriever {
         } catch (IOException | BuilderException e) {
 
         }
+        // check if criterion exists
+        if (ct == null) System.out.println("Criterion with id " + criterionId + " does not exist");
         return ct;
+    }
+
+    /**
+     * 
+     * @param criterionId
+     * @return 
+     */
+    @Override
+    public List<RequirementGroupType> getEvidences(String criterionId) {
+        List<RequirementGroupType> evidences = new ArrayList<>();
+        
+        if (isEuCriterionIdExists(criterionId)) {
+            List<CriterionType> subCriterions = getCriterion(criterionId).getSubCriterion();
+            
+            for (CriterionType ct : subCriterions) {
+                System.out.println("Criterion name : " + ct.getName().getValue());            
+                for (RequirementGroupType rgt : ct.getRequirementGroup()) {
+                    System.out.print(rgt.getID().getValue() + " - ");
+                }
+                
+                System.out.println();
+            }
+                    
+        } else {
+            System.out.println("EU criterion " + criterionId + " id does not exist...");            
+        }
+        
+        return evidences;
     }
     
     // Get all national criteria ids by country code (using DOM)
@@ -151,12 +191,12 @@ public class ECertisCriteriaDataRetriever implements CriteriaDataRetriever {
         }
         return criteriaIDs;
     }
-    
-    private boolean isEuCriterionIdExists(String sourceId) {
-        return euCriteriaIds.contains(sourceId);   
+       
+    public boolean isEuCriterionIdExists(String criterionId) {
+        return euCriteriaIds.contains(criterionId);   
     }
     
-    private boolean isCountryCodeExists(String countryCode) {
+    public boolean isCountryCodeExists(String countryCode) {
         return Codelists.CountryIdentification
                 .containsId(countryCode.toUpperCase());
     }

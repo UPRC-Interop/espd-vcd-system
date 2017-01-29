@@ -5,9 +5,9 @@
  */
 package eu.esens.espdvcd.retriever.criteria;
 
-import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.CriterionType;
+import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementGroupType;
 import java.util.List;
 
 /**
@@ -15,27 +15,27 @@ import java.util.List;
  * @author Konstantinos Raptis
  */
 public interface CriteriaDataRetriever {
+
+    /**
+     * 
+     * @param euCriterionId
+     * @param countryCode
+     * @return 
+     */
+    List<CriterionType> getNationalCriterionMapping(String euCriterionId, String countryCode);
     
     /**
      * 
-     * @param sourceId
-     * @param targetCountryCode
+     * @param criterionId
      * @return 
      */
-    List<CriterionType> getNationalCriterionMapping(String sourceId, String targetCountryCode);
+    CriterionType getCriterion(String criterionId);
     
     /**
      * 
-     * @param euID
+     * @param criterionId
      * @return 
      */
-    List<CriterionType> getCriteria(String euID);
-    
-    /**
-     * 
-     * @param euID
-     * @return 
-     */
-    List<RequirementGroup> getEvidences(String euID);
+    List<RequirementGroupType> getEvidences(String criterionId);
     
 }

@@ -4,9 +4,7 @@ package eu.esens.espdvcd.builder;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDResponse;
 
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 
 import org.junit.Assert;
 import org.junit.Before;
