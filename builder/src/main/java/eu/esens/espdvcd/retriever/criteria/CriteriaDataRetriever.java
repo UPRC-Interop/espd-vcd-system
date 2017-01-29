@@ -5,7 +5,6 @@
  */
 package eu.esens.espdvcd.retriever.criteria;
 
-import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.CriterionType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementGroupType;
 import java.util.List;
