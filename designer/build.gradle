@@ -27,7 +27,7 @@ repositories {
 apply plugin: 'org.akhikhl.gretty'
 
 gretty {
-    port                    = 8090
+  //  port                    = 8090
     contextPath             = '/'
     scanInterval            = 1
     fastReload              = true
@@ -47,10 +47,10 @@ dependencies {
     compile project(':builder')
     compile project(':codelists')
     compile project(':model')
-    compile 'com.vaadin:vaadin-server:7.6.0'
-    compile 'com.vaadin:vaadin-client-compiled:7.6.0'
-    compile 'com.vaadin:vaadin-client-compiler:7.6.0'
-    compile 'com.vaadin:vaadin-themes:7.6.0'
+    compile 'com.vaadin:vaadin-server:7.7.5'
+    compile 'com.vaadin:vaadin-client-compiled:7.7.5'
+    compile 'com.vaadin:vaadin-client-compiler:7.7.5'
+    compile 'com.vaadin:vaadin-themes:7.7.5'
     compile 'org.vaadin.addons:jain-i18N:1.1.9'
 }
 
