@@ -1,7 +1,10 @@
 package eu.esens.espdvcd.builder;
 
 import eu.esens.espdvcd.retriever.criteria.ECertisCriteriaExtractor;
+import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.CriterionType;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -22,25 +25,30 @@ public class ECertisCriteriaDataRetrieverTest {
     @Test
     public void testGetNationalCriterionMapping() {
         // European Criterion Id
-        // String criterionId = "d726bac9-e153-4e75-bfca-c5385587766d";
+        // String sourceId = "d726bac9-e153-4e75-bfca-c5385587766d";
+        String sourceId = "d726bac9-e153-4e75-bfca-c5385587766dadawd";
         
         // National Criterion Id - it origin
-        String sourceId = "704390c8-34e3-4337-9ab1-f5795bed1a3b";
+        // String sourceId = "704390c8-34e3-4337-9ab1-f5795bed1a3b";
         
         // Valid Country Code
         // String targetCountryCode = "it";
-        String targetCountryCode = "be";   
+        // String targetCountryCode = "be";   
+        String targetCountryCode = "bdadada";   
         
         ECertisCriteriaExtractor cdr = new ECertisCriteriaExtractor();
-        cdr.getNationalCriterionMapping(sourceId, targetCountryCode)
-                .forEach(mappedCriterion -> 
+                
+        List<CriterionType> mappedCriterions = cdr.getNationalCriterionMapping(sourceId, targetCountryCode);
+        mappedCriterions.forEach(mappedCriterion -> 
                         System.out.println(
                                 "Criterion with Id <<" + sourceId + ">>" 
                                 + " Mapped to " +  cdr.getCountryNameByCountryCode(targetCountryCode) 
-                                + " National Criterion with Id " + "<<" + mappedCriterion.getID().getValue() + ">>"));
-        System.out.println("Criterion #: " + cdr.getNationalCriterionMapping(sourceId, targetCountryCode).size());
+                                + " National Criterion with Id " 
+                                + "<<" + mappedCriterion.getID().getValue() + ">>"));
+        System.out.println("Criterion #: " + mappedCriterions.size());
     }
-   
+    
+    @Ignore
     @Test
     public void testGetCriterion() {
         // A Valid Criterion Id (Can be a non-European Criterion Id)
