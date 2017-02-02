@@ -12,6 +12,8 @@ import org.apache.commons.lang3.text.WordUtils;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CountryComboBox extends ComboBox {
 
@@ -27,8 +29,10 @@ public class CountryComboBox extends ComboBox {
             String flagPath = "img/flags_iso/24/" + countryId.toLowerCase() + ".png";
 
             UI ui = UI.getCurrent();
-            InputStream s = ui.getSession().getService().getThemeResourceAsStream(ui, ui.getTheme(), flagPath);
-            if (s != null) {
+            InputStream s;
+            try {
+                s = ui.getSession().getService().getThemeResourceAsStream(ui, ui.getTheme(), flagPath);
+          
                 ThemeResource iconResource = new ThemeResource("img/flags_iso/24/" + countryId.toLowerCase() + ".png");
                 setItemIcon(countryId, iconResource);
                 try {
@@ -36,8 +40,8 @@ public class CountryComboBox extends ComboBox {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            } else {
-                ThemeResource iconResource = new ThemeResource("img/flags_iso/24/null.png");
+                 } catch (IOException ex) {
+                 ThemeResource iconResource = new ThemeResource("img/flags_iso/24/null.png");
                 setItemIcon(countryId, iconResource);
             }
         }
