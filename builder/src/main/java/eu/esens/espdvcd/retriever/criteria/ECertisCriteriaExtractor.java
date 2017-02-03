@@ -12,13 +12,22 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import javax.xml.bind.JAXB;
 import javax.xml.parsers.DocumentBuilder;
@@ -37,12 +46,9 @@ import org.xml.sax.SAXException;
 public class ECertisCriteriaExtractor implements CriteriaExtractor, CriteriaDataRetriever {
 
     // Contains All european Criteria as CriterionType Objects
-    private final List<CriterionType> criterionTypeList;
-    // Contains All european Criteria as CriterionType Objects with their Ids as Keys
-    private final Map<String, CriterionType> criterionTypeMap;
-    // Contains All European Criteria Ids 
-    private final List<String> criterionTypeIdList;
-
+    // !!! Warning : Criteria in which Description is not Provided has been Discarded
+    private List<CriterionType> criterionTypeList;
+            
     public enum JurisdictionLevelCodeOrigin {
 
         EUROPEAN(), NATIONAL(), UNKNOWN()
@@ -50,25 +56,57 @@ public class ECertisCriteriaExtractor implements CriteriaExtractor, CriteriaData
     }
 
     public ECertisCriteriaExtractor() {
-        criterionTypeIdList = getAllEuropeanCriteriaIds();
-        criterionTypeList = criterionTypeIdList
-                .parallelStream()
-                .map(id -> getCriterion(id))
-                // getCriterion will return null if criterion not exists
-                // discard that value from our stream
-                .filter(ct -> ct != null)
-                // if description not provided from e-Certis (null), discard criterion
-                .filter(ct -> ct.getDescription() != null)
-                .collect(Collectors.toList());
-        // fill criterionType Map
-        criterionTypeMap = new HashMap<>();
-        criterionTypeList.forEach(ct -> {
-            criterionTypeMap.put(ct.getID().getValue(), ct);
-        });
+        
     }
-
+    
+    private void initCriterionTypeList() 
+             throws RetrieverException {
+        
+        // If Not Initialized Yet, Initialize CriterionType List
+        if (criterionTypeList == null) {
+            criterionTypeList = new ArrayList<>();
+            List<String> ctIds = getAllEuropeanCriteriaIds();
+            
+            // Synchronized Approach (1)
+            ExecutorService executorService = Executors.newCachedThreadPool();
+            Set<Callable<CriterionType>> ctCallableSet = new HashSet<>();
+            
+            ctIds.forEach(ctId -> {
+                ctCallableSet.add((Callable<CriterionType>) () -> getCriterion(ctId));
+            });
+                        
+            try {
+                List<Future<CriterionType>> fctList = executorService.invokeAll(ctCallableSet);
+                
+                for (Future fct : fctList) {
+                    CriterionType ct = (CriterionType) fct.get();
+                    // If Description is not provided, do not add Criterion
+                    if (ct.getDescription() != null) criterionTypeList.add(ct);
+                }
+                
+            } catch (InterruptedException | ExecutionException ex) {
+                Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.SEVERE, null, ex);
+                throw new RetrieverException(ex);
+            }
+                        
+            executorService.shutdown();
+            
+            ////////////////////////////////////////////////////////////////////
+            
+            // Sequential Approach (2)
+//            for (String ctId : ctIds) {
+//                CriterionType ct = getCriterion(ctId);
+//                // If Description is not provided, do not add Criterion
+//                if (ct.getDescription() != null) criterionTypeList.add(ct);
+//            }
+        }
+    }
+        
     @Override
-    public synchronized List<SelectableCriterion> getFullList() {
+    public synchronized List<SelectableCriterion> getFullList() 
+            throws RetrieverException {
+        
+        initCriterionTypeList();
         List<SelectableCriterion> lc
                 = criterionTypeList.stream()
                         .map((CriterionType c) -> ModelFactory.ESPD_REQUEST.extractSelectableCriterion(c))
@@ -77,12 +115,18 @@ public class ECertisCriteriaExtractor implements CriteriaExtractor, CriteriaData
     }
 
     @Override
-    public synchronized List<SelectableCriterion> getFullList(List<SelectableCriterion> initialList) {
+    public synchronized List<SelectableCriterion> getFullList(List<SelectableCriterion> initialList) 
+            throws RetrieverException {
+        
+        initCriterionTypeList();
         return getFullList(initialList, false);
     }
 
     @Override
-    public synchronized List<SelectableCriterion> getFullList(List<SelectableCriterion> initialList, boolean addAsSelected) {
+    public synchronized List<SelectableCriterion> getFullList(List<SelectableCriterion> initialList, boolean addAsSelected) 
+            throws RetrieverException {
+        
+        initCriterionTypeList();
         System.out.println("Criterion List Size:" + criterionTypeList.size());
         Set<SelectableCriterion> initialSet = new LinkedHashSet<>();
         initialSet.addAll(initialList);
@@ -102,67 +146,48 @@ public class ECertisCriteriaExtractor implements CriteriaExtractor, CriteriaData
      * @return All National Criteria which mapped with Source Criterion Id.
      */
     @Override
-    public List<CriterionType> getNationalCriterionMapping(String sourceId, String targetCountryCode) {
-            // throws RetrieverException {
-        List<CriterionType> nationalCriteria = new ArrayList<>();
+    public List<CriterionType> getNationalCriterionMapping(String sourceId, String targetCountryCode)
+             throws RetrieverException {
+        List<CriterionType> naCts = new ArrayList<>();
 
         boolean isCountryCodeExists = isCountryCodeExists(targetCountryCode);
-        JurisdictionLevelCodeOrigin jlco = getCriterionJurisdictionLevelCode(sourceId);
-
+        
         if (isCountryCodeExists) {
-
+            
+            CriterionType sourceCriterion = getCriterion(sourceId);
+            JurisdictionLevelCodeOrigin jlco = getCriterionJurisdictionLevelCodeOrigin(sourceCriterion);
+            
             switch (jlco) {
                 case EUROPEAN:
-                    // approach 1 (maybe its slow)
-//                    nationalCriteria = getNationalCriteriaIdsByCountryCode(targetCountryCode)
-//                            .parallelStream()
-//                            .filter(ncId -> getParentCriterionId(ncId).equals(sourceId))
-//                            .map(ncId -> getCriterion(ncId))
-//                            .collect(Collectors.toList());
-                                        
-                    // approach 2 (faster)
-                    nationalCriteria = criterionTypeMap.get(sourceId).getSubCriterion().parallelStream()
-                            .filter(subCt -> {
-                                if (!subCt.getLegislationReference().isEmpty()) {
-                                    if (subCt.getLegislationReference().get(0).getJurisdictionLevelCode().getValue().equals(targetCountryCode)) {
-                                        return true;
-                                    }
-                                }
-                                return false;
-                            })
-                            .collect(Collectors.toList());
+                    naCts = extractNational(sourceCriterion, targetCountryCode);
                     break;
                 case NATIONAL:
-                    nationalCriteria = getNationalCriteriaIdsByCountryCode(targetCountryCode)
-                            .parallelStream()
-                            .filter(ncId -> getParentCriterionId(ncId)
-                            .equals(getParentCriterionId(sourceId)))
-                            .map(ncId -> getCriterion(ncId))
-                            .collect(Collectors.toList());
+                    CriterionType euCt = getParentCriterion(sourceCriterion);
+                    naCts = extractNational(euCt, targetCountryCode);
                     break;
                 case UNKNOWN:
-                    // throw new RetrieverException("Criterion Id <<" + sourceId + ">> does not exist...");
-                    System.out.println("Criterion Id <<" + sourceId + ">> does not exist...");
+                    throw new RetrieverException("Criterions with Id <<" + sourceId 
+                            + ">> JurisdictionLevelCode Origin cannot be Classified as EUROPEAN or National...");
             }
 
         } else {
-            // throw new RetrieverException("Country Code <<" + targetCountryCode + ">> does not exist...");
-            System.out.println("Country Code <<\" + targetCountryCode + \">> does not exist...");
+            throw new RetrieverException("Country Code <<" + targetCountryCode + ">> does not exist...");
         }
 
-        return nationalCriteria;
+        return naCts;
     }
-
+    
     /**
      *
      * @param criterionId The Criterion Id (European or National).
      * @return Criterion Data of Criterion with given Id or null if Criterion does not exist.
      */
     @Override
-    public CriterionType getCriterion(String criterionId) {
-            // throws RetrieverException {
+    public CriterionType getCriterion(String criterionId) 
+            throws RetrieverException {
         CriterionType ct = null;
-        
+        BufferedReader br = null;
+                
         try {
             URL url = new URL(Constants.ECERTIS_URL + Constants.AVAILABLE_EU_CRITERIA + criterionId + "/");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -176,7 +201,7 @@ public class ECertisCriteriaExtractor implements CriteriaExtractor, CriteriaData
                 throw new RetrieverException("HTTP error code : " + connection.getResponseCode());
             }
 
-            BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             StringBuilder builder = new StringBuilder();
             String output;
 
@@ -186,86 +211,75 @@ public class ECertisCriteriaExtractor implements CriteriaExtractor, CriteriaData
 
             StringReader reader = new StringReader(builder.toString());
             ct = JAXB.unmarshal(reader, CriterionType.class);
+                   
+        } catch (RetrieverException ex) {
+            Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RetrieverException("Criterion with Id <<" + criterionId + ">> does not exist", ex);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RetrieverException("Malformed URL", ex);
+        } catch (IOException ex) {
+            Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RetrieverException("Error when trying to connect with e-Certis service", ex);
+        } finally {
             // close all streams
-            br.close();
-        } catch (IOException e) {
-            System.err.println("IOException: " + e.getMessage());
-        } catch (RetrieverException e) {
-            System.err.println("RetrieverException: " + e.getMessage());
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.SEVERE, null, e);
+                    throw new RetrieverException("Error when trying to close reader", e);
+                }
+            }
         }
-        
-        // check if criterion exists
-        if (ct == null) {
-            System.out.println("Criterion with id " + criterionId + " does not exist");
-        }
+                       
         return ct;
     }
 
     /**
      *
-     * @param criterionId A European Criterion Id
+     * @param criterionId 
      * @return
      */
     @Override
-    public List<RequirementGroupType> getEvidences(String criterionId) {
-            // throws RetrieverException {
+    public List<RequirementGroupType> getEvidences(String criterionId) 
+            throws RetrieverException {
+        
         List<RequirementGroupType> evidences = new ArrayList<>();
-
-        if (isEuropeanCriterion(criterionId)) {
-            List<CriterionType> subCriterions = getCriterion(criterionId).getSubCriterion();
-
-            for (CriterionType ct : subCriterions) {
-                System.out.println("Criterion name : " + ct.getName().getValue());
-                for (RequirementGroupType rgt : ct.getRequirementGroup()) {
-                    System.out.print(rgt.getID().getValue() + " - ");
-                }
-                System.out.println();
-            }
-
-        } else {
-            System.out.println("EU criterion " + criterionId + " id does not exist...");
+        
+        CriterionType ct = getCriterion(criterionId);
+        JurisdictionLevelCodeOrigin jlco = getCriterionJurisdictionLevelCodeOrigin(ct);        
+        
+        switch (jlco) {
+            case EUROPEAN:
+                
+                break;
+            case NATIONAL:
+                
+                break;
         }
-
         return evidences;
     }
-
-    // Get All National Criteria Ids by Country Code (using DOM)
-    private List<String> getNationalCriteriaIdsByCountryCode(String countryCode) {
-        List<String> nationalCriteriaIds = new ArrayList<>();
-        final String criterionElem = "ccv:Criterion";
-        final String idElem = "cbc:ID";
-
-        try {
-            URL url = new URL(Constants.ECERTIS_URL + Constants.AVAILABLE_EU_CRITERIA + "?nationalEntity=" + countryCode);
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(url.openStream());
-            doc.getDocumentElement().normalize();
-            NodeList nList = doc.getElementsByTagName(criterionElem);
-
-            for (int index = 0; index < nList.getLength(); index++) {
-                Node nNode = nList.item(index);
-
-                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-                    Element eElement = (Element) nNode;
-                    nationalCriteriaIds.add(eElement.getElementsByTagName(idElem).item(0).getTextContent());
-                }
-            }
-
-        } catch (ParserConfigurationException | SAXException | IOException e) {
-
-        }
-        return nationalCriteriaIds;
+    
+    private List<RequirementGroupType> extractEvidences(CriterionType nationalCriterion) {
+        return null;
     }
-
-    // Get Parent Criterion Id of a National Criterion (using DOM)
-    private String getParentCriterionId(String criterionId) {
-        String parentCriterionId = null;
+    
+    // Extract All National Criteria of Given European Criterion by Given Country Code
+    private List<CriterionType> extractNational(CriterionType euCt, String countryCode) {
+        return getSubCriterion(euCt, countryCode);
+    }
+    
+    // Get Parent Criterion of a National Criterion (using DOM)
+    private CriterionType getParentCriterion(CriterionType ct) 
+            throws RetrieverException {
+        CriterionType pc = null;
+        String pcId = null;
         final String parentCriterionElem = "ccv:ParentCriterion";
         final String idElem = "cbc:ID";
 
         try {
-            URL url = new URL(Constants.ECERTIS_URL + Constants.AVAILABLE_EU_CRITERIA + criterionId + "/");
+            URL url = new URL(Constants.ECERTIS_URL + Constants.AVAILABLE_EU_CRITERIA + ct.getID().getValue() + "/");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(url.openStream());
@@ -277,17 +291,29 @@ public class ECertisCriteriaExtractor implements CriteriaExtractor, CriteriaData
 
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element eElement = (Element) nNode;
-                    parentCriterionId = eElement.getElementsByTagName(idElem).item(0).getTextContent();
+                    pcId = eElement.getElementsByTagName(idElem).item(0).getTextContent();
                 }
             }
-
-        } catch (ParserConfigurationException | SAXException | IOException e) {
-
+            
+            if (pcId == null) throw new RetrieverException("Criterion Id Cannot be found...");
+            pc = getCriterion(pcId);
+            
+            
+        } catch (ParserConfigurationException | SAXException | IOException ex) {
+            Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RetrieverException("Error when trying to get Parent Criterion of <<" + ct.getID().getValue() + ">>", ex);
         }
-        return parentCriterionId;
+        return pc;
     }
-
-    // Get all eu criteria ids (using DOM)
+    
+    // Get SubCriterion/s of a European Criterion by Country Code
+    private List<CriterionType> getSubCriterion(CriterionType ct, String countryCode) {
+        return ct.getSubCriterion().stream().filter(theCt -> theCt.getLegislationReference().get(0)
+                .getJurisdictionLevelCode().getValue().equals(countryCode))
+                .collect(Collectors.toList());
+    }
+    
+    // Get All European Criteria Ids (using DOM)
     private List<String> getAllEuropeanCriteriaIds() {
         List<String> criteriaIDs = new ArrayList<>();
         final String criterionElem = "ccv:Criterion";
@@ -315,13 +341,14 @@ public class ECertisCriteriaExtractor implements CriteriaExtractor, CriteriaData
         }
         return criteriaIDs;
     }
-        
-    private JurisdictionLevelCodeOrigin getCriterionJurisdictionLevelCode(String criterionId) {
-            // throws RetrieverException {
+    
+    // Extract Given Criterion JurisdictionLevelCode Origin
+    private JurisdictionLevelCodeOrigin getCriterionJurisdictionLevelCodeOrigin(CriterionType ct) {
+            
         JurisdictionLevelCodeOrigin jlco = JurisdictionLevelCodeOrigin.UNKNOWN;
-        CriterionType ct = getCriterion(criterionId);
-
-        if (ct != null && !ct.getLegislationReference().isEmpty()) {
+        
+        if (!ct.getLegislationReference().isEmpty()) {
+            // Getting 1st LegislationReference's value in order to evaluate JurisdictionLevelCode Origin
             String jlcValue = ct.getLegislationReference().get(0)
                     .getJurisdictionLevelCode()
                     .getValue();
@@ -334,19 +361,11 @@ public class ECertisCriteriaExtractor implements CriteriaExtractor, CriteriaData
         }
         return jlco;
     }
-
-    private boolean isEuropeanCriterion(String criterionId) {
-        return criterionTypeIdList.contains(criterionId);
-    }
-
+    
+    // User Codelists in order to check if given Country Code is Valid
     private boolean isCountryCodeExists(String countryCode) {
         return Codelists.CountryIdentification
                 .containsId(countryCode.toUpperCase());
     }
-    
-    public String getCountryNameByCountryCode(String countryCode) {
-        return Codelists.CountryIdentification
-                .getValueForId(countryCode.toUpperCase());
-    }
-    
+       
 }

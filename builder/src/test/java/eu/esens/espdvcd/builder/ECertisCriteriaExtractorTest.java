@@ -3,6 +3,7 @@ package eu.esens.espdvcd.builder;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.retriever.criteria.ECertisCriteriaExtractor;
+import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -26,6 +27,7 @@ public class ECertisCriteriaExtractorTest {
      */
     @Test
     public void testGetFullList() {
+        try {
             ECertisCriteriaExtractor ce = new ECertisCriteriaExtractor();
             ce.getFullList().stream()
                     .forEach( (SelectableCriterion sc) -> {
@@ -34,6 +36,9 @@ public class ECertisCriteriaExtractorTest {
                     });
             System.out.println("Max Depth: " + maxDepth);
             System.out.println("Criterion #: " + ce.getFullList().size());
+        } catch (RetrieverException ex) {
+            System.err.println(ex);
+        }
     }
 
     private void traverseRequirementGroup(RequirementGroup rg, int depth) {
