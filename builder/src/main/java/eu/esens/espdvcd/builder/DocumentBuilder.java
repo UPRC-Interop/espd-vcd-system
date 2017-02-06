@@ -76,19 +76,9 @@ public class DocumentBuilder {
     private ESPDRequestType finalize(ESPDRequestType reqType) {
 
         // Finalizes the ESPDRequest Type, adding the Date and Time of Issue etc
-        reqType.setUBLVersionID(SchemaFactory.ESPD_REQUEST.createUBL21VersionIdType());
-
-        reqType.setCustomizationID(SchemaFactory.ESPD_REQUEST.createBIICustomizationIdType("urn:www.cenbii.eu:transaction:biitrns070:ver3.0"));
-        reqType.setVersionID(SchemaFactory.ESPD_REQUEST.createVersionIDType("1"));
-
-        reqType.setCopyIndicator(new CopyIndicatorType());
-        reqType.getCopyIndicator().setValue(false);
-
-        Date now = new Date();
-        GregorianCalendar c = new GregorianCalendar();
-        c.setTime(now);
 
         try {
+            GregorianCalendar c = new GregorianCalendar();
             XMLGregorianCalendar xmlDate = createECCompliantDate(c);
 
             reqType.setIssueDate(new IssueDateType());
@@ -113,19 +103,8 @@ public class DocumentBuilder {
     private ESPDResponseType finalize(ESPDResponseType resType) {
 
         // Finalizes the ESPDResponse Type, adding the Date and Time of Issue etc
-        resType.setUBLVersionID(SchemaFactory.ESPD_RESPONSE.createUBL21VersionIdType());
-
-        resType.setCustomizationID(SchemaFactory.ESPD_RESPONSE.createBIICustomizationIdType("urn:www.cenbii.eu:transaction:biitrns092:ver3.0"));
-        resType.setVersionID(SchemaFactory.ESPD_RESPONSE.createVersionIDType("1"));
-
-        resType.setCopyIndicator(new CopyIndicatorType());
-        resType.getCopyIndicator().setValue(false);
-
-        Date now = new Date();
-        GregorianCalendar c = new GregorianCalendar();
-        c.setTime(now);
-
         try {
+            GregorianCalendar c = new GregorianCalendar();
             XMLGregorianCalendar xmlDate = createECCompliantDate(c);
 
             resType.setIssueDate(new IssueDateType());
@@ -154,7 +133,7 @@ public class DocumentBuilder {
                         c.get(Calendar.YEAR),
                         c.get(Calendar.MONTH) + 1,
                         c.get(Calendar.DAY_OF_MONTH),
-                        c.get(Calendar.HOUR),
+                        c.get(Calendar.HOUR_OF_DAY),
                         c.get(Calendar.MINUTE),
                         c.get(Calendar.SECOND),
                         DatatypeConstants.FIELD_UNDEFINED,
