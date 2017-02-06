@@ -110,7 +110,7 @@ public interface SchemaExtractor {
         if (cd != null) {
 
             if (cd.getProcurementPublicationNumber() != null) {
-                dr.setID(createISOIECIDType(cd.getProcurementPublicationNumber()));
+                dr.setID(createGROWTemporaryId(cd.getProcurementPublicationNumber()));
             }
 
             dr.setDocumentTypeCode(createDocumentTypeCode("TED_CN"));
@@ -252,9 +252,9 @@ public interface SchemaExtractor {
         DocumentTypeCodeType dtc = new DocumentTypeCodeType();
         dtc.setListAgencyID("EU-COM-GROW");
         dtc.setListID("ReferencesTypeCodes");
-        //dtc.setListVersionID("1.0");
+        dtc.setListVersionID("1.0");
         // modification UL_2016-12-22: updated list version
-        dtc.setListVersionID("1.0.2");
+        //dtc.setListVersionID("1.0.2");
 
         dtc.setValue(code);
         return dtc;

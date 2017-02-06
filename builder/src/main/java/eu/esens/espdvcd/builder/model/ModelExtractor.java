@@ -1,6 +1,5 @@
 package eu.esens.espdvcd.builder.model;
 
-import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.CADetails;
 import eu.esens.espdvcd.model.LegislationReference;
