@@ -114,6 +114,8 @@ public interface ModelExtractor {
         if (rgType.getID() != null) {
             String id = rgType.getID().getValue();
             rg = new RequirementGroup(id);
+            if (rgType.getPi() != null)
+                rg.setCondition(rgType.getPi());
         }
         
 

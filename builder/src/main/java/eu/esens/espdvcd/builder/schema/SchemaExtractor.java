@@ -77,6 +77,7 @@ public interface SchemaExtractor {
                 .collect(Collectors.toList()));
 
         rgType.setID(createDefaultIDType(rg.getID()));
+        rgType.setPi(rg.getCondition());
 
         return rgType;
     }
