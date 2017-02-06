@@ -207,7 +207,8 @@ public interface SchemaExtractor {
         // modification UL_2016-12-22: updated ListAgencyID
         countryCodeType.setListAgencyID("EU-COM-GROW");
 
-        countryCodeType.setListName("ISO 3166-1");
+        //Updated to follow ESPD Service 2017.01.01 release
+        countryCodeType.setListName("CountryCodeIdentifier");
         //countryCodeType.setListVersionID("1.0");
         // modification UL_2016-12-22: updated list version and added listID
         countryCodeType.setListVersionID("1.0.2");
