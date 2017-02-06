@@ -77,6 +77,7 @@ public interface SchemaExtractor {
                 .collect(Collectors.toList()));
 
         rgType.setID(createDefaultIDType(rg.getID()));
+        rgType.setPi(rg.getCondition());
 
         return rgType;
     }
@@ -109,7 +110,7 @@ public interface SchemaExtractor {
         if (cd != null) {
 
             if (cd.getProcurementPublicationNumber() != null) {
-                dr.setID(createISOIECIDType(cd.getProcurementPublicationNumber()));
+                dr.setID(createGROWTemporaryId(cd.getProcurementPublicationNumber()));
             }
 
             dr.setDocumentTypeCode(createDocumentTypeCode("TED_CN"));
@@ -203,9 +204,18 @@ public interface SchemaExtractor {
     default IdentificationCodeType createISOCountryIdCodeType(String id) {
 
         IdentificationCodeType countryCodeType = new IdentificationCodeType();
-        countryCodeType.setListAgencyID("ISO");
-        countryCodeType.setListName("ISO 3166-1");
-        countryCodeType.setListVersionID("1.0");
+        //countryCodeType.setListAgencyID("ISO");
+        // modification UL_2016-12-22: updated ListAgencyID
+        countryCodeType.setListAgencyID("EU-COM-GROW");
+
+        //Updated to follow ESPD Service 2017.01.01 release
+        countryCodeType.setListName("CountryCodeIdentifier");
+        //countryCodeType.setListVersionID("1.0");
+        // modification UL_2016-12-22: updated list version and added listID
+        countryCodeType.setListVersionID("1.0.2");
+        countryCodeType.setListID("CountryCodeIdentifier");
+
+
         countryCodeType.setValue(id);
 
         return countryCodeType;
@@ -214,8 +224,14 @@ public interface SchemaExtractor {
     default TypeCodeType createJurisdictionLevelCode(String code) {
         TypeCodeType tc = new TypeCodeType();
         tc.setListAgencyID("EU-COM-GROW");
-        tc.setListID("CriterionJurisdictionLevelCode");
-        tc.setListVersionID("1.0");
+        //tc.setListID("CriterionJurisdictionLevelCode");
+        // modification UL_2016-12-22: new listID
+        tc.setListID("CriterionJurisdictionLevel");
+
+        //tc.setListVersionID("1.0");
+        // modification UL_2016-12-22: updated list version
+        tc.setListVersionID("1.0.2");
+
         tc.setValue(code);
         return tc;
     }
@@ -224,7 +240,10 @@ public interface SchemaExtractor {
         TypeCodeType tc = new TypeCodeType();
         tc.setListAgencyID("EU-COM-GROW");
         tc.setListID("CriteriaTypeCode");
-        tc.setListVersionID("1.0");
+        //tc.setListVersionID("1.0");
+        // modification UL_2016-12-22: updated list version
+        tc.setListVersionID("1.0.2");
+
         tc.setValue(code);
         return tc;
     }
@@ -234,6 +253,9 @@ public interface SchemaExtractor {
         dtc.setListAgencyID("EU-COM-GROW");
         dtc.setListID("ReferencesTypeCodes");
         dtc.setListVersionID("1.0");
+        // modification UL_2016-12-22: updated list version
+        //dtc.setListVersionID("1.0.2");
+
         dtc.setValue(code);
         return dtc;
     }
@@ -271,7 +293,14 @@ public interface SchemaExtractor {
 
         ProcurementProjectLotType pplt = new ProcurementProjectLotType();
         pplt.setID(new IDType());
-        pplt.getID().setValue(caDetails.getProcurementProjectLot());
+
+        //pplt.getID().setValue(caDetails.getProcurementProjectLot());
+        // modification UL_2016-12-21: according to ESPD specification 1.0.2, procurement project lot needs to be "0"
+        // and attribute schemeAgencyID needs to be set
+        pplt.getID().setValue((caDetails.getProcurementProjectLot() == null) ||
+                caDetails.getProcurementProjectLot().isEmpty() ? "0" : caDetails.getProcurementProjectLot());
+        pplt.getID().setSchemeAgencyID("EU-COM-GROW");
+
         return pplt;
     }
 }

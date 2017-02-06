@@ -15,7 +15,7 @@ import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Viewer extends Master {
+public class VCD extends Master {
 
     private HorizontalLayout panels = null;
     private ESPDRequest espdRequest = null;
@@ -25,17 +25,17 @@ public class Viewer extends Master {
     VerticalLayout panelLeftLayout = new VerticalLayout();
     VerticalLayout panelRightLayout = new VerticalLayout();
     Button panelLeftButtonImport = new Button("View existing ESPD Template");
-    Button panelRightButtonImport = new Button("View existing ESPD");
+    Button panelRightButtonImport = new Button("Import ESPD");
     private CriterionForm highlightedCriterion = null;
-    private Panel uploadPanelLeft = new Panel();
-    private Panel uploadPanelRight = new Panel();
+    private final Panel uploadPanelLeft = new Panel();
+    private final Panel uploadPanelRight = new Panel();
     GridLayout gridLayout = new GridLayout(2,1);
     VerticalLayout mainColumn = new VerticalLayout();
 
     protected Panel detailsPanel = new Panel();
     protected VerticalLayout detailsContent = new VerticalLayout();
 
-    public Viewer(Navigator navigator) {
+    public VCD(Navigator navigator) {
         super(navigator, true);
 
         detailsPanel.setStyleName("detailsPanel");
@@ -62,28 +62,14 @@ public class Viewer extends Master {
         panels.setWidth("100%");
         mainColumn.addComponent(panels);
 
-        Panel panelLeft = new Panel("Inspect an ESPD Template");
-        panelLeft.setStyleName("EspdTemplate-panelLeft");
-        panels.addComponent(panelLeft);
-
-        panelLeftLayout.setStyleName("panelLeftLayout");
-        panelLeft.setContent(panelLeftLayout);
-
-        Label panelLeftDescription = new Label("A description about viewing a existing espd template. More details goes here... More details goes here... More details goes here... More details goes here... More details goes here... More details goes here... More details goes here... More details goes here...");
-        panelLeftLayout.addComponent(panelLeftDescription);
-
-        panelLeftButtonImport.setStyleName("espdTemplate-panelButton");
-        panelLeftButtonImport.addClickListener(this::onImportEspdTemplate);
-        panelLeftLayout.addComponent(panelLeftButtonImport);
-
-        Panel panelRight = new Panel("Inspect an ESPD");
+        Panel panelRight = new Panel("Import and create a VCD");
         panelRight.setStyleName("EspdTemplate-panelRight");
         panels.addComponent(panelRight);
 
         panelRightLayout.setStyleName("panelRightLayout");
         panelRight.setContent(panelRightLayout);
 
-        Label panelRightDescription = new Label("A description about viewing an existing espd. More details goes here... More details goes here... More details goes here... More details goes here... More details goes here... More details goes here... More details goes here... More details goes here...");
+        Label panelRightDescription = new Label("A description about creating a VCD from an existing ESPD. More details goes here... More details goes here... More details goes here... More details goes here... More details goes here... More details goes here... More details goes here... More details goes here...");
         panelRightLayout.addComponent(panelRightDescription);
 
         panelRightButtonImport.addClickListener(this::onImportEspd);
@@ -99,11 +85,11 @@ public class Viewer extends Master {
     public void onNewEspdTemplate(Button.ClickEvent clickEvent) {
         try {
             panels.setVisible(false);
-            
+
             espdRequest = new ModelBuilder().addDefaultESPDCriteriaList().createESPDRequest();
-            
+
             // Cenerate the espd request form base on the provided espd request model
-            espdRequestForm = new ESPDRequestForm(this, espdRequest, 2, true);
+            espdRequestForm = new ESPDRequestForm(this, espdRequest, 1, true);
             mainColumn.addComponent(espdRequestForm);
         } catch (BuilderException ex) {
             Logger.getLogger(Viewer.class.getName()).log(Level.SEVERE, null, ex);
@@ -111,7 +97,7 @@ public class Viewer extends Master {
     }
 
     public void onImportEspdTemplate(Button.ClickEvent clickEvent) {
-        Viewer thisView = this;
+        VCD thisView = this;
         panelLeftButtonImport.setVisible(false);
 
         class EspdUploader2 implements Upload.Receiver, Upload.SucceededListener {
@@ -135,26 +121,24 @@ public class Viewer extends Master {
 
             public void uploadSucceeded(Upload.SucceededEvent event) {
 
-                try {
-                    InputStream is = new FileInputStream(file);
-                    espdRequest = new ModelBuilder().importFrom(is).createESPDRequest();
-                    espdRequestForm = new ESPDRequestForm(thisView, espdRequest, 2, true);
-                    mainColumn.addComponent(espdRequestForm);
-                    is.close();
-                    panels.setVisible(false);
+                try (InputStream is = new FileInputStream(file)) {
+                        espdRequest = new ModelBuilder().importFrom(is).createESPDRequest();
+                        espdRequestForm = new ESPDRequestForm(thisView, espdRequest, 1, true);
+                        mainColumn.addComponent(espdRequestForm);
+                        panels.setVisible(false);
                 } catch (IOException e) {
-                    Notification.show("Please ensure that the file is a valid ESPD Request or ESPD Response",
+                    Notification.show("Please ensure that the file is a valid ESPD Response",
                             "Import failed",
                             Notification.Type.ERROR_MESSAGE);
                     e.printStackTrace();
                 } catch (Exception e) {
-                    Notification.show("Please ensure that the file is a valid ESPD Request or ESPD Response",
+                    Notification.show("Please ensure that the file is a valid ESPD Response",
                             "Import failed",
                             Notification.Type.ERROR_MESSAGE);
                     e.printStackTrace();
                 }
             }
-        };
+        }
 
         EspdUploader2 receiver = new EspdUploader2();
         Upload upload = new Upload(null, receiver);
@@ -168,14 +152,14 @@ public class Viewer extends Master {
         panelLeftLayout.addComponent(uploadPanelLeft);
     }
 
-
     public void onImportEspd(Button.ClickEvent clickEvent) {
-        Viewer thisView = this;
+        VCD thisView = this;
         panelRightButtonImport.setVisible(false);
 
         class EspdUploader2 implements Upload.Receiver, Upload.SucceededListener {
             public File file;
 
+            @Override
             public OutputStream receiveUpload(String filename,
                                               String mimeType) {
                 FileOutputStream fos = null; // Stream to write to
@@ -192,28 +176,27 @@ public class Viewer extends Master {
                 return fos;
             }
 
+            @Override
             public void uploadSucceeded(Upload.SucceededEvent event) {
 
-                try {
-                    InputStream is = new FileInputStream(file);
-                    espdResponse = new ModelBuilder().importFrom(is).createESPDResponse();
-                    espdResponseForm = new ESPDResponseForm(thisView, espdResponse, 2, true);
-                    mainColumn.addComponent(espdResponseForm);
-                    is.close();
-                    panels.setVisible(false);
+                try (InputStream is = new FileInputStream(file)) {
+                        espdResponse = new ModelBuilder().importFrom(is).createESPDResponse();
+                        espdResponseForm = new ESPDResponseForm(thisView, espdResponse, 1, false);
+                        mainColumn.addComponent(espdResponseForm);
+                        panels.setVisible(false);
                 } catch (IOException e) {
-                    Notification.show("Please ensure that the file is a valid ESPD Request or ESPD Response",
+                    Notification.show("Please ensure that the file is a valid ESPD Response",
                             "Import failed",
                             Notification.Type.ERROR_MESSAGE);
                     e.printStackTrace();
                 } catch (Exception e) {
-                    Notification.show("Please ensure that the file is a valid ESPD Request or ESPD Response",
+                    Notification.show("Please ensure that the file is a valid ESPD Response",
                             "Import failed",
                             Notification.Type.ERROR_MESSAGE);
                     e.printStackTrace();
                 }
             }
-        };
+        }
 
         EspdUploader2 receiver = new EspdUploader2();
         Upload upload = new Upload(null, receiver);

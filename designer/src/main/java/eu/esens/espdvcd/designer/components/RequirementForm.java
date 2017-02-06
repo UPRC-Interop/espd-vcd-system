@@ -9,10 +9,10 @@ import com.vaadin.data.fieldgroup.BeanFieldGroup;
 
 public class RequirementForm extends VerticalLayout {
 
-    public RequirementForm(Requirement requirement, boolean includeResponses, boolean readOnly) {
+    public RequirementForm(Requirement requirement, boolean includeResponses, int displayEvidences, boolean readOnly) {
         setStyleName("requirementForm-layout");
         if (includeResponses) {
-            ResponseForm responseForm = ResponseFormFactory.buildResponseForm(requirement, readOnly);
+            ResponseForm responseForm = ResponseFormFactory.buildResponseForm(requirement, displayEvidences, readOnly);
             addComponent(responseForm);
         } else {
             ResponseForm responseForm = new ReadOnlyResponseForm(requirement.getResponseDataType().name(), requirement.getDescription());

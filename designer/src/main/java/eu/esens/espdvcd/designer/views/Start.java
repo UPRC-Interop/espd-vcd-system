@@ -21,6 +21,8 @@ public class Start extends Master {
 
     public Start(Navigator navigator) {
         super(navigator, true);
+        pagePanel.setContent(pageContent);
+        mainContent.addComponent(pagePanel);
 
         pagePanel.setContent(pageContent);
         mainContent.addComponent(pagePanel);

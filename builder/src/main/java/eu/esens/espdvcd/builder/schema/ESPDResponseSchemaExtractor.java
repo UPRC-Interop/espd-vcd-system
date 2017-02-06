@@ -1,5 +1,6 @@
 package eu.esens.espdvcd.builder.schema;
 
+import eu.esens.espdvcd.builder.EvidenceHelper;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.EODetails;
 import eu.esens.espdvcd.model.ESPDResponse;
@@ -41,6 +42,7 @@ import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.BirthDat
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.BirthplaceNameType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.CityNameType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ContractFolderIDType;
+import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.CopyIndicatorType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.DateType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.DescriptionType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ElectronicMailType;
@@ -83,6 +85,13 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
 
         resType.setEconomicOperatorParty(extracEODetails(res.getEODetails()));
 
+        resType.setUBLVersionID(createUBL21VersionIdType());
+
+        resType.setCustomizationID(createBIICustomizationIdType("urn:www.cenbii.eu:transaction:biitrns092:ver3.0"));
+        resType.setVersionID(createVersionIDType("2017.01.01"));
+
+        resType.setCopyIndicator(new CopyIndicatorType());
+        resType.getCopyIndicator().setValue(false);
         return resType;
     }
 
@@ -333,7 +342,13 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
                     drt.setAttachment(new AttachmentType());
                     drt.getAttachment().setExternalReference(new ExternalReferenceType());
                     drt.getAttachment().getExternalReference().setURI(new URIType());
-                    drt.getAttachment().getExternalReference().getURI().setValue(((EvidenceURLResponse) response).getEvidenceURL());
+                    //drt.getAttachment().getExternalReference().getURI().setValue(((EvidenceURLResponse) response).getEvidenceURL());
+                    // UL: modification for handling VCD resources
+                    drt.getAttachment().getExternalReference().getURI().setValue(
+                            EvidenceHelper.transformEvidenceURIFromLocalResourceToASiCResource(
+                                    ((EvidenceURLResponse) response).getEvidenceURL()
+                            )
+                    );
                     evType.getEvidenceDocumentReference().add(drt);
                     rType.getEvidence().add(evType);
                 }
