@@ -16,6 +16,7 @@ import eu.esens.espdvcd.model.SimpleESPDRequest;
 import eu.esens.espdvcd.model.SimpleESPDResponse;
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
 import eu.esens.espdvcd.retriever.criteria.PredefinedESPDCriteriaExtractor;
+import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import eu.esens.espdvcd.schema.SchemaUtil;
 import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
 import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
@@ -163,12 +164,20 @@ public class ModelBuilder {
         if (importStream != null) {
             req = createESPDRequestFromXML(importStream);
             if (criteriaExtractor != null) {
-                req.setCriterionList(criteriaExtractor.getFullList(req.getFullCriterionList()));
+                try {
+                    req.setCriterionList(criteriaExtractor.getFullList(req.getFullCriterionList()));
+                } catch (RetrieverException ex) {
+                    Logger.getLogger(ModelBuilder.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         } else {
             req = new SimpleESPDRequest();
             if (criteriaExtractor != null) {
-                req.setCriterionList(criteriaExtractor.getFullList());
+                try {
+                    req.setCriterionList(criteriaExtractor.getFullList());
+                } catch (RetrieverException ex) {
+                    Logger.getLogger(ModelBuilder.class.getName()).log(Level.SEVERE, null, ex);
+                }
             } else {
                 req.setCriterionList(getEmptyCriteriaList());
             }
@@ -198,13 +207,21 @@ public class ModelBuilder {
         if (importStream != null) {
             res = createESPDResponseFromXML(importStream);
             if (criteriaExtractor != null) {
-                res.setCriterionList(criteriaExtractor.getFullList(res.getFullCriterionList(), true));
+                try {
+                    res.setCriterionList(criteriaExtractor.getFullList(res.getFullCriterionList(), true));
+                } catch (RetrieverException ex) {
+                    Logger.getLogger(ModelBuilder.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
 
         } else {
             res = new SimpleESPDResponse();
             if (criteriaExtractor != null) {
-                res.setCriterionList(criteriaExtractor.getFullList());
+                try {
+                    res.setCriterionList(criteriaExtractor.getFullList());
+                } catch (RetrieverException ex) {
+                    Logger.getLogger(ModelBuilder.class.getName()).log(Level.SEVERE, null, ex);
+                }
             } else {
                 res.setCriterionList(getEmptyCriteriaList());
             }
@@ -244,7 +261,12 @@ public class ModelBuilder {
 
     private List<SelectableCriterion> getCriteriaList() {
         CriteriaExtractor cr = new PredefinedESPDCriteriaExtractor();
-        return cr.getFullList();
+        try {
+            return cr.getFullList();
+        } catch (RetrieverException ex) {
+            Logger.getLogger(ModelBuilder.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     private ESPDRequestType readESPDRequestFromStream(InputStream is) {

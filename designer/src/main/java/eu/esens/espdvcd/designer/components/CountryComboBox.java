@@ -9,6 +9,8 @@ import com.vaadin.ui.ComboBox;
 import eu.esens.espdvcd.codelist.Codelists;
 import org.apache.commons.lang3.text.WordUtils;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CountryComboBox extends ComboBox {
 
