@@ -297,10 +297,13 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
                 return rType;
 
             case PERIOD:
-                rType.setPeriod(new PeriodType());
-                DescriptionType dt = new DescriptionType();
-                dt.setValue(((PeriodResponse) response).getDescription());
-                rType.getPeriod().getDescription().add(dt);
+                String descr = ((PeriodResponse) response).getDescription();
+                if (descr != null && !descr.isEmpty()) {
+                    rType.setPeriod(new PeriodType());
+                    DescriptionType dt = new DescriptionType();
+                    dt.setValue(descr);
+                    rType.getPeriod().getDescription().add(dt);
+                }
                 return rType;
 
             case PERCENTAGE:
