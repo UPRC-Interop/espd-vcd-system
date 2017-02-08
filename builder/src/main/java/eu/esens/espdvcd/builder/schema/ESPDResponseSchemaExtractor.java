@@ -331,8 +331,11 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
                 return rType;
 
             case CODE:
-                rType.setCode(new TypeCodeType());
-                rType.getCode().setValue(((EvidenceURLCodeResponse) response).getEvidenceURLCode());
+                EvidenceURLCodeResponse localResp = ((EvidenceURLCodeResponse) response);
+                if (localResp.getEvidenceURLCode() != null && !localResp.getEvidenceURLCode().isEmpty()) {
+                    rType.setCode(new TypeCodeType());
+                    rType.getCode().setValue(localResp.getEvidenceURLCode());
+                }
                 return rType;
 
             case EVIDENCE_URL:
