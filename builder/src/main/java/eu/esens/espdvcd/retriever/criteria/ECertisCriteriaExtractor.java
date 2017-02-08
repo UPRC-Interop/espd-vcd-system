@@ -308,7 +308,9 @@ public class ECertisCriteriaExtractor implements CriteriaExtractor, CriteriaData
     
     // Get SubCriterion/s of a European Criterion by Country Code
     private List<CriterionType> getSubCriterion(CriterionType ct, String countryCode) {
-        return ct.getSubCriterion().stream().filter(theCt -> theCt.getLegislationReference().get(0)
+        return ct.getSubCriterion().stream()
+                .filter(theCt -> !theCt.getLegislationReference().isEmpty())
+                .filter(theCt -> theCt.getLegislationReference().get(0)
                 .getJurisdictionLevelCode().getValue().equals(countryCode))
                 .collect(Collectors.toList());
     }
