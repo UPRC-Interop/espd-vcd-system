@@ -111,7 +111,7 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
             PartyIdentificationType pit = new PartyIdentificationType();
             pit.setID(new IDType());
             pit.getID().setValue(eod.getID());
-            pit.getID().setSchemeAgencyID("EU_COM_GROW");
+            pit.getID().setSchemeAgencyID("EU-COM-GROW");
             eopt.getParty().getPartyIdentification().add(pit);
         }
 
