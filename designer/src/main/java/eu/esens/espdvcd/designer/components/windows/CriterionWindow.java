@@ -76,7 +76,7 @@ public class CriterionWindow extends Window {
         criterion.setTypeCode((String)typecode.getValue());
         criterion.setSelected(true);
         espd.getFullCriterionList().add(criterion);
-        CriterionForm criterionForm = new CriterionForm(view, criterion, false, displayEvidences, false);
+        CriterionForm criterionForm = new CriterionForm(view, criterion, false, displayEvidences, false, null);
         destinationLayout.addComponent(criterionForm);
         UI.getCurrent().removeWindow(this);
         Notification notification = new Notification("Your criterion has been added!");

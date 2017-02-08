@@ -24,12 +24,13 @@ public class CriterionForm extends VerticalLayout {
 
     private boolean readOnly = false;
 
-    public CriterionForm(Master view, SelectableCriterion criterion, boolean useRequirements, int displayEvidences, boolean readOnly) {
+    public CriterionForm(Master view, SelectableCriterion criterion, boolean useRequirements, int displayEvidences, boolean readOnly, EODetails eo) {
         this.view = view;
         this.criterionReference = criterion;
         this.useRequirements = useRequirements;
         this.readOnly = readOnly;
 
+        
         this.addComponent(panel);
         panel.setContent(panelContent);
 
@@ -61,8 +62,11 @@ public class CriterionForm extends VerticalLayout {
                 columnB.addComponent(requirementGroupForm);
             }
 
+            
             if (criterionReference.getLegislationReference() != null) {
                columnA.addComponent(new LegislationReferenceForm(criterionReference.getLegislationReference()));
+               if (eo != null)
+                   columnA.addComponent(new ECertisForm(criterionReference, eo));
             }
         } else { // The criterion form will contain a limited amount of details, therefore a more simplified layout is used.
             panelContent.addComponent(selected);

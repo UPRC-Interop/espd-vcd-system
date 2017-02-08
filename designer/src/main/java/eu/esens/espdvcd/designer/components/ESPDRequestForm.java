@@ -145,7 +145,7 @@ public class ESPDRequestForm extends ESPDForm {
                 criterionHash.put(criterion.getCriterionGroup(), new ArrayList<>());
             }
 
-            CriterionForm criterionForm = new CriterionForm(view, criterion, false, -1, readOnly);
+            CriterionForm criterionForm = new CriterionForm(view, criterion, false, -1, readOnly, null);
             criterionHash.get(criterion.getCriterionGroup()).add(criterionForm);
         }
         for (Map.Entry<String, List<CriterionForm>> entry : criterionHash.entrySet()) {

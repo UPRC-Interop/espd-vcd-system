@@ -54,7 +54,7 @@ public class ESPDResponseForm extends ESPDForm {
                 economicOperatorCriterionHash.put(criterion.getCriterionGroup(), new ArrayList<>());
             }
 
-            CriterionForm criterionForm = new CriterionForm(view, criterion, true, displayEvidences, readOnly);
+            CriterionForm criterionForm = new CriterionForm(view, criterion, true, displayEvidences, readOnly, espdResponse.getEODetails());
             economicOperatorCriterionHash.get(criterion.getCriterionGroup()).add(criterionForm);
         }
 
@@ -87,7 +87,7 @@ public class ESPDResponseForm extends ESPDForm {
                 exclusionCriterionHash.put(criterion.getCriterionGroup(), new ArrayList<CriterionForm>());
             }
 
-            CriterionForm criterionForm = new CriterionForm(view, criterion, true, displayEvidences, readOnly);
+            CriterionForm criterionForm = new CriterionForm(view, criterion, true, displayEvidences, readOnly, espdResponse.getEODetails());
             exclusionCriterionHash.get(criterion.getCriterionGroup()).add(criterionForm);
         }
 
@@ -123,7 +123,7 @@ public class ESPDResponseForm extends ESPDForm {
                 selectionCriterionHash.put(criterion.getCriterionGroup(), new ArrayList<CriterionForm>());
             }
 
-            CriterionForm criterionForm = new CriterionForm(view, criterion, true, displayEvidences, readOnly);
+            CriterionForm criterionForm = new CriterionForm(view, criterion, true, displayEvidences, readOnly, espdResponse.getEODetails());
             selectionCriterionHash.get(criterion.getCriterionGroup()).add(criterionForm);
 
         }
@@ -158,7 +158,7 @@ public class ESPDResponseForm extends ESPDForm {
                 reductionCriterionHash.put(criterion.getCriterionGroup(), new ArrayList<CriterionForm>());
             }
 
-            CriterionForm criterionForm = new CriterionForm(view, criterion, true, displayEvidences, readOnly);
+            CriterionForm criterionForm = new CriterionForm(view, criterion, true, displayEvidences, readOnly, espdResponse.getEODetails());
             reductionCriterionHash.get(criterion.getCriterionGroup()).add(criterionForm);
         }
 

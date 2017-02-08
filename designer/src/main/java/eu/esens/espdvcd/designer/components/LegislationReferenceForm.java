@@ -31,7 +31,7 @@ public class LegislationReferenceForm extends VerticalLayout {
         panelContent.addComponent(jurisdictionLevelCode);
         panelContent.addComponent(article);
         panelContent.addComponent(URI);
-
+             
         this.addLayoutClickListener(this::onLegislationReferenceClick);
 
         title.setCaption("Legislation Reference Title");
