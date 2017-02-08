@@ -281,6 +281,7 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
 
             case QUANTITY_INTEGER:
                 rType.setQuantity(new QuantityType());
+                rType.getQuantity().setUnitCode("NUMBER");
                 rType.getQuantity().setValue(BigDecimal.valueOf(((QuantityIntegerResponse) response).getQuantity()));
                 return rType;
 
@@ -358,7 +359,7 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
             case CODE_COUNTRY:
                 rType.setCode(new TypeCodeType());
                 rType.getCode().setListAgencyID("ISO");
-                rType.getCode().setListID("ISO 3166-2");
+                rType.getCode().setListID("ISO 3166-1");
                 rType.getCode().setListVersionID("1.0");
                 rType.getCode().setValue(((CountryCodeResponse) response).getCountryCode());
                 return rType;
