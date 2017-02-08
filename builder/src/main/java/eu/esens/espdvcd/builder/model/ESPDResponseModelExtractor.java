@@ -23,7 +23,10 @@ import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.Pers
 public class ESPDResponseModelExtractor implements ModelExtractor {
 
     /* package private constructor. Create only through factory */
-    ESPDResponseModelExtractor() {};
+    ESPDResponseModelExtractor() {
+    }
+
+    ;
 
     public ESPDResponse extractESPDResponse(ESPDResponseType resType) {
 
@@ -41,26 +44,26 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
         if (resType.getEconomicOperatorParty() != null) {
             res.setEODetails(extractEODetails(resType.getEconomicOperatorParty()));
         } else {
-             EODetails eod = new EODetails();
-        eod.setContactingDetails(new ContactingDetails());
-        eod.setPostalAddress(new PostalAddress());
-        eod.setNaturalPersons(new ArrayList<>());
+            EODetails eod = new EODetails();
+            eod.setContactingDetails(new ContactingDetails());
+            eod.setPostalAddress(new PostalAddress());
+            eod.setNaturalPersons(new ArrayList<>());
 
-        NaturalPerson np = new NaturalPerson();
-        np.setPostalAddress(new PostalAddress());
-        np.setContactDetails(new ContactingDetails());
+            NaturalPerson np = new NaturalPerson();
+            np.setPostalAddress(new PostalAddress());
+            np.setContactDetails(new ContactingDetails());
 
-        eod.getNaturalPersons().add(np);
+            eod.getNaturalPersons().add(np);
             res.setEODetails(eod);
         }
-        
+
         return res;
     }
 
     /**
      *
      * @param rt The JAXB RequirementType class to be extracted
-     * @return The Extracted @Requirement  
+     * @return The Extracted @Requirement
      */
     @Override
     public Requirement extractRequirement(RequirementType rt) {
@@ -69,7 +72,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
 
         if (!rt.getResponse().isEmpty()) {
             r.setResponse(extractResponse(rt.getResponse().get(0), ResponseTypeEnum.valueOf(rt.getResponseDataType())));
-        } else { 
+        } else {
             r.setResponse(ResponseFactory.createResponse(r.getResponseDataType()));
         }
         return r;
@@ -194,15 +197,14 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
 
     public EODetails extractEODetails(EconomicOperatorPartyType eop) {
 
-        EODetails eoDetails = null;
-        
+        final EODetails eoDetails = new EODetails();
+
         if (eop != null) {
-            eoDetails = new EODetails();
-            
+
             if (eop.getSMEIndicator() != null) {
                 eoDetails.setSmeIndicator(eop.getSMEIndicator().isValue());
             }
-            
+
             if (eop.getParty() != null) {
                 if (!eop.getParty().getPartyName().isEmpty()
                         && eop.getParty().getPartyName().get(0).getName() != null) {
@@ -220,7 +222,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
 
                 if (eop.getParty().getPostalAddress() != null) {
                     PostalAddress eoAddress = new PostalAddress();
-                    
+
                     if (eop.getParty().getPostalAddress().getStreetName() != null) {
                         eoAddress.setAddressLine1(eop.getParty().getPostalAddress().getStreetName().getValue());
                     }
@@ -237,7 +239,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                             && eop.getParty().getPostalAddress().getCountry().getIdentificationCode() != null) {
                         eoAddress.setCountryCode(eop.getParty().getPostalAddress().getCountry().getIdentificationCode().getValue());
                     }
-                    
+
                     eoDetails.setPostalAddress(eoAddress);
 
                     if (eop.getParty().getContact() != null) {
@@ -245,15 +247,15 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                         if (eop.getParty().getContact().getName() != null) {
                             eoDetails.getContactingDetails().setContactPointName(eop.getParty().getContact().getName().getValue());
                         }
-                        
+
                         if (eop.getParty().getContact().getElectronicMail() != null) {
                             eoDetails.getContactingDetails().setEmailAddress(eop.getParty().getContact().getElectronicMail().getValue());
                         }
-                        
+
                         if (eop.getParty().getContact().getTelephone() != null) {
                             eoDetails.getContactingDetails().setTelephoneNumber(eop.getParty().getContact().getTelephone().getValue());
                         }
-                        
+
                         if (eop.getParty().getContact().getTelefax() != null) {
                             eoDetails.getContactingDetails().setFaxNumber(eop.getParty().getContact().getTelefax().getValue());
                         }
@@ -261,91 +263,92 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
 
                 }
             }
-            
+
             if (!eop.getRepresentativeNaturalPerson().isEmpty()) {
-                NaturalPerson np = new NaturalPerson();
-                /* We assume only one. We arbitrarily fetch the first one from the list */
-                NaturalPersonType npt = eop.getRepresentativeNaturalPerson().get(0);
-                if (npt.getNaturalPersonRoleDescription() != null) {
-                    np.setRole(npt.getNaturalPersonRoleDescription().getValue());
-                }
-                
-                if (npt.getPowerOfAttorney() != null) {
-                    
-                    if (!npt.getPowerOfAttorney().getDescription().isEmpty()) {
-                        np.setPowerOfAttorney(npt.getPowerOfAttorney().getDescription().get(0).getValue());
+                eop.getRepresentativeNaturalPerson().forEach(npt -> {
+                    NaturalPerson np = new NaturalPerson();
+                    /* We assume only one. We arbitrarily fetch the first one from the list */
+
+                    if (npt.getNaturalPersonRoleDescription() != null) {
+                        np.setRole(npt.getNaturalPersonRoleDescription().getValue());
                     }
-                    /* in ESPD the only look for the person in agent party in power of attorney */ 
-                    if (npt.getPowerOfAttorney().getAgentParty() != null && !npt.getPowerOfAttorney().getAgentParty().getPerson().isEmpty()) {
-                        PersonType pt = npt.getPowerOfAttorney().getAgentParty().getPerson().get(0);
-                        
-                        if (pt.getFirstName() != null) {
-                           np.setFirstName(pt.getFirstName().getValue());
+
+                    if (npt.getPowerOfAttorney() != null) {
+
+                        if (!npt.getPowerOfAttorney().getDescription().isEmpty()) {
+                            np.setPowerOfAttorney(npt.getPowerOfAttorney().getDescription().get(0).getValue());
                         }
-                        
-                        if (pt.getFamilyName()!= null) {
-                           np.setFamilyName(pt.getFamilyName().getValue());
+                        /* in ESPD the only look for the person in agent party in power of attorney */
+                        if (npt.getPowerOfAttorney().getAgentParty() != null && !npt.getPowerOfAttorney().getAgentParty().getPerson().isEmpty()) {
+                            PersonType pt = npt.getPowerOfAttorney().getAgentParty().getPerson().get(0);
+
+                            if (pt.getFirstName() != null) {
+                                np.setFirstName(pt.getFirstName().getValue());
+                            }
+
+                            if (pt.getFamilyName() != null) {
+                                np.setFamilyName(pt.getFamilyName().getValue());
+                            }
+
+                            if (pt.getBirthplaceName() != null) {
+                                np.setBirthPlace(pt.getBirthplaceName().getValue());
+                            }
+
+                            if (pt.getBirthDate() != null) {
+                                np.setBirthDate(pt.getBirthDate().getValue().toGregorianCalendar().getTime());
+                            }
+
+                            if (pt.getContact() != null) {
+                                ContactingDetails cd = new ContactingDetails();
+
+                                if (pt.getContact().getElectronicMail() != null) {
+                                    cd.setEmailAddress(pt.getContact().getElectronicMail().getValue());
+                                }
+
+                                if (pt.getContact().getTelephone() != null) {
+                                    cd.setTelephoneNumber(pt.getContact().getTelephone().getValue());
+                                }
+
+                                if (pt.getContact().getTelefax() != null) {
+                                    cd.setFaxNumber(pt.getContact().getTelefax().getValue());
+                                }
+                                np.setContactDetails(cd);
+                            }
+
+                            if (pt.getResidenceAddress() != null) {
+
+                                PostalAddress pa = new PostalAddress();
+
+                                if (pt.getResidenceAddress().getPostbox() != null) {
+                                    pa.setPostCode(pt.getResidenceAddress().getPostbox().getValue());
+                                }
+
+                                if (pt.getResidenceAddress().getCityName() != null) {
+                                    pa.setCity(pt.getResidenceAddress().getCityName().getValue());
+                                }
+
+                                if (pt.getResidenceAddress().getStreetName() != null) {
+                                    pa.setAddressLine1(pt.getResidenceAddress().getStreetName().getValue());
+                                }
+
+                                if (pt.getResidenceAddress().getCountry() != null
+                                        && pt.getResidenceAddress().getCountry().getIdentificationCode() != null) {
+                                    pa.setCountryCode(pt.getResidenceAddress().getCountry().getIdentificationCode().getValue());
+                                }
+
+                                np.setPostalAddress(pa);
+                            }
                         }
-                        
-                        if (pt.getBirthplaceName() != null) {
-                            np.setBirthPlace(pt.getBirthplaceName().getValue());
-                        }
-                        
-                        if (pt.getBirthDate() != null) {
-                            np.setBirthDate(pt.getBirthDate().getValue().toGregorianCalendar().getTime());
-                        }
-                        
-                        if (pt.getContact() != null) {
-                            ContactingDetails cd = new ContactingDetails();
-                            
-                            if (pt.getContact().getElectronicMail() != null) {
-                                cd.setEmailAddress(pt.getContact().getElectronicMail().getValue());
-                            }
-                            
-                            if (pt.getContact().getTelephone() != null) {
-                                cd.setTelephoneNumber(pt.getContact().getTelephone().getValue());
-                            }
-                            
-                            if (pt.getContact().getTelefax() != null) {
-                                cd.setFaxNumber(pt.getContact().getTelefax().getValue());
-                            }
-                            np.setContactDetails(cd);
-                        }
-                        
-                        if (pt.getResidenceAddress() != null) {
-                            
-                            PostalAddress pa = new PostalAddress();
-                            
-                            if (pt.getResidenceAddress().getPostbox() != null) {
-                                pa.setPostCode(pt.getResidenceAddress().getPostbox().getValue());
-                            }
-                            
-                            if (pt.getResidenceAddress().getCityName() != null) {
-                                pa.setCity(pt.getResidenceAddress().getCityName().getValue());
-                            }
-                            
-                            if (pt.getResidenceAddress().getStreetName()!= null) {
-                                pa.setAddressLine1(pt.getResidenceAddress().getStreetName().getValue());
-                            }
-                            
-                            if (pt.getResidenceAddress().getCountry() != null 
-                              && pt.getResidenceAddress().getCountry().getIdentificationCode() != null) {
-                                pa.setCountryCode(pt.getResidenceAddress().getCountry().getIdentificationCode().getValue());
-                            }
-                            
-                            np.setPostalAddress(pa);
-                        }
+
                     }
-                    
-                }
-                eoDetails.getNaturalPersons().add(np);
+                    eoDetails.getNaturalPersons().add(np);
+                });
             } else {
                 eoDetails.getNaturalPersons().add(new NaturalPerson());
             }
         } else {
-             eoDetails = new EODetails();
-             eoDetails.setNaturalPersons(new ArrayList<>());
-             eoDetails.getNaturalPersons().add(new NaturalPerson());  
+            eoDetails.setNaturalPersons(new ArrayList<>());
+            eoDetails.getNaturalPersons().add(new NaturalPerson());
         }
 
         return eoDetails;
