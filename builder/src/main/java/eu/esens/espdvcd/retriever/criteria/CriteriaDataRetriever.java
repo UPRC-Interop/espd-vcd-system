@@ -13,18 +13,18 @@ public interface CriteriaDataRetriever {
 
     /**
      *  
-     * @param sourceId The Source Criterion Id (European or National).
-     * @param targetCountryCode The Country Identification according to ISO 3A.
-     * @return All National Criteria which mapped with Source Criterion Id.
+     * @param criterionId The Source Criterion Id (European or National).
+     * @param countryCode The Country Identification Code according to ISO 3A.
+     * @return All National Criteria which mapped with Source Criterion.
      * @throws eu.esens.espdvcd.retriever.exception.RetrieverException
      */
-    List<CriterionType> getNationalCriterionMapping(String sourceId, String targetCountryCode)
+    List<CriterionType> getNationalCriterionMapping(String criterionId, String countryCode)
             throws RetrieverException;
         
     /**
      * 
      * @param criterionId The Criterion Id (European or National).
-     * @return Criterion Data of Criterion with given Id or null if Criterion does not exist.
+     * @return Data of Criterion with given Id.
      * @throws eu.esens.espdvcd.retriever.exception.RetrieverException
      */
     CriterionType getCriterion(String criterionId)
@@ -32,8 +32,8 @@ public interface CriteriaDataRetriever {
     
     /**
      * 
-     * @param criterionId
-     * @return 
+     * @param criterionId The Criterion Id (European or National).
+     * @return All Criterion Evidences.
      * @throws eu.esens.espdvcd.retriever.exception.RetrieverException 
      */
     List<RequirementGroupType> getEvidences(String criterionId)
