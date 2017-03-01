@@ -3,11 +3,12 @@ package eu.esens.espdvcd.retriever.criteria;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.esens.espdvcd.builder.model.ModelFactory;
-import eu.esens.espdvcd.builder.utils.Constants;
-import eu.esens.espdvcd.builder.utils.NationalEntity;
-import eu.esens.espdvcd.builder.utils.Region;
+import eu.esens.espdvcd.retriever.utils.Constants;
+import eu.esens.espdvcd.retriever.utils.NationalEntity;
+import eu.esens.espdvcd.retriever.utils.Region;
 import eu.esens.espdvcd.codelist.Codelists;
 import eu.esens.espdvcd.model.SelectableCriterion;
+import eu.esens.espdvcd.model.retriever.ECertisCriterion;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.CriterionType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementGroupType;
@@ -173,6 +174,10 @@ public class ECertisCriteriaExtractor implements CriteriaExtractor, CriteriaData
         return nationalCriterionTypeList;
     }
     
+    private ECertisCriterion extractECertisCriterion(CriterionType c) {
+        return null;
+    }
+    
     @Override
     public CriterionType getCriterion(String criterionId) 
             throws RetrieverException {
@@ -236,16 +241,9 @@ public class ECertisCriteriaExtractor implements CriteriaExtractor, CriteriaData
     // Get SubCriterion/s of a European Criterion by Country Code
     private List<CriterionType> getSubCriterion(CriterionType c, String countryCode) {
         return c.getSubCriterion().stream()
-                .filter(subC -> {
-                    if (subC.getLegislationReference().isEmpty()) {
-                        System.out.println("Parent : " + c.getID().getValue() + " SubCriterion with Id : " + subC.getID().getValue() + " does not have LegislationReference");
-                        return false;
-                    }
-                    
-                    return subC.getLegislationReference().get(0)
-                            .getJurisdictionLevelCode().getValue()
-                            .equals(countryCode);
-                })
+                .filter(theCt -> !theCt.getLegislationReference().isEmpty())
+                .filter(theCt -> theCt.getLegislationReference().get(0)
+                .getJurisdictionLevelCode().getValue().equals(countryCode))
                 .collect(Collectors.toList());
     }
     

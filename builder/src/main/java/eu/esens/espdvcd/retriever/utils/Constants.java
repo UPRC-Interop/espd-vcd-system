@@ -1,4 +1,4 @@
-package eu.esens.espdvcd.builder.utils;
+package eu.esens.espdvcd.retriever.utils;
 
 /**
  *
