@@ -1,7 +1,6 @@
 package eu.esens.espdvcd.builder;
 
 import static eu.esens.espdvcd.builder.ECertisCriteriaExtractorTest.maxDepth;
-import eu.esens.espdvcd.builder.model.ModelFactory;
 import eu.esens.espdvcd.codelist.Codelists;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.retriever.criteria.ECertisCriteriaExtractor;
@@ -18,30 +17,42 @@ import org.junit.Test;
  * @author konstantinos
  */
 public class ECertisCriteriaDataRetrieverTest {
-
+    
+    private ECertisCriteriaExtractor extractor;
+    
     private final String[] criterionIds = {
         // eu
         "d726bac9-e153-4e75-bfca-c5385587766d",
         // national - italian origin
-        "704390c8-34e3-4337-9ab1-f5795bed1a3b"};
+        "fdab2c29-ab6d-4ce1-92c2-5663732dd022"};
 
     public ECertisCriteriaDataRetrieverTest() {
     }
 
     @Before
     public void setUp() {
+        extractor = new ECertisCriteriaExtractor();
     }
-
-    @Ignore
+    
     @Test
-    public void testGetAllNationalEntities() {
-        ECertisCriteriaExtractor extractor = new ECertisCriteriaExtractor();
+    public void testGetCriterionV2() {
         try {
-            extractor.getAllNationalEntities().forEach(ne -> System.out.println(ne));
+            extractor.getCriterionV2(criterionIds[1]);
         } catch (RetrieverException ex) {
             System.err.println(ex);
         }
     }
+    
+//    @Ignore
+//    @Test
+//    public void testGetAllNationalEntities() {
+//        ECertisCriteriaExtractor extractor = new ECertisCriteriaExtractor();
+//        try {
+//            extractor.getAllNationalEntities().forEach(ne -> System.out.println(ne));
+//        } catch (RetrieverException ex) {
+//            System.err.println(ex);
+//        }
+//    }
 
     @Ignore
     @Test
@@ -76,25 +87,34 @@ public class ECertisCriteriaDataRetrieverTest {
         }
     }
 
+    @Ignore
     @Test
     public void testGetNationalCriterionMappings() {
         ECertisCriteriaExtractor extractor = new ECertisCriteriaExtractor();
         try {
             // extractor.getAllNationalEntities().forEach(ne -> testGetNationalCriterionMapping(ne.getId()));
-            List<CriterionType> ct = extractor.getNationalCriterionMapping("d726bac9-e153-4e75-bfca-c5385587766d", "it");
+            List<CriterionType> ct = extractor.getNationalCriterionMapping("d726bac9-e153-4e75-bfca-c5385587766d", "hu");
             
-            ct.stream()
-                    .forEach(c -> c.getRequirementGroup()
-                            .forEach(rg -> traverseRequirementGroup(ModelFactory.ESPD_REQUEST
-                                    .extractRequirementGroup(rg), 1))
-                    );
+//            ct.stream()
+//                    .forEach(c -> c.getRequirementGroup()
+//                            .forEach(rg -> traverseRequirementGroup(ModelFactory.ESPD_REQUEST
+//                                    .extractRequirementGroup(rg), 1))
+//                    );
+
+            CriterionType c = ct.get(0);
+            c.getRequirementGroup().forEach(rg -> {
+                System.out.print(rg.getID().getValue());
+                System.out.print("\t" + rg.getRequirement().isEmpty() + "\n");
+                rg.getRequirement().forEach(rt -> System.out.println(rt.getID()));
+            });
             
         } catch (RetrieverException ex) {
             System.err.println(ex);
         }
     }
     
-    // @Test
+    @Ignore
+    @Test
     public void testGetNationalCriterionMapping() {
         
         String countryCode = "it";
@@ -185,6 +205,7 @@ public class ECertisCriteriaDataRetrieverTest {
 
     private void displayRequirementGroupType(RequirementGroupType rgt) {
         System.out.print(rgt.getID().getValue());
+        System.out.print(rgt.getTypeCode().getValue());
     }
 
     private void traverseRequirementGroup(RequirementGroup rg, int depth) {

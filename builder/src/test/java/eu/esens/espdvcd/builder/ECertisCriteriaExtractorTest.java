@@ -6,6 +6,8 @@ import eu.esens.espdvcd.retriever.criteria.ECertisCriteriaExtractor;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 /**
  *
@@ -14,12 +16,12 @@ import org.junit.Test;
 public class ECertisCriteriaExtractorTest {
 
     static int maxDepth = 1;
-        
-    public ECertisCriteriaExtractorTest() {
-    }
-
+    @Mock
+    private ECertisCriteriaExtractor extractor;
+   
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
     }
    
     /**
@@ -28,14 +30,13 @@ public class ECertisCriteriaExtractorTest {
     @Test
     public void testGetFullList() {
         try {
-            ECertisCriteriaExtractor ce = new ECertisCriteriaExtractor();
-            ce.getFullList().stream()
+            extractor.getFullList().stream()
                     .forEach( (SelectableCriterion sc) -> {
                         System.out.println(sc.getID() + " " + sc.getName() + " (" + sc.getTypeCode() + ")");
                         sc.getRequirementGroups().forEach(rg -> traverseRequirementGroup(rg, 1));
                     });
             System.out.println("Max Depth: " + maxDepth);
-            System.out.println("Criterion #: " + ce.getFullList().size());
+            System.out.println("Criterion #: " + extractor.getFullList().size());
         } catch (RetrieverException ex) {
             System.err.println(ex);
         }

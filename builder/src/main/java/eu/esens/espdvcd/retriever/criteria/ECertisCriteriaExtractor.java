@@ -1,11 +1,10 @@
 package eu.esens.espdvcd.retriever.criteria;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.esens.espdvcd.builder.model.ModelFactory;
 import eu.esens.espdvcd.retriever.utils.Constants;
-import eu.esens.espdvcd.retriever.utils.NationalEntity;
-import eu.esens.espdvcd.retriever.utils.Region;
 import eu.esens.espdvcd.codelist.Codelists;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.retriever.ECertisCriterion;
@@ -36,9 +35,9 @@ import javax.xml.bind.JAXB;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+//import org.json.JSONArray;
+//import org.json.JSONException;
+//import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -231,7 +230,63 @@ public class ECertisCriteriaExtractor implements CriteriaExtractor, CriteriaData
                        
         return theCriterion;
     }
+    
+    public ECertisCriterion getCriterionV2(String criterionId) 
+            throws RetrieverException {
+        BufferedReader br = null;
+        ECertisCriterion c = new ECertisCriterion();
+        
+        try {
+            URL url = new URL(Constants.ECERTIS_URL + Constants.AVAILABLE_EU_CRITERIA + criterionId + "/");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Accept", "application/json");
+            connection.setConnectTimeout(15000);
+            connection.connect();
 
+            // Http Status 200 = ok
+            if (connection.getResponseCode() != 200) {
+                throw new RetrieverException("HTTP error code : " + connection.getResponseCode());
+            }
+
+            br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            StringBuilder builder = new StringBuilder();
+            String output;
+
+            while ((output = br.readLine()) != null) {
+                builder.append(output);
+            }
+            
+            ObjectMapper mapper = new ObjectMapper();
+            
+            mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+            
+            ECertisCriterion ct = mapper.readValue(builder.toString(), ECertisCriterion.class);
+            String prettyCt = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(ct);
+            
+            System.out.println(prettyCt);
+            
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RetrieverException("Malformed URL", ex);
+        } catch (IOException ex) {
+            Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RetrieverException("Error when trying to connect with e-Certis service", ex);
+        } finally {
+            // close all streams
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.SEVERE, null, e);
+                    throw new RetrieverException("Error when trying to close reader", e);
+                }
+            }
+        }
+        
+        return c;
+    }
+    
     @Override
     public List<RequirementGroupType> getEvidences(String criterionId) 
             throws RetrieverException {
@@ -415,75 +470,75 @@ public class ECertisCriteriaExtractor implements CriteriaExtractor, CriteriaData
     }
     
     // Get All National Entities from e-Certis
-    public List<NationalEntity> getAllNationalEntities() 
-            throws RetrieverException {
-        List<NationalEntity> nationalEntities = new ArrayList<>();
-        BufferedReader br = null;
-        
-        try {
-            URL url = new URL(Constants.ECERTIS_URL + Constants.NATIONAL_ENTITIES);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
-            connection.setRequestProperty("Accept", "application/json");
-            connection.setConnectTimeout(15000);
-            connection.connect();
-
-            // Http Status 200 = ok
-            if (connection.getResponseCode() != 200) {
-                throw new RetrieverException("HTTP error code : " + connection.getResponseCode());
-            }
-
-            br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            StringBuilder builder = new StringBuilder();
-            String output;
-
-            while ((output = br.readLine()) != null) {
-                builder.append(output);
-            }
-            
-            JSONArray data = new JSONArray(builder.toString());
-                        
-            for (int i = 0; i < data.length(); i++) {
-                JSONObject neJson = data.getJSONObject(i);
-                NationalEntity ne = new NationalEntity();
-                ne.setId((String) neJson.get("id"));
-                ne.setName((String) neJson.get("name"));
-                
-                JSONArray regions = neJson.getJSONArray("regions");
-                
-                for (int j = 0; j < regions.length(); j++) {
-                    JSONObject reJson = regions.getJSONObject(j);
-                    String code = reJson.getString("code");
-                    String id = reJson.getString("id");
-                    String name = reJson.getString("name");
-                    
-                    Region region = new Region(code, id, name);
-                    ne.getRegions().add(region);
-                }
-                nationalEntities.add(ne);
-            }
-                        
-        } catch (JSONException ex) {
-            Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.SEVERE, null, ex);
-            throw new RetrieverException("JSONException", ex);
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.SEVERE, null, ex);
-            throw new RetrieverException("Malformed URL", ex);
-        } catch (IOException ex) {
-            Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.SEVERE, null, ex);
-            throw new RetrieverException("Error when trying to connect with e-Certis service", ex);
-        } finally {
-            // close all streams
-            if (br != null) {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.SEVERE, null, e);
-                    throw new RetrieverException("Error when trying to close reader", e);
-                }
-            }
-        }
-        return nationalEntities;
-    }
+//    public List<NationalEntity> getAllNationalEntities() 
+//            throws RetrieverException {
+//        List<NationalEntity> nationalEntities = new ArrayList<>();
+//        BufferedReader br = null;
+//        
+//        try {
+//            URL url = new URL(Constants.ECERTIS_URL + Constants.NATIONAL_ENTITIES);
+//            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+//            connection.setRequestMethod("GET");
+//            connection.setRequestProperty("Accept", "application/json");
+//            connection.setConnectTimeout(15000);
+//            connection.connect();
+//
+//            // Http Status 200 = ok
+//            if (connection.getResponseCode() != 200) {
+//                throw new RetrieverException("HTTP error code : " + connection.getResponseCode());
+//            }
+//
+//            br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+//            StringBuilder builder = new StringBuilder();
+//            String output;
+//
+//            while ((output = br.readLine()) != null) {
+//                builder.append(output);
+//            }
+//            
+//            JSONArray data = new JSONArray(builder.toString());
+//                        
+//            for (int i = 0; i < data.length(); i++) {
+//                JSONObject neJson = data.getJSONObject(i);
+//                NationalEntity ne = new NationalEntity();
+//                ne.setId((String) neJson.get("id"));
+//                ne.setName((String) neJson.get("name"));
+//                
+//                JSONArray regions = neJson.getJSONArray("regions");
+//                
+//                for (int j = 0; j < regions.length(); j++) {
+//                    JSONObject reJson = regions.getJSONObject(j);
+//                    String code = reJson.getString("code");
+//                    String id = reJson.getString("id");
+//                    String name = reJson.getString("name");
+//                    
+//                    Region region = new Region(code, id, name);
+//                    ne.getRegions().add(region);
+//                }
+//                nationalEntities.add(ne);
+//            }
+//                        
+//        } catch (JSONException ex) {
+//            Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.SEVERE, null, ex);
+//            throw new RetrieverException("JSONException", ex);
+//        } catch (MalformedURLException ex) {
+//            Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.SEVERE, null, ex);
+//            throw new RetrieverException("Malformed URL", ex);
+//        } catch (IOException ex) {
+//            Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.SEVERE, null, ex);
+//            throw new RetrieverException("Error when trying to connect with e-Certis service", ex);
+//        } finally {
+//            // close all streams
+//            if (br != null) {
+//                try {
+//                    br.close();
+//                } catch (IOException e) {
+//                    Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.SEVERE, null, e);
+//                    throw new RetrieverException("Error when trying to close reader", e);
+//                }
+//            }
+//        }
+//        return nationalEntities;
+//    }
         
 }
