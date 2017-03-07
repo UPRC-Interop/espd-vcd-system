@@ -164,7 +164,13 @@ public class VCD extends Master {
                                               String mimeType) {
                 FileOutputStream fos = null; // Stream to write to
                 try {
-                    file = new File("tmp/uploaded.xml");
+                    //file = new File("tmp/uploaded.xml");
+
+                    // fix UL 2017-03-06: exception if tmp directory is not available
+                    File dir = new File("tmp");
+                    dir.mkdirs();
+                    file = new File(dir, "uploaded.xml");
+
                     fos = new FileOutputStream(file);
                 } catch (final java.io.FileNotFoundException e) {
                     new Notification("Could not open file<br/>",
