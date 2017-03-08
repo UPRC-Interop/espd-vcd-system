@@ -1,38 +1,43 @@
 package eu.esens.espdvcd.model.retriever;
 
-import eu.esens.espdvcd.model.Evidence;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import eu.esens.espdvcd.model.retriever.interfaces.IECertisEvidence;
+import eu.esens.espdvcd.model.retriever.interfaces.IECertisEvidenceGroup;
+import java.util.List;
 
 /**
  *
  * @author Konstantinos Raptis
  */
-public class ECertisEvidenceGroup {
-
+ @JsonPropertyOrder( {"ID", "evidences"} )
+public class ECertisEvidenceGroup implements IECertisEvidenceGroup {
+    
     private String ID;
-    private Evidence evidence;
-
-    public ECertisEvidenceGroup() {
-    }
-
-    public ECertisEvidenceGroup(String ID, Evidence evidence) {
-        this.ID = ID;
-        this.evidence = evidence;
-    }
-        
+    @JsonDeserialize(as = List.class, contentAs = ECertisEvidence.class)
+    private List<IECertisEvidence> evidences;
+    
+    @Override
+    @JsonProperty("ID")
     public String getID() {
         return ID;
     }
 
+    @Override
     public void setID(String ID) {
         this.ID = ID;
     }
 
-    public Evidence getEvidence() {
-        return evidence;
+    @Override
+    @JsonProperty("TypeOfEvidence")
+    public List<IECertisEvidence> getEvidences() {
+        return evidences;
     }
 
-    public void setEvidence(Evidence evidence) {
-        this.evidence = evidence;
+    @Override
+    public void setEvidences(List<IECertisEvidence> evidences) {
+        this.evidences = evidences;
     }
         
 }

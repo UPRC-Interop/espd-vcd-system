@@ -1,223 +1,122 @@
 package eu.esens.espdvcd.model.retriever;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import java.util.ArrayList;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import eu.esens.espdvcd.model.retriever.interfaces.IECertisCriterion;
+import eu.esens.espdvcd.model.retriever.interfaces.IECertisEvidenceGroup;
+import eu.esens.espdvcd.model.retriever.interfaces.IECertisLegislationReference;
+import eu.esens.espdvcd.model.retriever.interfaces.IECertisText;
 import java.util.List;
 
 /**
  *
  * @author Konstantinos Raptis
  */
-@JsonPropertyOrder( {"ID", "typeCode", "name", "domainID", "versionID", "legislationReference", "evidenceGroups"} )
-public class ECertisCriterion {
+// @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonPropertyOrder( {"ID", "typeCode", "name", "domainID", "versionID", "legislationReference"} )
+public class ECertisCriterion implements IECertisCriterion {
     
     private String ID;
     private String typeCode;
-    private Text name;
+    @JsonDeserialize(as = ECertisText.class)
+    private IECertisText name;
     private String domainID;
     private String versionID;
-    private List<LegislationReference> legislationReference;
-    private List<EvidenceGroup> evidenceGroups;
-//        
-//    private ECertisCriterion parentCriterion;
-//    private List<ECertisCriterion> subCriterions; 
+    @JsonDeserialize(as = List.class, contentAs = ECertisLegislationReference.class)
+    private List<IECertisLegislationReference> legislationReference;
+    @JsonDeserialize(as = List.class, contentAs = ECertisEvidenceGroup.class)
+    private List<IECertisEvidenceGroup> evidenceGroup;
+    @JsonDeserialize(as = ECertisCriterion.class)
+    private IECertisCriterion parentCriterion;
     
-    
-    public ECertisCriterion() {
-        
-    }
-    
-    @JsonProperty(value = "ID")
-    public String getID() {
-        return ID;
-    }
-
+    @Override
     public void setID(String ID) {
         this.ID = ID;
     }
 
-    @JsonProperty(value = "TypeCode")
-    public String getTypeCode() {
-        return typeCode;
+    @Override
+    @JsonProperty("ID")
+    public String getID() {
+        return ID;
     }
-        
+
+    @Override
     public void setTypeCode(String typeCode) {
         this.typeCode = typeCode;
     }
-    
-    @JsonProperty(value = "Name")
-    public Text getName() {
+
+    @Override
+    @JsonProperty("TypeCode")
+    public String getTypeCode() {
+        return typeCode;
+    }
+
+    @Override
+    public void setName(IECertisText name) {
+        this.name = name;
+    }
+
+    @Override
+    @JsonProperty("Name")
+    public IECertisText getName() {
         return name;
     }
 
-    public void setName(Text name) {
-        this.name = name;
+    @Override
+    public void setDomainID(String domainID) {
+        this.domainID = domainID;
     }
-       
-    @JsonProperty(value = "DomainID")
+
+    @Override
+    @JsonProperty("DomainID")
     public String getDomainID() {
         return domainID;
     }
 
-    public void setDomainID(String domainID) {
-        this.domainID = domainID;
+    @Override
+    public void setVersionID(String versionID) {
+        this.versionID = versionID;
     }
-    
-    @JsonProperty(value = "VersionID")
+
+    @Override
+    @JsonProperty("VersionID")
     public String getVersionID() {
         return versionID;
     }
 
-    public void setVersionID(String versionID) {
-        this.versionID = versionID;
+    @Override
+    public void setLegislationReference(List<IECertisLegislationReference> legislationReference) {
+        this.legislationReference = legislationReference;
     }
-    
-    @JsonProperty(value = "LegislationReference")
-    public List<LegislationReference> getLegislationReference() {
-        if (legislationReference == null) {
-            legislationReference = new ArrayList<>();
-        }
+
+    @Override
+    @JsonProperty("LegislationReference")
+    public List<IECertisLegislationReference> getLegislationReference() {
         return legislationReference;
     }
 
-    public void setLegislationReference(List<LegislationReference> legislationReference) {
-        this.legislationReference = legislationReference;
+    @Override
+    public void setEvidenceGroup(List<IECertisEvidenceGroup> evidenceGroup) {
+        this.evidenceGroup = evidenceGroup;
     }
-          
-    public static class Text {
-        
-        private String languageID;
-        private String value;
-        
-        @JsonProperty("languageID")
-        public String getLanguageID() {
-            return languageID;
-        }
 
-        public void setLanguageID(String languageID) {
-            this.languageID = languageID;
-        }
-        
-        @JsonProperty("value")
-        public String getValue() {
-            return value;
-        }
-
-        public void setValue(String value) {
-            this.value = value;
-        }
-           
+    @Override
+    @JsonProperty("RequirementGroup")
+    public List<IECertisEvidenceGroup> getEvidenceGroup() {
+        return evidenceGroup;
     }
-    
-    public static class EvidenceIntendedUse {
-        
-        private Text description;
 
-        @JsonProperty("Description")
-        public Text getDescription() {
-            return description;
-        }
-
-        public void setDescription(Text description) {
-            this.description = description;
-        }
-               
+    @Override
+    public void setParentCriterion(IECertisCriterion parentCriterion) {
+        this.parentCriterion = parentCriterion;
     }
-    
-    @JsonPropertyOrder( {"title", "description", "jurisdictionLevelCode", "article", "URI"} )
-    public static class LegislationReference {
-                
-        private Text title;
-        private Text description;
-        private String jurisdictionLevelCode;
-        private Text article;
-        private String URI;
-        
-        @JsonProperty("Title")
-        public Text getTitle() {
-            return title;
-        }
 
-        public void setTitle(Text title) {
-            this.title = title;
-        }
-        
-        @JsonProperty("Description")
-        public Text getDescription() {
-            return description;
-        }
-
-        public void setDescription(Text description) {
-            this.description = description;
-        }
-        
-        @JsonProperty("JurisdictionLevelCode")
-        public String getJurisdictionLevelCode() {
-            return jurisdictionLevelCode;
-        }
-
-        public void setJurisdictionLevelCode(String JurisdictionLevelCode) {
-            this.jurisdictionLevelCode = JurisdictionLevelCode;
-        }
-        
-        @JsonProperty("Article")
-        public Text getArticle() {
-            return article;
-        }
-
-        public void setArticle(Text article) {
-            this.article = article;
-        }
-        
-        @JsonProperty("URI")
-        public String getURI() {
-            return URI;
-        }
-
-        public void setURI(String URI) {
-            this.URI = URI;
-        }
-        
-    }
-    
-    @JsonPropertyOrder( {"ID", "evidences"} )
-    public static class EvidenceGroup {
-        
-        private String ID;
-        private List<Evidence> evidences;
-        
-        @JsonProperty("ID")
-        public String getID() {
-            return ID;
-        }
-
-        public void setID(String ID) {
-            this.ID = ID;
-        }
-        
-        @JsonProperty("TypeOfEvidence")
-        public List<Evidence> getEvidences() {
-            return evidences;
-        }
-
-        public void setEvidences(List<Evidence> evidences) {
-            this.evidences = evidences;
-        }
-                       
-    }
-    
-    @JsonPropertyOrder( {"ID", "typeCode", "name"} )
-    public static class Evidence {
-        
-        private String ID;
-        private String typeCode;
-        private Text name;
-        private Text description;
-        private String versionID;
-        private EvidenceIntendedUse evidenceIntendUse;
-        
-        
+    @Override
+    @JsonProperty("ParentCriterion")
+    public IECertisCriterion getParentCriterion() {
+        return parentCriterion;
     }
     
 }
