@@ -11,11 +11,11 @@ import java.util.List;
  * @author Konstantinos Raptis
  */
 public class ECertisValidityPeriod implements IECertisValidityPeriod {
-    
-    @JsonDeserialize(as = List.class, contentAs = ECertisText.class)
+        
     private List<IECertisText> description;
     
     @Override
+    @JsonDeserialize(as = List.class, contentAs = ECertisText.class)
     public void setDescription(List<IECertisText> description) {
         this.description = description;
     }

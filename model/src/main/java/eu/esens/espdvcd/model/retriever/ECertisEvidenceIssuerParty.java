@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import eu.esens.espdvcd.model.retriever.interfaces.IECertisPartyName;
 import java.util.List;
 import eu.esens.espdvcd.model.retriever.interfaces.IECertisEvidenceIssuerParty;
-import eu.esens.espdvcd.model.retriever.interfaces.IECertisStringWrapper;
+import eu.esens.espdvcd.model.retriever.interfaces.IECertisWebsiteURI;
 
 /**
  *
@@ -14,24 +14,24 @@ import eu.esens.espdvcd.model.retriever.interfaces.IECertisStringWrapper;
  */
 @JsonPropertyOrder( {"websiteURI", "partyName"} )
 public class ECertisEvidenceIssuerParty implements IECertisEvidenceIssuerParty {
-    
-    @JsonDeserialize(as = ECertisStringWrapper.class)
-    private IECertisStringWrapper websiteURI;
-    @JsonDeserialize(as = List.class, contentAs = ECertisPartyName.class)
+        
+    private IECertisWebsiteURI websiteURI;
     private List<IECertisPartyName> partyName;
     
     @Override
-    public void setWebsiteURI(IECertisStringWrapper websiteURI) {
+    @JsonDeserialize(as = ECertisWebsiteURI.class)
+    public void setWebsiteURI(IECertisWebsiteURI websiteURI) {
         this.websiteURI = websiteURI;
     }
 
     @Override
     @JsonProperty("WebsiteURI")
-    public IECertisStringWrapper getWebsiteURI() {
+    public IECertisWebsiteURI getWebsiteURI() {
         return websiteURI;
     }
 
     @Override
+    @JsonDeserialize(as = List.class, contentAs = ECertisPartyName.class)
     public void setPartyName(List<IECertisPartyName> partyName) {
         this.partyName = partyName;
     }

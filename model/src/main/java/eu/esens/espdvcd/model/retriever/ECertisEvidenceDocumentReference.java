@@ -14,15 +14,13 @@ import eu.esens.espdvcd.model.retriever.interfaces.IECertisIssuerParty;
  */
 @JsonPropertyOrder( {"attachment", "validityPeriod", "issuerParty"} )
 public class ECertisEvidenceDocumentReference implements IECertisEvidenceDocumentReference {
-    
-    @JsonDeserialize(as = ECertisAttachment.class)
+        
     private IECertisAttachment attachment;
-    @JsonDeserialize(as = ECertisValidityPeriod.class)
     private IECertisValidityPeriod validityPeriod;
-    @JsonDeserialize(as = ECertisIssuerParty.class)
     private IECertisIssuerParty issuerParty;
     
     @Override
+    @JsonDeserialize(as = ECertisAttachment.class)
     public void setAttachment(IECertisAttachment attachment) {
         this.attachment = attachment;
     }
@@ -34,6 +32,7 @@ public class ECertisEvidenceDocumentReference implements IECertisEvidenceDocumen
     }
 
     @Override
+    @JsonDeserialize(as = ECertisValidityPeriod.class)
     public void setValidityPeriod(IECertisValidityPeriod validityPeriod) {
         this.validityPeriod = validityPeriod;
     }
@@ -45,6 +44,7 @@ public class ECertisEvidenceDocumentReference implements IECertisEvidenceDocumen
     }
 
     @Override
+    @JsonDeserialize(as = ECertisIssuerParty.class)
     public void setIssuerParty(IECertisIssuerParty issuerParty) {
         this.issuerParty = issuerParty;
     }

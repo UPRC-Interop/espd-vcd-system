@@ -4,10 +4,10 @@ package eu.esens.espdvcd.model.retriever.interfaces;
  *
  * @author Konstantinos Raptis
  */
-public interface IECertisStringWrapper {
+public interface IECertisWebsiteURI {
     
-    void setValue(String value);
+    void setWebsiteURI(String websiteURI);
     
-    String getValue();
+    String getWebsiteURI();
     
 }

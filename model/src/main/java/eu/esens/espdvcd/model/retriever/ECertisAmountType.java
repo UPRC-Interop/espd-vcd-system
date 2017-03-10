@@ -10,12 +10,9 @@ import eu.esens.espdvcd.model.retriever.interfaces.IECertisAmountType;
  */
 @JsonPropertyOrder({"value", "currencyID", "currencyCodeListVersionID"})
 public class ECertisAmountType implements IECertisAmountType {
-    
-    @JsonProperty("value")
+        
     private String value;
-    @JsonProperty("currencyID")
     private String currencyID;
-    @JsonProperty("currencyCodeListVersionID")
     private String currencyCodeListVersionID;
     
     @Override
@@ -24,6 +21,7 @@ public class ECertisAmountType implements IECertisAmountType {
     }
 
     @Override
+    @JsonProperty("value")
     public String getValue() {
         return value;
     }
@@ -34,6 +32,7 @@ public class ECertisAmountType implements IECertisAmountType {
     }
 
     @Override
+    @JsonProperty("currencyID")
     public String getCurrencyID() {
         return currencyID;
     }
@@ -44,6 +43,7 @@ public class ECertisAmountType implements IECertisAmountType {
     }
 
     @Override
+    @JsonProperty("currencyCodeListVersionID")
     public String getCurrencyCodeListVersionID() {
         return currencyCodeListVersionID;
     }

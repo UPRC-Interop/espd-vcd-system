@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import eu.esens.espdvcd.model.retriever.interfaces.IECertisLegislationReference;
 import eu.esens.espdvcd.model.retriever.interfaces.IECertisText;
+import eu.esens.espdvcd.model.retriever.interfaces.IECertisURI;
 
 /**
  *
@@ -12,15 +13,13 @@ import eu.esens.espdvcd.model.retriever.interfaces.IECertisText;
  */
 @JsonPropertyOrder( {"title", "description", "jurisdictionLevelCode", "article", "URI"} )
 public class ECertisLegislationReference implements IECertisLegislationReference {
-    
-    @JsonDeserialize(as = ECertisText.class)
+        
     private IECertisText title;
-    @JsonDeserialize(as = ECertisText.class)
     private IECertisText description;
     private String jurisdictionLevelCode;
-    @JsonDeserialize(as = ECertisText.class)
     private IECertisText article;
-    private String URI;
+    private IECertisURI URI;
+    
     
     @Override
     @JsonProperty("Title")
@@ -29,6 +28,7 @@ public class ECertisLegislationReference implements IECertisLegislationReference
     }
 
     @Override
+    @JsonDeserialize(as = ECertisText.class)
     public void setTitle(IECertisText title) {
         this.title = title;
     }
@@ -40,6 +40,7 @@ public class ECertisLegislationReference implements IECertisLegislationReference
     }
 
     @Override
+    @JsonDeserialize(as = ECertisText.class)
     public void setDescription(IECertisText description) {
         this.description = description;
     }
@@ -61,21 +62,23 @@ public class ECertisLegislationReference implements IECertisLegislationReference
         return article;
     }
 
-    @Override
+    @Override 
+    @JsonDeserialize(as = ECertisText.class)
     public void setArticle(IECertisText article) {
         this.article = article;
     }
-   
+
     @Override
     @JsonProperty("URI")
-    public String getURI() {
+    public IECertisURI getURI() {
         return URI;
     }
 
     @Override
-    public void setURI(String URI) {
+    @JsonDeserialize(as = ECertisURI.class)
+    public void setURI(IECertisURI URI) {
         this.URI = URI;
     }
-  
+       
 }
 

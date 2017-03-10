@@ -10,11 +10,11 @@ import eu.esens.espdvcd.model.retriever.interfaces.IECertisText;
  * @author Konstantinos Raptis
  */
 public class ECertisPartyName implements IECertisPartyName {
-
-    @JsonDeserialize(as = ECertisText.class)
+    
     private IECertisText name;
     
     @Override
+    @JsonDeserialize(as = ECertisText.class)
     public void setName(IECertisText name) {
         this.name = name;
     }

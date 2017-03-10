@@ -10,11 +10,11 @@ import eu.esens.espdvcd.model.retriever.interfaces.IECertisExternalReference;
  * @author Konstantinos Raptis
  */
 public class ECertisAttachment implements IECertisAttachment {
-    
-    @JsonDeserialize(as = ECertisExternalReference.class)
+        
     private IECertisExternalReference externalReference;
     
     @Override
+    @JsonDeserialize(as = ECertisExternalReference.class)
     public void setExternalReference(IECertisExternalReference externalReference) {
         this.externalReference = externalReference;
     }

@@ -22,20 +22,14 @@ public class ECertisEvidence implements IECertisEvidence {
     
     private String ID;
     private String typeCode;
-    @JsonDeserialize(as = ECertisText.class)
     private IECertisText name;
-    @JsonDeserialize(as = ECertisText.class)
     private IECertisText description;
     private String versionID;
-    @JsonDeserialize(as = ECertisAmountType.class)
     private IECertisAmountType feeAmount;
-    @JsonDeserialize(as = ECertisEvidenceIntendedUse.class)
     private IECertisEvidenceIntendedUse evidenceIntendedUse;
-    @JsonDeserialize(as = List.class, contentAs = ECertisEvidenceIssuerParty.class)
     private List<IECertisEvidenceIssuerParty> evidenceIssuerParty;
     private String addresseeDescription;
     private List<String> jurisdictionLevelCode;
-    @JsonDeserialize(as = List.class, contentAs = ECertisEvidenceDocumentReference.class)
     private List<IECertisEvidenceDocumentReference> evidenceDocumentReference;
 
     @Override
@@ -61,6 +55,7 @@ public class ECertisEvidence implements IECertisEvidence {
     }
 
     @Override
+    @JsonDeserialize(as = ECertisText.class)
     public void setName(IECertisText name) {
         this.name = name;
     }
@@ -72,6 +67,7 @@ public class ECertisEvidence implements IECertisEvidence {
     }
 
     @Override
+    @JsonDeserialize(as = ECertisText.class)
     public void setDescription(IECertisText description) {
         this.description = description;
     }
@@ -94,6 +90,7 @@ public class ECertisEvidence implements IECertisEvidence {
     }
 
     @Override
+    @JsonDeserialize(as = ECertisAmountType.class)
     public void setFeeAmount(IECertisAmountType feeAmount) {
         this.feeAmount = feeAmount;
     }
@@ -105,6 +102,7 @@ public class ECertisEvidence implements IECertisEvidence {
     }
     
     @Override
+    @JsonDeserialize(as = ECertisEvidenceIntendedUse.class)
     public void setEvidenceIntendedUse(IECertisEvidenceIntendedUse evidenceIntendedUse) {
         this.evidenceIntendedUse = evidenceIntendedUse;
     }
@@ -116,6 +114,7 @@ public class ECertisEvidence implements IECertisEvidence {
     }
 
     @Override
+    @JsonDeserialize(as = List.class, contentAs = ECertisEvidenceIssuerParty.class)
     public void setEvidenceIssuerParty(List<IECertisEvidenceIssuerParty> evidenceIssuerParty) {
         this.evidenceIssuerParty = evidenceIssuerParty;
     }
@@ -150,6 +149,7 @@ public class ECertisEvidence implements IECertisEvidence {
     }
 
     @Override
+    @JsonDeserialize(as = List.class, contentAs = ECertisEvidenceDocumentReference.class)
     public void setEvidenceDocumentReference(List<IECertisEvidenceDocumentReference> evidenceDocumentReference) {
         this.evidenceDocumentReference = evidenceDocumentReference;
     }

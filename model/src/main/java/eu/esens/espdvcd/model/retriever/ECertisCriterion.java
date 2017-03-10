@@ -19,19 +19,13 @@ public class ECertisCriterion implements IECertisCriterion {
     
     private String ID;
     private String typeCode;
-    @JsonDeserialize(as = ECertisText.class)
     private IECertisText name;
-    @JsonDeserialize(as = ECertisText.class)
     private IECertisText description;
     private String domainID;
     private String versionID;
-    @JsonDeserialize(as = List.class, contentAs = ECertisLegislationReference.class)
     private List<IECertisLegislationReference> legislationReference;
-    @JsonDeserialize(as = List.class, contentAs = ECertisEvidenceGroup.class)
     private List<IECertisEvidenceGroup> evidenceGroup;
-    @JsonDeserialize(as = List.class, contentAs = ECertisCriterion.class)
     private List<IECertisCriterion> subCriterion;
-    @JsonDeserialize(as = ECertisCriterion.class)
     private IECertisCriterion parentCriterion;
     
     @Override
@@ -57,6 +51,7 @@ public class ECertisCriterion implements IECertisCriterion {
     }
 
     @Override
+    @JsonDeserialize(as = ECertisText.class)
     public void setName(IECertisText name) {
         this.name = name;
     }
@@ -68,6 +63,7 @@ public class ECertisCriterion implements IECertisCriterion {
     }
     
     @Override
+    @JsonDeserialize(as = ECertisText.class)
     public void setDescription(IECertisText description) {
         this.description = description;
     }
@@ -101,6 +97,7 @@ public class ECertisCriterion implements IECertisCriterion {
     }
 
     @Override
+    @JsonDeserialize(as = List.class, contentAs = ECertisLegislationReference.class)
     public void setLegislationReference(List<IECertisLegislationReference> legislationReference) {
         this.legislationReference = legislationReference;
     }
@@ -112,6 +109,7 @@ public class ECertisCriterion implements IECertisCriterion {
     }
 
     @Override
+    @JsonDeserialize(as = List.class, contentAs = ECertisEvidenceGroup.class)
     public void setEvidenceGroup(List<IECertisEvidenceGroup> evidenceGroup) {
         this.evidenceGroup = evidenceGroup;
     }
@@ -123,6 +121,7 @@ public class ECertisCriterion implements IECertisCriterion {
     }
 
     @Override
+    @JsonDeserialize(as = List.class, contentAs = ECertisCriterion.class)
     public void setSubCriterion(List<IECertisCriterion> subCriterion) {
         this.subCriterion = subCriterion;
     }
@@ -134,6 +133,7 @@ public class ECertisCriterion implements IECertisCriterion {
     }
     
     @Override
+    @JsonDeserialize(as = ECertisCriterion.class)
     public void setParentCriterion(IECertisCriterion parentCriterion) {
         this.parentCriterion = parentCriterion;
     }

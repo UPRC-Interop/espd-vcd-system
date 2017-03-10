@@ -7,7 +7,10 @@ import eu.esens.espdvcd.retriever.criteria.ECertisCriteriaExtractor;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.CriterionType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementGroupType;
+import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -28,7 +31,7 @@ public class ECertisCriteriaDataRetrieverTest {
         // national - hungarian origin
         "ac610d21-1f2f-41b1-85bb-03ac43a305cb", // OK
         // eu
-        "bdf0601d-2480-4250-b870-658d0ee95be6", "b61bbeb7-690e-4a40-bc68-d6d4ecfaa3d4"};
+        "bdf0601d-2480-4250-b870-658d0ee95be6", "b61bbeb7-690e-4a40-bc68-d6d4ecfaa3d4"}; // OK OK
 
     public ECertisCriteriaDataRetrieverTest() {
     }
@@ -41,11 +44,13 @@ public class ECertisCriteriaDataRetrieverTest {
     @Test
     public void testGetCriterionV2() {
 
-        try {
-            extractor.getCriterionV2(criterionIds[3]);
-        } catch (RetrieverException ex) {
-            System.err.println(ex);
-        }
+        Arrays.asList(criterionIds).forEach(ID -> {
+            try {
+                extractor.getCriterionV2(ID);
+            } catch (RetrieverException ex) {
+                Logger.getLogger(ECertisCriteriaDataRetrieverTest.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
     }
 
 //    @Ignore
@@ -70,20 +75,6 @@ public class ECertisCriteriaDataRetrieverTest {
                 }
             });
             System.out.println("Number of eu criteria is : " + ids.size());
-        } catch (RetrieverException ex) {
-            System.err.println(ex);
-        }
-    }
-
-    @Ignore
-    @Test
-    public void testGetCriterionNationality() {
-        ECertisCriteriaExtractor extractor = new ECertisCriteriaExtractor();
-        try {
-            // CriterionType c = extractor.getCriterion("9fc69031-5b4d-440a-828c-2167e6f22328");
-            System.out.println(
-                    extractor.getJurisdictionLevelCodeFromRequirementGroup("a34b70d6-c43d-4726-9a88-8e2b438424bf")
-            );
         } catch (RetrieverException ex) {
             System.err.println(ex);
         }

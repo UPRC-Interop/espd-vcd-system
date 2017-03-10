@@ -1,8 +1,10 @@
 package eu.esens.espdvcd.retriever.criteria;
 
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import eu.esens.espdvcd.builder.model.ModelFactory;
 import eu.esens.espdvcd.retriever.utils.Constants;
 import eu.esens.espdvcd.codelist.Codelists;
@@ -231,10 +233,10 @@ public class ECertisCriteriaExtractor implements CriteriaExtractor, CriteriaData
         return theCriterion;
     }
     
-    public ECertisCriterion getCriterionV2(String criterionId) 
+    public ECertisCriterion getCriterionV2(String criterionId)
             throws RetrieverException {
         BufferedReader br = null;
-        ECertisCriterion c = new ECertisCriterion();
+        ECertisCriterion theCriterion = null;
         
         try {
             URL url = new URL(Constants.ECERTIS_URL + Constants.AVAILABLE_EU_CRITERIA + criterionId + "/");
@@ -244,28 +246,31 @@ public class ECertisCriteriaExtractor implements CriteriaExtractor, CriteriaData
             connection.setConnectTimeout(15000);
             connection.connect();
 
-            // Http Status 200 = ok
-            if (connection.getResponseCode() != 200) {
+            if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
                 throw new RetrieverException("HTTP error code : " + connection.getResponseCode());
             }
 
             br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             StringBuilder builder = new StringBuilder();
             String output;
-
+            
+            // Read stream
             while ((output = br.readLine()) != null) {
                 builder.append(output);
             }
-            
+                       
+            // Pass json string to mapper
             ObjectMapper mapper = new ObjectMapper();
-                        
-            // mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-                        
-            ECertisCriterion ct = mapper.readValue(builder.toString(), ECertisCriterion.class);
+            mapper.setSerializationInclusion(Include.NON_NULL);
+            theCriterion = mapper.readValue(builder.toString(), ECertisCriterion.class);
             
-            String prettyCt = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(ct);
-            System.out.println(prettyCt);
             
+            // Print JSON String
+//            String prettyCt = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(ct);
+//            System.out.println(prettyCt);
+        } catch (RetrieverException ex) {
+            Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RetrieverException("Criterion with Id <<" + criterionId + ">> does not exist", ex);
         } catch (MalformedURLException ex) {
             Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.SEVERE, null, ex);
             throw new RetrieverException("Malformed URL", ex);
@@ -284,7 +289,7 @@ public class ECertisCriteriaExtractor implements CriteriaExtractor, CriteriaData
             }
         }
         
-        return c;
+        return theCriterion;
     }
     
     @Override
@@ -370,7 +375,7 @@ public class ECertisCriteriaExtractor implements CriteriaExtractor, CriteriaData
         }
         return europeanCriterionIdList;
     }
-    
+        
     // Extract Given Criterion JurisdictionLevelCode Origin
     private JurisdictionLevelCodeOrigin getCriterionJurisdictionLevelCodeOrigin(CriterionType c) {
             
@@ -397,77 +402,77 @@ public class ECertisCriteriaExtractor implements CriteriaExtractor, CriteriaData
                 .containsId(countryCode.toUpperCase());
     }
     
-    public String getJurisdictionLevelCodeFromRequirementGroup(String criterionId) 
-            throws RetrieverException {
-        BufferedReader br = null;
-        String nationality = null;
-        
-        try {
-            URL url = new URL(Constants.ECERTIS_URL + Constants.AVAILABLE_EU_CRITERIA + criterionId + "/");
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
-            connection.setRequestProperty("Accept", "application/json");
-            connection.setConnectTimeout(15000);
-            connection.connect();
-
-            // Http Status 200 = ok
-            if (connection.getResponseCode() != 200) {
-                throw new RetrieverException("HTTP error code : " + connection.getResponseCode());
-            }
-
-            br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            StringBuilder builder = new StringBuilder();
-            String output;
-
-            while ((output = br.readLine()) != null) {
-                builder.append(output);
-            }
-            
-            ObjectMapper m = new ObjectMapper();
-            JsonNode rootNode = m.readTree(builder.toString());
-            JsonNode requirementGroupNode = rootNode.path("RequirementGroup");
-            
-            boolean flag1 = false;
-            boolean flag2 = false;
-            
-            for (JsonNode rqgNode : requirementGroupNode) {
-                JsonNode TypeOfEvidenceNode = rqgNode.path("TypeOfEvidence");
-                       
-                for (JsonNode toeNode : TypeOfEvidenceNode) {
-                    JsonNode JurisdictionLevelCodeNode = toeNode.path("JurisdictionLevelCode");
-                    
-                    for (JsonNode jlcNode : JurisdictionLevelCodeNode) {
-                        nationality = jlcNode.asText();
-                        flag2 = true;
-                    }
-                    if (flag2) {
-                        flag1 = true;
-                        break;
-                    }
-                }
-                if (flag1) break;
-            }
-                     
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.SEVERE, null, ex);
-            throw new RetrieverException("Malformed URL", ex);
-        } catch (IOException ex) {
-            Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.SEVERE, null, ex);
-            throw new RetrieverException("Error when trying to connect with e-Certis service", ex);
-        } finally {
-            // close all streams
-            if (br != null) {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.SEVERE, null, e);
-                    throw new RetrieverException("Error when trying to close reader", e);
-                }
-            }
-        }
-        
-        return nationality;
-    }
+//    public String getJurisdictionLevelCodeFromRequirementGroup(String criterionId) 
+//            throws RetrieverException {
+//        BufferedReader br = null;
+//        String nationality = null;
+//        
+//        try {
+//            URL url = new URL(Constants.ECERTIS_URL + Constants.AVAILABLE_EU_CRITERIA + criterionId + "/");
+//            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+//            connection.setRequestMethod("GET");
+//            connection.setRequestProperty("Accept", "application/json");
+//            connection.setConnectTimeout(15000);
+//            connection.connect();
+//
+//            // Http Status 200 = ok
+//            if (connection.getResponseCode() != 200) {
+//                throw new RetrieverException("HTTP error code : " + connection.getResponseCode());
+//            }
+//
+//            br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+//            StringBuilder builder = new StringBuilder();
+//            String output;
+//
+//            while ((output = br.readLine()) != null) {
+//                builder.append(output);
+//            }
+//            
+//            ObjectMapper m = new ObjectMapper();
+//            JsonNode rootNode = m.readTree(builder.toString());
+//            JsonNode requirementGroupNode = rootNode.path("RequirementGroup");
+//            
+//            boolean flag1 = false;
+//            boolean flag2 = false;
+//            
+//            for (JsonNode rqgNode : requirementGroupNode) {
+//                JsonNode TypeOfEvidenceNode = rqgNode.path("TypeOfEvidence");
+//                       
+//                for (JsonNode toeNode : TypeOfEvidenceNode) {
+//                    JsonNode JurisdictionLevelCodeNode = toeNode.path("JurisdictionLevelCode");
+//                    
+//                    for (JsonNode jlcNode : JurisdictionLevelCodeNode) {
+//                        nationality = jlcNode.asText();
+//                        flag2 = true;
+//                    }
+//                    if (flag2) {
+//                        flag1 = true;
+//                        break;
+//                    }
+//                }
+//                if (flag1) break;
+//            }
+//                     
+//        } catch (MalformedURLException ex) {
+//            Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.SEVERE, null, ex);
+//            throw new RetrieverException("Malformed URL", ex);
+//        } catch (IOException ex) {
+//            Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.SEVERE, null, ex);
+//            throw new RetrieverException("Error when trying to connect with e-Certis service", ex);
+//        } finally {
+//            // close all streams
+//            if (br != null) {
+//                try {
+//                    br.close();
+//                } catch (IOException e) {
+//                    Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.SEVERE, null, e);
+//                    throw new RetrieverException("Error when trying to close reader", e);
+//                }
+//            }
+//        }
+//        
+//        return nationality;
+//    }
     
     // Get All National Entities from e-Certis
 //    public List<NationalEntity> getAllNationalEntities() 
