@@ -20,6 +20,10 @@ public interface IECertisCriterion {
     
     IECertisText getName();
     
+    void setDescription(IECertisText description);
+    
+    IECertisText getDescription();
+    
     void setDomainID(String domainID);
     
     String getDomainID();
@@ -29,13 +33,17 @@ public interface IECertisCriterion {
     String getVersionID();
     
     void setLegislationReference(List<IECertisLegislationReference> legislationReference);
-    
+        
     List<IECertisLegislationReference> getLegislationReference();
-    
+        
     void setEvidenceGroup(List<IECertisEvidenceGroup> evidenceGroup);
     
     List<IECertisEvidenceGroup> getEvidenceGroup();
-  
+    
+    void setSubCriterion(List<IECertisCriterion> subCriterion);
+    
+    List<IECertisCriterion> getSubCriterion();
+    
     void setParentCriterion(IECertisCriterion parentCriterion);
     
     IECertisCriterion getParentCriterion();

@@ -1,6 +1,5 @@
 package eu.esens.espdvcd.model.retriever;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -14,20 +13,24 @@ import java.util.List;
  *
  * @author Konstantinos Raptis
  */
-// @JsonIgnoreProperties(ignoreUnknown = true)
-@JsonPropertyOrder( {"ID", "typeCode", "name", "domainID", "versionID", "legislationReference"} )
+@JsonPropertyOrder( {"ID", "typeCode", "name", "description", "domainID", "versionID", "legislationReference", "evidenceGroup",
+"subCriterion", "parentCriterion"} )
 public class ECertisCriterion implements IECertisCriterion {
     
     private String ID;
     private String typeCode;
     @JsonDeserialize(as = ECertisText.class)
     private IECertisText name;
+    @JsonDeserialize(as = ECertisText.class)
+    private IECertisText description;
     private String domainID;
     private String versionID;
     @JsonDeserialize(as = List.class, contentAs = ECertisLegislationReference.class)
     private List<IECertisLegislationReference> legislationReference;
     @JsonDeserialize(as = List.class, contentAs = ECertisEvidenceGroup.class)
     private List<IECertisEvidenceGroup> evidenceGroup;
+    @JsonDeserialize(as = List.class, contentAs = ECertisCriterion.class)
+    private List<IECertisCriterion> subCriterion;
     @JsonDeserialize(as = ECertisCriterion.class)
     private IECertisCriterion parentCriterion;
     
@@ -63,7 +66,18 @@ public class ECertisCriterion implements IECertisCriterion {
     public IECertisText getName() {
         return name;
     }
+    
+    @Override
+    public void setDescription(IECertisText description) {
+        this.description = description;
+    }
 
+    @Override
+    @JsonProperty("Description")
+    public IECertisText getDescription() {
+        return description;
+    }
+    
     @Override
     public void setDomainID(String domainID) {
         this.domainID = domainID;
@@ -108,6 +122,17 @@ public class ECertisCriterion implements IECertisCriterion {
         return evidenceGroup;
     }
 
+    @Override
+    public void setSubCriterion(List<IECertisCriterion> subCriterion) {
+        this.subCriterion = subCriterion;
+    }
+
+    @Override
+    @JsonProperty("SubCriterion")
+    public List<IECertisCriterion> getSubCriterion() {
+        return subCriterion;
+    }
+    
     @Override
     public void setParentCriterion(IECertisCriterion parentCriterion) {
         this.parentCriterion = parentCriterion;

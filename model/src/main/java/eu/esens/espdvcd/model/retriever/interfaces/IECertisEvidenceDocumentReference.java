@@ -14,4 +14,8 @@ public interface IECertisEvidenceDocumentReference {
     
     IECertisValidityPeriod getValidityPeriod();
     
+    void setIssuerParty(IECertisIssuerParty issuerParty);
+    
+    IECertisIssuerParty getIssuerParty();
+    
 }

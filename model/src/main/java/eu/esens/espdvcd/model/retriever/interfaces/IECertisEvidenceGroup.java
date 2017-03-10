@@ -8,6 +8,10 @@ import java.util.List;
  */
 public interface IECertisEvidenceGroup {
     
+//    IECertisID getID();
+//    
+//    void setID(IECertisID ID);
+    
     String getID();
     
     void setID(String ID);

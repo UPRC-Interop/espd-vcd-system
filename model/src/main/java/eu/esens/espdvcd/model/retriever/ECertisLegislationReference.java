@@ -65,7 +65,7 @@ public class ECertisLegislationReference implements IECertisLegislationReference
     public void setArticle(IECertisText article) {
         this.article = article;
     }
-
+   
     @Override
     @JsonProperty("URI")
     public String getURI() {
@@ -76,5 +76,6 @@ public class ECertisLegislationReference implements IECertisLegislationReference
     public void setURI(String URI) {
         this.URI = URI;
     }
-        
+  
 }
+

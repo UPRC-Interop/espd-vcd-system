@@ -258,12 +258,12 @@ public class ECertisCriteriaExtractor implements CriteriaExtractor, CriteriaData
             }
             
             ObjectMapper mapper = new ObjectMapper();
-            
-            mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-            
+                        
+            // mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+                        
             ECertisCriterion ct = mapper.readValue(builder.toString(), ECertisCriterion.class);
-            String prettyCt = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(ct);
             
+            String prettyCt = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(ct);
             System.out.println(prettyCt);
             
         } catch (MalformedURLException ex) {

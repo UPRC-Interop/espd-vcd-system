@@ -1,9 +1,9 @@
 package eu.esens.espdvcd.model.retriever;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import eu.esens.espdvcd.model.retriever.interfaces.IECertisAmountType;
 import eu.esens.espdvcd.model.retriever.interfaces.IECertisEvidence;
 import eu.esens.espdvcd.model.retriever.interfaces.IECertisEvidenceIntendedUse;
 import eu.esens.espdvcd.model.retriever.interfaces.IECertisText;
@@ -15,7 +15,6 @@ import eu.esens.espdvcd.model.retriever.interfaces.IECertisEvidenceIssuerParty;
  *
  * @author Konstantinos Raptis
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 @JsonPropertyOrder( {"ID", "typeCode", "name", "description", "versionID", "feeAmount",
 "evidenceIntendedUse", "evidenceIssuerParty", "addresseeDescription", "jurisdictionLevelCode", 
 "evidenceDocumentReference"} )
@@ -28,14 +27,13 @@ public class ECertisEvidence implements IECertisEvidence {
     @JsonDeserialize(as = ECertisText.class)
     private IECertisText description;
     private String versionID;
-    @JsonDeserialize(as = ECertisText.class)
-    private IECertisText feeAmount;
+    @JsonDeserialize(as = ECertisAmountType.class)
+    private IECertisAmountType feeAmount;
     @JsonDeserialize(as = ECertisEvidenceIntendedUse.class)
     private IECertisEvidenceIntendedUse evidenceIntendedUse;
     @JsonDeserialize(as = List.class, contentAs = ECertisEvidenceIssuerParty.class)
     private List<IECertisEvidenceIssuerParty> evidenceIssuerParty;
     private String addresseeDescription;
-    @JsonDeserialize(as = List.class, contentAs = String.class)
     private List<String> jurisdictionLevelCode;
     @JsonDeserialize(as = List.class, contentAs = ECertisEvidenceDocumentReference.class)
     private List<IECertisEvidenceDocumentReference> evidenceDocumentReference;
@@ -96,16 +94,16 @@ public class ECertisEvidence implements IECertisEvidence {
     }
 
     @Override
-    public void setFeeAmount(IECertisText feeAmount) {
+    public void setFeeAmount(IECertisAmountType feeAmount) {
         this.feeAmount = feeAmount;
     }
 
     @Override
     @JsonProperty("FeeAmount")
-    public IECertisText getFeeAmount() {
+    public IECertisAmountType getFeeAmount() {
         return feeAmount;
     }
-
+    
     @Override
     public void setEvidenceIntendedUse(IECertisEvidenceIntendedUse evidenceIntendedUse) {
         this.evidenceIntendedUse = evidenceIntendedUse;
@@ -123,6 +121,7 @@ public class ECertisEvidence implements IECertisEvidence {
     }
 
     @Override
+    @JsonProperty("EvidenceIssuerParty")
     public List<IECertisEvidenceIssuerParty> getEvidenceIssuerParty() {
         return evidenceIssuerParty;
     }
@@ -160,5 +159,5 @@ public class ECertisEvidence implements IECertisEvidence {
     public List<IECertisEvidenceDocumentReference> getEvidenceDocumentReference() {
         return evidenceDocumentReference;
     }
-         
+        
 }

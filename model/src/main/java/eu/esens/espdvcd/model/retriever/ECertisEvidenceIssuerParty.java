@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import eu.esens.espdvcd.model.retriever.interfaces.IECertisPartyName;
 import java.util.List;
 import eu.esens.espdvcd.model.retriever.interfaces.IECertisEvidenceIssuerParty;
+import eu.esens.espdvcd.model.retriever.interfaces.IECertisStringWrapper;
 
 /**
  *
@@ -14,18 +15,19 @@ import eu.esens.espdvcd.model.retriever.interfaces.IECertisEvidenceIssuerParty;
 @JsonPropertyOrder( {"websiteURI", "partyName"} )
 public class ECertisEvidenceIssuerParty implements IECertisEvidenceIssuerParty {
     
-    private String websiteURI;
+    @JsonDeserialize(as = ECertisStringWrapper.class)
+    private IECertisStringWrapper websiteURI;
     @JsonDeserialize(as = List.class, contentAs = ECertisPartyName.class)
     private List<IECertisPartyName> partyName;
     
     @Override
-    public void setWebsiteURI(String websiteURI) {
+    public void setWebsiteURI(IECertisStringWrapper websiteURI) {
         this.websiteURI = websiteURI;
     }
 
     @Override
     @JsonProperty("WebsiteURI")
-    public String getWebsiteURI() {
+    public IECertisStringWrapper getWebsiteURI() {
         return websiteURI;
     }
 
@@ -39,5 +41,5 @@ public class ECertisEvidenceIssuerParty implements IECertisEvidenceIssuerParty {
     public List<IECertisPartyName> getPartyName() {
         return partyName;
     }
-     
+
 }

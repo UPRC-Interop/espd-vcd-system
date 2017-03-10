@@ -12,12 +12,12 @@ import java.util.List;
  * @author Konstantinos Raptis
  */
  @JsonPropertyOrder( {"ID", "evidences"} )
-public class ECertisEvidenceGroup implements IECertisEvidenceGroup {
-    
-    private String ID;
+ public class ECertisEvidenceGroup implements IECertisEvidenceGroup {
+
+    private String ID; 
     @JsonDeserialize(as = List.class, contentAs = ECertisEvidence.class)
     private List<IECertisEvidence> evidences;
-    
+
     @Override
     @JsonProperty("ID")
     public String getID() {
@@ -26,9 +26,9 @@ public class ECertisEvidenceGroup implements IECertisEvidenceGroup {
 
     @Override
     public void setID(String ID) {
-        this.ID = ID;
+       this.ID = ID;
     }
-
+    
     @Override
     @JsonProperty("TypeOfEvidence")
     public List<IECertisEvidence> getEvidences() {

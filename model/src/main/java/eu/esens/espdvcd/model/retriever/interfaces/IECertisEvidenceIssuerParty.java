@@ -7,10 +7,10 @@ import java.util.List;
  * @author Konstantinos Raptis
  */
 public interface IECertisEvidenceIssuerParty {
+    
+    void setWebsiteURI(IECertisStringWrapper websiteURI);
         
-    void setWebsiteURI(String websiteURI);
-        
-    String getWebsiteURI();
+    IECertisStringWrapper getWebsiteURI();
     
     void setPartyName(List<IECertisPartyName> partyName);
     
