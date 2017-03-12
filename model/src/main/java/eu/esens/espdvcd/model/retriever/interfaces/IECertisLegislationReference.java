@@ -22,8 +22,8 @@ public interface IECertisLegislationReference {
 
     void setArticle(IECertisText article);
 
-    IECertisURI getURI();
+    String getURI();
     
-    void setURI(IECertisURI URI);
+    void setURI(String URI);
     
  }

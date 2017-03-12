@@ -7,6 +7,8 @@ import eu.esens.espdvcd.model.retriever.interfaces.IECertisCriterion;
 import eu.esens.espdvcd.model.retriever.interfaces.IECertisEvidenceGroup;
 import eu.esens.espdvcd.model.retriever.interfaces.IECertisLegislationReference;
 import eu.esens.espdvcd.model.retriever.interfaces.IECertisText;
+import eu.esens.espdvcd.model.util.CustomStringValueDeserializer;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,6 +31,7 @@ public class ECertisCriterion implements IECertisCriterion {
     private IECertisCriterion parentCriterion;
     
     @Override
+    @JsonDeserialize(using = CustomStringValueDeserializer.class)
     public void setID(String ID) {
         this.ID = ID;
     }
@@ -40,6 +43,7 @@ public class ECertisCriterion implements IECertisCriterion {
     }
 
     @Override
+    @JsonDeserialize(using = CustomStringValueDeserializer.class)
     public void setTypeCode(String typeCode) {
         this.typeCode = typeCode;
     }
@@ -75,6 +79,7 @@ public class ECertisCriterion implements IECertisCriterion {
     }
     
     @Override
+    @JsonDeserialize(using = CustomStringValueDeserializer.class)
     public void setDomainID(String domainID) {
         this.domainID = domainID;
     }
@@ -86,6 +91,7 @@ public class ECertisCriterion implements IECertisCriterion {
     }
 
     @Override
+    @JsonDeserialize(using = CustomStringValueDeserializer.class)
     public void setVersionID(String versionID) {
         this.versionID = versionID;
     }
@@ -105,6 +111,9 @@ public class ECertisCriterion implements IECertisCriterion {
     @Override
     @JsonProperty("LegislationReference")
     public List<IECertisLegislationReference> getLegislationReference() {
+        if (legislationReference == null) {
+            legislationReference = new ArrayList<>();
+        }
         return legislationReference;
     }
 
@@ -117,6 +126,9 @@ public class ECertisCriterion implements IECertisCriterion {
     @Override
     @JsonProperty("RequirementGroup")
     public List<IECertisEvidenceGroup> getEvidenceGroup() {
+        if (evidenceGroup == null) {
+            evidenceGroup = new ArrayList<>();
+        }
         return evidenceGroup;
     }
 
@@ -129,6 +141,9 @@ public class ECertisCriterion implements IECertisCriterion {
     @Override
     @JsonProperty("SubCriterion")
     public List<IECertisCriterion> getSubCriterion() {
+        if (subCriterion == null) {
+            subCriterion = new ArrayList<>();
+        }
         return subCriterion;
     }
     

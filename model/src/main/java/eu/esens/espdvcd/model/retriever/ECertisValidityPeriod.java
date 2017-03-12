@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import eu.esens.espdvcd.model.retriever.interfaces.IECertisText;
 import eu.esens.espdvcd.model.retriever.interfaces.IECertisValidityPeriod;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,6 +24,9 @@ public class ECertisValidityPeriod implements IECertisValidityPeriod {
     @Override
     @JsonProperty("Description")
     public List<IECertisText> getDescription() {
+        if (description == null) {
+            description = new ArrayList<>();
+        }
         return description;
     }
     

@@ -1,8 +1,8 @@
 package eu.esens.espdvcd.retriever.criteria;
 
+import eu.esens.espdvcd.model.retriever.interfaces.IECertisCriterion;
+import eu.esens.espdvcd.model.retriever.interfaces.IECertisEvidenceGroup;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
-import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.CriterionType;
-import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementGroupType;
 import java.util.List;
 
 /**
@@ -18,7 +18,7 @@ public interface CriteriaDataRetriever {
      * @return All National Criteria which mapped with Source Criterion.
      * @throws eu.esens.espdvcd.retriever.exception.RetrieverException
      */
-    List<CriterionType> getNationalCriterionMapping(String criterionId, String countryCode)
+    List<IECertisCriterion> getNationalCriterionMapping(String criterionId, String countryCode)
             throws RetrieverException;
         
     /**
@@ -27,7 +27,7 @@ public interface CriteriaDataRetriever {
      * @return Data of Criterion with given Id.
      * @throws eu.esens.espdvcd.retriever.exception.RetrieverException
      */
-    CriterionType getCriterion(String criterionId)
+    IECertisCriterion getCriterion(String criterionId)
             throws RetrieverException;
     
     /**
@@ -36,7 +36,7 @@ public interface CriteriaDataRetriever {
      * @return All Criterion Evidences.
      * @throws eu.esens.espdvcd.retriever.exception.RetrieverException 
      */
-    List<RequirementGroupType> getEvidences(String criterionId)
+    List<IECertisEvidenceGroup> getEvidences(String criterionId)
             throws RetrieverException;
                 
 }

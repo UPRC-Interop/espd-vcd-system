@@ -2,7 +2,9 @@ package eu.esens.espdvcd.model.retriever;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import eu.esens.espdvcd.model.retriever.interfaces.IECertisText;
+import eu.esens.espdvcd.model.util.CustomStringValueDeserializer;
 
 /**
  *
@@ -21,6 +23,7 @@ public class ECertisText implements IECertisText {
     }
 
     @Override
+    @JsonDeserialize(using = CustomStringValueDeserializer.class)
     public void setLanguageID(String languageID) {
         this.languageID = languageID;
     }
@@ -32,6 +35,7 @@ public class ECertisText implements IECertisText {
     }
 
     @Override
+    @JsonDeserialize(using = CustomStringValueDeserializer.class)
     public void setValue(String value) {
         this.value = value;
     }

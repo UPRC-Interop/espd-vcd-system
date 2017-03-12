@@ -8,9 +8,13 @@ import java.util.List;
  */
 public interface IECertisEvidenceIssuerParty {
     
-    void setWebsiteURI(IECertisWebsiteURI websiteURI);
-        
-    IECertisWebsiteURI getWebsiteURI();
+//    void setWebsiteURI(IECertisWebsiteURI websiteURI);
+//        
+//    IECertisWebsiteURI getWebsiteURI();
+    
+    void setWebsiteURI(String websiteURI);
+    
+    String getWebsiteURI();
     
     void setPartyName(List<IECertisPartyName> partyName);
     

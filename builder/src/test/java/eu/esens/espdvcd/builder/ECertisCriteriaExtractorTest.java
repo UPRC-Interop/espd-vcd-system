@@ -6,8 +6,6 @@ import eu.esens.espdvcd.retriever.criteria.ECertisCriteriaExtractor;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 /**
  *
@@ -16,31 +14,30 @@ import org.mockito.MockitoAnnotations;
 public class ECertisCriteriaExtractorTest {
 
     static int maxDepth = 1;
-    @Mock
     private ECertisCriteriaExtractor extractor;
    
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
+        extractor = new ECertisCriteriaExtractor();
     }
    
     /**
      * Test of getFullList method, of class ECertisCriteriaExtractor.
      */
-    @Test
-    public void testGetFullList() {
-        try {
-            extractor.getFullList().stream()
-                    .forEach( (SelectableCriterion sc) -> {
-                        System.out.println(sc.getID() + " " + sc.getName() + " (" + sc.getTypeCode() + ")");
-                        sc.getRequirementGroups().forEach(rg -> traverseRequirementGroup(rg, 1));
-                    });
-            System.out.println("Max Depth: " + maxDepth);
-            System.out.println("Criterion #: " + extractor.getFullList().size());
-        } catch (RetrieverException ex) {
-            System.err.println(ex);
-        }
-    }
+//    @Test
+//    public void testGetFullList() {
+//        try {
+//            extractor.getFullList().stream()
+//                    .forEach( (SelectableCriterion sc) -> {
+//                        System.out.println(sc.getID() + " " + sc.getName() + " (" + sc.getTypeCode() + ")");
+//                        sc.getRequirementGroups().forEach(rg -> traverseRequirementGroup(rg, 1));
+//                    });
+//            System.out.println("Max Depth: " + maxDepth);
+//            System.out.println("Criterion #: " + extractor.getFullList().size());
+//        } catch (RetrieverException ex) {
+//            System.err.println(ex);
+//        }
+//    }
 
     private void traverseRequirementGroup(RequirementGroup rg, int depth) {
 

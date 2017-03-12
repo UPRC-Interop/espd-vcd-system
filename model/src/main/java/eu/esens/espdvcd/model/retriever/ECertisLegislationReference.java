@@ -1,11 +1,11 @@
 package eu.esens.espdvcd.model.retriever;
 
+import eu.esens.espdvcd.model.util.CustomStringValueDeserializer;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import eu.esens.espdvcd.model.retriever.interfaces.IECertisLegislationReference;
 import eu.esens.espdvcd.model.retriever.interfaces.IECertisText;
-import eu.esens.espdvcd.model.retriever.interfaces.IECertisURI;
 
 /**
  *
@@ -18,7 +18,7 @@ public class ECertisLegislationReference implements IECertisLegislationReference
     private IECertisText description;
     private String jurisdictionLevelCode;
     private IECertisText article;
-    private IECertisURI URI;
+    private String URI;
     
     
     @Override
@@ -52,6 +52,7 @@ public class ECertisLegislationReference implements IECertisLegislationReference
     }
 
     @Override
+    @JsonDeserialize(using = CustomStringValueDeserializer.class)
     public void setJurisdictionLevelCode(String JurisdictionLevelCode) {
         this.jurisdictionLevelCode = JurisdictionLevelCode;
     }
@@ -70,13 +71,13 @@ public class ECertisLegislationReference implements IECertisLegislationReference
 
     @Override
     @JsonProperty("URI")
-    public IECertisURI getURI() {
+    public String getURI() {
         return URI;
     }
 
     @Override
-    @JsonDeserialize(as = ECertisURI.class)
-    public void setURI(IECertisURI URI) {
+    @JsonDeserialize(using = CustomStringValueDeserializer.class)
+    public void setURI(String URI) {
         this.URI = URI;
     }
        

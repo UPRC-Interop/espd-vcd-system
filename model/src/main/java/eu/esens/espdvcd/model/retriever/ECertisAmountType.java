@@ -2,7 +2,9 @@ package eu.esens.espdvcd.model.retriever;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import eu.esens.espdvcd.model.retriever.interfaces.IECertisAmountType;
+import eu.esens.espdvcd.model.util.CustomStringValueDeserializer;
 
 /**
  *
@@ -16,6 +18,7 @@ public class ECertisAmountType implements IECertisAmountType {
     private String currencyCodeListVersionID;
     
     @Override
+    @JsonDeserialize(using = CustomStringValueDeserializer.class)
     public void setValue(String value) {
         this.value = value;
     }
@@ -27,6 +30,7 @@ public class ECertisAmountType implements IECertisAmountType {
     }
 
     @Override
+    @JsonDeserialize(using = CustomStringValueDeserializer.class)
     public void setCurrencyID(String currencyID) {
         this.currencyID = currencyID;
     }
@@ -38,6 +42,7 @@ public class ECertisAmountType implements IECertisAmountType {
     }
 
     @Override
+    @JsonDeserialize(using = CustomStringValueDeserializer.class)
     public void setCurrencyCodeListVersionID(String currencyCodeListVersionID) {
         this.currencyCodeListVersionID = currencyCodeListVersionID;
     }

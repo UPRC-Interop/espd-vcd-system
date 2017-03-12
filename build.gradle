@@ -64,7 +64,7 @@ configure(subprojects)
         compile libraries.slf4j_api
         compile libraries.log4j_slf4j_impl
         compile libraries.log4j_core
-        compile libraries.log4j_api       
+        compile libraries.log4j_api   
         testCompile 'junit:junit:4.12'
         compile 'com.google.guava:guava:14.0'
     }

@@ -10,6 +10,8 @@ import eu.esens.espdvcd.model.retriever.interfaces.IECertisText;
 import java.util.List;
 import eu.esens.espdvcd.model.retriever.interfaces.IECertisEvidenceDocumentReference;
 import eu.esens.espdvcd.model.retriever.interfaces.IECertisEvidenceIssuerParty;
+import eu.esens.espdvcd.model.util.CustomStringValueDeserializer;
+import java.util.ArrayList;
 
 /**
  *
@@ -33,6 +35,7 @@ public class ECertisEvidence implements IECertisEvidence {
     private List<IECertisEvidenceDocumentReference> evidenceDocumentReference;
 
     @Override
+    @JsonDeserialize(using = CustomStringValueDeserializer.class)
     public void setID(String ID) {
         this.ID = ID;
     }
@@ -44,6 +47,7 @@ public class ECertisEvidence implements IECertisEvidence {
     }
 
     @Override
+    @JsonDeserialize(using = CustomStringValueDeserializer.class)
     public void setTypeCode(String typeCode) {
         this.typeCode = typeCode;
     }
@@ -79,6 +83,7 @@ public class ECertisEvidence implements IECertisEvidence {
     }
 
     @Override
+    @JsonDeserialize(using = CustomStringValueDeserializer.class)
     public void setVersionID(String versionID) {
         this.versionID = versionID;
     }
@@ -116,6 +121,9 @@ public class ECertisEvidence implements IECertisEvidence {
     @Override
     @JsonDeserialize(as = List.class, contentAs = ECertisEvidenceIssuerParty.class)
     public void setEvidenceIssuerParty(List<IECertisEvidenceIssuerParty> evidenceIssuerParty) {
+        if (evidenceIssuerParty == null) {
+            evidenceIssuerParty = new ArrayList<>();
+        }
         this.evidenceIssuerParty = evidenceIssuerParty;
     }
 
@@ -127,6 +135,7 @@ public class ECertisEvidence implements IECertisEvidence {
         
     
     @Override
+    @JsonDeserialize(using = CustomStringValueDeserializer.class)
     public void setAddresseeDescription(String addresseeDescription) {
         this.addresseeDescription = addresseeDescription;
     }
@@ -145,6 +154,9 @@ public class ECertisEvidence implements IECertisEvidence {
     @Override
     @JsonProperty("JurisdictionLevelCode")
     public List<String> getJurisdictionLevelCode() {
+        if (jurisdictionLevelCode == null) {
+            jurisdictionLevelCode = new ArrayList<>();
+        }
         return jurisdictionLevelCode;
     }
 
@@ -157,6 +169,9 @@ public class ECertisEvidence implements IECertisEvidence {
     @Override
     @JsonProperty("EvidenceDocumentReference")
     public List<IECertisEvidenceDocumentReference> getEvidenceDocumentReference() {
+        if (evidenceDocumentReference == null) {
+            evidenceDocumentReference = new ArrayList<>();
+        }
         return evidenceDocumentReference;
     }
         

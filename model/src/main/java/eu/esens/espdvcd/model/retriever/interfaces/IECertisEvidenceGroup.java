@@ -1,6 +1,5 @@
 package eu.esens.espdvcd.model.retriever.interfaces;
 
-import eu.esens.espdvcd.model.retriever.ECertisID;
 import java.util.List;
 
 /**
@@ -9,9 +8,9 @@ import java.util.List;
  */
 public interface IECertisEvidenceGroup {
     
-    ECertisID getID();
+    String getID();
     
-    void setID(ECertisID ID);
+    void setID(String ID);
        
     List<IECertisEvidence> getEvidences(); 
     
