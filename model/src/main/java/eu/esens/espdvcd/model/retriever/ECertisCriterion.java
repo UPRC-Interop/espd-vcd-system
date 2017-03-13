@@ -15,8 +15,19 @@ import java.util.List;
  *
  * @author Konstantinos Raptis
  */
-@JsonPropertyOrder( {"ID", "typeCode", "name", "description", "domainID", "versionID", "legislationReference", "evidenceGroup",
-"subCriterion", "parentCriterion"} )
+@JsonPropertyOrder( 
+	{
+	"ID", 
+	"typeCode", 
+	"name", 
+	"description", 
+	"domainID", 
+    	"versionID", 
+    	"legislationReference", 
+    	"evidenceGroup",
+    	"subCriterion", 
+    	"parentCriterion"
+    } )
 public class ECertisCriterion implements IECertisCriterion {
     
     private String ID;

@@ -1,6 +1,8 @@
 package eu.esens.espdvcd.retriever.criteria;
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.esens.espdvcd.builder.model.ModelFactory;
 import eu.esens.espdvcd.retriever.utils.Constants;
@@ -157,12 +159,12 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever {
                     nationalCriterionTypeList = getSubCriterion(parent, countryCode);
                     break;
                 case UNKNOWN:
-                    throw new RetrieverException("Criterion <<" + criterionId + ">> "
+                    throw new RetrieverException("Error... Criterion <<" + criterionId + ">> "
                             + "Cannot be Classified as European or National...");
             }
 
         } else {
-            throw new RetrieverException("Country Code <<" + countryCode + ">> "
+            throw new RetrieverException("Error... Country Code <<" + countryCode + ">> "
                     + "does not exist...");
         }
 
@@ -185,7 +187,7 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever {
             connection.connect();
 
             if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
-                throw new RetrieverException("HTTP error code : " + connection.getResponseCode());
+                throw new RetrieverException("Error... HTTP error code : " + connection.getResponseCode());
             }
 
             br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
@@ -205,13 +207,23 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever {
             // Print JSON String
             // String prettyCt = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(theCriterion);
             // System.out.println(prettyCt);
-        
+                   
         } catch (MalformedURLException ex) {
             Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.SEVERE, null, ex);
-            throw new RetrieverException("Malformed URL", ex);
+            throw new RetrieverException("Error... Malformed URL address", ex);
         } catch (IOException ex) {
+            String message = "Error... Unable to connect with e-Certis service";
+            
+            if (ex instanceof JsonParseException) {
+                message = "Error... JSON input contains invalid content";
+            } 
+            
+            if (ex instanceof JsonMappingException) {
+                message = "Error... JSON structure does not match structure expected";
+            } 
+            
             Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.SEVERE, null, ex);
-            throw new RetrieverException("Error when trying to connect with e-Certis service", ex);
+            throw new RetrieverException(message, ex);
         } finally {
             // close all streams
             if (br != null) {
@@ -219,7 +231,7 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever {
                     br.close();
                 } catch (IOException e) {
                     Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.SEVERE, null, e);
-                    throw new RetrieverException("Error when trying to close reader", e);
+                    throw new RetrieverException("Error... Unable to close buffered reader stream", e);
                 }
             }
         }
@@ -246,7 +258,7 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever {
     private IECertisCriterion getParentCriterion(IECertisCriterion c) 
             throws RetrieverException {
         if (c.getParentCriterion() == null) {
-            throw new RetrieverException("Error when trying to extract parent criterion of " + c.getID());
+            throw new RetrieverException("Error... Unable to extract parent criterion of " + c.getID());
         }
         return getCriterion(c.getParentCriterion().getID());
     }
