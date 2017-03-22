@@ -8,8 +8,8 @@ import java.util.List;
  */
 public interface IECertisValidityPeriod {
     
-    void setDescription(List<IECertisText> description);
+    void setDescription(List<String> description);
     
-    List<IECertisText> getDescription();
+    List<String> getDescription();
     
 }

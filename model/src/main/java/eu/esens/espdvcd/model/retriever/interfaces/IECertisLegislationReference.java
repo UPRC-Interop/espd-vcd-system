@@ -6,24 +6,24 @@ package eu.esens.espdvcd.model.retriever.interfaces;
  */
 public interface IECertisLegislationReference {
 
-    IECertisText getTitle();
+    String getTitle();
 
-    void setTitle(IECertisText title);
+    void setTitle(String title);
 
-    IECertisText getDescription();
+    String getDescription();
 
-    void setDescription(IECertisText description);
+    void setDescription(String description);
 
     String getJurisdictionLevelCode();
 
     void setJurisdictionLevelCode(String JurisdictionLevelCode);
 
-    IECertisText getArticle();
+    String getArticle();
 
-    void setArticle(IECertisText article);
+    void setArticle(String article);
 
     String getURI();
-    
+
     void setURI(String URI);
-    
- }
+
+}

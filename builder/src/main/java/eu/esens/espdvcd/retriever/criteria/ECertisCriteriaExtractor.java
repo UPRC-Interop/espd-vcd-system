@@ -4,25 +4,21 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import eu.esens.espdvcd.builder.model.ModelFactory;
 import eu.esens.espdvcd.retriever.utils.Constants;
 import eu.esens.espdvcd.codelist.Codelists;
-import eu.esens.espdvcd.model.Criterion;
-import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.retriever.ECertisCriterion;
 import eu.esens.espdvcd.model.retriever.interfaces.IECertisCriterion;
 import eu.esens.espdvcd.model.retriever.interfaces.IECertisEvidenceGroup;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
-import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.CriterionType;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Callable;
@@ -80,7 +76,9 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever {
                 for (Future f : futures) {
                     IECertisCriterion c = (IECertisCriterion) f.get();
                     // If Description is not provided, do not add Criterion
-                    if (c.getDescription() != null) criterionTypeList.add(c);
+                    if (c.getDescription() != null) 
+                        criterionTypeList.add(c);
+                    
                 }
                 
             } catch (InterruptedException | ExecutionException ex) {
@@ -107,7 +105,7 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever {
 //        getFullListFromeCertis();
 //        List<SelectableCriterion> lc
 //                = criterionTypeList.stream()
-//                        .map((CriterionType c) -> ModelFactory.ESPD_REQUEST.extractSelectableCriterion(c))
+//                        .map((IECertisCriterion c) -> extractSelectableCriterion(c))
 //                        .collect(Collectors.toList());
 //        return lc;
 //    }
@@ -130,7 +128,7 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever {
 //        initialSet.addAll(initialList);
 //        Set<SelectableCriterion> fullSet
 //                = criterionTypeList.stream()
-//                        .map(c -> ModelFactory.ESPD_REQUEST.extractSelectableCriterion(c, addAsSelected))
+//                        .map(c -> extractSelectableCriterion(c, addAsSelected))
 //                        .collect(Collectors.toSet());
 //        initialSet.addAll(fullSet);
 //        System.out.println("Criterion List Size in model:" + initialSet.size());
@@ -190,7 +188,7 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever {
                 throw new RetrieverException("Error... HTTP error code : " + connection.getResponseCode());
             }
 
-            br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            br = new BufferedReader(new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8));
             StringBuilder builder = new StringBuilder();
             String output;
             
@@ -202,11 +200,12 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever {
             // Pass json string to mapper
             ObjectMapper mapper = new ObjectMapper();
             mapper.setSerializationInclusion(Include.NON_NULL);
+            mapper.setSerializationInclusion(Include.NON_EMPTY);
             theCriterion = mapper.readValue(builder.toString(), ECertisCriterion.class);
                         
             // Print JSON String
-            // String prettyCt = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(theCriterion);
-            // System.out.println(prettyCt);
+            String prettyCt = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(theCriterion);
+            System.out.println(prettyCt);
                    
         } catch (MalformedURLException ex) {
             Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.SEVERE, null, ex);
@@ -248,8 +247,8 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever {
     // Get SubCriterion/s of a European Criterion by Country Code
     private List<IECertisCriterion> getSubCriterion(IECertisCriterion c, String countryCode) {
         return c.getSubCriterion().stream()
-                .filter(theCt -> !theCt.getLegislationReference().isEmpty())
-                .filter(theCt -> theCt.getLegislationReference().get(0)
+                .filter(theCt -> !theCt.getTheLegislationReference().isEmpty())
+                .filter(theCt -> theCt.getTheLegislationReference().get(0)
                 .getJurisdictionLevelCode().equals(countryCode))
                 .collect(Collectors.toList());
     }
@@ -300,9 +299,9 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever {
             
         JurisdictionLevelCodeOrigin jlco = JurisdictionLevelCodeOrigin.UNKNOWN;
         
-        if (!c.getLegislationReference().isEmpty()) {
+        if (!c.getTheLegislationReference().isEmpty()) {
             // Getting 1st LegislationReference's value in order to evaluate JurisdictionLevelCode Origin
-            String jlcValue = c.getLegislationReference().get(0)
+            String jlcValue = c.getTheLegislationReference().get(0)
                     .getJurisdictionLevelCode();
             
             if (jlcValue.equals("eu")) {
@@ -319,5 +318,5 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever {
         return Codelists.CountryIdentification
                 .containsId(countryCode.toUpperCase());
     }
-       
+        
 }

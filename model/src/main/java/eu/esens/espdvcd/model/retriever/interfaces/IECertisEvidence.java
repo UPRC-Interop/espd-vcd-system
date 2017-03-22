@@ -16,14 +16,22 @@ public interface IECertisEvidence {
 
     String getTypeCode();
 
-    void setName(IECertisText name);
+//    void setName(IECertisText name);
+//
+//    IECertisText getName();
 
-    IECertisText getName();
+    void setName(String name);
+    
+    String getName();
+    
+//    void setDescription(IECertisText description);
+//
+//    IECertisText getDescription();
 
-    void setDescription(IECertisText description);
-
-    IECertisText getDescription();
-
+    void setDescription(String description);
+    
+    String getDescription();
+    
     void setVersionID(String versionID);
 
     String getVersionID();

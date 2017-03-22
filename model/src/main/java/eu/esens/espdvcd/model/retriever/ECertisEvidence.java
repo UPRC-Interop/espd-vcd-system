@@ -6,11 +6,11 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import eu.esens.espdvcd.model.retriever.interfaces.IECertisAmountType;
 import eu.esens.espdvcd.model.retriever.interfaces.IECertisEvidence;
 import eu.esens.espdvcd.model.retriever.interfaces.IECertisEvidenceIntendedUse;
-import eu.esens.espdvcd.model.retriever.interfaces.IECertisText;
 import java.util.List;
 import eu.esens.espdvcd.model.retriever.interfaces.IECertisEvidenceDocumentReference;
 import eu.esens.espdvcd.model.retriever.interfaces.IECertisEvidenceIssuerParty;
 import eu.esens.espdvcd.model.util.CustomStringValueDeserializer;
+import eu.esens.espdvcd.model.util.CustomTextValueDeserializer;
 import java.util.ArrayList;
 
 /**
@@ -24,8 +24,8 @@ public class ECertisEvidence implements IECertisEvidence {
     
     private String ID;
     private String typeCode;
-    private IECertisText name;
-    private IECertisText description;
+    private String name;
+    private String description;
     private String versionID;
     private IECertisAmountType feeAmount;
     private IECertisEvidenceIntendedUse evidenceIntendedUse;
@@ -57,31 +57,31 @@ public class ECertisEvidence implements IECertisEvidence {
     public String getTypeCode() {
         return typeCode;
     }
-
+    
     @Override
-    @JsonDeserialize(as = ECertisText.class)
-    public void setName(IECertisText name) {
+    @JsonDeserialize(using = CustomTextValueDeserializer.class)
+    public void setName(String name) {
         this.name = name;
     }
 
     @Override
     @JsonProperty("Name")
-    public IECertisText getName() {
+    public String getName() {
         return name;
     }
 
     @Override
-    @JsonDeserialize(as = ECertisText.class)
-    public void setDescription(IECertisText description) {
+    @JsonDeserialize(using = CustomTextValueDeserializer.class)
+    public void setDescription(String description) {
         this.description = description;
     }
 
     @Override
     @JsonProperty("Description")
-    public IECertisText getDescription() {
+    public String getDescription() {
         return description;
     }
-
+    
     @Override
     @JsonDeserialize(using = CustomStringValueDeserializer.class)
     public void setVersionID(String versionID) {

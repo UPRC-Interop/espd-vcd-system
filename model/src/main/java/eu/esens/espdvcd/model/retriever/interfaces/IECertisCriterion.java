@@ -1,5 +1,6 @@
 package eu.esens.espdvcd.model.retriever.interfaces;
 
+import eu.esens.espdvcd.model.LegislationReference;
 import java.util.List;
 
 /**
@@ -16,13 +17,13 @@ public interface IECertisCriterion {
     
     String getTypeCode();
     
-    void setName(IECertisText name);
+    void setName(String name);
     
-    IECertisText getName();
+    String getName();
     
-    void setDescription(IECertisText description);
+    void setDescription(String description);
     
-    IECertisText getDescription();
+    String getDescription();
     
     void setDomainID(String domainID);
     
@@ -32,9 +33,9 @@ public interface IECertisCriterion {
     
     String getVersionID();
     
-    void setLegislationReference(List<IECertisLegislationReference> legislationReference);
+    void setTheLegislationReference(List<IECertisLegislationReference> legislationReference);
         
-    List<IECertisLegislationReference> getLegislationReference();
+    List<IECertisLegislationReference> getTheLegislationReference();
         
     void setEvidenceGroup(List<IECertisEvidenceGroup> evidenceGroup);
     

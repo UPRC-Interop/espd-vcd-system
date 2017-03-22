@@ -3,7 +3,7 @@ package eu.esens.espdvcd.model.retriever;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import eu.esens.espdvcd.model.retriever.interfaces.IECertisPartyName;
-import eu.esens.espdvcd.model.retriever.interfaces.IECertisText;
+import eu.esens.espdvcd.model.util.CustomTextValueDeserializer;
 
 /**
  *
@@ -11,17 +11,17 @@ import eu.esens.espdvcd.model.retriever.interfaces.IECertisText;
  */
 public class ECertisPartyName implements IECertisPartyName {
     
-    private IECertisText name;
+    private String name;
     
     @Override
-    @JsonDeserialize(as = ECertisText.class)
-    public void setName(IECertisText name) {
+    @JsonDeserialize(using = CustomTextValueDeserializer.class)
+    public void setName(String name) {
         this.name = name;
     }
 
     @Override
     @JsonProperty("Name")
-    public IECertisText getName() {
+    public String getName() {
         return name;
     }
         
