@@ -2,6 +2,7 @@ package eu.esens.espdvcd.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.validation.constraints.NotNull;
 
 /**
  * Economic operator
@@ -32,6 +33,7 @@ public class EODetails {
      * UBL syntax path:
      * espd-cac:EconomicOperatorParty.Party.PartyIdentification<br>
      */
+    @NotNull
     private String ID;
 
     /**
@@ -85,6 +87,7 @@ public class EODetails {
      * BusReqID: tbr92-001<br>
      * UBL syntax path: espd-cac:EconomicOperatorParty.Party.PartyName.Name<br>
      */
+    @NotNull
     private String name;
 
     /**

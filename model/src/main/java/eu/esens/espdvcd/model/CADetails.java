@@ -1,6 +1,7 @@
 package eu.esens.espdvcd.model;
 
 import java.io.Serializable;
+import javax.validation.constraints.NotNull;
 
 /**
  * Contracting authority and procurement procedure details
@@ -25,6 +26,7 @@ public class CADetails implements Serializable{
      * BusReqID: tbr92-011<br>
      * UBL syntax path: cac:ContractingParty.Party.PartyName.Name<br>
      */
+    @NotNull
     private String caOfficialName;
 
     /**
@@ -67,6 +69,7 @@ public class CADetails implements Serializable{
      * BusReqID: tbr92-013<br>
      * UBL syntax path: cbc:ContractFolderID<br>
      */
+    @NotNull
     private String procurementProcedureFileReferenceNo;
 
     /**
@@ -80,6 +83,7 @@ public class CADetails implements Serializable{
      * BusReqID: tbr92-014<br>
      * UBL syntax path: cac:ProcurementProjectLot.ID<br>
      */
+    @NotNull
     private String procurementProjectLot;
 
     /**
