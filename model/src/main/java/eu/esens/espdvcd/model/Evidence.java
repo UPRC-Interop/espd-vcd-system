@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
+ * FIXME: not used
+ *
  * Created by Ulf Lotzmann on 21/03/2016.
  */
 public class Evidence {

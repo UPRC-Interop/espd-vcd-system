@@ -1,5 +1,7 @@
 package eu.esens.espdvcd.model;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Postal Address
  *
@@ -53,6 +55,8 @@ public class PostalAddress {
 
 
     /**
+     * FIXME: not used according to specification
+     *
      * Country subdivision
      * <p>
      * The subdivision of a country such as region, county, state, province etc.
@@ -74,11 +78,12 @@ public class PostalAddress {
      * their subdivisions". It is recommended to use the alpha-2 representation.
      * <p>
      * Data type: Code<br>
-     * Cardinality: 0..1<br>
+     * Cardinality: 1..1<br>
      * InfReqID:  tir92-150<br>
      * BusReqID: tbr92-017<br>
      * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.Response. Evidence.EvidenceIssuerParty.PostalAddress.IdentificationCode<br>
      */
+    @NotNull
     private String countryCode;
 
     public String getAddressLine1() {

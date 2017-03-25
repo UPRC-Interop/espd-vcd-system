@@ -1,5 +1,7 @@
 package eu.esens.espdvcd.model;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Created by Ulf Lotzmann on 05/03/2016.
  */
@@ -12,11 +14,12 @@ public class LegislationReference {
      * Title of the legislation.
      * <p>
      * Data type: Text<br>
-     * Cardinality: 0..1<br>
+     * Cardinality: 1..1<br>
      * InfReqID: tir92-130<br>
      * BusReqID: tbr92-015, tbr92-016<br>
      * UBL syntax path: ccv:Criterion.LegislationReference.Title<br>
      */
+    @NotNull
     private String title;
 
     /**
