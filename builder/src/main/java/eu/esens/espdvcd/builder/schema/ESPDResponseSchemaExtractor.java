@@ -16,6 +16,7 @@ import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.Re
 import isa.names.specification.ubl.schema.xsd.ccv_commonbasiccomponents_1.IndicatorType;
 import isa.names.specification.ubl.schema.xsd.cev_commonaggregatecomponents_1.EvidenceType;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -178,15 +179,13 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
             if (np.getBirthDate() != null) {
                 try {
                     pt.setBirthDate(new BirthDateType());
-                    Calendar cal = new GregorianCalendar();
-                    cal.setTime(np.getBirthDate());
-                    XMLGregorianCalendar xcal;
-                    xcal = DatatypeFactory.newInstance()
-                            .newXMLGregorianCalendarDate(
-                                    cal.get(Calendar.YEAR),
-                                    cal.get(Calendar.MONTH) + 1,
-                                    cal.get(Calendar.DAY_OF_MONTH),
-                                    DatatypeConstants.FIELD_UNDEFINED);
+                  
+                    XMLGregorianCalendar xcal = DatatypeFactory.newInstance()
+                                .newXMLGregorianCalendarDate(
+                                        np.getBirthDate().getYear(),
+                                        np.getBirthDate().getMonthValue(),
+                                        np.getBirthDate().getDayOfMonth(),
+                                        DatatypeConstants.FIELD_UNDEFINED);
                     pt.getBirthDate().setValue(xcal);
                 } catch (DatatypeConfigurationException ex) {
                     log.error("Could not create XML Date Object", ex);
@@ -313,15 +312,13 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
 
             case DATE:
                 if (((DateResponse) response).getDate() != null) {
-                    Date respDate = ((DateResponse) response).getDate();
-                    Calendar cal = new GregorianCalendar();
-                    cal.setTime(respDate);
+                    LocalDate respDate = ((DateResponse) response).getDate();
                     try {
                         XMLGregorianCalendar xcal = DatatypeFactory.newInstance()
                                 .newXMLGregorianCalendarDate(
-                                        cal.get(Calendar.YEAR),
-                                        cal.get(Calendar.MONTH) + 1,
-                                        cal.get(Calendar.DAY_OF_MONTH),
+                                        respDate.getYear(),
+                                        respDate.getMonthValue(),
+                                        respDate.getDayOfMonth(),
                                         DatatypeConstants.FIELD_UNDEFINED);
                         rType.setDate(new DateType());
                         rType.getDate().setValue(xcal);

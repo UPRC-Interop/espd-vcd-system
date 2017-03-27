@@ -1,8 +1,15 @@
 package eu.esens.espdvcd.designer.components;
 
-import com.vaadin.data.fieldgroup.BeanFieldGroup;
-import com.vaadin.data.fieldgroup.PropertyId;
-import com.vaadin.ui.*;
+import com.vaadin.annotations.PropertyId;
+import com.vaadin.data.BeanValidationBinder;
+import com.vaadin.data.Binder;
+import com.vaadin.ui.FormLayout;
+import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Label;
+import com.vaadin.ui.Panel;
+import com.vaadin.ui.TextArea;
+import com.vaadin.ui.TextField;
+import com.vaadin.ui.VerticalLayout;
 import eu.esens.espdvcd.model.CADetails;
 import eu.esens.espdvcd.model.ESPDRequest;
 
@@ -78,25 +85,21 @@ public class CADetailsForm extends VerticalLayout {
         caCountry.setCaption("Country:");
         caCountry.setStyleName("textFieldCaptionText");
         caOfficialName.setCaption("Official Name:");
-        caOfficialName.setNullRepresentation("");
-        caOfficialName.setInputPrompt("Enter official name");
+        //caOfficialName.setInputPrompt("Enter official name");
         caOfficialName.setWidth("17em");
         caOfficialName.setStyleName("textFieldCaptionText");
 
         procurementProcedureTitle.setCaption("Title:");
-        procurementProcedureTitle.setNullRepresentation("");
-        procurementProcedureTitle.setInputPrompt("Enter title");
+        //procurementProcedureTitle.setInputPrompt("Enter title");
         procurementProcedureTitle.setWidth("20em");
         procurementProcedureTitle.setStyleName("textFieldCaptionText");
         procurementProcedureDesc.setCaption("Short Description:");
-        procurementProcedureDesc.setInputPrompt("Enter short description");
-        procurementProcedureDesc.setNullRepresentation("");
+        //procurementProcedureDesc.setInputPrompt("Enter short description");
         procurementProcedureDesc.setWidth("20em");
         procurementProcedureDesc.setStyleName("textFieldCaptionText");
         procurementProcedureFileReferenceNo.setCaption("File reference number attributed by the contracting authority or contracting entity (if applicable):");
         procurementProcedureFileReferenceNo.setStyleName("textCaption");
-        procurementProcedureFileReferenceNo.setNullRepresentation("");
-        procurementProcedureFileReferenceNo.setInputPrompt("Enter file reference number");
+        //procurementProcedureFileReferenceNo.setInputPrompt("Enter file reference number");
         procurementProcedureFileReferenceNo.setWidth("20em");
         procurementProcedureFileReferenceNo.setStyleName("textFieldCaptionText");
         procurementPublicationNumber.setWidth("30em");
@@ -104,10 +107,9 @@ public class CADetailsForm extends VerticalLayout {
 
         CADetails caDetails = espdRequest.getCADetails();
 
-        final BeanFieldGroup<CADetails> binder = new BeanFieldGroup<CADetails>(CADetails.class);
-        binder.bindMemberFields(this);
-        binder.setItemDataSource(caDetails);
-        binder.setBuffered(false);
+        final Binder<CADetails> binder = new BeanValidationBinder<>(CADetails.class);
+        binder.bindInstanceFields(this);
+        binder.setBean(caDetails);
         binder.setReadOnly(readOnly);
     }
 }

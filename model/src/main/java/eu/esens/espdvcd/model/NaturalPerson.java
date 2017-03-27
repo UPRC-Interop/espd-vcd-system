@@ -1,5 +1,6 @@
 package eu.esens.espdvcd.model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -94,7 +95,7 @@ public class NaturalPerson {
      * BusReqID: tbr92-009<br>
      * UBL syntax path: espd-cac:EconomicOperatorParty.Party.Person.BirthDate<br>
      */
-    private Date birthDate;
+    private LocalDate birthDate;
 
 
     /**
@@ -183,11 +184,11 @@ public class NaturalPerson {
         this.birthPlace = birthPlace;
     }
 
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 

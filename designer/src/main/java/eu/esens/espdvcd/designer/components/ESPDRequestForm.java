@@ -1,6 +1,6 @@
 package eu.esens.espdvcd.designer.components;
 
-import com.vaadin.data.Property;
+import com.vaadin.data.HasValue.ValueChangeEvent;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.*;
 import eu.esens.espdvcd.codelist.Codelists;
@@ -171,7 +171,7 @@ public class ESPDRequestForm extends ESPDForm {
      *
      * @param event Vaadin7 value change event
      */
-    public void onSelectAllExclusionCriteria(Property.ValueChangeEvent event) {
+    public void onSelectAllExclusionCriteria(ValueChangeEvent event) {
         for (CriterionGroupForm criterionGroupForm : exclusionCriterionGroupForms) {
             criterionGroupForm.setSelectedOnAllCriteria(selectAllExclusionCriteriaCheckbox.getValue());
         }
@@ -183,7 +183,7 @@ public class ESPDRequestForm extends ESPDForm {
      *
      * @param event Vaadin7 value change event
      */
-    public void onSelectAllSelectionCriteria(Property.ValueChangeEvent event) {
+    public void onSelectAllSelectionCriteria(ValueChangeEvent event) {
         for (CriterionGroupForm criterionGroupForm : selectionCriterionGroupForms) {
             criterionGroupForm.setSelectedOnAllCriteria(selectAllSelectionCriteriaCheckbox.getValue());
         }
@@ -195,7 +195,7 @@ public class ESPDRequestForm extends ESPDForm {
      *
      * @param event Vaadin7 value change event
      */
-    public void onSelectAllEconomicOperatorCriteria(Property.ValueChangeEvent event) {
+    public void onSelectAllEconomicOperatorCriteria(ValueChangeEvent event) {
         for (CriterionGroupForm criterionGroupForm : economicOperatorCriterionGroupForms) {
             criterionGroupForm.setSelectedOnAllCriteria(selectAllEconomicOperatorCriteriaCheckbox.getValue());
         }
@@ -207,7 +207,7 @@ public class ESPDRequestForm extends ESPDForm {
      *
      * @param event Vaadin7 value change event
      */
-    public void onSelectAllReductionCriteria(Property.ValueChangeEvent event) {
+    public void onSelectAllReductionCriteria(ValueChangeEvent event) {
         for (CriterionGroupForm criterionGroupForm : reductionCriterionGroupForms) {
             criterionGroupForm.setSelectedOnAllCriteria(selectAllReductionCriteriaCheckbox.getValue());
         }

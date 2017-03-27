@@ -1,6 +1,8 @@
 package eu.esens.espdvcd.designer.components.requirement;
 
-import com.vaadin.data.fieldgroup.BeanFieldGroup;
+import com.vaadin.data.BeanValidationBinder;
+import com.vaadin.data.Binder;
+import com.vaadin.data.converter.StringToFloatConverter;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
@@ -29,15 +31,14 @@ public class AmountResponseForm extends ResponseForm {
         columnA.setMargin(false);
         columnB.setMargin(false);
 
-        amount.setNullRepresentation("");
         amount.setWidth(120, Unit.PIXELS);
         currency.setWidth(160, Unit.PIXELS);
 
-        // Bind fields
-        final BeanFieldGroup<AmountResponse> binder = new BeanFieldGroup<>(AmountResponse.class);
-        binder.bindMemberFields(this);
-        binder.setItemDataSource(this.amountResponse);
-        binder.setBuffered(false);
+        Binder<AmountResponse> binder = new BeanValidationBinder<>(AmountResponse.class);
+        binder.forMemberField(amount)
+                .withConverter(new StringToFloatConverter("Cannot convert string to float"));
+        binder.bindInstanceFields(this);
+        binder.setBean(this.amountResponse);
         binder.setReadOnly(readOnly);
     }
 }

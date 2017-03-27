@@ -1,6 +1,8 @@
 package eu.esens.espdvcd.designer.components.requirement;
 
-import com.vaadin.data.fieldgroup.BeanFieldGroup;
+import com.vaadin.data.BeanValidationBinder;
+import com.vaadin.data.Binder;
+import com.vaadin.data.converter.StringToFloatConverter;
 import com.vaadin.ui.TextField;
 import eu.esens.espdvcd.model.requirement.response.PercentageResponse;
 
@@ -12,14 +14,14 @@ public class PercentageResponseForm extends ResponseForm {
         this.percentageResponse = percentageResponse;
         addComponent(percentage);
         percentage.setCaption(caption);
-        percentage.setNullRepresentation("");
         percentage.setWidth(280, Unit.PIXELS);
 
         // Bind fields
-        final BeanFieldGroup<PercentageResponse> binder = new BeanFieldGroup<>(PercentageResponse.class);
-        binder.bindMemberFields(this);
-        binder.setItemDataSource(this.percentageResponse);
-        binder.setBuffered(false);
+        final Binder<PercentageResponse> binder = new BeanValidationBinder<>(PercentageResponse.class);
+        binder.forField(percentage)
+                .withConverter(new StringToFloatConverter("Cannot convert to number"))
+                .bind("percentage");
+        binder.setBean(this.percentageResponse);
         binder.setReadOnly(readOnly);
     }
 }

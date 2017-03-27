@@ -1,6 +1,7 @@
 package eu.esens.espdvcd.designer.components;
 
-import com.vaadin.data.fieldgroup.BeanFieldGroup;
+import com.vaadin.data.BeanValidationBinder;
+import com.vaadin.data.Binder;
 import com.vaadin.ui.*;
 import eu.esens.espdvcd.model.NaturalPerson;
 
@@ -44,10 +45,9 @@ public class NaturalPersonForm extends Panel {
             panelContent.addComponent(new ContactingDetailsForm(this.naturalPerson.getContactDetails(), readOnly, false));
         }
 
-        final BeanFieldGroup<NaturalPerson> binder = new BeanFieldGroup<>(NaturalPerson.class);
-        binder.bindMemberFields(this);
-        binder.setItemDataSource(this.naturalPerson);
-        binder.setBuffered(false);
+        final Binder<NaturalPerson> binder = new BeanValidationBinder<>(NaturalPerson.class);
+        binder.bindInstanceFields(this);
+        binder.setBean(this.naturalPerson);
         binder.setReadOnly(readOnly);
 
         setWidth("100%");
@@ -62,27 +62,22 @@ public class NaturalPersonForm extends Panel {
         columnB.setSpacing(true);
         columnB.setMargin(false);
 
-        firstName.setNullRepresentation("");
-        firstName.setInputPrompt("First name");
+        firstName.setPlaceholder("First name");
         firstName.setWidth(300, Unit.PIXELS);
 
-        familyName.setNullRepresentation("");
-        familyName.setInputPrompt("Family name");
+        familyName.setPlaceholder("Family name");
         familyName.setWidth(300, Unit.PIXELS);
 
-        role.setNullRepresentation("");
-        role.setInputPrompt("Role");
+        role.setPlaceholder("Role");
         role.setWidth(300, Unit.PIXELS);
 
-        birthPlace.setNullRepresentation("");
-        birthPlace.setInputPrompt("Birth place");
+        birthPlace.setPlaceholder("Birth place");
         birthPlace.setWidth(300, Unit.PIXELS);
 
         birthDate.setWidth(300, Unit.PIXELS);
         birthDate.setDateFormat("dd/MM/yyyy");
 
-        powerOfAttorney.setNullRepresentation("");
-        powerOfAttorney.setInputPrompt("Detailed information");
+        powerOfAttorney.setPlaceholder("Detailed information");
         powerOfAttorney.setWidth(300, Unit.PIXELS);
     }
 }

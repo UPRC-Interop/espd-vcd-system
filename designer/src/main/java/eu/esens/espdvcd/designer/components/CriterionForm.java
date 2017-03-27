@@ -1,7 +1,8 @@
 package eu.esens.espdvcd.designer.components;
 
+import com.vaadin.data.BeanValidationBinder;
+import com.vaadin.data.Binder;
 import eu.esens.espdvcd.designer.DetailsPanel.DetailsPanel;
-import eu.esens.espdvcd.designer.DetailsPanel.DetailsPanelBuilder;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import com.vaadin.event.LayoutEvents;
 import com.vaadin.server.FontAwesome;
@@ -9,8 +10,6 @@ import com.vaadin.ui.*;
 import eu.esens.espdvcd.designer.views.EspdTemplate;
 import eu.esens.espdvcd.designer.views.Master;
 import eu.esens.espdvcd.model.*;
-import com.vaadin.data.fieldgroup.BeanFieldGroup;
-
 
 public class CriterionForm extends VerticalLayout {
     private Master view;
@@ -83,12 +82,10 @@ public class CriterionForm extends VerticalLayout {
         panelContent.setStyleName("criterionForm-panelContent");
 
         // Bind the this forms fields
-        final BeanFieldGroup<SelectableCriterion> criteriaGroup = new BeanFieldGroup<>(SelectableCriterion.class);
-        criteriaGroup.setItemDataSource(criterion);
-        criteriaGroup.setBuffered(false);
-        criteriaGroup.bindMemberFields(this);
+        final Binder<SelectableCriterion> criteriaGroup = new BeanValidationBinder<>(SelectableCriterion.class);
+        criteriaGroup.setBean(criterion);
+        criteriaGroup.bindInstanceFields(this);
         criteriaGroup.setReadOnly(readOnly);
-
     }
 
 
