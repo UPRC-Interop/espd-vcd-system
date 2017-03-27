@@ -33,7 +33,7 @@ gretty {
     contextPath             = '/'
     scanInterval            = 1
     servletContainer        = 'jetty9'
-    redeployMode            = 'restart'
+    redeployMode            = 'redeploy'
 //    managedClassReload      = true
     fastReload              = true
     recompileOnSourceChange = true
