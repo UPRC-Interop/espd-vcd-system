@@ -1,4 +1,6 @@
 apply plugin: 'war'
+apply from: 'https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.plugin'
+
 
 /**
  * Run gradle task jettyRun to start jetty
@@ -30,9 +32,9 @@ gretty {
     httpPort                = 8080
     contextPath             = '/'
     scanInterval            = 1
-    servletContainer        = 'jetty93'
+    servletContainer        = 'jetty9'
     redeployMode            = 'restart'
-    managedClassReload      = true
+//    managedClassReload      = true
     fastReload              = true
     recompileOnSourceChange = true
     reloadOnClassChange     = true
