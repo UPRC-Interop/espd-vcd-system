@@ -26,7 +26,7 @@ public class CriterionWindow extends Window {
     Button closeButton = new Button("Close");
     TextField caption = new TextField("Caption:");
     TextArea description = new TextArea("Description:");
-    ComboBox typecode = new ComboBox("Type:");
+    ComboBox<String> typecode = new ComboBox("Type:");
     int displayEvidences;
 
     public CriterionWindow(ESPDRequest espd, Master view, AbstractLayout destinationLayout, int displayEvidences) {
@@ -58,15 +58,9 @@ public class CriterionWindow extends Window {
         caption.setWidth(100, Unit.PERCENTAGE);
         description.setWidth(100, Unit.PERCENTAGE);
 
-        Iterator<String> iterator = Codelists.CriteriaType.getBiMap().values().iterator();
-        while (iterator.hasNext()) {
-            String countryName = iterator.next();
-            String countryId = Codelists.CriteriaType.getIdForData(countryName);
-            typecode.addItem(countryId);
-            typecode.setItemCaption(countryId, WordUtils.capitalize(countryName.toLowerCase()));
-        }
-
-        typecode.setInputPrompt("Select criterion type");
+        typecode.setItems(Codelists.CriteriaType.getBiMap().keySet());
+        typecode.setItemCaptionGenerator(i -> WordUtils.capitalize(Codelists.CriteriaType.getValueForId(i).toLowerCase()));
+        typecode.setPlaceholder("Select criterion type");
     }
 
     public void onSave(Button.ClickEvent clickEvent) {

@@ -1,24 +1,18 @@
 package eu.esens.espdvcd.designer.components.requirement;
 
-import com.vaadin.data.fieldgroup.BeanFieldGroup;
+import com.vaadin.data.BeanValidationBinder;
+import com.vaadin.data.Binder;
 import com.vaadin.server.FileDownloader;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.Page;
 import com.vaadin.server.StreamResource;
 import com.vaadin.shared.Position;
 import com.vaadin.ui.*;
-import eu.esens.espdvcd.builder.ModelBuilder;
-import eu.esens.espdvcd.builder.XMLDocumentBuilder;
-import eu.esens.espdvcd.designer.components.ESPDRequestForm;
 import eu.esens.espdvcd.model.requirement.response.EvidenceURLResponse;
 
 import java.io.*;
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.UUID;
 
 public class EvidenceURLResponseForm extends ResponseForm {
@@ -126,7 +120,7 @@ public class EvidenceURLResponseForm extends ResponseForm {
                     e.printStackTrace();
                 }
             }
-        };
+        }
 
         FileUploader receiver = new FileUploader();
         Upload upload = new Upload(null, receiver);
@@ -137,7 +131,6 @@ public class EvidenceURLResponseForm extends ResponseForm {
         // Url layout
         urlLayout.addComponent(evidenceURL);
         evidenceURL.setCaption(caption);
-        evidenceURL.setNullRepresentation("");
         evidenceURL.setWidth(280, Unit.PIXELS);
 
         // Completed layout
@@ -190,15 +183,14 @@ public class EvidenceURLResponseForm extends ResponseForm {
                 e.printStackTrace();
             }
         } else {
-            downloadEvidenceButton.setReadOnly(true);
+            downloadEvidenceButton.setEnabled(false);
             downloadEvidenceButton.setCaption("No evidence");
         }
 
         // Bind fields
-        final BeanFieldGroup<EvidenceURLResponse> binder = new BeanFieldGroup<>(EvidenceURLResponse.class);
-        binder.bindMemberFields(this);
-        binder.setItemDataSource(this.evidenceURLResponse);
-        binder.setBuffered(false);
+        final Binder<EvidenceURLResponse> binder = new BeanValidationBinder<>(EvidenceURLResponse.class);
+        binder.bindInstanceFields(this);
+        binder.setBean(this.evidenceURLResponse);
         if (displayEvidences == 1) {
             binder.setReadOnly(false);
         } else {

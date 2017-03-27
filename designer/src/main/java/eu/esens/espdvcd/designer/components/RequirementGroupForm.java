@@ -1,10 +1,11 @@
 package eu.esens.espdvcd.designer.components;
 
+import com.vaadin.data.BeanValidationBinder;
+import com.vaadin.data.Binder;
 import com.vaadin.ui.*;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.Requirement;
-import com.vaadin.data.fieldgroup.BeanFieldGroup;
 
 public class RequirementGroupForm extends VerticalLayout {
 
@@ -18,11 +19,10 @@ public class RequirementGroupForm extends VerticalLayout {
         setWidth("100%");
 
         // Bind the this forms fields
-        final BeanFieldGroup<RequirementGroup> requirementGroupGroup = new BeanFieldGroup<>(RequirementGroup.class);
-        requirementGroupGroup.setItemDataSource(requirementGroup);
-        requirementGroupGroup.setBuffered(false);
-        requirementGroupGroup.bindMemberFields(this);
-        requirementGroupGroup.setReadOnly(readOnly);
+//        final Binder<RequirementGroup> requirementGroupGroup = new BeanValidationBinder<>(RequirementGroup.class);
+//        requirementGroupGroup.setBean(requirementGroup);
+//        requirementGroupGroup.bindInstanceFields(this);
+//        requirementGroupGroup.setReadOnly(readOnly);
 
         Panel panel = new Panel();
         panel.setStyleName("RequirementGroupFormPanel");

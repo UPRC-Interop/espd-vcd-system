@@ -1,6 +1,7 @@
 package eu.esens.espdvcd.designer.components;
 
-import com.vaadin.data.fieldgroup.BeanFieldGroup;
+import com.vaadin.data.BeanValidationBinder;
+import com.vaadin.data.Binder;
 import com.vaadin.event.LayoutEvents;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.Panel;
@@ -62,10 +63,9 @@ public class LegislationReferenceForm extends VerticalLayout {
         panelContent.setMargin(true);
 
         // Bind the this forms fields
-        final BeanFieldGroup<LegislationReference> legislationReferenceGroup = new BeanFieldGroup<>(LegislationReference.class);
-        legislationReferenceGroup.setItemDataSource(legislationReference);
-        legislationReferenceGroup.setBuffered(false);
-        legislationReferenceGroup.bindMemberFields(this);
+//        final Binder<LegislationReference> legislationReferenceGroup = new BeanValidationBinder<>(LegislationReference.class);
+//        legislationReferenceGroup.bindInstanceFields(this);
+//        legislationReferenceGroup.setBean(legislationReference);
     }
 
     void onLegislationReferenceClick(LayoutEvents.LayoutClickEvent event) {

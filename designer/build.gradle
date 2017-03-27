@@ -27,9 +27,12 @@ repositories {
 apply plugin: 'org.akhikhl.gretty'
 
 gretty {
-  //  port                    = 8090
+    httpPort                = 8080
     contextPath             = '/'
     scanInterval            = 1
+    servletContainer        = 'jetty93'
+    redeployMode            = 'restart'
+    managedClassReload      = true
     fastReload              = true
     recompileOnSourceChange = true
     reloadOnClassChange     = true
@@ -49,11 +52,11 @@ dependencies {
     compile project(':builder')
     compile project(':codelists')
     compile project(':model')
-    compile 'com.vaadin:vaadin-server:7.7.5'
-    compile 'com.vaadin:vaadin-client-compiled:7.7.5'
-    compile 'com.vaadin:vaadin-client-compiler:7.7.5'
-    compile 'com.vaadin:vaadin-themes:7.7.5'
-    compile 'org.vaadin.addons:jain-i18N:1.1.9'
+    compile 'com.vaadin:vaadin-server:8.0.4'
+    compile 'com.vaadin:vaadin-client-compiled:8.0.4'
+    compile 'com.vaadin:vaadin-client-compiler:8.0.4'
+    compile 'com.vaadin:vaadin-themes:8.0.4'
+//    compile 'org.vaadin.addons:jain-i18N:1.1.9'
 }
 
 task copyTask(type: Copy) {

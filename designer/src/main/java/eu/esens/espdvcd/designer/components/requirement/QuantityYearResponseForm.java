@@ -1,7 +1,8 @@
 package eu.esens.espdvcd.designer.components.requirement;
 
-import com.vaadin.data.fieldgroup.BeanFieldGroup;
-import com.vaadin.data.util.converter.StringToIntegerConverter;
+import com.vaadin.data.BeanValidationBinder;
+import com.vaadin.data.Binder;
+import com.vaadin.data.converter.StringToIntegerConverter;
 import com.vaadin.ui.TextField;
 import eu.esens.espdvcd.model.requirement.response.QuantityYearResponse;
 
@@ -16,23 +17,21 @@ public class QuantityYearResponseForm extends ResponseForm {
         this.quantityYearResponse = quantityYearResponse;
         addComponent(year);
         year.setCaption(caption);
-        year.setNullRepresentation("");
         year.setWidth(280, Unit.PIXELS);
 
-        StringToIntegerConverter plainIntegerConverter = new StringToIntegerConverter() {
+        StringToIntegerConverter plainIntegerConverter = new StringToIntegerConverter("Not an Integer Number") {
             protected java.text.NumberFormat getFormat(Locale locale) {
                 NumberFormat format = super.getFormat(locale);
                 format.setGroupingUsed(false);
                 return format;
             };
         };
-        year.setConverter(plainIntegerConverter);
 
         // Bind fields
-        final BeanFieldGroup<QuantityYearResponse> binder = new BeanFieldGroup<>(QuantityYearResponse.class);
-        binder.bindMemberFields(this);
-        binder.setItemDataSource(this.quantityYearResponse);
-        binder.setBuffered(false);
+        final Binder<QuantityYearResponse> binder = new BeanValidationBinder<>(QuantityYearResponse.class);
+        binder.forField(year).withConverter(plainIntegerConverter).bind("year");
+       
+        binder.setBean(quantityYearResponse);
         binder.setReadOnly(readOnly);
     }
 }

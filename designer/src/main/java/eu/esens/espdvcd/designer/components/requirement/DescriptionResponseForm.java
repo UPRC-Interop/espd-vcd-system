@@ -1,6 +1,7 @@
 package eu.esens.espdvcd.designer.components.requirement;
 
-import com.vaadin.data.fieldgroup.BeanFieldGroup;
+import com.vaadin.data.BeanValidationBinder;
+import com.vaadin.data.Binder;
 import com.vaadin.ui.TextArea;
 import eu.esens.espdvcd.model.requirement.response.DescriptionResponse;
 
@@ -12,14 +13,12 @@ public class DescriptionResponseForm extends ResponseForm {
         this.descriptionResponse = descriptionResponse;
         addComponent(description);
         description.setCaption(caption);
-        description.setNullRepresentation("");
         description.setWidth(280, Unit.PIXELS);
 
         // Bind fields
-        final BeanFieldGroup<DescriptionResponse> binder = new BeanFieldGroup<>(DescriptionResponse.class);
-        binder.bindMemberFields(this);
-        binder.setItemDataSource(this.descriptionResponse);
-        binder.setBuffered(false);
+        final Binder<DescriptionResponse> binder = new BeanValidationBinder<>(DescriptionResponse.class);
+        binder.bindInstanceFields(this);
+        binder.setBean(this.descriptionResponse);
         binder.setReadOnly(readOnly);
     }
 }

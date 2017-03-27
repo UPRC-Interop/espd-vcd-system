@@ -6,10 +6,7 @@ import com.vaadin.ui.*;
 import eu.esens.espdvcd.codelist.Codelists;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.designer.DetailsPanel.DetailsPanelRequirement;
-import eu.esens.espdvcd.designer.components.CriterionForm;
-import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.RequestRequirement;
-import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import org.apache.commons.lang3.text.WordUtils;
 
@@ -26,7 +23,7 @@ public class RequirementWindow extends Window {
     VerticalLayout windowLayout = new VerticalLayout();
 
     TextField id = new TextField("ID");
-    ComboBox type = new ComboBox("Type");
+    ComboBox<ResponseTypeEnum> type = new ComboBox("Type");
     TextArea description = new TextArea("Description");
 
     HorizontalLayout buttonBar = new HorizontalLayout();
@@ -69,16 +66,11 @@ public class RequirementWindow extends Window {
 
         id.setValue(generatedUUID.toString());
         id.setReadOnly(true);
+        
+        type.setItems(Codelists.ResponseDataType.getBiMap().keySet().stream()
+                .map(respId -> DetailsPanelRequirement.requirementResponseDataStringToType(respId)));
+        type.setItemCaptionGenerator(i -> WordUtils.capitalize(Codelists.ResponseDataType.getValueForId(i.name()).toLowerCase()));
 
-
-        Iterator<String> iterator = Codelists.ResponseDataType.getBiMap().values().iterator();
-        while (iterator.hasNext()) {
-            String responseDataTypeValue = iterator.next();
-            String responseDataTypeID = Codelists.ResponseDataType.getIdForData(responseDataTypeValue);
-            ResponseTypeEnum responseTypeEnum = DetailsPanelRequirement.requirementResponseDataStringToType(responseDataTypeID);
-            type.addItem(responseTypeEnum);
-            type.setItemCaption(responseTypeEnum, WordUtils.capitalize(responseDataTypeValue.toLowerCase()));
-        }
     }
 
     public void onSave(Button.ClickEvent clickEvent) {
