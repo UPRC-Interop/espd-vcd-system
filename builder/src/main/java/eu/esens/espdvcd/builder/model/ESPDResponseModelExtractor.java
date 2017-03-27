@@ -16,6 +16,7 @@ import grow.names.specification.ubl.schema.xsd.espd_commonaggregatecomponents_1.
 import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.ResponseType;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PersonType;
@@ -92,7 +93,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
             case DATE:
                 DateResponse dResp = new DateResponse();
                 if (res.getDate() != null && res.getDate().getValue() != null) {
-                    dResp.setDate(res.getDate().getValue().toGregorianCalendar().getTime());
+                    dResp.setDate(res.getDate().getValue().toGregorianCalendar().toZonedDateTime().toLocalDate());
                 }
                 return dResp;
 
@@ -295,7 +296,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                             }
 
                             if (pt.getBirthDate() != null) {
-                                np.setBirthDate(pt.getBirthDate().getValue().toGregorianCalendar().getTime());
+                                np.setBirthDate(pt.getBirthDate().getValue().toGregorianCalendar().toZonedDateTime().toLocalDate());
                             }
 
                             if (pt.getContact() != null) {
