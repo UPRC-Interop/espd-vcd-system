@@ -110,11 +110,12 @@ public class CADetails implements Serializable{
      * subdivisions". It is recommended to use the alpha-2 representation.
      * <p>
      * Data type: Code<br>
-     * Cardinality: 0..1<br>
+     * Cardinality: 1..1<br>
      * InfReqID: tir92-016<br>
      * BusReqID: tbr92-011<br>
      * UBL syntax path: cac:ContractingParty.Party.PostalAddress.Country.IdentificationCode<br>
      */
+    @NotNull
     private String caCountry;
     
     private String procurementPublicationURI;

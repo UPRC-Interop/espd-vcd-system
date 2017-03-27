@@ -3,6 +3,7 @@ package eu.esens.espdvcd.model.requirement.response;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.validation.constraints.NotNull;
 
 /**
  * Country code response
@@ -26,6 +27,7 @@ public class CountryCodeResponse extends Response implements Serializable {
      * BusReqID: tbr92-017<br>
      * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.Response. Evidence.EvidenceIssuerParty.PostalAddress.IdentificationCode<br>
      */
+    @NotNull
     private String countryCode;
 
     public CountryCodeResponse() {

@@ -1,6 +1,8 @@
 package eu.esens.espdvcd.model;
 
 /**
+ * FIXME: not used
+ *
  * Attachment
  *
  * Information about an attached document.

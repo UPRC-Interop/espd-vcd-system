@@ -50,9 +50,9 @@ public class EODetails {
     private String electronicAddressID;
 
     /**
-     * Economic operator electronic website URI
+     * Economic operator website
      * <p>
-     * Electronic WEB address of the economic operator.
+     * The website of the economic operator.
      * <p>
      * Data type: Identifier<br>
      * Cardinality: 0..1<br>
@@ -63,6 +63,8 @@ public class EODetails {
     private String webSiteURI;
 
     /**
+     * FIXME: not used
+     *
      * Economic operator registration country code
      * <p>
      * The registration country code of the economic operator.
@@ -122,6 +124,8 @@ public class EODetails {
     private boolean smeIndicator;
 
     /**
+     * FIXME: not used
+     *
      * National database URI
      * <p>
      * Unrestricted and full direct access to tools and devices used for
@@ -136,6 +140,8 @@ public class EODetails {
     private String nationalDatabaseURI;
 
     /**
+     * FIXME: not used
+     *
      * National database access credentials
      * <p>
      * Unrestricted and full direct access to tools and devices used for
@@ -156,11 +162,12 @@ public class EODetails {
      * Address information.
      * <p>
      * Data type: <br>
-     * Cardinality: 0..1<br>
+     * Cardinality: 1..1<br>
      * InfReqID: <br>
      * BusReqID: <br>
      * UBL syntax path: espd-cac:EconomicOperatorParty.Party.PostalAddress<br>
      */
+    @NotNull
     private PostalAddress postalAddress;
 
     /**
