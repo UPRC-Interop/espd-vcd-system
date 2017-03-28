@@ -27,6 +27,12 @@ public interface ESPDRequest extends Serializable {
      * @return the {@link CADetails} of the ESPD Object
      */
     public CADetails getCADetails();
+
+    /**
+     *
+     * @return the {@link ServiceProviderDetails} of the ESPD Object
+     */
+    public ServiceProviderDetails getServiceProviderDetails();
     
     /**
      *
@@ -70,6 +76,12 @@ public interface ESPDRequest extends Serializable {
      * @param cd The CA Details that will be assigned to the ESPD Object 
      */
     void setCADetails(CADetails cd);
+
+    /**
+     *
+     * @param sp The Service Provider Details that will be assigned to the ESPD Object
+     */
+    void setServiceProviderDetails(ServiceProviderDetails sp);
 
     /**
      * @param modelType

@@ -117,6 +117,60 @@ public class CADetails implements Serializable{
      */
     @NotNull
     private String caCountry;
+
+    /**
+     * Contracting body electronic address identifier
+     * <p>
+     * Electronic address of the contracting body.
+     * <p>
+     * Data type: Identifier<br>
+     * Cardinality: 1..1<br>
+     * InfReqID: tir70-039<br>
+     * BusReqID: tbr70-001<br>
+     * UBL syntax path: cac:ContractingParty.Party.EndpointID<br>
+     */
+    @NotNull
+    private String electronicAddressID;
+
+    /**
+     * Contracting body website
+     * <p>
+     * The website of the contracting body.
+     * <p>
+     * Data type: Identifier<br>
+     * Cardinality: 0..1<br>
+     * InfReqID: ?<br>
+     * BusReqID: ?<br>
+     * UBL syntax path: cac:ContractingParty.Party.WebsiteURIID<br>
+     */
+    private String webSiteURI;
+
+    /**
+     * Postal address
+     * <p>
+     * Address information.
+     * <p>
+     * Data type: <br>
+     * Cardinality: 1..1<br>
+     * InfReqID: <br>
+     * BusReqID: <br>
+     * UBL syntax path: cac:ContractingParty.Party.PostalAddress.<br>
+     */
+    private PostalAddress postalAddress;
+
+    /**
+     * Contacting details
+     * <p>
+     * Used to provide contacting information for a party in general or a person.
+     * <p>
+     * Data type: <br>
+     * Cardinality: 0..1<br>
+     * InfReqID: <br>
+     * BusReqID: <br>
+     * UBL syntax path: cac:ContractingParty.Party.Contact.<br>
+     */
+    private ContactingDetails contactingDetails;
+
     
     private String procurementPublicationURI;
 
@@ -182,5 +236,37 @@ public class CADetails implements Serializable{
 
     public void setProcurementPublicationNumber(String procurementPublicationNumber) {
         this.procurementPublicationNumber = procurementPublicationNumber;
-    }   
+    }
+
+    public String getElectronicAddressID() {
+        return electronicAddressID;
+    }
+
+    public void setElectronicAddressID(String electronicAddressID) {
+        this.electronicAddressID = electronicAddressID;
+    }
+
+    public String getWebSiteURI() {
+        return webSiteURI;
+    }
+
+    public void setWebSiteURI(String webSiteURI) {
+        this.webSiteURI = webSiteURI;
+    }
+
+    public PostalAddress getPostalAddress() {
+        return postalAddress;
+    }
+
+    public void setPostalAddress(PostalAddress postalAddress) {
+        this.postalAddress = postalAddress;
+    }
+
+    public ContactingDetails getContactingDetails() {
+        return contactingDetails;
+    }
+
+    public void setContactingDetails(ContactingDetails contactingDetails) {
+        this.contactingDetails = contactingDetails;
+    }
 }
