@@ -1,178 +1,63 @@
 package eu.esens.espdvcd.model.retriever;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import eu.esens.espdvcd.model.retriever.interfaces.IECertisAmountType;
-import eu.esens.espdvcd.model.retriever.interfaces.IECertisEvidence;
-import eu.esens.espdvcd.model.retriever.interfaces.IECertisEvidenceIntendedUse;
 import java.util.List;
-import eu.esens.espdvcd.model.retriever.interfaces.IECertisEvidenceDocumentReference;
-import eu.esens.espdvcd.model.retriever.interfaces.IECertisEvidenceIssuerParty;
-import eu.esens.espdvcd.model.util.CustomStringValueDeserializer;
-import eu.esens.espdvcd.model.util.CustomTextValueDeserializer;
-import java.util.ArrayList;
 
 /**
  *
  * @author Konstantinos Raptis
  */
-@JsonPropertyOrder( {"ID", "typeCode", "name", "description", "versionID", "feeAmount",
-"evidenceIntendedUse", "evidenceIssuerParty", "addresseeDescription", "jurisdictionLevelCode", 
-"evidenceDocumentReference"} )
-public class ECertisEvidence implements IECertisEvidence {
+public interface ECertisEvidence {
+
+    void setID(String ID);
+
+    String getID();
+
+    void setTypeCode(String typeCode);
+
+    String getTypeCode();
+
+//    void setName(IECertisText name);
+//
+//    IECertisText getName();
+
+    void setName(String name);
     
-    private String ID;
-    private String typeCode;
-    private String name;
-    private String description;
-    private String versionID;
-    private IECertisAmountType feeAmount;
-    private IECertisEvidenceIntendedUse evidenceIntendedUse;
-    private List<IECertisEvidenceIssuerParty> evidenceIssuerParty;
-    private String addresseeDescription;
-    private List<String> jurisdictionLevelCode;
-    private List<IECertisEvidenceDocumentReference> evidenceDocumentReference;
-
-    @Override
-    @JsonDeserialize(using = CustomStringValueDeserializer.class)
-    public void setID(String ID) {
-        this.ID = ID;
-    }
-
-    @Override
-    @JsonProperty("ID")
-    public String getID() {
-        return ID;
-    }
-
-    @Override
-    @JsonDeserialize(using = CustomStringValueDeserializer.class)
-    public void setTypeCode(String typeCode) {
-        this.typeCode = typeCode;
-    }
-
-    @Override
-    @JsonProperty("TypeCode")
-    public String getTypeCode() {
-        return typeCode;
-    }
+    String getName();
     
-    @Override
-    @JsonDeserialize(using = CustomTextValueDeserializer.class)
-    public void setName(String name) {
-        this.name = name;
-    }
+//    void setDescription(IECertisText description);
+//
+//    IECertisText getDescription();
 
-    @Override
-    @JsonProperty("Name")
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    @JsonDeserialize(using = CustomTextValueDeserializer.class)
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    @Override
-    @JsonProperty("Description")
-    public String getDescription() {
-        return description;
-    }
+    void setDescription(String description);
     
-    @Override
-    @JsonDeserialize(using = CustomStringValueDeserializer.class)
-    public void setVersionID(String versionID) {
-        this.versionID = versionID;
-    }
-
-    @Override
-    @JsonProperty("VersionID")
-    public String getVersionID() {
-        return versionID;
-    }
-
-    @Override
-    @JsonDeserialize(as = ECertisAmountType.class)
-    public void setFeeAmount(IECertisAmountType feeAmount) {
-        this.feeAmount = feeAmount;
-    }
-
-    @Override
-    @JsonProperty("FeeAmount")
-    public IECertisAmountType getFeeAmount() {
-        return feeAmount;
-    }
+    String getDescription();
     
-    @Override
-    @JsonDeserialize(as = ECertisEvidenceIntendedUse.class)
-    public void setEvidenceIntendedUse(IECertisEvidenceIntendedUse evidenceIntendedUse) {
-        this.evidenceIntendedUse = evidenceIntendedUse;
-    }
+    void setVersionID(String versionID);
 
-    @Override
-    @JsonProperty("EvidenceIntendedUse")
-    public IECertisEvidenceIntendedUse getEvidenceIntendedUse() {
-        return evidenceIntendedUse;
-    }
+    String getVersionID();
 
-    @Override
-    @JsonDeserialize(as = List.class, contentAs = ECertisEvidenceIssuerParty.class)
-    public void setEvidenceIssuerParty(List<IECertisEvidenceIssuerParty> evidenceIssuerParty) {
-        if (evidenceIssuerParty == null) {
-            evidenceIssuerParty = new ArrayList<>();
-        }
-        this.evidenceIssuerParty = evidenceIssuerParty;
-    }
-
-    @Override
-    @JsonProperty("EvidenceIssuerParty")
-    public List<IECertisEvidenceIssuerParty> getEvidenceIssuerParty() {
-        return evidenceIssuerParty;
-    }
+    void setFeeAmount(ECertisAmount feeAmount);
         
+    ECertisAmount getFeeAmount();
     
-    @Override
-    @JsonDeserialize(using = CustomStringValueDeserializer.class)
-    public void setAddresseeDescription(String addresseeDescription) {
-        this.addresseeDescription = addresseeDescription;
-    }
+    void setEvidenceIntendedUse(ECertisEvidenceIntendedUse evidenceIntendedUse);
 
-    @Override
-    @JsonProperty("AddresseeDescription")
-    public String getAddresseeDescription() {
-        return addresseeDescription;
-    }
+    ECertisEvidenceIntendedUse getEvidenceIntendedUse();
 
-    @Override
-    public void setJurisdictionLevelCode(List<String> jurisdictionLevelCode) {
-        this.jurisdictionLevelCode = jurisdictionLevelCode;
-    }
+    void setEvidenceIssuerParty(List<ECertisEvidenceIssuerParty> evidenceIssuerParty);
 
-    @Override
-    @JsonProperty("JurisdictionLevelCode")
-    public List<String> getJurisdictionLevelCode() {
-        if (jurisdictionLevelCode == null) {
-            jurisdictionLevelCode = new ArrayList<>();
-        }
-        return jurisdictionLevelCode;
-    }
+    List<ECertisEvidenceIssuerParty> getEvidenceIssuerParty();
 
-    @Override
-    @JsonDeserialize(as = List.class, contentAs = ECertisEvidenceDocumentReference.class)
-    public void setEvidenceDocumentReference(List<IECertisEvidenceDocumentReference> evidenceDocumentReference) {
-        this.evidenceDocumentReference = evidenceDocumentReference;
-    }
+    void setAddresseeDescription(String addresseeDescription);
 
-    @Override
-    @JsonProperty("EvidenceDocumentReference")
-    public List<IECertisEvidenceDocumentReference> getEvidenceDocumentReference() {
-        if (evidenceDocumentReference == null) {
-            evidenceDocumentReference = new ArrayList<>();
-        }
-        return evidenceDocumentReference;
-    }
-        
+    String getAddresseeDescription();
+
+    void setJurisdictionLevelCode(List<String> jurisdictionLevelCode);
+
+    List<String> getJurisdictionLevelCode();
+
+    void setEvidenceDocumentReference(List<ECertisEvidenceDocumentReference> evidenceDocumentReference);
+
+    List<ECertisEvidenceDocumentReference> getEvidenceDocumentReference();
+
 }

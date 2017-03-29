@@ -24,20 +24,20 @@ public class ECertisCriteriaExtractorTest {
     /**
      * Test of getFullList method, of class ECertisCriteriaExtractor.
      */
-//    @Test
-//    public void testGetFullList() {
-//        try {
-//            extractor.getFullList().stream()
-//                    .forEach( (SelectableCriterion sc) -> {
-//                        System.out.println(sc.getID() + " " + sc.getName() + " (" + sc.getTypeCode() + ")");
-//                        sc.getRequirementGroups().forEach(rg -> traverseRequirementGroup(rg, 1));
-//                    });
-//            System.out.println("Max Depth: " + maxDepth);
-//            System.out.println("Criterion #: " + extractor.getFullList().size());
-//        } catch (RetrieverException ex) {
-//            System.err.println(ex);
-//        }
-//    }
+    @Test
+    public void testGetFullList() {
+        try {
+            extractor.getFullList().stream()
+                    .forEach( (SelectableCriterion sc) -> {
+                        System.out.println(sc.getID() + " " + sc.getName() + " (" + sc.getTypeCode() + ")");
+                        sc.getRequirementGroups().forEach(rg -> traverseRequirementGroup(rg, 1));
+                    });
+            System.out.println("Max Depth: " + maxDepth);
+            System.out.println("Criterion #: " + extractor.getFullList().size());
+        } catch (RetrieverException ex) {
+            System.err.println(ex);
+        }
+    }
 
     private void traverseRequirementGroup(RequirementGroup rg, int depth) {
 

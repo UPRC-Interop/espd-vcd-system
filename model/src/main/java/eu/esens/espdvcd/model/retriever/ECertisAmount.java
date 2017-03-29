@@ -1,10 +1,10 @@
-package eu.esens.espdvcd.model.retriever.interfaces;
+package eu.esens.espdvcd.model.retriever;
 
 /**
  *
  * @author Konstantinos Raptis
  */
-public interface IECertisAmountType {
+public interface ECertisAmount {
     
     void setValue(String value);
     

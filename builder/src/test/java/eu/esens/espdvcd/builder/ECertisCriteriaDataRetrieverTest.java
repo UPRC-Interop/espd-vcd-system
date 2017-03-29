@@ -1,25 +1,15 @@
 package eu.esens.espdvcd.builder;
 
-import eu.esens.espdvcd.model.retriever.interfaces.IECertisCriterion;
 import eu.esens.espdvcd.retriever.criteria.ECertisCriteriaExtractor;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
-import java.io.Writer;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import org.junit.Before;
 import org.junit.Test;
 import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
-import org.junit.Ignore;
+import eu.esens.espdvcd.model.retriever.ECertisCriterion;
 
 /**
  *
@@ -33,39 +23,7 @@ public class ECertisCriteriaDataRetrieverTest {
     public void setUp() {
         extractor = new ECertisCriteriaExtractor();
     }
-
-    @Test
-    public void testGetCriterionV3() {
-        try {
-//            IECertisCriterion c = extractor.getCriterion("d726bac9-e153-4e75-bfca-c5385587766d");
-            IECertisCriterion c = extractor.getCriterion("73e7b495-5052-4a00-8e62-386403e77bb4");
-                      
-            Writer out;
-            try {
-                out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("C:\\Users\\konstantinos\\Desktop\\file.txt"), "UTF-8"));
-                try {
-                    out.write(c.getTypeCode() + "\n" + c.getName());
-                } catch (IOException ex) {
-                    Logger.getLogger(ECertisCriteriaDataRetrieverTest.class.getName()).log(Level.SEVERE, null, ex);
-                } finally {
-                    try {
-                        out.close();
-                    } catch (IOException ex) {
-                        Logger.getLogger(ECertisCriteriaDataRetrieverTest.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-            } catch (FileNotFoundException | UnsupportedEncodingException ex) {
-                Logger.getLogger(ECertisCriteriaDataRetrieverTest.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            // -----
-            
-        } catch (RetrieverException ex) {
-            Logger.getLogger(ECertisCriteriaDataRetrieverTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    @Ignore
+  
     @Test
     public void testEuToNationalMapping() throws RetrieverException {
 
@@ -85,7 +43,6 @@ public class ECertisCriteriaDataRetrieverTest {
                 "63c2f7a0-63af-49c0-8251-80ec7bf43f94"));
     }
 
-    @Ignore
     @Test
     public void testNationalToNationalMapping() throws RetrieverException {
 
@@ -98,16 +55,14 @@ public class ECertisCriteriaDataRetrieverTest {
                 "db657c18-88e8-4a91-b645-214085f2eba8"));
     }
 
-    @Ignore
     @Test
     public void testGetCriterion() throws RetrieverException {
 
-        IECertisCriterion c = extractor.getCriterion("3f865345-9a7e-49a3-924a-ca77da6f2512");
+        ECertisCriterion c = extractor.getCriterion("3f865345-9a7e-49a3-924a-ca77da6f2512");
 
         assertEquals("3f865345-9a7e-49a3-924a-ca77da6f2512", c.getID());
     }
 
-    @Ignore
     @Test
     public void testGetEvidenceGroup() throws RetrieverException {
 
