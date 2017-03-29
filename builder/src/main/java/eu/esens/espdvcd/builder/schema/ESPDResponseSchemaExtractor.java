@@ -38,27 +38,7 @@ import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.Part
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PeriodType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PersonType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PowerOfAttorneyType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.AmountType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.BirthDateType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.BirthplaceNameType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.CityNameType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ContractFolderIDType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.CopyIndicatorType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.DateType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.DescriptionType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ElectronicMailType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.FamilyNameType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.FirstNameType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.IDType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.NameType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.PercentType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.PostboxType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.QuantityType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.StreetNameType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.TelefaxType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.TelephoneType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.TypeCodeType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.URIType;
+import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -79,6 +59,7 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
         resType.getAdditionalDocumentReference().add(extractCADetailsDocumentReferece(res.getCADetails()));
         resType.setContractingParty(extractContractingPartyType(res.getCADetails()));
         resType.getProcurementProjectLot().add(extractProcurementProjectLot(res.getCADetails()));
+        resType.setServiceProviderParty(extractServiceProviderPartyType(res.getServiceProviderDetails()));
         resType.getCriterion().addAll(res.getFullCriterionList().stream()
                 .filter(cr -> cr.isSelected())
                 .map(cr -> extractCriterion(cr))
@@ -121,6 +102,20 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
             pnt.setName(new NameType());
             pnt.getName().setValue(eod.getName());
             eopt.getParty().getPartyName().add(pnt);
+        }
+
+        // UL bugfix: there was no code for creating EndpointID element for EO
+        if (eod.getElectronicAddressID() != null) {
+            EndpointIDType eid = new EndpointIDType();
+            eid.setValue(eod.getElectronicAddressID());
+            eopt.getParty().setEndpointID(eid);
+        }
+
+        // UL bugfix: there was no code for creating WebsiteURI element for EO
+        if (eod.getWebSiteURI() != null) {
+            WebsiteURIType wsuri = new WebsiteURIType();
+            wsuri.setValue(eod.getWebSiteURI());
+            eopt.getParty().setWebsiteURI(wsuri);
         }
 
         if (eod.getPostalAddress() != null) {

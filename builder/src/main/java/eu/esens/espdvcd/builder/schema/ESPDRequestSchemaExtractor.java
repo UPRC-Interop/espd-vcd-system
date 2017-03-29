@@ -24,6 +24,7 @@ public class ESPDRequestSchemaExtractor implements SchemaExtractor {
         reqType.getAdditionalDocumentReference().add(extractCADetailsDocumentReferece(req.getCADetails()));
         reqType.setContractingParty(extractContractingPartyType(req.getCADetails()));
         reqType.getProcurementProjectLot().add(extractProcurementProjectLot(req.getCADetails()));
+        reqType.setServiceProviderParty(extractServiceProviderPartyType(req.getServiceProviderDetails()));
         reqType.getCriterion().addAll(req.getFullCriterionList().stream()
                 .filter(cr -> cr.isSelected())
                 .map(cr -> extractCriterion(cr))

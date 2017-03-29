@@ -3,6 +3,7 @@ package eu.esens.espdvcd.builder.schema;
 import eu.esens.espdvcd.model.CADetails;
 import eu.esens.espdvcd.model.Criterion;
 import eu.esens.espdvcd.model.LegislationReference;
+import eu.esens.espdvcd.model.ServiceProviderDetails;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.CriterionType;
@@ -10,27 +11,10 @@ import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.Le
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementGroupType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementType;
 import java.util.stream.Collectors;
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.AddressType;
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.AttachmentType;
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ContractingPartyType;
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.CountryType;
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.DocumentReferenceType;
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ExternalReferenceType;
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PartyNameType;
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PartyType;
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ProcurementProjectLotType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.CustomizationIDType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.DescriptionType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.DocumentTypeCodeType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.FileNameType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.IDType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.IdentificationCodeType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.NameType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.TextType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.TypeCodeType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.UBLVersionIDType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.URIType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.VersionIDType;
+
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.*;
+import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.*;
+
 
 public interface SchemaExtractor {
 
@@ -144,19 +128,123 @@ public interface SchemaExtractor {
 
     default ContractingPartyType extractContractingPartyType(CADetails cd) {
 
+        if (cd == null) {
+            return null;
+        }
+
         ContractingPartyType cpp = new ContractingPartyType();
         PartyType pt = new PartyType();
-        PartyNameType nt = new PartyNameType();
-        nt.setName(new NameType());
-        nt.getName().setValue(cd.getCAOfficialName());
-        pt.getPartyName().add(nt);
-
-        pt.setPostalAddress(new AddressType());
-        pt.getPostalAddress().setCountry(new CountryType());
-        pt.getPostalAddress().getCountry().setIdentificationCode(createISOCountryIdCodeType(cd.getCACountry()));
         cpp.setParty(pt);
 
+        if (cd.getCAOfficialName() != null) {
+            PartyNameType nt = new PartyNameType();
+            nt.setName(new NameType());
+            nt.getName().setValue(cd.getCAOfficialName());
+            pt.getPartyName().add(nt);
+        }
+
+        // UL: replaced by the respective PostalAddress model element, see below
+        //pt.setPostalAddress(new AddressType());
+        //pt.getPostalAddress().setCountry(new CountryType());
+        //pt.getPostalAddress().getCountry().setIdentificationCode(createISOCountryIdCodeType(cd.getCACountry()));
+
+
+        // UBL syntax path: cac:ContractingParty.Party.EndpointID
+        if (cd.getElectronicAddressID() != null) {
+            EndpointIDType eid = new EndpointIDType();
+            eid.setValue(cd.getElectronicAddressID());
+            pt.setEndpointID(eid);
+        }
+
+        // UBL syntax path: cac:ContractingParty.Party.WebsiteURIID
+        if (cd.getWebSiteURI() != null) {
+            WebsiteURIType wsuri = new WebsiteURIType();
+            wsuri.setValue(cd.getWebSiteURI());
+            pt.setWebsiteURI(wsuri);
+        }
+
+        if (cd.getPostalAddress() != null) {
+            // UBL syntax path: cac:ContractingParty.Party.PostalAddress
+
+            AddressType at = new AddressType();
+
+            at.setStreetName(new StreetNameType());
+            at.getStreetName().setValue(cd.getPostalAddress().getAddressLine1());
+
+            at.setCityName(new CityNameType());
+            at.getCityName().setValue(cd.getPostalAddress().getCity());
+
+            at.setPostbox(new PostboxType());
+            at.getPostbox().setValue(cd.getPostalAddress().getPostCode());
+
+            at.setCountry(new CountryType());
+            // FIXME: the country should be set using this model element; for compatibility the old method cd.getCACountry() is used
+            //at.getCountry().setIdentificationCode(createISOCountryIdCodeType(cd.getPostalAddress().getCountryCode()));
+            at.getCountry().setIdentificationCode(createISOCountryIdCodeType(cd.getCACountry()));
+
+            cpp.getParty().setPostalAddress(at);
+        }
+
+        if (cd.getContactingDetails() != null) {
+            // UBL syntax path: cac:ContractingParty.Party.Contact
+
+            oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ContactType ct = new ContactType();
+            ct.setName(new NameType());
+            ct.getName().setValue(cd.getContactingDetails().getContactPointName());
+
+            ct.setTelephone(new TelephoneType());
+            ct.getTelephone().setValue(cd.getContactingDetails().getTelephoneNumber());
+
+            ct.setElectronicMail(new ElectronicMailType());
+            ct.getElectronicMail().setValue(cd.getContactingDetails().getEmailAddress());
+
+            ct.setTelefax(new TelefaxType());
+            ct.getTelefax().setValue(cd.getContactingDetails().getFaxNumber());
+
+            cpp.getParty().setContact(ct);
+        }
+
         return cpp;
+    }
+
+    default ServiceProviderPartyType  extractServiceProviderPartyType(ServiceProviderDetails spd) {
+        if (spd == null) {
+            return null;
+        }
+
+        ServiceProviderPartyType sppt = new ServiceProviderPartyType();
+        PartyType pt = new PartyType();
+        sppt.setParty(pt);
+
+        if (spd.getEndpointID() != null) {
+            EndpointIDType eid = new EndpointIDType();
+            eid.setValue(spd.getEndpointID());
+            pt.setEndpointID(eid);
+        }
+
+        if (spd.getId() != null) {
+            PartyIdentificationType pid = new PartyIdentificationType();
+            IDType idt = new IDType();
+            idt.setValue(spd.getId());
+            pid.setID(idt);
+            pt.getPartyIdentification().add(pid);
+        }
+
+        if (spd.getName() != null) {
+            PartyNameType pnt = new PartyNameType();
+            NameType nt = new NameType();
+            nt.setValue(spd.getName());
+            pnt.setName(nt);
+            pt.getPartyName().add(pnt);
+        }
+
+        if (spd.getWebsiteURI() != null) {
+            WebsiteURIType wsuri = new WebsiteURIType();
+            wsuri.setValue(spd.getWebsiteURI());
+            pt.setWebsiteURI(wsuri);
+        }
+
+        return sppt;
     }
 
     default IDType createDefaultIDType(String id) {
@@ -288,6 +376,7 @@ public interface SchemaExtractor {
         return cid;
 
     }
+
 
     default ProcurementProjectLotType extractProcurementProjectLot(CADetails caDetails) {
 

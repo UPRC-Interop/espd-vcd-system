@@ -9,6 +9,7 @@ import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.CopyIndicatorType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.IssueDateType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.IssueTimeType;
+import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ProfileIDType;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.datatype.DatatypeConfigurationException;
@@ -89,6 +90,8 @@ public class DocumentBuilder {
             System.out.println("ERROR in DATES!");
         }
 
+        reqType.setProfileID(createBIIProfileIdType(getProfilID()));
+
         reqType.setID(SchemaFactory.ESPD_REQUEST.createISOIECIDType(UUID.randomUUID().toString()));
         return reqType;
     }
@@ -114,6 +117,8 @@ public class DocumentBuilder {
         } catch (DatatypeConfigurationException e) {
             System.out.println("ERROR in DATES!");
         }
+
+        resType.setProfileID(createBIIProfileIdType(getProfilID()));
 
         resType.setID(SchemaFactory.ESPD_RESPONSE.createISOIECIDType(UUID.randomUUID().toString()));
         return resType;
@@ -165,5 +170,27 @@ public class DocumentBuilder {
         }
 
         return result.toString();
+    }
+
+    /**
+     * Creates a ProfileIDType object with the given id.
+     * @param id
+     * @return
+     */
+    protected ProfileIDType createBIIProfileIdType(String id) {
+
+        ProfileIDType pid = new ProfileIDType();
+
+        //pid.setSchemeName("CustomizationID");
+        pid.setSchemeAgencyID("BII");
+        //pid.setSchemeVersionID("3.0");
+        pid.setValue(id);
+
+        return pid;
+
+    }
+
+    protected String getProfilID() {
+        return "undefined";
     }
 }

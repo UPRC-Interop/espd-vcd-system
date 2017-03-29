@@ -42,6 +42,8 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 resType.getProcurementProjectLot().get(0),
                 resType.getAdditionalDocumentReference()));
 
+        res.setServiceProviderDetails(extractServiceProviderDetails(resType.getServiceProviderParty()));
+
         if (resType.getEconomicOperatorParty() != null) {
             res.setEODetails(extractEODetails(resType.getEconomicOperatorParty()));
         } else {
@@ -213,7 +215,14 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 }
 
                 if (eop.getParty().getWebsiteURI() != null) {
-                    eoDetails.setElectronicAddressID(eop.getParty().getWebsiteURI().getValue());
+                    // UL: TODO please check - bug: electronicAddressID should be filled with endpointID, not websiteURI
+                    //eoDetails.setElectronicAddressID(eop.getParty().getWebsiteURI().getValue());
+                    eoDetails.setWebSiteURI(eop.getParty().getWebsiteURI().getValue());
+                }
+
+                // UL: TODO please check: added code for filling electronicAddressID
+                if (eop.getParty().getEndpointID() != null) {
+                    eoDetails.setElectronicAddressID(eop.getParty().getEndpointID().getValue());
                 }
 
                 if (!eop.getParty().getPartyIdentification().isEmpty()
