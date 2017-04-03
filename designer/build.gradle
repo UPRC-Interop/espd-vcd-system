@@ -1,6 +1,4 @@
 apply plugin: 'war'
-apply from: 'https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.plugin'
-
 
 /**
  * Run gradle task jettyRun to start jetty
@@ -26,7 +24,7 @@ repositories {
     }
 }
 
-apply plugin: 'org.akhikhl.gretty'
+apply from: 'https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.plugin'
 
 gretty {
     httpPort                = 8080
