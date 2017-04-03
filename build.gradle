@@ -10,9 +10,6 @@ subprojects { project ->
     project.ext.log4j2_version = '2.4.1'
     project.ext.jaxb_impl_version = '2.2.11'
     project.ext.jaxb_api_version = '2.2.12'
-    project.ext.hibernate_version = '5.0.3.Final'
-    project.ext.postgresql_version = '9.4-1205-jdbc42'
-    project.ext.h2_version = '1.4.190'
 
     project.ext.libraries = [
         /* logging */
@@ -72,6 +69,6 @@ configure(subprojects)
 
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.13'
+    gradleVersion = '3.4.1'
 }
 
