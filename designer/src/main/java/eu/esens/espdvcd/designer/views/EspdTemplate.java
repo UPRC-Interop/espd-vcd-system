@@ -36,7 +36,6 @@ public class EspdTemplate extends Master {
         detailsPanel.setStyleName("detailsPanel");
         detailsPanel.setSizeFull();
         detailsPanel.setContent(detailsContent);
-        detailsPanel.getContent().setSizeUndefined();
 
         detailsContent.setHeight("100%");
         detailsContent.setStyleName("master-detailsContent");
@@ -74,7 +73,7 @@ public class EspdTemplate extends Master {
         panelLeftButtonNew.addClickListener(this::onNewEspdTemplate);
         panelLeftLayout.addComponent(panelLeftButtonNew);
 
-        Panel panelRight = new Panel("Import existing ESPD Template");
+        Panel panelRight = new Panel("Import existing ESPD Template 123123");
         panelRight.setStyleName("EspdTemplate-panelRight");
         panels.addComponent(panelRight);
 
