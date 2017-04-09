@@ -5,6 +5,8 @@ import eu.esens.espdvcd.model.requirement.ruleset.RuleSet;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * Criterion requirement group
@@ -40,6 +42,8 @@ public class RequirementGroup implements Serializable {
      * BusReqID: <br>
      * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement<br>
      */
+    @NotNull
+    @Size(min = 1)
     private List<Requirement> requirements;
 
     /**

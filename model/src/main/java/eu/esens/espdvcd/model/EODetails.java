@@ -2,14 +2,16 @@ package eu.esens.espdvcd.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.validation.constraints.NotNull;
 
 /**
  * Economic operator
  *
- * Any natural or legal person or public entity or group of such persons and/or entities,
- * including any temporary association of undertakings, which offers the execution of works
- * and/or a work, the supply of products or the provision of services on the market.
- * Information about the party submitting the qualification.
+ * Any natural or legal person or public entity or group of such persons and/or
+ * entities, including any temporary association of undertakings, which offers
+ * the execution of works and/or a work, the supply of products or the provision
+ * of services on the market. Information about the party submitting the
+ * qualification.
  *
  * BusReqID: tbr92-017, tbr92-010, tbr92-028, tbr92-029
  *
@@ -18,21 +20,21 @@ import java.util.List;
  */
 public class EODetails {
 
-
     /**
      * Economic operator identifier
      * <p>
-     * An identifier that identifies the economic operator,
-     * such as a legal registration identifier.
+     * An identifier that identifies the economic operator, such as a legal
+     * registration identifier.
      * <p>
      * Data type: Identifier<br>
      * Cardinality: 1..1<br>
      * InfReqID: tir92-030<br>
      * BusReqID: tbr92-001<br>
-     * UBL syntax path: espd-cac:EconomicOperatorParty.Party.PartyIdentification<br>
+     * UBL syntax path:
+     * espd-cac:EconomicOperatorParty.Party.PartyIdentification<br>
      */
+    @NotNull
     private String ID;
-
 
     /**
      * Economic operator electronic address identifier
@@ -47,8 +49,22 @@ public class EODetails {
      */
     private String electronicAddressID;
 
+    /**
+     * Economic operator website
+     * <p>
+     * The website of the economic operator.
+     * <p>
+     * Data type: Identifier<br>
+     * Cardinality: 0..1<br>
+     * InfReqID: ?<br>
+     * BusReqID: ?<br>
+     * UBL syntax path: espd-cac:EconomicOperatorParty.Party.WebsiteURI<br>
+     */
+    private String webSiteURI;
 
     /**
+     * FIXME: not used
+     *
      * Economic operator registration country code
      * <p>
      * The registration country code of the economic operator.
@@ -57,10 +73,10 @@ public class EODetails {
      * Cardinality: 0..1<br>
      * InfReqID: tir92-032<br>
      * BusReqID: tbr92-003<br>
-     * UBL syntax path: espd-cac:EconomicOperatorParty.Party.PartyLegalEntity.RegistrationAddress.Country.IdentificationCode<br>
+     * UBL syntax path:
+     * espd-cac:EconomicOperatorParty.Party.PartyLegalEntity.RegistrationAddress.Country.IdentificationCode<br>
      */
     private String registrationCountryCode;
-
 
     /**
      * Economic operator name
@@ -73,30 +89,31 @@ public class EODetails {
      * BusReqID: tbr92-001<br>
      * UBL syntax path: espd-cac:EconomicOperatorParty.Party.PartyName.Name<br>
      */
+    @NotNull
     private String name;
-
 
     /**
      * Economic operator role
      * <p>
-     * The role of the economic operator when bidding from a consortium.
-     * (main contractor, subcontractor , additional)
+     * The role of the economic operator when bidding from a consortium. (main
+     * contractor, subcontractor , additional)
      * <p>
      * Data type: Code<br>
      * Cardinality: 0..1<br>
      * InfReqID: tir92-034<br>
      * BusReqID: tbr92-008<br>
-     * UBL syntax path: espd-cac:EconomicOperatorParty.EconomicOperatorRoleCode<br>
+     * UBL syntax path:
+     * espd-cac:EconomicOperatorParty.EconomicOperatorRoleCode<br>
      */
     private String role;
-
 
     /**
      * SME indicator
      * <p>
-     * Indicates whether the economic operator can be categorized as an SME (true) or not.
-     * According to the EC, SME are enterprises with less than 250 employees, a turnover
-     * less than EUR 50 m and a balance sheet total less than EUR 43 m.
+     * Indicates whether the economic operator can be categorized as an SME
+     * (true) or not. According to the EC, SME are enterprises with less than
+     * 250 employees, a turnover less than EUR 50 m and a balance sheet total
+     * less than EUR 43 m.
      * <p>
      * Data type: Indicator<br>
      * Cardinality: 0..1<br>
@@ -106,8 +123,9 @@ public class EODetails {
      */
     private boolean smeIndicator;
 
-
     /**
+     * FIXME: not used
+     *
      * National database URI
      * <p>
      * Unrestricted and full direct access to tools and devices used for
@@ -116,12 +134,14 @@ public class EODetails {
      * Data type: Identifier<br>
      * Cardinality: 0..1<br>
      * InfReqID: tir92-036<br>
-     * BusReqID: tbr92-006,  tbr92-007<br>
+     * BusReqID: tbr92-006, tbr92-007<br>
      * UBL syntax path: espd-cac:EconomicOperatorParty.NationalDatabaseURIID<br>
      */
     private String nationalDatabaseURI;
 
     /**
+     * FIXME: not used
+     *
      * National database access credentials
      * <p>
      * Unrestricted and full direct access to tools and devices used for
@@ -131,10 +151,10 @@ public class EODetails {
      * Cardinality: 0..1<br>
      * InfReqID: tir92-037<br>
      * BusReqID: tbr92-006, tbr92-007<br>
-     * UBL syntax path: espd-cac:EconomicOperatorParty.NationalDatabaseAccessCredentials<br>
+     * UBL syntax path:
+     * espd-cac:EconomicOperatorParty.NationalDatabaseAccessCredentials<br>
      */
     private String nationalDatabaseAccessCredentials;
-
 
     /**
      * Postal address
@@ -142,18 +162,19 @@ public class EODetails {
      * Address information.
      * <p>
      * Data type: <br>
-     * Cardinality: 0..1<br>
+     * Cardinality: 1..1<br>
      * InfReqID: <br>
      * BusReqID: <br>
      * UBL syntax path: espd-cac:EconomicOperatorParty.Party.PostalAddress<br>
      */
+    @NotNull
     private PostalAddress postalAddress;
-
 
     /**
      * Contacting details
      * <p>
-     * Used to provide contacting information for a party in general or a person.
+     * Used to provide contacting information for a party in general or a
+     * person.
      * <p>
      * Data type: <br>
      * Cardinality: 0..1<br>
@@ -166,7 +187,8 @@ public class EODetails {
     /**
      * Natural Person
      * <p>
-     * Information about individuals who in one way or the other represent the economic operator.
+     * Information about individuals who in one way or the other represent the
+     * economic operator.
      * <p>
      * Data type: <br>
      * Cardinality: 0..n<br>
@@ -265,5 +287,13 @@ public class EODetails {
 
     public void setContactingDetails(ContactingDetails contactingDetails) {
         this.contactingDetails = contactingDetails;
+    }
+
+    public String getWebSiteURI() {
+        return webSiteURI;
+    }
+
+    public void setWebSiteURI(String webSiteURI) {
+        this.webSiteURI = webSiteURI;
     }
 }

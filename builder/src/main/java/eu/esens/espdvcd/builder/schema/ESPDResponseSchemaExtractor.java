@@ -1,5 +1,6 @@
 package eu.esens.espdvcd.builder.schema;
 
+import eu.esens.espdvcd.builder.EvidenceHelper;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.EODetails;
 import eu.esens.espdvcd.model.ESPDResponse;
@@ -15,6 +16,7 @@ import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.Re
 import isa.names.specification.ubl.schema.xsd.ccv_commonbasiccomponents_1.IndicatorType;
 import isa.names.specification.ubl.schema.xsd.cev_commonaggregatecomponents_1.EvidenceType;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -36,26 +38,7 @@ import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.Part
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PeriodType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PersonType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PowerOfAttorneyType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.AmountType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.BirthDateType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.BirthplaceNameType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.CityNameType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ContractFolderIDType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.DateType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.DescriptionType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ElectronicMailType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.FamilyNameType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.FirstNameType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.IDType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.NameType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.PercentType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.PostboxType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.QuantityType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.StreetNameType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.TelefaxType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.TelephoneType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.TypeCodeType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.URIType;
+import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -76,6 +59,7 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
         resType.getAdditionalDocumentReference().add(extractCADetailsDocumentReferece(res.getCADetails()));
         resType.setContractingParty(extractContractingPartyType(res.getCADetails()));
         resType.getProcurementProjectLot().add(extractProcurementProjectLot(res.getCADetails()));
+        resType.setServiceProviderParty(extractServiceProviderPartyType(res.getServiceProviderDetails()));
         resType.getCriterion().addAll(res.getFullCriterionList().stream()
                 .filter(cr -> cr.isSelected())
                 .map(cr -> extractCriterion(cr))
@@ -83,6 +67,13 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
 
         resType.setEconomicOperatorParty(extracEODetails(res.getEODetails()));
 
+        resType.setUBLVersionID(createUBL21VersionIdType());
+
+        resType.setCustomizationID(createBIICustomizationIdType("urn:www.cenbii.eu:transaction:biitrns092:ver3.0"));
+        resType.setVersionID(createVersionIDType("2017.01.01"));
+
+        resType.setCopyIndicator(new CopyIndicatorType());
+        resType.getCopyIndicator().setValue(false);
         return resType;
     }
 
@@ -102,6 +93,7 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
             PartyIdentificationType pit = new PartyIdentificationType();
             pit.setID(new IDType());
             pit.getID().setValue(eod.getID());
+            pit.getID().setSchemeAgencyID("EU-COM-GROW");
             eopt.getParty().getPartyIdentification().add(pit);
         }
 
@@ -110,6 +102,20 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
             pnt.setName(new NameType());
             pnt.getName().setValue(eod.getName());
             eopt.getParty().getPartyName().add(pnt);
+        }
+
+        // UL bugfix: there was no code for creating EndpointID element for EO
+        if (eod.getElectronicAddressID() != null) {
+            EndpointIDType eid = new EndpointIDType();
+            eid.setValue(eod.getElectronicAddressID());
+            eopt.getParty().setEndpointID(eid);
+        }
+
+        // UL bugfix: there was no code for creating WebsiteURI element for EO
+        if (eod.getWebSiteURI() != null) {
+            WebsiteURIType wsuri = new WebsiteURIType();
+            wsuri.setValue(eod.getWebSiteURI());
+            eopt.getParty().setWebsiteURI(wsuri);
         }
 
         if (eod.getPostalAddress() != null) {
@@ -168,15 +174,13 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
             if (np.getBirthDate() != null) {
                 try {
                     pt.setBirthDate(new BirthDateType());
-                    Calendar cal = new GregorianCalendar();
-                    cal.setTime(np.getBirthDate());
-                    XMLGregorianCalendar xcal;
-                    xcal = DatatypeFactory.newInstance()
-                            .newXMLGregorianCalendarDate(
-                                    cal.get(Calendar.YEAR),
-                                    cal.get(Calendar.MONTH) + 1,
-                                    cal.get(Calendar.DAY_OF_MONTH),
-                                    DatatypeConstants.FIELD_UNDEFINED);
+                  
+                    XMLGregorianCalendar xcal = DatatypeFactory.newInstance()
+                                .newXMLGregorianCalendarDate(
+                                        np.getBirthDate().getYear(),
+                                        np.getBirthDate().getMonthValue(),
+                                        np.getBirthDate().getDayOfMonth(),
+                                        DatatypeConstants.FIELD_UNDEFINED);
                     pt.getBirthDate().setValue(xcal);
                 } catch (DatatypeConfigurationException ex) {
                     log.error("Could not create XML Date Object", ex);
@@ -271,6 +275,7 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
 
             case QUANTITY_INTEGER:
                 rType.setQuantity(new QuantityType());
+                rType.getQuantity().setUnitCode("NUMBER");
                 rType.getQuantity().setValue(BigDecimal.valueOf(((QuantityIntegerResponse) response).getQuantity()));
                 return rType;
 
@@ -286,10 +291,13 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
                 return rType;
 
             case PERIOD:
-                rType.setPeriod(new PeriodType());
-                DescriptionType dt = new DescriptionType();
-                dt.setValue(((PeriodResponse) response).getDescription());
-                rType.getPeriod().getDescription().add(dt);
+                String descr = ((PeriodResponse) response).getDescription();
+                if (descr != null && !descr.isEmpty()) {
+                    rType.setPeriod(new PeriodType());
+                    DescriptionType dt = new DescriptionType();
+                    dt.setValue(descr);
+                    rType.getPeriod().getDescription().add(dt);
+                }
                 return rType;
 
             case PERCENTAGE:
@@ -299,15 +307,13 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
 
             case DATE:
                 if (((DateResponse) response).getDate() != null) {
-                    Date respDate = ((DateResponse) response).getDate();
-                    Calendar cal = new GregorianCalendar();
-                    cal.setTime(respDate);
+                    LocalDate respDate = ((DateResponse) response).getDate();
                     try {
                         XMLGregorianCalendar xcal = DatatypeFactory.newInstance()
                                 .newXMLGregorianCalendarDate(
-                                        cal.get(Calendar.YEAR),
-                                        cal.get(Calendar.MONTH) + 1,
-                                        cal.get(Calendar.DAY_OF_MONTH),
+                                        respDate.getYear(),
+                                        respDate.getMonthValue(),
+                                        respDate.getDayOfMonth(),
                                         DatatypeConstants.FIELD_UNDEFINED);
                         rType.setDate(new DateType());
                         rType.getDate().setValue(xcal);
@@ -320,8 +326,11 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
                 return rType;
 
             case CODE:
-                rType.setCode(new TypeCodeType());
-                rType.getCode().setValue(((EvidenceURLCodeResponse) response).getEvidenceURLCode());
+                EvidenceURLCodeResponse localResp = ((EvidenceURLCodeResponse) response);
+                if (localResp.getEvidenceURLCode() != null && !localResp.getEvidenceURLCode().isEmpty()) {
+                    rType.setCode(new TypeCodeType());
+                    rType.getCode().setValue(localResp.getEvidenceURLCode());
+                }
                 return rType;
 
             case EVIDENCE_URL:
@@ -333,7 +342,13 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
                     drt.setAttachment(new AttachmentType());
                     drt.getAttachment().setExternalReference(new ExternalReferenceType());
                     drt.getAttachment().getExternalReference().setURI(new URIType());
-                    drt.getAttachment().getExternalReference().getURI().setValue(((EvidenceURLResponse) response).getEvidenceURL());
+                    //drt.getAttachment().getExternalReference().getURI().setValue(((EvidenceURLResponse) response).getEvidenceURL());
+                    // UL: modification for handling VCD resources
+                    drt.getAttachment().getExternalReference().getURI().setValue(
+                            EvidenceHelper.transformEvidenceURIFromLocalResourceToASiCResource(
+                                    ((EvidenceURLResponse) response).getEvidenceURL()
+                            )
+                    );
                     evType.getEvidenceDocumentReference().add(drt);
                     rType.getEvidence().add(evType);
                 }
@@ -342,7 +357,7 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
             case CODE_COUNTRY:
                 rType.setCode(new TypeCodeType());
                 rType.getCode().setListAgencyID("ISO");
-                rType.getCode().setListID("ISO 3166-2");
+                rType.getCode().setListID("ISO 3166-1");
                 rType.getCode().setListVersionID("1.0");
                 rType.getCode().setValue(((CountryCodeResponse) response).getCountryCode());
                 return rType;

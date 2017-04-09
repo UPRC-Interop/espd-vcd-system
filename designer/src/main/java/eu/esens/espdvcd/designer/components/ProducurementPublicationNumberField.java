@@ -13,11 +13,9 @@ public class ProducurementPublicationNumberField extends TextField {
         super(caption);
         thisField = this;
 
-        this.setTextChangeEventMode(TextChangeEventMode.EAGER);
-        this.setNullRepresentation("");
-        this.setInputPrompt("____/S ___-______");
+        this.setPlaceholder("____/S ___-______");
 
         RegexpValidator regexpValidator = new RegexpValidator("\\d{4}\\/S\\s\\d{3}-\\d{6}", "Incorrect format. Example: \"1234/S 123-123456\"");
-        this.addValidator(regexpValidator);
+//        this.addValidator(regexpValidator);
     }
 }

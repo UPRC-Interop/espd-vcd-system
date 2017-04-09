@@ -1,6 +1,7 @@
 package eu.esens.espdvcd.designer.components.requirement;
 
-import com.vaadin.data.fieldgroup.BeanFieldGroup;
+import com.vaadin.data.BeanValidationBinder;
+import com.vaadin.data.Binder;
 import eu.esens.espdvcd.designer.components.CountryComboBox;
 import eu.esens.espdvcd.model.requirement.response.CountryCodeResponse;
 
@@ -15,10 +16,9 @@ public class CountryCodeResponseForm extends ResponseForm {
         countryCode.setWidth(280, Unit.PIXELS);
 
         // Bind fields
-        final BeanFieldGroup<CountryCodeResponse> binder = new BeanFieldGroup<>(CountryCodeResponse.class);
-        binder.bindMemberFields(this);
-        binder.setItemDataSource(this.countryCodeResponse);
-        binder.setBuffered(false);
+        final Binder<CountryCodeResponse> binder = new BeanValidationBinder<>(CountryCodeResponse.class);
+        binder.bindInstanceFields(this);
+        binder.setBean(countryCodeResponse);
         binder.setReadOnly(readOnly);
     }
 }

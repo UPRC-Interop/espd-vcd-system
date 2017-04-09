@@ -3,6 +3,7 @@ package eu.esens.espdvcd.builder.schema;
 import eu.esens.espdvcd.model.CADetails;
 import eu.esens.espdvcd.model.Criterion;
 import eu.esens.espdvcd.model.LegislationReference;
+import eu.esens.espdvcd.model.ServiceProviderDetails;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.CriterionType;
@@ -10,27 +11,10 @@ import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.Le
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementGroupType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementType;
 import java.util.stream.Collectors;
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.AddressType;
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.AttachmentType;
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ContractingPartyType;
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.CountryType;
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.DocumentReferenceType;
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ExternalReferenceType;
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PartyNameType;
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PartyType;
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ProcurementProjectLotType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.CustomizationIDType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.DescriptionType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.DocumentTypeCodeType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.FileNameType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.IDType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.IdentificationCodeType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.NameType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.TextType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.TypeCodeType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.UBLVersionIDType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.URIType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.VersionIDType;
+
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.*;
+import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.*;
+
 
 public interface SchemaExtractor {
 
@@ -77,6 +61,7 @@ public interface SchemaExtractor {
                 .collect(Collectors.toList()));
 
         rgType.setID(createDefaultIDType(rg.getID()));
+        rgType.setPi(rg.getCondition());
 
         return rgType;
     }
@@ -109,7 +94,7 @@ public interface SchemaExtractor {
         if (cd != null) {
 
             if (cd.getProcurementPublicationNumber() != null) {
-                dr.setID(createISOIECIDType(cd.getProcurementPublicationNumber()));
+                dr.setID(createGROWTemporaryId(cd.getProcurementPublicationNumber()));
             }
 
             dr.setDocumentTypeCode(createDocumentTypeCode("TED_CN"));
@@ -143,19 +128,123 @@ public interface SchemaExtractor {
 
     default ContractingPartyType extractContractingPartyType(CADetails cd) {
 
+        if (cd == null) {
+            return null;
+        }
+
         ContractingPartyType cpp = new ContractingPartyType();
         PartyType pt = new PartyType();
-        PartyNameType nt = new PartyNameType();
-        nt.setName(new NameType());
-        nt.getName().setValue(cd.getCAOfficialName());
-        pt.getPartyName().add(nt);
-
-        pt.setPostalAddress(new AddressType());
-        pt.getPostalAddress().setCountry(new CountryType());
-        pt.getPostalAddress().getCountry().setIdentificationCode(createISOCountryIdCodeType(cd.getCACountry()));
         cpp.setParty(pt);
 
+        if (cd.getCAOfficialName() != null) {
+            PartyNameType nt = new PartyNameType();
+            nt.setName(new NameType());
+            nt.getName().setValue(cd.getCAOfficialName());
+            pt.getPartyName().add(nt);
+        }
+
+        // UL: replaced by the respective PostalAddress model element, see below
+        //pt.setPostalAddress(new AddressType());
+        //pt.getPostalAddress().setCountry(new CountryType());
+        //pt.getPostalAddress().getCountry().setIdentificationCode(createISOCountryIdCodeType(cd.getCACountry()));
+
+
+        // UBL syntax path: cac:ContractingParty.Party.EndpointID
+        if (cd.getElectronicAddressID() != null) {
+            EndpointIDType eid = new EndpointIDType();
+            eid.setValue(cd.getElectronicAddressID());
+            pt.setEndpointID(eid);
+        }
+
+        // UBL syntax path: cac:ContractingParty.Party.WebsiteURIID
+        if (cd.getWebSiteURI() != null) {
+            WebsiteURIType wsuri = new WebsiteURIType();
+            wsuri.setValue(cd.getWebSiteURI());
+            pt.setWebsiteURI(wsuri);
+        }
+
+        if (cd.getPostalAddress() != null) {
+            // UBL syntax path: cac:ContractingParty.Party.PostalAddress
+
+            AddressType at = new AddressType();
+
+            at.setStreetName(new StreetNameType());
+            at.getStreetName().setValue(cd.getPostalAddress().getAddressLine1());
+
+            at.setCityName(new CityNameType());
+            at.getCityName().setValue(cd.getPostalAddress().getCity());
+
+            at.setPostbox(new PostboxType());
+            at.getPostbox().setValue(cd.getPostalAddress().getPostCode());
+
+            at.setCountry(new CountryType());
+            // FIXME: the country should be set using this model element; for compatibility the old method cd.getCACountry() is used
+            //at.getCountry().setIdentificationCode(createISOCountryIdCodeType(cd.getPostalAddress().getCountryCode()));
+            at.getCountry().setIdentificationCode(createISOCountryIdCodeType(cd.getCACountry()));
+
+            cpp.getParty().setPostalAddress(at);
+        }
+
+        if (cd.getContactingDetails() != null) {
+            // UBL syntax path: cac:ContractingParty.Party.Contact
+
+            oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ContactType ct = new ContactType();
+            ct.setName(new NameType());
+            ct.getName().setValue(cd.getContactingDetails().getContactPointName());
+
+            ct.setTelephone(new TelephoneType());
+            ct.getTelephone().setValue(cd.getContactingDetails().getTelephoneNumber());
+
+            ct.setElectronicMail(new ElectronicMailType());
+            ct.getElectronicMail().setValue(cd.getContactingDetails().getEmailAddress());
+
+            ct.setTelefax(new TelefaxType());
+            ct.getTelefax().setValue(cd.getContactingDetails().getFaxNumber());
+
+            cpp.getParty().setContact(ct);
+        }
+
         return cpp;
+    }
+
+    default ServiceProviderPartyType  extractServiceProviderPartyType(ServiceProviderDetails spd) {
+        if (spd == null) {
+            return null;
+        }
+
+        ServiceProviderPartyType sppt = new ServiceProviderPartyType();
+        PartyType pt = new PartyType();
+        sppt.setParty(pt);
+
+        if (spd.getEndpointID() != null) {
+            EndpointIDType eid = new EndpointIDType();
+            eid.setValue(spd.getEndpointID());
+            pt.setEndpointID(eid);
+        }
+
+        if (spd.getId() != null) {
+            PartyIdentificationType pid = new PartyIdentificationType();
+            IDType idt = new IDType();
+            idt.setValue(spd.getId());
+            pid.setID(idt);
+            pt.getPartyIdentification().add(pid);
+        }
+
+        if (spd.getName() != null) {
+            PartyNameType pnt = new PartyNameType();
+            NameType nt = new NameType();
+            nt.setValue(spd.getName());
+            pnt.setName(nt);
+            pt.getPartyName().add(pnt);
+        }
+
+        if (spd.getWebsiteURI() != null) {
+            WebsiteURIType wsuri = new WebsiteURIType();
+            wsuri.setValue(spd.getWebsiteURI());
+            pt.setWebsiteURI(wsuri);
+        }
+
+        return sppt;
     }
 
     default IDType createDefaultIDType(String id) {
@@ -203,9 +292,18 @@ public interface SchemaExtractor {
     default IdentificationCodeType createISOCountryIdCodeType(String id) {
 
         IdentificationCodeType countryCodeType = new IdentificationCodeType();
-        countryCodeType.setListAgencyID("ISO");
-        countryCodeType.setListName("ISO 3166-1");
-        countryCodeType.setListVersionID("1.0");
+        //countryCodeType.setListAgencyID("ISO");
+        // modification UL_2016-12-22: updated ListAgencyID
+        countryCodeType.setListAgencyID("EU-COM-GROW");
+
+        //Updated to follow ESPD Service 2017.01.01 release
+        countryCodeType.setListName("CountryCodeIdentifier");
+        //countryCodeType.setListVersionID("1.0");
+        // modification UL_2016-12-22: updated list version and added listID
+        countryCodeType.setListVersionID("1.0.2");
+        countryCodeType.setListID("CountryCodeIdentifier");
+
+
         countryCodeType.setValue(id);
 
         return countryCodeType;
@@ -214,8 +312,14 @@ public interface SchemaExtractor {
     default TypeCodeType createJurisdictionLevelCode(String code) {
         TypeCodeType tc = new TypeCodeType();
         tc.setListAgencyID("EU-COM-GROW");
-        tc.setListID("CriterionJurisdictionLevelCode");
-        tc.setListVersionID("1.0");
+        //tc.setListID("CriterionJurisdictionLevelCode");
+        // modification UL_2016-12-22: new listID
+        tc.setListID("CriterionJurisdictionLevel");
+
+        //tc.setListVersionID("1.0");
+        // modification UL_2016-12-22: updated list version
+        tc.setListVersionID("1.0.2");
+
         tc.setValue(code);
         return tc;
     }
@@ -224,7 +328,10 @@ public interface SchemaExtractor {
         TypeCodeType tc = new TypeCodeType();
         tc.setListAgencyID("EU-COM-GROW");
         tc.setListID("CriteriaTypeCode");
-        tc.setListVersionID("1.0");
+        //tc.setListVersionID("1.0");
+        // modification UL_2016-12-22: updated list version
+        tc.setListVersionID("1.0.2");
+
         tc.setValue(code);
         return tc;
     }
@@ -234,6 +341,9 @@ public interface SchemaExtractor {
         dtc.setListAgencyID("EU-COM-GROW");
         dtc.setListID("ReferencesTypeCodes");
         dtc.setListVersionID("1.0");
+        // modification UL_2016-12-22: updated list version
+        //dtc.setListVersionID("1.0.2");
+
         dtc.setValue(code);
         return dtc;
     }
@@ -267,11 +377,19 @@ public interface SchemaExtractor {
 
     }
 
+
     default ProcurementProjectLotType extractProcurementProjectLot(CADetails caDetails) {
 
         ProcurementProjectLotType pplt = new ProcurementProjectLotType();
         pplt.setID(new IDType());
-        pplt.getID().setValue(caDetails.getProcurementProjectLot());
+
+        //pplt.getID().setValue(caDetails.getProcurementProjectLot());
+        // modification UL_2016-12-21: according to ESPD specification 1.0.2, procurement project lot needs to be "0"
+        // and attribute schemeAgencyID needs to be set
+        pplt.getID().setValue((caDetails.getProcurementProjectLot() == null) ||
+                caDetails.getProcurementProjectLot().isEmpty() ? "0" : caDetails.getProcurementProjectLot());
+        pplt.getID().setSchemeAgencyID("EU-COM-GROW");
+
         return pplt;
     }
 }

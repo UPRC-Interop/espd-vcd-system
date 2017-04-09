@@ -1,6 +1,7 @@
 package eu.esens.espdvcd.designer.components;
 
-import com.vaadin.data.fieldgroup.BeanFieldGroup;
+import com.vaadin.data.BeanValidationBinder;
+import com.vaadin.data.Binder;
 import com.vaadin.ui.*;
 import eu.esens.espdvcd.model.ContactingDetails;
 
@@ -38,10 +39,9 @@ public class ContactingDetailsForm extends Panel {
         columnB.addComponent(telephoneNumber);
         columnB.addComponent(faxNumber);
 
-        final BeanFieldGroup<ContactingDetails> binder = new BeanFieldGroup<>(ContactingDetails.class);
-        binder.bindMemberFields(this);
-        binder.setItemDataSource(this.contactingDetails);
-        binder.setBuffered(false);
+        final Binder<ContactingDetails> binder = new BeanValidationBinder<>(ContactingDetails.class);
+        binder.bindInstanceFields(this);
+        binder.setBean(this.contactingDetails);
         binder.setReadOnly(readOnly);
 
         panelContent.setStyleName("ContactingDetailsFormPanelContent");
@@ -55,20 +55,12 @@ public class ContactingDetailsForm extends Panel {
         columnB.setSpacing(true);
         columnB.setMargin(false);
 
-        contactPointName.setNullRepresentation("");
-        contactPointName.setInputPrompt("Contact point name");
         contactPointName.setWidth(400, Unit.PIXELS);
 
-        emailAddress.setNullRepresentation("");
-        emailAddress.setInputPrompt("Email address");
         emailAddress.setWidth(400, Unit.PIXELS);
 
-        telephoneNumber.setNullRepresentation("");
-        telephoneNumber.setInputPrompt("Phone number");
         telephoneNumber.setWidth(300, Unit.PIXELS);
 
-        faxNumber.setNullRepresentation("");
-        faxNumber.setInputPrompt("Fax number");
         faxNumber.setWidth(300, Unit.PIXELS);
     }
 }

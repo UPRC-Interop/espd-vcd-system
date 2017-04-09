@@ -22,6 +22,7 @@ public class ESPDRequestModelExtractor implements ModelExtractor {
                                           reqType.getContractFolderID(),
                                           reqType.getProcurementProjectLot().get(0),
                                           reqType.getAdditionalDocumentReference()));
+        req.setServiceProviderDetails(extractServiceProviderDetails(reqType.getServiceProviderParty()));
         
         return req;
     }

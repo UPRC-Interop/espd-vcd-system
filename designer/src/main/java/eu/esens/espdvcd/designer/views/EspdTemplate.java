@@ -36,7 +36,6 @@ public class EspdTemplate extends Master {
         detailsPanel.setStyleName("detailsPanel");
         detailsPanel.setSizeFull();
         detailsPanel.setContent(detailsContent);
-        detailsPanel.getContent().setSizeUndefined();
 
         detailsContent.setHeight("100%");
         detailsContent.setStyleName("master-detailsContent");
@@ -45,8 +44,8 @@ public class EspdTemplate extends Master {
         mainContent.setWidth("100%");
         gridLayout.setWidth("100%");
         gridLayout.setHeight("100%");
-        gridLayout.setColumnExpandRatio(0, 0.7f);
-        gridLayout.setColumnExpandRatio(1, 0.3f);
+        gridLayout.setColumnExpandRatio(0, 0.65f);
+        gridLayout.setColumnExpandRatio(1, 0.35f);
 
         gridLayout.addComponent(mainColumn, 0, 0);
         gridLayout.addComponent(detailsPanel, 1, 0);
@@ -74,7 +73,7 @@ public class EspdTemplate extends Master {
         panelLeftButtonNew.addClickListener(this::onNewEspdTemplate);
         panelLeftLayout.addComponent(panelLeftButtonNew);
 
-        Panel panelRight = new Panel("Import existing ESPD Template");
+        Panel panelRight = new Panel("Import existing ESPD Template 123123");
         panelRight.setStyleName("EspdTemplate-panelRight");
         panels.addComponent(panelRight);
 
@@ -105,7 +104,7 @@ public class EspdTemplate extends Master {
             espdRequest = new ModelBuilder().addDefaultESPDCriteriaList().createESPDRequest();
             
             // Cenerate the espd request form base on the provided espd request model
-            espdRequestForm = new ESPDRequestForm(this, espdRequest, false);
+            espdRequestForm = new ESPDRequestForm(this, espdRequest, -1, false);
             mainColumn.addComponent(espdRequestForm);
         } catch (BuilderException ex) {
             Logger.getLogger(EspdTemplate.class.getName()).log(Level.SEVERE, null, ex);
@@ -141,7 +140,7 @@ public class EspdTemplate extends Master {
                     InputStream is = new FileInputStream(file);
                     
                     espdRequest = new ModelBuilder().importFrom(is).createESPDRequest();
-                    espdRequestForm = new ESPDRequestForm(thisView, espdRequest, false);
+                    espdRequestForm = new ESPDRequestForm(thisView, espdRequest, -1, false);
                     mainColumn.addComponent(espdRequestForm);
                     is.close();
                     panels.setVisible(false);

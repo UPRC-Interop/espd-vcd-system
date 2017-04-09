@@ -4,6 +4,7 @@ import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.ui.*;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
+import eu.esens.espdvcd.designer.components.windows.CriterionWindow;
 import eu.esens.espdvcd.model.requirement.response.ResponseFactory;
 import eu.esens.espdvcd.designer.components.requirement.*;
 import eu.esens.espdvcd.model.requirement.response.AmountResponse;
@@ -158,7 +159,7 @@ public class Sandbox extends Master {
 
         { // EvidenceURLResponseForm
             EvidenceURLResponse evidenceURLResponse = (EvidenceURLResponse) ResponseFactory.createResponse(ResponseTypeEnum.EVIDENCE_URL);
-            EvidenceURLResponseForm evidenceURLResponseForm = new EvidenceURLResponseForm(evidenceURLResponse, "EvidenceURLResponse test case", false);
+            EvidenceURLResponseForm evidenceURLResponseForm = new EvidenceURLResponseForm(evidenceURLResponse, "EvidenceURLResponse test case", 1, false);
             pageContent.addComponent(evidenceURLResponseForm);
 
             Button testButton = new Button("Test EvidenceURLResponse");

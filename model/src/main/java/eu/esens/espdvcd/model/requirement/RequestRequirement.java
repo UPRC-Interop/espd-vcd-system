@@ -5,6 +5,7 @@ import eu.esens.espdvcd.model.requirement.response.Response;
 import eu.esens.espdvcd.model.Evidence;
 import eu.esens.espdvcd.model.requirement.response.ResponseFactory;
 import java.util.List;
+import javax.validation.constraints.NotNull;
 
 /**
  * Criterion requirement
@@ -32,6 +33,7 @@ public class RequestRequirement implements Requirement {
      * BusReqID: tbr70-013, tbr70-004<br>
      * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.ID<br>
      */
+    @NotNull
     private String ID;
 
     /**
@@ -45,6 +47,7 @@ public class RequestRequirement implements Requirement {
      * BusReqID: tbr70-013, tbr70-004<br>
      * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.Description<br>
      */
+    @NotNull
     private String description;
 
     /**

@@ -3,17 +3,7 @@ package eu.esens.espdvcd.builder;
 import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.builder.model.ModelFactory;
 import eu.esens.espdvcd.codelist.Codelists;
-import eu.esens.espdvcd.model.CADetails;
-import eu.esens.espdvcd.model.ContactingDetails;
-import eu.esens.espdvcd.model.Criterion;
-import eu.esens.espdvcd.model.EODetails;
-import eu.esens.espdvcd.model.ESPDRequest;
-import eu.esens.espdvcd.model.ESPDResponse;
-import eu.esens.espdvcd.model.NaturalPerson;
-import eu.esens.espdvcd.model.PostalAddress;
-import eu.esens.espdvcd.model.SelectableCriterion;
-import eu.esens.espdvcd.model.SimpleESPDRequest;
-import eu.esens.espdvcd.model.SimpleESPDResponse;
+import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
 import eu.esens.espdvcd.retriever.criteria.PredefinedESPDCriteriaExtractor;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
@@ -40,6 +30,7 @@ public class ModelBuilder {
 
     private EODetails eoDetails = null;
     private CADetails caDetails = null;
+    private ServiceProviderDetails serviceProviderDetails = null;
     private CriteriaExtractor criteriaExtractor = null;
     private InputStream importStream = null;
 
@@ -182,11 +173,17 @@ public class ModelBuilder {
                 req.setCriterionList(getEmptyCriteriaList());
             }
             req.setCADetails(createDefaultCADetails());
+            req.setServiceProviderDetails(createDefaultServiceProviderDetails());
         }
 
         //Overriding the default/imported ca details
         if (caDetails != null) {
             req.setCADetails(caDetails);
+        }
+
+        // Overriding the default/imported service provider details
+        if (serviceProviderDetails != null) {
+            req.setServiceProviderDetails(serviceProviderDetails);
         }
 
         // Apply workaround
@@ -233,6 +230,9 @@ public class ModelBuilder {
         if (res.getEODetails() == null) {
             res.setEODetails(createDefaultEODetails());
         }
+        if (res.getServiceProviderDetails() == null) {
+            res.setServiceProviderDetails(createDefaultServiceProviderDetails());
+        }
 
         if (caDetails != null) {
             res.setCADetails(caDetails);
@@ -240,6 +240,10 @@ public class ModelBuilder {
 
         if (eoDetails != null) {
             res.setEODetails(eoDetails);
+        }
+
+        if (serviceProviderDetails != null) {
+            res.setServiceProviderDetails(serviceProviderDetails);
         }
 
         // Apply workaround
@@ -362,10 +366,23 @@ public class ModelBuilder {
     private CADetails createDefaultCADetails() {
         // Default initialization of the ESPDRequest and ESPDResponse Models.
         // Empty CADetails
-
         System.out.println("Creating default CA Details");
-        return new CADetails();
+        CADetails cad = new CADetails();
+        cad.setContactingDetails(new ContactingDetails());
+        cad.setPostalAddress(new PostalAddress());
+        return cad;
+    }
 
+    private ServiceProviderDetails createDefaultServiceProviderDetails() {
+        // Empty ServiceProviderDetails
+        System.out.println("Creating default Service Provider Details");
+        ServiceProviderDetails spd = new ServiceProviderDetails();
+        // TODO: fill with reasonable default content
+        spd.setName("e-SENS");
+        spd.setEndpointID("N/A");
+        spd.setId("N/A");
+        spd.setWebsiteURI("N/A");
+        return spd;
     }
 
     private List<SelectableCriterion> getEmptyCriteriaList() {

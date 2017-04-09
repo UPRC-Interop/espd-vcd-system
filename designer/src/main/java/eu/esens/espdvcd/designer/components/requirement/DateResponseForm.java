@@ -1,6 +1,7 @@
 package eu.esens.espdvcd.designer.components.requirement;
 
-import com.vaadin.data.fieldgroup.BeanFieldGroup;
+import com.vaadin.data.BeanValidationBinder;
+import com.vaadin.data.Binder;
 import com.vaadin.ui.DateField;
 import eu.esens.espdvcd.model.requirement.response.DateResponse;
 
@@ -16,10 +17,9 @@ public class DateResponseForm extends ResponseForm {
         date.setDateFormat("dd/MM/yyyy");
 
         // Bind fields
-        final BeanFieldGroup<DateResponse> binder = new BeanFieldGroup<>(DateResponse.class);
-        binder.bindMemberFields(this);
-        binder.setItemDataSource(this.dateResponse);
-        binder.setBuffered(false);
+        final Binder<DateResponse> binder = new BeanValidationBinder<>(DateResponse.class);
+        binder.bindInstanceFields(this);
+        binder.setBean(this.dateResponse);
         binder.setReadOnly(readOnly);
     }
 }

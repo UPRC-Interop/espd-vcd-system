@@ -47,13 +47,13 @@ public class LoginFormWindow extends Window {
 
         // Username text field
         usernameTextField = new TextField("");
-        usernameTextField.setInputPrompt("Username");
+        usernameTextField.setPlaceholder("Username");
         usernameTextField.setStyleName("login-username-field");
         customLayout.addComponent(usernameTextField, "username");
 
         // Password text field
         passwordPasswordField = new PasswordField("");
-        passwordPasswordField.setInputPrompt("Password");
+        passwordPasswordField.setPlaceholder("Password");
         passwordPasswordField.setStyleName("login-password-field");
         customLayout.addComponent(passwordPasswordField, "password");
 
