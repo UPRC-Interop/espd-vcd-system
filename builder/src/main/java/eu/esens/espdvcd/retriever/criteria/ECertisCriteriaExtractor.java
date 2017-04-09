@@ -51,7 +51,7 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
         
     }
     
-    private void getFullListFromECertis() throws RetrieverException {
+    private void initCriterionList() throws RetrieverException {
         
         // If Not Initialized Yet, Initialize CriterionType List
         if (criterionTypeList == null) {
@@ -97,13 +97,10 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
     @Override
     public synchronized List<SelectableCriterion> getFullList() throws RetrieverException {
         
-        getFullListFromECertis();
+        initCriterionList();
         List<SelectableCriterion> lc
                 = criterionTypeList.stream()
-                        .map((ECertisCriterion c) -> {
-                            // convertion from ECertisCriterion to SelectableCriterion needed
-                            return new SelectableCriterion();
-                        })
+                        .map((ECertisCriterion c) -> (SelectableCriterion) c)
                         .collect(Collectors.toList());
         return lc;
     }
@@ -112,24 +109,21 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
     public synchronized List<SelectableCriterion> getFullList(List<SelectableCriterion> initialList) 
             throws RetrieverException {
         
-        getFullListFromECertis();
+        initCriterionList();
         return getFullList(initialList, false);
     }
 
     @Override
-    public synchronized List<SelectableCriterion> getFullList(List<SelectableCriterion> initialList, boolean addAsSelected) 
-            throws RetrieverException {
+    public synchronized List<SelectableCriterion> getFullList(List<SelectableCriterion> initialList, 
+            boolean addAsSelected) throws RetrieverException {
         
-        getFullListFromECertis();
+        initCriterionList();
         System.out.println("Criterion List Size:" + criterionTypeList.size());
         Set<SelectableCriterion> initialSet = new LinkedHashSet<>();
         initialSet.addAll(initialList);
         Set<SelectableCriterion> fullSet
                 = criterionTypeList.stream()
-                        .map((ECertisCriterion c) -> {
-                            // convertion from ECertisCriterion to SelectableCriterion needed
-                            return new SelectableCriterion();
-                        })
+                        .map((ECertisCriterion c) -> (SelectableCriterion) c)
                         .collect(Collectors.toSet());
         initialSet.addAll(fullSet);
         System.out.println("Criterion List Size in model:" + initialSet.size());
@@ -141,10 +135,10 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
              throws RetrieverException {
         List<ECertisCriterion> nationalCriterionTypeList = new ArrayList<>();
         
-        if (isCountryCodeExists(countryCode)) {
+        if (isCountryCodeExist(countryCode)) {
             
             ECertisCriterion source = getCriterion(criterionId);
-            JurisdictionLevelCodeOrigin jlco = getCriterionJurisdictionLevelCodeOrigin(source);
+            JurisdictionLevelCodeOrigin jlco = extractCriterionOrigin(source);
             
             switch (jlco) {
                 case EUROPEAN:
@@ -331,7 +325,7 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
     }
     
     // Extract Given Criterion JurisdictionLevelCode Origin
-    private JurisdictionLevelCodeOrigin getCriterionJurisdictionLevelCodeOrigin(ECertisCriterion c) {
+    private JurisdictionLevelCodeOrigin extractCriterionOrigin(ECertisCriterion c) {
             
         JurisdictionLevelCodeOrigin jlco = JurisdictionLevelCodeOrigin.UNKNOWN;
         
@@ -349,8 +343,8 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
         return jlco;
     }
     
-    // User Codelists in order to check if given Country Code is Valid
-    private boolean isCountryCodeExists(String countryCode) {
+    // Use Codelists in order to check if given Country Code is Valid
+    private boolean isCountryCodeExist(String countryCode) {
         return Codelists.CountryIdentification
                 .containsId(countryCode.toUpperCase());
     }

@@ -10,6 +10,9 @@ import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInA
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
 import eu.esens.espdvcd.model.retriever.ECertisCriterion;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.junit.Ignore;
 
 /**
  *
@@ -24,6 +27,16 @@ public class ECertisCriteriaDataRetrieverTest {
         extractor = new ECertisCriteriaExtractor();
     }
   
+    @Test
+    public void testGetCriterionV2() {
+        try {
+            extractor.getCriterion("d726bac9-e153-4e75-bfca-c5385587766d");
+        } catch (RetrieverException ex) {
+            Logger.getLogger(ECertisCriteriaDataRetrieverTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    // @Ignore
     @Test
     public void testEuToNationalMapping() throws RetrieverException {
 
@@ -43,6 +56,7 @@ public class ECertisCriteriaDataRetrieverTest {
                 "63c2f7a0-63af-49c0-8251-80ec7bf43f94"));
     }
 
+    // @Ignore
     @Test
     public void testNationalToNationalMapping() throws RetrieverException {
 
@@ -55,6 +69,7 @@ public class ECertisCriteriaDataRetrieverTest {
                 "db657c18-88e8-4a91-b645-214085f2eba8"));
     }
 
+    // @Ignore
     @Test
     public void testGetCriterion() throws RetrieverException {
 
@@ -63,6 +78,7 @@ public class ECertisCriteriaDataRetrieverTest {
         assertEquals("3f865345-9a7e-49a3-924a-ca77da6f2512", c.getID());
     }
 
+    // @Ignore
     @Test
     public void testGetEvidenceGroup() throws RetrieverException {
 

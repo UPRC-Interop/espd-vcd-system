@@ -12,9 +12,20 @@ import java.util.ArrayList;
  *
  * @author Konstantinos Raptis
  */
-@JsonPropertyOrder( {"ID", "typeCode", "name", "description", "versionID", "feeAmount",
-"evidenceIntendedUse", "evidenceIssuerParty", "addresseeDescription", "jurisdictionLevelCode", 
-"evidenceDocumentReference"} )
+@JsonPropertyOrder( 
+        {
+            "ID", 
+            "typeCode", 
+            "name", 
+            "description", 
+            "versionID",
+            "feeAmount",
+            "evidenceIntendedUse", 
+            "evidenceIssuerParty", 
+            "addresseeDescription", 
+            "jurisdictionLevelCode", 
+            "evidenceDocumentReference"
+        } )
 public class ECertisEvidenceImpl implements ECertisEvidence {
     
     private String ID;

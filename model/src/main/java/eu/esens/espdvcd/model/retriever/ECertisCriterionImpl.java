@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import eu.esens.espdvcd.model.Criterion;
 import eu.esens.espdvcd.model.LegislationReference;
+import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.util.CustomLegislationReferenceDeserializer;
 import eu.esens.espdvcd.model.util.CustomStringValueDeserializer;
@@ -31,7 +31,7 @@ import java.util.List;
             "subCriterion",
             "parentCriterion"
         })
-public class ECertisCriterionImpl extends Criterion implements ECertisCriterion {
+public class ECertisCriterionImpl extends SelectableCriterion implements ECertisCriterion {
 
     private String domainID;
     private String versionID;
@@ -111,22 +111,6 @@ public class ECertisCriterionImpl extends Criterion implements ECertisCriterion 
         return versionID;
     }
 
-//    @Override
-//    @JsonSetter("LegislationReference")
-//    @JsonDeserialize(as = List.class, contentAs = ECertisLegislationReference.class)
-//    public void setTheLegislationReference(List<IECertisLegislationReference> legislationReference) {
-//        this.legislationReference = legislationReference;
-//    }
-//
-//    @Override
-//    @JsonProperty("LegislationReference")
-//    public List<IECertisLegislationReference> getTheLegislationReference() {
-//        if (legislationReference == null) {
-//            legislationReference = new ArrayList<>();
-//        }
-//        return legislationReference;
-//    }
-
     @Override
     @JsonProperty("LegislationReference")
     public LegislationReference getLegislationReference() {
@@ -198,6 +182,13 @@ public class ECertisCriterionImpl extends Criterion implements ECertisCriterion 
     @JsonIgnore
     public List<RequirementGroup> getRequirementGroups() {
         return super.getRequirementGroups();
+    }
+    
+    // Ignore that property during deserialization process
+    @Override
+    @JsonIgnore
+    public boolean isSelected() {
+        return super.isSelected();
     }
     
 }

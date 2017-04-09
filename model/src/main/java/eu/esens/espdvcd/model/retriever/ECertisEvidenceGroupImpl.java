@@ -11,7 +11,11 @@ import java.util.List;
  *
  * @author Konstantinos Raptis
  */
- @JsonPropertyOrder( {"ID", "evidences"} )
+ @JsonPropertyOrder( 
+         {
+             "ID", 
+             "evidences"
+         })
  public class ECertisEvidenceGroupImpl implements ECertisEvidenceGroup {
        
     private String ID; 

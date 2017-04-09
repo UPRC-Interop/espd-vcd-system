@@ -8,7 +8,12 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  *
  * @author Konstantinos Raptis
  */
-@JsonPropertyOrder( {"attachment", "validityPeriod", "issuerParty"} )
+@JsonPropertyOrder( 
+        {
+            "attachment", 
+            "validityPeriod", 
+            "issuerParty"
+        })
 public class ECertisEvidenceDocumentReferenceImpl implements ECertisEvidenceDocumentReference {
         
     private ECertisAttachment attachment;

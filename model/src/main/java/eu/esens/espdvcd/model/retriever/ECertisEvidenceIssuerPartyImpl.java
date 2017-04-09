@@ -11,7 +11,11 @@ import java.util.ArrayList;
  *
  * @author Konstantinos Raptis
  */
-@JsonPropertyOrder( {"websiteURI", "partyName"} )
+@JsonPropertyOrder( 
+        {
+            "websiteURI", 
+            "partyName"
+        })
 public class ECertisEvidenceIssuerPartyImpl implements ECertisEvidenceIssuerParty {
        
     private String websiteURI;

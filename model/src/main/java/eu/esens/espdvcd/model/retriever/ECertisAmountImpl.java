@@ -9,7 +9,12 @@ import eu.esens.espdvcd.model.util.CustomStringValueDeserializer;
  *
  * @author Konstantinos Raptis
  */
-@JsonPropertyOrder({"value", "currencyID", "currencyCodeListVersionID"})
+@JsonPropertyOrder(
+        {
+            "value", 
+            "currencyID", 
+            "currencyCodeListVersionID"
+        })
 public class ECertisAmountImpl implements ECertisAmount {
         
     private String value;
