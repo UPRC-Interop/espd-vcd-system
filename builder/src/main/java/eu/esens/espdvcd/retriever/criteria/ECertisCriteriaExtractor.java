@@ -39,7 +39,7 @@ import eu.esens.espdvcd.model.retriever.ECertisSelectableCriterion;
  */
 public class ECertisCriteriaExtractor implements CriteriaDataRetriever, CriteriaExtractor {
 
-    private List<ECertisSelectableCriterion> criterionTypeList;
+    private List<ECertisSelectableCriterion> criterionList;
             
     public enum JurisdictionLevelCodeOrigin {
 
@@ -54,8 +54,8 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
     private void initCriterionList() throws RetrieverException {
         
         // If Not Initialized Yet, Initialize CriterionType List
-        if (criterionTypeList == null) {
-            criterionTypeList = new ArrayList<>();
+        if (criterionList == null) {
+            criterionList = new ArrayList<>();
                         
             // Multithreading Approach (1)
             ExecutorService executorService = Executors.newCachedThreadPool();
@@ -72,7 +72,7 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
                     ECertisSelectableCriterion c = (ECertisSelectableCriterion) f.get();
                     // If Description is not provided, do not add Criterion
                     if (c.getDescription() != null) 
-                        criterionTypeList.add(c);
+                        criterionList.add(c);
                     
                 }
                 
@@ -99,7 +99,7 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
         
         initCriterionList();
         List<SelectableCriterion> lc
-                = criterionTypeList.stream()
+                = criterionList.stream()
                         .map((ECertisSelectableCriterion c) -> (SelectableCriterion) c)
                         .collect(Collectors.toList());
         return lc;
@@ -118,11 +118,11 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
             boolean addAsSelected) throws RetrieverException {
         
         initCriterionList();
-        System.out.println("Criterion List Size:" + criterionTypeList.size());
+        System.out.println("Criterion List Size:" + criterionList.size());
         Set<SelectableCriterion> initialSet = new LinkedHashSet<>();
         initialSet.addAll(initialList);
         Set<SelectableCriterion> fullSet
-                = criterionTypeList.stream()
+                = criterionList.stream()
                         .map((ECertisSelectableCriterion c) -> (SelectableCriterion) c)
                         .collect(Collectors.toSet());
         initialSet.addAll(fullSet);
@@ -169,14 +169,16 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
             throws RetrieverException {
         BufferedReader br = null;
         ECertisSelectableCriterionImpl theCriterion = null;
+        HttpURLConnection connection = null;
         
         try {
             URL url = new URL(Constants.ECERTIS_URL + Constants.AVAILABLE_EU_CRITERIA + criterionId + "/");
             
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             connection.setRequestProperty("Accept", "application/json");
             connection.setConnectTimeout(15000);
+            connection.setReadTimeout(15000);
             connection.connect();
 
             if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
@@ -191,7 +193,9 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
             while ((output = br.readLine()) != null) {
                 builder.append(output);
             }
-                       
+                   
+            System.out.println(builder.toString());
+            
             // Pass json string to mapper
             ObjectMapper mapper = new ObjectMapper();
             mapper.setSerializationInclusion(Include.NON_NULL);
@@ -228,6 +232,10 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
                     throw new RetrieverException("Error... Unable to close buffered reader stream", e);
                 }
             }
+            // disconnect
+            if (connection != null) {
+                connection.disconnect();
+            }
         }
         
         return theCriterion;
@@ -261,14 +269,16 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
             throws RetrieverException {
         List<String> IDList = new ArrayList<>();
         BufferedReader br = null;
-                
+        HttpURLConnection connection = null;   
+        
         try {
             URL url = new URL(Constants.ECERTIS_URL + Constants.AVAILABLE_EU_CRITERIA);
             
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             connection.setRequestProperty("Accept", "application/json");
             connection.setConnectTimeout(15000);
+            connection.setReadTimeout(15000);
             connection.connect();
 
             if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
@@ -283,7 +293,9 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
             while ((output = br.readLine()) != null) {
                 builder.append(output);
             }
-                
+            
+            System.out.println(builder.toString());
+            
             ObjectMapper mapper = new ObjectMapper();
             JsonNode root = mapper.readTree(builder.toString());
             JsonNode criterions = root.path("Criterion");
@@ -318,6 +330,10 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
                     Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.SEVERE, null, e);
                     throw new RetrieverException("Error... Unable to close buffered reader stream", e);
                 }
+            }
+            // disconnect
+            if (connection != null) {
+                connection.disconnect();
             }
         }
         

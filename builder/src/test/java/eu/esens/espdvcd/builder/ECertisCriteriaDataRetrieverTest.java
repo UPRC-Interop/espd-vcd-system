@@ -1,5 +1,8 @@
 package eu.esens.espdvcd.builder;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.esens.espdvcd.retriever.criteria.ECertisCriteriaExtractor;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import java.util.List;
@@ -26,17 +29,27 @@ public class ECertisCriteriaDataRetrieverTest {
     public void setUp() {
         extractor = new ECertisCriteriaExtractor();
     }
-  
+    
+//    @Ignore
     @Test
-    public void testGetCriterionV2() {
+    public void testGetCriterionV2() throws JsonProcessingException {
         try {
-            extractor.getCriterion("d726bac9-e153-4e75-bfca-c5385587766d");
+            ECertisSelectableCriterion theCriterion = extractor.getCriterion("d726bac9-e153-4e75-bfca-c5385587766d");
+            
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+            mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+                        
+            // Print JSON String
+            String prettyCt = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(theCriterion);
+            System.out.println(prettyCt);
+            
         } catch (RetrieverException ex) {
             Logger.getLogger(ECertisCriteriaDataRetrieverTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    // @Ignore
+//    @Ignore
     @Test
     public void testEuToNationalMapping() throws RetrieverException {
 
@@ -56,7 +69,7 @@ public class ECertisCriteriaDataRetrieverTest {
                 "63c2f7a0-63af-49c0-8251-80ec7bf43f94"));
     }
 
-    // @Ignore
+//    @Ignore
     @Test
     public void testNationalToNationalMapping() throws RetrieverException {
 
@@ -69,7 +82,7 @@ public class ECertisCriteriaDataRetrieverTest {
                 "db657c18-88e8-4a91-b645-214085f2eba8"));
     }
 
-    // @Ignore
+//    @Ignore
     @Test
     public void testGetCriterion() throws RetrieverException {
 
@@ -78,7 +91,7 @@ public class ECertisCriteriaDataRetrieverTest {
         assertEquals("3f865345-9a7e-49a3-924a-ca77da6f2512", c.getID());
     }
 
-    // @Ignore
+//    @Ignore
     @Test
     public void testGetEvidenceGroup() throws RetrieverException {
 

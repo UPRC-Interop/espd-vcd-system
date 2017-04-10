@@ -24,7 +24,7 @@ public class ECertisCriteriaExtractorTest {
         extractor = new ECertisCriteriaExtractor();
     }
 
-    // @Ignore
+//    @Ignore
     @Test
     public void testGetAllEuropeanCriteriaID() throws RetrieverException {
 
@@ -62,7 +62,7 @@ public class ECertisCriteriaExtractorTest {
 
     }
 
-    // @Ignore
+//    @Ignore
     @Test
     public void testGetFullList() throws RetrieverException {
         
