@@ -9,10 +9,10 @@ import org.junit.Test;
 import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
-import eu.esens.espdvcd.model.retriever.ECertisCriterion;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.Ignore;
+import eu.esens.espdvcd.model.retriever.ECertisSelectableCriterion;
 
 /**
  *
@@ -73,7 +73,7 @@ public class ECertisCriteriaDataRetrieverTest {
     @Test
     public void testGetCriterion() throws RetrieverException {
 
-        ECertisCriterion c = extractor.getCriterion("3f865345-9a7e-49a3-924a-ca77da6f2512");
+        ECertisSelectableCriterion c = extractor.getCriterion("3f865345-9a7e-49a3-924a-ca77da6f2512");
 
         assertEquals("3f865345-9a7e-49a3-924a-ca77da6f2512", c.getID());
     }

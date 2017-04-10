@@ -7,7 +7,7 @@ import java.util.List;
  *
  * @author Konstantinos Raptis
  */
-public interface ECertisCriterion {
+public interface ECertisSelectableCriterion {
     
     void setID(String ID);
     
@@ -37,16 +37,16 @@ public interface ECertisCriterion {
         
     LegislationReference getLegislationReference();
         
-    void setEvidenceGroup(List<ECertisEvidenceGroup> evidenceGroup);
+    void setEvidenceGroups(List<ECertisEvidenceGroup> evidenceGroup);
     
-    List<ECertisEvidenceGroup> getEvidenceGroup();
+    List<ECertisEvidenceGroup> getEvidenceGroups();
     
-    void setSubCriterion(List<ECertisCriterion> subCriterion);
+    void setSubCriterions(List<ECertisSelectableCriterion> subCriterion);
     
-    List<ECertisCriterion> getSubCriterion();
+    List<ECertisSelectableCriterion> getSubCriterions();
     
-    void setParentCriterion(ECertisCriterion parentCriterion);
+    void setParentCriterion(ECertisSelectableCriterion parentCriterion);
     
-    ECertisCriterion getParentCriterion();
+    ECertisSelectableCriterion getParentCriterion();
     
 }

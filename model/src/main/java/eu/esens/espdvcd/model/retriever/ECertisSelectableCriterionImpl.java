@@ -27,17 +27,17 @@ import java.util.List;
             "domainID",
             "versionID",
             "legislationReference",
-            "evidenceGroup",
-            "subCriterion",
+            "evidenceGroups",
+            "subCriterions",
             "parentCriterion"
         })
-public class ECertisCriterionImpl extends SelectableCriterion implements ECertisCriterion {
+public class ECertisSelectableCriterionImpl extends SelectableCriterion implements ECertisSelectableCriterion {
 
     private String domainID;
     private String versionID;
-    private List<ECertisEvidenceGroup> evidenceGroup;
-    private List<ECertisCriterion> subCriterion;
-    private ECertisCriterion parentCriterion;
+    private List<ECertisEvidenceGroup> evidenceGroups;
+    private List<ECertisSelectableCriterion> subCriterions;
+    private ECertisSelectableCriterion parentCriterion;
 
     @Override
     @JsonDeserialize(using = CustomStringValueDeserializer.class)
@@ -127,45 +127,45 @@ public class ECertisCriterionImpl extends SelectableCriterion implements ECertis
     @Override
     @JsonSetter("RequirementGroup")
     @JsonDeserialize(as = List.class, contentAs = ECertisEvidenceGroupImpl.class)
-    public void setEvidenceGroup(List<ECertisEvidenceGroup> evidenceGroup) {
-        this.evidenceGroup = evidenceGroup;
+    public void setEvidenceGroups(List<ECertisEvidenceGroup> evidenceGroups) {
+        this.evidenceGroups = evidenceGroups;
     }
 
     @Override
     @JsonProperty("RequirementGroup")
-    public List<ECertisEvidenceGroup> getEvidenceGroup() {
-        if (evidenceGroup == null) {
-            evidenceGroup = new ArrayList<>();
+    public List<ECertisEvidenceGroup> getEvidenceGroups() {
+        if (evidenceGroups == null) {
+            evidenceGroups = new ArrayList<>();
         }
-        return evidenceGroup;
+        return evidenceGroups;
     }
 
     @Override
     @JsonSetter("SubCriterion")
-    @JsonDeserialize(as = List.class, contentAs = ECertisCriterionImpl.class)
-    public void setSubCriterion(List<ECertisCriterion> subCriterion) {
-        this.subCriterion = subCriterion;
+    @JsonDeserialize(as = List.class, contentAs = ECertisSelectableCriterionImpl.class)
+    public void setSubCriterions(List<ECertisSelectableCriterion> subCriterions) {
+        this.subCriterions = subCriterions;
     }
 
     @Override
     @JsonProperty("SubCriterion")
-    public List<ECertisCriterion> getSubCriterion() {
-        if (subCriterion == null) {
-            subCriterion = new ArrayList<>();
+    public List<ECertisSelectableCriterion> getSubCriterions() {
+        if (subCriterions == null) {
+            subCriterions = new ArrayList<>();
         }
-        return subCriterion;
+        return subCriterions;
     }
 
     @Override
     @JsonSetter("ParentCriterion")
-    @JsonDeserialize(as = ECertisCriterionImpl.class)
-    public void setParentCriterion(ECertisCriterion parentCriterion) {
+    @JsonDeserialize(as = ECertisSelectableCriterionImpl.class)
+    public void setParentCriterion(ECertisSelectableCriterion parentCriterion) {
         this.parentCriterion = parentCriterion;
     }
 
     @Override
     @JsonProperty("ParentCriterion")
-    public ECertisCriterion getParentCriterion() {
+    public ECertisSelectableCriterion getParentCriterion() {
         return parentCriterion;
     }
    
@@ -189,6 +189,11 @@ public class ECertisCriterionImpl extends SelectableCriterion implements ECertis
     @JsonIgnore
     public boolean isSelected() {
         return super.isSelected();
+    }
+
+    @Override
+    public void setSelected(boolean selected) {
+        super.setSelected(selected);
     }
     
 }
