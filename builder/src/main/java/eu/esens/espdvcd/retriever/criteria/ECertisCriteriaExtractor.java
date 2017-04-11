@@ -35,7 +35,7 @@ import eu.esens.espdvcd.model.retriever.ECertisSelectableCriterion;
 
 /**
  *
- * @author konstantinos
+ * @author konstantinos Raptis
  */
 public class ECertisCriteriaExtractor implements CriteriaDataRetriever, CriteriaExtractor {
 
@@ -53,7 +53,7 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
 
     private void initCriterionList() throws RetrieverException {
 
-        // If Not Initialized Yet, Initialize CriterionType List
+        // If Not Initialized Yet, Initialize Criterion List
         if (criterionList == null) {
             criterionList = new ArrayList<>();
 
@@ -86,10 +86,10 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
 
             ////////////////////////////////////////////////////////////////////
             // Sequential Approach (2)
-//            for (String id : getAllEuropeanCriteriaIds()) {
-//                CriterionType c = getCriterion(id);
+//            for (String ID : getAllEuropeanCriteriaID()) {
+//                ECertisSelectableCriterion c = getCriterion(ID);
 //                // If Description is not provided, do not add Criterion
-//                if (c.getDescription() != null) criterionTypeList.add(c);
+//                if (c.getDescription() != null) criterionList.add(c);
 //            }
         }
     }
@@ -131,16 +131,16 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
     }
 
     @Override
-    public List<ECertisSelectableCriterion> getNationalCriterionMapping(String criterionId, String countryCode)
+    public List<ECertisSelectableCriterion> getNationalCriterionMapping(String ID, String countryCode)
             throws RetrieverException {
         List<ECertisSelectableCriterion> nationalCriterionTypeList = new ArrayList<>();
 
         if (isCountryCodeExist(countryCode)) {
 
-            ECertisSelectableCriterion source = getCriterion(criterionId);
-            JurisdictionLevelCodeOrigin jlco = extractCriterionOrigin(source);
+            ECertisSelectableCriterion source = getCriterion(ID);
+            JurisdictionLevelCodeOrigin origin = extractCriterionOrigin(source);
 
-            switch (jlco) {
+            switch (origin) {
                 case EUROPEAN:
                     // Extract National Criteria
                     nationalCriterionTypeList = getSubCriterion(source, countryCode);
@@ -152,26 +152,29 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
                     nationalCriterionTypeList = getSubCriterion(parent, countryCode);
                     break;
                 case UNKNOWN:
-                    throw new RetrieverException("Error... Criterion <<" + criterionId + ">> Cannot be Classified as European or National...");
+                    throw new RetrieverException("Error... Criterion <<" + ID 
+                            + ">> Cannot be Classified as European or National...");
             }
 
         } else {
-            throw new RetrieverException("Error... Country Code <<" + countryCode + ">> does not exist...");
+            throw new RetrieverException("Error... Country Code <<" + countryCode 
+                    + ">> does not exist...");
         }
 
         return nationalCriterionTypeList;
     }
 
     @Override
-    public ECertisSelectableCriterion getCriterion(String criterionId)
+    public ECertisSelectableCriterion getCriterion(String ID)
             throws RetrieverException {
-        BufferedReader br = null;
+        
         ECertisSelectableCriterionImpl theCriterion = null;
-        HttpURLConnection connection = null;
 
         try {
             
-            String jsonString = getFromECertis(Constant.ECERTIS_URL + Constant.AVAILABLE_EU_CRITERIA + criterionId + "/", Constant.ACCEPT_JSON);
+            String jsonString = getFromECertis(
+                    Constant.ECERTIS_URL + Constant.AVAILABLE_EU_CRITERIA + ID + "/", 
+                    Constant.ACCEPT_JSON);
 
             // Pass json string to mapper
             ObjectMapper mapper = new ObjectMapper();
@@ -201,9 +204,9 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
     }
 
     @Override
-    public List<ECertisEvidenceGroup> getEvidences(String criterionId)
+    public List<ECertisEvidenceGroup> getEvidences(String ID)
             throws RetrieverException {
-        return getCriterion(criterionId).getEvidenceGroups();
+        return getCriterion(ID).getEvidenceGroups();
     }
 
     // Get SubCriterion/s of a European Criterion by Country Code
@@ -229,7 +232,9 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
         List<String> IDList = new ArrayList<>();
         
         try {
-            String jsonString = getFromECertis(Constant.ECERTIS_URL + Constant.AVAILABLE_EU_CRITERIA, Constant.ACCEPT_JSON);
+            String jsonString = getFromECertis(
+                    Constant.ECERTIS_URL + Constant.AVAILABLE_EU_CRITERIA, 
+                    Constant.ACCEPT_JSON);
 
             ObjectMapper mapper = new ObjectMapper();
             JsonNode root = mapper.readTree(jsonString);

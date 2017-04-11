@@ -37,11 +37,11 @@ public interface ECertisSelectableCriterion {
         
     LegislationReference getLegislationReference();
         
-    void setEvidenceGroups(List<ECertisEvidenceGroup> evidenceGroup);
+    void setEvidenceGroups(List<ECertisEvidenceGroup> evidenceGroups);
     
     List<ECertisEvidenceGroup> getEvidenceGroups();
     
-    void setSubCriterions(List<ECertisSelectableCriterion> subCriterion);
+    void setSubCriterions(List<ECertisSelectableCriterion> subCriterions);
     
     List<ECertisSelectableCriterion> getSubCriterions();
     
