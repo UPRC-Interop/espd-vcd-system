@@ -49,7 +49,7 @@ public class ECertisCriteriaDataRetrieverTest {
         }
     }
     
-//    @Ignore
+    @Ignore
     @Test
     public void testEuToNationalMapping() throws RetrieverException {
 
