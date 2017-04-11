@@ -56,9 +56,9 @@ public class EODetails {
      * <p>
      * Data type: Identifier<br>
      * Cardinality: 0..1<br>
-     * InfReqID: ?<br>
-     * BusReqID: ?<br>
-     * UBL syntax path: espd-cac:EconomicOperatorParty.Party.WebsiteURI<br>
+     * InfReqID: tir92-316<br>
+     * BusReqID: tbr041-002<br>
+     * UBL syntax path: espd-cac:EconomicOperatorParty.Party.WebsiteURIID<br>
      */
     private String webSiteURI;
 
@@ -185,7 +185,7 @@ public class EODetails {
     private ContactingDetails contactingDetails;
 
     /**
-     * Natural Person
+     * Representative natural person
      * <p>
      * Information about individuals who in one way or the other represent the
      * economic operator.
@@ -194,7 +194,8 @@ public class EODetails {
      * Cardinality: 0..n<br>
      * InfReqID: <br>
      * BusReqID: tbr92-018<br>
-     * UBL syntax path: espd-cac:EconomicOperatorParty.<br>
+     * UBL syntax path:
+     * espd-cac: EconomicOperatorParty.RepresentativeNaturalPerson.PowerOfAttorney.Description.AgentParty.Person<br>
      */
     private List<NaturalPerson> naturalPersons;
 

@@ -25,7 +25,7 @@ public class NaturalPerson {
      * Cardinality: 1..1<br>
      * InfReqID: tir92-055<br>
      * BusReqID: tbr92-009<br>
-     * UBL syntax path: espd-cac: EconomicOperatorParty.RepresentativeNaturalPerson.PowerOfAttorney.Description.AgentParty.Person.FamilyName<br>
+     * UBL syntax path: espd-cac: EconomicOperatorParty.RepresentativeNaturalPerson.PowerOfAttorney.Description.AgentParty.Person.FirstName<br>
      */
     @NotNull
     private String firstName;
@@ -68,7 +68,7 @@ public class NaturalPerson {
      * <p>
      * Data type: Code<br>
      * Cardinality: 0..1<br>
-     * InfReqID: tir92-057<br>
+     * InfReqID: tir92-065<br>
      * BusReqID: tbr92-010<br>
      * UBL syntax path: espd-cac: EconomicOperatorParty.RepresentativeNaturalPerson.NaturalPersonRoleDescription<br>
      */

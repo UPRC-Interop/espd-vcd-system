@@ -30,7 +30,7 @@ public class ResponseRequirement extends RequestRequirement {
      * Cardinality: 0..1<br>
      * InfReqID: <br>
      * BusReqID: <br>
-     * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.DescriptionResponse<br>
+     * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.Response<br>
      */
     private Response response;
 
