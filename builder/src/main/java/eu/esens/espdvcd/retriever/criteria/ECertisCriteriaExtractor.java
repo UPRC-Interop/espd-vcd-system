@@ -5,7 +5,6 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import eu.esens.espdvcd.retriever.utils.Constant;
 import eu.esens.espdvcd.codelist.Codelists;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.retriever.ECertisSelectableCriterionImpl;
@@ -39,6 +38,21 @@ import eu.esens.espdvcd.model.retriever.ECertisSelectableCriterion;
  */
 public class ECertisCriteriaExtractor implements CriteriaDataRetriever, CriteriaExtractor {
 
+    // Server URL (1st) is the production one (2nd) is the non production one
+    // private final String ECERTIS_URL = "https://ec.europa.eu/growth/tools-databases/ecertisrest/";
+    private final String ECERTIS_URL = "https://webgate.acceptance.ec.europa.eu/growth/tools-databases/ecertisrest/";
+        
+    // All available eu criteria
+    private final String ALL_CRITERIA = ECERTIS_URL + "criteria/";
+    
+    // Accept header JSON
+    private final String ACCEPT_JSON = "application/json";
+    
+    // Jackson related Errors
+    private final String ERROR_INVALID_CONTENT = "Error... JSON Input Contains Invalid Content";
+    private final String ERROR_UNEXPECTED_STUCTURE = "Error... JSON Structure does not Match Structure Expected";
+    
+    // Contains all eu criteria
     private List<ECertisSelectableCriterion> criterionList;
 
     public enum JurisdictionLevelCodeOrigin {
@@ -61,8 +75,8 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
             ExecutorService executorService = Executors.newCachedThreadPool();
             Set<Callable<ECertisSelectableCriterion>> callables = new HashSet<>();
 
-            getAllEuropeanCriteriaID().forEach(id -> {
-                callables.add((Callable<ECertisSelectableCriterion>) () -> getCriterion(id));
+            getAllEuropeanCriteriaID().forEach(ID -> {
+                callables.add((Callable<ECertisSelectableCriterion>) () -> getCriterion(ID));
             });
 
             try {
@@ -152,13 +166,11 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
                     nationalCriterionTypeList = getSubCriterion(parent, countryCode);
                     break;
                 case UNKNOWN:
-                    throw new RetrieverException("Error... Criterion <<" + ID 
-                            + ">> Cannot be Classified as European or National...");
+                    throw new RetrieverException("Error... Criterion " + ID + " cannot be Classified as European or National");
             }
 
         } else {
-            throw new RetrieverException("Error... Country Code <<" + countryCode 
-                    + ">> does not exist...");
+            throw new RetrieverException("Error... Country Code " + countryCode + " does not Exist");
         }
 
         return nationalCriterionTypeList;
@@ -173,8 +185,8 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
         try {
             
             String jsonString = getFromECertis(
-                    Constant.ECERTIS_URL + Constant.AVAILABLE_EU_CRITERIA + ID + "/", 
-                    Constant.ACCEPT_JSON);
+                    ALL_CRITERIA + ID + "/",
+                    ACCEPT_JSON);
 
             // Pass json string to mapper
             ObjectMapper mapper = new ObjectMapper();
@@ -189,11 +201,11 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
             String message = ex.getMessage();
 
             if (ex instanceof JsonParseException) {
-                message = "Error... JSON input contains invalid content";
+                message = ERROR_INVALID_CONTENT;
             }
 
             if (ex instanceof JsonMappingException) {
-                message = "Error... JSON structure does not match structure expected";
+                message = ERROR_UNEXPECTED_STUCTURE;
             }
 
             Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.SEVERE, null, ex);
@@ -222,7 +234,7 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
     private ECertisSelectableCriterion getParentCriterion(ECertisSelectableCriterion c)
             throws RetrieverException {
         if (c.getParentCriterion() == null) {
-            throw new RetrieverException("Error... Unable to extract parent criterion of " + c.getID());
+            throw new RetrieverException("Error... Unable to Extract Parent Criterion of " + c.getID());
         }
         return getCriterion(c.getParentCriterion().getID());
     }
@@ -233,8 +245,8 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
         
         try {
             String jsonString = getFromECertis(
-                    Constant.ECERTIS_URL + Constant.AVAILABLE_EU_CRITERIA, 
-                    Constant.ACCEPT_JSON);
+                    ALL_CRITERIA, 
+                    ACCEPT_JSON);
 
             ObjectMapper mapper = new ObjectMapper();
             JsonNode root = mapper.readTree(jsonString);
@@ -249,11 +261,11 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
             String message = ex.getMessage();
 
             if (ex instanceof JsonParseException) {
-                message = "Error... JSON input contains invalid content";
+                message = ERROR_INVALID_CONTENT;
             }
 
             if (ex instanceof JsonMappingException) {
-                message = "Error... JSON structure does not match structure expected";
+                message = ERROR_UNEXPECTED_STUCTURE;
             }
 
             Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.SEVERE, null, ex);
@@ -266,7 +278,7 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
     // Extract Given Criterion JurisdictionLevelCode Origin
     private JurisdictionLevelCodeOrigin extractCriterionOrigin(ECertisSelectableCriterion c) {
 
-        JurisdictionLevelCodeOrigin jlco = JurisdictionLevelCodeOrigin.UNKNOWN;
+        JurisdictionLevelCodeOrigin origin = JurisdictionLevelCodeOrigin.UNKNOWN;
 
         if (c.getLegislationReference() != null) {
 
@@ -274,12 +286,12 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
                     .getJurisdictionLevelCode();
 
             if (jlcValue.equals("eu")) {
-                jlco = JurisdictionLevelCodeOrigin.EUROPEAN;
+                origin = JurisdictionLevelCodeOrigin.EUROPEAN;
             } else {
-                jlco = JurisdictionLevelCodeOrigin.NATIONAL;
+                origin = JurisdictionLevelCodeOrigin.NATIONAL;
             }
         }
-        return jlco;
+        return origin;
     }
 
     // Use Codelists in order to check if given Country Code is Valid
@@ -305,7 +317,7 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
             connection.connect();
 
             if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
-                throw new RetrieverException("Error... HTTP error code : " + connection.getResponseCode());
+                throw new RetrieverException("Error... HTTP Error Code : " + connection.getResponseCode());
             }
 
             br = new BufferedReader(new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8));
@@ -318,10 +330,10 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
 
         } catch (MalformedURLException ex) {
             Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.SEVERE, null, ex);
-            throw new RetrieverException("Error... Malformed URL address", ex);
+            throw new RetrieverException("Error... Malformed URL Address", ex);
         } catch (IOException ex) {
             Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.SEVERE, null, ex);
-            throw new RetrieverException("Error... Unable to connect with e-Certis service", ex);
+            throw new RetrieverException("Error... Unable to Connect with e-Certis Service", ex);
         } finally {
             // close all streams
             if (br != null) {
@@ -329,7 +341,7 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
                     br.close();
                 } catch (IOException e) {
                     Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.SEVERE, null, e);
-                    throw new RetrieverException("Error... Unable to close buffered reader stream", e);
+                    throw new RetrieverException("Error... Unable to Close Buffered Reader Stream", e);
                 }
             }
             // disconnect
