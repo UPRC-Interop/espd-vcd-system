@@ -11,8 +11,6 @@ import com.vaadin.ui.UI;
 
 import com.vaadin.annotations.Title;
 import com.vaadin.annotations.Theme;
-import com.vaadin.ui.VerticalLayout;
-import eu.esens.espdvcd.designer.components.windows.CriterionWindow;
 import eu.esens.espdvcd.designer.views.*;
 
 @Title("Designer")
