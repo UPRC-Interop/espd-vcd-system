@@ -14,3 +14,4 @@ gradle.properties
 /designer/tmp/
 /persistence/logs/
 /.nb-gradle/
+/artifacts/
