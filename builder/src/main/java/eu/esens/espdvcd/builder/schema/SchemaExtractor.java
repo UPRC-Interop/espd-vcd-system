@@ -2,6 +2,7 @@ package eu.esens.espdvcd.builder.schema;
 
 import eu.esens.espdvcd.model.CADetails;
 import eu.esens.espdvcd.model.Criterion;
+import eu.esens.espdvcd.model.EODetails;
 import eu.esens.espdvcd.model.LegislationReference;
 import eu.esens.espdvcd.model.ServiceProviderDetails;
 import eu.esens.espdvcd.model.requirement.Requirement;
@@ -378,7 +379,7 @@ public interface SchemaExtractor {
     }
 
 
-    default ProcurementProjectLotType extractProcurementProjectLot(CADetails caDetails) {
+    default ProcurementProjectLotType extractProcurementProjectLot(EODetails eoDetails) {
 
         ProcurementProjectLotType pplt = new ProcurementProjectLotType();
         pplt.setID(new IDType());
@@ -386,8 +387,8 @@ public interface SchemaExtractor {
         //pplt.getID().setValue(caDetails.getProcurementProjectLot());
         // modification UL_2016-12-21: according to ESPD specification 1.0.2, procurement project lot needs to be "0"
         // and attribute schemeAgencyID needs to be set
-        pplt.getID().setValue((caDetails.getProcurementProjectLot() == null) ||
-                caDetails.getProcurementProjectLot().isEmpty() ? "0" : caDetails.getProcurementProjectLot());
+        pplt.getID().setValue((eoDetails.getProcurementProjectLot() == null) ||
+                eoDetails.getProcurementProjectLot().isEmpty() ? "0" : eoDetails.getProcurementProjectLot());
         pplt.getID().setSchemeAgencyID("EU-COM-GROW");
 
         return pplt;

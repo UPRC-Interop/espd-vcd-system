@@ -20,7 +20,6 @@ public class ESPDRequestModelExtractor implements ModelExtractor {
         .collect(Collectors.toList()));
         req.setCADetails(extractCADetails(reqType.getContractingParty(),
                                           reqType.getContractFolderID(),
-                                          reqType.getProcurementProjectLot().get(0),
                                           reqType.getAdditionalDocumentReference()));
         req.setServiceProviderDetails(extractServiceProviderDetails(reqType.getServiceProviderParty()));
         

@@ -20,6 +20,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PersonType;
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ProcurementProjectLotType;
 
 public class ESPDResponseModelExtractor implements ModelExtractor {
 
@@ -39,13 +40,12 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
 
         res.setCADetails(extractCADetails(resType.getContractingParty(),
                 resType.getContractFolderID(),
-                resType.getProcurementProjectLot().get(0),
                 resType.getAdditionalDocumentReference()));
 
         res.setServiceProviderDetails(extractServiceProviderDetails(resType.getServiceProviderParty()));
 
         if (resType.getEconomicOperatorParty() != null) {
-            res.setEODetails(extractEODetails(resType.getEconomicOperatorParty()));
+            res.setEODetails(extractEODetails(resType.getEconomicOperatorParty(), resType.getProcurementProjectLot().get(0)));
         } else {
             EODetails eod = new EODetails();
             eod.setContactingDetails(new ContactingDetails());
@@ -198,7 +198,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
 
     }
 
-    public EODetails extractEODetails(EconomicOperatorPartyType eop) {
+    public EODetails extractEODetails(EconomicOperatorPartyType eop, ProcurementProjectLotType pplt) {
 
         final EODetails eoDetails = new EODetails();
 
@@ -359,6 +359,11 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
         } else {
             eoDetails.setNaturalPersons(new ArrayList<>());
             eoDetails.getNaturalPersons().add(new NaturalPerson());
+        }
+        
+        // Procurement Project Lot
+        if (pplt != null && pplt.getID() != null) {
+            eoDetails.setProcurementProjectLot(pplt.getID().getValue());                    
         }
 
         return eoDetails;
