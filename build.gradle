@@ -28,25 +28,27 @@ subprojects { project ->
 
 // publishing definition
 configure (subprojects - project(':designer')) {
-    task javadocJar (type: Jar, dependsOn: javadoc) { // (1)
-        classifier = 'javadoc'
-        from javadoc.destinationDir
-    }
-
-    task sourcesJar (type : Jar) {
-        classifier = 'sources'
-        from sourceSets.main.allSource
+    task sourceJar(type: Jar) {
+        from sourceSets.main.allJava
     }
     
-    artifacts {
-        archives javadocJar
-        archives sourcesJar
+    publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                from components.java
+                
+                artifact sourceJar {
+                    classifier "sources"
+                }
+            }
+            
+        }
     }
 
-    uploadArchives {
-        repositories.mavenDeployer {
-            repository(url: "http://nexus.e-sens.gr/content/repositories/${project.version.endsWith('-SNAPSHOT') ? 'snapshots' : 'releases' }/") {
-                //authentication(userName: nexusUsername, password: nexusPassword)
+    publishing {
+        repositories { 
+            maven {
+                url "http://nexus.e-sens.gr/content/repositories/${project.version.endsWith('-SNAPSHOT') ? 'snapshots' : 'releases' }/"
             }
         }
     }
