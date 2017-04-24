@@ -103,7 +103,7 @@ public class Viewer extends Master {
             espdRequest = new ModelBuilder().addDefaultESPDCriteriaList().createESPDRequest();
             
             // Cenerate the espd request form base on the provided espd request model
-            espdRequestForm = new ESPDRequestForm(this, espdRequest, true);
+            espdRequestForm = new ESPDRequestForm(this, espdRequest, 2, true);
             mainColumn.addComponent(espdRequestForm);
         } catch (BuilderException ex) {
             Logger.getLogger(Viewer.class.getName()).log(Level.SEVERE, null, ex);
@@ -138,7 +138,7 @@ public class Viewer extends Master {
                 try {
                     InputStream is = new FileInputStream(file);
                     espdRequest = new ModelBuilder().importFrom(is).createESPDRequest();
-                    espdRequestForm = new ESPDRequestForm(thisView, espdRequest, true);
+                    espdRequestForm = new ESPDRequestForm(thisView, espdRequest, 2, true);
                     mainColumn.addComponent(espdRequestForm);
                     is.close();
                     panels.setVisible(false);
@@ -197,7 +197,7 @@ public class Viewer extends Master {
                 try {
                     InputStream is = new FileInputStream(file);
                     espdResponse = new ModelBuilder().importFrom(is).createESPDResponse();
-                    espdResponseForm = new ESPDResponseForm(thisView, espdResponse, true);
+                    espdResponseForm = new ESPDResponseForm(thisView, espdResponse, 2, true);
                     mainColumn.addComponent(espdResponseForm);
                     is.close();
                     panels.setVisible(false);
@@ -237,14 +237,21 @@ public class Viewer extends Master {
 
     public void resetView() {
         panels.setVisible(true);
+        panelLeftButtonImport.setVisible(true);
         panelRightButtonImport.setVisible(true);
         gridLayout.removeComponent(espdRequestForm);
         gridLayout.removeComponent(espdResponseForm);
-        panelRightLayout.removeComponent(uploadPanelLeft);
+        panelLeftLayout.removeComponent(uploadPanelLeft);
         panelRightLayout.removeComponent(uploadPanelRight);
         getDetailsContent().removeAllComponents();
-        mainColumn.removeComponent(espdRequestForm);
-        mainColumn.removeComponent(espdResponseForm);
+        if (espdRequestForm != null) {
+            mainColumn.removeComponent(espdRequestForm);
+            espdRequestForm = null;
+        }
+        if (espdResponseForm != null) {
+            mainColumn.removeComponent(espdResponseForm);
+            espdResponseForm = null;
+        }
     }
 
     public Panel getDetailsPanel() {

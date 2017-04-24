@@ -1,4 +1,7 @@
 dependencies {
     compile project(':schema')
     compile project(':codelists')
+    compile 'org.hibernate:hibernate-validator:5.4.1.Final'
+    compile 'org.glassfish:javax.el:3.0.1-b08'
+    
 }

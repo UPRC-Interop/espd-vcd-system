@@ -1,12 +1,9 @@
 package eu.esens.espdvcd.builder.model;
 
-import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
-import eu.esens.espdvcd.model.CADetails;
-import eu.esens.espdvcd.model.LegislationReference;
+import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
-import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.ResponseRequirement;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.CriterionType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.LegislationType;
@@ -14,37 +11,97 @@ import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.Re
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementType;
 import java.util.List;
 import java.util.stream.Collectors;
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ContractingPartyType;
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.DocumentReferenceType;
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ExternalReferenceType;
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ProcurementProjectLotType;
+
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.*;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ContractFolderIDType;
 
 public interface ModelExtractor {
 
     default CADetails extractCADetails(ContractingPartyType caParty,
             ContractFolderIDType contractFolderId,
-            ProcurementProjectLotType procurementProjectLot,
             List<DocumentReferenceType> additionalDocumentReferenceList) {
 
         CADetails cd = new CADetails();
 
         if (caParty != null && caParty.getParty() != null) {
 
-            if (!caParty.getParty().getPartyName().isEmpty()) {
-                cd.setCAOfficialName(caParty
-                        .getParty().getPartyName()
-                        .get(0).getName().getValue());
-            }
+            // --> moved to code below
+            //if (!caParty.getParty().getPartyName().isEmpty()) {
+            //    cd.setCAOfficialName(caParty
+            //            .getParty().getPartyName()
+            //            .get(0).getName().getValue());
+            //}
 
+            // FIXME: caCountry should be replaced by the PostalAddress model element
             if (caParty.getParty().getPostalAddress() != null
                     && caParty.getParty().getPostalAddress().getCountry() != null
                     && caParty.getParty().getPostalAddress().getCountry().getIdentificationCode() != null) {
                 cd.setCACountry(caParty
                         .getParty().getPostalAddress().getCountry().getIdentificationCode().getValue());
             }
-
         }
+
+        if (caParty != null && caParty.getParty() != null) {
+            if (!caParty.getParty().getPartyName().isEmpty()
+                    && caParty.getParty().getPartyName().get(0).getName() != null) {
+                cd.setCAOfficialName(caParty.getParty().getPartyName().get(0).getName().getValue());
+            }
+
+            if (caParty.getParty().getEndpointID() != null) {
+                cd.setElectronicAddressID(caParty.getParty().getEndpointID().getValue());
+            }
+
+            if (caParty.getParty().getWebsiteURI() != null) {
+                cd.setWebSiteURI(caParty.getParty().getWebsiteURI().getValue());
+            }
+
+
+
+            if (caParty.getParty().getPostalAddress() != null) {
+                PostalAddress caAddress = new PostalAddress();
+
+                if (caParty.getParty().getPostalAddress().getStreetName() != null) {
+                    caAddress.setAddressLine1(caParty.getParty().getPostalAddress().getStreetName().getValue());
+                }
+
+                if (caParty.getParty().getPostalAddress().getPostbox() != null) {
+                    caAddress.setPostCode(caParty.getParty().getPostalAddress().getPostbox().getValue());
+                }
+
+                if (caParty.getParty().getPostalAddress().getCityName() != null) {
+                    caAddress.setCity(caParty.getParty().getPostalAddress().getCityName().getValue());
+                }
+
+                if (caParty.getParty().getPostalAddress().getCountry() != null
+                        && caParty.getParty().getPostalAddress().getCountry().getIdentificationCode() != null) {
+                    caAddress.setCountryCode(caParty.getParty().getPostalAddress().getCountry().getIdentificationCode().getValue());
+                }
+
+                cd.setPostalAddress(caAddress);
+
+            }
+
+            if (caParty.getParty().getContact() != null) {
+                cd.setContactingDetails(new ContactingDetails());
+                if (caParty.getParty().getContact().getName() != null) {
+                    cd.getContactingDetails().setContactPointName(caParty.getParty().getContact().getName().getValue());
+                }
+
+                if (caParty.getParty().getContact().getElectronicMail() != null) {
+                    cd.getContactingDetails().setEmailAddress(caParty.getParty().getContact().getElectronicMail().getValue());
+                }
+
+                if (caParty.getParty().getContact().getTelephone() != null) {
+                    cd.getContactingDetails().setTelephoneNumber(caParty.getParty().getContact().getTelephone().getValue());
+                }
+
+                if (caParty.getParty().getContact().getTelefax() != null) {
+                    cd.getContactingDetails().setFaxNumber(caParty.getParty().getContact().getTelefax().getValue());
+                }
+            }
+        }
+
+
 
         if (contractFolderId != null && contractFolderId.getValue() != null) {
             cd.setProcurementProcedureFileReferenceNo(contractFolderId.getValue());
@@ -62,21 +119,48 @@ public interface ModelExtractor {
                 }
                 if (ref.getAttachment() != null && ref.getAttachment().getExternalReference() != null) {
                     ExternalReferenceType ert = ref.getAttachment().getExternalReference();
+                    
                     if (ert.getFileName() != null) {
                      cd.setProcurementProcedureTitle(ert.getFileName().getValue());
                     }
+                    
                     if (!ert.getDescription().isEmpty()) {
                      cd.setProcurementProcedureDesc(ert.getDescription().get(0).getValue());
+                    }
+                    
+                    if (ert.getURI() != null) {
+                        cd.setProcurementPublicationURI(ert.getURI().getValue());
                     }
                 }
             }
         }
+        return cd;
+    }
 
-        if (procurementProjectLot != null) {
-            cd.setProcurementProjectLot(procurementProjectLot.getID().getValue());
+    default ServiceProviderDetails extractServiceProviderDetails(ServiceProviderPartyType sppt) {
+        ServiceProviderDetails spd = new ServiceProviderDetails();
+
+        if (sppt != null && sppt.getParty() != null) {
+            if (!sppt.getParty().getPartyName().isEmpty()
+                    && sppt.getParty().getPartyName().get(0).getName() != null) {
+                spd.setName(sppt.getParty().getPartyName().get(0).getName().getValue());
+            }
+
+            if (sppt.getParty().getWebsiteURI() != null) {
+                spd.setWebsiteURI(sppt.getParty().getWebsiteURI().getValue());
+            }
+
+            if (sppt.getParty().getEndpointID() != null) {
+                spd.setEndpointID(sppt.getParty().getEndpointID().getValue());
+            }
+
+            if (!sppt.getParty().getPartyIdentification().isEmpty()
+                    && sppt.getParty().getPartyIdentification().get(0).getID() != null) {
+                spd.setId(sppt.getParty().getPartyIdentification().get(0).getID().getValue());
+            }
         }
 
-        return cd;
+        return spd;
     }
 
     default SelectableCriterion extractSelectableCriterion(CriterionType ct, boolean isSelected) {
@@ -108,6 +192,8 @@ public interface ModelExtractor {
         if (rgType.getID() != null) {
             String id = rgType.getID().getValue();
             rg = new RequirementGroup(id);
+            if (rgType.getPi() != null)
+                rg.setCondition(rgType.getPi());
         }
         
 

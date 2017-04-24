@@ -35,6 +35,8 @@ public class Master extends VerticalLayout implements View {
         setCaption(null);
         setStyleName("Master");
         setHeight("100%");
+        setSpacing(false);
+        setMargin(false);
 
         addComponent(fullLayout);
 
@@ -48,6 +50,8 @@ public class Master extends VerticalLayout implements View {
 
         topheader.setStyleName("topheader");
         topheader.setWidth("100%");
+        topheader.setSpacing(false);
+        topheader.setMargin(false);
         topheader.addComponent(topheaderWelcomeText);
 
         topheader.setHeight(76, Unit.PIXELS);
@@ -63,6 +67,8 @@ public class Master extends VerticalLayout implements View {
 
         content.setStyleName("content");
         content.setHeight("100%");
+        content.setSpacing(false);
+        content.setMargin(false);
 
         GridLayout contentGrid = new GridLayout(3,1);
         contentGrid.setWidth("100%");
@@ -131,6 +137,15 @@ public class Master extends VerticalLayout implements View {
             button.addClickListener(this::onNavigatorEspd);
         }
         {
+            Button button = new Button("VCD", FontAwesome.ENVELOPE);
+            button.setStyleName("navigatorButtonDark");
+            button.setWidth("100%");
+            button.setHeight(60, Unit.PIXELS);
+            navigatorContent.addComponent(button);
+
+            button.addClickListener(this::onNavigatorVCD);
+        }
+        {
             Button button = new Button("Viewer", FontAwesome.EYE);
             button.setStyleName("navigatorButtonDark");
             button.setWidth("100%");
@@ -187,6 +202,10 @@ public class Master extends VerticalLayout implements View {
 
     public void onNavigatorViewer(Button.ClickEvent clickEvent) {
         getNavigator().navigateTo(Designer.VIEW_VIEWER);
+    }
+
+    public void onNavigatorVCD(Button.ClickEvent clickEvent) {
+        getNavigator().navigateTo(Designer.VIEW_VCD);
     }
 
     public void onNavigatorSandbox(Button.ClickEvent clickEvent) {

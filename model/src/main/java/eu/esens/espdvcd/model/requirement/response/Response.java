@@ -35,7 +35,7 @@ public abstract class Response {
      * InfReqID: tir92-160<br>
      * BusReqID: tbr92-018, tbr92-007, tbr92-005<br>
      * UBL syntax path:
-     * ccv:Criterion.RequirementGroup.Requirement.DescriptionResponse.Indicator<br>
+     * ccv:Criterion.RequirementGroup.Requirement.Response.Indicator<br>
      */
     private boolean fulfillmentIndicator;
 

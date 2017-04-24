@@ -1,11 +1,13 @@
 package eu.esens.espdvcd.designer.components;
 
-import com.vaadin.data.fieldgroup.BeanFieldGroup;
+import com.vaadin.data.BeanValidationBinder;
+import com.vaadin.data.Binder;
 import com.vaadin.ui.*;
 import eu.esens.espdvcd.model.ContactingDetails;
 import eu.esens.espdvcd.model.EODetails;
 import eu.esens.espdvcd.model.NaturalPerson;
 import eu.esens.espdvcd.model.PostalAddress;
+import java.util.Arrays;
 import java.util.List;
 
 public class EODetailsForm extends Panel {
@@ -22,10 +24,10 @@ public class EODetailsForm extends Panel {
     private TextField electronicAddressID = new TextField("Electronic address id:");
     private TextField name = new TextField("Name:");
     private TextField role = new TextField("Role:");
-    private CheckBox smeIndicator = new CheckBox("SME:");
-    private TextField nationalDatabaseURI = new TextField("National database URI:");
-    private TextField nationalDatabaseAccessCredentials = new TextField("National database access credentials:");
-
+    private TextField procurementProjectLot = new TextField("Where applicable, indication of the lot(s) for which the economic operator wishes to tender:");
+    
+    private RadioButtonGroup<Boolean> smeIndicator = new RadioButtonGroup("Indicator: ");
+   
     private ContactingDetails contactingDetails; // To be implemented
     private List<NaturalPerson> naturalPersons; // To be implemented
 
@@ -45,9 +47,17 @@ public class EODetailsForm extends Panel {
         columnA.addComponent(ID);
         columnA.addComponent(electronicAddressID);
         columnB.addComponent(role);
-        columnB.addComponent(nationalDatabaseURI);
-        columnB.addComponent(nationalDatabaseAccessCredentials);
         columnB.addComponent(smeIndicator);
+
+        smeIndicator.setCaption("Is the economic operator a Micro, a Small or a Medium-Sized Enterprise:");
+        smeIndicator.setStyleName("horizontal");
+        smeIndicator.setItems(Arrays.asList(true,false));
+        smeIndicator.setItemCaptionGenerator(item -> (item == true) ? "Yes" : "No" );
+        
+        columnB.addComponent(smeIndicator);
+        
+        columnB.addComponent(procurementProjectLot);
+
 
         PostalAddress eoDetailsPostalAddress = eoDetails.getPostalAddress();
         if (eoDetailsPostalAddress != null) {
@@ -56,17 +66,16 @@ public class EODetailsForm extends Panel {
 
         ContactingDetails eoDetailsContactingDetails = eoDetails.getContactingDetails();
         if (eoDetailsContactingDetails != null) {
-            panelContent.addComponent(new ContactingDetailsForm(eoDetailsContactingDetails, readOnly));
+            panelContent.addComponent(new ContactingDetailsForm(eoDetailsContactingDetails, readOnly, true));
         }
 
         for (NaturalPerson naturalPerson : this.eoDetails.getNaturalPersons()) {
             panelContent.addComponent(new NaturalPersonForm(naturalPerson, readOnly));
         }
 
-        final BeanFieldGroup<EODetails> binder = new BeanFieldGroup<>(EODetails.class);
-        binder.bindMemberFields(this);
-        binder.setItemDataSource(this.eoDetails);
-        binder.setBuffered(false);
+        final Binder<EODetails> binder = new BeanValidationBinder<>(EODetails.class);
+        binder.bindInstanceFields(this);
+        binder.setBean(this.eoDetails);
         binder.setReadOnly(readOnly);
 
         panelContent.setStyleName("EODetailsFormPanelContent");
@@ -80,28 +89,16 @@ public class EODetailsForm extends Panel {
         columnB.setSpacing(true);
         columnB.setMargin(false);
 
-        ID.setNullRepresentation("");
-        ID.setInputPrompt("Please enter ID");
+        ID.setPlaceholder("Please enter ID");
         ID.setWidth(300, Unit.PIXELS);
 
-        electronicAddressID.setNullRepresentation("");
-        electronicAddressID.setInputPrompt("Electronic address ID");
+        electronicAddressID.setPlaceholder("Electronic address ID");
         electronicAddressID.setWidth(300, Unit.PIXELS);
 
-        name.setNullRepresentation("");
-        name.setInputPrompt("Name");
+        name.setPlaceholder("Name");
         name.setWidth(300, Unit.PIXELS);
 
-        role.setNullRepresentation("");
-        role.setInputPrompt("Role");
+        role.setPlaceholder("Role");
         role.setWidth(400, Unit.PIXELS);
-
-        nationalDatabaseURI.setNullRepresentation("");
-        nationalDatabaseURI.setInputPrompt("National database URI");
-        nationalDatabaseURI.setWidth(400, Unit.PIXELS);
-
-        nationalDatabaseAccessCredentials.setNullRepresentation("");
-        nationalDatabaseAccessCredentials.setInputPrompt("National database access credentials");
-        nationalDatabaseAccessCredentials.setWidth(400, Unit.PIXELS);
     }
 }

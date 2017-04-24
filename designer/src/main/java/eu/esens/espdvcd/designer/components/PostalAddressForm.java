@@ -1,6 +1,7 @@
 package eu.esens.espdvcd.designer.components;
 
-import com.vaadin.data.fieldgroup.BeanFieldGroup;
+import com.vaadin.data.BeanValidationBinder;
+import com.vaadin.data.Binder;
 import com.vaadin.ui.*;
 import eu.esens.espdvcd.model.PostalAddress;
 
@@ -14,7 +15,6 @@ public class PostalAddressForm extends Panel {
     private TextField addressLine1 = new TextField("Address line:");
     private TextField city = new TextField("City:");
     private TextField postCode = new TextField("Post code:");
-    private TextField countrySubdivision = new TextField("Country subdivision:");
     private CountryComboBox countryCode = new CountryComboBox("Country:");
 
     public PostalAddressForm(PostalAddress postalAddress, boolean readOnly) {
@@ -31,14 +31,12 @@ public class PostalAddressForm extends Panel {
 
         columnA.addComponent(addressLine1);
         columnA.addComponent(city);
-        columnA.addComponent(postCode);
-        columnB.addComponent(countrySubdivision);
         columnB.addComponent(countryCode);
+        columnB.addComponent(postCode);
 
-        final BeanFieldGroup<PostalAddress> binder = new BeanFieldGroup<>(PostalAddress.class);
-        binder.bindMemberFields(this);
-        binder.setItemDataSource(this.postalAddress);
-        binder.setBuffered(false);
+        final Binder<PostalAddress> binder = new BeanValidationBinder<>(PostalAddress.class);
+        binder.bindInstanceFields(this);
+        binder.setBean(this.postalAddress);
         binder.setReadOnly(readOnly);
 
         setWidth("100%");
@@ -53,23 +51,16 @@ public class PostalAddressForm extends Panel {
         columnB.setSpacing(true);
         columnB.setMargin(false);
 
-        addressLine1.setNullRepresentation("");
-        addressLine1.setInputPrompt("Address line");
+        addressLine1.setPlaceholder("Address line");
         addressLine1.setWidth(400, Unit.PIXELS);
 
-        city.setNullRepresentation("");
-        city.setInputPrompt("City");
+        city.setPlaceholder("City");
         city.setWidth(400, Unit.PIXELS);
 
-        postCode.setNullRepresentation("");
-        postCode.setInputPrompt("Post code");
+        postCode.setPlaceholder("Post code");
         postCode.setWidth(400, Unit.PIXELS);
 
-        countrySubdivision.setNullRepresentation("");
-        countrySubdivision.setInputPrompt("Country subdivision");
-        countrySubdivision.setWidth(300, Unit.PIXELS);
-
-        countryCode.setInputPrompt("Select country");
+        countryCode.setPlaceholder("Select country");
         countryCode.setWidth(300, Unit.PIXELS);
     }
 }

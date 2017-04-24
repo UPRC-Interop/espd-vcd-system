@@ -1,32 +1,30 @@
 apply plugin: 'war'
 
-/**
- * Run gradle task jettyRun to start jetty
- * and jettyStop to stop it.
- */
-buildscript {
-    repositories {
-//        jcenter()
-        jcenter {
-            url "http://jcenter.bintray.com/"
-        }
-    }
-
-    dependencies {
-        classpath 'org.akhikhl.gretty:gretty:+'
+repositories {
+    jcenter()
+    maven {
+        url "http://maven.vaadin.com/vaadin-addons"
     }
 }
 
-repositories {
+buildscript {
+  repositories {
     jcenter()
+  }
+
+  dependencies {
+    classpath 'org.akhikhl.gretty:gretty:1.4.2'
+  }
 }
 
 apply plugin: 'org.akhikhl.gretty'
 
 gretty {
-    port                    = 8090
+    httpPort                = 8080
     contextPath             = '/'
     scanInterval            = 1
+    servletContainer        = 'tomcat8'
+//    managedClassReload      = true
     fastReload              = true
     recompileOnSourceChange = true
     reloadOnClassChange     = true
@@ -38,22 +36,18 @@ gretty {
     fileLogEnabled          = true
     logDir                  = "${project.buildDir}"
     logFileName             = "${project.name}"
+   // serverConfigFile        = "src/main/webapp/WEB-INF/jetty-web.xml"
+    scanner                 = "jdk"
+    
+    jvmArgs= ['-Dorg.eclipse.jetty.annotations.maxWait=120']
 }
 
 dependencies {
     compile project(':builder')
     compile project(':codelists')
     compile project(':model')
-    compile 'com.vaadin:vaadin-server:7.6.0'
-    compile 'com.vaadin:vaadin-client-compiled:7.6.0'
-    compile 'com.vaadin:vaadin-client-compiler:7.6.0'
-    compile 'com.vaadin:vaadin-themes:7.6.0'
+    compile 'com.vaadin:vaadin-server:8.0.4'
+    compile 'com.vaadin:vaadin-client-compiled:8.0.4'
+    compile 'com.vaadin:vaadin-themes:8.0.4'
+    compile 'org.apache.commons:commons-lang3:3.5'
 }
-
-task copyTask(type: Copy) {
-    from "build/libs/designer-${version}.war"
-    into '../artifacts'
-    rename "designer-${version}.war", 'designer.war'
-}
-
-build.dependsOn copyTask

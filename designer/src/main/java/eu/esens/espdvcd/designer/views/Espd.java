@@ -90,7 +90,7 @@ public class Espd extends Master {
                         espdResponse.setEODetails(eoDetails);
                     }
 
-                    espdResponseForm = new ESPDResponseForm(thisView, espdResponse, false);
+                    espdResponseForm = new ESPDResponseForm(thisView, espdResponse, 0, false);
                     mainContent.addComponent(espdResponseForm);
                     is.close();
                     panels.setVisible(false);

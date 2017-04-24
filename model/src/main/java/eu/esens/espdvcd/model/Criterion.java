@@ -1,6 +1,7 @@
 package eu.esens.espdvcd.model;
 
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,11 +38,12 @@ public class Criterion implements Serializable {
      * operators and which will be used in the award decision.
      * <p>
      * Data type: Identifier<br>
-     * Cardinality: 0..1<br>
+     * Cardinality: 1..1<br>
      * InfReqID: tir92-070<br>
      * BusReqID: tbr92-015<br>
      * UBL syntax path: ccv:Criterion.ID<br>
      */
+    @NotNull
     private String ID;
 
     /**
@@ -55,6 +57,7 @@ public class Criterion implements Serializable {
      * BusReqID: tbr92-015<br>
      * UBL syntax path: ccv:Criterion.TypeCode<br>
      */
+    @NotNull
     private String typeCode;
 
     /**
@@ -180,6 +183,19 @@ public class Criterion implements Serializable {
     public void setLegislationReference(LegislationReference legislationReference) {
         this.legislationReference = legislationReference;
     }
+    
+
+    public String getCriterionGroup() {
+          String[] ar= this.typeCode.split("\\.",4);
+        StringBuilder sb = new StringBuilder();
+        int size = 3;
+        if (ar.length < size) size = ar.length;
+        for (int i=0; i<size; i++) {
+            sb.append(ar[i]);
+            sb.append(".");
+        }
+        return sb.delete(sb.lastIndexOf("."), sb.length()).toString();
+    }
 
     @Override
     public int hashCode() {
@@ -203,15 +219,12 @@ public class Criterion implements Serializable {
             return false;
         }
         final Criterion other = (Criterion) obj;
-        
+                            
         if (!Objects.equals(this.ID, other.ID)) {
+
             return false;
         }
-        
-        if (!Objects.equals(this.typeCode, other.typeCode)) {
-            return false;
-        }
-        
+                
         return true;
     }
     

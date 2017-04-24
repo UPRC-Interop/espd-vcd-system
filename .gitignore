@@ -8,7 +8,10 @@ gradle.properties
 /.nb-gradle-properties
 /schema/nbproject/
 /schema/src/main/resources/schema/episodes/
+/schema/private/
 /codelists/private/
 /codelists/nbproject/
 /designer/tmp/
 /persistence/logs/
+/.nb-gradle/
+/artifacts/

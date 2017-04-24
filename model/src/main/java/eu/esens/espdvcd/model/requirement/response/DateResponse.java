@@ -1,6 +1,7 @@
 package eu.esens.espdvcd.model.requirement.response;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -23,20 +24,20 @@ public class DateResponse extends Response implements Serializable {
      * BusReqID: tbr92-018<br>
      * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.Response.Date<br>
      */
-    private Date date;
+    private LocalDate date;
 
     public DateResponse() {
     }
 
-    public DateResponse(Date date) {
+    public DateResponse(LocalDate date) {
         this.date = date;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 }

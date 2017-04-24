@@ -1,5 +1,8 @@
 package eu.esens.espdvcd.designer.components;
 
+import com.vaadin.data.BeanValidationBinder;
+import com.vaadin.data.Binder;
+import eu.esens.espdvcd.designer.DetailsPanel.DetailsPanel;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import com.vaadin.event.LayoutEvents;
 import com.vaadin.server.FontAwesome;
@@ -7,8 +10,6 @@ import com.vaadin.ui.*;
 import eu.esens.espdvcd.designer.views.EspdTemplate;
 import eu.esens.espdvcd.designer.views.Master;
 import eu.esens.espdvcd.model.*;
-import com.vaadin.data.fieldgroup.BeanFieldGroup;
-
 
 public class CriterionForm extends VerticalLayout {
     private Master view;
@@ -22,12 +23,13 @@ public class CriterionForm extends VerticalLayout {
 
     private boolean readOnly = false;
 
-    public CriterionForm(Master view, SelectableCriterion criterion, boolean useRequirements, boolean readOnly) {
+    public CriterionForm(Master view, SelectableCriterion criterion, boolean useRequirements, int displayEvidences, boolean readOnly, EODetails eo) {
         this.view = view;
         this.criterionReference = criterion;
         this.useRequirements = useRequirements;
         this.readOnly = readOnly;
 
+        
         this.addComponent(panel);
         panel.setContent(panelContent);
 
@@ -55,12 +57,15 @@ public class CriterionForm extends VerticalLayout {
             columnB.addStyleName("ignoreCaptionCellWidth");
 
             for (RequirementGroup requirementGroup : criterion.getRequirementGroups()) {
-                RequirementGroupForm requirementGroupForm = new RequirementGroupForm(requirementGroup, this.useRequirements, readOnly);
+                RequirementGroupForm requirementGroupForm = new RequirementGroupForm(requirementGroup, this.useRequirements, displayEvidences, readOnly);
                 columnB.addComponent(requirementGroupForm);
             }
 
+            
             if (criterionReference.getLegislationReference() != null) {
                columnA.addComponent(new LegislationReferenceForm(criterionReference.getLegislationReference()));
+               if (eo != null)
+                   columnA.addComponent(new ECertisForm(criterionReference, eo));
             }
         } else { // The criterion form will contain a limited amount of details, therefore a more simplified layout is used.
             panelContent.addComponent(selected);
@@ -77,12 +82,10 @@ public class CriterionForm extends VerticalLayout {
         panelContent.setStyleName("criterionForm-panelContent");
 
         // Bind the this forms fields
-        final BeanFieldGroup<SelectableCriterion> criteriaGroup = new BeanFieldGroup<>(SelectableCriterion.class);
-        criteriaGroup.setItemDataSource(criterion);
-        criteriaGroup.setBuffered(false);
-        criteriaGroup.bindMemberFields(this);
+        final Binder<SelectableCriterion> criteriaGroup = new BeanValidationBinder<>(SelectableCriterion.class);
+        criteriaGroup.setBean(criterion);
+        criteriaGroup.bindInstanceFields(this);
         criteriaGroup.setReadOnly(readOnly);
-
     }
 
 
@@ -101,22 +104,21 @@ public class CriterionForm extends VerticalLayout {
             if (view instanceof EspdTemplate) {
                 EspdTemplate espdTemplateView = (EspdTemplate) view;
                 espdTemplateView.getDetailsContent().removeAllComponents();
-                Label detailsTitle = new Label(criterionReference.getName());
-                detailsTitle.setStyleName("detailsTitle");
-                espdTemplateView.getDetailsContent().addComponent(detailsTitle);
+
+/*                DetailsPanelBuilder detailsPanelBuilder = new DetailsPanelBuilder();
+
+                detailsPanelBuilder.setCaption(criterionReference.getName());
+
                 if (criterionReference.getLegislationReference() != null) {
-                    espdTemplateView.getDetailsContent().addComponent(new LegislationReferenceForm(criterionReference.getLegislationReference()));
+                    detailsPanelBuilder.setLegislationReference(criterionReference.getLegislationReference());
                 }
 
-                Panel panel = new Panel();
-                VerticalLayout panelContent = new VerticalLayout();
-                panel.setCaption("Criterion requirements");
-                panel.setContent(panelContent);
-                panelContent.setSpacing(true);
-                espdTemplateView.getDetailsContent().addComponent(panel);
-                for (RequirementGroup requirementGroup : criterionReference.getRequirementGroups()) {
-                    panelContent.addComponent(new RequirementGroupForm(requirementGroup, false, readOnly));
-                }
+                detailsPanelBuilder.setRequirementGroups(criterionReference.getRequirementGroups());
+
+                DetailsPanel detailsPanel = detailsPanelBuilder.build();*/
+                DetailsPanel detailsPanel = new DetailsPanel(criterionReference);
+
+                espdTemplateView.getDetailsContent().addComponent(detailsPanel);
 
                 CriterionForm highlightedCriterion = espdTemplateView.getHighlightedCriterion();
                 if (highlightedCriterion != this) {

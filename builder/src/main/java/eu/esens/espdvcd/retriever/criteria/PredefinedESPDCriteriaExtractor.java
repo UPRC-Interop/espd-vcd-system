@@ -14,7 +14,7 @@ import javax.xml.bind.JAXB;
 public class PredefinedESPDCriteriaExtractor implements CriteriaExtractor {
 
     private final List<CriterionType> criterionTypeList;
-    private static final String ESPDREQUEST_RESOURCE = "/espd-request.xml";
+    private static final String ESPDREQUEST_RESOURCE = "/templates/espd-request-2017.01.xml";
     
     public PredefinedESPDCriteriaExtractor() {
         ESPDRequestType requestTemplate = JAXB.unmarshal(CriteriaExtractor.class.getResourceAsStream(ESPDREQUEST_RESOURCE), ESPDRequestType.class);    
@@ -23,9 +23,11 @@ public class PredefinedESPDCriteriaExtractor implements CriteriaExtractor {
     
     @Override
     public List<SelectableCriterion> getFullList() {
-        return criterionTypeList.stream()
+        List<SelectableCriterion> lc = 
+        criterionTypeList.stream()
                 .map(c -> ModelFactory.ESPD_REQUEST.extractSelectableCriterion(c))
-                .collect(Collectors.toList());                
+                .collect(Collectors.toList());               
+        return lc;
     }
 
     @Override
@@ -35,6 +37,8 @@ public class PredefinedESPDCriteriaExtractor implements CriteriaExtractor {
     
      @Override
     public List<SelectableCriterion> getFullList(List<SelectableCriterion> initialList, boolean addAsSelected) {
+
+        System.out.println("Criterion List Size:"+criterionTypeList.size());
         Set<SelectableCriterion> initialSet = new LinkedHashSet<>();
         initialSet.addAll(initialList);
         Set<SelectableCriterion> fullSet = 
@@ -42,6 +46,7 @@ public class PredefinedESPDCriteriaExtractor implements CriteriaExtractor {
                 .map(c -> ModelFactory.ESPD_REQUEST.extractSelectableCriterion(c, addAsSelected))
                 .collect(Collectors.toSet());
         initialSet.addAll(fullSet);
+          System.out.println("Criterion List Size in model:"+initialSet.size());
         return new ArrayList<>(initialSet);
     }
     

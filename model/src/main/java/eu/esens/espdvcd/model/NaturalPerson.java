@@ -1,6 +1,8 @@
 package eu.esens.espdvcd.model;
 
+import java.time.LocalDate;
 import java.util.Date;
+import javax.validation.constraints.NotNull;
 
 /**
  * 	NaturalPerson
@@ -15,7 +17,7 @@ import java.util.Date;
 public class NaturalPerson {
 
     /**
-     * Natural person Family Name
+     * Representative natural person first name
      * <p>
      * Name of the natural person.
      * <p>
@@ -23,25 +25,29 @@ public class NaturalPerson {
      * Cardinality: 1..1<br>
      * InfReqID: tir92-055<br>
      * BusReqID: tbr92-009<br>
-     * UBL syntax path: espd-cac:EconomicOperatorParty.Party.Person.FirstName<br>
+     * UBL syntax path: espd-cac: EconomicOperatorParty.RepresentativeNaturalPerson.PowerOfAttorney.Description.AgentParty.Person.FirstName<br>
      */
+    @NotNull
     private String firstName;
     
-        /**
-     * Natural person firstName
+    /**
+     * Representative natural person family name
      * <p>
-     * Name of the natural person.
+     * Family Name of the natural person.
      * <p>
      * Data type: Text<br>
      * Cardinality: 1..1<br>
      * InfReqID: tir92-055<br>
      * BusReqID: tbr92-009<br>
-     * UBL syntax path: espd-cac:EconomicOperatorParty.Party.Person.FamilyName<br>
+     * UBL syntax path: espd-cac: EconomicOperatorParty.RepresentativeNaturalPerson.PowerOfAttorney.Description.AgentParty.Person.FamilyName<br>
      */
+    @NotNull
     private String familyName;
 
 
     /**
+     * FIXME: not used according to specification
+     *
      * Natural person identifier
      * <p>
      * Identifier of the natural person.
@@ -56,21 +62,21 @@ public class NaturalPerson {
 
 
     /**
-     * Natural person role
+     * Representative natural person role description
      * <p>
-     * Role of the natural person.
+     * The short description for the role of the economic operators representative.
      * <p>
      * Data type: Code<br>
      * Cardinality: 0..1<br>
-     * InfReqID: tir92-057<br>
+     * InfReqID: tir92-065<br>
      * BusReqID: tbr92-010<br>
-     * UBL syntax path: espd-cac:EconomicOperatorParty.RepresentativeNaturalPerson.NaturalPersonRoleCode<br>
+     * UBL syntax path: espd-cac: EconomicOperatorParty.RepresentativeNaturalPerson.NaturalPersonRoleDescription<br>
      */
     private String role;
 
 
     /**
-     * Natural person birth place
+     * Representative natural person birth place
      * <p>
      * Place of birth of the natural person.
      * <p>
@@ -78,13 +84,13 @@ public class NaturalPerson {
      * Cardinality: 0..1<br>
      * InfReqID: tir92-065<br>
      * BusReqID: tbr92-009<br>
-     * UBL syntax path: espd-cac:EconomicOperatorParty.Party.Person.BirthplaceName<br>
+     * UBL syntax path: espd-cac: EconomicOperatorParty.RepresentativeNaturalPerson.PowerOfAttorney.Description.AgentParty.Person.BirthplaceName<br>
      */
     private String birthPlace;
 
 
     /**
-     * Natural person birth date
+     * Representative natural person birth date
      * <p>
      * Date of birth of the natural person.
      * <p>
@@ -92,12 +98,14 @@ public class NaturalPerson {
      * Cardinality: 0..1<br>
      * InfReqID: tir92-066<br>
      * BusReqID: tbr92-009<br>
-     * UBL syntax path: espd-cac:EconomicOperatorParty.Party.Person.BirthDate<br>
+     * UBL syntax path: espd-cac: EconomicOperatorParty.RepresentativeNaturalPerson.PowerOfAttorney.Description.AgentParty.Person.BirthDate<br>
      */
-    private Date birthDate;
+    private LocalDate birthDate;
 
 
     /**
+     * FIXME: not used according to specification
+     *
      * Natural person registration country
      * <p>
      * Country of registration of the natural person.
@@ -112,6 +120,8 @@ public class NaturalPerson {
 
 
     /**
+     * FIXME: not used according to specification
+     *
      * Power of attorney
      * <p>
      * Power of attorney of the natural person.
@@ -133,11 +143,12 @@ public class NaturalPerson {
      * Address information.
      * <p>
      * Data type: <br>
-     * Cardinality: 0..1<br>
+     * Cardinality: 1..1<br>
      * InfReqID: <br>
      * BusReqID: <br>
      * UBL syntax path: espd-cac: EconomicOperatorParty.Party.Person.ResidenceAddress<br>
      */
+    @NotNull
     private PostalAddress postalAddress;
     
     private ContactingDetails contactDetails;
@@ -183,11 +194,11 @@ public class NaturalPerson {
         this.birthPlace = birthPlace;
     }
 
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 

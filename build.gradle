@@ -3,16 +3,13 @@ subprojects { project ->
     apply plugin: 'maven'
     apply plugin: 'maven-publish'
 
-    version = '1.0.0'
+    version = '1.0.2'
     group = 'eu.esens.espdvcd'
 
     project.ext.slf4j_version = '1.7.13'
     project.ext.log4j2_version = '2.4.1'
     project.ext.jaxb_impl_version = '2.2.11'
     project.ext.jaxb_api_version = '2.2.12'
-    project.ext.hibernate_version = '5.0.3.Final'
-    project.ext.postgresql_version = '9.4-1205-jdbc42'
-    project.ext.h2_version = '1.4.190'
 
     project.ext.libraries = [
         /* logging */
@@ -31,25 +28,27 @@ subprojects { project ->
 
 // publishing definition
 configure (subprojects - project(':designer')) {
-    task javadocJar (type: Jar, dependsOn: javadoc) { // (1)
-        classifier = 'javadoc'
-        from javadoc.destinationDir
-    }
-
-    task sourcesJar (type : Jar) {
-        classifier = 'sources'
-        from sourceSets.main.allSource
+    task sourceJar(type: Jar) {
+        from sourceSets.main.allJava
     }
     
-    artifacts {
-        archives javadocJar
-        archives sourcesJar
+    publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                from components.java
+                
+                artifact sourceJar {
+                    classifier "sources"
+                }
+            }
+            
+        }
     }
 
-    uploadArchives {
-        repositories.mavenDeployer {
-            repository(url: "http://nexus.e-sens.gr/content/repositories/${project.version.endsWith('-SNAPSHOT') ? 'snapshots' : 'releases' }/") {
-                //authentication(userName: nexusUsername, password: nexusPassword)
+    publishing {
+        repositories { 
+            maven {
+                url "http://nexus.e-sens.gr/content/repositories/${project.version.endsWith('-SNAPSHOT') ? 'snapshots' : 'releases' }/"
             }
         }
     }
@@ -72,6 +71,5 @@ configure(subprojects)
 
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.13'
+    gradleVersion = '3.4.1'
 }
-

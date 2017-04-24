@@ -1,6 +1,8 @@
 package eu.esens.espdvcd.designer.components.requirement;
 
-import com.vaadin.data.fieldgroup.BeanFieldGroup;
+import com.vaadin.data.BeanValidationBinder;
+import com.vaadin.data.Binder;
+import com.vaadin.data.converter.StringToIntegerConverter;
 import com.vaadin.ui.TextField;
 import eu.esens.espdvcd.model.requirement.response.QuantityIntegerResponse;
 
@@ -12,14 +14,14 @@ public class QuantityIntegerResponseForm extends ResponseForm {
         this.quantityIntegerResponse = quantityIntegerResponse;
         addComponent(quantity);
         quantity.setCaption(caption);
-        quantity.setNullRepresentation("");
         quantity.setWidth(280, Unit.PIXELS);
 
         // Bind fields
-        final BeanFieldGroup<QuantityIntegerResponse> binder = new BeanFieldGroup<>(QuantityIntegerResponse.class);
-        binder.bindMemberFields(this);
-        binder.setItemDataSource(this.quantityIntegerResponse);
-        binder.setBuffered(false);
+        final Binder<QuantityIntegerResponse> binder = new BeanValidationBinder<>(QuantityIntegerResponse.class);
+        binder.forField(quantity)
+                .withConverter(new StringToIntegerConverter("Cannot convert to Integer"))
+                .bind("quantity");
+        binder.setBean(this.quantityIntegerResponse);
         binder.setReadOnly(readOnly);
     }
 }
