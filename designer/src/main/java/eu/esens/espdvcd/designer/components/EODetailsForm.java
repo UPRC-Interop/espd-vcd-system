@@ -24,6 +24,8 @@ public class EODetailsForm extends Panel {
     private TextField electronicAddressID = new TextField("Electronic address id:");
     private TextField name = new TextField("Name:");
     private TextField role = new TextField("Role:");
+    private TextField procurementProjectLot = new TextField("Where applicable, indication of the lot(s) for which the economic operator wishes to tender:");
+    
     private RadioButtonGroup<Boolean> smeIndicator = new RadioButtonGroup("Indicator: ");
    
     private ContactingDetails contactingDetails; // To be implemented
@@ -53,6 +55,8 @@ public class EODetailsForm extends Panel {
         smeIndicator.setItemCaptionGenerator(item -> (item == true) ? "Yes" : "No" );
         
         columnB.addComponent(smeIndicator);
+        
+        columnB.addComponent(procurementProjectLot);
 
 
         PostalAddress eoDetailsPostalAddress = eoDetails.getPostalAddress();
