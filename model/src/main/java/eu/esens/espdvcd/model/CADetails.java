@@ -72,19 +72,7 @@ public class CADetails implements Serializable{
     @NotNull
     private String procurementProcedureFileReferenceNo;
 
-    /**
-     * Lot reference
-     * <p>
-     * An identifier for the lot.
-     * <p>
-     * Data type: Identifier<br>
-     * Cardinality: 1..1 (1..n)<br>
-     * InfReqID: <br>
-     * BusReqID: tbr92-014<br>
-     * UBL syntax path: cac:ProcurementProjectLot.ID<br>
-     */
-    @NotNull
-    private String procurementProjectLot;
+
 
     /**
      * Notice number / identifier
@@ -182,14 +170,6 @@ public class CADetails implements Serializable{
         this.procurementPublicationURI = procurementPublicationURI;
     }
     
-    public String getProcurementProjectLot() {
-        return procurementProjectLot;
-    }
-
-    public void setProcurementProjectLot(String procurementProjectLot) {
-        this.procurementProjectLot = procurementProjectLot;
-    }
-
     public String getCAOfficialName() {
         return caOfficialName;
     }

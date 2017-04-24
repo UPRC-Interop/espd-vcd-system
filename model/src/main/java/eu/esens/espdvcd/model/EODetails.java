@@ -198,6 +198,28 @@ public class EODetails {
      * espd-cac: EconomicOperatorParty.RepresentativeNaturalPerson.PowerOfAttorney.Description.AgentParty.Person<br>
      */
     private List<NaturalPerson> naturalPersons;
+    
+        /**
+     * Lot reference
+     * <p>
+     * An identifier for the lot.
+     * <p>
+     * Data type: Identifier<br>
+     * Cardinality: 1..1 (1..n)<br>
+     * InfReqID: <br>
+     * BusReqID: tbr92-014<br>
+     * UBL syntax path: cac:ProcurementProjectLot.ID<br>
+     */
+    @NotNull
+    private String procurementProjectLot;
+
+    public String getProcurementProjectLot() {
+        return procurementProjectLot;
+    }
+
+    public void setProcurementProjectLot(String procurementProjectLot) {
+        this.procurementProjectLot = procurementProjectLot;
+    }
 
     public String getID() {
         return ID;
