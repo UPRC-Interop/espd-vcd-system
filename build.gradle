@@ -29,17 +29,23 @@ subprojects { project ->
 // publishing definition
 configure (subprojects - project(':designer')) {
     task sourceJar(type: Jar) {
+         classifier "sources"
         from sourceSets.main.allJava
     }
-    
+
+    task javadocJar(type: Jar) {
+        classifier = 'javadoc'
+        from javadoc
+    } 
+
     publishing {
         publications {
             mavenJava(MavenPublication) {
                 from components.java
                 
-                artifact sourceJar {
-                    classifier "sources"
-                }
+                artifact sourceJar                
+                artifact javadocJar
+                
             }
             
         }
@@ -49,6 +55,10 @@ configure (subprojects - project(':designer')) {
         repositories { 
             maven {
                 url "http://nexus.e-sens.gr/content/repositories/${project.version.endsWith('-SNAPSHOT') ? 'snapshots' : 'releases' }/"
+//                credentials { 
+//                    username 'username'
+//                    password 'password'
+//                }
             }
         }
     }
@@ -71,5 +81,5 @@ configure(subprojects)
 
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '3.4.1'
+    gradleVersion = '3.5'
 }
