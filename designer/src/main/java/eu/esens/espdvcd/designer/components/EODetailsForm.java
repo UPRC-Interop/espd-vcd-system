@@ -25,6 +25,8 @@ public class EODetailsForm extends Panel {
     private TextField name = new TextField("Name:");
     private TextField role = new TextField("Role:");
     private TextField procurementProjectLot = new TextField("Where applicable, indication of the lot(s) for which the economic operator wishes to tender:");
+    private TextField websiteURI = new TextField("Web site address: ");
+    private TextField endpoindId = new TextField("Endpoint ID: ");
     
     private RadioButtonGroup<Boolean> smeIndicator = new RadioButtonGroup("Indicator: ");
    
@@ -46,6 +48,8 @@ public class EODetailsForm extends Panel {
         columnA.addComponent(name);
         columnA.addComponent(ID);
         columnA.addComponent(electronicAddressID);
+        columnA.addComponent(websiteURI);
+        columnA.addComponent(endpoindId);
         columnB.addComponent(role);
         columnB.addComponent(smeIndicator);
 
@@ -54,8 +58,7 @@ public class EODetailsForm extends Panel {
         smeIndicator.setItems(Arrays.asList(true,false));
         smeIndicator.setItemCaptionGenerator(item -> (item == true) ? "Yes" : "No" );
         
-        columnB.addComponent(smeIndicator);
-        
+        columnB.addComponent(smeIndicator);       
         columnB.addComponent(procurementProjectLot);
 
 

@@ -18,12 +18,16 @@ public class CADetailsForm extends VerticalLayout {
     private VerticalLayout layoutInformationAboutPublication;
     private FormLayout layoutFormInformatinAboutPublication;
     private Panel panelIdentifyProcurer;
-    private HorizontalLayout layoutIdentifyProcurer;
+    private VerticalLayout layoutIdentifyProcurer;
     private FormLayout layoutIdentifyProcurerOfficialName;
     private FormLayout layoutIdentifyProcurerCountry;
     private Panel panelInformationProcurementProcedure;
     private FormLayout layoutInformationProcurementProcedure;
-    private Label informationAboutPublicationText = new Label("For procurement procedures in which a call for competition has been published in the Official Journal of the European Union, the information required under Part I will be automatically retrieved, provided that the electronic ESPD-service is used to generate and fill in the ESPD. Reference of the relevant notice published in the Official Journal of the European Union:");
+    private Label informationAboutPublicationText = new Label("For procurement procedures in which a call "
+            + "for competition has been published in the Official Journal of the European Union, the information "
+            + "required under Part I will be automatically retrieved, provided that the electronic ESPD-service "
+            + "is used to generate and fill in the ESPD. Reference of the relevant notice published in the "
+            + "Official Journal of the European Union:");
 
     @PropertyId("CACountry")
     private CountryComboBox caCountry;
@@ -32,6 +36,15 @@ public class CADetailsForm extends VerticalLayout {
     private TextField procurementProcedureTitle;
     private TextArea procurementProcedureDesc;
     private TextField procurementProcedureFileReferenceNo;
+
+    
+    
+    //Optionals, part of Core Vocabulary
+    private TextField websiteURI;
+    private TextField endpointId;
+
+    private ContactingDetailsForm caContactingDetailsForm;
+    
     private ProducurementPublicationNumberField procurementPublicationNumber;
 
     public CADetailsForm(ESPDRequest espdRequest, boolean readOnly) {
@@ -40,10 +53,14 @@ public class CADetailsForm extends VerticalLayout {
         setCaption(null);
         setWidth("100%");
         setStyleName("caDetailsForm-layout");
+        
+        CADetails caDetails = espdRequest.getCADetails();
+                
         panelInformationAboutPublication = new Panel("Information about publication");
         layoutInformationAboutPublication = new VerticalLayout();
         panelIdentifyProcurer = new Panel("Identity of the procurer");
-        layoutIdentifyProcurer = new HorizontalLayout();
+        
+        layoutIdentifyProcurer = new VerticalLayout();
         layoutIdentifyProcurerOfficialName = new FormLayout();
         layoutIdentifyProcurerCountry = new FormLayout();
 
@@ -67,8 +84,14 @@ public class CADetailsForm extends VerticalLayout {
         layoutInformationAboutPublication.addComponent(informationAboutPublicationText);
         layoutFormInformatinAboutPublication.addComponent(procurementPublicationNumber);
         layoutInformationAboutPublication.addComponent(layoutFormInformatinAboutPublication);
-        layoutIdentifyProcurer.addComponent(layoutIdentifyProcurerOfficialName);
-        layoutIdentifyProcurer.addComponent(layoutIdentifyProcurerCountry);
+        
+        HorizontalLayout horLayoutIdentifyProcurer = new HorizontalLayout();
+        
+        
+        horLayoutIdentifyProcurer.addComponent(layoutIdentifyProcurerOfficialName);
+        horLayoutIdentifyProcurer.addComponent(layoutIdentifyProcurerCountry);
+        
+        layoutIdentifyProcurer.addComponent(horLayoutIdentifyProcurer);
         layoutIdentifyProcurerOfficialName.addComponent(caOfficialName);
         layoutIdentifyProcurerCountry.addComponent(caCountry);
         layoutInformationProcurementProcedure.addComponent(procurementProcedureTitle);
@@ -81,11 +104,11 @@ public class CADetailsForm extends VerticalLayout {
         layoutInformationAboutPublication.setMargin(true);
         layoutIdentifyProcurer.setMargin(true);
         layoutInformationProcurementProcedure.setMargin(true);
+        layoutInformationProcurementProcedure.setWidthUndefined();
         informationAboutPublicationText.setWidth(100, Unit.PERCENTAGE);
         caCountry.setCaption("Country:");
         caCountry.setStyleName("textFieldCaptionText");
         caOfficialName.setCaption("Official Name:");
-        //caOfficialName.setInputPrompt("Enter official name");
         caOfficialName.setWidth("17em");
         caOfficialName.setStyleName("textFieldCaptionText");
 
@@ -104,8 +127,10 @@ public class CADetailsForm extends VerticalLayout {
         procurementProcedureFileReferenceNo.setStyleName("textFieldCaptionText");
         procurementPublicationNumber.setWidth("30em");
         procurementPublicationNumber.setStyleName("textFieldCaptionText");
-
-        CADetails caDetails = espdRequest.getCADetails();
+        
+        caContactingDetailsForm = new ContactingDetailsForm(caDetails.getContactingDetails(), readOnly, true);
+        layoutIdentifyProcurer.addComponent(caContactingDetailsForm);
+             
 
         final Binder<CADetails> binder = new BeanValidationBinder<>(CADetails.class);
         binder.bindInstanceFields(this);
