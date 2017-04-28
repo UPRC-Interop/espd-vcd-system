@@ -19,7 +19,6 @@ public interface ModelExtractor {
 
     default CADetails extractCADetails(ContractingPartyType caParty,
             ContractFolderIDType contractFolderId,
-            ProcurementProjectLotType procurementProjectLot,
             List<DocumentReferenceType> additionalDocumentReferenceList) {
 
         CADetails cd = new CADetails();
@@ -40,9 +39,6 @@ public interface ModelExtractor {
                 cd.setCACountry(caParty
                         .getParty().getPostalAddress().getCountry().getIdentificationCode().getValue());
             }
-
-
-
         }
 
         if (caParty != null && caParty.getParty() != null) {
@@ -138,11 +134,6 @@ public interface ModelExtractor {
                 }
             }
         }
-
-        if (procurementProjectLot != null) {
-            cd.setProcurementProjectLot(procurementProjectLot.getID().getValue());
-        }
-
         return cd;
     }
 

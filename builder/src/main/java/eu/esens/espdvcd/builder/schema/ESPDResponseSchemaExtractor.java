@@ -58,7 +58,7 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
 
         resType.getAdditionalDocumentReference().add(extractCADetailsDocumentReferece(res.getCADetails()));
         resType.setContractingParty(extractContractingPartyType(res.getCADetails()));
-        resType.getProcurementProjectLot().add(extractProcurementProjectLot(res.getCADetails()));
+        resType.getProcurementProjectLot().add(extractProcurementProjectLot(res.getEODetails()));
         resType.setServiceProviderParty(extractServiceProviderPartyType(res.getServiceProviderDetails()));
         resType.getCriterion().addAll(res.getFullCriterionList().stream()
                 .filter(cr -> cr.isSelected())
