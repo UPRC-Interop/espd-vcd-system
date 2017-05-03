@@ -94,37 +94,44 @@ public class CADetailsForm extends VerticalLayout {
         layoutIdentifyProcurer.addComponent(horLayoutIdentifyProcurer);
         layoutIdentifyProcurerOfficialName.addComponent(caOfficialName);
         layoutIdentifyProcurerCountry.addComponent(caCountry);
+        
         layoutInformationProcurementProcedure.addComponent(procurementProcedureTitle);
         layoutInformationProcurementProcedure.addComponent(procurementProcedureDesc);
         layoutInformationProcurementProcedure.addComponent(procurementProcedureFileReferenceNo);
 
         panelInformationAboutPublication.setWidth("100%");
+        
         panelIdentifyProcurer.setWidth("100%");
+        
         layoutInformationAboutPublication.setWidth(100, Unit.PERCENTAGE);
         layoutInformationAboutPublication.setMargin(true);
+        
         layoutIdentifyProcurer.setMargin(true);
+        
         layoutInformationProcurementProcedure.setMargin(true);
         layoutInformationProcurementProcedure.setWidthUndefined();
+        
         informationAboutPublicationText.setWidth(100, Unit.PERCENTAGE);
+        
         caCountry.setCaption("Country:");
         caCountry.setStyleName("textFieldCaptionText");
+ 
         caOfficialName.setCaption("Official Name:");
         caOfficialName.setWidth("17em");
         caOfficialName.setStyleName("textFieldCaptionText");
 
         procurementProcedureTitle.setCaption("Title:");
-        //procurementProcedureTitle.setInputPrompt("Enter title");
         procurementProcedureTitle.setWidth("20em");
         procurementProcedureTitle.setStyleName("textFieldCaptionText");
+        
         procurementProcedureDesc.setCaption("Short Description:");
-        //procurementProcedureDesc.setInputPrompt("Enter short description");
         procurementProcedureDesc.setWidth("20em");
         procurementProcedureDesc.setStyleName("textFieldCaptionText");
+
         procurementProcedureFileReferenceNo.setCaption("File reference number attributed by the contracting authority or contracting entity (if applicable):");
-        procurementProcedureFileReferenceNo.setStyleName("textCaption");
-        //procurementProcedureFileReferenceNo.setInputPrompt("Enter file reference number");
         procurementProcedureFileReferenceNo.setWidth("20em");
         procurementProcedureFileReferenceNo.setStyleName("textFieldCaptionText");
+
         procurementPublicationNumber.setWidth("30em");
         procurementPublicationNumber.setStyleName("textFieldCaptionText");
         

@@ -29,7 +29,13 @@ public class EvidenceURLResponseForm extends ResponseForm {
 
     private Button selectFileButton = new Button("Evidence File");
     private Button selectUrlButton = new Button("Evidence URL");
+    
+    // Evidence
     private Label filenameLabel = new Label("");
+    private TextField evidenceDocumentDescription = new TextField("Document Description");
+    private DateTimeField evidenceIssueDateTime = new DateTimeField("Issue Date and Time: ");
+    
+    // File 
 
     public EvidenceURLResponseForm(EvidenceURLResponse evidenceURLResponse, String caption, int displayEvidences, boolean readOnly) {
         this.evidenceURLResponse = evidenceURLResponse;
@@ -127,6 +133,10 @@ public class EvidenceURLResponseForm extends ResponseForm {
         upload.setButtonCaption("Import");
         upload.addSucceededListener(receiver);
         uploadLayout.addComponent(upload);
+        uploadLayout.addComponent(evidenceIssueDateTime);
+        uploadLayout.addComponent(evidenceDocumentDescription);
+        
+        
 
         // Url layout
         urlLayout.addComponent(evidenceURL);

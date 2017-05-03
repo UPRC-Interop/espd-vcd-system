@@ -50,13 +50,24 @@ public class EODetailsForm extends Panel {
         columnA.addComponent(electronicAddressID);
         columnA.addComponent(websiteURI);
         columnA.addComponent(endpoindId);
+        
+        columnA.setMargin(true);
+        columnA.setWidthUndefined();
+        
         columnB.addComponent(role);
         columnB.addComponent(smeIndicator);
+        
+        columnB.setMargin(true);
+        columnB.setWidthUndefined();
 
         smeIndicator.setCaption("Is the economic operator a Micro, a Small or a Medium-Sized Enterprise:");
-        smeIndicator.setStyleName("horizontal");
+        smeIndicator.setStyleName("horizontal textFieldCaptionText");
+        smeIndicator.setWidth("20em");
         smeIndicator.setItems(Arrays.asList(true,false));
         smeIndicator.setItemCaptionGenerator(item -> (item == true) ? "Yes" : "No" );
+        
+        procurementProjectLot.setWidth("20em");
+        procurementProjectLot.setStyleName("textFieldCaptionText");
         
         columnB.addComponent(smeIndicator);       
         columnB.addComponent(procurementProjectLot);
