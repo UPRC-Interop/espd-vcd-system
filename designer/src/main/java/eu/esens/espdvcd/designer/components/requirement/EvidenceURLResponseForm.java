@@ -38,6 +38,7 @@ public class EvidenceURLResponseForm extends ResponseForm {
     // File 
 
     public EvidenceURLResponseForm(EvidenceURLResponse evidenceURLResponse, String caption, int displayEvidences, boolean readOnly) {
+        System.out.println("FUCK! "+caption);
         this.evidenceURLResponse = evidenceURLResponse;
 
 //        uploadEvidenceButton.addClickListener(this::onEvidenceUpload);
@@ -153,6 +154,8 @@ public class EvidenceURLResponseForm extends ResponseForm {
             showSelectMethodLayout();
         } else if (displayEvidences == 2) {
             showDownloadLayout();
+        } else {
+            showUrlLayout();
         }
 
         // Download layout
@@ -214,6 +217,7 @@ public class EvidenceURLResponseForm extends ResponseForm {
     }
 
     public void showSelectMethodLayout() {
+        System.out.println("Select Method");
         selectMethodLayout.setVisible(true);
         selectMethodLayout.setEnabled(true);
         uploadLayout.setVisible(false);
@@ -227,6 +231,7 @@ public class EvidenceURLResponseForm extends ResponseForm {
     }
 
     public void showUploadLayout() {
+        System.out.println("Upload Method");
         selectMethodLayout.setVisible(false);
         selectMethodLayout.setEnabled(false);
         uploadLayout.setVisible(true);
@@ -240,6 +245,7 @@ public class EvidenceURLResponseForm extends ResponseForm {
     }
 
     public void showUrlLayout() {
+        System.out.println("Show URL Method");
         selectMethodLayout.setVisible(false);
         selectMethodLayout.setEnabled(false);
         uploadLayout.setVisible(false);
@@ -253,6 +259,7 @@ public class EvidenceURLResponseForm extends ResponseForm {
     }
 
     public void showCompletedLayout() {
+        System.out.println("Show Completed Method");
         selectMethodLayout.setVisible(false);
         selectMethodLayout.setEnabled(false);
         uploadLayout.setVisible(false);
@@ -266,6 +273,7 @@ public class EvidenceURLResponseForm extends ResponseForm {
     }
 
     public void showDownloadLayout() {
+        System.out.println("Show Download Method");
         selectMethodLayout.setVisible(false);
         selectMethodLayout.setEnabled(false);
         uploadLayout.setVisible(false);
