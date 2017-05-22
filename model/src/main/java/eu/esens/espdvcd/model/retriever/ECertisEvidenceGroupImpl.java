@@ -47,5 +47,5 @@ import java.util.List;
     public void setEvidences(List<ECertisEvidence> evidences) {
         this.evidences = evidences;
     }
-        
+    
 }

@@ -51,5 +51,5 @@ public interface ECertisEvidence {
     void setEvidenceDocumentReference(List<ECertisEvidenceDocumentReference> evidenceDocumentReference);
 
     List<ECertisEvidenceDocumentReference> getEvidenceDocumentReference();
-
+    
 }

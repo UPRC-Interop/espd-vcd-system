@@ -39,8 +39,8 @@ import eu.esens.espdvcd.model.retriever.ECertisSelectableCriterion;
 public class ECertisCriteriaExtractor implements CriteriaDataRetriever, CriteriaExtractor {
 
     // Server URL (1st) is the production one (2nd) is the non production one
-    // private final String ECERTIS_URL = "https://ec.europa.eu/growth/tools-databases/ecertisrest/";
-    private final String ECERTIS_URL = "https://webgate.acceptance.ec.europa.eu/growth/tools-databases/ecertisrest/";
+    private final String ECERTIS_URL = "https://ec.europa.eu/growth/tools-databases/ecertisrest/";
+    // private final String ECERTIS_URL = "https://webgate.acceptance.ec.europa.eu/growth/tools-databases/ecertisrest/";
         
     // All available eu criteria
     private final String ALL_CRITERIA = ECERTIS_URL + "criteria/";
@@ -194,7 +194,16 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
             mapper.setSerializationInclusion(Include.NON_EMPTY);
             theCriterion = mapper.readValue(jsonString, ECertisSelectableCriterionImpl.class);
 
-            // Print JSON String
+            // Print JSON String (May print mixed strings when called from initCriterionList because of threading)
+            // for testring better use the code below in your test method
+            // ----------------------------------------------------------------------------------------------------
+            // ObjectMapper mapper = new ObjectMapper();
+            // mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+            // mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+            // String prettyCt = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(MyModelObject);
+            // System.out.println(prettyCt); 
+            // ---------------------------------------------------------------------------------------------------- 
+            
             // String prettyCt = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(theCriterion);
             // System.out.println(prettyCt);
         } catch (IOException ex) {
@@ -239,7 +248,7 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
         return getCriterion(c.getParentCriterion().getID());
     }
 
-    public List<String> getAllEuropeanCriteriaID()
+    private List<String> getAllEuropeanCriteriaID()
             throws RetrieverException {
         List<String> IDList = new ArrayList<>();
         
