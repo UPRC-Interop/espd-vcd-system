@@ -36,6 +36,8 @@ dependencies {
 }
 
 jaxb {
+    // System.setProperty('javax.xml.accessExternalSchema', 'all')
+    // xsdDir = "${project.projectDir}/src/main/resources/schema"
     xjc {
         destinationDir = "$generatedDir"
     }
