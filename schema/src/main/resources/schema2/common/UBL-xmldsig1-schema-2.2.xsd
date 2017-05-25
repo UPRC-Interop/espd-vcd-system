@@ -31,7 +31,5 @@
   <include
    schemaLocation="UBL-xmldsig-core-schema-2.2.xsd"/>
 
-  <import namespace="http://www.w3.org/2009/xmldsig11#"
-   schemaLocation="UBL-xmldsig11-schema-2.2.xsd"/>
 </schema>
 
