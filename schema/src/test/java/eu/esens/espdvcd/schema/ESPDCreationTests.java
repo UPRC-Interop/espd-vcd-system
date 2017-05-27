@@ -1,17 +1,16 @@
 package eu.esens.espdvcd.schema;
 
-import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
-import grow.names.specification.ubl.schema.xsd.espdrequest_1.ObjectFactory;
-import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
+import eu.espd.schema.v1.espdrequest_1.ESPDRequestType;
+import eu.espd.schema.v1.espdrequest_1.ObjectFactory;
+import eu.espd.schema.v1.espdresponse_1.ESPDResponseType;
 
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.AddressType;
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ContractingPartyType;
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PartyType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.BuildingNameType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.IDType;
+import eu.espd.schema.v1.commonaggregatecomponents_2.AddressType;
+import eu.espd.schema.v1.commonaggregatecomponents_2.ContractingPartyType;
+import eu.espd.schema.v1.commonaggregatecomponents_2.PartyType;
+import eu.espd.schema.v1.commonbasiccomponents_2.BuildingNameType;
+import eu.espd.schema.v1.commonbasiccomponents_2.IDType;
 
 import java.io.ByteArrayOutputStream;
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.Marshaller;
 
@@ -57,7 +56,7 @@ public class ESPDCreationTests {
     @Test
     public void createESPDResponse() {
 
-        grow.names.specification.ubl.schema.xsd.espdresponse_1.ObjectFactory of = new grow.names.specification.ubl.schema.xsd.espdresponse_1.ObjectFactory();
+        eu.espd.schema.v1.espdresponse_1.ObjectFactory of = new eu.espd.schema.v1.espdresponse_1.ObjectFactory();
         ESPDResponseType res = new ESPDResponseType();
         res.setID(new IDType());
         res.getID().setSchemeID("Lala");

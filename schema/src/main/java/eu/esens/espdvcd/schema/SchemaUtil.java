@@ -1,7 +1,7 @@
 package eu.esens.espdvcd.schema;
 
-import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
-import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
+import eu.espd.schema.v1.espdrequest_1.ESPDRequestType;
+import eu.espd.schema.v1.espdresponse_1.ESPDResponseType;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.bind.JAXBContext;
