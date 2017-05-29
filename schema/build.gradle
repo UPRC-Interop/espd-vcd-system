@@ -35,32 +35,16 @@ dependencies {
     
 }
 
-jaxb {
-    // System.setProperty('javax.xml.accessExternalSchema', 'all')
-    
-    // espd edm v 1.0.2
-    //    bindingsDir = "${project.rootDir}/schema/src/main/resources/schema/bindings"
-    //    xsdDir = "${project.projectDir}/src/main/resources/schema/v1"
-    //    bindings = ["binding_espdedm_v1.xjb"]
-    
-    // espd edm v 2.0.0
-    //    bindingsDir = "${project.rootDir}/schema/src/main/resources/schema/bindings"
-    //    xsdDir = "${project.projectDir}/src/main/resources/schema/v2"
-    //    bindings = ["binding_espdedm_v2.xjb"]
-    
-    //--------------------------------------------------------------------------
-    
-    bindingsDir = "${project.rootDir}/schema/src/main/resources/schema/bindings"
-    xsdDir = "${project.projectDir}/src/main/resources/schema"
-    bindings = ["binding_espdedm_v1.xjb", "binding_espdedm_v2.xjb"]
-    
-    xjc {
-              
-        // taskClassname = "com.sun.tools.xjc.XJC2Task"
-        destinationDir = "$generatedDir"
-        args = ["-verbose"]
-    }
-        
+task genEspdEdmV1(type: GradleBuild) {
+    buildFile = 'gen-schema-espd_edm-v1.gradle'
+    tasks = ['xjc']
 }
 
-compileJava.dependsOn xjc
+task genEspdEdmV2(type: GradleBuild) {
+    buildFile = 'gen-schema-espd_edm-v2.gradle'
+    tasks = ['xjc']
+}
+
+compileJava.dependsOn genEspdEdmV1, genEspdEdmV2
+
+
