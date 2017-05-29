@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<jxb:bindings version="1.0"
-              xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
-              xmlns:xs="http://www.w3.org/2001/XMLSchema"
-              >
+<jxb:bindings xmlns="http://java.sun.com/xml/ns/jaxb"
+    xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/jaxb http://java.sun.com/xml/ns/jaxb/bindingschema_2_0.xsd"
+    jxb:version="2.1">
     
     <!--
         
@@ -19,14 +21,14 @@
     -->    
     
     <!-- ESPDRequest-1.0 -->
-    <jxb:bindings version="1.0" schemaLocation="../v1/maindoc/ESPDRequest-1.0.xsd" node="/xs:schema">
+    <jxb:bindings schemaLocation="../v1/maindoc/ESPDRequest-1.0.xsd" node="/xs:schema">
         <jxb:schemaBindings>
             <jxb:package name="eu.espd.schema.v1.espdrequest_1"/>
         </jxb:schemaBindings>
     </jxb:bindings>
     
     <!-- ESPDResponse-1.0 -->
-    <jxb:bindings version="1.0" schemaLocation="../v1/maindoc/ESPDResponse-1.0.xsd" node="/xs:schema">
+    <jxb:bindings schemaLocation="../v1/maindoc/ESPDResponse-1.0.xsd" node="/xs:schema">
         <jxb:schemaBindings>
             <jxb:package name="eu.espd.schema.v1.espdresponse_1"/>
         </jxb:schemaBindings>
@@ -41,125 +43,125 @@
     -->    
     
     <!-- CCTS_CCT_SchemaModule-2.1 -->
-    <jxb:bindings version="1.0" schemaLocation="../v1/common/CCTS_CCT_SchemaModule-2.1.xsd" node="/xs:schema">
+    <jxb:bindings schemaLocation="../v1/common/CCTS_CCT_SchemaModule-2.1.xsd" node="/xs:schema">
         <jxb:schemaBindings>
             <jxb:package name="eu.espd.schema.v1.corecomponenttypeschemamodule._2"/>
         </jxb:schemaBindings>
     </jxb:bindings>   
          
     <!-- CCV-CommonAggregateComponents-1.0 --> 
-    <jxb:bindings version="1.0" schemaLocation="../v1/common/CCV-CommonAggregateComponents-1.0.xsd" node="/xs:schema">
+    <jxb:bindings schemaLocation="../v1/common/CCV-CommonAggregateComponents-1.0.xsd" node="/xs:schema">
         <jxb:schemaBindings>
             <jxb:package name="eu.espd.schema.v1.ccv_commonaggregatecomponents_1"/>
         </jxb:schemaBindings>
     </jxb:bindings>     
       
     <!-- CCV-CommonBasicComponents-1.0 -->                 
-    <jxb:bindings version="1.0" schemaLocation="../v1/common/CCV-CommonBasicComponents-1.0.xsd" node="/xs:schema">
+    <jxb:bindings schemaLocation="../v1/common/CCV-CommonBasicComponents-1.0.xsd" node="/xs:schema">
         <jxb:schemaBindings>
             <jxb:package name="eu.espd.schema.v1.ccv_commonbasiccomponents_1"/>
         </jxb:schemaBindings>
     </jxb:bindings>    
     
     <!-- CEV-CommonAggregateComponents-1.0 -->    
-    <jxb:bindings version="1.0" schemaLocation="../v1/common/CEV-CommonAggregateComponents-1.0.xsd" node="/xs:schema">
+    <jxb:bindings schemaLocation="../v1/common/CEV-CommonAggregateComponents-1.0.xsd" node="/xs:schema">
         <jxb:schemaBindings>
             <jxb:package name="eu.espd.schema.v1.cev_commonaggregatecomponents_1"/>
         </jxb:schemaBindings>
     </jxb:bindings>  
 
     <!-- CEV-CommonBasicComponents-1.0 -->
-    <jxb:bindings version="1.0" schemaLocation="../v1/common/CEV-CommonBasicComponents-1.0.xsd" node="/xs:schema">
+    <jxb:bindings schemaLocation="../v1/common/CEV-CommonBasicComponents-1.0.xsd" node="/xs:schema">
         <jxb:schemaBindings>
             <jxb:package name="eu.espd.schema.v1.cev_commonbasiccomponents_1"/>
         </jxb:schemaBindings>
     </jxb:bindings>  
     
     <!-- ESPD-CommonAggregateComponents-1.0 -->      
-    <jxb:bindings version="1.0" schemaLocation="../v1/common/ESPD-CommonAggregateComponents-1.0.xsd" node="/xs:schema">
+    <jxb:bindings schemaLocation="../v1/common/ESPD-CommonAggregateComponents-1.0.xsd" node="/xs:schema">
         <jxb:schemaBindings>
             <jxb:package name="eu.espd.schema.v1.espd_commonaggregatecomponents_1"/>
         </jxb:schemaBindings>
     </jxb:bindings>  
                                                                                                                
     <!-- ESPD-CommonBasicComponents-1.0 -->
-    <jxb:bindings version="1.0" schemaLocation="../v1/common/ESPD-CommonBasicComponents-1.0.xsd" node="/xs:schema">
+    <jxb:bindings schemaLocation="../v1/common/ESPD-CommonBasicComponents-1.0.xsd" node="/xs:schema">
         <jxb:schemaBindings>
             <jxb:package name="eu.espd.schema.v1.espd_commonbasiccomponents_1"/>
         </jxb:schemaBindings>
     </jxb:bindings>  
     
     <!-- UBL-CommonAggregateComponents-2.1 -->
-    <jxb:bindings version="1.0" schemaLocation="../v1/common/UBL-CommonAggregateComponents-2.1.xsd" node="/xs:schema">
+    <jxb:bindings schemaLocation="../v1/common/UBL-CommonAggregateComponents-2.1.xsd" node="/xs:schema">
         <jxb:schemaBindings>
             <jxb:package name="eu.espd.schema.v1.commonaggregatecomponents_2"/>
         </jxb:schemaBindings>
     </jxb:bindings>  
     
     <!-- UBL-CommonBasicComponents-2.1 -->
-    <jxb:bindings version="1.0" schemaLocation="../v1/common/UBL-CommonBasicComponents-2.1.xsd" node="/xs:schema">
+    <jxb:bindings schemaLocation="../v1/common/UBL-CommonBasicComponents-2.1.xsd" node="/xs:schema">
         <jxb:schemaBindings>
             <jxb:package name="eu.espd.schema.v1.commonbasiccomponents_2"/>
         </jxb:schemaBindings>
     </jxb:bindings>  
     
     <!-- UBL-CommonExtensionComponents-2.1 -->
-    <jxb:bindings version="1.0" schemaLocation="../v1/common/UBL-CommonExtensionComponents-2.1.xsd" node="/xs:schema">
+    <jxb:bindings schemaLocation="../v1/common/UBL-CommonExtensionComponents-2.1.xsd" node="/xs:schema">
         <jxb:schemaBindings>
             <jxb:package name="eu.espd.schema.v1.commonextensioncomponents_2"/>
         </jxb:schemaBindings>
     </jxb:bindings> 
     
     <!-- UBL-CommonSignatureComponents-2.1 -->
-    <jxb:bindings version="1.0" schemaLocation="../v1/common/UBL-CommonSignatureComponents-2.1.xsd" node="/xs:schema">
+    <jxb:bindings schemaLocation="../v1/common/UBL-CommonSignatureComponents-2.1.xsd" node="/xs:schema">
         <jxb:schemaBindings>
             <jxb:package name="eu.espd.schema.v1.commonsignaturecomponents_2"/>
         </jxb:schemaBindings>
     </jxb:bindings>
     
     <!-- UBL-CoreComponentParameters-2.1 -->
-        
+            
     <!-- UBL-ExtensionContentDataType-2.1 -->
-    
+        
     <!-- UBL-QualifiedDataTypes-2.1 -->
     
     <!-- UBL-SignatureAggregateComponents-2.1 -->
-    <jxb:bindings version="1.0" schemaLocation="../v1/common/UBL-SignatureAggregateComponents-2.1.xsd" node="/xs:schema">
+    <jxb:bindings schemaLocation="../v1/common/UBL-SignatureAggregateComponents-2.1.xsd" node="/xs:schema">
         <jxb:schemaBindings>
             <jxb:package name="eu.espd.schema.v1.signatureaggregatecomponents_2"/>
         </jxb:schemaBindings>
     </jxb:bindings>
     
     <!-- UBL-SignatureBasicComponents-2.1 -->
-    <jxb:bindings version="1.0" schemaLocation="../v1/common/UBL-SignatureBasicComponents-2.1.xsd" node="/xs:schema">
+    <jxb:bindings schemaLocation="../v1/common/UBL-SignatureBasicComponents-2.1.xsd" node="/xs:schema">
         <jxb:schemaBindings>
             <jxb:package name="eu.espd.schema.v1.signaturebasiccomponents_2"/>
         </jxb:schemaBindings>
     </jxb:bindings>
     
     <!-- UBL-UnqualifiedDataTypes-2.1 -->
-    <jxb:bindings version="1.0" schemaLocation="../v1/common/UBL-UnqualifiedDataTypes-2.1.xsd" node="/xs:schema">
+    <jxb:bindings schemaLocation="../v1/common/UBL-UnqualifiedDataTypes-2.1.xsd" node="/xs:schema">
         <jxb:schemaBindings>
             <jxb:package name="eu.espd.schema.v1.unqualifieddatatypes_2"/>
         </jxb:schemaBindings>
     </jxb:bindings>
     
     <!-- UBL-XAdESv132-2.1 -->
-    <jxb:bindings version="1.0" schemaLocation="../v1/common/UBL-XAdESv132-2.1.xsd" node="/xs:schema">
+    <jxb:bindings schemaLocation="../v1/common/UBL-XAdESv132-2.1.xsd" node="/xs:schema">
         <jxb:schemaBindings>
             <jxb:package name="eu.espd.schema.v1.uri._01903.v1_3"/>
         </jxb:schemaBindings>
     </jxb:bindings>
     
     <!-- UBL-XAdESv141-2.1 -->
-    <jxb:bindings version="1.0" schemaLocation="../v1/common/UBL-XAdESv141-2.1.xsd" node="/xs:schema">
+    <jxb:bindings schemaLocation="../v1/common/UBL-XAdESv141-2.1.xsd" node="/xs:schema">
         <jxb:schemaBindings>
             <jxb:package name="eu.espd.schema.v1.uri._01903.v1_4"/>
         </jxb:schemaBindings>
     </jxb:bindings>
     
     <!-- UBL-xmldsig-core-schema-2.1 -->
-    <jxb:bindings version="1.0" schemaLocation="../v1/common/UBL-xmldsig-core-schema-2.1.xsd" node="/xs:schema">
+    <jxb:bindings schemaLocation="../v1/common/UBL-xmldsig-core-schema-2.1.xsd" node="/xs:schema">
         <jxb:schemaBindings>
             <jxb:package name="eu.espd.schema.v1.xmldsig_core_schema"/>
         </jxb:schemaBindings>

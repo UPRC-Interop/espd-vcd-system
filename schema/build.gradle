@@ -50,16 +50,17 @@ jaxb {
     
     //--------------------------------------------------------------------------
     
-    xsdDir = "${project.projectDir}/src/main/resources/schema"
     bindingsDir = "${project.rootDir}/schema/src/main/resources/schema/bindings"
+    xsdDir = "${project.projectDir}/src/main/resources/schema"
     bindings = ["binding_espdedm_v1.xjb", "binding_espdedm_v2.xjb"]
-   
+    
     xjc {
+              
         // taskClassname = "com.sun.tools.xjc.XJC2Task"
         destinationDir = "$generatedDir"
         args = ["-verbose"]
     }
-    
+        
 }
 
 compileJava.dependsOn xjc
