@@ -30,10 +30,14 @@ dependencies {
 jaxb {
     // System.setProperty('javax.xml.accessExternalSchema', 'all')
     
+    
+    
     // espd edm v 1.0.2
-    bindingsDir = "${project.rootDir}/schema/src/main/resources/schema/bindings"
+    bindingsDir = "${project.rootDir}/src/main/resources/schema/bindings"
     xsdDir = "${project.projectDir}/src/main/resources/schema/v1"
     bindings = ["binding_espdedm_v1.xjb"]
+    
+    println "${bindingsDir}"
     
     xjc {
         // taskClassname = "com.sun.tools.xjc.XJC2Task"
