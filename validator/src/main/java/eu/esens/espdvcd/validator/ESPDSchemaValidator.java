@@ -14,8 +14,6 @@ import javax.xml.bind.*;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 
-import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
-
 /**
  * ESPD schema validator.
  *
