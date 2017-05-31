@@ -2,7 +2,7 @@ package eu.esens.espdvcd.builder.model;
 
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.SimpleESPDRequest;
-import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
+import eu.espd.schema.v1.espdrequest_1.ESPDRequestType;
 import java.util.stream.Collectors;
 
 

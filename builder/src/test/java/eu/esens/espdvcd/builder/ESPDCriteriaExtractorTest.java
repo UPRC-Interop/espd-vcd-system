@@ -3,7 +3,7 @@ package eu.esens.espdvcd.builder;
 import eu.esens.espdvcd.retriever.criteria.PredefinedESPDCriteriaExtractor;
 import eu.esens.espdvcd.builder.model.ModelFactory;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
-import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
+import eu.espd.schema.v1.espdrequest_1.ESPDRequestType;
 import javax.xml.bind.JAXB;
 import org.junit.Before;
 import org.junit.Test;

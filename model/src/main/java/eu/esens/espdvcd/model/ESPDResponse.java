@@ -1,6 +1,6 @@
 package eu.esens.espdvcd.model;
 
-import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
+import eu.espd.schema.v1.espdresponse_1.ESPDResponseType;
 
 import java.io.Serializable;
 import java.net.URL;

@@ -91,10 +91,10 @@ public interface ESPDRequest extends Serializable {
     /**
      * @return The {@link grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType} of the {@link ESPDRequest}.
      */
-    grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType getEspdRequestType();
+    eu.espd.schema.v1.espdrequest_1.ESPDRequestType getEspdRequestType();
 
     /**
      * @param espdRequestType
      */
-    void setEspdRequestType(grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType espdRequestType);
+    void setEspdRequestType(eu.espd.schema.v1.espdrequest_1.ESPDRequestType espdRequestType);
 }

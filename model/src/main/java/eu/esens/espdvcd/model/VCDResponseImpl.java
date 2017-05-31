@@ -1,7 +1,7 @@
 package eu.esens.espdvcd.model;
 
 import eu.esens.espdvcd.model.types.VCDResponseModelType;
-import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
+import eu.espd.schema.v1.espdresponse_1.ESPDResponseType;
 
 import java.util.List;
 

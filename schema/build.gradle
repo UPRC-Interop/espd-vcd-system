@@ -32,17 +32,18 @@ dependencies {
     jaxb "javax.xml.bind:jaxb-api:${project.jaxb_impl_version}"
     
     compile group: 'com.googlecode.jaxb-namespaceprefixmapper-interfaces', name: 'JAXBNamespacePrefixMapper', version: '2.2.4'
-    
 }
 
 task genEspdEdmV1(type: GradleBuild) {
     buildFile = 'gen-schema-espd_edm-v1.gradle'
     tasks = ['xjc']
+    startParameter.projectProperties = [jaxb_impl_version: "${project.jaxb_impl_version}"]
 }
 
 task genEspdEdmV2(type: GradleBuild) {
     buildFile = 'gen-schema-espd_edm-v2.gradle'
     tasks = ['xjc']
+    startParameter.projectProperties = [jaxb_impl_version: "${project.jaxb_impl_version}"]
 }
 
 compileJava.dependsOn genEspdEdmV1, genEspdEdmV2

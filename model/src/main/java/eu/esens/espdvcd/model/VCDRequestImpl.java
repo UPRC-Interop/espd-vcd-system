@@ -1,7 +1,7 @@
 package eu.esens.espdvcd.model;
 
 import eu.esens.espdvcd.model.types.VCDRequestModelType;
-import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
+import eu.espd.schema.v1.espdrequest_1.ESPDRequestType;
 
 /**
  * TODO: Add description.

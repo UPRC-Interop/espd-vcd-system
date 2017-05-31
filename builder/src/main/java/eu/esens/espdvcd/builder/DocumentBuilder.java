@@ -4,12 +4,11 @@ import eu.esens.espdvcd.builder.schema.SchemaFactory;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.schema.SchemaUtil;
-import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
-import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.CopyIndicatorType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.IssueDateType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.IssueTimeType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ProfileIDType;
+import eu.espd.schema.v1.espdrequest_1.ESPDRequestType;
+import eu.espd.schema.v1.espdresponse_1.ESPDResponseType;
+import eu.espd.schema.v1.commonbasiccomponents_2.IssueDateType;
+import eu.espd.schema.v1.commonbasiccomponents_2.IssueTimeType;
+import eu.espd.schema.v1.commonbasiccomponents_2.ProfileIDType;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.datatype.DatatypeConfigurationException;
@@ -21,7 +20,6 @@ import java.io.InputStream;
 import java.io.StringWriter;
 import java.nio.charset.Charset;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -158,11 +156,11 @@ public class DocumentBuilder {
         //Return the Object
         try {
             if (theReq instanceof ESPDResponse) {
-                grow.names.specification.ubl.schema.xsd.espdresponse_1.ObjectFactory of = new grow.names.specification.ubl.schema.xsd.espdresponse_1.ObjectFactory();
+                eu.espd.schema.v1.espdresponse_1.ObjectFactory of = new eu.espd.schema.v1.espdresponse_1.ObjectFactory();
                 SchemaUtil.getMarshaller().marshal(of.createESPDResponse(createXML((ESPDResponse) theReq)), result);
 
             } else {
-                grow.names.specification.ubl.schema.xsd.espdrequest_1.ObjectFactory of = new grow.names.specification.ubl.schema.xsd.espdrequest_1.ObjectFactory();
+                eu.espd.schema.v1.espdrequest_1.ObjectFactory of = new eu.espd.schema.v1.espdrequest_1.ObjectFactory();
                 SchemaUtil.getMarshaller().marshal(of.createESPDRequest(createXML(theReq)), result);
             }
         } catch (JAXBException ex) {

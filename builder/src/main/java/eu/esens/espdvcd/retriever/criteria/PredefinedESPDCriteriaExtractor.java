@@ -2,8 +2,8 @@ package eu.esens.espdvcd.retriever.criteria;
 
 import eu.esens.espdvcd.builder.model.ModelFactory;
 import eu.esens.espdvcd.model.SelectableCriterion;
-import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
-import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.CriterionType;
+import eu.espd.schema.v1.espdrequest_1.ESPDRequestType;
+import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.CriterionType;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
