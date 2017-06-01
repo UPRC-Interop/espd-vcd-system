@@ -305,7 +305,7 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
 
     // Use Codelists in order to check if given Country Code is Valid
     private boolean isCountryCodeExist(String countryCode) {
-        return Codelists.CountryIdentification
+        return Codelists.forV1.CountryIdentification
                 .containsId(countryCode.toUpperCase());
     }
     

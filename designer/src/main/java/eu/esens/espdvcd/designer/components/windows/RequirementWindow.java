@@ -67,9 +67,9 @@ public class RequirementWindow extends Window {
         id.setValue(generatedUUID.toString());
         id.setReadOnly(true);
         
-        type.setItems(Codelists.ResponseDataType.getBiMap().keySet().stream()
+        type.setItems(Codelists.forV1.ResponseDataType.getBiMap().keySet().stream()
                 .map(respId -> DetailsPanelRequirement.requirementResponseDataStringToType(respId)));
-        type.setItemCaptionGenerator(i -> WordUtils.capitalize(Codelists.ResponseDataType.getValueForId(i.name()).toLowerCase()));
+        type.setItemCaptionGenerator(i -> WordUtils.capitalize(Codelists.forV1.ResponseDataType.getValueForId(i.name()).toLowerCase()));
 
     }
 

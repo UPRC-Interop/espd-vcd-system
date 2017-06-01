@@ -170,11 +170,16 @@ public final class Codelists {
         /**
          * Activity Type CodeList
          */
-        ActivityType("/gc/v2/ActivityTypeCode-CodeList.gc"),
+        ActivityType("/gc/v2/ActivityType-CodeList.gc"),
         /**
          * Amount Type CodeList
          */
-        AmountType("/gc/v2/AmountTypeCodes-CodeList.gc"),
+        AmountType("/gc/v2/AmountType-CodeList.gc"),
+        /**
+         * Set whether an answer to a Criterion Property or/and Evidence can
+         * be publicly accessible or not
+         */
+        ConfidentialityLevel("/gc/v2/ConfidentialityLevel-CodeList.gc"),
         /**
          * Contract Type CodeList
          */
@@ -186,16 +191,7 @@ public final class Codelists {
         /**
          * ESPD Criteria Type taxonomy, flattened as a Codelist
          */
-        CriteriaType("/gc/v2/CriteriaTypeCodes-CodeList.gc"),
-        /**
-         * Criterion Jurisdiction Level for the ESPD Criteria Codelist
-         */
-        CriterionJurisdictionLevel("/gc/v2/CriterionJurisdictionLevel-CodeList.gc"),
-        /**
-         * UBL Cusomization ID codelist, used for the ESPD Request and Response
-         * Artifacts
-         */
-        CustomizationID("/gc/v2/CustomizationID-CodeList.gc"),
+        CriteriaType("/gc/v2/CriteriaType-CodeList.gc"),
         /**
          * Currency Codelist, ISO Compatible.
          */
@@ -206,27 +202,54 @@ public final class Codelists {
          */
         DocumentReferenceContentType("/gc/v2/DocRefContentType-CodeList.gc"),
         /**
-         * Economic Operator Role Codelist
+         * States the type of identifier of an Economic Operator of a group
+         * of tenderers
          */
-        EORole("/gc/v2/EORoleCodes-CodeList.gc"),
+        EOIDType("/gc/v2/EOIDType-CodeList.gc"),
         /**
          * Language iso code Codelist
          */
-        LanguageCodeEU("/gc/v2/LanguageCodeEU-CodeList.gc"),
+        LanguageCodeEU("/gc/v2/EULanguageCode-CodeList.gc"),
+        /**
+         * Specifies whether the Criterion is weigthed or a pass/fail one
+         */
+        EvaluationMethodType("/gc/v2/EvaluationMethodType-CodeList.gc"),
+        /**
+         * Financial Ratio Type CodeList
+         */
+        FinancialRatioType("/gc/v2/FinancialRatioType-CodeList.gc"),
+        /**
+         * Speficies the jurisdiction level of a gazette or publication board
+         * where the contract documents of the procurement procedure have
+         * been published
+         */
+        JurisdictionLevel("/gc/v2/JurisdictionLevel-CodeList.gc"),
+        /**
+         * Criterion Jurisdiction Level for the ESPD Criteria Codelist
+         */
+        LegislationType("/gc/v2/LegislationType-CodeList.gc"),
+        /**
+         * Specifies the number of lots the economic operator may tender
+         */
+        NumberOfLotsCode("/gc/v2/NumberOfLotsCode-CodeList.gc"),
+        /**
+         * Qualification Application Type, created in order to specify 
+         * whether the ESPD is "Regulated" or "Self-contained"
+         */
+        QualificationApplicationType("/gc/v2/QualificationApplicationType-CodeList.gc"),
         /**
          * Response Data type codelist, used to infer the type of response a
          * requirement requires.
          */
         ResponseDataType("/gc/v2/ResponseDataType-CodeList.gc"),
-        PeriodMeasureType("/gc/v2/PeriodMeasureTypeCodes-CodeList.gc"),
-        PeriodType("/gc/v2/PeriodTypeCodes-CodeList.gc"),
+        PeriodMeasureType("/gc/v2/PeriodMeasureType-CodeList.gc"),
         ProcedureType("/gc/v2/ProcedureType-CodeList.gc"),
         ProfileExecutionID("/gc/v2/ProfileExecutionID-CodeList.gc"),
         ProjectType("/gc/v2/ProjectType-CodeList.gc"),
         ServicesProjectSubType("/gc/v2/ServicesProjectSubType-CodeList.gc"),
-        TechnicalCapabilityType("/gc/v2/TechnicalCapabilityTypeCode-CodeList.gc"),
-        TenderingRole("/gc/v2/TendererRole-CodeList.gc");
-
+        TechnicalCapabilityType("/gc/v2/TechnicalCapabilityType-CodeList.gc"),
+        EORoleType("/gc/v2/EORoleType-CodeList.gc");
+        
         private final String name;
 
         private volatile GenericCode INSTANCE;

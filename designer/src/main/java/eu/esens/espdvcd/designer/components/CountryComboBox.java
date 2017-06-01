@@ -12,8 +12,8 @@ import org.apache.commons.lang3.text.WordUtils;
 public class CountryComboBox extends ComboBox<String> {
 
     public CountryComboBox(String title) {
-        super(title, Codelists.CountryIdentification.getBiMap().keySet());
-        this.setItemCaptionGenerator(i -> WordUtils.capitalize(Codelists.CountryIdentification.getValueForId(i)));
+        super(title, Codelists.forV1.CountryIdentification.getBiMap().keySet());
+        this.setItemCaptionGenerator(i -> WordUtils.capitalize(Codelists.forV1.CountryIdentification.getValueForId(i)));
         this.setItemIconGenerator(this::getIconForCountryId);
         this.setPlaceholder("Select country");
     }
