@@ -16,18 +16,18 @@ public class CodeListsTest {
     @Test 
         public void testGC() {
        
-            Assert.assertEquals("Greece", Codelists.CountryIdentification.getValueForId("GR"));
-            Assert.assertEquals("GR", Codelists.CountryIdentification.getIdForData("Greece"));
+            Assert.assertEquals("Greece", Codelists.forV1.CountryIdentification.getValueForId("GR"));
+            Assert.assertEquals("GR", Codelists.forV1.CountryIdentification.getIdForData("Greece"));
             
-            Assert.assertEquals("MT", Codelists.TenderingRole.getIdForData("Main tenderer"));
-            Assert.assertEquals("Main tenderer", Codelists.TenderingRole.getValueForId("MT"));
+            Assert.assertEquals("MT", Codelists.forV1.TenderingRole.getIdForData("Main tenderer"));
+            Assert.assertEquals("Main tenderer", Codelists.forV1.TenderingRole.getValueForId("MT"));
             
         }
         
         @Test 
         public void testBiMap() {
-            Assert.assertEquals("Greece",Codelists.CountryIdentification.getBiMap().get("GR"));
-            Assert.assertEquals("GR",Codelists.CountryIdentification.getBiMap().inverse().get("Greece"));            
+            Assert.assertEquals("Greece",Codelists.forV1.CountryIdentification.getBiMap().get("GR"));
+            Assert.assertEquals("GR",Codelists.forV1.CountryIdentification.getBiMap().inverse().get("Greece"));            
         }
     
         @Test 
@@ -35,7 +35,7 @@ public class CodeListsTest {
         
             String theCodelist = "";
             try {
-                for (Codelists c : Codelists.values()) {
+                for (Codelists.forV1 c : Codelists.forV1.values()) {
                     theCodelist = c.name();
                     Assert.assertNotNull(!c.getBiMap().isEmpty());
                 }
