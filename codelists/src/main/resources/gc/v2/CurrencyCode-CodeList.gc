@@ -847,14 +847,6 @@
       </Row>
       <Row>
          <Value ColumnRef="code">
-            <SimpleValue>MWK</SimpleValue>
-         </Value>
-         <Value ColumnRef="name">
-            <SimpleValue>Kwacha</SimpleValue>
-         </Value>
-      </Row>
-      <Row>
-         <Value ColumnRef="code">
             <SimpleValue>MXN</SimpleValue>
          </Value>
          <Value ColumnRef="name">
@@ -1256,14 +1248,6 @@
       <Row>
          <Value ColumnRef="code">
             <SimpleValue>USN</SimpleValue>
-         </Value>
-         <Value ColumnRef="name">
-            <SimpleValue/>
-         </Value>
-      </Row>
-      <Row>
-         <Value ColumnRef="code">
-            <SimpleValue>USS</SimpleValue>
          </Value>
          <Value ColumnRef="name">
             <SimpleValue/>

@@ -25,7 +25,9 @@ import org.oasis_open.docs.codelist.ns.genericode._1.SimpleCodeList;
  * either on a form or a document. 
  * 
  * It is used as an abstract superclass of the 
- * {@link eu.esens.espdvcd.codelist.Codelists} Codelists
+ * {@link eu.esens.espdvcd.codelist.CodeListsV1Impl} CodeListsV1Impl
+ * and
+ * {@link eu.esens.espdvcd.codelist.CodeListsV2Impl} CodeListsV2Impl
  *
  * @version 1.0
  */
