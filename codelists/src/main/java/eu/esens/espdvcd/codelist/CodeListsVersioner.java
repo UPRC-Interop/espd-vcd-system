@@ -1,12 +1,12 @@
 package eu.esens.espdvcd.codelist;
 
 /**
- *
- * @author konstantinos
+ * CodeListsVersioner provide 
+ * 
  */
-public final class CodeListsFactory {
+public final class CodeListsVersioner {
 
-    private CodeListsFactory() {
+    private CodeListsVersioner() {
 
     }
 
@@ -14,7 +14,7 @@ public final class CodeListsFactory {
      * ForCodeListsV1 work as a wrapper for codelists version 1.0.2
      *
      */
-    public static final class ForCodeListsV1 {
+    public static final class ForVersion1 {
         
         public static final CodeLists ACTIVITY_TYPE = CodeListsV1Impl.ActivityType;
 
@@ -57,19 +57,21 @@ public final class CodeListsFactory {
         public static final CodeLists TENDERING_ROLE = CodeListsV1Impl.TenderingRole;
 
         /**
+         * This method is a wrapper for enum values() method 
          * 
          * @return All values 
          */
-        public static final CodeLists[] getInstances() {
+        public static final CodeLists[] getCodeLists() {
             return CodeListsV1Impl.values();
         }
 
         /**
+         * This method is a wrapper for enum valueOf(String name) method 
          * 
          * @param name Exact name of enum constant 
          * @return The requested codelists
          */
-        public static final CodeLists getInstance(String name) {
+        public static final CodeLists getCodeList(String name) {
             return CodeListsV1Impl.valueOf(name);
         }
 
@@ -79,7 +81,7 @@ public final class CodeListsFactory {
      * ForCodeListsV2 work as a wrapper for codelists version 2.0.0
      *
      */
-    public static final class ForCodeListsV2 {
+    public static final class ForVersion2 {
 
         public static final CodeLists ACTIVITY_TYPE = CodeListsV2Impl.ActivityType;
 
@@ -130,19 +132,21 @@ public final class CodeListsFactory {
         public static final CodeLists EO_ROLE_TYPE = CodeListsV2Impl.EORoleType;
 
         /**
+         * This method is a wrapper for enum values() method 
          * 
          * @return All values 
          */
-        public static final CodeLists[] getInstances() {
+        public static final CodeLists[] getCodeLists() {
             return CodeListsV2Impl.values();
         }
 
         /**
+         * This method is a wrapper for enum valueOf(String name) method 
          * 
          * @param name Exact name of enum constant 
          * @return The requested codelists
          */
-        public static final CodeLists getInstance(String name) {
+        public static final CodeLists getCodeList(String name) {
             return CodeListsV2Impl.valueOf(name);
         }
     }

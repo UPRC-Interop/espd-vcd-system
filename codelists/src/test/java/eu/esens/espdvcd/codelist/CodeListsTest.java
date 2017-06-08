@@ -17,30 +17,30 @@ public class CodeListsTest {
     public void testGC() {
 
         // v1
-        Assert.assertEquals("Greece", CodeListsFactory.ForCodeListsV1.COUNTRY_IDENTIFICATION.getValueForId("GR"));
-        Assert.assertEquals("GR", CodeListsFactory.ForCodeListsV1.COUNTRY_IDENTIFICATION.getIdForData("Greece"));
+        Assert.assertEquals("Greece", CodeListsVersioner.ForVersion1.COUNTRY_IDENTIFICATION.getValueForId("GR"));
+        Assert.assertEquals("GR", CodeListsVersioner.ForVersion1.COUNTRY_IDENTIFICATION.getIdForData("Greece"));
 
-        Assert.assertEquals("MT", CodeListsFactory.ForCodeListsV1.TENDERING_ROLE.getIdForData("Main tenderer"));
-        Assert.assertEquals("Main tenderer", CodeListsFactory.ForCodeListsV1.TENDERING_ROLE.getValueForId("MT"));
+        Assert.assertEquals("MT", CodeListsVersioner.ForVersion1.TENDERING_ROLE.getIdForData("Main tenderer"));
+        Assert.assertEquals("Main tenderer", CodeListsVersioner.ForVersion1.TENDERING_ROLE.getValueForId("MT"));
 
         // v2
-        Assert.assertEquals("Andorra", CodeListsFactory.ForCodeListsV2.COUNTRY_IDENTIFICATION.getValueForId("AD"));
-        Assert.assertEquals("AD", CodeListsFactory.ForCodeListsV2.COUNTRY_IDENTIFICATION.getIdForData("Andorra"));
+        Assert.assertEquals("Andorra", CodeListsVersioner.ForVersion2.COUNTRY_IDENTIFICATION.getValueForId("AD"));
+        Assert.assertEquals("AD", CodeListsVersioner.ForVersion2.COUNTRY_IDENTIFICATION.getIdForData("Andorra"));
 
-        Assert.assertEquals("Group member", CodeListsFactory.ForCodeListsV2.EO_ROLE_TYPE.getValueForId("GM"));
-        Assert.assertEquals("GM", CodeListsFactory.ForCodeListsV2.EO_ROLE_TYPE.getIdForData("Group member"));
+        Assert.assertEquals("Group member", CodeListsVersioner.ForVersion2.EO_ROLE_TYPE.getValueForId("GM"));
+        Assert.assertEquals("GM", CodeListsVersioner.ForVersion2.EO_ROLE_TYPE.getIdForData("Group member"));
     }
 
     @Test
     public void testBiMap() {
 
         // v1
-        Assert.assertEquals("Greece", CodeListsFactory.ForCodeListsV1.COUNTRY_IDENTIFICATION.getBiMap().get("GR"));
-        Assert.assertEquals("GR", CodeListsFactory.ForCodeListsV1.COUNTRY_IDENTIFICATION.getBiMap().inverse().get("Greece"));
+        Assert.assertEquals("Greece", CodeListsVersioner.ForVersion1.COUNTRY_IDENTIFICATION.getBiMap().get("GR"));
+        Assert.assertEquals("GR", CodeListsVersioner.ForVersion1.COUNTRY_IDENTIFICATION.getBiMap().inverse().get("Greece"));
 
         // v2
-        Assert.assertEquals("Andorra", CodeListsFactory.ForCodeListsV1.COUNTRY_IDENTIFICATION.getBiMap().get("AD"));
-        Assert.assertEquals("AD", CodeListsFactory.ForCodeListsV1.COUNTRY_IDENTIFICATION.getBiMap().inverse().get("Andorra"));
+        Assert.assertEquals("Andorra", CodeListsVersioner.ForVersion2.COUNTRY_IDENTIFICATION.getBiMap().get("AD"));
+        Assert.assertEquals("AD", CodeListsVersioner.ForVersion2.COUNTRY_IDENTIFICATION.getBiMap().inverse().get("Andorra"));
     }
 
     @Test
@@ -51,7 +51,7 @@ public class CodeListsTest {
         // v1
         try {
 
-            for (CodeLists c : CodeListsFactory.ForCodeListsV1.getInstances()) {
+            for (CodeLists c : CodeListsVersioner.ForVersion1.getCodeLists()) {
                 theCodelist = c.getConstantName();
                 Assert.assertNotNull(!c.getBiMap().isEmpty());
             }
@@ -63,7 +63,7 @@ public class CodeListsTest {
         //v2
         try {
 
-            for (CodeLists c : CodeListsFactory.ForCodeListsV2.getInstances()) {
+            for (CodeLists c : CodeListsVersioner.ForVersion2.getCodeLists()) {
                 theCodelist = c.getConstantName();
                 Assert.assertNotNull(!c.getBiMap().isEmpty());
             }
