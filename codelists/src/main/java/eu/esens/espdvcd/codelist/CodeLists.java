@@ -3,7 +3,9 @@ package eu.esens.espdvcd.codelist;
 import com.google.common.collect.BiMap;
 
 /**
- * CodeLists interface should be implemented by all codeLists(x version)Impl enum classes  
+ * CodeLists interface should be implemented by all codeLists implementation 
+ * enum classes in order to provide an "extendable" enum design. Normally every
+ * implementation class represents a codelists version.
  * 
  */
 public interface CodeLists {

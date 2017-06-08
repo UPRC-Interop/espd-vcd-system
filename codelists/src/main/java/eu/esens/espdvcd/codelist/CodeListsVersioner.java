@@ -1,7 +1,7 @@
 package eu.esens.espdvcd.codelist;
 
 /**
- * CodeListsVersioner provide 
+ * CodeListsVersioner allow access to codelists based on codelists version
  * 
  */
 public final class CodeListsVersioner {
