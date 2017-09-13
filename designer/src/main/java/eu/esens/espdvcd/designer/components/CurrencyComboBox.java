@@ -9,8 +9,8 @@ import java.util.*;
 public class CurrencyComboBox extends ComboBox<String> {
 
     public CurrencyComboBox(String title) {
-        super(title, Codelists.Currency.getBiMap().keySet());
-        this.setItemCaptionGenerator(i -> WordUtils.capitalize(Codelists.Currency.getValueForId(i)));
+        super(title, Codelists.forV1.Currency.getBiMap().keySet());
+        this.setItemCaptionGenerator(i -> WordUtils.capitalize(Codelists.forV1.Currency.getValueForId(i)));
         this.setPlaceholder("Currency");
     }
 }

@@ -42,7 +42,7 @@ public class LegislationReferenceForm extends VerticalLayout {
         description.setValue(legislationReference.getDescription());
 
         jurisdictionLevelCode.setCaption("Legislation Reference Jurisdiction Level Code");
-        String legislationReferenceLevelDescription = Codelists.CriterionJurisdictionLevel.getValueForId(legislationReference.getJurisdictionLevelCode());
+        String legislationReferenceLevelDescription = Codelists.forV1.CriterionJurisdictionLevel.getValueForId(legislationReference.getJurisdictionLevelCode());
         
         if (legislationReferenceLevelDescription == null) {
             legislationReferenceLevelDescription = legislationReference.getJurisdictionLevelCode();
