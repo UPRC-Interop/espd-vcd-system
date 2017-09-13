@@ -12,7 +12,7 @@ buildscript {
     }
 
 }
-    
+
 def generatedDir = "${project.buildDir}/generated-sources/xjc"
 
     sourceSets {
