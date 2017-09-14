@@ -1,4 +1,4 @@
-package eu.esens.espdvcd.schema;
+package eu.esens.espdvcd.builder.util;
 
 import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
 import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;

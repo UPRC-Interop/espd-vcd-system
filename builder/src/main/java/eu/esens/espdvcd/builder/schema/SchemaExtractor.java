@@ -6,15 +6,14 @@ import eu.esens.espdvcd.model.LegislationReference;
 import eu.esens.espdvcd.model.ServiceProviderDetails;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
-import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.CriterionType;
-import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.LegislationType;
-import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.RequirementGroupType;
-import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.RequirementType;
+import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.CriterionType;
+import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.LegislationType;
+import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementGroupType;
+import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementType;
+
 import java.util.stream.Collectors;
-
-import eu.espd.schema.v1.commonaggregatecomponents_2.*;
-import eu.espd.schema.v1.commonbasiccomponents_2.*;
-
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.*;
+import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.*;
 
 public interface SchemaExtractor {
 
@@ -116,8 +115,8 @@ public interface SchemaExtractor {
                 if (cd.getProcurementProcedureDesc() != null) {
                     DescriptionType dt = new DescriptionType();
                     dt.setValue(cd.getProcurementProcedureDesc());
-                    if (dr.getAttachment().getExternalReference() == null ) {
-                      dr.getAttachment().setExternalReference(new ExternalReferenceType());
+                    if (dr.getAttachment().getExternalReference() == null) {
+                        dr.getAttachment().setExternalReference(new ExternalReferenceType());
                     }
                     dr.getAttachment().getExternalReference().getDescription().add(dt);
                 }
@@ -147,8 +146,6 @@ public interface SchemaExtractor {
         //pt.setPostalAddress(new AddressType());
         //pt.getPostalAddress().setCountry(new CountryType());
         //pt.getPostalAddress().getCountry().setIdentificationCode(createISOCountryIdCodeType(cd.getCACountry()));
-
-
         // UBL syntax path: cac:ContractingParty.Party.EndpointID
         if (cd.getElectronicAddressID() != null) {
             EndpointIDType eid = new EndpointIDType();
@@ -188,7 +185,7 @@ public interface SchemaExtractor {
         if (cd.getContactingDetails() != null) {
             // UBL syntax path: cac:ContractingParty.Party.Contact
 
-            eu.espd.schema.v1.commonaggregatecomponents_2.ContactType ct = new ContactType();
+            oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ContactType ct = new ContactType();
             ct.setName(new NameType());
             ct.getName().setValue(cd.getContactingDetails().getContactPointName());
 
@@ -207,7 +204,7 @@ public interface SchemaExtractor {
         return cpp;
     }
 
-    default ServiceProviderPartyType  extractServiceProviderPartyType(ServiceProviderDetails spd) {
+    default ServiceProviderPartyType extractServiceProviderPartyType(ServiceProviderDetails spd) {
         if (spd == null) {
             return null;
         }
@@ -280,7 +277,7 @@ public interface SchemaExtractor {
         reqGroupIDType.setSchemeVersionID("1.1");
         return reqGroupIDType;
     }
-    
+
     default IDType createGROWTemporaryId(String id) {
         IDType reqGroupIDType = createCustomSchemeIDIDType(id, "COM-GROW-TEMPORARY-ID");
         reqGroupIDType.setSchemeAgencyID("EU-COM-GROW");
@@ -302,7 +299,6 @@ public interface SchemaExtractor {
         // modification UL_2016-12-22: updated list version and added listID
         countryCodeType.setListVersionID("1.0.2");
         countryCodeType.setListID("CountryCodeIdentifier");
-
 
         countryCodeType.setValue(id);
 
@@ -377,7 +373,6 @@ public interface SchemaExtractor {
 
     }
 
-
     default ProcurementProjectLotType extractProcurementProjectLot(CADetails caDetails) {
 
         ProcurementProjectLotType pplt = new ProcurementProjectLotType();
@@ -386,8 +381,8 @@ public interface SchemaExtractor {
         //pplt.getID().setValue(caDetails.getProcurementProjectLot());
         // modification UL_2016-12-21: according to ESPD specification 1.0.2, procurement project lot needs to be "0"
         // and attribute schemeAgencyID needs to be set
-        pplt.getID().setValue((caDetails.getProcurementProjectLot() == null) ||
-                caDetails.getProcurementProjectLot().isEmpty() ? "0" : caDetails.getProcurementProjectLot());
+        pplt.getID().setValue((caDetails.getProcurementProjectLot() == null)
+                || caDetails.getProcurementProjectLot().isEmpty() ? "0" : caDetails.getProcurementProjectLot());
         pplt.getID().setSchemeAgencyID("EU-COM-GROW");
 
         return pplt;

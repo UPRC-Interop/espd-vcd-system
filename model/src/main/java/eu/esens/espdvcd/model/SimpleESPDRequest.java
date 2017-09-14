@@ -1,7 +1,6 @@
 package eu.esens.espdvcd.model;
 
 import eu.esens.espdvcd.model.types.ESPDRequestModelType;
-import eu.espd.schema.v1.espdrequest_1.ESPDRequestType;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -19,7 +18,6 @@ public class SimpleESPDRequest implements ESPDRequest {
     private Long id;
 
     private ESPDRequestModelType modelType = ESPDRequestModelType.ESPD_REQUEST_DRAFT;
-    private ESPDRequestType espdRequestType;
     private CADetails caDetails;
     private ServiceProviderDetails serviceProviderDetails;
     private List<SelectableCriterion> criterionList;
@@ -30,7 +28,7 @@ public class SimpleESPDRequest implements ESPDRequest {
     private static final String REDUCTION_OF_CANDIDATES_REGEXP = "^CRITERION.OTHER.EO_DATA.MEETS_THE_OBJECTIVE*";   
         
     public SimpleESPDRequest() {
-        this.espdRequestType = new ESPDRequestType();
+
     }
 
     @Override
@@ -67,16 +65,6 @@ public class SimpleESPDRequest implements ESPDRequest {
     @Override
     public void setModelType(ESPDRequestModelType modelType) {
         this.modelType = modelType;
-    }
-
-    @Override
-    public ESPDRequestType getEspdRequestType() {
-        return espdRequestType;
-    }
-
-    @Override
-    public void setEspdRequestType(ESPDRequestType espdRequestType) {
-        this.espdRequestType = espdRequestType;
     }
 
     @Override

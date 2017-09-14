@@ -1,7 +1,5 @@
 package eu.esens.espdvcd.model;
 
-import eu.espd.schema.v1.espdresponse_1.ESPDResponseType;
-
 import java.io.Serializable;
 import java.net.URL;
 import java.util.List;
@@ -10,29 +8,19 @@ import java.util.List;
  * This interface is in charge to provide {@link ESPDResponse} data.
  *
  */
-public interface ESPDResponse extends ESPDRequest,Serializable {
+public interface ESPDResponse extends ESPDRequest, Serializable {
 
     /**
-     * 
-     * @return the EO Details assigned to the ESPD Response Object 
+     *
+     * @return the EO Details assigned to the ESPD Response Object
      */
     public EODetails getEODetails();
-    
-    /**
-     * 
-     * @param eoDetails the {@link EODetails} to be assigned to the ESPD Response
-     * Object.
-     */
-    public void setEODetails(EODetails eoDetails);
-    /**
-     * @return The {@link ESPDResponseType} of the {@link ESPDResponse}.
-     */
-    public ESPDResponseType getEspdResponseType();
 
     /**
-     * @param espdResponseType
+     *
+     * @param eoDetails the {@link EODetails} to be assigned to the ESPD Response Object.
      */
-    void setEspdResponseType(ESPDResponseType espdResponseType);
+    public void setEODetails(EODetails eoDetails);
 
     /**
      * @return list of {@link URL} of the {@link ESPDResponse}.

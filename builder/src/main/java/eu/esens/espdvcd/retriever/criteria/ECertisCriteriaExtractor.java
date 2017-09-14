@@ -5,7 +5,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import eu.esens.espdvcd.codelist.Codelists;
+import eu.esens.espdvcd.codelist.CodeListsVersioner;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.retriever.ECertisSelectableCriterionImpl;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
@@ -305,7 +305,7 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
 
     // Use Codelists in order to check if given Country Code is Valid
     private boolean isCountryCodeExist(String countryCode) {
-        return Codelists.forV1.CountryIdentification
+        return CodeListsVersioner.ForVersion1.COUNTRY_IDENTIFICATION
                 .containsId(countryCode.toUpperCase());
     }
     

@@ -33,8 +33,6 @@ dependencies {
     compile 'com.google.guava:guava:14.0'
 }
 
-
-
 jaxb {
     xjc {
         destinationDir = "$generatedDir"

@@ -88,13 +88,4 @@ public interface ESPDRequest extends Serializable {
      */
     void setModelType(ESPDRequestModelType modelType);
 
-    /**
-     * @return The {@link eu.espd.schema.v1.espdrequest_1.ESPDRequestType} of the {@link ESPDRequest}.
-     */
-    eu.espd.schema.v1.espdrequest_1.ESPDRequestType getEspdRequestType();
-
-    /**
-     * @param espdRequestType
-     */
-    void setEspdRequestType(eu.espd.schema.v1.espdrequest_1.ESPDRequestType espdRequestType);
 }

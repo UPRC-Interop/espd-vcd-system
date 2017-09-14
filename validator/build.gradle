@@ -1,11 +1,19 @@
+repositories {
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+}
+
 dependencies {
-	compile project(':builder')
+    compile project(':builder')
+        
+    // schema
+    compile("eu.europa.ec.grow.espd:exchange-model2:2.0.0-SNAPSHOT")
+    compile group: 'eu.europa.ec.grow.espd', name: 'exchange-model', version: '1.0.2'
 }
 
 task copyTask(type: Copy) {
     from "build/libs/validator-${version}.jar"
     into '../artifacts'
-//    rename "validator-${version}.jar", 'validator.jar'
+    //    rename "validator-${version}.jar", 'validator.jar'
 }
 
 build.dependsOn copyTask

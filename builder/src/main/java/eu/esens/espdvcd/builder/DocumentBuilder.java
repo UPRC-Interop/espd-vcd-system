@@ -1,14 +1,15 @@
 package eu.esens.espdvcd.builder;
 
 import eu.esens.espdvcd.builder.schema.SchemaFactory;
+import eu.esens.espdvcd.builder.util.SchemaUtil;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDResponse;
-import eu.esens.espdvcd.schema.SchemaUtil;
-import eu.espd.schema.v1.espdrequest_1.ESPDRequestType;
-import eu.espd.schema.v1.espdresponse_1.ESPDResponseType;
-import eu.espd.schema.v1.commonbasiccomponents_2.IssueDateType;
-import eu.espd.schema.v1.commonbasiccomponents_2.IssueTimeType;
-import eu.espd.schema.v1.commonbasiccomponents_2.ProfileIDType;
+
+import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
+import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
+import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.IssueDateType;
+import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.IssueTimeType;
+import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ProfileIDType;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.datatype.DatatypeConfigurationException;
@@ -81,9 +82,9 @@ public class DocumentBuilder {
             XMLGregorianCalendar xmlDate = createECCompliantDate(c);
 
             reqType.setIssueDate(new IssueDateType());
-            reqType.getIssueDate().setValue(xmlDate);
+            reqType.getIssueDate().setValue(xmlDate.toGregorianCalendar().toZonedDateTime().toLocalDate());
             reqType.setIssueTime(new IssueTimeType());
-            reqType.getIssueTime().setValue(xmlDate);
+            reqType.getIssueTime().setValue(xmlDate.toGregorianCalendar().toZonedDateTime().toLocalTime());
         } catch (DatatypeConfigurationException e) {
             System.out.println("ERROR in DATES!");
         }
@@ -109,9 +110,9 @@ public class DocumentBuilder {
             XMLGregorianCalendar xmlDate = createECCompliantDate(c);
 
             resType.setIssueDate(new IssueDateType());
-            resType.getIssueDate().setValue(xmlDate);
+            resType.getIssueDate().setValue(xmlDate.toGregorianCalendar().toZonedDateTime().toLocalDate());
             resType.setIssueTime(new IssueTimeType());
-            resType.getIssueTime().setValue(xmlDate);
+            resType.getIssueTime().setValue(xmlDate.toGregorianCalendar().toZonedDateTime().toLocalTime());
         } catch (DatatypeConfigurationException e) {
             System.out.println("ERROR in DATES!");
         }
@@ -156,11 +157,11 @@ public class DocumentBuilder {
         //Return the Object
         try {
             if (theReq instanceof ESPDResponse) {
-                eu.espd.schema.v1.espdresponse_1.ObjectFactory of = new eu.espd.schema.v1.espdresponse_1.ObjectFactory();
+                grow.names.specification.ubl.schema.xsd.espdresponse_1.ObjectFactory of = new grow.names.specification.ubl.schema.xsd.espdresponse_1.ObjectFactory();
                 SchemaUtil.getMarshaller().marshal(of.createESPDResponse(createXML((ESPDResponse) theReq)), result);
 
             } else {
-                eu.espd.schema.v1.espdrequest_1.ObjectFactory of = new eu.espd.schema.v1.espdrequest_1.ObjectFactory();
+                grow.names.specification.ubl.schema.xsd.espdrequest_1.ObjectFactory of = new grow.names.specification.ubl.schema.xsd.espdrequest_1.ObjectFactory();
                 SchemaUtil.getMarshaller().marshal(of.createESPDRequest(createXML(theReq)), result);
             }
         } catch (JAXBException ex) {

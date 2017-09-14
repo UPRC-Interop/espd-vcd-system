@@ -1,7 +1,9 @@
 package eu.esens.espdvcd.validator;
 
-import eu.esens.espdvcd.schema.XSD;
-import eu.esens.espdvcd.schema.SchemaUtil;
+//import eu.esens.espdvcd.schema.XSD;
+//import eu.esens.espdvcd.schema.SchemaUtil;
+import eu.esens.espdvcd.builder.util.SchemaUtil;
+import eu.esens.espdvcd.builder.util.XSD;
 import org.xml.sax.SAXException;
 
 import java.io.InputStream;

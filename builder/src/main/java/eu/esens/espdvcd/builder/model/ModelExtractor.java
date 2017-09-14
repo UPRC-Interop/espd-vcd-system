@@ -5,15 +5,15 @@ import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.ResponseRequirement;
-import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.CriterionType;
-import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.LegislationType;
-import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.RequirementGroupType;
-import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.RequirementType;
+import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.CriterionType;
+import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.LegislationType;
+import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementGroupType;
+import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementType;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import eu.espd.schema.v1.commonaggregatecomponents_2.*;
-import eu.espd.schema.v1.commonbasiccomponents_2.ContractFolderIDType;
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.*;
+import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ContractFolderIDType;
 
 public interface ModelExtractor {
 

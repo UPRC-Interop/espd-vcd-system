@@ -8,13 +8,13 @@ import eu.esens.espdvcd.model.requirement.response.DescriptionResponse;
 import eu.esens.espdvcd.model.requirement.response.IndicatorResponse;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.response.*;
-import eu.espd.schema.v1.espd_commonaggregatecomponents_1.EconomicOperatorPartyType;
-import eu.espd.schema.v1.espd_commonaggregatecomponents_1.NaturalPersonType;
-import eu.espd.schema.v1.espdresponse_1.ESPDResponseType;
-import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.RequirementType;
-import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.ResponseType;
-import eu.espd.schema.v1.ccv_commonbasiccomponents_1.IndicatorType;
-import eu.espd.schema.v1.cev_commonaggregatecomponents_1.EvidenceType;
+import grow.names.specification.ubl.schema.xsd.espd_commonaggregatecomponents_1.EconomicOperatorPartyType;
+import grow.names.specification.ubl.schema.xsd.espd_commonaggregatecomponents_1.NaturalPersonType;
+import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
+import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementType;
+import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.ResponseType;
+import isa.names.specification.ubl.schema.xsd.ccv_commonbasiccomponents_1.IndicatorType;
+import isa.names.specification.ubl.schema.xsd.cev_commonaggregatecomponents_1.EvidenceType;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.UUID;
@@ -23,19 +23,19 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeConstants;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
-import eu.espd.schema.v1.commonaggregatecomponents_2.AddressType;
-import eu.espd.schema.v1.commonaggregatecomponents_2.AttachmentType;
-import eu.espd.schema.v1.commonaggregatecomponents_2.ContactType;
-import eu.espd.schema.v1.commonaggregatecomponents_2.CountryType;
-import eu.espd.schema.v1.commonaggregatecomponents_2.DocumentReferenceType;
-import eu.espd.schema.v1.commonaggregatecomponents_2.ExternalReferenceType;
-import eu.espd.schema.v1.commonaggregatecomponents_2.PartyIdentificationType;
-import eu.espd.schema.v1.commonaggregatecomponents_2.PartyNameType;
-import eu.espd.schema.v1.commonaggregatecomponents_2.PartyType;
-import eu.espd.schema.v1.commonaggregatecomponents_2.PeriodType;
-import eu.espd.schema.v1.commonaggregatecomponents_2.PersonType;
-import eu.espd.schema.v1.commonaggregatecomponents_2.PowerOfAttorneyType;
-import eu.espd.schema.v1.commonbasiccomponents_2.*;
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.AddressType;
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.AttachmentType;
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ContactType;
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.CountryType;
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.DocumentReferenceType;
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ExternalReferenceType;
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PartyIdentificationType;
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PartyNameType;
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PartyType;
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PeriodType;
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PersonType;
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PowerOfAttorneyType;
+import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -81,7 +81,7 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
         }
 
         EconomicOperatorPartyType eopt = new EconomicOperatorPartyType();
-        eopt.setSMEIndicator(new eu.espd.schema.v1.espd_commonbasiccomponents_1.IndicatorType());
+        eopt.setSMEIndicator(new grow.names.specification.ubl.schema.xsd.espd_commonbasiccomponents_1.IndicatorType());
         eopt.getSMEIndicator().setValue(eod.isSmeIndicator());
 
         eopt.setParty(new PartyType());
@@ -178,7 +178,7 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
                                         np.getBirthDate().getMonthValue(),
                                         np.getBirthDate().getDayOfMonth(),
                                         DatatypeConstants.FIELD_UNDEFINED);
-                    pt.getBirthDate().setValue(xcal);
+                    pt.getBirthDate().setValue(xcal.toGregorianCalendar().toZonedDateTime().toLocalDate());
                 } catch (DatatypeConfigurationException ex) {
                     log.error("Could not create XML Date Object", ex);
                 }
@@ -313,7 +313,7 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
                                         respDate.getDayOfMonth(),
                                         DatatypeConstants.FIELD_UNDEFINED);
                         rType.setDate(new DateType());
-                        rType.getDate().setValue(xcal);
+                        rType.getDate().setValue(xcal.toGregorianCalendar().toZonedDateTime().toLocalDate());
 
                     } catch (DatatypeConfigurationException ex) {
                         log.error("Could not create XMLGregorialCalendar Date Object", ex);

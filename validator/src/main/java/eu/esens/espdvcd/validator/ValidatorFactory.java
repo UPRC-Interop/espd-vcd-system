@@ -1,8 +1,9 @@
 package eu.esens.espdvcd.validator;
 
+import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
+import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
 import java.io.InputStream;
-import eu.espd.schema.v1.espdresponse_1.ESPDResponseType;
-import eu.espd.schema.v1.espdrequest_1.ESPDRequestType;
+
 import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBException;
