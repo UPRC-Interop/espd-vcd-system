@@ -39,8 +39,8 @@ import eu.esens.espdvcd.model.retriever.ECertisSelectableCriterion;
 public class ECertisCriteriaExtractor implements CriteriaDataRetriever, CriteriaExtractor {
 
     // Server URL (1st) is the production one (2nd) is the non production one
-    private final String ECERTIS_URL = "https://ec.europa.eu/growth/tools-databases/ecertisrest/";
-    // private final String ECERTIS_URL = "https://webgate.acceptance.ec.europa.eu/growth/tools-databases/ecertisrest/";
+    // private final String ECERTIS_URL = "https://ec.europa.eu/growth/tools-databases/ecertisrest/";
+    private final String ECERTIS_URL = "https://webgate.acceptance.ec.europa.eu/growth/tools-databases/ecertisrest/";
         
     // All available eu criteria
     private final String ALL_CRITERIA = ECERTIS_URL + "criteria/";
