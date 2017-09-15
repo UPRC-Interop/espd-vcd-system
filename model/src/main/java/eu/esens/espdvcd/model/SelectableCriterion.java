@@ -2,7 +2,6 @@ package eu.esens.espdvcd.model;
 
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Created by Ulf Lotzmann on 05/03/2016.
@@ -43,4 +42,5 @@ public class SelectableCriterion extends Criterion {
     public void setSelected(boolean selected) {
         this.selected = selected;
     }
+       
 }

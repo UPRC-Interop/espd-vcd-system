@@ -1,7 +1,6 @@
 package eu.esens.espdvcd.model;
 
 import eu.esens.espdvcd.model.types.VCDRequestModelType;
-import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
 
 /**
  * TODO: Add description.
@@ -23,13 +22,4 @@ public class VCDRequestImpl implements VCDRequest {
 
     }
 
-    @Override
-    public ESPDRequestType getVcdRequestType() {
-        return null;
-    }
-
-    @Override
-    public void setVcdRequestType(ESPDRequestType vcdRequestType) {
-
-    }
 }

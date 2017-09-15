@@ -43,8 +43,9 @@ public class Criterion implements Serializable {
      * BusReqID: tbr92-015<br>
      * UBL syntax path: ccv:Criterion.ID<br>
      */
-    @NotNull
-    private String ID;
+
+    @NotNull    
+    protected String ID;
 
     /**
      * Criterion type code
@@ -57,8 +58,10 @@ public class Criterion implements Serializable {
      * BusReqID: tbr92-015<br>
      * UBL syntax path: ccv:Criterion.TypeCode<br>
      */
+
     @NotNull
-    private String typeCode;
+    protected String typeCode;
+
 
     /**
      * Criterion name
@@ -73,7 +76,7 @@ public class Criterion implements Serializable {
      * BusReqID: tbr92-015<br>
      * UBL syntax path: ccv:Criterion.Name<br>
      */
-    private String name;
+    protected String name;
 
     /**
      * Criterion description
@@ -86,7 +89,7 @@ public class Criterion implements Serializable {
      * BusReqID: tbr92-015<br>
      * UBL syntax path: ccv:Criterion.Description<br>
      */
-    private String description;
+    protected String description;
 
     /**
      * Criterion legislation
@@ -97,7 +100,7 @@ public class Criterion implements Serializable {
      * BusReqID:<br>
      * UBL syntax path: ccv:Criterion.LegislationReference<br>
      */
-    private LegislationReference legislationReference;
+    protected LegislationReference legislationReference;
 
     /**
      * Requirement group
@@ -108,7 +111,7 @@ public class Criterion implements Serializable {
      * BusReqID:<br>
      * UBL syntax path: ccv:Criterion.RequirementGroup<br>
      */
-    private List<RequirementGroup> requirementGroups;
+    protected List<RequirementGroup> requirementGroups;
 
     /** */
     public Criterion() {

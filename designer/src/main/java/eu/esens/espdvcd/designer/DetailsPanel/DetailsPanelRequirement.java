@@ -2,7 +2,6 @@ package eu.esens.espdvcd.designer.DetailsPanel;
 
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.*;
-import eu.esens.espdvcd.codelist.Codelists;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;

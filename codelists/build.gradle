@@ -12,7 +12,7 @@ buildscript {
     }
 
 }
-    
+
 def generatedDir = "${project.buildDir}/generated-sources/xjc"
 
     sourceSets {
@@ -32,8 +32,6 @@ dependencies {
     jaxb "javax.xml.bind:jaxb-api:${project.jaxb_impl_version}"
     compile 'com.google.guava:guava:14.0'
 }
-
-
 
 jaxb {
     xjc {

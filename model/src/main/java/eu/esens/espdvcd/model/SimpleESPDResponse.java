@@ -1,7 +1,5 @@
 package eu.esens.espdvcd.model;
 
-import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
-
 import java.net.URL;
 import java.util.List;
 
@@ -29,13 +27,4 @@ public class SimpleESPDResponse extends SimpleESPDRequest implements ESPDRespons
         return null;
     }
 
-    @Override
-    public ESPDResponseType getEspdResponseType() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void setEspdResponseType(ESPDResponseType espdResponseType) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

@@ -58,8 +58,8 @@ public class CriterionWindow extends Window {
         caption.setWidth(100, Unit.PERCENTAGE);
         description.setWidth(100, Unit.PERCENTAGE);
 
-        typecode.setItems(Codelists.CriteriaType.getBiMap().keySet());
-        typecode.setItemCaptionGenerator(i -> WordUtils.capitalize(Codelists.CriteriaType.getValueForId(i).toLowerCase()));
+        typecode.setItems(Codelists.forV1.CriteriaType.getBiMap().keySet());
+        typecode.setItemCaptionGenerator(i -> WordUtils.capitalize(Codelists.forV1.CriteriaType.getValueForId(i).toLowerCase()));
         typecode.setPlaceholder("Select criterion type");
     }
 

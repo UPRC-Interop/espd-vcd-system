@@ -19,8 +19,9 @@ public class LegislationReference {
      * BusReqID: tbr92-015, tbr92-016<br>
      * UBL syntax path: ccv:Criterion.LegislationReference.Title<br>
      */
+
     @NotNull
-    private String title;
+    protected String title;
 
     /**
      * Legislation description
@@ -33,7 +34,7 @@ public class LegislationReference {
      * BusReqID: tbr92-015, tbr92-016<br>
      * UBL syntax path: ccv:Criterion.LegislationReference.Description<br>
      */
-    private String description;
+    protected String description;
 
     /**
      * Jurisdiction level
@@ -46,7 +47,7 @@ public class LegislationReference {
      * BusReqID: tbr92-015, tbr92-016<br>
      * UBL syntax path: ccv:Criterion.LegislationReference.JurisdictionLevelCode<br>
      */
-    private String jurisdictionLevelCode;
+    protected String jurisdictionLevelCode;
 
     /**
      * Legislation article
@@ -59,7 +60,7 @@ public class LegislationReference {
      * BusReqID: tbr92-015, tbr92-016<br>
      * UBL syntax path: ccv:Criterion.LegislationReference.Article<br>
      */
-    private String article;
+    protected String article;
 
     /**
      * Legislation URI
@@ -72,7 +73,7 @@ public class LegislationReference {
      * BusReqID: tbr92-015, tbr92-016<br>
      * UBL syntax path: ccv:Criterion.LegislationReference.URI<br>
      */
-    private String URI;
+    protected String URI;
 
     public LegislationReference(String title, String description, String jurisdictionLevelCode, String article, String URI) {
         this.title = title;

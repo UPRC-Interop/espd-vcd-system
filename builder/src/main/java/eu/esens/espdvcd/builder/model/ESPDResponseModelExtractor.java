@@ -12,11 +12,9 @@ import eu.esens.espdvcd.model.requirement.response.*;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.response.Response;
 import grow.names.specification.ubl.schema.xsd.espd_commonaggregatecomponents_1.EconomicOperatorPartyType;
-import grow.names.specification.ubl.schema.xsd.espd_commonaggregatecomponents_1.NaturalPersonType;
 import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.ResponseType;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PersonType;
@@ -95,7 +93,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
             case DATE:
                 DateResponse dResp = new DateResponse();
                 if (res.getDate() != null && res.getDate().getValue() != null) {
-                    dResp.setDate(res.getDate().getValue().toGregorianCalendar().toZonedDateTime().toLocalDate());
+                    dResp.setDate(res.getDate().getValue());
                 }
                 return dResp;
 
@@ -305,7 +303,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                             }
 
                             if (pt.getBirthDate() != null) {
-                                np.setBirthDate(pt.getBirthDate().getValue().toGregorianCalendar().toZonedDateTime().toLocalDate());
+                                np.setBirthDate(pt.getBirthDate().getValue());
                             }
 
                             if (pt.getContact() != null) {

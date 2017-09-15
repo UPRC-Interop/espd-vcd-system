@@ -1,7 +1,9 @@
 package eu.esens.espdvcd.validator;
 
-import eu.esens.espdvcd.schema.XSD;
-import eu.esens.espdvcd.schema.SchemaUtil;
+//import eu.esens.espdvcd.schema.XSD;
+//import eu.esens.espdvcd.schema.SchemaUtil;
+import eu.esens.espdvcd.builder.util.SchemaUtil;
+import eu.esens.espdvcd.builder.util.XSD;
 import org.xml.sax.SAXException;
 
 import java.io.InputStream;
@@ -13,8 +15,6 @@ import javax.xml.XMLConstants;
 import javax.xml.bind.*;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
-
-import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
 
 /**
  * ESPD schema validator.

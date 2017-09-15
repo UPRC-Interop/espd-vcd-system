@@ -2,44 +2,28 @@ buildscript {
 
     repositories {
         jcenter()
-        maven {
-            url "https://maven.research.rackspacecloud.com/content/repositories/public/"
-        }
+        mavenCentral()
+        maven { 
+            url "https://plugins.gradle.org/m2/" 
+        } 
     }
+    
     dependencies {
-        classpath 'org.openrepose:gradle-jaxb-plugin:2.2.1'
         classpath "com.sun.xml.bind:jaxb-impl:${project.jaxb_impl_version}"
     }
 }
 
-def generatedDir = "${project.buildDir}/generated-sources/xjc"
-
-sourceSets {
-    main {
-        java {
-            srcDirs += "$generatedDir"
-        }
-    }
+repositories {
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
 }
-    
-apply plugin: 'org.openrepose.gradle.plugins.jaxb'
 
 dependencies {
-    jaxb "com.sun.xml.bind:jaxb-core:${project.jaxb_impl_version}"
-    jaxb "com.sun.xml.bind:jaxb-xjc:${project.jaxb_impl_version}"
-    jaxb "com.sun.xml.bind:jaxb-impl:${project.jaxb_impl_version}"
-    jaxb "javax.xml.bind:jaxb-api:${project.jaxb_impl_version}"
-    
+    compile("eu.europa.ec.grow.espd:exchange-model2:2.0.0-SNAPSHOT")
+    compile group: 'eu.europa.ec.grow.espd', name: 'exchange-model', version: '1.0.2'
     compile "com.sun.xml.bind:jaxb-impl:${project.jaxb_impl_version}"
     compile "javax.xml.bind:jaxb-api:${project.jaxb_impl_version}"
     compile "com.sun.xml.bind:jaxb-core:${project.jaxb_impl_version}"
 }
 
-jaxb {
-    xjc {
-        destinationDir = "$generatedDir"
-    }
-}
 
 
-compileJava.dependsOn xjc

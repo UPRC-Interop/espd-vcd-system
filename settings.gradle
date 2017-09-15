@@ -2,5 +2,4 @@ include ':builder',
         ':codelists',
         ':designer',
         ':model',
-        ':schema',
         ':validator'

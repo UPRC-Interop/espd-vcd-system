@@ -62,7 +62,7 @@ public class ESPDResponseForm extends ESPDForm {
             String key = entry.getKey();
             List<CriterionForm> criterionForms = entry.getValue();
 
-            String fullTypeCodeName = Codelists.CriteriaType.getValueForId(key);
+            String fullTypeCodeName = Codelists.forV1.CriteriaType.getValueForId(key);
 
             if (fullTypeCodeName == null) {
                 // Fallback to display the type code instead of real name
@@ -95,7 +95,7 @@ public class ESPDResponseForm extends ESPDForm {
             String key = entry.getKey();
             List<CriterionForm> criterionForms = entry.getValue();
 
-            String fullTypeCodeName = Codelists.CriteriaType.getValueForId(key);
+            String fullTypeCodeName = Codelists.forV1.CriteriaType.getValueForId(key);
 
             if (fullTypeCodeName == null) {
                 // Fallback to display the type code instead of real name
@@ -132,7 +132,7 @@ public class ESPDResponseForm extends ESPDForm {
             String key = entry.getKey();
             List<CriterionForm> criterionForms = entry.getValue();
 
-            String fullTypeCodeName = Codelists.CriteriaType.getValueForId(key);
+            String fullTypeCodeName = Codelists.forV1.CriteriaType.getValueForId(key);
 
             if (fullTypeCodeName == null) {
                 // Fallback to display the type code instead of real name
@@ -166,7 +166,7 @@ public class ESPDResponseForm extends ESPDForm {
             String key = entry.getKey();
             List<CriterionForm> criterionForms = entry.getValue();
 
-            String fullTypeCodeName = Codelists.CriteriaType.getValueForId(key);
+            String fullTypeCodeName = Codelists.forV1.CriteriaType.getValueForId(key);
 
             if (fullTypeCodeName == null) {
                 // Fallback to display the type code instead of real name

@@ -2,11 +2,6 @@ package eu.esens.espdvcd.builder;
 
 import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.model.ESPDResponse;
-import eu.esens.espdvcd.model.SelectableCriterion;
-import eu.esens.espdvcd.model.requirement.Requirement;
-import eu.esens.espdvcd.model.requirement.RequirementGroup;
-import eu.esens.espdvcd.model.requirement.response.EvidenceURLResponse;
-import eu.esens.espdvcd.model.requirement.response.Response;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,8 +13,6 @@ import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Ulf Lotzmann on 08/06/2016.
