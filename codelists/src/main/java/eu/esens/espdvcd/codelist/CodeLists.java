@@ -23,5 +23,9 @@ public interface CodeLists {
     BiMap<String, String> getBiMap();
         
     String getConstantName();
+   
+    String getNameForIdV2(String id);
+    
+    String getDescriptionForIdV2(String id);
     
 }
