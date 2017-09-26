@@ -109,22 +109,9 @@ public enum CodeListsTestImpl implements CodeLists {
         this.lang = lang;
     }
 
-    public String getLang() {
-        if (lang == null) {
-            lang = DEFAULT_LANG;
-        }
-        return lang;
-    }
-    
-    private String getValueForIdV2(String id, String type, String lang) {
-        return getInstance().getValueForIdV2(id).stream()
-                .filter(vp -> vp.getColumnRef().equals(type + "-" + lang))
-                .findAny().get().getValue();
-    }
-
     @Override
     public String getNameForIdV2(String id) {
-        return getValueForIdV2(id, "name", "en");
+        return getInstance().getValueForIdV2(id).getName();
     }
 
     @Override
@@ -132,7 +119,12 @@ public enum CodeListsTestImpl implements CodeLists {
         if (lang == null) {
             lang = DEFAULT_LANG;
         }
-        return getValueForIdV2(id, "description", lang);
+        return getInstance().getValueForIdV2(id).getDescriptionMap().get(lang);
+    }
+
+    @Override
+    public String getIdForDataV2(String data) {
+        return getInstance().getIdForDataV2(data);
     }
        
 }

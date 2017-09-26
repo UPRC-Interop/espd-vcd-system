@@ -2,10 +2,10 @@ package eu.esens.espdvcd.codelist;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.bind.JAXBContext;
@@ -34,7 +34,7 @@ public class GenericCode {
 
     protected final JAXBElement<CodeListDocument> GC;
     protected BiMap<String, String> clBiMap;
-    protected final BiMap<String, List<CodelistRowValue>> clBiMapV2;
+    protected final BiMap<String, CodelistRow> clBiMapV2;
 
     protected GenericCode(String theCodelist) {
 
@@ -124,9 +124,9 @@ public class GenericCode {
         return biMap;
     }
 
-    private BiMap<String, List<CodelistRowValue>> createBiMapV2() {
+    private BiMap<String, CodelistRow> createBiMapV2() {
 
-        Map<String, List<CodelistRowValue>> sourceMap = new LinkedHashMap<>();
+        Map<String, CodelistRow> sourceMap = new LinkedHashMap<>();
         SimpleCodeList sgc = GC.getValue().getSimpleCodeList();
 
         sgc.getRow().stream()
@@ -139,7 +139,7 @@ public class GenericCode {
                             .filter(c -> ((Column) c.getColumnRef()).getId().equals("code"))
                             .findAny().get().getSimpleValue().getValue();
 
-                    String authorityCode = r.getValue().stream()
+                    String name = r.getValue().stream()
                             .filter(c -> ((Column) c.getColumnRef()).getId().equals("name-en"))
                             .findAny().get().getSimpleValue().getValue();
                     
@@ -159,55 +159,70 @@ public class GenericCode {
                             .filter(c -> ((Column) c.getColumnRef()).getId().equals("description-el"))
                             .findAny().get().getSimpleValue().getValue();
                     
-                    List<CodelistRowValue> values = new ArrayList<CodelistRowValue>() {
-                        {
+                    GenericCode.CodelistRow currentRow = new GenericCode.CodelistRow(id, name);
+                    
+                    currentRow.getDescriptionMap().put("en", descEn);
+                    currentRow.getDescriptionMap().put("es", descEs);
+                    currentRow.getDescriptionMap().put("fr", descFr);
+                    currentRow.getDescriptionMap().put("el", descEl);
 
-                            {
-                                add(new CodelistRowValue("name-en", authorityCode));
-                                add(new CodelistRowValue("description-en", descEn));
-                                add(new CodelistRowValue("description-es", descEs));
-                                add(new CodelistRowValue("description-fr", descFr));
-                                add(new CodelistRowValue("description-el", descEl));
-                            }
-
-                        }
-                    };
-
-                    sourceMap.put(id, values);
+                    sourceMap.put(id, currentRow);
                 });
 
-        BiMap<String, List<CodelistRowValue>> biMap = ImmutableBiMap.copyOf(sourceMap);
+        BiMap<String, CodelistRow> biMap = ImmutableBiMap.copyOf(sourceMap);
         return biMap;
     }
     
-    protected final List<CodelistRowValue> getValueForIdV2(String id) {
+    protected final CodelistRow getValueForIdV2(String id) {
         return clBiMapV2.get(id);
     }
+        
+    protected final String getIdForDataV2(String data) {
+        return clBiMapV2.values().stream()
+                .filter(row -> (row.name.equals(data) || row.descriptionMap.containsValue(data)))
+                .findAny().get().getId();
+    }
     
-    public class CodelistRowValue {
+    public static class CodelistRow {
         
-        private String columnRef;
-        private String value;
-      
-        public CodelistRowValue(String columnRef, String value) {
-            this.columnRef = columnRef;
-            this.value = value;
+        private String id;
+        private String name;
+        private Map<String, String> descriptionMap;
+
+        public CodelistRow(String id) {
+            this(id, "");
+        }
+
+        public CodelistRow(String id, String name) {
+            this.id = id;
+            this.name = name;
+        }
+
+        public String getId() {
+            return id;
         }
         
-        public String getColumnRef() {
-            return columnRef;
+        public void setId(String id) {
+            this.id = id;
         }
 
-        public void setColumnRef(String columnRef) {
-            this.columnRef = columnRef;
+        public String getName() {
+            return name;
         }
 
-        public String getValue() {
-            return value;
+        public void setName(String name) {
+            this.name = name;
         }
 
-        public void setValue(String value) {
-            this.value = value;
+        public Map<String, String> getDescriptionMap() {
+            if (descriptionMap == null) {
+                descriptionMap = new LinkedHashMap<>();
+            }
+            return descriptionMap;
+        }
+
+        public void setDescriptionMap(Map<String, String> descriptionMap) {
+            this.descriptionMap = descriptionMap;
         }
         
     }

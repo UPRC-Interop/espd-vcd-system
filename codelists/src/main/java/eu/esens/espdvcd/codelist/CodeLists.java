@@ -28,4 +28,6 @@ public interface CodeLists {
     
     String getDescriptionForIdV2(String id);
     
+    String getIdForDataV2(String data);
+    
 }

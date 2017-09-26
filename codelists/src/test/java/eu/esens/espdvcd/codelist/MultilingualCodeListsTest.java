@@ -18,11 +18,12 @@ public class MultilingualCodeListsTest {
     @Test
     public void testMGC() throws UnsupportedEncodingException {
 
-        CodeListsTestImpl.NotyceType.setLang("el");
-        String id = "TD001";
+        CodeListsTestImpl.NotyceType.setLang("en");
+        String id = "TD004";
         
-        Assert.assertEquals("PRIOR_WO_CALL", CodeListsTestImpl.NotyceType.getNameForIdV2(id));
-        System.out.println(CodeListsTestImpl.NotyceType.getDescriptionForIdV2(id));
+        // Assert.assertEquals("PRIOR_WO_CALL", CodeListsTestImpl.NotyceType.getNameForIdV2(id));
+        
+        System.out.println(CodeListsTestImpl.NotyceType.getIdForDataV2(CodeListsTestImpl.NotyceType.getDescriptionForIdV2(id)));
         
     }
 
