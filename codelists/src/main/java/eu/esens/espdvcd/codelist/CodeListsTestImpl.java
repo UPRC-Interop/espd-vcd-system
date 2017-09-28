@@ -111,7 +111,7 @@ public enum CodeListsTestImpl implements CodeLists {
 
     @Override
     public String getNameForIdV2(String id) {
-        return getInstance().getValueForIdV2(id).getName();
+        return getInstance().getNameForIdV2(id);
     }
 
     @Override
@@ -119,12 +119,22 @@ public enum CodeListsTestImpl implements CodeLists {
         if (lang == null) {
             lang = DEFAULT_LANG;
         }
-        return getInstance().getValueForIdV2(id).getDescriptionMap().get(lang);
+        return getInstance().getDescriptionForIdV2(id, lang);
     }
 
     @Override
     public String getIdForDataV2(String data) {
         return getInstance().getIdForDataV2(data);
+    }
+
+    @Override
+    public boolean containsIdV2(String id) {
+        return getInstance().containsIdV2(id);
+    }
+
+    @Override
+    public boolean containsValueV2(String value) {
+        return getInstance().containsValueV2(value);
     }
        
 }

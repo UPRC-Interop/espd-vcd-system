@@ -24,10 +24,16 @@ public interface CodeLists {
         
     String getConstantName();
    
+    // v2 -> multilingual API 
+    
     String getNameForIdV2(String id);
     
     String getDescriptionForIdV2(String id);
     
     String getIdForDataV2(String data);
+    
+    boolean containsIdV2(String id);
+    
+    boolean containsValueV2(String value);
     
 }

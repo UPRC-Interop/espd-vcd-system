@@ -1,6 +1,7 @@
 package eu.esens.espdvcd.codelist;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,14 +18,9 @@ public class MultilingualCodeListsTest {
 
     @Test
     public void testMGC() throws UnsupportedEncodingException {
-
-        CodeListsTestImpl.NotyceType.setLang("en");
-        String id = "TD004";
-        
-        // Assert.assertEquals("PRIOR_WO_CALL", CodeListsTestImpl.NotyceType.getNameForIdV2(id));
-        
-        System.out.println(CodeListsTestImpl.NotyceType.getIdForDataV2(CodeListsTestImpl.NotyceType.getDescriptionForIdV2(id)));
-        
+         Assert.assertEquals("PRIOR_WO_CALL", CodeListsTestImpl.NotyceType.getNameForIdV2("TD001"));
+         Assert.assertEquals("TD001", CodeListsTestImpl.NotyceType.getIdForDataV2("PRIOR_WO_CALL"));
+         Assert.assertEquals("Information notice without call for competition", CodeListsTestImpl.NotyceType.getDescriptionForIdV2("TD001"));
     }
 
 }

@@ -3,9 +3,7 @@ package eu.esens.espdvcd.codelist;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
 import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.Map;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.bind.JAXBContext;
@@ -35,7 +33,7 @@ public class GenericCode {
     protected final JAXBElement<CodeListDocument> GC;
     protected BiMap<String, String> clBiMap;
     protected final BiMap<String, CodelistRow> clBiMapV2;
-
+    
     protected GenericCode(String theCodelist) {
 
         XMLStreamReader xsr = null;
@@ -172,18 +170,31 @@ public class GenericCode {
         BiMap<String, CodelistRow> biMap = ImmutableBiMap.copyOf(sourceMap);
         return biMap;
     }
-    
-    protected final CodelistRow getValueForIdV2(String id) {
-        return clBiMapV2.get(id);
+            
+    protected final String getDescriptionForIdV2(String id, String lang) {
+        return clBiMapV2.get(id).getDescriptionMap().get(lang);
     }
-        
+    
+    protected final String getNameForIdV2(String id) {
+        return clBiMapV2.get(id).getName();
+    }
+    
     protected final String getIdForDataV2(String data) {
         return clBiMapV2.values().stream()
-                .filter(row -> (row.name.equals(data) || row.descriptionMap.containsValue(data)))
+                .filter(row -> row.getName().equals(data))
                 .findAny().get().getId();
     }
     
-    public static class CodelistRow {
+    protected final boolean containsIdV2(String id) {
+        return clBiMapV2.containsKey(id);
+    }
+    
+    protected final boolean containsValueV2(String value) {
+        return clBiMapV2.values().stream()
+                .anyMatch(row -> row.getName().equals(value));
+    }
+    
+    private static class CodelistRow {
         
         private String id;
         private String name;
