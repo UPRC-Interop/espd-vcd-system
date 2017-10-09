@@ -7,10 +7,12 @@ import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 import eu.esens.espdvcd.model.Criterion;
 import eu.esens.espdvcd.model.EODetails;
+import eu.esens.espdvcd.model.LegislationReference;
+import eu.esens.espdvcd.model.retriever.ECertisSelectableCriterion;
 import eu.esens.espdvcd.retriever.criteria.ECertisCriteriaExtractor;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
-import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.CriterionType;
-import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.LegislationType;
+import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.CriterionType;
+import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.LegislationType;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -53,39 +55,39 @@ public class ECertisForm extends VerticalLayout {
         ECertisCriteriaExtractor ce = new ECertisCriteriaExtractor();
 
           try {
-            List<CriterionType> cList = ce.getNationalCriterionMapping(c.getID(), eoDetails.getPostalAddress().getCountryCode().toLowerCase());
+            List<ECertisSelectableCriterion> cList = ce.getNationalCriterionMapping(c.getID(), eoDetails.getPostalAddress().getCountryCode().toLowerCase());
             if (!cList.isEmpty()) {
-                CriterionType ct = cList.get(0);
-
+                ECertisSelectableCriterion ct = cList.get(0);
+                
                 JAXB.marshal(ct, System.out);
                 title.setCaption("National Criterion Title");
-                title.setValue(ct.getName().getValue());
+                title.setValue(ct.getName());
                 panelContent.addComponent(title);
 
                 if (ct.getDescription() != null) {
                     description.setCaption("Description");
-                    description.setValue(ct.getDescription().getValue());
+                    description.setValue(ct.getDescription());
                     panelContent.addComponent(description);
                 }
 
-                if (!ct.getLegislationReference().isEmpty()) {
+                if (ct.getLegislationReference() != null) {
  
-                    LegislationType lt = ct.getLegislationReference().get(0);
+                    LegislationReference lt = ct.getLegislationReference();
 
                     jurisdictionLevelCode.setCaption("Jurisdiction Level");
-                    jurisdictionLevelCode.setValue(lt.getJurisdictionLevelCode().getValue());
+                    jurisdictionLevelCode.setValue(lt.getJurisdictionLevelCode());
                     panelContent.addComponent(jurisdictionLevelCode);
                   
                     legislationDescription.setCaption("Legislation Description");
-                    legislationDescription.setValue(lt.getDescription().getValue());
+                    legislationDescription.setValue(lt.getDescription());
                     panelContent.addComponent(legislationDescription);
                     
                     article.setCaption("Article");
-                    article.setValue(lt.getArticle().getValue());
+                    article.setValue(lt.getArticle());
                     panelContent.addComponent(article);
                     
                     URI.setCaption("Legislation Reference URI");
-                    URI.setValue(lt.getURI().getValue());
+                    URI.setValue(lt.getURI());
                     panelContent.addComponent(URI);
                 }
 
@@ -95,7 +97,7 @@ public class ECertisForm extends VerticalLayout {
                 //panelContent.addComponent(URI);
             } else {
                 title.setCaption("eCertis Data not available");
-                title.setValue("No information could be retrieved for country "+eoDetails.getPostalAddress().getCountryCode());
+                title.setValue("No information could be retrieved for country " + eoDetails.getPostalAddress().getCountryCode());
                 panelContent.addComponent(title);
             }
 

@@ -5,6 +5,9 @@ repositories {
     maven {
         url "http://maven.vaadin.com/vaadin-addons"
     }
+    
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+    
 }
 
 buildscript {
@@ -46,8 +49,12 @@ dependencies {
     compile project(':builder')
     compile project(':codelists')
     compile project(':model')
-    compile 'com.vaadin:vaadin-server:8.0.4'
-    compile 'com.vaadin:vaadin-client-compiled:8.0.4'
-    compile 'com.vaadin:vaadin-themes:8.0.4'
+    compile 'com.vaadin:vaadin-server:8.1.5'
+    compile 'com.vaadin:vaadin-client-compiled:8.1.5'
+    compile 'com.vaadin:vaadin-themes:8.1.5'
     compile 'org.apache.commons:commons-lang3:3.5'
+    
+    // schema
+    compile("eu.europa.ec.grow.espd:exchange-model2:2.0.0-SNAPSHOT")
+    compile group: 'eu.europa.ec.grow.espd', name: 'exchange-model', version: '1.0.2'
 }

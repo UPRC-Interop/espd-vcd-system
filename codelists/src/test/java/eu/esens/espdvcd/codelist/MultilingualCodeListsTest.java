@@ -12,15 +12,15 @@ import org.junit.Test;
  */
 public class MultilingualCodeListsTest {
 
-    @Before
-    public void setUp() {
-    }
-
-    @Test
-    public void testMGC() throws UnsupportedEncodingException {
-         Assert.assertEquals("PRIOR_WO_CALL", CodeListsTestImpl.NotyceType.getNameForIdV2("TD001"));
-         Assert.assertEquals("TD001", CodeListsTestImpl.NotyceType.getIdForDataV2("PRIOR_WO_CALL"));
-         Assert.assertEquals("Information notice without call for competition", CodeListsTestImpl.NotyceType.getDescriptionForIdV2("TD001"));
-    }
+//    @Before
+//    public void setUp() {
+//    }
+//
+//    @Test
+//    public void testMGC() throws UnsupportedEncodingException {
+//         Assert.assertEquals("PRIOR_WO_CALL", CodeListsTestImpl.NotyceType.getNameForIdV2("TD001"));
+//         Assert.assertEquals("TD001", CodeListsTestImpl.NotyceType.getIdForDataV2("PRIOR_WO_CALL"));
+//         Assert.assertEquals("Information notice without call for competition", CodeListsTestImpl.NotyceType.getDescriptionForIdV2("TD001"));
+//    }
 
 }

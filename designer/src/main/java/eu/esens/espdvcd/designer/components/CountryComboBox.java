@@ -13,7 +13,7 @@ public class CountryComboBox extends ComboBox<String> {
 
     public CountryComboBox(String title) {
         super(title, CodeListsVersioner.ForVersion1.COUNTRY_IDENTIFICATION.getBiMap().keySet());
-        this.setItemCaptionGenerator(i -> WordUtils.capitalize(Codelists.forV1.CountryIdentification.getValueForId(i)));
+        this.setItemCaptionGenerator(i -> WordUtils.capitalize(CodeListsVersioner.ForVersion1.COUNTRY_IDENTIFICATION.getValueForId(i)));
         this.setItemIconGenerator(this::getIconForCountryId);
         this.setPlaceholder("Select country");
     }

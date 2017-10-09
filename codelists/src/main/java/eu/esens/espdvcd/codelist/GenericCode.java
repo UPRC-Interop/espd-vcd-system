@@ -32,7 +32,7 @@ public class GenericCode {
 
     protected final JAXBElement<CodeListDocument> GC;
     protected BiMap<String, String> clBiMap;
-    protected final BiMap<String, CodelistRow> clBiMapV2;
+    // protected final BiMap<String, CodelistRow> clBiMapV2;
     
     protected GenericCode(String theCodelist) {
 
@@ -46,8 +46,8 @@ public class GenericCode {
             GC = jaxbUnmarshaller.unmarshal(xsr, CodeListDocument.class);
 
             //create the BiMap that holds the default id <-> value mapping 
-            // clBiMap = createBiMap();
-            clBiMapV2 = createBiMapV2();
+            clBiMap = createBiMap();
+            // clBiMapV2 = createBiMapV2();
 
         } catch (JAXBException | XMLStreamException ex) {
             Logger.getLogger(GenericCode.class.getName()).log(Level.SEVERE, null, ex);
@@ -122,120 +122,120 @@ public class GenericCode {
         return biMap;
     }
 
-    private BiMap<String, CodelistRow> createBiMapV2() {
-
-        Map<String, CodelistRow> sourceMap = new LinkedHashMap<>();
-        SimpleCodeList sgc = GC.getValue().getSimpleCodeList();
-
-        sgc.getRow().stream()
-                .filter((Row r) -> r.getValue().stream() // Search in Rows
-                .allMatch(c -> c.getColumnRef() instanceof Column)) // For Columns
-                .forEach((Row r) -> {
-
-                    // Extract Row data
-                    String id = r.getValue().stream()
-                            .filter(c -> ((Column) c.getColumnRef()).getId().equals("code"))
-                            .findAny().get().getSimpleValue().getValue();
-
-                    String name = r.getValue().stream()
-                            .filter(c -> ((Column) c.getColumnRef()).getId().equals("name-en"))
-                            .findAny().get().getSimpleValue().getValue();
-                    
-                    String descEn = r.getValue().stream()
-                            .filter(c -> ((Column) c.getColumnRef()).getId().equals("description-en"))
-                            .findAny().get().getSimpleValue().getValue();
-
-                    String descEs = r.getValue().stream()
-                            .filter(c -> ((Column) c.getColumnRef()).getId().equals("description-es"))
-                            .findAny().get().getSimpleValue().getValue();
-
-                    String descFr = r.getValue().stream()
-                            .filter(c -> ((Column) c.getColumnRef()).getId().equals("description-fr"))
-                            .findAny().get().getSimpleValue().getValue();
-
-                    String descEl = r.getValue().stream()
-                            .filter(c -> ((Column) c.getColumnRef()).getId().equals("description-el"))
-                            .findAny().get().getSimpleValue().getValue();
-                    
-                    GenericCode.CodelistRow currentRow = new GenericCode.CodelistRow(id, name);
-                    
-                    currentRow.getDescriptionMap().put("en", descEn);
-                    currentRow.getDescriptionMap().put("es", descEs);
-                    currentRow.getDescriptionMap().put("fr", descFr);
-                    currentRow.getDescriptionMap().put("el", descEl);
-
-                    sourceMap.put(id, currentRow);
-                });
-
-        BiMap<String, CodelistRow> biMap = ImmutableBiMap.copyOf(sourceMap);
-        return biMap;
-    }
+//    private BiMap<String, CodelistRow> createBiMapV2() {
+//
+//        Map<String, CodelistRow> sourceMap = new LinkedHashMap<>();
+//        SimpleCodeList sgc = GC.getValue().getSimpleCodeList();
+//
+//        sgc.getRow().stream()
+//                .filter((Row r) -> r.getValue().stream() // Search in Rows
+//                .allMatch(c -> c.getColumnRef() instanceof Column)) // For Columns
+//                .forEach((Row r) -> {
+//
+//                    // Extract Row data
+//                    String id = r.getValue().stream()
+//                            .filter(c -> ((Column) c.getColumnRef()).getId().equals("code"))
+//                            .findAny().get().getSimpleValue().getValue();
+//
+//                    String name = r.getValue().stream()
+//                            .filter(c -> ((Column) c.getColumnRef()).getId().equals("name-en"))
+//                            .findAny().get().getSimpleValue().getValue();
+//                    
+//                    String descEn = r.getValue().stream()
+//                            .filter(c -> ((Column) c.getColumnRef()).getId().equals("description-en"))
+//                            .findAny().get().getSimpleValue().getValue();
+//
+//                    String descEs = r.getValue().stream()
+//                            .filter(c -> ((Column) c.getColumnRef()).getId().equals("description-es"))
+//                            .findAny().get().getSimpleValue().getValue();
+//
+//                    String descFr = r.getValue().stream()
+//                            .filter(c -> ((Column) c.getColumnRef()).getId().equals("description-fr"))
+//                            .findAny().get().getSimpleValue().getValue();
+//
+//                    String descEl = r.getValue().stream()
+//                            .filter(c -> ((Column) c.getColumnRef()).getId().equals("description-el"))
+//                            .findAny().get().getSimpleValue().getValue();
+//                    
+//                    GenericCode.CodelistRow currentRow = new GenericCode.CodelistRow(id, name);
+//                    
+//                    currentRow.getDescriptionMap().put("en", descEn);
+//                    currentRow.getDescriptionMap().put("es", descEs);
+//                    currentRow.getDescriptionMap().put("fr", descFr);
+//                    currentRow.getDescriptionMap().put("el", descEl);
+//
+//                    sourceMap.put(id, currentRow);
+//                });
+//
+//        BiMap<String, CodelistRow> biMap = ImmutableBiMap.copyOf(sourceMap);
+//        return biMap;
+//    }
             
-    protected final String getDescriptionForIdV2(String id, String lang) {
-        return clBiMapV2.get(id).getDescriptionMap().get(lang);
-    }
-    
-    protected final String getNameForIdV2(String id) {
-        return clBiMapV2.get(id).getName();
-    }
-    
-    protected final String getIdForDataV2(String data) {
-        return clBiMapV2.values().stream()
-                .filter(row -> row.getName().equals(data))
-                .findAny().get().getId();
-    }
-    
-    protected final boolean containsIdV2(String id) {
-        return clBiMapV2.containsKey(id);
-    }
-    
-    protected final boolean containsValueV2(String value) {
-        return clBiMapV2.values().stream()
-                .anyMatch(row -> row.getName().equals(value));
-    }
-    
-    private static class CodelistRow {
-        
-        private String id;
-        private String name;
-        private Map<String, String> descriptionMap;
-
-        public CodelistRow(String id) {
-            this(id, "");
-        }
-
-        public CodelistRow(String id, String name) {
-            this.id = id;
-            this.name = name;
-        }
-
-        public String getId() {
-            return id;
-        }
-        
-        public void setId(String id) {
-            this.id = id;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public Map<String, String> getDescriptionMap() {
-            if (descriptionMap == null) {
-                descriptionMap = new LinkedHashMap<>();
-            }
-            return descriptionMap;
-        }
-
-        public void setDescriptionMap(Map<String, String> descriptionMap) {
-            this.descriptionMap = descriptionMap;
-        }
-        
-    }
+//    protected final String getDescriptionForIdV2(String id, String lang) {
+//        return clBiMapV2.get(id).getDescriptionMap().get(lang.toLowerCase());
+//    }
+//    
+//    protected final String getNameForIdV2(String id) {
+//        return clBiMapV2.get(id).getName();
+//    }
+//    
+//    protected final String getIdForDataV2(String data) {
+//        return clBiMapV2.values().stream()
+//                .filter(row -> row.getName().equals(data))
+//                .findAny().get().getId();
+//    }
+//    
+//    protected final boolean containsIdV2(String id) {
+//        return clBiMapV2.containsKey(id);
+//    }
+//    
+//    protected final boolean containsValueV2(String value) {
+//        return clBiMapV2.values().stream()
+//                .anyMatch(row -> row.getName().equals(value));
+//    }
+//    
+//    private static class CodelistRow {
+//        
+//        private String id;
+//        private String name;
+//        private Map<String, String> descriptionMap;
+//
+//        public CodelistRow(String id) {
+//            this(id, "");
+//        }
+//
+//        public CodelistRow(String id, String name) {
+//            this.id = id;
+//            this.name = name;
+//        }
+//
+//        public String getId() {
+//            return id;
+//        }
+//        
+//        public void setId(String id) {
+//            this.id = id;
+//        }
+//
+//        public String getName() {
+//            return name;
+//        }
+//
+//        public void setName(String name) {
+//            this.name = name;
+//        }
+//
+//        public Map<String, String> getDescriptionMap() {
+//            if (descriptionMap == null) {
+//                descriptionMap = new LinkedHashMap<>();
+//            }
+//            return descriptionMap;
+//        }
+//
+//        public void setDescriptionMap(Map<String, String> descriptionMap) {
+//            this.descriptionMap = descriptionMap;
+//        }
+//        
+//    }
     
 }
