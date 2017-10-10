@@ -237,7 +237,15 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                         eoAddress.setAddressLine1(eop.getParty().getPostalAddress().getStreetName().getValue());
                     }
 
-                    if (eop.getParty().getPostalAddress().getPostbox() != null) {
+                    //if (eop.getParty().getPostalAddress().getPostbox() != null) {
+                    //    eoAddress.setPostCode(eop.getParty().getPostalAddress().getPostbox().getValue());
+                    //}
+                    // UL 2017-10-10: read post code from cbc:PostalZone
+                    if (eop.getParty().getPostalAddress().getPostalZone() != null) {
+                        eoAddress.setPostCode(eop.getParty().getPostalAddress().getPostalZone().getValue());
+                    }
+                    // if not available, try cbc:Postbox (for backwards compatibility)
+                    else if (eop.getParty().getPostalAddress().getPostbox() != null) {
                         eoAddress.setPostCode(eop.getParty().getPostalAddress().getPostbox().getValue());
                     }
 
@@ -329,7 +337,15 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
 
                                 PostalAddress pa = new PostalAddress();
 
-                                if (pt.getResidenceAddress().getPostbox() != null) {
+                                //if (pt.getResidenceAddress().getPostbox() != null) {
+                                //    pa.setPostCode(pt.getResidenceAddress().getPostbox().getValue());
+                                //}
+                                // UL 2017-10-10: read post code from cbc:PostalZone
+                                if (pt.getResidenceAddress().getPostalZone() != null) {
+                                    pa.setPostCode(pt.getResidenceAddress().getPostalZone().getValue());
+                                }
+                                // if not available, try cbc:Postbox (for backwards compatibility)
+                                else if (pt.getResidenceAddress().getPostbox() != null) {
                                     pa.setPostCode(pt.getResidenceAddress().getPostbox().getValue());
                                 }
 
@@ -363,7 +379,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
         
         // Procurement Project Lot
         if (pplt != null && pplt.getID() != null) {
-            eoDetails.setProcurementProjectLot(pplt.getID().getValue());                    
+            eoDetails.setProcurementProjectLot(pplt.getID().getValue());
         }
 
         return eoDetails;

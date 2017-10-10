@@ -64,7 +64,15 @@ public interface ModelExtractor {
                     caAddress.setAddressLine1(caParty.getParty().getPostalAddress().getStreetName().getValue());
                 }
 
-                if (caParty.getParty().getPostalAddress().getPostbox() != null) {
+                //if (caParty.getParty().getPostalAddress().getPostbox() != null) {
+                //    caAddress.setPostCode(caParty.getParty().getPostalAddress().getPostbox().getValue());
+                //}
+                // UL 2017-10-10: read post code from cbc:PostalZone
+                if (caParty.getParty().getPostalAddress().getPostalZone() != null) {
+                    caAddress.setPostCode(caParty.getParty().getPostalAddress().getPostalZone().getValue());
+                }
+                // if not available, try cbc:Postbox (for backwards compatibility)
+                else if (caParty.getParty().getPostalAddress().getPostbox() != null) {
                     caAddress.setPostCode(caParty.getParty().getPostalAddress().getPostbox().getValue());
                 }
 

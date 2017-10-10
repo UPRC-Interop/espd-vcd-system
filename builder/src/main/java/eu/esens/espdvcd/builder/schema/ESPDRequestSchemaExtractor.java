@@ -39,6 +39,7 @@ public class ESPDRequestSchemaExtractor implements SchemaExtractor {
         ProcurementProjectLotType pplt = new ProcurementProjectLotType();
         pplt.setID(new IDType());
         pplt.getID().setValue("0");
+        pplt.getID().setSchemeAgencyID("EU-COM-GROW");
         reqType.getProcurementProjectLot().add(pplt);
 
         reqType.setCopyIndicator(new CopyIndicatorType());

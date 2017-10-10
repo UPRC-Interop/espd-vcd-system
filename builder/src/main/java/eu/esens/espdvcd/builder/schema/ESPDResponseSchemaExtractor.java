@@ -107,6 +107,7 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
         // UL bugfix: there was no code for creating EndpointID element for EO
         if (eod.getElectronicAddressID() != null) {
             EndpointIDType eid = new EndpointIDType();
+            eid.setSchemeAgencyID("EU-COM-GROW");
             eid.setValue(eod.getElectronicAddressID());
             eopt.getParty().setEndpointID(eid);
         }
@@ -127,8 +128,11 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
             at.setCityName(new CityNameType());
             at.getCityName().setValue(eod.getPostalAddress().getCity());
 
-            at.setPostbox(new PostboxType());
-            at.getPostbox().setValue(eod.getPostalAddress().getPostCode());
+            //at.setPostbox(new PostboxType());
+            //at.getPostbox().setValue(eod.getPostalAddress().getPostCode());
+            // UL 2017-10-10: write post code to cbc:PostalZone
+            at.setPostalZone(new PostalZoneType());
+            at.getPostalZone().setValue(eod.getPostalAddress().getPostCode());
 
             at.setCountry(new CountryType());
             at.getCountry().setIdentificationCode(createISOCountryIdCodeType(eod.getPostalAddress().getCountryCode()));
@@ -207,8 +211,11 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
             if (np.getPostalAddress() != null) {
 
                 pt.setResidenceAddress(new AddressType());
-                pt.getResidenceAddress().setPostbox(new PostboxType());
-                pt.getResidenceAddress().getPostbox().setValue(np.getPostalAddress().getPostCode());
+                //pt.getResidenceAddress().setPostbox(new PostboxType());
+                //pt.getResidenceAddress().getPostbox().setValue(np.getPostalAddress().getPostCode());
+                // UL 2017-10-10: write post code to cbc:PostalZone
+                pt.getResidenceAddress().setPostalZone(new PostalZoneType());
+                pt.getResidenceAddress().getPostalZone().setValue(np.getPostalAddress().getPostCode());
 
                 pt.getResidenceAddress().setStreetName(new StreetNameType());
                 pt.getResidenceAddress().getStreetName().setValue(np.getPostalAddress().getAddressLine1());
@@ -282,7 +289,14 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
             case AMOUNT:
                 rType.setAmount(new AmountType());
                 rType.getAmount().setValue(BigDecimal.valueOf(((AmountResponse) response).getAmount()));
-                rType.getAmount().setCurrencyID(((AmountResponse) response).getCurrency());
+                //rType.getAmount().setCurrencyID(((AmountResponse) response).getCurrency());
+                if (((AmountResponse) response).getCurrency() != null) {
+                    rType.getAmount().setCurrencyID(((AmountResponse) response).getCurrency());
+                }
+                // if no currency ID is specified, add a dummy attribute (in order to pass ESPD 1.0.2. conformance tests)
+                else {
+                    rType.getAmount().setCurrencyID("");
+                }
                 return rType;
 
             case INDICATOR:

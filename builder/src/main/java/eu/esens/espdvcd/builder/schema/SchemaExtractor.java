@@ -153,6 +153,7 @@ public interface SchemaExtractor {
         // UBL syntax path: cac:ContractingParty.Party.EndpointID
         if (cd.getElectronicAddressID() != null) {
             EndpointIDType eid = new EndpointIDType();
+            eid.setSchemeAgencyID("EU-COM-GROW");
             eid.setValue(cd.getElectronicAddressID());
             pt.setEndpointID(eid);
         }
@@ -175,8 +176,11 @@ public interface SchemaExtractor {
             at.setCityName(new CityNameType());
             at.getCityName().setValue(cd.getPostalAddress().getCity());
 
-            at.setPostbox(new PostboxType());
-            at.getPostbox().setValue(cd.getPostalAddress().getPostCode());
+            //at.setPostbox(new PostboxType());
+            //at.getPostbox().setValue(cd.getPostalAddress().getPostCode());
+            // UL 2017-10-10: write post code to cbc:PostalZone
+            at.setPostalZone(new PostalZoneType());
+            at.getPostalZone().setValue(cd.getPostalAddress().getPostCode());
 
             at.setCountry(new CountryType());
             // FIXME: the country should be set using this model element; for compatibility the old method cd.getCACountry() is used
@@ -219,6 +223,7 @@ public interface SchemaExtractor {
 
         if (spd.getEndpointID() != null) {
             EndpointIDType eid = new EndpointIDType();
+            eid.setSchemeAgencyID("EU-COM-GROW");
             eid.setValue(spd.getEndpointID());
             pt.setEndpointID(eid);
         }
@@ -226,6 +231,7 @@ public interface SchemaExtractor {
         if (spd.getId() != null) {
             PartyIdentificationType pid = new PartyIdentificationType();
             IDType idt = new IDType();
+            idt.setSchemeAgencyID("EU-COM-GROW");
             idt.setValue(spd.getId());
             pid.setID(idt);
             pt.getPartyIdentification().add(pid);
@@ -385,10 +391,12 @@ public interface SchemaExtractor {
         pplt.setID(new IDType());
 
         //pplt.getID().setValue(caDetails.getProcurementProjectLot());
-        // modification UL_2016-12-21: according to ESPD specification 1.0.2, procurement project lot needs to be "0"
+        //pplt.getID().setValue((eoDetails.getProcurementProjectLot() == null) ||
+        //        eoDetails.getProcurementProjectLot().isEmpty() ? "0" : eoDetails.getProcurementProjectLot());
+
+        // modification UL_2017-10-10: according to ESPD specification 1.0.2, procurement project lot needs to be "0"
         // and attribute schemeAgencyID needs to be set
-        pplt.getID().setValue((eoDetails.getProcurementProjectLot() == null) ||
-                eoDetails.getProcurementProjectLot().isEmpty() ? "0" : eoDetails.getProcurementProjectLot());
+        pplt.getID().setValue("0");
         pplt.getID().setSchemeAgencyID("EU-COM-GROW");
 
         return pplt;
