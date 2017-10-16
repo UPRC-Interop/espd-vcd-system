@@ -287,15 +287,14 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
                 return rType;
 
             case AMOUNT:
-                rType.setAmount(new AmountType());
-                rType.getAmount().setValue(BigDecimal.valueOf(((AmountResponse) response).getAmount()));
-                //rType.getAmount().setCurrencyID(((AmountResponse) response).getCurrency());
-                if (((AmountResponse) response).getCurrency() != null) {
+                if ( ((((AmountResponse) response).getAmount()) != 0) ||
+                        (((AmountResponse) response).getCurrency() != null) ) {
+                    // Only generate a proper response if for at least one of the variables "amount" and
+                    // "currency" a value different from the default is detected.
+
+                    rType.setAmount(new AmountType());
+                    rType.getAmount().setValue(BigDecimal.valueOf(((AmountResponse) response).getAmount()));
                     rType.getAmount().setCurrencyID(((AmountResponse) response).getCurrency());
-                }
-                // if no currency ID is specified, add a dummy attribute (in order to pass ESPD 1.0.2. conformance tests)
-                else {
-                    rType.getAmount().setCurrencyID("");
                 }
                 return rType;
 
@@ -369,12 +368,15 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
                 return rType;
 
             case CODE_COUNTRY:
-                rType.setCode(new TypeCodeType());
-                rType.getCode().setListAgencyID("ISO");
-                rType.getCode().setListID("ISO 3166-1");
-                rType.getCode().setListVersionID("1.0");
-                rType.getCode().setValue(((CountryCodeResponse) response).getCountryCode());
+                if (((CountryCodeResponse) response).getCountryCode() != null) {
+                    rType.setCode(new TypeCodeType());
+                    rType.getCode().setListAgencyID("ISO");
+                    rType.getCode().setListID("ISO 3166-1");
+                    rType.getCode().setListVersionID("1.0");
+                    rType.getCode().setValue(((CountryCodeResponse) response).getCountryCode());
+                }
                 return rType;
+
 
             default:
                 return null;
