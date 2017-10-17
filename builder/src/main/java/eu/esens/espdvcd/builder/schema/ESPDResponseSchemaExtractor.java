@@ -261,9 +261,10 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
         switch (respType) {
 
             case DESCRIPTION:
-                if (((DescriptionResponse) response).getDescription() != null) {
+                String description = ((DescriptionResponse) response).getDescription();
+                if (description != null && !description.isEmpty()) {
                     rType.setDescription(new DescriptionType());
-                    rType.getDescription().setValue(((DescriptionResponse) response).getDescription());
+                    rType.getDescription().setValue(description);
                 }
                 return rType;
 
@@ -287,14 +288,16 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
                 return rType;
 
             case AMOUNT:
-                if ( ((((AmountResponse) response).getAmount()) != 0) ||
-                        (((AmountResponse) response).getCurrency() != null) ) {
+                float amount = ((AmountResponse) response).getAmount();
+                String currency = ((AmountResponse) response).getCurrency();
+                if ( (amount != 0) ||
+                        ( currency != null && !currency.isEmpty() ) ) {
                     // Only generate a proper response if for at least one of the variables "amount" and
                     // "currency" a value different from the default is detected.
 
                     rType.setAmount(new AmountType());
-                    rType.getAmount().setValue(BigDecimal.valueOf(((AmountResponse) response).getAmount()));
-                    rType.getAmount().setCurrencyID(((AmountResponse) response).getCurrency());
+                    rType.getAmount().setValue(BigDecimal.valueOf(amount));
+                    rType.getAmount().setCurrencyID(currency);
                 }
                 return rType;
 
@@ -339,15 +342,16 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
                 return rType;
 
             case CODE:
-                EvidenceURLCodeResponse localResp = ((EvidenceURLCodeResponse) response);
-                if (localResp.getEvidenceURLCode() != null && !localResp.getEvidenceURLCode().isEmpty()) {
+                String evidenceURLCode = ((EvidenceURLCodeResponse) response).getEvidenceURLCode();
+                if (evidenceURLCode != null && !evidenceURLCode.isEmpty()) {
                     rType.setCode(new TypeCodeType());
-                    rType.getCode().setValue(localResp.getEvidenceURLCode());
+                    rType.getCode().setValue(evidenceURLCode);
                 }
                 return rType;
 
             case EVIDENCE_URL:
-                if (((EvidenceURLResponse) response).getEvidenceURL() != null) {
+                String evidenceURL = ((EvidenceURLResponse) response).getEvidenceURL();
+                if (evidenceURL != null && !evidenceURL.isEmpty()) {
                     EvidenceType evType = new EvidenceType();
                     DocumentReferenceType drt = new DocumentReferenceType();
                     drt.setID(new IDType());
@@ -358,9 +362,7 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
                     //drt.getAttachment().getExternalReference().getURI().setValue(((EvidenceURLResponse) response).getEvidenceURL());
                     // UL: modification for handling VCD resources
                     drt.getAttachment().getExternalReference().getURI().setValue(
-                            EvidenceHelper.transformEvidenceURIFromLocalResourceToASiCResource(
-                                    ((EvidenceURLResponse) response).getEvidenceURL()
-                            )
+                            EvidenceHelper.transformEvidenceURIFromLocalResourceToASiCResource(evidenceURL)
                     );
                     evType.getEvidenceDocumentReference().add(drt);
                     rType.getEvidence().add(evType);
@@ -368,12 +370,13 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
                 return rType;
 
             case CODE_COUNTRY:
-                if (((CountryCodeResponse) response).getCountryCode() != null) {
+                String countryCode = ((CountryCodeResponse) response).getCountryCode();
+                if (countryCode != null && !countryCode.isEmpty()) {
                     rType.setCode(new TypeCodeType());
                     rType.getCode().setListAgencyID("ISO");
                     rType.getCode().setListID("ISO 3166-1");
                     rType.getCode().setListVersionID("1.0");
-                    rType.getCode().setValue(((CountryCodeResponse) response).getCountryCode());
+                    rType.getCode().setValue(countryCode);
                 }
                 return rType;
 
