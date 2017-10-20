@@ -278,7 +278,9 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
 
             case QUANTITY:
                 rType.setQuantity(new QuantityType());
-                rType.getQuantity().setValue(BigDecimal.valueOf(((QuantityResponse) response).getQuantity()));
+                //rType.getQuantity().setValue(BigDecimal.valueOf(((QuantityResponse) response).getQuantity()));
+                // UL 2017-10-20: workaround for rounding issues with BigDecimal (e.g. 0.005 became 0.004999999888241291)
+                rType.getQuantity().setValue(new BigDecimal(Float.toString(((QuantityResponse) response).getQuantity())));
                 return rType;
 
             case QUANTITY_INTEGER:
@@ -296,7 +298,9 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
                     // "currency" a value different from the default is detected.
 
                     rType.setAmount(new AmountType());
-                    rType.getAmount().setValue(BigDecimal.valueOf(amount));
+                    //rType.getAmount().setValue(BigDecimal.valueOf(amount));
+                    // UL 2017-10-20: workaround for rounding issues with BigDecimal (e.g. 0.005 became 0.004999999888241291)
+                    rType.getAmount().setValue(new BigDecimal(Float.toString(amount)));
                     rType.getAmount().setCurrencyID(currency);
                 }
                 return rType;
@@ -318,7 +322,9 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
 
             case PERCENTAGE:
                 rType.setPercent(new PercentType());
-                rType.getPercent().setValue(BigDecimal.valueOf(((PercentageResponse) response).getPercentage()));
+                //rType.getPercent().setValue(BigDecimal.valueOf(((PercentageResponse) response).getPercentage()));
+                // UL 2017-10-20: workaround for rounding issues with BigDecimal (e.g. 0.005 became 0.004999999888241291)
+                rType.getPercent().setValue(new BigDecimal(Float.toString(((PercentageResponse) response).getPercentage())));
                 return rType;
 
             case DATE:
@@ -355,6 +361,7 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
                     EvidenceType evType = new EvidenceType();
                     DocumentReferenceType drt = new DocumentReferenceType();
                     drt.setID(new IDType());
+                    drt.getID().setSchemeAgencyID("EU-COM-GROW");
                     drt.getID().setValue(UUID.randomUUID().toString());
                     drt.setAttachment(new AttachmentType());
                     drt.getAttachment().setExternalReference(new ExternalReferenceType());
