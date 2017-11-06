@@ -41,20 +41,30 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
     // Server URL (1st) is the production one (2nd) is the non production one
     // private final String ECERTIS_URL = "https://ec.europa.eu/growth/tools-databases/ecertisrest/";
     private final String ECERTIS_URL = "https://webgate.acceptance.ec.europa.eu/growth/tools-databases/ecertisrest/";
-        
+
     // All available eu criteria
-    private final String ALL_CRITERIA = ECERTIS_URL + "criteria/";
-    
+    private final String ALL_CRITERIA = ECERTIS_URL + "criteria";
+
     // Accept header JSON
     private final String ACCEPT_JSON = "application/json";
-    
+
     // Jackson related Errors
-    private final String ERROR_INVALID_CONTENT = "Error... JSON Input Contains Invalid Content";
-    private final String ERROR_UNEXPECTED_STUCTURE = "Error... JSON Structure does not Match Structure Expected";
-    
+    private static final String ERROR_INVALID_CONTENT = "Error... JSON Input Contains Invalid Content";
+    private static final String ERROR_UNEXPECTED_STUCTURE = "Error... JSON Structure does not Match Structure Expected";
+
     // Contains all eu criteria
     private List<ECertisSelectableCriterion> criterionList;
 
+    // Multilinguality vars
+    private static final String DEFAULT_LANG = "en";
+    private String lang;
+
+    // Multilinguality related errors
+    private static final String ERROR_INVALID_LANGUAGE_CODE = "Error... Provided Language Code %s is not Included in CodeLists";
+    
+    // Country code related erros
+    private static final String ERROR_INVALID_COUNTRY_CODE = "Error... Provided Country Code %s is not Included in CodeLists";
+    
     public enum JurisdictionLevelCodeOrigin {
 
         EUROPEAN(), NATIONAL(), UNKNOWN()
@@ -62,9 +72,14 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
     }
 
     public ECertisCriteriaExtractor() {
-
+        this.lang = DEFAULT_LANG;
     }
 
+    /**
+     * Lazy initialization of European Criteria List 
+     * 
+     * @throws RetrieverException 
+     */
     private void initCriterionList() throws RetrieverException {
 
         // If Not Initialized Yet, Initialize Criterion List
@@ -170,22 +185,29 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
             }
 
         } else {
-            throw new RetrieverException("Error... Country Code " + countryCode + " does not Exist");
+            throw new RetrieverException(String.format(ERROR_INVALID_COUNTRY_CODE, countryCode));
         }
 
         return nationalCriterionTypeList;
     }
 
+    /**
+     * Get a specific criterion (European or National) from e-Certis
+     * 
+     * @param ID The criterion id
+     * @return The Criterion
+     * @throws RetrieverException 
+     */
     @Override
     public ECertisSelectableCriterion getCriterion(String ID)
             throws RetrieverException {
-        
+
         ECertisSelectableCriterionImpl theCriterion = null;
 
         try {
-            
+
             String jsonString = getFromECertis(
-                    ALL_CRITERIA + ID + "/",
+                    ALL_CRITERIA + "/" + ID,
                     ACCEPT_JSON);
 
             // Pass json string to mapper
@@ -203,7 +225,6 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
             // String prettyCt = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(MyModelObject);
             // System.out.println(prettyCt); 
             // ---------------------------------------------------------------------------------------------------- 
-            
             // String prettyCt = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(theCriterion);
             // System.out.println(prettyCt);
         } catch (IOException ex) {
@@ -219,8 +240,8 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
 
             Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.SEVERE, null, ex);
             throw new RetrieverException(message, ex);
-        } 
-        
+        }
+
         return theCriterion;
     }
 
@@ -248,13 +269,19 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
         return getCriterion(c.getParentCriterion().getID());
     }
 
+    /**
+     * Retrieve the ids of all European Criteria from e-Certis.
+     * 
+     * @return A list with the ids
+     * @throws RetrieverException 
+     */
     private List<String> getAllEuropeanCriteriaID()
             throws RetrieverException {
         List<String> IDList = new ArrayList<>();
-        
+
         try {
             String jsonString = getFromECertis(
-                    ALL_CRITERIA, 
+                    ALL_CRITERIA,
                     ACCEPT_JSON);
 
             ObjectMapper mapper = new ObjectMapper();
@@ -265,7 +292,7 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
                 String tempID = criterion.path("ID").asText();
                 IDList.add(tempID);
             }
-        
+
         } catch (IOException ex) {
             String message = ex.getMessage();
 
@@ -279,12 +306,17 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
 
             Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.SEVERE, null, ex);
             throw new RetrieverException(message, ex);
-        } 
+        }
 
         return IDList;
     }
-
-    // Extract Given Criterion JurisdictionLevelCode Origin
+    
+    /**
+     * Extract Given Criterion JurisdictionLevelCode Origin (European or National)
+     * 
+     * @param c The criterion
+     * @return The criterion's jurisdiction level code origin
+     */
     private JurisdictionLevelCodeOrigin extractCriterionOrigin(ECertisSelectableCriterion c) {
 
         JurisdictionLevelCodeOrigin origin = JurisdictionLevelCodeOrigin.UNKNOWN;
@@ -302,22 +334,69 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
         }
         return origin;
     }
-
-    // Use Codelists in order to check if given Country Code is Valid
+    
+    /**
+     * Check if given country code exists in the codelists
+     * 
+     * @param countryCode The country code (ISO 3166-1 2A:2006)
+     * @return true if exists, false if not
+     */
     private boolean isCountryCodeExist(String countryCode) {
         return CodeListsVersioner.ForVersion1.COUNTRY_IDENTIFICATION
                 .containsId(countryCode.toUpperCase());
     }
+
+    /**
+     * Check if given language code exists in the codelists
+     *
+     * @param languageCode The European language code
+     * @return true if exists, false if not
+     */
+    private boolean isLanguageCodeExist(String languageCode) {
+        return CodeListsVersioner.ForVersion1.LANGUAGE_CODE_EU
+                .containsId(languageCode.toUpperCase());
+    }
+
+    /**
+     * Set the current language
+     * 
+     * @param lang The European language code
+     * @throws RetrieverException In case of an invalid language code
+     */
+    public void setLang(String lang) throws RetrieverException {
+        if (isLanguageCodeExist(lang)) {
+            this.lang = lang;
+        } else {
+            throw new RetrieverException(String.format(ERROR_INVALID_LANGUAGE_CODE, lang));
+        }
+    }
+
+    /**
+     * Initialize language back to default (english).
+     * 
+     */
+    public void initLang() {
+        lang = DEFAULT_LANG;
+    }
     
-    // Open connection with e - Certis service in order to retrieve data
+    /**
+     * Open connection with e - Certis service in order to retrieve data
+     * 
+     * @param url The e-Certis service url
+     * @param accept The HTTP Accept header.
+     * -> application/xml for data in XML form, 
+     * -> application/json for data in JSON form.
+     * @return String representation of retrieved data
+     * @throws RetrieverException 
+     */
     private String getFromECertis(String url, String accept) throws RetrieverException {
         BufferedReader br = null;
         HttpURLConnection connection = null;
         StringBuilder builder = new StringBuilder();
-        
+
         try {
-            URL theUrl = new URL(url);            
-            
+            URL theUrl = new URL(url + "?lang=" + lang);
+
             connection = (HttpURLConnection) theUrl.openConnection();
             connection.setRequestMethod("GET");
             connection.setRequestProperty("Accept", accept);
@@ -358,7 +437,7 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
                 connection.disconnect();
             }
         }
-        
+
         return builder.toString();
     }
 

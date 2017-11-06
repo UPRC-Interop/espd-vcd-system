@@ -16,7 +16,7 @@ import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import java.util.List;
 import java.util.UUID;
 
-public class DetailsPanel extends Panel {
+public final class DetailsPanel extends Panel {
 
     VerticalLayout detailsPanelLayout = new VerticalLayout();
     Panel requirementGroupsPanel = new Panel();

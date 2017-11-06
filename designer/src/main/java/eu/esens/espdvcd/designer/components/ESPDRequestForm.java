@@ -3,7 +3,7 @@ package eu.esens.espdvcd.designer.components;
 import com.vaadin.data.HasValue.ValueChangeEvent;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.*;
-import eu.esens.espdvcd.codelist.Codelists;
+import eu.esens.espdvcd.codelist.CodeListsVersioner;
 import eu.esens.espdvcd.designer.components.windows.CriterionGroupWindow;
 import eu.esens.espdvcd.designer.components.windows.CriterionWindow;
 import eu.esens.espdvcd.designer.views.Master;
@@ -152,7 +152,7 @@ public class ESPDRequestForm extends ESPDForm {
             String key = entry.getKey();
             List<CriterionForm> criterionForms = entry.getValue();
 
-            String fullTypeCodeName = Codelists.forV1.CriteriaType.getValueForId(key);
+            String fullTypeCodeName = CodeListsVersioner.ForVersion1.CRITERIA_TYPE.getValueForId(key);
 
             if (fullTypeCodeName == null) {
                 // Fallback to display the type code instead of real name

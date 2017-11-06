@@ -13,31 +13,30 @@ import com.vaadin.ui.VerticalLayout;
 import eu.esens.espdvcd.model.CADetails;
 import eu.esens.espdvcd.model.ESPDRequest;
 
-public class CADetailsForm extends VerticalLayout {
-    private Panel panelInformationAboutPublication;
-    private VerticalLayout layoutInformationAboutPublication;
-    private FormLayout layoutFormInformatinAboutPublication;
-    private Panel panelIdentifyProcurer;
-    private VerticalLayout layoutIdentifyProcurer;
-    private FormLayout layoutIdentifyProcurerOfficialName;
-    private FormLayout layoutIdentifyProcurerCountry;
-    private Panel panelInformationProcurementProcedure;
-    private FormLayout layoutInformationProcurementProcedure;
-    private Label informationAboutPublicationText = new Label("For procurement procedures in which a call "
+public final class CADetailsForm extends VerticalLayout {
+    
+    private final Panel panelInformationAboutPublication;
+    private final VerticalLayout layoutInformationAboutPublication;
+    private final FormLayout layoutFormInformatinAboutPublication;
+    private final Panel panelIdentifyProcurer;
+    private final VerticalLayout layoutIdentifyProcurer;
+    private final FormLayout layoutIdentifyProcurerOfficialName;
+    private final FormLayout layoutIdentifyProcurerCountry;
+    private final Panel panelInformationProcurementProcedure;
+    private final FormLayout layoutInformationProcurementProcedure;
+    private final Label informationAboutPublicationText = new Label("For procurement procedures in which a call "
             + "for competition has been published in the Official Journal of the European Union, the information "
             + "required under Part I will be automatically retrieved, provided that the electronic ESPD-service "
             + "is used to generate and fill in the ESPD. Reference of the relevant notice published in the "
             + "Official Journal of the European Union:");
 
     @PropertyId("CACountry")
-    private CountryComboBox caCountry;
+    private final CountryComboBox caCountry;
     @PropertyId("CAOfficialName")
-    private TextField caOfficialName;
-    private TextField procurementProcedureTitle;
-    private TextArea procurementProcedureDesc;
-    private TextField procurementProcedureFileReferenceNo;
-
-    
+    private final TextField caOfficialName;
+    private final TextField procurementProcedureTitle;
+    private final TextArea procurementProcedureDesc;
+    private final TextField procurementProcedureFileReferenceNo;
     
     //Optionals, part of Core Vocabulary
     private TextField websiteURI;
@@ -140,7 +139,7 @@ public class CADetailsForm extends VerticalLayout {
              
 
         final Binder<CADetails> binder = new BeanValidationBinder<>(CADetails.class);
-        binder.bindInstanceFields(this);
+        binder.bindInstanceFields(CADetailsForm.this);
         binder.setBean(caDetails);
         binder.setReadOnly(readOnly);
     }
