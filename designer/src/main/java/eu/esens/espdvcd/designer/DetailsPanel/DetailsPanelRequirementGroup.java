@@ -15,7 +15,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
-public class DetailsPanelRequirementGroup extends VerticalLayout {
+public final class DetailsPanelRequirementGroup extends VerticalLayout {
 
     Criterion parentCriterion;
     RequirementGroup parentRequirementGroup;

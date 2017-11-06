@@ -5,19 +5,17 @@ repositories {
     maven {
         url "http://maven.vaadin.com/vaadin-addons"
     }
-    
     maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-    
 }
 
 buildscript {
-  repositories {
-    jcenter()
-  }
+    repositories {
+        jcenter()
+    }
 
-  dependencies {
-    classpath 'org.akhikhl.gretty:gretty:1.4.2'
-  }
+    dependencies {
+        classpath 'org.akhikhl.gretty:gretty:1.4.2'
+    }
 }
 
 apply plugin: 'org.akhikhl.gretty'
@@ -27,7 +25,7 @@ gretty {
     contextPath             = '/'
     scanInterval            = 1
     servletContainer        = 'tomcat8'
-//    managedClassReload      = true
+    //    managedClassReload      = true
     fastReload              = true
     recompileOnSourceChange = true
     reloadOnClassChange     = true
@@ -39,7 +37,7 @@ gretty {
     fileLogEnabled          = true
     logDir                  = "${project.buildDir}"
     logFileName             = "${project.name}"
-   // serverConfigFile        = "src/main/webapp/WEB-INF/jetty-web.xml"
+    // serverConfigFile        = "src/main/webapp/WEB-INF/jetty-web.xml"
     scanner                 = "jdk"
     
     jvmArgs= ['-Dorg.eclipse.jetty.annotations.maxWait=120']

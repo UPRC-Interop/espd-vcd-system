@@ -9,7 +9,7 @@ import eu.esens.espdvcd.model.requirement.RequirementGroup;
 /**
  * Created by ixuz on 6/23/16.
  */
-public class DetailsPanelRequirement extends VerticalLayout {
+public final class DetailsPanelRequirement extends VerticalLayout {
 
     RequirementGroup requirementGroup;
     Requirement requirement;

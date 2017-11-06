@@ -10,7 +10,7 @@ import eu.esens.espdvcd.model.PostalAddress;
 import java.util.Arrays;
 import java.util.List;
 
-public class EODetailsForm extends Panel {
+public final class EODetailsForm extends Panel {
 
     EODetails eoDetails = null;
 

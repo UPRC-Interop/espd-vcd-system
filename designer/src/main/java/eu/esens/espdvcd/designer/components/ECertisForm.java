@@ -11,14 +11,12 @@ import eu.esens.espdvcd.model.LegislationReference;
 import eu.esens.espdvcd.model.retriever.ECertisSelectableCriterion;
 import eu.esens.espdvcd.retriever.criteria.ECertisCriteriaExtractor;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
-import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.CriterionType;
-import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.LegislationType;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.bind.JAXB;
 
-public class ECertisForm extends VerticalLayout {
+public final class ECertisForm extends VerticalLayout {
 
     private final Panel panel = new Panel();
     private final VerticalLayout panelContent = new VerticalLayout();
@@ -34,7 +32,7 @@ public class ECertisForm extends VerticalLayout {
     public ECertisForm(Criterion c, EODetails eo) {
         this.c = c;
         this.eoDetails = eo;
-        
+
         setMargin(true);
         setStyleName("legislationReferenceForm-layout");
         setWidth("100%");
@@ -47,18 +45,19 @@ public class ECertisForm extends VerticalLayout {
         panel.setIcon(FontAwesome.CHEVRON_RIGHT);
         panelContent.setMargin(true);
         panelContent.setVisible(false);
-        this.addLayoutClickListener(this::onPanelClick);      
-      
+        this.addLayoutClickListener(this::onPanelClick);
+
     }
+
     private void fetchData() {
-            
+
         ECertisCriteriaExtractor ce = new ECertisCriteriaExtractor();
 
-          try {
+        try {
             List<ECertisSelectableCriterion> cList = ce.getNationalCriterionMapping(c.getID(), eoDetails.getPostalAddress().getCountryCode().toLowerCase());
             if (!cList.isEmpty()) {
                 ECertisSelectableCriterion ct = cList.get(0);
-                
+
                 JAXB.marshal(ct, System.out);
                 title.setCaption("National Criterion Title");
                 title.setValue(ct.getName());
@@ -71,21 +70,21 @@ public class ECertisForm extends VerticalLayout {
                 }
 
                 if (ct.getLegislationReference() != null) {
- 
+
                     LegislationReference lt = ct.getLegislationReference();
 
                     jurisdictionLevelCode.setCaption("Jurisdiction Level");
                     jurisdictionLevelCode.setValue(lt.getJurisdictionLevelCode());
                     panelContent.addComponent(jurisdictionLevelCode);
-                  
+
                     legislationDescription.setCaption("Legislation Description");
                     legislationDescription.setValue(lt.getDescription());
                     panelContent.addComponent(legislationDescription);
-                    
+
                     article.setCaption("Article");
                     article.setValue(lt.getArticle());
                     panelContent.addComponent(article);
-                    
+
                     URI.setCaption("Legislation Reference URI");
                     URI.setValue(lt.getURI());
                     panelContent.addComponent(URI);
@@ -107,13 +106,12 @@ public class ECertisForm extends VerticalLayout {
             title.setValue(ex.getMessage());
             panelContent.addComponent(title);
 
-
         }
     }
-    
+
     private void onPanelClick(LayoutEvents.LayoutClickEvent event) {
         if (panelContent.isVisible()) {
-            panelContent.setVisible(false);            
+            panelContent.setVisible(false);
             panelContent.removeAllComponents();
         } else {
             fetchData();
