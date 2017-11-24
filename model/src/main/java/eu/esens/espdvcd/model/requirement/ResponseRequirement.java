@@ -3,8 +3,7 @@ package eu.esens.espdvcd.model.requirement;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.requirement.response.Response;
 import eu.esens.espdvcd.model.requirement.response.DescriptionResponse;
-import eu.esens.espdvcd.model.Evidence;
-import eu.esens.espdvcd.model.requirement.response.ResponseFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 
