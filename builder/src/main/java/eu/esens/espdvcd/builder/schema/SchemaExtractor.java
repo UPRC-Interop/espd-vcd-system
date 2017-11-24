@@ -390,13 +390,9 @@ public interface SchemaExtractor {
         ProcurementProjectLotType pplt = new ProcurementProjectLotType();
         pplt.setID(new IDType());
 
-        //pplt.getID().setValue(caDetails.getProcurementProjectLot());
-        //pplt.getID().setValue((eoDetails.getProcurementProjectLot() == null) ||
-        //        eoDetails.getProcurementProjectLot().isEmpty() ? "0" : eoDetails.getProcurementProjectLot());
+        pplt.getID().setValue((eoDetails.getProcurementProjectLot() == null) ||
+                eoDetails.getProcurementProjectLot().isEmpty() ? "0" : eoDetails.getProcurementProjectLot());
 
-        // modification UL_2017-10-10: according to ESPD specification 1.0.2, procurement project lot needs to be "0"
-        // and attribute schemeAgencyID needs to be set
-        pplt.getID().setValue("0");
         pplt.getID().setSchemeAgencyID("EU-COM-GROW");
 
         return pplt;
