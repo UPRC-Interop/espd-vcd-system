@@ -2,6 +2,7 @@ package eu.esens.espdvcd.codelist;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class CodeListsTest {
@@ -16,33 +17,37 @@ public class CodeListsTest {
     @Test
     public void testGC() {
 
-        // v1
-        Assert.assertEquals("Greece", CodeListsVersioner.ForVersion1.COUNTRY_IDENTIFICATION.getValueForId("GR"));
-        Assert.assertEquals("GR", CodeListsVersioner.ForVersion1.COUNTRY_IDENTIFICATION.getIdForData("Greece"));
-
-        Assert.assertEquals("MT", CodeListsVersioner.ForVersion1.TENDERING_ROLE.getIdForData("Main tenderer"));
-        Assert.assertEquals("Main tenderer", CodeListsVersioner.ForVersion1.TENDERING_ROLE.getValueForId("MT"));
-
-        // v2
-        Assert.assertEquals("Andorra", CodeListsVersioner.ForVersion2.COUNTRY_IDENTIFICATION.getValueForId("AD"));
-        Assert.assertEquals("AD", CodeListsVersioner.ForVersion2.COUNTRY_IDENTIFICATION.getIdForData("Andorra"));
-
-        Assert.assertEquals("Group member", CodeListsVersioner.ForVersion2.EO_ROLE_TYPE.getValueForId("GM"));
-        Assert.assertEquals("GM", CodeListsVersioner.ForVersion2.EO_ROLE_TYPE.getIdForData("Group member"));
+        Assert.assertEquals("Greece", MultilingualCodeList.CountryIdentification.getNameForId("GR"));
+        Assert.assertEquals("GR", MultilingualCodeList.CountryIdentification.getIdForData("Greece"));
+        
+        Assert.assertEquals("SCLE", MultilingualCodeList.EORoleType.getIdForData("Sole contractor / Lead entity"));
+        Assert.assertEquals("Sole contractor / Lead entity", MultilingualCodeList.EORoleType.getNameForId("SCLE"));
+        
+        Assert.assertEquals("LOT_ALL", MultilingualCodeList.BidType.getIdForData("Submission for all lots"));
+        Assert.assertEquals("Submission for all lots", MultilingualCodeList.BidType.getNameForId("LOT_ALL"));
+        
+        MultilingualCodeList.BidType.setLang("ell");
+        
+        String nameInEll;
+        
+        System.out.println(nameInEll = MultilingualCodeList.BidType.getNameForId("LOT_ALL"));
+        System.out.println(MultilingualCodeList.BidType.getIdForData(nameInEll));
     }
 
+//    @Test
+//    public void testBiMap() {
+//
+//        // v1
+//        Assert.assertEquals("Greece", MultilingualCodeList.CountryIdentification.getBiMap().get("GR"));
+//        Assert.assertEquals("GR", MultilingualCodeList.CountryIdentification.getBiMap().inverse().get("Greece"));
+//    }    
+       
     @Test
-    public void testBiMap() {
-
-        // v1
-        Assert.assertEquals("Greece", CodeListsVersioner.ForVersion1.COUNTRY_IDENTIFICATION.getBiMap().get("GR"));
-        Assert.assertEquals("GR", CodeListsVersioner.ForVersion1.COUNTRY_IDENTIFICATION.getBiMap().inverse().get("Greece"));
-
-        // v2
-        Assert.assertEquals("Andorra", CodeListsVersioner.ForVersion2.COUNTRY_IDENTIFICATION.getBiMap().get("AD"));
-        Assert.assertEquals("AD", CodeListsVersioner.ForVersion2.COUNTRY_IDENTIFICATION.getBiMap().inverse().get("Andorra"));
+    public void testProjectTypeGC() {
+        System.out.println(MultilingualCodeList.ProjectType.getBiMap().isEmpty());
     }
-
+    
+    @Ignore
     @Test
     public void testAllGC() {
 
@@ -51,19 +56,7 @@ public class CodeListsTest {
         // v1
         try {
 
-            for (CodeLists c : CodeListsVersioner.ForVersion1.getCodeLists()) {
-                theCodelist = c.getConstantName();
-                Assert.assertNotNull(!c.getBiMap().isEmpty());
-            }
-
-        } catch (Exception e) {
-            Assert.fail("Error in CodeList " + theCodelist + ": " + e.getMessage());
-        }
-
-        //v2
-        try {
-
-            for (CodeLists c : CodeListsVersioner.ForVersion2.getCodeLists()) {
+            for (CodeList c : MultilingualCodeList.values()) {
                 theCodelist = c.getConstantName();
                 Assert.assertNotNull(!c.getBiMap().isEmpty());
             }
