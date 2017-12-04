@@ -4,7 +4,7 @@ import com.google.common.collect.BiMap;
 
 /**
  * CodeList interface should be implemented by all codeLists implementation 
- enum classes in order to provide an "extendable" enum design. Normally every
+ * enum classes in order to provide an "extendable" enum design. Normally every
  * implementation class represents a codelists version.
  * 
  */
@@ -16,9 +16,7 @@ public interface CodeList {
         
     String getConstantName();
     
-    String getNameForId(String id);
-    
-    String getDescriptionForId(String id);
+    String getDataForId(String id);
     
     String getIdForData(String data);
     

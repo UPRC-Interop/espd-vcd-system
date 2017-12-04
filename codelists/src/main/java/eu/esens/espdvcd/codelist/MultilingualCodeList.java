@@ -144,13 +144,8 @@ public enum MultilingualCodeList implements CodeList {
     }
 
     @Override
-    public final String getNameForId(String id) {
-        return getInstance().getNameForId(id, lang);
-    }
-
-    @Override
-    public final String getDescriptionForId(String id) {
-        return getInstance().getDescriptionForId(id, lang);
+    public final String getDataForId(String id) {
+        return getInstance().getDataForId(id, lang);
     }
 
     /**

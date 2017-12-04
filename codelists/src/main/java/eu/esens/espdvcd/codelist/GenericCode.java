@@ -95,10 +95,6 @@ public class GenericCode {
                     String nameENG = r.getValue().stream()
                             .filter(c -> ((Column) c.getColumnRef()).getId().equals("name-eng"))
                             .findAny().get().getSimpleValue().getValue();
-                    
-                    String descENG = r.getValue().stream()
-                            .filter(c -> ((Column) c.getColumnRef()).getId().equals("description-eng"))
-                            .findAny().get().getSimpleValue().getValue();
 
                     String nameBUL = r.getValue().stream()
                             .filter(c -> ((Column) c.getColumnRef()).getId().equals("name-bul"))
@@ -219,8 +215,6 @@ public class GenericCode {
                     currentRow.getNameMap().put("fin", nameFIN);
                     currentRow.getNameMap().put("swe", nameSWE);
                     
-                    currentRow.getDescriptionMap().put("eng", descENG);
-                    
                     sourceMap.put(id, currentRow);
                 });
 
@@ -231,12 +225,8 @@ public class GenericCode {
     protected final BiMap<String, GenericCode.CodelistRow> getBiMap() {
         return clBiMap;
     }
-    
-    protected final String getDescriptionForId(String id, String lang) {
-        return clBiMap.get(id).getDescriptionMap().get(lang.toLowerCase());
-    }
-    
-    protected final String getNameForId(String id, String lang) {
+        
+    protected final String getDataForId(String id, String lang) {
         return clBiMap.get(id).getNameMap().get(lang.toLowerCase());
     }
     
@@ -259,7 +249,6 @@ public class GenericCode {
         
         private String id;
         private Map<String, String> nameMap;
-        private Map<String, String> descriptionMap;
 
         public CodelistRow(String id) {
             this.id = id;
@@ -278,13 +267,6 @@ public class GenericCode {
                 nameMap = new LinkedHashMap<>();
             }
             return nameMap;
-        }
-
-        public Map<String, String> getDescriptionMap() {
-            if (descriptionMap == null) {
-                descriptionMap = new LinkedHashMap<>();
-            }
-            return descriptionMap;
         }
         
     }
