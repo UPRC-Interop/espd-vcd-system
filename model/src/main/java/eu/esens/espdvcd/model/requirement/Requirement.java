@@ -2,7 +2,6 @@ package eu.esens.espdvcd.model.requirement;
 
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.requirement.response.Response;
-
 import java.io.Serializable;
 import java.util.List;
 
@@ -31,7 +30,4 @@ public interface Requirement extends Serializable {
 
     void setResponse(Response response);
 
-    List<Evidence> getEvidences();
-
-    void setEvidences(List<Evidence> evidences);
 }

@@ -1,19 +1,9 @@
 package eu.esens.espdvcd.builder.model;
 
-import eu.esens.espdvcd.model.requirement.response.EvidenceURLResponse;
 import eu.esens.espdvcd.model.requirement.response.Response;
-import eu.esens.espdvcd.model.requirement.response.evidence.EvidenceIssuerParty;
+import eu.esens.espdvcd.model.EvidenceIssuerDetails;
 import eu.esens.espdvcd.model.requirement.response.evidence.VCDEvidenceResponse;
-import grow.names.specification.ubl.schema.xsd.espd_commonaggregatecomponents_1.EconomicOperatorPartyType;
-import grow.names.specification.ubl.schema.xsd.espd_commonaggregatecomponents_1.NaturalPersonType;
-import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
-import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.ResponseType;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.stream.Collectors;
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PersonType;
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ProcurementProjectLotType;
 
 /**
  * Created by Ulf Lotzmann on 04/05/2017.
@@ -119,8 +109,8 @@ public class VCDResponseModelExtractor extends ESPDResponseModelExtractor {
             }
 
 
-            EvidenceIssuerParty issuerParty = new EvidenceIssuerParty();
-            eResp.setIssuerParty(issuerParty);
+            EvidenceIssuerDetails issuerParty = new EvidenceIssuerDetails();
+            eResp.setEvidenceIssuer(issuerParty);
 
             if (res.getEvidence().get(0).getEvidenceIssuerParty() != null) {
 

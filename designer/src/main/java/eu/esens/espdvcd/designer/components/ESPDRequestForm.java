@@ -43,6 +43,7 @@ public class ESPDRequestForm extends ESPDForm {
 
         // Page 1 - Procedure
         page1 = newPage("Information concerning the procurement procedure", "Procedure");
+        page1.setWidth(1000, Unit.PIXELS);
         page1.addComponent(new CADetailsForm(espdRequest, readOnly));
 
 

@@ -53,8 +53,14 @@ public class ResponseFormFactory {
                 return periodResponseForm;
             case EVIDENCE_URL:
                 EvidenceURLResponse evidenceURLResponse = (EvidenceURLResponse) requirementResponse;
-                EvidenceURLResponseForm evidenceURLResponseForm = new EvidenceURLResponseForm(evidenceURLResponse, caption, displayEvidences, readOnly);
-                return evidenceURLResponseForm;
+                if (displayEvidences == 0) {
+                    ESPDEvidenceURLResponseForm evidenceURLResponseForm = new ESPDEvidenceURLResponseForm(evidenceURLResponse, caption, readOnly);
+                    return evidenceURLResponseForm;
+                }
+                else {
+                    EvidenceURLResponseForm evidenceURLResponseForm = new EvidenceURLResponseForm(evidenceURLResponse, caption, displayEvidences, readOnly);
+                    return evidenceURLResponseForm;
+                }
             case CODE:
                 EvidenceURLCodeResponse evidenceURLCodeResponse = (EvidenceURLCodeResponse) requirementResponse;
                 EvidenceURLCodeResponseForm evidenceURLCodeResponseForm = new EvidenceURLCodeResponseForm(evidenceURLCodeResponse, caption, readOnly);

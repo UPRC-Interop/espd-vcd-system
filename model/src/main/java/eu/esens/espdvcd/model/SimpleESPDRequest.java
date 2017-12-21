@@ -26,7 +26,7 @@ public class SimpleESPDRequest implements ESPDRequest {
     
     private static final String SELECTION_REGEXP = "^CRITERION.SELECTION.+";
     private static final String EXCLUSION_REGEXP = "^CRITERION.EXCLUSION.+";
-    private static final String EO_RELATED_REGEXP = "^CRITERION.OTHER.EO_DATA.+";
+    private static final String EO_RELATED_REGEXP = "(?!.*MEETS_THE_OBJECTIVE*)^CRITERION.OTHER.EO_DATA.+";
     private static final String REDUCTION_OF_CANDIDATES_REGEXP = "^CRITERION.OTHER.EO_DATA.MEETS_THE_OBJECTIVE*";   
         
     public SimpleESPDRequest() {

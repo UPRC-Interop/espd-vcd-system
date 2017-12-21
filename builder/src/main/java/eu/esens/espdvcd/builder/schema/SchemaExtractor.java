@@ -100,6 +100,8 @@ public interface SchemaExtractor {
 
             dr.setDocumentTypeCode(createDocumentTypeCode("TED_CN"));
 
+            dr.setDocumentType(createDocumentType("")); // to be filled with official description, when available
+
             if (cd.getProcurementProcedureTitle() != null || cd.getProcurementProcedureDesc() != null) {
                 dr.setAttachment(new AttachmentType());
 
@@ -149,6 +151,14 @@ public interface SchemaExtractor {
         //pt.getPostalAddress().setCountry(new CountryType());
         //pt.getPostalAddress().getCountry().setIdentificationCode(createISOCountryIdCodeType(cd.getCACountry()));
 
+
+        if (cd.getID() != null) {
+            PartyIdentificationType pit = new PartyIdentificationType();
+            pit.setID(new IDType());
+            pit.getID().setValue(cd.getID());
+            pit.getID().setSchemeAgencyID("EU-COM-GROW");
+            pt.getPartyIdentification().add(pit);
+        }
 
         // UBL syntax path: cac:ContractingParty.Party.EndpointID
         if (cd.getElectronicAddressID() != null) {
@@ -212,7 +222,7 @@ public interface SchemaExtractor {
         return cpp;
     }
 
-    default ServiceProviderPartyType  extractServiceProviderPartyType(ServiceProviderDetails spd) {
+    default ServiceProviderPartyType extractServiceProviderPartyType(ServiceProviderDetails spd) {
         if (spd == null) {
             return null;
         }
@@ -353,6 +363,12 @@ public interface SchemaExtractor {
 
         dtc.setValue(code);
         return dtc;
+    }
+
+    default DocumentTypeType createDocumentType(String type) {
+        DocumentTypeType dtt = new DocumentTypeType();
+        dtt.setValue(type);
+        return dtt;
     }
 
     default IDType createCustomSchemeIDIDType(String id, String schemeId) {

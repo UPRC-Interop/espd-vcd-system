@@ -100,16 +100,6 @@ public class RequestRequirement implements Requirement {
     }
 
     @Override
-    public List<Evidence> getEvidences() {
-        throw new UnsupportedOperationException("Not supported in ESPD request.");
-    }
-
-    @Override
-    public void setEvidences(List<Evidence> evidences) {
-        throw new UnsupportedOperationException("Not supported in ESPD request.");
-    }
-
-    @Override
     public void setResponseDataType(ResponseTypeEnum responseDataType) {
         this.responseDataType = responseDataType;
     }

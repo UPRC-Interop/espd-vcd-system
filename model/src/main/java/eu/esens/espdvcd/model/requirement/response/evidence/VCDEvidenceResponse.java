@@ -1,5 +1,6 @@
 package eu.esens.espdvcd.model.requirement.response.evidence;
 
+import eu.esens.espdvcd.model.EvidenceIssuerDetails;
 import eu.esens.espdvcd.model.requirement.response.EvidenceURLResponse;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -142,9 +143,9 @@ public class VCDEvidenceResponse extends EvidenceURLResponse {
      * Cardinality: 0..1<br>
      * InfReqID: <br>
      * BusReqID: <br>
-     * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.Response. Evidence.EvidenceIssuerParty<br>
+     * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.Response. Evidence.EvidenceIssuerDetails<br>
      */
-    private EvidenceIssuerParty issuerParty;
+    private EvidenceIssuerDetails evidenceIssuer;
 
 
     public VCDEvidenceResponse() {
@@ -198,12 +199,12 @@ public class VCDEvidenceResponse extends EvidenceURLResponse {
         this.description = description;
     }
 
-    public EvidenceIssuerParty getIssuerParty() {
-        return issuerParty;
+    public EvidenceIssuerDetails getEvidenceIssuer() {
+        return evidenceIssuer;
     }
 
-    public void setIssuerParty(EvidenceIssuerParty issuerParty) {
-        this.issuerParty = issuerParty;
+    public void setEvidenceIssuer(EvidenceIssuerDetails evidenceIssuer) {
+        this.evidenceIssuer = evidenceIssuer;
     }
 }
 

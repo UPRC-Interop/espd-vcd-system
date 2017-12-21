@@ -16,6 +16,19 @@ public class CADetails implements Serializable{
     private static final long serialVersionUID = -2251052431953226768L;
 
     /**
+     * Contracting body identifier
+     * <p>
+     * The national identifier of a contracting body as it is legally registered (e.g. VAT identification, such as KBO).
+     * <p>
+     * Data type: Identifier<br>
+     * Cardinality: 0..1<br>
+     * InfReqID: tir70-028<br>
+     * BusReqID: tbr70-001<br>
+     * UBL syntax path: cac: ContractingParty.Party.PartyIdentification<br>
+     */
+    private String ID;
+
+    /**
      * Contracting body name
      * <p>
      * The name of the contracting body as it is registered.
@@ -103,8 +116,9 @@ public class CADetails implements Serializable{
      * BusReqID: tbr92-011<br>
      * UBL syntax path: cac:ContractingParty.Party.PostalAddress.Country.IdentificationCode<br>
      */
-    @NotNull
-    private String caCountry;
+    //@NotNull
+    //private String caCountry;
+    // FIXME: delete - element in PostalAdress is now used
 
     /**
      * Contracting body electronic address identifier
@@ -202,12 +216,20 @@ public class CADetails implements Serializable{
         this.procurementProcedureFileReferenceNo = procurementProcedureFileReferenceNo;
     }
 
+    @Deprecated
     public String getCACountry() {
-        return caCountry;
+        if (postalAddress != null) {
+            return postalAddress.getCountryCode();
+        }
+        return null;//caCountry;
     }
 
+    @Deprecated
     public void setCACountry(String caCountry) {
-        this.caCountry = caCountry;
+        if (postalAddress != null) {
+            postalAddress.setCountryCode(caCountry);
+        }
+        //this.caCountry = caCountry;
     }
 
     public String getProcurementPublicationNumber() {
@@ -248,5 +270,13 @@ public class CADetails implements Serializable{
 
     public void setContactingDetails(ContactingDetails contactingDetails) {
         this.contactingDetails = contactingDetails;
+    }
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
     }
 }

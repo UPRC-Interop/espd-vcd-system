@@ -10,17 +10,7 @@ import java.util.UUID;
 
 /**
  *
- * documentation scheme of data fields:
- * <p>
- * name
- * <p>
- * descr
- * <p>
- * Data type: <br>
- * Cardinality: <br>
- * InfReqID: <br>
- * BusReqID: <br>
- * UBL syntax path: <br>
+ * Criterion
  *
  *
  * Created by Ulf Lotzmann on 05/03/2016.

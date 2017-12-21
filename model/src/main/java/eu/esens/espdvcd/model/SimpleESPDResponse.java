@@ -6,7 +6,7 @@ import java.net.URL;
 import java.util.List;
 
 /**
- * TODO: Add description.
+ * POJO implementation of {@link ESPDResponse}.
  *
  */
 public class SimpleESPDResponse extends SimpleESPDRequest implements ESPDResponse {

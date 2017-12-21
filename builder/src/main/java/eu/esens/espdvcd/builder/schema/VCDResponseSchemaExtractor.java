@@ -1,41 +1,25 @@
 package eu.esens.espdvcd.builder.schema;
 
 import eu.esens.espdvcd.builder.EvidenceHelper;
-import eu.esens.espdvcd.model.requirement.response.EvidenceURLResponse;
+import eu.esens.espdvcd.model.EvidenceIssuerDetails;
 import eu.esens.espdvcd.model.requirement.response.Response;
-import eu.esens.espdvcd.model.requirement.response.evidence.EvidenceIssuerParty;
 import eu.esens.espdvcd.model.requirement.response.evidence.VCDEvidenceResponse;
-import grow.names.specification.ubl.schema.xsd.espd_commonaggregatecomponents_1.EconomicOperatorPartyType;
-import grow.names.specification.ubl.schema.xsd.espd_commonaggregatecomponents_1.NaturalPersonType;
-import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
-import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementType;
-import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.ResponseType;
 import isa.names.specification.ubl.schema.xsd.cev_commonbasiccomponents_1.IndicatorType;
 import isa.names.specification.ubl.schema.xsd.cev_commonaggregatecomponents_1.EvidenceType;
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+
 import java.util.UUID;
-import java.util.stream.Collectors;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeConstants;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.AddressType;
+
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.AttachmentType;
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ContactType;
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.CountryType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.DocumentReferenceType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.DocumentTypeCodeType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ExternalReferenceType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PartyIdentificationType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PartyNameType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PartyType;
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PeriodType;
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PersonType;
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PowerOfAttorneyType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.*;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.NameType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.DocumentDescriptionType;
@@ -62,6 +46,7 @@ public class VCDResponseSchemaExtractor extends ESPDResponseSchemaExtractor {
         if (resp.getEvidenceURL() != null) {
             drt.setID(new IDType());
             drt.getID().setValue(UUID.randomUUID().toString()); // FIXME: newly generated UUID, or use the ID from the model?
+            // drt.getID().setSchemeAgencyID("EU-COM-GROW");
             drt.setAttachment(new AttachmentType());
             drt.getAttachment().setExternalReference(new ExternalReferenceType());
             drt.getAttachment().getExternalReference().setURI(new URIType());
@@ -124,8 +109,8 @@ public class VCDResponseSchemaExtractor extends ESPDResponseSchemaExtractor {
         evType.setEmbeddedEvidenceIndicator(new IndicatorType());
         evType.getEmbeddedEvidenceIndicator().setValue(resp.isEmbeddedEvidenceIndicator());
 
-        if (resp.getIssuerParty() != null) {
-            EvidenceIssuerParty ip = resp.getIssuerParty();
+        if (resp.getEvidenceIssuer() != null) {
+            EvidenceIssuerDetails ip = resp.getEvidenceIssuer();
             PartyType pt = new PartyType();
             evType.setEvidenceIssuerParty(pt);
 
@@ -149,9 +134,6 @@ public class VCDResponseSchemaExtractor extends ESPDResponseSchemaExtractor {
                 pt.getWebsiteURI().setValue(ip.getWebsite());
             }
         }
-
-
-
 
         return evType;
     }

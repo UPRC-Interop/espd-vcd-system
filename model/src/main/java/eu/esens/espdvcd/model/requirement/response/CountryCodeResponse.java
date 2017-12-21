@@ -25,7 +25,7 @@ public class CountryCodeResponse extends Response implements Serializable {
      * Cardinality: 0..1<br>
      * InfReqID:  tir92-150<br>
      * BusReqID: tbr92-017<br>
-     * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.Response. Evidence.EvidenceIssuerParty.PostalAddress.IdentificationCode<br>
+     * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.Response.Code<br>
      */
     @NotNull
     private String countryCode;

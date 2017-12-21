@@ -105,7 +105,8 @@ public class EODetails {
      * UBL syntax path:
      * espd-cac:EconomicOperatorParty.EconomicOperatorRoleCode<br>
      */
-    private String role;
+    //private String role;
+    // FIXME: not used anymore - update documentation
 
     /**
      * SME indicator
@@ -253,13 +254,13 @@ public class EODetails {
         this.name = name;
     }
 
-    public String getRole() {
-        return role;
-    }
+    //public String getRole() {
+    //    return role;
+    //}
 
-    public void setRole(String role) {
-        this.role = role;
-    }
+    //public void setRole(String role) {
+    //    this.role = role;
+    //}
 
     public boolean isSmeIndicator() {
         return smeIndicator;

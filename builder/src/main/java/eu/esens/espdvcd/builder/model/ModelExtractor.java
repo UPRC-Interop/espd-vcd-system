@@ -47,6 +47,11 @@ public interface ModelExtractor {
                 cd.setCAOfficialName(caParty.getParty().getPartyName().get(0).getName().getValue());
             }
 
+            if (!caParty.getParty().getPartyIdentification().isEmpty()
+                    && caParty.getParty().getPartyIdentification().get(0).getID() != null) {
+                cd.setID(caParty.getParty().getPartyIdentification().get(0).getID().getValue());
+            }
+
             if (caParty.getParty().getEndpointID() != null) {
                 cd.setElectronicAddressID(caParty.getParty().getEndpointID().getValue());
             }

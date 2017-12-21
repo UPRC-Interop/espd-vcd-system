@@ -154,7 +154,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
 
             case PERIOD:
                 PeriodResponse perResp = new PeriodResponse();
-                //TODO: NULL Checks and empty list checks
+
                 if (res.getPeriod() != null
                         && !res.getPeriod().getDescription().isEmpty()
                         && res.getPeriod().getDescription().get(0).getValue() != null) {
@@ -164,25 +164,8 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 return perResp;
 
             case EVIDENCE_URL:
-                EvidenceURLResponse eResp = new EvidenceURLResponse();
-                //TODO: NULL Checks and empty list checks
-                if (!res.getEvidence().isEmpty()
-                        && !res.getEvidence().get(0).getEvidenceDocumentReference().isEmpty()
-                        && res.getEvidence().get(0).getEvidenceDocumentReference().get(0).getAttachment() != null
-                        && res.getEvidence().get(0).getEvidenceDocumentReference().get(0).getAttachment().getExternalReference() != null
-                        && res.getEvidence().get(0).getEvidenceDocumentReference().get(0).getAttachment().getExternalReference().getURI() != null
-                        && res.getEvidence().get(0).getEvidenceDocumentReference().get(0).getAttachment().getExternalReference().getURI().getValue() != null) {
+                return extractEvidenceURLResponse(res);
 
-                    eResp.setEvidenceURL(res.getEvidence()
-                            .get(0)
-                            .getEvidenceDocumentReference()
-                            .get(0)
-                            .getAttachment()
-                            .getExternalReference()
-                            .getURI().getValue());
-                }
-
-                return eResp;
 
             case CODE:
                 EvidenceURLCodeResponse ecResp = new EvidenceURLCodeResponse();
@@ -196,6 +179,36 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 return null;
         }
 
+    }
+
+    /**
+     * Extract the evidence uri response.
+     *
+     * UL 2017-05-04
+     *
+     * @param res
+     * @return
+     */
+    protected Response extractEvidenceURLResponse(ResponseType res) {
+         EvidenceURLResponse eResp = new EvidenceURLResponse();
+
+        if (!res.getEvidence().isEmpty()
+                && !res.getEvidence().get(0).getEvidenceDocumentReference().isEmpty()
+                && res.getEvidence().get(0).getEvidenceDocumentReference().get(0).getAttachment() != null
+                && res.getEvidence().get(0).getEvidenceDocumentReference().get(0).getAttachment().getExternalReference() != null
+                && res.getEvidence().get(0).getEvidenceDocumentReference().get(0).getAttachment().getExternalReference().getURI() != null
+                && res.getEvidence().get(0).getEvidenceDocumentReference().get(0).getAttachment().getExternalReference().getURI().getValue() != null) {
+
+            eResp.setEvidenceURL(res.getEvidence()
+                    .get(0)
+                    .getEvidenceDocumentReference()
+                    .get(0)
+                    .getAttachment()
+                    .getExternalReference()
+                    .getURI().getValue());
+        }
+
+        return eResp;
     }
 
     public EODetails extractEODetails(EconomicOperatorPartyType eop, ProcurementProjectLotType pplt) {
@@ -214,13 +227,15 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                     eoDetails.setName(eop.getParty().getPartyName().get(0).getName().getValue());
                 }
 
+                // only criterion is used for tenderer role - changed also in BIS
+                /*if (eop.getEconomicOperatorRoleCode() != null) {
+                    eoDetails.setRole(eop.getEconomicOperatorRoleCode().getValue());
+                }*/
+
                 if (eop.getParty().getWebsiteURI() != null) {
-                    // UL: TODO please check - bug: electronicAddressID should be filled with endpointID, not websiteURI
-                    //eoDetails.setElectronicAddressID(eop.getParty().getWebsiteURI().getValue());
                     eoDetails.setWebSiteURI(eop.getParty().getWebsiteURI().getValue());
                 }
 
-                // UL: TODO please check: added code for filling electronicAddressID
                 if (eop.getParty().getEndpointID() != null) {
                     eoDetails.setElectronicAddressID(eop.getParty().getEndpointID().getValue());
                 }
@@ -237,14 +252,11 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                         eoAddress.setAddressLine1(eop.getParty().getPostalAddress().getStreetName().getValue());
                     }
 
-                    //if (eop.getParty().getPostalAddress().getPostbox() != null) {
-                    //    eoAddress.setPostCode(eop.getParty().getPostalAddress().getPostbox().getValue());
-                    //}
-                    // UL 2017-10-10: read post code from cbc:PostalZone
+                    // read post code from cbc:PostalZone...
                     if (eop.getParty().getPostalAddress().getPostalZone() != null) {
                         eoAddress.setPostCode(eop.getParty().getPostalAddress().getPostalZone().getValue());
                     }
-                    // if not available, try cbc:Postbox (for backwards compatibility)
+                    // ...if not available, try cbc:Postbox (for backwards compatibility)
                     else if (eop.getParty().getPostalAddress().getPostbox() != null) {
                         eoAddress.setPostCode(eop.getParty().getPostalAddress().getPostbox().getValue());
                     }
@@ -337,14 +349,11 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
 
                                 PostalAddress pa = new PostalAddress();
 
-                                //if (pt.getResidenceAddress().getPostbox() != null) {
-                                //    pa.setPostCode(pt.getResidenceAddress().getPostbox().getValue());
-                                //}
-                                // UL 2017-10-10: read post code from cbc:PostalZone
+                                // read post code from cbc:PostalZone...
                                 if (pt.getResidenceAddress().getPostalZone() != null) {
                                     pa.setPostCode(pt.getResidenceAddress().getPostalZone().getValue());
                                 }
-                                // if not available, try cbc:Postbox (for backwards compatibility)
+                                // ...if not available, try cbc:Postbox (for backwards compatibility)
                                 else if (pt.getResidenceAddress().getPostbox() != null) {
                                     pa.setPostCode(pt.getResidenceAddress().getPostbox().getValue());
                                 }

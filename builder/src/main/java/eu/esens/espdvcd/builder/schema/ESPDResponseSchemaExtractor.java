@@ -104,7 +104,16 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
             eopt.getParty().getPartyName().add(pnt);
         }
 
-        // UL bugfix: there was no code for creating EndpointID element for EO
+        // only criterion is used for tenderer role - changed also in BIS
+        /*if (eod.getRole() != null) {
+            TypeCodeType tct = new TypeCodeType();
+            tct.setListAgencyID("EU-COM-GROW");
+            tct.setListID("TendererRole");
+            tct.setListVersionID("1.0.2");
+            tct.setValue(eod.getRole());
+            eopt.setEconomicOperatorRoleCode(tct);
+        }*/
+
         if (eod.getElectronicAddressID() != null) {
             EndpointIDType eid = new EndpointIDType();
             eid.setSchemeAgencyID("EU-COM-GROW");
@@ -112,7 +121,6 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
             eopt.getParty().setEndpointID(eid);
         }
 
-        // UL bugfix: there was no code for creating WebsiteURI element for EO
         if (eod.getWebSiteURI() != null) {
             WebsiteURIType wsuri = new WebsiteURIType();
             wsuri.setValue(eod.getWebSiteURI());
@@ -128,9 +136,6 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
             at.setCityName(new CityNameType());
             at.getCityName().setValue(eod.getPostalAddress().getCity());
 
-            //at.setPostbox(new PostboxType());
-            //at.getPostbox().setValue(eod.getPostalAddress().getPostCode());
-            // UL 2017-10-10: write post code to cbc:PostalZone
             at.setPostalZone(new PostalZoneType());
             at.getPostalZone().setValue(eod.getPostalAddress().getPostCode());
 
@@ -211,9 +216,7 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
             if (np.getPostalAddress() != null) {
 
                 pt.setResidenceAddress(new AddressType());
-                //pt.getResidenceAddress().setPostbox(new PostboxType());
-                //pt.getResidenceAddress().getPostbox().setValue(np.getPostalAddress().getPostCode());
-                // UL 2017-10-10: write post code to cbc:PostalZone
+
                 pt.getResidenceAddress().setPostalZone(new PostalZoneType());
                 pt.getResidenceAddress().getPostalZone().setValue(np.getPostalAddress().getPostCode());
 
@@ -356,22 +359,8 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
                 return rType;
 
             case EVIDENCE_URL:
-                String evidenceURL = ((EvidenceURLResponse) response).getEvidenceURL();
-                if (evidenceURL != null && !evidenceURL.isEmpty()) {
-                    EvidenceType evType = new EvidenceType();
-                    DocumentReferenceType drt = new DocumentReferenceType();
-                    drt.setID(new IDType());
-                    drt.getID().setSchemeAgencyID("EU-COM-GROW");
-                    drt.getID().setValue(UUID.randomUUID().toString());
-                    drt.setAttachment(new AttachmentType());
-                    drt.getAttachment().setExternalReference(new ExternalReferenceType());
-                    drt.getAttachment().getExternalReference().setURI(new URIType());
-                    //drt.getAttachment().getExternalReference().getURI().setValue(((EvidenceURLResponse) response).getEvidenceURL());
-                    // UL: modification for handling VCD resources
-                    drt.getAttachment().getExternalReference().getURI().setValue(
-                            EvidenceHelper.transformEvidenceURIFromLocalResourceToASiCResource(evidenceURL)
-                    );
-                    evType.getEvidenceDocumentReference().add(drt);
+                EvidenceType evType = extractEvidenceURLResponse(response);
+                if (evType != null) {
                     rType.getEvidence().add(evType);
                 }
                 return rType;
@@ -393,4 +382,22 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
         }
 
     }
+
+    protected EvidenceType extractEvidenceURLResponse(Response response) {
+        if (((EvidenceURLResponse) response).getEvidenceURL() != null) {
+            EvidenceType evType = new EvidenceType();
+            DocumentReferenceType drt = new DocumentReferenceType();
+            drt.setID(new IDType());
+            drt.getID().setSchemeAgencyID("EU-COM-GROW");
+            drt.getID().setValue(UUID.randomUUID().toString());
+            drt.setAttachment(new AttachmentType());
+            drt.getAttachment().setExternalReference(new ExternalReferenceType());
+            drt.getAttachment().getExternalReference().setURI(new URIType());
+            drt.getAttachment().getExternalReference().getURI().setValue(((EvidenceURLResponse) response).getEvidenceURL());
+            evType.getEvidenceDocumentReference().add(drt);
+            return evType;
+        }
+        return null;
+    }
+
 }

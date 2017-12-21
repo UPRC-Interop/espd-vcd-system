@@ -40,7 +40,7 @@ public class PostalAddress {
      * Usage for Evidence Issuer (FIXME: not used anymore)
      * InfReqID: tir92-145<br>
      * BusReqID: tbr92-017<br>
-     * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.Response. Evidence.EvidenceIssuerParty.PostalAddress.StreetName<br>
+     * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.Response. Evidence.EvidenceIssuerDetails.PostalAddress.StreetName<br>
      */
     private String addressLine1;
 
@@ -71,7 +71,7 @@ public class PostalAddress {
      * Usage for Evidence Issuer (FIXME: not used anymore)
      * InfReqID: tir92-147<br>
      * BusReqID: tbr92-017<br>
-     * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.Response. Evidence.EvidenceIssuerParty.PostalAddress.CityName<br>
+     * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.Response. Evidence.EvidenceIssuerDetails.PostalAddress.CityName<br>
      */
     private String city;
 
@@ -102,7 +102,7 @@ public class PostalAddress {
      * Usage for Evidence Issuer (FIXME: not used anymore)
      * InfReqID: tir92-148<br>
      * BusReqID: tbr92-017<br>
-     * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.Response. Evidence.EvidenceIssuerParty.PostalAddress.PostalZone<br>
+     * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.Response. Evidence.EvidenceIssuerDetails.PostalAddress.PostalZone<br>
      */
     private String postCode;
 
@@ -135,7 +135,7 @@ public class PostalAddress {
      * Usage for Evidence Issuer (FIXME: not used anymore)
      * InfReqID: tir92-149<br>
      * BusReqID: tbr92-017<br>
-     * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.Response. Evidence.EvidenceIssuerParty.PostalAddress.CountrySubentity<br>
+     * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.Response. Evidence.EvidenceIssuerDetails.PostalAddress.CountrySubentity<br>
      */
     private String countrySubdivision;
 
@@ -168,7 +168,7 @@ public class PostalAddress {
      * Usage for Evidence Issuer (FIXME: not used anymore)
      * InfReqID:  tir92-150<br>
      * BusReqID: tbr92-017<br>
-     * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.Response. Evidence.EvidenceIssuerParty.PostalAddress.IdentificationCode<br>
+     * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.Response. Evidence.EvidenceIssuerDetails.PostalAddress.IdentificationCode<br>
      */
     @NotNull
     private String countryCode;
