@@ -39,4 +39,14 @@ public interface ESPDResponse extends ESPDRequest,Serializable {
      */
     List<URL> getExternalDocuments();
 
+    /**
+     * @param espdRequestDetails the (@link ESPDReqeustDetails) linked to this ESPD Response
+     */
+    public void setESPDRequestDetails(ESPDRequestDetails espdRequestDetails);
+
+    /**
+     * @return the (@link ESPDReqeustDetails) linked to this ESPD Response
+     */
+    public ESPDRequestDetails getESPDRequestDetails();
+
 }

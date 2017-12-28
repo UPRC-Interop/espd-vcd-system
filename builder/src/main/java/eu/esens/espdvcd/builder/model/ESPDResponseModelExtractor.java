@@ -1,26 +1,27 @@
 package eu.esens.espdvcd.builder.model;
 
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
-import eu.esens.espdvcd.model.ContactingDetails;
-import eu.esens.espdvcd.model.EODetails;
-import eu.esens.espdvcd.model.ESPDResponse;
-import eu.esens.espdvcd.model.NaturalPerson;
-import eu.esens.espdvcd.model.PostalAddress;
+import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.model.requirement.response.ResponseFactory;
-import eu.esens.espdvcd.model.SimpleESPDResponse;
 import eu.esens.espdvcd.model.requirement.response.*;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.response.Response;
 import grow.names.specification.ubl.schema.xsd.espd_commonaggregatecomponents_1.EconomicOperatorPartyType;
 import grow.names.specification.ubl.schema.xsd.espd_commonaggregatecomponents_1.NaturalPersonType;
+import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
 import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.ResponseType;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.DocumentReferenceType;
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ExternalReferenceType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PersonType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ProcurementProjectLotType;
+import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.DocumentTypeType;
 
 public class ESPDResponseModelExtractor implements ModelExtractor {
 
@@ -59,6 +60,28 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
             eod.getNaturalPersons().add(np);
             res.setEODetails(eod);
         }
+
+        if (resType.getCustomizationID().getValue().equals("urn:www.cenbii.eu:transaction:biitrns092:ver3.0")) {
+            // ESPD response detected
+            // TODO: check, if better method is available to distinguish between request and response
+
+            if (resType.getAdditionalDocumentReference() != null && !resType.getAdditionalDocumentReference().isEmpty()) {
+
+                // Find an entry with ESPD_REQUEST Value
+                DocumentReferenceType ref = resType.getAdditionalDocumentReference().stream().
+                        filter(r -> r.getDocumentTypeCode() != null && r.getDocumentTypeCode().getValue().
+                                equals("ESPD_REQUEST")).findFirst().get();
+
+                if (ref != null ) {
+                    res.setESPDRequestDetails(extractESPDRequestDetails(ref));
+                }
+            }
+        }
+        else {
+            // else an ESPD request is assumed
+            res.setESPDRequestDetails(extractESPDRequestDetails(resType));
+        }
+
 
         return res;
     }
@@ -393,4 +416,63 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
 
         return eoDetails;
     }
+
+    /**
+     * Extract ESPD Request details from existing Document Reference (when loading an ESPD Response)
+     *
+     * @param drt
+     * @return
+     */
+    ESPDRequestDetails extractESPDRequestDetails(DocumentReferenceType drt) {
+        ESPDRequestDetails erd = new ESPDRequestDetails();
+
+        if (drt.getID() != null) {
+            erd.setId(drt.getID().getValue());
+        }
+
+        if (drt.getIssueDate() != null) {
+            erd.setIssueDate(drt.getIssueDate().getValue());
+        }
+
+        if (drt.getIssueTime() != null) {
+            erd.setIssueTime(drt.getIssueTime().getValue());
+        }
+
+        if (drt.getDocumentDescription() != null && !drt.getDocumentDescription().isEmpty()) {
+            if (drt.getDocumentDescription().get(0) != null) {
+                erd.setReferenceNumber(drt.getDocumentDescription().get(0).getValue());
+            }
+        }
+
+        return erd;
+    }
+
+    /**
+     * Extract ESPD Request details from request document.
+     *
+     * @param reqType
+     * @return
+     */
+    ESPDRequestDetails extractESPDRequestDetails(ESPDResponseType reqType) {
+        ESPDRequestDetails erd = new ESPDRequestDetails();
+
+        if (reqType.getID() != null) {
+            erd.setId(reqType.getID().getValue());
+        }
+
+        if (reqType.getIssueDate() != null) {
+            erd.setIssueDate(reqType.getIssueDate().getValue());
+        }
+
+        if (reqType.getIssueTime() != null) {
+            erd.setIssueTime(reqType.getIssueTime().getValue());
+        }
+
+        if (reqType.getContractFolderID() != null) {
+            erd.setReferenceNumber(reqType.getContractFolderID().getValue());
+        }
+
+        return erd;
+    }
+
 }

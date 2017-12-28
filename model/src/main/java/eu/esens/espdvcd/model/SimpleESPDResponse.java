@@ -14,6 +14,7 @@ public class SimpleESPDResponse extends SimpleESPDRequest implements ESPDRespons
     private static final long serialVersionUID = -3343982328572347289L;
     
     protected EODetails eoDetails;
+    private ESPDRequestDetails espdRequestDetails;
 
     public EODetails getEODetails() {
         return eoDetails;
@@ -38,4 +39,15 @@ public class SimpleESPDResponse extends SimpleESPDRequest implements ESPDRespons
     public void setEspdResponseType(ESPDResponseType espdResponseType) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public void setESPDRequestDetails(ESPDRequestDetails espdRequestDetails) {
+        this.espdRequestDetails = espdRequestDetails;
+    }
+
+    @Override
+    public ESPDRequestDetails getESPDRequestDetails() {
+        return this.espdRequestDetails;
+    }
+
 }

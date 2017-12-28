@@ -3,6 +3,7 @@ package eu.esens.espdvcd.builder.schema;
 import eu.esens.espdvcd.builder.EvidenceHelper;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.EODetails;
+import eu.esens.espdvcd.model.ESPDRequestDetails;
 import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.model.requirement.response.DescriptionResponse;
 import eu.esens.espdvcd.model.requirement.response.IndicatorResponse;
@@ -17,10 +18,7 @@ import isa.names.specification.ubl.schema.xsd.ccv_commonbasiccomponents_1.Indica
 import isa.names.specification.ubl.schema.xsd.cev_commonaggregatecomponents_1.EvidenceType;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeConstants;
@@ -66,6 +64,11 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
                 .collect(Collectors.toList()));
 
         resType.setEconomicOperatorParty(extracEODetails(res.getEODetails()));
+
+        if (res.getESPDRequestDetails() != null) {
+            resType.getAdditionalDocumentReference().add(extractESPDRequestDetails(res.getESPDRequestDetails()));
+        }
+
 
         resType.setUBLVersionID(createUBL21VersionIdType());
 
@@ -398,6 +401,36 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
             return evType;
         }
         return null;
+    }
+
+    private DocumentReferenceType extractESPDRequestDetails(ESPDRequestDetails espdRequestDetails) {
+
+        if (espdRequestDetails == null) {
+            return null;
+        }
+
+        DocumentReferenceType drt = new DocumentReferenceType();
+
+        drt.setID(createISOIECIDType(espdRequestDetails.getId()));
+
+        IssueDateType idt = new IssueDateType();
+        idt.setValue(espdRequestDetails.getIssueDate());
+        drt.setIssueDate(idt);
+
+        IssueTimeType itt = new IssueTimeType();
+        itt.setValue(espdRequestDetails.getIssueTime());
+        drt.setIssueTime(itt);
+
+        List<DocumentDescriptionType> ddtList = drt.getDocumentDescription();
+        if (ddtList != null) {
+            DocumentDescriptionType ddt = new DocumentDescriptionType();
+            ddt.setValue(espdRequestDetails.getReferenceNumber());
+            ddtList.add(ddt);
+        }
+
+        drt.setDocumentTypeCode(createDocumentTypeCode("ESPD_REQUEST"));
+
+        return drt;
     }
 
 }
