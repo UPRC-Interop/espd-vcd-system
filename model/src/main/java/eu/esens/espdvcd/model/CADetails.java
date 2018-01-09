@@ -35,8 +35,8 @@ public class CADetails implements Serializable{
      * <p>
      * Data type: Text<br>
      * Cardinality: 1..1<br>
-     * InfReqID: tir92-009<br>
-     * BusReqID: tbr92-011<br>
+     * InfReqID: tir70-026, tir92-009<br>
+     * BusReqID: tbr70-001, tbr92-011<br>
      * UBL syntax path: cac:ContractingParty.Party.PartyName.Name<br>
      */
     @NotNull
@@ -49,8 +49,8 @@ public class CADetails implements Serializable{
      * <p>
      * Data type: Text<br>
      * Cardinality: 0..1<br>
-     * InfReqID: <br>
-     * BusReqID: tbr92-013<br>
+     * InfReqID: tir70-306, tir92-306<br>
+     * BusReqID: tbr70-007, tbr92-013<br>
      * UBL syntax path: cac:AdditionalDocumentReference.Attachment.ExternalReference.FileName<br>
      */
     private String procurementProcedureTitle;
@@ -62,8 +62,8 @@ public class CADetails implements Serializable{
      * <p>
      * Data type: Text<br>
      * Cardinality: 0..1<br>
-     * InfReqID: <br>
-     * BusReqID: tbr92-013<br>
+     * InfReqID: tir070-307, tir92-307<br>
+     * BusReqID: tbr70-007, tbr92-013<br>
      * UBL syntax path: cac:AdditionalDocumentReference.Attachment.ExternalReference.Description<br>
      */
     private String procurementProcedureDesc;
@@ -78,8 +78,8 @@ public class CADetails implements Serializable{
      * <p>
      * Data type: Identifier<br>
      * Cardinality: 1..1<br>
-     * InfReqID: <br>
-     * BusReqID: tbr92-013<br>
+     * InfReqID: tir70-005, tir92-013<br>
+     * BusReqID: tbr70-007, tbr92-013<br>
      * UBL syntax path: cbc:ContractFolderID<br>
      */
     @NotNull
@@ -96,29 +96,11 @@ public class CADetails implements Serializable{
      * <p>
      * Data type: Identifier<br>
      * Cardinality: 0..1<br>
-     * InfReqID: <br>
-     * BusReqID: tbr92-013<br>
+     * InfReqID: tir70-303, tir92-303<br>
+     * BusReqID: tbr70-007, tbr92-013<br>
      * UBL syntax path: cac:AdditionalDocumentReference.ID<br>
      */
     private String procurementPublicationNumber;
-   
-    //This could be changed to something that comes from an enumeration
-    /**
-     * Country code
-     * <p>
-     * A code that identifies the country. The lists of valid countries are registered with the
-     * ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their
-     * subdivisions". It is recommended to use the alpha-2 representation.
-     * <p>
-     * Data type: Code<br>
-     * Cardinality: 1..1<br>
-     * InfReqID: tir92-016<br>
-     * BusReqID: tbr92-011<br>
-     * UBL syntax path: cac:ContractingParty.Party.PostalAddress.Country.IdentificationCode<br>
-     */
-    //@NotNull
-    //private String caCountry;
-    // FIXME: delete - element in PostalAdress is now used
 
     /**
      * Contracting body electronic address identifier
@@ -127,11 +109,10 @@ public class CADetails implements Serializable{
      * <p>
      * Data type: Identifier<br>
      * Cardinality: 1..1<br>
-     * InfReqID: tir70-039<br>
-     * BusReqID: tbr70-001<br>
+     * InfReqID: tir70-039, tir92-011<br>
+     * BusReqID: tbr70-001, tbr92-011<br>
      * UBL syntax path: cac:ContractingParty.Party.EndpointID<br>
      */
-    @NotNull
     private String electronicAddressID;
 
     /**
@@ -141,8 +122,8 @@ public class CADetails implements Serializable{
      * <p>
      * Data type: Identifier<br>
      * Cardinality: 0..1<br>
-     * InfReqID: ?<br>
-     * BusReqID: ?<br>
+     * InfReqID: tir70-314, tir92-314<br>
+     * BusReqID: tbr70-006, tbr92-012<br>
      * UBL syntax path: cac:ContractingParty.Party.WebsiteURIID<br>
      */
     private String webSiteURI;

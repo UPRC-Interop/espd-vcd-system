@@ -172,9 +172,6 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
             npt.getNaturalPersonRoleDescription().setValue(np.getRole());
 
             npt.setPowerOfAttorney(new PowerOfAttorneyType());
-            DescriptionType dt = new DescriptionType();
-            dt.setValue(np.getPowerOfAttorney());
-            npt.getPowerOfAttorney().getDescription().add(dt);
 
             PartyType apt = new PartyType();
             PersonType pt = new PersonType();
@@ -210,10 +207,6 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
 
                 pt.getContact().setElectronicMail(new ElectronicMailType());
                 pt.getContact().getElectronicMail().setValue(np.getContactDetails().getEmailAddress());
-
-                pt.getContact().setTelefax(new TelefaxType());
-                pt.getContact().getTelefax().setValue(np.getContactDetails().getFaxNumber());
-
             }
 
             if (np.getPostalAddress() != null) {

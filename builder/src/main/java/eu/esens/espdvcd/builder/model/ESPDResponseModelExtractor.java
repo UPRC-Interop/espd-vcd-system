@@ -14,6 +14,7 @@ import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.Re
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.ResponseType;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -68,13 +69,19 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
             if (resType.getAdditionalDocumentReference() != null && !resType.getAdditionalDocumentReference().isEmpty()) {
 
                 // Find an entry with ESPD_REQUEST Value
-                DocumentReferenceType ref = resType.getAdditionalDocumentReference().stream().
-                        filter(r -> r.getDocumentTypeCode() != null && r.getDocumentTypeCode().getValue().
-                                equals("ESPD_REQUEST")).findFirst().get();
+                try {
+                    DocumentReferenceType ref = resType.getAdditionalDocumentReference().stream().
+                            filter(r -> r.getDocumentTypeCode() != null && r.getDocumentTypeCode().getValue().
+                                    equals("ESPD_REQUEST")).findFirst().get();
 
-                if (ref != null ) {
-                    res.setESPDRequestDetails(extractESPDRequestDetails(ref));
+                    if (ref != null ) {
+                        res.setESPDRequestDetails(extractESPDRequestDetails(ref));
+                    }
                 }
+                catch (NoSuchElementException ex) {
+                    // no reference to ESPD Request found
+                }
+
             }
         }
         else {
@@ -328,9 +335,6 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
 
                     if (npt.getPowerOfAttorney() != null) {
 
-                        if (!npt.getPowerOfAttorney().getDescription().isEmpty()) {
-                            np.setPowerOfAttorney(npt.getPowerOfAttorney().getDescription().get(0).getValue());
-                        }
                         /* in ESPD the only look for the person in agent party in power of attorney */
                         if (npt.getPowerOfAttorney().getAgentParty() != null && !npt.getPowerOfAttorney().getAgentParty().getPerson().isEmpty()) {
                             PersonType pt = npt.getPowerOfAttorney().getAgentParty().getPerson().get(0);
@@ -360,10 +364,6 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
 
                                 if (pt.getContact().getTelephone() != null) {
                                     cd.setTelephoneNumber(pt.getContact().getTelephone().getValue());
-                                }
-
-                                if (pt.getContact().getTelefax() != null) {
-                                    cd.setFaxNumber(pt.getContact().getTelefax().getValue());
                                 }
                                 np.setContactDetails(cd);
                             }

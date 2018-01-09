@@ -76,7 +76,7 @@ public class CADetailsForm extends VerticalLayout {
 
         ContactingDetails caDetailsContactingDetails = caDetails.getContactingDetails();
         if (caDetailsContactingDetails != null) {
-            layoutIdentifyProcurer.addComponent(new ContactingDetailsForm(caDetailsContactingDetails, readOnly, true));
+            layoutIdentifyProcurer.addComponent(new ContactingDetailsForm(caDetailsContactingDetails, readOnly, true, true));
         }
 
         panelInformationProcurementProcedure = new Panel("Information about the procurement procedure");

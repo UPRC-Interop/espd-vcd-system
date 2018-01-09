@@ -66,7 +66,7 @@ public class EODetailsForm extends Panel {
 
         ContactingDetails eoDetailsContactingDetails = eoDetails.getContactingDetails();
         if (eoDetailsContactingDetails != null) {
-            panelContent.addComponent(new ContactingDetailsForm(eoDetailsContactingDetails, readOnly, true));
+            panelContent.addComponent(new ContactingDetailsForm(eoDetailsContactingDetails, readOnly, true, true));
         }
 
         for (NaturalPerson naturalPerson : this.eoDetails.getNaturalPersons()) {

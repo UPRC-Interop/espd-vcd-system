@@ -20,7 +20,7 @@ public class ContactingDetailsForm extends Panel {
     private TextField telephoneNumber = new TextField("Phone number:");
     private TextField emailAddress = new TextField("Email:");
 
-    public ContactingDetailsForm(ContactingDetails contactingDetails, boolean readOnly, boolean useContactPointName) {
+    public ContactingDetailsForm(ContactingDetails contactingDetails, boolean readOnly, boolean useContactPointName, boolean useFax) {
         this.contactingDetails = contactingDetails;
 
         setStyleName("ContactingDetailsForm");
@@ -37,7 +37,9 @@ public class ContactingDetailsForm extends Panel {
         }
         columnA.addComponent(emailAddress);
         columnB.addComponent(telephoneNumber);
-        columnB.addComponent(faxNumber);
+        if (useFax) {
+            columnB.addComponent(faxNumber);
+        }
 
         final Binder<ContactingDetails> binder = new BeanValidationBinder<>(ContactingDetails.class);
         binder.bindInstanceFields(this);
