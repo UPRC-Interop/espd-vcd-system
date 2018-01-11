@@ -10,6 +10,7 @@ import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.Le
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementGroupType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementType;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.*;
@@ -22,24 +23,6 @@ public interface ModelExtractor {
             List<DocumentReferenceType> additionalDocumentReferenceList) {
 
         CADetails cd = new CADetails();
-
-        if (caParty != null && caParty.getParty() != null) {
-
-            // --> moved to code below
-            //if (!caParty.getParty().getPartyName().isEmpty()) {
-            //    cd.setCAOfficialName(caParty
-            //            .getParty().getPartyName()
-            //            .get(0).getName().getValue());
-            //}
-
-            // FIXME: caCountry should be replaced by the PostalAddress model element
-            if (caParty.getParty().getPostalAddress() != null
-                    && caParty.getParty().getPostalAddress().getCountry() != null
-                    && caParty.getParty().getPostalAddress().getCountry().getIdentificationCode() != null) {
-                cd.setCACountry(caParty
-                        .getParty().getPostalAddress().getCountry().getIdentificationCode().getValue());
-            }
-        }
 
         if (caParty != null && caParty.getParty() != null) {
             if (!caParty.getParty().getPartyName().isEmpty()
@@ -122,30 +105,32 @@ public interface ModelExtractor {
         if (!additionalDocumentReferenceList.isEmpty()) {
 
             // Find an entry with TED_CN Value
-            DocumentReferenceType ref = additionalDocumentReferenceList.stream()
+            Optional<DocumentReferenceType> optRef = additionalDocumentReferenceList.stream()
                     .filter(r -> r.getDocumentTypeCode() != null && r.getDocumentTypeCode().getValue().equals("TED_CN"))
-                    .findFirst().get();
-         
-            if (ref != null ) {
+                    .findFirst();
+            optRef.ifPresent(ref -> {
+
                 if (ref.getID() != null) {
                     cd.setProcurementPublicationNumber(ref.getID().getValue());
                 }
                 if (ref.getAttachment() != null && ref.getAttachment().getExternalReference() != null) {
                     ExternalReferenceType ert = ref.getAttachment().getExternalReference();
-                    
+
                     if (ert.getFileName() != null) {
-                     cd.setProcurementProcedureTitle(ert.getFileName().getValue());
+                        cd.setProcurementProcedureTitle(ert.getFileName().getValue());
                     }
-                    
+
                     if (!ert.getDescription().isEmpty()) {
-                     cd.setProcurementProcedureDesc(ert.getDescription().get(0).getValue());
+                        cd.setProcurementProcedureDesc(ert.getDescription().get(0).getValue());
                     }
-                    
+
                     if (ert.getURI() != null) {
                         cd.setProcurementPublicationURI(ert.getURI().getValue());
                     }
                 }
-            }
+
+            });
+
         }
         return cd;
     }
@@ -183,7 +168,6 @@ public interface ModelExtractor {
         String typeCode = ct.getTypeCode().getValue();
         String name = ct.getName().getValue();
 
-        //TODO: Extract multiple values
         LegislationReference lr = extractDefaultLegalReference(ct.getLegislationReference());
 
         List<RequirementGroup> rgList = ct.getRequirementGroup().stream()
@@ -209,15 +193,17 @@ public interface ModelExtractor {
                 rg.setCondition(rgType.getPi());
         }
         
+        if (rg != null) {
+            List<Requirement> rList = rgType.getRequirement().stream()
+                    .map(r -> extractRequirement(r))
+                    .collect(Collectors.toList());
+            List<RequirementGroup> childRg = rgType.getRequirementGroup().stream()
+                    .map(t -> extractRequirementGroup(t))
+                    .collect(Collectors.toList());
+            rg.setRequirements(rList);
+            rg.setRequirementGroups(childRg);
+        }
 
-        List<Requirement> rList = rgType.getRequirement().stream()
-                .map(r -> extractRequirement(r))
-                .collect(Collectors.toList());
-        List<RequirementGroup> childRg = rgType.getRequirementGroup().stream()
-                .map(t -> extractRequirementGroup(t))
-                .collect(Collectors.toList());
-        rg.setRequirements(rList);
-        rg.setRequirementGroups(childRg);
         return rg;
     }
 

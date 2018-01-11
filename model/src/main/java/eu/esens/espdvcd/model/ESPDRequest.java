@@ -20,56 +20,56 @@ public interface ESPDRequest extends Serializable {
      *
      * @return the model type
      */
-    public ESPDRequestModelType getModelType();
+    ESPDRequestModelType getModelType();
 
     /**
      *
      * @return the {@link CADetails} of the ESPD Object
      */
-    public CADetails getCADetails();
+    CADetails getCADetails();
 
     /**
      *
      * @return the {@link ServiceProviderDetails} of the ESPD Object
      */
-    public ServiceProviderDetails getServiceProviderDetails();
+    ServiceProviderDetails getServiceProviderDetails();
     
     /**
      *
      * @return the {@link SelectableCriterion} list of the ESPD Object
      */
-    public List<SelectableCriterion> getFullCriterionList(); 
+    List<SelectableCriterion> getFullCriterionList();
     
     /**
      * @return an immutable {@link SelectableCriterion} list of the ESPD Object that 
      * contains all the selection criteria.
      */
-    public List<SelectableCriterion> getSelectionCriteriaList();
+    List<SelectableCriterion> getSelectionCriteriaList();
     
     /**
      * @return an immutable {@link SelectableCriterion} list of the ESPD Object that 
      * contains all the exclusion criteria.
      */
-    public List<SelectableCriterion> getExclusionCriteriaList();
+    List<SelectableCriterion> getExclusionCriteriaList();
     
     /**
      * @return an immutable {@link SelectableCriterion} list of the ESPD Object that 
      * contains all the EO Related criteria.
      */
-    public List<SelectableCriterion> getEORelatedCriteriaList();
+    List<SelectableCriterion> getEORelatedCriteriaList();
     
     /**
      * @return an immutable {@link SelectableCriterion} list of the ESPD Object that 
      * contains all the Reduction of candidates selection criteria.
      */
-    public List<SelectableCriterion> getReductionOfCandidatesCriteriaList();
+    List<SelectableCriterion> getReductionOfCandidatesCriteriaList();
     
     /**
      * 
      * @param criterionList the {@link SelectableCriterion} list that will be assigned to
      * the ESPD Object
      */
-    public void setCriterionList(List<SelectableCriterion> criterionList);        
+    void setCriterionList(List<SelectableCriterion> criterionList);
   
     /**
      * 

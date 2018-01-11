@@ -12,11 +12,11 @@ import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
 import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.ResponseType;
-import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.DocumentReferenceType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ExternalReferenceType;
@@ -29,8 +29,6 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
     /* package private constructor. Create only through factory */
     ESPDResponseModelExtractor() {
     }
-
-    ;
 
     public ESPDResponse extractESPDResponse(ESPDResponseType resType) {
 
@@ -63,25 +61,15 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
         }
 
         if (resType.getCustomizationID().getValue().equals("urn:www.cenbii.eu:transaction:biitrns092:ver3.0")) {
-            // ESPD response detected
-            // TODO: check, if better method is available to distinguish between request and response
+            // ESPD response detected (by checking the customization id)
 
             if (resType.getAdditionalDocumentReference() != null && !resType.getAdditionalDocumentReference().isEmpty()) {
 
                 // Find an entry with ESPD_REQUEST Value
-                try {
-                    DocumentReferenceType ref = resType.getAdditionalDocumentReference().stream().
-                            filter(r -> r.getDocumentTypeCode() != null && r.getDocumentTypeCode().getValue().
-                                    equals("ESPD_REQUEST")).findFirst().get();
-
-                    if (ref != null ) {
-                        res.setESPDRequestDetails(extractESPDRequestDetails(ref));
-                    }
-                }
-                catch (NoSuchElementException ex) {
-                    // no reference to ESPD Request found
-                }
-
+                Optional<DocumentReferenceType> optRef = resType.getAdditionalDocumentReference().stream().
+                        filter(r -> r.getDocumentTypeCode() != null && r.getDocumentTypeCode().getValue().
+                                equals("ESPD_REQUEST")).findFirst();
+                optRef.ifPresent(documentReferenceType -> res.setESPDRequestDetails(extractESPDRequestDetails(documentReferenceType)));
             }
         }
         else {

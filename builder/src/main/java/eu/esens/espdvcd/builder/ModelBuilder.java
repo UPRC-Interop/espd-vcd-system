@@ -377,7 +377,7 @@ public class ModelBuilder {
         // Empty ServiceProviderDetails
         System.out.println("Creating default Service Provider Details");
         ServiceProviderDetails spd = new ServiceProviderDetails();
-        // TODO: fill with reasonable default content
+        // fill with default content
         spd.setName("e-SENS");
         spd.setEndpointID("N/A");
         spd.setId("N/A");

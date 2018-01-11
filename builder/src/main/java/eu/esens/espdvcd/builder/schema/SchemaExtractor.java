@@ -19,7 +19,7 @@ import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.*;
 
 public interface SchemaExtractor {
 
-    public RequirementType extractRequirementType(Requirement r);
+    RequirementType extractRequirementType(Requirement r);
 
     default CriterionType extractCriterion(Criterion c) {
 
@@ -193,9 +193,8 @@ public interface SchemaExtractor {
             at.getPostalZone().setValue(cd.getPostalAddress().getPostCode());
 
             at.setCountry(new CountryType());
-            // FIXME: the country should be set using this model element; for compatibility the old method cd.getCACountry() is used
-            //at.getCountry().setIdentificationCode(createISOCountryIdCodeType(cd.getPostalAddress().getCountryCode()));
-            at.getCountry().setIdentificationCode(createISOCountryIdCodeType(cd.getCACountry()));
+            at.getCountry().setIdentificationCode(createISOCountryIdCodeType(cd.getPostalAddress().getCountryCode()));
+
 
             cpp.getParty().setPostalAddress(at);
         }

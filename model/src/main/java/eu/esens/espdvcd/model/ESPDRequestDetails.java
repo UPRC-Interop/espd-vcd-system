@@ -1,7 +1,6 @@
 package eu.esens.espdvcd.model;
 
 import javax.xml.datatype.XMLGregorianCalendar;
-import java.time.LocalDate;
 
 /**
  * Reference to an ESPD Request document.

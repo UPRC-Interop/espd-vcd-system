@@ -3,7 +3,7 @@ package eu.esens.espdvcd.model;
 import eu.esens.espdvcd.model.types.EmbeddedDocumentModelType;
 
 /**
- * TODO: Add description.
+ * Not used.
  *
  */
 public class EmbeddedDocumentImpl implements EmbeddedDocument {

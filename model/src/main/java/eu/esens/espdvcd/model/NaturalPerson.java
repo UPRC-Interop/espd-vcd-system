@@ -1,7 +1,6 @@
 package eu.esens.espdvcd.model;
 
 import java.time.LocalDate;
-import java.util.Date;
 import javax.validation.constraints.NotNull;
 
 /**

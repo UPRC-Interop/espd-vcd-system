@@ -2,7 +2,6 @@ package eu.esens.espdvcd.model.requirement.response;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
 
 /**
  * Date response

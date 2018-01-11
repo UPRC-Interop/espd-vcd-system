@@ -1,8 +1,6 @@
 package eu.esens.espdvcd.model.requirement.response;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Evidence URL code response
@@ -14,6 +12,7 @@ public class EvidenceURLCodeResponse extends Response implements Serializable {
     private static final long serialVersionUID = -1738098273888763636L;
 
     /**
+     * FIXME: not used according to domain vocabulary.
      * Evidence URL code
      * <p>
      * (not specified in domain vocabulary)

@@ -16,8 +16,8 @@ public class ServiceProviderDetails {
      * <p>
      * Data type: Text<br>
      * Cardinality: 0..1<br>
-     * InfReqID: tir92-021<br>
-     * BusReqID: tbr92-021<br>
+     * InfReqID: tir70-040, tir92-021<br>
+     * BusReqID: tbr70-011, tbr92-021<br>
      * UBL syntax path: cac:ServiceProviderParty.Party.PartyName.Name<br>
      */
     private String name;
@@ -29,8 +29,8 @@ public class ServiceProviderDetails {
      * <p>
      * Data type: Identifier<br>
      * Cardinality: 0..1<br>
-     * InfReqID: tir92-022<br>
-     * BusReqID: tbr92-021<br>
+     * InfReqID: tir70-041, tir92-022<br>
+     * BusReqID: tbr70-011, tbr92-021<br>
      * UBL syntax path: cac:ServiceProviderParty.Party.PartyIdentification<br>
      */
     private String id;
@@ -42,8 +42,8 @@ public class ServiceProviderDetails {
      * <p>
      * Data type: Identifier<br>
      * Cardinality: 0..1<br>
-     * InfReqID: tir92-023<br>
-     * BusReqID: tbr92-021<br>
+     * InfReqID: tir70-042, tir92-023<br>
+     * BusReqID: tbr70-011, tbr92-021<br>
      * UBL syntax path: cac:ServiceProviderParty.Party.EndpointID<br>
      */
     private String endpointID;
@@ -55,8 +55,8 @@ public class ServiceProviderDetails {
      * <p>
      * Data type: Identifier <br>
      * Cardinality: 0..1<br>
-     * InfReqID: <br>
-     * BusReqID: <br>
+     * InfReqID: tir70-315, tir92-315<br>
+     * BusReqID: tbr70-011, tbr92-021<br>
      * UBL syntax path: cac: ServiceProviderParty.Party.WebsiteURIID<br>
      */
     private String websiteURI;

@@ -20,11 +20,10 @@ public class DescriptionResponse extends Response implements Serializable {
      * Data type: Text<br>
      * Cardinality: 0..1<br>
      * InfReqID: tir92-159<br>
-     * BusReqID: tbr92-018, tbr92-007, tbr92-005<br>
+     * BusReqID: tbr92-018, tbr92-007, tbr92-005, tbr92-006<br>
      * UBL syntax path:
-     * ccv:Criterion.RequirementGroup.Requirement.DescriptionResponse.Description<br>
+     * ccv:Criterion.RequirementGroup.Requirement.Response.Description<br>
      */
-    
     protected String description;
 
 

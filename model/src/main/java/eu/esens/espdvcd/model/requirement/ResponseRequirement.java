@@ -4,9 +4,6 @@ import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.requirement.response.Response;
 import eu.esens.espdvcd.model.requirement.response.DescriptionResponse;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Criterion requirement
  *

@@ -15,8 +15,8 @@ public class LegislationReference {
      * <p>
      * Data type: Text<br>
      * Cardinality: 1..1<br>
-     * InfReqID: tir92-130<br>
-     * BusReqID: tbr92-015, tbr92-016<br>
+     * InfReqID: tir70-064, tir92-130<br>
+     * BusReqID: tbr70-013, tbr92-015, tbr92-016<br>
      * UBL syntax path: ccv:Criterion.LegislationReference.Title<br>
      */
     @NotNull
@@ -29,8 +29,8 @@ public class LegislationReference {
      * <p>
      * Data type: Text<br>
      * Cardinality: 0..1<br>
-     * InfReqID: tir92-131<br>
-     * BusReqID: tbr92-015, tbr92-016<br>
+     * InfReqID: tir70-065, tir92-131<br>
+     * BusReqID: tbr70-013, tbr92-015, tbr92-016<br>
      * UBL syntax path: ccv:Criterion.LegislationReference.Description<br>
      */
     private String description;
@@ -42,8 +42,8 @@ public class LegislationReference {
      * <p>
      * Data type: Text<br>
      * Cardinality: 0..1<br>
-     * InfReqID: tir92-132<br>
-     * BusReqID: tbr92-015, tbr92-016<br>
+     * InfReqID: tir70-066, tir92-132<br>
+     * BusReqID: tbr70-013, tbr92-015, tbr92-016<br>
      * UBL syntax path: ccv:Criterion.LegislationReference.JurisdictionLevelCode<br>
      */
     private String jurisdictionLevelCode;
@@ -55,8 +55,8 @@ public class LegislationReference {
      * <p>
      * Data type: Text<br>
      * Cardinality: 0..1<br>
-     * InfReqID: tir92-133<br>
-     * BusReqID: tbr92-015, tbr92-016<br>
+     * InfReqID: tir70-067, tir92-133<br>
+     * BusReqID: tbr70-013, tbr92-015, tbr92-016<br>
      * UBL syntax path: ccv:Criterion.LegislationReference.Article<br>
      */
     private String article;
@@ -68,8 +68,8 @@ public class LegislationReference {
      * <p>
      * Data type: <br>
      * Cardinality: 0..1<br>
-     * InfReqID: tir92-134<br>
-     * BusReqID: tbr92-015, tbr92-016<br>
+     * InfReqID: tir70-068, tir92-134<br>
+     * BusReqID: tbr70-013, tbr92-015, tbr92-016<br>
      * UBL syntax path: ccv:Criterion.LegislationReference.URI<br>
      */
     private String URI;

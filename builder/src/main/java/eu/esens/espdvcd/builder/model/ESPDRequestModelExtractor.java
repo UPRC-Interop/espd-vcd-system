@@ -6,7 +6,6 @@ import eu.esens.espdvcd.model.SimpleESPDRequest;
 import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.IDType;
 
-import javax.xml.datatype.XMLGregorianCalendar;
 import java.util.stream.Collectors;
 
 

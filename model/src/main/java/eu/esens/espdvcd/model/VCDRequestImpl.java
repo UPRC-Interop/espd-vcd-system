@@ -4,7 +4,7 @@ import eu.esens.espdvcd.model.types.VCDRequestModelType;
 import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
 
 /**
- * TODO: Add description.
+ * Not used.
  *
  */
 public class VCDRequestImpl implements VCDRequest {
