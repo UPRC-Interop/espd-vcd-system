@@ -134,6 +134,7 @@ public class GenericCode {
 
     protected final String getValueForId(String id, String lang) {
         return lang != null ? clBiMap.get(id).getDataMap().get(lang.toLowerCase())
+                // en here is used because of v1 codelists
                 : clBiMap.get(id).getDataMap().get("en");
     }
 
@@ -142,6 +143,7 @@ public class GenericCode {
                 .filter(row -> row.getDataMap().get(lang).equals(data))
                 .findAny().get().getId()
                 : clBiMap.values().stream()
+                        // en here is used because of v1 codelists
                         .filter(row -> row.getDataMap().get("en").equals(data))
                         .findAny().get().getId();
     }
@@ -154,6 +156,7 @@ public class GenericCode {
         return lang != null ? clBiMap.values().stream()
                 .anyMatch(row -> row.getDataMap().get(lang).equals(value))
                 : clBiMap.values().stream()
+                        // en here is used because of v1 codelists
                         .anyMatch(row -> row.getDataMap().get("en").equals(value));
     }
 
