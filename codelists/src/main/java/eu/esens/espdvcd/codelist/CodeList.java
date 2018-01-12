@@ -12,11 +12,11 @@ public interface CodeList {
         
     boolean equalsName(String otherName);
         
-    BiMap<String, GenericCode.CodelistRow> getBiMap();
+    BiMap<String, GenericCode.CodeListRow> getBiMap();
         
     String getConstantName();
     
-    String getDataForId(String id);
+    String getValueForId(String id);
     
     String getIdForData(String data);
     

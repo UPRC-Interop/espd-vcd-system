@@ -5,7 +5,7 @@ import com.vaadin.server.StreamResource;
 import com.vaadin.ui.*;
 import eu.esens.espdvcd.builder.VCDDocumentBuilder;
 import eu.esens.espdvcd.builder.XMLDocumentBuilder;
-import eu.esens.espdvcd.codelist.CodeListsVersioner;
+import eu.esens.espdvcd.codelist.CodeListV1;
 import eu.esens.espdvcd.designer.views.Master;
 import eu.esens.espdvcd.model.*;
 
@@ -62,7 +62,7 @@ public class ESPDResponseForm extends ESPDForm {
             String key = entry.getKey();
             List<CriterionForm> criterionForms = entry.getValue();
 
-            String fullTypeCodeName = CodeListsVersioner.ForVersion1.CRITERIA_TYPE.getValueForId(key);
+            String fullTypeCodeName = CodeListV1.CriteriaType.getValueForId(key);
 
             if (fullTypeCodeName == null) {
                 // Fallback to display the type code instead of real name
@@ -95,7 +95,7 @@ public class ESPDResponseForm extends ESPDForm {
             String key = entry.getKey();
             List<CriterionForm> criterionForms = entry.getValue();
 
-            String fullTypeCodeName = CodeListsVersioner.ForVersion1.CRITERIA_TYPE.getValueForId(key);
+            String fullTypeCodeName = CodeListV1.CriteriaType.getValueForId(key);
 
             if (fullTypeCodeName == null) {
                 // Fallback to display the type code instead of real name
@@ -132,7 +132,7 @@ public class ESPDResponseForm extends ESPDForm {
             String key = entry.getKey();
             List<CriterionForm> criterionForms = entry.getValue();
 
-            String fullTypeCodeName = CodeListsVersioner.ForVersion1.CRITERIA_TYPE.getValueForId(key);
+            String fullTypeCodeName = CodeListV1.CriteriaType.getValueForId(key);
 
             if (fullTypeCodeName == null) {
                 // Fallback to display the type code instead of real name
@@ -166,7 +166,7 @@ public class ESPDResponseForm extends ESPDForm {
             String key = entry.getKey();
             List<CriterionForm> criterionForms = entry.getValue();
 
-            String fullTypeCodeName = CodeListsVersioner.ForVersion1.CRITERIA_TYPE.getValueForId(key);
+            String fullTypeCodeName = CodeListV1.CriteriaType.getValueForId(key);
 
             if (fullTypeCodeName == null) {
                 // Fallback to display the type code instead of real name

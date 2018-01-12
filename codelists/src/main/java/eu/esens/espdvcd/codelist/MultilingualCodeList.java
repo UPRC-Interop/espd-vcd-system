@@ -81,7 +81,7 @@ public enum MultilingualCodeList implements CodeList {
     PeriodMeasureType("/gc/multilingual/PeriodMeasureType-CodeList.gc"),
 //    ProcedureType("/gc/multilingual/ProcedureType-CodeList.gc"),
     ProfileExecutionID("/gc/multilingual/ProfileExecutionID-CodeList.gc"),
-    ProjectType("/gc/multilingual/ProjectType-CodeList.gc"),
+//    ProjectType("/gc/multilingual/ProjectType-CodeList.gc"),
     ServicesProjectSubType("/gc/multilingual/ServicesProjectSubType-CodeList.gc"),
     TechnicalCapabilityType("/gc/multilingual/TechnicalCapabilityType-CodeList.gc"),
     EORoleType("/gc/multilingual/EORoleType-CodeList.gc"),
@@ -144,8 +144,8 @@ public enum MultilingualCodeList implements CodeList {
     }
 
     @Override
-    public final String getDataForId(String id) {
-        return getInstance().getDataForId(id, lang);
+    public final String getValueForId(String id) {
+        return getInstance().getValueForId(id, lang);
     }
 
     /**
@@ -181,7 +181,7 @@ public enum MultilingualCodeList implements CodeList {
      * @return the internal representation of the codelist as an immutable bimap
      */
     @Override
-    public final BiMap<String, GenericCode.CodelistRow> getBiMap() {
+    public final BiMap<String, GenericCode.CodeListRow> getBiMap() {
         return getInstance().getBiMap();
     }
 

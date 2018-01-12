@@ -2,7 +2,6 @@ package eu.esens.espdvcd.codelist;
 
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class CodeListsTest {
@@ -17,20 +16,20 @@ public class CodeListsTest {
     @Test
     public void testGC() {
 
-        Assert.assertEquals("Greece", MultilingualCodeList.CountryIdentification.getDataForId("GR"));
+        Assert.assertEquals("Greece", MultilingualCodeList.CountryIdentification.getValueForId("GR"));
         Assert.assertEquals("GR", MultilingualCodeList.CountryIdentification.getIdForData("Greece"));
         
         Assert.assertEquals("SCLE", MultilingualCodeList.EORoleType.getIdForData("Sole contractor / Lead entity"));
-        Assert.assertEquals("Sole contractor / Lead entity", MultilingualCodeList.EORoleType.getDataForId("SCLE"));
+        Assert.assertEquals("Sole contractor / Lead entity", MultilingualCodeList.EORoleType.getValueForId("SCLE"));
         
         Assert.assertEquals("LOT_ALL", MultilingualCodeList.BidType.getIdForData("Submission for all lots"));
-        Assert.assertEquals("Submission for all lots", MultilingualCodeList.BidType.getDataForId("LOT_ALL"));
+        Assert.assertEquals("Submission for all lots", MultilingualCodeList.BidType.getValueForId("LOT_ALL"));
         
         MultilingualCodeList.BidType.setLang("ell");
         
         String nameInEll;
         
-        System.out.println(nameInEll = MultilingualCodeList.BidType.getDataForId("LOT_ALL"));
+        System.out.println(nameInEll = MultilingualCodeList.BidType.getValueForId("LOT_ALL"));
         System.out.println(MultilingualCodeList.BidType.getIdForData(nameInEll));
     }
 
@@ -42,10 +41,9 @@ public class CodeListsTest {
        
 //    @Test
 //    public void testProjectTypeGC() {
-//        System.out.println(MultilingualCodeList.ProjectType.getBiMap().isEmpty());
+//        System.out.println(MultilingualCodeList.ProcedureType.getBiMap().isEmpty());
 //    }
-    
-//    @Ignore
+
 //    @Test
 //    public void testAllGC() {
 //

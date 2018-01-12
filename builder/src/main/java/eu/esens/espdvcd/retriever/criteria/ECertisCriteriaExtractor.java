@@ -5,7 +5,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import eu.esens.espdvcd.codelist.CodeListsVersioner;
+import eu.esens.espdvcd.codelist.CodeListV1;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.retriever.ECertisSelectableCriterionImpl;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
@@ -342,7 +342,7 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
      * @return true if exists, false if not
      */
     private boolean isCountryCodeExist(String countryCode) {
-        return CodeListsVersioner.ForVersion1.COUNTRY_IDENTIFICATION
+        return CodeListV1.CountryIdentification
                 .containsId(countryCode.toUpperCase());
     }
 
@@ -353,7 +353,7 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
      * @return true if exists, false if not
      */
     private boolean isLanguageCodeExist(String languageCode) {
-        return CodeListsVersioner.ForVersion1.LANGUAGE_CODE_EU
+        return CodeListV1.LanguageCodeEU
                 .containsId(languageCode.toUpperCase());
     }
 

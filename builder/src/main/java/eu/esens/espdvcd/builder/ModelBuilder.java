@@ -3,7 +3,7 @@ package eu.esens.espdvcd.builder;
 import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.builder.model.ModelFactory;
 import eu.esens.espdvcd.builder.util.SchemaUtil;
-import eu.esens.espdvcd.codelist.CodeListsVersioner;
+import eu.esens.espdvcd.codelist.CodeListV1;
 import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
 import eu.esens.espdvcd.retriever.criteria.PredefinedESPDCriteriaExtractor;
@@ -399,7 +399,7 @@ public class ModelBuilder {
             String oldName = c.getName();
             c.setDescription(oldName);
             // Since we have no name, we will add the Criteria type name as Criterion Name
-            c.setName(CodeListsVersioner.ForVersion1.CRITERIA_TYPE.getValueForId(c.getTypeCode()) + " (No Name)");
+            c.setName(CodeListV1.CriteriaType.getValueForId(c.getTypeCode()) + " (No Name)");
 //                System.out.println("Workaround for: "+c.getID() +" "+c.getDescription());
         }
 //        }      
