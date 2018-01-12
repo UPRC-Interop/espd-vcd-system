@@ -9,6 +9,7 @@ import eu.esens.espdvcd.designer.components.CriterionForm;
 import eu.esens.espdvcd.designer.components.ESPDResponseForm;
 import eu.esens.espdvcd.model.*;
 import java.io.*;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -82,6 +83,14 @@ public class Espd extends Master {
                     
                     InputStream is = new FileInputStream(file);
                     espdResponse = new ModelBuilder().importFrom(is).createESPDResponse();
+
+                    // UL demo code 2018-01-12: filling the model with service-specific information from the frontend
+                    /*ServiceProviderDetails spd = new ServiceProviderDetails();
+                    spd.setName("ESPD Service Provider");
+                    spd.setEndpointID("eDelivery_ID");
+                    spd.setId(UUID.randomUUID().toString());
+                    spd.setWebsiteURI("http://www.esens.eu");
+                    espdResponse.setServiceProviderDetails(spd);*/
 
                     if (espdResponse.getEODetails() == null) {
                         EODetails eoDetails = new EODetails();

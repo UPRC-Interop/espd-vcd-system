@@ -42,7 +42,8 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 resType.getContractFolderID(),
                 resType.getAdditionalDocumentReference()));
 
-        res.setServiceProviderDetails(extractServiceProviderDetails(resType.getServiceProviderParty()));
+        // modification UL 2018-01-12: discard old service provider information, always use information of the current system
+        //res.setServiceProviderDetails(extractServiceProviderDetails(resType.getServiceProviderParty()));
 
         if (resType.getEconomicOperatorParty() != null) {
             res.setEODetails(extractEODetails(resType.getEconomicOperatorParty(), resType.getProcurementProjectLot().get(0)));

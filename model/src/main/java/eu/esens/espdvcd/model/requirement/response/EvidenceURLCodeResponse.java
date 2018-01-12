@@ -12,7 +12,6 @@ public class EvidenceURLCodeResponse extends Response implements Serializable {
     private static final long serialVersionUID = -1738098273888763636L;
 
     /**
-     * FIXME: not used according to domain vocabulary.
      * Evidence URL code
      * <p>
      * (not specified in domain vocabulary)
