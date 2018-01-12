@@ -1,5 +1,7 @@
 package eu.esens.espdvcd.builder.model;
 
+import eu.esens.espdvcd.builder.BuilderFactory;
+import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.model.requirement.Requirement;
@@ -136,7 +138,9 @@ public interface ModelExtractor {
     }
 
     default ServiceProviderDetails extractServiceProviderDetails(ServiceProviderPartyType sppt) {
-        ServiceProviderDetails spd = new ServiceProviderDetails();
+        // modification UL 2018-01-12: discard old service provider information, always use information of the current system
+
+        /*ServiceProviderDetails spd = new ServiceProviderDetails();
 
         if (sppt != null && sppt.getParty() != null) {
             if (!sppt.getParty().getPartyName().isEmpty()
@@ -159,6 +163,16 @@ public interface ModelExtractor {
         }
 
         return spd;
+        */
+
+        try {
+            // return the default service provider details
+            return BuilderFactory.getModelBuilder().createESPDRequest().getServiceProviderDetails();
+        } catch (BuilderException e) {
+            return null;
+        }
+
+
     }
 
     default SelectableCriterion extractSelectableCriterion(CriterionType ct, boolean isSelected) {

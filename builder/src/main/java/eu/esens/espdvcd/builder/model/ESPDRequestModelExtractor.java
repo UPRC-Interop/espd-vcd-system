@@ -25,8 +25,7 @@ public class ESPDRequestModelExtractor implements ModelExtractor {
                                           reqType.getContractFolderID(),
                                           reqType.getAdditionalDocumentReference()));
 
-        // modification UL 2018-01-12: discard old service provider information, always use information of the current system
-        //req.setServiceProviderDetails(extractServiceProviderDetails(reqType.getServiceProviderParty()));
+        req.setServiceProviderDetails(extractServiceProviderDetails(reqType.getServiceProviderParty()));
         
         return req;
     }
