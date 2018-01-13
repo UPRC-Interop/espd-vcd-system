@@ -2,6 +2,7 @@ package eu.esens.espdvcd.codelist;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class CodeListsTest {
@@ -12,7 +13,28 @@ public class CodeListsTest {
     @Before
     public void setUp() {
     }
+    
+    @Test
+    public void testCriteriaTypeGC() {
 
+        System.out.println("PRINTING DATA MAP\n");
+
+        CodeListV1.CriteriaType.getBiMap().values().stream().forEach((GenericCode.CodeListRow cr) -> {
+
+            for (String key : cr.getDataMap().keySet()) {
+                System.out.print("id: " + cr.getId() + " key: " + key + " value: " + cr.getDataMap().get(key) + ", ");
+            }
+
+            System.out.println();
+        });
+
+        System.out.println("PRINTING BIMAP KEYS\n");
+
+        CodeListV1.CriteriaType.getBiMap().keySet().stream().forEach(key -> System.out.println("key: " + key));
+        
+    }
+
+    @Ignore
     @Test
     public void testGC() {
 
@@ -36,12 +58,12 @@ public class CodeListsTest {
 //        Assert.assertEquals("Greece", CodeListV1.CountryIdentification.getBiMap().get("GR"));
 //        Assert.assertEquals("GR", CodeListV1.CountryIdentification.getBiMap().inverse().get("Greece"));
 //    }    
-
+    @Ignore
     @Test
     public void testAllGC() {
 
         String theCodelist = "";
-        
+
         // v1
         try {
 
@@ -53,7 +75,7 @@ public class CodeListsTest {
         } catch (Exception e) {
             Assert.fail("Error in CodeList " + theCodelist + ": " + e.getMessage());
         }
-        
+
         //v2
         try {
 

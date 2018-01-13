@@ -4,6 +4,7 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.bind.JAXBContext;
@@ -133,11 +134,11 @@ public class GenericCode {
     }
 
     protected final String getValueForId(String id, String lang) {
-        return lang != null ? clBiMap.get(id).getDataMap().get(lang.toLowerCase())
+        return lang != null ? (containsId(id) ? clBiMap.get(id).getDataMap().get(lang.toLowerCase()) : null)
                 // en here is used because of v1 codelists
-                : clBiMap.get(id).getDataMap().get("en");
+                : (containsId(id) ? clBiMap.get(id).getDataMap().get("en") : null);
     }
-
+    
     protected final String getIdForData(String data, String lang) {
         return lang != null ? clBiMap.values().stream()
                 .filter(row -> row.getDataMap().get(lang).equals(data))

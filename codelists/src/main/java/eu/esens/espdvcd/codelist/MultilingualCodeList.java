@@ -147,7 +147,7 @@ public enum MultilingualCodeList implements CodeList {
     public final String getValueForId(String id) {
         return getInstance().getValueForId(id, lang);
     }
-
+        
     /**
      * @param data
      * @return the Id of the codelist for the specific value
