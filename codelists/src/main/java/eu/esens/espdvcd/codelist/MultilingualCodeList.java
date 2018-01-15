@@ -39,7 +39,7 @@ public enum MultilingualCodeList implements CodeList {
     /**
      * Currency Codelist, ISO Compatible.
      */
-//    Currency("/gc/multilingual/CurrencyCode-CodeList.gc"),
+    Currency("/gc/multilingual/CurrencyCode-CodeList.gc"),
     /**
      * Document Reference types, used by ESPD Request and Response to add specific external references required by
      * the ESPD Data Model
@@ -79,9 +79,9 @@ public enum MultilingualCodeList implements CodeList {
      */
     ResponseDataType("/gc/multilingual/ResponseDataType-CodeList.gc"),
     PeriodMeasureType("/gc/multilingual/PeriodMeasureType-CodeList.gc"),
-//    ProcedureType("/gc/multilingual/ProcedureType-CodeList.gc"),
+    ProcedureType("/gc/multilingual/ProcedureType-CodeList.gc"),
     ProfileExecutionID("/gc/multilingual/ProfileExecutionID-CodeList.gc"),
-//    ProjectType("/gc/multilingual/ProjectType-CodeList.gc"),
+    ProjectType("/gc/multilingual/ProjectType-CodeList.gc"),
     ServicesProjectSubType("/gc/multilingual/ServicesProjectSubType-CodeList.gc"),
     TechnicalCapabilityType("/gc/multilingual/TechnicalCapabilityType-CodeList.gc"),
     EORoleType("/gc/multilingual/EORoleType-CodeList.gc"),

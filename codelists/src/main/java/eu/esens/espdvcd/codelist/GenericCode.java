@@ -4,7 +4,6 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.bind.JAXBContext;
