@@ -298,7 +298,11 @@ public interface SchemaExtractor {
     }
     
     default IDType createGROWTemporaryId(String id) {
-        IDType reqGroupIDType = createCustomSchemeIDIDType(id, "COM-GROW-TEMPORARY-ID");
+        // mod 2018-01-16: changed schemeID to "ISO/IEC 9834-8:2008 - 4UUID" according to ESPD 1.0.2 EDM
+        // remark: the DG GROW system uses "COM-GROW-TEMPORARY-ID", if no valid OJS number is entered
+        //IDType reqGroupIDType = createCustomSchemeIDIDType(id, "COM-GROW-TEMPORARY-ID");
+        IDType reqGroupIDType = createCustomSchemeIDIDType(id, "ISO/IEC 9834-8:2008 - 4UUID");
+
         reqGroupIDType.setSchemeAgencyID("EU-COM-GROW");
         reqGroupIDType.setSchemeAgencyName("DG GROW (European Commission)");
         reqGroupIDType.setSchemeVersionID("1.1");
