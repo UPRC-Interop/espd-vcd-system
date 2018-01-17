@@ -160,7 +160,11 @@ public enum CodeListV1 implements CodeList {
     public String getConstantName() {
         return name();
     }
-
+    
+    /**
+     * 
+     * @return All available languages
+     */
     @Override
     public Set<String> getAllLangs() {
         return getInstance().getAllLangs();

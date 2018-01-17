@@ -184,6 +184,10 @@ public enum CodeListV2 implements CodeList {
         return name();
     }
     
+    /**
+     * 
+     * @return All available languages
+     */
     @Override
     public Set<String> getAllLangs() {
         return getInstance().getAllLangs();

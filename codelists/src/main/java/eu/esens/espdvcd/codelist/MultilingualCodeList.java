@@ -143,7 +143,12 @@ public enum MultilingualCodeList implements CodeList {
     public void initLang() {
         lang = DEFAULT_LANG;
     }
-
+    
+    /**
+     *
+     * @param id 
+     * @return the value mapped with the specific id in the codelist, null otherwise
+     */
     @Override
     public final String getValueForId(String id) {
         return getInstance().getValueForId(id, lang);
@@ -186,6 +191,10 @@ public enum MultilingualCodeList implements CodeList {
         return getInstance().getBiMap(lang);
     }
     
+    /**
+     * 
+     * @return All available languages
+     */
     @Override
     public Set<String> getAllLangs() {
         return getInstance().getAllLangs();

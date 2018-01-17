@@ -139,8 +139,7 @@ public class GenericCode {
 
         return tempLangMap.entrySet()
                 .stream()
-                .collect(Collectors.toMap(e -> e.getKey(),
-                        e -> (BiMap) ImmutableBiMap.copyOf((Map) e.getValue())));
+                .collect(Collectors.toMap(e -> e.getKey(), e -> ImmutableBiMap.copyOf(e.getValue())));
     }
 
     protected final BiMap<String, String> getBiMap(String lang) {
