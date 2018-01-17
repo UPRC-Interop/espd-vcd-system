@@ -1,6 +1,7 @@
 package eu.esens.espdvcd.codelist;
 
 import com.google.common.collect.BiMap;
+import java.util.Set;
 
 /**
  *
@@ -103,7 +104,7 @@ public enum CodeListV1 implements CodeList {
      */
     @Override
     public final String getIdForData(String data) {
-        return getInstance().getIdForData(data, null);
+        return getInstance().getIdForData(data, "en");
     }
    
     /**
@@ -113,7 +114,7 @@ public enum CodeListV1 implements CodeList {
      */
     @Override
     public final boolean containsId(String id) {
-        return getInstance().containsId(id);
+        return getInstance().containsId(id, "en");
     }
 
     /**
@@ -123,7 +124,7 @@ public enum CodeListV1 implements CodeList {
      */
     @Override
     public final boolean containsValue(String value) {
-        return getInstance().containsValue(value, null);
+        return getInstance().containsValue(value, "en");
     }
         
     /**
@@ -134,15 +135,15 @@ public enum CodeListV1 implements CodeList {
      */
     @Override
     public final String getValueForId(String id) {
-        return getInstance().getValueForId(id, null);
+        return getInstance().getValueForId(id, "en");
     }
     
     /**
      * @return the internal representation of the codelist as an immutable bimap
      */
     @Override
-    public final BiMap<String, GenericCode.CodeListRow> getBiMap() {
-        return getInstance().getBiMap();
+    public final BiMap<String, String> getBiMap() {
+        return getInstance().getBiMap("en");
     }
 
     @Override
@@ -159,5 +160,10 @@ public enum CodeListV1 implements CodeList {
     public String getConstantName() {
         return name();
     }
-   
+
+    @Override
+    public Set<String> getAllLangs() {
+        return getInstance().getAllLangs();
+    }
+    
 }

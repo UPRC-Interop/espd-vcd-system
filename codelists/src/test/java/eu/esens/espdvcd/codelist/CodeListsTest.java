@@ -14,27 +14,18 @@ public class CodeListsTest {
     public void setUp() {
     }
     
-    @Test
-    public void testCriteriaTypeGC() {
-
-        System.out.println("PRINTING DATA MAP\n");
-
-        CodeListV1.CriteriaType.getBiMap().values().stream().forEach((GenericCode.CodeListRow cr) -> {
-
-            for (String key : cr.getDataMap().keySet()) {
-                System.out.print("id: " + cr.getId() + " key: " + key + " value: " + cr.getDataMap().get(key) + ", ");
-            }
-
-            System.out.println();
-        });
-
-        System.out.println("PRINTING BIMAP KEYS\n");
-
-        CodeListV1.CriteriaType.getBiMap().keySet().stream().forEach(key -> System.out.println("key: " + key));
-        
-    }
-
     @Ignore
+    @Test
+    public void testGetAllLangs() {
+        CodeListV1.CountryIdentification.getAllLangs().forEach(lang -> System.out.println(lang));
+    }
+    
+    @Ignore
+    @Test
+    public void testCountryIdentificationGC() {
+        CodeListV1.CountryIdentification.getBiMap().forEach((code, data) -> System.out.println(code + ", " + data));
+    }
+    
     @Test
     public void testGC() {
 
@@ -45,7 +36,6 @@ public class CodeListsTest {
         Assert.assertEquals("MT", CodeListV1.TenderingRole.getIdForData("Main tenderer"));
         Assert.assertEquals("Main tenderer", CodeListV1.TenderingRole.getValueForId("MT"));
 
-        // v2
         Assert.assertEquals("Andorra", CodeListV2.CountryIdentification.getValueForId("AD"));
         Assert.assertEquals("AD", CodeListV2.CountryIdentification.getIdForData("Andorra"));
 
@@ -53,12 +43,15 @@ public class CodeListsTest {
         Assert.assertEquals("GM", CodeListV2.EORoleType.getIdForData("Group member"));
     }
 
-//    @Test
-//    public void testBiMap() {
-//        Assert.assertEquals("Greece", CodeListV1.CountryIdentification.getBiMap().get("GR"));
-//        Assert.assertEquals("GR", CodeListV1.CountryIdentification.getBiMap().inverse().get("Greece"));
-//    }    
-    @Ignore
+    @Test
+    public void testBiMap() {
+        Assert.assertEquals("Greece", CodeListV1.CountryIdentification.getBiMap().get("GR"));
+        Assert.assertEquals("GR", CodeListV1.CountryIdentification.getBiMap().inverse().get("Greece"));
+        
+        Assert.assertEquals("Greece", CodeListV2.CountryIdentification.getBiMap().get("GR"));
+        Assert.assertEquals("GR", CodeListV2.CountryIdentification.getBiMap().inverse().get("Greece"));
+    }    
+    
     @Test
     public void testAllGC() {
 

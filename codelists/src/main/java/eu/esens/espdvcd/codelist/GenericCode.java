@@ -4,8 +4,10 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
@@ -32,7 +34,7 @@ import org.oasis_open.docs.codelist.ns.genericode._1.ColumnSet;
 public class GenericCode {
 
     protected final JAXBElement<CodeListDocument> GC;
-    protected final BiMap<String, CodeListRow> clBiMap;
+    protected final Map<String, BiMap<String, String>> langMap;
 
     protected GenericCode(String theCodelist) {
 
@@ -45,8 +47,8 @@ public class GenericCode {
 
             GC = jaxbUnmarshaller.unmarshal(xsr, CodeListDocument.class);
 
-            //create the BiMap that holds the default id <-> value mapping 
-            clBiMap = createBiMap();
+            // create the lang Map, which holds the BiMap that holds the default id <-> value mapping 
+            langMap = createLangMap();
 
         } catch (JAXBException | XMLStreamException ex) {
             Logger.getLogger(GenericCode.class.getName()).log(Level.SEVERE, null, ex);
@@ -78,9 +80,9 @@ public class GenericCode {
                 .findAny().orElseThrow(IllegalArgumentException::new).getSimpleValue().getValue();
     }
 
-    private BiMap<String, CodeListRow> createBiMap() {
+    private Map<String, BiMap<String, String>> createLangMap() {
 
-        Map<String, CodeListRow> sourceMap = new LinkedHashMap<>();
+        final Map<String, Map<String, String>> tempLangMap = new LinkedHashMap<>();
         SimpleCodeList sgc = GC.getValue().getSimpleCodeList();
         ColumnSet cs = GC.getValue().getColumnSet();
 
@@ -91,7 +93,7 @@ public class GenericCode {
                 .filter(o -> o instanceof Column)
                 .map(o -> (Column) o)
                 // discard description & code
-                /* @TODO This filtering may have to been removed in future versions */
+                /* @TODO This filtering may have to be removed in future versions */
                 .filter(c -> !c.getId().equals("code") && !c.getId().contains("description"))
                 .forEach(c -> idLangMap.put(c.getId(), c.getData().getLang()));
 
@@ -102,11 +104,10 @@ public class GenericCode {
 
                     // Extract Row data
                     // (1) extract code here
-                    String id = r.getValue().stream()
+                    String code = r.getValue().stream()
                             .filter(c -> ((Column) c.getColumnRef()).getId().equals("code"))
                             .findAny().get().getSimpleValue().getValue();
 
-                    final GenericCode.CodeListRow currentRow = new GenericCode.CodeListRow(id);
                     // (2) extract simple values here
                     r.getValue().stream()
                             // v stands for value here
@@ -118,67 +119,77 @@ public class GenericCode {
                                 String cRef = ((Column) v.getColumnRef()).getId();
                                 String lang = idLangMap.get(cRef);
                                 String data = v.getSimpleValue().getValue();
-                                currentRow.getDataMap().put(lang, data);
+
+                                // if language not exist, create new map for that particular language
+                                if (!tempLangMap.containsKey(lang)) {
+                                    // key = code, value =  data
+                                    Map<String, String> sourceMap = new LinkedHashMap<>();
+                                    sourceMap.put(code, data);
+                                    // put map for that language to temp lang map
+                                    tempLangMap.put(lang, sourceMap);
+                                } // there is a map for that particular language
+                                // get that map and put <code, data> there
+                                else {
+                                    tempLangMap.get(lang).put(code, data);
+                                }
+
                             });
 
-                    sourceMap.put(id, currentRow);
                 });
 
-        BiMap<String, GenericCode.CodeListRow> biMap = ImmutableBiMap.copyOf(sourceMap);
-        return biMap;
+        return tempLangMap.entrySet()
+                .stream()
+                .collect(Collectors.toMap(e -> e.getKey(),
+                        e -> (BiMap) ImmutableBiMap.copyOf((Map) e.getValue())));
     }
 
-    protected final BiMap<String, GenericCode.CodeListRow> getBiMap() {
-        return clBiMap;
+    protected final BiMap<String, String> getBiMap(String lang) {
+        return langMap.get(lang);
     }
 
     protected final String getValueForId(String id, String lang) {
-        return lang != null ? (containsId(id) ? clBiMap.get(id).getDataMap().get(lang.toLowerCase()) : null)
-                // en here is used because of v1 codelists
-                : (containsId(id) ? clBiMap.get(id).getDataMap().get("en") : null);
-    }
-    
-    protected final String getIdForData(String data, String lang) {
-        return lang != null ? clBiMap.values().stream()
-                .filter(row -> row.getDataMap().get(lang).equals(data))
-                .findAny().get().getId()
-                : clBiMap.values().stream()
-                        // en here is used because of v1 codelists
-                        .filter(row -> row.getDataMap().get("en").equals(data))
-                        .findAny().get().getId();
+        String value = null;
+
+        if (langMap.containsKey(lang)) {
+            value = langMap.get(lang).get(id);
+        }
+
+        return value;
     }
 
-    protected final boolean containsId(String id) {
-        return clBiMap.containsKey(id);
+    protected final String getIdForData(String data, String lang) {
+        String id = null;
+
+        if (langMap.containsKey(lang)) {
+            id = langMap.get(lang).inverse().get(data);
+        }
+
+        return id;
+    }
+
+    protected final boolean containsId(String id, String lang) {
+        boolean result = false;
+
+        if (langMap.containsKey(lang)) {
+            // id = code of row in gc
+            result = langMap.get(lang).containsKey(id);
+        }
+
+        return result;
     }
 
     protected final boolean containsValue(String value, String lang) {
-        return lang != null ? clBiMap.values().stream()
-                .anyMatch(row -> row.getDataMap().get(lang).equals(value))
-                : clBiMap.values().stream()
-                        // en here is used because of v1 codelists
-                        .anyMatch(row -> row.getDataMap().get("en").equals(value));
+        boolean result = false;
+
+        if (langMap.containsKey(lang)) {
+            langMap.get(lang).containsValue(value);
+        }
+
+        return result;
     }
-
-    public static class CodeListRow {
-
-        private final String id;
-        // key = lang, value = name in that lang
-        private final Map<String, String> dataMap;
-
-        public CodeListRow(String id) {
-            this.id = id;
-            dataMap = new LinkedHashMap<>();
-        }
-
-        public String getId() {
-            return id;
-        }
-
-        public Map<String, String> getDataMap() {
-            return dataMap;
-        }
-
+    
+    protected final Set<String> getAllLangs() {
+        return langMap.keySet();
     }
-
+    
 }

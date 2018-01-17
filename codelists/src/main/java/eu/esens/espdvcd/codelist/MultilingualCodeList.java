@@ -1,6 +1,7 @@
 package eu.esens.espdvcd.codelist;
 
 import com.google.common.collect.BiMap;
+import java.util.Set;
 
 /**
  *
@@ -164,7 +165,7 @@ public enum MultilingualCodeList implements CodeList {
      */
     @Override
     public final boolean containsId(String id) {
-        return getInstance().containsId(id);
+        return getInstance().containsId(id, lang);
     }
 
     /**
@@ -181,8 +182,13 @@ public enum MultilingualCodeList implements CodeList {
      * @return the internal representation of the codelist as an immutable bimap
      */
     @Override
-    public final BiMap<String, GenericCode.CodeListRow> getBiMap() {
-        return getInstance().getBiMap();
+    public final BiMap<String, String> getBiMap() {
+        return getInstance().getBiMap(lang);
     }
-
+    
+    @Override
+    public Set<String> getAllLangs() {
+        return getInstance().getAllLangs();
+    }
+    
 }

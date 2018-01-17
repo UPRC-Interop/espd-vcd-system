@@ -15,8 +15,7 @@ public class MultilingualCodeListsTest {
     @Before
     public void setUp() {
     }
-    
-    @Ignore
+       
     @Test
     public void testMGC() throws UnsupportedEncodingException {
         Assert.assertEquals("Greece", MultilingualCodeList.CountryIdentification.getValueForId("GR"));
@@ -35,26 +34,17 @@ public class MultilingualCodeListsTest {
         System.out.println(nameInEll = MultilingualCodeList.BidType.getValueForId("LOT_ALL"));
         System.out.println(MultilingualCodeList.BidType.getIdForData(nameInEll));
     }
-
+    
+    @Ignore
+    @Test
+    public void testGetAllLangs() {
+        MultilingualCodeList.CountryIdentification.getAllLangs().forEach(lang -> System.out.println(lang));
+    }
+    
+    @Ignore
     @Test
     public void testV1Compatibility() {
-
-        // ActivityType
-        //Assert.assertTrue("ActivityType multilingual not compatible with ActivityType V1", 
-        //        MultilingualCodeList.ActivityType.getBiMap().keySet().containsAll(CodeListV1.ActivityType.getBiMap().keySet()));
-        // AmountType
-        // Assert.assertTrue("AmountType multilingual not compatible with AmountType V1",
-        //        MultilingualCodeList.AmountType.getBiMap().keySet().containsAll(CodeListV1.AmountType.getBiMap().keySet()));
-        // BitType -> Not an equivelent gc file in v1 codelists (NEW)
-
-        // ConfidentialityLevel -> Not an equivelent gc file in v1 codelists (NEW)
-        // ContractType
-        // Assert.assertTrue("ContractType multilingual not compatible with ContractType V1",
-        //        MultilingualCodeList.ContractType.getBiMap().keySet().containsAll(CodeListV1.ContractType.getBiMap().keySet()));
-        // CountryCodeIdentifier
-        //Assert.assertTrue("CountryIdentification multilingual not compatible with CountryIdentification V1",
-        //        MultilingualCodeList.CountryIdentification.getBiMap().keySet().containsAll(CodeListV1.CountryIdentification.getBiMap().keySet()));
-        // CriterionElementType
+        
         for (CodeListV1 cV1 : CodeListV1.values()) {
             boolean found = false;
             
