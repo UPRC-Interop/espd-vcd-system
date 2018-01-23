@@ -1,6 +1,6 @@
 package eu.esens.espdvcd.codelist;
 
-import com.google.common.collect.BiMap;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -18,8 +18,11 @@ public enum CodeListV2 implements CodeList {
      */
     AmountType("/gc/v2/AmountType-CodeList.gc"),
     /**
-     * Set whether an answer to a Criterion Property or/and Evidence can be
-     * publicly accessible or not
+     * Bid Type CodeList
+     */
+    BidType("/gc/v2/BidType-CodeList.gc"),
+    /**
+     * Set whether an answer to a Criterion Property or/and Evidence can be publicly accessible or not
      */
     ConfidentialityLevel("/gc/v2/ConfidentialityLevel-CodeList.gc"),
     /**
@@ -31,23 +34,26 @@ public enum CodeListV2 implements CodeList {
      */
     CountryIdentification("/gc/v2/CountryCodeIdentifier-CodeList.gc"),
     /**
-     * ESPD Criteria Type taxonomy, flattened as a Codelist
+     * Criterion Element Type CodeList
      */
-    CriteriaType("/gc/v2/CriteriaType-CodeList.gc"),
+    CriterionElementType("/gc/v2/CriterionElementType-CodeList.gc"),
     /**
      * Currency Codelist, ISO Compatible.
      */
     Currency("/gc/v2/CurrencyCode-CodeList.gc"),
     /**
-     * Document Reference types, used by ESPD Request and Response to add
-     * specific external references required by the ESPD Data Model
+     * Document Reference types, used by ESPD Request and Response to add specific external references required by
+     * the ESPD Data Model
      */
     DocumentReferenceContentType("/gc/v2/DocRefContentType-CodeList.gc"),
     /**
-     * States the type of identifier of an Economic Operator of a group of
-     * tenderers
+     * States the type of identifier of an Economic Operator of a group of tenderers
      */
     EOIDType("/gc/v2/EOIDType-CodeList.gc"),
+    /**
+     * Economic Operator Industry Classification CodeList
+     */
+    EOIndustryClassification("/gc/v2/EOIndustryClassificationCode-CodeList.gc"),
     /**
      * Language iso code Codelist
      */
@@ -61,26 +67,16 @@ public enum CodeListV2 implements CodeList {
      */
     FinancialRatioType("/gc/v2/FinancialRatioType-CodeList.gc"),
     /**
-     * Speficies the jurisdiction level of a gazette or publication board where
-     * the contract documents of the procurement procedure have been published
-     */
-    JurisdictionLevel("/gc/v2/JurisdictionLevel-CodeList.gc"),
-    /**
      * Criterion Jurisdiction Level for the ESPD Criteria Codelist
      */
     LegislationType("/gc/v2/LegislationType-CodeList.gc"),
     /**
-     * Specifies the number of lots the economic operator may tender
-     */
-    NumberOfLotsCode("/gc/v2/NumberOfLotsCode-CodeList.gc"),
-    /**
-     * Qualification Application Type, created in order to specify whether the
-     * ESPD is "Regulated" or "Self-contained"
+     * Qualification Application Type, created in order to specify whether the ESPD is "Regulated" or
+     * "Self-contained"
      */
     QualificationApplicationType("/gc/v2/QualificationApplicationType-CodeList.gc"),
     /**
-     * Response Data type codelist, used to infer the type of response a
-     * requirement requires.
+     * Response Data type codelist, used to infer the type of response a requirement requires.
      */
     ResponseDataType("/gc/v2/ResponseDataType-CodeList.gc"),
     PeriodMeasureType("/gc/v2/PeriodMeasureType-CodeList.gc"),
@@ -89,14 +85,18 @@ public enum CodeListV2 implements CodeList {
     ProjectType("/gc/v2/ProjectType-CodeList.gc"),
     ServicesProjectSubType("/gc/v2/ServicesProjectSubType-CodeList.gc"),
     TechnicalCapabilityType("/gc/v2/TechnicalCapabilityType-CodeList.gc"),
-    EORoleType("/gc/v2/EORoleType-CodeList.gc");
-
+    EORoleType("/gc/v2/EORoleType-CodeList.gc"),
+    PropertyGroupType("/gc/v2/PropertyGroupType-CodeList.gc");
+    
     private final String name;
-
     private volatile GenericCode INSTANCE;
 
-    private CodeListV2(String s) {
-        name = s;
+    private static final String DEFAULT_LANG = "eng";
+    private String lang;
+
+    private CodeListV2(String name) {
+        this.lang = DEFAULT_LANG;
+        this.name = name;
     }
 
     private GenericCode getInstance() {
@@ -121,13 +121,37 @@ public enum CodeListV2 implements CodeList {
         return (otherName == null) ? false : name.equals(otherName);
     }
 
+    @Override
+    public String toString() {
+        return this.name;
+    }
+
     /**
-     * @param data
-     * @return the Id of the codelist for the specific value
+     * This method work as wrapper for enum name() method
+     *
+     * @return the exact name of this ENUM_CONSTANT
      */
     @Override
-    public final String getIdForData(String data) {
-        return getInstance().getIdForData(data, "en");
+    public String getConstantName() {
+        return name();
+    }
+
+    public void setLang(String lang) {
+        this.lang = lang;
+    }
+
+    public void initLang() {
+        lang = DEFAULT_LANG;
+    }
+    
+    /**
+     *
+     * @param id 
+     * @return the value mapped with the specific id in the codelist, null otherwise
+     */
+    @Override
+    public final String getValueForId(String id) {
+        return getInstance().getValueForId(id, lang);
     }
 
     /**
@@ -137,7 +161,7 @@ public enum CodeListV2 implements CodeList {
      */
     @Override
     public final boolean containsId(String id) {
-        return getInstance().containsId(id, "en");
+        return getInstance().containsId(id, lang);
     }
 
     /**
@@ -147,49 +171,22 @@ public enum CodeListV2 implements CodeList {
      */
     @Override
     public final boolean containsValue(String value) {
-        return getInstance().containsValue(value, "en");
-    }
-
-    /**
-     *
-     * @param id
-     * @return the value mapped with the specific id in the codelist, null
-     * otherwise
-     */
-    @Override
-    public final String getValueForId(String id) {
-        return getInstance().getValueForId(id, "en");
+        return getInstance().containsValue(value, lang);
     }
 
     /**
      * @return the internal representation of the codelist as an immutable bimap
      */
     @Override
-    public final BiMap<String, String> getBiMap() {
-        return getInstance().getBiMap("en");
-    }
-
-    @Override
-    public String toString() {
-        return this.name;
-    }
-
-    /**
-     * This method work as wrapper for enum name() method
-     * 
-     * @return the exact name of this ENUM_CONSTANT
-     */
-    @Override
-    public String getConstantName() {
-        return name();
+    public final Map<String, String> getDataMap() {
+        return getInstance().getDataMap(lang);
     }
     
     /**
      * 
      * @return All available languages
      */
-    @Override
-    public Set<String> getAllLangs() {
+    Set<String> getAllLangs() {
         return getInstance().getAllLangs();
     }
     

@@ -1,8 +1,6 @@
 package eu.esens.espdvcd.codelist;
 
-import com.google.common.collect.BiMap;
-import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 /**
  * CodeList interface should be implemented by all codeLists implementation 
@@ -14,18 +12,14 @@ public interface CodeList {
         
     boolean equalsName(String otherName);
         
-    BiMap<String, String> getBiMap();
+    Map<String, String> getDataMap();
         
     String getConstantName();
     
     String getValueForId(String id);
     
-    String getIdForData(String data);
-    
     boolean containsId(String id);
     
     boolean containsValue(String value);
-    
-    Set<String> getAllLangs();
     
 }

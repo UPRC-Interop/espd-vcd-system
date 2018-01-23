@@ -1,7 +1,6 @@
 package eu.esens.espdvcd.codelist;
 
-import com.google.common.collect.BiMap;
-import com.google.common.collect.ImmutableBiMap;
+import com.google.common.collect.ImmutableMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
@@ -34,7 +33,7 @@ import org.oasis_open.docs.codelist.ns.genericode._1.ColumnSet;
 public class GenericCode {
 
     protected final JAXBElement<CodeListDocument> GC;
-    protected final Map<String, BiMap<String, String>> langMap;
+    protected final Map<String, Map<String, String>> langMap;
 
     protected GenericCode(String theCodelist) {
 
@@ -80,7 +79,7 @@ public class GenericCode {
                 .findAny().orElseThrow(IllegalArgumentException::new).getSimpleValue().getValue();
     }
 
-    private Map<String, BiMap<String, String>> createLangMap() {
+    private Map<String, Map<String, String>> createLangMap() {
 
         final Map<String, Map<String, String>> tempLangMap = new LinkedHashMap<>();
         SimpleCodeList sgc = GC.getValue().getSimpleCodeList();
@@ -89,11 +88,12 @@ public class GenericCode {
         // Extract Ids and langs
         // Key = id,  value = lang
         final Map<String, String> idLangMap = new LinkedHashMap<>();
-        cs.getColumnChoice().stream()
-                .filter(o -> o instanceof Column)
+        cs.getColumnChoice().stream() // Search in ColumnSet
+                .filter(o -> o instanceof Column) // For Columns
                 .map(o -> (Column) o)
                 // discard description & code
-                /* @TODO This filtering may have to be removed in future versions */
+                /* @TODO This filtering may have to be removed in future versions,
+                since we are not using the description column, we choose not to handle it*/
                 .filter(c -> !c.getId().equals("code") && !c.getId().contains("description"))
                 .forEach(c -> idLangMap.put(c.getId(), c.getData().getLang()));
 
@@ -136,13 +136,19 @@ public class GenericCode {
                             });
 
                 });
-
+        
+//        tempLangMap.forEach((lang, biMap) -> {
+//            System.out.println("language: " + lang);
+//            biMap.forEach((code, data)-> System.out.println("Code: " + code + ", Data: " + data));
+//            System.out.println();
+//        });
+        
         return tempLangMap.entrySet()
                 .stream()
-                .collect(Collectors.toMap(e -> e.getKey(), e -> ImmutableBiMap.copyOf(e.getValue())));
+                .collect(Collectors.toMap(e -> e.getKey(), e -> ImmutableMap.copyOf(e.getValue())));
     }
 
-    protected final BiMap<String, String> getBiMap(String lang) {
+    protected final Map<String, String> getDataMap(String lang) {
         return langMap.get(lang);
     }
 
@@ -154,16 +160,6 @@ public class GenericCode {
         }
 
         return value;
-    }
-
-    protected final String getIdForData(String data, String lang) {
-        String id = null;
-
-        if (langMap.containsKey(lang)) {
-            id = langMap.get(lang).inverse().get(data);
-        }
-
-        return id;
     }
 
     protected final boolean containsId(String id, String lang) {

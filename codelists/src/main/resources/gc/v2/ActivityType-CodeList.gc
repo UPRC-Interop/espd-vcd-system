@@ -1,217 +1,2037 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<gc:CodeList xmlns:xs="http://www.w3.org/2001/XMLSchema"
-             xmlns:fn="http://www.w3.org/2005/xpath-functions"
-             xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
-             xmlns:gc="http://docs.oasis-open.org/codelist/ns/genericode/1.0/">
-   <Identification>
-      <ShortName>ActivityTypeCode</ShortName>
-      <LongName xml:lang="en">MA_MAIN_ACTIVITIES_SECTION I.2_1.3</LongName>
-      <Version>1.0</Version>
-      <CanonicalUri>Placeholder</CanonicalUri>
-      <CanonicalVersionUri>Placeholder</CanonicalVersionUri>
-      <Agency>
-         <LongName xml:lang="en">OJEU</LongName>
-         <Identifier/>
-      </Agency>
-   </Identification>
-   <ColumnSet>
-      <Column Id="code" Use="required">
-         <ShortName>Code</ShortName>
-         <Data Type="normalizedString" Lang="en"/>
-      </Column>
-      <Column Id="name" Use="optional">
-         <ShortName>Name</ShortName>
-         <Data Type="string" Lang="en"/>
-      </Column>
-      <Key Id="codeKey">
-         <ShortName>CodeKey</ShortName>
-         <ColumnRef Ref="code"/>
-      </Key>
-   </ColumnSet>
-   <SimpleCodeList>
-      <Row>
-         <Value ColumnRef="code">
-            <SimpleValue>A</SimpleValue>
-         </Value>
-         <Value ColumnRef="name">
-            <SimpleValue>Housing and community amenities</SimpleValue>
-         </Value>
-      </Row>
-      <Row>
-         <Value ColumnRef="code">
-            <SimpleValue>B</SimpleValue>
-         </Value>
-         <Value ColumnRef="name">
-            <SimpleValue>Social protection</SimpleValue>
-         </Value>
-      </Row>
-      <Row>
-         <Value ColumnRef="code">
-            <SimpleValue>C</SimpleValue>
-         </Value>
-         <Value ColumnRef="name">
-            <SimpleValue>Recreation, culture and religion</SimpleValue>
-         </Value>
-      </Row>
-      <Row>
-         <Value ColumnRef="code">
-            <SimpleValue>D</SimpleValue>
-         </Value>
-         <Value ColumnRef="name">
-            <SimpleValue>Defence</SimpleValue>
-         </Value>
-      </Row>
-      <Row>
-         <Value ColumnRef="code">
-            <SimpleValue>E</SimpleValue>
-         </Value>
-         <Value ColumnRef="name">
-            <SimpleValue>Environment</SimpleValue>
-         </Value>
-      </Row>
-      <Row>
-         <Value ColumnRef="code">
-            <SimpleValue>F</SimpleValue>
-         </Value>
-         <Value ColumnRef="name">
-            <SimpleValue>Economic and financial affairs</SimpleValue>
-         </Value>
-      </Row>
-      <Row>
-         <Value ColumnRef="code">
-            <SimpleValue>G</SimpleValue>
-         </Value>
-         <Value ColumnRef="name">
-            <SimpleValue>Production, transport and distribution of gas and heat</SimpleValue>
-         </Value>
-      </Row>
-      <Row>
-         <Value ColumnRef="code">
-            <SimpleValue>H</SimpleValue>
-         </Value>
-         <Value ColumnRef="name">
-            <SimpleValue>Health</SimpleValue>
-         </Value>
-      </Row>
-      <Row>
-         <Value ColumnRef="code">
-            <SimpleValue>I</SimpleValue>
-         </Value>
-         <Value ColumnRef="name">
-            <SimpleValue>Airport-related activities</SimpleValue>
-         </Value>
-      </Row>
-      <Row>
-         <Value ColumnRef="code">
-            <SimpleValue>J</SimpleValue>
-         </Value>
-         <Value ColumnRef="name">
-            <SimpleValue>Exploration and extraction of gas and oil</SimpleValue>
-         </Value>
-      </Row>
-      <Row>
-         <Value ColumnRef="code">
-            <SimpleValue>K</SimpleValue>
-         </Value>
-         <Value ColumnRef="name">
-            <SimpleValue>Port-related activities / Maritime or inland waterway</SimpleValue>
-         </Value>
-      </Row>
-      <Row>
-         <Value ColumnRef="code">
-            <SimpleValue>L</SimpleValue>
-         </Value>
-         <Value ColumnRef="name">
-            <SimpleValue>Education</SimpleValue>
-         </Value>
-      </Row>
-      <Row>
-         <Value ColumnRef="code">
-            <SimpleValue>M</SimpleValue>
-         </Value>
-         <Value ColumnRef="name">
-            <SimpleValue>Exploration and extraction of coal and other solid fuels</SimpleValue>
-         </Value>
-      </Row>
-      <Row>
-         <Value ColumnRef="code">
-            <SimpleValue>N</SimpleValue>
-         </Value>
-         <Value ColumnRef="name">
-            <SimpleValue>Electricity</SimpleValue>
-         </Value>
-      </Row>
-      <Row>
-         <Value ColumnRef="code">
-            <SimpleValue>P</SimpleValue>
-         </Value>
-         <Value ColumnRef="name">
-            <SimpleValue>Postal services</SimpleValue>
-         </Value>
-      </Row>
-      <Row>
-         <Value ColumnRef="code">
-            <SimpleValue>R</SimpleValue>
-         </Value>
-         <Value ColumnRef="name">
-            <SimpleValue>Railway services</SimpleValue>
-         </Value>
-      </Row>
-      <Row>
-         <Value ColumnRef="code">
-            <SimpleValue>S</SimpleValue>
-         </Value>
-         <Value ColumnRef="name">
-            <SimpleValue>General public services</SimpleValue>
-         </Value>
-      </Row>
-      <Row>
-         <Value ColumnRef="code">
-            <SimpleValue>T</SimpleValue>
-         </Value>
-         <Value ColumnRef="name">
-            <SimpleValue>Urban railway / light rail, metro, tramway, trolleybus or bus services</SimpleValue>
-         </Value>
-      </Row>
-      <Row>
-         <Value ColumnRef="code">
-            <SimpleValue>U</SimpleValue>
-         </Value>
-         <Value ColumnRef="name">
-            <SimpleValue>Public order and safety</SimpleValue>
-         </Value>
-      </Row>
-      <Row>
-         <Value ColumnRef="code">
-            <SimpleValue>W</SimpleValue>
-         </Value>
-         <Value ColumnRef="name">
-            <SimpleValue>Water</SimpleValue>
-         </Value>
-      </Row>
-      <Row>
-         <Value ColumnRef="code">
-            <SimpleValue>8</SimpleValue>
-         </Value>
-         <Value ColumnRef="name">
-            <SimpleValue>Other</SimpleValue>
-         </Value>
-      </Row>
-      <Row>
-         <Value ColumnRef="code">
-            <SimpleValue>9</SimpleValue>
-         </Value>
-         <Value ColumnRef="name">
-            <SimpleValue>Not applicable</SimpleValue>
-         </Value>
-      </Row>
-      <Row>
-         <Value ColumnRef="code">
-            <SimpleValue>Z</SimpleValue>
-         </Value>
-         <Value ColumnRef="name">
-            <SimpleValue>Not specified</SimpleValue>
-         </Value>
-      </Row>
-   </SimpleCodeList>
+<?xml version="1.0" encoding="UTF-8"?>
+<gc:CodeList xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:gc="http://docs.oasis-open.org/codelist/ns/genericode/1.0/" xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" xmlns:util="java:java.util.UUID" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://docs.oasis-open.org/codelist/ns/genericode/1.0/ ./genericode.xsd">
+    <Identification>
+        <ShortName>ActivityType</ShortName>
+        <LongName xml:lang="en">MA_MAIN_ACTIVITIES_SECTION I.2_1.3</LongName>
+        <LongName Identifier="listID">ActivityType</LongName>
+        <Version>1.0</Version>
+        <CanonicalUri>http://publications.europa.eu/mdr/authority/index.html</CanonicalUri>
+        <CanonicalVersionUri>http://publications.europa.eu/mdr/authority/eprocurement/01/index.html</CanonicalVersionUri>
+        <LocationUri>https://github.com/ESPD/ESPD-EDM/tree/ESPD-EDM-V02.00.00/docs/src/main/asciidoc/dist/cl/gc/ActivityType.gc</LocationUri>
+        <Agency>
+            <LongName xml:lang="EN">Publications Office of the EU</LongName>
+            <Identifier>EU-COM-OP</Identifier>
+        </Agency>
+    </Identification>
+    <ColumnSet>
+        <Column Id="code" Use="required">
+            <ShortName>Code</ShortName>
+            <Data Type="normalizedString" Lang="en"/>
+        </Column>
+        <Column Id="name-eng" Use="optional">
+            <ShortName>Name</ShortName>
+            <Data Type="string" Lang="eng"/>
+        </Column>
+        <Column Id="description-eng" Use="required">
+            <ShortName>Description</ShortName>
+            <Data Type="string" Lang="eng"/>
+        </Column>
+        <Column Id="name-bul" Use="required">
+            <ShortName>Name</ShortName>
+            <Data Type="string" Lang="bul"/>
+        </Column>
+        <Column Id="name-spa" Use="required">
+            <ShortName>Name</ShortName>
+            <Data Type="string" Lang="spa"/>
+        </Column>
+        <Column Id="name-ces" Use="required">
+            <ShortName>Name</ShortName>
+            <Data Type="string" Lang="ces"/>
+        </Column>
+        <Column Id="name-dan" Use="required">
+            <ShortName>Name</ShortName>
+            <Data Type="string" Lang="dan"/>
+        </Column>
+        <Column Id="name-deu" Use="required">
+            <ShortName>Name</ShortName>
+            <Data Type="string" Lang="deu"/>
+        </Column>
+        <Column Id="name-est" Use="required">
+            <ShortName>Name</ShortName>
+            <Data Type="string" Lang="est"/>
+        </Column>
+        <Column Id="name-ell" Use="required">
+            <ShortName>Name</ShortName>
+            <Data Type="string" Lang="ell"/>
+        </Column>
+        <Column Id="name-fra" Use="required">
+            <ShortName>Name</ShortName>
+            <Data Type="string" Lang="fra"/>
+        </Column>
+        <Column Id="name-gle" Use="required">
+            <ShortName>Name</ShortName>
+            <Data Type="string" Lang="gle"/>
+        </Column>
+        <Column Id="name-hrv" Use="required">
+            <ShortName>Name</ShortName>
+            <Data Type="string" Lang="hrv"/>
+        </Column>
+        <Column Id="name-ita" Use="required">
+            <ShortName>Name</ShortName>
+            <Data Type="string" Lang="ita"/>
+        </Column>
+        <Column Id="name-lav" Use="required">
+            <ShortName>Name</ShortName>
+            <Data Type="string" Lang="lav"/>
+        </Column>
+        <Column Id="name-lit" Use="required">
+            <ShortName>Name</ShortName>
+            <Data Type="string" Lang="lit"/>
+        </Column>
+        <Column Id="name-hun" Use="required">
+            <ShortName>Name</ShortName>
+            <Data Type="string" Lang="hun"/>
+        </Column>
+        <Column Id="name-mlt" Use="required">
+            <ShortName>Name</ShortName>
+            <Data Type="string" Lang="mlt"/>
+        </Column>
+        <Column Id="name-nld" Use="required">
+            <ShortName>Name</ShortName>
+            <Data Type="string" Lang="nld"/>
+        </Column>
+        <Column Id="name-pol" Use="required">
+            <ShortName>Name</ShortName>
+            <Data Type="string" Lang="pol"/>
+        </Column>
+        <Column Id="name-por" Use="required">
+            <ShortName>Name</ShortName>
+            <Data Type="string" Lang="por"/>
+        </Column>
+        <Column Id="name-ron" Use="required">
+            <ShortName>Name</ShortName>
+            <Data Type="string" Lang="ron"/>
+        </Column>
+        <Column Id="name-slk" Use="required">
+            <ShortName>Name</ShortName>
+            <Data Type="string" Lang="slk"/>
+        </Column>
+        <Column Id="name-slv" Use="required">
+            <ShortName>Name</ShortName>
+            <Data Type="string" Lang="slv"/>
+        </Column>
+        <Column Id="name-fin" Use="required">
+            <ShortName>Name</ShortName>
+            <Data Type="string" Lang="fin"/>
+        </Column>
+        <Column Id="name-swe" Use="required">
+            <ShortName>Name</ShortName>
+            <Data Type="string" Lang="swe"/>
+        </Column>
+        <Key Id="codeKey">
+            <ShortName>CodeKey</ShortName>
+            <ColumnRef Ref="code"/>
+        </Key>
+    </ColumnSet>
+    <SimpleCodeList>
+        <Row>
+            <Value ColumnRef="code">
+                <SimpleValue>HOUSING</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-eng">
+                <SimpleValue>Housing and community amenities</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-eng">
+                <SimpleValue>Housing and community amenities</SimpleValue>
+            </Value>
+            <Value ColumnRef="description-eng">
+                <SimpleValue>Housing and community amenities</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-bul">
+                <SimpleValue>Настаняване/жилищно строителство и места за отдих и култура</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-spa">
+                <SimpleValue>Vivienda y servicios comunitarios</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ces">
+                <SimpleValue>Bydlení a občanská vybavenost</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-dan">
+                <SimpleValue>Boliger og offentlige faciliteter</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-deu">
+                <SimpleValue>Wohnungswesen und kommunale Einrichtungen</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-est">
+                <SimpleValue>Elamu- ja kommunaalmajandus</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ell">
+                <SimpleValue>Στέγαση και υποδομές κοινής ωφέλειας</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-fra">
+                <SimpleValue>Logement et équipements collectifs</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-gle">
+                <SimpleValue>Tithíocht agus taitneamhachtaí pobail</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-hrv">
+                <SimpleValue>Stambeno i komunalno gospodarstvo i usluge</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ita">
+                <SimpleValue>Edilizia abitativa e strutture per le collettività</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-lav">
+                <SimpleValue>Dzīvokļu un komunālā saimniecība</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-lit">
+                <SimpleValue>Būstas ir komunaliniai patogumai</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-hun">
+                <SimpleValue>Lakásszolgáltatás és közösségi rekreáció</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-mlt">
+                <SimpleValue>Akkomodazzjoni u kumditajiet tal-komunità</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-nld">
+                <SimpleValue>Huisvesting en gemeenschappelijke voorzieningen</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-pol">
+                <SimpleValue>Budownictwo i obiekty komunalne</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-por">
+                <SimpleValue>Habitação e equipamentos da coletividade</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ron">
+                <SimpleValue>Locuințe și facilități pentru comunitate</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-slk">
+                <SimpleValue>Bývanie a občianska vybavenosť</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-slv">
+                <SimpleValue>Stanovanjske zadeve in prostorsko načrtovanje</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-fin">
+                <SimpleValue>Asuminen ja yhdyskuntapalvelut</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-swe">
+                <SimpleValue>Bostadsförsörjning och samhällsutveckling</SimpleValue>
+            </Value>
+        </Row>
+        <Row>
+            <Value ColumnRef="code">
+                <SimpleValue>PROTECTION_SOC</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-eng">
+                <SimpleValue>Social protection</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-eng">
+                <SimpleValue>Social protection</SimpleValue>
+            </Value>
+            <Value ColumnRef="description-eng">
+                <SimpleValue>Social protection</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-bul">
+                <SimpleValue>Социална закрила</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-spa">
+                <SimpleValue>Protección social</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ces">
+                <SimpleValue>Sociální služby</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-dan">
+                <SimpleValue>Social beskyttelse</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-deu">
+                <SimpleValue>Sozialwesen</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-est">
+                <SimpleValue>Sotsiaalkaitse</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ell">
+                <SimpleValue>Κοινωνική προστασία</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-fra">
+                <SimpleValue>Protection sociale</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-gle">
+                <SimpleValue>Cosaint shóisialta</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-hrv">
+                <SimpleValue>Socijalna skrb</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ita">
+                <SimpleValue>Protezione sociale</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-lav">
+                <SimpleValue>Sociālā aizsardzība</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-lit">
+                <SimpleValue>Socialinė apsauga</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-hun">
+                <SimpleValue>Szociális védelem</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-mlt">
+                <SimpleValue>Ħarsien soċjali</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-nld">
+                <SimpleValue>Sociale bescherming</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-pol">
+                <SimpleValue>Ochrona socjalna</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-por">
+                <SimpleValue>Protecão social</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ron">
+                <SimpleValue>Protecție socială</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-slk">
+                <SimpleValue>Sociálna starostlivosť</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-slv">
+                <SimpleValue>Socialno varstvo</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-fin">
+                <SimpleValue>Sosiaaliturva</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-swe">
+                <SimpleValue>Social trygghet</SimpleValue>
+            </Value>
+        </Row>
+        <Row>
+            <Value ColumnRef="code">
+                <SimpleValue>CULTURE</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-eng">
+                <SimpleValue>Recreation, culture and religion</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-eng">
+                <SimpleValue>Recreation, culture and religion</SimpleValue>
+            </Value>
+            <Value ColumnRef="description-eng">
+                <SimpleValue>Recreation, culture and religion</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-bul">
+                <SimpleValue>Отдих, култура и вероизповедание</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-spa">
+                <SimpleValue>Ocio, cultura y religión</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ces">
+                <SimpleValue>Rekreace, kultura a náboženství</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-dan">
+                <SimpleValue>Fritid, kultur og religion</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-deu">
+                <SimpleValue>Freizeit, Kultur und Religion</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-est">
+                <SimpleValue>Vaba aeg, kultuur ja religioon</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ell">
+                <SimpleValue>Αναψυχή, πολιτισμός και θρησκεία</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-fra">
+                <SimpleValue>Loisirs, culture et religion</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-gle">
+                <SimpleValue>Áineas, cultúr agus reiligiún</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-hrv">
+                <SimpleValue>Rekreacija, kultura i religija</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ita">
+                <SimpleValue>Servizi ricreativi, cultura e religione</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-lav">
+                <SimpleValue>Atpūta, kultūra un reliģija</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-lit">
+                <SimpleValue>Laisvalaikis, kultūra ir religija</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-hun">
+                <SimpleValue>Szabadidő, kultúra és vallás</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-mlt">
+                <SimpleValue>Rikreazzjoni, kultura u reliġjon</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-nld">
+                <SimpleValue>Recreatie, cultuur en godsdienst</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-pol">
+                <SimpleValue>Rekreacja, kultura i religia</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-por">
+                <SimpleValue>Atividades recreativas, culturais e religiosas</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ron">
+                <SimpleValue>Recreere, cultură și religie</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-slk">
+                <SimpleValue>Rekreácia, kultúra a náboženstvo</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-slv">
+                <SimpleValue>Rekreacija, kultura in vera</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-fin">
+                <SimpleValue>Virkistys, kulttuuri ja uskonto</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-swe">
+                <SimpleValue>Fritidsverksamhet, kultur och religion</SimpleValue>
+            </Value>
+        </Row>
+        <Row>
+            <Value ColumnRef="code">
+                <SimpleValue>DEFENCE</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-eng">
+                <SimpleValue>Defence</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-eng">
+                <SimpleValue>Defence</SimpleValue>
+            </Value>
+            <Value ColumnRef="description-eng">
+                <SimpleValue>Defence</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-bul">
+                <SimpleValue>Отбрана</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-spa">
+                <SimpleValue>Defensa</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ces">
+                <SimpleValue>Obrana</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-dan">
+                <SimpleValue>Forsvar</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-deu">
+                <SimpleValue>Verteidigung</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-est">
+                <SimpleValue>Riigikaitse</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ell">
+                <SimpleValue>Άμυνα</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-fra">
+                <SimpleValue>Défense</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-gle">
+                <SimpleValue>Cosaint</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-hrv">
+                <SimpleValue>Obrana</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ita">
+                <SimpleValue>Difesa</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-lav">
+                <SimpleValue>Aizsardzība</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-lit">
+                <SimpleValue>Gynyba</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-hun">
+                <SimpleValue>Honvédelem</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-mlt">
+                <SimpleValue>Difiża</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-nld">
+                <SimpleValue>Defensie</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-pol">
+                <SimpleValue>Obrona</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-por">
+                <SimpleValue>Defesa</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ron">
+                <SimpleValue>Apărare</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-slk">
+                <SimpleValue>Obrana</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-slv">
+                <SimpleValue>Obramba</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-fin">
+                <SimpleValue>Puolustus</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-swe">
+                <SimpleValue>Försvar</SimpleValue>
+            </Value>
+        </Row>
+        <Row>
+            <Value ColumnRef="code">
+                <SimpleValue>ENVIRONMENT</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-eng">
+                <SimpleValue>Environment</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-eng">
+                <SimpleValue>Environment</SimpleValue>
+            </Value>
+            <Value ColumnRef="description-eng">
+                <SimpleValue>Environment</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-bul">
+                <SimpleValue>Околна среда</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-spa">
+                <SimpleValue>Medio ambiente</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ces">
+                <SimpleValue>Životní prostředí</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-dan">
+                <SimpleValue>Miljø</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-deu">
+                <SimpleValue>Umwelt</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-est">
+                <SimpleValue>Keskkond</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ell">
+                <SimpleValue>Περιβάλλον</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-fra">
+                <SimpleValue>Environnement</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-gle">
+                <SimpleValue>Comhshaol</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-hrv">
+                <SimpleValue>Okoliš</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ita">
+                <SimpleValue>Ambiente</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-lav">
+                <SimpleValue>Vide</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-lit">
+                <SimpleValue>Aplinka</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-hun">
+                <SimpleValue>Környezetvédelem</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-mlt">
+                <SimpleValue>Ambjent</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-nld">
+                <SimpleValue>Milieu</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-pol">
+                <SimpleValue>Środowisko</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-por">
+                <SimpleValue>Ambiente</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ron">
+                <SimpleValue>Mediu</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-slk">
+                <SimpleValue>Životné prostredie</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-slv">
+                <SimpleValue>Okolje</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-fin">
+                <SimpleValue>Ympäristö</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-swe">
+                <SimpleValue>Miljö</SimpleValue>
+            </Value>
+        </Row>
+        <Row>
+            <Value ColumnRef="code">
+                <SimpleValue>AFFAIR_ECON_FIN</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-eng">
+                <SimpleValue>Economic and financial affairs</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-eng">
+                <SimpleValue>Economic and financial affairs</SimpleValue>
+            </Value>
+            <Value ColumnRef="description-eng">
+                <SimpleValue>Economic and financial affairs</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-bul">
+                <SimpleValue>Икономически и финансови дейности</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-spa">
+                <SimpleValue>Asuntos económicos y financieros</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ces">
+                <SimpleValue>Hospodářské a finanční záležitosti</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-dan">
+                <SimpleValue>Økonomiske og finansielle anliggender</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-deu">
+                <SimpleValue>Wirtschaft und Finanzen</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-est">
+                <SimpleValue>Majandus ja rahandus</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ell">
+                <SimpleValue>Οικονομικές και δημοσιονομικές υποθέσεις</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-fra">
+                <SimpleValue>Affaires économiques et financières</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-gle">
+                <SimpleValue>Gnóthaí eacnamaíocha agus airgeadais</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-hrv">
+                <SimpleValue>Gospodarstvo i financije</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ita">
+                <SimpleValue>Affari economici e finanziari</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-lav">
+                <SimpleValue>Ekonomika un finanses</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-lit">
+                <SimpleValue>Ekonomikos ir finansų reikalai</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-hun">
+                <SimpleValue>Gazdasági és pénzügyek</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-mlt">
+                <SimpleValue>Affarijiet ekonomiċi u finanzjarji</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-nld">
+                <SimpleValue>Economische en financiële zaken</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-pol">
+                <SimpleValue>Sprawy gospodarcze i finansowe</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-por">
+                <SimpleValue>Assuntos económicos e financeiros</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ron">
+                <SimpleValue>Afaceri economice și financiare</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-slk">
+                <SimpleValue>Hospodárske a finančné záležitosti</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-slv">
+                <SimpleValue>Gospodarske in finančne zadeve</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-fin">
+                <SimpleValue>Talous- ja rahoitusasiat</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-swe">
+                <SimpleValue>Ekonomi och finans</SimpleValue>
+            </Value>
+        </Row>
+        <Row>
+            <Value ColumnRef="code">
+                <SimpleValue>GAS_HEAT</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-eng">
+                <SimpleValue>Production, transport and distribution of gas and heat</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-eng">
+                <SimpleValue>Production, transport and distribution of gas and heat</SimpleValue>
+            </Value>
+            <Value ColumnRef="description-eng">
+                <SimpleValue>Production, transport and distribution of gas and heat</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-bul">
+                <SimpleValue>Производство, пренос и разпределение на газ и топлинна енергия</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-spa">
+                <SimpleValue>Producción, transporte y distribución de gas y calefacción</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ces">
+                <SimpleValue>Výroba, doprava a distribuce plynu a tepla</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-dan">
+                <SimpleValue>Produktion, transport og distribution af gas og varme</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-deu">
+                <SimpleValue>Erzeugung, Fortleitung und Abgabe von Gas und Wärme</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-est">
+                <SimpleValue>Gaasi ja soojusenergia tootmine, transport ja jaotamine</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ell">
+                <SimpleValue>Παραγωγή, μεταφορά και διανομή αερίου και θερμότητας</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-fra">
+                <SimpleValue>Production, transport et distribution de gaz et de chaleur</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-gle">
+                <SimpleValue>Táirgeadh, iompar agus dáileadh gáis nó teasa</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-hrv">
+                <SimpleValue>Proizvodnja, prijenos i distribucija plina i toplinske energije</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ita">
+                <SimpleValue>Produzione, trasporto e distribuzione di gas e calore</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-lav">
+                <SimpleValue>Gāzes un siltuma ražošana, pārvade un sadale</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-lit">
+                <SimpleValue>Dujų ir šilumos gamyba, transportavimas ir skirstymas</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-hun">
+                <SimpleValue>Gáz- és hőenergia termelése, szállítása és elosztása</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-mlt">
+                <SimpleValue>Produzzjoni, trasport u distribuzzjoni tal-gass u tas-sħana</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-nld">
+                <SimpleValue>Productie, vervoer en distributie van gas en warmte</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-pol">
+                <SimpleValue>Produkcja, transport oraz dystrybucja gazu i energii cieplnej</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-por">
+                <SimpleValue>Produção, transporte e distribuição de gás e de calor</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ron">
+                <SimpleValue>Producere, transport și distribuție de gaz și de energie termică</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-slk">
+                <SimpleValue>Výroba, preprava a distribúcia plynu a tepla</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-slv">
+                <SimpleValue>Proizvodnja, prenos ali distribucija plina in toplote</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-fin">
+                <SimpleValue>Kaasun ja lämmön tuotanto, siirto ja jakelu</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-swe">
+                <SimpleValue>Produktion, transport och distribution av gas och värme</SimpleValue>
+            </Value>
+        </Row>
+        <Row>
+            <Value ColumnRef="code">
+                <SimpleValue>HEALTH</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-eng">
+                <SimpleValue>Health</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-eng">
+                <SimpleValue>Health</SimpleValue>
+            </Value>
+            <Value ColumnRef="description-eng">
+                <SimpleValue>Health</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-bul">
+                <SimpleValue>Здравеопазване</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-spa">
+                <SimpleValue>Salud</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ces">
+                <SimpleValue>Zdravotnictví</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-dan">
+                <SimpleValue>Sundhed</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-deu">
+                <SimpleValue>Gesundheit</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-est">
+                <SimpleValue>Tervishoid</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ell">
+                <SimpleValue>Υγεία</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-fra">
+                <SimpleValue>Santé</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-gle">
+                <SimpleValue>Sláinte</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-hrv">
+                <SimpleValue>Zdravstvo</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ita">
+                <SimpleValue>Salute</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-lav">
+                <SimpleValue>Veselība</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-lit">
+                <SimpleValue>Sveikata</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-hun">
+                <SimpleValue>Egészségügy</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-mlt">
+                <SimpleValue>Saħħa</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-nld">
+                <SimpleValue>Gezondheid</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-pol">
+                <SimpleValue>Zdrowie</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-por">
+                <SimpleValue>Saúde</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ron">
+                <SimpleValue>Sănătate</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-slk">
+                <SimpleValue>Zdravotníctvo</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-slv">
+                <SimpleValue>Zdravje</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-fin">
+                <SimpleValue>Terveydenhuolto</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-swe">
+                <SimpleValue>Hälso- och sjukvård</SimpleValue>
+            </Value>
+        </Row>
+        <Row>
+            <Value ColumnRef="code">
+                <SimpleValue>AIRPORT</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-eng">
+                <SimpleValue>Airport-related activities</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-eng">
+                <SimpleValue>Airport-related activities</SimpleValue>
+            </Value>
+            <Value ColumnRef="description-eng">
+                <SimpleValue>Airport-related activities</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-bul">
+                <SimpleValue>Летищни дейности</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-spa">
+                <SimpleValue>Actividades aeroportuarias</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ces">
+                <SimpleValue>Činnosti související s letišti</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-dan">
+                <SimpleValue>Lufthavnsrelaterede aktiviteter</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-deu">
+                <SimpleValue>Flughafenanlagen</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-est">
+                <SimpleValue>Lennujaamaga seotud tegevus</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ell">
+                <SimpleValue>Δραστηριότητες που αφορούν τους αερολιμένες</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-fra">
+                <SimpleValue>Activités aéroportuaires</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-gle">
+                <SimpleValue>Gníomhaíochtaí a bhaineann le haerfoirt</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-hrv">
+                <SimpleValue>Djelatnosti povezane sa zračnim lukama</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ita">
+                <SimpleValue>Attività aeroportuali</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-lav">
+                <SimpleValue>Ar lidostu pārvaldi saistīta darbība</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-lit">
+                <SimpleValue>Oro uostų veikla</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-hun">
+                <SimpleValue>Repülőtéri tevékenységek</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-mlt">
+                <SimpleValue>Attivitajiet marbuta mal-ajruporti</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-nld">
+                <SimpleValue>Luchthavenactiviteiten</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-pol">
+                <SimpleValue>Działalność dotycząca portów lotniczych</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-por">
+                <SimpleValue>Atividades aeroportuárias</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ron">
+                <SimpleValue>Activități aeroportuare</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-slk">
+                <SimpleValue>Činnosti súvisiace s letiskami</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-slv">
+                <SimpleValue>Letališke dejavnosti</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-fin">
+                <SimpleValue>Lentokenttään liittyvät toiminnot</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-swe">
+                <SimpleValue>Flygplatsrelaterad verksamhet</SimpleValue>
+            </Value>
+        </Row>
+        <Row>
+            <Value ColumnRef="code">
+                <SimpleValue>GAS_OIL</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-eng">
+                <SimpleValue>Extraction of gas and oil</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-eng">
+                <SimpleValue>Extraction of gas and oil</SimpleValue>
+            </Value>
+            <Value ColumnRef="description-eng">
+                <SimpleValue>Extraction of gas and oil</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-bul">
+                <SimpleValue>Добив на газ или нефт</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-spa">
+                <SimpleValue>Extracción de gas y petróleo</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ces">
+                <SimpleValue>Těžba zemního plynu a ropy</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-dan">
+                <SimpleValue>Udvinding af gas og olie</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-deu">
+                <SimpleValue>Aufsuchung und Gewinnung von Gas und Erdöl</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-est">
+                <SimpleValue>Gaasi ja nafta ammutamine</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ell">
+                <SimpleValue>Εξόρυξη φυσικού αερίου και πετρελαίου</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-fra">
+                <SimpleValue>Extraction de gaz et de pétrole</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-gle">
+                <SimpleValue>Astarraingt gáis agus ola</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-hrv">
+                <SimpleValue>Vađenje plina i nafte</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ita">
+                <SimpleValue>Estrazione di gas e petrolio</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-lav">
+                <SimpleValue>Gāzes un naftas ieguve</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-lit">
+                <SimpleValue>Dujų ir naftos gavyba</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-hun">
+                <SimpleValue>Földgáz és kőolaj kitermelése</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-mlt">
+                <SimpleValue>Estrazzjoni ta' gass u żejt</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-nld">
+                <SimpleValue>Winning van gas en aardolie</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-pol">
+                <SimpleValue>Wydobycie gazu i ropy naftowej</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-por">
+                <SimpleValue>Extração de gás e de petróleo</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ron">
+                <SimpleValue>Extragerea gazelor şi petrolului</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-slk">
+                <SimpleValue>Ťažba plynu a ropy</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-slv">
+                <SimpleValue>Pridobivanje plina in nafte</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-fin">
+                <SimpleValue>Kaasun ja öljyn talteenotto</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-swe">
+                <SimpleValue>Utvinning av gas och olja</SimpleValue>
+            </Value>
+        </Row>
+        <Row>
+            <Value ColumnRef="code">
+                <SimpleValue>PORT</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-eng">
+                <SimpleValue>Port-related activities</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-eng">
+                <SimpleValue>Port-related activities</SimpleValue>
+            </Value>
+            <Value ColumnRef="description-eng">
+                <SimpleValue>Port-related activities</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-bul">
+                <SimpleValue>Пристанищни дейности</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-spa">
+                <SimpleValue>Actividades portuarias</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ces">
+                <SimpleValue>Činnosti související s přístavy</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-dan">
+                <SimpleValue>Havnerelaterede aktiviteter</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-deu">
+                <SimpleValue>Hafeneinrichtungen</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-est">
+                <SimpleValue>Sadamaga seotud tegevus</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ell">
+                <SimpleValue>Δραστηριότητες που αφορούν τους λιμένες</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-fra">
+                <SimpleValue>Activités portuaires</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-gle">
+                <SimpleValue>Gníomhaíochtaí a bhaineann le calafoirt</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-hrv">
+                <SimpleValue>Djelatnosti povezane s lukama</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ita">
+                <SimpleValue>Attività portuali</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-lav">
+                <SimpleValue>Ar ostu pārvaldi saistīta darbība</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-lit">
+                <SimpleValue>Uostų veikla</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-hun">
+                <SimpleValue>Kikötői tevékenységek</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-mlt">
+                <SimpleValue>Attivitajiet marbuta mal-portijiet</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-nld">
+                <SimpleValue>Havenactiviteiten</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-pol">
+                <SimpleValue>Działalność dotycząca portów wodnych</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-por">
+                <SimpleValue>Atividades portuárias</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ron">
+                <SimpleValue>Activități portuare</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-slk">
+                <SimpleValue>Činnosti súvisiace s prístavmi</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-slv">
+                <SimpleValue>Pristaniške dejavnosti</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-fin">
+                <SimpleValue>Satamaan liittyvät palvelut</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-swe">
+                <SimpleValue>Hamnverksamheter</SimpleValue>
+            </Value>
+        </Row>
+        <Row>
+            <Value ColumnRef="code">
+                <SimpleValue>EDUCATION</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-eng">
+                <SimpleValue>Education</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-eng">
+                <SimpleValue>Education</SimpleValue>
+            </Value>
+            <Value ColumnRef="description-eng">
+                <SimpleValue>Education</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-bul">
+                <SimpleValue>Образование</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-spa">
+                <SimpleValue>Educación</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ces">
+                <SimpleValue>Vzdělávání</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-dan">
+                <SimpleValue>Uddannelse</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-deu">
+                <SimpleValue>Bildung</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-est">
+                <SimpleValue>Haridus</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ell">
+                <SimpleValue>Εκπαίδευση</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-fra">
+                <SimpleValue>Éducation</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-gle">
+                <SimpleValue>Oideachas</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-hrv">
+                <SimpleValue>Obrazovanje</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ita">
+                <SimpleValue>Istruzione</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-lav">
+                <SimpleValue>Izglītība</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-lit">
+                <SimpleValue>Švietimas</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-hun">
+                <SimpleValue>Oktatás</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-mlt">
+                <SimpleValue>Edukazzjoni</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-nld">
+                <SimpleValue>Onderwijs</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-pol">
+                <SimpleValue>Edukacja</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-por">
+                <SimpleValue>Educação</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ron">
+                <SimpleValue>Educație</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-slk">
+                <SimpleValue>Vzdelávanie</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-slv">
+                <SimpleValue>Izobraževanje</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-fin">
+                <SimpleValue>Koulutus</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-swe">
+                <SimpleValue>Utbildning</SimpleValue>
+            </Value>
+        </Row>
+        <Row>
+            <Value ColumnRef="code">
+                <SimpleValue>FUEL_SOLID</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-eng">
+                <SimpleValue>Exploration and extraction of coal and other solid fuels</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-eng">
+                <SimpleValue>Exploration and extraction of coal and other solid fuels</SimpleValue>
+            </Value>
+            <Value ColumnRef="description-eng">
+                <SimpleValue>Exploration and extraction of coal and other solid fuels</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-bul">
+                <SimpleValue>Проучване и добив на въглища или други твърди горива</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-spa">
+                <SimpleValue>Prospección y extracción de carbón y otros combustibles sólidos</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ces">
+                <SimpleValue>Průzkum a těžba uhlí a jiných pevných paliv</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-dan">
+                <SimpleValue>Efterforskning efter og udvinding af kul og andet fast brændsel</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-deu">
+                <SimpleValue>Aufsuchung und Gewinnung von Kohle und anderen festen Brennstoffen</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-est">
+                <SimpleValue>Söe ja muude tahkekütuste leiukohtade uurimine ja kaevandamine</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ell">
+                <SimpleValue>Αναζήτηση και εξόρυξη άνθρακα και άλλων στερεών καυσίμων</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-fra">
+                <SimpleValue>Prospection et extraction de charbon et d'autres combustibles solides</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-gle">
+                <SimpleValue>Gual agus breosla soladach eile a thaiscéaladh agus a tharraingt</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-hrv">
+                <SimpleValue>Istraživanje i vađenje ugljena i drugih krutih goriva</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ita">
+                <SimpleValue>Esplorazione ed estrazione di carbone e altri combustibili solidi</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-lav">
+                <SimpleValue>Akmeņogļu un cita veida cietā kurināmā izpēte un ieguve</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-lit">
+                <SimpleValue>Akmens anglių ir kito kietojo kuro žvalgyba ir gavyba</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-hun">
+                <SimpleValue>Szén és más szilárd tüzelőanyag feltárása és kitermelése</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-mlt">
+                <SimpleValue>Esplorazzjoni u estrazzjoni tal-faħam u fjuwils solidi oħra</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-nld">
+                <SimpleValue>Opsporing en winning van steenkool en andere vaste brandstoffen</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-pol">
+                <SimpleValue>Poszukiwanie i wydobycie węgla i innych paliw stałych</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-por">
+                <SimpleValue>Prospeção e extração de carvão e outros combustíveis sólidos</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ron">
+                <SimpleValue>Prospectare și extragere a cărbunelui și a altor combustibili solizi</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-slk">
+                <SimpleValue>Prieskum a ťažba uhlia a iných tuhých palív</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-slv">
+                <SimpleValue>Iskanje in pridobivanje premoga ter drugih trdih goriv</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-fin">
+                <SimpleValue>Hiilen ja muiden kiinteiden polttoaineiden etsintä ja talteenotto</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-swe">
+                <SimpleValue>Undersökning och utvinning av kol och andra fasta bränslen</SimpleValue>
+            </Value>
+        </Row>
+        <Row>
+            <Value ColumnRef="code">
+                <SimpleValue>ELECTRICITY</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-eng">
+                <SimpleValue>Electricity</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-eng">
+                <SimpleValue>Electricity</SimpleValue>
+            </Value>
+            <Value ColumnRef="description-eng">
+                <SimpleValue>Electricity</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-bul">
+                <SimpleValue>Електрическа енергия</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-spa">
+                <SimpleValue>Electricidad</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ces">
+                <SimpleValue>Elektřina</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-dan">
+                <SimpleValue>Elektricitet</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-deu">
+                <SimpleValue>Strom</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-est">
+                <SimpleValue>Elektrienergia</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ell">
+                <SimpleValue>Ηλεκτρισμός</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-fra">
+                <SimpleValue>Électricité</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-gle">
+                <SimpleValue>Leictreachas</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-hrv">
+                <SimpleValue>Električna energija</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ita">
+                <SimpleValue>Elettricità</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-lav">
+                <SimpleValue>Elektroenerģijas apgāde</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-lit">
+                <SimpleValue>Elektros energija</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-hun">
+                <SimpleValue>Villamos energia</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-mlt">
+                <SimpleValue>Elettriku</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-nld">
+                <SimpleValue>Elektriciteit</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-pol">
+                <SimpleValue>Sektor elektroenergetyczny</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-por">
+                <SimpleValue>Eletricidade</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ron">
+                <SimpleValue>Electricitate</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-slk">
+                <SimpleValue>Elektrická energia</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-slv">
+                <SimpleValue>Električna energija</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-fin">
+                <SimpleValue>Sähkö</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-swe">
+                <SimpleValue>Elektricitet</SimpleValue>
+            </Value>
+        </Row>
+        <Row>
+            <Value ColumnRef="code">
+                <SimpleValue>SERVICE_POST</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-eng">
+                <SimpleValue>Postal services</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-eng">
+                <SimpleValue>Postal services</SimpleValue>
+            </Value>
+            <Value ColumnRef="description-eng">
+                <SimpleValue>Postal services</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-bul">
+                <SimpleValue>Пощенски услуги</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-spa">
+                <SimpleValue>Servicios postales</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ces">
+                <SimpleValue>Poštovní služby</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-dan">
+                <SimpleValue>Posttjenester</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-deu">
+                <SimpleValue>Postdienste</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-est">
+                <SimpleValue>Postiteenused</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ell">
+                <SimpleValue>Ταχυδρομικές υπηρεσίες</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-fra">
+                <SimpleValue>Services postaux</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-gle">
+                <SimpleValue>Seirbhísí poist</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-hrv">
+                <SimpleValue>Poštanske usluge</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ita">
+                <SimpleValue>Servizi postali</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-lav">
+                <SimpleValue>Pasta pakalpojumi</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-lit">
+                <SimpleValue>Pašto paslaugos</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-hun">
+                <SimpleValue>Postai szolgáltatások</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-mlt">
+                <SimpleValue>Servizzi postali</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-nld">
+                <SimpleValue>Postdiensten</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-pol">
+                <SimpleValue>Usługi pocztowe</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-por">
+                <SimpleValue>Serviços postais</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ron">
+                <SimpleValue>Servicii poștale</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-slk">
+                <SimpleValue>Poštové služby</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-slv">
+                <SimpleValue>Poštne storitve</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-fin">
+                <SimpleValue>Postipalvelut</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-swe">
+                <SimpleValue>Posttjänster</SimpleValue>
+            </Value>
+        </Row>
+        <Row>
+            <Value ColumnRef="code">
+                <SimpleValue>SERVICE_RAILWAY</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-eng">
+                <SimpleValue>Railway services</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-eng">
+                <SimpleValue>Railway services</SimpleValue>
+            </Value>
+            <Value ColumnRef="description-eng">
+                <SimpleValue>Railway services</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-bul">
+                <SimpleValue>Железопътни услуги</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-spa">
+                <SimpleValue>Servicios de transporte ferroviario</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ces">
+                <SimpleValue>Železniční služby</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-dan">
+                <SimpleValue>Jernbanetransport</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-deu">
+                <SimpleValue>Eisenbahndienste</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-est">
+                <SimpleValue>Raudteeteenused</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ell">
+                <SimpleValue>Υπηρεσίες σιδηροδρομικών μεταφορών</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-fra">
+                <SimpleValue>Services de chemin de fer</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-gle">
+                <SimpleValue>Seirbhísí iarnróid</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-hrv">
+                <SimpleValue>Željezničke usluge</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ita">
+                <SimpleValue>Servizi ferroviari</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-lav">
+                <SimpleValue>Dzelzceļa pakalpojumi</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-lit">
+                <SimpleValue>Geležinkelio paslaugos</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-hun">
+                <SimpleValue>Vasúti szolgáltatások</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-mlt">
+                <SimpleValue>Servizzi ferrovjarji</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-nld">
+                <SimpleValue>Vervoersdiensten per spoor</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-pol">
+                <SimpleValue>Usługi kolejowe</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-por">
+                <SimpleValue>Serviços ferroviários</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ron">
+                <SimpleValue>Servicii feroviare</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-slk">
+                <SimpleValue>Služby železničnej dopravy</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-slv">
+                <SimpleValue>Železniški promet</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-fin">
+                <SimpleValue>Rautatiepalvelut</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-swe">
+                <SimpleValue>Järnvägstjänster</SimpleValue>
+            </Value>
+        </Row>
+        <Row>
+            <Value ColumnRef="code">
+                <SimpleValue>SERVICE_PUBLIC</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-eng">
+                <SimpleValue>General public services</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-eng">
+                <SimpleValue>General public services</SimpleValue>
+            </Value>
+            <Value ColumnRef="description-eng">
+                <SimpleValue>General public services</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-bul">
+                <SimpleValue>Общи обществени услуги</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-spa">
+                <SimpleValue>Servicios públicos generales</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ces">
+                <SimpleValue>Služby pro širokou veřejnost</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-dan">
+                <SimpleValue>Generelle offentlige tjenester</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-deu">
+                <SimpleValue>Allgemeine öffentliche Verwaltung</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-est">
+                <SimpleValue>Üldised avalikud teenused</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ell">
+                <SimpleValue>Γενικές δημόσιες υπηρεσίες</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-fra">
+                <SimpleValue>Services généraux des administrations publiques</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-gle">
+                <SimpleValue>Seirbhísí poiblí ginearálta</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-hrv">
+                <SimpleValue>Opće javne usluge</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ita">
+                <SimpleValue>Servizi generali delle amministrazioni pubbliche</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-lav">
+                <SimpleValue>Vispārēji sabiedriskie pakalpojumi</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-lit">
+                <SimpleValue>Bendros viešosios paslaugos</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-hun">
+                <SimpleValue>Általános közszolgáltatások</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-mlt">
+                <SimpleValue>Servizzi pubbliċi ġenerali</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-nld">
+                <SimpleValue>Algemene overheidsdiensten</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-pol">
+                <SimpleValue>Ogólne usługi publiczne</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-por">
+                <SimpleValue>Serviços públicos gerais</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ron">
+                <SimpleValue>Servicii publice generale</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-slk">
+                <SimpleValue>Všeobecné verejné služby</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-slv">
+                <SimpleValue>Javna uprava</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-fin">
+                <SimpleValue>Yleinen julkishallinto</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-swe">
+                <SimpleValue>Allmänna offentliga tjänster</SimpleValue>
+            </Value>
+        </Row>
+        <Row>
+            <Value ColumnRef="code">
+                <SimpleValue>SERVICE_URBAN</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-eng">
+                <SimpleValue>Urban railway, tramway, trolleybus or bus services</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-eng">
+                <SimpleValue>Urban railway, tramway, trolleybus or bus services</SimpleValue>
+            </Value>
+            <Value ColumnRef="description-eng">
+                <SimpleValue>Urban railway, tramway, trolleybus or bus services</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-bul">
+                <SimpleValue>Градски железопътни, трамвайни, тролейбусни или автобусни услуги</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-spa">
+                <SimpleValue>Servicios de ferrocarriles urbanos, tranvías, trolebuses o autobuses</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ces">
+                <SimpleValue>Městská železniční, tramvajová, trolejbusová nebo autobusová doprava</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-dan">
+                <SimpleValue>Transport med bybane, sporvogn, trolleybus eller bus</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-deu">
+                <SimpleValue>Städtische Eisenbahn-, Straßenbahn-, Oberleitungsbus- oder Busdienste</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-est">
+                <SimpleValue>Linnarongi-, trammi-, trollibussi- või bussiteenused</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ell">
+                <SimpleValue>Μεταφορές με αστικούς σιδηροδρόμους, τραμ, τρόλεϊ ή λεωφορεία</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-fra">
+                <SimpleValue>Services de chemin de fer urbain, de tramway, de trolleybus ou d'autobus</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-gle">
+                <SimpleValue>Iarnród uirbeach, trambhealach, bus tralaí nó seirbhísí bus</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-hrv">
+                <SimpleValue>Usluge gradske željeznice, tramvaja, trolejbusa ili autobusa</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ita">
+                <SimpleValue>Servizi di ferrovia urbana, tram, filobus o bus</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-lav">
+                <SimpleValue>Pilsētas dzelzceļa, tramvaju, trolejbusu vai autobusu pakalpojumi</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-lit">
+                <SimpleValue>Miesto geležinkelio, tramvajų, troleibusų ar autobusų transporto paslaugos</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-hun">
+                <SimpleValue>Városi vasúti, villamos-, trolibusz- és autóbusz-szolgáltatások</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-mlt">
+                <SimpleValue>Servizzi ferrovjarji urbani, tat-tramm, tat-trolleybus jew tax-xarabank</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-nld">
+                <SimpleValue>Stadsspoorweg-, tram-, trolleybus- of busdiensten</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-pol">
+                <SimpleValue>Miejski transport kolejowy, tramwajowy, trolejbusowy lub autobusowy</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-por">
+                <SimpleValue>Serviços urbanos de caminho de ferro, elétricos, tróleis ou autocarros</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ron">
+                <SimpleValue>Servicii feroviare urbane, de tramvai, troleibuz sau de autobuz</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-slk">
+                <SimpleValue>Služby mestskej železničnej, električkovej, trolejbusovej alebo autobusovej dopravy</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-slv">
+                <SimpleValue>Mestni železniški, tramvajski, trolejbusni ali avtobusni promet</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-fin">
+                <SimpleValue>Kaupunkirautatie-, raitiotie-, johdinauto- tai linja-autopalvelut</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-swe">
+                <SimpleValue>Järnvägar i stadstrafik, spårvagnar, trådbussar eller bussar</SimpleValue>
+            </Value>
+        </Row>
+        <Row>
+            <Value ColumnRef="code">
+                <SimpleValue>SAFETY_PUBLIC</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-eng">
+                <SimpleValue>Public order and safety</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-eng">
+                <SimpleValue>Public order and safety</SimpleValue>
+            </Value>
+            <Value ColumnRef="description-eng">
+                <SimpleValue>Public order and safety</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-bul">
+                <SimpleValue>Обществен ред и безопасност</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-spa">
+                <SimpleValue>Orden público y seguridad</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ces">
+                <SimpleValue>Veřejný pořádek a bezpečnost</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-dan">
+                <SimpleValue>Offentlig orden og sikkerhed</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-deu">
+                <SimpleValue>Öffentliche Sicherheit und Ordnung</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-est">
+                <SimpleValue>Avalik kord ja julgeolek</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ell">
+                <SimpleValue>Δημόσια τάξη και ασφάλεια</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-fra">
+                <SimpleValue>Ordre et sécurité publics</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-gle">
+                <SimpleValue>Sábháilteacht agus ord poiblí</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-hrv">
+                <SimpleValue>Javni red i sigurnost</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ita">
+                <SimpleValue>Ordine pubblico e sicurezza</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-lav">
+                <SimpleValue>Sabiedriskā kārtība un drošība</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-lit">
+                <SimpleValue>Viešoji tvarka ir visuomenės apsauga</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-hun">
+                <SimpleValue>Közrend és biztonság</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-mlt">
+                <SimpleValue>Ordni pubblika u sikurezza</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-nld">
+                <SimpleValue>Openbare orde en veiligheid</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-pol">
+                <SimpleValue>Porządek i bezpieczeństwo publiczne</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-por">
+                <SimpleValue>Segurança e ordem pública</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ron">
+                <SimpleValue>Ordine și siguranță publică</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-slk">
+                <SimpleValue>Verejný poriadok a bezpečnosť</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-slv">
+                <SimpleValue>Javni red in mir ter varnost</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-fin">
+                <SimpleValue>Yleinen järjestys ja turvallisuus</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-swe">
+                <SimpleValue>Samhällsskydd och rättsskipning</SimpleValue>
+            </Value>
+        </Row>
+        <Row>
+            <Value ColumnRef="code">
+                <SimpleValue>WATER</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-eng">
+                <SimpleValue>Water</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-eng">
+                <SimpleValue>Water</SimpleValue>
+            </Value>
+            <Value ColumnRef="description-eng">
+                <SimpleValue>Water</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-bul">
+                <SimpleValue>Вода</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-spa">
+                <SimpleValue>Agua</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ces">
+                <SimpleValue>Voda</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-dan">
+                <SimpleValue>Vand</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-deu">
+                <SimpleValue>Wasser</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-est">
+                <SimpleValue>Vesi</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ell">
+                <SimpleValue>Ύδρευση</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-fra">
+                <SimpleValue>Eau</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-gle">
+                <SimpleValue>Uisce</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-hrv">
+                <SimpleValue>Vodoopskrba</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ita">
+                <SimpleValue>Acqua</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-lav">
+                <SimpleValue>Ūdensapgāde</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-lit">
+                <SimpleValue>Vanduo</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-hun">
+                <SimpleValue>Víz</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-mlt">
+                <SimpleValue>Ilma</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-nld">
+                <SimpleValue>Water</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-pol">
+                <SimpleValue>Sektor wodny</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-por">
+                <SimpleValue>Água</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ron">
+                <SimpleValue>Apă</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-slk">
+                <SimpleValue>Vodné hospodárstvo</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-slv">
+                <SimpleValue>Voda</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-fin">
+                <SimpleValue>Vesihuolto</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-swe">
+                <SimpleValue>Vatten</SimpleValue>
+            </Value>
+        </Row>
+        <Row>
+            <Value ColumnRef="code">
+                <SimpleValue>OTHER</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-eng">
+                <SimpleValue>Other activity</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-eng">
+                <SimpleValue>Other activity</SimpleValue>
+            </Value>
+            <Value ColumnRef="description-eng">
+                <SimpleValue>Other activity</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-bul">
+                <SimpleValue>Друга дейност</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-spa">
+                <SimpleValue>Otra actividad</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ces">
+                <SimpleValue>Jiné činnosti</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-dan">
+                <SimpleValue>Anden aktivitet</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-deu">
+                <SimpleValue>Andere Tätigkeit</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-est">
+                <SimpleValue>Muu tegevusala</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ell">
+                <SimpleValue>Άλλες δραστηριότητες</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-fra">
+                <SimpleValue>Autre activité</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-gle">
+                <SimpleValue>Gníomhaíocht eile</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-hrv">
+                <SimpleValue>Druga djelatnost</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ita">
+                <SimpleValue>Altre attività</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-lav">
+                <SimpleValue>Cita darbība</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-lit">
+                <SimpleValue>Kita veikla</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-hun">
+                <SimpleValue>Egyéb tevékenység</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-mlt">
+                <SimpleValue>Attivitajiet oħra</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-nld">
+                <SimpleValue>Andere activiteit</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-pol">
+                <SimpleValue>Inna działalność</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-por">
+                <SimpleValue>Outra atividade</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ron">
+                <SimpleValue>Altă activitate</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-slk">
+                <SimpleValue>Iná činnosť</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-slv">
+                <SimpleValue>Druga dejavnost</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-fin">
+                <SimpleValue>Muu toimiala</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-swe">
+                <SimpleValue>Annan verksamhet</SimpleValue>
+            </Value>
+        </Row>
+        <Row>
+            <Value ColumnRef="code">
+                <SimpleValue>NOT_APPLICABLE</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-eng">
+                <SimpleValue>Not applicable</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-eng">
+                <SimpleValue>Not applicable</SimpleValue>
+            </Value>
+            <Value ColumnRef="description-eng">
+                <SimpleValue>Not applicable</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-bul">
+                <SimpleValue>Не е приложимо</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-spa">
+                <SimpleValue>No procede</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ces">
+                <SimpleValue>Nehodící se</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-dan">
+                <SimpleValue>Finder ikke anvendelse</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-deu">
+                <SimpleValue>Entfällt</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-est">
+                <SimpleValue>Ei kohaldata</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ell">
+                <SimpleValue>Άνευ αντικειμένου</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-fra">
+                <SimpleValue>Sans objet</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-gle">
+                <SimpleValue>Neamhbhainteach</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-hrv">
+                <SimpleValue>Ne primjenjuje se</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ita">
+                <SimpleValue>Non applicabile</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-lav">
+                <SimpleValue>Netiek piemērots</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-lit">
+                <SimpleValue>Negalioja</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-hun">
+                <SimpleValue>Nem alkalmazható</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-mlt">
+                <SimpleValue>Mhux applikabbli</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-nld">
+                <SimpleValue>Niet van toepassing</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-pol">
+                <SimpleValue>Nie dotyczy</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-por">
+                <SimpleValue>Não consta</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ron">
+                <SimpleValue>Nu se aplică</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-slk">
+                <SimpleValue>Nehodiace sa</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-slv">
+                <SimpleValue>Ni znano</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-fin">
+                <SimpleValue>Ei sovelleta</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-swe">
+                <SimpleValue>Ingen uppgift</SimpleValue>
+            </Value>
+        </Row>
+        <Row>
+            <Value ColumnRef="code">
+                <SimpleValue>NOT_SPECIFIED</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-eng">
+                <SimpleValue>Not specified</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-eng">
+                <SimpleValue>Not specified</SimpleValue>
+            </Value>
+            <Value ColumnRef="description-eng">
+                <SimpleValue>Not specified</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-bul">
+                <SimpleValue>Не е уточнено</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-spa">
+                <SimpleValue>Sin especificar</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ces">
+                <SimpleValue>Neurčeno</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-dan">
+                <SimpleValue>Uspecificeret</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-deu">
+                <SimpleValue>Unbestimmt</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-est">
+                <SimpleValue>Ei ole määratletud</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ell">
+                <SimpleValue>Δεν διευκρινίζεται</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-fra">
+                <SimpleValue>Non spécifié</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-gle">
+                <SimpleValue>Neamhshonraithe</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-hrv">
+                <SimpleValue>Nije navedeno</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ita">
+                <SimpleValue>Non specificato</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-lav">
+                <SimpleValue>Nav</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-lit">
+                <SimpleValue>Nenurodyta</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-hun">
+                <SimpleValue>Nincs megjelölve</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-mlt">
+                <SimpleValue>Mhux speċifikat</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-nld">
+                <SimpleValue>Niet gespecificeerd</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-pol">
+                <SimpleValue>Nie określono</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-por">
+                <SimpleValue>Não especificado</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-ron">
+                <SimpleValue>Nu se specifică</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-slk">
+                <SimpleValue>Neurčené</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-slv">
+                <SimpleValue>Ni navedeno</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-fin">
+                <SimpleValue>Ei määritelty</SimpleValue>
+            </Value>
+            <Value ColumnRef="name-swe">
+                <SimpleValue>Ospecificerat</SimpleValue>
+            </Value>
+        </Row>
+    </SimpleCodeList>
 </gc:CodeList>

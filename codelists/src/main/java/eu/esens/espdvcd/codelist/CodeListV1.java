@@ -1,6 +1,6 @@
 package eu.esens.espdvcd.codelist;
 
-import com.google.common.collect.BiMap;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -97,15 +97,6 @@ public enum CodeListV1 implements CodeList {
     public boolean equalsName(String otherName) {
         return (otherName == null) ? false : name.equals(otherName);
     }
-    
-    /**
-     * @param data
-     * @return the Id of the codelist for the specific value
-     */
-    @Override
-    public final String getIdForData(String data) {
-        return getInstance().getIdForData(data, "en");
-    }
    
     /**
      *
@@ -142,8 +133,8 @@ public enum CodeListV1 implements CodeList {
      * @return the internal representation of the codelist as an immutable bimap
      */
     @Override
-    public final BiMap<String, String> getBiMap() {
-        return getInstance().getBiMap("en");
+    public final Map<String, String> getDataMap() {
+        return getInstance().getDataMap("en");
     }
 
     @Override
@@ -165,8 +156,7 @@ public enum CodeListV1 implements CodeList {
      * 
      * @return All available languages
      */
-    @Override
-    public Set<String> getAllLangs() {
+    Set<String> getAllLangs() {
         return getInstance().getAllLangs();
     }
     
