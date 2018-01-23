@@ -257,6 +257,10 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
             return rType;
         }
 
+        rType.setID(new IDType());
+        rType.getID().setSchemeAgencyID("EU-COM-GROW");
+        rType.getID().setValue(UUID.randomUUID().toString());
+
         switch (respType) {
 
             case DESCRIPTION:
@@ -404,20 +408,42 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
 
         DocumentReferenceType drt = new DocumentReferenceType();
 
-        drt.setID(createISOIECIDType(espdRequestDetails.getId()));
+        drt.setID(createISOIECIDType(espdRequestDetails.getID()));
 
-        IssueDateType idt = new IssueDateType();
-        idt.setValue(espdRequestDetails.getIssueDate());
-        drt.setIssueDate(idt);
+        try {
+            XMLGregorianCalendar xcalDate = DatatypeFactory.newInstance()
+                    .newXMLGregorianCalendarDate(
+                            espdRequestDetails.getIssueDate().getYear(),
+                            espdRequestDetails.getIssueDate().getMonthValue(),
+                            espdRequestDetails.getIssueDate().getDayOfMonth(),
+                            DatatypeConstants.FIELD_UNDEFINED);
+            IssueDateType idt = new IssueDateType();
+            idt.setValue(xcalDate);
+            drt.setIssueDate(idt);
+        } catch (DatatypeConfigurationException ex) {
+            log.error("Could not create XMLGregorialCalendar Date Object", ex);
+        }
 
-        IssueTimeType itt = new IssueTimeType();
-        itt.setValue(espdRequestDetails.getIssueTime());
-        drt.setIssueTime(itt);
+
+        try {
+            XMLGregorianCalendar xcalTime = DatatypeFactory.newInstance()
+                    .newXMLGregorianCalendarTime(
+                            espdRequestDetails.getIssueTime().getHour(),
+                            espdRequestDetails.getIssueTime().getMinute(),
+                            espdRequestDetails.getIssueTime().getSecond(),
+                            DatatypeConstants.FIELD_UNDEFINED);
+            IssueTimeType itt = new IssueTimeType();
+            itt.setValue(xcalTime);
+            drt.setIssueTime(itt);
+        } catch (DatatypeConfigurationException ex) {
+            log.error("Could not create XMLGregorialCalendar Date Object", ex);
+        }
+
 
         List<DocumentDescriptionType> ddtList = drt.getDocumentDescription();
         if (ddtList != null) {
             DocumentDescriptionType ddt = new DocumentDescriptionType();
-            ddt.setValue(espdRequestDetails.getReferenceNumber());
+            ddt.setValue(espdRequestDetails.getDescription());
             ddtList.add(ddt);
         }
 

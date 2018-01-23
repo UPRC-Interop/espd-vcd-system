@@ -415,20 +415,20 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
         ESPDRequestDetails erd = new ESPDRequestDetails();
 
         if (drt.getID() != null) {
-            erd.setId(drt.getID().getValue());
+            erd.setID(drt.getID().getValue());
         }
 
         if (drt.getIssueDate() != null) {
-            erd.setIssueDate(drt.getIssueDate().getValue());
+            erd.setIssueDate(drt.getIssueDate().getValue().toGregorianCalendar().toZonedDateTime().toLocalDate());
         }
 
         if (drt.getIssueTime() != null) {
-            erd.setIssueTime(drt.getIssueTime().getValue());
+            erd.setIssueTime(drt.getIssueTime().getValue().toGregorianCalendar().toZonedDateTime().toLocalTime());
         }
 
         if (drt.getDocumentDescription() != null && !drt.getDocumentDescription().isEmpty()) {
             if (drt.getDocumentDescription().get(0) != null) {
-                erd.setReferenceNumber(drt.getDocumentDescription().get(0).getValue());
+                erd.setDescription(drt.getDocumentDescription().get(0).getValue());
             }
         }
 
@@ -445,19 +445,19 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
         ESPDRequestDetails erd = new ESPDRequestDetails();
 
         if (reqType.getID() != null) {
-            erd.setId(reqType.getID().getValue());
+            erd.setID(reqType.getID().getValue());
         }
 
         if (reqType.getIssueDate() != null) {
-            erd.setIssueDate(reqType.getIssueDate().getValue());
+            erd.setIssueDate(reqType.getIssueDate().getValue().toGregorianCalendar().toZonedDateTime().toLocalDate());
         }
 
         if (reqType.getIssueTime() != null) {
-            erd.setIssueTime(reqType.getIssueTime().getValue());
+            erd.setIssueTime(reqType.getIssueTime().getValue().toGregorianCalendar().toZonedDateTime().toLocalTime());
         }
 
         if (reqType.getContractFolderID() != null) {
-            erd.setReferenceNumber(reqType.getContractFolderID().getValue());
+            erd.setDescription(reqType.getContractFolderID().getValue());
         }
 
         return erd;

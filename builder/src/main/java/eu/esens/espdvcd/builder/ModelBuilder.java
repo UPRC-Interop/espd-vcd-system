@@ -379,7 +379,7 @@ public class ModelBuilder {
         // fill with default content
         spd.setName("e-SENS");
         spd.setEndpointID("N/A");
-        spd.setId("N/A");
+        spd.setID("N/A");
         spd.setWebsiteURI("N/A");
         return spd;
     }

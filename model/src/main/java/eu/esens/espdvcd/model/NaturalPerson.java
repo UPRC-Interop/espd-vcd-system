@@ -98,7 +98,18 @@ public class NaturalPerson {
      */
     @NotNull
     private PostalAddress postalAddress;
-    
+
+    /**
+     * Representative natural person telephone number and email adress
+     * <p>
+     * A phone number and e-mail address for the contact point.
+     * <p>
+     * Data type: <br>
+     * Cardinality: 0..1<br>
+     * InfReqID: tir92-064, tir92-067<br>
+     * BusReqID: tbr92-009<br>
+     * UBL syntax path: espd-cac: EconomicOperatorParty.Party.Person.ResidenceAddress<br>
+     */
     private ContactingDetails contactDetails;
     
     

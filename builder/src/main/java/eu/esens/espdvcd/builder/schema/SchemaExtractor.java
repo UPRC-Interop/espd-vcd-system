@@ -237,11 +237,11 @@ public interface SchemaExtractor {
             pt.setEndpointID(eid);
         }
 
-        if (spd.getId() != null) {
+        if (spd.getID() != null) {
             PartyIdentificationType pid = new PartyIdentificationType();
             IDType idt = new IDType();
             idt.setSchemeAgencyID("EU-COM-GROW");
-            idt.setValue(spd.getId());
+            idt.setValue(spd.getID());
             pid.setID(idt);
             pt.getPartyIdentification().add(pid);
         }

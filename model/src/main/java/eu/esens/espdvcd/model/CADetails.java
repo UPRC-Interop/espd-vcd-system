@@ -154,7 +154,17 @@ public class CADetails implements Serializable{
      */
     private ContactingDetails contactingDetails;
 
-    
+    /**
+     * Notice URI
+     * <p>
+     * The Uniform Resource Identifier (URI) that identifies where the notice is located.
+     * <p>
+     * Data type: Identifier<br>
+     * Cardinality: 0..1<br>
+     * InfReqID: tir070-305<br>
+     * BusReqID: tbr70-007<br>
+     * UBL syntax path: cac: AdditionalDocumentReference.Attachment.ExternalReference.URI<br>
+     */
     private String procurementPublicationURI;
 
     public String getProcurementPublicationURI() {

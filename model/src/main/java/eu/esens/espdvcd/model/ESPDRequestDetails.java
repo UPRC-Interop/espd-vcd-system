@@ -1,14 +1,28 @@
 package eu.esens.espdvcd.model;
 
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 /**
  * Reference to an ESPD Request document.
  *
+ * Created by Ulf Lotzmann.
  */
 public class ESPDRequestDetails {
 
     /**
+     * ESPD request identifier
+     * <p>
+     * The identifier of the ESPD Request.
+     * <p>
+     * Data type: Text<br>
+     * Cardinality: 0..1<br>
+     * InfReqID: tir92-308<br>
+     * BusReqID: tbr92-013<br>
+     * UBL syntax path: cac:AdditionalDocumentReference.ID<br>
+     * <p>
+     * This element refers to the following element in the ESPD Request:<br>
      * Document identifier
      * <p>
      * Identifier of a document An transaction instance must contain an identifier.
@@ -17,39 +31,72 @@ public class ESPDRequestDetails {
      * <p>
      * Data type: Identifier<br>
      * Cardinality: 1..1<br>
-     * InfReqID: tir92-001<br>
-     * BusReqID: tbr92-019<br>
+     * InfReqID: tir70-001<br>
+     * BusReqID: tbr70-002<br>
      * UBL syntax path: cbc:ID<br>
      */
     private String id;
 
     /**
+     * ESPD request issue date
+     * <p>
+     * The issue date of the ESPD Request.
+     * <p>
+     * Data type: Text<br>
+     * Cardinality: 0..1<br>
+     * InfReqID: tir92-310<br>
+     * BusReqID: tbr92-013<br>
+     * UBL syntax path: cac:AdditionalDocumentReference.IssueDate<br>
+     * <p>
+     * This element refers to the following element in the ESPD Request:<br>
      * Document issue date
      * <p>
      * Date when the referred document was issued.
      * <p>
      * Data type: Date<br>
      * Cardinality: 1..1<br>
-     * InfReqID: tir92-002<br>
-     * BusReqID: tbr92-019<br>
+     * InfReqID: tir70-002<br>
+     * BusReqID: tbr70-002<br>
      * UBL syntax path: cbc:IssueDate<br>
      */
-    private XMLGregorianCalendar issueDate;
+    private LocalDate issueDate;
 
     /**
+     * ESPD request issue time
+     * <p>
+     * The issue time of the ESPD Request.
+     * <p>
+     * Data type: Text<br>
+     * Cardinality: 0..1<br>
+     * InfReqID: tir92-311<br>
+     * BusReqID: tbr92-013<br>
+     * UBL syntax path: cac:AdditionalDocumentReference.IssueTime<br>
+     * <p>
+     * This element refers to the following element in the ESPD Request:<br>
      * Document issue time
      * <p>
      * Time when the document was issued.
      * <p>
      * Data type: Time<br>
      * Cardinality: 0..1<br>
-     * InfReqID: tir92-003<br>
-     * BusReqID: tbr92-019<br>
+     * InfReqID: tir70-003<br>
+     * BusReqID: tbr70-002<br>
      * UBL syntax path: cbc:IssueTime<br>
      */
-    private XMLGregorianCalendar issueTime;
+    private LocalTime issueTime;
 
     /**
+     * ESPD request description
+     * <p>
+     * Short description of the ESPD Request.
+     * <p>
+     * Data type: Text<br>
+     * Cardinality: 0..1<br>
+     * InfReqID: tir92-313<br>
+     * BusReqID: tbr92-013<br>
+     * UBL syntax path: cac:AdditionalDocumentReference.DocumentDescription<br>
+     * <p>
+     * This element refers to the following element in the ESPD Request:<br>
      * Reference number
      * <p>
      * An identifier that is specified by the buyer and used as a reference number for all documents
@@ -59,44 +106,44 @@ public class ESPDRequestDetails {
      * <p>
      * Data type: Identifier<br>
      * Cardinality: 1..1<br>
-     * InfReqID: tir92-013<br>
-     * BusReqID: tbr92-013<br>
+     * InfReqID: tir70-005<br>
+     * BusReqID: tbr70-007<br>
      * UBL syntax path: cbc:ContractFolderID<br>
      */
-    private String referenceNumber;
+    private String description;
 
     public ESPDRequestDetails() {
     }
 
-    public String getId() {
+    public String getID() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setID(String id) {
         this.id = id;
     }
 
-    public XMLGregorianCalendar getIssueDate() {
+    public LocalDate getIssueDate() {
         return issueDate;
     }
 
-    public void setIssueDate(XMLGregorianCalendar issueDate) {
+    public void setIssueDate(LocalDate issueDate) {
         this.issueDate = issueDate;
     }
 
-    public XMLGregorianCalendar getIssueTime() {
+    public LocalTime getIssueTime() {
         return issueTime;
     }
 
-    public void setIssueTime(XMLGregorianCalendar issueTime) {
+    public void setIssueTime(LocalTime issueTime) {
         this.issueTime = issueTime;
     }
 
-    public String getReferenceNumber() {
-        return referenceNumber;
+    public String getDescription() {
+        return description;
     }
 
-    public void setReferenceNumber(String referenceNumber) {
-        this.referenceNumber = referenceNumber;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
