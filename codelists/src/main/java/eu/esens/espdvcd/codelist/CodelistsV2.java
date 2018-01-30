@@ -7,12 +7,8 @@ import java.util.Set;
  *
  * @author Konstantinos Raptis
  */
-public enum CodeListV2 implements CodeList {
-
-    /**
-     * Activity Type CodeList
-     */
-    ActivityType("/gc/v2/ActivityType-CodeList.gc"),
+public enum CodelistsV2 implements Codelists {
+    
     /**
      * Amount Type CodeList
      */
@@ -25,10 +21,6 @@ public enum CodeListV2 implements CodeList {
      * Set whether an answer to a Criterion Property or/and Evidence can be publicly accessible or not
      */
     ConfidentialityLevel("/gc/v2/ConfidentialityLevel-CodeList.gc"),
-    /**
-     * Contract Type CodeList
-     */
-    ContractType("/gc/v2/ContractType-CodeList.gc"),
     /**
      * Country Identification according to ISO 3A
      */
@@ -94,7 +86,7 @@ public enum CodeListV2 implements CodeList {
     private static final String DEFAULT_LANG = "eng";
     private String lang;
 
-    private CodeListV2(String name) {
+    private CodelistsV2(String name) {
         this.lang = DEFAULT_LANG;
         this.name = name;
     }

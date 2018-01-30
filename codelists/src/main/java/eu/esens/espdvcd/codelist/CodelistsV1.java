@@ -7,7 +7,7 @@ import java.util.Set;
  *
  * @author konstantinos
  */
-public enum CodeListV1 implements CodeList {
+public enum CodelistsV1 implements Codelists {
     
     /**
      * Activity Type CodeList
@@ -72,7 +72,7 @@ public enum CodeListV1 implements CodeList {
     private final String name;
     private volatile GenericCode INSTANCE;
 
-    private CodeListV1(String s) {
+    private CodelistsV1(String s) {
         name = s;
     }
 

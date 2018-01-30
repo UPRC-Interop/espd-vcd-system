@@ -8,7 +8,7 @@ import java.util.Map;
  * implementation class represents a codelists version.
  * 
  */
-public interface CodeList {
+public interface Codelists {
         
     boolean equalsName(String otherName);
         

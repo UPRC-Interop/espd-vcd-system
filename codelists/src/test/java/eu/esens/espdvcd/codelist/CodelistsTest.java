@@ -9,9 +9,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class CodeListTest {
+public class CodelistsTest {
 
-    public CodeListTest() {
+    public CodelistsTest() {
     }
 
     @Before
@@ -20,26 +20,26 @@ public class CodeListTest {
 
     @Test
     public void testGetAllLangs() {
-        Assert.assertTrue(CodeListV2.CountryIdentification.getAllLangs().size() > 1);
-        Assert.assertTrue(CodeListV1.CountryIdentification.getAllLangs().size() == 1);
+        Assert.assertTrue(CodelistsV2.CountryIdentification.getAllLangs().size() > 1);
+        Assert.assertTrue(CodelistsV1.CountryIdentification.getAllLangs().size() == 1);
     }
 
     @Test
     public void testGC() throws UnsupportedEncodingException {
-        Assert.assertEquals("Greece", CodeListV1.CountryIdentification.getValueForId("GR"));
-        Assert.assertEquals("Main tenderer", CodeListV1.TenderingRole.getValueForId("MT"));
+        Assert.assertEquals("Greece", CodelistsV1.CountryIdentification.getValueForId("GR"));
+        Assert.assertEquals("Main tenderer", CodelistsV1.TenderingRole.getValueForId("MT"));
         
-        Assert.assertEquals("Greece", CodeListV2.CountryIdentification.getValueForId("GR"));
-        Assert.assertEquals("Sole contractor / Lead entity", CodeListV2.EORoleType.getValueForId("SCLE"));
-        Assert.assertEquals("Submission for all lots", CodeListV2.BidType.getValueForId("LOT_ALL"));
-        CodeListV2.BidType.setLang("ell");
-        Assert.assertEquals("Υποβολή για όλες τις παρτίδες", CodeListV2.BidType.getValueForId("LOT_ALL"));
+        Assert.assertEquals("Greece", CodelistsV2.CountryIdentification.getValueForId("GR"));
+        Assert.assertEquals("Sole contractor / Lead entity", CodelistsV2.EORoleType.getValueForId("SCLE"));
+        Assert.assertEquals("Submission for all lots", CodelistsV2.BidType.getValueForId("LOT_ALL"));
+        CodelistsV2.BidType.setLang("ell");
+        Assert.assertEquals("Υποβολή για όλες τις παρτίδες", CodelistsV2.BidType.getValueForId("LOT_ALL"));
     }
 
     @Test
     public void testMap() {
-        Assert.assertEquals("Greece", CodeListV1.CountryIdentification.getDataMap().get("GR"));
-        Assert.assertEquals("Greece", CodeListV2.CountryIdentification.getDataMap().get("GR"));
+        Assert.assertEquals("Greece", CodelistsV1.CountryIdentification.getDataMap().get("GR"));
+        Assert.assertEquals("Greece", CodelistsV2.CountryIdentification.getDataMap().get("GR"));
     }
 
     @Test
@@ -49,7 +49,7 @@ public class CodeListTest {
 
         try {
 
-            for (CodeList c : CodeListV1.values()) {
+            for (Codelists c : CodelistsV1.values()) {
                 theCodelist = c.getConstantName();
                 Assert.assertNotNull(!c.getDataMap().isEmpty());
             }
@@ -60,7 +60,7 @@ public class CodeListTest {
 
         try {
 
-            for (CodeList c : CodeListV2.values()) {
+            for (Codelists c : CodelistsV2.values()) {
                 theCodelist = c.getConstantName();
                 Assert.assertNotNull(!c.getDataMap().isEmpty());
             }
@@ -77,10 +77,10 @@ public class CodeListTest {
         Map<String, String> compatibilityMap = new HashMap<>();
         List<String> compatibilityList = new ArrayList<>();
 
-        for (CodeListV1 cV1 : CodeListV1.values()) {
+        for (CodelistsV1 cV1 : CodelistsV1.values()) {
             boolean found = false;
 
-            for (CodeListV2 cMl : CodeListV2.values()) {
+            for (CodelistsV2 cMl : CodelistsV2.values()) {
                 if (cMl.getDataMap().keySet().containsAll(cV1.getDataMap().keySet())) {
                     compatibilityMap.put(cV1.getConstantName(), cMl.getConstantName());
                     found = true;
