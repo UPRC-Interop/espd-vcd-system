@@ -1,12 +1,20 @@
 package eu.esens.espdvcd.builder;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import eu.esens.espdvcd.model.SelectableCriterion;
+import eu.esens.espdvcd.model.retriever.ECertisEvidenceGroup;
 import eu.esens.espdvcd.retriever.criteria.ECertisCriteriaExtractor;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
-import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.CriterionType;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.junit.Before;
 import org.junit.Test;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import eu.esens.espdvcd.model.retriever.ECertisSelectableCriterion;
+import static org.junit.Assert.assertEquals;
 
 /**
  *
@@ -14,91 +22,162 @@ import org.junit.Test;
  */
 public class ECertisCriteriaDataRetrieverTest {
 
-    public ECertisCriteriaDataRetrieverTest() {
-    }
-
+    private ECertisCriteriaExtractor extractor;
+    
     @Before
     public void setUp() {
+        extractor = new ECertisCriteriaExtractor();
     }
-        
-//    @Ignore
+
+    /**
+     * JLC = jurisdiction level code
+     * LR = legislation reference
+     *
+     * @throws JsonProcessingException
+     * @throws RetrieverException
+     */
     @Test
-    public void testGetNationalCriterionMapping() {
-        // European Criterion Id
-        //String sourceId = "d726bac9-e153-4e75-bfca-c5385587766d";
-        //String sourceId = "d726bac9-e153-4e75-bfca-c5385587766dadawd";
-        
-        // National Criterion Id - it origin
-        String sourceId = "704390c8-34e3-4337-9ab1-f5795bed1a3b";
-        
-        // Valid Country Code
-        // String targetCountryCode = "it";
-        String targetCountryCode = "be";   
-        // String targetCountryCode = "bdadada";   
-        
-        ECertisCriteriaExtractor cdr = new ECertisCriteriaExtractor();
-        List<CriterionType> mappedCriterions = new ArrayList<>();       
-        
-        try {
-            mappedCriterions = cdr.getNationalCriterionMapping(sourceId, targetCountryCode);
-        } catch (RetrieverException ex) {
-            System.err.println(ex);
-        }
-        mappedCriterions.forEach(mappedCriterion -> 
-                        System.out.println(
-                                "Criterion with Id <<" + sourceId + ">> Mapped to " + targetCountryCode.toUpperCase()
-                                + " National Criterion with Id " 
-                                + "<<" + mappedCriterion.getID().getValue() + ">>"));
-        System.out.println("Criterion #: " + mappedCriterions.size());
-    }
-    
-   
-    @Test
-    public void testGetCriterion() {
-        // A Valid Criterion Id (Can be a non-European Criterion Id)
-        String criterionIds[] = {
-            // eu
-            "d726bac9-e153-4e75-bfca-c5385587766d",
-            // national
-            "b88e0b29-062c-4eb7-bdd4-f7292d20e53b"
-            // not Valid Criteria Id
-            /*"acdc"*/};
-                        
-        ECertisCriteriaExtractor cdr = new ECertisCriteriaExtractor();
-        try {
-            for (String ctId : criterionIds) {
-                displayCriterion(cdr.getCriterion(ctId));
-                System.out.println();
+    public void testCriteriaForNoLegislationReferenceOrNoJurisdictionLevelCode()
+            throws JsonProcessingException, RetrieverException {
+
+        // init counters
+        int noLegislationReference = 0;
+        int noJurisdictionLevelCode = 0;
+
+        // set lang to someting
+        extractor.setLang("el");
+
+        // Get all european criteria
+        List<SelectableCriterion> europeanCriteriaList = extractor.getFullList();
+
+        // run through european criteria
+        for (SelectableCriterion c : europeanCriteriaList) {
+
+            try {
+
+                // extract european criterion id
+                String id = c.getID();
+
+                // get that european criterion from eCertis
+                ECertisSelectableCriterion currentEUCriterion = extractor.getCriterion(id);
+
+                // run thought subcriterion list of current european criterion
+                for (ECertisSelectableCriterion subc : currentEUCriterion.getSubCriterions()) {
+
+                    // make sure that there is a legislation reference
+                    if (subc.getLegislationReference() != null) {
+
+                        // print criterion if it hasn't a JLC
+                        if (subc.getLegislationReference().getJurisdictionLevelCode() == null) {
+
+                            System.out.printf("Parent European Criterion's id: %s\n", id);
+                            System.out.printf("\tSubcriteria without jurisdiction level code\n");
+                            System.out.printf("\t\tCriterion id: %s\n", subc.getID());
+
+                            // no jurisdiction level code ++
+                            noJurisdictionLevelCode++;
+
+                        }
+
+                    } else {
+
+                        // print criterion if it hasn't a LR
+                        System.out.printf("Parent European Criterion's id: %s\n", id);
+                        System.out.printf("\tSubcriteria without legislation reference\n");
+                        System.out.printf("\t\tCriterion id: %s\n", subc.getID());
+
+                        // no legislation reference counter ++
+                        noLegislationReference++;
+                        // no legislation reference means no jurisdiction level code so increase the relative counter
+                        noJurisdictionLevelCode++;
+                    }
+
+                }
+
+            } catch (RetrieverException ex) {
+                Logger.getLogger(ECertisCriteriaDataRetrieverTest.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-        } catch (RetrieverException e) {
-            System.err.println(e);
+
         }
+
+        // Print counters result
+        System.out.printf("\nNumber of Criteria with no Legislation Reference: %d\n", noLegislationReference);
+        System.out.printf("Number of Criteria with no Jurisdiction Level Code: %d\n", noJurisdictionLevelCode);
     }
     
-    private void displayCriterion(CriterionType ct) {
-        System.out.printf("%-25s:%s%n", "Id" , ct.getID().getValue());
-        System.out.printf("%-25s:%s%n", "Name", ct.getName().getValue());
-        System.out.printf("%-25s:%s%n", "TypeCode" , ct.getTypeCode().getValue());
-        if (!ct.getLegislationReference().isEmpty()) {
-            System.out.printf("%-25s:%s%n", "JurisdictionLevelCode" , ct.getLegislationReference().get(0)
-                    .getJurisdictionLevelCode().getValue());
+    @Test
+    public void testGetCriterionInGreek() throws JsonProcessingException {
+        try {
+            extractor.setLang("el");
+
+            ECertisSelectableCriterion theCriterion = extractor.getCriterion("7c351fc0-1fd0-4bad-bfd8-1717a9dcf9d1");
+
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+            mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+
+            // Print JSON String
+            String prettyCt = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(theCriterion);
+            System.out.println(prettyCt);
+
+        } catch (RetrieverException ex) {
+            Logger.getLogger(ECertisCriteriaDataRetrieverTest.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.printf("%-25s:%s%n", "SubCriterions #", ct.getSubCriterion().size());
+    }
+
+    @Test
+    public void testEuToNationalMapping() throws RetrieverException {
+
+        String ID = "14df34e8-15a9-411c-8c05-8c051693e277";
+        String code = "gr";
+
+        List<String> results = extractor.getNationalCriterionMapping(ID, code)
+                .stream()
+                .map(c -> c.getID()).collect(Collectors.toList());
+
+        System.out.println("- EU to National (" + code + ") Criterion Mapping");
+        System.out.printf("%s --> %s%n", ID, results);
+    }
+
+    @Test
+    public void testNationalToNationalMapping() throws RetrieverException {
+
+        String ID = "fdab2c29-ab6d-4ce1-92c2-5663732dd022";
+        String code = "be";
+
+        List<String> results = extractor.getNationalCriterionMapping(ID, code)
+                .stream()
+                .map(c -> c.getID()).collect(Collectors.toList());
+
+        System.out.println("- Natinal to National (" + code + ") Criterion Mapping");
+        System.out.printf("%s --> %s%n", ID, results);
+    }
+
+    @Test
+    public void testGetCriterion() throws RetrieverException {
+
+        ECertisSelectableCriterion c = extractor.getCriterion("3f865345-9a7e-49a3-924a-ca77da6f2512");
+
+        assertEquals("3f865345-9a7e-49a3-924a-ca77da6f2512", c.getID());
     }
     
-//    @Ignore
-//    @Test
-//    public void testGetEvidences() {
-//        // A Valid European Criterion
-//        String euCriterionId = "d726bac9-e153-4e75-bfca-c5385587766d";
-//        
-//        // A National Criterion Id 
-//        String nationalCriterionId = "65da1473-2667-4d79-8e3b-01c6c4f39db3";
-//        
-//        ECertisCriteriaExtractor cdr = new ECertisCriteriaExtractor();
-//        cdr.getEvidences(euCriterionId);
-//        // cdr.getEvidences(nationalCriterionId).forEach(rg -> System.out.println(rg.getName().getValue()));
-//    }
+    @Test
+    public void testGetEvidenceGroup() throws RetrieverException {
+
+        final String ID = "fdab2c29-ab6d-4ce1-92c2-5663732dd022";
+
+        extractor.getEvidences(ID).forEach(eg -> traverseEvidenceGroup(eg));
+    }
+
+    private void traverseEvidenceGroup(ECertisEvidenceGroup eg) {
+        System.out.println("Traverse Evidence Group");
+        System.out.println("\tID: " + eg.getID());
+        eg.getEvidences()
+                .stream()
+                .forEach(ee -> {
+                    System.out.println("\t\tID: " + ee.getID());
+                    System.out.println("\t\tTypeCode: " + ee.getTypeCode());
+                });
+    }
 
 }
