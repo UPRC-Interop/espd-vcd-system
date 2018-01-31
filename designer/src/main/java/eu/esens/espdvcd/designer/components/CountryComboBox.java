@@ -6,14 +6,14 @@ package eu.esens.espdvcd.designer.components;
 
 import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.ComboBox;
-import eu.esens.espdvcd.codelist.CodeListV1;
+import eu.esens.espdvcd.codelist.CodelistsV1;
 import org.apache.commons.lang3.text.WordUtils;
 
 public class CountryComboBox extends ComboBox<String> {
 
     public CountryComboBox(String title) {
-        super(title, CodeListV1.CountryIdentification.getBiMap().keySet());
-        this.setItemCaptionGenerator(i -> WordUtils.capitalize(CodeListV1.CountryIdentification.getValueForId(i)));
+        super(title, CodelistsV1.CountryIdentification.getDataMap().keySet());
+        this.setItemCaptionGenerator(i -> WordUtils.capitalize(CodelistsV1.CountryIdentification.getValueForId(i)));
         this.setItemIconGenerator(this::getIconForCountryId);
         this.setPlaceholder("Select country");
     }

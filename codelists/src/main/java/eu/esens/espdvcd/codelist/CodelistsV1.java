@@ -68,10 +68,11 @@ public enum CodelistsV1 implements Codelists {
     ServicesProjectSubType("/gc/v1/ServicesProjectSubType-CodeList.gc"),
     TechnicalCapabilityType("/gc/v1/TechnicalCapabilityTypeCode-CodeList.gc"),
     TenderingRole("/gc/v1/TendererRole-CodeList.gc");
-    
+        
     private final String name;
     private volatile GenericCode INSTANCE;
-
+    private static final String DEFAULT_LANG = "en";
+    
     private CodelistsV1(String s) {
         name = s;
     }
@@ -105,7 +106,7 @@ public enum CodelistsV1 implements Codelists {
      */
     @Override
     public final boolean containsId(String id) {
-        return getInstance().containsId(id, "en");
+        return getInstance().containsId(id, DEFAULT_LANG);
     }
 
     /**
@@ -115,7 +116,7 @@ public enum CodelistsV1 implements Codelists {
      */
     @Override
     public final boolean containsValue(String value) {
-        return getInstance().containsValue(value, "en");
+        return getInstance().containsValue(value, DEFAULT_LANG);
     }
         
     /**
@@ -126,7 +127,7 @@ public enum CodelistsV1 implements Codelists {
      */
     @Override
     public final String getValueForId(String id) {
-        return getInstance().getValueForId(id, "en");
+        return getInstance().getValueForId(id, DEFAULT_LANG, DEFAULT_LANG);
     }
     
     /**
@@ -134,7 +135,7 @@ public enum CodelistsV1 implements Codelists {
      */
     @Override
     public final Map<String, String> getDataMap() {
-        return getInstance().getDataMap("en");
+        return getInstance().getDataMap(DEFAULT_LANG, DEFAULT_LANG);
     }
 
     @Override

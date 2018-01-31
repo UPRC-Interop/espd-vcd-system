@@ -7,7 +7,7 @@ import java.util.Set;
  *
  * @author Konstantinos Raptis
  */
-public enum CodelistsV2 implements Codelists {
+public enum CodelistsV2 implements MultilingualCodelists {
     
     /**
      * Amount Type CodeList
@@ -84,10 +84,8 @@ public enum CodelistsV2 implements Codelists {
     private volatile GenericCode INSTANCE;
 
     private static final String DEFAULT_LANG = "eng";
-    private String lang;
 
     private CodelistsV2(String name) {
-        this.lang = DEFAULT_LANG;
         this.name = name;
     }
 
@@ -127,14 +125,6 @@ public enum CodelistsV2 implements Codelists {
     public String getConstantName() {
         return name();
     }
-
-    public void setLang(String lang) {
-        this.lang = lang;
-    }
-
-    public void initLang() {
-        lang = DEFAULT_LANG;
-    }
     
     /**
      *
@@ -143,9 +133,14 @@ public enum CodelistsV2 implements Codelists {
      */
     @Override
     public final String getValueForId(String id) {
-        return getInstance().getValueForId(id, lang);
+        return getInstance().getValueForId(id, DEFAULT_LANG, DEFAULT_LANG);
     }
 
+    @Override
+    public String getValueForId(String id, String lang) {
+        return getInstance().getValueForId(id, lang, DEFAULT_LANG); 
+    }
+    
     /**
      *
      * @param id
@@ -153,9 +148,20 @@ public enum CodelistsV2 implements Codelists {
      */
     @Override
     public final boolean containsId(String id) {
+        return getInstance().containsId(id, DEFAULT_LANG);
+    }
+    
+    /**
+     *
+     * @param id
+     * @param lang
+     * @return true if the codelist contains the specific id, false otherwise
+     */
+    @Override
+    public boolean containsId(String id, String lang) {
         return getInstance().containsId(id, lang);
     }
-
+    
     /**
      *
      * @param value
@@ -163,15 +169,29 @@ public enum CodelistsV2 implements Codelists {
      */
     @Override
     public final boolean containsValue(String value) {
+        return getInstance().containsValue(value, DEFAULT_LANG);
+    }
+    
+    @Override
+    public boolean containsValue(String value, String lang) {
         return getInstance().containsValue(value, lang);
     }
-
+    
     /**
-     * @return the internal representation of the codelist as an immutable bimap
+     * @return the internal representation of the codelist as an immutable map
      */
     @Override
     public final Map<String, String> getDataMap() {
-        return getInstance().getDataMap(lang);
+        return getInstance().getDataMap(DEFAULT_LANG, DEFAULT_LANG);
+    }
+    
+    /**
+     * @param lang The language in which the data will be
+     * @return the internal representation of the codelist as an immutable map
+     */
+    @Override
+    public Map<String, String> getDataMap(String lang) {
+        return getInstance().getDataMap(lang, DEFAULT_LANG);
     }
     
     /**

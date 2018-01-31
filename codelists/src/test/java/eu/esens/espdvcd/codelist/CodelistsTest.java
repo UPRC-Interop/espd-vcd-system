@@ -32,8 +32,7 @@ public class CodelistsTest {
         Assert.assertEquals("Greece", CodelistsV2.CountryIdentification.getValueForId("GR"));
         Assert.assertEquals("Sole contractor / Lead entity", CodelistsV2.EORoleType.getValueForId("SCLE"));
         Assert.assertEquals("Submission for all lots", CodelistsV2.BidType.getValueForId("LOT_ALL"));
-        CodelistsV2.BidType.setLang("ell");
-        Assert.assertEquals("Υποβολή για όλες τις παρτίδες", CodelistsV2.BidType.getValueForId("LOT_ALL"));
+        Assert.assertEquals("Υποβολή για όλες τις παρτίδες", CodelistsV2.BidType.getValueForId("LOT_ALL", "ell"));
     }
 
     @Test
@@ -41,7 +40,25 @@ public class CodelistsTest {
         Assert.assertEquals("Greece", CodelistsV1.CountryIdentification.getDataMap().get("GR"));
         Assert.assertEquals("Greece", CodelistsV2.CountryIdentification.getDataMap().get("GR"));
     }
-
+    
+    @Test
+    public void testGetValueForId() {
+        Assert.assertEquals("Greece", CodelistsV2.CountryIdentification.getValueForId("GR", null));
+        Assert.assertEquals("Greece", CodelistsV2.CountryIdentification.getValueForId("GR", "lala"));
+    }
+    
+    @Test
+    public void testContainsId() {
+        Assert.assertEquals(false, CodelistsV2.CountryIdentification.containsId("GR", null));
+        Assert.assertEquals(false, CodelistsV2.CountryIdentification.containsId("GR", "lala"));
+    }
+    
+    @Test
+    public void testContainsValue() {
+        Assert.assertEquals(false, CodelistsV2.CountryIdentification.containsValue("Greece", null));
+        Assert.assertEquals(false, CodelistsV2.CountryIdentification.containsValue("Greece", "lala"));
+    }
+    
     @Test
     public void testAllGC() {
 

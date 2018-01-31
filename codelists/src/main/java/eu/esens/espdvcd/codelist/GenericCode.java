@@ -1,8 +1,10 @@
 package eu.esens.espdvcd.codelist;
 
 import com.google.common.collect.ImmutableMap;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,6 +33,9 @@ import org.oasis_open.docs.codelist.ns.genericode._1.ColumnSet;
  * @version 1.0
  */
 public class GenericCode {
+
+    private static final String ERROR_INVALID_LANGUAGE = "Invalid language code %s...";
+    private static final String ERROR_INVALID_LANGUAGE_ACTION_PERFORMED_WITH_DEFAULT = ERROR_INVALID_LANGUAGE + " %s been performed by using default language";
 
     protected final JAXBElement<CodeListDocument> GC;
     protected final Map<String, Map<String, String>> langMap;
@@ -136,55 +141,53 @@ public class GenericCode {
                             });
 
                 });
-        
-//        tempLangMap.forEach((lang, biMap) -> {
-//            System.out.println("language: " + lang);
-//            biMap.forEach((code, data)-> System.out.println("Code: " + code + ", Data: " + data));
-//            System.out.println();
-//        });
-        
+
         return tempLangMap.entrySet()
                 .stream()
                 .collect(Collectors.toMap(e -> e.getKey(), e -> ImmutableMap.copyOf(e.getValue())));
     }
 
-    protected final Map<String, String> getDataMap(String lang) {
-        return langMap.get(lang);
+    protected final Map<String, String> getDataMap(String lang, String defaultLang) {
+        return Optional.ofNullable(langMap.get(lang))
+                .orElseGet(() -> {
+                    Logger.getLogger(GenericCode.class.getName())
+                            .log(Level.SEVERE, String.format(ERROR_INVALID_LANGUAGE_ACTION_PERFORMED_WITH_DEFAULT, lang, "getDataMap"));
+                    return langMap.get(defaultLang);
+                });
     }
 
-    protected final String getValueForId(String id, String lang) {
-        String value = null;
-
-        if (langMap.containsKey(lang)) {
-            value = langMap.get(lang).get(id);
-        }
-
-        return value;
+    protected final String getValueForId(String id, String lang, String defaultLang) {
+        return Optional.ofNullable(langMap.get(lang))
+                .orElseGet(() -> {
+                    Logger.getLogger(GenericCode.class.getName())
+                            .log(Level.SEVERE, String.format(ERROR_INVALID_LANGUAGE_ACTION_PERFORMED_WITH_DEFAULT, lang, "getValueForId"));
+                    return langMap.get(defaultLang);
+                })
+                .get(id);
     }
 
     protected final boolean containsId(String id, String lang) {
-        boolean result = false;
-
-        if (langMap.containsKey(lang)) {
-            // id = code of row in gc
-            result = langMap.get(lang).containsKey(id);
-        }
-
-        return result;
+        return Optional.ofNullable(langMap.get(lang))
+                .orElseGet(() -> {
+                    Logger.getLogger(GenericCode.class.getName())
+                            .log(Level.SEVERE, String.format(ERROR_INVALID_LANGUAGE, lang));
+                    return Collections.EMPTY_MAP;
+                })
+                .containsKey(id);
     }
 
     protected final boolean containsValue(String value, String lang) {
-        boolean result = false;
-
-        if (langMap.containsKey(lang)) {
-            langMap.get(lang).containsValue(value);
-        }
-
-        return result;
+        return Optional.ofNullable(langMap.get(lang))
+                .orElseGet(() -> {
+                    Logger.getLogger(GenericCode.class.getName())
+                            .log(Level.SEVERE, String.format(ERROR_INVALID_LANGUAGE, lang));
+                    return Collections.EMPTY_MAP;
+                })
+                .containsValue(value);
     }
-    
+
     protected final Set<String> getAllLangs() {
         return langMap.keySet();
     }
-    
+
 }
