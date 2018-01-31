@@ -10,10 +10,6 @@ import java.util.Set;
 public enum CodelistsV2 implements MultilingualCodelists {
     
     /**
-     * Amount Type CodeList
-     */
-    AmountType("/gc/v2/AmountType-CodeList.gc"),
-    /**
      * Bid Type CodeList
      */
     BidType("/gc/v2/BidType-CodeList.gc"),

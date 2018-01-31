@@ -35,7 +35,7 @@ import org.oasis_open.docs.codelist.ns.genericode._1.ColumnSet;
 public class GenericCode {
 
     private static final String ERROR_INVALID_LANGUAGE = "Invalid language code %s...";
-    private static final String ERROR_INVALID_LANGUAGE_ACTION_PERFORMED_WITH_DEFAULT = ERROR_INVALID_LANGUAGE + " %s been performed by using default language";
+    private static final String ERROR_INVALID_LANGUAGE_ACTION_PERFORMED_WITH_DEFAULT = ERROR_INVALID_LANGUAGE + " %s been performed by using default language (%s)";
 
     protected final JAXBElement<CodeListDocument> GC;
     protected final Map<String, Map<String, String>> langMap;
@@ -151,7 +151,7 @@ public class GenericCode {
         return Optional.ofNullable(langMap.get(lang))
                 .orElseGet(() -> {
                     Logger.getLogger(GenericCode.class.getName())
-                            .log(Level.SEVERE, String.format(ERROR_INVALID_LANGUAGE_ACTION_PERFORMED_WITH_DEFAULT, lang, "getDataMap"));
+                            .log(Level.WARNING, String.format(ERROR_INVALID_LANGUAGE_ACTION_PERFORMED_WITH_DEFAULT, lang, "getDataMap", defaultLang));
                     return langMap.get(defaultLang);
                 });
     }
@@ -160,7 +160,7 @@ public class GenericCode {
         return Optional.ofNullable(langMap.get(lang))
                 .orElseGet(() -> {
                     Logger.getLogger(GenericCode.class.getName())
-                            .log(Level.SEVERE, String.format(ERROR_INVALID_LANGUAGE_ACTION_PERFORMED_WITH_DEFAULT, lang, "getValueForId"));
+                            .log(Level.WARNING, String.format(ERROR_INVALID_LANGUAGE_ACTION_PERFORMED_WITH_DEFAULT, lang, "getValueForId", defaultLang));
                     return langMap.get(defaultLang);
                 })
                 .get(id);
@@ -170,7 +170,7 @@ public class GenericCode {
         return Optional.ofNullable(langMap.get(lang))
                 .orElseGet(() -> {
                     Logger.getLogger(GenericCode.class.getName())
-                            .log(Level.SEVERE, String.format(ERROR_INVALID_LANGUAGE, lang));
+                            .log(Level.WARNING, String.format(ERROR_INVALID_LANGUAGE, lang));
                     return Collections.EMPTY_MAP;
                 })
                 .containsKey(id);
@@ -180,7 +180,7 @@ public class GenericCode {
         return Optional.ofNullable(langMap.get(lang))
                 .orElseGet(() -> {
                     Logger.getLogger(GenericCode.class.getName())
-                            .log(Level.SEVERE, String.format(ERROR_INVALID_LANGUAGE, lang));
+                            .log(Level.WARNING, String.format(ERROR_INVALID_LANGUAGE, lang));
                     return Collections.EMPTY_MAP;
                 })
                 .containsValue(value);
