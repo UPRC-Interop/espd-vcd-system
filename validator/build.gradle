@@ -1,5 +1,6 @@
 dependencies {
 	compile project(':builder')
+        compile group: 'com.helger', name: 'ph-schematron', version: '5.0.0'
 }
 
 task copyTask(type: Copy) {

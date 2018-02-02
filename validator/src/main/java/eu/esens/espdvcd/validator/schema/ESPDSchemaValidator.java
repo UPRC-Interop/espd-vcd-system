@@ -1,7 +1,8 @@
-package eu.esens.espdvcd.validator;
+package eu.esens.espdvcd.validator.schema;
 
 import eu.esens.espdvcd.schema.XSD;
 import eu.esens.espdvcd.schema.SchemaUtil;
+import eu.esens.espdvcd.validator.ArtifactValidator;
 import org.xml.sax.SAXException;
 
 import java.io.InputStream;
@@ -21,13 +22,13 @@ import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
  *
  * Created by Ulf Lotzmann on 03/05/2016.
  */
-public class ESPDSchemaValidator implements SchemaValidator {
+public class ESPDSchemaValidator implements ArtifactValidator {
 
     private List<String> validationMessages = new LinkedList<>();
     private String xsdPath;
     private Class jaxbClass;
 
-    protected ESPDSchemaValidator(InputStream is, String xsdPath, Class jaxbClass) throws SAXException, JAXBException {
+    public ESPDSchemaValidator(InputStream is, String xsdPath, Class jaxbClass) throws SAXException, JAXBException {
 
         this.xsdPath = xsdPath;
         this.jaxbClass = jaxbClass;

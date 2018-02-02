@@ -32,7 +32,7 @@ public class ESPDSchemaValidatorTest {
     @Test
     public void validateESPDRequest() throws Exception {
         // create ESPD request validator object for valid ESPD request and retrieve test results
-        SchemaValidator validator = ValidatorFactory.createESPDRequestSchemaValidator(isReqValid);
+        ArtifactValidator validator = ValidatorFactory.createESPDRequestSchemaValidator(isReqValid);
         Assert.assertTrue(validator.isValid());
 
         // create ESPD request validator object for invalid ESPD request and retrieve test results
@@ -54,7 +54,7 @@ public class ESPDSchemaValidatorTest {
     @Test
     public void checkESPDRequestValidationForESPDResponse() throws Exception {
         // create ESPD request validator object for valid ESPD response and retrieve test results
-        SchemaValidator validator = ValidatorFactory.createESPDRequestSchemaValidator(isResValid);
+        ArtifactValidator validator = ValidatorFactory.createESPDRequestSchemaValidator(isResValid);
         Assert.assertFalse(validator.isValid());
 
         Assert.assertTrue(validator.getValidationMessages().size() > 0);
@@ -69,14 +69,14 @@ public class ESPDSchemaValidatorTest {
     @Test
     public void validateESPDResponse() throws Exception {
         // create ESPD response validator object for valid ESPD response and retrieve test results
-        SchemaValidator validator = ValidatorFactory.createESPDResponseSchemaValidator(isResValid);
+        ArtifactValidator validator = ValidatorFactory.createESPDResponseSchemaValidator(isResValid);
         Assert.assertTrue(validator.isValid());
     }
 
     @Test
     public void checkESPDResponseValidationForESPDRequest() throws Exception {
         // create ESPD response validator object for valid ESPD request and retrieve test results
-        SchemaValidator validator = ValidatorFactory.createESPDResponseSchemaValidator(isReqValid);
+        ArtifactValidator validator = ValidatorFactory.createESPDResponseSchemaValidator(isReqValid);
         Assert.assertFalse(validator.isValid());
 
         Assert.assertTrue(validator.getValidationMessages().size() > 0);
