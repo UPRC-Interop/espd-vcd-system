@@ -1,9 +1,7 @@
 package eu.esens.espdvcd.codelist;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,9 +16,9 @@ public class CodelistsTest {
     }
 
     @Test
-    public void testGetAllLangs() {
+    public void testGetAllLang() {
         Assert.assertTrue(CodelistsV2.CountryIdentification.getAllLangs().size() > 1);
-        Assert.assertTrue(CodelistsV1.CountryIdentification.getAllLangs().size() == 1);
+        Assert.assertTrue(CodelistsV1.CountryIdentification.getAllLang().size() == 1);
     }
 
     @Test
@@ -175,6 +173,56 @@ public class CodelistsTest {
         compatibilityMap.forEach((v1, ml) -> System.out.printf("%-35s is a subset of %-35s \n", v1 + "(V1)", ml + "(ML)"));
         System.out.println("\nCompatibilityBetweenV1AndMLCodelists -> Non Compatible\n");
         compatibilityList.forEach(v1 -> System.out.printf("%-35s is not a subset of any ML codelist\n", v1 + "(V1)"));
+    }
+
+    @Test
+    public void test_getDataMapV1() {
+        // valid input
+        Assert.assertTrue(CodelistsV1.CountryIdentification._getDataMap().isPresent());
+        Assert.assertEquals("Greece", CodelistsV1.CountryIdentification._getDataMap().get().get("GR"));
+        // Invalid input
+        Assert.assertEquals(null, CodelistsV1.CountryIdentification._getDataMap().get().get("lala"));
+        Assert.assertEquals(null, CodelistsV1.CountryIdentification._getDataMap().get().get(null));
+    }
+
+    @Test
+    public void test_getDataMapV2() {
+        // valid input
+        Assert.assertTrue(CodelistsV2.BidType._getDataMap("ell").isPresent());
+        Assert.assertEquals("Submission for all lots", CodelistsV2.BidType._getDataMap().get().get("LOT_ALL"));
+        Assert.assertEquals("Υποβολή για όλες τις παρτίδες", CodelistsV2.BidType._getDataMap("ell").get().get("LOT_ALL"));
+
+        // Invalid input
+        Assert.assertTrue(CodelistsV2.BidType._getDataMap(null).isPresent());
+        Assert.assertTrue(CodelistsV2.BidType._getDataMap("lala").isPresent());
+        Assert.assertEquals(null, CodelistsV2.BidType._getDataMap().get().get(null));
+        Assert.assertEquals(null, CodelistsV2.BidType._getDataMap().get().get("lala"));
+        Assert.assertEquals("Submission for all lots", CodelistsV2.BidType._getDataMap("lala").get().get("LOT_ALL"));
+        Assert.assertEquals("Submission for all lots", CodelistsV2.BidType._getDataMap(null).get().get("LOT_ALL"));
+    }
+
+    @Test
+    public void test_getValueForIdV1() {
+        // valid input
+        Assert.assertEquals(Optional.of("Greece"), CodelistsV1.CountryIdentification._getValueForId("GR"));
+        Assert.assertEquals(Optional.of("Main tenderer"), CodelistsV1.TenderingRole._getValueForId("MT"));
+        // Invalid input
+        Assert.assertEquals(Optional.empty(), CodelistsV1.CountryIdentification._getValueForId(null));
+        Assert.assertEquals(Optional.empty(), CodelistsV1.TenderingRole._getValueForId("lala"));
+    }
+
+    @Test
+    public void test_getValueForIdV2() {
+        // valid input
+        Assert.assertEquals(Optional.of("Greece"), CodelistsV2.CountryIdentification._getValueForId("GR"));
+        Assert.assertEquals(Optional.of("Submission for all lots"), CodelistsV2.BidType._getValueForId("LOT_ALL"));
+        Assert.assertEquals(Optional.of("Greece"), CodelistsV2.CountryIdentification._getValueForId("GR", "ell"));
+        Assert.assertEquals(Optional.of("Υποβολή για όλες τις παρτίδες"), CodelistsV2.BidType._getValueForId("LOT_ALL", "ell"));
+        // Invalid input
+        Assert.assertEquals(Optional.empty(), CodelistsV2.CountryIdentification._getValueForId(null));
+        Assert.assertEquals(Optional.empty(), CodelistsV2.BidType._getValueForId("lala"));
+        Assert.assertEquals(Optional.of("Greece"), CodelistsV2.CountryIdentification._getValueForId("GR", null));
+        Assert.assertEquals(Optional.of("Submission for all lots"), CodelistsV2.BidType._getValueForId("LOT_ALL", "lala"));
     }
 
 }

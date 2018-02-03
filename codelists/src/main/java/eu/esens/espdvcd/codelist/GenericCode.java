@@ -1,6 +1,7 @@
 package eu.esens.espdvcd.codelist;
 
 import com.google.common.collect.ImmutableMap;
+
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -16,6 +17,7 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
+
 import org.oasis_open.docs.codelist.ns.genericode._1.CodeListDocument;
 import org.oasis_open.docs.codelist.ns.genericode._1.Column;
 import org.oasis_open.docs.codelist.ns.genericode._1.Row;
@@ -26,21 +28,23 @@ import org.oasis_open.docs.codelist.ns.genericode._1.ColumnSet;
  * GenericCode that is used to load simple Generic Code files and provide a generic API that maps the values used
  * as IDs, which are essentially the codelist values with actual values that are presented either on a form or a
  * document.
- *
- * It is used as an abstract superclass of the {@link eu.esens.espdvcd.codelist.MultilingualCodeList}
+ * <p>
+ * It is used as an abstract superclass of the {@link eu.esens.espdvcd.codelist.CodelistsV1}
  * MultilingualCodeList
  *
  * @version 1.0
  */
 public class GenericCode {
 
-    private static final String ERROR_INVALID_LANGUAGE = "Invalid language code %s...";
-    private static final String ERROR_INVALID_LANGUAGE_ACTION_PERFORMED_WITH_DEFAULT = ERROR_INVALID_LANGUAGE + " %s been performed by using default language (%s)";
+    private static final String ERROR_INVALID_LANGUAGE = "Invalid language code %s... ";
+    private static final String ACTION_PERFORMED_WITH_DEFAULT_LANGUAGE = "%s has been performed by using default language (%s)";
 
     protected final JAXBElement<CodeListDocument> GC;
     protected final Map<String, Map<String, String>> langMap;
+    private final String DEFAULT_LANG;
 
-    protected GenericCode(String theCodelist) {
+    protected GenericCode(String theCodelist, String defaultLang) {
+        DEFAULT_LANG = defaultLang;
 
         XMLStreamReader xsr = null;
         try {
@@ -74,13 +78,13 @@ public class GenericCode {
         SimpleCodeList sgc = GC.getValue().getSimpleCodeList();
         return sgc.getRow().stream()
                 .filter(r -> r.getValue().stream() //Search in Rows
-                .filter(c -> (c.getColumnRef() instanceof Column // For Columns
-                && ((Column) c.getColumnRef()).getId().equals(id)) // With Id "code"
-                && c.getSimpleValue().getValue().equals(IdValue)) // And Short name GR
-                .findAny().isPresent()).findAny().orElseThrow(IllegalArgumentException::new)
+                        .filter(c -> (c.getColumnRef() instanceof Column // For Columns
+                                && ((Column) c.getColumnRef()).getId().equals(id)) // With Id "code"
+                                && c.getSimpleValue().getValue().equals(IdValue)) // And Short name GR
+                        .findAny().isPresent()).findAny().orElseThrow(IllegalArgumentException::new)
                 .getValue().stream()
                 .filter(c -> (c.getColumnRef() instanceof Column // For Columns
-                && ((Column) c.getColumnRef()).getId().equals(dataId)))
+                        && ((Column) c.getColumnRef()).getId().equals(dataId)))
                 .findAny().orElseThrow(IllegalArgumentException::new).getSimpleValue().getValue();
     }
 
@@ -104,7 +108,7 @@ public class GenericCode {
 
         sgc.getRow().stream()
                 .filter((Row r) -> r.getValue().stream() // Search in Rows
-                .allMatch(c -> c.getColumnRef() instanceof Column)) // For Columns
+                        .allMatch(c -> c.getColumnRef() instanceof Column)) // For Columns
                 .forEach((Row r) -> {
 
                     // Extract Row data
@@ -147,46 +151,69 @@ public class GenericCode {
                 .collect(Collectors.toMap(e -> e.getKey(), e -> ImmutableMap.copyOf(e.getValue())));
     }
 
-    protected final Map<String, String> getDataMap(String lang, String defaultLang) {
+    protected final Map<String, String> getDataMap(String lang) {
         return Optional.ofNullable(langMap.get(lang))
-                .orElseGet(() -> {
-                    Logger.getLogger(GenericCode.class.getName())
-                            .log(Level.WARNING, String.format(ERROR_INVALID_LANGUAGE_ACTION_PERFORMED_WITH_DEFAULT, lang, "getDataMap", defaultLang));
-                    return langMap.get(defaultLang);
-                });
+                .orElseGet(() -> getDefaultDataMap(lang, "getDataMap", true));
     }
 
-    protected final String getValueForId(String id, String lang, String defaultLang) {
+    protected final String getValueForId(String id, String lang) {
         return Optional.ofNullable(langMap.get(lang))
-                .orElseGet(() -> {
-                    Logger.getLogger(GenericCode.class.getName())
-                            .log(Level.WARNING, String.format(ERROR_INVALID_LANGUAGE_ACTION_PERFORMED_WITH_DEFAULT, lang, "getValueForId", defaultLang));
-                    return langMap.get(defaultLang);
-                })
+                .orElseGet(() -> getDefaultDataMap(lang, "getValueForId", true))
                 .get(id);
     }
 
     protected final boolean containsId(String id, String lang) {
         return Optional.ofNullable(langMap.get(lang))
-                .orElseGet(() -> {
-                    Logger.getLogger(GenericCode.class.getName())
-                            .log(Level.WARNING, String.format(ERROR_INVALID_LANGUAGE, lang));
-                    return Collections.EMPTY_MAP;
-                })
+                .orElseGet(() -> getEmptyMap(lang, true))
                 .containsKey(id);
     }
 
     protected final boolean containsValue(String value, String lang) {
         return Optional.ofNullable(langMap.get(lang))
-                .orElseGet(() -> {
-                    Logger.getLogger(GenericCode.class.getName())
-                            .log(Level.WARNING, String.format(ERROR_INVALID_LANGUAGE, lang));
-                    return Collections.EMPTY_MAP;
-                })
+                .orElseGet(() -> getEmptyMap(lang, true))
                 .containsValue(value);
     }
 
-    protected final Set<String> getAllLangs() {
+    protected final Optional<Map<String, String>> _getDataMap(String lang) {
+        Optional<Map<String, String>> dataMap = Optional.ofNullable(langMap.get(lang));
+        return dataMap.isPresent() ? dataMap : _getDefaultDataMap(lang, "getDataMap", true);
+    }
+
+    protected final Optional<String> _getValueForId(String id, String lang) {
+        Optional<Map<String, String>> dataMap = Optional.ofNullable(langMap.get(lang));
+        return dataMap.isPresent() ? Optional.ofNullable(dataMap.get().get(id))
+                : Optional.ofNullable(_getDefaultDataMap(lang, "getValueForId", true).get().get(id));
+    }
+
+    private Map<String, String> getEmptyMap(String InvalidLang, boolean printError) {
+        if (printError) {
+            Logger.getLogger(GenericCode.class.getName())
+                    .log(Level.WARNING, String.format(ERROR_INVALID_LANGUAGE, InvalidLang));
+        }
+        return Collections.emptyMap();
+    }
+
+    private Map<String, String> getDefaultDataMap(String invalidLang, String action, boolean printError) {
+        if (printError) {
+            Logger.getLogger(GenericCode.class.getName())
+                    .log(Level.WARNING, String.format(ERROR_INVALID_LANGUAGE
+                                    + ACTION_PERFORMED_WITH_DEFAULT_LANGUAGE,
+                            invalidLang, action, DEFAULT_LANG));
+        }
+        return langMap.get(DEFAULT_LANG);
+    }
+
+    private Optional<Map<String, String>> _getDefaultDataMap(String invalidLang, String action, boolean printError) {
+        if (printError) {
+            Logger.getLogger(GenericCode.class.getName())
+                    .log(Level.WARNING, String.format(ERROR_INVALID_LANGUAGE
+                                    + ACTION_PERFORMED_WITH_DEFAULT_LANGUAGE,
+                            invalidLang, action, DEFAULT_LANG));
+        }
+        return Optional.of(langMap.get(DEFAULT_LANG));
+    }
+
+    protected final Set<String> getAllLang() {
         return langMap.keySet();
     }
 

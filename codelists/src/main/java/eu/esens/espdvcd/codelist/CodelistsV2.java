@@ -1,14 +1,14 @@
 package eu.esens.espdvcd.codelist;
 
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 /**
- *
  * @author Konstantinos Raptis
  */
 public enum CodelistsV2 implements MultilingualCodelists {
-    
+
     /**
      * Bid Type CodeList
      */
@@ -75,7 +75,7 @@ public enum CodelistsV2 implements MultilingualCodelists {
     TechnicalCapabilityType("/gc/v2/TechnicalCapabilityType-CodeList.gc"),
     EORoleType("/gc/v2/EORoleType-CodeList.gc"),
     PropertyGroupType("/gc/v2/PropertyGroupType-CodeList.gc");
-    
+
     private final String name;
     private volatile GenericCode INSTANCE;
 
@@ -93,14 +93,12 @@ public enum CodelistsV2 implements MultilingualCodelists {
     }
 
     protected synchronized void makeInstance() {
-        INSTANCE = new GenericCode(name);
+        INSTANCE = new GenericCode(name, DEFAULT_LANG);
     }
 
     /**
-     *
      * @param otherName
      * @return true if the name of the codelist is equal with @param othername
-     *
      */
     @Override
     public boolean equalsName(String otherName) {
@@ -121,24 +119,22 @@ public enum CodelistsV2 implements MultilingualCodelists {
     public String getConstantName() {
         return name();
     }
-    
+
     /**
-     *
-     * @param id 
+     * @param id
      * @return the value mapped with the specific id in the codelist, null otherwise
      */
     @Override
     public final String getValueForId(String id) {
-        return getInstance().getValueForId(id, DEFAULT_LANG, DEFAULT_LANG);
+        return getInstance().getValueForId(id, DEFAULT_LANG);
     }
 
     @Override
     public String getValueForId(String id, String lang) {
-        return getInstance().getValueForId(id, lang, DEFAULT_LANG); 
+        return getInstance().getValueForId(id, lang);
     }
-    
+
     /**
-     *
      * @param id
      * @return true if the codelist contains the specific id, false otherwise
      */
@@ -146,9 +142,8 @@ public enum CodelistsV2 implements MultilingualCodelists {
     public final boolean containsId(String id) {
         return getInstance().containsId(id, DEFAULT_LANG);
     }
-    
+
     /**
-     *
      * @param id
      * @param lang
      * @return true if the codelist contains the specific id, false otherwise
@@ -157,9 +152,8 @@ public enum CodelistsV2 implements MultilingualCodelists {
     public boolean containsId(String id, String lang) {
         return getInstance().containsId(id, lang);
     }
-    
+
     /**
-     *
      * @param value
      * @return true if the codelist contains the specific value, false otherwise
      */
@@ -167,35 +161,54 @@ public enum CodelistsV2 implements MultilingualCodelists {
     public final boolean containsValue(String value) {
         return getInstance().containsValue(value, DEFAULT_LANG);
     }
-    
+
     @Override
     public boolean containsValue(String value, String lang) {
         return getInstance().containsValue(value, lang);
     }
-    
+
     /**
      * @return the internal representation of the codelist as an immutable map
      */
     @Override
     public final Map<String, String> getDataMap() {
-        return getInstance().getDataMap(DEFAULT_LANG, DEFAULT_LANG);
+        return getInstance().getDataMap(DEFAULT_LANG);
     }
-    
+
     /**
      * @param lang The language in which the data will be
      * @return the internal representation of the codelist as an immutable map
      */
     @Override
     public Map<String, String> getDataMap(String lang) {
-        return getInstance().getDataMap(lang, DEFAULT_LANG);
+        return getInstance().getDataMap(lang);
     }
-    
+
+    @Override
+    public Optional<Map<String, String>> _getDataMap() {
+        return _getDataMap(DEFAULT_LANG);
+    }
+
+    @Override
+    public Optional<Map<String, String>> _getDataMap(String lang) {
+        return getInstance()._getDataMap(lang);
+    }
+
+    @Override
+    public Optional<String> _getValueForId(String id) {
+        return _getValueForId(id, DEFAULT_LANG);
+    }
+
+    @Override
+    public Optional<String> _getValueForId(String id, String lang) {
+        return getInstance()._getValueForId(id, lang);
+    }
+
     /**
-     * 
      * @return All available languages
      */
     Set<String> getAllLangs() {
-        return getInstance().getAllLangs();
+        return getInstance().getAllLang();
     }
-    
+
 }

@@ -1,14 +1,14 @@
 package eu.esens.espdvcd.codelist;
 
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 /**
- *
  * @author konstantinos
  */
 public enum CodelistsV1 implements Codelists {
-    
+
     /**
      * Activity Type CodeList
      */
@@ -68,11 +68,11 @@ public enum CodelistsV1 implements Codelists {
     ServicesProjectSubType("/gc/v1/ServicesProjectSubType-CodeList.gc"),
     TechnicalCapabilityType("/gc/v1/TechnicalCapabilityTypeCode-CodeList.gc"),
     TenderingRole("/gc/v1/TendererRole-CodeList.gc");
-        
+
     private final String name;
     private volatile GenericCode INSTANCE;
     private static final String DEFAULT_LANG = "en";
-    
+
     private CodelistsV1(String s) {
         name = s;
     }
@@ -85,22 +85,19 @@ public enum CodelistsV1 implements Codelists {
     }
 
     protected synchronized void makeInstance() {
-        INSTANCE = new GenericCode(name);
+        INSTANCE = new GenericCode(name, DEFAULT_LANG);
     }
-    
+
     /**
-     *
      * @param otherName
      * @return true if the name of the codelist is equal with @param othername
-     *
      */
     @Override
     public boolean equalsName(String otherName) {
         return (otherName == null) ? false : name.equals(otherName);
     }
-   
+
     /**
-     *
      * @param id
      * @return true if the codelist contains the specific id, false otherwise
      */
@@ -110,7 +107,6 @@ public enum CodelistsV1 implements Codelists {
     }
 
     /**
-     *
      * @param value
      * @return true if the codelist contains the specific value, false otherwise
      */
@@ -118,24 +114,23 @@ public enum CodelistsV1 implements Codelists {
     public final boolean containsValue(String value) {
         return getInstance().containsValue(value, DEFAULT_LANG);
     }
-        
+
     /**
-     *
      * @param id
      * @return the value mapped with the specific id in the codelist, null
      * otherwise
      */
     @Override
     public final String getValueForId(String id) {
-        return getInstance().getValueForId(id, DEFAULT_LANG, DEFAULT_LANG);
+        return getInstance().getValueForId(id, DEFAULT_LANG);
     }
-    
+
     /**
      * @return the internal representation of the codelist as an immutable bimap
      */
     @Override
     public final Map<String, String> getDataMap() {
-        return getInstance().getDataMap(DEFAULT_LANG, DEFAULT_LANG);
+        return getInstance().getDataMap(DEFAULT_LANG);
     }
 
     @Override
@@ -145,20 +140,29 @@ public enum CodelistsV1 implements Codelists {
 
     /**
      * This method work as wrapper for enum name() method
-     * 
+     *
      * @return the exact name of this ENUM_CONSTANT
      */
     @Override
     public String getConstantName() {
         return name();
     }
-    
+
+    @Override
+    public Optional<Map<String, String>> _getDataMap() {
+        return getInstance()._getDataMap(DEFAULT_LANG);
+    }
+
+    @Override
+    public Optional<String> _getValueForId(String id) {
+        return getInstance()._getValueForId(id, DEFAULT_LANG);
+    }
+
     /**
-     * 
      * @return All available languages
      */
-    Set<String> getAllLangs() {
-        return getInstance().getAllLangs();
+    Set<String> getAllLang() {
+        return getInstance().getAllLang();
     }
-    
+
 }

@@ -1,6 +1,7 @@
 package eu.esens.espdvcd.codelist;
 
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * CodeList interface should be implemented by all codeLists implementation 
@@ -21,5 +22,9 @@ public interface Codelists {
     boolean containsId(String id);
     
     boolean containsValue(String value);
-    
+
+    Optional<Map<String, String>> _getDataMap();
+
+    Optional<String> _getValueForId(String id);
+
 }
