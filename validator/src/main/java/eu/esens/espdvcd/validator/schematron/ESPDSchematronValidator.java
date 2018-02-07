@@ -1,26 +1,20 @@
 package eu.esens.espdvcd.validator.schematron;
 
-import com.helger.commons.io.resource.FileSystemResource;
-import com.helger.schematron.ISchematronResource;
-import com.helger.schematron.pure.SchematronResourcePure;
-import com.helger.schematron.pure.errorhandler.CollectingPSErrorHandler;
-import com.helger.schematron.pure.errorhandler.DoNothingPSErrorHandler;
-import com.helger.schematron.pure.errorhandler.IPSErrorHandler;
-import com.helger.schematron.pure.errorhandler.LoggingPSErrorHandler;
-import com.helger.schematron.pure.exchange.PSReader;
-import com.helger.schematron.pure.exchange.SchematronReadException;
-import com.helger.schematron.pure.model.PSSchema;
+import com.helger.commons.state.ESuccess;
+import com.helger.jaxb.IJAXBWriter;
+import com.helger.schematron.svrl.SVRLMarshaller;
+import com.helger.schematron.xslt.SchematronResourceSCH;
 import eu.esens.espdvcd.validator.ArtifactValidator;
+import jdk.internal.util.xml.impl.Input;
+import org.oclc.purl.dsdl.svrl.SchematronOutputType;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
 import javax.xml.transform.stream.StreamSource;
-import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * @author konstantinos
@@ -29,56 +23,59 @@ public class ESPDSchematronValidator implements ArtifactValidator {
 
     private static final String ERROR_INVALID_SCHEMATRON = "Invalid Schematron";
     private List<String> validationMessages = new LinkedList<>();
+//    private static Map<String, SchematronResourceSCH> schematronResourceCache = new LinkedHashMap<>();
 
     public ESPDSchematronValidator(InputStream is, String schPath) {
-        validateXML(is, schPath);
+        // validateXMLViaXSLTSchematron(is, schPath);
+        validateXMLViaXSLTSchematronFull(is, schPath);
     }
 
-    public ESPDSchematronValidator(InputStream is, String... schPath) {
-        validateXML(is, schPath);
-    }
-
-    // FIXME: this method does not work properly
-    private void validateXML(InputStream is, String... schPath) {
-        // Schematron Pure
-        final List<SchematronResourcePure> schematronList = Arrays.asList(schPath)
-                .stream()
-                .map(path -> SchematronResourcePure.fromFile(path))
-                .collect(Collectors.toList());
-        // error handler
-        schematronList
-                .stream()
-                .forEach(schematron -> schematron.setErrorHandler(new LoggingPSErrorHandler()));
-
-        schematronList.stream().filter(schematron -> !schematron.isValidSchematron()).forEach(schematron -> {
-            throw new IllegalArgumentException(ERROR_INVALID_SCHEMATRON);
-        });
-
-//        schematronList.stream().forEach(schematron -> {
-//            try {
-//                schematron.getSchematronValidity(new StreamSource(is)).isValid();
-//            } catch (Exception e) {
-//                validationMessages.add(e.getMessage());
-//            }
-//        });
-    }
-
-    private void validateXML(InputStream is, String schPath) {
-        // Schematron Pure
-        final SchematronResourcePure schematron = SchematronResourcePure.fromFile(schPath);
-        schematron.setErrorHandler(new LoggingPSErrorHandler());
-        // final ISchematronResource schematron = SchematronResourcePure.fromFile(schPath);
+    private void validateXMLViaXSLTSchematron(InputStream is, String schPath) {
+//        final SchematronResourceSCH schematron = Optional.ofNullable(schematronResourceCache.get(schPath))
+//                .orElseGet(() -> loadAndCacheSch(schPath));
+        final SchematronResourceSCH schematron = SchematronResourceSCH.fromFile(schPath);
 
         if (!schematron.isValidSchematron()) {
             throw new IllegalArgumentException(ERROR_INVALID_SCHEMATRON);
         }
 
         try {
-            schematron.getSchematronValidity(new StreamSource(is)).isValid();
+            boolean valid = schematron.getSchematronValidity(new StreamSource(is)).isValid();
+
+            if (!valid) {
+                validationMessages.add("invalid");
+            }
+
         } catch (Exception e) {
             validationMessages.add(e.getMessage());
         }
     }
+
+    private void validateXMLViaXSLTSchematronFull(InputStream is, String schPath) {
+//        final SchematronResourceSCH schematron = Optional.ofNullable(schematronResourceCache.get(schPath))
+//                .orElseGet(() -> loadAndCacheSch(schPath));
+        final SchematronResourceSCH schematron = SchematronResourceSCH.fromFile(schPath);
+
+        if (!schematron.isValidSchematron()) {
+            throw new IllegalArgumentException(ERROR_INVALID_SCHEMATRON);
+        }
+
+        try {
+            SchematronOutputType svrl = schematron.applySchematronValidationToSVRL(new StreamSource(is));
+            new SVRLMarshaller().write(svrl, System.out).isSuccess();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            validationMessages.add(e.getMessage());
+        }
+    }
+
+//    private SchematronResourceSCH loadAndCacheSch(String schPath) {
+//        System.out.println("Caching " + schPath);
+//        schematronResourceCache.put(schPath, SchematronResourceSCH.fromFile(schPath));
+//        System.out.println(schPath + " cached");
+//        return schematronResourceCache.get(schPath);
+//    }
 
     @Override
     public boolean isValid() {

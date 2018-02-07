@@ -9,18 +9,22 @@ import java.io.InputStream;
 public class ESPDSchematronValidatorTest {
 
     InputStream aValidESPDRequest;
+    InputStream anInvalidESPDRequest;
 
     @Before
     public void setUp() {
         aValidESPDRequest = ESPDSchematronValidatorTest.class.getResourceAsStream("/espd-request.xml");
         Assert.assertNotNull(aValidESPDRequest);
+
+        anInvalidESPDRequest = ESPDSchematronValidatorTest.class.getResourceAsStream("/espd-request-invalid.xml");
+        Assert.assertNotNull(anInvalidESPDRequest);
     }
 
     @Test
     public void testIsValid() {
         // create ESPD request validator object for valid ESPD request and retrieve test results
-        ArtifactValidator validator = ValidatorFactory.createESPDRequestSchematronValidator(aValidESPDRequest, ValidatorFactory.SchOrigin.EU);
-        Assert.assertTrue(validator.isValid());
+        ArtifactValidator validatorForValid = ValidatorFactory.createESPDRequestSchematronValidator(aValidESPDRequest, ValidatorFactory.SchOrigin.EHF);
+        Assert.assertTrue(validatorForValid.isValid());
     }
 
 }
