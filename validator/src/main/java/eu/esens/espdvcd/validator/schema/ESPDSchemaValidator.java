@@ -3,6 +3,7 @@ package eu.esens.espdvcd.validator.schema;
 import eu.esens.espdvcd.schema.XSD;
 import eu.esens.espdvcd.schema.SchemaUtil;
 import eu.esens.espdvcd.validator.ArtifactValidator;
+import eu.esens.espdvcd.validator.ValidationResult;
 import org.xml.sax.SAXException;
 
 import java.io.InputStream;
@@ -15,16 +16,14 @@ import javax.xml.bind.*;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 
-import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
-
 /**
  * ESPD schema validator.
- *
+ * <p>
  * Created by Ulf Lotzmann on 03/05/2016.
  */
 public class ESPDSchemaValidator implements ArtifactValidator {
 
-    private List<String> validationMessages = new LinkedList<>();
+    private List<ValidationResult> validationMessages = new LinkedList<>();
     private String xsdPath;
     private Class jaxbClass;
 
@@ -50,9 +49,13 @@ public class ESPDSchemaValidator implements ArtifactValidator {
 
         // setting schema
         unmarshaller.setSchema(schema);
-        unmarshaller.setEventHandler(validationEvent -> validationMessages.add(validationEvent.getMessage() +
-               " (line " + validationEvent.getLocator().getLineNumber() +
-              ", column " + validationEvent.getLocator().getColumnNumber() + ")"));
+        unmarshaller.setEventHandler(validationEvent -> {
+            validationMessages.add(new ValidationResult.Builder(String.valueOf(validationMessages.size()),
+                    "(line " + validationEvent.getLocator().getLineNumber() +
+                            ", column " + validationEvent.getLocator().getColumnNumber() + ")",
+                    validationEvent.getMessage()).build());
+            return true;
+        });
         /*unmarshaller.setEventHandler(new ValidationEventHandler() {
             @Override
             public boolean handleEvent(ValidationEvent validationEvent) {
@@ -67,15 +70,16 @@ public class ESPDSchemaValidator implements ArtifactValidator {
         // validate the given input stream against the specified schema
         try {
             unmarshaller.unmarshal(is);
-        }
-        catch (Exception e) {
-            validationMessages.add(e.getMessage());
+        } catch (Exception e) {
+            validationMessages.add(new ValidationResult.Builder(String.valueOf(validationMessages.size()),
+                    "(line 0, column 0)", e.getMessage()).build());
         }
 
     }
 
     /**
      * Provides validation result.
+     *
      * @return true, if validation was successful
      */
     @Override
@@ -86,22 +90,27 @@ public class ESPDSchemaValidator implements ArtifactValidator {
 
     /**
      * Provides list of validation events.
+     *
      * @return list of events where validation was not successful; empty, if validation was successful
      */
     @Override
-    public List<String> getValidationMessages() {
+    public List<ValidationResult> getValidationMessages() {
         return validationMessages;
     }
 
     /**
      * Provides filtered list of validation events.
-     * @param keyWord, for which the list entries are filtered
+     *
+     * @param flag, for which the list entries are filtered (keyWord is flag param)
      * @return filtered list of validation events
      */
     @Override
-    public List<String> getValidationMessagesFiltered(String keyWord) {
-        return validationMessages.stream().filter(s -> s.contains(keyWord)).collect(Collectors.toList());
+    public List<ValidationResult> getValidationMessagesFiltered(String flag) {
+        return validationMessages
+                .stream()
+                .filter(validationResult -> validationResult.getFlag() != null)
+                .filter(validationResult -> validationResult.getFlag().contains(flag))
+                .collect(Collectors.toList());
     }
-
 
 }

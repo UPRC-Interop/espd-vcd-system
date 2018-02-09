@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import eu.esens.espdvcd.validator.schematron.ESPDSchematronValidator;
+import eu.esens.espdvcd.validator.schematron.SchOrigin;
 import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
 import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
 import org.xml.sax.SAXException;
@@ -23,10 +24,6 @@ import javax.xml.bind.JAXBException;
  * Created by Ulf Lotzmann on 11/05/2016.
  */
 public class ValidatorFactory {
-
-    public enum SchOrigin {
-        EU, EHF
-    }
 
     /**
      * Factory method that creates an ESPD request schema validator object and
@@ -61,35 +58,13 @@ public class ValidatorFactory {
      * @param origin The origin of schematron files
      * @return
      */
-    public static ArtifactValidator createESPDRequestSchematronValidator(InputStream is, SchOrigin origin) {
+    public static ArtifactValidator createESPDRequestSchematronValidator(InputStream is, String schPath, SchOrigin origin) {
 
         switch (origin) {
             case EU:
-//                return new ESPDSchematronValidator(is,
-//                        ValidatorFactory.class
-//                                .getResource("/rules/v1/eu/ESPDRequest/sch/02-ESPD-CL-attrb-rules.sch")
-//                                .getPath(),
-//                        ValidatorFactory.class
-//                                .getResource("/rules/v1/eu/ESPDRequest/sch/03-ESPD-ID-attrb-rules.sch")
-//                                .getPath(),
-//                        ValidatorFactory.class
-//                                .getResource("/rules/v1/eu/ESPDRequest/sch/04-ESPD-Common BR-rules.sch")
-//                                .getPath());
-                return new ESPDSchematronValidator(is, ValidatorFactory.class
-                        .getResource("/rules/v1/eu/ESPDRequest/sch/02-ESPD-CL-attrb-rules.sch")
-                        .getPath());
-
-//                return new ESPDSchematronValidator(is, ValidatorFactory.class
-//                        .getResource("/rules/v1/eu/ESPDRequest/sch/03-ESPD-ID-attrb-rules.sch")
-//                        .getPath());
-
-//                return new ESPDSchematronValidator(is, ValidatorFactory.class
-//                        .getResource("/rules/v1/eu/ESPDRequest/sch/04-ESPD-Common BR-rules.sch")
-//                        .getPath());
+                return new ESPDSchematronValidator(is, schPath);
             case EHF:
-                return new ESPDSchematronValidator(is, ValidatorFactory.class
-                        .getResource("/rules/v1/ehf/ESPDRequest/EHF-ESPD-REQUEST.sch")
-                        .getPath());
+                return new ESPDSchematronValidator(is, schPath);
             default:
                 throw new UnsupportedOperationException("Unknown schematron origin");
         }

@@ -19,12 +19,13 @@ public interface ArtifactValidator {
      * Provides list of validation events.
      * @return list of events where validation was not successful; empty, if validation was successful
      */
-    List<String> getValidationMessages();
+    List<ValidationResult> getValidationMessages();
 
     /**
      * Provides filtered list of validation events.
      * @param keyWord, for which the list entries are filtered
      * @return filtered list of validation events
      */
-    List<String> getValidationMessagesFiltered(String keyWord);
+    List<ValidationResult> getValidationMessagesFiltered(String keyWord);
+
 }

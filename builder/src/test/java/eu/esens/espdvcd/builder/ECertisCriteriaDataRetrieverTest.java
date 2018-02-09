@@ -44,7 +44,7 @@ public class ECertisCriteriaDataRetrieverTest {
         int noLegislationReference = 0;
         int noJurisdictionLevelCode = 0;
 
-        // set lang to someting
+        // set lang to something
         extractor.setLang("el");
 
         // Get all european criteria

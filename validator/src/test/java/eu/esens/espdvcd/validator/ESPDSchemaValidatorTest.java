@@ -46,7 +46,7 @@ public class ESPDSchemaValidatorTest {
         Assert.assertTrue(validator.getValidationMessagesFiltered("RequirementGroups").size() > 0);
 
         System.out.println("validateESPDRequest events:");
-        for (String event: validator.getValidationMessages()) {
+        for (ValidationResult event: validator.getValidationMessages()) {
             System.out.println(event);
         }
     }
@@ -61,7 +61,7 @@ public class ESPDSchemaValidatorTest {
         Assert.assertTrue(validator.getValidationMessagesFiltered("ESPDResponse").size() > 0);
 
         System.out.println("checkESPDRequestValidationForESPDResponse events:");
-        for (String event: validator.getValidationMessages()) {
+        for (ValidationResult event: validator.getValidationMessages()) {
             System.out.println(event);
         }
     }
@@ -82,7 +82,7 @@ public class ESPDSchemaValidatorTest {
         Assert.assertTrue(validator.getValidationMessages().size() > 0);
 
         System.out.println("checkESPDResponseValidationForESPDRequest events:");
-        for (String event: validator.getValidationMessages()) {
+        for (ValidationResult event: validator.getValidationMessages()) {
             System.out.println(event);
         }
     }
