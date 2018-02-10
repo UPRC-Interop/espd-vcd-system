@@ -55,18 +55,18 @@ public class ValidatorFactory {
 
     /**
      * @param is     input stream with XML data
-     * @param origin The origin of schematron files
+     * @param schOrigin The origin of schematron files
      * @return
      */
-    public static ArtifactValidator createESPDRequestSchematronValidator(InputStream is, String schPath, SchOrigin origin) {
+    public static ArtifactValidator createESPDRequestSchematronValidator(InputStream is, String schPath, SchOrigin schOrigin) {
 
-        switch (origin) {
+        switch (schOrigin) {
             case EU:
                 return new ESPDSchematronValidator(is, schPath);
             case EHF:
                 return new ESPDSchematronValidator(is, schPath);
             default:
-                throw new UnsupportedOperationException("Unknown schematron origin");
+                throw new IllegalArgumentException("Unknown schematron origin");
         }
 
     }

@@ -22,6 +22,26 @@ public class ValidationResult {
         return flag;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public String getTest() {
+        return test;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
     public static class Builder {
 
         // mandatory params

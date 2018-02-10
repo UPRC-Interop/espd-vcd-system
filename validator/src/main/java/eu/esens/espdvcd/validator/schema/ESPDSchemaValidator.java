@@ -108,8 +108,8 @@ public class ESPDSchemaValidator implements ArtifactValidator {
     public List<ValidationResult> getValidationMessagesFiltered(String flag) {
         return validationMessages
                 .stream()
-                .filter(validationResult -> validationResult.getFlag() != null)
-                .filter(validationResult -> validationResult.getFlag().contains(flag))
+                .filter(validationResult -> validationResult.getText() != null)
+                .filter(validationResult -> validationResult.getText().contains(flag))
                 .collect(Collectors.toList());
     }
 
