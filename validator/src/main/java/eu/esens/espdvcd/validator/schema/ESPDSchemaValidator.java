@@ -101,15 +101,15 @@ public class ESPDSchemaValidator implements ArtifactValidator {
     /**
      * Provides filtered list of validation events.
      *
-     * @param flag, for which the list entries are filtered (keyWord is flag param)
+     * @param text, for which the list entries are filtered
      * @return filtered list of validation events
      */
     @Override
-    public List<ValidationResult> getValidationMessagesFiltered(String flag) {
+    public List<ValidationResult> getValidationMessagesFiltered(String text) {
         return validationMessages
                 .stream()
                 .filter(validationResult -> validationResult.getText() != null)
-                .filter(validationResult -> validationResult.getText().contains(flag))
+                .filter(validationResult -> validationResult.getText().contains(text))
                 .collect(Collectors.toList());
     }
 
