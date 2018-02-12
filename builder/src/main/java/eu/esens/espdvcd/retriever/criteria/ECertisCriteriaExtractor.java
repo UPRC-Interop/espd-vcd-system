@@ -9,17 +9,13 @@ import eu.esens.espdvcd.codelist.Codelists;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.retriever.ECertisSelectableCriterionImpl;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -28,29 +24,33 @@ import java.util.concurrent.Future;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+
 import eu.esens.espdvcd.model.retriever.ECertisEvidenceGroup;
-import java.util.LinkedHashSet;
+
 import eu.esens.espdvcd.model.retriever.ECertisSelectableCriterion;
 
 /**
- *
  * @author konstantinos Raptis
  */
 public class ECertisCriteriaExtractor implements CriteriaDataRetriever, CriteriaExtractor {
 
-    // Server URL (1st) is the production one (2nd) is the non production one
-    private final String ECERTIS_URL = "https://ec.europa.eu/growth/tools-databases/ecertisrest/";
-    // private final String ECERTIS_URL = "https://webgate.acceptance.ec.europa.eu/growth/tools-databases/ecertisrest/";
+    public static final String ECERTIS_CONFIG_PATH = ECertisCriteriaExtractor.class.getClassLoader()
+            .getResource("ecertis.properties").getPath();
+    public static final Properties ECERTIS_PROPERTIES = new Properties();
 
+    // Server URL (1st) is the production one (2nd) is the non production one
+    // private final String ECERTIS_URL_DEFAULT = "https://ec.europa.eu/growth/tools-databases/ecertisrest/";
+    // private final String ECERTIS_URL_DEFAULT = "https://webgate.acceptance.ec.europa.eu/growth/tools-databases/ecertisrest/";
+    private final String ECERTIS_URL;
     // All available eu criteria
-    private final String ALL_CRITERIA = ECERTIS_URL + "criteria";
+    private final String ALL_CRITERIA;
 
     // Accept header JSON
     private final String ACCEPT_JSON = "application/json";
 
     // Jackson related Errors
     private static final String ERROR_INVALID_CONTENT = "Error... JSON Input Contains Invalid Content";
-    private static final String ERROR_UNEXPECTED_STUCTURE = "Error... JSON Structure does not Match Structure Expected";
+    private static final String ERROR_UNEXPECTED_STRUCTURE = "Error... JSON Structure does not Match Structure Expected";
 
     // Contains all eu criteria
     private List<ECertisSelectableCriterion> criterionList;
@@ -61,10 +61,10 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
 
     // Multilinguality related errors
     private static final String ERROR_INVALID_LANGUAGE_CODE = "Error... Provided Language Code %s is not Included in CodeLists";
-    
-    // Country code related erros
+
+    // Country code related errors
     private static final String ERROR_INVALID_COUNTRY_CODE = "Error... Provided Country Code %s is not Included in CodeLists";
-    
+
     public enum JurisdictionLevelCodeOrigin {
 
         EUROPEAN(), NATIONAL(), UNKNOWN()
@@ -73,12 +73,25 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
 
     public ECertisCriteriaExtractor() {
         this.lang = DEFAULT_LANG;
+        try {
+            ECERTIS_PROPERTIES.load(new FileInputStream(ECERTIS_CONFIG_PATH));
+
+        } catch (IOException e) {
+            Logger.getLogger(ECertisCriteriaExtractor.class.getName())
+                    .log(Level.SEVERE, "Unable to load ecertis configuration file", e);
+        }
+        ECERTIS_URL = ECERTIS_PROPERTIES.getProperty("ecertis_url", "default");
+        ALL_CRITERIA = ECERTIS_URL + "criteria";
+    }
+
+    public String getECERTIS_URL() {
+        return ECERTIS_URL;
     }
 
     /**
-     * Lazy initialization of European Criteria List 
-     * 
-     * @throws RetrieverException 
+     * Lazy initialization of European Criteria List
+     *
+     * @throws RetrieverException
      */
     private void initCriterionList() throws RetrieverException {
 
@@ -129,8 +142,8 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
         initCriterionList();
         List<SelectableCriterion> lc
                 = criterionList.stream()
-                        .map((ECertisSelectableCriterion c) -> (SelectableCriterion) c)
-                        .collect(Collectors.toList());
+                .map((ECertisSelectableCriterion c) -> (SelectableCriterion) c)
+                .collect(Collectors.toList());
         return lc;
     }
 
@@ -144,7 +157,7 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
 
     @Override
     public synchronized List<SelectableCriterion> getFullList(List<SelectableCriterion> initialList,
-            boolean addAsSelected) throws RetrieverException {
+                                                              boolean addAsSelected) throws RetrieverException {
 
         initCriterionList();
         System.out.println("Criterion List Size:" + criterionList.size());
@@ -152,8 +165,8 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
         initialSet.addAll(initialList);
         Set<SelectableCriterion> fullSet
                 = criterionList.stream()
-                        .map((ECertisSelectableCriterion c) -> (SelectableCriterion) c)
-                        .collect(Collectors.toSet());
+                .map((ECertisSelectableCriterion c) -> (SelectableCriterion) c)
+                .collect(Collectors.toSet());
         initialSet.addAll(fullSet);
         System.out.println("Criterion List Size in model:" + initialSet.size());
         return new ArrayList<>(initialSet);
@@ -193,10 +206,10 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
 
     /**
      * Get a specific criterion (European or National) from e-Certis
-     * 
+     *
      * @param ID The criterion id
      * @return The Criterion
-     * @throws RetrieverException 
+     * @throws RetrieverException
      */
     @Override
     public ECertisSelectableCriterion getCriterion(String ID)
@@ -235,7 +248,7 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
             }
 
             if (ex instanceof JsonMappingException) {
-                message = ERROR_UNEXPECTED_STUCTURE;
+                message = ERROR_UNEXPECTED_STRUCTURE;
             }
 
             Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.SEVERE, null, ex);
@@ -256,7 +269,7 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
         return c.getSubCriterions().stream()
                 .filter(theCt -> theCt.getLegislationReference() != null)
                 .filter(theCt -> theCt.getLegislationReference()
-                .getJurisdictionLevelCode().equals(countryCode))
+                        .getJurisdictionLevelCode().equals(countryCode))
                 .collect(Collectors.toList());
     }
 
@@ -271,9 +284,9 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
 
     /**
      * Retrieve the ids of all European Criteria from e-Certis.
-     * 
+     *
      * @return A list with the ids
-     * @throws RetrieverException 
+     * @throws RetrieverException
      */
     private List<String> getAllEuropeanCriteriaID()
             throws RetrieverException {
@@ -301,7 +314,7 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
             }
 
             if (ex instanceof JsonMappingException) {
-                message = ERROR_UNEXPECTED_STUCTURE;
+                message = ERROR_UNEXPECTED_STRUCTURE;
             }
 
             Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.SEVERE, null, ex);
@@ -310,10 +323,10 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
 
         return IDList;
     }
-    
+
     /**
      * Extract Given Criterion JurisdictionLevelCode Origin (European or National)
-     * 
+     *
      * @param c The criterion
      * @return The criterion's jurisdiction level code origin
      */
@@ -334,10 +347,10 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
         }
         return origin;
     }
-    
+
     /**
      * Check if given country code exists in the codelists
-     * 
+     *
      * @param countryCode The country code (ISO 3166-1 2A:2006)
      * @return true if exists, false if not
      */
@@ -359,7 +372,7 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
 
     /**
      * Set the current language
-     * 
+     *
      * @param lang The European language code
      * @throws RetrieverException In case of an invalid language code
      */
@@ -373,21 +386,20 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
 
     /**
      * Initialize language back to default (english).
-     * 
      */
     public void initLang() {
         lang = DEFAULT_LANG;
     }
-    
+
     /**
      * Open connection with e - Certis service in order to retrieve data
-     * 
-     * @param url The e-Certis service url
+     *
+     * @param url    The e-Certis service url
      * @param accept The HTTP Accept header.
-     * -> application/xml for data in XML form, 
-     * -> application/json for data in JSON form.
+     *               -> application/xml for data in XML form,
+     *               -> application/json for data in JSON form.
      * @return String representation of retrieved data
-     * @throws RetrieverException 
+     * @throws RetrieverException
      */
     private String getFromECertis(String url, String accept) throws RetrieverException {
         BufferedReader br = null;

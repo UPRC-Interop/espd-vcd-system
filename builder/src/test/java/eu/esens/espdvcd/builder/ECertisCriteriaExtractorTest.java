@@ -5,7 +5,10 @@ import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.retriever.criteria.ECertisCriteriaExtractor;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import java.util.List;
+
+import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -45,6 +48,11 @@ public class ECertisCriteriaExtractorTest {
         System.out.println(tab + "JurisdictionLevelCode: " + lr.getJurisdictionLevelCode());
         System.out.println(tab + "Article: " + lr.getArticle());
         System.out.println(tab + "URI: " + lr.getURI() + "\n");
+    }
+
+    @Test
+    public void testECertisURL() {
+        Assert.assertNotEquals("default", extractor.getECERTIS_URL());
     }
 
 }
