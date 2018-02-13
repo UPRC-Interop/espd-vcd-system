@@ -2,9 +2,11 @@ package eu.esens.espdvcd.validator;
 
 import eu.esens.espdvcd.validator.schema.ESPDSchemaValidator;
 
+import java.io.File;
 import java.io.InputStream;
 
 import eu.esens.espdvcd.validator.schematron.ESPDSchematronValidator;
+import eu.esens.espdvcd.validator.schematron.SchematronOrigin;
 import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
 import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
 import org.xml.sax.SAXException;
@@ -20,6 +22,8 @@ import javax.xml.bind.JAXBException;
  * Created by Ulf Lotzmann on 11/05/2016.
  */
 public class ValidatorFactory {
+
+    private static final String ERROR_UNKNOWN_SCHEMATRON_ORIGIN = "Error... Unknown schematron origin";
 
     /**
      * Factory method that creates an ESPD request schema validator object and
@@ -50,11 +54,66 @@ public class ValidatorFactory {
     }
 
     /**
+     * Factory method that creates an ESPD artifact (request or response) schematron
+     * validator object and performs the schematron validation for the XML provided by
+     * the specified input stream.
+     *
      * @param is input stream with XML data
-     * @return
+     * @return schematron validator object
      */
-    public static ArtifactValidator createESPDArtifactSchematronValidator(InputStream is, String schPath) {
+    static ArtifactValidator createESPDArtifactSchematronValidator(InputStream is, String schPath) {
         return new ESPDSchematronValidator(is, schPath);
+    }
+
+    /**
+     * Factory method that creates an ESPD request schematron validator object
+     * and performs the schematron validation for the XML provided by the
+     * specified file.
+     *
+     * @param espdRequest file with XML data
+     * @param schOrigin origin of schematron file
+     * @return schematron validator object
+     */
+    public static ArtifactValidator createESPDRequestSchematronValidator(File espdRequest, SchematronOrigin schOrigin) {
+
+        switch (schOrigin) {
+            case EU:
+                return new ESPDSchematronValidator(espdRequest,
+                        "/rules/v1/eu/ESPDRequest/sch/02-ESPD-CL-attrb-rules.sch"
+                        , "/rules/v1/eu/ESPDRequest/sch/03-ESPD-ID-attrb-rules.sch"
+                        , "/rules/v1/eu/ESPDRequest/sch/04-ESPD-Common-BR-rules.sch");
+            case EHF:
+                return new ESPDSchematronValidator(espdRequest,
+                        "/rules/v1/ehf/ESPDRequest/EHF-ESPD-REQUEST.sch");
+            default:
+                throw new IllegalArgumentException(ERROR_UNKNOWN_SCHEMATRON_ORIGIN);
+        }
+    }
+
+    /**
+     * Factory method that creates an ESPD response schematron validator object
+     * and performs the schematron validation for the XML provided by the
+     * specified file.
+     *
+     * @param espdResponse file with XML data
+     * @param schOrigin origin of schematron file
+     * @return schematron validator object
+     */
+    public static ArtifactValidator createESPDResponseSchematronValidator(File espdResponse, SchematronOrigin schOrigin) {
+
+        switch (schOrigin) {
+            case EU:
+                return new ESPDSchematronValidator(espdResponse,
+                        "/rules/v1/eu/ESPDResponse/sch/02-ESPD-CL-attrb-rules.sch"
+                        , "/rules/v1/eu/ESPDResponse/sch/03-ESPD-ID-attrb-rules.sch"
+                        , "/rules/v1/eu/ESPDResponse/sch/04-ESPD-Common-BR-rules.sch"
+                        , "/rules/v1/eu/ESPDResponse/sch/05-ESPD-Spec-BR-rules.sch");
+            case EHF:
+                return new ESPDSchematronValidator(espdResponse,
+                        "/rules/v1/ehf/ESPDResponse/EHF-ESPD-RESPONSE.sch");
+            default:
+                throw new IllegalArgumentException(ERROR_UNKNOWN_SCHEMATRON_ORIGIN);
+        }
     }
 
 }

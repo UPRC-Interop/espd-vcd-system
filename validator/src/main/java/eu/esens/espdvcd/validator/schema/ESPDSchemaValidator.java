@@ -1,20 +1,21 @@
 package eu.esens.espdvcd.validator.schema;
 
-import eu.esens.espdvcd.schema.XSD;
 import eu.esens.espdvcd.schema.SchemaUtil;
+import eu.esens.espdvcd.schema.XSD;
 import eu.esens.espdvcd.validator.ArtifactValidator;
 import eu.esens.espdvcd.validator.ValidationResult;
 import org.xml.sax.SAXException;
 
+import javax.xml.XMLConstants;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.xml.XMLConstants;
-import javax.xml.bind.*;
-import javax.xml.validation.Schema;
-import javax.xml.validation.SchemaFactory;
 
 /**
  * ESPD schema validator.
@@ -49,6 +50,7 @@ public class ESPDSchemaValidator implements ArtifactValidator {
 
         // setting schema
         unmarshaller.setSchema(schema);
+        /* @TODO set flag value */
         unmarshaller.setEventHandler(validationEvent -> {
             validationMessages.add(new ValidationResult.Builder(String.valueOf(validationMessages.size()),
                     "(line " + validationEvent.getLocator().getLineNumber() +
@@ -71,6 +73,7 @@ public class ESPDSchemaValidator implements ArtifactValidator {
         try {
             unmarshaller.unmarshal(is);
         } catch (Exception e) {
+            /* @TODO set flag value */
             validationMessages.add(new ValidationResult.Builder(String.valueOf(validationMessages.size()),
                     "(line 0, column 0)", e.getMessage()).build());
         }
@@ -101,15 +104,14 @@ public class ESPDSchemaValidator implements ArtifactValidator {
     /**
      * Provides filtered list of validation events.
      *
-     * @param text, for which the list entries are filtered
+     * @param flag, for which the list entries are filtered
      * @return filtered list of validation events
      */
     @Override
-    public List<ValidationResult> getValidationMessagesFiltered(String text) {
+    public List<ValidationResult> getValidationMessagesFiltered(String flag) {
         return validationMessages
                 .stream()
-                .filter(validationResult -> validationResult.getText() != null)
-                .filter(validationResult -> validationResult.getText().contains(text))
+                .filter(validationResult -> validationResult.getText().contains(flag))
                 .collect(Collectors.toList());
     }
 
