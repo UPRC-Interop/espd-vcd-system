@@ -39,8 +39,8 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
     public static final Properties ECERTIS_PROPERTIES = new Properties();
 
     // Server URL (1st) is the production one (2nd) is the non production one
-    // private final String ECERTIS_URL_DEFAULT = "https://ec.europa.eu/growth/tools-databases/ecertisrest/";
-    // private final String ECERTIS_URL_DEFAULT = "https://webgate.acceptance.ec.europa.eu/growth/tools-databases/ecertisrest/";
+    public static final String ECERTIS_URL_DEFAULT = "https://ec.europa.eu/growth/tools-databases/ecertisrest/";
+    // public static final String ECERTIS_URL_DEFAULT = "https://webgate.acceptance.ec.europa.eu/growth/tools-databases/ecertisrest/";
     private final String ECERTIS_URL;
     // All available eu criteria
     private final String ALL_CRITERIA;
@@ -78,14 +78,10 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
 
         } catch (IOException e) {
             Logger.getLogger(ECertisCriteriaExtractor.class.getName())
-                    .log(Level.SEVERE, "Unable to load ecertis configuration file", e);
+                    .log(Level.SEVERE, "Unable to load ecertis configuration file... default value has been used for e-Certis URL instead", e);
         }
-        ECERTIS_URL = ECERTIS_PROPERTIES.getProperty("ecertis_url", "default");
+        ECERTIS_URL = ECERTIS_PROPERTIES.getProperty("ecertis_url", ECERTIS_URL_DEFAULT);
         ALL_CRITERIA = ECERTIS_URL + "criteria";
-    }
-
-    public String getECERTIS_URL() {
-        return ECERTIS_URL;
     }
 
     /**

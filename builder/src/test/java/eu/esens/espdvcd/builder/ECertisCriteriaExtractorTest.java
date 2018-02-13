@@ -50,9 +50,4 @@ public class ECertisCriteriaExtractorTest {
         System.out.println(tab + "URI: " + lr.getURI() + "\n");
     }
 
-    @Test
-    public void testECertisURL() {
-        Assert.assertNotEquals("default", extractor.getECERTIS_URL());
-    }
-
 }
