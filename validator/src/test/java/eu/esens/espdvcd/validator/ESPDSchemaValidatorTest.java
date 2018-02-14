@@ -12,20 +12,22 @@ import java.io.InputStream;
 public class ESPDSchemaValidatorTest {
 
     InputStream isReqValid;
-    InputStream isReqInvalid;
+    // InputStream isReqInvalid;
     InputStream isResValid;
     InputStream isResInvalid;
 
     @Before
     public void setUp() {
         //isReqValid = BuilderESPDTest.class.getResourceAsStream("/espd-request.xml");
-        isReqValid = ESPDSchemaValidatorTest.class.getResourceAsStream("/espd-request.xml");
+        // isReqValid = ESPDSchemaValidatorTest.class.getResourceAsStream("/espd-request.xml");
+        isReqValid = ESPDSchemaValidatorTest.class.getResourceAsStream("/ESPDRequest_DA_Test.xml");
         Assert.assertNotNull(isReqValid);
 
-        isReqInvalid = ESPDSchemaValidatorTest.class.getResourceAsStream("/espd-request-invalid.xml");
-        Assert.assertNotNull(isReqInvalid);
+//        isReqInvalid = ESPDSchemaValidatorTest.class.getResourceAsStream("/espd-request-invalid.xml");
+//        Assert.assertNotNull(isReqInvalid);
 
-        isResValid = ESPDSchemaValidatorTest.class.getResourceAsStream("/espd-response.xml");
+        // isResValid = ESPDSchemaValidatorTest.class.getResourceAsStream("/espd-response.xml");
+        isResValid = ESPDSchemaValidatorTest.class.getResourceAsStream("/ESPDResponse_DA_Test.xml");
         Assert.assertNotNull(isResValid);
     }
 
@@ -36,8 +38,8 @@ public class ESPDSchemaValidatorTest {
         Assert.assertTrue(validator.isValid());
 
         // create ESPD request validator object for invalid ESPD request and retrieve test results
-        validator = ValidatorFactory.createESPDRequestSchemaValidator(isReqInvalid);
-        Assert.assertFalse(validator.isValid());
+//        validator = ValidatorFactory.createESPDRequestSchemaValidator(isReqInvalid);
+//        Assert.assertFalse(validator.isValid());
 
         // as there are two errors introduced in the invalid espd request example xml,
         // there should be more than one messages
