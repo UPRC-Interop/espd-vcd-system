@@ -129,7 +129,7 @@ public class VCDDocumentBuilder extends DocumentBuilder {
     }
 
     @java.lang.Override
-    protected String getProfilID() {
+    protected String getProfileID() {
         return "56";
     }
 }

@@ -3,7 +3,7 @@ package eu.esens.espdvcd.designer.components.windows;
 import com.vaadin.server.Page;
 import com.vaadin.shared.Position;
 import com.vaadin.ui.*;
-import eu.esens.espdvcd.codelist.Codelists;
+import eu.esens.espdvcd.codelist.CodelistsV1;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.designer.DetailsPanel.DetailsPanelRequirement;
 import eu.esens.espdvcd.model.requirement.RequestRequirement;
@@ -67,9 +67,9 @@ public class RequirementWindow extends Window {
         id.setValue(generatedUUID.toString());
         id.setReadOnly(true);
         
-        type.setItems(Codelists.ResponseDataType.getBiMap().keySet().stream()
+        type.setItems(CodelistsV1.ResponseDataType.getDataMap().keySet().stream()
                 .map(respId -> DetailsPanelRequirement.requirementResponseDataStringToType(respId)));
-        type.setItemCaptionGenerator(i -> WordUtils.capitalize(Codelists.ResponseDataType.getValueForId(i.name()).toLowerCase()));
+        type.setItemCaptionGenerator(i -> WordUtils.capitalize(CodelistsV1.ResponseDataType.getValueForId(i.name()).toLowerCase()));
 
     }
 

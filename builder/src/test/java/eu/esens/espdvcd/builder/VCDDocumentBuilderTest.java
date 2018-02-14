@@ -2,11 +2,6 @@ package eu.esens.espdvcd.builder;
 
 import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.model.ESPDResponse;
-import eu.esens.espdvcd.model.SelectableCriterion;
-import eu.esens.espdvcd.model.requirement.Requirement;
-import eu.esens.espdvcd.model.requirement.RequirementGroup;
-import eu.esens.espdvcd.model.requirement.response.EvidenceURLResponse;
-import eu.esens.espdvcd.model.requirement.response.Response;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

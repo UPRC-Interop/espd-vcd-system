@@ -1,27 +1,22 @@
 package eu.esens.espdvcd.builder;
 
 import eu.esens.espdvcd.builder.schema.SchemaFactory;
+import eu.esens.espdvcd.builder.util.SchemaUtil;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDResponse;
-import eu.esens.espdvcd.schema.SchemaUtil;
 import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
 import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.CopyIndicatorType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.IssueDateType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.IssueTimeType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ProfileIDType;
 
 import javax.xml.bind.JAXBException;
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeConstants;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.StringWriter;
 import java.nio.charset.Charset;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,6 +25,7 @@ import java.util.logging.Logger;
  * Created by Ulf Lotzmann on 08/06/2016.
  */
 public class DocumentBuilder {
+
     protected final String theXML;
 
     public DocumentBuilder(ESPDRequest req) {
@@ -38,6 +34,7 @@ public class DocumentBuilder {
 
     /**
      * Transforms the XML Representation of the data to an input stream.
+     *
      * @return the String representation of the XML Data as an input stream
      */
     public InputStream getAsInputStream() {
@@ -76,20 +73,12 @@ public class DocumentBuilder {
     private ESPDRequestType finalize(ESPDRequestType reqType) {
 
         // Finalizes the ESPDRequest Type, adding the Date and Time of Issue etc
+        reqType.setIssueDate(new IssueDateType());
+        reqType.getIssueDate().setValue(LocalDate.now());
+        reqType.setIssueTime(new IssueTimeType());
+        reqType.getIssueTime().setValue(LocalTime.now());
 
-        try {
-            GregorianCalendar c = new GregorianCalendar();
-            XMLGregorianCalendar xmlDate = createECCompliantDate(c);
-
-            reqType.setIssueDate(new IssueDateType());
-            reqType.getIssueDate().setValue(xmlDate);
-            reqType.setIssueTime(new IssueTimeType());
-            reqType.getIssueTime().setValue(xmlDate);
-        } catch (DatatypeConfigurationException e) {
-            System.out.println("ERROR in DATES!");
-        }
-
-        reqType.setProfileID(createBIIProfileIdType(getProfilID()));
+        reqType.setProfileID(createBIIProfileIdType(getProfileID()));
 
         reqType.setID(SchemaFactory.ESPD_REQUEST.createISOIECIDType(UUID.randomUUID().toString()));
         return reqType;
@@ -105,49 +94,20 @@ public class DocumentBuilder {
     private ESPDResponseType finalize(ESPDResponseType resType) {
 
         // Finalizes the ESPDResponse Type, adding the Date and Time of Issue etc
-        try {
-            GregorianCalendar c = new GregorianCalendar();
-            XMLGregorianCalendar xmlDate = createECCompliantDate(c);
+        resType.setIssueDate(new IssueDateType());
+        resType.getIssueDate().setValue(LocalDate.now());
+        resType.setIssueTime(new IssueTimeType());
+        resType.getIssueTime().setValue(LocalTime.now());
 
-            resType.setIssueDate(new IssueDateType());
-            resType.getIssueDate().setValue(xmlDate);
-            resType.setIssueTime(new IssueTimeType());
-            resType.getIssueTime().setValue(xmlDate);
-        } catch (DatatypeConfigurationException e) {
-            System.out.println("ERROR in DATES!");
-        }
-
-        resType.setProfileID(createBIIProfileIdType(getProfilID()));
+        resType.setProfileID(createBIIProfileIdType(getProfileID()));
 
         resType.setID(SchemaFactory.ESPD_RESPONSE.createISOIECIDType(UUID.randomUUID().toString()));
         return resType;
     }
 
     /**
-     * Created an XMLGregorianCalendar instance that is compliant with the format
-     * required by ESPD Data model.
-     * @param c The date (GregorianCalendar) to be converted to ESPD Compliant XMLGregorianCalendar
-     * @return the XMLGregorianCalendar transformation of the input
-     * @throws DatatypeConfigurationException when input is invalid
-     */
-    private XMLGregorianCalendar createECCompliantDate(GregorianCalendar c) throws DatatypeConfigurationException {
-        // Creates the format according to the EC Application Requirement
-        XMLGregorianCalendar xmlDate = DatatypeFactory.newInstance()
-                .newXMLGregorianCalendar(
-                        c.get(Calendar.YEAR),
-                        c.get(Calendar.MONTH) + 1,
-                        c.get(Calendar.DAY_OF_MONTH),
-                        c.get(Calendar.HOUR_OF_DAY),
-                        c.get(Calendar.MINUTE),
-                        c.get(Calendar.SECOND),
-                        DatatypeConstants.FIELD_UNDEFINED,
-                        DatatypeConstants.FIELD_UNDEFINED
-                );
-        return xmlDate;
-    }
-
-    /**
      * Transforms the ESPDRequest model instance to an XML ESPD Request String
+     *
      * @param theReq The ESPD Request that we want transformed to XML
      * @return the Finalized ESPDRequestType Instance
      */
@@ -173,6 +133,7 @@ public class DocumentBuilder {
 
     /**
      * Creates a ProfileIDType object with the given id.
+     *
      * @param id
      * @return
      */
@@ -189,7 +150,7 @@ public class DocumentBuilder {
 
     }
 
-    protected String getProfilID() {
+    protected String getProfileID() {
         return "undefined";
     }
 }

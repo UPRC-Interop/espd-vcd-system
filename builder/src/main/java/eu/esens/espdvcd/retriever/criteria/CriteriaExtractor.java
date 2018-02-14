@@ -17,6 +17,7 @@ public interface CriteriaExtractor {
     
     /**
      *
+     * @param initialList
      * @return the full criteria list with the criteria in the initialList as not selected
      * @throws eu.esens.espdvcd.retriever.exception.RetrieverException
      * 
@@ -28,6 +29,7 @@ public interface CriteriaExtractor {
      *
      * @param initialList if @isSelected is true, the criteria from the @initialList will be 
      * included as selected, otherwise they will be included as not selected 
+     * @param addAsSelected
      * @return the full criteria list with the criteria in the initialList as selected
      * @throws eu.esens.espdvcd.retriever.exception.RetrieverException
      * 

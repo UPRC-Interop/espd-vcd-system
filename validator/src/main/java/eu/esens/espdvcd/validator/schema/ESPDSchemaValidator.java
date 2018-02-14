@@ -1,7 +1,7 @@
 package eu.esens.espdvcd.validator.schema;
 
-import eu.esens.espdvcd.schema.SchemaUtil;
-import eu.esens.espdvcd.schema.XSD;
+import eu.esens.espdvcd.builder.util.SchemaUtil;
+import eu.esens.espdvcd.builder.util.XSD;
 import eu.esens.espdvcd.validator.ArtifactValidator;
 import eu.esens.espdvcd.validator.ValidationResult;
 import org.xml.sax.SAXException;
@@ -55,7 +55,9 @@ public class ESPDSchemaValidator implements ArtifactValidator {
             validationMessages.add(new ValidationResult.Builder(String.valueOf(validationMessages.size()),
                     "(line " + validationEvent.getLocator().getLineNumber() +
                             ", column " + validationEvent.getLocator().getColumnNumber() + ")",
-                    validationEvent.getMessage()).build());
+                    validationEvent.getMessage())
+                    .flag("error")
+                    .build());
             return true;
         });
         /*unmarshaller.setEventHandler(new ValidationEventHandler() {
@@ -75,7 +77,9 @@ public class ESPDSchemaValidator implements ArtifactValidator {
         } catch (Exception e) {
             /* @TODO set flag value */
             validationMessages.add(new ValidationResult.Builder(String.valueOf(validationMessages.size()),
-                    "(line 0, column 0)", e.getMessage()).build());
+                    "(line 0, column 0)", e.getMessage())
+                    .flag("error")
+                    .build());
         }
 
     }
@@ -104,14 +108,14 @@ public class ESPDSchemaValidator implements ArtifactValidator {
     /**
      * Provides filtered list of validation events.
      *
-     * @param flag, for which the list entries are filtered
+     * @param text, for which the list entries are filtered
      * @return filtered list of validation events
      */
     @Override
-    public List<ValidationResult> getValidationMessagesFiltered(String flag) {
+    public List<ValidationResult> getValidationMessagesFiltered(String text) {
         return validationMessages
                 .stream()
-                .filter(validationResult -> validationResult.getText().contains(flag))
+                .filter(validationResult -> validationResult.getText().contains(text))
                 .collect(Collectors.toList());
     }
 

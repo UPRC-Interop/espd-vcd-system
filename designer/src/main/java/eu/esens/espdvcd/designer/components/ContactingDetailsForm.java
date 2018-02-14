@@ -24,7 +24,7 @@ public class ContactingDetailsForm extends Panel {
         this.contactingDetails = contactingDetails;
 
         setStyleName("ContactingDetailsForm");
-        setCaption("Contracting details form");
+        setCaption("Contacting Details");
         setContent(panelContent);
         setWidth("100%");
 

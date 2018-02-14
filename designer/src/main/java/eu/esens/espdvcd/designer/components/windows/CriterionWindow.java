@@ -3,7 +3,7 @@ package eu.esens.espdvcd.designer.components.windows;
 import com.vaadin.server.Page;
 import com.vaadin.shared.Position;
 import com.vaadin.ui.*;
-import eu.esens.espdvcd.codelist.Codelists;
+import eu.esens.espdvcd.codelist.CodelistsV1;
 import eu.esens.espdvcd.designer.components.CriterionForm;
 import eu.esens.espdvcd.designer.views.Master;
 import eu.esens.espdvcd.model.Criterion;
@@ -58,8 +58,8 @@ public class CriterionWindow extends Window {
         caption.setWidth(100, Unit.PERCENTAGE);
         description.setWidth(100, Unit.PERCENTAGE);
 
-        typecode.setItems(Codelists.CriteriaType.getBiMap().keySet());
-        typecode.setItemCaptionGenerator(i -> WordUtils.capitalize(Codelists.CriteriaType.getValueForId(i).toLowerCase()));
+        typecode.setItems(CodelistsV1.CriteriaType.getDataMap().keySet());
+        typecode.setItemCaptionGenerator(i -> WordUtils.capitalize(CodelistsV1.CriteriaType.getValueForId(i).toLowerCase()));
         typecode.setPlaceholder("Select criterion type");
     }
 

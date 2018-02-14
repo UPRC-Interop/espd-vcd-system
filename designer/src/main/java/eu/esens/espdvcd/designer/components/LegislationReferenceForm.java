@@ -7,7 +7,8 @@ import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Label;
-import eu.esens.espdvcd.codelist.Codelists;
+
+import eu.esens.espdvcd.codelist.CodelistsV1;
 import eu.esens.espdvcd.model.LegislationReference;
 
 public class LegislationReferenceForm extends VerticalLayout {
@@ -42,7 +43,8 @@ public class LegislationReferenceForm extends VerticalLayout {
         description.setValue(legislationReference.getDescription());
 
         jurisdictionLevelCode.setCaption("Legislation Reference Jurisdiction Level Code");
-        String legislationReferenceLevelDescription = Codelists.CriterionJurisdictionLevel.getValueForId(legislationReference.getJurisdictionLevelCode());
+
+        String legislationReferenceLevelDescription = CodelistsV1.CriterionJurisdictionLevel.getValueForId(legislationReference.getJurisdictionLevelCode());
         
         if (legislationReferenceLevelDescription == null) {
             legislationReferenceLevelDescription = legislationReference.getJurisdictionLevelCode();

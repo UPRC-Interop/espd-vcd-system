@@ -19,6 +19,7 @@ public class LegislationReference {
      * BusReqID: tbr70-013, tbr92-015, tbr92-016<br>
      * UBL syntax path: ccv:Criterion.LegislationReference.Title<br>
      */
+
     @NotNull
     protected String title;
 

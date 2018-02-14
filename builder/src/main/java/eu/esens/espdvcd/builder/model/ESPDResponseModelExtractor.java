@@ -113,7 +113,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
             case DATE:
                 DateResponse dResp = new DateResponse();
                 if (res.getDate() != null && res.getDate().getValue() != null) {
-                    dResp.setDate(res.getDate().getValue().toGregorianCalendar().toZonedDateTime().toLocalDate());
+                    dResp.setDate(res.getDate().getValue());
                 }
                 return dResp;
 
@@ -340,7 +340,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                             }
 
                             if (pt.getBirthDate() != null) {
-                                np.setBirthDate(pt.getBirthDate().getValue().toGregorianCalendar().toZonedDateTime().toLocalDate());
+                                np.setBirthDate(pt.getBirthDate().getValue());
                             }
 
                             if (pt.getContact() != null) {
@@ -419,11 +419,11 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
         }
 
         if (drt.getIssueDate() != null) {
-            erd.setIssueDate(drt.getIssueDate().getValue().toGregorianCalendar().toZonedDateTime().toLocalDate());
+            erd.setIssueDate(drt.getIssueDate().getValue());
         }
 
         if (drt.getIssueTime() != null) {
-            erd.setIssueTime(drt.getIssueTime().getValue().toGregorianCalendar().toZonedDateTime().toLocalTime());
+            erd.setIssueTime(drt.getIssueTime().getValue());
         }
 
         if (drt.getDocumentDescription() != null && !drt.getDocumentDescription().isEmpty()) {
@@ -449,11 +449,11 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
         }
 
         if (reqType.getIssueDate() != null) {
-            erd.setIssueDate(reqType.getIssueDate().getValue().toGregorianCalendar().toZonedDateTime().toLocalDate());
+            erd.setIssueDate(reqType.getIssueDate().getValue());
         }
 
         if (reqType.getIssueTime() != null) {
-            erd.setIssueTime(reqType.getIssueTime().getValue().toGregorianCalendar().toZonedDateTime().toLocalTime());
+            erd.setIssueTime(reqType.getIssueTime().getValue());
         }
 
         if (reqType.getContractFolderID() != null) {

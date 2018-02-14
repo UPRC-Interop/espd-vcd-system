@@ -16,7 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.bind.JAXB;
 
-public class ECertisForm extends VerticalLayout {
+public final class ECertisForm extends VerticalLayout {
 
     private final Panel panel = new Panel();
     private final VerticalLayout panelContent = new VerticalLayout();

@@ -31,7 +31,7 @@ public class XMLDocumentBuilder extends DocumentBuilder {
 
 
     @java.lang.Override
-    protected String getProfilID() {
+    protected String getProfileID() {
         return "ESPD";
     }
 

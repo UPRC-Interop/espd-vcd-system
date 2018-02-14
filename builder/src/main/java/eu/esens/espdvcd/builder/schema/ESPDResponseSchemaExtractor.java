@@ -190,7 +190,7 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
                                         np.getBirthDate().getMonthValue(),
                                         np.getBirthDate().getDayOfMonth(),
                                         DatatypeConstants.FIELD_UNDEFINED);
-                    pt.getBirthDate().setValue(xcal);
+                    pt.getBirthDate().setValue(xcal.toGregorianCalendar().toZonedDateTime().toLocalDate());
                 } catch (DatatypeConfigurationException ex) {
                     log.error("Could not create XML Date Object", ex);
                 }
@@ -341,7 +341,7 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
                                         respDate.getDayOfMonth(),
                                         DatatypeConstants.FIELD_UNDEFINED);
                         rType.setDate(new DateType());
-                        rType.getDate().setValue(xcal);
+                        rType.getDate().setValue(xcal.toGregorianCalendar().toZonedDateTime().toLocalDate());
 
                     } catch (DatatypeConfigurationException ex) {
                         log.error("Could not create XMLGregorialCalendar Date Object", ex);
@@ -418,10 +418,10 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
                             espdRequestDetails.getIssueDate().getDayOfMonth(),
                             DatatypeConstants.FIELD_UNDEFINED);
             IssueDateType idt = new IssueDateType();
-            idt.setValue(xcalDate);
+            idt.setValue(xcalDate.toGregorianCalendar().toZonedDateTime().toLocalDate());
             drt.setIssueDate(idt);
         } catch (DatatypeConfigurationException ex) {
-            log.error("Could not create XMLGregorialCalendar Date Object", ex);
+            log.error("Could not create XMLGregorianCalendar Date Object", ex);
         }
 
 
@@ -433,10 +433,10 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
                             espdRequestDetails.getIssueTime().getSecond(),
                             DatatypeConstants.FIELD_UNDEFINED);
             IssueTimeType itt = new IssueTimeType();
-            itt.setValue(xcalTime);
+            itt.setValue(xcalTime.toGregorianCalendar().toZonedDateTime().toLocalTime());
             drt.setIssueTime(itt);
         } catch (DatatypeConfigurationException ex) {
-            log.error("Could not create XMLGregorialCalendar Date Object", ex);
+            log.error("Could not create XMLGregorianCalendar Date Object", ex);
         }
 
 

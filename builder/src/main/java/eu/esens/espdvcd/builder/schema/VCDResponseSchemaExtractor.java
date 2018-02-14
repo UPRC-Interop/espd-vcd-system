@@ -68,7 +68,7 @@ public class VCDResponseSchemaExtractor extends ESPDResponseSchemaExtractor {
                                 resp.getDate().getMonthValue(),
                                 resp.getDate().getDayOfMonth(),
                                 DatatypeConstants.FIELD_UNDEFINED);
-                drt.getIssueDate().setValue(xcal);
+                drt.getIssueDate().setValue(xcal.toGregorianCalendar().toZonedDateTime().toLocalDate());
             } catch (DatatypeConfigurationException ex) {
                 log.error("Could not create XML Date Object", ex);
             }
@@ -84,7 +84,7 @@ public class VCDResponseSchemaExtractor extends ESPDResponseSchemaExtractor {
                                 resp.getTime().getMinute(),
                                 resp.getTime().getSecond(),
                                 DatatypeConstants.FIELD_UNDEFINED);
-                drt.getIssueTime().setValue(xcal);
+                drt.getIssueTime().setValue(xcal.toGregorianCalendar().toZonedDateTime().toLocalTime());
             } catch (DatatypeConfigurationException ex) {
                 log.error("Could not create XML Time Object", ex);
             }

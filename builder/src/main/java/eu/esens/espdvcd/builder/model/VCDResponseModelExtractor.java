@@ -56,7 +56,7 @@ public class VCDResponseModelExtractor extends ESPDResponseModelExtractor {
                             .getEvidenceDocumentReference()
                             .get(0)
                             .getIssueDate()
-                            .getValue().toGregorianCalendar().toZonedDateTime().toLocalDate());
+                            .getValue());
                 }
 
                 if (res.getEvidence().get(0).getEvidenceDocumentReference().get(0).getIssueTime() != null
@@ -66,7 +66,7 @@ public class VCDResponseModelExtractor extends ESPDResponseModelExtractor {
                             .getEvidenceDocumentReference()
                             .get(0)
                             .getIssueTime()
-                            .getValue().toGregorianCalendar().toZonedDateTime().toLocalTime());
+                            .getValue());
                 }
 
                 if (res.getEvidence().get(0).getEvidenceDocumentReference().get(0).getDocumentTypeCode() != null

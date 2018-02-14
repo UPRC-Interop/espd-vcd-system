@@ -1,6 +1,5 @@
 include ':builder',
         ':codelists',
-        ':designer',
         ':model',
-        ':schema',
+        ':designer',
         ':validator'

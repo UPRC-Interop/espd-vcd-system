@@ -7,8 +7,6 @@ import eu.esens.espdvcd.builder.ModelBuilder;
 import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.designer.components.ESPDRequestForm;
 import eu.esens.espdvcd.model.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Start extends Master {
 
