@@ -12,7 +12,7 @@ import java.io.InputStream;
 public class ESPDSchemaValidatorTest {
 
     InputStream isReqValid;
-    // InputStream isReqInvalid;
+    InputStream isReqInvalid;
     InputStream isResValid;
     InputStream isResInvalid;
 
@@ -23,8 +23,8 @@ public class ESPDSchemaValidatorTest {
         isReqValid = ESPDSchemaValidatorTest.class.getResourceAsStream("/ESPDRequest_DA_Test.xml");
         Assert.assertNotNull(isReqValid);
 
-//        isReqInvalid = ESPDSchemaValidatorTest.class.getResourceAsStream("/espd-request-invalid.xml");
-//        Assert.assertNotNull(isReqInvalid);
+        isReqInvalid = ESPDSchemaValidatorTest.class.getResourceAsStream("/espd-request-invalid.xml");
+        Assert.assertNotNull(isReqInvalid);
 
         // isResValid = ESPDSchemaValidatorTest.class.getResourceAsStream("/espd-response.xml");
         isResValid = ESPDSchemaValidatorTest.class.getResourceAsStream("/ESPDResponse_DA_Test.xml");
@@ -35,43 +35,50 @@ public class ESPDSchemaValidatorTest {
     public void validateESPDRequest() throws Exception {
         // create ESPD request validator object for valid ESPD request and retrieve test results
         ArtifactValidator validator = ValidatorFactory.createESPDRequestSchemaValidator(isReqValid);
+
+        System.out.println("validateESPDRequest events:");
+        for (ValidationResult event: validator.getValidationMessages()) {
+            System.out.println(event);
+        }
+
         Assert.assertTrue(validator.isValid());
 
         // create ESPD request validator object for invalid ESPD request and retrieve test results
-//        validator = ValidatorFactory.createESPDRequestSchemaValidator(isReqInvalid);
-//        Assert.assertFalse(validator.isValid());
+        validator = ValidatorFactory.createESPDRequestSchemaValidator(isReqInvalid);
+        Assert.assertFalse(validator.isValid());
 
         // as there are two errors introduced in the invalid espd request example xml,
         // there should be more than one messages
         Assert.assertTrue(validator.getValidationMessages().size() > 1);
         Assert.assertTrue(validator.getValidationMessagesFiltered("ContractingParty").size() > 0);
         Assert.assertTrue(validator.getValidationMessagesFiltered("RequirementGroups").size() > 0);
-
-        System.out.println("validateESPDRequest events:");
-        for (ValidationResult event: validator.getValidationMessages()) {
-            System.out.println(event);
-        }
     }
 
     @Test
     public void checkESPDRequestValidationForESPDResponse() throws Exception {
         // create ESPD request validator object for valid ESPD response and retrieve test results
         ArtifactValidator validator = ValidatorFactory.createESPDRequestSchemaValidator(isResValid);
-        Assert.assertFalse(validator.isValid());
-
-        Assert.assertTrue(validator.getValidationMessages().size() > 0);
-        Assert.assertTrue(validator.getValidationMessagesFiltered("ESPDResponse").size() > 0);
 
         System.out.println("checkESPDRequestValidationForESPDResponse events:");
         for (ValidationResult event: validator.getValidationMessages()) {
             System.out.println(event);
         }
+
+        Assert.assertFalse(validator.isValid());
+        Assert.assertTrue(validator.getValidationMessages().size() > 0);
+        Assert.assertTrue(validator.getValidationMessagesFiltered("ESPDResponse").size() > 0);
     }
 
     @Test
     public void validateESPDResponse() throws Exception {
         // create ESPD response validator object for valid ESPD response and retrieve test results
         ArtifactValidator validator = ValidatorFactory.createESPDResponseSchemaValidator(isResValid);
+
+        System.out.println("validateESPDResponse events:");
+        for (ValidationResult event: validator.getValidationMessages()) {
+            System.out.println(event);
+        }
+
         Assert.assertTrue(validator.isValid());
     }
 
@@ -79,14 +86,14 @@ public class ESPDSchemaValidatorTest {
     public void checkESPDResponseValidationForESPDRequest() throws Exception {
         // create ESPD response validator object for valid ESPD request and retrieve test results
         ArtifactValidator validator = ValidatorFactory.createESPDResponseSchemaValidator(isReqValid);
-        Assert.assertFalse(validator.isValid());
-
-        Assert.assertTrue(validator.getValidationMessages().size() > 0);
 
         System.out.println("checkESPDResponseValidationForESPDRequest events:");
         for (ValidationResult event: validator.getValidationMessages()) {
             System.out.println(event);
         }
+
+        Assert.assertFalse(validator.isValid());
+        Assert.assertTrue(validator.getValidationMessages().size() > 0);
     }
 
 }

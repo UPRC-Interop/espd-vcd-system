@@ -1,7 +1,6 @@
 package eu.esens.espdvcd.validator.schematron;
 
 import com.helger.schematron.xslt.SchematronResourceSCH;
-import eu.esens.espdvcd.codelist.GenericCode;
 import eu.esens.espdvcd.validator.ArtifactValidator;
 import eu.esens.espdvcd.validator.ValidationResult;
 import org.oclc.purl.dsdl.svrl.FailedAssert;
@@ -47,7 +46,7 @@ public class ESPDSchematronValidator implements ArtifactValidator {
         try {
             isValid = schematron.getSchematronValidity(new StreamSource(is)).isValid();
         } catch (Exception e) {
-            Logger.getLogger(GenericCode.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+            Logger.getLogger(ESPDSchematronValidator.class.getName()).log(Level.SEVERE, e.getMessage(), e);
         }
 
         return isValid;
@@ -63,7 +62,7 @@ public class ESPDSchematronValidator implements ArtifactValidator {
         try {
             validateXMLViaXSLTSchematronFull(new FileInputStream(artifact), schPath);
         } catch (FileNotFoundException e) {
-            Logger.getLogger(GenericCode.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+            Logger.getLogger(ESPDSchematronValidator.class.getName()).log(Level.SEVERE, e.getMessage(), e);
         }
     }
 

@@ -50,12 +50,13 @@ public class ESPDSchemaValidator implements ArtifactValidator {
 
         // setting schema
         unmarshaller.setSchema(schema);
-        /* @TODO set flag value */
         unmarshaller.setEventHandler(validationEvent -> {
             validationMessages.add(new ValidationResult.Builder(String.valueOf(validationMessages.size()),
                     "(line " + validationEvent.getLocator().getLineNumber() +
                             ", column " + validationEvent.getLocator().getColumnNumber() + ")",
-                    validationEvent.getMessage()).build());
+                    validationEvent.getMessage())
+                    .flag("error")
+                    .build());
             return true;
         });
         /*unmarshaller.setEventHandler(new ValidationEventHandler() {
@@ -73,9 +74,10 @@ public class ESPDSchemaValidator implements ArtifactValidator {
         try {
             unmarshaller.unmarshal(is);
         } catch (Exception e) {
-            /* @TODO set flag value */
             validationMessages.add(new ValidationResult.Builder(String.valueOf(validationMessages.size()),
-                    "(line 0, column 0)", e.getMessage()).build());
+                    "(line 0, column 0)", e.getMessage())
+                    .flag("error")
+                    .build());
         }
 
     }
