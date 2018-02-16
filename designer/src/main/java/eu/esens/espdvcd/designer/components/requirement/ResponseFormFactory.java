@@ -2,6 +2,7 @@ package eu.esens.espdvcd.designer.components.requirement;
 
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.response.*;
+import eu.esens.espdvcd.model.requirement.response.evidence.VCDEvidenceResponse;
 
 public class ResponseFormFactory {
 
@@ -52,12 +53,13 @@ public class ResponseFormFactory {
                 PeriodResponseForm periodResponseForm = new PeriodResponseForm(periodResponse, caption, readOnly);
                 return periodResponseForm;
             case EVIDENCE_URL:
-                EvidenceURLResponse evidenceURLResponse = (EvidenceURLResponse) requirementResponse;
                 if (displayEvidences == 0) {
+                    EvidenceURLResponse evidenceURLResponse = (EvidenceURLResponse) requirementResponse;
                     ESPDEvidenceURLResponseForm evidenceURLResponseForm = new ESPDEvidenceURLResponseForm(evidenceURLResponse, caption, readOnly);
                     return evidenceURLResponseForm;
                 }
                 else {
+                    VCDEvidenceResponse evidenceURLResponse = (VCDEvidenceResponse) requirementResponse;
                     EvidenceURLResponseForm evidenceURLResponseForm = new EvidenceURLResponseForm(evidenceURLResponse, caption, displayEvidences, readOnly);
                     return evidenceURLResponseForm;
                 }

@@ -411,7 +411,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
      * @param drt
      * @return
      */
-    ESPDRequestDetails extractESPDRequestDetails(DocumentReferenceType drt) {
+    private ESPDRequestDetails extractESPDRequestDetails(DocumentReferenceType drt) {
         ESPDRequestDetails erd = new ESPDRequestDetails();
 
         if (drt.getID() != null) {
@@ -441,7 +441,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
      * @param reqType
      * @return
      */
-    ESPDRequestDetails extractESPDRequestDetails(ESPDResponseType reqType) {
+    private ESPDRequestDetails extractESPDRequestDetails(ESPDResponseType reqType) {
         ESPDRequestDetails erd = new ESPDRequestDetails();
 
         if (reqType.getID() != null) {
