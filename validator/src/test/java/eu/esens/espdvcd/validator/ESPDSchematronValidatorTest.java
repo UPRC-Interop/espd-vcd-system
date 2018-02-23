@@ -35,8 +35,11 @@ public class ESPDSchematronValidatorTest {
                     .getResource("espd-request.xml").toURI()).toFile();
             anInvalidESPDRequestFile = Paths.get(getClass().getClassLoader()
                     .getResource("espd-request-invalid.xml").toURI()).toFile();
+            // aValidESPDResponseFile = Paths.get(getClass().getClassLoader()
+            //         .getResource("espd-response.xml").toURI()).toFile();
             aValidESPDResponseFile = Paths.get(getClass().getClassLoader()
-                    .getResource("espd-response.xml").toURI()).toFile();
+                    .getResource("ESPDResponse_DA Test_v.2-corrections_UL_v0.4-withC57Req.xml").toURI()).toFile();
+
 
         } catch (URISyntaxException e) {
             Logger.getLogger(ESPDSchematronValidatorTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
