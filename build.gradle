@@ -3,7 +3,7 @@ subprojects { project ->
     apply plugin: 'maven'
     apply plugin: 'maven-publish'
 
-    version = '1.1.0-SNAPSHOT'
+    version = '2.0.2'
     group = 'eu.esens.espdvcd'
 
     project.ext.slf4j_version = '1.7.13'
@@ -36,16 +36,16 @@ configure (subprojects - project(':designer')) {
     task javadocJar(type: Jar) {
         classifier = 'javadoc'
         from javadoc
-    } 
+    }
 
     publishing {
         publications {
             mavenJava(MavenPublication) {
                 from components.java
                 
-                artifact sourceJar                
+                artifact sourceJar
                 artifact javadocJar
-                
+
             }
             
         }
@@ -55,7 +55,7 @@ configure (subprojects - project(':designer')) {
         repositories { 
             maven {
                 url "http://nexus.e-sens.gr/content/repositories/${project.version.endsWith('-SNAPSHOT') ? 'snapshots' : 'releases' }/"
-//                credentials { 
+//                credentials {
 //                    username 'username'
 //                    password 'password'
 //                }
@@ -73,7 +73,7 @@ configure(subprojects)
         compile libraries.slf4j_api
         compile libraries.log4j_slf4j_impl
         compile libraries.log4j_core
-        compile libraries.log4j_api   
+        compile libraries.log4j_api       
         testCompile 'junit:junit:4.12'
         compile 'com.google.guava:guava:14.0'
     }

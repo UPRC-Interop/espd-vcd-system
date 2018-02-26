@@ -29,16 +29,15 @@ public class EvidenceURLResponseForm extends ResponseForm {
 
     private Button selectFileButton = new Button("Evidence File");
     private Button selectUrlButton = new Button("Evidence URL");
-    
+
     // Evidence
     private Label filenameLabel = new Label("");
     private TextField evidenceDocumentDescription = new TextField("Document Description");
     private DateTimeField evidenceIssueDateTime = new DateTimeField("Issue Date and Time: ");
-    
-    // File 
+
+    // File
 
     public EvidenceURLResponseForm(EvidenceURLResponse evidenceURLResponse, String caption, int displayEvidences, boolean readOnly) {
-        System.out.println("FUCK! "+caption);
         this.evidenceURLResponse = evidenceURLResponse;
 
 //        uploadEvidenceButton.addClickListener(this::onEvidenceUpload);
@@ -136,8 +135,8 @@ public class EvidenceURLResponseForm extends ResponseForm {
         uploadLayout.addComponent(upload);
         uploadLayout.addComponent(evidenceIssueDateTime);
         uploadLayout.addComponent(evidenceDocumentDescription);
-        
-        
+
+
 
         // Url layout
         urlLayout.addComponent(evidenceURL);

@@ -50,7 +50,6 @@ public class ESPDSchemaValidator implements ArtifactValidator {
 
         // setting schema
         unmarshaller.setSchema(schema);
-        /* @TODO set flag value */
         unmarshaller.setEventHandler(validationEvent -> {
             validationMessages.add(new ValidationResult.Builder(String.valueOf(validationMessages.size()),
                     "(line " + validationEvent.getLocator().getLineNumber() +
@@ -75,7 +74,6 @@ public class ESPDSchemaValidator implements ArtifactValidator {
         try {
             unmarshaller.unmarshal(is);
         } catch (Exception e) {
-            /* @TODO set flag value */
             validationMessages.add(new ValidationResult.Builder(String.valueOf(validationMessages.size()),
                     "(line 0, column 0)", e.getMessage())
                     .flag("error")

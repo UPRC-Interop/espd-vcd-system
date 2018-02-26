@@ -34,7 +34,7 @@ public class VCDDocumentBuilderTest {
         Assert.assertNotNull(isRes);
 
         // create an ESPD request as content for the ASiC
-        espd = new ModelBuilder().importFrom(isRes).createESPDResponse();
+        espd = new VCDModelBuilder().importFrom(isRes).createESPDResponse();
         Assert.assertNotNull(espd);
 
         // create the SignatureHelper for signing the ASiC

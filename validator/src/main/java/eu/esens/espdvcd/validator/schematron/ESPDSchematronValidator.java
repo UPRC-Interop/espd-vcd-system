@@ -11,10 +11,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -37,6 +34,9 @@ public class ESPDSchematronValidator implements ArtifactValidator {
 
     static boolean validateXMLViaXSLTSchematron(InputStream is, String schPath) {
         final SchematronResourceSCH schematron = SchematronResourceSCH.fromClassPath(schPath);
+        final Map <String, Object> aParams = new HashMap<>();
+        aParams.put ("allow-foreign", "true");
+        schematron.setParameters (aParams);
         boolean isValid = false;
 
         if (!schematron.isValidSchematron()) {
@@ -74,6 +74,10 @@ public class ESPDSchematronValidator implements ArtifactValidator {
      */
     private void validateXMLViaXSLTSchematronFull(InputStream is, String schPath) {
         final SchematronResourceSCH schematron = SchematronResourceSCH.fromClassPath(schPath);
+
+        final Map <String, Object> aParams = new HashMap<>();
+        aParams.put ("allow-foreign", "true");
+        schematron.setParameters (aParams);
 
         if (!schematron.isValidSchematron()) {
             throw new IllegalArgumentException(ERROR_INVALID_SCHEMATRON);
