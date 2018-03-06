@@ -1,7 +1,0 @@
-@import "addons.scss";
-@import "designertheme.scss";
-
-.designertheme {
-  @include addons;
-  @include designertheme;
-}
