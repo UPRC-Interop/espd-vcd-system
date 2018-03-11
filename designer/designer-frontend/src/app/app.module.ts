@@ -7,12 +7,16 @@ import {FormsModule} from "@angular/forms";
 
 import { AppComponent } from './app.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { StartComponent } from './start/start.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    StartComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,

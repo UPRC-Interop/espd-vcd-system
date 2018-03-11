@@ -1,34 +1,5 @@
 
-.mat-card {
-  margin-bottom:20px;
-  padding:20px;
-}
-.mat-card-content {
-  text-align:justify;
-}
-.mat-radio-button {
-  display:block;
-  /*margin-bottom:20px;*/
-  padding:10px
-}
 
-.width {
-  width: 50%;
-}
-
-.wrapper {
-  display:flex;
-  flex-direction: row;
-}
-.wrapper .mat-radio-group {
-  flex:1;
-  order:1;
-}
-
-.wrapper .mat-form-field {
-  flex:1;
-  order:2;
-}
 
 .container {
   width:80%;

@@ -1,137 +1,30 @@
 <app-toolbar></app-toolbar>
 
 <div class="container">
-  <mat-card>
-    <mat-card-title><h2>Welcome to ESPD</h2></mat-card-title>
-    <mat-card-content>
-      European Single Procurement Document (ESPD) is a self-declaration of the businesses' financial status, abilities and
-      suitability for a public procurement procedure. It is available in all EU languages and used as a preliminary
-      evidence of fulfilment of the conditions required in public procurement procedures across the EU. Thanks to the
-      ESPD, the tenderers no longer have to provide full documentary evidence and different forms previously used in the
-      EU procurement, which means a significant simplification of access to cross-border tendering opportunities. From
-      October 2018 onwards the ESPD shall be provided exclusively in an electronic form.
-      The European Commission provides a free web service for the buyers, bidders and other parties interested in filling
-      in the ESPD electronically. The online form can be filled in, printed and then sent to the buyer together with the
-      rest of the bid. If the procedure is run electronically, the ESPD can be exported, stored and submitted
-      electronically. The ESPD provided in a previous public procurement procedure can be reused as long as the
-      information remains correct. Bidders may be excluded from the procedure or be subject to prosecution if the
-      information in the ESPD is seriously misrepresented, withheld or cannot be complemented with supporting documents.
-      For more information on ESPD, please click here
-      If you are interested in the answers to the most frequently asked questions about the ESPD, please have a look at
-      the FAQ leaflet
-    </mat-card-content>
-  </mat-card>
+  <app-welcome></app-welcome>
+  <mat-horizontal-stepper [linear]="isLinear" #stepper="matHorizontalStepper">
+    <mat-step>
+      <ng-template matStepLabel>Start</ng-template>
+      <app-start></app-start>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Procedure</ng-template>
+      <h2>Procedure...</h2>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Exclusion</ng-template>
+      <h2>Exclusion...</h2>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Selection</ng-template>
+      <h2>Selection...</h2>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Finish</ng-template>
+      <h2>Finished...</h2>
+    </mat-step>
+  </mat-horizontal-stepper>
 
-
-  <form #f="ngForm">
-
-    <mat-card>
-      <mat-card-title><h2>Who are you?</h2></mat-card-title>
-      <mat-card-content>
-        <mat-radio-group name="chooseRole">
-          <mat-radio-button color="primary" name="role" value="CA" (change)="handleRole(CA)" #CA>I am a contracting
-            authority
-          </mat-radio-button>
-          <mat-radio-button color="primary" name="role" value="EO" (change)="handleRole(EO)" #EO>I am an economic
-            operator
-          </mat-radio-button>
-        </mat-radio-group>
-      </mat-card-content>
-    </mat-card>
-    <mat-card *ngIf="isCA">
-      <mat-card-title><h2>What would you like to do?</h2></mat-card-title>
-      <mat-card-content>
-        <div class="wrapper">
-          <mat-form-field class="width">
-            <input matInput placeholder="Please Specify the Received Notice Number" required>
-          </mat-form-field>
-          <mat-radio-group name="caOptions">
-            <mat-radio-button color="primary"
-                              name="caOption"
-                              value="createNewESPD"
-                              (change)="handleCASelection(createNewESPD)"
-                              #createNewESPD>Create a new ESPD</mat-radio-button>
-            <mat-radio-button color="primary"
-                              name="caOption"
-                              value="reuseESPD"
-                              (change)="handleCASelection(reuseESPD)"
-                              #reuseESPD>Reuse and existing ESPD</mat-radio-button>
-            <mat-radio-button color="primary"
-                              name="caOption"
-                              value="reviewESPD"
-                              (change)="handleCASelection(reviewESPD)"
-                              #reviewESPD>Review ESPD</mat-radio-button>
-          </mat-radio-group>
-        </div>
-      </mat-card-content>
-    </mat-card>
-
-    <mat-card *ngIf="isCreateNewESPD && isCA">
-      <mat-card-title><h2>Where is your Authority located?</h2></mat-card-title>
-      <mat-card-content>
-        <mat-form-field>
-          <mat-select placeholder="Select Country">
-            <mat-option>None</mat-option>
-            <mat-option *ngFor="let country of countries" [value]="country">{{country}}</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </mat-card-content>
-    </mat-card>
-
-    <mat-card *ngIf="(isReuseESPD || isReviewESPD)&& isCA">
-      <mat-card-title><h2>Upload Document</h2></mat-card-title>
-      <mat-card-content>
-        <label for="fileUploadCA">Please upload an ESPD Request or an ESPD Response: </label>
-        <br>
-          <input type="file" id="fileUploadCA"
-                 name="importCA"
-                 (change)="handleFileUpload($event.target.files)" required
-                 accept=".xml">
-      </mat-card-content>
-    </mat-card>
-
-    <mat-card *ngIf="isEO">
-      <mat-card-title><h2>What would you like to do?</h2></mat-card-title>
-      <mat-card-content>
-        <mat-radio-group name="eoOptions">
-          <mat-radio-button color="primary"
-                            name="eoOption"
-                            value="importESPD"
-                            (change)="handleEOSelection(importESPD)" #importESPD>Import ESPD</mat-radio-button>
-          <mat-radio-button color="primary"
-                            name="eoOption"
-                            value="createResponse"
-                            (change)="handleEOSelection(createResponse)" #createResponse>Create Response</mat-radio-button>
-        </mat-radio-group>
-      </mat-card-content>
-    </mat-card>
-
-
-    <mat-card *ngIf="isImportESPD && isEO">
-      <mat-card-title><h2>Upload Document</h2></mat-card-title>
-      <mat-card-content>
-        <label for="fileUploadEO">Please upload an ESPD Request or an ESPD Response: </label>
-        <br>
-        <input type="file" id="fileUploadEO"
-               name="importEO"
-               (change)="handleFileUpload($event.target.files)" required
-               accept=".xml">
-      </mat-card-content>
-    </mat-card>
-
-    <mat-card *ngIf="isCreateResponse && isEO">
-      <mat-card-title><h2>Where is your business located?</h2></mat-card-title>
-      <mat-card-content>
-        <mat-form-field>
-          <mat-select placeholder="Select Country">
-            <mat-option>None</mat-option>
-            <mat-option *ngFor="let country of countries" [value]="country">{{country}}</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </mat-card-content>
-    </mat-card>
-
-  </form>
 </div>
 
 
