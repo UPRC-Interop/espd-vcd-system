@@ -1,5 +1,7 @@
 
-<form #f="ngForm">
+<app-welcome></app-welcome>
+
+<form (ngSubmit)="onStartSubmit(f)" #f="ngForm">
 
   <mat-card>
     <mat-card-title>Who are you?</mat-card-title>
@@ -107,6 +109,6 @@
     </mat-card-content>
   </mat-card>
 
-  <button mat-raised-button color="primary" matStepperNext>Next</button>
+  <button type="submit" mat-raised-button color="primary" matStepperNext>Next</button>
 
 </form>

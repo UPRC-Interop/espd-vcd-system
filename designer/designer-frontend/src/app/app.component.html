@@ -1,7 +1,7 @@
 <app-toolbar></app-toolbar>
 
 <div class="container">
-  <app-welcome></app-welcome>
+
   <mat-horizontal-stepper [linear]="isLinear" #stepper="matHorizontalStepper">
     <mat-step>
       <ng-template matStepLabel>Start</ng-template>
@@ -9,11 +9,11 @@
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Procedure</ng-template>
-      <h2>Procedure...</h2>
+      <app-procedure></app-procedure>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Exclusion</ng-template>
-      <h2>Exclusion...</h2>
+      <app-exclusion></app-exclusion>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Selection</ng-template>

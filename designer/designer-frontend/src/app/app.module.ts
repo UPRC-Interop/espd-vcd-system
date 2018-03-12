@@ -9,6 +9,8 @@ import { AppComponent } from './app.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { StartComponent } from './start/start.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { ProcedureComponent } from './procedure/procedure.component';
+import { ExclusionComponent } from './exclusion/exclusion.component';
 
 
 @NgModule({
@@ -16,7 +18,9 @@ import { WelcomeComponent } from './welcome/welcome.component';
     AppComponent,
     ToolbarComponent,
     StartComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    ProcedureComponent,
+    ExclusionComponent
   ],
   imports: [
     BrowserModule,

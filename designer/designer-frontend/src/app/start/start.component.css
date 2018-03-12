@@ -1,5 +1,6 @@
 .mat-card {
   margin-bottom:20px;
+  margin-top:20px;
   padding:20px;
 }
 .mat-card-content {
@@ -28,3 +29,4 @@
   flex:1;
   order:2;
 }
+

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl} from "@angular/forms/forms";
+import {FormControl, NgForm} from "@angular/forms/forms";
+
 
 @Component({
   selector: 'app-start',
@@ -65,6 +66,10 @@ export class StartComponent implements OnInit {
       this.isImportESPD=false;
       this.isCreateResponse=true;
     }
+  }
+
+  onStartSubmit(form:NgForm){
+    console.log(form);
   }
 
 }

@@ -2,6 +2,9 @@
   flex: 1 1 auto;
 }
 
+.mat-toolbar {
+  margin-bottom:20px;
+}
 
 ul li {
   list-style:none;

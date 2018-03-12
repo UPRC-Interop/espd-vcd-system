@@ -1,0 +1,83 @@
+<h4>Part I: Information concerning the procurement procedure and the contracting authority or contracting entity</h4>
+<form #f="ngForm">
+  <mat-accordion multi="true">
+    <mat-expansion-panel expanded="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Information about Publication
+        </mat-panel-title>
+        <mat-panel-description>
+
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="desc">
+        <p>For procurement procedures in which a call for competition has been published in the Official Journal of the European Union, the information required under Part I will be automatically retrieved, provided that the electronic ESPD-service is used to generate and fill in the ESPD. Reference of the relevant notice published in the Official Journal of the European Union:</p>
+      </div>
+      <mat-form-field>
+        <!--<label for="noticeNumber">Received Notice Number</label>-->
+        <input matInput id="noticeNumber" placeholder="Received notice number">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Notice number in the OJS">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Notice number in the OJS">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="National Official Journal">
+      </mat-form-field>
+
+      <div class="desc">
+        <p>In case publication of a notice in the Official Journal of the European Union is not required, please give other information allowing the procurement procedure to be unequivocally identified (e. g. reference of a publication at national level)</p>
+      </div>
+    </mat-expansion-panel>
+    <mat-expansion-panel expanded="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Identity of the Procurer
+        </mat-panel-title>
+        <mat-panel-description>
+
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-form-field>
+        <input matInput placeholder="Official Name">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Select Country">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let country of countries" [value]="country">{{country}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel expanded="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Information about the procurement procedure
+        </mat-panel-title>
+        <mat-panel-description>
+
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-form-field>
+        <mat-select placeholder="Type of Procedure">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let proc of procedures" [value]="proc">{{proc}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Title">
+      </mat-form-field>
+      <mat-form-field>
+        <!--<input matInput placeholder="Short Description">-->
+        <textarea matInput id="shortDesc" cols="30" rows="10" placeholder="Short Description"></textarea>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="File Reference Number">
+      </mat-form-field>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+  <button type="submit" mat-raised-button color="primary" matStepperNext>Next</button>
+</form>
