@@ -1,0 +1,114 @@
+
+<app-welcome></app-welcome>
+
+<form (ngSubmit)="onStartSubmit(f)" #f="ngForm">
+
+  <mat-card>
+    <mat-card-title>Who are you?</mat-card-title>
+    <mat-card-content>
+      <mat-radio-group name="chooseRole">
+        <mat-radio-button color="primary" name="role" value="CA" (change)="handleRole(CA)" #CA>I am a contracting
+          authority
+        </mat-radio-button>
+        <mat-radio-button color="primary" name="role" value="EO" (change)="handleRole(EO)" #EO>I am an economic
+          operator
+        </mat-radio-button>
+      </mat-radio-group>
+    </mat-card-content>
+  </mat-card>
+  <mat-card *ngIf="isCA">
+    <mat-card-title>What would you like to do?</mat-card-title>
+    <mat-card-content>
+      <div class="wrapper">
+        <mat-form-field class="width">
+          <input matInput placeholder="Please Specify the Received Notice Number" required>
+        </mat-form-field>
+        <mat-radio-group name="caOptions">
+          <mat-radio-button color="primary"
+                            name="caOption"
+                            value="createNewESPD"
+                            (change)="handleCASelection(createNewESPD)"
+                            #createNewESPD>Create a new ESPD</mat-radio-button>
+          <mat-radio-button color="primary"
+                            name="caOption"
+                            value="reuseESPD"
+                            (change)="handleCASelection(reuseESPD)"
+                            #reuseESPD>Reuse and existing ESPD</mat-radio-button>
+          <mat-radio-button color="primary"
+                            name="caOption"
+                            value="reviewESPD"
+                            (change)="handleCASelection(reviewESPD)"
+                            #reviewESPD>Review ESPD</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card *ngIf="isCreateNewESPD && isCA">
+    <mat-card-title>Where is your Authority located?</mat-card-title>
+    <mat-card-content>
+      <mat-form-field>
+        <mat-select placeholder="Select Country">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let country of countries" [value]="country">{{country}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card *ngIf="(isReuseESPD || isReviewESPD)&& isCA">
+    <mat-card-title>Upload Document</mat-card-title>
+    <mat-card-content>
+      <label for="fileUploadCA">Please upload an ESPD Request or an ESPD Response: </label>
+      <br>
+      <input type="file" id="fileUploadCA"
+             name="importCA"
+             (change)="handleFileUpload($event.target.files)" required
+             accept=".xml">
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card *ngIf="isEO">
+    <mat-card-title>What would you like to do?</mat-card-title>
+    <mat-card-content>
+      <mat-radio-group name="eoOptions">
+        <mat-radio-button color="primary"
+                          name="eoOption"
+                          value="importESPD"
+                          (change)="handleEOSelection(importESPD)" #importESPD>Import ESPD</mat-radio-button>
+        <mat-radio-button color="primary"
+                          name="eoOption"
+                          value="createResponse"
+                          (change)="handleEOSelection(createResponse)" #createResponse>Create Response</mat-radio-button>
+      </mat-radio-group>
+    </mat-card-content>
+  </mat-card>
+
+
+  <mat-card *ngIf="isImportESPD && isEO">
+    <mat-card-title>Upload Document</mat-card-title>
+    <mat-card-content>
+      <label for="fileUploadEO">Please upload an ESPD Request or an ESPD Response: </label>
+      <br>
+      <input type="file" id="fileUploadEO"
+             name="importEO"
+             (change)="handleFileUpload($event.target.files)" required
+             accept=".xml">
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card *ngIf="isCreateResponse && isEO">
+    <mat-card-title>Where is your business located?</mat-card-title>
+    <mat-card-content>
+      <mat-form-field>
+        <mat-select placeholder="Select Country">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let country of countries" [value]="country">{{country}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-card-content>
+  </mat-card>
+
+  <button type="submit" mat-raised-button color="primary" matStepperNext>Next</button>
+
+</form>

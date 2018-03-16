@@ -1,0 +1,46 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.mat-toolbar {
+  margin-bottom:20px;
+}
+
+ul li {
+  list-style:none;
+  display:inline;
+}
+
+ul li a {
+  text-decoration: none;
+  color:white;
+  font-size: 14px;
+}
+
+ul li a:visited {
+  text-decoration: none;
+  color:white;
+}
+
+ul li a:hover {
+  text-decoration: none;
+  border-bottom:2px solid white;
+  padding-bottom:5px;
+  color:white;
+}
+
+ul li a:active {
+  text-decoration: none;
+  border-bottom:2px solid #E8EAF6;
+  color:#E8EAF6;
+}
+
+.fill {
+  display:flex;
+  align-items: flex-end;
+}
+
+#sub {
+  background-color:white;
+  color:#3F51B5;
+}
