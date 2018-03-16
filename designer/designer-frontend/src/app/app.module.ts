@@ -11,6 +11,7 @@ import { StartComponent } from './start/start.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { ProcedureComponent } from './procedure/procedure.component';
 import { ExclusionComponent } from './exclusion/exclusion.component';
+import { ProcedureEoComponent } from './procedure-eo/procedure-eo.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { ExclusionComponent } from './exclusion/exclusion.component';
     StartComponent,
     WelcomeComponent,
     ProcedureComponent,
-    ExclusionComponent
+    ExclusionComponent,
+    ProcedureEoComponent
   ],
   imports: [
     BrowserModule,
