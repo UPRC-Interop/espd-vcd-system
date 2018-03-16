@@ -7,7 +7,7 @@ import java.util.List;
  *
  * Created by Ulf Lotzmann on 11/05/2016.
  */
-public interface ArtifactValidator {
+public interface ArtefactValidator {
 
     /**
      * Provides validation result.

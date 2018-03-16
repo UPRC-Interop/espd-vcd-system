@@ -1,7 +1,7 @@
 package eu.esens.espdvcd.validator.schematron;
 
 import com.helger.schematron.xslt.SchematronResourceSCH;
-import eu.esens.espdvcd.validator.ArtifactValidator;
+import eu.esens.espdvcd.validator.ArtefactValidator;
 import eu.esens.espdvcd.validator.ValidationResult;
 import org.oclc.purl.dsdl.svrl.FailedAssert;
 import org.oclc.purl.dsdl.svrl.SchematronOutputType;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 /**
  * @author konstantinos
  */
-public class ESPDSchematronValidator implements ArtifactValidator {
+public class ESPDSchematronValidator implements ArtefactValidator {
 
     private static final String ERROR_INVALID_SCHEMATRON = "Error... Invalid Schematron";
     private List<ValidationResult> validationMessages = new LinkedList<>();
@@ -28,8 +28,8 @@ public class ESPDSchematronValidator implements ArtifactValidator {
         validateXMLViaXSLTSchematronFull(is, schPath);
     }
 
-    public ESPDSchematronValidator(File artifact, String... schPath) {
-        Arrays.asList(schPath).forEach(path -> validateXMLViaXSLTSchematronFull(artifact, path));
+    public ESPDSchematronValidator(File artefact, String... schPath) {
+        Arrays.asList(schPath).forEach(path -> validateXMLViaXSLTSchematronFull(artefact, path));
     }
 
     static boolean validateXMLViaXSLTSchematron(InputStream is, String schPath) {
@@ -55,12 +55,12 @@ public class ESPDSchematronValidator implements ArtifactValidator {
     /**
      * Validating given file against the specified schematron
      *
-     * @param artifact the espd request/response artifact provided by the specified file
+     * @param artefact the espd request/response artefact provided by the specified file
      * @param schPath the schematron file path
      */
-    private void validateXMLViaXSLTSchematronFull(File artifact, String schPath) {
+    private void validateXMLViaXSLTSchematronFull(File artefact, String schPath) {
         try {
-            validateXMLViaXSLTSchematronFull(new FileInputStream(artifact), schPath);
+            validateXMLViaXSLTSchematronFull(new FileInputStream(artefact), schPath);
         } catch (FileNotFoundException e) {
             Logger.getLogger(ESPDSchematronValidator.class.getName()).log(Level.SEVERE, e.getMessage(), e);
         }
@@ -69,7 +69,7 @@ public class ESPDSchematronValidator implements ArtifactValidator {
     /**
      * Validating given input stream against the specified schematron
      *
-     * @param is the espd request/response artifact provided by the specified input stream
+     * @param is the espd request/response artefact provided by the specified input stream
      * @param schPath the schematron file path
      */
     private void validateXMLViaXSLTSchematronFull(InputStream is, String schPath) {

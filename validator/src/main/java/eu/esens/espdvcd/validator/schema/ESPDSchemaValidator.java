@@ -2,7 +2,7 @@ package eu.esens.espdvcd.validator.schema;
 
 import eu.esens.espdvcd.builder.util.SchemaUtil;
 import eu.esens.espdvcd.builder.util.XSD;
-import eu.esens.espdvcd.validator.ArtifactValidator;
+import eu.esens.espdvcd.validator.ArtefactValidator;
 import eu.esens.espdvcd.validator.ValidationResult;
 import org.xml.sax.SAXException;
 
@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
  * <p>
  * Created by Ulf Lotzmann on 03/05/2016.
  */
-public class ESPDSchemaValidator implements ArtifactValidator {
+public class ESPDSchemaValidator implements ArtefactValidator {
 
     private List<ValidationResult> validationMessages = new LinkedList<>();
     private String xsdPath;
