@@ -33,7 +33,7 @@ public class ValidatorFactory {
      * @param is input stream with XML data
      * @return schema validator object
      */
-    public static ArtifactValidator createESPDRequestSchemaValidator(InputStream is) throws SAXException, JAXBException {
+    public static ArtefactValidator createESPDRequestSchemaValidator(InputStream is) throws SAXException, JAXBException {
         // FIXME: the path returned by XSD.ESPD_REQUEST.xsdPath() is probably incorrect, hence returning static string
         //return new ESPDSchemaValidator(is, XSD.ESPD_REQUEST.xsdPath(), ESPDRequestType.class);
         return new ESPDSchemaValidator(is, "/schema/maindoc/ESPDRequest-1.0.xsd", ESPDRequestType.class);
@@ -47,21 +47,21 @@ public class ValidatorFactory {
      * @param is input stream with XML data
      * @return schema validator object
      */
-    public static ArtifactValidator createESPDResponseSchemaValidator(InputStream is) throws SAXException, JAXBException {
+    public static ArtefactValidator createESPDResponseSchemaValidator(InputStream is) throws SAXException, JAXBException {
         // FIXME: the path returned by XSD.ESPD_REQUEST.xsdPath() is probably incorrect, hence returning static string
         //return new ESPDSchemaValidator(is, XSD.ESPD_RESPONSE.xsdPath(), ESPDRequestType.class);
         return new ESPDSchemaValidator(is, "/schema/maindoc/ESPDResponse-1.0.xsd", ESPDResponseType.class);
     }
 
     /**
-     * Factory method that creates an ESPD artifact (request or response) schematron
+     * Factory method that creates an ESPD artefact (request or response) schematron
      * validator object and performs the schematron validation for the XML provided by
      * the specified input stream.
      *
      * @param is input stream with XML data
      * @return schematron validator object
      */
-    static ArtifactValidator createESPDArtifactSchematronValidator(InputStream is, String schPath) {
+    static ArtefactValidator createESPDArtefactSchematronValidator(InputStream is, String schPath) {
         return new ESPDSchematronValidator(is, schPath);
     }
 
@@ -74,7 +74,7 @@ public class ValidatorFactory {
      * @param schOrigin origin of schematron file
      * @return schematron validator object
      */
-    public static ArtifactValidator createESPDRequestSchematronValidator(File espdRequest, SchematronOrigin schOrigin) {
+    public static ArtefactValidator createESPDRequestSchematronValidator(File espdRequest, SchematronOrigin schOrigin) {
 
         switch (schOrigin) {
             case EU:
@@ -99,7 +99,7 @@ public class ValidatorFactory {
      * @param schOrigin origin of schematron file
      * @return schematron validator object
      */
-    public static ArtifactValidator createESPDResponseSchematronValidator(File espdResponse, SchematronOrigin schOrigin) {
+    public static ArtefactValidator createESPDResponseSchematronValidator(File espdResponse, SchematronOrigin schOrigin) {
 
         switch (schOrigin) {
             case EU:

@@ -34,7 +34,7 @@ public class ESPDSchemaValidatorTest {
     @Test
     public void validateESPDRequest() throws Exception {
         // create ESPD request validator object for valid ESPD request and retrieve test results
-        ArtifactValidator validator = ValidatorFactory.createESPDRequestSchemaValidator(isReqValid);
+        ArtefactValidator validator = ValidatorFactory.createESPDRequestSchemaValidator(isReqValid);
 
         System.out.println("validateESPDRequest events:");
         for (ValidationResult event: validator.getValidationMessages()) {
@@ -57,7 +57,7 @@ public class ESPDSchemaValidatorTest {
     @Test
     public void checkESPDRequestValidationForESPDResponse() throws Exception {
         // create ESPD request validator object for valid ESPD response and retrieve test results
-        ArtifactValidator validator = ValidatorFactory.createESPDRequestSchemaValidator(isResValid);
+        ArtefactValidator validator = ValidatorFactory.createESPDRequestSchemaValidator(isResValid);
 
         System.out.println("checkESPDRequestValidationForESPDResponse events:");
         for (ValidationResult event: validator.getValidationMessages()) {
@@ -72,7 +72,7 @@ public class ESPDSchemaValidatorTest {
     @Test
     public void validateESPDResponse() throws Exception {
         // create ESPD response validator object for valid ESPD response and retrieve test results
-        ArtifactValidator validator = ValidatorFactory.createESPDResponseSchemaValidator(isResValid);
+        ArtefactValidator validator = ValidatorFactory.createESPDResponseSchemaValidator(isResValid);
 
         System.out.println("validateESPDResponse events:");
         for (ValidationResult event: validator.getValidationMessages()) {
@@ -85,7 +85,7 @@ public class ESPDSchemaValidatorTest {
     @Test
     public void checkESPDResponseValidationForESPDRequest() throws Exception {
         // create ESPD response validator object for valid ESPD request and retrieve test results
-        ArtifactValidator validator = ValidatorFactory.createESPDResponseSchemaValidator(isReqValid);
+        ArtefactValidator validator = ValidatorFactory.createESPDResponseSchemaValidator(isReqValid);
 
         System.out.println("checkESPDResponseValidationForESPDRequest events:");
         for (ValidationResult event: validator.getValidationMessages()) {

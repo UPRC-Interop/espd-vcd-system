@@ -8,6 +8,8 @@ public class ValidationResult {
     private final String test;
     private final String text;
     private final String role;
+    private final String expectedValue;
+    private final String providedValue;
 
     private ValidationResult(Builder builder) {
         this.id = builder.id;
@@ -16,6 +18,8 @@ public class ValidationResult {
         this.test = builder.test;
         this.text = builder.text;
         this.role = builder.role;
+        this.expectedValue = builder.expectedValue;
+        this.providedValue = builder.providedValue;
     }
 
     public String getFlag() {
@@ -42,6 +46,14 @@ public class ValidationResult {
         return role;
     }
 
+    public String getExpectedValue() {
+        return expectedValue;
+    }
+
+    public String getProvidedValue() {
+        return providedValue;
+    }
+
     public static class Builder {
 
         // mandatory params
@@ -52,6 +64,8 @@ public class ValidationResult {
         private String flag;
         private String test;
         private String role;
+        private String expectedValue;
+        private String providedValue;
 
         public Builder(String id, String location, String text) {
             this.id = id;
@@ -71,6 +85,16 @@ public class ValidationResult {
 
         public Builder role(String role) {
             this.role = role;
+            return this;
+        }
+
+        public Builder expectedValue(String expectedValue) {
+            this.expectedValue = expectedValue;
+            return this;
+        }
+
+        public Builder providedValue(String providedValue) {
+            this.providedValue = providedValue;
             return this;
         }
 
