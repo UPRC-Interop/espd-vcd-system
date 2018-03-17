@@ -3,27 +3,15 @@ package eu.esens.espdvcd.designer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import eu.esens.espdvcd.builder.BuilderFactory;
-import eu.esens.espdvcd.codelist.CodelistsV1;
 import eu.esens.espdvcd.codelist.CodelistsV2;
-import eu.esens.espdvcd.designer.routes.Criteria;
+import eu.esens.espdvcd.designer.routes.CriteriaRoute;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDResponse;
-import eu.esens.espdvcd.model.SelectableCriterion;
-import eu.esens.espdvcd.model.retriever.ECertisEvidenceGroup;
-import eu.esens.espdvcd.model.retriever.ECertisSelectableCriterion;
-import eu.esens.espdvcd.retriever.criteria.CriteriaDataRetriever;
-import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
-import eu.esens.espdvcd.retriever.criteria.ECertisCriteriaExtractor;
-import eu.esens.espdvcd.retriever.criteria.PredefinedESPDCriteriaExtractor;
-import eu.esens.espdvcd.retriever.exception.RetrieverException;
-import spark.servlet.SparkApplication;
 
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.http.Part;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static spark.Spark.*;
@@ -55,7 +43,7 @@ public final class Server{
         enableCORS();
 
         //SET UP
-        Criteria criteria = new Criteria();
+        CriteriaRoute criteriaRoute = new CriteriaRoute();
         String path;
 
         //ROUTES
@@ -81,18 +69,18 @@ public final class Server{
             return ow.writeValueAsString(CodelistsV2.ProjectType.getDataMap(lang));
         });
 
-//        post(path+"/*", ((request, response) -> {
+//        post(path+"/*", ((request, response) -> {2
 //            response.status();
 //        }));
 
         //CRITERIA
         path = "api/criteria";
         get(path+"/ECertis", ((request, response) -> {
-            return ow.writeValueAsString(criteria.getECertisCriteria());
+            return ow.writeValueAsString(criteriaRoute.getECertisCriteria());
         }));
 
         get(path+"/Predefined", (request, response) -> {
-            return ow.writeValueAsString(criteria.getPredefinedCriteria());
+            return ow.writeValueAsString(criteriaRoute.getPredefinedCriteria());
         });
 
 //        get(path+"/PredefinedCriterionList",(request, response) -> {
@@ -113,18 +101,16 @@ public final class Server{
             MultipartConfigElement multipartConfigElement = new MultipartConfigElement("file-uploads", 1000000000, 1000000000, 100);
             rq.raw().setAttribute("org.eclipse.jetty.multipartConfig", multipartConfigElement);
             Collection<Part> parts = rq.raw().getParts();
-            ArrayList<Part> listOfParts = new ArrayList<>(parts);
-            ESPDRequest req = BuilderFactory.getModelBuilder().importFrom(listOfParts.get(0).getInputStream()).createESPDRequest();
+            ESPDRequest req = BuilderFactory.getModelBuilder().importFrom(parts.iterator().next().getInputStream()).createESPDRequest();
             return ow.writeValueAsString(req);
         });
 
         post(path+"/response", "multipart/form-data", (rq, rsp) -> {
             MultipartConfigElement multipartConfigElement = new MultipartConfigElement("file-uploads", 1000000000, 1000000000, 100);
             rq.raw().setAttribute("org.eclipse.jetty.multipartConfig", multipartConfigElement);
+
             Collection<Part> parts = rq.raw().getParts();
-            ArrayList<Part> listOfParts = new ArrayList<>(parts);
-            System.out.println("SIZE OF listOfParts IS " + listOfParts.size());
-            ESPDResponse resp = BuilderFactory.getModelBuilder().importFrom(listOfParts.get(0).getInputStream()).createESPDResponse();
+            ESPDResponse resp = BuilderFactory.getModelBuilder().importFrom(parts.iterator().next().getInputStream()).createESPDResponse();
             return ow.writeValueAsString(resp);
         });
     }

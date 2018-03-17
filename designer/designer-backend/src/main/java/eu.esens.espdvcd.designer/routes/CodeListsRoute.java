@@ -1,5 +1,5 @@
 package eu.esens.espdvcd.designer.routes;
 
-public class CodeLists {
+public class CodeListsRoute {
 
 }

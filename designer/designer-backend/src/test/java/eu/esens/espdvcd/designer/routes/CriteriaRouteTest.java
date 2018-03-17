@@ -2,14 +2,11 @@ package eu.esens.espdvcd.designer.routes;
 
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+public class CriteriaRouteTest {
 
-public class CriteriaTest {
-
-    private final Criteria criteria = new Criteria();
+    private final CriteriaRoute criteriaRoute = new CriteriaRoute();
 //    @Before
 //    public void SetUp() throws Exception{
 //      Criteria criteria = new Criteria();
@@ -17,11 +14,12 @@ public class CriteriaTest {
 
     @Test
     public void getPredefinedCriteria() throws RetrieverException {
-        Assert.assertNotNull(criteria.getECertisCriteria());
+        Assert.assertNotNull(criteriaRoute.getECertisCriteria());
     }
 
     @Test
     public void getECertisCriteria() throws RetrieverException {
-        Assert.assertNotNull(criteria.getPredefinedCriteria());
+        Assert.assertNotNull(criteriaRoute.getPredefinedCriteria());
     }
+
 }

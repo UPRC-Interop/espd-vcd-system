@@ -2,4 +2,7 @@ include ':builder',
         ':codelists',
         ':model',
         ':designer',
-        ':validator'
+        ':validator',
+        'designer:designer-backend'
+findProject(':designer:designer-backend')?.name = 'designer-backend'
+

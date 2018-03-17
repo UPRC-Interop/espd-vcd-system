@@ -8,11 +8,11 @@ import eu.esens.espdvcd.retriever.exception.RetrieverException;
 
 import java.util.List;
 
-public class Criteria {
+public class CriteriaRoute {
 
     private final CriteriaExtractor eCertisExtractor, predefinedExtractor;
 
-    public Criteria(){
+    public CriteriaRoute(){
         eCertisExtractor = new ECertisCriteriaExtractor();
         predefinedExtractor = new PredefinedESPDCriteriaExtractor();
     }
