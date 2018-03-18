@@ -9,9 +9,9 @@ import org.junit.Ignore;
 /**
  *
  */
-public class SimpleESPDRequestTest {
+public class RegulatedESPDRequestTest {
     
-    ESPDRequest req = new SimpleESPDRequest();
+    ESPDRequest req = new RegulatedESPDRequest();
     
     @Before
     public void setUp() {

@@ -1,10 +1,8 @@
 package eu.esens.espdvcd.builder.model;
 
 import eu.esens.espdvcd.model.ESPDRequest;
-import eu.esens.espdvcd.model.ESPDRequestDetails;
-import eu.esens.espdvcd.model.SimpleESPDRequest;
+import eu.esens.espdvcd.model.RegulatedESPDRequest;
 import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.IDType;
 
 import java.util.stream.Collectors;
 
@@ -16,7 +14,7 @@ public class ESPDRequestModelExtractor implements ModelExtractor {
 
     public ESPDRequest extractESPDRequest(ESPDRequestType reqType) {
         
-        SimpleESPDRequest req = new SimpleESPDRequest();
+        RegulatedESPDRequest req = new RegulatedESPDRequest();
 
         req.getFullCriterionList().addAll(reqType.getCriterion().stream()
         .map(c -> extractSelectableCriterion(c))

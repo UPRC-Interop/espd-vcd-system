@@ -27,13 +27,16 @@ import javax.xml.transform.stream.StreamSource;
  *
  * @since 1.0
  */
-public class ModelBuilder {
+public class ModelBuilderV1 {
 
     private EODetails eoDetails = null;
     private CADetails caDetails = null;
     private ServiceProviderDetails serviceProviderDetails = null;
     private CriteriaExtractor criteriaExtractor = null;
     private InputStream importStream = null;
+
+    /* package private constructor. Create only through factory */
+    ModelBuilderV1() {}
 
     /**
      * Loads from an ESPD Request or an ESPD Response all the required data and
@@ -47,7 +50,7 @@ public class ModelBuilder {
      * @return the same ModelBuilder instance for incremental creation of the
      * required object.
      */
-    public ModelBuilder importFrom(InputStream is) {
+    public ModelBuilderV1 importFrom(InputStream is) {
         importStream = getBufferedInputStream(is);
         return this;
     }
@@ -66,9 +69,9 @@ public class ModelBuilder {
      * @throws BuilderException if the input stream is on a valid ESPD Request
      * or Response;
      */
-    public ModelBuilder withCADetailsFrom(InputStream is) throws BuilderException {
+    public ModelBuilderV1 withCADetailsFrom(InputStream is) throws BuilderException {
 
-        ESPDRequest req = createESPDRequestFromXML(is);
+        ESPDRequest req = createRegulatedESPDRequestFromXML(is);
         caDetails = req.getCADetails();
         return this;
     }
@@ -84,7 +87,7 @@ public class ModelBuilder {
      * required object.
      *
      */
-    public ModelBuilder withCADetailsFrom(CADetails caDetails) {
+    public ModelBuilderV1 withCADetailsFrom(CADetails caDetails) {
         this.caDetails = caDetails;
         return this;
     }
@@ -103,8 +106,8 @@ public class ModelBuilder {
      * @throws BuilderException if the input stream is on a valid ESPD Request
      * or Response;
      */
-    public ModelBuilder withEODetailsFrom(InputStream is) throws BuilderException {
-        ESPDResponse res = createESPDResponseFromXML(is);
+    public ModelBuilderV1 withEODetailsFrom(InputStream is) throws BuilderException {
+        ESPDResponse res = createRegulatedESPDResponseFromXML(is);
         eoDetails = res.getEODetails();
         return this;
     }
@@ -120,7 +123,7 @@ public class ModelBuilder {
      * required object.
      *
      */
-    public ModelBuilder withEODetailsFrom(EODetails eoDetails) {
+    public ModelBuilderV1 withEODetailsFrom(EODetails eoDetails) {
         this.eoDetails = eoDetails;
         return this;
     }
@@ -139,7 +142,7 @@ public class ModelBuilder {
      * @return the same ModelBuilder instance for incremental creation of the
      * required object.
      */
-    public ModelBuilder addDefaultESPDCriteriaList() {
+    public ModelBuilderV1 addDefaultESPDCriteriaList() {
 
         criteriaExtractor = new PredefinedESPDCriteriaExtractor();
         return this;
@@ -149,26 +152,38 @@ public class ModelBuilder {
      * Terminal builder method that returns an {@link ESPDRequest} instance,
      *
      * @return the created ESPD Request
+     * @throws BuilderException
+     * @deprecated as of release 2.0.2, replaced by {@link #createRegulatedESPDRequest()}
+     */
+    @Deprecated
+    public ESPDRequest createESPDRequest() throws BuilderException {
+        return createRegulatedESPDRequest();
+    }
+
+    /**
+     * Terminal builder method that returns an {@link ESPDRequest} instance,
+     *
+     * @return the created ESPD Request
      * @throws BuilderException if the import failed.
      */
-    public ESPDRequest createESPDRequest() throws BuilderException {
+    public ESPDRequest createRegulatedESPDRequest() throws BuilderException {
         ESPDRequest req;
         if (importStream != null) {
-            req = createESPDRequestFromXML(importStream);
+            req = createRegulatedESPDRequestFromXML(importStream);
             if (criteriaExtractor != null) {
                 try {
                     req.setCriterionList(criteriaExtractor.getFullList(req.getFullCriterionList()));
                 } catch (RetrieverException ex) {
-                    Logger.getLogger(ModelBuilder.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ModelBuilderV1.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         } else {
-            req = new SimpleESPDRequest();
+            req = new RegulatedESPDRequest();
             if (criteriaExtractor != null) {
                 try {
                     req.setCriterionList(criteriaExtractor.getFullList());
                 } catch (RetrieverException ex) {
-                    Logger.getLogger(ModelBuilder.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ModelBuilderV1.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else {
                 req.setCriterionList(getEmptyCriteriaList());
@@ -198,27 +213,39 @@ public class ModelBuilder {
      *
      * @return the created ESPD Response
      * @throws BuilderException if the import failed.
+     * @deprecated as of release 2.0.2, replaced by {@link #createRegulatedESPDResponse()}
      */
+    @Deprecated
     public ESPDResponse createESPDResponse() throws BuilderException {
+        return createRegulatedESPDResponse();
+    }
+
+    /**
+     * Terminal builder method that returns an {@link ESPDResponse} instance,
+     *
+     * @return the created ESPD Response
+     * @throws BuilderException if the import failed.
+     */
+    public ESPDResponse createRegulatedESPDResponse() throws BuilderException {
 
         ESPDResponse res;
         if (importStream != null) {
-            res = createESPDResponseFromXML(importStream);
+            res = createRegulatedESPDResponseFromXML(importStream);
             if (criteriaExtractor != null) {
                 try {
                     res.setCriterionList(criteriaExtractor.getFullList(res.getFullCriterionList(), true));
                 } catch (RetrieverException ex) {
-                    Logger.getLogger(ModelBuilder.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ModelBuilderV1.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
 
         } else {
-            res = new SimpleESPDResponse();
+            res = new RegulatedESPDResponse();
             if (criteriaExtractor != null) {
                 try {
                     res.setCriterionList(criteriaExtractor.getFullList());
                 } catch (RetrieverException ex) {
-                    Logger.getLogger(ModelBuilder.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ModelBuilderV1.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else {
                 res.setCriterionList(getEmptyCriteriaList());
@@ -269,29 +296,37 @@ public class ModelBuilder {
         try {
             return cr.getFullList();
         } catch (RetrieverException ex) {
-            Logger.getLogger(ModelBuilder.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ModelBuilderV1.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
 
-    private ESPDRequestType readESPDRequestFromStream(InputStream is) {
+    private ESPDRequestType readRegulatedESPDRequestFromStream(InputStream is) {
         try {
             // Start with the convience methods provided by JAXB. If there are
             // perfomance issues we will swicth back to the JAXB API Usage
             return SchemaUtil.getUnmarshaller().unmarshal(new StreamSource(is), ESPDRequestType.class).getValue();
         } catch (JAXBException ex) {
-            Logger.getLogger(ModelBuilder.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ModelBuilderV1.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
 
+    /**
+     * @deprecated as of release 2.0.2, replaced by {@link #readRegulatedESPDResponseFromStream(InputStream)}
+     */
+    @Deprecated
     protected ESPDResponseType readESPDResponseFromStream(InputStream is) {
+        return readRegulatedESPDResponseFromStream(is);
+    }
+
+    protected ESPDResponseType readRegulatedESPDResponseFromStream(InputStream is) {
         try {
             // Start with the convience methods provided by JAXB. If there are
             // perfomance issues we will swicth back to the JAXB API Usage
             return SchemaUtil.getUnmarshaller().unmarshal(new StreamSource(is), ESPDResponseType.class).getValue();
         } catch (JAXBException ex) {
-            Logger.getLogger(ModelBuilder.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ModelBuilderV1.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
@@ -304,23 +339,31 @@ public class ModelBuilder {
      * @throws BuilderException when the parsing from XML to ESPDRequest Model
      * fails
      */
-    private ESPDRequest createESPDRequestFromXML(InputStream xmlESPD) throws BuilderException {
+    private ESPDRequest createRegulatedESPDRequestFromXML(InputStream xmlESPD) throws BuilderException {
 
         ESPDRequest req;
 
         try (InputStream bis = getBufferedInputStream(xmlESPD)) {
             // Check and read the file in the JAXB Object
-            ESPDRequestType reqType = readESPDRequestFromStream(bis);
+            ESPDRequestType reqType = readRegulatedESPDRequestFromStream(bis);
             // Create the Model Object
             req = ModelFactory.ESPD_REQUEST.extractESPDRequest(reqType);
 
             return req;
 
         } catch (IOException ex) {
-            Logger.getLogger(ModelBuilder.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ModelBuilderV1.class.getName()).log(Level.SEVERE, null, ex);
             throw new BuilderException("Error in Reading XML Input Stream", ex);
         }
 
+    }
+
+    /**
+     * @deprecated as of release 2.0.2, replaced by {@link #createRegulatedESPDResponseFromXML(InputStream)}
+     */
+    @Deprecated
+    protected ESPDResponse createESPDResponseFromXML(InputStream xmlESPDRes) throws BuilderException {
+        return createRegulatedESPDResponseFromXML(xmlESPDRes);
     }
 
     /**
@@ -331,17 +374,17 @@ public class ModelBuilder {
      * @throws BuilderException when the parsing from XML to ESPDResponse Model
      * fails
      */
-    protected ESPDResponse createESPDResponseFromXML(InputStream xmlESPDRes) throws BuilderException {
+    protected ESPDResponse createRegulatedESPDResponseFromXML(InputStream xmlESPDRes) throws BuilderException {
 
         ESPDResponse res;
         // Check and read the file in the JAXB Object
         try (InputStream bis = getBufferedInputStream(xmlESPDRes)) {
             // Check and read the file in the JAXB Object
-            ESPDResponseType resType = readESPDResponseFromStream(bis);
+            ESPDResponseType resType = readRegulatedESPDResponseFromStream(bis);
             // Create the Model Object
             res = ModelFactory.ESPD_RESPONSE.extractESPDResponse(resType);
         } catch (IOException ex) {
-            Logger.getLogger(ModelBuilder.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ModelBuilderV1.class.getName()).log(Level.SEVERE, null, ex);
             throw new BuilderException("Error in Reading Input Stream for ESPD Response", ex);
         }
 

@@ -167,7 +167,7 @@ public interface ModelExtractor {
 
         try {
             // return the default service provider details
-            return BuilderFactory.getModelBuilder().createESPDRequest().getServiceProviderDetails();
+            return BuilderFactory.V1.getModelBuilder().createRegulatedESPDRequest().getServiceProviderDetails();
         } catch (BuilderException e) {
             return null;
         }

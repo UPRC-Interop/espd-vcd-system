@@ -10,19 +10,19 @@ import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class VCDModelBuilder extends ModelBuilder {
+public class VCDModelBuilder extends ModelBuilderV1 {
 
     @Override
-    protected ESPDResponse createESPDResponseFromXML(InputStream xmlESPDRes) throws BuilderException {
+    protected ESPDResponse createRegulatedESPDResponseFromXML(InputStream xmlESPDRes) throws BuilderException {
         ESPDResponse res;
         // Check and read the file in the JAXB Object
         try (InputStream bis = getBufferedInputStream(xmlESPDRes)) {
             // Check and read the file in the JAXB Object
-            ESPDResponseType resType = readESPDResponseFromStream(bis);
+            ESPDResponseType resType = readRegulatedESPDResponseFromStream(bis);
             // Create the Model Object
             res = ModelFactory.VCD_RESPONSE.extractESPDResponse(resType);
         } catch (IOException ex) {
-            Logger.getLogger(ModelBuilder.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ModelBuilderV1.class.getName()).log(Level.SEVERE, null, ex);
             throw new BuilderException("Error in Reading Input Stream for ESPD Response", ex);
         }
 

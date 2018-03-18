@@ -125,7 +125,7 @@ public class DocumentBuilder {
                 SchemaUtil.getMarshaller().marshal(of.createESPDRequest(createXML(theReq)), result);
             }
         } catch (JAXBException ex) {
-            Logger.getLogger(XMLDocumentBuilder.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(XMLDocumentBuilderV1.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return result.toString();

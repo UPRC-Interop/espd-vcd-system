@@ -8,7 +8,7 @@ import eu.esens.espdvcd.model.ESPDRequest;
  * 
  * @since 1.0
  */
-public class XMLDocumentBuilder extends DocumentBuilder {
+public class XMLDocumentBuilderV1 extends DocumentBuilder {
 
     /**
      * Creates an XMLDocumentBuilder based on {@link ESPDRequest} derived class input
@@ -17,7 +17,7 @@ public class XMLDocumentBuilder extends DocumentBuilder {
      * as an XML Document
      * 
      */
-    public XMLDocumentBuilder(ESPDRequest req) {
+    public XMLDocumentBuilderV1(ESPDRequest req) {
         super(req);
     }
 

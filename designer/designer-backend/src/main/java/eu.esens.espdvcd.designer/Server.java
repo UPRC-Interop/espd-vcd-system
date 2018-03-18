@@ -10,7 +10,6 @@ import eu.esens.espdvcd.model.ESPDResponse;
 
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.http.Part;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.logging.Logger;
 
