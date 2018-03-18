@@ -1,19 +1,9 @@
-version 'unspecified'
-
-apply plugin: 'java'
-
 sourceCompatibility = 1.8
-
-repositories {
-    mavenCentral()
-//    mavenLocal()
-    jcenter()
-}
 
 dependencies {
     compile project(':builder')
     compile project(':codelists')
     compile project(':model')
+
     compile 'com.sparkjava:spark-core:2.7.1'
-    testCompile group: 'junit', name: 'junit', version: '4.12'
 }

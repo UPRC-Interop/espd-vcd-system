@@ -1,7 +1,3 @@
-repositories {
-    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-}
-
 dependencies {
 	compile project(':builder')
     compile group: 'com.helger', name: 'ph-schematron', version: '5.0.1'

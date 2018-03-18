@@ -58,7 +58,7 @@ public class ESPDSchematronValidatorTest {
     public void testIsESPDRequestValidForEHF1() {
         // create ESPD request validator object for valid ESPD request and check if ESPD Request artifact is valid
         ArtefactValidator validatorForValidRequest = ValidatorFactory
-                .createESPDArtifactSchematronValidator(aValidESPDRequest, "/rules/v1/ehf/ESPDRequest/EHF-ESPD-REQUEST.sch");
+                .createESPDArtefactSchematronValidator(aValidESPDRequest, "/rules/v1/ehf/ESPDRequest/EHF-ESPD-REQUEST.sch");
         Assert.assertTrue(validatorForValidRequest.isValid());
     }
 
@@ -66,7 +66,7 @@ public class ESPDSchematronValidatorTest {
     public void testIsESPDResponseValidForEHF1() {
         // Create ESPD response validator object for a valid ESPD response and check if ESPD response artifact is valid
         ArtefactValidator validatorForValidResponse = ValidatorFactory
-                .createESPDArtifactSchematronValidator(aValidESPDResponse, "/rules/v1/ehf/ESPDResponse/EHF-ESPD-RESPONSE.sch");
+                .createESPDArtefactSchematronValidator(aValidESPDResponse, "/rules/v1/ehf/ESPDResponse/EHF-ESPD-RESPONSE.sch");
         Assert.assertTrue(validatorForValidResponse.isValid());
     }
 
@@ -74,7 +74,7 @@ public class ESPDSchematronValidatorTest {
     public void testIsESPDRequestValidForEU1() {
         // create ESPD request validator object for valid ESPD request and check if ESPD Request artifact is valid
         ArtefactValidator validatorForValidRequest = ValidatorFactory
-                .createESPDArtifactSchematronValidator(aValidESPDRequest, "/rules/v1/eu/ESPDRequest/sch/02-ESPD-CL-attrb-rules.sch");
+                .createESPDArtefactSchematronValidator(aValidESPDRequest, "/rules/v1/eu/ESPDRequest/sch/02-ESPD-CL-attrb-rules.sch");
         if (!validatorForValidRequest.isValid()){
             validatorForValidRequest.getValidationMessages().forEach(re -> System.out.printf("(%s) %s: %s => %s \n",re.getId(), re.getLocation(), re.getTest(), re.getText()));
         }
@@ -85,7 +85,7 @@ public class ESPDSchematronValidatorTest {
     public void testIsESPDResponseValidForEU1() {
         // Create ESPD response validator object for a valid ESPD response and check if ESPD response artifact is valid
         ArtefactValidator validatorForValidResponse = ValidatorFactory
-                .createESPDArtifactSchematronValidator(aValidESPDResponse, "/rules/v1/eu/ESPDResponse/sch/02-ESPD-CL-attrb-rules.sch");
+                .createESPDArtefactSchematronValidator(aValidESPDResponse, "/rules/v1/eu/ESPDResponse/sch/02-ESPD-CL-attrb-rules.sch");
         if (!validatorForValidResponse.isValid()){
             validatorForValidResponse
                     .getValidationMessages().forEach(re -> System.out.printf("(%s) %s: %s => %s \n",re.getId(), re.getLocation(), re.getTest(), re.getText()));
@@ -97,7 +97,7 @@ public class ESPDSchematronValidatorTest {
     public void testIsESPDRequestValidForEU2() {
         // create ESPD request validator object for valid ESPD request and check if ESPD Request artifact is valid
         ArtefactValidator validatorForValid2 = ValidatorFactory
-                .createESPDArtifactSchematronValidator(aValidESPDRequest, "/rules/v1/eu/ESPDRequest/sch/03-ESPD-ID-attrb-rules.sch");
+                .createESPDArtefactSchematronValidator(aValidESPDRequest, "/rules/v1/eu/ESPDRequest/sch/03-ESPD-ID-attrb-rules.sch");
         if (!validatorForValid2.isValid()){
             validatorForValid2
                     .getValidationMessages().forEach(re -> System.out.printf("(%s) %s: %s => %s \n",re.getId(), re.getLocation(), re.getTest(), re.getText()));
@@ -109,7 +109,7 @@ public class ESPDSchematronValidatorTest {
     public void testIsESPDResponseValidForEU2() {
         // Create ESPD response validator object for a valid ESPD response and check if ESPD response artifact is valid
         ArtefactValidator validatorForValidResponse = ValidatorFactory
-                .createESPDArtifactSchematronValidator(aValidESPDResponse, "/rules/v1/eu/ESPDResponse/sch/03-ESPD-ID-attrb-rules.sch");
+                .createESPDArtefactSchematronValidator(aValidESPDResponse, "/rules/v1/eu/ESPDResponse/sch/03-ESPD-ID-attrb-rules.sch");
         if (!validatorForValidResponse.isValid()){
             validatorForValidResponse
                     .getValidationMessages().forEach(re -> System.out.printf("(%s) %s: %s => %s \n",re.getId(), re.getLocation(), re.getTest(), re.getText()));
@@ -121,7 +121,7 @@ public class ESPDSchematronValidatorTest {
     public void testIsESPDRequestValidForEU3() {
         // create ESPD request validator object for valid ESPD request and check if ESPD Request artifact is valid
         ArtefactValidator validatorForValid3 = ValidatorFactory
-                .createESPDArtifactSchematronValidator(aValidESPDRequest, "/rules/v1/eu/ESPDRequest/sch/04-ESPD-Common-BR-rules.sch");
+                .createESPDArtefactSchematronValidator(aValidESPDRequest, "/rules/v1/eu/ESPDRequest/sch/04-ESPD-Common-BR-rules.sch");
         if (!validatorForValid3.isValid()){
             validatorForValid3
                     .getValidationMessages().forEach(re -> System.out.printf("(%s) %s: %s => %s \n",re.getId(), re.getLocation(), re.getTest(), re.getText()));
@@ -133,7 +133,7 @@ public class ESPDSchematronValidatorTest {
     public void testIsESPDResponseValidForEU3() {
         // Create ESPD response validator object for a valid ESPD response and check if ESPD response artifact is valid
         ArtefactValidator validatorForValidResponse = ValidatorFactory
-                .createESPDArtifactSchematronValidator(aValidESPDResponse, "/rules/v1/eu/ESPDResponse/sch/04-ESPD-Common-BR-rules.sch");
+                .createESPDArtefactSchematronValidator(aValidESPDResponse, "/rules/v1/eu/ESPDResponse/sch/04-ESPD-Common-BR-rules.sch");
         if (!validatorForValidResponse.isValid()){
             validatorForValidResponse
                     .getValidationMessages().forEach(re -> System.out.printf("(%s) %s: %s => %s \n",re.getId(), re.getLocation(), re.getTest(), re.getText()));
@@ -145,7 +145,7 @@ public class ESPDSchematronValidatorTest {
     public void testIsESPDResponseValidForEU4() {
         // Create ESPD response validator object for a valid ESPD response and check if ESPD response artifact is valid
         ArtefactValidator validatorForValidResponse = ValidatorFactory
-                .createESPDArtifactSchematronValidator(aValidESPDResponse, "/rules/v1/eu/ESPDResponse/sch/05-ESPD-Spec-BR-rules.sch");
+                .createESPDArtefactSchematronValidator(aValidESPDResponse, "/rules/v1/eu/ESPDResponse/sch/05-ESPD-Spec-BR-rules.sch");
         if (!validatorForValidResponse.isValid()){
             validatorForValidResponse
                     .getValidationMessages().forEach(re -> System.out.printf("(%s) %s: %s => %s \n",re.getId(), re.getLocation(), re.getTest(), re.getText()));

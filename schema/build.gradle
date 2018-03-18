@@ -13,10 +13,6 @@ buildscript {
     }
 }
 
-repositories {
-    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-}
-
 dependencies {
     compile("eu.europa.ec.grow.espd:exchange-model2:2.0.0-SNAPSHOT")
     compile group: 'eu.europa.ec.grow.espd', name: 'exchange-model', version: '1.0.2'

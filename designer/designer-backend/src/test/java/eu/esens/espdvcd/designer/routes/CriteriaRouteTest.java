@@ -7,6 +7,7 @@ import org.junit.Test;
 public class CriteriaRouteTest {
 
     private final CriteriaRoute criteriaRoute = new CriteriaRoute();
+
 //    @Before
 //    public void SetUp() throws Exception{
 //      Criteria criteria = new Criteria();
