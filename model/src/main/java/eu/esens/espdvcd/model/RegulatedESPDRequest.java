@@ -1,16 +1,20 @@
 package eu.esens.espdvcd.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import eu.esens.espdvcd.model.types.ESPDRequestModelType;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@JsonIgnoreProperties(value={ "selectionCriteriaList", "exclusionCriteriaList", "eorelatedCriteriaList", "reductionOfCandidatesCriteriaList" })//, allowGetters=true)
 
 /**
  * POJO implementation of {@link ESPDRequest}.
  *
  */
+
+
 public class RegulatedESPDRequest implements ESPDRequest {
 
     private static final long serialVersionUID = -8366478868586274094L;

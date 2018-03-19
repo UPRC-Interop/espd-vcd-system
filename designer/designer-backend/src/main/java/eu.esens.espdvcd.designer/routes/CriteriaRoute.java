@@ -18,6 +18,7 @@ public class CriteriaRoute {
     }
 
     public List<SelectableCriterion> getPredefinedCriteria() throws RetrieverException {
+
         return predefinedExtractor.getFullList();
     }
 

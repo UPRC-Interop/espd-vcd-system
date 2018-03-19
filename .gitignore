@@ -15,6 +15,7 @@ gradle.properties
 /persistence/logs/
 /.nb-gradle/
 /artifacts/
+.DS_Store
 
 **/out/
 

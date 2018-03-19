@@ -1,5 +1,6 @@
 package eu.esens.espdvcd.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -15,6 +16,9 @@ import java.util.UUID;
  *
  * Created by Ulf Lotzmann on 05/03/2016.
  */
+
+@JsonIgnoreProperties(ignoreUnknown=true)
+
 public class Criterion implements Serializable {
 
     private static final long serialVersionUID = 4541034499184281949L;

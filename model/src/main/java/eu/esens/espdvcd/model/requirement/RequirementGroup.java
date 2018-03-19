@@ -1,5 +1,6 @@
 package eu.esens.espdvcd.model.requirement;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import eu.esens.espdvcd.model.requirement.ruleset.RuleSet;
 
 import java.io.Serializable;
@@ -66,13 +67,11 @@ public class RequirementGroup implements Serializable {
     // condition for making this requirement group mandatory, e.g. GROUP_FULFILLED.ON_TRUE, GROUP_FULFILLED.ON_FALSE
     private String condition;
 
-
-
     public RequirementGroup(String ID) {
         this.ID = ID;
     }
     
-    public RequirementGroup(String ID, List<Requirement> requirements) {
+    public RequirementGroup(@JsonProperty("ID") String ID, @JsonProperty("requirements") List<Requirement> requirements) {
         this.ID = ID;
         this.requirements = requirements;
     }

@@ -1,5 +1,6 @@
 package eu.esens.espdvcd.model.requirement;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.requirement.response.Response;
 import eu.esens.espdvcd.model.requirement.response.DescriptionResponse;
@@ -32,7 +33,7 @@ public class ResponseRequirement extends RequestRequirement {
 
 
 
-    public ResponseRequirement(String ID, ResponseTypeEnum responseDataType, String description) {
+    public ResponseRequirement(@JsonProperty("ID") String ID,@JsonProperty("responseDataType") ResponseTypeEnum responseDataType,@JsonProperty("description") String description) {
         super(ID, responseDataType, description);
     }
 

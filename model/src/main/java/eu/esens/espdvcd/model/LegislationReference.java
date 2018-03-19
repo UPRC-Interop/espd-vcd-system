@@ -1,5 +1,7 @@
 package eu.esens.espdvcd.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.validation.constraints.NotNull;
 
 /**
@@ -75,7 +77,9 @@ public class LegislationReference {
      */
     protected String URI;
 
-    public LegislationReference(String title, String description, String jurisdictionLevelCode, String article, String URI) {
+    public LegislationReference(@JsonProperty("title") String title, @JsonProperty("desccription") String description,
+                                @JsonProperty("jurisdictionLevelCode") String jurisdictionLevelCode,
+                                @JsonProperty("article") String article, @JsonProperty("URI") String URI) {
         this.title = title;
         this.description = description;
         this.jurisdictionLevelCode = jurisdictionLevelCode;

@@ -1,5 +1,8 @@
 package eu.esens.espdvcd.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.time.LocalDate;
 import javax.validation.constraints.NotNull;
 
