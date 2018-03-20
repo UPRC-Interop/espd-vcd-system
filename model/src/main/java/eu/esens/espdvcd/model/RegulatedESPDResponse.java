@@ -31,6 +31,7 @@ public class RegulatedESPDResponse extends RegulatedESPDRequest implements ESPDR
         return null;
     }
 
+    @JsonIgnore
     @Override
     public ESPDResponseType getEspdResponseType() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -42,7 +43,6 @@ public class RegulatedESPDResponse extends RegulatedESPDRequest implements ESPDR
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @JsonIgnore
     @Override
     public void setESPDRequestDetails(ESPDRequestDetails espdRequestDetails) {
         this.espdRequestDetails = espdRequestDetails;
