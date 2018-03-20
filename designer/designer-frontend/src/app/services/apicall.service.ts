@@ -14,6 +14,9 @@ export class ApicallService {
   getExclusionCriteria(){
     return this.http.get<any>("http://localhost:8080/api/criteriaList/predefined/exclusion").toPromise()
   }
+  getSelectionCriteria(){
+    return this.http.get<any>("http://localhost:8080/api/criteriaList/predefined/selection").toPromise()
+  }
 
 
 }

@@ -1,0 +1,66 @@
+<h4>Part IV: Selection Criteria</h4>
+<form #f="ngForm">
+  <mat-accordion multi="true">
+    <mat-expansion-panel expanded="true" *ngIf="selCriteria">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          A: Suitability
+        </mat-panel-title>
+        <mat-panel-description>
+
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="desc">
+        <h4>Article 58(2) of Directive 2014/24/EU sets out the following selection criteria </h4>
+      </div>
+      <mat-card *ngFor="let criteria of selCriteria">
+        <div class="exclusionCriteria" >
+
+          <div class="criteria">
+            <mat-checkbox color="primary">{{criteria.name}}</mat-checkbox>
+            <div class="critDesc">{{criteria.description}}</div>
+          </div>
+
+          <div class="eCertis">
+            <h5>eCertis Information ...</h5>
+            <div class="eCertDesc">no information...</div>
+          </div>
+        </div>
+      </mat-card>
+    </mat-expansion-panel>
+    <mat-expansion-panel expanded="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          B: Grounds relating to the payment of taxes or social security contributions
+        </mat-panel-title>
+        <mat-panel-description>
+
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+    </mat-expansion-panel>
+
+    <mat-expansion-panel expanded="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          C: Grounds relating to insolvency, conflicts of interests or professional misconduct
+        </mat-panel-title>
+        <mat-panel-description>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+    </mat-expansion-panel>
+    <mat-expansion-panel expanded="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          D: Purely national exclusion grounds
+        </mat-panel-title>
+        <mat-panel-description>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+    </mat-expansion-panel>
+  </mat-accordion>
+  <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+  <button type="submit" mat-raised-button color="primary" matStepperNext>Next</button>
+</form>

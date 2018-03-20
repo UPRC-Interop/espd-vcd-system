@@ -15,6 +15,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { ProcedureComponent } from './procedure/procedure.component';
 import { ExclusionComponent } from './exclusion/exclusion.component';
 import { ProcedureEoComponent } from './procedure-eo/procedure-eo.component';
+import { SelectionComponent } from './selection/selection.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { ProcedureEoComponent } from './procedure-eo/procedure-eo.component';
     WelcomeComponent,
     ProcedureComponent,
     ExclusionComponent,
-    ProcedureEoComponent
+    ProcedureEoComponent,
+    SelectionComponent
   ],
   imports: [
     BrowserModule,
