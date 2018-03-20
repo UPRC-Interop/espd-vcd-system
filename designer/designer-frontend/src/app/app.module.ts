@@ -3,7 +3,10 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import {FormsModule} from "@angular/forms";
+import {HttpClientModule} from '@angular/common/http';
 
+import {DataService} from "./services/data.service";
+import {ApicallService} from "./services/apicall.service"
 
 import { AppComponent } from './app.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
@@ -28,9 +31,10 @@ import { ProcedureEoComponent } from './procedure-eo/procedure-eo.component';
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [ApicallService, DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

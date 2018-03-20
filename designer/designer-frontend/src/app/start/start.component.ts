@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, NgForm} from "@angular/forms/forms";
+import {ApicallService} from "../services/apicall.service";
+import {DataService} from "../services/data.service";
 
 
 @Component({
@@ -9,9 +11,17 @@ import {FormControl, NgForm} from "@angular/forms/forms";
 })
 export class StartComponent implements OnInit {
 
-  constructor() { }
+  countries:Object=null;
+
+  constructor(private dataService:DataService) { }
 
   ngOnInit() {
+    // this.APIService.GETCountryList().then(res=>{console.log(res)}).catch(err=>{console.log(err)});
+    // this.APIService.requestCountryList();
+    // this.countries=this.APIService.getCountries();
+    // console.log(this.countries);
+    this.countries=this.dataService.getCountries();
+    console.log(this.countries);
   }
 
   isCA:boolean=false;
@@ -23,7 +33,7 @@ export class StartComponent implements OnInit {
   isCreateResponse:boolean=false;
   fileToUpload:File[] = [];
 
-  countries=["Greece", "Germany", "France"];
+  // countries=["Greece", "Germany", "France"];
 
   handleFileUpload(files:FileList) {
     console.log(files);
