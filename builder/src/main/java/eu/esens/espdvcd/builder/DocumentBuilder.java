@@ -86,7 +86,8 @@ public class DocumentBuilder {
             reqType.setIssueTime(new IssueTimeType());
             reqType.getIssueTime().setValue(xmlDate);
         } catch (DatatypeConfigurationException e) {
-            System.out.println("ERROR in DATES!");
+            //System.out.println("ERROR in DATES!");
+            Logger.getLogger(DocumentBuilder.class.getName()).log(Level.SEVERE, "Error in Issue Date or Time", e);
         }
 
         reqType.setProfileID(createBIIProfileIdType(getProfilID()));
@@ -114,7 +115,8 @@ public class DocumentBuilder {
             resType.setIssueTime(new IssueTimeType());
             resType.getIssueTime().setValue(xmlDate);
         } catch (DatatypeConfigurationException e) {
-            System.out.println("ERROR in DATES!");
+            //System.out.println("ERROR in DATES!");
+            Logger.getLogger(DocumentBuilder.class.getName()).log(Level.SEVERE, "Error in Issue Date or Time", e);
         }
 
         resType.setProfileID(createBIIProfileIdType(getProfilID()));

@@ -55,6 +55,13 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
         }
 
         resType.getAdditionalDocumentReference().add(extractCADetailsDocumentReferece(res.getCADetails()));
+
+        // 2018-03-20 UL: add capabilities to handle National Official Journal
+        DocumentReferenceType drt = extractCADetailsNationalDocumentReference(res.getCADetails());
+        if (drt != null) {
+            resType.getAdditionalDocumentReference().add(drt);
+        }
+
         resType.setContractingParty(extractContractingPartyType(res.getCADetails()));
         resType.getProcurementProjectLot().add(extractProcurementProjectLot(res.getEODetails()));
         resType.setServiceProviderParty(extractServiceProviderPartyType(res.getServiceProviderDetails()));
