@@ -11,9 +11,9 @@ import {DataService} from "../services/data.service";
 })
 export class StartComponent implements OnInit {
 
-  countries:Object=null;
+  countries:any;
 
-  constructor(private dataService:DataService) { }
+  constructor(private dataService:DataService, private APIService:ApicallService) { }
 
   ngOnInit() {
     // this.APIService.GETCountryList().then(res=>{console.log(res)}).catch(err=>{console.log(err)});
@@ -80,6 +80,10 @@ export class StartComponent implements OnInit {
 
   onStartSubmit(form:NgForm){
     console.log(form);
+    this.APIService.postFile(this.fileToUpload)
+      .then(res=>res)
+      .catch(err=>err);
+
   }
 
 }
