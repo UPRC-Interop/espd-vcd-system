@@ -1,7 +1,6 @@
 package eu.esens.espdvcd.model;
 
 import eu.esens.espdvcd.model.types.ESPDRequestModelType;
-import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -19,7 +18,6 @@ public class SimpleESPDRequest implements ESPDRequest {
     private Long id;
 
     private ESPDRequestModelType modelType = ESPDRequestModelType.ESPD_REQUEST_DRAFT;
-    private ESPDRequestType espdRequestType;
     private CADetails caDetails;
     private ServiceProviderDetails serviceProviderDetails;
     private List<SelectableCriterion> criterionList;
@@ -28,10 +26,7 @@ public class SimpleESPDRequest implements ESPDRequest {
     private static final String EXCLUSION_REGEXP = "^CRITERION.EXCLUSION.+";
     private static final String EO_RELATED_REGEXP = "(?!.*MEETS_THE_OBJECTIVE*)^CRITERION.OTHER.EO_DATA.+";
     private static final String REDUCTION_OF_CANDIDATES_REGEXP = "^CRITERION.OTHER.EO_DATA.MEETS_THE_OBJECTIVE*";   
-        
-    public SimpleESPDRequest() {
-        this.espdRequestType = new ESPDRequestType();
-    }
+
 
     @Override
     public Long getId() {
@@ -67,16 +62,6 @@ public class SimpleESPDRequest implements ESPDRequest {
     @Override
     public void setModelType(ESPDRequestModelType modelType) {
         this.modelType = modelType;
-    }
-
-    @Override
-    public ESPDRequestType getEspdRequestType() {
-        return espdRequestType;
-    }
-
-    @Override
-    public void setEspdRequestType(ESPDRequestType espdRequestType) {
-        this.espdRequestType = espdRequestType;
     }
 
     @Override
