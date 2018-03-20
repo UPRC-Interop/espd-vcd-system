@@ -11,12 +11,52 @@ export class ApicallService {
    return this.http.get<any>("http://localhost:8080/api/codelists/v2/countryID").toPromise()
   }
 
+
+  /* ============= EXCLUSION CRITERIA ===================*/
   getExclusionCriteria(){
     return this.http.get<any>("http://localhost:8080/api/criteriaList/predefined/exclusion").toPromise()
   }
+
+  getExclusionCriteria_A(){
+    return this.http.get<any>("http://localhost:8080/api/criteriaList/predefined/exclusion/conviction").toPromise()
+  }
+
+  getExclusionCriteria_B(){
+    return this.http.get<any>("http://localhost:8080/api/criteriaList/predefined/exclusion/contribution").toPromise()
+  }
+
+  getExclusionCriteria_C(){
+    return this.http.get<any>("http://localhost:8080/api/criteriaList/predefined/exclusion/insolvencyConflictsMisconduct").toPromise()
+  }
+
+  getExclusionCriteria_D(){
+    return this.http.get<any>("http://localhost:8080/api/criteriaList/predefined/exclusion/national").toPromise()
+  }
+
+  /* ============= SELECTION CRITERIA ===================*/
+
   getSelectionCriteria(){
     return this.http.get<any>("http://localhost:8080/api/criteriaList/predefined/selection").toPromise()
   }
+
+  getSelectionCriteria_A(){
+    return this.http.get<any>("http://localhost:8080/api/criteriaList/predefined/selection/suitability").toPromise()
+  }
+
+  getSelectionCriteria_B(){
+    return this.http.get<any>("http://localhost:8080/api/criteriaList/predefined/selection/economic").toPromise()
+  }
+
+  getSelectionCriteria_C(){
+    return this.http.get<any>("http://localhost:8080/api/criteriaList/predefined/selection/technical").toPromise()
+  }
+  getSelectionCriteria_D(){
+    return this.http.get<any>("http://localhost:8080/api/criteriaList/predefined/selection/quality").toPromise()
+  }
+
+
+
+
 
   postFile(filesToUpload: File[]) {
 

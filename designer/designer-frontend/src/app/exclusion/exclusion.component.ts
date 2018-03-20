@@ -8,15 +8,39 @@ import {ApicallService} from "../services/apicall.service";
 })
 export class ExclusionComponent implements OnInit {
 
-  exCriteria:any;
+  exlusionACriteria:any;
+  exlusionBCriteria:any;
+  exlusionCCriteria:any;
+  exlusionDCriteria:any;
 
   constructor(private APIService:ApicallService) { }
 
   ngOnInit() {
-    this.APIService.getExclusionCriteria()
+    this.APIService.getExclusionCriteria_A()
       .then(res=>{
-        this.exCriteria=res;
-        console.log(this.exCriteria);
+        this.exlusionACriteria=res;
+        // console.log(this.exlusionACriteria);
+      })
+      .catch(err=>{console.log(err)});
+
+    this.APIService.getExclusionCriteria_B()
+      .then(res=>{
+        this.exlusionBCriteria=res;
+        // console.log(this.exlusionBCriteria);
+      })
+      .catch(err=>{console.log(err)});
+
+    this.APIService.getExclusionCriteria_C()
+      .then(res=>{
+        this.exlusionCCriteria=res;
+        // console.log(this.exlusionCCriteria);
+      })
+      .catch(err=>{console.log(err)});
+
+    this.APIService.getExclusionCriteria_D()
+      .then(res=>{
+        this.exlusionDCriteria=res;
+        // console.log(this.exlusionDCriteria);
       })
       .catch(err=>{console.log(err)});
   }
