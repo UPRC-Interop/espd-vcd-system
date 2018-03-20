@@ -8,7 +8,6 @@ import eu.esens.espdvcd.codelist.CodelistsV2;
 import eu.esens.espdvcd.designer.routes.CriteriaRoute;
 import eu.esens.espdvcd.model.*;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.io.ByteArrayInputStream;
 import java.util.Collections;
@@ -24,8 +23,18 @@ public final class Server {
     private final static ObjectWriter ow = new ObjectMapper().findAndRegisterModules().writer().withDefaultPrettyPrinter();
     private final static ObjectMapper om = new ObjectMapper().findAndRegisterModules();
 
-    private static final String SELECTION_REGEXP = "^CRITERION.SELECTION.+";
     private static final String EXCLUSION_REGEXP = "^CRITERION.EXCLUSION.+";
+    private static final String EXCLUSION_CONVICTION_REGEXP = "^CRITERION.EXCLUSION.CONVICTIONS.+";
+    private static final String EXCLUSION_CONTRIBUTION_REGEXP = "^CRITERION.EXCLUSION.CONTRIBUTIONS.+";
+    private static final String EXCLUSION_SOCIAL_BUSINESS_MISCONDUCT_CONFLICT_REGEXP = "(^CRITERION.EXCLUSION.SOCIAL.+)|(^CRITERION.EXCLUSION.BUSINESS.+)|(^CRITERION.EXCLUSION.MISCONDUCT.+)|(^CRITERION.EXCLUSION.CONFLICT_OF_INTEREST.+)";
+    private static final String EXCLUSION_NATIONAL_REGEXP = "^CRITERION.EXCLUSION.NATIONAL.+";
+
+    private static final String SELECTION_REGEXP = "^CRITERION.SELECTION.+";
+    private static final String SELECTION_SUITABILITY_REGEXP = "^CRITERION.SELECTION.SUITABILITY.+";
+    private static final String SELECTION_ECONOMIC_REGEXP = "^CRITERION.SELECTION.ECONOMIC_FINANCIAL_STANDING.+";
+    private static final String SELECTION_TECHNICAL_REGEXP = "(?!.*CERTIFICATES*)^CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY.+";
+    private static final String SELECTION_CERTIFICATES_REGEXP = "^CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY.CERTIFICATES.+";
+
     private static final String EO_RELATED_REGEXP = "(?!.*MEETS_THE_OBJECTIVE*)^CRITERION.OTHER.EO_DATA.+";
     private static final String REDUCTION_OF_CANDIDATES_REGEXP = "^CRITERION.OTHER.EO_DATA.MEETS_THE_OBJECTIVE*";
 
@@ -194,17 +203,36 @@ public final class Server {
             });
 
             path("/criteriaList", () -> {
-                get("/ecertis", ((request, response) -> {
-                    return ow.writeValueAsString(criteriaRoute.getECertisCriteria());
-                }));
+                get("/ecertis", ((request, response) -> ow.writeValueAsString(criteriaRoute.getECertisCriteria())));
 
                 path("/predefined", () -> {
                     get("/", (request, response)
                             -> ow.writeValueAsString(criteriaRoute.getPredefinedCriteria()));
-
                     get("", (request, response)
                             -> ow.writeValueAsString(criteriaRoute.getPredefinedCriteria()));
 
+                    path("/selection", () -> {
+                        get("", (request, response) -> ow.writeValueAsString(filterCriteriaList(criteriaRoute.getPredefinedCriteria(), SELECTION_REGEXP)));
+                        get("/", (request, response) -> ow.writeValueAsString(filterCriteriaList(criteriaRoute.getPredefinedCriteria(), SELECTION_REGEXP)));
+                        get("/technical", (request, response) -> ow.writeValueAsString(filterCriteriaList(criteriaRoute.getPredefinedCriteria(), SELECTION_TECHNICAL_REGEXP)));
+                        get("/suitability", (request, response) -> ow.writeValueAsString(filterCriteriaList(criteriaRoute.getPredefinedCriteria(), SELECTION_SUITABILITY_REGEXP)));
+                        get("/quality", (request, response) -> ow.writeValueAsString(filterCriteriaList(criteriaRoute.getPredefinedCriteria(), SELECTION_CERTIFICATES_REGEXP)));
+                        get("/economic", (request, response) -> ow.writeValueAsString(filterCriteriaList(criteriaRoute.getPredefinedCriteria(), SELECTION_ECONOMIC_REGEXP)));
+                    });
+                    path("/exclusion", () -> {
+                        get("/", (request, response)
+                                -> ow.writeValueAsString(filterCriteriaList(criteriaRoute.getPredefinedCriteria(), EXCLUSION_REGEXP)));
+                        get("", (rsequest, response)
+                                -> ow.writeValueAsString(filterCriteriaList(criteriaRoute.getPredefinedCriteria(), EXCLUSION_REGEXP)));
+                        get("/contribution", (request, response)
+                                -> ow.writeValueAsString(filterCriteriaList(criteriaRoute.getPredefinedCriteria(), EXCLUSION_CONTRIBUTION_REGEXP)));
+                        get("/conviction", (request, response)
+                                -> ow.writeValueAsString(filterCriteriaList(criteriaRoute.getPredefinedCriteria(), EXCLUSION_CONVICTION_REGEXP)));
+                        get("/national", (request, response)
+                                -> ow.writeValueAsString(filterCriteriaList(criteriaRoute.getPredefinedCriteria(), EXCLUSION_NATIONAL_REGEXP)));
+                        get("/insolvencyConflictsMisconduct", (request, response)
+                                -> ow.writeValueAsString(filterCriteriaList(criteriaRoute.getPredefinedCriteria(), EXCLUSION_SOCIAL_BUSINESS_MISCONDUCT_CONFLICT_REGEXP)));
+                    });
                     get("/selection", (request, response)
                             -> ow.writeValueAsString(filterCriteriaList(criteriaRoute.getPredefinedCriteria(), SELECTION_REGEXP)));
 
@@ -297,12 +325,12 @@ public final class Server {
                     });
                     path("/selfContained", () -> {
                         get("/request", (rq, rsp) -> {
-                            ESPDRequest req = BuilderFactory.V2.getModelBuilder().createRegulatedESPDRequest();
+                            ESPDRequest req = BuilderFactory.V2.getModelBuilder().createSelfContainedESPDRequest();
                             return ow.writeValueAsString(req);
                         });
 
                         get("/response", (rq, rsp) -> {
-                            ESPDResponse req = BuilderFactory.V2.getModelBuilder().createRegulatedESPDResponse();
+                            ESPDResponse req = BuilderFactory.V2.getModelBuilder().createSelfContainedESPDResponse();
                             return ow.writeValueAsString(req);
                         });
 
