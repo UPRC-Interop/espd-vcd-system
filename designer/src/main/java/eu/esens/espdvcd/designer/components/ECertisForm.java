@@ -8,7 +8,7 @@ import com.vaadin.ui.VerticalLayout;
 import eu.esens.espdvcd.model.Criterion;
 import eu.esens.espdvcd.model.EODetails;
 import eu.esens.espdvcd.model.LegislationReference;
-import eu.esens.espdvcd.model.retriever.ECertisSelectableCriterion;
+import eu.esens.espdvcd.model.retriever.ECertisCriterion;
 import eu.esens.espdvcd.retriever.criteria.ECertisCriteriaExtractor;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import java.util.List;
@@ -54,9 +54,9 @@ public class ECertisForm extends VerticalLayout {
         ECertisCriteriaExtractor ce = new ECertisCriteriaExtractor();
 
         try {
-            List<ECertisSelectableCriterion> cList = ce.getNationalCriterionMapping(c.getID(), eoDetails.getPostalAddress().getCountryCode().toLowerCase());
+            List<ECertisCriterion> cList = ce.getNationalCriterionMapping(c.getID(), eoDetails.getPostalAddress().getCountryCode().toLowerCase());
             if (!cList.isEmpty()) {
-                ECertisSelectableCriterion ct = cList.get(0);
+                ECertisCriterion ct = cList.get(0);
 
                 JAXB.marshal(ct, System.out);
                 title.setCaption("National Criterion Title");

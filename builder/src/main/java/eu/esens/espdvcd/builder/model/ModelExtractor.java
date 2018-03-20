@@ -11,18 +11,21 @@ import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.Cr
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.LegislationType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementGroupType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementType;
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ContractingPartyType;
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.DocumentReferenceType;
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ExternalReferenceType;
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ServiceProviderPartyType;
+import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ContractFolderIDType;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.*;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ContractFolderIDType;
-
 public interface ModelExtractor {
 
     default CADetails extractCADetails(ContractingPartyType caParty,
-            ContractFolderIDType contractFolderId,
-            List<DocumentReferenceType> additionalDocumentReferenceList) {
+                                       ContractFolderIDType contractFolderId,
+                                       List<DocumentReferenceType> additionalDocumentReferenceList) {
 
         CADetails cd = new CADetails();
 
@@ -44,7 +47,6 @@ public interface ModelExtractor {
             if (caParty.getParty().getWebsiteURI() != null) {
                 cd.setWebSiteURI(caParty.getParty().getWebsiteURI().getValue());
             }
-
 
 
             if (caParty.getParty().getPostalAddress() != null) {
@@ -98,7 +100,6 @@ public interface ModelExtractor {
                 }
             }
         }
-
 
 
         if (contractFolderId != null && contractFolderId.getValue() != null) {
@@ -206,7 +207,7 @@ public interface ModelExtractor {
             if (rgType.getPi() != null)
                 rg.setCondition(rgType.getPi());
         }
-        
+
         if (rg != null) {
             List<Requirement> rList = rgType.getRequirement().stream()
                     .map(r -> extractRequirement(r))
