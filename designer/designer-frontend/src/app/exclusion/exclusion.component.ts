@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ApicallService} from "../services/apicall.service";
 
 @Component({
   selector: 'app-exclusion',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExclusionComponent implements OnInit {
 
-  constructor() { }
+  exCriteria:any;
+
+  constructor(private APIService:ApicallService) { }
 
   ngOnInit() {
+    this.APIService.getExclusionCriteria()
+      .then(res=>{
+        this.exCriteria=res;
+        console.log(this.exCriteria);
+      })
+      .catch(err=>{console.log(err)});
   }
 
 }

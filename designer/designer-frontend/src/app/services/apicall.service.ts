@@ -9,9 +9,11 @@ export class ApicallService {
 
   requestCountryList(){
    return this.http.get<any>("http://localhost:8080/api/codelists/v2/countryID").toPromise()
-
   }
 
+  getExclusionCriteria(){
+    return this.http.get<any>("http://localhost:8080/api/criteriaList/predefined/exclusion").toPromise()
+  }
 
 
 }
