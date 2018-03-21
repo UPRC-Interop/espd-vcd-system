@@ -5,32 +5,26 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import eu.esens.espdvcd.builder.model.ModelFactory;
 import eu.esens.espdvcd.codelist.Codelists;
-import eu.esens.espdvcd.model.LegislationReference;
 import eu.esens.espdvcd.model.SelectableCriterion;
+import eu.esens.espdvcd.model.retriever.ECertisCriterion;
 import eu.esens.espdvcd.model.retriever.ECertisCriterionImpl;
-import eu.esens.espdvcd.model.retriever.ECertisLegislationReference;
+import eu.esens.espdvcd.model.retriever.ECertisEvidenceGroup;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
-
-import eu.esens.espdvcd.model.retriever.ECertisEvidenceGroup;
-
-import eu.esens.espdvcd.model.retriever.ECertisCriterion;
 
 /**
  * @author konstantinos Raptis
@@ -139,11 +133,8 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
         initECertisCriterionList();
         initPredefinedCriterionList();
 
-        List<SelectableCriterion> lc
-                = predefinedCriterionList.stream()
-                .map(sc -> applyECertisData(sc))
-                .collect(Collectors.toList());
-        return lc;
+        predefinedCriterionList.forEach(this::applyECertisData);
+        return predefinedCriterionList;
     }
 
     @Override
@@ -161,12 +152,10 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
 
         Set<SelectableCriterion> initialSet = new LinkedHashSet<>();
         initialSet.addAll(initialList);
-        Set<SelectableCriterion> fullSet
-                = predefinedCriterionList.stream()
-                .map(sc -> applyECertisData(sc))
-                .collect(Collectors.toSet());
+        predefinedCriterionList.stream().forEach(sc -> applyECertisDataAsSelected(sc, addAsSelected));
+        Set<SelectableCriterion> fullSet = new HashSet<>(predefinedCriterionList);
         initialSet.addAll(fullSet);
-        System.out.println("Criterion List Size in model:" + initialSet.size());
+        Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.SEVERE, "Criterion List Size in model: " + initialSet.size());
         return new ArrayList<>(initialSet);
     }
 
@@ -249,13 +238,18 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
     }
 
     /**
-     *
-     *
      * @param sc The Selectable Criterion, in which the e-Certis data will be applied
      * @return
      */
-    private SelectableCriterion applyECertisData(final SelectableCriterion sc) {
+    private void applyECertisData(final SelectableCriterion sc) {
+        applyECertisDataAsSelected(sc, false);
+    }
 
+    /**
+     * @param sc The Selectable Criterion, in which the e-Certis data will be applied
+     * @param sc
+     */
+    private void applyECertisDataAsSelected(final SelectableCriterion sc, final boolean addAsSelected) {
         // find the equivalent criterion from e-Certis criteria map and (if exist)
         // use it in order to update current predefined criterion
         Optional.ofNullable(eCertisCriterionMap.get(sc.getID()))
@@ -263,8 +257,8 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
                     sc.setName(ec.getName());
                     sc.setDescription(ec.getDescription());
                     sc.setLegislationReference(ec.getLegislationReference());
+                    sc.setSelected(addAsSelected);
                 });
-        return sc;
     }
 
     // Get SubCriterion/s of a European Criterion by Country Code

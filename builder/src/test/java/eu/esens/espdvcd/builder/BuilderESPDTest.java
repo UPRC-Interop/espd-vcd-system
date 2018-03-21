@@ -1,11 +1,16 @@
 
 package eu.esens.espdvcd.builder;
 
+import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDResponse;
 
 import java.io.InputStream;
 
+import eu.esens.espdvcd.model.SimpleESPDRequest;
+import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
+import eu.esens.espdvcd.retriever.criteria.ECertisCriteriaExtractor;
+import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -120,4 +125,14 @@ public class BuilderESPDTest {
         Assert.assertEquals(originalEspdExclusionCriteriaCount, importedEspdExclusionCriteriaCount);
         Assert.assertNotEquals(originalCriteriaSelectedCount, importedEspdExclusionCriteriaSelectedCount);
     }
+
+    @Test
+    public void createSimpleESPDRequestAndApplyEcertisData() throws BuilderException, RetrieverException {
+
+        CriteriaExtractor extractor = new ECertisCriteriaExtractor();
+        ESPDRequest req = BuilderFactory.getModelBuilder().createESPDRequest();
+        req.setCriterionList(extractor.getFullList());
+        System.out.println(BuilderFactory.getDocumentBuilderFor(req).theXML);
+    }
+
 }

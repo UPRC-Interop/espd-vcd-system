@@ -4,6 +4,7 @@ import eu.esens.espdvcd.model.LegislationReference;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class ECertisCriteriaExtractorTest {
         extractor = new ECertisCriteriaExtractor();
     }
 
+    @Ignore
     @Test
     public void testPredefinedAndECertisCriteriaID() throws RetrieverException {
 
@@ -66,6 +68,20 @@ public class ECertisCriteriaExtractorTest {
     }
 
     @Test
+    public void testGetFullListTwice() throws RetrieverException {
+
+        long start1 = System.currentTimeMillis();
+        testGetFullList();
+        long end1 = System.currentTimeMillis();
+
+        long start2 = System.currentTimeMillis();
+        testGetFullList();
+        long end2 = System.currentTimeMillis();
+
+        System.out.println("First time: " + (end1 - start1) + " msecs");
+        System.out.println("Second time: " + (end2 - start2) + " msecs");
+    }
+
     public void testGetFullList() throws RetrieverException {
 
         List<SelectableCriterion> criteriaList = extractor.getFullList();
