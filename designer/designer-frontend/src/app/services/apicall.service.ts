@@ -6,12 +6,17 @@ import {Country} from "../model/country.model";
 @Injectable()
 export class ApicallService {
 
+  /* ============ CODELISTS =============*/
+
   constructor(private http:HttpClient) {}
 
-  requestCountryList(){
+  getCountryList(){
    return this.http.get<Country[]>("http://localhost:8080/api/codelists/v2/countryID").toPromise()
   }
 
+  getProcedureType(){
+    return this.http.get<any>("http://localhost:8080/api/codelists/v2/procedureType").toPromise()
+  }
 
   /* ============= EXCLUSION CRITERIA ===================*/
   getExclusionCriteria(){
@@ -59,6 +64,7 @@ export class ApicallService {
 
 
 
+
   postFile(filesToUpload: File[]) {
 
     const formData: FormData = new FormData();
@@ -69,7 +75,7 @@ export class ApicallService {
     // const header = new HttpHeaders({'Content-Type':'application/xml; charset=utf-8'});
     let header = new HttpHeaders();
     header = header.set('Content-Type', 'application/xml; charset=utf-8');
-    return this.http.post<any>("http://localhost:8080/api/espd/v1/request", formData, {headers:header}).toPromise();
+    return this.http.post<any>("http://localhost:8080/api/espd/v1/request", formData).toPromise();
 
   }
 
