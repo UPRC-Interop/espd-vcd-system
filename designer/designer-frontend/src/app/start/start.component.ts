@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, NgForm} from "@angular/forms/forms";
 import {ApicallService} from "../services/apicall.service";
 import {DataService} from "../services/data.service";
+import {Country} from "../model/country.model";
 
 
 @Component({
@@ -11,7 +12,7 @@ import {DataService} from "../services/data.service";
 })
 export class StartComponent implements OnInit {
 
-  countries:any;
+  countries:Country[];
 
   constructor(private dataService:DataService, private APIService:ApicallService) { }
 
@@ -20,8 +21,12 @@ export class StartComponent implements OnInit {
     // this.APIService.requestCountryList();
     // this.countries=this.APIService.getCountries();
     // console.log(this.countries);
-    this.countries=this.dataService.getCountries();
-    console.log(this.countries);
+    this.dataService.getCountries()
+      .then(res=>{
+        this.countries=res;
+        console.log("this is from start component"); console.log(res);
+      })
+      .catch(err=>{console.log(err)});
   }
 
   isCA:boolean=false;

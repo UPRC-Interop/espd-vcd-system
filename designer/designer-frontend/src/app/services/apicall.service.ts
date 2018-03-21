@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import 'rxjs/add/operator/toPromise';
+import {Country} from "../model/country.model";
 
 @Injectable()
 export class ApicallService {
@@ -8,7 +9,7 @@ export class ApicallService {
   constructor(private http:HttpClient) {}
 
   requestCountryList(){
-   return this.http.get<any>("http://localhost:8080/api/codelists/v2/countryID").toPromise()
+   return this.http.get<Country[]>("http://localhost:8080/api/codelists/v2/countryID").toPromise()
   }
 
 
