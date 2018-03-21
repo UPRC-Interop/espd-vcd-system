@@ -5,13 +5,14 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import eu.esens.espdvcd.builder.BuilderFactory;
 import eu.esens.espdvcd.codelist.CodelistsV1;
 import eu.esens.espdvcd.codelist.CodelistsV2;
+import eu.esens.espdvcd.designer.models.CodelistItem;
 import eu.esens.espdvcd.designer.routes.CriteriaRoute;
 import eu.esens.espdvcd.model.*;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import javax.servlet.MultipartConfigElement;
+import javax.servlet.http.Part;
 import java.io.ByteArrayInputStream;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -73,7 +74,12 @@ public final class Server {
 
                     get("/countryID", (request, response) -> {
                         String lang = request.queryParams("lang");
-                        return ow.writeValueAsString(CodelistsV2.CountryIdentification.getDataMap(lang));
+                        Map<String, String> countries = CodelistsV2.CountryIdentification.getDataMap(lang);
+                        List<CodelistItem> codelistItems = new ArrayList<>(countries.size());
+                        countries.forEach((key, value)->{
+                            codelistItems.add(new CodelistItem(key,value));
+                        });
+                        return ow.writeValueAsString(codelistItems);
                     });
 
                     get("/procedureType", (request, response) -> {
@@ -262,42 +268,50 @@ public final class Server {
                     });
 
                     post("/request", (rq, rsp) -> {
-
-                        switch (rq.contentType()) {
-                            case "application/json":
-                                ESPDRequest espdRequest = om.readValue(rq.body(), RegulatedESPDRequest.class);
-                                return BuilderFactory.V1.getDocumentBuilderFor(espdRequest).getAsInputStream();
-                            case "text/xml":
-                            case "application/xml":
-//                        MultipartConfigElement multipartConfigElement = new MultipartConfigElement("file-uploads", 1000000000, 1000000000, 100);
-//                        rq.raw().setAttribute("org.eclipse.jetty.multipartConfig", multipartConfigElement);
-//                        Collection<Part> parts = rq.raw().getParts();
-//                        ESPDRequest req = BuilderFactory.V1.getModelBuilder().importFrom(parts.iterator().next().getInputStream()).createRegulatedESPDRequest();
-                                ESPDRequest req = BuilderFactory.V1.getModelBuilder().importFrom(new ByteArrayInputStream(rq.bodyAsBytes())).createRegulatedESPDRequest();
+                        if (rq.contentType().equals("application/json")) {
+                            ESPDRequest espdRequest = om.readValue(rq.body(), RegulatedESPDRequest.class);
+                            return BuilderFactory.V1.getDocumentBuilderFor(espdRequest).getAsInputStream();
+                        }else if (rq.contentType().contains("multipart/form-data")) {
+                            MultipartConfigElement multipartConfigElement = new MultipartConfigElement("file-uploads", 1000000000, 1000000000, 100);
+                            rq.raw().setAttribute("org.eclipse.jetty.multipartConfig", multipartConfigElement);
+                            Collection<Part> parts = rq.raw().getParts();
+                            if(parts.iterator().hasNext()){
+                                ESPDRequest req = BuilderFactory.V1.getModelBuilder().importFrom(parts.iterator().next().getInputStream()).createRegulatedESPDRequest();
                                 return ow.writeValueAsString(req);
-                            default:
+                            }else {
                                 rsp.status(400);
-                                return "Invalid request";
+                                return "Bad request";
+                            }
+                        }else if( rq.contentType().equals("application/xml")){
+                            ESPDRequest req = BuilderFactory.V1.getModelBuilder().importFrom(new ByteArrayInputStream(rq.bodyAsBytes())).createRegulatedESPDRequest();
+                            return ow.writeValueAsString(req);
+                        }else {
+                            rsp.status(400);
+                            return "Bad request";
                         }
-
                     });
 
                     post("/response", (rq, rsp) -> {
-//                    MultipartConfigElement multipartConfigElement = new MultipartConfigElement("file-uploads", 1000000000, 1000000000, 100);
-//                    rq.raw().setAttribute("org.eclipse.jetty.multipartConfig", multipartConfigElement);
-//                    Collection<Part> parts = rq.raw().getParts();
-//                    ESPDResponse resp = BuilderFactory.V1.getModelBuilder().importFrom(parts.iterator().next().getInputStream()).createRegulatedESPDResponse();
-                        switch (rq.contentType()) {
-                            case "application/json":
-                                ESPDResponse espdResponse = om.readValue(rq.body(), RegulatedESPDResponse.class);
-                                return BuilderFactory.V1.getDocumentBuilderFor(espdResponse).getAsInputStream();
-                            case "text/xml":
-                            case "application/xml":
-                                ESPDResponse resp = BuilderFactory.V1.getModelBuilder().importFrom(new ByteArrayInputStream(rq.bodyAsBytes())).createRegulatedESPDResponse();
+                        if (rq.contentType().equals("application/json")) {
+                            ESPDResponse espdResponse = om.readValue(rq.body(), RegulatedESPDResponse.class);
+                            return BuilderFactory.V1.getDocumentBuilderFor(espdResponse).getAsInputStream();
+                        }else if(rq.contentType().contains("multipart/form-data")) {
+                            MultipartConfigElement multipartConfigElement = new MultipartConfigElement("file-uploads", 1000000000, 1000000000, 100);
+                            rq.raw().setAttribute("org.eclipse.jetty.multipartConfig", multipartConfigElement);
+                            Collection<Part> parts = rq.raw().getParts();
+                            if (parts.iterator().hasNext()){
+                                ESPDResponse resp = BuilderFactory.V1.getModelBuilder().importFrom(parts.iterator().next().getInputStream()).createRegulatedESPDResponse();
                                 return ow.writeValueAsString(resp);
-                            default:
+                            } else {
                                 rsp.status(400);
-                                return "Invalid request";
+                                return "Bad request";
+                            }
+                        }else if(rq.contentType().equals("application/xml")) {
+                            ESPDResponse resp = BuilderFactory.V1.getModelBuilder().importFrom(new ByteArrayInputStream(rq.bodyAsBytes())).createRegulatedESPDResponse();
+                            return ow.writeValueAsString(resp);
+                        }else {
+                            rsp.status(400);
+                            return "Bad request";
                         }
                     });
 
@@ -316,11 +330,11 @@ public final class Server {
                         });
 
                         post("/request", (rq, rsp) -> {
-                            throw new NotImplementedException();
+                            throw new UnsupportedOperationException("Not yet implemented");
                         });
 
                         post("/response", (rq, rsp) -> {
-                            throw new NotImplementedException();
+                            throw new UnsupportedOperationException("Not yet implemented");
                         });
                     });
                     path("/selfContained", () -> {
@@ -335,11 +349,11 @@ public final class Server {
                         });
 
                         post("/request", (rq, rsp) -> {
-                            throw new NotImplementedException();
+                            throw new UnsupportedOperationException("Not yet implemented");
                         });
 
                         post("/response", (rq, rsp) -> {
-                            throw new NotImplementedException();
+                            throw new UnsupportedOperationException("Not yet implemented");
                         });
                     });
 

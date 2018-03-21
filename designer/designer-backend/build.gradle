@@ -11,4 +11,4 @@ dependencies {
     compile 'com.sparkjava:spark-core:2.7.1'
 }
 
-mainClassName='eu.esens.espdvcd.designer.designer-backend.Server'
+mainClassName='eu.esens.espdvcd.designer.Server'
