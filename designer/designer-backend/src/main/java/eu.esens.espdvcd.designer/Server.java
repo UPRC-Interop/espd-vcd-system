@@ -24,10 +24,15 @@ public final class Server {
     private final static ObjectWriter ow = new ObjectMapper().findAndRegisterModules().writer().withDefaultPrettyPrinter();
     private final static ObjectMapper om = new ObjectMapper().findAndRegisterModules();
 
+    private final static Map<String, List<CodelistItem>> codelistsMap = new LinkedHashMap<>();
+
     private static final String EXCLUSION_REGEXP = "^CRITERION.EXCLUSION.+";
     private static final String EXCLUSION_CONVICTION_REGEXP = "^CRITERION.EXCLUSION.CONVICTIONS.+";
     private static final String EXCLUSION_CONTRIBUTION_REGEXP = "^CRITERION.EXCLUSION.CONTRIBUTIONS.+";
-    private static final String EXCLUSION_SOCIAL_BUSINESS_MISCONDUCT_CONFLICT_REGEXP = "(^CRITERION.EXCLUSION.SOCIAL.+)|(^CRITERION.EXCLUSION.BUSINESS.+)|(^CRITERION.EXCLUSION.MISCONDUCT.+)|(^CRITERION.EXCLUSION.CONFLICT_OF_INTEREST.+)";
+    private static final String EXCLUSION_SOCIAL_BUSINESS_MISCONDUCT_CONFLICT_REGEXP = "(^CRITERION.EXCLUSION.SOCIAL.+)|" +
+            "(^CRITERION.EXCLUSION.BUSINESS.+)|" +
+            "(^CRITERION.EXCLUSION.MISCONDUCT.+)|" +
+            "(^CRITERION.EXCLUSION.CONFLICT_OF_INTEREST.+)";
     private static final String EXCLUSION_NATIONAL_REGEXP = "^CRITERION.EXCLUSION.NATIONAL.+";
 
     private static final String SELECTION_REGEXP = "^CRITERION.SELECTION.+";
@@ -70,116 +75,29 @@ public final class Server {
 
             path("/codelists", () -> {
                 path("/v2", () -> {
-                    get("/languageCodeEU", (request, response) -> ow.writeValueAsString(CodelistsV2.LanguageCodeEU.getDataMap()));
-
-                    get("/countryID", (request, response) -> {
+                    get("/:codelist", (request, response) ->
+                    {
+                        String codelistName = request.params("codelist");
                         String lang = request.queryParams("lang");
-                        Map<String, String> countries = CodelistsV2.CountryIdentification.getDataMap(lang);
-                        List<CodelistItem> codelistItems = new ArrayList<>(countries.size());
-                        countries.forEach((key, value)->{
-                            codelistItems.add(new CodelistItem(key,value));
-                        });
-                        return ow.writeValueAsString(codelistItems);
-                    });
-
-                    get("/procedureType", (request, response) -> {
-                        String lang = request.queryParams("lang");
-                        return ow.writeValueAsString(CodelistsV2.ProcedureType.getDataMap(lang));
-                    });
-
-                    get("/projectType", (request, response) -> {
-                        String lang = request.queryParams("lang");
-                        return ow.writeValueAsString(CodelistsV2.ProjectType.getDataMap(lang));
-                    });
-
-                    get("/bidType", (request, response) -> {
-                        String lang = request.queryParams("lang");
-                        return ow.writeValueAsString(CodelistsV2.BidType.getDataMap(lang));
-                    });
-
-                    get("/confidentialityLevel", (request, response) -> {
-                        String lang = request.queryParams("lang");
-                        return ow.writeValueAsString(CodelistsV2.ConfidentialityLevel.getDataMap(lang));
-                    });
-
-                    get("/criterionElementType", (request, response) -> {
-                        String lang = request.queryParams("lang");
-                        return ow.writeValueAsString(CodelistsV2.CriterionElementType.getDataMap(lang));
-                    });
-
-                    get("/currency", (request, response) -> {
-                        String lang = request.queryParams("lang");
-                        return ow.writeValueAsString(CodelistsV2.Currency.getDataMap(lang));
-                    });
-
-                    get("/documentReferenceContentType", (request, response) -> {
-                        String lang = request.queryParams("lang");
-                        return ow.writeValueAsString(CodelistsV2.DocumentReferenceContentType.getDataMap(lang));
-                    });
-
-                    get("/EOIDType", (request, response) -> {
-                        String lang = request.queryParams("lang");
-                        return ow.writeValueAsString(CodelistsV2.EOIDType.getDataMap(lang));
-                    });
-
-                    get("/EOIndustryClassification", (request, response) -> {
-                        String lang = request.queryParams("lang");
-                        return ow.writeValueAsString(CodelistsV2.EOIndustryClassification.getDataMap(lang));
-                    });
-
-                    get("/EORoleType", (request, response) -> {
-                        String lang = request.queryParams("lang");
-                        return ow.writeValueAsString(CodelistsV2.EORoleType.getDataMap(lang));
-                    });
-
-                    get("/evaluationMethodType", (request, response) -> {
-                        String lang = request.queryParams("lang");
-                        return ow.writeValueAsString(CodelistsV2.EvaluationMethodType.getDataMap(lang));
-                    });
-
-                    get("/financialRatioType", (request, response) -> {
-                        String lang = request.queryParams("lang");
-                        return ow.writeValueAsString(CodelistsV2.FinancialRatioType.getDataMap(lang));
-                    });
-
-                    get("/legislationType", (request, response) -> {
-                        String lang = request.queryParams("lang");
-                        return ow.writeValueAsString(CodelistsV2.LegislationType.getDataMap(lang));
-                    });
-
-                    get("/periodMeasureType", (request, response) -> {
-                        String lang = request.queryParams("lang");
-                        return ow.writeValueAsString(CodelistsV2.PeriodMeasureType.getDataMap(lang));
-                    });
-
-                    get("/profileExecutionID", (request, response) -> {
-                        String lang = request.queryParams("lang");
-                        return ow.writeValueAsString(CodelistsV2.ProfileExecutionID.getDataMap(lang));
-                    });
-
-                    get("/propertyGroupType", (request, response) -> {
-                        String lang = request.queryParams("lang");
-                        return ow.writeValueAsString(CodelistsV2.PropertyGroupType.getDataMap(lang));
-                    });
-
-                    get("/qualificationApplicationType", (request, response) -> {
-                        String lang = request.queryParams("lang");
-                        return ow.writeValueAsString(CodelistsV2.QualificationApplicationType.getDataMap(lang));
-                    });
-
-                    get("/responseDataType", (request, response) -> {
-                        String lang = request.queryParams("lang");
-                        return ow.writeValueAsString(CodelistsV2.ResponseDataType.getDataMap(lang));
-                    });
-
-                    get("/servicesProjectSubType", (request, response) -> {
-                        String lang = request.queryParams("lang");
-                        return ow.writeValueAsString(CodelistsV2.ServicesProjectSubType.getDataMap(lang));
-                    });
-
-                    get("/technicalCapabilityType", (request, response) -> {
-                        String lang = request.queryParams("lang");
-                        return ow.writeValueAsString(CodelistsV2.TechnicalCapabilityType.getDataMap(lang));
+                        if(codelistsMap.containsKey(codelistName)) {
+                            LOGGER.info("Got cached codelist.");
+                            return ow.writeValueAsString(codelistsMap.get(codelistName));
+                        }
+                        else {
+                            try{
+                                Map<String,String> theCodelistMap = CodelistsV2.valueOf(codelistName).getDataMap(lang);
+                                List<CodelistItem> theCodelistList = new ArrayList<>(theCodelistMap.size());
+                                theCodelistMap.forEach((key, value)->{
+                                    theCodelistList.add(new CodelistItem(key,value));
+                                });
+                                codelistsMap.putIfAbsent(codelistName, theCodelistList);
+                                return ow.writeValueAsString(theCodelistList);
+                            }
+                            catch(IllegalArgumentException e){
+                                response.status(404);
+                                return "CodeList not found";
+                            }
+                        }
                     });
                 });
 
@@ -282,7 +200,7 @@ public final class Server {
                                 rsp.status(400);
                                 return "Bad request";
                             }
-                        }else if( rq.contentType().equals("application/xml")){
+                        }else if(rq.contentType().equals("application/xml")){
                             ESPDRequest req = BuilderFactory.V1.getModelBuilder().importFrom(new ByteArrayInputStream(rq.bodyAsBytes())).createRegulatedESPDRequest();
                             return ow.writeValueAsString(req);
                         }else {
