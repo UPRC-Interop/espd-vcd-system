@@ -15,14 +15,15 @@ export class DataService {
       return Promise.resolve(this.countries);
     } else {
       return this.APIService.requestCountryList()
-        .then(res=>{
-          this.countries=res;
-          // return res;
-          return Promise.resolve(this.countries);
+        .then( res => {
+          this.countries = res;
+          return Promise.resolve(res);
         })
-        .catch(err=>{console.log(err);});
+        .catch(err =>
+         {
+           console.log(err);
+           return Promise.reject(err);
+         });
     }
-
-
   }
 }

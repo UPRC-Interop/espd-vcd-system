@@ -21,7 +21,7 @@ export class StartComponent implements OnInit {
     // this.APIService.requestCountryList();
     // this.countries=this.APIService.getCountries();
     // console.log(this.countries);
-    this.countries=this.dataService.getCountries()
+    this.dataService.getCountries()
       .then(res=>{
         this.countries=res;
         console.log("this is from start component"); console.log(res);
