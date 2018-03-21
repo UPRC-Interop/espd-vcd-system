@@ -10,16 +10,19 @@ export class DataService {
   constructor(private APIService:ApicallService) { }
 
 
-  getCountries():Country[]{
-    this.APIService.requestCountryList()
-      .then(res=>{
-        this.countries=res;
-        // return this.countries;
-       if(this.countries) {
-         return this.countries;
-       }
-      })
-      .catch(err=>{console.log(err); return this.countries;});
+  getCountries():Promise<Country[]>{
+    if(this.countries!= null) {
+      return Promise.resolve(this.countries);
+    } else {
+      return this.APIService.requestCountryList()
+        .then(res=>{
+          this.countries=res;
+          // return res;
+          return Promise.resolve(this.countries);
+        })
+        .catch(err=>{console.log(err);});
+    }
+
 
   }
 }
