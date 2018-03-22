@@ -16,18 +16,18 @@ public interface ESPDResponse extends ESPDRequest,Serializable {
      * 
      * @return the EO Details assigned to the ESPD Response Object 
      */
-    public EODetails getEODetails();
+    EODetails getEODetails();
     
     /**
      * 
      * @param eoDetails the {@link EODetails} to be assigned to the ESPD Response
      * Object.
      */
-    public void setEODetails(EODetails eoDetails);
+    void setEODetails(EODetails eoDetails);
     /**
      * @return The {@link ESPDResponseType} of the {@link ESPDResponse}.
      */
-    public ESPDResponseType getEspdResponseType();
+    ESPDResponseType getEspdResponseType();
 
     /**
      * @param espdResponseType
@@ -38,5 +38,15 @@ public interface ESPDResponse extends ESPDRequest,Serializable {
      * @return list of {@link URL} of the {@link ESPDResponse}.
      */
     List<URL> getExternalDocuments();
+
+    /**
+     * @param espdRequestDetails the (@link ESPDReqeustDetails) linked to this ESPD Response
+     */
+    void setESPDRequestDetails(ESPDRequestDetails espdRequestDetails);
+
+    /**
+     * @return the (@link ESPDReqeustDetails) linked to this ESPD Response
+     */
+    ESPDRequestDetails getESPDRequestDetails();
 
 }

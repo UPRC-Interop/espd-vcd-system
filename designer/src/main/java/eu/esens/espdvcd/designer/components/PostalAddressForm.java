@@ -52,15 +52,24 @@ public class PostalAddressForm extends Panel {
         columnB.setMargin(false);
 
         addressLine1.setPlaceholder("Address line");
-        addressLine1.setWidth(400, Unit.PIXELS);
+        //addressLine1.setWidth(400, Unit.PIXELS);
 
         city.setPlaceholder("City");
-        city.setWidth(400, Unit.PIXELS);
+        //city.setWidth(400, Unit.PIXELS);
 
         postCode.setPlaceholder("Post code");
-        postCode.setWidth(400, Unit.PIXELS);
+        //postCode.setWidth(400, Unit.PIXELS);
 
         countryCode.setPlaceholder("Select country");
-        countryCode.setWidth(300, Unit.PIXELS);
+        //countryCode.setWidth(300, Unit.PIXELS);
+
+        addressLine1.setWidth("17em");
+        //addressLine1.setStyleName("textFieldCaptionText");
+        city.setWidth("17em");
+        //city.setStyleName("textFieldCaptionText");
+        postCode.setWidth("17em");
+        //postCode.setStyleName("textFieldCaptionText");
+        countryCode.setWidth("17em");
+        //countryCode.setStyleName("textFieldCaptionText");
     }
 }

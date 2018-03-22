@@ -10,17 +10,7 @@ import java.util.UUID;
 
 /**
  *
- * documentation scheme of data fields:
- * <p>
- * name
- * <p>
- * descr
- * <p>
- * Data type: <br>
- * Cardinality: <br>
- * InfReqID: <br>
- * BusReqID: <br>
- * UBL syntax path: <br>
+ * Criterion
  *
  *
  * Created by Ulf Lotzmann on 05/03/2016.
@@ -39,12 +29,12 @@ public class Criterion implements Serializable {
      * <p>
      * Data type: Identifier<br>
      * Cardinality: 1..1<br>
-     * InfReqID: tir92-070<br>
-     * BusReqID: tbr92-015<br>
+     * InfReqID: tir70-060, tir92-070<br>
+     * BusReqID: tbr70-010, tbr70-009, tbr92-015, tbr92-016<br>
      * UBL syntax path: ccv:Criterion.ID<br>
      */
     @NotNull
-    private String ID;
+    protected String ID;
 
     /**
      * Criterion type code
@@ -52,13 +42,13 @@ public class Criterion implements Serializable {
      * Code specifying the type of criterion.
      * <p>
      * Data type: Code<br>
-     * Cardinality: 1..n - Remark: strings separated with delimiter TODO<br>
-     * InfReqID: tir92-071<br>
-     * BusReqID: tbr92-015<br>
+     * Cardinality: 1..n - Remark: strings separated with delimiter<br>
+     * InfReqID: tir70-061, tir92-071<br>
+     * BusReqID: tbr70-013, tbr92-015, tbr92-016<br>
      * UBL syntax path: ccv:Criterion.TypeCode<br>
      */
     @NotNull
-    private String typeCode;
+    protected String typeCode;
 
     /**
      * Criterion name
@@ -69,11 +59,11 @@ public class Criterion implements Serializable {
      * <p>
      * Data type: Text<br>
      * Cardinality: 0..1<br>
-     * InfReqID: tir92-072<br>
-     * BusReqID: tbr92-015<br>
+     * InfReqID: tir70-062, tir92-072<br>
+     * BusReqID: tbr70-010, tbr70-009, tbr92-015, tbr92-016<br>
      * UBL syntax path: ccv:Criterion.Name<br>
      */
-    private String name;
+    protected String name;
 
     /**
      * Criterion description
@@ -82,11 +72,11 @@ public class Criterion implements Serializable {
      * <p>
      * Data type: Text<br>
      * Cardinality:	0..1<br>
-     * InfReqID: tir92-073<br>
-     * BusReqID: tbr92-015<br>
+     * InfReqID: tir70-063, tir92-073<br>
+     * BusReqID: tbr70-010, tbr70-009, tbr92-015, tbr92-016<br>
      * UBL syntax path: ccv:Criterion.Description<br>
      */
-    private String description;
+    protected String description;
 
     /**
      * Criterion legislation
@@ -97,7 +87,7 @@ public class Criterion implements Serializable {
      * BusReqID:<br>
      * UBL syntax path: ccv:Criterion.LegislationReference<br>
      */
-    private LegislationReference legislationReference;
+    protected LegislationReference legislationReference;
 
     /**
      * Requirement group
@@ -108,7 +98,7 @@ public class Criterion implements Serializable {
      * BusReqID:<br>
      * UBL syntax path: ccv:Criterion.RequirementGroup<br>
      */
-    private List<RequirementGroup> requirementGroups;
+    protected List<RequirementGroup> requirementGroups;
 
     /** */
     public Criterion() {
@@ -219,13 +209,8 @@ public class Criterion implements Serializable {
             return false;
         }
         final Criterion other = (Criterion) obj;
-                            
-        if (!Objects.equals(this.ID, other.ID)) {
 
-            return false;
-        }
-                
-        return true;
+        return Objects.equals(this.ID, other.ID);
     }
     
     

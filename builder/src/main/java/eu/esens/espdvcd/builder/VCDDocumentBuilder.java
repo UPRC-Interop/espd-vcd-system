@@ -1,5 +1,6 @@
 package eu.esens.espdvcd.builder;
 
+import eu.esens.espdvcd.builder.schema.SchemaFactory;
 import eu.esens.espdvcd.model.ESPDRequest;
 
 import eu.esens.espdvcd.model.ESPDResponse;
@@ -8,6 +9,7 @@ import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.response.EvidenceURLResponse;
 import eu.esens.espdvcd.model.requirement.response.Response;
+import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
 import no.difi.asic.AsicWriterFactory;
 import no.difi.asic.AsicWriter;
 import no.difi.asic.MimeType;
@@ -131,5 +133,12 @@ public class VCDDocumentBuilder extends DocumentBuilder {
     @java.lang.Override
     protected String getProfilID() {
         return "56";
+    }
+
+
+    @Override
+    protected ESPDResponseType createXML(ESPDResponse res) {
+        ESPDResponseType resType = finalize(SchemaFactory.VCD_RESPONSE.extractESPDResponseType(res));
+        return resType;
     }
 }

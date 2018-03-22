@@ -12,7 +12,7 @@ public interface CriteriaExtractor {
      * @return The full criteria list with all the criteria unselected
      * @throws eu.esens.espdvcd.retriever.exception.RetrieverException
      */
-    public List<SelectableCriterion> getFullList() 
+    List<SelectableCriterion> getFullList()
             throws RetrieverException;
     
     /**
@@ -21,7 +21,7 @@ public interface CriteriaExtractor {
      * @throws eu.esens.espdvcd.retriever.exception.RetrieverException
      * 
      */
-    public List<SelectableCriterion> getFullList(List<SelectableCriterion> initialList)
+    List<SelectableCriterion> getFullList(List<SelectableCriterion> initialList)
             throws RetrieverException; 
     
      /**
@@ -32,6 +32,6 @@ public interface CriteriaExtractor {
      * @throws eu.esens.espdvcd.retriever.exception.RetrieverException
      * 
      */
-    public List<SelectableCriterion> getFullList(List<SelectableCriterion> initialList, boolean addAsSelected)
+     List<SelectableCriterion> getFullList(List<SelectableCriterion> initialList, boolean addAsSelected)
             throws RetrieverException;
 }

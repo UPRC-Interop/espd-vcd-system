@@ -18,26 +18,12 @@ public abstract class Response {
      * Data type: Identifier<br>
      * Cardinality: 0..1<br>
      * InfReqID: tir92-158<br>
-     * BusReqID: tbr92-018, tbr92-007, tbr92-005<br>
+     * BusReqID: tbr92-018, tbr92-007, tbr92-005, tbr92-006<br>
      * UBL syntax path:
      * ccv:Criterion.RequirementGroup.Requirement.DescriptionResponse.ID<br>
      */
     private String ID;
 
-    /**
-     * Criterion fulfillment indicator
-     * <p>
-     * Indicates whether the economic operator states that he fulfills the
-     * specific criterion (true) or not (false).
-     * <p>
-     * Data type: Indicator<br>
-     * Cardinality: 0..1<br>
-     * InfReqID: tir92-160<br>
-     * BusReqID: tbr92-018, tbr92-007, tbr92-005<br>
-     * UBL syntax path:
-     * ccv:Criterion.RequirementGroup.Requirement.Response.Indicator<br>
-     */
-    private boolean fulfillmentIndicator;
 
     public String getID() {
         return ID;
@@ -47,11 +33,4 @@ public abstract class Response {
         this.ID = ID;
     }
 
-    public boolean isFulfillmentIndicator() {
-        return fulfillmentIndicator;
-    }
-
-    public void setFulfillmentIndicator(boolean fulfillmentIndicator) {
-        this.fulfillmentIndicator = fulfillmentIndicator;
-    }
 }

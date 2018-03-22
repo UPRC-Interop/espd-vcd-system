@@ -1,12 +1,12 @@
 package eu.esens.espdvcd.model.requirement.response;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.validation.constraints.NotNull;
 
 /**
  * Country code response
+ *
+ * Is used in version 1.0.2 for country code and code to access the online evidence.
  *
  * Created by Ulf Lotzmann on 21/03/2016.
  */
@@ -15,17 +15,15 @@ public class CountryCodeResponse extends Response implements Serializable {
     private static final long serialVersionUID = -1738098273888763636L;
 
     /**
-     * Country code
+     * Criterion fulfillment code
      * <p>
-     * A code that identifies the country. The lists of valid countries are registered with the
-     * ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and
-     * their subdivisions". It is recommended to use the alpha-2 representation.
+     * Event declared to fulfil this criterion, expressed as a code.
      * <p>
      * Data type: Code<br>
      * Cardinality: 0..1<br>
-     * InfReqID:  tir92-150<br>
-     * BusReqID: tbr92-017<br>
-     * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.Response. Evidence.EvidenceIssuerParty.PostalAddress.IdentificationCode<br>
+     * InfReqID:  tir92-167<br>
+     * BusReqID: tbr92-018<br>
+     * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.Response.Code<br>
      */
     @NotNull
     private String countryCode;

@@ -21,7 +21,6 @@ import java.io.InputStream;
 import java.io.StringWriter;
 import java.nio.charset.Charset;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -62,7 +61,7 @@ public class DocumentBuilder {
     * @param res The ESPDResponse Model instance to be transformed to XML
     * @return a JAXB ESPDResponseType instance from an ESPDResponse Model instance
     */
-   private ESPDResponseType createXML(ESPDResponse res) {
+   protected ESPDResponseType createXML(ESPDResponse res) {
        ESPDResponseType resType = finalize(SchemaFactory.ESPD_RESPONSE.extractESPDResponseType(res));
        return resType;
    }
@@ -87,7 +86,8 @@ public class DocumentBuilder {
             reqType.setIssueTime(new IssueTimeType());
             reqType.getIssueTime().setValue(xmlDate);
         } catch (DatatypeConfigurationException e) {
-            System.out.println("ERROR in DATES!");
+            //System.out.println("ERROR in DATES!");
+            Logger.getLogger(DocumentBuilder.class.getName()).log(Level.SEVERE, "Error in Issue Date or Time", e);
         }
 
         reqType.setProfileID(createBIIProfileIdType(getProfilID()));
@@ -103,7 +103,7 @@ public class DocumentBuilder {
      * @param resType The JAXB ESPDResponseType that will be finalized.
      * @return the Finalized ESPDResponseType Instance
      */
-    private ESPDResponseType finalize(ESPDResponseType resType) {
+    protected ESPDResponseType finalize(ESPDResponseType resType) {
 
         // Finalizes the ESPDResponse Type, adding the Date and Time of Issue etc
         try {
@@ -115,7 +115,8 @@ public class DocumentBuilder {
             resType.setIssueTime(new IssueTimeType());
             resType.getIssueTime().setValue(xmlDate);
         } catch (DatatypeConfigurationException e) {
-            System.out.println("ERROR in DATES!");
+            //System.out.println("ERROR in DATES!");
+            Logger.getLogger(DocumentBuilder.class.getName()).log(Level.SEVERE, "Error in Issue Date or Time", e);
         }
 
         resType.setProfileID(createBIIProfileIdType(getProfilID()));
@@ -152,7 +153,7 @@ public class DocumentBuilder {
      * @param theReq The ESPD Request that we want transformed to XML
      * @return the Finalized ESPDRequestType Instance
      */
-    protected String createXMLasString(ESPDRequest theReq) {
+    private String createXMLasString(ESPDRequest theReq) {
         StringWriter result = new StringWriter();
 
         //Return the Object
@@ -177,7 +178,7 @@ public class DocumentBuilder {
      * @param id
      * @return
      */
-    protected ProfileIDType createBIIProfileIdType(String id) {
+    private ProfileIDType createBIIProfileIdType(String id) {
 
         ProfileIDType pid = new ProfileIDType();
 

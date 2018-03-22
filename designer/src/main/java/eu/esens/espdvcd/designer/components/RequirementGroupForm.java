@@ -34,11 +34,11 @@ public class RequirementGroupForm extends VerticalLayout {
         int numberOfComponentsInPanel = 0;
         // Add a sub requirement forms
         for (Requirement requirement : requirementGroup.getRequirements()) {
-            if (!(displayEvidences == 0 && requirement.getResponseDataType() == ResponseTypeEnum.EVIDENCE_URL)) {
+            //if (!(displayEvidences == 0 && requirement.getResponseDataType() == ResponseTypeEnum.EVIDENCE_URL)) {
                 RequirementForm requirementForm = new RequirementForm(requirement, includeResponses, displayEvidences, readOnly);
                 panelContent.addComponent(requirementForm);
                 numberOfComponentsInPanel++;
-            }
+            //}
         }
 
         // Add a sub requirement group forms

@@ -21,7 +21,7 @@ public class EODetailsForm extends Panel {
     private FormLayout columnB = new FormLayout();
 
     private TextField ID = new TextField("ID:");
-    private TextField electronicAddressID = new TextField("Electronic address id:");
+    private TextField webSiteURI = new TextField("Internet address (web address):");
     private TextField name = new TextField("Name:");
     private TextField role = new TextField("Role:");
     private TextField procurementProjectLot = new TextField("Where applicable, indication of the lot(s) for which the economic operator wishes to tender:");
@@ -45,8 +45,8 @@ public class EODetailsForm extends Panel {
 
         columnA.addComponent(name);
         columnA.addComponent(ID);
-        columnA.addComponent(electronicAddressID);
-        columnB.addComponent(role);
+        columnA.addComponent(webSiteURI);
+        //columnB.addComponent(role);
         columnB.addComponent(smeIndicator);
 
         smeIndicator.setCaption("Is the economic operator a Micro, a Small or a Medium-Sized Enterprise:");
@@ -66,7 +66,7 @@ public class EODetailsForm extends Panel {
 
         ContactingDetails eoDetailsContactingDetails = eoDetails.getContactingDetails();
         if (eoDetailsContactingDetails != null) {
-            panelContent.addComponent(new ContactingDetailsForm(eoDetailsContactingDetails, readOnly, true));
+            panelContent.addComponent(new ContactingDetailsForm(eoDetailsContactingDetails, readOnly, true, true));
         }
 
         for (NaturalPerson naturalPerson : this.eoDetails.getNaturalPersons()) {
@@ -92,8 +92,8 @@ public class EODetailsForm extends Panel {
         ID.setPlaceholder("Please enter ID");
         ID.setWidth(300, Unit.PIXELS);
 
-        electronicAddressID.setPlaceholder("Electronic address ID");
-        electronicAddressID.setWidth(300, Unit.PIXELS);
+        webSiteURI.setPlaceholder("Internet address (web address)");
+        webSiteURI.setWidth(300, Unit.PIXELS);
 
         name.setPlaceholder("Name");
         name.setWidth(300, Unit.PIXELS);

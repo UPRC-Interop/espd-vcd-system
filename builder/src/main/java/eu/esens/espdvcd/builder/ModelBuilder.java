@@ -252,7 +252,7 @@ public class ModelBuilder {
         return res;
     }
 
-    private InputStream getBufferedInputStream(InputStream xmlESPD) {
+    protected InputStream getBufferedInputStream(InputStream xmlESPD) {
         // We require a marked input stream
         InputStream bis;
         if (xmlESPD.markSupported()) {
@@ -284,7 +284,7 @@ public class ModelBuilder {
         }
     }
 
-    private ESPDResponseType readESPDResponseFromStream(InputStream is) {
+    protected ESPDResponseType readESPDResponseFromStream(InputStream is) {
         try {
             // Start with the convience methods provided by JAXB. If there are
             // perfomance issues we will swicth back to the JAXB API Usage
@@ -330,7 +330,7 @@ public class ModelBuilder {
      * @throws BuilderException when the parsing from XML to ESPDResponse Model
      * fails
      */
-    private ESPDResponse createESPDResponseFromXML(InputStream xmlESPDRes) throws BuilderException {
+    protected ESPDResponse createESPDResponseFromXML(InputStream xmlESPDRes) throws BuilderException {
 
         ESPDResponse res;
         // Check and read the file in the JAXB Object
@@ -375,12 +375,11 @@ public class ModelBuilder {
 
     private ServiceProviderDetails createDefaultServiceProviderDetails() {
         // Empty ServiceProviderDetails
-        System.out.println("Creating default Service Provider Details");
         ServiceProviderDetails spd = new ServiceProviderDetails();
-        // TODO: fill with reasonable default content
+        // fill with default content
         spd.setName("e-SENS");
         spd.setEndpointID("N/A");
-        spd.setId("N/A");
+        spd.setID("N/A");
         spd.setWebsiteURI("N/A");
         return spd;
     }

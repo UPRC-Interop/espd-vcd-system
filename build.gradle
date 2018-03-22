@@ -3,7 +3,7 @@ subprojects { project ->
     apply plugin: 'maven'
     apply plugin: 'maven-publish'
 
-    version = '1.0.2'
+    version = '1.0.2-2'
     group = 'eu.esens.espdvcd'
 
     project.ext.slf4j_version = '1.7.13'

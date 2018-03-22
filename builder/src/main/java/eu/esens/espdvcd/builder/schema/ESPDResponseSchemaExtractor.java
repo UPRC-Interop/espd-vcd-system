@@ -3,6 +3,7 @@ package eu.esens.espdvcd.builder.schema;
 import eu.esens.espdvcd.builder.EvidenceHelper;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.EODetails;
+import eu.esens.espdvcd.model.ESPDRequestDetails;
 import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.model.requirement.response.DescriptionResponse;
 import eu.esens.espdvcd.model.requirement.response.IndicatorResponse;
@@ -17,10 +18,7 @@ import isa.names.specification.ubl.schema.xsd.ccv_commonbasiccomponents_1.Indica
 import isa.names.specification.ubl.schema.xsd.cev_commonaggregatecomponents_1.EvidenceType;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeConstants;
@@ -57,6 +55,13 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
         }
 
         resType.getAdditionalDocumentReference().add(extractCADetailsDocumentReferece(res.getCADetails()));
+
+        // 2018-03-20 UL: add capabilities to handle National Official Journal
+        DocumentReferenceType drt = extractCADetailsNationalDocumentReference(res.getCADetails());
+        if (drt != null) {
+            resType.getAdditionalDocumentReference().add(drt);
+        }
+
         resType.setContractingParty(extractContractingPartyType(res.getCADetails()));
         resType.getProcurementProjectLot().add(extractProcurementProjectLot(res.getEODetails()));
         resType.setServiceProviderParty(extractServiceProviderPartyType(res.getServiceProviderDetails()));
@@ -66,6 +71,11 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
                 .collect(Collectors.toList()));
 
         resType.setEconomicOperatorParty(extracEODetails(res.getEODetails()));
+
+        if (res.getESPDRequestDetails() != null) {
+            resType.getAdditionalDocumentReference().add(extractESPDRequestDetails(res.getESPDRequestDetails()));
+        }
+
 
         resType.setUBLVersionID(createUBL21VersionIdType());
 
@@ -104,14 +114,23 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
             eopt.getParty().getPartyName().add(pnt);
         }
 
-        // UL bugfix: there was no code for creating EndpointID element for EO
+        // only criterion is used for tenderer role - changed also in BIS
+        /*if (eod.getRole() != null) {
+            TypeCodeType tct = new TypeCodeType();
+            tct.setListAgencyID("EU-COM-GROW");
+            tct.setListID("TendererRole");
+            tct.setListVersionID("1.0.2");
+            tct.setValue(eod.getRole());
+            eopt.setEconomicOperatorRoleCode(tct);
+        }*/
+
         if (eod.getElectronicAddressID() != null) {
             EndpointIDType eid = new EndpointIDType();
+            eid.setSchemeAgencyID("EU-COM-GROW");
             eid.setValue(eod.getElectronicAddressID());
             eopt.getParty().setEndpointID(eid);
         }
 
-        // UL bugfix: there was no code for creating WebsiteURI element for EO
         if (eod.getWebSiteURI() != null) {
             WebsiteURIType wsuri = new WebsiteURIType();
             wsuri.setValue(eod.getWebSiteURI());
@@ -127,8 +146,8 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
             at.setCityName(new CityNameType());
             at.getCityName().setValue(eod.getPostalAddress().getCity());
 
-            at.setPostbox(new PostboxType());
-            at.getPostbox().setValue(eod.getPostalAddress().getPostCode());
+            at.setPostalZone(new PostalZoneType());
+            at.getPostalZone().setValue(eod.getPostalAddress().getPostCode());
 
             at.setCountry(new CountryType());
             at.getCountry().setIdentificationCode(createISOCountryIdCodeType(eod.getPostalAddress().getCountryCode()));
@@ -160,9 +179,6 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
             npt.getNaturalPersonRoleDescription().setValue(np.getRole());
 
             npt.setPowerOfAttorney(new PowerOfAttorneyType());
-            DescriptionType dt = new DescriptionType();
-            dt.setValue(np.getPowerOfAttorney());
-            npt.getPowerOfAttorney().getDescription().add(dt);
 
             PartyType apt = new PartyType();
             PersonType pt = new PersonType();
@@ -198,17 +214,14 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
 
                 pt.getContact().setElectronicMail(new ElectronicMailType());
                 pt.getContact().getElectronicMail().setValue(np.getContactDetails().getEmailAddress());
-
-                pt.getContact().setTelefax(new TelefaxType());
-                pt.getContact().getTelefax().setValue(np.getContactDetails().getFaxNumber());
-
             }
 
             if (np.getPostalAddress() != null) {
 
                 pt.setResidenceAddress(new AddressType());
-                pt.getResidenceAddress().setPostbox(new PostboxType());
-                pt.getResidenceAddress().getPostbox().setValue(np.getPostalAddress().getPostCode());
+
+                pt.getResidenceAddress().setPostalZone(new PostalZoneType());
+                pt.getResidenceAddress().getPostalZone().setValue(np.getPostalAddress().getPostCode());
 
                 pt.getResidenceAddress().setStreetName(new StreetNameType());
                 pt.getResidenceAddress().getStreetName().setValue(np.getPostalAddress().getAddressLine1());
@@ -251,12 +264,17 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
             return rType;
         }
 
+        rType.setID(new IDType());
+        rType.getID().setSchemeAgencyID("EU-COM-GROW");
+        rType.getID().setValue(UUID.randomUUID().toString());
+
         switch (respType) {
 
             case DESCRIPTION:
-                if (((DescriptionResponse) response).getDescription() != null) {
+                String description = ((DescriptionResponse) response).getDescription();
+                if (description != null && !description.isEmpty()) {
                     rType.setDescription(new DescriptionType());
-                    rType.getDescription().setValue(((DescriptionResponse) response).getDescription());
+                    rType.getDescription().setValue(description);
                 }
                 return rType;
 
@@ -270,7 +288,9 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
 
             case QUANTITY:
                 rType.setQuantity(new QuantityType());
-                rType.getQuantity().setValue(BigDecimal.valueOf(((QuantityResponse) response).getQuantity()));
+                //rType.getQuantity().setValue(BigDecimal.valueOf(((QuantityResponse) response).getQuantity()));
+                // UL 2017-10-20: workaround for rounding issues with BigDecimal (e.g. 0.005 became 0.004999999888241291)
+                rType.getQuantity().setValue(new BigDecimal(Float.toString(((QuantityResponse) response).getQuantity())));
                 return rType;
 
             case QUANTITY_INTEGER:
@@ -280,9 +300,19 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
                 return rType;
 
             case AMOUNT:
-                rType.setAmount(new AmountType());
-                rType.getAmount().setValue(BigDecimal.valueOf(((AmountResponse) response).getAmount()));
-                rType.getAmount().setCurrencyID(((AmountResponse) response).getCurrency());
+                float amount = ((AmountResponse) response).getAmount();
+                String currency = ((AmountResponse) response).getCurrency();
+                if ( (amount != 0) ||
+                        ( currency != null && !currency.isEmpty() ) ) {
+                    // Only generate a proper response if for at least one of the variables "amount" and
+                    // "currency" a value different from the default is detected.
+
+                    rType.setAmount(new AmountType());
+                    //rType.getAmount().setValue(BigDecimal.valueOf(amount));
+                    // UL 2017-10-20: workaround for rounding issues with BigDecimal
+                    rType.getAmount().setValue(new BigDecimal(Float.toString(amount)));
+                    rType.getAmount().setCurrencyID(currency);
+                }
                 return rType;
 
             case INDICATOR:
@@ -302,7 +332,9 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
 
             case PERCENTAGE:
                 rType.setPercent(new PercentType());
-                rType.getPercent().setValue(BigDecimal.valueOf(((PercentageResponse) response).getPercentage()));
+                //rType.getPercent().setValue(BigDecimal.valueOf(((PercentageResponse) response).getPercentage()));
+                // UL 2017-10-20: workaround for rounding issues with BigDecimal
+                rType.getPercent().setValue(new BigDecimal(Float.toString(((PercentageResponse) response).getPercentage())));
                 return rType;
 
             case DATE:
@@ -326,45 +358,105 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
                 return rType;
 
             case CODE:
-                EvidenceURLCodeResponse localResp = ((EvidenceURLCodeResponse) response);
-                if (localResp.getEvidenceURLCode() != null && !localResp.getEvidenceURLCode().isEmpty()) {
+                String evidenceURLCode = ((EvidenceURLCodeResponse) response).getEvidenceURLCode();
+                if (evidenceURLCode != null && !evidenceURLCode.isEmpty()) {
                     rType.setCode(new TypeCodeType());
-                    rType.getCode().setValue(localResp.getEvidenceURLCode());
+                    rType.getCode().setValue(evidenceURLCode);
                 }
                 return rType;
 
             case EVIDENCE_URL:
-                if (((EvidenceURLResponse) response).getEvidenceURL() != null) {
-                    EvidenceType evType = new EvidenceType();
-                    DocumentReferenceType drt = new DocumentReferenceType();
-                    drt.setID(new IDType());
-                    drt.getID().setValue(UUID.randomUUID().toString());
-                    drt.setAttachment(new AttachmentType());
-                    drt.getAttachment().setExternalReference(new ExternalReferenceType());
-                    drt.getAttachment().getExternalReference().setURI(new URIType());
-                    //drt.getAttachment().getExternalReference().getURI().setValue(((EvidenceURLResponse) response).getEvidenceURL());
-                    // UL: modification for handling VCD resources
-                    drt.getAttachment().getExternalReference().getURI().setValue(
-                            EvidenceHelper.transformEvidenceURIFromLocalResourceToASiCResource(
-                                    ((EvidenceURLResponse) response).getEvidenceURL()
-                            )
-                    );
-                    evType.getEvidenceDocumentReference().add(drt);
+                EvidenceType evType = extractEvidenceURLResponse(response);
+                if (evType != null) {
                     rType.getEvidence().add(evType);
                 }
                 return rType;
 
             case CODE_COUNTRY:
-                rType.setCode(new TypeCodeType());
-                rType.getCode().setListAgencyID("ISO");
-                rType.getCode().setListID("ISO 3166-1");
-                rType.getCode().setListVersionID("1.0");
-                rType.getCode().setValue(((CountryCodeResponse) response).getCountryCode());
+                String countryCode = ((CountryCodeResponse) response).getCountryCode();
+                if (countryCode != null && !countryCode.isEmpty()) {
+                    rType.setCode(new TypeCodeType());
+                    rType.getCode().setListAgencyID("ISO");
+                    rType.getCode().setListID("ISO 3166-1");
+                    rType.getCode().setListVersionID("1.0");
+                    rType.getCode().setValue(countryCode);
+                }
                 return rType;
+
 
             default:
                 return null;
         }
 
     }
+
+    protected EvidenceType extractEvidenceURLResponse(Response response) {
+        if (((EvidenceURLResponse) response).getEvidenceURL() != null) {
+            EvidenceType evType = new EvidenceType();
+            DocumentReferenceType drt = new DocumentReferenceType();
+            drt.setID(new IDType());
+            drt.getID().setSchemeAgencyID("EU-COM-GROW");
+            drt.getID().setValue(UUID.randomUUID().toString());
+            drt.setAttachment(new AttachmentType());
+            drt.getAttachment().setExternalReference(new ExternalReferenceType());
+            drt.getAttachment().getExternalReference().setURI(new URIType());
+            drt.getAttachment().getExternalReference().getURI().setValue(((EvidenceURLResponse) response).getEvidenceURL());
+            evType.getEvidenceDocumentReference().add(drt);
+            return evType;
+        }
+        return null;
+    }
+
+    private DocumentReferenceType extractESPDRequestDetails(ESPDRequestDetails espdRequestDetails) {
+
+        if (espdRequestDetails == null) {
+            return null;
+        }
+
+        DocumentReferenceType drt = new DocumentReferenceType();
+
+        drt.setID(createISOIECIDType(espdRequestDetails.getID()));
+
+        try {
+            XMLGregorianCalendar xcalDate = DatatypeFactory.newInstance()
+                    .newXMLGregorianCalendarDate(
+                            espdRequestDetails.getIssueDate().getYear(),
+                            espdRequestDetails.getIssueDate().getMonthValue(),
+                            espdRequestDetails.getIssueDate().getDayOfMonth(),
+                            DatatypeConstants.FIELD_UNDEFINED);
+            IssueDateType idt = new IssueDateType();
+            idt.setValue(xcalDate);
+            drt.setIssueDate(idt);
+        } catch (DatatypeConfigurationException ex) {
+            log.error("Could not create XMLGregorialCalendar Date Object", ex);
+        }
+
+
+        try {
+            XMLGregorianCalendar xcalTime = DatatypeFactory.newInstance()
+                    .newXMLGregorianCalendarTime(
+                            espdRequestDetails.getIssueTime().getHour(),
+                            espdRequestDetails.getIssueTime().getMinute(),
+                            espdRequestDetails.getIssueTime().getSecond(),
+                            DatatypeConstants.FIELD_UNDEFINED);
+            IssueTimeType itt = new IssueTimeType();
+            itt.setValue(xcalTime);
+            drt.setIssueTime(itt);
+        } catch (DatatypeConfigurationException ex) {
+            log.error("Could not create XMLGregorialCalendar Date Object", ex);
+        }
+
+
+        List<DocumentDescriptionType> ddtList = drt.getDocumentDescription();
+        if (ddtList != null) {
+            DocumentDescriptionType ddt = new DocumentDescriptionType();
+            ddt.setValue(espdRequestDetails.getDescription());
+            ddtList.add(ddt);
+        }
+
+        drt.setDocumentTypeCode(createDocumentTypeCode("ESPD_REQUEST"));
+
+        return drt;
+    }
+
 }

@@ -25,8 +25,8 @@ public class ContactingDetails {
      * UBL syntax path: espd-cac:EconomicOperatorParty. Party. Contact.Name<br>
      *
      * Usage for Contracting Authority:
-     * InfReqID: tir92-017<br>
-     * BusReqID: tbr92-012<br>
+     * InfReqID: tir70-035, tir92-017<br>
+     * BusReqID: tbr70-006, tbr92-012<br>
      * UBL syntax path: cac: ContractingParty. Party. Contact.Name<br>
      */
     private String contactPointName;
@@ -46,8 +46,8 @@ public class ContactingDetails {
      * UBL syntax path: espd-cac:EconomicOperatorParty.Party. Contact.Telephone<br>
      *
      * Usage for Contracting Authority:
-     * InfReqID: tir92-018<br>
-     * BusReqID: tbr92-012<br>
+     * InfReqID: tir70-036, tir92-018<br>
+     * BusReqID: tbr70-006, tbr92-012<br>
      * UBL syntax path: cac: ContractingParty. Party. Contact.Telephone<br>
      */
     private String faxNumber;
@@ -67,8 +67,8 @@ public class ContactingDetails {
      * UBL syntax path: espd-cac:EconomicOperatorParty.Party. Contact.Telefax<br>
      *
      * Usage for Contracting Authority:
-     * InfReqID: tir92-019<br>
-     * BusReqID: tbr92-012<br>
+     * InfReqID: tir70-037, tir92-019<br>
+     * BusReqID: tbr70-006, tbr92-012<br>
      * UBL syntax path: cac: ContractingParty. Party. Contact.Telefax<br>
      */
     private String telephoneNumber;
@@ -88,8 +88,8 @@ public class ContactingDetails {
      * UBL syntax path: espd-cac:EconomicOperatorParty. Party. Contact.ElectronicMail<br>
      *
      * Usage for Contracting Authority:
-     * InfReqID: tir92-020<br>
-     * BusReqID: tbr92-012<br>
+     * InfReqID: tir70-038, tir92-020<br>
+     * BusReqID: tbr70-006, tbr92-012<br>
      * UBL syntax path: cac: ContractingParty. Party. Contact.ElectronicMail<br>
      */
     private String emailAddress;

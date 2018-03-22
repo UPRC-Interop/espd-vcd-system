@@ -5,6 +5,7 @@ import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.Page;
 import com.vaadin.ui.*;
 import eu.esens.espdvcd.builder.ModelBuilder;
+import eu.esens.espdvcd.builder.VCDModelBuilder;
 import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.designer.components.CriterionForm;
 import eu.esens.espdvcd.designer.components.ESPDRequestForm;
@@ -186,7 +187,7 @@ public class VCD extends Master {
             public void uploadSucceeded(Upload.SucceededEvent event) {
 
                 try (InputStream is = new FileInputStream(file)) {
-                        espdResponse = new ModelBuilder().importFrom(is).createESPDResponse();
+                        espdResponse = new VCDModelBuilder().importFrom(is).createESPDResponse();
                         espdResponseForm = new ESPDResponseForm(thisView, espdResponse, 1, false);
                         mainColumn.addComponent(espdResponseForm);
                         panels.setVisible(false);

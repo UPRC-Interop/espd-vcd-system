@@ -63,22 +63,6 @@ public class EODetails {
     private String webSiteURI;
 
     /**
-     * FIXME: not used
-     *
-     * Economic operator registration country code
-     * <p>
-     * The registration country code of the economic operator.
-     * <p>
-     * Data type: Code<br>
-     * Cardinality: 0..1<br>
-     * InfReqID: tir92-032<br>
-     * BusReqID: tbr92-003<br>
-     * UBL syntax path:
-     * espd-cac:EconomicOperatorParty.Party.PartyLegalEntity.RegistrationAddress.Country.IdentificationCode<br>
-     */
-    private String registrationCountryCode;
-
-    /**
      * Economic operator name
      * <p>
      * The name of the economic operator.
@@ -91,21 +75,6 @@ public class EODetails {
      */
     @NotNull
     private String name;
-
-    /**
-     * Economic operator role
-     * <p>
-     * The role of the economic operator when bidding from a consortium. (main
-     * contractor, subcontractor , additional)
-     * <p>
-     * Data type: Code<br>
-     * Cardinality: 0..1<br>
-     * InfReqID: tir92-034<br>
-     * BusReqID: tbr92-008<br>
-     * UBL syntax path:
-     * espd-cac:EconomicOperatorParty.EconomicOperatorRoleCode<br>
-     */
-    private String role;
 
     /**
      * SME indicator
@@ -122,39 +91,6 @@ public class EODetails {
      * UBL syntax path: espd-cac:EconomicOperatorParty.SMEIndicator<br>
      */
     private boolean smeIndicator;
-
-    /**
-     * FIXME: not used
-     *
-     * National database URI
-     * <p>
-     * Unrestricted and full direct access to tools and devices used for
-     * electronic communication is possible at this URL.
-     * <p>
-     * Data type: Identifier<br>
-     * Cardinality: 0..1<br>
-     * InfReqID: tir92-036<br>
-     * BusReqID: tbr92-006, tbr92-007<br>
-     * UBL syntax path: espd-cac:EconomicOperatorParty.NationalDatabaseURIID<br>
-     */
-    private String nationalDatabaseURI;
-
-    /**
-     * FIXME: not used
-     *
-     * National database access credentials
-     * <p>
-     * Unrestricted and full direct access to tools and devices used for
-     * electronic communication is possible at this URL.
-     * <p>
-     * Data type: Text<br>
-     * Cardinality: 0..1<br>
-     * InfReqID: tir92-037<br>
-     * BusReqID: tbr92-006, tbr92-007<br>
-     * UBL syntax path:
-     * espd-cac:EconomicOperatorParty.NationalDatabaseAccessCredentials<br>
-     */
-    private String nationalDatabaseAccessCredentials;
 
     /**
      * Postal address
@@ -199,14 +135,14 @@ public class EODetails {
      */
     private List<NaturalPerson> naturalPersons;
     
-        /**
+    /**
      * Lot reference
      * <p>
      * An identifier for the lot.
      * <p>
      * Data type: Identifier<br>
      * Cardinality: 1..1 (1..n)<br>
-     * InfReqID: <br>
+     * InfReqID: tir92-130<br>
      * BusReqID: tbr92-014<br>
      * UBL syntax path: cac:ProcurementProjectLot.ID<br>
      */
@@ -237,14 +173,6 @@ public class EODetails {
         this.electronicAddressID = electronicAddressID;
     }
 
-    public String getRegistrationCountryCode() {
-        return registrationCountryCode;
-    }
-
-    public void setRegistrationCountryCode(String registrationCountryCode) {
-        this.registrationCountryCode = registrationCountryCode;
-    }
-
     public String getName() {
         return name;
     }
@@ -253,36 +181,12 @@ public class EODetails {
         this.name = name;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
     public boolean isSmeIndicator() {
         return smeIndicator;
     }
 
     public void setSmeIndicator(boolean smeIndicator) {
         this.smeIndicator = smeIndicator;
-    }
-
-    public String getNationalDatabaseURI() {
-        return nationalDatabaseURI;
-    }
-
-    public void setNationalDatabaseURI(String nationalDatabaseURI) {
-        this.nationalDatabaseURI = nationalDatabaseURI;
-    }
-
-    public String getNationalDatabaseAccessCredentials() {
-        return nationalDatabaseAccessCredentials;
-    }
-
-    public void setNationalDatabaseAccessCredentials(String nationalDatabaseAccessCredentials) {
-        this.nationalDatabaseAccessCredentials = nationalDatabaseAccessCredentials;
     }
 
     public PostalAddress getPostalAddress() {

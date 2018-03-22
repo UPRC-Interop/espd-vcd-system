@@ -1,5 +1,7 @@
 package eu.esens.espdvcd.builder.model;
 
+import eu.esens.espdvcd.builder.BuilderFactory;
+import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.model.requirement.Requirement;
@@ -9,42 +11,33 @@ import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.Cr
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.LegislationType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementGroupType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementType;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.*;
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ContractingPartyType;
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.DocumentReferenceType;
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ExternalReferenceType;
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ServiceProviderPartyType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ContractFolderIDType;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public interface ModelExtractor {
 
     default CADetails extractCADetails(ContractingPartyType caParty,
-            ContractFolderIDType contractFolderId,
-            List<DocumentReferenceType> additionalDocumentReferenceList) {
+                                       ContractFolderIDType contractFolderId,
+                                       List<DocumentReferenceType> additionalDocumentReferenceList) {
 
         CADetails cd = new CADetails();
-
-        if (caParty != null && caParty.getParty() != null) {
-
-            // --> moved to code below
-            //if (!caParty.getParty().getPartyName().isEmpty()) {
-            //    cd.setCAOfficialName(caParty
-            //            .getParty().getPartyName()
-            //            .get(0).getName().getValue());
-            //}
-
-            // FIXME: caCountry should be replaced by the PostalAddress model element
-            if (caParty.getParty().getPostalAddress() != null
-                    && caParty.getParty().getPostalAddress().getCountry() != null
-                    && caParty.getParty().getPostalAddress().getCountry().getIdentificationCode() != null) {
-                cd.setCACountry(caParty
-                        .getParty().getPostalAddress().getCountry().getIdentificationCode().getValue());
-            }
-        }
 
         if (caParty != null && caParty.getParty() != null) {
             if (!caParty.getParty().getPartyName().isEmpty()
                     && caParty.getParty().getPartyName().get(0).getName() != null) {
                 cd.setCAOfficialName(caParty.getParty().getPartyName().get(0).getName().getValue());
+            }
+
+            if (!caParty.getParty().getPartyIdentification().isEmpty()
+                    && caParty.getParty().getPartyIdentification().get(0).getID() != null) {
+                cd.setID(caParty.getParty().getPartyIdentification().get(0).getID().getValue());
             }
 
             if (caParty.getParty().getEndpointID() != null) {
@@ -56,7 +49,6 @@ public interface ModelExtractor {
             }
 
 
-
             if (caParty.getParty().getPostalAddress() != null) {
                 PostalAddress caAddress = new PostalAddress();
 
@@ -64,7 +56,15 @@ public interface ModelExtractor {
                     caAddress.setAddressLine1(caParty.getParty().getPostalAddress().getStreetName().getValue());
                 }
 
-                if (caParty.getParty().getPostalAddress().getPostbox() != null) {
+                //if (caParty.getParty().getPostalAddress().getPostbox() != null) {
+                //    caAddress.setPostCode(caParty.getParty().getPostalAddress().getPostbox().getValue());
+                //}
+                // UL 2017-10-10: read post code from cbc:PostalZone
+                if (caParty.getParty().getPostalAddress().getPostalZone() != null) {
+                    caAddress.setPostCode(caParty.getParty().getPostalAddress().getPostalZone().getValue());
+                }
+                // if not available, try cbc:Postbox (for backwards compatibility)
+                else if (caParty.getParty().getPostalAddress().getPostbox() != null) {
                     caAddress.setPostCode(caParty.getParty().getPostalAddress().getPostbox().getValue());
                 }
 
@@ -102,43 +102,62 @@ public interface ModelExtractor {
         }
 
 
-
         if (contractFolderId != null && contractFolderId.getValue() != null) {
             cd.setProcurementProcedureFileReferenceNo(contractFolderId.getValue());
         }
         if (!additionalDocumentReferenceList.isEmpty()) {
 
             // Find an entry with TED_CN Value
-            DocumentReferenceType ref = additionalDocumentReferenceList.stream()
+            Optional<DocumentReferenceType> optRef = additionalDocumentReferenceList.stream()
                     .filter(r -> r.getDocumentTypeCode() != null && r.getDocumentTypeCode().getValue().equals("TED_CN"))
-                    .findFirst().get();
-         
-            if (ref != null ) {
+                    .findFirst();
+            optRef.ifPresent(ref -> {
+
                 if (ref.getID() != null) {
                     cd.setProcurementPublicationNumber(ref.getID().getValue());
                 }
                 if (ref.getAttachment() != null && ref.getAttachment().getExternalReference() != null) {
                     ExternalReferenceType ert = ref.getAttachment().getExternalReference();
-                    
+
                     if (ert.getFileName() != null) {
-                     cd.setProcurementProcedureTitle(ert.getFileName().getValue());
+                        cd.setProcurementProcedureTitle(ert.getFileName().getValue());
                     }
-                    
+
                     if (!ert.getDescription().isEmpty()) {
-                     cd.setProcurementProcedureDesc(ert.getDescription().get(0).getValue());
+                        cd.setProcurementProcedureDesc(ert.getDescription().get(0).getValue());
+
+                        // 2018-03-20 UL: modifications to add capabilities to handle Received Notice Number
+                        if (ert.getDescription().size() > 1) {
+                            cd.setReceivedNoticeNumber(ert.getDescription().get(1).getValue());
+                        }
                     }
-                    
+
                     if (ert.getURI() != null) {
                         cd.setProcurementPublicationURI(ert.getURI().getValue());
                     }
                 }
-            }
+
+            });
+
+            // 2018-03-20 UL: add capabilities to handle National Official Journal
+            Optional<DocumentReferenceType> optNatRef = additionalDocumentReferenceList.stream()
+                    .filter(r -> r.getDocumentTypeCode() != null && r.getDocumentTypeCode().getValue().equals("NGOJ"))
+                    .findFirst();
+            optNatRef.ifPresent(ref -> {
+
+                if (ref.getID() != null) {
+                    cd.setNationalOfficialJournal(ref.getID().getValue());
+                }
+            });
+
         }
         return cd;
     }
 
     default ServiceProviderDetails extractServiceProviderDetails(ServiceProviderPartyType sppt) {
-        ServiceProviderDetails spd = new ServiceProviderDetails();
+        // modification UL 2018-01-12: discard old service provider information, always use information of the current system
+
+        /*ServiceProviderDetails spd = new ServiceProviderDetails();
 
         if (sppt != null && sppt.getParty() != null) {
             if (!sppt.getParty().getPartyName().isEmpty()
@@ -161,6 +180,16 @@ public interface ModelExtractor {
         }
 
         return spd;
+        */
+
+        try {
+            // return the default service provider details
+            return BuilderFactory.getModelBuilder().createESPDRequest().getServiceProviderDetails();
+        } catch (BuilderException e) {
+            return null;
+        }
+
+
     }
 
     default SelectableCriterion extractSelectableCriterion(CriterionType ct, boolean isSelected) {
@@ -170,7 +199,6 @@ public interface ModelExtractor {
         String typeCode = ct.getTypeCode().getValue();
         String name = ct.getName().getValue();
 
-        //TODO: Extract multiple values
         LegislationReference lr = extractDefaultLegalReference(ct.getLegislationReference());
 
         List<RequirementGroup> rgList = ct.getRequirementGroup().stream()
@@ -195,16 +223,18 @@ public interface ModelExtractor {
             if (rgType.getPi() != null)
                 rg.setCondition(rgType.getPi());
         }
-        
 
-        List<Requirement> rList = rgType.getRequirement().stream()
-                .map(r -> extractRequirement(r))
-                .collect(Collectors.toList());
-        List<RequirementGroup> childRg = rgType.getRequirementGroup().stream()
-                .map(t -> extractRequirementGroup(t))
-                .collect(Collectors.toList());
-        rg.setRequirements(rList);
-        rg.setRequirementGroups(childRg);
+        if (rg != null) {
+            List<Requirement> rList = rgType.getRequirement().stream()
+                    .map(r -> extractRequirement(r))
+                    .collect(Collectors.toList());
+            List<RequirementGroup> childRg = rgType.getRequirementGroup().stream()
+                    .map(t -> extractRequirementGroup(t))
+                    .collect(Collectors.toList());
+            rg.setRequirements(rList);
+            rg.setRequirementGroups(childRg);
+        }
+
         return rg;
     }
 

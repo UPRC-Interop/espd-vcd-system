@@ -1,34 +1,34 @@
 package eu.esens.espdvcd.builder.model;
 
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
-import eu.esens.espdvcd.model.ContactingDetails;
-import eu.esens.espdvcd.model.EODetails;
-import eu.esens.espdvcd.model.ESPDResponse;
-import eu.esens.espdvcd.model.NaturalPerson;
-import eu.esens.espdvcd.model.PostalAddress;
+import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.model.requirement.response.ResponseFactory;
-import eu.esens.espdvcd.model.SimpleESPDResponse;
 import eu.esens.espdvcd.model.requirement.response.*;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.response.Response;
 import grow.names.specification.ubl.schema.xsd.espd_commonaggregatecomponents_1.EconomicOperatorPartyType;
 import grow.names.specification.ubl.schema.xsd.espd_commonaggregatecomponents_1.NaturalPersonType;
+import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
 import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.ResponseType;
-import java.time.LocalDate;
+
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.stream.Collectors;
+
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.DocumentReferenceType;
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ExternalReferenceType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PersonType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ProcurementProjectLotType;
+import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.DocumentTypeType;
 
 public class ESPDResponseModelExtractor implements ModelExtractor {
 
     /* package private constructor. Create only through factory */
     ESPDResponseModelExtractor() {
     }
-
-    ;
 
     public ESPDResponse extractESPDResponse(ESPDResponseType resType) {
 
@@ -59,6 +59,24 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
             eod.getNaturalPersons().add(np);
             res.setEODetails(eod);
         }
+
+        if (resType.getCustomizationID().getValue().equals("urn:www.cenbii.eu:transaction:biitrns092:ver3.0")) {
+            // ESPD response detected (by checking the customization id)
+
+            if (resType.getAdditionalDocumentReference() != null && !resType.getAdditionalDocumentReference().isEmpty()) {
+
+                // Find an entry with ESPD_REQUEST Value
+                Optional<DocumentReferenceType> optRef = resType.getAdditionalDocumentReference().stream().
+                        filter(r -> r.getDocumentTypeCode() != null && r.getDocumentTypeCode().getValue().
+                                equals("ESPD_REQUEST")).findFirst();
+                optRef.ifPresent(documentReferenceType -> res.setESPDRequestDetails(extractESPDRequestDetails(documentReferenceType)));
+            }
+        }
+        else {
+            // else an ESPD request is assumed
+            res.setESPDRequestDetails(extractESPDRequestDetails(resType));
+        }
+
 
         return res;
     }
@@ -154,7 +172,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
 
             case PERIOD:
                 PeriodResponse perResp = new PeriodResponse();
-                //TODO: NULL Checks and empty list checks
+
                 if (res.getPeriod() != null
                         && !res.getPeriod().getDescription().isEmpty()
                         && res.getPeriod().getDescription().get(0).getValue() != null) {
@@ -164,25 +182,8 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 return perResp;
 
             case EVIDENCE_URL:
-                EvidenceURLResponse eResp = new EvidenceURLResponse();
-                //TODO: NULL Checks and empty list checks
-                if (!res.getEvidence().isEmpty()
-                        && !res.getEvidence().get(0).getEvidenceDocumentReference().isEmpty()
-                        && res.getEvidence().get(0).getEvidenceDocumentReference().get(0).getAttachment() != null
-                        && res.getEvidence().get(0).getEvidenceDocumentReference().get(0).getAttachment().getExternalReference() != null
-                        && res.getEvidence().get(0).getEvidenceDocumentReference().get(0).getAttachment().getExternalReference().getURI() != null
-                        && res.getEvidence().get(0).getEvidenceDocumentReference().get(0).getAttachment().getExternalReference().getURI().getValue() != null) {
+                return extractEvidenceURLResponse(res);
 
-                    eResp.setEvidenceURL(res.getEvidence()
-                            .get(0)
-                            .getEvidenceDocumentReference()
-                            .get(0)
-                            .getAttachment()
-                            .getExternalReference()
-                            .getURI().getValue());
-                }
-
-                return eResp;
 
             case CODE:
                 EvidenceURLCodeResponse ecResp = new EvidenceURLCodeResponse();
@@ -196,6 +197,36 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 return null;
         }
 
+    }
+
+    /**
+     * Extract the evidence uri response.
+     *
+     * UL 2017-05-04
+     *
+     * @param res
+     * @return
+     */
+    protected Response extractEvidenceURLResponse(ResponseType res) {
+         EvidenceURLResponse eResp = new EvidenceURLResponse();
+
+        if (!res.getEvidence().isEmpty()
+                && !res.getEvidence().get(0).getEvidenceDocumentReference().isEmpty()
+                && res.getEvidence().get(0).getEvidenceDocumentReference().get(0).getAttachment() != null
+                && res.getEvidence().get(0).getEvidenceDocumentReference().get(0).getAttachment().getExternalReference() != null
+                && res.getEvidence().get(0).getEvidenceDocumentReference().get(0).getAttachment().getExternalReference().getURI() != null
+                && res.getEvidence().get(0).getEvidenceDocumentReference().get(0).getAttachment().getExternalReference().getURI().getValue() != null) {
+
+            eResp.setEvidenceURL(res.getEvidence()
+                    .get(0)
+                    .getEvidenceDocumentReference()
+                    .get(0)
+                    .getAttachment()
+                    .getExternalReference()
+                    .getURI().getValue());
+        }
+
+        return eResp;
     }
 
     public EODetails extractEODetails(EconomicOperatorPartyType eop, ProcurementProjectLotType pplt) {
@@ -214,13 +245,15 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                     eoDetails.setName(eop.getParty().getPartyName().get(0).getName().getValue());
                 }
 
+                // only criterion is used for tenderer role - changed also in BIS
+                /*if (eop.getEconomicOperatorRoleCode() != null) {
+                    eoDetails.setRole(eop.getEconomicOperatorRoleCode().getValue());
+                }*/
+
                 if (eop.getParty().getWebsiteURI() != null) {
-                    // UL: TODO please check - bug: electronicAddressID should be filled with endpointID, not websiteURI
-                    //eoDetails.setElectronicAddressID(eop.getParty().getWebsiteURI().getValue());
                     eoDetails.setWebSiteURI(eop.getParty().getWebsiteURI().getValue());
                 }
 
-                // UL: TODO please check: added code for filling electronicAddressID
                 if (eop.getParty().getEndpointID() != null) {
                     eoDetails.setElectronicAddressID(eop.getParty().getEndpointID().getValue());
                 }
@@ -237,7 +270,12 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                         eoAddress.setAddressLine1(eop.getParty().getPostalAddress().getStreetName().getValue());
                     }
 
-                    if (eop.getParty().getPostalAddress().getPostbox() != null) {
+                    // read post code from cbc:PostalZone...
+                    if (eop.getParty().getPostalAddress().getPostalZone() != null) {
+                        eoAddress.setPostCode(eop.getParty().getPostalAddress().getPostalZone().getValue());
+                    }
+                    // ...if not available, try cbc:Postbox (for backwards compatibility)
+                    else if (eop.getParty().getPostalAddress().getPostbox() != null) {
                         eoAddress.setPostCode(eop.getParty().getPostalAddress().getPostbox().getValue());
                     }
 
@@ -285,9 +323,6 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
 
                     if (npt.getPowerOfAttorney() != null) {
 
-                        if (!npt.getPowerOfAttorney().getDescription().isEmpty()) {
-                            np.setPowerOfAttorney(npt.getPowerOfAttorney().getDescription().get(0).getValue());
-                        }
                         /* in ESPD the only look for the person in agent party in power of attorney */
                         if (npt.getPowerOfAttorney().getAgentParty() != null && !npt.getPowerOfAttorney().getAgentParty().getPerson().isEmpty()) {
                             PersonType pt = npt.getPowerOfAttorney().getAgentParty().getPerson().get(0);
@@ -318,10 +353,6 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                                 if (pt.getContact().getTelephone() != null) {
                                     cd.setTelephoneNumber(pt.getContact().getTelephone().getValue());
                                 }
-
-                                if (pt.getContact().getTelefax() != null) {
-                                    cd.setFaxNumber(pt.getContact().getTelefax().getValue());
-                                }
                                 np.setContactDetails(cd);
                             }
 
@@ -329,7 +360,12 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
 
                                 PostalAddress pa = new PostalAddress();
 
-                                if (pt.getResidenceAddress().getPostbox() != null) {
+                                // read post code from cbc:PostalZone...
+                                if (pt.getResidenceAddress().getPostalZone() != null) {
+                                    pa.setPostCode(pt.getResidenceAddress().getPostalZone().getValue());
+                                }
+                                // ...if not available, try cbc:Postbox (for backwards compatibility)
+                                else if (pt.getResidenceAddress().getPostbox() != null) {
                                     pa.setPostCode(pt.getResidenceAddress().getPostbox().getValue());
                                 }
 
@@ -363,9 +399,68 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
         
         // Procurement Project Lot
         if (pplt != null && pplt.getID() != null) {
-            eoDetails.setProcurementProjectLot(pplt.getID().getValue());                    
+            eoDetails.setProcurementProjectLot(pplt.getID().getValue());
         }
 
         return eoDetails;
     }
+
+    /**
+     * Extract ESPD Request details from existing Document Reference (when loading an ESPD Response)
+     *
+     * @param drt
+     * @return
+     */
+    private ESPDRequestDetails extractESPDRequestDetails(DocumentReferenceType drt) {
+        ESPDRequestDetails erd = new ESPDRequestDetails();
+
+        if (drt.getID() != null) {
+            erd.setID(drt.getID().getValue());
+        }
+
+        if (drt.getIssueDate() != null) {
+            erd.setIssueDate(drt.getIssueDate().getValue().toGregorianCalendar().toZonedDateTime().toLocalDate());
+        }
+
+        if (drt.getIssueTime() != null) {
+            erd.setIssueTime(drt.getIssueTime().getValue().toGregorianCalendar().toZonedDateTime().toLocalTime());
+        }
+
+        if (drt.getDocumentDescription() != null && !drt.getDocumentDescription().isEmpty()) {
+            if (drt.getDocumentDescription().get(0) != null) {
+                erd.setDescription(drt.getDocumentDescription().get(0).getValue());
+            }
+        }
+
+        return erd;
+    }
+
+    /**
+     * Extract ESPD Request details from request document.
+     *
+     * @param reqType
+     * @return
+     */
+    private ESPDRequestDetails extractESPDRequestDetails(ESPDResponseType reqType) {
+        ESPDRequestDetails erd = new ESPDRequestDetails();
+
+        if (reqType.getID() != null) {
+            erd.setID(reqType.getID().getValue());
+        }
+
+        if (reqType.getIssueDate() != null) {
+            erd.setIssueDate(reqType.getIssueDate().getValue().toGregorianCalendar().toZonedDateTime().toLocalDate());
+        }
+
+        if (reqType.getIssueTime() != null) {
+            erd.setIssueTime(reqType.getIssueTime().getValue().toGregorianCalendar().toZonedDateTime().toLocalTime());
+        }
+
+        if (reqType.getContractFolderID() != null) {
+            erd.setDescription(reqType.getContractFolderID().getValue());
+        }
+
+        return erd;
+    }
+
 }

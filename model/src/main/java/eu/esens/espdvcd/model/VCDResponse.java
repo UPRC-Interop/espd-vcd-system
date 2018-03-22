@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * TODO: Add description.
+ * Not used.
  *
  */
 public interface VCDResponse extends Serializable {

@@ -19,7 +19,7 @@ import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.*;
 
 public interface SchemaExtractor {
 
-    public RequirementType extractRequirementType(Requirement r);
+    RequirementType extractRequirementType(Requirement r);
 
     default CriterionType extractCriterion(Criterion c) {
 
@@ -100,6 +100,8 @@ public interface SchemaExtractor {
 
             dr.setDocumentTypeCode(createDocumentTypeCode("TED_CN"));
 
+            //dr.setDocumentType(createDocumentType("")); // to be filled with official description, when available
+
             if (cd.getProcurementProcedureTitle() != null || cd.getProcurementProcedureDesc() != null) {
                 dr.setAttachment(new AttachmentType());
 
@@ -114,18 +116,49 @@ public interface SchemaExtractor {
 
                 }
 
-                if (cd.getProcurementProcedureDesc() != null) {
+                // 2018-03-20 UL: modifications to add capabilities to handle Received Notice Number
+                if ((cd.getProcurementProcedureDesc() != null && !cd.getProcurementProcedureDesc().isEmpty()) ||
+                        (cd.getReceivedNoticeNumber() != null && !cd.getReceivedNoticeNumber().isEmpty())) {
                     DescriptionType dt = new DescriptionType();
-                    dt.setValue(cd.getProcurementProcedureDesc());
+                    dt.setValue(cd.getProcurementProcedureDesc() != null ? cd.getProcurementProcedureDesc() : "");
                     if (dr.getAttachment().getExternalReference() == null ) {
                       dr.getAttachment().setExternalReference(new ExternalReferenceType());
                     }
-                    dr.getAttachment().getExternalReference().getDescription().add(dt);
+                    dr.getAttachment().getExternalReference().getDescription().add(0, dt);
+
+                    if (cd.getReceivedNoticeNumber() != null && !cd.getReceivedNoticeNumber().isEmpty()) {
+                        DescriptionType dtRNN = new DescriptionType();
+                        dtRNN.setValue(cd.getReceivedNoticeNumber());
+                        dr.getAttachment().getExternalReference().getDescription().add(1, dtRNN);
+                    }
                 }
             }
         }
         return dr;
     }
+
+
+
+    default DocumentReferenceType extractCADetailsNationalDocumentReference(CADetails cd) {
+
+        DocumentReferenceType dr = null;
+
+        if (cd != null && cd.getNationalOfficialJournal() != null && !cd.getNationalOfficialJournal().isEmpty()) {
+
+            dr = new DocumentReferenceType();
+
+            if (cd.getProcurementPublicationNumber() != null) {
+                dr.setID(createGROWNationalJournalId(cd.getNationalOfficialJournal()));
+            }
+
+            dr.setDocumentTypeCode(createDocumentTypeCode("NGOJ"));
+
+            //dr.setDocumentType(createDocumentType("")); // to be filled with official description, when available
+
+        }
+        return dr;
+    }
+
 
     default ContractingPartyType extractContractingPartyType(CADetails cd) {
 
@@ -150,9 +183,18 @@ public interface SchemaExtractor {
         //pt.getPostalAddress().getCountry().setIdentificationCode(createISOCountryIdCodeType(cd.getCACountry()));
 
 
+        if (cd.getID() != null) {
+            PartyIdentificationType pit = new PartyIdentificationType();
+            pit.setID(new IDType());
+            pit.getID().setValue(cd.getID());
+            pit.getID().setSchemeAgencyID("EU-COM-GROW");
+            pt.getPartyIdentification().add(pit);
+        }
+
         // UBL syntax path: cac:ContractingParty.Party.EndpointID
         if (cd.getElectronicAddressID() != null) {
             EndpointIDType eid = new EndpointIDType();
+            eid.setSchemeAgencyID("EU-COM-GROW");
             eid.setValue(cd.getElectronicAddressID());
             pt.setEndpointID(eid);
         }
@@ -175,13 +217,15 @@ public interface SchemaExtractor {
             at.setCityName(new CityNameType());
             at.getCityName().setValue(cd.getPostalAddress().getCity());
 
-            at.setPostbox(new PostboxType());
-            at.getPostbox().setValue(cd.getPostalAddress().getPostCode());
+            //at.setPostbox(new PostboxType());
+            //at.getPostbox().setValue(cd.getPostalAddress().getPostCode());
+            // UL 2017-10-10: write post code to cbc:PostalZone
+            at.setPostalZone(new PostalZoneType());
+            at.getPostalZone().setValue(cd.getPostalAddress().getPostCode());
 
             at.setCountry(new CountryType());
-            // FIXME: the country should be set using this model element; for compatibility the old method cd.getCACountry() is used
-            //at.getCountry().setIdentificationCode(createISOCountryIdCodeType(cd.getPostalAddress().getCountryCode()));
-            at.getCountry().setIdentificationCode(createISOCountryIdCodeType(cd.getCACountry()));
+            at.getCountry().setIdentificationCode(createISOCountryIdCodeType(cd.getPostalAddress().getCountryCode()));
+
 
             cpp.getParty().setPostalAddress(at);
         }
@@ -208,7 +252,7 @@ public interface SchemaExtractor {
         return cpp;
     }
 
-    default ServiceProviderPartyType  extractServiceProviderPartyType(ServiceProviderDetails spd) {
+    default ServiceProviderPartyType extractServiceProviderPartyType(ServiceProviderDetails spd) {
         if (spd == null) {
             return null;
         }
@@ -219,14 +263,16 @@ public interface SchemaExtractor {
 
         if (spd.getEndpointID() != null) {
             EndpointIDType eid = new EndpointIDType();
+            eid.setSchemeAgencyID("EU-COM-GROW");
             eid.setValue(spd.getEndpointID());
             pt.setEndpointID(eid);
         }
 
-        if (spd.getId() != null) {
+        if (spd.getID() != null) {
             PartyIdentificationType pid = new PartyIdentificationType();
             IDType idt = new IDType();
-            idt.setValue(spd.getId());
+            idt.setSchemeAgencyID("EU-COM-GROW");
+            idt.setValue(spd.getID());
             pid.setID(idt);
             pt.getPartyIdentification().add(pid);
         }
@@ -283,7 +329,19 @@ public interface SchemaExtractor {
     }
     
     default IDType createGROWTemporaryId(String id) {
-        IDType reqGroupIDType = createCustomSchemeIDIDType(id, "COM-GROW-TEMPORARY-ID");
+        // mod 2018-01-16: changed schemeID to "ISO/IEC 9834-8:2008 - 4UUID" according to ESPD 1.0.2 EDM
+        // remark: the DG GROW system uses "COM-GROW-TEMPORARY-ID", if no valid OJS number is entered
+        //IDType reqGroupIDType = createCustomSchemeIDIDType(id, "COM-GROW-TEMPORARY-ID");
+        IDType reqGroupIDType = createCustomSchemeIDIDType(id, "ISO/IEC 9834-8:2008 - 4UUID");
+
+        reqGroupIDType.setSchemeAgencyID("EU-COM-GROW");
+        reqGroupIDType.setSchemeAgencyName("DG GROW (European Commission)");
+        reqGroupIDType.setSchemeVersionID("1.1");
+        return reqGroupIDType;
+    }
+
+    default IDType createGROWNationalJournalId(String id) {
+        IDType reqGroupIDType = createCustomSchemeIDIDType(id, null);
         reqGroupIDType.setSchemeAgencyID("EU-COM-GROW");
         reqGroupIDType.setSchemeAgencyName("DG GROW (European Commission)");
         reqGroupIDType.setSchemeVersionID("1.1");
@@ -349,9 +407,17 @@ public interface SchemaExtractor {
         return dtc;
     }
 
+    default DocumentTypeType createDocumentType(String type) {
+        DocumentTypeType dtt = new DocumentTypeType();
+        dtt.setValue(type);
+        return dtt;
+    }
+
     default IDType createCustomSchemeIDIDType(String id, String schemeId) {
         IDType reqGroupIDType = createDefaultIDType(id);
-        reqGroupIDType.setSchemeID(schemeId);
+        if (schemeId != null) {
+            reqGroupIDType.setSchemeID(schemeId);
+        }
         return reqGroupIDType;
     }
 
@@ -384,11 +450,9 @@ public interface SchemaExtractor {
         ProcurementProjectLotType pplt = new ProcurementProjectLotType();
         pplt.setID(new IDType());
 
-        //pplt.getID().setValue(caDetails.getProcurementProjectLot());
-        // modification UL_2016-12-21: according to ESPD specification 1.0.2, procurement project lot needs to be "0"
-        // and attribute schemeAgencyID needs to be set
         pplt.getID().setValue((eoDetails.getProcurementProjectLot() == null) ||
                 eoDetails.getProcurementProjectLot().isEmpty() ? "0" : eoDetails.getProcurementProjectLot());
+
         pplt.getID().setSchemeAgencyID("EU-COM-GROW");
 
         return pplt;

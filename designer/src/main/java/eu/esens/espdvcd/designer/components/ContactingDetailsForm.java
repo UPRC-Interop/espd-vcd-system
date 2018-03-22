@@ -20,7 +20,7 @@ public class ContactingDetailsForm extends Panel {
     private TextField telephoneNumber = new TextField("Phone number:");
     private TextField emailAddress = new TextField("Email:");
 
-    public ContactingDetailsForm(ContactingDetails contactingDetails, boolean readOnly, boolean useContactPointName) {
+    public ContactingDetailsForm(ContactingDetails contactingDetails, boolean readOnly, boolean useContactPointName, boolean useFax) {
         this.contactingDetails = contactingDetails;
 
         setStyleName("ContactingDetailsForm");
@@ -37,7 +37,9 @@ public class ContactingDetailsForm extends Panel {
         }
         columnA.addComponent(emailAddress);
         columnB.addComponent(telephoneNumber);
-        columnB.addComponent(faxNumber);
+        if (useFax) {
+            columnB.addComponent(faxNumber);
+        }
 
         final Binder<ContactingDetails> binder = new BeanValidationBinder<>(ContactingDetails.class);
         binder.bindInstanceFields(this);
@@ -55,12 +57,21 @@ public class ContactingDetailsForm extends Panel {
         columnB.setSpacing(true);
         columnB.setMargin(false);
 
-        contactPointName.setWidth(400, Unit.PIXELS);
+        /*contactPointName.setWidth(400, Unit.PIXELS);
 
         emailAddress.setWidth(400, Unit.PIXELS);
 
         telephoneNumber.setWidth(300, Unit.PIXELS);
 
-        faxNumber.setWidth(300, Unit.PIXELS);
+        faxNumber.setWidth(300, Unit.PIXELS);*/
+
+        contactPointName.setWidth("17em");
+        //contactPointName.setStyleName("textFieldCaptionText");
+        emailAddress.setWidth("17em");
+        //emailAddress.setStyleName("textFieldCaptionText");
+        telephoneNumber.setWidth("17em");
+        //telephoneNumber.setStyleName("textFieldCaptionText");
+        faxNumber.setWidth("17em");
+        //faxNumber.setStyleName("textFieldCaptionText");
     }
 }

@@ -6,7 +6,7 @@ import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
 import java.io.Serializable;
 
 /**
- * TODO: Add description.
+ * Not used.
  *
  */
 public interface VCDRequest extends Serializable {

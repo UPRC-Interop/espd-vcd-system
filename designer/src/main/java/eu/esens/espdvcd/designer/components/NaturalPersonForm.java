@@ -17,7 +17,7 @@ public class NaturalPersonForm extends Panel {
     private TextField role = new TextField("Role:");
     private TextField birthPlace = new TextField("Birth place:");
     private DateField birthDate = new DateField("Birth date:");
-    private TextArea powerOfAttorney = new TextArea("Detailed information:");
+    //private TextArea powerOfAttorney = new TextArea("Detailed information:");
 
     public NaturalPersonForm(NaturalPerson naturalPerson, boolean readOnly) {
         this.naturalPerson = naturalPerson;
@@ -31,18 +31,25 @@ public class NaturalPersonForm extends Panel {
         columns.addComponent(columnA);
         columns.addComponent(columnB);
 
-        columnA.addComponent(firstName);
+        /*columnA.addComponent(firstName);
         columnA.addComponent(role);
         columnA.addComponent(birthPlace);
         columnA.addComponent(birthDate);
         columnB.addComponent(familyName);
-        columnB.addComponent(powerOfAttorney);
+        columnB.addComponent(powerOfAttorney);*/
+
+        columnA.addComponent(firstName);
+        columnA.addComponent(birthPlace);
+        columnA.addComponent(role);
+        columnB.addComponent(familyName);
+        columnB.addComponent(birthDate);
+
 
         if (this.naturalPerson.getPostalAddress() != null) {
             panelContent.addComponent(new PostalAddressForm(this.naturalPerson.getPostalAddress(), readOnly));
         }
         if (this.naturalPerson.getContactDetails() != null) {
-            panelContent.addComponent(new ContactingDetailsForm(this.naturalPerson.getContactDetails(), readOnly, false));
+            panelContent.addComponent(new ContactingDetailsForm(this.naturalPerson.getContactDetails(), readOnly, false, false));
         }
 
         final Binder<NaturalPerson> binder = new BeanValidationBinder<>(NaturalPerson.class);
@@ -77,7 +84,7 @@ public class NaturalPersonForm extends Panel {
         birthDate.setWidth(300, Unit.PIXELS);
         birthDate.setDateFormat("dd/MM/yyyy");
 
-        powerOfAttorney.setPlaceholder("Detailed information");
-        powerOfAttorney.setWidth(300, Unit.PIXELS);
+        //powerOfAttorney.setPlaceholder("Detailed information");
+        //powerOfAttorney.setWidth(300, Unit.PIXELS);
     }
 }

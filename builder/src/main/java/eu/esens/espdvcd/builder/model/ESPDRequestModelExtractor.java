@@ -1,8 +1,11 @@
 package eu.esens.espdvcd.builder.model;
 
 import eu.esens.espdvcd.model.ESPDRequest;
+import eu.esens.espdvcd.model.ESPDRequestDetails;
 import eu.esens.espdvcd.model.SimpleESPDRequest;
 import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
+import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.IDType;
+
 import java.util.stream.Collectors;
 
 
@@ -21,10 +24,10 @@ public class ESPDRequestModelExtractor implements ModelExtractor {
         req.setCADetails(extractCADetails(reqType.getContractingParty(),
                                           reqType.getContractFolderID(),
                                           reqType.getAdditionalDocumentReference()));
+
         req.setServiceProviderDetails(extractServiceProviderDetails(reqType.getServiceProviderParty()));
         
         return req;
     }
-        
     
 }

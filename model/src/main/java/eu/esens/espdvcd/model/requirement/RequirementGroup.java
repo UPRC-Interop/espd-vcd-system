@@ -25,8 +25,8 @@ public class RequirementGroup implements Serializable {
      * <p>
      * Data type: Text<br>
      * Cardinality: 0..1<br>
-     * InfReqID: <br>
-     * BusReqID: tbr70-013, tbr70-004<br>
+     * InfReqID: tir70-320, tir92-320<br>
+     * BusReqID: tbr70-013, tbr70-004, tbr92-015, tbr92-016<br>
      * UBL syntax path: ccv:Criterion.RequirementGroup.ID<br>
      */
     private String ID;

@@ -2,21 +2,27 @@ package eu.esens.espdvcd.designer.components.requirement;
 
 import com.vaadin.data.BeanValidationBinder;
 import com.vaadin.data.Binder;
+import com.vaadin.data.converter.StringToIntegerConverter;
 import com.vaadin.server.FileDownloader;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.Page;
 import com.vaadin.server.StreamResource;
 import com.vaadin.shared.Position;
 import com.vaadin.ui.*;
+import eu.esens.espdvcd.model.EvidenceIssuerDetails;
 import eu.esens.espdvcd.model.requirement.response.EvidenceURLResponse;
+import eu.esens.espdvcd.model.requirement.response.QuantityIntegerResponse;
+import eu.esens.espdvcd.model.requirement.response.evidence.VCDEvidenceResponse;
 
 import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.UUID;
 
 public class EvidenceURLResponseForm extends ResponseForm {
-    private EvidenceURLResponse evidenceURLResponse = null;
+    private VCDEvidenceResponse evidenceURLResponse = null;
     private TextField evidenceURL = new TextField("Evidence URL: ");
     private Button uploadEvidenceButton = new Button("Upload evidence");
     private Button downloadEvidenceButton = new Button("Download evidence");
@@ -31,7 +37,7 @@ public class EvidenceURLResponseForm extends ResponseForm {
     private Button selectUrlButton = new Button("Evidence URL");
     private Label filenameLabel = new Label("");
 
-    public EvidenceURLResponseForm(EvidenceURLResponse evidenceURLResponse, String caption, int displayEvidences, boolean readOnly) {
+    public EvidenceURLResponseForm(VCDEvidenceResponse evidenceURLResponse, String caption, int displayEvidences, boolean readOnly) {
         this.evidenceURLResponse = evidenceURLResponse;
 
 //        uploadEvidenceButton.addClickListener(this::onEvidenceUpload);
@@ -106,6 +112,21 @@ public class EvidenceURLResponseForm extends ResponseForm {
                     notification.show(Page.getCurrent());
 
                     evidenceURL.setValue(file.toURI().toURL().toExternalForm());
+
+                    // UL 2018-01-25 test code: add meta-data for uploaded evidence
+                    /*
+                    evidenceURLResponse.setName("NEW-DATA-FIELD_EVIDENCE-NAME");
+                    evidenceURLResponse.setDate(LocalDate.now());
+                    evidenceURLResponse.setTime(LocalTime.now());
+                    evidenceURLResponse.setDescription("This is a dummy description for a dummy evidence document.");
+                    evidenceURLResponse.setEmbeddedEvidenceIndicator(true);
+                    evidenceURLResponse.setTypeCode(UUID.randomUUID().toString());
+                    EvidenceIssuerDetails eid = new EvidenceIssuerDetails();
+                    eid.setID(UUID.randomUUID().toString());
+                    eid.setName("Dummy Evidence Issuer");
+                    eid.setWebsite("https://www.uni-koblenz.de");
+                    evidenceURLResponse.setEvidenceIssuer(eid);
+                    */
 
                     showCompletedLayout();
                 } catch (IOException e) {
@@ -188,7 +209,7 @@ public class EvidenceURLResponseForm extends ResponseForm {
         }
 
         // Bind fields
-        final Binder<EvidenceURLResponse> binder = new BeanValidationBinder<>(EvidenceURLResponse.class);
+        final Binder<VCDEvidenceResponse> binder = new BeanValidationBinder<>(VCDEvidenceResponse.class);
         binder.bindInstanceFields(this);
         binder.setBean(this.evidenceURLResponse);
         if (displayEvidences == 1) {

@@ -6,7 +6,7 @@ import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
 import java.util.List;
 
 /**
- * TODO: Add description.
+ * Not used.
  *
  */
 public class VCDResponseImpl implements VCDResponse {

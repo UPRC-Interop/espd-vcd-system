@@ -18,8 +18,6 @@ import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Ulf Lotzmann on 08/06/2016.
@@ -41,7 +39,7 @@ public class VCDDocumentBuilderTest {
         Assert.assertNotNull(isRes);
 
         // create an ESPD request as content for the ASiC
-        espd = new ModelBuilder().importFrom(isRes).createESPDResponse();
+        espd = new VCDModelBuilder().importFrom(isRes).createESPDResponse();
         Assert.assertNotNull(espd);
 
         // create the SignatureHelper for signing the ASiC

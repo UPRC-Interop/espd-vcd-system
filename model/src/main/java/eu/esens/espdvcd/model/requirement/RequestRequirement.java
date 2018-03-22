@@ -2,9 +2,7 @@ package eu.esens.espdvcd.model.requirement;
 
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.requirement.response.Response;
-import eu.esens.espdvcd.model.Evidence;
-import eu.esens.espdvcd.model.requirement.response.ResponseFactory;
-import java.util.List;
+
 import javax.validation.constraints.NotNull;
 
 /**
@@ -18,10 +16,6 @@ public class RequestRequirement implements Requirement {
 
     private static final long serialVersionUID = 528517963577425517L;
 
-
-
-
-
     /**
      * Criterion requirement identifier
      * <p>
@@ -29,8 +23,8 @@ public class RequestRequirement implements Requirement {
      * <p>
      * Data type: Identifier<br>
      * Cardinality: 1..1<br>
-     * InfReqID: tir070-080<br>
-     * BusReqID: tbr70-013, tbr70-004<br>
+     * InfReqID: tir70-080, tir92-135<br>
+     * BusReqID: tbr70-013, tbr70-004, tbr92-015, tbr92-016, tbr92-018<br>
      * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.ID<br>
      */
     @NotNull
@@ -43,8 +37,8 @@ public class RequestRequirement implements Requirement {
      * <p>
      * Data type: Text<br>
      * Cardinality: 1..1<br>
-     * InfReqID: tir070-081<br>
-     * BusReqID: tbr70-013, tbr70-004<br>
+     * InfReqID: tir70-081, tir92-136<br>
+     * BusReqID: tbr70-013, tbr70-004, tbr92-015, tbr92-016, tbr92-018<br>
      * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.Description<br>
      */
     @NotNull
@@ -58,7 +52,7 @@ public class RequestRequirement implements Requirement {
      * Data type: Text<br>
      * Cardinality: 0..1<br>
      * InfReqID: <br>
-     * BusReqID: tbr92-015, tbr92-016, tbr92-018<br>
+     * BusReqID: tbr70-013, tbr70-004, tbr92-015, tbr92-016, tbr92-018<br>
      * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.ResponseDataType<br>
      */
     private ResponseTypeEnum responseDataType;
@@ -101,16 +95,6 @@ public class RequestRequirement implements Requirement {
     }
 
     @Override
-    public List<Evidence> getEvidences() {
-        throw new UnsupportedOperationException("Not supported in ESPD request.");
-    }
-
-    @Override
-    public void setEvidences(List<Evidence> evidences) {
-        throw new UnsupportedOperationException("Not supported in ESPD request.");
-    }
-
-    @Override
     public void setResponseDataType(ResponseTypeEnum responseDataType) {
         this.responseDataType = responseDataType;
     }
@@ -119,4 +103,5 @@ public class RequestRequirement implements Requirement {
     public ResponseTypeEnum getResponseDataType() {
       return this.responseDataType;
     }
+
 }

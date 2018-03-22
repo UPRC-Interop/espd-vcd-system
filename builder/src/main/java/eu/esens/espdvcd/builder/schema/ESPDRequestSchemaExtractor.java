@@ -5,6 +5,8 @@ import eu.esens.espdvcd.model.requirement.Requirement;
 import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementType;
 import java.util.stream.Collectors;
+
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.DocumentReferenceType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ProcurementProjectLotType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ContractFolderIDType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.CopyIndicatorType;
@@ -24,6 +26,13 @@ public class ESPDRequestSchemaExtractor implements SchemaExtractor {
         }
 
         reqType.getAdditionalDocumentReference().add(extractCADetailsDocumentReferece(req.getCADetails()));
+
+        // 2018-03-20 UL: add capabilities to handle National Official Journal
+        DocumentReferenceType drt = extractCADetailsNationalDocumentReference(req.getCADetails());
+        if (drt != null) {
+            reqType.getAdditionalDocumentReference().add(drt);
+        }
+
         reqType.setContractingParty(extractContractingPartyType(req.getCADetails()));
         reqType.setServiceProviderParty(extractServiceProviderPartyType(req.getServiceProviderDetails()));
         reqType.getCriterion().addAll(req.getFullCriterionList().stream()
@@ -39,6 +48,7 @@ public class ESPDRequestSchemaExtractor implements SchemaExtractor {
         ProcurementProjectLotType pplt = new ProcurementProjectLotType();
         pplt.setID(new IDType());
         pplt.getID().setValue("0");
+        pplt.getID().setSchemeAgencyID("EU-COM-GROW");
         reqType.getProcurementProjectLot().add(pplt);
 
         reqType.setCopyIndicator(new CopyIndicatorType());

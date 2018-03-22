@@ -13,8 +13,6 @@ public class QuantityYearResponse extends Response implements Serializable {
 
     private static final long serialVersionUID = -9178109536250269929L;
 
-
-
     /**
      * Criterion fulfillment date
      * <p>
@@ -22,7 +20,7 @@ public class QuantityYearResponse extends Response implements Serializable {
      * <p>
      * Data type: Date<br>
      * Cardinality: 0..1<br>
-     * InfReqID: <br>
+     * InfReqID: tir92-166<br>
      * BusReqID: tbr92-018<br>
      * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.Response.Date<br>
      */

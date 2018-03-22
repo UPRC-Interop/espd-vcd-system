@@ -58,7 +58,7 @@ public class SimpleESPDRequestTest {
     @Test
     public void testSetCriterionList() {
         assertTrue(req.getFullCriterionList().size() == 4);
-    };
+    }
 
     /**
      * Test of getSelectionCriteriaList method, of class SimpleESPDRequest.
