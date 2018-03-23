@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {ApicallService} from "../services/apicall.service";
+import {SelectionCriteria} from "../model/selectionCriteria.model";
+import {DataService} from "../services/data.service";
 
 @Component({
   selector: 'app-selection',
@@ -8,39 +9,45 @@ import {ApicallService} from "../services/apicall.service";
 })
 export class SelectionComponent implements OnInit {
 
-  selectionACriteria:any;
-  selectionBCriteria:any;
-  selectionCCriteria:any;
-  selectionDCriteria:any;
+  selectionACriteria:SelectionCriteria[]=null;
+  selectionBCriteria:SelectionCriteria[]=null;
+  selectionCCriteria:SelectionCriteria[]=null;
+  selectionDCriteria:SelectionCriteria[]=null;
 
 
-  selCriteria:any;
-  constructor(private APIService:ApicallService) { }
+  constructor(private dataService:DataService) { }
 
   ngOnInit() {
-    this.APIService.getSelectionCriteria_A()
+
+    this.dataService.getSelectionACriteria()
       .then(res=>{
         this.selectionACriteria=res;
+        console.log(res);
       })
       .catch(err=>{console.log(err)});
 
-    this.APIService.getSelectionCriteria_B()
+    this.dataService.getSelectionBCriteria()
       .then(res=>{
         this.selectionBCriteria=res;
+        console.log(res);
       })
       .catch(err=>{console.log(err)});
 
-    this.APIService.getSelectionCriteria_C()
+    this.dataService.getSelectionCCriteria()
       .then(res=>{
         this.selectionCCriteria=res;
+        console.log(res);
       })
       .catch(err=>{console.log(err)});
 
-    this.APIService.getSelectionCriteria_D()
+    this.dataService.getSelectionDCriteria()
       .then(res=>{
         this.selectionDCriteria=res;
+        console.log(res);
       })
       .catch(err=>{console.log(err)});
+
+
   }
 
 }

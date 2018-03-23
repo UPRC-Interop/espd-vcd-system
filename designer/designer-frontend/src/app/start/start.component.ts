@@ -3,7 +3,7 @@ import {FormControl, NgForm} from "@angular/forms/forms";
 import {ApicallService} from "../services/apicall.service";
 import {DataService} from "../services/data.service";
 import {Country} from "../model/country.model";
-import {ProcedureType} from "../model/procedureType.model";
+// import {ProcedureType} from "../model/procedureType.model";
 
 
 @Component({
@@ -14,15 +14,11 @@ import {ProcedureType} from "../model/procedureType.model";
 export class StartComponent implements OnInit {
 
   countries:Country[];
-  procedureTypes:ProcedureType[];
+  // procedureTypes:ProcedureType[];
 
   constructor(private dataService:DataService, private APIService:ApicallService) { }
 
   ngOnInit() {
-    // this.APIService.GETCountryList().then(res=>{console.log(res)}).catch(err=>{console.log(err)});
-    // this.APIService.requestCountryList();
-    // this.countries=this.APIService.getCountries();
-    // console.log(this.countries);
     this.dataService.getCountries()
       .then(res=>{
         this.countries=res;
@@ -30,12 +26,7 @@ export class StartComponent implements OnInit {
       })
       .catch(err=>{console.log(err)});
 
-    this.dataService.getProcedureTypes()
-      .then(res=>{
-        this.procedureTypes=res;
-        console.log("this is from start component"); console.log(res);
-      })
-      .catch(err=>{console.log(err)});
+
   }
 
   isCA:boolean=false;
@@ -95,7 +86,7 @@ export class StartComponent implements OnInit {
   onStartSubmit(form:NgForm){
     console.log(form);
     this.APIService.postFile(this.fileToUpload)
-      .then(res=>res)
+      .then(res=>{console.log(res);})
       .catch(err=>err);
 
   }

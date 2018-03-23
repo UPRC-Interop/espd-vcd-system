@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {DataService} from "../services/data.service";
+import {ProcedureType} from "../model/procedureType.model";
+import {Country} from "../model/country.model";
 
 @Component({
   selector: 'app-procedure',
@@ -7,12 +10,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProcedureComponent implements OnInit {
 
-  countries=["Greece", "Germany", "France"];
-  procedures=["Open Procedure","Restricted Procedure","Competitive procedure with Negotiation", "Competitive dialogue",
-              "Innovation Partnership"];
-  constructor() { }
+  countries:Country[]=null;
+  procedureTypes:ProcedureType[]=null;
+  constructor(private dataService:DataService) { }
 
   ngOnInit() {
+
+    this.dataService.getCountries()
+      .then(res=>{
+        this.countries=res;
+        console.log(res);
+      })
+      .catch(err=>{console.log(err)});
+
+    this.dataService.getProcedureTypes()
+      .then(res=>{
+        this.procedureTypes=res;
+        console.log(res);
+      })
+      .catch(err=>{console.log(err)});
   }
 
 }

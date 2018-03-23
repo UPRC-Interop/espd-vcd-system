@@ -17,7 +17,7 @@
        <div class="exclusionCriteria" >
 
          <div class="criteria">
-           <mat-checkbox color="primary" checked="true" disabled>{{criteria.name}}</mat-checkbox>
+           <mat-checkbox color="primary" checked="criteria.selected" disabled>{{criteria.name}}</mat-checkbox>
            <div class="critDesc">{{criteria.description}}</div>
          </div>
 
@@ -45,7 +45,7 @@
         <div class="exclusionCriteria" >
 
           <div class="criteria">
-            <mat-checkbox color="primary" checked="true" disabled>{{criteria.name}}</mat-checkbox>
+            <mat-checkbox color="primary" checked="criteria.selected" disabled>{{criteria.name}}</mat-checkbox>
             <div class="critDesc">{{criteria.description}}</div>
           </div>
 
@@ -72,7 +72,7 @@
       <mat-card *ngFor="let criteria of exlusionCCriteria">
         <div class="exclusionCriteria" >
           <div class="criteria">
-            <mat-checkbox color="primary" checked="true" disabled>{{criteria.name}}</mat-checkbox>
+            <mat-checkbox color="primary" checked="criteria.selected" disabled>{{criteria.name}}</mat-checkbox>
             <div class="critDesc">{{criteria.description}}</div>
           </div>
           <div class="eCertis">
@@ -98,7 +98,7 @@
       <mat-card *ngFor="let criteria of exlusionDCriteria">
         <div class="exclusionCriteria" >
           <div class="criteria">
-            <mat-checkbox color="primary">{{criteria.name}}</mat-checkbox>
+            <mat-checkbox color="primary" checked="criteria.selected">{{criteria.name}}</mat-checkbox>
             <div class="critDesc">{{criteria.description}}</div>
           </div>
           <div class="eCertis">

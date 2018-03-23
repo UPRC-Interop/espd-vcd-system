@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ApicallService} from "../services/apicall.service";
+import {ExclusionCriteria} from "../model/exclusionCriteria.model";
+import {DataService} from "../services/data.service";
 
 @Component({
   selector: 'app-exclusion',
@@ -8,41 +10,43 @@ import {ApicallService} from "../services/apicall.service";
 })
 export class ExclusionComponent implements OnInit {
 
-  exlusionACriteria:any;
-  exlusionBCriteria:any;
-  exlusionCCriteria:any;
-  exlusionDCriteria:any;
+  exlusionACriteria:ExclusionCriteria[]=null;
+  exlusionBCriteria:ExclusionCriteria[]=null;
+  exlusionCCriteria:ExclusionCriteria[]=null;
+  exlusionDCriteria:ExclusionCriteria[]=null;
 
-  constructor(private APIService:ApicallService) { }
+  constructor(private dataService:DataService) { }
 
   ngOnInit() {
-    this.APIService.getExclusionCriteria_A()
+    this.dataService.getExclusionACriteria()
       .then(res=>{
         this.exlusionACriteria=res;
-        // console.log(this.exlusionACriteria);
+        console.log(res);
       })
       .catch(err=>{console.log(err)});
 
-    this.APIService.getExclusionCriteria_B()
+    this.dataService.getExclusionBCriteria()
       .then(res=>{
         this.exlusionBCriteria=res;
-        // console.log(this.exlusionBCriteria);
+        console.log(res);
       })
       .catch(err=>{console.log(err)});
 
-    this.APIService.getExclusionCriteria_C()
+    this.dataService.getExclusionCCriteria()
       .then(res=>{
         this.exlusionCCriteria=res;
-        // console.log(this.exlusionCCriteria);
+        console.log(res);
       })
       .catch(err=>{console.log(err)});
 
-    this.APIService.getExclusionCriteria_D()
+    this.dataService.getExclusionDCriteria()
       .then(res=>{
         this.exlusionDCriteria=res;
-        // console.log(this.exlusionDCriteria);
+        console.log(res);
       })
       .catch(err=>{console.log(err)});
+
+
   }
 
 }

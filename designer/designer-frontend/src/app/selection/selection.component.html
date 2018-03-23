@@ -17,7 +17,7 @@
         <div class="exclusionCriteria" >
 
           <div class="criteria">
-            <mat-checkbox color="primary">{{criteria.name}}</mat-checkbox>
+            <mat-checkbox color="primary" checked="criteria.selected">{{criteria.name}}</mat-checkbox>
             <div class="critDesc">{{criteria.description}}</div>
           </div>
           <div class="eCertis">
@@ -28,7 +28,7 @@
       </mat-card>
     </mat-expansion-panel>
 
-    <mat-expansion-panel expanded="true" *ngIf="selectionACriteria">
+    <mat-expansion-panel expanded="true" *ngIf="selectionBCriteria">
       <mat-expansion-panel-header>
         <mat-panel-title>
           B: Grounds relating to the payment of taxes or social security contributions
@@ -37,10 +37,10 @@
       <div class="desc">
         <h4>Article 58(2) of Directive 2014/24/EU sets out the following selection criteria </h4>
       </div>
-      <mat-card *ngFor="let criteria of selectionACriteria">
+      <mat-card *ngFor="let criteria of selectionBCriteria">
         <div class="exclusionCriteria" >
           <div class="criteria">
-            <mat-checkbox color="primary">{{criteria.name}}</mat-checkbox>
+            <mat-checkbox color="primary" checked="criteria.selected">{{criteria.name}}</mat-checkbox>
             <div class="critDesc">{{criteria.description}}</div>
           </div>
           <div class="eCertis">
@@ -51,7 +51,7 @@
       </mat-card>
     </mat-expansion-panel>
 
-    <mat-expansion-panel expanded="true" *ngIf="selectionACriteria">
+    <mat-expansion-panel expanded="true" *ngIf="selectionCCriteria">
       <mat-expansion-panel-header>
         <mat-panel-title>
           C: Grounds relating to insolvency, conflicts of interests or professional misconduct
@@ -60,10 +60,10 @@
       <div class="desc">
         <h4>Article 58(2) of Directive 2014/24/EU sets out the following selection criteria </h4>
       </div>
-      <mat-card *ngFor="let criteria of selectionACriteria">
+      <mat-card *ngFor="let criteria of selectionCCriteria">
         <div class="exclusionCriteria" >
           <div class="criteria">
-            <mat-checkbox color="primary">{{criteria.name}}</mat-checkbox>
+            <mat-checkbox color="primary" checked="criteria.selected">{{criteria.name}}</mat-checkbox>
             <div class="critDesc">{{criteria.description}}</div>
           </div>
           <div class="eCertis">
@@ -74,7 +74,7 @@
       </mat-card>
     </mat-expansion-panel>
 
-    <mat-expansion-panel expanded="true" *ngIf="selectionACriteria">
+    <mat-expansion-panel expanded="true" *ngIf="selectionDCriteria">
       <mat-expansion-panel-header>
         <mat-panel-title>
           D: Purely national exclusion grounds
@@ -83,10 +83,10 @@
       <div class="desc">
         <h4>Article 58(2) of Directive 2014/24/EU sets out the following selection criteria </h4>
       </div>
-      <mat-card *ngFor="let criteria of selectionACriteria">
+      <mat-card *ngFor="let criteria of selectionDCriteria">
         <div class="exclusionCriteria" >
           <div class="criteria">
-            <mat-checkbox color="primary">{{criteria.name}}</mat-checkbox>
+            <mat-checkbox color="primary" checked="criteria.selected">{{criteria.name}}</mat-checkbox>
             <div class="critDesc">{{criteria.description}}</div>
           </div>
           <div class="eCertis">
