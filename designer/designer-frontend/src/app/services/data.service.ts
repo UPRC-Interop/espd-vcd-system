@@ -3,16 +3,17 @@ import {ApicallService} from "../services/apicall.service";
 import {Country} from "../model/country.model"
 import {ProcedureType} from "../model/procedureType.model";
 import {ExclusionCriteria} from "../model/exclusionCriteria.model";
+import {SelectionCriteria} from "../model/selectionCriteria.model";
 
 @Injectable()
 export class DataService {
 
   countries:Country[]=null;
   procedureTypes:ProcedureType[]=null;
-  exlusionACriteria:ExclusionCriteria[]=null;
-  exlusionBCriteria:ExclusionCriteria[]=null;
-  exlusionCCriteria:ExclusionCriteria[]=null;
-  exlusionDCriteria:ExclusionCriteria[]=null;
+  exclusionACriteria:ExclusionCriteria[]=null;
+  exclusionBCriteria:ExclusionCriteria[]=null;
+  exclusionCCriteria:ExclusionCriteria[]=null;
+  exclusionDCriteria:ExclusionCriteria[]=null;
   selectionACriteria:ExclusionCriteria[]=null;
   selectionBCriteria:ExclusionCriteria[]=null;
   selectionCCriteria:ExclusionCriteria[]=null;
@@ -58,12 +59,12 @@ export class DataService {
   /* =================== Exclusion Criteria ========================== */
 
   getExclusionACriteria():Promise<ExclusionCriteria[]>{
-    if(this.exlusionACriteria!= null) {
-      return Promise.resolve(this.exlusionACriteria);
+    if(this.exclusionACriteria!= null) {
+      return Promise.resolve(this.exclusionACriteria);
     } else {
       return this.APIService.getExclusionCriteria_A()
         .then( res => {
-          this.exlusionACriteria = res;
+          this.exclusionACriteria = res;
           return Promise.resolve(res);
         })
         .catch(err =>
@@ -75,12 +76,12 @@ export class DataService {
   }
 
   getExclusionBCriteria():Promise<ExclusionCriteria[]>{
-    if(this.exlusionBCriteria!= null) {
-      return Promise.resolve(this.exlusionBCriteria);
+    if(this.exclusionBCriteria!= null) {
+      return Promise.resolve(this.exclusionBCriteria);
     } else {
       return this.APIService.getExclusionCriteria_B()
         .then( res => {
-          this.exlusionBCriteria = res;
+          this.exclusionBCriteria = res;
           return Promise.resolve(res);
         })
         .catch(err =>
@@ -92,12 +93,12 @@ export class DataService {
   }
 
   getExclusionCCriteria():Promise<ExclusionCriteria[]>{
-    if(this.exlusionCCriteria!= null) {
-      return Promise.resolve(this.exlusionCCriteria);
+    if(this.exclusionCCriteria!= null) {
+      return Promise.resolve(this.exclusionCCriteria);
     } else {
       return this.APIService.getExclusionCriteria_C()
         .then( res => {
-          this.exlusionCCriteria = res;
+          this.exclusionCCriteria = res;
           return Promise.resolve(res);
         })
         .catch(err =>
@@ -109,12 +110,12 @@ export class DataService {
   }
 
   getExclusionDCriteria():Promise<ExclusionCriteria[]>{
-    if(this.exlusionDCriteria!= null) {
-      return Promise.resolve(this.exlusionDCriteria);
+    if(this.exclusionDCriteria!= null) {
+      return Promise.resolve(this.exclusionDCriteria);
     } else {
       return this.APIService.getExclusionCriteria_D()
         .then( res => {
-          this.exlusionDCriteria = res;
+          this.exclusionDCriteria = res;
           return Promise.resolve(res);
         })
         .catch(err =>
@@ -127,11 +128,11 @@ export class DataService {
 
   /* =================== Selection Criteria ========================== */
 
-  getSelectionACriteria():Promise<ExclusionCriteria[]>{
+  getSelectionACriteria():Promise<SelectionCriteria[]>{
     if(this.selectionACriteria!= null) {
       return Promise.resolve(this.selectionACriteria);
     } else {
-      return this.APIService.getSelectionCriteria()
+      return this.APIService.getSelectionCriteria_A()
         .then( res => {
           this.selectionACriteria = res;
           return Promise.resolve(res);
@@ -144,7 +145,7 @@ export class DataService {
     }
   }
 
-  getSelectionBCriteria():Promise<ExclusionCriteria[]>{
+  getSelectionBCriteria():Promise<SelectionCriteria[]>{
     if(this.selectionBCriteria!= null) {
       return Promise.resolve(this.selectionBCriteria);
     } else {
@@ -161,7 +162,7 @@ export class DataService {
     }
   }
 
-  getSelectionCCriteria():Promise<ExclusionCriteria[]>{
+  getSelectionCCriteria():Promise<SelectionCriteria[]>{
     if(this.selectionCCriteria!= null) {
       return Promise.resolve(this.selectionCCriteria);
     } else {
@@ -178,7 +179,7 @@ export class DataService {
     }
   }
 
-  getSelectionDCriteria():Promise<ExclusionCriteria[]>{
+  getSelectionDCriteria():Promise<SelectionCriteria[]>{
     if(this.selectionDCriteria!= null) {
       return Promise.resolve(this.selectionDCriteria);
     } else {
