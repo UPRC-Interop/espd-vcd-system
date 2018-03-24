@@ -14,10 +14,11 @@ export class DataService {
   exclusionBCriteria:ExclusionCriteria[]=null;
   exclusionCCriteria:ExclusionCriteria[]=null;
   exclusionDCriteria:ExclusionCriteria[]=null;
-  selectionACriteria:ExclusionCriteria[]=null;
-  selectionBCriteria:ExclusionCriteria[]=null;
-  selectionCCriteria:ExclusionCriteria[]=null;
-  selectionDCriteria:ExclusionCriteria[]=null;
+  selectionACriteria:SelectionCriteria[]=null;
+  selectionBCriteria:SelectionCriteria[]=null;
+  selectionCCriteria:SelectionCriteria[]=null;
+  selectionDCriteria:SelectionCriteria[]=null;
+  selectionALLCriteria:SelectionCriteria[]=null;
 
   constructor(private APIService:ApicallService) { }
 
@@ -127,6 +128,24 @@ export class DataService {
   }
 
   /* =================== Selection Criteria ========================== */
+
+  getSelectionALLCriteria():Promise<SelectionCriteria[]>{
+    if(this.selectionALLCriteria!= null) {
+      return Promise.resolve(this.selectionALLCriteria);
+    } else {
+      return this.APIService.getSelectionCriteria()
+        .then( res => {
+          this.selectionALLCriteria = res;
+          return Promise.resolve(res);
+        })
+        .catch(err =>
+        {
+          console.log(err);
+          return Promise.reject(err);
+        });
+    }
+  }
+
 
   getSelectionACriteria():Promise<SelectionCriteria[]>{
     if(this.selectionACriteria!= null) {

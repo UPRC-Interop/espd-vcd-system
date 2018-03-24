@@ -11,7 +11,7 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div class="desc">
-        <h4>Article 57(1) of Directive 2014/24/EU sets out the following reasons for exclusion</h4>
+        <h4>Article {{exlusionACriteria['0'].legislationReference.article}} of {{exlusionACriteria['0'].legislationReference.title}} sets out the following reasons for exclusion</h4>
       </div>
      <mat-card *ngFor="let criteria of exlusionACriteria">
        <div class="exclusionCriteria" >
@@ -39,7 +39,7 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div class="desc">
-        <h4>Article 57(1) of Directive 2014/24/EU sets out the following reasons for exclusion</h4>
+        <h4>Article {{exlusionBCriteria['0'].legislationReference.article}} of {{exlusionBCriteria['0'].legislationReference.title}} sets out the following reasons for exclusion</h4>
       </div>
       <mat-card *ngFor="let criteria of exlusionBCriteria">
         <div class="exclusionCriteria" >
@@ -67,7 +67,7 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div class="desc">
-        <h4>Article 57(1) of Directive 2014/24/EU sets out the following reasons for exclusion</h4>
+        <h4>Article {{exlusionCCriteria['0'].legislationReference.article}} of {{exlusionCCriteria['0'].legislationReference.title}} sets out the following reasons for exclusion</h4>
       </div>
       <mat-card *ngFor="let criteria of exlusionCCriteria">
         <div class="exclusionCriteria" >
@@ -93,7 +93,7 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div class="desc">
-        <h4>Article 57(1) of Directive 2014/24/EU sets out the following reasons for exclusion</h4>
+        <h4>Do the purely national grounds of exclusion, which are specified in the relevant notice or in the procurement documents, apply?</h4>
       </div>
       <mat-card *ngFor="let criteria of exlusionDCriteria">
         <div class="exclusionCriteria" >

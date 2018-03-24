@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ApicallService} from "../services/apicall.service";
 import {ExclusionCriteria} from "../model/exclusionCriteria.model";
+import {LegislationReference} from "../model/legislationReference.model";
 import {DataService} from "../services/data.service";
 
 @Component({
@@ -21,7 +22,8 @@ export class ExclusionComponent implements OnInit {
     this.dataService.getExclusionACriteria()
       .then(res=>{
         this.exlusionACriteria=res;
-        console.log(res);
+        console.log("This is exclusionACriteria: ");
+        console.log(this.exlusionACriteria);
       })
       .catch(err=>{console.log(err)});
 

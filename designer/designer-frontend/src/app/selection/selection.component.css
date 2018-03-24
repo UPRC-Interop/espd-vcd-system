@@ -46,4 +46,9 @@ button {
 
 mat-card {
   margin-bottom:10px;
+  margin-top:10px;
+}
+
+mat-checkbox {
+  font-weight:bold;
 }
