@@ -4,6 +4,7 @@ import {Country} from "../model/country.model"
 import {ProcedureType} from "../model/procedureType.model";
 import {ExclusionCriteria} from "../model/exclusionCriteria.model";
 import {SelectionCriteria} from "../model/selectionCriteria.model";
+import {NgForm} from "@angular/forms/forms";
 
 @Injectable()
 export class DataService {
@@ -20,7 +21,33 @@ export class DataService {
   selectionDCriteria:SelectionCriteria[]=null;
   selectionALLCriteria:SelectionCriteria[]=null;
 
+  isCA:boolean=false;
+  isEO:boolean=false;
+  receivedNoticeNumber:string;
+  selectedCountry:string="";
+
   constructor(private APIService:ApicallService) { }
+
+
+  startCA(form:NgForm){
+    console.log(form);
+    console.log(form.value);
+
+    if(form.value.chooseRole=="CA") {
+        this.isCA=true;
+        this.receivedNoticeNumber=form.value.noticeNumber;
+        if(form.value.CACountry!="") {
+          this.selectedCountry=form.value.CACountry;
+        }
+
+    }
+
+    console.log(this.receivedNoticeNumber);
+    console.log(this.selectedCountry);
+  }
+
+
+
 
 
   getCountries():Promise<Country[]>{
@@ -214,6 +241,8 @@ export class DataService {
         });
     }
   }
+
+
 
 
 }

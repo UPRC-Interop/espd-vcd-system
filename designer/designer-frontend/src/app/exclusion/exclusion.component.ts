@@ -22,29 +22,29 @@ export class ExclusionComponent implements OnInit {
     this.dataService.getExclusionACriteria()
       .then(res=>{
         this.exlusionACriteria=res;
-        console.log("This is exclusionACriteria: ");
-        console.log(this.exlusionACriteria);
+        // console.log("This is exclusionACriteria: ");
+        // console.log(this.exlusionACriteria);
       })
       .catch(err=>{console.log(err)});
 
     this.dataService.getExclusionBCriteria()
       .then(res=>{
         this.exlusionBCriteria=res;
-        console.log(res);
+        // console.log(res);
       })
       .catch(err=>{console.log(err)});
 
     this.dataService.getExclusionCCriteria()
       .then(res=>{
         this.exlusionCCriteria=res;
-        console.log(res);
+        // console.log(res);
       })
       .catch(err=>{console.log(err)});
 
     this.dataService.getExclusionDCriteria()
       .then(res=>{
         this.exlusionDCriteria=res;
-        console.log(res);
+        // console.log(res);
       })
       .catch(err=>{console.log(err)});
 

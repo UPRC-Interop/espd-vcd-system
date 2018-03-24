@@ -15,7 +15,4 @@ export class Cadetails {
   // contactingDetails: ContactingDetails;
   // id: string;
 
-  constructor(response:any) {
-
-  }
 }

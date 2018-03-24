@@ -22,7 +22,7 @@ export class StartComponent implements OnInit {
     this.dataService.getCountries()
       .then(res=>{
         this.countries=res;
-        console.log("this is from start component"); console.log(res);
+        // console.log("this is from start component"); console.log(res);
       })
       .catch(err=>{console.log(err)});
 
@@ -36,7 +36,7 @@ export class StartComponent implements OnInit {
   isReviewESPD:boolean=false;
   isImportESPD:boolean=false;
   isCreateResponse:boolean=false;
-  fileToUpload:File[] = [];
+  fileToUpload:File[] =[];
 
   // countries=["Greece", "Germany", "France"];
 
@@ -84,10 +84,15 @@ export class StartComponent implements OnInit {
   }
 
   onStartSubmit(form:NgForm){
-    console.log(form);
-    this.APIService.postFile(this.fileToUpload)
-      .then(res=>{console.log(res);})
-      .catch(err=>err);
+    // console.log(form);
+    if(this.fileToUpload.length>0) {
+      this.APIService.postFile(this.fileToUpload)
+        .then(res=>{
+          console.log(res);
+        })
+        .catch(err=>err);
+    }
+    this.dataService.startCA(form);
 
   }
 

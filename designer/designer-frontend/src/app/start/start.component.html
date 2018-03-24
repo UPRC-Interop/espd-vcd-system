@@ -1,12 +1,12 @@
 
 <app-welcome></app-welcome>
 
-<form (ngSubmit)="onStartSubmit(f)" #f="ngForm">
+<form  #f="ngForm">
 
   <mat-card>
     <mat-card-title>Who are you?</mat-card-title>
     <mat-card-content>
-      <mat-radio-group name="chooseRole">
+      <mat-radio-group name="chooseRole" ngModel>
         <mat-radio-button color="primary" name="role" value="CA" (change)="handleRole(CA)" #CA>I am a contracting
           authority
         </mat-radio-button>
@@ -21,9 +21,9 @@
     <mat-card-content>
       <div class="wrapper">
         <mat-form-field class="width">
-          <input matInput placeholder="Please Specify the Received Notice Number" required>
+          <input matInput name="noticeNumber" placeholder="Please Specify the Received Notice Number" required ngModel>
         </mat-form-field>
-        <mat-radio-group name="caOptions">
+        <mat-radio-group name="caOptions" ngModel>
           <mat-radio-button color="primary"
                             name="caOption"
                             value="createNewESPD"
@@ -33,7 +33,7 @@
                             name="caOption"
                             value="reuseESPD"
                             (change)="handleCASelection(reuseESPD)"
-                            #reuseESPD>Reuse and existing ESPD</mat-radio-button>
+                            #reuseESPD>Reuse an existing ESPD</mat-radio-button>
           <mat-radio-button color="primary"
                             name="caOption"
                             value="reviewESPD"
@@ -48,7 +48,7 @@
     <mat-card-title>Where is your Authority located?</mat-card-title>
     <mat-card-content>
       <mat-form-field>
-        <mat-select placeholder="Select Country">
+        <mat-select name="CACountry" placeholder="Select Country" ngModel>
           <mat-option>None</mat-option>
           <mat-option *ngFor="let country of countries" [value]="country.code">{{country.name}}</mat-option>
         </mat-select>
@@ -71,7 +71,7 @@
   <mat-card *ngIf="isEO">
     <mat-card-title>What would you like to do?</mat-card-title>
     <mat-card-content>
-      <mat-radio-group name="eoOptions">
+      <mat-radio-group name="eoOptions" ngModel>
         <mat-radio-button color="primary"
                           name="eoOption"
                           value="importESPD"
@@ -100,7 +100,7 @@
     <mat-card-title>Where is your business located?</mat-card-title>
     <mat-card-content>
       <mat-form-field>
-        <mat-select placeholder="Select Country">
+        <mat-select name="EOCountry" placeholder="Select Country" ngModel>
           <mat-option>None</mat-option>
           <mat-option *ngFor="let country of countries" [value]="country.code">{{country.name}}</mat-option>
         </mat-select>
@@ -108,6 +108,6 @@
     </mat-card-content>
   </mat-card>
 
-  <button type="submit" mat-raised-button color="primary" matStepperNext>Next</button>
+  <button type="button" mat-raised-button color="primary" (click)="onStartSubmit(f)"  matStepperNext>Next</button>
 
 </form>

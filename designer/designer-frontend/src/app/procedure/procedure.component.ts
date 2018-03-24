@@ -19,16 +19,19 @@ export class ProcedureComponent implements OnInit {
     this.dataService.getCountries()
       .then(res=>{
         this.countries=res;
-        console.log(res);
+        // console.log(res);
       })
       .catch(err=>{console.log(err)});
 
     this.dataService.getProcedureTypes()
       .then(res=>{
         this.procedureTypes=res;
-        console.log(res);
+        // console.log(res);
       })
       .catch(err=>{console.log(err)});
+
   }
+
+
 
 }
