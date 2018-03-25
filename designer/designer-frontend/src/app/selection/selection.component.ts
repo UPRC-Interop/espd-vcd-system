@@ -80,7 +80,11 @@ export class SelectionComponent implements OnInit {
   }
 
   onSelectionSubmit(form:NgForm){
-    this.dataService.selectionSubmit(this.selectionACriteria,this.selectionBCriteria, this.selectionCCriteria, this.selectionDCriteria)
+    this.dataService.selectionSubmit(this.selectionACriteria,
+      this.selectionBCriteria,
+      this.selectionCCriteria,
+      this.selectionDCriteria,
+      this.isSatisfiedALL)
   }
 
 }

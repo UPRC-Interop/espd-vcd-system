@@ -6,6 +6,7 @@ import {ExclusionCriteria} from "../model/exclusionCriteria.model";
 import {SelectionCriteria} from "../model/selectionCriteria.model";
 import {NgForm} from "@angular/forms/forms";
 import {Cadetails} from "../model/caDetails.model";
+import {ESPDRequest} from "../model/ESPDRequest.model";
 
 @Injectable()
 export class DataService {
@@ -23,6 +24,8 @@ export class DataService {
   selectionALLCriteria:SelectionCriteria[]=null;
 
   CADetails:Cadetails = new Cadetails();
+  espdRequest:ESPDRequest;
+  espdRequestjson:string;
 
   isCA:boolean=false;
   isEO:boolean=false;
@@ -31,6 +34,32 @@ export class DataService {
 
   constructor(private APIService:ApicallService) {
 
+  }
+
+  createESPDRequest(isSatisfiedALL:boolean):ESPDRequest{
+    if(isSatisfiedALL) {
+      this.espdRequest= new ESPDRequest(this.CADetails,
+        this.exclusionACriteria,
+        this.exclusionBCriteria,
+        this.exclusionCCriteria,
+        this.exclusionDCriteria,
+        this.selectionALLCriteria);
+      console.log(this.espdRequest);
+      return this.espdRequest;
+    } else {
+      this.espdRequest= new ESPDRequest(this.CADetails,
+        this.exclusionACriteria,
+        this.exclusionBCriteria,
+        this.exclusionCCriteria,
+        this.exclusionDCriteria,
+        this.selectionACriteria,
+        this.selectionBCriteria,
+        this.selectionCCriteria,
+        this.selectionDCriteria);
+
+      console.log(this.espdRequest);
+      return this.espdRequest;
+    }
   }
 
   exclusionSubmit(exclusionCriteriaA:ExclusionCriteria[],
@@ -47,13 +76,20 @@ export class DataService {
   selectionSubmit(selectionCriteriaA:SelectionCriteria[],
                   selectionCriteriaB:SelectionCriteria[],
                   selectionCriteriaC:SelectionCriteria[],
-                  selectionCriteriaD:SelectionCriteria[]){
+                  selectionCriteriaD:SelectionCriteria[],
+                  isSatisfiedALL:boolean){
       this.selectionACriteria=selectionCriteriaA;
       this.selectionBCriteria=selectionCriteriaB;
       this.selectionCCriteria=selectionCriteriaC;
       this.selectionDCriteria=selectionCriteriaD;
 
+    //create ESPDRequest
+    // console.dir(JSON.stringify(this.createESPDRequest(isSatisfiedALL)));
+
     //apicall service post
+    this.APIService.getXMLRequest(JSON.stringify(this.createESPDRequest(isSatisfiedALL)))
+      .then(res=>{console.log(res);})
+      .catch(err=>{console.log(err);});
 
   }
 
@@ -70,13 +106,7 @@ export class DataService {
         }
 
     }
-
-    console.log(this.receivedNoticeNumber);
-    console.log(this.selectedCountry);
   }
-
-
-
 
 
   getCountries():Promise<Country[]>{

@@ -63,7 +63,7 @@ export class ApicallService {
     return this.http.get<SelectionCriteria[]>("http://localhost:8080/api/criteriaList/predefined/selection/quality").toPromise()
   }
 
-
+  /* ============ UPLOAD XML GET JSON ================= */
   postFile(filesToUpload: File[]) {
 
     const formData: FormData = new FormData();
@@ -74,6 +74,19 @@ export class ApicallService {
     // const header = new HttpHeaders({'Content-Type':'application/xml; charset=utf-8'});
     let header = new HttpHeaders();
     header = header.set('Content-Type', 'application/xml; charset=utf-8');
+    return this.http.post<any>("http://localhost:8080/api/espd/v1/request", formData).toPromise();
+
+  }
+
+  /* ================= UPLOAD JSON GET XML Request*/
+  getXMLRequest(ESPDRequest:string){
+    const formData: FormData = new FormData();
+
+    if(ESPDRequest) {
+      formData.append(`ESPDRequestString`, ESPDRequest);
+    }
+    let header = new HttpHeaders();
+    // header = header.set('Content-Type', 'application/json; charset=utf-8');
     return this.http.post<any>("http://localhost:8080/api/espd/v1/request", formData).toPromise();
 
   }
