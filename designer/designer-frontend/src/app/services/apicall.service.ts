@@ -80,14 +80,14 @@ export class ApicallService {
 
   /* ================= UPLOAD JSON GET XML Request*/
   getXMLRequest(ESPDRequest:string){
-    const formData: FormData = new FormData();
-
-    if(ESPDRequest) {
-      formData.append(`ESPDRequestString`, ESPDRequest);
-    }
-    let header = new HttpHeaders();
+    // const formData: FormData = new FormData();
+    //
+    // if(ESPDRequest) {
+    //   formData.append(`ESPDRequestString`, ESPDRequest);
+    // }
+    // let header = new HttpHeaders();
     // header = header.set('Content-Type', 'application/json; charset=utf-8');
-    return this.http.post<any>("http://localhost:8080/api/espd/v1/request", formData).toPromise();
+    return this.http.post<any>("http://localhost:8080/api/espd/v1/request", ESPDRequest).toPromise();
 
   }
 
