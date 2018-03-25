@@ -1,18 +1,20 @@
+import {PostalAddress} from "./postalAddress.model";
+import {ContactingDetails} from "./contactingDetails.model";
 export class Cadetails {
-  receivedNoticeNumber:string;
-  procurementPublicationNumber: string;
-  procurementPublicationURI: string;
-  nationalOfficialJournal: string;
-  caofficialName: string;
-  cacountry: string;
-  procurementProcedureType:string;
   procurementProcedureTitle: string;
   procurementProcedureDesc: string;
   procurementProcedureFileReferenceNo: string;
-  // electronicAddressID?: any;
-  // webSiteURI: string;
-  // postalAddress: PostalAddress;
-  // contactingDetails: ContactingDetails;
-  // id: string;
+  procurementPublicationNumber: string;
+  electronicAddressID?: string;
+  webSiteURI?: string;
+  postalAddress?: PostalAddress;
+  contactingDetails?: ContactingDetails;
+  procurementPublicationURI: string;
+  id: string;
+  caofficialName: string;
+  cacountry: string;
+  receivedNoticeNumber?:string;
+  nationalOfficialJournal?: string;
+  procurementProcedureType?:string;
 
 }

@@ -15,7 +15,7 @@
       </div>
       <mat-form-field>
         <!--<label for="noticeNumber">Received Notice Number</label>-->
-        <input matInput id="noticeNumber" placeholder="Received notice number">
+        <input matInput id="noticeNumber" name="receivedNoticeNumber" [(ngModel)]="dataService.receivedNoticeNumber" placeholder="Received notice number">
       </mat-form-field>
       <mat-form-field>
         <input matInput placeholder="Notice number in the OJS">
@@ -44,7 +44,7 @@
         <input matInput placeholder="Official Name">
       </mat-form-field>
       <mat-form-field>
-        <mat-select placeholder="Select Country">
+        <mat-select name="CACountry" placeholder="Select Country" [(ngModel)]="dataService.selectedCountry">
           <mat-option>None</mat-option>
           <mat-option *ngFor="let country of countries" [value]="country.code">{{country.name}}</mat-option>
         </mat-select>

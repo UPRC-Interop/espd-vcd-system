@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import {DataService} from "../services/data.service";
 import {ProcedureType} from "../model/procedureType.model";
 import {Country} from "../model/country.model";
@@ -8,10 +8,13 @@ import {Country} from "../model/country.model";
   templateUrl: './procedure.component.html',
   styleUrls: ['./procedure.component.css']
 })
-export class ProcedureComponent implements OnInit {
+export class ProcedureComponent implements OnInit, OnChanges {
 
   countries:Country[]=null;
   procedureTypes:ProcedureType[]=null;
+
+
+
   constructor(private dataService:DataService) { }
 
   ngOnInit() {
@@ -30,6 +33,10 @@ export class ProcedureComponent implements OnInit {
       })
       .catch(err=>{console.log(err)});
 
+  }
+
+  ngOnChanges(changes: SimpleChanges){
+    console.log(this.dataService.receivedNoticeNumber);
   }
 
 
