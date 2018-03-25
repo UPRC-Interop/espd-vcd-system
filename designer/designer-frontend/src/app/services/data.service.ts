@@ -7,6 +7,7 @@ import {SelectionCriteria} from "../model/selectionCriteria.model";
 import {NgForm} from "@angular/forms/forms";
 import {Cadetails} from "../model/caDetails.model";
 import {ESPDRequest} from "../model/ESPDRequest.model";
+import {FullCriterion} from "../model/fullCriterion.model";
 
 @Injectable()
 export class DataService {
@@ -22,6 +23,7 @@ export class DataService {
   selectionCCriteria:SelectionCriteria[]=null;
   selectionDCriteria:SelectionCriteria[]=null;
   selectionALLCriteria:SelectionCriteria[]=null;
+  fullCriterionList:FullCriterion[]=null;
 
   CADetails:Cadetails = new Cadetails();
   espdRequest:ESPDRequest;
@@ -36,30 +38,53 @@ export class DataService {
 
   }
 
-  createESPDRequest(isSatisfiedALL:boolean):ESPDRequest{
-    if(isSatisfiedALL) {
-      this.espdRequest= new ESPDRequest(this.CADetails,
-        this.exclusionACriteria,
-        this.exclusionBCriteria,
-        this.exclusionCCriteria,
-        this.exclusionDCriteria,
-        this.selectionALLCriteria);
-      console.log(this.espdRequest);
-      return this.espdRequest;
-    } else {
-      this.espdRequest= new ESPDRequest(this.CADetails,
-        this.exclusionACriteria,
-        this.exclusionBCriteria,
-        this.exclusionCCriteria,
-        this.exclusionDCriteria,
-        this.selectionACriteria,
-        this.selectionBCriteria,
-        this.selectionCCriteria,
-        this.selectionDCriteria);
+  makeFullCriterionList(exclusionACriteria:ExclusionCriteria[],
+                        exclusionBCriteria:ExclusionCriteria[],
+                        exclusionCCriteria:ExclusionCriteria[],
+                        exclusionDCriteria:ExclusionCriteria[],
+                        isSatisfiedALL:boolean,
+                        selectionALLCriteria?:SelectionCriteria[],
+                        selectionACriteria?:SelectionCriteria[],
+                        selectionBCriteria?:SelectionCriteria[],
+                        selectionCCriteria?:SelectionCriteria[],
+                        selectionDCriteria?:SelectionCriteria[]):FullCriterion[]{
+    // let exAString:string= JSON.stringify(exclusionACriteria);
+    // let exBString:string= JSON.stringify(exclusionBCriteria);
 
+    if(isSatisfiedALL) {
+      var combineJsonArray = [...exclusionACriteria ,
+        ...exclusionBCriteria,
+        ...exclusionCCriteria,
+        ...exclusionDCriteria,
+        ...selectionALLCriteria];
+      console.dir(combineJsonArray);
+      return combineJsonArray;
+
+    } else {
+      var combineJsonArray = [
+        ...exclusionACriteria ,
+        ...exclusionBCriteria,
+        ...exclusionCCriteria,
+        ...exclusionDCriteria,
+        ...selectionACriteria,
+        ...selectionBCriteria,
+        ...selectionCCriteria,
+        ...selectionDCriteria];
+      console.dir(combineJsonArray);
+      return combineJsonArray;
+    }
+
+
+
+
+  }
+
+  createESPDRequest():ESPDRequest{
+
+      this.espdRequest= new ESPDRequest(this.CADetails,this.fullCriterionList);
       console.log(this.espdRequest);
       return this.espdRequest;
-    }
+
   }
 
   exclusionSubmit(exclusionCriteriaA:ExclusionCriteria[],
@@ -85,9 +110,19 @@ export class DataService {
 
     //create ESPDRequest
     // console.dir(JSON.stringify(this.createESPDRequest(isSatisfiedALL)));
+    this.fullCriterionList=this.makeFullCriterionList(this.exclusionACriteria,
+      this.exclusionBCriteria,
+      this.exclusionCCriteria,
+      this.exclusionDCriteria,
+      isSatisfiedALL,
+      this.selectionALLCriteria,
+      this.selectionACriteria,
+      this.selectionBCriteria,
+      this.selectionCCriteria,
+      this.selectionDCriteria);
 
     //apicall service post
-    this.APIService.getXMLRequest(JSON.stringify(this.createESPDRequest(isSatisfiedALL)))
+    this.APIService.getXMLRequest(JSON.stringify(this.createESPDRequest()))
       .then(res=>{console.log(res);})
       .catch(err=>{console.log(err);});
 

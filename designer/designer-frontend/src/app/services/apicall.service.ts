@@ -85,9 +85,13 @@ export class ApicallService {
     // if(ESPDRequest) {
     //   formData.append(`ESPDRequestString`, ESPDRequest);
     // }
-    // let header = new HttpHeaders();
-    // header = header.set('Content-Type', 'application/json; charset=utf-8');
-    return this.http.post<any>("http://localhost:8080/api/espd/v1/request", ESPDRequest).toPromise();
+
+    let header = new HttpHeaders();
+    let _header = header.append('Content-Type', 'application/json; charset=utf-8');
+    let options = {headers:_header};
+
+    // headers = header.append('Content-Type', 'application/json; charset=utf-8');
+    return this.http.post<any>("http://localhost:8080/api/espd/v1/request", ESPDRequest, options).toPromise();
 
   }
 
