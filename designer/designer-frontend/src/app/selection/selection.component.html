@@ -28,7 +28,11 @@
 
         <div class="exclusionCriteria" >
           <div class="criteria">
-            <mat-checkbox color="primary" checked="selectionALLCriteria['0'].selected" disabled>{{selectionALLCriteria['0'].name}}</mat-checkbox>
+            <mat-checkbox color="primary"
+                          checked="selectionALLCriteria['0'].selected"
+                          disabled
+                          name="selectionSatisfiedALL"
+                          [(ngModel)]="selectionALLCriteria['0'].selected">{{selectionALLCriteria['0'].name}}</mat-checkbox>
             <div class="critDesc">{{selectionALLCriteria['0'].description}}</div>
           </div>
         </div>
@@ -52,11 +56,14 @@
       <div class="desc">
         <h4>Article {{selectionACriteria['0'].legislationReference.article}} of {{selectionACriteria['0'].legislationReference.title}} sets out the following selection criteria </h4>
       </div>
-      <mat-card *ngFor="let criteria of selectionACriteria">
+      <mat-card *ngFor="let criteria of selectionACriteria; let i=index">
         <div class="exclusionCriteria" >
 
           <div class="criteria">
-            <mat-checkbox color="primary" checked="criteria.selected">{{criteria.name}}</mat-checkbox>
+            <mat-checkbox color="primary"
+                          checked="criteria.selected"
+                          name="selectionACriteria"
+                          [(ngModel)]="selectionACriteria[i].selected">{{criteria.name}}</mat-checkbox>
             <div class="critDesc">{{criteria.description}}</div>
           </div>
           <div class="eCertis">
@@ -76,10 +83,13 @@
       <div class="desc">
         <h4>Article {{selectionBCriteria['0'].legislationReference.article}} of {{selectionBCriteria['0'].legislationReference.title}} sets out the following selection criteria </h4>
       </div>
-      <mat-card *ngFor="let criteria of selectionBCriteria">
-        <div class="exclusionCriteria" >
+      <mat-card *ngFor="let criteria of selectionBCriteria; let i=index">
+        <div class="exclusionCriteria">
           <div class="criteria">
-            <mat-checkbox color="primary" checked="criteria.selected">{{criteria.name}}</mat-checkbox>
+            <mat-checkbox color="primary"
+                          checked="criteria.selected"
+                          name="selectionBCriteria"
+                          [(ngModel)]="selectionBCriteria[i].selected">{{criteria.name}}</mat-checkbox>
             <div class="critDesc">{{criteria.description}}</div>
           </div>
           <div class="eCertis">
@@ -99,10 +109,13 @@
       <div class="desc">
         <h4>Article {{selectionCCriteria['0'].legislationReference.article}} of {{selectionCCriteria['0'].legislationReference.title}} sets out the following selection criteria </h4>
       </div>
-      <mat-card *ngFor="let criteria of selectionCCriteria">
-        <div class="exclusionCriteria" >
+      <mat-card *ngFor="let criteria of selectionCCriteria; let i=index">
+        <div class="exclusionCriteria">
           <div class="criteria">
-            <mat-checkbox color="primary" checked="criteria.selected">{{criteria.name}}</mat-checkbox>
+            <mat-checkbox color="primary"
+                          checked="criteria.selected"
+                          name="selectionCCriteria"
+                          [(ngModel)]="selectionCCriteria[i].selected">{{criteria.name}}</mat-checkbox>
             <div class="critDesc">{{criteria.description}}</div>
           </div>
           <div class="eCertis">
@@ -122,10 +135,13 @@
       <div class="desc">
         <h4>Article {{selectionDCriteria['0'].legislationReference.article}} of {{selectionDCriteria['0'].legislationReference.title}} sets out the following selection criteria </h4>
       </div>
-      <mat-card *ngFor="let criteria of selectionDCriteria">
-        <div class="exclusionCriteria" >
+      <mat-card *ngFor="let criteria of selectionDCriteria; let i=index">
+        <div class="exclusionCriteria">
           <div class="criteria">
-            <mat-checkbox color="primary" checked="criteria.selected">{{criteria.name}}</mat-checkbox>
+            <mat-checkbox color="primary"
+                          checked="criteria.selected"
+                          name="selectionDCriteria"
+                          [(ngModel)]="selectionDCriteria[i].selected">{{criteria.name}}</mat-checkbox>
             <div class="critDesc">{{criteria.description}}</div>
           </div>
           <div class="eCertis">
@@ -138,5 +154,5 @@
 
   </mat-accordion>
   <button mat-raised-button color="primary" matStepperPrevious>Back</button>
-  <button type="submit" mat-raised-button color="primary" matStepperNext>Next</button>
+  <button type="submit" mat-raised-button color="primary" matStepperNext (click)="onSelectionSubmit(f)">Next</button>
 </form>

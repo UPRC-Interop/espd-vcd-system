@@ -3,6 +3,7 @@ import {ApicallService} from "../services/apicall.service";
 import {ExclusionCriteria} from "../model/exclusionCriteria.model";
 import {LegislationReference} from "../model/legislationReference.model";
 import {DataService} from "../services/data.service";
+import {NgForm} from "@angular/forms/forms";
 
 @Component({
   selector: 'app-exclusion',
@@ -49,6 +50,15 @@ export class ExclusionComponent implements OnInit {
       .catch(err=>{console.log(err)});
 
 
+  }
+
+
+  onExclusionSubmit(form:NgForm){
+    console.log(form.value);
+      this.dataService.exclusionSubmit(this.exlusionACriteria,
+                                      this.exlusionBCriteria,
+                                      this.exlusionCCriteria,
+                                      this.exlusionDCriteria);
   }
 
 }

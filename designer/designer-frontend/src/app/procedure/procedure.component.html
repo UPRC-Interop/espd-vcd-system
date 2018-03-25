@@ -18,13 +18,13 @@
         <input matInput id="noticeNumber" name="receivedNoticeNumber" [(ngModel)]="dataService.receivedNoticeNumber" placeholder="Received notice number">
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Notice number in the OJS">
+        <input matInput name="noticeNumberOJS" [(ngModel)]="dataService.CADetails.procurementPublicationNumber" placeholder="Notice number in the OJS">
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="OJS URL">
+        <input matInput name="ojsURL" placeholder="OJS URL" [(ngModel)]="dataService.CADetails.procurementPublicationURI">
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="National Official Journal">
+        <input matInput name="nationalJournal" placeholder="National Official Journal" [(ngModel)]="dataService.CADetails.nationalOfficialJournal">
       </mat-form-field>
 
       <div class="desc">
@@ -41,7 +41,7 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-form-field>
-        <input matInput placeholder="Official Name">
+        <input matInput placeholder="Official Name" name="CAofficialName" [(ngModel)]="dataService.CADetails.caofficialName">
       </mat-form-field>
       <mat-form-field>
         <mat-select name="CACountry" placeholder="Select Country" [(ngModel)]="dataService.selectedCountry">
@@ -61,23 +61,28 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-form-field>
-        <mat-select placeholder="Type of Procedure">
+        <mat-select placeholder="Type of Procedure" name="typeOfProcedure" [(ngModel)]="dataService.CADetails.procurementProcedureType">
           <mat-option>None</mat-option>
           <mat-option *ngFor="let proc of procedureTypes" [value]="proc.code">{{proc.name}}</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Title">
+        <input matInput placeholder="Title" name="title" [(ngModel)]="dataService.CADetails.procurementProcedureTitle">
       </mat-form-field>
       <mat-form-field>
         <!--<input matInput placeholder="Short Description">-->
-        <textarea matInput id="shortDesc" cols="30" rows="10" placeholder="Short Description"></textarea>
+        <textarea matInput
+                  id="shortDesc" cols="30" rows="10"
+                  placeholder="Short Description"
+                  name="description"
+                  [(ngModel)]="dataService.CADetails.procurementProcedureDesc"></textarea>
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="File Reference Number">
+        <input matInput placeholder="File Reference Number" name="fileReferenceNumber"
+               [(ngModel)]="dataService.CADetails.procurementProcedureFileReferenceNo">
       </mat-form-field>
     </mat-expansion-panel>
   </mat-accordion>
   <button mat-raised-button color="primary" matStepperPrevious>Back</button>
-  <button type="submit" mat-raised-button color="primary" matStepperNext>Next</button>
+  <button type="button" mat-raised-button color="primary" matStepperNext (click)="onProcedureSubmit(f)">Next</button>
 </form>

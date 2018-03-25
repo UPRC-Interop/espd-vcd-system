@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {SelectionCriteria} from "../model/selectionCriteria.model";
 import {DataService} from "../services/data.service";
-import {FormControl} from "@angular/forms/forms";
+import {FormControl, NgForm} from "@angular/forms/forms";
 
 @Component({
   selector: 'app-selection',
@@ -22,6 +22,9 @@ export class SelectionComponent implements OnInit {
   constructor(private dataService:DataService) { }
 
   ngOnInit() {
+
+
+
 
     this.dataService.getSelectionALLCriteria()
       .then(res=>{
@@ -74,6 +77,10 @@ export class SelectionComponent implements OnInit {
       this.isSatisfiedALL=true;
       this.isAtoD=false;
     }
+  }
+
+  onSelectionSubmit(form:NgForm){
+    this.dataService.selectionSubmit(this.selectionACriteria,this.selectionBCriteria, this.selectionCCriteria, this.selectionDCriteria)
   }
 
 }

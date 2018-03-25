@@ -13,11 +13,11 @@
       <div class="desc">
         <h4>Article {{exlusionACriteria['0'].legislationReference.article}} of {{exlusionACriteria['0'].legislationReference.title}} sets out the following reasons for exclusion</h4>
       </div>
-     <mat-card *ngFor="let criteria of exlusionACriteria">
+     <mat-card *ngFor="let criteria of exlusionACriteria; let i = index">
        <div class="exclusionCriteria" >
 
          <div class="criteria">
-           <mat-checkbox color="primary" checked="criteria.selected" disabled>{{criteria.name}}</mat-checkbox>
+           <mat-checkbox name=exlusionACriteria[i] color="primary" checked="exlusionACriteria[i].selected" [(ngModel)]="exlusionACriteria[i].selected" disabled>{{criteria.name}}</mat-checkbox>
            <div class="critDesc">{{criteria.description}}</div>
          </div>
 
@@ -95,10 +95,10 @@
       <div class="desc">
         <h4>Do the purely national grounds of exclusion, which are specified in the relevant notice or in the procurement documents, apply?</h4>
       </div>
-      <mat-card *ngFor="let criteria of exlusionDCriteria">
+      <mat-card *ngFor="let criteria of exlusionDCriteria; let i=index">
         <div class="exclusionCriteria" >
           <div class="criteria">
-            <mat-checkbox color="primary" checked="criteria.selected">{{criteria.name}}</mat-checkbox>
+            <mat-checkbox color="primary" checked="criteria.selected" name="exclusionDCriteria" [(ngModel)]="exlusionDCriteria[i].selected">{{criteria.name}}</mat-checkbox>
             <div class="critDesc">{{criteria.description}}</div>
           </div>
           <div class="eCertis">
@@ -110,5 +110,5 @@
     </mat-expansion-panel>
   </mat-accordion>
   <button mat-raised-button color="primary" matStepperPrevious>Back</button>
-  <button type="submit" mat-raised-button color="primary" matStepperNext>Next</button>
+  <button type="submit" mat-raised-button color="primary" matStepperNext (click)="onExclusionSubmit(f)">Next</button>
 </form>

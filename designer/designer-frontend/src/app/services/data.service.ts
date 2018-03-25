@@ -5,6 +5,7 @@ import {ProcedureType} from "../model/procedureType.model";
 import {ExclusionCriteria} from "../model/exclusionCriteria.model";
 import {SelectionCriteria} from "../model/selectionCriteria.model";
 import {NgForm} from "@angular/forms/forms";
+import {Cadetails} from "../model/caDetails.model";
 
 @Injectable()
 export class DataService {
@@ -21,12 +22,40 @@ export class DataService {
   selectionDCriteria:SelectionCriteria[]=null;
   selectionALLCriteria:SelectionCriteria[]=null;
 
+  CADetails:Cadetails = new Cadetails();
+
   isCA:boolean=false;
   isEO:boolean=false;
   receivedNoticeNumber:string;
   selectedCountry:string="";
 
-  constructor(private APIService:ApicallService) { }
+  constructor(private APIService:ApicallService) {
+
+  }
+
+  exclusionSubmit(exclusionCriteriaA:ExclusionCriteria[],
+                  exclusionCriteriaB:ExclusionCriteria[],
+                  exclusionCriteriaC:ExclusionCriteria[],
+                  exclusionCriteriaD:ExclusionCriteria[]){
+    this.exclusionACriteria=exclusionCriteriaA;
+    this.exclusionBCriteria=exclusionCriteriaB;
+    this.exclusionCCriteria=exclusionCriteriaC;
+    this.exclusionDCriteria=exclusionCriteriaD;
+
+  }
+
+  selectionSubmit(selectionCriteriaA:SelectionCriteria[],
+                  selectionCriteriaB:SelectionCriteria[],
+                  selectionCriteriaC:SelectionCriteria[],
+                  selectionCriteriaD:SelectionCriteria[]){
+      this.selectionACriteria=selectionCriteriaA;
+      this.selectionBCriteria=selectionCriteriaB;
+      this.selectionCCriteria=selectionCriteriaC;
+      this.selectionDCriteria=selectionCriteriaD;
+
+    //apicall service post
+
+  }
 
 
   startCA(form:NgForm){
