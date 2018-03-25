@@ -11,7 +11,9 @@ import eu.esens.espdvcd.model.*;
 
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.http.Part;
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
+import java.io.InputStreamReader;
 import java.util.*;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -23,7 +25,6 @@ public final class Server {
     private final static Logger LOGGER = Logger.getLogger(Server.class.getName());
     private final static ObjectWriter ow = new ObjectMapper().findAndRegisterModules().writer().withDefaultPrettyPrinter();
     private final static ObjectMapper om = new ObjectMapper().findAndRegisterModules();
-
     private final static Map<String, List<CodelistItem>> codelistsMap = new LinkedHashMap<>();
 
     private static final String EXCLUSION_REGEXP = "^CRITERION.EXCLUSION.+";
@@ -79,10 +80,8 @@ public final class Server {
                     {
                         String codelistName = request.params("codelist");
                         String lang = request.queryParams("lang");
-                        if(codelistsMap.containsKey(codelistName)) {
-                            LOGGER.info("Got cached codelist.");
-                            return ow.writeValueAsString(codelistsMap.get(codelistName));
-                        }
+                        if(codelistsMap.containsKey(codelistName+'.'+lang))
+                            return ow.writeValueAsString(codelistsMap.get(codelistName+'.'+lang));
                         else {
                             try{
                                 Map<String,String> theCodelistMap = CodelistsV2.valueOf(codelistName).getDataMap(lang);
@@ -186,7 +185,8 @@ public final class Server {
                     });
 
                     post("/request", (rq, rsp) -> {
-                        if (rq.contentType().equals("application/json")) {
+                        if (rq.contentType().contains("application/json")) {
+                            LOGGER.info(rq.body());
                             ESPDRequest espdRequest = om.readValue(rq.body(), RegulatedESPDRequest.class);
                             return BuilderFactory.V1.getDocumentBuilderFor(espdRequest).getAsInputStream();
                         }else if (rq.contentType().contains("multipart/form-data")) {
@@ -194,7 +194,10 @@ public final class Server {
                             rq.raw().setAttribute("org.eclipse.jetty.multipartConfig", multipartConfigElement);
                             Collection<Part> parts = rq.raw().getParts();
                             if(parts.iterator().hasNext()){
-                                ESPDRequest req = BuilderFactory.V1.getModelBuilder().importFrom(parts.iterator().next().getInputStream()).createRegulatedESPDRequest();
+                                Part part = parts.iterator().next();
+                                LOGGER.info(part.getContentType());
+                                LOGGER.info(new BufferedReader(new InputStreamReader(part.getInputStream())).lines().collect(Collectors.joining("\n")));
+                                ESPDRequest req = BuilderFactory.V1.getModelBuilder().importFrom(part.getInputStream()).createRegulatedESPDRequest();
                                 return ow.writeValueAsString(req);
                             }else {
                                 rsp.status(400);
@@ -204,6 +207,9 @@ public final class Server {
                             ESPDRequest req = BuilderFactory.V1.getModelBuilder().importFrom(new ByteArrayInputStream(rq.bodyAsBytes())).createRegulatedESPDRequest();
                             return ow.writeValueAsString(req);
                         }else {
+                            LOGGER.warning("Invalid request.");
+                            LOGGER.warning("Got unexpected content/type: "+rq.contentType());
+                            LOGGER.warning("With body: "+rq.body());
                             rsp.status(400);
                             return "Bad request";
                         }
