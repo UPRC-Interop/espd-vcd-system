@@ -28,7 +28,7 @@ dependencies {
     compile "com.sun.xml.bind:jaxb-core:${project.jaxb_impl_version}"
     
     // schema
-    compile("eu.europa.ec.grow.espd:exchange-model2:2.0.0-SNAPSHOT")
+    compile("eu.europa.ec.grow.espd:exchange-model2:2.0.1-SNAPSHOT")
     compile group: 'eu.europa.ec.grow.espd', name: 'exchange-model', version: '1.0.2'
 }
 

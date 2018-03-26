@@ -6,6 +6,6 @@ dependencies {
     compile 'org.glassfish:javax.el:3.0.1-b08'
 
     // schema
-    compile("eu.europa.ec.grow.espd:exchange-model2:2.0.0-SNAPSHOT")
+    compile("eu.europa.ec.grow.espd:exchange-model2:2.0.1-SNAPSHOT")
     compile group: 'eu.europa.ec.grow.espd', name: 'exchange-model', version: '1.0.2'
 }

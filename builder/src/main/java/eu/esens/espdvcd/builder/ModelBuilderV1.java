@@ -3,23 +3,20 @@ package eu.esens.espdvcd.builder;
 import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.builder.model.ModelFactory;
 import eu.esens.espdvcd.builder.util.SchemaUtil;
-import eu.esens.espdvcd.codelist.CodelistsV1;
 import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
 import eu.esens.espdvcd.retriever.criteria.PredefinedESPDCriteriaExtractor;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
-
 import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
 import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
+
+import javax.xml.bind.JAXBException;
+import javax.xml.transform.stream.StreamSource;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.xml.bind.JAXBException;
-import javax.xml.transform.stream.StreamSource;
 
 /**
  * The ModelBuilder is a builder pattern implemented class, that is used for
@@ -27,7 +24,7 @@ import javax.xml.transform.stream.StreamSource;
  *
  * @since 1.0
  */
-public class ModelBuilderV1 {
+public class ModelBuilderV1 extends ModelBuilder {
 
     private EODetails eoDetails = null;
     private CADetails caDetails = null;
@@ -179,15 +176,7 @@ public class ModelBuilderV1 {
             }
         } else {
             req = new RegulatedESPDRequest();
-            if (criteriaExtractor != null) {
-                try {
-                    req.setCriterionList(criteriaExtractor.getFullList());
-                } catch (RetrieverException ex) {
-                    Logger.getLogger(ModelBuilderV1.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            } else {
-                req.setCriterionList(getEmptyCriteriaList());
-            }
+            handleCriteriaExtractor(req);
             req.setCADetails(createDefaultCADetails());
             req.setServiceProviderDetails(createDefaultServiceProviderDetails());
         }
@@ -206,6 +195,18 @@ public class ModelBuilderV1 {
         req.getFullCriterionList().forEach(this::applyCriteriaWorkaround);
 
         return req;
+    }
+
+    private void handleCriteriaExtractor(ESPDRequest req) {
+        if (criteriaExtractor != null) {
+            try {
+                req.setCriterionList(criteriaExtractor.getFullList());
+            } catch (RetrieverException ex) {
+                Logger.getLogger(ModelBuilderV1.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            req.setCriterionList(getEmptyCriteriaList());
+        }
     }
 
     /**
@@ -241,15 +242,7 @@ public class ModelBuilderV1 {
 
         } else {
             res = new RegulatedESPDResponse();
-            if (criteriaExtractor != null) {
-                try {
-                    res.setCriterionList(criteriaExtractor.getFullList());
-                } catch (RetrieverException ex) {
-                    Logger.getLogger(ModelBuilderV1.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            } else {
-                res.setCriterionList(getEmptyCriteriaList());
-            }
+            handleCriteriaExtractor(res);
         }
 
         if (res.getCADetails() == null) {
@@ -291,20 +284,20 @@ public class ModelBuilderV1 {
         return bis;
     }
 
-    private List<SelectableCriterion> getCriteriaList() {
-        CriteriaExtractor cr = new PredefinedESPDCriteriaExtractor();
-        try {
-            return cr.getFullList();
-        } catch (RetrieverException ex) {
-            Logger.getLogger(ModelBuilderV1.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
+//    private List<SelectableCriterion> getCriteriaList() {
+//        CriteriaExtractor cr = new PredefinedESPDCriteriaExtractor();
+//        try {
+//            return cr.getFullList();
+//        } catch (RetrieverException ex) {
+//            Logger.getLogger(ModelBuilderV1.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return null;
+//    }
 
     private ESPDRequestType readRegulatedESPDRequestFromStream(InputStream is) {
         try {
-            // Start with the convience methods provided by JAXB. If there are
-            // perfomance issues we will swicth back to the JAXB API Usage
+            // Start with the convenience methods provided by JAXB. If there are
+            // performance issues we will switch back to the JAXB API Usage
             return SchemaUtil.getUnmarshaller().unmarshal(new StreamSource(is), ESPDRequestType.class).getValue();
         } catch (JAXBException ex) {
             Logger.getLogger(ModelBuilderV1.class.getName()).log(Level.SEVERE, null, ex);
@@ -322,8 +315,8 @@ public class ModelBuilderV1 {
 
     protected ESPDResponseType readRegulatedESPDResponseFromStream(InputStream is) {
         try {
-            // Start with the convience methods provided by JAXB. If there are
-            // perfomance issues we will swicth back to the JAXB API Usage
+            // Start with the convenience methods provided by JAXB. If there are
+            // performance issues we will switch back to the JAXB API Usage
             return SchemaUtil.getUnmarshaller().unmarshal(new StreamSource(is), ESPDResponseType.class).getValue();
         } catch (JAXBException ex) {
             Logger.getLogger(ModelBuilderV1.class.getName()).log(Level.SEVERE, null, ex);
@@ -391,59 +384,4 @@ public class ModelBuilderV1 {
         return res;
     }
 
-    private EODetails createDefaultEODetails() {
-        // Empty EODetails (with initialized lists)
-        System.out.println("Creating default EO Details");
-        EODetails eod = new EODetails();
-        eod.setContactingDetails(new ContactingDetails());
-        eod.setPostalAddress(new PostalAddress());
-        eod.setNaturalPersons(new ArrayList<>());
-
-        NaturalPerson np = new NaturalPerson();
-        np.setPostalAddress(new PostalAddress());
-        np.setContactDetails(new ContactingDetails());
-
-        eod.getNaturalPersons().add(np);
-        return eod;
-    }
-
-    private CADetails createDefaultCADetails() {
-        // Default initialization of the ESPDRequest and ESPDResponse Models.
-        // Empty CADetails
-        System.out.println("Creating default CA Details");
-        CADetails cad = new CADetails();
-        cad.setContactingDetails(new ContactingDetails());
-        cad.setPostalAddress(new PostalAddress());
-        return cad;
-    }
-
-    private ServiceProviderDetails createDefaultServiceProviderDetails() {
-        // Empty ServiceProviderDetails
-        ServiceProviderDetails spd = new ServiceProviderDetails();
-        // fill with default content
-        spd.setName("e-SENS");
-        spd.setEndpointID("N/A");
-        spd.setID("N/A");
-        spd.setWebsiteURI("N/A");
-        return spd;
-    }
-
-    private List<SelectableCriterion> getEmptyCriteriaList() {
-        // Empty Criteria List
-        return new ArrayList<>();
-    }
-
-    private void applyCriteriaWorkaround(Criterion c) {
-
-//        if (c.getTypeCode().equals("SELECTION.ECONOMIC_FINANCIAL_STANDING") 
-//                || c.getTypeCode().equals("DATA_ON_ECONOMIC_OPERATOR")) {
-        if (c.getDescription().equals("")) {
-            String oldName = c.getName();
-            c.setDescription(oldName);
-            // Since we have no name, we will add the Criteria type name as Criterion Name
-            c.setName(CodelistsV1.CriteriaType.getValueForId(c.getTypeCode()) + " (No Name)");
-//                System.out.println("Workaround for: "+c.getID() +" "+c.getDescription());
-        }
-//        }      
-    }
 }

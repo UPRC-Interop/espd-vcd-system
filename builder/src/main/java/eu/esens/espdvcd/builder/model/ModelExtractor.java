@@ -11,18 +11,22 @@ import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.Cr
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.LegislationType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementGroupType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementType;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.*;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ContractFolderIDType;
+import test.x.ubl.pre_award.commonaggregate.TenderingCriterionPropertyGroupType;
+import test.x.ubl.pre_award.commonaggregate.TenderingCriterionPropertyType;
+import test.x.ubl.pre_award.commonaggregate.TenderingCriterionType;
 
 public interface ModelExtractor {
 
     default CADetails extractCADetails(ContractingPartyType caParty,
-            ContractFolderIDType contractFolderId,
-            List<DocumentReferenceType> additionalDocumentReferenceList) {
+                                       ContractFolderIDType contractFolderId,
+                                       List<DocumentReferenceType> additionalDocumentReferenceList) {
 
         CADetails cd = new CADetails();
 
@@ -44,7 +48,6 @@ public interface ModelExtractor {
             if (caParty.getParty().getWebsiteURI() != null) {
                 cd.setWebSiteURI(caParty.getParty().getWebsiteURI().getValue());
             }
-
 
 
             if (caParty.getParty().getPostalAddress() != null) {
@@ -100,7 +103,6 @@ public interface ModelExtractor {
         }
 
 
-
         if (contractFolderId != null && contractFolderId.getValue() != null) {
             cd.setProcurementProcedureFileReferenceNo(contractFolderId.getValue());
         }
@@ -135,6 +137,122 @@ public interface ModelExtractor {
 
         }
         return cd;
+    }
+
+    default CADetails extractCADetails(List<test.x.ubl.pre_award.commonaggregate.ContractingPartyType> caParty,
+                                       test.x.ubl.pre_award.commonbasic.ContractFolderIDType contractFolderId,
+                                       List<test.x.ubl.pre_award.commonaggregate.DocumentReferenceType> additionalDocumentReferenceList) {
+
+        CADetails cd = new CADetails();
+
+        if (!caParty.isEmpty() && caParty.get(0) != null) {
+            if (!caParty.get(0).getParty().getPartyName().isEmpty()
+                    && caParty.get(0).getParty().getPartyName().get(0).getName() != null) {
+                cd.setCAOfficialName(caParty.get(0).getParty().getPartyName().get(0).getName().getValue());
+            }
+
+            if (!caParty.get(0).getParty().getPartyIdentification().isEmpty()
+                    && caParty.get(0).getParty().getPartyIdentification().get(0).getID() != null) {
+                cd.setID(caParty.get(0).getParty().getPartyIdentification().get(0).getID().getValue());
+            }
+
+            if (caParty.get(0).getParty().getEndpointID() != null) {
+                cd.setElectronicAddressID(caParty.get(0).getParty().getEndpointID().getValue());
+            }
+
+            if (caParty.get(0).getParty().getWebsiteURI() != null) {
+                cd.setWebSiteURI(caParty.get(0).getParty().getWebsiteURI().getValue());
+            }
+
+
+            if (caParty.get(0).getParty().getPostalAddress() != null) {
+                PostalAddress caAddress = new PostalAddress();
+
+                if (caParty.get(0).getParty().getPostalAddress().getStreetName() != null) {
+                    caAddress.setAddressLine1(caParty.get(0).getParty().getPostalAddress().getStreetName().getValue());
+                }
+
+                //if (caParty.getParty().getPostalAddress().getPostbox() != null) {
+                //    caAddress.setPostCode(caParty.getParty().getPostalAddress().getPostbox().getValue());
+                //}
+                // UL 2017-10-10: read post code from cbc:PostalZone
+                if (caParty.get(0).getParty().getPostalAddress().getPostalZone() != null) {
+                    caAddress.setPostCode(caParty.get(0).getParty().getPostalAddress().getPostalZone().getValue());
+                }
+                // if not available, try cbc:Postbox (for backwards compatibility)
+                else if (caParty.get(0).getParty().getPostalAddress().getPostbox() != null) {
+                    caAddress.setPostCode(caParty.get(0).getParty().getPostalAddress().getPostbox().getValue());
+                }
+
+                if (caParty.get(0).getParty().getPostalAddress().getCityName() != null) {
+                    caAddress.setCity(caParty.get(0).getParty().getPostalAddress().getCityName().getValue());
+                }
+
+                if (caParty.get(0).getParty().getPostalAddress().getCountry() != null
+                        && caParty.get(0).getParty().getPostalAddress().getCountry().getIdentificationCode() != null) {
+                    caAddress.setCountryCode(caParty.get(0).getParty().getPostalAddress().getCountry().getIdentificationCode().getValue());
+                }
+
+                cd.setPostalAddress(caAddress);
+
+            }
+
+            if (caParty.get(0).getParty().getContact() != null) {
+                cd.setContactingDetails(new ContactingDetails());
+                if (caParty.get(0).getParty().getContact().getName() != null) {
+                    cd.getContactingDetails().setContactPointName(caParty.get(0).getParty().getContact().getName().getValue());
+                }
+
+                if (caParty.get(0).getParty().getContact().getElectronicMail() != null) {
+                    cd.getContactingDetails().setEmailAddress(caParty.get(0).getParty().getContact().getElectronicMail().getValue());
+                }
+
+                if (caParty.get(0).getParty().getContact().getTelephone() != null) {
+                    cd.getContactingDetails().setTelephoneNumber(caParty.get(0).getParty().getContact().getTelephone().getValue());
+                }
+
+                if (caParty.get(0).getParty().getContact().getTelefax() != null) {
+                    cd.getContactingDetails().setFaxNumber(caParty.get(0).getParty().getContact().getTelefax().getValue());
+                }
+            }
+        }
+
+
+        if (contractFolderId != null && contractFolderId.getValue() != null) {
+            cd.setProcurementProcedureFileReferenceNo(contractFolderId.getValue());
+        }
+        if (!additionalDocumentReferenceList.isEmpty()) {
+
+            // Find an entry with TED_CN Value
+            Optional<test.x.ubl.pre_award.commonaggregate.DocumentReferenceType> optRef = additionalDocumentReferenceList.stream()
+                    .filter(r -> r.getDocumentTypeCode() != null && r.getDocumentTypeCode().getValue().equals("TED_CN"))
+                    .findFirst();
+            optRef.ifPresent(ref -> {
+
+                if (ref.getID() != null) {
+                    cd.setProcurementPublicationNumber(ref.getID().getValue());
+                }
+                if (ref.getAttachment() != null && ref.getAttachment().getExternalReference() != null) {
+                    test.x.ubl.pre_award.commonaggregate.ExternalReferenceType ert = ref.getAttachment().getExternalReference();
+
+                    if (ert.getFileName() != null) {
+                        cd.setProcurementProcedureTitle(ert.getFileName().getValue());
+                    }
+
+                    if (!ert.getDescription().isEmpty()) {
+                        cd.setProcurementProcedureDesc(ert.getDescription().get(0).getValue());
+                    }
+
+                    if (ert.getURI() != null) {
+                        cd.setProcurementPublicationURI(ert.getURI().getValue());
+                    }
+                }
+
+            });
+
+        }
+        return cd;
+
     }
 
     default ServiceProviderDetails extractServiceProviderDetails(ServiceProviderPartyType sppt) {
@@ -175,6 +293,14 @@ public interface ModelExtractor {
 
     }
 
+    default ServiceProviderDetails extractServiceProviderDetails(List<test.x.ubl.pre_award.commonaggregate.ContractingPartyType> sppt) {
+        try {
+            return BuilderFactory.V2.getModelBuilder().createRegulatedESPDRequest().getServiceProviderDetails();
+        } catch (BuilderException e) {
+            return null;
+        }
+    }
+
     default SelectableCriterion extractSelectableCriterion(CriterionType ct, boolean isSelected) {
 
         String id = ct.getID().getValue();
@@ -197,6 +323,52 @@ public interface ModelExtractor {
         return extractSelectableCriterion(ct, true);
     }
 
+    default SelectableCriterion extractSelectableCriterion(TenderingCriterionType tct, boolean isSelected) {
+        String id = tct.getID().getValue();
+        String desc = tct.getDescription().isEmpty() ? "" : tct.getDescription().get(0).getValue();
+        String typeCode = tct.getCriterionTypeCode().getValue();
+        String name = tct.getName().getValue();
+
+        LegislationReference lr = extractDefaultLegalReferenceV2(tct.getLegislation());
+
+        List<RequirementGroup> rgList = tct.getTenderingCriterionPropertyGroup().stream()
+                .map(t -> extractRequirementGroup(t))
+                .collect(Collectors.toList());
+
+        SelectableCriterion selCr = new SelectableCriterion(id, typeCode, name, desc, lr, rgList);
+        selCr.setSelected(isSelected);
+        return selCr;
+    }
+
+    default SelectableCriterion extractSelectableCriterion(TenderingCriterionType tct) {
+        return extractSelectableCriterion(tct, true);
+    }
+
+    default RequirementGroup extractRequirementGroup(TenderingCriterionPropertyGroupType rgType) {
+
+        RequirementGroup rg = null;
+        if (rgType.getID() != null) {
+            String id = rgType.getID().getValue();
+            rg = new RequirementGroup(id);
+            if (rgType.getPropertyGroupTypeCode() != null) {
+                rg.setCondition(rgType.getPropertyGroupTypeCode().getValue());
+            }
+        }
+
+        if (rg != null) {
+            List<Requirement> rList = rgType.getTenderingCriterionProperty().stream()
+                    .map(r -> extractRequirement(r))
+                    .collect(Collectors.toList());
+            List<RequirementGroup> childRg = rgType.getSubsidiaryTenderingCriterionPropertyGroup().stream()
+                    .map(t -> extractRequirementGroup(t))
+                    .collect(Collectors.toList());
+            rg.setRequirements(rList);
+            rg.setRequirementGroups(childRg);
+        }
+
+        return rg;
+    }
+
     default RequirementGroup extractRequirementGroup(RequirementGroupType rgType) {
 
         RequirementGroup rg = null;
@@ -206,7 +378,7 @@ public interface ModelExtractor {
             if (rgType.getPi() != null)
                 rg.setCondition(rgType.getPi());
         }
-        
+
         if (rg != null) {
             List<Requirement> rList = rgType.getRequirement().stream()
                     .map(r -> extractRequirement(r))
@@ -221,7 +393,11 @@ public interface ModelExtractor {
         return rg;
     }
 
-    default LegislationReference extractDefaultLegalReference(List<LegislationType> lrList) {
+    default LegislationReference extractDefaultLegalReferenceV2(List<test.x.ubl.pre_award.commonaggregate.LegislationType> lrList) {
+        return null;
+    }
+
+    default LegislationReference extractDefaultLegalReference(List<isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.LegislationType> lrList) {
 
         //First check if there is an EU_* jurisdiction
         LegislationReference lr;
@@ -254,6 +430,24 @@ public interface ModelExtractor {
                 lt.getArticle().getValue(),
                 lt.getURI().getValue());
         return lr;
+    }
+
+    default Requirement extractRequirement(TenderingCriterionPropertyType rt) {
+        String theId = null;
+        if (rt.getID() != null) {
+            theId = rt.getID().getValue();
+        }
+        String theDescription = null;
+        if (!rt.getDescription().isEmpty()
+                && rt.getDescription().get(0) != null) {
+            theDescription = rt.getDescription().get(0).getValue();
+        }
+        Requirement r = new ResponseRequirement(
+                theId,
+                ResponseTypeEnum.valueOf(rt.getValueDataTypeCode().getValue()),
+                theDescription
+        );
+        return r;
     }
 
     default Requirement extractRequirement(RequirementType rt) {
