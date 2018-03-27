@@ -7,27 +7,24 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.esens.espdvcd.codelist.CodelistsV1;
 import eu.esens.espdvcd.model.SelectableCriterion;
-import eu.esens.espdvcd.model.retriever.ECertisSelectableCriterionImpl;
+import eu.esens.espdvcd.model.retriever.ECertisCriterion;
+import eu.esens.espdvcd.model.retriever.ECertisCriterionImpl;
+import eu.esens.espdvcd.model.retriever.ECertisEvidenceGroup;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
-
-import eu.esens.espdvcd.model.retriever.ECertisEvidenceGroup;
-
-import eu.esens.espdvcd.model.retriever.ECertisSelectableCriterion;
 
 /**
  * @author konstantinos Raptis
@@ -50,17 +47,20 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
     private static final String ERROR_UNEXPECTED_STRUCTURE = "Error... JSON Structure does not Match Structure Expected";
 
     // Contains all eu criteria
-    private List<ECertisSelectableCriterion> criterionList;
+    private Map<String, ECertisCriterion> eCertisCriterionMap;
+    private List<SelectableCriterion> predefinedCriterionList;
 
     // Multilinguality vars
     private static final String DEFAULT_LANG = "en";
     private String lang;
 
     // Multilinguality related errors
-    private static final String ERROR_INVALID_LANGUAGE_CODE = "Error... Provided Language Code %s is not Included in CodeLists";
+    private static final String ERROR_INVALID_LANGUAGE_CODE = "Error... Provided Language Code %s is not Included in codelists";
 
     // Country code related errors
-    private static final String ERROR_INVALID_COUNTRY_CODE = "Error... Provided Country Code %s is not Included in CodeLists";
+    private static final String ERROR_INVALID_COUNTRY_CODE = "Error... Provided Country Code %s is not Included in codelists";
+
+    private PredefinedESPDCriteriaExtractor predefinedExtractor;
 
     public enum CriterionOrigin {
 
@@ -69,6 +69,7 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
     }
 
     public ECertisCriteriaExtractor() {
+        this.predefinedExtractor = new PredefinedESPDCriteriaExtractor();
         this.lang = DEFAULT_LANG;
         try {
             ECERTIS_PROPERTIES.load(new FileInputStream(ECERTIS_CONFIG_PATH));
@@ -82,28 +83,39 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
     }
 
     /**
-     * Lazy initialization of European Criteria List
+     * Lazy initialization of European predefined originating criteria
+     */
+    private void initPredefinedCriterionList() {
+
+        // If Not Initialized Yet, Initialize predefined Criterion List
+        if (predefinedCriterionList == null) {
+            predefinedCriterionList = predefinedExtractor.getFullList();
+        }
+    }
+
+    /**
+     * Lazy initialization of European e-Certis originating criteria
      *
      * @throws RetrieverException
      */
-    private void initCriterionList() throws RetrieverException {
+    private void initECertisCriterionList() throws RetrieverException {
 
-        // If Not Initialized Yet, Initialize Criterion List
-        if (criterionList == null) {
-            criterionList = new ArrayList<>();
+        // If Not Initialized Yet, Initialize e-Certis Criterion List
+        if (eCertisCriterionMap == null) {
+            eCertisCriterionMap = new LinkedHashMap<>();
 
             ExecutorService executorService = Executors.newCachedThreadPool();
-            Set<Callable<ECertisSelectableCriterion>> callableSet = new HashSet<>();
+            Set<Callable<ECertisCriterion>> callableSet = new HashSet<>();
             getAllEuropeanCriteriaID().forEach(ID -> callableSet.add(() -> getCriterion(ID)));
 
             try {
-                List<Future<ECertisSelectableCriterion>> futureList = executorService.invokeAll(callableSet);
+                List<Future<ECertisCriterion>> futureList = executorService.invokeAll(callableSet);
 
                 for (Future f : futureList) {
-                    ECertisSelectableCriterion c = (ECertisSelectableCriterion) f.get();
+                    ECertisCriterion c = (ECertisCriterion) f.get();
                     // If Description is not provided, do not add Criterion
                     if (c.getDescription() != null) {
-                        criterionList.add(c);
+                        eCertisCriterionMap.put(c.getID(), c);
                     }
                 }
 
@@ -118,46 +130,43 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
 
     @Override
     public synchronized List<SelectableCriterion> getFullList() throws RetrieverException {
+        initECertisCriterionList();
+        initPredefinedCriterionList();
 
-        initCriterionList();
-        List<SelectableCriterion> lc = criterionList.stream()
-                .map((ECertisSelectableCriterion c) -> (SelectableCriterion) c)
-                .collect(Collectors.toList());
-        return lc;
+        predefinedCriterionList.forEach(this::applyECertisData);
+        return predefinedCriterionList;
     }
 
     @Override
-    public synchronized List<SelectableCriterion> getFullList(List<SelectableCriterion> initialList)
-            throws RetrieverException {
+    public synchronized List<SelectableCriterion> getFullList(List<SelectableCriterion> initialList) throws RetrieverException {
+        initECertisCriterionList();
+        initPredefinedCriterionList();
 
-        initCriterionList();
         return getFullList(initialList, false);
     }
 
     @Override
-    public synchronized List<SelectableCriterion> getFullList(List<SelectableCriterion> initialList,
-                                                              boolean addAsSelected) throws RetrieverException {
+    public synchronized List<SelectableCriterion> getFullList(List<SelectableCriterion> initialList, boolean addAsSelected) throws RetrieverException {
+        initECertisCriterionList();
+        initPredefinedCriterionList();
 
-        initCriterionList();
-        System.out.println("Criterion List Size:" + criterionList.size());
         Set<SelectableCriterion> initialSet = new LinkedHashSet<>();
         initialSet.addAll(initialList);
-        Set<SelectableCriterion> fullSet = criterionList.stream()
-                .map((ECertisSelectableCriterion c) -> (SelectableCriterion) c)
-                .collect(Collectors.toSet());
+        predefinedCriterionList.stream().forEach(sc -> applyECertisDataAsSelected(sc, addAsSelected));
+        Set<SelectableCriterion> fullSet = new HashSet<>(predefinedCriterionList);
         initialSet.addAll(fullSet);
-        System.out.println("Criterion List Size in model:" + initialSet.size());
+        Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.SEVERE, "Criterion List Size in model: " + initialSet.size());
         return new ArrayList<>(initialSet);
     }
 
     @Override
-    public List<ECertisSelectableCriterion> getNationalCriterionMapping(String ID, String countryCode)
+    public List<ECertisCriterion> getNationalCriterionMapping(String ID, String countryCode)
             throws RetrieverException {
-        List<ECertisSelectableCriterion> nationalCriterionTypeList = new ArrayList<>();
+        List<ECertisCriterion> nationalCriterionTypeList = new ArrayList<>();
 
         if (isCountryCodeExist(countryCode)) {
 
-            ECertisSelectableCriterion source = getCriterion(ID);
+            ECertisCriterion source = getCriterion(ID);
             CriterionOrigin origin = extractCriterionOrigin(source);
 
             switch (origin) {
@@ -167,7 +176,7 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
                     break;
                 case NATIONAL:
                     // Get the EU Parent Criterion
-                    ECertisSelectableCriterion parent = getParentCriterion(source);
+                    ECertisCriterion parent = getParentCriterion(source);
                     // Extract National Criteria
                     nationalCriterionTypeList = getSubCriterion(parent, countryCode);
                     break;
@@ -190,10 +199,9 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
      * @throws RetrieverException
      */
     @Override
-    public ECertisSelectableCriterion getCriterion(String ID)
-            throws RetrieverException {
+    public ECertisCriterion getCriterion(String ID) throws RetrieverException {
 
-        ECertisSelectableCriterionImpl theCriterion = null;
+        ECertisCriterion theCriterion = null;
 
         try {
             ObjectMapper mapper = new ObjectMapper();
@@ -201,7 +209,7 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
             mapper.setSerializationInclusion(Include.NON_EMPTY);
             theCriterion = mapper.readValue(
                     getFromECertis(ALL_CRITERIA + "/" + ID).toString(),
-                    ECertisSelectableCriterionImpl.class);
+                    ECertisCriterionImpl.class);
         } catch (IOException ex) {
             handleMappingException(ex);
         }
@@ -225,23 +233,45 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
     }
 
     @Override
-    public List<ECertisEvidenceGroup> getEvidences(String ID)
-            throws RetrieverException {
+    public List<ECertisEvidenceGroup> getEvidences(String ID) throws RetrieverException {
         return getCriterion(ID).getEvidenceGroups();
     }
 
-    // Get SubCriterion/a of a European Criterion by Country Code
-    private List<ECertisSelectableCriterion> getSubCriterion(ECertisSelectableCriterion c, String countryCode) {
-        return c.getSubCriterions().stream()
-                .filter(theCt -> theCt.getLegislationReference() != null)
-                .filter(theCt -> theCt.getLegislationReference()
+    /**
+     * @param sc The Selectable Criterion, in which the e-Certis data will be applied
+     * @return
+     */
+    private void applyECertisData(final SelectableCriterion sc) {
+        applyECertisDataAsSelected(sc, false);
+    }
+
+    /**
+     * @param sc The Selectable Criterion, in which the e-Certis data will be applied
+     * @param sc
+     */
+    private void applyECertisDataAsSelected(final SelectableCriterion sc, final boolean addAsSelected) {
+        // find the equivalent criterion from e-Certis criteria map and (if exist)
+        // use it in order to update current predefined criterion
+        Optional.ofNullable(eCertisCriterionMap.get(sc.getID()))
+                .ifPresent(ec -> {
+                    sc.setName(ec.getName());
+                    sc.setDescription(ec.getDescription());
+                    sc.setLegislationReference(ec.getLegislationReference());
+                    sc.setSelected(addAsSelected);
+                });
+    }
+
+    // Get SubCriterion/s of a European Criterion by Country Code
+    private List<ECertisCriterion> getSubCriterion(ECertisCriterion ec, String countryCode) {
+        return ec.getSubCriterions().stream()
+                .filter(c -> c.getLegislationReference() != null)
+                .filter(c -> c.getLegislationReference()
                         .getJurisdictionLevelCode().equals(countryCode))
                 .collect(Collectors.toList());
     }
 
     // Get Parent Criterion of a National Criterion
-    private ECertisSelectableCriterion getParentCriterion(ECertisSelectableCriterion c)
-            throws RetrieverException {
+    private ECertisCriterion getParentCriterion(ECertisCriterion c) throws RetrieverException {
         if (c.getParentCriterion() == null) {
             throw new RetrieverException("Error... Unable to Extract Parent Criterion of " + c.getID());
         }
@@ -254,8 +284,8 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
      * @return A list with the IDs
      * @throws RetrieverException
      */
-    private List<String> getAllEuropeanCriteriaID()
-            throws RetrieverException {
+    List<String> getAllEuropeanCriteriaID() throws RetrieverException {
+
         List<String> IDList = new ArrayList<>();
 
         try {
@@ -283,7 +313,7 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
      * @param c The criterion
      * @return The Criterion's Origin
      */
-    private CriterionOrigin extractCriterionOrigin(ECertisSelectableCriterion c) {
+    private CriterionOrigin extractCriterionOrigin(ECertisCriterion c) {
 
         CriterionOrigin origin = CriterionOrigin.UNKNOWN;
 

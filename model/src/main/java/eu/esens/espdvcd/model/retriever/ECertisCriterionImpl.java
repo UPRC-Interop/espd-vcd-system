@@ -1,16 +1,14 @@
 package eu.esens.espdvcd.model.retriever;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import eu.esens.espdvcd.model.LegislationReference;
-import eu.esens.espdvcd.model.SelectableCriterion;
-import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.util.CustomLegislationReferenceDeserializer;
 import eu.esens.espdvcd.model.util.CustomStringValueDeserializer;
 import eu.esens.espdvcd.model.util.CustomTextValueDeserializer;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,13 +29,18 @@ import java.util.List;
             "subCriterions",
             "parentCriterion"
         })
-public class ECertisSelectableCriterionImpl extends SelectableCriterion implements ECertisSelectableCriterion {
+public class ECertisCriterionImpl implements ECertisCriterion {
 
+    private String ID;
+    private String typeCode;
+    private String name;
+    private String description;
     private String domainID;
     private String versionID;
+    private LegislationReference legislationReference;
     private List<ECertisEvidenceGroup> evidenceGroups;
-    private List<ECertisSelectableCriterion> subCriterions;
-    private ECertisSelectableCriterion parentCriterion;
+    private List<ECertisCriterion> subCriterions;
+    private ECertisCriterion parentCriterion;
 
     @Override
     @JsonDeserialize(using = CustomStringValueDeserializer.class)
@@ -142,14 +145,14 @@ public class ECertisSelectableCriterionImpl extends SelectableCriterion implemen
 
     @Override
     @JsonSetter("SubCriterion")
-    @JsonDeserialize(as = List.class, contentAs = ECertisSelectableCriterionImpl.class)
-    public void setSubCriterions(List<ECertisSelectableCriterion> subCriterions) {
+    @JsonDeserialize(as = List.class, contentAs = ECertisCriterionImpl.class)
+    public void setSubCriterions(List<ECertisCriterion> subCriterions) {
         this.subCriterions = subCriterions;
     }
 
     @Override
     @JsonProperty("SubCriterion")
-    public List<ECertisSelectableCriterion> getSubCriterions() {
+    public List<ECertisCriterion> getSubCriterions() {
         if (subCriterions == null) {
             subCriterions = new ArrayList<>();
         }
@@ -158,42 +161,15 @@ public class ECertisSelectableCriterionImpl extends SelectableCriterion implemen
 
     @Override
     @JsonSetter("ParentCriterion")
-    @JsonDeserialize(as = ECertisSelectableCriterionImpl.class)
-    public void setParentCriterion(ECertisSelectableCriterion parentCriterion) {
+    @JsonDeserialize(as = ECertisCriterionImpl.class)
+    public void setParentCriterion(ECertisCriterion parentCriterion) {
         this.parentCriterion = parentCriterion;
     }
 
     @Override
     @JsonProperty("ParentCriterion")
-    public ECertisSelectableCriterion getParentCriterion() {
+    public ECertisCriterion getParentCriterion() {
         return parentCriterion;
     }
-   
-    
-    // Ignore that property during deserialization process
-    @Override
-    @JsonIgnore
-    public String getCriterionGroup() {
-        return super.getCriterionGroup();
-    }
-    
-    // Ignore that property during deserialization process
-    @Override
-    @JsonIgnore
-    public List<RequirementGroup> getRequirementGroups() {
-        return super.getRequirementGroups();
-    }
-    
-    // Ignore that property during deserialization process
-    @Override
-    @JsonIgnore
-    public boolean isSelected() {
-        return super.isSelected();
-    }
 
-    @Override
-    public void setSelected(boolean selected) {
-        super.setSelected(selected);
-    }
-    
 }

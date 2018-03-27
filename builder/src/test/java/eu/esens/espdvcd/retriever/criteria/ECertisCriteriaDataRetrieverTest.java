@@ -1,4 +1,4 @@
-package eu.esens.espdvcd.builder;
+package eu.esens.espdvcd.retriever;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -7,23 +7,27 @@ import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.retriever.ECertisEvidenceGroup;
 import eu.esens.espdvcd.retriever.criteria.ECertisCriteriaExtractor;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
+
 import java.util.List;
 import java.util.stream.Collectors;
+
 import org.junit.Before;
 import org.junit.Test;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import eu.esens.espdvcd.model.retriever.ECertisSelectableCriterion;
+
+import eu.esens.espdvcd.model.retriever.ECertisCriterion;
+
 import static org.junit.Assert.assertEquals;
 
 /**
- *
  * @author konstantinos
  */
 public class ECertisCriteriaDataRetrieverTest {
 
     private ECertisCriteriaExtractor extractor;
-    
+
     @Before
     public void setUp() {
         extractor = new ECertisCriteriaExtractor();
@@ -59,10 +63,10 @@ public class ECertisCriteriaDataRetrieverTest {
                 String id = c.getID();
 
                 // get that european criterion from eCertis
-                ECertisSelectableCriterion currentEUCriterion = extractor.getCriterion(id);
+                ECertisCriterion currentEUCriterion = extractor.getCriterion(id);
 
                 // run thought subcriterion list of current european criterion
-                for (ECertisSelectableCriterion subc : currentEUCriterion.getSubCriterions()) {
+                for (ECertisCriterion subc : currentEUCriterion.getSubCriterions()) {
 
                     // make sure that there is a legislation reference
                     if (subc.getLegislationReference() != null) {
@@ -104,13 +108,13 @@ public class ECertisCriteriaDataRetrieverTest {
         System.out.printf("\nNumber of Criteria with no Legislation Reference: %d\n", noLegislationReference);
         System.out.printf("Number of Criteria with no Jurisdiction Level Code: %d\n", noJurisdictionLevelCode);
     }
-    
+
     @Test
     public void testGetCriterionInGreek() throws JsonProcessingException {
         try {
             extractor.setLang("el");
 
-            ECertisSelectableCriterion theCriterion = extractor.getCriterion("7c351fc0-1fd0-4bad-bfd8-1717a9dcf9d1");
+            ECertisCriterion theCriterion = extractor.getCriterion("7c351fc0-1fd0-4bad-bfd8-1717a9dcf9d1");
 
             ObjectMapper mapper = new ObjectMapper();
             mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
@@ -156,11 +160,11 @@ public class ECertisCriteriaDataRetrieverTest {
     @Test
     public void testGetCriterion() throws RetrieverException {
 
-        ECertisSelectableCriterion c = extractor.getCriterion("3f865345-9a7e-49a3-924a-ca77da6f2512");
+        ECertisCriterion c = extractor.getCriterion("3f865345-9a7e-49a3-924a-ca77da6f2512");
 
         assertEquals("3f865345-9a7e-49a3-924a-ca77da6f2512", c.getID());
     }
-    
+
     @Test
     public void testGetEvidenceGroup() throws RetrieverException {
 

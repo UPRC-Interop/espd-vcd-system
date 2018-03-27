@@ -25,8 +25,8 @@ import test.x.ubl.pre_award.commonaggregate.TenderingCriterionType;
 public interface ModelExtractor {
 
     default CADetails extractCADetails(ContractingPartyType caParty,
-                                       ContractFolderIDType contractFolderId,
-                                       List<DocumentReferenceType> additionalDocumentReferenceList) {
+            ContractFolderIDType contractFolderId,
+            List<DocumentReferenceType> additionalDocumentReferenceList) {
 
         CADetails cd = new CADetails();
 
@@ -126,6 +126,11 @@ public interface ModelExtractor {
 
                     if (!ert.getDescription().isEmpty()) {
                         cd.setProcurementProcedureDesc(ert.getDescription().get(0).getValue());
+
+                        // 2018-03-20 UL: modifications to add capabilities to handle Received Notice Number
+                        if (ert.getDescription().size() > 1) {
+                            cd.setReceivedNoticeNumber(ert.getDescription().get(1).getValue());
+                        }
                     }
 
                     if (ert.getURI() != null) {
@@ -133,6 +138,17 @@ public interface ModelExtractor {
                     }
                 }
 
+            });
+
+            // 2018-03-20 UL: add capabilities to handle National Official Journal
+            Optional<DocumentReferenceType> optNatRef = additionalDocumentReferenceList.stream()
+                    .filter(r -> r.getDocumentTypeCode() != null && r.getDocumentTypeCode().getValue().equals("NGOJ"))
+                    .findFirst();
+            optNatRef.ifPresent(ref -> {
+
+                if (ref.getID() != null) {
+                    cd.setNationalOfficialJournal(ref.getID().getValue());
+                }
             });
 
         }
