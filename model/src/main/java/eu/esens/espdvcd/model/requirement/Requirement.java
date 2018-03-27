@@ -17,7 +17,7 @@ import java.io.Serializable;
  */
 
 //@JsonIgnoreProperties(ignoreUnknown = true)
-//@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY)
+//@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "")
 //@JsonSubTypes({
 //        @JsonSubTypes.Type(value = RequestRequirement.class, name = "RequestRequirement"),
 //

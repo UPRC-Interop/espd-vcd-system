@@ -6,7 +6,6 @@ import eu.esens.espdvcd.model.ESPDResponse;
 
 import java.io.InputStream;
 
-import eu.esens.espdvcd.model.SimpleESPDRequest;
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
 import eu.esens.espdvcd.retriever.criteria.ECertisCriteriaExtractor;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
