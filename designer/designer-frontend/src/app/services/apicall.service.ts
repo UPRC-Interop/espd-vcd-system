@@ -5,6 +5,7 @@ import {Country} from "../model/country.model";
 import {ProcedureType} from "../model/procedureType.model";
 import {ExclusionCriteria} from "../model/exclusionCriteria.model";
 import {SelectionCriteria} from "../model/selectionCriteria.model";
+import {ESPDRequest} from "../model/ESPDRequest.model";
 
 @Injectable()
 export class ApicallService {
@@ -74,7 +75,7 @@ export class ApicallService {
     // const header = new HttpHeaders({'Content-Type':'application/xml; charset=utf-8'});
     let header = new HttpHeaders();
     header = header.set('Content-Type', 'application/xml; charset=utf-8');
-    return this.http.post<any>("http://localhost:8080/api/espd/v1/request", formData).toPromise();
+    return this.http.post<ESPDRequest>("http://localhost:8080/api/espd/v1/request", formData).toPromise();
 
   }
 

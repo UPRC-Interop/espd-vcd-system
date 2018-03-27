@@ -38,6 +38,7 @@ export class DataService {
 
   }
 
+  /* ================= Merge criterions into one fullcriterion list ================*/
   makeFullCriterionList(exclusionACriteria:ExclusionCriteria[],
                         exclusionBCriteria:ExclusionCriteria[],
                         exclusionCCriteria:ExclusionCriteria[],
@@ -74,10 +75,13 @@ export class DataService {
       return combineJsonArray;
     }
 
+    //TODO filter full criterion list
 
 
 
   }
+
+  /* ================================= create ESPDRequest Object =======================*/
 
   createESPDRequest():ESPDRequest{
 
@@ -86,6 +90,9 @@ export class DataService {
       return this.espdRequest;
 
   }
+
+
+  /* ============================= step submit actions =================================*/
 
   exclusionSubmit(exclusionCriteriaA:ExclusionCriteria[],
                   exclusionCriteriaB:ExclusionCriteria[],
@@ -128,10 +135,33 @@ export class DataService {
 
   }
 
+  /* ================================= CA REUSE ESPD REQUEST ====================== */
+
+  CAReuseESPD(filesToUpload: File[], form:NgForm){
+    if(filesToUpload.length>0) {
+      this.APIService.postFile(filesToUpload)
+        .then(res=>{
+          // res.cadetails=this.CADetails;
+          // console.log(res.fullCriterionList);
+          // console.log(res.cadetails);
+          this.CADetails=res.cadetails;
+          this.selectedCountry=this.CADetails.cacountry;
+          console.log(this.CADetails);
+
+        })
+        .catch(err=>err);
+    }
+
+    if(form.value.chooseRole=="CA") {
+      this.isCA=true;
+      this.receivedNoticeNumber=form.value.noticeNumber;
+    }
+
+  }
 
   startCA(form:NgForm){
-    console.log(form);
-    console.log(form.value);
+    // console.log(form);
+    // console.log(form.value);
 
     if(form.value.chooseRole=="CA") {
         this.isCA=true;
@@ -142,6 +172,9 @@ export class DataService {
 
     }
   }
+
+
+  /* =================================  Get from Codelists ===========================*/
 
 
   getCountries():Promise<Country[]>{
@@ -178,7 +211,7 @@ export class DataService {
     }
   }
 
-  /* =================== Exclusion Criteria ========================== */
+  /* ======================================= Exclusion Criteria ========================== */
 
   getExclusionACriteria():Promise<ExclusionCriteria[]>{
     if(this.exclusionACriteria!= null) {
@@ -248,7 +281,7 @@ export class DataService {
     }
   }
 
-  /* =================== Selection Criteria ========================== */
+  /* ============================== Selection Criteria ======================================= */
 
   getSelectionALLCriteria():Promise<SelectionCriteria[]>{
     if(this.selectionALLCriteria!= null) {
