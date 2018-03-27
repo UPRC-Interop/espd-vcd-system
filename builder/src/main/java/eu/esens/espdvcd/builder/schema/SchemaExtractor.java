@@ -100,7 +100,7 @@ public interface SchemaExtractor {
 
             dr.setDocumentTypeCode(createDocumentTypeCode("TED_CN"));
 
-            dr.setDocumentType(createDocumentType("")); // to be filled with official description, when available
+            //dr.setDocumentType(createDocumentType("")); // to be filled with official description, when available
 
             if (cd.getProcurementProcedureTitle() != null || cd.getProcurementProcedureDesc() != null) {
                 dr.setAttachment(new AttachmentType());
@@ -116,18 +116,49 @@ public interface SchemaExtractor {
 
                 }
 
-                if (cd.getProcurementProcedureDesc() != null) {
+                // 2018-03-20 UL: modifications to add capabilities to handle Received Notice Number
+                if ((cd.getProcurementProcedureDesc() != null && !cd.getProcurementProcedureDesc().isEmpty()) ||
+                        (cd.getReceivedNoticeNumber() != null && !cd.getReceivedNoticeNumber().isEmpty())) {
                     DescriptionType dt = new DescriptionType();
-                    dt.setValue(cd.getProcurementProcedureDesc());
+                    dt.setValue(cd.getProcurementProcedureDesc() != null ? cd.getProcurementProcedureDesc() : "");
                     if (dr.getAttachment().getExternalReference() == null ) {
                       dr.getAttachment().setExternalReference(new ExternalReferenceType());
                     }
-                    dr.getAttachment().getExternalReference().getDescription().add(dt);
+                    dr.getAttachment().getExternalReference().getDescription().add(0, dt);
+
+                    if (cd.getReceivedNoticeNumber() != null && !cd.getReceivedNoticeNumber().isEmpty()) {
+                        DescriptionType dtRNN = new DescriptionType();
+                        dtRNN.setValue(cd.getReceivedNoticeNumber());
+                        dr.getAttachment().getExternalReference().getDescription().add(1, dtRNN);
+                    }
                 }
             }
         }
         return dr;
     }
+
+
+
+    default DocumentReferenceType extractCADetailsNationalDocumentReference(CADetails cd) {
+
+        DocumentReferenceType dr = null;
+
+        if (cd != null && cd.getNationalOfficialJournal() != null && !cd.getNationalOfficialJournal().isEmpty()) {
+
+            dr = new DocumentReferenceType();
+
+            if (cd.getProcurementPublicationNumber() != null) {
+                dr.setID(createGROWNationalJournalId(cd.getNationalOfficialJournal()));
+            }
+
+            dr.setDocumentTypeCode(createDocumentTypeCode("NGOJ"));
+
+            //dr.setDocumentType(createDocumentType("")); // to be filled with official description, when available
+
+        }
+        return dr;
+    }
+
 
     default ContractingPartyType extractContractingPartyType(CADetails cd) {
 
@@ -309,6 +340,14 @@ public interface SchemaExtractor {
         return reqGroupIDType;
     }
 
+    default IDType createGROWNationalJournalId(String id) {
+        IDType reqGroupIDType = createCustomSchemeIDIDType(id, null);
+        reqGroupIDType.setSchemeAgencyID("EU-COM-GROW");
+        reqGroupIDType.setSchemeAgencyName("DG GROW (European Commission)");
+        reqGroupIDType.setSchemeVersionID("1.1");
+        return reqGroupIDType;
+    }
+
     default IdentificationCodeType createISOCountryIdCodeType(String id) {
 
         IdentificationCodeType countryCodeType = new IdentificationCodeType();
@@ -376,7 +415,9 @@ public interface SchemaExtractor {
 
     default IDType createCustomSchemeIDIDType(String id, String schemeId) {
         IDType reqGroupIDType = createDefaultIDType(id);
-        reqGroupIDType.setSchemeID(schemeId);
+        if (schemeId != null) {
+            reqGroupIDType.setSchemeID(schemeId);
+        }
         return reqGroupIDType;
     }
 

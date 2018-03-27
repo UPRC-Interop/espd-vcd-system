@@ -1,13 +1,14 @@
 package eu.esens.espdvcd.model.retriever;
 
 import eu.esens.espdvcd.model.LegislationReference;
+
 import java.util.List;
 
 /**
  *
  * @author Konstantinos Raptis
  */
-public interface ECertisSelectableCriterion {
+public interface ECertisCriterion {
     
     void setID(String ID);
     
@@ -41,12 +42,12 @@ public interface ECertisSelectableCriterion {
     
     List<ECertisEvidenceGroup> getEvidenceGroups();
     
-    void setSubCriterions(List<ECertisSelectableCriterion> subCriterions);
+    void setSubCriterions(List<ECertisCriterion> subCriterions);
     
-    List<ECertisSelectableCriterion> getSubCriterions();
+    List<ECertisCriterion> getSubCriterions();
     
-    void setParentCriterion(ECertisSelectableCriterion parentCriterion);
+    void setParentCriterion(ECertisCriterion parentCriterion);
     
-    ECertisSelectableCriterion getParentCriterion();
+    ECertisCriterion getParentCriterion();
     
 }

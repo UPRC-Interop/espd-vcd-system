@@ -43,30 +43,29 @@ public class DocumentBuilder {
     }
 
     /**
-    *
-    * @param req The ESPDRequest Model instance to be transformed to XML
-    * @return a JAXB ESPDRequestType instance from an ESPDRequest Model instance
-    */
-   private ESPDRequestType createXML(ESPDRequest req) {
-       ESPDRequestType reqType = finalize(SchemaFactory.ESPD_REQUEST.extractESPDRequestType(req));
-       return reqType;
+     * @param req The ESPDRequest Model instance to be transformed to XML
+     * @return a JAXB ESPDRequestType instance from an ESPDRequest Model instance
+     */
+    private ESPDRequestType createXML(ESPDRequest req) {
+        ESPDRequestType reqType = finalize(SchemaFactory.ESPD_REQUEST.extractESPDRequestType(req));
+        return reqType;
 
-   }
+    }
 
     /**
-    *
-    * @param res The ESPDResponse Model instance to be transformed to XML
-    * @return a JAXB ESPDResponseType instance from an ESPDResponse Model instance
-    */
-   protected ESPDResponseType createXML(ESPDResponse res) {
-       ESPDResponseType resType = finalize(SchemaFactory.ESPD_RESPONSE.extractESPDResponseType(res));
-       return resType;
-   }
+     * @param res The ESPDResponse Model instance to be transformed to XML
+     * @return a JAXB ESPDResponseType instance from an ESPDResponse Model instance
+     */
+    protected ESPDResponseType createXML(ESPDResponse res) {
+        ESPDResponseType resType = finalize(SchemaFactory.ESPD_RESPONSE.extractESPDResponseType(res));
+        return resType;
+    }
 
     /**
      * Finalizes an ESPDRequestType instance by adding the necessary data required
      * for publication. These include the UBL constants, transactions, issue date
      * and issue time.
+     *
      * @param reqType The JAXB ESPDRequestType that will be finalized.
      * @return the Finalized ESPDRequestType Instance
      */
@@ -88,6 +87,7 @@ public class DocumentBuilder {
      * Finalizes an ESPDResponseType instance by adding the necessary data required
      * for publication. These include the UBL constants, transactions, issue date
      * and issue time.
+     *
      * @param resType The JAXB ESPDResponseType that will be finalized.
      * @return the Finalized ESPDResponseType Instance
      */
