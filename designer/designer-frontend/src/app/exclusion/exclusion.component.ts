@@ -12,39 +12,40 @@ import {NgForm} from "@angular/forms/forms";
 })
 export class ExclusionComponent implements OnInit {
 
-  exlusionACriteria:ExclusionCriteria[]=null;
-  exlusionBCriteria:ExclusionCriteria[]=null;
-  exlusionCCriteria:ExclusionCriteria[]=null;
-  exlusionDCriteria:ExclusionCriteria[]=null;
+  exclusionACriteria:ExclusionCriteria[]=null;
+  exclusionBCriteria:ExclusionCriteria[]=null;
+  exclusionCCriteria:ExclusionCriteria[]=null;
+  exclusionDCriteria:ExclusionCriteria[]=null;
 
   constructor(private dataService:DataService) { }
 
   ngOnInit() {
     this.dataService.getExclusionACriteria()
       .then(res=>{
-        this.exlusionACriteria=res;
+        //TODO check if exclusionACriteria is from file when posted. dataService.exclusionACriteria=res.... bind it to service in the view
+        this.exclusionACriteria=res;
         // console.log("This is exclusionACriteria: ");
-        // console.log(this.exlusionACriteria);
+        // console.log(this.exclusionACriteria);
       })
       .catch(err=>{console.log(err)});
 
     this.dataService.getExclusionBCriteria()
       .then(res=>{
-        this.exlusionBCriteria=res;
+        this.exclusionBCriteria=res;
         // console.log(res);
       })
       .catch(err=>{console.log(err)});
 
     this.dataService.getExclusionCCriteria()
       .then(res=>{
-        this.exlusionCCriteria=res;
+        this.exclusionCCriteria=res;
         // console.log(res);
       })
       .catch(err=>{console.log(err)});
 
     this.dataService.getExclusionDCriteria()
       .then(res=>{
-        this.exlusionDCriteria=res;
+        this.exclusionDCriteria=res;
         // console.log(res);
       })
       .catch(err=>{console.log(err)});
@@ -55,10 +56,10 @@ export class ExclusionComponent implements OnInit {
 
   onExclusionSubmit(form:NgForm){
     console.log(form.value);
-      this.dataService.exclusionSubmit(this.exlusionACriteria,
-                                      this.exlusionBCriteria,
-                                      this.exlusionCCriteria,
-                                      this.exlusionDCriteria);
+      this.dataService.exclusionSubmit(this.exclusionACriteria,
+                                      this.exclusionBCriteria,
+                                      this.exclusionCCriteria,
+                                      this.exclusionDCriteria);
   }
 
 }

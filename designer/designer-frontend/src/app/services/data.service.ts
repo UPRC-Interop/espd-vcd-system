@@ -12,6 +12,24 @@ import {FullCriterion} from "../model/fullCriterion.model";
 @Injectable()
 export class DataService {
 
+  /* ================================= Filtering Regex ===============================*/
+  EXCLUSION_REGEXP: RegExp = /^CRITERION.EXCLUSION.+/;
+  EXCLUSION_CONVICTION_REGEXP: RegExp = /^CRITERION.EXCLUSION.CONVICTIONS.+/;
+  EXCLUSION_CONTRIBUTION_REGEXP: RegExp = /^CRITERION.EXCLUSION.CONTRIBUTIONS.+/;
+  EXCLUSION_SOCIAL_BUSINESS_MISCONDUCT_CONFLICT_REGEXP: RegExp = /(^CRITERION.EXCLUSION.SOCIAL.+)|(^CRITERION.EXCLUSION.BUSINESS.+)|(^CRITERION.EXCLUSION.MISCONDUCT.+)|(^CRITERION.EXCLUSION.CONFLICT_OF_INTEREST.+)/;
+  EXCLUSION_NATIONAL_REGEXP: RegExp = /^CRITERION.EXCLUSION.NATIONAL.+/;
+
+  SELECTION_REGEXP: RegExp = /^CRITERION.SELECTION.+/;
+  SELECTION_SUITABILITY_REGEXP: RegExp = /^CRITERION.SELECTION.SUITABILITY.+/;
+  SELECTION_ECONOMIC_REGEXP: RegExp = /^CRITERION.SELECTION.ECONOMIC_FINANCIAL_STANDING.+/;
+  SELECTION_TECHNICAL_REGEXP: RegExp = /(?!.*CERTIFICATES*)^CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY.+/;
+  SELECTION_CERTIFICATES_REGEXP: RegExp = /^CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY.CERTIFICATES.+/;
+
+  EO_RELATED_REGEXP: RegExp = /(?!.*MEETS_THE_OBJECTIVE*)^CRITERION.OTHER.EO_DATA.+/;
+  REDUCTION_OF_CANDIDATES_REGEXP: RegExp = /^CRITERION.OTHER.EO_DATA.MEETS_THE_OBJECTIVE*/;
+
+
+
   countries:Country[]=null;
   procedureTypes:ProcedureType[]=null;
   exclusionACriteria:ExclusionCriteria[]=null;
@@ -39,6 +57,7 @@ export class DataService {
   }
 
   /* ================= Merge criterions into one fullcriterion list ================*/
+
   makeFullCriterionList(exclusionACriteria:ExclusionCriteria[],
                         exclusionBCriteria:ExclusionCriteria[],
                         exclusionCCriteria:ExclusionCriteria[],
@@ -58,7 +77,7 @@ export class DataService {
         ...exclusionCCriteria,
         ...exclusionDCriteria,
         ...selectionALLCriteria];
-      console.dir(combineJsonArray);
+      // console.dir(combineJsonArray);
       return combineJsonArray;
 
     } else {
@@ -71,15 +90,39 @@ export class DataService {
         ...selectionBCriteria,
         ...selectionCCriteria,
         ...selectionDCriteria];
-      console.dir(combineJsonArray);
+      // console.dir(combineJsonArray);
       return combineJsonArray;
     }
-
-    //TODO filter full criterion list
-
-
-
   }
+
+
+  /* ============================= Filtering Criteria ============================*/
+
+
+
+  filterExclusionCriteria(regex:RegExp, criteriaList:FullCriterion[]):ExclusionCriteria[]{
+    const filteredList: FullCriterion[] = [];
+    for (const fullCriterion of criteriaList) {
+      if (regex.test(fullCriterion.typeCode)) {
+        filteredList.push(fullCriterion);
+      }
+    }
+    return filteredList;
+  }
+
+
+  filterSelectionCriteria(regex:RegExp, criteriaList:FullCriterion[]):SelectionCriteria[]{
+    const filteredList: FullCriterion[] = [];
+    for (const fullCriterion of criteriaList) {
+      if (regex.test(fullCriterion.typeCode)) {
+        filteredList.push(fullCriterion);
+      }
+    }
+    return filteredList;
+  }
+
+
+
 
   /* ================================= create ESPDRequest Object =======================*/
 
@@ -147,6 +190,17 @@ export class DataService {
           this.CADetails=res.cadetails;
           this.selectedCountry=this.CADetails.cacountry;
           console.log(this.CADetails);
+
+          this.exclusionACriteria = this.filterExclusionCriteria(this.EXCLUSION_CONVICTION_REGEXP, res.fullCriterionList);
+          this.exclusionBCriteria = this.filterExclusionCriteria(this.EXCLUSION_CONTRIBUTION_REGEXP, res.fullCriterionList);
+          this.exclusionCCriteria = this.filterExclusionCriteria(this.EXCLUSION_SOCIAL_BUSINESS_MISCONDUCT_CONFLICT_REGEXP, res.fullCriterionList);
+          this.exclusionBCriteria = this.filterExclusionCriteria(this.EXCLUSION_NATIONAL_REGEXP, res.fullCriterionList);
+
+          this.selectionACriteria = this.filterSelectionCriteria(this.SELECTION_SUITABILITY_REGEXP, res.fullCriterionList);
+          this.selectionBCriteria = this.filterSelectionCriteria(this.SELECTION_ECONOMIC_REGEXP, res.fullCriterionList);
+          this.selectionCCriteria = this.filterSelectionCriteria(this.SELECTION_TECHNICAL_REGEXP, res.fullCriterionList);
+          this.selectionBCriteria = this.filterSelectionCriteria(this.SELECTION_CERTIFICATES_REGEXP, res.fullCriterionList);
+
 
         })
         .catch(err=>err);

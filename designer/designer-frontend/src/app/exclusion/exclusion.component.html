@@ -1,7 +1,7 @@
 <h4>Part III: Exclusion grounds</h4>
 <form #f="ngForm">
   <mat-accordion multi="true">
-    <mat-expansion-panel expanded="true" *ngIf="exlusionACriteria">
+    <mat-expansion-panel expanded="true" *ngIf="exclusionACriteria">
       <mat-expansion-panel-header>
         <mat-panel-title>
           A: Grounds relating to criminal convictions
@@ -11,13 +11,13 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div class="desc">
-        <h4>Article {{exlusionACriteria['0'].legislationReference.article}} of {{exlusionACriteria['0'].legislationReference.title}} sets out the following reasons for exclusion</h4>
+        <h4>Article {{exclusionACriteria['0'].legislationReference.article}} of {{exclusionACriteria['0'].legislationReference.title}} sets out the following reasons for exclusion</h4>
       </div>
-     <mat-card *ngFor="let criteria of exlusionACriteria; let i = index">
+     <mat-card *ngFor="let criteria of exclusionACriteria; let i = index">
        <div class="exclusionCriteria" >
 
          <div class="criteria">
-           <mat-checkbox name=exlusionACriteria[i] color="primary" checked="exlusionACriteria[i].selected" [(ngModel)]="exlusionACriteria[i].selected" disabled>{{criteria.name}}</mat-checkbox>
+           <mat-checkbox name=exclusionACriteria[i] color="primary" checked="exclusionACriteria[i].selected" [(ngModel)]="exclusionACriteria[i].selected" disabled>{{criteria.name}}</mat-checkbox>
            <div class="critDesc">{{criteria.description}}</div>
          </div>
 
@@ -29,7 +29,7 @@
      </mat-card>
     </mat-expansion-panel>
 
-    <mat-expansion-panel expanded="true" *ngIf="exlusionBCriteria">
+    <mat-expansion-panel expanded="true" *ngIf="exclusionBCriteria">
       <mat-expansion-panel-header>
         <mat-panel-title>
           B: Grounds relating to the payment of taxes or social security contributions
@@ -39,9 +39,9 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div class="desc">
-        <h4>Article {{exlusionBCriteria['0'].legislationReference.article}} of {{exlusionBCriteria['0'].legislationReference.title}} sets out the following reasons for exclusion</h4>
+        <h4>Article {{exclusionBCriteria['0'].legislationReference.article}} of {{exclusionBCriteria['0'].legislationReference.title}} sets out the following reasons for exclusion</h4>
       </div>
-      <mat-card *ngFor="let criteria of exlusionBCriteria">
+      <mat-card *ngFor="let criteria of exclusionBCriteria">
         <div class="exclusionCriteria" >
 
           <div class="criteria">
@@ -57,7 +57,7 @@
       </mat-card>
     </mat-expansion-panel>
 
-    <mat-expansion-panel expanded="true" *ngIf="exlusionCCriteria">
+    <mat-expansion-panel expanded="true" *ngIf="exclusionCCriteria">
       <mat-expansion-panel-header>
         <mat-panel-title>
           C: Grounds relating to insolvency, conflicts of interests or professional misconduct
@@ -67,9 +67,9 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div class="desc">
-        <h4>Article {{exlusionCCriteria['0'].legislationReference.article}} of {{exlusionCCriteria['0'].legislationReference.title}} sets out the following reasons for exclusion</h4>
+        <h4>Article {{exclusionCCriteria['0'].legislationReference.article}} of {{exclusionCCriteria['0'].legislationReference.title}} sets out the following reasons for exclusion</h4>
       </div>
-      <mat-card *ngFor="let criteria of exlusionCCriteria">
+      <mat-card *ngFor="let criteria of exclusionCCriteria">
         <div class="exclusionCriteria" >
           <div class="criteria">
             <mat-checkbox color="primary" checked="criteria.selected" disabled>{{criteria.name}}</mat-checkbox>
@@ -83,7 +83,7 @@
       </mat-card>
     </mat-expansion-panel>
 
-    <mat-expansion-panel expanded="true" *ngIf="exlusionDCriteria">
+    <mat-expansion-panel expanded="true" *ngIf="exclusionDCriteria">
       <mat-expansion-panel-header>
         <mat-panel-title>
           D: Purely national exclusion grounds
@@ -95,10 +95,10 @@
       <div class="desc">
         <h4>Do the purely national grounds of exclusion, which are specified in the relevant notice or in the procurement documents, apply?</h4>
       </div>
-      <mat-card *ngFor="let criteria of exlusionDCriteria; let i=index">
+      <mat-card *ngFor="let criteria of exclusionDCriteria; let i=index">
         <div class="exclusionCriteria" >
           <div class="criteria">
-            <mat-checkbox color="primary" checked="criteria.selected" name="exclusionDCriteria" [(ngModel)]="exlusionDCriteria[i].selected">{{criteria.name}}</mat-checkbox>
+            <mat-checkbox color="primary" checked="criteria.selected" name="exclusionDCriteria" [(ngModel)]="exclusionDCriteria[i].selected">{{criteria.name}}</mat-checkbox>
             <div class="critDesc">{{criteria.description}}</div>
           </div>
           <div class="eCertis">
