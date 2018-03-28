@@ -1,4 +1,4 @@
-package eu.esens.espdvcd.builder;
+package eu.esens.espdvcd.retriever;
 
 import eu.esens.espdvcd.retriever.criteria.PredefinedESPDCriteriaExtractor;
 import eu.esens.espdvcd.builder.model.ModelFactory;

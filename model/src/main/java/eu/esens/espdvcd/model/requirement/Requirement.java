@@ -16,15 +16,6 @@ import java.io.Serializable;
  * Created by Ulf Lotzmann on 21/03/2016.
  */
 
-//@JsonIgnoreProperties(ignoreUnknown = true)
-//@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY)
-//@JsonSubTypes({
-//        @JsonSubTypes.Type(value = RequestRequirement.class, name = "RequestRequirement"),
-//
-//        @JsonSubTypes.Type(value = ResponseRequirement.class, name = "ResponseRequirement") }
-//)
-@JsonDeserialize(as=ResponseRequirement.class)
-
 public interface Requirement extends Serializable {
     String getID();
 

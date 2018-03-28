@@ -51,7 +51,8 @@ public class CADetails implements Serializable{
      * Cardinality: 0..1<br>
      * InfReqID: tir70-306, tir92-306<br>
      * BusReqID: tbr70-007, tbr92-013<br>
-     * UBL syntax path: cac:AdditionalDocumentReference.Attachment.ExternalReference.FileName<br>
+     * UBL syntax path: cac:AdditionalDocumentReference.Attachment.ExternalReference.FileName
+     * - DocumentTypeCode TED_CN<br>
      */
     private String procurementProcedureTitle;
 
@@ -64,7 +65,8 @@ public class CADetails implements Serializable{
      * Cardinality: 0..1<br>
      * InfReqID: tir070-307, tir92-307<br>
      * BusReqID: tbr70-007, tbr92-013<br>
-     * UBL syntax path: cac:AdditionalDocumentReference.Attachment.ExternalReference.Description<br>
+     * UBL syntax path: cac:AdditionalDocumentReference.Attachment.ExternalReference.Description
+     * - DocumentTypeCode TED_CN, seq no. 1<br>
      */
     private String procurementProcedureDesc;
 
@@ -98,7 +100,8 @@ public class CADetails implements Serializable{
      * Cardinality: 0..1<br>
      * InfReqID: tir70-303, tir92-303<br>
      * BusReqID: tbr70-007, tbr92-013<br>
-     * UBL syntax path: cac:AdditionalDocumentReference.ID<br>
+     * UBL syntax path: cac:AdditionalDocumentReference.ID
+     * - DocumentTypeCode TED_CN<br>
      */
     private String procurementPublicationNumber;
 
@@ -163,9 +166,44 @@ public class CADetails implements Serializable{
      * Cardinality: 0..1<br>
      * InfReqID: tir070-305<br>
      * BusReqID: tbr70-007<br>
-     * UBL syntax path: cac: AdditionalDocumentReference.Attachment.ExternalReference.URI<br>
+     * UBL syntax path: cac: AdditionalDocumentReference.Attachment.ExternalReference.URI
+     * - DocumentTypeCode TED_CN<br>
      */
     private String procurementPublicationURI;
+
+
+    /**
+     * Received notice number
+     * <p>
+     * Additional attribute to ensure compatibility with DG GROW system (ESPD 1.0.2).
+     * <p>
+     * Data type: Text<br>
+     * Cardinality: 0..1<br>
+     * InfReqID: N/A<br>
+     * BusReqID: N/A<br>
+     * UBL syntax path: cac:AdditionalDocumentReference.Attachment.ExternalReference.Description
+     * - DocumentTypeCode TED_CN, seq no. 2<br>
+     */
+    private String receivedNoticeNumber;
+
+    /**
+     * National Official Journal
+     * <p>
+     * In case publication of a notice in the Official Journal of the European Union is not required,
+     * please give other information allowing the procurement procedure to be unequivocally identified
+     * (e. g. reference of a publication at national level)<br>
+     * Additional attribute to ensure compatibility with DG GROW system (ESPD 1.0.2).
+     * <p>
+     * Data type: Identifier<br>
+     * Cardinality: 0..1<br>
+     * InfReqID: N/A<br>
+     * BusReqID: N/A<br>
+     * UBL syntax path: cac:AdditionalDocumentReference.ID
+     * - DocumentTypeCode NGOJ<br>
+     */
+    private String nationalOfficialJournal;
+
+
 
     public String getProcurementPublicationURI() {
         return procurementPublicationURI;
@@ -269,5 +307,21 @@ public class CADetails implements Serializable{
 
     public void setID(String ID) {
         this.ID = ID;
+    }
+
+    public String getReceivedNoticeNumber() {
+        return receivedNoticeNumber;
+    }
+
+    public void setReceivedNoticeNumber(String receivedNoticeNumber) {
+        this.receivedNoticeNumber = receivedNoticeNumber;
+    }
+
+    public String getNationalOfficialJournal() {
+        return nationalOfficialJournal;
+    }
+
+    public void setNationalOfficialJournal(String nationalOfficialJournal) {
+        this.nationalOfficialJournal = nationalOfficialJournal;
     }
 }

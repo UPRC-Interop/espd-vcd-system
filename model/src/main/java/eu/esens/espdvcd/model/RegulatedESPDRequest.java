@@ -2,6 +2,7 @@ package eu.esens.espdvcd.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import eu.esens.espdvcd.model.types.ESPDRequestModelType;
+import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
