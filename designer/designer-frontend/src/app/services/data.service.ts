@@ -173,8 +173,12 @@ export class DataService {
 
     //apicall service post
     this.APIService.getXMLRequest(JSON.stringify(this.createESPDRequest()))
-      .then(res=>{console.log(res);})
-      .catch(err=>{console.log(err);});
+      .then(res=>{
+        console.log(res);
+      })
+      .catch(err=>{
+        console.log(err);
+      });
 
   }
 
@@ -189,7 +193,7 @@ export class DataService {
           // console.log(res.cadetails);
           this.CADetails=res.cadetails;
           this.selectedCountry=this.CADetails.cacountry;
-          console.log(this.CADetails);
+
 
           this.exclusionACriteria = this.filterExclusionCriteria(this.EXCLUSION_CONVICTION_REGEXP, res.fullCriterionList);
           this.exclusionBCriteria = this.filterExclusionCriteria(this.EXCLUSION_CONTRIBUTION_REGEXP, res.fullCriterionList);
@@ -200,6 +204,9 @@ export class DataService {
           this.selectionBCriteria = this.filterSelectionCriteria(this.SELECTION_ECONOMIC_REGEXP, res.fullCriterionList);
           this.selectionCCriteria = this.filterSelectionCriteria(this.SELECTION_TECHNICAL_REGEXP, res.fullCriterionList);
           this.selectionBCriteria = this.filterSelectionCriteria(this.SELECTION_CERTIFICATES_REGEXP, res.fullCriterionList);
+          console.log(this.exclusionACriteria);
+          console.log(this.selectionACriteria);
+          console.log(res);
 
 
         })
