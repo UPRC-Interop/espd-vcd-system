@@ -264,22 +264,20 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
             return rType;
         }
 
-        rType.setID(new IDType());
-        rType.getID().setSchemeAgencyID("EU-COM-GROW");
-        rType.getID().setValue(UUID.randomUUID().toString());
-
         switch (respType) {
 
             case DESCRIPTION:
                 String description = ((DescriptionResponse) response).getDescription();
                 if (description != null && !description.isEmpty()) {
-                    rType.setDescription(new DescriptionType());
-                    rType.getDescription().setValue(description);
+                  rType.setID(createReqResponseId());
+                  rType.setDescription(new DescriptionType());
+                  rType.getDescription().setValue(description);
                 }
                 return rType;
 
             case QUANTITY_YEAR:
                 if (((QuantityYearResponse) response).getYear() != 0) {
+                  rType.setID(createReqResponseId());
                     rType.setQuantity(new QuantityType());
                     rType.getQuantity().setUnitCode("YEAR");
                     rType.getQuantity().setValue(BigDecimal.valueOf(((QuantityYearResponse) response).getYear()));
@@ -287,6 +285,7 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
                 return rType;
 
             case QUANTITY:
+                rType.setID(createReqResponseId());
                 rType.setQuantity(new QuantityType());
                 //rType.getQuantity().setValue(BigDecimal.valueOf(((QuantityResponse) response).getQuantity()));
                 // UL 2017-10-20: workaround for rounding issues with BigDecimal (e.g. 0.005 became 0.004999999888241291)
@@ -294,6 +293,7 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
                 return rType;
 
             case QUANTITY_INTEGER:
+                rType.setID(createReqResponseId());
                 rType.setQuantity(new QuantityType());
                 rType.getQuantity().setUnitCode("NUMBER");
                 rType.getQuantity().setValue(BigDecimal.valueOf(((QuantityIntegerResponse) response).getQuantity()));
@@ -306,7 +306,7 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
                         ( currency != null && !currency.isEmpty() ) ) {
                     // Only generate a proper response if for at least one of the variables "amount" and
                     // "currency" a value different from the default is detected.
-
+                    rType.setID(createReqResponseId());
                     rType.setAmount(new AmountType());
                     //rType.getAmount().setValue(BigDecimal.valueOf(amount));
                     // UL 2017-10-20: workaround for rounding issues with BigDecimal
@@ -316,6 +316,7 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
                 return rType;
 
             case INDICATOR:
+              rType.setID(createReqResponseId());
                 rType.setIndicator(new IndicatorType());
                 rType.getIndicator().setValue(((IndicatorResponse) response).isIndicator());
                 return rType;
@@ -323,6 +324,7 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
             case PERIOD:
                 String descr = ((PeriodResponse) response).getDescription();
                 if (descr != null && !descr.isEmpty()) {
+                  rType.setID(createReqResponseId());
                     rType.setPeriod(new PeriodType());
                     DescriptionType dt = new DescriptionType();
                     dt.setValue(descr);
@@ -331,6 +333,7 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
                 return rType;
 
             case PERCENTAGE:
+              rType.setID(createReqResponseId());
                 rType.setPercent(new PercentType());
                 //rType.getPercent().setValue(BigDecimal.valueOf(((PercentageResponse) response).getPercentage()));
                 // UL 2017-10-20: workaround for rounding issues with BigDecimal
@@ -349,6 +352,7 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
                                         DatatypeConstants.FIELD_UNDEFINED);
                         rType.setDate(new DateType());
                         rType.getDate().setValue(xcal);
+                        rType.setID(createReqResponseId());
 
                     } catch (DatatypeConfigurationException ex) {
                         log.error("Could not create XMLGregorialCalendar Date Object", ex);
@@ -360,6 +364,7 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
             case CODE:
                 String evidenceURLCode = ((EvidenceURLCodeResponse) response).getEvidenceURLCode();
                 if (evidenceURLCode != null && !evidenceURLCode.isEmpty()) {
+                  rType.setID(createReqResponseId());
                     rType.setCode(new TypeCodeType());
                     rType.getCode().setValue(evidenceURLCode);
                 }
@@ -368,6 +373,7 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
             case EVIDENCE_URL:
                 EvidenceType evType = extractEvidenceURLResponse(response);
                 if (evType != null) {
+                  rType.setID(createReqResponseId());
                     rType.getEvidence().add(evType);
                 }
                 return rType;
@@ -375,6 +381,7 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
             case CODE_COUNTRY:
                 String countryCode = ((CountryCodeResponse) response).getCountryCode();
                 if (countryCode != null && !countryCode.isEmpty()) {
+                  rType.setID(createReqResponseId());
                     rType.setCode(new TypeCodeType());
                     rType.getCode().setListAgencyID("ISO");
                     rType.getCode().setListID("ISO 3166-1");
@@ -388,6 +395,13 @@ public class ESPDResponseSchemaExtractor implements SchemaExtractor {
                 return null;
         }
 
+    }
+
+    protected IDType createReqResponseId() {
+      IDType theID = new IDType();
+      theID.setSchemeAgencyID("EU-COM-GROW");
+      theID.setValue(UUID.randomUUID().toString());
+      return theID;
     }
 
     protected EvidenceType extractEvidenceURLResponse(Response response) {
