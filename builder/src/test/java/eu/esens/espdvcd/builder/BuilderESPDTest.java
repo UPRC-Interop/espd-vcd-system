@@ -2,9 +2,16 @@
 package eu.esens.espdvcd.builder;
 
 import eu.esens.espdvcd.builder.exception.BuilderException;
+import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDResponse;
 
+import eu.esens.espdvcd.model.SelectableCriterion;
+import eu.esens.espdvcd.model.requirement.Requirement;
+import eu.esens.espdvcd.model.requirement.RequirementGroup;
+import eu.esens.espdvcd.model.requirement.ResponseRequirement;
+import eu.esens.espdvcd.model.requirement.response.DescriptionResponse;
+import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
 import java.io.InputStream;
 
 import eu.esens.espdvcd.model.SimpleESPDRequest;
@@ -133,6 +140,26 @@ public class BuilderESPDTest {
         ESPDRequest req = BuilderFactory.getModelBuilder().createESPDRequest();
         req.setCriterionList(extractor.getFullList());
         System.out.println(BuilderFactory.getDocumentBuilderFor(req).theXML);
+    }
+
+    @Test
+    public void createESPDResponseWithAnEmptyResponse() throws Exception {
+        ESPDResponse resp = BuilderFactory.getModelBuilder().createESPDResponse();
+        SelectableCriterion cri = new SelectableCriterion();
+        cri.setSelected(true);
+        cri.setDescription("Test Empty Description");
+
+        RequirementGroup rg = new RequirementGroup("testReq");
+        cri.getRequirementGroups().add(rg);
+
+        Requirement req = new ResponseRequirement("the ID",ResponseTypeEnum.DESCRIPTION,"Test Description");
+        rg.getRequirements().add(req);
+        resp.getFullCriterionList().add(cri);
+
+        ESPDResponseType et = BuilderFactory.getDocumentBuilderFor(resp).createXML(resp);
+        Assert.assertNotNull(et.getCriterion().get(0).getRequirementGroup().get(0).getRequirement().get(0).getResponse().get(0));
+        Assert.assertNull(et.getCriterion().get(0).getRequirementGroup().get(0).getRequirement().get(0).getResponse().get(0).getID());
+        Assert.assertNull(et.getCriterion().get(0).getRequirementGroup().get(0).getRequirement().get(0).getResponse().get(0).getDescription());
     }
 
 }
