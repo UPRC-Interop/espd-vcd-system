@@ -156,10 +156,36 @@ public class BuilderESPDTest {
         rg.getRequirements().add(req);
         resp.getFullCriterionList().add(cri);
 
+        Requirement req2 = new ResponseRequirement("the ID",ResponseTypeEnum.PERIOD,"Test Period");
+        rg.getRequirements().add(req2);
+
+        Requirement req3 = new ResponseRequirement("the ID",ResponseTypeEnum.EVIDENCE_URL,"Test Evidence");
+        rg.getRequirements().add(req3);
+
+        Requirement req4 = new ResponseRequirement("the ID",ResponseTypeEnum.CODE,"Test Code");
+        rg.getRequirements().add(req4);
+
+      Requirement req5 = new ResponseRequirement("the ID",ResponseTypeEnum.AMOUNT,"Test Amount");
+      rg.getRequirements().add(req5);
+
+      Requirement req6 = new ResponseRequirement("the ID",ResponseTypeEnum.QUANTITY_YEAR,"Test Year");
+      rg.getRequirements().add(req6);
+
+      Requirement req7 = new ResponseRequirement("the ID",ResponseTypeEnum.DATE,"Test Date");
+      rg.getRequirements().add(req7);
+
+      Requirement req8 = new ResponseRequirement("the ID",ResponseTypeEnum.CODE_COUNTRY,"Test Country");
+      rg.getRequirements().add(req8);
+
+      resp.getFullCriterionList().add(cri);
+
         ESPDResponseType et = BuilderFactory.getDocumentBuilderFor(resp).createXML(resp);
-        Assert.assertNotNull(et.getCriterion().get(0).getRequirementGroup().get(0).getRequirement().get(0).getResponse().get(0));
-        Assert.assertNull(et.getCriterion().get(0).getRequirementGroup().get(0).getRequirement().get(0).getResponse().get(0).getID());
-        Assert.assertNull(et.getCriterion().get(0).getRequirementGroup().get(0).getRequirement().get(0).getResponse().get(0).getDescription());
+        et.getCriterion().get(0).getRequirementGroup().get(0).getRequirement().forEach(r -> {
+          Assert.assertNotNull(r.getResponse().get(0));
+          Assert.assertNull(r.getResponse().get(0).getID());
+          Assert.assertNull(r.getResponse().get(0).getDescription());
+        });
+
     }
 
 }
