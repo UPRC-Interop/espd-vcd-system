@@ -53,6 +53,7 @@ export class DataService {
   isEO:boolean=false;
   receivedNoticeNumber:string;
   selectedCountry:string="";
+  selectedEOCountry:string="";
 
   constructor(private APIService:ApicallService) {
 
@@ -187,7 +188,7 @@ export class DataService {
 
   /* ================================== EXPORT FILES ============================= */
 
-  //TODO make saveTofileSystem--> CreateFile and create the BLOB to data.service.... SaveFile when click export button
+
 
   createFile(response) {
     // const contentDispositionHeader: string = response.headers.get('Content-Disposition');
@@ -201,6 +202,8 @@ export class DataService {
   }
 
   saveFile(blob){
+
+    //TODO if isCA ->espd-request.xml, if isEO -> espd-response.xml
     const filename:string = "espd-request";
     saveAs(blob, filename);
   }
@@ -210,6 +213,7 @@ export class DataService {
   /* ================================= CA REUSE ESPD REQUEST ====================== */
 
   CAReuseESPD(filesToUpload: File[], form:NgForm){
+    //TODO rename to ReuseESPD, if isCA... if isEO... etc.
     if(filesToUpload.length>0) {
       this.APIService.postFile(filesToUpload)
         .then(res=>{
@@ -245,18 +249,26 @@ export class DataService {
 
   }
 
-  startCA(form:NgForm){
+  startESPD(form:NgForm){
     // console.log(form);
     // console.log(form.value);
 
     if(form.value.chooseRole=="CA") {
-        this.isCA=true;
-        this.receivedNoticeNumber=form.value.noticeNumber;
-        if(form.value.CACountry!="") {
-          this.selectedCountry=form.value.CACountry;
-        }
-
+      this.isCA = true;
+      this.isEO = false;
+      this.receivedNoticeNumber = form.value.noticeNumber;
+      if (form.value.EOCountry != "") {
+        this.selectedCountry = form.value.EOCountry;
+      }
     }
+
+      if(form.value.chooseRole=="EO") {
+        this.isEO=true;
+        this.isCA=false;
+        if(form.value.CACountry != "") {
+          this.selectedCountry=form.value.CACountry;
+          }
+        }
   }
 
 

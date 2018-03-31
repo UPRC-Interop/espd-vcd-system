@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
-import {FormsModule} from "@angular/forms";
+import {FormsModule,ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from '@angular/common/http';
 
 import {DataService} from "./services/data.service";
@@ -37,6 +37,7 @@ import { FinishComponent } from './finish/finish.component';
     MaterialModule,
     FormsModule,
     HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [ApicallService, DataService],
   bootstrap: [AppComponent]

@@ -9,7 +9,8 @@
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Procedure</ng-template>
-      <app-procedure></app-procedure>
+      <app-procedure *ngIf="dataService.isCA"></app-procedure>
+      <app-procedure-eo *ngIf="dataService.isEO"></app-procedure-eo>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Exclusion</ng-template>

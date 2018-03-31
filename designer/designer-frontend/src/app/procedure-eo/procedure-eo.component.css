@@ -1,0 +1,79 @@
+.mat-form-field {
+  display:block;
+  margin-bottom:20px;
+  margin-top:20px;
+}
+/*.eoField {*/
+  /*margin-bottom: 0;*/
+  /*margin-top: 0;*/
+/*}*/
+
+.eo1 {
+  flex:1;
+  order:1;
+}
+
+.eo2 {
+  flex:1;
+  order:2;
+}
+
+.eo1, .eo2 {
+
+}
+.eoField {
+  margin: 20px;
+}
+.eoContainer {
+  display:flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+
+}
+.mat-expansion-panel-header {
+  background-color:#3F51B5;
+}
+
+.mat.expansion-panel:hover{
+  background:#3F51B5;
+}
+
+mat-expansion-panel-header:hover {
+  background-color:#3F51B5;
+}
+mat-expansion-panel-header:focus {
+  background-color:#3F51B5;
+}
+mat-expansion-panel-header:active {
+  background-color:#3F51B5;
+}
+
+mat-panel-title, mat-panel-description {
+  color:white;
+}
+mat-expansion-panel-header.mat-expanded {
+  background-color:#3F51B5;
+}
+
+mat-expansion-panel-header.mat-expanded:hover {
+  background-color:#3F51B5;
+}
+mat-expansion-panel-header.mat-expanded:focus {
+  background-color:#3F51B5;
+}
+mat-expansion-panel-header.mat-expanded:active{
+  background-color:#3F51B5;
+}
+
+button {
+  margin-top:20px;
+}
+
+mat-grid-list {
+  padding:0;
+}
+mat-grid-tile {
+  margin: 0;
+  padding: 0;
+}

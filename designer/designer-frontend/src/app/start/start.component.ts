@@ -86,10 +86,15 @@ export class StartComponent implements OnInit {
     // console.log(form);
 
     //CA reuses ESPDRequest
-    this.dataService.CAReuseESPD(this.fileToUpload, form);
+    if(this.isCA){
+      this.dataService.CAReuseESPD(this.fileToUpload, form);
+    }
 
-    //CA creates new ESPDRequest
-    this.dataService.startCA(form);
+
+    //Start New ESPD
+      this.dataService.startESPD(form);
+
+
 
   }
 
