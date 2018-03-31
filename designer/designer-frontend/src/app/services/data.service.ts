@@ -8,11 +8,12 @@ import {NgForm} from "@angular/forms/forms";
 import {Cadetails} from "../model/caDetails.model";
 import {ESPDRequest} from "../model/ESPDRequest.model";
 import {FullCriterion} from "../model/fullCriterion.model";
+import { saveAs } from 'file-saver/FileSaver';
 
 @Injectable()
 export class DataService {
 
-  /* ================================= Filtering Regex ===============================*/
+  /* ================================= Criterion Filtering Regex ===============================*/
   EXCLUSION_REGEXP: RegExp = /^CRITERION.EXCLUSION.+/;
   EXCLUSION_CONVICTION_REGEXP: RegExp = /^CRITERION.EXCLUSION.CONVICTIONS.+/;
   EXCLUSION_CONTRIBUTION_REGEXP: RegExp = /^CRITERION.EXCLUSION.CONTRIBUTIONS.+/;
@@ -42,6 +43,7 @@ export class DataService {
   selectionDCriteria:SelectionCriteria[]=null;
   selectionALLCriteria:SelectionCriteria[]=null;
   fullCriterionList:FullCriterion[]=null;
+  blob=null;
 
   CADetails:Cadetails = new Cadetails();
   espdRequest:ESPDRequest;
@@ -175,12 +177,35 @@ export class DataService {
     this.APIService.getXMLRequest(JSON.stringify(this.createESPDRequest()))
       .then(res=>{
         console.log(res);
+        this.createFile(res);
       })
       .catch(err=>{
         console.log(err);
       });
 
   }
+
+  /* ================================== EXPORT FILES ============================= */
+
+  //TODO make saveTofileSystem--> CreateFile and create the BLOB to data.service.... SaveFile when click export button
+
+  createFile(response) {
+    // const contentDispositionHeader: string = response.headers.get('Content-Disposition');
+    // const parts: string[] = contentDispositionHeader.split(';');
+    // const filename = parts[1].split('=')[1];
+
+    // const filename:string = "espd-request";
+    this.blob = new Blob([response.body], { type: 'text/xml' });
+    // console.log(this.blob);
+    // saveAs(blob, filename);
+  }
+
+  saveFile(blob){
+    const filename:string = "espd-request";
+    saveAs(blob, filename);
+  }
+
+
 
   /* ================================= CA REUSE ESPD REQUEST ====================== */
 

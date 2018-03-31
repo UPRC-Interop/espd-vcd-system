@@ -16,7 +16,7 @@ export class ProcedureComponent implements OnInit, OnChanges {
 
 
 
-  constructor(private dataService:DataService) { }
+  constructor(public dataService:DataService) { }
 
   ngOnInit() {
 

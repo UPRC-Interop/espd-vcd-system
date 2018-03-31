@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {DataService} from "../services/data.service";
 
 @Component({
   selector: 'app-finish',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FinishComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dataService:DataService) { }
 
   ngOnInit() {
+  }
+
+  exportFile(){
+    this.dataService.saveFile(this.dataService.blob);
   }
 
 }
