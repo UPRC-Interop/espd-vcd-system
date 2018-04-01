@@ -8,7 +8,7 @@ export class EoDetails {
   smeIndicator:boolean;
   postalAddress:PostalAddress;
   contactingDetails:ContactingDetails;
-  naturalPerson: NaturalPerson;
+  naturalPerson: NaturalPerson[];
   procurementProjectLot:number;
   id:string;
 }

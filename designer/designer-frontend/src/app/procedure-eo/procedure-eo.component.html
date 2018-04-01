@@ -94,42 +94,70 @@
             A: Information about the economic operator
           </mat-panel-title>
         </mat-expansion-panel-header>
-              <div class="eoContainer">
+              <div class="eoContainer" >
                 <div class="eo1">
                   <mat-form-field class="eoField">
-                    <input matInput placeholder="Name">
+                    <input formControlName="name" matInput placeholder="Name" >
                   </mat-form-field>
-                  <mat-form-field class="eoField">
-                    <input matInput placeholder="Street and Number">
-                  </mat-form-field>
-                  <mat-form-field class="eoField">
-                    <input matInput placeholder="Postcode">
-                  </mat-form-field>
-                  <mat-form-field class="eoField">
-                    <input matInput placeholder="City">
-                  </mat-form-field>
-                  <mat-form-field class="eoField">
-                    <input matInput placeholder="Country">
-                  </mat-form-field>
+                  <div class="postalAddress" formGroupName='postalAddress'>
+                    <mat-form-field class="eoField">
+                      <input formControlName="addressLine1" matInput placeholder="Street and Number">
+                    </mat-form-field>
+                    <mat-form-field class="eoField">
+                      <input formControlName="postCode" matInput placeholder="Postcode">
+                    </mat-form-field>
+                    <mat-form-field class="eoField">
+                      <input matInput placeholder="City" formControlName="city">
+                    </mat-form-field>
+                    <mat-form-field class="eoField">
+                      <mat-select  formControlName="countryCode"
+                                   placeholder="Select Country">
+                        <mat-option>None</mat-option>
+                        <mat-option *ngFor="let country of countries" [value]="country.code">{{country.name}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+
                 </div>
-                <div class="eo2">
-                  <mat-form-field class="eoField">
-                    <input matInput placeholder="Email">
-                  </mat-form-field>
-                  <mat-form-field class="eoField">
-                    <input matInput placeholder="Telephone">
-                  </mat-form-field>
-                  <mat-form-field class="eoField">
-                    <input matInput placeholder="Contact person or persons">
-                  </mat-form-field>
-                  <mat-form-field class="eoField">
-                    <input matInput placeholder="VAT number, if applicable">
-                  </mat-form-field>
-                  <mat-form-field class="eoField">
-                    <input matInput placeholder="Other number, if VAT not applicable">
-                  </mat-form-field>
+
+
+                <div class="eo2" >
+                      <div class="contactingDetails" formGroupName="contactingDetails">
+                        <mat-form-field class="eoField">
+                          <input formControlName="emailAddress" matInput placeholder="Email">
+                        </mat-form-field>
+                        <mat-form-field class="eoField">
+                          <input formControlName="telephoneNumber" matInput placeholder="Telephone">
+                        </mat-form-field>
+                        <mat-form-field class="eoField">
+                          <input formControlName="contactPointName" matInput placeholder="Contact person or persons">
+                        </mat-form-field>
+                      </div>
+                    <mat-form-field class="eoField">
+                      <input formControlName="id" matInput placeholder="VAT number, if applicable">
+                    </mat-form-field>
+                    <!--<mat-form-field class="eoField">-->
+                    <!--<input matInput placeholder="Other number, if VAT not applicable">-->
+                    <!--</mat-form-field>-->
+                    <mat-form-field class="eoField">
+                      <input  formControlName="websiteURI" matInput placeholder="Internet address (web address) (if applicable)">
+                    </mat-form-field>
                 </div>
               </div>
+        <div class="smeIndicator">
+          <span>Is the economic operator a Micro, a Small or a Medium-Sized Enterprise? </span>
+          <mat-radio-group formControlName="smeIndicator">
+            <mat-radio-button color="primary"
+                              value="YES"
+                              [value]="true">YES</mat-radio-button>
+            <mat-radio-button color="primary"
+                              value="NO"
+                              [value]="false">NO</mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+
+
 
 
       </mat-expansion-panel>

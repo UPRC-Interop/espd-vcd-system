@@ -9,6 +9,7 @@ import {Cadetails} from "../model/caDetails.model";
 import {ESPDRequest} from "../model/ESPDRequest.model";
 import {FullCriterion} from "../model/fullCriterion.model";
 import { saveAs } from 'file-saver/FileSaver';
+import {EoDetails} from "../model/eoDetails.model";
 
 @Injectable()
 export class DataService {
@@ -46,6 +47,7 @@ export class DataService {
   blob=null;
 
   CADetails:Cadetails = new Cadetails();
+  EODetails:EoDetails=new EoDetails();
   espdRequest:ESPDRequest;
   espdRequestjson:string;
 
@@ -257,16 +259,17 @@ export class DataService {
       this.isCA = true;
       this.isEO = false;
       this.receivedNoticeNumber = form.value.noticeNumber;
-      if (form.value.EOCountry != "") {
-        this.selectedCountry = form.value.EOCountry;
+      if (form.value.CACountry != "") {
+        this.selectedCountry = form.value.CACountry;
       }
     }
 
       if(form.value.chooseRole=="EO") {
         this.isEO=true;
         this.isCA=false;
-        if(form.value.CACountry != "") {
-          this.selectedCountry=form.value.CACountry;
+        if(form.value.EOCountry != "") {
+          this.selectedEOCountry=form.value.EOCountry;
+
           }
         }
   }
