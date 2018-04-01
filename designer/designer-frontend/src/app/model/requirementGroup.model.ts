@@ -1,7 +1,7 @@
 import {Requirement} from "./requirement.model";
 export class RequirementGroup{
   requirements:Requirement[];
-  requirementGroup?:RequirementGroup[];
+  requirementGroups?:RequirementGroup[];
   ruleset?:string;
   condition?:string;
   id:string;
