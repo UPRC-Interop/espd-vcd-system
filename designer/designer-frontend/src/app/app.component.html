@@ -14,11 +14,13 @@
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Exclusion</ng-template>
-      <app-exclusion></app-exclusion>
+      <app-exclusion *ngIf="dataService.isCA"></app-exclusion>
+      <app-exclusion-eo *ngIf="dataService.isEO"></app-exclusion-eo>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Selection</ng-template>
-      <app-selection></app-selection>
+      <app-selection *ngIf="dataService.isCA"></app-selection>
+      <app-selection-eo *ngIf="dataService.isEO"></app-selection-eo>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Finish</ng-template>

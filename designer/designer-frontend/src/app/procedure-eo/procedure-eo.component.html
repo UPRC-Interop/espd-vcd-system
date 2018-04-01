@@ -155,6 +155,17 @@
                               [value]="false">NO</mat-radio-button>
           </mat-radio-group>
         </div>
+        <div class="eoRelatedCriteria" *ngFor="let criteria of eoRelatedCriteria; let i=index">
+          <span>{{criteria.description}}}</span>
+          <mat-radio-group formControlName="smeIndicator">
+            <mat-radio-button color="primary"
+                              value="YES"
+                              [value]="true">YES</mat-radio-button>
+            <mat-radio-button color="primary"
+                              value="NO"
+                              [value]="false">NO</mat-radio-button>
+          </mat-radio-group>
+        </div>
 
 
 

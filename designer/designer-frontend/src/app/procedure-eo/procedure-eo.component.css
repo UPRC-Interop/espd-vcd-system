@@ -77,3 +77,9 @@ mat-grid-tile {
   margin: 0;
   padding: 0;
 }
+
+.eoRelatedCriteria {
+  display:block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

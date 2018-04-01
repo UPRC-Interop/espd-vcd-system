@@ -6,6 +6,7 @@ import {ProcedureType} from "../model/procedureType.model";
 import {ExclusionCriteria} from "../model/exclusionCriteria.model";
 import {SelectionCriteria} from "../model/selectionCriteria.model";
 import {ESPDRequest} from "../model/ESPDRequest.model";
+import {EoRelatedCriterion} from "../model/eoRelatedCriterion.model";
 
 @Injectable()
 export class ApicallService {
@@ -21,6 +22,14 @@ export class ApicallService {
   getProcedureType(){
     return this.http.get<ProcedureType[]>("http://localhost:8080/api/codelists/v2/ProcedureType").toPromise()
   }
+
+
+  /* ==================== EO related criteria ========================= */
+
+  getEO_RelatedCriteria(){
+    return this.http.get<EoRelatedCriterion[]>("http://localhost:8080/api/criteriaList/predefined/eorelated").toPromise()
+  }
+
 
   /* ============= EXCLUSION CRITERIA ===================*/
   getExclusionCriteria(){

@@ -10,6 +10,7 @@ import {ESPDRequest} from "../model/ESPDRequest.model";
 import {FullCriterion} from "../model/fullCriterion.model";
 import { saveAs } from 'file-saver/FileSaver';
 import {EoDetails} from "../model/eoDetails.model";
+import {EoRelatedCriterion} from "../model/eoRelatedCriterion.model";
 
 @Injectable()
 export class DataService {
@@ -44,6 +45,7 @@ export class DataService {
   selectionDCriteria:SelectionCriteria[]=null;
   selectionALLCriteria:SelectionCriteria[]=null;
   fullCriterionList:FullCriterion[]=null;
+  eoRelatedCriteria:EoRelatedCriterion[]=null;
   blob=null;
 
   CADetails:Cadetails = new Cadetails();
@@ -306,6 +308,25 @@ export class DataService {
         })
         .catch(err =>
         {
+          console.log(err);
+          return Promise.reject(err);
+        });
+    }
+  }
+
+  /* ========================================EO related Criteria ========================= */
+
+  getEoRelatedCriteria():Promise<EoRelatedCriterion[]>{
+    if(this.eoRelatedCriteria!=null) {
+      return Promise.resolve(this.eoRelatedCriteria);
+    } else {
+      return this.APIService.getEO_RelatedCriteria()
+        .then(
+          res=>{
+            this.eoRelatedCriteria=res;
+            return Promise.resolve(res);
+          }
+        ).catch(err=>{
           console.log(err);
           return Promise.reject(err);
         });

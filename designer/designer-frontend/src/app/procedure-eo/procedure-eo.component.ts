@@ -2,7 +2,8 @@ import {Component, OnChanges, OnInit, SimpleChange, SimpleChanges} from '@angula
 import {DataService} from "../services/data.service";
 import {ProcedureType} from "../model/procedureType.model";
 import {Country} from "../model/country.model";
-import {FormControl, FormGroup, NgForm, Validators} from "@angular/forms";
+import {FormArray, FormControl, FormGroup, NgForm, Validators} from "@angular/forms";
+import {EoRelatedCriterion} from "../model/eoRelatedCriterion.model";
 
 @Component({
   selector: 'app-procedure-eo',
@@ -15,10 +16,19 @@ export class ProcedureEoComponent implements OnInit, OnChanges {
 
   countries:Country[]=null;
   procedureTypes:ProcedureType[]=null;
+  eoRelatedCriteria:EoRelatedCriterion[]=null;
 
   constructor(public dataService:DataService) { }
 
   ngOnInit() {
+
+    this.dataService.getEoRelatedCriteria()
+      .then(res=>{
+        this.eoRelatedCriteria=res;
+        // this.createControls(this.eoRelatedCriteria);
+      })
+      .catch(err=>{console.log(err)});
+
 
 
 
@@ -37,7 +47,8 @@ export class ProcedureEoComponent implements OnInit, OnChanges {
         "telephoneNumber":new FormControl(),
       }),
       "id":new FormControl(),
-      "websiteURI": new FormControl()
+      "websiteURI": new FormControl(),
+      "eoRelatedCriteria": new FormArray([])
 
     });
 
@@ -61,6 +72,12 @@ export class ProcedureEoComponent implements OnInit, OnChanges {
     this.EOForm.patchValue({
       "name": this.dataService.selectedEOCountry
     });
+  }
+
+  createControls(criteriaList:EoRelatedCriterion[]){
+    for(let criteria of criteriaList) {
+      console.log(criteria);
+    }
   }
 
 
