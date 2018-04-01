@@ -1,9 +1,16 @@
 package eu.esens.espdvcd.builder;
 
 import eu.esens.espdvcd.builder.exception.BuilderException;
+import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDResponse;
 
+import eu.esens.espdvcd.model.SelectableCriterion;
+import eu.esens.espdvcd.model.requirement.Requirement;
+import eu.esens.espdvcd.model.requirement.RequirementGroup;
+import eu.esens.espdvcd.model.requirement.ResponseRequirement;
+import eu.esens.espdvcd.model.requirement.response.DescriptionResponse;
+import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
 import java.io.InputStream;
 
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
@@ -131,6 +138,52 @@ public class BuilderESPDTest {
         ESPDRequest req = BuilderFactory.getModelBuilder().createESPDRequest();
         req.setCriterionList(extractor.getFullList());
         System.out.println(BuilderFactory.getDocumentBuilderFor(req).theXML);
+    }
+
+    @Test
+    public void createESPDResponseWithAnEmptyResponse() throws Exception {
+        ESPDResponse resp = BuilderFactory.getModelBuilder().createESPDResponse();
+        SelectableCriterion cri = new SelectableCriterion();
+        cri.setSelected(true);
+        cri.setDescription("Test Empty Description");
+
+        RequirementGroup rg = new RequirementGroup("testReq");
+        cri.getRequirementGroups().add(rg);
+
+        Requirement req = new ResponseRequirement("the ID",ResponseTypeEnum.DESCRIPTION,"Test Description");
+        rg.getRequirements().add(req);
+        resp.getFullCriterionList().add(cri);
+
+        Requirement req2 = new ResponseRequirement("the ID",ResponseTypeEnum.PERIOD,"Test Period");
+        rg.getRequirements().add(req2);
+
+        Requirement req3 = new ResponseRequirement("the ID",ResponseTypeEnum.EVIDENCE_URL,"Test Evidence");
+        rg.getRequirements().add(req3);
+
+        Requirement req4 = new ResponseRequirement("the ID",ResponseTypeEnum.CODE,"Test Code");
+        rg.getRequirements().add(req4);
+
+      Requirement req5 = new ResponseRequirement("the ID",ResponseTypeEnum.AMOUNT,"Test Amount");
+      rg.getRequirements().add(req5);
+
+      Requirement req6 = new ResponseRequirement("the ID",ResponseTypeEnum.QUANTITY_YEAR,"Test Year");
+      rg.getRequirements().add(req6);
+
+      Requirement req7 = new ResponseRequirement("the ID",ResponseTypeEnum.DATE,"Test Date");
+      rg.getRequirements().add(req7);
+
+      Requirement req8 = new ResponseRequirement("the ID",ResponseTypeEnum.CODE_COUNTRY,"Test Country");
+      rg.getRequirements().add(req8);
+
+      resp.getFullCriterionList().add(cri);
+
+        ESPDResponseType et = BuilderFactory.getDocumentBuilderFor(resp).createXML(resp);
+        et.getCriterion().get(0).getRequirementGroup().get(0).getRequirement().forEach(r -> {
+          Assert.assertNotNull(r.getResponse().get(0));
+          Assert.assertNull(r.getResponse().get(0).getID());
+          Assert.assertNull(r.getResponse().get(0).getDescription());
+        });
+
     }
 
 }
