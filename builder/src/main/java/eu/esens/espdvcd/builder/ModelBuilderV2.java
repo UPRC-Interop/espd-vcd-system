@@ -5,6 +5,7 @@ import eu.esens.espdvcd.builder.model.ModelFactory;
 import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
+import eu.esens.espdvcd.schema.SchemaUtil;
 import test.x.ubl.pre_award.qualificationapplicationrequest.QualificationApplicationRequestType;
 
 import javax.xml.bind.JAXBException;

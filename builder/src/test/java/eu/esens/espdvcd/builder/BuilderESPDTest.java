@@ -186,4 +186,13 @@ public class BuilderESPDTest {
 
     }
 
+    @Test
+    public void createRegulatedESPDRequestV2() throws BuilderException, RetrieverException {
+
+        CriteriaExtractor extractor = new ECertisCriteriaExtractor();
+        ESPDRequest req = BuilderFactory.V2.getModelBuilder().createRegulatedESPDRequest();
+        req.setCriterionList(extractor.getFullList());
+        System.out.println(BuilderFactory.V2.getDocumentBuilderFor(req).theXML);
+    }
+
 }

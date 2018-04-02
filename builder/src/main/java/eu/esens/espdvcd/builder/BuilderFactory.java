@@ -84,8 +84,7 @@ public class BuilderFactory {
          * @return an instance of the {@link XMLDocumentBuilderV2}
          */
         public static XMLDocumentBuilderV2 getDocumentBuilderFor(ESPDRequest req) {
-            // return new XMLDocumentBuilderV2(req);
-            throw new UnsupportedOperationException("Error... XML document builder v2 not yet implemented...");
+            return new XMLDocumentBuilderV2(req);
         }
 
     }
