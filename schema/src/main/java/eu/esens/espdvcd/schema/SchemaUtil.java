@@ -50,7 +50,7 @@ public class SchemaUtil {
         return marshaller;
     }
 
-    public static Marshaller getMarashallerForV2() throws JAXBException {
+    public static Marshaller getMarshallerForV2() throws JAXBException {
 
         Marshaller marshaller = JCV2.createMarshaller();
         try {

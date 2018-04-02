@@ -2,7 +2,6 @@ package eu.esens.espdvcd.builder;
 
 import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.builder.model.ModelFactory;
-import eu.esens.espdvcd.builder.util.SchemaUtil;
 import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;

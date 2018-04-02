@@ -24,7 +24,7 @@ import java.net.URI;
 /**
  * Created by Ulf Lotzmann on 08/06/2016.
  */
-public class VCDDocumentBuilder extends DocumentBuilder {
+public class VCDDocumentBuilder extends DocumentBuilderV1 {
 
     private SignatureHelper signatureHelper;
 

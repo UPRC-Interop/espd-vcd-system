@@ -1,7 +1,7 @@
 package eu.esens.espdvcd.validator.schema;
 
-import eu.esens.espdvcd.builder.util.SchemaUtil;
-import eu.esens.espdvcd.builder.util.XSD;
+import eu.esens.espdvcd.schema.SchemaUtil;
+import eu.esens.espdvcd.schema.XSD;
 import eu.esens.espdvcd.validator.ArtefactValidator;
 import eu.esens.espdvcd.validator.ValidationResult;
 import org.xml.sax.SAXException;

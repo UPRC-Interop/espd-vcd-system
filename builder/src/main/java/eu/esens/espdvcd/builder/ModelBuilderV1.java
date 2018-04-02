@@ -2,11 +2,11 @@ package eu.esens.espdvcd.builder;
 
 import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.builder.model.ModelFactory;
-import eu.esens.espdvcd.builder.util.SchemaUtil;
 import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
 import eu.esens.espdvcd.retriever.criteria.PredefinedESPDCriteriaExtractor;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
+import eu.esens.espdvcd.schema.SchemaUtil;
 import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
 import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
 

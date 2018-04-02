@@ -1,10 +1,7 @@
 dependencies {
+    compile project(':schema')
 	compile project(':builder')
     compile group: 'com.helger', name: 'ph-schematron', version: '5.0.1'
-
-    // schema
-    compile("eu.europa.ec.grow.espd:exchange-model2:2.0.1-SNAPSHOT")
-    compile group: 'eu.europa.ec.grow.espd', name: 'exchange-model', version: '1.0.2'
 }
 
 task copyTask(type: Copy) {

@@ -3,12 +3,12 @@ package eu.esens.espdvcd.builder;
 import eu.esens.espdvcd.model.ESPDRequest;
 
 /**
- * The XMLDocumentBuilder is a builder pattern implemented class that is used
+ * The XMLDocumentBuilderV1 is a builder pattern implemented class that is used
  * for guided creation of XML Document Artefacts out of ESPD Model Objects.
  * 
  * @since 1.0
  */
-public class XMLDocumentBuilderV1 extends DocumentBuilder {
+public class XMLDocumentBuilderV1 extends DocumentBuilderV1 {
 
     /**
      * Creates an XMLDocumentBuilder based on {@link ESPDRequest} derived class input

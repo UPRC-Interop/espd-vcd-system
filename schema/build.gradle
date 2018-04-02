@@ -14,7 +14,7 @@ buildscript {
 }
 
 dependencies {
-    compile("eu.europa.ec.grow.espd:exchange-model2:2.0.0-SNAPSHOT")
+    compile("eu.europa.ec.grow.espd:exchange-model2:2.0.1-SNAPSHOT")
     compile group: 'eu.europa.ec.grow.espd', name: 'exchange-model', version: '1.0.2'
     compile "com.sun.xml.bind:jaxb-impl:${project.jaxb_impl_version}"
     compile "javax.xml.bind:jaxb-api:${project.jaxb_impl_version}"

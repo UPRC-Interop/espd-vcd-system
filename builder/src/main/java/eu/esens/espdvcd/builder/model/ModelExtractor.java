@@ -2,6 +2,7 @@ package eu.esens.espdvcd.builder.model;
 
 import eu.esens.espdvcd.builder.BuilderFactory;
 import eu.esens.espdvcd.builder.exception.BuilderException;
+import eu.esens.espdvcd.codelist.CodelistsV2;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.model.requirement.Requirement;
@@ -13,6 +14,7 @@ import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.Re
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementType;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -25,8 +27,8 @@ import test.x.ubl.pre_award.commonaggregate.TenderingCriterionType;
 public interface ModelExtractor {
 
     default CADetails extractCADetails(ContractingPartyType caParty,
-            ContractFolderIDType contractFolderId,
-            List<DocumentReferenceType> additionalDocumentReferenceList) {
+                                       ContractFolderIDType contractFolderId,
+                                       List<DocumentReferenceType> additionalDocumentReferenceList) {
 
         CADetails cd = new CADetails();
 
@@ -410,7 +412,14 @@ public interface ModelExtractor {
     }
 
     default LegislationReference extractDefaultLegalReferenceV2(List<test.x.ubl.pre_award.commonaggregate.LegislationType> lrList) {
-        return null;
+
+        //First check if there is an EU_* jurisdiction
+        LegislationReference lr;
+        lr = extractEULegalReferenceV2(lrList);
+        if (lr == null) {
+            lr = extractNationalLegalReferenceV2(lrList);
+        }
+        return lr;
     }
 
     default LegislationReference extractDefaultLegalReference(List<isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.LegislationType> lrList) {
@@ -424,9 +433,29 @@ public interface ModelExtractor {
         return lr;
     }
 
+    default LegislationReference extractEULegalReferenceV2(List<test.x.ubl.pre_award.commonaggregate.LegislationType> lrList) {
+        return lrList.stream()
+                .filter(lr -> lr.getJurisdictionLevel()
+                        .stream().findFirst().orElseThrow(NoSuchElementException::new)
+                        // FIXME there are more codelists v2 options in legislationType
+                        .getValue().contains(CodelistsV2.LegislationType.getValueForId("EU_DIRECTIVE")))
+                .findFirst().map(lr -> extractLegalReference(lr))
+                .orElse(null);
+    }
+
     default LegislationReference extractEULegalReference(List<LegislationType> lrList) {
         return lrList.stream()
                 .filter(lr -> lr.getJurisdictionLevelCode().getValue().contains("EU_"))
+                .findFirst().map(lr -> extractLegalReference(lr))
+                .orElse(null);
+    }
+
+    default LegislationReference extractNationalLegalReferenceV2(List<test.x.ubl.pre_award.commonaggregate.LegislationType> lrList) {
+        return lrList.stream()
+                .filter(lr -> lr.getJurisdictionLevel().stream()
+                        .findFirst().orElseThrow(NoSuchElementException::new)
+                        // FIXME there are more codelists v2 options in legislationType
+                        .getValue().contains(CodelistsV2.LegislationType.getValueForId("NATIONAL_LEGISLATION")))
                 .findFirst().map(lr -> extractLegalReference(lr))
                 .orElse(null);
     }
@@ -436,6 +465,17 @@ public interface ModelExtractor {
                 .filter(lr -> lr.getJurisdictionLevelCode().getValue().contains("NATIONAL"))
                 .findFirst().map(lr -> extractLegalReference(lr))
                 .orElse(null);
+    }
+
+    default LegislationReference extractLegalReference(test.x.ubl.pre_award.commonaggregate.LegislationType lt) {
+        LegislationReference lr = new LegislationReference(
+                lt.getTitle().get(0).getValue(),
+                lt.getDescription().get(0).getValue(),
+                lt.getJurisdictionLevel().get(0).getValue(),
+                lt.getArticle().get(0).getValue(),
+                lt.getURI().get(0).getValue()
+        );
+        return lr;
     }
 
     default LegislationReference extractLegalReference(LegislationType lt) {

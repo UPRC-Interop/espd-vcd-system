@@ -1,6 +1,5 @@
 package eu.esens.espdvcd.builder;
 
-import eu.esens.espdvcd.builder.util.SchemaUtil;
 import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
 import grow.names.specification.ubl.schema.xsd.espdrequest_1.ObjectFactory;
 import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
@@ -121,7 +120,7 @@ public class ESPDCreationTests {
     private String toXmlForV2(JAXBElement element) {
         try {
 
-            Marshaller marshaller = SchemaUtil.getMarashallerForV2();
+            Marshaller marshaller = SchemaUtil.getMarshallerForV2();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 
             ByteArrayOutputStream baos = new ByteArrayOutputStream();

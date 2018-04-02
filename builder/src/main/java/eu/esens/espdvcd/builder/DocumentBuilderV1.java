@@ -1,9 +1,9 @@
 package eu.esens.espdvcd.builder;
 
 import eu.esens.espdvcd.builder.schema.SchemaFactory;
-import eu.esens.espdvcd.builder.util.SchemaUtil;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDResponse;
+import eu.esens.espdvcd.schema.SchemaUtil;
 import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
 import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.IssueDateType;
@@ -24,11 +24,11 @@ import java.util.logging.Logger;
 /**
  * Created by Ulf Lotzmann on 08/06/2016.
  */
-public class DocumentBuilder {
+public class DocumentBuilderV1 {
 
     protected final String theXML;
 
-    public DocumentBuilder(ESPDRequest req) {
+    public DocumentBuilderV1(ESPDRequest req) {
         theXML = createXMLasString(req);
     }
 

@@ -12,7 +12,7 @@ public class BuilderFactory {
 
     /**
      * Creates a new instance of the {@link ModelBuilderV1}, which is used to
-     * create ESPD and VCD model pojos from XML input.
+     * create ESPD and VCD model POJOs from XML input.
      *
      * @return an instance of the {@link ModelBuilderV1}
      * @deprecated as of release 2.0.2, replaced by {@link V1#getModelBuilder()}
@@ -35,7 +35,7 @@ public class BuilderFactory {
         return new XMLDocumentBuilderV1(req);
     }
 
-    public static class V1 {
+    public static final class V1 {
 
         private V1() {}
 
@@ -62,7 +62,7 @@ public class BuilderFactory {
 
     }
 
-    public static class V2 {
+    public static final class V2 {
 
         private V2() {}
 
