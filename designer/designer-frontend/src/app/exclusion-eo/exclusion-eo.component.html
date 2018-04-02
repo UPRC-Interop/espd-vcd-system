@@ -13,20 +13,43 @@
       <div class="desc">
         <h4>Article {{exclusionACriteria['0'].legislationReference.article}} of {{exclusionACriteria['0'].legislationReference.title}} sets out the following reasons for exclusion</h4>
       </div>
-     <mat-card *ngFor="let criteria of exclusionACriteria; let i = index">
-       <div class="exclusionCriteria" >
+      <mat-card *ngFor="let criteria of exclusionACriteria; let i = index">
+        <div class="exclusionCriteria" >
 
-         <div class="criteria">
-           <mat-checkbox name=exclusionACriteria[i] color="primary" checked="exclusionACriteria[i].selected" [(ngModel)]="exclusionACriteria[i].selected" disabled>{{criteria.name}}</mat-checkbox>
-           <div class="critDesc">{{criteria.description}}</div>
-         </div>
+          <div class="criteria">
+            <h4>{{criteria.name}}</h4>
 
-         <div class="eCertis">
-           <h5>eCertis Information ...</h5>
-           <div class="eCertDesc">no information...</div>
-         </div>
-       </div>
-     </mat-card>
+            <!--<mat-checkbox name=exclusionACriteria[i] -->
+                          <!--color="primary" -->
+                          <!--checked="exclusionACriteria[i].selected" -->
+                          <!--[(ngModel)]="exclusionACriteria[i].selected" -->
+                          <!--disabled>{{criteria.name}}</mat-checkbox>-->
+            <div class="critDesc">{{criteria.description}}</div>
+            <div class="eCertis">
+              <h5>eCertis Information ...</h5>
+              <div class="eCertDesc">no information...</div>
+            </div>
+          </div>
+          <div class="answer">
+            <span>{{criteria.requirementGroups[0].requirements[0].description}}</span>
+            <!--<mat-radio-group name='responseDataType'>-->
+              <!--<mat-radio-button color="primary" name="selALL" value="YES" (change)="handleALL(YES)" #YES>YES</mat-radio-button>-->
+              <!--<mat-radio-button color="primary" name="selALL" value="NO" checked (change)="handleALL(NO)" #NO>NO</mat-radio-button>-->
+            <!--</mat-radio-group>-->
+            <mat-radio-group name="response.indicator"
+                             [(ngModel)]="criteria.selected">
+              <mat-radio-button color="primary"
+                                value="YES"
+                                [value]="true">YES</mat-radio-button>
+              <mat-radio-button color="primary"
+                                value="NO"
+                                [value]="false">NO</mat-radio-button>
+            </mat-radio-group>
+
+          </div>
+
+        </div>
+      </mat-card>
     </mat-expansion-panel>
 
     <mat-expansion-panel expanded="true" *ngIf="exclusionBCriteria">
@@ -110,5 +133,5 @@
     </mat-expansion-panel>
   </mat-accordion>
   <button mat-raised-button color="primary" matStepperPrevious>Back</button>
-  <button type="submit" mat-raised-button color="primary" matStepperNext (click)="onExclusionSubmit(f)">Next</button>
+  <button type="submit" mat-raised-button color="primary" matStepperNext (click)="onExclusionEOSubmit(f)">Next</button>
 </form>

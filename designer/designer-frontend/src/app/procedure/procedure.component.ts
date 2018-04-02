@@ -16,7 +16,7 @@ export class ProcedureComponent implements OnInit, OnChanges {
 
 
 
-  constructor(private dataService:DataService) { }
+  constructor(public dataService:DataService) { }
 
   ngOnInit() {
 
@@ -41,10 +41,10 @@ export class ProcedureComponent implements OnInit, OnChanges {
   }
 
   onProcedureSubmit(form:NgForm){
-    console.log(form.value);
+    // console.log(form.value);
     this.dataService.CADetails.cacountry=form.value.CACountry;
     this.dataService.CADetails.receivedNoticeNumber=form.value.receivedNoticeNumber;
-    console.log(this.dataService.CADetails);
+    // console.log(this.dataService.CADetails);
   }
 
 

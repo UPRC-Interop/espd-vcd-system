@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import 'rxjs/add/operator/toPromise';
 import {Country} from "../model/country.model";
 import {ProcedureType} from "../model/procedureType.model";
 import {ExclusionCriteria} from "../model/exclusionCriteria.model";
 import {SelectionCriteria} from "../model/selectionCriteria.model";
+import {ESPDRequest} from "../model/ESPDRequest.model";
+import {EoRelatedCriterion} from "../model/eoRelatedCriterion.model";
 
 @Injectable()
 export class ApicallService {
@@ -20,6 +22,14 @@ export class ApicallService {
   getProcedureType(){
     return this.http.get<ProcedureType[]>("http://localhost:8080/api/codelists/v2/ProcedureType").toPromise()
   }
+
+
+  /* ==================== EO related criteria ========================= */
+
+  getEO_RelatedCriteria(){
+    return this.http.get<EoRelatedCriterion[]>("http://localhost:8080/api/criteriaList/predefined/eorelated").toPromise()
+  }
+
 
   /* ============= EXCLUSION CRITERIA ===================*/
   getExclusionCriteria(){
@@ -74,11 +84,11 @@ export class ApicallService {
     // const header = new HttpHeaders({'Content-Type':'application/xml; charset=utf-8'});
     let header = new HttpHeaders();
     header = header.set('Content-Type', 'application/xml; charset=utf-8');
-    return this.http.post<any>("http://localhost:8080/api/espd/v1/request", formData).toPromise();
+    return this.http.post<ESPDRequest>("http://localhost:8080/api/espd/v1/request", formData).toPromise();
 
   }
 
-  /* ================= UPLOAD JSON GET XML Request*/
+  /* ================= UPLOAD JSON GET XML Request ================================= */
   getXMLRequest(ESPDRequest:string){
     // const formData: FormData = new FormData();
     //
@@ -88,7 +98,18 @@ export class ApicallService {
 
     let header = new HttpHeaders();
     let _header = header.append('Content-Type', 'application/json; charset=utf-8');
-    let options = {headers:_header};
+    // let options = {
+    //   headers:_header,
+    //   responseType:'blob'
+    // };
+
+    let options: Object = {
+      headers: _header,
+      responseType: 'blob' as 'blob',
+      observe: 'response' as 'response'
+    };
+
+
 
     // headers = header.append('Content-Type', 'application/json; charset=utf-8');
     return this.http.post<any>("http://localhost:8080/api/espd/v1/request", ESPDRequest, options).toPromise();

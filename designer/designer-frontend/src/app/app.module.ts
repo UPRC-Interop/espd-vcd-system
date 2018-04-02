@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
-import {FormsModule} from "@angular/forms";
+import {FormsModule,ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from '@angular/common/http';
 
 import {DataService} from "./services/data.service";
@@ -17,6 +17,8 @@ import { ExclusionComponent } from './exclusion/exclusion.component';
 import { ProcedureEoComponent } from './procedure-eo/procedure-eo.component';
 import { SelectionComponent } from './selection/selection.component';
 import { FinishComponent } from './finish/finish.component';
+import { ExclusionEoComponent } from './exclusion-eo/exclusion-eo.component';
+import { SelectionEoComponent } from './selection-eo/selection-eo.component';
 
 
 @NgModule({
@@ -29,7 +31,9 @@ import { FinishComponent } from './finish/finish.component';
     ExclusionComponent,
     ProcedureEoComponent,
     SelectionComponent,
-    FinishComponent
+    FinishComponent,
+    ExclusionEoComponent,
+    SelectionEoComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +41,7 @@ import { FinishComponent } from './finish/finish.component';
     MaterialModule,
     FormsModule,
     HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [ApicallService, DataService],
   bootstrap: [AppComponent]

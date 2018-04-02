@@ -38,7 +38,6 @@ export class StartComponent implements OnInit {
   isCreateResponse:boolean=false;
   fileToUpload:File[] =[];
 
-  // countries=["Greece", "Germany", "France"];
 
   handleFileUpload(files:FileList) {
     console.log(files);
@@ -85,14 +84,17 @@ export class StartComponent implements OnInit {
 
   onStartSubmit(form:NgForm){
     // console.log(form);
-    if(this.fileToUpload.length>0) {
-      this.APIService.postFile(this.fileToUpload)
-        .then(res=>{
-          console.log(res);
-        })
-        .catch(err=>err);
+
+    //CA reuses ESPDRequest
+    if(this.isCA){
+      this.dataService.CAReuseESPD(this.fileToUpload, form);
     }
-    this.dataService.startCA(form);
+
+
+    //Start New ESPD
+      this.dataService.startESPD(form);
+
+
 
   }
 

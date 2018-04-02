@@ -1,13 +1,24 @@
 package eu.esens.espdvcd.designer;
 
+import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.module.SimpleAbstractTypeResolver;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import eu.esens.espdvcd.builder.BuilderFactory;
 import eu.esens.espdvcd.codelist.CodelistsV1;
 import eu.esens.espdvcd.codelist.CodelistsV2;
 import eu.esens.espdvcd.designer.models.CodelistItem;
 import eu.esens.espdvcd.designer.routes.CriteriaRoute;
 import eu.esens.espdvcd.model.*;
+import eu.esens.espdvcd.model.requirement.RequestRequirement;
+import eu.esens.espdvcd.model.requirement.Requirement;
+import eu.esens.espdvcd.model.requirement.ResponseRequirement;
+import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
+import eu.esens.espdvcd.retriever.criteria.ECertisCriteriaExtractor;
+import eu.esens.espdvcd.retriever.criteria.PredefinedESPDCriteriaExtractor;
+import eu.esens.espdvcd.retriever.exception.RetrieverException;
 
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.http.Part;
@@ -23,12 +34,14 @@ import static spark.Spark.*;
 public final class Server {
 
     private final static Logger LOGGER = Logger.getLogger(Server.class.getName());
-    private final static ObjectWriter WRITER = new ObjectMapper().findAndRegisterModules().writer().withDefaultPrettyPrinter();
-    private final static ObjectMapper MAPPER = new ObjectMapper().findAndRegisterModules();
+    private final static ObjectWriter WRITER = new ObjectMapper().registerModule(new JavaTimeModule()).writer().withDefaultPrettyPrinter();
+    private final static ObjectMapper REQ_MAPPER = new ObjectMapper().registerModule(new JavaTimeModule()),
+            RESP_MAPPER = new ObjectMapper().registerModule(new JavaTimeModule());
+    private final static PredefinedESPDCriteriaExtractor PREDEFINED_CRITERIA_EXTRACTOR = new PredefinedESPDCriteriaExtractor();
+    private final static ECertisCriteriaExtractor E_CERTIS_CRITERIA_EXTRACTOR = new ECertisCriteriaExtractor();
 
     private final static Map<String, List<CodelistItem>> CODELISTS_MAP_V2 = new LinkedHashMap<>(),
             CODELISTS_MAP_V1 = new LinkedHashMap<>();
-
     private static final String EXCLUSION_REGEXP = "^CRITERION.EXCLUSION.+";
     private static final String EXCLUSION_CONVICTION_REGEXP = "^CRITERION.EXCLUSION.CONVICTIONS.+";
     private static final String EXCLUSION_CONTRIBUTION_REGEXP = "^CRITERION.EXCLUSION.CONTRIBUTIONS.+";
@@ -44,7 +57,6 @@ public final class Server {
     private static final String SELECTION_CERTIFICATES_REGEXP = "^CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY.CERTIFICATES.+";
     private static final String EO_RELATED_REGEXP = "(?!.*MEETS_THE_OBJECTIVE*)^CRITERION.OTHER.EO_DATA.+";
     private static final String REDUCTION_OF_CANDIDATES_REGEXP = "^CRITERION.OTHER.EO_DATA.MEETS_THE_OBJECTIVE*";
-
 
     public static void main(String[] args) {
 
@@ -69,6 +81,15 @@ public final class Server {
 
         //SET UP
         CriteriaRoute criteriaRoute = new CriteriaRoute();
+        SimpleModule requestRequirementModule = new SimpleModule("RequestRequirementModule", Version.unknownVersion()),
+                responseRequirementModule = new SimpleModule("ResponseRequirementModule", Version.unknownVersion());
+        SimpleAbstractTypeResolver requestRequirementResolver = new SimpleAbstractTypeResolver().addMapping(Requirement.class, RequestRequirement.class),
+                responseRequirementResolver = new SimpleAbstractTypeResolver().addMapping(Requirement.class, ResponseRequirement.class);
+        requestRequirementModule.setAbstractTypes(requestRequirementResolver);
+        responseRequirementModule.setAbstractTypes(responseRequirementResolver);
+
+        REQ_MAPPER.registerModule(requestRequirementModule);
+        RESP_MAPPER.registerModule(responseRequirementModule);
 
         //ROUTES
         path("/api", () -> {
@@ -114,7 +135,7 @@ public final class Server {
                                 return "CodeList not found";
                             }
                         }
-                    }else {
+                    } else {
                         response.status(400);
                         return "Invalid codelist version specified";
                     }
@@ -122,7 +143,23 @@ public final class Server {
             });
 
             path("/criteriaList", () -> {
-                get("/ecertis", ((request, response) -> WRITER.writeValueAsString(criteriaRoute.getECertisCriteria())));
+
+//                get("/:criteriaType/:criteriaLanguage", (request, response) -> {
+//                    final String criteriaType = request.params("criteriaType"),
+//                            criteriaLanguage = request.params("criteriaLanguage");
+//                });
+
+                get("/ecertis/:lang", ((request, response) -> {
+                    final String language = request.params("lang");
+                    try {
+                        E_CERTIS_CRITERIA_EXTRACTOR.setLang(language);
+                    } catch (RetrieverException e) {
+                        e.printStackTrace();
+                        response.status(400);
+                        return "Invalid langage specified";
+                    }
+                    return WRITER.writeValueAsString(E_CERTIS_CRITERIA_EXTRACTOR.getCriterion(E_CERTIS_CRITERIA_EXTRACTOR.getFullList().iterator().next().getID()));
+                }));
 
                 path("/predefined", () -> {
                     get("/", (request, response)
@@ -183,7 +220,7 @@ public final class Server {
                     post("/request", (rq, rsp) -> {
                         if (rq.contentType().contains("application/json")) {
                             LOGGER.info(rq.body());
-                            ESPDRequest espdRequest = MAPPER.readValue(rq.body(), RegulatedESPDRequest.class);
+                            ESPDRequest espdRequest = REQ_MAPPER.readValue(rq.body(), RegulatedESPDRequest.class);
                             rsp.header("Content-Type", "application/octet-stream");
                             rsp.header("Content-Disposition", "attachment; filename=espd-request.xml;");
                             return BuilderFactory.V1.getDocumentBuilderFor(espdRequest).getAsInputStream();
@@ -196,6 +233,7 @@ public final class Server {
                                 LOGGER.info(part.getContentType());
                                 LOGGER.info(new BufferedReader(new InputStreamReader(part.getInputStream())).lines().collect(Collectors.joining("\n")));
                                 ESPDRequest req = BuilderFactory.V1.getModelBuilder().importFrom(part.getInputStream()).createRegulatedESPDRequest();
+                                req.setCriterionList(PREDEFINED_CRITERIA_EXTRACTOR.getFullList(req.getFullCriterionList()));
                                 return WRITER.writeValueAsString(req);
                             } else {
                                 rsp.status(400);
@@ -203,6 +241,7 @@ public final class Server {
                             }
                         } else if (rq.contentType().contains("application/xml")) {
                             ESPDRequest req = BuilderFactory.V1.getModelBuilder().importFrom(new ByteArrayInputStream(rq.bodyAsBytes())).createRegulatedESPDRequest();
+                            req.setCriterionList(PREDEFINED_CRITERIA_EXTRACTOR.getFullList(req.getFullCriterionList()));
                             return WRITER.writeValueAsString(req);
                         } else {
                             LOGGER.warning("Invalid request.");
@@ -215,7 +254,7 @@ public final class Server {
 
                     post("/response", (rq, rsp) -> {
                         if (rq.contentType().contains("application/json")) {
-                            ESPDResponse espdResponse = MAPPER.readValue(rq.body(), RegulatedESPDResponse.class);
+                            ESPDResponse espdResponse = RESP_MAPPER.readValue(rq.body(), RegulatedESPDResponse.class);
                             rsp.header("Content-Type", "application/octet-stream");
                             rsp.header("Content-Disposition", "attachment; filename=espd-response.xml;");
                             return BuilderFactory.V1.getDocumentBuilderFor(espdResponse).getAsInputStream();

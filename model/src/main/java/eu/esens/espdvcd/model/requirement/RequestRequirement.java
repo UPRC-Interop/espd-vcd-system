@@ -1,5 +1,6 @@
 package eu.esens.espdvcd.model.requirement;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.requirement.response.Response;
@@ -85,11 +86,13 @@ public class RequestRequirement implements Requirement {
         this.description = description;
     }
 
+    @JsonIgnore
     @Override
     public Response getResponse() {
         throw new UnsupportedOperationException("Not supported in ESPD request.");
     }
 
+    @JsonIgnore
     @Override
     public void setResponse(Response response) {
         throw new UnsupportedOperationException("Not supported in ESPD request.");
