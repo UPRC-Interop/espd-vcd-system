@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {ExclusionCriteria} from "../model/exclusionCriteria.model";
-import {DataService} from "../services/data.service";
-import {NgForm} from "@angular/forms";
+import {Component, OnInit} from '@angular/core';
+import {ExclusionCriteria} from '../model/exclusionCriteria.model';
+import {DataService} from '../services/data.service';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-exclusion-eo',
@@ -10,45 +10,54 @@ import {NgForm} from "@angular/forms";
 })
 export class ExclusionEoComponent implements OnInit {
 
-  exclusionACriteria:ExclusionCriteria[]=null;
-  exclusionBCriteria:ExclusionCriteria[]=null;
-  exclusionCCriteria:ExclusionCriteria[]=null;
-  exclusionDCriteria:ExclusionCriteria[]=null;
+  exclusionACriteria: ExclusionCriteria[] = null;
+  exclusionBCriteria: ExclusionCriteria[] = null;
+  exclusionCCriteria: ExclusionCriteria[] = null;
+  exclusionDCriteria: ExclusionCriteria[] = null;
 
-  constructor(private dataService:DataService) { }
+  constructor(private dataService: DataService) {
+  }
 
   ngOnInit() {
     this.dataService.getExclusionACriteria()
-      .then(res=>{
-        this.exclusionACriteria=res;
+      .then(res => {
+        this.exclusionACriteria = res;
         // console.log("This is exclusionACriteria: ");
         console.log(this.exclusionACriteria);
       })
-      .catch(err=>{console.log(err)});
+      .catch(err => {
+        console.log(err);
+      });
 
     this.dataService.getExclusionBCriteria()
-      .then(res=>{
-        this.exclusionBCriteria=res;
+      .then(res => {
+        this.exclusionBCriteria = res;
         // console.log(res);
       })
-      .catch(err=>{console.log(err)});
+      .catch(err => {
+        console.log(err);
+      });
 
     this.dataService.getExclusionCCriteria()
-      .then(res=>{
-        this.exclusionCCriteria=res;
+      .then(res => {
+        this.exclusionCCriteria = res;
         // console.log(res);
       })
-      .catch(err=>{console.log(err)});
+      .catch(err => {
+        console.log(err);
+      });
 
     this.dataService.getExclusionDCriteria()
-      .then(res=>{
-        this.exclusionDCriteria=res;
+      .then(res => {
+        this.exclusionDCriteria = res;
         // console.log(res);
       })
-      .catch(err=>{console.log(err)});
+      .catch(err => {
+        console.log(err);
+      });
   }
 
-  onExclusionEOSubmit(form:NgForm){
+  onExclusionEOSubmit(form: NgForm) {
     console.log(form.value);
     this.dataService.exclusionSubmit(this.exclusionACriteria,
       this.exclusionBCriteria,
