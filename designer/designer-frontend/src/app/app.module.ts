@@ -4,6 +4,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule} from './material/material.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import {AppRoutingModule} from './app-routing.module';
 
 import {DataService} from './services/data.service';
 import {ApicallService} from './services/apicall.service';
@@ -21,6 +22,8 @@ import {ExclusionEoComponent} from './exclusion-eo/exclusion-eo.component';
 import {SelectionEoComponent} from './selection-eo/selection-eo.component';
 import {RequirementGroupComponent} from './requirement-group/requirement-group.component';
 import {RequirementComponent} from './requirement/requirement.component';
+import { RootComponent } from './root/root.component';
+
 
 
 @NgModule({
@@ -37,7 +40,8 @@ import {RequirementComponent} from './requirement/requirement.component';
     ExclusionEoComponent,
     SelectionEoComponent,
     RequirementGroupComponent,
-    RequirementComponent
+    RequirementComponent,
+    RootComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +49,8 @@ import {RequirementComponent} from './requirement/requirement.component';
     MaterialModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AppRoutingModule
   ],
   providers: [ApicallService, DataService],
   bootstrap: [AppComponent]

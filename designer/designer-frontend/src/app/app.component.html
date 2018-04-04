@@ -1,33 +1,5 @@
 <app-toolbar></app-toolbar>
 
-<div class="container">
-
-  <mat-horizontal-stepper [linear]="isLinear" #stepper="matHorizontalStepper">
-    <mat-step>
-      <ng-template matStepLabel>Start</ng-template>
-      <app-start></app-start>
-    </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Procedure</ng-template>
-      <app-procedure *ngIf="dataService.isCA"></app-procedure>
-      <app-procedure-eo *ngIf="dataService.isEO"></app-procedure-eo>
-    </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Exclusion</ng-template>
-      <app-exclusion *ngIf="dataService.isCA"></app-exclusion>
-      <app-exclusion-eo *ngIf="dataService.isEO"></app-exclusion-eo>
-    </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Selection</ng-template>
-      <app-selection *ngIf="dataService.isCA"></app-selection>
-      <app-selection-eo *ngIf="dataService.isEO"></app-selection-eo>
-    </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Finish</ng-template>
-      <app-finish></app-finish>
-    </mat-step>
-  </mat-horizontal-stepper>
-
-</div>
+<router-outlet></router-outlet>
 
 

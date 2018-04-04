@@ -90,6 +90,7 @@ export class ExclusionEoComponent implements OnInit {
 
   onExclusionEOSubmit(form: NgForm) {
     console.log(form.value);
+    console.log(this.formA.value);
     this.dataService.exclusionSubmit(this.exclusionACriteria,
       this.exclusionBCriteria,
       this.exclusionCCriteria,
