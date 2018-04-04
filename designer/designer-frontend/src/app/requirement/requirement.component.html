@@ -1,34 +1,30 @@
-<mat-card>
+
   <div [formGroup]="form">
-    <label [attr.for]="req.id">{{req.description}}</label>
+    <label *ngIf="req.responseDataType=='INDICATOR'" [attr.for]="req.id">{{req.description}}</label>
 
     <div [ngSwitch]="req.responseDataType">
 
-        <input matInput *ngSwitchDefault [formControlName]="req.id"
-               [id]="req.id">
+      <mat-form-field *ngSwitchDefault >
+        <input matInput [formControlName]="req.id" [id]="req.id" [placeholder]="req.description">
+      </mat-form-field>
 
+      <mat-form-field *ngSwitchCase="'DATE'">
+        <input matInput [matDatepicker]="picker" [formControlName]="req.id" [id]="req.id" [placeholder]="req.description">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
 
-
-        <mat-select [id]="req.id" *ngSwitchCase="'INDICATOR'" [formControlName]="req.id">
-          <mat-option>YES</mat-option>
-          <mat-option>NO</mat-option>
-        </mat-select>
-
-
-
-      <!--<mat-radio-group>-->
-        <!--<mat-radio-button color="primary"-->
-                          <!--value="YES"-->
-                          <!--[value]="true">YES-->
-        <!--</mat-radio-button>-->
-        <!--<mat-radio-button color="primary"-->
-                          <!--value="NO"-->
-                          <!--[value]="false">NO-->
-        <!--</mat-radio-button>-->
-      <!--</mat-radio-group>-->
+      <mat-radio-group [id]="req.id" *ngSwitchCase="'INDICATOR'" [formControlName]="req.id">
+        <mat-radio-button color="primary"
+                          value="YES">YES
+        </mat-radio-button>
+        <mat-radio-button color="primary"
+                          value="NO">NO
+        </mat-radio-button>
+      </mat-radio-group>
 
     </div>
   </div>
-</mat-card>
+
 
 

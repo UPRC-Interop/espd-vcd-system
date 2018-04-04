@@ -26,7 +26,6 @@
             </div>
           </div>
           <div class="answer">
-            <span>{{criteria.requirementGroups[0].requirements[0].description}}</span>
 
             <div *ngFor="let rg of requirementAGroups" class="form-row">
               <app-requirement-group [reqGroup]="rg" [form] = "formA.get(rg.id)" [indicator]="true"></app-requirement-group>
