@@ -1,6 +1,6 @@
 <h4>Part III: Exclusion grounds</h4>
 <mat-accordion multi="true">
-  <form>
+  <form [formGroup]="formA">
     <mat-expansion-panel expanded="true" *ngIf="exclusionACriteria">
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -27,6 +27,11 @@
           </div>
           <div class="answer">
             <span>{{criteria.requirementGroups[0].requirements[0].description}}</span>
+
+            <div *ngFor="let rg of requirementAGroups" class="form-row">
+              <app-requirement-group [reqGroup]="rg" [form] = "formA.get(rg.id)" [indicator]="true"></app-requirement-group>
+            </div>
+
             <!--<mat-radio-group name='responseDataType'>-->
             <!--<mat-radio-button color="primary" name="selALL" value="YES" (change)="handleALL(YES)" #YES>YES</mat-radio-button>-->
             <!--<mat-radio-button color="primary" name="selALL" value="NO" checked (change)="handleALL(NO)" #NO>NO</mat-radio-button>-->

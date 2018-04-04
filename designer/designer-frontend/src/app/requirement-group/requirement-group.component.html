@@ -1,3 +1,12 @@
-<p>
-  requirement-group works!
-</p>
+<div *ngIf="showIndicator">
+  <mat-card>
+    <mat-card-content>
+      <div *ngFor="let r of reqGroup.requirements" class="form-row">
+        <app-requirement [req]="r" [form] = "form" (indicatorChanged)="childIndicatorChangedHandler($event)"></app-requirement>
+      </div>
+      <div *ngFor="let rg of reqGroup.requirementGroups" class="form-row">
+        <app-requirement-group [reqGroup]="rg" [form] = "form.get(rg.id)" [indicator]="childIndicator"></app-requirement-group>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
