@@ -19,6 +19,8 @@ import { SelectionComponent } from './selection/selection.component';
 import { FinishComponent } from './finish/finish.component';
 import { ExclusionEoComponent } from './exclusion-eo/exclusion-eo.component';
 import { SelectionEoComponent } from './selection-eo/selection-eo.component';
+import { RequirementGroupComponent } from './requirement-group/requirement-group.component';
+import { RequirementComponent } from './requirement/requirement.component';
 
 
 @NgModule({
@@ -33,7 +35,9 @@ import { SelectionEoComponent } from './selection-eo/selection-eo.component';
     SelectionComponent,
     FinishComponent,
     ExclusionEoComponent,
-    SelectionEoComponent
+    SelectionEoComponent,
+    RequirementGroupComponent,
+    RequirementComponent
   ],
   imports: [
     BrowserModule,
