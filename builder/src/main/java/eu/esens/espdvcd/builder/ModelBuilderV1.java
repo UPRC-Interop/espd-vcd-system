@@ -294,15 +294,13 @@ public class ModelBuilderV1 extends ModelBuilder {
 //        return null;
 //    }
 
-    private ESPDRequestType readRegulatedESPDRequestFromStream(InputStream is) {
-        try {
+    private ESPDRequestType readRegulatedESPDRequestFromStream(InputStream is)
+        throws JAXBException {
+
             // Start with the convenience methods provided by JAXB. If there are
             // performance issues we will switch back to the JAXB API Usage
             return SchemaUtil.getUnmarshaller().unmarshal(new StreamSource(is), ESPDRequestType.class).getValue();
-        } catch (JAXBException ex) {
-            Logger.getLogger(ModelBuilderV1.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
+
     }
 
     /**
@@ -344,7 +342,7 @@ public class ModelBuilderV1 extends ModelBuilder {
 
             return req;
 
-        } catch (IOException ex) {
+        } catch (IOException | JAXBException ex) {
             Logger.getLogger(ModelBuilderV1.class.getName()).log(Level.SEVERE, null, ex);
             throw new BuilderException("Error in Reading XML Input Stream", ex);
         }
