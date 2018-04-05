@@ -27,8 +27,8 @@ export class ExclusionEoComponent implements OnInit {
     this.dataService.getExclusionACriteria()
       .then(res => {
         this.exclusionACriteria = res;
-        this.formA = this.dataService.createExclusionCriterionForm(this.exclusionACriteria);
-
+        this.formA = this.dataService.createExclusionCriterionFormTest(this.exclusionACriteria);
+        console.log(this.formA);
         // this.exclusionACriteria.forEach(criteria => {
         //   // this.requirementAGroups[criteria.typeCode] = criteria.requirementGroups;
         //   // console.log(criteria);

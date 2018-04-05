@@ -19,6 +19,9 @@ export class CriterionComponent implements OnInit {
   ngOnInit() {
     console.log(this.criterion);
     console.log(this.form);
+    console.log(this.form.controls);
+    console.log(this.criterion.typeCode);
+    console.log(this.form.get(this.criterion.typeCode));
   }
 
 }
