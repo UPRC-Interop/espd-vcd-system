@@ -14,12 +14,12 @@
         <h4>Article {{exclusionACriteria['0'].legislationReference.article}} of
           {{exclusionACriteria['0'].legislationReference.title}} sets out the following reasons for exclusion</h4>
       </div>
-      <mat-card *ngFor="let criteria of exclusionACriteria; let i = index">
+      <mat-card *ngFor="let cr of exclusionACriteria; let i = index">
         <div class="exclusionCriteria">
 
           <div class="criteria">
-            <h4>{{criteria.name}}</h4>
-            <div class="critDesc">{{criteria.description}}</div>
+            <h4>{{cr.name}}</h4>
+            <div class="critDesc">{{cr.description}}</div>
             <div class="eCertis">
               <h5>eCertis Information ...</h5>
               <div class="eCertDesc">no information...</div>
@@ -30,9 +30,9 @@
             <!--<div *ngFor="let rg of requirementAGroups" class="form-row">-->
               <!--<app-requirement-group [reqGroup]="rg" [form] = "formA.get(rg.id)" [indicator]="true"></app-requirement-group>-->
             <!--</div>-->
-            <div *ngFor="let cr of exclusionACriteria; let i = index" class="form-row">
+
               <app-criterion [criterion]="cr" [form]="formA.controls" [indicator]="true"></app-criterion>
-            </div>
+
 
             <!--<mat-radio-group name='responseDataType'>-->
             <!--<mat-radio-button color="primary" name="selALL" value="YES" (change)="handleALL(YES)" #YES>YES</mat-radio-button>-->
