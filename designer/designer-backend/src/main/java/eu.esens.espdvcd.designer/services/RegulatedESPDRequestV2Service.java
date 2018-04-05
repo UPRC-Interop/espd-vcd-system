@@ -5,8 +5,7 @@ import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
+import java.io.*;
 
 public class RegulatedESPDRequestV2Service implements ESPDRequestService {
     private final CriteriaService criteriaService;
@@ -16,15 +15,8 @@ public class RegulatedESPDRequestV2Service implements ESPDRequestService {
     }
 
     @Override
-    public ESPDRequest XMLStreamToRequestParser(InputStream XML) throws RetrieverException, BuilderException {
-        ESPDRequest request = BuilderFactory.V2.getModelBuilder().importFrom(XML).createRegulatedESPDRequest();
-        request.setCriterionList(criteriaService.getUnselectedCriteria(request.getFullCriterionList()));
-        return request;
-    }
-
-    @Override
-    public ESPDRequest XMLStringToRequestParser(String XML) throws BuilderException, RetrieverException {
-        ESPDRequest request = BuilderFactory.V2.getModelBuilder().importFrom(new ByteArrayInputStream(XML.getBytes())).createRegulatedESPDRequest();
+    public ESPDRequest XMLFileToObjectTransformer(File XML) throws RetrieverException, BuilderException, FileNotFoundException {
+        ESPDRequest request = BuilderFactory.V2.getModelBuilder().importFrom(new FileInputStream(XML)).createRegulatedESPDRequest();
         request.setCriterionList(criteriaService.getUnselectedCriteria(request.getFullCriterionList()));
         return request;
     }

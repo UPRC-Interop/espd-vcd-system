@@ -2,22 +2,19 @@ package eu.esens.espdvcd.designer.services;
 
 import eu.esens.espdvcd.builder.BuilderFactory;
 import eu.esens.espdvcd.builder.exception.BuilderException;
+import eu.esens.espdvcd.designer.exceptions.ValidationException;
 import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
+import org.xml.sax.SAXException;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
+import javax.xml.bind.JAXBException;
+import java.io.*;
 
 public class RegulatedESPDResponseV2Service implements ESPDResponseService {
 
     @Override
-    public ESPDResponse XMLStreamToResponseParser(InputStream XML) throws RetrieverException, BuilderException {
-        return BuilderFactory.V2.getModelBuilder().importFrom(XML).createRegulatedESPDResponse();
-    }
-
-    @Override
-    public ESPDResponse XMLStringToResponseParser(String XML) throws BuilderException, RetrieverException {
-        return BuilderFactory.V2.getModelBuilder().importFrom(new ByteArrayInputStream(XML.getBytes())).createRegulatedESPDResponse();
+    public ESPDResponse XMLFileToObjectTransformer(File XML) throws RetrieverException, BuilderException, ValidationException, FileNotFoundException, JAXBException, SAXException {
+        return BuilderFactory.V2.getModelBuilder().importFrom(new FileInputStream(XML)).createRegulatedESPDResponse();
     }
 
     @Override

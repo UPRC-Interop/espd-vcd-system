@@ -6,6 +6,7 @@ dependencies {
     compile project(':builder')
     compile project(':codelists')
     compile project(':model')
+    compile project(':validator')
 
     compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.4'
     compile 'com.sparkjava:spark-core:2.7.1'

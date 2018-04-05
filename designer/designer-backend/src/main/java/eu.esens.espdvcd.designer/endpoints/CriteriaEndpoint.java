@@ -61,7 +61,7 @@ public class CriteriaEndpoint extends Endpoint {
                 response.header("Content-Type", "application/json");
                 return WRITER.writeValueAsString(service.getTranslatedCriteria(lang));
             } catch (UnsupportedOperationException e) {
-                response.status(400);
+                response.status(406);
                 LOGGER.warning(e.getMessage());
                 return TRANSLATION_ERROR;
             } catch (RetrieverException e) {
@@ -95,7 +95,7 @@ public class CriteriaEndpoint extends Endpoint {
                 LOGGER.warning(e.getMessage());
                 return CRITERIA_ERROR + e.getMessage();
             } catch (UnsupportedOperationException e) {
-                response.status(400);
+                response.status(406);
                 LOGGER.warning(e.getMessage());
                 return TRANSLATION_ERROR;
             } catch (RetrieverException e) {

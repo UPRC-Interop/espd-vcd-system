@@ -4,23 +4,35 @@ import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.module.SimpleAbstractTypeResolver;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import eu.esens.espdvcd.builder.exception.BuilderException;
+import eu.esens.espdvcd.designer.exceptions.ValidationException;
 import eu.esens.espdvcd.designer.services.ESPDResponseService;
 import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.model.RegulatedESPDResponse;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.ResponseRequirement;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
+import eu.esens.espdvcd.validator.ValidationResult;
 import spark.Service;
 
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.http.Part;
+import javax.xml.bind.UnmarshalException;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.*;
 import java.util.Collection;
-import java.util.logging.Logger;
+import java.util.List;
+import java.util.UUID;
 
 public class ESPDResponseEndpoint extends Endpoint {
     private final ESPDResponseService service;
-    private final String INTERNAL_SERVER_ERROR = "Oops, an internal server error occurred. (Did you provide the correct input?)";
+    private final String DOCUMENT_ERROR = "Oops, the XML document provided was not valid and could not be converted to JSON. Did you provide the correct input? \nThis could help you:\n",
+            LOGGER_DOCUMENT_ERROR = "Error occurred in ESPDResponseEndpoint while converting an XML response to an object. ",
+            DESERIALIZATION_ERROR = "Oops, the provided JSON document was not valid and could not be converted to an object. Did you provide the correct format? \nThis could help you:\n",
+            LOGGER_DESERIALIZATION_ERROR = "Error occurred in ESPDResponseEndpoint while converting a JSON object to XML. ";
+
     public ESPDResponseEndpoint(ESPDResponseService service) {
         this.service = service;
 
@@ -45,9 +57,9 @@ public class ESPDResponseEndpoint extends Endpoint {
                     try {
                         espdResponse = MAPPER.readValue(rq.body(), RegulatedESPDResponse.class);
                     } catch (IOException e) {
-                        rsp.status(500);
-                        LOGGER.severe("Error occured in ESPDResponseEndpoint while converting a JSON object to an XML. "+e.getMessage());
-                        return INTERNAL_SERVER_ERROR+ " More info: " + e.getMessage();
+                        rsp.status(400);
+                        LOGGER.severe( LOGGER_DESERIALIZATION_ERROR + e.getMessage());
+                        return DESERIALIZATION_ERROR + e.getMessage();
                     }
                     rsp.header("Content-Type", "application/octet-stream");
                     rsp.header("Content-Disposition", "attachment; filename=espd-response.xml;");
@@ -58,34 +70,66 @@ public class ESPDResponseEndpoint extends Endpoint {
                     Collection<Part> parts = rq.raw().getParts();
                     if (parts.iterator().hasNext()) {
                         Part part = parts.iterator().next();
+                        String tempFileName = UUID.randomUUID().toString();
+                        try (InputStream input = part.getInputStream()) {
+                            Files.copy(input, Paths.get(tempFileName), StandardCopyOption.REPLACE_EXISTING);
+                        } catch (Exception e){
+                            LOGGER.severe(LOGGER_DOCUMENT_ERROR + e.getMessage());
+                            rsp.status(500);
+                            return "Unable to save uploaded file. More info:\n" + e.getMessage();
+                        }
                         try {
                             rsp.header("Content-Type", "application/json");
-                            return WRITER.writeValueAsString(service.XMLStreamToResponseParser(part.getInputStream()));
+                            return WRITER.writeValueAsString(service.XMLFileToObjectTransformer(new File(tempFileName)));
                         } catch (RetrieverException | BuilderException | NullPointerException e) {
-                            LOGGER.severe("Error occured in ESPDResponseEndpoint while converting an XML response to an object.");
-                            rsp.status(500);
-                            return INTERNAL_SERVER_ERROR;
+                            LOGGER.severe(LOGGER_DOCUMENT_ERROR + e.getMessage());
+                            rsp.status(406);
+                            return DOCUMENT_ERROR + e.getMessage();
+                        } catch (ValidationException e){
+                            LOGGER.severe(e.getMessage());
+                            rsp.status(406);
+                            return DOCUMENT_ERROR + e.getMessage() + ListPrinter(e.getResults());
+                        } finally {
+                            Files.deleteIfExists(Paths.get(tempFileName));
                         }
                     } else {
                         rsp.status(400);
-                        return "Bad request.";
+                        return "Bad request content.";
                     }
                 } else if (rq.contentType().contains("application/xml")) {
+                    String path = UUID.randomUUID().toString();
                     try {
                         rsp.header("Content-Type", "application/json");
-                        return WRITER.writeValueAsString(service.XMLStringToResponseParser(rq.body()));
-                    } catch (RetrieverException | BuilderException | NullPointerException e) {
-                        LOGGER.severe("Error occured in ESPDResponseEndpoint while converting an XML response to an object.");
-                        rsp.status(500);
-                        return INTERNAL_SERVER_ERROR;
+                        Files.write( Paths.get(path), rq.body().getBytes(StandardCharsets.UTF_8), StandardOpenOption.CREATE);
+                        File tempFile = new File(path);
+                        String returnValue = WRITER.writeValueAsString(service.XMLFileToObjectTransformer(tempFile));
+                        Files.deleteIfExists(Paths.get(path));
+                        return returnValue;
+                    } catch (RetrieverException | BuilderException | UnmarshalException e) {
+                        LOGGER.severe(LOGGER_DOCUMENT_ERROR + e.getMessage());
+                        rsp.status(406);
+                        return DOCUMENT_ERROR + e.getMessage();
+                    } catch (ValidationException e){
+                        LOGGER.severe(e.getMessage());
+                        rsp.status(406);
+                        return DOCUMENT_ERROR + e.getMessage() + ListPrinter(e.getResults());
+                    } finally {
+                        Files.deleteIfExists(Paths.get(path));
                     }
                 } else {
                     LOGGER.severe("Got unexpected content-type: " + rq.contentType());
-                    rsp.status(400);
-                    return "Bad content-type specified.";
+                    rsp.status(406);
+                    return "Unacceptable content-type specified.";
                 }
             });
-
         });
+    }
+
+    private String ListPrinter(List<ValidationResult> theList){
+        StringBuilder stringifiedList = new StringBuilder().append("\n");
+        for (ValidationResult res: theList) {
+            stringifiedList.append(res.toString()).append("\n");
+        }
+        return stringifiedList.toString();
     }
 }

@@ -33,7 +33,7 @@ public class CodelistsEndpoint extends Endpoint {
                     response.status(404);
                     return CODELIST_ERROR;
                 } catch (UnsupportedOperationException e){
-                    response.status(400);
+                    response.status(406);
                     return "Translation not supported.";
                 }
             });
