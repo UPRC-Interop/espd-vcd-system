@@ -23,6 +23,7 @@ import {SelectionEoComponent} from './selection-eo/selection-eo.component';
 import {RequirementGroupComponent} from './requirement-group/requirement-group.component';
 import {RequirementComponent} from './requirement/requirement.component';
 import { RootComponent } from './root/root.component';
+import { CriterionComponent } from './criterion/criterion.component';
 
 
 
@@ -41,7 +42,8 @@ import { RootComponent } from './root/root.component';
     SelectionEoComponent,
     RequirementGroupComponent,
     RequirementComponent,
-    RootComponent
+    RootComponent,
+    CriterionComponent
   ],
   imports: [
     BrowserModule,

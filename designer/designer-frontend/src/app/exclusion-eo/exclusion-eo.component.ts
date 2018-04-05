@@ -27,6 +27,8 @@ export class ExclusionEoComponent implements OnInit {
     this.dataService.getExclusionACriteria()
       .then(res => {
         this.exclusionACriteria = res;
+        this.formA = this.dataService.createExclusionCriterionForm(this.exclusionACriteria);
+
         // this.exclusionACriteria.forEach(criteria => {
         //   // this.requirementAGroups[criteria.typeCode] = criteria.requirementGroups;
         //   // console.log(criteria);
@@ -43,17 +45,15 @@ export class ExclusionEoComponent implements OnInit {
         //
         // }
 
-        this.exclusionACriteria.forEach(criteria => {
-          this.requirementAGroups = criteria.requirementGroups;
-          // console.log(criteria);
-
-        });
-
-        // console.log(this.CriteriaFull);
-        console.log(this.requirementAGroups);
-        // this.formA = this.dataService.createForm(this.CriteriaFull.requirementGroups);
-        this.formA = this.dataService.createForm(this.requirementAGroups);
-        console.log(this.formA);
+        // this.exclusionACriteria.forEach(criteria => {
+        //   this.requirementAGroups = criteria.requirementGroups;
+        //   // console.log(criteria);
+        //
+        // });
+        //
+        //
+        // this.formA = this.dataService.createForm(this.requirementAGroups);
+        // console.log(this.formA);
 
       })
       .catch(err => {

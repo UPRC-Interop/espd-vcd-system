@@ -478,8 +478,34 @@ export class DataService {
 
   /* =================  Dynamic Forms =========================== */
 
+  createExclusionCriterionForm(criteria: ExclusionCriteria[]) {
+    let group: any = {};
+    criteria.forEach(cr => {
+      group[cr.typeCode] = this.createCriterionFormGroup(cr);
+      console.log(group[cr.typeCode]);
+    });
+    let fg = new FormGroup(group);
 
-  createForm(reqGroups: RequirementGroup[]) {
+    console.log(fg);
+    return fg;
+  }
+
+  createCriterionFormGroup(cr: ExclusionCriteria) {
+    let group: any = {};
+    if (cr) {
+      console.log('In Criterion: ' + cr.typeCode);
+      if (cr.requirementGroups != null || cr.requirementGroups != undefined) {
+        group[cr.typeCode] = this.createFormGroups(cr.requirementGroups);
+      }
+    }
+    let fg = new FormGroup(group);
+    console.log(fg.getRawValue());
+    return fg;
+
+  }
+
+
+  createFormGroups(reqGroups: RequirementGroup[]) {
     let group: any = {};
     reqGroups.forEach(rg => {
       group[rg.id] = this.toFormGroup(rg);
@@ -491,14 +517,13 @@ export class DataService {
   }
 
 
-
   toFormGroup(rg: RequirementGroup) {
     let group: any = {};
     if (rg) {
-      console.log("In Req Group: " + rg.id);
+      console.log('In Req Group: ' + rg.id);
       if (rg.requirements != undefined) {
         rg.requirements.forEach(r => {
-          console.log("In Req: " + r.id);
+          console.log('In Req: ' + r.id);
           r.response = new RequirementResponse();
           group[r.id] = new FormControl(r.response.description || '');
           // console.log(group);
@@ -507,9 +532,9 @@ export class DataService {
       }
       if (rg.requirementGroups != null || rg.requirementGroups != undefined) {
         rg.requirementGroups.forEach(rg => {
-          console.log("Req Group " + rg.id);
+          console.log('Req Group ' + rg.id);
           group[rg.id] = this.toFormGroup(rg);
-        })
+        });
       }
     }
     let fg = new FormGroup(group);

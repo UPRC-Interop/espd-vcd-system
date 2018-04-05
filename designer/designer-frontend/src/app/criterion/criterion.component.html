@@ -1,0 +1,3 @@
+<div *ngFor="let rg of criterion.requirementGroups" class="form-row">
+  <app-requirement-group [reqGroup]="rg" [form] = "form.get(rg.id)" [indicator]="true"></app-requirement-group>
+</div>
