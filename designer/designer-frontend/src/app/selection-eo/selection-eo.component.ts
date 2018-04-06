@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {DataService} from '../services/data.service';
-import {FormControl, NgForm} from '@angular/forms';
+import {FormControl, FormGroup, NgForm} from '@angular/forms';
 import {SelectionCriteria} from '../model/selectionCriteria.model';
 
 @Component({
@@ -17,6 +17,11 @@ export class SelectionEoComponent implements OnInit {
   isSatisfiedALL: boolean = true;
   isAtoD: boolean = false;
 
+  public formA = new FormGroup({});
+  public formB = new FormGroup({});
+  public formC = new FormGroup({});
+  public formD = new FormGroup({});
+
 
   constructor(private dataService: DataService) {
   }
@@ -27,7 +32,7 @@ export class SelectionEoComponent implements OnInit {
     this.dataService.getSelectionALLCriteria()
       .then(res => {
         this.selectionALLCriteria = res;
-        // console.log(res);
+        // this.formALL = this.dataService.createSelectionCriterionForm(this.selectionALLCriteria);
       })
       .catch(err => {
         console.log(err);
@@ -36,7 +41,7 @@ export class SelectionEoComponent implements OnInit {
     this.dataService.getSelectionACriteria()
       .then(res => {
         this.selectionACriteria = res;
-        // console.log(res);
+        this.formA = this.dataService.createSelectionCriterionForm(this.selectionACriteria);
       })
       .catch(err => {
         console.log(err);
@@ -46,7 +51,7 @@ export class SelectionEoComponent implements OnInit {
     this.dataService.getSelectionBCriteria()
       .then(res => {
         this.selectionBCriteria = res;
-        // console.log(res);
+        this.formB = this.dataService.createSelectionCriterionForm(this.selectionBCriteria);
       })
       .catch(err => {
         console.log(err);
@@ -55,7 +60,7 @@ export class SelectionEoComponent implements OnInit {
     this.dataService.getSelectionCCriteria()
       .then(res => {
         this.selectionCCriteria = res;
-        // console.log(res);
+        this.formC = this.dataService.createSelectionCriterionForm(this.selectionCCriteria);
       })
       .catch(err => {
         console.log(err);
@@ -64,7 +69,7 @@ export class SelectionEoComponent implements OnInit {
     this.dataService.getSelectionDCriteria()
       .then(res => {
         this.selectionDCriteria = res;
-        // console.log(res);
+        this.formD = this.dataService.createSelectionCriterionForm(this.selectionDCriteria);
       })
       .catch(err => {
         console.log(err);
