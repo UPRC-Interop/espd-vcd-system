@@ -1,7 +1,7 @@
 package eu.esens.espdvcd.designer.models;
 
-public class CodelistItem {
-    private String code, name;
+public final class CodelistItem {
+    private final String code, name;
 
     public CodelistItem(String key, String value){
         this.code = key;
