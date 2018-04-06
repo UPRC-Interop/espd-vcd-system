@@ -1,7 +1,7 @@
 import {LegislationReference} from './legislationReference.model';
 import {RequirementGroup} from './requirementGroup.model';
 
-export class EoRelatedCriterion {
+export class ReductionCriterion {
   typeCode: string;
   name: string;
   description: string;

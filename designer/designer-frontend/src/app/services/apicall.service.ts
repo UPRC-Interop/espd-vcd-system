@@ -8,6 +8,7 @@ import {SelectionCriteria} from '../model/selectionCriteria.model';
 import {ESPDRequest} from '../model/ESPDRequest.model';
 import {EoRelatedCriterion} from '../model/eoRelatedCriterion.model';
 import {Currency} from '../model/currency.model';
+import {ReductionCriterion} from '../model/reductionCriterion.model';
 
 @Injectable()
 export class ApicallService {
@@ -33,9 +34,14 @@ export class ApicallService {
   /* ==================== EO related criteria ========================= */
 
   getEO_RelatedCriteria() {
-    return this.http.get<EoRelatedCriterion[]>('http://localhost:8080/api/criteriaList/predefined/eorelated').toPromise();
+    return this.http.get<EoRelatedCriterion[]>('http://localhost:8080/api/v1/criteria/predefined/eo_related').toPromise();
   }
 
+  /* =========================== Reduction of Candidates ================= */
+
+  get_ReductionCriteria() {
+    return this.http.get<ReductionCriterion[]>('http://localhost:8080/api/v1/criteria/predefined/reduction').toPromise();
+  }
 
   /* ============= EXCLUSION CRITERIA ===================*/
   getExclusionCriteria() {

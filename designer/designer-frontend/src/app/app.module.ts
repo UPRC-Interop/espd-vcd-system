@@ -24,6 +24,7 @@ import {RequirementGroupComponent} from './requirement-group/requirement-group.c
 import {RequirementComponent} from './requirement/requirement.component';
 import { RootComponent } from './root/root.component';
 import { CriterionComponent } from './criterion/criterion.component';
+import { FinishEoComponent } from './finish-eo/finish-eo.component';
 
 
 
@@ -43,7 +44,8 @@ import { CriterionComponent } from './criterion/criterion.component';
     RequirementGroupComponent,
     RequirementComponent,
     RootComponent,
-    CriterionComponent
+    CriterionComponent,
+    FinishEoComponent
   ],
   imports: [
     BrowserModule,

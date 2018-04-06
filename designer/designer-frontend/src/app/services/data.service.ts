@@ -14,6 +14,7 @@ import {EoRelatedCriterion} from '../model/eoRelatedCriterion.model';
 import {RequirementGroup} from '../model/requirementGroup.model';
 import {RequirementResponse} from '../model/requirement-response.model';
 import {Currency} from '../model/currency.model';
+import {ReductionCriterion} from '../model/reductionCriterion.model';
 
 @Injectable()
 export class DataService {
@@ -49,6 +50,8 @@ export class DataService {
   selectionALLCriteria: SelectionCriteria[] = null;
   fullCriterionList: FullCriterion[] = null;
   eoRelatedCriteria: EoRelatedCriterion[] = null;
+  reductionCriteria: ReductionCriterion[] = null;
+
   blob = null;
 
   CADetails: Cadetails = new Cadetails();
@@ -327,7 +330,6 @@ export class DataService {
   }
 
 
-
   /* ========================================EO related Criteria ========================= */
 
   getEoRelatedCriteria(): Promise<EoRelatedCriterion[]> {
@@ -338,6 +340,24 @@ export class DataService {
         .then(
           res => {
             this.eoRelatedCriteria = res;
+            return Promise.resolve(res);
+          }
+        ).catch(err => {
+          console.log(err);
+          return Promise.reject(err);
+        });
+    }
+  }
+
+  /* ================================= Reduction of Candidates Criteria ======================= */
+  getReductionCriteria(): Promise<ReductionCriterion[]> {
+    if (this.reductionCriteria != null) {
+      return Promise.resolve(this.reductionCriteria);
+    } else {
+      return this.APIService.get_ReductionCriteria()
+        .then(
+          res => {
+            this.reductionCriteria = res;
             return Promise.resolve(res);
           }
         ).catch(err => {
@@ -533,7 +553,6 @@ export class DataService {
     console.log(fg);
     return fg;
   }
-
 
 
   createCriterionFormGroup(cr: ExclusionCriteria) {
