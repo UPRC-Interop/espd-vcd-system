@@ -37,6 +37,16 @@ export class ApicallService {
     return this.http.get<EoRelatedCriterion[]>('http://localhost:8080/api/v1/criteria/predefined/eo_related').toPromise();
   }
 
+  getEO_RelatedACriteria() {
+    return this.http.get<EoRelatedCriterion[]>('http://localhost:8080/api/v1/criteria/predefined/eo_related_A').toPromise();
+  }
+  getEO_RelatedCCriteria() {
+    return this.http.get<EoRelatedCriterion[]>('http://localhost:8080/api/v1/criteria/predefined/eo_related_B').toPromise();
+  }
+  getEO_RelatedDCriteria() {
+    return this.http.get<EoRelatedCriterion[]>('http://localhost:8080/api/v1/criteria/predefined/eo_related_C').toPromise();
+  }
+
   /* =========================== Reduction of Candidates ================= */
 
   get_ReductionCriteria() {

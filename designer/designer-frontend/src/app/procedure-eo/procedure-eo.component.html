@@ -11,24 +11,33 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div class="desc">
-        <p>For procurement procedures in which a call for competition has been published in the Official Journal of the European Union, the information required under Part I will be automatically retrieved, provided that the electronic ESPD-service is used to generate and fill in the ESPD. Reference of the relevant notice published in the Official Journal of the European Union:</p>
+        <p>For procurement procedures in which a call for competition has been published in the Official Journal of the
+          European Union, the information required under Part I will be automatically retrieved, provided that the
+          electronic ESPD-service is used to generate and fill in the ESPD. Reference of the relevant notice published
+          in the Official Journal of the European Union:</p>
       </div>
       <mat-form-field>
         <!--<label for="noticeNumber">Received Notice Number</label>-->
-        <input matInput id="noticeNumber" name="receivedNoticeNumber" [(ngModel)]="dataService.receivedNoticeNumber" placeholder="Received notice number">
+        <input matInput id="noticeNumber" name="receivedNoticeNumber" [(ngModel)]="dataService.receivedNoticeNumber"
+               placeholder="Received notice number">
       </mat-form-field>
       <mat-form-field>
-        <input matInput name="noticeNumberOJS" [(ngModel)]="dataService.CADetails.procurementPublicationNumber" placeholder="Notice number in the OJS">
+        <input matInput name="noticeNumberOJS" [(ngModel)]="dataService.CADetails.procurementPublicationNumber"
+               placeholder="Notice number in the OJS">
       </mat-form-field>
       <mat-form-field>
-        <input matInput name="ojsURL" placeholder="OJS URL" [(ngModel)]="dataService.CADetails.procurementPublicationURI">
+        <input matInput name="ojsURL" placeholder="OJS URL"
+               [(ngModel)]="dataService.CADetails.procurementPublicationURI">
       </mat-form-field>
       <mat-form-field>
-        <input matInput name="nationalJournal" placeholder="National Official Journal" [(ngModel)]="dataService.CADetails.nationalOfficialJournal">
+        <input matInput name="nationalJournal" placeholder="National Official Journal"
+               [(ngModel)]="dataService.CADetails.nationalOfficialJournal">
       </mat-form-field>
 
       <div class="desc">
-        <p>In case publication of a notice in the Official Journal of the European Union is not required, please give other information allowing the procurement procedure to be unequivocally identified (e. g. reference of a publication at national level)</p>
+        <p>In case publication of a notice in the Official Journal of the European Union is not required, please give
+          other information allowing the procurement procedure to be unequivocally identified (e. g. reference of a
+          publication at national level)</p>
       </div>
     </mat-expansion-panel>
     <mat-expansion-panel expanded="true">
@@ -41,7 +50,8 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-form-field>
-        <input matInput placeholder="Official Name" name="CAofficialName" [(ngModel)]="dataService.CADetails.caofficialName">
+        <input matInput placeholder="Official Name" name="CAofficialName"
+               [(ngModel)]="dataService.CADetails.caofficialName">
       </mat-form-field>
       <mat-form-field>
         <mat-select name="CACountry" placeholder="Select Country" [(ngModel)]="dataService.selectedCountry">
@@ -61,7 +71,8 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-form-field>
-        <mat-select placeholder="Type of Procedure" name="typeOfProcedure" [(ngModel)]="dataService.CADetails.procurementProcedureType">
+        <mat-select placeholder="Type of Procedure" name="typeOfProcedure"
+                    [(ngModel)]="dataService.CADetails.procurementProcedureType">
           <mat-option>None</mat-option>
           <mat-option *ngFor="let proc of procedureTypes" [value]="proc.code">{{proc.name}}</mat-option>
         </mat-select>
@@ -94,89 +105,115 @@
             A: Information about the economic operator
           </mat-panel-title>
         </mat-expansion-panel-header>
-              <div class="eoContainer" >
-                <div class="eo1">
-                  <mat-form-field class="eoField">
-                    <input formControlName="name" matInput placeholder="Name" >
-                  </mat-form-field>
-                  <div class="postalAddress" formGroupName='postalAddress'>
-                    <mat-form-field class="eoField">
-                      <input formControlName="addressLine1" matInput placeholder="Street and Number">
-                    </mat-form-field>
-                    <mat-form-field class="eoField">
-                      <input formControlName="postCode" matInput placeholder="Postcode">
-                    </mat-form-field>
-                    <mat-form-field class="eoField">
-                      <input matInput placeholder="City" formControlName="city">
-                    </mat-form-field>
-                    <mat-form-field class="eoField">
-                      <mat-select  formControlName="countryCode"
-                                   placeholder="Select Country">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let country of countries" [value]="country.code">{{country.name}}</mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                  </div>
+        <div class="eoContainer">
+          <div class="eo1">
+            <mat-form-field class="eoField">
+              <input formControlName="name" matInput placeholder="Name">
+            </mat-form-field>
+            <div class="postalAddress" formGroupName='postalAddress'>
+              <mat-form-field class="eoField">
+                <input formControlName="addressLine1" matInput placeholder="Street and Number">
+              </mat-form-field>
+              <mat-form-field class="eoField">
+                <input formControlName="postCode" matInput placeholder="Postcode">
+              </mat-form-field>
+              <mat-form-field class="eoField">
+                <input matInput placeholder="City" formControlName="city">
+              </mat-form-field>
+              <mat-form-field class="eoField">
+                <mat-select formControlName="countryCode"
+                            placeholder="Select Country">
+                  <mat-option>None</mat-option>
+                  <mat-option *ngFor="let country of countries" [value]="country.code">{{country.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
 
-                </div>
+          </div>
 
 
-                <div class="eo2" >
-                      <div class="contactingDetails" formGroupName="contactingDetails">
-                        <mat-form-field class="eoField">
-                          <input formControlName="emailAddress" matInput placeholder="Email">
-                        </mat-form-field>
-                        <mat-form-field class="eoField">
-                          <input formControlName="telephoneNumber" matInput placeholder="Telephone">
-                        </mat-form-field>
-                        <mat-form-field class="eoField">
-                          <input formControlName="contactPointName" matInput placeholder="Contact person or persons">
-                        </mat-form-field>
-                      </div>
-                    <mat-form-field class="eoField">
-                      <input formControlName="id" matInput placeholder="VAT number, if applicable">
-                    </mat-form-field>
-                    <!--<mat-form-field class="eoField">-->
-                    <!--<input matInput placeholder="Other number, if VAT not applicable">-->
-                    <!--</mat-form-field>-->
-                    <mat-form-field class="eoField">
-                      <input  formControlName="websiteURI" matInput placeholder="Internet address (web address) (if applicable)">
-                    </mat-form-field>
-                </div>
-              </div>
+          <div class="eo2">
+            <div class="contactingDetails" formGroupName="contactingDetails">
+              <mat-form-field class="eoField">
+                <input formControlName="emailAddress" matInput placeholder="Email">
+              </mat-form-field>
+              <mat-form-field class="eoField">
+                <input formControlName="telephoneNumber" matInput placeholder="Telephone">
+              </mat-form-field>
+              <mat-form-field class="eoField">
+                <input formControlName="contactPointName" matInput placeholder="Contact person or persons">
+              </mat-form-field>
+            </div>
+            <mat-form-field class="eoField">
+              <input formControlName="id" matInput placeholder="VAT number, if applicable">
+            </mat-form-field>
+            <!--<mat-form-field class="eoField">-->
+            <!--<input matInput placeholder="Other number, if VAT not applicable">-->
+            <!--</mat-form-field>-->
+            <mat-form-field class="eoField">
+              <input formControlName="websiteURI" matInput placeholder="Internet address (web address) (if applicable)">
+            </mat-form-field>
+          </div>
+        </div>
         <div class="smeIndicator">
           <span>Is the economic operator a Micro, a Small or a Medium-Sized Enterprise? </span>
           <mat-radio-group formControlName="smeIndicator">
             <mat-radio-button color="primary"
                               value="YES"
-                              [value]="true">YES</mat-radio-button>
+                              [value]="true">YES
+            </mat-radio-button>
             <mat-radio-button color="primary"
                               value="NO"
-                              [value]="false">NO</mat-radio-button>
+                              [value]="false">NO
+            </mat-radio-button>
           </mat-radio-group>
         </div>
-        <div class="eoRelatedCriteria" *ngFor="let criteria of eoRelatedCriteria; let i=index">
-          <span>{{criteria.description}}}</span>
-          <mat-radio-group formControlName="smeIndicator">
-            <mat-radio-button color="primary"
-                              value="YES"
-                              [value]="true">YES</mat-radio-button>
-            <mat-radio-button color="primary"
-                              value="NO"
-                              [value]="false">NO</mat-radio-button>
-          </mat-radio-group>
-        </div>
+        <form [formGroup]="formA">
+          <div class="eoRelatedCriteria" *ngFor="let cr of eoRelatedACriteria; let i=index">
+            <span>{{cr.description}}</span>
+            <div class="answer">
+              <app-criterion [criterion]="cr" [form]="formA.controls" [indicator]="true"></app-criterion>
+            </div>
+          </div>
+        </form>
+      </mat-expansion-panel>
 
-
-
-
-
+      <mat-expansion-panel expanded="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            C: Information about reliance on the capacities of other entities
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <form [formGroup]="formC">
+          <div class="eoRelatedCriteria" *ngFor="let cr of eoRelatedCCriteria; let i=index">
+            <span>{{cr.description}}</span>
+            <div class="answer">
+              <app-criterion [criterion]="cr" [form]="formC.controls" [indicator]="true"></app-criterion>
+            </div>
+          </div>
+        </form>
+      </mat-expansion-panel>
+      <mat-expansion-panel expanded="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            D: Information concerning subcontractors on whose capacity the economic operator does not rely
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <form [formGroup]="formD">
+          <div class="eoRelatedCriteria" *ngFor="let cr of eoRelatedDCriteria; let i=index">
+            <span>{{cr.description}}</span>
+            <div class="answer">
+              <app-criterion [criterion]="cr" [form]="formD.controls" [indicator]="true"></app-criterion>
+            </div>
+          </div>
+        </form>
       </mat-expansion-panel>
     </mat-accordion>
   </form>
 
 
   <button mat-raised-button color="primary" matStepperPrevious>Back</button>
-  <button type="button" mat-raised-button color="primary" matStepperNext (click)="onProcedureEOSubmit(f,EOForm)">Next</button>
+  <button type="button" mat-raised-button color="primary" matStepperNext (click)="onProcedureEOSubmit(f,EOForm)">Next
+  </button>
 </form>
 

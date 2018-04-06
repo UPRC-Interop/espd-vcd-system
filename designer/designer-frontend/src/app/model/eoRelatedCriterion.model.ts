@@ -7,5 +7,5 @@ export class EoRelatedCriterion {
   description: string;
   selected: boolean;
   legislationReference: LegislationReference;
-  RequirementGroups: RequirementGroup[];
+  requirementGroups: RequirementGroup[];
 }

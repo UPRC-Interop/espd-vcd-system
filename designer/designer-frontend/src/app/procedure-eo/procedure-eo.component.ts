@@ -13,10 +13,16 @@ import {EoRelatedCriterion} from '../model/eoRelatedCriterion.model';
 export class ProcedureEoComponent implements OnInit, OnChanges {
 
   public EOForm: FormGroup;
+  public formA = new FormGroup({});
+  public formC = new FormGroup({});
+  public formD = new FormGroup({});
 
   countries: Country[] = null;
   procedureTypes: ProcedureType[] = null;
   eoRelatedCriteria: EoRelatedCriterion[] = null;
+  eoRelatedACriteria: EoRelatedCriterion[] = null;
+  eoRelatedCCriteria: EoRelatedCriterion[] = null;
+  eoRelatedDCriteria: EoRelatedCriterion[] = null;
 
   constructor(public dataService: DataService) {
   }
@@ -27,6 +33,33 @@ export class ProcedureEoComponent implements OnInit, OnChanges {
       .then(res => {
         this.eoRelatedCriteria = res;
         // this.createControls(this.eoRelatedCriteria);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+    this.dataService.getEoRelatedACriteria()
+      .then(res => {
+        this.eoRelatedACriteria = res;
+        this.formA = this.dataService.createEORelatedCriterionForm(this.eoRelatedACriteria);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+    this.dataService.getEoRelatedCCriteria()
+      .then(res => {
+        this.eoRelatedCCriteria = res;
+        this.formC = this.dataService.createEORelatedCriterionForm(this.eoRelatedCCriteria);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+    this.dataService.getEoRelatedDCriteria()
+      .then(res => {
+        this.eoRelatedDCriteria = res;
+        this.formD = this.dataService.createEORelatedCriterionForm(this.eoRelatedDCriteria);
       })
       .catch(err => {
         console.log(err);
@@ -79,11 +112,7 @@ export class ProcedureEoComponent implements OnInit, OnChanges {
     });
   }
 
-  createControls(criteriaList: EoRelatedCriterion[]) {
-    for (let criteria of criteriaList) {
-      console.log(criteria);
-    }
-  }
+
 
 
   onProcedureEOSubmit(form: NgForm, eoForm: FormGroup) {
@@ -92,7 +121,7 @@ export class ProcedureEoComponent implements OnInit, OnChanges {
     this.dataService.CADetails.cacountry = form.value.CACountry;
     this.dataService.CADetails.receivedNoticeNumber = form.value.receivedNoticeNumber;
 
-    //TODO put form values to dataService
+    // TODO put form values to dataService
     console.log(this.dataService.selectedEOCountry);
     // console.log(this.dataService.CADetails);
   }

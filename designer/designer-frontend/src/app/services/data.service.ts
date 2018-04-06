@@ -50,6 +50,9 @@ export class DataService {
   selectionALLCriteria: SelectionCriteria[] = null;
   fullCriterionList: FullCriterion[] = null;
   eoRelatedCriteria: EoRelatedCriterion[] = null;
+  eoRelatedACriteria: EoRelatedCriterion[] = null;
+  eoRelatedCCriteria: EoRelatedCriterion[] = null;
+  eoRelatedDCriteria: EoRelatedCriterion[] = null;
   reductionCriteria: ReductionCriterion[] = null;
 
   blob = null;
@@ -349,6 +352,57 @@ export class DataService {
     }
   }
 
+  getEoRelatedACriteria(): Promise<EoRelatedCriterion[]> {
+    if (this.eoRelatedACriteria != null) {
+      return Promise.resolve(this.eoRelatedACriteria);
+    } else {
+      return this.APIService.getEO_RelatedACriteria()
+        .then(
+          res => {
+            this.eoRelatedACriteria = res;
+            return Promise.resolve(res);
+          }
+        ).catch(err => {
+          console.log(err);
+          return Promise.reject(err);
+        });
+    }
+  }
+
+  getEoRelatedCCriteria(): Promise<EoRelatedCriterion[]> {
+    if (this.eoRelatedCCriteria != null) {
+      return Promise.resolve(this.eoRelatedCCriteria);
+    } else {
+      return this.APIService.getEO_RelatedCCriteria()
+        .then(
+          res => {
+            this.eoRelatedCCriteria = res;
+            return Promise.resolve(res);
+          }
+        ).catch(err => {
+          console.log(err);
+          return Promise.reject(err);
+        });
+    }
+  }
+
+  getEoRelatedDCriteria(): Promise<EoRelatedCriterion[]> {
+    if (this.eoRelatedDCriteria != null) {
+      return Promise.resolve(this.eoRelatedDCriteria);
+    } else {
+      return this.APIService.getEO_RelatedDCriteria()
+        .then(
+          res => {
+            this.eoRelatedDCriteria = res;
+            return Promise.resolve(res);
+          }
+        ).catch(err => {
+          console.log(err);
+          return Promise.reject(err);
+        });
+    }
+  }
+
   /* ================================= Reduction of Candidates Criteria ======================= */
   getReductionCriteria(): Promise<ReductionCriterion[]> {
     if (this.reductionCriteria != null) {
@@ -555,6 +609,18 @@ export class DataService {
   }
 
   createReductionCriterionForm(criteria: ReductionCriterion[]) {
+    let group: any = {};
+    criteria.forEach(cr => {
+      group[cr.typeCode] = this.createFormGroups(cr.requirementGroups);
+      console.log(group[cr.typeCode]);
+    });
+    let fg = new FormGroup(group);
+
+    console.log(fg);
+    return fg;
+  }
+
+  createEORelatedCriterionForm(criteria: EoRelatedCriterion[]) {
     let group: any = {};
     criteria.forEach(cr => {
       group[cr.typeCode] = this.createFormGroups(cr.requirementGroups);
