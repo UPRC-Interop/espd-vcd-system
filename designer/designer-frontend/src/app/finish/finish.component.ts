@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {DataService} from "../services/data.service";
+import {Component, OnInit} from '@angular/core';
+import {DataService} from '../services/data.service';
 
 @Component({
   selector: 'app-finish',
@@ -8,12 +8,13 @@ import {DataService} from "../services/data.service";
 })
 export class FinishComponent implements OnInit {
 
-  constructor(private dataService:DataService) { }
+  constructor(private dataService: DataService) {
+  }
 
   ngOnInit() {
   }
 
-  exportFile(){
+  exportFile() {
     this.dataService.saveFile(this.dataService.blob);
   }
 

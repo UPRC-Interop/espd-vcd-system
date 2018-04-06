@@ -554,6 +554,18 @@ export class DataService {
     return fg;
   }
 
+  createReductionCriterionForm(criteria: ReductionCriterion[]) {
+    let group: any = {};
+    criteria.forEach(cr => {
+      group[cr.typeCode] = this.createFormGroups(cr.requirementGroups);
+      console.log(group[cr.typeCode]);
+    });
+    let fg = new FormGroup(group);
+
+    console.log(fg);
+    return fg;
+  }
+
 
   createCriterionFormGroup(cr: ExclusionCriteria) {
     let group: any = {};

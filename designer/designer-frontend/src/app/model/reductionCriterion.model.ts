@@ -7,5 +7,5 @@ export class ReductionCriterion {
   description: string;
   selected: boolean;
   legislationReference: LegislationReference;
-  RequirementGroups: RequirementGroup[];
+  requirementGroups: RequirementGroup[];
 }
