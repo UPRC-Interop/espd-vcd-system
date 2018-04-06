@@ -18,15 +18,15 @@ export class ApicallService {
   }
 
   getCountryList() {
-    return this.http.get<Country[]>('http://localhost:8080/api/codelists/v2/CountryIdentification').toPromise();
+    return this.http.get<Country[]>('http://localhost:8080/api/v2/codelists/CountryIdentification').toPromise();
   }
 
   getProcedureType() {
-    return this.http.get<ProcedureType[]>('http://localhost:8080/api/codelists/v2/ProcedureType').toPromise();
+    return this.http.get<ProcedureType[]>('http://localhost:8080/api/v2/codelists/ProcedureType').toPromise();
   }
 
   getCurr() {
-    return this.http.get<Currency[]>('http://localhost:8080/api/codelists/v1/Currency').toPromise();
+    return this.http.get<Currency[]>('http://localhost:8080/api/v2/codelists/Currency').toPromise();
   }
 
 
@@ -39,45 +39,45 @@ export class ApicallService {
 
   /* ============= EXCLUSION CRITERIA ===================*/
   getExclusionCriteria() {
-    return this.http.get<ExclusionCriteria[]>('http://localhost:8080/api/criteriaList/predefined/exclusion').toPromise();
+    return this.http.get<ExclusionCriteria[]>('http://localhost:8080/api/v1/criteria/predefined/exclusion').toPromise();
   }
 
   getExclusionCriteria_A() {
-    return this.http.get<ExclusionCriteria[]>('http://localhost:8080/api/criteriaList/predefined/exclusion/conviction').toPromise();
+    return this.http.get<ExclusionCriteria[]>('http://localhost:8080/api/v1/criteria/predefined/exclusion_a').toPromise();
   }
 
   getExclusionCriteria_B() {
-    return this.http.get<ExclusionCriteria[]>('http://localhost:8080/api/criteriaList/predefined/exclusion/contribution').toPromise();
+    return this.http.get<ExclusionCriteria[]>('http://localhost:8080/api/v1/criteria/predefined/exclusion_b').toPromise();
   }
 
   getExclusionCriteria_C() {
-    return this.http.get<ExclusionCriteria[]>('http://localhost:8080/api/criteriaList/predefined/exclusion/insolvencyConflictsMisconduct').toPromise();
+    return this.http.get<ExclusionCriteria[]>('http://localhost:8080/api/v1/criteria/predefined/exclusion_c').toPromise();
   }
 
   getExclusionCriteria_D() {
-    return this.http.get<ExclusionCriteria[]>('http://localhost:8080/api/criteriaList/predefined/exclusion/national').toPromise();
+    return this.http.get<ExclusionCriteria[]>('http://localhost:8080/api/v1/criteria/predefined/exclusion_d').toPromise();
   }
 
   /* ============= SELECTION CRITERIA ===================*/
 
   getSelectionCriteria() {
-    return this.http.get<SelectionCriteria[]>('http://localhost:8080/api/criteriaList/predefined/selection').toPromise();
+    return this.http.get<SelectionCriteria[]>('http://localhost:8080/api/v1/criteria/predefined/selection').toPromise();
   }
 
   getSelectionCriteria_A() {
-    return this.http.get<SelectionCriteria[]>('http://localhost:8080/api/criteriaList/predefined/selection/suitability').toPromise();
+    return this.http.get<SelectionCriteria[]>('http://localhost:8080/api/v1/criteria/predefined/selection_a').toPromise();
   }
 
   getSelectionCriteria_B() {
-    return this.http.get<SelectionCriteria[]>('http://localhost:8080/api/criteriaList/predefined/selection/economic').toPromise();
+    return this.http.get<SelectionCriteria[]>('http://localhost:8080/api/v1/criteria/predefined/selection_b').toPromise();
   }
 
   getSelectionCriteria_C() {
-    return this.http.get<SelectionCriteria[]>('http://localhost:8080/api/criteriaList/predefined/selection/technical').toPromise();
+    return this.http.get<SelectionCriteria[]>('http://localhost:8080/api/v1/criteria/predefined/selection_c').toPromise();
   }
 
   getSelectionCriteria_D() {
-    return this.http.get<SelectionCriteria[]>('http://localhost:8080/api/criteriaList/predefined/selection/quality').toPromise();
+    return this.http.get<SelectionCriteria[]>('http://localhost:8080/api/v1/criteria/predefined/selection_d').toPromise();
   }
 
   /* ============ UPLOAD XML GET JSON ================= */
@@ -91,7 +91,7 @@ export class ApicallService {
     // const header = new HttpHeaders({'Content-Type':'application/xml; charset=utf-8'});
     let header = new HttpHeaders();
     header = header.set('Content-Type', 'application/xml; charset=utf-8');
-    return this.http.post<ESPDRequest>('http://localhost:8080/api/espd/v1/request', formData).toPromise();
+    return this.http.post<ESPDRequest>('http://localhost:8080/api/v1/espd/request', formData).toPromise();
 
   }
 
@@ -118,7 +118,7 @@ export class ApicallService {
 
 
     // headers = header.append('Content-Type', 'application/json; charset=utf-8');
-    return this.http.post<any>('http://localhost:8080/api/espd/v1/request', ESPDRequest, options).toPromise();
+    return this.http.post<any>('http://localhost:8080/api/v1/espd/request', ESPDRequest, options).toPromise();
 
   }
 
