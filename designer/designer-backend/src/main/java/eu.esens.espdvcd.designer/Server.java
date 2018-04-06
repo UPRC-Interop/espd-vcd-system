@@ -35,7 +35,7 @@ public class Server {
 
         LOGGER.info("Attempting to bind to port " + portToBind);
         Service spark = Service.ignite().port(portToBind); //SET THE SPARK SERVER ON FIRE
-        enableCors(spark);
+        enableCORS(spark);
 
         LOGGER.info("Starting endpoint configuration");
 
@@ -85,7 +85,25 @@ public class Server {
     }
 
 
-    private static void enableCors(Service spark) {
+    // Enables CORS on requests.
+    private static void enableCORS(Service spark) {
+
+        spark.options("/*", (request, response) -> {
+
+            String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
+            if (accessControlRequestHeaders != null) {
+                if (accessControlRequestHeaders != null)
+                    response.header("Access-Control-Allow-Headers", accessControlRequestHeaders);
+            }
+
+            String accessControlRequestMethod = request.headers("Access-Control-Request-Method");
+            if (accessControlRequestMethod != null) {
+                if (accessControlRequestMethod != null)
+                    response.header("Access-Control-Allow-Methods", accessControlRequestMethod);
+            }
+
+            return "OK";
+        });
 
         spark.before((request, response) -> {
             response.header("Access-Control-Allow-Origin", "*");
@@ -93,7 +111,7 @@ public class Server {
             response.header("Access-Control-Allow-Headers", "Content-Type, Content-Disposition");
         });
 
-        LOGGER.info("CORS support enabled.");
+        LOGGER.info("CORS support is now enabled. Enjoy.");
     }
 
 }

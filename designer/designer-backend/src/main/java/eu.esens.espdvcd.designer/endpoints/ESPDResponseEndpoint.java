@@ -12,10 +12,15 @@ import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.ResponseRequirement;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import eu.esens.espdvcd.validator.ValidationResult;
+import org.xml.sax.SAXException;
+import spark.Request;
+import spark.Response;
 import spark.Service;
 
 import javax.servlet.MultipartConfigElement;
+import javax.servlet.ServletException;
 import javax.servlet.http.Part;
+import javax.xml.bind.JAXBException;
 import javax.xml.bind.UnmarshalException;
 import java.io.File;
 import java.io.IOException;
@@ -46,83 +51,92 @@ public class ESPDResponseEndpoint extends Endpoint {
     @Override
     public void configure(Service spark, String basePath) {
         spark.path(basePath, () -> {
-            spark.get("/*", ((request, response) -> {
+            spark.get("", ((request, response) -> {
                 response.status(405);
                 return "You need to POST a document in xml or json format.";
             }));
 
-            spark.post("/*", (rq, rsp) -> {
-                if (rq.contentType().contains("application/json")) {
-                    ESPDResponse espdResponse = null;
-                    try {
-                        espdResponse = MAPPER.readValue(rq.body(), RegulatedESPDResponse.class);
-                    } catch (IOException e) {
-                        rsp.status(400);
-                        LOGGER.severe( LOGGER_DESERIALIZATION_ERROR + e.getMessage());
-                        return DESERIALIZATION_ERROR + e.getMessage();
-                    }
-                    rsp.header("Content-Type", "application/octet-stream");
-                    rsp.header("Content-Disposition", "attachment; filename=espd-response.xml;");
-                    return service.ResponseToXMLStreamTransformer(espdResponse);
-                } else if (rq.contentType().contains("multipart/form-data")) {
-                    MultipartConfigElement multipartConfigElement = new MultipartConfigElement("file-uploads", 1000000000, 1000000000, 100);
-                    rq.raw().setAttribute("org.eclipse.jetty.multipartConfig", multipartConfigElement);
-                    Collection<Part> parts = rq.raw().getParts();
-                    if (parts.iterator().hasNext()) {
-                        Part part = parts.iterator().next();
-                        String tempFileName = UUID.randomUUID().toString();
-                        try (InputStream input = part.getInputStream()) {
-                            Files.copy(input, Paths.get(tempFileName), StandardCopyOption.REPLACE_EXISTING);
-                        } catch (Exception e){
-                            LOGGER.severe(LOGGER_DOCUMENT_ERROR + e.getMessage());
-                            rsp.status(500);
-                            return "Unable to save uploaded file. More info:\n" + e.getMessage();
-                        }
-                        try {
-                            rsp.header("Content-Type", "application/json");
-                            return WRITER.writeValueAsString(service.XMLFileToObjectTransformer(new File(tempFileName)));
-                        } catch (RetrieverException | BuilderException | NullPointerException e) {
-                            LOGGER.severe(LOGGER_DOCUMENT_ERROR + e.getMessage());
-                            rsp.status(406);
-                            return DOCUMENT_ERROR + e.getMessage();
-                        } catch (ValidationException e){
-                            LOGGER.severe(e.getMessage());
-                            rsp.status(406);
-                            return DOCUMENT_ERROR + e.getMessage() + ListPrinter(e.getResults());
-                        } finally {
-                            Files.deleteIfExists(Paths.get(tempFileName));
-                        }
-                    } else {
-                        rsp.status(400);
-                        return "Bad request content.";
-                    }
-                } else if (rq.contentType().contains("application/xml")) {
-                    String path = UUID.randomUUID().toString();
-                    try {
-                        rsp.header("Content-Type", "application/json");
-                        Files.write( Paths.get(path), rq.body().getBytes(StandardCharsets.UTF_8), StandardOpenOption.CREATE);
-                        File tempFile = new File(path);
-                        String returnValue = WRITER.writeValueAsString(service.XMLFileToObjectTransformer(tempFile));
-                        Files.deleteIfExists(Paths.get(path));
-                        return returnValue;
-                    } catch (RetrieverException | BuilderException | UnmarshalException e) {
-                        LOGGER.severe(LOGGER_DOCUMENT_ERROR + e.getMessage());
-                        rsp.status(406);
-                        return DOCUMENT_ERROR + e.getMessage();
-                    } catch (ValidationException e){
-                        LOGGER.severe(e.getMessage());
-                        rsp.status(406);
-                        return DOCUMENT_ERROR + e.getMessage() + ListPrinter(e.getResults());
-                    } finally {
-                        Files.deleteIfExists(Paths.get(path));
-                    }
-                } else {
-                    LOGGER.severe("Got unexpected content-type: " + rq.contentType());
-                    rsp.status(406);
-                    return "Unacceptable content-type specified.";
-                }
-            });
+            spark.get("/", ((request, response) -> {
+                response.status(405);
+                return "You need to POST a document in xml or json format.";
+            }));
+
+            spark.post("", this::postResponse);
+
+            spark.post("/", this::postResponse);
         });
+    }
+
+    private Object postResponse(Request rq, Response rsp) throws IOException, ServletException, JAXBException, SAXException {
+        if (rq.contentType().contains("application/json")) {
+            ESPDResponse espdResponse = null;
+            try {
+                espdResponse = MAPPER.readValue(rq.body(), RegulatedESPDResponse.class);
+            } catch (IOException e) {
+                rsp.status(400);
+                LOGGER.severe( LOGGER_DESERIALIZATION_ERROR + e.getMessage());
+                return DESERIALIZATION_ERROR + e.getMessage();
+            }
+            rsp.header("Content-Type", "application/octet-stream");
+            rsp.header("Content-Disposition", "attachment; filename=espd-response.xml;");
+            return service.ResponseToXMLStreamTransformer(espdResponse);
+        } else if (rq.contentType().contains("multipart/form-data")) {
+            MultipartConfigElement multipartConfigElement = new MultipartConfigElement("file-uploads", 1000000000, 1000000000, 100);
+            rq.raw().setAttribute("org.eclipse.jetty.multipartConfig", multipartConfigElement);
+            Collection<Part> parts = rq.raw().getParts();
+            if (parts.iterator().hasNext()) {
+                Part part = parts.iterator().next();
+                String tempFileName = UUID.randomUUID().toString();
+                try (InputStream input = part.getInputStream()) {
+                    Files.copy(input, Paths.get(tempFileName), StandardCopyOption.REPLACE_EXISTING);
+                } catch (Exception e){
+                    LOGGER.severe(LOGGER_DOCUMENT_ERROR + e.getMessage());
+                    rsp.status(500);
+                    return "Unable to save uploaded file. More info:\n" + e.getMessage();
+                }
+                try {
+                    rsp.header("Content-Type", "application/json");
+                    return WRITER.writeValueAsString(service.XMLFileToObjectTransformer(new File(tempFileName)));
+                } catch (RetrieverException | BuilderException | NullPointerException e) {
+                    LOGGER.severe(LOGGER_DOCUMENT_ERROR + e.getMessage());
+                    rsp.status(406);
+                    return DOCUMENT_ERROR + e.getMessage();
+                } catch (ValidationException e){
+                    LOGGER.severe(e.getMessage());
+                    rsp.status(406);
+                    return DOCUMENT_ERROR + e.getMessage() + ListPrinter(e.getResults());
+                } finally {
+                    Files.deleteIfExists(Paths.get(tempFileName));
+                }
+            } else {
+                rsp.status(400);
+                return "Bad request content.";
+            }
+        } else if (rq.contentType().contains("application/xml")) {
+            String path = UUID.randomUUID().toString();
+            try {
+                rsp.header("Content-Type", "application/json");
+                Files.write( Paths.get(path), rq.body().getBytes(StandardCharsets.UTF_8), StandardOpenOption.CREATE);
+                File tempFile = new File(path);
+                String returnValue = WRITER.writeValueAsString(service.XMLFileToObjectTransformer(tempFile));
+                Files.deleteIfExists(Paths.get(path));
+                return returnValue;
+            } catch (RetrieverException | BuilderException | UnmarshalException e) {
+                LOGGER.severe(LOGGER_DOCUMENT_ERROR + e.getMessage());
+                rsp.status(406);
+                return DOCUMENT_ERROR + e.getMessage();
+            } catch (ValidationException e){
+                LOGGER.severe(e.getMessage());
+                rsp.status(406);
+                return DOCUMENT_ERROR + e.getMessage() + ListPrinter(e.getResults());
+            } finally {
+                Files.deleteIfExists(Paths.get(path));
+            }
+        } else {
+            LOGGER.severe("Got unexpected content-type: " + rq.contentType());
+            rsp.status(406);
+            return "Unacceptable content-type specified.";
+        }
     }
 
     private String ListPrinter(List<ValidationResult> theList){
