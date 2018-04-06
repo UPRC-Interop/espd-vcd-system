@@ -24,12 +24,12 @@ export class RequirementGroupComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     this.showIndicator = this.checkIndicator(this.indicator);
-    console.log('Reg Group Id: ' + this.reqGroup.id + ' show Indicator is: ' + this.showIndicator);
+    // console.log('Reg Group Id: ' + this.reqGroup.id + ' show Indicator is: ' + this.showIndicator);
   }
 
   checkIndicator(b: boolean): boolean {
 
-    console.log('Check Indicator called ' + this.reqGroup.id + ' with value of indicator: ' + this.indicator);
+    // console.log('Check Indicator called ' + this.reqGroup.id + ' with value of indicator: ' + this.indicator);
     if (this.reqGroup.condition) {
       if (this.reqGroup.condition.endsWith('ON_FALSE')) {
         return !b;

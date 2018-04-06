@@ -27,7 +27,7 @@ export class ApicallService {
   }
 
   getCurr() {
-    return this.http.get<Currency[]>('http://localhost:8080/api/v2/codelists/Currency').toPromise();
+    return this.http.get<Currency[]>('http://localhost:8080/api/v1/codelists/Currency').toPromise();
   }
 
 

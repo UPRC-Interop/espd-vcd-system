@@ -213,7 +213,12 @@ export class DataService {
   saveFile(blob) {
 
     // TODO if isCA ->espd-request.xml, if isEO -> espd-response.xml
-    const filename: string = 'espd-request';
+    if (this.isCA) {
+      var filename: string = 'espd-request';
+    } else if (this.isEO) {
+      var filename: string = 'espd-response';
+    }
+
     saveAs(blob, filename);
   }
 
@@ -587,48 +592,48 @@ export class DataService {
   createExclusionCriterionForm(criteria: ExclusionCriteria[]) {
     let group: any = {};
     criteria.forEach(cr => {
-      group[cr.typeCode] = this.createFormGroups(cr.requirementGroups);
-      console.log(group[cr.typeCode]);
+      group[cr.id] = this.createFormGroups(cr.requirementGroups);
+      // console.log(group[cr.typeCode]);
     });
     let fg = new FormGroup(group);
 
-    console.log(fg);
+    // console.log(fg);
     return fg;
   }
 
   createSelectionCriterionForm(criteria: SelectionCriteria[]) {
     let group: any = {};
     criteria.forEach(cr => {
-      group[cr.typeCode] = this.createFormGroups(cr.requirementGroups);
-      console.log(group[cr.typeCode]);
+      group[cr.id] = this.createFormGroups(cr.requirementGroups);
+      // console.log(group[cr.typeCode]);
     });
     let fg = new FormGroup(group);
 
-    console.log(fg);
+    // console.log(fg);
     return fg;
   }
 
   createReductionCriterionForm(criteria: ReductionCriterion[]) {
     let group: any = {};
     criteria.forEach(cr => {
-      group[cr.typeCode] = this.createFormGroups(cr.requirementGroups);
-      console.log(group[cr.typeCode]);
+      group[cr.id] = this.createFormGroups(cr.requirementGroups);
+      // console.log(group[cr.typeCode]);
     });
     let fg = new FormGroup(group);
 
-    console.log(fg);
+    // console.log(fg);
     return fg;
   }
 
   createEORelatedCriterionForm(criteria: EoRelatedCriterion[]) {
     let group: any = {};
     criteria.forEach(cr => {
-      group[cr.typeCode] = this.createFormGroups(cr.requirementGroups);
-      console.log(group[cr.typeCode]);
+      group[cr.id] = this.createFormGroups(cr.requirementGroups);
+      // console.log(group[cr.typeCode]);
     });
     let fg = new FormGroup(group);
 
-    console.log(fg);
+    // console.log(fg);
     return fg;
   }
 
@@ -636,13 +641,13 @@ export class DataService {
   createCriterionFormGroup(cr: ExclusionCriteria) {
     let group: any = {};
     if (cr) {
-      console.log('In Criterion: ' + cr.typeCode);
+      // console.log('In Criterion: ' + cr.typeCode);
       if (cr.requirementGroups != null || cr.requirementGroups != undefined) {
-        group[cr.typeCode] = this.createFormGroups(cr.requirementGroups);
+        group[cr.id] = this.createFormGroups(cr.requirementGroups);
       }
     }
     let fg = new FormGroup(group);
-    console.log(fg.getRawValue());
+    // console.log(fg.getRawValue());
     return fg;
 
   }
@@ -655,7 +660,7 @@ export class DataService {
     });
     // console.log(group);
     let fg = new FormGroup(group);
-    console.log(fg);
+    // console.log(fg);
     return fg;
   }
 
@@ -663,10 +668,10 @@ export class DataService {
   toFormGroup(rg: RequirementGroup) {
     let group: any = {};
     if (rg) {
-      console.log('In Req Group: ' + rg.id);
+      // console.log('In Req Group: ' + rg.id);
       if (rg.requirements != undefined) {
         rg.requirements.forEach(r => {
-          console.log('In Req: ' + r.id);
+          // console.log('In Req: ' + r.id);
           r.response = new RequirementResponse();
           group[r.id] = new FormControl(r.response.description || '');
           // console.log(group);
@@ -675,13 +680,13 @@ export class DataService {
       }
       if (rg.requirementGroups != null || rg.requirementGroups != undefined) {
         rg.requirementGroups.forEach(rg => {
-          console.log('Req Group ' + rg.id);
+          // console.log('Req Group ' + rg.id);
           group[rg.id] = this.toFormGroup(rg);
         });
       }
     }
     let fg = new FormGroup(group);
-    console.log(fg.getRawValue());
+    // console.log(fg.getRawValue());
     return fg;
   }
 

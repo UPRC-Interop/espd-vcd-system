@@ -170,10 +170,12 @@
         </div>
         <form [formGroup]="formA">
           <div class="eoRelatedCriteria" *ngFor="let cr of eoRelatedACriteria; let i=index">
-            <span>{{cr.description}}</span>
-            <div class="answer">
-              <app-criterion [criterion]="cr" [form]="formA.controls" [indicator]="true"></app-criterion>
-            </div>
+            <mat-card>
+              <h4>{{cr.description}}</h4>
+              <div class="answer">
+                <app-criterion [criterion]="cr" [form]="formA.controls" [indicator]="true"></app-criterion>
+              </div>
+            </mat-card>
           </div>
         </form>
       </mat-expansion-panel>
@@ -213,7 +215,7 @@
 
 
   <button mat-raised-button color="primary" matStepperPrevious>Back</button>
-  <button type="button" mat-raised-button color="primary" matStepperNext (click)="onProcedureEOSubmit(f,EOForm)">Next
+  <button type="button" mat-raised-button color="primary" matStepperNext (click)="onProcedureEOSubmit(f,EOForm,formA)">Next
   </button>
 </form>
 

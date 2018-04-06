@@ -1,20 +1,21 @@
 <div [formGroup]="form">
-  <label *ngIf="req.responseDataType=='INDICATOR'" [attr.for]="req.id">{{req.description}}</label>
+  <!--<label *ngIf="req.responseDataType=='INDICATOR'" [attr.for]="req.id">{{req.description}}</label>-->
+  <label [attr.for]="req.id">{{req.description}}</label>
 
   <div [ngSwitch]="req.responseDataType">
 
     <mat-form-field *ngSwitchDefault>
-      <input matInput [formControlName]="req.id" [id]="req.id" [placeholder]="req.description">
+      <input matInput [formControlName]="req.id" [id]="req.id" >
     </mat-form-field>
 
     <mat-form-field *ngSwitchCase="'DATE'">
-      <input matInput [matDatepicker]="picker" [formControlName]="req.id" [id]="req.id" [placeholder]="req.description">
+      <input matInput [matDatepicker]="picker" [formControlName]="req.id" [id]="req.id" >
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field *ngSwitchCase="'CODE_COUNTRY'">
-      <mat-select [placeholder]="req.description" [formControlName]="req.id" [id]="req.id">
+      <mat-select  [formControlName]="req.id" [id]="req.id">
         <mat-option>None</mat-option>
         <mat-option *ngFor="let country of countries" [value]="country.code">{{country.name}}</mat-option>
       </mat-select>
@@ -23,12 +24,12 @@
 
     <div class="amount" *ngSwitchCase="'AMOUNT'">
       <mat-form-field>
-        <input matInput [formControlName]="req.id" [id]="req.id" [placeholder]="req.description">
+        <input matInput [formControlName]="req.id" [id]="req.id" >
       </mat-form-field>
       <mat-form-field>
         <mat-select>
           <mat-option>None</mat-option>
-          <mat-option *ngFor="let curr of currency" [value]="curr.code">{{curr.code}} ( {{curr.name}}  )</mat-option>
+          <mat-option *ngFor="let curr of currency" [value]="curr.code">{{curr.code}} ( {{curr.name}} )</mat-option>
         </mat-select>
       </mat-form-field>
 

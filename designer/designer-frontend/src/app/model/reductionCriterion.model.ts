@@ -8,4 +8,5 @@ export class ReductionCriterion {
   selected: boolean;
   legislationReference: LegislationReference;
   requirementGroups: RequirementGroup[];
+  id: string;
 }

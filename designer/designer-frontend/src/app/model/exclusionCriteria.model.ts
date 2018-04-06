@@ -8,4 +8,5 @@ export class ExclusionCriteria {
   selected: boolean;
   legislationReference: LegislationReference;
   requirementGroups: RequirementGroup[];
+  id: string;
 }

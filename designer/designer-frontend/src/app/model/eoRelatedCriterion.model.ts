@@ -8,4 +8,5 @@ export class EoRelatedCriterion {
   selected: boolean;
   legislationReference: LegislationReference;
   requirementGroups: RequirementGroup[];
+  id: string;
 }

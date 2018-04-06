@@ -113,11 +113,28 @@ export class ProcedureEoComponent implements OnInit, OnChanges {
   }
 
 
-
-
-  onProcedureEOSubmit(form: NgForm, eoForm: FormGroup) {
+  onProcedureEOSubmit(form: NgForm, eoForm: FormGroup, formA: FormGroup) {
     // console.log(form.value);
     console.log(eoForm.value);
+    console.log(formA.getRawValue());
+    console.log(formA);
+    console.log(formA.controls);
+
+    this.eoRelatedACriteria.forEach(cr => {
+      console.log(formA.controls[cr.id]);
+      cr.requirementGroups.forEach(rg => {
+        // console.log(formA.controls[rg.id]);
+        rg.requirementGroups.forEach(rg2 => {
+          rg2.requirements.forEach(req => {
+            console.log(req.description);
+          });
+        });
+        rg.requirements.forEach(req => {
+          console.log(req.description);
+        });
+      });
+    });
+
     this.dataService.CADetails.cacountry = form.value.CACountry;
     this.dataService.CADetails.receivedNoticeNumber = form.value.receivedNoticeNumber;
 

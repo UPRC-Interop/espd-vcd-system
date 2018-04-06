@@ -8,4 +8,5 @@ export class FullCriterion {
   selected: boolean;
   legislationReference: LegislationReference;
   requirementGroups: RequirementGroup[];
+  id: string;
 }
