@@ -14,7 +14,7 @@ public class CriteriaEndpoint extends Endpoint {
     private final CriteriaService service;
     private final String CRITERIA_ERROR = "Criteria requested not found",
             TRANSLATION_ERROR = "Translation not supported",
-            RETRIEVER_ERROR = "Failed to get criteria with error: ";
+            RETRIEVER_ERROR = "Failed to get criteria with error: \n";
 
     public CriteriaEndpoint(CriteriaService service) {
         this.service = service;
@@ -80,7 +80,7 @@ public class CriteriaEndpoint extends Endpoint {
             } catch (IllegalArgumentException e) {
                 response.status(404);
                 LOGGER.warning(e.getMessage());
-                return CRITERIA_ERROR + e.getMessage();
+                return CRITERIA_ERROR;
             } catch (RetrieverException e) {
                 response.status(500);
                 LOGGER.severe(e.getMessage());
@@ -93,7 +93,7 @@ public class CriteriaEndpoint extends Endpoint {
             } catch (IllegalArgumentException e) {
                 response.status(404);
                 LOGGER.warning(e.getMessage());
-                return CRITERIA_ERROR + e.getMessage();
+                return CRITERIA_ERROR;
             } catch (UnsupportedOperationException e) {
                 response.status(406);
                 LOGGER.warning(e.getMessage());
