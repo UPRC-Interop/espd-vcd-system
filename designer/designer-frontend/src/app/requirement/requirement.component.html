@@ -1,30 +1,52 @@
+<div [formGroup]="form">
+  <label *ngIf="req.responseDataType=='INDICATOR'" [attr.for]="req.id">{{req.description}}</label>
 
-  <div [formGroup]="form">
-    <label *ngIf="req.responseDataType=='INDICATOR'" [attr.for]="req.id">{{req.description}}</label>
+  <div [ngSwitch]="req.responseDataType">
 
-    <div [ngSwitch]="req.responseDataType">
+    <mat-form-field *ngSwitchDefault>
+      <input matInput [formControlName]="req.id" [id]="req.id" [placeholder]="req.description">
+    </mat-form-field>
 
-      <mat-form-field *ngSwitchDefault >
+    <mat-form-field *ngSwitchCase="'DATE'">
+      <input matInput [matDatepicker]="picker" [formControlName]="req.id" [id]="req.id" [placeholder]="req.description">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field *ngSwitchCase="'CODE_COUNTRY'">
+      <mat-select [placeholder]="req.description" [formControlName]="req.id" [id]="req.id">
+        <mat-option>None</mat-option>
+        <mat-option *ngFor="let country of countries" [value]="country.code">{{country.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+
+    <div class="amount" *ngSwitchCase="'AMOUNT'">
+      <mat-form-field>
         <input matInput [formControlName]="req.id" [id]="req.id" [placeholder]="req.description">
       </mat-form-field>
-
-      <mat-form-field *ngSwitchCase="'DATE'">
-        <input matInput [matDatepicker]="picker" [formControlName]="req.id" [id]="req.id" [placeholder]="req.description">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
+      <mat-form-field>
+        <mat-select>
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let curr of currency" [value]="curr.code">{{curr.code}} ( {{curr.name}}  )</mat-option>
+        </mat-select>
       </mat-form-field>
 
-      <mat-radio-group [id]="req.id" *ngSwitchCase="'INDICATOR'" [formControlName]="req.id">
-        <mat-radio-button color="primary"
-                          value="YES">YES
-        </mat-radio-button>
-        <mat-radio-button color="primary"
-                          value="NO">NO
-        </mat-radio-button>
-      </mat-radio-group>
 
     </div>
+
+
+    <mat-radio-group [id]="req.id" *ngSwitchCase="'INDICATOR'" [formControlName]="req.id">
+      <mat-radio-button color="primary"
+                        value="YES">YES
+      </mat-radio-button>
+      <mat-radio-button color="primary"
+                        value="NO">NO
+      </mat-radio-button>
+    </mat-radio-group>
+
   </div>
+</div>
 
 
 

@@ -1,6 +1,9 @@
 import {Component, Input, Output, OnInit, EventEmitter, OnChanges} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {Requirement} from '../model/requirement.model';
+import {DataService} from '../services/data.service';
+import {Country} from '../model/country.model';
+import {Currency} from '../model/currency.model';
 
 @Component({
   selector: 'app-requirement',
@@ -14,7 +17,10 @@ export class RequirementComponent implements OnInit, OnChanges {
 
   @Output() indicatorChanged = new EventEmitter();
 
-  constructor() {
+  countries: Country[] = null;
+  currency: Currency[] = null;
+
+  constructor(private dataService: DataService) {
   }
 
   ngOnChanges() {
@@ -22,6 +28,26 @@ export class RequirementComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
+
+    this.dataService.getCountries()
+      .then(res => {
+        this.countries = res;
+        // console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+    this.dataService.getCurrency()
+      .then(res => {
+        this.currency = res;
+        // console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+
     if (this.req.responseDataType === 'INDICATOR') {
       this.form.get(this.req.id)
         .valueChanges

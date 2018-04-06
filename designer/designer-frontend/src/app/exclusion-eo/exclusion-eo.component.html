@@ -1,4 +1,4 @@
-<h4>Part III: Exclusion grounds</h4>
+<h4 xmlns="http://www.w3.org/1999/html">Part III: Exclusion grounds</h4>
 <mat-accordion multi="true">
   <form [formGroup]="formA">
     <mat-expansion-panel expanded="true" *ngIf="exclusionACriteria">
@@ -26,30 +26,7 @@
             </div>
           </div>
           <div class="answer">
-
-            <!--<div *ngFor="let rg of requirementAGroups" class="form-row">-->
-              <!--<app-requirement-group [reqGroup]="rg" [form] = "formA.get(rg.id)" [indicator]="true"></app-requirement-group>-->
-            <!--</div>-->
-
               <app-criterion [criterion]="cr" [form]="formA.controls" [indicator]="true"></app-criterion>
-
-
-            <!--<mat-radio-group name='responseDataType'>-->
-            <!--<mat-radio-button color="primary" name="selALL" value="YES" (change)="handleALL(YES)" #YES>YES</mat-radio-button>-->
-            <!--<mat-radio-button color="primary" name="selALL" value="NO" checked (change)="handleALL(NO)" #NO>NO</mat-radio-button>-->
-            <!--</mat-radio-group>-->
-
-            <!--<mat-radio-group>-->
-              <!--<mat-radio-button color="primary"-->
-                                <!--value="YES"-->
-                                <!--[value]="true">YES-->
-              <!--</mat-radio-button>-->
-              <!--<mat-radio-button color="primary"-->
-                                <!--value="NO"-->
-                                <!--[value]="false">NO-->
-              <!--</mat-radio-button>-->
-            <!--</mat-radio-group>-->
-
           </div>
 
         </div>
@@ -58,7 +35,7 @@
 
   </form>
 
-  <form #f="ngForm">
+  <form [formGroup]="formB">
     <mat-expansion-panel expanded="true" *ngIf="exclusionBCriteria">
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -72,22 +49,26 @@
         <h4>Article {{exclusionBCriteria['0'].legislationReference.article}} of
           {{exclusionBCriteria['0'].legislationReference.title}} sets out the following reasons for exclusion</h4>
       </div>
-      <mat-card *ngFor="let criteria of exclusionBCriteria">
+      <mat-card *ngFor="let cr of exclusionBCriteria">
         <div class="exclusionCriteria">
-
           <div class="criteria">
-            <mat-checkbox color="primary" checked="criteria.selected" disabled>{{criteria.name}}</mat-checkbox>
-            <div class="critDesc">{{criteria.description}}</div>
+            <h4>{{cr.name}}</h4>
+            <div class="critDesc">{{cr.description}}</div>
           </div>
 
           <div class="eCertis">
             <h5>eCertis Information ...</h5>
             <div class="eCertDesc">no information...</div>
           </div>
+          <div class="answer">
+            <app-criterion [criterion]="cr" [form]="formB.controls" [indicator]="true"></app-criterion>
+          </div>
         </div>
       </mat-card>
     </mat-expansion-panel>
+  </form>
 
+  <form [formGroup]="formC">
     <mat-expansion-panel expanded="true" *ngIf="exclusionCCriteria">
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -101,20 +82,24 @@
         <h4>Article {{exclusionCCriteria['0'].legislationReference.article}} of
           {{exclusionCCriteria['0'].legislationReference.title}} sets out the following reasons for exclusion</h4>
       </div>
-      <mat-card *ngFor="let criteria of exclusionCCriteria">
+      <mat-card *ngFor="let cr of exclusionCCriteria">
         <div class="exclusionCriteria">
           <div class="criteria">
-            <mat-checkbox color="primary" checked="criteria.selected" disabled>{{criteria.name}}</mat-checkbox>
-            <div class="critDesc">{{criteria.description}}</div>
+            <h4>{{cr.name}}</h4>
+            <div class="critDesc">{{cr.description}}</div>
           </div>
           <div class="eCertis">
             <h5>eCertis Information ...</h5>
             <div class="eCertDesc">no information...</div>
           </div>
+          <div class="answer">
+            <app-criterion [criterion]="cr" [form]="formC.controls" [indicator]="true"></app-criterion>
+          </div>
         </div>
       </mat-card>
     </mat-expansion-panel>
-
+  </form>
+  <form [formGroup]="formD">
     <mat-expansion-panel expanded="true" *ngIf="exclusionDCriteria">
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -128,24 +113,25 @@
         <h4>Do the purely national grounds of exclusion, which are specified in the relevant notice or in the
           procurement documents, apply?</h4>
       </div>
-      <mat-card *ngFor="let criteria of exclusionDCriteria; let i=index">
+      <mat-card *ngFor="let cr of exclusionDCriteria; let i=index">
         <div class="exclusionCriteria">
           <div class="criteria">
-            <mat-checkbox color="primary" checked="criteria.selected" name="exclusionDCriteria"
-                          [(ngModel)]="exclusionDCriteria[i].selected">{{criteria.name}}
-            </mat-checkbox>
-            <div class="critDesc">{{criteria.description}}</div>
+            <h4>{{cr.name}}</h4>
+            <div class="critDesc">{{cr.description}}</div>
           </div>
           <div class="eCertis">
             <h5>eCertis Information ...</h5>
             <div class="eCertDesc">no information...</div>
+          </div>
+          <div class="answer">
+            <app-criterion [criterion]="cr" [form]="formD.controls" [indicator]="true"></app-criterion>
           </div>
         </div>
       </mat-card>
     </mat-expansion-panel>
 
     <button mat-raised-button color="primary" matStepperPrevious>Back</button>
-    <button type="submit" mat-raised-button color="primary" matStepperNext (click)="onExclusionEOSubmit(f)">Next
+    <button type="submit" mat-raised-button color="primary" matStepperNext (click)="onExclusionEOSubmit()">Next
     </button>
 
   </form>

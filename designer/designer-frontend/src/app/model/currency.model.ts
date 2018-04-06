@@ -1,4 +1,4 @@
-export class ProcedureType {
+export class Currency {
   code: string;
   name: string;
 }

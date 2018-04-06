@@ -1,0 +1,54 @@
+.mat-form-field {
+  display:block;
+  margin-bottom:20px;
+  margin-top:20px;
+}
+
+.mat-expansion-panel-header {
+  background-color:#3F51B5;
+}
+
+.mat.expansion-panel:hover{
+  background-color:#3F51B5;
+}
+
+
+mat-expansion-panel-header:hover {
+  background-color:#3F51B5;
+}
+mat-expansion-panel-header:focus {
+  background-color:#3F51B5;
+}
+mat-expansion-panel-header:active {
+  background-color:#3F51B5;
+}
+
+mat-panel-title, mat-panel-description {
+  color:white;
+}
+mat-expansion-panel-header.mat-expanded {
+  background-color:#3F51B5;
+}
+
+mat-expansion-panel-header.mat-expanded:hover {
+  background-color:#3F51B5;
+}
+mat-expansion-panel-header.mat-expanded:focus {
+  background-color:#3F51B5;
+}
+mat-expansion-panel-header.mat-expanded:active{
+  background-color:#3F51B5;
+}
+
+button {
+  margin-top:20px;
+}
+
+mat-card {
+  margin-bottom:10px;
+  margin-top:10px;
+}
+
+mat-checkbox {
+  font-weight:bold;
+}

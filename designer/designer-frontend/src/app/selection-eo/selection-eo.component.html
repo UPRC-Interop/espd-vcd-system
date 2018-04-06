@@ -1,3 +1,158 @@
-<p>
-  selection-eo works!
-</p>
+<h4>Part IV: Selection Criteria</h4>
+<form #f="ngForm">
+
+  <mat-card>
+    <mat-card-content>
+      <p>Contracting authorities must indicate which selection criteria will be applied by 'ticking' the checkbox placed before the relevant criterion.</p>
+      <span>Do you want to use the selection criteria from A to D? </span>
+      <mat-radio-group name="satisfiesALL">
+        <mat-radio-button color="primary" name="selALL" value="YES" (change)="handleALL(YES)" #YES>YES</mat-radio-button>
+        <mat-radio-button color="primary" name="selALL" value="NO" checked (change)="handleALL(NO)" #NO>NO</mat-radio-button>
+      </mat-radio-group>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-accordion multi="true" *ngIf="isSatisfiedALL">
+    <mat-expansion-panel expanded="true" *ngIf="selectionALLCriteria">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          ɑ: Global indication for all selection criteria
+        </mat-panel-title>
+        <mat-panel-description>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="desc">
+        <h4>Concerning the selection criteria the contracting authority declares that</h4>
+      </div>
+      <mat-card>
+
+        <div class="exclusionCriteria" >
+          <div class="criteria">
+            <mat-checkbox color="primary"
+                          checked="selectionALLCriteria['0'].selected"
+                          disabled
+                          name="selectionSatisfiedALL"
+                          [(ngModel)]="selectionALLCriteria['0'].selected">{{selectionALLCriteria['0'].name}}</mat-checkbox>
+            <div class="critDesc">{{selectionALLCriteria['0'].description}}</div>
+          </div>
+        </div>
+      </mat-card>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+
+
+
+  <mat-accordion multi="true" *ngIf="isAtoD">
+    <mat-expansion-panel expanded="true" *ngIf="selectionACriteria">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          A: Suitability
+        </mat-panel-title>
+        <mat-panel-description>
+
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="desc">
+        <h4>Article {{selectionACriteria['0'].legislationReference.article}} of {{selectionACriteria['0'].legislationReference.title}} sets out the following selection criteria </h4>
+      </div>
+      <mat-card *ngFor="let criteria of selectionACriteria; let i=index">
+        <div class="exclusionCriteria" >
+
+          <div class="criteria">
+            <mat-checkbox color="primary"
+                          checked="criteria.selected"
+                          name="selectionACriteria"
+                          [(ngModel)]="selectionACriteria[i].selected">{{criteria.name}}</mat-checkbox>
+            <div class="critDesc">{{criteria.description}}</div>
+          </div>
+          <div class="eCertis">
+            <h5>eCertis Information ...</h5>
+            <div class="eCertDesc">no information...</div>
+          </div>
+        </div>
+      </mat-card>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel expanded="true" *ngIf="selectionBCriteria">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          B: Grounds relating to the payment of taxes or social security contributions
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="desc">
+        <h4>Article {{selectionBCriteria['0'].legislationReference.article}} of {{selectionBCriteria['0'].legislationReference.title}} sets out the following selection criteria </h4>
+      </div>
+      <mat-card *ngFor="let criteria of selectionBCriteria; let i=index">
+        <div class="exclusionCriteria">
+          <div class="criteria">
+            <mat-checkbox color="primary"
+                          checked="criteria.selected"
+                          name="selectionBCriteria"
+                          [(ngModel)]="selectionBCriteria[i].selected">{{criteria.name}}</mat-checkbox>
+            <div class="critDesc">{{criteria.description}}</div>
+          </div>
+          <div class="eCertis">
+            <h5>eCertis Information ...</h5>
+            <div class="eCertDesc">no information...</div>
+          </div>
+        </div>
+      </mat-card>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel expanded="true" *ngIf="selectionCCriteria">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          C: Grounds relating to insolvency, conflicts of interests or professional misconduct
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="desc">
+        <h4>Article {{selectionCCriteria['0'].legislationReference.article}} of {{selectionCCriteria['0'].legislationReference.title}} sets out the following selection criteria </h4>
+      </div>
+      <mat-card *ngFor="let criteria of selectionCCriteria; let i=index">
+        <div class="exclusionCriteria">
+          <div class="criteria">
+            <mat-checkbox color="primary"
+                          checked="criteria.selected"
+                          name="selectionCCriteria"
+                          [(ngModel)]="selectionCCriteria[i].selected">{{criteria.name}}</mat-checkbox>
+            <div class="critDesc">{{criteria.description}}</div>
+          </div>
+          <div class="eCertis">
+            <h5>eCertis Information ...</h5>
+            <div class="eCertDesc">no information...</div>
+          </div>
+        </div>
+      </mat-card>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel expanded="true" *ngIf="selectionDCriteria">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          D: Quality assurance schemes and environmental management standards
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="desc">
+        <h4>Article {{selectionDCriteria['0'].legislationReference.article}} of {{selectionDCriteria['0'].legislationReference.title}} sets out the following selection criteria </h4>
+      </div>
+      <mat-card *ngFor="let criteria of selectionDCriteria; let i=index">
+        <div class="exclusionCriteria">
+          <div class="criteria">
+            <mat-checkbox color="primary"
+                          checked="criteria.selected"
+                          name="selectionDCriteria"
+                          [(ngModel)]="selectionDCriteria[i].selected">{{criteria.name}}</mat-checkbox>
+            <div class="critDesc">{{criteria.description}}</div>
+          </div>
+          <div class="eCertis">
+            <h5>eCertis Information ...</h5>
+            <div class="eCertDesc">no information...</div>
+          </div>
+        </div>
+      </mat-card>
+    </mat-expansion-panel>
+
+  </mat-accordion>
+  <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+  <button type="submit" mat-raised-button color="primary" matStepperNext (click)="onSelectionSubmit(f)">Next</button>
+</form>

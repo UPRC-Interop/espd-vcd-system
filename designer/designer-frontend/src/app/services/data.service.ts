@@ -13,6 +13,7 @@ import {EoDetails} from '../model/eoDetails.model';
 import {EoRelatedCriterion} from '../model/eoRelatedCriterion.model';
 import {RequirementGroup} from '../model/requirementGroup.model';
 import {RequirementResponse} from '../model/requirement-response.model';
+import {Currency} from '../model/currency.model';
 
 @Injectable()
 export class DataService {
@@ -36,6 +37,7 @@ export class DataService {
 
   countries: Country[] = null;
   procedureTypes: ProcedureType[] = null;
+  currency: Currency[] = null;
   exclusionACriteria: ExclusionCriteria[] = null;
   exclusionBCriteria: ExclusionCriteria[] = null;
   exclusionCCriteria: ExclusionCriteria[] = null;
@@ -163,7 +165,7 @@ export class DataService {
     this.selectionCCriteria = selectionCriteriaC;
     this.selectionDCriteria = selectionCriteriaD;
 
-    //create ESPDRequest
+    // create ESPDRequest
     // console.dir(JSON.stringify(this.createESPDRequest(isSatisfiedALL)));
     this.fullCriterionList = this.makeFullCriterionList(this.exclusionACriteria,
       this.exclusionBCriteria,
@@ -176,7 +178,7 @@ export class DataService {
       this.selectionCCriteria,
       this.selectionDCriteria);
 
-    //apicall service post
+    // apicall service post
     this.APIService.getXMLRequest(JSON.stringify(this.createESPDRequest()))
       .then(res => {
         console.log(res);
@@ -204,7 +206,7 @@ export class DataService {
 
   saveFile(blob) {
 
-    //TODO if isCA ->espd-request.xml, if isEO -> espd-response.xml
+    // TODO if isCA ->espd-request.xml, if isEO -> espd-response.xml
     const filename: string = 'espd-request';
     saveAs(blob, filename);
   }
@@ -213,7 +215,7 @@ export class DataService {
   /* ================================= CA REUSE ESPD REQUEST ====================== */
 
   CAReuseESPD(filesToUpload: File[], form: NgForm) {
-    //TODO rename to ReuseESPD, if isCA... if isEO... etc.
+    // TODO rename to ReuseESPD, if isCA... if isEO... etc.
     if (filesToUpload.length > 0) {
       this.APIService.postFile(filesToUpload)
         .then(res => {
@@ -307,6 +309,24 @@ export class DataService {
         });
     }
   }
+
+  getCurrency(): Promise<Currency[]> {
+    if (this.currency != null) {
+      return Promise.resolve(this.currency);
+    } else {
+      return this.APIService.getCurr()
+        .then(res => {
+          this.currency = res;
+          return Promise.resolve(res);
+        })
+        .catch(err => {
+          console.log(err);
+          return Promise.reject(err);
+        });
+    }
+  }
+
+
 
   /* ========================================EO related Criteria ========================= */
 
@@ -478,19 +498,19 @@ export class DataService {
 
   /* =================  Dynamic Forms =========================== */
 
+  // createExclusionCriterionForm(criteria: ExclusionCriteria[]) {
+  //   let group: any = {};
+  //   criteria.forEach(cr => {
+  //     group[cr.typeCode] = this.createCriterionFormGroup(cr);
+  //     console.log(group[cr.typeCode]);
+  //   });
+  //   let fg = new FormGroup(group);
+  //
+  //   console.log(fg);
+  //   return fg;
+  // }
+
   createExclusionCriterionForm(criteria: ExclusionCriteria[]) {
-    let group: any = {};
-    criteria.forEach(cr => {
-      group[cr.typeCode] = this.createCriterionFormGroup(cr);
-      console.log(group[cr.typeCode]);
-    });
-    let fg = new FormGroup(group);
-
-    console.log(fg);
-    return fg;
-  }
-
-  createExclusionCriterionFormTest(criteria: ExclusionCriteria[]) {
     let group: any = {};
     criteria.forEach(cr => {
       group[cr.typeCode] = this.createFormGroups(cr.requirementGroups);

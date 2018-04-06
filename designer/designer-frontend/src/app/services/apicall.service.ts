@@ -7,6 +7,7 @@ import {ExclusionCriteria} from '../model/exclusionCriteria.model';
 import {SelectionCriteria} from '../model/selectionCriteria.model';
 import {ESPDRequest} from '../model/ESPDRequest.model';
 import {EoRelatedCriterion} from '../model/eoRelatedCriterion.model';
+import {Currency} from '../model/currency.model';
 
 @Injectable()
 export class ApicallService {
@@ -22,6 +23,10 @@ export class ApicallService {
 
   getProcedureType() {
     return this.http.get<ProcedureType[]>('http://localhost:8080/api/codelists/v2/ProcedureType').toPromise();
+  }
+
+  getCurr() {
+    return this.http.get<Currency[]>('http://localhost:8080/api/codelists/v1/Currency').toPromise();
   }
 
 
