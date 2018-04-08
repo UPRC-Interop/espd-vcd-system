@@ -29,7 +29,7 @@ export class ExclusionEoComponent implements OnInit {
       .then(res => {
         this.exclusionACriteria = res;
         this.formA = this.dataService.createExclusionCriterionForm(this.exclusionACriteria);
-        console.log(this.formA);
+        // console.log(this.formA);
       })
       .catch(err => {
         console.log(err);

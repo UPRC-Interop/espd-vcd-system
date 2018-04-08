@@ -4,6 +4,8 @@ import {ProcedureType} from '../model/procedureType.model';
 import {Country} from '../model/country.model';
 import {FormArray, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 import {EoRelatedCriterion} from '../model/eoRelatedCriterion.model';
+import {RequirementGroup} from '../model/requirementGroup.model';
+import {RequirementResponse} from '../model/requirement-response.model';
 
 @Component({
   selector: 'app-procedure-eo',
@@ -112,27 +114,61 @@ export class ProcedureEoComponent implements OnInit, OnChanges {
     });
   }
 
+  reqGroupMatch(rg: RequirementGroup, cr: EoRelatedCriterion, form: FormGroup, formValues: any) {
+    if (rg != null || rg != undefined) {
+      // console.log(formValues[cr.id.valueOf()]);
+      console.log('reqGroup ' + rg.id);
+      // console.log(cr.id);
+      // console.log((<FormGroup>form.controls[cr.id]).controls[rg.id]);
+      // console.log(formValues[cr.id.valueOf()][rg.id.valueOf()]);
 
-  onProcedureEOSubmit(form: NgForm, eoForm: FormGroup, formA: FormGroup) {
-    // console.log(form.value);
-    console.log(eoForm.value);
-    console.log(formA.getRawValue());
-    console.log(formA);
-    console.log(formA.controls);
+      if (rg.requirements != undefined || rg.requirements != null) {
+
+        rg.requirements.forEach(req => {
+          if (req != null || req != undefined) {
+            console.log('requirement id outside undefined ' + req.id);
+            // req.response = new RequirementResponse();
+          }
+
+        });
+      }
+
+      if (rg.requirementGroups != null || rg.requirementGroups != undefined) {
+        rg.requirementGroups.forEach(rg2 => {
+          console.log(formValues);
+          // console.log(formValues[cr.id.valueOf()]);
+          // console.log(formValues[cr.id.valueOf()][rg.id.valueOf()]);
+          // console.log(formValues[cr.id.valueOf()][rg.id.valueOf()][rg2.id.valueOf()]);
+          // formValues = formValues[cr.id.valueOf()][rg.id.valueOf()][rg2.id.valueOf()];
+          formValues = formValues[rg2.id.valueOf()];
+          console.log(formValues);
+          console.log('reqGroup inside curs ' + rg2.id);
+          this.reqGroupMatch(rg2, cr, form, formValues);
+        });
+      }
+
+
+    }
+
+  }
+
+
+  onProcedureEOSubmit(form: NgForm, eoForm: FormGroup) {
+    let formValues = this.formA.getRawValue();
+    console.log(formValues);
+    // console.log(formValues['2043338f-a38a-490b-b3ec-2607cb25a017']);
 
     this.eoRelatedACriteria.forEach(cr => {
-      console.log(formA.controls[cr.id]);
+      let formValues = this.formA.getRawValue();
+      // console.log(formValues[cr.id.valueOf()]);
+      // console.log(cr.id.valueOf());
+      formValues = formValues[cr.id.valueOf()];
       cr.requirementGroups.forEach(rg => {
-        // console.log(formA.controls[rg.id]);
-        rg.requirementGroups.forEach(rg2 => {
-          rg2.requirements.forEach(req => {
-            console.log(req.description);
-          });
-        });
-        rg.requirements.forEach(req => {
-          console.log(req.description);
-        });
+        formValues = formValues[rg.id.valueOf()];
+        this.reqGroupMatch(rg, cr, this.formA, formValues);
       });
+
+
     });
 
     this.dataService.CADetails.cacountry = form.value.CACountry;
