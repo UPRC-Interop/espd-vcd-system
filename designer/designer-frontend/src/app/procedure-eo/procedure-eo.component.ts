@@ -115,6 +115,7 @@ export class ProcedureEoComponent implements OnInit, OnChanges {
   }
 
   reqGroupMatch(rg: RequirementGroup, cr: EoRelatedCriterion, form: FormGroup, formValues: any) {
+
     if (rg != null || rg != undefined) {
       // console.log(formValues[cr.id.valueOf()]);
       console.log('reqGroup ' + rg.id);
@@ -126,7 +127,12 @@ export class ProcedureEoComponent implements OnInit, OnChanges {
 
         rg.requirements.forEach(req => {
           if (req != null || req != undefined) {
-            console.log('requirement id outside undefined ' + req.id);
+            console.log('requirement id ' + req.id);
+            console.log(formValues);
+            // if (formValues[req.id.valueOf()] == undefined) {
+            //   console.log(formValues.valueOf());
+            // }
+            console.log(formValues[req.id.valueOf()]);
             // req.response = new RequirementResponse();
           }
 
@@ -135,12 +141,19 @@ export class ProcedureEoComponent implements OnInit, OnChanges {
 
       if (rg.requirementGroups != null || rg.requirementGroups != undefined) {
         rg.requirementGroups.forEach(rg2 => {
-          console.log(formValues);
+          console.log('outer reqgroup id ' + rg.id);
+          console.log('inner reqgroup id ' + rg2.id);
+          // console.log(formValues);
           // console.log(formValues[cr.id.valueOf()]);
           // console.log(formValues[cr.id.valueOf()][rg.id.valueOf()]);
           // console.log(formValues[cr.id.valueOf()][rg.id.valueOf()][rg2.id.valueOf()]);
           // formValues = formValues[cr.id.valueOf()][rg.id.valueOf()][rg2.id.valueOf()];
-          formValues = formValues[rg2.id.valueOf()];
+
+          // fix
+          if (formValues[rg2.id.valueOf()] != undefined) {
+            formValues = formValues[rg2.id.valueOf()];
+          }
+
           console.log(formValues);
           console.log('reqGroup inside curs ' + rg2.id);
           this.reqGroupMatch(rg2, cr, form, formValues);
