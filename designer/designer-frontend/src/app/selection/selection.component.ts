@@ -89,6 +89,7 @@ export class SelectionComponent implements OnInit {
   }
 
   onSelectionSubmit(form: NgForm) {
+    console.log(form.value);
     this.dataService.selectionSubmit(this.selectionACriteria,
       this.selectionBCriteria,
       this.selectionCCriteria,

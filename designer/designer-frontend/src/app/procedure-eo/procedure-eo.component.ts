@@ -213,6 +213,7 @@ export class ProcedureEoComponent implements OnInit, OnChanges {
 
 
   onProcedureEOSubmit(form: NgForm, eoForm: FormGroup) {
+    console.log(form.value);
     console.log(eoForm.value);
     let formValues = this.formA.getRawValue();
     console.log(formValues);

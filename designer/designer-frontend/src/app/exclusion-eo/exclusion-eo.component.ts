@@ -149,10 +149,7 @@ export class ExclusionEoComponent implements OnInit {
           this.reqGroupMatch(rg2, cr, form, formValues);
         });
       }
-
-
     }
-
   }
 
 
@@ -191,11 +188,6 @@ export class ExclusionEoComponent implements OnInit {
           formValues = formValues[rg.id.valueOf()];
           this.reqGroupMatch(rg, cr, this.formA, formValues);
         }
-
-
-        // formValues = formValues[rg.id.valueOf()];
-        // console.log(formValues);
-        // this.reqGroupMatch(rg, cr, this.formA, formValues);
       });
     });
 
