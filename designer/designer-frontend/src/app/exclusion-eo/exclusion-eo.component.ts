@@ -132,7 +132,7 @@ export class ExclusionEoComponent implements OnInit {
         let firstRgFormValues = null;
         let firstRgId = rg.id;
         firstRgFormValues = formValues;
-        console.log('This is ID out ' + firstRgId);
+        console.log('This is Rg ID out ' + firstRgId);
         rg.requirementGroups.forEach(rg2 => {
           console.log('outer reqgroup id ' + rg.id);
           console.log('inner reqgroup id ' + rg2.id);
@@ -161,18 +161,41 @@ export class ExclusionEoComponent implements OnInit {
     // console.log(this.formA.value);
     let formValues = this.formA.getRawValue();
     console.log(formValues);
+    console.log(this.exclusionACriteria);
 
     this.exclusionACriteria.forEach(cr => {
       let formValues = this.formA.getRawValue();
       formValues = formValues[cr.id.valueOf()];
       console.log(formValues);
 
+      // let testFormValues = formValues[cr.id.valueOf()];
+      console.log('cr loop: ' + cr.id);
+
+      let testFormValues = null;
+
       cr.requirementGroups.forEach(rg => {
+        console.log('first rg loop: ' + rg.id);
+
+        if (testFormValues == null) {
+          testFormValues = this.formA.getRawValue();
+          testFormValues = testFormValues[cr.id.valueOf()];
+          // formValues = testFormValues;
+        }
+
+        if (formValues[rg.id.valueOf()] == undefined) {
+          console.log('THIS IS undefined');
+          testFormValues = testFormValues[rg.id.valueOf()];
+          this.reqGroupMatch(rg, cr, this.formA, testFormValues);
+        } else if (formValues[rg.id.valueOf()] != undefined) {
+          console.log('THIS IS DEFINED');
+          formValues = formValues[rg.id.valueOf()];
+          this.reqGroupMatch(rg, cr, this.formA, formValues);
+        }
 
 
-        formValues = formValues[rg.id.valueOf()];
-        console.log(formValues);
-        this.reqGroupMatch(rg, cr, this.formA, formValues);
+        // formValues = formValues[rg.id.valueOf()];
+        // console.log(formValues);
+        // this.reqGroupMatch(rg, cr, this.formA, formValues);
       });
     });
 
