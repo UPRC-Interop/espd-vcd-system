@@ -123,7 +123,7 @@ export class ProcedureEoComponent implements OnInit, OnChanges {
 
         rg.requirements.forEach(req => {
           if (req != null || req != undefined) {
-            console.log('requirement id ' + req.id);
+            // console.log('requirement id ' + req.id);
 
             console.log(formValues[req.id.valueOf()]);
             req.response = new RequirementResponse();
@@ -132,7 +132,7 @@ export class ProcedureEoComponent implements OnInit, OnChanges {
               if (formValues[req.id.valueOf()] == 'YES') {
                 req.response.indicator = true;
                 req.response.id = null;
-              } else if (formValues[req.id.valueOf()] == 'NO') {
+              } else {
                 req.response.indicator = false;
                 req.response.id = null;
               }
@@ -184,7 +184,7 @@ export class ProcedureEoComponent implements OnInit, OnChanges {
         let firstRgFormValues = null;
         let firstRgId = rg.id;
         firstRgFormValues = formValues;
-        console.log('This is ID out ' + firstRgId);
+        // console.log('This is ID out ' + firstRgId);
         rg.requirementGroups.forEach(rg2 => {
           // console.log('outer reqgroup id ' + rg.id);
           // console.log('inner reqgroup id ' + rg2.id);
@@ -213,10 +213,9 @@ export class ProcedureEoComponent implements OnInit, OnChanges {
 
 
   onProcedureEOSubmit(form: NgForm, eoForm: FormGroup) {
+    console.log(eoForm.value);
     let formValues = this.formA.getRawValue();
     console.log(formValues);
-    console.log(this.eoRelatedACriteria);
-    // console.log(formValues['2043338f-a38a-490b-b3ec-2607cb25a017']);
 
     this.eoRelatedACriteria.forEach(cr => {
       let formValues = this.formA.getRawValue();
@@ -227,7 +226,27 @@ export class ProcedureEoComponent implements OnInit, OnChanges {
       });
     });
 
+    this.eoRelatedCCriteria.forEach(cr => {
+      let formValues = this.formC.getRawValue();
+      formValues = formValues[cr.id.valueOf()];
+      cr.requirementGroups.forEach(rg => {
+        formValues = formValues[rg.id.valueOf()];
+        this.reqGroupMatch(rg, cr, this.formC, formValues);
+      });
+    });
+
+    this.eoRelatedDCriteria.forEach(cr => {
+      let formValues = this.formD.getRawValue();
+      formValues = formValues[cr.id.valueOf()];
+      cr.requirementGroups.forEach(rg => {
+        formValues = formValues[rg.id.valueOf()];
+        this.reqGroupMatch(rg, cr, this.formD, formValues);
+      });
+    });
+
     console.log(this.eoRelatedACriteria);
+    console.log(this.eoRelatedCCriteria);
+    console.log(this.eoRelatedDCriteria);
 
     this.dataService.CADetails.cacountry = form.value.CACountry;
     this.dataService.CADetails.receivedNoticeNumber = form.value.receivedNoticeNumber;
