@@ -291,11 +291,6 @@ export class ExclusionEoComponent implements OnInit {
           formValues = formValues[rg.id.valueOf()];
           this.reqGroupMatch(rg, cr, this.formD, formValues);
         }
-
-
-        // formValues = formValues[rg.id.valueOf()];
-        // console.log(formValues);
-        // this.reqGroupMatch(rg, cr, this.formA, formValues);
       });
     });
 

@@ -1,8 +1,10 @@
 import {Cadetails} from './caDetails.model';
 import {FullCriterion} from './fullCriterion.model';
+import {EoDetails} from './eoDetails.model';
 
-export class ESPDRequest {
+export class ESPDResponse {
   cadetails: Cadetails;
+  eodetails: EoDetails;
   fullCriterionList: FullCriterion[];
 
   constructor(cadetails: Cadetails, fullCriterionList: FullCriterion[]) {

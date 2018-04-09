@@ -100,11 +100,27 @@ export class SelectionEoComponent implements OnInit {
     if (rg != null || rg != undefined) {
       // console.log('reqGroup ' + rg.id);
 
+      // let reqFormValues = null;
+      // let firstReqRg = rg.id;
+      // reqFormValues = formValues;
       if (rg.requirements != undefined || rg.requirements != null) {
 
 
         rg.requirements.forEach(req => {
           if (req != null || req != undefined) {
+
+            // if (reqFormValues == null) {
+            //   // reqFormValues = form.getRawValue();
+            //   // reqFormValues = reqFormValues[cr.id.valueOf()];
+            //   // reqFormValues = reqFormValues[rg.id.valueOf()];
+            //   // reqFormValues = reqFormValues[req.id.valueOf()];
+            // }
+
+            // if (formValues[req.id.valueOf()] == undefined) {
+            //   formValues = reqFormValues[firstReqRg.valueOf()];
+            // }
+
+
             // console.log('requirement id ' + req.id);
             console.log(formValues[req.id.valueOf()]);
             req.response = new RequirementResponse();
@@ -216,7 +232,7 @@ export class SelectionEoComponent implements OnInit {
       let formValues = this.formB.getRawValue();
       formValues = formValues[cr.id.valueOf()];
       console.log(formValues);
-      console.log('THIS IS FORM B =================================');
+      // console.log('THIS IS FORM B =================================');
 
       // let testFormValues = formValues[cr.id.valueOf()];
       console.log('cr loop: ' + cr.id);
@@ -225,7 +241,6 @@ export class SelectionEoComponent implements OnInit {
 
       cr.requirementGroups.forEach(rg => {
         console.log('first rg loop: ' + rg.id);
-
         if (testFormValues == null) {
           testFormValues = this.formB.getRawValue();
           testFormValues = testFormValues[cr.id.valueOf()];
@@ -234,7 +249,14 @@ export class SelectionEoComponent implements OnInit {
 
         if (formValues[rg.id.valueOf()] == undefined) {
           console.log('THIS IS undefined');
+
+          // fix
+          let testFormValues = null;
+          testFormValues = this.formB.getRawValue();
+          testFormValues = testFormValues[cr.id.valueOf()];
           testFormValues = testFormValues[rg.id.valueOf()];
+          // fix
+
           this.reqGroupMatch(rg, cr, this.formB, testFormValues);
         } else if (formValues[rg.id.valueOf()] != undefined) {
           console.log('THIS IS DEFINED');
@@ -247,7 +269,7 @@ export class SelectionEoComponent implements OnInit {
     this.selectionCCriteria.forEach(cr => {
       let formValues = this.formC.getRawValue();
       formValues = formValues[cr.id.valueOf()];
-      console.log('THIS IS FORM C =================================');
+      // console.log('THIS IS FORM C =================================');
       console.log(formValues);
 
       // let testFormValues = formValues[cr.id.valueOf()];
@@ -266,7 +288,13 @@ export class SelectionEoComponent implements OnInit {
 
         if (formValues[rg.id.valueOf()] == undefined) {
           console.log('THIS IS undefined');
+          // fix
+          let testFormValues = null;
+          testFormValues = this.formC.getRawValue();
+          testFormValues = testFormValues[cr.id.valueOf()];
           testFormValues = testFormValues[rg.id.valueOf()];
+          // fix
+
           this.reqGroupMatch(rg, cr, this.formC, testFormValues);
         } else if (formValues[rg.id.valueOf()] != undefined) {
           console.log('THIS IS DEFINED');
@@ -280,6 +308,7 @@ export class SelectionEoComponent implements OnInit {
       let formValues = this.formD.getRawValue();
       formValues = formValues[cr.id.valueOf()];
       console.log(formValues);
+      // console.log('THIS IS FORM D ==============================');
 
       // let testFormValues = formValues[cr.id.valueOf()];
       console.log('cr loop: ' + cr.id);
@@ -311,7 +340,7 @@ export class SelectionEoComponent implements OnInit {
     console.log(this.selectionBCriteria);
     console.log(this.selectionCCriteria);
     console.log(this.selectionDCriteria);
-    this.dataService.selectionSubmit(this.selectionACriteria,
+    this.dataService.selectionEOSubmit(this.selectionACriteria,
       this.selectionBCriteria,
       this.selectionCCriteria,
       this.selectionDCriteria,

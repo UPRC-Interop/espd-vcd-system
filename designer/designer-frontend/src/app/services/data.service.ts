@@ -57,6 +57,8 @@ export class DataService {
 
   blob = null;
 
+  isSatisfiedALLeo: boolean;
+
   CADetails: Cadetails = new Cadetails();
   EODetails: EoDetails = new EoDetails();
   espdRequest: ESPDRequest;
@@ -196,23 +198,35 @@ export class DataService {
 
   }
 
+  selectionEOSubmit(selectionCriteriaA: SelectionCriteria[],
+                    selectionCriteriaB: SelectionCriteria[],
+                    selectionCriteriaC: SelectionCriteria[],
+                    selectionCriteriaD: SelectionCriteria[],
+                    isSatisfiedALL: boolean) {
+    this.selectionACriteria = selectionCriteriaA;
+    this.selectionBCriteria = selectionCriteriaB;
+    this.selectionCCriteria = selectionCriteriaC;
+    this.selectionDCriteria = selectionCriteriaD;
+
+    this.isSatisfiedALLeo = isSatisfiedALL;
+
+  }
+
+  finishEOSubmit(reductionCriteria: ReductionCriterion[]) {
+    this.reductionCriteria = reductionCriteria;
+
+  }
+
+
   /* ================================== EXPORT FILES ============================= */
 
 
   createFile(response) {
-    // const contentDispositionHeader: string = response.headers.get('Content-Disposition');
-    // const parts: string[] = contentDispositionHeader.split(';');
-    // const filename = parts[1].split('=')[1];
-
     // const filename:string = "espd-request";
     this.blob = new Blob([response.body], {type: 'text/xml'});
-    // console.log(this.blob);
-    // saveAs(blob, filename);
   }
 
   saveFile(blob) {
-
-    // TODO if isCA ->espd-request.xml, if isEO -> espd-response.xml
     if (this.isCA) {
       var filename: string = 'espd-request';
     } else if (this.isEO) {
