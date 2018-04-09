@@ -92,7 +92,9 @@ export class SelectionEoComponent implements OnInit {
     }
   }
 
-  onSelectionSubmit(form: NgForm) {
+  onSelectionEOSubmit() {
+
+
     this.dataService.selectionSubmit(this.selectionACriteria,
       this.selectionBCriteria,
       this.selectionCCriteria,

@@ -202,27 +202,108 @@ export class ExclusionEoComponent implements OnInit {
     this.exclusionBCriteria.forEach(cr => {
       let formValues = this.formB.getRawValue();
       formValues = formValues[cr.id.valueOf()];
+      console.log(formValues);
+
+      // let testFormValues = formValues[cr.id.valueOf()];
+      console.log('cr loop: ' + cr.id);
+
+      let testFormValues = null;
+
       cr.requirementGroups.forEach(rg => {
-        formValues = formValues[rg.id.valueOf()];
-        this.reqGroupMatch(rg, cr, this.formB, formValues);
+        console.log('first rg loop: ' + rg.id);
+
+        if (testFormValues == null) {
+          testFormValues = this.formB.getRawValue();
+          testFormValues = testFormValues[cr.id.valueOf()];
+          // formValues = testFormValues;
+        }
+
+        if (formValues[rg.id.valueOf()] == undefined) {
+          console.log('THIS IS undefined');
+          testFormValues = testFormValues[rg.id.valueOf()];
+          this.reqGroupMatch(rg, cr, this.formB, testFormValues);
+        } else if (formValues[rg.id.valueOf()] != undefined) {
+          console.log('THIS IS DEFINED');
+          formValues = formValues[rg.id.valueOf()];
+          this.reqGroupMatch(rg, cr, this.formB, formValues);
+        }
+
+
+        // formValues = formValues[rg.id.valueOf()];
+        // console.log(formValues);
+        // this.reqGroupMatch(rg, cr, this.formA, formValues);
       });
     });
 
     this.exclusionCCriteria.forEach(cr => {
       let formValues = this.formC.getRawValue();
       formValues = formValues[cr.id.valueOf()];
+      console.log(formValues);
+
+      // let testFormValues = formValues[cr.id.valueOf()];
+      console.log('cr loop: ' + cr.id);
+
+      let testFormValues = null;
+
       cr.requirementGroups.forEach(rg => {
-        formValues = formValues[rg.id.valueOf()];
-        this.reqGroupMatch(rg, cr, this.formC, formValues);
+        console.log('first rg loop: ' + rg.id);
+
+        if (testFormValues == null) {
+          testFormValues = this.formC.getRawValue();
+          testFormValues = testFormValues[cr.id.valueOf()];
+          // formValues = testFormValues;
+        }
+
+        if (formValues[rg.id.valueOf()] == undefined) {
+          console.log('THIS IS undefined');
+          testFormValues = testFormValues[rg.id.valueOf()];
+          this.reqGroupMatch(rg, cr, this.formC, testFormValues);
+        } else if (formValues[rg.id.valueOf()] != undefined) {
+          console.log('THIS IS DEFINED');
+          formValues = formValues[rg.id.valueOf()];
+          this.reqGroupMatch(rg, cr, this.formC, formValues);
+        }
+
+
+        // formValues = formValues[rg.id.valueOf()];
+        // console.log(formValues);
+        // this.reqGroupMatch(rg, cr, this.formA, formValues);
       });
     });
 
     this.exclusionDCriteria.forEach(cr => {
       let formValues = this.formD.getRawValue();
       formValues = formValues[cr.id.valueOf()];
+      console.log(formValues);
+
+      // let testFormValues = formValues[cr.id.valueOf()];
+      console.log('cr loop: ' + cr.id);
+
+      let testFormValues = null;
+
       cr.requirementGroups.forEach(rg => {
-        formValues = formValues[rg.id.valueOf()];
-        this.reqGroupMatch(rg, cr, this.formD, formValues);
+        console.log('first rg loop: ' + rg.id);
+
+        if (testFormValues == null) {
+          testFormValues = this.formD.getRawValue();
+          testFormValues = testFormValues[cr.id.valueOf()];
+          // formValues = testFormValues;
+        }
+
+        if (formValues[rg.id.valueOf()] == undefined) {
+          console.log('THIS IS undefined');
+          testFormValues = testFormValues[rg.id.valueOf()];
+          this.reqGroupMatch(rg, cr, this.formD, testFormValues);
+        } else if (formValues[rg.id.valueOf()] != undefined) {
+          console.log('THIS IS DEFINED');
+          formValues = formValues[rg.id.valueOf()];
+          this.reqGroupMatch(rg, cr, this.formD, formValues);
+        }
+
+
+        // formValues = formValues[rg.id.valueOf()];
+        // console.log(formValues);
+        // this.reqGroupMatch(rg, cr, this.formA, formValues);
       });
     });
 
