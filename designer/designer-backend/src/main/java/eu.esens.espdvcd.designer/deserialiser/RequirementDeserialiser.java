@@ -17,7 +17,9 @@ import java.io.DataInput;
 import java.io.IOException;
 
 public class RequirementDeserialiser extends StdDeserializer<ResponseRequirement> {
-    public RequirementDeserialiser(){this(null);}
+    public RequirementDeserialiser() {
+        this(null);
+    }
 
     public RequirementDeserialiser(Class<?> vc) {
         super(vc);
@@ -32,13 +34,13 @@ public class RequirementDeserialiser extends StdDeserializer<ResponseRequirement
         JsonNode ID = root.get("id");
         JsonNode description = root.get("description");
 
-        ResponseRequirement responseRequirement = new ResponseRequirement(ID.asText(),ResponseTypeEnum.valueOf(responseType.asText()),description.asText());
+        ResponseRequirement responseRequirement = new ResponseRequirement(ID.asText(), ResponseTypeEnum.valueOf(responseType.asText()), description.asText());
         Response x;
 
-        switch (responseRequirement.getResponseDataType()){
+        switch (responseRequirement.getResponseDataType()) {
             case CODE:
-                 x = mapper.treeToValue(root.get("response"), EvidenceURLCodeResponse.class);
-                 break;
+                x = mapper.treeToValue(root.get("response"), EvidenceURLCodeResponse.class);
+                break;
             case AMOUNT:
                 x = mapper.treeToValue(root.get("response"), AmountResponse.class);
                 break;
@@ -77,4 +79,5 @@ public class RequirementDeserialiser extends StdDeserializer<ResponseRequirement
         responseRequirement.setResponse(x);
         return responseRequirement;
     }
+
 }
