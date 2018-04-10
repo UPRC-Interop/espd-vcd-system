@@ -2,22 +2,20 @@ package eu.esens.espdvcd.builder.model;
 
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.*;
-import eu.esens.espdvcd.model.requirement.response.ResponseFactory;
-import eu.esens.espdvcd.model.requirement.response.*;
 import eu.esens.espdvcd.model.requirement.Requirement;
-import eu.esens.espdvcd.model.requirement.response.Response;
+import eu.esens.espdvcd.model.requirement.response.*;
 import grow.names.specification.ubl.schema.xsd.espd_commonaggregatecomponents_1.EconomicOperatorPartyType;
 import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.ResponseType;
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.DocumentReferenceType;
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PersonType;
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ProcurementProjectLotType;
+import test.x.ubl.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
 
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.DocumentReferenceType;
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PersonType;
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ProcurementProjectLotType;
 
 public class ESPDResponseModelExtractor implements ModelExtractor {
 
@@ -76,6 +74,10 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
         return res;
     }
 
+    public ESPDResponse extractESPDResponse(QualificationApplicationResponseType resType) {
+        throw new UnsupportedOperationException();
+    }
+
     /**
      *
      * @param rt The JAXB RequirementType class to be extracted
@@ -93,6 +95,8 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
         }
         return r;
     }
+
+    // TODO extractRequirement for TenderingCriterionPropertyType
 
     public Response extractResponse(ResponseType res, ResponseTypeEnum theType) {
 
@@ -178,7 +182,6 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
 
             case EVIDENCE_URL:
                 return extractEvidenceURLResponse(res);
-
 
             case CODE:
                 EvidenceURLCodeResponse ecResp = new EvidenceURLCodeResponse();

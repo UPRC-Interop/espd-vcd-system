@@ -20,7 +20,5 @@ public enum ResponseTypeEnum {
     CODE_COUNTRY,
     PERCENTAGE,
     PERIOD,
-    CODE,
-    // FIXME not sure if NONE is necessary here
-    NONE;
+    CODE
 }
