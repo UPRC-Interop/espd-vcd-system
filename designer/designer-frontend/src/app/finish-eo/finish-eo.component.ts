@@ -140,18 +140,40 @@ export class FinishEoComponent implements OnInit {
         }
       });
     });
-
-    console.log(this.reductionCriteria);
     this.dataService.finishEOSubmit(this.reductionCriteria);
   }
 
   onExportV2() {
     this.dataService.version = 'v2';
-  }
+    this.reductionCriteria.forEach(cr => {
+      let formValues = this.form.getRawValue();
+      formValues = formValues[cr.id.valueOf()];
+      console.log(formValues);
 
+      // let testFormValues = formValues[cr.id.valueOf()];
+      console.log('cr loop: ' + cr.id);
 
-  exportFile() {
-    this.dataService.saveFile(this.dataService.blob);
+      let testFormValues = null;
+
+      cr.requirementGroups.forEach(rg => {
+        console.log('first rg loop: ' + rg.id);
+
+        if (testFormValues == null) {
+          testFormValues = this.form.getRawValue();
+          testFormValues = testFormValues[cr.id.valueOf()];
+          // formValues = testFormValues;
+        }
+
+        if (formValues[rg.id.valueOf()] == undefined) {
+          testFormValues = testFormValues[rg.id.valueOf()];
+          this.reqGroupMatch(rg, cr, this.form, testFormValues);
+        } else if (formValues[rg.id.valueOf()] != undefined) {
+          formValues = formValues[rg.id.valueOf()];
+          this.reqGroupMatch(rg, cr, this.form, formValues);
+        }
+      });
+    });
+    this.dataService.finishEOSubmit(this.reductionCriteria);
   }
 
 }

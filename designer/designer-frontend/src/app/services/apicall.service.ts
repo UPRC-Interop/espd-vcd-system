@@ -157,7 +157,21 @@ export class ApicallService {
 
     // headers = header.append('Content-Type', 'application/json; charset=utf-8');
     return this.http.post<any>('http://localhost:8080/api/v1/espd/response', ESPDResponse, options).toPromise();
+  }
 
+  getXMLResponseV2(ESPDResponse: string) {
+
+    let header = new HttpHeaders();
+    let _header = header.append('Content-Type', 'application/json; charset=utf-8');
+
+    let options: Object = {
+      headers: _header,
+      responseType: 'blob' as 'blob',
+      observe: 'response' as 'response'
+    };
+
+    // headers = header.append('Content-Type', 'application/json; charset=utf-8');
+    return this.http.post<any>('http://localhost:8080/api/v2/espd/response', ESPDResponse, options).toPromise();
   }
 
 

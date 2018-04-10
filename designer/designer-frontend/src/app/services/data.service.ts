@@ -280,9 +280,45 @@ export class DataService {
     this.reductionCriteria = reductionCriteria;
 
     // make full criterion list
-    // create espdresponse
-    // make api call
-    // createfile, save file
+    this.fullCriterionList = this.makeFullCriterionList(this.exclusionACriteria,
+      this.exclusionBCriteria,
+      this.exclusionCCriteria,
+      this.exclusionDCriteria,
+      this.isSatisfiedALLeo,
+      this.selectionALLCriteria,
+      this.selectionACriteria,
+      this.selectionBCriteria,
+      this.selectionCCriteria,
+      this.selectionDCriteria,
+      this.eoRelatedACriteria,
+      this.eoRelatedCCriteria,
+      this.eoRelatedDCriteria,
+      this.reductionCriteria);
+
+    console.log(this.fullCriterionList);
+
+
+    if (this.version == 'v1') {
+      this.APIService.getXMLResponse(JSON.stringify(this.createESPDResponse()))
+        .then(res => {
+          console.log(res);
+          this.createFile(res);
+          this.saveFile(this.blob);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    } else if (this.version == 'v2') {
+      this.APIService.getXMLResponseV2(JSON.stringify(this.createESPDResponse()))
+        .then(res => {
+          console.log(res);
+          this.createFileV2(res);
+          this.saveFile(this.blobV2);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
 
   }
 
