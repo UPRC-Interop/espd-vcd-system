@@ -9,6 +9,7 @@ import {ESPDRequest} from '../model/ESPDRequest.model';
 import {EoRelatedCriterion} from '../model/eoRelatedCriterion.model';
 import {Currency} from '../model/currency.model';
 import {ReductionCriterion} from '../model/reductionCriterion.model';
+import {ESPDResponse} from '../model/ESPDResponse.model';
 
 @Injectable()
 export class ApicallService {
@@ -110,6 +111,20 @@ export class ApicallService {
     let header = new HttpHeaders();
     header = header.set('Content-Type', 'application/xml; charset=utf-8');
     return this.http.post<ESPDRequest>('http://localhost:8080/api/v1/espd/request', formData).toPromise();
+
+  }
+
+  postFileResponse(filesToUpload: File[]) {
+
+    const formData: FormData = new FormData();
+    for (let i = 0; i < filesToUpload.length; i++) {
+      formData.append(`files[]`, filesToUpload[i], filesToUpload[i].name);
+    }
+    // console.log(formData);
+    // const header = new HttpHeaders({'Content-Type':'application/xml; charset=utf-8'});
+    let header = new HttpHeaders();
+    header = header.set('Content-Type', 'application/xml; charset=utf-8');
+    return this.http.post<ESPDResponse>('http://localhost:8080/api/v1/espd/response', formData).toPromise();
 
   }
 

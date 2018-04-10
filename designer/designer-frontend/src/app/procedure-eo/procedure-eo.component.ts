@@ -70,7 +70,7 @@ export class ProcedureEoComponent implements OnInit, OnChanges {
 
     this.EOForm = new FormGroup({
       'name': new FormControl(this.dataService.EODetails.name),
-      'smeIndicator': new FormControl(false),
+      'smeIndicator': new FormControl(this.dataService.EODetails.smeIndicator),
       'postalAddress': new FormGroup({
         'addressLine1': new FormControl(),
         'postCode': new FormControl(),
@@ -107,13 +107,14 @@ export class ProcedureEoComponent implements OnInit, OnChanges {
       });
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    this.EOForm.patchValue({
-      'name': this.dataService.selectedEOCountry
-    });
+  ngOnChanges() {
+    if (this.EOForm) {
+      // this.EOForm.patchValue(this.dataService.EODetails);
+    }
+
   }
 
-  /* ================= natural person form =========================== */
+  /* ================================================= natural person form ================================================ */
 
   initNaturalPerson() {
     return new FormGroup({
@@ -146,6 +147,8 @@ export class ProcedureEoComponent implements OnInit, OnChanges {
     control.removeAt(i);
   }
 
+
+  /* ====================================================== Getting values from Form ======================================*/
 
   reqGroupMatch(rg: RequirementGroup, cr: EoRelatedCriterion, form: FormGroup, formValues: any) {
 
@@ -285,7 +288,6 @@ export class ProcedureEoComponent implements OnInit, OnChanges {
     this.dataService.CADetails.cacountry = form.value.CACountry;
     this.dataService.CADetails.receivedNoticeNumber = form.value.receivedNoticeNumber;
 
-    // TODO put form values to dataService
     console.log(this.dataService.selectedEOCountry);
 
     console.log(this.dataService.CADetails);
