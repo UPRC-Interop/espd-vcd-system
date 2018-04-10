@@ -64,13 +64,15 @@
       <mat-card *ngFor="let cr of selectionACriteria; let i=index">
         <div class="selectionCriteria">
 
-          <div class="criteria">
-            <h4>{{cr.name}}</h4>
-            <div class="critDesc">{{cr.description}}</div>
-          </div>
-          <div class="eCertis">
-            <h5>eCertis Information ...</h5>
-            <div class="eCertDesc">no information...</div>
+          <div class="criterion-wrap">
+            <div class="criteria">
+              <h4>{{cr.name}}</h4>
+              <div class="critDesc">{{cr.description}}</div>
+            </div>
+            <div class="eCertis">
+              <h5>eCertis Information ...</h5>
+              <div class="eCertDesc">no information...</div>
+            </div>
           </div>
           <div class="answer">
             <app-criterion [criterion]="cr" [form]="formA.controls" [indicator]="true"></app-criterion>
@@ -93,13 +95,15 @@
       </div>
       <mat-card *ngFor="let cr of selectionBCriteria; let i=index">
         <div class="selectionCriteria">
-          <div class="criteria">
-            <h4>{{cr.name}}</h4>
-            <div class="critDesc">{{cr.description}}</div>
-          </div>
-          <div class="eCertis">
-            <h5>eCertis Information ...</h5>
-            <div class="eCertDesc">no information...</div>
+          <div class="criterion-wrap">
+            <div class="criteria">
+              <h4>{{cr.name}}</h4>
+              <div class="critDesc">{{cr.description}}</div>
+            </div>
+            <div class="eCertis">
+              <h5>eCertis Information ...</h5>
+              <div class="eCertDesc">no information...</div>
+            </div>
           </div>
           <div class="answer">
             <app-criterion [criterion]="cr" [form]="formB.controls" [indicator]="true"></app-criterion>
@@ -121,13 +125,15 @@
       </div>
       <mat-card *ngFor="let cr of selectionCCriteria; let i=index">
         <div class="selectionCriteria">
-          <div class="criteria">
-            <h4>{{cr.name}}</h4>
-            <div class="critDesc">{{cr.description}}</div>
-          </div>
-          <div class="eCertis">
-            <h5>eCertis Information ...</h5>
-            <div class="eCertDesc">no information...</div>
+          <div class="criterion-wrap">
+            <div class="criteria">
+              <h4>{{cr.name}}</h4>
+              <div class="critDesc">{{cr.description}}</div>
+            </div>
+            <div class="eCertis">
+              <h5>eCertis Information ...</h5>
+              <div class="eCertDesc">no information...</div>
+            </div>
           </div>
           <div class="answer">
             <app-criterion [criterion]="cr" [form]="formC.controls" [indicator]="true"></app-criterion>
@@ -149,13 +155,15 @@
       </div>
       <mat-card *ngFor="let cr of selectionDCriteria; let i=index">
         <div class="selectionCriteria">
-          <div class="criteria">
-            <h4>{{cr.name}}</h4>
-            <div class="critDesc">{{cr.description}}</div>
-          </div>
-          <div class="eCertis">
-            <h5>eCertis Information ...</h5>
-            <div class="eCertDesc">no information...</div>
+          <div class="criterion-wrap">
+            <div class="criteria">
+              <h4>{{cr.name}}</h4>
+              <div class="critDesc">{{cr.description}}</div>
+            </div>
+            <div class="eCertis">
+              <h5>eCertis Information ...</h5>
+              <div class="eCertDesc">no information...</div>
+            </div>
           </div>
           <div class="answer">
             <app-criterion [criterion]="cr" [form]="formD.controls" [indicator]="true"></app-criterion>
