@@ -40,9 +40,11 @@ export class ApicallService {
   getEO_RelatedACriteria() {
     return this.http.get<EoRelatedCriterion[]>('http://localhost:8080/api/v1/criteria/predefined/eo_related_A').toPromise();
   }
+
   getEO_RelatedCCriteria() {
     return this.http.get<EoRelatedCriterion[]>('http://localhost:8080/api/v1/criteria/predefined/eo_related_B').toPromise();
   }
+
   getEO_RelatedDCriteria() {
     return this.http.get<EoRelatedCriterion[]>('http://localhost:8080/api/v1/criteria/predefined/eo_related_C').toPromise();
   }
@@ -113,18 +115,9 @@ export class ApicallService {
 
   /* ================= UPLOAD JSON GET XML Request ================================= */
   getXMLRequest(ESPDRequest: string) {
-    // const formData: FormData = new FormData();
-    //
-    // if(ESPDRequest) {
-    //   formData.append(`ESPDRequestString`, ESPDRequest);
-    // }
 
     let header = new HttpHeaders();
     let _header = header.append('Content-Type', 'application/json; charset=utf-8');
-    // let options = {
-    //   headers:_header,
-    //   responseType:'blob'
-    // };
 
     let options: Object = {
       headers: _header,
@@ -132,9 +125,38 @@ export class ApicallService {
       observe: 'response' as 'response'
     };
 
-
     // headers = header.append('Content-Type', 'application/json; charset=utf-8');
     return this.http.post<any>('http://localhost:8080/api/v1/espd/request', ESPDRequest, options).toPromise();
+  }
+
+  getXMLRequestV2(ESPDRequest: string) {
+
+    let header = new HttpHeaders();
+    let _header = header.append('Content-Type', 'application/json; charset=utf-8');
+
+    let options: Object = {
+      headers: _header,
+      responseType: 'blob' as 'blob',
+      observe: 'response' as 'response'
+    };
+
+    // headers = header.append('Content-Type', 'application/json; charset=utf-8');
+    return this.http.post<any>('http://localhost:8080/api/v2/espd/request', ESPDRequest, options).toPromise();
+  }
+
+  getXMLResponse(ESPDResponse: string) {
+
+    let header = new HttpHeaders();
+    let _header = header.append('Content-Type', 'application/json; charset=utf-8');
+
+    let options: Object = {
+      headers: _header,
+      responseType: 'blob' as 'blob',
+      observe: 'response' as 'response'
+    };
+
+    // headers = header.append('Content-Type', 'application/json; charset=utf-8');
+    return this.http.post<any>('http://localhost:8080/api/v1/espd/response', ESPDResponse, options).toPromise();
 
   }
 

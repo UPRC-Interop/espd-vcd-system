@@ -111,6 +111,7 @@ export class FinishEoComponent implements OnInit {
   }
 
   onExportV1() {
+    this.dataService.version = 'v1';
     this.reductionCriteria.forEach(cr => {
       let formValues = this.form.getRawValue();
       formValues = formValues[cr.id.valueOf()];
@@ -145,7 +146,7 @@ export class FinishEoComponent implements OnInit {
   }
 
   onExportV2() {
-
+    this.dataService.version = 'v2';
   }
 
 

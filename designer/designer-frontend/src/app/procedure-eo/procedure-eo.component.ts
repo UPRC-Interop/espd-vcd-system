@@ -287,7 +287,14 @@ export class ProcedureEoComponent implements OnInit, OnChanges {
 
     // TODO put form values to dataService
     console.log(this.dataService.selectedEOCountry);
+
+    console.log(this.dataService.CADetails);
+    this.dataService.EODetails = eoForm.value;
+    console.log(this.dataService.EODetails);
     // console.log(this.dataService.CADetails);
+    this.dataService.procedureEOSubmit(this.eoRelatedACriteria,
+      this.eoRelatedCCriteria,
+      this.eoRelatedDCriteria);
   }
 
 }

@@ -15,6 +15,7 @@ import {RequirementGroup} from '../model/requirementGroup.model';
 import {RequirementResponse} from '../model/requirement-response.model';
 import {Currency} from '../model/currency.model';
 import {ReductionCriterion} from '../model/reductionCriterion.model';
+import {ESPDResponse} from '../model/ESPDResponse.model';
 
 @Injectable()
 export class DataService {
@@ -56,13 +57,15 @@ export class DataService {
   reductionCriteria: ReductionCriterion[] = null;
 
   blob = null;
+  blobV2 = null;
 
   isSatisfiedALLeo: boolean;
 
   CADetails: Cadetails = new Cadetails();
   EODetails: EoDetails = new EoDetails();
   espdRequest: ESPDRequest;
-  espdRequestjson: string;
+  espdResponse: ESPDResponse;
+  version: string;
 
   isCA: boolean = false;
   isEO: boolean = false;
@@ -85,31 +88,68 @@ export class DataService {
                         selectionACriteria?: SelectionCriteria[],
                         selectionBCriteria?: SelectionCriteria[],
                         selectionCCriteria?: SelectionCriteria[],
-                        selectionDCriteria?: SelectionCriteria[]): FullCriterion[] {
+                        selectionDCriteria?: SelectionCriteria[],
+                        eoRelatedACriteria?: EoRelatedCriterion[],
+                        eoRelatedCCriteria?: EoRelatedCriterion[],
+                        eoRelatedDCriteria?: EoRelatedCriterion[],
+                        reductionCriteria?: ReductionCriterion[]): FullCriterion[] {
     // let exAString:string= JSON.stringify(exclusionACriteria);
     // let exBString:string= JSON.stringify(exclusionBCriteria);
 
-    if (isSatisfiedALL) {
-      var combineJsonArray = [...exclusionACriteria,
-        ...exclusionBCriteria,
-        ...exclusionCCriteria,
-        ...exclusionDCriteria,
-        ...selectionALLCriteria];
-      // console.dir(combineJsonArray);
-      return combineJsonArray;
+    if (this.isCA) {
+      if (isSatisfiedALL) {
+        var combineJsonArray = [...exclusionACriteria,
+          ...exclusionBCriteria,
+          ...exclusionCCriteria,
+          ...exclusionDCriteria,
+          ...selectionALLCriteria];
+        // console.dir(combineJsonArray);
+        return combineJsonArray;
 
-    } else {
-      var combineJsonArray = [
-        ...exclusionACriteria,
-        ...exclusionBCriteria,
-        ...exclusionCCriteria,
-        ...exclusionDCriteria,
-        ...selectionACriteria,
-        ...selectionBCriteria,
-        ...selectionCCriteria,
-        ...selectionDCriteria];
-      // console.dir(combineJsonArray);
-      return combineJsonArray;
+      } else {
+        var combineJsonArray = [
+          ...exclusionACriteria,
+          ...exclusionBCriteria,
+          ...exclusionCCriteria,
+          ...exclusionDCriteria,
+          ...selectionACriteria,
+          ...selectionBCriteria,
+          ...selectionCCriteria,
+          ...selectionDCriteria];
+        // console.dir(combineJsonArray);
+        return combineJsonArray;
+      }
+    } else if (this.isEO) {
+      if (isSatisfiedALL) {
+        var combineJsonArray = [...exclusionACriteria,
+          ...exclusionBCriteria,
+          ...exclusionCCriteria,
+          ...exclusionDCriteria,
+          ...selectionALLCriteria,
+          ...eoRelatedACriteria,
+          ...eoRelatedCCriteria,
+          ...eoRelatedDCriteria,
+          ...reductionCriteria];
+        // console.dir(combineJsonArray);
+        return combineJsonArray;
+
+      } else {
+        var combineJsonArray = [
+          ...exclusionACriteria,
+          ...exclusionBCriteria,
+          ...exclusionCCriteria,
+          ...exclusionDCriteria,
+          ...selectionACriteria,
+          ...selectionBCriteria,
+          ...selectionCCriteria,
+          ...selectionDCriteria,
+          ...eoRelatedACriteria,
+          ...eoRelatedCCriteria,
+          ...eoRelatedDCriteria,
+          ...reductionCriteria];
+        // console.dir(combineJsonArray);
+        return combineJsonArray;
+      }
     }
   }
 
@@ -147,6 +187,12 @@ export class DataService {
     console.log(this.espdRequest);
     return this.espdRequest;
 
+  }
+
+  createESPDResponse(): ESPDResponse {
+    this.espdResponse = new ESPDResponse(this.CADetails, this.EODetails, this.fullCriterionList);
+    console.log(this.espdResponse);
+    return this.espdResponse;
   }
 
 
@@ -196,6 +242,24 @@ export class DataService {
         console.log(err);
       });
 
+    this.APIService.getXMLRequestV2(JSON.stringify(this.createESPDRequest()))
+      .then(res => {
+        console.log(res);
+        this.createFileV2(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+  }
+
+
+  procedureEOSubmit(eoRelatedCriteriaA: EoRelatedCriterion[],
+                    eoRelatedCriteriaC: EoRelatedCriterion[],
+                    eoRelatedCriteriaD: EoRelatedCriterion[]) {
+    this.eoRelatedACriteria = eoRelatedCriteriaA;
+    this.eoRelatedCCriteria = eoRelatedCriteriaC;
+    this.eoRelatedDCriteria = eoRelatedCriteriaD;
   }
 
   selectionEOSubmit(selectionCriteriaA: SelectionCriteria[],
@@ -215,6 +279,11 @@ export class DataService {
   finishEOSubmit(reductionCriteria: ReductionCriterion[]) {
     this.reductionCriteria = reductionCriteria;
 
+    // make full criterion list
+    // create espdresponse
+    // make api call
+    // createfile, save file
+
   }
 
 
@@ -226,11 +295,20 @@ export class DataService {
     this.blob = new Blob([response.body], {type: 'text/xml'});
   }
 
+  createFileV2(response) {
+    // const filename:string = "espd-request";
+    this.blobV2 = new Blob([response.body], {type: 'text/xml'});
+  }
+
   saveFile(blob) {
-    if (this.isCA) {
-      var filename: string = 'espd-request';
-    } else if (this.isEO) {
-      var filename: string = 'espd-response';
+    if (this.isCA && this.version == 'v1') {
+      var filename = 'espd-request-v1';
+    } else if (this.isEO && this.version == 'v1') {
+      var filename = 'espd-response-v1';
+    } else if (this.isCA && this.version == 'v2') {
+      var filename = 'espd-request-v2';
+    } else if (this.isEO && this.version == 'v2') {
+      var filename = 'espd-response-v2';
     }
 
     saveAs(blob, filename);
