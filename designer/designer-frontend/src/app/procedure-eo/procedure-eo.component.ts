@@ -84,7 +84,7 @@ export class ProcedureEoComponent implements OnInit, OnChanges {
       }),
       'naturalPersons': new FormArray([this.initNaturalPerson()]),
       'id': new FormControl(),
-      'websiteURI': new FormControl()
+      'webSiteURI': new FormControl()
     });
 
 
@@ -128,7 +128,7 @@ export class ProcedureEoComponent implements OnInit, OnChanges {
         'city': new FormControl(),
         'countryCode': new FormControl(),
       }),
-      'contactingDetails': new FormGroup({
+      'contactDetails': new FormGroup({
         'contactPointName': new FormControl(),
         'emailAddress': new FormControl(),
         'telephoneNumber': new FormControl(),
