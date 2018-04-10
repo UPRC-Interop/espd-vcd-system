@@ -58,7 +58,7 @@ public class ESPDResponseSchemaExtractorV1 implements SchemaExtractorV1 {
                 .map(cr -> extractCriterion(cr))
                 .collect(Collectors.toList()));
 
-        resType.setEconomicOperatorParty(extracEODetails(res.getEODetails()));
+        resType.setEconomicOperatorParty(extractEODetails(res.getEODetails()));
 
         if (res.getESPDRequestDetails() != null) {
             resType.getAdditionalDocumentReference().add(extractESPDRequestDetails(res.getESPDRequestDetails()));
@@ -75,7 +75,7 @@ public class ESPDResponseSchemaExtractorV1 implements SchemaExtractorV1 {
         return resType;
     }
 
-    public EconomicOperatorPartyType extracEODetails(EODetails eod) {
+    public EconomicOperatorPartyType extractEODetails(EODetails eod) {
 
         if (eod == null) {
             return null;

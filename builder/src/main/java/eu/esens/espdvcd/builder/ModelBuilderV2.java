@@ -122,7 +122,7 @@ public class ModelBuilderV2 extends ModelBuilder {
         try {
             // Start with the convenience methods provided by JAXB. If there are
             // performance issues we will switch back to the JAXB API Usage
-            return SchemaUtil.getUnmarshaller().unmarshal(new StreamSource(is), QualificationApplicationRequestType.class).getValue();
+            return SchemaUtil.V2.getUnmarshaller().unmarshal(new StreamSource(is), QualificationApplicationRequestType.class).getValue();
         } catch (JAXBException ex) {
             Logger.getLogger(ModelBuilderV2.class.getName()).log(Level.SEVERE, null, ex);
             return null;

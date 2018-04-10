@@ -498,9 +498,10 @@ public interface ModelExtractor {
                 && rt.getDescription().get(0) != null) {
             theDescription = rt.getDescription().get(0).getValue();
         }
+
         Requirement r = new ResponseRequirement(
                 theId,
-                ResponseTypeEnum.valueOf(rt.getValueDataTypeCode().getValue()),
+                ResponseTypeEnum.valueOf(rt.getTypeCode().getValue()),
                 theDescription
         );
         return r;

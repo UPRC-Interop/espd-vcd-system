@@ -341,7 +341,7 @@ public interface SchemaExtractorV2 {
         return reqGroupIDType;
     }
 
-    // (2.0.1) updated
+    // (2.0.1) updated KR_1-4-2018
     default IdentificationCodeType createISOCountryIdCodeType(String id) {
         IdentificationCodeType countryCodeType = new IdentificationCodeType();
         countryCodeType.setListAgencyID("EU-COM-GROW");
@@ -450,6 +450,15 @@ public interface SchemaExtractorV2 {
         PropertyGroupTypeCodeType ptc = new PropertyGroupTypeCodeType();
         ptc.setValue(code);
         return ptc;
+    }
+
+    default IndustryClassificationCodeType createIndustryClassificationCodeType(String code) {
+        IndustryClassificationCodeType icct = new IndustryClassificationCodeType();
+        icct.setListID("EOIndustryClassificationCode");
+        icct.setListAgencyID("EU-COM-GROW");
+        icct.setListVersionID("2.0.1");
+        icct.setValue(code);
+        return icct;
     }
 
 }
