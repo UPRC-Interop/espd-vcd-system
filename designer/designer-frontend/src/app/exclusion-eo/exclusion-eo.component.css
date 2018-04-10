@@ -46,6 +46,7 @@ button {
 
 mat-card {
   margin-bottom:10px;
+  border:1px solid rgba(0,0,0,0.1);
 }
 
 .exclusionCriteria {
@@ -60,3 +61,9 @@ mat-card {
 .answer {
   flex:2;
 }
+
+
+
+/*.mat-expansion-panel {*/
+  /*border:1px solid rgba(0,0,0,0.1);*/
+/*}*/
