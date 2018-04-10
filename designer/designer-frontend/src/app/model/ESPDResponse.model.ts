@@ -7,8 +7,9 @@ export class ESPDResponse {
   eodetails: EoDetails;
   fullCriterionList: FullCriterion[];
 
-  constructor(cadetails: Cadetails, fullCriterionList: FullCriterion[]) {
+  constructor(cadetails: Cadetails, eodetails: EoDetails, fullCriterionList: FullCriterion[]) {
     this.cadetails = cadetails;
+    this.eodetails = eodetails;
     this.fullCriterionList = fullCriterionList;
   }
 }

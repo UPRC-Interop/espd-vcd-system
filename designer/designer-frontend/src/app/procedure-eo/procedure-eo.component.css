@@ -83,3 +83,9 @@ mat-grid-tile {
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
+.add, .remove {
+  display:inline-block;
+  margin-left: 25px;
+  font-size: 22px;
+}

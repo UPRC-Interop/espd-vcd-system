@@ -82,10 +82,9 @@ export class ProcedureEoComponent implements OnInit, OnChanges {
         'emailAddress': new FormControl(),
         'telephoneNumber': new FormControl(),
       }),
+      'naturalPersons': new FormArray([this.initNaturalPerson()]),
       'id': new FormControl(),
-      'websiteURI': new FormControl(),
-      'eoRelatedCriteria': new FormArray([])
-
+      'websiteURI': new FormControl()
     });
 
 
@@ -113,6 +112,40 @@ export class ProcedureEoComponent implements OnInit, OnChanges {
       'name': this.dataService.selectedEOCountry
     });
   }
+
+  /* ================= natural person form =========================== */
+
+  initNaturalPerson() {
+    return new FormGroup({
+      'firstName': new FormControl(),
+      'familyName': new FormControl(),
+      'role': new FormControl(),
+      'birthPlace': new FormControl(),
+      'birthDate': new FormControl(),
+      'postalAddress': new FormGroup({
+        'addressLine1': new FormControl(),
+        'postCode': new FormControl(),
+        'city': new FormControl(),
+        'countryCode': new FormControl(),
+      }),
+      'contactingDetails': new FormGroup({
+        'contactPointName': new FormControl(),
+        'emailAddress': new FormControl(),
+        'telephoneNumber': new FormControl(),
+      })
+    });
+  }
+
+  addPerson() {
+    const control = <FormArray>this.EOForm.controls['naturalPersons'];
+    control.push(this.initNaturalPerson());
+  }
+
+  removePerson(i: number) {
+    const control = <FormArray>this.EOForm.controls['naturalPersons'];
+    control.removeAt(i);
+  }
+
 
   reqGroupMatch(rg: RequirementGroup, cr: EoRelatedCriterion, form: FormGroup, formValues: any) {
 

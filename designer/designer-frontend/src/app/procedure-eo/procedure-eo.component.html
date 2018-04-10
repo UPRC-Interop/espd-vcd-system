@@ -180,6 +180,87 @@
         </form>
       </mat-expansion-panel>
 
+      <div formArrayName="naturalPersons">
+        <div *ngFor="let person of EOForm.controls.naturalPersons.controls; let i = index;">
+          <mat-expansion-panel expanded="true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                B: Information about representatives of the economic operator #{{ i + 1}}
+              </mat-panel-title>
+              <mat-panel-description>
+                <div class="add">
+                  <a (click)="addPerson()">+</a>
+                </div>
+                <div class="remove">
+                  <a (click)="removePerson(i)">-</a>
+                </div>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <div [formGroupName]="i">
+              <div class="eoContainer">
+                <div class="eo1">
+                  <mat-form-field class="eoField">
+                    <input formControlName="firstName" matInput placeholder="Name">
+                  </mat-form-field>
+                  <mat-form-field class="eoField">
+                    <input formControlName="birthDate" matInput placeholder="Date of Birth">
+                  </mat-form-field>
+                  <div class="postalAddress" formGroupName='postalAddress'>
+                    <mat-form-field class="eoField">
+                      <input formControlName="addressLine1" matInput placeholder="Street and Number">
+                    </mat-form-field>
+                    <mat-form-field class="eoField">
+                      <input formControlName="postCode" matInput placeholder="Postcode">
+                    </mat-form-field>
+                    <mat-form-field class="eoField">
+                      <input matInput placeholder="City" formControlName="city">
+                    </mat-form-field>
+                    <mat-form-field class="eoField">
+                      <mat-select formControlName="countryCode"
+                                  placeholder="Select Country">
+                        <mat-option>None</mat-option>
+                        <mat-option *ngFor="let country of countries" [value]="country.code">{{country.name}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="eo2">
+                  <mat-form-field class="eoField">
+                    <input formControlName="familyName" matInput placeholder="Last name">
+                  </mat-form-field>
+                  <mat-form-field class="eoField">
+                    <input formControlName="birthPlace" matInput placeholder="Place of Birth">
+                  </mat-form-field>
+                  <div class="contactingDetails" formGroupName="contactingDetails">
+                    <mat-form-field class="eoField">
+                      <input formControlName="emailAddress" matInput placeholder="Email">
+                    </mat-form-field>
+                    <mat-form-field class="eoField">
+                      <input formControlName="telephoneNumber" matInput placeholder="Telephone">
+                    </mat-form-field>
+                  </div>
+                  <mat-form-field class="eoField">
+                    <input formControlName="role" matInput placeholder="Position/Acting in the capacity of">
+                  </mat-form-field>
+                  <mat-form-field class="eoField">
+                    <input matInput placeholder="If needed, please provide detailed information on the representation">
+                  </mat-form-field>
+                  <!--<mat-form-field class="eoField">-->
+                  <!--<input matInput placeholder="Other number, if VAT not applicable">-->
+                  <!--</mat-form-field>-->
+                </div>
+              </div>
+            </div>
+
+
+            <!--<form [formGroup]="formC">-->
+            <!---->
+            <!--</form>-->
+
+          </mat-expansion-panel>
+        </div>
+      </div>
       <mat-expansion-panel expanded="true">
         <mat-expansion-panel-header>
           <mat-panel-title>
