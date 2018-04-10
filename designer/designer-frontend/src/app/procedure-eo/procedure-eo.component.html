@@ -204,7 +204,9 @@
                     <input formControlName="firstName" matInput placeholder="Name">
                   </mat-form-field>
                   <mat-form-field class="eoField">
-                    <input formControlName="birthDate" matInput placeholder="Date of Birth">
+                    <input formControlName="birthDate" matInput placeholder="Date of Birth" matInput [matDatepicker]="picker">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
                   </mat-form-field>
                   <div class="postalAddress" formGroupName='postalAddress'>
                     <mat-form-field class="eoField">
