@@ -5,22 +5,22 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class CriteriaEndpointTest {
-
-    private final CriteriaEndpoint criteriaEndpoint = new CriteriaEndpoint();
-
-//    @Before
-//    public void SetUp() throws Exception{
-//      Criteria criteria = new Criteria();
+//
+//    private final CriteriaEndpoint criteriaEndpoint = new CriteriaEndpoint();
+//
+////    @Before
+////    public void SetUp() throws Exception{
+////      Criteria criteria = new Criteria();
+////    }
+//
+//    @Test
+//    public void getPredefinedCriteria() throws RetrieverException {
+//        Assert.assertNotNull(criteriaEndpoint.getECertisCriteria());
 //    }
-
-    @Test
-    public void getPredefinedCriteria() throws RetrieverException {
-        Assert.assertNotNull(criteriaEndpoint.getECertisCriteria());
-    }
-
-    @Test
-    public void getECertisCriteria() throws RetrieverException {
-        Assert.assertNotNull(criteriaEndpoint.getPredefinedCriteria());
-    }
+//
+//    @Test
+//    public void getECertisCriteria() throws RetrieverException {
+//        Assert.assertNotNull(criteriaEndpoint.getPredefinedCriteria());
+//    }
 
 }

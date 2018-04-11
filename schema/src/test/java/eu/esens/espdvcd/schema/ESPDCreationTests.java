@@ -120,7 +120,7 @@ public class ESPDCreationTests {
     private String toXmlForV2(JAXBElement element) {
         try {
 
-            Marshaller marshaller = SchemaUtil.getMarashallerForV2();
+            Marshaller marshaller = SchemaUtil.V2.getMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
