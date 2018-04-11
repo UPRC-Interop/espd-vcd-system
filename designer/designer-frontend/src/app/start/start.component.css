@@ -2,6 +2,7 @@
   margin-bottom:20px;
   margin-top:20px;
   padding:20px;
+  border:1px solid rgba(0,0,0,0.1);
 }
 .mat-card-content {
   text-align:justify;

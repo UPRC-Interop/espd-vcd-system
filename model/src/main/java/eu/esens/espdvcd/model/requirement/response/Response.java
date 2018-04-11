@@ -8,22 +8,6 @@ package eu.esens.espdvcd.model.requirement.response;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property="responseDataType")
-@JsonSubTypes({
-        @JsonSubTypes.Type(value = IndicatorResponse.class, name = "INDICATOR"),
-        @JsonSubTypes.Type(value = DateResponse.class, name = "DATE") ,
-        @JsonSubTypes.Type(value = DescriptionResponse.class, name = "DESCRIPTION"),
-        @JsonSubTypes.Type(value = QuantityResponse.class, name = "QUANTITY"),
-        @JsonSubTypes.Type(value = QuantityYearResponse.class, name = "QUANTITY_YEAR"),
-        @JsonSubTypes.Type(value = QuantityIntegerResponse.class, name = "QUANTITY_INTEGER"),
-        @JsonSubTypes.Type(value = AmountResponse.class, name = "AMOUNT"),
-        @JsonSubTypes.Type(value = CountryCodeResponse.class, name = "CODE_COUNTRY"),
-        @JsonSubTypes.Type(value = PercentageResponse.class, name = "PERCENTAGE"),
-        @JsonSubTypes.Type(value = PeriodResponse.class, name = "PERIOD"),
-        @JsonSubTypes.Type(value = EvidenceURLResponse.class, name = "EVIDENCE_URL"),
-        @JsonSubTypes.Type(value = EvidenceURLCodeResponse.class, name = "CODE")
-})
-
 public abstract class Response {
 
     /**

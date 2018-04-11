@@ -1,5 +1,7 @@
 package eu.esens.espdvcd.model.requirement.response;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 
 /**
@@ -30,7 +32,7 @@ public class PeriodResponse extends DescriptionResponse implements Serializable 
     public PeriodResponse() {
     }
 
-    public PeriodResponse(String description) {
+    public PeriodResponse(@JsonProperty("period") String description) {
         this.description = description;
     }
 

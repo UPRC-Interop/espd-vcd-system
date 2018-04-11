@@ -56,3 +56,21 @@ mat-card {
 mat-checkbox {
   font-weight:bold;
 }
+
+
+.reductionCriteria {
+  display: flex;
+}
+
+.criterion-wrap {
+  flex:1;
+  padding: 20px;
+}
+
+.answer {
+  flex:2;
+}
+
+.mat-expansion-panel {
+  border:1px solid rgba(0,0,0,0.1);
+}

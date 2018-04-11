@@ -1,8 +1,15 @@
 package eu.esens.espdvcd.designer.endpoints;
 
+import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.Version;
+import com.fasterxml.jackson.databind.BeanDescription;
+import com.fasterxml.jackson.databind.SerializationConfig;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.deser.BeanDeserializer;
 import com.fasterxml.jackson.databind.module.SimpleAbstractTypeResolver;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.databind.ser.BeanPropertyWriter;
+import com.fasterxml.jackson.databind.ser.BeanSerializerModifier;
 import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.designer.exceptions.ValidationException;
 import eu.esens.espdvcd.designer.services.ESPDRequestService;
@@ -10,6 +17,7 @@ import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.RegulatedESPDRequest;
 import eu.esens.espdvcd.model.requirement.RequestRequirement;
 import eu.esens.espdvcd.model.requirement.Requirement;
+import eu.esens.espdvcd.model.requirement.ResponseRequirement;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import eu.esens.espdvcd.validator.ValidationResult;
 import org.xml.sax.SAXException;
@@ -33,6 +41,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class ESPDRequestEndpoint extends Endpoint {
     private final ESPDRequestService service;
@@ -42,11 +51,12 @@ public class ESPDRequestEndpoint extends Endpoint {
             LOGGER_DESERIALIZATION_ERROR = "Error occurred in ESPDResponseEndpoint while converting a JSON object to XML. ";
 
     public ESPDRequestEndpoint(ESPDRequestService service) {
+        super();
         this.service = service;
 
         SimpleModule requirementModule = new SimpleModule("RequirementModule", Version.unknownVersion());
         SimpleAbstractTypeResolver requestRequirementResolver = new SimpleAbstractTypeResolver()
-                .addMapping(Requirement.class, RequestRequirement.class);
+                .addMapping(Requirement.class, ResponseRequirement.class); //Fix Response Exception
         requirementModule.setAbstractTypes(requestRequirementResolver);
         MAPPER.registerModule(requirementModule);
     }

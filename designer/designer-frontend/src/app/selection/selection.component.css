@@ -12,6 +12,9 @@
   background-color:#3F51B5;
 }
 
+/*.mat-expansion-panel {*/
+  /*border:1px solid rgba(0,0,0,0.1);*/
+/*}*/
 
 mat-expansion-panel-header:hover {
   background-color:#3F51B5;
@@ -47,6 +50,7 @@ button {
 mat-card {
   margin-bottom:10px;
   margin-top:10px;
+  border:1px solid rgba(0,0,0,0.1);
 }
 
 mat-checkbox {

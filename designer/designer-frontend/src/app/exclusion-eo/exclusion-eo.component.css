@@ -46,19 +46,24 @@ button {
 
 mat-card {
   margin-bottom:10px;
+  border:1px solid rgba(0,0,0,0.1);
 }
 
-/*.exclusionCriteria {*/
-  /*display:flex;*/
-  /*justify-content: center;*/
-  /*flex-direction: row;*/
-  /*align-items: center;*/
-/*}*/
-/*.criteria {*/
-  /*flex:1;*/
-  /*order:1;*/
-/*}*/
-/*.answer {*/
-  /*flex:1;*/
-  /*order:1;*/
+.exclusionCriteria {
+  display: flex;
+}
+
+.criterion-wrap {
+  flex:1;
+  padding: 20px;
+}
+
+.answer {
+  flex:2;
+}
+
+
+
+/*.mat-expansion-panel {*/
+  /*border:1px solid rgba(0,0,0,0.1);*/
 /*}*/

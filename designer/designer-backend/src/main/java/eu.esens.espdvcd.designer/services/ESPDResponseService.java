@@ -13,6 +13,6 @@ import java.io.InputStream;
 
 public interface ESPDResponseService {
     ESPDResponse XMLFileToObjectTransformer(File XML) throws RetrieverException, BuilderException, ValidationException, FileNotFoundException, JAXBException, SAXException;
-    InputStream ResponseToXMLStreamTransformer(ESPDResponse request);
-    String ResponseToXMLStringTransformer(ESPDResponse request);
+    InputStream ResponseToXMLStreamTransformer(ESPDResponse response);
+    String ResponseToXMLStringTransformer(ESPDResponse response);
 }

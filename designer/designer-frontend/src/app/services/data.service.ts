@@ -353,9 +353,9 @@ export class DataService {
 
   /* ================================= CA REUSE ESPD REQUEST ====================== */
 
-  CAReuseESPD(filesToUpload: File[], form: NgForm) {
+  ReuseESPD(filesToUpload: File[], form: NgForm, role: string) {
     // TODO rename to ReuseESPD, if isCA... if isEO... etc.
-    if (filesToUpload.length > 0) {
+    if (filesToUpload.length > 0 && role == 'CA') {
       this.APIService.postFile(filesToUpload)
         .then(res => {
           // res.cadetails=this.CADetails;
@@ -374,8 +374,33 @@ export class DataService {
           this.selectionBCriteria = this.filterSelectionCriteria(this.SELECTION_ECONOMIC_REGEXP, res.fullCriterionList);
           this.selectionCCriteria = this.filterSelectionCriteria(this.SELECTION_TECHNICAL_REGEXP, res.fullCriterionList);
           this.selectionBCriteria = this.filterSelectionCriteria(this.SELECTION_CERTIFICATES_REGEXP, res.fullCriterionList);
-          console.log(this.exclusionACriteria);
-          console.log(this.selectionACriteria);
+          console.log(res);
+
+
+        })
+        .catch(err => err);
+    } else if (filesToUpload.length > 0 && role == 'EO') {
+      this.APIService.postFileResponse(filesToUpload)
+        .then(res => {
+          // res.cadetails=this.CADetails;
+          // console.log(res.fullCriterionList);
+          // console.log(res.cadetails);
+          this.CADetails = res.cadetails;
+          this.selectedCountry = this.CADetails.cacountry;
+          this.EODetails = res.eodetails;
+          console.log(this.EODetails);
+          this.selectedEOCountry = this.EODetails.postalAddress.countryCode;
+
+
+          this.exclusionACriteria = this.filterExclusionCriteria(this.EXCLUSION_CONVICTION_REGEXP, res.fullCriterionList);
+          this.exclusionBCriteria = this.filterExclusionCriteria(this.EXCLUSION_CONTRIBUTION_REGEXP, res.fullCriterionList);
+          this.exclusionCCriteria = this.filterExclusionCriteria(this.EXCLUSION_SOCIAL_BUSINESS_MISCONDUCT_CONFLICT_REGEXP, res.fullCriterionList);
+          this.exclusionBCriteria = this.filterExclusionCriteria(this.EXCLUSION_NATIONAL_REGEXP, res.fullCriterionList);
+
+          this.selectionACriteria = this.filterSelectionCriteria(this.SELECTION_SUITABILITY_REGEXP, res.fullCriterionList);
+          this.selectionBCriteria = this.filterSelectionCriteria(this.SELECTION_ECONOMIC_REGEXP, res.fullCriterionList);
+          this.selectionCCriteria = this.filterSelectionCriteria(this.SELECTION_TECHNICAL_REGEXP, res.fullCriterionList);
+          this.selectionBCriteria = this.filterSelectionCriteria(this.SELECTION_CERTIFICATES_REGEXP, res.fullCriterionList);
           console.log(res);
 
 
@@ -389,6 +414,13 @@ export class DataService {
     }
 
   }
+
+  // eoDetailsFormUpdate(form: FormGroup) {
+  //   form.patchValue({
+  //     'name': this.EODetails.name
+  //   });
+  // }
+
 
   startESPD(form: NgForm) {
     // console.log(form);

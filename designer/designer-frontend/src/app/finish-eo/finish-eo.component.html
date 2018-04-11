@@ -22,14 +22,17 @@
         </mat-card>
         <mat-card *ngFor="let cr of reductionCriteria; let i = index">
           <div class="reductionCriteria">
-            <h4>The economic operator declares that:</h4>
-            <div class="criteria">
-              <h4>{{cr.name}}</h4>
-              <div class="critDesc">{{cr.description}}</div>
-              <!--<div class="eCertis">-->
+
+            <div class="criterion-wrap">
+              <div class="criteria">
+                <h4>The economic operator declares that:</h4>
+                <h4>{{cr.name}}</h4>
+                <div class="critDesc">{{cr.description}}</div>
+                <!--<div class="eCertis">-->
                 <!--<h5>eCertis Information ...</h5>-->
                 <!--<div class="eCertDesc">no information...</div>-->
-              <!--</div>-->
+                <!--</div>-->
+              </div>
             </div>
             <div class="answer">
               <app-criterion [criterion]="cr" [form]="form.controls" [indicator]="true"></app-criterion>

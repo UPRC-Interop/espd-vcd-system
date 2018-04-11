@@ -35,8 +35,16 @@
   background-color:#3F51B5;
 }
 
+.mat-expansion-panel {
+  border:1px solid rgba(0,0,0,0.1);
+}
+
 .mat.expansion-panel:hover{
   background:#3F51B5;
+}
+
+mat-card {
+  border:1px solid rgba(0,0,0,0.1);
 }
 
 mat-expansion-panel-header:hover {
