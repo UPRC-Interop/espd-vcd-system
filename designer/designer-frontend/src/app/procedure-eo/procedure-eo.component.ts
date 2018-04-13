@@ -147,6 +147,10 @@ export class ProcedureEoComponent implements OnInit, OnChanges {
     control.removeAt(i);
   }
 
+  getNaturalPersonFormData() {
+    return <FormArray>this.EOForm.controls['naturalPersons'];
+  }
+
 
   /* ====================================================== Getting values from Form ======================================*/
 
