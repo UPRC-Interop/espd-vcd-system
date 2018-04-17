@@ -4,25 +4,20 @@ import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDResponse;
-
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.ResponseRequirement;
-import eu.esens.espdvcd.model.requirement.response.DescriptionResponse;
-import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
-
-import java.io.InputStream;
-import java.nio.file.Paths;
-
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
 import eu.esens.espdvcd.retriever.criteria.ECertisCriteriaExtractor;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
+import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.rules.Timeout;
+
+import java.io.InputStream;
 
 public class BuilderESPDTest {
 
@@ -138,14 +133,14 @@ public class BuilderESPDTest {
     public void createSimpleESPDRequestAndApplyEcertisData() throws BuilderException, RetrieverException {
 
         CriteriaExtractor extractor = new ECertisCriteriaExtractor();
-        ESPDRequest req = BuilderFactory.getModelBuilder().createESPDRequest();
+        ESPDRequest req = BuilderFactory.V1.getModelBuilder().createRegulatedESPDRequest();
         req.setCriterionList(extractor.getFullList());
-        System.out.println(BuilderFactory.getDocumentBuilderFor(req).theXML);
+        System.out.println(BuilderFactory.V1.getDocumentBuilderFor(req).theXML);
     }
 
     @Test
     public void createESPDResponseWithAnEmptyResponse() throws Exception {
-        ESPDResponse resp = BuilderFactory.getModelBuilder().createESPDResponse();
+        ESPDResponse resp = BuilderFactory.V1.getModelBuilder().createRegulatedESPDResponse();
         SelectableCriterion cri = new SelectableCriterion();
         cri.setSelected(true);
         cri.setDescription("Test Empty Description");
@@ -180,7 +175,7 @@ public class BuilderESPDTest {
 
         resp.getFullCriterionList().add(cri);
 
-        ESPDResponseType et = BuilderFactory.getDocumentBuilderFor(resp).createXML(resp);
+        ESPDResponseType et = BuilderFactory.V1.getDocumentBuilderFor(resp).createXML(resp);
         et.getCriterion().get(0).getRequirementGroup().get(0).getRequirement().forEach(r -> {
             Assert.assertNotNull(r.getResponse().get(0));
             Assert.assertNull(r.getResponse().get(0).getID());
@@ -198,6 +193,7 @@ public class BuilderESPDTest {
         System.out.println(BuilderFactory.V2.getDocumentBuilderFor(req).theXML);
     }
 
+    @Ignore
     @Test
     public void testImportFromForRegulatedV2ESPDRequestArtefact() throws BuilderException, RetrieverException {
 

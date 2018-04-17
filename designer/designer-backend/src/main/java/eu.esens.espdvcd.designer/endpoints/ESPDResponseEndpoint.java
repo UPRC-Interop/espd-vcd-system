@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.module.SimpleAbstractTypeResolver;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import eu.esens.espdvcd.builder.exception.BuilderException;
+import eu.esens.espdvcd.designer.deserialiser.RequirementDeserialiser;
 import eu.esens.espdvcd.designer.exceptions.ValidationException;
 import eu.esens.espdvcd.designer.services.ESPDResponseService;
 import eu.esens.espdvcd.model.ESPDResponse;
@@ -39,13 +40,17 @@ public class ESPDResponseEndpoint extends Endpoint {
             LOGGER_DESERIALIZATION_ERROR = "Error occurred in ESPDResponseEndpoint while converting a JSON object to XML. ";
 
     public ESPDResponseEndpoint(ESPDResponseService service) {
+        super();
         this.service = service;
 
         SimpleModule requirementModule = new SimpleModule("RequirementModule", Version.unknownVersion());
         SimpleAbstractTypeResolver responseRequirementResolver = new SimpleAbstractTypeResolver()
                 .addMapping(Requirement.class, ResponseRequirement.class);
         requirementModule.setAbstractTypes(responseRequirementResolver);
-        MAPPER.registerModule(requirementModule);
+//        MAPPER.registerModule(requirementModule); //Fix for not using the deserializer
+        SimpleModule desrModule = new SimpleModule();
+        desrModule.addDeserializer(Requirement.class,new RequirementDeserialiser());
+        MAPPER.registerModule(desrModule);
     }
 
     @Override
