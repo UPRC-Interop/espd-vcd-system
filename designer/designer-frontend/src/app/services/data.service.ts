@@ -80,9 +80,6 @@ export class DataService {
   public EOForm: FormGroup;
 
 
-
-
-
   constructor(private APIService: ApicallService) {
 
   }
@@ -408,6 +405,7 @@ export class DataService {
           this.selectedCountry = this.CADetails.cacountry;
           this.EODetails = res.eodetails;
           console.log(this.EODetails);
+          console.log(this.EODetails.naturalPersons);
           this.selectedEOCountry = this.EODetails.postalAddress.countryCode;
 
           // Fill in EoDetails Form
@@ -428,7 +426,8 @@ export class DataService {
           this.eoRelatedACriteria = this.filterEoRelatedCriteria(this.EO_RELATED_A_REGEXP, res.fullCriterionList);
           this.eoRelatedCCriteria = this.filterEoRelatedCriteria(this.EO_RELATED_C_REGEXP, res.fullCriterionList);
           this.eoRelatedDCriteria = this.filterEoRelatedCriteria(this.EO_RELATED_D_REGEXP, res.fullCriterionList);
-          console.log(this.eoRelatedACriteria);
+          // console.log(this.eoRelatedACriteria);
+
           console.log(res);
 
 
@@ -458,7 +457,7 @@ export class DataService {
         'emailAddress': this.EODetails.contactingDetails.emailAddress,
         'telephoneNumber': this.EODetails.contactingDetails.telephoneNumber,
       },
-      'naturalPersons': this.EODetails.naturalPerson,
+      'naturalPersons': this.EODetails.naturalPersons,
       'id': this.EODetails.id,
       'webSiteURI': this.EODetails.webSiteURI
     });

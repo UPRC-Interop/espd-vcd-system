@@ -69,15 +69,7 @@ export class ProcedureEoComponent implements OnInit, OnChanges {
         } else if (this.dataService.isImportESPD) {
           console.log('This is import');
           this.eoRelatedACriteria = this.dataService.eoRelatedACriteria;
-          // this.eoRelatedACriteria = res;
-          // TODO patchValue to EoForm
-          if (this.dataService.EODetails) {
-            console.log('this is before patch values');
-            console.log(this.dataService.EODetails);
-
-          }
-
-
+          console.log(this.dataService.eoRelatedACriteria);
         }
 
 
