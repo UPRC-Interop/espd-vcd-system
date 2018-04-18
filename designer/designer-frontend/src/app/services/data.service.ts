@@ -34,6 +34,9 @@ export class DataService {
   SELECTION_CERTIFICATES_REGEXP: RegExp = /^CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY.CERTIFICATES.+/;
 
   EO_RELATED_REGEXP: RegExp = /(?!.*MEETS_THE_OBJECTIVE*)^CRITERION.OTHER.EO_DATA.+/;
+  EO_RELATED_A_REGEXP: RegExp = /(^CRITERION.OTHER.EO_DATA.REGISTERED_IN_OFFICIAL_LIST*)|(^CRITERION.OTHER.EO_DATA.SHELTERED_WORKSHOP*)|(^CRITERION.OTHER.EO_DATA.TOGETHER_WITH_OTHERS*)/;
+  EO_RELATED_C_REGEXP: RegExp = /^CRITERION.OTHER.EO_DATA.RELIES_ON_OTHER_CAPACITIES*/;
+  EO_RELATED_D_REGEXP: RegExp = /^CRITERION.OTHER.EO_DATA.SUBCONTRACTS_WITH_THIRD_PARTIES*/;
   REDUCTION_OF_CANDIDATES_REGEXP: RegExp = /^CRITERION.OTHER.EO_DATA.MEETS_THE_OBJECTIVE*/;
 
 
@@ -69,9 +72,16 @@ export class DataService {
 
   isCA: boolean = false;
   isEO: boolean = false;
+  isImportESPD: boolean = false;
+  isCreateResponse: boolean = false;
   receivedNoticeNumber: string;
   selectedCountry: string = '';
   selectedEOCountry: string = '';
+  public EOForm: FormGroup;
+
+
+
+
 
   constructor(private APIService: ApicallService) {
 
@@ -169,6 +179,16 @@ export class DataService {
 
 
   filterSelectionCriteria(regex: RegExp, criteriaList: FullCriterion[]): SelectionCriteria[] {
+    const filteredList: FullCriterion[] = [];
+    for (const fullCriterion of criteriaList) {
+      if (regex.test(fullCriterion.typeCode)) {
+        filteredList.push(fullCriterion);
+      }
+    }
+    return filteredList;
+  }
+
+  filterEoRelatedCriteria(regex: RegExp, criteriaList: FullCriterion[]): EoRelatedCriterion[] {
     const filteredList: FullCriterion[] = [];
     for (const fullCriterion of criteriaList) {
       if (regex.test(fullCriterion.typeCode)) {
@@ -354,7 +374,6 @@ export class DataService {
   /* ================================= CA REUSE ESPD REQUEST ====================== */
 
   ReuseESPD(filesToUpload: File[], form: NgForm, role: string) {
-    // TODO rename to ReuseESPD, if isCA... if isEO... etc.
     if (filesToUpload.length > 0 && role == 'CA') {
       this.APIService.postFile(filesToUpload)
         .then(res => {
@@ -391,6 +410,10 @@ export class DataService {
           console.log(this.EODetails);
           this.selectedEOCountry = this.EODetails.postalAddress.countryCode;
 
+          // Fill in EoDetails Form
+          this.eoDetailsFormUpdate();
+          // console.log(this.EOForm.value);
+
 
           this.exclusionACriteria = this.filterExclusionCriteria(this.EXCLUSION_CONVICTION_REGEXP, res.fullCriterionList);
           this.exclusionBCriteria = this.filterExclusionCriteria(this.EXCLUSION_CONTRIBUTION_REGEXP, res.fullCriterionList);
@@ -401,6 +424,11 @@ export class DataService {
           this.selectionBCriteria = this.filterSelectionCriteria(this.SELECTION_ECONOMIC_REGEXP, res.fullCriterionList);
           this.selectionCCriteria = this.filterSelectionCriteria(this.SELECTION_TECHNICAL_REGEXP, res.fullCriterionList);
           this.selectionBCriteria = this.filterSelectionCriteria(this.SELECTION_CERTIFICATES_REGEXP, res.fullCriterionList);
+
+          this.eoRelatedACriteria = this.filterEoRelatedCriteria(this.EO_RELATED_A_REGEXP, res.fullCriterionList);
+          this.eoRelatedCCriteria = this.filterEoRelatedCriteria(this.EO_RELATED_C_REGEXP, res.fullCriterionList);
+          this.eoRelatedDCriteria = this.filterEoRelatedCriteria(this.EO_RELATED_D_REGEXP, res.fullCriterionList);
+          console.log(this.eoRelatedACriteria);
           console.log(res);
 
 
@@ -415,11 +443,26 @@ export class DataService {
 
   }
 
-  // eoDetailsFormUpdate(form: FormGroup) {
-  //   form.patchValue({
-  //     'name': this.EODetails.name
-  //   });
-  // }
+  eoDetailsFormUpdate() {
+    this.EOForm.patchValue({
+      'name': this.EODetails.name,
+      'smeIndicator': this.EODetails.smeIndicator,
+      'postalAddress': {
+        'addressLine1': this.EODetails.postalAddress.addressLine1,
+        'postCode': this.EODetails.postalAddress.postCode,
+        'city': this.EODetails.postalAddress.city,
+        'countryCode': this.selectedEOCountry,
+      },
+      'contactingDetails': {
+        'contactPointName': this.EODetails.contactingDetails.contactPointName,
+        'emailAddress': this.EODetails.contactingDetails.emailAddress,
+        'telephoneNumber': this.EODetails.contactingDetails.telephoneNumber,
+      },
+      'naturalPersons': this.EODetails.naturalPerson,
+      'id': this.EODetails.id,
+      'webSiteURI': this.EODetails.webSiteURI
+    });
+  }
 
 
   startESPD(form: NgForm) {
@@ -442,6 +485,14 @@ export class DataService {
         this.selectedEOCountry = form.value.EOCountry;
 
       }
+    }
+
+    if (form.value.chooseRole == 'EO' && form.value.eoOptions == 'importESPD') {
+      this.isImportESPD = true;
+      this.isCreateResponse = false;
+    } else if (form.value.chooseRole == 'EO' && form.value.eoOptions == 'createResponse') {
+      this.isImportESPD = false;
+      this.isCreateResponse = true;
     }
   }
 

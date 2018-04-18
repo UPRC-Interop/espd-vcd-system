@@ -27,9 +27,29 @@ export class ProcedureEoComponent implements OnInit, OnChanges {
   eoRelatedDCriteria: EoRelatedCriterion[] = null;
 
   constructor(public dataService: DataService) {
+    this.EOForm = new FormGroup({
+      'name': new FormControl(this.dataService.EODetails.name),
+      'smeIndicator': new FormControl(this.dataService.EODetails.smeIndicator),
+      'postalAddress': new FormGroup({
+        'addressLine1': new FormControl(),
+        'postCode': new FormControl(),
+        'city': new FormControl(),
+        'countryCode': new FormControl(this.dataService.selectedEOCountry),
+      }),
+      'contactingDetails': new FormGroup({
+        'contactPointName': new FormControl(),
+        'emailAddress': new FormControl(),
+        'telephoneNumber': new FormControl(),
+      }),
+      'naturalPersons': new FormArray([this.initNaturalPerson()]),
+      'id': new FormControl(),
+      'webSiteURI': new FormControl()
+    });
+    this.dataService.EOForm = this.EOForm;
   }
 
   ngOnInit() {
+
 
     this.dataService.getEoRelatedCriteria()
       .then(res => {
@@ -42,7 +62,25 @@ export class ProcedureEoComponent implements OnInit, OnChanges {
 
     this.dataService.getEoRelatedACriteria()
       .then(res => {
-        this.eoRelatedACriteria = res;
+
+        if (this.dataService.isCreateResponse) {
+          this.eoRelatedACriteria = res;
+          console.log('This is create response');
+        } else if (this.dataService.isImportESPD) {
+          console.log('This is import');
+          this.eoRelatedACriteria = this.dataService.eoRelatedACriteria;
+          // this.eoRelatedACriteria = res;
+          // TODO patchValue to EoForm
+          if (this.dataService.EODetails) {
+            console.log('this is before patch values');
+            console.log(this.dataService.EODetails);
+
+          }
+
+
+        }
+
+
         this.formA = this.dataService.createEORelatedCriterionForm(this.eoRelatedACriteria);
       })
       .catch(err => {
@@ -66,26 +104,6 @@ export class ProcedureEoComponent implements OnInit, OnChanges {
       .catch(err => {
         console.log(err);
       });
-
-
-    this.EOForm = new FormGroup({
-      'name': new FormControl(this.dataService.EODetails.name),
-      'smeIndicator': new FormControl(this.dataService.EODetails.smeIndicator),
-      'postalAddress': new FormGroup({
-        'addressLine1': new FormControl(),
-        'postCode': new FormControl(),
-        'city': new FormControl(),
-        'countryCode': new FormControl(this.dataService.selectedEOCountry),
-      }),
-      'contactingDetails': new FormGroup({
-        'contactPointName': new FormControl(),
-        'emailAddress': new FormControl(),
-        'telephoneNumber': new FormControl(),
-      }),
-      'naturalPersons': new FormArray([this.initNaturalPerson()]),
-      'id': new FormControl(),
-      'webSiteURI': new FormControl()
-    });
 
 
     this.dataService.getCountries()
