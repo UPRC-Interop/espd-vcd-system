@@ -6,6 +6,7 @@ import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import eu.esens.espdvcd.schema.SchemaUtil;
+import eu.esens.espdvcd.schema.SchemaVersion;
 import test.x.ubl.pre_award.qualificationapplicationrequest.QualificationApplicationRequestType;
 
 import javax.xml.bind.JAXBException;
@@ -74,7 +75,8 @@ public class ModelBuilderV2 extends ModelBuilder {
         }
 
         // Apply workaround
-        req.getFullCriterionList().forEach(this::applyCriteriaWorkaround);
+        // req.getFullCriterionList().forEach(this::applyCriteriaWorkaround);
+        req.getFullCriterionList().forEach(sc -> applyCriteriaWorkaround(sc, SchemaVersion.V2));
 
         return req;
     }

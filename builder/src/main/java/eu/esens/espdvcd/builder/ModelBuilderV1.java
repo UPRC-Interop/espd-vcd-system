@@ -7,6 +7,7 @@ import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
 import eu.esens.espdvcd.retriever.criteria.PredefinedESPDCriteriaExtractor;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import eu.esens.espdvcd.schema.SchemaUtil;
+import eu.esens.espdvcd.schema.SchemaVersion;
 import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
 import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
 
@@ -192,7 +193,8 @@ public class ModelBuilderV1 extends ModelBuilder {
         }
 
         // Apply workaround
-        req.getFullCriterionList().forEach(this::applyCriteriaWorkaround);
+        // req.getFullCriterionList().forEach(this::applyCriteriaWorkaround);
+        req.getFullCriterionList().forEach(sc -> applyCriteriaWorkaround(sc, SchemaVersion.V1));
 
         return req;
     }
@@ -268,7 +270,8 @@ public class ModelBuilderV1 extends ModelBuilder {
         }
 
         // Apply workaround
-        res.getFullCriterionList().forEach(this::applyCriteriaWorkaround);
+        // res.getFullCriterionList().forEach(this::applyCriteriaWorkaround);
+        res.getFullCriterionList().forEach(sc -> applyCriteriaWorkaround(sc, SchemaVersion.V1));
 
         return res;
     }
@@ -299,7 +302,7 @@ public class ModelBuilderV1 extends ModelBuilder {
 
             // Start with the convenience methods provided by JAXB. If there are
             // performance issues we will switch back to the JAXB API Usage
-            return SchemaUtil.getUnmarshaller().unmarshal(new StreamSource(is), ESPDRequestType.class).getValue();
+            return SchemaUtil.V1.getUnmarshaller().unmarshal(new StreamSource(is), ESPDRequestType.class).getValue();
 
     }
 
@@ -315,7 +318,7 @@ public class ModelBuilderV1 extends ModelBuilder {
         try {
             // Start with the convenience methods provided by JAXB. If there are
             // performance issues we will switch back to the JAXB API Usage
-            return SchemaUtil.getUnmarshaller().unmarshal(new StreamSource(is), ESPDResponseType.class).getValue();
+            return SchemaUtil.V1.getUnmarshaller().unmarshal(new StreamSource(is), ESPDResponseType.class).getValue();
         } catch (JAXBException ex) {
             Logger.getLogger(ModelBuilderV1.class.getName()).log(Level.SEVERE, null, ex);
             return null;

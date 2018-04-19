@@ -77,9 +77,9 @@ public class DocumentBuilderV2 {
         reqType.setIssueTime(new IssueTimeType());
         reqType.getIssueTime().setValue(LocalTime.now());
 
-        reqType.setProfileID(createBIIProfileIdType(getProfileID()));
+        reqType.setProfileID(createCENBIIProfileIdType(getProfileID()));
+        reqType.setUUID(SchemaFactory.V2.ESPD_REQUEST.createISOIECUUIDType(UUID.randomUUID().toString()));
 
-        reqType.setID(SchemaFactory.V2.ESPD_REQUEST.createISOIECIDType(UUID.randomUUID().toString()));
         return reqType;
     }
 
@@ -99,9 +99,10 @@ public class DocumentBuilderV2 {
         resType.setIssueTime(new IssueTimeType());
         resType.getIssueTime().setValue(LocalTime.now());
 
-        resType.setProfileID(createBIIProfileIdType(getProfileID()));
+        resType.setProfileID(createCENBIIProfileIdType(getProfileID()));
+        // FIXME id is mandatory also here
+        resType.setUUID(SchemaFactory.V2.ESPD_RESPONSE.createISOIECUUIDType(UUID.randomUUID().toString()));
 
-        resType.setID(SchemaFactory.V2.ESPD_RESPONSE.createISOIECIDType(UUID.randomUUID().toString()));
         return resType;
     }
 
@@ -137,21 +138,16 @@ public class DocumentBuilderV2 {
      * @param id
      * @return
      */
-    private ProfileIDType createBIIProfileIdType(String id) {
-
+    private ProfileIDType createCENBIIProfileIdType(String id) {
         ProfileIDType pid = new ProfileIDType();
-
-        //pid.setSchemeName("CustomizationID");
-        pid.setSchemeAgencyID("BII");
-        //pid.setSchemeVersionID("3.0");
+        pid.setSchemeAgencyID("CEN-BII");
+        pid.setSchemeVersionID("1.0");
         pid.setValue(id);
-
         return pid;
-
     }
 
     protected String getProfileID() {
-        return "undefined";
+        return "41";
     }
 
 }

@@ -193,15 +193,26 @@ public class BuilderESPDTest {
         System.out.println(BuilderFactory.V2.getDocumentBuilderFor(req).theXML);
     }
 
-    @Ignore
-    @Test
-    public void testImportFromForRegulatedV2ESPDRequestArtefact() throws BuilderException, RetrieverException {
-
-        ESPDRequest request = BuilderFactory.V2.getModelBuilder().importFrom(
-                getClass().getResourceAsStream("/regulatedespdrequestv2_2_4_2018.xml")
-        ).createRegulatedESPDRequest();
-
-    }
-
+//    @Test
+//    public void testImportFromForRegulatedV2ESPDRequestArtefact() throws BuilderException, RetrieverException {
+//
+//        CriteriaExtractor extractor = new ECertisCriteriaExtractor();
+//        ESPDRequest req = BuilderFactory.V2.getModelBuilder().importFrom(
+//                getClass().getResourceAsStream("/regulatedespdrequestv2_19_4_2018.xml")
+//        ).createRegulatedESPDRequest();
+//        req.setCriterionList(extractor.getFullList());
+//        System.out.println(BuilderFactory.V2.getDocumentBuilderFor(req).theXML);
+//    }
+//
+//    @Test
+//    public void testImportFromForRegulatedV1ESPDRequestArtefact() throws BuilderException, RetrieverException {
+//
+//        CriteriaExtractor extractor = new ECertisCriteriaExtractor();
+//        ESPDRequest req = BuilderFactory.V1.getModelBuilder().importFrom(
+//                getClass().getResourceAsStream("/regulatedespdrequestv2_19_4_2018.xml")
+//        ).createRegulatedESPDRequest();
+//        req.setCriterionList(extractor.getFullList());
+//        System.out.println(BuilderFactory.V1.getDocumentBuilderFor(req).theXML);
+//    }
 
 }

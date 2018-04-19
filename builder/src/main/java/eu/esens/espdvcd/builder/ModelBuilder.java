@@ -2,7 +2,9 @@ package eu.esens.espdvcd.builder;
 
 import eu.esens.espdvcd.codelist.CodelistsV1;
 import eu.esens.espdvcd.model.*;
-
+import eu.esens.espdvcd.schema.SchemaVersion;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.io.BufferedInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -52,7 +54,7 @@ abstract class ModelBuilder {
         return new ArrayList<>();
     }
 
-    protected void applyCriteriaWorkaround(Criterion c) {
+    protected void applyCriteriaWorkaround(Criterion c, SchemaVersion sv) {
 
 //        if (c.getTypeCode().equals("SELECTION.ECONOMIC_FINANCIAL_STANDING")
 //                || c.getTypeCode().equals("DATA_ON_ECONOMIC_OPERATOR")) {
@@ -60,7 +62,16 @@ abstract class ModelBuilder {
             String oldName = c.getName();
             c.setDescription(oldName);
             // Since we have no name, we will add the Criteria type name as Criterion Name
-            c.setName(CodelistsV1.CriteriaType.getValueForId(c.getTypeCode()) + " (No Name)");
+            switch (sv) {
+                case V1:
+                    c.setName(CodelistsV1.CriteriaType.getValueForId(c.getTypeCode()) + " (No Name)");
+                    break;
+                case V2:
+                    c.setName(CodelistsV1.CriteriaType.getValueForId(c.getTypeCode()) + " (No Name)");
+                    break;
+                default:
+                    Logger.getLogger(ModelBuilder.class.getName()).log(Level.SEVERE, "Error... Unknown schema version");
+            }
 //                System.out.println("Workaround for: "+c.getID() +" "+c.getDescription());
         }
 //        }

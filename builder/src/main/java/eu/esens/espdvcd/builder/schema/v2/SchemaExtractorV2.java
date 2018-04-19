@@ -361,6 +361,14 @@ public interface SchemaExtractorV2 {
         return versionID;
     }
 
+    // (2.0.1) updated by KR_1-4-2018
+    default IDType createISOIECIDType(String id) {
+        IDType reqGroupIDType = createCustomSchemeIDIDType(id, "ISO/IEC 9834-8:2008 - 4UUID");
+        reqGroupIDType.setSchemeAgencyName("DG GROW (European Commission)");
+        reqGroupIDType.setSchemeVersionID("2.0");
+        return reqGroupIDType;
+    }
+
     /**
      * (2.0.1) updated by KR_1-4-2018
      * replaces {@link eu.esens.espdvcd.builder.schema.v1.SchemaExtractorV1#createCriterionRelatedIDType(String)}
@@ -370,12 +378,14 @@ public interface SchemaExtractorV2 {
         return reqGroupIDType;
     }
 
-    // (2.0.1) updated by KR_1-4-2018
-    default IDType createISOIECIDType(String id) {
-        IDType reqGroupIDType = createCustomSchemeIDIDType(id, "ISO/IEC 9834-8:2008 - 4UUID");
-        reqGroupIDType.setSchemeAgencyName("DG GROW (European Commission)");
-        reqGroupIDType.setSchemeVersionID("2.0");
-        return reqGroupIDType;
+    // (2.0.1) updated by KR_19-4-2018
+    default UUIDType createISOIECUUIDType(String id) {
+        UUIDType uuidType = new UUIDType();
+        uuidType.setSchemeID("ISO/IEC 9834-8:2008 - 4UUID");
+        uuidType.setSchemeAgencyName("EU-COM-GROW");
+        uuidType.setSchemeVersionID("2.0");
+        uuidType.setValue(id);
+        return uuidType;
     }
 
     // (2.0.1) updated by KR_1-4-2018
@@ -407,7 +417,7 @@ public interface SchemaExtractorV2 {
         CustomizationIDType cid = new CustomizationIDType();
         cid.setSchemeName("CustomizationID");
         cid.setSchemeAgencyID("CEN-BII");
-        cid.setSchemeVersionID("3.0");
+        cid.setSchemeVersionID("1.0");
         cid.setValue(id);
         return cid;
     }

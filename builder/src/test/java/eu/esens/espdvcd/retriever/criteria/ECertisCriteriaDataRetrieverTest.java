@@ -1,4 +1,4 @@
-package eu.esens.espdvcd.retriever;
+package eu.esens.espdvcd.retriever.criteria;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
