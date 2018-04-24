@@ -1,5 +1,6 @@
 import {LegislationReference} from './legislationReference.model';
 import {RequirementGroup} from './requirementGroup.model';
+import {RequirementResponse} from './requirement-response.model';
 
 export class EoRelatedCriterion {
   typeCode: string;
@@ -9,4 +10,5 @@ export class EoRelatedCriterion {
   legislationReference: LegislationReference;
   requirementGroups: RequirementGroup[];
   id: string;
+  response?: RequirementResponse;
 }

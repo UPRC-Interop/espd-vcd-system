@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit} from '@angular/core';
 import {DataService} from '../services/data.service';
 
 @Component({
@@ -6,14 +6,18 @@ import {DataService} from '../services/data.service';
   templateUrl: './root.component.html',
   styleUrls: ['./root.component.css']
 })
-export class RootComponent implements OnInit {
+export class RootComponent implements OnInit, OnChanges {
 
   isLinear = true;
+  // eoRelatedFormA = this.dataService.eoRelatedACriteriaForm;
 
   constructor(public dataService: DataService) {
   }
 
   ngOnInit() {
+  }
+
+  ngOnChanges() {
   }
 
 }

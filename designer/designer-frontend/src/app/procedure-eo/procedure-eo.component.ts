@@ -1,4 +1,4 @@
-import {Component, OnChanges, OnInit, SimpleChange, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChange, SimpleChanges} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {ProcedureType} from '../model/procedureType.model';
 import {Country} from '../model/country.model';
@@ -15,16 +15,21 @@ import {RequirementResponse} from '../model/requirement-response.model';
 export class ProcedureEoComponent implements OnInit, OnChanges {
 
   public EOForm: FormGroup;
-  public formA = new FormGroup({});
-  public formC = new FormGroup({});
-  public formD = new FormGroup({});
+  // public formA = new FormGroup({});
+  @Input() formA: FormGroup;
+  @Input() formD: FormGroup;
+  @Input() formC: FormGroup;
+  // public formC = new FormGroup({});
+  // public formD = new FormGroup({});
+  test = true;
 
   countries: Country[] = null;
   procedureTypes: ProcedureType[] = null;
   eoRelatedCriteria: EoRelatedCriterion[] = null;
-  eoRelatedACriteria: EoRelatedCriterion[] = null;
-  eoRelatedCCriteria: EoRelatedCriterion[] = null;
-  eoRelatedDCriteria: EoRelatedCriterion[] = null;
+  // eoRelatedACriteria: EoRelatedCriterion[] = null;
+  @Input() eoRelatedACriteria: EoRelatedCriterion[];
+  @Input() eoRelatedCCriteria: EoRelatedCriterion[];
+  @Input() eoRelatedDCriteria: EoRelatedCriterion[];
 
   constructor(public dataService: DataService) {
     this.EOForm = new FormGroup({
@@ -60,42 +65,42 @@ export class ProcedureEoComponent implements OnInit, OnChanges {
         console.log(err);
       });
 
-    this.dataService.getEoRelatedACriteria()
-      .then(res => {
+    // this.dataService.getEoRelatedACriteria()
+    //   .then(res => {
+    //
+    //     if (this.dataService.isCreateResponse) {
+    //       this.eoRelatedACriteria = res;
+    //       console.log('This is create response');
+    //     } else if (this.dataService.isImportESPD) {
+    //       console.log('This is import');
+    //       this.eoRelatedACriteria = this.dataService.eoRelatedACriteria;
+    //       console.log(this.dataService.eoRelatedACriteria);
+    //     }
+    //
+    //
+    //     this.formA = this.dataService.createEORelatedCriterionForm(this.eoRelatedACriteria);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
 
-        if (this.dataService.isCreateResponse) {
-          this.eoRelatedACriteria = res;
-          console.log('This is create response');
-        } else if (this.dataService.isImportESPD) {
-          console.log('This is import');
-          this.eoRelatedACriteria = this.dataService.eoRelatedACriteria;
-          console.log(this.dataService.eoRelatedACriteria);
-        }
+    // this.dataService.getEoRelatedCCriteria()
+    //   .then(res => {
+    //     this.eoRelatedCCriteria = res;
+    //     this.formC = this.dataService.createEORelatedCriterionForm(this.eoRelatedCCriteria);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
 
-
-        this.formA = this.dataService.createEORelatedCriterionForm(this.eoRelatedACriteria);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-
-    this.dataService.getEoRelatedCCriteria()
-      .then(res => {
-        this.eoRelatedCCriteria = res;
-        this.formC = this.dataService.createEORelatedCriterionForm(this.eoRelatedCCriteria);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-
-    this.dataService.getEoRelatedDCriteria()
-      .then(res => {
-        this.eoRelatedDCriteria = res;
-        this.formD = this.dataService.createEORelatedCriterionForm(this.eoRelatedDCriteria);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    // this.dataService.getEoRelatedDCriteria()
+    //   .then(res => {
+    //     this.eoRelatedDCriteria = res;
+    //     this.formD = this.dataService.createEORelatedCriterionForm(this.eoRelatedDCriteria);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
 
 
     this.dataService.getCountries()
@@ -117,12 +122,46 @@ export class ProcedureEoComponent implements OnInit, OnChanges {
       });
   }
 
-  ngOnChanges() {
-    if (this.EOForm) {
-      // this.EOForm.patchValue(this.dataService.EODetails);
-    }
+  // ngOnChanges(changes: SimpleChange) {
+  //   console.log(changes);
+  //   console.log('change triggered');
+  //
+  //   // for (const property in changes) {
+  //   //   const change = changes[property];
+  //   //   if (change.currentValue != undefined) {
+  //   //     console.log('success!');
+  //   //   }
+  //   //   console.log(change);
+  //   //   console.log(change.currentValue);
+  //   // }
+  // }
+  ngOnChanges(changes: SimpleChanges) {
+    // console.log(changes);
+    // console.log('change triggered');
 
+    for (const property in changes) {
+      const change = changes[property];
+      if (change.currentValue != undefined) {
+        console.log('success!');
+        console.log(change);
+        console.log(change.currentValue);
+        console.log(this.formA.value);
+        console.log(this.formD.value);
+
+        console.log(this.dataService.eoRelatedDCriteriaForm != null);
+      }
+    }
   }
+
+  toggle() {
+    if (this.test) {
+      this.test = false;
+    } else {
+      this.test = true;
+
+    }
+  }
+
 
   /* ================================================= natural person form ================================================ */
 

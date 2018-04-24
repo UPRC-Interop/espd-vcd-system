@@ -80,6 +80,13 @@ export class DataService {
   public EOForm: FormGroup;
 
 
+  /* =========================================== FORMS =============================================== */
+
+  public eoRelatedACriteriaForm: FormGroup = null;
+  public eoRelatedCCriteriaForm: FormGroup = null;
+  public eoRelatedDCriteriaForm: FormGroup = null;
+
+
   constructor(private APIService: ApicallService) {
 
   }
@@ -412,8 +419,11 @@ export class DataService {
           this.eoDetailsFormUpdate();
           // console.log(this.EOForm.value);
 
+          console.log(res.fullCriterionList);
+
 
           this.exclusionACriteria = this.filterExclusionCriteria(this.EXCLUSION_CONVICTION_REGEXP, res.fullCriterionList);
+          // console.log(this.exclusionACriteria);
           this.exclusionBCriteria = this.filterExclusionCriteria(this.EXCLUSION_CONTRIBUTION_REGEXP, res.fullCriterionList);
           this.exclusionCCriteria = this.filterExclusionCriteria(this.EXCLUSION_SOCIAL_BUSINESS_MISCONDUCT_CONFLICT_REGEXP, res.fullCriterionList);
           this.exclusionBCriteria = this.filterExclusionCriteria(this.EXCLUSION_NATIONAL_REGEXP, res.fullCriterionList);
@@ -424,9 +434,14 @@ export class DataService {
           this.selectionBCriteria = this.filterSelectionCriteria(this.SELECTION_CERTIFICATES_REGEXP, res.fullCriterionList);
 
           this.eoRelatedACriteria = this.filterEoRelatedCriteria(this.EO_RELATED_A_REGEXP, res.fullCriterionList);
-          this.eoRelatedCCriteria = this.filterEoRelatedCriteria(this.EO_RELATED_C_REGEXP, res.fullCriterionList);
-          this.eoRelatedDCriteria = this.filterEoRelatedCriteria(this.EO_RELATED_D_REGEXP, res.fullCriterionList);
           // console.log(this.eoRelatedACriteria);
+          this.eoRelatedACriteriaForm = this.createEORelatedCriterionForm(this.eoRelatedACriteria);
+          // console.log(this.eoRelatedACriteriaForm);
+
+          this.eoRelatedCCriteria = this.filterEoRelatedCriteria(this.EO_RELATED_C_REGEXP, res.fullCriterionList);
+          this.eoRelatedCCriteriaForm = this.createEORelatedCriterionForm(this.eoRelatedCCriteria);
+          this.eoRelatedDCriteria = this.filterEoRelatedCriteria(this.EO_RELATED_D_REGEXP, res.fullCriterionList);
+          this.eoRelatedDCriteriaForm = this.createEORelatedCriterionForm(this.eoRelatedDCriteria);
 
           console.log(res);
 

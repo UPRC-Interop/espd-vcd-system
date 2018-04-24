@@ -9,7 +9,13 @@
     <mat-step>
       <ng-template matStepLabel>Procedure</ng-template>
       <app-procedure *ngIf="dataService.isCA"></app-procedure>
-      <app-procedure-eo *ngIf="dataService.isEO"></app-procedure-eo>
+      <app-procedure-eo [formA] = 'dataService.eoRelatedACriteriaForm'
+                        [formD] = 'dataService.eoRelatedDCriteriaForm'
+                        [formC] = 'dataService.eoRelatedCCriteriaForm'
+                        [eoRelatedACriteria] = 'dataService.eoRelatedACriteria'
+                        [eoRelatedCCriteria] = 'dataService.eoRelatedCCriteria'
+                        [eoRelatedDCriteria] = 'dataService.eoRelatedDCriteria'
+                        *ngIf="dataService.isEO"></app-procedure-eo>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Exclusion</ng-template>

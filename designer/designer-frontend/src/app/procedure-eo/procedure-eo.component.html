@@ -168,16 +168,25 @@
             </mat-radio-button>
           </mat-radio-group>
         </div>
-        <form [formGroup]="formA">
-          <div class="eoRelatedCriteria" *ngFor="let cr of eoRelatedACriteria; let i=index">
-            <mat-card>
-              <h4>{{cr.description}}</h4>
-              <div class="answer">
-                <app-criterion [criterion]="cr" [form]="formA.controls" [indicator]="true"></app-criterion>
-              </div>
-            </mat-card>
-          </div>
-        </form>
+
+        <ng-container *ngIf="this.dataService.eoRelatedDCriteriaForm != null">
+          <p>this is test</p>
+
+        </ng-container>
+        <button (click)="toggle()">TEST</button>
+
+        <ng-container *ngIf="dataService.eoRelatedACriteriaForm">
+          <form [formGroup]="dataService.eoRelatedACriteriaForm">
+            <div class="eoRelatedCriteria" *ngFor="let cr of eoRelatedACriteria; let i=index">
+              <mat-card>
+                <h4>{{cr.description}}</h4>
+                <div class="answer">
+                  <app-criterion [criterion]="cr" [form]="dataService.eoRelatedACriteriaForm.controls" [indicator]="true"></app-criterion>
+                </div>
+              </mat-card>
+            </div>
+          </form>
+        </ng-container>
       </mat-expansion-panel>
 
       <div formArrayName="naturalPersons">
@@ -269,14 +278,16 @@
             C: Information about reliance on the capacities of other entities
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <form [formGroup]="formC">
-          <div class="eoRelatedCriteria" *ngFor="let cr of eoRelatedCCriteria; let i=index">
-            <span>{{cr.description}}</span>
-            <div class="answer">
-              <app-criterion [criterion]="cr" [form]="formC.controls" [indicator]="true"></app-criterion>
+        <ng-container *ngIf='this.dataService.eoRelatedCCriteriaForm!=null'>
+          <form [formGroup]="dataService.eoRelatedCCriteriaForm">
+            <div class="eoRelatedCriteria" *ngFor="let cr of eoRelatedCCriteria; let i=index">
+              <span>{{cr.description}}</span>
+              <div class="answer">
+                <app-criterion [criterion]="cr" [form]="dataService.eoRelatedCCriteriaForm.controls" [indicator]="true"></app-criterion>
+              </div>
             </div>
-          </div>
-        </form>
+          </form>
+        </ng-container>
       </mat-expansion-panel>
       <mat-expansion-panel expanded="true">
         <mat-expansion-panel-header>
@@ -284,14 +295,16 @@
             D: Information concerning subcontractors on whose capacity the economic operator does not rely
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <form [formGroup]="formD">
-          <div class="eoRelatedCriteria" *ngFor="let cr of eoRelatedDCriteria; let i=index">
-            <span>{{cr.description}}</span>
-            <div class="answer">
-              <app-criterion [criterion]="cr" [form]="formD.controls" [indicator]="true"></app-criterion>
+        <ng-container *ngIf='this.dataService.eoRelatedDCriteriaForm!=null'>
+          <form [formGroup]="dataService.eoRelatedDCriteriaForm">
+            <div class="eoRelatedCriteria" *ngFor="let cr of eoRelatedDCriteria; let i=index">
+              <span>{{cr.description}}</span>
+              <div class="answer">
+                <app-criterion [criterion]="cr" [form]="dataService.eoRelatedDCriteriaForm.controls" [indicator]="true"></app-criterion>
+              </div>
             </div>
-          </div>
-        </form>
+          </form>
+        </ng-container>
       </mat-expansion-panel>
     </mat-accordion>
   </form>
