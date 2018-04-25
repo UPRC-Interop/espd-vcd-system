@@ -1,6 +1,5 @@
 package eu.esens.espdvcd.retriever.criteria;
 
-import eu.esens.espdvcd.retriever.criteria.PredefinedESPDCriteriaExtractor;
 import eu.esens.espdvcd.builder.model.ModelFactory;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import javax.xml.bind.JAXB;

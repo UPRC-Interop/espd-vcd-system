@@ -46,7 +46,7 @@ public class ESPDRequestSchemaExtractorV2 implements SchemaExtractorV2 {
         reqType.setProfileExecutionID(new ProfileExecutionIDType());
         reqType.getProfileExecutionID().setSchemeAgencyID("EU-COM-GROW");
         reqType.getProfileExecutionID().setSchemeVersionID("2.0.1");
-        // FIXME (REGULATED % SELF-CONTAINED 2.0.1) Compulsory use of the CodeList ProfileExecutionID. Use the value "EU-COM-GROW" for th SchemeAgencyID attribute
+        // FIXME (REGULATED / SELF-CONTAINED 2.0.1) Compulsory use of the CodeList ProfileExecutionID. Use the value "EU-COM-GROW" for th SchemeAgencyID attribute
         reqType.getProfileExecutionID().setValue("ESPD-EDMv2.0.1-REGULATED");
 
         //Procurement Project Lot is always 0 in Request and not part of the UI
@@ -75,7 +75,8 @@ public class ESPDRequestSchemaExtractorV2 implements SchemaExtractorV2 {
         // tbr070-013
         // FIXME (SELF-CONTAINED 2.0.1) The Regulated ESPD documents do not specify REQUIREMENTS, only QUESTIONS. The SELF-CONTAINED version does
         propertyType.setTypeCode(new TypeCodeType());
-        propertyType.getTypeCode().setValue(CriterionElementTypeEnum.QUESTION.name());
+        propertyType.getTypeCode().setValue(r.getTypeCode().name());
+        // propertyType.getTypeCode().setValue(CriterionElementTypeEnum.QUESTION.name());
         // tbr070-013
         propertyType.setValueDataTypeCode(new ValueDataTypeCodeType());
         propertyType.getValueDataTypeCode().setValue(r.getResponseDataType().name());

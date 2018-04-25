@@ -5,9 +5,7 @@ import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
 import eu.esens.espdvcd.retriever.criteria.PredefinedESPDCriteriaExtractor;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class PredefinedCriteriaService implements CriteriaService{
 

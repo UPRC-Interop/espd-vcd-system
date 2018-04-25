@@ -77,6 +77,7 @@ public class DocumentBuilderV2 {
         reqType.setIssueTime(new IssueTimeType());
         reqType.getIssueTime().setValue(LocalTime.now());
 
+        // FIXME id is mandatory also here
         reqType.setProfileID(createCENBIIProfileIdType(getProfileID()));
         reqType.setUUID(SchemaFactory.V2.ESPD_REQUEST.createISOIECUUIDType(UUID.randomUUID().toString()));
 

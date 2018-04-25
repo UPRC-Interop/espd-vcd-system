@@ -3,17 +3,13 @@ package eu.esens.espdvcd.designer.deserialiser;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.requirement.ResponseRequirement;
 import eu.esens.espdvcd.model.requirement.response.*;
-import net.sf.saxon.functions.Count;
 
-import javax.validation.UnexpectedTypeException;
-import java.io.DataInput;
 import java.io.IOException;
 
 public class RequirementDeserialiser extends StdDeserializer<ResponseRequirement> {
