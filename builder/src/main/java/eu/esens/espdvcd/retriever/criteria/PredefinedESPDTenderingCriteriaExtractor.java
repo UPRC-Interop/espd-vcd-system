@@ -20,8 +20,8 @@ public class PredefinedESPDTenderingCriteriaExtractor implements CriteriaExtract
 
     private final List<TenderingCriterionType> criterionTypeList;
 
-    private static final String ESPD_REQUEST_V2_REGULATED_RESOURCE = "/templates/v2_regulated/REGULATED-ESPDRequest-02.00.01.xml";
-    private static final String ESPD_REQUEST_V2_SELF_CONTAINED_RESOURCE = "/templates/v2_self_contained/SELFCONTAINED-ESPDRequest-02.00.01.xml";
+    private static final String ESPD_REQUEST_V2_REGULATED_RESOURCE = "/templates/v2_regulated/REGULATED-ESPDRequest-02.00.02.xml";
+    private static final String ESPD_REQUEST_V2_SELF_CONTAINED_RESOURCE = "/templates/v2_self_contained/SELFCONTAINED-ESPDRequest-02.00.02.xml";
 
     public PredefinedESPDTenderingCriteriaExtractor(@NotNull QualificationApplicationTypeEnum type) {
 

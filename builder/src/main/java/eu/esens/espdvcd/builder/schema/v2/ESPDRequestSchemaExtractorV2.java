@@ -2,6 +2,7 @@ package eu.esens.espdvcd.builder.schema.v2;
 
 import eu.esens.espdvcd.codelist.CodelistsV2;
 import eu.esens.espdvcd.codelist.enums.CriterionElementTypeEnum;
+import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import test.x.ubl.pre_award.commonaggregate.DocumentReferenceType;
@@ -48,6 +49,9 @@ public class ESPDRequestSchemaExtractorV2 implements SchemaExtractorV2 {
         reqType.getProfileExecutionID().setSchemeVersionID("2.0.1");
         // FIXME (REGULATED / SELF-CONTAINED 2.0.1) Compulsory use of the CodeList ProfileExecutionID. Use the value "EU-COM-GROW" for th SchemeAgencyID attribute
         reqType.getProfileExecutionID().setValue("ESPD-EDMv2.0.1-REGULATED");
+        // FIXME hardcoded value has to be replaced here
+        reqType.setQualificationApplicationTypeCode(new QualificationApplicationTypeCodeType());
+        reqType.getQualificationApplicationTypeCode().setValue(QualificationApplicationTypeEnum.REGULATED.name());
 
         //Procurement Project Lot is always 0 in Request and not part of the UI
         ProcurementProjectLotType pplt = new ProcurementProjectLotType();

@@ -10,9 +10,9 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-abstract class ModelBuilder {
+public interface ModelBuilder {
 
-    protected EODetails createDefaultEODetails() {
+    default EODetails createDefaultEODetails() {
         // Empty EODetails (with initialized lists)
         System.out.println("Creating default EO Details");
         EODetails eod = new EODetails();
@@ -28,7 +28,7 @@ abstract class ModelBuilder {
         return eod;
     }
 
-    protected CADetails createDefaultCADetails() {
+    default CADetails createDefaultCADetails() {
         // Default initialization of the ESPDRequest and ESPDResponse Models.
         // Empty CADetails
         System.out.println("Creating default CA Details");
@@ -38,7 +38,7 @@ abstract class ModelBuilder {
         return cad;
     }
 
-    protected ServiceProviderDetails createDefaultServiceProviderDetails() {
+    default ServiceProviderDetails createDefaultServiceProviderDetails() {
         // Empty ServiceProviderDetails
         ServiceProviderDetails spd = new ServiceProviderDetails();
         // fill with default content
@@ -49,12 +49,12 @@ abstract class ModelBuilder {
         return spd;
     }
 
-    protected List<SelectableCriterion> getEmptyCriteriaList() {
+    default List<SelectableCriterion> getEmptyCriteriaList() {
         // Empty Criteria List
         return new ArrayList<>();
     }
 
-    protected void applyCriteriaWorkaround(Criterion c, SchemaVersion sv) {
+    default void applyCriteriaWorkaround(Criterion c, SchemaVersion sv) {
 
 //        if (c.getTypeCode().equals("SELECTION.ECONOMIC_FINANCIAL_STANDING")
 //                || c.getTypeCode().equals("DATA_ON_ECONOMIC_OPERATOR")) {
@@ -77,7 +77,7 @@ abstract class ModelBuilder {
 //        }
     }
 
-    protected InputStream getBufferedInputStream(InputStream xmlESPD) {
+    default InputStream getBufferedInputStream(InputStream xmlESPD) {
         // We require a marked input stream
         InputStream bis;
         if (xmlESPD.markSupported()) {

@@ -16,7 +16,7 @@ import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ModelBuilderV2 extends ModelBuilder {
+public class ModelBuilderV2 implements ModelBuilder {
 
     private EODetails eoDetails = null;
     private CADetails caDetails = null;

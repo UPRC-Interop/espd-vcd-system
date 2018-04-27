@@ -25,7 +25,7 @@ import java.util.logging.Logger;
  *
  * @since 1.0
  */
-public class ModelBuilderV1 extends ModelBuilder {
+public class ModelBuilderV1 implements ModelBuilder {
 
     private EODetails eoDetails = null;
     private CADetails caDetails = null;
@@ -275,27 +275,6 @@ public class ModelBuilderV1 extends ModelBuilder {
 
         return res;
     }
-
-    protected InputStream getBufferedInputStream(InputStream xmlESPD) {
-        // We require a marked input stream
-        InputStream bis;
-        if (xmlESPD.markSupported()) {
-            bis = xmlESPD;
-        } else {
-            bis = new BufferedInputStream(xmlESPD);
-        }
-        return bis;
-    }
-
-//    private List<SelectableCriterion> getCriteriaList() {
-//        CriteriaExtractor cr = new PredefinedESPDCriteriaExtractor();
-//        try {
-//            return cr.getFullList();
-//        } catch (RetrieverException ex) {
-//            Logger.getLogger(ModelBuilderV1.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        return null;
-//    }
 
     private ESPDRequestType readRegulatedESPDRequestFromStream(InputStream is)
         throws JAXBException {

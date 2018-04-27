@@ -3,6 +3,7 @@ package eu.esens.espdvcd.builder.model;
 import eu.esens.espdvcd.builder.BuilderFactory;
 import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.codelist.CodelistsV2;
+import eu.esens.espdvcd.codelist.enums.CriterionElementTypeEnum;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.model.requirement.Requirement;
@@ -488,20 +489,20 @@ public interface ModelExtractor {
         return lr;
     }
 
-    default Requirement extractRequirement(TenderingCriterionPropertyType rt) {
+    default Requirement extractRequirement(TenderingCriterionPropertyType pt) {
         String theId = null;
-        if (rt.getID() != null) {
-            theId = rt.getID().getValue();
+        if (pt.getID() != null) {
+            theId = pt.getID().getValue();
         }
         String theDescription = null;
-        if (!rt.getDescription().isEmpty()
-                && rt.getDescription().get(0) != null) {
-            theDescription = rt.getDescription().get(0).getValue();
+        if (!pt.getDescription().isEmpty() && pt.getDescription().get(0) != null) {
+            theDescription = pt.getDescription().get(0).getValue();
         }
 
         Requirement r = new ResponseRequirement(
                 theId,
-                ResponseTypeEnum.valueOf(rt.getValueDataTypeCode().getValue()),
+                CriterionElementTypeEnum.valueOf(pt.getTypeCode().getValue()),
+                ResponseTypeEnum.valueOf(pt.getValueDataTypeCode().getValue()),
                 theDescription
         );
         return r;

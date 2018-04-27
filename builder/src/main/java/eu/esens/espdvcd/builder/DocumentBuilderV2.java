@@ -77,8 +77,10 @@ public class DocumentBuilderV2 {
         reqType.setIssueTime(new IssueTimeType());
         reqType.getIssueTime().setValue(LocalTime.now());
 
-        // FIXME id is mandatory also here
+
         reqType.setProfileID(createCENBIIProfileIdType(getProfileID()));
+        // FIXME local id value here may have to be changed (temporary value has been applied)
+        reqType.setID(SchemaFactory.V2.ESPD_REQUEST.createLocalIDType("ESPDREQ-DGPE-ad63141780"));
         reqType.setUUID(SchemaFactory.V2.ESPD_REQUEST.createISOIECUUIDType(UUID.randomUUID().toString()));
 
         return reqType;
@@ -101,7 +103,8 @@ public class DocumentBuilderV2 {
         resType.getIssueTime().setValue(LocalTime.now());
 
         resType.setProfileID(createCENBIIProfileIdType(getProfileID()));
-        // FIXME id is mandatory also here
+        // FIXME local id value here may have to be changed (temporary value has been applied)
+        resType.setID(SchemaFactory.V2.ESPD_REQUEST.createLocalIDType("ESPDREQ-DGPE-ad63141780"));
         resType.setUUID(SchemaFactory.V2.ESPD_RESPONSE.createISOIECUUIDType(UUID.randomUUID().toString()));
 
         return resType;
