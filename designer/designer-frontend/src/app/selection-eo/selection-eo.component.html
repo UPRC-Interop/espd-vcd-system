@@ -47,7 +47,8 @@
 
 
 <mat-accordion multi="true" *ngIf="isAtoD">
-  <form [formGroup]="formA">
+<ng-container *ngIf="dataService.selectionACriteriaForm">
+  <form [formGroup]="dataService.selectionACriteriaForm">
     <mat-expansion-panel expanded="true" *ngIf="selectionACriteria">
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -75,14 +76,16 @@
             </div>
           </div>
           <div class="answer">
-            <app-criterion [criterion]="cr" [form]="formA.controls" [indicator]="true"></app-criterion>
+            <app-criterion [criterion]="cr" [form]="dataService.selectionACriteriaForm.controls" [indicator]="true"></app-criterion>
           </div>
         </div>
       </mat-card>
     </mat-expansion-panel>
   </form>
+</ng-container>
 
-  <form [formGroup]="formB">
+<ng-container *ngIf="dataService.selectionBCriteriaForm">
+  <form [formGroup]="dataService.selectionBCriteriaForm">
     <mat-expansion-panel expanded="true" *ngIf="selectionBCriteria">
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -106,72 +109,78 @@
             </div>
           </div>
           <div class="answer">
-            <app-criterion [criterion]="cr" [form]="formB.controls" [indicator]="true"></app-criterion>
+            <app-criterion [criterion]="cr" [form]="dataService.selectionBCriteriaForm.controls" [indicator]="true"></app-criterion>
           </div>
         </div>
       </mat-card>
     </mat-expansion-panel>
   </form>
-  <form [formGroup]="formC">
-    <mat-expansion-panel expanded="true" *ngIf="selectionCCriteria">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          C: Grounds relating to insolvency, conflicts of interests or professional misconduct
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <div class="desc">
-        <h4>Article {{selectionCCriteria['0'].legislationReference.article}} of
-          {{selectionCCriteria['0'].legislationReference.title}} sets out the following selection criteria </h4>
-      </div>
-      <mat-card *ngFor="let cr of selectionCCriteria; let i=index">
-        <div class="selectionCriteria">
-          <div class="criterion-wrap">
-            <div class="criteria">
-              <h4>{{cr.name}}</h4>
-              <div class="critDesc">{{cr.description}}</div>
-            </div>
-            <div class="eCertis">
-              <h5>eCertis Information ...</h5>
-              <div class="eCertDesc">no information...</div>
-            </div>
-          </div>
-          <div class="answer">
-            <app-criterion [criterion]="cr" [form]="formC.controls" [indicator]="true"></app-criterion>
-          </div>
+</ng-container>
+
+  <ng-container *ngIf="dataService.selectionCCriteriaForm">
+    <form [formGroup]="dataService.selectionCCriteriaForm">
+      <mat-expansion-panel expanded="true" *ngIf="selectionCCriteria">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            C: Grounds relating to insolvency, conflicts of interests or professional misconduct
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="desc">
+          <h4>Article {{selectionCCriteria['0'].legislationReference.article}} of
+            {{selectionCCriteria['0'].legislationReference.title}} sets out the following selection criteria </h4>
         </div>
-      </mat-card>
-    </mat-expansion-panel>
-  </form>
-  <form [formGroup]="formD">
-    <mat-expansion-panel expanded="true" *ngIf="selectionDCriteria">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          D: Quality assurance schemes and environmental management standards
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <div class="desc">
-        <h4>Article {{selectionDCriteria['0'].legislationReference.article}} of
-          {{selectionDCriteria['0'].legislationReference.title}} sets out the following selection criteria </h4>
-      </div>
-      <mat-card *ngFor="let cr of selectionDCriteria; let i=index">
-        <div class="selectionCriteria">
-          <div class="criterion-wrap">
-            <div class="criteria">
-              <h4>{{cr.name}}</h4>
-              <div class="critDesc">{{cr.description}}</div>
+        <mat-card *ngFor="let cr of selectionCCriteria; let i=index">
+          <div class="selectionCriteria">
+            <div class="criterion-wrap">
+              <div class="criteria">
+                <h4>{{cr.name}}</h4>
+                <div class="critDesc">{{cr.description}}</div>
+              </div>
+              <div class="eCertis">
+                <h5>eCertis Information ...</h5>
+                <div class="eCertDesc">no information...</div>
+              </div>
             </div>
-            <div class="eCertis">
-              <h5>eCertis Information ...</h5>
-              <div class="eCertDesc">no information...</div>
+            <div class="answer">
+              <app-criterion [criterion]="cr" [form]="dataService.selectionCCriteriaForm.controls" [indicator]="true"></app-criterion>
             </div>
           </div>
-          <div class="answer">
-            <app-criterion [criterion]="cr" [form]="formD.controls" [indicator]="true"></app-criterion>
-          </div>
+        </mat-card>
+      </mat-expansion-panel>
+    </form>
+  </ng-container>
+  <ng-container *ngIf="dataService.selectionDCriteriaForm">
+    <form [formGroup]="dataService.selectionDCriteriaForm">
+      <mat-expansion-panel expanded="true" *ngIf="selectionDCriteria">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            D: Quality assurance schemes and environmental management standards
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="desc">
+          <h4>Article {{selectionDCriteria['0'].legislationReference.article}} of
+            {{selectionDCriteria['0'].legislationReference.title}} sets out the following selection criteria </h4>
         </div>
-      </mat-card>
-    </mat-expansion-panel>
-  </form>
+        <mat-card *ngFor="let cr of selectionDCriteria; let i=index">
+          <div class="selectionCriteria">
+            <div class="criterion-wrap">
+              <div class="criteria">
+                <h4>{{cr.name}}</h4>
+                <div class="critDesc">{{cr.description}}</div>
+              </div>
+              <div class="eCertis">
+                <h5>eCertis Information ...</h5>
+                <div class="eCertDesc">no information...</div>
+              </div>
+            </div>
+            <div class="answer">
+              <app-criterion [criterion]="cr" [form]="dataService.selectionDCriteriaForm.controls" [indicator]="true"></app-criterion>
+            </div>
+          </div>
+        </mat-card>
+      </mat-expansion-panel>
+    </form>
+  </ng-container>
 </mat-accordion>
 <button mat-raised-button color="primary" matStepperPrevious>Back</button>
 <button type="submit" mat-raised-button color="primary" matStepperNext (click)="onSelectionEOSubmit()">Next</button>

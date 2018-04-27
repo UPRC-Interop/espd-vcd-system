@@ -12,7 +12,7 @@ import {RequirementResponse} from '../model/requirement-response.model';
   templateUrl: './procedure-eo.component.html',
   styleUrls: ['./procedure-eo.component.css']
 })
-export class ProcedureEoComponent implements OnInit, OnChanges {
+export class ProcedureEoComponent implements OnInit {
 
   public EOForm: FormGroup;
   // public formA = new FormGroup({});
@@ -65,44 +65,6 @@ export class ProcedureEoComponent implements OnInit, OnChanges {
         console.log(err);
       });
 
-    // this.dataService.getEoRelatedACriteria()
-    //   .then(res => {
-    //
-    //     if (this.dataService.isCreateResponse) {
-    //       this.eoRelatedACriteria = res;
-    //       console.log('This is create response');
-    //     } else if (this.dataService.isImportESPD) {
-    //       console.log('This is import');
-    //       this.eoRelatedACriteria = this.dataService.eoRelatedACriteria;
-    //       console.log(this.dataService.eoRelatedACriteria);
-    //     }
-    //
-    //
-    //     this.formA = this.dataService.createEORelatedCriterionForm(this.eoRelatedACriteria);
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
-
-    // this.dataService.getEoRelatedCCriteria()
-    //   .then(res => {
-    //     this.eoRelatedCCriteria = res;
-    //     this.formC = this.dataService.createEORelatedCriterionForm(this.eoRelatedCCriteria);
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
-
-    // this.dataService.getEoRelatedDCriteria()
-    //   .then(res => {
-    //     this.eoRelatedDCriteria = res;
-    //     this.formD = this.dataService.createEORelatedCriterionForm(this.eoRelatedDCriteria);
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
-
-
     this.dataService.getCountries()
       .then(res => {
         this.countries = res;
@@ -122,45 +84,6 @@ export class ProcedureEoComponent implements OnInit, OnChanges {
       });
   }
 
-  // ngOnChanges(changes: SimpleChange) {
-  //   console.log(changes);
-  //   console.log('change triggered');
-  //
-  //   // for (const property in changes) {
-  //   //   const change = changes[property];
-  //   //   if (change.currentValue != undefined) {
-  //   //     console.log('success!');
-  //   //   }
-  //   //   console.log(change);
-  //   //   console.log(change.currentValue);
-  //   // }
-  // }
-  ngOnChanges(changes: SimpleChanges) {
-    // console.log(changes);
-    // console.log('change triggered');
-
-    // for (const property in changes) {
-    //   const change = changes[property];
-    //   if (change.currentValue != undefined) {
-    //     console.log('success!');
-    //     console.log(change);
-    //     console.log(change.currentValue);
-    //     console.log(this.formA.value);
-    //     console.log(this.formD.value);
-    //
-    //     console.log(this.dataService.eoRelatedDCriteriaForm != null);
-    //   }
-    // }
-  }
-
-  // toggle() {
-  //   if (this.test) {
-  //     this.test = false;
-  //   } else {
-  //     this.test = true;
-  //
-  //   }
-  // }
 
 
   /* ================================================= natural person form ================================================ */

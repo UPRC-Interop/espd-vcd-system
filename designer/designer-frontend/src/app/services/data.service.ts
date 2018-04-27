@@ -86,6 +86,16 @@ export class DataService {
   public eoRelatedCCriteriaForm: FormGroup = null;
   public eoRelatedDCriteriaForm: FormGroup = null;
 
+  public exclusionACriteriaForm: FormGroup = null;
+  public exclusionBCriteriaForm: FormGroup = null;
+  public exclusionCCriteriaForm: FormGroup = null;
+  public exclusionDCriteriaForm: FormGroup = null;
+
+  public selectionACriteriaForm: FormGroup = null;
+  public selectionBCriteriaForm: FormGroup = null;
+  public selectionCCriteriaForm: FormGroup = null;
+  public selectionDCriteriaForm: FormGroup = null;
+
 
   constructor(private APIService: ApicallService) {
 
@@ -422,27 +432,35 @@ export class DataService {
 
           console.log(res.fullCriterionList);
 
+          this.eoRelatedACriteria = this.filterEoRelatedCriteria(this.EO_RELATED_A_REGEXP, res.fullCriterionList);
+          this.eoRelatedCCriteria = this.filterEoRelatedCriteria(this.EO_RELATED_C_REGEXP, res.fullCriterionList);
+          this.eoRelatedDCriteria = this.filterEoRelatedCriteria(this.EO_RELATED_D_REGEXP, res.fullCriterionList);
+          // console.log(this.eoRelatedACriteria);
+          this.eoRelatedACriteriaForm = this.createEORelatedCriterionForm(this.eoRelatedACriteria);
+          this.eoRelatedCCriteriaForm = this.createEORelatedCriterionForm(this.eoRelatedCCriteria);
+          this.eoRelatedDCriteriaForm = this.createEORelatedCriterionForm(this.eoRelatedDCriteria);
+
 
           this.exclusionACriteria = this.filterExclusionCriteria(this.EXCLUSION_CONVICTION_REGEXP, res.fullCriterionList);
-          // console.log(this.exclusionACriteria);
           this.exclusionBCriteria = this.filterExclusionCriteria(this.EXCLUSION_CONTRIBUTION_REGEXP, res.fullCriterionList);
           this.exclusionCCriteria = this.filterExclusionCriteria(this.EXCLUSION_SOCIAL_BUSINESS_MISCONDUCT_CONFLICT_REGEXP, res.fullCriterionList);
-          this.exclusionBCriteria = this.filterExclusionCriteria(this.EXCLUSION_NATIONAL_REGEXP, res.fullCriterionList);
+          this.exclusionDCriteria = this.filterExclusionCriteria(this.EXCLUSION_NATIONAL_REGEXP, res.fullCriterionList);
+
+          this.exclusionACriteriaForm = this.createExclusionCriterionForm(this.exclusionACriteria);
+          this.exclusionBCriteriaForm = this.createExclusionCriterionForm(this.exclusionBCriteria);
+          this.exclusionCCriteriaForm = this.createExclusionCriterionForm(this.exclusionCCriteria);
+          this.exclusionDCriteriaForm = this.createExclusionCriterionForm(this.exclusionDCriteria);
 
           this.selectionACriteria = this.filterSelectionCriteria(this.SELECTION_SUITABILITY_REGEXP, res.fullCriterionList);
           this.selectionBCriteria = this.filterSelectionCriteria(this.SELECTION_ECONOMIC_REGEXP, res.fullCriterionList);
           this.selectionCCriteria = this.filterSelectionCriteria(this.SELECTION_TECHNICAL_REGEXP, res.fullCriterionList);
           this.selectionBCriteria = this.filterSelectionCriteria(this.SELECTION_CERTIFICATES_REGEXP, res.fullCriterionList);
 
-          this.eoRelatedACriteria = this.filterEoRelatedCriteria(this.EO_RELATED_A_REGEXP, res.fullCriterionList);
-          // console.log(this.eoRelatedACriteria);
-          this.eoRelatedACriteriaForm = this.createEORelatedCriterionForm(this.eoRelatedACriteria);
-          // console.log(this.eoRelatedACriteriaForm);
-
-          this.eoRelatedCCriteria = this.filterEoRelatedCriteria(this.EO_RELATED_C_REGEXP, res.fullCriterionList);
-          this.eoRelatedCCriteriaForm = this.createEORelatedCriterionForm(this.eoRelatedCCriteria);
-          this.eoRelatedDCriteria = this.filterEoRelatedCriteria(this.EO_RELATED_D_REGEXP, res.fullCriterionList);
-          this.eoRelatedDCriteriaForm = this.createEORelatedCriterionForm(this.eoRelatedDCriteria);
+          this.selectionACriteriaForm = this.createSelectionCriterionForm(this.selectionACriteria);
+          console.log(this.selectionACriteriaForm);
+          this.selectionBCriteriaForm = this.createSelectionCriterionForm(this.selectionBCriteria);
+          this.selectionCCriteriaForm = this.createSelectionCriterionForm(this.selectionCCriteria);
+          this.selectionDCriteriaForm = this.createSelectionCriterionForm(this.selectionDCriteria);
 
           console.log(res);
 
@@ -461,11 +479,6 @@ export class DataService {
   eoDetailsFormUpdate() {
 
     /* ====================== Date Manipulation =====================================*/
-    let date = new Date(this.EODetails.naturalPersons[0]['birthDate'][0],
-      this.EODetails.naturalPersons[0]['birthDate'][1],
-      this.EODetails.naturalPersons[0]['birthDate'][2]);
-
-    console.dir(this.EODetails.naturalPersons[0]['birthDate']);
 
     this.EODetails.naturalPersons[0]['birthDate'] = this.getDateJSObject(this.EODetails.naturalPersons[0]['birthDate']);
     console.log(this.EODetails.naturalPersons[0]['birthDate']);
@@ -528,6 +541,128 @@ export class DataService {
       this.isImportESPD = false;
       this.isCreateResponse = true;
     }
+
+    /* ===================== create forms in case of predefined criteria ================== */
+    if (this.isCreateResponse) {
+      this.getEoRelatedACriteria()
+        .then(res => {
+
+          if (this.isCreateResponse) {
+            this.eoRelatedACriteria = res;
+            console.log('This is create response');
+          } else if (this.isImportESPD) {
+            console.log('This is import');
+            this.eoRelatedACriteria = this.eoRelatedACriteria;
+            console.log(this.eoRelatedACriteria);
+          }
+
+
+          this.eoRelatedACriteriaForm = this.createEORelatedCriterionForm(this.eoRelatedACriteria);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+
+      this.getEoRelatedCCriteria()
+        .then(res => {
+          this.eoRelatedCCriteria = res;
+          this.eoRelatedCCriteriaForm = this.createEORelatedCriterionForm(this.eoRelatedCCriteria);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+
+      this.getEoRelatedDCriteria()
+        .then(res => {
+          this.eoRelatedDCriteria = res;
+          this.eoRelatedDCriteriaForm = this.createEORelatedCriterionForm(this.eoRelatedDCriteria);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+
+
+      /* ========================= predefined exclusion criteria response ============= */
+      this.getExclusionACriteria()
+        .then(res => {
+          this.exclusionACriteria = res;
+          this.exclusionACriteriaForm = this.createExclusionCriterionForm(this.exclusionACriteria);
+          // console.log(this.formA);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+
+      this.getExclusionBCriteria()
+        .then(res => {
+          this.exclusionBCriteria = res;
+          this.exclusionBCriteriaForm = this.createExclusionCriterionForm(this.exclusionBCriteria);
+          // console.log(res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+
+      this.getExclusionCCriteria()
+        .then(res => {
+          this.exclusionCCriteria = res;
+          this.exclusionCCriteriaForm = this.createExclusionCriterionForm(this.exclusionCCriteria);
+          // console.log(res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+
+      this.getExclusionDCriteria()
+        .then(res => {
+          this.exclusionDCriteria = res;
+          this.exclusionDCriteriaForm = this.createExclusionCriterionForm(this.exclusionDCriteria);
+          // console.log(res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+
+      /* ======================== predefined selection criteria ============================ */
+      this.getSelectionACriteria()
+        .then(res => {
+          this.selectionACriteria = res;
+          this.selectionACriteriaForm = this.createSelectionCriterionForm(this.selectionACriteria);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+
+
+      this.getSelectionBCriteria()
+        .then(res => {
+          this.selectionBCriteria = res;
+          this.selectionBCriteriaForm = this.createSelectionCriterionForm(this.selectionBCriteria);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+
+      this.getSelectionCCriteria()
+        .then(res => {
+          this.selectionCCriteria = res;
+          this.selectionCCriteriaForm = this.createSelectionCriterionForm(this.selectionCCriteria);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+
+      this.getSelectionDCriteria()
+        .then(res => {
+          this.selectionDCriteria = res;
+          this.selectionDCriteriaForm= this.createSelectionCriterionForm(this.selectionDCriteria);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+
+    }
+
   }
 
 

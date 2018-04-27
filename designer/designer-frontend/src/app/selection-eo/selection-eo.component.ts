@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {FormControl, FormGroup, NgForm} from '@angular/forms';
 import {SelectionCriteria} from '../model/selectionCriteria.model';
 import {RequirementResponse} from '../model/requirement-response.model';
 import {RequirementGroup} from '../model/requirementGroup.model';
 import {EoRelatedCriterion} from '../model/eoRelatedCriterion.model';
+import {ExclusionCriteria} from '../model/exclusionCriteria.model';
 
 @Component({
   selector: 'app-selection-eo',
@@ -12,21 +13,22 @@ import {EoRelatedCriterion} from '../model/eoRelatedCriterion.model';
   styleUrls: ['./selection-eo.component.css']
 })
 export class SelectionEoComponent implements OnInit {
-  selectionACriteria: SelectionCriteria[] = null;
-  selectionBCriteria: SelectionCriteria[] = null;
-  selectionCCriteria: SelectionCriteria[] = null;
-  selectionDCriteria: SelectionCriteria[] = null;
   selectionALLCriteria: SelectionCriteria[] = null;
   isSatisfiedALL: boolean = true;
   isAtoD: boolean = false;
 
-  public formA = new FormGroup({});
-  public formB = new FormGroup({});
-  public formC = new FormGroup({});
-  public formD = new FormGroup({});
+  @Input() selectionACriteria: SelectionCriteria[];
+  @Input() selectionBCriteria: SelectionCriteria[];
+  @Input() selectionCCriteria: SelectionCriteria[];
+  @Input() selectionDCriteria: SelectionCriteria[];
+
+  @Input() formA: FormGroup;
+  @Input() formB: FormGroup;
+  @Input() formC: FormGroup;
+  @Input() formD: FormGroup;
 
 
-  constructor(private dataService: DataService) {
+  constructor(public dataService: DataService) {
   }
 
   ngOnInit() {
@@ -40,45 +42,6 @@ export class SelectionEoComponent implements OnInit {
       .catch(err => {
         console.log(err);
       });
-
-    this.dataService.getSelectionACriteria()
-      .then(res => {
-        this.selectionACriteria = res;
-        this.formA = this.dataService.createSelectionCriterionForm(this.selectionACriteria);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-
-
-    this.dataService.getSelectionBCriteria()
-      .then(res => {
-        this.selectionBCriteria = res;
-        this.formB = this.dataService.createSelectionCriterionForm(this.selectionBCriteria);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-
-    this.dataService.getSelectionCCriteria()
-      .then(res => {
-        this.selectionCCriteria = res;
-        this.formC = this.dataService.createSelectionCriterionForm(this.selectionCCriteria);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-
-    this.dataService.getSelectionDCriteria()
-      .then(res => {
-        this.selectionDCriteria = res;
-        this.formD = this.dataService.createSelectionCriterionForm(this.selectionDCriteria);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-
-
   }
 
 

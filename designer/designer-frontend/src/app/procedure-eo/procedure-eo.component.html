@@ -169,12 +169,6 @@
           </mat-radio-group>
         </div>
 
-        <!--<ng-container *ngIf="test">-->
-          <!--<p>this is test</p>-->
-
-        <!--</ng-container>-->
-        <!--<button (click)="toggle()">TEST</button>-->
-
         <ng-container *ngIf="dataService.eoRelatedACriteriaForm">
           <form [formGroup]="dataService.eoRelatedACriteriaForm">
             <div class="eoRelatedCriteria" *ngFor="let cr of eoRelatedACriteria; let i=index">

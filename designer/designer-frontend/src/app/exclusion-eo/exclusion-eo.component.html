@@ -1,6 +1,7 @@
 <h4 xmlns="http://www.w3.org/1999/html">Part III: Exclusion grounds</h4>
 <mat-accordion multi="true">
-  <form [formGroup]="formA">
+<ng-container *ngIf="dataService.exclusionACriteriaForm">
+  <form [formGroup]="dataService.exclusionACriteriaForm">
     <mat-expansion-panel expanded="true" *ngIf="exclusionACriteria">
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -25,10 +26,10 @@
                 <h5>eCertis Information ...</h5>
                 <div class="eCertDesc">no information...</div>
               </div>
-          </div>
+            </div>
           </div>
           <div class="answer">
-              <app-criterion [criterion]="cr" [form]="formA.controls" [indicator]="true"></app-criterion>
+            <app-criterion [criterion]="cr" [form]="dataService.exclusionACriteriaForm.controls" [indicator]="true"></app-criterion>
           </div>
 
         </div>
@@ -36,8 +37,10 @@
     </mat-expansion-panel>
 
   </form>
+</ng-container>
 
-  <form [formGroup]="formB">
+<ng-container *ngIf="dataService.exclusionBCriteriaForm">
+  <form [formGroup]="dataService.exclusionBCriteriaForm">
     <mat-expansion-panel expanded="true" *ngIf="exclusionBCriteria">
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -65,14 +68,16 @@
             </div>
           </div>
           <div class="answer">
-            <app-criterion [criterion]="cr" [form]="formB.controls" [indicator]="true"></app-criterion>
+            <app-criterion [criterion]="cr" [form]="dataService.exclusionBCriteriaForm.controls" [indicator]="true"></app-criterion>
           </div>
         </div>
       </mat-card>
     </mat-expansion-panel>
   </form>
+</ng-container>
 
-  <form [formGroup]="formC">
+<ng-container *ngIf="dataService.exclusionCCriteriaForm">
+  <form [formGroup]="dataService.exclusionCCriteriaForm">
     <mat-expansion-panel expanded="true" *ngIf="exclusionCCriteria">
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -99,13 +104,17 @@
             </div>
           </div>
           <div class="answer">
-            <app-criterion [criterion]="cr" [form]="formC.controls" [indicator]="true"></app-criterion>
+            <app-criterion [criterion]="cr" [form]="dataService.exclusionCCriteriaForm.controls" [indicator]="true"></app-criterion>
           </div>
         </div>
       </mat-card>
     </mat-expansion-panel>
   </form>
-  <form [formGroup]="formD">
+</ng-container>
+
+
+<ng-container *ngIf="dataService.exclusionDCriteriaForm">
+  <form [formGroup]="dataService.exclusionDCriteriaForm">
     <mat-expansion-panel expanded="true" *ngIf="exclusionDCriteria">
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -132,16 +141,14 @@
             </div>
           </div>
           <div class="answer">
-            <app-criterion [criterion]="cr" [form]="formD.controls" [indicator]="true"></app-criterion>
+            <app-criterion [criterion]="cr" [form]="dataService.exclusionDCriteriaForm.controls" [indicator]="true"></app-criterion>
           </div>
         </div>
       </mat-card>
     </mat-expansion-panel>
-
-    <button mat-raised-button color="primary" matStepperPrevious>Back</button>
-    <button type="submit" mat-raised-button color="primary" matStepperNext (click)="onExclusionEOSubmit()">Next
-    </button>
-
   </form>
-
+</ng-container>
 </mat-accordion>
+<button mat-raised-button color="primary" matStepperPrevious>Back</button>
+<button type="submit" mat-raised-button color="primary" matStepperNext (click)="onExclusionEOSubmit()">Next
+</button>
