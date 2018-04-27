@@ -40,7 +40,7 @@ export class RequirementGroupComponent implements OnInit, OnChanges {
     return true;
   }
 
-  childIndicatorChangedHandler(event: string) {
-    this.childIndicator = (event === 'YES');
+  childIndicatorChangedHandler(event: boolean) {
+    this.childIndicator = (event);
   }
 }

@@ -897,8 +897,19 @@ export class DataService {
       if (rg.requirements != undefined) {
         rg.requirements.forEach(r => {
           // console.log('In Req: ' + r.id);
-          r.response = new RequirementResponse();
-          group[r.id] = new FormControl(r.response.description || '');
+
+          // TODO if response !=undefined
+          if (r.response != null || r.response != undefined) {
+            group[r.id] = new FormControl(r.response.description ||
+              r.response.percentage || r.response.indicator || r.response.evidenceURL ||
+              r.response.evidenceURLCode || r.response.currency || r.response.countryCode || r.response.date ||
+              r.response.amount || r.response.period || r.response.quantity || r.response.year || '');
+
+          } else {
+            r.response = new RequirementResponse();
+            group[r.id] = new FormControl(r.response.description || '');
+          }
+
           // console.log(group);
           // console.log(group[r.id]);
         });

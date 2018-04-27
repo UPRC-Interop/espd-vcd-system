@@ -39,10 +39,12 @@
 
     <mat-radio-group [id]="req.id" *ngSwitchCase="'INDICATOR'" [formControlName]="req.id">
       <mat-radio-button color="primary"
-                        value="YES">YES
+                        value="YES"
+                        [value]="true">YES
       </mat-radio-button>
       <mat-radio-button color="primary"
-                        value="NO">NO
+                        value="NO"
+                        [value]="false">NO
       </mat-radio-button>
     </mat-radio-group>
 
