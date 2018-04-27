@@ -413,6 +413,7 @@ export class DataService {
           this.EODetails = res.eodetails;
           console.log(this.EODetails);
           console.log(this.EODetails.naturalPersons);
+          console.log(this.EODetails.naturalPersons['birthDate']);
           this.selectedEOCountry = this.EODetails.postalAddress.countryCode;
 
           // Fill in EoDetails Form
@@ -458,6 +459,17 @@ export class DataService {
   }
 
   eoDetailsFormUpdate() {
+
+    /* ====================== Date Manipulation =====================================*/
+    let date = new Date(this.EODetails.naturalPersons[0]['birthDate'][0],
+      this.EODetails.naturalPersons[0]['birthDate'][1],
+      this.EODetails.naturalPersons[0]['birthDate'][2]);
+
+    console.dir(this.EODetails.naturalPersons[0]['birthDate']);
+
+    this.EODetails.naturalPersons[0]['birthDate'] = this.getDateJSObject(this.EODetails.naturalPersons[0]['birthDate']);
+    console.log(this.EODetails.naturalPersons[0]['birthDate']);
+
     this.EOForm.patchValue({
       'name': this.EODetails.name,
       'smeIndicator': this.EODetails.smeIndicator,
@@ -476,6 +488,14 @@ export class DataService {
       'id': this.EODetails.id,
       'webSiteURI': this.EODetails.webSiteURI
     });
+  }
+
+
+  /*  ======================================== Date Manipulation ================================*/
+
+  getDateJSObject(...dateArray: any[]): Date {
+    const date = new Date(dateArray[0][0], dateArray[0][1], dateArray[0][2]);
+    return date;
   }
 
 
@@ -902,9 +922,10 @@ export class DataService {
           if (r.response != null || r.response != undefined) {
             group[r.id] = new FormControl(r.response.description ||
               r.response.percentage || r.response.indicator || r.response.evidenceURL ||
-              r.response.evidenceURLCode || r.response.currency || r.response.countryCode || r.response.date ||
+              r.response.evidenceURLCode || r.response.currency || r.response.countryCode ||
               r.response.amount || r.response.period || r.response.quantity || r.response.year || '');
 
+            console.log(r.response);
           } else {
             r.response = new RequirementResponse();
             group[r.id] = new FormControl(r.response.description || '');

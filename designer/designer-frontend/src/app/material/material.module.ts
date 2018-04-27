@@ -34,7 +34,7 @@ import {
     MatNativeDateModule
   ],
   exports: [MatButtonModule, MatToolbarModule, MatIconModule, MatStepperModule, MatCardModule, MatRadioModule, MatInputModule,
-    MatSelectModule, MatExpansionModule, MatCheckboxModule, MatGridListModule, MatDatepickerModule,MatNativeDateModule],
+    MatSelectModule, MatExpansionModule, MatCheckboxModule, MatGridListModule, MatDatepickerModule, MatNativeDateModule],
   declarations: []
 })
 export class MaterialModule {

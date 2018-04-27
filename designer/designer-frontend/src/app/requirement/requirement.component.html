@@ -9,7 +9,7 @@
     </mat-form-field>
 
     <mat-form-field *ngSwitchCase="'DATE'">
-      <input matInput [matDatepicker]="picker" [formControlName]="req.id" [id]="req.id" >
+      <input matInput [matDatepicker]="picker" [formControlName]="req.id" [id]="req.id" [value]="req.response.date">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>

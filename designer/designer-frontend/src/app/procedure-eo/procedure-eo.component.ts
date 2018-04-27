@@ -139,28 +139,28 @@ export class ProcedureEoComponent implements OnInit, OnChanges {
     // console.log(changes);
     // console.log('change triggered');
 
-    for (const property in changes) {
-      const change = changes[property];
-      if (change.currentValue != undefined) {
-        console.log('success!');
-        console.log(change);
-        console.log(change.currentValue);
-        console.log(this.formA.value);
-        console.log(this.formD.value);
-
-        console.log(this.dataService.eoRelatedDCriteriaForm != null);
-      }
-    }
+    // for (const property in changes) {
+    //   const change = changes[property];
+    //   if (change.currentValue != undefined) {
+    //     console.log('success!');
+    //     console.log(change);
+    //     console.log(change.currentValue);
+    //     console.log(this.formA.value);
+    //     console.log(this.formD.value);
+    //
+    //     console.log(this.dataService.eoRelatedDCriteriaForm != null);
+    //   }
+    // }
   }
 
-  toggle() {
-    if (this.test) {
-      this.test = false;
-    } else {
-      this.test = true;
-
-    }
-  }
+  // toggle() {
+  //   if (this.test) {
+  //     this.test = false;
+  //   } else {
+  //     this.test = true;
+  //
+  //   }
+  // }
 
 
   /* ================================================= natural person form ================================================ */
