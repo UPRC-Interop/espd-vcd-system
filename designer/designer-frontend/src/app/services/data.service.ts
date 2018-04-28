@@ -96,6 +96,8 @@ export class DataService {
   public selectionCCriteriaForm: FormGroup = null;
   public selectionDCriteriaForm: FormGroup = null;
 
+  public reductionCriteriaForm: FormGroup = null;
+
 
   constructor(private APIService: ApicallService) {
 
@@ -203,6 +205,16 @@ export class DataService {
   }
 
   filterEoRelatedCriteria(regex: RegExp, criteriaList: FullCriterion[]): EoRelatedCriterion[] {
+    const filteredList: FullCriterion[] = [];
+    for (const fullCriterion of criteriaList) {
+      if (regex.test(fullCriterion.typeCode)) {
+        filteredList.push(fullCriterion);
+      }
+    }
+    return filteredList;
+  }
+
+  filterReductionCriteria(regex: RegExp, criteriaList: FullCriterion[]): ReductionCriterion[] {
     const filteredList: FullCriterion[] = [];
     for (const fullCriterion of criteriaList) {
       if (regex.test(fullCriterion.typeCode)) {
@@ -454,13 +466,19 @@ export class DataService {
           this.selectionACriteria = this.filterSelectionCriteria(this.SELECTION_SUITABILITY_REGEXP, res.fullCriterionList);
           this.selectionBCriteria = this.filterSelectionCriteria(this.SELECTION_ECONOMIC_REGEXP, res.fullCriterionList);
           this.selectionCCriteria = this.filterSelectionCriteria(this.SELECTION_TECHNICAL_REGEXP, res.fullCriterionList);
-          this.selectionBCriteria = this.filterSelectionCriteria(this.SELECTION_CERTIFICATES_REGEXP, res.fullCriterionList);
+          this.selectionDCriteria = this.filterSelectionCriteria(this.SELECTION_CERTIFICATES_REGEXP, res.fullCriterionList);
 
           this.selectionACriteriaForm = this.createSelectionCriterionForm(this.selectionACriteria);
-          console.log(this.selectionACriteriaForm);
           this.selectionBCriteriaForm = this.createSelectionCriterionForm(this.selectionBCriteria);
           this.selectionCCriteriaForm = this.createSelectionCriterionForm(this.selectionCCriteria);
           this.selectionDCriteriaForm = this.createSelectionCriterionForm(this.selectionDCriteria);
+
+          this.reductionCriteria = this.filterReductionCriteria(this.REDUCTION_OF_CANDIDATES_REGEXP, res.fullCriterionList);
+          if (!this.reductionCriteria) {
+            console.log('IT IS EMPTYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY');
+          }
+          this.reductionCriteriaForm = this.createReductionCriterionForm(this.reductionCriteria);
+
 
           console.log(res);
 
@@ -655,7 +673,18 @@ export class DataService {
       this.getSelectionDCriteria()
         .then(res => {
           this.selectionDCriteria = res;
-          this.selectionDCriteriaForm= this.createSelectionCriterionForm(this.selectionDCriteria);
+          this.selectionDCriteriaForm = this.createSelectionCriterionForm(this.selectionDCriteria);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+
+      /* =========================== predefined reduction criteria ================================= */
+      this.getReductionCriteria()
+        .then(res => {
+          this.reductionCriteria = res;
+          this.reductionCriteriaForm = this.createReductionCriterionForm(this.reductionCriteria);
+
         })
         .catch(err => {
           console.log(err);

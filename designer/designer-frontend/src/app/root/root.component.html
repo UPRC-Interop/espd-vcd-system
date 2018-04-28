@@ -46,7 +46,9 @@
     <mat-step>
       <ng-template matStepLabel>Finish</ng-template>
       <app-finish *ngIf="dataService.isCA"></app-finish>
-      <app-finish-eo *ngIf="dataService.isEO"></app-finish-eo>
+      <app-finish-eo [form]="dataService.reductionCriteriaForm"
+                     [reductionCriteria]="dataService.reductionCriteria"
+        *ngIf="dataService.isEO"></app-finish-eo>
     </mat-step>
   </mat-horizontal-stepper>
 

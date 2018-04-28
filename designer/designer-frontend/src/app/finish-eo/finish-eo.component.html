@@ -3,48 +3,50 @@
 
 <mat-accordion multi="true">
 
-  <form [formGroup]="form">
-    <mat-expansion-panel expanded="true" *ngIf="reductionCriteria">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Part V: Reduction of the number of qualified candidates
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <div class="desc">
-        <mat-card>
-          The economic operator should only provide information where the contracting authority or contracting entity
-          has specified the objective and non discriminatory criteria or rules to be applied in order to limit the
-          number of candidates that will be invited to tender or to conduct a dialogue. This information, which can be
-          accompanied by requirements concerning the (types of) certificates or forms of documentary evidence, if any,
-          to be produced, is set out in the relevant notice or in the procurement documents referred to in the notice.
-          For restricted procedures, competitive procedures with negotiation, competitive dialogue procedures and
-          innovation partnerships only:
-        </mat-card>
-        <mat-card *ngFor="let cr of reductionCriteria; let i = index">
-          <div class="reductionCriteria">
+  <ng-container *ngIf="dataService.reductionCriteriaForm">
+    <form [formGroup]="dataService.reductionCriteriaForm">
+      <mat-expansion-panel expanded="true" *ngIf="reductionCriteria">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Part V: Reduction of the number of qualified candidates
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="desc">
+          <mat-card>
+            The economic operator should only provide information where the contracting authority or contracting entity
+            has specified the objective and non discriminatory criteria or rules to be applied in order to limit the
+            number of candidates that will be invited to tender or to conduct a dialogue. This information, which can be
+            accompanied by requirements concerning the (types of) certificates or forms of documentary evidence, if any,
+            to be produced, is set out in the relevant notice or in the procurement documents referred to in the notice.
+            For restricted procedures, competitive procedures with negotiation, competitive dialogue procedures and
+            innovation partnerships only:
+          </mat-card>
+          <mat-card *ngFor="let cr of reductionCriteria; let i = index">
+            <div class="reductionCriteria">
 
-            <div class="criterion-wrap">
-              <div class="criteria">
-                <h4>The economic operator declares that:</h4>
-                <h4>{{cr.name}}</h4>
-                <div class="critDesc">{{cr.description}}</div>
-                <!--<div class="eCertis">-->
-                <!--<h5>eCertis Information ...</h5>-->
-                <!--<div class="eCertDesc">no information...</div>-->
-                <!--</div>-->
+              <div class="criterion-wrap">
+                <div class="criteria">
+                  <h4>The economic operator declares that:</h4>
+                  <h4>{{cr.name}}</h4>
+                  <div class="critDesc">{{cr.description}}</div>
+                  <!--<div class="eCertis">-->
+                  <!--<h5>eCertis Information ...</h5>-->
+                  <!--<div class="eCertDesc">no information...</div>-->
+                  <!--</div>-->
+                </div>
               </div>
+              <div class="answer">
+                <app-criterion [criterion]="cr" [form]="dataService.reductionCriteriaForm.controls" [indicator]="true"></app-criterion>
+              </div>
+
             </div>
-            <div class="answer">
-              <app-criterion [criterion]="cr" [form]="form.controls" [indicator]="true"></app-criterion>
-            </div>
-
-          </div>
-        </mat-card>
+          </mat-card>
 
 
-      </div>
-    </mat-expansion-panel>
-  </form>
+        </div>
+      </mat-expansion-panel>
+    </form>
+  </ng-container>
   <mat-expansion-panel expanded="true">
     <mat-expansion-panel-header>
       <mat-panel-title>

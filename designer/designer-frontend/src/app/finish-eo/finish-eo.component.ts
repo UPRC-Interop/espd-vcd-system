@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {ReductionCriterion} from '../model/reductionCriterion.model';
 import {FormGroup} from '@angular/forms';
@@ -13,22 +13,14 @@ import {EoRelatedCriterion} from '../model/eoRelatedCriterion.model';
 })
 export class FinishEoComponent implements OnInit {
 
-  reductionCriteria: ReductionCriterion[] = null;
-  public form = new FormGroup({});
+  @Input() reductionCriteria: ReductionCriterion[];
+  @Input() form: FormGroup;
 
-  constructor(private dataService: DataService) {
+  constructor(public dataService: DataService) {
   }
 
   ngOnInit() {
-    this.dataService.getReductionCriteria()
-      .then(res => {
-        this.reductionCriteria = res;
-        this.form = this.dataService.createReductionCriterionForm(this.reductionCriteria);
 
-      })
-      .catch(err => {
-        console.log(err);
-      });
   }
 
   reqGroupMatch(rg: RequirementGroup, cr: EoRelatedCriterion, form: FormGroup, formValues: any) {
