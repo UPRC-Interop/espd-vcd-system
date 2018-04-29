@@ -392,8 +392,8 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
             connection = (HttpURLConnection) theUrl.openConnection();
             connection.setRequestMethod("GET");
             connection.setRequestProperty("Accept", "application/json");
-            connection.setConnectTimeout(15 * 1000);    // 15 sec
-            connection.setReadTimeout(15 * 1000);       // 15 sec
+            connection.setConnectTimeout(4 * 1000);    // 4 sec
+            connection.setReadTimeout(4 * 1000);       // 4 sec
             connection.connect();
 
             if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {

@@ -1,9 +1,13 @@
 package eu.esens.espdvcd.designer;
 
-import eu.esens.espdvcd.designer.endpoints.*;
-import eu.esens.espdvcd.designer.services.*;
+import eu.esens.espdvcd.designer.endpoint.CodelistsEndpoint;
+import eu.esens.espdvcd.designer.endpoint.CriteriaEndpoint;
+import eu.esens.espdvcd.designer.endpoint.ESPDEndpoint;
+import eu.esens.espdvcd.designer.endpoint.Endpoint;
+import eu.esens.espdvcd.designer.service.*;
 import spark.Service;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Server {
@@ -34,7 +38,12 @@ public class Server {
         }
 
         LOGGER.info("Attempting to bind to port " + portToBind);
-        Service spark = Service.ignite().port(portToBind); //SET THE SPARK SERVER ON FIRE
+        Service spark = Service.ignite().port(portToBind);                                //SET THE SPARK SERVER ON FIRE
+        spark.initExceptionHandler(e -> {
+            LOGGER.severe("Failed to ignite the Spark server");
+            LOGGER.log(Level.SEVERE, e.getMessage(), e);
+            System.exit(2);
+        });
         enableCORS(spark);
 
         LOGGER.info("Starting endpoint configuration");
@@ -62,26 +71,26 @@ public class Server {
             v2Context.addEndpointWithPath(predefCriteriaEndpoint, "/criteria/predefined");
 
             LOGGER.info("Configuring ESPDRequestV1 endpoint...");
-            Endpoint ESPDRequestV1Endpoint = new ESPDRequestEndpoint(new RegulatedESPDRequestV1Service());
+            Endpoint ESPDRequestV1Endpoint = new ESPDEndpoint(new RegulatedESPDRequestV1Service());
             v1Context.addEndpointWithPath(ESPDRequestV1Endpoint, "/espd/request");
 
             LOGGER.info("Configuring ESPDResponseV1 endpoint...");
-            Endpoint ESPDResponseV1Endpoint = new ESPDResponseEndpoint(new RegulatedESPDResponseV1Service());
+            Endpoint ESPDResponseV1Endpoint = new ESPDEndpoint(new RegulatedESPDResponseV1Service());
             v1Context.addEndpointWithPath(ESPDResponseV1Endpoint, "/espd/response");
 
             LOGGER.info("Configuring ESPDRequestV2 endpoint...");
-            Endpoint ESPDRequestV2Endpoint = new ESPDRequestEndpoint(new RegulatedESPDRequestV2Service());
+            Endpoint ESPDRequestV2Endpoint = new ESPDEndpoint(new RegulatedESPDRequestV2Service());
             v2Context.addEndpointWithPath(ESPDRequestV2Endpoint, "/espd/request");
 
             LOGGER.info("Configuring ESPDResponseV2 endpoint...");
-            Endpoint ESPDResponseV2Endpoint = new ESPDResponseEndpoint(new RegulatedESPDResponseV2Service());
+            Endpoint ESPDResponseV2Endpoint = new ESPDEndpoint(new RegulatedESPDResponseV2Service());
             v2Context.addEndpointWithPath(ESPDResponseV2Endpoint, "/espd/response");
         } catch (Exception e) {
             LOGGER.severe("Failed to initialize the endpoints with error " + e.getMessage());
-            System.exit(1);
+            System.exit(3);
         }
 
-        LOGGER.info("Server is up and running at port 8080");
+        LOGGER.info("Server is up and running at port " + portToBind);
     }
 
 
@@ -111,7 +120,7 @@ public class Server {
             response.header("Access-Control-Allow-Headers", "Content-Type, Content-Disposition");
         });
 
-        LOGGER.info("CORS support is now enabled. Enjoy.");
+        LOGGER.info("CORS support is now enabled. Enjoy");
     }
 
 }

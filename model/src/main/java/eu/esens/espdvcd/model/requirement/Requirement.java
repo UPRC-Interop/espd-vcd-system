@@ -1,11 +1,9 @@
 package eu.esens.espdvcd.model.requirement;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import eu.esens.espdvcd.codelist.enums.CriterionElementTypeEnum;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.requirement.response.Response;
+
 import java.io.Serializable;
 
 /**
@@ -21,9 +19,26 @@ public interface Requirement extends Serializable {
 
     void setID(String ID);
 
+    /**
+     * In schema version 2 this is mapped to: cbc:ValueDataTypeCode
+     *
+     * @return
+     */
     ResponseTypeEnum getResponseDataType();
 
     void setResponseDataType(ResponseTypeEnum responseDataType);
+
+    /**
+     * Possible types are 'CAPTION , REQUIREMENT, QUESTION'
+     *
+     * The Regulated ESPD documents do not specify REQUIREMENTS,
+     * only QUESTIONS. The SELF-CONTAINED version does
+     *
+     * @return
+     */
+    CriterionElementTypeEnum getTypeCode();
+
+    void setTypeCode(CriterionElementTypeEnum typeCode);
 
     String getDescription();
 

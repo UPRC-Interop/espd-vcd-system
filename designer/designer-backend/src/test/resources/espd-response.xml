@@ -1,0 +1,2209 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<espd-res:ESPDResponse xmlns:ccv-cbc="urn:isa:names:specification:ubl:schema:xsd:CCV-CommonBasicComponents-1" xmlns:espd-cbc="urn:grow:names:specification:ubl:schema:xsd:ESPD-CommonBasicComponents-1" xmlns:ccv-cac="urn:isa:names:specification:ubl:schema:xsd:CCV-CommonAggregateComponents-1" xmlns:espd-cac="urn:grow:names:specification:ubl:schema:xsd:ESPD-CommonAggregateComponents-1" xmlns:ubl-ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns:espd-req="urn:grow:names:specification:ubl:schema:xsd:ESPDRequest-1" xmlns:cev-cac="urn:isa:names:specification:ubl:schema:xsd:CEV-CommonAggregateComponents-1" xmlns:ubl-cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cev-cbc="urn:isa:names:specification:ubl:schema:xsd:CEV-CommonBasicComponents-1" xmlns:espd-res="urn:grow:names:specification:ubl:schema:xsd:ESPDResponse-1" xmlns:ubl-cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+    <ubl-cbc:UBLVersionID schemeAgencyID="OASIS-UBL-TC">2.1</ubl-cbc:UBLVersionID>
+    <ubl-cbc:CustomizationID schemeName="CustomizationID" schemeAgencyID="BII" schemeVersionID="3.0">urn:www.cenbii.eu:transaction:biitrns092:ver3.0</ubl-cbc:CustomizationID>
+    <ubl-cbc:ProfileID schemeAgencyID="BII">ESPD</ubl-cbc:ProfileID>
+    <ubl-cbc:ID schemeID="ISO/IEC 9834-8:2008 - 4UUID" schemeAgencyID="EU-COM-GROW" schemeAgencyName="DG GROW (European Commission)" schemeVersionID="1.1">0540188e-c94d-42bd-914d-7dca368e3e15</ubl-cbc:ID>
+    <ubl-cbc:CopyIndicator>false</ubl-cbc:CopyIndicator>
+    <ubl-cbc:VersionID schemeAgencyID="EU-COM-GROW">2017.01.01</ubl-cbc:VersionID>
+    <ubl-cbc:IssueDate>2018-03-29</ubl-cbc:IssueDate>
+    <ubl-cbc:IssueTime>13:59:11</ubl-cbc:IssueTime>
+    <ubl-cbc:ContractFolderID schemeAgencyID="TeD">__ProcurementProcedureFileRefNumber</ubl-cbc:ContractFolderID>
+    <ubl-cac:ContractingParty>
+        <ubl-cac:Party>
+            <ubl-cbc:WebsiteURI>__www.Procurer.com</ubl-cbc:WebsiteURI>
+            <ubl-cac:PartyIdentification>
+                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">__ProcurerID</ubl-cbc:ID>
+            </ubl-cac:PartyIdentification>
+            <ubl-cac:PartyName>
+                <ubl-cbc:Name>__ProcurerName</ubl-cbc:Name>
+            </ubl-cac:PartyName>
+            <ubl-cac:PostalAddress>
+                <ubl-cbc:StreetName>__ProcurerStreet</ubl-cbc:StreetName>
+                <ubl-cbc:CityName>__ProcurerCity</ubl-cbc:CityName>
+                <ubl-cbc:PostalZone>12345</ubl-cbc:PostalZone>
+                <ubl-cac:Country>
+                    <ubl-cbc:IdentificationCode listID="CountryCodeIdentifier" listAgencyID="EU-COM-GROW" listName="CountryCodeIdentifier" listVersionID="1.0.2">AD</ubl-cbc:IdentificationCode>
+                </ubl-cac:Country>
+            </ubl-cac:PostalAddress>
+            <ubl-cac:Contact>
+                <ubl-cbc:Name>__ProcurerContactName</ubl-cbc:Name>
+                <ubl-cbc:Telephone>654321</ubl-cbc:Telephone>
+                <ubl-cbc:Telefax>098765</ubl-cbc:Telefax>
+                <ubl-cbc:ElectronicMail>__ProcurerContact@pr.com</ubl-cbc:ElectronicMail>
+            </ubl-cac:Contact>
+        </ubl-cac:Party>
+    </ubl-cac:ContractingParty>
+    <espd-cac:EconomicOperatorParty>
+        <espd-cbc:SMEIndicator>true</espd-cbc:SMEIndicator>
+        <espd-cac:RepresentativeNaturalPerson>
+            <espd-cbc:NaturalPersonRoleDescription>__EoRepresRole</espd-cbc:NaturalPersonRoleDescription>
+            <ubl-cac:PowerOfAttorney>
+                <ubl-cac:AgentParty>
+                    <ubl-cac:Person>
+                        <ubl-cbc:FirstName>__EoRepresName</ubl-cbc:FirstName>
+                        <ubl-cbc:FamilyName>__EoRepresFamName</ubl-cbc:FamilyName>
+                        <ubl-cbc:BirthDate>2017-01-01</ubl-cbc:BirthDate>
+                        <ubl-cbc:BirthplaceName>__EoRepresBirthPlace</ubl-cbc:BirthplaceName>
+                        <ubl-cac:Contact>
+                            <ubl-cbc:Telephone>540923</ubl-cbc:Telephone>
+                            <ubl-cbc:ElectronicMail>__EoRepres@eo.com</ubl-cbc:ElectronicMail>
+                        </ubl-cac:Contact>
+                        <ubl-cac:ResidenceAddress>
+                            <ubl-cbc:StreetName>__EoRepresStreet</ubl-cbc:StreetName>
+                            <ubl-cbc:CityName>__EoRepresCity</ubl-cbc:CityName>
+                            <ubl-cbc:PostalZone>54321</ubl-cbc:PostalZone>
+                            <ubl-cac:Country>
+                                <ubl-cbc:IdentificationCode listID="CountryCodeIdentifier" listAgencyID="EU-COM-GROW" listName="CountryCodeIdentifier" listVersionID="1.0.2">NL</ubl-cbc:IdentificationCode>
+                            </ubl-cac:Country>
+                        </ubl-cac:ResidenceAddress>
+                    </ubl-cac:Person>
+                </ubl-cac:AgentParty>
+            </ubl-cac:PowerOfAttorney>
+        </espd-cac:RepresentativeNaturalPerson>
+        <ubl-cac:Party>
+            <ubl-cbc:WebsiteURI>__Eo@eo.com</ubl-cbc:WebsiteURI>
+            <ubl-cac:PartyIdentification>
+                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">__EoID</ubl-cbc:ID>
+            </ubl-cac:PartyIdentification>
+            <ubl-cac:PartyName>
+                <ubl-cbc:Name>__EoName</ubl-cbc:Name>
+            </ubl-cac:PartyName>
+            <ubl-cac:PostalAddress>
+                <ubl-cbc:StreetName>__EoStreet</ubl-cbc:StreetName>
+                <ubl-cbc:CityName>__EoCity</ubl-cbc:CityName>
+                <ubl-cbc:PostalZone>98651</ubl-cbc:PostalZone>
+                <ubl-cac:Country>
+                    <ubl-cbc:IdentificationCode listID="CountryCodeIdentifier" listAgencyID="EU-COM-GROW" listName="CountryCodeIdentifier" listVersionID="1.0.2">DE</ubl-cbc:IdentificationCode>
+                </ubl-cac:Country>
+            </ubl-cac:PostalAddress>
+            <ubl-cac:Contact>
+                <ubl-cbc:Name>__EoContactName</ubl-cbc:Name>
+                <ubl-cbc:Telephone>324598</ubl-cbc:Telephone>
+                <ubl-cbc:Telefax>456712</ubl-cbc:Telefax>
+                <ubl-cbc:ElectronicMail>__EoContact@eo.com</ubl-cbc:ElectronicMail>
+            </ubl-cac:Contact>
+        </ubl-cac:Party>
+    </espd-cac:EconomicOperatorParty>
+    <ubl-cac:ProcurementProjectLot>
+        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">0</ubl-cbc:ID>
+    </ubl-cac:ProcurementProjectLot>
+    <ccv-cac:Criterion>
+        <ubl-cbc:ID schemeID="CriteriaID" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">005eb9ed-1347-4ca3-bb29-9bc0db64e1ab</ubl-cbc:ID>
+        <ubl-cbc:TypeCode listID="CriteriaTypeCode" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">CRITERION.EXCLUSION.CONVICTIONS.PARTICIPATION_IN_CRIMINAL_ORGANISATION</ubl-cbc:TypeCode>
+        <ubl-cbc:Name>Participation in a criminal organisation</ubl-cbc:Name>
+        <ubl-cbc:Description>Has the economic operator itself or any person who is a member of its administrative, management or supervisory body or has powers of representation, decision or control therein been the subject of a conviction by final judgment for participation in a criminal organisation, by a conviction rendered at the most five years ago or in which an exclusion period set out directly in the conviction continues to be applicable? As defined in Article 2 of Council Framework Decision 2008/841/JHA of 24 October 2008 on the fight against organised crime (OJ L 300, 11.11.2008, p. 42).</ubl-cbc:Description>
+        <ccv-cac:LegislationReference>
+            <ccv-cbc:Title>Public Procurement Directive 2014/24/EU</ccv-cbc:Title>
+            <ubl-cbc:Description>Directive 2014/24/EU of the European Parliament and of the Council of 26 February 2014 on public procurement and repealing Directive 2004/18/EC</ubl-cbc:Description>
+            <ccv-cbc:JurisdictionLevelCode listID="CriterionJurisdictionLevel" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">EU_DIRECTIVE</ccv-cbc:JurisdictionLevelCode>
+            <ccv-cbc:Article>57(1)</ccv-cbc:Article>
+            <ubl-cbc:URI>http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32014L0024</ubl-cbc:URI>
+        </ccv-cac:LegislationReference>
+        <ccv-cac:RequirementGroup>
+            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7c637c0c-7703-4389-ba52-02997a055bd7</ubl-cbc:ID>
+            <ccv-cac:Requirement responseDataType="INDICATOR">
+                <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">974c8196-9d1c-419c-9ca9-45bb9f5fd59a</ubl-cbc:ID>
+                <ubl-cbc:Description>Your answer?</ubl-cbc:Description>
+                <ccv-cac:Response>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">74f0a620-33b5-41d6-8276-6806fa2be9bc</ubl-cbc:ID>
+                    <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                </ccv-cac:Response>
+            </ccv-cac:Requirement>
+            <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">f5276600-a2b6-4ff6-a90e-b31fe19dae41</ubl-cbc:ID>
+                <ccv-cac:Requirement responseDataType="DATE">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">ecf40999-7b64-4e10-b960-7f8ff8674cf6</ubl-cbc:ID>
+                    <ubl-cbc:Description>Date of conviction</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">1e155bcb-205e-4efe-bb97-512e89f0e43c</ubl-cbc:ID>
+                        <ubl-cbc:Date>2016-01-01</ubl-cbc:Date>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7d35fb7c-da5b-4830-b598-4f347a04dceb</ubl-cbc:ID>
+                    <ubl-cbc:Description>Reason</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">fbd2b397-b05c-491b-9f72-3fbe9b7de2e3</ubl-cbc:ID>
+                        <ubl-cbc:Description>__CriminalParticipationReason</ubl-cbc:Description>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">c5012430-14da-454c-9d01-34cedc6a7ded</ubl-cbc:ID>
+                    <ubl-cbc:Description>Who has been convicted</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">9df778a0-6b80-4e9c-ae86-9f3d4cbca690</ubl-cbc:ID>
+                        <ubl-cbc:Description>__CriminalParticipationWho</ubl-cbc:Description>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="PERIOD">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">9ca9096f-edd2-4f19-b6b1-b55c83a2d5c8</ubl-cbc:ID>
+                    <ubl-cbc:Description>Length of the period of exclusion</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">cd593d51-0388-4b69-aae4-40bbe4b34ddd</ubl-cbc:ID>
+                        <ubl-cac:Period>
+                            <ubl-cbc:Description>__CriminalParticipationLength</ubl-cbc:Description>
+                        </ubl-cac:Period>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:RequirementGroup>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">5f9f09f7-f701-432c-9fdc-c22c124a74c9</ubl-cbc:ID>
+                    <ccv-cac:Requirement responseDataType="INDICATOR">
+                        <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">20c5361b-7599-4ee6-b030-7f8323174d1e</ubl-cbc:ID>
+                        <ubl-cbc:Description>Have you taken measures to demonstrate your reliability ("Self-Cleaning")?</ubl-cbc:Description>
+                        <ccv-cac:Response>
+                            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">348a3c46-ce18-498e-9708-5e2c9ad08f12</ubl-cbc:ID>
+                            <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                        </ccv-cac:Response>
+                    </ccv-cac:Requirement>
+                    <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">74e6c7b4-757b-4b40-ada6-fad6a997c310</ubl-cbc:ID>
+                        <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                            <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7b07904f-e080-401a-a3a1-9a3efeeda54b</ubl-cbc:ID>
+                            <ubl-cbc:Description>Please describe them</ubl-cbc:Description>
+                            <ccv-cac:Response>
+                                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">79819efd-3d1d-49a0-b190-610b9a777718</ubl-cbc:ID>
+                                <ubl-cbc:Description>__CriminalParticipationSelfCleaning</ubl-cbc:Description>
+                            </ccv-cac:Response>
+                        </ccv-cac:Requirement>
+                    </ccv-cac:RequirementGroup>
+                </ccv-cac:RequirementGroup>
+            </ccv-cac:RequirementGroup>
+        </ccv-cac:RequirementGroup>
+        <ccv-cac:RequirementGroup>
+            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7458d42a-e581-4640-9283-34ceb3ad4345</ubl-cbc:ID>
+            <ccv-cac:Requirement responseDataType="INDICATOR">
+                <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">c1347b74-1872-4060-a6db-f4044edcd7c4</ubl-cbc:ID>
+                <ubl-cbc:Description>Is this information available electronically?</ubl-cbc:Description>
+                <ccv-cac:Response>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">5af680be-966b-43dd-b669-b3eaf9d5bbb5</ubl-cbc:ID>
+                    <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                </ccv-cac:Response>
+            </ccv-cac:Requirement>
+            <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">41dd2e9b-1bfd-44c7-93ee-56bd74a4334b</ubl-cbc:ID>
+                <ccv-cac:Requirement responseDataType="EVIDENCE_URL">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">f4313bb6-21b6-499e-bdff-debe10e11d2c</ubl-cbc:ID>
+                    <ubl-cbc:Description>URL</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">18102c04-2caa-4647-aa3b-ae3a102aa53f</ubl-cbc:ID>
+                        <cev-cac:Evidence>
+                            <cev-cac:EvidenceDocumentReference>
+                                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">1156b5c1-112f-4912-b735-856b2dd32f9e</ubl-cbc:ID>
+                                <ubl-cac:Attachment>
+                                    <ubl-cac:ExternalReference>
+                                        <ubl-cbc:URI>www.__CriminalPart.com</ubl-cbc:URI>
+                                    </ubl-cac:ExternalReference>
+                                </ubl-cac:Attachment>
+                            </cev-cac:EvidenceDocumentReference>
+                        </cev-cac:Evidence>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="CODE">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">1f1cd18e-3e01-4ca2-af4c-e2981924ba8d</ubl-cbc:ID>
+                    <ubl-cbc:Description>Code</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">3e493fdf-4125-4a49-9ba9-08b2e55a6781</ubl-cbc:ID>
+                        <ccv-cbc:Code>__CriminalParticipationCode</ccv-cbc:Code>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">c3ccfa31-0c5e-4e3a-a3fd-db9fb83d78d4</ubl-cbc:ID>
+                    <ubl-cbc:Description>Issuer</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">3a7f2cd4-20e0-4a5f-bc8d-353d0d039a59</ubl-cbc:ID>
+                        <ubl-cbc:Description>__CriminalParticipationIssuer</ubl-cbc:Description>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+            </ccv-cac:RequirementGroup>
+        </ccv-cac:RequirementGroup>
+    </ccv-cac:Criterion>
+    <ccv-cac:Criterion>
+        <ubl-cbc:ID schemeID="CriteriaID" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">c27b7c4e-c837-4529-b867-ed55ce639db5</ubl-cbc:ID>
+        <ubl-cbc:TypeCode listID="CriteriaTypeCode" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">CRITERION.EXCLUSION.CONVICTIONS.CORRUPTION</ubl-cbc:TypeCode>
+        <ubl-cbc:Name>Corruption</ubl-cbc:Name>
+        <ubl-cbc:Description>Has the economic operator itself or any person who is a member of its administrative, management or supervisory body or has powers of representation, decision or control therein been the subject of a conviction by final judgment for corruption, by a conviction rendered at the most five years ago or in which an exclusion period set out directly in the conviction continues to be applicable? As defined in Article 3 of the Convention on the fight against corruption involving officials of the European Communities or officials of Member States of the European Union, OJ C 195, 25.6.1997, p. 1, and in Article 2(1) of Council Framework Decision 2003/568/JHA of 22 July 2003 on combating corruption in the private sector (OJ L 192, 31.7.2003, p. 54). This exclusion ground also includes corruption as defined in the national law of the contracting authority (contracting entity) or the economic operator.</ubl-cbc:Description>
+        <ccv-cac:LegislationReference>
+            <ccv-cbc:Title>Public Procurement Directive 2014/24/EU</ccv-cbc:Title>
+            <ubl-cbc:Description>Directive 2014/24/EU of the European Parliament and of the Council of 26 February 2014 on public procurement and repealing Directive 2004/18/EC</ubl-cbc:Description>
+            <ccv-cbc:JurisdictionLevelCode listID="CriterionJurisdictionLevel" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">EU_DIRECTIVE</ccv-cbc:JurisdictionLevelCode>
+            <ccv-cbc:Article>57(1)</ccv-cbc:Article>
+            <ubl-cbc:URI>http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32014L0024</ubl-cbc:URI>
+        </ccv-cac:LegislationReference>
+        <ccv-cac:RequirementGroup>
+            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7c637c0c-7703-4389-ba52-02997a055bd7</ubl-cbc:ID>
+            <ccv-cac:Requirement responseDataType="INDICATOR">
+                <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">974c8196-9d1c-419c-9ca9-45bb9f5fd59a</ubl-cbc:ID>
+                <ubl-cbc:Description>Your answer?</ubl-cbc:Description>
+                <ccv-cac:Response>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">5f999193-66dc-409a-8810-fbc9aaec5621</ubl-cbc:ID>
+                    <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                </ccv-cac:Response>
+            </ccv-cac:Requirement>
+            <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">f5276600-a2b6-4ff6-a90e-b31fe19dae41</ubl-cbc:ID>
+                <ccv-cac:Requirement responseDataType="DATE">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">ecf40999-7b64-4e10-b960-7f8ff8674cf6</ubl-cbc:ID>
+                    <ubl-cbc:Description>Date of conviction</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">33610baa-f465-4473-9351-d01fb9979df5</ubl-cbc:ID>
+                        <ubl-cbc:Date>2017-01-02</ubl-cbc:Date>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7d35fb7c-da5b-4830-b598-4f347a04dceb</ubl-cbc:ID>
+                    <ubl-cbc:Description>Reason</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">f644e986-5ba5-4d2e-987a-ec35c6f07cdd</ubl-cbc:ID>
+                        <ubl-cbc:Description>__CorruptionReason</ubl-cbc:Description>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">c5012430-14da-454c-9d01-34cedc6a7ded</ubl-cbc:ID>
+                    <ubl-cbc:Description>Who has been convicted</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">5fbc301b-7d8e-45a5-8ef2-128e29136196</ubl-cbc:ID>
+                        <ubl-cbc:Description>__CorruptionWho</ubl-cbc:Description>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="PERIOD">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">9ca9096f-edd2-4f19-b6b1-b55c83a2d5c8</ubl-cbc:ID>
+                    <ubl-cbc:Description>Length of the period of exclusion</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">3cb88aa8-ec3b-45fd-84fb-04406da4c133</ubl-cbc:ID>
+                        <ubl-cac:Period>
+                            <ubl-cbc:Description>__CorruptionLength</ubl-cbc:Description>
+                        </ubl-cac:Period>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:RequirementGroup>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">5f9f09f7-f701-432c-9fdc-c22c124a74c9</ubl-cbc:ID>
+                    <ccv-cac:Requirement responseDataType="INDICATOR">
+                        <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">20c5361b-7599-4ee6-b030-7f8323174d1e</ubl-cbc:ID>
+                        <ubl-cbc:Description>Have you taken measures to demonstrate your reliability ("Self-Cleaning")?</ubl-cbc:Description>
+                        <ccv-cac:Response>
+                            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">50db73d0-0fb0-4ec1-a6af-6212c34582aa</ubl-cbc:ID>
+                            <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                        </ccv-cac:Response>
+                    </ccv-cac:Requirement>
+                    <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">74e6c7b4-757b-4b40-ada6-fad6a997c310</ubl-cbc:ID>
+                        <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                            <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7b07904f-e080-401a-a3a1-9a3efeeda54b</ubl-cbc:ID>
+                            <ubl-cbc:Description>Please describe them</ubl-cbc:Description>
+                            <ccv-cac:Response>
+                                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">f07bfe55-05e0-4fd5-add5-183c9aacb221</ubl-cbc:ID>
+                                <ubl-cbc:Description>__CorruptionDescription</ubl-cbc:Description>
+                            </ccv-cac:Response>
+                        </ccv-cac:Requirement>
+                    </ccv-cac:RequirementGroup>
+                </ccv-cac:RequirementGroup>
+            </ccv-cac:RequirementGroup>
+        </ccv-cac:RequirementGroup>
+        <ccv-cac:RequirementGroup>
+            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7458d42a-e581-4640-9283-34ceb3ad4345</ubl-cbc:ID>
+            <ccv-cac:Requirement responseDataType="INDICATOR">
+                <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">c1347b74-1872-4060-a6db-f4044edcd7c4</ubl-cbc:ID>
+                <ubl-cbc:Description>Is this information available electronically?</ubl-cbc:Description>
+                <ccv-cac:Response>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">c1b318d5-98a9-43cd-9ef1-5b073290d74a</ubl-cbc:ID>
+                    <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                </ccv-cac:Response>
+            </ccv-cac:Requirement>
+            <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">41dd2e9b-1bfd-44c7-93ee-56bd74a4334b</ubl-cbc:ID>
+                <ccv-cac:Requirement responseDataType="EVIDENCE_URL">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">f4313bb6-21b6-499e-bdff-debe10e11d2c</ubl-cbc:ID>
+                    <ubl-cbc:Description>URL</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">43ceeb5e-5fef-4c23-a633-f219edd1fab9</ubl-cbc:ID>
+                        <cev-cac:Evidence>
+                            <cev-cac:EvidenceDocumentReference>
+                                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">49a184c5-856c-451f-960a-0c02cd44c9d3</ubl-cbc:ID>
+                                <ubl-cac:Attachment>
+                                    <ubl-cac:ExternalReference>
+                                        <ubl-cbc:URI>www.__Corruption.Com</ubl-cbc:URI>
+                                    </ubl-cac:ExternalReference>
+                                </ubl-cac:Attachment>
+                            </cev-cac:EvidenceDocumentReference>
+                        </cev-cac:Evidence>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="CODE">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">1f1cd18e-3e01-4ca2-af4c-e2981924ba8d</ubl-cbc:ID>
+                    <ubl-cbc:Description>Code</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">d7ebe3a7-b4b6-42f2-856c-01944587eeae</ubl-cbc:ID>
+                        <ccv-cbc:Code>__CorruptionCode</ccv-cbc:Code>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">c3ccfa31-0c5e-4e3a-a3fd-db9fb83d78d4</ubl-cbc:ID>
+                    <ubl-cbc:Description>Issuer</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">4b14c3fb-095a-48b2-9a48-64991e528ae2</ubl-cbc:ID>
+                        <ubl-cbc:Description>__CorruptionIssuer</ubl-cbc:Description>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+            </ccv-cac:RequirementGroup>
+        </ccv-cac:RequirementGroup>
+    </ccv-cac:Criterion>
+    <ccv-cac:Criterion>
+        <ubl-cbc:ID schemeID="CriteriaID" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">297d2323-3ede-424e-94bc-a91561e6f320</ubl-cbc:ID>
+        <ubl-cbc:TypeCode listID="CriteriaTypeCode" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">CRITERION.EXCLUSION.CONVICTIONS.FRAUD</ubl-cbc:TypeCode>
+        <ubl-cbc:Name>Fraud</ubl-cbc:Name>
+        <ubl-cbc:Description>Has the economic operator itself or any person who is a member of its administrative, management or supervisory body or has powers of representation, decision or control therein been the subject of a conviction by final judgment for fraud, by a conviction rendered at the most five years ago or in which an exclusion period set out directly in the conviction continues to be applicable? Within the meaning of Article 1 of the Convention on the protection of the European Communities' financial interests (OJ C 316, 27.11.1995, p. 48).</ubl-cbc:Description>
+        <ccv-cac:LegislationReference>
+            <ccv-cbc:Title>Public Procurement Directive 2014/24/EU</ccv-cbc:Title>
+            <ubl-cbc:Description>Directive 2014/24/EU of the European Parliament and of the Council of 26 February 2014 on public procurement and repealing Directive 2004/18/EC</ubl-cbc:Description>
+            <ccv-cbc:JurisdictionLevelCode listID="CriterionJurisdictionLevel" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">EU_DIRECTIVE</ccv-cbc:JurisdictionLevelCode>
+            <ccv-cbc:Article>57(1)</ccv-cbc:Article>
+            <ubl-cbc:URI>http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32014L0024</ubl-cbc:URI>
+        </ccv-cac:LegislationReference>
+        <ccv-cac:RequirementGroup>
+            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7c637c0c-7703-4389-ba52-02997a055bd7</ubl-cbc:ID>
+            <ccv-cac:Requirement responseDataType="INDICATOR">
+                <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">974c8196-9d1c-419c-9ca9-45bb9f5fd59a</ubl-cbc:ID>
+                <ubl-cbc:Description>Your answer?</ubl-cbc:Description>
+                <ccv-cac:Response>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">193aa957-77e1-4cf5-8f2d-2e3a268eca35</ubl-cbc:ID>
+                    <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                </ccv-cac:Response>
+            </ccv-cac:Requirement>
+            <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">f5276600-a2b6-4ff6-a90e-b31fe19dae41</ubl-cbc:ID>
+                <ccv-cac:Requirement responseDataType="DATE">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">ecf40999-7b64-4e10-b960-7f8ff8674cf6</ubl-cbc:ID>
+                    <ubl-cbc:Description>Date of conviction</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">8812940b-2829-488c-8cf1-2c2022ca8175</ubl-cbc:ID>
+                        <ubl-cbc:Date>2018-01-02</ubl-cbc:Date>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7d35fb7c-da5b-4830-b598-4f347a04dceb</ubl-cbc:ID>
+                    <ubl-cbc:Description>Reason</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">267df947-0a2e-4e3e-bddb-6af853d421f6</ubl-cbc:ID>
+                        <ubl-cbc:Description>__FraudReason</ubl-cbc:Description>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">c5012430-14da-454c-9d01-34cedc6a7ded</ubl-cbc:ID>
+                    <ubl-cbc:Description>Who has been convicted</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">a20477e3-20f2-48f8-8fef-a0240634cf73</ubl-cbc:ID>
+                        <ubl-cbc:Description>__FraudWho</ubl-cbc:Description>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="PERIOD">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">9ca9096f-edd2-4f19-b6b1-b55c83a2d5c8</ubl-cbc:ID>
+                    <ubl-cbc:Description>Length of the period of exclusion</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">dd5e15a1-de8c-4d70-a379-1d98f1e1beb4</ubl-cbc:ID>
+                        <ubl-cac:Period>
+                            <ubl-cbc:Description>__FraudLength</ubl-cbc:Description>
+                        </ubl-cac:Period>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:RequirementGroup>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">5f9f09f7-f701-432c-9fdc-c22c124a74c9</ubl-cbc:ID>
+                    <ccv-cac:Requirement responseDataType="INDICATOR">
+                        <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">20c5361b-7599-4ee6-b030-7f8323174d1e</ubl-cbc:ID>
+                        <ubl-cbc:Description>Have you taken measures to demonstrate your reliability ("Self-Cleaning")?</ubl-cbc:Description>
+                        <ccv-cac:Response>
+                            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">6aa8ff75-a921-4c3b-a3cf-e61db9470f83</ubl-cbc:ID>
+                            <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                        </ccv-cac:Response>
+                    </ccv-cac:Requirement>
+                    <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">74e6c7b4-757b-4b40-ada6-fad6a997c310</ubl-cbc:ID>
+                        <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                            <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7b07904f-e080-401a-a3a1-9a3efeeda54b</ubl-cbc:ID>
+                            <ubl-cbc:Description>Please describe them</ubl-cbc:Description>
+                            <ccv-cac:Response>
+                                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">a7e1104b-a85f-47ee-8c03-19ca3ac94799</ubl-cbc:ID>
+                                <ubl-cbc:Description>__FraudSelfCleaning</ubl-cbc:Description>
+                            </ccv-cac:Response>
+                        </ccv-cac:Requirement>
+                    </ccv-cac:RequirementGroup>
+                </ccv-cac:RequirementGroup>
+            </ccv-cac:RequirementGroup>
+        </ccv-cac:RequirementGroup>
+        <ccv-cac:RequirementGroup>
+            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7458d42a-e581-4640-9283-34ceb3ad4345</ubl-cbc:ID>
+            <ccv-cac:Requirement responseDataType="INDICATOR">
+                <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">c1347b74-1872-4060-a6db-f4044edcd7c4</ubl-cbc:ID>
+                <ubl-cbc:Description>Is this information available electronically?</ubl-cbc:Description>
+                <ccv-cac:Response>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">e96912c3-8115-4433-94df-5010e90064ee</ubl-cbc:ID>
+                    <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                </ccv-cac:Response>
+            </ccv-cac:Requirement>
+            <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">41dd2e9b-1bfd-44c7-93ee-56bd74a4334b</ubl-cbc:ID>
+                <ccv-cac:Requirement responseDataType="EVIDENCE_URL">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">f4313bb6-21b6-499e-bdff-debe10e11d2c</ubl-cbc:ID>
+                    <ubl-cbc:Description>URL</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">e906760c-e34d-4b97-8677-d3dfa158b0fe</ubl-cbc:ID>
+                        <cev-cac:Evidence>
+                            <cev-cac:EvidenceDocumentReference>
+                                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">a2324a47-9fb0-4815-96c8-55b8b8e775c9</ubl-cbc:ID>
+                                <ubl-cac:Attachment>
+                                    <ubl-cac:ExternalReference>
+                                        <ubl-cbc:URI>www.__Fraud.com</ubl-cbc:URI>
+                                    </ubl-cac:ExternalReference>
+                                </ubl-cac:Attachment>
+                            </cev-cac:EvidenceDocumentReference>
+                        </cev-cac:Evidence>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="CODE">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">1f1cd18e-3e01-4ca2-af4c-e2981924ba8d</ubl-cbc:ID>
+                    <ubl-cbc:Description>Code</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">f617253b-c448-4255-bca0-7d46b7ecfa43</ubl-cbc:ID>
+                        <ccv-cbc:Code>__FraudCode</ccv-cbc:Code>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">c3ccfa31-0c5e-4e3a-a3fd-db9fb83d78d4</ubl-cbc:ID>
+                    <ubl-cbc:Description>Issuer</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">a54780cf-4e74-4e77-b285-db8c27e836be</ubl-cbc:ID>
+                        <ubl-cbc:Description>__FraudIssuer</ubl-cbc:Description>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+            </ccv-cac:RequirementGroup>
+        </ccv-cac:RequirementGroup>
+    </ccv-cac:Criterion>
+    <ccv-cac:Criterion>
+        <ubl-cbc:ID schemeID="CriteriaID" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">d486fb70-86b3-4e75-97f2-0d71b5697c7d</ubl-cbc:ID>
+        <ubl-cbc:TypeCode listID="CriteriaTypeCode" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">CRITERION.EXCLUSION.CONVICTIONS.TERRORIST_OFFENCES</ubl-cbc:TypeCode>
+        <ubl-cbc:Name>Terrorist offences or offences linked to terrorist activities</ubl-cbc:Name>
+        <ubl-cbc:Description>Has the economic operator itself or any person who is a member of its administrative, management or supervisory body or has powers of representation, decision or control therein been the subject of a conviction by final judgment for terrorist offences or offences linked to terrorist activities, by a conviction rendered at the most five years ago or in which an exclusion period set out directly in the conviction continues to be applicable? As defined in Articles 1 and 3 of Council Framework Decision of 13 June 2002 on combating terrorism (OJ L 164, 22.6.2002, p. 3). This exclusion ground also includes inciting or aiding or abetting or attempting to commit an offence, as referred to in Article 4 of that Framework Decision.</ubl-cbc:Description>
+        <ccv-cac:LegislationReference>
+            <ccv-cbc:Title>Public Procurement Directive 2014/24/EU</ccv-cbc:Title>
+            <ubl-cbc:Description>Directive 2014/24/EU of the European Parliament and of the Council of 26 February 2014 on public procurement and repealing Directive 2004/18/EC</ubl-cbc:Description>
+            <ccv-cbc:JurisdictionLevelCode listID="CriterionJurisdictionLevel" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">EU_DIRECTIVE</ccv-cbc:JurisdictionLevelCode>
+            <ccv-cbc:Article>57(1)</ccv-cbc:Article>
+            <ubl-cbc:URI>http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32014L0024</ubl-cbc:URI>
+        </ccv-cac:LegislationReference>
+        <ccv-cac:RequirementGroup>
+            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7c637c0c-7703-4389-ba52-02997a055bd7</ubl-cbc:ID>
+            <ccv-cac:Requirement responseDataType="INDICATOR">
+                <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">974c8196-9d1c-419c-9ca9-45bb9f5fd59a</ubl-cbc:ID>
+                <ubl-cbc:Description>Your answer?</ubl-cbc:Description>
+                <ccv-cac:Response>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">b038eb5c-32a1-4796-a449-94da4ca1b90b</ubl-cbc:ID>
+                    <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                </ccv-cac:Response>
+            </ccv-cac:Requirement>
+            <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">f5276600-a2b6-4ff6-a90e-b31fe19dae41</ubl-cbc:ID>
+                <ccv-cac:Requirement responseDataType="DATE">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">ecf40999-7b64-4e10-b960-7f8ff8674cf6</ubl-cbc:ID>
+                    <ubl-cbc:Description>Date of conviction</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">e66a193b-a6d3-485a-a534-b40aadef3d38</ubl-cbc:ID>
+                        <ubl-cbc:Date>2017-01-03</ubl-cbc:Date>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7d35fb7c-da5b-4830-b598-4f347a04dceb</ubl-cbc:ID>
+                    <ubl-cbc:Description>Reason</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">33bc7269-ad70-4eca-b545-bf3546086d69</ubl-cbc:ID>
+                        <ubl-cbc:Description>__TerrorReason</ubl-cbc:Description>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">c5012430-14da-454c-9d01-34cedc6a7ded</ubl-cbc:ID>
+                    <ubl-cbc:Description>Who has been convicted</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">9f7464cb-f8b9-4a28-abeb-c34c096aea09</ubl-cbc:ID>
+                        <ubl-cbc:Description>__TerrorWho</ubl-cbc:Description>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="PERIOD">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">9ca9096f-edd2-4f19-b6b1-b55c83a2d5c8</ubl-cbc:ID>
+                    <ubl-cbc:Description>Length of the period of exclusion</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">bd368be2-9efe-4c37-b083-cc56bf5f9e09</ubl-cbc:ID>
+                        <ubl-cac:Period>
+                            <ubl-cbc:Description>__TerrorLength</ubl-cbc:Description>
+                        </ubl-cac:Period>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:RequirementGroup>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">5f9f09f7-f701-432c-9fdc-c22c124a74c9</ubl-cbc:ID>
+                    <ccv-cac:Requirement responseDataType="INDICATOR">
+                        <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">20c5361b-7599-4ee6-b030-7f8323174d1e</ubl-cbc:ID>
+                        <ubl-cbc:Description>Have you taken measures to demonstrate your reliability ("Self-Cleaning")?</ubl-cbc:Description>
+                        <ccv-cac:Response>
+                            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">47cf3191-fd2a-40cf-abcd-6f3824fbde71</ubl-cbc:ID>
+                            <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                        </ccv-cac:Response>
+                    </ccv-cac:Requirement>
+                    <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">74e6c7b4-757b-4b40-ada6-fad6a997c310</ubl-cbc:ID>
+                        <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                            <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7b07904f-e080-401a-a3a1-9a3efeeda54b</ubl-cbc:ID>
+                            <ubl-cbc:Description>Please describe them</ubl-cbc:Description>
+                            <ccv-cac:Response>
+                                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">79a72c39-0824-434e-aebd-595e3ef2e9db</ubl-cbc:ID>
+                                <ubl-cbc:Description>__TerrorSelfCleaning</ubl-cbc:Description>
+                            </ccv-cac:Response>
+                        </ccv-cac:Requirement>
+                    </ccv-cac:RequirementGroup>
+                </ccv-cac:RequirementGroup>
+            </ccv-cac:RequirementGroup>
+        </ccv-cac:RequirementGroup>
+        <ccv-cac:RequirementGroup>
+            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7458d42a-e581-4640-9283-34ceb3ad4345</ubl-cbc:ID>
+            <ccv-cac:Requirement responseDataType="INDICATOR">
+                <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">c1347b74-1872-4060-a6db-f4044edcd7c4</ubl-cbc:ID>
+                <ubl-cbc:Description>Is this information available electronically?</ubl-cbc:Description>
+                <ccv-cac:Response>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">0f9fe59f-7c70-464c-b44e-fa1a917ab73f</ubl-cbc:ID>
+                    <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                </ccv-cac:Response>
+            </ccv-cac:Requirement>
+            <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">41dd2e9b-1bfd-44c7-93ee-56bd74a4334b</ubl-cbc:ID>
+                <ccv-cac:Requirement responseDataType="EVIDENCE_URL">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">f4313bb6-21b6-499e-bdff-debe10e11d2c</ubl-cbc:ID>
+                    <ubl-cbc:Description>URL</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">cf9efff9-8e91-43d8-9c32-c45a5f21aa84</ubl-cbc:ID>
+                        <cev-cac:Evidence>
+                            <cev-cac:EvidenceDocumentReference>
+                                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">c5af75af-d8a0-466b-8122-bddee8a28b9a</ubl-cbc:ID>
+                                <ubl-cac:Attachment>
+                                    <ubl-cac:ExternalReference>
+                                        <ubl-cbc:URI>www.__Terror.com</ubl-cbc:URI>
+                                    </ubl-cac:ExternalReference>
+                                </ubl-cac:Attachment>
+                            </cev-cac:EvidenceDocumentReference>
+                        </cev-cac:Evidence>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="CODE">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">1f1cd18e-3e01-4ca2-af4c-e2981924ba8d</ubl-cbc:ID>
+                    <ubl-cbc:Description>Code</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">f12814f6-5136-46e1-a14b-ec5edac055ca</ubl-cbc:ID>
+                        <ccv-cbc:Code>__TerrorCode</ccv-cbc:Code>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">c3ccfa31-0c5e-4e3a-a3fd-db9fb83d78d4</ubl-cbc:ID>
+                    <ubl-cbc:Description>Issuer</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">37f1d339-e3eb-4767-ace1-e4fa8420d1e7</ubl-cbc:ID>
+                        <ubl-cbc:Description>__TerrorIssuer</ubl-cbc:Description>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+            </ccv-cac:RequirementGroup>
+        </ccv-cac:RequirementGroup>
+    </ccv-cac:Criterion>
+    <ccv-cac:Criterion>
+        <ubl-cbc:ID schemeID="CriteriaID" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">47112079-6fec-47a3-988f-e561668c3aef</ubl-cbc:ID>
+        <ubl-cbc:TypeCode listID="CriteriaTypeCode" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">CRITERION.EXCLUSION.CONVICTIONS.MONEY_LAUNDERING</ubl-cbc:TypeCode>
+        <ubl-cbc:Name>Money laundering or terrorist financing</ubl-cbc:Name>
+        <ubl-cbc:Description>Has the economic operator itself or any person who is a member of its administrative, management or supervisory body or has powers of representation, decision or control therein been the subject of a conviction by final judgment for money laundering or terrorist financing, by a conviction rendered at the most five years ago or in which an exclusion period set out directly in the conviction continues to be applicable? As defined in Article 1 of Directive 2005/60/EC of the European Parliament and of the Council of 26 October 2005 on the prevention of the use of the financial system for the purpose of money laundering and terrorist financing (OJ L 309, 25.11.2005, p. 15).</ubl-cbc:Description>
+        <ccv-cac:LegislationReference>
+            <ccv-cbc:Title>Public Procurement Directive 2014/24/EU</ccv-cbc:Title>
+            <ubl-cbc:Description>Directive 2014/24/EU of the European Parliament and of the Council of 26 February 2014 on public procurement and repealing Directive 2004/18/EC</ubl-cbc:Description>
+            <ccv-cbc:JurisdictionLevelCode listID="CriterionJurisdictionLevel" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">EU_DIRECTIVE</ccv-cbc:JurisdictionLevelCode>
+            <ccv-cbc:Article>57(1)</ccv-cbc:Article>
+            <ubl-cbc:URI>http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32014L0024</ubl-cbc:URI>
+        </ccv-cac:LegislationReference>
+        <ccv-cac:RequirementGroup>
+            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7c637c0c-7703-4389-ba52-02997a055bd7</ubl-cbc:ID>
+            <ccv-cac:Requirement responseDataType="INDICATOR">
+                <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">974c8196-9d1c-419c-9ca9-45bb9f5fd59a</ubl-cbc:ID>
+                <ubl-cbc:Description>Your answer?</ubl-cbc:Description>
+                <ccv-cac:Response>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">26b0401b-3985-44af-85b3-a2fe5b4b6a5b</ubl-cbc:ID>
+                    <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                </ccv-cac:Response>
+            </ccv-cac:Requirement>
+            <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">f5276600-a2b6-4ff6-a90e-b31fe19dae41</ubl-cbc:ID>
+                <ccv-cac:Requirement responseDataType="DATE">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">ecf40999-7b64-4e10-b960-7f8ff8674cf6</ubl-cbc:ID>
+                    <ubl-cbc:Description>Date of conviction</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">822f1946-74ed-49c6-9d8b-21d65cd1804f</ubl-cbc:ID>
+                        <ubl-cbc:Date>2017-01-04</ubl-cbc:Date>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7d35fb7c-da5b-4830-b598-4f347a04dceb</ubl-cbc:ID>
+                    <ubl-cbc:Description>Reason</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">909689c7-90e6-42b7-a5ec-32ab5a56bb87</ubl-cbc:ID>
+                        <ubl-cbc:Description>__MoneyLaunderingReason</ubl-cbc:Description>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">c5012430-14da-454c-9d01-34cedc6a7ded</ubl-cbc:ID>
+                    <ubl-cbc:Description>Who has been convicted</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">6a0b2155-4da9-4ed5-8064-a40c075529d2</ubl-cbc:ID>
+                        <ubl-cbc:Description>__MoneyLaunderingWho</ubl-cbc:Description>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="PERIOD">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">9ca9096f-edd2-4f19-b6b1-b55c83a2d5c8</ubl-cbc:ID>
+                    <ubl-cbc:Description>Length of the period of exclusion</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">6bec9346-9e06-4e74-be61-6e4514180017</ubl-cbc:ID>
+                        <ubl-cac:Period>
+                            <ubl-cbc:Description>__MoneyLaunderingLength</ubl-cbc:Description>
+                        </ubl-cac:Period>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:RequirementGroup>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">5f9f09f7-f701-432c-9fdc-c22c124a74c9</ubl-cbc:ID>
+                    <ccv-cac:Requirement responseDataType="INDICATOR">
+                        <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">20c5361b-7599-4ee6-b030-7f8323174d1e</ubl-cbc:ID>
+                        <ubl-cbc:Description>Have you taken measures to demonstrate your reliability ("Self-Cleaning")?</ubl-cbc:Description>
+                        <ccv-cac:Response>
+                            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">7518310d-aeee-495c-a9d8-8510b3404bc1</ubl-cbc:ID>
+                            <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                        </ccv-cac:Response>
+                    </ccv-cac:Requirement>
+                    <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">74e6c7b4-757b-4b40-ada6-fad6a997c310</ubl-cbc:ID>
+                        <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                            <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7b07904f-e080-401a-a3a1-9a3efeeda54b</ubl-cbc:ID>
+                            <ubl-cbc:Description>Please describe them</ubl-cbc:Description>
+                            <ccv-cac:Response>
+                                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">0116e675-2ef9-46e1-86f4-8b4f885df159</ubl-cbc:ID>
+                                <ubl-cbc:Description>__MoneyLaunderingSelfCleaning</ubl-cbc:Description>
+                            </ccv-cac:Response>
+                        </ccv-cac:Requirement>
+                    </ccv-cac:RequirementGroup>
+                </ccv-cac:RequirementGroup>
+            </ccv-cac:RequirementGroup>
+        </ccv-cac:RequirementGroup>
+        <ccv-cac:RequirementGroup>
+            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7458d42a-e581-4640-9283-34ceb3ad4345</ubl-cbc:ID>
+            <ccv-cac:Requirement responseDataType="INDICATOR">
+                <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">c1347b74-1872-4060-a6db-f4044edcd7c4</ubl-cbc:ID>
+                <ubl-cbc:Description>Is this information available electronically?</ubl-cbc:Description>
+                <ccv-cac:Response>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">023c5e2f-b013-45c4-9be6-326b34d7fb03</ubl-cbc:ID>
+                    <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                </ccv-cac:Response>
+            </ccv-cac:Requirement>
+            <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">41dd2e9b-1bfd-44c7-93ee-56bd74a4334b</ubl-cbc:ID>
+                <ccv-cac:Requirement responseDataType="EVIDENCE_URL">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">f4313bb6-21b6-499e-bdff-debe10e11d2c</ubl-cbc:ID>
+                    <ubl-cbc:Description>URL</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">cb8b6b82-9775-4662-8616-a1091717997a</ubl-cbc:ID>
+                        <cev-cac:Evidence>
+                            <cev-cac:EvidenceDocumentReference>
+                                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">5a640eaa-0b29-4451-9cf7-519deacced8f</ubl-cbc:ID>
+                                <ubl-cac:Attachment>
+                                    <ubl-cac:ExternalReference>
+                                        <ubl-cbc:URI>www.__MoneyLaundering.com</ubl-cbc:URI>
+                                    </ubl-cac:ExternalReference>
+                                </ubl-cac:Attachment>
+                            </cev-cac:EvidenceDocumentReference>
+                        </cev-cac:Evidence>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="CODE">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">1f1cd18e-3e01-4ca2-af4c-e2981924ba8d</ubl-cbc:ID>
+                    <ubl-cbc:Description>Code</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">b2b828d6-7f0b-460b-82e2-0cb10c0624a2</ubl-cbc:ID>
+                        <ccv-cbc:Code>__MoneyLaunderingCode</ccv-cbc:Code>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">c3ccfa31-0c5e-4e3a-a3fd-db9fb83d78d4</ubl-cbc:ID>
+                    <ubl-cbc:Description>Issuer</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">01b013c5-33e8-4439-8806-8be7cda2c38e</ubl-cbc:ID>
+                        <ubl-cbc:Description>__MoneyLaunderingIssuer</ubl-cbc:Description>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+            </ccv-cac:RequirementGroup>
+        </ccv-cac:RequirementGroup>
+    </ccv-cac:Criterion>
+    <ccv-cac:Criterion>
+        <ubl-cbc:ID schemeID="CriteriaID" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">d789d01a-fe03-4ccd-9898-73f9cfa080d1</ubl-cbc:ID>
+        <ubl-cbc:TypeCode listID="CriteriaTypeCode" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">CRITERION.EXCLUSION.CONVICTIONS.CHILD_LABOUR-HUMAN_TRAFFICKING</ubl-cbc:TypeCode>
+        <ubl-cbc:Name>Child labour and other forms of trafficking in human beings</ubl-cbc:Name>
+        <ubl-cbc:Description>Has the economic operator itself or any person who is a member of its administrative, management or supervisory body or has powers of representation, decision or control therein been the subject of a conviction by final judgment for child labour and other forms of trafficking in human beings, by a conviction rendered at the most five years ago or in which an exclusion period set out directly in the conviction continues to be applicable? As defined in Article 2 of Directive 2011/36/EU of the European Parliament and of the Council of 5 April 2011 on preventing and combating trafficking in human beings and protecting its victims, and replacing Council Framework Decision 2002/629/JHA (OJ L 101, 15.4.2011, p. 1).</ubl-cbc:Description>
+        <ccv-cac:LegislationReference>
+            <ccv-cbc:Title>Public Procurement Directive 2014/24/EU</ccv-cbc:Title>
+            <ubl-cbc:Description>Directive 2014/24/EU of the European Parliament and of the Council of 26 February 2014 on public procurement and repealing Directive 2004/18/EC</ubl-cbc:Description>
+            <ccv-cbc:JurisdictionLevelCode listID="CriterionJurisdictionLevel" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">EU_DIRECTIVE</ccv-cbc:JurisdictionLevelCode>
+            <ccv-cbc:Article>57(1)</ccv-cbc:Article>
+            <ubl-cbc:URI>http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32014L0024</ubl-cbc:URI>
+        </ccv-cac:LegislationReference>
+        <ccv-cac:RequirementGroup>
+            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7c637c0c-7703-4389-ba52-02997a055bd7</ubl-cbc:ID>
+            <ccv-cac:Requirement responseDataType="INDICATOR">
+                <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">974c8196-9d1c-419c-9ca9-45bb9f5fd59a</ubl-cbc:ID>
+                <ubl-cbc:Description>Your answer?</ubl-cbc:Description>
+                <ccv-cac:Response>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">03f0648b-4185-4e0f-affe-24763d13da65</ubl-cbc:ID>
+                    <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                </ccv-cac:Response>
+            </ccv-cac:Requirement>
+            <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">f5276600-a2b6-4ff6-a90e-b31fe19dae41</ubl-cbc:ID>
+                <ccv-cac:Requirement responseDataType="DATE">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">ecf40999-7b64-4e10-b960-7f8ff8674cf6</ubl-cbc:ID>
+                    <ubl-cbc:Description>Date of conviction</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">5ed8a200-aa5f-4700-8104-0d2e2b817c95</ubl-cbc:ID>
+                        <ubl-cbc:Date>2017-01-05</ubl-cbc:Date>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7d35fb7c-da5b-4830-b598-4f347a04dceb</ubl-cbc:ID>
+                    <ubl-cbc:Description>Reason</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">2d7b3baf-2fae-432c-80dc-b65f0c8eb60b</ubl-cbc:ID>
+                        <ubl-cbc:Description>__HumanTrafficReason</ubl-cbc:Description>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">c5012430-14da-454c-9d01-34cedc6a7ded</ubl-cbc:ID>
+                    <ubl-cbc:Description>Who has been convicted</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">0344e2a6-7da9-439d-a85c-28092a78df00</ubl-cbc:ID>
+                        <ubl-cbc:Description>__HumanTrafficWho</ubl-cbc:Description>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="PERIOD">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">9ca9096f-edd2-4f19-b6b1-b55c83a2d5c8</ubl-cbc:ID>
+                    <ubl-cbc:Description>Length of the period of exclusion</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">a228617d-33fe-421f-8164-d7da6f7e04c9</ubl-cbc:ID>
+                        <ubl-cac:Period>
+                            <ubl-cbc:Description>__HumanTrafficLength</ubl-cbc:Description>
+                        </ubl-cac:Period>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:RequirementGroup>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">5f9f09f7-f701-432c-9fdc-c22c124a74c9</ubl-cbc:ID>
+                    <ccv-cac:Requirement responseDataType="INDICATOR">
+                        <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">20c5361b-7599-4ee6-b030-7f8323174d1e</ubl-cbc:ID>
+                        <ubl-cbc:Description>Have you taken measures to demonstrate your reliability ("Self-Cleaning")?</ubl-cbc:Description>
+                        <ccv-cac:Response>
+                            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">556b4c93-bff2-4609-be78-8681a2998042</ubl-cbc:ID>
+                            <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                        </ccv-cac:Response>
+                    </ccv-cac:Requirement>
+                    <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">74e6c7b4-757b-4b40-ada6-fad6a997c310</ubl-cbc:ID>
+                        <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                            <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7b07904f-e080-401a-a3a1-9a3efeeda54b</ubl-cbc:ID>
+                            <ubl-cbc:Description>Please describe them</ubl-cbc:Description>
+                            <ccv-cac:Response>
+                                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">402400e1-4f25-4fbb-89ae-d15ed435611b</ubl-cbc:ID>
+                                <ubl-cbc:Description>__HumanTrafficDescr</ubl-cbc:Description>
+                            </ccv-cac:Response>
+                        </ccv-cac:Requirement>
+                    </ccv-cac:RequirementGroup>
+                </ccv-cac:RequirementGroup>
+            </ccv-cac:RequirementGroup>
+        </ccv-cac:RequirementGroup>
+        <ccv-cac:RequirementGroup>
+            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7458d42a-e581-4640-9283-34ceb3ad4345</ubl-cbc:ID>
+            <ccv-cac:Requirement responseDataType="INDICATOR">
+                <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">c1347b74-1872-4060-a6db-f4044edcd7c4</ubl-cbc:ID>
+                <ubl-cbc:Description>Is this information available electronically?</ubl-cbc:Description>
+                <ccv-cac:Response>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">67220615-aef7-4dab-9ead-b605e9122670</ubl-cbc:ID>
+                    <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                </ccv-cac:Response>
+            </ccv-cac:Requirement>
+            <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">41dd2e9b-1bfd-44c7-93ee-56bd74a4334b</ubl-cbc:ID>
+                <ccv-cac:Requirement responseDataType="EVIDENCE_URL">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">f4313bb6-21b6-499e-bdff-debe10e11d2c</ubl-cbc:ID>
+                    <ubl-cbc:Description>URL</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">17048c9a-d94f-456e-a312-0e8c8abfcc49</ubl-cbc:ID>
+                        <cev-cac:Evidence>
+                            <cev-cac:EvidenceDocumentReference>
+                                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">2207d439-a4bf-4955-b568-155437b0c833</ubl-cbc:ID>
+                                <ubl-cac:Attachment>
+                                    <ubl-cac:ExternalReference>
+                                        <ubl-cbc:URI>www.__HumanTraffic.com</ubl-cbc:URI>
+                                    </ubl-cac:ExternalReference>
+                                </ubl-cac:Attachment>
+                            </cev-cac:EvidenceDocumentReference>
+                        </cev-cac:Evidence>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="CODE">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">1f1cd18e-3e01-4ca2-af4c-e2981924ba8d</ubl-cbc:ID>
+                    <ubl-cbc:Description>Code</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">0ced3586-fb11-47cd-bea8-f5471a5dcb6a</ubl-cbc:ID>
+                        <ccv-cbc:Code>__HumanTrafficode</ccv-cbc:Code>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">c3ccfa31-0c5e-4e3a-a3fd-db9fb83d78d4</ubl-cbc:ID>
+                    <ubl-cbc:Description>Issuer</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">80aaf722-8461-4106-afac-39e7f9e6f3e6</ubl-cbc:ID>
+                        <ubl-cbc:Description>__HumanTrafficIssuer</ubl-cbc:Description>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+            </ccv-cac:RequirementGroup>
+        </ccv-cac:RequirementGroup>
+    </ccv-cac:Criterion>
+    <ccv-cac:Criterion>
+        <ubl-cbc:ID schemeID="CriteriaID" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">b61bbeb7-690e-4a40-bc68-d6d4ecfaa3d4</ubl-cbc:ID>
+        <ubl-cbc:TypeCode listID="CriteriaTypeCode" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">CRITERION.EXCLUSION.CONTRIBUTIONS.PAYMENT_OF_TAXES</ubl-cbc:TypeCode>
+        <ubl-cbc:Name>Payment of taxes</ubl-cbc:Name>
+        <ubl-cbc:Description>Has the economic operator breached its obligations relating to the payment of taxes, both in the country in which it is established and in Member State of the contracting authority or contracting entity if other than the country of establishment?</ubl-cbc:Description>
+        <ccv-cac:LegislationReference>
+            <ccv-cbc:Title>Public Procurement Directive 2014/24/EU</ccv-cbc:Title>
+            <ubl-cbc:Description>Directive 2014/24/EU of the European Parliament and of the Council of 26 February 2014 on public procurement and repealing Directive 2004/18/EC</ubl-cbc:Description>
+            <ccv-cbc:JurisdictionLevelCode listID="CriterionJurisdictionLevel" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">EU_DIRECTIVE</ccv-cbc:JurisdictionLevelCode>
+            <ccv-cbc:Article>57(2)</ccv-cbc:Article>
+            <ubl-cbc:URI>http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32014L0024</ubl-cbc:URI>
+        </ccv-cac:LegislationReference>
+        <ccv-cac:RequirementGroup>
+            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">098fd3cc-466e-4233-af1a-affe09471bce</ubl-cbc:ID>
+            <ccv-cac:Requirement responseDataType="INDICATOR">
+                <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">974c8196-9d1c-419c-9ca9-45bb9f5fd59a</ubl-cbc:ID>
+                <ubl-cbc:Description>Your answer?</ubl-cbc:Description>
+                <ccv-cac:Response>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">ec15567b-d451-4493-8c44-d2935cf6b184</ubl-cbc:ID>
+                    <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                </ccv-cac:Response>
+            </ccv-cac:Requirement>
+            <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">f8499787-f9f8-4355-95e2-9784426f4d7b</ubl-cbc:ID>
+                <ccv-cac:Requirement responseDataType="CODE_COUNTRY">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">6c87d3d4-e8eb-4253-b385-6373020ab886</ubl-cbc:ID>
+                    <ubl-cbc:Description>Country or member state concerned</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">dc6ef859-a63d-49d3-97b7-e38f3870055c</ubl-cbc:ID>
+                        <ccv-cbc:Code listID="ISO 3166-1" listAgencyID="ISO" listVersionID="1.0">BG</ccv-cbc:Code>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="AMOUNT">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">9052cc59-cfe5-41c6-a314-02a7f378ffe8</ubl-cbc:ID>
+                    <ubl-cbc:Description>Amount concerned</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">ee1ec925-29a3-4927-9b3b-dbcbd2acd105</ubl-cbc:ID>
+                        <ubl-cbc:Amount currencyID="EUR">123.11</ubl-cbc:Amount>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:RequirementGroup>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7c2aec9f-4876-4c33-89e6-2ab6d6cf5d02</ubl-cbc:ID>
+                    <ccv-cac:Requirement responseDataType="INDICATOR">
+                        <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">9b4497e6-a166-46f9-8581-7fc39ff975c4</ubl-cbc:ID>
+                        <ubl-cbc:Description>Has this breach of obligations been established by means other than a judicial or administrative decision?</ubl-cbc:Description>
+                        <ccv-cac:Response>
+                            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">62121617-50f8-4c4d-9331-95da8187ace5</ubl-cbc:ID>
+                            <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                        </ccv-cac:Response>
+                    </ccv-cac:Requirement>
+                    <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">3cb7abf1-662a-4756-b61c-7bc716c1fafc</ubl-cbc:ID>
+                        <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                            <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">201f11c3-1fa2-4464-acc0-f021266fd881</ubl-cbc:ID>
+                            <ubl-cbc:Description>Please describe which means were used</ubl-cbc:Description>
+                            <ccv-cac:Response>
+                                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">30135d8b-3e6a-4e23-bd36-e84f863d2510</ubl-cbc:ID>
+                                <ubl-cbc:Description>__Taxes</ubl-cbc:Description>
+                            </ccv-cac:Response>
+                        </ccv-cac:Requirement>
+                    </ccv-cac:RequirementGroup>
+                </ccv-cac:RequirementGroup>
+                <ccv-cac:RequirementGroup>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">c882afa4-6971-4b00-8970-0c283eb122cc</ubl-cbc:ID>
+                    <ccv-cac:Requirement responseDataType="INDICATOR">
+                        <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">08b0c984-c5e6-4143-8493-868c39745637</ubl-cbc:ID>
+                        <ubl-cbc:Description>If this breach of obligations was established through a judicial or administrative decision, was this decision final and binding?</ubl-cbc:Description>
+                        <ccv-cac:Response>
+                            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">3f02a4d9-6ca7-43c3-a7ce-755e9d3bdcb9</ubl-cbc:ID>
+                            <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                        </ccv-cac:Response>
+                    </ccv-cac:Requirement>
+                    <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">815422d6-f8a1-418a-8bf0-3524f7c8f721</ubl-cbc:ID>
+                        <ccv-cac:Requirement responseDataType="DATE">
+                            <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">ecf40999-7b64-4e10-b960-7f8ff8674cf6</ubl-cbc:ID>
+                            <ubl-cbc:Description>Date of conviction</ubl-cbc:Description>
+                            <ccv-cac:Response>
+                                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">5433ce74-c667-4994-8c5d-fd96d48b436b</ubl-cbc:ID>
+                                <ubl-cbc:Date>2017-01-08</ubl-cbc:Date>
+                            </ccv-cac:Response>
+                        </ccv-cac:Requirement>
+                        <ccv-cac:Requirement responseDataType="PERIOD">
+                            <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">9ca9096f-edd2-4f19-b6b1-b55c83a2d5c8</ubl-cbc:ID>
+                            <ubl-cbc:Description>Length of the period of exclusion</ubl-cbc:Description>
+                            <ccv-cac:Response>
+                                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">e4f9cc7a-15af-48fb-8ab5-1c267d5d31a2</ubl-cbc:ID>
+                                <ubl-cac:Period>
+                                    <ubl-cbc:Description>__TaxesLength</ubl-cbc:Description>
+                                </ubl-cac:Period>
+                            </ccv-cac:Response>
+                        </ccv-cac:Requirement>
+                    </ccv-cac:RequirementGroup>
+                </ccv-cac:RequirementGroup>
+                <ccv-cac:RequirementGroup>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">fc57e473-d63e-4a04-b589-dcf81cab8052</ubl-cbc:ID>
+                    <ccv-cac:Requirement responseDataType="INDICATOR">
+                        <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">70f8697b-8953-411a-a489-4ff62e5250d2</ubl-cbc:ID>
+                        <ubl-cbc:Description>Has the economic operator fulfilled its obligations by paying or entering into a binding arrangement with a view to paying the taxes or social security contributions due, including, where applicable, any interest accrued or fines?</ubl-cbc:Description>
+                        <ccv-cac:Response>
+                            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">ac6958ec-0852-43fa-9039-8954fe3adc75</ubl-cbc:ID>
+                            <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                        </ccv-cac:Response>
+                    </ccv-cac:Requirement>
+                    <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">6c3609e1-9add-4fa9-9409-62ce72ae4548</ubl-cbc:ID>
+                        <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                            <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">55905dd0-38f0-4f93-8c74-5ae05a21afc5</ubl-cbc:ID>
+                            <ubl-cbc:Description>Please describe them</ubl-cbc:Description>
+                            <ccv-cac:Response>
+                                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">d1b63e45-e47e-4320-9ec0-42fc741d02e0</ubl-cbc:ID>
+                                <ubl-cbc:Description>__Taxesdescription</ubl-cbc:Description>
+                            </ccv-cac:Response>
+                        </ccv-cac:Requirement>
+                    </ccv-cac:RequirementGroup>
+                </ccv-cac:RequirementGroup>
+            </ccv-cac:RequirementGroup>
+        </ccv-cac:RequirementGroup>
+        <ccv-cac:RequirementGroup>
+            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7458d42a-e581-4640-9283-34ceb3ad4345</ubl-cbc:ID>
+            <ccv-cac:Requirement responseDataType="INDICATOR">
+                <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">c1347b74-1872-4060-a6db-f4044edcd7c4</ubl-cbc:ID>
+                <ubl-cbc:Description>Is this information available electronically?</ubl-cbc:Description>
+                <ccv-cac:Response>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">21b057d1-30c0-49b1-80fd-f4ecbad09884</ubl-cbc:ID>
+                    <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                </ccv-cac:Response>
+            </ccv-cac:Requirement>
+            <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">41dd2e9b-1bfd-44c7-93ee-56bd74a4334b</ubl-cbc:ID>
+                <ccv-cac:Requirement responseDataType="EVIDENCE_URL">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">f4313bb6-21b6-499e-bdff-debe10e11d2c</ubl-cbc:ID>
+                    <ubl-cbc:Description>URL</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">ce3db7cf-6ca2-42ee-9182-08e1ce44a2a0</ubl-cbc:ID>
+                        <cev-cac:Evidence>
+                            <cev-cac:EvidenceDocumentReference>
+                                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">11df90ae-8ebe-415b-b92e-e6b2d53399df</ubl-cbc:ID>
+                                <ubl-cac:Attachment>
+                                    <ubl-cac:ExternalReference>
+                                        <ubl-cbc:URI>www.__Taxes.com</ubl-cbc:URI>
+                                    </ubl-cac:ExternalReference>
+                                </ubl-cac:Attachment>
+                            </cev-cac:EvidenceDocumentReference>
+                        </cev-cac:Evidence>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="CODE">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">1f1cd18e-3e01-4ca2-af4c-e2981924ba8d</ubl-cbc:ID>
+                    <ubl-cbc:Description>Code</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">63bdaacc-564d-49fc-a8d7-6290502ae194</ubl-cbc:ID>
+                        <ccv-cbc:Code>__TaxesCode</ccv-cbc:Code>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">c3ccfa31-0c5e-4e3a-a3fd-db9fb83d78d4</ubl-cbc:ID>
+                    <ubl-cbc:Description>Issuer</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">79f5de93-fb4d-4aab-aa4e-deba92f1c691</ubl-cbc:ID>
+                        <ubl-cbc:Description>__TaxesIssuer</ubl-cbc:Description>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+            </ccv-cac:RequirementGroup>
+        </ccv-cac:RequirementGroup>
+    </ccv-cac:Criterion>
+    <ccv-cac:Criterion>
+        <ubl-cbc:ID schemeID="CriteriaID" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7d85e333-bbab-49c0-be8d-c36d71a72f5e</ubl-cbc:ID>
+        <ubl-cbc:TypeCode listID="CriteriaTypeCode" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">CRITERION.EXCLUSION.CONTRIBUTIONS.PAYMENT_OF_SOCIAL_SECURITY</ubl-cbc:TypeCode>
+        <ubl-cbc:Name>Payment of social security contributions</ubl-cbc:Name>
+        <ubl-cbc:Description>Has the economic operator breached its obligations relating to the payment social security contributions, both in the country in which it is established and in Member State of the contracting authority or contracting entity if other than the country of establishment?</ubl-cbc:Description>
+        <ccv-cac:LegislationReference>
+            <ccv-cbc:Title>Public Procurement Directive 2014/24/EU</ccv-cbc:Title>
+            <ubl-cbc:Description>Directive 2014/24/EU of the European Parliament and of the Council of 26 February 2014 on public procurement and repealing Directive 2004/18/EC</ubl-cbc:Description>
+            <ccv-cbc:JurisdictionLevelCode listID="CriterionJurisdictionLevel" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">EU_DIRECTIVE</ccv-cbc:JurisdictionLevelCode>
+            <ccv-cbc:Article>57(2)</ccv-cbc:Article>
+            <ubl-cbc:URI>http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32014L0024</ubl-cbc:URI>
+        </ccv-cac:LegislationReference>
+        <ccv-cac:RequirementGroup>
+            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">098fd3cc-466e-4233-af1a-affe09471bce</ubl-cbc:ID>
+            <ccv-cac:Requirement responseDataType="INDICATOR">
+                <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">974c8196-9d1c-419c-9ca9-45bb9f5fd59a</ubl-cbc:ID>
+                <ubl-cbc:Description>Your answer?</ubl-cbc:Description>
+                <ccv-cac:Response>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">a10614bb-198c-4a8e-ac2d-c7ffff1fbffe</ubl-cbc:ID>
+                    <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                </ccv-cac:Response>
+            </ccv-cac:Requirement>
+            <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">f8499787-f9f8-4355-95e2-9784426f4d7b</ubl-cbc:ID>
+                <ccv-cac:Requirement responseDataType="CODE_COUNTRY">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">6c87d3d4-e8eb-4253-b385-6373020ab886</ubl-cbc:ID>
+                    <ubl-cbc:Description>Country or member state concerned</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">e60b6a0b-98b9-40ad-b782-da79abe23cc6</ubl-cbc:ID>
+                        <ccv-cbc:Code listID="ISO 3166-1" listAgencyID="ISO" listVersionID="1.0">HR</ccv-cbc:Code>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="AMOUNT">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">9052cc59-cfe5-41c6-a314-02a7f378ffe8</ubl-cbc:ID>
+                    <ubl-cbc:Description>Amount concerned</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">433d033f-71a0-4953-869c-34884c144c40</ubl-cbc:ID>
+                        <ubl-cbc:Amount currencyID="EUR">250.12</ubl-cbc:Amount>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:RequirementGroup>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7c2aec9f-4876-4c33-89e6-2ab6d6cf5d02</ubl-cbc:ID>
+                    <ccv-cac:Requirement responseDataType="INDICATOR">
+                        <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">9b4497e6-a166-46f9-8581-7fc39ff975c4</ubl-cbc:ID>
+                        <ubl-cbc:Description>Has this breach of obligations been established by means other than a judicial or administrative decision?</ubl-cbc:Description>
+                        <ccv-cac:Response>
+                            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">a8142bd2-461b-423e-b1c0-9229f0026ab2</ubl-cbc:ID>
+                            <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                        </ccv-cac:Response>
+                    </ccv-cac:Requirement>
+                    <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">3cb7abf1-662a-4756-b61c-7bc716c1fafc</ubl-cbc:ID>
+                        <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                            <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">201f11c3-1fa2-4464-acc0-f021266fd881</ubl-cbc:ID>
+                            <ubl-cbc:Description>Please describe which means were used</ubl-cbc:Description>
+                            <ccv-cac:Response>
+                                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">7ce78c80-1f7d-432b-a79d-423a543ef988</ubl-cbc:ID>
+                                <ubl-cbc:Description>__SocialSecurityDescr</ubl-cbc:Description>
+                            </ccv-cac:Response>
+                        </ccv-cac:Requirement>
+                    </ccv-cac:RequirementGroup>
+                </ccv-cac:RequirementGroup>
+                <ccv-cac:RequirementGroup>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">c882afa4-6971-4b00-8970-0c283eb122cc</ubl-cbc:ID>
+                    <ccv-cac:Requirement responseDataType="INDICATOR">
+                        <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">08b0c984-c5e6-4143-8493-868c39745637</ubl-cbc:ID>
+                        <ubl-cbc:Description>If this breach of obligations was established through a judicial or administrative decision, was this decision final and binding?</ubl-cbc:Description>
+                        <ccv-cac:Response>
+                            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">234a7b15-444f-49fe-b8ff-0872617a252f</ubl-cbc:ID>
+                            <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                        </ccv-cac:Response>
+                    </ccv-cac:Requirement>
+                    <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">815422d6-f8a1-418a-8bf0-3524f7c8f721</ubl-cbc:ID>
+                        <ccv-cac:Requirement responseDataType="DATE">
+                            <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">ecf40999-7b64-4e10-b960-7f8ff8674cf6</ubl-cbc:ID>
+                            <ubl-cbc:Description>Date of conviction</ubl-cbc:Description>
+                            <ccv-cac:Response>
+                                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">25887005-7cbe-4ead-90c2-427bf83ed903</ubl-cbc:ID>
+                                <ubl-cbc:Date>2017-01-09</ubl-cbc:Date>
+                            </ccv-cac:Response>
+                        </ccv-cac:Requirement>
+                        <ccv-cac:Requirement responseDataType="PERIOD">
+                            <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">9ca9096f-edd2-4f19-b6b1-b55c83a2d5c8</ubl-cbc:ID>
+                            <ubl-cbc:Description>Length of the period of exclusion</ubl-cbc:Description>
+                            <ccv-cac:Response>
+                                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">f5d0f1bf-d6be-4b36-89dd-fe424b94165b</ubl-cbc:ID>
+                                <ubl-cac:Period>
+                                    <ubl-cbc:Description>__SocialSecurityLength</ubl-cbc:Description>
+                                </ubl-cac:Period>
+                            </ccv-cac:Response>
+                        </ccv-cac:Requirement>
+                    </ccv-cac:RequirementGroup>
+                </ccv-cac:RequirementGroup>
+                <ccv-cac:RequirementGroup>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">fc57e473-d63e-4a04-b589-dcf81cab8052</ubl-cbc:ID>
+                    <ccv-cac:Requirement responseDataType="INDICATOR">
+                        <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">70f8697b-8953-411a-a489-4ff62e5250d2</ubl-cbc:ID>
+                        <ubl-cbc:Description>Has the economic operator fulfilled its obligations by paying or entering into a binding arrangement with a view to paying the taxes or social security contributions due, including, where applicable, any interest accrued or fines?</ubl-cbc:Description>
+                        <ccv-cac:Response>
+                            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">129a6cb5-f225-423b-8b7e-3955f33eab48</ubl-cbc:ID>
+                            <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                        </ccv-cac:Response>
+                    </ccv-cac:Requirement>
+                    <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">6c3609e1-9add-4fa9-9409-62ce72ae4548</ubl-cbc:ID>
+                        <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                            <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">55905dd0-38f0-4f93-8c74-5ae05a21afc5</ubl-cbc:ID>
+                            <ubl-cbc:Description>Please describe them</ubl-cbc:Description>
+                            <ccv-cac:Response>
+                                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">cff10047-61fa-45fd-b27e-2ae00e9bc98a</ubl-cbc:ID>
+                                <ubl-cbc:Description>__SocialSecurityDesription</ubl-cbc:Description>
+                            </ccv-cac:Response>
+                        </ccv-cac:Requirement>
+                    </ccv-cac:RequirementGroup>
+                </ccv-cac:RequirementGroup>
+            </ccv-cac:RequirementGroup>
+        </ccv-cac:RequirementGroup>
+        <ccv-cac:RequirementGroup>
+            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7458d42a-e581-4640-9283-34ceb3ad4345</ubl-cbc:ID>
+            <ccv-cac:Requirement responseDataType="INDICATOR">
+                <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">c1347b74-1872-4060-a6db-f4044edcd7c4</ubl-cbc:ID>
+                <ubl-cbc:Description>Is this information available electronically?</ubl-cbc:Description>
+                <ccv-cac:Response>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">73d6525a-8139-401d-b853-156130a4999e</ubl-cbc:ID>
+                    <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                </ccv-cac:Response>
+            </ccv-cac:Requirement>
+            <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">41dd2e9b-1bfd-44c7-93ee-56bd74a4334b</ubl-cbc:ID>
+                <ccv-cac:Requirement responseDataType="EVIDENCE_URL">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">f4313bb6-21b6-499e-bdff-debe10e11d2c</ubl-cbc:ID>
+                    <ubl-cbc:Description>URL</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">2fbe0ee0-2503-406f-8240-c1a9e41195c8</ubl-cbc:ID>
+                        <cev-cac:Evidence>
+                            <cev-cac:EvidenceDocumentReference>
+                                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">d7db8f9b-d0de-40c2-8adb-fcd18d64a4d4</ubl-cbc:ID>
+                                <ubl-cac:Attachment>
+                                    <ubl-cac:ExternalReference>
+                                        <ubl-cbc:URI>www.__SocialSecurity.com</ubl-cbc:URI>
+                                    </ubl-cac:ExternalReference>
+                                </ubl-cac:Attachment>
+                            </cev-cac:EvidenceDocumentReference>
+                        </cev-cac:Evidence>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="CODE">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">1f1cd18e-3e01-4ca2-af4c-e2981924ba8d</ubl-cbc:ID>
+                    <ubl-cbc:Description>Code</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">7ca9279a-92ac-46bf-ae46-b17053d0c4ce</ubl-cbc:ID>
+                        <ccv-cbc:Code>__SocialSecurityCode</ccv-cbc:Code>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">c3ccfa31-0c5e-4e3a-a3fd-db9fb83d78d4</ubl-cbc:ID>
+                    <ubl-cbc:Description>Issuer</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">35e56739-3be8-4475-9141-f78c9db18846</ubl-cbc:ID>
+                        <ubl-cbc:Description>__SocialSecurityIssuer</ubl-cbc:Description>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+            </ccv-cac:RequirementGroup>
+        </ccv-cac:RequirementGroup>
+    </ccv-cac:Criterion>
+    <ccv-cac:Criterion>
+        <ubl-cbc:ID schemeID="CriteriaID" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">a80ddb62-d25b-4e4e-ae22-3968460dc0a9</ubl-cbc:ID>
+        <ubl-cbc:TypeCode listID="CriteriaTypeCode" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">CRITERION.EXCLUSION.SOCIAL.ENVIRONMENTAL_LAW</ubl-cbc:TypeCode>
+        <ubl-cbc:Name>Breaching of obligations in the fields of environmental law</ubl-cbc:Name>
+        <ubl-cbc:Description>Has the economic operator, to its knowledge, breached its obligations in the fields of environmental law? As referred to for the purposes of this procurement in national law, in the relevant notice or the procurement documents or in Article 18(2) of Directive 2014/24/EU.</ubl-cbc:Description>
+        <ccv-cac:LegislationReference>
+            <ccv-cbc:Title>Public Procurement Directive 2014/24/EU</ccv-cbc:Title>
+            <ubl-cbc:Description>Directive 2014/24/EU of the European Parliament and of the Council of 26 February 2014 on public procurement and repealing Directive 2004/18/EC</ubl-cbc:Description>
+            <ccv-cbc:JurisdictionLevelCode listID="CriterionJurisdictionLevel" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">EU_DIRECTIVE</ccv-cbc:JurisdictionLevelCode>
+            <ccv-cbc:Article>57(4)</ccv-cbc:Article>
+            <ubl-cbc:URI>http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32014L0024</ubl-cbc:URI>
+        </ccv-cac:LegislationReference>
+        <ccv-cac:RequirementGroup>
+            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">976b5acb-c00f-46ca-8f83-5ce6abfdfe43</ubl-cbc:ID>
+            <ccv-cac:Requirement responseDataType="INDICATOR">
+                <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">974c8196-9d1c-419c-9ca9-45bb9f5fd59a</ubl-cbc:ID>
+                <ubl-cbc:Description>Your answer?</ubl-cbc:Description>
+                <ccv-cac:Response>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">1ebb3cdc-9406-4669-aa7d-5c2d197e6546</ubl-cbc:ID>
+                    <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                </ccv-cac:Response>
+            </ccv-cac:Requirement>
+            <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">64a2102c-4af1-4ecb-97b3-0c41907ec0f6</ubl-cbc:ID>
+                <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">e098da8e-4717-4500-965f-f882d5b4e1ad</ubl-cbc:ID>
+                    <ubl-cbc:Description>Please describe them</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">c1a7875a-544c-40d6-aa8b-81f21b8e6869</ubl-cbc:ID>
+                        <ubl-cbc:Description>__EnvLaw</ubl-cbc:Description>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:RequirementGroup>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">5f9f09f7-f701-432c-9fdc-c22c124a74c9</ubl-cbc:ID>
+                    <ccv-cac:Requirement responseDataType="INDICATOR">
+                        <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">20c5361b-7599-4ee6-b030-7f8323174d1e</ubl-cbc:ID>
+                        <ubl-cbc:Description>Have you taken measures to demonstrate your reliability ("Self-Cleaning")?</ubl-cbc:Description>
+                        <ccv-cac:Response>
+                            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">4140d442-e3ee-4932-961f-70c50f3ff904</ubl-cbc:ID>
+                            <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                        </ccv-cac:Response>
+                    </ccv-cac:Requirement>
+                    <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">74e6c7b4-757b-4b40-ada6-fad6a997c310</ubl-cbc:ID>
+                        <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                            <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7b07904f-e080-401a-a3a1-9a3efeeda54b</ubl-cbc:ID>
+                            <ubl-cbc:Description>Please describe them</ubl-cbc:Description>
+                            <ccv-cac:Response>
+                                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">70cd1a4b-316d-4fd7-8849-18675d278f57</ubl-cbc:ID>
+                                <ubl-cbc:Description>__EnvLawSelfCleaning</ubl-cbc:Description>
+                            </ccv-cac:Response>
+                        </ccv-cac:Requirement>
+                    </ccv-cac:RequirementGroup>
+                </ccv-cac:RequirementGroup>
+            </ccv-cac:RequirementGroup>
+        </ccv-cac:RequirementGroup>
+    </ccv-cac:Criterion>
+    <ccv-cac:Criterion>
+        <ubl-cbc:ID schemeID="CriteriaID" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">a261a395-ed17-4939-9c75-b9ff1109ca6e</ubl-cbc:ID>
+        <ubl-cbc:TypeCode listID="CriteriaTypeCode" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">CRITERION.EXCLUSION.SOCIAL.SOCIAL_LAW</ubl-cbc:TypeCode>
+        <ubl-cbc:Name>Breaching of obligations in the fields of social law</ubl-cbc:Name>
+        <ubl-cbc:Description>Has the economic operator, to its knowledge, breached its obligations in the fields of social law? As referred to for the purposes of this procurement in national law, in the relevant notice or the procurement documents or in Article 18(2) of Directive 2014/24/EU.</ubl-cbc:Description>
+        <ccv-cac:LegislationReference>
+            <ccv-cbc:Title>Public Procurement Directive 2014/24/EU</ccv-cbc:Title>
+            <ubl-cbc:Description>Directive 2014/24/EU of the European Parliament and of the Council of 26 February 2014 on public procurement and repealing Directive 2004/18/EC</ubl-cbc:Description>
+            <ccv-cbc:JurisdictionLevelCode listID="CriterionJurisdictionLevel" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">EU_DIRECTIVE</ccv-cbc:JurisdictionLevelCode>
+            <ccv-cbc:Article>57(4)</ccv-cbc:Article>
+            <ubl-cbc:URI>http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32014L0024</ubl-cbc:URI>
+        </ccv-cac:LegislationReference>
+        <ccv-cac:RequirementGroup>
+            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">976b5acb-c00f-46ca-8f83-5ce6abfdfe43</ubl-cbc:ID>
+            <ccv-cac:Requirement responseDataType="INDICATOR">
+                <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">974c8196-9d1c-419c-9ca9-45bb9f5fd59a</ubl-cbc:ID>
+                <ubl-cbc:Description>Your answer?</ubl-cbc:Description>
+                <ccv-cac:Response>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">5352804d-c4a8-4a27-b7aa-1cfb2c8fce77</ubl-cbc:ID>
+                    <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                </ccv-cac:Response>
+            </ccv-cac:Requirement>
+            <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">64a2102c-4af1-4ecb-97b3-0c41907ec0f6</ubl-cbc:ID>
+                <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">e098da8e-4717-4500-965f-f882d5b4e1ad</ubl-cbc:ID>
+                    <ubl-cbc:Description>Please describe them</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">224a0068-c81c-43a1-8a67-fbd274de52ca</ubl-cbc:ID>
+                        <ubl-cbc:Description>__SocialLaw</ubl-cbc:Description>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:RequirementGroup>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">5f9f09f7-f701-432c-9fdc-c22c124a74c9</ubl-cbc:ID>
+                    <ccv-cac:Requirement responseDataType="INDICATOR">
+                        <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">20c5361b-7599-4ee6-b030-7f8323174d1e</ubl-cbc:ID>
+                        <ubl-cbc:Description>Have you taken measures to demonstrate your reliability ("Self-Cleaning")?</ubl-cbc:Description>
+                        <ccv-cac:Response>
+                            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">6a26d28a-b39c-4fc6-bdbc-44dc3971b384</ubl-cbc:ID>
+                            <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                        </ccv-cac:Response>
+                    </ccv-cac:Requirement>
+                    <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">74e6c7b4-757b-4b40-ada6-fad6a997c310</ubl-cbc:ID>
+                        <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                            <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7b07904f-e080-401a-a3a1-9a3efeeda54b</ubl-cbc:ID>
+                            <ubl-cbc:Description>Please describe them</ubl-cbc:Description>
+                            <ccv-cac:Response>
+                                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">d1274148-831d-42fb-9ce8-ef589ed1e0bb</ubl-cbc:ID>
+                                <ubl-cbc:Description>__SocialLawSelfCleaning</ubl-cbc:Description>
+                            </ccv-cac:Response>
+                        </ccv-cac:Requirement>
+                    </ccv-cac:RequirementGroup>
+                </ccv-cac:RequirementGroup>
+            </ccv-cac:RequirementGroup>
+        </ccv-cac:RequirementGroup>
+    </ccv-cac:Criterion>
+    <ccv-cac:Criterion>
+        <ubl-cbc:ID schemeID="CriteriaID" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">a34b70d6-c43d-4726-9a88-8e2b438424bf</ubl-cbc:ID>
+        <ubl-cbc:TypeCode listID="CriteriaTypeCode" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">CRITERION.EXCLUSION.SOCIAL.LABOUR_LAW</ubl-cbc:TypeCode>
+        <ubl-cbc:Name>Breaching of obligations in the fields of labour law</ubl-cbc:Name>
+        <ubl-cbc:Description>Has the economic operator, to its knowledge, breached its obligations in the fields of labour law? As referred to for the purposes of this procurement in national law, in the relevant notice or the procurement documents or in Article 18(2) of Directive 2014/24/EU.</ubl-cbc:Description>
+        <ccv-cac:LegislationReference>
+            <ccv-cbc:Title>Public Procurement Directive 2014/24/EU</ccv-cbc:Title>
+            <ubl-cbc:Description>Directive 2014/24/EU of the European Parliament and of the Council of 26 February 2014 on public procurement and repealing Directive 2004/18/EC</ubl-cbc:Description>
+            <ccv-cbc:JurisdictionLevelCode listID="CriterionJurisdictionLevel" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">EU_DIRECTIVE</ccv-cbc:JurisdictionLevelCode>
+            <ccv-cbc:Article>57(4)</ccv-cbc:Article>
+            <ubl-cbc:URI>http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32014L0024</ubl-cbc:URI>
+        </ccv-cac:LegislationReference>
+        <ccv-cac:RequirementGroup>
+            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">976b5acb-c00f-46ca-8f83-5ce6abfdfe43</ubl-cbc:ID>
+            <ccv-cac:Requirement responseDataType="INDICATOR">
+                <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">974c8196-9d1c-419c-9ca9-45bb9f5fd59a</ubl-cbc:ID>
+                <ubl-cbc:Description>Your answer?</ubl-cbc:Description>
+                <ccv-cac:Response>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">7ceb3e9a-3e1c-4f9b-91da-51a42d82b5a9</ubl-cbc:ID>
+                    <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                </ccv-cac:Response>
+            </ccv-cac:Requirement>
+            <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">64a2102c-4af1-4ecb-97b3-0c41907ec0f6</ubl-cbc:ID>
+                <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">e098da8e-4717-4500-965f-f882d5b4e1ad</ubl-cbc:ID>
+                    <ubl-cbc:Description>Please describe them</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">3149322e-ae51-4a2a-b7a8-3be09dfef2f5</ubl-cbc:ID>
+                        <ubl-cbc:Description>__LabourLaw</ubl-cbc:Description>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:RequirementGroup>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">5f9f09f7-f701-432c-9fdc-c22c124a74c9</ubl-cbc:ID>
+                    <ccv-cac:Requirement responseDataType="INDICATOR">
+                        <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">20c5361b-7599-4ee6-b030-7f8323174d1e</ubl-cbc:ID>
+                        <ubl-cbc:Description>Have you taken measures to demonstrate your reliability ("Self-Cleaning")?</ubl-cbc:Description>
+                        <ccv-cac:Response>
+                            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">cacc6dd5-97e0-45f6-8926-58ac6a5f9951</ubl-cbc:ID>
+                            <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                        </ccv-cac:Response>
+                    </ccv-cac:Requirement>
+                    <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">74e6c7b4-757b-4b40-ada6-fad6a997c310</ubl-cbc:ID>
+                        <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                            <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7b07904f-e080-401a-a3a1-9a3efeeda54b</ubl-cbc:ID>
+                            <ubl-cbc:Description>Please describe them</ubl-cbc:Description>
+                            <ccv-cac:Response>
+                                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">8086b326-b6d7-46a0-a40d-51d63413b4e3</ubl-cbc:ID>
+                                <ubl-cbc:Description>__LabourLawDescr</ubl-cbc:Description>
+                            </ccv-cac:Response>
+                        </ccv-cac:Requirement>
+                    </ccv-cac:RequirementGroup>
+                </ccv-cac:RequirementGroup>
+            </ccv-cac:RequirementGroup>
+        </ccv-cac:RequirementGroup>
+    </ccv-cac:Criterion>
+    <ccv-cac:Criterion>
+        <ubl-cbc:ID schemeID="CriteriaID" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">d3732c09-7d62-4edc-a172-241da6636e7c</ubl-cbc:ID>
+        <ubl-cbc:TypeCode listID="CriteriaTypeCode" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">CRITERION.EXCLUSION.BUSINESS.BANKRUPTCY</ubl-cbc:TypeCode>
+        <ubl-cbc:Name>Bankruptcy</ubl-cbc:Name>
+        <ubl-cbc:Description>Is the economic operator bankrupt? This information needs not be given if exclusion of economic operators in this case has been made mandatory under the applicable national law without any possibility of derogation where the economic operator is nevertheless able to perform the contract.</ubl-cbc:Description>
+        <ccv-cac:LegislationReference>
+            <ccv-cbc:Title>Public Procurement Directive 2014/24/EU</ccv-cbc:Title>
+            <ubl-cbc:Description>Directive 2014/24/EU of the European Parliament and of the Council of 26 February 2014 on public procurement and repealing Directive 2004/18/EC</ubl-cbc:Description>
+            <ccv-cbc:JurisdictionLevelCode listID="CriterionJurisdictionLevel" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">EU_DIRECTIVE</ccv-cbc:JurisdictionLevelCode>
+            <ccv-cbc:Article>57(4)</ccv-cbc:Article>
+            <ubl-cbc:URI>http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32014L0024</ubl-cbc:URI>
+        </ccv-cac:LegislationReference>
+        <ccv-cac:RequirementGroup>
+            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">d91c11a1-f19e-4b83-8ade-c4be2bf00555</ubl-cbc:ID>
+            <ccv-cac:Requirement responseDataType="INDICATOR">
+                <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">974c8196-9d1c-419c-9ca9-45bb9f5fd59a</ubl-cbc:ID>
+                <ubl-cbc:Description>Your answer?</ubl-cbc:Description>
+                <ccv-cac:Response>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">b9f5b203-3685-4bba-a158-7805ecb3cdf4</ubl-cbc:ID>
+                    <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                </ccv-cac:Response>
+            </ccv-cac:Requirement>
+            <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">aeef523b-c8fc-4dba-9c34-03e34812567b</ubl-cbc:ID>
+                <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">e098da8e-4717-4500-965f-f882d5b4e1ad</ubl-cbc:ID>
+                    <ubl-cbc:Description>Please describe them</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">519a7e01-4d1c-421a-bbd1-6a3b86602c6c</ubl-cbc:ID>
+                        <ubl-cbc:Description>__bankruptcy</ubl-cbc:Description>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">4e3f468a-86c4-4c99-bd15-c8b221229348</ubl-cbc:ID>
+                    <ubl-cbc:Description>Indicate reasons for being nevertheless to perform the contract</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">42c2322b-d6b5-4af6-bb36-512ff1644273</ubl-cbc:ID>
+                        <ubl-cbc:Description>__bankruptcyReason</ubl-cbc:Description>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+            </ccv-cac:RequirementGroup>
+        </ccv-cac:RequirementGroup>
+        <ccv-cac:RequirementGroup>
+            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7458d42a-e581-4640-9283-34ceb3ad4345</ubl-cbc:ID>
+            <ccv-cac:Requirement responseDataType="INDICATOR">
+                <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">c1347b74-1872-4060-a6db-f4044edcd7c4</ubl-cbc:ID>
+                <ubl-cbc:Description>Is this information available electronically?</ubl-cbc:Description>
+                <ccv-cac:Response>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">07897777-20a1-4f80-9d60-c5743f7a1e68</ubl-cbc:ID>
+                    <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                </ccv-cac:Response>
+            </ccv-cac:Requirement>
+            <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">41dd2e9b-1bfd-44c7-93ee-56bd74a4334b</ubl-cbc:ID>
+                <ccv-cac:Requirement responseDataType="EVIDENCE_URL">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">f4313bb6-21b6-499e-bdff-debe10e11d2c</ubl-cbc:ID>
+                    <ubl-cbc:Description>URL</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">8eeeff22-f2fc-4301-b61d-67cb89fa670d</ubl-cbc:ID>
+                        <cev-cac:Evidence>
+                            <cev-cac:EvidenceDocumentReference>
+                                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">720c6d0a-ef3c-4d32-97f7-3169cd60a7f3</ubl-cbc:ID>
+                                <ubl-cac:Attachment>
+                                    <ubl-cac:ExternalReference>
+                                        <ubl-cbc:URI>www.__bankruptcy.com</ubl-cbc:URI>
+                                    </ubl-cac:ExternalReference>
+                                </ubl-cac:Attachment>
+                            </cev-cac:EvidenceDocumentReference>
+                        </cev-cac:Evidence>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="CODE">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">1f1cd18e-3e01-4ca2-af4c-e2981924ba8d</ubl-cbc:ID>
+                    <ubl-cbc:Description>Code</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">c47120e8-2bd1-43b1-9483-1eabb7ab5404</ubl-cbc:ID>
+                        <ccv-cbc:Code>__bankruptcyCode</ccv-cbc:Code>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">c3ccfa31-0c5e-4e3a-a3fd-db9fb83d78d4</ubl-cbc:ID>
+                    <ubl-cbc:Description>Issuer</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">63a31cc4-2b98-458e-8a97-a949092c002b</ubl-cbc:ID>
+                        <ubl-cbc:Description>__bankruptcyIssuer</ubl-cbc:Description>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+            </ccv-cac:RequirementGroup>
+        </ccv-cac:RequirementGroup>
+    </ccv-cac:Criterion>
+    <ccv-cac:Criterion>
+        <ubl-cbc:ID schemeID="CriteriaID" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">396f288a-e267-4c20-851a-ed4f7498f137</ubl-cbc:ID>
+        <ubl-cbc:TypeCode listID="CriteriaTypeCode" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">CRITERION.EXCLUSION.BUSINESS.INSOLVENCY</ubl-cbc:TypeCode>
+        <ubl-cbc:Name>Insolvency</ubl-cbc:Name>
+        <ubl-cbc:Description>Is the economic operator the subject of insolvency or winding-up? This information needs not be given if exclusion of economic operators in this case has been made mandatory under the applicable national law without any possibility of derogation where the economic operator is nevertheless able to perform the contract.</ubl-cbc:Description>
+        <ccv-cac:LegislationReference>
+            <ccv-cbc:Title>Public Procurement Directive 2014/24/EU</ccv-cbc:Title>
+            <ubl-cbc:Description>Directive 2014/24/EU of the European Parliament and of the Council of 26 February 2014 on public procurement and repealing Directive 2004/18/EC</ubl-cbc:Description>
+            <ccv-cbc:JurisdictionLevelCode listID="CriterionJurisdictionLevel" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">EU_DIRECTIVE</ccv-cbc:JurisdictionLevelCode>
+            <ccv-cbc:Article>57(4)</ccv-cbc:Article>
+            <ubl-cbc:URI>http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32014L0024</ubl-cbc:URI>
+        </ccv-cac:LegislationReference>
+        <ccv-cac:RequirementGroup>
+            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">d91c11a1-f19e-4b83-8ade-c4be2bf00555</ubl-cbc:ID>
+            <ccv-cac:Requirement responseDataType="INDICATOR">
+                <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">974c8196-9d1c-419c-9ca9-45bb9f5fd59a</ubl-cbc:ID>
+                <ubl-cbc:Description>Your answer?</ubl-cbc:Description>
+                <ccv-cac:Response>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">d8ac3265-7c73-4ff5-8157-b6f5200e4915</ubl-cbc:ID>
+                    <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                </ccv-cac:Response>
+            </ccv-cac:Requirement>
+            <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">aeef523b-c8fc-4dba-9c34-03e34812567b</ubl-cbc:ID>
+                <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">e098da8e-4717-4500-965f-f882d5b4e1ad</ubl-cbc:ID>
+                    <ubl-cbc:Description>Please describe them</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">26059027-36c5-4ebe-b276-75094877ef99</ubl-cbc:ID>
+                        <ubl-cbc:Description>__Insolvency</ubl-cbc:Description>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">4e3f468a-86c4-4c99-bd15-c8b221229348</ubl-cbc:ID>
+                    <ubl-cbc:Description>Indicate reasons for being nevertheless to perform the contract</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">9a700c29-0625-4b1a-a277-6e4c42ce099a</ubl-cbc:ID>
+                        <ubl-cbc:Description>__InsolvencyReason</ubl-cbc:Description>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+            </ccv-cac:RequirementGroup>
+        </ccv-cac:RequirementGroup>
+        <ccv-cac:RequirementGroup>
+            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7458d42a-e581-4640-9283-34ceb3ad4345</ubl-cbc:ID>
+            <ccv-cac:Requirement responseDataType="INDICATOR">
+                <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">c1347b74-1872-4060-a6db-f4044edcd7c4</ubl-cbc:ID>
+                <ubl-cbc:Description>Is this information available electronically?</ubl-cbc:Description>
+                <ccv-cac:Response>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">97dce8b1-032e-4be6-8e62-142eca2ca538</ubl-cbc:ID>
+                    <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                </ccv-cac:Response>
+            </ccv-cac:Requirement>
+            <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">41dd2e9b-1bfd-44c7-93ee-56bd74a4334b</ubl-cbc:ID>
+                <ccv-cac:Requirement responseDataType="EVIDENCE_URL">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">f4313bb6-21b6-499e-bdff-debe10e11d2c</ubl-cbc:ID>
+                    <ubl-cbc:Description>URL</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">10411b3f-a54d-4bb5-8772-30761708a68b</ubl-cbc:ID>
+                        <cev-cac:Evidence>
+                            <cev-cac:EvidenceDocumentReference>
+                                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">b2431d69-ef2c-4a14-86ae-22322ad5b46b</ubl-cbc:ID>
+                                <ubl-cac:Attachment>
+                                    <ubl-cac:ExternalReference>
+                                        <ubl-cbc:URI>www.__Insolvency.com</ubl-cbc:URI>
+                                    </ubl-cac:ExternalReference>
+                                </ubl-cac:Attachment>
+                            </cev-cac:EvidenceDocumentReference>
+                        </cev-cac:Evidence>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="CODE">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">1f1cd18e-3e01-4ca2-af4c-e2981924ba8d</ubl-cbc:ID>
+                    <ubl-cbc:Description>Code</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">5b9a0cbc-ea8a-4ff6-a385-3c40ceda63b3</ubl-cbc:ID>
+                        <ccv-cbc:Code>__InsolvencyCode</ccv-cbc:Code>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">c3ccfa31-0c5e-4e3a-a3fd-db9fb83d78d4</ubl-cbc:ID>
+                    <ubl-cbc:Description>Issuer</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">97a58cf8-a2d1-4bda-98b0-74f65d3bdbdd</ubl-cbc:ID>
+                        <ubl-cbc:Description>__InsolvencyIssuer</ubl-cbc:Description>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+            </ccv-cac:RequirementGroup>
+        </ccv-cac:RequirementGroup>
+    </ccv-cac:Criterion>
+    <ccv-cac:Criterion>
+        <ubl-cbc:ID schemeID="CriteriaID" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">68918c7a-f5bc-4a1a-a62f-ad8983600d48</ubl-cbc:ID>
+        <ubl-cbc:TypeCode listID="CriteriaTypeCode" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">CRITERION.EXCLUSION.BUSINESS.CREDITORS_ARRANGEMENT</ubl-cbc:TypeCode>
+        <ubl-cbc:Name>Arrangement with creditors</ubl-cbc:Name>
+        <ubl-cbc:Description>Is the economic operator in arrangement with creditors? This information needs not be given if exclusion of economic operators in this case has been made mandatory under the applicable national law without any possibility of derogation where the economic operator is nevertheless able to perform the contract.</ubl-cbc:Description>
+        <ccv-cac:LegislationReference>
+            <ccv-cbc:Title>Public Procurement Directive 2014/24/EU</ccv-cbc:Title>
+            <ubl-cbc:Description>Directive 2014/24/EU of the European Parliament and of the Council of 26 February 2014 on public procurement and repealing Directive 2004/18/EC</ubl-cbc:Description>
+            <ccv-cbc:JurisdictionLevelCode listID="CriterionJurisdictionLevel" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">EU_DIRECTIVE</ccv-cbc:JurisdictionLevelCode>
+            <ccv-cbc:Article>57(4)</ccv-cbc:Article>
+            <ubl-cbc:URI>http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32014L0024</ubl-cbc:URI>
+        </ccv-cac:LegislationReference>
+        <ccv-cac:RequirementGroup>
+            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">d91c11a1-f19e-4b83-8ade-c4be2bf00555</ubl-cbc:ID>
+            <ccv-cac:Requirement responseDataType="INDICATOR">
+                <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">974c8196-9d1c-419c-9ca9-45bb9f5fd59a</ubl-cbc:ID>
+                <ubl-cbc:Description>Your answer?</ubl-cbc:Description>
+                <ccv-cac:Response>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">a69bae81-aff3-4fa3-8a4a-a89f8ac81565</ubl-cbc:ID>
+                    <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                </ccv-cac:Response>
+            </ccv-cac:Requirement>
+            <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">aeef523b-c8fc-4dba-9c34-03e34812567b</ubl-cbc:ID>
+                <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">e098da8e-4717-4500-965f-f882d5b4e1ad</ubl-cbc:ID>
+                    <ubl-cbc:Description>Please describe them</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">d7626e39-03ea-418e-b3b6-735968a365dc</ubl-cbc:ID>
+                        <ubl-cbc:Description>__Creditors</ubl-cbc:Description>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">4e3f468a-86c4-4c99-bd15-c8b221229348</ubl-cbc:ID>
+                    <ubl-cbc:Description>Indicate reasons for being nevertheless to perform the contract</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">ee975b9c-91e5-4c74-b6a8-24c17ae26c21</ubl-cbc:ID>
+                        <ubl-cbc:Description>__CreditorsReason</ubl-cbc:Description>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+            </ccv-cac:RequirementGroup>
+        </ccv-cac:RequirementGroup>
+        <ccv-cac:RequirementGroup>
+            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7458d42a-e581-4640-9283-34ceb3ad4345</ubl-cbc:ID>
+            <ccv-cac:Requirement responseDataType="INDICATOR">
+                <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">c1347b74-1872-4060-a6db-f4044edcd7c4</ubl-cbc:ID>
+                <ubl-cbc:Description>Is this information available electronically?</ubl-cbc:Description>
+                <ccv-cac:Response>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">35673f15-9347-4407-85f2-0b8447dc6302</ubl-cbc:ID>
+                    <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                </ccv-cac:Response>
+            </ccv-cac:Requirement>
+            <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">41dd2e9b-1bfd-44c7-93ee-56bd74a4334b</ubl-cbc:ID>
+                <ccv-cac:Requirement responseDataType="EVIDENCE_URL">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">f4313bb6-21b6-499e-bdff-debe10e11d2c</ubl-cbc:ID>
+                    <ubl-cbc:Description>URL</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">617fb0ea-3496-4697-b2e5-24f5efa9e12f</ubl-cbc:ID>
+                        <cev-cac:Evidence>
+                            <cev-cac:EvidenceDocumentReference>
+                                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">4e1735aa-63fd-455b-9c91-1ebee83a477d</ubl-cbc:ID>
+                                <ubl-cac:Attachment>
+                                    <ubl-cac:ExternalReference>
+                                        <ubl-cbc:URI>www.__Creditors.com</ubl-cbc:URI>
+                                    </ubl-cac:ExternalReference>
+                                </ubl-cac:Attachment>
+                            </cev-cac:EvidenceDocumentReference>
+                        </cev-cac:Evidence>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="CODE">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">1f1cd18e-3e01-4ca2-af4c-e2981924ba8d</ubl-cbc:ID>
+                    <ubl-cbc:Description>Code</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">87ce6b3b-a338-478a-911c-fd307242d32c</ubl-cbc:ID>
+                        <ccv-cbc:Code>__CreditorsCode</ccv-cbc:Code>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">c3ccfa31-0c5e-4e3a-a3fd-db9fb83d78d4</ubl-cbc:ID>
+                    <ubl-cbc:Description>Issuer</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">e2ee4c52-f3f2-424b-a187-2cd4bf844d57</ubl-cbc:ID>
+                        <ubl-cbc:Description>__CreditorsIssuer</ubl-cbc:Description>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+            </ccv-cac:RequirementGroup>
+        </ccv-cac:RequirementGroup>
+    </ccv-cac:Criterion>
+    <ccv-cac:Criterion>
+        <ubl-cbc:ID schemeID="CriteriaID" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">daffa2a9-9f8f-4568-8be8-7b8bf306d096</ubl-cbc:ID>
+        <ubl-cbc:TypeCode listID="CriteriaTypeCode" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">CRITERION.EXCLUSION.BUSINESS.BANKRUPTCY_ANALOGOUS</ubl-cbc:TypeCode>
+        <ubl-cbc:Name>Analogous situation like bankruptcy under national law</ubl-cbc:Name>
+        <ubl-cbc:Description>Is the economic operator in any analogous situation like bankruptcy arising from a similar procedure under national laws and regulations? This information needs not be given if exclusion of economic operators in this case has been made mandatory under the applicable national law without any possibility of derogation where the economic operator is nevertheless able to perform the contract.</ubl-cbc:Description>
+        <ccv-cac:LegislationReference>
+            <ccv-cbc:Title>Public Procurement Directive 2014/24/EU</ccv-cbc:Title>
+            <ubl-cbc:Description>Directive 2014/24/EU of the European Parliament and of the Council of 26 February 2014 on public procurement and repealing Directive 2004/18/EC</ubl-cbc:Description>
+            <ccv-cbc:JurisdictionLevelCode listID="CriterionJurisdictionLevel" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">EU_DIRECTIVE</ccv-cbc:JurisdictionLevelCode>
+            <ccv-cbc:Article>57(4)</ccv-cbc:Article>
+            <ubl-cbc:URI>http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32014L0024</ubl-cbc:URI>
+        </ccv-cac:LegislationReference>
+        <ccv-cac:RequirementGroup>
+            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">d91c11a1-f19e-4b83-8ade-c4be2bf00555</ubl-cbc:ID>
+            <ccv-cac:Requirement responseDataType="INDICATOR">
+                <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">974c8196-9d1c-419c-9ca9-45bb9f5fd59a</ubl-cbc:ID>
+                <ubl-cbc:Description>Your answer?</ubl-cbc:Description>
+                <ccv-cac:Response>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">24dd712e-7412-48a8-9ca2-64234f677a17</ubl-cbc:ID>
+                    <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                </ccv-cac:Response>
+            </ccv-cac:Requirement>
+            <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">aeef523b-c8fc-4dba-9c34-03e34812567b</ubl-cbc:ID>
+                <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">e098da8e-4717-4500-965f-f882d5b4e1ad</ubl-cbc:ID>
+                    <ubl-cbc:Description>Please describe them</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">2b7a5c04-1971-45c3-92d6-b941c754787d</ubl-cbc:ID>
+                        <ubl-cbc:Description>__BankruptcyNationalLaw</ubl-cbc:Description>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">4e3f468a-86c4-4c99-bd15-c8b221229348</ubl-cbc:ID>
+                    <ubl-cbc:Description>Indicate reasons for being nevertheless to perform the contract</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">f6bcf884-8d23-4724-86c6-ee195680b7e9</ubl-cbc:ID>
+                        <ubl-cbc:Description>__BankruptcyNationalLawReason</ubl-cbc:Description>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+            </ccv-cac:RequirementGroup>
+        </ccv-cac:RequirementGroup>
+        <ccv-cac:RequirementGroup>
+            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7458d42a-e581-4640-9283-34ceb3ad4345</ubl-cbc:ID>
+            <ccv-cac:Requirement responseDataType="INDICATOR">
+                <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">c1347b74-1872-4060-a6db-f4044edcd7c4</ubl-cbc:ID>
+                <ubl-cbc:Description>Is this information available electronically?</ubl-cbc:Description>
+                <ccv-cac:Response>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">14cead1c-53ff-4f65-a2bd-2efcebc68b02</ubl-cbc:ID>
+                    <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                </ccv-cac:Response>
+            </ccv-cac:Requirement>
+            <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">41dd2e9b-1bfd-44c7-93ee-56bd74a4334b</ubl-cbc:ID>
+                <ccv-cac:Requirement responseDataType="EVIDENCE_URL">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">f4313bb6-21b6-499e-bdff-debe10e11d2c</ubl-cbc:ID>
+                    <ubl-cbc:Description>URL</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">6ae8c3cc-29de-4f45-8095-e69701b67d53</ubl-cbc:ID>
+                        <cev-cac:Evidence>
+                            <cev-cac:EvidenceDocumentReference>
+                                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">b3a66e15-003f-4da0-b1c2-6027ba0c0717</ubl-cbc:ID>
+                                <ubl-cac:Attachment>
+                                    <ubl-cac:ExternalReference>
+                                        <ubl-cbc:URI>www.__BankruptcyNationalLaw.com</ubl-cbc:URI>
+                                    </ubl-cac:ExternalReference>
+                                </ubl-cac:Attachment>
+                            </cev-cac:EvidenceDocumentReference>
+                        </cev-cac:Evidence>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="CODE">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">1f1cd18e-3e01-4ca2-af4c-e2981924ba8d</ubl-cbc:ID>
+                    <ubl-cbc:Description>Code</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">eac62aa0-51c4-4f73-a2e9-c1814aab92fc</ubl-cbc:ID>
+                        <ccv-cbc:Code>__BankruptcyNationalLawCode</ccv-cbc:Code>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">c3ccfa31-0c5e-4e3a-a3fd-db9fb83d78d4</ubl-cbc:ID>
+                    <ubl-cbc:Description>Issuer</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">ce505494-4999-4a58-88f4-3edfbe4c8bb3</ubl-cbc:ID>
+                        <ubl-cbc:Description>__BankruptcyNationalLawIssuer</ubl-cbc:Description>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+            </ccv-cac:RequirementGroup>
+        </ccv-cac:RequirementGroup>
+    </ccv-cac:Criterion>
+    <ccv-cac:Criterion>
+        <ubl-cbc:ID schemeID="CriteriaID" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">8fda202a-0c37-41bb-9d7d-de3f49edbfcb</ubl-cbc:ID>
+        <ubl-cbc:TypeCode listID="CriteriaTypeCode" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">CRITERION.EXCLUSION.BUSINESS.LIQUIDATOR_ADMINISTERED</ubl-cbc:TypeCode>
+        <ubl-cbc:Name>Assets being administered by liquidator</ubl-cbc:Name>
+        <ubl-cbc:Description>Are the assets of the economic operator being administered by a liquidator or by the court?  This information needs not be given if exclusion of economic operators in this case has been made mandatory under the applicable national law without any possibility of derogation where the economic operator is nevertheless able to perform the contract.</ubl-cbc:Description>
+        <ccv-cac:LegislationReference>
+            <ccv-cbc:Title>Public Procurement Directive 2014/24/EU</ccv-cbc:Title>
+            <ubl-cbc:Description>Directive 2014/24/EU of the European Parliament and of the Council of 26 February 2014 on public procurement and repealing Directive 2004/18/EC</ubl-cbc:Description>
+            <ccv-cbc:JurisdictionLevelCode listID="CriterionJurisdictionLevel" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">EU_DIRECTIVE</ccv-cbc:JurisdictionLevelCode>
+            <ccv-cbc:Article>57(4)</ccv-cbc:Article>
+            <ubl-cbc:URI>http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32014L0024</ubl-cbc:URI>
+        </ccv-cac:LegislationReference>
+        <ccv-cac:RequirementGroup>
+            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">d91c11a1-f19e-4b83-8ade-c4be2bf00555</ubl-cbc:ID>
+            <ccv-cac:Requirement responseDataType="INDICATOR">
+                <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">974c8196-9d1c-419c-9ca9-45bb9f5fd59a</ubl-cbc:ID>
+                <ubl-cbc:Description>Your answer?</ubl-cbc:Description>
+                <ccv-cac:Response>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">791e45da-621d-4ee3-90ff-a8d0a880cfd9</ubl-cbc:ID>
+                    <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                </ccv-cac:Response>
+            </ccv-cac:Requirement>
+            <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">aeef523b-c8fc-4dba-9c34-03e34812567b</ubl-cbc:ID>
+                <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">e098da8e-4717-4500-965f-f882d5b4e1ad</ubl-cbc:ID>
+                    <ubl-cbc:Description>Please describe them</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">e9c1e201-4ec0-4fa9-b000-c52f60d684b5</ubl-cbc:ID>
+                        <ubl-cbc:Description>__Liquidator</ubl-cbc:Description>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">4e3f468a-86c4-4c99-bd15-c8b221229348</ubl-cbc:ID>
+                    <ubl-cbc:Description>Indicate reasons for being nevertheless to perform the contract</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">40866b69-9659-4830-97a0-a5e76a748863</ubl-cbc:ID>
+                        <ubl-cbc:Description>__LiquidatorReason</ubl-cbc:Description>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+            </ccv-cac:RequirementGroup>
+        </ccv-cac:RequirementGroup>
+        <ccv-cac:RequirementGroup>
+            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7458d42a-e581-4640-9283-34ceb3ad4345</ubl-cbc:ID>
+            <ccv-cac:Requirement responseDataType="INDICATOR">
+                <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">c1347b74-1872-4060-a6db-f4044edcd7c4</ubl-cbc:ID>
+                <ubl-cbc:Description>Is this information available electronically?</ubl-cbc:Description>
+                <ccv-cac:Response>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">5e78fbdc-873f-4655-9278-4ae82d787845</ubl-cbc:ID>
+                    <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                </ccv-cac:Response>
+            </ccv-cac:Requirement>
+            <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">41dd2e9b-1bfd-44c7-93ee-56bd74a4334b</ubl-cbc:ID>
+                <ccv-cac:Requirement responseDataType="EVIDENCE_URL">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">f4313bb6-21b6-499e-bdff-debe10e11d2c</ubl-cbc:ID>
+                    <ubl-cbc:Description>URL</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">78931060-26bb-49fb-a2cc-e37fee555bb5</ubl-cbc:ID>
+                        <cev-cac:Evidence>
+                            <cev-cac:EvidenceDocumentReference>
+                                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">671644da-7671-4c37-8a75-c8762a6a96a0</ubl-cbc:ID>
+                                <ubl-cac:Attachment>
+                                    <ubl-cac:ExternalReference>
+                                        <ubl-cbc:URI>www.__Liquidator.com</ubl-cbc:URI>
+                                    </ubl-cac:ExternalReference>
+                                </ubl-cac:Attachment>
+                            </cev-cac:EvidenceDocumentReference>
+                        </cev-cac:Evidence>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="CODE">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">1f1cd18e-3e01-4ca2-af4c-e2981924ba8d</ubl-cbc:ID>
+                    <ubl-cbc:Description>Code</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">1f87efa0-8517-473d-9ecd-740a7f962424</ubl-cbc:ID>
+                        <ccv-cbc:Code>__LiquidatorCode</ccv-cbc:Code>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">c3ccfa31-0c5e-4e3a-a3fd-db9fb83d78d4</ubl-cbc:ID>
+                    <ubl-cbc:Description>Issuer</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">779bf06d-5131-4114-8632-e08a8e7ba605</ubl-cbc:ID>
+                        <ubl-cbc:Description>__LiquidatorIssuer</ubl-cbc:Description>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+            </ccv-cac:RequirementGroup>
+        </ccv-cac:RequirementGroup>
+    </ccv-cac:Criterion>
+    <ccv-cac:Criterion>
+        <ubl-cbc:ID schemeID="CriteriaID" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">166536e2-77f7-455c-b018-70582474e4f6</ubl-cbc:ID>
+        <ubl-cbc:TypeCode listID="CriteriaTypeCode" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">CRITERION.EXCLUSION.BUSINESS.ACTIVITIES_SUSPENDED</ubl-cbc:TypeCode>
+        <ubl-cbc:Name>Business activities are suspended</ubl-cbc:Name>
+        <ubl-cbc:Description>Are the business activities of the economic operator suspended?  This information needs not be given if exclusion of economic operators in this case has been made mandatory under the applicable national law without any possibility of derogation where the economic operator is nevertheless able to perform the contract.</ubl-cbc:Description>
+        <ccv-cac:LegislationReference>
+            <ccv-cbc:Title>Public Procurement Directive 2014/24/EU</ccv-cbc:Title>
+            <ubl-cbc:Description>Directive 2014/24/EU of the European Parliament and of the Council of 26 February 2014 on public procurement and repealing Directive 2004/18/EC</ubl-cbc:Description>
+            <ccv-cbc:JurisdictionLevelCode listID="CriterionJurisdictionLevel" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">EU_DIRECTIVE</ccv-cbc:JurisdictionLevelCode>
+            <ccv-cbc:Article>57(4)</ccv-cbc:Article>
+            <ubl-cbc:URI>http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32014L0024</ubl-cbc:URI>
+        </ccv-cac:LegislationReference>
+        <ccv-cac:RequirementGroup>
+            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">d91c11a1-f19e-4b83-8ade-c4be2bf00555</ubl-cbc:ID>
+            <ccv-cac:Requirement responseDataType="INDICATOR">
+                <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">974c8196-9d1c-419c-9ca9-45bb9f5fd59a</ubl-cbc:ID>
+                <ubl-cbc:Description>Your answer?</ubl-cbc:Description>
+                <ccv-cac:Response>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">f2ceded8-4853-433e-98f7-098c2dc4a26b</ubl-cbc:ID>
+                    <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                </ccv-cac:Response>
+            </ccv-cac:Requirement>
+            <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">aeef523b-c8fc-4dba-9c34-03e34812567b</ubl-cbc:ID>
+                <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">e098da8e-4717-4500-965f-f882d5b4e1ad</ubl-cbc:ID>
+                    <ubl-cbc:Description>Please describe them</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">6f5e81d0-c28b-4e77-bd23-c4c0a8b9eb3d</ubl-cbc:ID>
+                        <ubl-cbc:Description>__Suspension</ubl-cbc:Description>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">4e3f468a-86c4-4c99-bd15-c8b221229348</ubl-cbc:ID>
+                    <ubl-cbc:Description>Indicate reasons for being nevertheless to perform the contract</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">182c9543-b996-4d56-8135-31db18841c6d</ubl-cbc:ID>
+                        <ubl-cbc:Description>__SuspensionReason</ubl-cbc:Description>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+            </ccv-cac:RequirementGroup>
+        </ccv-cac:RequirementGroup>
+        <ccv-cac:RequirementGroup>
+            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7458d42a-e581-4640-9283-34ceb3ad4345</ubl-cbc:ID>
+            <ccv-cac:Requirement responseDataType="INDICATOR">
+                <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">c1347b74-1872-4060-a6db-f4044edcd7c4</ubl-cbc:ID>
+                <ubl-cbc:Description>Is this information available electronically?</ubl-cbc:Description>
+                <ccv-cac:Response>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">52a86f9d-7cdb-4fbf-ad6e-dc4d526f8109</ubl-cbc:ID>
+                    <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                </ccv-cac:Response>
+            </ccv-cac:Requirement>
+            <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">41dd2e9b-1bfd-44c7-93ee-56bd74a4334b</ubl-cbc:ID>
+                <ccv-cac:Requirement responseDataType="EVIDENCE_URL">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">f4313bb6-21b6-499e-bdff-debe10e11d2c</ubl-cbc:ID>
+                    <ubl-cbc:Description>URL</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">24253e66-11c2-4eb6-9b73-1d1150951c1f</ubl-cbc:ID>
+                        <cev-cac:Evidence>
+                            <cev-cac:EvidenceDocumentReference>
+                                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">e294e298-e1ef-43e9-9076-4f3b6ed2591e</ubl-cbc:ID>
+                                <ubl-cac:Attachment>
+                                    <ubl-cac:ExternalReference>
+                                        <ubl-cbc:URI>www.__Suspension.com</ubl-cbc:URI>
+                                    </ubl-cac:ExternalReference>
+                                </ubl-cac:Attachment>
+                            </cev-cac:EvidenceDocumentReference>
+                        </cev-cac:Evidence>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="CODE">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">1f1cd18e-3e01-4ca2-af4c-e2981924ba8d</ubl-cbc:ID>
+                    <ubl-cbc:Description>Code</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">500c9f29-3a9e-4ef6-9cd6-59d95fd3612b</ubl-cbc:ID>
+                        <ccv-cbc:Code>__SuspensionCode</ccv-cbc:Code>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">c3ccfa31-0c5e-4e3a-a3fd-db9fb83d78d4</ubl-cbc:ID>
+                    <ubl-cbc:Description>Issuer</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">24f51de6-57e6-4b27-8eb3-25339c1f9cea</ubl-cbc:ID>
+                        <ubl-cbc:Description>__SuspensionIssuer</ubl-cbc:Description>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+            </ccv-cac:RequirementGroup>
+        </ccv-cac:RequirementGroup>
+    </ccv-cac:Criterion>
+    <ccv-cac:Criterion>
+        <ubl-cbc:ID schemeID="CriteriaID" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">514d3fde-1e3e-4dcd-b02a-9f984d5bbda3</ubl-cbc:ID>
+        <ubl-cbc:TypeCode listID="CriteriaTypeCode" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">CRITERION.EXCLUSION.MISCONDUCT.MC_PROFESSIONAL</ubl-cbc:TypeCode>
+        <ubl-cbc:Name>Guilty of grave professional misconduct</ubl-cbc:Name>
+        <ubl-cbc:Description>Is the economic operator  guilty of grave professional misconduct? Where applicable, see definitions in national law, the relevant notice or the procurement documents.</ubl-cbc:Description>
+        <ccv-cac:LegislationReference>
+            <ccv-cbc:Title>Public Procurement Directive 2014/24/EU</ccv-cbc:Title>
+            <ubl-cbc:Description>Directive 2014/24/EU of the European Parliament and of the Council of 26 February 2014 on public procurement and repealing Directive 2004/18/EC</ubl-cbc:Description>
+            <ccv-cbc:JurisdictionLevelCode listID="CriterionJurisdictionLevel" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">EU_DIRECTIVE</ccv-cbc:JurisdictionLevelCode>
+            <ccv-cbc:Article>57(4)</ccv-cbc:Article>
+            <ubl-cbc:URI>http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32014L0024</ubl-cbc:URI>
+        </ccv-cac:LegislationReference>
+        <ccv-cac:RequirementGroup>
+            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">67362ec7-cec3-4cb8-a38e-5d7a2a31e6d8</ubl-cbc:ID>
+            <ccv-cac:Requirement responseDataType="INDICATOR">
+                <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">974c8196-9d1c-419c-9ca9-45bb9f5fd59a</ubl-cbc:ID>
+                <ubl-cbc:Description>Your answer?</ubl-cbc:Description>
+                <ccv-cac:Response>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">e7060e20-9514-44b9-b171-e2d3312adaca</ubl-cbc:ID>
+                    <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                </ccv-cac:Response>
+            </ccv-cac:Requirement>
+            <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">2cbcf978-765c-40aa-996b-b1d082485cef</ubl-cbc:ID>
+                <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">e098da8e-4717-4500-965f-f882d5b4e1ad</ubl-cbc:ID>
+                    <ubl-cbc:Description>Please describe them</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">f5f0a523-6417-48bd-8488-2a1154b7119f</ubl-cbc:ID>
+                        <ubl-cbc:Description>__Misconduct</ubl-cbc:Description>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:RequirementGroup>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">5f9f09f7-f701-432c-9fdc-c22c124a74c9</ubl-cbc:ID>
+                    <ccv-cac:Requirement responseDataType="INDICATOR">
+                        <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">20c5361b-7599-4ee6-b030-7f8323174d1e</ubl-cbc:ID>
+                        <ubl-cbc:Description>Have you taken measures to demonstrate your reliability ("Self-Cleaning")?</ubl-cbc:Description>
+                        <ccv-cac:Response>
+                            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">05bf9940-3919-4d6f-b1d2-a4651ef79865</ubl-cbc:ID>
+                            <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                        </ccv-cac:Response>
+                    </ccv-cac:Requirement>
+                    <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">74e6c7b4-757b-4b40-ada6-fad6a997c310</ubl-cbc:ID>
+                        <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                            <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7b07904f-e080-401a-a3a1-9a3efeeda54b</ubl-cbc:ID>
+                            <ubl-cbc:Description>Please describe them</ubl-cbc:Description>
+                            <ccv-cac:Response>
+                                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">edd8eb86-8750-43ab-8971-3cfec17ac495</ubl-cbc:ID>
+                                <ubl-cbc:Description>__MisconductSelfCleaning</ubl-cbc:Description>
+                            </ccv-cac:Response>
+                        </ccv-cac:Requirement>
+                    </ccv-cac:RequirementGroup>
+                </ccv-cac:RequirementGroup>
+            </ccv-cac:RequirementGroup>
+        </ccv-cac:RequirementGroup>
+    </ccv-cac:Criterion>
+    <ccv-cac:Criterion>
+        <ubl-cbc:ID schemeID="CriteriaID" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">56d13e3d-76e8-4f23-8af6-13e60a2ee356</ubl-cbc:ID>
+        <ubl-cbc:TypeCode listID="CriteriaTypeCode" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">CRITERION.EXCLUSION.MISCONDUCT.MARKET_DISTORTION</ubl-cbc:TypeCode>
+        <ubl-cbc:Name>Agreements with other economic operators aimed at distorting competition</ubl-cbc:Name>
+        <ubl-cbc:Description>Has the economic operator entered into agreements with other economic operators aimed at distorting competition?</ubl-cbc:Description>
+        <ccv-cac:LegislationReference>
+            <ccv-cbc:Title>Public Procurement Directive 2014/24/EU</ccv-cbc:Title>
+            <ubl-cbc:Description>Directive 2014/24/EU of the European Parliament and of the Council of 26 February 2014 on public procurement and repealing Directive 2004/18/EC</ubl-cbc:Description>
+            <ccv-cbc:JurisdictionLevelCode listID="CriterionJurisdictionLevel" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">EU_DIRECTIVE</ccv-cbc:JurisdictionLevelCode>
+            <ccv-cbc:Article>57(4)</ccv-cbc:Article>
+            <ubl-cbc:URI>http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32014L0024</ubl-cbc:URI>
+        </ccv-cac:LegislationReference>
+        <ccv-cac:RequirementGroup>
+            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">67362ec7-cec3-4cb8-a38e-5d7a2a31e6d8</ubl-cbc:ID>
+            <ccv-cac:Requirement responseDataType="INDICATOR">
+                <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">974c8196-9d1c-419c-9ca9-45bb9f5fd59a</ubl-cbc:ID>
+                <ubl-cbc:Description>Your answer?</ubl-cbc:Description>
+                <ccv-cac:Response>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">c931ec98-8ae3-49b0-a2e5-54b11a91cb7e</ubl-cbc:ID>
+                    <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                </ccv-cac:Response>
+            </ccv-cac:Requirement>
+            <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">2cbcf978-765c-40aa-996b-b1d082485cef</ubl-cbc:ID>
+                <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">e098da8e-4717-4500-965f-f882d5b4e1ad</ubl-cbc:ID>
+                    <ubl-cbc:Description>Please describe them</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">3c173ba7-e516-4530-bb7a-2951bdb0c3ea</ubl-cbc:ID>
+                        <ubl-cbc:Description>__Competition</ubl-cbc:Description>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:RequirementGroup>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">5f9f09f7-f701-432c-9fdc-c22c124a74c9</ubl-cbc:ID>
+                    <ccv-cac:Requirement responseDataType="INDICATOR">
+                        <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">20c5361b-7599-4ee6-b030-7f8323174d1e</ubl-cbc:ID>
+                        <ubl-cbc:Description>Have you taken measures to demonstrate your reliability ("Self-Cleaning")?</ubl-cbc:Description>
+                        <ccv-cac:Response>
+                            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">946dc117-f7d8-4952-ada8-ab0b5f302e60</ubl-cbc:ID>
+                            <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                        </ccv-cac:Response>
+                    </ccv-cac:Requirement>
+                    <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">74e6c7b4-757b-4b40-ada6-fad6a997c310</ubl-cbc:ID>
+                        <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                            <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7b07904f-e080-401a-a3a1-9a3efeeda54b</ubl-cbc:ID>
+                            <ubl-cbc:Description>Please describe them</ubl-cbc:Description>
+                            <ccv-cac:Response>
+                                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">0939f08d-9f0d-44b3-898a-58ad503eb665</ubl-cbc:ID>
+                                <ubl-cbc:Description>__CompetitionSelfCleaning</ubl-cbc:Description>
+                            </ccv-cac:Response>
+                        </ccv-cac:Requirement>
+                    </ccv-cac:RequirementGroup>
+                </ccv-cac:RequirementGroup>
+            </ccv-cac:RequirementGroup>
+        </ccv-cac:RequirementGroup>
+    </ccv-cac:Criterion>
+    <ccv-cac:Criterion>
+        <ubl-cbc:ID schemeID="CriteriaID" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">b1b5ac18-f393-4280-9659-1367943c1a2e</ubl-cbc:ID>
+        <ubl-cbc:TypeCode listID="CriteriaTypeCode" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">CRITERION.EXCLUSION.CONFLICT_OF_INTEREST.PROCEDURE_PARTICIPATION</ubl-cbc:TypeCode>
+        <ubl-cbc:Name>Conflict of interest due to its participation in the procurement procedure</ubl-cbc:Name>
+        <ubl-cbc:Description>Is the economic operator aware of any conflict of interest, as indicated in national law, the relevant notice or the procurement documents due to its participation in the procurement procedure?</ubl-cbc:Description>
+        <ccv-cac:LegislationReference>
+            <ccv-cbc:Title>Public Procurement Directive 2014/24/EU</ccv-cbc:Title>
+            <ubl-cbc:Description>Directive 2014/24/EU of the European Parliament and of the Council of 26 February 2014 on public procurement and repealing Directive 2004/18/EC</ubl-cbc:Description>
+            <ccv-cbc:JurisdictionLevelCode listID="CriterionJurisdictionLevel" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">EU_DIRECTIVE</ccv-cbc:JurisdictionLevelCode>
+            <ccv-cbc:Article>57(4)</ccv-cbc:Article>
+            <ubl-cbc:URI>http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32014L0024</ubl-cbc:URI>
+        </ccv-cac:LegislationReference>
+        <ccv-cac:RequirementGroup>
+            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">30450436-f559-4dfa-98ba-f0842ed9d2a0</ubl-cbc:ID>
+            <ccv-cac:Requirement responseDataType="INDICATOR">
+                <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">974c8196-9d1c-419c-9ca9-45bb9f5fd59a</ubl-cbc:ID>
+                <ubl-cbc:Description>Your answer?</ubl-cbc:Description>
+                <ccv-cac:Response>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">df572943-2443-424b-b671-f10addd3ccbc</ubl-cbc:ID>
+                    <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                </ccv-cac:Response>
+            </ccv-cac:Requirement>
+            <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">73f0fe4c-4ed9-4343-8096-d898cf200146</ubl-cbc:ID>
+                <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">e098da8e-4717-4500-965f-f882d5b4e1ad</ubl-cbc:ID>
+                    <ubl-cbc:Description>Please describe them</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">236e71ca-83ff-46e9-ace6-462ba96463e1</ubl-cbc:ID>
+                        <ubl-cbc:Description>__ConflictOfInterests</ubl-cbc:Description>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+            </ccv-cac:RequirementGroup>
+        </ccv-cac:RequirementGroup>
+    </ccv-cac:Criterion>
+    <ccv-cac:Criterion>
+        <ubl-cbc:ID schemeID="CriteriaID" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">61874050-5130-4f1c-a174-720939c7b483</ubl-cbc:ID>
+        <ubl-cbc:TypeCode listID="CriteriaTypeCode" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">CRITERION.EXCLUSION.CONFLICT_OF_INTEREST.PROCEDURE_PREPARATION</ubl-cbc:TypeCode>
+        <ubl-cbc:Name>Direct or indirect involvement in the preparation of this procurement procedure</ubl-cbc:Name>
+        <ubl-cbc:Description>Has the economic operator or an undertaking related to it advised the contracting authority or contracting entity or otherwise been involved in the preparation of the procurement procedure?</ubl-cbc:Description>
+        <ccv-cac:LegislationReference>
+            <ccv-cbc:Title>Public Procurement Directive 2014/24/EU</ccv-cbc:Title>
+            <ubl-cbc:Description>Directive 2014/24/EU of the European Parliament and of the Council of 26 February 2014 on public procurement and repealing Directive 2004/18/EC</ubl-cbc:Description>
+            <ccv-cbc:JurisdictionLevelCode listID="CriterionJurisdictionLevel" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">EU_DIRECTIVE</ccv-cbc:JurisdictionLevelCode>
+            <ccv-cbc:Article>57(4)</ccv-cbc:Article>
+            <ubl-cbc:URI>http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32014L0024</ubl-cbc:URI>
+        </ccv-cac:LegislationReference>
+        <ccv-cac:RequirementGroup>
+            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">77ae3f29-7c5f-4afa-af97-24afec48c5bf</ubl-cbc:ID>
+            <ccv-cac:Requirement responseDataType="INDICATOR">
+                <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">974c8196-9d1c-419c-9ca9-45bb9f5fd59a</ubl-cbc:ID>
+                <ubl-cbc:Description>Your answer?</ubl-cbc:Description>
+                <ccv-cac:Response>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">2dbbc79b-cc06-429e-abc7-341455df0145</ubl-cbc:ID>
+                    <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                </ccv-cac:Response>
+            </ccv-cac:Requirement>
+            <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">73f0fe4c-4ed9-4343-8096-d898cf200146</ubl-cbc:ID>
+                <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">e098da8e-4717-4500-965f-f882d5b4e1ad</ubl-cbc:ID>
+                    <ubl-cbc:Description>Please describe them</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">2f2f5191-cd32-416c-91e7-e927741a9bde</ubl-cbc:ID>
+                        <ubl-cbc:Description>__InvolvementIntoProcurementProcedure</ubl-cbc:Description>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+            </ccv-cac:RequirementGroup>
+        </ccv-cac:RequirementGroup>
+    </ccv-cac:Criterion>
+    <ccv-cac:Criterion>
+        <ubl-cbc:ID schemeID="CriteriaID" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">3293e92b-7f3e-42f1-bee6-a7641bb04251</ubl-cbc:ID>
+        <ubl-cbc:TypeCode listID="CriteriaTypeCode" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">CRITERION.EXCLUSION.CONFLICT_OF_INTEREST.EARLY_TERMINATION</ubl-cbc:TypeCode>
+        <ubl-cbc:Name>Early termination, damages or other comparable sanctions</ubl-cbc:Name>
+        <ubl-cbc:Description>Has the economic operator experienced that a prior public contract, a prior contract with a contracting entity or a prior concession contract was terminated early, or that damages or other comparable sanctions were imposed in connection with that prior contract?</ubl-cbc:Description>
+        <ccv-cac:LegislationReference>
+            <ccv-cbc:Title>Public Procurement Directive 2014/24/EU</ccv-cbc:Title>
+            <ubl-cbc:Description>Directive 2014/24/EU of the European Parliament and of the Council of 26 February 2014 on public procurement and repealing Directive 2004/18/EC</ubl-cbc:Description>
+            <ccv-cbc:JurisdictionLevelCode listID="CriterionJurisdictionLevel" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">EU_DIRECTIVE</ccv-cbc:JurisdictionLevelCode>
+            <ccv-cbc:Article>57(4)</ccv-cbc:Article>
+            <ubl-cbc:URI>http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32014L0024</ubl-cbc:URI>
+        </ccv-cac:LegislationReference>
+        <ccv-cac:RequirementGroup>
+            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">67362ec7-cec3-4cb8-a38e-5d7a2a31e6d8</ubl-cbc:ID>
+            <ccv-cac:Requirement responseDataType="INDICATOR">
+                <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">974c8196-9d1c-419c-9ca9-45bb9f5fd59a</ubl-cbc:ID>
+                <ubl-cbc:Description>Your answer?</ubl-cbc:Description>
+                <ccv-cac:Response>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">9a7d5d18-db16-4e2e-a9f9-c55860704e40</ubl-cbc:ID>
+                    <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                </ccv-cac:Response>
+            </ccv-cac:Requirement>
+            <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">2cbcf978-765c-40aa-996b-b1d082485cef</ubl-cbc:ID>
+                <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                    <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">e098da8e-4717-4500-965f-f882d5b4e1ad</ubl-cbc:ID>
+                    <ubl-cbc:Description>Please describe them</ubl-cbc:Description>
+                    <ccv-cac:Response>
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">0c47adb4-2f3b-4d5b-9f37-f91dcbc1ebab</ubl-cbc:ID>
+                        <ubl-cbc:Description>__Damages</ubl-cbc:Description>
+                    </ccv-cac:Response>
+                </ccv-cac:Requirement>
+                <ccv-cac:RequirementGroup>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">5f9f09f7-f701-432c-9fdc-c22c124a74c9</ubl-cbc:ID>
+                    <ccv-cac:Requirement responseDataType="INDICATOR">
+                        <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">20c5361b-7599-4ee6-b030-7f8323174d1e</ubl-cbc:ID>
+                        <ubl-cbc:Description>Have you taken measures to demonstrate your reliability ("Self-Cleaning")?</ubl-cbc:Description>
+                        <ccv-cac:Response>
+                            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">e3307ca9-679b-4fe2-8df0-5213c9fe631a</ubl-cbc:ID>
+                            <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                        </ccv-cac:Response>
+                    </ccv-cac:Requirement>
+                    <ccv-cac:RequirementGroup pi="GROUP_FULFILLED.ON_TRUE">
+                        <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">74e6c7b4-757b-4b40-ada6-fad6a997c310</ubl-cbc:ID>
+                        <ccv-cac:Requirement responseDataType="DESCRIPTION">
+                            <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">7b07904f-e080-401a-a3a1-9a3efeeda54b</ubl-cbc:ID>
+                            <ubl-cbc:Description>Please describe them</ubl-cbc:Description>
+                            <ccv-cac:Response>
+                                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">5096531e-9bf2-41c3-a31f-c57b987350a0</ubl-cbc:ID>
+                                <ubl-cbc:Description>__DamagesSelfCleaning</ubl-cbc:Description>
+                            </ccv-cac:Response>
+                        </ccv-cac:Requirement>
+                    </ccv-cac:RequirementGroup>
+                </ccv-cac:RequirementGroup>
+            </ccv-cac:RequirementGroup>
+        </ccv-cac:RequirementGroup>
+    </ccv-cac:Criterion>
+    <ccv-cac:Criterion>
+        <ubl-cbc:ID schemeID="CriteriaID" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">696a75b2-6107-428f-8b74-82affb67e184</ubl-cbc:ID>
+        <ubl-cbc:TypeCode listID="CriteriaTypeCode" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">CRITERION.EXCLUSION.CONFLICT_OF_INTEREST.MISINTERPRETATION</ubl-cbc:TypeCode>
+        <ubl-cbc:Name>Guilty of misinterpretation, withheld information, unable to provide required documents and obtained confidential information of this procedure</ubl-cbc:Name>
+        <ubl-cbc:Description>Can the economic operator confirm the four exclusion grounds, that it has not been guilty of serious misrepresentation in supplying the information required for the verification of the absence of grounds for exclusion or the fulfilment of the selection criteria, that it has not withheld such information, it has been able, without delay, to submit the supporting documents required by a contracting authority or contracting entity, and it has not undertaken to unduly influence the decision making process of the contracting authority or contracting entity, to obtain confidential information that may confer upon it undue advantages in the procurement procedure or to negligently provide misleading information that may have a material influence on decisions concerning exclusion, selection or award?</ubl-cbc:Description>
+        <ccv-cac:LegislationReference>
+            <ccv-cbc:Title>Public Procurement Directive 2014/24/EU</ccv-cbc:Title>
+            <ubl-cbc:Description>Directive 2014/24/EU of the European Parliament and of the Council of 26 February 2014 on public procurement and repealing Directive 2004/18/EC</ubl-cbc:Description>
+            <ccv-cbc:JurisdictionLevelCode listID="CriterionJurisdictionLevel" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">EU_DIRECTIVE</ccv-cbc:JurisdictionLevelCode>
+            <ccv-cbc:Article>57(4)</ccv-cbc:Article>
+            <ubl-cbc:URI>http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32014L0024</ubl-cbc:URI>
+        </ccv-cac:LegislationReference>
+        <ccv-cac:RequirementGroup>
+            <ubl-cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">30450436-f559-4dfa-98ba-f0842ed9d2a0</ubl-cbc:ID>
+            <ccv-cac:Requirement responseDataType="INDICATOR">
+                <ubl-cbc:ID schemeID="CriterionRelatedIDs" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">974c8196-9d1c-419c-9ca9-45bb9f5fd59a</ubl-cbc:ID>
+                <ubl-cbc:Description>Your answer?</ubl-cbc:Description>
+                <ccv-cac:Response>
+                    <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">5fc8a244-2c0f-4507-9551-53d8ddec1d92</ubl-cbc:ID>
+                    <ccv-cbc:Indicator>true</ccv-cbc:Indicator>
+                </ccv-cac:Response>
+            </ccv-cac:Requirement>
+        </ccv-cac:RequirementGroup>
+    </ccv-cac:Criterion>
+    <ubl-cac:ServiceProviderParty>
+        <ubl-cac:Party>
+            <ubl-cbc:WebsiteURI>http://poyry-pq.de/</ubl-cbc:WebsiteURI>
+            <ubl-cbc:EndpointID schemeAgencyID="EU-COM-GROW">alex.krueger@poyry.com</ubl-cbc:EndpointID>
+            <ubl-cac:PartyIdentification>
+                <ubl-cbc:ID schemeAgencyID="EU-COM-GROW">DE1234567890</ubl-cbc:ID>
+            </ubl-cac:PartyIdentification>
+            <ubl-cac:PartyName>
+                <ubl-cbc:Name>Pöyry Deutschland GmbH</ubl-cbc:Name>
+            </ubl-cac:PartyName>
+        </ubl-cac:Party>
+    </ubl-cac:ServiceProviderParty>
+    <ubl-cac:AdditionalDocumentReference>
+        <ubl-cbc:ID schemeID="ISO/IEC 9834-8:2008 - 4UUID" schemeAgencyID="EU-COM-GROW" schemeAgencyName="DG GROW (European Commission)" schemeVersionID="1.1">2018/S 123-123456</ubl-cbc:ID>
+        <ubl-cbc:DocumentTypeCode listID="ReferencesTypeCodes" listAgencyID="EU-COM-GROW" listVersionID="1.0">TED_CN</ubl-cbc:DocumentTypeCode>
+        <ubl-cac:Attachment>
+            <ubl-cac:ExternalReference>
+                <ubl-cbc:URI>__OJS URL</ubl-cbc:URI>
+                <ubl-cbc:FileName>__ProcurementProcedureTitle</ubl-cbc:FileName>
+                <ubl-cbc:Description>__ProcurementProcedureDescription</ubl-cbc:Description>
+            </ubl-cac:ExternalReference>
+        </ubl-cac:Attachment>
+    </ubl-cac:AdditionalDocumentReference>
+    <ubl-cac:AdditionalDocumentReference>
+        <ubl-cbc:ID schemeID="ISO/IEC 9834-8:2008 - 4UUID" schemeAgencyID="EU-COM-GROW" schemeAgencyName="DG GROW (European Commission)" schemeVersionID="1.1">25563c2e-e28c-4aa6-bfd3-9a4e5c24a2f2</ubl-cbc:ID>
+        <ubl-cbc:IssueDate>2018-03-29</ubl-cbc:IssueDate>
+        <ubl-cbc:IssueTime>13:17:29</ubl-cbc:IssueTime>
+        <ubl-cbc:DocumentTypeCode listID="ReferencesTypeCodes" listAgencyID="EU-COM-GROW" listVersionID="1.0">ESPD_REQUEST</ubl-cbc:DocumentTypeCode>
+        <ubl-cbc:DocumentDescription>__ProcurementProcedureFileRefNumber</ubl-cbc:DocumentDescription>
+    </ubl-cac:AdditionalDocumentReference>
+</espd-res:ESPDResponse>

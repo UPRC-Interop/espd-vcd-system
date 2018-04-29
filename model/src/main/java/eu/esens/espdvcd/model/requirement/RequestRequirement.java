@@ -1,7 +1,7 @@
 package eu.esens.espdvcd.model.requirement;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import eu.esens.espdvcd.codelist.enums.CriterionElementTypeEnum;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.requirement.response.Response;
 
@@ -59,9 +59,26 @@ public class RequestRequirement implements Requirement {
      */
     private ResponseTypeEnum responseDataType;
 
+    /**
+     * The type of property. Used to verify that structure of the property is correct
+     * UBL syntax path:
+     */
+    private CriterionElementTypeEnum typeCode;
 
-    public RequestRequirement(@JsonProperty("ID") String ID,@JsonProperty("responseDataType") ResponseTypeEnum responseDataType,@JsonProperty("description") String description) {
+    public RequestRequirement(@JsonProperty("ID") String ID,
+                              @JsonProperty("responseDataType") ResponseTypeEnum responseDataType,
+                              @JsonProperty("description") String description) {
         this.ID = ID;
+        this.responseDataType = responseDataType;
+        this.description = description;
+    }
+
+    public RequestRequirement(@JsonProperty("ID") String ID,
+                              @JsonProperty("typeCode") CriterionElementTypeEnum typeCode,
+                              @JsonProperty("responseDataType") ResponseTypeEnum responseDataType,
+                              @JsonProperty("description") String description) {
+        this.ID = ID;
+        this.typeCode = typeCode;
         this.responseDataType = responseDataType;
         this.description = description;
     }
@@ -102,8 +119,18 @@ public class RequestRequirement implements Requirement {
     }
 
     @Override
+    public void setTypeCode(CriterionElementTypeEnum typeCode) {
+        this.typeCode = typeCode;
+    }
+
+    @Override
     public ResponseTypeEnum getResponseDataType() {
       return this.responseDataType;
+    }
+
+    @Override
+    public CriterionElementTypeEnum getTypeCode() {
+        return typeCode;
     }
 
 }

@@ -29,10 +29,14 @@ public class XMLDocumentBuilderV2 extends DocumentBuilderV2 {
         return theXML;
     }
 
-
+    /**
+     * 41 is the default value according to ESPD-EDM v2.0.1 implementation guide
+     *
+     * @return
+     */
     @Override
     protected String getProfileID() {
-        return "ESPD";
+        return "41";
     }
 
 }

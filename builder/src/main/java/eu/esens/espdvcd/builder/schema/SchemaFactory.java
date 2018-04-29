@@ -8,9 +8,18 @@ import eu.esens.espdvcd.builder.schema.v2.ESPDResponseSchemaExtractorV2;
 import eu.esens.espdvcd.builder.schema.v2.VCDResponseSchemaExtractorV2;
 
 public class SchemaFactory {
-    
+
+    /**
+     * @deprecated as of release 2.0.2, replaced by {@link V1#ESPD_REQUEST}
+     */
     public static final ESPDRequestSchemaExtractor ESPD_REQUEST = new ESPDRequestSchemaExtractor();
+    /**
+     * @deprecated as of release 2.0.2, replaced by {@link V1#ESPD_RESPONSE}
+     */
     public static final ESPDResponseSchemaExtractor ESPD_RESPONSE = new ESPDResponseSchemaExtractor();
+    /**
+     * @deprecated as of release 2.0.2, replaced by {@link V1#VCD_RESPONSE}
+     */
     public static final VCDResponseSchemaExtractor VCD_RESPONSE = new VCDResponseSchemaExtractor();
 
     public static final class V1 {

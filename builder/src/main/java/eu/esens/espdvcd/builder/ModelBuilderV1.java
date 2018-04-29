@@ -7,6 +7,7 @@ import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
 import eu.esens.espdvcd.retriever.criteria.PredefinedESPDCriteriaExtractor;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import eu.esens.espdvcd.schema.SchemaUtil;
+import eu.esens.espdvcd.schema.SchemaVersion;
 import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
 import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
 
@@ -24,7 +25,7 @@ import java.util.logging.Logger;
  *
  * @since 1.0
  */
-public class ModelBuilderV1 extends ModelBuilder {
+public class ModelBuilderV1 implements ModelBuilder {
 
     private EODetails eoDetails = null;
     private CADetails caDetails = null;
@@ -192,7 +193,8 @@ public class ModelBuilderV1 extends ModelBuilder {
         }
 
         // Apply workaround
-        req.getFullCriterionList().forEach(this::applyCriteriaWorkaround);
+        // req.getFullCriterionList().forEach(this::applyCriteriaWorkaround);
+        req.getFullCriterionList().forEach(sc -> applyCriteriaWorkaround(sc, SchemaVersion.V1));
 
         return req;
     }
@@ -268,38 +270,18 @@ public class ModelBuilderV1 extends ModelBuilder {
         }
 
         // Apply workaround
-        res.getFullCriterionList().forEach(this::applyCriteriaWorkaround);
+        // res.getFullCriterionList().forEach(this::applyCriteriaWorkaround);
+        res.getFullCriterionList().forEach(sc -> applyCriteriaWorkaround(sc, SchemaVersion.V1));
 
         return res;
     }
-
-    protected InputStream getBufferedInputStream(InputStream xmlESPD) {
-        // We require a marked input stream
-        InputStream bis;
-        if (xmlESPD.markSupported()) {
-            bis = xmlESPD;
-        } else {
-            bis = new BufferedInputStream(xmlESPD);
-        }
-        return bis;
-    }
-
-//    private List<SelectableCriterion> getCriteriaList() {
-//        CriteriaExtractor cr = new PredefinedESPDCriteriaExtractor();
-//        try {
-//            return cr.getFullList();
-//        } catch (RetrieverException ex) {
-//            Logger.getLogger(ModelBuilderV1.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        return null;
-//    }
 
     private ESPDRequestType readRegulatedESPDRequestFromStream(InputStream is)
         throws JAXBException {
 
             // Start with the convenience methods provided by JAXB. If there are
             // performance issues we will switch back to the JAXB API Usage
-            return SchemaUtil.getUnmarshaller().unmarshal(new StreamSource(is), ESPDRequestType.class).getValue();
+            return SchemaUtil.V1.getUnmarshaller().unmarshal(new StreamSource(is), ESPDRequestType.class).getValue();
 
     }
 
@@ -315,7 +297,7 @@ public class ModelBuilderV1 extends ModelBuilder {
         try {
             // Start with the convenience methods provided by JAXB. If there are
             // performance issues we will switch back to the JAXB API Usage
-            return SchemaUtil.getUnmarshaller().unmarshal(new StreamSource(is), ESPDResponseType.class).getValue();
+            return SchemaUtil.V1.getUnmarshaller().unmarshal(new StreamSource(is), ESPDResponseType.class).getValue();
         } catch (JAXBException ex) {
             Logger.getLogger(ModelBuilderV1.class.getName()).log(Level.SEVERE, null, ex);
             return null;

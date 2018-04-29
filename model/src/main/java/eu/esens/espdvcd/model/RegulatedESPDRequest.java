@@ -21,6 +21,7 @@ public class RegulatedESPDRequest implements ESPDRequest {
     private static final long serialVersionUID = -8366478868586274094L;
 
     private Long id;
+    private String localId;
 
     private ESPDRequestModelType modelType = ESPDRequestModelType.ESPD_REQUEST_DRAFT;
     private CADetails caDetails;
@@ -39,6 +40,11 @@ public class RegulatedESPDRequest implements ESPDRequest {
     @Override
     public Long getId() {
         return id;
+    }
+
+    @Override
+    public String getLocalId() {
+        return localId;
     }
 
     @Override
