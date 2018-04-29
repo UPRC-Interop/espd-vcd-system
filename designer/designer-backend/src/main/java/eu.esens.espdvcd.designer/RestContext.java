@@ -1,6 +1,6 @@
 package eu.esens.espdvcd.designer;
 
-import eu.esens.espdvcd.designer.endpoints.Endpoint;
+import eu.esens.espdvcd.designer.endpoint.Endpoint;
 import spark.Service;
 
 import java.util.logging.Logger;
@@ -26,7 +26,7 @@ public class RestContext {
 
     public void addEndpointWithPath(Endpoint endpoint, String path) {
 
-        endpoint.configure(spark, basePath+path);
+        endpoint.configure(spark, basePath + path);
 //        logger.info("REST endpoints registered for "+ endpoint.getClass().getSimpleName());
     }
 

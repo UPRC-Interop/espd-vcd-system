@@ -22,57 +22,55 @@ public class RequirementDeserialiser extends StdDeserializer<ResponseRequirement
     }
 
     @Override
-    public ResponseRequirement deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+    public ResponseRequirement deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         JsonNode root = p.getCodec().readTree(p);
-//        System.out.println(root.get("id").asText());
         JsonNode responseType = root.get("responseDataType");
         JsonNode ID = root.get("id");
         JsonNode description = root.get("description");
 
         ResponseRequirement responseRequirement = new ResponseRequirement(ID.asText(), ResponseTypeEnum.valueOf(responseType.asText()), description.asText());
-        Response x;
+        Response response;
 
         switch (responseRequirement.getResponseDataType()) {
             case CODE:
-                x = mapper.treeToValue(root.get("response"), EvidenceURLCodeResponse.class);
+                response = mapper.treeToValue(root.get("response"), EvidenceURLCodeResponse.class);
                 break;
             case AMOUNT:
-                x = mapper.treeToValue(root.get("response"), AmountResponse.class);
+                response = mapper.treeToValue(root.get("response"), AmountResponse.class);
                 break;
             case QUANTITY:
-                x = mapper.treeToValue(root.get("response"), QuantityResponse.class);
+                response = mapper.treeToValue(root.get("response"), QuantityResponse.class);
                 break;
             case INDICATOR:
-                x = mapper.treeToValue(root.get("response"), IndicatorResponse.class);
+                response = mapper.treeToValue(root.get("response"), IndicatorResponse.class);
                 break;
             case PERCENTAGE:
-                x = mapper.treeToValue(root.get("response"), PercentageResponse.class);
+                response = mapper.treeToValue(root.get("response"), PercentageResponse.class);
                 break;
             case DESCRIPTION:
-                x = mapper.treeToValue(root.get("response"), DescriptionResponse.class);
+                response = mapper.treeToValue(root.get("response"), DescriptionResponse.class);
                 break;
             case CODE_COUNTRY:
-                x = mapper.treeToValue(root.get("response"), CountryCodeResponse.class);
+                response = mapper.treeToValue(root.get("response"), CountryCodeResponse.class);
                 break;
             case QUANTITY_YEAR:
-                x = mapper.treeToValue(root.get("response"), QuantityYearResponse.class);
+                response = mapper.treeToValue(root.get("response"), QuantityYearResponse.class);
                 break;
             case QUANTITY_INTEGER:
-                x = mapper.treeToValue(root.get("response"), QuantityIntegerResponse.class);
+                response = mapper.treeToValue(root.get("response"), QuantityIntegerResponse.class);
                 break;
             case PERIOD:
-                x = mapper.treeToValue(root.get("response"), PeriodResponse.class);
+                response = mapper.treeToValue(root.get("response"), PeriodResponse.class);
                 break;
             case EVIDENCE_URL:
-                x = mapper.treeToValue(root.get("response"), EvidenceURLResponse.class);
+                response = mapper.treeToValue(root.get("response"), EvidenceURLResponse.class);
                 break;
             default:
-                x = null;
+                response = null;
                 break;
         }
-
-        responseRequirement.setResponse(x);
+        responseRequirement.setResponse(response);
         return responseRequirement;
     }
 
