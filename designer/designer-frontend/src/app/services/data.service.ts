@@ -642,6 +642,8 @@ export class DataService {
         });
 
       /* ======================== predefined selection criteria ============================ */
+
+
       this.getSelectionACriteria()
         .then(res => {
           this.selectionACriteria = res;
