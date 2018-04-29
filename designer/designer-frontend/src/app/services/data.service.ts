@@ -439,6 +439,7 @@ export class DataService {
           this.selectedEOCountry = this.EODetails.postalAddress.countryCode;
 
           // Fill in EoDetails Form
+
           this.eoDetailsFormUpdate();
           // console.log(this.EOForm.value);
 
@@ -475,7 +476,7 @@ export class DataService {
 
           this.reductionCriteria = this.filterReductionCriteria(this.REDUCTION_OF_CANDIDATES_REGEXP, res.fullCriterionList);
           if (!this.reductionCriteria) {
-            console.log('IT IS EMPTYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY');
+
           }
           this.reductionCriteriaForm = this.createReductionCriterionForm(this.reductionCriteria);
 
@@ -497,9 +498,11 @@ export class DataService {
   eoDetailsFormUpdate() {
 
     /* ====================== Date Manipulation =====================================*/
+    if (this.EODetails.naturalPersons[0]['birthDate']) {
+      this.EODetails.naturalPersons[0]['birthDate'] = this.getDateJSObject(this.EODetails.naturalPersons[0]['birthDate']);
+      console.log(this.EODetails.naturalPersons[0]['birthDate']);
+    }
 
-    this.EODetails.naturalPersons[0]['birthDate'] = this.getDateJSObject(this.EODetails.naturalPersons[0]['birthDate']);
-    console.log(this.EODetails.naturalPersons[0]['birthDate']);
 
     this.EOForm.patchValue({
       'name': this.EODetails.name,
