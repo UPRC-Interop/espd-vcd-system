@@ -1087,14 +1087,19 @@ export class DataService {
         rg.requirements.forEach(r => {
           // console.log('In Req: ' + r.id);
 
-          // TODO if response !=undefined
+          // TODO if date handle date
           if (r.response != null || r.response != undefined) {
             group[r.id] = new FormControl(r.response.description ||
               r.response.percentage || r.response.indicator || r.response.evidenceURL ||
               r.response.evidenceURLCode || r.response.currency || r.response.countryCode ||
               r.response.amount || r.response.period || r.response.quantity || r.response.year || '');
 
-            console.log(r.response);
+            if (r.response.date) {
+              const date = this.getDateJSObject(r.response.date);
+              group[r.id] = new FormControl(date);
+            }
+
+            // console.log(r.response);
           } else {
             r.response = new RequirementResponse();
             group[r.id] = new FormControl(r.response.description || '');
