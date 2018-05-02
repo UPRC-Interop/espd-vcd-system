@@ -44,8 +44,8 @@ public class DocumentBuilderV2 {
      * @return a JAXB QualificationApplicationRequestType instance from an ESPDRequest Model instance
      */
     private QualificationApplicationRequestType createXML(ESPDRequest req) {
-        QualificationApplicationRequestType reqType =
-                finalize(SchemaFactory.V2.ESPD_REQUEST.extractQualificationApplicationRequestType(req));
+        QualificationApplicationRequestType reqType = finalize(SchemaFactory.V2.ESPD_REQUEST
+                .extractQualificationApplicationRequestType(req));
         return reqType;
     }
 
@@ -123,11 +123,11 @@ public class DocumentBuilderV2 {
         try {
             if (theReq instanceof ESPDResponse) {
                 test.x.ubl.pre_award.qualificationapplicationresponse.ObjectFactory of = new test.x.ubl.pre_award.qualificationapplicationresponse.ObjectFactory();
-                SchemaUtil.V2.getMarshaller().marshal(of.createQualificationApplicationResponse(createXML((ESPDResponse) theReq)), result);
+                SchemaUtil.getMarshaller().marshal(of.createQualificationApplicationResponse(createXML((ESPDResponse) theReq)), result);
 
             } else {
                 test.x.ubl.pre_award.qualificationapplicationrequest.ObjectFactory of = new test.x.ubl.pre_award.qualificationapplicationrequest.ObjectFactory();
-                SchemaUtil.V2.getMarshaller().marshal(of.createQualificationApplicationRequest(createXML(theReq)), result);
+                SchemaUtil.getMarshaller().marshal(of.createQualificationApplicationRequest(createXML(theReq)), result);
             }
         } catch (JAXBException ex) {
             Logger.getLogger(XMLDocumentBuilderV2.class.getName()).log(Level.SEVERE, null, ex);

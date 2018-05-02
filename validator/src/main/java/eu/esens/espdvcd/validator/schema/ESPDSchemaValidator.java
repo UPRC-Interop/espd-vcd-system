@@ -46,7 +46,7 @@ public class ESPDSchemaValidator implements ArtefactValidator {
     private void validateXML(InputStream is, Schema schema) throws JAXBException {
 
         // creating unmarshaller
-        Unmarshaller unmarshaller = SchemaUtil.V1.getUnmarshaller();
+        Unmarshaller unmarshaller = SchemaUtil.getUnmarshaller();
 
         // setting schema
         unmarshaller.setSchema(schema);

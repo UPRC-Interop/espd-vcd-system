@@ -49,7 +49,7 @@ public class ESPDCreationTests {
         //This must be validated using code list for examle
         req.getContractingParty().getParty().getPostalAddress().getBuildingName().setLanguageID("EN");
 
-        System.out.println(toXmlForV1(of.createESPDRequest(req)));
+        System.out.println(toXml(of.createESPDRequest(req)));
 
     }
 
@@ -62,7 +62,7 @@ public class ESPDCreationTests {
         res.getID().setSchemeID("Lala");
         res.getID().setValue("Value");
 
-        System.out.println(toXmlForV1(of.createESPDResponse(res)));
+        System.out.println(toXml(of.createESPDResponse(res)));
 
     }
 
@@ -85,7 +85,7 @@ public class ESPDCreationTests {
         //This must be validated using code list for examle
         req.getContractingParty().get(0).getParty().getPostalAddress().getBuildingName().setLanguageID("EN");
 
-        System.out.println(toXmlForV2(of.createQualificationApplicationRequest(req)));
+        System.out.println(toXml(of.createQualificationApplicationRequest(req)));
 
     }
 
@@ -98,14 +98,14 @@ public class ESPDCreationTests {
         res.getID().setSchemeID("Lala");
         res.getID().setValue("Value");
 
-        System.out.println(toXmlForV2(of.createQualificationApplicationResponse(res)));
+        System.out.println(toXml(of.createQualificationApplicationResponse(res)));
 
     }
 
-    private String toXmlForV1(JAXBElement element) {
+    private String toXml(JAXBElement element) {
         try {
 
-            Marshaller marshaller = SchemaUtil.V1.getMarshaller();
+            Marshaller marshaller = SchemaUtil.getMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -117,19 +117,4 @@ public class ESPDCreationTests {
         return "";
     }
 
-    private String toXmlForV2(JAXBElement element) {
-        try {
-
-            Marshaller marshaller = SchemaUtil.V2.getMarshaller();
-            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            marshaller.marshal(element, baos);
-            return baos.toString();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "";
-    }
-    
 }

@@ -7,6 +7,7 @@ import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import eu.esens.espdvcd.schema.SchemaUtil;
 import eu.esens.espdvcd.schema.SchemaVersion;
+import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
 import test.x.ubl.pre_award.qualificationapplicationrequest.QualificationApplicationRequestType;
 
 import javax.xml.bind.JAXBException;
@@ -107,28 +108,32 @@ public class ModelBuilderV2 implements ModelBuilder {
 
         try (InputStream bis = getBufferedInputStream(xmlESPD)) {
             // Check and read the file in the JAXB Object
-            QualificationApplicationRequestType reqType = readRegulatedESPDRequestFromStream(bis);
+            // QualificationApplicationRequestType reqType = readRegulatedESPDRequestFromStream(bis);
+            ESPDRequestType reqType = readRegulatedESPDRequestFromStream(bis);
             // Create the Model Object
             req = ModelFactory.ESPD_REQUEST.extractESPDRequest(reqType);
 
             return req;
 
-        } catch (IOException ex) {
+        } catch (IOException | JAXBException ex) {
             Logger.getLogger(ModelBuilderV2.class.getName()).log(Level.SEVERE, null, ex);
             throw new BuilderException("Error in Reading XML Input Stream", ex);
         }
 
     }
 
-    private QualificationApplicationRequestType readRegulatedESPDRequestFromStream(InputStream is) {
-        try {
-            // Start with the convenience methods provided by JAXB. If there are
-            // performance issues we will switch back to the JAXB API Usage
-            return SchemaUtil.V2.getUnmarshaller().unmarshal(new StreamSource(is), QualificationApplicationRequestType.class).getValue();
-        } catch (JAXBException ex) {
-            Logger.getLogger(ModelBuilderV2.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
+//    private QualificationApplicationRequestType readRegulatedESPDRequestFromStream(InputStream is) throws JAXBException {
+//
+//        // Start with the convenience methods provided by JAXB. If there are
+//        // performance issues we will switch back to the JAXB API Usage
+//        return SchemaUtil.V2.getUnmarshaller().unmarshal(new StreamSource(is), QualificationApplicationRequestType.class).getValue();
+//    }
+
+    private ESPDRequestType readRegulatedESPDRequestFromStream(InputStream is) throws JAXBException {
+
+        // Start with the convenience methods provided by JAXB. If there are
+        // performance issues we will switch back to the JAXB API Usage
+        return SchemaUtil.getUnmarshaller().unmarshal(new StreamSource(is), ESPDRequestType.class).getValue();
     }
 
 }
