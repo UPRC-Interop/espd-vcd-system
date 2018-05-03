@@ -12,14 +12,10 @@ import test.x.ubl.pre_award.qualificationapplicationrequest.QualificationApplica
 
 import javax.xml.bind.JAXBException;
 import javax.xml.transform.stream.StreamSource;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Pattern;
 
 public class ModelBuilderV2 implements ModelBuilder {
 
@@ -103,8 +99,7 @@ public class ModelBuilderV2 implements ModelBuilder {
      *
      * @param xmlESPD The input stream of the XML document to be parsed
      * @return a prefilled ESPDRequest based on the input data
-     * @throws BuilderException when the parsing from XML to ESPDRequest Model
-     *                          fails
+     * @throws BuilderException when the parsing from XML to ESPDRequest Model fails
      */
     private ESPDRequest createRegulatedESPDRequestFromXML(InputStream xmlESPD) throws BuilderException {
 
@@ -113,84 +108,27 @@ public class ModelBuilderV2 implements ModelBuilder {
         try (InputStream bis = getBufferedInputStream(xmlESPD)) {
             // Check and read the file in the JAXB Object
             // but first identify the artefact schema version
-            BufferedReader reader = new BufferedReader(new InputStreamReader(bis, StandardCharsets.UTF_8));
-            StringBuilder partOfTheArtefact = new StringBuilder();
-            int numberOfLines = 0;
-            String inputLine;
-
-            // Read stream
-            reader.mark(717);
-            while ((inputLine = reader.readLine()) != null) {
-                    // && numberOfLines < 2) {
-                partOfTheArtefact.append(inputLine);
-                numberOfLines++;
-                if (numberOfLines > 1) {
+            switch (findSchemaVersion(xmlESPD)) {
+                case V1:
+                    Logger.getLogger(ModelBuilderV2.class.getName()).log(Level.INFO, "v1 artefact has been imported...");
+                    ESPDRequestType espdRequestType = readESPDRequestFromStream(bis);
+                    req = ModelFactory.ESPD_REQUEST.extractESPDRequest(espdRequestType); // Create the Model Object
                     break;
-                }
-            }
-
-
-            // --
-            System.out.println("Print 1\n" + partOfTheArtefact.toString());
-            System.out.println("# " + partOfTheArtefact.toString().length());
-            // --
-
-            // reset the stream
-            reader.reset();
-
-            // ---
-
-            StringBuilder partOfTheArtefact2 = new StringBuilder();
-            int numberOfLines2 = 0;
-            String inputLine2;
-
-            // Read stream again
-            reader.mark(717);
-            while ((inputLine2 = reader.readLine()) != null) {
-                partOfTheArtefact2.append(inputLine2);
-                numberOfLines2++;
-                if (numberOfLines2 > 1) { // read only the first 2 lines of the artefact
+                case V2:
+                    Logger.getLogger(ModelBuilderV2.class.getName()).log(Level.INFO, "v2 artefact has been imported...");
+                    QualificationApplicationRequestType qualificationApplicationRequestType = readQualificationApplicationRequestFromStream(bis);
+                    req = ModelFactory.ESPD_REQUEST.extractESPDRequest(qualificationApplicationRequestType); // Create the Model Object
                     break;
-                }
+                default:
+                    throw new BuilderException("Error... Imported artefact could not be identified as either v1 or v2.");
             }
-
-            System.out.println("Print 2\n" + partOfTheArtefact2.toString());
-            System.out.println("# " + partOfTheArtefact2.toString().length());
-            // --
-
-            // reset the stream
-            reader.reset();
-
-            boolean isV1Artefact = Pattern.compile("ESPDRequest")
-                    .matcher(partOfTheArtefact.toString()).find();
-
-            if (isV1Artefact) { // v1 artefact found
-                Logger.getLogger(ModelBuilderV2.class.getName()).log(Level.INFO, "v1 artefact found...");
-                ESPDRequestType reqType = readESPDRequestFromStream(bis);
-                // Create the Model Object
-                req = ModelFactory.ESPD_REQUEST.extractESPDRequest(reqType);
-            } else {
-                // check if it is a v2 artefact
-                boolean isV2Artefact = Pattern.compile("QualificationApplicationRequest")
-                        .matcher(partOfTheArtefact.toString()).find();
-                if (isV2Artefact) { // v2 artefact found
-                    Logger.getLogger(ModelBuilderV2.class.getName()).log(Level.INFO, "v2 artefact found...");
-                    QualificationApplicationRequestType reqType = readQualificationApplicationRequestFromStream(bis);
-                    // Create the Model Object
-                    req = ModelFactory.ESPD_REQUEST.extractESPDRequest(reqType);
-                } else {
-                    // nor v1 or v2 artefact found
-                    throw new BuilderException("Error... Imported artefact cound not identified neither as v1 nor as v2.");
-                }
-            }
-
-            return req;
 
         } catch (IOException | JAXBException ex) {
             Logger.getLogger(ModelBuilderV2.class.getName()).log(Level.SEVERE, null, ex);
             throw new BuilderException("Error in Reading XML Input Stream", ex);
         }
 
+        return req;
     }
 
     private QualificationApplicationRequestType readQualificationApplicationRequestFromStream(InputStream is) throws JAXBException {
