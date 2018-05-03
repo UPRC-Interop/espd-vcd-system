@@ -1,20 +1,16 @@
 package eu.esens.espdvcd.builder;
 
-import eu.esens.espdvcd.builder.exception.BuilderException;
-import eu.esens.espdvcd.builder.model.ModelFactory;
 import eu.esens.espdvcd.codelist.CodelistsV1;
 import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.schema.SchemaVersion;
-import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
-import test.x.ubl.pre_award.qualificationapplicationrequest.QualificationApplicationRequestType;
 
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.io.BufferedInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 public interface ModelBuilder {
@@ -102,7 +98,6 @@ public interface ModelBuilder {
      * @return The schema version
      */
     default SchemaVersion findSchemaVersion(InputStream xmlESPD) {
-
         InputStream bis = getBufferedInputStream(xmlESPD);
         SchemaVersion version = SchemaVersion.UNKNOWN;
 
@@ -136,9 +131,8 @@ public interface ModelBuilder {
                 }
             }
         } catch (IOException ex) {
-            Logger.getLogger(ModelBuilderV2.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ModelBuilder.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         return version;
     }
 
