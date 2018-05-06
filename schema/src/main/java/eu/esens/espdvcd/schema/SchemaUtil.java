@@ -20,13 +20,14 @@ import javax.xml.bind.Unmarshaller;
  */
 public class SchemaUtil {
 
-    private static final JAXBContext JCV1;
-    private static final JAXBContext JCV2;
+    private static final JAXBContext JCV;
 
     static {
         try {
-            JCV1 = JAXBContext.newInstance(ESPDRequestType.class.getPackage().getName() + ":" + ESPDResponseType.class.getPackage().getName());
-            JCV2 = JAXBContext.newInstance(QualificationApplicationRequestType.class.getPackage().getName() + ":" + QualificationApplicationResponseType.class.getPackage().getName());
+            JCV = JAXBContext.newInstance(ESPDRequestType.class.getPackage().getName()
+                    + ":" + ESPDResponseType.class.getPackage().getName()
+                    + ":" + QualificationApplicationRequestType.class.getPackage().getName()
+                    + ":" + QualificationApplicationResponseType.class.getPackage().getName());
         } catch (JAXBException ex) {
             Logger.getLogger(SchemaUtil.class.getName()).log(Level.SEVERE, null, ex);
             throw new ExceptionInInitializerError(ex);
@@ -38,12 +39,10 @@ public class SchemaUtil {
      *
      * @return an ESPD/VCD Marshaller
      * @throws JAXBException when the marshaller cannot be initialized
-     * @deprecated as of release 2.0.2, replaced by {@link V1#getMarshaller()}
      */
-    @Deprecated
     public static Marshaller getMarshaller() throws JAXBException {
 
-        Marshaller marshaller = JCV1.createMarshaller();
+        Marshaller marshaller = JCV.createMarshaller();
         try {
             marshaller.setProperty("com.sun.xml.bind.namespacePrefixMapper", new ESPDPrefixMapper());
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
@@ -58,78 +57,10 @@ public class SchemaUtil {
      *
      * @return an ESPD/VCD Marshaller
      * @throws JAXBException when the marshaller cannot be initialized
-     * @deprecated as of release 2.0.2, replaced by {@link V1#getUnmarshaller()}
      */
-    @Deprecated
     public static Unmarshaller getUnmarshaller() throws JAXBException {
-
-        Unmarshaller unmarshaller = JCV1.createUnmarshaller();
+        Unmarshaller unmarshaller = JCV.createUnmarshaller();
         return unmarshaller;
-
-    }
-
-    public static final class V1 {
-
-        private V1() {
-        }
-
-        /**
-         * Factory Method that gets a proper marshaller for the ESPD/VCD Artifacts
-         *
-         * @return an ESPD/VCD Marshaller
-         * @throws JAXBException when the marshaller cannot be initialized
-         */
-        public static Marshaller getMarshaller() throws JAXBException {
-
-            Marshaller marshaller = JCV1.createMarshaller();
-            try {
-                marshaller.setProperty("com.sun.xml.bind.namespacePrefixMapper", new ESPDPrefixMapper());
-                marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-            } catch (PropertyException e) {
-                Logger.getLogger(SchemaUtil.class.getName()).log(Level.SEVERE, e.getMessage(), e);
-            }
-            return marshaller;
-        }
-
-        /**
-         * Factory Method that gets a proper unmarshaller for the ESPD/VCD Artifacts
-         *
-         * @return an ESPD/VCD Marshaller
-         * @throws JAXBException when the marshaller cannot be initialized
-         */
-        public static Unmarshaller getUnmarshaller() throws JAXBException {
-
-            Unmarshaller unmarshaller = JCV1.createUnmarshaller();
-            return unmarshaller;
-
-        }
-
-    }
-
-    public static final class V2 {
-
-        private V2() {
-        }
-
-        public static Marshaller getMarshaller() throws JAXBException {
-
-            Marshaller marshaller = JCV2.createMarshaller();
-            try {
-                marshaller.setProperty("com.sun.xml.bind.namespacePrefixMapper", new ESPDPrefixMapper());
-                marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-            } catch (PropertyException e) {
-                Logger.getLogger(SchemaUtil.class.getName()).log(Level.SEVERE, e.getMessage(), e);
-            }
-            return marshaller;
-        }
-
-        public static Unmarshaller getUnmarshaller() throws JAXBException {
-
-            Unmarshaller unmarshaller = JCV2.createUnmarshaller();
-            return unmarshaller;
-
-        }
-
     }
 
 }

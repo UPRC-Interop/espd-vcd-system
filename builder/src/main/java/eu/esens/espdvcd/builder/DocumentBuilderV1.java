@@ -118,11 +118,11 @@ public class DocumentBuilderV1 {
         try {
             if (theReq instanceof ESPDResponse) {
                 grow.names.specification.ubl.schema.xsd.espdresponse_1.ObjectFactory of = new grow.names.specification.ubl.schema.xsd.espdresponse_1.ObjectFactory();
-                SchemaUtil.V1.getMarshaller().marshal(of.createESPDResponse(createXML((ESPDResponse) theReq)), result);
+                SchemaUtil.getMarshaller().marshal(of.createESPDResponse(createXML((ESPDResponse) theReq)), result);
 
             } else {
                 grow.names.specification.ubl.schema.xsd.espdrequest_1.ObjectFactory of = new grow.names.specification.ubl.schema.xsd.espdrequest_1.ObjectFactory();
-                SchemaUtil.V1.getMarshaller().marshal(of.createESPDRequest(createXML(theReq)), result);
+                SchemaUtil.getMarshaller().marshal(of.createESPDRequest(createXML(theReq)), result);
             }
         } catch (JAXBException ex) {
             Logger.getLogger(XMLDocumentBuilderV1.class.getName()).log(Level.SEVERE, null, ex);

@@ -211,17 +211,6 @@ public class BuilderESPDTest {
     @Test
     public void testImportFromForRegulatedV1ESPDRequestArtefact() throws BuilderException, RetrieverException {
 
-        CriteriaExtractor extractor = new PredefinedESPDCriteriaExtractor();
-        ESPDRequest req = BuilderFactory.V1.getModelBuilder().importFrom(
-                getClass().getResourceAsStream("/espd-request.xml")
-        ).createRegulatedESPDRequest();
-        req.setCriterionList(extractor.getFullList());
-        System.out.println(BuilderFactory.V1.getDocumentBuilderFor(req).theXML);
-    }
-
-    @Test
-    public void testImportFromForRegulatedV2ESPDRequestArtefact() throws BuilderException, RetrieverException {
-
         CriteriaExtractor extractor = new PredefinedESPDTenderingCriteriaExtractor(QualificationApplicationTypeEnum.REGULATED);
         ESPDRequest req = BuilderFactory.V2.getModelBuilder().importFrom(
                 getClass().getResourceAsStream("/espd-request.xml")
@@ -230,15 +219,15 @@ public class BuilderESPDTest {
         System.out.println(BuilderFactory.V2.getDocumentBuilderFor(req).theXML);
     }
 
-//    @Test
-//    public void testImportFromForRegulatedV1ESPDRequestArtefact() throws BuilderException, RetrieverException {
-//
-//        CriteriaExtractor extractor = new ECertisCriteriaExtractor();
-//        ESPDRequest req = BuilderFactory.V1.getModelBuilder().importFrom(
-//                getClass().getResourceAsStream("/espd-request.xml")
-//        ).createRegulatedESPDRequest();
-//        req.setCriterionList(extractor.getFullList());
-//        System.out.println(BuilderFactory.V1.getDocumentBuilderFor(req).theXML);
-//    }
+    @Test
+    public void testImportFromForRegulatedV2ESPDRequestArtefact() throws BuilderException, RetrieverException {
+
+        CriteriaExtractor extractor = new PredefinedESPDTenderingCriteriaExtractor(QualificationApplicationTypeEnum.REGULATED);
+        ESPDRequest req = BuilderFactory.V2.getModelBuilder()
+                .importFrom(getClass().getResourceAsStream("/REGULATED-ESPDRequest-02.00.02.xml"))
+                .createRegulatedESPDRequest();
+        req.setCriterionList(extractor.getFullList());
+        System.out.println(BuilderFactory.V2.getDocumentBuilderFor(req).theXML);
+    }
 
 }

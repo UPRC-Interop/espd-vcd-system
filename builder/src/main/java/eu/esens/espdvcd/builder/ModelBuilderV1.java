@@ -13,7 +13,6 @@ import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.transform.stream.StreamSource;
-import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.Level;
@@ -281,7 +280,7 @@ public class ModelBuilderV1 implements ModelBuilder {
 
             // Start with the convenience methods provided by JAXB. If there are
             // performance issues we will switch back to the JAXB API Usage
-            return SchemaUtil.V1.getUnmarshaller().unmarshal(new StreamSource(is), ESPDRequestType.class).getValue();
+            return SchemaUtil.getUnmarshaller().unmarshal(new StreamSource(is), ESPDRequestType.class).getValue();
 
     }
 
@@ -297,7 +296,7 @@ public class ModelBuilderV1 implements ModelBuilder {
         try {
             // Start with the convenience methods provided by JAXB. If there are
             // performance issues we will switch back to the JAXB API Usage
-            return SchemaUtil.V1.getUnmarshaller().unmarshal(new StreamSource(is), ESPDResponseType.class).getValue();
+            return SchemaUtil.getUnmarshaller().unmarshal(new StreamSource(is), ESPDResponseType.class).getValue();
         } catch (JAXBException ex) {
             Logger.getLogger(ModelBuilderV1.class.getName()).log(Level.SEVERE, null, ex);
             return null;

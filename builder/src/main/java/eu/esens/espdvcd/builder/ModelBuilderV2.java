@@ -7,6 +7,7 @@ import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import eu.esens.espdvcd.schema.SchemaUtil;
 import eu.esens.espdvcd.schema.SchemaVersion;
+import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
 import test.x.ubl.pre_award.qualificationapplicationrequest.QualificationApplicationRequestType;
 
 import javax.xml.bind.JAXBException;
@@ -98,8 +99,7 @@ public class ModelBuilderV2 implements ModelBuilder {
      *
      * @param xmlESPD The input stream of the XML document to be parsed
      * @return a prefilled ESPDRequest based on the input data
-     * @throws BuilderException when the parsing from XML to ESPDRequest Model
-     *                          fails
+     * @throws BuilderException when the parsing from XML to ESPDRequest Model fails
      */
     private ESPDRequest createRegulatedESPDRequestFromXML(InputStream xmlESPD) throws BuilderException {
 
@@ -107,28 +107,42 @@ public class ModelBuilderV2 implements ModelBuilder {
 
         try (InputStream bis = getBufferedInputStream(xmlESPD)) {
             // Check and read the file in the JAXB Object
-            QualificationApplicationRequestType reqType = readRegulatedESPDRequestFromStream(bis);
-            // Create the Model Object
-            req = ModelFactory.ESPD_REQUEST.extractESPDRequest(reqType);
+            // but first identify the artefact schema version
+            switch (findSchemaVersion(xmlESPD)) {
+                case V1:
+                    Logger.getLogger(ModelBuilderV2.class.getName()).log(Level.INFO, "v1 artefact has been imported...");
+                    ESPDRequestType espdRequestType = readESPDRequestFromStream(bis);
+                    req = ModelFactory.ESPD_REQUEST.extractESPDRequest(espdRequestType); // Create the Model Object
+                    break;
+                case V2:
+                    Logger.getLogger(ModelBuilderV2.class.getName()).log(Level.INFO, "v2 artefact has been imported...");
+                    QualificationApplicationRequestType qualificationApplicationRequestType = readQualificationApplicationRequestFromStream(bis);
+                    req = ModelFactory.ESPD_REQUEST.extractESPDRequest(qualificationApplicationRequestType); // Create the Model Object
+                    break;
+                default:
+                    throw new BuilderException("Error... Imported artefact could not be identified as either v1 or v2.");
+            }
 
-            return req;
-
-        } catch (IOException ex) {
+        } catch (IOException | JAXBException ex) {
             Logger.getLogger(ModelBuilderV2.class.getName()).log(Level.SEVERE, null, ex);
             throw new BuilderException("Error in Reading XML Input Stream", ex);
         }
 
+        return req;
     }
 
-    private QualificationApplicationRequestType readRegulatedESPDRequestFromStream(InputStream is) {
-        try {
-            // Start with the convenience methods provided by JAXB. If there are
-            // performance issues we will switch back to the JAXB API Usage
-            return SchemaUtil.V2.getUnmarshaller().unmarshal(new StreamSource(is), QualificationApplicationRequestType.class).getValue();
-        } catch (JAXBException ex) {
-            Logger.getLogger(ModelBuilderV2.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
+    private QualificationApplicationRequestType readQualificationApplicationRequestFromStream(InputStream is) throws JAXBException {
+
+        // Start with the convenience methods provided by JAXB. If there are
+        // performance issues we will switch back to the JAXB API Usage
+        return SchemaUtil.getUnmarshaller().unmarshal(new StreamSource(is), QualificationApplicationRequestType.class).getValue();
+    }
+
+    private ESPDRequestType readESPDRequestFromStream(InputStream is) throws JAXBException {
+
+        // Start with the convenience methods provided by JAXB. If there are
+        // performance issues we will switch back to the JAXB API Usage
+        return SchemaUtil.getUnmarshaller().unmarshal(new StreamSource(is), ESPDRequestType.class).getValue();
     }
 
 }
