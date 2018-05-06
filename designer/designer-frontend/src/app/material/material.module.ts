@@ -13,8 +13,8 @@ import {
   MatCheckboxModule,
   MatGridListModule,
   MatDatepickerModule,
-  MatNativeDateModule
 } from '@angular/material';
+import {MatMomentDateModule} from '@angular/material-moment-adapter';
 
 @NgModule({
   imports: [
@@ -31,10 +31,10 @@ import {
     MatCheckboxModule,
     MatGridListModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatMomentDateModule
   ],
   exports: [MatButtonModule, MatToolbarModule, MatIconModule, MatStepperModule, MatCardModule, MatRadioModule, MatInputModule,
-    MatSelectModule, MatExpansionModule, MatCheckboxModule, MatGridListModule, MatDatepickerModule, MatNativeDateModule],
+    MatSelectModule, MatExpansionModule, MatCheckboxModule, MatGridListModule, MatDatepickerModule, MatMomentDateModule],
   declarations: []
 })
 export class MaterialModule {

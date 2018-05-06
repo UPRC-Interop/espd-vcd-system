@@ -17,6 +17,9 @@ import {Currency} from '../model/currency.model';
 import {ReductionCriterion} from '../model/reductionCriterion.model';
 import {ESPDResponse} from '../model/ESPDResponse.model';
 
+import * as moment from 'moment';
+import {Moment} from 'moment';
+
 @Injectable()
 export class DataService {
 
@@ -435,7 +438,7 @@ export class DataService {
           this.EODetails = res.eodetails;
           console.log(this.EODetails);
           console.log(this.EODetails.naturalPersons);
-          console.log(this.EODetails.naturalPersons['birthDate']);
+          // console.log(this.EODetails.naturalPersons['birthDate']);
           this.selectedEOCountry = this.EODetails.postalAddress.countryCode;
 
           // Fill in EoDetails Form
@@ -499,7 +502,7 @@ export class DataService {
 
     /* ====================== Date Manipulation =====================================*/
     if (this.EODetails.naturalPersons[0]['birthDate']) {
-      this.EODetails.naturalPersons[0]['birthDate'] = this.getDateJSObject(this.EODetails.naturalPersons[0]['birthDate']);
+      this.EODetails.naturalPersons[0]['birthDate'] = this.getDateJSObjectD(this.EODetails.naturalPersons[0]['birthDate']);
       console.log(this.EODetails.naturalPersons[0]['birthDate']);
     }
 
@@ -527,8 +530,15 @@ export class DataService {
 
   /*  ======================================== Date Manipulation ================================*/
 
-  getDateJSObject(...dateArray: any[]): Date {
+  getDateJSObjectD(...dateArray: any[]): Date {
+    console.log(dateArray);
+    console.log(dateArray[0][0]);
     const date = new Date(dateArray[0][0], dateArray[0][1], dateArray[0][2]);
+    return date;
+  }
+
+  getDateJSObjectMoment(...dateArray: any[]): Moment {
+    const date = moment(dateArray[0][0], dateArray[0][1], dateArray[0][2]);
     return date;
   }
 
@@ -1091,11 +1101,20 @@ export class DataService {
           if (r.response != null || r.response != undefined) {
             group[r.id] = new FormControl(r.response.description ||
               r.response.percentage || r.response.indicator || r.response.evidenceURL ||
-              r.response.evidenceURLCode || r.response.currency || r.response.countryCode ||
+              r.response.evidenceURLCode || r.response.countryCode ||
               r.response.amount || r.response.period || r.response.quantity || r.response.year || '');
 
             if (r.response.date) {
-              const date = this.getDateJSObject(r.response.date);
+              console.log(r.response.date);
+              console.log(r.response.date[0]);
+              console.log(r.response.date[1]);
+              console.log(r.response.date[2]);
+
+
+              let date = this.getDateJSObjectD(r.response.date);
+              let momentDate = moment(r.response.date).format('LLL');
+              console.log(momentDate);
+
               group[r.id] = new FormControl(date);
             }
 

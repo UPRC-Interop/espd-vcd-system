@@ -6,6 +6,8 @@ import {FormArray, FormControl, FormGroup, NgForm, Validators} from '@angular/fo
 import {EoRelatedCriterion} from '../model/eoRelatedCriterion.model';
 import {RequirementGroup} from '../model/requirementGroup.model';
 import {RequirementResponse} from '../model/requirement-response.model';
+import * as moment from 'moment';
+import {Moment} from 'moment';
 
 @Component({
   selector: 'app-procedure-eo',
@@ -13,6 +15,10 @@ import {RequirementResponse} from '../model/requirement-response.model';
   styleUrls: ['./procedure-eo.component.css']
 })
 export class ProcedureEoComponent implements OnInit {
+
+
+
+
 
   public EOForm: FormGroup;
   // public formA = new FormGroup({});
@@ -83,7 +89,6 @@ export class ProcedureEoComponent implements OnInit {
         console.log(err);
       });
   }
-
 
 
   /* ================================================= natural person form ================================================ */
