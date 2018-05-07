@@ -2,7 +2,7 @@ package eu.esens.espdvcd.schema;
 
 public enum SchemaVersion {
 
-    V1("1.0.2"), V2("2.0.1");
+    V1("1.0.2"), V2("2.0.1"), UNKNOWN("UNKNOWN SCHEMA VERSION");
 
     private String tag;
 

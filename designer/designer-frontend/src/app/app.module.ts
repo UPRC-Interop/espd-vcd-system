@@ -22,10 +22,11 @@ import {ExclusionEoComponent} from './exclusion-eo/exclusion-eo.component';
 import {SelectionEoComponent} from './selection-eo/selection-eo.component';
 import {RequirementGroupComponent} from './requirement-group/requirement-group.component';
 import {RequirementComponent} from './requirement/requirement.component';
-import { RootComponent } from './root/root.component';
-import { CriterionComponent } from './criterion/criterion.component';
-import { FinishEoComponent } from './finish-eo/finish-eo.component';
-
+import {RootComponent} from './root/root.component';
+import {CriterionComponent} from './criterion/criterion.component';
+import {FinishEoComponent} from './finish-eo/finish-eo.component';
+import {MAT_MOMENT_DATE_FORMATS, MatMomentDateModule, MomentDateAdapter} from '@angular/material-moment-adapter';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material';
 
 
 @NgModule({
@@ -54,9 +55,13 @@ import { FinishEoComponent } from './finish-eo/finish-eo.component';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatMomentDateModule
   ],
-  providers: [ApicallService, DataService],
+  providers: [ApicallService, DataService,
+    {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
+    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS}],
   bootstrap: [AppComponent]
 })
 export class AppModule {
