@@ -237,8 +237,7 @@ public interface SchemaExtractorV2 {
 
             at.setCountry(new CountryType());
             at.getCountry().setIdentificationCode(createISOCountryIdCodeType(cd.getPostalAddress().getCountryCode()));
-
-
+            at.getCountry().getIdentificationCode().setListID("CountryCodeIdentifier");
             cpp.getParty().setPostalAddress(at);
         }
 
@@ -344,10 +343,10 @@ public interface SchemaExtractorV2 {
     // (2.0.1) updated KR_1-4-2018
     default IdentificationCodeType createISOCountryIdCodeType(String id) {
         IdentificationCodeType countryCodeType = new IdentificationCodeType();
-        countryCodeType.setListAgencyID("EU-COM-GROW");
-        countryCodeType.setListVersionID("2.0.1");
-        countryCodeType.setListID("CountryCodeIdentifier");
-        countryCodeType.setListName("ISO-1-ALPHA-2");
+        countryCodeType.setListAgencyID("ISO");
+        countryCodeType.setListVersionID("1.0");
+        countryCodeType.setListName("CountryCodeIdentifier");
+//        countryCodeType.setListName("ISO-1-ALPHA-2");
         countryCodeType.setValue(id);
         return countryCodeType;
     }
@@ -384,6 +383,8 @@ public interface SchemaExtractorV2 {
         uuidType.setSchemeID("ISO/IEC 9834-8:2008 - 4UUID");
         uuidType.setSchemeAgencyName("EU-COM-GROW");
         uuidType.setSchemeVersionID("2.0");
+        uuidType.setSchemeAgencyID("EU-COM-GROW");
+
         uuidType.setValue(id);
         return uuidType;
     }

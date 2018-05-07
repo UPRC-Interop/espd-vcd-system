@@ -52,6 +52,9 @@ public class ESPDRequestSchemaExtractorV2 implements SchemaExtractorV2 {
         // FIXME hardcoded value has to be replaced here
         reqType.setQualificationApplicationTypeCode(new QualificationApplicationTypeCodeType());
         reqType.getQualificationApplicationTypeCode().setValue(QualificationApplicationTypeEnum.REGULATED.name());
+        reqType.getQualificationApplicationTypeCode().setListID("QualificationApplicationType");
+        reqType.getQualificationApplicationTypeCode().setListAgencyID("EU-COM-GROW");
+        reqType.getQualificationApplicationTypeCode().setListVersionID("2.0.2");
 
         //Procurement Project Lot is always 0 in Request and not part of the UI
         ProcurementProjectLotType pplt = new ProcurementProjectLotType();

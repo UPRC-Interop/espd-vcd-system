@@ -36,7 +36,7 @@ public class XMLDocumentBuilderV2 extends DocumentBuilderV2 {
      */
     @Override
     protected String getProfileID() {
-        return "41";
-    }
+        return "4.1";
+    } //Changed to the ESPD validator required value
 
 }
