@@ -79,6 +79,8 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
         EconomicOperatorPartyType eopt = new EconomicOperatorPartyType();
         eopt.getQualifyingParty().add(new QualifyingPartyType());
         String icc = eod.isSmeIndicator() ? "SME" : "LARGE";
+
+        eopt.getQualifyingParty().get(0).setParty(new PartyType());
         eopt.getQualifyingParty().get(0).getParty()
                 .setIndustryClassificationCode(createIndustryClassificationCodeType(
                         CodelistsV2.EOIndustryClassification.getValueForId(icc)));

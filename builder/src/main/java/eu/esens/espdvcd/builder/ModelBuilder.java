@@ -1,6 +1,7 @@
 package eu.esens.espdvcd.builder;
 
 import eu.esens.espdvcd.codelist.CodelistsV1;
+import eu.esens.espdvcd.codelist.CodelistsV2;
 import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.schema.SchemaVersion;
 
@@ -57,7 +58,7 @@ public interface ModelBuilder {
         return new ArrayList<>();
     }
 
-    default void applyCriteriaWorkaround(Criterion c, SchemaVersion sv) {
+    default void applyCriteriaWorkaround(Criterion c) {
 
 //        if (c.getTypeCode().equals("SELECTION.ECONOMIC_FINANCIAL_STANDING")
 //                || c.getTypeCode().equals("DATA_ON_ECONOMIC_OPERATOR")) {
@@ -65,16 +66,7 @@ public interface ModelBuilder {
             String oldName = c.getName();
             c.setDescription(oldName);
             // Since we have no name, we will add the Criteria type name as Criterion Name
-            switch (sv) {
-                case V1:
-                    c.setName(CodelistsV1.CriteriaType.getValueForId(c.getTypeCode()) + " (No Name)");
-                    break;
-                case V2:
-                    c.setName(CodelistsV1.CriteriaType.getValueForId(c.getTypeCode()) + " (No Name)");
-                    break;
-                default:
-                    Logger.getLogger(ModelBuilder.class.getName()).log(Level.SEVERE, "Error... Unknown schema version");
-            }
+            c.setName(CodelistsV1.CriteriaType.getValueForId(c.getTypeCode()) + " (No Name)");
 //                System.out.println("Workaround for: "+c.getID() +" "+c.getDescription());
         }
 //        }
@@ -114,14 +106,14 @@ public interface ModelBuilder {
             }
             bis.reset();
 
-            boolean isV1Artefact = Pattern.compile("ESPDRequest")
+            boolean isV1Artefact = Pattern.compile("ESPDRequest|ESPDResponse")
                     .matcher(partOfTheArtefact.toString()).find();
 
             if (isV1Artefact) { // v1 artefact found
                 version = SchemaVersion.V1;
             } else {
                 // check if it is a v2 artefact
-                boolean isV2Artefact = Pattern.compile("QualificationApplicationRequest")
+                boolean isV2Artefact = Pattern.compile("QualificationApplicationRequest|QualificationApplicationResponse")
                         .matcher(partOfTheArtefact.toString()).find();
                 if (isV2Artefact) { // v2 artefact found
                     version = SchemaVersion.V2;

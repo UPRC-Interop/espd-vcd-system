@@ -11,15 +11,15 @@ import eu.esens.espdvcd.model.ESPDRequest;
 public class BuilderFactory {
 
     /**
-     * Creates a new instance of the {@link ModelBuilderV1}, which is used to
+     * Creates a new instance of the {@link OldModelBuilder}, which is used to
      * create ESPD and VCD model POJOs from XML input.
      *
-     * @return an instance of the {@link ModelBuilderV1}
+     * @return an instance of the {@link OldModelBuilder}
      * @deprecated as of release 2.0.2, replaced by {@link V1#getModelBuilder()}
      */
     @Deprecated
-    public static ModelBuilderV1 getModelBuilder() {
-        return new ModelBuilderV1();
+    public static OldModelBuilder getOldModelBuilder() {
+        return new OldModelBuilder();
     }
 
     /**
@@ -40,13 +40,13 @@ public class BuilderFactory {
         private V1() {}
 
         /**
-         * Creates a new instance of the {@link ModelBuilderV1}, which is used to
+         * Creates a new instance of the {@link OldModelBuilder}, which is used to
          * create ESPD and VCD model pojos from XML input.
          *
-         * @return an instance of the {@link ModelBuilderV1}
+         * @return an instance of the {@link OldModelBuilder}
          */
-        public static ModelBuilderV1 getModelBuilder() {
-            return new ModelBuilderV1();
+        public static OldModelBuilder getModelBuilder() {
+            return new OldModelBuilder();
         }
 
         /**
@@ -67,13 +67,13 @@ public class BuilderFactory {
         private V2() {}
 
         /**
-         * Creates a new instance of the {@link ModelBuilderV2}, which is used to
+         * Creates a new instance of the {@link RegulatedModelBuilder}, which is used to
          * create ESPD and VCD model pojos from XML input.
          *
-         * @return an instance of the {@link ModelBuilderV2}
+         * @return an instance of the {@link RegulatedModelBuilder}
          */
-        public static ModelBuilderV2 getModelBuilder() {
-            return new ModelBuilderV2();
+        public static RegulatedModelBuilder getModelBuilder() {
+            return new RegulatedModelBuilder();
         }
 
         /**

@@ -4,6 +4,7 @@ import eu.esens.espdvcd.builder.BuilderFactory;
 import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.codelist.CodelistsV2;
 import eu.esens.espdvcd.codelist.enums.CriterionElementTypeEnum;
+import eu.esens.espdvcd.codelist.enums.EOIndustryClassificationCodeEnum;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.model.requirement.Requirement;
@@ -314,7 +315,7 @@ public interface ModelExtractor {
 
     default ServiceProviderDetails extractServiceProviderDetails(List<test.x.ubl.pre_award.commonaggregate.ContractingPartyType> sppt) {
         try {
-            return BuilderFactory.V2.getModelBuilder().createRegulatedESPDRequest().getServiceProviderDetails();
+            return BuilderFactory.V2.getModelBuilder().createESPDRequest().getServiceProviderDetails();
         } catch (BuilderException e) {
             return null;
         }
@@ -523,5 +524,15 @@ public interface ModelExtractor {
                 ResponseTypeEnum.valueOf(rt.getResponseDataType()),
                 theDescription);
         return r;
+    }
+
+    default boolean isSMEIndicator(test.x.ubl.pre_award.commonaggregate.EconomicOperatorPartyType eop) {
+        boolean isSME = false;
+        EOIndustryClassificationCodeEnum code = EOIndustryClassificationCodeEnum.valueOf(eop.getQualifyingParty()
+                .get(0).getParty().getIndustryClassificationCode().getValue());
+        if (code != EOIndustryClassificationCodeEnum.LARGE) {
+            isSME = true;
+        }
+        return isSME;
     }
 }

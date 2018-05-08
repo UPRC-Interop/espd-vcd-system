@@ -7,7 +7,6 @@ import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
 import eu.esens.espdvcd.retriever.criteria.PredefinedESPDCriteriaExtractor;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import eu.esens.espdvcd.schema.SchemaUtil;
-import eu.esens.espdvcd.schema.SchemaVersion;
 import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
 import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
 
@@ -24,7 +23,7 @@ import java.util.logging.Logger;
  *
  * @since 1.0
  */
-public class ModelBuilderV1 implements ModelBuilder {
+public class OldModelBuilder implements ModelBuilder {
 
     private EODetails eoDetails = null;
     private CADetails caDetails = null;
@@ -33,7 +32,7 @@ public class ModelBuilderV1 implements ModelBuilder {
     private InputStream importStream = null;
 
     /* package private constructor. Create only through factory */
-    ModelBuilderV1() {}
+    OldModelBuilder() {}
 
     /**
      * Loads from an ESPD Request or an ESPD Response all the required data and
@@ -47,7 +46,7 @@ public class ModelBuilderV1 implements ModelBuilder {
      * @return the same ModelBuilder instance for incremental creation of the
      * required object.
      */
-    public ModelBuilderV1 importFrom(InputStream is) {
+    public OldModelBuilder importFrom(InputStream is) {
         importStream = getBufferedInputStream(is);
         return this;
     }
@@ -66,7 +65,7 @@ public class ModelBuilderV1 implements ModelBuilder {
      * @throws BuilderException if the input stream is on a valid ESPD Request
      * or Response;
      */
-    public ModelBuilderV1 withCADetailsFrom(InputStream is) throws BuilderException {
+    public OldModelBuilder withCADetailsFrom(InputStream is) throws BuilderException {
 
         ESPDRequest req = createRegulatedESPDRequestFromXML(is);
         caDetails = req.getCADetails();
@@ -84,7 +83,7 @@ public class ModelBuilderV1 implements ModelBuilder {
      * required object.
      *
      */
-    public ModelBuilderV1 withCADetailsFrom(CADetails caDetails) {
+    public OldModelBuilder withCADetailsFrom(CADetails caDetails) {
         this.caDetails = caDetails;
         return this;
     }
@@ -103,7 +102,7 @@ public class ModelBuilderV1 implements ModelBuilder {
      * @throws BuilderException if the input stream is on a valid ESPD Request
      * or Response;
      */
-    public ModelBuilderV1 withEODetailsFrom(InputStream is) throws BuilderException {
+    public OldModelBuilder withEODetailsFrom(InputStream is) throws BuilderException {
         ESPDResponse res = createRegulatedESPDResponseFromXML(is);
         eoDetails = res.getEODetails();
         return this;
@@ -120,7 +119,7 @@ public class ModelBuilderV1 implements ModelBuilder {
      * required object.
      *
      */
-    public ModelBuilderV1 withEODetailsFrom(EODetails eoDetails) {
+    public OldModelBuilder withEODetailsFrom(EODetails eoDetails) {
         this.eoDetails = eoDetails;
         return this;
     }
@@ -139,7 +138,7 @@ public class ModelBuilderV1 implements ModelBuilder {
      * @return the same ModelBuilder instance for incremental creation of the
      * required object.
      */
-    public ModelBuilderV1 addDefaultESPDCriteriaList() {
+    public OldModelBuilder addDefaultESPDCriteriaList() {
 
         criteriaExtractor = new PredefinedESPDCriteriaExtractor();
         return this;
@@ -171,7 +170,7 @@ public class ModelBuilderV1 implements ModelBuilder {
                 try {
                     req.setCriterionList(criteriaExtractor.getFullList(req.getFullCriterionList()));
                 } catch (RetrieverException ex) {
-                    Logger.getLogger(ModelBuilderV1.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(OldModelBuilder.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         } else {
@@ -192,9 +191,7 @@ public class ModelBuilderV1 implements ModelBuilder {
         }
 
         // Apply workaround
-        // req.getFullCriterionList().forEach(this::applyCriteriaWorkaround);
-        req.getFullCriterionList().forEach(sc -> applyCriteriaWorkaround(sc, SchemaVersion.V1));
-
+        req.getFullCriterionList().forEach(this::applyCriteriaWorkaround);
         return req;
     }
 
@@ -203,7 +200,7 @@ public class ModelBuilderV1 implements ModelBuilder {
             try {
                 req.setCriterionList(criteriaExtractor.getFullList());
             } catch (RetrieverException ex) {
-                Logger.getLogger(ModelBuilderV1.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(OldModelBuilder.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
             req.setCriterionList(getEmptyCriteriaList());
@@ -237,7 +234,7 @@ public class ModelBuilderV1 implements ModelBuilder {
                 try {
                     res.setCriterionList(criteriaExtractor.getFullList(res.getFullCriterionList(), true));
                 } catch (RetrieverException ex) {
-                    Logger.getLogger(ModelBuilderV1.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(OldModelBuilder.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
 
@@ -269,9 +266,7 @@ public class ModelBuilderV1 implements ModelBuilder {
         }
 
         // Apply workaround
-        // res.getFullCriterionList().forEach(this::applyCriteriaWorkaround);
-        res.getFullCriterionList().forEach(sc -> applyCriteriaWorkaround(sc, SchemaVersion.V1));
-
+        res.getFullCriterionList().forEach(this::applyCriteriaWorkaround);
         return res;
     }
 
@@ -298,7 +293,7 @@ public class ModelBuilderV1 implements ModelBuilder {
             // performance issues we will switch back to the JAXB API Usage
             return SchemaUtil.getUnmarshaller().unmarshal(new StreamSource(is), ESPDResponseType.class).getValue();
         } catch (JAXBException ex) {
-            Logger.getLogger(ModelBuilderV1.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OldModelBuilder.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
@@ -324,7 +319,7 @@ public class ModelBuilderV1 implements ModelBuilder {
             return req;
 
         } catch (IOException | JAXBException ex) {
-            Logger.getLogger(ModelBuilderV1.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OldModelBuilder.class.getName()).log(Level.SEVERE, null, ex);
             throw new BuilderException("Error in Reading XML Input Stream", ex);
         }
 
@@ -356,7 +351,7 @@ public class ModelBuilderV1 implements ModelBuilder {
             // Create the Model Object
             res = ModelFactory.ESPD_RESPONSE.extractESPDResponse(resType);
         } catch (IOException ex) {
-            Logger.getLogger(ModelBuilderV1.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OldModelBuilder.class.getName()).log(Level.SEVERE, null, ex);
             throw new BuilderException("Error in Reading Input Stream for ESPD Response", ex);
         }
 

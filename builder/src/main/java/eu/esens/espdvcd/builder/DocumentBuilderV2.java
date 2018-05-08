@@ -54,11 +54,9 @@ public class DocumentBuilderV2 {
      * @return a JAXB QualificationApplicationResponseType instance from an ESPDResponse Model instance
      */
     protected QualificationApplicationResponseType createXML(ESPDResponse res) {
-//        QualificationApplicationResponseType resType =
-//                finalize(SchemaFactory.V2.ESPD_RESPONSE.extractQualificationApplicationResponseType(res));
-//        return resType;
-        // FIXME: restore code above
-        return null;
+        QualificationApplicationResponseType resType =
+                finalize(SchemaFactory.V2.ESPD_RESPONSE.extractQualificationApplicationResponseType(res));
+        return resType;
     }
 
     /**

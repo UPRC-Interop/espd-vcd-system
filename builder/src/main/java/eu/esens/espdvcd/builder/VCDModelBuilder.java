@@ -10,7 +10,7 @@ import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class VCDModelBuilder extends ModelBuilderV1 {
+public class VCDModelBuilder extends OldModelBuilder {
 
     @Override
     protected ESPDResponse createRegulatedESPDResponseFromXML(InputStream xmlESPDRes) throws BuilderException {
@@ -22,7 +22,7 @@ public class VCDModelBuilder extends ModelBuilderV1 {
             // Create the Model Object
             res = ModelFactory.VCD_RESPONSE.extractESPDResponse(resType);
         } catch (IOException ex) {
-            Logger.getLogger(ModelBuilderV1.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OldModelBuilder.class.getName()).log(Level.SEVERE, null, ex);
             throw new BuilderException("Error in Reading Input Stream for ESPD Response", ex);
         }
 

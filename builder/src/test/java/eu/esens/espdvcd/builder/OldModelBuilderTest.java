@@ -13,14 +13,14 @@ import org.junit.Before;
  *
  * @author jerouris
  */
-public class ModelBuilderV1Test {
+public class OldModelBuilderTest {
 
     private InputStream isReq;
     private InputStream isReqReduced;
     private InputStream isRes;
     private InputStream isResReduced;
     
-    public ModelBuilderV1Test() {
+    public OldModelBuilderTest() {
     }
     
      @Before
@@ -40,7 +40,7 @@ public class ModelBuilderV1Test {
 
     @Test
     public void testBuilderEmptyRequest() {
-        ModelBuilderV1 mb = new ModelBuilderV1();
+        OldModelBuilder mb = new OldModelBuilder();
         try {
             ESPDRequest req = mb.createRegulatedESPDRequest();
             assertNotNull("ESPD Request is Null", req);
@@ -54,7 +54,7 @@ public class ModelBuilderV1Test {
     
     @Test
     public void testBuilderDefaultCriteriaRequest() {
-        ModelBuilderV1 mb = new ModelBuilderV1();
+        OldModelBuilder mb = new OldModelBuilder();
         try {
             ESPDRequest req = mb.addDefaultESPDCriteriaList().createRegulatedESPDRequest();
             assertNotNull("ESPD Request is Null", req);
@@ -68,7 +68,7 @@ public class ModelBuilderV1Test {
     @Test
     public void testBuilderImportRequestCreateRequest() {
         
-        ModelBuilderV1 mb = new ModelBuilderV1();
+        OldModelBuilder mb = new OldModelBuilder();
         try {
             ESPDRequest req = mb.importFrom(isReq).createRegulatedESPDRequest();
             assertNotNull("ESPD Request is Null", req);
@@ -83,7 +83,7 @@ public class ModelBuilderV1Test {
     @Test
     public void testBuilderImportResponseCreateRequest() {
         
-        ModelBuilderV1 mb = new ModelBuilderV1();
+        OldModelBuilder mb = new OldModelBuilder();
         try {
             ESPDRequest req = mb.importFrom(isRes).createRegulatedESPDRequest();
             assertNotNull("ESPD Request is Null", req);
@@ -98,7 +98,7 @@ public class ModelBuilderV1Test {
     @Test
     public void testBuilderImportReducedRequestCreateRequest() {
         
-        ModelBuilderV1 mb = new ModelBuilderV1();
+        OldModelBuilder mb = new OldModelBuilder();
         try {
             ESPDRequest req = mb.importFrom(isReqReduced).createRegulatedESPDRequest();
             assertNotNull("ESPD Request is Null", req);
@@ -113,7 +113,7 @@ public class ModelBuilderV1Test {
     @Test
     public void testBuilderImportResponseReducedCreateRequest() {
         
-        ModelBuilderV1 mb = new ModelBuilderV1();
+        OldModelBuilder mb = new OldModelBuilder();
         try {
             ESPDRequest req = mb.importFrom(isResReduced).createRegulatedESPDRequest();
             assertNotNull("ESPD Request is Null", req);
@@ -128,7 +128,7 @@ public class ModelBuilderV1Test {
     @Test
     public void testBuilderImportReducedRequestAddDefaultCriteriaCreateRequest() {
         
-        ModelBuilderV1 mb = new ModelBuilderV1();
+        OldModelBuilder mb = new OldModelBuilder();
         try {
             ESPDRequest req = mb.importFrom(isReqReduced).addDefaultESPDCriteriaList().createRegulatedESPDRequest();
             assertNotNull("ESPD Request is Null", req);
@@ -144,7 +144,7 @@ public class ModelBuilderV1Test {
     @Test
     public void testBuilderImportResponseReducedAddDefaultCriteriaCreateRequest() {
         
-        ModelBuilderV1 mb = new ModelBuilderV1();
+        OldModelBuilder mb = new OldModelBuilder();
         try {
             ESPDRequest req = mb.importFrom(isResReduced).addDefaultESPDCriteriaList().createRegulatedESPDRequest();
             assertNotNull("ESPD Request is Null", req);
@@ -159,7 +159,7 @@ public class ModelBuilderV1Test {
     
     @Test
     public void testBuilderEmptyResponse() {
-        ModelBuilderV1 mb = new ModelBuilderV1();
+        OldModelBuilder mb = new OldModelBuilder();
         try {
             ESPDResponse req = mb.createRegulatedESPDResponse();
             assertNotNull("ESPD Response is Null", req);
@@ -174,7 +174,7 @@ public class ModelBuilderV1Test {
     
     @Test
     public void testBuilderDefaultCriteriaResponse() {
-        ModelBuilderV1 mb = new ModelBuilderV1();
+        OldModelBuilder mb = new OldModelBuilder();
         try {
             ESPDResponse req = mb.addDefaultESPDCriteriaList().createRegulatedESPDResponse();
             assertNotNull("ESPD Response is Null", req);
@@ -189,7 +189,7 @@ public class ModelBuilderV1Test {
     @Test
     public void testBuilderImportRequestCreateResponse() {
         
-        ModelBuilderV1 mb = new ModelBuilderV1();
+        OldModelBuilder mb = new OldModelBuilder();
         try {
             ESPDResponse req = mb.importFrom(isReq).createRegulatedESPDResponse();
             assertNotNull("ESPD Request is Null", req);
@@ -205,7 +205,7 @@ public class ModelBuilderV1Test {
     @Test
     public void testBuilderImportResponseCreateResponse() {
         
-        ModelBuilderV1 mb = new ModelBuilderV1();
+        OldModelBuilder mb = new OldModelBuilder();
         try {
             ESPDResponse req = mb.importFrom(isRes).createRegulatedESPDResponse();
             assertNotNull("ESPD Request is Null", req);
@@ -221,7 +221,7 @@ public class ModelBuilderV1Test {
     @Test
     public void testBuilderImportReducedRequestCreateResponse() {
         
-        ModelBuilderV1 mb = new ModelBuilderV1();
+        OldModelBuilder mb = new OldModelBuilder();
         try {
             ESPDResponse req = mb.importFrom(isReqReduced).createRegulatedESPDResponse();
             assertNotNull("ESPD Request is Null", req);
@@ -237,7 +237,7 @@ public class ModelBuilderV1Test {
     @Test
     public void testBuilderImportResponseReducedCreateResponse() {
         
-        ModelBuilderV1 mb = new ModelBuilderV1();
+        OldModelBuilder mb = new OldModelBuilder();
         try {
             ESPDResponse req = mb.importFrom(isResReduced).createRegulatedESPDResponse();
             assertNotNull("ESPD Request is Null", req);
@@ -253,7 +253,7 @@ public class ModelBuilderV1Test {
     @Test
     public void testBuilderImportReducedRequestAddDefaultCriteriaCreateResponse() {
         
-        ModelBuilderV1 mb = new ModelBuilderV1();
+        OldModelBuilder mb = new OldModelBuilder();
         try {
             ESPDResponse req = mb.importFrom(isReqReduced).addDefaultESPDCriteriaList().createRegulatedESPDResponse();
             assertNotNull("ESPD Request is Null", req);
@@ -270,7 +270,7 @@ public class ModelBuilderV1Test {
     @Test
     public void testBuilderImportResponseReducedAddDefaultCriteriaCreateResponse() {
         
-        ModelBuilderV1 mb = new ModelBuilderV1();
+        OldModelBuilder mb = new OldModelBuilder();
         try {
             ESPDResponse req = mb.importFrom(isResReduced).addDefaultESPDCriteriaList().createRegulatedESPDResponse();
             assertNotNull("ESPD Request is Null", req);
