@@ -80,6 +80,7 @@ public interface SchemaExtractorV2 {
                 .collect(Collectors.toList()));
 
         rgType.setID(createDefaultIDType(rg.getID()));
+
         // RequirementGroup "PI" attribute: the "processing instruction" attribute is not defined in UBL-2.2.
         // Instead, if needed, use the "cbc:PropertyGroupTypeCode" component
         rgType.setPropertyGroupTypeCode(createPropertyGroupTypeCodeType(rg.getCondition()));
@@ -203,11 +204,13 @@ public interface SchemaExtractorV2 {
             pt.getPartyIdentification().add(pit);
         }
 
+        //FIXME: SCHEMEID ON CONTRACTINGPARTY>PARTY>ENDPOINTID MAY BE INCORRECT
         // UBL syntax path: cac:ContractingParty.Party.EndpointID
         if (cd.getElectronicAddressID() != null) {
             EndpointIDType eid = new EndpointIDType();
             eid.setSchemeAgencyID("EU-COM-GROW");
             eid.setValue(cd.getElectronicAddressID());
+            eid.setSchemeID("ISO/IEC 9834-8:2008 - 4UUID");
             pt.setEndpointID(eid);
         }
 
@@ -272,9 +275,11 @@ public interface SchemaExtractorV2 {
         PartyType pt = new PartyType();
         sppt.setParty(pt);
 
+        //FIXME: SCHEMEID ON SERVICEPROVIDERPARTYTYPE MAY BE INCORRECT
         if (spd.getEndpointID() != null) {
             EndpointIDType eid = new EndpointIDType();
             eid.setSchemeAgencyID("EU-COM-GROW");
+            eid.setSchemeID("ISO/IEC 9834-8:2008 - 4UUID");
             eid.setValue(spd.getEndpointID());
             pt.setEndpointID(eid);
         }
@@ -323,7 +328,7 @@ public interface SchemaExtractorV2 {
         DocumentTypeCodeType dtc = new DocumentTypeCodeType();
         dtc.setListAgencyID("EU-COM-GROW");
         dtc.setListID("ReferencesTypeCodes");
-        dtc.setListVersionID("1.0");
+        dtc.setListVersionID("2.0.1");
         // modification UL_2016-12-22: updated list version
         //dtc.setListVersionID("1.0.2");
 
@@ -476,6 +481,9 @@ public interface SchemaExtractorV2 {
     // (2.0.1) updated by KR_1-4-2018
     default PropertyGroupTypeCodeType createPropertyGroupTypeCodeType(String code) {
         PropertyGroupTypeCodeType ptc = new PropertyGroupTypeCodeType();
+        ptc.setListID("PropertyGroupType");
+        ptc.setListAgencyID("EU-COM-GROW");
+        ptc.setListVersionID("2.0.1");
         ptc.setValue(code);
         return ptc;
     }
