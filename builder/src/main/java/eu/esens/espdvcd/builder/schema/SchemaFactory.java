@@ -7,39 +7,27 @@ import eu.esens.espdvcd.builder.schema.v2.ESPDRequestSchemaExtractorV2;
 import eu.esens.espdvcd.builder.schema.v2.ESPDResponseSchemaExtractorV2;
 import eu.esens.espdvcd.builder.schema.v2.VCDResponseSchemaExtractorV2;
 
-public class SchemaFactory {
+public abstract class SchemaFactory {
 
     /**
-     * @deprecated as of release 2.0.2, replaced by {@link V1#ESPD_REQUEST}
+     * @deprecated as of release 2.0.2, replaced by {@link SchemaFactoryV1#ESPD_REQUEST}
      */
     public static final ESPDRequestSchemaExtractor ESPD_REQUEST = new ESPDRequestSchemaExtractor();
     /**
-     * @deprecated as of release 2.0.2, replaced by {@link V1#ESPD_RESPONSE}
+     * @deprecated as of release 2.0.2, replaced by {@link SchemaFactoryV1#ESPD_RESPONSE}
      */
     public static final ESPDResponseSchemaExtractor ESPD_RESPONSE = new ESPDResponseSchemaExtractor();
     /**
-     * @deprecated as of release 2.0.2, replaced by {@link V1#VCD_RESPONSE}
+     * @deprecated as of release 2.0.2, replaced by {@link SchemaFactoryV1#VCD_RESPONSE}
      */
     public static final VCDResponseSchemaExtractor VCD_RESPONSE = new VCDResponseSchemaExtractor();
 
-    public static final class V1 {
-
-        private V1() {}
-
-        public static final ESPDRequestSchemaExtractorV1 ESPD_REQUEST = new ESPDRequestSchemaExtractorV1();
-        public static final ESPDResponseSchemaExtractorV1 ESPD_RESPONSE = new ESPDResponseSchemaExtractorV1();
-        public static final VCDResponseSchemaExtractorV1 VCD_RESPONSE = new VCDResponseSchemaExtractorV1();
-
+    public static SchemaFactoryV1 withSchemaVersion1() {
+        return new SchemaFactoryV1();
     }
 
-    public static final class V2 {
-
-        private V2() {}
-
-        public static final ESPDRequestSchemaExtractorV2 ESPD_REQUEST = new ESPDRequestSchemaExtractorV2();
-        public static final ESPDResponseSchemaExtractorV2 ESPD_RESPONSE = new ESPDResponseSchemaExtractorV2();
-        public static final VCDResponseSchemaExtractorV2 VCD_RESPONSE = new VCDResponseSchemaExtractorV2();
-
+    public static SchemaFactoryV2 withSchemaVersion2() {
+        return new SchemaFactoryV2();
     }
 
 }

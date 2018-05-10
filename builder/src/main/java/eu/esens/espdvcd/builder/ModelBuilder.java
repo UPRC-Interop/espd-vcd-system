@@ -1,7 +1,6 @@
 package eu.esens.espdvcd.builder;
 
 import eu.esens.espdvcd.codelist.CodelistsV1;
-import eu.esens.espdvcd.codelist.CodelistsV2;
 import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.schema.SchemaVersion;
 

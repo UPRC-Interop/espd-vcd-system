@@ -47,7 +47,7 @@ public class DocumentBuilderV1 {
      * @return a JAXB ESPDRequestType instance from an ESPDRequest Model instance
      */
     private ESPDRequestType createXML(ESPDRequest req) {
-        ESPDRequestType reqType = finalize(SchemaFactory.ESPD_REQUEST.extractESPDRequestType(req));
+        ESPDRequestType reqType = finalize(SchemaFactory.withSchemaVersion1().ESPD_REQUEST.extractESPDRequestType(req));
         return reqType;
 
     }
@@ -57,7 +57,7 @@ public class DocumentBuilderV1 {
      * @return a JAXB ESPDResponseType instance from an ESPDResponse Model instance
      */
     protected ESPDResponseType createXML(ESPDResponse res) {
-        ESPDResponseType resType = finalize(SchemaFactory.ESPD_RESPONSE.extractESPDResponseType(res));
+        ESPDResponseType resType = finalize(SchemaFactory.withSchemaVersion1().ESPD_RESPONSE.extractESPDResponseType(res));
         return resType;
     }
 
@@ -79,7 +79,7 @@ public class DocumentBuilderV1 {
 
         reqType.setProfileID(createBIIProfileIdType(getProfileID()));
 
-        reqType.setID(SchemaFactory.ESPD_REQUEST.createISOIECIDType(UUID.randomUUID().toString()));
+        reqType.setID(SchemaFactory.withSchemaVersion1().ESPD_REQUEST.createISOIECIDType(UUID.randomUUID().toString()));
         return reqType;
     }
 
@@ -101,7 +101,7 @@ public class DocumentBuilderV1 {
 
         resType.setProfileID(createBIIProfileIdType(getProfileID()));
 
-        resType.setID(SchemaFactory.ESPD_RESPONSE.createISOIECIDType(UUID.randomUUID().toString()));
+        resType.setID(SchemaFactory.withSchemaVersion1().ESPD_RESPONSE.createISOIECIDType(UUID.randomUUID().toString()));
         return resType;
     }
 

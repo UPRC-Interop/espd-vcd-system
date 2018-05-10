@@ -32,12 +32,12 @@ public class RegulatedESPDResponseV1ServiceTest {
         espdResponseFile = new File(RegulatedESPDResponseV1ServiceTest.class.getResource("/espd-response.xml").toURI());
         Assert.assertNotNull(espdResponseFile);
 
-        request = BuilderFactory.V1.getModelBuilder().importFrom
-                (RegulatedESPDResponseV1ServiceTest.class.getResourceAsStream("/espd-request.xml")).createRegulatedESPDRequest();
+        request = BuilderFactory.getRegulatedModelBuilder().importFrom
+                (RegulatedESPDResponseV1ServiceTest.class.getResourceAsStream("/espd-request.xml")).createESPDRequest();
         Assert.assertNotNull(request);
 
-        response = BuilderFactory.V1.getModelBuilder().importFrom
-                (RegulatedESPDResponseV1ServiceTest.class.getResourceAsStream("/espd-response.xml")).createRegulatedESPDResponse();
+        response = BuilderFactory.getRegulatedModelBuilder().importFrom
+                (RegulatedESPDResponseV1ServiceTest.class.getResourceAsStream("/espd-response.xml")).createESPDResponse();
         Assert.assertNotNull(response);
 
         service = new RegulatedESPDResponseV1Service();
