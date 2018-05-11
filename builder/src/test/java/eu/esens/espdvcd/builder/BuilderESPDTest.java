@@ -1,7 +1,6 @@
 package eu.esens.espdvcd.builder;
 
 import eu.esens.espdvcd.builder.exception.BuilderException;
-import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDResponse;
@@ -10,8 +9,8 @@ import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.ResponseRequirement;
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
+import eu.esens.espdvcd.retriever.criteria.ECertisCriteriaExtractor;
 import eu.esens.espdvcd.retriever.criteria.PredefinedESPDCriteriaExtractor;
-import eu.esens.espdvcd.retriever.criteria.PredefinedESPDTenderingCriteriaExtractor;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
 import org.junit.Assert;
@@ -180,22 +179,20 @@ public class BuilderESPDTest {
     @Test
     public void testCreateRegulatedESPDRequestV1WithPredefinedCriteria() throws BuilderException, RetrieverException {
 
-        CriteriaExtractor extractor1 = new PredefinedESPDCriteriaExtractor();
-        CriteriaExtractor extractor2 = new PredefinedESPDTenderingCriteriaExtractor(QualificationApplicationTypeEnum.REGULATED);
+        CriteriaExtractor extractor = new PredefinedESPDCriteriaExtractor();
 
         ESPDRequest req = BuilderFactory.V1.getModelBuilder().createRegulatedESPDRequest();
-        req.setCriterionList(extractor2.getFullList());
+        req.setCriterionList(extractor.getFullList());
         System.out.println(BuilderFactory.V1.getDocumentBuilderFor(req).theXML);
     }
 
     @Test
     public void testCreateRegulatedESPDRequestV2WithPredefinedCriteria() throws BuilderException, RetrieverException {
 
-        CriteriaExtractor extractor1 = new PredefinedESPDCriteriaExtractor();
-        CriteriaExtractor extractor2 = new PredefinedESPDTenderingCriteriaExtractor(QualificationApplicationTypeEnum.REGULATED);
+        CriteriaExtractor extractor = new PredefinedESPDCriteriaExtractor();
 
         ESPDRequest req = BuilderFactory.V2.getModelBuilder().createESPDRequest();
-        req.setCriterionList(extractor2.getFullList());
+        req.setCriterionList(extractor.getFullList());
         System.out.println(BuilderFactory.V2.getDocumentBuilderFor(req).theXML);
     }
 
@@ -210,7 +207,8 @@ public class BuilderESPDTest {
     @Test
     public void testImportFromForRegulatedV1ESPDRequestArtefact() throws BuilderException, RetrieverException {
 
-        CriteriaExtractor extractor = new PredefinedESPDTenderingCriteriaExtractor(QualificationApplicationTypeEnum.REGULATED);
+//        CriteriaExtractor extractor = new PredefinedESPDCriteriaExtractor();
+        ECertisCriteriaExtractor extractor = new ECertisCriteriaExtractor();
         ESPDRequest req = BuilderFactory.V2.getModelBuilder().importFrom(
                 getClass().getResourceAsStream("/espd-request.xml")
         ).createESPDRequest();
@@ -221,7 +219,8 @@ public class BuilderESPDTest {
     @Test
     public void testImportFromForRegulatedV2ESPDRequestArtefact() throws BuilderException, RetrieverException {
 
-        CriteriaExtractor extractor = new PredefinedESPDTenderingCriteriaExtractor(QualificationApplicationTypeEnum.REGULATED);
+//        CriteriaExtractor extractor = new PredefinedESPDCriteriaExtractor();
+        ECertisCriteriaExtractor extractor = new ECertisCriteriaExtractor();
         ESPDRequest req = BuilderFactory.V2.getModelBuilder()
                 .importFrom(getClass().getResourceAsStream("/REGULATED-ESPDRequest-02.00.02.xml"))
                 .createESPDRequest();
