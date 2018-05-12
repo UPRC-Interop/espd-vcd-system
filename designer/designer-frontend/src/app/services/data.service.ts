@@ -240,6 +240,7 @@ export class DataService {
 
   createESPDResponse(): ESPDResponse {
     this.espdResponse = new ESPDResponse(this.CADetails, this.EODetails, this.fullCriterionList);
+    console.log(this.espdResponse.eodetails.naturalPersons[0].birthDate);
     console.log(this.espdResponse);
     return this.espdResponse;
   }
@@ -502,7 +503,6 @@ export class DataService {
 
     /* ====================== Date Manipulation =====================================*/
     if (this.EODetails.naturalPersons[0]['birthDate']) {
-      this.EODetails.naturalPersons[0]['birthDate'] = this.getDateJSObjectD(this.EODetails.naturalPersons[0]['birthDate']);
       console.log(this.EODetails.naturalPersons[0]['birthDate']);
     }
 
@@ -530,12 +530,15 @@ export class DataService {
 
   /*  ======================================== Date Manipulation ================================*/
 
-  getDateJSObjectD(...dateArray: any[]): Date {
-    console.log(dateArray);
-    console.log(dateArray[0][0]);
-    const date = new Date(dateArray[0][0], dateArray[0][1], dateArray[0][2]);
-    return date;
-  }
+  // getDateJSObjectD(...dateArray: any[]): Date {
+  //   console.log(dateArray);
+  //   console.log(dateArray[0][0]);
+  //   let date = new Date(dateArray[0][0], dateArray[0][1], dateArray[0][2]);
+  //   console.log(date);
+  //   // console.log(date.toDateString());
+  //   // date.setMinutes( date.getMinutes() + date.getTimezoneOffset() );
+  //   return date;
+  // }
 
   getDateJSObjectMoment(...dateArray: any[]): Moment {
     const date = moment(dateArray[0][0], dateArray[0][1], dateArray[0][2]);
@@ -1111,11 +1114,11 @@ export class DataService {
               console.log(r.response.date[2]);
 
 
-              let date = this.getDateJSObjectD(r.response.date);
-              let momentDate = moment(r.response.date).format('LLL');
-              console.log(momentDate);
+              // let date = this.getDateJSObjectD(r.response.date);
+              // let momentDate = moment(r.response.date).format('LLL');
+              // console.log(momentDate);
 
-              group[r.id] = new FormControl(date);
+              group[r.id] = new FormControl(r.response.date);
             }
 
             // console.log(r.response);

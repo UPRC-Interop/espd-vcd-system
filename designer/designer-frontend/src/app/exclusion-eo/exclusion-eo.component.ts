@@ -63,6 +63,7 @@ export class ExclusionEoComponent implements OnInit {
               req.response.id = null;
             } else if (req.responseDataType == 'DATE') {
               req.response.date = formValues[req.id.valueOf()];
+              // req.response.date.setMinutes( req.response.date.getMinutes() + req.response.date.getTimezoneOffset() );
               req.response.id = null;
             } else if (req.responseDataType == 'PERCENTAGE') {
               req.response.percentage = formValues[req.id.valueOf()];
