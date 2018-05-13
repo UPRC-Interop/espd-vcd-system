@@ -162,6 +162,7 @@ export class ProcedureEoComponent implements OnInit {
               req.response.id = null;
             } else if (req.responseDataType == 'DATE') {
               req.response.date = formValues[req.id.valueOf()];
+              console.log(req.response.date);
               // req.response.date.setMinutes( req.response.date.getMinutes() + req.response.date.getTimezoneOffset() );
 
               console.log(req.response.date);
@@ -177,7 +178,8 @@ export class ProcedureEoComponent implements OnInit {
               req.response.id = null;
             } else if (req.responseDataType == 'AMOUNT') {
               req.response.amount = formValues[req.id.valueOf()];
-              req.response.currency = formValues[req.id.valueOf()];
+              const currencyid = req.id + 'currency';
+              req.response.currency = formValues[currencyid.valueOf()];
               req.response.id = null;
             } else if (req.responseDataType == 'QUANTITY_INTEGER') {
               req.response.quantity = formValues[req.id.valueOf()];

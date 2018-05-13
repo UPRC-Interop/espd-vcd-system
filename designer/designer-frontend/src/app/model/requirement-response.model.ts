@@ -1,6 +1,8 @@
+import {Moment} from 'moment';
+
 export class RequirementResponse {
   indicator?: boolean;
-  date?: Date;
+  date?: Moment;
   description: string;
   evidenceURL?: string;
   evidenceURLCode?: string;

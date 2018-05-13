@@ -504,6 +504,7 @@ export class DataService {
     /* ====================== Date Manipulation =====================================*/
     if (this.EODetails.naturalPersons[0]['birthDate']) {
       console.log(this.EODetails.naturalPersons[0]['birthDate']);
+      // this.EODetails.naturalPersons[0]['birthDate'] = this.EODetails.naturalPersons[0]['birthDate'].utc();
     }
 
 
@@ -1105,7 +1106,7 @@ export class DataService {
             group[r.id] = new FormControl(r.response.description ||
               r.response.percentage || r.response.indicator || r.response.evidenceURL ||
               r.response.evidenceURLCode || r.response.countryCode ||
-              r.response.amount || r.response.period || r.response.quantity || r.response.year || '');
+              r.response.period || r.response.quantity || r.response.year || '');
 
             if (r.response.date) {
               console.log(r.response.date);
@@ -1119,6 +1120,11 @@ export class DataService {
               // console.log(momentDate);
 
               group[r.id] = new FormControl(r.response.date);
+            }
+
+            if (r.response.currency || r.response.amount) {
+              group[r.id] = new FormControl(r.response.amount);
+              group[r.id + 'currency'] = new FormControl(r.response.currency);
             }
 
             // console.log(r.response);

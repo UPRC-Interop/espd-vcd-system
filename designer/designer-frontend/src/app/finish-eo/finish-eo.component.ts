@@ -62,7 +62,8 @@ export class FinishEoComponent implements OnInit {
               req.response.id = null;
             } else if (req.responseDataType == 'AMOUNT') {
               req.response.amount = formValues[req.id.valueOf()];
-              req.response.currency = formValues[req.id.valueOf()];
+              const currencyid = req.id + 'currency';
+              req.response.currency = formValues[currencyid.valueOf()];
               req.response.id = null;
             } else if (req.responseDataType == 'QUANTITY_INTEGER') {
               req.response.quantity = formValues[req.id.valueOf()];

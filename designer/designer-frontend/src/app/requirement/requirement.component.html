@@ -27,7 +27,7 @@
         <input matInput [formControlName]="req.id" [id]="req.id" >
       </mat-form-field>
       <mat-form-field>
-        <mat-select>
+        <mat-select [formControlName]="req.id+'currency'" [id]="req.id+'currency'">
           <mat-option>None</mat-option>
           <mat-option *ngFor="let curr of currency" [value]="curr.code">{{curr.code}} ( {{curr.name}} )</mat-option>
         </mat-select>
