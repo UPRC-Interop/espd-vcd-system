@@ -64,6 +64,16 @@ public enum CodelistsV2 implements MultilingualCodelists {
      */
     QualificationApplicationType("/gc/v2/QualificationApplicationType-CodeList.gc"),
     /**
+     * Criteria Taxonomy Codelists contains criteria typeCodes and description
+     */
+//    ESPD_CriteriaTaxonomy_V1_0_2("/gc/v2/ESPD-CriteriaTaxonomy_V1.0.2.gc"),
+//    ESPD_CriteriaTaxonomy_V1_0_3("/gc/v2/ESPD-CriteriaTaxonomy_V1.0.3.gc"),
+//    ESPD_CriteriaTaxonomy_V2_0_2("/gc/v2/ESPD-CriteriaTaxonomy_V2.0.2.gc"),
+    /**
+     *
+     */
+    WeightingType("/gc/v2/WeightingType-CodeList.gc"),
+    /**
      * Response Data type codelist, used to infer the type of response a requirement requires.
      */
     ResponseDataType("/gc/v2/ResponseDataType-CodeList.gc"),

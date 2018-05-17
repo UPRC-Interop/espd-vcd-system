@@ -19,17 +19,17 @@ public class RegulatedESPDResponseV2Service implements ESPDService {
     }
     @Override
     public ESPDResponse XMLFileToObjectTransformer(File XML) throws RetrieverException, BuilderException, ValidationException, FileNotFoundException, JAXBException, SAXException {
-        return BuilderFactory.V2.getModelBuilder().importFrom(new FileInputStream(XML)).createESPDResponse();
+        return BuilderFactory.getRegulatedModelBuilder().importFrom(new FileInputStream(XML)).createESPDResponse();
     }
 
     @Override
     public InputStream ObjectToXMLStreamTransformer(Object document) {
-        return BuilderFactory.V2.getDocumentBuilderFor((ESPDResponse) document).getAsInputStream();
+        return BuilderFactory.withSchemaVersion2().getDocumentBuilderFor((ESPDResponse) document).getAsInputStream();
     }
 
     @Override
     public String ObjectToXMLStringTransformer(Object document) {
-        return BuilderFactory.V2.getDocumentBuilderFor((ESPDResponse) document).getAsString();
+        return BuilderFactory.withSchemaVersion2().getDocumentBuilderFor((ESPDResponse) document).getAsString();
     }
 
     @Override

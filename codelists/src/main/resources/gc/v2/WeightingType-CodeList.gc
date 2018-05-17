@@ -5,12 +5,10 @@
              xmlns:gc="http://docs.oasis-open.org/codelist/ns/genericode/1.0/"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
    <Identification>
-      <ShortName>EvaluationMethodType</ShortName>
-      <LongName xml:lang="en">EVALUATION METHOD TYPE</LongName>
+      <ShortName>WeightingType</ShortName>
+      <LongName xml:lang="en">WEIGHTING TYPE</LongName>
       <Version>2.0.2</Version>
       <CanonicalUri>https://github.com/ESPD/ESPD-EDM</CanonicalUri>
-      <CanonicalVersionUri>https://github.com/ESPD/ESPD-EDM/tree/ESPD-EDM-V2.0.2</CanonicalVersionUri>
-      <LocationUri>https://github.com/ESPD/ESPD-EDM/tree/ESPD-EDM-V2.0.2/docs/src/main/asciidoc/dist/cl/gc/EvaluationMethodType.gc</LocationUri>
       <Agency>
          <LongName xml:lang="en">DG GROW (European Commission)</LongName>
          <Identifier>EU-COM-GROW</Identifier>
@@ -20,6 +18,10 @@
       <Column Id="code" Use="required">
          <ShortName>Code</ShortName>
          <Data Type="normalizedString" Lang="en"/>
+      </Column>
+      <Column Use="optional" Id="name-Description">
+         <ShortName>Name</ShortName>
+         <Data Type="string" Lang="Description"/>
       </Column>
       <Column Use="optional" Id="name-bul">
          <ShortName>Name</ShortName>
@@ -125,156 +127,156 @@
    <SimpleCodeList>
       <Row>
          <Value ColumnRef="code">
-            <SimpleValue>PASSFAIL</SimpleValue>
+            <SimpleValue>PERCENTAGE</SimpleValue>
          </Value>
          <Value ColumnRef="name-bul">
-            <SimpleValue>Pass or Fail</SimpleValue>
+            <SimpleValue>Percentual value</SimpleValue>
          </Value>
          <Value ColumnRef="name-spa">
-            <SimpleValue>Pass or Fail</SimpleValue>
+            <SimpleValue>Percentual value</SimpleValue>
          </Value>
          <Value ColumnRef="name-ces">
-            <SimpleValue>Pass or Fail</SimpleValue>
+            <SimpleValue>Percentual value</SimpleValue>
          </Value>
          <Value ColumnRef="name-dan">
-            <SimpleValue>Pass or Fail</SimpleValue>
+            <SimpleValue>Percentual value</SimpleValue>
          </Value>
          <Value ColumnRef="name-deu">
-            <SimpleValue>Pass or Fail</SimpleValue>
+            <SimpleValue>Percentual value</SimpleValue>
          </Value>
          <Value ColumnRef="name-est">
-            <SimpleValue>Pass or Fail</SimpleValue>
+            <SimpleValue>Percentual value</SimpleValue>
          </Value>
          <Value ColumnRef="name-ell">
-            <SimpleValue>Pass or Fail</SimpleValue>
+            <SimpleValue>Percentual value</SimpleValue>
          </Value>
          <Value ColumnRef="name-eng">
-            <SimpleValue>Pass or Fail</SimpleValue>
+            <SimpleValue>Percentual value</SimpleValue>
          </Value>
          <Value ColumnRef="name-fra">
-            <SimpleValue>Pass or Fail</SimpleValue>
+            <SimpleValue>Percentual value</SimpleValue>
          </Value>
          <Value ColumnRef="name-gle">
-            <SimpleValue>Pass or Fail</SimpleValue>
+            <SimpleValue>Percentual value</SimpleValue>
          </Value>
          <Value ColumnRef="name-hrv">
-            <SimpleValue>Pass or Fail</SimpleValue>
+            <SimpleValue>Percentual value</SimpleValue>
          </Value>
          <Value ColumnRef="name-ita">
-            <SimpleValue>Pass or Fail</SimpleValue>
+            <SimpleValue>Percentual value</SimpleValue>
          </Value>
          <Value ColumnRef="name-lav">
-            <SimpleValue>Pass or Fail</SimpleValue>
+            <SimpleValue>Percentual value</SimpleValue>
          </Value>
          <Value ColumnRef="name-lit">
-            <SimpleValue>Pass or Fail</SimpleValue>
+            <SimpleValue>Percentual value</SimpleValue>
          </Value>
          <Value ColumnRef="name-hun">
-            <SimpleValue>Pass or Fail</SimpleValue>
+            <SimpleValue>Percentual value</SimpleValue>
          </Value>
          <Value ColumnRef="name-mlt">
-            <SimpleValue>Pass or Fail</SimpleValue>
+            <SimpleValue>Percentual value</SimpleValue>
          </Value>
          <Value ColumnRef="name-nld">
-            <SimpleValue>Pass or Fail</SimpleValue>
+            <SimpleValue>Percentual value</SimpleValue>
          </Value>
          <Value ColumnRef="name-pol">
-            <SimpleValue>Pass or Fail</SimpleValue>
+            <SimpleValue>Percentual value</SimpleValue>
          </Value>
          <Value ColumnRef="name-por">
-            <SimpleValue>Pass or Fail</SimpleValue>
+            <SimpleValue>Percentual value</SimpleValue>
          </Value>
          <Value ColumnRef="name-ron">
-            <SimpleValue>Pass or Fail</SimpleValue>
+            <SimpleValue>Percentual value</SimpleValue>
          </Value>
          <Value ColumnRef="name-slk">
-            <SimpleValue>Pass or Fail</SimpleValue>
+            <SimpleValue>Percentual value</SimpleValue>
          </Value>
          <Value ColumnRef="name-slv">
-            <SimpleValue>Pass or Fail</SimpleValue>
+            <SimpleValue>Percentual value</SimpleValue>
          </Value>
          <Value ColumnRef="name-fin">
-            <SimpleValue>Pass or Fail</SimpleValue>
+            <SimpleValue>Percentual value</SimpleValue>
          </Value>
          <Value ColumnRef="name-swe">
-            <SimpleValue>Pass or Fail</SimpleValue>
+            <SimpleValue>Percentual value</SimpleValue>
          </Value>
       </Row>
       <Row>
          <Value ColumnRef="code">
-            <SimpleValue>WEIGHTED</SimpleValue>
+            <SimpleValue>NUMERIC</SimpleValue>
          </Value>
          <Value ColumnRef="name-bul">
-            <SimpleValue>The Criterion is weighted</SimpleValue>
+            <SimpleValue>Numeric value</SimpleValue>
          </Value>
          <Value ColumnRef="name-spa">
-            <SimpleValue>The Criterion is weighted</SimpleValue>
+            <SimpleValue>Numeric value</SimpleValue>
          </Value>
          <Value ColumnRef="name-ces">
-            <SimpleValue>The Criterion is weighted</SimpleValue>
+            <SimpleValue>Numeric value</SimpleValue>
          </Value>
          <Value ColumnRef="name-dan">
-            <SimpleValue>The Criterion is weighted</SimpleValue>
+            <SimpleValue>Numeric value</SimpleValue>
          </Value>
          <Value ColumnRef="name-deu">
-            <SimpleValue>The Criterion is weighted</SimpleValue>
+            <SimpleValue>Numeric value</SimpleValue>
          </Value>
          <Value ColumnRef="name-est">
-            <SimpleValue>The Criterion is weighted</SimpleValue>
+            <SimpleValue>Numeric value</SimpleValue>
          </Value>
          <Value ColumnRef="name-ell">
-            <SimpleValue>The Criterion is weighted</SimpleValue>
+            <SimpleValue>Numeric value</SimpleValue>
          </Value>
          <Value ColumnRef="name-eng">
-            <SimpleValue>The Criterion is weighted</SimpleValue>
+            <SimpleValue>Numeric value</SimpleValue>
          </Value>
          <Value ColumnRef="name-fra">
-            <SimpleValue>The Criterion is weighted</SimpleValue>
+            <SimpleValue>Numeric value</SimpleValue>
          </Value>
          <Value ColumnRef="name-gle">
-            <SimpleValue>The Criterion is weighted</SimpleValue>
+            <SimpleValue>Numeric value</SimpleValue>
          </Value>
          <Value ColumnRef="name-hrv">
-            <SimpleValue>The Criterion is weighted</SimpleValue>
+            <SimpleValue>Numeric value</SimpleValue>
          </Value>
          <Value ColumnRef="name-ita">
-            <SimpleValue>The Criterion is weighted</SimpleValue>
+            <SimpleValue>Numeric value</SimpleValue>
          </Value>
          <Value ColumnRef="name-lav">
-            <SimpleValue>The Criterion is weighted</SimpleValue>
+            <SimpleValue>Numeric value</SimpleValue>
          </Value>
          <Value ColumnRef="name-lit">
-            <SimpleValue>The Criterion is weighted</SimpleValue>
+            <SimpleValue>Numeric value</SimpleValue>
          </Value>
          <Value ColumnRef="name-hun">
-            <SimpleValue>The Criterion is weighted</SimpleValue>
+            <SimpleValue>Numeric value</SimpleValue>
          </Value>
          <Value ColumnRef="name-mlt">
-            <SimpleValue>The Criterion is weighted</SimpleValue>
+            <SimpleValue>Numeric value</SimpleValue>
          </Value>
          <Value ColumnRef="name-nld">
-            <SimpleValue>The Criterion is weighted</SimpleValue>
+            <SimpleValue>Numeric value</SimpleValue>
          </Value>
          <Value ColumnRef="name-pol">
-            <SimpleValue>The Criterion is weighted</SimpleValue>
+            <SimpleValue>Numeric value</SimpleValue>
          </Value>
          <Value ColumnRef="name-por">
-            <SimpleValue>The Criterion is weighted</SimpleValue>
+            <SimpleValue>Numeric value</SimpleValue>
          </Value>
          <Value ColumnRef="name-ron">
-            <SimpleValue>The Criterion is weighted</SimpleValue>
+            <SimpleValue>Numeric value</SimpleValue>
          </Value>
          <Value ColumnRef="name-slk">
-            <SimpleValue>The Criterion is weighted</SimpleValue>
+            <SimpleValue>Numeric value</SimpleValue>
          </Value>
          <Value ColumnRef="name-slv">
-            <SimpleValue>The Criterion is weighted</SimpleValue>
+            <SimpleValue>Numeric value</SimpleValue>
          </Value>
          <Value ColumnRef="name-fin">
-            <SimpleValue>The Criterion is weighted</SimpleValue>
+            <SimpleValue>Numeric value</SimpleValue>
          </Value>
          <Value ColumnRef="name-swe">
-            <SimpleValue>The Criterion is weighted</SimpleValue>
+            <SimpleValue>Numeric value</SimpleValue>
          </Value>
       </Row>
    </SimpleCodeList>

@@ -72,7 +72,7 @@ public class ESPDTenderingCriteriaExtractorTest {
 
         ESPDRequest req = ModelFactory.ESPD_REQUEST.extractESPDRequest(reqType);
 
-        QualificationApplicationRequestType req2Type = SchemaFactory.V2.ESPD_REQUEST.extractQualificationApplicationRequestType(req);
+        QualificationApplicationRequestType req2Type = SchemaFactory.withSchemaVersion2().ESPD_REQUEST.extractQualificationApplicationRequestType(req);
         JAXB.marshal(req2Type, System.out);
 
     }

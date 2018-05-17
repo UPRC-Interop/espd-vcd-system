@@ -44,7 +44,7 @@ public class DocumentBuilderV2 {
      * @return a JAXB QualificationApplicationRequestType instance from an ESPDRequest Model instance
      */
     private QualificationApplicationRequestType createXML(ESPDRequest req) {
-        QualificationApplicationRequestType reqType = finalize(SchemaFactory.V2.ESPD_REQUEST
+        QualificationApplicationRequestType reqType = finalize(SchemaFactory.withSchemaVersion2().ESPD_REQUEST
                 .extractQualificationApplicationRequestType(req));
         return reqType;
     }
@@ -55,7 +55,7 @@ public class DocumentBuilderV2 {
      */
     protected QualificationApplicationResponseType createXML(ESPDResponse res) {
         QualificationApplicationResponseType resType =
-                finalize(SchemaFactory.V2.ESPD_RESPONSE.extractQualificationApplicationResponseType(res));
+                finalize(SchemaFactory.withSchemaVersion2().ESPD_RESPONSE.extractQualificationApplicationResponseType(res));
         return resType;
     }
 
@@ -78,8 +78,8 @@ public class DocumentBuilderV2 {
 
         reqType.setProfileID(createCENBIIProfileIdType(getProfileID()));
         // FIXME local id value here may have to be changed (temporary value has been applied)
-        reqType.setID(SchemaFactory.V2.ESPD_REQUEST.createLocalIDType("ESPDREQ-DGPE-ad63141780"));
-        reqType.setUUID(SchemaFactory.V2.ESPD_REQUEST.createISOIECUUIDType(UUID.randomUUID().toString()));
+        reqType.setID(SchemaFactory.withSchemaVersion2().ESPD_REQUEST.createLocalIDType("ESPDREQ-DGPE-ad63141780"));
+        reqType.setUUID(SchemaFactory.withSchemaVersion2().ESPD_REQUEST.createISOIECUUIDType(UUID.randomUUID().toString()));
 
         return reqType;
     }
@@ -102,8 +102,8 @@ public class DocumentBuilderV2 {
 
         resType.setProfileID(createCENBIIProfileIdType(getProfileID()));
         // FIXME local id value here may have to be changed (temporary value has been applied)
-        resType.setID(SchemaFactory.V2.ESPD_REQUEST.createLocalIDType("ESPDREQ-DGPE-ad63141780"));
-        resType.setUUID(SchemaFactory.V2.ESPD_RESPONSE.createISOIECUUIDType(UUID.randomUUID().toString()));
+        resType.setID(SchemaFactory.withSchemaVersion2().ESPD_REQUEST.createLocalIDType("ESPDREQ-DGPE-ad63141780"));
+        resType.setUUID(SchemaFactory.withSchemaVersion2().ESPD_RESPONSE.createISOIECUUIDType(UUID.randomUUID().toString()));
 
         return resType;
     }

@@ -1,7 +1,5 @@
 package eu.esens.espdvcd.builder.schema.v2;
 
-import eu.esens.espdvcd.codelist.CodelistsV2;
-import eu.esens.espdvcd.codelist.enums.CriterionElementTypeEnum;
 import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.requirement.Requirement;
