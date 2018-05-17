@@ -1,18 +1,22 @@
 package eu.esens.espdvcd.builder;
 
+import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.codelist.CodelistsV1;
-import eu.esens.espdvcd.codelist.CodelistsV2;
+import eu.esens.espdvcd.codelist.enums.ProfileExecutionIDEnum;
 import eu.esens.espdvcd.model.*;
-import eu.esens.espdvcd.schema.SchemaVersion;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+//import eu.esens.espdvcd.schema.SchemaVersion;
 
 public interface ModelBuilder {
 
@@ -84,48 +88,69 @@ public interface ModelBuilder {
     }
 
     /**
-     * Identify schema version of given ESPD XML artefact
+     * Identify profile execution id of given ESPD XML artefact.
      *
      * @param xmlESPD The ESPD XML artefact
-     * @return The schema version
+     * @return The profile execution id
      */
-    default SchemaVersion findSchemaVersion(InputStream xmlESPD) {
+    default ProfileExecutionIDEnum findArtefactVersion(InputStream xmlESPD) throws BuilderException {
         InputStream bis = getBufferedInputStream(xmlESPD);
-        SchemaVersion version = SchemaVersion.UNKNOWN;
+        ProfileExecutionIDEnum profileExecutionIDEnum = ProfileExecutionIDEnum.UNKNOWN;
 
         try {
-            byte[] contents = new byte[1024];
+            int numberOfBytes = 2048;
+            byte[] contents = new byte[numberOfBytes];
             int bytesRead;
             StringBuilder partOfTheArtefact = new StringBuilder();
-            bis.mark(1024);
+            bis.mark(numberOfBytes);
             while ((bytesRead = bis.read(contents)) != -1) {
                 partOfTheArtefact.append(new String(contents, 0, bytesRead));
-                if (bytesRead >= 1024) {
+                if (bytesRead >= numberOfBytes) {
                     break;
                 }
             }
             bis.reset();
 
-            boolean isV1Artefact = Pattern.compile("ESPDRequest|ESPDResponse")
+            String v1ArtefactRegex = "ESPDRequest|ESPDResponse";
+            boolean isV1Artefact = Pattern.compile(v1ArtefactRegex)
                     .matcher(partOfTheArtefact.toString()).find();
 
             if (isV1Artefact) { // v1 artefact found
-                version = SchemaVersion.V1;
+                profileExecutionIDEnum = ProfileExecutionIDEnum.ESPD_EDM_V1_0_2;
             } else {
                 // check if it is a v2 artefact
-                boolean isV2Artefact = Pattern.compile("QualificationApplicationRequest|QualificationApplicationResponse")
+                String v2ArtefactRegex = "QualificationApplicationRequest|QualificationApplicationResponse";
+                boolean isV2Artefact = Pattern.compile(v2ArtefactRegex)
                         .matcher(partOfTheArtefact.toString()).find();
                 if (isV2Artefact) { // v2 artefact found
-                    version = SchemaVersion.V2;
+                    /**
+                     * in v2.0.x artefacts <cbc:ProfileExecutionID> is mandatory element
+                     * and get values from: {@link eu.esens.espdvcd.codelist.CodelistsV2#ProfileExecutionID}
+                     */
+                    String profileExecutionIDExtractionRegex = ".*<cbc:ProfileExecutionID.*?>(.*?)</cbc:ProfileExecutionID>.*";
+                    Matcher m = Pattern.compile(profileExecutionIDExtractionRegex,
+                            Pattern.DOTALL & Pattern.MULTILINE)
+                            .matcher(partOfTheArtefact.toString());
+                    if (m.find())  {
+                        // extract <cbc:ProfileExecutionID> value
+                        final String theId = m.group(1);
+                        profileExecutionIDEnum = Arrays.stream(ProfileExecutionIDEnum.values())
+                                .filter(id -> id.getValue().equals(theId))
+                                .findAny().orElseThrow(() -> new BuilderException("Error... ProfileExecutionID element value doesn't match with any ProfileExecutionID Codelist value."));
+                    } else {
+                        throw new BuilderException("Error... Matcher couldn't find profile execution id value, by using regular expression.");
+                    }
+
                 } else {
                     // nor v1 or v2 artefact found
-                    version = SchemaVersion.UNKNOWN;
+                    throw new BuilderException("Error... Imported artefact could not be identified as either v1 or v2.");
                 }
             }
         } catch (IOException ex) {
             Logger.getLogger(ModelBuilder.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return version;
+        return profileExecutionIDEnum;
     }
+
 
 }

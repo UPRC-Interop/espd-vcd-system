@@ -305,7 +305,7 @@ public interface ModelExtractor {
 
         try {
             // return the default service provider details
-            return BuilderFactory.V1.getModelBuilder().createRegulatedESPDRequest().getServiceProviderDetails();
+            return BuilderFactory.getRegulatedModelBuilder().createESPDRequest().getServiceProviderDetails();
         } catch (BuilderException e) {
             return null;
         }
@@ -315,7 +315,7 @@ public interface ModelExtractor {
 
     default ServiceProviderDetails extractServiceProviderDetails(List<test.x.ubl.pre_award.commonaggregate.ContractingPartyType> sppt) {
         try {
-            return BuilderFactory.V2.getModelBuilder().createESPDRequest().getServiceProviderDetails();
+            return BuilderFactory.getRegulatedModelBuilder().createESPDRequest().getServiceProviderDetails();
         } catch (BuilderException e) {
             return null;
         }

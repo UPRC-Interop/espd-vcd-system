@@ -19,19 +19,19 @@ public class RegulatedESPDRequestV2Service implements ESPDService {
 
     @Override
     public ESPDRequest XMLFileToObjectTransformer(File XML) throws RetrieverException, BuilderException, FileNotFoundException {
-        ESPDRequest request = BuilderFactory.V2.getModelBuilder().importFrom(new FileInputStream(XML)).createESPDRequest();
+        ESPDRequest request = BuilderFactory.getRegulatedModelBuilder().importFrom(new FileInputStream(XML)).createESPDRequest();
         request.setCriterionList(criteriaService.getUnselectedCriteria(request.getFullCriterionList()));
         return request;
     }
 
     @Override
     public InputStream ObjectToXMLStreamTransformer(Object document) {
-        return BuilderFactory.V2.getDocumentBuilderFor((ESPDRequest) document).getAsInputStream();
+        return BuilderFactory.withSchemaVersion2().getDocumentBuilderFor((ESPDRequest) document).getAsInputStream();
     }
 
     @Override
     public String ObjectToXMLStringTransformer(Object document) {
-        return BuilderFactory.V2.getDocumentBuilderFor((ESPDRequest) document).getAsString();
+        return BuilderFactory.withSchemaVersion2().getDocumentBuilderFor((ESPDRequest) document).getAsString();
     }
 
     @Override

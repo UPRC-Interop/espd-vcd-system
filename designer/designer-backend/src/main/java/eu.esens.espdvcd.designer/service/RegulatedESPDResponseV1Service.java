@@ -43,17 +43,17 @@ public class RegulatedESPDResponseV1Service implements ESPDService {
         if (!schematronResult.isValid())
             throw new ValidationException("Schematron validation failed on the supplied xml document.", schematronResult.getValidationMessages());
 
-        return BuilderFactory.V1.getModelBuilder().importFrom(new FileInputStream(XML)).createRegulatedESPDResponse();
+        return BuilderFactory.getRegulatedModelBuilder().importFrom(new FileInputStream(XML)).createESPDResponse();
     }
 
     @Override
     public InputStream ObjectToXMLStreamTransformer(Object document) {
-        return BuilderFactory.V1.getDocumentBuilderFor((ESPDResponse) document).getAsInputStream();
+        return BuilderFactory.withSchemaVersion1().getDocumentBuilderFor((ESPDResponse) document).getAsInputStream();
     }
 
     @Override
     public String ObjectToXMLStringTransformer(Object document) {
-        return BuilderFactory.V1.getDocumentBuilderFor((ESPDResponse) document).getAsString();
+        return BuilderFactory.withSchemaVersion1().getDocumentBuilderFor((ESPDResponse) document).getAsString();
     }
 
     @Override
