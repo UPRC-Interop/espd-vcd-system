@@ -163,6 +163,10 @@ export class ProcedureEoComponent implements OnInit {
             } else if (req.responseDataType == 'DATE') {
               req.response.date = formValues[req.id.valueOf()];
               console.log(req.response.date);
+              if (typeof req.response.date !== 'string') {
+                const utcDate = this.dataService.toUTCDate(req.response.date);
+                req.response.date = moment(utcDate);
+              }
               // req.response.date.setMinutes( req.response.date.getMinutes() + req.response.date.getTimezoneOffset() );
 
               console.log(req.response.date);

@@ -161,6 +161,8 @@ export class ApicallService {
 
   getXMLResponse(ESPDResponse: string) {
 
+    console.log(ESPDResponse);
+
     let header = new HttpHeaders();
     let _header = header.append('Content-Type', 'application/json; charset=utf-8');
 

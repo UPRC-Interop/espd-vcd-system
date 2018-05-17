@@ -6,6 +6,8 @@ import {RequirementResponse} from '../model/requirement-response.model';
 import {RequirementGroup} from '../model/requirementGroup.model';
 import {EoRelatedCriterion} from '../model/eoRelatedCriterion.model';
 import {ExclusionCriteria} from '../model/exclusionCriteria.model';
+import * as moment from 'moment';
+import {Moment} from 'moment';
 
 @Component({
   selector: 'app-selection-eo',
@@ -106,6 +108,15 @@ export class SelectionEoComponent implements OnInit {
               req.response.id = null;
             } else if (req.responseDataType == 'DATE') {
               req.response.date = formValues[req.id.valueOf()];
+              // console.log('CHECKING DATE-----------------------------------------------');
+              console.log(req.response.date);
+              console.log(typeof req.response.date);
+              if (typeof req.response.date !== 'string') {
+                const utcDate = this.dataService.toUTCDate(req.response.date);
+                req.response.date = moment(utcDate);
+              }
+
+
               req.response.id = null;
             } else if (req.responseDataType == 'PERCENTAGE') {
               req.response.percentage = formValues[req.id.valueOf()];

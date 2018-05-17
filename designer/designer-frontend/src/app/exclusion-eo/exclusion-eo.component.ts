@@ -5,6 +5,7 @@ import {FormGroup, NgForm} from '@angular/forms';
 import {RequirementGroup} from '../model/requirementGroup.model';
 import {RequirementResponse} from '../model/requirement-response.model';
 import {EoRelatedCriterion} from '../model/eoRelatedCriterion.model';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-exclusion-eo',
@@ -63,6 +64,10 @@ export class ExclusionEoComponent implements OnInit {
               req.response.id = null;
             } else if (req.responseDataType == 'DATE') {
               req.response.date = formValues[req.id.valueOf()];
+              if (typeof req.response.date !== 'string') {
+                const utcDate = this.dataService.toUTCDate(req.response.date);
+                req.response.date = moment(utcDate);
+              }
               // req.response.date.setMinutes( req.response.date.getMinutes() + req.response.date.getTimezoneOffset() );
               req.response.id = null;
             } else if (req.responseDataType == 'PERCENTAGE') {
