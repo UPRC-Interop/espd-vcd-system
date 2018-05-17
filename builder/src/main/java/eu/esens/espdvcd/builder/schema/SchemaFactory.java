@@ -1,12 +1,5 @@
 package eu.esens.espdvcd.builder.schema;
 
-import eu.esens.espdvcd.builder.schema.v1.ESPDRequestSchemaExtractorV1;
-import eu.esens.espdvcd.builder.schema.v1.ESPDResponseSchemaExtractorV1;
-import eu.esens.espdvcd.builder.schema.v1.VCDResponseSchemaExtractorV1;
-import eu.esens.espdvcd.builder.schema.v2.ESPDRequestSchemaExtractorV2;
-import eu.esens.espdvcd.builder.schema.v2.ESPDResponseSchemaExtractorV2;
-import eu.esens.espdvcd.builder.schema.v2.VCDResponseSchemaExtractorV2;
-
 public abstract class SchemaFactory {
 
     /**

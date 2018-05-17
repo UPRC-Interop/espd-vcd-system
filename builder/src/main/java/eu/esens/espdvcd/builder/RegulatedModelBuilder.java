@@ -230,13 +230,16 @@ public class RegulatedModelBuilder implements ModelBuilder {
         try (InputStream bis = getBufferedInputStream(xmlESPD)) {
             // Check and read the file in the JAXB Object
             // but first identify the artefact schema version
-            switch (findSchemaVersion(xmlESPD)) {
-                case V1:
+            switch (findArtefactVersion(xmlESPD)) {
+                case ESPD_EDM_V1_0_2:
                     Logger.getLogger(RegulatedModelBuilder.class.getName()).log(Level.INFO, "v1 artefact has been imported...");
                     ESPDRequestType espdRequestType = readESPDRequestFromStream(bis);
                     req = ModelFactory.ESPD_REQUEST.extractESPDRequest(espdRequestType); // Create the Model Object
                     break;
-                case V2:
+                case ESPD_EDM_V2_0_0_REGULATED:
+                case ESPD_EDM_V2_0_2_REGULATED:
+                case ESPD_EDM_V2_0_2_SELFCONTAINED: // FIXME temporarily until implemented
+                case ESPD_EDM_V2_0_0_SELFCONTAINED: // FIXME temporarily until implemented
                     Logger.getLogger(RegulatedModelBuilder.class.getName()).log(Level.INFO, "v2 artefact has been imported...");
                     QualificationApplicationRequestType qualificationApplicationRequestType = readQualificationApplicationRequestFromStream(bis);
                     req = ModelFactory.ESPD_REQUEST.extractESPDRequest(qualificationApplicationRequestType); // Create the Model Object
@@ -268,15 +271,18 @@ public class RegulatedModelBuilder implements ModelBuilder {
         try (InputStream bis = getBufferedInputStream(xmlESPDRes)) {
             // Check and read the file in the JAXB Object
             // but first identify the artefact schema version
-            switch (findSchemaVersion(xmlESPDRes)) {
-                case V1:
+            switch (findArtefactVersion(xmlESPDRes)) {
+                case ESPD_EDM_V1_0_2:
                     Logger.getLogger(RegulatedModelBuilder.class.getName()).log(Level.INFO, "v1 artefact has been imported...");
                     // Check and read the file in the JAXB Object
                     ESPDResponseType espdResponseType = readESPDResponseFromStream(bis);
                     // Create the Model Object
                     res = ModelFactory.ESPD_RESPONSE.extractESPDResponse(espdResponseType);
                     break;
-                case V2:
+                case ESPD_EDM_V2_0_0_REGULATED:
+                case ESPD_EDM_V2_0_2_REGULATED:
+                case ESPD_EDM_V2_0_0_SELFCONTAINED: // FIXME temporarily until implemented
+                case ESPD_EDM_V2_0_2_SELFCONTAINED: // FIXME temporarily until implemented
                     Logger.getLogger(RegulatedModelBuilder.class.getName()).log(Level.INFO, "v2 artefact has been imported...");
                     // Check and read the file in the JAXB Object
                     QualificationApplicationResponseType qualificationApplicationResponseType = readQualificationApplicationResponseFromStream(bis);
