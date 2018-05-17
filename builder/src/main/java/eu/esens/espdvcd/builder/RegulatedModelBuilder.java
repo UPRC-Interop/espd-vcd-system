@@ -2,10 +2,9 @@ package eu.esens.espdvcd.builder;
 
 import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.builder.model.ModelFactory;
-import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
 import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
-import eu.esens.espdvcd.retriever.criteria.PredefinedESPDTenderingCriteriaExtractor;
+import eu.esens.espdvcd.retriever.criteria.PredefinedESPDCriteriaExtractor;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import eu.esens.espdvcd.schema.SchemaUtil;
 import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
@@ -127,9 +126,7 @@ public class RegulatedModelBuilder implements ModelBuilder {
      * required object.
      */
     public RegulatedModelBuilder addDefaultESPDCriteriaList() {
-        // FIXME maybe code has to be restored here
-        // criteriaExtractor = new PredefinedESPDCriteriaExtractor();
-        criteriaExtractor = new PredefinedESPDTenderingCriteriaExtractor(QualificationApplicationTypeEnum.REGULATED);
+        criteriaExtractor = new PredefinedESPDCriteriaExtractor();
         return this;
     }
 
