@@ -2,9 +2,9 @@ package eu.esens.espdvcd.builder.model;
 
 import eu.esens.espdvcd.builder.BuilderFactory;
 import eu.esens.espdvcd.builder.exception.BuilderException;
-import eu.esens.espdvcd.codelist.CodelistsV2;
 import eu.esens.espdvcd.codelist.enums.CriterionElementTypeEnum;
 import eu.esens.espdvcd.codelist.enums.EOIndustryClassificationCodeEnum;
+import eu.esens.espdvcd.codelist.enums.LegislationTypeEnum;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.model.requirement.Requirement;
@@ -14,17 +14,19 @@ import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.Cr
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.LegislationType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementGroupType;
 import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementType;
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ContractingPartyType;
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.DocumentReferenceType;
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ExternalReferenceType;
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ServiceProviderPartyType;
+import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ContractFolderIDType;
+import test.x.ubl.pre_award.commonaggregate.TenderingCriterionPropertyGroupType;
+import test.x.ubl.pre_award.commonaggregate.TenderingCriterionPropertyType;
+import test.x.ubl.pre_award.commonaggregate.TenderingCriterionType;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.*;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ContractFolderIDType;
-import test.x.ubl.pre_award.commonaggregate.TenderingCriterionPropertyGroupType;
-import test.x.ubl.pre_award.commonaggregate.TenderingCriterionPropertyType;
-import test.x.ubl.pre_award.commonaggregate.TenderingCriterionType;
 
 public interface ModelExtractor {
 
@@ -437,10 +439,14 @@ public interface ModelExtractor {
 
     default LegislationReference extractEULegalReferenceV2(List<test.x.ubl.pre_award.commonaggregate.LegislationType> lrList) {
         return lrList.stream()
-                .filter(lr -> lr.getJurisdictionLevel()
-                        .stream().findFirst().orElseThrow(NoSuchElementException::new)
-                        // FIXME there are more codelists v2 options in legislationType
-                        .getValue().contains(CodelistsV2.LegislationType.getValueForId("EU_DIRECTIVE")))
+                .filter(lr -> {
+                    String jl = lr.getJurisdictionLevel().stream()
+                            .findFirst().orElseThrow(NoSuchElementException::new)
+                            .getValue();
+                    return jl.equals(LegislationTypeEnum.EU_DIRECTIVE.name()) |
+                            jl.equals(LegislationTypeEnum.EU_DECISION.name()) |
+                            jl.equals(LegislationTypeEnum.EU_REGULATION.name());
+                })
                 .findFirst().map(lr -> extractLegalReference(lr))
                 .orElse(null);
     }
@@ -454,10 +460,13 @@ public interface ModelExtractor {
 
     default LegislationReference extractNationalLegalReferenceV2(List<test.x.ubl.pre_award.commonaggregate.LegislationType> lrList) {
         return lrList.stream()
-                .filter(lr -> lr.getJurisdictionLevel().stream()
-                        .findFirst().orElseThrow(NoSuchElementException::new)
-                        // FIXME there are more codelists v2 options in legislationType
-                        .getValue().contains(CodelistsV2.LegislationType.getValueForId("NATIONAL_LEGISLATION")))
+                .filter(lr -> {
+                    String jl = lr.getJurisdictionLevel().stream()
+                            .findFirst().orElseThrow(NoSuchElementException::new)
+                            .getValue();
+                    return jl.equals(LegislationTypeEnum.NATIONAL_LEGISLATION.name()) |
+                            jl.equals(LegislationTypeEnum.SUBNATIONAL_LEGISLATION.name());
+                })
                 .findFirst().map(lr -> extractLegalReference(lr))
                 .orElse(null);
     }

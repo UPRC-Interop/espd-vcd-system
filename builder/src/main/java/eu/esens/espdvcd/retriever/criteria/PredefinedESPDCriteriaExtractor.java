@@ -22,8 +22,8 @@ public class PredefinedESPDCriteriaExtractor implements CriteriaExtractor {
     private final List<TenderingCriterionType> criterionTypeList;
 
     private static final String ESPD_REQUEST_V1_REGULATED_RESOURCE = "/templates/v1_regulated/espd-request-2018.03.xml";
-    private static final String ESPD_REQUEST_V2_REGULATED_RESOURCE = "/templates/v2_regulated/REGULATED-ESPDRequest-02.00.02.xml";
-    private static final String ESPD_REQUEST_V2_SELF_CONTAINED_RESOURCE = "/templates/v2_self_contained/SELFCONTAINED-ESPDRequest-02.00.02.xml";
+    private static final String ESPD_REQUEST_V2_REGULATED_RESOURCE = "/templates/v2_regulated/REGULATED_ESPD-Request_2.0.2.xml";
+    private static final String ESPD_REQUEST_V2_SELF_CONTAINED_RESOURCE = "/templates/v2_self_contained/SELFCONTAINED_ESPD-Request.V2.0.2.xml";
 
     public PredefinedESPDCriteriaExtractor() {
 //        ESPDRequestType requestTemplate = JAXB.unmarshal(CriteriaExtractor.class.getResourceAsStream(ESPD_REQUEST_V1_REGULATED_RESOURCE), ESPDRequestType.class);

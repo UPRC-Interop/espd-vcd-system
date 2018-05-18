@@ -4,6 +4,7 @@ import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.codelist.CodelistsV1;
 import eu.esens.espdvcd.codelist.enums.ProfileExecutionIDEnum;
 import eu.esens.espdvcd.model.*;
+import eu.esens.espdvcd.schema.SchemaVersion;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -88,12 +89,57 @@ public interface ModelBuilder {
     }
 
     /**
+     * Identify schema version of given ESPD XML artefact
+     *
+     * @param xmlESPD The ESPD XML artefact
+     * @return The schema version
+     */
+    default SchemaVersion findSchemaVersion(InputStream xmlESPD) {
+        InputStream bis = getBufferedInputStream(xmlESPD);
+        SchemaVersion version = SchemaVersion.UNKNOWN;
+
+        try {
+            byte[] contents = new byte[1024];
+            int bytesRead;
+            StringBuilder partOfTheArtefact = new StringBuilder();
+            bis.mark(1024);
+            while ((bytesRead = bis.read(contents)) != -1) {
+                partOfTheArtefact.append(new String(contents, 0, bytesRead));
+                if (bytesRead >= 1024) {
+                    break;
+                }
+            }
+            bis.reset();
+
+            boolean isV1Artefact = Pattern.compile("ESPDRequest|ESPDResponse")
+                    .matcher(partOfTheArtefact.toString()).find();
+
+            if (isV1Artefact) { // v1 artefact found
+                version = SchemaVersion.V1;
+            } else {
+                // check if it is a v2 artefact
+                boolean isV2Artefact = Pattern.compile("QualificationApplicationRequest|QualificationApplicationResponse")
+                        .matcher(partOfTheArtefact.toString()).find();
+                if (isV2Artefact) { // v2 artefact found
+                    version = SchemaVersion.V2;
+                } else {
+                    // nor v1 or v2 artefact found
+                    version = SchemaVersion.UNKNOWN;
+                }
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(ModelBuilder.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return version;
+    }
+
+    /**
      * Identify profile execution id of given ESPD XML artefact.
      *
      * @param xmlESPD The ESPD XML artefact
      * @return The profile execution id
      */
-    default ProfileExecutionIDEnum findArtefactVersion(InputStream xmlESPD) throws BuilderException {
+    default ProfileExecutionIDEnum findEDMArtefactVersion(InputStream xmlESPD) throws BuilderException {
         InputStream bis = getBufferedInputStream(xmlESPD);
         ProfileExecutionIDEnum profileExecutionIDEnum = ProfileExecutionIDEnum.UNKNOWN;
 
