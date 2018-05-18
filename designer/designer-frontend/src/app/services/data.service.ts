@@ -238,9 +238,42 @@ export class DataService {
 
   }
 
+  toUTCDate(date: Moment): Moment {
+    const utcDate = new Date(Date.UTC(date.toDate().getFullYear(),
+      date.toDate().getMonth(),
+      date.toDate().getDate(),
+      date.toDate().getHours(),
+      date.toDate().getMinutes()));
+
+    return date = moment(utcDate);
+  }
+
+
   createESPDResponse(): ESPDResponse {
     this.espdResponse = new ESPDResponse(this.CADetails, this.EODetails, this.fullCriterionList);
     console.log(this.espdResponse.eodetails.naturalPersons[0].birthDate);
+    console.log(JSON.stringify(this.espdResponse.eodetails.naturalPersons[0].birthDate));
+    // let utcDate = new Date(Date.UTC(this.espdResponse.eodetails.naturalPersons[0].birthDate.toDate().getFullYear(),
+    //   this.espdResponse.eodetails.naturalPersons[0].birthDate.toDate().getMonth(),
+    //   this.espdResponse.eodetails.naturalPersons[0].birthDate.toDate().getDate(),
+    //   this.espdResponse.eodetails.naturalPersons[0].birthDate.toDate().getHours(),
+    //   this.espdResponse.eodetails.naturalPersons[0].birthDate.toDate().getMinutes()));
+    // console.log(utcDate);
+    //
+    // // let momentUTC = moment.utc(this.espdResponse.eodetails.naturalPersons[0].birthDate).format();
+    // // console.log(momentUTC);
+    // // console.log(JSON.stringify(momentUTC));
+    //
+    // this.espdResponse.eodetails.naturalPersons[0].birthDate = moment(utcDate);
+    //
+    // let result = JSON.stringify(utcDate);
+    // console.log(result);
+
+    if (typeof this.espdResponse.eodetails.naturalPersons[0].birthDate !== 'string') {
+      let utcDate = this.toUTCDate(this.espdResponse.eodetails.naturalPersons[0].birthDate);
+      this.espdResponse.eodetails.naturalPersons[0].birthDate = moment(utcDate);
+    }
+
     console.log(this.espdResponse);
     return this.espdResponse;
   }
@@ -1110,9 +1143,7 @@ export class DataService {
 
             if (r.response.date) {
               console.log(r.response.date);
-              console.log(r.response.date[0]);
-              console.log(r.response.date[1]);
-              console.log(r.response.date[2]);
+              // console.log(typeof r.response.date);
 
 
               // let date = this.getDateJSObjectD(r.response.date);

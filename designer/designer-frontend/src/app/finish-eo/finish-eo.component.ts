@@ -5,6 +5,7 @@ import {FormGroup} from '@angular/forms';
 import {RequirementResponse} from '../model/requirement-response.model';
 import {RequirementGroup} from '../model/requirementGroup.model';
 import {EoRelatedCriterion} from '../model/eoRelatedCriterion.model';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-finish-eo',
@@ -50,6 +51,10 @@ export class FinishEoComponent implements OnInit {
               req.response.id = null;
             } else if (req.responseDataType == 'DATE') {
               req.response.date = formValues[req.id.valueOf()];
+              if (typeof req.response.date !== 'string') {
+                const utcDate = this.dataService.toUTCDate(req.response.date);
+                req.response.date = moment(utcDate);
+              }
               req.response.id = null;
             } else if (req.responseDataType == 'PERCENTAGE') {
               req.response.percentage = formValues[req.id.valueOf()];
