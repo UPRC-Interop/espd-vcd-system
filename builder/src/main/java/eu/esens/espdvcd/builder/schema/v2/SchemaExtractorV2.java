@@ -5,6 +5,7 @@ import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import test.x.ubl.pre_award.commonaggregate.*;
 import test.x.ubl.pre_award.commonbasic.*;
+import test.x.ubl.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
 
 import java.util.stream.Collectors;
 
@@ -15,9 +16,9 @@ public interface SchemaExtractorV2 {
      * {@link isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementType}
      * in schema version 2.0.x
      */
-    TenderingCriterionPropertyType extractTenderingCriterionPropertyType(Requirement r);
+    TenderingCriterionPropertyType extractTenderingCriterionPropertyType(Requirement r, QualificationApplicationResponseType responseType);
 
-    default TenderingCriterionType extractTenderingCriterion(Criterion c) {
+    default TenderingCriterionType extractTenderingCriterion(Criterion c, QualificationApplicationResponseType responseType) {
 
         TenderingCriterionType tct = new TenderingCriterionType();
 
@@ -38,7 +39,7 @@ public interface SchemaExtractorV2 {
         tct.setCriterionTypeCode(createCriteriaTypeCode(c.getTypeCode()));
 
         tct.getTenderingCriterionPropertyGroup().addAll(c.getRequirementGroups().stream()
-                .map(rg -> extractTenderingCriterionPropertyGroupType(rg))
+                .map(rg -> extractTenderingCriterionPropertyGroupType(rg, responseType))
                 .collect(Collectors.toList()));
 
         return tct;
@@ -66,17 +67,17 @@ public interface SchemaExtractorV2 {
     }
 
     // This is RequirementGroup equivalent in schema version 2.0.x
-    default TenderingCriterionPropertyGroupType extractTenderingCriterionPropertyGroupType(RequirementGroup rg) {
+    default TenderingCriterionPropertyGroupType extractTenderingCriterionPropertyGroupType(RequirementGroup rg, QualificationApplicationResponseType responseType) {
 
         TenderingCriterionPropertyGroupType rgType = new TenderingCriterionPropertyGroupType();
 
         //TODO: Apply Defaults() method for adding default attributes etc
         rgType.getSubsidiaryTenderingCriterionPropertyGroup().addAll(rg.getRequirementGroups().stream()
-                .map(rg1 -> extractTenderingCriterionPropertyGroupType(rg1))
+                .map(rg1 -> extractTenderingCriterionPropertyGroupType(rg1, responseType))
                 .collect(Collectors.toList()));
         // This is Requirement equivalent in schema version 2.0.x
         rgType.getTenderingCriterionProperty().addAll(rg.getRequirements().stream()
-                .map(r1 -> extractTenderingCriterionPropertyType(r1))
+                .map(r1 -> extractTenderingCriterionPropertyType(r1, responseType))
                 .collect(Collectors.toList()));
 
         rgType.setID(createDefaultIDType(rg.getID()));
@@ -343,6 +344,16 @@ public interface SchemaExtractorV2 {
         reqGroupIDType.setSchemeAgencyName("DG GROW (European Commission)");
         reqGroupIDType.setSchemeVersionID("1.1");
         return reqGroupIDType;
+    }
+
+    // (2.0.2) updated by KR_20-5-2018
+    default ValidatedCriterionPropertyIDType createValidatedCriterionPropertyId(String id) {
+        ValidatedCriterionPropertyIDType propertyIDType = new ValidatedCriterionPropertyIDType();
+        propertyIDType.setValue(id);
+        propertyIDType.setSchemeID("CriteriaTaxonomy");
+        propertyIDType.setSchemeAgencyID("EU-COM-GROW");
+        propertyIDType.setSchemeVersionID("2.0.2");
+        return propertyIDType;
     }
 
     // (2.0.1) updated KR_1-4-2018

@@ -29,45 +29,45 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
 
     public QualificationApplicationResponseType extractQualificationApplicationResponseType(ESPDResponse res) {
 
-        QualificationApplicationResponseType resType = new QualificationApplicationResponseType();
+        final QualificationApplicationResponseType responseType = new QualificationApplicationResponseType();
 
         if (res.getCADetails().getProcurementProcedureFileReferenceNo() != null) {
-            resType.setContractFolderID(new ContractFolderIDType());
-            resType.getContractFolderID().setSchemeAgencyID("TeD");
-            resType.getContractFolderID().setValue(res.getCADetails().getProcurementProcedureFileReferenceNo());
+            responseType.setContractFolderID(new ContractFolderIDType());
+            responseType.getContractFolderID().setSchemeAgencyID("TeD");
+            responseType.getContractFolderID().setValue(res.getCADetails().getProcurementProcedureFileReferenceNo());
         }
 
-        resType.getAdditionalDocumentReference().add(extractCADetailsDocumentReference(res.getCADetails()));
+        responseType.getAdditionalDocumentReference().add(extractCADetailsDocumentReference(res.getCADetails()));
 
         DocumentReferenceType drt = extractCADetailsNationalDocumentReference(res.getCADetails());
         if (drt != null) {
-            resType.getAdditionalDocumentReference().add(drt);
+            responseType.getAdditionalDocumentReference().add(drt);
         }
 
-        resType.getContractingParty().add(extractContractingPartyType(res.getCADetails()));
-        resType.getProcurementProjectLot().add(extractProcurementProjectLot(res.getEODetails()));
-        resType.getContractingParty().get(0).getParty().getServiceProviderParty()
+        responseType.getContractingParty().add(extractContractingPartyType(res.getCADetails()));
+        responseType.getProcurementProjectLot().add(extractProcurementProjectLot(res.getEODetails()));
+        responseType.getContractingParty().get(0).getParty().getServiceProviderParty()
                 .add(extractServiceProviderPartyType(res.getServiceProviderDetails()));
-        resType.getTenderingCriterion().addAll(res.getFullCriterionList().stream()
+        responseType.getTenderingCriterion().addAll(res.getFullCriterionList().stream()
                 .filter(cr -> cr.isSelected())
-                .map(cr -> extractTenderingCriterion(cr))
+                .map(cr -> extractTenderingCriterion(cr, responseType))
                 .collect(Collectors.toList()));
 
-        resType.getEconomicOperatorParty().add(extractEODetails(res.getEODetails()));
+        responseType.getEconomicOperatorParty().add(extractEODetails(res.getEODetails()));
 
         if (res.getESPDRequestDetails() != null) {
-            resType.getAdditionalDocumentReference().add(extractESPDRequestDetails(res.getESPDRequestDetails()));
+            responseType.getAdditionalDocumentReference().add(extractESPDRequestDetails(res.getESPDRequestDetails()));
         }
 
 
-        resType.setUBLVersionID(createUBL22VersionIdType());
+        responseType.setUBLVersionID(createUBL22VersionIdType());
 
-        resType.setCustomizationID(createCENBIICustomizationIdType("urn:www.cenbii.eu:transaction:biitrdm070:ver3.0"));
-        resType.setVersionID(createVersionIDType("2017.01.01"));
+        responseType.setCustomizationID(createCENBIICustomizationIdType("urn:www.cenbii.eu:transaction:biitrdm070:ver3.0"));
+        responseType.setVersionID(createVersionIDType("2017.01.01"));
 
-        resType.setCopyIndicator(new CopyIndicatorType());
-        resType.getCopyIndicator().setValue(false);
-        return resType;
+        responseType.setCopyIndicator(new CopyIndicatorType());
+        responseType.getCopyIndicator().setValue(false);
+        return responseType;
     }
 
     public EconomicOperatorPartyType extractEODetails(EODetails eod) {
@@ -219,19 +219,21 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
     }
 
     @Override
-    public TenderingCriterionPropertyType extractTenderingCriterionPropertyType(Requirement r) {
+    public TenderingCriterionPropertyType extractTenderingCriterionPropertyType(Requirement r, QualificationApplicationResponseType responseType) {
         TenderingCriterionPropertyType req = new TenderingCriterionPropertyType();
         req.setTypeCode(new TypeCodeType());
         req.getTypeCode().setValue(r.getResponseDataType().name());
         req.getDescription().add(new DescriptionType());
         req.getDescription().get(0).setValue(r.getDescription());
         req.setID(createCriteriaTaxonomyIDType(r.getID()));
+        responseType.getTenderingCriterionResponse().add(extractTenderingCriterionResponse(r.getResponse(), r.getResponseDataType(), r.getID()));
         return req;
     }
 
-    private TenderingCriterionResponseType extractTenderingCriterionResponse(Response response, ResponseTypeEnum respType) {
+    private TenderingCriterionResponseType extractTenderingCriterionResponse(Response response, ResponseTypeEnum respType, String rqID) {
 
         TenderingCriterionResponseType tcrType = new TenderingCriterionResponseType();
+        tcrType.setValidatedCriterionPropertyID(createValidatedCriterionPropertyId(rqID));
         ResponseValueType rvType = new ResponseValueType();
 
         if (response == null) {

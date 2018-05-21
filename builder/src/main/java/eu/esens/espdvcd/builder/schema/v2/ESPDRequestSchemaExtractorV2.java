@@ -1,5 +1,6 @@
 package eu.esens.espdvcd.builder.schema.v2;
 
+import eu.esens.espdvcd.codelist.enums.CriterionElementTypeEnum;
 import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.requirement.Requirement;
@@ -8,6 +9,7 @@ import test.x.ubl.pre_award.commonaggregate.ProcurementProjectLotType;
 import test.x.ubl.pre_award.commonaggregate.TenderingCriterionPropertyType;
 import test.x.ubl.pre_award.commonbasic.*;
 import test.x.ubl.pre_award.qualificationapplicationrequest.QualificationApplicationRequestType;
+import test.x.ubl.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
 
 import java.util.stream.Collectors;
 
@@ -35,7 +37,7 @@ public class ESPDRequestSchemaExtractorV2 implements SchemaExtractorV2 {
 
         reqType.getTenderingCriterion().addAll(req.getFullCriterionList().stream()
                 .filter(cr -> cr.isSelected())
-                .map(cr -> extractTenderingCriterion(cr))
+                .map(cr -> extractTenderingCriterion(cr, null))
                 .collect(Collectors.toList()));
 
         reqType.setUBLVersionID(createUBL22VersionIdType());
@@ -68,7 +70,7 @@ public class ESPDRequestSchemaExtractorV2 implements SchemaExtractorV2 {
     }
 
     @Override
-    public TenderingCriterionPropertyType extractTenderingCriterionPropertyType(Requirement r) {
+    public TenderingCriterionPropertyType extractTenderingCriterionPropertyType(Requirement r, QualificationApplicationResponseType responseType) {
 
         TenderingCriterionPropertyType propertyType = new TenderingCriterionPropertyType();
 
@@ -80,12 +82,17 @@ public class ESPDRequestSchemaExtractorV2 implements SchemaExtractorV2 {
         // tbr070-013
         // FIXME (SELF-CONTAINED 2.0.1) The Regulated ESPD documents do not specify REQUIREMENTS, only QUESTIONS. The SELF-CONTAINED version does
         propertyType.setTypeCode(new TypeCodeType());
-        propertyType.getTypeCode().setValue(r.getTypeCode().name());
+
+        if (r.getTypeCode() != null) {
+            propertyType.getTypeCode().setValue(r.getTypeCode().name());
+        } else { // FIXME temporary fix to avoid NullPointerException when importFrom(V1.0.2 artefact)
+            propertyType.getTypeCode().setValue(CriterionElementTypeEnum.QUESTION.name());
+        }
+
         propertyType.getTypeCode().setListID("CriterionElementType");
         propertyType.getTypeCode().setListAgencyID("EU-COM-GROW");
         propertyType.getTypeCode().setListVersionID("2.0.1");
 
-        // propertyType.getTypeCode().setValue(CriterionElementTypeEnum.QUESTION.name());
         // tbr070-013
         propertyType.setValueDataTypeCode(new ValueDataTypeCodeType());
         propertyType.getValueDataTypeCode().setValue(r.getResponseDataType().name());

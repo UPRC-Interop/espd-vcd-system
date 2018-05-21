@@ -11,6 +11,8 @@ import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.Re
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.DocumentReferenceType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PersonType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ProcurementProjectLotType;
+import test.x.ubl.pre_award.commonaggregate.TenderingCriterionPropertyType;
+import test.x.ubl.pre_award.commonaggregate.TenderingCriterionResponseType;
 import test.x.ubl.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
 
 import java.util.ArrayList;
@@ -74,23 +76,23 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
         return res;
     }
 
-    public ESPDResponse extractESPDResponse(QualificationApplicationResponseType resType) {
+    public ESPDResponse extractESPDResponse(QualificationApplicationResponseType responseType) {
 
         RegulatedESPDResponse res = new RegulatedESPDResponse();
 
-        res.getFullCriterionList().addAll(resType.getTenderingCriterion().stream()
-                .map(c -> extractSelectableCriterion(c))
+        res.getFullCriterionList().addAll(responseType.getTenderingCriterion().stream()
+                .map(c -> extractSelectableCriterion(c, responseType))
                 .collect(Collectors.toList()));
 
-        res.setCADetails(extractCADetails(resType.getContractingParty(),
-                resType.getContractFolderID(),
-                resType.getAdditionalDocumentReference()));
+        res.setCADetails(extractCADetails(responseType.getContractingParty(),
+                responseType.getContractFolderID(),
+                responseType.getAdditionalDocumentReference()));
 
-        res.setServiceProviderDetails(extractServiceProviderDetails(resType.getContractingParty()));
+        res.setServiceProviderDetails(extractServiceProviderDetails(responseType.getContractingParty()));
 
-        if (!resType.getEconomicOperatorParty().isEmpty()) {
+        if (!responseType.getEconomicOperatorParty().isEmpty()) {
             // FIXME we assure 1 here
-            res.setEODetails(extractEODetails(resType.getEconomicOperatorParty().get(0), resType.getProcurementProjectLot().get(0)));
+            res.setEODetails(extractEODetails(responseType.getEconomicOperatorParty().get(0), responseType.getProcurementProjectLot().get(0)));
         } else {
             EODetails eod = new EODetails();
             eod.setContactingDetails(new ContactingDetails());
@@ -105,13 +107,13 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
             res.setEODetails(eod);
         }
 
-        if (resType.getCustomizationID().getValue().equals("urn:www.cenbii.eu:transaction:biitrdm070:ver3.0")) {
+        if (responseType.getCustomizationID().getValue().equals("urn:www.cenbii.eu:transaction:biitrdm070:ver3.0")) {
             // ESPD response detected (by checking the customization id)
 
-            if (resType.getAdditionalDocumentReference() != null && !resType.getAdditionalDocumentReference().isEmpty()) {
+            if (responseType.getAdditionalDocumentReference() != null && !responseType.getAdditionalDocumentReference().isEmpty()) {
 
                 // Find an entry with ESPD_REQUEST Value
-                Optional<test.x.ubl.pre_award.commonaggregate.DocumentReferenceType> optRef = resType.getAdditionalDocumentReference().stream().
+                Optional<test.x.ubl.pre_award.commonaggregate.DocumentReferenceType> optRef = responseType.getAdditionalDocumentReference().stream().
                         filter(r -> r.getDocumentTypeCode() != null && r.getDocumentTypeCode().getValue().
                                 equals("ESPD_REQUEST")).findFirst();
                 optRef.ifPresent(documentReferenceType -> res.setESPDRequestDetails(extractESPDRequestDetails(documentReferenceType)));
@@ -119,7 +121,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
         }
         else {
             // else an ESPD request is assumed
-            res.setESPDRequestDetails(extractESPDRequestDetails(resType));
+            res.setESPDRequestDetails(extractESPDRequestDetails(responseType));
         }
 
 
@@ -145,7 +147,28 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
         return r;
     }
 
-    // TODO extractRequirement for TenderingCriterionPropertyType
+    @Override
+    public Requirement extractRequirement(TenderingCriterionPropertyType pt, QualificationApplicationResponseType responseType) {
+
+        Requirement r = ModelExtractor.super.extractRequirement(pt, responseType);
+
+        if (!responseType.getTenderingCriterionResponse().isEmpty()) {
+            r.setResponse(extractResponse(responseType.getTenderingCriterionResponse().get(0), ResponseTypeEnum.valueOf(pt.getValueDataTypeCode().getValue())));
+        } else {
+            r.setResponse(ResponseFactory.createResponse(r.getResponseDataType()));
+        }
+        return r;
+    }
+
+    public Response extractResponse(TenderingCriterionResponseType responseType, ResponseTypeEnum theType) {
+
+        switch (theType) {
+
+            default:
+                return null;
+        }
+
+    }
 
     public Response extractResponse(ResponseType res, ResponseTypeEnum theType) {
 

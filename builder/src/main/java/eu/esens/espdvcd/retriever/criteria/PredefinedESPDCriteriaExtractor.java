@@ -36,7 +36,7 @@ public class PredefinedESPDCriteriaExtractor implements CriteriaExtractor {
     public List<SelectableCriterion> getFullList() {
         List<SelectableCriterion> lc =
                 criterionTypeList.stream()
-                        .map(c -> ModelFactory.ESPD_REQUEST.extractSelectableCriterion(c))
+                        .map(c -> ModelFactory.ESPD_REQUEST.extractSelectableCriterion(c, null))
                         .collect(Collectors.toList());
         return lc;
     }
@@ -54,7 +54,7 @@ public class PredefinedESPDCriteriaExtractor implements CriteriaExtractor {
         initialSet.addAll(initialList);
         Set<SelectableCriterion> fullSet =
                 criterionTypeList.stream()
-                        .map(c -> ModelFactory.ESPD_REQUEST.extractSelectableCriterion(c, addAsSelected))
+                        .map(c -> ModelFactory.ESPD_REQUEST.extractSelectableCriterion(c, addAsSelected, null))
                         .collect(Collectors.toSet());
         initialSet.addAll(fullSet);
         Logger.getLogger(PredefinedESPDCriteriaExtractor.class.getName()).log(Level.SEVERE, "Criterion List Size in model: " + initialSet.size());
