@@ -244,27 +244,87 @@ export class ProcedureEoComponent implements OnInit {
     this.eoRelatedACriteria.forEach(cr => {
       let formValues = this.formA.getRawValue();
       formValues = formValues[cr.id.valueOf()];
+
+      let testFormValues = null;
+
       cr.requirementGroups.forEach(rg => {
-        formValues = formValues[rg.id.valueOf()];
-        this.reqGroupMatch(rg, cr, this.formA, formValues);
+        // formValues = formValues[rg.id.valueOf()];
+        // this.reqGroupMatch(rg, cr, this.formA, formValues);
+        if (testFormValues == null) {
+          testFormValues = this.formA.getRawValue();
+          testFormValues = testFormValues[cr.id.valueOf()];
+          // formValues = testFormValues;
+        }
+
+        if (formValues[rg.id.valueOf()] == undefined) {
+          // console.log('THIS IS undefined');
+          testFormValues = testFormValues[rg.id.valueOf()];
+          this.reqGroupMatch(rg, cr, this.formA, testFormValues);
+        } else if (formValues[rg.id.valueOf()] != undefined) {
+          // console.log('THIS IS DEFINED');
+          formValues = formValues[rg.id.valueOf()];
+          this.reqGroupMatch(rg, cr, this.formA, formValues);
+        }
       });
     });
 
     this.eoRelatedCCriteria.forEach(cr => {
       let formValues = this.formC.getRawValue();
       formValues = formValues[cr.id.valueOf()];
+
+      let testFormValues = null;
+
       cr.requirementGroups.forEach(rg => {
-        formValues = formValues[rg.id.valueOf()];
-        this.reqGroupMatch(rg, cr, this.formC, formValues);
+        if (testFormValues == null) {
+          testFormValues = this.formC.getRawValue();
+          testFormValues = testFormValues[cr.id.valueOf()];
+          // formValues = testFormValues;
+        }
+
+        if (formValues[rg.id.valueOf()] == undefined) {
+          // fix
+          let testFormValues = null;
+          testFormValues = this.formC.getRawValue();
+          testFormValues = testFormValues[cr.id.valueOf()];
+          testFormValues = testFormValues[rg.id.valueOf()];
+          // fix
+
+          this.reqGroupMatch(rg, cr, this.formC, testFormValues);
+        } else if (formValues[rg.id.valueOf()] != undefined) {
+          formValues = formValues[rg.id.valueOf()];
+          this.reqGroupMatch(rg, cr, this.formC, formValues);
+        }
       });
     });
 
     this.eoRelatedDCriteria.forEach(cr => {
       let formValues = this.formD.getRawValue();
       formValues = formValues[cr.id.valueOf()];
+
+      let testFormValues = null;
+
       cr.requirementGroups.forEach(rg => {
-        formValues = formValues[rg.id.valueOf()];
-        this.reqGroupMatch(rg, cr, this.formD, formValues);
+        if (testFormValues == null) {
+          testFormValues = this.formD.getRawValue();
+          testFormValues = testFormValues[cr.id.valueOf()];
+          // formValues = testFormValues;
+        }
+
+        if (formValues[rg.id.valueOf()] == undefined) {
+          console.log('THIS IS undefined');
+          // fix
+          let testFormValues = null;
+          testFormValues = this.formD.getRawValue();
+          testFormValues = testFormValues[cr.id.valueOf()];
+          testFormValues = testFormValues[rg.id.valueOf()];
+          // fix
+
+          this.reqGroupMatch(rg, cr, this.formD, testFormValues);
+        } else if (formValues[rg.id.valueOf()] != undefined) {
+          console.log('THIS IS DEFINED');
+          formValues = formValues[rg.id.valueOf()];
+          this.reqGroupMatch(rg, cr, this.formD, formValues);
+        }
       });
     });
 
