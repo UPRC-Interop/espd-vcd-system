@@ -1,6 +1,7 @@
 FROM java:8-alpine
 
 WORKDIR /designer
+
 COPY artifact-designer.jar /designer
 
 EXPOSE 80
