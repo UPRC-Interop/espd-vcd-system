@@ -12,4 +12,15 @@ dependencies {
     compile 'com.sparkjava:spark-core:2.7.1'
 }
 
+jar {
+    manifest {
+        attributes "Main-Class": "eu.esens.espdvcd.designer.Server"
+    }
+
+    doFirst {
+        from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    }
+    exclude 'META-INF/*.RSA', 'META-INF/*.SF','META-INF/*.DSA'
+}
+
 mainClassName='eu.esens.espdvcd.designer.Server'
