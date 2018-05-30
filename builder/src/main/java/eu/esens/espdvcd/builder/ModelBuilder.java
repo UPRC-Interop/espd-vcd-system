@@ -99,17 +99,20 @@ public interface ModelBuilder {
         SchemaVersion version = SchemaVersion.UNKNOWN;
 
         try {
-            byte[] contents = new byte[1024];
+            int numberOfBytes = 256;
+            byte[] contents = new byte[numberOfBytes];
             int bytesRead;
             StringBuilder partOfTheArtefact = new StringBuilder();
-            bis.mark(1024);
+            bis.mark(numberOfBytes);
             while ((bytesRead = bis.read(contents)) != -1) {
                 partOfTheArtefact.append(new String(contents, 0, bytesRead));
-                if (bytesRead >= 1024) {
+                if (bytesRead >= numberOfBytes) {
                     break;
                 }
             }
             bis.reset();
+
+            System.out.println(partOfTheArtefact.toString());
 
             boolean isV1Artefact = Pattern.compile("ESPDRequest|ESPDResponse")
                     .matcher(partOfTheArtefact.toString()).find();

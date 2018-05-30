@@ -22,7 +22,6 @@ import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.Contract
 import test.x.ubl.pre_award.commonaggregate.TenderingCriterionPropertyGroupType;
 import test.x.ubl.pre_award.commonaggregate.TenderingCriterionPropertyType;
 import test.x.ubl.pre_award.commonaggregate.TenderingCriterionType;
-import test.x.ubl.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -346,7 +345,7 @@ public interface ModelExtractor {
         return extractSelectableCriterion(ct, true);
     }
 
-    default SelectableCriterion extractSelectableCriterion(TenderingCriterionType tct, boolean isSelected, QualificationApplicationResponseType responseType) {
+    default SelectableCriterion extractSelectableCriterion(TenderingCriterionType tct, boolean isSelected) {
         String id = tct.getID().getValue();
         String desc = tct.getDescription().isEmpty() ? "" : tct.getDescription().get(0).getValue();
         String typeCode = tct.getCriterionTypeCode().getValue();
@@ -355,7 +354,7 @@ public interface ModelExtractor {
         LegislationReference lr = extractDefaultLegalReferenceV2(tct.getLegislation());
 
         List<RequirementGroup> rgList = tct.getTenderingCriterionPropertyGroup().stream()
-                .map(t -> extractRequirementGroup(t, responseType))
+                .map(t -> extractRequirementGroup(t))
                 .collect(Collectors.toList());
 
         SelectableCriterion selCr = new SelectableCriterion(id, typeCode, name, desc, lr, rgList);
@@ -363,11 +362,11 @@ public interface ModelExtractor {
         return selCr;
     }
 
-    default SelectableCriterion extractSelectableCriterion(TenderingCriterionType tct, QualificationApplicationResponseType responseType) {
-        return extractSelectableCriterion(tct, true, responseType);
+    default SelectableCriterion extractSelectableCriterion(TenderingCriterionType tct) {
+        return extractSelectableCriterion(tct, true);
     }
 
-    default RequirementGroup extractRequirementGroup(TenderingCriterionPropertyGroupType rgType, QualificationApplicationResponseType responseType) {
+    default RequirementGroup extractRequirementGroup(TenderingCriterionPropertyGroupType rgType) {
 
         RequirementGroup rg = null;
         if (rgType.getID() != null) {
@@ -380,10 +379,10 @@ public interface ModelExtractor {
 
         if (rg != null) {
             List<Requirement> rList = rgType.getTenderingCriterionProperty().stream()
-                    .map(r -> extractRequirement(r, responseType))
+                    .map(r -> extractRequirement(r))
                     .collect(Collectors.toList());
             List<RequirementGroup> childRg = rgType.getSubsidiaryTenderingCriterionPropertyGroup().stream()
-                    .map(t -> extractRequirementGroup(t, responseType))
+                    .map(t -> extractRequirementGroup(t))
                     .collect(Collectors.toList());
             rg.setRequirements(rList);
             rg.setRequirementGroups(childRg);
@@ -500,7 +499,7 @@ public interface ModelExtractor {
         return lr;
     }
 
-    default Requirement extractRequirement(TenderingCriterionPropertyType pt, QualificationApplicationResponseType responseType) {
+    default Requirement extractRequirement(TenderingCriterionPropertyType pt) {
         String theId = null;
         if (pt.getID() != null) {
             theId = pt.getID().getValue();

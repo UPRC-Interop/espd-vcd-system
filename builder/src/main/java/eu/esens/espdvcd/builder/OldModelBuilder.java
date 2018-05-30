@@ -315,7 +315,6 @@ public class OldModelBuilder implements ModelBuilder {
             ESPDRequestType reqType = readRegulatedESPDRequestFromStream(bis);
             // Create the Model Object
             req = ModelFactory.ESPD_REQUEST.extractESPDRequest(reqType);
-
             return req;
 
         } catch (IOException | JAXBException ex) {

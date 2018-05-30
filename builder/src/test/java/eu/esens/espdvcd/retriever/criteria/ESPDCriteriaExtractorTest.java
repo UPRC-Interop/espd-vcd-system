@@ -59,6 +59,7 @@ public class ESPDCriteriaExtractorTest {
         
         ESPDRequestType reqType = JAXB.unmarshal(ESPDCriteriaExtractorTest.class.getResourceAsStream("/espd-request.xml"),ESPDRequestType.class);
         
+        // ESPDRequest req = ModelFactory.ESPD_REQUEST.extractESPDRequest(reqType);
         ESPDRequest req = ModelFactory.ESPD_REQUEST.extractESPDRequest(reqType);
         
         ESPDRequestType req2Type = SchemaFactory.ESPD_REQUEST.extractESPDRequestType(req);

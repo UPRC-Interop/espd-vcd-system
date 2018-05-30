@@ -35,7 +35,7 @@ public class ESPDRequestModelExtractor implements ModelExtractor {
         RegulatedESPDRequest req = new RegulatedESPDRequest();
 
         req.getFullCriterionList().addAll(reqType.getTenderingCriterion().stream()
-                .map(c -> extractSelectableCriterion(c, null))
+                .map(c -> extractSelectableCriterion(c))
                 .collect(Collectors.toList()));
         req.setCADetails(extractCADetails(reqType.getContractingParty(),
                 reqType.getContractFolderID(),

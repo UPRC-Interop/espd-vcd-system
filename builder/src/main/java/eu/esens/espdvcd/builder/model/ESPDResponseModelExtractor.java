@@ -3,6 +3,7 @@ package eu.esens.espdvcd.builder.model;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.model.requirement.Requirement;
+import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.response.*;
 import grow.names.specification.ubl.schema.xsd.espd_commonaggregatecomponents_1.EconomicOperatorPartyType;
 import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
@@ -11,7 +12,6 @@ import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.Re
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.DocumentReferenceType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PersonType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ProcurementProjectLotType;
-import test.x.ubl.pre_award.commonaggregate.TenderingCriterionPropertyType;
 import test.x.ubl.pre_award.commonaggregate.TenderingCriterionResponseType;
 import test.x.ubl.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
 
@@ -66,8 +66,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                                 equals("ESPD_REQUEST")).findFirst();
                 optRef.ifPresent(documentReferenceType -> res.setESPDRequestDetails(extractESPDRequestDetails(documentReferenceType)));
             }
-        }
-        else {
+        } else {
             // else an ESPD request is assumed
             res.setESPDRequestDetails(extractESPDRequestDetails(resType));
         }
@@ -78,21 +77,21 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
 
     public ESPDResponse extractESPDResponse(QualificationApplicationResponseType responseType) {
 
-        RegulatedESPDResponse res = new RegulatedESPDResponse();
+        RegulatedESPDResponse regulatedResponse = new RegulatedESPDResponse();
 
-        res.getFullCriterionList().addAll(responseType.getTenderingCriterion().stream()
-                .map(c -> extractSelectableCriterion(c, responseType))
+        regulatedResponse.getFullCriterionList().addAll(responseType.getTenderingCriterion().stream()
+                .map(c -> extractSelectableCriterion(c))
                 .collect(Collectors.toList()));
 
-        res.setCADetails(extractCADetails(responseType.getContractingParty(),
+        regulatedResponse.setCADetails(extractCADetails(responseType.getContractingParty(),
                 responseType.getContractFolderID(),
                 responseType.getAdditionalDocumentReference()));
 
-        res.setServiceProviderDetails(extractServiceProviderDetails(responseType.getContractingParty()));
+        regulatedResponse.setServiceProviderDetails(extractServiceProviderDetails(responseType.getContractingParty()));
 
         if (!responseType.getEconomicOperatorParty().isEmpty()) {
             // FIXME we assure 1 here
-            res.setEODetails(extractEODetails(responseType.getEconomicOperatorParty().get(0), responseType.getProcurementProjectLot().get(0)));
+            regulatedResponse.setEODetails(extractEODetails(responseType.getEconomicOperatorParty().get(0), responseType.getProcurementProjectLot().get(0)));
         } else {
             EODetails eod = new EODetails();
             eod.setContactingDetails(new ContactingDetails());
@@ -104,8 +103,11 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
             np.setContactDetails(new ContactingDetails());
 
             eod.getNaturalPersons().add(np);
-            res.setEODetails(eod);
+            regulatedResponse.setEODetails(eod);
         }
+
+        regulatedResponse.getFullCriterionList().forEach(sc -> sc.getRequirementGroups()
+                .forEach(rqGroup -> applyAllResponse(responseType, rqGroup)));
 
         if (responseType.getCustomizationID().getValue().equals("urn:www.cenbii.eu:transaction:biitrdm070:ver3.0")) {
             // ESPD response detected (by checking the customization id)
@@ -116,21 +118,40 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 Optional<test.x.ubl.pre_award.commonaggregate.DocumentReferenceType> optRef = responseType.getAdditionalDocumentReference().stream().
                         filter(r -> r.getDocumentTypeCode() != null && r.getDocumentTypeCode().getValue().
                                 equals("ESPD_REQUEST")).findFirst();
-                optRef.ifPresent(documentReferenceType -> res.setESPDRequestDetails(extractESPDRequestDetails(documentReferenceType)));
+                optRef.ifPresent(documentReferenceType -> regulatedResponse.setESPDRequestDetails(extractESPDRequestDetails(documentReferenceType)));
+            }
+        } else {
+            // else an ESPD request is assumed
+            regulatedResponse.setESPDRequestDetails(extractESPDRequestDetails(responseType));
+        }
+
+        return regulatedResponse;
+    }
+
+
+    private void applyAllResponse(QualificationApplicationResponseType responseType, RequirementGroup requirementGroup) {
+
+        for (Requirement rq : requirementGroup.getRequirements()) { //  loop through all requirements
+            boolean isFound = false;
+
+            for (TenderingCriterionResponseType res : responseType.getTenderingCriterionResponse()) { //  loop through all responses
+
+                if (rq.getID().equals(res.getValidatedCriterionPropertyID().getValue())) {
+                    rq.setResponse(extractResponse(res, rq.getResponseDataType()));
+                    isFound = true;
+                    break;
+                }
+            }
+
+            if (!isFound) {
+                rq.setResponse(ResponseFactory.createResponse(rq.getResponseDataType()));
             }
         }
-        else {
-            // else an ESPD request is assumed
-            res.setESPDRequestDetails(extractESPDRequestDetails(responseType));
-        }
 
-
-        return res;
-
+        requirementGroup.getRequirementGroups().forEach(rqGroup -> applyAllResponse(responseType, rqGroup));
     }
 
     /**
-     *
      * @param rt The JAXB RequirementType class to be extracted
      * @return The Extracted @Requirement
      */
@@ -141,19 +162,6 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
 
         if (!rt.getResponse().isEmpty()) {
             r.setResponse(extractResponse(rt.getResponse().get(0), ResponseTypeEnum.valueOf(rt.getResponseDataType())));
-        } else {
-            r.setResponse(ResponseFactory.createResponse(r.getResponseDataType()));
-        }
-        return r;
-    }
-
-    @Override
-    public Requirement extractRequirement(TenderingCriterionPropertyType pt, QualificationApplicationResponseType responseType) {
-
-        Requirement r = ModelExtractor.super.extractRequirement(pt, responseType);
-
-        if (!responseType.getTenderingCriterionResponse().isEmpty()) {
-            r.setResponse(extractResponse(responseType.getTenderingCriterionResponse().get(0), ResponseTypeEnum.valueOf(pt.getValueDataTypeCode().getValue())));
         } else {
             r.setResponse(ResponseFactory.createResponse(r.getResponseDataType()));
         }
@@ -271,14 +279,14 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
 
     /**
      * Extract the evidence uri response.
-     *
+     * <p>
      * UL 2017-05-04
      *
      * @param res
      * @return
      */
     protected Response extractEvidenceURLResponse(ResponseType res) {
-         EvidenceURLResponse eResp = new EvidenceURLResponse();
+        EvidenceURLResponse eResp = new EvidenceURLResponse();
 
         if (!res.getEvidence().isEmpty()
                 && !res.getEvidence().get(0).getEvidenceDocumentReference().isEmpty()
@@ -466,7 +474,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
             eoDetails.setNaturalPersons(new ArrayList<>());
             eoDetails.getNaturalPersons().add(new NaturalPerson());
         }
-        
+
         // Procurement Project Lot
         if (pplt != null && pplt.getID() != null) {
             eoDetails.setProcurementProjectLot(pplt.getID().getValue());
@@ -570,69 +578,69 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
 
 
 
-                        /* in ESPD the only look for the person in agent party in power of attorney */
-                        if (eop.getParty().getPowerOfAttorney().get(0).getAgentParty() != null
-                                && !eop.getParty().getPowerOfAttorney().get(0).getAgentParty().getPerson().isEmpty()) {
-                            test.x.ubl.pre_award.commonaggregate.PersonType pt = eop.getParty().getPowerOfAttorney().get(0).getAgentParty().getPerson().get(0);
+                    /* in ESPD the only look for the person in agent party in power of attorney */
+                    if (eop.getParty().getPowerOfAttorney().get(0).getAgentParty() != null
+                            && !eop.getParty().getPowerOfAttorney().get(0).getAgentParty().getPerson().isEmpty()) {
+                        test.x.ubl.pre_award.commonaggregate.PersonType pt = eop.getParty().getPowerOfAttorney().get(0).getAgentParty().getPerson().get(0);
 
-                            if (pt.getFirstName() != null) {
-                                np.setFirstName(pt.getFirstName().getValue());
-                            }
-
-                            if (pt.getFamilyName() != null) {
-                                np.setFamilyName(pt.getFamilyName().getValue());
-                            }
-
-                            if (pt.getBirthplaceName() != null) {
-                                np.setBirthPlace(pt.getBirthplaceName().getValue());
-                            }
-
-                            if (pt.getBirthDate() != null) {
-                                np.setBirthDate(pt.getBirthDate().getValue());
-                            }
-
-                            if (pt.getContact() != null) {
-                                ContactingDetails cd = new ContactingDetails();
-
-                                if (pt.getContact().getElectronicMail() != null) {
-                                    cd.setEmailAddress(pt.getContact().getElectronicMail().getValue());
-                                }
-
-                                if (pt.getContact().getTelephone() != null) {
-                                    cd.setTelephoneNumber(pt.getContact().getTelephone().getValue());
-                                }
-                                np.setContactDetails(cd);
-                            }
-
-                            if (pt.getResidenceAddress() != null) {
-
-                                PostalAddress pa = new PostalAddress();
-
-                                // read post code from cbc:PostalZone...
-                                if (pt.getResidenceAddress().getPostalZone() != null) {
-                                    pa.setPostCode(pt.getResidenceAddress().getPostalZone().getValue());
-                                }
-                                // ...if not available, try cbc:Postbox (for backwards compatibility)
-                                else if (pt.getResidenceAddress().getPostbox() != null) {
-                                    pa.setPostCode(pt.getResidenceAddress().getPostbox().getValue());
-                                }
-
-                                if (pt.getResidenceAddress().getCityName() != null) {
-                                    pa.setCity(pt.getResidenceAddress().getCityName().getValue());
-                                }
-
-                                if (pt.getResidenceAddress().getStreetName() != null) {
-                                    pa.setAddressLine1(pt.getResidenceAddress().getStreetName().getValue());
-                                }
-
-                                if (pt.getResidenceAddress().getCountry() != null
-                                        && pt.getResidenceAddress().getCountry().getIdentificationCode() != null) {
-                                    pa.setCountryCode(pt.getResidenceAddress().getCountry().getIdentificationCode().getValue());
-                                }
-
-                                np.setPostalAddress(pa);
-                            }
+                        if (pt.getFirstName() != null) {
+                            np.setFirstName(pt.getFirstName().getValue());
                         }
+
+                        if (pt.getFamilyName() != null) {
+                            np.setFamilyName(pt.getFamilyName().getValue());
+                        }
+
+                        if (pt.getBirthplaceName() != null) {
+                            np.setBirthPlace(pt.getBirthplaceName().getValue());
+                        }
+
+                        if (pt.getBirthDate() != null) {
+                            np.setBirthDate(pt.getBirthDate().getValue());
+                        }
+
+                        if (pt.getContact() != null) {
+                            ContactingDetails cd = new ContactingDetails();
+
+                            if (pt.getContact().getElectronicMail() != null) {
+                                cd.setEmailAddress(pt.getContact().getElectronicMail().getValue());
+                            }
+
+                            if (pt.getContact().getTelephone() != null) {
+                                cd.setTelephoneNumber(pt.getContact().getTelephone().getValue());
+                            }
+                            np.setContactDetails(cd);
+                        }
+
+                        if (pt.getResidenceAddress() != null) {
+
+                            PostalAddress pa = new PostalAddress();
+
+                            // read post code from cbc:PostalZone...
+                            if (pt.getResidenceAddress().getPostalZone() != null) {
+                                pa.setPostCode(pt.getResidenceAddress().getPostalZone().getValue());
+                            }
+                            // ...if not available, try cbc:Postbox (for backwards compatibility)
+                            else if (pt.getResidenceAddress().getPostbox() != null) {
+                                pa.setPostCode(pt.getResidenceAddress().getPostbox().getValue());
+                            }
+
+                            if (pt.getResidenceAddress().getCityName() != null) {
+                                pa.setCity(pt.getResidenceAddress().getCityName().getValue());
+                            }
+
+                            if (pt.getResidenceAddress().getStreetName() != null) {
+                                pa.setAddressLine1(pt.getResidenceAddress().getStreetName().getValue());
+                            }
+
+                            if (pt.getResidenceAddress().getCountry() != null
+                                    && pt.getResidenceAddress().getCountry().getIdentificationCode() != null) {
+                                pa.setCountryCode(pt.getResidenceAddress().getCountry().getIdentificationCode().getValue());
+                            }
+
+                            np.setPostalAddress(pa);
+                        }
+                    }
 
 
                     eoDetails.getNaturalPersons().add(np);
@@ -689,7 +697,8 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
      * @param drt
      * @return
      */
-    private ESPDRequestDetails extractESPDRequestDetails(test.x.ubl.pre_award.commonaggregate.DocumentReferenceType drt) {
+    private ESPDRequestDetails extractESPDRequestDetails(test.x.ubl.pre_award.commonaggregate.DocumentReferenceType
+                                                                 drt) {
         ESPDRequestDetails erd = new ESPDRequestDetails();
 
         if (drt.getID() != null) {

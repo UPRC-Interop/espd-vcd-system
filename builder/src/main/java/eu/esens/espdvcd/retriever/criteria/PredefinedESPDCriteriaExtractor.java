@@ -22,8 +22,7 @@ public class PredefinedESPDCriteriaExtractor implements CriteriaExtractor {
     private final List<TenderingCriterionType> criterionTypeList;
 
     private static final String ESPD_REQUEST_V1_REGULATED_RESOURCE = "/templates/v1_regulated/espd-request-2018.03.xml";
-    private static final String ESPD_REQUEST_V2_REGULATED_RESOURCE = "/templates/v2_regulated/REGULATED_ESPD-Request_2.0.2.xml";
-    private static final String ESPD_REQUEST_V2_SELF_CONTAINED_RESOURCE = "/templates/v2_self_contained/SELFCONTAINED_ESPD-Request.V2.0.2.xml";
+    private static final String ESPD_REQUEST_V2_REGULATED_RESOURCE = "/templates/v2_regulated/espd-request-v2_2018-05-30a.xml";
 
     public PredefinedESPDCriteriaExtractor() {
 //        ESPDRequestType requestTemplate = JAXB.unmarshal(CriteriaExtractor.class.getResourceAsStream(ESPD_REQUEST_V1_REGULATED_RESOURCE), ESPDRequestType.class);
@@ -36,7 +35,7 @@ public class PredefinedESPDCriteriaExtractor implements CriteriaExtractor {
     public List<SelectableCriterion> getFullList() {
         List<SelectableCriterion> lc =
                 criterionTypeList.stream()
-                        .map(c -> ModelFactory.ESPD_REQUEST.extractSelectableCriterion(c, null))
+                        .map(c -> ModelFactory.ESPD_REQUEST.extractSelectableCriterion(c))
                         .collect(Collectors.toList());
         return lc;
     }
@@ -54,7 +53,7 @@ public class PredefinedESPDCriteriaExtractor implements CriteriaExtractor {
         initialSet.addAll(initialList);
         Set<SelectableCriterion> fullSet =
                 criterionTypeList.stream()
-                        .map(c -> ModelFactory.ESPD_REQUEST.extractSelectableCriterion(c, addAsSelected, null))
+                        .map(c -> ModelFactory.ESPD_REQUEST.extractSelectableCriterion(c, addAsSelected))
                         .collect(Collectors.toSet());
         initialSet.addAll(fullSet);
         Logger.getLogger(PredefinedESPDCriteriaExtractor.class.getName()).log(Level.SEVERE, "Criterion List Size in model: " + initialSet.size());
