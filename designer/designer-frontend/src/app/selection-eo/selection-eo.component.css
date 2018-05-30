@@ -42,6 +42,7 @@ mat-expansion-panel-header.mat-expanded:active{
 
 button {
   margin-top:20px;
+  margin-right: 5px;
 }
 
 mat-card {
