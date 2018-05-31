@@ -17,7 +17,7 @@
        <div class="exclusionCriteria" >
 
          <div class="criteria">
-           <mat-checkbox name=exclusionACriteria[i] color="primary" checked="exclusionACriteria[i].selected" [(ngModel)]="exclusionACriteria[i].selected" disabled>{{criteria.name}}</mat-checkbox>
+           <mat-checkbox name=exclusionACriteria[i] color="primary" checked="exclusionACriteria[i].selected" [(ngModel)]="exclusionACriteria[i].selected" [disabled]="exclusionACriteria[i].selected">{{criteria.name}}</mat-checkbox>
            <div class="critDesc">{{criteria.description}}</div>
          </div>
 
@@ -41,11 +41,11 @@
       <div class="desc">
         <h4>Article {{exclusionBCriteria['0'].legislationReference.article}} of {{exclusionBCriteria['0'].legislationReference.title}} sets out the following reasons for exclusion</h4>
       </div>
-      <mat-card *ngFor="let criteria of exclusionBCriteria">
+      <mat-card *ngFor="let criteria of exclusionBCriteria; let i = index">
         <div class="exclusionCriteria" >
 
           <div class="criteria">
-            <mat-checkbox color="primary" checked="criteria.selected" disabled>{{criteria.name}}</mat-checkbox>
+            <mat-checkbox color="primary" checked="criteria.selected" [disabled]="exclusionBCriteria[i].selected">{{criteria.name}}</mat-checkbox>
             <div class="critDesc">{{criteria.description}}</div>
           </div>
 
@@ -69,10 +69,10 @@
       <div class="desc">
         <h4>Article {{exclusionCCriteria['0'].legislationReference.article}} of {{exclusionCCriteria['0'].legislationReference.title}} sets out the following reasons for exclusion</h4>
       </div>
-      <mat-card *ngFor="let criteria of exclusionCCriteria">
+      <mat-card *ngFor="let criteria of exclusionCCriteria; let i = index">
         <div class="exclusionCriteria" >
           <div class="criteria">
-            <mat-checkbox color="primary" checked="criteria.selected" disabled>{{criteria.name}}</mat-checkbox>
+            <mat-checkbox color="primary" checked="criteria.selected" [disabled]="exclusionCCriteria[i].selected">{{criteria.name}}</mat-checkbox>
             <div class="critDesc">{{criteria.description}}</div>
           </div>
           <div class="eCertis">
