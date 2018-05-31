@@ -3,7 +3,8 @@ package eu.esens.espdvcd.builder;
 import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.builder.model.ModelFactory;
 import eu.esens.espdvcd.model.ESPDResponse;
-import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
+import eu.espd.schema.v1.espdresponse_1.ESPDResponseType;
+//import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
 
 import java.io.IOException;
 import java.io.InputStream;

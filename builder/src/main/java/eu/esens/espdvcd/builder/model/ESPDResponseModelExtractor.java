@@ -5,19 +5,28 @@ import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.response.*;
-import grow.names.specification.ubl.schema.xsd.espd_commonaggregatecomponents_1.EconomicOperatorPartyType;
-import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
-import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementType;
-import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.ResponseType;
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.DocumentReferenceType;
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PersonType;
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ProcurementProjectLotType;
-import test.x.ubl.pre_award.commonaggregate.TenderingCriterionResponseType;
-import test.x.ubl.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
+import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.RequirementType;
+import eu.espd.schema.v1.commonaggregatecomponents_2.DocumentReferenceType;
+import eu.espd.schema.v1.commonaggregatecomponents_2.PersonType;
+import eu.espd.schema.v1.commonaggregatecomponents_2.ProcurementProjectLotType;
+import eu.espd.schema.v1.espd_commonaggregatecomponents_1.EconomicOperatorPartyType;
+import eu.espd.schema.v1.espdresponse_1.ESPDResponseType;
+import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionResponseType;
+import eu.espd.schema.v2.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
 
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+//import grow.names.specification.ubl.schema.xsd.espd_commonaggregatecomponents_1.EconomicOperatorPartyType;
+//import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
+//import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementType;
+//import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.ResponseType;
+//import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.DocumentReferenceType;
+//import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PersonType;
+//import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ProcurementProjectLotType;
+//import test.x.ubl.pre_award.commonaggregate.TenderingCriterionResponseType;
+//import test.x.ubl.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
 
 public class ESPDResponseModelExtractor implements ModelExtractor {
 
@@ -61,7 +70,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
             if (resType.getAdditionalDocumentReference() != null && !resType.getAdditionalDocumentReference().isEmpty()) {
 
                 // Find an entry with ESPD_REQUEST Value
-                Optional<DocumentReferenceType> optRef = resType.getAdditionalDocumentReference().stream().
+                Optional<eu.espd.schema.v1.commonaggregatecomponents_2.DocumentReferenceType> optRef = resType.getAdditionalDocumentReference().stream().
                         filter(r -> r.getDocumentTypeCode() != null && r.getDocumentTypeCode().getValue().
                                 equals("ESPD_REQUEST")).findFirst();
                 optRef.ifPresent(documentReferenceType -> res.setESPDRequestDetails(extractESPDRequestDetails(documentReferenceType)));
@@ -115,7 +124,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
             if (responseType.getAdditionalDocumentReference() != null && !responseType.getAdditionalDocumentReference().isEmpty()) {
 
                 // Find an entry with ESPD_REQUEST Value
-                Optional<test.x.ubl.pre_award.commonaggregate.DocumentReferenceType> optRef = responseType.getAdditionalDocumentReference().stream().
+                Optional<eu.espd.schema.v2.pre_award.commonaggregate.DocumentReferenceType> optRef = responseType.getAdditionalDocumentReference().stream().
                         filter(r -> r.getDocumentTypeCode() != null && r.getDocumentTypeCode().getValue().
                                 equals("ESPD_REQUEST")).findFirst();
                 optRef.ifPresent(documentReferenceType -> regulatedResponse.setESPDRequestDetails(extractESPDRequestDetails(documentReferenceType)));
@@ -178,7 +187,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
 
     }
 
-    public Response extractResponse(ResponseType res, ResponseTypeEnum theType) {
+    public Response extractResponse(eu.espd.schema.v1.ccv_commonaggregatecomponents_1.ResponseType res, ResponseTypeEnum theType) {
 
         switch (theType) {
 
@@ -285,7 +294,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
      * @param res
      * @return
      */
-    protected Response extractEvidenceURLResponse(ResponseType res) {
+    protected Response extractEvidenceURLResponse(eu.espd.schema.v1.ccv_commonaggregatecomponents_1.ResponseType res) {
         EvidenceURLResponse eResp = new EvidenceURLResponse();
 
         if (!res.getEvidence().isEmpty()
@@ -483,8 +492,8 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
         return eoDetails;
     }
 
-    public EODetails extractEODetails(test.x.ubl.pre_award.commonaggregate.EconomicOperatorPartyType eop,
-                                      test.x.ubl.pre_award.commonaggregate.ProcurementProjectLotType pplt) {
+    public EODetails extractEODetails(eu.espd.schema.v2.pre_award.commonaggregate.EconomicOperatorPartyType eop,
+                                      eu.espd.schema.v2.pre_award.commonaggregate.ProcurementProjectLotType pplt) {
 
         final EODetails eoDetails = new EODetails();
 
@@ -581,7 +590,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                     /* in ESPD the only look for the person in agent party in power of attorney */
                     if (eop.getParty().getPowerOfAttorney().get(0).getAgentParty() != null
                             && !eop.getParty().getPowerOfAttorney().get(0).getAgentParty().getPerson().isEmpty()) {
-                        test.x.ubl.pre_award.commonaggregate.PersonType pt = eop.getParty().getPowerOfAttorney().get(0).getAgentParty().getPerson().get(0);
+                        eu.espd.schema.v2.pre_award.commonaggregate.PersonType pt = eop.getParty().getPowerOfAttorney().get(0).getAgentParty().getPerson().get(0);
 
                         if (pt.getFirstName() != null) {
                             np.setFirstName(pt.getFirstName().getValue());
@@ -697,8 +706,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
      * @param drt
      * @return
      */
-    private ESPDRequestDetails extractESPDRequestDetails(test.x.ubl.pre_award.commonaggregate.DocumentReferenceType
-                                                                 drt) {
+    private ESPDRequestDetails extractESPDRequestDetails(eu.espd.schema.v2.pre_award.commonaggregate.DocumentReferenceType drt) {
         ESPDRequestDetails erd = new ESPDRequestDetails();
 
         if (drt.getID() != null) {

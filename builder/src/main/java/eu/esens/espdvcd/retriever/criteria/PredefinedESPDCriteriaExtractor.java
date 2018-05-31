@@ -2,10 +2,12 @@ package eu.esens.espdvcd.retriever.criteria;
 
 import eu.esens.espdvcd.builder.model.ModelFactory;
 import eu.esens.espdvcd.model.SelectableCriterion;
-import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
-import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.CriterionType;
-import test.x.ubl.pre_award.commonaggregate.TenderingCriterionType;
-import test.x.ubl.pre_award.qualificationapplicationrequest.QualificationApplicationRequestType;
+import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionType;
+import eu.espd.schema.v2.pre_award.qualificationapplicationrequest.QualificationApplicationRequestType;
+//import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
+//import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.CriterionType;
+//import test.x.ubl.pre_award.commonaggregate.TenderingCriterionType;
+//import test.x.ubl.pre_award.qualificationapplicationrequest.QualificationApplicationRequestType;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;

@@ -4,20 +4,17 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.esens.espdvcd.model.SelectableCriterion;
+import eu.esens.espdvcd.model.retriever.ECertisCriterion;
 import eu.esens.espdvcd.model.retriever.ECertisEvidenceGroup;
-import eu.esens.espdvcd.retriever.criteria.ECertisCriteriaExtractor;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
-
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import eu.esens.espdvcd.model.retriever.ECertisCriterion;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
 
@@ -40,6 +37,7 @@ public class ECertisCriteriaDataRetrieverTest {
      * @throws JsonProcessingException
      * @throws RetrieverException
      */
+    @Ignore
     @Test
     public void testCriteriaForNoLegislationReferenceOrNoJurisdictionLevelCode()
             throws JsonProcessingException, RetrieverException {

@@ -1,7 +1,5 @@
 package eu.esens.espdvcd.model;
 
-import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
-
 import java.io.Serializable;
 import java.net.URL;
 import java.util.List;
@@ -24,15 +22,6 @@ public interface ESPDResponse extends ESPDRequest,Serializable {
      * Object.
      */
     void setEODetails(EODetails eoDetails);
-    /**
-     * @return The {@link ESPDResponseType} of the {@link ESPDResponse}.
-     */
-    ESPDResponseType getEspdResponseType();
-
-    /**
-     * @param espdResponseType
-     */
-    void setEspdResponseType(ESPDResponseType espdResponseType);
 
     /**
      * @return list of {@link URL} of the {@link ESPDResponse}.

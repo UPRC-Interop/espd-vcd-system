@@ -7,8 +7,11 @@ import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
 import eu.esens.espdvcd.retriever.criteria.PredefinedESPDCriteriaExtractor;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import eu.esens.espdvcd.schema.SchemaUtil;
-import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
-import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
+import eu.esens.espdvcd.schema.SchemaVersion;
+import eu.espd.schema.v1.espdrequest_1.ESPDRequestType;
+import eu.espd.schema.v1.espdresponse_1.ESPDResponseType;
+//import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
+//import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.transform.stream.StreamSource;
@@ -275,7 +278,7 @@ public class OldModelBuilder implements ModelBuilder {
 
             // Start with the convenience methods provided by JAXB. If there are
             // performance issues we will switch back to the JAXB API Usage
-            return SchemaUtil.getUnmarshaller().unmarshal(new StreamSource(is), ESPDRequestType.class).getValue();
+            return SchemaUtil.getUnmarshaller(SchemaVersion.V1).unmarshal(new StreamSource(is), ESPDRequestType.class).getValue();
 
     }
 
@@ -291,7 +294,7 @@ public class OldModelBuilder implements ModelBuilder {
         try {
             // Start with the convenience methods provided by JAXB. If there are
             // performance issues we will switch back to the JAXB API Usage
-            return SchemaUtil.getUnmarshaller().unmarshal(new StreamSource(is), ESPDResponseType.class).getValue();
+            return SchemaUtil.getUnmarshaller(SchemaVersion.V1).unmarshal(new StreamSource(is), ESPDResponseType.class).getValue();
         } catch (JAXBException ex) {
             Logger.getLogger(OldModelBuilder.class.getName()).log(Level.SEVERE, null, ex);
             return null;

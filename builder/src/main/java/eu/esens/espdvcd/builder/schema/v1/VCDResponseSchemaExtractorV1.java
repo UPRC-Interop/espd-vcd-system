@@ -1,14 +1,13 @@
 package eu.esens.espdvcd.builder.schema.v1;
 
 import eu.esens.espdvcd.builder.EvidenceHelper;
-import eu.esens.espdvcd.builder.schema.VCDResponseSchemaExtractor;
 import eu.esens.espdvcd.model.EvidenceIssuerDetails;
 import eu.esens.espdvcd.model.requirement.response.Response;
 import eu.esens.espdvcd.model.requirement.response.evidence.VCDEvidenceResponse;
-import isa.names.specification.ubl.schema.xsd.cev_commonaggregatecomponents_1.EvidenceType;
-import isa.names.specification.ubl.schema.xsd.cev_commonbasiccomponents_1.IndicatorType;
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.*;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.*;
+import eu.espd.schema.v1.cev_commonaggregatecomponents_1.EvidenceType;
+import eu.espd.schema.v1.cev_commonbasiccomponents_1.IndicatorType;
+import eu.espd.schema.v1.commonaggregatecomponents_2.*;
+import eu.espd.schema.v1.commonbasiccomponents_2.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,6 +16,11 @@ import javax.xml.datatype.DatatypeConstants;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.util.UUID;
+
+//import isa.names.specification.ubl.schema.xsd.cev_commonaggregatecomponents_1.EvidenceType;
+//import isa.names.specification.ubl.schema.xsd.cev_commonbasiccomponents_1.IndicatorType;
+//import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.*;
+//import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.*;
 
 public class VCDResponseSchemaExtractorV1 extends ESPDResponseSchemaExtractorV1 {
 
