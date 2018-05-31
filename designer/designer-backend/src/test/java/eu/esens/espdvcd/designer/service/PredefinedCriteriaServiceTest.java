@@ -13,16 +13,16 @@ public class PredefinedCriteriaServiceTest {
     CriteriaService predefinedCriteriaService = new PredefinedCriteriaService();
 
     @Test
-    public void getCriteria() throws Exception{
+    public void getCriteria() throws Exception {
         System.out.println(predefinedCriteriaService.getCriteria().size());
     }
 
     @Test
-    public void getUnselectedCriteria() throws Exception{
+    public void getUnselectedCriteria() throws Exception {
         List<SelectableCriterion> theList = predefinedCriteriaService.getCriteria();
         theList.remove(30);
         List<SelectableCriterion> theListWithMissing30 = predefinedCriteriaService.getUnselectedCriteria(theList);
-        Assert.assertFalse(theListWithMissing30.get(60).isSelected());
+        Assert.assertFalse(theListWithMissing30.get(theListWithMissing30.size() - 1).isSelected());
         System.out.println(theListWithMissing30.size());
     }
 
