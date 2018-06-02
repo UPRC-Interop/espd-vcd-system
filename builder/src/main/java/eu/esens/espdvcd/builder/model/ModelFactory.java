@@ -3,8 +3,8 @@ package eu.esens.espdvcd.builder.model;
 
 public class ModelFactory {
 
-    public static final ESPDRequestModelExtractor ESPD_REQUEST = new ESPDRequestModelExtractor();
-    public static final ESPDResponseModelExtractor ESPD_RESPONSE = new ESPDResponseModelExtractor();
-    public static final VCDResponseModelExtractor VCD_RESPONSE = new VCDResponseModelExtractor();
+      public static final ESPDRequestModelExtractor ESPD_REQUEST = new ESPDRequestModelExtractor();
+      public static final ESPDResponseModelExtractor ESPD_RESPONSE = new ESPDResponseModelExtractor();
+      public static final VCDResponseModelExtractor VCD_RESPONSE = new VCDResponseModelExtractor();
 
 }

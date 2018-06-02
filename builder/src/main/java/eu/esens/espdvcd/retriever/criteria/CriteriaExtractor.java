@@ -9,7 +9,7 @@ public interface CriteriaExtractor {
     
     /**
      * 
-     * @return The full criteria list with all the criteria unselected
+     * @return The full criteria list with all the criteria selected
      * @throws eu.esens.espdvcd.retriever.exception.RetrieverException
      */
     List<SelectableCriterion> getFullList()

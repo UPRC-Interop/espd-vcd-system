@@ -6,15 +6,22 @@ import eu.esens.espdvcd.model.ESPDRequestDetails;
 import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.response.*;
-import grow.names.specification.ubl.schema.xsd.espd_commonaggregatecomponents_1.EconomicOperatorPartyType;
-import grow.names.specification.ubl.schema.xsd.espd_commonaggregatecomponents_1.NaturalPersonType;
-import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
-import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementType;
-import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.ResponseType;
-import isa.names.specification.ubl.schema.xsd.ccv_commonbasiccomponents_1.IndicatorType;
-import isa.names.specification.ubl.schema.xsd.cev_commonaggregatecomponents_1.EvidenceType;
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.*;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.*;
+//import grow.names.specification.ubl.schema.xsd.espd_commonaggregatecomponents_1.EconomicOperatorPartyType;
+//import grow.names.specification.ubl.schema.xsd.espd_commonaggregatecomponents_1.NaturalPersonType;
+//import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
+//import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementType;
+//import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.ResponseType;
+//import isa.names.specification.ubl.schema.xsd.ccv_commonbasiccomponents_1.IndicatorType;
+//import isa.names.specification.ubl.schema.xsd.cev_commonaggregatecomponents_1.EvidenceType;
+//import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.*;
+//import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.*;
+import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.RequirementType;
+import eu.espd.schema.v1.ccv_commonbasiccomponents_1.IndicatorType;
+import eu.espd.schema.v1.commonaggregatecomponents_2.*;
+import eu.espd.schema.v1.commonbasiccomponents_2.*;
+import eu.espd.schema.v1.espd_commonaggregatecomponents_1.EconomicOperatorPartyType;
+import eu.espd.schema.v1.espd_commonaggregatecomponents_1.NaturalPersonType;
+import eu.espd.schema.v1.espdresponse_1.ESPDResponseType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -82,7 +89,7 @@ public class ESPDResponseSchemaExtractorV1 implements SchemaExtractorV1 {
         }
 
         EconomicOperatorPartyType eopt = new EconomicOperatorPartyType();
-        eopt.setSMEIndicator(new grow.names.specification.ubl.schema.xsd.espd_commonbasiccomponents_1.IndicatorType());
+        eopt.setSMEIndicator(new eu.espd.schema.v1.espd_commonbasiccomponents_1.IndicatorType());
         eopt.getSMEIndicator().setValue(eod.isSmeIndicator());
 
         eopt.setParty(new PartyType());
@@ -245,9 +252,9 @@ public class ESPDResponseSchemaExtractorV1 implements SchemaExtractorV1 {
         return req;
     }
 
-    private isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.ResponseType extractResponse(Response response, ResponseTypeEnum respType) {
+    private eu.espd.schema.v1.ccv_commonaggregatecomponents_1.ResponseType extractResponse(Response response, ResponseTypeEnum respType) {
 
-        isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.ResponseType rType = new ResponseType();
+        eu.espd.schema.v1.ccv_commonaggregatecomponents_1.ResponseType rType = new eu.espd.schema.v1.ccv_commonaggregatecomponents_1.ResponseType();
         if (response == null) {
             return rType;
         }
@@ -354,7 +361,7 @@ public class ESPDResponseSchemaExtractorV1 implements SchemaExtractorV1 {
                 return rType;
 
             case EVIDENCE_URL:
-                isa.names.specification.ubl.schema.xsd.cev_commonaggregatecomponents_1.EvidenceType evType = extractEvidenceURLResponse(response);
+                eu.espd.schema.v1.cev_commonaggregatecomponents_1.EvidenceType evType = extractEvidenceURLResponse(response);
                 if (evType != null) {
                     rType.getEvidence().add(evType);
                 }
@@ -378,9 +385,9 @@ public class ESPDResponseSchemaExtractorV1 implements SchemaExtractorV1 {
 
     }
 
-    protected isa.names.specification.ubl.schema.xsd.cev_commonaggregatecomponents_1.EvidenceType extractEvidenceURLResponse(Response response) {
+    protected eu.espd.schema.v1.cev_commonaggregatecomponents_1.EvidenceType extractEvidenceURLResponse(Response response) {
         if (((EvidenceURLResponse) response).getEvidenceURL() != null) {
-            isa.names.specification.ubl.schema.xsd.cev_commonaggregatecomponents_1.EvidenceType evType = new EvidenceType();
+            eu.espd.schema.v1.cev_commonaggregatecomponents_1.EvidenceType evType = new eu.espd.schema.v1.cev_commonaggregatecomponents_1.EvidenceType();
             DocumentReferenceType drt = new DocumentReferenceType();
             drt.setID(new IDType());
             drt.getID().setSchemeAgencyID("EU-COM-GROW");

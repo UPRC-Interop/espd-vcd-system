@@ -7,10 +7,15 @@ import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
 import eu.esens.espdvcd.retriever.criteria.PredefinedESPDCriteriaExtractor;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import eu.esens.espdvcd.schema.SchemaUtil;
-import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
-import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
-import test.x.ubl.pre_award.qualificationapplicationrequest.QualificationApplicationRequestType;
-import test.x.ubl.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
+import eu.esens.espdvcd.schema.SchemaVersion;
+import eu.espd.schema.v1.espdrequest_1.ESPDRequestType;
+import eu.espd.schema.v1.espdresponse_1.ESPDResponseType;
+import eu.espd.schema.v2.pre_award.qualificationapplicationrequest.QualificationApplicationRequestType;
+import eu.espd.schema.v2.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
+//import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
+//import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
+//import test.x.ubl.pre_award.qualificationapplicationrequest.QualificationApplicationRequestType;
+//import test.x.ubl.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.transform.stream.StreamSource;
@@ -294,25 +299,25 @@ public class RegulatedModelBuilder implements ModelBuilder {
     private QualificationApplicationRequestType readQualificationApplicationRequestFromStream(InputStream is) throws JAXBException {
         // Start with the convenience methods provided by JAXB. If there are
         // performance issues we will switch back to the JAXB API Usage
-        return SchemaUtil.getUnmarshaller().unmarshal(new StreamSource(is), QualificationApplicationRequestType.class).getValue();
+        return SchemaUtil.getUnmarshaller(SchemaVersion.V2).unmarshal(new StreamSource(is), QualificationApplicationRequestType.class).getValue();
     }
 
     protected QualificationApplicationResponseType readQualificationApplicationResponseFromStream(InputStream is) throws JAXBException {
         // Start with the convenience methods provided by JAXB. If there are
         // performance issues we will switch back to the JAXB API Usage
-        return SchemaUtil.getUnmarshaller().unmarshal(new StreamSource(is), QualificationApplicationResponseType.class).getValue();
+        return SchemaUtil.getUnmarshaller(SchemaVersion.V2).unmarshal(new StreamSource(is), QualificationApplicationResponseType.class).getValue();
     }
 
     private ESPDRequestType readESPDRequestFromStream(InputStream is) throws JAXBException {
         // Start with the convenience methods provided by JAXB. If there are
         // performance issues we will switch back to the JAXB API Usage
-        return SchemaUtil.getUnmarshaller().unmarshal(new StreamSource(is), ESPDRequestType.class).getValue();
+        return SchemaUtil.getUnmarshaller(SchemaVersion.V1).unmarshal(new StreamSource(is), ESPDRequestType.class).getValue();
     }
 
     protected ESPDResponseType readESPDResponseFromStream(InputStream is) throws JAXBException {
         // Start with the convenience methods provided by JAXB. If there are
         // performance issues we will switch back to the JAXB API Usage
-        return SchemaUtil.getUnmarshaller().unmarshal(new StreamSource(is), ESPDResponseType.class).getValue();
+        return SchemaUtil.getUnmarshaller(SchemaVersion.V1).unmarshal(new StreamSource(is), ESPDResponseType.class).getValue();
     }
 
     private void handleNullCriteriaExtractor(ESPDRequest req) {

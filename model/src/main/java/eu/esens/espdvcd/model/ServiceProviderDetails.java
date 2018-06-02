@@ -61,6 +61,19 @@ public class ServiceProviderDetails {
      */
     private String websiteURI;
 
+    /**
+     * Postal address
+     * <p>
+     * Address information.
+     * <p>
+     * Data type: <br>
+     * Cardinality: 1..1<br>
+     * InfReqID: <br>
+     * BusReqID: <br>
+     * UBL syntax path: cac:ServiceProviderParty.Party.PostalAddress.<br>
+     */
+    private PostalAddress postalAddress;
+
 
     public String getName() {
         return name;
@@ -92,5 +105,13 @@ public class ServiceProviderDetails {
 
     public void setWebsiteURI(String websiteURI) {
         this.websiteURI = websiteURI;
+    }
+
+    public PostalAddress getPostalAddress() {
+        return postalAddress;
+    }
+
+    public void setPostalAddress(PostalAddress postalAddress) {
+        this.postalAddress = postalAddress;
     }
 }

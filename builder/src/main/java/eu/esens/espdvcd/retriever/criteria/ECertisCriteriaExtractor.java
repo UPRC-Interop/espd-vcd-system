@@ -242,7 +242,7 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
      * @return
      */
     private void applyECertisData(final SelectableCriterion sc) {
-        applyECertisDataAsSelected(sc, false);
+        applyECertisDataAsSelected(sc, true);
     }
 
     /**

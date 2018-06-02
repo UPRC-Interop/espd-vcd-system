@@ -72,6 +72,7 @@ public class ESPDEndpoint extends Endpoint {
 
     private Object postRequest(Request rq, Response rsp) throws IOException, ServletException, JAXBException, SAXException {
         if (rq.contentType().contains("application/json")) {
+            LOGGER.info(rq.body());
             Object document = null;
             try {
                 switch (artefactType) {

@@ -3,7 +3,8 @@ package eu.esens.espdvcd.builder.model;
 import eu.esens.espdvcd.model.requirement.response.Response;
 import eu.esens.espdvcd.model.EvidenceIssuerDetails;
 import eu.esens.espdvcd.model.requirement.response.evidence.VCDEvidenceResponse;
-import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.ResponseType;
+import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.ResponseType;
+//import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.ResponseType;
 
 /**
  * Created by Ulf Lotzmann on 04/05/2017.

@@ -1,8 +1,5 @@
 package eu.esens.espdvcd.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
-
 import java.net.URL;
 import java.util.List;
 
@@ -29,18 +26,6 @@ public class RegulatedESPDResponse extends RegulatedESPDRequest implements ESPDR
     @Override
     public List<URL> getExternalDocuments() {
         return null;
-    }
-
-    @JsonIgnore
-    @Override
-    public ESPDResponseType getEspdResponseType() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @JsonIgnore
-    @Override
-    public void setEspdResponseType(ESPDResponseType espdResponseType) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

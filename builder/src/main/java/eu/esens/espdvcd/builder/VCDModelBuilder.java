@@ -3,7 +3,8 @@ package eu.esens.espdvcd.builder;
 import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.builder.model.ModelFactory;
 import eu.esens.espdvcd.model.ESPDResponse;
-import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
+import eu.espd.schema.v1.espdresponse_1.ESPDResponseType;
+//import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,6 +21,7 @@ public class VCDModelBuilder extends OldModelBuilder {
             // Check and read the file in the JAXB Object
             ESPDResponseType resType = readRegulatedESPDResponseFromStream(bis);
             // Create the Model Object
+            // res = ModelFactory.VCD_RESPONSE.extractESPDResponse(resType);
             res = ModelFactory.VCD_RESPONSE.extractESPDResponse(resType);
         } catch (IOException ex) {
             Logger.getLogger(OldModelBuilder.class.getName()).log(Level.SEVERE, null, ex);

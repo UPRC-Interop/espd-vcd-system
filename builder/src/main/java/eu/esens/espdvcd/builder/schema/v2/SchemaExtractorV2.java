@@ -3,9 +3,12 @@ package eu.esens.espdvcd.builder.schema.v2;
 import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
-import test.x.ubl.pre_award.commonaggregate.*;
-import test.x.ubl.pre_award.commonbasic.*;
-import test.x.ubl.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
+//import test.x.ubl.pre_award.commonaggregate.*;
+//import test.x.ubl.pre_award.commonbasic.*;
+//import test.x.ubl.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
+import eu.espd.schema.v2.pre_award.commonaggregate.*;
+import eu.espd.schema.v2.pre_award.commonbasic.*;
+import eu.espd.schema.v2.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
 
 import java.util.stream.Collectors;
 
@@ -13,7 +16,7 @@ public interface SchemaExtractorV2 {
 
     /**
      * TenderingCriterionPropertyType replaces
-     * {@link isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementType}
+     * {@link eu.espd.schema.v1.ccv_commonaggregatecomponents_1.RequirementType}
      * in schema version 2.0.x
      */
     TenderingCriterionPropertyType extractTenderingCriterionPropertyType(Requirement r, QualificationApplicationResponseType responseType);

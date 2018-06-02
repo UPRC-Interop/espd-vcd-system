@@ -99,26 +99,29 @@ public interface ModelBuilder {
         SchemaVersion version = SchemaVersion.UNKNOWN;
 
         try {
-            byte[] contents = new byte[1024];
+            int numberOfBytes = 128; // not safe above 256
+            byte[] contents = new byte[numberOfBytes];
             int bytesRead;
             StringBuilder partOfTheArtefact = new StringBuilder();
-            bis.mark(1024);
+            bis.mark(numberOfBytes);
             while ((bytesRead = bis.read(contents)) != -1) {
                 partOfTheArtefact.append(new String(contents, 0, bytesRead));
-                if (bytesRead >= 1024) {
+                if (bytesRead >= numberOfBytes) {
                     break;
                 }
             }
             bis.reset();
 
-            boolean isV1Artefact = Pattern.compile("ESPDRequest|ESPDResponse")
+            System.out.println(partOfTheArtefact.toString());
+
+            boolean isV1Artefact = Pattern.compile("<.*ESPDRequest|<.*ESPDResponse")
                     .matcher(partOfTheArtefact.toString()).find();
 
             if (isV1Artefact) { // v1 artefact found
                 version = SchemaVersion.V1;
             } else {
                 // check if it is a v2 artefact
-                boolean isV2Artefact = Pattern.compile("QualificationApplicationRequest|QualificationApplicationResponse")
+                boolean isV2Artefact = Pattern.compile("<.*QualificationApplicationRequest|<.*QualificationApplicationResponse")
                         .matcher(partOfTheArtefact.toString()).find();
                 if (isV2Artefact) { // v2 artefact found
                     version = SchemaVersion.V2;
@@ -157,17 +160,37 @@ public interface ModelBuilder {
             }
             bis.reset();
 
-            String v1ArtefactRegex = "ESPDRequest|ESPDResponse";
-            boolean isV1Artefact = Pattern.compile(v1ArtefactRegex)
-                    .matcher(partOfTheArtefact.toString()).find();
+            String[] elementStartValues = partOfTheArtefact.toString().split("<");
+            StringBuilder builder = new StringBuilder();
+
+            if (elementStartValues.length > 1) { // go for the second line
+                // get at least 50 chars if exist
+                int limit = elementStartValues[2].toCharArray().length >= 50 ? 50 : elementStartValues[2].toCharArray().length;
+
+                for (int i = 0; i < limit; i++) {
+                    builder.append(elementStartValues[2].charAt(i));
+                }
+            } else {
+                throw new BuilderException("Error... Invalid artefact.");
+            }
+            String partOfSecondLine = builder.toString();
+
+            boolean isV1Artefact = false;
+            // check if it is a v1 artefact
+            if (partOfSecondLine.contains("ESPDRequest") || partOfSecondLine.contains("ESPDResponse")) {
+                isV1Artefact = true;
+            }
 
             if (isV1Artefact) { // v1 artefact found
                 profileExecutionIDEnum = ProfileExecutionIDEnum.ESPD_EDM_V1_0_2;
             } else {
+
+                boolean isV2Artefact = false;
                 // check if it is a v2 artefact
-                String v2ArtefactRegex = "QualificationApplicationRequest|QualificationApplicationResponse";
-                boolean isV2Artefact = Pattern.compile(v2ArtefactRegex)
-                        .matcher(partOfTheArtefact.toString()).find();
+                if (partOfSecondLine.contains("QualificationApplicationRequest") || partOfSecondLine.contains("QualificationApplicationResponse")) {
+                    isV2Artefact = true;
+                }
+
                 if (isV2Artefact) { // v2 artefact found
                     /**
                      * in v2.0.x artefacts <cbc:ProfileExecutionID> is mandatory element
@@ -177,7 +200,7 @@ public interface ModelBuilder {
                     Matcher m = Pattern.compile(profileExecutionIDExtractionRegex,
                             Pattern.DOTALL & Pattern.MULTILINE)
                             .matcher(partOfTheArtefact.toString());
-                    if (m.find())  {
+                    if (m.find()) {
                         // extract <cbc:ProfileExecutionID> value
                         final String theId = m.group(1);
                         profileExecutionIDEnum = Arrays.stream(ProfileExecutionIDEnum.values())

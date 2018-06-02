@@ -4,12 +4,18 @@ import eu.esens.espdvcd.codelist.enums.CriterionElementTypeEnum;
 import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.requirement.Requirement;
-import test.x.ubl.pre_award.commonaggregate.DocumentReferenceType;
-import test.x.ubl.pre_award.commonaggregate.ProcurementProjectLotType;
-import test.x.ubl.pre_award.commonaggregate.TenderingCriterionPropertyType;
-import test.x.ubl.pre_award.commonbasic.*;
-import test.x.ubl.pre_award.qualificationapplicationrequest.QualificationApplicationRequestType;
-import test.x.ubl.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
+import eu.espd.schema.v2.pre_award.commonaggregate.DocumentReferenceType;
+import eu.espd.schema.v2.pre_award.commonaggregate.ProcurementProjectLotType;
+import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionPropertyType;
+import eu.espd.schema.v2.pre_award.commonbasic.*;
+import eu.espd.schema.v2.pre_award.qualificationapplicationrequest.QualificationApplicationRequestType;
+import eu.espd.schema.v2.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
+//import test.x.ubl.pre_award.commonaggregate.DocumentReferenceType;
+//import test.x.ubl.pre_award.commonaggregate.ProcurementProjectLotType;
+//import test.x.ubl.pre_award.commonaggregate.TenderingCriterionPropertyType;
+//import test.x.ubl.pre_award.commonbasic.*;
+//import test.x.ubl.pre_award.qualificationapplicationrequest.QualificationApplicationRequestType;
+//import test.x.ubl.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
 
 import java.util.stream.Collectors;
 

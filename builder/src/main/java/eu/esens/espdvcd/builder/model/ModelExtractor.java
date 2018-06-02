@@ -10,19 +10,30 @@ import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.ResponseRequirement;
-import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.CriterionType;
-import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.LegislationType;
-import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementGroupType;
-import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementType;
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ContractingPartyType;
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.DocumentReferenceType;
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ExternalReferenceType;
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ServiceProviderPartyType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ContractFolderIDType;
-import test.x.ubl.pre_award.commonaggregate.TenderingCriterionPropertyGroupType;
-import test.x.ubl.pre_award.commonaggregate.TenderingCriterionPropertyType;
-import test.x.ubl.pre_award.commonaggregate.TenderingCriterionType;
-import test.x.ubl.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
+import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.CriterionType;
+import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.LegislationType;
+import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.RequirementGroupType;
+import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.RequirementType;
+import eu.espd.schema.v1.commonaggregatecomponents_2.ContractingPartyType;
+import eu.espd.schema.v1.commonaggregatecomponents_2.DocumentReferenceType;
+import eu.espd.schema.v1.commonaggregatecomponents_2.ExternalReferenceType;
+import eu.espd.schema.v1.commonaggregatecomponents_2.ServiceProviderPartyType;
+import eu.espd.schema.v1.commonbasiccomponents_2.ContractFolderIDType;
+import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionPropertyGroupType;
+import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionPropertyType;
+import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionType;
+//import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.CriterionType;
+//import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.LegislationType;
+//import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementGroupType;
+//import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementType;
+//import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ContractingPartyType;
+//import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.DocumentReferenceType;
+//import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ExternalReferenceType;
+//import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ServiceProviderPartyType;
+//import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ContractFolderIDType;
+//import test.x.ubl.pre_award.commonaggregate.TenderingCriterionPropertyGroupType;
+//import test.x.ubl.pre_award.commonaggregate.TenderingCriterionPropertyType;
+//import test.x.ubl.pre_award.commonaggregate.TenderingCriterionType;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -162,9 +173,9 @@ public interface ModelExtractor {
         return cd;
     }
 
-    default CADetails extractCADetails(List<test.x.ubl.pre_award.commonaggregate.ContractingPartyType> caParty,
-                                       test.x.ubl.pre_award.commonbasic.ContractFolderIDType contractFolderId,
-                                       List<test.x.ubl.pre_award.commonaggregate.DocumentReferenceType> additionalDocumentReferenceList) {
+    default CADetails extractCADetails(List<eu.espd.schema.v2.pre_award.commonaggregate.ContractingPartyType> caParty,
+                                       eu.espd.schema.v2.pre_award.commonbasic.ContractFolderIDType contractFolderId,
+                                       List<eu.espd.schema.v2.pre_award.commonaggregate.DocumentReferenceType> additionalDocumentReferenceList) {
 
         CADetails cd = new CADetails();
 
@@ -247,7 +258,7 @@ public interface ModelExtractor {
         if (!additionalDocumentReferenceList.isEmpty()) {
 
             // Find an entry with TED_CN Value
-            Optional<test.x.ubl.pre_award.commonaggregate.DocumentReferenceType> optRef = additionalDocumentReferenceList.stream()
+            Optional<eu.espd.schema.v2.pre_award.commonaggregate.DocumentReferenceType> optRef = additionalDocumentReferenceList.stream()
                     .filter(r -> r.getDocumentTypeCode() != null && r.getDocumentTypeCode().getValue().equals("TED_CN"))
                     .findFirst();
             optRef.ifPresent(ref -> {
@@ -256,7 +267,7 @@ public interface ModelExtractor {
                     cd.setProcurementPublicationNumber(ref.getID().getValue());
                 }
                 if (ref.getAttachment() != null && ref.getAttachment().getExternalReference() != null) {
-                    test.x.ubl.pre_award.commonaggregate.ExternalReferenceType ert = ref.getAttachment().getExternalReference();
+                    eu.espd.schema.v2.pre_award.commonaggregate.ExternalReferenceType ert = ref.getAttachment().getExternalReference();
 
                     if (ert.getFileName() != null) {
                         cd.setProcurementProcedureTitle(ert.getFileName().getValue());
@@ -316,7 +327,7 @@ public interface ModelExtractor {
 
     }
 
-    default ServiceProviderDetails extractServiceProviderDetails(List<test.x.ubl.pre_award.commonaggregate.ContractingPartyType> sppt) {
+    default ServiceProviderDetails extractServiceProviderDetails(List<eu.espd.schema.v2.pre_award.commonaggregate.ContractingPartyType> sppt) {
         try {
             return BuilderFactory.getRegulatedModelBuilder().createESPDRequest().getServiceProviderDetails();
         } catch (BuilderException e) {
@@ -346,7 +357,7 @@ public interface ModelExtractor {
         return extractSelectableCriterion(ct, true);
     }
 
-    default SelectableCriterion extractSelectableCriterion(TenderingCriterionType tct, boolean isSelected, QualificationApplicationResponseType responseType) {
+    default SelectableCriterion extractSelectableCriterion(TenderingCriterionType tct, boolean isSelected) {
         String id = tct.getID().getValue();
         String desc = tct.getDescription().isEmpty() ? "" : tct.getDescription().get(0).getValue();
         String typeCode = tct.getCriterionTypeCode().getValue();
@@ -355,7 +366,7 @@ public interface ModelExtractor {
         LegislationReference lr = extractDefaultLegalReferenceV2(tct.getLegislation());
 
         List<RequirementGroup> rgList = tct.getTenderingCriterionPropertyGroup().stream()
-                .map(t -> extractRequirementGroup(t, responseType))
+                .map(t -> extractRequirementGroup(t))
                 .collect(Collectors.toList());
 
         SelectableCriterion selCr = new SelectableCriterion(id, typeCode, name, desc, lr, rgList);
@@ -363,11 +374,11 @@ public interface ModelExtractor {
         return selCr;
     }
 
-    default SelectableCriterion extractSelectableCriterion(TenderingCriterionType tct, QualificationApplicationResponseType responseType) {
-        return extractSelectableCriterion(tct, true, responseType);
+    default SelectableCriterion extractSelectableCriterion(TenderingCriterionType tct) {
+        return extractSelectableCriterion(tct, true);
     }
 
-    default RequirementGroup extractRequirementGroup(TenderingCriterionPropertyGroupType rgType, QualificationApplicationResponseType responseType) {
+    default RequirementGroup extractRequirementGroup(TenderingCriterionPropertyGroupType rgType) {
 
         RequirementGroup rg = null;
         if (rgType.getID() != null) {
@@ -380,10 +391,10 @@ public interface ModelExtractor {
 
         if (rg != null) {
             List<Requirement> rList = rgType.getTenderingCriterionProperty().stream()
-                    .map(r -> extractRequirement(r, responseType))
+                    .map(r -> extractRequirement(r))
                     .collect(Collectors.toList());
             List<RequirementGroup> childRg = rgType.getSubsidiaryTenderingCriterionPropertyGroup().stream()
-                    .map(t -> extractRequirementGroup(t, responseType))
+                    .map(t -> extractRequirementGroup(t))
                     .collect(Collectors.toList());
             rg.setRequirements(rList);
             rg.setRequirementGroups(childRg);
@@ -416,7 +427,7 @@ public interface ModelExtractor {
         return rg;
     }
 
-    default LegislationReference extractDefaultLegalReferenceV2(List<test.x.ubl.pre_award.commonaggregate.LegislationType> lrList) {
+    default LegislationReference extractDefaultLegalReferenceV2(List<eu.espd.schema.v2.pre_award.commonaggregate.LegislationType> lrList) {
 
         //First check if there is an EU_* jurisdiction
         LegislationReference lr;
@@ -427,7 +438,7 @@ public interface ModelExtractor {
         return lr;
     }
 
-    default LegislationReference extractDefaultLegalReference(List<isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.LegislationType> lrList) {
+    default LegislationReference extractDefaultLegalReference(List<LegislationType> lrList) {
 
         //First check if there is an EU_* jurisdiction
         LegislationReference lr;
@@ -438,7 +449,7 @@ public interface ModelExtractor {
         return lr;
     }
 
-    default LegislationReference extractEULegalReferenceV2(List<test.x.ubl.pre_award.commonaggregate.LegislationType> lrList) {
+    default LegislationReference extractEULegalReferenceV2(List<eu.espd.schema.v2.pre_award.commonaggregate.LegislationType> lrList) {
         return lrList.stream()
                 .filter(lr -> {
                     String jl = lr.getJurisdictionLevel().stream()
@@ -459,7 +470,7 @@ public interface ModelExtractor {
                 .orElse(null);
     }
 
-    default LegislationReference extractNationalLegalReferenceV2(List<test.x.ubl.pre_award.commonaggregate.LegislationType> lrList) {
+    default LegislationReference extractNationalLegalReferenceV2(List<eu.espd.schema.v2.pre_award.commonaggregate.LegislationType> lrList) {
         return lrList.stream()
                 .filter(lr -> {
                     String jl = lr.getJurisdictionLevel().stream()
@@ -479,7 +490,7 @@ public interface ModelExtractor {
                 .orElse(null);
     }
 
-    default LegislationReference extractLegalReference(test.x.ubl.pre_award.commonaggregate.LegislationType lt) {
+    default LegislationReference extractLegalReference(eu.espd.schema.v2.pre_award.commonaggregate.LegislationType lt) {
         LegislationReference lr = new LegislationReference(
                 lt.getTitle().get(0).getValue(),
                 lt.getDescription().get(0).getValue(),
@@ -500,7 +511,7 @@ public interface ModelExtractor {
         return lr;
     }
 
-    default Requirement extractRequirement(TenderingCriterionPropertyType pt, QualificationApplicationResponseType responseType) {
+    default Requirement extractRequirement(TenderingCriterionPropertyType pt) {
         String theId = null;
         if (pt.getID() != null) {
             theId = pt.getID().getValue();
@@ -536,7 +547,7 @@ public interface ModelExtractor {
         return r;
     }
 
-    default boolean isSMEIndicator(test.x.ubl.pre_award.commonaggregate.EconomicOperatorPartyType eop) {
+    default boolean isSMEIndicator(eu.espd.schema.v2.pre_award.commonaggregate.EconomicOperatorPartyType eop) {
         boolean isSME = false;
         EOIndustryClassificationCodeEnum code = EOIndustryClassificationCodeEnum.valueOf(eop.getQualifyingParty()
                 .get(0).getParty().getIndustryClassificationCode().getValue());

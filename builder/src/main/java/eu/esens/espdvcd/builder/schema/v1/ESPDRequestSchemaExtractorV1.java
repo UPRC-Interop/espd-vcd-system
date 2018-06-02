@@ -2,16 +2,24 @@ package eu.esens.espdvcd.builder.schema.v1;
 
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.requirement.Requirement;
-import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
-import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementType;
+import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.RequirementType;
+import eu.espd.schema.v1.commonaggregatecomponents_2.DocumentReferenceType;
+import eu.espd.schema.v1.commonaggregatecomponents_2.ProcurementProjectLotType;
+import eu.espd.schema.v1.commonbasiccomponents_2.ContractFolderIDType;
+import eu.espd.schema.v1.commonbasiccomponents_2.CopyIndicatorType;
+import eu.espd.schema.v1.commonbasiccomponents_2.DescriptionType;
+import eu.espd.schema.v1.commonbasiccomponents_2.IDType;
+import eu.espd.schema.v1.espdrequest_1.ESPDRequestType;
+//import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
+//import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementType;
 import java.util.stream.Collectors;
 
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.DocumentReferenceType;
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ProcurementProjectLotType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ContractFolderIDType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.CopyIndicatorType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.DescriptionType;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.IDType;
+//import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.DocumentReferenceType;
+//import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ProcurementProjectLotType;
+//import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ContractFolderIDType;
+//import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.CopyIndicatorType;
+//import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.DescriptionType;
+//import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.IDType;
 
 public class ESPDRequestSchemaExtractorV1 implements SchemaExtractorV1 {
 

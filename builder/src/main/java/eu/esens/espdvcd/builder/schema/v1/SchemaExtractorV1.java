@@ -7,15 +7,20 @@ import eu.esens.espdvcd.model.LegislationReference;
 import eu.esens.espdvcd.model.ServiceProviderDetails;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
-import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.CriterionType;
-import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.LegislationType;
-import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementGroupType;
-import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementType;
+import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.CriterionType;
+import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.LegislationType;
+import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.RequirementGroupType;
+import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.RequirementType;
+//import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.CriterionType;
+//import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.LegislationType;
+//import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementGroupType;
+//import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementType;
 
 import java.util.stream.Collectors;
-
-import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.*;
-import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.*;
+import eu.espd.schema.v1.commonaggregatecomponents_2.*;
+import eu.espd.schema.v1.commonbasiccomponents_2.*;
+//import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.*;
+//import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.*;
 
 public interface SchemaExtractorV1 {
 
@@ -232,7 +237,7 @@ public interface SchemaExtractorV1 {
         if (cd.getContactingDetails() != null) {
             // UBL syntax path: cac:ContractingParty.Party.Contact
 
-            oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ContactType ct = new ContactType();
+            eu.espd.schema.v1.commonaggregatecomponents_2.ContactType ct = new ContactType();
             ct.setName(new NameType());
             ct.getName().setValue(cd.getContactingDetails().getContactPointName());
 
