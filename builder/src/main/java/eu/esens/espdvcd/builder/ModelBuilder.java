@@ -97,27 +97,28 @@ public interface ModelBuilder {
         SchemaVersion version = SchemaVersion.UNKNOWN;
 
         try {
-            String partOfTheArtefact = getPartOfTheArtefact(xmlESPD, 128); //  not safe above 256
+            String partOfTheArtefact = getPartOfTheArtefact(xmlESPD, 128); //  better stay below 256
 
-            boolean isV1Artefact = Pattern.compile("<.*ESPDRequest|<.*ESPDResponse")
-                    .matcher(partOfTheArtefact).find();
+            final String v1ArtefactRegex = "<[^ ]*(ESPDRequest|ESPDResponse)";
+            final String v2ArtefactRegex = "<[^ ]*(QualificationApplicationRequest|QualificationApplicationResponse)";
 
-            if (isV1Artefact) { // v1 artefact found
+            boolean isV1Artefact = Pattern.compile(v1ArtefactRegex).matcher(partOfTheArtefact).find();
+
+            if (isV1Artefact) {
                 version = SchemaVersion.V1;
             } else {
-                // check if it is a v2 artefact
-                boolean isV2Artefact = Pattern.compile("<.*QualificationApplicationRequest|<.*QualificationApplicationResponse")
-                        .matcher(partOfTheArtefact).find();
-                if (isV2Artefact) { // v2 artefact found
+
+                boolean isV2Artefact = Pattern.compile(v2ArtefactRegex).matcher(partOfTheArtefact).find();
+
+                if (isV2Artefact) {
                     version = SchemaVersion.V2;
-                } else {
-                    // nor v1 or v2 artefact found
-                    version = SchemaVersion.UNKNOWN;
                 }
             }
+
         } catch (IOException ex) {
             Logger.getLogger(ModelBuilder.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         return version;
     }
 
