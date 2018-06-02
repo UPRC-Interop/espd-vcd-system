@@ -1,7 +1,7 @@
 package eu.esens.espdvcd.builder;
 
-import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.codelist.enums.ProfileExecutionIDEnum;
+import eu.esens.espdvcd.schema.SchemaVersion;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -24,13 +24,29 @@ public class ModelBuilderTest implements ModelBuilder {
 
     @Ignore
     @Test
-    public void testFindArtefactVersion() throws BuilderException {
-        Assert.assertEquals(ProfileExecutionIDEnum.ESPD_EDM_V2_0_1_REGULATED, findEDMArtefactVersion(espdRequestRegulatedV2_0_1));
-        Assert.assertNotEquals(ProfileExecutionIDEnum.ESPD_EDM_V2_0_2_REGULATED, findEDMArtefactVersion(espdRequestRegulatedV1_0_2));
-        Assert.assertNotEquals(ProfileExecutionIDEnum.ESPD_EDM_V2_0_2_REGULATED, findEDMArtefactVersion(espdRequestRegulatedV1_0_2));
-        Assert.assertEquals(ProfileExecutionIDEnum.ESPD_EDM_V1_0_2, findEDMArtefactVersion(espdRequestRegulatedV1_0_2));
-        Assert.assertEquals(ProfileExecutionIDEnum.ESPD_EDM_V1_0_2, findEDMArtefactVersion(espdResponseRegulatedV1_0_2));
-        Assert.assertEquals(ProfileExecutionIDEnum.ESPD_EDM_V2_0_2_REGULATED, findEDMArtefactVersion(espdResponseRegulatedV2_0_2));
+    public void testFindEDMtVersion() {
+        Assert.assertEquals(ProfileExecutionIDEnum.ESPD_EDM_V2_0_1_REGULATED, findEDMVersion(espdRequestRegulatedV2_0_1));
+        Assert.assertNotEquals(ProfileExecutionIDEnum.ESPD_EDM_V2_0_2_REGULATED, findEDMVersion(espdRequestRegulatedV1_0_2));
+        Assert.assertNotEquals(ProfileExecutionIDEnum.ESPD_EDM_V2_0_2_REGULATED, findEDMVersion(espdRequestRegulatedV1_0_2));
+        Assert.assertEquals(ProfileExecutionIDEnum.ESPD_EDM_V1_0_2, findEDMVersion(espdRequestRegulatedV1_0_2));
+        Assert.assertEquals(ProfileExecutionIDEnum.ESPD_EDM_V1_0_2, findEDMVersion(espdResponseRegulatedV1_0_2));
+        Assert.assertEquals(ProfileExecutionIDEnum.ESPD_EDM_V2_0_2_REGULATED, findEDMVersion(espdResponseRegulatedV2_0_2));
+    }
+
+    @Ignore
+    @Test
+    public void testFindSchemaVersion() {
+        Assert.assertEquals(SchemaVersion.V2, findSchemaVersion(espdRequestRegulatedV2_0_1));
+        Assert.assertNotEquals(SchemaVersion.V1, findSchemaVersion(espdRequestRegulatedV2_0_1));
+
+        Assert.assertEquals(SchemaVersion.V1, findSchemaVersion(espdRequestRegulatedV1_0_2));
+        Assert.assertNotEquals(SchemaVersion.V2, findSchemaVersion(espdRequestRegulatedV1_0_2));
+
+        Assert.assertNotEquals(SchemaVersion.V2, findSchemaVersion(espdResponseRegulatedV1_0_2));
+        Assert.assertEquals(SchemaVersion.V1, findSchemaVersion(espdResponseRegulatedV1_0_2));
+
+        Assert.assertEquals(SchemaVersion.V2, findSchemaVersion(espdResponseRegulatedV2_0_2));
+        Assert.assertNotEquals(SchemaVersion.V1, findSchemaVersion(espdResponseRegulatedV2_0_2));
     }
 
 }
