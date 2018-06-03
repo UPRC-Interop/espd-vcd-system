@@ -2,9 +2,9 @@ package eu.esens.espdvcd.builder;
 
 import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.builder.model.ModelFactory;
+import eu.esens.espdvcd.builder.util.ArtefactUtils;
 import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
-import eu.esens.espdvcd.retriever.criteria.PredefinedESPDCriteriaExtractor;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import eu.esens.espdvcd.schema.SchemaUtil;
 import eu.esens.espdvcd.schema.SchemaVersion;
@@ -48,7 +48,7 @@ public class RegulatedModelBuilder implements ModelBuilder {
      * required object.
      */
     public RegulatedModelBuilder importFrom(InputStream is) {
-        importStream = getBufferedInputStream(is);
+        importStream = ArtefactUtils.getBufferedInputStream(is);
         return this;
     }
 
@@ -130,10 +130,10 @@ public class RegulatedModelBuilder implements ModelBuilder {
      * @return the same ModelBuilder instance for incremental creation of the
      * required object.
      */
-    public RegulatedModelBuilder addDefaultESPDCriteriaList() {
-        criteriaExtractor = new PredefinedESPDCriteriaExtractor();
-        return this;
-    }
+//    public RegulatedModelBuilder addDefaultESPDCriteriaList() {
+//        criteriaExtractor = new PredefinedESPDCriteriaExtractor();
+//        return this;
+//    }
 
     public ESPDRequest createESPDRequest() throws BuilderException {
         ESPDRequest req;
@@ -229,10 +229,10 @@ public class RegulatedModelBuilder implements ModelBuilder {
 
         ESPDRequest req;
 
-        try (InputStream bis = getBufferedInputStream(xmlESPD)) {
+        try (InputStream bis = ArtefactUtils.getBufferedInputStream(xmlESPD)) {
             // Check and read the file in the JAXB Object
             // but first identify the artefact schema version
-            switch (findSchemaVersion(xmlESPD)) {
+            switch (ArtefactUtils.findSchemaVersion(xmlESPD)) {
                 case V1:
                     ESPDRequestType espdRequestType = readESPDRequestFromStream(bis);
                     req = ModelFactory.ESPD_REQUEST.extractESPDRequest(espdRequestType); // Create the Model Object
@@ -266,10 +266,10 @@ public class RegulatedModelBuilder implements ModelBuilder {
 
         ESPDResponse res;
 
-        try (InputStream bis = getBufferedInputStream(xmlESPDRes)) {
+        try (InputStream bis = ArtefactUtils.getBufferedInputStream(xmlESPDRes)) {
             // Check and read the file in the JAXB Object
             // but first identify the artefact schema version
-            switch (findSchemaVersion(xmlESPDRes)) {
+            switch (ArtefactUtils.findSchemaVersion(xmlESPDRes)) {
                 case V1:
                     Logger.getLogger(RegulatedModelBuilder.class.getName()).log(Level.INFO, "v1 artefact has been imported...");
                     // Check and read the file in the JAXB Object

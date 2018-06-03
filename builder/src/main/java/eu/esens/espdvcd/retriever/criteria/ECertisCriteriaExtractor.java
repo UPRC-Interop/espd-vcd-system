@@ -11,7 +11,9 @@ import eu.esens.espdvcd.model.retriever.ECertisCriterion;
 import eu.esens.espdvcd.model.retriever.ECertisCriterionImpl;
 import eu.esens.espdvcd.model.retriever.ECertisEvidenceGroup;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
+import eu.esens.espdvcd.schema.SchemaVersion;
 
+import javax.validation.constraints.NotNull;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -68,8 +70,8 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
 
     }
 
-    public ECertisCriteriaExtractor() {
-        this.predefinedExtractor = new PredefinedESPDCriteriaExtractor();
+    ECertisCriteriaExtractor(@NotNull SchemaVersion version) {
+        this.predefinedExtractor = new PredefinedESPDCriteriaExtractor(version);
         this.lang = DEFAULT_LANG;
         try {
             ECERTIS_PROPERTIES.load(new FileInputStream(ECERTIS_CONFIG_PATH));

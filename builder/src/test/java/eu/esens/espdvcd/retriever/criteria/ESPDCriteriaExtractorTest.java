@@ -4,6 +4,7 @@ import eu.esens.espdvcd.builder.model.ModelFactory;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import javax.xml.bind.JAXB;
 
+import eu.esens.espdvcd.schema.SchemaVersion;
 import eu.espd.schema.v1.espdrequest_1.ESPDRequestType;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,7 +28,7 @@ public class ESPDCriteriaExtractorTest {
 
     @Test
     public void testGetFullList() {
-        PredefinedESPDCriteriaExtractor ce = new PredefinedESPDCriteriaExtractor();
+        PredefinedESPDCriteriaExtractor ce = new PredefinedESPDCriteriaExtractor(SchemaVersion.V1);
         ce.getFullList().stream()
                 .forEach(c -> {
                     System.out.println(c.getID() + " " + c.getName() + " (" + c.getTypeCode() + ")");

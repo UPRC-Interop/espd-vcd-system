@@ -3,6 +3,7 @@ package eu.esens.espdvcd.retriever.criteria;
 import eu.esens.espdvcd.model.LegislationReference;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
+import eu.esens.espdvcd.schema.SchemaVersion;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -21,7 +22,7 @@ public class ECertisCriteriaExtractorTest {
 
     @Before
     public void setUp() {
-        extractor = new ECertisCriteriaExtractor();
+        extractor = new ECertisCriteriaExtractor(SchemaVersion.V1);
     }
 
     @Ignore
@@ -29,7 +30,7 @@ public class ECertisCriteriaExtractorTest {
     public void testPredefinedAndECertisCriteriaID() throws RetrieverException {
 
         PredefinedESPDCriteriaExtractor predefinedESPDCriteriaExtractor =
-                new PredefinedESPDCriteriaExtractor();
+                new PredefinedESPDCriteriaExtractor(SchemaVersion.V1);
 
         final List<String> ecertisIDList = extractor.getAllEuropeanCriteriaID();
         final List<String> predefinedIDList = predefinedESPDCriteriaExtractor.getFullList().stream()

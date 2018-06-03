@@ -9,13 +9,15 @@ import org.junit.Test;
 
 import java.io.InputStream;
 
-public class ModelBuilderTest implements ModelBuilder {
+import static eu.esens.espdvcd.builder.util.ArtefactUtils.*;
 
-    private InputStream espdRequestRegulatedV1_0_2 = ModelBuilderTest.class.getResourceAsStream("/espd-request.xml");
-    private InputStream espdRequestRegulatedV2_0_1 = ModelBuilderTest.class.getResourceAsStream("/espd-request-v2_2018-05-30a.xml");
+public class ArtefactUtilsTest {
 
-    private InputStream espdResponseRegulatedV1_0_2 = ModelBuilderTest.class.getResourceAsStream("/espd-response.xml");
-    private InputStream espdResponseRegulatedV2_0_2 = ModelBuilderTest.class.getResourceAsStream("/REGULATED_ESPD-Response_2.0.2.xml");
+    private InputStream espdRequestRegulatedV1_0_2 = ArtefactUtilsTest.class.getResourceAsStream("/espd-request.xml");
+    private InputStream espdRequestRegulatedV2_0_1 = ArtefactUtilsTest.class.getResourceAsStream("/espd-request-v2_2018-05-30a.xml");
+
+    private InputStream espdResponseRegulatedV1_0_2 = ArtefactUtilsTest.class.getResourceAsStream("/espd-response.xml");
+    private InputStream espdResponseRegulatedV2_0_2 = ArtefactUtilsTest.class.getResourceAsStream("/REGULATED_ESPD-Response_2.0.2.xml");
 
     @Before
     public void setUp() {

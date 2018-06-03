@@ -2,6 +2,7 @@ package eu.esens.espdvcd.builder;
 
 import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.builder.model.ModelFactory;
+import eu.esens.espdvcd.builder.util.ArtefactUtils;
 import eu.esens.espdvcd.model.ESPDResponse;
 import eu.espd.schema.v1.espdresponse_1.ESPDResponseType;
 //import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
@@ -17,7 +18,7 @@ public class VCDModelBuilder extends OldModelBuilder {
     protected ESPDResponse createRegulatedESPDResponseFromXML(InputStream xmlESPDRes) throws BuilderException {
         ESPDResponse res;
         // Check and read the file in the JAXB Object
-        try (InputStream bis = getBufferedInputStream(xmlESPDRes)) {
+        try (InputStream bis = ArtefactUtils.getBufferedInputStream(xmlESPDRes)) {
             // Check and read the file in the JAXB Object
             ESPDResponseType resType = readRegulatedESPDResponseFromStream(bis);
             // Create the Model Object

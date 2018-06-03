@@ -7,6 +7,7 @@ import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.retriever.ECertisCriterion;
 import eu.esens.espdvcd.model.retriever.ECertisEvidenceGroup;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
+import eu.esens.espdvcd.schema.SchemaVersion;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -27,7 +28,7 @@ public class ECertisCriteriaDataRetrieverTest {
 
     @Before
     public void setUp() {
-        extractor = new ECertisCriteriaExtractor();
+        extractor = new ECertisCriteriaExtractor(SchemaVersion.V1);
     }
 
     /**

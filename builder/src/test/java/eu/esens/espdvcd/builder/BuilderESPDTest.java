@@ -9,10 +9,10 @@ import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.ResponseRequirement;
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
-import eu.esens.espdvcd.retriever.criteria.PredefinedESPDCriteriaExtractor;
+import eu.esens.espdvcd.retriever.criteria.CriteriaExtractorFactory;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
+import eu.esens.espdvcd.schema.SchemaVersion;
 import eu.espd.schema.v1.espdresponse_1.ESPDResponseType;
-// import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -112,7 +112,7 @@ public class BuilderESPDTest {
         ESPDRequest importedEspd;
         importedEspd = BuilderFactory.getRegulatedModelBuilder()
                 .importFrom(new XMLDocumentBuilderV1(originalEspd).getAsInputStream())
-                .addDefaultESPDCriteriaList()
+                // .addDefaultESPDCriteriaList()
                 .createESPDRequest();
 
         Assert.assertNotNull(importedEspd);
@@ -178,7 +178,7 @@ public class BuilderESPDTest {
     @Test
     public void testCreateRegulatedESPDRequestV1WithPredefinedCriteria() throws BuilderException, RetrieverException {
 
-        CriteriaExtractor extractor = new PredefinedESPDCriteriaExtractor();
+        CriteriaExtractor extractor = CriteriaExtractorFactory.getPredefinedESPDCriteriaExtractor(SchemaVersion.V1);
 
         ESPDRequest req = BuilderFactory.getRegulatedModelBuilder().createESPDRequest();
         req.setCriterionList(extractor.getFullList());
@@ -188,7 +188,7 @@ public class BuilderESPDTest {
     @Test
     public void testCreateRegulatedESPDRequestV2WithPredefinedCriteria() throws BuilderException, RetrieverException {
 
-        CriteriaExtractor extractor = new PredefinedESPDCriteriaExtractor();
+        CriteriaExtractor extractor = CriteriaExtractorFactory.getPredefinedESPDCriteriaExtractor(SchemaVersion.V1);
 
         ESPDRequest req = BuilderFactory.getRegulatedModelBuilder().createESPDRequest();
         req.setCriterionList(extractor.getFullList());
@@ -197,7 +197,7 @@ public class BuilderESPDTest {
 
     @Test
     public void testCreateESPDRequestV2WithPredefinedCriteria() throws BuilderException, RetrieverException {
-        CriteriaExtractor extractor = new PredefinedESPDCriteriaExtractor();
+        CriteriaExtractor extractor = CriteriaExtractorFactory.getPredefinedESPDCriteriaExtractor(SchemaVersion.V1);
         ESPDRequest req = BuilderFactory.getRegulatedModelBuilder().createESPDRequest();
         req.setCriterionList(extractor.getFullList());
         System.out.println(BuilderFactory.withSchemaVersion1().getDocumentBuilderFor(req).theXML);
@@ -206,28 +206,33 @@ public class BuilderESPDTest {
     @Test
     public void testImportFromForRegulatedV1ESPDRequestArtefact() throws BuilderException, RetrieverException {
 
-        CriteriaExtractor extractor = new PredefinedESPDCriteriaExtractor();
+        CriteriaExtractor extractor = CriteriaExtractorFactory.getPredefinedESPDCriteriaExtractor(SchemaVersion.V1);
         ESPDRequest req = BuilderFactory.getRegulatedModelBuilder()
                 .importFrom(getClass().getResourceAsStream("/espd-request.xml"))
                 .createESPDRequest();
         req.setCriterionList(extractor.getFullList());
-        System.out.println(BuilderFactory.withSchemaVersion2().getDocumentBuilderFor(req).theXML);
+        System.out.println(BuilderFactory.withSchemaVersion2()
+                .getDocumentBuilderFor(req)
+                .addDefaultESPDCriteriaList().theXML);
     }
 
     @Test
     public void testImportFromForRegulatedV2ESPDRequestArtefact() throws BuilderException, RetrieverException {
 
-
-        // CriteriaExtractor extractor = new ECertisCriteriaExtractor();
-        // CriteriaExtractor extractor = new PredefinedESPDCriteriaExtractor();
         ESPDRequest request = BuilderFactory.getRegulatedModelBuilder()
                 .importFrom(getClass().getResourceAsStream("/espd-request-2018.03.xml"))
-                // .importFrom(getClass().getResourceAsStream("/espd-request-v2_2018-05-30a.xml"))
+                // .addECertisCriteriaList()      <- BEFORE
+                // .addDefaultESPDCriteriaList()  <- BEFORE
+                .importFrom(getClass().getResourceAsStream("/espd-request-v2_2018-05-30a.xml"))
                 .createESPDRequest();
         Assert.assertNotNull(request);
 
         // request.setCriterionList(extractor.getFullList());
-        System.out.println(BuilderFactory.withSchemaVersion1().getDocumentBuilderFor(request).theXML);
+        System.out.println(BuilderFactory.withSchemaVersion1()
+                .getDocumentBuilderFor(request)
+                .addDefaultESPDCriteriaList()   // <- AFTER
+                .addECertisCriteriaList()       // <- AFTER
+                .theXML);
     }
 
     @Test

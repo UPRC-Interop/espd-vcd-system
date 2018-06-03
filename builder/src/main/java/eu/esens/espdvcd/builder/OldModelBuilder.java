@@ -2,9 +2,9 @@ package eu.esens.espdvcd.builder;
 
 import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.builder.model.ModelFactory;
+import eu.esens.espdvcd.builder.util.ArtefactUtils;
 import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
-import eu.esens.espdvcd.retriever.criteria.PredefinedESPDCriteriaExtractor;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import eu.esens.espdvcd.schema.SchemaUtil;
 import eu.esens.espdvcd.schema.SchemaVersion;
@@ -50,7 +50,7 @@ public class OldModelBuilder implements ModelBuilder {
      * required object.
      */
     public OldModelBuilder importFrom(InputStream is) {
-        importStream = getBufferedInputStream(is);
+        importStream = ArtefactUtils.getBufferedInputStream(is);
         return this;
     }
 
@@ -141,11 +141,11 @@ public class OldModelBuilder implements ModelBuilder {
      * @return the same ModelBuilder instance for incremental creation of the
      * required object.
      */
-    public OldModelBuilder addDefaultESPDCriteriaList() {
-
-        criteriaExtractor = new PredefinedESPDCriteriaExtractor();
-        return this;
-    }
+//    public OldModelBuilder addDefaultESPDCriteriaList() {
+//
+//        criteriaExtractor = new PredefinedESPDCriteriaExtractor();
+//        return this;
+//    }
 
     /**
      * Terminal builder method that returns an {@link ESPDRequest} instance,
@@ -313,7 +313,7 @@ public class OldModelBuilder implements ModelBuilder {
 
         ESPDRequest req;
 
-        try (InputStream bis = getBufferedInputStream(xmlESPD)) {
+        try (InputStream bis = ArtefactUtils.getBufferedInputStream(xmlESPD)) {
             // Check and read the file in the JAXB Object
             ESPDRequestType reqType = readRegulatedESPDRequestFromStream(bis);
             // Create the Model Object
@@ -347,7 +347,7 @@ public class OldModelBuilder implements ModelBuilder {
 
         ESPDResponse res;
         // Check and read the file in the JAXB Object
-        try (InputStream bis = getBufferedInputStream(xmlESPDRes)) {
+        try (InputStream bis = ArtefactUtils.getBufferedInputStream(xmlESPDRes)) {
             // Check and read the file in the JAXB Object
             ESPDResponseType resType = readRegulatedESPDResponseFromStream(bis);
             // Create the Model Object
