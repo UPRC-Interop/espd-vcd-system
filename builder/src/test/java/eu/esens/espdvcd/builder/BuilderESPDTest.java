@@ -220,7 +220,7 @@ public class BuilderESPDTest {
     public void testImportFromForRegulatedV2ESPDRequestArtefact() throws BuilderException, RetrieverException {
 
         ESPDRequest request = BuilderFactory.getRegulatedModelBuilder()
-                .importFrom(getClass().getResourceAsStream("/espd-request-2018.03.xml"))
+                // .importFrom(getClass().getResourceAsStream("/espd-request-2018.03.xml"))
                 // .addECertisCriteriaList()      <- BEFORE
                 // .addDefaultESPDCriteriaList()  <- BEFORE
                 .importFrom(getClass().getResourceAsStream("/espd-request-v2_2018-05-30a.xml"))
@@ -230,8 +230,8 @@ public class BuilderESPDTest {
         // request.setCriterionList(extractor.getFullList());
         System.out.println(BuilderFactory.withSchemaVersion1()
                 .getDocumentBuilderFor(request)
-                .addDefaultESPDCriteriaList()   // <- AFTER
-                .addECertisCriteriaList()       // <- AFTER
+                // .addDefaultESPDCriteriaList()   // <- AFTER
+                // .addECertisCriteriaList()       // <- AFTER
                 .theXML);
     }
 

@@ -234,6 +234,7 @@ public class RegulatedModelBuilder implements ModelBuilder {
             // but first identify the artefact schema version
             switch (ArtefactUtils.findSchemaVersion(xmlESPD)) {
                 case V1:
+                    Logger.getLogger(RegulatedModelBuilder.class.getName()).log(Level.INFO, "v1 artefact has been imported...");
                     ESPDRequestType espdRequestType = readESPDRequestFromStream(bis);
                     req = ModelFactory.ESPD_REQUEST.extractESPDRequest(espdRequestType); // Create the Model Object
                     break;

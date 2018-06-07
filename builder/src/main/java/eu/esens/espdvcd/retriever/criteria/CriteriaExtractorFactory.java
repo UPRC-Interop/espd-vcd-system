@@ -15,7 +15,7 @@ public class CriteriaExtractorFactory {
         return new PredefinedESPDCriteriaExtractor(version);
     }
 
-    public static CriteriaExtractor getECertisCriteriaExtractor(SchemaVersion version) {
+    public static CriteriaExtractor getECertisCriteriaExtractor(@NotNull SchemaVersion version) {
 
         if (version == SchemaVersion.UNKNOWN) {
             throw new IllegalArgumentException("Error... Invalid schema version value.");
