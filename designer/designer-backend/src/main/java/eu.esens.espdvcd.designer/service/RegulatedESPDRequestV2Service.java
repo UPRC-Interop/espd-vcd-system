@@ -5,6 +5,7 @@ import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.designer.typeEnum.ArtefactType;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
+import eu.esens.espdvcd.schema.SchemaVersion;
 
 import java.io.*;
 
@@ -14,7 +15,7 @@ public class RegulatedESPDRequestV2Service implements ESPDService {
 
     public RegulatedESPDRequestV2Service() throws RetrieverException {
         artefactType = ArtefactType.REQUEST;
-        criteriaService = new PredefinedCriteriaService();
+        criteriaService = new PredefinedCriteriaService(SchemaVersion.V2);
     }
 
     @Override
