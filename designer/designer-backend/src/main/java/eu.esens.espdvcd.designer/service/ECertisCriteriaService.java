@@ -1,16 +1,19 @@
 package eu.esens.espdvcd.designer.service;
 
 import eu.esens.espdvcd.model.SelectableCriterion;
+import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
+import eu.esens.espdvcd.retriever.criteria.CriteriaExtractorFactory;
 import eu.esens.espdvcd.retriever.criteria.ECertisCriteriaExtractor;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
+import eu.esens.espdvcd.schema.SchemaVersion;
 
 import java.util.List;
 
 public class ECertisCriteriaService implements CriteriaService {
     private ECertisCriteriaExtractor ECERTIS_CRITERIA_EXTRACTOR;
 
-    public ECertisCriteriaService() {
-        ECERTIS_CRITERIA_EXTRACTOR = new ECertisCriteriaExtractor();
+    public ECertisCriteriaService(SchemaVersion version) {
+        ECERTIS_CRITERIA_EXTRACTOR = (ECertisCriteriaExtractor) CriteriaExtractorFactory.getECertisCriteriaExtractor(version);
     }
 
     @Override

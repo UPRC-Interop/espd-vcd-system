@@ -5,6 +5,7 @@ import eu.esens.espdvcd.designer.endpoint.CriteriaEndpoint;
 import eu.esens.espdvcd.designer.endpoint.ESPDEndpoint;
 import eu.esens.espdvcd.designer.endpoint.Endpoint;
 import eu.esens.espdvcd.designer.service.*;
+import eu.esens.espdvcd.schema.SchemaVersion;
 import spark.Service;
 
 import java.util.logging.Level;
@@ -61,14 +62,18 @@ public class Server {
             v2Context.addEndpoint(v2Codelists);
 
             LOGGER.info("Configuring eCertisCriteria endpoint...");
-            Endpoint eCertisCriteriaEndpoint = new CriteriaEndpoint(new ECertisCriteriaService());
-            v1Context.addEndpointWithPath(eCertisCriteriaEndpoint, "/criteria/eCertis");
-            v2Context.addEndpointWithPath(eCertisCriteriaEndpoint, "/criteria/eCertis");
+            Endpoint eCertisCriteriaEndpointV1 = new CriteriaEndpoint(new ECertisCriteriaService(SchemaVersion.V1));
+            Endpoint eCertisCriteriaEndpointV2 = new CriteriaEndpoint(new ECertisCriteriaService(SchemaVersion.V2));
+
+            v1Context.addEndpointWithPath(eCertisCriteriaEndpointV1, "/criteria/eCertis");
+            v2Context.addEndpointWithPath(eCertisCriteriaEndpointV2, "/criteria/eCertis");
 
             LOGGER.info("Configuring predefinedCriteria endpoint...");
-            Endpoint predefCriteriaEndpoint = new CriteriaEndpoint(new PredefinedCriteriaService());
-            v1Context.addEndpointWithPath(predefCriteriaEndpoint, "/criteria/predefined");
-            v2Context.addEndpointWithPath(predefCriteriaEndpoint, "/criteria/predefined");
+            Endpoint predefCriteriaEndpointV1 = new CriteriaEndpoint(new PredefinedCriteriaService(SchemaVersion.V1));
+            Endpoint predefCriteriaEndpointV2 = new CriteriaEndpoint(new PredefinedCriteriaService(SchemaVersion.V2));
+
+            v1Context.addEndpointWithPath(predefCriteriaEndpointV1, "/criteria/predefined");
+            v2Context.addEndpointWithPath(predefCriteriaEndpointV2, "/criteria/predefined");
 
             LOGGER.info("Configuring ESPDRequestV1 endpoint...");
             Endpoint ESPDRequestV1Endpoint = new ESPDEndpoint(new RegulatedESPDRequestV1Service());

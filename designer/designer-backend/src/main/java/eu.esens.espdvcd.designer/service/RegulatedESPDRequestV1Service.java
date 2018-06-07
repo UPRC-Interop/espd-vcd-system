@@ -6,6 +6,7 @@ import eu.esens.espdvcd.designer.exception.ValidationException;
 import eu.esens.espdvcd.designer.typeEnum.ArtefactType;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
+import eu.esens.espdvcd.schema.SchemaVersion;
 import eu.esens.espdvcd.validator.ArtefactValidator;
 import org.xml.sax.SAXException;
 
@@ -23,7 +24,7 @@ public class RegulatedESPDRequestV1Service implements ESPDService {
 
     public RegulatedESPDRequestV1Service() throws RetrieverException {
         artefactType = ArtefactType.REQUEST;
-        criteriaService = new PredefinedCriteriaService();
+        criteriaService = new PredefinedCriteriaService(SchemaVersion.V1);
         schematronValidationService = new SchematronValidatorService();
         schemaValidationService = new SchemaValidatorService();
     }
