@@ -48,7 +48,7 @@ export class ProcedureComponent implements OnInit, OnChanges {
     // console.log(form.value);
     this.dataService.CADetails.cacountry = form.value.CACountry;
     this.dataService.CADetails.receivedNoticeNumber = form.value.receivedNoticeNumber;
-    // console.log(this.dataService.CADetails);
+    console.log(this.dataService.CADetails);
   }
 
 

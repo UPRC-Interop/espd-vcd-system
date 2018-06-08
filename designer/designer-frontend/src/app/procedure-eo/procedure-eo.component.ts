@@ -107,6 +107,7 @@ export class ProcedureEoComponent implements OnInit {
         'contactPointName': new FormControl(),
         'emailAddress': new FormControl(),
         'telephoneNumber': new FormControl(),
+        'faxNumber': new FormControl(),
       })
     });
   }
@@ -143,7 +144,8 @@ export class ProcedureEoComponent implements OnInit {
             req.response = new RequirementResponse();
 
             if (req.responseDataType == 'INDICATOR') {
-              if (formValues[req.id.valueOf()] == 'YES') {
+              // console.log(formValues[req.id.valueOf()]);
+              if (formValues[req.id.valueOf()] == true) {
                 req.response.indicator = true;
                 req.response.id = null;
               } else {
@@ -182,8 +184,8 @@ export class ProcedureEoComponent implements OnInit {
               req.response.id = null;
             } else if (req.responseDataType == 'AMOUNT') {
               req.response.amount = formValues[req.id.valueOf()];
-              const currencyid = req.id + 'currency';
-              req.response.currency = formValues[currencyid.valueOf()];
+              // const currencyid = req.id + 'currency';
+              // req.response.currency = formValues[currencyid.valueOf()];
               req.response.id = null;
             } else if (req.responseDataType == 'QUANTITY_INTEGER') {
               req.response.quantity = formValues[req.id.valueOf()];
