@@ -442,8 +442,12 @@ export class DataService {
         .then(res => {
           // res.cadetails=this.CADetails;
           // console.log(res.fullCriterionList);
-          // console.log(res.cadetails);
+          console.log(res.cadetails);
           this.CADetails = res.cadetails;
+          // console.log(res.cadetails.postalAddress);
+          console.log(this.CADetails.postalAddress.addressLine1);
+          console.log(this.CADetails.postalAddress.city);
+          console.log(this.CADetails.postalAddress.postCode);
           this.selectedCountry = this.CADetails.cacountry;
 
 
@@ -1127,14 +1131,17 @@ export class DataService {
 
 
   toFormGroup(rg: RequirementGroup) {
+
+    // let ID = 0;
+
     let group: any = {};
     if (rg) {
       // console.log('In Req Group: ' + rg.id);
       if (rg.requirements != undefined) {
         rg.requirements.forEach(r => {
+          // ID++;
+          // console.log(ID);
           // console.log('In Req: ' + r.id);
-
-          // TODO if date handle date
           if (r.response != null || r.response != undefined) {
             group[r.id] = new FormControl(r.response.description ||
               r.response.percentage || r.response.indicator || r.response.evidenceURL ||

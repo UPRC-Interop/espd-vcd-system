@@ -46,7 +46,7 @@ export class ExclusionEoComponent implements OnInit {
             console.log(formValues[req.id.valueOf()]);
             req.response = new RequirementResponse();
             if (req.responseDataType == 'INDICATOR') {
-              if (formValues[req.id.valueOf()] == 'YES') {
+              if (formValues[req.id.valueOf()] == true) {
                 req.response.indicator = true;
                 req.response.id = null;
               } else {
