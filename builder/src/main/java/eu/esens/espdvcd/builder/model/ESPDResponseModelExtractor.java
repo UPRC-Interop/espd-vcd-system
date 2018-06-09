@@ -177,10 +177,104 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
         return r;
     }
 
-    public Response extractResponse(TenderingCriterionResponseType responseType, ResponseTypeEnum theType) {
+    public Response extractResponse(TenderingCriterionResponseType res, ResponseTypeEnum theType) {
+
+        if (res.getResponseValue().isEmpty()) {
+            return null;
+        }
 
         switch (theType) {
 
+            case INDICATOR:
+                IndicatorResponse resp = new IndicatorResponse();
+                if (res.getResponseValue().get(0).getResponseIndicator() != null) {
+                    resp.setIndicator(res.getResponseValue().get(0).getResponseIndicator().isValue());
+                }
+                return resp;
+
+            case DATE:
+                DateResponse dResp = new DateResponse();
+                if (res.getResponseValue().get(0).getResponseDate() != null &&
+                        res.getResponseValue().get(0).getResponseDate().getValue() != null) {
+                    dResp.setDate(res.getResponseValue().get(0).getResponseDate().getValue());
+                }
+                return dResp;
+
+            case DESCRIPTION:
+                DescriptionResponse deResp = new DescriptionResponse();
+                if (res.getResponseValue().get(0).getDescription().get(0) != null &&
+                        res.getResponseValue().get(0).getDescription().get(0).getValue() != null) {
+                    deResp.setDescription(res.getResponseValue().get(0).getDescription().get(0).getValue());
+                }
+                return deResp;
+
+            case QUANTITY:
+                QuantityResponse qResp = new QuantityResponse();
+                if (res.getResponseValue().get(0).getResponseQuantity() != null &&
+                        res.getResponseValue().get(0).getResponseQuantity().getValue() != null) {
+                    qResp.setQuantity(res.getResponseValue().get(0).getResponseQuantity().getValue().floatValue());
+                }
+                return qResp;
+
+            case QUANTITY_YEAR:
+                QuantityYearResponse qyResp = new QuantityYearResponse();
+                if (res.getResponseValue().get(0).getResponseQuantity() != null
+                        && res.getResponseValue().get(0).getResponseQuantity().getValue() != null) {
+                    qyResp.setYear(res.getResponseValue().get(0).getResponseQuantity().getValue().intValueExact());
+                }
+                return qyResp;
+
+            case AMOUNT:
+                AmountResponse aResp = new AmountResponse();
+                if (res.getResponseValue().get(0).getResponseAmount() != null &&
+                        res.getResponseValue().get(0).getResponseAmount().getValue() != null) {
+                    aResp.setAmount(res.getResponseValue().get(0).getResponseAmount().getValue().floatValue());
+                    if (res.getResponseValue().get(0).getResponseAmount().getCurrencyID() != null) {
+                        aResp.setCurrency(res.getResponseValue().get(0).getResponseAmount().getCurrencyID());
+                    }
+                }
+                return aResp;
+
+            case CODE_COUNTRY:
+                CountryCodeResponse cResp = new CountryCodeResponse();
+                if (res.getResponseValue().get(0).getResponseCode() != null &&
+                        res.getResponseValue().get(0).getResponseCode().getValue() != null) {
+                    cResp.setCountryCode(res.getResponseValue().get(0).getResponseCode().getValue());
+                }
+                return cResp;
+
+            case PERCENTAGE:
+                PercentageResponse pResp = new PercentageResponse();
+                if (res.getResponseValue().get(0).getResponseNumeric() != null &&
+                        res.getResponseValue().get(0).getResponseNumeric().getValue() != null) {
+                    pResp.setPercentage(res.getResponseValue().get(0).getResponseNumeric().getValue().floatValue());
+                }
+                return pResp;
+
+            case PERIOD:
+                PeriodResponse perResp = new PeriodResponse();
+                if (!res.getApplicablePeriod().isEmpty()
+                        && !res.getApplicablePeriod().get(0).getDescription().isEmpty()
+                        && res.getApplicablePeriod().get(0).getDescription().get(0).getValue() != null) {
+
+                    perResp.setDescription(res.getApplicablePeriod().get(0).getDescription().get(0).getValue());
+                }
+                return perResp;
+
+            case CODE:
+                EvidenceURLCodeResponse ecResp = new EvidenceURLCodeResponse();
+                if (res.getResponseValue().get(0).getResponseCode() != null
+                        && res.getResponseValue().get(0).getResponseCode().getValue() != null) {
+                    ecResp.setEvidenceURLCode(res.getResponseValue().get(0).getResponseCode().getValue());
+                }
+                return ecResp;
+
+            case EVIDENCE_IDENTIFIER:
+                // in v1 this maps to EVIDENCE_URL, CODE, DESCRIPTION
+
+            case IDENTIFIER:
+            case URL:
+                // in v1 this maps to DESCRIPTION
             default:
                 return null;
         }

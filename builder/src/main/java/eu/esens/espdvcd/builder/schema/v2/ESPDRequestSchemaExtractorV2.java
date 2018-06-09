@@ -1,6 +1,5 @@
 package eu.esens.espdvcd.builder.schema.v2;
 
-import eu.esens.espdvcd.codelist.enums.CriterionElementTypeEnum;
 import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.requirement.Requirement;
@@ -10,14 +9,15 @@ import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionPropertyTyp
 import eu.espd.schema.v2.pre_award.commonbasic.*;
 import eu.espd.schema.v2.pre_award.qualificationapplicationrequest.QualificationApplicationRequestType;
 import eu.espd.schema.v2.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
+
+import java.util.stream.Collectors;
+
 //import test.x.ubl.pre_award.commonaggregate.DocumentReferenceType;
 //import test.x.ubl.pre_award.commonaggregate.ProcurementProjectLotType;
 //import test.x.ubl.pre_award.commonaggregate.TenderingCriterionPropertyType;
 //import test.x.ubl.pre_award.commonbasic.*;
 //import test.x.ubl.pre_award.qualificationapplicationrequest.QualificationApplicationRequestType;
 //import test.x.ubl.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
-
-import java.util.stream.Collectors;
 
 public class ESPDRequestSchemaExtractorV2 implements SchemaExtractorV2 {
 
@@ -52,7 +52,7 @@ public class ESPDRequestSchemaExtractorV2 implements SchemaExtractorV2 {
         reqType.setVersionID(createVersionIDType("2017.01.01"));
         reqType.setProfileExecutionID(new ProfileExecutionIDType());
         reqType.getProfileExecutionID().setSchemeAgencyID("EU-COM-GROW");
-        reqType.getProfileExecutionID().setSchemeVersionID("2.0.1");
+        reqType.getProfileExecutionID().setSchemeVersionID("2.0.2");
         // FIXME (REGULATED / SELF-CONTAINED 2.0.1) Compulsory use of the CodeList ProfileExecutionID. Use the value "EU-COM-GROW" for th SchemeAgencyID attribute
         reqType.getProfileExecutionID().setValue("ESPD-EDMv2.0.1-REGULATED");
         // FIXME hardcoded value has to be replaced here
@@ -86,25 +86,20 @@ public class ESPDRequestSchemaExtractorV2 implements SchemaExtractorV2 {
         propertyType.getDescription().add(new DescriptionType());
         propertyType.getDescription().get(0).setValue(r.getDescription());
         // tbr070-013
-        // FIXME (SELF-CONTAINED 2.0.1) The Regulated ESPD documents do not specify REQUIREMENTS, only QUESTIONS. The SELF-CONTAINED version does
+        // FIXME (SELF-CONTAINED 2.0.2) The Regulated ESPD documents do not specify REQUIREMENTS, only QUESTIONS. The SELF-CONTAINED version does
         propertyType.setTypeCode(new TypeCodeType());
-
-        if (r.getTypeCode() != null) {
-            propertyType.getTypeCode().setValue(r.getTypeCode().name());
-        } else { // FIXME temporary fix to avoid NullPointerException when importFrom(V1.0.2 artefact)
-            propertyType.getTypeCode().setValue(CriterionElementTypeEnum.QUESTION.name());
-        }
+        propertyType.getTypeCode().setValue(r.getTypeCode().name());
 
         propertyType.getTypeCode().setListID("CriterionElementType");
         propertyType.getTypeCode().setListAgencyID("EU-COM-GROW");
-        propertyType.getTypeCode().setListVersionID("2.0.1");
+        propertyType.getTypeCode().setListVersionID("2.0.2");
 
         // tbr070-013
         propertyType.setValueDataTypeCode(new ValueDataTypeCodeType());
         propertyType.getValueDataTypeCode().setValue(r.getResponseDataType().name());
         propertyType.getValueDataTypeCode().setListID("ResponseDataType");
         propertyType.getValueDataTypeCode().setListAgencyID("EU-COM-GROW");
-        propertyType.getValueDataTypeCode().setListVersionID("2.0.1");
+        propertyType.getValueDataTypeCode().setListVersionID("2.0.2");
 
         return propertyType;
     }

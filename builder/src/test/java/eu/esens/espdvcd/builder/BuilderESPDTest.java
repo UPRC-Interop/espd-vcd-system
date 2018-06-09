@@ -230,7 +230,7 @@ public class BuilderESPDTest {
         // request.setCriterionList(extractor.getFullList());
         System.out.println(BuilderFactory.withSchemaVersion1()
                 .getDocumentBuilderFor(request)
-                // .addDefaultESPDCriteriaList()   // <- AFTER
+                .addDefaultESPDCriteriaList()   // <- AFTER
                 // .addECertisCriteriaList()       // <- AFTER
                 .theXML);
     }

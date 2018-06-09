@@ -22,8 +22,21 @@ public class ECertisCriteriaExtractorTest {
 
     @Before
     public void setUp() {
-        extractor = new ECertisCriteriaExtractor(SchemaVersion.V1);
+        extractor = new ECertisCriteriaExtractor(SchemaVersion.V2);
     }
+
+    @Test
+    public void testGetAllEUCriteriaIDs() throws RetrieverException {
+
+        int index = 1;
+
+        for (String id : extractor.getAllEuropeanCriteriaID()) {
+            System.out.println("(" + index + ") " + id);
+            index++;
+        }
+
+    }
+
 
     @Ignore
     @Test
@@ -50,24 +63,28 @@ public class ECertisCriteriaExtractorTest {
         } else {
 
             System.out.println("Predefined IDs that are not contained in e-Certis list:");
-            predefinedIDList.stream().forEach(scID -> {
-
-                if (!ecertisIDList.contains(scID)) {
-                    System.out.println(scID);
+            int index1 = 1;
+            for (String id : predefinedIDList) {
+                if (!ecertisIDList.contains(id)) {
+                    System.out.println("(" + index1 + ") " + id);
+                    index1++;
                 }
-            });
+            }
 
             System.out.println("\ne-Certis IDs that are not contained in Predefined list:");
-            ecertisIDList.stream().forEach(ecID -> {
-
-                if (!predefinedIDList.contains(ecID)) {
-                    System.out.println(ecID);
+            int index2 = 1;
+            for (String id : ecertisIDList) {
+                if (!predefinedIDList.contains(id)) {
+                    System.out.println("(" + index2 + ") " + id);
+                    index2++;
                 }
-            });
+            }
+
         }
 
     }
 
+    @Ignore
     @Test
     public void testGetFullListTwice() throws RetrieverException {
 
@@ -83,15 +100,18 @@ public class ECertisCriteriaExtractorTest {
         System.out.println("Second time: " + (end2 - start2) + " msecs");
     }
 
+    @Test
     public void testGetFullList() throws RetrieverException {
 
         List<SelectableCriterion> criteriaList = extractor.getFullList();
+        int numberOfCriterion = 1;
 
-        criteriaList.forEach((SelectableCriterion sc) -> {
-            System.out.println(sc.getID() + " " + sc.getName() + " (" + sc.getTypeCode() + ")");
+        for (SelectableCriterion sc : criteriaList) {
+            System.out.println("(" + numberOfCriterion + ") " + sc.getID() + " " + sc.getName() + " (" + sc.getTypeCode() + ")");
             Optional.ofNullable(sc.getLegislationReference())
                     .ifPresent(lr -> traverseLegislationReference(lr));
-        });
+            numberOfCriterion++;
+        }
 
         System.out.printf("Number of EU Criteria: %d%n", criteriaList.size());
     }

@@ -8,20 +8,18 @@ import eu.espd.schema.v1.espdrequest_1.ESPDRequestType;
 import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionType;
 import eu.espd.schema.v2.pre_award.qualificationapplicationrequest.QualificationApplicationRequestType;
 
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import javax.validation.constraints.NotNull;
+import javax.xml.bind.JAXB;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
-import javax.validation.constraints.NotNull;
-import javax.xml.bind.JAXB;
 
 public class PredefinedESPDCriteriaExtractor implements CriteriaExtractor {
 
     private List<CriterionType> criterionTypeList;
-    private List<TenderingCriterionType> tenderingCriterionTypeList;
+    private Map<String, TenderingCriterionType> tenderingCriterionTypeMap;
+    private List<SelectableCriterion> excelCriterionList;
 
     private static final String ESPD_REQUEST_V1_REGULATED_RESOURCE = "/templates/v1_regulated/espd-request-2018.03.xml";
     private static final String ESPD_REQUEST_V2_REGULATED_RESOURCE = "/templates/v2_regulated/espd-request-v2_2018-05-30a.xml";
@@ -38,12 +36,34 @@ public class PredefinedESPDCriteriaExtractor implements CriteriaExtractor {
                 break;
             case V2:
                 QualificationApplicationRequestType requestV2Template = JAXB.unmarshal(CriteriaExtractor.class.getResourceAsStream(ESPD_REQUEST_V2_REGULATED_RESOURCE), QualificationApplicationRequestType.class);
-                tenderingCriterionTypeList = requestV2Template.getTenderingCriterion();
+                tenderingCriterionTypeMap = new HashMap<>();
+                requestV2Template.getTenderingCriterion().forEach(tc -> tenderingCriterionTypeMap.put(tc.getID().getValue(), tc));
+                PredefinedExcelCriteriaExtractor excelCriteriaExtractor = new PredefinedExcelCriteriaExtractor();
+                excelCriterionList = excelCriteriaExtractor.getFullList();
                 break;
             default:
                 throw new IllegalArgumentException("Error... Invalid schema version value.");
         }
 
+    }
+
+    private SelectableCriterion applyDataFromV2Artefact(final SelectableCriterion excelCriterion, boolean isSelected) {
+
+        TenderingCriterionType artefactCriterionType = tenderingCriterionTypeMap.get(excelCriterion.getID());
+
+        if (artefactCriterionType != null) {
+            SelectableCriterion artefactCriterion = ModelFactory.ESPD_REQUEST.extractSelectableCriterion(artefactCriterionType, isSelected);
+
+            if (artefactCriterion.getLegislationReference() != null) {
+                excelCriterion.setLegislationReference(artefactCriterion.getLegislationReference());
+            }
+        }
+
+        return excelCriterion;
+    }
+
+    private SelectableCriterion applyDataFromV2Artefact(final SelectableCriterion excelCriterion) {
+        return applyDataFromV2Artefact(excelCriterion, true);
     }
 
     @Override
@@ -58,8 +78,12 @@ public class PredefinedESPDCriteriaExtractor implements CriteriaExtractor {
                         .collect(Collectors.toList());
                 break;
             case V2:
-                lc = tenderingCriterionTypeList.stream()
-                        .map(c -> ModelFactory.ESPD_REQUEST.extractSelectableCriterion(c))
+//                lc = tenderingCriterionTypeList.stream()
+//                        .map(c -> ModelFactory.ESPD_REQUEST.extractSelectableCriterion(c))
+//                        .collect(Collectors.toList());
+
+                lc = excelCriterionList.stream()
+                        .map(sc -> applyDataFromV2Artefact(sc))
                         .collect(Collectors.toList());
                 break;
             default:
@@ -87,8 +111,12 @@ public class PredefinedESPDCriteriaExtractor implements CriteriaExtractor {
                         .collect(Collectors.toSet());
                 break;
             case V2:
-                fullSet = tenderingCriterionTypeList.stream()
-                        .map(c -> ModelFactory.ESPD_REQUEST.extractSelectableCriterion(c, addAsSelected))
+//                fullSet = tenderingCriterionTypeList.stream()
+//                        .map(c -> ModelFactory.ESPD_REQUEST.extractSelectableCriterion(c, addAsSelected))
+//                        .collect(Collectors.toSet());
+
+                fullSet = excelCriterionList.stream()
+                        .map(sc -> applyDataFromV2Artefact(sc, addAsSelected))
                         .collect(Collectors.toSet());
                 break;
             default:
