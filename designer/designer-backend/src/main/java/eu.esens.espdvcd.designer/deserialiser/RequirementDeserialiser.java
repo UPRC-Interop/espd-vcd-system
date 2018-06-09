@@ -2,10 +2,9 @@ package eu.esens.espdvcd.designer.deserialiser;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.requirement.ResponseRequirement;
 import eu.esens.espdvcd.model.requirement.response.*;
@@ -23,7 +22,7 @@ public class RequirementDeserialiser extends StdDeserializer<ResponseRequirement
 
     @Override
     public ResponseRequirement deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
+        final ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule()).disable(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE).configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
         JsonNode root = p.getCodec().readTree(p);
         JsonNode responseType = root.get("responseDataType");
         JsonNode ID = root.get("id");
@@ -66,8 +65,12 @@ public class RequirementDeserialiser extends StdDeserializer<ResponseRequirement
             case EVIDENCE_URL:
                 response = mapper.treeToValue(root.get("response"), EvidenceURLResponse.class);
                 break;
+            case DATE:
+                response = mapper.treeToValue(root.get("response"), DateResponse.class);
+                break;
             default:
                 response = null;
+                System.err.println("RESPONSE TYPE NOT FOUND");
                 break;
         }
         responseRequirement.setResponse(response);

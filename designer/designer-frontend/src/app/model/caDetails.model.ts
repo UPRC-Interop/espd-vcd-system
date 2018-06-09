@@ -1,5 +1,6 @@
-import {PostalAddress} from "./postalAddress.model";
-import {ContactingDetails} from "./contactingDetails.model";
+import {PostalAddress} from './postalAddress.model';
+import {ContactingDetails} from './contactingDetails.model';
+
 export class Cadetails {
   procurementProcedureTitle: string;
   procurementProcedureDesc: string;
@@ -13,8 +14,8 @@ export class Cadetails {
   id: string;
   caofficialName: string;
   cacountry: string;
-  receivedNoticeNumber?:string;
+  receivedNoticeNumber?: string;
   nationalOfficialJournal?: string;
-  procurementProcedureType?:string;
+  procurementProcedureType?: string;
 
 }
