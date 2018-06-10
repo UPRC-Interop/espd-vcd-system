@@ -9,11 +9,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.stream.Collectors;
 
 public class RegulatedESPDResponseV1ServiceTest {
 
@@ -21,7 +18,7 @@ public class RegulatedESPDResponseV1ServiceTest {
     File espdResponseFile;
     ESPDRequest request;
     ESPDResponse response;
-    ESPDService service;
+    ModeltoESPDService service;
     ObjectWriter writer;
 
     @Before
@@ -40,7 +37,7 @@ public class RegulatedESPDResponseV1ServiceTest {
                 (RegulatedESPDResponseV1ServiceTest.class.getResourceAsStream("/espd-response.xml")).createESPDResponse();
         Assert.assertNotNull(response);
 
-        service = new RegulatedESPDResponseV1Service();
+        service = new RegulatedModeltoESPDResponseV1Service();
         writer = new ObjectMapper().writer().withDefaultPrettyPrinter();
     }
 
@@ -60,14 +57,14 @@ public class RegulatedESPDResponseV1ServiceTest {
 
     @Test
     public void XMLStreamFromResponse() throws Exception{
-        InputStream is = service.ObjectToXMLStreamTransformer(response);
+        InputStream is = service.CreateXMLStreamFromModel(response);
         Assert.assertNotNull(is);
 //        System.out.print(new BufferedReader( new InputStreamReader(is) ).lines().parallel().collect(Collectors.joining("\n")));
     }
 
     @Test
     public void XMLStringFromResponse() throws Exception{
-        String is = service.ObjectToXMLStringTransformer(response);
+        String is = service.CreateXMLStringFromModel(response);
         Assert.assertNotNull(is);
 //        System.out.print(is);
     }

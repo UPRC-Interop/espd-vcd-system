@@ -11,24 +11,20 @@ import org.xml.sax.SAXException;
 import javax.xml.bind.JAXBException;
 import java.io.*;
 
-public class RegulatedESPDResponseV2Service implements ESPDService {
+public class RegulatedModeltoESPDResponseV2Service implements ModeltoESPDService {
     private final ArtefactType artefactType;
 
-    public RegulatedESPDResponseV2Service(){
+    public RegulatedModeltoESPDResponseV2Service(){
         artefactType=ArtefactType.RESPONSE;
-    }
-    @Override
-    public ESPDResponse XMLFileToObjectTransformer(File XML) throws RetrieverException, BuilderException, ValidationException, FileNotFoundException, JAXBException, SAXException {
-        return BuilderFactory.getRegulatedModelBuilder().importFrom(new FileInputStream(XML)).createESPDResponse();
     }
 
     @Override
-    public InputStream ObjectToXMLStreamTransformer(Object document) {
+    public InputStream CreateXMLStreamFromModel(Object document) {
         return BuilderFactory.withSchemaVersion2().getDocumentBuilderFor((ESPDResponse) document).getAsInputStream();
     }
 
     @Override
-    public String ObjectToXMLStringTransformer(Object document) {
+    public String CreateXMLStringFromModel(Object document) {
         return BuilderFactory.withSchemaVersion2().getDocumentBuilderFor((ESPDResponse) document).getAsString();
     }
 
