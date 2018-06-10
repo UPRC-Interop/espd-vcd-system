@@ -49,7 +49,7 @@ public class ESPDRequestSchemaExtractorV2 implements SchemaExtractorV2 {
         reqType.setUBLVersionID(createUBL22VersionIdType());
         reqType.setCustomizationID(createCENBIICustomizationIdType("urn:www.cenbii.eu:transaction:biitrdm070:ver3.0"));
         // FIXME: version id should be updated here
-        reqType.setVersionID(createVersionIDType("2017.01.01"));
+        reqType.setVersionID(createVersionIDType("2018.01.01"));
         reqType.setProfileExecutionID(new ProfileExecutionIDType());
         reqType.getProfileExecutionID().setSchemeAgencyID("EU-COM-GROW");
         reqType.getProfileExecutionID().setSchemeVersionID("2.0.2");
