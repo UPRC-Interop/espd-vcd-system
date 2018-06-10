@@ -32,6 +32,8 @@ public class RequestRequirement implements Requirement {
     @NotNull
     private String ID;
 
+    private String UUID;
+
     /**
      * Criterion requirement description
      * <p>
@@ -91,6 +93,16 @@ public class RequestRequirement implements Requirement {
     @Override
     public void setID(String ID) {
         this.ID = ID;
+    }
+
+    @Override
+    public String getUUID() {
+        return UUID;
+    }
+
+    @Override
+    public void setUUID(String UUID) {
+        this.UUID = UUID;
     }
 
     @Override

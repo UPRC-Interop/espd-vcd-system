@@ -7,6 +7,8 @@ import eu.esens.espdvcd.designer.exception.ValidationException;
 import eu.esens.espdvcd.designer.typeEnum.ArtefactType;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.RegulatedESPDRequest;
+import eu.esens.espdvcd.model.requirement.Requirement;
+import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import eu.esens.espdvcd.schema.SchemaVersion;
 import eu.esens.espdvcd.validator.ArtefactValidator;
@@ -17,12 +19,14 @@ import javax.xml.validation.Schema;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.List;
 
 public class ESPDRequestToModelService implements ESPDtoModelService {
 
     private CriteriaService criteriaService;
     private final ValidatorService schemaValidationService, schematronValidationService;
     private final ArtefactType artefactType;
+    private int counter=0;
 
     public ESPDRequestToModelService() {
         this.artefactType=ArtefactType.REQUEST;
@@ -51,6 +55,24 @@ public class ESPDRequestToModelService implements ESPDtoModelService {
 
         ESPDRequest request = BuilderFactory.getRegulatedModelBuilder().importFrom(new FileInputStream(XML)).createESPDRequest();
         request.setCriterionList(criteriaService.getUnselectedCriteria(request.getFullCriterionList()));
+
+        counter=0;
+        request.getFullCriterionList().forEach(cr -> {
+            cr.setUUID(cr.getID());
+            idFix(cr.getRequirementGroups());
+        });
         return request;
+    }
+
+    private void idFix(List<RequirementGroup> reqGroups){
+        counter++;
+        for(RequirementGroup reqGroup : reqGroups){
+            reqGroup.setUUID(reqGroup.getID()+"-"+counter);
+            idFix(reqGroup.getRequirementGroups());
+            List<Requirement> reqs = reqGroup.getRequirements();
+            reqs.forEach(req -> {
+                req.setUUID(req.getID()+"-"+counter);
+            });
+        }
     }
 }

@@ -32,6 +32,8 @@ public class RequirementGroup implements Serializable {
      */
     private String ID;
 
+    private String UUID;
+
     /**
      * Criterion requirements
      * <p>
@@ -70,7 +72,15 @@ public class RequirementGroup implements Serializable {
     public RequirementGroup(String ID) {
         this.ID = ID;
     }
-    
+
+    public String getUUID() {
+        return UUID;
+    }
+
+    public void setUUID(String UUID) {
+        this.UUID = UUID;
+    }
+
     public RequirementGroup(@JsonProperty("ID") String ID, @JsonProperty("requirements") List<Requirement> requirements) {
         this.ID = ID;
         this.requirements = requirements;

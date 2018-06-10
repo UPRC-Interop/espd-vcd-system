@@ -19,6 +19,10 @@ public interface Requirement extends Serializable {
 
     void setID(String ID);
 
+    String getUUID();
+
+    void setUUID(String UUID);
+
     /**
      * In schema version 2 this is mapped to: cbc:ValueDataTypeCode
      *

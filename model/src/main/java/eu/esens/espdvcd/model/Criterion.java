@@ -40,6 +40,16 @@ public class Criterion implements Serializable {
     @NotNull
     protected String ID;
 
+    protected String UUID;
+
+    public void setUUID(String UUID) {
+        this.UUID = UUID;
+    }
+
+    public String getUUID() {
+        return UUID;
+    }
+
     /**
      * Criterion type code
      * <p>
@@ -106,7 +116,7 @@ public class Criterion implements Serializable {
 
     /** */
     public Criterion() {
-        this.ID = UUID.randomUUID().toString();    
+        this.ID = java.util.UUID.randomUUID().toString();
     }
     
     public Criterion(String ID, String typeCode, String name, String description, LegislationReference legislationReference, List<RequirementGroup> requirementGroups) {
