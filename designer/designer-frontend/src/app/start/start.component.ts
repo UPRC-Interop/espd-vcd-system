@@ -78,6 +78,15 @@ export class StartComponent implements OnInit {
     }
   }
 
+  handleVersionSelection(radio: FormControl) {
+    console.log(radio.value);
+    if (radio.value === 'v1') {
+      this.APIService.version = 'v1';
+    } else if (radio.value === 'v2') {
+      this.APIService.version = 'v2';
+    }
+  }
+
   handleEOSelection(radio: FormControl) {
     if (radio.value === 'importESPD') {
       this.isImportESPD = true;

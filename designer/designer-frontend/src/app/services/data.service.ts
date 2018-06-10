@@ -450,6 +450,7 @@ export class DataService {
           console.log(this.CADetails.postalAddress.postCode);
           this.selectedCountry = this.CADetails.cacountry;
 
+          console.log(res.fullCriterionList);
 
           this.exclusionACriteria = this.filterExclusionCriteria(this.EXCLUSION_CONVICTION_REGEXP, res.fullCriterionList);
           this.exclusionBCriteria = this.filterExclusionCriteria(this.EXCLUSION_CONTRIBUTION_REGEXP, res.fullCriterionList);
@@ -558,6 +559,7 @@ export class DataService {
         'contactPointName': this.EODetails.contactingDetails.contactPointName,
         'emailAddress': this.EODetails.contactingDetails.emailAddress,
         'telephoneNumber': this.EODetails.contactingDetails.telephoneNumber,
+        'faxNumber': this.EODetails.contactingDetails.faxNumber,
       },
       'naturalPersons': this.EODetails.naturalPersons,
       'id': this.EODetails.id,
@@ -1169,6 +1171,7 @@ export class DataService {
           } else {
             r.response = new RequirementResponse();
             group[r.id] = new FormControl(r.response.description || '');
+            group[r.id + 'currency'] = new FormControl(r.response.currency || '');
           }
 
           // console.log(group);

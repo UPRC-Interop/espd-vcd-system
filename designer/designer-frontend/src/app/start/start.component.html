@@ -45,6 +45,24 @@
   </mat-card>
 
   <mat-card *ngIf="isCreateNewESPD && isCA">
+
+    <mat-card-title>Select Version</mat-card-title>
+    <mat-card-content>
+      <mat-radio-group name="versions" ngModel>
+        <mat-radio-button color="primary"
+                          name="version"
+                          value="v1"
+                          (change)="handleVersionSelection(createV1)"
+                          #createV1>Create v1</mat-radio-button>
+        <mat-radio-button color="primary"
+                          name="version"
+                          value="v2"
+                          (change)="handleVersionSelection(createV2)"
+                          #createV2>Create v2
+        </mat-radio-button>
+      </mat-radio-group>
+    </mat-card-content>
+
     <mat-card-title>Where is your Authority located?</mat-card-title>
     <mat-card-content>
       <mat-form-field>
@@ -97,6 +115,24 @@
   </mat-card>
 
   <mat-card *ngIf="isCreateResponse && isEO">
+
+    <mat-card-title>Select Version</mat-card-title>
+    <mat-card-content>
+      <mat-radio-group name="versions" ngModel>
+        <mat-radio-button color="primary"
+                          name="version"
+                          value="v1"
+                          (change)="handleVersionSelection(createV1)"
+                          #createV1>Create v1</mat-radio-button>
+        <mat-radio-button color="primary"
+                          name="version"
+                          value="v2"
+                          (change)="handleVersionSelection(createV2)"
+                          #createV2>Create v2
+        </mat-radio-button>
+      </mat-radio-group>
+    </mat-card-content>
+
     <mat-card-title>Where is your business located?</mat-card-title>
     <mat-card-content>
       <mat-form-field>

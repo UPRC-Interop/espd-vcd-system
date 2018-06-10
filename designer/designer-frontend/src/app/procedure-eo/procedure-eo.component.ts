@@ -47,6 +47,7 @@ export class ProcedureEoComponent implements OnInit {
       'contactingDetails': new FormGroup({
         'contactPointName': new FormControl(),
         'emailAddress': new FormControl(),
+        'faxNumber': new FormControl(),
         'telephoneNumber': new FormControl(),
       }),
       'naturalPersons': new FormArray([this.initNaturalPerson()]),
@@ -107,7 +108,6 @@ export class ProcedureEoComponent implements OnInit {
         'contactPointName': new FormControl(),
         'emailAddress': new FormControl(),
         'telephoneNumber': new FormControl(),
-        'faxNumber': new FormControl(),
       })
     });
   }
