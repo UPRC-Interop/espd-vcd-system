@@ -1,6 +1,7 @@
 package eu.esens.espdvcd.designer.service;
 
 import eu.esens.espdvcd.model.SelectableCriterion;
+import eu.esens.espdvcd.schema.SchemaVersion;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -10,7 +11,7 @@ import static org.junit.Assert.*;
 
 public class PredefinedCriteriaServiceTest {
 
-    CriteriaService predefinedCriteriaService = new PredefinedCriteriaService();
+    CriteriaService predefinedCriteriaService = new PredefinedCriteriaService(SchemaVersion.V1);
 
     @Test
     public void getCriteria() throws Exception {
