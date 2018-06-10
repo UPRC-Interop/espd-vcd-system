@@ -1,9 +1,6 @@
 package eu.esens.espdvcd.designer;
 
-import eu.esens.espdvcd.designer.endpoint.CodelistsEndpoint;
-import eu.esens.espdvcd.designer.endpoint.CriteriaEndpoint;
-import eu.esens.espdvcd.designer.endpoint.ESPDEndpoint;
-import eu.esens.espdvcd.designer.endpoint.Endpoint;
+import eu.esens.espdvcd.designer.endpoint.*;
 import eu.esens.espdvcd.designer.service.*;
 import eu.esens.espdvcd.schema.SchemaVersion;
 import spark.Service;
@@ -50,7 +47,8 @@ public class Server {
         LOGGER.info("Starting endpoint configuration");
 
         RestContext v2Context = new RestContext("/api/v2", spark),
-                v1Context = new RestContext("/api/v1", spark);
+                v1Context = new RestContext("/api/v1", spark),
+                unversionedContext = new RestContext("/api", spark);
 
         try {
             LOGGER.info("Configuring codelistsV1 endpoint...");
@@ -75,21 +73,29 @@ public class Server {
             v1Context.addEndpointWithPath(predefCriteriaEndpointV1, "/criteria/predefined");
             v2Context.addEndpointWithPath(predefCriteriaEndpointV2, "/criteria/predefined");
 
-            LOGGER.info("Configuring ESPDRequestV1 endpoint...");
-            Endpoint ESPDRequestV1Endpoint = new ESPDEndpoint(new RegulatedESPDRequestV1Service());
+            LOGGER.info("Configuring ExportESPDRequestV1 endpoint...");
+            Endpoint ESPDRequestV1Endpoint = new ExportESPDEndpoint(new RegulatedModeltoESPDRequestV1Service());
             v1Context.addEndpointWithPath(ESPDRequestV1Endpoint, "/espd/request");
 
-            LOGGER.info("Configuring ESPDResponseV1 endpoint...");
-            Endpoint ESPDResponseV1Endpoint = new ESPDEndpoint(new RegulatedESPDResponseV1Service());
+            LOGGER.info("Configuring ExportESPDResponseV1 endpoint...");
+            Endpoint ESPDResponseV1Endpoint = new ExportESPDEndpoint(new RegulatedModeltoESPDResponseV1Service());
             v1Context.addEndpointWithPath(ESPDResponseV1Endpoint, "/espd/response");
 
-            LOGGER.info("Configuring ESPDRequestV2 endpoint...");
-            Endpoint ESPDRequestV2Endpoint = new ESPDEndpoint(new RegulatedESPDRequestV2Service());
+            LOGGER.info("Configuring ExportESPDRequestV2 endpoint...");
+            Endpoint ESPDRequestV2Endpoint = new ExportESPDEndpoint(new RegulatedModeltoESPDRequestV2Service());
             v2Context.addEndpointWithPath(ESPDRequestV2Endpoint, "/espd/request");
 
-            LOGGER.info("Configuring ESPDResponseV2 endpoint...");
-            Endpoint ESPDResponseV2Endpoint = new ESPDEndpoint(new RegulatedESPDResponseV2Service());
+            LOGGER.info("Configuring ExportESPDResponseV2 endpoint...");
+            Endpoint ESPDResponseV2Endpoint = new ExportESPDEndpoint(new RegulatedModeltoESPDResponseV2Service());
             v2Context.addEndpointWithPath(ESPDResponseV2Endpoint, "/espd/response");
+
+            LOGGER.info("Configuring ImportESPDRequest endpoint...");
+            Endpoint importESPDReq = new ImportESPDEndpoint(new ESPDRequestToModelService());
+            unversionedContext.addEndpointWithPath(importESPDReq, "/importESPD/request");
+
+            LOGGER.info("Configuring ImportESPDResponse endpoint...");
+            Endpoint importESPDResp = new ImportESPDEndpoint(new ESPDResponseToModelService());
+            unversionedContext.addEndpointWithPath(importESPDResp, "/importESPD/response");
         } catch (Exception e) {
             LOGGER.severe("Failed to initialize the endpoints with error " + e.getMessage());
             System.exit(3);

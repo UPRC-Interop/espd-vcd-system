@@ -9,29 +9,20 @@ import eu.esens.espdvcd.schema.SchemaVersion;
 
 import java.io.*;
 
-public class RegulatedESPDRequestV2Service implements ESPDService {
-    private final CriteriaService criteriaService;
+public class RegulatedModeltoESPDRequestV2Service implements ModeltoESPDService {
     private final ArtefactType artefactType;
 
-    public RegulatedESPDRequestV2Service() throws RetrieverException {
+    public RegulatedModeltoESPDRequestV2Service() throws RetrieverException {
         artefactType = ArtefactType.REQUEST;
-        criteriaService = new PredefinedCriteriaService(SchemaVersion.V2);
     }
 
     @Override
-    public ESPDRequest XMLFileToObjectTransformer(File XML) throws RetrieverException, BuilderException, FileNotFoundException {
-        ESPDRequest request = BuilderFactory.getRegulatedModelBuilder().importFrom(new FileInputStream(XML)).createESPDRequest();
-        request.setCriterionList(criteriaService.getUnselectedCriteria(request.getFullCriterionList()));
-        return request;
-    }
-
-    @Override
-    public InputStream ObjectToXMLStreamTransformer(Object document) {
+    public InputStream CreateXMLStreamFromModel(Object document) {
         return BuilderFactory.withSchemaVersion2().getDocumentBuilderFor((ESPDRequest) document).getAsInputStream();
     }
 
     @Override
-    public String ObjectToXMLStringTransformer(Object document) {
+    public String CreateXMLStringFromModel(Object document) {
         return BuilderFactory.withSchemaVersion2().getDocumentBuilderFor((ESPDRequest) document).getAsString();
     }
 

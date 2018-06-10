@@ -118,6 +118,7 @@ export class DataService {
                         selectionBCriteria?: SelectionCriteria[],
                         selectionCCriteria?: SelectionCriteria[],
                         selectionDCriteria?: SelectionCriteria[],
+                        eoRelatedCriteria?: EoRelatedCriterion[],
                         eoRelatedACriteria?: EoRelatedCriterion[],
                         eoRelatedCCriteria?: EoRelatedCriterion[],
                         eoRelatedDCriteria?: EoRelatedCriterion[],
@@ -131,7 +132,10 @@ export class DataService {
           ...exclusionBCriteria,
           ...exclusionCCriteria,
           ...exclusionDCriteria,
-          ...selectionALLCriteria];
+          ...selectionALLCriteria,
+          ...eoRelatedCriteria,
+          ...reductionCriteria
+        ];
         // console.dir(combineJsonArray);
         return combineJsonArray;
 
@@ -144,7 +148,9 @@ export class DataService {
           ...selectionACriteria,
           ...selectionBCriteria,
           ...selectionCCriteria,
-          ...selectionDCriteria];
+          ...selectionDCriteria,
+          ...eoRelatedCriteria,
+          ...reductionCriteria];
         // console.dir(combineJsonArray);
         return combineJsonArray;
       }
@@ -238,6 +244,8 @@ export class DataService {
 
   }
 
+  // date handling
+
   toUTCDate(date: Moment): Moment {
     const utcDate = new Date(Date.UTC(date.toDate().getFullYear(),
       date.toDate().getMonth(),
@@ -313,7 +321,9 @@ export class DataService {
       this.selectionACriteria,
       this.selectionBCriteria,
       this.selectionCCriteria,
-      this.selectionDCriteria);
+      this.selectionDCriteria,
+      this.eoRelatedCriteria,
+      this.reductionCriteria);
 
     // apicall service post
     this.APIService.getXMLRequest(JSON.stringify(this.createESPDRequest()))
@@ -334,6 +344,11 @@ export class DataService {
         console.log(err);
       });
 
+  }
+
+  procedureSubmit(eoRelatedCriteria: EoRelatedCriterion[], reductionCriteria: ReductionCriterion[]) {
+    this.eoRelatedCriteria = eoRelatedCriteria;
+    this.reductionCriteria = reductionCriteria;
   }
 
 
@@ -450,6 +465,7 @@ export class DataService {
           console.log(this.CADetails.postalAddress.postCode);
           this.selectedCountry = this.CADetails.cacountry;
 
+          console.log(res.fullCriterionList);
 
           this.exclusionACriteria = this.filterExclusionCriteria(this.EXCLUSION_CONVICTION_REGEXP, res.fullCriterionList);
           this.exclusionBCriteria = this.filterExclusionCriteria(this.EXCLUSION_CONTRIBUTION_REGEXP, res.fullCriterionList);
@@ -558,6 +574,7 @@ export class DataService {
         'contactPointName': this.EODetails.contactingDetails.contactPointName,
         'emailAddress': this.EODetails.contactingDetails.emailAddress,
         'telephoneNumber': this.EODetails.contactingDetails.telephoneNumber,
+        'faxNumber': this.EODetails.contactingDetails.faxNumber,
       },
       'naturalPersons': this.EODetails.naturalPersons,
       'id': this.EODetails.id,
@@ -1169,6 +1186,7 @@ export class DataService {
           } else {
             r.response = new RequirementResponse();
             group[r.id] = new FormControl(r.response.description || '');
+            group[r.id + 'currency'] = new FormControl(r.response.currency || '');
           }
 
           // console.log(group);

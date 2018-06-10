@@ -13,7 +13,7 @@ public class ECertisCriteriaService implements CriteriaService {
     private ECertisCriteriaExtractor ECERTIS_CRITERIA_EXTRACTOR;
 
     public ECertisCriteriaService(SchemaVersion version) {
-        ECERTIS_CRITERIA_EXTRACTOR = (ECertisCriteriaExtractor) CriteriaExtractorFactory.getECertisCriteriaExtractor(version);
+        ECERTIS_CRITERIA_EXTRACTOR = new ECertisCriteriaExtractor(version);
     }
 
     @Override

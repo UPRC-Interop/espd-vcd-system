@@ -82,6 +82,7 @@ export class ExclusionEoComponent implements OnInit {
             } else if (req.responseDataType == 'AMOUNT') {
               req.response.amount = formValues[req.id.valueOf()];
               const currencyid = req.id + 'currency';
+              console.log(formValues[currencyid.valueOf()]);
               req.response.currency = formValues[currencyid.valueOf()];
               req.response.id = null;
             } else if (req.responseDataType == 'QUANTITY_INTEGER') {

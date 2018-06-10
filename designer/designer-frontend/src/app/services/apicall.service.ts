@@ -17,6 +17,11 @@ export class ApicallService {
 
   /* ============ CODELISTS =============*/
 
+  version: string = 'v1';
+  // version: string = 'v2';
+  // version: string;
+
+
   constructor(private http: HttpClient) {
   }
 
@@ -36,68 +41,68 @@ export class ApicallService {
   /* ==================== EO related criteria ========================= */
 
   getEO_RelatedCriteria() {
-    return this.http.get<EoRelatedCriterion[]>(environment.apiUrl + 'v1/criteria/predefined/eo_related').toPromise();
+    return this.http.get<EoRelatedCriterion[]>(environment.apiUrl + this.version + '/criteria/predefined/eo_related').toPromise();
   }
 
   getEO_RelatedACriteria() {
-    return this.http.get<EoRelatedCriterion[]>(environment.apiUrl + 'v1/criteria/predefined/eo_related_A').toPromise();
+    return this.http.get<EoRelatedCriterion[]>(environment.apiUrl + this.version + '/criteria/predefined/eo_related_A').toPromise();
   }
 
   getEO_RelatedCCriteria() {
-    return this.http.get<EoRelatedCriterion[]>(environment.apiUrl + 'v1/criteria/predefined/eo_related_B').toPromise();
+    return this.http.get<EoRelatedCriterion[]>(environment.apiUrl + this.version + '/criteria/predefined/eo_related_B').toPromise();
   }
 
   getEO_RelatedDCriteria() {
-    return this.http.get<EoRelatedCriterion[]>(environment.apiUrl + 'v1/criteria/predefined/eo_related_C').toPromise();
+    return this.http.get<EoRelatedCriterion[]>(environment.apiUrl + this.version + '/criteria/predefined/eo_related_C').toPromise();
   }
 
   /* =========================== Reduction of Candidates ================= */
 
   get_ReductionCriteria() {
-    return this.http.get<ReductionCriterion[]>(environment.apiUrl + 'v1/criteria/predefined/reduction').toPromise();
+    return this.http.get<ReductionCriterion[]>(environment.apiUrl + this.version +  '/criteria/predefined/reduction').toPromise();
   }
 
   /* ============= EXCLUSION CRITERIA ===================*/
   getExclusionCriteria() {
-    return this.http.get<ExclusionCriteria[]>(environment.apiUrl + 'v1/criteria/predefined/exclusion').toPromise();
+    return this.http.get<ExclusionCriteria[]>(environment.apiUrl + this.version + '/criteria/predefined/exclusion').toPromise();
   }
 
   getExclusionCriteria_A() {
-    return this.http.get<ExclusionCriteria[]>(environment.apiUrl + 'v1/criteria/predefined/exclusion_a').toPromise();
+    return this.http.get<ExclusionCriteria[]>(environment.apiUrl + this.version + '/criteria/predefined/exclusion_a').toPromise();
   }
 
   getExclusionCriteria_B() {
-    return this.http.get<ExclusionCriteria[]>(environment.apiUrl + 'v1/criteria/predefined/exclusion_b').toPromise();
+    return this.http.get<ExclusionCriteria[]>(environment.apiUrl + this.version + '/criteria/predefined/exclusion_b').toPromise();
   }
 
   getExclusionCriteria_C() {
-    return this.http.get<ExclusionCriteria[]>(environment.apiUrl + 'v1/criteria/predefined/exclusion_c').toPromise();
+    return this.http.get<ExclusionCriteria[]>(environment.apiUrl + this.version + '/criteria/predefined/exclusion_c').toPromise();
   }
 
   getExclusionCriteria_D() {
-    return this.http.get<ExclusionCriteria[]>(environment.apiUrl + 'v1/criteria/predefined/exclusion_d').toPromise();
+    return this.http.get<ExclusionCriteria[]>(environment.apiUrl + this.version + '/criteria/predefined/exclusion_d').toPromise();
   }
 
   /* ============= SELECTION CRITERIA ===================*/
 
   getSelectionCriteria() {
-    return this.http.get<SelectionCriteria[]>(environment.apiUrl + 'v1/criteria/predefined/selection').toPromise();
+    return this.http.get<SelectionCriteria[]>(environment.apiUrl + this.version + '/criteria/predefined/selection').toPromise();
   }
 
   getSelectionCriteria_A() {
-    return this.http.get<SelectionCriteria[]>(environment.apiUrl + 'v1/criteria/predefined/selection_a').toPromise();
+    return this.http.get<SelectionCriteria[]>(environment.apiUrl + this.version + '/criteria/predefined/selection_a').toPromise();
   }
 
   getSelectionCriteria_B() {
-    return this.http.get<SelectionCriteria[]>(environment.apiUrl + 'v1/criteria/predefined/selection_b').toPromise();
+    return this.http.get<SelectionCriteria[]>(environment.apiUrl + this.version + '/criteria/predefined/selection_b').toPromise();
   }
 
   getSelectionCriteria_C() {
-    return this.http.get<SelectionCriteria[]>(environment.apiUrl + 'v1/criteria/predefined/selection_c').toPromise();
+    return this.http.get<SelectionCriteria[]>(environment.apiUrl + this.version + '/criteria/predefined/selection_c').toPromise();
   }
 
   getSelectionCriteria_D() {
-    return this.http.get<SelectionCriteria[]>(environment.apiUrl + 'v1/criteria/predefined/selection_d').toPromise();
+    return this.http.get<SelectionCriteria[]>(environment.apiUrl + this.version + '/criteria/predefined/selection_d').toPromise();
   }
 
   /* ============ UPLOAD XML GET JSON ================= */
@@ -111,7 +116,7 @@ export class ApicallService {
     // const header = new HttpHeaders({'Content-Type':'application/xml; charset=utf-8'});
     let header = new HttpHeaders();
     header = header.set('Content-Type', 'application/xml; charset=utf-8');
-    return this.http.post<ESPDRequest>(environment.apiUrl + 'v1/espd/request', formData).toPromise();
+    return this.http.post<ESPDRequest>(environment.apiUrl + '/importESPD/request', formData).toPromise();
 
   }
 
@@ -125,13 +130,14 @@ export class ApicallService {
     // const header = new HttpHeaders({'Content-Type':'application/xml; charset=utf-8'});
     let header = new HttpHeaders();
     header = header.set('Content-Type', 'application/xml; charset=utf-8');
-    return this.http.post<ESPDResponse>(environment.apiUrl + 'v1/espd/response', formData).toPromise();
+    return this.http.post<ESPDResponse>(environment.apiUrl + '/importESPD/response', formData).toPromise();
 
   }
 
   /* ================= UPLOAD JSON GET XML Request ================================= */
   getXMLRequest(ESPDRequest: string) {
 
+    console.log(ESPDRequest);
     let header = new HttpHeaders();
     let _header = header.append('Content-Type', 'application/json; charset=utf-8');
 
