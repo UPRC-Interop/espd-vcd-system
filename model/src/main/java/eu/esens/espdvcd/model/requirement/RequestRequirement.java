@@ -63,7 +63,7 @@ public class RequestRequirement implements Requirement {
      * The type of property. Used to verify that structure of the property is correct
      * UBL syntax path:
      */
-    private CriterionElementTypeEnum typeCode;
+    private CriterionElementTypeEnum typeCode = CriterionElementTypeEnum.QUESTION;
 
     public RequestRequirement(@JsonProperty("ID") String ID,
                               @JsonProperty("responseDataType") ResponseTypeEnum responseDataType,

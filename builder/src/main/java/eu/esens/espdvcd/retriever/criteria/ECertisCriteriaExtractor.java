@@ -62,7 +62,7 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
     // Country code related errors
     private static final String ERROR_INVALID_COUNTRY_CODE = "Error... Provided Country Code %s is not Included in codelists";
 
-    private PredefinedESPDCriteriaExtractor predefinedExtractor;
+    private CriteriaExtractor predefinedCriteriaExtractor;
 
     public enum CriterionOrigin {
 
@@ -70,8 +70,23 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
 
     }
 
-    ECertisCriteriaExtractor(@NotNull SchemaVersion version) {
-        this.predefinedExtractor = new PredefinedESPDCriteriaExtractor(version);
+    public ECertisCriteriaExtractor(@NotNull SchemaVersion version) {
+
+        switch (version) {
+            case V1:
+                this.predefinedCriteriaExtractor = new PredefinedESPDCriteriaExtractor(version);
+                Logger.getLogger(ECertisCriteriaExtractor.class.getName())
+                        .log(Level.INFO, "e-Certis criteria extractor initialized with Predefined v1 artefact resource criterion list");
+                break;
+            case V2:
+                this.predefinedCriteriaExtractor = new PredefinedExcelCriteriaExtractor();
+                Logger.getLogger(ECertisCriteriaExtractor.class.getName())
+                        .log(Level.INFO, "e-Certis criteria extractor initialized with Predefined v2 criteria taxonomy excel resource criterion list");
+                break;
+            default:
+                throw new IllegalArgumentException("Error... Invalid schema version value.");
+        }
+
         this.lang = DEFAULT_LANG;
         try {
             ECERTIS_PROPERTIES.load(new FileInputStream(ECERTIS_CONFIG_PATH));
@@ -90,8 +105,14 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
     private void initPredefinedCriterionList() {
 
         // If Not Initialized Yet, Initialize predefined Criterion List
-        if (predefinedCriterionList == null) {
-            predefinedCriterionList = predefinedExtractor.getFullList();
+        if (predefinedCriterionList == null && predefinedCriteriaExtractor != null) {
+
+            try {
+                predefinedCriterionList = predefinedCriteriaExtractor.getFullList();
+            } catch (RetrieverException e) {
+                Logger.getLogger(ECertisCriteriaExtractor.class.getName())
+                        .log(Level.SEVERE, "Error... Unable to initialize predefined criterion list", e);
+            }
         }
     }
 
@@ -108,17 +129,15 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
 
             ExecutorService executorService = Executors.newCachedThreadPool();
             Set<Callable<ECertisCriterion>> callableSet = new HashSet<>();
-            getAllEuropeanCriteriaID().forEach(ID -> callableSet.add(() -> getCriterion(ID)));
+            List<String> allEuCriteriaID = getAllEuropeanCriteriaID();
+            allEuCriteriaID.forEach(ID -> callableSet.add(() -> getCriterion(ID)));
 
             try {
                 List<Future<ECertisCriterion>> futureList = executorService.invokeAll(callableSet);
 
                 for (Future f : futureList) {
                     ECertisCriterion c = (ECertisCriterion) f.get();
-                    // If Description is not provided, do not add Criterion
-                    if (c.getDescription() != null) {
-                        eCertisCriterionMap.put(c.getID(), c);
-                    }
+                    eCertisCriterionMap.put(c.getID(), c);
                 }
 
             } catch (InterruptedException | ExecutionException ex) {
@@ -254,13 +273,36 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
     private void applyECertisDataAsSelected(final SelectableCriterion sc, final boolean addAsSelected) {
         // find the equivalent criterion from e-Certis criteria map and (if exist)
         // use it in order to update current predefined criterion
-        Optional.ofNullable(eCertisCriterionMap.get(sc.getID()))
-                .ifPresent(ec -> {
-                    sc.setName(ec.getName());
-                    sc.setDescription(ec.getDescription());
-                    sc.setLegislationReference(ec.getLegislationReference());
-                    sc.setSelected(addAsSelected);
-                });
+        ECertisCriterion ec = eCertisCriterionMap.get(sc.getID());
+
+        if (ec != null) {
+
+            if (ec.getName() != null) {
+                sc.setName(ec.getName());
+            } else {
+                Logger.getLogger(ECertisCriteriaExtractor.class.getName())
+                        .log(Level.WARNING, "e-Certis criterion " + ec.getID()
+                                + " has a NULL name value.");
+            }
+
+            if (ec.getDescription() != null) {
+                sc.setDescription(ec.getDescription());
+            } else {
+                Logger.getLogger(ECertisCriteriaExtractor.class.getName())
+                        .log(Level.WARNING, "e-Certis criterion " + ec.getID()
+                                + " has a NULL description value.");
+            }
+
+            if (ec.getLegislationReference() != null) {
+                sc.setLegislationReference(ec.getLegislationReference());
+            } else {
+                Logger.getLogger(ECertisCriteriaExtractor.class.getName())
+                        .log(Level.WARNING, "e-Certis criterion " + ec.getID()
+                                + " has a NULL  legislation reference value.");
+            }
+
+            sc.setSelected(addAsSelected);
+        }
     }
 
     // Get SubCriterion/s of a European Criterion by Country Code

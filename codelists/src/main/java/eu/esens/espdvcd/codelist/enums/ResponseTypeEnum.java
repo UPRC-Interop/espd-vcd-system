@@ -9,28 +9,28 @@ package eu.esens.espdvcd.codelist.enums;
  */
 public enum ResponseTypeEnum {
 
-    INDICATOR,                          // ResponseDataType v1, v2 codelist
-    DATE,                               // ResponseDataType v1, v2 codelist
-    DESCRIPTION,                        // ResponseDataType v1, v2 codelist
-    EVIDENCE_URL,                       // ResponseDataType v1     codelist
-    QUANTITY,                           // ResponseDataType v1, v2 codelist
-    QUANTITY_YEAR,                      // ResponseDataType v1, v2 codelist
-    QUANTITY_INTEGER,                   // ResponseDataType v1, v2 codelist
-    AMOUNT,                             // ResponseDataType v1, v2 codelist
-    CODE_COUNTRY,                       // ResponseDataType v1, v2 codelist
-    PERCENTAGE,                         // ResponseDataType v1, v2 codelist
-    PERIOD,                             // ResponseDataType v1, v2 codelist
-    CODE,                               // ResponseDataType v1, v2 codelist
-    EVIDENCE_IDENTIFIER,                // ResponseDataType     v2 codelist
-    NONE,                               // ResponseDataType     v2 codelist
-    IDENTIFIER,                         // ResponseDataType     v2 codelist
-    URL,                                // ResponseDataType     v2 codelist
-    MAXIMUM_AMOUNT,                     // ResponseDataType     v2 codelist
-    MINIMUM_AMOUNT,                     // ResponseDataType     v2 codelist
-    MAXIMUM_VALUE_NUMERIC,              // ResponseDataType     v2 codelist
-    MINIMUM_VALUE_NUMERIC,              // ResponseDataType     v2 codelist
-    TRANSLATION_TYPE_CODE,              // ResponseDataType     v2 codelist
-    CERTIFICATION_LEVEL_DESCRIPTION,    // ResponseDataType     v2 codelist
-    COPY_QUALITY_TYPE_CODE,             // ResponseDataType     v2 codelist
-    TIME                                // ResponseDataType     v2 codelist
+    INDICATOR,                          // ResponseDataType v1, v2 codelist - REGULATED
+    DATE,                               // ResponseDataType v1, v2 codelist - REGULATED
+    DESCRIPTION,                        // ResponseDataType v1, v2 codelist - REGULATED
+    EVIDENCE_URL,                       // ResponseDataType v1     codelist - REGULATED
+    QUANTITY,                           // ResponseDataType v1, v2 codelist - REGULATED
+    QUANTITY_YEAR,                      // ResponseDataType v1, v2 codelist - REGULATED
+    QUANTITY_INTEGER,                   // ResponseDataType v1, v2 codelist - REGULATED
+    AMOUNT,                             // ResponseDataType v1, v2 codelist - REGULATED
+    CODE_COUNTRY,                       // ResponseDataType v1, v2 codelist - REGULATED
+    PERCENTAGE,                         // ResponseDataType v1, v2 codelist - REGULATED
+    PERIOD,                             // ResponseDataType v1, v2 codelist - REGULATED
+    CODE,                               // ResponseDataType v1, v2 codelist - REGULATED
+    EVIDENCE_IDENTIFIER,                // ResponseDataType     v2 codelist - REGULATED (v1 {EVIDENCE_URL, CODE, DESCRIPTION})
+    NONE,                               // ResponseDataType     v2 codelist - SELF CONTAINED
+    IDENTIFIER,                         // ResponseDataType     v2 codelist - REGULATED
+    URL,                                // ResponseDataType     v2 codelist - REGULATED
+    MAXIMUM_AMOUNT,                     // ResponseDataType     v2 codelist - SELF CONTAINED
+    MINIMUM_AMOUNT,                     // ResponseDataType     v2 codelist - SELF CONTAINED
+    MAXIMUM_VALUE_NUMERIC,              // ResponseDataType     v2 codelist - SELF CONTAINED
+    MINIMUM_VALUE_NUMERIC,              // ResponseDataType     v2 codelist - SELF CONTAINED
+    TRANSLATION_TYPE_CODE,              // ResponseDataType     v2 codelist - SELF CONTAINED
+    CERTIFICATION_LEVEL_DESCRIPTION,    // ResponseDataType     v2 codelist - SELF CONTAINED
+    COPY_QUALITY_TYPE_CODE,             // ResponseDataType     v2 codelist - SELF CONTAINED
+    TIME                                // ResponseDataType     v2 codelist - SELF CONTAINED
 }

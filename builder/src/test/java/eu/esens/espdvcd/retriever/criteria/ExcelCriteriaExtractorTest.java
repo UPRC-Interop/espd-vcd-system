@@ -2,7 +2,6 @@ package eu.esens.espdvcd.retriever.criteria;
 
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
-import eu.esens.espdvcd.schema.SchemaVersion;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -19,7 +18,7 @@ public class ExcelCriteriaExtractorTest {
     @Ignore
     @Test
     public void testReadFile() throws RetrieverException {
-        CriteriaExtractor extractor = new PredefinedExcelCriteriaExtractor(SchemaVersion.V2);
+        CriteriaExtractor extractor = new PredefinedExcelCriteriaExtractor();
         extractor.getFullList().forEach(sc -> {
             System.out.println("ID: " + sc.getID() + " Name: " + sc.getName() + " Desc: " + sc.getDescription() + " Element Code: " + sc.getTypeCode());
             System.out.println("Legislation: " + sc.getLegislationReference());

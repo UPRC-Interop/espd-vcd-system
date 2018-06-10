@@ -4,7 +4,6 @@ import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.ResponseRequirement;
-import eu.esens.espdvcd.schema.SchemaVersion;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -20,7 +19,7 @@ public class PredefinedExcelCriteriaExtractor implements CriteriaExtractor {
     private List<SelectableCriterion> criterionList;
     private static final String REGEX = "\\$";
 
-    PredefinedExcelCriteriaExtractor(SchemaVersion version) {
+    PredefinedExcelCriteriaExtractor() {
         criterionList = new ArrayList<>();
 
         try {
