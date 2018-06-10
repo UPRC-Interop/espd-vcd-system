@@ -225,10 +225,16 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
     @Override
     public TenderingCriterionPropertyType extractTenderingCriterionPropertyType(Requirement r, QualificationApplicationResponseType responseType) {
         TenderingCriterionPropertyType req = new TenderingCriterionPropertyType();
+
         req.setTypeCode(new TypeCodeType());
-        req.getTypeCode().setValue(r.getResponseDataType().name());
+        req.getTypeCode().setValue(r.getTypeCode().name());
+
+        req.setValueDataTypeCode(new ValueDataTypeCodeType());
+        req.getValueDataTypeCode().setValue(r.getResponseDataType().name());
+
         req.getDescription().add(new DescriptionType());
         req.getDescription().get(0).setValue(r.getDescription());
+
         req.setID(createCriteriaTaxonomyIDType(r.getID()));
         responseType.getTenderingCriterionResponse().add(extractTenderingCriterionResponse(r.getResponse(), r.getResponseDataType(), r.getID()));
         return req;
