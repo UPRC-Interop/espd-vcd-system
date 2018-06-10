@@ -118,6 +118,7 @@ export class DataService {
                         selectionBCriteria?: SelectionCriteria[],
                         selectionCCriteria?: SelectionCriteria[],
                         selectionDCriteria?: SelectionCriteria[],
+                        eoRelatedCriteria?: EoRelatedCriterion[],
                         eoRelatedACriteria?: EoRelatedCriterion[],
                         eoRelatedCCriteria?: EoRelatedCriterion[],
                         eoRelatedDCriteria?: EoRelatedCriterion[],
@@ -131,7 +132,10 @@ export class DataService {
           ...exclusionBCriteria,
           ...exclusionCCriteria,
           ...exclusionDCriteria,
-          ...selectionALLCriteria];
+          ...selectionALLCriteria,
+          ...eoRelatedCriteria,
+          ...reductionCriteria
+        ];
         // console.dir(combineJsonArray);
         return combineJsonArray;
 
@@ -144,7 +148,9 @@ export class DataService {
           ...selectionACriteria,
           ...selectionBCriteria,
           ...selectionCCriteria,
-          ...selectionDCriteria];
+          ...selectionDCriteria,
+          ...eoRelatedCriteria,
+          ...reductionCriteria];
         // console.dir(combineJsonArray);
         return combineJsonArray;
       }
@@ -238,6 +244,8 @@ export class DataService {
 
   }
 
+  // date handling
+
   toUTCDate(date: Moment): Moment {
     const utcDate = new Date(Date.UTC(date.toDate().getFullYear(),
       date.toDate().getMonth(),
@@ -313,7 +321,9 @@ export class DataService {
       this.selectionACriteria,
       this.selectionBCriteria,
       this.selectionCCriteria,
-      this.selectionDCriteria);
+      this.selectionDCriteria,
+      this.eoRelatedCriteria,
+      this.reductionCriteria);
 
     // apicall service post
     this.APIService.getXMLRequest(JSON.stringify(this.createESPDRequest()))
@@ -334,6 +344,11 @@ export class DataService {
         console.log(err);
       });
 
+  }
+
+  procedureSubmit(eoRelatedCriteria: EoRelatedCriterion[], reductionCriteria: ReductionCriterion[]) {
+    this.eoRelatedCriteria = eoRelatedCriteria;
+    this.reductionCriteria = reductionCriteria;
   }
 
 

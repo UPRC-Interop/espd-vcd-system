@@ -17,9 +17,9 @@ export class ApicallService {
 
   /* ============ CODELISTS =============*/
 
-  // version: string = 'v1';
+  version: string = 'v1';
   // version: string = 'v2';
-  version: string;
+  // version: string;
 
 
   constructor(private http: HttpClient) {
@@ -137,6 +137,7 @@ export class ApicallService {
   /* ================= UPLOAD JSON GET XML Request ================================= */
   getXMLRequest(ESPDRequest: string) {
 
+    console.log(ESPDRequest);
     let header = new HttpHeaders();
     let _header = header.append('Content-Type', 'application/json; charset=utf-8');
 
