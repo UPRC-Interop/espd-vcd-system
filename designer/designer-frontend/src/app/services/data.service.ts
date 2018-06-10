@@ -62,6 +62,8 @@ export class DataService {
   eoRelatedDCriteria: EoRelatedCriterion[] = null;
   reductionCriteria: ReductionCriterion[] = null;
 
+  notDefCriteria: EoRelatedCriterion[] = null;
+
   blob = null;
   blobV2 = null;
 
@@ -108,87 +110,6 @@ export class DataService {
 
   /* ================= Merge criterions into one fullcriterion list ================*/
 
-  makeFullCriterionList(exclusionACriteria: ExclusionCriteria[],
-                        exclusionBCriteria: ExclusionCriteria[],
-                        exclusionCCriteria: ExclusionCriteria[],
-                        exclusionDCriteria: ExclusionCriteria[],
-                        isSatisfiedALL: boolean,
-                        selectionALLCriteria?: SelectionCriteria[],
-                        selectionACriteria?: SelectionCriteria[],
-                        selectionBCriteria?: SelectionCriteria[],
-                        selectionCCriteria?: SelectionCriteria[],
-                        selectionDCriteria?: SelectionCriteria[],
-                        eoRelatedCriteria?: EoRelatedCriterion[],
-                        eoRelatedACriteria?: EoRelatedCriterion[],
-                        eoRelatedCCriteria?: EoRelatedCriterion[],
-                        eoRelatedDCriteria?: EoRelatedCriterion[],
-                        reductionCriteria?: ReductionCriterion[]): FullCriterion[] {
-    // let exAString:string= JSON.stringify(exclusionACriteria);
-    // let exBString:string= JSON.stringify(exclusionBCriteria);
-
-    if (this.isCA) {
-      if (isSatisfiedALL) {
-        var combineJsonArray = [...exclusionACriteria,
-          ...exclusionBCriteria,
-          ...exclusionCCriteria,
-          ...exclusionDCriteria,
-          ...selectionALLCriteria,
-          ...eoRelatedCriteria,
-          ...reductionCriteria
-        ];
-        // console.dir(combineJsonArray);
-        return combineJsonArray;
-
-      } else {
-        var combineJsonArray = [
-          ...exclusionACriteria,
-          ...exclusionBCriteria,
-          ...exclusionCCriteria,
-          ...exclusionDCriteria,
-          ...selectionACriteria,
-          ...selectionBCriteria,
-          ...selectionCCriteria,
-          ...selectionDCriteria,
-          ...eoRelatedCriteria,
-          ...reductionCriteria];
-        // console.dir(combineJsonArray);
-        return combineJsonArray;
-      }
-    } else if (this.isEO) {
-      if (isSatisfiedALL) {
-        var combineJsonArray = [...exclusionACriteria,
-          ...exclusionBCriteria,
-          ...exclusionCCriteria,
-          ...exclusionDCriteria,
-          ...selectionALLCriteria,
-          ...eoRelatedACriteria,
-          ...eoRelatedCCriteria,
-          ...eoRelatedDCriteria,
-          ...reductionCriteria];
-        // console.dir(combineJsonArray);
-        return combineJsonArray;
-
-      } else {
-        var combineJsonArray = [
-          ...exclusionACriteria,
-          ...exclusionBCriteria,
-          ...exclusionCCriteria,
-          ...exclusionDCriteria,
-          ...selectionACriteria,
-          ...selectionBCriteria,
-          ...selectionCCriteria,
-          ...selectionDCriteria,
-          ...eoRelatedACriteria,
-          ...eoRelatedCCriteria,
-          ...eoRelatedDCriteria,
-          ...reductionCriteria];
-        // console.dir(combineJsonArray);
-        return combineJsonArray;
-      }
-    }
-  }
-
-
   /* ============================= Filtering Criteria ============================*/
 
 
@@ -200,6 +121,143 @@ export class DataService {
       }
     }
     return filteredList;
+  }
+
+  makeFullCriterionListCA(exclusionACriteria: ExclusionCriteria[],
+                          exclusionBCriteria: ExclusionCriteria[],
+                          exclusionCCriteria: ExclusionCriteria[],
+                          exclusionDCriteria: ExclusionCriteria[],
+                          isSatisfiedALL: boolean,
+                          selectionALLCriteria?: SelectionCriteria[],
+                          selectionACriteria?: SelectionCriteria[],
+                          selectionBCriteria?: SelectionCriteria[],
+                          selectionCCriteria?: SelectionCriteria[],
+                          selectionDCriteria?: SelectionCriteria[],
+                          eoRelatedCriteria?: EoRelatedCriterion[],
+                          reductionCriteria?: ReductionCriterion[]
+  ): FullCriterion[] {
+    // let exAString:string= JSON.stringify(exclusionACriteria);
+    // let exBString:string= JSON.stringify(exclusionBCriteria);
+
+    if (this.isCA) {
+      if (isSatisfiedALL) {
+        console.log(reductionCriteria);
+        var combineJsonArray = [...exclusionACriteria,
+          ...exclusionBCriteria,
+          ...exclusionCCriteria,
+          ...exclusionDCriteria,
+          ...selectionALLCriteria,
+          ...eoRelatedCriteria,
+          ...reductionCriteria
+        ];
+        // console.log(combineJsonArray);
+        return combineJsonArray;
+
+      } else {
+        console.log(reductionCriteria);
+        var combineJsonArray = [
+          ...exclusionACriteria,
+          ...exclusionBCriteria,
+          ...exclusionCCriteria,
+          ...exclusionDCriteria,
+          ...selectionACriteria,
+          ...selectionBCriteria,
+          ...selectionCCriteria,
+          ...selectionDCriteria,
+          ...eoRelatedCriteria,
+          ...reductionCriteria];
+        // console.dir(combineJsonArray);
+        return combineJsonArray;
+      }
+    }
+  }
+
+
+  makeFullCriterionListEO(exclusionACriteria: ExclusionCriteria[],
+                          exclusionBCriteria: ExclusionCriteria[],
+                          exclusionCCriteria: ExclusionCriteria[],
+                          exclusionDCriteria: ExclusionCriteria[],
+                          isSatisfiedALL: boolean,
+                          selectionALLCriteria?: SelectionCriteria[],
+                          selectionACriteria?: SelectionCriteria[],
+                          selectionBCriteria?: SelectionCriteria[],
+                          selectionCCriteria?: SelectionCriteria[],
+                          selectionDCriteria?: SelectionCriteria[],
+                          eoRelatedACriteria?: EoRelatedCriterion[],
+                          eoRelatedCCriteria?: EoRelatedCriterion[],
+                          eoRelatedDCriteria?: EoRelatedCriterion[],
+                          reductionCriteria?: ReductionCriterion[]
+  ): FullCriterion[] {
+    // let exAString:string= JSON.stringify(exclusionACriteria);
+    // let exBString:string= JSON.stringify(exclusionBCriteria);
+
+    // if (this.isCA) {
+    //   if (isSatisfiedALL) {
+    //     console.log(reductionCriteria);
+    //     var combineJsonArray = [...exclusionACriteria,
+    //       ...exclusionBCriteria,
+    //       ...exclusionCCriteria,
+    //       ...exclusionDCriteria,
+    //       ...selectionALLCriteria,
+    //       ...eoRelatedCriteria,
+    //       ...reductionCriteria
+    //     ];
+    //     // console.log(combineJsonArray);
+    //     return combineJsonArray;
+    //
+    //   } else {
+    //     console.log(reductionCriteria);
+    //     var combineJsonArray = [
+    //       ...exclusionACriteria,
+    //       ...exclusionBCriteria,
+    //       ...exclusionCCriteria,
+    //       ...exclusionDCriteria,
+    //       ...selectionACriteria,
+    //       ...selectionBCriteria,
+    //       ...selectionCCriteria,
+    //       ...selectionDCriteria,
+    //       ...eoRelatedCriteria,
+    //       ...reductionCriteria];
+    //     // console.dir(combineJsonArray);
+    //     return combineJsonArray;
+    //   }
+    // } else
+    if (this.isEO) {
+      if (isSatisfiedALL) {
+        console.log(reductionCriteria);
+        console.log(eoRelatedACriteria);
+        console.log(eoRelatedCCriteria);
+        console.log(eoRelatedDCriteria);
+        var combineJsonArray = [...exclusionACriteria,
+          ...exclusionBCriteria,
+          ...exclusionCCriteria,
+          ...exclusionDCriteria,
+          ...selectionALLCriteria,
+          ...eoRelatedACriteria,
+          ...eoRelatedCCriteria,
+          ...eoRelatedDCriteria,
+          ...reductionCriteria];
+        // console.dir(combineJsonArray);
+        return combineJsonArray;
+
+      } else {
+        var combineJsonArray = [
+          ...exclusionACriteria,
+          ...exclusionBCriteria,
+          ...exclusionCCriteria,
+          ...exclusionDCriteria,
+          ...selectionACriteria,
+          ...selectionBCriteria,
+          ...selectionCCriteria,
+          ...selectionDCriteria,
+          ...eoRelatedACriteria,
+          ...eoRelatedCCriteria,
+          ...eoRelatedDCriteria,
+          ...reductionCriteria];
+        // console.dir(combineJsonArray);
+        return combineJsonArray;
+      }
+    }
   }
 
 
@@ -312,7 +370,8 @@ export class DataService {
 
     // create ESPDRequest
     // console.dir(JSON.stringify(this.createESPDRequest(isSatisfiedALL)));
-    this.fullCriterionList = this.makeFullCriterionList(this.exclusionACriteria,
+    // console.log(this.reductionCriteria);
+    this.fullCriterionList = this.makeFullCriterionListCA(this.exclusionACriteria,
       this.exclusionBCriteria,
       this.exclusionCCriteria,
       this.exclusionDCriteria,
@@ -325,6 +384,7 @@ export class DataService {
       this.eoRelatedCriteria,
       this.reductionCriteria);
 
+    console.log(this.fullCriterionList);
     // apicall service post
     this.APIService.getXMLRequest(JSON.stringify(this.createESPDRequest()))
       .then(res => {
@@ -349,6 +409,7 @@ export class DataService {
   procedureSubmit(eoRelatedCriteria: EoRelatedCriterion[], reductionCriteria: ReductionCriterion[]) {
     this.eoRelatedCriteria = eoRelatedCriteria;
     this.reductionCriteria = reductionCriteria;
+    // console.log(this.reductionCriteria);
   }
 
 
@@ -378,7 +439,7 @@ export class DataService {
     this.reductionCriteria = reductionCriteria;
 
     // make full criterion list
-    this.fullCriterionList = this.makeFullCriterionList(this.exclusionACriteria,
+    this.fullCriterionList = this.makeFullCriterionListEO(this.exclusionACriteria,
       this.exclusionBCriteria,
       this.exclusionCCriteria,
       this.exclusionDCriteria,
@@ -391,7 +452,8 @@ export class DataService {
       this.eoRelatedACriteria,
       this.eoRelatedCCriteria,
       this.eoRelatedDCriteria,
-      this.reductionCriteria);
+      this.reductionCriteria
+    );
 
     console.log(this.fullCriterionList);
 
@@ -455,6 +517,7 @@ export class DataService {
     if (filesToUpload.length > 0 && role == 'CA') {
       this.APIService.postFile(filesToUpload)
         .then(res => {
+          this.APIService.version = res.documentDetails.version.toLowerCase();
           // res.cadetails=this.CADetails;
           // console.log(res.fullCriterionList);
           console.log(res.cadetails);
@@ -484,6 +547,7 @@ export class DataService {
     } else if (filesToUpload.length > 0 && role == 'EO') {
       this.APIService.postFileResponse(filesToUpload)
         .then(res => {
+          this.APIService.version = res.documentDetails.version.toLowerCase();
           // res.cadetails=this.CADetails;
           // console.log(res.fullCriterionList);
           // console.log(res.cadetails);
