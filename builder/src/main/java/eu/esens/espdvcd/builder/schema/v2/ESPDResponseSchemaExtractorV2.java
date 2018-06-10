@@ -67,7 +67,7 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
         responseType.setUBLVersionID(createUBL22VersionIdType());
 
         responseType.setCustomizationID(createCENBIICustomizationIdType("urn:www.cenbii.eu:transaction:biitrdm070:ver3.0"));
-        responseType.setVersionID(createVersionIDType("2017.01.01"));
+        responseType.setVersionID(createVersionIDType("2018.01.01"));
 
         responseType.setCopyIndicator(new CopyIndicatorType());
         responseType.getCopyIndicator().setValue(false);
@@ -362,7 +362,7 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
                     rvType.setResponseCode(new ResponseCodeType());
                     rvType.getResponseCode().setListAgencyID("ISO");
                     rvType.getResponseCode().setListID("ISO 3166-1");
-                    rvType.getResponseCode().setListVersionID("2.0.1");
+                    rvType.getResponseCode().setListVersionID("2.0.2");
                     rvType.getResponseCode().setValue(countryCode);
                 }
                 tcrType.getResponseValue().add(rvType);

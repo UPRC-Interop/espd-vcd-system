@@ -374,7 +374,7 @@ public interface SchemaExtractorV2 {
     default VersionIDType createVersionIDType(String id) {
         VersionIDType versionID = new VersionIDType();
         versionID.setSchemeAgencyID("EU-COM-GROW");
-        versionID.setSchemeVersionID("2.0.1");
+        versionID.setSchemeVersionID("2.0.2");
         versionID.setValue(id);
         return versionID;
     }
@@ -430,7 +430,7 @@ public interface SchemaExtractorV2 {
         CriterionTypeCodeType tc = new CriterionTypeCodeType();
         tc.setListAgencyID("EU-COM-GROW");
         tc.setListID("CriteriaTypeCode");
-        tc.setListVersionID("2.0.1");
+        tc.setListVersionID("2.0.2");
         tc.setValue(code);
         return tc;
     }
@@ -487,7 +487,7 @@ public interface SchemaExtractorV2 {
     default IDType createDefaultIDType(String id) {
         IDType reqGroupIDType = new IDType();
         reqGroupIDType.setSchemeAgencyID("EU-COM-GROW");
-        reqGroupIDType.setSchemeVersionID("2.0.1");
+        reqGroupIDType.setSchemeVersionID("2.0.2");
         reqGroupIDType.setValue(id);
         return reqGroupIDType;
     }
@@ -497,7 +497,7 @@ public interface SchemaExtractorV2 {
         PropertyGroupTypeCodeType ptc = new PropertyGroupTypeCodeType();
         ptc.setListID("PropertyGroupType");
         ptc.setListAgencyID("EU-COM-GROW");
-        ptc.setListVersionID("2.0.1");
+        ptc.setListVersionID("2.0.2");
         ptc.setValue(code);
         return ptc;
     }
@@ -506,7 +506,7 @@ public interface SchemaExtractorV2 {
         IndustryClassificationCodeType icct = new IndustryClassificationCodeType();
         icct.setListID("EOIndustryClassificationCode");
         icct.setListAgencyID("EU-COM-GROW");
-        icct.setListVersionID("2.0.1");
+        icct.setListVersionID("2.0.2");
         icct.setValue(code);
         return icct;
     }
