@@ -11,6 +11,7 @@ import {Currency} from '../model/currency.model';
 import {ReductionCriterion} from '../model/reductionCriterion.model';
 import {ESPDResponse} from '../model/ESPDResponse.model';
 import {environment} from '../../environments/environment';
+// import {DataService} from '../services/data.service';
 
 @Injectable()
 export class ApicallService {
@@ -59,7 +60,7 @@ export class ApicallService {
   /* =========================== Reduction of Candidates ================= */
 
   get_ReductionCriteria() {
-    return this.http.get<ReductionCriterion[]>(environment.apiUrl + this.version +  '/criteria/predefined/reduction').toPromise();
+    return this.http.get<ReductionCriterion[]>(environment.apiUrl + this.version + '/criteria/predefined/reduction').toPromise();
   }
 
   /* ============= EXCLUSION CRITERIA ===================*/
