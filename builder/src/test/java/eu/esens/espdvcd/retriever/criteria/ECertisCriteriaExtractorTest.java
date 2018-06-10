@@ -104,6 +104,7 @@ public class ECertisCriteriaExtractorTest {
     public void testGetFullList() throws RetrieverException {
 
         List<SelectableCriterion> criteriaList = extractor.getFullList();
+        // List<SelectableCriterion> criteriaList = CriteriaExtractorFactory.getPredefinedESPDCriteriaExtractor(SchemaVersion.V2).getFullList();
         int numberOfCriterion = 1;
 
         for (SelectableCriterion sc : criteriaList) {
