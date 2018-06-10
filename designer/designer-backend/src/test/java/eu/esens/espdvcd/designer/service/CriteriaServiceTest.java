@@ -3,6 +3,7 @@ package eu.esens.espdvcd.designer.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import eu.esens.espdvcd.retriever.criteria.ECertisCriteriaExtractor;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
+import eu.esens.espdvcd.schema.SchemaVersion;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,8 +15,8 @@ public class CriteriaServiceTest {
 
     @Before
     public void setUp() throws Exception {
-        eCertisCriteriaService = new ECertisCriteriaService();
-        predefinedCriteriaService = new PredefinedCriteriaService();
+        eCertisCriteriaService = new ECertisCriteriaService(SchemaVersion.V2);
+        predefinedCriteriaService = new PredefinedCriteriaService(SchemaVersion.V1);
     }
 
     @Test
@@ -31,7 +32,7 @@ public class CriteriaServiceTest {
 //        List<SelectableCriterion> translatedCriteria = eCertisCriteriaService.getTranslatedCriteria("el");
 //        ObjectWriter writer = new ObjectMapper().writer().withDefaultPrettyPrinter();
 //        LOGGER.info(writer.writeValueAsString(translatedCriteria));
-        ECertisCriteriaExtractor ex = new ECertisCriteriaExtractor();
+        ECertisCriteriaExtractor ex = new ECertisCriteriaExtractor(SchemaVersion.V1);
 //        List<SelectableCriterion> engCriteria = ex.getFullList();
         ex.setLang("el");
 //        List<SelectableCriterion> elCriteria = ex.getFullList();

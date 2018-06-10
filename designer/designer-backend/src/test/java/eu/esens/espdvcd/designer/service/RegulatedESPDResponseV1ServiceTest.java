@@ -18,7 +18,8 @@ public class RegulatedESPDResponseV1ServiceTest {
     File espdResponseFile;
     ESPDRequest request;
     ESPDResponse response;
-    ModeltoESPDService service;
+    ModeltoESPDService modeltoESPDService;
+    ESPDtoModelService espdToModelService;
     ObjectWriter writer;
 
     @Before
@@ -37,34 +38,38 @@ public class RegulatedESPDResponseV1ServiceTest {
                 (RegulatedESPDResponseV1ServiceTest.class.getResourceAsStream("/espd-response.xml")).createESPDResponse();
         Assert.assertNotNull(response);
 
-        service = new RegulatedModeltoESPDResponseV1Service();
+        modeltoESPDService = new RegulatedModeltoESPDResponseV1Service();
+        espdToModelService = new ESPDResponseToModelService();
         writer = new ObjectMapper().writer().withDefaultPrettyPrinter();
     }
 
     @Test
     public void responseJSONFromRequestTest() throws Exception {
-        ESPDResponse response = (ESPDResponse) service.XMLFileToObjectTransformer(espdRequestFile);
+        ESPDResponse response = (ESPDResponse) espdToModelService.CreateModelFromXML((espdRequestFile));
         Assert.assertNotNull(response);
+        String exportedString = modeltoESPDService.CreateXMLStringFromModel(response);
+        Assert.assertNotNull(exportedString);
+        System.out.println(exportedString);
 //        System.out.print(writer.writeValueAsString(response));
     }
 
-    @Test
-    public void responseJSONFromResponseTest() throws Exception{
-        ESPDResponse response = (ESPDResponse) service.XMLFileToObjectTransformer(espdResponseFile);
-        Assert.assertNotNull(response);
-//        System.out.print(writer.writeValueAsString(response));
-    }
+//    @Test
+//    public void responseJSONFromResponseTest() throws Exception{
+//        ESPDResponse response = (ESPDResponse) modeltoESPDService.XMLFileToObjectTransformer(espdResponseFile);
+//        Assert.assertNotNull(response);
+////        System.out.print(writer.writeValueAsString(response));
+//    }
 
     @Test
     public void XMLStreamFromResponse() throws Exception{
-        InputStream is = service.CreateXMLStreamFromModel(response);
+        InputStream is = modeltoESPDService.CreateXMLStreamFromModel(response);
         Assert.assertNotNull(is);
 //        System.out.print(new BufferedReader( new InputStreamReader(is) ).lines().parallel().collect(Collectors.joining("\n")));
     }
 
     @Test
     public void XMLStringFromResponse() throws Exception{
-        String is = service.CreateXMLStringFromModel(response);
+        String is = modeltoESPDService.CreateXMLStringFromModel(response);
         Assert.assertNotNull(is);
 //        System.out.print(is);
     }
