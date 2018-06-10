@@ -228,7 +228,7 @@ public class BuilderESPDTest {
         Assert.assertNotNull(request);
 
         // request.setCriterionList(extractor.getFullList());
-        System.out.println(BuilderFactory.withSchemaVersion1()
+        System.out.println(BuilderFactory.withSchemaVersion2()
                 .getDocumentBuilderFor(request)
                 .addDefaultESPDCriteriaList()   // <- AFTER
                 // .addECertisCriteriaList()       // <- AFTER
