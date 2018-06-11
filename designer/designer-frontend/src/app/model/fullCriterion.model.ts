@@ -10,5 +10,6 @@ export class FullCriterion {
   legislationReference: LegislationReference;
   requirementGroups: RequirementGroup[];
   id: string;
+  uuid: string;
   response?: RequirementResponse;
 }

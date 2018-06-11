@@ -19,6 +19,8 @@ import javax.xml.validation.Schema;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.io.IOException;
 import java.util.List;
 
 public class ESPDRequestToModelService implements ESPDtoModelService {
@@ -35,7 +37,7 @@ public class ESPDRequestToModelService implements ESPDtoModelService {
     }
 
     @Override
-    public Object CreateModelFromXML(File XML) throws RetrieverException, BuilderException, FileNotFoundException, JAXBException, SAXException, ValidationException {
+    public Object CreateModelFromXML(File XML) throws RetrieverException, BuilderException, FileNotFoundException, JAXBException, SAXException, ValidationException, IOException {
         SchemaVersion artifactVersion = ArtefactUtils.findSchemaVersion(new FileInputStream(XML));
         if (artifactVersion == SchemaVersion.V1){
             criteriaService = new PredefinedCriteriaService(SchemaVersion.V1);
@@ -53,7 +55,9 @@ public class ESPDRequestToModelService implements ESPDtoModelService {
             throw new ValidationException("Cannot find artifact version");
         }
 
-        ESPDRequest request = BuilderFactory.getRegulatedModelBuilder().importFrom(new FileInputStream(XML)).createESPDRequest();
+        InputStream is = new FileInputStream(XML);
+
+        ESPDRequest request = BuilderFactory.getRegulatedModelBuilder().importFrom(is).createESPDRequest();
         request.setCriterionList(criteriaService.getUnselectedCriteria(request.getFullCriterionList()));
 
         counter=0;
@@ -61,6 +65,9 @@ public class ESPDRequestToModelService implements ESPDtoModelService {
             cr.setUUID(cr.getID());
             idFix(cr.getRequirementGroups());
         });
+        is.close();
+        //is.flush();
+        is=null;
         return request;
     }
 

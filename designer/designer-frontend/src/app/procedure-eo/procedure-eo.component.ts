@@ -132,38 +132,38 @@ export class ProcedureEoComponent implements OnInit {
   reqGroupMatch(rg: RequirementGroup, cr: EoRelatedCriterion, form: FormGroup, formValues: any) {
 
     if (rg != null || rg != undefined) {
-      // console.log('reqGroup ' + rg.id);
+      // console.log('reqGroup ' + rg.uuid);
 
       if (rg.requirements != undefined || rg.requirements != null) {
 
         rg.requirements.forEach(req => {
           if (req != null || req != undefined) {
-            // console.log('requirement id ' + req.id);
+            // console.log('requirement uuid ' + req.uuid);
 
-            console.log(formValues[req.id.valueOf()]);
+            console.log(formValues[req.uuid.valueOf()]);
             req.response = new RequirementResponse();
 
             if (req.responseDataType == 'INDICATOR') {
-              // console.log(formValues[req.id.valueOf()]);
-              if (formValues[req.id.valueOf()] == true) {
+              // console.log(formValues[req.uuid.valueOf()]);
+              if (formValues[req.uuid.valueOf()] == true) {
                 req.response.indicator = true;
-                req.response.id = null;
+                req.response.uuid = null;
               } else {
                 req.response.indicator = false;
-                req.response.id = null;
+                req.response.uuid = null;
               }
 
             } else if (req.responseDataType == 'DESCRIPTION') {
-              req.response.description = formValues[req.id.valueOf()];
-              req.response.id = null;
+              req.response.description = formValues[req.uuid.valueOf()];
+              req.response.uuid = null;
             } else if (req.responseDataType == 'EVIDENCE_URL') {
-              req.response.evidenceURL = formValues[req.id.valueOf()];
-              req.response.id = null;
+              req.response.evidenceURL = formValues[req.uuid.valueOf()];
+              req.response.uuid = null;
             } else if (req.responseDataType == 'CODE') {
-              req.response.evidenceURLCode = formValues[req.id.valueOf()];
-              req.response.id = null;
+              req.response.evidenceURLCode = formValues[req.uuid.valueOf()];
+              req.response.uuid = null;
             } else if (req.responseDataType == 'DATE') {
-              req.response.date = formValues[req.id.valueOf()];
+              req.response.date = formValues[req.uuid.valueOf()];
               console.log(req.response.date);
               if (typeof req.response.date !== 'string') {
                 const utcDate = this.dataService.toUTCDate(req.response.date);
@@ -172,30 +172,30 @@ export class ProcedureEoComponent implements OnInit {
               // req.response.date.setMinutes( req.response.date.getMinutes() + req.response.date.getTimezoneOffset() );
 
               console.log(req.response.date);
-              req.response.id = null;
+              req.response.uuid = null;
             } else if (req.responseDataType == 'PERCENTAGE') {
-              req.response.percentage = formValues[req.id.valueOf()];
-              req.response.id = null;
+              req.response.percentage = formValues[req.uuid.valueOf()];
+              req.response.uuid = null;
             } else if (req.responseDataType == 'PERIOD') {
-              req.response.period = formValues[req.id.valueOf()];
-              req.response.id = null;
+              req.response.period = formValues[req.uuid.valueOf()];
+              req.response.uuid = null;
             } else if (req.responseDataType == 'CODE_COUNTRY') {
-              req.response.countryCode = formValues[req.id.valueOf()];
-              req.response.id = null;
+              req.response.countryCode = formValues[req.uuid.valueOf()];
+              req.response.uuid = null;
             } else if (req.responseDataType == 'AMOUNT') {
-              req.response.amount = formValues[req.id.valueOf()];
-              // const currencyid = req.id + 'currency';
+              req.response.amount = formValues[req.uuid.valueOf()];
+              // const currencyid = req.uuid + 'currency';
               // req.response.currency = formValues[currencyid.valueOf()];
-              req.response.id = null;
+              req.response.uuid = null;
             } else if (req.responseDataType == 'QUANTITY_INTEGER') {
-              req.response.quantity = formValues[req.id.valueOf()];
-              req.response.id = null;
+              req.response.quantity = formValues[req.uuid.valueOf()];
+              req.response.uuid = null;
             } else if (req.responseDataType == 'QUANTITY') {
-              req.response.quantity = formValues[req.id.valueOf()];
-              req.response.id = null;
+              req.response.quantity = formValues[req.uuid.valueOf()];
+              req.response.uuid = null;
             } else if (req.responseDataType == 'QUANTITY_YEAR') {
-              req.response.year = formValues[req.id.valueOf()];
-              req.response.id = null;
+              req.response.year = formValues[req.uuid.valueOf()];
+              req.response.uuid = null;
             }
 
 
@@ -207,26 +207,26 @@ export class ProcedureEoComponent implements OnInit {
       if (rg.requirementGroups != null || rg.requirementGroups != undefined) {
 
         let firstRgFormValues = null;
-        let firstRgId = rg.id;
+        let firstRgId = rg.uuid;
         firstRgFormValues = formValues;
         // console.log('This is ID out ' + firstRgId);
         rg.requirementGroups.forEach(rg2 => {
-          // console.log('outer reqgroup id ' + rg.id);
-          // console.log('inner reqgroup id ' + rg2.id);
+          // console.log('outer reqgroup id ' + rg.uuid);
+          // console.log('inner reqgroup id ' + rg2.uuid);
 
 
-          if (rg.id == firstRgId) {
+          if (rg.uuid == firstRgId) {
             // console.log('Reset to first ReqGroup ');
             formValues = firstRgFormValues;
           }
 
           // fix
-          if (formValues[rg2.id.valueOf()] != undefined) {
-            formValues = formValues[rg2.id.valueOf()];
+          if (formValues[rg2.uuid.valueOf()] != undefined) {
+            formValues = formValues[rg2.uuid.valueOf()];
           }
 
           console.log(formValues);
-          // console.log('reqGroup inside curs ' + rg2.id);
+          // console.log('reqGroup inside curs ' + rg2.uuid);
           this.reqGroupMatch(rg2, cr, form, formValues);
         });
       }
@@ -245,26 +245,26 @@ export class ProcedureEoComponent implements OnInit {
 
     this.eoRelatedACriteria.forEach(cr => {
       let formValues = this.formA.getRawValue();
-      formValues = formValues[cr.id.valueOf()];
+      formValues = formValues[cr.uuid.valueOf()];
 
       let testFormValues = null;
 
       cr.requirementGroups.forEach(rg => {
-        // formValues = formValues[rg.id.valueOf()];
+        // formValues = formValues[rg.uuid.valueOf()];
         // this.reqGroupMatch(rg, cr, this.formA, formValues);
         if (testFormValues == null) {
           testFormValues = this.formA.getRawValue();
-          testFormValues = testFormValues[cr.id.valueOf()];
+          testFormValues = testFormValues[cr.uuid.valueOf()];
           // formValues = testFormValues;
         }
 
-        if (formValues[rg.id.valueOf()] == undefined) {
+        if (formValues[rg.uuid.valueOf()] == undefined) {
           // console.log('THIS IS undefined');
-          testFormValues = testFormValues[rg.id.valueOf()];
+          testFormValues = testFormValues[rg.uuid.valueOf()];
           this.reqGroupMatch(rg, cr, this.formA, testFormValues);
-        } else if (formValues[rg.id.valueOf()] != undefined) {
+        } else if (formValues[rg.uuid.valueOf()] != undefined) {
           // console.log('THIS IS DEFINED');
-          formValues = formValues[rg.id.valueOf()];
+          formValues = formValues[rg.uuid.valueOf()];
           this.reqGroupMatch(rg, cr, this.formA, formValues);
         }
       });
@@ -272,28 +272,28 @@ export class ProcedureEoComponent implements OnInit {
 
     this.eoRelatedCCriteria.forEach(cr => {
       let formValues = this.formC.getRawValue();
-      formValues = formValues[cr.id.valueOf()];
+      formValues = formValues[cr.uuid.valueOf()];
 
       let testFormValues = null;
 
       cr.requirementGroups.forEach(rg => {
         if (testFormValues == null) {
           testFormValues = this.formC.getRawValue();
-          testFormValues = testFormValues[cr.id.valueOf()];
+          testFormValues = testFormValues[cr.uuid.valueOf()];
           // formValues = testFormValues;
         }
 
-        if (formValues[rg.id.valueOf()] == undefined) {
+        if (formValues[rg.uuid.valueOf()] == undefined) {
           // fix
           let testFormValues = null;
           testFormValues = this.formC.getRawValue();
-          testFormValues = testFormValues[cr.id.valueOf()];
-          testFormValues = testFormValues[rg.id.valueOf()];
+          testFormValues = testFormValues[cr.uuid.valueOf()];
+          testFormValues = testFormValues[rg.uuid.valueOf()];
           // fix
 
           this.reqGroupMatch(rg, cr, this.formC, testFormValues);
-        } else if (formValues[rg.id.valueOf()] != undefined) {
-          formValues = formValues[rg.id.valueOf()];
+        } else if (formValues[rg.uuid.valueOf()] != undefined) {
+          formValues = formValues[rg.uuid.valueOf()];
           this.reqGroupMatch(rg, cr, this.formC, formValues);
         }
       });
@@ -301,30 +301,30 @@ export class ProcedureEoComponent implements OnInit {
 
     this.eoRelatedDCriteria.forEach(cr => {
       let formValues = this.formD.getRawValue();
-      formValues = formValues[cr.id.valueOf()];
+      formValues = formValues[cr.uuid.valueOf()];
 
       let testFormValues = null;
 
       cr.requirementGroups.forEach(rg => {
         if (testFormValues == null) {
           testFormValues = this.formD.getRawValue();
-          testFormValues = testFormValues[cr.id.valueOf()];
+          testFormValues = testFormValues[cr.uuid.valueOf()];
           // formValues = testFormValues;
         }
 
-        if (formValues[rg.id.valueOf()] == undefined) {
+        if (formValues[rg.uuid.valueOf()] == undefined) {
           console.log('THIS IS undefined');
           // fix
           let testFormValues = null;
           testFormValues = this.formD.getRawValue();
-          testFormValues = testFormValues[cr.id.valueOf()];
-          testFormValues = testFormValues[rg.id.valueOf()];
+          testFormValues = testFormValues[cr.uuid.valueOf()];
+          testFormValues = testFormValues[rg.uuid.valueOf()];
           // fix
 
           this.reqGroupMatch(rg, cr, this.formD, testFormValues);
-        } else if (formValues[rg.id.valueOf()] != undefined) {
+        } else if (formValues[rg.uuid.valueOf()] != undefined) {
           console.log('THIS IS DEFINED');
-          formValues = formValues[rg.id.valueOf()];
+          formValues = formValues[rg.uuid.valueOf()];
           this.reqGroupMatch(rg, cr, this.formD, formValues);
         }
       });

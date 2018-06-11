@@ -5,4 +5,5 @@ export class Requirement {
   responseDataType: string;
   response?: RequirementResponse;
   id: string;
+  uuid: string;
 }
