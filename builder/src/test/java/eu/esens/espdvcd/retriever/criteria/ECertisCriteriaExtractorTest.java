@@ -8,7 +8,9 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -43,12 +45,15 @@ public class ECertisCriteriaExtractorTest {
     public void testPredefinedAndECertisCriteriaID() throws RetrieverException {
 
         PredefinedESPDCriteriaExtractor predefinedESPDCriteriaExtractor =
-                new PredefinedESPDCriteriaExtractor(SchemaVersion.V1);
+                new PredefinedESPDCriteriaExtractor(SchemaVersion.V2);
 
         final List<String> ecertisIDList = extractor.getAllEuropeanCriteriaID();
         final List<String> predefinedIDList = predefinedESPDCriteriaExtractor.getFullList().stream()
                 .map(sc -> sc.getID())
                 .collect(Collectors.toList());
+
+        final Map<String, SelectableCriterion> eCertisCriterionMap = new HashMap<>();
+        extractor.getFullList().forEach(sc -> eCertisCriterionMap.put(sc.getID(), sc));
 
         System.out.println("Number of e-Certis Criteria: " + ecertisIDList.size());
         System.out.println("Number of Predefined Criteria: " + predefinedIDList.size());
@@ -66,7 +71,7 @@ public class ECertisCriteriaExtractorTest {
             int index1 = 1;
             for (String id : predefinedIDList) {
                 if (!ecertisIDList.contains(id)) {
-                    System.out.println("(" + index1 + ") " + id);
+                    System.out.println("(" + index1 + ") " + id + " " + (eCertisCriterionMap.get(id) != null ? eCertisCriterionMap.get(id).getTypeCode() : null));
                     index1++;
                 }
             }
@@ -75,7 +80,7 @@ public class ECertisCriteriaExtractorTest {
             int index2 = 1;
             for (String id : ecertisIDList) {
                 if (!predefinedIDList.contains(id)) {
-                    System.out.println("(" + index2 + ") " + id);
+                    System.out.println("(" + index2 + ") " + id + " " + (eCertisCriterionMap.get(id) != null ? eCertisCriterionMap.get(id).getTypeCode() : null));
                     index2++;
                 }
             }
