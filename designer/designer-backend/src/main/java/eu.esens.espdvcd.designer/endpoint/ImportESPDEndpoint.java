@@ -72,11 +72,12 @@ public class ImportESPDEndpoint extends Endpoint {
             Collection<Part> parts = rq.raw().getParts();
             if (parts.iterator().hasNext()) {
                 Part part = parts.iterator().next();
-                Path tempFile = Files.createTempFile("espd-file", ".tmp");
+                File tempFile = File.createTempFile("espd-file", ".tmp");
+                tempFile.deleteOnExit();
 
                 try (InputStream input = part.getInputStream()) {
                     artefactVersion = ArtefactUtils.findSchemaVersion(input);
-                    Files.copy(input, tempFile, StandardCopyOption.REPLACE_EXISTING);
+                    Files.copy(input, tempFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
                 } catch (Exception e) {
                     LOGGER.severe(LOGGER_DOCUMENT_ERROR + e.getMessage());
                     rsp.status(500);
@@ -85,7 +86,7 @@ public class ImportESPDEndpoint extends Endpoint {
                 try {
                     rsp.header("Content-Type", "application/json");
 
-                    File espdFile = tempFile.toFile();
+                    File espdFile = tempFile;
                     Object espd = service.CreateModelFromXML(espdFile);
                     DocumentDetails details = new DocumentDetails(artefactVersion.name(), "regulated");
                     String serializedDetails = WRITER.writeValueAsString(details);
@@ -109,7 +110,7 @@ public class ImportESPDEndpoint extends Endpoint {
                     rsp.status(406);
                     return DOCUMENT_ERROR + e.getMessage() + ListPrinter(e.getResults());
                 } finally {
-                    Files.deleteIfExists(tempFile);
+                    Files.deleteIfExists(tempFile.toPath());
                 }
             } else {
                 rsp.status(400);
