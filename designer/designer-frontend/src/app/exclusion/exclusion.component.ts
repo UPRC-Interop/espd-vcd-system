@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ApicallService} from '../services/apicall.service';
 import {ExclusionCriteria} from '../model/exclusionCriteria.model';
 import {LegislationReference} from '../model/legislationReference.model';
@@ -12,52 +12,51 @@ import {NgForm} from '@angular/forms/forms';
 })
 export class ExclusionComponent implements OnInit {
 
-  exclusionACriteria: ExclusionCriteria[] = null;
-  exclusionBCriteria: ExclusionCriteria[] = null;
-  exclusionCCriteria: ExclusionCriteria[] = null;
-  exclusionDCriteria: ExclusionCriteria[] = null;
+  @Input() exclusionACriteria: ExclusionCriteria[];
+  @Input() exclusionBCriteria: ExclusionCriteria[];
+  @Input() exclusionCCriteria: ExclusionCriteria[];
+  @Input() exclusionDCriteria: ExclusionCriteria[];
 
   constructor(private dataService: DataService) {
   }
 
   ngOnInit() {
-    this.dataService.getExclusionACriteria()
-      .then(res => {
-        //TODO check if exclusionACriteria is from file when posted. dataService.exclusionACriteria=res.... bind it to service in the view
-        this.exclusionACriteria = res;
-        // console.log("This is exclusionACriteria: ");
-        // console.log(this.exclusionACriteria);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-
-    this.dataService.getExclusionBCriteria()
-      .then(res => {
-        this.exclusionBCriteria = res;
-        // console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-
-    this.dataService.getExclusionCCriteria()
-      .then(res => {
-        this.exclusionCCriteria = res;
-        // console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-
-    this.dataService.getExclusionDCriteria()
-      .then(res => {
-        this.exclusionDCriteria = res;
-        // console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    // this.dataService.getExclusionACriteria()
+    //   .then(res => {
+    //     this.exclusionACriteria = res;
+    //     // console.log("This is exclusionACriteria: ");
+    //     // console.log(this.exclusionACriteria);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
+    //
+    // this.dataService.getExclusionBCriteria()
+    //   .then(res => {
+    //     this.exclusionBCriteria = res;
+    //     // console.log(res);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
+    //
+    // this.dataService.getExclusionCCriteria()
+    //   .then(res => {
+    //     this.exclusionCCriteria = res;
+    //     // console.log(res);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
+    //
+    // this.dataService.getExclusionDCriteria()
+    //   .then(res => {
+    //     this.exclusionDCriteria = res;
+    //     // console.log(res);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
 
 
   }

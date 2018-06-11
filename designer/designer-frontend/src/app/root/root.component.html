@@ -19,7 +19,11 @@
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Exclusion</ng-template>
-      <app-exclusion *ngIf="dataService.isCA"></app-exclusion>
+      <app-exclusion  [exclusionACriteria] = 'dataService.exclusionACriteria'
+                      [exclusionBCriteria] = 'dataService.exclusionBCriteria'
+                      [exclusionCCriteria] = 'dataService.exclusionCCriteria'
+                      [exclusionDCriteria] = 'dataService.exclusionDCriteria'
+                      *ngIf="dataService.isCA"></app-exclusion>
       <app-exclusion-eo [formA] = 'dataService.exclusionACriteriaForm'
                         [formB] = 'dataService.exclusionBCriteriaForm'
                         [formC] = 'dataService.exclusionCCriteriaForm'
@@ -32,7 +36,12 @@
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Selection</ng-template>
-      <app-selection *ngIf="dataService.isCA"></app-selection>
+      <app-selection [selectionACriteria] = 'dataService.selectionACriteria'
+                     [selectionBCriteria] = 'dataService.selectionBCriteria'
+                     [selectionCCriteria] = 'dataService.selectionCCriteria'
+                     [selectionDCriteria] = 'dataService.selectionDCriteria'
+                     [selectionALLCriteria]='dataService.selectionALLCriteria'
+        *ngIf="dataService.isCA"></app-selection>
       <app-selection-eo [formA] = 'dataService.selectionACriteriaForm'
                         [formB] = 'dataService.selectionBCriteriaForm'
                         [formC] = 'dataService.selectionCCriteriaForm'

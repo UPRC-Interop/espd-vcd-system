@@ -60,14 +60,14 @@ export class ProcedureEoComponent implements OnInit {
   ngOnInit() {
 
 
-    this.dataService.getEoRelatedCriteria()
-      .then(res => {
-        this.eoRelatedCriteria = res;
-        // this.createControls(this.eoRelatedCriteria);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    // this.dataService.getEoRelatedCriteria()
+    //   .then(res => {
+    //     this.eoRelatedCriteria = res;
+    //     // this.createControls(this.eoRelatedCriteria);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
 
     this.dataService.getCountries()
       .then(res => {

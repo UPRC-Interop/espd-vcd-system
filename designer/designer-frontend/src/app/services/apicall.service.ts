@@ -19,8 +19,8 @@ export class ApicallService {
   /* ============ CODELISTS =============*/
 
   // version: string = 'v1';
-  version: string = 'v2';
-  // version: string;
+  // version: string = 'v2';
+  version: string;
 
 
   constructor(private http: HttpClient) {

@@ -79,6 +79,7 @@ export class DataService {
   isEO: boolean = false;
   isImportESPD: boolean = false;
   isCreateResponse: boolean = false;
+  isCreateNewESPD: boolean = false;
   receivedNoticeNumber: string;
   selectedCountry: string = '';
   selectedEOCountry: string = '';
@@ -307,7 +308,7 @@ export class DataService {
   // date handling
 
   toUTCDate(date: Moment): Moment {
-    if(date !== null) {
+    if (date !== null) {
       const utcDate = new Date(Date.UTC(date.toDate().getFullYear(),
         date.toDate().getMonth(),
         date.toDate().getDate(),
@@ -411,11 +412,11 @@ export class DataService {
 
   }
 
-  procedureSubmit(eoRelatedCriteria: EoRelatedCriterion[], reductionCriteria: ReductionCriterion[]) {
-    this.eoRelatedCriteria = eoRelatedCriteria;
-    this.reductionCriteria = reductionCriteria;
-    // console.log(this.reductionCriteria);
-  }
+  // procedureSubmit(eoRelatedCriteria: EoRelatedCriterion[], reductionCriteria: ReductionCriterion[]) {
+  //   this.eoRelatedCriteria = eoRelatedCriteria;
+  //   this.reductionCriteria = reductionCriteria;
+  //   // console.log(this.reductionCriteria);
+  // }
 
 
   procedureEOSubmit(eoRelatedCriteriaA: EoRelatedCriterion[],
@@ -538,12 +539,18 @@ export class DataService {
           this.exclusionACriteria = this.filterExclusionCriteria(this.EXCLUSION_CONVICTION_REGEXP, res.fullCriterionList);
           this.exclusionBCriteria = this.filterExclusionCriteria(this.EXCLUSION_CONTRIBUTION_REGEXP, res.fullCriterionList);
           this.exclusionCCriteria = this.filterExclusionCriteria(this.EXCLUSION_SOCIAL_BUSINESS_MISCONDUCT_CONFLICT_REGEXP, res.fullCriterionList);
-          this.exclusionBCriteria = this.filterExclusionCriteria(this.EXCLUSION_NATIONAL_REGEXP, res.fullCriterionList);
+          this.exclusionDCriteria = this.filterExclusionCriteria(this.EXCLUSION_NATIONAL_REGEXP, res.fullCriterionList);
+
+          console.log(this.exclusionDCriteria);
 
           this.selectionACriteria = this.filterSelectionCriteria(this.SELECTION_SUITABILITY_REGEXP, res.fullCriterionList);
           this.selectionBCriteria = this.filterSelectionCriteria(this.SELECTION_ECONOMIC_REGEXP, res.fullCriterionList);
           this.selectionCCriteria = this.filterSelectionCriteria(this.SELECTION_TECHNICAL_REGEXP, res.fullCriterionList);
-          this.selectionBCriteria = this.filterSelectionCriteria(this.SELECTION_CERTIFICATES_REGEXP, res.fullCriterionList);
+          this.selectionDCriteria = this.filterSelectionCriteria(this.SELECTION_CERTIFICATES_REGEXP, res.fullCriterionList);
+          this.selectionALLCriteria = this.filterSelectionCriteria(this.SELECTION_REGEXP, res.fullCriterionList);
+
+          this.eoRelatedCriteria = this.filterEoRelatedCriteria(this.EO_RELATED_REGEXP, res.fullCriterionList);
+          this.reductionCriteria = this.filterEoRelatedCriteria(this.REDUCTION_OF_CANDIDATES_REGEXP, res.fullCriterionList);
           console.log(res);
 
 
@@ -552,6 +559,7 @@ export class DataService {
     } else if (filesToUpload.length > 0 && role == 'EO') {
       this.APIService.postFileResponse(filesToUpload)
         .then(res => {
+          console.log(res);
           this.APIService.version = res.documentDetails.version.toLowerCase();
           // res.cadetails=this.CADetails;
           // console.log(res.fullCriterionList);
@@ -838,6 +846,116 @@ export class DataService {
 
     }
 
+    // get predefined criteria (ca)
+    if (this.isCreateNewESPD) {
+      /* =========================== predefined reduction criteria ================================= */
+      this.getReductionCriteria()
+        .then(res => {
+          this.reductionCriteria = res;
+          // console.log(this.reductionCriteria);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+
+      /* ========================= predefined other.eo criteria ====================================*/
+      this.getEoRelatedCriteria()
+        .then(res => {
+          this.eoRelatedCriteria = res;
+          // console.log(this.eoRelatedCriteria);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+
+      /* ======================== predefined exclusion criteria ================================== */
+
+      this.getExclusionACriteria()
+        .then(res => {
+          this.exclusionACriteria = res;
+          // console.log("This is exclusionACriteria: ");
+          // console.log(this.exclusionACriteria);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+
+      this.getExclusionBCriteria()
+        .then(res => {
+          this.exclusionBCriteria = res;
+          // console.log(res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+
+      this.getExclusionCCriteria()
+        .then(res => {
+          this.exclusionCCriteria = res;
+          // console.log(res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+
+      this.getExclusionDCriteria()
+        .then(res => {
+          this.exclusionDCriteria = res;
+          // console.log(res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+
+      /* ============================= predefined selection criteria =========================== */
+      this.getSelectionALLCriteria()
+        .then(res => {
+          this.selectionALLCriteria = res;
+          // console.log(res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+
+      this.getSelectionACriteria()
+        .then(res => {
+          this.selectionACriteria = res;
+          // console.log(res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+
+
+      this.getSelectionBCriteria()
+        .then(res => {
+          this.selectionBCriteria = res;
+          // console.log(res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+
+      this.getSelectionCCriteria()
+        .then(res => {
+          this.selectionCCriteria = res;
+          // console.log(res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+
+      this.getSelectionDCriteria()
+        .then(res => {
+          this.selectionDCriteria = res;
+          // console.log(res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+
+    }
+
   }
 
 
@@ -893,7 +1011,7 @@ export class DataService {
   }
 
 
-  /* ========================================EO related Criteria ========================= */
+  /* ======================================== EO related Criteria ========================= */
 
   getEoRelatedCriteria(): Promise<EoRelatedCriterion[]> {
     if (this.eoRelatedCriteria != null) {

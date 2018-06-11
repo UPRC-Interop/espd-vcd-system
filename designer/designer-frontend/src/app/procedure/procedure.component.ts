@@ -1,4 +1,4 @@
-import {Component, OnInit, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, OnInit, OnChanges, SimpleChanges, Input} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {ProcedureType} from '../model/procedureType.model';
 import {Country} from '../model/country.model';
@@ -15,8 +15,8 @@ export class ProcedureComponent implements OnInit, OnChanges {
 
   countries: Country[] = null;
   procedureTypes: ProcedureType[] = null;
-  eoRelatedCriteria: EoRelatedCriterion[] = null;
-  reductionCriteria: ReductionCriterion[] = null;
+  // @Input() eoRelatedCriteria: EoRelatedCriterion[];
+  // @Input() reductionCriteria: ReductionCriterion[];
 
 
   constructor(public dataService: DataService) {
@@ -43,23 +43,23 @@ export class ProcedureComponent implements OnInit, OnChanges {
       });
 
     // Get predefined eoRelated Criteria
-    this.dataService.getEoRelatedCriteria()
-      .then(res => {
-        this.eoRelatedCriteria = res;
-        // console.log(this.eoRelatedCriteria);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    // this.dataService.getEoRelatedCriteria()
+    //   .then(res => {
+    //     this.eoRelatedCriteria = res;
+    //     // console.log(this.eoRelatedCriteria);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
 
-    this.dataService.getReductionCriteria()
-      .then(res => {
-        this.reductionCriteria = res;
-        // console.log(this.reductionCriteria);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    // this.dataService.getReductionCriteria()
+    //   .then(res => {
+    //     this.reductionCriteria = res;
+    //     // console.log(this.reductionCriteria);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
 
   }
 
@@ -72,7 +72,7 @@ export class ProcedureComponent implements OnInit, OnChanges {
     this.dataService.CADetails.cacountry = form.value.CACountry;
     this.dataService.CADetails.receivedNoticeNumber = form.value.receivedNoticeNumber;
     console.log(this.dataService.CADetails);
-    this.dataService.procedureSubmit(this.eoRelatedCriteria, this.reductionCriteria);
+    // this.dataService.procedureSubmit(this.eoRelatedCriteria, this.reductionCriteria);
   }
 
 

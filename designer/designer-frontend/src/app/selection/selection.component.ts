@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {SelectionCriteria} from '../model/selectionCriteria.model';
 import {DataService} from '../services/data.service';
 import {FormControl, NgForm} from '@angular/forms/forms';
@@ -10,11 +10,11 @@ import {FormControl, NgForm} from '@angular/forms/forms';
 })
 export class SelectionComponent implements OnInit {
 
-  selectionACriteria: SelectionCriteria[] = null;
-  selectionBCriteria: SelectionCriteria[] = null;
-  selectionCCriteria: SelectionCriteria[] = null;
-  selectionDCriteria: SelectionCriteria[] = null;
-  selectionALLCriteria: SelectionCriteria[] = null;
+  @Input() selectionACriteria: SelectionCriteria[];
+  @Input() selectionBCriteria: SelectionCriteria[];
+  @Input() selectionCCriteria: SelectionCriteria[];
+  @Input() selectionDCriteria: SelectionCriteria[];
+  @Input() selectionALLCriteria: SelectionCriteria[];
   isSatisfiedALL: boolean = true;
   isAtoD: boolean = false;
 
@@ -25,51 +25,51 @@ export class SelectionComponent implements OnInit {
   ngOnInit() {
 
 
-    this.dataService.getSelectionALLCriteria()
-      .then(res => {
-        this.selectionALLCriteria = res;
-        // console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-
-    this.dataService.getSelectionACriteria()
-      .then(res => {
-        this.selectionACriteria = res;
-        // console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-
-
-    this.dataService.getSelectionBCriteria()
-      .then(res => {
-        this.selectionBCriteria = res;
-        // console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-
-    this.dataService.getSelectionCCriteria()
-      .then(res => {
-        this.selectionCCriteria = res;
-        // console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-
-    this.dataService.getSelectionDCriteria()
-      .then(res => {
-        this.selectionDCriteria = res;
-        // console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    // this.dataService.getSelectionALLCriteria()
+    //   .then(res => {
+    //     this.selectionALLCriteria = res;
+    //     // console.log(res);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
+    //
+    // this.dataService.getSelectionACriteria()
+    //   .then(res => {
+    //     this.selectionACriteria = res;
+    //     // console.log(res);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
+    //
+    //
+    // this.dataService.getSelectionBCriteria()
+    //   .then(res => {
+    //     this.selectionBCriteria = res;
+    //     // console.log(res);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
+    //
+    // this.dataService.getSelectionCCriteria()
+    //   .then(res => {
+    //     this.selectionCCriteria = res;
+    //     // console.log(res);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
+    //
+    // this.dataService.getSelectionDCriteria()
+    //   .then(res => {
+    //     this.selectionDCriteria = res;
+    //     // console.log(res);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
 
 
   }

@@ -65,14 +65,17 @@ export class StartComponent implements OnInit {
   handleCASelection(radio: FormControl) {
     if (radio.value === 'createNewESPD') {
       this.isCreateNewESPD = true;
+      this.dataService.isCreateNewESPD = true;
       this.isReuseESPD = false;
       this.isReviewESPD = false;
     } else if (radio.value === 'reuseESPD') {
       this.isCreateNewESPD = false;
+      this.dataService.isCreateNewESPD = false;
       this.isReuseESPD = true;
       this.isReviewESPD = false;
     } else if (radio.value === 'reviewESPD') {
       this.isCreateNewESPD = false;
+      this.dataService.isCreateNewESPD = false;
       this.isReuseESPD = false;
       this.isReviewESPD = true;
     }
