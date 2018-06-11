@@ -6,4 +6,5 @@ export class RequirementGroup {
   ruleset?: string;
   condition?: string;
   id: string;
+  uuid: string;
 }
