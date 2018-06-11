@@ -68,7 +68,7 @@ public class ImportESPDEndpoint extends Endpoint {
     private Object postRequest(Request rq, Response rsp) throws IOException, ServletException, JAXBException, SAXException {
         SchemaVersion artefactVersion = null;
         if (rq.contentType().contains("multipart/form-data")) {
-            MultipartConfigElement multipartConfigElement = new MultipartConfigElement("file-uploads", 1000000000, 1000000000, 100);
+            MultipartConfigElement multipartConfigElement = new MultipartConfigElement("file-uploads", 1000000000, 1000000000, 1000);
             rq.raw().setAttribute("org.eclipse.jetty.multipartConfig", multipartConfigElement);
             Collection<Part> parts = rq.raw().getParts();
             if (parts.iterator().hasNext()) {
@@ -81,6 +81,9 @@ public class ImportESPDEndpoint extends Endpoint {
                     FileOutputStream out = new FileOutputStream(tempFile);
                     IOUtils.copy(input, out);
                     out.close();
+                    out.flush();
+                    out = null;
+                    // System.gc();
 //                    Files.copy(input, tempFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
                 } catch (Exception e) {
                     LOGGER.severe(LOGGER_DOCUMENT_ERROR + e.getMessage());
@@ -92,6 +95,22 @@ public class ImportESPDEndpoint extends Endpoint {
 
                     File espdFile = tempFile;
                     Object espd = service.CreateModelFromXML(espdFile);
+
+                    // espdFile.setWritable(true);
+
+                    // if(espdFile.delete()){
+                    //     System.out.println(espdFile.getName() + " is deleted!");
+                    // }else{
+                    // //     System.gc();
+
+                    // // if(espdFile.delete()){
+                    // //     System.out.println(espdFile.getName() + " is deleted! Attempt 2");
+                    // // }else {
+                    //     System.out.println("Delete operation failed.");
+                    // // }
+                    
+                    // }
+
                     DocumentDetails details = new DocumentDetails(artefactVersion.name(), "regulated");
                     String serializedDetails = WRITER.writeValueAsString(details);
                     String serializedDocument = WRITER.writeValueAsString(espd);
@@ -114,7 +133,7 @@ public class ImportESPDEndpoint extends Endpoint {
                     rsp.status(406);
                     return DOCUMENT_ERROR + e.getMessage() + ListPrinter(e.getResults());
                 } finally {
-                    Files.deleteIfExists(tempFile.toPath());
+                    // Files.deleteIfExists(tempFile.toPath());
                 }
             } else {
                 rsp.status(400);
