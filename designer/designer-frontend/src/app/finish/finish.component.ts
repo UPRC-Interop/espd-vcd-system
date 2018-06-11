@@ -15,13 +15,18 @@ export class FinishComponent implements OnInit {
   }
 
   exportFile() {
-    this.dataService.version = 'v1';
+    // this.dataService.version = 'v1';
     this.dataService.saveFile(this.dataService.blob);
   }
 
-  exportFileV2() {
-    this.dataService.version = 'v2';
-    this.dataService.saveFile(this.dataService.blobV2);
-  }
+  // exportFile() {
+  //   this.dataService.version = 'v1';
+  //   this.dataService.saveFile(this.dataService.blob);
+  // }
+  //
+  // exportFileV2() {
+  //   this.dataService.version = 'v2';
+  //   this.dataService.saveFile(this.dataService.blobV2);
+  // }
 
 }

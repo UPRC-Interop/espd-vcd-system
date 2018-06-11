@@ -11,6 +11,7 @@ import {Currency} from '../model/currency.model';
 import {ReductionCriterion} from '../model/reductionCriterion.model';
 import {ESPDResponse} from '../model/ESPDResponse.model';
 import {environment} from '../../environments/environment';
+
 // import {DataService} from '../services/data.service';
 
 @Injectable()
@@ -149,7 +150,7 @@ export class ApicallService {
     };
 
     // headers = header.append('Content-Type', 'application/json; charset=utf-8');
-    return this.http.post<any>(environment.apiUrl + 'v1/espd/request', ESPDRequest, options).toPromise();
+    return this.http.post<any>(environment.apiUrl + this.version + '/espd/request', ESPDRequest, options).toPromise();
   }
 
   getXMLRequestV2(ESPDRequest: string) {
@@ -181,7 +182,7 @@ export class ApicallService {
     };
 
     // headers = header.append('Content-Type', 'application/json; charset=utf-8');
-    return this.http.post<any>(environment.apiUrl + 'v1/espd/response', ESPDResponse, options).toPromise();
+    return this.http.post<any>(environment.apiUrl + this.version + '/espd/response', ESPDResponse, options).toPromise();
   }
 
   getXMLResponseV2(ESPDResponse: string) {

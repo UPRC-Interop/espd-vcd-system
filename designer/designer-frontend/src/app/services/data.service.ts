@@ -401,14 +401,14 @@ export class DataService {
         console.log(err);
       });
 
-    this.APIService.getXMLRequestV2(JSON.stringify(this.createESPDRequest()))
-      .then(res => {
-        console.log(res);
-        this.createFileV2(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    // this.APIService.getXMLRequestV2(JSON.stringify(this.createESPDRequest()))
+    //   .then(res => {
+    //     console.log(res);
+    //     this.createFileV2(res);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
 
   }
 
@@ -464,7 +464,6 @@ export class DataService {
     console.log(this.fullCriterionList);
 
 
-    if (this.version == 'v1') {
       this.APIService.getXMLResponse(JSON.stringify(this.createESPDResponse()))
         .then(res => {
           console.log(res);
@@ -474,17 +473,31 @@ export class DataService {
         .catch(err => {
           console.log(err);
         });
-    } else if (this.version == 'v2') {
-      this.APIService.getXMLResponseV2(JSON.stringify(this.createESPDResponse()))
-        .then(res => {
-          console.log(res);
-          this.createFileV2(res);
-          this.saveFile(this.blobV2);
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    }
+
+    // if (this.APIService.version == 'v1') {
+    //   this.APIService.getXMLResponse(JSON.stringify(this.createESPDResponse()))
+    //     .then(res => {
+    //       console.log(res);
+    //       this.createFile(res);
+    //       this.saveFile(this.blob);
+    //     })
+    //     .catch(err => {
+    //       console.log(err);
+    //     });
+    // } else if (this.APIService.version == 'v2') {
+    //   this.APIService.getXMLResponseV2(JSON.stringify(this.createESPDResponse()))
+    //     .then(res => {
+    //       console.log(res);
+    //       // this.createFileV2(res);
+    //       // this.saveFile(this.blobV2);
+    //
+    //       this.createFile(res);
+    //       this.saveFile(this.blob);
+    //     })
+    //     .catch(err => {
+    //       console.log(err);
+    //     });
+    // }
 
   }
 
@@ -497,19 +510,19 @@ export class DataService {
     this.blob = new Blob([response.body], {type: 'text/xml'});
   }
 
-  createFileV2(response) {
-    // const filename:string = "espd-request";
-    this.blobV2 = new Blob([response.body], {type: 'text/xml'});
-  }
+  // createFileV2(response) {
+  //   // const filename:string = "espd-request";
+  //   this.blobV2 = new Blob([response.body], {type: 'text/xml'});
+  // }
 
   saveFile(blob) {
-    if (this.isCA && this.version == 'v1') {
+    if (this.isCA && this.APIService.version == 'v1') {
       var filename = 'espd-request-v1';
-    } else if (this.isEO && this.version == 'v1') {
+    } else if (this.isEO && this.APIService.version == 'v1') {
       var filename = 'espd-response-v1';
-    } else if (this.isCA && this.version == 'v2') {
+    } else if (this.isCA && this.APIService.version == 'v2') {
       var filename = 'espd-request-v2';
-    } else if (this.isEO && this.version == 'v2') {
+    } else if (this.isEO && this.APIService.version == 'v2') {
       var filename = 'espd-response-v2';
     }
 
