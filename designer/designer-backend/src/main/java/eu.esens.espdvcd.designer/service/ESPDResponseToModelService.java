@@ -16,6 +16,8 @@ import javax.xml.bind.JAXBException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -31,7 +33,7 @@ public class ESPDResponseToModelService implements ESPDtoModelService {
     }
 
     @Override
-    public Object CreateModelFromXML(File XML) throws RetrieverException, BuilderException, FileNotFoundException, JAXBException, SAXException, ValidationException {
+    public Object CreateModelFromXML(File XML) throws RetrieverException, BuilderException, FileNotFoundException, JAXBException, SAXException, ValidationException, IOException {
         ArtefactValidator schemaResult, schematronResult;
         SchemaVersion artefactVersion = ArtefactUtils.findSchemaVersion(new FileInputStream(XML));
 
@@ -49,12 +51,18 @@ public class ESPDResponseToModelService implements ESPDtoModelService {
             if (!schematronResult.isValid())
                 throw new ValidationException("Schematron validation failed on the supplied xml document.", schematronResult.getValidationMessages());
         }
-        ESPDResponse response = BuilderFactory.getRegulatedModelBuilder().importFrom(new FileInputStream(XML)).createESPDResponse();
+
+        InputStream is = new FileInputStream(XML);
+
+        ESPDResponse response = BuilderFactory.getRegulatedModelBuilder().importFrom(is).createESPDResponse();
         counter=0;
         response.getFullCriterionList().forEach(cr -> {
             cr.setUUID(cr.getID());
             idFix(cr.getRequirementGroups());
         });
+        is.close();
+        //is.flush();
+        is=null;
         return response;
     }
 
