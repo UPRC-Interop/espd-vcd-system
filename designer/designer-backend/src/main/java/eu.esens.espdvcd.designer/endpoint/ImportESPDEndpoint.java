@@ -27,10 +27,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.UnmarshalException;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.nio.file.StandardOpenOption;
+import java.nio.file.*;
 import java.util.Collection;
 import java.util.UUID;
 
@@ -75,10 +72,11 @@ public class ImportESPDEndpoint extends Endpoint {
             Collection<Part> parts = rq.raw().getParts();
             if (parts.iterator().hasNext()) {
                 Part part = parts.iterator().next();
-                String tempFileName = UUID.randomUUID().toString();
+                Path tempFile = Files.createTempFile("espd-file", ".tmp");
+
                 try (InputStream input = part.getInputStream()) {
                     artefactVersion = ArtefactUtils.findSchemaVersion(input);
-                    Files.copy(input, Paths.get(tempFileName), StandardCopyOption.REPLACE_EXISTING);
+                    Files.copy(input, tempFile, StandardCopyOption.REPLACE_EXISTING);
                 } catch (Exception e) {
                     LOGGER.severe(LOGGER_DOCUMENT_ERROR + e.getMessage());
                     rsp.status(500);
@@ -86,7 +84,9 @@ public class ImportESPDEndpoint extends Endpoint {
                 }
                 try {
                     rsp.header("Content-Type", "application/json");
-                    Object espd = service.CreateModelFromXML(new File (tempFileName));
+
+                    File espdFile = tempFile.toFile();
+                    Object espd = service.CreateModelFromXML(espdFile);
                     DocumentDetails details = new DocumentDetails(artefactVersion.name(), "regulated");
                     String serializedDetails = WRITER.writeValueAsString(details);
                     String serializedDocument = WRITER.writeValueAsString(espd);
@@ -109,22 +109,22 @@ public class ImportESPDEndpoint extends Endpoint {
                     rsp.status(406);
                     return DOCUMENT_ERROR + e.getMessage() + ListPrinter(e.getResults());
                 } finally {
-                    Files.deleteIfExists(Paths.get(tempFileName));
+                    Files.deleteIfExists(tempFile);
                 }
             } else {
                 rsp.status(400);
                 return "Bad request.";
             }
         } else if (rq.contentType().contains("application/xml")) {
-            String path = UUID.randomUUID().toString();
+            Path tempFile = Files.createTempFile("espd-file", ".tmp");
             try {
                 rsp.header("Content-Type", "application/json");
                 byte[] xmlStream = rq.body().getBytes(StandardCharsets.UTF_8);
                 artefactVersion = ArtefactUtils.findSchemaVersion(new ByteArrayInputStream(xmlStream));
-                Files.write(Paths.get(path), xmlStream, StandardOpenOption.CREATE);
-                File tempFile = new File(path);
+                Files.write(tempFile, xmlStream, StandardOpenOption.CREATE);
+                File espdFile = tempFile.toFile();
 
-                Object espd = service.CreateModelFromXML(tempFile);
+                Object espd = service.CreateModelFromXML(espdFile);
                 DocumentDetails details = new DocumentDetails(artefactVersion.name(), "regulated");
                 String serializedDetails = WRITER.writeValueAsString(details);
                 String serializedDocument = WRITER.writeValueAsString(espd);
@@ -147,7 +147,7 @@ public class ImportESPDEndpoint extends Endpoint {
                 rsp.status(406);
                 return DOCUMENT_ERROR + e.getMessage() + ListPrinter(e.getResults());
             } finally {
-                Files.deleteIfExists(Paths.get(path));
+                Files.deleteIfExists(tempFile);
             }
         } else {
             LOGGER.severe("Got unexpected content-type: " + rq.contentType());
