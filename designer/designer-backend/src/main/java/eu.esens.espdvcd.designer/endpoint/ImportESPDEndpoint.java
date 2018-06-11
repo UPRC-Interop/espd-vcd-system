@@ -15,6 +15,7 @@ import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import eu.esens.espdvcd.schema.SchemaUtil;
 import eu.esens.espdvcd.schema.SchemaVersion;
+import org.apache.poi.util.IOUtils;
 import org.xml.sax.SAXException;
 import spark.Request;
 import spark.Response;
@@ -77,7 +78,10 @@ public class ImportESPDEndpoint extends Endpoint {
 
                 try (InputStream input = part.getInputStream()) {
                     artefactVersion = ArtefactUtils.findSchemaVersion(input);
-                    Files.copy(input, tempFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                    FileOutputStream out = new FileOutputStream(tempFile);
+                    IOUtils.copy(input, out);
+                    out.close();
+//                    Files.copy(input, tempFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
                 } catch (Exception e) {
                     LOGGER.severe(LOGGER_DOCUMENT_ERROR + e.getMessage());
                     rsp.status(500);
