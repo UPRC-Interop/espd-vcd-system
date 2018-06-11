@@ -307,13 +307,16 @@ export class DataService {
   // date handling
 
   toUTCDate(date: Moment): Moment {
-    const utcDate = new Date(Date.UTC(date.toDate().getFullYear(),
-      date.toDate().getMonth(),
-      date.toDate().getDate(),
-      date.toDate().getHours(),
-      date.toDate().getMinutes()));
+    if(date !== null) {
+      const utcDate = new Date(Date.UTC(date.toDate().getFullYear(),
+        date.toDate().getMonth(),
+        date.toDate().getDate(),
+        date.toDate().getHours(),
+        date.toDate().getMinutes()));
 
-    return date = moment(utcDate);
+      return date = moment(utcDate);
+    }
+
   }
 
 
