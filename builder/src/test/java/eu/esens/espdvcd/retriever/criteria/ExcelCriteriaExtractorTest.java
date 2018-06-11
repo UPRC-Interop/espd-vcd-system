@@ -23,7 +23,6 @@ public class ExcelCriteriaExtractorTest {
 
     }
 
-    @Ignore
     @Test
     public void testReadFile() throws RetrieverException {
         CriteriaExtractor extractor = new PredefinedExcelCriteriaExtractor();
