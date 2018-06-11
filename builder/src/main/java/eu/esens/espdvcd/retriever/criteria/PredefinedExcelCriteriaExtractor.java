@@ -1,7 +1,10 @@
 package eu.esens.espdvcd.retriever.criteria;
 
+import eu.esens.espdvcd.codelist.enums.CriterionElementTypeEnum;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.SelectableCriterion;
+import eu.esens.espdvcd.model.requirement.RequestRequirement;
+import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.ResponseRequirement;
 import org.apache.poi.ss.usermodel.*;
@@ -17,14 +20,20 @@ public class PredefinedExcelCriteriaExtractor implements CriteriaExtractor {
 
     private static final String CRITERIA_TAXONOMY_RESOURCE = "/templates/v2_regulated/ESPD-CriteriaTaxonomy-REGULATED-V2.0.2.xlsx";
     private List<SelectableCriterion> criterionList;
-    private static final String REGEX = "\\$";
+    private final static int nameColumnIndex = 17;
+    private final static int descriptionColumnIndex = 18;
+    private final static int propertyDataTypeColumnIndex = 21;
+    private final static int elementUUIDColumnIndex = 22;
+    private final static int elementCodeColumnIndex = 23;
 
     PredefinedExcelCriteriaExtractor() {
         criterionList = new ArrayList<>();
 
         try {
+
             Workbook workbook = new XSSFWorkbook(PredefinedExcelCriteriaExtractor.class.getResourceAsStream(CRITERIA_TAXONOMY_RESOURCE));
-            workbook.forEach(sheet -> readDataSheet(sheet));
+            criterionList = new ArrayList<>(65);
+            workbook.forEach(sheet -> criterionList.addAll(readDataSheet(sheet)));
             workbook.close();
 
         } catch (IOException e) {
@@ -33,143 +42,81 @@ public class PredefinedExcelCriteriaExtractor implements CriteriaExtractor {
 
     }
 
-    private void readDataSheet(Sheet dataSheet) {
+    private List<SelectableCriterion> readDataSheet(Sheet dataSheet) {
 
-        DataFormatter dataFormatter = new DataFormatter();
+        // The criteria Column is always the second one
+        int criteriaColumn = 1;
 
-        int criterionIndex = 0;
-        List<String> rqGroupAsList = null;
+        List<SelectableCriterion> crList = new ArrayList<>();
+        for (Row r : dataSheet) {
 
-        String tempName;
-        String tempDescription;
-        String tempPropertyDataType;
-        String tempElementUUID;
-        String tempElementCode;
-
-        final int nameColumnIndex = 17;
-        final int descriptionColumnIndex = 18;
-        final int propertyDataTypeColumnIndex = 21;
-        final int elementUUIDColumnIndex = 22;
-        final int elementCodeColumnIndex = 23;
-
-        for (Row row : dataSheet) {
-
-            for (Cell cell : row) {
-                String cellValue = dataFormatter.formatCellValue(cell);
-
-                if (cellValue.equals("{CRITERION")) {
-                    // go and get row specific cell values
-                    tempName = dataFormatter.formatCellValue(row.getCell(nameColumnIndex));
-                    tempDescription = dataFormatter.formatCellValue(row.getCell(descriptionColumnIndex));
-                    tempElementUUID = dataFormatter.formatCellValue(row.getCell(elementUUIDColumnIndex));
-                    tempElementCode = dataFormatter.formatCellValue(row.getCell(elementCodeColumnIndex));
-
-                    SelectableCriterion criterion = new SelectableCriterion(tempElementUUID, tempElementCode,
-                            tempName, tempDescription, null);
-                    criterionList.add(criterionIndex, criterion);
-                    break; // go to the next row
-                }
-
-                if (cellValue.equals("{LEGISLATION}")) {
-                    // no legislation in criteria taxonomy excel
-                    break; // go to the next row
-                }
-
-                if (cellValue.equals("{QUESTION_GROUP")) {
-                    tempElementUUID = dataFormatter.formatCellValue(row.getCell(elementUUIDColumnIndex));
-                    tempElementCode = dataFormatter.formatCellValue(row.getCell(elementCodeColumnIndex));
-
-                    rqGroupAsList = new ArrayList<>();
-                    rqGroupAsList.add("{QUESTION_GROUP$" + tempElementUUID + "$" + tempElementCode);
-                    break; // go to the next row
-                }
-
-                if (cellValue.equals("{QUESTION}")) {
-                    if (rqGroupAsList != null) {
-                        tempDescription = dataFormatter.formatCellValue(row.getCell(descriptionColumnIndex));
-                        tempPropertyDataType = dataFormatter.formatCellValue(row.getCell(propertyDataTypeColumnIndex));
-
-                        rqGroupAsList.add("{QUESTION}$" + tempDescription + "$" + tempPropertyDataType);
-                    }
-                    break; // go to the next row
-                }
-
-                if (cellValue.equals("{QUESTION_SUBGROUP")) {
-                    if (rqGroupAsList != null) {
-                        tempElementUUID = dataFormatter.formatCellValue(row.getCell(elementUUIDColumnIndex));
-                        tempElementCode = dataFormatter.formatCellValue(row.getCell(elementCodeColumnIndex));
-
-                        rqGroupAsList.add("{QUESTION_SUBGROUP$" + tempElementUUID + "$" + tempElementCode);
-                    }
-                    break; // go to the next row
-                }
-
-                if (cellValue.equals("QUESTION_SUBGROUP}")) {
-                    if (rqGroupAsList != null) {
-                        rqGroupAsList.add("QUESTION_SUBGROUP}");
-                    }
-                    break; // go to the next row
-                }
-
-                if (cellValue.equals("QUESTION_GROUP}")) {
-                    if (rqGroupAsList != null) {
-                        RequirementGroup rqGroup = extractRequirementGroup(rqGroupAsList);
-                        criterionList.get(criterionIndex).getRequirementGroups().add(rqGroup);
-                    }
-                    break; // go to the next row
-                }
-
-                if (cellValue.equals("CRITERION}")) {
-                    criterionIndex++;
-                    break; // go to the next row
-                }
-
+            if ("{CRITERION".equals(getCellStringValueOrNull(r, criteriaColumn))) {
+                // We have a criterion in this column.
+                SelectableCriterion sc = new SelectableCriterion();
+                // These calls must be moved to a row wrapper, for better OO (call should be r.getRowName())
+                sc.setName(getRowName(r));
+                sc.setDescription(getRowDescription(r));
+                sc.setID(getRowUUID(r));
+                sc.getRequirementGroups().addAll(extractQuestionGroups(dataSheet, r.getRowNum()+1, criteriaColumn+1));
+                crList.add(sc);
             }
-
         }
-
+        return crList;
     }
 
-    private RequirementGroup extractRequirementGroup(List<String> rqGroupAsList) {
-        RequirementGroup rqGroup = null;
-        int loopIndex = 0;
+    private List<RequirementGroup> extractQuestionGroups(Sheet d, int rowNum, int colNum) {
+        List<RequirementGroup> rgList = new ArrayList<>();
 
-        for (String rowValues : rqGroupAsList) {
-
-            String[] values = rowValues.split(REGEX);
-
-            if ("{QUESTION_GROUP".equals(values[0]) || "{QUESTION_SUBGROUP".equals(values[0])) {
-                rqGroup = new RequirementGroup(values[1]); // UUID
-                rqGroup.setCondition(values[2]);           // PropertyGroupTypeCode
-                loopIndex++;
-                continue;
+        for (int i = rowNum; i < d.getLastRowNum(); i++) {
+            if ("{QUESTION_GROUP".equals(getCellStringValueOrNull(d.getRow(rowNum), colNum)) ||
+                "{QUESTION_SUBGROUP".equals(getCellStringValueOrNull(d.getRow(rowNum), colNum))) {
+                RequirementGroup rg = new RequirementGroup(getRowUUID(d.getRow(rowNum)));
+                rg.getRequirementGroups().addAll(extractQuestionGroups(d, i+1, colNum+1));
+                rg.getRequirements().addAll(extractQuestions(d, i+1, colNum+1));
+                rgList.add(rg);
             }
-
-            if ("{QUESTION}".equals(values[0]) && rqGroup != null) {
-
-                rqGroup.getRequirements().add(new ResponseRequirement(UUID.randomUUID().toString(),
-                        ResponseTypeEnum.valueOf(values[2]),
-                        values[1])); // description
-                loopIndex++;
-                continue;
-            }
-
-            if ("{QUESTION_SUBGROUP".equals(values[0]) && rqGroup != null) {
-                List<String> rqSubGroupAsList = new ArrayList<>();
-                int innerIndex = loopIndex;
-
-                while (!"QUESTION_SUBGROUP}".equals(rqGroupAsList.get(innerIndex).split("$")[0])) {
-                    rqSubGroupAsList.add(rqGroupAsList.get(innerIndex));
-                    innerIndex++;
-                }
-
-                rqGroup.getRequirementGroups().add(extractRequirementGroup(rqSubGroupAsList));
-            }
-
-            loopIndex++;
         }
+        return rgList;
+    }
 
-        return rqGroup;
+    private List<Requirement> extractQuestions(Sheet d, int rowNum, int colNum){
+
+        List<Requirement> rList = new ArrayList<>();
+        for (int i = rowNum; i < d.getLastRowNum(); i++) {
+            if ("{QUESTION".equals(getCellStringValueOrNull(d.getRow(rowNum), colNum))) {
+                Requirement r = new RequestRequirement(
+                    getRowUUID(d.getRow(rowNum)),
+                    ResponseTypeEnum.valueOf(getRowCode(d.getRow(rowNum))),
+                    getRowDescription(d.getRow(rowNum))
+                );
+                r.setTypeCode(CriterionElementTypeEnum.QUESTION);
+                rList.add(r);
+            }
+
+        }
+        return rList;
+    }
+
+    private String getRowUUID(Row r) {
+        return getCellStringValueOrNull(r, elementUUIDColumnIndex);
+    }
+
+    private String getRowName(Row r) {
+        return getCellStringValueOrNull(r, nameColumnIndex);
+    }
+
+    private String getRowDescription(Row r) {
+        return getCellStringValueOrNull(r, descriptionColumnIndex);
+    }
+
+    private String getRowCode(Row r) {
+        return getCellStringValueOrNull(r, elementCodeColumnIndex);
+    }
+
+    private String getCellStringValueOrNull(Row r, int index) {
+        Cell c = r.getCell(index);
+        if (c == null) return null;
+        return CellType.STRING.equals(c.getCellTypeEnum())?c.getStringCellValue():null;
     }
 
     @Override
@@ -196,5 +143,4 @@ public class PredefinedExcelCriteriaExtractor implements CriteriaExtractor {
         initialSet.addAll(fullSet);
         return new ArrayList<>(initialSet);
     }
-
 }
