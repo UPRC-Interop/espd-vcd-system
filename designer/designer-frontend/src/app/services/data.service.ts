@@ -1243,14 +1243,19 @@ export class DataService {
 
             if (r.response.currency || r.response.amount) {
               group[r.uuid] = new FormControl(r.response.amount);
-              group[r.uuid + 'currency'] = new FormControl(r.response.currency);
+              if (r.response.currency) {
+                group[r.uuid + 'currency'] = new FormControl(r.response.currency);
+              }
             }
 
             // console.log(r.response);
           } else {
             r.response = new RequirementResponse();
             group[r.uuid] = new FormControl(r.response.description || '');
-            group[r.uuid + 'currency'] = new FormControl(r.response.currency || '');
+            if (this.isEO) {
+              group[r.uuid + 'currency'] = new FormControl();
+            }
+
           }
 
           // console.log(group);
