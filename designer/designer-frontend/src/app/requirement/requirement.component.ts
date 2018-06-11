@@ -24,7 +24,7 @@ export class RequirementComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    this.indicatorChanged.emit(this.form.get(this.req.id).value);
+    this.indicatorChanged.emit(this.form.get(this.req.uuid).value);
   }
 
   ngOnInit() {
@@ -49,7 +49,7 @@ export class RequirementComponent implements OnInit, OnChanges {
 
 
     if (this.req.responseDataType === 'INDICATOR') {
-      this.form.get(this.req.id)
+      this.form.get(this.req.uuid)
         .valueChanges
         .subscribe(ev => {
           console.log('emit: ' + ev);

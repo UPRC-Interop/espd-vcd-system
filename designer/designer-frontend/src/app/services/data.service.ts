@@ -1138,7 +1138,7 @@ export class DataService {
   createExclusionCriterionForm(criteria: ExclusionCriteria[]) {
     let group: any = {};
     criteria.forEach(cr => {
-      group[cr.id] = this.createFormGroups(cr.requirementGroups);
+      group[cr.uuid] = this.createFormGroups(cr.requirementGroups);
       // console.log(group[cr.typeCode]);
     });
     let fg = new FormGroup(group);
@@ -1150,7 +1150,7 @@ export class DataService {
   createSelectionCriterionForm(criteria: SelectionCriteria[]) {
     let group: any = {};
     criteria.forEach(cr => {
-      group[cr.id] = this.createFormGroups(cr.requirementGroups);
+      group[cr.uuid] = this.createFormGroups(cr.requirementGroups);
       // console.log(group[cr.typeCode]);
     });
     let fg = new FormGroup(group);
@@ -1162,7 +1162,7 @@ export class DataService {
   createReductionCriterionForm(criteria: ReductionCriterion[]) {
     let group: any = {};
     criteria.forEach(cr => {
-      group[cr.id] = this.createFormGroups(cr.requirementGroups);
+      group[cr.uuid] = this.createFormGroups(cr.requirementGroups);
       // console.log(group[cr.typeCode]);
     });
     let fg = new FormGroup(group);
@@ -1174,7 +1174,7 @@ export class DataService {
   createEORelatedCriterionForm(criteria: EoRelatedCriterion[]) {
     let group: any = {};
     criteria.forEach(cr => {
-      group[cr.id] = this.createFormGroups(cr.requirementGroups);
+      group[cr.uuid] = this.createFormGroups(cr.requirementGroups);
       // console.log(group[cr.typeCode]);
     });
     let fg = new FormGroup(group);
@@ -1189,7 +1189,7 @@ export class DataService {
     if (cr) {
       // console.log('In Criterion: ' + cr.typeCode);
       if (cr.requirementGroups != null || cr.requirementGroups != undefined) {
-        group[cr.id] = this.createFormGroups(cr.requirementGroups);
+        group[cr.uuid] = this.createFormGroups(cr.requirementGroups);
       }
     }
     let fg = new FormGroup(group);
@@ -1202,7 +1202,7 @@ export class DataService {
   createFormGroups(reqGroups: RequirementGroup[]) {
     let group: any = {};
     reqGroups.forEach(rg => {
-      group[rg.id] = this.toFormGroup(rg);
+      group[rg.uuid] = this.toFormGroup(rg);
     });
     // console.log(group);
     let fg = new FormGroup(group);
@@ -1222,9 +1222,9 @@ export class DataService {
         rg.requirements.forEach(r => {
           // ID++;
           // console.log(ID);
-          // console.log('In Req: ' + r.id);
+          // console.log('In Req: ' + r.uuid);
           if (r.response != null || r.response != undefined) {
-            group[r.id] = new FormControl(r.response.description ||
+            group[r.uuid] = new FormControl(r.response.description ||
               r.response.percentage || r.response.indicator || r.response.evidenceURL ||
               r.response.evidenceURLCode || r.response.countryCode ||
               r.response.period || r.response.quantity || r.response.year || '');
@@ -1238,29 +1238,29 @@ export class DataService {
               // let momentDate = moment(r.response.date).format('LLL');
               // console.log(momentDate);
 
-              group[r.id] = new FormControl(r.response.date);
+              group[r.uuid] = new FormControl(r.response.date);
             }
 
             if (r.response.currency || r.response.amount) {
-              group[r.id] = new FormControl(r.response.amount);
-              group[r.id + 'currency'] = new FormControl(r.response.currency);
+              group[r.uuid] = new FormControl(r.response.amount);
+              group[r.uuid + 'currency'] = new FormControl(r.response.currency);
             }
 
             // console.log(r.response);
           } else {
             r.response = new RequirementResponse();
-            group[r.id] = new FormControl(r.response.description || '');
-            group[r.id + 'currency'] = new FormControl(r.response.currency || '');
+            group[r.uuid] = new FormControl(r.response.description || '');
+            group[r.uuid + 'currency'] = new FormControl(r.response.currency || '');
           }
 
           // console.log(group);
-          // console.log(group[r.id]);
+          // console.log(group[r.uuid]);
         });
       }
       if (rg.requirementGroups != null || rg.requirementGroups != undefined) {
         rg.requirementGroups.forEach(rg => {
-          // console.log('Req Group ' + rg.id);
-          group[rg.id] = this.toFormGroup(rg);
+          // console.log('Req Group ' + rg.uuid);
+          group[rg.uuid] = this.toFormGroup(rg);
         });
       }
     }

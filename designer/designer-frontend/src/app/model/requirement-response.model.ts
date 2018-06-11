@@ -14,4 +14,5 @@ export class RequirementResponse {
   quantity?: number;
   year?: number;
   id?: string;
+  uuid: string;
 }

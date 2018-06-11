@@ -5,7 +5,7 @@
         <app-requirement [req]="r" [form] = "form" (indicatorChanged)="childIndicatorChangedHandler($event)"></app-requirement>
       </div>
       <div *ngFor="let rg of reqGroup.requirementGroups" class="form-row">
-        <app-requirement-group [reqGroup]="rg" [form] = "form.get(rg.id)" [indicator]="childIndicator"></app-requirement-group>
+        <app-requirement-group [reqGroup]="rg" [form] = "form.get(rg.uuid)" [indicator]="childIndicator"></app-requirement-group>
       </div>
     </mat-card-content>
   </mat-card>

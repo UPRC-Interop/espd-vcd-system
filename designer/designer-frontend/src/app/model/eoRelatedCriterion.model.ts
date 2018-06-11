@@ -10,5 +10,6 @@ export class EoRelatedCriterion {
   legislationReference: LegislationReference;
   requirementGroups: RequirementGroup[];
   id: string;
+  uuid: string;
   response?: RequirementResponse;
 }

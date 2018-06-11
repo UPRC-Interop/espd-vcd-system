@@ -10,5 +10,6 @@ export class ReductionCriterion {
   legislationReference: LegislationReference;
   requirementGroups: RequirementGroup[];
   id: string;
+  uuid: string;
   response?: RequirementResponse;
 }
