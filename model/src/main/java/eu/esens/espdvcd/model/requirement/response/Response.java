@@ -26,6 +26,16 @@ public abstract class Response {
      * ccv:Criterion.RequirementGroup.Requirement.DescriptionResponse.ID<br>
      */
 
+    private String UUID;
+
+    public String getUUID() {
+        return UUID;
+    }
+
+    public void setUUID(String UUID) {
+        this.UUID = UUID;
+    }
+
     private String ID;
 
     public String getID() {
