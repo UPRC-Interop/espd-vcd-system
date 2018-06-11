@@ -18,8 +18,8 @@ export class ApicallService {
 
   /* ============ CODELISTS =============*/
 
-  // version: string = 'v1';
-  version: string = 'v2';
+  version: string = 'v1';
+  // version: string = 'v2';
   // version: string;
 
 

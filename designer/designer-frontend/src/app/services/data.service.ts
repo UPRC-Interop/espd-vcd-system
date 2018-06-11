@@ -101,6 +101,8 @@ export class DataService {
   public selectionCCriteriaForm: FormGroup = null;
   public selectionDCriteriaForm: FormGroup = null;
 
+  public selectionALLCriteriaForm: FormGroup = null;
+
   public reductionCriteriaForm: FormGroup = null;
 
 
@@ -589,11 +591,15 @@ export class DataService {
           this.selectionBCriteria = this.filterSelectionCriteria(this.SELECTION_ECONOMIC_REGEXP, res.fullCriterionList);
           this.selectionCCriteria = this.filterSelectionCriteria(this.SELECTION_TECHNICAL_REGEXP, res.fullCriterionList);
           this.selectionDCriteria = this.filterSelectionCriteria(this.SELECTION_CERTIFICATES_REGEXP, res.fullCriterionList);
+          this.selectionALLCriteria = this.filterSelectionCriteria(this.SELECTION_REGEXP, res.fullCriterionList);
+
 
           this.selectionACriteriaForm = this.createSelectionCriterionForm(this.selectionACriteria);
           this.selectionBCriteriaForm = this.createSelectionCriterionForm(this.selectionBCriteria);
           this.selectionCCriteriaForm = this.createSelectionCriterionForm(this.selectionCCriteria);
           this.selectionDCriteriaForm = this.createSelectionCriterionForm(this.selectionDCriteria);
+          this.selectionALLCriteriaForm = this.createSelectionCriterionForm(this.selectionALLCriteria);
+
 
           this.reductionCriteria = this.filterReductionCriteria(this.REDUCTION_OF_CANDIDATES_REGEXP, res.fullCriterionList);
           if (!this.reductionCriteria) {
@@ -1120,6 +1126,7 @@ export class DataService {
         });
     }
   }
+
 
   /* =================  Dynamic Forms =========================== */
 

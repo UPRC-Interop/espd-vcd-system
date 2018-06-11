@@ -15,7 +15,7 @@ import {Moment} from 'moment';
   styleUrls: ['./selection-eo.component.css']
 })
 export class SelectionEoComponent implements OnInit {
-  selectionALLCriteria: SelectionCriteria[] = null;
+  // selectionALLCriteria: SelectionCriteria[] = null;
   isSatisfiedALL: boolean = true;
   isAtoD: boolean = false;
 
@@ -23,11 +23,13 @@ export class SelectionEoComponent implements OnInit {
   @Input() selectionBCriteria: SelectionCriteria[];
   @Input() selectionCCriteria: SelectionCriteria[];
   @Input() selectionDCriteria: SelectionCriteria[];
+  @Input() selectionALLCriteria: SelectionCriteria[];
 
   @Input() formA: FormGroup;
   @Input() formB: FormGroup;
   @Input() formC: FormGroup;
   @Input() formD: FormGroup;
+  @Input() formALL: FormGroup;
 
 
   constructor(public dataService: DataService) {
@@ -36,14 +38,14 @@ export class SelectionEoComponent implements OnInit {
   ngOnInit() {
 
 
-    this.dataService.getSelectionALLCriteria()
-      .then(res => {
-        this.selectionALLCriteria = res;
-        // this.formALL = this.dataService.createSelectionCriterionForm(this.selectionALLCriteria);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    // this.dataService.getSelectionALLCriteria()
+    //   .then(res => {
+    //     this.selectionALLCriteria = res;
+    //     // this.formALL = this.dataService.createSelectionCriterionForm(this.selectionALLCriteria);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
   }
 
 
