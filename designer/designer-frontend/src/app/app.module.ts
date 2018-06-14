@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule} from './material/material.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {AppRoutingModule} from './app-routing.module';
 
 import {DataService} from './services/data.service';
@@ -25,8 +25,15 @@ import {RequirementComponent} from './requirement/requirement.component';
 import {RootComponent} from './root/root.component';
 import {CriterionComponent} from './criterion/criterion.component';
 import {FinishEoComponent} from './finish-eo/finish-eo.component';
+
+/* date and locale */
 import {MAT_MOMENT_DATE_FORMATS, MatMomentDateModule, MomentDateAdapter} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material';
+
+/* translations */
+
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 
 @NgModule({
@@ -56,7 +63,14 @@ import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material'
     HttpClientModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    MatMomentDateModule
+    MatMomentDateModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [ApicallService, DataService,
     {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
@@ -65,4 +79,9 @@ import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material'
   bootstrap: [AppComponent]
 })
 export class AppModule {
+}
+
+/* required for AOT */
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
 }
