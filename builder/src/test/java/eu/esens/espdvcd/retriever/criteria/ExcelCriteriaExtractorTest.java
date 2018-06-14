@@ -1,18 +1,9 @@
 package eu.esens.espdvcd.retriever.criteria;
 
-import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
-import eu.esens.espdvcd.model.requirement.ResponseRequirement;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
-import eu.esens.espdvcd.schema.SchemaVersion;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
 
 public class ExcelCriteriaExtractorTest {
 
@@ -28,7 +19,7 @@ public class ExcelCriteriaExtractorTest {
         extractor.getFullList().forEach(sc -> {
             System.out.println("ID: " + sc.getID() + " Name: " + sc.getName() + " Desc: " + sc.getDescription() + " Element Code: " + sc.getTypeCode());
             System.out.println("Legislation: " + sc.getLegislationReference());
-            sc.getRequirementGroups().forEach(rqg -> printRequirementGroup(rqg, 1));
+            sc.getRequirementGroups().forEach(rqg -> printRequirementGroup(rqg, 3));
             System.out.println();
         });
     }
