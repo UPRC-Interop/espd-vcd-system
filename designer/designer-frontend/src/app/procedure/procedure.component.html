@@ -1,81 +1,81 @@
-<h4>Part I: Information concerning the procurement procedure and the contracting authority or contracting entity</h4>
+<h4 translate>espd.part1.header</h4>
 <form #f="ngForm">
   <mat-accordion multi="true">
     <mat-expansion-panel expanded="true">
       <mat-expansion-panel-header>
-        <mat-panel-title>
-          Information about Publication
+        <mat-panel-title translate>
+          espd.part1.info.pub
         </mat-panel-title>
         <mat-panel-description>
 
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div class="desc">
-        <p>For procurement procedures in which a call for competition has been published in the Official Journal of the European Union, the information required under Part I will be automatically retrieved, provided that the electronic ESPD-service is used to generate and fill in the ESPD. Reference of the relevant notice published in the Official Journal of the European Union:</p>
+        <p translate>espd.part1.to.be.filled.alert</p>
       </div>
       <mat-form-field>
         <!--<label for="noticeNumber">Received Notice Number</label>-->
-        <input matInput id="noticeNumber" name="receivedNoticeNumber" [(ngModel)]="dataService.receivedNoticeNumber" placeholder="Received notice number">
+        <input matInput id="noticeNumber" name="receivedNoticeNumber" [(ngModel)]="dataService.receivedNoticeNumber" placeholder="{{'espd.part1.ted.reception.id' | translate}}">
       </mat-form-field>
       <mat-form-field>
-        <input matInput name="noticeNumberOJS" [(ngModel)]="dataService.CADetails.procurementPublicationNumber" placeholder="Notice number in the OJS">
+        <input matInput name="noticeNumberOJS" [(ngModel)]="dataService.CADetails.procurementPublicationNumber" placeholder="{{'espd.part1.ojs.label' | translate}}">
       </mat-form-field>
       <mat-form-field>
-        <input matInput name="ojsURL" placeholder="OJS URL" [(ngModel)]="dataService.CADetails.procurementPublicationURI">
+        <input matInput name="ojsURL" placeholder="{{'espd.part1.ojs.url' | translate}}" [(ngModel)]="dataService.CADetails.procurementPublicationURI">
       </mat-form-field>
       <mat-form-field>
         <input matInput name="nationalJournal" placeholder="National Official Journal" [(ngModel)]="dataService.CADetails.nationalOfficialJournal">
       </mat-form-field>
 
       <div class="desc">
-        <p>In case publication of a notice in the Official Journal of the European Union is not required, please give other information allowing the procurement procedure to be unequivocally identified (e. g. reference of a publication at national level)</p>
+        <p translate>espd.part1.official.journal.alert</p>
       </div>
     </mat-expansion-panel>
     <mat-expansion-panel expanded="true">
       <mat-expansion-panel-header>
-        <mat-panel-title>
-          Identity of the Procurer
+        <mat-panel-title translate>
+          espd.part1.contact.details.ca
         </mat-panel-title>
         <mat-panel-description>
 
         </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-form-field>
-        <input matInput placeholder="Official Name" name="CAofficialName" [(ngModel)]="dataService.CADetails.caofficialName">
+        <input matInput placeholder="{{'espd.part1.name' | translate}}" name="CAofficialName" [(ngModel)]="dataService.CADetails.caofficialName">
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Procurer Identification" name="CAofficialID" [(ngModel)]="dataService.CADetails.id">
+        <input matInput placeholder="{{'espd.part1.contact.details.ca' | translate}}" name="CAofficialID" [(ngModel)]="dataService.CADetails.id">
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Procurer website" name="CAofficialWebSite" [(ngModel)]="dataService.CADetails.webSiteURI">
+        <input matInput placeholder="{{'espd.part1.website' | translate}}" name="CAofficialWebSite" [(ngModel)]="dataService.CADetails.webSiteURI">
       </mat-form-field>
       <ng-container *ngIf="dataService.CADetails.postalAddress">
         <mat-form-field>
-          <input matInput placeholder="Procurer City" name="CAofficialCity" [(ngModel)]="dataService.CADetails.postalAddress.city">
+          <input matInput placeholder="{{'espd.part1.city' | translate}}" name="CAofficialCity" [(ngModel)]="dataService.CADetails.postalAddress.city">
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Street and Number" name="CAofficialStreet" [(ngModel)]="dataService.CADetails.postalAddress.addressLine1">
+          <input matInput placeholder="{{'espd.part1.street.and. num' | translate}}" name="CAofficialStreet" [(ngModel)]="dataService.CADetails.postalAddress.addressLine1">
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Post Code" name="CAofficialPostCode" [(ngModel)]="dataService.CADetails.postalAddress.postCode">
+          <input matInput placeholder="{{'espd.part1.postcode'| translate}}" name="CAofficialPostCode" [(ngModel)]="dataService.CADetails.postalAddress.postCode">
         </mat-form-field>
       </ng-container>
       <ng-container *ngIf="dataService.CADetails.contactingDetails">
         <mat-form-field>
-          <input matInput placeholder="Contact Point Name" name="CAofficialContactName" [(ngModel)]="dataService.CADetails.contactingDetails.contactPointName">
+          <input matInput placeholder="{{'espd.part2.contact.person' | translate}}" name="CAofficialContactName" [(ngModel)]="dataService.CADetails.contactingDetails.contactPointName">
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Contact Telephone Number" name="CAofficialContactTelephone" [(ngModel)]="dataService.CADetails.contactingDetails.telephoneNumber">
+          <input matInput placeholder="{{'espd.part1.telephone' | translate}}" name="CAofficialContactTelephone" [(ngModel)]="dataService.CADetails.contactingDetails.telephoneNumber">
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Contact Fax Number" name="CAofficialContactFaxNumber" [(ngModel)]="dataService.CADetails.contactingDetails.faxNumber">
+          <input matInput placeholder="{{'espd.part1.fax' | translate}}" name="CAofficialContactFaxNumber" [(ngModel)]="dataService.CADetails.contactingDetails.faxNumber">
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Contact email address" name="CAofficialContactEmail" [(ngModel)]="dataService.CADetails.contactingDetails.emailAddress">
+          <input matInput placeholder="{{'espd.part1.email' | translate}}" name="CAofficialContactEmail" [(ngModel)]="dataService.CADetails.contactingDetails.emailAddress">
         </mat-form-field>
       </ng-container>
       <mat-form-field>
-        <mat-select name="CACountry" placeholder="Select Country" [(ngModel)]="dataService.selectedCountry">
+        <mat-select name="CACountry" placeholder="{{'espd.part1.country' | translate}}" [(ngModel)]="dataService.selectedCountry">
           <mat-option>None</mat-option>
           <mat-option *ngFor="let country of countries" [value]="country.code">{{country.name}}</mat-option>
         </mat-select>
@@ -84,36 +84,36 @@
 
     <mat-expansion-panel expanded="true">
       <mat-expansion-panel-header>
-        <mat-panel-title>
-          Information about the procurement procedure
+        <mat-panel-title translate>
+          espd.part1.info.procurement.proc
         </mat-panel-title>
         <mat-panel-description>
 
         </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-form-field>
-        <mat-select placeholder="Type of Procedure" name="typeOfProcedure" [(ngModel)]="dataService.CADetails.procurementProcedureType">
+        <mat-select placeholder="Type of Procedure" name="{{'espd.part1.info.procedure' | translate}}" [(ngModel)]="dataService.CADetails.procurementProcedureType">
           <mat-option>None</mat-option>
           <mat-option *ngFor="let proc of procedureTypes" [value]="proc.code">{{proc.name}}</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Title" name="title" [(ngModel)]="dataService.CADetails.procurementProcedureTitle">
+        <input matInput placeholder="{{'espd.part1.procurer.name' | translate}}" name="title" [(ngModel)]="dataService.CADetails.procurementProcedureTitle">
       </mat-form-field>
       <mat-form-field>
         <!--<input matInput placeholder="Short Description">-->
         <textarea matInput
                   id="shortDesc" cols="30" rows="10"
-                  placeholder="Short Description"
+                  placeholder="{{'espd.part1.title.or.short.desc' | translate}}"
                   name="description"
                   [(ngModel)]="dataService.CADetails.procurementProcedureDesc"></textarea>
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="File Reference Number" name="fileReferenceNumber"
+        <input matInput placeholder="{{'espd.part1.file.ref.ca' | translate}}" name="fileReferenceNumber"
                [(ngModel)]="dataService.CADetails.procurementProcedureFileReferenceNo">
       </mat-form-field>
     </mat-expansion-panel>
   </mat-accordion>
-  <button mat-raised-button color="primary" matStepperPrevious>Back</button>
-  <button type="button" mat-raised-button color="primary" matStepperNext (click)="onProcedureSubmit(f)">Next</button>
+  <button mat-raised-button color="primary" matStepperPrevious>{{'espd.gui.back.to.main' | translate}}</button>
+  <button type="button" mat-raised-button color="primary" matStepperNext (click)="onProcedureSubmit(f)">{{ 'espd.gui.next' | translate}}</button>
 </form>
