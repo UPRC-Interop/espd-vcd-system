@@ -18,16 +18,6 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-//import grow.names.specification.ubl.schema.xsd.espd_commonaggregatecomponents_1.EconomicOperatorPartyType;
-//import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
-//import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementType;
-//import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.ResponseType;
-//import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.DocumentReferenceType;
-//import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PersonType;
-//import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ProcurementProjectLotType;
-//import test.x.ubl.pre_award.commonaggregate.TenderingCriterionResponseType;
-//import test.x.ubl.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
-
 public class ESPDResponseModelExtractor implements ModelExtractor {
 
     /* package private constructor. Create only through factory */

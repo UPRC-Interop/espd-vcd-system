@@ -73,7 +73,7 @@ public enum CodelistsV1 implements Codelists {
     private volatile GenericCode INSTANCE;
     private static final String DEFAULT_LANG = "en";
 
-    private CodelistsV1(String s) {
+    CodelistsV1(String s) {
         name = s;
     }
 

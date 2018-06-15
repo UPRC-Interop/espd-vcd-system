@@ -1,22 +1,10 @@
 package eu.esens.espdvcd.builder;
 
 import eu.esens.espdvcd.codelist.CodelistsV1;
-import eu.esens.espdvcd.codelist.enums.ProfileExecutionIDEnum;
 import eu.esens.espdvcd.model.*;
-import eu.esens.espdvcd.schema.SchemaVersion;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-//import eu.esens.espdvcd.schema.SchemaVersion;
 
 public interface ModelBuilder {
 

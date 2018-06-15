@@ -10,11 +10,6 @@ import eu.espd.schema.v2.pre_award.commonbasic.IssueTimeType;
 import eu.espd.schema.v2.pre_award.commonbasic.ProfileIDType;
 import eu.espd.schema.v2.pre_award.qualificationapplicationrequest.QualificationApplicationRequestType;
 import eu.espd.schema.v2.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
-//import test.x.ubl.pre_award.commonbasic.IssueDateType;
-//import test.x.ubl.pre_award.commonbasic.IssueTimeType;
-//import test.x.ubl.pre_award.commonbasic.ProfileIDType;
-//import test.x.ubl.pre_award.qualificationapplicationrequest.QualificationApplicationRequestType;
-//import test.x.ubl.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
 
 import javax.xml.bind.JAXBException;
 import java.io.ByteArrayInputStream;

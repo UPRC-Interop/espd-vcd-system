@@ -12,11 +12,6 @@ import eu.espd.schema.v2.pre_award.commonbasic.*;
 import eu.espd.schema.v2.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-//import test.x.ubl.pre_award.commonaggregate.*;
-//import test.x.ubl.pre_award.commonbasic.*;
-//import test.x.ubl.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
-
-
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeConstants;
 import javax.xml.datatype.DatatypeFactory;

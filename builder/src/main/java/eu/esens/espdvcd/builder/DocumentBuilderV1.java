@@ -10,11 +10,6 @@ import eu.espd.schema.v1.commonbasiccomponents_2.IssueTimeType;
 import eu.espd.schema.v1.commonbasiccomponents_2.ProfileIDType;
 import eu.espd.schema.v1.espdrequest_1.ESPDRequestType;
 import eu.espd.schema.v1.espdresponse_1.ESPDResponseType;
-//import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
-//import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
-//import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.IssueDateType;
-//import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.IssueTimeType;
-//import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ProfileIDType;
 
 import javax.xml.bind.JAXBException;
 import java.io.ByteArrayInputStream;

@@ -12,10 +12,6 @@ import eu.espd.schema.v1.espdrequest_1.ESPDRequestType;
 import eu.espd.schema.v1.espdresponse_1.ESPDResponseType;
 import eu.espd.schema.v2.pre_award.qualificationapplicationrequest.QualificationApplicationRequestType;
 import eu.espd.schema.v2.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
-//import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
-//import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
-//import test.x.ubl.pre_award.qualificationapplicationrequest.QualificationApplicationRequestType;
-//import test.x.ubl.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.transform.stream.StreamSource;
@@ -24,12 +20,12 @@ import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class RegulatedModelBuilder implements ModelBuilder {
+public abstract class RegulatedModelBuilder implements ModelBuilder {
 
     private EODetails eoDetails = null;
     private CADetails caDetails = null;
     private ServiceProviderDetails serviceProviderDetails = null;
-    private CriteriaExtractor criteriaExtractor = null;
+    protected CriteriaExtractor criteriaExtractor = null;
     private InputStream importStream = null;
 
     /* package private constructor. Create only through factory */
@@ -130,10 +126,9 @@ public class RegulatedModelBuilder implements ModelBuilder {
      * @return the same ModelBuilder instance for incremental creation of the
      * required object.
      */
-//    public RegulatedModelBuilder addDefaultESPDCriteriaList() {
-//        criteriaExtractor = new PredefinedESPDCriteriaExtractor();
-//        return this;
-//    }
+    abstract RegulatedModelBuilder addDefaultESPDCriteriaList();
+
+    abstract RegulatedModelBuilder addECertisESPDCriteriaList();
 
     public ESPDRequest createESPDRequest() throws BuilderException {
         ESPDRequest req;

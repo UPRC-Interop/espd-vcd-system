@@ -1,12 +1,6 @@
 package eu.esens.espdvcd.builder;
 
 import eu.esens.espdvcd.model.ESPDRequest;
-import eu.esens.espdvcd.retriever.criteria.CriteriaExtractorFactory;
-import eu.esens.espdvcd.retriever.exception.RetrieverException;
-import eu.esens.espdvcd.schema.SchemaVersion;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * The XMLDocumentBuilder is a builder pattern implemented class that is used
@@ -47,29 +41,5 @@ public class XMLDocumentBuilderV2 extends DocumentBuilderV2 {
     protected String getProfileID() {
         return "4.1";
     } //Changed to the ESPD validator required value
-
-    public XMLDocumentBuilderV2 addDefaultESPDCriteriaList() {
-
-        try {
-            request.setCriterionList(CriteriaExtractorFactory.getPredefinedESPDCriteriaExtractor(SchemaVersion.V2)
-                    .getFullList(request.getFullCriterionList()));
-        } catch (RetrieverException ex) {
-            Logger.getLogger(XMLDocumentBuilderV1.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return XMLDocumentBuilderV2.this;
-    }
-
-    public XMLDocumentBuilderV2 addECertisCriteriaList() {
-
-        try {
-            request.setCriterionList(CriteriaExtractorFactory.getECertisCriteriaExtractor(SchemaVersion.V2)
-                    .getFullList(request.getFullCriterionList()));
-        } catch (RetrieverException ex) {
-            Logger.getLogger(XMLDocumentBuilderV1.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return XMLDocumentBuilderV2.this;
-    }
 
 }

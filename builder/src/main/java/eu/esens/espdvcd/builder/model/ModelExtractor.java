@@ -22,18 +22,6 @@ import eu.espd.schema.v1.commonbasiccomponents_2.ContractFolderIDType;
 import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionPropertyGroupType;
 import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionPropertyType;
 import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionType;
-//import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.CriterionType;
-//import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.LegislationType;
-//import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementGroupType;
-//import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementType;
-//import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ContractingPartyType;
-//import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.DocumentReferenceType;
-//import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ExternalReferenceType;
-//import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ServiceProviderPartyType;
-//import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ContractFolderIDType;
-//import test.x.ubl.pre_award.commonaggregate.TenderingCriterionPropertyGroupType;
-//import test.x.ubl.pre_award.commonaggregate.TenderingCriterionPropertyType;
-//import test.x.ubl.pre_award.commonaggregate.TenderingCriterionType;
 
 import java.util.List;
 import java.util.NoSuchElementException;

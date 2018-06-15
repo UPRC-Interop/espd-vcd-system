@@ -14,6 +14,8 @@ import java.util.regex.Pattern;
 
 public class ArtefactUtils {
 
+    private static final Logger LOGGER = Logger.getLogger(ArtefactUtils.class.getName());
+
     public static InputStream getBufferedInputStream(InputStream xmlESPD) {
         // We require a marked input stream
         InputStream bis;
@@ -54,7 +56,7 @@ public class ArtefactUtils {
             }
 
         } catch (IOException ex) {
-            Logger.getLogger(ArtefactUtils.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.log(Level.SEVERE, null, ex);
         }
 
         return version;
@@ -118,7 +120,7 @@ public class ArtefactUtils {
             }
 
         } catch (IOException ex) {
-            Logger.getLogger(ArtefactUtils.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
         }
         return profileExecutionIDEnum;
     }
