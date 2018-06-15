@@ -79,17 +79,15 @@ public class ESPDResponseToModelService implements ESPDtoModelService {
     }
 
     private boolean isESPDRequest(File Artefact) {
-        Scanner scanner = null;
-        try {
-            scanner = new Scanner(Artefact);
-        } catch (FileNotFoundException e) {
-            Logger.getLogger(ModeltoESPDService.class.getName()).log(Level.SEVERE, e.getMessage(), e);
-        }
         String line = "";
         int linesToSkip = 2;
-        for (int i = 0; i < linesToSkip; i++) {
-            if (scanner.hasNextLine())
-                line = scanner.nextLine();
+        try (Scanner scanner = new Scanner(Artefact)){
+            for (int i = 0; i < linesToSkip; i++) {
+                if (scanner.hasNextLine())
+                    line = scanner.nextLine();
+            }
+        } catch (FileNotFoundException e) {
+            Logger.getLogger(ModeltoESPDService.class.getName()).log(Level.SEVERE, e.getMessage(), e);
         }
         return line.trim().split("\\s+")[0].contains("ESPDRequest");
     }
