@@ -11,6 +11,7 @@ import eu.espd.schema.v1.commonaggregatecomponents_2.PersonType;
 import eu.espd.schema.v1.commonaggregatecomponents_2.ProcurementProjectLotType;
 import eu.espd.schema.v1.espd_commonaggregatecomponents_1.EconomicOperatorPartyType;
 import eu.espd.schema.v1.espdresponse_1.ESPDResponseType;
+import eu.espd.schema.v2.pre_award.commonaggregate.EvidenceType;
 import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionResponseType;
 import eu.espd.schema.v2.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
 
@@ -74,23 +75,23 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
         return res;
     }
 
-    public ESPDResponse extractESPDResponse(QualificationApplicationResponseType responseType) {
+    public ESPDResponse extractESPDResponse(QualificationApplicationResponseType qarType) {
 
         RegulatedESPDResponse regulatedResponse = new RegulatedESPDResponse();
 
-        regulatedResponse.getFullCriterionList().addAll(responseType.getTenderingCriterion().stream()
+        regulatedResponse.getFullCriterionList().addAll(qarType.getTenderingCriterion().stream()
                 .map(c -> extractSelectableCriterion(c))
                 .collect(Collectors.toList()));
 
-        regulatedResponse.setCADetails(extractCADetails(responseType.getContractingParty(),
-                responseType.getContractFolderID(),
-                responseType.getAdditionalDocumentReference()));
+        regulatedResponse.setCADetails(extractCADetails(qarType.getContractingParty(),
+                qarType.getContractFolderID(),
+                qarType.getAdditionalDocumentReference()));
 
-        regulatedResponse.setServiceProviderDetails(extractServiceProviderDetails(responseType.getContractingParty()));
+        regulatedResponse.setServiceProviderDetails(extractServiceProviderDetails(qarType.getContractingParty()));
 
-        if (!responseType.getEconomicOperatorParty().isEmpty()) {
+        if (!qarType.getEconomicOperatorParty().isEmpty()) {
             // FIXME we assure 1 here
-            regulatedResponse.setEODetails(extractEODetails(responseType.getEconomicOperatorParty().get(0), responseType.getProcurementProjectLot().get(0)));
+            regulatedResponse.setEODetails(extractEODetails(qarType.getEconomicOperatorParty().get(0), qarType.getProcurementProjectLot().get(0)));
         } else {
             EODetails eod = new EODetails();
             eod.setContactingDetails(new ContactingDetails());
@@ -105,35 +106,38 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
             regulatedResponse.setEODetails(eod);
         }
 
+        // extract all responses
         regulatedResponse.getFullCriterionList().forEach(sc -> sc.getRequirementGroups()
-                .forEach(rqGroup -> applyAllResponse(responseType, rqGroup)));
+                .forEach(rg -> applyAllResponse(qarType, rg)));
 
-        if (responseType.getCustomizationID().getValue().equals("urn:www.cenbii.eu:transaction:biitrdm070:ver3.0")) {
+        // extract all evidences
+
+        if (qarType.getCustomizationID().getValue().equals("urn:www.cenbii.eu:transaction:biitrdm070:ver3.0")) {
             // ESPD response detected (by checking the customization id)
 
-            if (responseType.getAdditionalDocumentReference() != null && !responseType.getAdditionalDocumentReference().isEmpty()) {
+            if (qarType.getAdditionalDocumentReference() != null && !qarType.getAdditionalDocumentReference().isEmpty()) {
 
                 // Find an entry with ESPD_REQUEST Value
-                Optional<eu.espd.schema.v2.pre_award.commonaggregate.DocumentReferenceType> optRef = responseType.getAdditionalDocumentReference().stream().
+                Optional<eu.espd.schema.v2.pre_award.commonaggregate.DocumentReferenceType> optRef = qarType.getAdditionalDocumentReference().stream().
                         filter(r -> r.getDocumentTypeCode() != null && r.getDocumentTypeCode().getValue().
                                 equals("ESPD_REQUEST")).findFirst();
                 optRef.ifPresent(documentReferenceType -> regulatedResponse.setESPDRequestDetails(extractESPDRequestDetails(documentReferenceType)));
             }
         } else {
             // else an ESPD request is assumed
-            regulatedResponse.setESPDRequestDetails(extractESPDRequestDetails(responseType));
+            regulatedResponse.setESPDRequestDetails(extractESPDRequestDetails(qarType));
         }
 
         return regulatedResponse;
     }
 
+    private void applyAllResponse(final QualificationApplicationResponseType qarType,
+                                  final RequirementGroup rg) {
 
-    private void applyAllResponse(QualificationApplicationResponseType responseType, RequirementGroup requirementGroup) {
-
-        for (Requirement rq : requirementGroup.getRequirements()) { //  loop through all requirements
+        for (Requirement rq : rg.getRequirements()) { //  loop through all requirements
             boolean isFound = false;
 
-            for (TenderingCriterionResponseType res : responseType.getTenderingCriterionResponse()) { //  loop through all responses
+            for (TenderingCriterionResponseType res : qarType.getTenderingCriterionResponse()) { //  loop through all responses
 
                 if (rq.getID().equals(res.getValidatedCriterionPropertyID().getValue())) {
                     rq.setResponse(extractResponse(res, rq.getResponseDataType()));
@@ -143,11 +147,18 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
             }
 
             if (!isFound) {
-                rq.setResponse(ResponseFactory.createResponse(rq.getResponseDataType()));
+
+                // workaround in order to avoid common PERIOD value with different meaning in v1 and v2 EDM
+                if (rq.getResponseDataType() == ResponseTypeEnum.PERIOD) {
+                    rq.setResponse(new ApplicablePeriodResponse());
+                } else {
+                    rq.setResponse(ResponseFactory.createResponse(rq.getResponseDataType()));
+                }
+
             }
         }
 
-        requirementGroup.getRequirementGroups().forEach(rqGroup -> applyAllResponse(responseType, rqGroup));
+        rg.getRequirementGroups().forEach(rqGroup -> applyAllResponse(qarType, rqGroup));
     }
 
     /**
@@ -167,7 +178,8 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
         return r;
     }
 
-    public Response extractResponse(TenderingCriterionResponseType res, ResponseTypeEnum theType) {
+    public Response extractResponse(TenderingCriterionResponseType res,
+                                    ResponseTypeEnum theType) {
 
         if (res.getResponseValue().isEmpty()) {
             return null;
@@ -242,14 +254,23 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 return pResp;
 
             case PERIOD:
-                PeriodResponse perResp = new PeriodResponse();
-                if (!res.getApplicablePeriod().isEmpty()
-                        && !res.getApplicablePeriod().get(0).getDescription().isEmpty()
-                        && res.getApplicablePeriod().get(0).getDescription().get(0).getValue() != null) {
+                ApplicablePeriodResponse apResp = new ApplicablePeriodResponse();
+                if (!res.getApplicablePeriod().isEmpty()) {
 
-                    perResp.setDescription(res.getApplicablePeriod().get(0).getDescription().get(0).getValue());
+                    if (res.getApplicablePeriod().get(0).getStartDate() != null
+                            && res.getApplicablePeriod().get(0).getStartDate().getValue() != null) {
+
+                        apResp.setStartDate(res.getApplicablePeriod().get(0).getStartDate().getValue());
+                    }
+
+                    if (res.getApplicablePeriod().get(0).getEndDate() != null
+                            && res.getApplicablePeriod().get(0).getEndDate().getValue() != null) {
+
+                        apResp.setEndDate(res.getApplicablePeriod().get(0).getEndDate().getValue());
+                    }
+
                 }
-                return perResp;
+                return apResp;
 
             case CODE:
                 EvidenceURLCodeResponse ecResp = new EvidenceURLCodeResponse();
@@ -260,11 +281,22 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 return ecResp;
 
             case EVIDENCE_IDENTIFIER:
-                // in v1 this maps to EVIDENCE_URL, CODE, DESCRIPTION
+                // in regulated v1 response this maps to EVIDENCE_URL, CODE, DESCRIPTION
+                EvidenceIdentifierResponse eiResp = new EvidenceIdentifierResponse();
+                if (!res.getEvidenceSupplied().isEmpty()
+                        && res.getEvidenceSupplied().get(0).getID() != null
+                        && res.getEvidenceSupplied().get(0).getID().getValue() != null) {
+
+                    eiResp.setEvidenceSuppliedId(res.getEvidenceSupplied().get(0).getID().getValue());
+                }
+                return eiResp;
 
             case IDENTIFIER:
+                // there is no example for this one and also no mapping in v1
+
             case URL:
                 // in v1 this maps to DESCRIPTION
+
             default:
                 return null;
         }
@@ -790,7 +822,8 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
      * @param drt
      * @return
      */
-    private ESPDRequestDetails extractESPDRequestDetails(eu.espd.schema.v2.pre_award.commonaggregate.DocumentReferenceType drt) {
+    private ESPDRequestDetails extractESPDRequestDetails
+    (eu.espd.schema.v2.pre_award.commonaggregate.DocumentReferenceType drt) {
         ESPDRequestDetails erd = new ESPDRequestDetails();
 
         if (drt.getID() != null) {

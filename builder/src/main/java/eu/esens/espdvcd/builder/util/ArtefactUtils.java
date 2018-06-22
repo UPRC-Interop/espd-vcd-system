@@ -34,7 +34,7 @@ public class ArtefactUtils {
      * @return The schema version
      */
     public static SchemaVersion findSchemaVersion(InputStream xmlESPD) {
-        SchemaVersion version = SchemaVersion.UNKNOWN;
+        SchemaVersion version = null;
 
         try {
             String partOfTheArtefact = getPartOfTheArtefact(xmlESPD, 128); //  better stay below 256
@@ -87,7 +87,7 @@ public class ArtefactUtils {
      * @return The profile execution id
      */
     public static ProfileExecutionIDEnum findEDMVersion(InputStream xmlESPD) {
-        ProfileExecutionIDEnum profileExecutionIDEnum = ProfileExecutionIDEnum.UNKNOWN;
+        ProfileExecutionIDEnum profileExecutionIDEnum = null;
 
         try {
             String partOfTheArtefact = getPartOfTheArtefact(xmlESPD, 2048);

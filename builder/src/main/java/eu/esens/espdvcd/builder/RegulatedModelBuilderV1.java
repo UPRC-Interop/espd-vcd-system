@@ -1,8 +1,10 @@
 package eu.esens.espdvcd.builder;
 
-import eu.esens.espdvcd.retriever.criteria.CriteriaExtractorAbstractFactory;
+import eu.esens.espdvcd.retriever.criteria.CriteriaExtractorFactory;
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractorFactoryProducer;
+import eu.esens.espdvcd.retriever.criteria.MultilingualCriteriaExtractorFactory;
 import eu.esens.espdvcd.retriever.criteria.enums.FactoryType;
+import eu.esens.espdvcd.retriever.criteria.enums.MultilingualFactoryType;
 import eu.esens.espdvcd.schema.SchemaVersion;
 
 public class RegulatedModelBuilderV1 extends RegulatedModelBuilder {
@@ -11,15 +13,15 @@ public class RegulatedModelBuilderV1 extends RegulatedModelBuilder {
 
     @Override
     RegulatedModelBuilder addDefaultESPDCriteriaList() {
-        CriteriaExtractorAbstractFactory af = CriteriaExtractorFactoryProducer.getFactory(FactoryType.PREDEFINED);
-        criteriaExtractor = af.createCriteriaExtractor(VERSION);
+        CriteriaExtractorFactory f = CriteriaExtractorFactoryProducer.getFactory(FactoryType.PREDEFINED_ESPD);
+        criteriaExtractor = f.createCriteriaExtractor(VERSION);
         return this;
     }
 
     @Override
     RegulatedModelBuilder addECertisESPDCriteriaList() {
-        CriteriaExtractorAbstractFactory af = CriteriaExtractorFactoryProducer.getFactory(FactoryType.ECERTIS);
-        criteriaExtractor = af.createCriteriaExtractor(VERSION);
+        MultilingualCriteriaExtractorFactory f = CriteriaExtractorFactoryProducer.getMultilingualFactory(MultilingualFactoryType.ECERTIS);
+        criteriaExtractor = f.createMultilingualCriteriaExtractor(VERSION);
         return this;
     }
 

@@ -70,7 +70,7 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Multilin
 
     }
 
-    ECertisCriteriaExtractor(@NotNull SchemaVersion version) {
+    public ECertisCriteriaExtractor(@NotNull SchemaVersion version) {
 
         switch (version) {
             case V1:

@@ -26,7 +26,7 @@ public class PredefinedESPDCriteriaExtractor implements CriteriaExtractor {
 
     private final SchemaVersion version;
 
-    PredefinedESPDCriteriaExtractor(@NotNull SchemaVersion version) {
+    public PredefinedESPDCriteriaExtractor(@NotNull SchemaVersion version) {
         this.version = version;
 
         switch (version) {

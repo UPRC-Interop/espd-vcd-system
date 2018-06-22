@@ -5,9 +5,6 @@
  */
 package eu.esens.espdvcd.model.requirement.response;
 
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-
 public abstract class Response {
 
     /**
@@ -27,6 +24,9 @@ public abstract class Response {
      */
 
     private String UUID;
+    private String ID;
+    private String validatedCriterionPropertyID;
+    private String confidentialityLevelCode;
 
     public String getUUID() {
         return UUID;
@@ -36,8 +36,6 @@ public abstract class Response {
         this.UUID = UUID;
     }
 
-    private String ID;
-
     public String getID() {
         return ID;
     }
@@ -46,4 +44,19 @@ public abstract class Response {
         this.ID = ID;
     }
 
+    public String getValidatedCriterionPropertyID() {
+        return validatedCriterionPropertyID;
+    }
+
+    public void setValidatedCriterionPropertyID(String validatedCriterionPropertyID) {
+        this.validatedCriterionPropertyID = validatedCriterionPropertyID;
+    }
+
+    public String getConfidentialityLevelCode() {
+        return confidentialityLevelCode;
+    }
+
+    public void setConfidentialityLevelCode(String confidentialityLevelCode) {
+        this.confidentialityLevelCode = confidentialityLevelCode;
+    }
 }

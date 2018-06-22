@@ -12,6 +12,7 @@ import eu.espd.schema.v2.pre_award.commonbasic.*;
 import eu.espd.schema.v2.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeConstants;
 import javax.xml.datatype.DatatypeFactory;
@@ -19,6 +20,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -218,7 +220,7 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
     }
 
     @Override
-    public TenderingCriterionPropertyType extractTenderingCriterionPropertyType(Requirement r, QualificationApplicationResponseType responseType) {
+    public TenderingCriterionPropertyType extractTenderingCriterionPropertyType(Requirement r, QualificationApplicationResponseType qarType) {
         TenderingCriterionPropertyType req = new TenderingCriterionPropertyType();
 
         req.setTypeCode(new TypeCodeType());
@@ -231,15 +233,19 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
         req.getDescription().get(0).setValue(r.getDescription());
 
         req.setID(createCriteriaTaxonomyIDType(r.getID()));
-        responseType.getTenderingCriterionResponse().add(extractTenderingCriterionResponse(r.getResponse(), r.getResponseDataType(), r.getID()));
+        qarType.getTenderingCriterionResponse().add(extractTenderingCriterionResponse(qarType, r.getResponse(), r.getResponseDataType(), r.getID()));
         return req;
     }
 
-    private TenderingCriterionResponseType extractTenderingCriterionResponse(Response response, ResponseTypeEnum respType, String rqID) {
+    private TenderingCriterionResponseType extractTenderingCriterionResponse(QualificationApplicationResponseType qarType,
+                                                                             Response response,
+                                                                             ResponseTypeEnum respType,
+                                                                             String rqID) {
 
         TenderingCriterionResponseType tcrType = new TenderingCriterionResponseType();
         tcrType.setValidatedCriterionPropertyID(createValidatedCriterionPropertyId(rqID));
         ResponseValueType rvType = new ResponseValueType();
+        EvidenceSuppliedType evsType = new EvidenceSuppliedType();
 
         if (response == null) {
             return tcrType;
@@ -302,16 +308,19 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
                 tcrType.getResponseValue().add(rvType);
                 return tcrType;
 
-//            case PERIOD:
-//                String descr = ((PeriodResponse) response).getDescription();
-//                if (descr != null && !descr.isEmpty()) {
-//                    rvType.setResetPeriod(new PeriodType());
-//                    DescriptionType dt = new DescriptionType();
-//                    dt.setValue(descr);
-//                    rvType.getPeriod().getDescription().add(dt);
-//                }
-//                tcrType.getResponseValue().add(rvType);
-//                return tcrType;
+            case PERIOD:
+                PeriodType periodType = new PeriodType();
+                if (((ApplicablePeriodResponse) response).getStartDate() != null
+                        && ((ApplicablePeriodResponse) response).getEndDate() != null) {
+
+                    periodType.setStartDate(new StartDateType());
+                    periodType.setEndDate(new EndDateType());
+                    periodType.getStartDate().setValue(((ApplicablePeriodResponse) response).getStartDate());
+                    periodType.getEndDate().setValue(((ApplicablePeriodResponse) response).getEndDate());
+
+                }
+                tcrType.getApplicablePeriod().add(periodType);
+                return tcrType;
 
             case PERCENTAGE:
                 rvType.setResponseNumeric(new ResponseNumericType());
@@ -349,14 +358,6 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
                 tcrType.getResponseValue().add(rvType);
                 return tcrType;
 
-//            case EVIDENCE_URL:
-//                EvidenceType evType = extractEvidenceURLResponse(response);
-//                if (evType != null) {
-//                    rvType.getEvidence().add(evType);
-//                }
-//                tcrType.getResponseValue().add(rvType);
-//                return tcrType;
-
             case CODE_COUNTRY:
                 String countryCode = ((CountryCodeResponse) response).getCountryCode();
                 if (countryCode != null && !countryCode.isEmpty()) {
@@ -368,10 +369,36 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
                 }
                 tcrType.getResponseValue().add(rvType);
                 return tcrType;
+
+            case EVIDENCE_IDENTIFIER:
+                String evidenceSuppliedId = ((EvidenceIdentifierResponse) response).getEvidenceSuppliedId();
+                if (evidenceSuppliedId != null) {
+                    evsType.setID(new IDType());
+                    evsType.getID().setValue(evidenceSuppliedId);
+                }
+                tcrType.getEvidenceSupplied().add(evsType);
+                return tcrType;
+
+            case IDENTIFIER:
+
+            case URL:
+
             default:
                 return null;
         }
 
+    }
+
+    protected eu.espd.schema.v2.pre_award.commonaggregate.EvidenceType extractEvidenceIdentifierResponse(String evidenceId,
+                                                                                                         Response response) {
+
+        eu.espd.schema.v2.pre_award.commonaggregate.EvidenceType evType = new eu.espd.schema.v2.pre_award.commonaggregate.EvidenceType();
+        eu.espd.schema.v2.pre_award.commonaggregate.DocumentReferenceType drt = new eu.espd.schema.v2.pre_award.commonaggregate.DocumentReferenceType();
+        evType.setID(new IDType());
+        evType.getID().setSchemeAgencyID("EU-COM-GROW");
+        evType.getID().setValue(evidenceId);
+        evType.getDocumentReference().add(drt);
+        return evType;
     }
 
     protected EvidenceType extractEvidenceURLResponse(Response response) {
