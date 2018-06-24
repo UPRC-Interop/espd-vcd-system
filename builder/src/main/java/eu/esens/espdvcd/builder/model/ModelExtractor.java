@@ -351,15 +351,15 @@ public interface ModelExtractor {
         return extractSelectableCriterion(ct, true);
     }
 
-    default SelectableCriterion extractSelectableCriterion(TenderingCriterionType tct, boolean isSelected) {
-        String id = tct.getID().getValue();
-        String desc = tct.getDescription().isEmpty() ? "" : tct.getDescription().get(0).getValue();
-        String typeCode = tct.getCriterionTypeCode().getValue();
-        String name = tct.getName().getValue();
+    default SelectableCriterion extractSelectableCriterion(TenderingCriterionType tcType, boolean isSelected) {
+        String id = tcType.getID().getValue();
+        String desc = tcType.getDescription().isEmpty() ? "" : tcType.getDescription().get(0).getValue();
+        String typeCode = tcType.getCriterionTypeCode().getValue();
+        String name = tcType.getName().getValue();
 
-        LegislationReference lr = extractDefaultLegalReferenceV2(tct.getLegislation());
+        LegislationReference lr = extractDefaultLegalReferenceV2(tcType.getLegislation());
 
-        List<RequirementGroup> rgList = tct.getTenderingCriterionPropertyGroup().stream()
+        List<RequirementGroup> rgList = tcType.getTenderingCriterionPropertyGroup().stream()
                 .map(t -> extractRequirementGroup(t))
                 .collect(Collectors.toList());
 

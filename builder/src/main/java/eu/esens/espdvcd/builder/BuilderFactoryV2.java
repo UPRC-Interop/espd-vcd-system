@@ -12,9 +12,9 @@ public class BuilderFactoryV2 {
      * Creates a new instance of the {@link RegulatedModelBuilderV2}, which is used to
      * create ESPD and VCD model pojos from XML input.
      *
-     * @return an instance of the {@link RegulatedModelBuilder}
+     * @return an instance of the {@link RegulatedModelBuilderV2}
      */
-    public RegulatedModelBuilder getRegulatedModelBuilder() {
+    public RegulatedModelBuilderV2 getRegulatedModelBuilder() {
         return new RegulatedModelBuilderV2();
     }
 

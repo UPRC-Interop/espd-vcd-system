@@ -1,5 +1,6 @@
 package eu.esens.espdvcd.model;
 
+import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
 import eu.esens.espdvcd.model.types.ESPDRequestModelType;
 
 import java.io.Serializable;
