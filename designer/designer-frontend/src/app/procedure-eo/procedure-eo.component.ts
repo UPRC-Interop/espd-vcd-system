@@ -8,6 +8,9 @@ import {RequirementGroup} from '../model/requirementGroup.model';
 import {RequirementResponse} from '../model/requirement-response.model';
 import * as moment from 'moment';
 import {Moment} from 'moment';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {TOOPDialogComponent} from '../toopdialog/toopdialog.component';
+
 
 @Component({
   selector: 'app-procedure-eo',
@@ -34,7 +37,7 @@ export class ProcedureEoComponent implements OnInit {
   @Input() eoRelatedCCriteria: EoRelatedCriterion[];
   @Input() eoRelatedDCriteria: EoRelatedCriterion[];
 
-  constructor(public dataService: DataService) {
+  constructor(public dataService: DataService, public dialog: MatDialog) {
     this.EOForm = new FormGroup({
       'name': new FormControl(this.dataService.EODetails.name),
       'smeIndicator': new FormControl(this.dataService.EODetails.smeIndicator),
@@ -346,6 +349,19 @@ export class ProcedureEoComponent implements OnInit {
     this.dataService.procedureEOSubmit(this.eoRelatedACriteria,
       this.eoRelatedCCriteria,
       this.eoRelatedDCriteria);
+  }
+
+
+  openTOOPDialog() {
+    console.log('this is toop test');
+    let dialogRef = this.dialog.open(TOOPDialogComponent, {
+      width: '500px',
+      data: 'This is test dialog'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('closed dialog');
+    });
   }
 
 }

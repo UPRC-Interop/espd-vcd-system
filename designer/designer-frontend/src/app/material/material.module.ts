@@ -15,6 +15,7 @@ import {
   MatDatepickerModule,
 } from '@angular/material';
 import {MatMomentDateModule} from '@angular/material-moment-adapter';
+import {MatDialogModule} from '@angular/material';
 
 @NgModule({
   imports: [
@@ -31,10 +32,11 @@ import {MatMomentDateModule} from '@angular/material-moment-adapter';
     MatCheckboxModule,
     MatGridListModule,
     MatDatepickerModule,
-    MatMomentDateModule
+    MatMomentDateModule,
+    MatDialogModule
   ],
   exports: [MatButtonModule, MatToolbarModule, MatIconModule, MatStepperModule, MatCardModule, MatRadioModule, MatInputModule,
-    MatSelectModule, MatExpansionModule, MatCheckboxModule, MatGridListModule, MatDatepickerModule, MatMomentDateModule],
+    MatSelectModule, MatExpansionModule, MatCheckboxModule, MatGridListModule, MatDatepickerModule, MatMomentDateModule, MatDialogModule],
   declarations: []
 })
 export class MaterialModule {

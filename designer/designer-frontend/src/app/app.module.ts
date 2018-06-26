@@ -34,6 +34,7 @@ import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material'
 
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { TOOPDialogComponent } from './toopdialog/toopdialog.component';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
     RequirementComponent,
     RootComponent,
     CriterionComponent,
-    FinishEoComponent
+    FinishEoComponent,
+    TOOPDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -71,6 +73,8 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
         deps: [HttpClient]
       }
     })
+  ], entryComponents: [
+    TOOPDialogComponent
   ],
   providers: [ApicallService, DataService,
     {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
