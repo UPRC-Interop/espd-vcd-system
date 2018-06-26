@@ -10,10 +10,10 @@ import {TranslateService} from '@ngx-translate/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  isLinear: boolean = true;
+  isLinear = true;
 
   constructor(public dataService: DataService, public translate: TranslateService) {
-    translate.setDefaultLang('ESPD_el');
+    translate.setDefaultLang('ESPD_en');
     // translate.setDefaultLang('ESPD_de');
   }
 }
