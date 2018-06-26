@@ -188,7 +188,7 @@ public class BuilderESPDTest {
     @Test
     public void testCreateRegulatedESPDRequestV2WithPredefinedCriteria() throws BuilderException, RetrieverException {
 
-        CriteriaExtractor extractor = CriteriaExtractorFactory.getPredefinedESPDCriteriaExtractor(SchemaVersion.V1);
+        CriteriaExtractor extractor = CriteriaExtractorFactory.getPredefinedESPDCriteriaExtractor(SchemaVersion.V2);
 
         ESPDRequest req = BuilderFactory.getRegulatedModelBuilder().createESPDRequest();
         req.setCriterionList(extractor.getFullList());
