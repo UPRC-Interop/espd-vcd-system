@@ -6,6 +6,7 @@ import eu.esens.espdvcd.model.EODetails;
 import eu.esens.espdvcd.model.ESPDRequestDetails;
 import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.model.requirement.Requirement;
+import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.response.*;
 import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
 import eu.espd.schema.v2.pre_award.commonaggregate.*;
@@ -20,6 +21,7 @@ import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -28,44 +30,46 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
 
     private final static Logger log = LoggerFactory.getLogger(ESPDResponseSchemaExtractorV2.class);
 
-    public QualificationApplicationResponseType extractQualificationApplicationResponseType(ESPDResponse espdResponse) {
+    public QualificationApplicationResponseType extractQualificationApplicationResponseType(ESPDResponse modelResponse) {
 
         final QualificationApplicationResponseType qarType = new QualificationApplicationResponseType();
 
-        if (espdResponse.getCADetails().getProcurementProcedureFileReferenceNo() != null) {
+        if (modelResponse.getCADetails().getProcurementProcedureFileReferenceNo() != null) {
             qarType.setContractFolderID(new ContractFolderIDType());
             qarType.getContractFolderID().setSchemeAgencyID("TeD");
-            qarType.getContractFolderID().setValue(espdResponse.getCADetails().getProcurementProcedureFileReferenceNo());
+            qarType.getContractFolderID().setValue(modelResponse.getCADetails().getProcurementProcedureFileReferenceNo());
         }
 
-        qarType.getAdditionalDocumentReference().add(extractCADetailsDocumentReference(espdResponse.getCADetails()));
+        qarType.getAdditionalDocumentReference().add(extractCADetailsDocumentReference(modelResponse.getCADetails()));
 
-        DocumentReferenceType drt = extractCADetailsNationalDocumentReference(espdResponse.getCADetails());
+        DocumentReferenceType drt = extractCADetailsNationalDocumentReference(modelResponse.getCADetails());
         if (drt != null) {
             qarType.getAdditionalDocumentReference().add(drt);
         }
 
-        qarType.getContractingParty().add(extractContractingPartyType(espdResponse.getCADetails()));
-        qarType.getProcurementProjectLot().add(extractProcurementProjectLot(espdResponse.getEODetails()));
-        qarType.getContractingParty().get(0).getParty().getServiceProviderParty()
-                .add(extractServiceProviderPartyType(espdResponse.getServiceProviderDetails()));
-        qarType.getTenderingCriterion().addAll(espdResponse.getFullCriterionList().stream()
-                .filter(cr -> cr.isSelected())
-                .map(cr -> extractTenderingCriterion(cr))
+        qarType.getContractingParty().add(extractContractingPartyType(modelResponse.getCADetails()));
+        qarType.getProcurementProjectLot().add(extractProcurementProjectLot(modelResponse.getEODetails()));
+
+        if (modelResponse.getServiceProviderDetails() != null) {
+            qarType.getContractingParty().get(0).getParty().getServiceProviderParty()
+                    .add(extractServiceProviderPartyType(modelResponse.getServiceProviderDetails()));
+        }
+
+        qarType.getTenderingCriterion().addAll(modelResponse.getFullCriterionList().stream()
+                .filter(sc -> sc.isSelected())
+                .map(sc -> extractTenderingCriterion(sc))
                 .collect(Collectors.toList()));
 
-        qarType.getEconomicOperatorParty().add(extractEODetails(espdResponse.getEODetails()));
+        qarType.getEconomicOperatorParty().add(extractEODetails(modelResponse.getEODetails()));
 
-        qarType.getTenderingCriterionResponse().addAll(espdResponse.getResponseList().stream()
-                .map(res -> extractTenderingCriterionResponse(res, res.getResponseType()))
-                .collect(Collectors.toList()));
+        qarType.getTenderingCriterionResponse().addAll(extractAllTenderingCriterionResponses(modelResponse));
 
-        qarType.getEvidence().addAll(espdResponse.getEvidenceList().stream()
+        qarType.getEvidence().addAll(modelResponse.getEvidenceList().stream()
                 .map(ev -> extractEvidenceType(ev))
                 .collect(Collectors.toList()));
 
-        if (espdResponse.getESPDRequestDetails() != null) {
-            qarType.getAdditionalDocumentReference().add(extractESPDRequestDetails(espdResponse.getESPDRequestDetails()));
+        if (modelResponse.getESPDRequestDetails() != null) {
+            qarType.getAdditionalDocumentReference().add(extractESPDRequestDetails(modelResponse.getESPDRequestDetails()));
         }
 
 
@@ -79,10 +83,43 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
         return qarType;
     }
 
+    public List<TenderingCriterionResponseType> extractAllTenderingCriterionResponses(final ESPDResponse response) {
+        List<TenderingCriterionResponseType> tcrTypeList = new ArrayList<>();
+        response.getFullCriterionList().forEach(sc -> tcrTypeList.addAll(extractAllTenderingCriterionResponses(sc.getRequirementGroups())));
+        return tcrTypeList;
+    }
+
+    public List<TenderingCriterionResponseType> extractAllTenderingCriterionResponses(final List<RequirementGroup> rgList) {
+        final List<TenderingCriterionResponseType> tcrTypeList = new ArrayList<>();
+        rgList.forEach(rg -> tcrTypeList.addAll(extractAllTenderingCriterionResponses(rg)));
+        return tcrTypeList;
+    }
+
+    public List<TenderingCriterionResponseType> extractAllTenderingCriterionResponses(final RequirementGroup rg) {
+        return extractAllRequirements(rg, null).stream()
+                .map(rq -> extractTenderingCriterionResponse(rq.getResponse(), rq.getResponseDataType()))
+                .collect(Collectors.toList());
+    }
+
+    public List<Requirement> extractAllRequirements(final RequirementGroup rg, List<Requirement> requirementList) {
+
+        if (requirementList == null) {
+            requirementList = new ArrayList<>();
+        }
+
+        requirementList.addAll(rg.getRequirements());
+
+        for (RequirementGroup subRg : rg.getRequirementGroups()) {
+            extractAllRequirements(subRg, requirementList);
+        }
+
+        return requirementList;
+    }
+
     public EvidenceType extractEvidenceType(Evidence evidence) {
 
         if (evidence == null) {
-            return  null;
+            return null;
         }
 
         EvidenceType evType = new EvidenceType();
@@ -294,11 +331,8 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
     public TenderingCriterionPropertyType extractTenderingCriterionPropertyType(Requirement r) {
         TenderingCriterionPropertyType req = new TenderingCriterionPropertyType();
 
-        req.setTypeCode(new TypeCodeType());
-        req.getTypeCode().setValue(r.getTypeCode().name());
-
-        req.setValueDataTypeCode(new ValueDataTypeCodeType());
-        req.getValueDataTypeCode().setValue(r.getResponseDataType().name());
+        req.setTypeCode(createTypeCodeType(r.getTypeCode().name()));
+        req.setValueDataTypeCode(createValueDataTypeCodeType(r.getResponseDataType().name()));
 
         req.getDescription().add(new DescriptionType());
         req.getDescription().get(0).setValue(r.getDescription());
@@ -311,12 +345,20 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
     private TenderingCriterionResponseType extractTenderingCriterionResponse(Response response, ResponseTypeEnum respType) {
 
         TenderingCriterionResponseType tcrType = new TenderingCriterionResponseType();
-        tcrType.setValidatedCriterionPropertyID(createValidatedCriterionPropertyId(response.getValidatedCriterionPropertyID()));
         ResponseValueType rvType = new ResponseValueType();
         EvidenceSuppliedType evsType = new EvidenceSuppliedType();
 
         if (response == null) {
-            return tcrType;
+            // return tcrType;
+            return null;
+        }
+
+        if (response.getValidatedCriterionPropertyID() != null) {
+            tcrType.setValidatedCriterionPropertyID(createValidatedCriterionPropertyId(response.getValidatedCriterionPropertyID()));
+        }
+
+        if (response.getConfidentialityLevelCode() != null) {
+            tcrType.setConfidentialityLevelCode(createConfidentialityLevelCode(response.getConfidentialityLevelCode()));
         }
 
         tcrType.setID(createDefaultIDType(UUID.randomUUID().toString()));

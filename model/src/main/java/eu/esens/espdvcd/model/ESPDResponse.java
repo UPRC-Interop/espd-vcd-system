@@ -1,6 +1,5 @@
 package eu.esens.espdvcd.model;
 
-import eu.esens.espdvcd.model.requirement.response.Response;
 import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
 
 import java.io.Serializable;
@@ -44,9 +43,5 @@ public interface ESPDResponse extends ESPDRequest, Serializable {
     void setEvidenceList(List<Evidence> evidenceList);
 
     List<Evidence> getEvidenceList();
-
-    void setResponseList(List<Response> responseList);
-
-    List<Response> getResponseList();
 
 }

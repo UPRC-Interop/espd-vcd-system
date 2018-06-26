@@ -38,10 +38,12 @@ public interface ModelBuilder {
         // Empty ServiceProviderDetails
         ServiceProviderDetails spd = new ServiceProviderDetails();
         // fill with default content
-        spd.setName("e-SENS");
+        spd.setWebsiteURI("N/A");
         spd.setEndpointID("N/A");
         spd.setID("N/A");
-        spd.setWebsiteURI("N/A");
+        spd.setName("e-SENS");
+        spd.setPostalAddress(new PostalAddress());
+        spd.getPostalAddress().setCountryCode("N/A");
         return spd;
     }
 

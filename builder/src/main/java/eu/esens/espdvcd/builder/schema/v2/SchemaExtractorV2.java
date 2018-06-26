@@ -5,7 +5,7 @@ import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.espd.schema.v2.pre_award.commonaggregate.*;
 import eu.espd.schema.v2.pre_award.commonbasic.*;
-import eu.espd.schema.v2.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
+import eu.espd.schema.v2.unqualifieddatatypes_2.CodeType;
 
 import java.util.stream.Collectors;
 
@@ -81,6 +81,7 @@ public interface SchemaExtractorV2 {
                 .collect(Collectors.toList()));
 
         rgType.setID(createDefaultIDType(rg.getID()));
+        // rgType.setID(createCriteriaTaxonomyIDType(rg.getID()));
 
         // RequirementGroup "PI" attribute: the "processing instruction" attribute is not defined in UBL-2.2.
         // Instead, if needed, use the "cbc:PropertyGroupTypeCode" component
@@ -308,6 +309,14 @@ public interface SchemaExtractorV2 {
             pt.setWebsiteURI(wsuri);
         }
 
+        if (spd.getPostalAddress() != null) {
+            AddressType addressType = new AddressType();
+            addressType.setCountry(new CountryType());
+            addressType.getCountry().setIdentificationCode(new IdentificationCodeType());
+            addressType.getCountry().getIdentificationCode().setValue(spd.getPostalAddress().getCountryCode());
+            pt.setPostalAddress(addressType);
+        }
+
         return sppt;
     }
 
@@ -352,6 +361,15 @@ public interface SchemaExtractorV2 {
         return propertyIDType;
     }
 
+    default ConfidentialityLevelCodeType createConfidentialityLevelCode(String code) {
+        ConfidentialityLevelCodeType codeType = new ConfidentialityLevelCodeType();
+        codeType.setValue(code);
+        codeType.setListID("ConfidentialityLevel");
+        codeType.setListAgencyID("EU-COM-GROW");
+        codeType.setListVersionID("2.0.2");
+        return codeType;
+    }
+
     default IdentificationCodeType createISOCountryIdCodeType(String id) {
         IdentificationCodeType countryCodeType = new IdentificationCodeType();
         countryCodeType.setListAgencyID("ISO");
@@ -370,10 +388,10 @@ public interface SchemaExtractorV2 {
     }
 
     default IDType createISOIECIDType(String id) {
-        IDType reqGroupIDType = createCustomSchemeIDIDType(id, "ISO/IEC 9834-8:2008 - 4UUID");
-        reqGroupIDType.setSchemeAgencyName("DG GROW (European Commission)");
-        reqGroupIDType.setSchemeVersionID("2.0");
-        return reqGroupIDType;
+        IDType idType = createCustomSchemeIDIDType(id, "ISO/IEC 9834-8:2008 - 4UUID");
+        idType.setSchemeAgencyName("DG GROW (European Commission)");
+        idType.setSchemeVersionID("2.0");
+        return idType;
     }
 
     /**
@@ -381,8 +399,8 @@ public interface SchemaExtractorV2 {
      *
      */
     default IDType createCriteriaTaxonomyIDType(String id) {
-        IDType reqGroupIDType = createCustomSchemeIDIDType(id, "CriteriaTaxonomy");
-        return reqGroupIDType;
+        IDType idType = createCustomSchemeIDIDType(id, "CriteriaTaxonomy");
+        return idType;
     }
 
     default UUIDType createISOIECUUIDType(String id) {
@@ -437,30 +455,30 @@ public interface SchemaExtractorV2 {
         CustomizationIDType cid = new CustomizationIDType();
         cid.setSchemeName("CustomizationID");
         cid.setSchemeAgencyID("CEN-BII");
-        cid.setSchemeVersionID("1.0");
+        cid.setSchemeVersionID("2.0");
         cid.setValue(id);
         return cid;
     }
 
     default JurisdictionLevelType createJurisdictionLevel(String code) {
-        JurisdictionLevelType jlt = new JurisdictionLevelType();
+        JurisdictionLevelType jlType = new JurisdictionLevelType();
         // FIXME: not sure if setLanguageID is mandatory here
-        jlt.setLanguageID("en");
-        jlt.setValue(code);
-        return jlt;
+        jlType.setLanguageID("en");
+        jlType.setValue(code);
+        return jlType;
     }
 
     default IDType createCriteriaIDType(String id) {
-        IDType reqGroupIDType = createCustomSchemeIDIDType(id, "CriteriaTaxonomy");
-        return reqGroupIDType;
+        IDType idType = createCustomSchemeIDIDType(id, "CriteriaTaxonomy");
+        return idType;
     }
 
     default IDType createCustomSchemeIDIDType(String id, String schemeId) {
-        IDType reqGroupIDType = createDefaultIDType(id);
+        IDType idType = createDefaultIDType(id);
         if (schemeId != null) {
-            reqGroupIDType.setSchemeID(schemeId);
+            idType.setSchemeID(schemeId);
         }
-        return reqGroupIDType;
+        return idType;
     }
 
     default IDType createDefaultIDType(String id) {
@@ -469,6 +487,20 @@ public interface SchemaExtractorV2 {
         idType.setSchemeVersionID("2.0.2");
         idType.setValue(id);
         return idType;
+    }
+
+    default CodeType createCustomListIDCodeType(String code, String listId) {
+        CodeType codeType = createDefaultCodeType(code);
+        codeType.setListID(listId);
+        return codeType;
+    }
+
+    default CodeType createDefaultCodeType(String code) {
+        CodeType codeType = new CodeType();
+        codeType.setListAgencyID("EU-COM-GROW");
+        codeType.setListVersionID("2.0.2");
+        codeType.setValue(code);
+        return codeType;
     }
 
     default PropertyGroupTypeCodeType createPropertyGroupTypeCodeType(String code) {
@@ -487,6 +519,24 @@ public interface SchemaExtractorV2 {
         icct.setListVersionID("2.0.2");
         icct.setValue(code);
         return icct;
+    }
+
+    default ValueDataTypeCodeType createValueDataTypeCodeType(String code) {
+        ValueDataTypeCodeType vdTypeCode = new ValueDataTypeCodeType();
+        vdTypeCode.setListID("ResponseDataType");
+        vdTypeCode.setListAgencyID("EU-COM-GROW");
+        vdTypeCode.setListVersionID("2.0.2");
+        vdTypeCode.setValue(code);
+        return vdTypeCode;
+    }
+
+    default TypeCodeType createTypeCodeType(String code) {
+        TypeCodeType tCodeType = new TypeCodeType();
+        tCodeType.setListID("CriterionElementType");
+        tCodeType.setListAgencyID("EU-COM-GROW");
+        tCodeType.setListVersionID("2.0.2");
+        tCodeType.setValue(code);
+        return tCodeType;
     }
 
 }

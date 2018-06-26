@@ -524,19 +524,19 @@ public interface ModelExtractor {
         return r;
     }
 
-    default Requirement extractRequirement(RequirementType rt) {
+    default Requirement extractRequirement(RequirementType rqType) {
         String theId = null;
-        if (rt.getID() != null) {
-            theId = rt.getID().getValue();
+        if (rqType.getID() != null) {
+            theId = rqType.getID().getValue();
         }
         String theDescription = null;
-        if (rt.getDescription() != null) {
-            theDescription = rt.getDescription().getValue();
+        if (rqType.getDescription() != null) {
+            theDescription = rqType.getDescription().getValue();
         }
 
         Requirement r = new ResponseRequirement(
                 theId,
-                ResponseTypeEnum.valueOf(rt.getResponseDataType()),
+                ResponseTypeEnum.valueOf(rqType.getResponseDataType()),
                 theDescription);
         return r;
     }

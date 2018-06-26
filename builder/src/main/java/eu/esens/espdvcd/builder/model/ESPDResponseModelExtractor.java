@@ -13,12 +13,17 @@ import eu.espd.schema.v1.commonaggregatecomponents_2.ProcurementProjectLotType;
 import eu.espd.schema.v1.espd_commonaggregatecomponents_1.EconomicOperatorPartyType;
 import eu.espd.schema.v1.espdresponse_1.ESPDResponseType;
 import eu.espd.schema.v2.pre_award.commonaggregate.EvidenceType;
-import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionPropertyGroupType;
 import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionResponseType;
+import eu.espd.schema.v2.pre_award.commonbasic.ConfidentialityLevelCodeType;
+import eu.espd.schema.v2.pre_award.commonbasic.ValidatedCriterionPropertyIDType;
 import eu.espd.schema.v2.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
 
 import javax.validation.constraints.NotNull;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class ESPDResponseModelExtractor implements ModelExtractor {
@@ -89,7 +94,13 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 qarType.getContractFolderID(),
                 qarType.getAdditionalDocumentReference()));
 
-        modelResponse.setServiceProviderDetails(extractServiceProviderDetails(qarType.getContractingParty()));
+        // Service Provider Party Details extraction
+//        if (!qarType.getContractingParty().isEmpty()
+//                && qarType.getContractingParty().get(0).getParty() != null
+//                && !qarType.getContractingParty().get(0).getParty().getServiceProviderParty().isEmpty()) {
+
+            modelResponse.setServiceProviderDetails(extractServiceProviderDetails(qarType.getContractingParty()));
+//        }
 
         if (!qarType.getEconomicOperatorParty().isEmpty()) {
             // FIXME we assure 1 here
@@ -108,15 +119,23 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
             modelResponse.setEODetails(eod);
         }
 
-        // create a map with requirement ID as key and requirement ValueDataTypeCode as value
-        final Map<String, ResponseTypeEnum> valueDataTypeCodeMap = new HashMap<>();
-        qarType.getTenderingCriterion()
-                .forEach(tcType -> valueDataTypeCodeMap.putAll(extractAllValueDataTypeCodes(tcType.getTenderingCriterionPropertyGroup())));
+        // Create a Map with key -> ValidatedCriterionPropertyID , value -> TenderingCriterionResponseType in order to use it
+        // during responses extraction process
+        final Map<String, TenderingCriterionResponseType> tcrTypeMap = qarType.getTenderingCriterionResponse().stream()
+                .collect(Collectors.toMap(tcrType -> tcrType.getValidatedCriterionPropertyID().getValue(), Function.identity()));
 
         // extract all responses
-        modelResponse.getResponseList().addAll(qarType.getTenderingCriterionResponse().stream()
-                .map(tcrType -> extractResponse(tcrType, valueDataTypeCodeMap.get(tcrType.getValidatedCriterionPropertyID().getValue())))
-                .collect(Collectors.toList()));
+        modelResponse.getFullCriterionList()    // loop through all criteria
+                .forEach(sc -> sc.getRequirementGroups()    // loop through all RequirementGroups of current criterion
+                        .forEach(rg -> extractAllRequirements(rg, null) // extract all Requirements of current RequirementGroup
+                                .forEach(rq -> { // loop thought all of the extracted Requirements
+
+                                    if (tcrTypeMap.containsKey(rq.getID())) { // try to find a response for that requirement
+                                        rq.setResponse(extractResponse(tcrTypeMap.get(rq.getID()), rq.getResponseDataType()));
+                                    }
+
+                                })));
+
 
         // extract all evidences
         modelResponse.getEvidenceList().addAll(qarType.getEvidence().stream()
@@ -142,28 +161,19 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
         return modelResponse;
     }
 
-    public Map<String, ResponseTypeEnum> extractAllValueDataTypeCodes(List<TenderingCriterionPropertyGroupType> rgList) {
-        final Map<String, ResponseTypeEnum> valueDateTypeMap = new HashMap<>();
-        rgList.forEach(rg -> valueDateTypeMap.putAll(extractAllValueDataTypeCodes(rg, null)));
-        return valueDateTypeMap;
-    }
+    protected List<Requirement> extractAllRequirements(RequirementGroup rg, List<Requirement> requirementList) {
 
-    public Map<String, ResponseTypeEnum> extractAllValueDataTypeCodes(TenderingCriterionPropertyGroupType rg,
-                                                                      Map<String, ResponseTypeEnum> valueDataTypeCodeMap) {
-
-        if (valueDataTypeCodeMap == null) {
-            valueDataTypeCodeMap = new HashMap<>();
+        if (requirementList == null) {
+            requirementList = new ArrayList<>();
         }
 
-        valueDataTypeCodeMap.putAll(rg.getTenderingCriterionProperty().stream()
-                .collect(Collectors.toMap(tcpType -> tcpType.getID().getValue(), tcpType -> ResponseTypeEnum
-                        .valueOf(tcpType.getValueDataTypeCode().getValue()))));
+        requirementList.addAll(rg.getRequirements());
 
-        for (TenderingCriterionPropertyGroupType subRg : rg.getSubsidiaryTenderingCriterionPropertyGroup()) {
-            extractAllValueDataTypeCodes(subRg, valueDataTypeCodeMap);
+        for (RequirementGroup subRg : rg.getRequirementGroups()) {
+            extractAllRequirements(subRg, requirementList);
         }
 
-        return valueDataTypeCodeMap;
+        return requirementList;
     }
 
     public Evidence extractEvidence(@NotNull EvidenceType evType) {
@@ -251,6 +261,20 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
         return r;
     }
 
+    private void applyValidatedCriterionPropertyID(final ValidatedCriterionPropertyIDType vcpIDType, final Response resp) {
+
+        if (vcpIDType != null && vcpIDType.getValue() != null) {
+            resp.setValidatedCriterionPropertyID(vcpIDType.getValue());
+        }
+    }
+
+    private void applyConfidentialityLevelCode(final ConfidentialityLevelCodeType clcType, final Response resp) {
+
+        if (clcType != null && clcType.getValue() != null) {
+            resp.setConfidentialityLevelCode(clcType.getValue());
+        }
+    }
+
     public Response extractResponse(TenderingCriterionResponseType res, ResponseTypeEnum theType) {
 
         switch (theType) {
@@ -260,6 +284,8 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 if (res.getResponseValue().get(0).getResponseIndicator() != null) {
                     resp.setIndicator(res.getResponseValue().get(0).getResponseIndicator().isValue());
                 }
+                applyValidatedCriterionPropertyID(res.getValidatedCriterionPropertyID(), resp);
+                applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), resp);
                 resp.setResponseType(theType);
                 return resp;
 
@@ -269,6 +295,8 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                         res.getResponseValue().get(0).getResponseDate().getValue() != null) {
                     dResp.setDate(res.getResponseValue().get(0).getResponseDate().getValue());
                 }
+                applyValidatedCriterionPropertyID(res.getValidatedCriterionPropertyID(), dResp);
+                applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), dResp);
                 dResp.setResponseType(theType);
                 return dResp;
 
@@ -278,6 +306,8 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                         res.getResponseValue().get(0).getDescription().get(0).getValue() != null) {
                     deResp.setDescription(res.getResponseValue().get(0).getDescription().get(0).getValue());
                 }
+                applyValidatedCriterionPropertyID(res.getValidatedCriterionPropertyID(), deResp);
+                applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), deResp);
                 deResp.setResponseType(theType);
                 return deResp;
 
@@ -287,6 +317,8 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                         res.getResponseValue().get(0).getResponseQuantity().getValue() != null) {
                     qResp.setQuantity(res.getResponseValue().get(0).getResponseQuantity().getValue().floatValue());
                 }
+                applyValidatedCriterionPropertyID(res.getValidatedCriterionPropertyID(), qResp);
+                applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), qResp);
                 qResp.setResponseType(theType);
                 return qResp;
 
@@ -296,6 +328,8 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                         && res.getResponseValue().get(0).getResponseQuantity().getValue() != null) {
                     qyResp.setYear(res.getResponseValue().get(0).getResponseQuantity().getValue().intValueExact());
                 }
+                applyValidatedCriterionPropertyID(res.getValidatedCriterionPropertyID(), qyResp);
+                applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), qyResp);
                 qyResp.setResponseType(theType);
                 return qyResp;
 
@@ -308,6 +342,8 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                         aResp.setCurrency(res.getResponseValue().get(0).getResponseAmount().getCurrencyID());
                     }
                 }
+                applyValidatedCriterionPropertyID(res.getValidatedCriterionPropertyID(), aResp);
+                applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), aResp);
                 aResp.setResponseType(theType);
                 return aResp;
 
@@ -317,6 +353,8 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                         res.getResponseValue().get(0).getResponseCode().getValue() != null) {
                     cResp.setCountryCode(res.getResponseValue().get(0).getResponseCode().getValue());
                 }
+                applyValidatedCriterionPropertyID(res.getValidatedCriterionPropertyID(), cResp);
+                applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), cResp);
                 cResp.setResponseType(theType);
                 return cResp;
 
@@ -326,6 +364,8 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                         res.getResponseValue().get(0).getResponseNumeric().getValue() != null) {
                     pResp.setPercentage(res.getResponseValue().get(0).getResponseNumeric().getValue().floatValue());
                 }
+                applyValidatedCriterionPropertyID(res.getValidatedCriterionPropertyID(), pResp);
+                applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), pResp);
                 pResp.setResponseType(theType);
                 return pResp;
 
@@ -346,6 +386,8 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                     }
 
                 }
+                applyValidatedCriterionPropertyID(res.getValidatedCriterionPropertyID(), apResp);
+                applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), apResp);
                 apResp.setResponseType(theType);
                 return apResp;
 
@@ -355,6 +397,8 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                         && res.getResponseValue().get(0).getResponseCode().getValue() != null) {
                     ecResp.setEvidenceURLCode(res.getResponseValue().get(0).getResponseCode().getValue());
                 }
+                applyValidatedCriterionPropertyID(res.getValidatedCriterionPropertyID(), ecResp);
+                applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), ecResp);
                 ecResp.setResponseType(theType);
                 return ecResp;
 
@@ -367,6 +411,8 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
 
                     eiResp.setEvidenceSuppliedId(res.getEvidenceSupplied().get(0).getID().getValue());
                 }
+                applyValidatedCriterionPropertyID(res.getValidatedCriterionPropertyID(), eiResp);
+                applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), eiResp);
                 eiResp.setResponseType(theType);
                 return eiResp;
 

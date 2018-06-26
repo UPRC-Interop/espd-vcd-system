@@ -144,7 +144,7 @@ public class DocumentBuilderV2 {
     private ProfileIDType createCENBIIProfileIdType(String id) {
         ProfileIDType pid = new ProfileIDType();
         pid.setSchemeAgencyID("CEN-BII");
-        pid.setSchemeVersionID("1.0");
+        pid.setSchemeVersionID("2.0");
         pid.setValue(id);
         return pid;
     }

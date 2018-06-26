@@ -18,7 +18,6 @@ public class RegulatedESPDResponse extends RegulatedESPDRequest implements ESPDR
     protected EODetails eoDetails;
     private ESPDRequestDetails espdRequestDetails;
     private List<Evidence> evidenceList;
-    private List<Response> responseList;
 
     public EODetails getEODetails() {
         return eoDetails;
@@ -56,16 +55,4 @@ public class RegulatedESPDResponse extends RegulatedESPDRequest implements ESPDR
         return evidenceList;
     }
 
-    @Override
-    public void setResponseList(List<Response> responseList) {
-        this.responseList = responseList;
-    }
-
-    @Override
-    public List<Response> getResponseList() {
-        if (responseList == null) {
-            responseList = new ArrayList<>();
-        }
-        return responseList;
-    }
 }
