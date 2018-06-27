@@ -11,6 +11,7 @@ import {Currency} from '../model/currency.model';
 import {ReductionCriterion} from '../model/reductionCriterion.model';
 import {ESPDResponse} from '../model/ESPDResponse.model';
 import {environment} from '../../environments/environment';
+import {ToopCompanyData} from '../model/toopCompanyData.model';
 
 // import {DataService} from '../services/data.service';
 
@@ -198,6 +199,10 @@ export class ApicallService {
 
     // headers = header.append('Content-Type', 'application/json; charset=utf-8');
     return this.http.post<any>(environment.apiUrl + 'v2/espd/response', ESPDResponse, options).toPromise();
+  }
+
+  getTOOPData(id: string) {
+    return this.http.get<ToopCompanyData>('http://localhost:3000/companyData/' + id).toPromise();
   }
 
 

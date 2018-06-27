@@ -354,12 +354,13 @@ export class ProcedureEoComponent implements OnInit {
 
   openTOOPDialog() {
     console.log('this is toop test');
-    let dialogRef = this.dialog.open(TOOPDialogComponent, {
+    const dialogRef = this.dialog.open(TOOPDialogComponent, {
       width: '500px',
-      data: 'This is test dialog'
+      id: ''
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
       console.log('closed dialog');
     });
   }

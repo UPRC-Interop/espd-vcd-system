@@ -1,7 +1,11 @@
-<h1 mat-dialog-title>TOOP</h1>
+<h1 mat-dialog-title>Which data will be requested</h1>
 <div mat-dialog-content>
-  <p>By clicking next you give consent to Lorem ipsum dolor sit amet, consectetur adipisicing elit. A commodi magnam quam sed voluptates. Aperiam, doloremque, dolores exercitationem expedita laborum minus nam natus officia optio quae quam qui quo tempora!</p>
+  <p>By agreeing to proceed the system will retrieve your company's information.</p>
   <mat-form-field>
-    <input matInput [(ngModel)]="data">
+    <input matInput placeholder="Type your ID" [(ngModel)]="id">
   </mat-form-field>
 </div>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close (click)="onClose()">I don't agree</button>
+  <button mat-button mat-dialog-close primary (click)="onGetTOOPData(this.id)">I agree</button>
+</mat-dialog-actions>
