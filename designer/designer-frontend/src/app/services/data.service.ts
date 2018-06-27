@@ -685,7 +685,7 @@ export class DataService {
         'addressLine1': this.EODetails.postalAddress.addressLine1,
         'postCode': this.EODetails.postalAddress.postCode,
         'city': this.EODetails.postalAddress.city,
-        'countryCode': this.selectedEOCountry,
+        'countryCode': this.EODetails.postalAddress.countryCode,
       },
       'contactingDetails': {
         'contactPointName': this.EODetails.contactingDetails.contactPointName,
