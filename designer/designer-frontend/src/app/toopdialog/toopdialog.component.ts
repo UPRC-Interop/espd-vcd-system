@@ -2,6 +2,7 @@ import {Component, OnInit, Inject} from '@angular/core';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import {ApicallService} from '../services/apicall.service';
 import {ToopCompanyData} from '../model/toopCompanyData.model';
+import {DataService} from '../services/data.service';
 
 @Component({
   selector: 'app-toopdialog',
@@ -14,7 +15,8 @@ export class TOOPDialogComponent implements OnInit {
 
   constructor(public thisDialogRef: MatDialogRef<TOOPDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public id: string,
-              private APIService: ApicallService) {
+              private APIService: ApicallService,
+              public dataService: DataService) {
   }
 
   ngOnInit() {
@@ -31,6 +33,28 @@ export class TOOPDialogComponent implements OnInit {
       .catch(err => {
         console.log(err);
       });
+  }
+
+  onUseTOOPData() {
+    console.log(this.companyData);
+    this.dataService.EODetails.name = this.companyData.name;
+    this.dataService.EODetails.id = this.companyData.id;
+    this.dataService.EODetails.webSiteURI = this.companyData.webSiteURI;
+    this.dataService.EODetails.smeIndicator = this.companyData.smeIndicator;
+    this.dataService.EODetails.postalAddress = this.companyData.postalAddress;
+    this.dataService.EODetails.postalAddress.addressLine1 = this.companyData.postalAddress.addressLine1;
+    this.dataService.EODetails.postalAddress.city = this.companyData.postalAddress.city;
+    this.dataService.EODetails.postalAddress.postCode = this.companyData.postalAddress.postCode;
+    this.dataService.EODetails.postalAddress.countryCode = this.companyData.postalAddress.countryCode;
+    this.dataService.EODetails.contactingDetails = this.companyData.contactingDetails;
+    this.dataService.EODetails.contactingDetails.contactPointName = this.companyData.contactingDetails.contactPointName;
+    this.dataService.EODetails.contactingDetails.telephoneNumber = this.companyData.contactingDetails.telephoneNumber;
+    this.dataService.EODetails.contactingDetails.faxNumber = this.companyData.contactingDetails.faxNumber;
+    this.dataService.EODetails.contactingDetails.emailAddress = this.companyData.contactingDetails.emailAddress;
+
+    console.log(this.dataService.EODetails);
+    this.dataService.eoDetailsFromTOOPFormUpdate();
+    this.thisDialogRef.close('CLOSING MODAL');
   }
 
   onClose() {

@@ -13,6 +13,7 @@ import {
   MatCheckboxModule,
   MatGridListModule,
   MatDatepickerModule,
+  MatListModule
 } from '@angular/material';
 import {MatMomentDateModule} from '@angular/material-moment-adapter';
 import {MatDialogModule} from '@angular/material';
@@ -33,10 +34,12 @@ import {MatDialogModule} from '@angular/material';
     MatGridListModule,
     MatDatepickerModule,
     MatMomentDateModule,
-    MatDialogModule
+    MatDialogModule,
+    MatListModule
   ],
   exports: [MatButtonModule, MatToolbarModule, MatIconModule, MatStepperModule, MatCardModule, MatRadioModule, MatInputModule,
-    MatSelectModule, MatExpansionModule, MatCheckboxModule, MatGridListModule, MatDatepickerModule, MatMomentDateModule, MatDialogModule],
+    MatSelectModule, MatExpansionModule, MatCheckboxModule, MatGridListModule, MatDatepickerModule,
+    MatMomentDateModule, MatDialogModule, MatListModule],
   declarations: []
 })
 export class MaterialModule {

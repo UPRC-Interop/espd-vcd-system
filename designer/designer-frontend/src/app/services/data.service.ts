@@ -676,6 +676,28 @@ export class DataService {
     });
   }
 
+  eoDetailsFromTOOPFormUpdate() {
+
+    this.EOForm.patchValue({
+      'name': this.EODetails.name,
+      'smeIndicator': this.EODetails.smeIndicator,
+      'postalAddress': {
+        'addressLine1': this.EODetails.postalAddress.addressLine1,
+        'postCode': this.EODetails.postalAddress.postCode,
+        'city': this.EODetails.postalAddress.city,
+        'countryCode': this.selectedEOCountry,
+      },
+      'contactingDetails': {
+        'contactPointName': this.EODetails.contactingDetails.contactPointName,
+        'emailAddress': this.EODetails.contactingDetails.emailAddress,
+        'telephoneNumber': this.EODetails.contactingDetails.telephoneNumber,
+        'faxNumber': this.EODetails.contactingDetails.faxNumber,
+      },
+      'id': this.EODetails.id,
+      'webSiteURI': this.EODetails.webSiteURI
+    });
+  }
+
 
   /*  ======================================== Date Manipulation ================================*/
 
@@ -1383,7 +1405,7 @@ export class DataService {
                 group[r.uuid + 'currency'] = new FormControl(r.response.currency);
               }
             }
-              // in case of request import
+            // in case of request import
             if (r.response.currency === null || r.response.amount === '0') {
               group[r.uuid + 'currency'] = new FormControl();
             }
