@@ -95,12 +95,12 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 qarType.getAdditionalDocumentReference()));
 
         // Service Provider Party Details extraction
-//        if (!qarType.getContractingParty().isEmpty()
-//                && qarType.getContractingParty().get(0).getParty() != null
-//                && !qarType.getContractingParty().get(0).getParty().getServiceProviderParty().isEmpty()) {
+        if (!qarType.getContractingParty().isEmpty()
+                && qarType.getContractingParty().get(0).getParty() != null
+                && !qarType.getContractingParty().get(0).getParty().getServiceProviderParty().isEmpty()) {
 
             modelResponse.setServiceProviderDetails(extractServiceProviderDetails(qarType.getContractingParty()));
-//        }
+        }
 
         if (!qarType.getEconomicOperatorParty().isEmpty()) {
             // FIXME we assure 1 here

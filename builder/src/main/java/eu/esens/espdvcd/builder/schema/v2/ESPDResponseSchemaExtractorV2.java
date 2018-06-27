@@ -1,6 +1,7 @@
 package eu.esens.espdvcd.builder.schema.v2;
 
 import eu.esens.espdvcd.codelist.CodelistsV2;
+import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.EODetails;
 import eu.esens.espdvcd.model.ESPDRequestDetails;
@@ -50,10 +51,9 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
         qarType.getContractingParty().add(extractContractingPartyType(modelResponse.getCADetails()));
         qarType.getProcurementProjectLot().add(extractProcurementProjectLot(modelResponse.getEODetails()));
 
-        if (modelResponse.getServiceProviderDetails() != null) {
-            qarType.getContractingParty().get(0).getParty().getServiceProviderParty()
-                    .add(extractServiceProviderPartyType(modelResponse.getServiceProviderDetails()));
-        }
+
+        qarType.getContractingParty().get(0).getParty().getServiceProviderParty()
+                .add(extractServiceProviderPartyType(modelResponse.getServiceProviderDetails()));
 
         qarType.getTenderingCriterion().addAll(modelResponse.getFullCriterionList().stream()
                 .filter(sc -> sc.isSelected())
@@ -75,8 +75,14 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
 
         qarType.setUBLVersionID(createUBL22VersionIdType());
 
-        qarType.setCustomizationID(createCENBIICustomizationIdType("urn:www.cenbii.eu:transaction:biitrdm070:ver3.0"));
+        qarType.setCustomizationID(createCENBIICustomizationIdType("urn:www.cenbii.eu:transaction:biitrdm092:ver3.0"));
         qarType.setVersionID(createVersionIDType("2018.01.01"));
+
+        qarType.setQualificationApplicationTypeCode(new QualificationApplicationTypeCodeType());
+        qarType.getQualificationApplicationTypeCode().setValue(QualificationApplicationTypeEnum.REGULATED.name());
+        qarType.getQualificationApplicationTypeCode().setListID("QualificationApplicationType");
+        qarType.getQualificationApplicationTypeCode().setListAgencyID("EU-COM-GROW");
+        qarType.getQualificationApplicationTypeCode().setListVersionID("2.0.2");
 
         qarType.setCopyIndicator(new CopyIndicatorType());
         qarType.getCopyIndicator().setValue(false);
@@ -185,43 +191,47 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
             return null;
         }
 
-        EconomicOperatorPartyType eopt = new EconomicOperatorPartyType();
-        eopt.getQualifyingParty().add(new QualifyingPartyType());
+        EconomicOperatorPartyType eoPartyType = new EconomicOperatorPartyType();
+        eoPartyType.getQualifyingParty().add(new QualifyingPartyType());
         String icc = eod.isSmeIndicator() ? "SME" : "LARGE";
 
-        eopt.getQualifyingParty().get(0).setParty(new PartyType());
-        eopt.getQualifyingParty().get(0).getParty()
+        eoPartyType.getQualifyingParty().get(0).setParty(new PartyType());
+        eoPartyType.getQualifyingParty().get(0).getParty()
                 .setIndustryClassificationCode(createIndustryClassificationCodeType(
                         CodelistsV2.EOIndustryClassification.getValueForId(icc)));
 
-        eopt.setParty(new PartyType());
+        eoPartyType.setParty(new PartyType());
+
+        /* FIXME: VALUE MAY NEED REFACTORING HERE */
+        eoPartyType.getParty().setIndustryClassificationCode(createIndustryClassificationCodeType(icc));
 
         if (eod.getID() != null) {
             PartyIdentificationType pit = new PartyIdentificationType();
             pit.setID(new IDType());
             pit.getID().setValue(eod.getID());
             pit.getID().setSchemeAgencyID("EU-COM-GROW");
-            eopt.getParty().getPartyIdentification().add(pit);
+            eoPartyType.getParty().getPartyIdentification().add(pit);
         }
 
         if (eod.getName() != null) {
             PartyNameType pnt = new PartyNameType();
             pnt.setName(new NameType());
             pnt.getName().setValue(eod.getName());
-            eopt.getParty().getPartyName().add(pnt);
+            eoPartyType.getParty().getPartyName().add(pnt);
         }
 
         if (eod.getElectronicAddressID() != null) {
             EndpointIDType eid = new EndpointIDType();
+            eid.setSchemeID("ISO/IEC 9834-8:2008 - 4UUID");
             eid.setSchemeAgencyID("EU-COM-GROW");
             eid.setValue(eod.getElectronicAddressID());
-            eopt.getParty().setEndpointID(eid);
+            eoPartyType.getParty().setEndpointID(eid);
         }
 
         if (eod.getWebSiteURI() != null) {
             WebsiteURIType wsuri = new WebsiteURIType();
             wsuri.setValue(eod.getWebSiteURI());
-            eopt.getParty().setWebsiteURI(wsuri);
+            eoPartyType.getParty().setWebsiteURI(wsuri);
         }
 
         if (eod.getPostalAddress() != null) {
@@ -239,7 +249,7 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
             at.setCountry(new CountryType());
             at.getCountry().setIdentificationCode(createISOCountryIdCodeType(eod.getPostalAddress().getCountryCode()));
 
-            eopt.getParty().setPostalAddress(at);
+            eoPartyType.getParty().setPostalAddress(at);
         }
 
         if (eod.getContactingDetails() != null) {
@@ -256,7 +266,7 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
             ct.setTelefax(new TelefaxType());
             ct.getTelefax().setValue(eod.getContactingDetails().getFaxNumber());
 
-            eopt.getParty().setContact(ct);
+            eoPartyType.getParty().setContact(ct);
         }
 
         eod.getNaturalPersons().forEach(np -> {
@@ -322,9 +332,9 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
             apt.getPerson().add(pt);
             poa.setAgentParty(apt);
 
-            eopt.getParty().getPowerOfAttorney().add(poa);
+            eoPartyType.getParty().getPowerOfAttorney().add(poa);
         });
-        return eopt;
+        return eoPartyType;
     }
 
     @Override

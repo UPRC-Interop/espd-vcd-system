@@ -43,7 +43,7 @@ public interface ModelBuilder {
         spd.setID("N/A");
         spd.setName("e-SENS");
         spd.setPostalAddress(new PostalAddress());
-        spd.getPostalAddress().setCountryCode("N/A");
+        spd.getPostalAddress().setCountryCode("NO");
         return spd;
     }
 

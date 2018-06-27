@@ -269,6 +269,7 @@ public interface SchemaExtractorV2 {
     }
 
     default ServiceProviderPartyType extractServiceProviderPartyType(ServiceProviderDetails spd) {
+
         if (spd == null) {
             return null;
         }
@@ -276,6 +277,12 @@ public interface SchemaExtractorV2 {
         ServiceProviderPartyType sppt = new ServiceProviderPartyType();
         PartyType pt = new PartyType();
         sppt.setParty(pt);
+
+        if (spd.getWebsiteURI() != null) {
+            WebsiteURIType wsuri = new WebsiteURIType();
+            wsuri.setValue(spd.getWebsiteURI());
+            pt.setWebsiteURI(wsuri);
+        }
 
         //FIXME: SCHEMEID ON SERVICEPROVIDERPARTYTYPE MAY BE INCORRECT
         if (spd.getEndpointID() != null) {
@@ -303,16 +310,13 @@ public interface SchemaExtractorV2 {
             pt.getPartyName().add(pnt);
         }
 
-        if (spd.getWebsiteURI() != null) {
-            WebsiteURIType wsuri = new WebsiteURIType();
-            wsuri.setValue(spd.getWebsiteURI());
-            pt.setWebsiteURI(wsuri);
-        }
-
         if (spd.getPostalAddress() != null) {
             AddressType addressType = new AddressType();
             addressType.setCountry(new CountryType());
             addressType.getCountry().setIdentificationCode(new IdentificationCodeType());
+            addressType.getCountry().getIdentificationCode().setListID("CountryCodeIdentifier");
+            addressType.getCountry().getIdentificationCode().setListAgencyID("ISO");
+            addressType.getCountry().getIdentificationCode().setListVersionID("1.0");
             addressType.getCountry().getIdentificationCode().setValue(spd.getPostalAddress().getCountryCode());
             pt.setPostalAddress(addressType);
         }
@@ -326,7 +330,6 @@ public interface SchemaExtractorV2 {
         // remark: the DG GROW system uses "COM-GROW-TEMPORARY-ID", if no valid OJS number is entered
         //IDType reqGroupIDType = createCustomSchemeIDIDType(id, "COM-GROW-TEMPORARY-ID");
         IDType reqGroupIDType = createCustomSchemeIDIDType(id, "ISO/IEC 9834-8:2008 - 4UUID");
-
         reqGroupIDType.setSchemeAgencyID("EU-COM-GROW");
         reqGroupIDType.setSchemeAgencyName("DG GROW (European Commission)");
         reqGroupIDType.setSchemeVersionID("1.1");
@@ -374,6 +377,7 @@ public interface SchemaExtractorV2 {
         IdentificationCodeType countryCodeType = new IdentificationCodeType();
         countryCodeType.setListAgencyID("ISO");
         countryCodeType.setListVersionID("1.0");
+        countryCodeType.setListID("CountryCodeIdentifier");
         countryCodeType.setListName("CountryCodeIdentifier");
         countryCodeType.setValue(id);
         return countryCodeType;
