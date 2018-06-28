@@ -1,10 +1,17 @@
 package eu.esens.espdvcd.designer.endpoint;
 
+import eu.esens.espdvcd.designer.service.ToopService;
 import spark.Request;
 import spark.Response;
 import spark.Service;
 
 public class ToopResponseEndpoint extends Endpoint {
+
+    ToopService service;
+
+    public ToopResponseEndpoint(ToopService service){
+        this.service = service;
+    }
 
     @Override
     public void configure(Service spark, String basePath) {
