@@ -10,6 +10,11 @@ dependencies {
 
     compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.4'
     compile 'com.sparkjava:spark-core:2.7.1'
+// https://mvnrepository.com/artifact/eu.toop/toop-commons
+    compile group: 'eu.toop', name: 'toop-commons', version: '0.9.1'
+    // https://mvnrepository.com/artifact/com.helger/ph-httpclient
+    compile group: 'com.helger', name: 'ph-httpclient', version: '8.5.0'
+
 }
 
 jar {
