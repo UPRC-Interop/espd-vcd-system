@@ -1,25 +1,22 @@
-<h4>Part I: Information concerning the procurement procedure and the contracting authority or contracting entity</h4>
+<h4 translate>espd.part1.header</h4>
 <form #f="ngForm">
   <mat-accordion multi="true">
     <mat-expansion-panel expanded="true">
       <mat-expansion-panel-header>
-        <mat-panel-title>
-          Information about Publication
+        <mat-panel-title translate>
+          espd.part1.info.pub
         </mat-panel-title>
         <mat-panel-description>
 
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div class="desc">
-        <p>For procurement procedures in which a call for competition has been published in the Official Journal of the
-          European Union, the information required under Part I will be automatically retrieved, provided that the
-          electronic ESPD-service is used to generate and fill in the ESPD. Reference of the relevant notice published
-          in the Official Journal of the European Union:</p>
+        <p translate>espd.part1.to.be.filled.alert</p>
       </div>
       <mat-form-field>
         <!--<label for="noticeNumber">Received Notice Number</label>-->
         <input matInput id="noticeNumber" name="receivedNoticeNumber" [(ngModel)]="dataService.receivedNoticeNumber"
-               placeholder="Received notice number">
+               placeholder="{{'espd.part1.ted.reception.id' | translate}}">
       </mat-form-field>
       <mat-form-field>
         <input matInput name="noticeNumberOJS" [(ngModel)]="dataService.CADetails.procurementPublicationNumber"
@@ -138,6 +135,7 @@
         </mat-expansion-panel-header>
         <div class="eoContainer">
           <div class="eo1">
+            <button mat-raised-button color="primary" (click)="openTOOPDialog()">Get from TOOP</button>
             <mat-form-field class="eoField">
               <input formControlName="name" matInput placeholder="Name" >
             </mat-form-field>

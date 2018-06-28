@@ -464,15 +464,15 @@ export class DataService {
     console.log(this.fullCriterionList);
 
 
-      this.APIService.getXMLResponse(JSON.stringify(this.createESPDResponse()))
-        .then(res => {
-          console.log(res);
-          this.createFile(res);
-          this.saveFile(this.blob);
-        })
-        .catch(err => {
-          console.log(err);
-        });
+    this.APIService.getXMLResponse(JSON.stringify(this.createESPDResponse()))
+      .then(res => {
+        console.log(res);
+        this.createFile(res);
+        this.saveFile(this.blob);
+      })
+      .catch(err => {
+        console.log(err);
+      });
 
     // if (this.APIService.version == 'v1') {
     //   this.APIService.getXMLResponse(JSON.stringify(this.createESPDResponse()))
@@ -676,6 +676,28 @@ export class DataService {
     });
   }
 
+  eoDetailsFromTOOPFormUpdate() {
+
+    this.EOForm.patchValue({
+      'name': this.EODetails.name,
+      'smeIndicator': this.EODetails.smeIndicator,
+      'postalAddress': {
+        'addressLine1': this.EODetails.postalAddress.addressLine1,
+        'postCode': this.EODetails.postalAddress.postCode,
+        'city': this.EODetails.postalAddress.city,
+        'countryCode': this.EODetails.postalAddress.countryCode,
+      },
+      'contactingDetails': {
+        'contactPointName': this.EODetails.contactingDetails.contactPointName,
+        'emailAddress': this.EODetails.contactingDetails.emailAddress,
+        'telephoneNumber': this.EODetails.contactingDetails.telephoneNumber,
+        'faxNumber': this.EODetails.contactingDetails.faxNumber,
+      },
+      'id': this.EODetails.id,
+      'webSiteURI': this.EODetails.webSiteURI
+    });
+  }
+
 
   /*  ======================================== Date Manipulation ================================*/
 
@@ -733,14 +755,9 @@ export class DataService {
           if (this.isCreateResponse) {
             this.eoRelatedACriteria = res;
             console.log('This is create response');
-          } else if (this.isImportESPD) {
-            console.log('This is import');
-            this.eoRelatedACriteria = this.eoRelatedACriteria;
-            console.log(this.eoRelatedACriteria);
           }
-
-
           this.eoRelatedACriteriaForm = this.createEORelatedCriterionForm(this.eoRelatedACriteria);
+          console.log(this.eoRelatedACriteriaForm);
         })
         .catch(err => {
           console.log(err);
@@ -1384,9 +1401,13 @@ export class DataService {
 
             if (r.response.currency || r.response.amount) {
               group[r.uuid] = new FormControl(r.response.amount);
-              if (r.response.currency) {
+              if (r.response.currency !== null && r.response.currency !== undefined) {
                 group[r.uuid + 'currency'] = new FormControl(r.response.currency);
               }
+            }
+            // in case of request import
+            if (r.response.currency === null || r.response.amount === '0') {
+              group[r.uuid + 'currency'] = new FormControl();
             }
 
             // console.log(r.response);

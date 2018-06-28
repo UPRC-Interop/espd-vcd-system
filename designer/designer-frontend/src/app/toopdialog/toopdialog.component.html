@@ -1,0 +1,55 @@
+<h1 mat-dialog-title *ngIf="!this.companyData">Which data will be requested</h1>
+<h1 mat-dialog-title *ngIf="this.companyData">Data Requested to be used</h1>
+<div mat-dialog-content *ngIf="!this.companyData">
+  <p>By agreeing to proceed the system will retrieve your company's information.</p>
+  <mat-form-field>
+    <input matInput placeholder="Type your ID" [(ngModel)]="id">
+  </mat-form-field>
+  <mat-list>
+    <h3 mat-subheader>Company Details</h3>
+    <mat-list-item>Name</mat-list-item>
+    <mat-list-item>Website URI</mat-list-item>
+    <mat-list-item>SME</mat-list-item>
+    <mat-list-item>Street and Number </mat-list-item>
+    <mat-list-item>City</mat-list-item>
+    <mat-list-item>Post Code</mat-list-item>
+    <mat-list-item>Country</mat-list-item>
+    <mat-divider></mat-divider>
+    <h3 mat-subheader>Company contacting information</h3>
+    <mat-list-item>Contact Point Name</mat-list-item>
+    <mat-list-item>Email</mat-list-item>
+    <mat-list-item>Fax Number</mat-list-item>
+    <mat-list-item>Telephone Number</mat-list-item>
+  </mat-list>
+</div>
+
+<div mat-dialog-content *ngIf="this.companyData">
+  <p>By agreeing to proceed the system will use the retrieved company's information.</p>
+  <mat-list>
+    <h3 mat-subheader>Company Details</h3>
+    <mat-list-item>Name: {{companyData.name}}</mat-list-item>
+    <mat-list-item>Website URI: {{companyData.webSiteURI}}</mat-list-item>
+    <mat-list-item>SME: {{companyData.smeIndicator}}</mat-list-item>
+    <mat-list-item>Street and Number: {{companyData.postalAddress.addressLine1}} </mat-list-item>
+    <mat-list-item>City: {{companyData.postalAddress.city}}</mat-list-item>
+    <mat-list-item>Post Code: {{companyData.postalAddress.postCode}}</mat-list-item>
+    <mat-list-item>Country: {{companyData.postalAddress.countryCode}}</mat-list-item>
+    <mat-divider></mat-divider>
+    <h3 mat-subheader>Company contacting information</h3>
+    <mat-list-item>Contact Point Name: {{companyData.contactingDetails.contactPointName}}</mat-list-item>
+    <mat-list-item>Email: {{companyData.contactingDetails.emailAddress}}</mat-list-item>
+    <mat-list-item>Fax Number: {{companyData.contactingDetails.faxNumber}}</mat-list-item>
+    <mat-list-item>Telephone Number: {{companyData.contactingDetails.telephoneNumber}}</mat-list-item>
+  </mat-list>
+</div>
+<mat-dialog-actions>
+  <div *ngIf="!this.companyData">
+    <button mat-button mat-dialog-close (click)="onClose()">Cancel</button>
+    <button mat-raised-button [disabled]="!this.id" color="primary" (click)="onGetTOOPData(this.id)">Request this information through TOOP</button>
+  </div>
+  <div *ngIf="this.companyData">
+    <button mat-button mat-dialog-close (click)="onClose()">I don't agree</button>
+    <button mat-raised-button color="primary" (click)="onUseTOOPData()">I agree</button>
+  </div>
+
+</mat-dialog-actions>
