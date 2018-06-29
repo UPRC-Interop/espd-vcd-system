@@ -12,6 +12,7 @@ import {DataService} from '../services/data.service';
 export class TOOPDialogComponent implements OnInit {
 
   public companyData: ToopCompanyData;
+  showSpinner = false;
 
   constructor(public thisDialogRef: MatDialogRef<TOOPDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public id: string,
@@ -23,15 +24,17 @@ export class TOOPDialogComponent implements OnInit {
   }
 
   onGetTOOPData(id: string) {
-    console.log(id);
+    this.showSpinner = true;
     this.APIService.getTOOPData(id, this.dataService.selectedEOCountry)
       .then(res => {
         console.log(res);
         this.companyData = res;
         console.log(this.companyData);
+        this.showSpinner = false;
       })
       .catch(err => {
         console.log(err);
+        this.showSpinner = false;
       });
   }
 

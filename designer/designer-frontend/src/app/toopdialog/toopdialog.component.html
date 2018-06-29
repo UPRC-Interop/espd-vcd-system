@@ -1,6 +1,9 @@
 <h1 mat-dialog-title *ngIf="!this.companyData">Which data will be requested</h1>
 <h1 mat-dialog-title *ngIf="this.companyData">Data Requested to be used</h1>
-<div mat-dialog-content *ngIf="!this.companyData">
+
+<mat-progress-spinner *ngIf="this.showSpinner" mode="indeterminate" diameter="30"></mat-progress-spinner>
+
+<div mat-dialog-content *ngIf="!this.companyData && !this.showSpinner">
   <p>By agreeing to proceed the system will retrieve your company's information.</p>
   <mat-form-field>
     <input matInput placeholder="Type your ID" [(ngModel)]="id">

@@ -98,3 +98,9 @@ mat-grid-tile {
   margin-left: 25px;
   font-size: 22px;
 }
+
+#toopBtn {
+  width:140px;
+  height: 30px;
+  margin: 10px;
+}
