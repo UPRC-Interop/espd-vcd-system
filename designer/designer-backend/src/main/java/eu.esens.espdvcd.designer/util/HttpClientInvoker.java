@@ -1,14 +1,12 @@
-package eu.esens.espdvcd.designer.toop.iface.Util;
+package eu.esens.espdvcd.designer.util;
 
 import com.helger.commons.ValueEnforcer;
-import com.helger.httpclient.HttpClientFactory;
-import com.helger.httpclient.HttpClientManager;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ByteArrayEntity;
-
+import com.helger.httpclient.HttpClientFactory;
+import com.helger.httpclient.HttpClientManager;
+import com.helger.httpclient.response.ResponseHandlerByteArray;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 import java.io.IOException;
@@ -33,9 +31,13 @@ public final class HttpClientInvoker {
         ValueEnforcer.notNull (aResponseHandler, "ResponseHandler");
         ValueEnforcer.notNull (aResultHandler, "ResultHandler");
 
-        try (final HttpClientManager aMgr = new HttpClientManager ()) {
+        final HttpClientFactory aHCFactory = new HttpClientFactory ();
+        // For proxy etc
+        aHCFactory.setUseSystemProperties (true);
+
+        try (final HttpClientManager aMgr = new HttpClientManager (aHCFactory)) {
             final HttpPost aPost = new HttpPost (sDestinationURL);
-            aPost.setEntity (new ByteArrayEntity(aDataToSend));
+            aPost.setEntity (new ByteArrayEntity (aDataToSend));
 
             final T aResponse = aMgr.execute (aPost, aResponseHandler);
             aResultHandler.accept (aResponse);
@@ -47,12 +49,7 @@ public final class HttpClientInvoker {
         ValueEnforcer.notEmpty (sDestinationURL, "DestinationURL");
         ValueEnforcer.notNull (aDataToSend, "DataToSend");
 
-        httpClientCall(sDestinationURL, aDataToSend, new ResponseHandler<Object>() {
-            @Override
-            public Object handleResponse(HttpResponse response) throws ClientProtocolException, IOException {
-                return null;
-            }
-        }, x -> {
+        httpClientCall (sDestinationURL, aDataToSend, new ResponseHandlerByteArray (), x -> {
             // do nothing
         });
     }

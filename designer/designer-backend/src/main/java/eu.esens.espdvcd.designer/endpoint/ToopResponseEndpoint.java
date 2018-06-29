@@ -1,17 +1,28 @@
 package eu.esens.espdvcd.designer.endpoint;
 
-import eu.esens.espdvcd.designer.service.ToopService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.sun.istack.NotNull;
+import eu.esens.espdvcd.model.EODetails;
+import eu.esens.espdvcd.model.PostalAddress;
+import eu.toop.commons.dataexchange.TDEDataElementResponseValueType;
+import eu.toop.commons.dataexchange.TDETOOPResponseType;
+import eu.toop.commons.exchange.ToopMessageBuilder;
+import org.apache.poi.util.NotImplemented;
 import spark.Request;
 import spark.Response;
 import spark.Service;
 
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import com.google.common.io.Files;
+import java.util.ArrayList;
+import java.util.List;
+
+import static eu.esens.espdvcd.designer.Server.TOOPResponseQueue;
+
 public class ToopResponseEndpoint extends Endpoint {
-
-    ToopService service;
-
-    public ToopResponseEndpoint(ToopService service){
-        this.service = service;
-    }
 
     @Override
     public void configure(Service spark, String basePath) {
@@ -33,7 +44,49 @@ public class ToopResponseEndpoint extends Endpoint {
         });
     }
 
-    private Object postRequest(Request request, Response response) {
-        //TODO PROCESS CONNECTOR RESPONSE
+    private Object postRequest(Request request, Response response) throws IOException {
+        LOGGER.info("Got TOOP Response from Toop Connector!");
+        TDETOOPResponseType TOOPResponse = ToopMessageBuilder.parseResponseMessage(new ByteArrayInputStream(request.bodyAsBytes()));
+        LOGGER.info("Extracting response...");
+        //DEBUG
+//        Files.write(request.bodyAsBytes(), new File("response.asic"));
+
+        TOOPResponseQueue.add(extractEODetails(TOOPResponse));
+        return "";
+    }
+
+    private EODetails extractEODetails(TDETOOPResponseType TOOPResponse) throws JsonProcessingException {
+        List<TDEDataElementResponseValueType> theList = new ArrayList<>();
+        final EODetails eoDetails = new EODetails();
+
+        TOOPResponse.getDataElementRequest().forEach(e -> {
+            String providedDataName = e.getConceptRequest().getConceptRequestAtIndex(0).getConceptName().getValue();
+            String providedDataValue = e.getConceptRequest().getConceptRequestAtIndex(0).getConceptRequestAtIndex(0).getDataElementResponseValueAtIndex(0).getResponseDescription().getValue();
+            if (providedDataName!=null && providedDataValue !=null) {
+                switch (providedDataName) {
+                    case "CompanyCode":
+                        eoDetails.setID(providedDataValue);
+                        break;
+                    case "companyName":
+                        eoDetails.setName(providedDataValue);
+                        break;
+                    case "companyType":
+                        eoDetails.setSmeIndicator(providedDataValue.equalsIgnoreCase("sme"));
+                        break;
+                    case "Address":
+                        PostalAddress address = new PostalAddress();
+                        String[] addressParts = providedDataValue.split(",[ ]*");
+                        address.setAddressLine1(addressParts[0]);
+                        address.setPostCode(addressParts[1]);
+                        address.setCity(addressParts[2]);
+                        address.setCountryCode("SV");
+//                    address.setCountryCode(addressParts[3]);
+                        eoDetails.setPostalAddress(address);
+                        break;
+                }
+            }
+        });
+//        LOGGER.info(WRITER.writeValueAsString(eoDetails));
+        return eoDetails;
     }
 }
