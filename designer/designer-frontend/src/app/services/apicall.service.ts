@@ -201,8 +201,19 @@ export class ApicallService {
     return this.http.post<any>(environment.apiUrl + 'v2/espd/response', ESPDResponse, options).toPromise();
   }
 
-  getTOOPData(id: string) {
-    return this.http.get<ToopCompanyData>('http://localhost:3000/companyData/' + id).toPromise();
+  getTOOPData(id: string, country: string) {
+    // ELONIA test request
+    country = 'SV';
+
+    let header = new HttpHeaders();
+    header = header.set('Content-Type', 'application/json; charset=utf-8');
+
+    let TOOPReq = {'companyID': id, 'countryCode': country};
+    const TOOPReqJSON = JSON.stringify(TOOPReq);
+
+    console.log(TOOPReqJSON);
+
+    return this.http.post<ToopCompanyData>('http://83.212.107.143:9090/api/toopDataRequest', TOOPReqJSON).toPromise();
   }
 
 

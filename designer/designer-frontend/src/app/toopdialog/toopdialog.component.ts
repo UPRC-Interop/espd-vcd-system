@@ -24,7 +24,7 @@ export class TOOPDialogComponent implements OnInit {
 
   onGetTOOPData(id: string) {
     console.log(id);
-    this.APIService.getTOOPData(id)
+    this.APIService.getTOOPData(id, this.dataService.selectedEOCountry)
       .then(res => {
         console.log(res);
         this.companyData = res;
@@ -46,11 +46,6 @@ export class TOOPDialogComponent implements OnInit {
     this.dataService.EODetails.postalAddress.city = this.companyData.postalAddress.city;
     this.dataService.EODetails.postalAddress.postCode = this.companyData.postalAddress.postCode;
     this.dataService.EODetails.postalAddress.countryCode = this.companyData.postalAddress.countryCode;
-    this.dataService.EODetails.contactingDetails = this.companyData.contactingDetails;
-    this.dataService.EODetails.contactingDetails.contactPointName = this.companyData.contactingDetails.contactPointName;
-    this.dataService.EODetails.contactingDetails.telephoneNumber = this.companyData.contactingDetails.telephoneNumber;
-    this.dataService.EODetails.contactingDetails.faxNumber = this.companyData.contactingDetails.faxNumber;
-    this.dataService.EODetails.contactingDetails.emailAddress = this.companyData.contactingDetails.emailAddress;
 
     console.log(this.dataService.EODetails);
     this.dataService.eoDetailsFromTOOPFormUpdate();

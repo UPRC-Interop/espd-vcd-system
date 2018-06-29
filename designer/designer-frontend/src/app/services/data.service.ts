@@ -687,14 +687,7 @@ export class DataService {
         'city': this.EODetails.postalAddress.city,
         'countryCode': this.EODetails.postalAddress.countryCode,
       },
-      'contactingDetails': {
-        'contactPointName': this.EODetails.contactingDetails.contactPointName,
-        'emailAddress': this.EODetails.contactingDetails.emailAddress,
-        'telephoneNumber': this.EODetails.contactingDetails.telephoneNumber,
-        'faxNumber': this.EODetails.contactingDetails.faxNumber,
-      },
       'id': this.EODetails.id,
-      'webSiteURI': this.EODetails.webSiteURI
     });
   }
 

@@ -8,18 +8,12 @@
   <mat-list>
     <h3 mat-subheader>Company Details</h3>
     <mat-list-item>Name</mat-list-item>
-    <mat-list-item>Website URI</mat-list-item>
     <mat-list-item>SME</mat-list-item>
     <mat-list-item>Street and Number </mat-list-item>
     <mat-list-item>City</mat-list-item>
     <mat-list-item>Post Code</mat-list-item>
     <mat-list-item>Country</mat-list-item>
     <mat-divider></mat-divider>
-    <h3 mat-subheader>Company contacting information</h3>
-    <mat-list-item>Contact Point Name</mat-list-item>
-    <mat-list-item>Email</mat-list-item>
-    <mat-list-item>Fax Number</mat-list-item>
-    <mat-list-item>Telephone Number</mat-list-item>
   </mat-list>
 </div>
 
@@ -28,18 +22,12 @@
   <mat-list>
     <h3 mat-subheader>Company Details</h3>
     <mat-list-item>Name: {{companyData.name}}</mat-list-item>
-    <mat-list-item>Website URI: {{companyData.webSiteURI}}</mat-list-item>
     <mat-list-item>SME: {{companyData.smeIndicator}}</mat-list-item>
     <mat-list-item>Street and Number: {{companyData.postalAddress.addressLine1}} </mat-list-item>
     <mat-list-item>City: {{companyData.postalAddress.city}}</mat-list-item>
     <mat-list-item>Post Code: {{companyData.postalAddress.postCode}}</mat-list-item>
     <mat-list-item>Country: {{companyData.postalAddress.countryCode}}</mat-list-item>
     <mat-divider></mat-divider>
-    <h3 mat-subheader>Company contacting information</h3>
-    <mat-list-item>Contact Point Name: {{companyData.contactingDetails.contactPointName}}</mat-list-item>
-    <mat-list-item>Email: {{companyData.contactingDetails.emailAddress}}</mat-list-item>
-    <mat-list-item>Fax Number: {{companyData.contactingDetails.faxNumber}}</mat-list-item>
-    <mat-list-item>Telephone Number: {{companyData.contactingDetails.telephoneNumber}}</mat-list-item>
   </mat-list>
 </div>
 <mat-dialog-actions>
