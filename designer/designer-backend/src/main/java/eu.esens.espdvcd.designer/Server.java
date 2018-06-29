@@ -2,15 +2,19 @@ package eu.esens.espdvcd.designer;
 
 import eu.esens.espdvcd.designer.endpoint.*;
 import eu.esens.espdvcd.designer.service.*;
+import eu.esens.espdvcd.model.EODetails;
 import eu.esens.espdvcd.schema.SchemaVersion;
 import spark.Service;
 
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Server {
 
     private final static Logger LOGGER = Logger.getLogger(Server.class.getName());
+    public final static BlockingQueue<EODetails> TOOPResponseQueue = new ArrayBlockingQueue<>(1);
 
     public static void main(String args[]) {
 
@@ -96,6 +100,13 @@ public class Server {
             LOGGER.info("Configuring ImportESPDResponse endpoint...");
             Endpoint importESPDResp = new ImportESPDEndpoint(new ESPDResponseToModelService());
             unversionedContext.addEndpointWithPath(importESPDResp, "/importESPD/response");
+
+            LOGGER.info("Configuring TOOP endpoints...");
+            Endpoint toopRequestEnd = new ToopDataRequestEndpoint();
+            unversionedContext.addEndpointWithPath(toopRequestEnd, "/toopDataRequest");
+            Endpoint toopResponseEnd = new ToopResponseEndpoint();
+            unversionedContext.addEndpointWithPath(toopResponseEnd, "/to-dc");
+
         } catch (Exception e) {
             LOGGER.severe("Failed to initialize the endpoints with error " + e.getMessage());
             System.exit(3);
