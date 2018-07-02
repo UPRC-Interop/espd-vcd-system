@@ -3,9 +3,8 @@ package eu.esens.espdvcd.designer.service;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
-import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
-import eu.esens.espdvcd.retriever.criteria.CriteriaExtractorFactory;
-import eu.esens.espdvcd.retriever.criteria.PredefinedESPDCriteriaExtractor;
+import eu.esens.espdvcd.retriever.criteria.*;
+import eu.esens.espdvcd.retriever.criteria.enums.FactoryType;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import eu.esens.espdvcd.schema.SchemaVersion;
 
@@ -17,7 +16,7 @@ public class PredefinedCriteriaService implements CriteriaService {
     private int counter=0;
 
     public PredefinedCriteriaService(SchemaVersion version) {
-        predefinedExtractor = CriteriaExtractorFactory.getPredefinedESPDCriteriaExtractor(version);
+        predefinedExtractor = new PredefinedESPDCriteriaExtractor(version);
     }
 
     @Override
@@ -34,8 +33,6 @@ public class PredefinedCriteriaService implements CriteriaService {
 
     @Override
     public List<SelectableCriterion> getUnselectedCriteria(List<SelectableCriterion> initialList) throws RetrieverException {
-
-
         return predefinedExtractor.getFullList(initialList);
     }
 

@@ -1,7 +1,12 @@
 package eu.esens.espdvcd.designer.endpoint;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.module.SimpleAbstractTypeResolver;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import eu.esens.espdvcd.designer.deserialiser.RequirementDeserialiser;
 import eu.esens.espdvcd.designer.service.CriteriaService;
+import eu.esens.espdvcd.model.requirement.Requirement;
+import eu.esens.espdvcd.model.requirement.ResponseRequirement;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import spark.Request;
 import spark.Response;
