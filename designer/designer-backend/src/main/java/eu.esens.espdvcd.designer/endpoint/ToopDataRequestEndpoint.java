@@ -10,6 +10,7 @@ import eu.esens.espdvcd.designer.util.Config;
 import eu.esens.espdvcd.designer.model.ToopDataRequest;
 import eu.esens.espdvcd.designer.util.HttpClientInvoker;
 
+import eu.esens.espdvcd.designer.util.Message;
 import eu.esens.espdvcd.model.EODetails;
 import eu.toop.commons.codelist.EPredefinedDocumentTypeIdentifier;
 import eu.toop.commons.codelist.EPredefinedProcessIdentifier;
@@ -37,9 +38,11 @@ import spark.Request;
 import spark.Response;
 import spark.Service;
 
-import static eu.esens.espdvcd.designer.Server.TOOPResponseQueue;
+import static eu.esens.espdvcd.designer.Server.TOOP_RESPONSE_MAP;
 
 public class ToopDataRequestEndpoint extends Endpoint {
+
+    private final static String dataConsumerID = UUID.randomUUID().toString();
 
     @Override
     public void configure(Service spark, String basePath) {
@@ -67,10 +70,21 @@ public class ToopDataRequestEndpoint extends Endpoint {
         createRequestAndSendToToopConnector(toopDataRequest);
         LOGGER.info("Sent TOOP Request to the Connector.");
 
-        EODetails toopDetails = TOOPResponseQueue.take();
-        LOGGER.info("Sending toop response.");
+        Message<EODetails> theMessage = new Message<>();
+        synchronized (theMessage) {
+            TOOP_RESPONSE_MAP.put(dataConsumerID, theMessage);
+            LOGGER.info("Added message to hashmap.");
 
-        return WRITER.writeValueAsString(toopDetails);
+            LOGGER.info("Waiting for response...");
+
+            theMessage.wait();
+
+            EODetails toopDetails = theMessage.getResponse();
+
+            LOGGER.info("Got response from other thread!");
+            LOGGER.info("Sending response.");
+            return WRITER.writeValueAsString(toopDetails);
+        }
     }
 
     private static TDETOOPRequestType createRequest (
@@ -89,7 +103,7 @@ public class ToopDataRequestEndpoint extends Endpoint {
 
         final TDETOOPRequestType aRet = new TDETOOPRequestType ();
         aRet.setDocumentUniversalUniqueIdentifier (ToopXSDHelper
-            .createIdentifier (UUID.randomUUID ().toString ()));
+            .createIdentifier (UUID.randomUUID().toString()));
         aRet.setDocumentIssueDate (PDTXMLConverter.getXMLCalendarDateNow ());
         aRet.setDocumentIssueTime (PDTXMLConverter.getXMLCalendarTimeNow ());
         aRet.setCopyIndicator (ToopXSDHelper.createIndicator (false));
@@ -152,6 +166,7 @@ public class ToopDataRequestEndpoint extends Endpoint {
 
             aRet.addDataElementRequest (aReq);
         }
+        aRet.setDataConsumerGlobalSessionIdentifier(ToopXSDHelper.createIdentifier(dataConsumerID));
         return aRet;
     }
 
@@ -167,7 +182,7 @@ public class ToopDataRequestEndpoint extends Endpoint {
         return conceptValues;
     }
 
-    public static void createRequestAndSendToToopConnector (ToopDataRequest toopDataRequest) throws IOException {
+    static void createRequestAndSendToToopConnector (ToopDataRequest toopDataRequest) throws IOException {
 
         final SignatureHelper aSH = new SignatureHelper (new DefaultResourceProvider().getInputStream (Config.getKeystorePath ()),
                 Config.getKeystorePassword (),
@@ -182,7 +197,7 @@ public class ToopDataRequestEndpoint extends Endpoint {
 
             final String aFromDCUrl = Config.getToopConnectorDPUrl ();
 
-            Files.write(aBAOS.toByteArray(), new File("request.asic"));
+            Files.write(aBAOS.toByteArray(), new File("request_last.asic"));
 
             HttpClientInvoker.httpClientCallNoResponse (aFromDCUrl, aBAOS.toByteArray ());
         }

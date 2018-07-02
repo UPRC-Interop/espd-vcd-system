@@ -213,7 +213,7 @@ export class ApicallService {
 
     console.log(TOOPReqJSON);
 
-    return this.http.post<ToopCompanyData>('http://83.212.107.143:9090/api/toopDataRequest', TOOPReqJSON).toPromise();
+    return this.http.post<ToopCompanyData>(environment.apiUrl + 'toopDataRequest', TOOPReqJSON).toPromise();
   }
 
 

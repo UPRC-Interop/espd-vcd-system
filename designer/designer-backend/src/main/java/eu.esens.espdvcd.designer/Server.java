@@ -2,19 +2,24 @@ package eu.esens.espdvcd.designer;
 
 import eu.esens.espdvcd.designer.endpoint.*;
 import eu.esens.espdvcd.designer.service.*;
+import eu.esens.espdvcd.designer.util.Message;
 import eu.esens.espdvcd.model.EODetails;
 import eu.esens.espdvcd.schema.SchemaVersion;
 import spark.Service;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Server {
 
     private final static Logger LOGGER = Logger.getLogger(Server.class.getName());
-    public final static BlockingQueue<EODetails> TOOPResponseQueue = new ArrayBlockingQueue<>(1);
+    public final static ConcurrentMap<String, Message<EODetails>> TOOP_RESPONSE_MAP = new ConcurrentHashMap<>();
 
     public static void main(String args[]) {
 

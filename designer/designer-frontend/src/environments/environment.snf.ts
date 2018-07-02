@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://snf-822556.vm.okeanos.grnet.gr/api/'
+  apiUrl: 'http://83.212.107.143:9090/api/'
 };

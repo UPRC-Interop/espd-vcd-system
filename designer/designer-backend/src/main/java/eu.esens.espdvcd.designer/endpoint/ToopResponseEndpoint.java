@@ -1,6 +1,8 @@
 package eu.esens.espdvcd.designer.endpoint;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.google.common.io.Files;
+import eu.esens.espdvcd.designer.util.Message;
 import eu.esens.espdvcd.model.EODetails;
 import eu.esens.espdvcd.model.PostalAddress;
 import eu.toop.commons.dataexchange.TDEDataElementResponseValueType;
@@ -11,11 +13,12 @@ import spark.Response;
 import spark.Service;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static eu.esens.espdvcd.designer.Server.TOOPResponseQueue;
+import static eu.esens.espdvcd.designer.Server.TOOP_RESPONSE_MAP;
 
 public class ToopResponseEndpoint extends Endpoint {
 
@@ -44,10 +47,19 @@ public class ToopResponseEndpoint extends Endpoint {
         TDETOOPResponseType TOOPResponse = ToopMessageBuilder.parseResponseMessage(new ByteArrayInputStream(request.bodyAsBytes()));
         LOGGER.info("Extracting response...");
         //DEBUG
-//        Files.write(request.bodyAsBytes(), new File("response.asic"));
+        Files.write(request.bodyAsBytes(), new File("response_last.asic"));
 
-        TOOPResponseQueue.add(extractEODetails(TOOPResponse));
-        return "";
+        final String id = TOOPResponse.getDataConsumerGlobalSessionIdentifier().getValue();
+        System.out.println(id);
+        Message<EODetails> eoDetailsMessage = TOOP_RESPONSE_MAP.get(id);
+        synchronized (eoDetailsMessage) {
+            eoDetailsMessage.setResponse(extractEODetails(TOOPResponse));
+            eoDetailsMessage.notify();
+            LOGGER.info("Sent response to the other thread...");
+
+//        TOOPResponseQueue.add(extractEODetails(TOOPResponse));
+            return "";
+        }
     }
 
     private EODetails extractEODetails(TDETOOPResponseType TOOPResponse) throws JsonProcessingException {
@@ -74,18 +86,13 @@ public class ToopResponseEndpoint extends Endpoint {
                         address.setAddressLine1(addressParts[0]);
                         address.setPostCode(addressParts[1]);
                         address.setCity(addressParts[2]);
-                        if (addressParts[3].equalsIgnoreCase("Elonia"))
-                            address.setCountryCode("SV");
-                        else if (addressParts[3].equalsIgnoreCase("Sweden"))
-                            address.setCountryCode("SW");
-                        else
-                            address.setCountryCode(addressParts[3]);
+                        address.setCountryCode(TOOPResponse.getDataRequestSubject().getLegalEntity().getLegalEntityLegalAddress().getCountryCode().getValue());
                         eoDetails.setPostalAddress(address);
                         break;
                 }
             }
         });
-        LOGGER.info(WRITER.writeValueAsString(eoDetails));
+//        LOGGER.info(WRITER.writeValueAsString(eoDetails));
         return eoDetails;
     }
 }
