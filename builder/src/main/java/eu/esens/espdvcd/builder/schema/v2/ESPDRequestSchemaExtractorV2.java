@@ -12,13 +12,6 @@ import eu.espd.schema.v2.pre_award.qualificationapplicationresponse.Qualificatio
 
 import java.util.stream.Collectors;
 
-//import test.x.ubl.pre_award.commonaggregate.DocumentReferenceType;
-//import test.x.ubl.pre_award.commonaggregate.ProcurementProjectLotType;
-//import test.x.ubl.pre_award.commonaggregate.TenderingCriterionPropertyType;
-//import test.x.ubl.pre_award.commonbasic.*;
-//import test.x.ubl.pre_award.qualificationapplicationrequest.QualificationApplicationRequestType;
-//import test.x.ubl.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
-
 public class ESPDRequestSchemaExtractorV2 implements SchemaExtractorV2 {
 
     public QualificationApplicationRequestType extractQualificationApplicationRequestType(ESPDRequest req) {
@@ -43,7 +36,7 @@ public class ESPDRequestSchemaExtractorV2 implements SchemaExtractorV2 {
 
         reqType.getTenderingCriterion().addAll(req.getFullCriterionList().stream()
                 .filter(cr -> cr.isSelected())
-                .map(cr -> extractTenderingCriterion(cr, null))
+                .map(cr -> extractTenderingCriterion(cr))
                 .collect(Collectors.toList()));
 
         reqType.setUBLVersionID(createUBL22VersionIdType());
@@ -76,7 +69,7 @@ public class ESPDRequestSchemaExtractorV2 implements SchemaExtractorV2 {
     }
 
     @Override
-    public TenderingCriterionPropertyType extractTenderingCriterionPropertyType(Requirement r, QualificationApplicationResponseType responseType) {
+    public TenderingCriterionPropertyType extractTenderingCriterionPropertyType(Requirement r) {
 
         TenderingCriterionPropertyType propertyType = new TenderingCriterionPropertyType();
 

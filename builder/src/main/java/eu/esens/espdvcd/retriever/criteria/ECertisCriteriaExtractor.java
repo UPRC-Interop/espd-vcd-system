@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
 /**
  * @author konstantinos Raptis
  */
-public class ECertisCriteriaExtractor implements CriteriaDataRetriever, CriteriaExtractor {
+public class ECertisCriteriaExtractor implements CriteriaDataRetriever, MultilingualCriteriaExtractor {
 
     public static final String ECERTIS_CONFIG_PATH = ECertisCriteriaExtractor.class.getClassLoader()
             .getResource("ecertis.properties").getPath();
@@ -403,6 +403,7 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
      * @param lang The European language code
      * @throws RetrieverException In case of an invalid language code
      */
+    @Override
     public void setLang(String lang) throws RetrieverException {
         if (isLanguageCodeExist(lang)) {
             this.lang = lang;
@@ -414,8 +415,14 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Criteria
     /**
      * Initialize language back to default (english).
      */
+    @Override
     public void initLang() {
         lang = DEFAULT_LANG;
+    }
+
+    @Override
+    public String getLang() {
+        return lang;
     }
 
     /**

@@ -14,6 +14,8 @@ import java.util.regex.Pattern;
 
 public class ArtefactUtils {
 
+    private static final Logger LOGGER = Logger.getLogger(ArtefactUtils.class.getName());
+
     public static InputStream getBufferedInputStream(InputStream xmlESPD) {
         // We require a marked input stream
         InputStream bis;
@@ -32,7 +34,7 @@ public class ArtefactUtils {
      * @return The schema version
      */
     public static SchemaVersion findSchemaVersion(InputStream xmlESPD) {
-        SchemaVersion version = SchemaVersion.UNKNOWN;
+        SchemaVersion version = null;
 
         try {
             String partOfTheArtefact = getPartOfTheArtefact(xmlESPD, 128); //  better stay below 256
@@ -54,7 +56,7 @@ public class ArtefactUtils {
             }
 
         } catch (IOException ex) {
-            Logger.getLogger(ArtefactUtils.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.log(Level.SEVERE, null, ex);
         }
 
         return version;
@@ -85,7 +87,7 @@ public class ArtefactUtils {
      * @return The profile execution id
      */
     public static ProfileExecutionIDEnum findEDMVersion(InputStream xmlESPD) {
-        ProfileExecutionIDEnum profileExecutionIDEnum = ProfileExecutionIDEnum.UNKNOWN;
+        ProfileExecutionIDEnum profileExecutionIDEnum = null;
 
         try {
             String partOfTheArtefact = getPartOfTheArtefact(xmlESPD, 2048);
@@ -118,7 +120,7 @@ public class ArtefactUtils {
             }
 
         } catch (IOException ex) {
-            Logger.getLogger(ArtefactUtils.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
         }
         return profileExecutionIDEnum;
     }

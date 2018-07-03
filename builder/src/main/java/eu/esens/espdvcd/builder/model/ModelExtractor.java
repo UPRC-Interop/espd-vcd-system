@@ -22,18 +22,6 @@ import eu.espd.schema.v1.commonbasiccomponents_2.ContractFolderIDType;
 import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionPropertyGroupType;
 import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionPropertyType;
 import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionType;
-//import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.CriterionType;
-//import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.LegislationType;
-//import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementGroupType;
-//import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementType;
-//import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ContractingPartyType;
-//import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.DocumentReferenceType;
-//import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ExternalReferenceType;
-//import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ServiceProviderPartyType;
-//import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.ContractFolderIDType;
-//import test.x.ubl.pre_award.commonaggregate.TenderingCriterionPropertyGroupType;
-//import test.x.ubl.pre_award.commonaggregate.TenderingCriterionPropertyType;
-//import test.x.ubl.pre_award.commonaggregate.TenderingCriterionType;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -319,7 +307,10 @@ public interface ModelExtractor {
 
         try {
             // return the default service provider details
-            return BuilderFactory.getRegulatedModelBuilder().createESPDRequest().getServiceProviderDetails();
+            return BuilderFactory.withEDMVersion1()
+                    .getRegulatedModelBuilder()
+                    .createESPDRequest()
+                    .getServiceProviderDetails();
         } catch (BuilderException e) {
             return null;
         }
@@ -329,7 +320,10 @@ public interface ModelExtractor {
 
     default ServiceProviderDetails extractServiceProviderDetails(List<eu.espd.schema.v2.pre_award.commonaggregate.ContractingPartyType> sppt) {
         try {
-            return BuilderFactory.getRegulatedModelBuilder().createESPDRequest().getServiceProviderDetails();
+            return BuilderFactory.withEDMVersion2()
+                    .getRegulatedModelBuilder()
+                    .createESPDRequest()
+                    .getServiceProviderDetails();
         } catch (BuilderException e) {
             return null;
         }
@@ -357,15 +351,15 @@ public interface ModelExtractor {
         return extractSelectableCriterion(ct, true);
     }
 
-    default SelectableCriterion extractSelectableCriterion(TenderingCriterionType tct, boolean isSelected) {
-        String id = tct.getID().getValue();
-        String desc = tct.getDescription().isEmpty() ? "" : tct.getDescription().get(0).getValue();
-        String typeCode = tct.getCriterionTypeCode().getValue();
-        String name = tct.getName().getValue();
+    default SelectableCriterion extractSelectableCriterion(TenderingCriterionType tcType, boolean isSelected) {
+        String id = tcType.getID().getValue();
+        String desc = tcType.getDescription().isEmpty() ? "" : tcType.getDescription().get(0).getValue();
+        String typeCode = tcType.getCriterionTypeCode().getValue();
+        String name = tcType.getName().getValue();
 
-        LegislationReference lr = extractDefaultLegalReferenceV2(tct.getLegislation());
+        LegislationReference lr = extractDefaultLegalReferenceV2(tcType.getLegislation());
 
-        List<RequirementGroup> rgList = tct.getTenderingCriterionPropertyGroup().stream()
+        List<RequirementGroup> rgList = tcType.getTenderingCriterionPropertyGroup().stream()
                 .map(t -> extractRequirementGroup(t))
                 .collect(Collectors.toList());
 
@@ -530,19 +524,19 @@ public interface ModelExtractor {
         return r;
     }
 
-    default Requirement extractRequirement(RequirementType rt) {
+    default Requirement extractRequirement(RequirementType rqType) {
         String theId = null;
-        if (rt.getID() != null) {
-            theId = rt.getID().getValue();
+        if (rqType.getID() != null) {
+            theId = rqType.getID().getValue();
         }
         String theDescription = null;
-        if (rt.getDescription() != null) {
-            theDescription = rt.getDescription().getValue();
+        if (rqType.getDescription() != null) {
+            theDescription = rqType.getDescription().getValue();
         }
 
         Requirement r = new ResponseRequirement(
                 theId,
-                ResponseTypeEnum.valueOf(rt.getResponseDataType()),
+                ResponseTypeEnum.valueOf(rqType.getResponseDataType()),
                 theDescription);
         return r;
     }

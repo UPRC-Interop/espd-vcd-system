@@ -17,11 +17,6 @@ import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.util.UUID;
 
-//import isa.names.specification.ubl.schema.xsd.cev_commonaggregatecomponents_1.EvidenceType;
-//import isa.names.specification.ubl.schema.xsd.cev_commonbasiccomponents_1.IndicatorType;
-//import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.*;
-//import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.*;
-
 public class VCDResponseSchemaExtractorV1 extends ESPDResponseSchemaExtractorV1 {
 
     private final static Logger log = LoggerFactory.getLogger(VCDResponseSchemaExtractorV1.class);

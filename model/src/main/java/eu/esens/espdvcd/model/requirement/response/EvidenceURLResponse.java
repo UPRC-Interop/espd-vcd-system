@@ -29,6 +29,7 @@ public class EvidenceURLResponse extends Response implements Serializable {
     public EvidenceURLResponse() {
     }
 
+
     public EvidenceURLResponse(String evidenceURL) {
         this.evidenceURL = evidenceURL;
     }
@@ -36,7 +37,6 @@ public class EvidenceURLResponse extends Response implements Serializable {
     public String getEvidenceURL() {
         return evidenceURL;
     }
-
     public void setEvidenceURL(String evidenceURL) {
         this.evidenceURL = evidenceURL;
     }

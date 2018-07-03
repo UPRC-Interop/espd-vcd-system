@@ -1,6 +1,10 @@
 package eu.esens.espdvcd.model;
 
+import eu.esens.espdvcd.model.requirement.response.Response;
+import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
+
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,6 +17,7 @@ public class RegulatedESPDResponse extends RegulatedESPDRequest implements ESPDR
     
     protected EODetails eoDetails;
     private ESPDRequestDetails espdRequestDetails;
+    private List<Evidence> evidenceList;
 
     public EODetails getEODetails() {
         return eoDetails;
@@ -21,8 +26,7 @@ public class RegulatedESPDResponse extends RegulatedESPDRequest implements ESPDR
     public void setEODetails(EODetails eoDetails) {
         this.eoDetails = eoDetails;
     }
-    
-    
+
     @Override
     public List<URL> getExternalDocuments() {
         return null;
@@ -36,6 +40,19 @@ public class RegulatedESPDResponse extends RegulatedESPDRequest implements ESPDR
     @Override
     public ESPDRequestDetails getESPDRequestDetails() {
         return this.espdRequestDetails;
+    }
+
+    @Override
+    public void setEvidenceList(List<Evidence> evidenceList) {
+        this.evidenceList = evidenceList;
+    }
+
+    @Override
+    public List<Evidence> getEvidenceList() {
+        if (evidenceList == null) {
+            evidenceList = new ArrayList<>();
+        }
+        return evidenceList;
     }
 
 }

@@ -1,21 +1,20 @@
 package eu.esens.espdvcd.builder.schema.v2;
 
 import eu.esens.espdvcd.codelist.CodelistsV2;
+import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.EODetails;
 import eu.esens.espdvcd.model.ESPDRequestDetails;
 import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.model.requirement.Requirement;
+import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.response.*;
+import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
 import eu.espd.schema.v2.pre_award.commonaggregate.*;
 import eu.espd.schema.v2.pre_award.commonbasic.*;
 import eu.espd.schema.v2.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-//import test.x.ubl.pre_award.commonaggregate.*;
-//import test.x.ubl.pre_award.commonbasic.*;
-//import test.x.ubl.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
-
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeConstants;
@@ -23,6 +22,7 @@ import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -31,47 +31,158 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
 
     private final static Logger log = LoggerFactory.getLogger(ESPDResponseSchemaExtractorV2.class);
 
-    public QualificationApplicationResponseType extractQualificationApplicationResponseType(ESPDResponse res) {
+    public QualificationApplicationResponseType extractQualificationApplicationResponseType(ESPDResponse modelResponse) {
 
-        final QualificationApplicationResponseType responseType = new QualificationApplicationResponseType();
+        final QualificationApplicationResponseType qarType = new QualificationApplicationResponseType();
 
-        if (res.getCADetails().getProcurementProcedureFileReferenceNo() != null) {
-            responseType.setContractFolderID(new ContractFolderIDType());
-            responseType.getContractFolderID().setSchemeAgencyID("TeD");
-            responseType.getContractFolderID().setValue(res.getCADetails().getProcurementProcedureFileReferenceNo());
+        if (modelResponse.getCADetails().getProcurementProcedureFileReferenceNo() != null) {
+            qarType.setContractFolderID(new ContractFolderIDType());
+            qarType.getContractFolderID().setSchemeAgencyID("TeD");
+            qarType.getContractFolderID().setValue(modelResponse.getCADetails().getProcurementProcedureFileReferenceNo());
         }
 
-        responseType.getAdditionalDocumentReference().add(extractCADetailsDocumentReference(res.getCADetails()));
+        qarType.getAdditionalDocumentReference().add(extractCADetailsDocumentReference(modelResponse.getCADetails()));
 
-        DocumentReferenceType drt = extractCADetailsNationalDocumentReference(res.getCADetails());
+        DocumentReferenceType drt = extractCADetailsNationalDocumentReference(modelResponse.getCADetails());
         if (drt != null) {
-            responseType.getAdditionalDocumentReference().add(drt);
+            qarType.getAdditionalDocumentReference().add(drt);
         }
 
-        responseType.getContractingParty().add(extractContractingPartyType(res.getCADetails()));
-        responseType.getProcurementProjectLot().add(extractProcurementProjectLot(res.getEODetails()));
-        responseType.getContractingParty().get(0).getParty().getServiceProviderParty()
-                .add(extractServiceProviderPartyType(res.getServiceProviderDetails()));
-        responseType.getTenderingCriterion().addAll(res.getFullCriterionList().stream()
-                .filter(cr -> cr.isSelected())
-                .map(cr -> extractTenderingCriterion(cr, responseType))
+        qarType.getContractingParty().add(extractContractingPartyType(modelResponse.getCADetails()));
+        qarType.getProcurementProjectLot().add(extractProcurementProjectLot(modelResponse.getEODetails()));
+
+
+        qarType.getContractingParty().get(0).getParty().getServiceProviderParty()
+                .add(extractServiceProviderPartyType(modelResponse.getServiceProviderDetails()));
+
+        qarType.getTenderingCriterion().addAll(modelResponse.getFullCriterionList().stream()
+                .filter(sc -> sc.isSelected())
+                .map(sc -> extractTenderingCriterion(sc))
                 .collect(Collectors.toList()));
 
-        responseType.getEconomicOperatorParty().add(extractEODetails(res.getEODetails()));
+        qarType.getEconomicOperatorParty().add(extractEODetails(modelResponse.getEODetails()));
 
-        if (res.getESPDRequestDetails() != null) {
-            responseType.getAdditionalDocumentReference().add(extractESPDRequestDetails(res.getESPDRequestDetails()));
+        qarType.getTenderingCriterionResponse().addAll(extractAllTenderingCriterionResponses(modelResponse));
+
+        qarType.getEvidence().addAll(modelResponse.getEvidenceList().stream()
+                .map(ev -> extractEvidenceType(ev))
+                .collect(Collectors.toList()));
+
+        if (modelResponse.getESPDRequestDetails() != null) {
+            qarType.getAdditionalDocumentReference().add(extractESPDRequestDetails(modelResponse.getESPDRequestDetails()));
         }
 
 
-        responseType.setUBLVersionID(createUBL22VersionIdType());
+        qarType.setUBLVersionID(createUBL22VersionIdType());
 
-        responseType.setCustomizationID(createCENBIICustomizationIdType("urn:www.cenbii.eu:transaction:biitrdm070:ver3.0"));
-        responseType.setVersionID(createVersionIDType("2018.01.01"));
+        qarType.setCustomizationID(createCENBIICustomizationIdType("urn:www.cenbii.eu:transaction:biitrdm092:ver3.0"));
+        qarType.setVersionID(createVersionIDType("2018.01.01"));
 
-        responseType.setCopyIndicator(new CopyIndicatorType());
-        responseType.getCopyIndicator().setValue(false);
-        return responseType;
+        qarType.setQualificationApplicationTypeCode(new QualificationApplicationTypeCodeType());
+        qarType.getQualificationApplicationTypeCode().setValue(QualificationApplicationTypeEnum.REGULATED.name());
+        qarType.getQualificationApplicationTypeCode().setListID("QualificationApplicationType");
+        qarType.getQualificationApplicationTypeCode().setListAgencyID("EU-COM-GROW");
+        qarType.getQualificationApplicationTypeCode().setListVersionID("2.0.2");
+
+        qarType.setCopyIndicator(new CopyIndicatorType());
+        qarType.getCopyIndicator().setValue(false);
+        return qarType;
+    }
+
+    public List<TenderingCriterionResponseType> extractAllTenderingCriterionResponses(final ESPDResponse response) {
+        List<TenderingCriterionResponseType> tcrTypeList = new ArrayList<>();
+        response.getFullCriterionList().forEach(sc -> tcrTypeList.addAll(extractAllTenderingCriterionResponses(sc.getRequirementGroups())));
+        return tcrTypeList;
+    }
+
+    public List<TenderingCriterionResponseType> extractAllTenderingCriterionResponses(final List<RequirementGroup> rgList) {
+        final List<TenderingCriterionResponseType> tcrTypeList = new ArrayList<>();
+        rgList.forEach(rg -> tcrTypeList.addAll(extractAllTenderingCriterionResponses(rg)));
+        return tcrTypeList;
+    }
+
+    public List<TenderingCriterionResponseType> extractAllTenderingCriterionResponses(final RequirementGroup rg) {
+        return extractAllRequirements(rg, null).stream()
+                .map(rq -> extractTenderingCriterionResponse(rq.getResponse(), rq.getResponseDataType()))
+                .collect(Collectors.toList());
+    }
+
+    public List<Requirement> extractAllRequirements(final RequirementGroup rg, List<Requirement> requirementList) {
+
+        if (requirementList == null) {
+            requirementList = new ArrayList<>();
+        }
+
+        requirementList.addAll(rg.getRequirements());
+
+        for (RequirementGroup subRg : rg.getRequirementGroups()) {
+            extractAllRequirements(subRg, requirementList);
+        }
+
+        return requirementList;
+    }
+
+    public EvidenceType extractEvidenceType(Evidence evidence) {
+
+        if (evidence == null) {
+            return null;
+        }
+
+        EvidenceType evType = new EvidenceType();
+        evType.getDocumentReference().add(new DocumentReferenceType());
+
+        if (evidence.getID() != null) {
+            evType.setID(new IDType());
+            evType.getID().setSchemeAgencyID("EU-COM-GROW");
+            evType.getID().setValue(evidence.getID());
+        }
+
+        if (evidence.getDescription() != null) {
+            evType.getDescription().add(new DescriptionType());
+            evType.getDescription().get(0).setValue(evidence.getDescription());
+        }
+
+        if (evidence.getConfidentialityLevelCode() != null) {
+            evType.setConfidentialityLevelCode(new ConfidentialityLevelCodeType());
+            evType.getConfidentialityLevelCode().setListID("ConfidentialityLevel");
+            evType.getConfidentialityLevelCode().setListAgencyID("EU-COM-GROW");
+            evType.getConfidentialityLevelCode().setListVersionID("2.0.2");
+            evType.getConfidentialityLevelCode().setValue(evidence.getConfidentialityLevelCode());
+        }
+
+        if (evidence.getEvidenceURL() != null) {
+            // FIXME document reference ID added as an empty element here
+            evType.getDocumentReference().get(0).setID(new IDType());
+            evType.getDocumentReference().get(0).getID().setSchemeAgencyID("EU-COM-GROW");
+            evType.getDocumentReference().get(0).setAttachment(new AttachmentType());
+            evType.getDocumentReference().get(0).getAttachment().setExternalReference(new ExternalReferenceType());
+            evType.getDocumentReference().get(0).getAttachment().getExternalReference().setURI(new URIType());
+            evType.getDocumentReference().get(0).getAttachment().getExternalReference().getURI().setValue(evidence.getEvidenceURL());
+        }
+
+        if (evidence.getEvidenceIssuer() != null) {
+
+            evType.getDocumentReference().get(0).setIssuerParty(new PartyType());
+
+            if (evidence.getEvidenceIssuer().getName() != null) {
+                evType.getDocumentReference().get(0).getIssuerParty().getPartyName().add(new PartyNameType());
+                evType.getDocumentReference().get(0).getIssuerParty().getPartyName().get(0).setName(new NameType());
+                evType.getDocumentReference().get(0).getIssuerParty().getPartyName().get(0).getName().setValue(evidence.getEvidenceIssuer().getName());
+            }
+
+            if (evidence.getEvidenceIssuer().getID() != null) {
+                evType.getDocumentReference().get(0).getIssuerParty().getPartyIdentification().add(new PartyIdentificationType());
+                evType.getDocumentReference().get(0).getIssuerParty().getPartyIdentification().get(0).setID(new IDType());
+                evType.getDocumentReference().get(0).getIssuerParty().getPartyIdentification().get(0).getID().setValue(evidence.getEvidenceIssuer().getID());
+            }
+
+            if (evidence.getEvidenceIssuer().getWebsite() != null) {
+                evType.getDocumentReference().get(0).getIssuerParty().setWebsiteURI(new WebsiteURIType());
+                evType.getDocumentReference().get(0).getIssuerParty().getWebsiteURI().setValue(evidence.getEvidenceIssuer().getWebsite());
+            }
+        }
+
+        return evType;
     }
 
     public EconomicOperatorPartyType extractEODetails(EODetails eod) {
@@ -80,43 +191,47 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
             return null;
         }
 
-        EconomicOperatorPartyType eopt = new EconomicOperatorPartyType();
-        eopt.getQualifyingParty().add(new QualifyingPartyType());
+        EconomicOperatorPartyType eoPartyType = new EconomicOperatorPartyType();
+        eoPartyType.getQualifyingParty().add(new QualifyingPartyType());
         String icc = eod.isSmeIndicator() ? "SME" : "LARGE";
 
-        eopt.getQualifyingParty().get(0).setParty(new PartyType());
-        eopt.getQualifyingParty().get(0).getParty()
+        eoPartyType.getQualifyingParty().get(0).setParty(new PartyType());
+        eoPartyType.getQualifyingParty().get(0).getParty()
                 .setIndustryClassificationCode(createIndustryClassificationCodeType(
                         CodelistsV2.EOIndustryClassification.getValueForId(icc)));
 
-        eopt.setParty(new PartyType());
+        eoPartyType.setParty(new PartyType());
+
+        /* FIXME: VALUE MAY NEED REFACTORING HERE */
+        eoPartyType.getParty().setIndustryClassificationCode(createIndustryClassificationCodeType(icc));
 
         if (eod.getID() != null) {
             PartyIdentificationType pit = new PartyIdentificationType();
             pit.setID(new IDType());
             pit.getID().setValue(eod.getID());
             pit.getID().setSchemeAgencyID("EU-COM-GROW");
-            eopt.getParty().getPartyIdentification().add(pit);
+            eoPartyType.getParty().getPartyIdentification().add(pit);
         }
 
         if (eod.getName() != null) {
             PartyNameType pnt = new PartyNameType();
             pnt.setName(new NameType());
             pnt.getName().setValue(eod.getName());
-            eopt.getParty().getPartyName().add(pnt);
+            eoPartyType.getParty().getPartyName().add(pnt);
         }
 
         if (eod.getElectronicAddressID() != null) {
             EndpointIDType eid = new EndpointIDType();
+            eid.setSchemeID("ISO/IEC 9834-8:2008 - 4UUID");
             eid.setSchemeAgencyID("EU-COM-GROW");
             eid.setValue(eod.getElectronicAddressID());
-            eopt.getParty().setEndpointID(eid);
+            eoPartyType.getParty().setEndpointID(eid);
         }
 
         if (eod.getWebSiteURI() != null) {
             WebsiteURIType wsuri = new WebsiteURIType();
             wsuri.setValue(eod.getWebSiteURI());
-            eopt.getParty().setWebsiteURI(wsuri);
+            eoPartyType.getParty().setWebsiteURI(wsuri);
         }
 
         if (eod.getPostalAddress() != null) {
@@ -134,7 +249,7 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
             at.setCountry(new CountryType());
             at.getCountry().setIdentificationCode(createISOCountryIdCodeType(eod.getPostalAddress().getCountryCode()));
 
-            eopt.getParty().setPostalAddress(at);
+            eoPartyType.getParty().setPostalAddress(at);
         }
 
         if (eod.getContactingDetails() != null) {
@@ -151,7 +266,7 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
             ct.setTelefax(new TelefaxType());
             ct.getTelefax().setValue(eod.getContactingDetails().getFaxNumber());
 
-            eopt.getParty().setContact(ct);
+            eoPartyType.getParty().setContact(ct);
         }
 
         eod.getNaturalPersons().forEach(np -> {
@@ -217,42 +332,49 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
             apt.getPerson().add(pt);
             poa.setAgentParty(apt);
 
-            eopt.getParty().getPowerOfAttorney().add(poa);
+            eoPartyType.getParty().getPowerOfAttorney().add(poa);
         });
-        return eopt;
+        return eoPartyType;
     }
 
     @Override
-    public TenderingCriterionPropertyType extractTenderingCriterionPropertyType(Requirement r, QualificationApplicationResponseType responseType) {
+    public TenderingCriterionPropertyType extractTenderingCriterionPropertyType(Requirement r) {
         TenderingCriterionPropertyType req = new TenderingCriterionPropertyType();
 
-        req.setTypeCode(new TypeCodeType());
-        req.getTypeCode().setValue(r.getTypeCode().name());
-
-        req.setValueDataTypeCode(new ValueDataTypeCodeType());
-        req.getValueDataTypeCode().setValue(r.getResponseDataType().name());
+        req.setTypeCode(createTypeCodeType(r.getTypeCode().name()));
+        req.setValueDataTypeCode(createValueDataTypeCodeType(r.getResponseDataType().name()));
 
         req.getDescription().add(new DescriptionType());
         req.getDescription().get(0).setValue(r.getDescription());
 
         req.setID(createCriteriaTaxonomyIDType(r.getID()));
-        responseType.getTenderingCriterionResponse().add(extractTenderingCriterionResponse(r.getResponse(), r.getResponseDataType(), r.getID()));
+
         return req;
     }
 
-    private TenderingCriterionResponseType extractTenderingCriterionResponse(Response response, ResponseTypeEnum respType, String rqID) {
+    private TenderingCriterionResponseType extractTenderingCriterionResponse(Response response, ResponseTypeEnum respType) {
 
         TenderingCriterionResponseType tcrType = new TenderingCriterionResponseType();
-        tcrType.setValidatedCriterionPropertyID(createValidatedCriterionPropertyId(rqID));
         ResponseValueType rvType = new ResponseValueType();
+        EvidenceSuppliedType evsType = new EvidenceSuppliedType();
 
         if (response == null) {
-            return tcrType;
+            // return tcrType;
+            return null;
         }
 
-        rvType.setID(new IDType());
-        rvType.getID().setSchemeAgencyID("EU-COM-GROW");
-        rvType.getID().setValue(UUID.randomUUID().toString());
+        if (response.getValidatedCriterionPropertyID() != null) {
+            tcrType.setValidatedCriterionPropertyID(createValidatedCriterionPropertyId(response.getValidatedCriterionPropertyID()));
+        }
+
+        if (response.getConfidentialityLevelCode() != null) {
+            tcrType.setConfidentialityLevelCode(createConfidentialityLevelCode(response.getConfidentialityLevelCode()));
+        }
+
+        tcrType.setID(createDefaultIDType(UUID.randomUUID().toString()));
+        tcrType.getID().setSchemeID("ISO/IEC 9834-8:2008 - 4UUID");
+        rvType.setID(createDefaultIDType(UUID.randomUUID().toString()));
+        rvType.getID().setSchemeID("ISO/IEC 9834-8:2008 - 4UUID");
 
         switch (respType) {
             case DESCRIPTION:
@@ -307,16 +429,19 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
                 tcrType.getResponseValue().add(rvType);
                 return tcrType;
 
-//            case PERIOD:
-//                String descr = ((PeriodResponse) response).getDescription();
-//                if (descr != null && !descr.isEmpty()) {
-//                    rvType.setResetPeriod(new PeriodType());
-//                    DescriptionType dt = new DescriptionType();
-//                    dt.setValue(descr);
-//                    rvType.getPeriod().getDescription().add(dt);
-//                }
-//                tcrType.getResponseValue().add(rvType);
-//                return tcrType;
+            case PERIOD:
+                PeriodType periodType = new PeriodType();
+                if (((ApplicablePeriodResponse) response).getStartDate() != null
+                        && ((ApplicablePeriodResponse) response).getEndDate() != null) {
+
+                    periodType.setStartDate(new StartDateType());
+                    periodType.setEndDate(new EndDateType());
+                    periodType.getStartDate().setValue(((ApplicablePeriodResponse) response).getStartDate());
+                    periodType.getEndDate().setValue(((ApplicablePeriodResponse) response).getEndDate());
+
+                }
+                tcrType.getApplicablePeriod().add(periodType);
+                return tcrType;
 
             case PERCENTAGE:
                 rvType.setResponseNumeric(new ResponseNumericType());
@@ -354,14 +479,6 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
                 tcrType.getResponseValue().add(rvType);
                 return tcrType;
 
-//            case EVIDENCE_URL:
-//                EvidenceType evType = extractEvidenceURLResponse(response);
-//                if (evType != null) {
-//                    rvType.getEvidence().add(evType);
-//                }
-//                tcrType.getResponseValue().add(rvType);
-//                return tcrType;
-
             case CODE_COUNTRY:
                 String countryCode = ((CountryCodeResponse) response).getCountryCode();
                 if (countryCode != null && !countryCode.isEmpty()) {
@@ -373,27 +490,25 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
                 }
                 tcrType.getResponseValue().add(rvType);
                 return tcrType;
+
+            case EVIDENCE_IDENTIFIER:
+                String evidenceSuppliedId = ((EvidenceIdentifierResponse) response).getEvidenceSuppliedId();
+                if (evidenceSuppliedId != null) {
+                    evsType.setID(new IDType());
+                    evsType.getID().setSchemeAgencyID("ISO/IEC 9834-8:2008 - 4UUID");
+                    evsType.getID().setValue(evidenceSuppliedId);
+                }
+                tcrType.getEvidenceSupplied().add(evsType);
+                return tcrType;
+
+            case IDENTIFIER:
+
+            case URL:
+
             default:
                 return null;
         }
 
-    }
-
-    protected EvidenceType extractEvidenceURLResponse(Response response) {
-        if (((EvidenceURLResponse) response).getEvidenceURL() != null) {
-            EvidenceType evType = new EvidenceType();
-            DocumentReferenceType drt = new DocumentReferenceType();
-            evType.setID(new IDType());
-            evType.getID().setSchemeAgencyID("EU-COM-GROW");
-            evType.getID().setValue(UUID.randomUUID().toString());
-            drt.setAttachment(new AttachmentType());
-            drt.getAttachment().setExternalReference(new ExternalReferenceType());
-            drt.getAttachment().getExternalReference().setURI(new URIType());
-            drt.getAttachment().getExternalReference().getURI().setValue(((EvidenceURLResponse) response).getEvidenceURL());
-            evType.getDocumentReference().add(drt);
-            return evType;
-        }
-        return null;
     }
 
     private DocumentReferenceType extractESPDRequestDetails(ESPDRequestDetails espdRequestDetails) {

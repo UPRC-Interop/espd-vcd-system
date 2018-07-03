@@ -1,5 +1,7 @@
 package eu.esens.espdvcd.model;
 
+import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
+
 import java.io.Serializable;
 import java.net.URL;
 import java.util.List;
@@ -8,7 +10,7 @@ import java.util.List;
  * This interface is in charge to provide {@link ESPDResponse} data.
  *
  */
-public interface ESPDResponse extends ESPDRequest,Serializable {
+public interface ESPDResponse extends ESPDRequest, Serializable {
 
     /**
      * 
@@ -34,8 +36,12 @@ public interface ESPDResponse extends ESPDRequest,Serializable {
     void setESPDRequestDetails(ESPDRequestDetails espdRequestDetails);
 
     /**
-     * @return the (@link ESPDReqeustDetails) linked to this ESPD Response
+     * @return the (@link ESPDRequestDetails) linked to this ESPD Response
      */
     ESPDRequestDetails getESPDRequestDetails();
+
+    void setEvidenceList(List<Evidence> evidenceList);
+
+    List<Evidence> getEvidenceList();
 
 }

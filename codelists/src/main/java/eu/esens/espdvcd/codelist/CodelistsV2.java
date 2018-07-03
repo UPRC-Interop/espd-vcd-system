@@ -91,7 +91,7 @@ public enum CodelistsV2 implements MultilingualCodelists {
 
     private static final String DEFAULT_LANG = "eng";
 
-    private CodelistsV2(String name) {
+    CodelistsV2(String name) {
         this.name = name;
     }
 

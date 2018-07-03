@@ -26,7 +26,7 @@ public class PredefinedESPDCriteriaExtractor implements CriteriaExtractor {
 
     private final SchemaVersion version;
 
-    PredefinedESPDCriteriaExtractor(@NotNull SchemaVersion version) {
+    public PredefinedESPDCriteriaExtractor(@NotNull SchemaVersion version) {
         this.version = version;
 
         switch (version) {
@@ -72,20 +72,19 @@ public class PredefinedESPDCriteriaExtractor implements CriteriaExtractor {
         List<SelectableCriterion> lc;
 
         switch (version) {
+
             case V1:
                 lc = criterionTypeList.stream()
                         .map(c -> ModelFactory.ESPD_REQUEST.extractSelectableCriterion(c))
                         .collect(Collectors.toList());
                 break;
-            case V2:
-//                lc = tenderingCriterionTypeList.stream()
-//                        .map(c -> ModelFactory.ESPD_REQUEST.extractSelectableCriterion(c))
-//                        .collect(Collectors.toList());
 
+            case V2:
                 lc = excelCriterionList.stream()
                         .map(sc -> applyDataFromV2Artefact(sc))
                         .collect(Collectors.toList());
                 break;
+
             default:
                 throw new IllegalArgumentException("Error... Invalid schema version value.");
         }
@@ -105,20 +104,19 @@ public class PredefinedESPDCriteriaExtractor implements CriteriaExtractor {
         Set<SelectableCriterion> fullSet;
 
         switch (version) {
+
             case V1:
                 fullSet = criterionTypeList.stream()
                         .map(c -> ModelFactory.ESPD_REQUEST.extractSelectableCriterion(c, addAsSelected))
                         .collect(Collectors.toSet());
                 break;
-            case V2:
-//                fullSet = tenderingCriterionTypeList.stream()
-//                        .map(c -> ModelFactory.ESPD_REQUEST.extractSelectableCriterion(c, addAsSelected))
-//                        .collect(Collectors.toSet());
 
+            case V2:
                 fullSet = excelCriterionList.stream()
                         .map(sc -> applyDataFromV2Artefact(sc, addAsSelected))
                         .collect(Collectors.toSet());
                 break;
+
             default:
                 throw new IllegalArgumentException("Error... Invalid schema version value.");
         }

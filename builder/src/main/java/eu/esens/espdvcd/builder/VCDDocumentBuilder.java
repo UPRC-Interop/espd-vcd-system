@@ -9,7 +9,6 @@ import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.response.EvidenceURLResponse;
 import eu.esens.espdvcd.model.requirement.response.Response;
-//import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
 import eu.espd.schema.v1.espdresponse_1.ESPDResponseType;
 import no.difi.asic.AsicWriterFactory;
 import no.difi.asic.AsicWriter;
@@ -139,7 +138,7 @@ public class VCDDocumentBuilder extends DocumentBuilderV1 {
 
     @Override
     protected ESPDResponseType createXML(ESPDResponse res) {
-        ESPDResponseType resType = finalize(SchemaFactory.VCD_RESPONSE.extractESPDResponseType(res));
+        ESPDResponseType resType = finalize(SchemaFactory.withSchemaVersion1().VCD_RESPONSE.extractESPDResponseType(res));
         return resType;
     }
 }

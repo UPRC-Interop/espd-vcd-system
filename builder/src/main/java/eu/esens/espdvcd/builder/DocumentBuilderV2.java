@@ -10,11 +10,6 @@ import eu.espd.schema.v2.pre_award.commonbasic.IssueTimeType;
 import eu.espd.schema.v2.pre_award.commonbasic.ProfileIDType;
 import eu.espd.schema.v2.pre_award.qualificationapplicationrequest.QualificationApplicationRequestType;
 import eu.espd.schema.v2.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
-//import test.x.ubl.pre_award.commonbasic.IssueDateType;
-//import test.x.ubl.pre_award.commonbasic.IssueTimeType;
-//import test.x.ubl.pre_award.commonbasic.ProfileIDType;
-//import test.x.ubl.pre_award.qualificationapplicationrequest.QualificationApplicationRequestType;
-//import test.x.ubl.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
 
 import javax.xml.bind.JAXBException;
 import java.io.ByteArrayInputStream;
@@ -149,7 +144,7 @@ public class DocumentBuilderV2 {
     private ProfileIDType createCENBIIProfileIdType(String id) {
         ProfileIDType pid = new ProfileIDType();
         pid.setSchemeAgencyID("CEN-BII");
-        pid.setSchemeVersionID("1.0");
+        pid.setSchemeVersionID("2.0");
         pid.setValue(id);
         return pid;
     }

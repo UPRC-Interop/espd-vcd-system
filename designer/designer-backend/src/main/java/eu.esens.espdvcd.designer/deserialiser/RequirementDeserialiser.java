@@ -48,9 +48,11 @@ public class RequirementDeserialiser extends StdDeserializer<ResponseRequirement
                 response = mapper.treeToValue(root.get("response"), PercentageResponse.class);
                 break;
             case DESCRIPTION:
-            case URL:
                 response = mapper.treeToValue(root.get("response"), DescriptionResponse.class);
                 break;
+//            case URL:
+//                response = mapper.treeToValue(root.get("response"), EvidenceURLCodeResponse.class);
+//                break;
             case CODE_COUNTRY:
                 response = mapper.treeToValue(root.get("response"), CountryCodeResponse.class);
                 break;
@@ -61,10 +63,12 @@ public class RequirementDeserialiser extends StdDeserializer<ResponseRequirement
                 response = mapper.treeToValue(root.get("response"), QuantityIntegerResponse.class);
                 break;
             case PERIOD:
-                response = mapper.treeToValue(root.get("response"), PeriodResponse.class);
+                response = mapper.treeToValue(root.get("response"), ApplicablePeriodResponse.class);
+                break;
+            case EVIDENCE_IDENTIFIER:
+                response = mapper.treeToValue(root.get("response"), EvidenceIdentifierResponse.class);
                 break;
             case EVIDENCE_URL:
-            case EVIDENCE_IDENTIFIER:
                 response = mapper.treeToValue(root.get("response"), EvidenceURLResponse.class);
                 break;
             case DATE:
