@@ -89,7 +89,7 @@ public class ECertisCriteriaExtractorTest {
 
     }
 
-    @Ignore
+    // @Ignore
     @Test
     public void testGetFullListTwice() throws RetrieverException {
 

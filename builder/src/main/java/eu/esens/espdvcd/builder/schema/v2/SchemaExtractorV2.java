@@ -1,5 +1,7 @@
 package eu.esens.espdvcd.builder.schema.v2;
 
+import eu.esens.espdvcd.codelist.enums.ProfileExecutionIDEnum;
+import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
 import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
@@ -16,7 +18,7 @@ public interface SchemaExtractorV2 {
      * {@link eu.espd.schema.v1.ccv_commonaggregatecomponents_1.RequirementType}
      * in schema version 2.0.x
      */
-    TenderingCriterionPropertyType extractTenderingCriterionPropertyType(Requirement r);
+    TenderingCriterionPropertyType extractTenderingCriterionPropertyType(Requirement rq);
 
     default TenderingCriterionType extractTenderingCriterion(Criterion c) {
 
@@ -63,7 +65,6 @@ public interface SchemaExtractorV2 {
         lt.getTitle().get(0).setValue(lr.getTitle());
 
         return lt;
-
     }
 
     // This is RequirementGroup equivalent in schema version 2.0.x
@@ -329,11 +330,11 @@ public interface SchemaExtractorV2 {
         // mod 2018-01-16: changed schemeID to "ISO/IEC 9834-8:2008 - 4UUID" according to ESPD 1.0.2 EDM
         // remark: the DG GROW system uses "COM-GROW-TEMPORARY-ID", if no valid OJS number is entered
         //IDType reqGroupIDType = createCustomSchemeIDIDType(id, "COM-GROW-TEMPORARY-ID");
-        IDType reqGroupIDType = createCustomSchemeIDIDType(id, "ISO/IEC 9834-8:2008 - 4UUID");
-        reqGroupIDType.setSchemeAgencyID("EU-COM-GROW");
-        reqGroupIDType.setSchemeAgencyName("DG GROW (European Commission)");
-        reqGroupIDType.setSchemeVersionID("1.1");
-        return reqGroupIDType;
+        IDType idType = createCustomSchemeIDIDType(id, "ISO/IEC 9834-8:2008 - 4UUID");
+        idType.setSchemeAgencyID("EU-COM-GROW");
+        idType.setSchemeAgencyName("DG GROW (European Commission)");
+        idType.setSchemeVersionID("1.1");
+        return idType;
     }
 
     /* @TODO code has to be checked again */
@@ -410,10 +411,9 @@ public interface SchemaExtractorV2 {
     default UUIDType createISOIECUUIDType(String id) {
         UUIDType uuidType = new UUIDType();
         uuidType.setSchemeID("ISO/IEC 9834-8:2008 - 4UUID");
-        uuidType.setSchemeAgencyName("EU-COM-GROW");
+        // uuidType.setSchemeAgencyName("EU-COM-GROW");
         uuidType.setSchemeVersionID("2.0");
         uuidType.setSchemeAgencyID("EU-COM-GROW");
-
         uuidType.setValue(id);
         return uuidType;
     }
@@ -425,13 +425,13 @@ public interface SchemaExtractorV2 {
      *
      * @return
      */
-    default IDType createLocalIDType(String id) {
-        // FIXME schemeId value here may have to be changed (temporary value has been applied)
-        IDType localIDType = new IDType();
-        localIDType.setSchemeAgencyID("DGPE");
-        localIDType.setValue(id);
-        return localIDType;
-    }
+//    default IDType createLocalIDType(String id) {
+//        // FIXME schemeId value here may have to be changed (temporary value has been applied)
+//        IDType localIDType = new IDType();
+//        localIDType.setSchemeAgencyID("DGPE");
+//        localIDType.setValue(id);
+//        return localIDType;
+//    }
 
     default CriterionTypeCodeType createCriteriaTypeCode(String code) {
         CriterionTypeCodeType tc = new CriterionTypeCodeType();
@@ -449,10 +449,10 @@ public interface SchemaExtractorV2 {
     }
 
     default UBLVersionIDType createUBL22VersionIdType() {
-        UBLVersionIDType id = new UBLVersionIDType();
-        id.setSchemeAgencyID("OASIS-UBL-TC");
-        id.setValue("2.2");
-        return id;
+        UBLVersionIDType ublvIdType = new UBLVersionIDType();
+        ublvIdType.setSchemeAgencyID("OASIS-UBL-TC");
+        ublvIdType.setValue("2.2");
+        return ublvIdType;
     }
 
     default CustomizationIDType createCENBIICustomizationIdType(String id) {
@@ -541,6 +541,35 @@ public interface SchemaExtractorV2 {
         tCodeType.setListVersionID("2.0.2");
         tCodeType.setValue(code);
         return tCodeType;
+    }
+
+    /**
+     * Compulsory use of the code list QualificationApplicationType.
+     *
+     * @param code
+     * @return
+     */
+    default QualificationApplicationTypeCodeType createQualificationApplicationTypeCodeType(QualificationApplicationTypeEnum code) {
+        QualificationApplicationTypeCodeType qaTypeCode = new QualificationApplicationTypeCodeType();
+        qaTypeCode.setValue(code.name());
+        qaTypeCode.setListID("QualificationApplicationType");
+        qaTypeCode.setListAgencyID("EU-COM-GROW");
+        qaTypeCode.setListVersionID("2.0.2");
+        return qaTypeCode;
+    }
+
+    /**
+     * Compulsory use of the CodeList ProfileExecutionID.
+     *
+     * @param id
+     * @return
+     */
+    default ProfileExecutionIDType createProfileExecutionIDType(ProfileExecutionIDEnum id) {
+        ProfileExecutionIDType peIdType = new ProfileExecutionIDType();
+        peIdType.setSchemeAgencyID("EU-COM-GROW");
+        peIdType.setSchemeVersionID("2.0.2");
+        peIdType.setValue(id.getValue());
+        return peIdType;
     }
 
 }

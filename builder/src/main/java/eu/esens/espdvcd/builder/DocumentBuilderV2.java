@@ -45,7 +45,8 @@ public class DocumentBuilderV2 {
      * @return a JAXB QualificationApplicationRequestType instance from an ESPDRequest Model instance
      */
     private QualificationApplicationRequestType createXML(ESPDRequest req) {
-        QualificationApplicationRequestType reqType = finalize(SchemaFactory.withSchemaVersion2().ESPD_REQUEST
+        QualificationApplicationRequestType reqType = finalize(SchemaFactory
+                .withSchemaVersion2().ESPD_REQUEST
                 .extractQualificationApplicationRequestType(req));
         return reqType;
     }
@@ -55,8 +56,9 @@ public class DocumentBuilderV2 {
      * @return a JAXB QualificationApplicationResponseType instance from an ESPDResponse Model instance
      */
     protected QualificationApplicationResponseType createXML(ESPDResponse res) {
-        QualificationApplicationResponseType resType =
-                finalize(SchemaFactory.withSchemaVersion2().ESPD_RESPONSE.extractQualificationApplicationResponseType(res));
+        QualificationApplicationResponseType resType = finalize(SchemaFactory
+                .withSchemaVersion2().ESPD_RESPONSE
+                .extractQualificationApplicationResponseType(res));
         return resType;
     }
 
@@ -78,8 +80,7 @@ public class DocumentBuilderV2 {
 
 
         reqType.setProfileID(createCENBIIProfileIdType(getProfileID()));
-        // FIXME local id value here may have to be changed (temporary value has been applied)
-        reqType.setID(SchemaFactory.withSchemaVersion2().ESPD_REQUEST.createLocalIDType("ESPDREQ-DGPE-ad63141780"));
+        reqType.setID(SchemaFactory.withSchemaVersion2().ESPD_REQUEST.createISOIECIDType(UUID.randomUUID().toString()));
         reqType.setUUID(SchemaFactory.withSchemaVersion2().ESPD_REQUEST.createISOIECUUIDType(UUID.randomUUID().toString()));
 
         return reqType;
@@ -102,8 +103,7 @@ public class DocumentBuilderV2 {
         resType.getIssueTime().setValue(LocalTime.now());
 
         resType.setProfileID(createCENBIIProfileIdType(getProfileID()));
-        // FIXME local id value here may have to be changed (temporary value has been applied)
-        resType.setID(SchemaFactory.withSchemaVersion2().ESPD_REQUEST.createLocalIDType("ESPDREQ-DGPE-ad63141780"));
+        resType.setID(SchemaFactory.withSchemaVersion2().ESPD_RESPONSE.createISOIECIDType(UUID.randomUUID().toString()));
         resType.setUUID(SchemaFactory.withSchemaVersion2().ESPD_RESPONSE.createISOIECUUIDType(UUID.randomUUID().toString()));
 
         return resType;
@@ -142,11 +142,11 @@ public class DocumentBuilderV2 {
      * @return
      */
     private ProfileIDType createCENBIIProfileIdType(String id) {
-        ProfileIDType pid = new ProfileIDType();
-        pid.setSchemeAgencyID("CEN-BII");
-        pid.setSchemeVersionID("2.0");
-        pid.setValue(id);
-        return pid;
+        ProfileIDType pIdType = new ProfileIDType();
+        pIdType.setSchemeAgencyID("CEN-BII");
+        pIdType.setSchemeVersionID("2.0");
+        pIdType.setValue(id);
+        return pIdType;
     }
 
     protected String getProfileID() {

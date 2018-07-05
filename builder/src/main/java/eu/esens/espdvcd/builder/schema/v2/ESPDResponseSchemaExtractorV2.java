@@ -72,17 +72,12 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
             qarType.getAdditionalDocumentReference().add(extractESPDRequestDetails(modelResponse.getESPDRequestDetails()));
         }
 
-
         qarType.setUBLVersionID(createUBL22VersionIdType());
 
         qarType.setCustomizationID(createCENBIICustomizationIdType("urn:www.cenbii.eu:transaction:biitrdm092:ver3.0"));
         qarType.setVersionID(createVersionIDType("2018.01.01"));
 
-        qarType.setQualificationApplicationTypeCode(new QualificationApplicationTypeCodeType());
-        qarType.getQualificationApplicationTypeCode().setValue(QualificationApplicationTypeEnum.REGULATED.name());
-        qarType.getQualificationApplicationTypeCode().setListID("QualificationApplicationType");
-        qarType.getQualificationApplicationTypeCode().setListAgencyID("EU-COM-GROW");
-        qarType.getQualificationApplicationTypeCode().setListVersionID("2.0.2");
+        qarType.setQualificationApplicationTypeCode(createQualificationApplicationTypeCodeType(QualificationApplicationTypeEnum.REGULATED));
 
         qarType.setCopyIndicator(new CopyIndicatorType());
         qarType.getCopyIndicator().setValue(false);
@@ -338,16 +333,16 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
     }
 
     @Override
-    public TenderingCriterionPropertyType extractTenderingCriterionPropertyType(Requirement r) {
+    public TenderingCriterionPropertyType extractTenderingCriterionPropertyType(Requirement rq) {
         TenderingCriterionPropertyType req = new TenderingCriterionPropertyType();
 
-        req.setTypeCode(createTypeCodeType(r.getTypeCode().name()));
-        req.setValueDataTypeCode(createValueDataTypeCodeType(r.getResponseDataType().name()));
+        req.setTypeCode(createTypeCodeType(rq.getTypeCode().name()));
+        req.setValueDataTypeCode(createValueDataTypeCodeType(rq.getResponseDataType().name()));
 
         req.getDescription().add(new DescriptionType());
-        req.getDescription().get(0).setValue(r.getDescription());
+        req.getDescription().get(0).setValue(rq.getDescription());
 
-        req.setID(createCriteriaTaxonomyIDType(r.getID()));
+        req.setID(createCriteriaTaxonomyIDType(rq.getID()));
 
         return req;
     }

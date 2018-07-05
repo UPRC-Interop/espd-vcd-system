@@ -1,22 +1,60 @@
 package eu.esens.espdvcd.retriever.criteria;
 
+import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
+import eu.esens.espdvcd.schema.SchemaVersion;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
+
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class ExcelCriteriaExtractorTest {
 
+    private CriteriaExtractor excelCriteriaExtractor;
+    private CriteriaExtractor predefinedCriteriaExtractor;
+
     @Before
     public void setUp() {
+        excelCriteriaExtractor = new PredefinedExcelCriteriaExtractor();
+        predefinedCriteriaExtractor = new PredefinedESPDCriteriaExtractor(SchemaVersion.V1);
+    }
+
+    @Ignore
+    @Test
+    public void testV1PredefinedAndExcelPredefinedCriterionList() throws RetrieverException {
+
+        final Map<String, SelectableCriterion> fullExcelMap = excelCriteriaExtractor.getFullList()
+                .stream().collect(Collectors.toMap(SelectableCriterion::getID, Function.identity()));
+
+        final Map<String, SelectableCriterion> fullPredefinedV1Map = predefinedCriteriaExtractor.getFullList()
+                .stream().collect(Collectors.toMap(SelectableCriterion::getID, Function.identity()));
+
+        System.out.println("Exist in Criteria Taxonomy V2 -> Does Not Exist in Predefined V1\n");
+        for (String v1Id : fullPredefinedV1Map.keySet()) {
+
+            if (!fullExcelMap.containsKey(v1Id)) {
+                System.out.println("Criterion: " + v1Id + " TypeCode: " + fullPredefinedV1Map.get(v1Id).getTypeCode());
+            }
+        }
+
+        System.out.println("\n\nExist in Predefined V1 -> Does Not Exist in Criteria Taxonomy V2\n");
+        for (String excelId : fullExcelMap.keySet()) {
+
+            if (!fullPredefinedV1Map.containsKey(excelId)) {
+                System.out.println("Criterion: " + excelId + " TypeCode: " + fullExcelMap.get(excelId).getTypeCode());
+            }
+        }
 
     }
 
     @Test
     public void testReadFile() throws RetrieverException {
-        CriteriaExtractor extractor = new PredefinedExcelCriteriaExtractor();
 
-        extractor.getFullList().forEach(sc -> {
+        excelCriteriaExtractor.getFullList().forEach(sc -> {
             System.out.println("ID: " + sc.getID() + " Name: " + sc.getName() + " Desc: " + sc.getDescription() + " Element Code: " + sc.getTypeCode());
             System.out.println("Legislation: " + sc.getLegislationReference());
             sc.getRequirementGroups().forEach(rqg -> printRequirementGroup(rqg, 3));

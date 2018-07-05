@@ -1,5 +1,6 @@
 package eu.esens.espdvcd.builder.schema.v2;
 
+import eu.esens.espdvcd.codelist.enums.ProfileExecutionIDEnum;
 import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.requirement.Requirement;
@@ -8,7 +9,6 @@ import eu.espd.schema.v2.pre_award.commonaggregate.ProcurementProjectLotType;
 import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionPropertyType;
 import eu.espd.schema.v2.pre_award.commonbasic.*;
 import eu.espd.schema.v2.pre_award.qualificationapplicationrequest.QualificationApplicationRequestType;
-import eu.espd.schema.v2.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
 
 import java.util.stream.Collectors;
 
@@ -16,72 +16,64 @@ public class ESPDRequestSchemaExtractorV2 implements SchemaExtractorV2 {
 
     public QualificationApplicationRequestType extractQualificationApplicationRequestType(ESPDRequest req) {
 
-        QualificationApplicationRequestType reqType = new QualificationApplicationRequestType();
+        QualificationApplicationRequestType qarType = new QualificationApplicationRequestType();
 
         if (req.getCADetails().getProcurementProcedureFileReferenceNo() != null) {
-            reqType.setContractFolderID(new ContractFolderIDType());
-            reqType.getContractFolderID().setSchemeAgencyID("TeD");
-            reqType.getContractFolderID().setValue(req.getCADetails().getProcurementProcedureFileReferenceNo());
+            qarType.setContractFolderID(new ContractFolderIDType());
+            qarType.getContractFolderID().setSchemeAgencyID("TeD");
+            qarType.getContractFolderID().setValue(req.getCADetails().getProcurementProcedureFileReferenceNo());
         }
 
-        reqType.getAdditionalDocumentReference().add(extractCADetailsDocumentReference(req.getCADetails()));
+        qarType.getAdditionalDocumentReference().add(extractCADetailsDocumentReference(req.getCADetails()));
 
         DocumentReferenceType drt = extractCADetailsNationalDocumentReference(req.getCADetails());
         if (drt != null) {
-            reqType.getAdditionalDocumentReference().add(drt);
+            qarType.getAdditionalDocumentReference().add(drt);
         }
 
-        reqType.getContractingParty().add(extractContractingPartyType(req.getCADetails()));
-        reqType.getContractingParty().get(0).getParty().getServiceProviderParty().add(extractServiceProviderPartyType(req.getServiceProviderDetails()));
+        qarType.getContractingParty().add(extractContractingPartyType(req.getCADetails()));
+        qarType.getContractingParty().get(0).getParty().getServiceProviderParty().add(extractServiceProviderPartyType(req.getServiceProviderDetails()));
 
-        reqType.getTenderingCriterion().addAll(req.getFullCriterionList().stream()
+        qarType.getTenderingCriterion().addAll(req.getFullCriterionList().stream()
                 .filter(cr -> cr.isSelected())
                 .map(cr -> extractTenderingCriterion(cr))
                 .collect(Collectors.toList()));
 
-        reqType.setUBLVersionID(createUBL22VersionIdType());
-        reqType.setCustomizationID(createCENBIICustomizationIdType("urn:www.cenbii.eu:transaction:biitrdm070:ver3.0"));
+        qarType.setUBLVersionID(createUBL22VersionIdType());
+        qarType.setCustomizationID(createCENBIICustomizationIdType("urn:www.cenbii.eu:transaction:biitrdm070:ver3.0"));
         // FIXME: version id should be updated here
-        reqType.setVersionID(createVersionIDType("2018.01.01"));
-        reqType.setProfileExecutionID(new ProfileExecutionIDType());
-        reqType.getProfileExecutionID().setSchemeAgencyID("EU-COM-GROW");
-        reqType.getProfileExecutionID().setSchemeVersionID("2.0.2");
-        // FIXME (REGULATED / SELF-CONTAINED 2.0.1) Compulsory use of the CodeList ProfileExecutionID. Use the value "EU-COM-GROW" for th SchemeAgencyID attribute
-        reqType.getProfileExecutionID().setValue("ESPD-EDMv2.0.1-REGULATED");
-        // FIXME hardcoded value has to be replaced here
-        reqType.setQualificationApplicationTypeCode(new QualificationApplicationTypeCodeType());
-        reqType.getQualificationApplicationTypeCode().setValue(QualificationApplicationTypeEnum.REGULATED.name());
-        reqType.getQualificationApplicationTypeCode().setListID("QualificationApplicationType");
-        reqType.getQualificationApplicationTypeCode().setListAgencyID("EU-COM-GROW");
-        reqType.getQualificationApplicationTypeCode().setListVersionID("2.0.2");
+        qarType.setVersionID(createVersionIDType("2018.01.01"));
+        qarType.setProfileExecutionID(createProfileExecutionIDType(ProfileExecutionIDEnum.ESPD_EDM_V2_0_2_REGULATED));
+
+        qarType.setQualificationApplicationTypeCode(createQualificationApplicationTypeCodeType(QualificationApplicationTypeEnum.REGULATED));
 
         //Procurement Project Lot is always 0 in Request and not part of the UI
         ProcurementProjectLotType pplt = new ProcurementProjectLotType();
         pplt.setID(new IDType());
         pplt.getID().setValue("0");
         pplt.getID().setSchemeAgencyID("EU-COM-GROW");
-        reqType.getProcurementProjectLot().add(pplt);
+        qarType.getProcurementProjectLot().add(pplt);
 
-        reqType.setCopyIndicator(new CopyIndicatorType());
-        reqType.getCopyIndicator().setValue(false);
+        qarType.setCopyIndicator(new CopyIndicatorType());
+        qarType.getCopyIndicator().setValue(false);
 
-        return reqType;
+        return qarType;
     }
 
     @Override
-    public TenderingCriterionPropertyType extractTenderingCriterionPropertyType(Requirement r) {
+    public TenderingCriterionPropertyType extractTenderingCriterionPropertyType(Requirement rq) {
 
         TenderingCriterionPropertyType propertyType = new TenderingCriterionPropertyType();
 
         // tbr070-013
-        propertyType.setID(createCriteriaTaxonomyIDType(r.getID()));
+        propertyType.setID(createCriteriaTaxonomyIDType(rq.getID()));
         // tbr070-013
         propertyType.getDescription().add(new DescriptionType());
-        propertyType.getDescription().get(0).setValue(r.getDescription());
+        propertyType.getDescription().get(0).setValue(rq.getDescription());
         // tbr070-013
         // FIXME (SELF-CONTAINED 2.0.2) The Regulated ESPD documents do not specify REQUIREMENTS, only QUESTIONS. The SELF-CONTAINED version does
         propertyType.setTypeCode(new TypeCodeType());
-        propertyType.getTypeCode().setValue(r.getTypeCode().name());
+        propertyType.getTypeCode().setValue(rq.getTypeCode().name());
 
         propertyType.getTypeCode().setListID("CriterionElementType");
         propertyType.getTypeCode().setListAgencyID("EU-COM-GROW");
@@ -89,7 +81,7 @@ public class ESPDRequestSchemaExtractorV2 implements SchemaExtractorV2 {
 
         // tbr070-013
         propertyType.setValueDataTypeCode(new ValueDataTypeCodeType());
-        propertyType.getValueDataTypeCode().setValue(r.getResponseDataType().name());
+        propertyType.getValueDataTypeCode().setValue(rq.getResponseDataType().name());
         propertyType.getValueDataTypeCode().setListID("ResponseDataType");
         propertyType.getValueDataTypeCode().setListAgencyID("EU-COM-GROW");
         propertyType.getValueDataTypeCode().setListVersionID("2.0.2");

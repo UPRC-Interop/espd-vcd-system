@@ -1,26 +1,16 @@
 package eu.esens.espdvcd.builder.schema.v1;
 
-import eu.esens.espdvcd.model.CADetails;
-import eu.esens.espdvcd.model.Criterion;
-import eu.esens.espdvcd.model.EODetails;
-import eu.esens.espdvcd.model.LegislationReference;
-import eu.esens.espdvcd.model.ServiceProviderDetails;
+import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.CriterionType;
 import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.LegislationType;
 import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.RequirementGroupType;
 import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.RequirementType;
-//import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.CriterionType;
-//import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.LegislationType;
-//import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementGroupType;
-//import isa.names.specification.ubl.schema.xsd.ccv_commonaggregatecomponents_1.RequirementType;
-
-import java.util.stream.Collectors;
 import eu.espd.schema.v1.commonaggregatecomponents_2.*;
 import eu.espd.schema.v1.commonbasiccomponents_2.*;
-//import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.*;
-//import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.*;
+
+import java.util.stream.Collectors;
 
 public interface SchemaExtractorV1 {
 
@@ -142,7 +132,6 @@ public interface SchemaExtractorV1 {
         return dr;
     }
 
-
     default DocumentReferenceType extractCADetailsNationalDocumentReference(CADetails cd) {
 
         DocumentReferenceType dr = null;
@@ -162,7 +151,6 @@ public interface SchemaExtractorV1 {
         }
         return dr;
     }
-
 
     default ContractingPartyType extractContractingPartyType(CADetails cd) {
 
@@ -299,7 +287,6 @@ public interface SchemaExtractorV1 {
     }
 
     default IDType createDefaultIDType(String id) {
-
         IDType reqGroupIDType = new IDType();
         reqGroupIDType.setSchemeAgencyID("EU-COM-GROW");
         reqGroupIDType.setSchemeVersionID("1.0");
@@ -308,7 +295,6 @@ public interface SchemaExtractorV1 {
     }
 
     default VersionIDType createVersionIDType(String id) {
-
         VersionIDType versionID = new VersionIDType();
         versionID.setSchemeAgencyID("EU-COM-GROW");
         versionID.setValue(id);
@@ -326,10 +312,10 @@ public interface SchemaExtractorV1 {
     }
 
     default IDType createISOIECIDType(String id) {
-        IDType reqGroupIDType = createCustomSchemeIDIDType(id, "ISO/IEC 9834-8:2008 - 4UUID");
-        reqGroupIDType.setSchemeAgencyName("DG GROW (European Commission)");
-        reqGroupIDType.setSchemeVersionID("1.1");
-        return reqGroupIDType;
+        IDType idType = createCustomSchemeIDIDType(id, "ISO/IEC 9834-8:2008 - 4UUID");
+        idType.setSchemeAgencyName("DG GROW (European Commission)");
+        idType.setSchemeVersionID("1.1");
+        return idType;
     }
 
     default IDType createGROWTemporaryId(String id) {
