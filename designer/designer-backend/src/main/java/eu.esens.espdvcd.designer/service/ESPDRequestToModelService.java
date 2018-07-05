@@ -6,6 +6,7 @@ import eu.esens.espdvcd.builder.util.ArtefactUtils;
 import eu.esens.espdvcd.designer.exception.ValidationException;
 import eu.esens.espdvcd.designer.typeEnum.ArtefactType;
 import eu.esens.espdvcd.model.ESPDRequest;
+import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.model.RegulatedESPDRequest;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
@@ -38,8 +39,8 @@ public class ESPDRequestToModelService implements ESPDtoModelService {
 
     @Override
     public Object CreateModelFromXML(File XML) throws RetrieverException, BuilderException, FileNotFoundException, JAXBException, SAXException, ValidationException, IOException {
-        SchemaVersion artifactVersion = ArtefactUtils.findSchemaVersion(new FileInputStream(XML));
-        if (artifactVersion == SchemaVersion.V1){
+        SchemaVersion artefactVersion = ArtefactUtils.findSchemaVersion(new FileInputStream(XML));
+        if (artefactVersion == SchemaVersion.V1){
             criteriaService = new PredefinedCriteriaService(SchemaVersion.V1);
 
             ArtefactValidator schemaResult = schemaValidationService.validateESPDRequest(XML);
@@ -49,15 +50,23 @@ public class ESPDRequestToModelService implements ESPDtoModelService {
             ArtefactValidator schematronResult = schematronValidationService.validateESPDRequest(XML);
             if (!schematronResult.isValid())
                 throw new ValidationException("Schematron validation failed on the supplied xml document.", schematronResult.getValidationMessages());
-        }else if(artifactVersion == SchemaVersion.V2){
+        }else if(artefactVersion == SchemaVersion.V2){
             criteriaService = new PredefinedCriteriaService(SchemaVersion.V2);
         }else {
-            throw new ValidationException("Cannot find artifact version");
+            throw new ValidationException("Cannot find artefact version");
         }
 
         InputStream is = new FileInputStream(XML);
 
-        ESPDRequest request = BuilderFactory.getRegulatedModelBuilder().importFrom(is).createESPDRequest();
+        ESPDRequest request = null;
+        switch (artefactVersion){
+            case V1:
+                request = BuilderFactory.withEDMVersion1().getRegulatedModelBuilder().importFrom(is).createESPDResponse();
+                break;
+            case V2:
+                request = BuilderFactory.withEDMVersion2().getRegulatedModelBuilder().importFrom(is).createESPDResponse();
+                break;
+        }
         request.setCriterionList(criteriaService.getUnselectedCriteria(request.getFullCriterionList()));
 
         counter=0;

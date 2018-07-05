@@ -13,11 +13,7 @@ import eu.esens.espdvcd.validator.ArtefactValidator;
 import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBException;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -25,7 +21,7 @@ import java.util.logging.Logger;
 
 public class ESPDResponseToModelService implements ESPDtoModelService {
     private final ValidatorService schemaValidationService, schematronValidationService;
-    private int counter=0;
+    private int counter;
 
     public ESPDResponseToModelService() {
         schematronValidationService = new SchematronValidatorService();
@@ -37,7 +33,7 @@ public class ESPDResponseToModelService implements ESPDtoModelService {
         ArtefactValidator schemaResult, schematronResult;
         SchemaVersion artefactVersion = ArtefactUtils.findSchemaVersion(new FileInputStream(XML));
 
-        if(artefactVersion == SchemaVersion.V1){
+        if (artefactVersion == SchemaVersion.V1) {
             if (isESPDRequest(XML)) {
                 schemaResult = schemaValidationService.validateESPDRequest(XML);
                 schematronResult = schematronValidationService.validateESPDRequest(XML);
@@ -54,42 +50,48 @@ public class ESPDResponseToModelService implements ESPDtoModelService {
 
         InputStream is = new FileInputStream(XML);
 
-        ESPDResponse response = BuilderFactory.getRegulatedModelBuilder().importFrom(is).createESPDResponse();
-        counter=0;
+        ESPDResponse response = null;
+        switch (artefactVersion){
+            case V1:
+                response = BuilderFactory.withEDMVersion1().getRegulatedModelBuilder().importFrom(is).createESPDResponse();
+                break;
+            case V2:
+                response = BuilderFactory.withEDMVersion2().getRegulatedModelBuilder().importFrom(is).createESPDResponse();
+                break;
+        }
+        counter = 0;
         response.getFullCriterionList().forEach(cr -> {
             cr.setUUID(cr.getID());
             idFix(cr.getRequirementGroups());
         });
         is.close();
         //is.flush();
-        is=null;
+        is = null;
         return response;
     }
 
-    private void idFix(List<RequirementGroup> reqGroups){
+    private void idFix(List<RequirementGroup> reqGroups) {
         counter++;
-        for(RequirementGroup reqGroup : reqGroups){
-            reqGroup.setUUID(reqGroup.getID()+"-"+counter);
+        for (RequirementGroup reqGroup : reqGroups) {
+            reqGroup.setUUID(reqGroup.getID() + "-" + counter);
             idFix(reqGroup.getRequirementGroups());
             List<Requirement> reqs = reqGroup.getRequirements();
             reqs.forEach(req -> {
-                req.setUUID(req.getID()+"-"+counter);
+                req.setUUID(req.getID() + "-" + counter);
             });
         }
     }
 
     private boolean isESPDRequest(File Artefact) {
-        Scanner scanner = null;
-        try {
-            scanner = new Scanner(Artefact);
+        String line = "";
+        try (Scanner scanner = new Scanner(Artefact)) {
+            int linesToSkip = 2;
+            for (int i = 0; i < linesToSkip; i++) {
+                if (scanner.hasNextLine())
+                    line = scanner.nextLine();
+            }
         } catch (FileNotFoundException e) {
             Logger.getLogger(ModeltoESPDService.class.getName()).log(Level.SEVERE, e.getMessage(), e);
-        }
-        String line = "";
-        int linesToSkip = 2;
-        for (int i = 0; i < linesToSkip; i++) {
-            if (scanner.hasNextLine())
-                line = scanner.nextLine();
         }
         return line.trim().split("\\s+")[0].contains("ESPDRequest");
     }
