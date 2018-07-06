@@ -1,5 +1,7 @@
 package eu.esens.espdvcd.model;
 
+import eu.esens.espdvcd.codelist.enums.EORoleTypeEnum;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.validation.constraints.NotNull;
@@ -90,7 +92,7 @@ public class EODetails {
      * BusReqID: tbr92-004<br>
      * UBL syntax path: espd-cac:EconomicOperatorParty.SMEIndicator<br>
      */
-    private boolean smeIndicator;
+    private Boolean smeIndicator;
 
     /**
      * Postal address
@@ -149,6 +151,20 @@ public class EODetails {
     @NotNull
     private String procurementProjectLot;
 
+    /**
+     * EO Role Code
+     * <p>
+     * Identifies the role of the economic operator in the bid.
+     * Rule: Compulsory use of the Code List EORoleType.
+     * <p>
+     * Data type: Code<br>
+     * Cardinality: 1...1<br>
+     * InfReqID:
+     * BusReqID
+     * UBL syntax path: EconomicOperatorParty.EconomicOperatorRole.RoleCode<br>
+     */
+    private EORoleTypeEnum eoRole;
+
     public String getProcurementProjectLot() {
         return procurementProjectLot;
     }
@@ -181,11 +197,11 @@ public class EODetails {
         this.name = name;
     }
 
-    public boolean isSmeIndicator() {
+    public Boolean isSmeIndicator() {
         return smeIndicator;
     }
 
-    public void setSmeIndicator(boolean smeIndicator) {
+    public void setSmeIndicator(Boolean smeIndicator) {
         this.smeIndicator = smeIndicator;
     }
 
@@ -222,5 +238,13 @@ public class EODetails {
 
     public void setWebSiteURI(String webSiteURI) {
         this.webSiteURI = webSiteURI;
+    }
+
+    public EORoleTypeEnum getEoRole() {
+        return eoRole;
+    }
+
+    public void setEoRole(EORoleTypeEnum eoRole) {
+        this.eoRole = eoRole;
     }
 }

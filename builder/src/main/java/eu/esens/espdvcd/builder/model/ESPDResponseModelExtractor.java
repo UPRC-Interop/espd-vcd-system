@@ -1,5 +1,6 @@
 package eu.esens.espdvcd.builder.model;
 
+import eu.esens.espdvcd.codelist.enums.EORoleTypeEnum;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.model.requirement.Requirement;
@@ -24,9 +25,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class ESPDResponseModelExtractor implements ModelExtractor {
+
+    Logger logger = Logger.getLogger(ESPDResponseModelExtractor.class.getCanonicalName());
 
     /* package private constructor. Create only through factory */
     ESPDResponseModelExtractor() {
@@ -34,32 +39,22 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
 
     public ESPDResponse extractESPDResponse(ESPDResponseType resType) {
 
-        RegulatedESPDResponse res = new RegulatedESPDResponse();
+        RegulatedESPDResponse modelResponse = new RegulatedESPDResponse();
 
-        res.getFullCriterionList().addAll(resType.getCriterion().stream()
+        modelResponse.getFullCriterionList().addAll(resType.getCriterion().stream()
                 .map(c -> extractSelectableCriterion(c))
                 .collect(Collectors.toList()));
 
-        res.setCADetails(extractCADetails(resType.getContractingParty(),
+        modelResponse.setCADetails(extractCADetails(resType.getContractingParty(),
                 resType.getContractFolderID(),
                 resType.getAdditionalDocumentReference()));
 
-        res.setServiceProviderDetails(extractServiceProviderDetails(resType.getServiceProviderParty()));
+        modelResponse.setServiceProviderDetails(extractServiceProviderDetails(resType.getServiceProviderParty()));
 
         if (resType.getEconomicOperatorParty() != null) {
-            res.setEODetails(extractEODetails(resType.getEconomicOperatorParty(), resType.getProcurementProjectLot().get(0)));
+            modelResponse.setEODetails(extractEODetails(resType.getEconomicOperatorParty(), resType.getProcurementProjectLot().get(0)));
         } else {
-            EODetails eod = new EODetails();
-            eod.setContactingDetails(new ContactingDetails());
-            eod.setPostalAddress(new PostalAddress());
-            eod.setNaturalPersons(new ArrayList<>());
-
-            NaturalPerson np = new NaturalPerson();
-            np.setPostalAddress(new PostalAddress());
-            np.setContactDetails(new ContactingDetails());
-
-            eod.getNaturalPersons().add(np);
-            res.setEODetails(eod);
+            applyEODetailsStructure(modelResponse);
         }
 
         if (resType.getCustomizationID().getValue().equals("urn:www.cenbii.eu:transaction:biitrns092:ver3.0")) {
@@ -71,15 +66,15 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 Optional<eu.espd.schema.v1.commonaggregatecomponents_2.DocumentReferenceType> optRef = resType.getAdditionalDocumentReference().stream().
                         filter(r -> r.getDocumentTypeCode() != null && r.getDocumentTypeCode().getValue().
                                 equals("ESPD_REQUEST")).findFirst();
-                optRef.ifPresent(documentReferenceType -> res.setESPDRequestDetails(extractESPDRequestDetails(documentReferenceType)));
+                optRef.ifPresent(documentReferenceType -> modelResponse.setESPDRequestDetails(extractESPDRequestDetails(documentReferenceType)));
             }
         } else {
             // else an ESPD request is assumed
-            res.setESPDRequestDetails(extractESPDRequestDetails(resType));
+            modelResponse.setESPDRequestDetails(extractESPDRequestDetails(resType));
         }
 
 
-        return res;
+        return modelResponse;
     }
 
     public ESPDResponse extractESPDResponse(QualificationApplicationResponseType qarType) {
@@ -90,6 +85,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 .map(c -> extractSelectableCriterion(c))
                 .collect(Collectors.toList()));
 
+        // Contracting Authority Details
         modelResponse.setCADetails(extractCADetails(qarType.getContractingParty(),
                 qarType.getContractFolderID(),
                 qarType.getAdditionalDocumentReference()));
@@ -102,21 +98,11 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
             modelResponse.setServiceProviderDetails(extractServiceProviderDetails(qarType.getContractingParty()));
         }
 
+        // Economic Operator Details
         if (!qarType.getEconomicOperatorParty().isEmpty()) {
-            // FIXME we assure 1 here
             modelResponse.setEODetails(extractEODetails(qarType.getEconomicOperatorParty().get(0), qarType.getProcurementProjectLot().get(0)));
         } else {
-            EODetails eod = new EODetails();
-            eod.setContactingDetails(new ContactingDetails());
-            eod.setPostalAddress(new PostalAddress());
-            eod.setNaturalPersons(new ArrayList<>());
-
-            NaturalPerson np = new NaturalPerson();
-            np.setPostalAddress(new PostalAddress());
-            np.setContactDetails(new ContactingDetails());
-
-            eod.getNaturalPersons().add(np);
-            modelResponse.setEODetails(eod);
+            applyEODetailsStructure(modelResponse);
         }
 
         // Create a Map with key -> ValidatedCriterionPropertyID , value -> TenderingCriterionResponseType in order to use it
@@ -159,6 +145,20 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
         }
 
         return modelResponse;
+    }
+
+    private void applyEODetailsStructure(RegulatedESPDResponse modelResponse) {
+        EODetails eod = new EODetails();
+        eod.setContactingDetails(new ContactingDetails());
+        eod.setPostalAddress(new PostalAddress());
+        eod.setNaturalPersons(new ArrayList<>());
+
+        NaturalPerson np = new NaturalPerson();
+        np.setPostalAddress(new PostalAddress());
+        np.setContactDetails(new ContactingDetails());
+
+        eod.getNaturalPersons().add(np);
+        modelResponse.setEODetails(eod);
     }
 
     protected List<Requirement> extractAllRequirements(RequirementGroup rg, List<Requirement> requirementList) {
@@ -733,92 +733,120 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
         return eoDetails;
     }
 
-    public EODetails extractEODetails(eu.espd.schema.v2.pre_award.commonaggregate.EconomicOperatorPartyType eop,
-                                      eu.espd.schema.v2.pre_award.commonaggregate.ProcurementProjectLotType pplt) {
+    public EODetails extractEODetails(eu.espd.schema.v2.pre_award.commonaggregate.EconomicOperatorPartyType eoPartyType,
+                                      eu.espd.schema.v2.pre_award.commonaggregate.ProcurementProjectLotType pplType) {
 
         final EODetails eoDetails = new EODetails();
 
-        if (eop != null) {
+        if (eoPartyType != null) {
 
-            if (eop.getQualifyingParty().get(0).getParty().getIndustryClassificationCode() != null) {
-                eoDetails.setSmeIndicator(isSMEIndicator(eop));
+            // (1) Path: .../cac:EconomicOperatorParty/cac:QualifyingParty
+//            if (!eoPartyType.getQualifyingParty().isEmpty()
+//                    && eoPartyType.getQualifyingParty().get(0).getParty() != null) {
+//
+//            }
+
+            // (2) Path: .../cac:EconomicOperatorParty/cac:EconomicOperatorRole
+            if (eoPartyType.getEconomicOperatorRole() != null) {
+
+                if (eoPartyType.getEconomicOperatorRole().getRoleCode() != null) {
+                    eoDetails.setEoRole(EORoleTypeEnum.valueOf(eoPartyType.getEconomicOperatorRole().getRoleCode().getValue()));
+                }
+
+                /*
+                 * FIXME Rule: Software applications should retrieve and reuse the description from the Code List EORoleType. There is no description in the referenced codelist
+                 */
+//                if (!eoPartyType.getEconomicOperatorRole().getRoleDescription().isEmpty()
+//                        && eoPartyType.getEconomicOperatorRole().getRoleDescription().get(0).getValue() != null) {
+//
+//                }
+
             }
 
-            if (eop.getParty() != null) {
-                if (!eop.getParty().getPartyName().isEmpty()
-                        && eop.getParty().getPartyName().get(0).getName() != null) {
-                    eoDetails.setName(eop.getParty().getPartyName().get(0).getName().getValue());
+            // (3) Path: .../cac:EconomicOperatorParty/cac:Party
+            if (eoPartyType.getParty() != null) {
+
+                if (!eoPartyType.getParty().getPartyName().isEmpty()
+                        && eoPartyType.getParty().getPartyName().get(0).getName() != null) {
+                    eoDetails.setName(eoPartyType.getParty().getPartyName().get(0).getName().getValue());
                 }
 
                 // only criterion is used for tenderer role - changed also in BIS
-                /*if (eop.getEconomicOperatorRoleCode() != null) {
-                    eoDetails.setRole(eop.getEconomicOperatorRoleCode().getValue());
+                /*if (eoPartyType.getEconomicOperatorRoleCode() != null) {
+                    eoDetails.setRole(eoPartyType.getEconomicOperatorRoleCode().getValue());
                 }*/
 
-                if (eop.getParty().getWebsiteURI() != null) {
-                    eoDetails.setWebSiteURI(eop.getParty().getWebsiteURI().getValue());
+                if (eoPartyType.getParty().getIndustryClassificationCode() != null
+                        && eoPartyType.getParty().getIndustryClassificationCode().getValue() != null) {
+                    eoDetails.setSmeIndicator(isSME(eoPartyType.getParty().getIndustryClassificationCode().getValue()));
                 }
 
-                if (eop.getParty().getEndpointID() != null) {
-                    eoDetails.setElectronicAddressID(eop.getParty().getEndpointID().getValue());
+                if (eoPartyType.getParty().getWebsiteURI() != null) {
+                    eoDetails.setWebSiteURI(eoPartyType.getParty().getWebsiteURI().getValue());
                 }
 
-                if (!eop.getParty().getPartyIdentification().isEmpty()
-                        && eop.getParty().getPartyIdentification().get(0).getID() != null) {
-                    eoDetails.setID(eop.getParty().getPartyIdentification().get(0).getID().getValue());
+                if (eoPartyType.getParty().getEndpointID() != null) {
+                    eoDetails.setElectronicAddressID(eoPartyType.getParty().getEndpointID().getValue());
                 }
 
-                if (eop.getParty().getPostalAddress() != null) {
+                if (!eoPartyType.getParty().getPartyIdentification().isEmpty()
+                        && eoPartyType.getParty().getPartyIdentification().get(0).getID() != null) {
+                    eoDetails.setID(eoPartyType.getParty().getPartyIdentification().get(0).getID().getValue());
+                }
+
+                if (eoPartyType.getParty().getPostalAddress() != null) {
+
                     PostalAddress eoAddress = new PostalAddress();
 
-                    if (eop.getParty().getPostalAddress().getStreetName() != null) {
-                        eoAddress.setAddressLine1(eop.getParty().getPostalAddress().getStreetName().getValue());
+                    if (eoPartyType.getParty().getPostalAddress().getStreetName() != null) {
+                        eoAddress.setAddressLine1(eoPartyType.getParty().getPostalAddress().getStreetName().getValue());
                     }
 
                     // read post code from cbc:PostalZone...
-                    if (eop.getParty().getPostalAddress().getPostalZone() != null) {
-                        eoAddress.setPostCode(eop.getParty().getPostalAddress().getPostalZone().getValue());
+                    if (eoPartyType.getParty().getPostalAddress().getPostalZone() != null) {
+                        eoAddress.setPostCode(eoPartyType.getParty().getPostalAddress().getPostalZone().getValue());
                     }
                     // ...if not available, try cbc:Postbox (for backwards compatibility)
-                    else if (eop.getParty().getPostalAddress().getPostbox() != null) {
-                        eoAddress.setPostCode(eop.getParty().getPostalAddress().getPostbox().getValue());
+                    else if (eoPartyType.getParty().getPostalAddress().getPostbox() != null) {
+                        eoAddress.setPostCode(eoPartyType.getParty().getPostalAddress().getPostbox().getValue());
                     }
 
-                    if (eop.getParty().getPostalAddress().getCityName() != null) {
-                        eoAddress.setCity(eop.getParty().getPostalAddress().getCityName().getValue());
+                    if (eoPartyType.getParty().getPostalAddress().getCityName() != null) {
+                        eoAddress.setCity(eoPartyType.getParty().getPostalAddress().getCityName().getValue());
                     }
 
-                    if (eop.getParty().getPostalAddress().getCountry() != null
-                            && eop.getParty().getPostalAddress().getCountry().getIdentificationCode() != null) {
-                        eoAddress.setCountryCode(eop.getParty().getPostalAddress().getCountry().getIdentificationCode().getValue());
+                    if (eoPartyType.getParty().getPostalAddress().getCountry() != null
+                            && eoPartyType.getParty().getPostalAddress().getCountry().getIdentificationCode() != null) {
+                        eoAddress.setCountryCode(eoPartyType.getParty().getPostalAddress().getCountry().getIdentificationCode().getValue());
                     }
 
                     eoDetails.setPostalAddress(eoAddress);
 
-                    if (eop.getParty().getContact() != null) {
+                    if (eoPartyType.getParty().getContact() != null) {
                         eoDetails.setContactingDetails(new ContactingDetails());
-                        if (eop.getParty().getContact().getName() != null) {
-                            eoDetails.getContactingDetails().setContactPointName(eop.getParty().getContact().getName().getValue());
+                        if (eoPartyType.getParty().getContact().getName() != null) {
+                            eoDetails.getContactingDetails().setContactPointName(eoPartyType.getParty().getContact().getName().getValue());
                         }
 
-                        if (eop.getParty().getContact().getElectronicMail() != null) {
-                            eoDetails.getContactingDetails().setEmailAddress(eop.getParty().getContact().getElectronicMail().getValue());
+                        if (eoPartyType.getParty().getContact().getElectronicMail() != null) {
+                            eoDetails.getContactingDetails().setEmailAddress(eoPartyType.getParty().getContact().getElectronicMail().getValue());
                         }
 
-                        if (eop.getParty().getContact().getTelephone() != null) {
-                            eoDetails.getContactingDetails().setTelephoneNumber(eop.getParty().getContact().getTelephone().getValue());
+                        if (eoPartyType.getParty().getContact().getTelephone() != null) {
+                            eoDetails.getContactingDetails().setTelephoneNumber(eoPartyType.getParty().getContact().getTelephone().getValue());
                         }
 
-                        if (eop.getParty().getContact().getTelefax() != null) {
-                            eoDetails.getContactingDetails().setFaxNumber(eop.getParty().getContact().getTelefax().getValue());
+                        if (eoPartyType.getParty().getContact().getTelefax() != null) {
+                            eoDetails.getContactingDetails().setFaxNumber(eoPartyType.getParty().getContact().getTelefax().getValue());
                         }
                     }
 
                 }
             }
 
-            if (!eop.getParty().getPowerOfAttorney().isEmpty()) {
-                eop.getParty().getPowerOfAttorney().forEach(poa -> {
+            if (!eoPartyType.getParty().getPowerOfAttorney().isEmpty()) {
+
+                eoPartyType.getParty().getPowerOfAttorney().forEach(poa -> {
                     NaturalPerson np = new NaturalPerson();
                     /* We assume only one. We arbitrarily fetch the first one from the list */
 
@@ -826,12 +854,10 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                         np.setRole(poa.getDescription().get(0).getValue());
                     }
 
-
-
                     /* in ESPD the only look for the person in agent party in power of attorney */
-                    if (eop.getParty().getPowerOfAttorney().get(0).getAgentParty() != null
-                            && !eop.getParty().getPowerOfAttorney().get(0).getAgentParty().getPerson().isEmpty()) {
-                        eu.espd.schema.v2.pre_award.commonaggregate.PersonType pt = eop.getParty().getPowerOfAttorney().get(0).getAgentParty().getPerson().get(0);
+                    if (eoPartyType.getParty().getPowerOfAttorney().get(0).getAgentParty() != null
+                            && !eoPartyType.getParty().getPowerOfAttorney().get(0).getAgentParty().getPerson().isEmpty()) {
+                        eu.espd.schema.v2.pre_award.commonaggregate.PersonType pt = eoPartyType.getParty().getPowerOfAttorney().get(0).getAgentParty().getPerson().get(0);
 
                         if (pt.getFirstName() != null) {
                             np.setFirstName(pt.getFirstName().getValue());
@@ -896,16 +922,22 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                     eoDetails.getNaturalPersons().add(np);
                 });
             } else {
-                eoDetails.getNaturalPersons().add(new NaturalPerson());
+                NaturalPerson np = new NaturalPerson();
+                np.setPostalAddress(new PostalAddress());
+                np.getPostalAddress().setCountryCode("NO");
+                eoDetails.getNaturalPersons().add(np);
             }
         } else {
             eoDetails.setNaturalPersons(new ArrayList<>());
-            eoDetails.getNaturalPersons().add(new NaturalPerson());
+            NaturalPerson np = new NaturalPerson();
+            np.setPostalAddress(new PostalAddress());
+            np.getPostalAddress().setCountryCode("NO");
+            eoDetails.getNaturalPersons().add(np);
         }
 
         // Procurement Project Lot
-        if (pplt != null && pplt.getID() != null) {
-            eoDetails.setProcurementProjectLot(pplt.getID().getValue());
+        if (pplType != null && pplType.getID() != null) {
+            eoDetails.setProcurementProjectLot(pplType.getID().getValue());
         }
 
         return eoDetails;
@@ -947,8 +979,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
      * @param drt
      * @return
      */
-    private ESPDRequestDetails extractESPDRequestDetails
-    (eu.espd.schema.v2.pre_award.commonaggregate.DocumentReferenceType drt) {
+    private ESPDRequestDetails extractESPDRequestDetails (eu.espd.schema.v2.pre_award.commonaggregate.DocumentReferenceType drt) {
         ESPDRequestDetails erd = new ESPDRequestDetails();
 
         if (drt.getID() != null) {

@@ -22,6 +22,7 @@ import eu.espd.schema.v1.commonbasiccomponents_2.ContractFolderIDType;
 import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionPropertyGroupType;
 import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionPropertyType;
 import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionType;
+import eu.espd.schema.v2.pre_award.commonbasic.IndustryClassificationCodeType;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -541,10 +542,9 @@ public interface ModelExtractor {
         return r;
     }
 
-    default boolean isSMEIndicator(eu.espd.schema.v2.pre_award.commonaggregate.EconomicOperatorPartyType eop) {
+    default boolean isSME(String icc) {
         boolean isSME = false;
-        EOIndustryClassificationCodeEnum code = EOIndustryClassificationCodeEnum.valueOf(eop.getQualifyingParty()
-                .get(0).getParty().getIndustryClassificationCode().getValue());
+        EOIndustryClassificationCodeEnum code = EOIndustryClassificationCodeEnum.valueOf(icc);
         if (code != EOIndustryClassificationCodeEnum.LARGE) {
             isSME = true;
         }

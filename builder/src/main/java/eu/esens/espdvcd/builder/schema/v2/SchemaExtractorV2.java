@@ -395,7 +395,7 @@ public interface SchemaExtractorV2 {
     default IDType createISOIECIDType(String id) {
         IDType idType = createCustomSchemeIDIDType(id, "ISO/IEC 9834-8:2008 - 4UUID");
         idType.setSchemeAgencyName("DG GROW (European Commission)");
-        idType.setSchemeVersionID("2.0");
+        idType.setSchemeVersionID("1.1");
         return idType;
     }
 
@@ -517,12 +517,12 @@ public interface SchemaExtractorV2 {
     }
 
     default IndustryClassificationCodeType createIndustryClassificationCodeType(String code) {
-        IndustryClassificationCodeType icct = new IndustryClassificationCodeType();
-        icct.setListID("EOIndustryClassificationCode");
-        icct.setListAgencyID("EU-COM-GROW");
-        icct.setListVersionID("2.0.2");
-        icct.setValue(code);
-        return icct;
+        IndustryClassificationCodeType icCodeType = new IndustryClassificationCodeType();
+        icCodeType.setListID("EOIndustryClassificationCode");
+        icCodeType.setListAgencyID("EU-COM-GROW");
+        icCodeType.setListVersionID("2.0.2");
+        icCodeType.setValue(code);
+        return icCodeType;
     }
 
     default ValueDataTypeCodeType createValueDataTypeCodeType(String code) {

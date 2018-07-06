@@ -1,6 +1,8 @@
 package eu.esens.espdvcd.builder.schema.v2;
 
 import eu.esens.espdvcd.codelist.CodelistsV2;
+import eu.esens.espdvcd.codelist.enums.EOIndustryClassificationCodeEnum;
+import eu.esens.espdvcd.codelist.enums.ProfileExecutionIDEnum;
 import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.EODetails;
@@ -51,7 +53,6 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
         qarType.getContractingParty().add(extractContractingPartyType(modelResponse.getCADetails()));
         qarType.getProcurementProjectLot().add(extractProcurementProjectLot(modelResponse.getEODetails()));
 
-
         qarType.getContractingParty().get(0).getParty().getServiceProviderParty()
                 .add(extractServiceProviderPartyType(modelResponse.getServiceProviderDetails()));
 
@@ -73,14 +74,13 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
         }
 
         qarType.setUBLVersionID(createUBL22VersionIdType());
-
         qarType.setCustomizationID(createCENBIICustomizationIdType("urn:www.cenbii.eu:transaction:biitrdm092:ver3.0"));
         qarType.setVersionID(createVersionIDType("2018.01.01"));
-
+        qarType.setProfileExecutionID(createProfileExecutionIDType(ProfileExecutionIDEnum.ESPD_EDM_V2_0_2_REGULATED));
         qarType.setQualificationApplicationTypeCode(createQualificationApplicationTypeCodeType(QualificationApplicationTypeEnum.REGULATED));
-
         qarType.setCopyIndicator(new CopyIndicatorType());
         qarType.getCopyIndicator().setValue(false);
+
         return qarType;
     }
 
@@ -188,17 +188,14 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
 
         EconomicOperatorPartyType eoPartyType = new EconomicOperatorPartyType();
         eoPartyType.getQualifyingParty().add(new QualifyingPartyType());
-        String icc = eod.isSmeIndicator() ? "SME" : "LARGE";
-
         eoPartyType.getQualifyingParty().get(0).setParty(new PartyType());
-        eoPartyType.getQualifyingParty().get(0).getParty()
-                .setIndustryClassificationCode(createIndustryClassificationCodeType(
-                        CodelistsV2.EOIndustryClassification.getValueForId(icc)));
-
         eoPartyType.setParty(new PartyType());
 
-        /* FIXME: VALUE MAY NEED REFACTORING HERE */
-        eoPartyType.getParty().setIndustryClassificationCode(createIndustryClassificationCodeType(icc));
+        if (eod.isSmeIndicator() != null) {
+            String icc = eod.isSmeIndicator() ? EOIndustryClassificationCodeEnum.SME.name()
+                    : EOIndustryClassificationCodeEnum.LARGE.name();
+            eoPartyType.getParty().setIndustryClassificationCode(createIndustryClassificationCodeType(icc));
+        }
 
         if (eod.getID() != null) {
             PartyIdentificationType pit = new PartyIdentificationType();
@@ -271,16 +268,16 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
             poa.getDescription().add(new DescriptionType());
             poa.getDescription().get(0).setValue(np.getRole());
 
-            PartyType apt = new PartyType();
-            PersonType pt = new PersonType();
-            pt.setFirstName(new FirstNameType());
-            pt.getFirstName().setValue(np.getFirstName());
+            PartyType agentPartyType = new PartyType();
+            PersonType personType = new PersonType();
+            personType.setFirstName(new FirstNameType());
+            personType.getFirstName().setValue(np.getFirstName());
 
-            pt.setFamilyName(new FamilyNameType());
-            pt.getFamilyName().setValue(np.getFamilyName());
+            personType.setFamilyName(new FamilyNameType());
+            personType.getFamilyName().setValue(np.getFamilyName());
             if (np.getBirthDate() != null) {
                 try {
-                    pt.setBirthDate(new BirthDateType());
+                    personType.setBirthDate(new BirthDateType());
 
                     XMLGregorianCalendar xcal = DatatypeFactory.newInstance()
                             .newXMLGregorianCalendarDate(
@@ -288,44 +285,44 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
                                     np.getBirthDate().getMonthValue(),
                                     np.getBirthDate().getDayOfMonth(),
                                     DatatypeConstants.FIELD_UNDEFINED);
-                    pt.getBirthDate().setValue(xcal.toGregorianCalendar().toZonedDateTime().toLocalDate());
+                    personType.getBirthDate().setValue(xcal.toGregorianCalendar().toZonedDateTime().toLocalDate());
                 } catch (DatatypeConfigurationException ex) {
                     log.error("Could not create XML Date Object", ex);
                 }
             }
 
-            pt.setBirthplaceName(new BirthplaceNameType());
-            pt.getBirthplaceName().setValue(np.getBirthPlace());
+            personType.setBirthplaceName(new BirthplaceNameType());
+            personType.getBirthplaceName().setValue(np.getBirthPlace());
 
             if (np.getContactDetails() != null) {
 
-                pt.setContact(new ContactType());
-                pt.getContact().setTelephone(new TelephoneType());
-                pt.getContact().getTelephone().setValue(np.getContactDetails().getTelephoneNumber());
+                personType.setContact(new ContactType());
+                personType.getContact().setTelephone(new TelephoneType());
+                personType.getContact().getTelephone().setValue(np.getContactDetails().getTelephoneNumber());
 
-                pt.getContact().setElectronicMail(new ElectronicMailType());
-                pt.getContact().getElectronicMail().setValue(np.getContactDetails().getEmailAddress());
+                personType.getContact().setElectronicMail(new ElectronicMailType());
+                personType.getContact().getElectronicMail().setValue(np.getContactDetails().getEmailAddress());
             }
 
             if (np.getPostalAddress() != null) {
 
-                pt.setResidenceAddress(new AddressType());
+                personType.setResidenceAddress(new AddressType());
 
-                pt.getResidenceAddress().setPostalZone(new PostalZoneType());
-                pt.getResidenceAddress().getPostalZone().setValue(np.getPostalAddress().getPostCode());
+                personType.getResidenceAddress().setPostalZone(new PostalZoneType());
+                personType.getResidenceAddress().getPostalZone().setValue(np.getPostalAddress().getPostCode());
 
-                pt.getResidenceAddress().setStreetName(new StreetNameType());
-                pt.getResidenceAddress().getStreetName().setValue(np.getPostalAddress().getAddressLine1());
+                personType.getResidenceAddress().setStreetName(new StreetNameType());
+                personType.getResidenceAddress().getStreetName().setValue(np.getPostalAddress().getAddressLine1());
 
-                pt.getResidenceAddress().setCityName(new CityNameType());
-                pt.getResidenceAddress().getCityName().setValue(np.getPostalAddress().getCity());
+                personType.getResidenceAddress().setCityName(new CityNameType());
+                personType.getResidenceAddress().getCityName().setValue(np.getPostalAddress().getCity());
 
-                pt.getResidenceAddress().setCountry(new CountryType());
-                pt.getResidenceAddress().getCountry().setIdentificationCode(createISOCountryIdCodeType(np.getPostalAddress().getCountryCode()));
+                personType.getResidenceAddress().setCountry(new CountryType());
+                personType.getResidenceAddress().getCountry().setIdentificationCode(createISOCountryIdCodeType(np.getPostalAddress().getCountryCode()));
             }
 
-            apt.getPerson().add(pt);
-            poa.setAgentParty(apt);
+            agentPartyType.getPerson().add(personType);
+            poa.setAgentParty(agentPartyType);
 
             eoPartyType.getParty().getPowerOfAttorney().add(poa);
         });

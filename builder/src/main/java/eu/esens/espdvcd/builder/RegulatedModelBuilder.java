@@ -189,6 +189,7 @@ public abstract class RegulatedModelBuilder implements ModelBuilder {
         if (res.getCADetails() == null) {
             res.setCADetails(createDefaultCADetails());
         }
+
         if (res.getEODetails() == null) {
             res.setEODetails(createDefaultEODetails());
         }

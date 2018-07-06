@@ -178,7 +178,8 @@ public class BuilderESPDTest {
                 .importFrom(BuilderESPDTest.class.getResourceAsStream("/REGULATED-ESPD-Response_2.0.2.xml"))
                 .createESPDResponse();
 
-        System.out.println(BuilderFactory.withEDMVersion2().getDocumentBuilderFor(espdResponse).theXML);
+        XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.withEDMVersion2().getDocumentBuilderFor(espdResponse);
+        System.out.println(xmlDocumentBuilderV2.theXML);
     }
 
 }
