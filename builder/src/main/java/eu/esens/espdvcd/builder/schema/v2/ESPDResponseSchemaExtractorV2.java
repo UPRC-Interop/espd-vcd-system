@@ -197,6 +197,16 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
             eoPartyType.getParty().setIndustryClassificationCode(createIndustryClassificationCodeType(icc));
         }
 
+        if (eod.getEoRole() != null) {
+            eoPartyType.setEconomicOperatorRole(new EconomicOperatorRoleType());
+            eoPartyType.getEconomicOperatorRole().setRoleCode(new RoleCodeType());
+            eoPartyType.getEconomicOperatorRole().getRoleCode().setListID("EORoleType");
+            eoPartyType.getEconomicOperatorRole().getRoleCode().setListAgencyName("DG GROW (European Commission)");
+            eoPartyType.getEconomicOperatorRole().getRoleCode().setListAgencyID("EU-COM-GROW");
+            eoPartyType.getEconomicOperatorRole().getRoleCode().setListVersionID("2.0.2");
+            eoPartyType.getEconomicOperatorRole().getRoleCode().setValue(eod.getEoRole().name());
+        }
+
         if (eod.getID() != null) {
             PartyIdentificationType pit = new PartyIdentificationType();
             pit.setID(new IDType());

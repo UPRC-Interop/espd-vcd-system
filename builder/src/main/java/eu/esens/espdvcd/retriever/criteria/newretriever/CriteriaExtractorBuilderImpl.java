@@ -7,20 +7,41 @@ import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CriteriaExtractorImpl implements CriteriaExtractor {
+public class CriteriaExtractorBuilderImpl implements CriteriaExtractorBuilder, CriteriaExtractor {
 
     private CriteriaResource cResource;
     private LegislationResource lResource;
     private RequirementGroupResource rgResource;
 
-    private CriteriaExtractorImpl(Builder b) {
-        this.cResource = b.cResource;
-        this.lResource = b.lResource;
-        this.rgResource = b.rgResource;
+    public CriteriaExtractorBuilderImpl() {
+
     }
 
     @Override
-    public List<SelectableCriterion> getFullList() throws RetrieverException {
+    public CriteriaExtractorBuilder withCriteriaResource(CriteriaResource resource) {
+        this.cResource = resource;
+        return CriteriaExtractorBuilderImpl.this;
+    }
+
+    @Override
+    public CriteriaExtractorBuilder withLegislationResource(LegislationResource resource) {
+        this.lResource = resource;
+        return CriteriaExtractorBuilderImpl.this;
+    }
+
+    @Override
+    public CriteriaExtractorBuilder withRequirementGroupsResource(RequirementGroupResource resource) {
+        this.rgResource = resource;
+        return CriteriaExtractorBuilderImpl.this;
+    }
+
+    @Override
+    public CriteriaExtractor build() {
+        return CriteriaExtractorBuilderImpl.this;
+    }
+
+    @Override
+    public List<SelectableCriterion> getFullList() {
         return cResource.getCriterionList().stream()
                 .map(sc -> {
                     sc.setLegislationReference(lResource.getLegislationForCriterion(sc.getID()));
@@ -43,35 +64,7 @@ public class CriteriaExtractorImpl implements CriteriaExtractor {
         return null;
     }
 
-    public static class Builder {
 
-        private CriteriaResource cResource;
-        private LegislationResource lResource;
-        private RequirementGroupResource rgResource;
 
-        public Builder() {
-
-        }
-
-        public Builder withCriterionResource(CriteriaResource resource) {
-            this.cResource = resource;
-            return this;
-        }
-
-        public Builder withLegislationResource(LegislationResource resource) {
-            this.lResource = resource;
-            return this;
-        }
-
-        public Builder withRequirementGroupResource(RequirementGroupResource resource) {
-            this.rgResource = resource;
-            return this;
-        }
-
-        public CriteriaExtractorImpl build() {
-            return new CriteriaExtractorImpl(this);
-        }
-
-    }
 
 }

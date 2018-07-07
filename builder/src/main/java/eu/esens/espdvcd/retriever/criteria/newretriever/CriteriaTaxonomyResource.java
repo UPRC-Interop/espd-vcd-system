@@ -14,7 +14,7 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ExcelResource implements CriteriaResource, RequirementGroupResource {
+public class CriteriaTaxonomyResource implements CriteriaResource, RequirementGroupResource {
 
     private static final String CRITERIA_TAXONOMY_RESOURCE = "/templates/v2_regulated/ESPD-CriteriaTaxonomy-REGULATED-V2.0.2.xlsx";
     private List<SelectableCriterion> criterionList;
@@ -26,12 +26,12 @@ public class ExcelResource implements CriteriaResource, RequirementGroupResource
 
     private Map<String, List<RequirementGroup>> rgMap;
 
-    public ExcelResource() {
+    public CriteriaTaxonomyResource() {
         rgMap = new HashMap<>();
 
         try {
 
-            Workbook workbook = new XSSFWorkbook(ExcelResource.class.getResourceAsStream(CRITERIA_TAXONOMY_RESOURCE));
+            Workbook workbook = new XSSFWorkbook(CriteriaTaxonomyResource.class.getResourceAsStream(CRITERIA_TAXONOMY_RESOURCE));
             criterionList = new ArrayList<>(65);
             Sheet first = workbook.getSheetAt(0);
             workbook.forEach(sheet -> criterionList.addAll(readDataSheet(sheet)));
@@ -40,7 +40,7 @@ public class ExcelResource implements CriteriaResource, RequirementGroupResource
             criterionList.forEach(sc -> rgMap.put(sc.getID(), sc.getRequirementGroups()));
 
         } catch (IOException e) {
-            Logger.getLogger(ExcelResource.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(CriteriaTaxonomyResource.class.getName()).log(Level.SEVERE, null, e);
         }
 
     }

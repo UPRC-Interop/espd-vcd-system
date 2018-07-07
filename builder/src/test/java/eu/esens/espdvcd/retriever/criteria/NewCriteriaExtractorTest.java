@@ -1,7 +1,7 @@
 package eu.esens.espdvcd.retriever.criteria;
 
-import eu.esens.espdvcd.retriever.criteria.newretriever.CriteriaExtractorImpl;
-import eu.esens.espdvcd.retriever.criteria.newretriever.ExcelResource;
+import eu.esens.espdvcd.retriever.criteria.newretriever.CriteriaExtractorBuilderImpl;
+import eu.esens.espdvcd.retriever.criteria.newretriever.CriteriaTaxonomyResource;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,12 +15,12 @@ public class NewCriteriaExtractorTest {
     @Test
     public void testNewCriteriaExtractorBuilder() throws Exception {
 
-        ExcelResource resource = new ExcelResource();
+        CriteriaTaxonomyResource taxonomyResource = new CriteriaTaxonomyResource();
 
-        CriteriaExtractorImpl extractor = new CriteriaExtractorImpl.Builder()
-                .withCriterionResource(resource)
+        CriteriaExtractor extractor = new CriteriaExtractorBuilderImpl()
+                .withCriteriaResource(taxonomyResource)
                 .withLegislationResource(null)
-                .withRequirementGroupResource(resource)
+                .withRequirementGroupsResource(taxonomyResource)
                 .build();
 
         extractor.getFullList();
