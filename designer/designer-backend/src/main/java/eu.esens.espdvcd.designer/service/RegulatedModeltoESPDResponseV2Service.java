@@ -4,13 +4,13 @@ import eu.esens.espdvcd.builder.BuilderFactory;
 import eu.esens.espdvcd.designer.typeEnum.ArtefactType;
 import eu.esens.espdvcd.model.ESPDResponse;
 
-import java.io.*;
+import java.io.InputStream;
 
 public class RegulatedModeltoESPDResponseV2Service implements ModeltoESPDService {
     private final ArtefactType artefactType;
 
-    public RegulatedModeltoESPDResponseV2Service(){
-        artefactType=ArtefactType.RESPONSE;
+    public RegulatedModeltoESPDResponseV2Service() {
+        artefactType = ArtefactType.RESPONSE;
     }
 
     @Override

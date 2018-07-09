@@ -20,7 +20,7 @@ public class RegulatedModeltoESPDResponseV1Service implements ModeltoESPDService
         ESPDResponse response = (ESPDResponse) document;
 
         for (SelectableCriterion cr : response.getFullCriterionList()) {
-            if(cr == null){
+            if (cr == null) {
                 throw new ValidationException("Null criterions are not supported.");
             }
         }
@@ -32,7 +32,7 @@ public class RegulatedModeltoESPDResponseV1Service implements ModeltoESPDService
         ESPDResponse response = (ESPDResponse) document;
 
         for (SelectableCriterion cr : response.getFullCriterionList()) {
-            if(cr == null){
+            if (cr == null) {
                 throw new ValidationException("Null criterions are not supported.");
             }
         }

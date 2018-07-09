@@ -1,6 +1,5 @@
 package eu.esens.espdvcd.designer.service;
 
-import com.sun.javaws.exceptions.InvalidArgumentException;
 import eu.esens.espdvcd.builder.BuilderFactory;
 import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.builder.util.ArtefactUtils;
@@ -13,7 +12,6 @@ import eu.esens.espdvcd.schema.SchemaVersion;
 import eu.esens.espdvcd.validator.ArtefactValidator;
 import org.xml.sax.SAXException;
 
-import javax.validation.Validation;
 import javax.xml.bind.JAXBException;
 import java.io.*;
 import java.util.List;
@@ -53,7 +51,7 @@ public class ESPDResponseToModelService implements ESPDtoModelService {
         InputStream is = new FileInputStream(XML);
 
         ESPDResponse response = null;
-        switch (artefactVersion){
+        switch (artefactVersion) {
             case V1:
                 response = BuilderFactory.withEDMVersion1().getRegulatedModelBuilder().importFrom(is).createESPDResponse();
                 break;
