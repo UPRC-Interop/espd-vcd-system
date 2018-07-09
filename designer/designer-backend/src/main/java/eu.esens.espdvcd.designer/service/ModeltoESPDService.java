@@ -15,9 +15,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public interface ModeltoESPDService {
-    InputStream CreateXMLStreamFromModel(Object model);
+    InputStream CreateXMLStreamFromModel(Object model) throws ValidationException;
 
-    String CreateXMLStringFromModel(Object model);
+    String CreateXMLStringFromModel(Object model) throws ValidationException;
 
     ArtefactType getArtefactType();
 }

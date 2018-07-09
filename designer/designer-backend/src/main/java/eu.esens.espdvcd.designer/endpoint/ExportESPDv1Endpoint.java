@@ -94,7 +94,13 @@ public class ExportESPDv1Endpoint extends Endpoint {
                     rsp.header("Content-Disposition", "attachment; filename=espd-response.xml;");
                     break;
             }
-            return service.CreateXMLStreamFromModel(document);
+            try {
+                return service.CreateXMLStreamFromModel(document);
+            }catch (ValidationException e){
+                LOGGER.severe(e.getMessage());
+                rsp.status(406);
+                return "Found null criterion. Please check your input. Aborting export...";
+            }
         } else {
             LOGGER.severe("Got unexpected content-type: " + rq.contentType());
             rsp.status(406);
