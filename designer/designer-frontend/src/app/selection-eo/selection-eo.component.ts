@@ -16,8 +16,7 @@ import {Moment} from 'moment';
 })
 export class SelectionEoComponent implements OnInit {
   // selectionALLCriteria: SelectionCriteria[] = null;
-  isSatisfiedALL: boolean = true;
-  isAtoD: boolean = false;
+
 
   @Input() selectionACriteria: SelectionCriteria[];
   @Input() selectionBCriteria: SelectionCriteria[];
@@ -30,7 +29,8 @@ export class SelectionEoComponent implements OnInit {
   @Input() formC: FormGroup;
   @Input() formD: FormGroup;
   @Input() formALL: FormGroup;
-
+  isSatisfiedALL: boolean = true;
+  isAtoD: boolean = false;
 
   constructor(public dataService: DataService) {
   }
@@ -317,6 +317,7 @@ export class SelectionEoComponent implements OnInit {
     console.log(this.selectionBCriteria);
     console.log(this.selectionCCriteria);
     console.log(this.selectionDCriteria);
+    console.log(this.isSatisfiedALL);
     this.dataService.selectionEOSubmit(this.selectionACriteria,
       this.selectionBCriteria,
       this.selectionCCriteria,

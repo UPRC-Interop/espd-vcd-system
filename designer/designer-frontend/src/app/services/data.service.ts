@@ -437,6 +437,7 @@ export class DataService {
     this.selectionCCriteria = selectionCriteriaC;
     this.selectionDCriteria = selectionCriteriaD;
 
+    console.log(this.selectionALLCriteria);
     this.isSatisfiedALLeo = isSatisfiedALL;
 
   }
@@ -804,6 +805,14 @@ export class DataService {
         });
 
       /* ======================== predefined selection criteria ============================ */
+      this.getSelectionALLCriteria()
+        .then(res => {
+          this.selectionALLCriteria = res;
+          // console.log(res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
 
 
       this.getSelectionACriteria()
