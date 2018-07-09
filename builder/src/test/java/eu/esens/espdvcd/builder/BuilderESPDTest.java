@@ -182,4 +182,17 @@ public class BuilderESPDTest {
         System.out.println(xmlDocumentBuilderV2.theXML);
     }
 
+    @Test
+    public void createRegulatedResponseV2() throws Exception {
+
+
+        ESPDResponse espdResponse = BuilderFactory.withEDMVersion2()
+                .getRegulatedModelBuilder()
+                .addDefaultESPDCriteriaList()
+                .createESPDResponse();
+
+        XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.withEDMVersion2().getDocumentBuilderFor(espdResponse);
+        System.out.println(xmlDocumentBuilderV2.theXML);
+    }
+
 }
