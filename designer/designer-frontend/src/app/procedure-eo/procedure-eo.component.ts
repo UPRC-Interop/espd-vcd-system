@@ -173,27 +173,27 @@ export class ProcedureEoComponent implements OnInit {
 
               console.log(req.response.date);
               req.response.uuid = null;
-            } else if (req.responseDataType == 'PERCENTAGE') {
+            } else if (req.responseDataType === 'PERCENTAGE') {
               req.response.percentage = formValues[req.uuid.valueOf()];
               req.response.uuid = null;
-            } else if (req.responseDataType == 'PERIOD') {
+            } else if (req.responseDataType === 'PERIOD') {
               req.response.period = formValues[req.uuid.valueOf()];
               req.response.uuid = null;
-            } else if (req.responseDataType == 'CODE_COUNTRY') {
+            } else if (req.responseDataType === 'CODE_COUNTRY') {
               req.response.countryCode = formValues[req.uuid.valueOf()];
               req.response.uuid = null;
-            } else if (req.responseDataType == 'AMOUNT') {
+            } else if (req.responseDataType === 'AMOUNT') {
               req.response.amount = formValues[req.uuid.valueOf()];
               // const currencyid = req.uuid + 'currency';
               // req.response.currency = formValues[currencyid.valueOf()];
               req.response.uuid = null;
-            } else if (req.responseDataType == 'QUANTITY_INTEGER') {
+            } else if (req.responseDataType === 'QUANTITY_INTEGER') {
               req.response.quantity = formValues[req.uuid.valueOf()];
               req.response.uuid = null;
-            } else if (req.responseDataType == 'QUANTITY') {
+            } else if (req.responseDataType === 'QUANTITY') {
               req.response.quantity = formValues[req.uuid.valueOf()];
               req.response.uuid = null;
-            } else if (req.responseDataType == 'QUANTITY_YEAR') {
+            } else if (req.responseDataType === 'QUANTITY_YEAR') {
               req.response.year = formValues[req.uuid.valueOf()];
               req.response.uuid = null;
             }
