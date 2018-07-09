@@ -5,6 +5,7 @@ import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.builder.util.ArtefactUtils;
 import eu.esens.espdvcd.codelist.enums.ProfileExecutionIDEnum;
 import eu.esens.espdvcd.designer.deserialiser.RequirementDeserialiser;
+import eu.esens.espdvcd.designer.deserialiser.RequirementDeserialiserV2;
 import eu.esens.espdvcd.designer.exception.ValidationException;
 import eu.esens.espdvcd.designer.model.DocumentDetails;
 import eu.esens.espdvcd.designer.service.ESPDtoModelService;
@@ -39,10 +40,6 @@ public class ImportESPDEndpoint extends Endpoint {
 
     public ImportESPDEndpoint(ESPDtoModelService service) {
         this.service = service;
-
-        SimpleModule desrModule = new SimpleModule();
-        desrModule.addDeserializer(Requirement.class, new RequirementDeserialiser());
-        MAPPER.registerModule(desrModule);
     }
 
     @Override

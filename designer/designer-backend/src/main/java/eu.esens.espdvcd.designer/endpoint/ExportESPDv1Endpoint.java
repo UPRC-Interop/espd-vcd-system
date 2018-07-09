@@ -33,13 +33,13 @@ import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
-public class ExportESPDEndpoint extends Endpoint {
+public class ExportESPDv1Endpoint extends Endpoint {
     private final ModeltoESPDService service;
     private final ArtefactType artefactType;
     private final String DESERIALIZATION_ERROR = "Oops, the provided JSON document was not valid and could not be converted to an object. Did you provide the correct format? \nThis could help you:\n",
             LOGGER_DESERIALIZATION_ERROR = "Error occurred in ESPDEndpoint while converting a JSON object to XML. ";
 
-    public ExportESPDEndpoint(ModeltoESPDService service) {
+    public ExportESPDv1Endpoint(ModeltoESPDService service) {
         this.service = service;
         artefactType = service.getArtefactType();
 

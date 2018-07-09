@@ -10,12 +10,12 @@ import eu.esens.espdvcd.model.requirement.response.*;
 
 import java.io.IOException;
 
-public class RequirementDeserialiser extends StdDeserializer<ResponseRequirement> {
-    public RequirementDeserialiser() {
+public class RequirementDeserialiserV2 extends StdDeserializer<ResponseRequirement> {
+    public RequirementDeserialiserV2() {
         this(null);
     }
 
-    public RequirementDeserialiser(Class<?> vc) {
+    public RequirementDeserialiserV2(Class<?> vc) {
         super(vc);
     }
 
@@ -59,7 +59,7 @@ public class RequirementDeserialiser extends StdDeserializer<ResponseRequirement
                 response = mapper.treeToValue(root.get("response"), QuantityIntegerResponse.class);
                 break;
             case PERIOD:
-                response = mapper.treeToValue(root.get("response"), PeriodResponse.class);
+                response = mapper.treeToValue(root.get("response"), ApplicablePeriodResponse.class);
                 break;
             case EVIDENCE_IDENTIFIER:
                 response = mapper.treeToValue(root.get("response"), EvidenceIdentifierResponse.class);
