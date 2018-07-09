@@ -4,7 +4,6 @@ import eu.esens.espdvcd.builder.BuilderFactory;
 import eu.esens.espdvcd.designer.exception.ValidationException;
 import eu.esens.espdvcd.designer.typeEnum.ArtefactType;
 import eu.esens.espdvcd.model.ESPDRequest;
-import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 
@@ -23,7 +22,7 @@ public class RegulatedModeltoESPDRequestV1Service implements ModeltoESPDService 
         ESPDRequest request = (ESPDRequest) document;
 
         for (SelectableCriterion cr : request.getFullCriterionList()) {
-            if(cr == null){
+            if (cr == null) {
                 throw new ValidationException("Null criterions are not supported.");
             }
         }
@@ -36,7 +35,7 @@ public class RegulatedModeltoESPDRequestV1Service implements ModeltoESPDService 
         ESPDRequest request = (ESPDRequest) document;
 
         for (SelectableCriterion cr : request.getFullCriterionList()) {
-            if(cr == null){
+            if (cr == null) {
                 throw new ValidationException("Null criterions are not supported.");
             }
         }

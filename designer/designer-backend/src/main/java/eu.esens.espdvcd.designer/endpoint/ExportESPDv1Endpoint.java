@@ -1,7 +1,6 @@
 package eu.esens.espdvcd.designer.endpoint;
 
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.designer.deserialiser.RequirementDeserialiser;
 import eu.esens.espdvcd.designer.exception.ValidationException;
 import eu.esens.espdvcd.designer.service.ModeltoESPDService;
@@ -9,29 +8,14 @@ import eu.esens.espdvcd.designer.typeEnum.ArtefactType;
 import eu.esens.espdvcd.model.RegulatedESPDRequest;
 import eu.esens.espdvcd.model.RegulatedESPDResponse;
 import eu.esens.espdvcd.model.requirement.Requirement;
-import eu.esens.espdvcd.retriever.exception.RetrieverException;
-import eu.esens.espdvcd.validator.ValidationResult;
 import org.xml.sax.SAXException;
 import spark.Request;
 import spark.Response;
 import spark.Service;
 
-import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletException;
-import javax.servlet.http.Part;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.UnmarshalException;
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.nio.file.StandardOpenOption;
-import java.util.Collection;
-import java.util.List;
-import java.util.UUID;
 
 public class ExportESPDv1Endpoint extends Endpoint {
     private final ModeltoESPDService service;
@@ -96,7 +80,7 @@ public class ExportESPDv1Endpoint extends Endpoint {
             }
             try {
                 return service.CreateXMLStreamFromModel(document);
-            }catch (ValidationException e){
+            } catch (ValidationException e) {
                 LOGGER.severe(e.getMessage());
                 rsp.status(406);
                 return "Found null criterion. Please check your input. Aborting export...";
