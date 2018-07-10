@@ -74,19 +74,19 @@ public class Server {
             v2Context.addEndpointWithPath(predefCriteriaEndpointV2, "/criteria/predefined");
 
             LOGGER.info("Configuring ExportESPDRequestV1 endpoint...");
-            Endpoint ESPDRequestV1Endpoint = new ExportESPDEndpoint(new RegulatedModeltoESPDRequestV1Service());
+            Endpoint ESPDRequestV1Endpoint = new ExportESPDv1Endpoint(new RegulatedModeltoESPDRequestV1Service());
             v1Context.addEndpointWithPath(ESPDRequestV1Endpoint, "/espd/request");
 
             LOGGER.info("Configuring ExportESPDResponseV1 endpoint...");
-            Endpoint ESPDResponseV1Endpoint = new ExportESPDEndpoint(new RegulatedModeltoESPDResponseV1Service());
+            Endpoint ESPDResponseV1Endpoint = new ExportESPDv1Endpoint(new RegulatedModeltoESPDResponseV1Service());
             v1Context.addEndpointWithPath(ESPDResponseV1Endpoint, "/espd/response");
 
             LOGGER.info("Configuring ExportESPDRequestV2 endpoint...");
-            Endpoint ESPDRequestV2Endpoint = new ExportESPDEndpoint(new RegulatedModeltoESPDRequestV2Service());
+            Endpoint ESPDRequestV2Endpoint = new ExportESPDv2Endpoint(new RegulatedModeltoESPDRequestV2Service());
             v2Context.addEndpointWithPath(ESPDRequestV2Endpoint, "/espd/request");
 
             LOGGER.info("Configuring ExportESPDResponseV2 endpoint...");
-            Endpoint ESPDResponseV2Endpoint = new ExportESPDEndpoint(new RegulatedModeltoESPDResponseV2Service());
+            Endpoint ESPDResponseV2Endpoint = new ExportESPDv2Endpoint(new RegulatedModeltoESPDResponseV2Service());
             v2Context.addEndpointWithPath(ESPDResponseV2Endpoint, "/espd/response");
 
             LOGGER.info("Configuring ImportESPDRequest endpoint...");

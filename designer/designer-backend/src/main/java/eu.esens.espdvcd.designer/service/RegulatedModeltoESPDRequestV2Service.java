@@ -5,7 +5,7 @@ import eu.esens.espdvcd.designer.typeEnum.ArtefactType;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 
-import java.io.*;
+import java.io.InputStream;
 
 public class RegulatedModeltoESPDRequestV2Service implements ModeltoESPDService {
     private final ArtefactType artefactType;

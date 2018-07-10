@@ -51,7 +51,7 @@ public class ESPDResponseToModelService implements ESPDtoModelService {
         InputStream is = new FileInputStream(XML);
 
         ESPDResponse response = null;
-        switch (artefactVersion){
+        switch (artefactVersion) {
             case V1:
                 response = BuilderFactory.withEDMVersion1().getRegulatedModelBuilder().importFrom(is).createESPDResponse();
                 break;
