@@ -110,12 +110,6 @@ public class PredefinedExcelCriteriaExtractor implements CriteriaExtractor {
         List<Requirement> rList = new ArrayList<>();
         for (int i = rowNum; i < endRowNum; i++) {
             if ("{QUESTION}".equals(getCellStringValueOrNull(d.getRow(i), colNum))) {
-//                Requirement r = new RequestRequirement(
-//                        // getRowUUID(d.getRow(i)),
-//                        UUID.randomUUID().toString(),
-//                        ResponseTypeEnum.valueOf(getResponseType(d.getRow(i))),
-//                        getRowDescription(d.getRow(i)) //+ "(at " + i + "," + colNum + ")"
-//                );
                 Requirement r = new ResponseRequirement(
                         // getRowUUID(d.getRow(i)),
                         UUID.randomUUID().toString(),
