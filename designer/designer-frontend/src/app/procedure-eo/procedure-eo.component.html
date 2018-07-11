@@ -193,12 +193,12 @@
           <span>Is the economic operator a Micro, a Small or a Medium-Sized Enterprise? </span>
           <mat-radio-group formControlName="smeIndicator">
             <mat-radio-button color="primary"
-                              value="YES"
+                              value="true"
                               [value]="true">YES
             </mat-radio-button>
             <mat-radio-button color="primary"
-                              value="NO"
-                              [value]="false">NO
+                              value="false"
+                              [value]="false" [checked]="true">NO
             </mat-radio-button>
           </mat-radio-group>
         </div>

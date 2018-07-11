@@ -37,7 +37,7 @@ export class ProcedureEoComponent implements OnInit {
   constructor(public dataService: DataService) {
     this.EOForm = new FormGroup({
       'name': new FormControl(this.dataService.EODetails.name),
-      'smeIndicator': new FormControl(this.dataService.EODetails.smeIndicator),
+      'smeIndicator': new FormControl(false),
       'postalAddress': new FormGroup({
         'addressLine1': new FormControl(),
         'postCode': new FormControl(),
