@@ -341,7 +341,7 @@ export class DataService {
     // let result = JSON.stringify(utcDate);
     // console.log(result);
 
-    if (typeof this.espdResponse.eodetails.naturalPersons[0].birthDate !== 'string') {
+    if (typeof this.espdResponse.eodetails.naturalPersons[0].birthDate !== 'string' && this.espdResponse.eodetails.naturalPersons[0].birthDate !== null) {
       let utcDate = this.toUTCDate(this.espdResponse.eodetails.naturalPersons[0].birthDate);
       this.espdResponse.eodetails.naturalPersons[0].birthDate = moment(utcDate);
     }
