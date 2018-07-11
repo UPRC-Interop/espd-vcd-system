@@ -808,7 +808,7 @@ export class DataService {
       this.getSelectionALLCriteria()
         .then(res => {
           this.selectionALLCriteria = res;
-          // console.log(res);
+          this.selectionALLCriteriaForm = this.createSelectionCriterionForm(this.selectionALLCriteria);
         })
         .catch(err => {
           console.log(err);

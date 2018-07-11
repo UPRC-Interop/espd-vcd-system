@@ -15,4 +15,6 @@ export class RequirementResponse {
   year?: number;
   id?: string;
   uuid: string;
+  startDate?: Moment;
+  endDate?: Moment;
 }
