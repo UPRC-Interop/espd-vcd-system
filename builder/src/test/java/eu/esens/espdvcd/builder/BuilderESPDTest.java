@@ -171,11 +171,36 @@ public class BuilderESPDTest {
     }
 
     @Test
+    public void createRegulatedRequestV2() throws Exception {
+
+        ESPDRequest espdRequest = BuilderFactory.withEDMVersion2()
+                .getRegulatedModelBuilder()
+                .addDefaultESPDCriteriaList()
+                .createESPDRequest();
+
+        XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.withEDMVersion2().getDocumentBuilderFor(espdRequest);
+        System.out.println(xmlDocumentBuilderV2.getAsString());
+    }
+
+    @Test
     public void createRegulatedResponseV2FromAnImportedV2Response() throws Exception {
 
         ESPDResponse espdResponse = BuilderFactory.withEDMVersion2()
                 .getRegulatedModelBuilder()
                 .importFrom(BuilderESPDTest.class.getResourceAsStream("/REGULATED-ESPD-Response_2.0.2.xml"))
+                .createESPDResponse();
+
+        XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.withEDMVersion2().getDocumentBuilderFor(espdResponse);
+        System.out.println(xmlDocumentBuilderV2.theXML);
+    }
+
+    @Test
+    public void createRegulatedResponseV2() throws Exception {
+
+
+        ESPDResponse espdResponse = BuilderFactory.withEDMVersion2()
+                .getRegulatedModelBuilder()
+                .addDefaultESPDCriteriaList()
                 .createESPDResponse();
 
         XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.withEDMVersion2().getDocumentBuilderFor(espdResponse);

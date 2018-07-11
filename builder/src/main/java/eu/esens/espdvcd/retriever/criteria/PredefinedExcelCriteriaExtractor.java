@@ -3,9 +3,9 @@ package eu.esens.espdvcd.retriever.criteria;
 import eu.esens.espdvcd.codelist.enums.CriterionElementTypeEnum;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.SelectableCriterion;
-import eu.esens.espdvcd.model.requirement.RequestRequirement;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
+import eu.esens.espdvcd.model.requirement.ResponseRequirement;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -110,7 +110,7 @@ public class PredefinedExcelCriteriaExtractor implements CriteriaExtractor {
         List<Requirement> rList = new ArrayList<>();
         for (int i = rowNum; i < endRowNum; i++) {
             if ("{QUESTION}".equals(getCellStringValueOrNull(d.getRow(i), colNum))) {
-                Requirement r = new RequestRequirement(
+                Requirement r = new ResponseRequirement(
                         // getRowUUID(d.getRow(i)),
                         UUID.randomUUID().toString(),
                         ResponseTypeEnum.valueOf(getResponseType(d.getRow(i))),
