@@ -1399,12 +1399,16 @@ export class DataService {
               group[r.uuid + 'currency'] = new FormControl();
             }
 
+
+
             // console.log(r.response);
           } else {
             r.response = new RequirementResponse();
             group[r.uuid] = new FormControl(r.response.description || '');
             if (this.isEO) {
               group[r.uuid + 'currency'] = new FormControl();
+              group[r.uuid + 'startDate'] = new FormControl();
+              group[r.uuid + 'endDate'] = new FormControl();
             }
 
           }

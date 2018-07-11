@@ -4,6 +4,7 @@ import {Requirement} from '../model/requirement.model';
 import {DataService} from '../services/data.service';
 import {Country} from '../model/country.model';
 import {Currency} from '../model/currency.model';
+import {ApicallService} from '../services/apicall.service';
 
 @Component({
   selector: 'app-requirement',
@@ -20,7 +21,7 @@ export class RequirementComponent implements OnInit, OnChanges {
   countries: Country[] = null;
   currency: Currency[] = null;
 
-  constructor(private dataService: DataService) {
+  constructor(public dataService: DataService, public APIService: ApicallService) {
   }
 
   ngOnChanges() {

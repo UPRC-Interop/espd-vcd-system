@@ -14,11 +14,29 @@
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
-    <!--<mat-form-field *ngSwitchCase="'PERIOD'">-->
-      <!--<input matInput [matDatepicker]="picker" [formControlName]="req.uuid" [id]="req.uuid">-->
-      <!--<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>-->
-      <!--<mat-datepicker #picker></mat-datepicker>-->
-    <!--</mat-form-field>-->
+    <div class="period" *ngSwitchCase="'PERIOD'" >
+      <div class="periodv2" *ngIf="APIService.version === 'v2'">
+        <!--<label [attr.for]="req.uuid+'startDate'">Start Date</label>-->
+        <mat-form-field >
+          <input matInput [matDatepicker]="startPicker" [formControlName]="req.uuid+'startDate'" [id]="req.uuid+'startDate'">
+          <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+          <mat-datepicker #startPicker></mat-datepicker>
+        </mat-form-field>
+        <!--<label [attr.for]="req.uuid+'endDate'">End Date</label>-->
+        <mat-form-field >
+          <input matInput [matDatepicker]="endPicker" [formControlName]="req.uuid+'endDate'" [id]="req.uuid+'endDate'">
+          <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+          <mat-datepicker #endPicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="periodv1" *ngIf="APIService.version === 'v1'">
+        <mat-form-field >
+          <input matInput [formControlName]="req.uuid" [id]="req.uuid" >
+        </mat-form-field>
+      </div>
+    </div>
+
+
 
     <mat-form-field *ngSwitchCase="'CODE_COUNTRY'">
       <mat-select  [formControlName]="req.uuid" [id]="req.uuid">
