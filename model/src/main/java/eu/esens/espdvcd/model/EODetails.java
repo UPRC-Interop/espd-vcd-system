@@ -2,9 +2,9 @@ package eu.esens.espdvcd.model;
 
 import eu.esens.espdvcd.codelist.enums.EORoleTypeEnum;
 
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
-import javax.validation.constraints.NotNull;
 
 /**
  * Economic operator
@@ -197,7 +197,7 @@ public class EODetails {
         this.name = name;
     }
 
-    public Boolean isSmeIndicator() {
+    public boolean isSmeIndicator() {
         return smeIndicator;
     }
 
