@@ -19,6 +19,8 @@ import {ESPDResponse} from '../model/ESPDResponse.model';
 
 import * as moment from 'moment';
 import {Moment} from 'moment';
+import {PostalAddress} from '../model/postalAddress.model';
+import {ContactingDetails} from '../model/contactingDetails.model';
 
 @Injectable()
 export class DataService {
@@ -71,6 +73,8 @@ export class DataService {
 
   CADetails: Cadetails = new Cadetails();
   EODetails: EoDetails = new EoDetails();
+  PostalAddress: PostalAddress = new PostalAddress();
+  ContactingDetails: ContactingDetails = new ContactingDetails();
   espdRequest: ESPDRequest;
   espdResponse: ESPDResponse;
   version: string;
@@ -341,7 +345,8 @@ export class DataService {
     // let result = JSON.stringify(utcDate);
     // console.log(result);
 
-    if (typeof this.espdResponse.eodetails.naturalPersons[0].birthDate !== 'string' && this.espdResponse.eodetails.naturalPersons[0].birthDate !== null) {
+    if (typeof this.espdResponse.eodetails.naturalPersons[0].birthDate !== 'string'
+      && this.espdResponse.eodetails.naturalPersons[0].birthDate !== null) {
       let utcDate = this.toUTCDate(this.espdResponse.eodetails.naturalPersons[0].birthDate);
       this.espdResponse.eodetails.naturalPersons[0].birthDate = moment(utcDate);
     }
@@ -465,15 +470,15 @@ export class DataService {
     console.log(this.fullCriterionList);
 
 
-      this.APIService.getXMLResponse(JSON.stringify(this.createESPDResponse()))
-        .then(res => {
-          console.log(res);
-          this.createFile(res);
-          this.saveFile(this.blob);
-        })
-        .catch(err => {
-          console.log(err);
-        });
+    this.APIService.getXMLResponse(JSON.stringify(this.createESPDResponse()))
+      .then(res => {
+        console.log(res);
+        this.createFile(res);
+        this.saveFile(this.blob);
+      })
+      .catch(err => {
+        console.log(err);
+      });
 
     // if (this.APIService.version == 'v1') {
     //   this.APIService.getXMLResponse(JSON.stringify(this.createESPDResponse()))
@@ -542,6 +547,8 @@ export class DataService {
           // console.log(res.fullCriterionList);
           console.log(res.cadetails);
           this.CADetails = res.cadetails;
+          this.PostalAddress = res.cadetails.postalAddress;
+          this.ContactingDetails = res.cadetails.contactingDetails;
           // console.log(res.cadetails.postalAddress);
           console.log(this.CADetails.postalAddress.addressLine1);
           console.log(this.CADetails.postalAddress.city);
@@ -579,6 +586,8 @@ export class DataService {
           // console.log(res.fullCriterionList);
           // console.log(res.cadetails);
           this.CADetails = res.cadetails;
+          this.PostalAddress = res.cadetails.postalAddress;
+          this.ContactingDetails = res.cadetails.contactingDetails;
           this.selectedCountry = this.CADetails.cacountry;
           this.EODetails = res.eodetails;
           console.log(this.EODetails);
@@ -728,6 +737,7 @@ export class DataService {
 
     /* ===================== create forms in case of predefined criteria ================== */
     if (this.isCreateResponse) {
+
       this.getEoRelatedACriteria()
         .then(res => {
 
@@ -867,6 +877,7 @@ export class DataService {
 
     // get predefined criteria (ca)
     if (this.isCreateNewESPD) {
+
       /* =========================== predefined reduction criteria ================================= */
       this.getReductionCriteria()
         .then(res => {
@@ -1398,7 +1409,6 @@ export class DataService {
             if (r.response.currency === null || r.response.amount === '0') {
               group[r.uuid + 'currency'] = new FormControl();
             }
-
 
 
             // console.log(r.response);

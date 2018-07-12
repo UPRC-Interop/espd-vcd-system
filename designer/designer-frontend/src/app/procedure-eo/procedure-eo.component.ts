@@ -336,6 +336,9 @@ export class ProcedureEoComponent implements OnInit {
 
     this.dataService.CADetails.cacountry = form.value.CACountry;
     this.dataService.CADetails.receivedNoticeNumber = form.value.receivedNoticeNumber;
+    this.dataService.PostalAddress.countryCode = form.value.CACountry;
+    this.dataService.CADetails.postalAddress = this.dataService.PostalAddress;
+    this.dataService.CADetails.contactingDetails = this.dataService.ContactingDetails;
 
     console.log(this.dataService.selectedEOCountry);
 

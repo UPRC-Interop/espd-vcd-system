@@ -59,29 +59,29 @@
       <mat-form-field>
         <input matInput placeholder="Procurer website" name="CAofficialWebSite" [(ngModel)]="dataService.CADetails.webSiteURI">
       </mat-form-field>
-      <ng-container *ngIf="dataService.CADetails.postalAddress">
+      <ng-container *ngIf="dataService.CADetails.postalAddress || dataService.PostalAddress">
         <mat-form-field>
-          <input matInput placeholder="Procurer City" name="CAofficialCity" [(ngModel)]="dataService.CADetails.postalAddress.city">
+          <input matInput placeholder="Procurer City" name="CAofficialCity" [(ngModel)]="dataService.PostalAddress.city">
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Street and Number" name="CAofficialStreet" [(ngModel)]="dataService.CADetails.postalAddress.addressLine1">
+          <input matInput placeholder="Street and Number" name="CAofficialStreet" [(ngModel)]="dataService.PostalAddress.addressLine1">
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Post Code" name="CAofficialPostCode" [(ngModel)]="dataService.CADetails.postalAddress.postCode">
+          <input matInput placeholder="Post Code" name="CAofficialPostCode" [(ngModel)]="dataService.PostalAddress.postCode">
         </mat-form-field>
       </ng-container>
-      <ng-container *ngIf="dataService.CADetails.contactingDetails">
+      <ng-container *ngIf="dataService.CADetails.contactingDetails || dataService.ContactingDetails">
         <mat-form-field>
-          <input matInput placeholder="Contact Point Name" name="CAofficialContactName" [(ngModel)]="dataService.CADetails.contactingDetails.contactPointName">
+          <input matInput placeholder="Contact Point Name" name="CAofficialContactName" [(ngModel)]="dataService.ContactingDetails.contactPointName">
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Contact Telephone Number" name="CAofficialContactTelephone" [(ngModel)]="dataService.CADetails.contactingDetails.telephoneNumber">
+          <input matInput placeholder="Contact Telephone Number" name="CAofficialContactTelephone" [(ngModel)]="dataService.ContactingDetails.telephoneNumber">
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Contact Fax Number" name="CAofficialContactFaxNumber" [(ngModel)]="dataService.CADetails.contactingDetails.faxNumber">
+          <input matInput placeholder="Contact Fax Number" name="CAofficialContactFaxNumber" [(ngModel)]="dataService.ContactingDetails.faxNumber">
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Contact email address" name="CAofficialContactEmail" [(ngModel)]="dataService.CADetails.contactingDetails.emailAddress">
+          <input matInput placeholder="Contact email address" name="CAofficialContactEmail" [(ngModel)]="dataService.ContactingDetails.emailAddress">
         </mat-form-field>
       </ng-container>
       <mat-form-field>
