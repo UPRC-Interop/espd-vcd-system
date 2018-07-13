@@ -21,6 +21,7 @@ import * as moment from 'moment';
 import {Moment} from 'moment';
 import {PostalAddress} from '../model/postalAddress.model';
 import {ContactingDetails} from '../model/contactingDetails.model';
+import {MatSnackBar} from '@angular/material';
 
 @Injectable()
 export class DataService {
@@ -111,9 +112,15 @@ export class DataService {
   public reductionCriteriaForm: FormGroup = null;
 
 
-  constructor(private APIService: ApicallService) {
+  constructor(private APIService: ApicallService, public snackBar: MatSnackBar) {
 
   }
+
+  /* ============================ snackbar ===================================== */
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action);
+  }
+
 
   /* ================= Merge criterions into one fullcriterion list ================*/
 
@@ -404,6 +411,10 @@ export class DataService {
       })
       .catch(err => {
         console.log(err);
+        const message: string = err.error.error +
+          'Message: ' + err.message;
+        const action = 'close';
+        this.openSnackBar(message, action);
       });
 
     // this.APIService.getXMLRequestV2(JSON.stringify(this.createESPDRequest()))
@@ -478,6 +489,10 @@ export class DataService {
       })
       .catch(err => {
         console.log(err);
+        const message: string = err.error.error +
+          'Message: ' + err.message;
+        const action = 'close';
+        this.openSnackBar(message, action);
       });
 
     // if (this.APIService.version == 'v1') {
@@ -522,13 +537,13 @@ export class DataService {
   // }
 
   saveFile(blob) {
-    if (this.isCA && this.APIService.version == 'v1') {
+    if (this.isCA && this.APIService.version === 'v1') {
       var filename = 'espd-request-v1';
-    } else if (this.isEO && this.APIService.version == 'v1') {
+    } else if (this.isEO && this.APIService.version === 'v1') {
       var filename = 'espd-response-v1';
-    } else if (this.isCA && this.APIService.version == 'v2') {
+    } else if (this.isCA && this.APIService.version === 'v2') {
       var filename = 'espd-request-v2';
-    } else if (this.isEO && this.APIService.version == 'v2') {
+    } else if (this.isEO && this.APIService.version === 'v2') {
       var filename = 'espd-response-v2';
     }
 
@@ -576,8 +591,14 @@ export class DataService {
 
 
         })
-        .catch(err => err);
-    } else if (filesToUpload.length > 0 && role == 'EO') {
+        .catch(err => {
+          console.log(err);
+          const message: string = err.error.error +
+            'Message: ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
+        });
+    } else if (filesToUpload.length > 0 && role === 'EO') {
       this.APIService.postFileResponse(filesToUpload)
         .then(res => {
           console.log(res);
@@ -646,7 +667,13 @@ export class DataService {
 
 
         })
-        .catch(err => err);
+        .catch(err => {
+          console.log(err);
+          const message: string = err.error.error +
+            'Message: ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
+        });
     }
 
     if (form.value.chooseRole == 'CA') {
@@ -682,7 +709,8 @@ export class DataService {
       },
       'naturalPersons': this.EODetails.naturalPersons,
       'id': this.EODetails.id,
-      'webSiteURI': this.EODetails.webSiteURI
+      'webSiteURI': this.EODetails.webSiteURI,
+      'procurementProjectLot': this.EODetails.procurementProjectLot
     });
   }
 
@@ -752,6 +780,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error.error +
+            'Message: ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
         });
 
       this.getEoRelatedCCriteria()
@@ -761,6 +793,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error.error +
+            'Message: ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
         });
 
       this.getEoRelatedDCriteria()
@@ -770,6 +806,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error.error +
+            'Message: ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
         });
 
 
@@ -782,6 +822,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error.error +
+            'Message: ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
         });
 
       this.getExclusionBCriteria()
@@ -792,6 +836,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error.error +
+            'Message: ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
         });
 
       this.getExclusionCCriteria()
@@ -802,6 +850,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error.error +
+            'Message: ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
         });
 
       this.getExclusionDCriteria()
@@ -812,6 +864,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error.error +
+            'Message: ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
         });
 
       /* ======================== predefined selection criteria ============================ */
@@ -822,6 +878,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error.error +
+            'Message: ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
         });
 
 
@@ -832,6 +892,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error.error +
+            'Message: ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
         });
 
 
@@ -842,6 +906,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error.error +
+            'Message: ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
         });
 
       this.getSelectionCCriteria()
@@ -851,6 +919,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error.error +
+            'Message: ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
         });
 
       this.getSelectionDCriteria()
@@ -860,6 +932,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error.error +
+            'Message: ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
         });
 
       /* =========================== predefined reduction criteria ================================= */
@@ -871,6 +947,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error.error +
+            'Message: ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
         });
 
     }
@@ -886,6 +966,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error.error +
+            'Message: ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
         });
 
       /* ========================= predefined other.eo criteria ====================================*/
@@ -896,6 +980,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error.error +
+            'Message: ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
         });
 
       /* ======================== predefined exclusion criteria ================================== */
@@ -908,6 +996,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error.error +
+            'Message: ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
         });
 
       this.getExclusionBCriteria()
@@ -917,6 +1009,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error.error +
+            'Message: ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
         });
 
       this.getExclusionCCriteria()
@@ -926,6 +1022,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error.error +
+            'Message: ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
         });
 
       this.getExclusionDCriteria()
@@ -935,6 +1035,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error.error +
+            'Message: ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
         });
 
       /* ============================= predefined selection criteria =========================== */
@@ -945,6 +1049,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error.error +
+            'Message: ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
         });
 
       this.getSelectionACriteria()
@@ -954,6 +1062,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error.error +
+            'Message: ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
         });
 
 
@@ -964,6 +1076,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error.error +
+            'Message: ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
         });
 
       this.getSelectionCCriteria()
@@ -973,6 +1089,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error.error +
+            'Message: ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
         });
 
       this.getSelectionDCriteria()
@@ -982,6 +1102,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error.error +
+            'Message: ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
         });
 
     }
@@ -1003,6 +1127,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error.error +
+            'Message: ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -1019,6 +1147,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error.error +
+            'Message: ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -1035,6 +1167,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error.error +
+            'Message: ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -1055,6 +1191,10 @@ export class DataService {
           }
         ).catch(err => {
           console.log(err);
+          const message: string = err.error.error +
+            'Message: ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -1072,6 +1212,10 @@ export class DataService {
           }
         ).catch(err => {
           console.log(err);
+          const message: string = err.error.error +
+            'Message: ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -1089,6 +1233,10 @@ export class DataService {
           }
         ).catch(err => {
           console.log(err);
+          const message: string = err.error.error +
+            'Message: ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -1106,6 +1254,10 @@ export class DataService {
           }
         ).catch(err => {
           console.log(err);
+          const message: string = err.error.error +
+            'Message: ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -1124,6 +1276,10 @@ export class DataService {
           }
         ).catch(err => {
           console.log(err);
+          const message: string = err.error.error +
+            'Message: ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -1142,6 +1298,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error.error +
+            'Message: ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -1158,6 +1318,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error.error +
+            'Message: ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -1174,6 +1338,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error.error +
+            'Message: ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -1190,6 +1358,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error.error +
+            'Message: ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -1208,6 +1380,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error.error +
+            'Message: ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -1225,6 +1401,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error.error +
+            'Message: ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -1241,6 +1421,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error.error +
+            'Message: ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -1257,6 +1441,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error.error +
+            'Message: ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -1273,6 +1461,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error.error +
+            'Message: ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }

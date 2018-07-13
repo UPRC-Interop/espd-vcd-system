@@ -159,6 +159,9 @@
                 </mat-select>
               </mat-form-field>
             </div>
+            <mat-form-field class="eoField">
+              <input matInput placeholder="Indication of the lot(s) for which the economic operator wishes to tender" formControlName="procurementProjectLot">
+            </mat-form-field>
 
           </div>
 
@@ -202,14 +205,6 @@
             </mat-radio-button>
           </mat-radio-group>
         </div>
-
-        <!--<mat-form-field>-->
-          <!--<input matInput [matDatepicker]="picker" formControlName="test">-->
-          <!--<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>-->
-          <!--<mat-datepicker #picker></mat-datepicker>-->
-        <!--</mat-form-field>-->
-
-
         <ng-container *ngIf="dataService.eoRelatedACriteriaForm">
           <form [formGroup]="dataService.eoRelatedACriteriaForm">
             <div class="eoRelatedCriteria" *ngFor="let cr of eoRelatedACriteria; let i=index">
@@ -285,24 +280,13 @@
                     <mat-form-field class="eoField">
                       <input formControlName="telephoneNumber" matInput placeholder="Telephone">
                     </mat-form-field>
-                    <!--<mat-form-field class="eoField">-->
-                      <!--<input formControlName="faxNumber" matInput placeholder="Fax Number">-->
-                    <!--</mat-form-field>-->
                   </div>
                   <mat-form-field class="eoField">
                     <input formControlName="role" matInput placeholder="Position/Acting in the capacity of">
                   </mat-form-field>
-                  <!--<mat-form-field class="eoField">-->
-                  <!--<input matInput placeholder="Other number, if VAT not applicable">-->
-                  <!--</mat-form-field>-->
                 </div>
               </div>
             </div>
-
-
-            <!--<form [formGroup]="formC">-->
-            <!---->
-            <!--</form>-->
 
           </mat-expansion-panel>
         </div>

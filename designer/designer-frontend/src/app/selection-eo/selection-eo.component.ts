@@ -129,9 +129,6 @@ export class SelectionEoComponent implements OnInit {
               // req.response.period = formValues[req.uuid.valueOf()];
               const startDateid = req.uuid + 'startDate';
               req.response.startDate = formValues[startDateid.valueOf()];
-              console.log('THIS IS start DATE ===============================================================');
-              console.log(formValues[req.uuid.valueOf()]);
-              console.log(req.response.startDate);
               if (typeof req.response.startDate !== 'string' && req.response.startDate !== null) {
                 const utcDate = this.dataService.toUTCDate(req.response.startDate);
                 req.response.startDate = moment(utcDate);
@@ -139,8 +136,6 @@ export class SelectionEoComponent implements OnInit {
               console.log(req.response.startDate);
               const endDateid = req.uuid + 'endDate';
               req.response.endDate = formValues[endDateid.valueOf()];
-              console.log('THIS IS END DATE ===============================================================');
-              console.log(req.response.endDate);
               if (typeof req.response.endDate !== 'string' && req.response.endDate !== null) {
                 const utcDate = this.dataService.toUTCDate(req.response.endDate);
                 req.response.endDate = moment(utcDate);

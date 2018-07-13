@@ -52,7 +52,8 @@ export class ProcedureEoComponent implements OnInit {
       }),
       'naturalPersons': new FormArray([this.initNaturalPerson()]),
       'id': new FormControl(),
-      'webSiteURI': new FormControl()
+      'webSiteURI': new FormControl(),
+      'procurementProjectLot': new FormControl(0)
     });
     this.dataService.EOForm = this.EOForm;
   }

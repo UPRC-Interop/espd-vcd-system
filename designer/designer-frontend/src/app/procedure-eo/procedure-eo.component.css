@@ -24,11 +24,14 @@
 .eoField {
   margin: 20px;
 }
+.eoField2 {
+  margin:0;
+}
 .eoContainer {
   display:flex;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
 
 }
 .mat-expansion-panel-header {
