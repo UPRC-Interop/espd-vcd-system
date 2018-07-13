@@ -106,6 +106,9 @@ export class SelectionEoComponent implements OnInit {
             } else if (req.responseDataType == 'EVIDENCE_URL') {
               req.response.evidenceURL = formValues[req.uuid.valueOf()];
               req.response.uuid = null;
+            } else if (req.responseDataType == 'EVIDENCE_IDENTIFIER') {
+              req.response.evidenceSuppliedId = formValues[req.uuid.valueOf()];
+              req.response.uuid = null;
             } else if (req.responseDataType == 'CODE') {
               req.response.evidenceURLCode = formValues[req.uuid.valueOf()];
               req.response.uuid = null;

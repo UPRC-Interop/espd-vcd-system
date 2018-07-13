@@ -411,8 +411,8 @@ export class DataService {
       })
       .catch(err => {
         console.log(err);
-        const message: string = err.error.error +
-          'Message: ' + err.message;
+        const message: string = err.error +
+          ' ' + err.message;
         const action = 'close';
         this.openSnackBar(message, action);
       });
@@ -489,8 +489,9 @@ export class DataService {
       })
       .catch(err => {
         console.log(err);
-        const message: string = err.error.error +
-          'Message: ' + err.message;
+        console.log(err.error);
+        const message: string = err.error +
+          ' ' + err.message;
         const action = 'close';
         this.openSnackBar(message, action);
       });
@@ -593,8 +594,8 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error.error +
-            'Message: ' + err.message;
+          const message: string = err.error +
+            ' ' + err.message;
           const action = 'close';
           this.openSnackBar(message, action);
         });
@@ -669,8 +670,8 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error.error +
-            'Message: ' + err.message;
+          const message: string = err.error +
+            ' ' + err.message;
           const action = 'close';
           this.openSnackBar(message, action);
         });
@@ -780,8 +781,8 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error.error +
-            'Message: ' + err.message;
+          const message: string = err.error +
+            ' ' + err.message;
           const action = 'close';
           this.openSnackBar(message, action);
         });
@@ -793,8 +794,8 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error.error +
-            'Message: ' + err.message;
+          const message: string = err.error +
+            ' ' + err.message;
           const action = 'close';
           this.openSnackBar(message, action);
         });
@@ -806,8 +807,8 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error.error +
-            'Message: ' + err.message;
+          const message: string = err.error +
+            ' ' + err.message;
           const action = 'close';
           this.openSnackBar(message, action);
         });
@@ -822,8 +823,8 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error.error +
-            'Message: ' + err.message;
+          const message: string = err.error +
+            ' ' + err.message;
           const action = 'close';
           this.openSnackBar(message, action);
         });
@@ -836,8 +837,8 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error.error +
-            'Message: ' + err.message;
+          const message: string = err.error +
+            ' ' + err.message;
           const action = 'close';
           this.openSnackBar(message, action);
         });
@@ -850,8 +851,8 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error.error +
-            'Message: ' + err.message;
+          const message: string = err.error +
+            ' ' + err.message;
           const action = 'close';
           this.openSnackBar(message, action);
         });
@@ -864,8 +865,8 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error.error +
-            'Message: ' + err.message;
+          const message: string = err.error +
+            ' ' + err.message;
           const action = 'close';
           this.openSnackBar(message, action);
         });
@@ -878,8 +879,8 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error.error +
-            'Message: ' + err.message;
+          const message: string = err.error +
+            ' ' + err.message;
           const action = 'close';
           this.openSnackBar(message, action);
         });
@@ -892,8 +893,8 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error.error +
-            'Message: ' + err.message;
+          const message: string = err.error +
+            ' ' + err.message;
           const action = 'close';
           this.openSnackBar(message, action);
         });
@@ -906,8 +907,8 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error.error +
-            'Message: ' + err.message;
+          const message: string = err.error +
+            ' ' + err.message;
           const action = 'close';
           this.openSnackBar(message, action);
         });
@@ -919,8 +920,8 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error.error +
-            'Message: ' + err.message;
+          const message: string = err.error +
+            ' ' + err.message;
           const action = 'close';
           this.openSnackBar(message, action);
         });
@@ -932,8 +933,8 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error.error +
-            'Message: ' + err.message;
+          const message: string = err.error +
+            ' ' + err.message;
           const action = 'close';
           this.openSnackBar(message, action);
         });
@@ -947,8 +948,8 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error.error +
-            'Message: ' + err.message;
+          const message: string = err.error +
+            ' ' + err.message;
           const action = 'close';
           this.openSnackBar(message, action);
         });
@@ -966,8 +967,8 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error.error +
-            'Message: ' + err.message;
+          const message: string = err.error +
+            ' ' + err.message;
           const action = 'close';
           this.openSnackBar(message, action);
         });
@@ -980,8 +981,8 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error.error +
-            'Message: ' + err.message;
+          const message: string = err.error +
+            ' ' + err.message;
           const action = 'close';
           this.openSnackBar(message, action);
         });
@@ -996,8 +997,8 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error.error +
-            'Message: ' + err.message;
+          const message: string = err.error +
+            ' ' + err.message;
           const action = 'close';
           this.openSnackBar(message, action);
         });
@@ -1009,8 +1010,8 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error.error +
-            'Message: ' + err.message;
+          const message: string = err.error +
+            ' ' + err.message;
           const action = 'close';
           this.openSnackBar(message, action);
         });
@@ -1022,8 +1023,8 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error.error +
-            'Message: ' + err.message;
+          const message: string = err.error +
+            ' ' + err.message;
           const action = 'close';
           this.openSnackBar(message, action);
         });
@@ -1035,8 +1036,8 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error.error +
-            'Message: ' + err.message;
+          const message: string = err.error +
+            ' ' + err.message;
           const action = 'close';
           this.openSnackBar(message, action);
         });
@@ -1049,8 +1050,8 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error.error +
-            'Message: ' + err.message;
+          const message: string = err.error +
+            ' ' + err.message;
           const action = 'close';
           this.openSnackBar(message, action);
         });
@@ -1062,8 +1063,8 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error.error +
-            'Message: ' + err.message;
+          const message: string = err.error +
+            ' ' + err.message;
           const action = 'close';
           this.openSnackBar(message, action);
         });
@@ -1076,8 +1077,8 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error.error +
-            'Message: ' + err.message;
+          const message: string = err.error +
+            ' ' + err.message;
           const action = 'close';
           this.openSnackBar(message, action);
         });
@@ -1089,8 +1090,8 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error.error +
-            'Message: ' + err.message;
+          const message: string = err.error +
+            ' ' + err.message;
           const action = 'close';
           this.openSnackBar(message, action);
         });
@@ -1102,8 +1103,8 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error.error +
-            'Message: ' + err.message;
+          const message: string = err.error +
+            ' ' + err.message;
           const action = 'close';
           this.openSnackBar(message, action);
         });
@@ -1127,8 +1128,8 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error.error +
-            'Message: ' + err.message;
+          const message: string = err.error +
+            ' ' + err.message;
           const action = 'close';
           this.openSnackBar(message, action);
           return Promise.reject(err);
@@ -1147,8 +1148,8 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error.error +
-            'Message: ' + err.message;
+          const message: string = err.error +
+            ' ' + err.message;
           const action = 'close';
           this.openSnackBar(message, action);
           return Promise.reject(err);
@@ -1167,8 +1168,8 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error.error +
-            'Message: ' + err.message;
+          const message: string = err.error +
+            ' ' + err.message;
           const action = 'close';
           this.openSnackBar(message, action);
           return Promise.reject(err);
@@ -1191,8 +1192,8 @@ export class DataService {
           }
         ).catch(err => {
           console.log(err);
-          const message: string = err.error.error +
-            'Message: ' + err.message;
+          const message: string = err.error +
+            ' ' + err.message;
           const action = 'close';
           this.openSnackBar(message, action);
           return Promise.reject(err);
@@ -1212,8 +1213,8 @@ export class DataService {
           }
         ).catch(err => {
           console.log(err);
-          const message: string = err.error.error +
-            'Message: ' + err.message;
+          const message: string = err.error +
+            ' ' + err.message;
           const action = 'close';
           this.openSnackBar(message, action);
           return Promise.reject(err);
@@ -1233,8 +1234,8 @@ export class DataService {
           }
         ).catch(err => {
           console.log(err);
-          const message: string = err.error.error +
-            'Message: ' + err.message;
+          const message: string = err.error +
+            ' ' + err.message;
           const action = 'close';
           this.openSnackBar(message, action);
           return Promise.reject(err);
@@ -1254,8 +1255,8 @@ export class DataService {
           }
         ).catch(err => {
           console.log(err);
-          const message: string = err.error.error +
-            'Message: ' + err.message;
+          const message: string = err.error +
+            ' ' + err.message;
           const action = 'close';
           this.openSnackBar(message, action);
           return Promise.reject(err);
@@ -1276,8 +1277,8 @@ export class DataService {
           }
         ).catch(err => {
           console.log(err);
-          const message: string = err.error.error +
-            'Message: ' + err.message;
+          const message: string = err.error +
+            ' ' + err.message;
           const action = 'close';
           this.openSnackBar(message, action);
           return Promise.reject(err);
@@ -1298,8 +1299,8 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error.error +
-            'Message: ' + err.message;
+          const message: string = err.error +
+            ' ' + err.message;
           const action = 'close';
           this.openSnackBar(message, action);
           return Promise.reject(err);
@@ -1318,8 +1319,8 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error.error +
-            'Message: ' + err.message;
+          const message: string = err.error +
+            ' ' + err.message;
           const action = 'close';
           this.openSnackBar(message, action);
           return Promise.reject(err);
@@ -1338,8 +1339,8 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error.error +
-            'Message: ' + err.message;
+          const message: string = err.error +
+            ' ' + err.message;
           const action = 'close';
           this.openSnackBar(message, action);
           return Promise.reject(err);
@@ -1358,8 +1359,8 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error.error +
-            'Message: ' + err.message;
+          const message: string = err.error +
+            ' ' + err.message;
           const action = 'close';
           this.openSnackBar(message, action);
           return Promise.reject(err);
@@ -1380,8 +1381,8 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error.error +
-            'Message: ' + err.message;
+          const message: string = err.error +
+            ' ' + err.message;
           const action = 'close';
           this.openSnackBar(message, action);
           return Promise.reject(err);
@@ -1401,8 +1402,8 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error.error +
-            'Message: ' + err.message;
+          const message: string = err.error +
+            ' ' + err.message;
           const action = 'close';
           this.openSnackBar(message, action);
           return Promise.reject(err);
@@ -1421,8 +1422,8 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error.error +
-            'Message: ' + err.message;
+          const message: string = err.error +
+            ' ' + err.message;
           const action = 'close';
           this.openSnackBar(message, action);
           return Promise.reject(err);
@@ -1441,8 +1442,8 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error.error +
-            'Message: ' + err.message;
+          const message: string = err.error +
+            ' ' + err.message;
           const action = 'close';
           this.openSnackBar(message, action);
           return Promise.reject(err);
@@ -1461,8 +1462,8 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error.error +
-            'Message: ' + err.message;
+          const message: string = err.error +
+            ' ' + err.message;
           const action = 'close';
           this.openSnackBar(message, action);
           return Promise.reject(err);

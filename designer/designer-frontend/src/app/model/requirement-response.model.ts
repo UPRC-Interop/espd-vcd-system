@@ -17,4 +17,5 @@ export class RequirementResponse {
   uuid: string;
   startDate?: Moment;
   endDate?: Moment;
+  evidenceSuppliedId?: string;
 }
