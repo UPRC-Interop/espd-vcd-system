@@ -22,6 +22,7 @@ import {Moment} from 'moment';
 import {PostalAddress} from '../model/postalAddress.model';
 import {ContactingDetails} from '../model/contactingDetails.model';
 import {MatSnackBar} from '@angular/material';
+import {Evidence} from '../model/evidence.model';
 
 @Injectable()
 export class DataService {
@@ -64,6 +65,7 @@ export class DataService {
   eoRelatedCCriteria: EoRelatedCriterion[] = null;
   eoRelatedDCriteria: EoRelatedCriterion[] = null;
   reductionCriteria: ReductionCriterion[] = null;
+  evidenceList: Evidence[] = [];
 
   notDefCriteria: EoRelatedCriterion[] = null;
 
@@ -333,7 +335,7 @@ export class DataService {
 
 
   createESPDResponse(): ESPDResponse {
-    this.espdResponse = new ESPDResponse(this.CADetails, this.EODetails, this.fullCriterionList);
+    this.espdResponse = new ESPDResponse(this.CADetails, this.EODetails, this.fullCriterionList, this.evidenceList);
     console.log(this.espdResponse.eodetails.naturalPersons[0].birthDate);
     console.log(JSON.stringify(this.espdResponse.eodetails.naturalPersons[0].birthDate));
     // let utcDate = new Date(Date.UTC(this.espdResponse.eodetails.naturalPersons[0].birthDate.toDate().getFullYear(),

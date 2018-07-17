@@ -20,4 +20,5 @@ export class RequirementResponse {
   evidenceSuppliedId?: string;
   identifier?: string;
   url?: string;
+  validatedCriterionPropertyID?: string;
 }

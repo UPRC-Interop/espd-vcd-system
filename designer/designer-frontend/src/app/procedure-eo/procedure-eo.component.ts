@@ -8,6 +8,8 @@ import {RequirementGroup} from '../model/requirementGroup.model';
 import {RequirementResponse} from '../model/requirement-response.model';
 import * as moment from 'moment';
 import {Moment} from 'moment';
+import {Evidence} from '../model/evidence.model';
+import {EvidenceIssuer} from '../model/evidenceIssuer.model';
 
 @Component({
   selector: 'app-procedure-eo',
@@ -141,7 +143,7 @@ export class ProcedureEoComponent implements OnInit {
           if (req != null || req !== undefined) {
             // console.log('requirement uuid ' + req.uuid);
 
-            console.log(formValues[req.uuid.valueOf()]);
+            // console.log(formValues[req.uuid.valueOf()]);
             console.log(req);
             req.response = new RequirementResponse();
 
@@ -164,6 +166,28 @@ export class ProcedureEoComponent implements OnInit {
             } else if (req.responseDataType == 'EVIDENCE_IDENTIFIER') {
               // req.response.evidenceSuppliedId = formValues[req.uuid.valueOf()];
               req.response.evidenceSuppliedId = req.id;
+              req.response.validatedCriterionPropertyID = req.id;
+              const evidenceUrlID = req.uuid + 'evidenceUrl';
+              const evidenceCodeID = req.uuid + 'evidenceCode';
+              const evidenceIssuerID = req.uuid + 'evidenceIssuer';
+
+              // create evidence
+              let evidence = new Evidence();
+              let evidenceIssuer = new EvidenceIssuer();
+              evidence.id = req.id;
+              evidence.evidenceURL = formValues[evidenceUrlID.valueOf()];
+              evidence.description = formValues[evidenceCodeID.valueOf()];
+              evidenceIssuer.name = formValues[evidenceIssuerID.valueOf()];
+              evidenceIssuer.website = null;
+              evidenceIssuer.id = null;
+              evidence.evidenceIssuer = evidenceIssuer;
+              evidence.confidentialityLevelCode = 'PUBLIC';
+
+              console.log(evidence);
+              this.dataService.evidenceList.push(evidence);
+              console.log(this.dataService.evidenceList);
+              // console.log(JSON.stringify(this.dataService.evidenceList));
+
               req.response.uuid = null;
             } else if (req.responseDataType === 'CODE') {
               req.response.evidenceURLCode = formValues[req.uuid.valueOf()];
