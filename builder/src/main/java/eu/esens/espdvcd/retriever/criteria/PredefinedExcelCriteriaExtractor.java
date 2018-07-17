@@ -35,7 +35,6 @@ public class PredefinedExcelCriteriaExtractor implements CriteriaExtractor {
             Workbook workbook = new XSSFWorkbook(
                     PredefinedExcelCriteriaExtractor.class.getResourceAsStream(CRITERIA_TAXONOMY_RESOURCE));
             criterionList = new ArrayList<>(65);
-            Sheet first = workbook.getSheetAt(0);
             workbook.forEach(sheet -> criterionList.addAll(readDataSheet(sheet)));
             workbook.close();
 
