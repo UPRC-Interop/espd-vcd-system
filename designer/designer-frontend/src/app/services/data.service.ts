@@ -1612,6 +1612,10 @@ export class DataService {
               group[r.uuid + 'currency'] = new FormControl();
               group[r.uuid + 'startDate'] = new FormControl();
               group[r.uuid + 'endDate'] = new FormControl();
+              group[r.uuid + 'evidenceUrl'] = new FormControl();
+              group[r.uuid + 'evidenceCode'] = new FormControl();
+              group[r.uuid + 'evidenceIssuer'] = new FormControl();
+
             }
 
           }

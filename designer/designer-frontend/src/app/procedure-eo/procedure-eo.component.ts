@@ -142,6 +142,7 @@ export class ProcedureEoComponent implements OnInit {
             // console.log('requirement uuid ' + req.uuid);
 
             console.log(formValues[req.uuid.valueOf()]);
+            console.log(req);
             req.response = new RequirementResponse();
 
             if (req.responseDataType === 'INDICATOR') {
@@ -161,7 +162,8 @@ export class ProcedureEoComponent implements OnInit {
               req.response.evidenceURL = formValues[req.uuid.valueOf()];
               req.response.uuid = null;
             } else if (req.responseDataType == 'EVIDENCE_IDENTIFIER') {
-              req.response.evidenceSuppliedId = formValues[req.uuid.valueOf()];
+              // req.response.evidenceSuppliedId = formValues[req.uuid.valueOf()];
+              req.response.evidenceSuppliedId = req.id;
               req.response.uuid = null;
             } else if (req.responseDataType === 'CODE') {
               req.response.evidenceURLCode = formValues[req.uuid.valueOf()];
@@ -199,6 +201,12 @@ export class ProcedureEoComponent implements OnInit {
               req.response.uuid = null;
             } else if (req.responseDataType === 'QUANTITY_YEAR') {
               req.response.year = formValues[req.uuid.valueOf()];
+              req.response.uuid = null;
+            } else if (req.responseDataType === 'IDENTIFIER') {
+              req.response.identifier = formValues[req.uuid.valueOf()];
+              req.response.uuid = null;
+            } else if (req.responseDataType === 'URL') {
+              req.response.url = formValues[req.uuid.valueOf()];
               req.response.uuid = null;
             }
 

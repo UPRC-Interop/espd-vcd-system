@@ -91,6 +91,7 @@ export class SelectionEoComponent implements OnInit {
 
             // console.log('requirement id ' + req.uuid);
             console.log(formValues[req.uuid.valueOf()]);
+            // console.log(formValues[req.id.valueOf()]);
             req.response = new RequirementResponse();
             if (req.responseDataType == 'INDICATOR') {
               if (formValues[req.uuid.valueOf()] == true) {
