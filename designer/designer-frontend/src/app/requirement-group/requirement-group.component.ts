@@ -31,7 +31,7 @@ export class RequirementGroupComponent implements OnInit, OnChanges {
 
     // console.log('Check Indicator called ' + this.reqGroup.id + ' with value of indicator: ' + this.indicator);
     if (this.reqGroup.condition) {
-      if (this.reqGroup.condition.endsWith('ON_FALSE')) {
+      if (this.reqGroup.condition.endsWith('ON_FALSE') || this.reqGroup.condition === 'ONFALSE') {
         return !b;
       } else {
         return b;

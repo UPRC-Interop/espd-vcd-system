@@ -19,6 +19,9 @@ import {ESPDResponse} from '../model/ESPDResponse.model';
 
 import * as moment from 'moment';
 import {Moment} from 'moment';
+import {PostalAddress} from '../model/postalAddress.model';
+import {ContactingDetails} from '../model/contactingDetails.model';
+import {MatSnackBar} from '@angular/material';
 
 @Injectable()
 export class DataService {
@@ -71,6 +74,8 @@ export class DataService {
 
   CADetails: Cadetails = new Cadetails();
   EODetails: EoDetails = new EoDetails();
+  PostalAddress: PostalAddress = new PostalAddress();
+  ContactingDetails: ContactingDetails = new ContactingDetails();
   espdRequest: ESPDRequest;
   espdResponse: ESPDResponse;
   version: string;
@@ -107,9 +112,15 @@ export class DataService {
   public reductionCriteriaForm: FormGroup = null;
 
 
-  constructor(private APIService: ApicallService) {
+  constructor(private APIService: ApicallService, public snackBar: MatSnackBar) {
 
   }
+
+  /* ============================ snackbar ===================================== */
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action);
+  }
+
 
   /* ================= Merge criterions into one fullcriterion list ================*/
 
@@ -341,7 +352,8 @@ export class DataService {
     // let result = JSON.stringify(utcDate);
     // console.log(result);
 
-    if (typeof this.espdResponse.eodetails.naturalPersons[0].birthDate !== 'string') {
+    if (typeof this.espdResponse.eodetails.naturalPersons[0].birthDate !== 'string'
+      && this.espdResponse.eodetails.naturalPersons[0].birthDate !== null) {
       let utcDate = this.toUTCDate(this.espdResponse.eodetails.naturalPersons[0].birthDate);
       this.espdResponse.eodetails.naturalPersons[0].birthDate = moment(utcDate);
     }
@@ -399,6 +411,10 @@ export class DataService {
       })
       .catch(err => {
         console.log(err);
+        const message: string = err.error +
+          ' ' + err.message;
+        const action = 'close';
+        this.openSnackBar(message, action);
       });
 
     // this.APIService.getXMLRequestV2(JSON.stringify(this.createESPDRequest()))
@@ -437,6 +453,7 @@ export class DataService {
     this.selectionCCriteria = selectionCriteriaC;
     this.selectionDCriteria = selectionCriteriaD;
 
+    console.log(this.selectionALLCriteria);
     this.isSatisfiedALLeo = isSatisfiedALL;
 
   }
@@ -464,15 +481,20 @@ export class DataService {
     console.log(this.fullCriterionList);
 
 
-      this.APIService.getXMLResponse(JSON.stringify(this.createESPDResponse()))
-        .then(res => {
-          console.log(res);
-          this.createFile(res);
-          this.saveFile(this.blob);
-        })
-        .catch(err => {
-          console.log(err);
-        });
+    this.APIService.getXMLResponse(JSON.stringify(this.createESPDResponse()))
+      .then(res => {
+        console.log(res);
+        this.createFile(res);
+        this.saveFile(this.blob);
+      })
+      .catch(err => {
+        console.log(err);
+        console.log(err.error);
+        const message: string = err.error +
+          ' ' + err.message;
+        const action = 'close';
+        this.openSnackBar(message, action);
+      });
 
     // if (this.APIService.version == 'v1') {
     //   this.APIService.getXMLResponse(JSON.stringify(this.createESPDResponse()))
@@ -516,13 +538,13 @@ export class DataService {
   // }
 
   saveFile(blob) {
-    if (this.isCA && this.APIService.version == 'v1') {
+    if (this.isCA && this.APIService.version === 'v1') {
       var filename = 'espd-request-v1';
-    } else if (this.isEO && this.APIService.version == 'v1') {
+    } else if (this.isEO && this.APIService.version === 'v1') {
       var filename = 'espd-response-v1';
-    } else if (this.isCA && this.APIService.version == 'v2') {
+    } else if (this.isCA && this.APIService.version === 'v2') {
       var filename = 'espd-request-v2';
-    } else if (this.isEO && this.APIService.version == 'v2') {
+    } else if (this.isEO && this.APIService.version === 'v2') {
       var filename = 'espd-response-v2';
     }
 
@@ -541,6 +563,8 @@ export class DataService {
           // console.log(res.fullCriterionList);
           console.log(res.cadetails);
           this.CADetails = res.cadetails;
+          this.PostalAddress = res.cadetails.postalAddress;
+          this.ContactingDetails = res.cadetails.contactingDetails;
           // console.log(res.cadetails.postalAddress);
           console.log(this.CADetails.postalAddress.addressLine1);
           console.log(this.CADetails.postalAddress.city);
@@ -568,8 +592,14 @@ export class DataService {
 
 
         })
-        .catch(err => err);
-    } else if (filesToUpload.length > 0 && role == 'EO') {
+        .catch(err => {
+          console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
+        });
+    } else if (filesToUpload.length > 0 && role === 'EO') {
       this.APIService.postFileResponse(filesToUpload)
         .then(res => {
           console.log(res);
@@ -578,6 +608,8 @@ export class DataService {
           // console.log(res.fullCriterionList);
           // console.log(res.cadetails);
           this.CADetails = res.cadetails;
+          this.PostalAddress = res.cadetails.postalAddress;
+          this.ContactingDetails = res.cadetails.contactingDetails;
           this.selectedCountry = this.CADetails.cacountry;
           this.EODetails = res.eodetails;
           console.log(this.EODetails);
@@ -636,7 +668,13 @@ export class DataService {
 
 
         })
-        .catch(err => err);
+        .catch(err => {
+          console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
+        });
     }
 
     if (form.value.chooseRole == 'CA') {
@@ -672,7 +710,8 @@ export class DataService {
       },
       'naturalPersons': this.EODetails.naturalPersons,
       'id': this.EODetails.id,
-      'webSiteURI': this.EODetails.webSiteURI
+      'webSiteURI': this.EODetails.webSiteURI,
+      'procurementProjectLot': this.EODetails.procurementProjectLot
     });
   }
 
@@ -727,23 +766,25 @@ export class DataService {
 
     /* ===================== create forms in case of predefined criteria ================== */
     if (this.isCreateResponse) {
+
       this.getEoRelatedACriteria()
         .then(res => {
 
           if (this.isCreateResponse) {
             this.eoRelatedACriteria = res;
             console.log('This is create response');
-          } else if (this.isImportESPD) {
-            console.log('This is import');
-            this.eoRelatedACriteria = this.eoRelatedACriteria;
-            console.log(this.eoRelatedACriteria);
           }
 
 
           this.eoRelatedACriteriaForm = this.createEORelatedCriterionForm(this.eoRelatedACriteria);
+          console.log(this.eoRelatedACriteriaForm);
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
         });
 
       this.getEoRelatedCCriteria()
@@ -753,6 +794,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
         });
 
       this.getEoRelatedDCriteria()
@@ -762,6 +807,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
         });
 
 
@@ -774,6 +823,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
         });
 
       this.getExclusionBCriteria()
@@ -784,6 +837,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
         });
 
       this.getExclusionCCriteria()
@@ -794,6 +851,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
         });
 
       this.getExclusionDCriteria()
@@ -804,9 +865,25 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
         });
 
       /* ======================== predefined selection criteria ============================ */
+      this.getSelectionALLCriteria()
+        .then(res => {
+          this.selectionALLCriteria = res;
+          this.selectionALLCriteriaForm = this.createSelectionCriterionForm(this.selectionALLCriteria);
+        })
+        .catch(err => {
+          console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
+        });
 
 
       this.getSelectionACriteria()
@@ -816,6 +893,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
         });
 
 
@@ -826,6 +907,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
         });
 
       this.getSelectionCCriteria()
@@ -835,6 +920,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
         });
 
       this.getSelectionDCriteria()
@@ -844,6 +933,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
         });
 
       /* =========================== predefined reduction criteria ================================= */
@@ -855,12 +948,17 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
         });
 
     }
 
     // get predefined criteria (ca)
     if (this.isCreateNewESPD) {
+
       /* =========================== predefined reduction criteria ================================= */
       this.getReductionCriteria()
         .then(res => {
@@ -869,6 +967,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
         });
 
       /* ========================= predefined other.eo criteria ====================================*/
@@ -879,6 +981,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
         });
 
       /* ======================== predefined exclusion criteria ================================== */
@@ -891,6 +997,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
         });
 
       this.getExclusionBCriteria()
@@ -900,6 +1010,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
         });
 
       this.getExclusionCCriteria()
@@ -909,6 +1023,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
         });
 
       this.getExclusionDCriteria()
@@ -918,6 +1036,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
         });
 
       /* ============================= predefined selection criteria =========================== */
@@ -928,6 +1050,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
         });
 
       this.getSelectionACriteria()
@@ -937,6 +1063,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
         });
 
 
@@ -947,6 +1077,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
         });
 
       this.getSelectionCCriteria()
@@ -956,6 +1090,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
         });
 
       this.getSelectionDCriteria()
@@ -965,6 +1103,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
         });
 
     }
@@ -986,6 +1128,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -1002,6 +1148,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -1018,6 +1168,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -1038,6 +1192,10 @@ export class DataService {
           }
         ).catch(err => {
           console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -1055,6 +1213,10 @@ export class DataService {
           }
         ).catch(err => {
           console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -1072,6 +1234,10 @@ export class DataService {
           }
         ).catch(err => {
           console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -1089,6 +1255,10 @@ export class DataService {
           }
         ).catch(err => {
           console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -1107,6 +1277,10 @@ export class DataService {
           }
         ).catch(err => {
           console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -1125,6 +1299,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -1141,6 +1319,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -1157,6 +1339,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -1173,6 +1359,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -1191,6 +1381,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -1208,6 +1402,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -1224,6 +1422,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -1240,6 +1442,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -1256,6 +1462,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -1384,10 +1594,15 @@ export class DataService {
 
             if (r.response.currency || r.response.amount) {
               group[r.uuid] = new FormControl(r.response.amount);
-              if (r.response.currency) {
+              if (r.response.currency !== null && r.response.currency !== undefined) {
                 group[r.uuid + 'currency'] = new FormControl(r.response.currency);
               }
             }
+            // in case of request import
+            if (r.response.currency === null || r.response.amount === '0') {
+              group[r.uuid + 'currency'] = new FormControl();
+            }
+
 
             // console.log(r.response);
           } else {
@@ -1395,6 +1610,8 @@ export class DataService {
             group[r.uuid] = new FormControl(r.response.description || '');
             if (this.isEO) {
               group[r.uuid + 'currency'] = new FormControl();
+              group[r.uuid + 'startDate'] = new FormControl();
+              group[r.uuid + 'endDate'] = new FormControl();
             }
 
           }

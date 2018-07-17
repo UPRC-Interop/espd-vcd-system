@@ -2,9 +2,9 @@ package eu.esens.espdvcd.model;
 
 import eu.esens.espdvcd.codelist.enums.EORoleTypeEnum;
 
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
-import javax.validation.constraints.NotNull;
 
 /**
  * Economic operator
@@ -92,7 +92,7 @@ public class EODetails {
      * BusReqID: tbr92-004<br>
      * UBL syntax path: espd-cac:EconomicOperatorParty.SMEIndicator<br>
      */
-    private Boolean smeIndicator;
+    private boolean smeIndicator;
 
     /**
      * Postal address
@@ -197,11 +197,11 @@ public class EODetails {
         this.name = name;
     }
 
-    public Boolean isSmeIndicator() {
+    public boolean isSmeIndicator() {
         return smeIndicator;
     }
 
-    public void setSmeIndicator(Boolean smeIndicator) {
+    public void setSmeIndicator(boolean smeIndicator) {
         this.smeIndicator = smeIndicator;
     }
 

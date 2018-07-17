@@ -37,7 +37,7 @@ export class ProcedureEoComponent implements OnInit {
   constructor(public dataService: DataService) {
     this.EOForm = new FormGroup({
       'name': new FormControl(this.dataService.EODetails.name),
-      'smeIndicator': new FormControl(this.dataService.EODetails.smeIndicator),
+      'smeIndicator': new FormControl(false),
       'postalAddress': new FormGroup({
         'addressLine1': new FormControl(),
         'postCode': new FormControl(),
@@ -52,7 +52,8 @@ export class ProcedureEoComponent implements OnInit {
       }),
       'naturalPersons': new FormArray([this.initNaturalPerson()]),
       'id': new FormControl(),
-      'webSiteURI': new FormControl()
+      'webSiteURI': new FormControl(),
+      'procurementProjectLot': new FormControl(0)
     });
     this.dataService.EOForm = this.EOForm;
   }
@@ -131,21 +132,21 @@ export class ProcedureEoComponent implements OnInit {
 
   reqGroupMatch(rg: RequirementGroup, cr: EoRelatedCriterion, form: FormGroup, formValues: any) {
 
-    if (rg != null || rg != undefined) {
+    if (rg != null || rg !== undefined) {
       // console.log('reqGroup ' + rg.uuid);
 
-      if (rg.requirements != undefined || rg.requirements != null) {
+      if (rg.requirements !== undefined || rg.requirements != null) {
 
         rg.requirements.forEach(req => {
-          if (req != null || req != undefined) {
+          if (req != null || req !== undefined) {
             // console.log('requirement uuid ' + req.uuid);
 
             console.log(formValues[req.uuid.valueOf()]);
             req.response = new RequirementResponse();
 
-            if (req.responseDataType == 'INDICATOR') {
+            if (req.responseDataType === 'INDICATOR') {
               // console.log(formValues[req.uuid.valueOf()]);
-              if (formValues[req.uuid.valueOf()] == true) {
+              if (formValues[req.uuid.valueOf()] === true) {
                 req.response.indicator = true;
                 req.response.uuid = null;
               } else {
@@ -153,16 +154,19 @@ export class ProcedureEoComponent implements OnInit {
                 req.response.uuid = null;
               }
 
-            } else if (req.responseDataType == 'DESCRIPTION') {
+            } else if (req.responseDataType === 'DESCRIPTION') {
               req.response.description = formValues[req.uuid.valueOf()];
               req.response.uuid = null;
-            } else if (req.responseDataType == 'EVIDENCE_URL') {
+            } else if (req.responseDataType === 'EVIDENCE_URL') {
               req.response.evidenceURL = formValues[req.uuid.valueOf()];
               req.response.uuid = null;
-            } else if (req.responseDataType == 'CODE') {
+            } else if (req.responseDataType == 'EVIDENCE_IDENTIFIER') {
+              req.response.evidenceSuppliedId = formValues[req.uuid.valueOf()];
+              req.response.uuid = null;
+            } else if (req.responseDataType === 'CODE') {
               req.response.evidenceURLCode = formValues[req.uuid.valueOf()];
               req.response.uuid = null;
-            } else if (req.responseDataType == 'DATE') {
+            } else if (req.responseDataType === 'DATE') {
               req.response.date = formValues[req.uuid.valueOf()];
               console.log(req.response.date);
               if (typeof req.response.date !== 'string') {
@@ -173,27 +177,27 @@ export class ProcedureEoComponent implements OnInit {
 
               console.log(req.response.date);
               req.response.uuid = null;
-            } else if (req.responseDataType == 'PERCENTAGE') {
+            } else if (req.responseDataType === 'PERCENTAGE') {
               req.response.percentage = formValues[req.uuid.valueOf()];
               req.response.uuid = null;
-            } else if (req.responseDataType == 'PERIOD') {
+            } else if (req.responseDataType === 'PERIOD') {
               req.response.period = formValues[req.uuid.valueOf()];
               req.response.uuid = null;
-            } else if (req.responseDataType == 'CODE_COUNTRY') {
+            } else if (req.responseDataType === 'CODE_COUNTRY') {
               req.response.countryCode = formValues[req.uuid.valueOf()];
               req.response.uuid = null;
-            } else if (req.responseDataType == 'AMOUNT') {
+            } else if (req.responseDataType === 'AMOUNT') {
               req.response.amount = formValues[req.uuid.valueOf()];
               // const currencyid = req.uuid + 'currency';
               // req.response.currency = formValues[currencyid.valueOf()];
               req.response.uuid = null;
-            } else if (req.responseDataType == 'QUANTITY_INTEGER') {
+            } else if (req.responseDataType === 'QUANTITY_INTEGER') {
               req.response.quantity = formValues[req.uuid.valueOf()];
               req.response.uuid = null;
-            } else if (req.responseDataType == 'QUANTITY') {
+            } else if (req.responseDataType === 'QUANTITY') {
               req.response.quantity = formValues[req.uuid.valueOf()];
               req.response.uuid = null;
-            } else if (req.responseDataType == 'QUANTITY_YEAR') {
+            } else if (req.responseDataType === 'QUANTITY_YEAR') {
               req.response.year = formValues[req.uuid.valueOf()];
               req.response.uuid = null;
             }
@@ -204,10 +208,10 @@ export class ProcedureEoComponent implements OnInit {
         });
       }
 
-      if (rg.requirementGroups != null || rg.requirementGroups != undefined) {
+      if (rg.requirementGroups != null || rg.requirementGroups !== undefined) {
 
         let firstRgFormValues = null;
-        let firstRgId = rg.uuid;
+        const firstRgId = rg.uuid;
         firstRgFormValues = formValues;
         // console.log('This is ID out ' + firstRgId);
         rg.requirementGroups.forEach(rg2 => {
@@ -215,13 +219,13 @@ export class ProcedureEoComponent implements OnInit {
           // console.log('inner reqgroup id ' + rg2.uuid);
 
 
-          if (rg.uuid == firstRgId) {
+          if (rg.uuid === firstRgId) {
             // console.log('Reset to first ReqGroup ');
             formValues = firstRgFormValues;
           }
 
           // fix
-          if (formValues[rg2.uuid.valueOf()] != undefined) {
+          if (formValues[rg2.uuid.valueOf()] !== undefined) {
             formValues = formValues[rg2.uuid.valueOf()];
           }
 
@@ -240,7 +244,7 @@ export class ProcedureEoComponent implements OnInit {
   onProcedureEOSubmit(form: NgForm, eoForm: FormGroup) {
     console.log(form.value);
     console.log(eoForm.value);
-    let formValues = this.formA.getRawValue();
+    const formValues = this.formA.getRawValue();
     console.log(formValues);
 
     this.eoRelatedACriteria.forEach(cr => {
@@ -258,11 +262,11 @@ export class ProcedureEoComponent implements OnInit {
           // formValues = testFormValues;
         }
 
-        if (formValues[rg.uuid.valueOf()] == undefined) {
+        if (formValues[rg.uuid.valueOf()] === undefined) {
           // console.log('THIS IS undefined');
           testFormValues = testFormValues[rg.uuid.valueOf()];
           this.reqGroupMatch(rg, cr, this.formA, testFormValues);
-        } else if (formValues[rg.uuid.valueOf()] != undefined) {
+        } else if (formValues[rg.uuid.valueOf()] !== undefined) {
           // console.log('THIS IS DEFINED');
           formValues = formValues[rg.uuid.valueOf()];
           this.reqGroupMatch(rg, cr, this.formA, formValues);
@@ -283,7 +287,7 @@ export class ProcedureEoComponent implements OnInit {
           // formValues = testFormValues;
         }
 
-        if (formValues[rg.uuid.valueOf()] == undefined) {
+        if (formValues[rg.uuid.valueOf()] === undefined) {
           // fix
           let testFormValues = null;
           testFormValues = this.formC.getRawValue();
@@ -312,7 +316,7 @@ export class ProcedureEoComponent implements OnInit {
           // formValues = testFormValues;
         }
 
-        if (formValues[rg.uuid.valueOf()] == undefined) {
+        if (formValues[rg.uuid.valueOf()] === undefined) {
           console.log('THIS IS undefined');
           // fix
           let testFormValues = null;
@@ -322,7 +326,7 @@ export class ProcedureEoComponent implements OnInit {
           // fix
 
           this.reqGroupMatch(rg, cr, this.formD, testFormValues);
-        } else if (formValues[rg.uuid.valueOf()] != undefined) {
+        } else if (formValues[rg.uuid.valueOf()] !== undefined) {
           console.log('THIS IS DEFINED');
           formValues = formValues[rg.uuid.valueOf()];
           this.reqGroupMatch(rg, cr, this.formD, formValues);
@@ -336,6 +340,9 @@ export class ProcedureEoComponent implements OnInit {
 
     this.dataService.CADetails.cacountry = form.value.CACountry;
     this.dataService.CADetails.receivedNoticeNumber = form.value.receivedNoticeNumber;
+    this.dataService.PostalAddress.countryCode = form.value.CACountry;
+    this.dataService.CADetails.postalAddress = this.dataService.PostalAddress;
+    this.dataService.CADetails.contactingDetails = this.dataService.ContactingDetails;
 
     console.log(this.dataService.selectedEOCountry);
 

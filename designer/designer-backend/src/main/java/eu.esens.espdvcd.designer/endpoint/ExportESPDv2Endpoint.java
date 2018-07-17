@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import eu.esens.espdvcd.designer.deserialiser.RequirementDeserialiser;
+import eu.esens.espdvcd.designer.deserialiser.RequirementDeserialiserV2;
 import eu.esens.espdvcd.designer.exception.ValidationException;
 import eu.esens.espdvcd.designer.service.ModeltoESPDService;
 import eu.esens.espdvcd.designer.typeEnum.ArtefactType;
@@ -32,7 +33,7 @@ public class ExportESPDv2Endpoint extends Endpoint {
         artefactType = service.getArtefactType();
 
         SimpleModule desrModule = new SimpleModule();
-        desrModule.addDeserializer(Requirement.class, new RequirementDeserialiser());
+        desrModule.addDeserializer(Requirement.class, new RequirementDeserialiserV2());
         priveMapper = new ObjectMapper()
                 .registerModule(new JavaTimeModule())
                 .disable(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE).registerModule(desrModule);

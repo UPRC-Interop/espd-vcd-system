@@ -15,6 +15,14 @@ import {Country} from '../model/country.model';
 export class StartComponent implements OnInit {
 
   countries: Country[];
+  isCA = false;
+  isEO = false;
+  isCreateNewESPD = false;
+  isReuseESPD = false;
+  isReviewESPD = false;
+  isImportESPD  = false;
+  isCreateResponse = false;
+  fileToUpload: File[] = [];
 
   // procedureTypes:ProcedureType[];
 
@@ -34,14 +42,7 @@ export class StartComponent implements OnInit {
 
   }
 
-  isCA: boolean = false;
-  isEO: boolean = false;
-  isCreateNewESPD: boolean = false;
-  isReuseESPD: boolean = false;
-  isReviewESPD: boolean = false;
-  isImportESPD: boolean = false;
-  isCreateResponse: boolean = false;
-  fileToUpload: File[] = [];
+
 
 
   handleFileUpload(files: FileList) {
@@ -109,11 +110,11 @@ export class StartComponent implements OnInit {
 
     // CA reuses ESPDRequest
     if (this.isCA) {
-      let role = 'CA';
+      const role = 'CA';
       this.dataService.ReuseESPD(this.fileToUpload, form, role);
     } else if (this.isEO) {
       // TODO EOReuseESPD
-      let role = 'EO';
+      const role = 'EO';
       this.dataService.ReuseESPD(this.fileToUpload, form, role);
     }
 
