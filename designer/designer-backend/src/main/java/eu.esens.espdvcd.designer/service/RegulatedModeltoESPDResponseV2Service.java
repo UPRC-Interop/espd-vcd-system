@@ -15,11 +15,15 @@ public class RegulatedModeltoESPDResponseV2Service implements ModeltoESPDService
 
     @Override
     public InputStream CreateXMLStreamFromModel(Object document) {
+        ESPDResponse doc = (ESPDResponse) document;
+        doc.getEvidenceList().removeIf(e -> e.getEvidenceURL() == null);
         return BuilderFactory.withEDMVersion2().getDocumentBuilderFor((ESPDResponse) document).getAsInputStream();
     }
 
     @Override
     public String CreateXMLStringFromModel(Object document) {
+        ESPDResponse doc = (ESPDResponse) document;
+        doc.getEvidenceList().removeIf(e -> e.getEvidenceURL() == null);
         return BuilderFactory.withEDMVersion2().getDocumentBuilderFor((ESPDResponse) document).getAsString();
     }
 
