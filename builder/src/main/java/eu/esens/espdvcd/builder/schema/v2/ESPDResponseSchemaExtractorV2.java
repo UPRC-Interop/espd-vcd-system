@@ -1,6 +1,5 @@
 package eu.esens.espdvcd.builder.schema.v2;
 
-import eu.esens.espdvcd.codelist.CodelistsV2;
 import eu.esens.espdvcd.codelist.enums.EOIndustryClassificationCodeEnum;
 import eu.esens.espdvcd.codelist.enums.ProfileExecutionIDEnum;
 import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
@@ -191,11 +190,10 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
         eoPartyType.getQualifyingParty().get(0).setParty(new PartyType());
         eoPartyType.setParty(new PartyType());
 
-        if (eod.isSmeIndicator() != null) {
-            String icc = eod.isSmeIndicator() ? EOIndustryClassificationCodeEnum.SME.name()
-                    : EOIndustryClassificationCodeEnum.LARGE.name();
-            eoPartyType.getParty().setIndustryClassificationCode(createIndustryClassificationCodeType(icc));
-        }
+        String icc = eod.isSmeIndicator() ? EOIndustryClassificationCodeEnum.SME.name()
+                : EOIndustryClassificationCodeEnum.LARGE.name();
+        eoPartyType.getParty().setIndustryClassificationCode(createIndustryClassificationCodeType(icc));
+
 
         if (eod.getEoRole() != null) {
             eoPartyType.setEconomicOperatorRole(new EconomicOperatorRoleType());

@@ -8,6 +8,7 @@ import {EoRelatedCriterion} from '../model/eoRelatedCriterion.model';
 import {ExclusionCriteria} from '../model/exclusionCriteria.model';
 import * as moment from 'moment';
 import {Moment} from 'moment';
+import {ApicallService} from '../services/apicall.service';
 
 @Component({
   selector: 'app-selection-eo',
@@ -29,10 +30,10 @@ export class SelectionEoComponent implements OnInit {
   @Input() formC: FormGroup;
   @Input() formD: FormGroup;
   @Input() formALL: FormGroup;
-  isSatisfiedALL: boolean = true;
-  isAtoD: boolean = false;
+  isSatisfiedALL = true;
+  isAtoD = false;
 
-  constructor(public dataService: DataService) {
+  constructor(public dataService: DataService, private APIService: ApicallService) {
   }
 
   ngOnInit() {
@@ -64,17 +65,17 @@ export class SelectionEoComponent implements OnInit {
 
   reqGroupMatch(rg: RequirementGroup, cr: EoRelatedCriterion, form: FormGroup, formValues: any) {
 
-    if (rg != null || rg != undefined) {
+    if (rg != null || rg !== undefined) {
       // console.log('reqGroup ' + rg.uuid);
 
       // let reqFormValues = null;
       // let firstReqRg = rg.uuid;
       // reqFormValues = formValues;
-      if (rg.requirements != undefined || rg.requirements != null) {
+      if (rg.requirements !== undefined || rg.requirements != null) {
 
 
         rg.requirements.forEach(req => {
-          if (req != null || req != undefined) {
+          if (req !== null || req !== undefined) {
 
             // if (reqFormValues == null) {
             //   // reqFormValues = form.getRawValue();
@@ -105,26 +106,45 @@ export class SelectionEoComponent implements OnInit {
             } else if (req.responseDataType == 'EVIDENCE_URL') {
               req.response.evidenceURL = formValues[req.uuid.valueOf()];
               req.response.uuid = null;
+            } else if (req.responseDataType == 'EVIDENCE_IDENTIFIER') {
+              req.response.evidenceSuppliedId = formValues[req.uuid.valueOf()];
+              req.response.uuid = null;
             } else if (req.responseDataType == 'CODE') {
               req.response.evidenceURLCode = formValues[req.uuid.valueOf()];
               req.response.uuid = null;
             } else if (req.responseDataType == 'DATE') {
               req.response.date = formValues[req.uuid.valueOf()];
               // console.log('CHECKING DATE-----------------------------------------------');
-              console.log(req.response.date);
-              console.log(typeof req.response.date);
+              // console.log(req.response.date);
+              // console.log(typeof req.response.date);
               if (typeof req.response.date !== 'string') {
                 const utcDate = this.dataService.toUTCDate(req.response.date);
                 req.response.date = moment(utcDate);
               }
-
-
               req.response.uuid = null;
             } else if (req.responseDataType == 'PERCENTAGE') {
               req.response.percentage = formValues[req.uuid.valueOf()];
               req.response.uuid = null;
-            } else if (req.responseDataType == 'PERIOD') {
+            } else if (req.responseDataType == 'PERIOD' && this.APIService.version === 'v1') {
               req.response.period = formValues[req.uuid.valueOf()];
+              req.response.uuid = null;
+            } else if (req.responseDataType == 'PERIOD' && this.APIService.version === 'v2') {
+              // req.response.period = formValues[req.uuid.valueOf()];
+              const startDateid = req.uuid + 'startDate';
+              req.response.startDate = formValues[startDateid.valueOf()];
+              if (typeof req.response.startDate !== 'string' && req.response.startDate !== null) {
+                const utcDate = this.dataService.toUTCDate(req.response.startDate);
+                req.response.startDate = moment(utcDate);
+              }
+              console.log(req.response.startDate);
+              const endDateid = req.uuid + 'endDate';
+              req.response.endDate = formValues[endDateid.valueOf()];
+              if (typeof req.response.endDate !== 'string' && req.response.endDate !== null) {
+                const utcDate = this.dataService.toUTCDate(req.response.endDate);
+                req.response.endDate = moment(utcDate);
+              }
+              console.log(req.response.endDate);
+
               req.response.uuid = null;
             } else if (req.responseDataType == 'CODE_COUNTRY') {
               req.response.countryCode = formValues[req.uuid.valueOf()];

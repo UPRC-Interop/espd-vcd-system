@@ -71,6 +71,10 @@ export class ProcedureComponent implements OnInit, OnChanges {
     // console.log(form.value);
     this.dataService.CADetails.cacountry = form.value.CACountry;
     this.dataService.CADetails.receivedNoticeNumber = form.value.receivedNoticeNumber;
+    // this.dataService.CADetails.postalAddress.countryCode = form.value.CACountry;
+    this.dataService.PostalAddress.countryCode = form.value.CACountry;
+    this.dataService.CADetails.postalAddress = this.dataService.PostalAddress;
+    this.dataService.CADetails.contactingDetails = this.dataService.ContactingDetails;
     console.log(this.dataService.CADetails);
     // this.dataService.procedureSubmit(this.eoRelatedCriteria, this.reductionCriteria);
   }
