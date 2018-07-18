@@ -176,7 +176,7 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Multilin
         predefinedCriterionList.stream().forEach(sc -> applyECertisDataAsSelected(sc, addAsSelected));
         Set<SelectableCriterion> fullSet = new HashSet<>(predefinedCriterionList);
         initialSet.addAll(fullSet);
-        Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.SEVERE, "Criterion List Size in model: " + initialSet.size());
+        Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.INFO, "Criterion List Size in model: " + initialSet.size());
         return new ArrayList<>(initialSet);
     }
 

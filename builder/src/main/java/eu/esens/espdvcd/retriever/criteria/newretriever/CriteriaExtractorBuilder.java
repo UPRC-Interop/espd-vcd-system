@@ -4,6 +4,8 @@ import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
 import eu.esens.espdvcd.retriever.criteria.newretriever.resource.*;
 import eu.esens.espdvcd.schema.SchemaVersion;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -12,9 +14,9 @@ import java.util.logging.Logger;
  */
 public class CriteriaExtractorBuilder {
 
-    private CriteriaResource cResource;
-    private LegislationResource lResource;
-    private RequirementGroupResource rgResource;
+    private List<CriteriaResource> cResourceList;
+    private List<LegislationResource> lResourceList;
+    private List<RequirementGroupResource> rgResourceList;
 
     private CriteriaTaxonomyResource taxonomyResource;
     private ECertisResource eCertisResource;
@@ -30,6 +32,9 @@ public class CriteriaExtractorBuilder {
     }
 
     public CriteriaExtractorBuilder(SchemaVersion version) {
+        cResourceList = new ArrayList<>();
+        lResourceList = new ArrayList<>();
+        rgResourceList = new ArrayList<>();
 
         if (version != null) {
             this.version = version;
@@ -40,38 +45,38 @@ public class CriteriaExtractorBuilder {
     }
 
     public CriteriaExtractorBuilder addCriteriaResource(CriteriaResource resource) {
-        this.cResource = resource;
+        cResourceList.add(resource);
         return CriteriaExtractorBuilder.this;
     }
 
     public CriteriaExtractorBuilder addLegislationResource(LegislationResource resource) {
-        this.lResource = resource;
+        lResourceList.add(resource);
         return CriteriaExtractorBuilder.this;
     }
 
     public CriteriaExtractorBuilder addRequirementGroupsResource(RequirementGroupResource resource) {
-        this.rgResource = resource;
+        rgResourceList.add(resource);
         return CriteriaExtractorBuilder.this;
     }
 
     public CriteriaExtractor build() {
 
-        if (cResource == null) {
+        if (cResourceList.isEmpty()) {
             initCriteriaTaxonomyResource();
-            cResource = taxonomyResource;
+            cResourceList.add(taxonomyResource);
         }
 
-        if (lResource == null) {
+        if (lResourceList.isEmpty()) {
             initESPDArtefactResource();
-            lResource = artefactResource;
+            lResourceList.add(artefactResource);
         }
 
-        if (rgResource == null) {
+        if (rgResourceList.isEmpty()) {
             initCriteriaTaxonomyResource();
-            rgResource = taxonomyResource;
+            rgResourceList.add(taxonomyResource);
         }
 
-        return new CriteriaExtractorImpl(cResource, lResource, rgResource);
+        return new CriteriaExtractorImpl(cResourceList, lResourceList, rgResourceList);
     }
 
     /**

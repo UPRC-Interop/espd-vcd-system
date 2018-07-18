@@ -11,8 +11,10 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.function.Function;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 /**
  * @author konstantinos Raptis
@@ -72,7 +74,7 @@ public class CriteriaTaxonomyResource implements CriteriaResource, RequirementGr
                         sc.setSelected(true);
                         sc.getRequirementGroups().addAll(
                                 extractQuestionGroups(dataSheet, r.getRowNum() + 1,
-                                        r2.getRowNum() + 1,criteriaColumn + 1));
+                                        r2.getRowNum() + 1, criteriaColumn + 1));
                         crList.add(sc);
                     }
                 }
@@ -156,6 +158,12 @@ public class CriteriaTaxonomyResource implements CriteriaResource, RequirementGr
     @Override
     public List<SelectableCriterion> getCriterionList() {
         return criterionList;
+    }
+
+    @Override
+    public Map<String, SelectableCriterion> getCriterionMap() {
+        return criterionList.stream()
+                .collect(Collectors.toMap(sc -> sc.getID(), Function.identity()));
     }
 
     @Override

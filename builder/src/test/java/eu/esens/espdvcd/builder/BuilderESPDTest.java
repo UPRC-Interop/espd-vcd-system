@@ -7,6 +7,13 @@ import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.ResponseRequirement;
+import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
+import eu.esens.espdvcd.retriever.criteria.CriteriaExtractorFactory;
+import eu.esens.espdvcd.retriever.criteria.CriteriaExtractorFactoryProducer;
+import eu.esens.espdvcd.retriever.criteria.MultilingualCriteriaExtractorFactory;
+import eu.esens.espdvcd.retriever.criteria.enums.FactoryType;
+import eu.esens.espdvcd.retriever.criteria.enums.MultilingualFactoryType;
+import eu.esens.espdvcd.schema.SchemaVersion;
 import eu.espd.schema.v1.espdresponse_1.ESPDResponseType;
 import org.junit.Assert;
 import org.junit.Before;
@@ -183,6 +190,36 @@ public class BuilderESPDTest {
     }
 
     @Test
+    public void createRegulatedRequestV2FromAnImportedV2Request() throws Exception {
+
+        ESPDRequest espdRequest = BuilderFactory.withEDMVersion2()
+                .getRegulatedModelBuilder()
+                .importFrom(BuilderESPDTest.class.getResourceAsStream("/REGULATED-ESPD-Request_2.0.2.xml"))
+                .createESPDRequest();
+
+        XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.withEDMVersion2().getDocumentBuilderFor(espdRequest);
+        System.out.println(xmlDocumentBuilderV2.getAsString());
+    }
+
+    @Test
+    public void createRegulatedRequestV2FromAnImportedV2RequestWithExtractor() throws Exception {
+
+        ESPDRequest espdRequest = BuilderFactory.withEDMVersion2()
+                .getRegulatedModelBuilder()
+                .importFrom(BuilderESPDTest.class.getResourceAsStream("/REGULATED-ESPD-Request_2.0.2.xml"))
+                .createESPDRequest();
+
+        CriteriaExtractorFactory factory = CriteriaExtractorFactoryProducer.getFactory(FactoryType.PREDEFINED_ESPD);
+        CriteriaExtractor extractor = factory.createCriteriaExtractor(SchemaVersion.V2);
+        // MultilingualCriteriaExtractorFactory factory = CriteriaExtractorFactoryProducer.getMultilingualFactory(MultilingualFactoryType.ECERTIS);
+        // CriteriaExtractor extractor = factory.createMultilingualCriteriaExtractor(SchemaVersion.V2);
+        espdRequest.setCriterionList(extractor.getFullList(espdRequest.getFullCriterionList()));
+
+        XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.withEDMVersion2().getDocumentBuilderFor(espdRequest);
+        // System.out.println(xmlDocumentBuilderV2.getAsString());
+    }
+
+    @Test
     public void createRegulatedResponseV2FromAnImportedV2Response() throws Exception {
 
         ESPDResponse espdResponse = BuilderFactory.withEDMVersion2()
@@ -191,7 +228,7 @@ public class BuilderESPDTest {
                 .createESPDResponse();
 
         XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.withEDMVersion2().getDocumentBuilderFor(espdResponse);
-        System.out.println(xmlDocumentBuilderV2.theXML);
+        System.out.println(xmlDocumentBuilderV2.getAsString());
     }
 
     @Test
@@ -204,7 +241,7 @@ public class BuilderESPDTest {
                 .createESPDResponse();
 
         XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.withEDMVersion2().getDocumentBuilderFor(espdResponse);
-        System.out.println(xmlDocumentBuilderV2.theXML);
+        System.out.println(xmlDocumentBuilderV2.getAsString());
     }
 
 }

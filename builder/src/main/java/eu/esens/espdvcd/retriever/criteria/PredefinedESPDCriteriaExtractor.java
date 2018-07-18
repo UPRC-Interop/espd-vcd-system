@@ -26,6 +26,8 @@ public class PredefinedESPDCriteriaExtractor implements CriteriaExtractor {
 
     private final SchemaVersion version;
 
+    Logger logger = Logger.getLogger(PredefinedESPDCriteriaExtractor.class.getName());
+
     public PredefinedESPDCriteriaExtractor(@NotNull SchemaVersion version) {
         this.version = version;
 
@@ -45,25 +47,6 @@ public class PredefinedESPDCriteriaExtractor implements CriteriaExtractor {
                 throw new IllegalArgumentException("Error... Invalid schema version value.");
         }
 
-    }
-
-    private SelectableCriterion applyDataFromV2Artefact(final SelectableCriterion excelCriterion, boolean isSelected) {
-
-        TenderingCriterionType artefactCriterionType = tenderingCriterionTypeMap.get(excelCriterion.getID());
-
-        if (artefactCriterionType != null) {
-            SelectableCriterion artefactCriterion = ModelFactory.ESPD_REQUEST.extractSelectableCriterion(artefactCriterionType, isSelected);
-
-            if (artefactCriterion.getLegislationReference() != null) {
-                excelCriterion.setLegislationReference(artefactCriterion.getLegislationReference());
-            }
-        }
-
-        return excelCriterion;
-    }
-
-    private SelectableCriterion applyDataFromV2Artefact(final SelectableCriterion excelCriterion) {
-        return applyDataFromV2Artefact(excelCriterion, true);
     }
 
     @Override
@@ -97,10 +80,40 @@ public class PredefinedESPDCriteriaExtractor implements CriteriaExtractor {
         return getFullList(initialList, false);
     }
 
+//    @Override
+//    public List<SelectableCriterion> getFullList(List<SelectableCriterion> initialList, boolean addAsSelected) {
+//        Set<SelectableCriterion> initialSet = new LinkedHashSet<>();
+//        initialSet.addAll(initialList);
+//        Set<SelectableCriterion> fullSet;
+//
+//        switch (version) {
+//
+//            case V1:
+//                fullSet = criterionTypeList.stream()
+//                        .map(c -> ModelFactory.ESPD_REQUEST.extractSelectableCriterion(c, addAsSelected))
+//                        .collect(Collectors.toSet());
+//                break;
+//
+//            case V2:
+//                fullSet = excelCriterionList.stream()
+//                        .map(sc -> applyDataFromV2Artefact(sc, addAsSelected))
+//                        .collect(Collectors.toSet());
+//                break;
+//
+//            default:
+//                throw new IllegalArgumentException("Error... Invalid schema version value.");
+//        }
+//
+//        initialSet.addAll(fullSet);
+//        Logger.getLogger(PredefinedESPDCriteriaExtractor.class.getName()).log(Level.INFO, "Criterion List Size in model: " + initialSet.size());
+//        return new ArrayList<>(initialSet);
+//    }
+
     @Override
     public List<SelectableCriterion> getFullList(List<SelectableCriterion> initialList, boolean addAsSelected) {
         Set<SelectableCriterion> initialSet = new LinkedHashSet<>();
         initialSet.addAll(initialList);
+        logger.log(Level.INFO, "(1) InitialSet size: " + initialSet.size());
         Set<SelectableCriterion> fullSet;
 
         switch (version) {
@@ -121,9 +134,29 @@ public class PredefinedESPDCriteriaExtractor implements CriteriaExtractor {
                 throw new IllegalArgumentException("Error... Invalid schema version value.");
         }
 
+        logger.log(Level.INFO, "(2) fullSet size: " + fullSet.size());
         initialSet.addAll(fullSet);
-        Logger.getLogger(PredefinedESPDCriteriaExtractor.class.getName()).log(Level.INFO, "Criterion List Size in model: " + initialSet.size());
+        logger.log(Level.INFO, "(3) InitialSet size after adding fullSet: " + initialSet.size());
         return new ArrayList<>(initialSet);
+    }
+
+    private SelectableCriterion applyDataFromV2Artefact(SelectableCriterion excelCriterion) {
+        return applyDataFromV2Artefact(excelCriterion, true);
+    }
+
+    private SelectableCriterion applyDataFromV2Artefact(SelectableCriterion excelCriterion, boolean isSelected) {
+
+        TenderingCriterionType artefactCriterionType = tenderingCriterionTypeMap.get(excelCriterion.getID());
+
+        if (artefactCriterionType != null) {
+            SelectableCriterion artefactCriterion = ModelFactory.ESPD_REQUEST.extractSelectableCriterion(artefactCriterionType, isSelected);
+
+            if (artefactCriterion.getLegislationReference() != null) {
+                excelCriterion.setLegislationReference(artefactCriterion.getLegislationReference());
+            }
+        }
+
+        return excelCriterion;
     }
 
 }
