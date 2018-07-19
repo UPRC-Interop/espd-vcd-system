@@ -121,6 +121,9 @@ export class SelectionEoComponent implements OnInit {
               let evidence = new Evidence();
               let evidenceIssuer = new EvidenceIssuer();
               evidence.id = req.id;
+              // if (formValues[evidenceUrlID.valueOf()] === null) {
+              //   evidence.evidenceURL = '';
+              // }
               evidence.evidenceURL = formValues[evidenceUrlID.valueOf()];
               evidence.description = formValues[evidenceCodeID.valueOf()];
               evidenceIssuer.name = formValues[evidenceIssuerID.valueOf()];
