@@ -11,10 +11,13 @@
 
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <div class="desc">
-        <h4>Article {{exclusionACriteria['0'].legislationReference.article}} of
-          {{exclusionACriteria['0'].legislationReference.title}} sets out the following reasons for exclusion</h4>
-      </div>
+      <ng-container *ngIf="exclusionACriteria.length !== 0">
+        <div class="desc">
+          <h4>Article {{exclusionACriteria['0'].legislationReference.article}} of
+            {{exclusionACriteria['0'].legislationReference.title}} sets out the following reasons for exclusion</h4>
+        </div>
+      </ng-container>
+
       <mat-card *ngFor="let cr of exclusionACriteria; let i = index">
         <div class="exclusionCriteria">
 
@@ -50,10 +53,12 @@
 
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <div class="desc">
-        <h4>Article {{exclusionBCriteria['0'].legislationReference.article}} of
-          {{exclusionBCriteria['0'].legislationReference.title}} sets out the following reasons for exclusion</h4>
-      </div>
+      <ng-container *ngIf="exclusionBCriteria.length !== 0">
+        <div class="desc">
+          <h4>Article {{exclusionBCriteria['0'].legislationReference.article}} of
+            {{exclusionBCriteria['0'].legislationReference.title}} sets out the following reasons for exclusion</h4>
+        </div>
+      </ng-container>
       <mat-card *ngFor="let cr of exclusionBCriteria">
         <div class="exclusionCriteria">
           <div class="criterion-wrap">
@@ -87,10 +92,12 @@
 
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <div class="desc">
-        <h4>Article {{exclusionCCriteria['0'].legislationReference.article}} of
-          {{exclusionCCriteria['0'].legislationReference.title}} sets out the following reasons for exclusion</h4>
-      </div>
+      <ng-container *ngIf="exclusionCCriteria.length !== 0">
+        <div class="desc">
+          <h4>Article {{exclusionCCriteria['0'].legislationReference.article}} of
+            {{exclusionCCriteria['0'].legislationReference.title}} sets out the following reasons for exclusion</h4>
+        </div>
+      </ng-container>
       <mat-card *ngFor="let cr of exclusionCCriteria">
         <div class="exclusionCriteria">
           <div class="criterion-wrap">
@@ -124,10 +131,12 @@
 
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <div class="desc">
-        <h4>Do the purely national grounds of exclusion, which are specified in the relevant notice or in the
-          procurement documents, apply?</h4>
-      </div>
+      <ng-container *ngIf="exclusionDCriteria.length !== 0">
+        <div class="desc">
+          <h4>Do the purely national grounds of exclusion, which are specified in the relevant notice or in the
+            procurement documents, apply?</h4>
+        </div>
+      </ng-container>
       <mat-card *ngFor="let cr of exclusionDCriteria; let i=index">
         <div class="exclusionCriteria">
           <div class="criterion-wrap">

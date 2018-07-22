@@ -321,7 +321,7 @@ export class DataService {
   // date handling
 
   toUTCDate(date: Moment): Moment {
-    if (date !== null) {
+    if (date !== null && date !== undefined) {
       const utcDate = new Date(Date.UTC(date.toDate().getFullYear(),
         date.toDate().getMonth(),
         date.toDate().getDate(),
@@ -619,6 +619,13 @@ export class DataService {
           // console.log(this.EODetails.naturalPersons['birthDate']);
           this.selectedEOCountry = this.EODetails.postalAddress.countryCode;
 
+          // get evidence list only in v2
+          if (this.APIService.version === 'v2') {
+            this.evidenceList = res.evidenceList;
+            console.log(this.evidenceList);
+          }
+
+
           // Fill in EoDetails Form
 
           this.eoDetailsFormUpdate();
@@ -627,35 +634,57 @@ export class DataService {
           console.log(res.fullCriterionList);
 
           this.eoRelatedACriteria = this.filterEoRelatedCriteria(this.EO_RELATED_A_REGEXP, res.fullCriterionList);
-          this.eoRelatedCCriteria = this.filterEoRelatedCriteria(this.EO_RELATED_C_REGEXP, res.fullCriterionList);
-          this.eoRelatedDCriteria = this.filterEoRelatedCriteria(this.EO_RELATED_D_REGEXP, res.fullCriterionList);
           // console.log(this.eoRelatedACriteria);
+          this.eoRelatedCCriteria = this.filterEoRelatedCriteria(this.EO_RELATED_C_REGEXP, res.fullCriterionList);
+          // console.log(this.eoRelatedCCriteria);
+          this.eoRelatedDCriteria = this.filterEoRelatedCriteria(this.EO_RELATED_D_REGEXP, res.fullCriterionList);
+          // console.log(this.eoRelatedDCriteria);
           this.eoRelatedACriteriaForm = this.createEORelatedCriterionForm(this.eoRelatedACriteria);
+          // console.log(this.eoRelatedACriteriaForm);
           this.eoRelatedCCriteriaForm = this.createEORelatedCriterionForm(this.eoRelatedCCriteria);
+          // console.log(this.eoRelatedCCriteriaForm);
           this.eoRelatedDCriteriaForm = this.createEORelatedCriterionForm(this.eoRelatedDCriteria);
+          // console.log(this.eoRelatedDCriteriaForm);
 
 
           this.exclusionACriteria = this.filterExclusionCriteria(this.EXCLUSION_CONVICTION_REGEXP, res.fullCriterionList);
+          // console.log(this.exclusionACriteria);
           this.exclusionBCriteria = this.filterExclusionCriteria(this.EXCLUSION_CONTRIBUTION_REGEXP, res.fullCriterionList);
+          // console.log(this.exclusionBCriteria);
           this.exclusionCCriteria = this.filterExclusionCriteria(this.EXCLUSION_SOCIAL_BUSINESS_MISCONDUCT_CONFLICT_REGEXP, res.fullCriterionList);
+          // console.log(this.exclusionCCriteria);
           this.exclusionDCriteria = this.filterExclusionCriteria(this.EXCLUSION_NATIONAL_REGEXP, res.fullCriterionList);
+          // console.log(this.exclusionDCriteria);
 
           this.exclusionACriteriaForm = this.createExclusionCriterionForm(this.exclusionACriteria);
+          // console.log(this.exclusionACriteriaForm);
           this.exclusionBCriteriaForm = this.createExclusionCriterionForm(this.exclusionBCriteria);
+          // console.log(this.exclusionBCriteriaForm);
           this.exclusionCCriteriaForm = this.createExclusionCriterionForm(this.exclusionCCriteria);
+          // console.log(this.exclusionCCriteriaForm);
           this.exclusionDCriteriaForm = this.createExclusionCriterionForm(this.exclusionDCriteria);
+          // console.log(this.exclusionDCriteriaForm);
 
           this.selectionACriteria = this.filterSelectionCriteria(this.SELECTION_SUITABILITY_REGEXP, res.fullCriterionList);
+          // console.log(this.selectionACriteria);
           this.selectionBCriteria = this.filterSelectionCriteria(this.SELECTION_ECONOMIC_REGEXP, res.fullCriterionList);
+          // console.log(this.selectionBCriteria);
           this.selectionCCriteria = this.filterSelectionCriteria(this.SELECTION_TECHNICAL_REGEXP, res.fullCriterionList);
+          // console.log(this.selectionCCriteria);
           this.selectionDCriteria = this.filterSelectionCriteria(this.SELECTION_CERTIFICATES_REGEXP, res.fullCriterionList);
+          // console.log(this.selectionDCriteria);
           this.selectionALLCriteria = this.filterSelectionCriteria(this.SELECTION_REGEXP, res.fullCriterionList);
+          console.log(this.selectionALLCriteria);
 
 
           this.selectionACriteriaForm = this.createSelectionCriterionForm(this.selectionACriteria);
+          // console.log(this.selectionACriteriaForm);
           this.selectionBCriteriaForm = this.createSelectionCriterionForm(this.selectionBCriteria);
+          // console.log(this.selectionBCriteriaForm);
           this.selectionCCriteriaForm = this.createSelectionCriterionForm(this.selectionCCriteria);
+          // console.log(this.selectionCCriteriaForm);
           this.selectionDCriteriaForm = this.createSelectionCriterionForm(this.selectionDCriteria);
+          // console.log(this.selectionDCriteriaForm);
           this.selectionALLCriteriaForm = this.createSelectionCriterionForm(this.selectionALLCriteria);
 
 
@@ -704,17 +733,29 @@ export class DataService {
         'city': this.EODetails.postalAddress.city,
         'countryCode': this.selectedEOCountry,
       },
-      'contactingDetails': {
-        'contactPointName': this.EODetails.contactingDetails.contactPointName,
-        'emailAddress': this.EODetails.contactingDetails.emailAddress,
-        'telephoneNumber': this.EODetails.contactingDetails.telephoneNumber,
-        'faxNumber': this.EODetails.contactingDetails.faxNumber,
-      },
-      'naturalPersons': this.EODetails.naturalPersons,
       'id': this.EODetails.id,
       'webSiteURI': this.EODetails.webSiteURI,
       'procurementProjectLot': this.EODetails.procurementProjectLot
     });
+
+    // TODO uncomment them and handle the null
+    // if (this.EODetails.contactingDetails !== null) {
+    //   this.EOForm.patchValue({
+    //     'contactingDetails': {
+    //       'contactPointName': this.EODetails.contactingDetails.contactPointName,
+    //       'emailAddress': this.EODetails.contactingDetails.emailAddress,
+    //       'telephoneNumber': this.EODetails.contactingDetails.telephoneNumber,
+    //       'faxNumber': this.EODetails.contactingDetails.faxNumber,
+    //     }
+    //   });
+    // }
+
+    // if (this.EODetails.naturalPersons !== null || this.EODetails.naturalPersons !== undefined) {
+    //   this.EOForm.patchValue({
+    //     'naturalPersons': this.EODetails.naturalPersons
+    //   });
+    // }
+
   }
 
 
@@ -1594,6 +1635,20 @@ export class DataService {
               group[r.uuid] = new FormControl(r.response.date);
             }
 
+            // TODO version period
+            if (r.response.startDate) {
+              group[r.uuid + 'startDate'] = new FormControl(r.response.startDate);
+            }
+            if (r.response.endDate) {
+              group[r.uuid + 'endDate'] = new FormControl(r.response.endDate);
+            }
+
+            if (r.response.evidenceSuppliedId) {
+              group[r.uuid + 'evidenceUrl'] = new FormControl();
+              group[r.uuid + 'evidenceCode'] = new FormControl();
+              group[r.uuid + 'evidenceIssuer'] = new FormControl();
+            }
+
             if (r.response.currency || r.response.amount) {
               group[r.uuid] = new FormControl(r.response.amount);
               if (r.response.currency !== null && r.response.currency !== undefined) {
@@ -1634,6 +1689,7 @@ export class DataService {
       }
     }
     let fg = new FormGroup(group);
+
     // console.log(fg.getRawValue());
     return fg;
   }

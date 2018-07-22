@@ -58,10 +58,13 @@
 
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <div class="desc">
-        <h4>Article {{selectionACriteria['0'].legislationReference.article}} of
-          {{selectionACriteria['0'].legislationReference.title}} sets out the following selection criteria </h4>
-      </div>
+      <ng-container *ngIf="selectionACriteria.length !== 0">
+        <div class="desc">
+          <h4>Article {{selectionACriteria['0'].legislationReference.article}} of
+            {{selectionACriteria['0'].legislationReference.title}} sets out the following selection criteria </h4>
+        </div>
+      </ng-container>
+
       <mat-card *ngFor="let cr of selectionACriteria; let i=index">
         <div class="selectionCriteria">
 
@@ -92,10 +95,12 @@
           B: Grounds relating to the payment of taxes or social security contributions
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <div class="desc">
-        <h4>Article {{selectionBCriteria['0'].legislationReference.article}} of
-          {{selectionBCriteria['0'].legislationReference.title}} sets out the following selection criteria </h4>
-      </div>
+      <ng-container *ngIf="selectionBCriteria.length !== 0">
+        <div class="desc">
+          <h4>Article {{selectionBCriteria['0'].legislationReference.article}} of
+            {{selectionBCriteria['0'].legislationReference.title}} sets out the following selection criteria </h4>
+        </div>
+      </ng-container>
       <mat-card *ngFor="let cr of selectionBCriteria; let i=index">
         <div class="selectionCriteria">
           <div class="criterion-wrap">
@@ -125,10 +130,12 @@
             C: Grounds relating to insolvency, conflicts of interests or professional misconduct
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <div class="desc">
-          <h4>Article {{selectionCCriteria['0'].legislationReference.article}} of
-            {{selectionCCriteria['0'].legislationReference.title}} sets out the following selection criteria </h4>
-        </div>
+        <ng-container *ngIf="selectionCCriteria.length !== 0">
+          <div class="desc">
+            <h4>Article {{selectionCCriteria['0'].legislationReference.article}} of
+              {{selectionCCriteria['0'].legislationReference.title}} sets out the following selection criteria </h4>
+          </div>
+        </ng-container>
         <mat-card *ngFor="let cr of selectionCCriteria; let i=index">
           <div class="selectionCriteria">
             <div class="criterion-wrap">
@@ -157,10 +164,13 @@
             D: Quality assurance schemes and environmental management standards
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <div class="desc">
-          <h4>Article {{selectionDCriteria['0'].legislationReference.article}} of
-            {{selectionDCriteria['0'].legislationReference.title}} sets out the following selection criteria </h4>
-        </div>
+        <ng-container *ngIf="selectionDCriteria.length !== 0">
+          <div class="desc">
+            <h4>Article {{selectionDCriteria['0'].legislationReference.article}} of
+              {{selectionDCriteria['0'].legislationReference.title}} sets out the following selection criteria </h4>
+          </div>
+        </ng-container>
+
         <mat-card *ngFor="let cr of selectionDCriteria; let i=index">
           <div class="selectionCriteria">
             <div class="criterion-wrap">

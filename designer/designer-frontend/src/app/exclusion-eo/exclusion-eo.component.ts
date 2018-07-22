@@ -73,12 +73,23 @@ export class ExclusionEoComponent implements OnInit {
               let evidence = new Evidence();
               let evidenceIssuer = new EvidenceIssuer();
               evidence.id = req.id;
+
+              // fill in workaround
               // if (formValues[evidenceUrlID.valueOf()] === null) {
               //   evidence.evidenceURL = '';
+              // } else {
+              //   evidence.evidenceURL = formValues[evidenceUrlID.valueOf()];
               // }
-              evidence.evidenceURL = formValues[evidenceUrlID.valueOf()];
-              evidence.description = formValues[evidenceCodeID.valueOf()];
-              evidenceIssuer.name = formValues[evidenceIssuerID.valueOf()];
+              // if (formValues[evidenceCodeID.valueOf()] === null) {
+              //   evidence.description = '';
+              // } else {
+              //   evidence.description = formValues[evidenceCodeID.valueOf()];
+              // }
+              // if (formValues[evidenceIssuerID.valueOf()] === null) {
+              //   evidence.description = '';
+              // } else {
+              //   evidence.description = formValues[evidenceIssuerID.valueOf()];
+              // }
               evidenceIssuer.website = null;
               evidenceIssuer.id = null;
               evidence.evidenceIssuer = evidenceIssuer;

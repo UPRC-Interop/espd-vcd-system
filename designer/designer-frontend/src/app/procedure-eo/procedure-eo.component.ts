@@ -175,8 +175,21 @@ export class ProcedureEoComponent implements OnInit {
               let evidence = new Evidence();
               let evidenceIssuer = new EvidenceIssuer();
               evidence.id = req.id;
+              // fill in workaround
               // if (formValues[evidenceUrlID.valueOf()] === null) {
               //   evidence.evidenceURL = '';
+              // } else {
+              //   evidence.evidenceURL = formValues[evidenceUrlID.valueOf()];
+              // }
+              // if (formValues[evidenceCodeID.valueOf()] === null) {
+              //   evidence.description = '';
+              // } else {
+              //   evidence.description = formValues[evidenceCodeID.valueOf()];
+              // }
+              // if (formValues[evidenceIssuerID.valueOf()] === null) {
+              //   evidence.description = '';
+              // } else {
+              //   evidence.description = formValues[evidenceIssuerID.valueOf()];
               // }
               evidence.evidenceURL = formValues[evidenceUrlID.valueOf()];
               evidence.description = formValues[evidenceCodeID.valueOf()];
