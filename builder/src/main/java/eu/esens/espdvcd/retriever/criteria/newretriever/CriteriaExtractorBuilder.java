@@ -71,13 +71,14 @@ public class CriteriaExtractorBuilder {
         }
 
         if (rgResourceList.isEmpty()) {
-            rgResourceList.addAll(createDefaultRequirementGroupsResources());
+            rgResourceList.addAll(createDefaultRequirementGroupResources());
         }
 
         return new CriteriaExtractorImpl(cResourceList, lResourceList, rgResourceList);
     }
 
     private CriteriaResource createDefaultCriteriaResource() {
+        logger.log(Level.INFO, "Creating default criteria resource");
 
         initCriteriaTaxonomyResource();
         initECertisResource();
@@ -89,6 +90,7 @@ public class CriteriaExtractorBuilder {
     }
 
     private List<LegislationResource> createDefaultLegislationResources() {
+        logger.log(Level.INFO, "Creating default legislation resources");
 
         initESPDArtefactResource();
         initECertisResource();
@@ -100,7 +102,8 @@ public class CriteriaExtractorBuilder {
         return resourceList;
     }
 
-    private List<RequirementGroupResource> createDefaultRequirementGroupsResources() {
+    private List<RequirementGroupResource> createDefaultRequirementGroupResources() {
+        logger.log(Level.INFO, "Creating default requirement group resources");
 
         initCriteriaTaxonomyResource();
         initESPDArtefactResource();
@@ -132,6 +135,7 @@ public class CriteriaExtractorBuilder {
     private void initCriteriaTaxonomyResource() {
 
         if (taxonomyResource == null) {
+            logger.log(Level.INFO, "Criteria taxonomy Resource initialized");
             taxonomyResource = new CriteriaTaxonomyResource();
         }
     }
@@ -142,6 +146,7 @@ public class CriteriaExtractorBuilder {
     private void initECertisResource() {
 
         if (eCertisResource == null) {
+            logger.log(Level.INFO, "eCertis Resource initialized");
             eCertisResource = new ECertisResource();
         }
     }
@@ -152,6 +157,7 @@ public class CriteriaExtractorBuilder {
     private void initESPDArtefactResource() {
 
         if (artefactResource == null) {
+            logger.log(Level.INFO, "ESPD artefact Resource initialized");
             artefactResource = new ESPDArtefactResource(version);
         }
     }

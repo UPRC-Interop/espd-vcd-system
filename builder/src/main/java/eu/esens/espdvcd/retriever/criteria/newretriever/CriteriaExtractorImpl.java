@@ -80,11 +80,11 @@ public class CriteriaExtractorImpl implements CriteriaExtractor {
         public int compare(Resource r1, Resource r2) {
 
             if (r1.getResourceType().getPriority() > r2.getResourceType().getPriority()) {
-                return 1;
+                return -1;
             }
 
             if (r1.getResourceType().getPriority() < r2.getResourceType().getPriority()) {
-                return -1;
+                return 1;
             }
 
             return 0;

@@ -42,7 +42,7 @@ public class NewCriteriaExtractorTest {
         CriteriaExtractor extractor = new CriteriaExtractorBuilder()
                 .addCriteriaResource(taxonomyResource)
                 .addCriteriaResource(artefactResource)
-                .addCriteriaResource(eCertisResource)
+                // .addCriteriaResource(eCertisResource)
                 .addLegislationResource(artefactResource)
                 .addRequirementGroupsResource(taxonomyResource)
                 .addRequirementGroupsResource(artefactResource)
@@ -55,7 +55,7 @@ public class NewCriteriaExtractorTest {
     }
 
     @Test
-    public void testDefaultCriteriaExtractorBuilderBuild() throws Exception {
+    public void testDefaultCriteriaExtractorBuilder() throws Exception {
 
         int index = 1;
 

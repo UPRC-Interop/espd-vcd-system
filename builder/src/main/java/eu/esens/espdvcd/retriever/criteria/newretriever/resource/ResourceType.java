@@ -2,7 +2,7 @@ package eu.esens.espdvcd.retriever.criteria.newretriever.resource;
 
 public enum ResourceType {
 
-    ECERTIS(3), ARTEFACT(2), TAXONOMY(1);
+    ECERTIS(1), ARTEFACT(2), TAXONOMY(3);
 
     private int priority;
 
