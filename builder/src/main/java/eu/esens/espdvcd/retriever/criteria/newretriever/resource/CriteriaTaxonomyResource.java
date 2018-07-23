@@ -161,6 +161,11 @@ public class CriteriaTaxonomyResource implements CriteriaResource, RequirementGr
     }
 
     @Override
+    public Map<String, SelectableCriterion> getCriterionMap() {
+        return criterionList.stream().collect(Collectors.toMap(sc -> sc.getID(), Function.identity()));
+    }
+
+    @Override
     public List<RequirementGroup> getRequirementGroupsForCriterion(String ID) {
         return rgMap.get(ID);
     }

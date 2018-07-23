@@ -1,5 +1,6 @@
 package eu.esens.espdvcd.retriever.criteria.newretriever;
 
+import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
 import eu.esens.espdvcd.retriever.criteria.newretriever.resource.*;
 import eu.esens.espdvcd.schema.SchemaVersion;
@@ -18,12 +19,12 @@ public class CriteriaExtractorBuilder {
     private List<LegislationResource> lResourceList;
     private List<RequirementGroupResource> rgResourceList;
 
-    private CriteriaTaxonomyResource taxonomyResource;
-    private ECertisResource eCertisResource;
-    private ESPDArtefactResource artefactResource;
-
     private static final SchemaVersion DEFAULT_VERSION = SchemaVersion.V2;
     private SchemaVersion version;
+
+    private ESPDArtefactResource artefactResource;
+    private CriteriaTaxonomyResource taxonomyResource;
+    private ECertisResource eCertisResource;
 
     Logger logger = Logger.getLogger(CriteriaExtractorBuilder.class.getName());
 
@@ -62,21 +63,67 @@ public class CriteriaExtractorBuilder {
     public CriteriaExtractor build() {
 
         if (cResourceList.isEmpty()) {
-            initCriteriaTaxonomyResource();
-            cResourceList.add(taxonomyResource);
+            cResourceList.add(createDefaultCriteriaResource());
         }
 
         if (lResourceList.isEmpty()) {
-            initESPDArtefactResource();
-            lResourceList.add(artefactResource);
+            lResourceList.addAll(createDefaultLegislationResources());
         }
 
         if (rgResourceList.isEmpty()) {
-            initCriteriaTaxonomyResource();
-            rgResourceList.add(taxonomyResource);
+            rgResourceList.addAll(createDefaultRequirementGroupsResources());
         }
 
         return new CriteriaExtractorImpl(cResourceList, lResourceList, rgResourceList);
+    }
+
+    private CriteriaResource createDefaultCriteriaResource() {
+
+        initCriteriaTaxonomyResource();
+        initECertisResource();
+
+        taxonomyResource.getCriterionList()
+                .forEach(sc -> applyNameAndDescription(eCertisResource.getCriterionMap().get(sc.getID()), sc));
+
+        return taxonomyResource;
+    }
+
+    private List<LegislationResource> createDefaultLegislationResources() {
+
+        initESPDArtefactResource();
+        initECertisResource();
+
+        List<LegislationResource> resourceList = new ArrayList<>();
+        resourceList.add(artefactResource);
+        resourceList.add(eCertisResource);
+
+        return resourceList;
+    }
+
+    private List<RequirementGroupResource> createDefaultRequirementGroupsResources() {
+
+        initCriteriaTaxonomyResource();
+        initESPDArtefactResource();
+
+        List<RequirementGroupResource> resourceList = new ArrayList<>();
+        resourceList.add(taxonomyResource);
+        resourceList.add(artefactResource);
+
+        return resourceList;
+    }
+
+    private void applyNameAndDescription(SelectableCriterion from, SelectableCriterion to) {
+
+        if (from != null && to != null) {
+
+            if (from.getName() != null) {
+                to.setName(from.getName());
+            }
+
+            if (from.getDescription() != null) {
+                to.setDescription(from.getDescription());
+            }
+        }
     }
 
     /**

@@ -12,4 +12,6 @@ public interface CriteriaResource extends Resource {
 
     List<SelectableCriterion> getCriterionList();
 
+    Map<String, SelectableCriterion> getCriterionMap();
+
 }

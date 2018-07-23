@@ -66,6 +66,11 @@ public class ESPDArtefactResource implements CriteriaResource, LegislationResour
     }
 
     @Override
+    public Map<String, SelectableCriterion> getCriterionMap() {
+        return criterionMap;
+    }
+
+    @Override
     public LegislationReference getLegislationForCriterion(String ID) {
         return criterionMap.containsKey(ID)
                 ? criterionMap.get(ID).getLegislationReference()

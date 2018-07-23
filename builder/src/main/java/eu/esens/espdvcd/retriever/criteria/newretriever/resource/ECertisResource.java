@@ -22,6 +22,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.concurrent.*;
+import java.util.function.Function;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -263,6 +264,13 @@ public class ECertisResource implements CriteriaResource, LegislationResource {
         return criterionMap.values().stream()
                 .map(ec -> createSelectableCriterion(ec))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Map<String, SelectableCriterion> getCriterionMap() {
+        return criterionMap.values().stream()
+                .map(ec -> createSelectableCriterion(ec))
+                .collect(Collectors.toMap(sc -> sc.getID(), Function.identity()));
     }
 
     @Override

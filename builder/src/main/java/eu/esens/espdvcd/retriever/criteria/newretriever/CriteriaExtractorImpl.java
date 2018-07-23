@@ -27,14 +27,13 @@ public class CriteriaExtractorImpl implements CriteriaExtractor {
                           @NotEmpty List<LegislationResource> lResourceList,
                           @NotEmpty List<RequirementGroupResource> rgResourceList) {
 
-        this.criterionList = discardAllDuplicatesByPriority(cResourceList);
+        this.criterionList = createCriterionList(cResourceList);
         this.lResourceList = lResourceList;
         this.rgResourceList = rgResourceList;
     }
 
-    private List<SelectableCriterion> discardAllDuplicatesByPriority(List<CriteriaResource> cResourceList) {
+    private List<SelectableCriterion> createCriterionList(List<CriteriaResource> cResourceList) {
         final Map<String, SelectableCriterion> fullCriterionMap = new LinkedHashMap<>();
-
         cResourceList.sort(new ResourceComparator());
 
         cResourceList.forEach(cResource -> cResource.getCriterionList()
@@ -45,10 +44,6 @@ public class CriteriaExtractorImpl implements CriteriaExtractor {
 
     @Override
     public List<SelectableCriterion> getFullList() {
-        // final Set<SelectableCriterion> fullCriterionSet = new LinkedHashSet<>();
-        // add all criteria from criteria resources
-        // cResourceList.forEach(cResource -> fullCriterionSet.addAll(cResource.getCriterionList()));
-        // fullCriterionSet.addAll(criterionList);
         // add all legislation to that criteria from legislation resources
         criterionList.forEach(this::addLegislationReference);
         // add all requirement groups to that criteria from requirement group resources

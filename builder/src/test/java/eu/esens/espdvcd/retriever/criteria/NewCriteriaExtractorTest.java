@@ -55,6 +55,19 @@ public class NewCriteriaExtractorTest {
     }
 
     @Test
+    public void testDefaultCriteriaExtractorBuilderBuild() throws Exception {
+
+        int index = 1;
+
+        CriteriaExtractor extractor = new CriteriaExtractorBuilder().build();
+
+        for (SelectableCriterion sc : extractor.getFullList()) {
+            System.out.printf("%-2d %-36s %b\n%s\n%s\n%s\n\n", index++, sc.getID(), sc.isSelected(), sc.getName(), sc.getTypeCode(), sc.getDescription());
+        }
+
+    }
+
+    @Test
     public void testNewCriteriaExtractorBuilder() throws Exception {
 
         CriteriaTaxonomyResource taxonomyResource = new CriteriaTaxonomyResource();
