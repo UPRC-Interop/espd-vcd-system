@@ -3,4 +3,16 @@
 }
 label {
   font-weight: bold;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+mat-form-field {
+  display: block;
+  width: 100%;
+}
+
+mat-radio-button {
+  display: inline-block;
+  margin: 5px;
 }

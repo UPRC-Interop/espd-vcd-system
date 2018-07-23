@@ -9,6 +9,8 @@ import {ExclusionCriteria} from '../model/exclusionCriteria.model';
 import * as moment from 'moment';
 import {Moment} from 'moment';
 import {ApicallService} from '../services/apicall.service';
+import {EvidenceIssuer} from '../model/evidenceIssuer.model';
+import {Evidence} from '../model/evidence.model';
 
 @Component({
   selector: 'app-selection-eo',
@@ -91,6 +93,7 @@ export class SelectionEoComponent implements OnInit {
 
             // console.log('requirement id ' + req.uuid);
             console.log(formValues[req.uuid.valueOf()]);
+            // console.log(formValues[req.id.valueOf()]);
             req.response = new RequirementResponse();
             if (req.responseDataType == 'INDICATOR') {
               if (formValues[req.uuid.valueOf()] == true) {
@@ -107,7 +110,33 @@ export class SelectionEoComponent implements OnInit {
               req.response.evidenceURL = formValues[req.uuid.valueOf()];
               req.response.uuid = null;
             } else if (req.responseDataType == 'EVIDENCE_IDENTIFIER') {
-              req.response.evidenceSuppliedId = formValues[req.uuid.valueOf()];
+              // req.response.evidenceSuppliedId = formValues[req.uuid.valueOf()];
+              req.response.evidenceSuppliedId = req.id;
+              req.response.validatedCriterionPropertyID = req.id;
+              const evidenceUrlID = req.uuid + 'evidenceUrl';
+              const evidenceCodeID = req.uuid + 'evidenceCode';
+              const evidenceIssuerID = req.uuid + 'evidenceIssuer';
+
+              // create evidence
+              let evidence = new Evidence();
+              let evidenceIssuer = new EvidenceIssuer();
+              evidence.id = req.id;
+              // if (formValues[evidenceUrlID.valueOf()] === null) {
+              //   evidence.evidenceURL = '';
+              // }
+              evidence.evidenceURL = formValues[evidenceUrlID.valueOf()];
+              evidence.description = formValues[evidenceCodeID.valueOf()];
+              evidenceIssuer.name = formValues[evidenceIssuerID.valueOf()];
+              evidenceIssuer.website = null;
+              evidenceIssuer.id = null;
+              evidence.evidenceIssuer = evidenceIssuer;
+              evidence.confidentialityLevelCode = 'PUBLIC';
+
+              console.log(evidence);
+              this.dataService.evidenceList.push(evidence);
+              console.log(this.dataService.evidenceList);
+              // console.log(JSON.stringify(this.dataService.evidenceList));
+
               req.response.uuid = null;
             } else if (req.responseDataType == 'CODE') {
               req.response.evidenceURLCode = formValues[req.uuid.valueOf()];
@@ -162,6 +191,12 @@ export class SelectionEoComponent implements OnInit {
               req.response.uuid = null;
             } else if (req.responseDataType == 'QUANTITY_YEAR') {
               req.response.year = formValues[req.uuid.valueOf()];
+              req.response.uuid = null;
+            } else if (req.responseDataType === 'IDENTIFIER') {
+              req.response.identifier = formValues[req.uuid.valueOf()];
+              req.response.uuid = null;
+            } else if (req.responseDataType === 'URL') {
+              req.response.url = formValues[req.uuid.valueOf()];
               req.response.uuid = null;
             }
           }
@@ -329,6 +364,44 @@ export class SelectionEoComponent implements OnInit {
           console.log('THIS IS DEFINED');
           formValues = formValues[rg.uuid.valueOf()];
           this.reqGroupMatch(rg, cr, this.formD, formValues);
+        }
+      });
+    });
+
+    this.dataService.selectionALLCriteria.forEach(cr => {
+      let formValues = this.dataService.selectionALLCriteriaForm.getRawValue();
+      formValues = formValues[cr.uuid.valueOf()];
+      // console.log('THIS IS FORM C =================================');
+      console.log(formValues);
+
+      // let testFormValues = formValues[cr.uuid.valueOf()];
+      console.log('cr loop: ' + cr.uuid);
+
+      let testFormValues = null;
+
+      cr.requirementGroups.forEach(rg => {
+        console.log('first rg loop: ' + rg.uuid);
+
+        if (testFormValues == null) {
+          testFormValues = this.formC.getRawValue();
+          testFormValues = testFormValues[cr.uuid.valueOf()];
+          // formValues = testFormValues;
+        }
+
+        if (formValues[rg.uuid.valueOf()] == undefined) {
+          console.log('THIS IS undefined');
+          // fix
+          let testFormValues = null;
+          testFormValues = this.dataService.selectionALLCriteriaForm.getRawValue();
+          testFormValues = testFormValues[cr.uuid.valueOf()];
+          testFormValues = testFormValues[rg.uuid.valueOf()];
+          // fix
+
+          this.reqGroupMatch(rg, cr, this.dataService.selectionALLCriteriaForm, testFormValues);
+        } else if (formValues[rg.uuid.valueOf()] != undefined) {
+          console.log('THIS IS DEFINED');
+          formValues = formValues[rg.uuid.valueOf()];
+          this.reqGroupMatch(rg, cr, this.dataService.selectionALLCriteriaForm, formValues);
         }
       });
     });

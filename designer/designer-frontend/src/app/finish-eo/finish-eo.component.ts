@@ -6,6 +6,8 @@ import {RequirementResponse} from '../model/requirement-response.model';
 import {RequirementGroup} from '../model/requirementGroup.model';
 import {EoRelatedCriterion} from '../model/eoRelatedCriterion.model';
 import * as moment from 'moment';
+import {EvidenceIssuer} from '../model/evidenceIssuer.model';
+import {Evidence} from '../model/evidence.model';
 
 @Component({
   selector: 'app-finish-eo',
@@ -47,7 +49,34 @@ export class FinishEoComponent implements OnInit {
               req.response.evidenceURL = formValues[req.uuid.valueOf()];
               req.response.uuid = null;
             } else if (req.responseDataType == 'EVIDENCE_IDENTIFIER') {
-              req.response.evidenceSuppliedId = formValues[req.uuid.valueOf()];
+              // req.response.evidenceSuppliedId = formValues[req.uuid.valueOf()];
+              req.response.evidenceSuppliedId = req.id;
+              req.response.id = req.id;
+              req.response.validatedCriterionPropertyID = req.id;
+              const evidenceUrlID = req.uuid + 'evidenceUrl';
+              const evidenceCodeID = req.uuid + 'evidenceCode';
+              const evidenceIssuerID = req.uuid + 'evidenceIssuer';
+
+              // create evidence
+              let evidence = new Evidence();
+              let evidenceIssuer = new EvidenceIssuer();
+              evidence.id = req.id;
+              // if (formValues[evidenceUrlID.valueOf()] === null) {
+              //   evidence.evidenceURL = '';
+              // }
+              evidence.evidenceURL = formValues[evidenceUrlID.valueOf()];
+              evidence.description = formValues[evidenceCodeID.valueOf()];
+              evidenceIssuer.name = formValues[evidenceIssuerID.valueOf()];
+              evidenceIssuer.website = null;
+              evidenceIssuer.id = null;
+              evidence.evidenceIssuer = evidenceIssuer;
+              evidence.confidentialityLevelCode = 'PUBLIC';
+
+              console.log(evidence);
+              this.dataService.evidenceList.push(evidence);
+              console.log(this.dataService.evidenceList);
+              // console.log(JSON.stringify(this.dataService.evidenceList));
+
               req.response.uuid = null;
             } else if (req.responseDataType == 'CODE') {
               req.response.evidenceURLCode = formValues[req.uuid.valueOf()];
@@ -81,6 +110,12 @@ export class FinishEoComponent implements OnInit {
               req.response.uuid = null;
             } else if (req.responseDataType == 'QUANTITY_YEAR') {
               req.response.year = formValues[req.uuid.valueOf()];
+              req.response.uuid = null;
+            } else if (req.responseDataType === 'IDENTIFIER') {
+              req.response.identifier = formValues[req.uuid.valueOf()];
+              req.response.uuid = null;
+            } else if (req.responseDataType === 'URL') {
+              req.response.url = formValues[req.uuid.valueOf()];
               req.response.uuid = null;
             }
           }

@@ -18,4 +18,7 @@ export class RequirementResponse {
   startDate?: Moment;
   endDate?: Moment;
   evidenceSuppliedId?: string;
+  identifier?: string;
+  url?: string;
+  validatedCriterionPropertyID?: string;
 }

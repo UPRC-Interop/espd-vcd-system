@@ -1,14 +1,18 @@
 <div [formGroup]="form">
-  <!--<label *ngIf="req.responseDataType=='INDICATOR'" [attr.for]="req.id">{{req.description}}</label>-->
-  <label [attr.for]="req.uuid">{{req.description}}</label>
+  <label *ngIf="req.responseDataType=='INDICATOR'" [attr.for]="req.id">{{req.description}}</label>
+
 
   <div [ngSwitch]="req.responseDataType">
 
     <mat-form-field *ngSwitchDefault>
+      <label [attr.for]="req.uuid">{{req.description}}</label>
+      <br>
       <input matInput [formControlName]="req.uuid" [id]="req.uuid" >
     </mat-form-field>
 
     <mat-form-field *ngSwitchCase="'DATE'">
+      <label [attr.for]="req.uuid">{{req.description}}</label>
+      <br>
       <input matInput [matDatepicker]="picker" [formControlName]="req.uuid" [id]="req.uuid">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
@@ -16,13 +20,16 @@
 
     <div class="period" *ngSwitchCase="'PERIOD'" >
       <div class="periodv2" *ngIf="APIService.version === 'v2'">
-        <!--<label [attr.for]="req.uuid+'startDate'">Start Date</label>-->
+        <label [attr.for]="req.uuid+'startDate'">Start Date: </label>
+        <br>
         <mat-form-field >
           <input matInput [matDatepicker]="startPicker" [formControlName]="req.uuid+'startDate'" [id]="req.uuid+'startDate'">
           <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
           <mat-datepicker #startPicker></mat-datepicker>
         </mat-form-field>
-        <!--<label [attr.for]="req.uuid+'endDate'">End Date</label>-->
+        <br>
+        <label [attr.for]="req.uuid+'endDate'">End Date: </label>
+        <br>
         <mat-form-field >
           <input matInput [matDatepicker]="endPicker" [formControlName]="req.uuid+'endDate'" [id]="req.uuid+'endDate'">
           <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
@@ -30,6 +37,8 @@
         </mat-form-field>
       </div>
       <div class="periodv1" *ngIf="APIService.version === 'v1'">
+        <label [attr.for]="req.uuid">{{req.description}}</label>
+        <br>
         <mat-form-field >
           <input matInput [formControlName]="req.uuid" [id]="req.uuid" >
         </mat-form-field>
@@ -39,6 +48,8 @@
 
 
     <mat-form-field *ngSwitchCase="'CODE_COUNTRY'">
+      <label [attr.for]="req.uuid">{{req.description}}</label>
+      <br>
       <mat-select  [formControlName]="req.uuid" [id]="req.uuid">
         <mat-option>None</mat-option>
         <mat-option *ngFor="let country of countries" [value]="country.code">{{country.name}}</mat-option>
@@ -47,6 +58,8 @@
 
 
     <div class="amount" *ngSwitchCase="'AMOUNT'">
+      <label [attr.for]="req.uuid">{{req.description}}</label>
+      <br>
       <mat-form-field>
         <input matInput [formControlName]="req.uuid" [id]="req.uuid" >
       </mat-form-field>
@@ -56,6 +69,25 @@
           <mat-option *ngFor="let curr of currency" [value]="curr.code">{{curr.code}} ( {{curr.name}} )</mat-option>
         </mat-select>
       </mat-form-field>
+    </div>
+
+    <div class="evidence_identifier" *ngSwitchCase="'EVIDENCE_IDENTIFIER'">
+      <label [attr.for]="req.uuid+'evidenceUrl'">URL: </label>
+      <br>
+      <mat-form-field>
+        <input matInput [formControlName]="req.uuid+'evidenceUrl'" [id]="req.uuid+'evidenceUrl'" >
+      </mat-form-field>
+      <label [attr.for]="req.uuid+'evidenceCode'">Reference/Code: </label>
+      <br>
+      <mat-form-field>
+        <input matInput [formControlName]="req.uuid+'evidenceCode'" [id]="req.uuid+'evidenceCode'" >
+      </mat-form-field>
+      <label [attr.for]="req.uuid+'evidenceIssuer'">Issuer: </label>
+      <br>
+      <mat-form-field>
+        <input matInput [formControlName]="req.uuid+'evidenceIssuer'" [id]="req.uuid+'evidenceIssuer'" >
+      </mat-form-field>
+
     </div>
 
 
