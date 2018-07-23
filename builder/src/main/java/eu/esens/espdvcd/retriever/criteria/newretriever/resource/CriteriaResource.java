@@ -8,15 +8,8 @@ import java.util.Map;
 /**
  * @author konstantinos Raptis
  */
-public interface CriteriaResource {
+public interface CriteriaResource extends Resource {
 
     List<SelectableCriterion> getCriterionList();
-
-    /**
-     * A Map that contains all criteriaResource criteria as values and use their IDs as keys
-     *
-     * @return
-     */
-    Map<String, SelectableCriterion> getCriterionMap();
 
 }

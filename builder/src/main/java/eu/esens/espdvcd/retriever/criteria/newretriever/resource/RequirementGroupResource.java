@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * @author konstantinos Raptis
  */
-public interface RequirementGroupResource {
+public interface RequirementGroupResource extends Resource {
 
     List<RequirementGroup> getRequirementGroupsForCriterion(String ID);
 

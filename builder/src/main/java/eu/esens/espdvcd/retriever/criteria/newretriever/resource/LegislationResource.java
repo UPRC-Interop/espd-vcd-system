@@ -5,7 +5,7 @@ import eu.esens.espdvcd.model.LegislationReference;
 /**
  * @author konstantinos Raptis
  */
-public interface LegislationResource {
+public interface LegislationResource extends Resource {
 
     LegislationReference getLegislationForCriterion(String ID);
 

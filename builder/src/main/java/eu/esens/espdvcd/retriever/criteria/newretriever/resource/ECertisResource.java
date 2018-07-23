@@ -114,7 +114,6 @@ public class ECertisResource implements CriteriaResource, LegislationResource {
         }
 
         executorService.shutdown();
-
     }
 
     /**
@@ -267,15 +266,15 @@ public class ECertisResource implements CriteriaResource, LegislationResource {
     }
 
     @Override
-    public Map<String, SelectableCriterion> getCriterionMap() {
-        return null;
-    }
-
-    @Override
     public LegislationReference getLegislationForCriterion(String ID) {
         return criterionMap.containsKey(ID)
                 ? criterionMap.get(ID).getLegislationReference()
                 : null;
+    }
+
+    @Override
+    public ResourceType getResourceType() {
+        return ResourceType.ECERTIS;
     }
 
 }
