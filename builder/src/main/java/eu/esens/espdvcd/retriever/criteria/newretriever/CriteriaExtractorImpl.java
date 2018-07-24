@@ -6,9 +6,12 @@ import eu.esens.espdvcd.retriever.criteria.newretriever.resource.CriteriaResourc
 import eu.esens.espdvcd.retriever.criteria.newretriever.resource.LegislationResource;
 import eu.esens.espdvcd.retriever.criteria.newretriever.resource.RequirementGroupResource;
 import eu.esens.espdvcd.retriever.criteria.newretriever.resource.Resource;
+import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 /**
@@ -21,6 +24,8 @@ public class CriteriaExtractorImpl implements CriteriaExtractor {
     private List<RequirementGroupResource> rgResourceList;
 
     private List<SelectableCriterion> criterionList;
+
+    Logger logger = Logger.getLogger(CriteriaExtractorImpl.class.getName());
 
     /* package private constructor. Create only through factory */
     CriteriaExtractorImpl(@NotEmpty List<CriteriaResource> cResourceList,
@@ -36,8 +41,14 @@ public class CriteriaExtractorImpl implements CriteriaExtractor {
         final Map<String, SelectableCriterion> fullCriterionMap = new LinkedHashMap<>();
         cResourceList.sort(new ResourceComparator());
 
-        cResourceList.forEach(cResource -> cResource.getCriterionList()
-                .forEach(sc -> fullCriterionMap.put(sc.getID(), sc)));
+        cResourceList.forEach(cResource -> {
+            try {
+                cResource.getCriterionList()
+                        .forEach(sc -> fullCriterionMap.put(sc.getID(), sc));
+            } catch (RetrieverException e) {
+                logger.log(Level.SEVERE, e.getMessage());
+            }
+        });
 
         return fullCriterionMap.values().stream().collect(Collectors.toList());
     }
@@ -64,14 +75,26 @@ public class CriteriaExtractorImpl implements CriteriaExtractor {
 
     private void addLegislationReference(SelectableCriterion sc) {
 
-        lResourceList.forEach(lResource -> sc.setLegislationReference(lResource
-                .getLegislationForCriterion(sc.getID())));
+        lResourceList.forEach(lResource -> {
+            try {
+                sc.setLegislationReference(lResource
+                        .getLegislationForCriterion(sc.getID()));
+            } catch (RetrieverException e) {
+                logger.log(Level.SEVERE, e.getMessage());
+            }
+        });
     }
 
     private void addRequirementGroups(SelectableCriterion sc) {
 
-        rgResourceList.forEach(rgResource -> sc.setRequirementGroups(rgResource
-                .getRequirementGroupsForCriterion(sc.getID())));
+        rgResourceList.forEach(rgResource -> {
+            try {
+                sc.setRequirementGroups(rgResource
+                        .getRequirementGroupsForCriterion(sc.getID()));
+            } catch (RetrieverException e) {
+                logger.log(Level.SEVERE, e.getMessage());
+            }
+        });
     }
 
     private static class ResourceComparator implements Comparator<Resource> {

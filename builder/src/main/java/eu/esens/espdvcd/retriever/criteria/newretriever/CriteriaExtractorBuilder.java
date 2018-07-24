@@ -3,6 +3,7 @@ package eu.esens.espdvcd.retriever.criteria.newretriever;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
 import eu.esens.espdvcd.retriever.criteria.newretriever.resource.*;
+import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import eu.esens.espdvcd.schema.SchemaVersion;
 
 import java.util.ArrayList;
@@ -84,7 +85,13 @@ public class CriteriaExtractorBuilder {
         initECertisResource();
 
         taxonomyResource.getCriterionList()
-                .forEach(sc -> applyNameAndDescription(eCertisResource.getCriterionMap().get(sc.getID()), sc));
+                .forEach(sc -> {
+                    try {
+                        applyNameAndDescription(eCertisResource.getCriterionMap().get(sc.getID()), sc);
+                    } catch (RetrieverException e) {
+                        logger.log(Level.SEVERE, e.getMessage());
+                    }
+                });
 
         return taxonomyResource;
     }

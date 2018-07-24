@@ -70,7 +70,6 @@ public class ECertisResource implements CriteriaResource, LegislationResource {
 
     public ECertisResource() {
         this.lang = DEFAULT_LANG;
-        criterionMap = new HashMap<>();
 
         try {
             ECERTIS_PROPERTIES.load(new FileInputStream(ECERTIS_CONFIG_PATH));
@@ -80,12 +79,6 @@ public class ECertisResource implements CriteriaResource, LegislationResource {
         }
         ECERTIS_URL = ECERTIS_PROPERTIES.getProperty("ecertis_url", ECERTIS_URL_DEFAULT);
         ALL_CRITERIA = ECERTIS_URL + "criteria";
-
-        try {
-            applyDataToCriterionMap();
-        } catch (RetrieverException ex) {
-            logger.log(Level.SEVERE, "Error... e-Certis criterion map initialization FAILED.", ex);
-        }
     }
 
     /**
@@ -93,28 +86,31 @@ public class ECertisResource implements CriteriaResource, LegislationResource {
      *
      * @throws RetrieverException
      */
-    private void applyDataToCriterionMap() throws RetrieverException {
+    private void initCriterionMap() throws RetrieverException {
 
+        if (criterionMap == null) {
+            criterionMap = new LinkedHashMap<>();
 
-        ExecutorService executorService = Executors.newCachedThreadPool();
-        Set<Callable<ECertisCriterion>> callableSet = new HashSet<>();
-        List<String> allEUCriteriaID = getAllEUCriteriaID();
-        allEUCriteriaID.forEach(ID -> callableSet.add(() -> getECertisCriterion(ID)));
+            ExecutorService executorService = Executors.newCachedThreadPool();
+            Set<Callable<ECertisCriterion>> callableSet = new HashSet<>();
+            List<String> allEUCriteriaID = getAllEUCriteriaID();
+            allEUCriteriaID.forEach(ID -> callableSet.add(() -> getECertisCriterion(ID)));
 
-        try {
-            List<Future<ECertisCriterion>> futureList = executorService.invokeAll(callableSet);
+            try {
+                List<Future<ECertisCriterion>> futureList = executorService.invokeAll(callableSet);
 
-            for (Future f : futureList) {
-                ECertisCriterion c = (ECertisCriterion) f.get();
-                criterionMap.put(c.getID(), c);
+                for (Future f : futureList) {
+                    ECertisCriterion c = (ECertisCriterion) f.get();
+                    criterionMap.put(c.getID(), c);
+                }
+
+            } catch (InterruptedException | ExecutionException ex) {
+                logger.log(Level.SEVERE, null, ex);
+                throw new RetrieverException(ex);
             }
 
-        } catch (InterruptedException | ExecutionException ex) {
-            Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.SEVERE, null, ex);
-            throw new RetrieverException(ex);
+            executorService.shutdown();
         }
-
-        executorService.shutdown();
     }
 
     /**
@@ -124,7 +120,7 @@ public class ECertisResource implements CriteriaResource, LegislationResource {
      * @return The criterion or Null if criterion does not exist.
      * @throws RetrieverException
      */
-    public ECertisCriterion getECertisCriterion(String ID) throws RetrieverException {
+    private ECertisCriterion getECertisCriterion(String ID) throws RetrieverException {
 
         ECertisCriterion theCriterion = null;
 
@@ -170,6 +166,39 @@ public class ECertisResource implements CriteriaResource, LegislationResource {
         return IDList;
     }
 
+    /**
+     * Retrieve all the EU criteria from e-Certis service, alongside
+     * with some of their basic info (ID, Name, Description)
+     *
+     * @throws RetrieverException
+     */
+    List<SelectableCriterion> getAllEUCriteriaWithBasicInfo() throws RetrieverException {
+        // FIXME make this method package private
+
+        List<SelectableCriterion> cList = new ArrayList<>();
+
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode root = mapper.readTree(
+                    getFromECertis(ALL_CRITERIA).toString());
+            JsonNode criteria = root.path("Criterion");
+
+            for (JsonNode criterion : criteria) {
+                SelectableCriterion sc = new SelectableCriterion();
+                sc.setID(criterion.path("ID").asText());
+                sc.setName(criterion.path("Name").findValue("value").asText());
+                sc.setDescription(criterion.path("Description").findValue("value").asText());
+                sc.setSelected(true);
+                cList.add(sc);
+            }
+
+        } catch (IOException ex) {
+            handleMappingException(ex);
+        }
+
+        return cList;
+    }
+
     private void handleMappingException(IOException ex) throws RetrieverException {
         String message = ex.getMessage();
 
@@ -181,7 +210,7 @@ public class ECertisResource implements CriteriaResource, LegislationResource {
             message = ERROR_UNEXPECTED_STRUCTURE;
         }
 
-        Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.SEVERE, null, ex);
+        logger.log(Level.SEVERE, null, ex);
         throw new RetrieverException(message, ex);
     }
 
@@ -221,10 +250,10 @@ public class ECertisResource implements CriteriaResource, LegislationResource {
             }
 
         } catch (MalformedURLException ex) {
-            Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, null, ex);
             throw new RetrieverException("Error... Malformed URL Address", ex);
         } catch (IOException ex) {
-            Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, null, ex);
             throw new RetrieverException("Error... Unable to Connect with e-Certis Service", ex);
         } finally {
             // close all streams
@@ -232,7 +261,7 @@ public class ECertisResource implements CriteriaResource, LegislationResource {
                 try {
                     br.close();
                 } catch (IOException e) {
-                    Logger.getLogger(ECertisCriteriaExtractor.class.getName()).log(Level.SEVERE, null, e);
+                    logger.log(Level.SEVERE, null, e);
                     throw new RetrieverException("Error... Unable to Close Buffered Reader Stream", e);
                 }
             }
@@ -260,21 +289,24 @@ public class ECertisResource implements CriteriaResource, LegislationResource {
     }
 
     @Override
-    public List<SelectableCriterion> getCriterionList() {
+    public List<SelectableCriterion> getCriterionList() throws RetrieverException {
+        initCriterionMap();
         return criterionMap.values().stream()
                 .map(ec -> createSelectableCriterion(ec))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public Map<String, SelectableCriterion> getCriterionMap() {
+    public Map<String, SelectableCriterion> getCriterionMap() throws RetrieverException {
+        initCriterionMap();
         return criterionMap.values().stream()
                 .map(ec -> createSelectableCriterion(ec))
                 .collect(Collectors.toMap(sc -> sc.getID(), Function.identity()));
     }
 
     @Override
-    public LegislationReference getLegislationForCriterion(String ID) {
+    public LegislationReference getLegislationForCriterion(String ID) throws RetrieverException {
+        initCriterionMap();
         return criterionMap.containsKey(ID)
                 ? criterionMap.get(ID).getLegislationReference()
                 : null;
