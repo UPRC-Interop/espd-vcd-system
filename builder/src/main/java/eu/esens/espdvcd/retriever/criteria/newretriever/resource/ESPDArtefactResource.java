@@ -67,7 +67,7 @@ public class ESPDArtefactResource implements CriteriaResource, LegislationResour
 
     @Override
     public Map<String, SelectableCriterion> getCriterionMap() {
-        return null;
+        return criterionMap;
     }
 
     @Override
@@ -84,4 +84,10 @@ public class ESPDArtefactResource implements CriteriaResource, LegislationResour
                 : null;
     }
 
+    @Override
+    public ResourceType getResourceType() {
+        return ResourceType.ARTEFACT;
+    }
+
 }
+

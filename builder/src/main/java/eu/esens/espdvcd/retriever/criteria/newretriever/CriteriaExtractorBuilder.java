@@ -1,7 +1,9 @@
 package eu.esens.espdvcd.retriever.criteria.newretriever;
 
+import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
 import eu.esens.espdvcd.retriever.criteria.newretriever.resource.*;
+import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import eu.esens.espdvcd.schema.SchemaVersion;
 
 import java.util.ArrayList;
@@ -18,12 +20,12 @@ public class CriteriaExtractorBuilder {
     private List<LegislationResource> lResourceList;
     private List<RequirementGroupResource> rgResourceList;
 
-    private CriteriaTaxonomyResource taxonomyResource;
-    private ECertisResource eCertisResource;
-    private ESPDArtefactResource artefactResource;
-
     private static final SchemaVersion DEFAULT_VERSION = SchemaVersion.V2;
     private SchemaVersion version;
+
+    private ESPDArtefactResource artefactResource;
+    private CriteriaTaxonomyResource taxonomyResource;
+    private ECertisResource eCertisResource;
 
     Logger logger = Logger.getLogger(CriteriaExtractorBuilder.class.getName());
 
@@ -62,21 +64,76 @@ public class CriteriaExtractorBuilder {
     public CriteriaExtractor build() {
 
         if (cResourceList.isEmpty()) {
-            initCriteriaTaxonomyResource();
-            cResourceList.add(taxonomyResource);
+            cResourceList.add(createDefaultCriteriaResource());
         }
 
         if (lResourceList.isEmpty()) {
-            initESPDArtefactResource();
-            lResourceList.add(artefactResource);
+            lResourceList.addAll(createDefaultLegislationResources());
         }
 
         if (rgResourceList.isEmpty()) {
-            initCriteriaTaxonomyResource();
-            rgResourceList.add(taxonomyResource);
+            rgResourceList.addAll(createDefaultRequirementGroupResources());
         }
 
         return new CriteriaExtractorImpl(cResourceList, lResourceList, rgResourceList);
+    }
+
+    private CriteriaResource createDefaultCriteriaResource() {
+        logger.log(Level.INFO, "Creating default criteria resource");
+
+        initCriteriaTaxonomyResource();
+        initECertisResource();
+
+        taxonomyResource.getCriterionList()
+                .forEach(sc -> {
+                    try {
+                        applyNameAndDescription(eCertisResource.getCriterionMap().get(sc.getID()), sc);
+                    } catch (RetrieverException e) {
+                        logger.log(Level.SEVERE, e.getMessage());
+                    }
+                });
+
+        return taxonomyResource;
+    }
+
+    private List<LegislationResource> createDefaultLegislationResources() {
+        logger.log(Level.INFO, "Creating default legislation resources");
+
+        initESPDArtefactResource();
+        initECertisResource();
+
+        List<LegislationResource> resourceList = new ArrayList<>();
+        resourceList.add(artefactResource);
+        resourceList.add(eCertisResource);
+
+        return resourceList;
+    }
+
+    private List<RequirementGroupResource> createDefaultRequirementGroupResources() {
+        logger.log(Level.INFO, "Creating default requirement group resources");
+
+        initCriteriaTaxonomyResource();
+        initESPDArtefactResource();
+
+        List<RequirementGroupResource> resourceList = new ArrayList<>();
+        resourceList.add(taxonomyResource);
+        resourceList.add(artefactResource);
+
+        return resourceList;
+    }
+
+    private void applyNameAndDescription(SelectableCriterion from, SelectableCriterion to) {
+
+        if (from != null && to != null) {
+
+            if (from.getName() != null) {
+                to.setName(from.getName());
+            }
+
+            if (from.getDescription() != null) {
+                to.setDescription(from.getDescription());
+            }
+        }
     }
 
     /**
@@ -85,6 +142,7 @@ public class CriteriaExtractorBuilder {
     private void initCriteriaTaxonomyResource() {
 
         if (taxonomyResource == null) {
+            logger.log(Level.INFO, "Criteria taxonomy Resource initialized");
             taxonomyResource = new CriteriaTaxonomyResource();
         }
     }
@@ -95,6 +153,7 @@ public class CriteriaExtractorBuilder {
     private void initECertisResource() {
 
         if (eCertisResource == null) {
+            logger.log(Level.INFO, "eCertis Resource initialized");
             eCertisResource = new ECertisResource();
         }
     }
@@ -105,6 +164,7 @@ public class CriteriaExtractorBuilder {
     private void initESPDArtefactResource() {
 
         if (artefactResource == null) {
+            logger.log(Level.INFO, "ESPD artefact Resource initialized");
             artefactResource = new ESPDArtefactResource(version);
         }
     }

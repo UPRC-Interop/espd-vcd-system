@@ -5,12 +5,16 @@ import eu.esens.espdvcd.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public interface ModelBuilder {
 
+    Logger logger = Logger.getLogger(ModelBuilder.class.getName());
+
     default EODetails createDefaultEODetails() {
         // Empty EODetails (with initialized lists)
-        System.out.println("Creating default EO Details");
+        logger.log(Level.INFO, "Creating default Economic Operator Details");
         EODetails eod = new EODetails();
         eod.setContactingDetails(new ContactingDetails());
         eod.setPostalAddress(new PostalAddress());
@@ -27,7 +31,7 @@ public interface ModelBuilder {
     default CADetails createDefaultCADetails() {
         // Default initialization of the ESPDRequest and ESPDResponse Models.
         // Empty CADetails
-        System.out.println("Creating default CA Details");
+        logger.log(Level.INFO, "Creating default Contracting Authority Details");
         CADetails cad = new CADetails();
         cad.setContactingDetails(new ContactingDetails());
         cad.setPostalAddress(new PostalAddress());
@@ -36,6 +40,7 @@ public interface ModelBuilder {
 
     default ServiceProviderDetails createDefaultServiceProviderDetails() {
         // Empty ServiceProviderDetails
+        logger.log(Level.INFO, "Creating default Service Provider Details");
         ServiceProviderDetails spd = new ServiceProviderDetails();
         // fill with default content
         spd.setWebsiteURI("N/A");

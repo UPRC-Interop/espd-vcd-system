@@ -2,12 +2,12 @@ package eu.esens.espdvcd.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
+
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
 
 /**
  *
@@ -226,6 +226,5 @@ public class Criterion implements Serializable {
 
         return Objects.equals(this.ID, other.ID);
     }
-    
-    
+
 }
