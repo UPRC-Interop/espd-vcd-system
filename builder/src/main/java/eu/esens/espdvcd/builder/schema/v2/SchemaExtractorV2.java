@@ -100,6 +100,8 @@ public interface SchemaExtractorV2 {
 
             if (cd.getProcurementPublicationNumber() != null) {
                 dr.setID(createGROWTemporaryId(cd.getProcurementPublicationNumber()));
+            } else {
+                dr.setID(createGROWTemporaryId("0000/S 000-000000"));
             }
 
             dr.setDocumentTypeCode(createDocumentTypeCode("TED_CN"));
@@ -570,6 +572,13 @@ public interface SchemaExtractorV2 {
         peIdType.setSchemeVersionID("2.0.2");
         peIdType.setValue(id.getValue());
         return peIdType;
+    }
+
+    default ContractFolderIDType createContractFolderIDType(String id) {
+        ContractFolderIDType cfIdType = new ContractFolderIDType();
+        cfIdType.setSchemeAgencyID("TeD");
+        cfIdType.setValue(id);
+        return cfIdType;
     }
 
 }

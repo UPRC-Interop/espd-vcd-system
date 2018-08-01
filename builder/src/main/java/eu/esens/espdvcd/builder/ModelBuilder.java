@@ -10,11 +10,11 @@ import java.util.logging.Logger;
 
 public interface ModelBuilder {
 
-    Logger logger = Logger.getLogger(ModelBuilder.class.getName());
+    Logger LOGGER = Logger.getLogger(ModelBuilder.class.getName());
 
     default EODetails createDefaultEODetails() {
         // Empty EODetails (with initialized lists)
-        logger.log(Level.INFO, "Creating default Economic Operator Details");
+        LOGGER.log(Level.INFO, "Creating default Economic Operator Details");
         EODetails eod = new EODetails();
         eod.setContactingDetails(new ContactingDetails());
         eod.setPostalAddress(new PostalAddress());
@@ -31,7 +31,7 @@ public interface ModelBuilder {
     default CADetails createDefaultCADetails() {
         // Default initialization of the ESPDRequest and ESPDResponse Models.
         // Empty CADetails
-        logger.log(Level.INFO, "Creating default Contracting Authority Details");
+        LOGGER.log(Level.INFO, "Creating default Contracting Authority Details");
         CADetails cad = new CADetails();
         cad.setContactingDetails(new ContactingDetails());
         cad.setPostalAddress(new PostalAddress());
@@ -40,7 +40,7 @@ public interface ModelBuilder {
 
     default ServiceProviderDetails createDefaultServiceProviderDetails() {
         // Empty ServiceProviderDetails
-        logger.log(Level.INFO, "Creating default Service Provider Details");
+        LOGGER.log(Level.INFO, "Creating default Service Provider Details");
         ServiceProviderDetails spd = new ServiceProviderDetails();
         // fill with default content
         spd.setWebsiteURI("N/A");
