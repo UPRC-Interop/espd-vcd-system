@@ -63,12 +63,18 @@ public class ECertisResource implements CriteriaResource, LegislationResource {
         }
     }
 
+    private List<String> extractCommonIDList(List<String> list1, List<String> list2) {
+        List<String> commonIDList = new ArrayList<>(list1);
+        commonIDList.retainAll(list2);
+        return commonIDList;
+    }
+
     Map<String, ECertisCriterion> createECertisCriterionMap() throws RetrieverException {
 
         Map<String, ECertisCriterion> eCertisCriterionMap = new LinkedHashMap<>();
 
         List<String> fullIDList = initialIDList != null
-                ? initialIDList
+                ? extractCommonIDList(initialIDList, getAllEUCriteriaID())
                 : getAllEUCriteriaID();
 
         ExecutorService executorService = Executors.newCachedThreadPool();
@@ -111,48 +117,6 @@ public class ECertisResource implements CriteriaResource, LegislationResource {
 
         return eCertisCriterionMap;
     }
-
-//    private static class GetECertisCriterionTask implements Callable<ECertisCriterion> {
-//
-//        private String ID;
-//        private String lang;
-//
-//        public GetECertisCriterionTask(String ID) {
-//            this(ID, EULanguageCodeEnum.EN);
-//        }
-//
-//        public GetECertisCriterionTask(String ID, EULanguageCodeEnum lang) {
-//            this.ID = ID;
-//            this.lang = lang.name().toLowerCase();
-//        }
-//
-//        @Override
-//        public ECertisCriterion call() throws IOException {
-//
-//            try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
-//                HttpGet httpGet = new HttpGet("https://ec.europa.eu/growth/tools-databases/ecertisrest/criteria/" + ID + "?lang=" + lang);
-//                httpGet.setHeader("Accept", "application/json");
-//
-//                ResponseHandler<String> responseHandler = response -> {
-//                    int status = response.getStatusLine().getStatusCode();
-//
-//                    if (status == HttpStatus.SC_OK) {
-//                        HttpEntity entity = response.getEntity();
-//                        return entity != null ? EntityUtils.toString(entity) : null;
-//                    } else {
-//                        throw new ClientProtocolException("Unexpected response status: " + status);
-//                    }
-//
-//                };
-//
-//                ObjectMapper mapper = new ObjectMapper();
-//                mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-//                mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
-//                return mapper.readValue(httpClient.execute(httpGet, responseHandler), ECertisCriterionImpl.class);
-//            }
-//
-//        }
-//    }
 
     /**
      * Retrieve all the EU criteria IDs from e-Certis service.
@@ -221,35 +185,6 @@ public class ECertisResource implements CriteriaResource, LegislationResource {
 
         return cList;
     }
-
-//    /**
-//     * Open connection with e - Certis service in order to retrieve data
-//     *
-//     * @param url The e-Certis service url
-//     * @return String representation of retrieved data
-//     * @throws IOException
-//     */
-//    private String getFromECertis(String url) throws IOException {
-//
-//        try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
-//            HttpGet httpGet = new HttpGet(url);
-//            httpGet.setHeader("Accept", "application/json");
-//
-//            ResponseHandler<String> responseHandler = response -> {
-//                int status = response.getStatusLine().getStatusCode();
-//
-//                if (status == HttpStatus.SC_OK) {
-//                    HttpEntity entity = response.getEntity();
-//                    return entity != null ? EntityUtils.toString(entity) : null;
-//                } else {
-//                    throw new ClientProtocolException("Unexpected response status: " + status);
-//                }
-//
-//            };
-//
-//            return httpClient.execute(httpGet, responseHandler);
-//        }
-//    }
 
     private void handleMappingException(IOException ex) throws RetrieverException {
         String message = ex.getMessage();

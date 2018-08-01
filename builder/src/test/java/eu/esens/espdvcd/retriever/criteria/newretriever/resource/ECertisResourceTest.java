@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 public class ECertisResourceTest {
 
@@ -17,6 +18,22 @@ public class ECertisResourceTest {
     @Before
     public void setUp() {
 
+    }
+
+    @Test
+    public void testECertisCriterionResourceWithInitialIDList() throws Exception {
+
+        CriteriaTaxonomyResource taxonomyResource = new CriteriaTaxonomyResource();
+
+        ECertisResource eCertisResource = new ECertisResource(taxonomyResource
+                .getCriterionList()
+                .stream().map(sc -> sc.getID()).collect(Collectors.toList()));
+
+        int index = 1;
+
+        for (SelectableCriterion sc : eCertisResource.getCriterionList()) {
+            SelectableCriterionPrinter.printSelectableCriterion(sc, index++);
+        }
     }
 
     @Test

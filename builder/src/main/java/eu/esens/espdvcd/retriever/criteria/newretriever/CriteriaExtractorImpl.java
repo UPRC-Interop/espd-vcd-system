@@ -32,6 +32,10 @@ public class CriteriaExtractorImpl implements CriteriaExtractor {
                           @NotEmpty List<LegislationResource> lResourceList,
                           @NotEmpty List<RequirementGroupResource> rgResourceList) {
 
+        ResourceComparator resourceComparator = new ResourceComparator();
+        lResourceList.sort(resourceComparator);
+        rgResourceList.sort(resourceComparator);
+
         this.criterionList = createCriterionList(cResourceList);
         this.lResourceList = lResourceList;
         this.rgResourceList = rgResourceList;
@@ -77,8 +81,11 @@ public class CriteriaExtractorImpl implements CriteriaExtractor {
 
         lResourceList.forEach(lResource -> {
             try {
-                sc.setLegislationReference(lResource
-                        .getLegislationForCriterion(sc.getID()));
+
+                if (sc.getLegislationReference() == null) {
+                    sc.setLegislationReference(lResource
+                            .getLegislationForCriterion(sc.getID()));
+                }
             } catch (RetrieverException e) {
                 LOGGER.log(Level.SEVERE, e.getMessage());
             }

@@ -25,7 +25,7 @@ public class GetFromECertisTask implements Callable<String> {
     @Override
     public String call() throws Exception {
 
-        // LOGGER.log(Level.INFO, String.format("%-16s Task: %s START", Thread.currentThread().getName(), url));
+        LOGGER.log(Level.INFO, String.format("%-16s Task: %s START", Thread.currentThread().getName(), url));
         long startTime = System.currentTimeMillis();
 
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
@@ -38,11 +38,11 @@ public class GetFromECertisTask implements Callable<String> {
                 if (status == HttpStatus.SC_OK) {
                     HttpEntity entity = response.getEntity();
                     long endTime = System.currentTimeMillis();
-                    // LOGGER.log(Level.INFO, String.format("%-16s Task: %s FINISH %d ms", Thread.currentThread().getName(), url, (endTime - startTime)));
+                    LOGGER.log(Level.INFO, String.format("%-16s Task: %s FINISH %d ms", Thread.currentThread().getName(), url, (endTime - startTime)));
                     return entity != null ? EntityUtils.toString(entity) : null;
                 } else {
                     long endTime = System.currentTimeMillis();
-                    // LOGGER.log(Level.SEVERE, String.format("%-16s Task: %s FINISH with exception %d ms", Thread.currentThread().getName(), url, (endTime - startTime)));
+                    LOGGER.log(Level.SEVERE, String.format("%-16s Task: %s FINISH with exception %d ms", Thread.currentThread().getName(), url, (endTime - startTime)));
                     throw new ClientProtocolException("Unexpected response status: " + status);
                 }
 
