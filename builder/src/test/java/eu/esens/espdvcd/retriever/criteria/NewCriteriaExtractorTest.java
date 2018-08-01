@@ -55,7 +55,7 @@ public class NewCriteriaExtractorTest {
     }
 
     @Test
-    public void testDefaultCriteriaExtractorBuilder() throws Exception {
+    public void testDefaultCriteriaExtractorBuilderBasicInfo() throws Exception {
 
         int index = 1;
 
@@ -68,6 +68,24 @@ public class NewCriteriaExtractorTest {
     }
 
     @Test
+    public void testDefaultCriteriaExtractorBuilder() throws Exception {
+
+        CriteriaExtractor extractor = new CriteriaExtractorBuilder()
+                .build();
+
+        ESPDRequest espdRequest = BuilderFactory.withEDMVersion2()
+                .getRegulatedModelBuilder()
+                .createESPDRequest();
+
+        espdRequest.setCriterionList(extractor.getFullList());
+
+        XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.withEDMVersion2()
+                .getDocumentBuilderFor(espdRequest);
+        System.out.println(xmlDocumentBuilderV2.getAsString());
+
+    }
+
+    @Test
     public void testNewCriteriaExtractorBuilder() throws Exception {
 
         CriteriaTaxonomyResource taxonomyResource = new CriteriaTaxonomyResource();
@@ -75,9 +93,9 @@ public class NewCriteriaExtractorTest {
         ESPDArtefactResource artefactResource = new ESPDArtefactResource(SchemaVersion.V2);
 
         CriteriaExtractor extractor = new CriteriaExtractorBuilder()
-                .addCriteriaResource(taxonomyResource)
+                // .addCriteriaResource(taxonomyResource)
                 .addCriteriaResource(eCertisResource)
-                .addLegislationResource(artefactResource)
+                // .addLegislationResource(artefactResource)
                 .addLegislationResource(eCertisResource)
                 .addRequirementGroupsResource(taxonomyResource)
                 .addRequirementGroupsResource(artefactResource)

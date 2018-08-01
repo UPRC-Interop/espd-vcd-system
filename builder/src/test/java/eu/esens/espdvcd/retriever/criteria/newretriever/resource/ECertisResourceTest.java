@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 
 public class ECertisResourceTest {
 
-    Logger logger = Logger.getLogger(ECertisResourceTest.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ECertisResourceTest.class.getName());
 
     @Before
     public void setUp() {
@@ -57,7 +57,7 @@ public class ECertisResourceTest {
 
         } catch (RetrieverException e) {
             exceptionHappened = true;
-            logger.log(Level.SEVERE, e.getMessage());
+            LOGGER.log(Level.SEVERE, e.getMessage());
         }
 
         return exceptionHappened;
