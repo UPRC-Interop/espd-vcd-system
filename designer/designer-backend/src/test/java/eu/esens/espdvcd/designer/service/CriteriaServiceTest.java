@@ -1,30 +1,33 @@
 package eu.esens.espdvcd.designer.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.retriever.criteria.ECertisCriteriaExtractor;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import eu.esens.espdvcd.schema.SchemaVersion;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 public class CriteriaServiceTest {
-    private CriteriaService eCertisCriteriaService,  predefinedCriteriaService;
+    private CriteriaService predefinedCriteriaServiceV1, predefinedCriteriaServiceV2;
     private final static Logger LOGGER = Logger.getLogger(CriteriaServiceTest.class.getName());
 
     @Before
     public void setUp() throws Exception {
-        eCertisCriteriaService = new ECertisCriteriaService(SchemaVersion.V2);
-        predefinedCriteriaService = new PredefinedCriteriaService(SchemaVersion.V1);
+        predefinedCriteriaServiceV1 = new PredefinedCriteriaService(SchemaVersion.V1);
+        predefinedCriteriaServiceV2 = new PredefinedCriteriaService(SchemaVersion.V2);
     }
 
     @Test
-    public void getCriteria() {
-    }
+    public void predefinedCriteriaServiceTest() throws RetrieverException {
+        List<SelectableCriterion> v1Criteria = predefinedCriteriaServiceV1.getCriteria();
+        List<SelectableCriterion> v2Criteria = predefinedCriteriaServiceV2.getCriteria();
 
-    @Test
-    public void getUnselectedCriteria() {
+        Assert.assertEquals( 63, v1Criteria.size());
+        Assert.assertEquals( 63, v2Criteria.size());
     }
 
     @Test
@@ -39,7 +42,4 @@ public class CriteriaServiceTest {
         LOGGER.info(ex.getCriterion("c27b7c4e-c837-4529-b867-ed55ce639db5").getDescription());
     }
 
-    @Test
-    public void getfilteredCriteriaList() {
-    }
 }

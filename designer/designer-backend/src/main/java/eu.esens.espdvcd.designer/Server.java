@@ -59,12 +59,12 @@ public class Server {
             Endpoint v2Codelists = new CodelistsEndpoint(new CodelistsV2Service());
             v2Context.addEndpoint(v2Codelists);
 
-            LOGGER.info("Configuring eCertisCriteria endpoint...");
-            Endpoint eCertisCriteriaEndpointV1 = new CriteriaEndpoint(new ECertisCriteriaService(SchemaVersion.V1));
-            Endpoint eCertisCriteriaEndpointV2 = new CriteriaEndpoint(new ECertisCriteriaService(SchemaVersion.V2));
-
-            v1Context.addEndpointWithPath(eCertisCriteriaEndpointV1, "/criteria/eCertis");
-            v2Context.addEndpointWithPath(eCertisCriteriaEndpointV2, "/criteria/eCertis");
+//            LOGGER.info("Configuring eCertisCriteria endpoint...");
+//            Endpoint eCertisCriteriaEndpointV1 = new CriteriaEndpoint(new ECertisCriteriaService(SchemaVersion.V1));
+//            Endpoint eCertisCriteriaEndpointV2 = new CriteriaEndpoint(new ECertisCriteriaService(SchemaVersion.V2));
+//
+//            v1Context.addEndpointWithPath(eCertisCriteriaEndpointV1, "/criteria/eCertis");
+//            v2Context.addEndpointWithPath(eCertisCriteriaEndpointV2, "/criteria/eCertis");
 
             LOGGER.info("Configuring predefinedCriteria endpoint...");
             Endpoint predefCriteriaEndpointV1 = new CriteriaEndpoint(new PredefinedCriteriaService(SchemaVersion.V1));
