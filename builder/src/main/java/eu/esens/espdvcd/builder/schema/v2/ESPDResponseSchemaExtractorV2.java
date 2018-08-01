@@ -37,9 +37,9 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
         final QualificationApplicationResponseType qarType = new QualificationApplicationResponseType();
 
         if (modelResponse.getCADetails().getProcurementProcedureFileReferenceNo() != null) {
-            qarType.setContractFolderID(new ContractFolderIDType());
-            qarType.getContractFolderID().setSchemeAgencyID("TeD");
-            qarType.getContractFolderID().setValue(modelResponse.getCADetails().getProcurementProcedureFileReferenceNo());
+            qarType.setContractFolderID(createContractFolderIDType(modelResponse.getCADetails().getProcurementProcedureFileReferenceNo()));
+        } else {
+            qarType.setContractFolderID(createContractFolderIDType("PPID-test1"));
         }
 
         qarType.getAdditionalDocumentReference().add(extractCADetailsDocumentReference(modelResponse.getCADetails()));
@@ -365,6 +365,7 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
 
         if (response.getValidatedCriterionPropertyID() != null) {
             tcrType.setValidatedCriterionPropertyID(createValidatedCriterionPropertyId(response.getValidatedCriterionPropertyID()));
+//            tcrType.setValidatedCriterionPropertyID(createValidatedCriterionPropertyId());
         }
 
         if (response.getConfidentialityLevelCode() != null) {

@@ -14,27 +14,33 @@ import java.util.stream.Collectors;
 
 public class ESPDRequestSchemaExtractorV2 implements SchemaExtractorV2 {
 
-    public QualificationApplicationRequestType extractQualificationApplicationRequestType(ESPDRequest req) {
+    public QualificationApplicationRequestType extractQualificationApplicationRequestType(ESPDRequest modelRequest) {
 
         QualificationApplicationRequestType qarType = new QualificationApplicationRequestType();
 
-        if (req.getCADetails().getProcurementProcedureFileReferenceNo() != null) {
+        if (modelRequest.getCADetails().getProcurementProcedureFileReferenceNo() != null) {
             qarType.setContractFolderID(new ContractFolderIDType());
             qarType.getContractFolderID().setSchemeAgencyID("TeD");
-            qarType.getContractFolderID().setValue(req.getCADetails().getProcurementProcedureFileReferenceNo());
+            qarType.getContractFolderID().setValue(modelRequest.getCADetails().getProcurementProcedureFileReferenceNo());
         }
 
-        qarType.getAdditionalDocumentReference().add(extractCADetailsDocumentReference(req.getCADetails()));
+        if (modelRequest.getCADetails().getProcurementProcedureFileReferenceNo() != null) {
+            qarType.setContractFolderID(createContractFolderIDType(modelRequest.getCADetails().getProcurementProcedureFileReferenceNo()));
+        } else {
+            qarType.setContractFolderID(createContractFolderIDType("PPID-test1"));
+        }
 
-        DocumentReferenceType drt = extractCADetailsNationalDocumentReference(req.getCADetails());
+        qarType.getAdditionalDocumentReference().add(extractCADetailsDocumentReference(modelRequest.getCADetails()));
+
+        DocumentReferenceType drt = extractCADetailsNationalDocumentReference(modelRequest.getCADetails());
         if (drt != null) {
             qarType.getAdditionalDocumentReference().add(drt);
         }
 
-        qarType.getContractingParty().add(extractContractingPartyType(req.getCADetails()));
-        qarType.getContractingParty().get(0).getParty().getServiceProviderParty().add(extractServiceProviderPartyType(req.getServiceProviderDetails()));
+        qarType.getContractingParty().add(extractContractingPartyType(modelRequest.getCADetails()));
+        qarType.getContractingParty().get(0).getParty().getServiceProviderParty().add(extractServiceProviderPartyType(modelRequest.getServiceProviderDetails()));
 
-        qarType.getTenderingCriterion().addAll(req.getFullCriterionList().stream()
+        qarType.getTenderingCriterion().addAll(modelRequest.getFullCriterionList().stream()
                 .filter(cr -> cr.isSelected())
                 .map(cr -> extractTenderingCriterion(cr))
                 .collect(Collectors.toList()));

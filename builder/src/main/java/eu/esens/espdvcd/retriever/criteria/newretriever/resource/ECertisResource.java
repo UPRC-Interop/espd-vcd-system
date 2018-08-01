@@ -1,6 +1,5 @@
 package eu.esens.espdvcd.retriever.criteria.newretriever.resource;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -9,7 +8,7 @@ import com.github.rholder.retry.RetryException;
 import eu.esens.espdvcd.model.LegislationReference;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.retriever.ECertisCriterion;
-import eu.esens.espdvcd.model.retriever.ECertisCriterionImpl;
+import eu.esens.espdvcd.retriever.criteria.newretriever.resource.tasks.GetECertisCriterionRetryingTask;
 import eu.esens.espdvcd.retriever.criteria.newretriever.resource.tasks.GetFromECertisRetryingTask;
 import eu.esens.espdvcd.retriever.criteria.newretriever.resource.tasks.GetFromECertisTask;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
@@ -79,34 +78,21 @@ public class ECertisResource implements CriteriaResource, LegislationResource {
 
         ExecutorService executorService = Executors.newCachedThreadPool();
 
-        Set<GetFromECertisRetryingTask> rTasks = new LinkedHashSet<>(fullIDList.size());
-        fullIDList.forEach(ID -> rTasks.add(new GetFromECertisRetryingTask(
-                new GetFromECertisTask(ALL_CRITERIA_URL + "/" + ID))));
+        Set<GetECertisCriterionRetryingTask> rTasks = new LinkedHashSet<>(fullIDList.size());
+        fullIDList.forEach(ID -> rTasks.add(new GetECertisCriterionRetryingTask(ID)));
 
         try {
             LOGGER.log(Level.INFO, "Invoke all tasks... START");
             long startTime = System.currentTimeMillis();
-            // List<Future<ECertisCriterion>> futureList = executor.invokeAll(tasks);
-            List<Future<String>> futures = executorService.invokeAll(rTasks);
+            List<Future<ECertisCriterion>> futures = executorService.invokeAll(rTasks);
             long endTime = System.currentTimeMillis();
             LOGGER.log(Level.INFO, "Invoke all tasks... FINISH: " + (endTime - startTime) + " ms");
 
             for (Future f : futures) {
 
                 if (f.isDone()) {
-                    // ECertisCriterion c = (ECertisCriterion) f.get();
-                    // eCertisCriterionMap.put(c.getID(), c);
-                    String cString = (String) f.get();
-
-                    try {
-                        ObjectMapper mapper = new ObjectMapper();
-                        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-                        mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
-                        ECertisCriterion ec = mapper.readValue(cString, ECertisCriterionImpl.class);
-                        eCertisCriterionMap.put(ec.getID(), ec);
-                    } catch (IOException e) {
-                        throw new RetrieverException(e);
-                    }
+                    ECertisCriterion ec = (ECertisCriterion) f.get();
+                    eCertisCriterionMap.put(ec.getID(), ec);
                 }
 
             }

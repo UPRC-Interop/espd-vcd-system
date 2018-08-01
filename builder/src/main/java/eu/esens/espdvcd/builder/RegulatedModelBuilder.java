@@ -22,6 +22,8 @@ import java.util.logging.Logger;
 
 public abstract class RegulatedModelBuilder implements ModelBuilder {
 
+    private static final Logger LOGGER = Logger.getLogger(RegulatedModelBuilder.class.getName());
+
     private EODetails eoDetails = null;
     private CADetails caDetails = null;
     private ServiceProviderDetails serviceProviderDetails = null;
@@ -138,7 +140,7 @@ public abstract class RegulatedModelBuilder implements ModelBuilder {
                 try {
                     req.setCriterionList(criteriaExtractor.getFullList(req.getFullCriterionList()));
                 } catch (RetrieverException ex) {
-                    Logger.getLogger(RegulatedModelBuilder.class.getName()).log(Level.SEVERE, null, ex);
+                    LOGGER.log(Level.SEVERE, null, ex);
                 }
             }
         } else {
@@ -177,7 +179,7 @@ public abstract class RegulatedModelBuilder implements ModelBuilder {
                 try {
                     res.setCriterionList(criteriaExtractor.getFullList(res.getFullCriterionList(), true));
                 } catch (RetrieverException ex) {
-                    Logger.getLogger(RegulatedModelBuilder.class.getName()).log(Level.SEVERE, null, ex);
+                    LOGGER.log(Level.SEVERE, null, ex);
                 }
             }
 
@@ -230,12 +232,12 @@ public abstract class RegulatedModelBuilder implements ModelBuilder {
             // but first identify the artefact schema version
             switch (ArtefactUtils.findSchemaVersion(xmlESPD)) {
                 case V1:
-                    Logger.getLogger(RegulatedModelBuilder.class.getName()).log(Level.INFO, "v1 artefact has been imported...");
+                    LOGGER.log(Level.INFO, "v1 artefact has been imported...");
                     ESPDRequestType espdRequestType = readESPDRequestFromStream(bis);
                     req = ModelFactory.ESPD_REQUEST.extractESPDRequest(espdRequestType); // Create the Model Object
                     break;
                 case V2:
-                    Logger.getLogger(RegulatedModelBuilder.class.getName()).log(Level.INFO, "v2 artefact has been imported...");
+                    LOGGER.log(Level.INFO, "v2 artefact has been imported...");
                     QualificationApplicationRequestType qualificationApplicationRequestType = readQualificationApplicationRequestFromStream(bis);
                     req = ModelFactory.ESPD_REQUEST.extractESPDRequest(qualificationApplicationRequestType); // Create the Model Object
                     break;
@@ -244,7 +246,7 @@ public abstract class RegulatedModelBuilder implements ModelBuilder {
             }
 
         } catch (IOException | JAXBException ex) {
-            Logger.getLogger(RegulatedModelBuilder.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.log(Level.SEVERE, null, ex);
             throw new BuilderException("Error in Reading XML Input Stream", ex);
         }
 
@@ -268,14 +270,14 @@ public abstract class RegulatedModelBuilder implements ModelBuilder {
             // but first identify the artefact schema version
             switch (ArtefactUtils.findSchemaVersion(xmlESPDRes)) {
                 case V1:
-                    Logger.getLogger(RegulatedModelBuilder.class.getName()).log(Level.INFO, "v1 artefact has been imported...");
+                    LOGGER.log(Level.INFO, "v1 artefact has been imported...");
                     // Check and read the file in the JAXB Object
                     ESPDResponseType espdResponseType = readESPDResponseFromStream(bis);
                     // Create the Model Object
                     res = ModelFactory.ESPD_RESPONSE.extractESPDResponse(espdResponseType);
                     break;
                 case V2:
-                    Logger.getLogger(RegulatedModelBuilder.class.getName()).log(Level.INFO, "v2 artefact has been imported...");
+                    LOGGER.log(Level.INFO, "v2 artefact has been imported...");
                     // Check and read the file in the JAXB Object
                     QualificationApplicationResponseType qualificationApplicationResponseType = readQualificationApplicationResponseFromStream(bis);
                     // Create the Model Object
@@ -286,7 +288,7 @@ public abstract class RegulatedModelBuilder implements ModelBuilder {
             }
 
         } catch (IOException | JAXBException ex) {
-            Logger.getLogger(RegulatedModelBuilder.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.log(Level.SEVERE, null, ex);
             throw new BuilderException("Error in Reading Input Stream for ESPD Response", ex);
         }
 
@@ -322,7 +324,7 @@ public abstract class RegulatedModelBuilder implements ModelBuilder {
             try {
                 req.setCriterionList(criteriaExtractor.getFullList());
             } catch (RetrieverException ex) {
-                Logger.getLogger(RegulatedModelBuilder.class.getName()).log(Level.SEVERE, null, ex);
+                LOGGER.log(Level.SEVERE, null, ex);
             }
         } else {
             req.setCriterionList(getEmptyCriteriaList());

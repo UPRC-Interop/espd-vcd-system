@@ -3,6 +3,7 @@ package eu.esens.espdvcd.retriever.criteria;
 import eu.esens.espdvcd.builder.BuilderFactory;
 import eu.esens.espdvcd.builder.XMLDocumentBuilderV2;
 import eu.esens.espdvcd.model.ESPDRequest;
+import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.retriever.criteria.newretriever.CriteriaExtractorBuilder;
 import eu.esens.espdvcd.retriever.criteria.newretriever.resource.CriteriaTaxonomyResource;
@@ -68,7 +69,7 @@ public class NewCriteriaExtractorTest {
     }
 
     @Test
-    public void testDefaultCriteriaExtractorBuilder() throws Exception {
+    public void testDefaultCriteriaExtractorBuilderForRequest() throws Exception {
 
         CriteriaExtractor extractor = new CriteriaExtractorBuilder()
                 .build();
@@ -81,6 +82,24 @@ public class NewCriteriaExtractorTest {
 
         XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.withEDMVersion2()
                 .getDocumentBuilderFor(espdRequest);
+        System.out.println(xmlDocumentBuilderV2.getAsString());
+
+    }
+
+    @Test
+    public void testDefaultCriteriaExtractorBuilderForResponse() throws Exception {
+
+        CriteriaExtractor extractor = new CriteriaExtractorBuilder()
+                .build();
+
+        ESPDResponse espdResponse = BuilderFactory.withEDMVersion2()
+                .getRegulatedModelBuilder()
+                .createESPDResponse();
+
+        espdResponse.setCriterionList(extractor.getFullList());
+
+        XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.withEDMVersion2()
+                .getDocumentBuilderFor(espdResponse);
         System.out.println(xmlDocumentBuilderV2.getAsString());
 
     }
