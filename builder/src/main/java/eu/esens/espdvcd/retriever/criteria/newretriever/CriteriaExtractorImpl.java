@@ -19,18 +19,22 @@ import java.util.stream.Collectors;
  */
 public class CriteriaExtractorImpl implements CriteriaExtractor {
 
+    private static final Logger LOGGER = Logger.getLogger(CriteriaExtractorImpl.class.getName());
+
     //    private List<CriteriaResource> cResourceList;
     private List<LegislationResource> lResourceList;
     private List<RequirementGroupResource> rgResourceList;
 
     private List<SelectableCriterion> criterionList;
 
-    Logger logger = Logger.getLogger(CriteriaExtractorImpl.class.getName());
-
     /* package private constructor. Create only through factory */
     CriteriaExtractorImpl(@NotEmpty List<CriteriaResource> cResourceList,
                           @NotEmpty List<LegislationResource> lResourceList,
                           @NotEmpty List<RequirementGroupResource> rgResourceList) {
+
+        ResourceComparator resourceComparator = new ResourceComparator();
+        lResourceList.sort(resourceComparator);
+        rgResourceList.sort(resourceComparator);
 
         this.criterionList = createCriterionList(cResourceList);
         this.lResourceList = lResourceList;
@@ -46,7 +50,7 @@ public class CriteriaExtractorImpl implements CriteriaExtractor {
                 cResource.getCriterionList()
                         .forEach(sc -> fullCriterionMap.put(sc.getID(), sc));
             } catch (RetrieverException e) {
-                logger.log(Level.SEVERE, e.getMessage());
+                LOGGER.log(Level.SEVERE, e.getMessage());
             }
         });
 
@@ -77,10 +81,13 @@ public class CriteriaExtractorImpl implements CriteriaExtractor {
 
         lResourceList.forEach(lResource -> {
             try {
-                sc.setLegislationReference(lResource
-                        .getLegislationForCriterion(sc.getID()));
+
+                if (sc.getLegislationReference() == null) {
+                    sc.setLegislationReference(lResource
+                            .getLegislationForCriterion(sc.getID()));
+                }
             } catch (RetrieverException e) {
-                logger.log(Level.SEVERE, e.getMessage());
+                LOGGER.log(Level.SEVERE, e.getMessage());
             }
         });
     }
@@ -89,10 +96,13 @@ public class CriteriaExtractorImpl implements CriteriaExtractor {
 
         rgResourceList.forEach(rgResource -> {
             try {
-                sc.setRequirementGroups(rgResource
-                        .getRequirementGroupsForCriterion(sc.getID()));
+
+                if (sc.getRequirementGroups().isEmpty()) {
+                    sc.setRequirementGroups(rgResource
+                            .getRequirementGroupsForCriterion(sc.getID()));
+                }
             } catch (RetrieverException e) {
-                logger.log(Level.SEVERE, e.getMessage());
+                LOGGER.log(Level.SEVERE, e.getMessage());
             }
         });
     }

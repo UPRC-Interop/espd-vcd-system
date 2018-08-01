@@ -9,14 +9,31 @@ import org.junit.Test;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 public class ECertisResourceTest {
 
-    Logger logger = Logger.getLogger(ECertisResourceTest.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ECertisResourceTest.class.getName());
 
     @Before
     public void setUp() {
 
+    }
+
+    @Test
+    public void testECertisCriterionResourceWithInitialIDList() throws Exception {
+
+        CriteriaTaxonomyResource taxonomyResource = new CriteriaTaxonomyResource();
+
+        ECertisResource eCertisResource = new ECertisResource(taxonomyResource
+                .getCriterionList()
+                .stream().map(sc -> sc.getID()).collect(Collectors.toList()));
+
+        int index = 1;
+
+        for (SelectableCriterion sc : eCertisResource.getCriterionList()) {
+            SelectableCriterionPrinter.printSelectableCriterion(sc, index++);
+        }
     }
 
     @Test
@@ -57,7 +74,7 @@ public class ECertisResourceTest {
 
         } catch (RetrieverException e) {
             exceptionHappened = true;
-            logger.log(Level.SEVERE, e.getMessage());
+            LOGGER.log(Level.SEVERE, e.getMessage());
         }
 
         return exceptionHappened;
