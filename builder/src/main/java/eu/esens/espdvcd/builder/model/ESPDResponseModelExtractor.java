@@ -442,6 +442,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 }
                 applyValidatedCriterionPropertyID(res.getValidatedCriterionPropertyID(), urlResp);
                 applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), urlResp);
+                urlResp.setResponseType(theType);
                 return urlResp;
 
             default:

@@ -49,6 +49,12 @@ public class ResponseFactory {
             case CODE:
                 return new EvidenceURLCodeResponse();
 
+            case URL:
+                return new URLResponse();
+
+            case IDENTIFIER:
+                return new IdentifierResponse();
+
             default:
                 return null;
                    
