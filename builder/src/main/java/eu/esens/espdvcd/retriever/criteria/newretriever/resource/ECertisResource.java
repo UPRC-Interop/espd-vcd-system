@@ -82,11 +82,13 @@ public class ECertisResource implements CriteriaResource, LegislationResource {
         fullIDList.forEach(ID -> rTasks.add(new GetECertisCriterionRetryingTask(ID)));
 
         try {
-            LOGGER.log(Level.INFO, "Invoke all tasks... START");
+            // LOGGER.log(Level.INFO, "Invoke all tasks... START");
+            System.out.println("Invoke all tasks... START");
             long startTime = System.currentTimeMillis();
             List<Future<ECertisCriterion>> futures = executorService.invokeAll(rTasks);
             long endTime = System.currentTimeMillis();
-            LOGGER.log(Level.INFO, "Invoke all tasks... FINISH: " + (endTime - startTime) + " ms");
+            // LOGGER.log(Level.INFO, "Invoke all tasks... FINISH: " + (endTime - startTime) + " ms");
+            System.out.println("Invoke all tasks... FINISH: " + (endTime - startTime) + " ms");
 
             for (Future f : futures) {
 
@@ -193,6 +195,7 @@ public class ECertisResource implements CriteriaResource, LegislationResource {
         sc.setName(c.getName());
         sc.setDescription(c.getDescription());
         sc.setSelected(asSelected);
+        sc.setLegislationReference(c.getLegislationReference());
         return sc;
     }
 

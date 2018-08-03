@@ -25,7 +25,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -421,10 +420,29 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 return eiResp;
 
             case IDENTIFIER:
-                // there is no example for this one and also no mapping in v1
+                IdentifierResponse iResp = new IdentifierResponse();
+                if (!res.getResponseValue().isEmpty()
+                        && res.getResponseValue().get(0).getResponseID() != null
+                        && res.getResponseValue().get(0).getResponseID().getValue() != null) {
+
+                    iResp.setIdentifier(res.getResponseValue().get(0).getResponseID().getValue());
+                }
+                applyValidatedCriterionPropertyID(res.getValidatedCriterionPropertyID(), iResp);
+                applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), iResp);
+                iResp.setResponseType(theType);
+                return iResp;
 
             case URL:
-                // in v1 this maps to DESCRIPTION
+                URLResponse urlResp = new URLResponse();
+                if (!res.getResponseValue().isEmpty()
+                        && res.getResponseValue().get(0).getResponseURI() != null
+                        && res.getResponseValue().get(0).getResponseURI().getValue() != null) {
+
+                    urlResp.setUrl(res.getResponseValue().get(0).getResponseURI().getValue());
+                }
+                applyValidatedCriterionPropertyID(res.getValidatedCriterionPropertyID(), urlResp);
+                applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), urlResp);
+                return urlResp;
 
             default:
                 return null;
@@ -983,7 +1001,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
      * @param drt
      * @return
      */
-    private ESPDRequestDetails extractESPDRequestDetails (eu.espd.schema.v2.pre_award.commonaggregate.DocumentReferenceType drt) {
+    private ESPDRequestDetails extractESPDRequestDetails(eu.espd.schema.v2.pre_award.commonaggregate.DocumentReferenceType drt) {
         ESPDRequestDetails erd = new ESPDRequestDetails();
 
         if (drt.getID() != null) {

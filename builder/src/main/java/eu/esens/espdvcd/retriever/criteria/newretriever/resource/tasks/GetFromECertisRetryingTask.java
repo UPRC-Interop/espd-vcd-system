@@ -17,16 +17,13 @@ public class GetFromECertisRetryingTask implements Callable<String> {
     }
 
     @Override
-    public String call() throws IOException, ExecutionException, RetryException {
+    public String call() throws ExecutionException, RetryException {
 
         Retryer<String> retryer = RetryerBuilder.<String>newBuilder()
                 .retryIfResult(Predicates.<String>isNull())
-                // .retryIfExceptionOfType(IOException.class)
-                .retryIfException()
-                // .retryIfRuntimeException()
+                .retryIfExceptionOfType(IOException.class)
+                .retryIfRuntimeException()
                 .withWaitStrategy(WaitStrategies.fibonacciWait(100, 2, TimeUnit.MINUTES))
-                // .withStopStrategy(StopStrategies.stopAfterAttempt(3))
-                // .withStopStrategy(StopStrategies.neverStop())
                 .withStopStrategy(StopStrategies.stopAfterDelay(4, TimeUnit.SECONDS))
                 .build();
 

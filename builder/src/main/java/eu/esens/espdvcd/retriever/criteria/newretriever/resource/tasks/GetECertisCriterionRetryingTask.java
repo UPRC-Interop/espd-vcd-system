@@ -2,11 +2,14 @@ package eu.esens.espdvcd.retriever.criteria.newretriever.resource.tasks;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.rholder.retry.RetryException;
 import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
 import eu.esens.espdvcd.model.retriever.ECertisCriterion;
 import eu.esens.espdvcd.model.retriever.ECertisCriterionImpl;
 
+import java.io.IOException;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 
 public class GetECertisCriterionRetryingTask implements Callable<ECertisCriterion> {
 
@@ -26,7 +29,7 @@ public class GetECertisCriterionRetryingTask implements Callable<ECertisCriterio
     }
 
     @Override
-    public ECertisCriterion call() throws Exception {
+    public ECertisCriterion call() throws ExecutionException, RetryException, IOException {
 
         GetFromECertisTask task = new GetFromECertisTask(ALL_CRITERIA_URL + "/" + ID + "?lang=" + lang.name().toLowerCase());
         GetFromECertisRetryingTask rTask = new GetFromECertisRetryingTask(task);

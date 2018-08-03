@@ -1,7 +1,6 @@
 package eu.esens.espdvcd.retriever.criteria.newretriever.resource;
 
 import eu.esens.espdvcd.model.SelectableCriterion;
-import eu.esens.espdvcd.model.retriever.ECertisCriterion;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import org.junit.Assert;
 import org.junit.Before;
@@ -68,10 +67,13 @@ public class ECertisResourceTest {
 
         try {
 
-            for (ECertisCriterion ec : resource.createECertisCriterionMap().values()) {
-                System.out.printf("%-2d %-36s\nName: %s\nDescription: %s\n\n", index++, ec.getID(), ec.getName(), ec.getDescription());
-            }
+//            for (ECertisCriterion ec : resource.createECertisCriterionMap().values()) {
+//                System.out.printf("%-2d %-36s\nName: %s\nDescription: %s\n\n", index++, ec.getID(), ec.getName(), ec.getDescription());
+//            }
 
+            for (SelectableCriterion sc : resource.getCriterionList()) {
+                SelectableCriterionPrinter.printSelectableCriterion(sc, index++);
+            }
         } catch (RetrieverException e) {
             exceptionHappened = true;
             LOGGER.log(Level.SEVERE, e.getMessage());

@@ -506,8 +506,23 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
                 return tcrType;
 
             case IDENTIFIER:
+                String responseID = ((IdentifierResponse) response).getIdentifier();
+                if (responseID != null) {
+                    rvType.setResponseID(new ResponseIDType());
+                    rvType.getResponseID().setSchemeAgencyID("EU-COM-GROW");
+                    rvType.getResponseID().setValue(responseID);
+                }
+                tcrType.getResponseValue().add(rvType);
+                return tcrType;
 
             case URL:
+                String url = ((URLResponse) response).getUrl();
+                if (url != null) {
+                    rvType.setResponseURI(new ResponseURIType());
+                    rvType.getResponseURI().setValue(url);
+                }
+                tcrType.getResponseValue().add(rvType);
+                return tcrType;
 
             default:
                 return null;
