@@ -5,9 +5,15 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.rholder.retry.RetryException;
+import eu.esens.espdvcd.codelist.enums.ConfidentialityLevelEnum;
+import eu.esens.espdvcd.model.EvidenceIssuerDetails;
 import eu.esens.espdvcd.model.LegislationReference;
 import eu.esens.espdvcd.model.SelectableCriterion;
+import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
 import eu.esens.espdvcd.model.retriever.ECertisCriterion;
+import eu.esens.espdvcd.model.retriever.ECertisEvidence;
+import eu.esens.espdvcd.model.retriever.ECertisEvidenceGroup;
+import eu.esens.espdvcd.model.retriever.ECertisEvidenceIssuerParty;
 import eu.esens.espdvcd.retriever.criteria.newretriever.resource.tasks.GetECertisCriterionRetryingTask;
 import eu.esens.espdvcd.retriever.criteria.newretriever.resource.tasks.GetFromECertisRetryingTask;
 import eu.esens.espdvcd.retriever.criteria.newretriever.resource.tasks.GetFromECertisTask;
@@ -27,7 +33,7 @@ import java.util.stream.Collectors;
 /**
  * @author konstantinos Raptis
  */
-public class ECertisResource implements CriteriaResource, LegislationResource {
+public class ECertisResource implements CriteriaResource, LegislationResource, EvidencesResource {
 
     private static final Logger LOGGER = Logger.getLogger(ECertisResource.class.getName());
 
@@ -189,18 +195,83 @@ public class ECertisResource implements CriteriaResource, LegislationResource {
         throw new RetrieverException(message, ex);
     }
 
-    private SelectableCriterion createSelectableCriterionAsSelected(ECertisCriterion c, boolean asSelected) {
+    /**
+     * Create a new selectable criterion from an e-Certis criterion.
+     *
+     * @param ec         The e-Certis criterion
+     * @param asSelected
+     * @return
+     */
+    private SelectableCriterion createSelectableCriterionAsSelected(ECertisCriterion ec, boolean asSelected) {
         SelectableCriterion sc = new SelectableCriterion();
-        sc.setID(c.getID());
-        sc.setName(c.getName());
-        sc.setDescription(c.getDescription());
+        sc.setID(ec.getID());
+        sc.setName(ec.getName());
+        sc.setDescription(ec.getDescription());
         sc.setSelected(asSelected);
-        sc.setLegislationReference(c.getLegislationReference());
+        sc.setLegislationReference(ec.getLegislationReference());
         return sc;
     }
 
-    private SelectableCriterion createSelectableCriterion(ECertisCriterion c) {
-        return createSelectableCriterionAsSelected(c, true);
+    /**
+     * Create a new selectable criterion from an e-Certis criterion.
+     *
+     * @param ec The e-Certis criterion
+     * @return
+     */
+    private SelectableCriterion createSelectableCriterion(ECertisCriterion ec) {
+        return createSelectableCriterionAsSelected(ec, true);
+    }
+
+    private Evidence extractEvidence(ECertisEvidence evidence) {
+        Evidence e = new Evidence();
+        e.setID(evidence.getID());
+        e.setDescription(evidence.getDescription());
+        e.setConfidentialityLevelCode(ConfidentialityLevelEnum.PUBLIC.name());
+
+        if (!evidence.getEvidenceDocumentReference().isEmpty()
+                && evidence.getEvidenceDocumentReference().get(0).getAttachment() != null
+                && evidence.getEvidenceDocumentReference().get(0).getAttachment().getExternalReference() != null
+                && evidence.getEvidenceDocumentReference().get(0).getAttachment().getExternalReference().getURI() != null) {
+
+            e.setEvidenceURL(evidence.getEvidenceDocumentReference().get(0).getAttachment().getExternalReference().getURI());
+        }
+
+        if (!evidence.getEvidenceIssuerParty().isEmpty()) {
+            e.setEvidenceIssuer(createEvidenceIssuerDetails(evidence.getEvidenceIssuerParty().get(0)));
+        }
+
+        return e;
+    }
+
+    private EvidenceIssuerDetails createEvidenceIssuerDetails(ECertisEvidenceIssuerParty evidenceIssuerParty) {
+        EvidenceIssuerDetails issuerDetails = new EvidenceIssuerDetails();
+
+        if (!evidenceIssuerParty.getPartyName().isEmpty()
+                && evidenceIssuerParty.getPartyName().get(0).getName() != null) {
+
+            issuerDetails.setName(evidenceIssuerParty.getPartyName().get(0).getName());
+        }
+
+        issuerDetails.setWebsite(evidenceIssuerParty.getWebsiteURI());
+
+        return issuerDetails;
+    }
+
+    private List<Evidence> extractEvidences(ECertisEvidenceGroup eg) {
+        return eg.getEvidences()
+                .stream()
+                .map(e -> extractEvidence(e))
+                .collect(Collectors.toList());
+    }
+
+    private List<Evidence> extractEvidences(List<ECertisEvidenceGroup> egList) {
+        List<Evidence> evidenceList = new ArrayList<>();
+
+        for (ECertisEvidenceGroup eg : egList) {
+            evidenceList.addAll(extractEvidences(eg));
+        }
+
+        return evidenceList;
     }
 
     @Override
@@ -225,6 +296,17 @@ public class ECertisResource implements CriteriaResource, LegislationResource {
         return criterionMap.containsKey(ID)
                 ? criterionMap.get(ID).getLegislationReference()
                 : null;
+    }
+
+    @Override
+    public List<Evidence> getEvidencesForCriterion(String ID) throws RetrieverException {
+        initCriterionMap();
+
+        if (criterionMap.containsKey(ID)) {
+            return extractEvidences(criterionMap.get(ID).getEvidenceGroups());
+        }
+
+        return Collections.emptyList();
     }
 
     @Override

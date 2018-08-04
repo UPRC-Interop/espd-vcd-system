@@ -21,7 +21,7 @@ public class CriteriaExtractorImpl implements CriteriaExtractor {
 
     private static final Logger LOGGER = Logger.getLogger(CriteriaExtractorImpl.class.getName());
 
-    //    private List<CriteriaResource> cResourceList;
+    // private List<CriteriaResource> cResourceList;
     private List<LegislationResource> lResourceList;
     private List<RequirementGroupResource> rgResourceList;
 

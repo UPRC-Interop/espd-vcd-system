@@ -10,14 +10,13 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- *
  * Criterion
- *
- *
+ * <p>
+ * <p>
  * Created by Ulf Lotzmann on 05/03/2016.
  */
 
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 
 public class Criterion implements Serializable {
 
@@ -118,7 +117,7 @@ public class Criterion implements Serializable {
     public Criterion() {
         this.ID = java.util.UUID.randomUUID().toString();
     }
-    
+
     public Criterion(String ID, String typeCode, String name, String description, LegislationReference legislationReference, List<RequirementGroup> requirementGroups) {
         this.ID = ID;
         this.typeCode = typeCode;
@@ -127,7 +126,7 @@ public class Criterion implements Serializable {
         this.legislationReference = legislationReference;
         this.requirementGroups = requirementGroups;
     }
-    
+
     public Criterion(String ID, String typeCode, String name, String description, LegislationReference legislationReference) {
         this.ID = ID;
         this.typeCode = typeCode;
@@ -187,14 +186,14 @@ public class Criterion implements Serializable {
     public void setLegislationReference(LegislationReference legislationReference) {
         this.legislationReference = legislationReference;
     }
-    
+
 
     public String getCriterionGroup() {
-          String[] ar= this.typeCode.split("\\.",4);
+        String[] ar = this.typeCode.split("\\.", 4);
         StringBuilder sb = new StringBuilder();
         int size = 3;
         if (ar.length < size) size = ar.length;
-        for (int i=0; i<size; i++) {
+        for (int i = 0; i < size; i++) {
             sb.append(ar[i]);
             sb.append(".");
         }
