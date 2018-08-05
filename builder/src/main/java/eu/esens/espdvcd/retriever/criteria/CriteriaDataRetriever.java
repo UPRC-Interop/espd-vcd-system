@@ -2,13 +2,11 @@ package eu.esens.espdvcd.retriever.criteria;
 
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
-import eu.esens.espdvcd.model.retriever.ECertisCriterion;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
+
 import java.util.List;
-import eu.esens.espdvcd.model.retriever.ECertisEvidenceGroup;
 
 /**
- *
  * @author Konstantinos Raptis
  */
 public interface CriteriaDataRetriever {
@@ -20,8 +18,7 @@ public interface CriteriaDataRetriever {
      * @return All National Criteria which mapped with Source Criterion.
      * @throws eu.esens.espdvcd.retriever.exception.RetrieverException
      */
-    List<SelectableCriterion> getNationalCriterionMapping(String ID, String countryCode)
-            throws RetrieverException;
+    List<SelectableCriterion> getNationalCriterionMapping(String ID, String countryCode) throws RetrieverException;
         
     /**
      * 
@@ -29,16 +26,14 @@ public interface CriteriaDataRetriever {
      * @return Data of Criterion with given ID.
      * @throws eu.esens.espdvcd.retriever.exception.RetrieverException
      */
-    SelectableCriterion getCriterion(String ID)
-            throws RetrieverException;
+    SelectableCriterion getCriterion(String ID) throws RetrieverException;
     
     /**
      * 
      * @param ID The Criterion ID (European or National).
      * @return All Criterion Evidences.
-     * @throws eu.esens.espdvcd.retriever.exception.RetrieverException 
+     * @throws eu.esens.espdvcd.retriever.exception.RetrieverException
      */
-    List<Evidence> getEvidences(String ID)
-            throws RetrieverException;
+    List<Evidence> getEvidences(String ID) throws RetrieverException;
                 
 }

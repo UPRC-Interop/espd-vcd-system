@@ -130,8 +130,6 @@ public abstract class RegulatedModelBuilder implements ModelBuilder {
      */
     abstract RegulatedModelBuilder addDefaultESPDCriteriaList();
 
-    abstract RegulatedModelBuilder addECertisESPDCriteriaList();
-
     public ESPDRequest createESPDRequest() throws BuilderException {
         ESPDRequest req;
         if (importStream != null) {

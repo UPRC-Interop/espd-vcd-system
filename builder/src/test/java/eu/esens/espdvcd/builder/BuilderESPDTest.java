@@ -8,10 +8,7 @@ import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.ResponseRequirement;
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
-import eu.esens.espdvcd.retriever.criteria.CriteriaExtractorFactory;
-import eu.esens.espdvcd.retriever.criteria.CriteriaExtractorFactoryProducer;
-import eu.esens.espdvcd.retriever.criteria.enums.FactoryType;
-import eu.esens.espdvcd.schema.SchemaVersion;
+import eu.esens.espdvcd.retriever.criteria.CriteriaExtractorBuilder;
 import eu.espd.schema.v1.espdresponse_1.ESPDResponseType;
 import org.junit.Assert;
 import org.junit.Before;
@@ -207,14 +204,11 @@ public class BuilderESPDTest {
                 .importFrom(BuilderESPDTest.class.getResourceAsStream("/REGULATED-ESPD-Request_2.0.2.xml"))
                 .createESPDRequest();
 
-        CriteriaExtractorFactory factory = CriteriaExtractorFactoryProducer.getFactory(FactoryType.PREDEFINED_ESPD);
-        CriteriaExtractor extractor = factory.createCriteriaExtractor(SchemaVersion.V2);
-        // MultilingualCriteriaExtractorFactory factory = CriteriaExtractorFactoryProducer.getMultilingualFactory(MultilingualFactoryType.ECERTIS);
-        // CriteriaExtractor extractor = factory.createMultilingualCriteriaExtractor(SchemaVersion.V2);
+        CriteriaExtractor extractor = new CriteriaExtractorBuilder().build();
         espdRequest.setCriterionList(extractor.getFullList(espdRequest.getFullCriterionList()));
 
         XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.withEDMVersion2().getDocumentBuilderFor(espdRequest);
-        // System.out.println(xmlDocumentBuilderV2.getAsString());
+        System.out.println(xmlDocumentBuilderV2.getAsString());
     }
 
     @Test
