@@ -90,8 +90,7 @@ public class ImportESPDEndpoint extends Endpoint {
                 try {
                     rsp.header("Content-Type", "application/json");
 
-                    File espdFile = tempFile;
-                    Object espd = service.CreateModelFromXML(espdFile);
+                    Object espd = service.CreateModelFromXML(tempFile);
 
                     // espdFile.setWritable(true);
 
@@ -108,6 +107,9 @@ public class ImportESPDEndpoint extends Endpoint {
                     
                     // }
 
+                    /*
+                     * TODO: REFACTOR OBJECT CREATION IN JSON
+                     */
                     DocumentDetails details = new DocumentDetails(artefactVersion.name(), "regulated");
                     String serializedDetails = WRITER.writeValueAsString(details);
                     String serializedDocument = WRITER.writeValueAsString(espd);

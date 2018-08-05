@@ -4,7 +4,6 @@ import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.retriever.criteria.*;
-import eu.esens.espdvcd.retriever.criteria.enums.FactoryType;
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractorBuilder;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import eu.esens.espdvcd.schema.SchemaVersion;

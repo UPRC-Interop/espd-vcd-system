@@ -70,6 +70,12 @@ public class RequirementDeserialiserV2 extends StdDeserializer<ResponseRequireme
             case DATE:
                 response = mapper.treeToValue(root.get("response"), DateResponse.class);
                 break;
+            case URL:
+                response = mapper.treeToValue(root.get("response"), URLResponse.class);
+                break;
+            case IDENTIFIER:
+                response = mapper.treeToValue(root.get("response"), IdentifierResponse.class);
+                break;
             default:
                 response = null;
                 System.err.println("RESPONSE TYPE NOT FOUND");
