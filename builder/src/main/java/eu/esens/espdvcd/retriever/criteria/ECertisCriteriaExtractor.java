@@ -7,9 +7,9 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.esens.espdvcd.codelist.CodelistsV1;
 import eu.esens.espdvcd.model.SelectableCriterion;
+import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
 import eu.esens.espdvcd.model.retriever.ECertisCriterion;
 import eu.esens.espdvcd.model.retriever.ECertisCriterionImpl;
-import eu.esens.espdvcd.model.retriever.ECertisEvidenceGroup;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import eu.esens.espdvcd.schema.SchemaVersion;
 
@@ -254,8 +254,8 @@ public class ECertisCriteriaExtractor implements CriteriaDataRetriever, Multilin
     }
 
     @Override
-    public List<ECertisEvidenceGroup> getEvidences(String ID) throws RetrieverException {
-        return getCriterion(ID).getEvidenceGroups();
+    public List<Evidence> getEvidences(String ID) throws RetrieverException {
+
     }
 
     /**

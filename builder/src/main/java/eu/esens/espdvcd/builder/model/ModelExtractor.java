@@ -2,14 +2,16 @@ package eu.esens.espdvcd.builder.model;
 
 import eu.esens.espdvcd.builder.BuilderFactory;
 import eu.esens.espdvcd.builder.exception.BuilderException;
-import eu.esens.espdvcd.codelist.enums.CriterionElementTypeEnum;
-import eu.esens.espdvcd.codelist.enums.EOIndustryClassificationCodeEnum;
-import eu.esens.espdvcd.codelist.enums.LegislationTypeEnum;
-import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
+import eu.esens.espdvcd.codelist.enums.*;
 import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.ResponseRequirement;
+import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
+import eu.esens.espdvcd.model.retriever.ECertisCriterion;
+import eu.esens.espdvcd.model.retriever.ECertisEvidence;
+import eu.esens.espdvcd.model.retriever.ECertisEvidenceGroup;
+import eu.esens.espdvcd.model.retriever.ECertisEvidenceIssuerParty;
 import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.CriterionType;
 import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.LegislationType;
 import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.RequirementGroupType;
@@ -24,6 +26,7 @@ import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionPropertyTyp
 import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionType;
 import eu.espd.schema.v2.pre_award.commonbasic.IndustryClassificationCodeType;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -373,6 +376,29 @@ public interface ModelExtractor {
         return extractSelectableCriterion(tct, true);
     }
 
+    /**
+     * Create a new selectable criterion from an e-Certis criterion.
+     *
+     * @param ec         The e-Certis criterion
+     * @param isSelected
+     * @return
+     */
+    default SelectableCriterion extractSelectableCriterion(ECertisCriterion ec, boolean isSelected) {
+        String id = ec.getID();
+        String name = ec.getName();
+        String desc = ec.getDescription();
+
+        LegislationReference lr = ec.getLegislationReference();
+
+        SelectableCriterion sc = new SelectableCriterion(id, null, name, desc, lr, null);
+        sc.setSelected(isSelected);
+        return sc;
+    }
+
+    default SelectableCriterion extractSelectableCriterion(ECertisCriterion ec) {
+        return extractSelectableCriterion(ec, true);
+    }
+
     default RequirementGroup extractRequirementGroup(TenderingCriterionPropertyGroupType rgType) {
 
         RequirementGroup rg = null;
@@ -540,6 +566,58 @@ public interface ModelExtractor {
                 ResponseTypeEnum.valueOf(rqType.getResponseDataType()),
                 theDescription);
         return r;
+    }
+
+    default Evidence extractEvidence(ECertisEvidence evidence) {
+        Evidence e = new Evidence();
+        e.setID(evidence.getID());
+        e.setDescription(evidence.getDescription());
+        e.setConfidentialityLevelCode(ConfidentialityLevelEnum.PUBLIC.name());
+
+        if (!evidence.getEvidenceDocumentReference().isEmpty()
+                && evidence.getEvidenceDocumentReference().get(0).getAttachment() != null
+                && evidence.getEvidenceDocumentReference().get(0).getAttachment().getExternalReference() != null
+                && evidence.getEvidenceDocumentReference().get(0).getAttachment().getExternalReference().getURI() != null) {
+
+            e.setEvidenceURL(evidence.getEvidenceDocumentReference().get(0).getAttachment().getExternalReference().getURI());
+        }
+
+        if (!evidence.getEvidenceIssuerParty().isEmpty()) {
+            e.setEvidenceIssuer(extractEvidenceIssuerDetails(evidence.getEvidenceIssuerParty().get(0)));
+        }
+
+        return e;
+    }
+
+    default List<Evidence> extractEvidences(ECertisEvidenceGroup eg) {
+        return eg.getEvidences()
+                .stream()
+                .map(e -> extractEvidence(e))
+                .collect(Collectors.toList());
+    }
+
+    default List<Evidence> extractEvidences(List<ECertisEvidenceGroup> egList) {
+        List<Evidence> evidenceList = new ArrayList<>();
+
+        for (ECertisEvidenceGroup eg : egList) {
+            evidenceList.addAll(extractEvidences(eg));
+        }
+
+        return evidenceList;
+    }
+
+    default EvidenceIssuerDetails extractEvidenceIssuerDetails(ECertisEvidenceIssuerParty evidenceIssuerParty) {
+        EvidenceIssuerDetails issuerDetails = new EvidenceIssuerDetails();
+
+        if (!evidenceIssuerParty.getPartyName().isEmpty()
+                && evidenceIssuerParty.getPartyName().get(0).getName() != null) {
+
+            issuerDetails.setName(evidenceIssuerParty.getPartyName().get(0).getName());
+        }
+
+        issuerDetails.setWebsite(evidenceIssuerParty.getWebsiteURI());
+
+        return issuerDetails;
     }
 
     default boolean isSME(String icc) {
