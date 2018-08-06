@@ -116,10 +116,6 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                                 .forEach(rq -> { // loop thought all of the extracted Requirements
 
                                     if (tcrTypeMap.containsKey(rq.getID())) { // try to find a response for that requirement
-//                                        TenderingCriterionResponseType responseType = tcrTypeMap.get(rq.getID());
-//                                        ValidatedCriterionPropertyIDType vcpIdType = new ValidatedCriterionPropertyIDType();
-//                                        vcpIdType.setValue(rq.getID());
-//                                        responseType.setValidatedCriterionPropertyID(vcpIdType);
                                         rq.setResponse(extractResponse(tcrTypeMap.get(rq.getID()), rq.getResponseDataType()));
                                     }
 

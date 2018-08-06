@@ -98,7 +98,10 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
     public List<TenderingCriterionResponseType> extractAllTenderingCriterionResponses(final RequirementGroup rg) {
         return extractAllRequirements(rg, null).stream()
                 .map(rq -> {
-//                    rq.getResponse().setValidatedCriterionPropertyID(rq.getID());
+
+                    if (rq.getResponse() != null) {
+                        rq.getResponse().setValidatedCriterionPropertyID(rq.getID());
+                    }
                     return extractTenderingCriterionResponse(rq.getResponse(), rq.getResponseDataType());
                 })
                 .collect(Collectors.toList());
