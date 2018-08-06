@@ -360,10 +360,10 @@ public interface SchemaExtractorV2 {
 
     default ValidatedCriterionPropertyIDType createValidatedCriterionPropertyId(String id) {
         ValidatedCriterionPropertyIDType propertyIDType = new ValidatedCriterionPropertyIDType();
-        propertyIDType.setValue(id);
         propertyIDType.setSchemeID("CriteriaTaxonomy");
         propertyIDType.setSchemeAgencyID("EU-COM-GROW");
         propertyIDType.setSchemeVersionID("2.0.2");
+        propertyIDType.setValue(id);
         return propertyIDType;
     }
 

@@ -219,6 +219,9 @@ public class BuilderESPDTest {
                 .importFrom(BuilderESPDTest.class.getResourceAsStream("/REGULATED-ESPD-Response_2.0.2.xml"))
                 .createESPDResponse();
 
+//        CriteriaExtractor extractor = new CriteriaExtractorBuilder().build();
+//        espdResponse.setCriterionList(extractor.getFullList());
+
         XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.withEDMVersion2().getDocumentBuilderFor(espdResponse);
         System.out.println(xmlDocumentBuilderV2.getAsString());
     }

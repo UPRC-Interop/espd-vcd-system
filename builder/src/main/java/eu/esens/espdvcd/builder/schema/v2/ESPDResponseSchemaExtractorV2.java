@@ -98,7 +98,7 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
     public List<TenderingCriterionResponseType> extractAllTenderingCriterionResponses(final RequirementGroup rg) {
         return extractAllRequirements(rg, null).stream()
                 .map(rq -> {
-                    rq.getResponse().setValidatedCriterionPropertyID(rq.getID());
+//                    rq.getResponse().setValidatedCriterionPropertyID(rq.getID());
                     return extractTenderingCriterionResponse(rq.getResponse(), rq.getResponseDataType());
                 })
                 .collect(Collectors.toList());
@@ -362,13 +362,11 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
         EvidenceSuppliedType evsType = new EvidenceSuppliedType();
 
         if (response == null) {
-            // return tcrType;
             return null;
         }
 
         if (response.getValidatedCriterionPropertyID() != null) {
             tcrType.setValidatedCriterionPropertyID(createValidatedCriterionPropertyId(response.getValidatedCriterionPropertyID()));
-//            tcrType.setValidatedCriterionPropertyID(createValidatedCriterionPropertyId());
         }
 
         if (response.getConfidentialityLevelCode() != null) {
