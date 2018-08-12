@@ -47,12 +47,12 @@ public class Validators {
 
             case V1:
                 //  LOGGER.log(Level.INFO, "Creating ESPD request V1 schematron validator for: " + espdRequest.getName());
-                LOGGER.log(Level.INFO, "Creating ESPD request V1 schematron validator...");
+                LOGGER.log(Level.INFO, "Creating ESPD request V1 schema validator...");
                 return new ESPDSchemaValidator(is, "/schema/v1/maindoc/ESPDRequest-1.0.xsd", ESPDRequestType.class);
 
             case V2:
                 // LOGGER.log(Level.INFO, "Creating ESPD request V2 schematron validator for: "  + espdRequest.getName());
-                LOGGER.log(Level.INFO, "Creating ESPD request V2 schematron validator...");
+                LOGGER.log(Level.INFO, "Creating ESPD request V2 schema validator...");
                 return new ESPDSchemaValidator(is, "/schema/v2/maindoc/UBL-QualificationApplicationRequest-2.2-Pre-award.xsd", QualificationApplicationRequestType.class);
 
             default:
@@ -77,12 +77,12 @@ public class Validators {
 
             case V1:
                 //  LOGGER.log(Level.INFO, "Creating ESPD request V1 schematron validator for: " + espdRequest.getName());
-                LOGGER.log(Level.INFO, "Creating ESPD request V1 schematron validator...");
+                LOGGER.log(Level.INFO, "Creating ESPD request V1 schema validator...");
                 return new ESPDSchemaValidator(is, "/schema/v1/maindoc/ESPDResponse-1.0.xsd", ESPDResponseType.class);
 
             case V2:
                 // LOGGER.log(Level.INFO, "Creating ESPD request V2 schematron validator for: "  + espdRequest.getName());
-                LOGGER.log(Level.INFO, "Creating ESPD request V2 schematron validator...");
+                LOGGER.log(Level.INFO, "Creating ESPD request V2 schema validator...");
                 return new ESPDSchemaValidator(is, "/schema/v2/maindoc/UBL-QualificationApplicationResponse-2.2-Pre-award.xsd", QualificationApplicationResponseType.class);
 
             default:
@@ -105,6 +105,7 @@ public class Validators {
 
             default:
                 // LOGGER.log(Level.SEVERE, "Error... Unknown artefact type (neither request nor response) for: " + espdArtefact.getName());
+                LOGGER.log(Level.SEVERE, "Error... Unknown artefact type (neither request nor response)");
                 return null;
 
         }
