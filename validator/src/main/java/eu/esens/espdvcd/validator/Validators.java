@@ -7,6 +7,8 @@ import eu.esens.espdvcd.validator.schema.ESPDSchemaValidator;
 import eu.esens.espdvcd.validator.schematron.ESPDSchematronValidator;
 import eu.espd.schema.v1.espdrequest_1.ESPDRequestType;
 import eu.espd.schema.v1.espdresponse_1.ESPDResponseType;
+import eu.espd.schema.v2.pre_award.qualificationapplicationrequest.QualificationApplicationRequestType;
+import eu.espd.schema.v2.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
 import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBException;
@@ -37,10 +39,26 @@ public class Validators {
      * @param is input stream with XML data
      * @return schema validator object
      */
-    public static ArtefactValidator createESPDRequestSchemaValidator(InputStream is) throws SAXException, JAXBException {
+    public static ArtefactValidator createESPDRequestSchemaValidator(InputStream is, SchemaVersion version) throws SAXException, JAXBException {
         // FIXME: the path returned by XSD.ESPD_REQUEST.xsdPath() is probably incorrect, hence returning static string
         //return new ESPDSchemaValidator(is, XSD.ESPD_REQUEST.xsdPath(), ESPDRequestType.class);
-        return new ESPDSchemaValidator(is, "/schema/v1/maindoc/ESPDRequest-1.0.xsd", ESPDRequestType.class);
+
+        switch (version) {
+
+            case V1:
+                //  LOGGER.log(Level.INFO, "Creating ESPD request V1 schematron validator for: " + espdRequest.getName());
+                LOGGER.log(Level.INFO, "Creating ESPD request V1 schematron validator...");
+                return new ESPDSchemaValidator(is, "/schema/v1/maindoc/ESPDRequest-1.0.xsd", ESPDRequestType.class);
+
+            case V2:
+                // LOGGER.log(Level.INFO, "Creating ESPD request V2 schematron validator for: "  + espdRequest.getName());
+                LOGGER.log(Level.INFO, "Creating ESPD request V2 schematron validator...");
+                return new ESPDSchemaValidator(is, "/schema/v2/maindoc/UBL-QualificationApplicationRequest-2.2-Pre-award.xsd", QualificationApplicationRequestType.class);
+
+            default:
+                LOGGER.log(Level.SEVERE, "Error... Unknown schema version");
+                return null;
+        }
     }
 
     /**
@@ -51,10 +69,45 @@ public class Validators {
      * @param is input stream with XML data
      * @return schema validator object
      */
-    public static ArtefactValidator createESPDResponseSchemaValidator(InputStream is) throws SAXException, JAXBException {
+    public static ArtefactValidator createESPDResponseSchemaValidator(InputStream is, SchemaVersion version) throws SAXException, JAXBException {
         // FIXME: the path returned by XSD.ESPD_REQUEST.xsdPath() is probably incorrect, hence returning static string
         //return new ESPDSchemaValidator(is, XSD.ESPD_RESPONSE.xsdPath(), ESPDRequestType.class);
-        return new ESPDSchemaValidator(is, "/schema/v1/maindoc/ESPDResponse-1.0.xsd", ESPDResponseType.class);
+
+        switch (version) {
+
+            case V1:
+                //  LOGGER.log(Level.INFO, "Creating ESPD request V1 schematron validator for: " + espdRequest.getName());
+                LOGGER.log(Level.INFO, "Creating ESPD request V1 schematron validator...");
+                return new ESPDSchemaValidator(is, "/schema/v1/maindoc/ESPDResponse-1.0.xsd", ESPDResponseType.class);
+
+            case V2:
+                // LOGGER.log(Level.INFO, "Creating ESPD request V2 schematron validator for: "  + espdRequest.getName());
+                LOGGER.log(Level.INFO, "Creating ESPD request V2 schematron validator...");
+                return new ESPDSchemaValidator(is, "/schema/v2/maindoc/UBL-QualificationApplicationResponse-2.2-Pre-award.xsd", QualificationApplicationResponseType.class);
+
+            default:
+                LOGGER.log(Level.SEVERE, "Error... Unknown schema version");
+                return null;
+        }
+    }
+
+    public static ArtefactValidator createESPDSchemaValidator(InputStream espdArtefact) throws SAXException, JAXBException {
+        ArtefactType type = ArtefactUtils.findArtefactType(espdArtefact);
+        SchemaVersion version = ArtefactUtils.findSchemaVersion(espdArtefact);
+
+        switch (type) {
+
+            case ESPD_REQUEST:
+                return createESPDRequestSchemaValidator(espdArtefact, version);
+
+            case ESPD_RESPONSE:
+                return createESPDResponseSchemaValidator(espdArtefact, version);
+
+            default:
+                // LOGGER.log(Level.SEVERE, "Error... Unknown artefact type (neither request nor response) for: " + espdArtefact.getName());
+                return null;
+
+        }
     }
 
 //    /**
@@ -147,7 +200,7 @@ public class Validators {
                         .build();
 
             case V2:
-                LOGGER.log(Level.INFO, "Creating ESPD request V2 schematron validator for: "  + espdRequest.getName());
+                LOGGER.log(Level.INFO, "Creating ESPD request V2 schematron validator for: " + espdRequest.getName());
                 return new ESPDSchematronValidator.Builder(espdRequest)
                         .addSchematron("/rules/v2/eu/ESPDRequest-2.0.2/sch/02-ESPD-Req-Cardinality-BR.sch")
                         .addSchematron("/rules/v2/eu/ESPDRequest-2.0.2/sch/03-ESPD-Req-Criterion-BR.sch")

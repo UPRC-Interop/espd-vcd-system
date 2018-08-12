@@ -43,7 +43,6 @@ public class ESPDSchemaValidator implements ArtefactValidator {
         validateXML(is, schema);
     }
 
-
     private void validateXML(InputStream is, Schema schema) throws JAXBException {
 
         // creating unmarshaller
