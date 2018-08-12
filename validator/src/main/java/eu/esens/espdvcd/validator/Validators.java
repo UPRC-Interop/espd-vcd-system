@@ -139,7 +139,7 @@ public class Validators {
         switch (version) {
 
             case V1:
-                LOGGER.log(Level.INFO, "Creating ESPD request V1 schematron validator...");
+                LOGGER.log(Level.INFO, "Creating ESPD request V1 schematron validator for: " + espdRequest.getName());
                 return new ESPDSchematronValidator.Builder(espdRequest)
                         .addSchematron("/rules/v1/eu/ESPDRequest/sch/02-ESPD-CL-attrb-rules.sch")
                         .addSchematron("/rules/v1/eu/ESPDRequest/sch/03-ESPD-ID-attrb-rules.sch")
@@ -147,7 +147,7 @@ public class Validators {
                         .build();
 
             case V2:
-                LOGGER.log(Level.INFO, "Creating ESPD request V2 schematron validator...");
+                LOGGER.log(Level.INFO, "Creating ESPD request V2 schematron validator for: "  + espdRequest.getName());
                 return new ESPDSchematronValidator.Builder(espdRequest)
                         .addSchematron("/rules/v2/eu/ESPDRequest-2.0.2/sch/02-ESPD-Req-Cardinality-BR.sch")
                         .addSchematron("/rules/v2/eu/ESPDRequest-2.0.2/sch/03-ESPD-Req-Criterion-BR.sch")
@@ -176,7 +176,7 @@ public class Validators {
         switch (version) {
 
             case V1:
-                LOGGER.log(Level.INFO, "Creating ESPD response V1 schematron validator...");
+                LOGGER.log(Level.INFO, "Creating ESPD response V1 schematron validator for: " + espdResponse.getName());
                 return new ESPDSchematronValidator.Builder(espdResponse)
                         .addSchematron("/rules/v1/eu/ESPDResponse/sch/02-ESPD-CL-attrb-rules.sch")
                         .addSchematron("/rules/v1/eu/ESPDResponse/sch/03-ESPD-ID-attrb-rules.sch")
@@ -185,7 +185,7 @@ public class Validators {
                         .build();
 
             case V2:
-                LOGGER.log(Level.INFO, "Creating ESPD response V2 schematron validator...");
+                LOGGER.log(Level.INFO, "Creating ESPD response V2 schematron validator for: " + espdResponse.getName());
                 return new ESPDSchematronValidator.Builder(espdResponse)
                         .addSchematron("/rules/v2/eu/ESPDResponse-2.0.2/sch/02-ESPD-Resp-Cardinality-BR.sch")
                         .addSchematron("/rules/v2/eu/ESPDResponse-2.0.2/sch/03-ESPD-Resp-Criterion-BR.sch")
@@ -225,7 +225,7 @@ public class Validators {
                 return createESPDResponseSchematronValidator(espdArtefact, version);
 
             default:
-                LOGGER.log(Level.SEVERE, "Error... Unknown artefact type (neither request nor response)");
+                LOGGER.log(Level.SEVERE, "Error... Unknown artefact type (neither request nor response) for: " + espdArtefact.getName());
                 return null;
 
         }
