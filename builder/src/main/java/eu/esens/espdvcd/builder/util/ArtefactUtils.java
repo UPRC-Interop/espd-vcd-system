@@ -4,9 +4,7 @@ import eu.esens.espdvcd.builder.enums.ArtefactType;
 import eu.esens.espdvcd.codelist.enums.ProfileExecutionIDEnum;
 import eu.esens.espdvcd.schema.SchemaVersion;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -74,6 +72,22 @@ public class ArtefactUtils {
         return SchemaVersion.UNKNOWN;
     }
 
+    /**
+     * Identify schema version of given ESPD XML artefact
+     *
+     * @param xmlESPD The ESPD XML artefact
+     * @return The schema version
+     */
+    public static SchemaVersion findSchemaVersion(File xmlESPD) {
+
+        try {
+            return findSchemaVersion(new FileInputStream(xmlESPD));
+        } catch (FileNotFoundException e) {
+            LOGGER.log(Level.SEVERE, e.getMessage(), e);
+        }
+
+        return SchemaVersion.UNKNOWN;
+    }
 
     public static String getPartOfTheArtefact(InputStream xmlESPD, int bytesToRead) throws IOException {
         InputStream bis = getBufferedInputStream(xmlESPD);
@@ -182,6 +196,23 @@ public class ArtefactUtils {
             return findArtefactType(partOfTheArtefact);
 
         } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, e.getMessage(), e);
+        }
+
+        return ArtefactType.UNKNOWN;
+    }
+
+    /**
+     * Identify type of given ESPD XML artefact (request or response)
+     *
+     * @param xmlESPD The ESPD XML artefact
+     * @return The artefact type
+     */
+    public static ArtefactType findArtefactType(File xmlESPD) {
+
+        try {
+            return findArtefactType(new FileInputStream(xmlESPD));
+        } catch (FileNotFoundException e) {
             LOGGER.log(Level.SEVERE, e.getMessage(), e);
         }
 

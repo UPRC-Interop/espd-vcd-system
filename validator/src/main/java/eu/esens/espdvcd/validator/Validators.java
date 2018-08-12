@@ -10,6 +10,7 @@ import eu.espd.schema.v1.espdresponse_1.ESPDResponseType;
 import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBException;
+import java.io.File;
 import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,8 +28,6 @@ import java.util.logging.Logger;
 public class Validators {
 
     private static final Logger LOGGER = Logger.getLogger(Validators.class.getName());
-
-    private static final String ERROR_UNKNOWN_SCHEMATRON_ORIGIN = "Error... Unknown schematron origin";
 
     /**
      * Factory method that creates an ESPD request schema validator object and
@@ -58,19 +57,19 @@ public class Validators {
         return new ESPDSchemaValidator(is, "/schema/v1/maindoc/ESPDResponse-1.0.xsd", ESPDResponseType.class);
     }
 
-    /**
-     * Factory method that creates an ESPD artefact (request or response) schematron
-     * validator object and performs the schematron validation for the XML provided by
-     * the specified input stream.
-     *
-     * @param is input stream with XML data
-     * @return schematron validator object
-     */
-    static ArtefactValidator createESPDArtefactSchematronValidator(InputStream is, String schPath) {
-        return new ESPDSchematronValidator.Builder(is)
-                .addSchematron(schPath)
-                .build();
-    }
+//    /**
+//     * Factory method that creates an ESPD artefact (request or response) schematron
+//     * validator object and performs the schematron validation for the XML provided by
+//     * the specified input stream.
+//     *
+//     * @param is input stream with XML data
+//     * @return schematron validator object
+//     */
+//    static ArtefactValidator createESPDArtefactSchematronValidator(InputStream is, String schPath) {
+//        return new ESPDSchematronValidator.Builder(is)
+//                .addSchematron(schPath)
+//                .build();
+//    }
 
 //    /**
 //     * Factory method that creates an ESPD request schematron validator object
@@ -135,7 +134,7 @@ public class Validators {
      * @param espdRequest ESPD request input stream with XML data
      * @return schematron validator object
      */
-    public static ArtefactValidator createESPDRequestSchematronValidator(InputStream espdRequest, SchemaVersion version) {
+    public static ArtefactValidator createESPDRequestSchematronValidator(File espdRequest, SchemaVersion version) {
 
         switch (version) {
 
@@ -150,11 +149,11 @@ public class Validators {
             case V2:
                 LOGGER.log(Level.INFO, "Creating ESPD request V2 schematron validator...");
                 return new ESPDSchematronValidator.Builder(espdRequest)
-                        .addSchematron("/rules/v2/eu/ESPDRequest-2.0.2/sch/02 ESPD Req Cardinality BR.sch")
-                        .addSchematron("/rules/v2/eu/ESPDRequest-2.0.2/sch/03 ESPD Req Criterion BR.sch")
-                        .addSchematron("/rules/v2/eu/ESPDRequest-2.0.2/sch/04 ESPD Req Other BR.sch")
-                        .addSchematron("/rules/v2/eu/ESPDRequest-2.0.2/sch/05 ESPD Req Procurer BR.sch")
-                        .addSchematron("/rules/v2/eu/ESPDRequest-2.0.2/sch/05 ESPD Req Self-contained BR.sch")
+                        .addSchematron("/rules/v2/eu/ESPDRequest-2.0.2/sch/02-ESPD-Req-Cardinality-BR.sch")
+                        .addSchematron("/rules/v2/eu/ESPDRequest-2.0.2/sch/03-ESPD-Req-Criterion-BR.sch")
+                        .addSchematron("/rules/v2/eu/ESPDRequest-2.0.2/sch/04-ESPD-Req-Other-BR.sch")
+                        .addSchematron("/rules/v2/eu/ESPDRequest-2.0.2/sch/05-ESPD-Req-Procurer-BR.sch")
+                        .addSchematron("/rules/v2/eu/ESPDRequest-2.0.2/sch/05-ESPD-Req-Self-contained-BR.sch")
                         .build();
 
             default:
@@ -172,7 +171,7 @@ public class Validators {
      * @param espdResponse ESPD response input stream with XML data
      * @return schematron validator object
      */
-    public static ArtefactValidator createESPDResponseSchematronValidator(InputStream espdResponse, SchemaVersion version) {
+    public static ArtefactValidator createESPDResponseSchematronValidator(File espdResponse, SchemaVersion version) {
 
         switch (version) {
 
@@ -188,13 +187,13 @@ public class Validators {
             case V2:
                 LOGGER.log(Level.INFO, "Creating ESPD response V2 schematron validator...");
                 return new ESPDSchematronValidator.Builder(espdResponse)
-                        .addSchematron("/rules/v2/eu/ESPDResponse-2.0.2/sch/02 ESPD Resp Cardinality BR.sch")
-                        .addSchematron("/rules/v2/eu/ESPDResponse-2.0.2/sch/03 ESPD Resp Criterion BR.sch")
-                        .addSchematron("/rules/v2/eu/ESPDResponse-2.0.2/sch/04 ESPD Resp Other BR.sch")
-                        .addSchematron("/rules/v2/eu/ESPDResponse-2.0.2/sch/05 ESPD Resp EO BR.sch")
-                        .addSchematron("/rules/v2/eu/ESPDResponse-2.0.2/sch/05 ESPD Resp Qualification BR.sch")
-                        .addSchematron("/rules/v2/eu/ESPDResponse-2.0.2/sch/05 ESPD Resp Role BR.sch")
-                        .addSchematron("/rules/v2/eu/ESPDResponse-2.0.2/sch/05 ESPD Resp Self-contained BR.sch")
+                        .addSchematron("/rules/v2/eu/ESPDResponse-2.0.2/sch/02-ESPD-Resp-Cardinality-BR.sch")
+                        .addSchematron("/rules/v2/eu/ESPDResponse-2.0.2/sch/03-ESPD-Resp-Criterion-BR.sch")
+                        .addSchematron("/rules/v2/eu/ESPDResponse-2.0.2/sch/04-ESPD-Resp-Other-BR.sch")
+                        .addSchematron("/rules/v2/eu/ESPDResponse-2.0.2/sch/05-ESPD-Resp-EO-BR.sch")
+                        .addSchematron("/rules/v2/eu/ESPDResponse-2.0.2/sch/05-ESPD-Resp-Qualification-BR.sch")
+                        .addSchematron("/rules/v2/eu/ESPDResponse-2.0.2/sch/05-ESPD-Resp-Role-BR.sch")
+                        .addSchematron("/rules/v2/eu/ESPDResponse-2.0.2/sch/05-ESPD-Resp-Self-contained-BR.sch")
                         .build();
 
             default:
@@ -212,7 +211,7 @@ public class Validators {
      * @param espdArtefact ESPD artefact (request or response) input stream with XML data
      * @return schematron validator object
      */
-    public static ArtefactValidator createESPDSchematronValidator(InputStream espdArtefact) {
+    public static ArtefactValidator createESPDSchematronValidator(File espdArtefact) {
 
         ArtefactType type = ArtefactUtils.findArtefactType(espdArtefact);
         SchemaVersion version = ArtefactUtils.findSchemaVersion(espdArtefact);

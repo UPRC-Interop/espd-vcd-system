@@ -19,7 +19,9 @@ public enum ProfileExecutionIDEnum {
     ESPD_EDM_V2_0_2_REGULATED("ESPD-EDMv2.0.2-REGULATED"),
     ESPD_EDM_V2_0_2_SELFCONTAINED("ESPD-EDMv2.0.2-SELFCONTAINED"),
     // 1.0.2
-    ESPD_EDM_V1_0_2("ESPD-EDMv1.0.2");
+    ESPD_EDM_V1_0_2("ESPD-EDMv1.0.2"),
+
+    UNKNOWN("UNKNOWN");
 
     private String value;
 
