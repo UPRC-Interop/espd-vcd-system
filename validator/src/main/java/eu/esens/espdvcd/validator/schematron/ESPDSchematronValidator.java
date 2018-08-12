@@ -7,56 +7,66 @@ import org.oclc.purl.dsdl.svrl.FailedAssert;
 import org.oclc.purl.dsdl.svrl.SchematronOutputType;
 
 import javax.xml.transform.stream.StreamSource;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 /**
- * @author konstantinos
+ * @author konstantinos Raptis
  */
 public class ESPDSchematronValidator implements ArtefactValidator {
 
-    private static final String ERROR_INVALID_SCHEMATRON = "Error... Invalid Schematron";
+    private static final Logger LOGGER = Logger.getLogger(ESPDSchematronValidator.class.getName());
+
     private List<ValidationResult> validationMessages = new LinkedList<>();
+    private InputStream espdArtefact;
+    private Set<String> schematronPathSet;
 
-    public ESPDSchematronValidator(InputStream is, String schPath) {
-        validateXMLViaXSLTSchematronFull(is, schPath);
+//    public ESPDSchematronValidator(InputStream is, String schPath) {
+//        validateXMLViaXSLTSchematronFull(is, schPath);
+//    }
+
+//    public ESPDSchematronValidator(File artefact, String... schPath) {
+//        Arrays.asList(schPath).forEach(path -> validateXMLViaXSLTSchematronFull(artefact, path));
+//    }
+
+    private ESPDSchematronValidator(Builder b) {
+        this.espdArtefact = b.espdArtefact;
+        this.schematronPathSet = b.schematronPathSet;
+        validateXMLViaXSLTSchematron();
     }
 
-    public ESPDSchematronValidator(File artefact, String... schPath) {
-        Arrays.asList(schPath).forEach(path -> validateXMLViaXSLTSchematronFull(artefact, path));
-    }
+//    static boolean validateXMLViaXSLTSchematron(InputStream is, String schPath) {
+//        final SchematronResourceSCH schematron = SchematronResourceSCH.fromClassPath(schPath);
+//        final Map<String, Object> aParams = new HashMap<>();
+//        aParams.put("allow-foreign", "true");
+//        schematron.setParameters(aParams);
+//        boolean isValid = false;
+//
+//        if (!schematron.isValidSchematron()) {
+//            throw new IllegalArgumentException(ERROR_INVALID_SCHEMATRON);
+//        }
+//
+//        try {
+//            isValid = schematron.getSchematronValidity(new StreamSource(is)).isValid();
+//        } catch (Exception e) {
+//            Logger.getLogger(ESPDSchematronValidator.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+//        }
+//
+//        return isValid;
+//    }
 
-    static boolean validateXMLViaXSLTSchematron(InputStream is, String schPath) {
-        final SchematronResourceSCH schematron = SchematronResourceSCH.fromClassPath(schPath);
-        final Map <String, Object> aParams = new HashMap<>();
-        aParams.put ("allow-foreign", "true");
-        schematron.setParameters (aParams);
-        boolean isValid = false;
-
-        if (!schematron.isValidSchematron()) {
-            throw new IllegalArgumentException(ERROR_INVALID_SCHEMATRON);
-        }
-
-        try {
-            isValid = schematron.getSchematronValidity(new StreamSource(is)).isValid();
-        } catch (Exception e) {
-            Logger.getLogger(ESPDSchematronValidator.class.getName()).log(Level.SEVERE, e.getMessage(), e);
-        }
-
-        return isValid;
+    private void validateXMLViaXSLTSchematron() {
+        schematronPathSet.forEach(path -> validateXMLViaXSLTSchematronFull(espdArtefact, path));
     }
 
     /**
      * Validating given file against the specified schematron
      *
      * @param artefact the espd request/response artefact provided by the specified file
-     * @param schPath the schematron file path
+     * @param schPath  the schematron file path
      */
     private void validateXMLViaXSLTSchematronFull(File artefact, String schPath) {
         try {
@@ -69,18 +79,18 @@ public class ESPDSchematronValidator implements ArtefactValidator {
     /**
      * Validating given input stream against the specified schematron
      *
-     * @param is the espd request/response artefact provided by the specified input stream
+     * @param is      the espd request/response artefact provided by the specified input stream
      * @param schPath the schematron file path
      */
     private void validateXMLViaXSLTSchematronFull(InputStream is, String schPath) {
         final SchematronResourceSCH schematron = SchematronResourceSCH.fromClassPath(schPath);
 
-        final Map <String, Object> aParams = new HashMap<>();
-        aParams.put ("allow-foreign", "true");
-        schematron.setParameters (aParams);
+        final Map<String, Object> aParams = new HashMap<>();
+        aParams.put("allow-foreign", "true");
+        schematron.setParameters(aParams);
 
         if (!schematron.isValidSchematron()) {
-            throw new IllegalArgumentException(ERROR_INVALID_SCHEMATRON);
+            throw new IllegalArgumentException("Error... Invalid Schematron");
         }
 
         try {
@@ -99,15 +109,13 @@ public class ESPDSchematronValidator implements ArtefactValidator {
             // Print SVRL
             // new SVRLMarshaller().write(svrl, System.out);
         } catch (Exception e) {
-            e.printStackTrace();
-            /* @TODO should flag value be fatal here */
+            LOGGER.log(Level.SEVERE, e.getMessage(), e);
             validationMessages.add(new ValidationResult.Builder(String.valueOf(validationMessages.size()),
                     "(line 0, column 0)", e.getMessage())
                     .flag("fatal")
                     .build());
         }
     }
-
 
 
     /**
@@ -142,6 +150,29 @@ public class ESPDSchematronValidator implements ArtefactValidator {
                 .stream()
                 .filter(validationResult -> Optional.ofNullable(validationResult.getFlag()).equals(flag))
                 .collect(Collectors.toList());
+    }
+
+    public static class Builder {
+
+        Set<String> schematronPathSet;
+        InputStream espdArtefact;
+
+        public Builder(InputStream espdArtefact) {
+            this.espdArtefact = espdArtefact;
+            schematronPathSet = new LinkedHashSet<>(10);
+        }
+
+        public Builder addSchematron(String path) {
+            if (path != null) {
+                schematronPathSet.add(path);
+            }
+            return this;
+        }
+
+        public ESPDSchematronValidator build() {
+            return new ESPDSchematronValidator(this);
+        }
+
     }
 
 }

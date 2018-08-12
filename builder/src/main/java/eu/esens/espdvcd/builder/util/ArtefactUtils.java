@@ -1,5 +1,6 @@
 package eu.esens.espdvcd.builder.util;
 
+import eu.esens.espdvcd.builder.enums.ArtefactType;
 import eu.esens.espdvcd.codelist.enums.ProfileExecutionIDEnum;
 import eu.esens.espdvcd.schema.SchemaVersion;
 
@@ -34,7 +35,6 @@ public class ArtefactUtils {
      * @return The schema version
      */
     public static SchemaVersion findSchemaVersion(InputStream xmlESPD) {
-        SchemaVersion version = null;
 
         try {
             String partOfTheArtefact = getPartOfTheArtefact(xmlESPD, 128); //  better stay below 256
@@ -45,21 +45,20 @@ public class ArtefactUtils {
             boolean isV1Artefact = Pattern.compile(v1ArtefactRegex).matcher(partOfTheArtefact).find();
 
             if (isV1Artefact) {
-                version = SchemaVersion.V1;
-            } else {
+                return SchemaVersion.V1;
+            }
 
-                boolean isV2Artefact = Pattern.compile(v2ArtefactRegex).matcher(partOfTheArtefact).find();
+            boolean isV2Artefact = Pattern.compile(v2ArtefactRegex).matcher(partOfTheArtefact).find();
 
-                if (isV2Artefact) {
-                    version = SchemaVersion.V2;
-                }
+            if (isV2Artefact) {
+                return SchemaVersion.V2;
             }
 
         } catch (IOException ex) {
-            LOGGER.log(Level.SEVERE, null, ex);
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
         }
 
-        return version;
+        return SchemaVersion.UNKNOWN;
     }
 
     public static String getPartOfTheArtefact(InputStream xmlESPD, int bytesToRead) throws IOException {
@@ -123,6 +122,39 @@ public class ArtefactUtils {
             LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
         }
         return profileExecutionIDEnum;
+    }
+
+    /**
+     * Identify type of given ESPD XML artefact (request or response)
+     *
+     * @param xmlESPD The ESPD XML artefact
+     * @return The artefact type
+     */
+    public static ArtefactType findArtefactType(InputStream xmlESPD) {
+
+        try {
+            String partOfTheArtefact = getPartOfTheArtefact(xmlESPD, 128); //  better stay below 256
+
+            final String requestRegex = "<\\S*(ESPDRequest|QualificationApplicationRequest)";
+            final String responseRegex = "<\\S*(ESPDResponse|QualificationApplicationResponse)";
+
+            boolean isRequest = Pattern.compile(requestRegex).matcher(partOfTheArtefact).find();
+
+            if (isRequest) {
+                return ArtefactType.ESPD_REQUEST;
+            }
+
+            boolean isResponse = Pattern.compile(responseRegex).matcher(partOfTheArtefact).find();
+
+            if (isResponse) {
+                return ArtefactType.ESPD_RESPONSE;
+            }
+
+        } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, e.getMessage(), e);
+        }
+
+        return ArtefactType.UNKNOWN;
     }
 
 }

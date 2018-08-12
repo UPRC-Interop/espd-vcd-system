@@ -1,5 +1,8 @@
 package eu.esens.espdvcd.validator;
 
+/**
+ * @author konstantinos Raptis
+ */
 public class ValidationResult {
 
     private final String id;
