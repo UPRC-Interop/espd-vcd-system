@@ -203,6 +203,12 @@ public class Validators {
             case V2:
                 LOGGER.log(Level.INFO, "Creating ESPD request V2 schematron validator for: " + espdRequest.getName());
                 return new ESPDSchematronValidator.Builder(espdRequest)
+                        // common
+                        .addSchematron("/rules/v2/eu/common/sch/01-ESPD-codelist-values.sch")
+                        .addSchematron("/rules/v2/eu/common/sch/01-ESPD-Common-CL-Attributes.sch")
+                        .addSchematron("/rules/v2/eu/common/sch/03-ESPD-Common-Criterion-BR.sch")
+                        .addSchematron("/rules/v2/eu/common/sch/04-ESPD-Common-Other-BR.sch")
+                        // espd request 2.0.2
                         .addSchematron("/rules/v2/eu/ESPDRequest-2.0.2/sch/02-ESPD-Req-Cardinality-BR.sch")
                         .addSchematron("/rules/v2/eu/ESPDRequest-2.0.2/sch/03-ESPD-Req-Criterion-BR.sch")
                         .addSchematron("/rules/v2/eu/ESPDRequest-2.0.2/sch/04-ESPD-Req-Other-BR.sch")
@@ -241,6 +247,12 @@ public class Validators {
             case V2:
                 LOGGER.log(Level.INFO, "Creating ESPD response V2 schematron validator for: " + espdResponse.getName());
                 return new ESPDSchematronValidator.Builder(espdResponse)
+                        // common
+                        .addSchematron("/rules/v2/eu/common/sch/01-ESPD-codelist-values.sch")
+                        .addSchematron("/rules/v2/eu/common/sch/01-ESPD-Common-CL-Attributes.sch")
+                        .addSchematron("/rules/v2/eu/common/sch/03-ESPD-Common-Criterion-BR.sch")
+                        .addSchematron("/rules/v2/eu/common/sch/04-ESPD-Common-Other-BR.sch")
+                        // espd response 2.0.2
                         .addSchematron("/rules/v2/eu/ESPDResponse-2.0.2/sch/02-ESPD-Resp-Cardinality-BR.sch")
                         .addSchematron("/rules/v2/eu/ESPDResponse-2.0.2/sch/03-ESPD-Resp-Criterion-BR.sch")
                         .addSchematron("/rules/v2/eu/ESPDResponse-2.0.2/sch/04-ESPD-Resp-Other-BR.sch")
