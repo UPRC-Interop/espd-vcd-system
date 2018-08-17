@@ -657,9 +657,9 @@ export class DataService {
           // console.log(this.exclusionDCriteria);
 
           this.exclusionACriteriaForm = this.createExclusionCriterionForm(this.exclusionACriteria);
-          // console.log(this.exclusionACriteriaForm);
+          console.log(this.exclusionACriteriaForm);
           this.exclusionBCriteriaForm = this.createExclusionCriterionForm(this.exclusionBCriteria);
-          // console.log(this.exclusionBCriteriaForm);
+          console.log(this.exclusionBCriteriaForm);
           this.exclusionCCriteriaForm = this.createExclusionCriterionForm(this.exclusionCCriteria);
           // console.log(this.exclusionCCriteriaForm);
           this.exclusionDCriteriaForm = this.createExclusionCriterionForm(this.exclusionDCriteria);
@@ -738,23 +738,26 @@ export class DataService {
       'procurementProjectLot': this.EODetails.procurementProjectLot
     });
 
-    // TODO uncomment them and handle the null
-    // if (this.EODetails.contactingDetails !== null) {
-    //   this.EOForm.patchValue({
-    //     'contactingDetails': {
-    //       'contactPointName': this.EODetails.contactingDetails.contactPointName,
-    //       'emailAddress': this.EODetails.contactingDetails.emailAddress,
-    //       'telephoneNumber': this.EODetails.contactingDetails.telephoneNumber,
-    //       'faxNumber': this.EODetails.contactingDetails.faxNumber,
-    //     }
-    //   });
-    // }
+    if (this.EODetails.contactingDetails !== null) {
+      this.EOForm.patchValue({
+        'contactingDetails': {
+          'contactPointName': this.EODetails.contactingDetails.contactPointName,
+          'emailAddress': this.EODetails.contactingDetails.emailAddress,
+          'telephoneNumber': this.EODetails.contactingDetails.telephoneNumber,
+          'faxNumber': this.EODetails.contactingDetails.faxNumber,
+        }
+      });
+    }
 
-    // if (this.EODetails.naturalPersons !== null || this.EODetails.naturalPersons !== undefined) {
-    //   this.EOForm.patchValue({
-    //     'naturalPersons': this.EODetails.naturalPersons
-    //   });
-    // }
+    if (this.EODetails.naturalPersons !== null || this.EODetails.naturalPersons !== undefined) {
+      // TODO find better way to handle null fields in naturalperson's objects
+      if (this.EODetails.naturalPersons[0].firstName !== null) {
+        this.EOForm.patchValue({
+          'naturalPersons': this.EODetails.naturalPersons
+        });
+      }
+
+    }
 
   }
 
@@ -862,7 +865,7 @@ export class DataService {
         .then(res => {
           this.exclusionACriteria = res;
           this.exclusionACriteriaForm = this.createExclusionCriterionForm(this.exclusionACriteria);
-          // console.log(this.formA);
+          console.log(this.exclusionACriteriaForm);
         })
         .catch(err => {
           console.log(err);
@@ -876,7 +879,7 @@ export class DataService {
         .then(res => {
           this.exclusionBCriteria = res;
           this.exclusionBCriteriaForm = this.createExclusionCriterionForm(this.exclusionBCriteria);
-          // console.log(res);
+          console.log(this.exclusionBCriteriaForm);
         })
         .catch(err => {
           console.log(err);

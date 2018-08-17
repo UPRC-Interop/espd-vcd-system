@@ -54,6 +54,8 @@ export class RequirementComponent implements OnInit, OnChanges {
         .valueChanges
         .subscribe(ev => {
           console.log('emit: ' + ev);
+          // console.log(ev);
+          // console.log(typeof ev);
           this.indicatorChanged.emit(ev);
         });
     }

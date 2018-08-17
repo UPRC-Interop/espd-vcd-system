@@ -37,31 +37,31 @@ export class ExclusionEoComponent implements OnInit {
 
   reqGroupMatch(rg: RequirementGroup, cr: EoRelatedCriterion, form: FormGroup, formValues: any) {
 
-    if (rg != null || rg != undefined) {
+    if (rg != null || rg !== undefined) {
       // console.log('reqGroup ' + rg.uuid);
 
-      if (rg.requirements != undefined || rg.requirements != null) {
+      if (rg.requirements !== undefined || rg.requirements != null) {
 
         rg.requirements.forEach(req => {
-          if (req != null || req != undefined) {
+          if (req != null || req !== undefined) {
             // console.log('requirement uuid ' + req.uuid);
             console.log(formValues[req.uuid.valueOf()]);
             req.response = new RequirementResponse();
-            if (req.responseDataType == 'INDICATOR') {
-              if (formValues[req.uuid.valueOf()] == true) {
+            if (req.responseDataType === 'INDICATOR') {
+              if (formValues[req.uuid.valueOf()] === true) {
                 req.response.indicator = true;
                 req.response.uuid = null;
               } else {
                 req.response.indicator = false;
                 req.response.uuid = null;
               }
-            } else if (req.responseDataType == 'DESCRIPTION') {
+            } else if (req.responseDataType === 'DESCRIPTION') {
               req.response.description = formValues[req.uuid.valueOf()];
               req.response.uuid = null;
-            } else if (req.responseDataType == 'EVIDENCE_URL') {
+            } else if (req.responseDataType === 'EVIDENCE_URL') {
               req.response.evidenceURL = formValues[req.uuid.valueOf()];
               req.response.id = null;
-            } else if (req.responseDataType == 'EVIDENCE_IDENTIFIER') {
+            } else if (req.responseDataType === 'EVIDENCE_IDENTIFIER') {
               // req.response.evidenceSuppliedId = formValues[req.uuid.valueOf()];
               req.response.evidenceSuppliedId = req.id;
               req.response.validatedCriterionPropertyID = req.id;
