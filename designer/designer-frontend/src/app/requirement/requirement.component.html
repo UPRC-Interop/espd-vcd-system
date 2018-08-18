@@ -1,5 +1,5 @@
 <div [formGroup]="form">
-  <label *ngIf="req.responseDataType=='INDICATOR'" [attr.for]="req.id">{{req.description}}</label>
+  <label *ngIf="req.responseDataType=='INDICATOR'" [attr.for]="req.uuid">{{req.description}}</label>
 
 
   <div [ngSwitch]="req.responseDataType">

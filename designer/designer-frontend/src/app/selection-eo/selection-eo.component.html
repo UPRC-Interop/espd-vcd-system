@@ -28,16 +28,26 @@
         <h4>Concerning the selection criteria the contracting authority declares that</h4>
       </div>
       <mat-card>
-
+      <!--  selectionALLcriteria v1 -->
+        <!--<div class="exclusionCriteria">-->
+          <!--<div class="criteria">-->
+            <!--<mat-checkbox color="primary"-->
+                          <!--checked="selectionALLCriteria['0'].selected"-->
+                          <!--disabled-->
+                          <!--name="selectionSatisfiedALL"-->
+                          <!--[(ngModel)]="selectionALLCriteria['0'].selected">{{selectionALLCriteria['0'].name}}-->
+            <!--</mat-checkbox>-->
+            <!--<div class="critDesc">{{selectionALLCriteria['0'].description}}</div>-->
+          <!--</div>-->
+        <!--</div>-->
         <div class="exclusionCriteria">
           <div class="criteria">
             <mat-checkbox color="primary"
-                          checked="selectionALLCriteria['0'].selected"
-                          disabled
-                          name="selectionSatisfiedALL"
-                          [(ngModel)]="selectionALLCriteria['0'].selected">{{selectionALLCriteria['0'].name}}
+                          checked="true"
+                          disabled="true"
+                          name="selectionSatisfiedALL">
+              <div class="critDesc">It satisfies all the required selection criteria</div>
             </mat-checkbox>
-            <div class="critDesc">{{selectionALLCriteria['0'].description}}</div>
           </div>
         </div>
       </mat-card>

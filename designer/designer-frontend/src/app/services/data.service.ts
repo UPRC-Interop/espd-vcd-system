@@ -657,9 +657,9 @@ export class DataService {
           // console.log(this.exclusionDCriteria);
 
           this.exclusionACriteriaForm = this.createExclusionCriterionForm(this.exclusionACriteria);
-          // console.log(this.exclusionACriteriaForm);
+          console.log(this.exclusionACriteriaForm);
           this.exclusionBCriteriaForm = this.createExclusionCriterionForm(this.exclusionBCriteria);
-          // console.log(this.exclusionBCriteriaForm);
+          console.log(this.exclusionBCriteriaForm);
           this.exclusionCCriteriaForm = this.createExclusionCriterionForm(this.exclusionCCriteria);
           // console.log(this.exclusionCCriteriaForm);
           this.exclusionDCriteriaForm = this.createExclusionCriterionForm(this.exclusionDCriteria);
@@ -738,23 +738,26 @@ export class DataService {
       'procurementProjectLot': this.EODetails.procurementProjectLot
     });
 
-    // TODO uncomment them and handle the null
-    // if (this.EODetails.contactingDetails !== null) {
-    //   this.EOForm.patchValue({
-    //     'contactingDetails': {
-    //       'contactPointName': this.EODetails.contactingDetails.contactPointName,
-    //       'emailAddress': this.EODetails.contactingDetails.emailAddress,
-    //       'telephoneNumber': this.EODetails.contactingDetails.telephoneNumber,
-    //       'faxNumber': this.EODetails.contactingDetails.faxNumber,
-    //     }
-    //   });
-    // }
+    if (this.EODetails.contactingDetails !== null) {
+      this.EOForm.patchValue({
+        'contactingDetails': {
+          'contactPointName': this.EODetails.contactingDetails.contactPointName,
+          'emailAddress': this.EODetails.contactingDetails.emailAddress,
+          'telephoneNumber': this.EODetails.contactingDetails.telephoneNumber,
+          'faxNumber': this.EODetails.contactingDetails.faxNumber,
+        }
+      });
+    }
 
-    // if (this.EODetails.naturalPersons !== null || this.EODetails.naturalPersons !== undefined) {
-    //   this.EOForm.patchValue({
-    //     'naturalPersons': this.EODetails.naturalPersons
-    //   });
-    // }
+    if (this.EODetails.naturalPersons !== null || this.EODetails.naturalPersons !== undefined) {
+      // TODO find better way to handle null fields in naturalperson's objects
+      if (this.EODetails.naturalPersons[0].firstName !== null) {
+        this.EOForm.patchValue({
+          'naturalPersons': this.EODetails.naturalPersons
+        });
+      }
+
+    }
 
   }
 
@@ -781,19 +784,19 @@ export class DataService {
     // console.log(form);
     // console.log(form.value);
 
-    if (form.value.chooseRole == 'CA') {
+    if (form.value.chooseRole === 'CA') {
       this.isCA = true;
       this.isEO = false;
       this.receivedNoticeNumber = form.value.noticeNumber;
-      if (form.value.CACountry != '') {
+      if (form.value.CACountry !== '') {
         this.selectedCountry = form.value.CACountry;
       }
     }
 
-    if (form.value.chooseRole == 'EO') {
+    if (form.value.chooseRole === 'EO') {
       this.isEO = true;
       this.isCA = false;
-      if (form.value.EOCountry != '') {
+      if (form.value.EOCountry !== '') {
         this.selectedEOCountry = form.value.EOCountry;
 
       }
@@ -862,7 +865,7 @@ export class DataService {
         .then(res => {
           this.exclusionACriteria = res;
           this.exclusionACriteriaForm = this.createExclusionCriterionForm(this.exclusionACriteria);
-          // console.log(this.formA);
+          console.log(this.exclusionACriteriaForm);
         })
         .catch(err => {
           console.log(err);
@@ -876,7 +879,7 @@ export class DataService {
         .then(res => {
           this.exclusionBCriteria = res;
           this.exclusionBCriteriaForm = this.createExclusionCriterionForm(this.exclusionBCriteria);
-          // console.log(res);
+          console.log(this.exclusionBCriteriaForm);
         })
         .catch(err => {
           console.log(err);
@@ -1644,9 +1647,20 @@ export class DataService {
             }
 
             if (r.response.evidenceSuppliedId) {
-              group[r.uuid + 'evidenceUrl'] = new FormControl();
-              group[r.uuid + 'evidenceCode'] = new FormControl();
-              group[r.uuid + 'evidenceIssuer'] = new FormControl();
+
+              // TODO find evidence in EvidenceList object and import it
+              const evi = this.evidenceList.find((ev, i) => {
+                if (ev.id === r.response.evidenceSuppliedId) {
+                  // this.evidenceList[i].description = 'test';
+                  return true;
+                }
+              });
+              console.log(evi);
+              console.log(typeof evi);
+
+              group[r.uuid + 'evidenceUrl'] = new FormControl(evi.evidenceURL);
+              group[r.uuid + 'evidenceCode'] = new FormControl(evi.description);
+              group[r.uuid + 'evidenceIssuer'] = new FormControl(evi.evidenceIssuer.name);
             }
 
             if (r.response.currency || r.response.amount) {
