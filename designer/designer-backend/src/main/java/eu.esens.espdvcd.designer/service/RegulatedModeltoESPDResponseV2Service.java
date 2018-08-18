@@ -21,9 +21,9 @@ public class RegulatedModeltoESPDResponseV2Service implements ModeltoESPDService
     public InputStream CreateXMLStreamFromModel(Object document) {
         ESPDResponse doc = (ESPDResponse) document;
         doc.getEvidenceList().removeIf(e -> e.getEvidenceURL() == null);
-        doc.getFullCriterionList().forEach(cr -> {
-            fixNullResponses(cr.getRequirementGroups());
-        });
+//        doc.getFullCriterionList().forEach(cr -> {
+//            fixNullResponses(cr.getRequirementGroups());
+//        });
         return BuilderFactory.withEDMVersion2().getDocumentBuilderFor((ESPDResponse) document).getAsInputStream();
     }
 
@@ -31,9 +31,9 @@ public class RegulatedModeltoESPDResponseV2Service implements ModeltoESPDService
     public String CreateXMLStringFromModel(Object document) {
         ESPDResponse doc = (ESPDResponse) document;
         doc.getEvidenceList().removeIf(e -> e.getEvidenceURL() == null);
-        doc.getFullCriterionList().forEach(cr -> {
-            fixNullResponses(cr.getRequirementGroups());
-        });
+//        doc.getFullCriterionList().forEach(cr -> {
+//            fixNullResponses(cr.getRequirementGroups());
+//        });
         return BuilderFactory.withEDMVersion2().getDocumentBuilderFor((ESPDResponse) document).getAsString();
     }
 
@@ -44,40 +44,40 @@ public class RegulatedModeltoESPDResponseV2Service implements ModeltoESPDService
 
 
     private void fixNullResponses(List<RequirementGroup> requirementGroupList) {
-        requirementGroupList.forEach(rg -> {
-
-            /*
-            FIXME: TEMPORARY FIX FOR MISSING RESPONSE DATA TYPES
-            */
-            rg.getRequirements().removeIf(r -> r.getResponse() == null);
-
-
-            if (rg.getRequirements().size() > 0) {
-                switch (rg.getCondition()) {
-                    case "ONTRUE":
-                        if (rg.getRequirements().get(0).getResponseDataType().equals(ResponseTypeEnum.INDICATOR)) {
-                            IndicatorResponse indicator = (IndicatorResponse) rg.getRequirements().get(0).getResponse();
-                            if (!indicator.isIndicator()) {
-                                rg.getRequirementGroups().forEach(reqGrp -> {
-                                    reqGrp.getRequirements().forEach(requirement -> requirement.setResponse(null));
-                                });
-                            }
-                        }
-                        break;
-                    case "ONFALSE":
-                        if (rg.getRequirements().get(0).getResponseDataType().equals(ResponseTypeEnum.INDICATOR)) {
-                            IndicatorResponse indicator = (IndicatorResponse) rg.getRequirements().get(0).getResponse();
-                            if (indicator.isIndicator()) {
-                                rg.getRequirementGroups().forEach(reqGrp -> {
-                                    reqGrp.getRequirements().forEach(requirement -> requirement.setResponse(null));
-                                });
-                            }
-                        }
-                        break;
-                }
-            }
-
-            fixNullResponses(rg.getRequirementGroups());
-        });
+//        for (RequirementGroup rg : requirementGroupList) {
+//
+//            /*
+//            FIXME: TEMPORARY FIX FOR MISSING RESPONSE DATA TYPES
+//            */
+//            rg.getRequirements().removeIf(r -> r.getResponse() == null);
+//
+//
+//            if (rg.getRequirements().size() > 0) {
+//                switch (rg.getCondition()) {
+//                    case "ONTRUE":
+//                        if (rg.getRequirements().get(0).getResponseDataType().equals(ResponseTypeEnum.INDICATOR)) {
+//                            IndicatorResponse indicator = (IndicatorResponse) rg.getRequirements().get(0).getResponse();
+//                            if (!indicator.isIndicator()) {
+//                                rg.getRequirementGroups().forEach(reqGrp -> {
+//                                    reqGrp.getRequirements().forEach(requirement -> requirement.setResponse(null));
+//                                });
+//                            }
+//                        }
+//                        break;
+//                    case "ONFALSE":
+//                        if (rg.getRequirements().get(0).getResponseDataType().equals(ResponseTypeEnum.INDICATOR)) {
+//                            IndicatorResponse indicator = (IndicatorResponse) rg.getRequirements().get(0).getResponse();
+//                            if (indicator.isIndicator()) {
+//                                rg.getRequirementGroups().forEach(reqGrp -> {
+//                                    reqGrp.getRequirements().forEach(requirement -> requirement.setResponse(null));
+//                                });
+//                            }
+//                        }
+//                        break;
+//                }
+//            }
+//
+//            fixNullResponses(rg.getRequirementGroups());
+//        }
     }
 }
