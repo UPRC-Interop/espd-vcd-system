@@ -784,19 +784,19 @@ export class DataService {
     // console.log(form);
     // console.log(form.value);
 
-    if (form.value.chooseRole == 'CA') {
+    if (form.value.chooseRole === 'CA') {
       this.isCA = true;
       this.isEO = false;
       this.receivedNoticeNumber = form.value.noticeNumber;
-      if (form.value.CACountry != '') {
+      if (form.value.CACountry !== '') {
         this.selectedCountry = form.value.CACountry;
       }
     }
 
-    if (form.value.chooseRole == 'EO') {
+    if (form.value.chooseRole === 'EO') {
       this.isEO = true;
       this.isCA = false;
-      if (form.value.EOCountry != '') {
+      if (form.value.EOCountry !== '') {
         this.selectedEOCountry = form.value.EOCountry;
 
       }
@@ -1647,9 +1647,20 @@ export class DataService {
             }
 
             if (r.response.evidenceSuppliedId) {
-              group[r.uuid + 'evidenceUrl'] = new FormControl();
-              group[r.uuid + 'evidenceCode'] = new FormControl();
-              group[r.uuid + 'evidenceIssuer'] = new FormControl();
+
+              // TODO find evidence in EvidenceList object and import it
+              const evi = this.evidenceList.find((ev, i) => {
+                if (ev.id === r.response.evidenceSuppliedId) {
+                  // this.evidenceList[i].description = 'test';
+                  return true;
+                }
+              });
+              console.log(evi);
+              console.log(typeof evi);
+
+              group[r.uuid + 'evidenceUrl'] = new FormControl(evi.evidenceURL);
+              group[r.uuid + 'evidenceCode'] = new FormControl(evi.description);
+              group[r.uuid + 'evidenceIssuer'] = new FormControl(evi.evidenceIssuer.name);
             }
 
             if (r.response.currency || r.response.amount) {

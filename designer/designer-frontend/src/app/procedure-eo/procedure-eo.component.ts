@@ -163,7 +163,7 @@ export class ProcedureEoComponent implements OnInit {
             } else if (req.responseDataType === 'EVIDENCE_URL') {
               req.response.evidenceURL = formValues[req.uuid.valueOf()];
               req.response.uuid = null;
-            } else if (req.responseDataType == 'EVIDENCE_IDENTIFIER') {
+            } else if (req.responseDataType === 'EVIDENCE_IDENTIFIER') {
               // req.response.evidenceSuppliedId = formValues[req.uuid.valueOf()];
               req.response.evidenceSuppliedId = req.id;
               req.response.validatedCriterionPropertyID = req.id;
@@ -176,31 +176,44 @@ export class ProcedureEoComponent implements OnInit {
               let evidenceIssuer = new EvidenceIssuer();
               evidence.id = req.id;
               // fill in workaround
-              // if (formValues[evidenceUrlID.valueOf()] === null) {
-              //   evidence.evidenceURL = '';
-              // } else {
-              //   evidence.evidenceURL = formValues[evidenceUrlID.valueOf()];
-              // }
-              // if (formValues[evidenceCodeID.valueOf()] === null) {
-              //   evidence.description = '';
-              // } else {
-              //   evidence.description = formValues[evidenceCodeID.valueOf()];
-              // }
-              // if (formValues[evidenceIssuerID.valueOf()] === null) {
-              //   evidence.description = '';
-              // } else {
-              //   evidence.description = formValues[evidenceIssuerID.valueOf()];
-              // }
-              evidence.evidenceURL = formValues[evidenceUrlID.valueOf()];
-              evidence.description = formValues[evidenceCodeID.valueOf()];
-              evidenceIssuer.name = formValues[evidenceIssuerID.valueOf()];
-              evidenceIssuer.website = null;
+              if (formValues[evidenceUrlID.valueOf()] === null) {
+                evidence.evidenceURL = '';
+              } else {
+                evidence.evidenceURL = formValues[evidenceUrlID.valueOf()];
+              }
+              if (formValues[evidenceCodeID.valueOf()] === null) {
+                evidence.description = '';
+              } else {
+                evidence.description = formValues[evidenceCodeID.valueOf()];
+              }
+              if (formValues[evidenceIssuerID.valueOf()] === null) {
+                evidence.description = '';
+              } else {
+                evidence.description = formValues[evidenceIssuerID.valueOf()];
+              }
+              // evidence.evidenceURL = formValues[evidenceUrlID.valueOf()];
+              // evidence.description = formValues[evidenceCodeID.valueOf()];
+              // evidenceIssuer.name = formValues[evidenceIssuerID.valueOf()];
+              evidenceIssuer.website = '';
               evidenceIssuer.id = null;
               evidence.evidenceIssuer = evidenceIssuer;
               evidence.confidentialityLevelCode = 'PUBLIC';
 
               console.log(evidence);
-              this.dataService.evidenceList.push(evidence);
+              // check if evidence already exists, if exists edit evidence object else push new evidence
+
+              const evi = this.dataService.evidenceList.find((ev, i) => {
+                if (ev.id === evidence.id) {
+                  this.dataService.evidenceList[i] = evidence;
+                  console.log('inside if');
+                  return true;
+                }
+              });
+
+              if (!evi) {
+                this.dataService.evidenceList.push(evidence);
+              }
+
               console.log(this.dataService.evidenceList);
               // console.log(JSON.stringify(this.dataService.evidenceList));
 
