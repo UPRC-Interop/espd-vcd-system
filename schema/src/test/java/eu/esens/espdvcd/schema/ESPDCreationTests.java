@@ -1,17 +1,8 @@
 package eu.esens.espdvcd.schema;
 
-//import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
-//import grow.names.specification.ubl.schema.xsd.espdrequest_1.ObjectFactory;
-//import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
 import java.io.ByteArrayOutputStream;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.Marshaller;
-//import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.AddressType;
-//import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.ContractingPartyType;
-//import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_2.PartyType;
-//import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.BuildingNameType;
-//import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_2.IDType;
-
 import eu.espd.schema.v1.commonaggregatecomponents_2.AddressType;
 import eu.espd.schema.v1.commonaggregatecomponents_2.ContractingPartyType;
 import eu.espd.schema.v1.commonaggregatecomponents_2.PartyType;
@@ -24,8 +15,6 @@ import eu.espd.schema.v2.pre_award.qualificationapplicationrequest.Qualification
 import eu.espd.schema.v2.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
 import org.junit.Before;
 import org.junit.Test;
-//import test.x.ubl.pre_award.qualificationapplicationrequest.QualificationApplicationRequestType;
-//import test.x.ubl.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
 
 /**
  *
@@ -66,7 +55,6 @@ public class ESPDCreationTests {
     @Test
     public void createESPDResponse() {
 
-        // grow.names.specification.ubl.schema.xsd.espdresponse_1.ObjectFactory of = new grow.names.specification.ubl.schema.xsd.espdresponse_1.ObjectFactory();
         eu.espd.schema.v1.espdresponse_1.ObjectFactory of = new eu.espd.schema.v1.espdresponse_1.ObjectFactory();
         ESPDResponseType res = new ESPDResponseType();
         res.setID(new IDType());
@@ -80,7 +68,6 @@ public class ESPDCreationTests {
     @Test
     public void createESPDRequestForV2() {
 
-        // test.x.ubl.pre_award.qualificationapplicationrequest.ObjectFactory of = new test.x.ubl.pre_award.qualificationapplicationrequest.ObjectFactory();
         eu.espd.schema.v2.pre_award.qualificationapplicationrequest.ObjectFactory of = new eu.espd.schema.v2.pre_award.qualificationapplicationrequest.ObjectFactory();
         QualificationApplicationRequestType req = new QualificationApplicationRequestType();
 
@@ -104,7 +91,6 @@ public class ESPDCreationTests {
     @Test
     public void createESPDResponseForV2() {
 
-        // test.x.ubl.pre_award.qualificationapplicationresponse.ObjectFactory of = new test.x.ubl.pre_award.qualificationapplicationresponse.ObjectFactory();
         eu.espd.schema.v2.pre_award.qualificationapplicationresponse.ObjectFactory of = new eu.espd.schema.v2.pre_award.qualificationapplicationresponse.ObjectFactory();
         QualificationApplicationResponseType res = new QualificationApplicationResponseType();
         res.setID(new eu.espd.schema.v2.pre_award.commonbasic.IDType());
