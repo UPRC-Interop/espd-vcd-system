@@ -187,9 +187,9 @@ export class ProcedureEoComponent implements OnInit {
                 evidence.description = formValues[evidenceCodeID.valueOf()];
               }
               if (formValues[evidenceIssuerID.valueOf()] === null) {
-                evidence.description = '';
+                evidenceIssuer.name = '';
               } else {
-                evidence.description = formValues[evidenceIssuerID.valueOf()];
+                evidenceIssuer.name = formValues[evidenceIssuerID.valueOf()];
               }
               // evidence.evidenceURL = formValues[evidenceUrlID.valueOf()];
               // evidence.description = formValues[evidenceCodeID.valueOf()];
@@ -205,7 +205,6 @@ export class ProcedureEoComponent implements OnInit {
               const evi = this.dataService.evidenceList.find((ev, i) => {
                 if (ev.id === evidence.id) {
                   this.dataService.evidenceList[i] = evidence;
-                  console.log('inside if');
                   return true;
                 }
               });

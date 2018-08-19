@@ -133,9 +133,9 @@ export class SelectionEoComponent implements OnInit {
                 evidence.description = formValues[evidenceCodeID.valueOf()];
               }
               if (formValues[evidenceIssuerID.valueOf()] === null) {
-                evidence.description = '';
+                evidenceIssuer.name = '';
               } else {
-                evidence.description = formValues[evidenceIssuerID.valueOf()];
+                evidenceIssuer.name = formValues[evidenceIssuerID.valueOf()];
               }
               // evidence.evidenceURL = formValues[evidenceUrlID.valueOf()];
               // evidence.description = formValues[evidenceCodeID.valueOf()];
