@@ -68,7 +68,7 @@ export class RequirementGroupComponent implements OnInit, OnChanges {
     this.childIndicator = (event);
     // console.log('Before ====== child indicator is: ' + this.childIndicator);
     // console.log(typeof this.childIndicator);
-
+    //
     // if (typeof this.childIndicator === 'string') {
     //   if (this.childIndicator === '') {
     //     this.childIndicator = false;

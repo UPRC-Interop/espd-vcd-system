@@ -25,7 +25,11 @@ export class RequirementComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-      this.indicatorChanged.emit(this.form.get(this.req.uuid).value);
+    // if (this.req.responseDataType === 'INDICATOR') {
+    //   this.indicatorChanged.emit(this.form.get(this.req.uuid).value);
+    // }
+    this.indicatorChanged.emit(this.form.get(this.req.uuid).value);
+
   }
 
   ngOnInit() {

@@ -1680,13 +1680,18 @@ export class DataService {
             r.response = new RequirementResponse();
             group[r.uuid] = new FormControl(r.response.description || '');
             if (this.isEO) {
-              group[r.uuid + 'currency'] = new FormControl();
-              group[r.uuid + 'startDate'] = new FormControl();
-              group[r.uuid + 'endDate'] = new FormControl();
-              group[r.uuid + 'evidenceUrl'] = new FormControl();
-              group[r.uuid + 'evidenceCode'] = new FormControl();
-              group[r.uuid + 'evidenceIssuer'] = new FormControl();
-
+              if (r.responseDataType === 'AMOUNT') {
+                group[r.uuid + 'currency'] = new FormControl();
+              }
+              if (r.responseDataType === 'PERIOD' && this.version === 'v2') {
+                group[r.uuid + 'startDate'] = new FormControl();
+                group[r.uuid + 'endDate'] = new FormControl();
+              }
+              if (r.responseDataType === 'EVIDENCE_IDENTIFIER') {
+                group[r.uuid + 'evidenceUrl'] = new FormControl();
+                group[r.uuid + 'evidenceCode'] = new FormControl();
+                group[r.uuid + 'evidenceIssuer'] = new FormControl();
+              }
             }
 
           }
