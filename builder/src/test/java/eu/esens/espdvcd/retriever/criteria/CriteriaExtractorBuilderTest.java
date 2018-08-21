@@ -39,6 +39,24 @@ public class CriteriaExtractorBuilderTest {
         SelectableCriterionPrinter.print(e.getFullList());
     }
 
+
+    @Test
+    public void testBuilderWithESPDArtefactResource() throws Exception {
+
+        ESPDArtefactResource r = new ESPDArtefactResource(SchemaVersion.V1);
+
+        CriteriaExtractor e = b
+                // Criteria resources
+                .addCriteriaResource(r)
+                // Legislation resources
+                .addLegislationResource(r)
+                // RequirementGroup resources
+                .addRequirementGroupsResource(r)
+                .build();
+
+        SelectableCriterionPrinter.print(e.getFullList());
+    }
+
     @Test
     public void testDefaultCriteriaExtractorBuilderBasicInfo() throws Exception {
         CriteriaExtractor e = b.build();
