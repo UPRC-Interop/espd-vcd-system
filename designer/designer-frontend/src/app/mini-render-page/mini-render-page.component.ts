@@ -22,6 +22,8 @@ export class MiniRenderPageComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.dataService.isEO = true;
+
     this.exclusionACriteria = [{
       'typeCode': 'CRITERION.EXCLUSION.CONVICTIONS.PARTICIPATION_IN_CRIMINAL_ORGANISATION',
       'name': 'Participation in a criminal organisation',
