@@ -93,12 +93,10 @@
 
     <mat-radio-group [id]="req.uuid" *ngSwitchCase="'INDICATOR'" [formControlName]="req.uuid">
       <mat-radio-button color="primary"
-                        value="YES"
-                        [value]="true">YES
+                        [value]=true>YES
       </mat-radio-button>
       <mat-radio-button color="primary"
-                        value="NO"
-                        [value]="false">NO
+                        [value]=false>NO
       </mat-radio-button>
     </mat-radio-group>
 
