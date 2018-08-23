@@ -11,5 +11,7 @@ export class SelectionCriteria {
   requirementGroups: RequirementGroup[];
   id: string;
   uuid: string;
+  criterionGroup: string;
+  ruleset?: string;
   response?: RequirementResponse;
 }

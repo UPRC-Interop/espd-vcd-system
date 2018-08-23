@@ -7,4 +7,5 @@ export class RequirementGroup {
   condition?: string;
   id: string;
   uuid: string;
+  typecode?: string;
 }
