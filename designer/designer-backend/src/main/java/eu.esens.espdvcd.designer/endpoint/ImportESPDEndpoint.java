@@ -1,21 +1,12 @@
 package eu.esens.espdvcd.designer.endpoint;
 
-import com.fasterxml.jackson.databind.module.SimpleModule;
 import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.builder.util.ArtefactUtils;
-import eu.esens.espdvcd.codelist.enums.ProfileExecutionIDEnum;
-import eu.esens.espdvcd.designer.deserialiser.RequirementDeserialiser;
-import eu.esens.espdvcd.designer.deserialiser.RequirementDeserialiserV2;
 import eu.esens.espdvcd.designer.exception.ValidationException;
 import eu.esens.espdvcd.designer.model.DocumentDetails;
 import eu.esens.espdvcd.designer.service.ESPDtoModelService;
-import eu.esens.espdvcd.model.ESPDRequest;
-import eu.esens.espdvcd.model.RegulatedESPDRequest;
-import eu.esens.espdvcd.model.RegulatedESPDResponse;
-import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
-import eu.esens.espdvcd.schema.SchemaUtil;
-import eu.esens.espdvcd.schema.SchemaVersion;
+import eu.esens.espdvcd.schema.EDMVersion;
 import org.apache.poi.util.IOUtils;
 import org.xml.sax.SAXException;
 import spark.Request;
@@ -31,7 +22,6 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.util.Collection;
-import java.util.UUID;
 
 public class ImportESPDEndpoint extends Endpoint {
     private final ESPDtoModelService service;
@@ -63,7 +53,7 @@ public class ImportESPDEndpoint extends Endpoint {
     }
 
     private Object postRequest(Request rq, Response rsp) throws IOException, ServletException, JAXBException, SAXException {
-        SchemaVersion artefactVersion = null;
+        EDMVersion artefactVersion = null;
         if (rq.contentType().contains("multipart/form-data")) {
             MultipartConfigElement multipartConfigElement = new MultipartConfigElement("file-uploads", 1000000000, 1000000000, 1000);
             rq.raw().setAttribute("org.eclipse.jetty.multipartConfig", multipartConfigElement);
@@ -74,7 +64,7 @@ public class ImportESPDEndpoint extends Endpoint {
                 tempFile.deleteOnExit();
 
                 try (InputStream input = part.getInputStream()) {
-                    artefactVersion = ArtefactUtils.findSchemaVersion(input);
+                    artefactVersion = ArtefactUtils.findEDMVersion(input);
                     FileOutputStream out = new FileOutputStream(tempFile);
                     IOUtils.copy(input, out);
                     out.close();
@@ -143,7 +133,7 @@ public class ImportESPDEndpoint extends Endpoint {
             try {
                 rsp.header("Content-Type", "application/json");
                 byte[] xmlStream = rq.body().getBytes(StandardCharsets.UTF_8);
-                artefactVersion = ArtefactUtils.findSchemaVersion(new ByteArrayInputStream(xmlStream));
+                artefactVersion = ArtefactUtils.findEDMVersion(new ByteArrayInputStream(xmlStream));
                 Files.write(tempFile, xmlStream, StandardOpenOption.CREATE);
                 File espdFile = tempFile.toFile();
 

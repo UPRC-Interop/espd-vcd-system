@@ -1,7 +1,7 @@
 package eu.esens.espdvcd.builder;
 
+import eu.esens.espdvcd.schema.EDMVersion;
 import eu.esens.espdvcd.schema.SchemaUtil;
-import eu.esens.espdvcd.schema.SchemaVersion;
 import eu.espd.schema.v1.commonaggregatecomponents_2.AddressType;
 import eu.espd.schema.v1.commonaggregatecomponents_2.ContractingPartyType;
 import eu.espd.schema.v1.commonaggregatecomponents_2.PartyType;
@@ -52,7 +52,7 @@ public class ESPDCreationTests {
         //This must be validated using code list for examle
         req.getContractingParty().getParty().getPostalAddress().getBuildingName().setLanguageID("EN");
 
-        System.out.println(toXml(of.createESPDRequest(req), SchemaVersion.V1));
+        System.out.println(toXml(of.createESPDRequest(req), EDMVersion.V1));
 
     }
 
@@ -65,7 +65,7 @@ public class ESPDCreationTests {
         res.getID().setSchemeID("Lala");
         res.getID().setValue("Value");
 
-        System.out.println(toXml(of.createESPDResponse(res), SchemaVersion.V1));
+        System.out.println(toXml(of.createESPDResponse(res), EDMVersion.V1));
 
     }
 
@@ -88,7 +88,7 @@ public class ESPDCreationTests {
         //This must be validated using code list for examle
         req.getContractingParty().get(0).getParty().getPostalAddress().getBuildingName().setLanguageID("EN");
 
-        System.out.println(toXml(of.createQualificationApplicationRequest(req), SchemaVersion.V2));
+        System.out.println(toXml(of.createQualificationApplicationRequest(req), EDMVersion.V2));
 
     }
 
@@ -101,11 +101,11 @@ public class ESPDCreationTests {
         res.getID().setSchemeID("Lala");
         res.getID().setValue("Value");
 
-        System.out.println(toXml(of.createQualificationApplicationResponse(res), SchemaVersion.V2));
+        System.out.println(toXml(of.createQualificationApplicationResponse(res), EDMVersion.V2));
 
     }
 
-    private String toXml(JAXBElement element, SchemaVersion version) {
+    private String toXml(JAXBElement element, EDMVersion version) {
         try {
 
             Marshaller marshaller = SchemaUtil.getMarshaller(version);

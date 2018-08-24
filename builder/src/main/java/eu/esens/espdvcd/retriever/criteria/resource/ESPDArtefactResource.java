@@ -6,7 +6,7 @@ import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
 import eu.esens.espdvcd.retriever.criteria.resource.enums.ResourceType;
-import eu.esens.espdvcd.schema.SchemaVersion;
+import eu.esens.espdvcd.schema.EDMVersion;
 import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.CriterionType;
 import eu.espd.schema.v1.espdrequest_1.ESPDRequestType;
 import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionType;
@@ -22,14 +22,14 @@ import java.util.stream.Collectors;
 /**
  * @author Konstantinos Raptis
  */
-public class ESPDArtefactResource implements CriteriaResource, LegislationResource, RequirementGroupResource {
+public class ESPDArtefactResource implements CriteriaResource, LegislationResource, RequirementsResource {
 
     private static final String ESPD_REQUEST_V1_REGULATED_RESOURCE = "/templates/v1_regulated/espd-request-2018.03.xml";
     private static final String ESPD_REQUEST_V2_REGULATED_RESOURCE = "/templates/v2_regulated/espd-request-v2_2018-05-30a.xml";
 
     private Map<String, SelectableCriterion> criterionMap;
 
-    public ESPDArtefactResource(@NotNull SchemaVersion version) {
+    public ESPDArtefactResource(@NotNull EDMVersion version) {
         criterionMap = new HashMap<>();
 
         switch (version) {

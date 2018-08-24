@@ -1,7 +1,7 @@
 package eu.esens.espdvcd.validator.schema;
 
+import eu.esens.espdvcd.schema.EDMVersion;
 import eu.esens.espdvcd.schema.SchemaUtil;
-import eu.esens.espdvcd.schema.SchemaVersion;
 import eu.esens.espdvcd.schema.XSD;
 import eu.esens.espdvcd.validator.ArtefactValidator;
 import eu.esens.espdvcd.validator.ValidationResult;
@@ -46,7 +46,7 @@ public class ESPDSchemaValidator implements ArtefactValidator {
     private void validateXML(InputStream is, Schema schema) throws JAXBException {
 
         // creating unmarshaller
-        Unmarshaller unmarshaller = SchemaUtil.getUnmarshaller(SchemaVersion.V1);
+        Unmarshaller unmarshaller = SchemaUtil.getUnmarshaller(EDMVersion.V1);
 
         // setting schema
         unmarshaller.setSchema(schema);

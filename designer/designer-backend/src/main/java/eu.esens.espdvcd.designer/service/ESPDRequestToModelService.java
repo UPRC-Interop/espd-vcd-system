@@ -9,7 +9,7 @@ import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
-import eu.esens.espdvcd.schema.SchemaVersion;
+import eu.esens.espdvcd.schema.EDMVersion;
 import eu.esens.espdvcd.validator.ArtefactValidator;
 import org.xml.sax.SAXException;
 
@@ -32,9 +32,9 @@ public class ESPDRequestToModelService implements ESPDtoModelService {
 
     @Override
     public Object CreateModelFromXML(File XML) throws RetrieverException, BuilderException, FileNotFoundException, JAXBException, SAXException, ValidationException, IOException {
-        SchemaVersion artefactVersion = ArtefactUtils.findSchemaVersion(new FileInputStream(XML));
-        if (artefactVersion == SchemaVersion.V1) {
-            criteriaService = new PredefinedCriteriaService(SchemaVersion.V1);
+        EDMVersion artefactVersion = ArtefactUtils.findEDMVersion(new FileInputStream(XML));
+        if (artefactVersion == EDMVersion.V1) {
+            criteriaService = new PredefinedCriteriaService(EDMVersion.V1);
 
             ArtefactValidator schemaResult = schemaValidationService.validateESPDRequest(XML);
             if (!schemaResult.isValid())
@@ -43,8 +43,8 @@ public class ESPDRequestToModelService implements ESPDtoModelService {
             ArtefactValidator schematronResult = schematronValidationService.validateESPDRequest(XML);
             if (!schematronResult.isValid())
                 throw new ValidationException("Schematron validation failed on the supplied xml document.", schematronResult.getValidationMessages());
-        } else if (artefactVersion == SchemaVersion.V2) {
-            criteriaService = new PredefinedCriteriaService(SchemaVersion.V2);
+        } else if (artefactVersion == EDMVersion.V2) {
+            criteriaService = new PredefinedCriteriaService(EDMVersion.V2);
         } else {
             throw new ValidationException("Cannot find artefact version");
         }

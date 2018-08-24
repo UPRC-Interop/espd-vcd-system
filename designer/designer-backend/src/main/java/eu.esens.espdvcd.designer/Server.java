@@ -2,7 +2,7 @@ package eu.esens.espdvcd.designer;
 
 import eu.esens.espdvcd.designer.endpoint.*;
 import eu.esens.espdvcd.designer.service.*;
-import eu.esens.espdvcd.schema.SchemaVersion;
+import eu.esens.espdvcd.schema.EDMVersion;
 import spark.Service;
 
 import java.util.logging.Level;
@@ -60,15 +60,15 @@ public class Server {
             v2Context.addEndpoint(v2Codelists);
 
 //            LOGGER.info("Configuring eCertisCriteria endpoint...");
-//            Endpoint eCertisCriteriaEndpointV1 = new CriteriaEndpoint(new ECertisCriteriaService(SchemaVersion.V1));
-//            Endpoint eCertisCriteriaEndpointV2 = new CriteriaEndpoint(new ECertisCriteriaService(SchemaVersion.V2));
+//            Endpoint eCertisCriteriaEndpointV1 = new CriteriaEndpoint(new ECertisCriteriaService(EDMVersion.V1));
+//            Endpoint eCertisCriteriaEndpointV2 = new CriteriaEndpoint(new ECertisCriteriaService(EDMVersion.V2));
 //
 //            v1Context.addEndpointWithPath(eCertisCriteriaEndpointV1, "/criteria/eCertis");
 //            v2Context.addEndpointWithPath(eCertisCriteriaEndpointV2, "/criteria/eCertis");
 
             LOGGER.info("Configuring predefinedCriteria endpoint...");
-            Endpoint predefCriteriaEndpointV1 = new CriteriaEndpoint(new PredefinedCriteriaService(SchemaVersion.V1));
-            Endpoint predefCriteriaEndpointV2 = new CriteriaEndpoint(new PredefinedCriteriaService(SchemaVersion.V2));
+            Endpoint predefCriteriaEndpointV1 = new CriteriaEndpoint(new PredefinedCriteriaService(EDMVersion.V1));
+            Endpoint predefCriteriaEndpointV2 = new CriteriaEndpoint(new PredefinedCriteriaService(EDMVersion.V2));
 
             v1Context.addEndpointWithPath(predefCriteriaEndpointV1, "/criteria/predefined");
             v2Context.addEndpointWithPath(predefCriteriaEndpointV2, "/criteria/predefined");

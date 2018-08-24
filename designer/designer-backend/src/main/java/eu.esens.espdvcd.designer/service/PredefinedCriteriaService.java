@@ -7,7 +7,7 @@ import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractorBuilder;
 import eu.esens.espdvcd.retriever.criteria.resource.ESPDArtefactResource;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
-import eu.esens.espdvcd.schema.SchemaVersion;
+import eu.esens.espdvcd.schema.EDMVersion;
 
 import java.util.List;
 
@@ -16,19 +16,19 @@ public class PredefinedCriteriaService implements CriteriaService {
     private final CriteriaExtractor predefinedExtractor;
     private int counter = 0;
 
-    public PredefinedCriteriaService(SchemaVersion version) {
+    public PredefinedCriteriaService(EDMVersion version) {
         CriteriaExtractorBuilder b = new CriteriaExtractorBuilder(version);
 
         switch (version) {
             case V1:
-                ESPDArtefactResource r = new ESPDArtefactResource(SchemaVersion.V1);
+                ESPDArtefactResource r = new ESPDArtefactResource(EDMVersion.V1);
                 predefinedExtractor = b
                         // Criteria resources
                         .addCriteriaResource(r)
                         // Legislation resources
                         .addLegislationResource(r)
                         // RequirementGroup resources
-                        .addRequirementGroupsResource(r)
+                        .addRequirementsResource(r)
                         .build();
                 break;
             case V2:

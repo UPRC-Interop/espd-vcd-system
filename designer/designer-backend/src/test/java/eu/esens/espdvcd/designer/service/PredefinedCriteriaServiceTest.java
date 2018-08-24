@@ -3,17 +3,15 @@ package eu.esens.espdvcd.designer.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import eu.esens.espdvcd.model.SelectableCriterion;
-import eu.esens.espdvcd.schema.SchemaVersion;
+import eu.esens.espdvcd.schema.EDMVersion;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 public class PredefinedCriteriaServiceTest {
 
-    CriteriaService predefinedCriteriaService = new PredefinedCriteriaService(SchemaVersion.V2);
+    CriteriaService predefinedCriteriaService = new PredefinedCriteriaService(EDMVersion.V2);
 
     @Test
     public void getCriteria() throws Exception {

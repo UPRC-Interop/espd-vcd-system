@@ -2,7 +2,7 @@ package eu.esens.espdvcd.builder;
 
 import eu.esens.espdvcd.builder.enums.ArtefactType;
 import eu.esens.espdvcd.codelist.enums.ProfileExecutionIDEnum;
-import eu.esens.espdvcd.schema.SchemaVersion;
+import eu.esens.espdvcd.schema.EDMVersion;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -41,25 +41,25 @@ public class ArtefactUtilsTest {
     @Ignore
     @Test
     public void testFindEDMVersion() {
-        Assert.assertEquals(ProfileExecutionIDEnum.ESPD_EDM_V2_0_1_REGULATED, findEDMVersion(espdRequestRegulatedV2_0_1));
-        Assert.assertNotEquals(ProfileExecutionIDEnum.ESPD_EDM_V2_0_2_REGULATED, findEDMVersion(espdRequestRegulatedV1_0_2));
-        Assert.assertNotEquals(ProfileExecutionIDEnum.ESPD_EDM_V2_0_2_REGULATED, findEDMVersion(espdRequestRegulatedV1_0_2));
-        Assert.assertEquals(ProfileExecutionIDEnum.ESPD_EDM_V1_0_2, findEDMVersion(espdRequestRegulatedV1_0_2));
-        Assert.assertEquals(ProfileExecutionIDEnum.ESPD_EDM_V1_0_2, findEDMVersion(espdResponseRegulatedV1_0_2));
-        Assert.assertEquals(ProfileExecutionIDEnum.ESPD_EDM_V2_0_2_REGULATED, findEDMVersion(espdResponseRegulatedV2_0_2));
+        Assert.assertEquals(ProfileExecutionIDEnum.ESPD_EDM_V2_0_1_REGULATED, findProfileExecutionID(espdRequestRegulatedV2_0_1));
+        Assert.assertNotEquals(ProfileExecutionIDEnum.ESPD_EDM_V2_0_2_REGULATED, findProfileExecutionID(espdRequestRegulatedV1_0_2));
+        Assert.assertNotEquals(ProfileExecutionIDEnum.ESPD_EDM_V2_0_2_REGULATED, findProfileExecutionID(espdRequestRegulatedV1_0_2));
+        Assert.assertEquals(ProfileExecutionIDEnum.ESPD_EDM_V1_0_2, findProfileExecutionID(espdRequestRegulatedV1_0_2));
+        Assert.assertEquals(ProfileExecutionIDEnum.ESPD_EDM_V1_0_2, findProfileExecutionID(espdResponseRegulatedV1_0_2));
+        Assert.assertEquals(ProfileExecutionIDEnum.ESPD_EDM_V2_0_2_REGULATED, findProfileExecutionID(espdResponseRegulatedV2_0_2));
     }
 
     @Ignore
     @Test
     public void testFindSchemaVersion() {
-        Assert.assertEquals(SchemaVersion.V2, findSchemaVersion(espdRequestRegulatedV2_0_1));
-        Assert.assertNotEquals(SchemaVersion.V1, findSchemaVersion(espdRequestRegulatedV2_0_1));
-        Assert.assertEquals(SchemaVersion.V1, findSchemaVersion(espdRequestRegulatedV1_0_2));
-        Assert.assertNotEquals(SchemaVersion.V2, findSchemaVersion(espdRequestRegulatedV1_0_2));
-        Assert.assertNotEquals(SchemaVersion.V2, findSchemaVersion(espdResponseRegulatedV1_0_2));
-        Assert.assertEquals(SchemaVersion.V1, findSchemaVersion(espdResponseRegulatedV1_0_2));
-        Assert.assertEquals(SchemaVersion.V2, findSchemaVersion(espdResponseRegulatedV2_0_2));
-        Assert.assertNotEquals(SchemaVersion.V1, findSchemaVersion(espdResponseRegulatedV2_0_2));
+        Assert.assertEquals(EDMVersion.V2, findEDMVersion(espdRequestRegulatedV2_0_1));
+        Assert.assertNotEquals(EDMVersion.V1, findEDMVersion(espdRequestRegulatedV2_0_1));
+        Assert.assertEquals(EDMVersion.V1, findEDMVersion(espdRequestRegulatedV1_0_2));
+        Assert.assertNotEquals(EDMVersion.V2, findEDMVersion(espdRequestRegulatedV1_0_2));
+        Assert.assertNotEquals(EDMVersion.V2, findEDMVersion(espdResponseRegulatedV1_0_2));
+        Assert.assertEquals(EDMVersion.V1, findEDMVersion(espdResponseRegulatedV1_0_2));
+        Assert.assertEquals(EDMVersion.V2, findEDMVersion(espdResponseRegulatedV2_0_2));
+        Assert.assertNotEquals(EDMVersion.V1, findEDMVersion(espdResponseRegulatedV2_0_2));
     }
 
     @Ignore
@@ -74,16 +74,16 @@ public class ArtefactUtilsTest {
     @Ignore
     @Test
     public void testUseTwoArtefactUtilsMethodsForTheSameStreamRepeatedly() {
-        Assert.assertEquals(ProfileExecutionIDEnum.ESPD_EDM_V1_0_2, findEDMVersion(espdRequestRegulatedV1_0_2));
-        Assert.assertEquals(SchemaVersion.V1, findSchemaVersion(espdRequestRegulatedV1_0_2));
+        Assert.assertEquals(ProfileExecutionIDEnum.ESPD_EDM_V1_0_2, findProfileExecutionID(espdRequestRegulatedV1_0_2));
+        Assert.assertEquals(EDMVersion.V1, findEDMVersion(espdRequestRegulatedV1_0_2));
         Assert.assertEquals(ArtefactType.ESPD_REQUEST, findArtefactType(espdRequestRegulatedV1_0_2));
     }
 
     @Ignore
     @Test
     public void testUseTwoArtefactUtilsMethodsForTheSameFileInputStreamRepeatedly() throws Exception {
-        Assert.assertEquals(ProfileExecutionIDEnum.ESPD_EDM_V2_0_2_REGULATED, findEDMVersion(new FileInputStream(regulatedRequestV2)));
-        Assert.assertEquals(SchemaVersion.V2, findSchemaVersion(new FileInputStream(regulatedRequestV2)));
+        Assert.assertEquals(ProfileExecutionIDEnum.ESPD_EDM_V2_0_2_REGULATED, findProfileExecutionID(new FileInputStream(regulatedRequestV2)));
+        Assert.assertEquals(EDMVersion.V2, findEDMVersion(new FileInputStream(regulatedRequestV2)));
         Assert.assertEquals(ArtefactType.ESPD_REQUEST, findArtefactType(new FileInputStream(regulatedRequestV2)));
     }
 

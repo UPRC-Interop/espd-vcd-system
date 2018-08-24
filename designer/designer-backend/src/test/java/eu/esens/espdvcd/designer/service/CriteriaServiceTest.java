@@ -2,7 +2,7 @@ package eu.esens.espdvcd.designer.service;
 
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
-import eu.esens.espdvcd.schema.SchemaVersion;
+import eu.esens.espdvcd.schema.EDMVersion;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,8 +16,8 @@ public class CriteriaServiceTest {
 
     @Before
     public void setUp() throws Exception {
-        predefinedCriteriaServiceV1 = new PredefinedCriteriaService(SchemaVersion.V1);
-        predefinedCriteriaServiceV2 = new PredefinedCriteriaService(SchemaVersion.V2);
+        predefinedCriteriaServiceV1 = new PredefinedCriteriaService(EDMVersion.V1);
+        predefinedCriteriaServiceV2 = new PredefinedCriteriaService(EDMVersion.V2);
     }
 
     @Test

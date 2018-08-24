@@ -2,7 +2,7 @@ package eu.esens.espdvcd.validator;
 
 import eu.esens.espdvcd.builder.enums.ArtefactType;
 import eu.esens.espdvcd.builder.util.ArtefactUtils;
-import eu.esens.espdvcd.schema.SchemaVersion;
+import eu.esens.espdvcd.schema.EDMVersion;
 import eu.esens.espdvcd.validator.schema.ESPDSchemaValidator;
 import eu.esens.espdvcd.validator.schematron.ESPDSchematronValidator;
 import eu.espd.schema.v1.espdrequest_1.ESPDRequestType;
@@ -39,7 +39,7 @@ public class Validators {
      * @param is input stream with XML data
      * @return schema validator object
      */
-    public static ArtefactValidator createESPDRequestSchemaValidator(InputStream is, SchemaVersion version) throws SAXException, JAXBException {
+    public static ArtefactValidator createESPDRequestSchemaValidator(InputStream is, EDMVersion version) throws SAXException, JAXBException {
         // FIXME: the path returned by XSD.ESPD_REQUEST.xsdPath() is probably incorrect, hence returning static string
         //return new ESPDSchemaValidator(is, XSD.ESPD_REQUEST.xsdPath(), ESPDRequestType.class);
 
@@ -69,7 +69,7 @@ public class Validators {
      * @param is input stream with XML data
      * @return schema validator object
      */
-    public static ArtefactValidator createESPDResponseSchemaValidator(InputStream is, SchemaVersion version) throws SAXException, JAXBException {
+    public static ArtefactValidator createESPDResponseSchemaValidator(InputStream is, EDMVersion version) throws SAXException, JAXBException {
         // FIXME: the path returned by XSD.ESPD_REQUEST.xsdPath() is probably incorrect, hence returning static string
         //return new ESPDSchemaValidator(is, XSD.ESPD_RESPONSE.xsdPath(), ESPDRequestType.class);
 
@@ -93,7 +93,7 @@ public class Validators {
 
     public static ArtefactValidator createESPDSchemaValidator(InputStream espdArtefact) throws SAXException, JAXBException {
         ArtefactType type = ArtefactUtils.findArtefactType(espdArtefact);
-        SchemaVersion version = ArtefactUtils.findSchemaVersion(espdArtefact);
+        EDMVersion version = ArtefactUtils.findEDMVersion(espdArtefact);
 
         switch (type) {
 
@@ -183,12 +183,12 @@ public class Validators {
     /**
      * Factory method that creates an ESPD artefact request schematron
      * validator object for the XML provided by the specified input stream
-     * according to the {@link SchemaVersion}.
+     * according to the {@link EDMVersion}.
      *
      * @param espdRequest ESPD request input stream with XML data
      * @return schematron validator object
      */
-    public static ArtefactValidator createESPDRequestSchematronValidator(File espdRequest, SchemaVersion version) {
+    public static ArtefactValidator createESPDRequestSchematronValidator(File espdRequest, EDMVersion version) {
 
         switch (version) {
 
@@ -226,12 +226,12 @@ public class Validators {
     /**
      * Factory method that creates an ESPD artefact response schematron
      * validator object for the XML provided by the specified input stream
-     * according to the {@link SchemaVersion}.
+     * according to the {@link EDMVersion}.
      *
      * @param espdResponse ESPD response input stream with XML data
      * @return schematron validator object
      */
-    public static ArtefactValidator createESPDResponseSchematronValidator(File espdResponse, SchemaVersion version) {
+    public static ArtefactValidator createESPDResponseSchematronValidator(File espdResponse, EDMVersion version) {
 
         switch (version) {
 
@@ -272,7 +272,7 @@ public class Validators {
     /**
      * Factory method that creates an ESPD artefact (request or response) schematron
      * validator object for the XML provided by the specified input stream
-     * according to the {@link SchemaVersion}.
+     * according to the {@link EDMVersion}.
      *
      * @param espdArtefact ESPD artefact (request or response) input stream with XML data
      * @return schematron validator object
@@ -280,7 +280,7 @@ public class Validators {
     public static ArtefactValidator createESPDSchematronValidator(File espdArtefact) {
 
         ArtefactType type = ArtefactUtils.findArtefactType(espdArtefact);
-        SchemaVersion version = ArtefactUtils.findSchemaVersion(espdArtefact);
+        EDMVersion version = ArtefactUtils.findEDMVersion(espdArtefact);
 
         switch (type) {
 

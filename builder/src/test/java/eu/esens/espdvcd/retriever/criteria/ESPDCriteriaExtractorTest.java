@@ -4,7 +4,7 @@ package eu.esens.espdvcd.retriever.criteria;
 //import eu.esens.espdvcd.builder.schema.SchemaFactory;
 //import eu.esens.espdvcd.model.ESPDRequest;
 //import eu.esens.espdvcd.model.requirement.RequirementGroup;
-//import eu.esens.espdvcd.schema.SchemaVersion;
+//import eu.esens.espdvcd.schema.EDMVersion;
 //import eu.espd.schema.v1.espdrequest_1.ESPDRequestType;
 //import org.junit.Before;
 //import org.junit.Test;
@@ -28,7 +28,7 @@ package eu.esens.espdvcd.retriever.criteria;
 //
 //    @Test
 //    public void testGetFullList() {
-//        PredefinedESPDCriteriaExtractor ce = new PredefinedESPDCriteriaExtractor(SchemaVersion.V1);
+//        PredefinedESPDCriteriaExtractor ce = new PredefinedESPDCriteriaExtractor(EDMVersion.V1);
 //        ce.getFullList().stream()
 //                .forEach(c -> {
 //                    System.out.println(c.getID() + " " + c.getName() + " (" + c.getTypeCode() + ")");

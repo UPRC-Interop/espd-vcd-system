@@ -4,7 +4,7 @@ import eu.esens.espdvcd.builder.schema.SchemaFactory;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.schema.SchemaUtil;
-import eu.esens.espdvcd.schema.SchemaVersion;
+import eu.esens.espdvcd.schema.EDMVersion;
 import eu.espd.schema.v1.commonbasiccomponents_2.IssueDateType;
 import eu.espd.schema.v1.commonbasiccomponents_2.IssueTimeType;
 import eu.espd.schema.v1.commonbasiccomponents_2.ProfileIDType;
@@ -119,11 +119,11 @@ public class DocumentBuilderV1 {
         try {
             if (theReq instanceof ESPDResponse) {
                 eu.espd.schema.v1.espdresponse_1.ObjectFactory of = new eu.espd.schema.v1.espdresponse_1.ObjectFactory();
-                SchemaUtil.getMarshaller(SchemaVersion.V1).marshal(of.createESPDResponse(createXML((ESPDResponse) theReq)), result);
+                SchemaUtil.getMarshaller(EDMVersion.V1).marshal(of.createESPDResponse(createXML((ESPDResponse) theReq)), result);
 
             } else {
                 eu.espd.schema.v1.espdrequest_1.ObjectFactory of = new eu.espd.schema.v1.espdrequest_1.ObjectFactory();
-                SchemaUtil.getMarshaller(SchemaVersion.V1).marshal(of.createESPDRequest(createXML(theReq)), result);
+                SchemaUtil.getMarshaller(EDMVersion.V1).marshal(of.createESPDRequest(createXML(theReq)), result);
             }
         } catch (JAXBException ex) {
             Logger.getLogger(XMLDocumentBuilderV1.class.getName()).log(Level.SEVERE, null, ex);

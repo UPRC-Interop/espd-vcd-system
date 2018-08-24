@@ -1,6 +1,6 @@
 package eu.esens.espdvcd.retriever.criteria.resource;
 
-import eu.esens.espdvcd.schema.SchemaVersion;
+import eu.esens.espdvcd.schema.EDMVersion;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,9 +12,9 @@ public class ESPDArtefactResourceTest {
 
     @Before
     public void setUp() {
-        r1 = new ESPDArtefactResource(SchemaVersion.V1);
+        r1 = new ESPDArtefactResource(EDMVersion.V1);
         Assert.assertNotNull(r1);
-        r2 = new ESPDArtefactResource(SchemaVersion.V2);
+        r2 = new ESPDArtefactResource(EDMVersion.V2);
         Assert.assertNotNull(r2);
     }
 

@@ -9,6 +9,7 @@ import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.ResponseRequirement;
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractorBuilder;
+import eu.esens.espdvcd.schema.EDMVersion;
 import eu.espd.schema.v1.espdresponse_1.ESPDResponseType;
 import org.junit.Assert;
 import org.junit.Before;
@@ -204,7 +205,7 @@ public class BuilderESPDTest {
                 .importFrom(BuilderESPDTest.class.getResourceAsStream("/REGULATED-ESPD-Request_2.0.2.xml"))
                 .createESPDRequest();
 
-        CriteriaExtractor extractor = new CriteriaExtractorBuilder().build();
+        CriteriaExtractor extractor = new CriteriaExtractorBuilder(EDMVersion.V2).build();
         espdRequest.setCriterionList(extractor.getFullList(espdRequest.getFullCriterionList()));
 
         XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.withEDMVersion2().getDocumentBuilderFor(espdRequest);

@@ -7,7 +7,7 @@ package eu.esens.espdvcd.retriever.criteria;
 //import eu.esens.espdvcd.model.retriever.ECertisCriterion;
 //import eu.esens.espdvcd.model.retriever.ECertisEvidenceGroup;
 //import eu.esens.espdvcd.retriever.exception.RetrieverException;
-//import eu.esens.espdvcd.schema.SchemaVersion;
+//import eu.esens.espdvcd.schema.EDMVersion;
 //import org.junit.Before;
 //import org.junit.Ignore;
 //import org.junit.Test;
@@ -28,7 +28,7 @@ package eu.esens.espdvcd.retriever.criteria;
 //
 //    @Before
 //    public void setUp() {
-//        extractor = new ECertisCriteriaExtractor(SchemaVersion.V1);
+//        extractor = new ECertisCriteriaExtractor(EDMVersion.V1);
 //    }
 //
 //    /**
