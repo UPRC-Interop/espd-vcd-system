@@ -6,8 +6,8 @@ import eu.esens.espdvcd.builder.util.ArtefactUtils;
 import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
+import eu.esens.espdvcd.schema.EDMVersion;
 import eu.esens.espdvcd.schema.SchemaUtil;
-import eu.esens.espdvcd.schema.SchemaVersion;
 import eu.espd.schema.v1.espdrequest_1.ESPDRequestType;
 import eu.espd.schema.v1.espdresponse_1.ESPDResponseType;
 import eu.espd.schema.v2.pre_award.qualificationapplicationrequest.QualificationApplicationRequestType;
@@ -228,7 +228,7 @@ public abstract class RegulatedModelBuilder implements ModelBuilder {
         try (InputStream bis = ArtefactUtils.getBufferedInputStream(xmlESPD)) {
             // Check and read the file in the JAXB Object
             // but first identify the artefact schema version
-            switch (ArtefactUtils.findSchemaVersion(xmlESPD)) {
+            switch (ArtefactUtils.findEDMVersion(xmlESPD)) {
                 case V1:
                     LOGGER.log(Level.INFO, "v1 artefact has been imported...");
                     ESPDRequestType espdRequestType = readESPDRequestFromStream(bis);
@@ -266,7 +266,7 @@ public abstract class RegulatedModelBuilder implements ModelBuilder {
         try (InputStream bis = ArtefactUtils.getBufferedInputStream(xmlESPDRes)) {
             // Check and read the file in the JAXB Object
             // but first identify the artefact schema version
-            switch (ArtefactUtils.findSchemaVersion(xmlESPDRes)) {
+            switch (ArtefactUtils.findEDMVersion(xmlESPDRes)) {
                 case V1:
                     LOGGER.log(Level.INFO, "v1 artefact has been imported...");
                     // Check and read the file in the JAXB Object
@@ -296,25 +296,25 @@ public abstract class RegulatedModelBuilder implements ModelBuilder {
     private QualificationApplicationRequestType readQualificationApplicationRequestFromStream(InputStream is) throws JAXBException {
         // Start with the convenience methods provided by JAXB. If there are
         // performance issues we will switch back to the JAXB API Usage
-        return SchemaUtil.getUnmarshaller(SchemaVersion.V2).unmarshal(new StreamSource(is), QualificationApplicationRequestType.class).getValue();
+        return SchemaUtil.getUnmarshaller(EDMVersion.V2).unmarshal(new StreamSource(is), QualificationApplicationRequestType.class).getValue();
     }
 
     protected QualificationApplicationResponseType readQualificationApplicationResponseFromStream(InputStream is) throws JAXBException {
         // Start with the convenience methods provided by JAXB. If there are
         // performance issues we will switch back to the JAXB API Usage
-        return SchemaUtil.getUnmarshaller(SchemaVersion.V2).unmarshal(new StreamSource(is), QualificationApplicationResponseType.class).getValue();
+        return SchemaUtil.getUnmarshaller(EDMVersion.V2).unmarshal(new StreamSource(is), QualificationApplicationResponseType.class).getValue();
     }
 
     private ESPDRequestType readESPDRequestFromStream(InputStream is) throws JAXBException {
         // Start with the convenience methods provided by JAXB. If there are
         // performance issues we will switch back to the JAXB API Usage
-        return SchemaUtil.getUnmarshaller(SchemaVersion.V1).unmarshal(new StreamSource(is), ESPDRequestType.class).getValue();
+        return SchemaUtil.getUnmarshaller(EDMVersion.V1).unmarshal(new StreamSource(is), ESPDRequestType.class).getValue();
     }
 
     protected ESPDResponseType readESPDResponseFromStream(InputStream is) throws JAXBException {
         // Start with the convenience methods provided by JAXB. If there are
         // performance issues we will switch back to the JAXB API Usage
-        return SchemaUtil.getUnmarshaller(SchemaVersion.V1).unmarshal(new StreamSource(is), ESPDResponseType.class).getValue();
+        return SchemaUtil.getUnmarshaller(EDMVersion.V1).unmarshal(new StreamSource(is), ESPDResponseType.class).getValue();
     }
 
     private void handleNullCriteriaExtractor(ESPDRequest req) {

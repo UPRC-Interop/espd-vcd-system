@@ -8,7 +8,7 @@ import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
-import eu.esens.espdvcd.schema.SchemaVersion;
+import eu.esens.espdvcd.schema.EDMVersion;
 import eu.esens.espdvcd.validator.ArtefactValidator;
 import org.xml.sax.SAXException;
 
@@ -31,9 +31,9 @@ public class ESPDResponseToModelService implements ESPDtoModelService {
     @Override
     public Object CreateModelFromXML(File XML) throws RetrieverException, BuilderException, FileNotFoundException, JAXBException, SAXException, ValidationException, IOException {
         ArtefactValidator schemaResult, schematronResult;
-        SchemaVersion artefactVersion = ArtefactUtils.findSchemaVersion(new FileInputStream(XML));
+        EDMVersion artefactVersion = ArtefactUtils.findEDMVersion(new FileInputStream(XML));
 
-        if (artefactVersion == SchemaVersion.V1) {
+        if (artefactVersion == EDMVersion.V1) {
             if (isESPDRequest(XML)) {
                 schemaResult = schemaValidationService.validateESPDRequest(XML);
                 schematronResult = schematronValidationService.validateESPDRequest(XML);

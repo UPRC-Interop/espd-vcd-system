@@ -1,6 +1,6 @@
 package eu.esens.espdvcd.validator;
 
-import eu.esens.espdvcd.schema.SchemaVersion;
+import eu.esens.espdvcd.schema.EDMVersion;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -35,7 +35,7 @@ public class ESPDSchemaValidatorTest {
     @Test
     public void validateESPDRequest() throws Exception {
         // create ESPD request validator object for valid ESPD request and retrieve test results
-        ArtefactValidator validator = Validators.createESPDRequestSchemaValidator(isReqValid, SchemaVersion.V1);
+        ArtefactValidator validator = Validators.createESPDRequestSchemaValidator(isReqValid, EDMVersion.V1);
 
         System.out.println("validateESPDRequest events:");
         for (ValidationResult event: validator.getValidationMessages()) {
@@ -45,7 +45,7 @@ public class ESPDSchemaValidatorTest {
         Assert.assertTrue(validator.isValid());
 
         // create ESPD request validator object for invalid ESPD request and retrieve test results
-        validator = Validators.createESPDRequestSchemaValidator(isReqInvalid, SchemaVersion.V1);
+        validator = Validators.createESPDRequestSchemaValidator(isReqInvalid, EDMVersion.V1);
         Assert.assertFalse(validator.isValid());
 
         // as there are two errors introduced in the invalid espd request example xml,
@@ -58,7 +58,7 @@ public class ESPDSchemaValidatorTest {
     @Test
     public void checkESPDRequestValidationForESPDResponse() throws Exception {
         // create ESPD request validator object for valid ESPD response and retrieve test results
-        ArtefactValidator validator = Validators.createESPDRequestSchemaValidator(isResValid, SchemaVersion.V1);
+        ArtefactValidator validator = Validators.createESPDRequestSchemaValidator(isResValid, EDMVersion.V1);
 
         System.out.println("checkESPDRequestValidationForESPDResponse events:");
         for (ValidationResult event: validator.getValidationMessages()) {
@@ -73,7 +73,7 @@ public class ESPDSchemaValidatorTest {
     @Test
     public void validateESPDResponse() throws Exception {
         // create ESPD response validator object for valid ESPD response and retrieve test results
-        ArtefactValidator validator = Validators.createESPDResponseSchemaValidator(isResValid, SchemaVersion.V1);
+        ArtefactValidator validator = Validators.createESPDResponseSchemaValidator(isResValid, EDMVersion.V1);
 
         System.out.println("validateESPDResponse events:");
         for (ValidationResult event: validator.getValidationMessages()) {
@@ -86,7 +86,7 @@ public class ESPDSchemaValidatorTest {
     @Test
     public void checkESPDResponseValidationForESPDRequest() throws Exception {
         // create ESPD response validator object for valid ESPD request and retrieve test results
-        ArtefactValidator validator = Validators.createESPDResponseSchemaValidator(isReqValid, SchemaVersion.V1);
+        ArtefactValidator validator = Validators.createESPDResponseSchemaValidator(isReqValid, EDMVersion.V1);
 
         System.out.println("checkESPDResponseValidationForESPDRequest events:");
         for (ValidationResult event: validator.getValidationMessages()) {

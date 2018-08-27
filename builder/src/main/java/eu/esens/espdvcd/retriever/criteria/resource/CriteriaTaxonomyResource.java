@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 /**
  * @author konstantinos Raptis
  */
-public class CriteriaTaxonomyResource implements CriteriaResource, RequirementGroupResource {
+public class CriteriaTaxonomyResource implements CriteriaResource, RequirementsResource {
 
     private static final String CRITERIA_TAXONOMY_RESOURCE = "/templates/v2_regulated/ESPD-CriteriaTaxonomy-REGULATED-V2.0.2.xlsx";
     private final static int nameColumnIndex = 17;

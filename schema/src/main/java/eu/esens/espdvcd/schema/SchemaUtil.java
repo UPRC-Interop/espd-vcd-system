@@ -44,7 +44,7 @@ public class SchemaUtil {
      * @return an ESPD/VCD Marshaller
      * @throws JAXBException when the marshaller cannot be initialized
      */
-    public static Marshaller getMarshaller(SchemaVersion version) throws JAXBException {
+    public static Marshaller getMarshaller(EDMVersion version) throws JAXBException {
 
         Marshaller marshaller = null;
 
@@ -76,7 +76,7 @@ public class SchemaUtil {
      * @return an ESPD/VCD Marshaller
      * @throws JAXBException when the marshaller cannot be initialized
      */
-    public static Unmarshaller getUnmarshaller(SchemaVersion version) throws JAXBException {
+    public static Unmarshaller getUnmarshaller(EDMVersion version) throws JAXBException {
 
         Unmarshaller unmarshaller = null;
 

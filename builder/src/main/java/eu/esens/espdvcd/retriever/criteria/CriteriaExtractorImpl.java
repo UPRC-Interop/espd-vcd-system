@@ -3,7 +3,7 @@ package eu.esens.espdvcd.retriever.criteria;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.retriever.criteria.resource.CriteriaResource;
 import eu.esens.espdvcd.retriever.criteria.resource.LegislationResource;
-import eu.esens.espdvcd.retriever.criteria.resource.RequirementGroupResource;
+import eu.esens.espdvcd.retriever.criteria.resource.RequirementsResource;
 import eu.esens.espdvcd.retriever.criteria.resource.Resource;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -22,14 +22,14 @@ public class CriteriaExtractorImpl implements CriteriaExtractor {
 
     // private List<CriteriaResource> cResourceList;
     private List<LegislationResource> lResourceList;
-    private List<RequirementGroupResource> rgResourceList;
+    private List<RequirementsResource> rgResourceList;
 
     private List<SelectableCriterion> criterionList;
 
     /* package private constructor. Create only through factory */
     CriteriaExtractorImpl(@NotEmpty List<CriteriaResource> cResourceList,
                           @NotEmpty List<LegislationResource> lResourceList,
-                          @NotEmpty List<RequirementGroupResource> rgResourceList) {
+                          @NotEmpty List<RequirementsResource> rgResourceList) {
 
         ResourceComparator resourceComparator = new ResourceComparator();
         lResourceList.sort(resourceComparator);

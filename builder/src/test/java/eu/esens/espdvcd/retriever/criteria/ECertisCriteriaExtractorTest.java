@@ -3,7 +3,7 @@ package eu.esens.espdvcd.retriever.criteria;
 //import eu.esens.espdvcd.model.LegislationReference;
 //import eu.esens.espdvcd.model.SelectableCriterion;
 //import eu.esens.espdvcd.retriever.exception.RetrieverException;
-//import eu.esens.espdvcd.schema.SchemaVersion;
+//import eu.esens.espdvcd.schema.EDMVersion;
 //import org.junit.Before;
 //import org.junit.Ignore;
 //import org.junit.Test;
@@ -24,7 +24,7 @@ package eu.esens.espdvcd.retriever.criteria;
 //
 //    @Before
 //    public void setUp() {
-//        extractor = new ECertisCriteriaExtractor(SchemaVersion.V2);
+//        extractor = new ECertisCriteriaExtractor(EDMVersion.V2);
 //    }
 //
 //    @Test
@@ -45,7 +45,7 @@ package eu.esens.espdvcd.retriever.criteria;
 //    public void testPredefinedAndECertisCriteriaID() throws RetrieverException {
 //
 //        PredefinedESPDCriteriaExtractor predefinedESPDCriteriaExtractor =
-//                new PredefinedESPDCriteriaExtractor(SchemaVersion.V2);
+//                new PredefinedESPDCriteriaExtractor(EDMVersion.V2);
 //
 //        final List<String> ecertisIDList = extractor.getAllEuropeanCriteriaID();
 //        final List<String> predefinedIDList = predefinedESPDCriteriaExtractor.getFullList().stream()
@@ -109,7 +109,7 @@ package eu.esens.espdvcd.retriever.criteria;
 //    public void testGetFullList() throws RetrieverException {
 //
 //        List<SelectableCriterion> criteriaList = extractor.getFullList();
-//        // List<SelectableCriterion> criteriaList = CriteriaExtractorFactory.getPredefinedESPDCriteriaExtractor(SchemaVersion.V2).getFullList();
+//        // List<SelectableCriterion> criteriaList = CriteriaExtractorFactory.getPredefinedESPDCriteriaExtractor(EDMVersion.V2).getFullList();
 //        int numberOfCriterion = 1;
 //
 //        for (SelectableCriterion sc : criteriaList) {

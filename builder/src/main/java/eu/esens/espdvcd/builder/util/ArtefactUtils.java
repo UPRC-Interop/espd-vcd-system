@@ -2,7 +2,7 @@ package eu.esens.espdvcd.builder.util;
 
 import eu.esens.espdvcd.builder.enums.ArtefactType;
 import eu.esens.espdvcd.codelist.enums.ProfileExecutionIDEnum;
-import eu.esens.espdvcd.schema.SchemaVersion;
+import eu.esens.espdvcd.schema.EDMVersion;
 
 import java.io.*;
 import java.util.Arrays;
@@ -27,12 +27,12 @@ public class ArtefactUtils {
     }
 
     /**
-     * Identify schema version of given ESPD artefact String representation
+     * Identify Exchange Data Model (EDM) version of given ESPD artefact String representation
      *
      * @param partOfTheArtefact A String representation of the ESPD XML artefact or part of it
-     * @return The schema version
+     * @return The EDM version
      */
-    public static SchemaVersion findSchemaVersion(final String partOfTheArtefact) {
+    public static EDMVersion findEDMVersion(final String partOfTheArtefact) {
         String smallerPartOfTheArtefact = partOfTheArtefact.substring(0, 99); // 100 chars
 
         final String v1ArtefactRegex = "<\\S*(ESPDRequest|ESPDResponse)";
@@ -41,52 +41,52 @@ public class ArtefactUtils {
         boolean isV1Artefact = Pattern.compile(v1ArtefactRegex).matcher(smallerPartOfTheArtefact).find();
 
         if (isV1Artefact) {
-            return SchemaVersion.V1;
+            return EDMVersion.V1;
         }
 
         boolean isV2Artefact = Pattern.compile(v2ArtefactRegex).matcher(smallerPartOfTheArtefact).find();
 
         if (isV2Artefact) {
-            return SchemaVersion.V2;
+            return EDMVersion.V2;
         }
 
-        return SchemaVersion.UNKNOWN;
+        return null;
     }
 
     /**
-     * Identify schema version of given ESPD XML artefact
+     * Identify Exchange Data Model (EDM) version of given ESPD XML artefact
      *
      * @param xmlESPD The ESPD XML artefact
-     * @return The schema version
+     * @return The EDM version
      */
-    public static SchemaVersion findSchemaVersion(InputStream xmlESPD) {
+    public static EDMVersion findEDMVersion(InputStream xmlESPD) {
 
         try {
             String partOfTheArtefact = getPartOfTheArtefact(xmlESPD, 128); //  better stay below 256
-            return findSchemaVersion(partOfTheArtefact);
+            return findEDMVersion(partOfTheArtefact);
 
         } catch (IOException ex) {
             LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
         }
 
-        return SchemaVersion.UNKNOWN;
+        return null;
     }
 
     /**
-     * Identify schema version of given ESPD XML artefact
+     * Identify Exchange Data Model (EDM) version of given ESPD XML artefact
      *
      * @param xmlESPD The ESPD XML artefact
-     * @return The schema version
+     * @return The EDM version
      */
-    public static SchemaVersion findSchemaVersion(File xmlESPD) {
+    public static EDMVersion findEDMVersion(File xmlESPD) {
 
         try {
-            return findSchemaVersion(new FileInputStream(xmlESPD));
+            return findEDMVersion(new FileInputStream(xmlESPD));
         } catch (FileNotFoundException e) {
             LOGGER.log(Level.SEVERE, e.getMessage(), e);
         }
 
-        return SchemaVersion.UNKNOWN;
+        return null;
     }
 
     public static String getPartOfTheArtefact(InputStream xmlESPD, int bytesToRead) throws IOException {
@@ -113,13 +113,13 @@ public class ArtefactUtils {
      * @param xmlESPD The ESPD XML artefact
      * @return The profile execution id
      */
-    public static ProfileExecutionIDEnum findEDMVersion(InputStream xmlESPD) {
+    public static ProfileExecutionIDEnum findProfileExecutionID(InputStream xmlESPD) {
         ProfileExecutionIDEnum profileExecutionID = ProfileExecutionIDEnum.UNKNOWN;
 
         try {
             String partOfTheArtefact = getPartOfTheArtefact(xmlESPD, 2048);
 
-            switch (findSchemaVersion(partOfTheArtefact)) {
+            switch (findEDMVersion(partOfTheArtefact)) {
 
                 case V1:
                     profileExecutionID = ProfileExecutionIDEnum.ESPD_EDM_V1_0_2;

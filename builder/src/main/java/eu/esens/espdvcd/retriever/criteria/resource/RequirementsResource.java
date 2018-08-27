@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * @author konstantinos Raptis
  */
-public interface RequirementGroupResource extends Resource {
+public interface RequirementsResource extends Resource {
 
     List<RequirementGroup> getRequirementGroupsForCriterion(String ID) throws RetrieverException;
 
