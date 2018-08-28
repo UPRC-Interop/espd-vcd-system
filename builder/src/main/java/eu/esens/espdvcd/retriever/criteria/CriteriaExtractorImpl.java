@@ -122,7 +122,7 @@ public class CriteriaExtractorImpl implements CriteriaExtractor {
 
                 if (sc.getRequirementGroups().isEmpty()) {
                     sc.setRequirementGroups(rgResource
-                            .getRequirementGroupsForCriterion(sc.getID()));
+                            .getRequirementsForCriterion(sc.getID()));
                 }
             } catch (RetrieverException e) {
                 LOGGER.log(Level.SEVERE, e.getMessage());

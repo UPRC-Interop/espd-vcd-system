@@ -82,7 +82,7 @@ public class ESPDArtefactResource implements CriteriaResource, LegislationResour
     }
 
     @Override
-    public List<RequirementGroup> getRequirementGroupsForCriterion(String ID) {
+    public List<RequirementGroup> getRequirementsForCriterion(String ID) {
         return criterionMap.containsKey(ID)
                 ? criterionMap.get(ID).getRequirementGroups()
                 : null;

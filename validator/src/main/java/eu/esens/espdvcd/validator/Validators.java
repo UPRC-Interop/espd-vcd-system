@@ -56,7 +56,7 @@ public class Validators {
                 return new ESPDSchemaValidator(is, "/schema/v2/maindoc/UBL-QualificationApplicationRequest-2.2-Pre-award.xsd", QualificationApplicationRequestType.class);
 
             default:
-                LOGGER.log(Level.SEVERE, "Error... Unknown schema version");
+                LOGGER.log(Level.SEVERE, "Error... Unknown Exchange Data Model (EDM) version");
                 return null;
         }
     }
@@ -86,7 +86,7 @@ public class Validators {
                 return new ESPDSchemaValidator(is, "/schema/v2/maindoc/UBL-QualificationApplicationResponse-2.2-Pre-award.xsd", QualificationApplicationResponseType.class);
 
             default:
-                LOGGER.log(Level.SEVERE, "Error... Unknown schema version");
+                LOGGER.log(Level.SEVERE, "Error... Unknown Exchange Data Model (EDM) version");
                 return null;
         }
     }
@@ -204,7 +204,7 @@ public class Validators {
                 LOGGER.log(Level.INFO, "Creating ESPD request V2 schematron validator for: " + espdRequest.getName());
                 return new ESPDSchematronValidator.Builder(espdRequest)
                         // common
-//                        .addSchematron("/rules/v2/eu/common/sch/01-ESPD-codelist-values.sch")
+                        .addSchematron("/rules/v2/eu/common/sch/01-ESPD-codelist-values.sch")
                         .addSchematron("/rules/v2/eu/common/sch/01-ESPD-Common-CL-Attributes.sch")
                         .addSchematron("/rules/v2/eu/common/sch/03-ESPD-Common-Criterion-BR.sch")
                         .addSchematron("/rules/v2/eu/common/sch/04-ESPD-Common-Other-BR.sch")
@@ -217,7 +217,7 @@ public class Validators {
                         .build();
 
             default:
-                LOGGER.log(Level.SEVERE, "Error... Unknown schema version");
+                LOGGER.log(Level.SEVERE, "Error... Unknown Exchange Data Model (EDM) version");
                 return null;
         }
 
@@ -248,7 +248,7 @@ public class Validators {
                 LOGGER.log(Level.INFO, "Creating ESPD response V2 schematron validator for: " + espdResponse.getName());
                 return new ESPDSchematronValidator.Builder(espdResponse)
                         // common
-//                        .addSchematron("/rules/v2/eu/common/sch/01-ESPD-codelist-values.sch")
+                        .addSchematron("/rules/v2/eu/common/sch/01-ESPD-codelist-values.sch")
                         .addSchematron("/rules/v2/eu/common/sch/01-ESPD-Common-CL-Attributes.sch")
                         .addSchematron("/rules/v2/eu/common/sch/03-ESPD-Common-Criterion-BR.sch")
                         .addSchematron("/rules/v2/eu/common/sch/04-ESPD-Common-Other-BR.sch")
@@ -263,7 +263,7 @@ public class Validators {
                         .build();
 
             default:
-                LOGGER.log(Level.SEVERE, "Error... Unknown schema version");
+                LOGGER.log(Level.SEVERE, "Error... Unknown Exchange Data Model (EDM) version");
                 return null;
         }
 

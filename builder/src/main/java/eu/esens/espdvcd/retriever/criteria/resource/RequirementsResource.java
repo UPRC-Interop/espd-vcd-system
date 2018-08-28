@@ -10,6 +10,14 @@ import java.util.List;
  */
 public interface RequirementsResource extends Resource {
 
-    List<RequirementGroup> getRequirementGroupsForCriterion(String ID) throws RetrieverException;
+    /**
+     * Returns the requirements of a particular criterion. The requirements are
+     * in a list of requirement groups.
+     *
+     * @param ID The criterion ID
+     * @return
+     * @throws RetrieverException
+     */
+    List<RequirementGroup> getRequirementsForCriterion(String ID) throws RetrieverException;
 
 }
