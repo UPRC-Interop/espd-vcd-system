@@ -393,8 +393,9 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
                 return tcrType;
 
             case QUANTITY_YEAR:
+                rvType.setResponseQuantity(new ResponseQuantityType());
                 if (((QuantityYearResponse) response).getYear() != 0) {
-                    rvType.setResponseQuantity(new ResponseQuantityType());
+                    // rvType.setResponseQuantity(new ResponseQuantityType());
                     rvType.getResponseQuantity().setUnitCode("YEAR");
                     rvType.getResponseQuantity().setValue(BigDecimal.valueOf(((QuantityYearResponse) response).getYear()));
                 }
@@ -417,12 +418,12 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
             case AMOUNT:
                 float amount = ((AmountResponse) response).getAmount();
                 String currency = ((AmountResponse) response).getCurrency();
-                if ((amount != 0) ||
-                        (currency != null && !currency.isEmpty())) {
+                rvType.setResponseAmount(new ResponseAmountType());
+                if ((amount != 0) || (currency != null && !currency.isEmpty())) {
                     // Only generate a proper response if for at least one of the variables "amount" and
                     // "currency" a value different from the default is detected.
 
-                    rvType.setResponseAmount(new ResponseAmountType());
+                    // rvType.setResponseAmount(new ResponseAmountType());
                     rvType.getResponseAmount().setValue(new BigDecimal(Float.toString(amount)));
                     rvType.getResponseAmount().setCurrencyID(currency);
                 }
