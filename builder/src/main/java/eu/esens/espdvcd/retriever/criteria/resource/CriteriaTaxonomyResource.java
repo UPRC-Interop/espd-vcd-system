@@ -167,7 +167,7 @@ public class CriteriaTaxonomyResource implements CriteriaResource, RequirementsR
     }
 
     @Override
-    public List<RequirementGroup> getRequirementGroupsForCriterion(String ID) {
+    public List<RequirementGroup> getRequirementsForCriterion(String ID) {
         return rgMap.get(ID);
     }
 
