@@ -21,9 +21,9 @@ public class RegulatedModeltoESPDResponseV2Service implements ModeltoESPDService
     public InputStream CreateXMLStreamFromModel(Object document) {
         ESPDResponse doc = (ESPDResponse) document;
         doc.getEvidenceList().removeIf(e -> e.getEvidenceURL() == null);
-//        doc.getFullCriterionList().forEach(cr -> {
-//            fixNullResponses(cr.getRequirementGroups());
-//        });
+        doc.getFullCriterionList().forEach(cr -> {
+            fixResponses(cr.getRequirementGroups());
+        });
         return BuilderFactory.withEDMVersion2().getDocumentBuilderFor((ESPDResponse) document).getAsInputStream();
     }
 
@@ -31,9 +31,9 @@ public class RegulatedModeltoESPDResponseV2Service implements ModeltoESPDService
     public String CreateXMLStringFromModel(Object document) {
         ESPDResponse doc = (ESPDResponse) document;
         doc.getEvidenceList().removeIf(e -> e.getEvidenceURL() == null);
-//        doc.getFullCriterionList().forEach(cr -> {
-//            fixNullResponses(cr.getRequirementGroups());
-//        });
+        doc.getFullCriterionList().forEach(cr -> {
+            fixResponses(cr.getRequirementGroups());
+        });
         return BuilderFactory.withEDMVersion2().getDocumentBuilderFor((ESPDResponse) document).getAsString();
     }
 
@@ -42,42 +42,38 @@ public class RegulatedModeltoESPDResponseV2Service implements ModeltoESPDService
         return artefactType;
     }
 
+    private void fixResponses(List<RequirementGroup> requirementGroupList) {
 
-    private void fixNullResponses(List<RequirementGroup> requirementGroupList) {
-//        for (RequirementGroup rg : requirementGroupList) {
-//
-//            /*
-//            FIXME: TEMPORARY FIX FOR MISSING RESPONSE DATA TYPES
-//            */
-//            rg.getRequirements().removeIf(r -> r.getResponse() == null);
-//
-//
-//            if (rg.getRequirements().size() > 0) {
-//                switch (rg.getCondition()) {
-//                    case "ONTRUE":
-//                        if (rg.getRequirements().get(0).getResponseDataType().equals(ResponseTypeEnum.INDICATOR)) {
-//                            IndicatorResponse indicator = (IndicatorResponse) rg.getRequirements().get(0).getResponse();
-//                            if (!indicator.isIndicator()) {
-//                                rg.getRequirementGroups().forEach(reqGrp -> {
-//                                    reqGrp.getRequirements().forEach(requirement -> requirement.setResponse(null));
-//                                });
-//                            }
-//                        }
-//                        break;
-//                    case "ONFALSE":
-//                        if (rg.getRequirements().get(0).getResponseDataType().equals(ResponseTypeEnum.INDICATOR)) {
-//                            IndicatorResponse indicator = (IndicatorResponse) rg.getRequirements().get(0).getResponse();
-//                            if (indicator.isIndicator()) {
-//                                rg.getRequirementGroups().forEach(reqGrp -> {
-//                                    reqGrp.getRequirements().forEach(requirement -> requirement.setResponse(null));
-//                                });
-//                            }
-//                        }
-//                        break;
-//                }
-//            }
-//
-//            fixNullResponses(rg.getRequirementGroups());
-//        }
-    }
+        for (RequirementGroup rg : requirementGroupList) {
+
+            if(rg.getRequirements().get(0).getResponseDataType().equals(ResponseTypeEnum.INDICATOR)&&rg.getRequirementGroups().size()>0) {
+                IndicatorResponse indicator = (IndicatorResponse) rg.getRequirements().get(0).getResponse();
+
+                switch (rg.getRequirementGroups().get(0).getCondition()) {
+                    case "ONTRUE":
+//                        System.out.println("Found ontrue");
+                        if(!indicator.isIndicator()){
+                            rg.getRequirementGroups().get(0).getRequirements().forEach(rq -> {
+
+                                    rq.setResponse(null);
+                                });
+                            }
+                            break;
+                    case "ONFALSE":
+//                        System.out.println("Found onfalse");
+                        if(indicator.isIndicator()){
+                            rg.getRequirementGroups().get(0).getRequirements().forEach(rq -> {
+                                rq.setResponse(null);
+                            });
+                        }
+                            break;
+                    default:
+                        System.out.println("Ignoring condition "+rg.getCondition());
+                        break;
+                }
+            }
+                fixResponses(rg.getRequirementGroups());
+            }
+
+        }
 }

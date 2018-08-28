@@ -18,25 +18,27 @@ public class PredefinedCriteriaService implements CriteriaService {
 
     public PredefinedCriteriaService(EDMVersion version) {
         CriteriaExtractorBuilder b = new CriteriaExtractorBuilder(version);
-
-        switch (version) {
-            case V1:
-                ESPDArtefactResource r = new ESPDArtefactResource(EDMVersion.V1);
-                predefinedExtractor = b
-                        // Criteria resources
-                        .addCriteriaResource(r)
-                        // Legislation resources
-                        .addLegislationResource(r)
-                        // RequirementGroup resources
-                        .addRequirementsResource(r)
-                        .build();
-                break;
-            case V2:
-                predefinedExtractor = b.build();
-                break;
-            default:
-                throw new IllegalArgumentException("You need to specify a schema version to create a criteria service.");
-        }
+        predefinedExtractor = b.build();
+//
+//
+//        switch (version) {
+//            case V1:
+//                ESPDArtefactResource r = new ESPDArtefactResource(EDMVersion.V1);
+//                predefinedExtractor = b
+//                        // Criteria resources
+//                        .addCriteriaResource(r)
+//                        // Legislation resources
+//                        .addLegislationResource(r)
+//                        // RequirementGroup resources
+//                        .addRequirementsResource(r)
+//                        .build();
+//                break;
+//            case V2:
+//                predefinedExtractor = b.build();
+//                break;
+//            default:
+//                throw new IllegalArgumentException("You need to specify a schema version to create a criteria service.");
+//        }
     }
 
     @Override
