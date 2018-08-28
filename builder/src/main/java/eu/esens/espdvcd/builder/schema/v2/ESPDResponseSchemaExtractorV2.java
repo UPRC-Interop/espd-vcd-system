@@ -384,8 +384,9 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
         switch (respType) {
             case DESCRIPTION:
                 String description = ((DescriptionResponse) response).getDescription();
+                rvType.getDescription().add(new DescriptionType());
                 if (description != null && !description.isEmpty()) {
-                    rvType.getDescription().add(new DescriptionType());
+                    // rvType.getDescription().add(new DescriptionType());
                     rvType.getDescription().get(0).setValue(description);
                 }
                 tcrType.getResponseValue().add(rvType);
