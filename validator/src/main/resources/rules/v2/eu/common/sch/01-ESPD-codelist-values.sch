@@ -6,8 +6,17 @@
         xmlns:cbc="urn:X-test:UBL:Pre-award:CommonBasic"
         xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
         xmlns:espd-req="urn:X-test:UBL:Pre-award:QualificationApplicationRequest">
-   <pattern id="code-list-values">
    
+    <title>ESPD Code List Business Rules</title>
+	<ns prefix="cac" uri="urn:X-test:UBL:Pre-award:CommonAggregate"/>
+    <ns prefix="cbc" uri="urn:X-test:UBL:Pre-award:CommonBasic"/>
+    <ns prefix="ext" uri="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"/>
+    <ns prefix="espd-req" uri="urn:X-test:UBL:Pre-award:QualificationApplicationRequest"/>
+    <ns prefix="espd-resp" uri="urn:X-test:UBL:Pre-award:QualificationApplicationResponse"/>
+    <ns prefix="fn" uri="http://www.w3.org/2005/xpath-functions"/>
+
+    <pattern id="code-list-values">
+
    <!-- ESPD code list values constraints - ESPD-codelist-values.cva
 		Version 2.0.2
 	
