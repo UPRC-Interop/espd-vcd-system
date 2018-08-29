@@ -20,7 +20,7 @@ public class CriteriaExtractorImpl implements CriteriaExtractor {
 
     private static final Logger LOGGER = Logger.getLogger(CriteriaExtractorImpl.class.getName());
 
-    // private List<CriteriaResource> cResourceList;
+    private List<CriteriaResource> cResourceList;
     private List<LegislationResource> lResourceList;
     private List<RequirementsResource> rgResourceList;
 
@@ -32,12 +32,27 @@ public class CriteriaExtractorImpl implements CriteriaExtractor {
                           @NotEmpty List<RequirementsResource> rgResourceList) {
 
         ResourceComparator resourceComparator = new ResourceComparator();
+        cResourceList.sort(resourceComparator);
         lResourceList.sort(resourceComparator);
         rgResourceList.sort(resourceComparator);
 
-        this.criterionList = createCriterionList(cResourceList);
+        this.cResourceList = cResourceList;
         this.lResourceList = lResourceList;
         this.rgResourceList = rgResourceList;
+    }
+
+    /**
+     * Lazy initialization of criterion list
+     */
+    private void initCriterionList() {
+
+        if (criterionList == null) {
+            criterionList = createCriterionList(cResourceList);
+            // add all legislation to that criteria from legislation resources
+            criterionList.forEach(this::addLegislationReference);
+            // add all requirement groups to that criteria from requirement group resources
+            criterionList.forEach(this::addRequirementGroups);
+        }
     }
 
     private void applyCriterionBasicInfoIfNotNull(SelectableCriterion from, SelectableCriterion to) {
@@ -58,7 +73,6 @@ public class CriteriaExtractorImpl implements CriteriaExtractor {
 
     private List<SelectableCriterion> createCriterionList(List<CriteriaResource> cResourceList) {
         final Map<String, SelectableCriterion> fullCriterionMap = new LinkedHashMap<>();
-        cResourceList.sort(new ResourceComparator());
 
         cResourceList.forEach(cResource -> {
             try {
@@ -82,22 +96,21 @@ public class CriteriaExtractorImpl implements CriteriaExtractor {
 
     @Override
     public List<SelectableCriterion> getFullList() {
-        // add all legislation to that criteria from legislation resources
-        criterionList.forEach(this::addLegislationReference);
-        // add all requirement groups to that criteria from requirement group resources
-        criterionList.forEach(this::addRequirementGroups);
-
+        initCriterionList();
         return criterionList;
     }
 
     @Override
     public List<SelectableCriterion> getFullList(List<SelectableCriterion> initialList) {
-        return null;
+        return getFullList(initialList, false);
     }
 
     @Override
     public List<SelectableCriterion> getFullList(List<SelectableCriterion> initialList, boolean addAsSelected) {
-        return null;
+        initCriterionList();
+        Set<SelectableCriterion> initialSet = new LinkedHashSet<>();
+        initialSet.addAll(criterionList);
+        return new ArrayList<>(initialSet);
     }
 
     private void addLegislationReference(SelectableCriterion sc) {
