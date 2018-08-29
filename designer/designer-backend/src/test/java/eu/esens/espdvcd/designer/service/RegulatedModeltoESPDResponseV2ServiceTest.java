@@ -6,23 +6,18 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import eu.esens.espdvcd.builder.BuilderFactory;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
-import eu.esens.espdvcd.designer.deserialiser.RequirementDeserialiserV2;
+import eu.esens.espdvcd.designer.deserialiser.RequirementDeserialiser;
 import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.model.RegulatedESPDResponse;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
-import eu.espd.schema.v1.unqualifieddatatypes_2.SoundType;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
 import java.net.URI;
 import java.util.List;
-import java.util.UUID;
-
-import static org.junit.Assert.*;
 
 public class RegulatedModeltoESPDResponseV2ServiceTest {
 
@@ -39,7 +34,7 @@ public class RegulatedModeltoESPDResponseV2ServiceTest {
         ESPDResponse v2Response = new ObjectMapper()
                 .registerModule(new JavaTimeModule())
                 .registerModule(new SimpleModule()
-                        .addDeserializer(Requirement.class, new RequirementDeserialiserV2()))
+                        .addDeserializer(Requirement.class, new RequirementDeserialiser()))
                 .disable(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE)
                 .readValue(ESPDV2JsonResponse, RegulatedESPDResponse.class);
 

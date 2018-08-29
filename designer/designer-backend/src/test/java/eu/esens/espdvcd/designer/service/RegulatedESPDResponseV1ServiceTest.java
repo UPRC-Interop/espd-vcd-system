@@ -7,6 +7,7 @@ import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDResponse;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.File;
@@ -75,6 +76,7 @@ public class RegulatedESPDResponseV1ServiceTest {
     }
 
     @Test
+    @Ignore
     public void testNullCriterion() throws Exception{
         ESPDRequest request = BuilderFactory.withEDMVersion1().getRegulatedModelBuilder().createESPDRequest();
         request.getFullCriterionList().add(null);
