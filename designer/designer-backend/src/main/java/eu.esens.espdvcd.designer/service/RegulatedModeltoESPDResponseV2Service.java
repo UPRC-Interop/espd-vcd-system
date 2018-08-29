@@ -48,28 +48,29 @@ public class RegulatedModeltoESPDResponseV2Service implements ModeltoESPDService
 
             if (rg.getRequirements().get(0).getResponseDataType().equals(ResponseTypeEnum.INDICATOR) && rg.getRequirementGroups().size() > 0) {
                 IndicatorResponse indicator = (IndicatorResponse) rg.getRequirements().get(0).getResponse();
-
-                rg.getRequirementGroups().forEach(requirementGroup -> {
-                    switch (requirementGroup.getCondition()) {
-                        case "ONTRUE":
-                            if (!indicator.isIndicator()) {
-                                requirementGroup.getRequirements().forEach(rq -> {
-                                    rq.setResponse(null);
-                                });
-                            }
-                            break;
-                        case "ONFALSE":
-                            if (indicator.isIndicator()) {
-                                requirementGroup.getRequirements().forEach(rq -> {
-                                    rq.setResponse(null);
-                                });
-                            }
-                            break;
-                        default:
-                            System.out.println("Ignoring condition " + requirementGroup.getCondition());
-                            break;
-                    }
-                });
+                if (indicator != null) {
+                    rg.getRequirementGroups().forEach(requirementGroup -> {
+                        switch (requirementGroup.getCondition()) {
+                            case "ONTRUE":
+                                if (!indicator.isIndicator()) {
+                                    requirementGroup.getRequirements().forEach(rq -> {
+                                        rq.setResponse(null);
+                                    });
+                                }
+                                break;
+                            case "ONFALSE":
+                                if (indicator.isIndicator()) {
+                                    requirementGroup.getRequirements().forEach(rq -> {
+                                        rq.setResponse(null);
+                                    });
+                                }
+                                break;
+                            default:
+                                System.out.println("Ignoring condition " + requirementGroup.getCondition());
+                                break;
+                        }
+                    });
+                }
             }
             fixResponses(rg.getRequirementGroups());
         }
