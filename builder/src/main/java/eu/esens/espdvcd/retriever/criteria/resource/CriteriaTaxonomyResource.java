@@ -22,7 +22,8 @@ import java.util.stream.Collectors;
  */
 public class CriteriaTaxonomyResource implements CriteriaResource, RequirementsResource {
 
-    private static final String CRITERIA_TAXONOMY_RESOURCE = "/templates/v2_regulated/ESPD-CriteriaTaxonomy-REGULATED-V2.0.2.xlsx";
+    // private static final String CRITERIA_TAXONOMY_RESOURCE = "/templates/v2_regulated/ESPD-CriteriaTaxonomy-REGULATED-V2.0.2.xlsx";
+    private static final String CRITERIA_TAXONOMY_RESOURCE = "/templates/v2_regulated/ESPD-CriteriaTaxonomy-REGULATED-V2.0.2-FIXED.xlsx";
     private final static int nameColumnIndex = 17;
     private final static int descriptionColumnIndex = 18;
     private final static int propertyDataTypeColumnIndex = 21;
