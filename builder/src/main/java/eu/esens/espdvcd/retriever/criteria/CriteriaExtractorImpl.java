@@ -110,6 +110,8 @@ public class CriteriaExtractorImpl implements CriteriaExtractor {
         initCriterionList();
         Set<SelectableCriterion> initialSet = new LinkedHashSet<>();
         initialSet.addAll(criterionList);
+        initialList.forEach(sc -> sc.setSelected(addAsSelected));
+        initialSet.addAll(initialList);
         return new ArrayList<>(initialSet);
     }
 
