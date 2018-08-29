@@ -1683,7 +1683,10 @@ export class DataService {
               if (r.responseDataType === 'AMOUNT') {
                 group[r.uuid + 'currency'] = new FormControl();
               }
-              if (r.responseDataType === 'PERIOD' && this.version === 'v2') {
+
+              // group[r.uuid + 'startDate'] = new FormControl();
+              // group[r.uuid + 'endDate'] = new FormControl();
+              if (r.responseDataType === 'PERIOD' && this.APIService.version === 'v2') {
                 group[r.uuid + 'startDate'] = new FormControl();
                 group[r.uuid + 'endDate'] = new FormControl();
               }
