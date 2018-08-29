@@ -23,18 +23,6 @@ public class RegulatedModeltoESPDResponseV2Service implements ModeltoESPDService
         doc.getEvidenceList().removeIf(e -> e.getEvidenceURL() == null);
         doc.getFullCriterionList().forEach(cr -> {
             fixResponses(cr.getRequirementGroups());
-            if (cr.getID().equals("9b19e869-6c89-4cc4-bd6c-ac9ca8602165")) {
-                cr.getRequirementGroups()
-                        .stream()
-                        .filter(rg -> rg.getID().equals("ecb5127b-9018-4fb8-8327-a6a7a2c73195"))
-                        .findFirst()
-                        .get()
-                        .getRequirementGroups()
-                        .stream()
-                        .filter(requirementGroup -> requirementGroup.getID().equals("59e6f3ef-15cd-4e21-82ac-ea497ccd44e2"))
-                        .findFirst()
-                        .get().getRequirements().forEach(requirement -> requirement.setResponse(null));
-            }
         });
         return BuilderFactory.withEDMVersion2().getDocumentBuilderFor((ESPDResponse) document).getAsInputStream();
     }
@@ -82,7 +70,6 @@ public class RegulatedModeltoESPDResponseV2Service implements ModeltoESPDService
                             break;
                     }
                 });
-
             }
             fixResponses(rg.getRequirementGroups());
         }
