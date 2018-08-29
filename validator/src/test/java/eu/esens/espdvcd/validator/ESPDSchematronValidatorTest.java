@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import java.io.File;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 public class ESPDSchematronValidatorTest {
 
@@ -22,6 +23,7 @@ public class ESPDSchematronValidatorTest {
 
     private File invalidRegulatedResponseV2;
     private File invalidRegulatedResponseV2_12;
+    private File invalidRegulatedResponseV2_31;
 
     @Before
     public void setUp() {
@@ -48,6 +50,9 @@ public class ESPDSchematronValidatorTest {
 
         invalidRegulatedResponseV2_12 = new File(getClass().getClassLoader().getResource("espd-response-v2-12.xml").getFile());
         Assert.assertNotNull(invalidRegulatedResponseV2_12);
+
+        invalidRegulatedResponseV2_31 = new File(getClass().getClassLoader().getResource("espd-response-v2-31.xml").getFile());
+        Assert.assertNotNull(invalidRegulatedResponseV2_31);
     }
 
     @Test
@@ -71,7 +76,7 @@ public class ESPDSchematronValidatorTest {
         ArtefactValidator v4 = Validators.createESPDSchematronValidator(selfContainedResponseV2);
         Assert.assertNotNull(v4);
         printErrorsIfExist(v4);
-        Assert.assertFalse(v4.isValid());
+        Assert.assertTrue(v4.isValid());
 
         ArtefactValidator v5 = Validators.createESPDSchematronValidator(validRegulatedRequestV1);
         Assert.assertNotNull(v5);
@@ -92,6 +97,11 @@ public class ESPDSchematronValidatorTest {
         Assert.assertNotNull(v8);
         printErrorsIfExist(v8);
         Assert.assertFalse(v8.isValid());
+
+        ArtefactValidator v9 = Validators.createESPDSchematronValidator(invalidRegulatedResponseV2_31);
+        Assert.assertNotNull(v9);
+        printErrorsIfExist(v9);
+        Assert.assertFalse(v9.isValid());
     }
 
     private void printErrorsIfExist(ArtefactValidator v) {
@@ -99,13 +109,20 @@ public class ESPDSchematronValidatorTest {
 
             int index = 1;
 
-            // v.getValidationMessages().forEach(re -> System.out.printf("(%s) %s: %s => %s \n", re.getId(), re.getLocation(), re.getTest(), re.getText()));
             for (ValidationResult re : v.getValidationMessages()) {
-                System.out.printf("%-3d: (%s) %s: %s => %s \n", index++, re.getId(), re.getLocation(), re.getTest(), re.getText());
+                System.out.printf("%-3d: [%s] (%s) %s: %s => %s \n", index++, re.getFlag(), re.getId(), re.getLocation(), re.getTest(), re.getText());
             }
         }
 
-        System.out.println("Total number of errors: " + v.getValidationMessages().size());
+        System.out.println("Total number of errors: " + v.getValidationMessages().stream()
+                .filter(vr -> !"warning".equals(vr.getFlag()))
+                .collect(Collectors.toList())
+                .size());
+
+        System.out.println("Total number of warnings: " + v.getValidationMessages().stream()
+                .filter(vr -> "warning".equals(vr.getFlag()))
+                .collect(Collectors.toList())
+                .size());
     }
 
 }

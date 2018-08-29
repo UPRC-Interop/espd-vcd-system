@@ -82,7 +82,7 @@ public class ESPDSchematronValidator implements ArtefactValidator {
      * Validating given file against the specified schematron.
      *
      * @param xmlArtefact The espd request/response artefact provided by the specified file.
-     * @param schPath The schematron file path.
+     * @param schPath     The schematron file path.
      */
     private void validateXMLViaXSLTSchematronFull(File xmlArtefact, String schPath) {
         final SchematronResourceSCH schematron = SchematronResourceSCH.fromClassPath(schPath);
@@ -128,13 +128,19 @@ public class ESPDSchematronValidator implements ArtefactValidator {
      */
     @Override
     public boolean isValid() {
-        return validationMessages.isEmpty();
+
+        boolean errorFound = validationMessages.stream()
+                .filter(r -> !"warning".equals(r.getFlag()))
+                .findFirst()
+                .isPresent();
+
+        return !errorFound;
     }
 
     /**
      * Provides list of validation events.
      *
-     * @return list of events where validation was not successful; empty, if validation was successful
+     * @return list of events where validation was not successful
      */
     @Override
     public List<ValidationResult> getValidationMessages() {
@@ -143,6 +149,8 @@ public class ESPDSchematronValidator implements ArtefactValidator {
 
     /**
      * Provides filtered list of validation events.
+     * <p>
+     * Possible flags are: warning, error and fatal
      *
      * @param flag, for which the list entries are filtered
      * @return filtered list of validation events

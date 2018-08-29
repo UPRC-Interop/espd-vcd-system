@@ -17,7 +17,7 @@ public interface ArtefactValidator {
 
     /**
      * Provides list of validation events.
-     * @return list of events where validation was not successful; empty, if validation was successful
+     * @return list of events where validation was not successful
      */
     List<ValidationResult> getValidationMessages();
 
