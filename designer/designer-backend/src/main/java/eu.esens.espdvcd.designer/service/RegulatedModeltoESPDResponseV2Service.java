@@ -23,6 +23,18 @@ public class RegulatedModeltoESPDResponseV2Service implements ModeltoESPDService
         doc.getEvidenceList().removeIf(e -> e.getEvidenceURL() == null);
         doc.getFullCriterionList().forEach(cr -> {
             fixResponses(cr.getRequirementGroups());
+            if (cr.getID().equals("9b19e869-6c89-4cc4-bd6c-ac9ca8602165")) {
+                cr.getRequirementGroups()
+                        .stream()
+                        .filter(rg -> rg.getID().equals("ecb5127b-9018-4fb8-8327-a6a7a2c73195"))
+                        .findFirst()
+                        .get()
+                        .getRequirementGroups()
+                        .stream()
+                        .filter(requirementGroup -> requirementGroup.getID().equals("59e6f3ef-15cd-4e21-82ac-ea497ccd44e2"))
+                        .findFirst()
+                        .get().getRequirements().forEach(requirement -> requirement.setResponse(null));
+            }
         });
         return BuilderFactory.withEDMVersion2().getDocumentBuilderFor((ESPDResponse) document).getAsInputStream();
     }
@@ -46,37 +58,34 @@ public class RegulatedModeltoESPDResponseV2Service implements ModeltoESPDService
 
         for (RequirementGroup rg : requirementGroupList) {
 
-            if(rg.getRequirements().get(0).getResponseDataType().equals(ResponseTypeEnum.INDICATOR)&&rg.getRequirementGroups().size()>0) {
+            if (rg.getRequirements().get(0).getResponseDataType().equals(ResponseTypeEnum.INDICATOR) && rg.getRequirementGroups().size() > 0) {
                 IndicatorResponse indicator = (IndicatorResponse) rg.getRequirements().get(0).getResponse();
 
                 rg.getRequirementGroups().forEach(requirementGroup -> {
                     switch (requirementGroup.getCondition()) {
                         case "ONTRUE":
-//                        System.out.println("Found ontrue");
-                            if(!indicator.isIndicator()){
-                                rg.getRequirementGroups().get(0).getRequirements().forEach(rq -> {
-
+                            if (!indicator.isIndicator()) {
+                                requirementGroup.getRequirements().forEach(rq -> {
                                     rq.setResponse(null);
                                 });
                             }
                             break;
                         case "ONFALSE":
-//                        System.out.println("Found onfalse");
-                            if(indicator.isIndicator()){
-                                rg.getRequirementGroups().get(0).getRequirements().forEach(rq -> {
+                            if (indicator.isIndicator()) {
+                                requirementGroup.getRequirements().forEach(rq -> {
                                     rq.setResponse(null);
                                 });
                             }
                             break;
                         default:
-                            System.out.println("Ignoring condition "+rg.getCondition());
+                            System.out.println("Ignoring condition " + requirementGroup.getCondition());
                             break;
                     }
                 });
 
             }
-                fixResponses(rg.getRequirementGroups());
-            }
-
+            fixResponses(rg.getRequirementGroups());
         }
+
+    }
 }
