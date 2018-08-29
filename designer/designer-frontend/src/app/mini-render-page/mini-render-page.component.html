@@ -1,0 +1,18 @@
+
+<ng-container *ngIf="exclusionACriteriaForm">
+  <form [formGroup]="exclusionACriteriaForm">
+    <mat-expansion-panel expanded="true" *ngIf="exclusionACriteria">
+
+      <mat-card *ngFor="let cr of exclusionACriteria; let i = index">
+        <div class="exclusionCriteria">
+          <div class="answer">
+            <app-criterion [criterion]="cr" [form]="exclusionACriteriaForm.controls" [indicator]="true"></app-criterion>
+          </div>
+        </div>
+      </mat-card>
+    </mat-expansion-panel>
+
+  </form>
+  <br>
+  <button type="submit" mat-raised-button color="primary" (click)="onMockSubmit()">Submit</button>
+</ng-container>

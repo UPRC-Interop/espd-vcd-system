@@ -63,7 +63,6 @@ export class RequirementComponent implements OnInit, OnChanges {
           this.indicatorChanged.emit(ev);
         });
     } else {
-      // TODO: This is a workaround that could be better written in the future
       this.indicatorChanged.emit(true);
     }
   }
