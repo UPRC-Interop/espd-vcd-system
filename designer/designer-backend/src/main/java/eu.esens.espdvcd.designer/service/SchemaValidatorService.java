@@ -13,11 +13,11 @@ import java.io.FileNotFoundException;
 public class SchemaValidatorService implements ValidatorService {
     @Override
     public ArtefactValidator validateESPDRequest(File request) throws FileNotFoundException, JAXBException, SAXException {
-        return Validators.createESPDRequestSchemaValidator(new FileInputStream(request), ArtefactUtils.findEDMVersion(request));
+        return Validators.createESPDRequestSchemaValidator(request, ArtefactUtils.findEDMVersion(request));
     }
 
     @Override
     public ArtefactValidator validateESPDResponse(File response) throws FileNotFoundException, JAXBException, SAXException {
-        return Validators.createESPDResponseSchemaValidator(new FileInputStream(response), ArtefactUtils.findEDMVersion(response));
+        return Validators.createESPDResponseSchemaValidator(response, ArtefactUtils.findEDMVersion(response));
     }
 }
