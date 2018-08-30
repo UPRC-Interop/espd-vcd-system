@@ -7,13 +7,14 @@ import {Evidence} from '../model/evidence.model';
 import {EvidenceIssuer} from '../model/evidenceIssuer.model';
 import * as moment from 'moment';
 import {DataService} from './data.service';
+import {ApicallService} from './apicall.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FormUtilService {
 
-  constructor(private dataService: DataService) {
+  constructor(private dataService: DataService, private APIService: ApicallService) {
   }
 
 
@@ -27,7 +28,7 @@ export class FormUtilService {
         rg.requirements.forEach(req => {
           if (req != null || req !== undefined) {
             // console.log('requirement uuid ' + req.uuid);
-            console.log(formValues[req.uuid.valueOf()]);
+            // console.log(formValues[req.uuid.valueOf()]);
             req.response = new RequirementResponse();
             if (req.responseDataType === 'INDICATOR') {
               if (formValues[req.uuid.valueOf()] === true) {
@@ -92,43 +93,63 @@ export class FormUtilService {
               if (!evi) {
                 evidenceList.push(evidence);
               }
-              console.log(evidenceList);
+              // console.log(evidenceList);
               // console.log(JSON.stringify(this.dataService.evidenceList));
 
               req.response.uuid = null;
-            } else if (req.responseDataType == 'CODE') {
+            } else if (req.responseDataType === 'CODE') {
               req.response.evidenceURLCode = formValues[req.uuid.valueOf()];
               req.response.uuid = null;
-            } else if (req.responseDataType == 'DATE') {
+            } else if (req.responseDataType === 'DATE') {
               req.response.date = formValues[req.uuid.valueOf()];
-              if (typeof req.response.date !== 'string') {
+              // console.log('CHECKING DATE-----------------------------------------------');
+              // console.log(req.response.date);
+              // console.log(typeof req.response.date);
+              if (typeof req.response.date !== 'string' && req.response.date !== null && req.response.date !== undefined) {
                 const utcDate = this.dataService.toUTCDate(req.response.date);
                 req.response.date = moment(utcDate);
               }
-              // req.response.date.setMinutes( req.response.date.getMinutes() + req.response.date.getTimezoneOffset() );
               req.response.uuid = null;
-            } else if (req.responseDataType == 'PERCENTAGE') {
+            } else if (req.responseDataType === 'PERCENTAGE') {
               req.response.percentage = formValues[req.uuid.valueOf()];
               req.response.uuid = null;
-            } else if (req.responseDataType == 'PERIOD') {
+            } else if (req.responseDataType === 'PERIOD' && this.APIService.version === 'v1') {
               req.response.period = formValues[req.uuid.valueOf()];
               req.response.uuid = null;
-            } else if (req.responseDataType == 'CODE_COUNTRY') {
+            } else if (req.responseDataType === 'PERIOD' && this.APIService.version === 'v2') {
+              // req.response.period = formValues[req.uuid.valueOf()];
+              const startDateid = req.uuid + 'startDate';
+              req.response.startDate = formValues[startDateid.valueOf()];
+              if (typeof req.response.startDate !== 'string' && req.response.startDate !== null) {
+                const utcDate = this.dataService.toUTCDate(req.response.startDate);
+                req.response.startDate = moment(utcDate);
+              }
+              // console.log(req.response.startDate);
+              const endDateid = req.uuid + 'endDate';
+              req.response.endDate = formValues[endDateid.valueOf()];
+              if (typeof req.response.endDate !== 'string' && req.response.endDate !== null) {
+                const utcDate = this.dataService.toUTCDate(req.response.endDate);
+                req.response.endDate = moment(utcDate);
+              }
+              // console.log(req.response.endDate);
+
+              req.response.uuid = null;
+            } else if (req.responseDataType === 'CODE_COUNTRY') {
               req.response.countryCode = formValues[req.uuid.valueOf()];
               req.response.uuid = null;
-            } else if (req.responseDataType == 'AMOUNT') {
+            } else if (req.responseDataType === 'AMOUNT') {
               req.response.amount = formValues[req.uuid.valueOf()];
               const currencyid = req.uuid + 'currency';
-              console.log(formValues[currencyid.valueOf()]);
+              // console.log(formValues[currencyid.valueOf()]);
               req.response.currency = formValues[currencyid.valueOf()];
               req.response.uuid = null;
-            } else if (req.responseDataType == 'QUANTITY_INTEGER') {
+            } else if (req.responseDataType === 'QUANTITY_INTEGER') {
               req.response.quantity = formValues[req.uuid.valueOf()];
               req.response.uuid = null;
-            } else if (req.responseDataType == 'QUANTITY') {
+            } else if (req.responseDataType === 'QUANTITY') {
               req.response.quantity = formValues[req.uuid.valueOf()];
               req.response.uuid = null;
-            } else if (req.responseDataType == 'QUANTITY_YEAR') {
+            } else if (req.responseDataType === 'QUANTITY_YEAR') {
               req.response.year = formValues[req.uuid.valueOf()];
               req.response.uuid = null;
             } else if (req.responseDataType === 'IDENTIFIER') {
@@ -158,7 +179,7 @@ export class FormUtilService {
           if (formValues[rg2.uuid.valueOf()] != undefined) {
             formValues = formValues[rg2.uuid.valueOf()];
           }
-          console.log(formValues);
+          // console.log(formValues);
           // console.log('reqGroup inside curs ' + rg2.uuid);
           this.getFromForm(rg2, cr, form, formValues, evidenceList);
         });
@@ -170,7 +191,7 @@ export class FormUtilService {
     criteria.forEach(cr => {
       let formValues = form.getRawValue();
       formValues = formValues[cr.uuid.valueOf()];
-      console.log(formValues);
+      // console.log(formValues);
 
       // let testFormValues = formValues[cr.uuid.valueOf()];
       // console.log('cr loop: ' + cr.uuid);
@@ -187,8 +208,15 @@ export class FormUtilService {
         }
 
         if (formValues[rg.uuid.valueOf()] == undefined) {
-          // console.log('THIS IS undefined');
+
+          // fix go up a level
+          let testFormValues = null;
+          testFormValues = form.getRawValue();
+          testFormValues = testFormValues[cr.uuid.valueOf()];
           testFormValues = testFormValues[rg.uuid.valueOf()];
+          // fix
+
+          // console.log('THIS IS undefined');
           this.getFromForm(rg, cr, form, testFormValues, evidenceList);
         } else if (formValues[rg.uuid.valueOf()] != undefined) {
           // console.log('THIS IS DEFINED');
@@ -198,6 +226,5 @@ export class FormUtilService {
       });
     });
   }
-
 
 }
