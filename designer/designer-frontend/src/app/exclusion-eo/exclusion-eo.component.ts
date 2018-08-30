@@ -60,7 +60,7 @@ export class ExclusionEoComponent implements OnInit {
               req.response.uuid = null;
             } else if (req.responseDataType === 'EVIDENCE_URL') {
               req.response.evidenceURL = formValues[req.uuid.valueOf()];
-              req.response.id = null;
+              req.response.uuid = null;
             } else if (req.responseDataType === 'EVIDENCE_IDENTIFIER') {
               // req.response.evidenceSuppliedId = formValues[req.uuid.valueOf()];
               req.response.evidenceSuppliedId = req.id;
@@ -164,12 +164,12 @@ export class ExclusionEoComponent implements OnInit {
         let firstRgFormValues = null;
         let firstRgId = rg.uuid;
         firstRgFormValues = formValues;
-        console.log('This is Rg ID out ' + firstRgId);
+        // console.log('This is Rg ID out ' + firstRgId);
         rg.requirementGroups.forEach(rg2 => {
-          console.log('outer reqgroup id ' + rg.uuid);
-          console.log('inner reqgroup id ' + rg2.uuid);
+          // console.log('outer reqgroup id ' + rg.uuid);
+          // console.log('inner reqgroup id ' + rg2.uuid);
           if (rg.uuid == firstRgId) {
-            console.log('Reset to first ReqGroup ');
+            // console.log('Reset to first ReqGroup ');
             formValues = firstRgFormValues;
           }
           // fix
@@ -188,9 +188,9 @@ export class ExclusionEoComponent implements OnInit {
   onExclusionEOSubmit() {
     // console.log(form.value);
     // console.log(this.formA.value);
-    let formValues = this.formA.getRawValue();
-    console.log(formValues);
-    console.log(this.exclusionACriteria);
+    // let formValues = this.formA.getRawValue();
+    // console.log(formValues);
+    // console.log(this.exclusionACriteria);
 
     this.exclusionACriteria.forEach(cr => {
       let formValues = this.formA.getRawValue();
@@ -198,12 +198,12 @@ export class ExclusionEoComponent implements OnInit {
       console.log(formValues);
 
       // let testFormValues = formValues[cr.uuid.valueOf()];
-      console.log('cr loop: ' + cr.uuid);
+      // console.log('cr loop: ' + cr.uuid);
 
       let testFormValues = null;
 
       cr.requirementGroups.forEach(rg => {
-        console.log('first rg loop: ' + rg.uuid);
+        // console.log('first rg loop: ' + rg.uuid);
 
         if (testFormValues == null) {
           testFormValues = this.formA.getRawValue();
@@ -212,11 +212,11 @@ export class ExclusionEoComponent implements OnInit {
         }
 
         if (formValues[rg.uuid.valueOf()] == undefined) {
-          console.log('THIS IS undefined');
+          // console.log('THIS IS undefined');
           testFormValues = testFormValues[rg.uuid.valueOf()];
           this.reqGroupMatch(rg, cr, this.formA, testFormValues);
         } else if (formValues[rg.uuid.valueOf()] != undefined) {
-          console.log('THIS IS DEFINED');
+          // console.log('THIS IS DEFINED');
           formValues = formValues[rg.uuid.valueOf()];
           this.reqGroupMatch(rg, cr, this.formA, formValues);
         }
@@ -226,15 +226,15 @@ export class ExclusionEoComponent implements OnInit {
     this.exclusionBCriteria.forEach(cr => {
       let formValues = this.formB.getRawValue();
       formValues = formValues[cr.uuid.valueOf()];
-      console.log(formValues);
+      // console.log(formValues);
 
       // let testFormValues = formValues[cr.uuid.valueOf()];
-      console.log('cr loop: ' + cr.uuid);
+      // console.log('cr loop: ' + cr.uuid);
 
       let testFormValues = null;
 
       cr.requirementGroups.forEach(rg => {
-        console.log('first rg loop: ' + rg.uuid);
+        // console.log('first rg loop: ' + rg.uuid);
 
         if (testFormValues == null) {
           testFormValues = this.formB.getRawValue();
@@ -243,11 +243,11 @@ export class ExclusionEoComponent implements OnInit {
         }
 
         if (formValues[rg.uuid.valueOf()] == undefined) {
-          console.log('THIS IS undefined');
+          // console.log('THIS IS undefined');
           testFormValues = testFormValues[rg.uuid.valueOf()];
           this.reqGroupMatch(rg, cr, this.formB, testFormValues);
         } else if (formValues[rg.uuid.valueOf()] != undefined) {
-          console.log('THIS IS DEFINED');
+          // console.log('THIS IS DEFINED');
           formValues = formValues[rg.uuid.valueOf()];
           this.reqGroupMatch(rg, cr, this.formB, formValues);
         }
@@ -262,7 +262,7 @@ export class ExclusionEoComponent implements OnInit {
     this.exclusionCCriteria.forEach(cr => {
       let formValues = this.formC.getRawValue();
       formValues = formValues[cr.uuid.valueOf()];
-      console.log(formValues);
+      // console.log(formValues);
 
       // let testFormValues = formValues[cr.uuid.valueOf()];
       console.log('cr loop: ' + cr.uuid);
@@ -279,11 +279,11 @@ export class ExclusionEoComponent implements OnInit {
         }
 
         if (formValues[rg.uuid.valueOf()] == undefined) {
-          console.log('THIS IS undefined');
+          // console.log('THIS IS undefined');
           testFormValues = testFormValues[rg.uuid.valueOf()];
           this.reqGroupMatch(rg, cr, this.formC, testFormValues);
         } else if (formValues[rg.uuid.valueOf()] != undefined) {
-          console.log('THIS IS DEFINED');
+          // console.log('THIS IS DEFINED');
           formValues = formValues[rg.uuid.valueOf()];
           this.reqGroupMatch(rg, cr, this.formC, formValues);
         }
@@ -298,15 +298,15 @@ export class ExclusionEoComponent implements OnInit {
     this.exclusionDCriteria.forEach(cr => {
       let formValues = this.formD.getRawValue();
       formValues = formValues[cr.uuid.valueOf()];
-      console.log(formValues);
+      // console.log(formValues);
 
       // let testFormValues = formValues[cr.uuid.valueOf()];
-      console.log('cr loop: ' + cr.uuid);
+      // console.log('cr loop: ' + cr.uuid);
 
       let testFormValues = null;
 
       cr.requirementGroups.forEach(rg => {
-        console.log('first rg loop: ' + rg.uuid);
+        // console.log('first rg loop: ' + rg.uuid);
 
         if (testFormValues == null) {
           testFormValues = this.formD.getRawValue();
@@ -315,11 +315,11 @@ export class ExclusionEoComponent implements OnInit {
         }
 
         if (formValues[rg.uuid.valueOf()] == undefined) {
-          console.log('THIS IS undefined');
+          // console.log('THIS IS undefined');
           testFormValues = testFormValues[rg.uuid.valueOf()];
           this.reqGroupMatch(rg, cr, this.formD, testFormValues);
         } else if (formValues[rg.uuid.valueOf()] != undefined) {
-          console.log('THIS IS DEFINED');
+          // console.log('THIS IS DEFINED');
           formValues = formValues[rg.uuid.valueOf()];
           this.reqGroupMatch(rg, cr, this.formD, formValues);
         }
