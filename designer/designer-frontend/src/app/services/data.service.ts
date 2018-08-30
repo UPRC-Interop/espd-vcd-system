@@ -1624,7 +1624,8 @@ export class DataService {
             group[r.uuid] = new FormControl(r.response.description ||
               r.response.percentage || r.response.indicator || r.response.evidenceURL ||
               r.response.evidenceURLCode || r.response.countryCode ||
-              r.response.period || r.response.quantity || r.response.year || '');
+              r.response.period || r.response.quantity || r.response.year || r.response.identifier ||
+              r.response.url || '');
 
             if (r.response.date) {
               console.log(r.response.date);
