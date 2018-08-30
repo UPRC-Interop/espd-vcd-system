@@ -3,6 +3,7 @@ package eu.esens.espdvcd.validator;
 import eu.esens.espdvcd.builder.enums.ArtefactType;
 import eu.esens.espdvcd.builder.util.ArtefactUtils;
 import eu.esens.espdvcd.schema.EDMVersion;
+import eu.esens.espdvcd.schema.XSD;
 import eu.esens.espdvcd.validator.schema.ESPDSchemaValidator;
 import eu.esens.espdvcd.validator.schematron.ESPDSchematronValidator;
 import eu.espd.schema.v1.espdrequest_1.ESPDRequestType;
@@ -12,8 +13,7 @@ import eu.espd.schema.v2.pre_award.qualificationapplicationresponse.Qualificatio
 import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBException;
-import java.io.File;
-import java.io.InputStream;
+import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -33,65 +33,79 @@ public class Validators {
 
     /**
      * Factory method that creates an ESPD request schema validator object and
-     * performs the schema validation for the XML provided by the specified
-     * input stream.
+     * performs the schema validation for the XML provided by the specified file.
      *
-     * @param is input stream with XML data
+     * @param espdRequest ESPD request file with XML data
      * @return schema validator object
      */
-    public static ArtefactValidator createESPDRequestSchemaValidator(InputStream is, EDMVersion version) throws SAXException, JAXBException {
-        // FIXME: the path returned by XSD.ESPD_REQUEST.xsdPath() is probably incorrect, hence returning static string
-        //return new ESPDSchemaValidator(is, XSD.ESPD_REQUEST.xsdPath(), ESPDRequestType.class);
+    public static ArtefactValidator createESPDRequestSchemaValidator(File espdRequest, EDMVersion version) throws SAXException, JAXBException {
 
-        switch (version) {
+        ArtefactValidator v = null;
 
-            case V1:
-                //  LOGGER.log(Level.INFO, "Creating ESPD request V1 schematron validator for: " + espdRequest.getName());
-                LOGGER.log(Level.INFO, "Creating ESPD request V1 schema validator...");
-                return new ESPDSchemaValidator(is, "/schema/v1/maindoc/ESPDRequest-1.0.xsd", ESPDRequestType.class);
+        try (InputStream is = new FileInputStream(espdRequest)) {
 
-            case V2:
-                // LOGGER.log(Level.INFO, "Creating ESPD request V2 schematron validator for: "  + espdRequest.getName());
-                LOGGER.log(Level.INFO, "Creating ESPD request V2 schema validator...");
-                return new ESPDSchemaValidator(is, "/schema/v2/maindoc/UBL-QualificationApplicationRequest-2.2-Pre-award.xsd", QualificationApplicationRequestType.class);
+            switch (version) {
 
-            default:
-                LOGGER.log(Level.SEVERE, "Error... Unknown Exchange Data Model (EDM) version");
-                return null;
+                case V1:
+                    LOGGER.log(Level.INFO, "Creating ESPD request V1 schema validator for: " + espdRequest.getName());
+                    v = new ESPDSchemaValidator(is, "/" + XSD.ESPD_REQUEST.xsdPath(), ESPDRequestType.class);
+                    break;
+
+                case V2:
+                    LOGGER.log(Level.INFO, "Creating ESPD request V2 schema validator for: " + espdRequest.getName());
+                    v = new ESPDSchemaValidator(is, "/" + XSD.ESPD_REQUEST_V2.xsdPath(), QualificationApplicationRequestType.class);
+                    break;
+
+                default:
+                    LOGGER.log(Level.SEVERE, "Error... Unknown Exchange Data Model (EDM) version");
+
+            }
+
+        } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, e.getMessage(), e);
         }
+
+        return v;
     }
 
     /**
      * Factory method that creates an ESPD response schema validator object and
-     * performs the schema validation for the XML provided by the specified
-     * input stream.
+     * performs the schema validation for the XML provided by the specified file.
      *
-     * @param is input stream with XML data
+     * @param espdResponse ESPD response file with XML data
      * @return schema validator object
      */
-    public static ArtefactValidator createESPDResponseSchemaValidator(InputStream is, EDMVersion version) throws SAXException, JAXBException {
-        // FIXME: the path returned by XSD.ESPD_REQUEST.xsdPath() is probably incorrect, hence returning static string
-        //return new ESPDSchemaValidator(is, XSD.ESPD_RESPONSE.xsdPath(), ESPDRequestType.class);
+    public static ArtefactValidator createESPDResponseSchemaValidator(File espdResponse, EDMVersion version) throws SAXException, JAXBException {
 
-        switch (version) {
+        ArtefactValidator v = null;
 
-            case V1:
-                //  LOGGER.log(Level.INFO, "Creating ESPD request V1 schematron validator for: " + espdRequest.getName());
-                LOGGER.log(Level.INFO, "Creating ESPD request V1 schema validator...");
-                return new ESPDSchemaValidator(is, "/schema/v1/maindoc/ESPDResponse-1.0.xsd", ESPDResponseType.class);
+        try (InputStream is = new FileInputStream(espdResponse)) {
 
-            case V2:
-                // LOGGER.log(Level.INFO, "Creating ESPD request V2 schematron validator for: "  + espdRequest.getName());
-                LOGGER.log(Level.INFO, "Creating ESPD request V2 schema validator...");
-                return new ESPDSchemaValidator(is, "/schema/v2/maindoc/UBL-QualificationApplicationResponse-2.2-Pre-award.xsd", QualificationApplicationResponseType.class);
+            switch (version) {
 
-            default:
-                LOGGER.log(Level.SEVERE, "Error... Unknown Exchange Data Model (EDM) version");
-                return null;
+                case V1:
+                    LOGGER.log(Level.INFO, "Creating ESPD request V1 schema validator for: " + espdResponse.getName());
+                    v = new ESPDSchemaValidator(is, "/" + XSD.ESPD_RESPONSE.xsdPath(), ESPDResponseType.class);
+                    break;
+
+                case V2:
+                    LOGGER.log(Level.INFO, "Creating ESPD request V2 schema validator for: " + espdResponse.getName());
+                    v = new ESPDSchemaValidator(is, "/" + XSD.ESPD_RESPONSE_V2.xsdPath(), QualificationApplicationResponseType.class);
+                    break;
+
+                default:
+                    LOGGER.log(Level.SEVERE, "Error... Unknown Exchange Data Model (EDM) version");
+
+            }
+
+        } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, e.getMessage(), e);
         }
+
+        return v;
     }
 
-    public static ArtefactValidator createESPDSchemaValidator(InputStream espdArtefact) throws SAXException, JAXBException {
+    public static ArtefactValidator createESPDSchemaValidator(File espdArtefact) throws SAXException, JAXBException {
         ArtefactType type = ArtefactUtils.findArtefactType(espdArtefact);
         EDMVersion version = ArtefactUtils.findEDMVersion(espdArtefact);
 
@@ -104,8 +118,7 @@ public class Validators {
                 return createESPDResponseSchemaValidator(espdArtefact, version);
 
             default:
-                // LOGGER.log(Level.SEVERE, "Error... Unknown artefact type (neither request nor response) for: " + espdArtefact.getName());
-                LOGGER.log(Level.SEVERE, "Error... Unknown artefact type (neither request nor response)");
+                LOGGER.log(Level.SEVERE, "Error... Unknown artefact type (neither request nor response) for: " + espdArtefact.getName());
                 return null;
 
         }
@@ -182,10 +195,10 @@ public class Validators {
 
     /**
      * Factory method that creates an ESPD artefact request schematron
-     * validator object for the XML provided by the specified input stream
+     * validator object for the XML provided by the specified file
      * according to the {@link EDMVersion}.
      *
-     * @param espdRequest ESPD request input stream with XML data
+     * @param espdRequest ESPD request file with XML data
      * @return schematron validator object
      */
     public static ArtefactValidator createESPDRequestSchematronValidator(File espdRequest, EDMVersion version) {
@@ -225,10 +238,10 @@ public class Validators {
 
     /**
      * Factory method that creates an ESPD artefact response schematron
-     * validator object for the XML provided by the specified input stream
+     * validator object for the XML provided by the specified file
      * according to the {@link EDMVersion}.
      *
-     * @param espdResponse ESPD response input stream with XML data
+     * @param espdResponse ESPD response file with XML data
      * @return schematron validator object
      */
     public static ArtefactValidator createESPDResponseSchematronValidator(File espdResponse, EDMVersion version) {
@@ -271,10 +284,10 @@ public class Validators {
 
     /**
      * Factory method that creates an ESPD artefact (request or response) schematron
-     * validator object for the XML provided by the specified input stream
+     * validator object for the XML provided by the specified file
      * according to the {@link EDMVersion}.
      *
-     * @param espdArtefact ESPD artefact (request or response) input stream with XML data
+     * @param espdArtefact ESPD artefact (request or response) file with XML data
      * @return schematron validator object
      */
     public static ArtefactValidator createESPDSchematronValidator(File espdArtefact) {
