@@ -17,6 +17,8 @@ public class ESPDSchemaValidatorTest {
     InputStream isResValid;
     InputStream isResInvalid;
 
+    private InputStream invalidRegulatedResponseV2_46;
+
     @Before
     public void setUp() {
         //isReqValid = BuilderESPDTest.class.getResourceAsStream("/espd-request.xml");
@@ -30,6 +32,9 @@ public class ESPDSchemaValidatorTest {
         // isResValid = ESPDSchemaValidatorTest.class.getResourceAsStream("/espd-response.xml");
         isResValid = ESPDSchemaValidatorTest.class.getResourceAsStream("/ESPDResponse_DA_Test.xml");
         Assert.assertNotNull(isResValid);
+
+        invalidRegulatedResponseV2_46 = ESPDSchemaValidatorTest.class.getResourceAsStream("/espd-response-v2-46.xml");
+        Assert.assertNotNull(invalidRegulatedResponseV2_46);
     }
 
     @Test
@@ -89,6 +94,20 @@ public class ESPDSchemaValidatorTest {
         ArtefactValidator validator = Validators.createESPDResponseSchemaValidator(isReqValid, EDMVersion.V1);
 
         System.out.println("checkESPDResponseValidationForESPDRequest events:");
+        for (ValidationResult event: validator.getValidationMessages()) {
+            System.out.println(event);
+        }
+
+        Assert.assertFalse(validator.isValid());
+        Assert.assertTrue(validator.getValidationMessages().size() > 0);
+    }
+
+    @Test
+    public void testCreateESPDSchemaValidator() throws Exception {
+
+        ArtefactValidator validator = Validators.createESPDSchemaValidator(invalidRegulatedResponseV2_46);
+
+        System.out.println("testCreateESPDSchemaValidator events:");
         for (ValidationResult event: validator.getValidationMessages()) {
             System.out.println(event);
         }
