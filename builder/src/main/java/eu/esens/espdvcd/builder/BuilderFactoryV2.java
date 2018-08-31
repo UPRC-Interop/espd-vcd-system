@@ -14,7 +14,7 @@ public class BuilderFactoryV2 {
      *
      * @return an instance of the {@link RegulatedModelBuilderV2}
      */
-    public RegulatedModelBuilderV2 getRegulatedModelBuilder() {
+    public RegulatedModelBuilderV2 createRegulatedModelBuilder() {
         return new RegulatedModelBuilderV2();
     }
 
@@ -25,7 +25,7 @@ public class BuilderFactoryV2 {
      * @param req an {@link ESPDRequest} implementing class or one of its subclasses
      * @return an instance of the {@link XMLDocumentBuilderV2}
      */
-    public XMLDocumentBuilderV2 getDocumentBuilderFor(ESPDRequest req) {
+    public XMLDocumentBuilderV2 createDocumentBuilderFor(ESPDRequest req) {
         return new XMLDocumentBuilderV2(req);
     }
 

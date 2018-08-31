@@ -1,17 +1,15 @@
 package eu.esens.espdvcd.builder;
 
 /**
- * Factory class that can be used to create the available Builders both for the
- * domain model and XML Document model.
+ * Factory class that can be used to create the available Builder
+ * Factories for both exchange data model (EDM) versions.
  *
- * @since 1.0
+ * @since 2.0.2
  */
-public abstract class BuilderFactory {
+public class BuilderFactory {
 
-    public static BuilderFactoryV1 withEDMVersion1() {
-        return new BuilderFactoryV1();
-    }
+    public static final BuilderFactoryV1 EDM_V1 = new BuilderFactoryV1();
 
-    public static BuilderFactoryV2 withEDMVersion2() { return new BuilderFactoryV2(); }
+    public static final BuilderFactoryV2 EDM_V2 = new BuilderFactoryV2();
 
 }
