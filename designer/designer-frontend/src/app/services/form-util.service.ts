@@ -138,11 +138,17 @@ export class FormUtilService {
               req.response.countryCode = formValues[req.uuid.valueOf()];
               req.response.uuid = null;
             } else if (req.responseDataType === 'AMOUNT') {
-              req.response.amount = formValues[req.uuid.valueOf()];
               const currencyid = req.uuid + 'currency';
-              // console.log(formValues[currencyid.valueOf()]);
-              req.response.currency = formValues[currencyid.valueOf()];
-              req.response.uuid = null;
+
+              // AMOUNT quickfix
+              if (formValues[req.uuid.valueOf()] === '' && formValues[currencyid.valueOf()] === null) {
+                req.response = null;
+              } else {
+                req.response.amount = formValues[req.uuid.valueOf()];
+                // console.log(formValues[currencyid.valueOf()]);
+                req.response.currency = formValues[currencyid.valueOf()];
+                req.response.uuid = null;
+              }
             } else if (req.responseDataType === 'QUANTITY_INTEGER') {
               req.response.quantity = formValues[req.uuid.valueOf()];
               req.response.uuid = null;
