@@ -2,18 +2,18 @@
 <!--
   Library:           UBL Pre-award Development Test Version csd02wd01pa06
   Release Date:      04 September 2017
-  Module:            UBL-xmldsig-core-edm-2.2.xsd
+  Module:            UBL-xmldsig-core-schema-2.2.xsd
   Generated on:      2017-08-15 14:20(UTC)
 
   This is a copy of
   http://www.w3.org/TR/2008/REC-xmldsig-core-20080610/xmldsig-core-schema.xsd
   modified only to remove the DOCTYPE declaration that has no impact on the
-  XDM model of the XML instance of this edm fragment:
+  XDM model of the XML instance of this schema fragment:
 
-<!DOCTYPE edm
+<!DOCTYPE schema
   PUBLIC "-//W3C//DTD XMLSchema 200102//EN" "http://www.w3.org/2001/XMLSchema.dtd"
  [
-   <!ATTLIST edm
+   <!ATTLIST schema
      xmlns:ds CDATA #FIXED "http://www.w3.org/2000/09/xmldsig#">
    <!ENTITY dsig 'http://www.w3.org/2000/09/xmldsig#'>
    <!ENTITY % p ''>
