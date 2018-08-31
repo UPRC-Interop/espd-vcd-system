@@ -1,7 +1,7 @@
 include ':builder',
         ':codelists',
         ':model',
-        ':schema',
+        ':edm',
         ':designer',
         ':validator',
         'designer:designer-backend'

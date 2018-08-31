@@ -15,13 +15,13 @@ import java.io.InputStream;
 //    public InputStream CreateXMLStreamFromModel(E document) throws ValidationException {
 //        //Do validation
 //
-//        return BuilderFactory.withEDMVersion1().getDocumentBuilderFor(document).getAsInputStream();
+//        return BuilderFactory.withEDMVersion1().createDocumentBuilderFor(document).getAsInputStream();
 //    }
 //
 //    @Override
 //    public String CreateXMLStringFromModel(E document) throws ValidationException {
 //        //Do validation
 //
-//        return BuilderFactory.withEDMVersion1().getDocumentBuilderFor(document).getAsString();
+//        return BuilderFactory.withEDMVersion1().createDocumentBuilderFor(document).getAsString();
 //    }
 //}

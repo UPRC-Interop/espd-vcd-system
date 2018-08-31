@@ -16,12 +16,12 @@ public class RegulatedModeltoESPDRequestV2Service implements ModeltoESPDService 
 
     @Override
     public InputStream CreateXMLStreamFromModel(Object document) {
-        return BuilderFactory.withEDMVersion2().getDocumentBuilderFor((ESPDRequest) document).getAsInputStream();
+        return BuilderFactory.EDM_V2.createDocumentBuilderFor((ESPDRequest) document).getAsInputStream();
     }
 
     @Override
     public String CreateXMLStringFromModel(Object document) {
-        return BuilderFactory.withEDMVersion2().getDocumentBuilderFor((ESPDRequest) document).getAsString();
+        return BuilderFactory.EDM_V2.createDocumentBuilderFor((ESPDRequest) document).getAsString();
     }
 
     @Override

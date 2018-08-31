@@ -8,7 +8,7 @@
     document will do, such as providing the stylesheet itself as the input).
 
     The end result of running this synthesized stylesheet with no or any input 
-    is a Schematron schema expressing the constraints found in the CVA file
+    is a Schematron edm expressing the constraints found in the CVA file
     that was input to the creation this stylesheet.  Any changes to those
     inputs will require this stylesheet to be recreated.
   -->

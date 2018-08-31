@@ -20,8 +20,8 @@ import java.util.logging.Logger;
 /**
  * The Validators is a Factory class that provides static methods for
  * creating different kinds of validator:<br>
- * - ESPD request schema validator<br>
- * - ESPD response schema validator<br>
+ * - ESPD request edm validator<br>
+ * - ESPD response edm validator<br>
  * - ESPD request schematron validator<br>
  * - ESPD response schematron validator<br>
  * <p>
@@ -32,11 +32,11 @@ public class Validators {
     private static final Logger LOGGER = Logger.getLogger(Validators.class.getName());
 
     /**
-     * Factory method that creates an ESPD request schema validator object and
-     * performs the schema validation for the XML provided by the specified file.
+     * Factory method that creates an ESPD request edm validator object and
+     * performs the edm validation for the XML provided by the specified file.
      *
      * @param espdRequest ESPD request file with XML data
-     * @return schema validator object
+     * @return edm validator object
      */
     public static ArtefactValidator createESPDRequestSchemaValidator(File espdRequest, EDMVersion version) throws SAXException, JAXBException {
 
@@ -47,12 +47,12 @@ public class Validators {
             switch (version) {
 
                 case V1:
-                    LOGGER.log(Level.INFO, "Creating ESPD request V1 schema validator for: " + espdRequest.getName());
+                    LOGGER.log(Level.INFO, "Creating ESPD request V1 edm validator for: " + espdRequest.getName());
                     v = new ESPDSchemaValidator(is, "/" + XSD.ESPD_REQUEST.xsdPath(), ESPDRequestType.class);
                     break;
 
                 case V2:
-                    LOGGER.log(Level.INFO, "Creating ESPD request V2 schema validator for: " + espdRequest.getName());
+                    LOGGER.log(Level.INFO, "Creating ESPD request V2 edm validator for: " + espdRequest.getName());
                     v = new ESPDSchemaValidator(is, "/" + XSD.ESPD_REQUEST_V2.xsdPath(), QualificationApplicationRequestType.class);
                     break;
 
@@ -69,11 +69,11 @@ public class Validators {
     }
 
     /**
-     * Factory method that creates an ESPD response schema validator object and
-     * performs the schema validation for the XML provided by the specified file.
+     * Factory method that creates an ESPD response edm validator object and
+     * performs the edm validation for the XML provided by the specified file.
      *
      * @param espdResponse ESPD response file with XML data
-     * @return schema validator object
+     * @return edm validator object
      */
     public static ArtefactValidator createESPDResponseSchemaValidator(File espdResponse, EDMVersion version) throws SAXException, JAXBException {
 
@@ -84,12 +84,12 @@ public class Validators {
             switch (version) {
 
                 case V1:
-                    LOGGER.log(Level.INFO, "Creating ESPD request V1 schema validator for: " + espdResponse.getName());
+                    LOGGER.log(Level.INFO, "Creating ESPD request V1 edm validator for: " + espdResponse.getName());
                     v = new ESPDSchemaValidator(is, "/" + XSD.ESPD_RESPONSE.xsdPath(), ESPDResponseType.class);
                     break;
 
                 case V2:
-                    LOGGER.log(Level.INFO, "Creating ESPD request V2 schema validator for: " + espdResponse.getName());
+                    LOGGER.log(Level.INFO, "Creating ESPD request V2 edm validator for: " + espdResponse.getName());
                     v = new ESPDSchemaValidator(is, "/" + XSD.ESPD_RESPONSE_V2.xsdPath(), QualificationApplicationResponseType.class);
                     break;
 

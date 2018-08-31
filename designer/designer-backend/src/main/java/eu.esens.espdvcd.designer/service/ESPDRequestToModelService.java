@@ -54,10 +54,10 @@ public class ESPDRequestToModelService implements ESPDtoModelService {
         ESPDRequest request = null;
         switch (artefactVersion) {
             case V1:
-                request = BuilderFactory.withEDMVersion1().getRegulatedModelBuilder().importFrom(is).createESPDResponse();
+                request = BuilderFactory.EDM_V1.createRegulatedModelBuilder().importFrom(is).createESPDResponse();
                 break;
             case V2:
-                request = BuilderFactory.withEDMVersion2().getRegulatedModelBuilder().importFrom(is).createESPDResponse();
+                request = BuilderFactory.EDM_V2.createRegulatedModelBuilder().importFrom(is).createESPDResponse();
                 break;
         }
         request.setCriterionList(criteriaService.getUnselectedCriteria(request.getFullCriterionList()));

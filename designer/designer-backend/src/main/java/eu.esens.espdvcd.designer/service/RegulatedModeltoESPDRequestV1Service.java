@@ -27,7 +27,7 @@ public class RegulatedModeltoESPDRequestV1Service implements ModeltoESPDService 
             }
         }
 
-        return BuilderFactory.withEDMVersion1().getDocumentBuilderFor((ESPDRequest) document).getAsInputStream();
+        return BuilderFactory.EDM_V1.createDocumentBuilderFor((ESPDRequest) document).getAsInputStream();
     }
 
     @Override
@@ -40,7 +40,7 @@ public class RegulatedModeltoESPDRequestV1Service implements ModeltoESPDService 
             }
         }
 
-        return BuilderFactory.withEDMVersion1().getDocumentBuilderFor((ESPDRequest) document).getAsString();
+        return BuilderFactory.EDM_V1.createDocumentBuilderFor((ESPDRequest) document).getAsString();
     }
 
     @Override

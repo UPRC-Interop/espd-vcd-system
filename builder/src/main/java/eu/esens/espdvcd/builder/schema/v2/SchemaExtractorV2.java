@@ -16,7 +16,7 @@ public interface SchemaExtractorV2 {
     /**
      * TenderingCriterionPropertyType replaces
      * {@link eu.espd.schema.v1.ccv_commonaggregatecomponents_1.RequirementType}
-     * in schema version 2.0.x
+     * in edm version 2.0.x
      */
     TenderingCriterionPropertyType extractTenderingCriterionPropertyType(Requirement rq);
 
@@ -67,7 +67,7 @@ public interface SchemaExtractorV2 {
         return lt;
     }
 
-    // This is RequirementGroup equivalent in schema version 2.0.x
+    // This is RequirementGroup equivalent in edm version 2.0.x
     default TenderingCriterionPropertyGroupType extractTenderingCriterionPropertyGroupType(RequirementGroup rg) {
 
         TenderingCriterionPropertyGroupType rgType = new TenderingCriterionPropertyGroupType();
@@ -76,7 +76,7 @@ public interface SchemaExtractorV2 {
         rgType.getSubsidiaryTenderingCriterionPropertyGroup().addAll(rg.getRequirementGroups().stream()
                 .map(rg1 -> extractTenderingCriterionPropertyGroupType(rg1))
                 .collect(Collectors.toList()));
-        // This is Requirement equivalent in schema version 2.0.x
+        // This is Requirement equivalent in edm version 2.0.x
         rgType.getTenderingCriterionProperty().addAll(rg.getRequirements().stream()
                 .map(r1 -> extractTenderingCriterionPropertyType(r1))
                 .collect(Collectors.toList()));

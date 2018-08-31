@@ -1,0 +1,50 @@
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "gradle.plugin.org.openrepose:gradle-jaxb-plugin:2.2.3"
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+apply plugin: 'org.openrepose.gradle.plugins.jaxb'
+
+dependencies {
+    jaxb "com.sun.xml.bind:jaxb-core:${jaxb_impl_version}"
+    jaxb "com.sun.xml.bind:jaxb-xjc:${jaxb_impl_version}"
+    jaxb "com.sun.xml.bind:jaxb-impl:${jaxb_impl_version}"
+    jaxb "javax.xml.bind:jaxb-api:${jaxb_impl_version}"
+    
+    compile group: 'com.googlecode.jaxb-namespaceprefixmapper-interfaces', name: 'JAXBNamespacePrefixMapper', version: '2.2.4'
+}
+
+jaxb {
+    // System.setProperty('javax.xml.accessExternalSchema', 'all')
+    
+    
+    
+    // espd edm v 1.0.2
+    bindingsDir = "${project.rootDir}/src/main/resources/edm/bindings"
+    xsdDir = "${project.projectDir}/src/main/resources/edm/v1"
+    bindings = ["binding_espdedm_v1.xjb"]
+    
+    println "${bindingsDir}"
+    
+    xjc {
+        // taskClassname = "com.sun.tools.xjc.XJC2Task"
+        destinationDir = "${project.buildDir}/generated-sources/xjc"
+        args = ["-verbose"]
+    }
+        
+}
+
+compileJava.dependsOn xjc
+

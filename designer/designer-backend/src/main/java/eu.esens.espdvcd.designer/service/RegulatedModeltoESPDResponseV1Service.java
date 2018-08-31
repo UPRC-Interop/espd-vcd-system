@@ -24,7 +24,7 @@ public class RegulatedModeltoESPDResponseV1Service implements ModeltoESPDService
                 throw new ValidationException("Null criterions are not supported.");
             }
         }
-        return BuilderFactory.withEDMVersion1().getDocumentBuilderFor((ESPDResponse) document).getAsInputStream();
+        return BuilderFactory.EDM_V1.createDocumentBuilderFor((ESPDResponse) document).getAsInputStream();
     }
 
     @Override
@@ -37,7 +37,7 @@ public class RegulatedModeltoESPDResponseV1Service implements ModeltoESPDService
             }
         }
 
-        return BuilderFactory.withEDMVersion1().getDocumentBuilderFor(response).getAsString();
+        return BuilderFactory.EDM_V1.createDocumentBuilderFor(response).getAsString();
     }
 
     @Override

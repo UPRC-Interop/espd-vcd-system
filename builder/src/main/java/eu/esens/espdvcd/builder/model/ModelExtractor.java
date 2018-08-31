@@ -311,8 +311,8 @@ public interface ModelExtractor {
 
         try {
             // return the default service provider details
-            return BuilderFactory.withEDMVersion1()
-                    .getRegulatedModelBuilder()
+            return BuilderFactory.EDM_V1
+                    .createRegulatedModelBuilder()
                     .createESPDRequest()
                     .getServiceProviderDetails();
         } catch (BuilderException e) {
@@ -324,8 +324,8 @@ public interface ModelExtractor {
 
     default ServiceProviderDetails extractServiceProviderDetails(List<eu.espd.schema.v2.pre_award.commonaggregate.ContractingPartyType> sppt) {
         try {
-            return BuilderFactory.withEDMVersion2()
-                    .getRegulatedModelBuilder()
+            return BuilderFactory.EDM_V2
+                    .createRegulatedModelBuilder()
                     .createESPDRequest()
                     .getServiceProviderDetails();
         } catch (BuilderException e) {

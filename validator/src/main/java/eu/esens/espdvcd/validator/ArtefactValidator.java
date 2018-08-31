@@ -3,7 +3,7 @@ package eu.esens.espdvcd.validator;
 import java.util.List;
 
 /**
- * Generic schema validator interface.
+ * Generic edm validator interface.
  *
  * Created by Ulf Lotzmann on 11/05/2016.
  */

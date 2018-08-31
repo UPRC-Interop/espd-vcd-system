@@ -1,5 +1,5 @@
 dependencies {
-    compile project(':schema')
+    compile project(':edm')
 	compile project(':builder')
     compile group: 'com.helger', name: 'ph-schematron', version: '5.0.1'
 }

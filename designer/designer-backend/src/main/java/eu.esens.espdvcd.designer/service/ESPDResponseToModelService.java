@@ -53,10 +53,10 @@ public class ESPDResponseToModelService implements ESPDtoModelService {
         ESPDResponse response = null;
         switch (artefactVersion) {
             case V1:
-                response = BuilderFactory.withEDMVersion1().getRegulatedModelBuilder().importFrom(is).createESPDResponse();
+                response = BuilderFactory.EDM_V1.createRegulatedModelBuilder().importFrom(is).createESPDResponse();
                 break;
             case V2:
-                response = BuilderFactory.withEDMVersion2().getRegulatedModelBuilder().importFrom(is).createESPDResponse();
+                response = BuilderFactory.EDM_V2.createRegulatedModelBuilder().importFrom(is).createESPDResponse();
                 break;
         }
         counter = 0;

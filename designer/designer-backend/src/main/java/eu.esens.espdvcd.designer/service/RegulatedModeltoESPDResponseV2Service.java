@@ -24,7 +24,7 @@ public class RegulatedModeltoESPDResponseV2Service implements ModeltoESPDService
         doc.getFullCriterionList().forEach(cr -> {
             fixResponses(cr.getRequirementGroups());
         });
-        return BuilderFactory.withEDMVersion2().getDocumentBuilderFor((ESPDResponse) document).getAsInputStream();
+        return BuilderFactory.EDM_V2.createDocumentBuilderFor((ESPDResponse) document).getAsInputStream();
     }
 
     @Override
@@ -34,7 +34,7 @@ public class RegulatedModeltoESPDResponseV2Service implements ModeltoESPDService
         doc.getFullCriterionList().forEach(cr -> {
             fixResponses(cr.getRequirementGroups());
         });
-        return BuilderFactory.withEDMVersion2().getDocumentBuilderFor((ESPDResponse) document).getAsString();
+        return BuilderFactory.EDM_V2.createDocumentBuilderFor((ESPDResponse) document).getAsString();
     }
 
     @Override
