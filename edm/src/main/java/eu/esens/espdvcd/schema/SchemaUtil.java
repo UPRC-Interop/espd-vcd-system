@@ -1,7 +1,7 @@
 package eu.esens.espdvcd.schema;
 
-//import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
-//import grow.names.specification.ubl.schema.xsd.espdresponse_1.ESPDResponseType;
+//import grow.names.specification.ubl.edm.xsd.espdrequest_1.ESPDRequestType;
+//import grow.names.specification.ubl.edm.xsd.espdresponse_1.ESPDResponseType;
 //
 //import test.x.ubl.pre_award.qualificationapplicationrequest.QualificationApplicationRequestType;
 //import test.x.ubl.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
@@ -58,7 +58,7 @@ public class SchemaUtil {
                     marshaller = JCV2.createMarshaller();
                     break;
                 default:
-                    throw new SchemaException("Error... Unknown schema version.");
+                    throw new SchemaException("Error... Unknown edm version.");
             }
 
             marshaller.setProperty("com.sun.xml.bind.namespacePrefixMapper", new ESPDPrefixMapper());
@@ -90,7 +90,7 @@ public class SchemaUtil {
                     unmarshaller = JCV2.createUnmarshaller();
                     break;
                 default:
-                    throw new SchemaException("Error... Unknown schema version.");
+                    throw new SchemaException("Error... Unknown edm version.");
             }
 
         } catch (SchemaException e) {

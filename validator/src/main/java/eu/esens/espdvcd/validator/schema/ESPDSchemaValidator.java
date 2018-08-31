@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * ESPD schema validator.
+ * ESPD edm validator.
  * <p>
  * Created by Ulf Lotzmann on 03/05/2016.
  */
@@ -34,12 +34,12 @@ public class ESPDSchemaValidator implements ArtefactValidator {
         this.xsdPath = xsdPath;
         this.jaxbClass = jaxbClass;
 
-        // initialise schema from the specified xsd
+        // initialise edm from the specified xsd
         SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
         URL xsdURL = XSD.class.getResource(xsdPath);
         Schema schema = sf.newSchema(xsdURL);
 
-        // validate input stream against schema
+        // validate input stream against edm
         validateXML(is, schema);
     }
 
@@ -48,7 +48,7 @@ public class ESPDSchemaValidator implements ArtefactValidator {
         // creating unmarshaller
         Unmarshaller unmarshaller = SchemaUtil.getUnmarshaller(EDMVersion.V1);
 
-        // setting schema
+        // setting edm
         unmarshaller.setSchema(schema);
         unmarshaller.setEventHandler(validationEvent -> {
             validationMessages.add(new ValidationResult.Builder(String.valueOf(validationMessages.size()),
@@ -70,7 +70,7 @@ public class ESPDSchemaValidator implements ArtefactValidator {
             }
         });*/
 
-        // validate the given input stream against the specified schema
+        // validate the given input stream against the specified edm
         try {
             unmarshaller.unmarshal(is);
         } catch (Exception e) {

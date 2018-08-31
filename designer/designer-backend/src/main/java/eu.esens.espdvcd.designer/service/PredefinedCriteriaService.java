@@ -37,7 +37,7 @@ public class PredefinedCriteriaService implements CriteriaService {
 //                predefinedExtractor = b.build();
 //                break;
 //            default:
-//                throw new IllegalArgumentException("You need to specify a schema version to create a criteria service.");
+//                throw new IllegalArgumentException("You need to specify a edm version to create a criteria service.");
 //        }
     }
 

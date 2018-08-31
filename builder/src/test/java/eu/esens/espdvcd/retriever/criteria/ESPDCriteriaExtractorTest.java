@@ -1,16 +1,16 @@
 package eu.esens.espdvcd.retriever.criteria;
 
 //import eu.esens.espdvcd.builder.model.ModelFactory;
-//import eu.esens.espdvcd.builder.schema.SchemaFactory;
+//import eu.esens.espdvcd.builder.edm.SchemaFactory;
 //import eu.esens.espdvcd.model.ESPDRequest;
 //import eu.esens.espdvcd.model.requirement.RequirementGroup;
-//import eu.esens.espdvcd.schema.EDMVersion;
-//import eu.espd.schema.v1.espdrequest_1.ESPDRequestType;
+//import eu.esens.espdvcd.edm.EDMVersion;
+//import eu.espd.edm.v1.espdrequest_1.ESPDRequestType;
 //import org.junit.Before;
 //import org.junit.Test;
 //
 //import javax.xml.bind.JAXB;
-////import grow.names.specification.ubl.schema.xsd.espdrequest_1.ESPDRequestType;
+////import grow.names.specification.ubl.edm.xsd.espdrequest_1.ESPDRequestType;
 //
 //public class ESPDCriteriaExtractorTest {
 //

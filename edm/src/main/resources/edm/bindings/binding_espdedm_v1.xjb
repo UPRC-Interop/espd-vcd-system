@@ -19,7 +19,7 @@
 
     <!--
         
-        This file bindings are for schema version 1.0.2
+        This file bindings are for edm version 1.0.2
     
     -->
               
@@ -171,7 +171,7 @@
         </jxb:schemaBindings>
     </jxb:bindings>
     
-    <!-- UBL-xmldsig-core-schema-2.1 -->
+    <!-- UBL-xmldsig-core-edm-2.1 -->
     <jxb:bindings schemaLocation="../v1/common/UBL-xmldsig-core-schema-2.1.xsd" node="/xs:schema">
         <jxb:schemaBindings>
             <jxb:package name="eu.espd.schema.v1.xmldsig_core_schema"/>

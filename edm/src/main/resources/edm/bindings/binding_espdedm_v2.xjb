@@ -19,7 +19,7 @@
 
     <!--
         
-        This file bindings are for schema version 2.0.0
+        This file bindings are for edm version 2.0.0
     
     -->
               
@@ -132,21 +132,21 @@
         </jxb:schemaBindings>
     </jxb:bindings>
     
-    <!-- UBL-xmldsig1-schema-2.2 -->
+    <!-- UBL-xmldsig1-edm-2.2 -->
     <jxb:bindings schemaLocation="../v2/common/UBL-xmldsig1-schema-2.2.xsd" node="/xs:schema">
         <jxb:schemaBindings>
             <jxb:package name="eu.espd.schema.v2.xmldsig1"/>
         </jxb:schemaBindings>
     </jxb:bindings>
     
-    <!-- UBL-xmldsig11-schema-2.2 -->
+    <!-- UBL-xmldsig11-edm-2.2 -->
     <jxb:bindings schemaLocation="../v2/common/UBL-xmldsig11-schema-2.2.xsd" node="/xs:schema">
         <jxb:schemaBindings>
             <jxb:package name="eu.espd.schema.v2.xmldsig11"/>
         </jxb:schemaBindings>
     </jxb:bindings>
     
-    <!-- UBL-xmldsig-core-schema-2.2 -->
+    <!-- UBL-xmldsig-core-edm-2.2 -->
         
 </jxb:bindings>
 

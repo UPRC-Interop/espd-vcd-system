@@ -3,7 +3,7 @@ package eu.esens.espdvcd.retriever.criteria;
 //import eu.esens.espdvcd.model.LegislationReference;
 //import eu.esens.espdvcd.model.SelectableCriterion;
 //import eu.esens.espdvcd.retriever.exception.RetrieverException;
-//import eu.esens.espdvcd.schema.EDMVersion;
+//import eu.esens.espdvcd.edm.EDMVersion;
 //import org.junit.Before;
 //import org.junit.Ignore;
 //import org.junit.Test;

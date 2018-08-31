@@ -24,7 +24,7 @@ public interface Requirement extends Serializable {
     void setUUID(String UUID);
 
     /**
-     * In schema version 2 this is mapped to: cbc:ValueDataTypeCode
+     * In edm version 2 this is mapped to: cbc:ValueDataTypeCode
      *
      * @return
      */

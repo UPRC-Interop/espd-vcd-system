@@ -227,7 +227,7 @@ public abstract class RegulatedModelBuilder implements ModelBuilder {
 
         try (InputStream bis = ArtefactUtils.getBufferedInputStream(xmlESPD)) {
             // Check and read the file in the JAXB Object
-            // but first identify the artefact schema version
+            // but first identify the artefact edm version
             switch (ArtefactUtils.findEDMVersion(xmlESPD)) {
                 case V1:
                     LOGGER.log(Level.INFO, "v1 artefact has been imported...");
@@ -265,7 +265,7 @@ public abstract class RegulatedModelBuilder implements ModelBuilder {
 
         try (InputStream bis = ArtefactUtils.getBufferedInputStream(xmlESPDRes)) {
             // Check and read the file in the JAXB Object
-            // but first identify the artefact schema version
+            // but first identify the artefact edm version
             switch (ArtefactUtils.findEDMVersion(xmlESPDRes)) {
                 case V1:
                     LOGGER.log(Level.INFO, "v1 artefact has been imported...");

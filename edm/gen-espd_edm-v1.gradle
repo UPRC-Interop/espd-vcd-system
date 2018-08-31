@@ -32,8 +32,8 @@ jaxb {
     
     
     // espd edm v 1.0.2
-    bindingsDir = "${project.rootDir}/src/main/resources/schema/bindings"
-    xsdDir = "${project.projectDir}/src/main/resources/schema/v1"
+    bindingsDir = "${project.rootDir}/src/main/resources/edm/bindings"
+    xsdDir = "${project.projectDir}/src/main/resources/edm/v1"
     bindings = ["binding_espdedm_v1.xjb"]
     
     println "${bindingsDir}"

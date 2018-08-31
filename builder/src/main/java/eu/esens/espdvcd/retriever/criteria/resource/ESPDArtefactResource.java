@@ -44,7 +44,7 @@ public class ESPDArtefactResource implements CriteriaResource, LegislationResour
                         .forEach(this::addToCriterionMap);
                 break;
             default:
-                throw new IllegalArgumentException("Error... Invalid schema version value.");
+                throw new IllegalArgumentException("Error... Invalid edm version value.");
         }
 
     }
