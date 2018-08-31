@@ -26,16 +26,36 @@
       </div>
       <mat-card>
 
-        <div class="exclusionCriteria" >
-          <div class="criteria">
-            <mat-checkbox color="primary"
-                          checked="selectionALLCriteria['0'].selected"
-                          disabled
-                          name="selectionSatisfiedALL"
-                          [(ngModel)]="selectionALLCriteria['0'].selected">{{selectionALLCriteria['0'].name}}</mat-checkbox>
-            <div class="critDesc">{{selectionALLCriteria['0'].description}}</div>
+        <!-- Regulated v1 SatisfiesALL Criterion-->
+        <ng-container *ngIf="this.APIService.version==='v1'">
+          <div class="exclusionCriteria" >
+            <div class="criteria">
+              <mat-checkbox color="primary"
+                            checked="selectionALLCriteria['0'].selected"
+                            disabled
+                            name="selectionSatisfiedALL"
+                            [(ngModel)]="selectionALLCriteria['0'].selected">{{selectionALLCriteria['0'].name}}
+              </mat-checkbox>
+              <div class="critDesc">{{selectionALLCriteria['0'].description}}</div>
+            </div>
           </div>
-        </div>
+        </ng-container>
+
+        <!-- Regulated v2 SatisfiesALL Criterion -->
+        <ng-container *ngIf="this.APIService.version==='v2'">
+          <div class="exclusionCriteria" >
+            <div class="criteria">
+              <mat-checkbox color="primary"
+                            checked="true"
+                            disabled="true"
+                            name="selectionSatisfiedALL">
+                <div class="critDesc">It satisfies all the required selection criteria</div>
+              </mat-checkbox>
+            </div>
+          </div>
+        </ng-container>
+
+
       </mat-card>
     </mat-expansion-panel>
   </mat-accordion>

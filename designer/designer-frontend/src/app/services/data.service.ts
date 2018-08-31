@@ -73,6 +73,7 @@ export class DataService {
   blobV2 = null;
 
   isSatisfiedALLeo: boolean;
+  toggleIndicator: boolean;
 
   CADetails: Cadetails = new Cadetails();
   EODetails: EoDetails = new EoDetails();
@@ -336,8 +337,8 @@ export class DataService {
 
   createESPDResponse(): ESPDResponse {
     this.espdResponse = new ESPDResponse(this.CADetails, this.EODetails, this.fullCriterionList, this.evidenceList);
-    console.log(this.espdResponse.eodetails.naturalPersons[0].birthDate);
-    console.log(JSON.stringify(this.espdResponse.eodetails.naturalPersons[0].birthDate));
+    // console.log(this.espdResponse.eodetails.naturalPersons[0].birthDate);
+    // console.log(JSON.stringify(this.espdResponse.eodetails.naturalPersons[0].birthDate));
     // let utcDate = new Date(Date.UTC(this.espdResponse.eodetails.naturalPersons[0].birthDate.toDate().getFullYear(),
     //   this.espdResponse.eodetails.naturalPersons[0].birthDate.toDate().getMonth(),
     //   this.espdResponse.eodetails.naturalPersons[0].birthDate.toDate().getDate(),
@@ -1621,14 +1622,24 @@ export class DataService {
           // console.log(ID);
           // console.log('In Req: ' + r.uuid);
           if (r.response != null || r.response != undefined) {
+            // console.log('response toggle according to indicator');
+            // this.toggleIndicator = r.response.indicator;
+            // console.log('toggle indicator when import');
+            // console.log(this.toggleIndicator);
             group[r.uuid] = new FormControl(r.response.description ||
-              r.response.percentage || r.response.indicator || r.response.evidenceURL ||
+              r.response.percentage || r.response.evidenceURL ||
               r.response.evidenceURLCode || r.response.countryCode ||
-              r.response.period || r.response.quantity || r.response.year || r.response.identifier ||
-              r.response.url || '');
+              r.response.period || r.response.quantity || r.response.year || r.response.url || r.response.identifier || '');
+
+
+            // YES/NO if responseDataType is indicator then pass indicator value to formControl. (initial state problem fixed)
+            if (r.responseDataType === 'INDICATOR') {
+              group[r.uuid] = new FormControl(r.response.indicator);
+            }
+
 
             if (r.response.date) {
-              console.log(r.response.date);
+              // console.log(r.response.date);
               // console.log(typeof r.response.date);
 
 
@@ -1656,8 +1667,8 @@ export class DataService {
                   return true;
                 }
               });
-              console.log(evi);
-              console.log(typeof evi);
+              // console.log(evi);
+              // console.log(typeof evi);
 
               group[r.uuid + 'evidenceUrl'] = new FormControl(evi.evidenceURL);
               group[r.uuid + 'evidenceCode'] = new FormControl(evi.description);
@@ -1681,6 +1692,9 @@ export class DataService {
             r.response = new RequirementResponse();
             group[r.uuid] = new FormControl(r.response.description || '');
             if (this.isEO) {
+              if (r.responseDataType === 'INDICATOR') {
+                group[r.uuid] = new FormControl(false);
+              }
               if (r.responseDataType === 'AMOUNT') {
                 group[r.uuid + 'currency'] = new FormControl();
               }

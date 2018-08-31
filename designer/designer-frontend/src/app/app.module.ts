@@ -27,7 +27,6 @@ import {CriterionComponent} from './criterion/criterion.component';
 import {FinishEoComponent} from './finish-eo/finish-eo.component';
 import {MAT_MOMENT_DATE_FORMATS, MatMomentDateModule, MomentDateAdapter} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material';
-import { MiniRenderPageComponent } from './mini-render-page/mini-render-page.component';
 
 
 @NgModule({
@@ -48,7 +47,6 @@ import { MiniRenderPageComponent } from './mini-render-page/mini-render-page.com
     RootComponent,
     CriterionComponent,
     FinishEoComponent,
-    MiniRenderPageComponent
   ],
   imports: [
     BrowserModule,

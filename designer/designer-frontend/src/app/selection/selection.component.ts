@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {SelectionCriteria} from '../model/selectionCriteria.model';
 import {DataService} from '../services/data.service';
 import {FormControl, NgForm} from '@angular/forms/forms';
+import {ApicallService} from '../services/apicall.service';
 
 @Component({
   selector: 'app-selection',
@@ -19,7 +20,7 @@ export class SelectionComponent implements OnInit {
   isAtoD: boolean = false;
 
 
-  constructor(private dataService: DataService) {
+  constructor(private dataService: DataService, public APIService: ApicallService) {
   }
 
   ngOnInit() {
