@@ -73,6 +73,7 @@ export class DataService {
   blobV2 = null;
 
   isSatisfiedALLeo: boolean;
+  toggleIndicator: boolean;
 
   CADetails: Cadetails = new Cadetails();
   EODetails: EoDetails = new EoDetails();
@@ -1621,10 +1622,21 @@ export class DataService {
           // console.log(ID);
           // console.log('In Req: ' + r.uuid);
           if (r.response != null || r.response != undefined) {
+            // console.log('response toggle according to indicator');
+            // this.toggleIndicator = r.response.indicator;
+            // console.log('toggle indicator when import');
+            // console.log(this.toggleIndicator);
             group[r.uuid] = new FormControl(r.response.description ||
-              r.response.percentage || r.response.indicator || r.response.evidenceURL ||
+              r.response.percentage || r.response.evidenceURL ||
               r.response.evidenceURLCode || r.response.countryCode ||
               r.response.period || r.response.quantity || r.response.year || r.response.url || r.response.identifier || '');
+
+
+            // YES/NO if responseDataType is indicator then pass indicator value to formControl. (initial state problem fixed)
+            if (r.responseDataType === 'INDICATOR') {
+              group[r.uuid] = new FormControl(r.response.indicator);
+            }
+
 
             if (r.response.date) {
               // console.log(r.response.date);
@@ -1680,6 +1692,9 @@ export class DataService {
             r.response = new RequirementResponse();
             group[r.uuid] = new FormControl(r.response.description || '');
             if (this.isEO) {
+              if (r.responseDataType === 'INDICATOR') {
+                group[r.uuid] = new FormControl(false);
+              }
               if (r.responseDataType === 'AMOUNT') {
                 group[r.uuid + 'currency'] = new FormControl();
               }
