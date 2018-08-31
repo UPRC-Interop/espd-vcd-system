@@ -150,14 +150,29 @@ export class FormUtilService {
                 req.response.uuid = null;
               }
             } else if (req.responseDataType === 'QUANTITY_INTEGER') {
-              req.response.quantity = formValues[req.uuid.valueOf()];
-              req.response.uuid = null;
+              if (formValues[req.uuid.valueOf()] === '') {
+                req.response = null;
+              } else {
+                req.response.quantity = formValues[req.uuid.valueOf()];
+                req.response.uuid = null;
+              }
+
             } else if (req.responseDataType === 'QUANTITY') {
-              req.response.quantity = formValues[req.uuid.valueOf()];
-              req.response.uuid = null;
+              if (formValues[req.uuid.valueOf()] === '') {
+                req.response = null;
+              } else {
+                req.response.quantity = formValues[req.uuid.valueOf()];
+                req.response.uuid = null;
+              }
+
             } else if (req.responseDataType === 'QUANTITY_YEAR') {
-              req.response.year = formValues[req.uuid.valueOf()];
-              req.response.uuid = null;
+              if (formValues[req.uuid.valueOf()] === '') {
+                req.response = null;
+              } else {
+                req.response.year = formValues[req.uuid.valueOf()];
+                req.response.uuid = null;
+              }
+
             } else if (req.responseDataType === 'IDENTIFIER') {
               req.response.identifier = formValues[req.uuid.valueOf()];
               req.response.uuid = null;
