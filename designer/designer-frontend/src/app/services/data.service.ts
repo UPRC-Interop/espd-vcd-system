@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ApicallService} from '../services/apicall.service';
+import {ApicallService} from './apicall.service';
 import {Country} from '../model/country.model';
 import {ProcedureType} from '../model/procedureType.model';
 import {ExclusionCriteria} from '../model/exclusionCriteria.model';
@@ -329,7 +329,7 @@ export class DataService {
         date.toDate().getHours(),
         date.toDate().getMinutes()));
 
-      return date = moment(utcDate);
+      return moment(utcDate);
     }
 
   }
@@ -775,9 +775,8 @@ export class DataService {
   //   return date;
   // }
 
-  getDateJSObjectMoment(...dateArray: any[]): Moment {
-    const date = moment(dateArray[0][0], dateArray[0][1], dateArray[0][2]);
-    return date;
+  static getDateJSObjectMoment(...dateArray: any[]): Moment {
+    return  moment(dateArray[0][0], dateArray[0][1], dateArray[0][2]);
   }
 
 
@@ -1540,7 +1539,6 @@ export class DataService {
       // console.log(group[cr.typeCode]);
     });
     let fg = new FormGroup(group);
-
     // console.log(fg);
     return fg;
   }
@@ -1552,7 +1550,6 @@ export class DataService {
       // console.log(group[cr.typeCode]);
     });
     let fg = new FormGroup(group);
-
     // console.log(fg);
     return fg;
   }
@@ -1665,7 +1662,7 @@ export class DataService {
             if (r.response.evidenceSuppliedId) {
 
               // TODO find evidence in EvidenceList object and import it
-              const evi = this.evidenceList.find((ev, i) => {
+              const evi = this.evidenceList.find((ev) => {
                 if (ev.id === r.response.evidenceSuppliedId) {
                   // this.evidenceList[i].description = 'test';
                   return true;
