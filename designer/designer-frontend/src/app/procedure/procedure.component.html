@@ -23,9 +23,9 @@
       <mat-form-field>
         <input matInput name="ojsURL" placeholder="OJS URL" [(ngModel)]="dataService.CADetails.procurementPublicationURI">
       </mat-form-field>
-      <mat-form-field>
-        <input matInput name="nationalJournal" placeholder="National Official Journal" [(ngModel)]="dataService.CADetails.nationalOfficialJournal">
-      </mat-form-field>
+      <!--<mat-form-field>-->
+        <!--<input matInput name="nationalJournal" placeholder="National Official Journal" [(ngModel)]="dataService.CADetails.nationalOfficialJournal">-->
+      <!--</mat-form-field>-->
 
       <div class="desc">
         <p>In case publication of a notice in the Official Journal of the European Union is not required, please give other information allowing the procurement procedure to be unequivocally identified (e. g. reference of a publication at national level)</p>
@@ -91,12 +91,12 @@
 
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <mat-form-field>
-        <mat-select placeholder="Type of Procedure" name="typeOfProcedure" [(ngModel)]="dataService.CADetails.procurementProcedureType">
-          <mat-option>None</mat-option>
-          <mat-option *ngFor="let proc of procedureTypes" [value]="proc.code">{{proc.name}}</mat-option>
-        </mat-select>
-      </mat-form-field>
+      <!--<mat-form-field>-->
+        <!--<mat-select placeholder="Type of Procedure" name="typeOfProcedure" [(ngModel)]="dataService.CADetails.procurementProcedureType">-->
+          <!--<mat-option>None</mat-option>-->
+          <!--<mat-option *ngFor="let proc of procedureTypes" [value]="proc.code">{{proc.name}}</mat-option>-->
+        <!--</mat-select>-->
+      <!--</mat-form-field>-->
       <mat-form-field>
         <input matInput placeholder="Title" name="title" [(ngModel)]="dataService.CADetails.procurementProcedureTitle">
       </mat-form-field>

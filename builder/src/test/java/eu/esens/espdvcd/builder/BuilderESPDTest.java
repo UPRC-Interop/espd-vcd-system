@@ -269,4 +269,22 @@ public class BuilderESPDTest {
         System.out.println(xmlDocumentBuilderV2.getAsString());
     }
 
+    @Ignore
+    @Test
+    public void createRegulatedResponseV2FromAnImportedV2ResponseForArtefact60() throws Exception {
+
+        ESPDResponse espdResponse = BuilderFactory.EDM_V2
+                .createRegulatedModelBuilder()
+                .importFrom(BuilderESPDTest.class.getResourceAsStream("/espd-response-v2-60.xml"))
+                .createESPDResponse();
+
+//        CriteriaExtractor extractor = new CriteriaExtractorBuilder(EDMVersion.V2).build();
+//        espdResponse.setCriterionList(extractor.getFullList());
+
+        XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.EDM_V2
+                .createDocumentBuilderFor(espdResponse);
+
+        System.out.println(xmlDocumentBuilderV2.getAsString());
+    }
+
 }

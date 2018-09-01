@@ -30,21 +30,17 @@ public class CriteriaDataRetrieverBuilder {
     public CriteriaDataRetriever build() {
 
         if (eResourceList.isEmpty()) {
-            eResourceList.addAll(createDefaultEvidencesResource());
+            eResourceList.add(createDefaultEvidencesResource());
         }
 
         return new CriteriaDataRetrieverImpl(eResourceList);
     }
 
-    private List<EvidencesResource> createDefaultEvidencesResource() {
+    private EvidencesResource createDefaultEvidencesResource() {
         LOGGER.log(Level.INFO, "Creating default evidences resource");
-
         initECertisResource();
 
-        List<EvidencesResource> resourceList = new ArrayList<>();
-        resourceList.add(eCertisResource);
-
-        return resourceList;
+        return eCertisResource;
     }
 
     /**
@@ -53,8 +49,8 @@ public class CriteriaDataRetrieverBuilder {
     private void initECertisResource() {
 
         if (eCertisResource == null) {
-            LOGGER.log(Level.INFO, "eCertis Resource initialized");
             eCertisResource = new ECertisResource();
+            LOGGER.log(Level.INFO, "eCertis Resource initialized");
         }
     }
 
