@@ -56,4 +56,9 @@ public class ECertisResourceTest {
         SelectableCriterionPrinter.print(r.getCriterionList());
     }
 
+    @Test
+    public void testGetEvidencesForCriterion() throws Exception {
+        Assert.assertFalse(r.getEvidencesForCriterion("a205fa3b-0719-4c8a-b09d-8f6b2cbf8bd2").isEmpty());
+    }
+
 }
