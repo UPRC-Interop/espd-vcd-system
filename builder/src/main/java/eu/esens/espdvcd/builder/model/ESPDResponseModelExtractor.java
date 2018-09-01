@@ -332,6 +332,14 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 qyResp.setResponseType(theType);
                 return qyResp;
 
+            case QUANTITY_INTEGER:
+                QuantityIntegerResponse qiResp = new QuantityIntegerResponse();
+                if (res.getResponseValue().get(0).getResponseQuantity() != null
+                        && res.getResponseValue().get(0).getResponseQuantity().getValue() != null) {
+                    qiResp.setQuantity(res.getResponseValue().get(0).getResponseQuantity().getValue().intValueExact());
+                }
+                return qiResp;
+
             case AMOUNT:
                 AmountResponse aResp = new AmountResponse();
                 if (res.getResponseValue().get(0).getResponseAmount() != null &&
