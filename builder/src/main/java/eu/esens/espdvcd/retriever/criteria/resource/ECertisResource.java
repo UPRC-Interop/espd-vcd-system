@@ -188,13 +188,23 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
 
     @Override
     public List<Evidence> getEvidencesForCriterion(String ID) throws RetrieverException {
-        initCriterionMap();
 
-        if (criterionMap.containsKey(ID)) {
-            return ModelFactory.ESPD_REQUEST.extractEvidences(criterionMap.get(ID).getEvidenceGroups());
+        // FIXME below comment section fails because national criteria are not contained in criterionMap in the current approach
+//        initCriterionMap();
+//
+//        if (criterionMap.containsKey(ID)) {
+//            return ModelFactory.ESPD_REQUEST.extractEvidences(criterionMap.get(ID).getEvidenceGroups());
+//        }
+
+        GetECertisCriterionRetryingTask task = new GetECertisCriterionRetryingTask(ID);
+
+        try {
+            ECertisCriterion ec = task.call();
+            return ModelFactory.ESPD_REQUEST.extractEvidences(ec.getEvidenceGroups());
+
+        } catch (ExecutionException | RetryException | IOException e) {
+            throw new RetrieverException(e);
         }
-
-        return Collections.emptyList();
     }
 
     @Override
