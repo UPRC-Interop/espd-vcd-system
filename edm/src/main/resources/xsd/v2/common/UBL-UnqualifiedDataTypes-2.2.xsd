@@ -6,7 +6,7 @@
   Generated on:      2016-06-24 19:50(UTC)
   Copyright (c) OASIS Open 2016. All Rights Reserved.
 
-  This edm fragment implements UBL unqualified datatypes using core
+  This schema fragment implements UBL unqualified datatypes using core
   component types with all supplementary components as described in
   CCTS 2.01 http://www.unece.org/cefact/ebxml/CCTS_V2-01_Final.pdf tables
   8-1, 8-2 and 8-3.
