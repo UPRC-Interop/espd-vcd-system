@@ -11,12 +11,12 @@ import eu.esens.espdvcd.schema.EDMVersion;
 
 import java.util.List;
 
-public class PredefinedCriteriaService implements CriteriaService {
+public class RetrieverCriteriaService implements CriteriaService {
 
     private final CriteriaExtractor predefinedExtractor;
     private int counter = 0;
 
-    public PredefinedCriteriaService(EDMVersion version) {
+    public RetrieverCriteriaService(EDMVersion version) {
         CriteriaExtractorBuilder b = new CriteriaExtractorBuilder(version);
         predefinedExtractor = b.build();
 //

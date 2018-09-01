@@ -46,7 +46,7 @@ public class RegulatedModeltoESPDResponseV2ServiceTest {
 //            }
 //      });
 
-        System.out.println(BuilderFactory.withEDMVersion2().getDocumentBuilderFor(v2Response).getAsString());
+        System.out.println(BuilderFactory.EDM_V2.createDocumentBuilderFor(v2Response).getAsString());
     }
 
     private void recurseRequirementsAndGenerateEvidences(List<RequirementGroup> requirementGroups, List<Evidence> evidences){

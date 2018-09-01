@@ -31,11 +31,11 @@ public class RegulatedESPDResponseV1ServiceTest {
         espdResponseFile = new File(RegulatedESPDResponseV1ServiceTest.class.getResource("/espd-response.xml").toURI());
         Assert.assertNotNull(espdResponseFile);
 
-        request = BuilderFactory.withEDMVersion1().getRegulatedModelBuilder().importFrom
+        request = BuilderFactory.EDM_V1.createRegulatedModelBuilder().importFrom
                 (RegulatedESPDResponseV1ServiceTest.class.getResourceAsStream("/espd-request.xml")).createESPDRequest();
         Assert.assertNotNull(request);
 
-        response = BuilderFactory.withEDMVersion1().getRegulatedModelBuilder().importFrom
+        response = BuilderFactory.EDM_V1.createRegulatedModelBuilder().importFrom
                 (RegulatedESPDResponseV1ServiceTest.class.getResourceAsStream("/espd-response.xml")).createESPDResponse();
         Assert.assertNotNull(response);
 
@@ -78,9 +78,9 @@ public class RegulatedESPDResponseV1ServiceTest {
     @Test
     @Ignore
     public void testNullCriterion() throws Exception{
-        ESPDRequest request = BuilderFactory.withEDMVersion1().getRegulatedModelBuilder().createESPDRequest();
+        ESPDRequest request = BuilderFactory.EDM_V1.createRegulatedModelBuilder().createESPDRequest();
         request.getFullCriterionList().add(null);
-        System.out.println(BuilderFactory.withEDMVersion1().getDocumentBuilderFor(request).getAsString());
+        System.out.println(BuilderFactory.EDM_V1.createDocumentBuilderFor(request).getAsString());
     }
 
 }
