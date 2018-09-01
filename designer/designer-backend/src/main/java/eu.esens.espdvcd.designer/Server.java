@@ -67,8 +67,8 @@ public class Server {
 //            v2Context.addEndpointWithPath(eCertisCriteriaEndpointV2, "/criteria/eCertis");
 
             LOGGER.info("Configuring predefinedCriteria endpoint...");
-            Endpoint predefCriteriaEndpointV1 = new CriteriaEndpoint(new PredefinedCriteriaService(EDMVersion.V1));
-            Endpoint predefCriteriaEndpointV2 = new CriteriaEndpoint(new PredefinedCriteriaService(EDMVersion.V2));
+            Endpoint predefCriteriaEndpointV1 = new CriteriaEndpoint(new RetrieverCriteriaService(EDMVersion.V1));
+            Endpoint predefCriteriaEndpointV2 = new CriteriaEndpoint(new RetrieverCriteriaService(EDMVersion.V2));
 
             v1Context.addEndpointWithPath(predefCriteriaEndpointV1, "/criteria/predefined");
             v2Context.addEndpointWithPath(predefCriteriaEndpointV2, "/criteria/predefined");
