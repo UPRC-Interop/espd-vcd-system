@@ -16,8 +16,8 @@ public class CriteriaServiceTest {
 
     @Before
     public void setUp() throws Exception {
-        predefinedCriteriaServiceV1 = new PredefinedCriteriaService(EDMVersion.V1);
-        predefinedCriteriaServiceV2 = new PredefinedCriteriaService(EDMVersion.V2);
+        predefinedCriteriaServiceV1 = new RetrieverCriteriaService(EDMVersion.V1);
+        predefinedCriteriaServiceV2 = new RetrieverCriteriaService(EDMVersion.V2);
     }
 
     @Test

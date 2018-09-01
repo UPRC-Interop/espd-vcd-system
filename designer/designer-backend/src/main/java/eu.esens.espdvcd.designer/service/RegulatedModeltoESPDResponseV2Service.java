@@ -21,9 +21,7 @@ public class RegulatedModeltoESPDResponseV2Service implements ModeltoESPDService
     public InputStream CreateXMLStreamFromModel(Object document) {
         ESPDResponse doc = (ESPDResponse) document;
         doc.getEvidenceList().removeIf(e -> e.getEvidenceURL() == null);
-        doc.getFullCriterionList().forEach(cr -> {
-            fixResponses(cr.getRequirementGroups());
-        });
+        doc.getFullCriterionList().forEach(cr -> fixResponses(cr.getRequirementGroups()));
         return BuilderFactory.EDM_V2.createDocumentBuilderFor((ESPDResponse) document).getAsInputStream();
     }
 
@@ -31,9 +29,7 @@ public class RegulatedModeltoESPDResponseV2Service implements ModeltoESPDService
     public String CreateXMLStringFromModel(Object document) {
         ESPDResponse doc = (ESPDResponse) document;
         doc.getEvidenceList().removeIf(e -> e.getEvidenceURL() == null);
-        doc.getFullCriterionList().forEach(cr -> {
-            fixResponses(cr.getRequirementGroups());
-        });
+        doc.getFullCriterionList().forEach(cr -> fixResponses(cr.getRequirementGroups()));
         return BuilderFactory.EDM_V2.createDocumentBuilderFor((ESPDResponse) document).getAsString();
     }
 
@@ -53,16 +49,12 @@ public class RegulatedModeltoESPDResponseV2Service implements ModeltoESPDService
                         switch (requirementGroup.getCondition()) {
                             case "ONTRUE":
                                 if (!indicator.isIndicator()) {
-                                    requirementGroup.getRequirements().forEach(rq -> {
-                                        rq.setResponse(null);
-                                    });
+                                    requirementGroup.getRequirements().forEach(rq -> rq.setResponse(null));
                                 }
                                 break;
                             case "ONFALSE":
                                 if (indicator.isIndicator()) {
-                                    requirementGroup.getRequirements().forEach(rq -> {
-                                        rq.setResponse(null);
-                                    });
+                                    requirementGroup.getRequirements().forEach(rq -> rq.setResponse(null));
                                 }
                                 break;
                             default:
@@ -74,6 +66,5 @@ public class RegulatedModeltoESPDResponseV2Service implements ModeltoESPDService
             }
             fixResponses(rg.getRequirementGroups());
         }
-
     }
 }

@@ -9,9 +9,9 @@ import org.junit.Test;
 
 import java.util.List;
 
-public class PredefinedCriteriaServiceTest {
+public class RetrieverCriteriaServiceTest {
 
-    CriteriaService predefinedCriteriaService = new PredefinedCriteriaService(EDMVersion.V2);
+    CriteriaService predefinedCriteriaService = new RetrieverCriteriaService(EDMVersion.V2);
 
     @Test
     public void getCriteria() throws Exception {

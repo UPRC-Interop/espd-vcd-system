@@ -34,7 +34,7 @@ public class ESPDRequestToModelService implements ESPDtoModelService {
     public Object CreateModelFromXML(File XML) throws RetrieverException, BuilderException, FileNotFoundException, JAXBException, SAXException, ValidationException, IOException {
         EDMVersion artefactVersion = ArtefactUtils.findEDMVersion(new FileInputStream(XML));
         if (artefactVersion == EDMVersion.V1) {
-            criteriaService = new PredefinedCriteriaService(EDMVersion.V1);
+            criteriaService = new RetrieverCriteriaService(EDMVersion.V1);
 
             ArtefactValidator schemaResult = schemaValidationService.validateESPDRequest(XML);
             if (!schemaResult.isValid())
@@ -44,7 +44,7 @@ public class ESPDRequestToModelService implements ESPDtoModelService {
             if (!schematronResult.isValid())
                 throw new ValidationException("Schematron validation failed on the supplied xml document.", schematronResult.getValidationMessages());
         } else if (artefactVersion == EDMVersion.V2) {
-            criteriaService = new PredefinedCriteriaService(EDMVersion.V2);
+            criteriaService = new RetrieverCriteriaService(EDMVersion.V2);
         } else {
             throw new ValidationException("Cannot find artefact version");
         }
