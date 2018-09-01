@@ -1650,12 +1650,16 @@ export class DataService {
               group[r.uuid] = new FormControl(r.response.date);
             }
 
-            // TODO version period
+            // FIX: starDate-endDate null value case when AtoD Criteria are selected
             if (r.response.startDate) {
               group[r.uuid + 'startDate'] = new FormControl(r.response.startDate);
+            } else if (r.response.startDate === null) {
+              group[r.uuid + 'startDate'] = new FormControl();
             }
             if (r.response.endDate) {
               group[r.uuid + 'endDate'] = new FormControl(r.response.endDate);
+            } else if (r.response.endDate === null) {
+              group[r.uuid + 'endDate'] = new FormControl();
             }
 
             if (r.response.evidenceSuppliedId) {
