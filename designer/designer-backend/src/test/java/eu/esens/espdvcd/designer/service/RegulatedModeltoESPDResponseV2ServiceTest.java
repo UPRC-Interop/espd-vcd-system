@@ -13,6 +13,7 @@ import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.File;
@@ -29,6 +30,7 @@ public class RegulatedModeltoESPDResponseV2ServiceTest {
         ESPDV2JsonResponse = new File(ESPDResource);
     }
 
+    @Ignore
     @Test
     public void testV2ResponseExport() throws Exception{
         ESPDResponse v2Response = new ObjectMapper()
