@@ -46,56 +46,61 @@ export class FormUtilService {
               req.response.uuid = null;
             } else if (req.responseDataType === 'EVIDENCE_IDENTIFIER') {
               // req.response.evidenceSuppliedId = formValues[req.uuid.valueOf()];
+              // Workaround: if EvidenceURL is not present, do not create the evidence
+
               req.response.evidenceSuppliedId = req.id;
               req.response.validatedCriterionPropertyID = req.id;
               const evidenceUrlID = req.uuid + 'evidenceUrl';
               const evidenceCodeID = req.uuid + 'evidenceCode';
               const evidenceIssuerID = req.uuid + 'evidenceIssuer';
+              if (formValues[evidenceUrlID.valueOf()] !== null ) {
+                // create evidence
+                let evidence = new Evidence();
+                let evidenceIssuer = new EvidenceIssuer();
+                evidence.id = req.id;
 
-              // create evidence
-              let evidence = new Evidence();
-              let evidenceIssuer = new EvidenceIssuer();
-              evidence.id = req.id;
-
-              // fill in workaround
-              if (formValues[evidenceUrlID.valueOf()] === null) {
-                evidence.evidenceURL = '';
-              } else {
-                evidence.evidenceURL = formValues[evidenceUrlID.valueOf()];
-              }
-              if (formValues[evidenceCodeID.valueOf()] === null) {
-                evidence.description = '';
-              } else {
-                evidence.description = formValues[evidenceCodeID.valueOf()];
-              }
-              if (formValues[evidenceIssuerID.valueOf()] === null) {
-                evidenceIssuer.name = '';
-              } else {
-                evidenceIssuer.name = formValues[evidenceIssuerID.valueOf()];
-              }
-              // evidence.evidenceURL = formValues[evidenceUrlID.valueOf()];
-              // evidence.description = formValues[evidenceCodeID.valueOf()];
-              // evidenceIssuer.name = formValues[evidenceIssuerID.valueOf()];
-              evidenceIssuer.website = '';
-              evidenceIssuer.id = null;
-              evidence.evidenceIssuer = evidenceIssuer;
-              evidence.confidentialityLevelCode = 'PUBLIC';
-
-              console.log(evidence);
-              // check if evidence already exists, if exists edit evidence object else push new evidence
-
-              const evi = evidenceList.find((ev, i) => {
-                if (ev.id === evidence.id) {
-                  evidenceList[i] = evidence;
-                  return true;
+                // fill in workaround
+                if (formValues[evidenceUrlID.valueOf()] === null) {
+                  evidence.evidenceURL = '';
+                } else {
+                  evidence.evidenceURL = formValues[evidenceUrlID.valueOf()];
                 }
-              });
-              if (!evi) {
-                evidenceList.push(evidence);
-              }
-              // console.log(evidenceList);
-              // console.log(JSON.stringify(this.dataService.evidenceList));
+                if (formValues[evidenceCodeID.valueOf()] === null) {
+                  evidence.description = '';
+                } else {
+                  evidence.description = formValues[evidenceCodeID.valueOf()];
+                }
+                if (formValues[evidenceIssuerID.valueOf()] === null) {
+                  evidenceIssuer.name = '';
+                } else {
+                  evidenceIssuer.name = formValues[evidenceIssuerID.valueOf()];
+                }
+                // evidence.evidenceURL = formValues[evidenceUrlID.valueOf()];
+                // evidence.description = formValues[evidenceCodeID.valueOf()];
+                // evidenceIssuer.name = formValues[evidenceIssuerID.valueOf()];
+                evidenceIssuer.website = '';
+                evidenceIssuer.id = null;
+                evidence.evidenceIssuer = evidenceIssuer;
+                evidence.confidentialityLevelCode = 'PUBLIC';
 
+                console.log(evidence);
+                // check if evidence already exists, if exists edit evidence object else push new evidence
+
+                const evi = evidenceList.find((ev, i) => {
+                  if (ev.id === evidence.id) {
+                    evidenceList[i] = evidence;
+                    return true;
+                  }
+                });
+                if (!evi) {
+                  evidenceList.push(evidence);
+                }
+                console.log(evidenceList);
+              }
+
+              // console.log(evidenceList);
+
+              // console.log(JSON.stringify(this.dataService.evidenceList));
               req.response.uuid = null;
             } else if (req.responseDataType === 'CODE') {
               req.response.evidenceURLCode = formValues[req.uuid.valueOf()];
@@ -231,7 +236,6 @@ export class FormUtilService {
         if (formValues[rg.uuid.valueOf()] == undefined) {
 
           // fix go up a level
-          let testFormValues = null;
           testFormValues = form.getRawValue();
           testFormValues = testFormValues[cr.uuid.valueOf()];
           testFormValues = testFormValues[rg.uuid.valueOf()];

@@ -1,16 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {DataService} from '../services/data.service';
-import {FormControl, FormGroup, NgForm} from '@angular/forms';
+import {FormControl, FormGroup} from '@angular/forms';
 import {SelectionCriteria} from '../model/selectionCriteria.model';
-import {RequirementResponse} from '../model/requirement-response.model';
-import {RequirementGroup} from '../model/requirementGroup.model';
-import {EoRelatedCriterion} from '../model/eoRelatedCriterion.model';
-import {ExclusionCriteria} from '../model/exclusionCriteria.model';
-import * as moment from 'moment';
-import {Moment} from 'moment';
-import {ApicallService} from '../services/apicall.service';
-import {EvidenceIssuer} from '../model/evidenceIssuer.model';
-import {Evidence} from '../model/evidence.model';
 import {FormUtilService} from '../services/form-util.service';
 
 @Component({
@@ -36,7 +27,8 @@ export class SelectionEoComponent implements OnInit {
   isSatisfiedALL = true;
   isAtoD = false;
 
-  constructor(public dataService: DataService, private APIService: ApicallService, public formUtil: FormUtilService) {
+  constructor(public dataService: DataService,
+              public formUtil: FormUtilService) {
   }
 
   ngOnInit() {
@@ -66,11 +58,17 @@ export class SelectionEoComponent implements OnInit {
     this.formUtil.extractFormValuesFromCriteria(this.selectionDCriteria, this.formD, this.dataService.evidenceList);
     this.formUtil.extractFormValuesFromCriteria(this.dataService.selectionALLCriteria, this.dataService.selectionALLCriteriaForm, this.dataService.evidenceList);
 
+    console.log("Selection A Criteria");
     console.log(this.selectionACriteria);
+    console.log("Selection B Criteria");
     console.log(this.selectionBCriteria);
+    console.log("Selection C Criteria");
     console.log(this.selectionCCriteria);
+    console.log("Selection D Criteria");
     console.log(this.selectionDCriteria);
+    console.log("Selection ALL Criteria");
     console.log(this.isSatisfiedALL);
+
     this.dataService.selectionEOSubmit(this.selectionACriteria,
       this.selectionBCriteria,
       this.selectionCCriteria,
