@@ -8,7 +8,7 @@ import {DataService} from '../services/data.service';
 })
 export class FinishComponent implements OnInit {
 
-  constructor(private dataService: DataService) {
+  constructor(public dataService: DataService) {
   }
 
   ngOnInit() {

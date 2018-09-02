@@ -5,9 +5,9 @@
     <mat-card-content>
       <p>Contracting authorities must indicate which selection criteria will be applied by 'ticking' the checkbox placed before the relevant criterion.</p>
       <span>Do you want to use the selection criteria from A to D? </span>
-      <mat-radio-group name="satisfiesALL">
+      <mat-radio-group name="satisfiesALL" [disabled]="this.dataService.isReadOnly()">
         <mat-radio-button color="primary" name="selALL" value="YES" (change)="handleALL(YES)" #YES>YES</mat-radio-button>
-        <mat-radio-button color="primary" name="selALL" value="NO" checked (change)="handleALL(NO)" #NO>NO</mat-radio-button>
+        <mat-radio-button color="primary" name="selALL" value="NO" [checked]="!this.dataService.isReadOnly()" (change)="handleALL(NO)" #NO>NO</mat-radio-button>
       </mat-radio-group>
     </mat-card-content>
   </mat-card>
@@ -85,7 +85,8 @@
             <mat-checkbox color="primary"
                           checked="criteria.selected"
                           name="selectionACriteria"
-                          [(ngModel)]="selectionACriteria[i].selected">{{criteria.name}}</mat-checkbox>
+                          [(ngModel)]="selectionACriteria[i].selected"
+                          [disabled]="this.dataService.isReadOnly()">{{criteria.name}}</mat-checkbox>
             <div class="critDesc">{{criteria.description}}</div>
           </div>
           <div class="eCertis">
@@ -113,7 +114,8 @@
             <mat-checkbox color="primary"
                           checked="criteria.selected"
                           name="selectionBCriteria"
-                          [(ngModel)]="selectionBCriteria[i].selected">{{criteria.name}}</mat-checkbox>
+                          [(ngModel)]="selectionBCriteria[i].selected"
+                          [disabled]="this.dataService.isReadOnly()">{{criteria.name}}</mat-checkbox>
             <div class="critDesc">{{criteria.description}}</div>
           </div>
           <div class="eCertis">
@@ -141,7 +143,8 @@
             <mat-checkbox color="primary"
                           checked="criteria.selected"
                           name="selectionCCriteria"
-                          [(ngModel)]="selectionCCriteria[i].selected">{{criteria.name}}</mat-checkbox>
+                          [(ngModel)]="selectionCCriteria[i].selected"
+                          [disabled]="this.dataService.isReadOnly()">{{criteria.name}}</mat-checkbox>
             <div class="critDesc">{{criteria.description}}</div>
           </div>
           <div class="eCertis">
@@ -169,7 +172,8 @@
             <mat-checkbox color="primary"
                           checked="criteria.selected"
                           name="selectionDCriteria"
-                          [(ngModel)]="selectionDCriteria[i].selected">{{criteria.name}}</mat-checkbox>
+                          [(ngModel)]="selectionDCriteria[i].selected"
+                          [disabled]="this.dataService.isReadOnly()">{{criteria.name}}</mat-checkbox>
             <div class="critDesc">{{criteria.description}}</div>
           </div>
           <div class="eCertis">

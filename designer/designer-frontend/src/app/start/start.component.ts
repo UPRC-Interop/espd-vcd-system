@@ -20,7 +20,7 @@ export class StartComponent implements OnInit {
   isCreateNewESPD = false;
   isReuseESPD = false;
   isReviewESPD = false;
-  isImportESPD  = false;
+  isImportESPD = false;
   isCreateResponse = false;
   fileToUpload: File[] = [];
 
@@ -41,8 +41,6 @@ export class StartComponent implements OnInit {
 
 
   }
-
-
 
 
   handleFileUpload(files: FileList) {
@@ -69,16 +67,19 @@ export class StartComponent implements OnInit {
       this.dataService.isCreateNewESPD = true;
       this.isReuseESPD = false;
       this.isReviewESPD = false;
+      this.dataService.isReviewESPD = false;
     } else if (radio.value === 'reuseESPD') {
       this.isCreateNewESPD = false;
       this.dataService.isCreateNewESPD = false;
       this.isReuseESPD = true;
       this.isReviewESPD = false;
+      this.dataService.isReviewESPD = false;
     } else if (radio.value === 'reviewESPD') {
       this.isCreateNewESPD = false;
       this.dataService.isCreateNewESPD = false;
       this.isReuseESPD = false;
       this.isReviewESPD = true;
+      this.dataService.isReviewESPD = true;
     }
   }
 
@@ -107,13 +108,12 @@ export class StartComponent implements OnInit {
 
   onStartSubmit(form: NgForm) {
     // console.log(form);
-
+  console.log(this.dataService.isReadOnly());
     // CA reuses ESPDRequest
     if (this.isCA) {
       const role = 'CA';
       this.dataService.ReuseESPD(this.fileToUpload, form, role);
     } else if (this.isEO) {
-      // TODO EOReuseESPD
       const role = 'EO';
       this.dataService.ReuseESPD(this.fileToUpload, form, role);
     }

@@ -106,7 +106,7 @@
       <mat-card *ngFor="let criteria of exclusionDCriteria; let i=index">
         <div class="exclusionCriteria" >
           <div class="criteria">
-            <mat-checkbox color="primary" checked="criteria.selected" name="exclusionDCriteria" [(ngModel)]="exclusionDCriteria[i].selected">{{criteria.name}}</mat-checkbox>
+            <mat-checkbox color="primary" checked="criteria.selected" name="exclusionDCriteria" [(ngModel)]="exclusionDCriteria[i].selected" [disabled]="this.dataService.isReadOnly()">{{criteria.name}}</mat-checkbox>
             <div class="critDesc">{{criteria.description}}</div>
           </div>
           <div class="eCertis">

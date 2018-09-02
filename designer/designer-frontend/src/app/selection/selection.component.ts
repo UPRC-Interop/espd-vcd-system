@@ -16,14 +16,18 @@ export class SelectionComponent implements OnInit {
   @Input() selectionCCriteria: SelectionCriteria[];
   @Input() selectionDCriteria: SelectionCriteria[];
   @Input() selectionALLCriteria: SelectionCriteria[];
-  isSatisfiedALL: boolean = true;
-  isAtoD: boolean = false;
+  isSatisfiedALL = true;
+  isAtoD = false;
 
 
-  constructor(private dataService: DataService, public APIService: ApicallService) {
+  constructor(public dataService: DataService, public APIService: ApicallService) {
   }
 
   ngOnInit() {
+    if (this.dataService.isReadOnly()) {
+      this.isAtoD = true;
+      this.isSatisfiedALL = false;
+    }
 
   }
 
@@ -39,6 +43,7 @@ export class SelectionComponent implements OnInit {
       this.isSatisfiedALL = true;
       this.isAtoD = false;
     }
+
   }
 
   onSelectionSubmit(form: NgForm) {

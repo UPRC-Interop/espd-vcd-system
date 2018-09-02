@@ -17,7 +17,7 @@ export class ExclusionComponent implements OnInit {
   @Input() exclusionCCriteria: ExclusionCriteria[];
   @Input() exclusionDCriteria: ExclusionCriteria[];
 
-  constructor(private dataService: DataService) {
+  constructor(public dataService: DataService) {
   }
 
   ngOnInit() {

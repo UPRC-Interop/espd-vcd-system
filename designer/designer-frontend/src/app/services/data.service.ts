@@ -88,6 +88,7 @@ export class DataService {
   isImportESPD: boolean = false;
   isCreateResponse: boolean = false;
   isCreateNewESPD: boolean = false;
+  isReviewESPD = false;
   receivedNoticeNumber: string;
   selectedCountry: string = '';
   selectedEOCountry: string = '';
@@ -561,6 +562,7 @@ export class DataService {
     if (filesToUpload.length > 0 && role == 'CA') {
       this.APIService.postFile(filesToUpload)
         .then(res => {
+          console.log('REUSE EPSD');
           this.APIService.version = res.documentDetails.version.toLowerCase();
           // res.cadetails=this.CADetails;
           // console.log(res.fullCriterionList);
@@ -716,6 +718,16 @@ export class DataService {
 
   }
 
+  isReadOnly(): boolean {
+    if (this.isReviewESPD) {
+      // console.log('It is REVIEWESPD');
+      return true;
+    } else {
+      // console.log('It is NOT review espd');
+      return false;
+    }
+  }
+
   eoDetailsFormUpdate() {
 
     /* ====================== Date Manipulation =====================================*/
@@ -776,13 +788,14 @@ export class DataService {
   // }
 
   static getDateJSObjectMoment(...dateArray: any[]): Moment {
-    return  moment(dateArray[0][0], dateArray[0][1], dateArray[0][2]);
+    return moment(dateArray[0][0], dateArray[0][1], dateArray[0][2]);
   }
 
 
   startESPD(form: NgForm) {
     // console.log(form);
     // console.log(form.value);
+    console.log('START ESPD');
 
     if (form.value.chooseRole === 'CA') {
       this.isCA = true;
