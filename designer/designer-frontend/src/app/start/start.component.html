@@ -38,7 +38,8 @@
                             name="caOption"
                             value="reviewESPD"
                             (change)="handleCASelection(reviewESPD)"
-                            #reviewESPD>Review ESPD</mat-radio-button>
+                            #reviewESPD>Review ESPD
+          </mat-radio-button>
         </mat-radio-group>
       </div>
     </mat-card-content>
@@ -92,17 +93,25 @@
       <mat-radio-group name="eoOptions" ngModel>
         <mat-radio-button color="primary"
                           name="eoOption"
-                          value="importESPD"
-                          (change)="handleEOSelection(importESPD)" #importESPD>Import ESPD</mat-radio-button>
+                          value="createResponse"
+                          (change)="handleEOSelection(createResponse)" #createResponse>Create Response
+        </mat-radio-button>
         <mat-radio-button color="primary"
                           name="eoOption"
-                          value="createResponse"
-                          (change)="handleEOSelection(createResponse)" #createResponse>Create Response</mat-radio-button>
+                          value="importESPD"
+                          (change)="handleEOSelection(importESPD)" #importESPD>Import ESPD
+        </mat-radio-button>
+        <mat-radio-button color="primary"
+                          name="eoOption"
+                          value="reviewESPD"
+                          (change)="handleEOSelection(reviewESPD)"
+                          #reviewESPD>Review ESPD
+        </mat-radio-button>
       </mat-radio-group>
     </mat-card-content>
   </mat-card>
 
-  <mat-card *ngIf="isImportESPD && isEO">
+  <mat-card *ngIf="(isImportESPD || isReviewESPD) && isEO">
     <mat-card-title>Upload Document</mat-card-title>
     <mat-card-content>
       <label for="fileUploadEO">Please upload an ESPD Request or an ESPD Response: </label>

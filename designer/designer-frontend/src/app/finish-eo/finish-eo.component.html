@@ -112,6 +112,9 @@
 </mat-accordion>
 
 <button mat-raised-button color="primary" matStepperPrevious>Back</button>
-<button type="submit" mat-raised-button color="primary" matStepperNext (click)="onExport()">Export</button>
+<ng-container *ngIf="!this.dataService.isReadOnly()">
+  <button type="submit" mat-raised-button color="primary" matStepperNext (click)="onExport()">Export</button>
+</ng-container>
+
 <!--<button type="submit" mat-raised-button color="primary" matStepperNext (click)="onExportV2()">Export V2</button>-->
 

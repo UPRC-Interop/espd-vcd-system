@@ -668,6 +668,9 @@ export class DataService {
           this.exclusionDCriteriaForm = this.createExclusionCriterionForm(this.exclusionDCriteria);
           // console.log(this.exclusionDCriteriaForm);
 
+
+
+
           this.selectionACriteria = this.filterSelectionCriteria(this.SELECTION_SUITABILITY_REGEXP, res.fullCriterionList);
           // console.log(this.selectionACriteria);
           this.selectionBCriteria = this.filterSelectionCriteria(this.SELECTION_ECONOMIC_REGEXP, res.fullCriterionList);
@@ -696,6 +699,23 @@ export class DataService {
 
           }
           this.reductionCriteriaForm = this.createReductionCriterionForm(this.reductionCriteria);
+
+          // REVIEW ESPD: make forms non editable if user selected Review ESPD
+          if (this.isReadOnly()) {
+            this.exclusionACriteriaForm.disable();
+            this.exclusionBCriteriaForm.disable();
+            this.exclusionCCriteriaForm.disable();
+            this.exclusionDCriteriaForm.disable();
+            this.selectionALLCriteriaForm.disable();
+            this.selectionACriteriaForm.disable();
+            this.selectionBCriteriaForm.disable();
+            this.selectionCCriteriaForm.disable();
+            this.selectionDCriteriaForm.disable();
+            this.eoRelatedACriteriaForm.disable();
+            this.eoRelatedCCriteriaForm.disable();
+            this.eoRelatedDCriteriaForm.disable();
+            this.reductionCriteriaForm.disable();
+          }
 
 
           console.log(res);

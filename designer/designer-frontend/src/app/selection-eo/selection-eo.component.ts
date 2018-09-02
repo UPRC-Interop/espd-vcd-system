@@ -32,6 +32,10 @@ export class SelectionEoComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.dataService.isReadOnly()) {
+      this.isAtoD = true;
+      this.isSatisfiedALL = false;
+    }
   }
 
 

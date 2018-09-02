@@ -63,15 +63,11 @@ export class ProcedureEoComponent implements OnInit {
 
   ngOnInit() {
 
+    // make EODetails and Natural Person forms non editable if user selects review ESPD
+    if (this.dataService.isReadOnly()) {
+      this.EOForm.disable();
+    }
 
-    // this.dataService.getEoRelatedCriteria()
-    //   .then(res => {
-    //     this.eoRelatedCriteria = res;
-    //     // this.createControls(this.eoRelatedCriteria);
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
 
     this.dataService.getCountries()
       .then(res => {

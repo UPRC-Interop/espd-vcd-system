@@ -98,11 +98,22 @@ export class StartComponent implements OnInit {
       this.dataService.isImportESPD = true;
       this.isCreateResponse = false;
       this.dataService.isCreateResponse = false;
+      this.isReviewESPD = false;
+      this.dataService.isReviewESPD = false;
     } else if (radio.value === 'createResponse') {
       this.isImportESPD = false;
       this.dataService.isImportESPD = false;
       this.isCreateResponse = true;
       this.dataService.isCreateResponse = true;
+      this.isReviewESPD = false;
+      this.dataService.isReviewESPD = false;
+    } else if (radio.value === 'reviewESPD') {
+      this.isImportESPD = false;
+      this.dataService.isImportESPD = false;
+      this.isCreateResponse = false;
+      this.dataService.isCreateResponse = false;
+      this.isReviewESPD = true;
+      this.dataService.isReviewESPD = true;
     }
   }
 

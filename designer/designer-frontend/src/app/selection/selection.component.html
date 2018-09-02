@@ -6,7 +6,7 @@
       <p>Contracting authorities must indicate which selection criteria will be applied by 'ticking' the checkbox placed before the relevant criterion.</p>
       <span>Do you want to use the selection criteria from A to D? </span>
       <mat-radio-group name="satisfiesALL" [disabled]="this.dataService.isReadOnly()">
-        <mat-radio-button color="primary" name="selALL" value="YES" (change)="handleALL(YES)" #YES>YES</mat-radio-button>
+        <mat-radio-button color="primary" name="selALL" value="YES" [checked]="this.dataService.isReadOnly()" (change)="handleALL(YES)" #YES>YES</mat-radio-button>
         <mat-radio-button color="primary" name="selALL" value="NO" [checked]="!this.dataService.isReadOnly()" (change)="handleALL(NO)" #NO>NO</mat-radio-button>
       </mat-radio-group>
     </mat-card-content>

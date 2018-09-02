@@ -19,15 +19,15 @@
       <mat-form-field>
         <!--<label for="noticeNumber">Received Notice Number</label>-->
         <input matInput id="noticeNumber" name="receivedNoticeNumber" [(ngModel)]="dataService.receivedNoticeNumber"
-               placeholder="Received notice number">
+               placeholder="Received notice number" [disabled]="this.dataService.isReadOnly()">
       </mat-form-field>
       <mat-form-field>
         <input matInput name="noticeNumberOJS" [(ngModel)]="dataService.CADetails.procurementPublicationNumber"
-               placeholder="Notice number in the OJS">
+               placeholder="Notice number in the OJS" [disabled]="this.dataService.isReadOnly()">
       </mat-form-field>
       <mat-form-field>
         <input matInput name="ojsURL" placeholder="OJS URL"
-               [(ngModel)]="dataService.CADetails.procurementPublicationURI">
+               [(ngModel)]="dataService.CADetails.procurementPublicationURI" [disabled]="this.dataService.isReadOnly()">
       </mat-form-field>
       <!--<mat-form-field>-->
         <!--<input matInput name="nationalJournal" placeholder="National Official Journal"-->
@@ -51,41 +51,41 @@
       </mat-expansion-panel-header>
       <mat-form-field>
         <input matInput placeholder="Official Name" name="CAofficialName"
-               [(ngModel)]="dataService.CADetails.caofficialName">
+               [(ngModel)]="dataService.CADetails.caofficialName" [disabled]="this.dataService.isReadOnly()">
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Procurer Identification" name="CAofficialID" [(ngModel)]="dataService.CADetails.id">
+        <input matInput placeholder="Procurer Identification" name="CAofficialID" [(ngModel)]="dataService.CADetails.id" [disabled]="this.dataService.isReadOnly()">
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Procurer website" name="CAofficialWebSite" [(ngModel)]="dataService.CADetails.webSiteURI">
+        <input matInput placeholder="Procurer website" name="CAofficialWebSite" [(ngModel)]="dataService.CADetails.webSiteURI" [disabled]="this.dataService.isReadOnly()">
       </mat-form-field>
       <ng-container *ngIf="dataService.CADetails.postalAddress || dataService.PostalAddress">
         <mat-form-field>
-          <input matInput placeholder="Procurer City" name="CAofficialCity" [(ngModel)]="dataService.PostalAddress.city">
+          <input matInput placeholder="Procurer City" name="CAofficialCity" [(ngModel)]="dataService.PostalAddress.city" [disabled]="this.dataService.isReadOnly()">
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Street and Number" name="CAofficialStreet" [(ngModel)]="dataService.PostalAddress.addressLine1">
+          <input matInput placeholder="Street and Number" name="CAofficialStreet" [(ngModel)]="dataService.PostalAddress.addressLine1" [disabled]="this.dataService.isReadOnly()">
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Post Code" name="CAofficialPostCode" [(ngModel)]="dataService.PostalAddress.postCode">
+          <input matInput placeholder="Post Code" name="CAofficialPostCode" [(ngModel)]="dataService.PostalAddress.postCode" [disabled]="this.dataService.isReadOnly()">
         </mat-form-field>
       </ng-container>
       <ng-container *ngIf="dataService.CADetails.contactingDetails || dataService.ContactingDetails">
         <mat-form-field>
-          <input matInput placeholder="Contact Point Name" name="CAofficialContactName" [(ngModel)]="dataService.ContactingDetails.contactPointName">
+          <input matInput placeholder="Contact Point Name" name="CAofficialContactName" [(ngModel)]="dataService.ContactingDetails.contactPointName" [disabled]="this.dataService.isReadOnly()">
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Contact Telephone Number" name="CAofficialContactTelephone" [(ngModel)]="dataService.ContactingDetails.telephoneNumber">
+          <input matInput placeholder="Contact Telephone Number" name="CAofficialContactTelephone" [(ngModel)]="dataService.ContactingDetails.telephoneNumber" [disabled]="this.dataService.isReadOnly()">
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Contact Fax Number" name="CAofficialContactFaxNumber" [(ngModel)]="dataService.ContactingDetails.faxNumber">
+          <input matInput placeholder="Contact Fax Number" name="CAofficialContactFaxNumber" [(ngModel)]="dataService.ContactingDetails.faxNumber" [disabled]="this.dataService.isReadOnly()">
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Contact email address" name="CAofficialContactEmail" [(ngModel)]="dataService.ContactingDetails.emailAddress">
+          <input matInput placeholder="Contact email address" name="CAofficialContactEmail" [(ngModel)]="dataService.ContactingDetails.emailAddress" [disabled]="this.dataService.isReadOnly()">
         </mat-form-field>
       </ng-container>
       <mat-form-field>
-        <mat-select name="CACountry" placeholder="Select Country" [(ngModel)]="dataService.selectedCountry">
+        <mat-select name="CACountry" placeholder="Select Country" [(ngModel)]="dataService.selectedCountry" [disabled]="this.dataService.isReadOnly()">
           <mat-option>None</mat-option>
           <mat-option *ngFor="let country of countries" [value]="country.code">{{country.name}}</mat-option>
         </mat-select>
@@ -110,7 +110,7 @@
         <!--</mat-select>-->
       <!--</mat-form-field>-->
       <mat-form-field>
-        <input matInput placeholder="Title" name="title" [(ngModel)]="dataService.CADetails.procurementProcedureTitle">
+        <input matInput placeholder="Title" name="title" [(ngModel)]="dataService.CADetails.procurementProcedureTitle" [disabled]="this.dataService.isReadOnly()">
       </mat-form-field>
       <mat-form-field>
         <!--<input matInput placeholder="Short Description">-->
@@ -118,11 +118,13 @@
                   id="shortDesc" cols="30" rows="10"
                   placeholder="Short Description"
                   name="description"
-                  [(ngModel)]="dataService.CADetails.procurementProcedureDesc"></textarea>
+                  [(ngModel)]="dataService.CADetails.procurementProcedureDesc"
+                  [disabled]="this.dataService.isReadOnly()"></textarea>
       </mat-form-field>
       <mat-form-field>
         <input matInput placeholder="File Reference Number" name="fileReferenceNumber"
-               [(ngModel)]="dataService.CADetails.procurementProcedureFileReferenceNo">
+               [(ngModel)]="dataService.CADetails.procurementProcedureFileReferenceNo"
+               [disabled]="this.dataService.isReadOnly()">
       </mat-form-field>
     </mat-expansion-panel>
   </mat-accordion>
