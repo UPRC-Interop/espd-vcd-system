@@ -2,17 +2,19 @@ package eu.esens.espdvcd.designer.endpoint;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import eu.esens.espdvcd.designer.service.CriteriaService;
+import eu.esens.espdvcd.designer.util.ErrorResponse;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import spark.Request;
 import spark.Response;
 import spark.Service;
 
+import java.util.Objects;
+
 public class CriteriaEndpoint extends Endpoint {
 
     private final CriteriaService service;
-    private final String CRITERIA_ERROR = "Criteria requested not found",
-            TRANSLATION_ERROR = "Translation not supported",
-            RETRIEVER_ERROR = "Failed to get criteria with error: \n";
+    private final String CRITERIA_ERROR = "Criteria requested not found.",
+            RETRIEVER_ERROR = "Retriever failed to get criteria. Additional info: \n";
 
     public CriteriaEndpoint(CriteriaService service) {
         this.service = service;
@@ -20,7 +22,8 @@ public class CriteriaEndpoint extends Endpoint {
 
     @Override
     public void configure(Service spark, String basePath) {
-        spark.path(basePath, () -> {
+
+        spark.path(basePath+"/criteria", () -> {
             spark.get("", (request, response) -> {
                 String lang = request.queryParams("lang");
                 return getNoFilter(response, lang);
@@ -31,6 +34,10 @@ public class CriteriaEndpoint extends Endpoint {
                 return getNoFilter(response, lang);
             });
 
+            spark.get("/getFilters", this::getFilters);
+
+            spark.get("/getFilters/", this::getFilters);
+
             spark.get("/:filter", (request, response) -> {
                 String lang = request.queryParams("lang");
                 return getFilter(request, response, lang);
@@ -40,67 +47,71 @@ public class CriteriaEndpoint extends Endpoint {
                 String lang = request.queryParams("lang");
                 return getFilter(request, response, lang);
             });
+
         });
 
     }
 
     private Object getNoFilter(Response response, String lang) throws JsonProcessingException {
-        if (lang == null) {
+        response.header("Content-Type", "application/json");
+        if (Objects.isNull(lang)) {
             try {
-                response.header("Content-Type", "application/json");
                 return WRITER.writeValueAsString(service.getCriteria());
             } catch (RetrieverException e) {
-                response.status(500);
+                response.status(502);
                 LOGGER.severe(e.getMessage());
-                return RETRIEVER_ERROR + e.getMessage();
+                return WRITER.writeValueAsString(new ErrorResponse.ErrorBuilder(502, RETRIEVER_ERROR + e.getMessage()).build());
             }
         } else {
             try {
-                response.header("Content-Type", "application/json");
                 return WRITER.writeValueAsString(service.getTranslatedCriteria(lang));
             } catch (UnsupportedOperationException e) {
                 response.status(406);
                 LOGGER.warning(e.getMessage());
-                return TRANSLATION_ERROR;
+                return WRITER.writeValueAsString(new ErrorResponse.ErrorBuilder(406, e.getMessage()).build());
             } catch (RetrieverException e) {
-                response.status(500);
+                response.status(502);
                 LOGGER.severe(e.getMessage());
-                return RETRIEVER_ERROR + e.getMessage();
+                return WRITER.writeValueAsString(new ErrorResponse.ErrorBuilder(502, RETRIEVER_ERROR + e.getMessage()).build());
             }
         }
     }
 
     private Object getFilter(Request request, Response response, String lang) throws JsonProcessingException {
-        if (lang == null) {
+        response.header("Content-Type", "application/json");
+        if (Objects.isNull(lang)) {
             try {
-                response.header("Content-Type", "application/json");
                 return WRITER.writeValueAsString(service.getFilteredCriteriaList(request.params("filter").toUpperCase()));
             } catch (IllegalArgumentException e) {
                 response.status(404);
                 LOGGER.warning(e.getMessage());
-                return CRITERIA_ERROR;
+                return WRITER.writeValueAsString(new ErrorResponse.ErrorBuilder(404, CRITERIA_ERROR).build());
             } catch (RetrieverException e) {
-                response.status(500);
+                response.status(502);
                 LOGGER.severe(e.getMessage());
-                return RETRIEVER_ERROR + e.getMessage();
+                return WRITER.writeValueAsString(new ErrorResponse.ErrorBuilder(502, RETRIEVER_ERROR + e.getMessage()).build());
             }
         } else {
             try {
-                response.header("Content-Type", "application/json");
                 return WRITER.writeValueAsString(service.getFilteredTranslatedCriteriaList(request.params("filter").toUpperCase(), lang));
             } catch (IllegalArgumentException e) {
                 response.status(404);
                 LOGGER.warning(e.getMessage());
-                return CRITERIA_ERROR;
+                return WRITER.writeValueAsString(new ErrorResponse.ErrorBuilder(404, CRITERIA_ERROR).build());
             } catch (UnsupportedOperationException e) {
                 response.status(406);
                 LOGGER.warning(e.getMessage());
-                return TRANSLATION_ERROR;
+                return WRITER.writeValueAsString(new ErrorResponse.ErrorBuilder(406, e.getMessage()).build());
             } catch (RetrieverException e) {
-                response.status(500);
+                response.status(502);
                 LOGGER.severe(e.getMessage());
-                return RETRIEVER_ERROR + e.getMessage();
+                return WRITER.writeValueAsString(new ErrorResponse.ErrorBuilder(502, RETRIEVER_ERROR + e.getMessage()).build());
             }
         }
+    }
+
+    private Object getFilters(Request request, Response response) throws JsonProcessingException{
+        response.header("Content-Type", "application/json");
+        return WRITER.writeValueAsString(service.getCriteriaFilters());
     }
 }

@@ -1,5 +1,6 @@
 package eu.esens.espdvcd.designer.service;
 
+import eu.esens.espdvcd.designer.typeEnum.CriteriaType;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
@@ -40,7 +41,12 @@ public class RetrieverCriteriaService implements CriteriaService {
 
     @Override
     public List<SelectableCriterion> getTranslatedCriteria(String lang) {
-        throw new UnsupportedOperationException("Translation is not supported for predefined criteria");
+        throw new UnsupportedOperationException("Translation is not yet supported for the criteria");
+    }
+
+    @Override
+    public CriteriaType[] getCriteriaFilters() {
+        return CriteriaType.values();
     }
 
     private void idFix(List<RequirementGroup> reqGroups) {

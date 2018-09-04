@@ -1,7 +1,8 @@
 package eu.esens.espdvcd.designer.service;
 
+import eu.esens.espdvcd.codelist.Codelists;
 import eu.esens.espdvcd.codelist.CodelistsV2;
-import eu.esens.espdvcd.designer.model.CodelistItem;
+import eu.esens.espdvcd.designer.util.CodelistItem;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,9 +23,7 @@ public class CodelistsV2Service implements CodelistsService {
         else {
             Map<String, String> theCodelistMap = CodelistsV2.valueOf(codelist).getDataMap();
             List<CodelistItem> theCodelistList = new ArrayList<>(theCodelistMap.size());
-            theCodelistMap.forEach((key, value) -> {
-                theCodelistList.add(new CodelistItem(key, value));
-            });
+            theCodelistMap.forEach((key, value) -> theCodelistList.add(new CodelistItem(key, value)));
             CODELISTS_MAP.putIfAbsent(codelist, theCodelistList);
             return theCodelistList;
         }
@@ -38,11 +37,14 @@ public class CodelistsV2Service implements CodelistsService {
             //TODO: CHECK IF LANGUAGE CODE EXISTS BEFORE ADDING TO CODELIST MAP
             Map<String, String> theCodelistMap = CodelistsV2.valueOf(codelist).getDataMap(language);
             List<CodelistItem> theCodelistList = new ArrayList<>(theCodelistMap.size());
-            theCodelistMap.forEach((key, value) -> {
-                theCodelistList.add(new CodelistItem(key, value));
-            });
+            theCodelistMap.forEach((key, value) -> theCodelistList.add(new CodelistItem(key, value)));
             CODELISTS_MAP.putIfAbsent(codelist + '.' + language, theCodelistList);
             return theCodelistList;
         }
+    }
+
+    @Override
+    public Codelists[] getAvailableCodelists() {
+        return CodelistsV2.values();
     }
 }

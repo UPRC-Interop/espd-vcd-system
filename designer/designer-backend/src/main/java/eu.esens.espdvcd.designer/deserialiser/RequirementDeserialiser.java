@@ -7,12 +7,20 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.requirement.ResponseRequirement;
 import eu.esens.espdvcd.model.requirement.response.*;
+import eu.esens.espdvcd.schema.EDMVersion;
 
 import java.io.IOException;
+import java.util.logging.Logger;
 
 public class RequirementDeserialiser extends StdDeserializer<ResponseRequirement> {
-    public RequirementDeserialiser() {
-        this(null);
+
+    protected static final Logger LOGGER = Logger.getLogger(RequirementDeserialiser.class.getName());
+
+    private EDMVersion version;
+
+    public RequirementDeserialiser(EDMVersion version) {
+        this((Class<?>) null);
+        this.version = version;
     }
 
     public RequirementDeserialiser(Class<?> vc) {
@@ -59,7 +67,10 @@ public class RequirementDeserialiser extends StdDeserializer<ResponseRequirement
                 response = mapper.treeToValue(root.get("response"), QuantityIntegerResponse.class);
                 break;
             case PERIOD:
-                response = mapper.treeToValue(root.get("response"), PeriodResponse.class);
+                if (version.equals(EDMVersion.V1))
+                    response = mapper.treeToValue(root.get("response"), PeriodResponse.class);
+                else
+                    response = mapper.treeToValue(root.get("response"), ApplicablePeriodResponse.class);
                 break;
             case EVIDENCE_IDENTIFIER:
                 response = mapper.treeToValue(root.get("response"), EvidenceIdentifierResponse.class);
@@ -70,10 +81,16 @@ public class RequirementDeserialiser extends StdDeserializer<ResponseRequirement
             case DATE:
                 response = mapper.treeToValue(root.get("response"), DateResponse.class);
                 break;
+            case URL:
+                response = mapper.treeToValue(root.get("response"), URLResponse.class);
+                break;
+            case IDENTIFIER:
+                response = mapper.treeToValue(root.get("response"), IdentifierResponse.class);
+                break;
             default:
                 response = null;
-                System.err.println("RESPONSE TYPE NOT FOUND");
-                System.err.println(responseRequirement.getResponseDataType());
+                LOGGER.warning("RESPONSE TYPE NOT FOUND");
+                LOGGER.warning(responseRequirement.getResponseDataType().name());
                 break;
         }
         responseRequirement.setResponse(response);
