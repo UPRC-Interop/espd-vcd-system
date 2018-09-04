@@ -449,8 +449,9 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
                 return tcrType;
 
             case PERCENTAGE:
-                rvType.setResponseNumeric(new ResponseNumericType());
-                rvType.getResponseNumeric().setValue(new BigDecimal(Float.toString(((PercentageResponse) response).getPercentage())));
+                rvType.setResponseQuantity(new ResponseQuantityType());
+                rvType.getResponseQuantity().setUnitCode("PERCENTAGE");
+                rvType.getResponseQuantity().setValue(new BigDecimal(Float.toString(((PercentageResponse) response).getPercentage())));
                 tcrType.getResponseValue().add(rvType);
                 return tcrType;
 
