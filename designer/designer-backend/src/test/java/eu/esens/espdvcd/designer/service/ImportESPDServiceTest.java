@@ -1,0 +1,100 @@
+package eu.esens.espdvcd.designer.service;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import eu.esens.espdvcd.builder.BuilderFactory;
+import eu.esens.espdvcd.model.ESPDRequest;
+import eu.esens.espdvcd.model.ESPDResponse;
+import eu.esens.espdvcd.model.SelectableCriterion;
+import eu.esens.espdvcd.model.requirement.Requirement;
+import eu.esens.espdvcd.schema.EDMVersion;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.io.File;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class ImportESPDServiceTest {
+    File espdResponse;
+    File espdRequestFile;
+    File espdResponseFile;
+    ESPDRequest request;
+    ESPDResponse response;
+    ExportESPDService exportESPDService;
+    ImportESPDService importESPDService;
+    ObjectWriter writer;
+
+    @Before
+    public void setUp() throws Exception {
+        espdRequestFile = new File(ImportESPDServiceTest.class.getResource("/espd-request.xml").toURI());
+        Assert.assertNotNull(espdRequestFile);
+
+        espdResponseFile = new File(ImportESPDServiceTest.class.getResource("/espd-response.xml").toURI());
+        Assert.assertNotNull(espdResponseFile);
+        espdResponse = new File(this.getClass().getClassLoader().getResource("espd-response-v2-60.xml").toURI());
+
+        request = BuilderFactory.EDM_V1.createRegulatedModelBuilder().importFrom
+                (ImportESPDServiceTest.class.getResourceAsStream("/espd-request.xml")).createESPDRequest();
+        Assert.assertNotNull(request);
+
+        response = BuilderFactory.EDM_V1.createRegulatedModelBuilder().importFrom
+                (ImportESPDServiceTest.class.getResourceAsStream("/espd-response.xml")).createESPDResponse();
+        Assert.assertNotNull(response);
+
+        exportESPDService = new RegulatedExportESPDV1Service();
+        importESPDService = new ImportESPDResponseService();
+        writer = new ObjectMapper().writer().withDefaultPrettyPrinter();
+    }
+
+    @Test
+    public void testQuantityIntegerImport() throws Exception {
+        ImportESPDService service = new ImportESPDResponseService();
+        Assert.assertNotNull(espdResponse);
+        ESPDResponse theResponse = (ESPDResponse) service.importESPDFile(espdResponse);
+
+        List<Requirement> requirementList = theResponse.getFullCriterionList().stream()
+                .filter(cr -> cr.getID().equals("b16cb9fc-6cb7-4585-9302-9533b415cf48"))
+                .findFirst()
+                .get()
+                .getRequirementGroups()
+                .stream()
+                .filter(rg -> rg.getID().equals("e1886054-ada4-473c-9afc-2fde82c24cf4"))
+                .findFirst()
+                .get()
+                .getRequirements()
+                .stream()
+                .filter(rq -> rq.getID().equals("6c14dfbf-1450-4bd7-b324-5cc70acf4f34")).collect(Collectors.toList());
+
+        Assert.assertNotNull(requirementList.get(0).getResponse());
+    }
+
+    @Test
+    public void generateRequirementGroupStructure() throws Exception {
+        CriteriaService service = new RetrieverCriteriaService(EDMVersion.V2);
+
+        SelectableCriterion criterion = service.getCriteria().stream()
+                .filter(cr -> cr.getID().equals("005eb9ed-1347-4ca3-bb29-9bc0db64e1ab"))
+                .findFirst()
+                .get();
+
+        criterion.getRequirementGroups().get(0).getRequirementGroups().add(criterion.getRequirementGroups().get(0).getRequirementGroups().get(0));
+        System.out.println(new ObjectMapper().writer().withDefaultPrettyPrinter().writeValueAsString(criterion));
+    }
+
+    @Test
+    public void responseJSONFromRequestTest() throws Exception {
+        ESPDResponse response = (ESPDResponse) importESPDService.importESPDFile(espdRequestFile);
+        Assert.assertNotNull(response);
+        String exportedString = exportESPDService.exportESPDRequestAsString(response);
+        Assert.assertNotNull(exportedString);
+        System.out.println(exportedString);
+    }
+
+    @Test
+    public void responseJSONFromResponseTest() throws Exception {
+        ESPDResponse response = (ESPDResponse) importESPDService.importESPDFile(espdResponseFile);
+        Assert.assertNotNull(response);
+    }
+}

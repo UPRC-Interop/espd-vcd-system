@@ -43,68 +43,68 @@ export class ApicallService {
   /* ==================== EO related criteria ========================= */
 
   getEO_RelatedCriteria() {
-    return this.http.get<EoRelatedCriterion[]>(environment.apiUrl + this.version + '/criteria/predefined/eo_related').toPromise();
+    return this.http.get<EoRelatedCriterion[]>(environment.apiUrl + this.version + '/criteria/eo_related').toPromise();
   }
 
   getEO_RelatedACriteria() {
-    return this.http.get<EoRelatedCriterion[]>(environment.apiUrl + this.version + '/criteria/predefined/eo_related_A').toPromise();
+    return this.http.get<EoRelatedCriterion[]>(environment.apiUrl + this.version + '/criteria/eo_related_A').toPromise();
   }
 
   getEO_RelatedCCriteria() {
-    return this.http.get<EoRelatedCriterion[]>(environment.apiUrl + this.version + '/criteria/predefined/eo_related_B').toPromise();
+    return this.http.get<EoRelatedCriterion[]>(environment.apiUrl + this.version + '/criteria/eo_related_B').toPromise();
   }
 
   getEO_RelatedDCriteria() {
-    return this.http.get<EoRelatedCriterion[]>(environment.apiUrl + this.version + '/criteria/predefined/eo_related_C').toPromise();
+    return this.http.get<EoRelatedCriterion[]>(environment.apiUrl + this.version + '/criteria/eo_related_C').toPromise();
   }
 
   /* =========================== Reduction of Candidates ================= */
 
   get_ReductionCriteria() {
-    return this.http.get<ReductionCriterion[]>(environment.apiUrl + this.version + '/criteria/predefined/reduction').toPromise();
+    return this.http.get<ReductionCriterion[]>(environment.apiUrl + this.version + '/criteria/reduction').toPromise();
   }
 
   /* ============= EXCLUSION CRITERIA ===================*/
   getExclusionCriteria() {
-    return this.http.get<ExclusionCriteria[]>(environment.apiUrl + this.version + '/criteria/predefined/exclusion').toPromise();
+    return this.http.get<ExclusionCriteria[]>(environment.apiUrl + this.version + '/criteria/exclusion').toPromise();
   }
 
   getExclusionCriteria_A() {
-    return this.http.get<ExclusionCriteria[]>(environment.apiUrl + this.version + '/criteria/predefined/exclusion_a').toPromise();
+    return this.http.get<ExclusionCriteria[]>(environment.apiUrl + this.version + '/criteria/exclusion_a').toPromise();
   }
 
   getExclusionCriteria_B() {
-    return this.http.get<ExclusionCriteria[]>(environment.apiUrl + this.version + '/criteria/predefined/exclusion_b').toPromise();
+    return this.http.get<ExclusionCriteria[]>(environment.apiUrl + this.version + '/criteria/exclusion_b').toPromise();
   }
 
   getExclusionCriteria_C() {
-    return this.http.get<ExclusionCriteria[]>(environment.apiUrl + this.version + '/criteria/predefined/exclusion_c').toPromise();
+    return this.http.get<ExclusionCriteria[]>(environment.apiUrl + this.version + '/criteria/exclusion_c').toPromise();
   }
 
   getExclusionCriteria_D() {
-    return this.http.get<ExclusionCriteria[]>(environment.apiUrl + this.version + '/criteria/predefined/exclusion_d').toPromise();
+    return this.http.get<ExclusionCriteria[]>(environment.apiUrl + this.version + '/criteria/exclusion_d').toPromise();
   }
 
   /* ============= SELECTION CRITERIA ===================*/
 
   getSelectionCriteria() {
-    return this.http.get<SelectionCriteria[]>(environment.apiUrl + this.version + '/criteria/predefined/selection').toPromise();
+    return this.http.get<SelectionCriteria[]>(environment.apiUrl + this.version + '/criteria/selection').toPromise();
   }
 
   getSelectionCriteria_A() {
-    return this.http.get<SelectionCriteria[]>(environment.apiUrl + this.version + '/criteria/predefined/selection_a').toPromise();
+    return this.http.get<SelectionCriteria[]>(environment.apiUrl + this.version + '/criteria/selection_a').toPromise();
   }
 
   getSelectionCriteria_B() {
-    return this.http.get<SelectionCriteria[]>(environment.apiUrl + this.version + '/criteria/predefined/selection_b').toPromise();
+    return this.http.get<SelectionCriteria[]>(environment.apiUrl + this.version + '/criteria/selection_b').toPromise();
   }
 
   getSelectionCriteria_C() {
-    return this.http.get<SelectionCriteria[]>(environment.apiUrl + this.version + '/criteria/predefined/selection_c').toPromise();
+    return this.http.get<SelectionCriteria[]>(environment.apiUrl + this.version + '/criteria/selection_c').toPromise();
   }
 
   getSelectionCriteria_D() {
-    return this.http.get<SelectionCriteria[]>(environment.apiUrl + this.version + '/criteria/predefined/selection_d').toPromise();
+    return this.http.get<SelectionCriteria[]>(environment.apiUrl + this.version + '/criteria/selection_d').toPromise();
   }
 
   /* ============ UPLOAD XML GET JSON ================= */

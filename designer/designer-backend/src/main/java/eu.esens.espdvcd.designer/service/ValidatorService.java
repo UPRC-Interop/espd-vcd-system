@@ -8,6 +8,5 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 public interface ValidatorService {
-    ArtefactValidator validateESPDRequest(File request) throws JAXBException, SAXException, FileNotFoundException;
-    ArtefactValidator validateESPDResponse(File response) throws JAXBException, SAXException, FileNotFoundException;
+    ArtefactValidator validateESPDFile(File request) throws JAXBException, SAXException;
 }

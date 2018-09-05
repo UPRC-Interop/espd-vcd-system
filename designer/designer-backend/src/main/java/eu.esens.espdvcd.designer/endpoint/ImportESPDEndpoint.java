@@ -1,12 +1,11 @@
 package eu.esens.espdvcd.designer.endpoint;
 
 import eu.esens.espdvcd.builder.exception.BuilderException;
-import eu.esens.espdvcd.builder.util.ArtefactUtils;
 import eu.esens.espdvcd.designer.exception.ValidationException;
-import eu.esens.espdvcd.designer.model.DocumentDetails;
-import eu.esens.espdvcd.designer.service.ESPDtoModelService;
+import eu.esens.espdvcd.designer.service.ImportESPDService;
+import eu.esens.espdvcd.designer.util.DocumentDetails;
+import eu.esens.espdvcd.designer.util.ErrorResponse;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
-import eu.esens.espdvcd.schema.EDMVersion;
 import org.apache.poi.util.IOUtils;
 import org.xml.sax.SAXException;
 import spark.Request;
@@ -18,17 +17,22 @@ import javax.servlet.ServletException;
 import javax.servlet.http.Part;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.UnmarshalException;
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.Collection;
+import java.util.Objects;
 
 public class ImportESPDEndpoint extends Endpoint {
-    private final ESPDtoModelService service;
-    private final String DOCUMENT_ERROR = "Oops, the XML document provided was not valid and could not be converted to JSON. Did you provide the correct input? \nThis could help you:\n",
-            LOGGER_DOCUMENT_ERROR = "Error occurred in ESPDEndpoint while converting an XML response to an object. ";
+    private final ImportESPDService service;
+    private final String LOGGER_DOCUMENT_ERROR = "Error occurred in ESPDEndpoint while converting an XML response to an object. ";
 
-    public ImportESPDEndpoint(ESPDtoModelService service) {
+    public ImportESPDEndpoint(ImportESPDService service) {
         this.service = service;
     }
 
@@ -37,12 +41,14 @@ public class ImportESPDEndpoint extends Endpoint {
         spark.path(basePath, () -> {
             spark.get("", ((request, response) -> {
                 response.status(405);
-                return "You need to POST an artefact in xml.";
+                response.header("Content-Type", "application/json");
+                return WRITER.writeValueAsString(new ErrorResponse.ErrorBuilder(405, "You need to POST an artefact in XML.").build());
             }));
 
             spark.get("/", ((request, response) -> {
                 response.status(405);
-                return "You need to POST an artefact in xml.";
+                response.header("Content-Type", "application/json");
+                return WRITER.writeValueAsString(new ErrorResponse.ErrorBuilder(405, "You need to POST an artefact in XML.").build());
             }));
 
             spark.post("", this::postRequest);
@@ -53,54 +59,67 @@ public class ImportESPDEndpoint extends Endpoint {
     }
 
     private Object postRequest(Request rq, Response rsp) throws IOException, ServletException, JAXBException, SAXException {
-        EDMVersion artefactVersion = null;
-        if (rq.contentType().contains("multipart/form-data")) {
-            MultipartConfigElement multipartConfigElement = new MultipartConfigElement("file-uploads", 1000000000, 1000000000, 1000);
-            rq.raw().setAttribute("org.eclipse.jetty.multipartConfig", multipartConfigElement);
-            Collection<Part> parts = rq.raw().getParts();
-            if (parts.iterator().hasNext()) {
-                Part part = parts.iterator().next();
-                File tempFile = File.createTempFile("espd-file", ".tmp");
-                tempFile.deleteOnExit();
+        rsp.header("Content-Type", "application/json");
+        if (Objects.nonNull(rq.contentType())) {
+            if (rq.contentType().contains("multipart/form-data")) {
+                MultipartConfigElement multipartConfigElement = new MultipartConfigElement("file-uploads", 1024 * 1024 * 2, 1024 * 1024 * 3, 0);
+                rq.raw().setAttribute("org.eclipse.jetty.multipartConfig", multipartConfigElement);
+                Collection<Part> parts = rq.raw().getParts();
+                if (parts.iterator().hasNext()) {
+                    Part part = parts.iterator().next();
+                    File tempFile = File.createTempFile("espd-file", ".tmp");
+                    tempFile.deleteOnExit();
 
-                try (InputStream input = part.getInputStream()) {
-                    artefactVersion = ArtefactUtils.findEDMVersion(input);
-                    FileOutputStream out = new FileOutputStream(tempFile);
-                    IOUtils.copy(input, out);
-                    out.close();
-                    out.flush();
-                    out = null;
-                    // System.gc();
-//                    Files.copy(input, tempFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-                } catch (Exception e) {
-                    LOGGER.severe(LOGGER_DOCUMENT_ERROR + e.getMessage());
-                    rsp.status(500);
-                    return "Unable to save uploaded file. More info:\n" + e.getMessage();
+                    try (InputStream input = part.getInputStream()) {
+                        FileOutputStream out = new FileOutputStream(tempFile);
+                        IOUtils.copy(input, out);
+                        out.close();
+                        out.flush();
+                    } catch (IOException e) {
+                        LOGGER.severe(LOGGER_DOCUMENT_ERROR + e.getMessage());
+                        rsp.status(500);
+                        return WRITER.writeValueAsString(new ErrorResponse.ErrorBuilder(500, "Unable to save uploaded file. More info:\n" + e.getMessage()).build());
+                    }
+                    try {
+                        Object espd = service.importESPDFile(tempFile);
+                        DocumentDetails details = service.getDocumentDetails(tempFile);
+                        String serializedDetails = WRITER.writeValueAsString(details);
+                        String serializedDocument = WRITER.writeValueAsString(espd);
+
+                        StringBuilder builder = new StringBuilder(serializedDocument);
+                        builder.setLength(builder.length() - 1);
+                        builder.append(",");
+                        builder.append("\"documentDetails\" : ");
+                        builder.append(serializedDetails);
+                        builder.append("}");
+
+                        return builder.toString();
+                    } catch (RetrieverException | BuilderException | NullPointerException e) {
+                        LOGGER.severe(LOGGER_DOCUMENT_ERROR + e.getMessage());
+                        rsp.status(406);
+                        return WRITER.writeValueAsString(new ErrorResponse.ErrorBuilder(406, e.getMessage()).build());
+                    } catch (ValidationException e) {
+                        LOGGER.severe(e.getMessage());
+                        rsp.status(406);
+                        return WRITER.writeValueAsString(new ErrorResponse.ErrorBuilder(406, e.getMessage()).withResponseObject(e.getResults()).build());
+
+                    }
+//                finally {
+//                     Files.deleteIfExists(tempFile.toPath());
+//                }
+                } else {
+                    rsp.status(400);
+                    return WRITER.writeValueAsString(new ErrorResponse.ErrorBuilder(400, "There was no file found in your upload, please check your input.").build());
                 }
+            } else if (rq.contentType().contains("application/xml")) {
+                Path tempFile = Files.createTempFile("espd-file", ".tmp");
                 try {
-                    rsp.header("Content-Type", "application/json");
+                    byte[] xmlStream = rq.body().getBytes(StandardCharsets.UTF_8);
+                    Files.write(tempFile, xmlStream, StandardOpenOption.CREATE);
+                    File espdFile = tempFile.toFile();
 
-                    Object espd = service.CreateModelFromXML(tempFile);
-
-                    // espdFile.setWritable(true);
-
-                    // if(espdFile.delete()){
-                    //     System.out.println(espdFile.getName() + " is deleted!");
-                    // }else{
-                    // //     System.gc();
-
-                    // // if(espdFile.delete()){
-                    // //     System.out.println(espdFile.getName() + " is deleted! Attempt 2");
-                    // // }else {
-                    //     System.out.println("Delete operation failed.");
-                    // // }
-                    
-                    // }
-
-                    /*
-                     * TODO: REFACTOR OBJECT CREATION IN JSON
-                     */
-                    DocumentDetails details = new DocumentDetails(artefactVersion.name(), "regulated");
+                    Object espd = service.importESPDFile(espdFile);
+                    DocumentDetails details = service.getDocumentDetails(espdFile);
                     String serializedDetails = WRITER.writeValueAsString(details);
                     String serializedDocument = WRITER.writeValueAsString(espd);
 
@@ -112,60 +131,26 @@ public class ImportESPDEndpoint extends Endpoint {
                     builder.append("}");
 
                     return builder.toString();
-                } catch (RetrieverException | BuilderException | NullPointerException e) {
+                } catch (RetrieverException | BuilderException | UnmarshalException e) {
                     LOGGER.severe(LOGGER_DOCUMENT_ERROR + e.getMessage());
                     rsp.status(406);
-                    return DOCUMENT_ERROR + e.getMessage() + "\n" + "";
+                    return WRITER.writeValueAsString(new ErrorResponse.ErrorBuilder(406, e.getMessage()).build());
                 } catch (ValidationException e) {
                     LOGGER.severe(e.getMessage());
-                    LOGGER.severe(ListPrinter(e.getResults()));
                     rsp.status(406);
-                    return DOCUMENT_ERROR + e.getMessage() + ListPrinter(e.getResults());
+                    return WRITER.writeValueAsString(new ErrorResponse.ErrorBuilder(406, e.getMessage()).withResponseObject(e.getResults()).build());
                 } finally {
-                    // Files.deleteIfExists(tempFile.toPath());
+                    Files.deleteIfExists(tempFile);
                 }
             } else {
-                rsp.status(400);
-                return "Bad request.";
-            }
-        } else if (rq.contentType().contains("application/xml")) {
-            Path tempFile = Files.createTempFile("espd-file", ".tmp");
-            try {
-                rsp.header("Content-Type", "application/json");
-                byte[] xmlStream = rq.body().getBytes(StandardCharsets.UTF_8);
-                artefactVersion = ArtefactUtils.findEDMVersion(new ByteArrayInputStream(xmlStream));
-                Files.write(tempFile, xmlStream, StandardOpenOption.CREATE);
-                File espdFile = tempFile.toFile();
-
-                Object espd = service.CreateModelFromXML(espdFile);
-                DocumentDetails details = new DocumentDetails(artefactVersion.name(), "regulated");
-                String serializedDetails = WRITER.writeValueAsString(details);
-                String serializedDocument = WRITER.writeValueAsString(espd);
-
-                StringBuilder builder = new StringBuilder(serializedDocument);
-                builder.setLength(builder.length() - 1);
-                builder.append(",");
-                builder.append("\"documentDetails\" : ");
-                builder.append(serializedDetails);
-                builder.append("}");
-
-                return builder.toString();
-            } catch (RetrieverException | BuilderException | UnmarshalException e) {
-                LOGGER.severe(LOGGER_DOCUMENT_ERROR + e.getMessage());
+                LOGGER.warning("Got unexpected content-type: " + rq.contentType());
                 rsp.status(406);
-                return DOCUMENT_ERROR + e.getMessage();
-            } catch (ValidationException e) {
-                LOGGER.severe(e.getMessage());
-                LOGGER.severe(ListPrinter(e.getResults()));
-                rsp.status(406);
-                return DOCUMENT_ERROR + e.getMessage() + ListPrinter(e.getResults());
-            } finally {
-                Files.deleteIfExists(tempFile);
+                return WRITER.writeValueAsString(new ErrorResponse.ErrorBuilder(406, "Unacceptable content-type specified.").build());
             }
         } else {
-            LOGGER.severe("Got unexpected content-type: " + rq.contentType());
+            LOGGER.warning("Got null content-type");
             rsp.status(406);
-            return "Unacceptable content-type specified.";
+            return WRITER.writeValueAsString(new ErrorResponse.ErrorBuilder(406, "Unacceptable content-type specified.").build());
         }
     }
 }

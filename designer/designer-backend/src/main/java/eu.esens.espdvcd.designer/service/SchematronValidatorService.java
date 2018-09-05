@@ -1,19 +1,32 @@
 package eu.esens.espdvcd.designer.service;
 
-import eu.esens.espdvcd.builder.util.ArtefactUtils;
 import eu.esens.espdvcd.validator.ArtefactValidator;
+import eu.esens.espdvcd.validator.ValidationResult;
 import eu.esens.espdvcd.validator.Validators;
 
 import java.io.File;
+import java.util.List;
 
 public class SchematronValidatorService implements ValidatorService {
     @Override
-    public ArtefactValidator validateESPDRequest(File request) {
-        return Validators.createESPDRequestSchematronValidator(request, ArtefactUtils.findEDMVersion(request)); //,SchematronOrigin.EU);
-    }
+    public ArtefactValidator validateESPDFile(File request) {
+//        return Validators.createESPDSchematronValidator(request);
 
-    @Override
-    public ArtefactValidator validateESPDResponse(File response) {
-        return Validators.createESPDResponseSchematronValidator(response, ArtefactUtils.findEDMVersion(response));
+        return new ArtefactValidator() {
+            @Override
+            public boolean isValid() {
+                return true;
+            }
+
+            @Override
+            public List<ValidationResult> getValidationMessages() {
+                return null;
+            }
+
+            @Override
+            public List<ValidationResult> getValidationMessagesFiltered(String keyWord) {
+                return null;
+            }
+        };
     }
 }

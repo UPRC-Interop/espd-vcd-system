@@ -21,13 +21,13 @@ public class RestContext {
     public void addEndpoint(Endpoint endpoint) {
 
         endpoint.configure(spark, basePath);
-//        logger.info("REST endpoints registered for "+ endpoint.getClass().getSimpleName());
+        logger.info("REST endpoints registered for "+ endpoint.getClass().getName());
     }
 
     public void addEndpointWithPath(Endpoint endpoint, String path) {
 
         endpoint.configure(spark, basePath + path);
-//        logger.info("REST endpoints registered for "+ endpoint.getClass().getSimpleName());
+        logger.info("REST endpoints registered for "+ endpoint.getClass().getName());
     }
 
 }

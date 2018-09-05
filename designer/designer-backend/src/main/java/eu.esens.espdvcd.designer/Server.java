@@ -37,6 +37,7 @@ public class Server {
 
         LOGGER.info("Attempting to bind to port " + portToBind);
         Service spark = Service.ignite().port(portToBind);                                //SET THE SPARK SERVER ON FIRE
+
         spark.initExceptionHandler(e -> {
             LOGGER.severe("Failed to ignite the Spark server");
             LOGGER.log(Level.SEVERE, e.getMessage(), e);
@@ -46,60 +47,48 @@ public class Server {
 
         LOGGER.info("Starting endpoint configuration");
 
-        RestContext v2Context = new RestContext("/api/v2", spark),
-                v1Context = new RestContext("/api/v1", spark),
-                unversionedContext = new RestContext("/api", spark);
+        RestContext v2Context = new RestContext("/api/v2", spark);
+        RestContext v1Context = new RestContext("/api/v1", spark);
+        RestContext baseContext = new RestContext("/api", spark);
 
-        try {
-            LOGGER.info("Configuring codelistsV1 endpoint...");
-            Endpoint v1Codelists = new CodelistsEndpoint(new CodelistsV1Service());
-            v1Context.addEndpoint(v1Codelists);
+        LOGGER.info("Configuring codelistsV1 endpoint...");
+        Endpoint v1Codelists = new CodelistsEndpoint(new CodelistsV1Service());
+        v1Context.addEndpoint(v1Codelists);
 
-            LOGGER.info("Configuring codelistsV2 endpoint...");
-            Endpoint v2Codelists = new CodelistsEndpoint(new CodelistsV2Service());
-            v2Context.addEndpoint(v2Codelists);
+        LOGGER.info("Configuring codelistsV2 endpoint...");
+        Endpoint v2Codelists = new CodelistsEndpoint(new CodelistsV2Service());
+        v2Context.addEndpoint(v2Codelists);
 
-//            LOGGER.info("Configuring eCertisCriteria endpoint...");
-//            Endpoint eCertisCriteriaEndpointV1 = new CriteriaEndpoint(new ECertisCriteriaService(EDMVersion.V1));
-//            Endpoint eCertisCriteriaEndpointV2 = new CriteriaEndpoint(new ECertisCriteriaService(EDMVersion.V2));
-//
-//            v1Context.addEndpointWithPath(eCertisCriteriaEndpointV1, "/criteria/eCertis");
-//            v2Context.addEndpointWithPath(eCertisCriteriaEndpointV2, "/criteria/eCertis");
+        LOGGER.info("Configuring predefinedCriteria endpoint...");
+        Endpoint predefCriteriaEndpointV1 = new CriteriaEndpoint(new RetrieverCriteriaService(EDMVersion.V1));
+        Endpoint predefCriteriaEndpointV2 = new CriteriaEndpoint(new RetrieverCriteriaService(EDMVersion.V2));
 
-            LOGGER.info("Configuring predefinedCriteria endpoint...");
-            Endpoint predefCriteriaEndpointV1 = new CriteriaEndpoint(new RetrieverCriteriaService(EDMVersion.V1));
-            Endpoint predefCriteriaEndpointV2 = new CriteriaEndpoint(new RetrieverCriteriaService(EDMVersion.V2));
+        v1Context.addEndpoint(predefCriteriaEndpointV1);
+        v2Context.addEndpoint(predefCriteriaEndpointV2);
 
-            v1Context.addEndpointWithPath(predefCriteriaEndpointV1, "/criteria/predefined");
-            v2Context.addEndpointWithPath(predefCriteriaEndpointV2, "/criteria/predefined");
+        LOGGER.info("Configuring ExportESPDRequestV1 endpoint...");
+        Endpoint ESPDRequestV1Endpoint = new ExportESPDEndpoint(EDMVersion.V1);
+        v1Context.addEndpoint(ESPDRequestV1Endpoint);
 
-            LOGGER.info("Configuring ExportESPDRequestV1 endpoint...");
-            Endpoint ESPDRequestV1Endpoint = new ExportESPDv1Endpoint(new RegulatedModeltoESPDRequestV1Service());
-            v1Context.addEndpointWithPath(ESPDRequestV1Endpoint, "/espd/request");
+        LOGGER.info("Configuring ExportESPDResponseV1 endpoint...");
+        Endpoint ESPDResponseV1Endpoint = new ExportESPDEndpoint(EDMVersion.V1);
+        v1Context.addEndpoint(ESPDResponseV1Endpoint);
 
-            LOGGER.info("Configuring ExportESPDResponseV1 endpoint...");
-            Endpoint ESPDResponseV1Endpoint = new ExportESPDv1Endpoint(new RegulatedModeltoESPDResponseV1Service());
-            v1Context.addEndpointWithPath(ESPDResponseV1Endpoint, "/espd/response");
+        LOGGER.info("Configuring ExportESPDRequestV2 endpoint...");
+        Endpoint ESPDRequestV2Endpoint = new ExportESPDEndpoint(EDMVersion.V2);
+        v2Context.addEndpoint(ESPDRequestV2Endpoint);
 
-            LOGGER.info("Configuring ExportESPDRequestV2 endpoint...");
-            Endpoint ESPDRequestV2Endpoint = new ExportESPDv2Endpoint(new RegulatedModeltoESPDRequestV2Service());
-            v2Context.addEndpointWithPath(ESPDRequestV2Endpoint, "/espd/request");
+        LOGGER.info("Configuring ExportESPDResponseV2 endpoint...");
+        Endpoint ESPDResponseV2Endpoint = new ExportESPDEndpoint(EDMVersion.V2);
+        v2Context.addEndpoint(ESPDResponseV2Endpoint);
 
-            LOGGER.info("Configuring ExportESPDResponseV2 endpoint...");
-            Endpoint ESPDResponseV2Endpoint = new ExportESPDv2Endpoint(new RegulatedModeltoESPDResponseV2Service());
-            v2Context.addEndpointWithPath(ESPDResponseV2Endpoint, "/espd/response");
+        LOGGER.info("Configuring ImportESPDRequest endpoint...");
+        Endpoint importESPDReq = new ImportESPDEndpoint(new ImportESPDRequestService());
+        baseContext.addEndpointWithPath(importESPDReq, "/importESPD/request");
 
-            LOGGER.info("Configuring ImportESPDRequest endpoint...");
-            Endpoint importESPDReq = new ImportESPDEndpoint(new ESPDRequestToModelService());
-            unversionedContext.addEndpointWithPath(importESPDReq, "/importESPD/request");
-
-            LOGGER.info("Configuring ImportESPDResponse endpoint...");
-            Endpoint importESPDResp = new ImportESPDEndpoint(new ESPDResponseToModelService());
-            unversionedContext.addEndpointWithPath(importESPDResp, "/importESPD/response");
-        } catch (Exception e) {
-            LOGGER.severe("Failed to initialize the endpoints with error " + e.getMessage());
-            System.exit(3);
-        }
+        LOGGER.info("Configuring ImportESPDResponse endpoint...");
+        Endpoint importESPDResp = new ImportESPDEndpoint(new ImportESPDResponseService());
+        baseContext.addEndpointWithPath(importESPDResp, "/importESPD/response");
 
         LOGGER.info("Server is up and running at port " + portToBind);
     }
@@ -112,14 +101,12 @@ public class Server {
 
             String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
             if (accessControlRequestHeaders != null) {
-                if (accessControlRequestHeaders != null)
-                    response.header("Access-Control-Allow-Headers", accessControlRequestHeaders);
+                response.header("Access-Control-Allow-Headers", accessControlRequestHeaders);
             }
 
             String accessControlRequestMethod = request.headers("Access-Control-Request-Method");
             if (accessControlRequestMethod != null) {
-                if (accessControlRequestMethod != null)
-                    response.header("Access-Control-Allow-Methods", accessControlRequestMethod);
+                response.header("Access-Control-Allow-Methods", accessControlRequestMethod);
             }
 
             return "OK";
