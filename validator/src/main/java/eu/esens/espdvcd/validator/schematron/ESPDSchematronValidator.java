@@ -1,12 +1,19 @@
 package eu.esens.espdvcd.validator.schematron;
 
+import com.helger.commons.io.resource.ClassPathResource;
+import com.helger.commons.io.resource.IReadableResource;
+import com.helger.commons.string.StringHelper;
 import com.helger.schematron.svrl.SVRLMarshaller;
 import com.helger.schematron.xslt.SchematronResourceSCH;
+import com.helger.xml.transform.DefaultTransformURIResolver;
 import eu.esens.espdvcd.validator.ArtefactValidator;
 import eu.esens.espdvcd.validator.ValidationResult;
 import org.oclc.purl.dsdl.svrl.FailedAssert;
 import org.oclc.purl.dsdl.svrl.SchematronOutputType;
 
+import javax.annotation.Nullable;
+import javax.xml.transform.Source;
+import javax.xml.transform.TransformerException;
 import javax.xml.transform.stream.StreamSource;
 import java.io.File;
 import java.io.FileInputStream;
@@ -91,6 +98,11 @@ public class ESPDSchematronValidator implements ArtefactValidator {
         final Map<String, Object> aParams = new HashMap<>();
         aParams.put("allow-foreign", "true");
         schematron.setParameters(aParams);
+
+        ClasspathURIResolver resolver = new ClasspathURIResolver();
+        resolver.addResource("rules/v2/eu/ESPDRequest-2.0.2/xsl/ESPD-CriteriaTaxonomy-REGULATED.V2.0.2.xml");
+        resolver.addResource("rules/v2/eu/ESPDRequest-2.0.2/xsl/ESPD-CriteriaTaxonomy-SELFCONTAINED.V2.0.2.xml");
+        schematron.setURIResolver(resolver);
 
         if (!schematron.isValidSchematron()) {
             throw new IllegalArgumentException("Error... Invalid Schematron");
