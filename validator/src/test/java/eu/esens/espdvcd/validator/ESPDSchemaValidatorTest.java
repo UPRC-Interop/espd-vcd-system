@@ -109,8 +109,8 @@ public class ESPDSchemaValidatorTest {
             System.out.println(event);
         }
 
-        Assert.assertFalse(validator.isValid());
-        Assert.assertTrue(validator.getValidationMessages().size() > 0);
+        Assert.assertTrue(validator.isValid());
+        Assert.assertFalse(validator.getValidationMessages().size() > 0);
     }
 
 }

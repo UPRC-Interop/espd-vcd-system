@@ -29,7 +29,7 @@ public class ESPDSchemaValidator implements ArtefactValidator {
     private String xsdPath;
     private Class jaxbClass;
 
-    public ESPDSchemaValidator(InputStream is, String xsdPath, Class jaxbClass) throws SAXException, JAXBException {
+    public ESPDSchemaValidator(InputStream is, String xsdPath, Class jaxbClass, EDMVersion v) throws SAXException, JAXBException {
 
         this.xsdPath = xsdPath;
         this.jaxbClass = jaxbClass;
@@ -40,13 +40,13 @@ public class ESPDSchemaValidator implements ArtefactValidator {
         Schema schema = sf.newSchema(xsdURL);
 
         // validate input stream against schema
-        validateXML(is, schema);
+        validateXML(is, schema, v);
     }
 
-    private void validateXML(InputStream is, Schema schema) throws JAXBException {
+    private void validateXML(InputStream is, Schema schema, EDMVersion v) throws JAXBException {
 
         // creating unmarshaller
-        Unmarshaller unmarshaller = SchemaUtil.getUnmarshaller(EDMVersion.V1);
+        Unmarshaller unmarshaller = SchemaUtil.getUnmarshaller(v);
 
         // setting schema
         unmarshaller.setSchema(schema);

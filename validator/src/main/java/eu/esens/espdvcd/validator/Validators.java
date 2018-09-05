@@ -48,12 +48,12 @@ public class Validators {
 
                 case V1:
                     LOGGER.log(Level.INFO, "Creating ESPD request V1 edm validator for: " + espdRequest.getName());
-                    v = new ESPDSchemaValidator(is, "/" + XSD.ESPD_REQUEST.xsdPath(), ESPDRequestType.class);
+                    v = new ESPDSchemaValidator(is, "/" + XSD.ESPD_REQUEST.xsdPath(), ESPDRequestType.class, version);
                     break;
 
                 case V2:
                     LOGGER.log(Level.INFO, "Creating ESPD request V2 edm validator for: " + espdRequest.getName());
-                    v = new ESPDSchemaValidator(is, "/" + XSD.ESPD_REQUEST_V2.xsdPath(), QualificationApplicationRequestType.class);
+                    v = new ESPDSchemaValidator(is, "/" + XSD.ESPD_REQUEST_V2.xsdPath(), QualificationApplicationRequestType.class, version);
                     break;
 
                 default:
@@ -85,12 +85,12 @@ public class Validators {
 
                 case V1:
                     LOGGER.log(Level.INFO, "Creating ESPD request V1 edm validator for: " + espdResponse.getName());
-                    v = new ESPDSchemaValidator(is, "/" + XSD.ESPD_RESPONSE.xsdPath(), ESPDResponseType.class);
+                    v = new ESPDSchemaValidator(is, "/" + XSD.ESPD_RESPONSE.xsdPath(), ESPDResponseType.class, version);
                     break;
 
                 case V2:
                     LOGGER.log(Level.INFO, "Creating ESPD request V2 edm validator for: " + espdResponse.getName());
-                    v = new ESPDSchemaValidator(is, "/" + XSD.ESPD_RESPONSE_V2.xsdPath(), QualificationApplicationResponseType.class);
+                    v = new ESPDSchemaValidator(is, "/" + XSD.ESPD_RESPONSE_V2.xsdPath(), QualificationApplicationResponseType.class, version);
                     break;
 
                 default:
