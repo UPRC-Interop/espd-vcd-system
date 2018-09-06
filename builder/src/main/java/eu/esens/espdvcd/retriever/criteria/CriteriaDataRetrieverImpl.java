@@ -7,6 +7,7 @@ import eu.esens.espdvcd.model.LegislationReference;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
 import eu.esens.espdvcd.model.retriever.ECertisCriterion;
+import eu.esens.espdvcd.retriever.criteria.resource.ECertisResource;
 import eu.esens.espdvcd.retriever.criteria.resource.EvidencesResource;
 import eu.esens.espdvcd.retriever.criteria.resource.tasks.GetECertisCriterionRetryingTask;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
@@ -28,12 +29,14 @@ public class CriteriaDataRetrieverImpl implements CriteriaDataRetriever {
     private static final Logger LOGGER = Logger.getLogger(CriteriaDataRetrieverImpl.class.getName());
 
     private List<EvidencesResource> eResourceList;
+    private ECertisResource eCertisResource;
 
     private enum CriterionOrigin {EUROPEAN, NATIONAL}
 
     /* package private constructor. Create only through factory */
     CriteriaDataRetrieverImpl(@NotEmpty List<EvidencesResource> eResourceList) {
         this.eResourceList = eResourceList;
+        eCertisResource = new ECertisResource();
     }
 
     /**
@@ -74,35 +77,6 @@ public class CriteriaDataRetrieverImpl implements CriteriaDataRetriever {
     }
 
     /**
-     * Get sub-Criteria of a European Criterion by identification code.
-     *
-     * @param ec   The European Criterion
-     * @param code The identification code (ISO 639-1:2002)
-     * @return List of subCriteria
-     */
-    private List<ECertisCriterion> getSubCriterionList(ECertisCriterion ec, String code) {
-        return ec.getSubCriterions().stream()
-                .filter(c -> c.getLegislationReference() != null)
-                .filter(c -> c.getLegislationReference()
-                        .getJurisdictionLevelCode().equals(code))
-                .collect(Collectors.toList());
-    }
-
-    /**
-     * Get Parent Criterion of a National Criterion
-     *
-     * @param ec
-     * @return
-     * @throws RetrieverException
-     */
-    private ECertisCriterion getParentCriterion(ECertisCriterion ec) throws RetrieverException {
-        if (ec.getParentCriterion() == null) {
-            throw new RetrieverException("Error... Unable to Extract Parent Criterion of " + ec.getID());
-        }
-        return getECertisCriterion(ec.getParentCriterion().getID());
-    }
-
-    /**
      * Identifies the origin of given criterion ID (European or National). If
      * the criterion ID found to belong to a European criterion, then method
      * return all its National sub-Criteria, filtered by given country code. If
@@ -133,13 +107,13 @@ public class CriteriaDataRetrieverImpl implements CriteriaDataRetriever {
                 switch (origin) {
                     case EUROPEAN:
                         // Extract National Criteria
-                        nationalCriterionTypeList = getSubCriterionList(source, codeLowerCase);
+                        nationalCriterionTypeList = eCertisResource.getSubCriterionList(source, codeLowerCase);
                         break;
                     case NATIONAL:
                         // Get the EU Parent Criterion
-                        ECertisCriterion parent = getParentCriterion(source);
+                        ECertisCriterion parent = eCertisResource.getParentCriterion(source);
                         // Extract National Criteria
-                        nationalCriterionTypeList = getSubCriterionList(parent, codeLowerCase);
+                        nationalCriterionTypeList = eCertisResource.getSubCriterionList(parent, codeLowerCase);
                         break;
                     default:
                         throw new RetrieverException("Error... Criterion " + ID + " cannot be Classified as European or National");
@@ -159,23 +133,6 @@ public class CriteriaDataRetrieverImpl implements CriteriaDataRetriever {
     }
 
     /**
-     * Retrieves an e-Certis Criterion with full data.
-     *
-     * @param ID The Criterion ID
-     * @return The e-Certis Criterion
-     * @throws RetrieverException
-     */
-    ECertisCriterion getECertisCriterion(String ID) throws RetrieverException {
-        GetECertisCriterionRetryingTask task = new GetECertisCriterionRetryingTask(ID);
-
-        try {
-            return task.call();
-        } catch (ExecutionException | RetryException | IOException e) {
-            throw new RetrieverException(e);
-        }
-    }
-
-    /**
      * Retrieves an e-Certis Criterion, which maps to
      * the related {@link SelectableCriterion} model class.
      *
@@ -185,7 +142,7 @@ public class CriteriaDataRetrieverImpl implements CriteriaDataRetriever {
      */
     @Override
     public SelectableCriterion getCriterion(String ID) throws RetrieverException {
-        return ModelFactory.ESPD_REQUEST.extractSelectableCriterion(getECertisCriterion(ID), true);
+        return ModelFactory.ESPD_REQUEST.extractSelectableCriterion(eCertisResource.getECertisCriterion(ID), true);
     }
 
     /**

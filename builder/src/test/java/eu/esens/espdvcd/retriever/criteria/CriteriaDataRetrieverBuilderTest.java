@@ -1,20 +1,14 @@
 package eu.esens.espdvcd.retriever.criteria;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.esens.espdvcd.codelist.CodelistsV2;
 import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
-import eu.esens.espdvcd.model.retriever.ECertisCriterion;
-import eu.esens.espdvcd.retriever.criteria.resource.ECertisResource;
-import eu.esens.espdvcd.retriever.criteria.resource.EvidencesResource;
 import eu.esens.espdvcd.retriever.criteria.resource.SelectableCriterionPrinter;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,25 +30,6 @@ public class CriteriaDataRetrieverBuilderTest {
 
         SelectableCriterion sc = r.getCriterion("7c351fc0-1fd0-4bad-bfd8-1717a9dcf9d1");
         SelectableCriterionPrinter.print(sc);
-    }
-
-    @Test
-    public void testGetECertisCriterion() throws Exception {
-
-        ECertisResource r = new ECertisResource();
-        List<EvidencesResource> rList = new ArrayList<>();
-        rList.add(r);
-        CriteriaDataRetrieverImpl rImpl = new CriteriaDataRetrieverImpl(rList);
-
-        ECertisCriterion ec = rImpl.getECertisCriterion("7c351fc0-1fd0-4bad-bfd8-1717a9dcf9d1");
-
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-        mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
-
-        // Print JSON String
-        String prettyCt = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(ec);
-        System.out.println(prettyCt);
     }
 
     @Test

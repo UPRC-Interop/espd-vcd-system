@@ -189,13 +189,6 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
     @Override
     public List<Evidence> getEvidencesForCriterion(String ID) throws RetrieverException {
 
-        // FIXME below comment section fails because national criteria are not contained in criterionMap in the current approach
-//        initCriterionMap();
-//
-//        if (criterionMap.containsKey(ID)) {
-//            return ModelFactory.ESPD_REQUEST.extractEvidences(criterionMap.get(ID).getEvidenceGroups());
-//        }
-
         GetECertisCriterionRetryingTask task = new GetECertisCriterionRetryingTask(ID);
 
         try {
@@ -210,6 +203,52 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
     @Override
     public ResourceType getResourceType() {
         return ResourceType.ECERTIS;
+    }
+
+    /**
+     * Retrieves an e-Certis Criterion with full data.
+     *
+     * @param ID The Criterion ID
+     * @return The e-Certis Criterion
+     * @throws RetrieverException
+     */
+    public ECertisCriterion getECertisCriterion(String ID) throws RetrieverException {
+        GetECertisCriterionRetryingTask task = new GetECertisCriterionRetryingTask(ID);
+
+        try {
+            return task.call();
+        } catch (ExecutionException | RetryException | IOException e) {
+            throw new RetrieverException(e);
+        }
+    }
+
+    /**
+     * Get Parent Criterion of a National Criterion
+     *
+     * @param ec
+     * @return
+     * @throws RetrieverException
+     */
+    public ECertisCriterion getParentCriterion(ECertisCriterion ec) throws RetrieverException {
+        if (ec.getParentCriterion() == null) {
+            throw new RetrieverException("Error... Unable to Extract Parent Criterion of " + ec.getID());
+        }
+        return getECertisCriterion(ec.getParentCriterion().getID());
+    }
+
+    /**
+     * Get sub-Criteria of a European Criterion by identification code.
+     *
+     * @param ec   The European Criterion
+     * @param code The identification code (ISO 639-1:2002)
+     * @return List of subCriteria
+     */
+    public List<ECertisCriterion> getSubCriterionList(ECertisCriterion ec, String code) {
+        return ec.getSubCriterions().stream()
+                .filter(c -> c.getLegislationReference() != null)
+                .filter(c -> c.getLegislationReference()
+                        .getJurisdictionLevelCode().equals(code))
+                .collect(Collectors.toList());
     }
 
 }

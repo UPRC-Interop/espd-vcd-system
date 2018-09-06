@@ -1,5 +1,8 @@
 package eu.esens.espdvcd.retriever.criteria.resource;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import eu.esens.espdvcd.model.retriever.ECertisCriterion;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -59,6 +62,22 @@ public class ECertisResourceTest {
     @Test
     public void testGetEvidencesForCriterion() throws Exception {
         Assert.assertFalse(r.getEvidencesForCriterion("a205fa3b-0719-4c8a-b09d-8f6b2cbf8bd2").isEmpty());
+    }
+
+    @Test
+    public void testGetECertisCriterion() throws Exception {
+
+        ECertisResource r = new ECertisResource();
+
+        ECertisCriterion ec = r.getECertisCriterion("7c351fc0-1fd0-4bad-bfd8-1717a9dcf9d1");
+
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+
+        // Print JSON String
+        String prettyCt = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(ec);
+        System.out.println(prettyCt);
     }
 
 }
