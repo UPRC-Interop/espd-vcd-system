@@ -1,13 +1,16 @@
 package eu.esens.espdvcd.builder.schema;
 
-public abstract class SchemaFactory {
+public class SchemaFactory {
 
-    public static SchemaFactoryV1 withSchemaVersion1() {
-        return new SchemaFactoryV1();
+    private static final SchemaFactoryV1 schemaFactoryV1 = new SchemaFactoryV1();
+    private static final SchemaFactoryV2 schemaFactoryV2 = new SchemaFactoryV2();
+
+    public static SchemaFactoryV1 withEDM_V1() {
+        return schemaFactoryV1;
     }
 
-    public static SchemaFactoryV2 withSchemaVersion2() {
-        return new SchemaFactoryV2();
+    public static SchemaFactoryV2 withEDM_V2() {
+        return schemaFactoryV2;
     }
 
 }

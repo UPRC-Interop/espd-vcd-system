@@ -14,6 +14,7 @@ import no.difi.asic.AsicWriterFactory;
 import no.difi.asic.AsicWriter;
 import no.difi.asic.MimeType;
 import no.difi.asic.SignatureHelper;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +40,7 @@ public class VCDDocumentBuilder extends DocumentBuilderV1 {
 
         // extract references to evidence documents from ESPDResponse
         if (req instanceof ESPDResponse) {
-            scanForDocuments((ESPDResponse)req);
+            scanForDocuments((ESPDResponse) req);
         }
     }
 
@@ -66,15 +67,14 @@ public class VCDDocumentBuilder extends DocumentBuilderV1 {
         try {
             // Add the XML business document
             AsicWriter asicWriter = asicWriterFactory.newContainer(archiveOutputFile)
-                 .add(espdStream, "espd.xml", MimeType.forString("application/xml"));
+                    .add(espdStream, "espd.xml", MimeType.forString("application/xml"));
 
             // Add all found evidence documents with modified file entry name
             for (URI document : documents) {
                 asicWriter.add(new File(document), EvidenceHelper.getASiCResourcePath(document.toString()));
             }
             asicWriter.sign(signatureHelper);
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(VCDDocumentBuilder.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -91,6 +91,7 @@ public class VCDDocumentBuilder extends DocumentBuilderV1 {
 
     /**
      * Scan the espd for references to locally stored ("java.io.tmpdir" folder) documents
+     *
      * @param espd
      */
     private void scanForDocuments(ESPDResponse espd) {
@@ -103,17 +104,18 @@ public class VCDDocumentBuilder extends DocumentBuilderV1 {
 
     /**
      * Recursively scan requirement groups for references to locally stored documents
+     *
      * @param rg
      */
     private void scanRequirementGroup(RequirementGroup rg) {
-        for (RequirementGroup innerRg : rg.getRequirementGroups() ) {
+        for (RequirementGroup innerRg : rg.getRequirementGroups()) {
             scanRequirementGroup(innerRg);
         }
         for (Requirement rq : rg.getRequirements()) {
             Response resp = rq.getResponse();
             //if (rq.getResponseDataType().equals(ResponseTypeEnum.EVIDENCE_URL)) {
             if (resp instanceof EvidenceURLResponse) {
-                String uriStr = ((EvidenceURLResponse)resp).getEvidenceURL();
+                String uriStr = ((EvidenceURLResponse) resp).getEvidenceURL();
                 if (uriStr != null) {
                     try {
                         URI uri = URI.create(uriStr);
@@ -138,7 +140,8 @@ public class VCDDocumentBuilder extends DocumentBuilderV1 {
 
     @Override
     protected ESPDResponseType createXML(ESPDResponse res) {
-        ESPDResponseType resType = finalize(SchemaFactory.withSchemaVersion1().VCD_RESPONSE.extractESPDResponseType(res));
+        ESPDResponseType resType = finalize(SchemaFactory.withEDM_V1().VCD_RESPONSE
+                .extractESPDResponseType(res));
         return resType;
     }
 }

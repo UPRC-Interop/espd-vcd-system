@@ -45,8 +45,7 @@ public class DocumentBuilderV2 {
      * @return a JAXB QualificationApplicationRequestType instance from an ESPDRequest Model instance
      */
     private QualificationApplicationRequestType createXML(ESPDRequest req) {
-        QualificationApplicationRequestType reqType = finalize(SchemaFactory
-                .withSchemaVersion2().ESPD_REQUEST
+        QualificationApplicationRequestType reqType = finalize(SchemaFactory.withEDM_V2().ESPD_REQUEST
                 .extractQualificationApplicationRequestType(req));
         return reqType;
     }
@@ -56,8 +55,7 @@ public class DocumentBuilderV2 {
      * @return a JAXB QualificationApplicationResponseType instance from an ESPDResponse Model instance
      */
     protected QualificationApplicationResponseType createXML(ESPDResponse res) {
-        QualificationApplicationResponseType resType = finalize(SchemaFactory
-                .withSchemaVersion2().ESPD_RESPONSE
+        QualificationApplicationResponseType resType = finalize(SchemaFactory.withEDM_V2().ESPD_RESPONSE
                 .extractQualificationApplicationResponseType(res));
         return resType;
     }
@@ -80,8 +78,10 @@ public class DocumentBuilderV2 {
 
 
         reqType.setProfileID(createCENBIIProfileIdType(getProfileID()));
-        reqType.setID(SchemaFactory.withSchemaVersion2().ESPD_REQUEST.createISOIECIDType(UUID.randomUUID().toString()));
-        reqType.setUUID(SchemaFactory.withSchemaVersion2().ESPD_REQUEST.createISOIECUUIDType(UUID.randomUUID().toString()));
+        reqType.setID(SchemaFactory.withEDM_V2().ESPD_REQUEST
+                .createISOIECIDType(UUID.randomUUID().toString()));
+        reqType.setUUID(SchemaFactory.withEDM_V2().ESPD_REQUEST
+                .createISOIECUUIDType(UUID.randomUUID().toString()));
 
         return reqType;
     }
@@ -103,8 +103,10 @@ public class DocumentBuilderV2 {
         resType.getIssueTime().setValue(LocalTime.now());
 
         resType.setProfileID(createCENBIIProfileIdType(getProfileID()));
-        resType.setID(SchemaFactory.withSchemaVersion2().ESPD_RESPONSE.createISOIECIDType(UUID.randomUUID().toString()));
-        resType.setUUID(SchemaFactory.withSchemaVersion2().ESPD_RESPONSE.createISOIECUUIDType(UUID.randomUUID().toString()));
+        resType.setID(SchemaFactory.withEDM_V2().ESPD_RESPONSE
+                .createISOIECIDType(UUID.randomUUID().toString()));
+        resType.setUUID(SchemaFactory.withEDM_V2().ESPD_RESPONSE
+                .createISOIECUUIDType(UUID.randomUUID().toString()));
 
         return resType;
     }
