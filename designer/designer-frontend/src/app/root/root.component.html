@@ -8,14 +8,14 @@
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Procedure</ng-template>
-      <app-procedure *ngIf="dataService.isCA"></app-procedure>
+      <app-procedure *ngIf="utilities.isCA"></app-procedure>
       <app-procedure-eo [formA] = 'dataService.eoRelatedACriteriaForm'
                         [formD] = 'dataService.eoRelatedDCriteriaForm'
                         [formC] = 'dataService.eoRelatedCCriteriaForm'
                         [eoRelatedACriteria] = 'dataService.eoRelatedACriteria'
                         [eoRelatedCCriteria] = 'dataService.eoRelatedCCriteria'
                         [eoRelatedDCriteria] = 'dataService.eoRelatedDCriteria'
-                        *ngIf="dataService.isEO"></app-procedure-eo>
+                        *ngIf="utilities.isEO"></app-procedure-eo>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Exclusion</ng-template>
@@ -23,7 +23,7 @@
                       [exclusionBCriteria] = 'dataService.exclusionBCriteria'
                       [exclusionCCriteria] = 'dataService.exclusionCCriteria'
                       [exclusionDCriteria] = 'dataService.exclusionDCriteria'
-                      *ngIf="dataService.isCA"></app-exclusion>
+                      *ngIf="utilities.isCA"></app-exclusion>
       <app-exclusion-eo [formA] = 'dataService.exclusionACriteriaForm'
                         [formB] = 'dataService.exclusionBCriteriaForm'
                         [formC] = 'dataService.exclusionCCriteriaForm'
@@ -32,7 +32,7 @@
                         [exclusionBCriteria] = 'dataService.exclusionBCriteria'
                         [exclusionCCriteria] = 'dataService.exclusionCCriteria'
                         [exclusionDCriteria] = 'dataService.exclusionDCriteria'
-        *ngIf="dataService.isEO"></app-exclusion-eo>
+        *ngIf="utilities.isEO"></app-exclusion-eo>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Selection</ng-template>
@@ -41,7 +41,7 @@
                      [selectionCCriteria] = 'dataService.selectionCCriteria'
                      [selectionDCriteria] = 'dataService.selectionDCriteria'
                      [selectionALLCriteria]='dataService.selectionALLCriteria'
-        *ngIf="dataService.isCA"></app-selection>
+        *ngIf="utilities.isCA"></app-selection>
       <app-selection-eo [formA] = 'dataService.selectionACriteriaForm'
                         [formB] = 'dataService.selectionBCriteriaForm'
                         [formC] = 'dataService.selectionCCriteriaForm'
@@ -52,14 +52,14 @@
                         [selectionCCriteria] = 'dataService.selectionCCriteria'
                         [selectionDCriteria] = 'dataService.selectionDCriteria'
                         [selectionALLCriteria]="dataService.selectionALLCriteria"
-                        *ngIf="dataService.isEO"></app-selection-eo>
+                        *ngIf="utilities.isEO"></app-selection-eo>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Finish</ng-template>
-      <app-finish *ngIf="dataService.isCA"></app-finish>
+      <app-finish *ngIf="utilities.isCA"></app-finish>
       <app-finish-eo [form]="dataService.reductionCriteriaForm"
                      [reductionCriteria]="dataService.reductionCriteria"
-        *ngIf="dataService.isEO"></app-finish-eo>
+        *ngIf="utilities.isEO"></app-finish-eo>
     </mat-step>
   </mat-horizontal-stepper>
 

@@ -1,20 +1,28 @@
 import {Injectable} from '@angular/core';
 import {RequirementGroup} from '../model/requirementGroup.model';
 import {EoRelatedCriterion} from '../model/eoRelatedCriterion.model';
-import {FormGroup} from '@angular/forms';
+import {FormControl, FormGroup} from '@angular/forms';
 import {RequirementResponse} from '../model/requirement-response.model';
 import {Evidence} from '../model/evidence.model';
 import {EvidenceIssuer} from '../model/evidenceIssuer.model';
 import * as moment from 'moment';
 import {DataService} from './data.service';
 import {ApicallService} from './apicall.service';
+import {ExclusionCriteria} from '../model/exclusionCriteria.model';
+import {SelectionCriteria} from '../model/selectionCriteria.model';
+import {ReductionCriterion} from '../model/reductionCriterion.model';
+import {UtilitiesService} from './utilities.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FormUtilService {
+  template = [];
+  evidenceList: Evidence[] = [];
 
-  constructor(private dataService: DataService, private APIService: ApicallService) {
+
+  constructor(private APIService: ApicallService,
+              public utilities: UtilitiesService) {
   }
 
 
@@ -53,7 +61,7 @@ export class FormUtilService {
               const evidenceUrlID = req.uuid + 'evidenceUrl';
               const evidenceCodeID = req.uuid + 'evidenceCode';
               const evidenceIssuerID = req.uuid + 'evidenceIssuer';
-              if (formValues[evidenceUrlID.valueOf()] !== null ) {
+              if (formValues[evidenceUrlID.valueOf()] !== null) {
                 // create evidence
                 let evidence = new Evidence();
                 let evidenceIssuer = new EvidenceIssuer();
@@ -111,7 +119,7 @@ export class FormUtilService {
               // console.log(req.response.date);
               // console.log(typeof req.response.date);
               if (typeof req.response.date !== 'string' && req.response.date !== null && req.response.date !== undefined) {
-                const utcDate = this.dataService.toUTCDate(req.response.date);
+                const utcDate = this.utilities.toUTCDate(req.response.date);
                 req.response.date = moment(utcDate);
               }
               req.response.uuid = null;
@@ -126,14 +134,14 @@ export class FormUtilService {
               const startDateid = req.uuid + 'startDate';
               req.response.startDate = formValues[startDateid.valueOf()];
               if (typeof req.response.startDate !== 'string' && req.response.startDate !== null) {
-                const utcDate = this.dataService.toUTCDate(req.response.startDate);
+                const utcDate = this.utilities.toUTCDate(req.response.startDate);
                 req.response.startDate = moment(utcDate);
               }
               // console.log(req.response.startDate);
               const endDateid = req.uuid + 'endDate';
               req.response.endDate = formValues[endDateid.valueOf()];
               if (typeof req.response.endDate !== 'string' && req.response.endDate !== null) {
-                const utcDate = this.dataService.toUTCDate(req.response.endDate);
+                const utcDate = this.utilities.toUTCDate(req.response.endDate);
                 req.response.endDate = moment(utcDate);
               }
               // console.log(req.response.endDate);
@@ -250,6 +258,234 @@ export class FormUtilService {
         }
       });
     });
+  }
+
+  getReqGroups(rg: RequirementGroup) {
+    if (rg !== null || rg !== undefined) {
+
+      this.template[rg.id] = rg;
+
+      // console.log('upper rg.id: ' + rg.id);
+      // console.log(rg.id);
+      if (rg.requirementGroups !== null || rg.requirementGroups !== undefined) {
+        rg.requirementGroups.forEach(rg2 => {
+          // console.log('inner for: ' + rg2.id);
+          // console.log(this.template);
+          // console.log(rg2.id);
+          this.getReqGroups(rg2);
+        });
+
+      }
+    }
+  }
+
+  // id as input parameter, to create formGroup for specific requirementGroup object
+  createTemplateFormGroup(id: string): FormGroup {
+    return this.toFormGroup(this.template[id]);
+  }
+
+
+  createExclusionCriterionForm(criteria: ExclusionCriteria[]) {
+    let group: any = {};
+    criteria.forEach(cr => {
+      group[cr.uuid] = this.createFormGroups(cr.requirementGroups);
+      // console.log(group[cr.typeCode]);
+    });
+    let fg = new FormGroup(group);
+    // console.log(fg);
+    return fg;
+  }
+
+  createSelectionCriterionForm(criteria: SelectionCriteria[]) {
+    let group: any = {};
+    criteria.forEach(cr => {
+      group[cr.uuid] = this.createFormGroups(cr.requirementGroups);
+      // console.log(group[cr.typeCode]);
+    });
+    let fg = new FormGroup(group);
+    // console.log(fg);
+    return fg;
+  }
+
+  createReductionCriterionForm(criteria: ReductionCriterion[]) {
+    let group: any = {};
+    criteria.forEach(cr => {
+      group[cr.uuid] = this.createFormGroups(cr.requirementGroups);
+      // console.log(group[cr.typeCode]);
+    });
+    let fg = new FormGroup(group);
+
+    // console.log(fg);
+    return fg;
+  }
+
+  createEORelatedCriterionForm(criteria: EoRelatedCriterion[]) {
+    let group: any = {};
+    criteria.forEach(cr => {
+      group[cr.uuid] = this.createFormGroups(cr.requirementGroups);
+      // console.log(group[cr.typeCode]);
+    });
+    let fg = new FormGroup(group);
+
+    // console.log(fg);
+    return fg;
+  }
+
+
+  createFormGroups(reqGroups: RequirementGroup[]) {
+    let group: any = {};
+    reqGroups.forEach(rg => {
+      group[rg.uuid] = this.toFormGroup(rg);
+    });
+    // console.log(group);
+    let fg = new FormGroup(group);
+    // console.log(fg);
+    return fg;
+  }
+
+  toFormGroup(rg: RequirementGroup) {
+    let group: any = {};
+    if (rg) {
+      // console.log('In Req Group: ' + rg.id);
+      if (rg.requirements != undefined) {
+        rg.requirements.forEach(r => {
+          if (r.response != null || r.response != undefined) {
+            group[r.uuid] = new FormControl(r.response.description ||
+              r.response.percentage || r.response.evidenceURL ||
+              r.response.evidenceURLCode || r.response.countryCode ||
+              r.response.period || r.response.quantity || r.response.year || r.response.url || r.response.identifier || '');
+
+
+            // YES/NO if responseDataType is indicator then pass indicator value to formControl. (initial state problem fixed)
+            if (r.responseDataType === 'INDICATOR') {
+              group[r.uuid] = new FormControl(r.response.indicator);
+            }
+
+            if (r.response.date) {
+
+              group[r.uuid] = new FormControl(r.response.date);
+            }
+
+            // FIX: starDate-endDate null value case when AtoD Criteria are selected
+            if (r.response.startDate) {
+              group[r.uuid + 'startDate'] = new FormControl(r.response.startDate);
+            } else if (r.response.startDate === null) {
+              group[r.uuid + 'startDate'] = new FormControl();
+            }
+            if (r.response.endDate) {
+              group[r.uuid + 'endDate'] = new FormControl(r.response.endDate);
+            } else if (r.response.endDate === null) {
+              group[r.uuid + 'endDate'] = new FormControl();
+            }
+
+            if (r.response.evidenceSuppliedId) {
+
+              // TODO find evidence in EvidenceList object and import it
+              const evi = this.evidenceList.find((ev) => {
+                if (ev.id === r.response.evidenceSuppliedId) {
+                  // this.evidenceList[i].description = 'test';
+                  return true;
+                }
+              });
+              // console.log(evi);
+              // console.log(typeof evi);
+
+              group[r.uuid + 'evidenceUrl'] = new FormControl(evi.evidenceURL);
+              group[r.uuid + 'evidenceCode'] = new FormControl(evi.description);
+              group[r.uuid + 'evidenceIssuer'] = new FormControl(evi.evidenceIssuer.name);
+            }
+
+            if (r.response.currency || r.response.amount) {
+              group[r.uuid] = new FormControl(r.response.amount);
+              if (r.response.currency !== null && r.response.currency !== undefined) {
+                group[r.uuid + 'currency'] = new FormControl(r.response.currency);
+              }
+            }
+            // in case of request import
+            if (r.response.currency === null || r.response.amount === '0') {
+              group[r.uuid + 'currency'] = new FormControl();
+            }
+
+
+            // console.log(r.response);
+          } else {
+            r.response = new RequirementResponse();
+            group[r.uuid] = new FormControl(r.response.description || '');
+
+            // TODO: make util service that hold dataservice EO,CA etc...
+            if (this.utilities.isEO) {
+              if (r.responseDataType === 'INDICATOR') {
+                group[r.uuid] = new FormControl(false);
+              }
+              if (r.responseDataType === 'AMOUNT') {
+                group[r.uuid + 'currency'] = new FormControl();
+              }
+
+              // group[r.uuid + 'startDate'] = new FormControl();
+              // group[r.uuid + 'endDate'] = new FormControl();
+              if (r.responseDataType === 'PERIOD' && this.APIService.version === 'v2') {
+                group[r.uuid + 'startDate'] = new FormControl();
+                group[r.uuid + 'endDate'] = new FormControl();
+              }
+              if (r.responseDataType === 'EVIDENCE_IDENTIFIER') {
+                group[r.uuid + 'evidenceUrl'] = new FormControl();
+                group[r.uuid + 'evidenceCode'] = new FormControl();
+                group[r.uuid + 'evidenceIssuer'] = new FormControl();
+              }
+            }
+
+          }
+
+          // console.log(group);
+          // console.log(group[r.uuid]);
+        });
+      }
+      if (rg.requirementGroups != null || rg.requirementGroups != undefined) {
+        rg.requirementGroups.forEach(rg => {
+          // console.log('Req Group ' + rg.uuid);
+          group[rg.uuid] = this.toFormGroup(rg);
+        });
+      }
+    }
+    let fg = new FormGroup(group);
+
+    // console.log(fg.getRawValue());
+    return fg;
+  }
+
+
+  pushToReqGroups(rg: RequirementGroup, temp: any) {
+    if (rg !== null || rg !== undefined) {
+
+      if (rg.requirementGroups !== null || rg.requirementGroups !== undefined) {
+
+
+        if (rg.id === '7c637c0c-7703-4389-ba52-02997a055bd7') {
+          const rgFound = rg.requirementGroups.find((reqGroup) => {
+            // console.log('REQGROUP uuid: ' + reqGroup.uuid);
+            // console.log('TEMP uuid: ' + temp.uuid);
+            if (reqGroup.uuid === temp.uuid) {
+              // console.log('Do not add cause it is already added...');
+              return false;
+            }
+          });
+          // console.log(rgFound);
+          // if reqGroup with temp.uuid not found then push it
+          if (!rgFound) {
+            // console.log('not found, ADD it: ');
+            console.log('Length before push: ' + rg.requirementGroups.length);
+            rg.requirementGroups.push(temp);
+            console.log('Length after push: ' + rg.requirementGroups.length);
+            console.log(rg.requirementGroups);
+          }
+        }
+
+        rg.requirementGroups.forEach(rg2 => {
+          this.pushToReqGroups(rg2, temp);
+        });
+
+      }
+    }
   }
 
 }

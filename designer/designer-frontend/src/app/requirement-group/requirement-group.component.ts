@@ -21,32 +21,10 @@ export class RequirementGroupComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    // this.childIndicator = true;
-    // this.tempForm = this.form;
-    // console.log(this.form.get(this.reqGroup.uuid));
-    // console.log(this.form.controls[this.reqGroup.uuid]);
-    // this.form = this.form[this.reqGroup.uuid];
-    // console.log(this.form);
-    // console.log(this.form.controls);
-    // for (const control in this.form.controls) {
-    //   if (this.form.get(control)) {
-    //     console.log(this.form.get(control));
-    //     // if (this.form.get(control).value.controls !== null) {
-    //     //   console.log(this.form.get(control).value.controls !== null);
-    //     // }
-    //
-    //   }
-    // }
   }
 
   ngOnChanges() {
     this.showIndicator = this.checkIndicator(this.indicator);
-    // console.log(this.showIndicator);
-
-    // if form.get(rg.uuid) != undefined
-
-    // console.log('Reg Group Id: ' + this.reqGroup.uuid + ' show Indicator is: ' + this.showIndicator);
-    // console.log(typeof this.showIndicator);
   }
 
   checkIndicator(b: boolean): boolean {
@@ -66,44 +44,6 @@ export class RequirementGroupComponent implements OnInit, OnChanges {
 
   childIndicatorChangedHandler(event: boolean) {
     this.childIndicator = (event);
-    // console.log('Before ====== child indicator is: ' + this.childIndicator);
-    // console.log(typeof this.childIndicator);
-
-    // if (typeof this.childIndicator === 'string') {
-    //   if (this.childIndicator === '') {
-    //     this.childIndicator = true;
-    //   }
-    // }
-
-    // if (typeof this.childIndicator === 'string') {
-    //   if (this.childIndicator === '') {
-    //     this.childIndicator = false;
-    //     if (this.form.controls[this.reqGroup.uuid] !== undefined) {
-    //       this.childIndicator = true;
-    //     }
-    //   } else {
-    //     this.childIndicator = true;
-    //   }
-    // }
-
-    // console.log('child indicator is: ' + this.childIndicator);
-    // console.log(typeof this.childIndicator);
-
-    // if (this.form.controls !== undefined) {
-    //   this.childIndicator = true;
-    // }
-
-
-    // this.childIndicator = false;
-
-
-    // if (this.form.get(this.reqGroup.uuid)) {
-    //   console.log(this.form.get(this.reqGroup.uuid));
-    //   console.log('this is true');
-    // } else {
-    //   console.log(this.form.get(this.reqGroup.uuid));
-    //   console.log('this is false');
-    // }
 
   }
 }

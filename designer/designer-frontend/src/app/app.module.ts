@@ -46,7 +46,7 @@ import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material'
     RequirementComponent,
     RootComponent,
     CriterionComponent,
-    FinishEoComponent,
+    FinishEoComponent
   ],
   imports: [
     BrowserModule,

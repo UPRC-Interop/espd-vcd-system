@@ -23,6 +23,8 @@ import {PostalAddress} from '../model/postalAddress.model';
 import {ContactingDetails} from '../model/contactingDetails.model';
 import {MatSnackBar} from '@angular/material';
 import {Evidence} from '../model/evidence.model';
+import {FormUtilService} from './form-util.service';
+import {UtilitiesService} from './utilities.service';
 
 @Injectable()
 export class DataService {
@@ -82,13 +84,6 @@ export class DataService {
   espdRequest: ESPDRequest;
   espdResponse: ESPDResponse;
   version: string;
-
-  isCA: boolean = false;
-  isEO: boolean = false;
-  isImportESPD: boolean = false;
-  isCreateResponse: boolean = false;
-  isCreateNewESPD: boolean = false;
-  isReviewESPD = false;
   receivedNoticeNumber: string;
   selectedCountry: string = '';
   selectedEOCountry: string = '';
@@ -116,7 +111,10 @@ export class DataService {
   public reductionCriteriaForm: FormGroup = null;
 
 
-  constructor(private APIService: ApicallService, public snackBar: MatSnackBar) {
+  constructor(private APIService: ApicallService,
+              public snackBar: MatSnackBar,
+              public formUtil: FormUtilService,
+              public utilities: UtilitiesService) {
 
   }
 
@@ -157,7 +155,7 @@ export class DataService {
     // let exAString:string= JSON.stringify(exclusionACriteria);
     // let exBString:string= JSON.stringify(exclusionBCriteria);
 
-    if (this.isCA) {
+    if (this.utilities.isCA) {
       if (isSatisfiedALL) {
         console.log(reductionCriteria);
         var combineJsonArray = [...exclusionACriteria,
@@ -240,7 +238,7 @@ export class DataService {
     //     return combineJsonArray;
     //   }
     // } else
-    if (this.isEO) {
+    if (this.utilities.isEO) {
       if (isSatisfiedALL) {
         console.log(reductionCriteria);
         console.log(eoRelatedACriteria);
@@ -322,43 +320,26 @@ export class DataService {
 
   // date handling
 
-  toUTCDate(date: Moment): Moment {
-    if (date !== null && date !== undefined) {
-      const utcDate = new Date(Date.UTC(date.toDate().getFullYear(),
-        date.toDate().getMonth(),
-        date.toDate().getDate(),
-        date.toDate().getHours(),
-        date.toDate().getMinutes()));
-
-      return moment(utcDate);
-    }
-
-  }
+  // toUTCDate(date: Moment): Moment {
+  //   if (date !== null && date !== undefined) {
+  //     const utcDate = new Date(Date.UTC(date.toDate().getFullYear(),
+  //       date.toDate().getMonth(),
+  //       date.toDate().getDate(),
+  //       date.toDate().getHours(),
+  //       date.toDate().getMinutes()));
+  //
+  //     return moment(utcDate);
+  //   }
+  //
+  // }
 
 
   createESPDResponse(): ESPDResponse {
-    this.espdResponse = new ESPDResponse(this.CADetails, this.EODetails, this.fullCriterionList, this.evidenceList);
-    // console.log(this.espdResponse.eodetails.naturalPersons[0].birthDate);
-    // console.log(JSON.stringify(this.espdResponse.eodetails.naturalPersons[0].birthDate));
-    // let utcDate = new Date(Date.UTC(this.espdResponse.eodetails.naturalPersons[0].birthDate.toDate().getFullYear(),
-    //   this.espdResponse.eodetails.naturalPersons[0].birthDate.toDate().getMonth(),
-    //   this.espdResponse.eodetails.naturalPersons[0].birthDate.toDate().getDate(),
-    //   this.espdResponse.eodetails.naturalPersons[0].birthDate.toDate().getHours(),
-    //   this.espdResponse.eodetails.naturalPersons[0].birthDate.toDate().getMinutes()));
-    // console.log(utcDate);
-    //
-    // // let momentUTC = moment.utc(this.espdResponse.eodetails.naturalPersons[0].birthDate).format();
-    // // console.log(momentUTC);
-    // // console.log(JSON.stringify(momentUTC));
-    //
-    // this.espdResponse.eodetails.naturalPersons[0].birthDate = moment(utcDate);
-    //
-    // let result = JSON.stringify(utcDate);
-    // console.log(result);
+    this.espdResponse = new ESPDResponse(this.CADetails, this.EODetails, this.fullCriterionList, this.formUtil.evidenceList);
 
     if (typeof this.espdResponse.eodetails.naturalPersons[0].birthDate !== 'string'
       && this.espdResponse.eodetails.naturalPersons[0].birthDate !== null) {
-      let utcDate = this.toUTCDate(this.espdResponse.eodetails.naturalPersons[0].birthDate);
+      let utcDate = this.utilities.toUTCDate(this.espdResponse.eodetails.naturalPersons[0].birthDate);
       this.espdResponse.eodetails.naturalPersons[0].birthDate = moment(utcDate);
     }
 
@@ -421,22 +402,7 @@ export class DataService {
         this.openSnackBar(message, action);
       });
 
-    // this.APIService.getXMLRequestV2(JSON.stringify(this.createESPDRequest()))
-    //   .then(res => {
-    //     console.log(res);
-    //     this.createFileV2(res);
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
-
   }
-
-  // procedureSubmit(eoRelatedCriteria: EoRelatedCriterion[], reductionCriteria: ReductionCriterion[]) {
-  //   this.eoRelatedCriteria = eoRelatedCriteria;
-  //   this.reductionCriteria = reductionCriteria;
-  //   // console.log(this.reductionCriteria);
-  // }
 
 
   procedureEOSubmit(eoRelatedCriteriaA: EoRelatedCriterion[],
@@ -500,31 +466,6 @@ export class DataService {
         this.openSnackBar(message, action);
       });
 
-    // if (this.APIService.version == 'v1') {
-    //   this.APIService.getXMLResponse(JSON.stringify(this.createESPDResponse()))
-    //     .then(res => {
-    //       console.log(res);
-    //       this.createFile(res);
-    //       this.saveFile(this.blob);
-    //     })
-    //     .catch(err => {
-    //       console.log(err);
-    //     });
-    // } else if (this.APIService.version == 'v2') {
-    //   this.APIService.getXMLResponseV2(JSON.stringify(this.createESPDResponse()))
-    //     .then(res => {
-    //       console.log(res);
-    //       // this.createFileV2(res);
-    //       // this.saveFile(this.blobV2);
-    //
-    //       this.createFile(res);
-    //       this.saveFile(this.blob);
-    //     })
-    //     .catch(err => {
-    //       console.log(err);
-    //     });
-    // }
-
   }
 
 
@@ -536,19 +477,15 @@ export class DataService {
     this.blob = new Blob([response.body], {type: 'text/xml'});
   }
 
-  // createFileV2(response) {
-  //   // const filename:string = "espd-request";
-  //   this.blobV2 = new Blob([response.body], {type: 'text/xml'});
-  // }
 
   saveFile(blob) {
-    if (this.isCA && this.APIService.version === 'v1') {
+    if (this.utilities.isCA && this.APIService.version === 'v1') {
       var filename = 'espd-request-v1';
-    } else if (this.isEO && this.APIService.version === 'v1') {
+    } else if (this.utilities.isEO && this.APIService.version === 'v1') {
       var filename = 'espd-response-v1';
-    } else if (this.isCA && this.APIService.version === 'v2') {
+    } else if (this.utilities.isCA && this.APIService.version === 'v2') {
       var filename = 'espd-request-v2';
-    } else if (this.isEO && this.APIService.version === 'v2') {
+    } else if (this.utilities.isEO && this.APIService.version === 'v2') {
       var filename = 'espd-response-v2';
     }
 
@@ -625,6 +562,7 @@ export class DataService {
           // get evidence list only in v2
           if (this.APIService.version === 'v2') {
             this.evidenceList = res.evidenceList;
+            this.formUtil.evidenceList = res.evidenceList;
             console.log(this.evidenceList);
           }
 
@@ -642,11 +580,11 @@ export class DataService {
           // console.log(this.eoRelatedCCriteria);
           this.eoRelatedDCriteria = this.filterEoRelatedCriteria(this.EO_RELATED_D_REGEXP, res.fullCriterionList);
           // console.log(this.eoRelatedDCriteria);
-          this.eoRelatedACriteriaForm = this.createEORelatedCriterionForm(this.eoRelatedACriteria);
+          this.eoRelatedACriteriaForm = this.formUtil.createEORelatedCriterionForm(this.eoRelatedACriteria);
           // console.log(this.eoRelatedACriteriaForm);
-          this.eoRelatedCCriteriaForm = this.createEORelatedCriterionForm(this.eoRelatedCCriteria);
+          this.eoRelatedCCriteriaForm = this.formUtil.createEORelatedCriterionForm(this.eoRelatedCCriteria);
           // console.log(this.eoRelatedCCriteriaForm);
-          this.eoRelatedDCriteriaForm = this.createEORelatedCriterionForm(this.eoRelatedDCriteria);
+          this.eoRelatedDCriteriaForm = this.formUtil.createEORelatedCriterionForm(this.eoRelatedDCriteria);
           // console.log(this.eoRelatedDCriteriaForm);
 
 
@@ -659,16 +597,14 @@ export class DataService {
           this.exclusionDCriteria = this.filterExclusionCriteria(this.EXCLUSION_NATIONAL_REGEXP, res.fullCriterionList);
           // console.log(this.exclusionDCriteria);
 
-          this.exclusionACriteriaForm = this.createExclusionCriterionForm(this.exclusionACriteria);
+          this.exclusionACriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionACriteria);
           console.log(this.exclusionACriteriaForm);
-          this.exclusionBCriteriaForm = this.createExclusionCriterionForm(this.exclusionBCriteria);
+          this.exclusionBCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionBCriteria);
           console.log(this.exclusionBCriteriaForm);
-          this.exclusionCCriteriaForm = this.createExclusionCriterionForm(this.exclusionCCriteria);
+          this.exclusionCCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionCCriteria);
           // console.log(this.exclusionCCriteriaForm);
-          this.exclusionDCriteriaForm = this.createExclusionCriterionForm(this.exclusionDCriteria);
+          this.exclusionDCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionDCriteria);
           // console.log(this.exclusionDCriteriaForm);
-
-
 
 
           this.selectionACriteria = this.filterSelectionCriteria(this.SELECTION_SUITABILITY_REGEXP, res.fullCriterionList);
@@ -683,22 +619,22 @@ export class DataService {
           console.log(this.selectionALLCriteria);
 
 
-          this.selectionACriteriaForm = this.createSelectionCriterionForm(this.selectionACriteria);
+          this.selectionACriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionACriteria);
           // console.log(this.selectionACriteriaForm);
-          this.selectionBCriteriaForm = this.createSelectionCriterionForm(this.selectionBCriteria);
+          this.selectionBCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionBCriteria);
           // console.log(this.selectionBCriteriaForm);
-          this.selectionCCriteriaForm = this.createSelectionCriterionForm(this.selectionCCriteria);
+          this.selectionCCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionCCriteria);
           // console.log(this.selectionCCriteriaForm);
-          this.selectionDCriteriaForm = this.createSelectionCriterionForm(this.selectionDCriteria);
+          this.selectionDCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionDCriteria);
           // console.log(this.selectionDCriteriaForm);
-          this.selectionALLCriteriaForm = this.createSelectionCriterionForm(this.selectionALLCriteria);
+          this.selectionALLCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionALLCriteria);
 
 
           this.reductionCriteria = this.filterReductionCriteria(this.REDUCTION_OF_CANDIDATES_REGEXP, res.fullCriterionList);
           if (!this.reductionCriteria) {
 
           }
-          this.reductionCriteriaForm = this.createReductionCriterionForm(this.reductionCriteria);
+          this.reductionCriteriaForm = this.formUtil.createReductionCriterionForm(this.reductionCriteria);
 
           // REVIEW ESPD: make forms non editable if user selected Review ESPD
           if (this.isReadOnly()) {
@@ -732,14 +668,14 @@ export class DataService {
     }
 
     if (form.value.chooseRole == 'CA') {
-      this.isCA = true;
+      this.utilities.isCA = true;
       this.receivedNoticeNumber = form.value.noticeNumber;
     }
 
   }
 
   isReadOnly(): boolean {
-    if (this.isReviewESPD) {
+    if (this.utilities.isReviewESPD) {
       // console.log('It is REVIEWESPD');
       return true;
     } else {
@@ -818,8 +754,8 @@ export class DataService {
     console.log('START ESPD');
 
     if (form.value.chooseRole === 'CA') {
-      this.isCA = true;
-      this.isEO = false;
+      this.utilities.isCA = true;
+      this.utilities.isEO = false;
       this.receivedNoticeNumber = form.value.noticeNumber;
       if (form.value.CACountry !== '') {
         this.selectedCountry = form.value.CACountry;
@@ -827,8 +763,8 @@ export class DataService {
     }
 
     if (form.value.chooseRole === 'EO') {
-      this.isEO = true;
-      this.isCA = false;
+      this.utilities.isEO = true;
+      this.utilities.isCA = false;
       if (form.value.EOCountry !== '') {
         this.selectedEOCountry = form.value.EOCountry;
 
@@ -836,26 +772,27 @@ export class DataService {
     }
 
     if (form.value.chooseRole == 'EO' && form.value.eoOptions == 'importESPD') {
-      this.isImportESPD = true;
-      this.isCreateResponse = false;
+      this.utilities.isImportESPD = true;
+      this.utilities.isCreateResponse = false;
     } else if (form.value.chooseRole == 'EO' && form.value.eoOptions == 'createResponse') {
-      this.isImportESPD = false;
-      this.isCreateResponse = true;
+      this.utilities.isImportESPD = false;
+      this.utilities.isCreateResponse = true;
     }
 
     /* ===================== create forms in case of predefined criteria ================== */
-    if (this.isCreateResponse) {
+    if (this.utilities.isCreateResponse) {
 
       this.getEoRelatedACriteria()
         .then(res => {
 
-          if (this.isCreateResponse) {
+          if (this.utilities.isCreateResponse) {
             this.eoRelatedACriteria = res;
+
             console.log('This is create response');
           }
 
 
-          this.eoRelatedACriteriaForm = this.createEORelatedCriterionForm(this.eoRelatedACriteria);
+          this.eoRelatedACriteriaForm = this.formUtil.createEORelatedCriterionForm(this.eoRelatedACriteria);
           console.log(this.eoRelatedACriteriaForm);
         })
         .catch(err => {
@@ -869,7 +806,7 @@ export class DataService {
       this.getEoRelatedCCriteria()
         .then(res => {
           this.eoRelatedCCriteria = res;
-          this.eoRelatedCCriteriaForm = this.createEORelatedCriterionForm(this.eoRelatedCCriteria);
+          this.eoRelatedCCriteriaForm = this.formUtil.createEORelatedCriterionForm(this.eoRelatedCCriteria);
         })
         .catch(err => {
           console.log(err);
@@ -882,7 +819,7 @@ export class DataService {
       this.getEoRelatedDCriteria()
         .then(res => {
           this.eoRelatedDCriteria = res;
-          this.eoRelatedDCriteriaForm = this.createEORelatedCriterionForm(this.eoRelatedDCriteria);
+          this.eoRelatedDCriteriaForm = this.formUtil.createEORelatedCriterionForm(this.eoRelatedDCriteria);
         })
         .catch(err => {
           console.log(err);
@@ -897,8 +834,15 @@ export class DataService {
       this.getExclusionACriteria()
         .then(res => {
           this.exclusionACriteria = res;
-          this.exclusionACriteriaForm = this.createExclusionCriterionForm(this.exclusionACriteria);
+          this.exclusionACriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionACriteria);
           console.log(this.exclusionACriteriaForm);
+
+          this.exclusionACriteria.forEach(cr => {
+            cr.requirementGroups.forEach(rg => {
+              this.formUtil.getReqGroups(rg);
+            });
+          });
+
         })
         .catch(err => {
           console.log(err);
@@ -911,7 +855,7 @@ export class DataService {
       this.getExclusionBCriteria()
         .then(res => {
           this.exclusionBCriteria = res;
-          this.exclusionBCriteriaForm = this.createExclusionCriterionForm(this.exclusionBCriteria);
+          this.exclusionBCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionBCriteria);
           console.log(this.exclusionBCriteriaForm);
         })
         .catch(err => {
@@ -925,7 +869,7 @@ export class DataService {
       this.getExclusionCCriteria()
         .then(res => {
           this.exclusionCCriteria = res;
-          this.exclusionCCriteriaForm = this.createExclusionCriterionForm(this.exclusionCCriteria);
+          this.exclusionCCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionCCriteria);
           // console.log(res);
         })
         .catch(err => {
@@ -939,7 +883,7 @@ export class DataService {
       this.getExclusionDCriteria()
         .then(res => {
           this.exclusionDCriteria = res;
-          this.exclusionDCriteriaForm = this.createExclusionCriterionForm(this.exclusionDCriteria);
+          this.exclusionDCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionDCriteria);
           // console.log(res);
         })
         .catch(err => {
@@ -954,7 +898,7 @@ export class DataService {
       this.getSelectionALLCriteria()
         .then(res => {
           this.selectionALLCriteria = res;
-          this.selectionALLCriteriaForm = this.createSelectionCriterionForm(this.selectionALLCriteria);
+          this.selectionALLCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionALLCriteria);
         })
         .catch(err => {
           console.log(err);
@@ -968,7 +912,7 @@ export class DataService {
       this.getSelectionACriteria()
         .then(res => {
           this.selectionACriteria = res;
-          this.selectionACriteriaForm = this.createSelectionCriterionForm(this.selectionACriteria);
+          this.selectionACriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionACriteria);
         })
         .catch(err => {
           console.log(err);
@@ -982,7 +926,7 @@ export class DataService {
       this.getSelectionBCriteria()
         .then(res => {
           this.selectionBCriteria = res;
-          this.selectionBCriteriaForm = this.createSelectionCriterionForm(this.selectionBCriteria);
+          this.selectionBCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionBCriteria);
         })
         .catch(err => {
           console.log(err);
@@ -995,7 +939,7 @@ export class DataService {
       this.getSelectionCCriteria()
         .then(res => {
           this.selectionCCriteria = res;
-          this.selectionCCriteriaForm = this.createSelectionCriterionForm(this.selectionCCriteria);
+          this.selectionCCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionCCriteria);
         })
         .catch(err => {
           console.log(err);
@@ -1008,7 +952,7 @@ export class DataService {
       this.getSelectionDCriteria()
         .then(res => {
           this.selectionDCriteria = res;
-          this.selectionDCriteriaForm = this.createSelectionCriterionForm(this.selectionDCriteria);
+          this.selectionDCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionDCriteria);
         })
         .catch(err => {
           console.log(err);
@@ -1022,7 +966,7 @@ export class DataService {
       this.getReductionCriteria()
         .then(res => {
           this.reductionCriteria = res;
-          this.reductionCriteriaForm = this.createReductionCriterionForm(this.reductionCriteria);
+          this.reductionCriteriaForm = this.formUtil.createReductionCriterionForm(this.reductionCriteria);
 
         })
         .catch(err => {
@@ -1036,7 +980,7 @@ export class DataService {
     }
 
     // get predefined criteria (ca)
-    if (this.isCreateNewESPD) {
+    if (this.utilities.isCreateNewESPD) {
 
       /* =========================== predefined reduction criteria ================================= */
       this.getReductionCriteria()
@@ -1120,6 +1064,7 @@ export class DataService {
           const action = 'close';
           this.openSnackBar(message, action);
         });
+
 
       /* ============================= predefined selection criteria =========================== */
       this.getSelectionALLCriteria()
@@ -1551,218 +1496,7 @@ export class DataService {
   }
 
 
-  /* =================  Dynamic Forms =========================== */
-
-  // createExclusionCriterionForm(criteria: ExclusionCriteria[]) {
-  //   let group: any = {};
-  //   criteria.forEach(cr => {
-  //     group[cr.typeCode] = this.createCriterionFormGroup(cr);
-  //     console.log(group[cr.typeCode]);
-  //   });
-  //   let fg = new FormGroup(group);
-  //
-  //   console.log(fg);
-  //   return fg;
-  // }
-
-  createExclusionCriterionForm(criteria: ExclusionCriteria[]) {
-    let group: any = {};
-    criteria.forEach(cr => {
-      group[cr.uuid] = this.createFormGroups(cr.requirementGroups);
-      // console.log(group[cr.typeCode]);
-    });
-    let fg = new FormGroup(group);
-    // console.log(fg);
-    return fg;
-  }
-
-  createSelectionCriterionForm(criteria: SelectionCriteria[]) {
-    let group: any = {};
-    criteria.forEach(cr => {
-      group[cr.uuid] = this.createFormGroups(cr.requirementGroups);
-      // console.log(group[cr.typeCode]);
-    });
-    let fg = new FormGroup(group);
-    // console.log(fg);
-    return fg;
-  }
-
-  createReductionCriterionForm(criteria: ReductionCriterion[]) {
-    let group: any = {};
-    criteria.forEach(cr => {
-      group[cr.uuid] = this.createFormGroups(cr.requirementGroups);
-      // console.log(group[cr.typeCode]);
-    });
-    let fg = new FormGroup(group);
-
-    // console.log(fg);
-    return fg;
-  }
-
-  createEORelatedCriterionForm(criteria: EoRelatedCriterion[]) {
-    let group: any = {};
-    criteria.forEach(cr => {
-      group[cr.uuid] = this.createFormGroups(cr.requirementGroups);
-      // console.log(group[cr.typeCode]);
-    });
-    let fg = new FormGroup(group);
-
-    // console.log(fg);
-    return fg;
-  }
 
 
-  createCriterionFormGroup(cr: ExclusionCriteria) {
-    let group: any = {};
-    if (cr) {
-      // console.log('In Criterion: ' + cr.typeCode);
-      if (cr.requirementGroups != null || cr.requirementGroups != undefined) {
-        group[cr.uuid] = this.createFormGroups(cr.requirementGroups);
-      }
-    }
-    let fg = new FormGroup(group);
-    // console.log(fg.getRawValue());
-    return fg;
-
-  }
-
-
-  createFormGroups(reqGroups: RequirementGroup[]) {
-    let group: any = {};
-    reqGroups.forEach(rg => {
-      group[rg.uuid] = this.toFormGroup(rg);
-    });
-    // console.log(group);
-    let fg = new FormGroup(group);
-    // console.log(fg);
-    return fg;
-  }
-
-
-  toFormGroup(rg: RequirementGroup) {
-
-    // let ID = 0;
-
-    let group: any = {};
-    if (rg) {
-      // console.log('In Req Group: ' + rg.id);
-      if (rg.requirements != undefined) {
-        rg.requirements.forEach(r => {
-          // ID++;
-          // console.log(ID);
-          // console.log('In Req: ' + r.uuid);
-          if (r.response != null || r.response != undefined) {
-            // console.log('response toggle according to indicator');
-            // this.toggleIndicator = r.response.indicator;
-            // console.log('toggle indicator when import');
-            // console.log(this.toggleIndicator);
-            group[r.uuid] = new FormControl(r.response.description ||
-              r.response.percentage || r.response.evidenceURL ||
-              r.response.evidenceURLCode || r.response.countryCode ||
-              r.response.period || r.response.quantity || r.response.year || r.response.url || r.response.identifier || '');
-
-
-            // YES/NO if responseDataType is indicator then pass indicator value to formControl. (initial state problem fixed)
-            if (r.responseDataType === 'INDICATOR') {
-              group[r.uuid] = new FormControl(r.response.indicator);
-            }
-
-
-            if (r.response.date) {
-              // console.log(r.response.date);
-              // console.log(typeof r.response.date);
-
-
-              // let date = this.getDateJSObjectD(r.response.date);
-              // let momentDate = moment(r.response.date).format('LLL');
-              // console.log(momentDate);
-
-              group[r.uuid] = new FormControl(r.response.date);
-            }
-
-            // FIX: starDate-endDate null value case when AtoD Criteria are selected
-            if (r.response.startDate) {
-              group[r.uuid + 'startDate'] = new FormControl(r.response.startDate);
-            } else if (r.response.startDate === null) {
-              group[r.uuid + 'startDate'] = new FormControl();
-            }
-            if (r.response.endDate) {
-              group[r.uuid + 'endDate'] = new FormControl(r.response.endDate);
-            } else if (r.response.endDate === null) {
-              group[r.uuid + 'endDate'] = new FormControl();
-            }
-
-            if (r.response.evidenceSuppliedId) {
-
-              // TODO find evidence in EvidenceList object and import it
-              const evi = this.evidenceList.find((ev) => {
-                if (ev.id === r.response.evidenceSuppliedId) {
-                  // this.evidenceList[i].description = 'test';
-                  return true;
-                }
-              });
-              // console.log(evi);
-              // console.log(typeof evi);
-
-              group[r.uuid + 'evidenceUrl'] = new FormControl(evi.evidenceURL);
-              group[r.uuid + 'evidenceCode'] = new FormControl(evi.description);
-              group[r.uuid + 'evidenceIssuer'] = new FormControl(evi.evidenceIssuer.name);
-            }
-
-            if (r.response.currency || r.response.amount) {
-              group[r.uuid] = new FormControl(r.response.amount);
-              if (r.response.currency !== null && r.response.currency !== undefined) {
-                group[r.uuid + 'currency'] = new FormControl(r.response.currency);
-              }
-            }
-            // in case of request import
-            if (r.response.currency === null || r.response.amount === '0') {
-              group[r.uuid + 'currency'] = new FormControl();
-            }
-
-
-            // console.log(r.response);
-          } else {
-            r.response = new RequirementResponse();
-            group[r.uuid] = new FormControl(r.response.description || '');
-            if (this.isEO) {
-              if (r.responseDataType === 'INDICATOR') {
-                group[r.uuid] = new FormControl(false);
-              }
-              if (r.responseDataType === 'AMOUNT') {
-                group[r.uuid + 'currency'] = new FormControl();
-              }
-
-              // group[r.uuid + 'startDate'] = new FormControl();
-              // group[r.uuid + 'endDate'] = new FormControl();
-              if (r.responseDataType === 'PERIOD' && this.APIService.version === 'v2') {
-                group[r.uuid + 'startDate'] = new FormControl();
-                group[r.uuid + 'endDate'] = new FormControl();
-              }
-              if (r.responseDataType === 'EVIDENCE_IDENTIFIER') {
-                group[r.uuid + 'evidenceUrl'] = new FormControl();
-                group[r.uuid + 'evidenceCode'] = new FormControl();
-                group[r.uuid + 'evidenceIssuer'] = new FormControl();
-              }
-            }
-
-          }
-
-          // console.log(group);
-          // console.log(group[r.uuid]);
-        });
-      }
-      if (rg.requirementGroups != null || rg.requirementGroups != undefined) {
-        rg.requirementGroups.forEach(rg => {
-          // console.log('Req Group ' + rg.uuid);
-          group[rg.uuid] = this.toFormGroup(rg);
-        });
-      }
-    }
-    let fg = new FormGroup(group);
-
-    // console.log(fg.getRawValue());
-    return fg;
-  }
 
 }

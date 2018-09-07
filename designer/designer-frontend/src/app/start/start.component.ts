@@ -3,6 +3,7 @@ import {FormControl, NgForm} from '@angular/forms/forms';
 import {ApicallService} from '../services/apicall.service';
 import {DataService} from '../services/data.service';
 import {Country} from '../model/country.model';
+import {UtilitiesService} from '../services/utilities.service';
 
 // import {ProcedureType} from "../model/procedureType.model";
 
@@ -26,7 +27,7 @@ export class StartComponent implements OnInit {
 
   // procedureTypes:ProcedureType[];
 
-  constructor(private dataService: DataService, private APIService: ApicallService) {
+  constructor(private dataService: DataService, private APIService: ApicallService, public utilities: UtilitiesService) {
   }
 
   ngOnInit() {
@@ -64,22 +65,22 @@ export class StartComponent implements OnInit {
   handleCASelection(radio: FormControl) {
     if (radio.value === 'createNewESPD') {
       this.isCreateNewESPD = true;
-      this.dataService.isCreateNewESPD = true;
+      this.utilities.isCreateNewESPD = true;
       this.isReuseESPD = false;
       this.isReviewESPD = false;
-      this.dataService.isReviewESPD = false;
+      this.utilities.isReviewESPD = false;
     } else if (radio.value === 'reuseESPD') {
       this.isCreateNewESPD = false;
-      this.dataService.isCreateNewESPD = false;
+      this.utilities.isCreateNewESPD = false;
       this.isReuseESPD = true;
       this.isReviewESPD = false;
-      this.dataService.isReviewESPD = false;
+      this.utilities.isReviewESPD = false;
     } else if (radio.value === 'reviewESPD') {
       this.isCreateNewESPD = false;
-      this.dataService.isCreateNewESPD = false;
+      this.utilities.isCreateNewESPD = false;
       this.isReuseESPD = false;
       this.isReviewESPD = true;
-      this.dataService.isReviewESPD = true;
+      this.utilities.isReviewESPD = true;
     }
   }
 
@@ -95,25 +96,25 @@ export class StartComponent implements OnInit {
   handleEOSelection(radio: FormControl) {
     if (radio.value === 'importESPD') {
       this.isImportESPD = true;
-      this.dataService.isImportESPD = true;
+      this.utilities.isImportESPD = true;
       this.isCreateResponse = false;
-      this.dataService.isCreateResponse = false;
+      this.utilities.isCreateResponse = false;
       this.isReviewESPD = false;
-      this.dataService.isReviewESPD = false;
+      this.utilities.isReviewESPD = false;
     } else if (radio.value === 'createResponse') {
       this.isImportESPD = false;
-      this.dataService.isImportESPD = false;
+      this.utilities.isImportESPD = false;
       this.isCreateResponse = true;
-      this.dataService.isCreateResponse = true;
+      this.utilities.isCreateResponse = true;
       this.isReviewESPD = false;
-      this.dataService.isReviewESPD = false;
+      this.utilities.isReviewESPD = false;
     } else if (radio.value === 'reviewESPD') {
       this.isImportESPD = false;
-      this.dataService.isImportESPD = false;
+      this.utilities.isImportESPD = false;
       this.isCreateResponse = false;
-      this.dataService.isCreateResponse = false;
+      this.utilities.isCreateResponse = false;
       this.isReviewESPD = true;
-      this.dataService.isReviewESPD = true;
+      this.utilities.isReviewESPD = true;
     }
   }
 
