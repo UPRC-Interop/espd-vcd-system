@@ -9,9 +9,9 @@ import javax.validation.constraints.NotNull;
 
 /**
  * Criterion requirement
- *
+ * <p>
  * Requirement to fulfill an specific criterion.
- *
+ * <p>
  * Created by ixuz on 2/24/16.
  */
 public class RequestRequirement implements Requirement {
@@ -66,6 +66,10 @@ public class RequestRequirement implements Requirement {
      * UBL syntax path:
      */
     private CriterionElementTypeEnum typeCode = CriterionElementTypeEnum.QUESTION;
+
+    private boolean mandatory;
+
+    private boolean multiple;
 
     public RequestRequirement(@JsonProperty("ID") String ID,
                               @JsonProperty("responseDataType") ResponseTypeEnum responseDataType,
@@ -137,12 +141,32 @@ public class RequestRequirement implements Requirement {
 
     @Override
     public ResponseTypeEnum getResponseDataType() {
-      return this.responseDataType;
+        return this.responseDataType;
     }
 
     @Override
     public CriterionElementTypeEnum getTypeCode() {
         return typeCode;
+    }
+
+    @Override
+    public void setMandatory(boolean mandatory) {
+        this.mandatory = mandatory;
+    }
+
+    @Override
+    public void setMultiple(boolean multiple) {
+        this.multiple = multiple;
+    }
+
+    @Override
+    public boolean isMandatory() {
+        return mandatory;
+    }
+
+    @Override
+    public boolean isMultiple() {
+        return multiple;
     }
 
 }

@@ -8,9 +8,9 @@ import java.io.Serializable;
 
 /**
  * Criterion requirement interface
- *
+ * <p>
  * Requirement to fulfill an specific criterion.
- *
+ * <p>
  * Created by Ulf Lotzmann on 21/03/2016.
  */
 
@@ -34,9 +34,9 @@ public interface Requirement extends Serializable {
 
     /**
      * Possible types are 'CAPTION , REQUIREMENT, QUESTION'
-     *
+     * <p>
      * The Regulated ESPD documents do not specify REQUIREMENTS,
-     * only QUESTIONS. The SELF-CONTAINED version does
+     * only QUESTIONS. The SELF-CONTAINED version does.
      *
      * @return
      */
@@ -51,5 +51,13 @@ public interface Requirement extends Serializable {
     Response getResponse();
 
     void setResponse(Response response);
+
+    void setMandatory(boolean mandatory);
+
+    void setMultiple(boolean multiple);
+
+    boolean isMandatory();
+
+    boolean isMultiple();
 
 }
