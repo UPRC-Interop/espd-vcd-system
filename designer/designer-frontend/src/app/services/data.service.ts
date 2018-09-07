@@ -67,7 +67,7 @@ export class DataService {
   eoRelatedCCriteria: EoRelatedCriterion[] = null;
   eoRelatedDCriteria: EoRelatedCriterion[] = null;
   reductionCriteria: ReductionCriterion[] = null;
-  evidenceList: Evidence[] = [];
+  // evidenceList: Evidence[] = [];
 
   notDefCriteria: EoRelatedCriterion[] = null;
 
@@ -561,9 +561,9 @@ export class DataService {
 
           // get evidence list only in v2
           if (this.APIService.version === 'v2') {
-            this.evidenceList = res.evidenceList;
             this.formUtil.evidenceList = res.evidenceList;
-            console.log(this.evidenceList);
+            this.formUtil.evidenceList = res.evidenceList;
+            console.log(this.formUtil.evidenceList);
           }
 
 

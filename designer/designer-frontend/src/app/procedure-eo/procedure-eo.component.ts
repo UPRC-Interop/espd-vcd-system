@@ -136,9 +136,9 @@ export class ProcedureEoComponent implements OnInit {
     // const formValues = this.formA.getRawValue();
     // console.log(formValues);
 
-    this.formUtil.extractFormValuesFromCriteria(this.eoRelatedACriteria, this.formA, this.dataService.evidenceList);
-    this.formUtil.extractFormValuesFromCriteria(this.eoRelatedCCriteria, this.formC, this.dataService.evidenceList);
-    this.formUtil.extractFormValuesFromCriteria(this.eoRelatedDCriteria, this.formD, this.dataService.evidenceList);
+    this.formUtil.extractFormValuesFromCriteria(this.eoRelatedACriteria, this.formA, this.formUtil.evidenceList);
+    this.formUtil.extractFormValuesFromCriteria(this.eoRelatedCCriteria, this.formC, this.formUtil.evidenceList);
+    this.formUtil.extractFormValuesFromCriteria(this.eoRelatedDCriteria, this.formD, this.formUtil.evidenceList);
 
 
     console.log(this.eoRelatedACriteria);

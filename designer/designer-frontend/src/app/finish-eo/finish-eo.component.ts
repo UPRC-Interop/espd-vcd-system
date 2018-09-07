@@ -29,7 +29,7 @@ export class FinishEoComponent implements OnInit {
 
   onExport() {
     // this.dataService.version = 'v1';
-    this.formUtil.extractFormValuesFromCriteria(this.reductionCriteria, this.form, this.dataService.evidenceList);
+    this.formUtil.extractFormValuesFromCriteria(this.reductionCriteria, this.form, this.formUtil.evidenceList);
     this.dataService.finishEOSubmit(this.reductionCriteria);
   }
 

@@ -37,10 +37,10 @@ export class ExclusionEoComponent implements OnInit {
 
 
   onExclusionEOSubmit() {
-    this.formUtil.extractFormValuesFromCriteria(this.exclusionACriteria, this.formA, this.dataService.evidenceList);
-    this.formUtil.extractFormValuesFromCriteria(this.exclusionBCriteria, this.formB, this.dataService.evidenceList);
-    this.formUtil.extractFormValuesFromCriteria(this.exclusionCCriteria, this.formC, this.dataService.evidenceList);
-    this.formUtil.extractFormValuesFromCriteria(this.exclusionDCriteria, this.formD, this.dataService.evidenceList);
+    this.formUtil.extractFormValuesFromCriteria(this.exclusionACriteria, this.formA, this.formUtil.evidenceList);
+    this.formUtil.extractFormValuesFromCriteria(this.exclusionBCriteria, this.formB, this.formUtil.evidenceList);
+    this.formUtil.extractFormValuesFromCriteria(this.exclusionCCriteria, this.formC, this.formUtil.evidenceList);
+    this.formUtil.extractFormValuesFromCriteria(this.exclusionDCriteria, this.formD, this.formUtil.evidenceList);
 
 
     console.log(this.exclusionACriteria);

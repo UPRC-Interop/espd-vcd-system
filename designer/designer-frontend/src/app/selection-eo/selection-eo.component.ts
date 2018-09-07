@@ -53,24 +53,23 @@ export class SelectionEoComponent implements OnInit {
   }
 
 
-
   onSelectionEOSubmit() {
 
-    this.formUtil.extractFormValuesFromCriteria(this.selectionACriteria, this.formA, this.dataService.evidenceList);
-    this.formUtil.extractFormValuesFromCriteria(this.selectionBCriteria, this.formB, this.dataService.evidenceList);
-    this.formUtil.extractFormValuesFromCriteria(this.selectionCCriteria, this.formC, this.dataService.evidenceList);
-    this.formUtil.extractFormValuesFromCriteria(this.selectionDCriteria, this.formD, this.dataService.evidenceList);
-    this.formUtil.extractFormValuesFromCriteria(this.dataService.selectionALLCriteria, this.dataService.selectionALLCriteriaForm, this.dataService.evidenceList);
+    this.formUtil.extractFormValuesFromCriteria(this.selectionACriteria, this.formA, this.formUtil.evidenceList);
+    this.formUtil.extractFormValuesFromCriteria(this.selectionBCriteria, this.formB, this.formUtil.evidenceList);
+    this.formUtil.extractFormValuesFromCriteria(this.selectionCCriteria, this.formC, this.formUtil.evidenceList);
+    this.formUtil.extractFormValuesFromCriteria(this.selectionDCriteria, this.formD, this.formUtil.evidenceList);
+    this.formUtil.extractFormValuesFromCriteria(this.dataService.selectionALLCriteria, this.dataService.selectionALLCriteriaForm, this.formUtil.evidenceList);
 
-    console.log("Selection A Criteria");
+    console.log('Selection A Criteria');
     console.log(this.selectionACriteria);
-    console.log("Selection B Criteria");
+    console.log('Selection B Criteria');
     console.log(this.selectionBCriteria);
-    console.log("Selection C Criteria");
+    console.log('Selection C Criteria');
     console.log(this.selectionCCriteria);
-    console.log("Selection D Criteria");
+    console.log('Selection D Criteria');
     console.log(this.selectionDCriteria);
-    console.log("Selection ALL Criteria");
+    console.log('Selection ALL Criteria');
     console.log(this.isSatisfiedALL);
 
     this.dataService.selectionEOSubmit(this.selectionACriteria,
