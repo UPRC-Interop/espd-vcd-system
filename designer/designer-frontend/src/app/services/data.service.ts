@@ -152,8 +152,6 @@ export class DataService {
                           eoRelatedCriteria?: EoRelatedCriterion[],
                           reductionCriteria?: ReductionCriterion[]
   ): FullCriterion[] {
-    // let exAString:string= JSON.stringify(exclusionACriteria);
-    // let exBString:string= JSON.stringify(exclusionBCriteria);
 
     if (this.utilities.isCA) {
       if (isSatisfiedALL) {
@@ -204,40 +202,6 @@ export class DataService {
                           eoRelatedDCriteria?: EoRelatedCriterion[],
                           reductionCriteria?: ReductionCriterion[]
   ): FullCriterion[] {
-    // let exAString:string= JSON.stringify(exclusionACriteria);
-    // let exBString:string= JSON.stringify(exclusionBCriteria);
-
-    // if (this.isCA) {
-    //   if (isSatisfiedALL) {
-    //     console.log(reductionCriteria);
-    //     var combineJsonArray = [...exclusionACriteria,
-    //       ...exclusionBCriteria,
-    //       ...exclusionCCriteria,
-    //       ...exclusionDCriteria,
-    //       ...selectionALLCriteria,
-    //       ...eoRelatedCriteria,
-    //       ...reductionCriteria
-    //     ];
-    //     // console.log(combineJsonArray);
-    //     return combineJsonArray;
-    //
-    //   } else {
-    //     console.log(reductionCriteria);
-    //     var combineJsonArray = [
-    //       ...exclusionACriteria,
-    //       ...exclusionBCriteria,
-    //       ...exclusionCCriteria,
-    //       ...exclusionDCriteria,
-    //       ...selectionACriteria,
-    //       ...selectionBCriteria,
-    //       ...selectionCCriteria,
-    //       ...selectionDCriteria,
-    //       ...eoRelatedCriteria,
-    //       ...reductionCriteria];
-    //     // console.dir(combineJsonArray);
-    //     return combineJsonArray;
-    //   }
-    // } else
     if (this.utilities.isEO) {
       if (isSatisfiedALL) {
         console.log(reductionCriteria);
@@ -317,21 +281,6 @@ export class DataService {
     return this.espdRequest;
 
   }
-
-  // date handling
-
-  // toUTCDate(date: Moment): Moment {
-  //   if (date !== null && date !== undefined) {
-  //     const utcDate = new Date(Date.UTC(date.toDate().getFullYear(),
-  //       date.toDate().getMonth(),
-  //       date.toDate().getDate(),
-  //       date.toDate().getHours(),
-  //       date.toDate().getMinutes()));
-  //
-  //     return moment(utcDate);
-  //   }
-  //
-  // }
 
 
   createESPDResponse(): ESPDResponse {
@@ -496,7 +445,7 @@ export class DataService {
   /* ================================= CA REUSE ESPD REQUEST ====================== */
 
   ReuseESPD(filesToUpload: File[], form: NgForm, role: string) {
-    if (filesToUpload.length > 0 && role == 'CA') {
+    if (filesToUpload.length > 0 && role === 'CA') {
       this.APIService.postFile(filesToUpload)
         .then(res => {
           console.log('REUSE EPSD');
@@ -531,6 +480,15 @@ export class DataService {
           this.eoRelatedCriteria = this.filterEoRelatedCriteria(this.EO_RELATED_REGEXP, res.fullCriterionList);
           this.reductionCriteria = this.filterEoRelatedCriteria(this.REDUCTION_OF_CANDIDATES_REGEXP, res.fullCriterionList);
           console.log(res);
+
+          // create requirementGroup template objects required for multiple instances (cardinalities) function
+          this.formUtil.createTemplateReqGroups(this.exclusionACriteria);
+          this.formUtil.createTemplateReqGroups(this.exclusionBCriteria);
+          this.formUtil.createTemplateReqGroups(this.exclusionCCriteria);
+          this.formUtil.createTemplateReqGroups(this.exclusionDCriteria);
+          this.formUtil.createTemplateReqGroups(this.selectionALLCriteria);
+          this.formUtil.createTemplateReqGroups(this.eoRelatedCriteria);
+          this.formUtil.createTemplateReqGroups(this.reductionCriteria);
 
 
         })
@@ -652,6 +610,9 @@ export class DataService {
             this.eoRelatedDCriteriaForm.disable();
             this.reductionCriteriaForm.disable();
           }
+
+          // create requirementGroup template objects required for multiple instances (cardinalities) function
+          this.formUtil.createTemplateReqGroups(res.fullCriterionList);
 
 
           console.log(res);
@@ -1494,9 +1455,6 @@ export class DataService {
         });
     }
   }
-
-
-
 
 
 }

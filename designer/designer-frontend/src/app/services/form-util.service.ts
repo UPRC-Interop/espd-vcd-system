@@ -12,6 +12,7 @@ import {ExclusionCriteria} from '../model/exclusionCriteria.model';
 import {SelectionCriteria} from '../model/selectionCriteria.model';
 import {ReductionCriterion} from '../model/reductionCriterion.model';
 import {UtilitiesService} from './utilities.service';
+import {FullCriterion} from '../model/fullCriterion.model';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,13 @@ export class FormUtilService {
               public utilities: UtilitiesService) {
   }
 
+  createTemplateReqGroups(criteria: FullCriterion[]) {
+      criteria.forEach(cr => {
+        cr.requirementGroups.forEach(rg => {
+          this.getReqGroups(rg);
+        });
+      });
+  }
 
   getFromForm(rg: RequirementGroup, cr: EoRelatedCriterion, form: FormGroup, formValues: any, evidenceList: Evidence[]) {
 
@@ -264,17 +272,10 @@ export class FormUtilService {
     if (rg !== null || rg !== undefined) {
 
       this.template[rg.id] = rg;
-
-      // console.log('upper rg.id: ' + rg.id);
-      // console.log(rg.id);
       if (rg.requirementGroups !== null || rg.requirementGroups !== undefined) {
         rg.requirementGroups.forEach(rg2 => {
-          // console.log('inner for: ' + rg2.id);
-          // console.log(this.template);
-          // console.log(rg2.id);
           this.getReqGroups(rg2);
         });
-
       }
     }
   }
@@ -284,6 +285,8 @@ export class FormUtilService {
     return this.toFormGroup(this.template[id]);
   }
 
+
+  /* ========================================= CREATE CRITERION FORMS =================================== */
 
   createExclusionCriterionForm(criteria: ExclusionCriteria[]) {
     let group: any = {};
@@ -453,39 +456,5 @@ export class FormUtilService {
     return fg;
   }
 
-
-  pushToReqGroups(rg: RequirementGroup, temp: any) {
-    if (rg !== null || rg !== undefined) {
-
-      if (rg.requirementGroups !== null || rg.requirementGroups !== undefined) {
-
-
-        if (rg.id === '7c637c0c-7703-4389-ba52-02997a055bd7') {
-          const rgFound = rg.requirementGroups.find((reqGroup) => {
-            // console.log('REQGROUP uuid: ' + reqGroup.uuid);
-            // console.log('TEMP uuid: ' + temp.uuid);
-            if (reqGroup.uuid === temp.uuid) {
-              // console.log('Do not add cause it is already added...');
-              return false;
-            }
-          });
-          // console.log(rgFound);
-          // if reqGroup with temp.uuid not found then push it
-          if (!rgFound) {
-            // console.log('not found, ADD it: ');
-            console.log('Length before push: ' + rg.requirementGroups.length);
-            rg.requirementGroups.push(temp);
-            console.log('Length after push: ' + rg.requirementGroups.length);
-            console.log(rg.requirementGroups);
-          }
-        }
-
-        rg.requirementGroups.forEach(rg2 => {
-          this.pushToReqGroups(rg2, temp);
-        });
-
-      }
-    }
-  }
 
 }
