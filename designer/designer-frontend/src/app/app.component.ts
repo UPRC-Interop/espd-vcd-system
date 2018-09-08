@@ -9,7 +9,7 @@ import {DataService} from './services/data.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  isLinear: boolean = true;
+  isLinear = true;
 
   constructor(public dataService: DataService) {
   }

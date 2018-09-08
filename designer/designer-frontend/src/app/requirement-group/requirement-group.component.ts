@@ -61,8 +61,8 @@ export class RequirementGroupComponent implements OnInit, OnChanges {
 
       // push to json Structure
 
-      // Overwrite FIX: don't assign by reference
-      this.placeHolder = Object.assign({}, this.formUtil.template[groupId]);
+      // Overwrite FIX: don't assign by reference.
+      this.placeHolder = JSON.parse(JSON.stringify(this.formUtil.template[groupId]));
       // TODO: generate uuid
       let uuid = UUID.UUID();
       this.placeHolder.uuid = uuid;

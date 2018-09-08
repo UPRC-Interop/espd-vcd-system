@@ -29,9 +29,22 @@ export class FormUtilService {
   createTemplateReqGroups(criteria: FullCriterion[]) {
       criteria.forEach(cr => {
         cr.requirementGroups.forEach(rg => {
+          this.template[rg.id] = rg;
           this.getReqGroups(rg);
         });
       });
+  }
+
+  getReqGroups(rg: RequirementGroup) {
+    if (rg !== null || rg !== undefined) {
+
+      this.template[rg.id] = rg;
+      if (rg.requirementGroups !== null || rg.requirementGroups !== undefined) {
+        rg.requirementGroups.forEach(rg2 => {
+          this.getReqGroups(rg2);
+        });
+      }
+    }
   }
 
   getFromForm(rg: RequirementGroup, cr: EoRelatedCriterion, form: FormGroup, formValues: any, evidenceList: Evidence[]) {
@@ -268,17 +281,6 @@ export class FormUtilService {
     });
   }
 
-  getReqGroups(rg: RequirementGroup) {
-    if (rg !== null || rg !== undefined) {
-
-      this.template[rg.id] = rg;
-      if (rg.requirementGroups !== null || rg.requirementGroups !== undefined) {
-        rg.requirementGroups.forEach(rg2 => {
-          this.getReqGroups(rg2);
-        });
-      }
-    }
-  }
 
   // id as input parameter, to create formGroup for specific requirementGroup object
   createTemplateFormGroup(id: string): FormGroup {

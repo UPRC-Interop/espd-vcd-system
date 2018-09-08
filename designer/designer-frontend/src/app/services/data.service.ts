@@ -481,15 +481,6 @@ export class DataService {
           this.reductionCriteria = this.filterEoRelatedCriteria(this.REDUCTION_OF_CANDIDATES_REGEXP, res.fullCriterionList);
           console.log(res);
 
-          // create requirementGroup template objects required for multiple instances (cardinalities) function
-          this.formUtil.createTemplateReqGroups(this.exclusionACriteria);
-          this.formUtil.createTemplateReqGroups(this.exclusionBCriteria);
-          this.formUtil.createTemplateReqGroups(this.exclusionCCriteria);
-          this.formUtil.createTemplateReqGroups(this.exclusionDCriteria);
-          this.formUtil.createTemplateReqGroups(this.selectionALLCriteria);
-          this.formUtil.createTemplateReqGroups(this.eoRelatedCriteria);
-          this.formUtil.createTemplateReqGroups(this.reductionCriteria);
-
 
         })
         .catch(err => {
@@ -691,24 +682,6 @@ export class DataService {
 
   }
 
-
-  /*  ======================================== Date Manipulation ================================*/
-
-  // getDateJSObjectD(...dateArray: any[]): Date {
-  //   console.log(dateArray);
-  //   console.log(dateArray[0][0]);
-  //   let date = new Date(dateArray[0][0], dateArray[0][1], dateArray[0][2]);
-  //   console.log(date);
-  //   // console.log(date.toDateString());
-  //   // date.setMinutes( date.getMinutes() + date.getTimezoneOffset() );
-  //   return date;
-  // }
-
-  static getDateJSObjectMoment(...dateArray: any[]): Moment {
-    return moment(dateArray[0][0], dateArray[0][1], dateArray[0][2]);
-  }
-
-
   startESPD(form: NgForm) {
     // console.log(form);
     // console.log(form.value);
@@ -749,6 +722,9 @@ export class DataService {
           if (this.utilities.isCreateResponse) {
             this.eoRelatedACriteria = res;
 
+            /* [cardinalities]: create template requirementGroup */
+            this.formUtil.createTemplateReqGroups(this.eoRelatedACriteria);
+
             console.log('This is create response');
           }
 
@@ -768,6 +744,9 @@ export class DataService {
         .then(res => {
           this.eoRelatedCCriteria = res;
           this.eoRelatedCCriteriaForm = this.formUtil.createEORelatedCriterionForm(this.eoRelatedCCriteria);
+
+          /* [cardinalities]: create template requirementGroup */
+          this.formUtil.createTemplateReqGroups(this.eoRelatedCCriteria);
         })
         .catch(err => {
           console.log(err);
@@ -781,6 +760,9 @@ export class DataService {
         .then(res => {
           this.eoRelatedDCriteria = res;
           this.eoRelatedDCriteriaForm = this.formUtil.createEORelatedCriterionForm(this.eoRelatedDCriteria);
+
+          /* [cardinalities]: create template requirementGroup */
+          this.formUtil.createTemplateReqGroups(this.eoRelatedDCriteria);
         })
         .catch(err => {
           console.log(err);
@@ -798,11 +780,8 @@ export class DataService {
           this.exclusionACriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionACriteria);
           console.log(this.exclusionACriteriaForm);
 
-          this.exclusionACriteria.forEach(cr => {
-            cr.requirementGroups.forEach(rg => {
-              this.formUtil.getReqGroups(rg);
-            });
-          });
+          /* [cardinalities]: create template requirementGroup */
+          this.formUtil.createTemplateReqGroups(this.exclusionACriteria);
 
         })
         .catch(err => {
@@ -818,6 +797,8 @@ export class DataService {
           this.exclusionBCriteria = res;
           this.exclusionBCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionBCriteria);
           console.log(this.exclusionBCriteriaForm);
+          /* [cardinalities]: create template requirementGroup */
+          this.formUtil.createTemplateReqGroups(this.exclusionBCriteria);
         })
         .catch(err => {
           console.log(err);
@@ -832,6 +813,8 @@ export class DataService {
           this.exclusionCCriteria = res;
           this.exclusionCCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionCCriteria);
           // console.log(res);
+          /* [cardinalities]: create template requirementGroup */
+          this.formUtil.createTemplateReqGroups(this.exclusionCCriteria);
         })
         .catch(err => {
           console.log(err);
@@ -846,6 +829,8 @@ export class DataService {
           this.exclusionDCriteria = res;
           this.exclusionDCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionDCriteria);
           // console.log(res);
+          /* [cardinalities]: create template requirementGroup */
+          this.formUtil.createTemplateReqGroups(this.exclusionDCriteria);
         })
         .catch(err => {
           console.log(err);
@@ -860,6 +845,8 @@ export class DataService {
         .then(res => {
           this.selectionALLCriteria = res;
           this.selectionALLCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionALLCriteria);
+          /* [cardinalities]: create template requirementGroup */
+          this.formUtil.createTemplateReqGroups(this.selectionALLCriteria);
         })
         .catch(err => {
           console.log(err);
@@ -874,6 +861,8 @@ export class DataService {
         .then(res => {
           this.selectionACriteria = res;
           this.selectionACriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionACriteria);
+          /* [cardinalities]: create template requirementGroup */
+          this.formUtil.createTemplateReqGroups(this.selectionACriteria);
         })
         .catch(err => {
           console.log(err);
@@ -888,6 +877,8 @@ export class DataService {
         .then(res => {
           this.selectionBCriteria = res;
           this.selectionBCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionBCriteria);
+          /* [cardinalities]: create template requirementGroup */
+          this.formUtil.createTemplateReqGroups(this.selectionBCriteria);
         })
         .catch(err => {
           console.log(err);
@@ -901,6 +892,8 @@ export class DataService {
         .then(res => {
           this.selectionCCriteria = res;
           this.selectionCCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionCCriteria);
+          /* [cardinalities]: create template requirementGroup */
+          this.formUtil.createTemplateReqGroups(this.selectionCCriteria);
         })
         .catch(err => {
           console.log(err);
@@ -914,6 +907,8 @@ export class DataService {
         .then(res => {
           this.selectionDCriteria = res;
           this.selectionDCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionDCriteria);
+          /* [cardinalities]: create template requirementGroup */
+          this.formUtil.createTemplateReqGroups(this.selectionDCriteria);
         })
         .catch(err => {
           console.log(err);
@@ -928,6 +923,10 @@ export class DataService {
         .then(res => {
           this.reductionCriteria = res;
           this.reductionCriteriaForm = this.formUtil.createReductionCriterionForm(this.reductionCriteria);
+          /* [cardinalities]: create template requirementGroup */
+          this.formUtil.createTemplateReqGroups(this.reductionCriteria);
+          console.log('TEMPLATE ARRAY: ');
+          console.log(this.formUtil.template);
 
         })
         .catch(err => {

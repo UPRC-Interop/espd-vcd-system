@@ -21,4 +21,6 @@ export class RequirementResponse {
   identifier?: string;
   url?: string;
   validatedCriterionPropertyID?: string;
+  mandatory?: boolean;
+  multiple?: boolean;
 }

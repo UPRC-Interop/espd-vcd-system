@@ -8,4 +8,6 @@ export class Requirement {
   response?: RequirementResponse;
   id: string;
   uuid: string;
+  mandatory?: boolean;
+  multiple?: boolean;
 }

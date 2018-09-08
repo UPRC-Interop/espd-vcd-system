@@ -15,6 +15,8 @@ export class UtilitiesService {
 
   constructor() { }
 
+  /*  ======================================== Date Manipulation ================================*/
+
   toUTCDate(date: Moment): Moment {
     if (date !== null && date !== undefined) {
       const utcDate = new Date(Date.UTC(date.toDate().getFullYear(),

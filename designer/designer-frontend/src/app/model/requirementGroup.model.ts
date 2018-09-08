@@ -8,4 +8,6 @@ export class RequirementGroup {
   id: string;
   uuid: string;
   typecode?: string;
+  mandatory?: boolean;
+  multiple?: boolean;
 }
