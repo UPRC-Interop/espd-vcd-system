@@ -6,7 +6,9 @@ import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.ResponseRequirement;
+import eu.esens.espdvcd.retriever.criteria.resource.enums.CardinalityEnum;
 import eu.esens.espdvcd.retriever.criteria.resource.enums.ResourceType;
+import eu.esens.espdvcd.retriever.criteria.resource.utils.CardinalityUtils;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -26,6 +28,7 @@ public class CriteriaTaxonomyResource implements CriteriaResource, RequirementsR
     // private static final String CRITERIA_TAXONOMY_RESOURCE = "/templates/v2_regulated/ESPD-CriteriaTaxonomy-REGULATED-V2.0.2-FIXED.xlsx";
     private final static int nameColumnIndex = 17;
     private final static int descriptionColumnIndex = 18;
+    private final static int cardinalityColumnIndex = 20;
     private final static int propertyDataTypeColumnIndex = 21;
     private final static int elementUUIDColumnIndex = 22;
     private final static int elementCodeColumnIndex = 23;
@@ -101,6 +104,10 @@ public class CriteriaTaxonomyResource implements CriteriaResource, RequirementsR
                         i = j;
                         RequirementGroup rg = new RequirementGroup(getRowUUID(d.getRow(sRow)));
                         rg.setCondition(getRowCode(d.getRow(sRow)));
+                        // setting cardinality here
+                        CardinalityEnum cardinality = CardinalityUtils.extractCardinality(getRowCardinality(d.getRow(sRow)));
+                        rg.setMandatory(cardinality.isMandatory());
+                        rg.setMultiple(cardinality.isMultiple());
                         rg.getRequirementGroups().addAll(extractQuestionGroups(d, sRow, (j), colNum + 1));
                         rg.getRequirements().addAll(extractQuestions(d, sRow, j, colNum + 1));
                         rgList.add(rg);
@@ -119,10 +126,14 @@ public class CriteriaTaxonomyResource implements CriteriaResource, RequirementsR
             if ("{QUESTION}".equals(getCellStringValueOrNull(d.getRow(i), colNum))) {
                 Requirement r = new ResponseRequirement(
                         UUID.randomUUID().toString(),
-                        ResponseTypeEnum.valueOf(getResponseType(d.getRow(i))),
+                        ResponseTypeEnum.valueOf(getRowResponseType(d.getRow(i))),
                         getRowDescription(d.getRow(i)) //+ "(at " + i + "," + colNum + ")"
                 );
                 r.setTypeCode(CriterionElementTypeEnum.QUESTION);
+                // setting cardinality here
+                CardinalityEnum cardinality = CardinalityUtils.extractCardinality(getRowCardinality(d.getRow(i)));
+                r.setMandatory(cardinality.isMandatory());
+                r.setMultiple(cardinality.isMultiple());
                 rList.add(r);
             }
         }
@@ -145,8 +156,12 @@ public class CriteriaTaxonomyResource implements CriteriaResource, RequirementsR
         return getCellStringValueOrNull(r, elementCodeColumnIndex);
     }
 
-    private String getResponseType(Row r) {
+    private String getRowResponseType(Row r) {
         return getCellStringValueOrNull(r, propertyDataTypeColumnIndex);
+    }
+
+    private String getRowCardinality(Row r) {
+        return getCellStringOrNumericValueOrNull(r, cardinalityColumnIndex);
     }
 
     private String getCellStringValueOrNull(Row r, int index) {
@@ -155,6 +170,23 @@ public class CriteriaTaxonomyResource implements CriteriaResource, RequirementsR
             return null;
         }
         return CellType.STRING.equals(c.getCellTypeEnum()) ? c.getStringCellValue() : null;
+    }
+
+    private String getCellStringOrNumericValueOrNull(Row r, int index) {
+        Cell c = r.getCell(index);
+        if (c == null) {
+            return null;
+        }
+
+        if (CellType.STRING.equals(c.getCellTypeEnum())) {
+            return c.getStringCellValue();
+        }
+
+        if (CellType.NUMERIC.equals(c.getCellTypeEnum())) {
+            return String.valueOf((int) c.getNumericCellValue());
+        }
+
+        return null;
     }
 
     @Override

@@ -28,12 +28,13 @@ public interface ImportESPDService<T extends ESPDRequest> {
     }
 
     default void generateUUIDSForAllRequirementGroups(List<RequirementGroup> reqGroups, int counter) {
-        counter++;
         for (RequirementGroup reqGroup : reqGroups) {
+            counter++;
             reqGroup.setUUID(String.format("%s-%d", reqGroup.getID(), counter));
             generateUUIDSForAllRequirementGroups(reqGroup.getRequirementGroups(), counter);
             List<Requirement> reqs = reqGroup.getRequirements();
             for (Requirement req : reqs) {
+                counter++;
                 req.setUUID(String.format("%s-%d", req.getID(), counter));
             }
         }

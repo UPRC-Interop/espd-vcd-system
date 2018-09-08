@@ -66,21 +66,13 @@ public class Server {
         v1Context.addEndpoint(predefCriteriaEndpointV1);
         v2Context.addEndpoint(predefCriteriaEndpointV2);
 
-        LOGGER.info("Configuring ExportESPDRequestV1 endpoint...");
+        LOGGER.info("Configuring ExportESPDV1 endpoint...");
         Endpoint ESPDRequestV1Endpoint = new ExportESPDEndpoint(EDMVersion.V1);
         v1Context.addEndpoint(ESPDRequestV1Endpoint);
 
-        LOGGER.info("Configuring ExportESPDResponseV1 endpoint...");
-        Endpoint ESPDResponseV1Endpoint = new ExportESPDEndpoint(EDMVersion.V1);
-        v1Context.addEndpoint(ESPDResponseV1Endpoint);
-
-        LOGGER.info("Configuring ExportESPDRequestV2 endpoint...");
+        LOGGER.info("Configuring ExportESPDV2 endpoint...");
         Endpoint ESPDRequestV2Endpoint = new ExportESPDEndpoint(EDMVersion.V2);
         v2Context.addEndpoint(ESPDRequestV2Endpoint);
-
-        LOGGER.info("Configuring ExportESPDResponseV2 endpoint...");
-        Endpoint ESPDResponseV2Endpoint = new ExportESPDEndpoint(EDMVersion.V2);
-        v2Context.addEndpoint(ESPDResponseV2Endpoint);
 
         LOGGER.info("Configuring ImportESPDRequest endpoint...");
         Endpoint importESPDReq = new ImportESPDEndpoint(new ImportESPDRequestService());

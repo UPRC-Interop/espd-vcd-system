@@ -3,6 +3,7 @@ package eu.esens.espdvcd.retriever.criteria.resource;
 import eu.esens.espdvcd.model.LegislationReference;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
+import eu.esens.espdvcd.retriever.criteria.resource.utils.CardinalityUtils;
 
 import java.util.List;
 
@@ -65,10 +66,15 @@ public class SelectableCriterionPrinter {
             tabs += "\t";
         }
         final String finalTabs = tabs;
-        System.out.println("\n" + tabs + "RequirementGroup: " + rg.getID() + " Condition: " + rg.getCondition());
+        System.out.println("\n" + tabs + "RequirementGroup: " + rg.getID()
+                + " Cardinality: " + CardinalityUtils.extractCardinality(rg.isMandatory(), rg.isMultiple())
+                + " Condition: " + rg.getCondition());
+
         System.out.println(tabs + "Requirements: ");
         rg.getRequirements().forEach(r -> {
-            System.out.println(finalTabs + "\tReq ID: " + r.getID() + " Req Type:" + r.getResponseDataType() + " Req Desc:" + r.getDescription());
+            System.out.println(finalTabs + "\tReq ID: " + r.getID()
+                    + " Cardinality: " + CardinalityUtils.extractCardinality(rg.isMandatory(), rg.isMultiple())
+                    + " Req Type:" + r.getResponseDataType() + " Req Desc:" + r.getDescription());
         });
         final int innerDepth = depth + 1;
         rg.getRequirementGroups().forEach(rg1 -> printRequirementGroup(rg1, innerDepth));

@@ -7,11 +7,11 @@ import eu.esens.espdvcd.model.requirement.response.*;
 
 /**
  * Criterion requirement
- *
+ * <p>
  * Requirement to fulfill an specific criterion.
- *
+ * <p>
  * Extends RequestRequirement by response and evidences.
- *
+ * <p>
  * Created by Ulf Lotzmann on 21/03/2016.
  */
 public class ResponseRequirement extends RequestRequirement {
@@ -21,7 +21,7 @@ public class ResponseRequirement extends RequestRequirement {
     /**
      * Criterion requirement response
      * <p>
-     *
+     * <p>
      * <p>
      * Data type: <br>
      * Cardinality: 0..1<br>
@@ -48,7 +48,7 @@ public class ResponseRequirement extends RequestRequirement {
     public Response getResponse() {
         return this.response;
     }
- 
+
     @Override
     public void setResponse(Response response) {
         this.response = response;
