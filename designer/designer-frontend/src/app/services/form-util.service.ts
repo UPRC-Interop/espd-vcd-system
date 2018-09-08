@@ -27,12 +27,11 @@ export class FormUtilService {
   }
 
   createTemplateReqGroups(criteria: FullCriterion[]) {
-      criteria.forEach(cr => {
-        cr.requirementGroups.forEach(rg => {
-          this.template[rg.id] = rg;
-          this.getReqGroups(rg);
-        });
+    criteria.forEach(cr => {
+      cr.requirementGroups.forEach(rg => {
+        this.getReqGroups(rg);
       });
+    });
   }
 
   getReqGroups(rg: RequirementGroup) {
@@ -242,6 +241,8 @@ export class FormUtilService {
     }
   }
 
+
+  /* ============================= EXTRACT VALUES FROM FORMS ================================================ */
   extractFormValuesFromCriteria(criteria: EoRelatedCriterion[], form: FormGroup, evidenceList: Evidence[]) {
     criteria.forEach(cr => {
       let formValues = form.getRawValue();
@@ -282,9 +283,43 @@ export class FormUtilService {
   }
 
 
-  // id as input parameter, to create formGroup for specific requirementGroup object
+  /* ======================================= CREATE TEMPLATE FORMGROUPS FOR CARDINALITIES =====================*/
   createTemplateFormGroup(id: string): FormGroup {
-    return this.toFormGroup(this.template[id]);
+    return this.toTemplateFormGroup(this.template[id]);
+  }
+
+
+  toTemplateFormGroup(rg: RequirementGroup) {
+    let group: any = {};
+    if (rg) {
+      if (rg.requirements !== undefined) {
+        rg.requirements.forEach(r => {
+          group[r.uuid] = new FormControl();
+          if (r.responseDataType === 'EVIDENCE_IDENTIFIER') {
+            group[r.uuid + 'evidenceUrl'] = new FormControl();
+            group[r.uuid + 'evidenceCode'] = new FormControl();
+            group[r.uuid + 'evidenceIssuer'] = new FormControl();
+          } else if (r.responseDataType === 'PERIOD' && this.APIService.version === 'v2') {
+            group[r.uuid + 'startDate'] = new FormControl();
+            group[r.uuid + 'endDate'] = new FormControl();
+          } else if (r.responseDataType === 'INDICATOR') {
+            group[r.uuid] = new FormControl(false);
+          } else if (r.responseDataType === 'AMOUNT') {
+            group[r.uuid + 'currency'] = new FormControl();
+          } else {
+            group[r.uuid] = new FormControl();
+          }
+        });
+      }
+      if (rg.requirementGroups != null || rg.requirementGroups !== undefined) {
+        rg.requirementGroups.forEach(rg => {
+          // console.log('Req Group ' + rg.uuid);
+          group[rg.uuid] = this.toFormGroup(rg);
+        });
+      }
+    }
+    let fg = new FormGroup(group);
+    return fg;
   }
 
 
