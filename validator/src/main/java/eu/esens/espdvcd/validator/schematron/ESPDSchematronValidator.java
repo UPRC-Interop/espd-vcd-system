@@ -1,5 +1,6 @@
 package eu.esens.espdvcd.validator.schematron;
 
+import com.google.common.io.Files;
 import com.helger.schematron.xslt.SchematronResourceSCH;
 import com.helger.schematron.xslt.SchematronResourceXSLT;
 import eu.esens.espdvcd.validator.ArtefactValidator;
@@ -23,116 +24,49 @@ public class ESPDSchematronValidator implements ArtefactValidator {
     private static final Logger LOGGER = Logger.getLogger(ESPDSchematronValidator.class.getName());
 
     private List<ValidationResult> validationMessages = new LinkedList<>();
-    private File espdArtefact;
-    private Set<String> schematronPathSet;
-
-//    public ESPDSchematronValidator(InputStream is, String schPath) {
-//        validateXMLViaSchematronOld(is, schPath);
-//    }
-
-//    public ESPDSchematronValidator(File artefact, String... schPath) {
-//        Arrays.asList(schPath).forEach(path -> validateXMLViaSchematronOld(artefact, path));
-//    }
+    // private File espdArtefact;
+    private List<SchematronResourceSCH> schList;
+    private List<SchematronResourceXSLT> xsltList;
 
     private ESPDSchematronValidator(Builder b) {
-        this.espdArtefact = b.espdArtefact;
-        this.schematronPathSet = b.schematronPathSet;
-        validateXMLViaXSLTSchematron();
+        // this.espdArtefact = b.espdArtefact;
+        this.schList = b.schList;
+        this.xsltList = b.xsltList;
+        validateXMLViaAllSCH(b.espdArtefact);
+        validateXMLViaAllXSLT(b.espdArtefact);
     }
 
-//    static boolean validateXMLViaXSLTSchematron(InputStream is, String schPath) {
-//        final SchematronResourceSCH schematron = SchematronResourceSCH.fromClassPath(schPath);
-//        final Map<String, Object> aParams = new HashMap<>();
-//        aParams.put("allow-foreign", "true");
-//        schematron.setParameters(aParams);
-//        boolean isValid = false;
-//
-//        if (!schematron.isValidSchematron()) {
-//            throw new IllegalArgumentException(ERROR_INVALID_SCHEMATRON);
-//        }
-//
-//        try {
-//            isValid = schematron.getSchematronValidity(new StreamSource(is)).isValid();
-//        } catch (Exception e) {
-//            Logger.getLogger(ESPDSchematronValidator.class.getName()).log(Level.SEVERE, e.getMessage(), e);
-//        }
-//
-//        return isValid;
-//    }
+    private void validateXMLViaAllSCH(File espdArtefact) {
 
-    private void validateXMLViaXSLTSchematron() {
-//        schematronPathSet.forEach(schPath -> validateXMLViaSchematronOld(espdArtefact, schPath));
-        schematronPathSet.forEach(schPath -> validateXMLViaXSLT(espdArtefact, schPath));
+        schList.forEach(sch -> {
+            try {
+                applyResultToValidationMessages(createValidationResult(espdArtefact, sch));
+            } catch (Exception e) {
+                LOGGER.log(Level.SEVERE, e.getMessage(), e);
+            }
+        });
     }
 
-//    /**
-//     * Validating given file against the specified schematron
-//     *
-//     * @param artefact the espd request/response artefact provided by the specified file
-//     * @param schPath  the schematron file path
-//     */
-//    private void validateXMLViaSchematronOld(File artefact, String schPath) {
-//        try {
-//            validateXMLViaSchematronOld(new FileInputStream(artefact), schPath);
-//        } catch (FileNotFoundException e) {
-//            Logger.getLogger(ESPDSchematronValidator.class.getName()).log(Level.SEVERE, e.getMessage(), e);
-//        }
-//    }
+    private void validateXMLViaAllXSLT(File espdArtefact) {
 
-    private SchematronOutputType createSVRLForXSLTValidation(File xmlArtefact, String xsltPath) throws Exception {
+        xsltList.forEach(xslt -> {
+            try {
+                applyResultToValidationMessages(createValidationResult(espdArtefact, xslt));
+            } catch (Exception e) {
+                LOGGER.log(Level.SEVERE, e.getMessage(), e);
+            }
+        });
+    }
 
-        final SchematronResourceXSLT xslt = SchematronResourceXSLT.fromClassPath(xsltPath);
-        final Map<String, Object> params = new HashMap<>();
-        params.put("allow-foreign", "true");
-        xslt.setParameters(params);
-        xslt.setURIResolver(createTaxonomyURIResolver());
-
-        if (!xslt.isValidSchematron()) {
-            throw new IllegalArgumentException("Error... Invalid Schematron");
-        }
-
+    private SchematronOutputType createValidationResult(File xmlArtefact, SchematronResourceXSLT xslt) throws Exception {
         return xslt.applySchematronValidationToSVRL(new StreamSource(new FileInputStream(xmlArtefact)));
     }
 
-    private SchematronOutputType createSVRLForSchematronValidation(File xmlArtefact, String schPath) throws Exception {
-
-        final SchematronResourceSCH schematron = SchematronResourceSCH.fromClassPath(schPath);
-        final Map<String, Object> params = new HashMap<>();
-        params.put("allow-foreign", "true");
-        schematron.setParameters(params);
-        schematron.setURIResolver(createTaxonomyURIResolver());
-
-        if (!schematron.isValidSchematron()) {
-            throw new IllegalArgumentException("Error... Invalid Schematron");
-        }
-
-        return schematron.applySchematronValidationToSVRL(new StreamSource(new FileInputStream(xmlArtefact)));
+    private SchematronOutputType createValidationResult(File xmlArtefact, SchematronResourceSCH sch) throws Exception {
+        return sch.applySchematronValidationToSVRL(new StreamSource(new FileInputStream(xmlArtefact)));
     }
 
-    private ClasspathURIResolver createTaxonomyURIResolver() {
-        ClasspathURIResolver resolver = new ClasspathURIResolver();
-        resolver.addResource("rules/v2/eu/ESPDRequest-2.0.2/xsl/ESPD-CriteriaTaxonomy-REGULATED.V2.0.2.xml");
-        resolver.addResource("rules/v2/eu/ESPDRequest-2.0.2/xsl/ESPD-CriteriaTaxonomy-SELFCONTAINED.V2.0.2.xml");
-        return resolver;
-    }
-
-    private void validateXMLViaXSLT(File xmlArtefact, String xsltPath) {
-        try {
-            validateXMLViaSVRL(createSVRLForXSLTValidation(xmlArtefact, xsltPath));
-        } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, e.getMessage(), e);
-        }
-    }
-
-    private void validateXMLViaSchematron(File xmlArtefact, String schPath) {
-        try {
-            validateXMLViaSVRL(createSVRLForSchematronValidation(xmlArtefact, schPath));
-        } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, e.getMessage(), e);
-        }
-    }
-
-    private void validateXMLViaSVRL(SchematronOutputType svrl) {
+    private void applyResultToValidationMessages(SchematronOutputType svrl) {
 
         try {
 
@@ -245,19 +179,86 @@ public class ESPDSchematronValidator implements ArtefactValidator {
 
     public static class Builder {
 
-        Set<String> schematronPathSet;
-        File espdArtefact;
+        private List<SchematronResourceSCH> schList;
+        private List<SchematronResourceXSLT> xsltList;
+        private File espdArtefact;
 
         public Builder(File espdArtefact) {
             this.espdArtefact = espdArtefact;
-            schematronPathSet = new LinkedHashSet<>(10);
+            schList = new ArrayList<>();
+            xsltList = new ArrayList<>();
         }
 
+        /**
+         * Add a schematron file (.sch, .xslt), which will be used
+         * during validation process of an ESPD XML Artefact.
+         *
+         * @param path The schematron file path
+         * @return
+         */
         public Builder addSchematron(String path) {
             if (path != null) {
-                schematronPathSet.add(path);
+                addIfValidOrThrowException(path);
             }
             return this;
+        }
+
+        private void addIfValidOrThrowException(String path) {
+
+            switch (Files.getFileExtension(path)) {
+
+                case "sch":
+                    schList.add(createSchematronResourceSCH(path));
+                    break;
+
+                case "xslt":
+                    xsltList.add(createSchematronResourceXSLT(path));
+                    break;
+
+                default:
+                    throw new IllegalArgumentException("Error... Invalid schematron file extension."
+                            + " Valid extensions are .sch, .xslt");
+            }
+
+        }
+
+        private SchematronResourceSCH createSchematronResourceSCH(String schPath) {
+
+            final SchematronResourceSCH sch = SchematronResourceSCH.fromClassPath(schPath);
+            sch.setParameters(createDefaultParams());
+            sch.setURIResolver(createTaxonomyURIResolver());
+
+            if (!sch.isValidSchematron()) {
+                throw new IllegalArgumentException("Error... Invalid Schematron: " + schPath);
+            }
+
+            return sch;
+        }
+
+        private SchematronResourceXSLT createSchematronResourceXSLT(String xsltPath) {
+
+            final SchematronResourceXSLT xslt = SchematronResourceXSLT.fromClassPath(xsltPath);
+            xslt.setParameters(createDefaultParams());
+            xslt.setURIResolver(createTaxonomyURIResolver());
+
+            if (!xslt.isValidSchematron()) {
+                throw new IllegalArgumentException("Error... Invalid Schematron: " + xsltPath);
+            }
+
+            return xslt;
+        }
+
+        private Map<String, Object> createDefaultParams() {
+            final Map<String, Object> params = new HashMap<>();
+            params.put("allow-foreign", "true");
+            return params;
+        }
+
+        private ClasspathURIResolver createTaxonomyURIResolver() {
+            ClasspathURIResolver resolver = new ClasspathURIResolver();
+            resolver.addResource("rules/v2/eu/ESPDRequest-2.0.2/xsl/ESPD-CriteriaTaxonomy-REGULATED.V2.0.2.xml");
+            resolver.addResource("rules/v2/eu/ESPDRequest-2.0.2/xsl/ESPD-CriteriaTaxonomy-SELFCONTAINED.V2.0.2.xml");
+            return resolver;
         }
 
         public ESPDSchematronValidator build() {
