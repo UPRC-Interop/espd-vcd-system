@@ -73,13 +73,16 @@ public class RequirementGroup implements Serializable {
     private boolean multiple;
 
     public RequirementGroup(String ID) {
-        this.ID = ID;
+        this(ID, null);
     }
 
     public RequirementGroup(@JsonProperty("ID") String ID,
                             @JsonProperty("requirements") List<Requirement> requirements) {
         this.ID = ID;
         this.requirements = requirements;
+        // apply default cardinality 1
+        this.mandatory = true;
+        this.multiple = false;
     }
 
     public String getUUID() {

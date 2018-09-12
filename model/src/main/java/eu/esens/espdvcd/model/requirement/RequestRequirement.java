@@ -74,9 +74,7 @@ public class RequestRequirement implements Requirement {
     public RequestRequirement(@JsonProperty("ID") String ID,
                               @JsonProperty("responseDataType") ResponseTypeEnum responseDataType,
                               @JsonProperty("description") String description) {
-        this.ID = ID;
-        this.responseDataType = responseDataType;
-        this.description = description;
+        this(ID, null, responseDataType, description);
     }
 
     public RequestRequirement(@JsonProperty("ID") String ID,
@@ -87,6 +85,9 @@ public class RequestRequirement implements Requirement {
         this.typeCode = typeCode;
         this.responseDataType = responseDataType;
         this.description = description;
+        // apply default cardinality 1
+        this.mandatory = true;
+        this.multiple = false;
     }
 
     @Override
