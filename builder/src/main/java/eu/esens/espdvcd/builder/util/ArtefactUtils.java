@@ -16,6 +16,12 @@ public class ArtefactUtils {
 
     private static final Logger LOGGER = Logger.getLogger(ArtefactUtils.class.getName());
 
+    private static String clearCRLF(String stringToClear) {
+        return stringToClear
+                .replace("\n", "")
+                .replace("\r", "");
+    }
+
     public static InputStream getBufferedInputStream(InputStream xmlESPD) {
         // We require a marked input stream
         InputStream bis;
@@ -28,12 +34,14 @@ public class ArtefactUtils {
     }
 
     /**
-     * Identify Exchange Data Model (EDM) version of given ESPD artefact String representation
+     * Identify Exchange Data Model (EDM) version of given ESPD artefact String representation.
+     *
+     * Warning!!! Do not make this method public or package private.
      *
      * @param partOfTheArtefact A String representation of the ESPD XML artefact or part of it
      * @return The EDM version
      */
-    public static EDMVersion findEDMVersion(final String partOfTheArtefact) {
+    private static EDMVersion findEDMVersion(final String partOfTheArtefact) {
         String smallerPartOfTheArtefact = partOfTheArtefact.substring(0, 99); // 100 chars
 
         final String v1ArtefactRegex = "<\\S*(ESPDRequest|ESPDResponse)";
@@ -97,15 +105,18 @@ public class ArtefactUtils {
         byte[] contents = new byte[bytesToRead];
         int bytesRead;
         bis.mark(bytesToRead);
+
         while ((bytesRead = bis.read(contents)) != -1) {
+
             partOfTheArtefact.append(new String(contents, 0, bytesRead));
+
             if (bytesRead >= bytesToRead) {
                 break;
             }
         }
         bis.reset();
 
-        return partOfTheArtefact.toString();
+        return clearCRLF(partOfTheArtefact.toString());
     }
 
     /**
@@ -161,11 +172,13 @@ public class ArtefactUtils {
     /**
      * Identify type of given ESPD artefact String representation (request or response)
      *
+     * Warning!!! Do not make this method public or package private.
+     *
      * @param partOfTheArtefact A String representation of the ESPD XML artefact or part of it
      * @return The artefact type
      */
-    public static ArtefactType findArtefactType(final String partOfTheArtefact) {
-        String smallerPartOfTheArtefact = partOfTheArtefact.substring(0, 99); // 100 chars
+    private static ArtefactType findArtefactType(final String partOfTheArtefact) {
+        String smallerPartOfTheArtefact = clearCRLF(partOfTheArtefact.substring(0, 99)); // 100 chars
 
         final String requestRegex = "<\\S*(ESPDRequest|QualificationApplicationRequest)";
         final String responseRegex = "<\\S*(ESPDResponse|QualificationApplicationResponse)";

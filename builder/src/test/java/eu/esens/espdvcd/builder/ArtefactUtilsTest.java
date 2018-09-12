@@ -25,8 +25,11 @@ public class ArtefactUtilsTest {
 
     private File regulatedRequestV2;
 
+    private InputStream selfContainedRequestV2IS;
+    private File selfContainedRequestV2File;
+
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         espdRequestRegulatedV1_0_2 = ArtefactUtilsTest.class.getResourceAsStream("/espd-request.xml");
         Assert.assertNotNull(espdRequestRegulatedV1_0_2);
         espdRequestRegulatedV2_0_1 = ArtefactUtilsTest.class.getResourceAsStream("/espd-request-v2_2018-05-30a.xml");
@@ -38,6 +41,14 @@ public class ArtefactUtilsTest {
 
         regulatedRequestV2 = new File(getClass().getClassLoader().getResource("REGULATED-ESPD-Request_2.0.2.xml").getFile());
         Assert.assertNotNull(regulatedRequestV2);
+
+        // SELFCONTAINED_ESPD-Request.V2.0.2.xml
+
+        selfContainedRequestV2IS = getClass().getClassLoader().getResourceAsStream("SELFCONTAINED_ESPD-Request.V2.0.2.xml");
+        Assert.assertNotNull(selfContainedRequestV2IS);
+
+        selfContainedRequestV2File = new File(getClass().getClassLoader().getResource("SELFCONTAINED_ESPD-Request.V2.0.2.xml").getFile());
+        Assert.assertNotNull(selfContainedRequestV2File);
     }
 
     @Ignore
@@ -92,8 +103,8 @@ public class ArtefactUtilsTest {
     @Ignore
     @Test
     public void testFindQualificationApplicationType() {
-        Assert.assertEquals(QualificationApplicationTypeEnum.REGULATED, ArtefactUtils.findQualificationApplicationType(espdRequestRegulatedV2_0_1));
-        Assert.assertEquals(QualificationApplicationTypeEnum.REGULATED, ArtefactUtils.findQualificationApplicationType(regulatedRequestV2));
+        Assert.assertEquals(QualificationApplicationTypeEnum.SELFCONTAINED, ArtefactUtils.findQualificationApplicationType(selfContainedRequestV2File));
+        Assert.assertEquals(QualificationApplicationTypeEnum.SELFCONTAINED, ArtefactUtils.findQualificationApplicationType(selfContainedRequestV2IS));
     }
 
 }
