@@ -2,6 +2,7 @@ package eu.esens.espdvcd.builder.util;
 
 import eu.esens.espdvcd.builder.enums.ArtefactType;
 import eu.esens.espdvcd.codelist.enums.ProfileExecutionIDEnum;
+import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
 import eu.esens.espdvcd.schema.EDMVersion;
 
 import java.io.*;
@@ -138,7 +139,8 @@ public class ArtefactUtils {
                         // extract <cbc:ProfileExecutionID> value
                         final String theId = m.group(1);
                         profileExecutionID = Arrays.stream(ProfileExecutionIDEnum.values())
-                                .filter(id -> id.getValue().equals(theId))
+                                .filter(id -> id.getValue().equals(theId)
+                                        && !id.equals(ProfileExecutionIDEnum.UNKNOWN))
                                 .findAny().orElseThrow(() -> new IOException("Error... ProfileExecutionID element value doesn't match with any ProfileExecutionID Codelist value."));
                     } else {
                         throw new IOException("Error... Matcher couldn't find profile execution id value, by using regular expression.");
@@ -217,6 +219,70 @@ public class ArtefactUtils {
         }
 
         return ArtefactType.UNKNOWN;
+    }
+
+    /**
+     * Identify QualificationApplicationTypeCode of given ESPD XML
+     * artefact (regulated or self-contained).
+     *
+     * @param xmlESPD The ESPD XML artefact
+     * @return The QualificationApplicationTypeCode
+     */
+    public static QualificationApplicationTypeEnum findQualificationApplicationType(File xmlESPD) {
+
+        try {
+            return findQualificationApplicationType(new FileInputStream(xmlESPD));
+        } catch (FileNotFoundException e) {
+            LOGGER.log(Level.SEVERE, e.getMessage(), e);
+        }
+
+        return QualificationApplicationTypeEnum.UNKNOWN;
+    }
+
+    /**
+     * Identify QualificationApplicationTypeCode of given ESPD XML
+     * artefact (regulated or self-contained).
+     *
+     * @param xmlESPD The ESPD XML artefact
+     * @return The QualificationApplicationTypeCode
+     */
+    public static QualificationApplicationTypeEnum findQualificationApplicationType(InputStream xmlESPD) {
+
+        QualificationApplicationTypeEnum qaType = QualificationApplicationTypeEnum.UNKNOWN;
+
+        try {
+            String partOfTheArtefact = getPartOfTheArtefact(xmlESPD, 4056);
+
+            switch (findEDMVersion(partOfTheArtefact)) {
+
+                case V1:
+                    qaType = QualificationApplicationTypeEnum.REGULATED;
+                    break;
+
+                case V2:
+                    String extractionRegex = ".*<cbc:QualificationApplicationTypeCode.*?>(.*?)</cbc:QualificationApplicationTypeCode>.*";
+                    Matcher m = Pattern.compile(extractionRegex, Pattern.DOTALL & Pattern.MULTILINE)
+                            .matcher(partOfTheArtefact);
+                    if (m.find()) {
+                        final String theType = m.group(1);
+                        qaType = Arrays.stream(QualificationApplicationTypeEnum.values())
+                                .filter(type -> type.name().equals(theType)
+                                        && !type.equals(QualificationApplicationTypeEnum.UNKNOWN))
+                                .findAny().orElseThrow(() -> new IOException("Error... cbc:QualificationApplicationTypeCode element value doesn't match with any QualificationApplicationType Codelist value."));
+                    } else {
+                        throw new IOException("Error... Matcher couldn't find cbc:QualificationApplicationTypeCode value, by using regular expression.");
+                    }
+                    break;
+
+                default:
+                    throw new IOException("Error... Imported artefact could not be identified as either v1 or v2.");
+            }
+
+        } catch (IOException ex) {
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+
+        return qaType;
     }
 
 }

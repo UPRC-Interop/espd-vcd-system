@@ -7,6 +7,7 @@ import eu.esens.espdvcd.schema.XSD;
 import eu.esens.espdvcd.schematron.SchematronV1;
 import eu.esens.espdvcd.schematron.SchematronV2;
 import eu.esens.espdvcd.validator.schema.ESPDSchemaValidator;
+import eu.esens.espdvcd.validator.schematron.ClasspathURIResolver;
 import eu.esens.espdvcd.validator.schematron.ESPDSchematronValidator;
 import eu.espd.schema.v1.espdrequest_1.ESPDRequestType;
 import eu.espd.schema.v1.espdresponse_1.ESPDResponseType;
@@ -151,7 +152,7 @@ public class ValidatorFactory {
 
             case V2:
                 LOGGER.log(Level.INFO, "Creating ESPD request V2 schematron validator for: " + espdRequest.getName());
-                return new ESPDSchematronValidator.Builder(espdRequest)
+                return new ESPDSchematronValidator.Builder(espdRequest, createTaxonomyURIResolver())
                         // common
                         .addSchematron("/" + SchematronV2.ESPDCodelistsValues.xslt())
                         .addSchematron("/" + SchematronV2.ESPDCommonCLAttributes.xslt())
@@ -195,7 +196,7 @@ public class ValidatorFactory {
 
             case V2:
                 LOGGER.log(Level.INFO, "Creating ESPD response V2 schematron validator for: " + espdResponse.getName());
-                return new ESPDSchematronValidator.Builder(espdResponse)
+                return new ESPDSchematronValidator.Builder(espdResponse, createTaxonomyURIResolver())
                         // common
                         .addSchematron("/" + SchematronV2.ESPDCodelistsValues.xslt())
                         .addSchematron("/" + SchematronV2.ESPDCommonCLAttributes.xslt())
@@ -244,6 +245,13 @@ public class ValidatorFactory {
                 return null;
 
         }
+    }
+
+    private static ClasspathURIResolver createTaxonomyURIResolver() {
+        ClasspathURIResolver resolver = new ClasspathURIResolver();
+        resolver.addResource("schematron/v2/ESPDRequest-2.0.2/xsl/ESPD-CriteriaTaxonomy-REGULATED.V2.0.2.xml");
+        resolver.addResource("schematron/v2/ESPDRequest-2.0.2/xsl/ESPD-CriteriaTaxonomy-SELFCONTAINED.V2.0.2.xml");
+        return resolver;
     }
 
 }

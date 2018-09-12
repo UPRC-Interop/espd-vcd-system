@@ -1,7 +1,9 @@
 package eu.esens.espdvcd.builder;
 
 import eu.esens.espdvcd.builder.enums.ArtefactType;
+import eu.esens.espdvcd.builder.util.ArtefactUtils;
 import eu.esens.espdvcd.codelist.enums.ProfileExecutionIDEnum;
+import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
 import eu.esens.espdvcd.schema.EDMVersion;
 import org.junit.Assert;
 import org.junit.Before;
@@ -85,6 +87,13 @@ public class ArtefactUtilsTest {
         Assert.assertEquals(ProfileExecutionIDEnum.ESPD_EDM_V2_0_2_REGULATED, findProfileExecutionID(new FileInputStream(regulatedRequestV2)));
         Assert.assertEquals(EDMVersion.V2, findEDMVersion(new FileInputStream(regulatedRequestV2)));
         Assert.assertEquals(ArtefactType.ESPD_REQUEST, findArtefactType(new FileInputStream(regulatedRequestV2)));
+    }
+
+    @Ignore
+    @Test
+    public void testFindQualificationApplicationType() {
+        Assert.assertEquals(QualificationApplicationTypeEnum.REGULATED, ArtefactUtils.findQualificationApplicationType(espdRequestRegulatedV2_0_1));
+        Assert.assertEquals(QualificationApplicationTypeEnum.REGULATED, ArtefactUtils.findQualificationApplicationType(regulatedRequestV2));
     }
 
 }
