@@ -73,7 +73,10 @@ public class RequirementGroup implements Serializable {
     private boolean multiple;
 
     public RequirementGroup(String ID) {
-        this(ID, null);
+        this.ID = ID;
+        // apply default cardinality 1
+        this.mandatory = true;
+        this.multiple = false;
     }
 
     public RequirementGroup(@JsonProperty("ID") String ID,
