@@ -13,6 +13,7 @@ import {SelectionCriteria} from '../model/selectionCriteria.model';
 import {ReductionCriterion} from '../model/reductionCriterion.model';
 import {UtilitiesService} from './utilities.service';
 import {FullCriterion} from '../model/fullCriterion.model';
+import {UUID} from 'angular2-uuid';
 
 @Injectable({
   providedIn: 'root'
@@ -45,6 +46,26 @@ export class FormUtilService {
       }
     }
   }
+
+  changeReqId(rg: RequirementGroup) {
+    if (rg) {
+      // change requirement ids
+      if (rg.requirements !== undefined) {
+        rg.requirements.forEach(r => {
+          console.log('REQUIREMENT ID: ' + r.id);
+          r.id = UUID.UUID();
+          console.log('NEW REQUIREMENT ID: ' + r.id);
+        });
+      }
+      if (rg.requirementGroups !== null || rg.requirementGroups !== undefined) {
+        rg.requirementGroups.forEach(rg2 => {
+          this.changeReqId(rg2);
+        });
+      }
+    }
+
+  }
+
 
   getFromForm(rg: RequirementGroup, cr: EoRelatedCriterion, form: FormGroup, formValues: any, evidenceList: Evidence[]) {
 

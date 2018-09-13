@@ -73,13 +73,7 @@ export class RequirementGroupComponent implements OnInit, OnChanges {
       console.log(this.placeHolder);
 
       // change requirement ids
-      if (this.placeHolder.requirements !== undefined) {
-        this.placeHolder.requirements.forEach(r => {
-          console.log('REQUIREMENT ID: ' + r.id);
-          r.id = UUID.UUID();
-          console.log('NEW REQUIREMENT ID: ' + r.id);
-        });
-      }
+      this.formUtil.changeReqId(this.placeHolder);
 
       this.reqGroup.requirementGroups.push(this.placeHolder);
       console.log('NEW Local ReqGroup:');
