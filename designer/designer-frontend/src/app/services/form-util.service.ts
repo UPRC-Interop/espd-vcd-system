@@ -38,7 +38,7 @@ export class FormUtilService {
   getReqGroups(rg: RequirementGroup) {
     if (rg !== null || rg !== undefined) {
 
-      this.template[rg.id] = rg;
+      this.template[rg.uuid] = rg;
       if (rg.requirementGroups !== null || rg.requirementGroups !== undefined) {
         rg.requirementGroups.forEach(rg2 => {
           this.getReqGroups(rg2);
@@ -52,9 +52,7 @@ export class FormUtilService {
       // change requirement ids
       if (rg.requirements !== undefined) {
         rg.requirements.forEach(r => {
-          console.log('REQUIREMENT ID: ' + r.id);
           r.id = UUID.UUID();
-          console.log('NEW REQUIREMENT ID: ' + r.id);
         });
       }
       if (rg.requirementGroups !== null || rg.requirementGroups !== undefined) {

@@ -4,6 +4,7 @@ import {FormGroup} from '@angular/forms';
 import {RequirementGroup} from '../model/requirementGroup.model';
 import {FormUtilService} from '../services/form-util.service';
 import {UUID} from 'angular2-uuid';
+import {FullCriterion} from '../model/fullCriterion.model';
 
 @Component({
   selector: 'app-criterion',
@@ -16,6 +17,7 @@ export class CriterionComponent implements OnInit {
   @Input() form: FormGroup;
   @Input() indicator: boolean;
   public placeHolder: any = {};
+  fullCriterionList: FullCriterion[] = null;
 
   constructor(public formUtil: FormUtilService) {
   }
@@ -25,20 +27,20 @@ export class CriterionComponent implements OnInit {
   }
 
   onAdd(reqGroup: RequirementGroup) {
-    console.log(`Called onAdd with groupId ${reqGroup.id}:`);
-    console.log(this.formUtil.template[reqGroup.id]);
+    console.log(`Called onAdd with groupId ${reqGroup.uuid}:`);
+    console.log(this.formUtil.template[reqGroup.uuid]);
 
-    if (this.formUtil.template[reqGroup.id] !== undefined) {
+    if (this.formUtil.template[reqGroup.uuid] !== undefined) {
 
 // create new formGroup from template
-      const fg = this.formUtil.createTemplateFormGroup(reqGroup.id);
-      console.log('The Requirement Group created from the Template:');
+      const fg = this.formUtil.createTemplateFormGroup(reqGroup.uuid);
+      console.log('The Requirement Group created from the Template: ');
       console.log(fg);
 
 // push to json Structure
 
 // Overwrite FIX: don't assign by reference.
-      this.placeHolder = JSON.parse(JSON.stringify(this.formUtil.template[reqGroup.id]));
+      this.placeHolder = JSON.parse(JSON.stringify(this.formUtil.template[reqGroup.uuid]));
 // TODO: generate uuid
       let uuid = UUID.UUID();
       this.placeHolder.uuid = uuid;
@@ -62,6 +64,8 @@ export class CriterionComponent implements OnInit {
       this.form.addControl(uuid, fg);
       console.log('FORM After ADD: ');
       console.log(this.form);
+
+      this.formUtil.getReqGroups(this.placeHolder);
 
     } else {
       console.log('No template found for criteria creation');

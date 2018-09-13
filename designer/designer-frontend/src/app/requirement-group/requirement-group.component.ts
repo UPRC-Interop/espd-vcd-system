@@ -49,20 +49,20 @@ export class RequirementGroupComponent implements OnInit, OnChanges {
   }
 
   onAdd(rg: RequirementGroup) {
-    console.log(`Called onAdd with groupId ${rg.id}:`);
-    console.log(this.formUtil.template[rg.id]);
+    console.log(`Called onAdd with groupId ${rg.uuid}:`);
+    console.log(this.formUtil.template[rg.uuid]);
 
-    if (this.formUtil.template[rg.id] !== undefined) {
+    if (this.formUtil.template[rg.uuid] !== undefined) {
 
       // create new formGroup from template
-      const fg = this.formUtil.createTemplateFormGroup(rg.id);
+      const fg = this.formUtil.createTemplateFormGroup(rg.uuid);
       console.log('The Requirement Group created from the Template:');
       console.log(fg);
 
       // push to json Structure
 
       // Overwrite FIX: don't assign by reference.
-      this.placeHolder = JSON.parse(JSON.stringify(this.formUtil.template[rg.id]));
+      this.placeHolder = JSON.parse(JSON.stringify(this.formUtil.template[rg.uuid]));
       // TODO: generate uuid
       let uuid = UUID.UUID();
       this.placeHolder.uuid = uuid;
@@ -85,6 +85,8 @@ export class RequirementGroupComponent implements OnInit, OnChanges {
       this.form.addControl(uuid, fg);
       console.log('FORM After ADD: ');
       console.log(this.form);
+
+      this.formUtil.getReqGroups(this.placeHolder);
 
     } else {
       console.log('No template found for criteria creation');
