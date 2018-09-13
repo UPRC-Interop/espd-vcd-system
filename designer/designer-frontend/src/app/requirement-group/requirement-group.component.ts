@@ -48,21 +48,21 @@ export class RequirementGroupComponent implements OnInit, OnChanges {
     this.childIndicator = (event);
   }
 
-  onAdd(groupId: string) {
-    console.log(`Called onAdd with groupId ${groupId}:`);
-    console.log(this.formUtil.template[groupId]);
+  onAdd(rg: RequirementGroup) {
+    console.log(`Called onAdd with groupId ${rg.id}:`);
+    console.log(this.formUtil.template[rg.id]);
 
-    if (this.formUtil.template[groupId] !== undefined) {
+    if (this.formUtil.template[rg.id] !== undefined) {
 
       // create new formGroup from template
-      const fg = this.formUtil.createTemplateFormGroup(groupId);
+      const fg = this.formUtil.createTemplateFormGroup(rg.id);
       console.log('The Requirement Group created from the Template:');
       console.log(fg);
 
       // push to json Structure
 
       // Overwrite FIX: don't assign by reference.
-      this.placeHolder = JSON.parse(JSON.stringify(this.formUtil.template[groupId]));
+      this.placeHolder = JSON.parse(JSON.stringify(this.formUtil.template[rg.id]));
       // TODO: generate uuid
       let uuid = UUID.UUID();
       this.placeHolder.uuid = uuid;
@@ -71,6 +71,16 @@ export class RequirementGroupComponent implements OnInit, OnChanges {
       console.log(this.reqGroup);
       console.log('new ReqGroup:');
       console.log(this.placeHolder);
+
+      // change requirement ids
+      if (this.placeHolder.requirements !== undefined) {
+        this.placeHolder.requirements.forEach(r => {
+          console.log('REQUIREMENT ID: ' + r.id);
+          r.id = UUID.UUID();
+          console.log('NEW REQUIREMENT ID: ' + r.id);
+        });
+      }
+
       this.reqGroup.requirementGroups.push(this.placeHolder);
       console.log('NEW Local ReqGroup:');
       console.log(this.reqGroup);

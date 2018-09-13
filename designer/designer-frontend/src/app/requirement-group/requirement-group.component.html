@@ -7,7 +7,7 @@
         <div *ngFor="let rg of reqGroup.requirementGroups" class="form-row">
           <app-requirement-group [reqGroup]="rg" [form] = "form.get(rg.uuid)" [indicator]="childIndicator"></app-requirement-group>
           <div *ngIf="childIndicator && rg.multiple" style="text-align: right">
-            <button type="button" (click)="onAdd(rg.id)"><span class="material-icons" style="vertical-align: middle;">add_circle_outline</span></button>
+            <button type="button" (click)="onAdd(rg)"><span class="material-icons" style="vertical-align: middle;">add_circle_outline</span></button>
             <button type="button" (click)="onRemove(rg)"><span class="material-icons" style="vertical-align: middle;">remove_circle_outline</span></button>
           </div>
           <!--<div *ngIf="rg.mandatory && rg.multiple" style="text-align: right">-->
