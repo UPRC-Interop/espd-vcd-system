@@ -47,6 +47,17 @@ export class CriterionComponent implements OnInit {
       console.log(reqGroup);
       console.log('new ReqGroup:');
       console.log(this.placeHolder);
+
+      // change requirement ids
+      if (this.placeHolder.requirements !== undefined) {
+        this.placeHolder.requirements.forEach(r => {
+          console.log('REQUIREMENT ID: ' + r.id);
+          r.id = UUID.UUID();
+          console.log('NEW REQUIREMENT ID: ' + r.id);
+        });
+      }
+
+
       this.criterion.requirementGroups.push(this.placeHolder);
       console.log('NEW Local ReqGroup:');
       console.log(reqGroup);
