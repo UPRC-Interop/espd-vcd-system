@@ -4,41 +4,39 @@
 <form  #f="ngForm">
 
   <mat-card>
-    <mat-card-title>Who are you?</mat-card-title>
+    <mat-card-title translate>espd.init.who.are.you</mat-card-title>
     <mat-card-content>
       <mat-radio-group name="chooseRole" ngModel>
-        <mat-radio-button color="primary" name="role" value="CA" (change)="handleRole(CA)" #CA>I am a contracting
-          authority
+        <mat-radio-button color="primary" name="role" value="CA" (change)="handleRole(CA)" #CA>{{'espd.init.i.am.ca' | translate}}
         </mat-radio-button>
-        <mat-radio-button color="primary" name="role" value="EO" (change)="handleRole(EO)" #EO>I am an economic
-          operator
+        <mat-radio-button color="primary" name="role" value="EO" (change)="handleRole(EO)" #EO translate>{{'espd.init.i.am.eop' | translate}}
         </mat-radio-button>
       </mat-radio-group>
     </mat-card-content>
   </mat-card>
   <mat-card *ngIf="isCA">
-    <mat-card-title>What would you like to do?</mat-card-title>
+    <mat-card-title translate>espd.init.what.you.do</mat-card-title>
     <mat-card-content>
       <div class="wrapper">
         <mat-form-field class="width">
-          <input matInput name="noticeNumber" placeholder="Please Specify the Received Notice Number" required ngModel>
+          <input matInput name="noticeNumber" placeholder="{{'espd.init.ted.reception.id.placeholder' | translate}}" required ngModel>
         </mat-form-field>
         <mat-radio-group name="caOptions" ngModel>
           <mat-radio-button color="primary"
                             name="caOption"
                             value="createNewESPD"
                             (change)="handleCASelection(createNewESPD)"
-                            #createNewESPD>Create a new ESPD</mat-radio-button>
+                            #createNewESPD>{{ 'espd.init.create.espd' | translate}}</mat-radio-button>
           <mat-radio-button color="primary"
                             name="caOption"
                             value="reuseESPD"
-                            (change)="handleCASelection(reuseESPD)"
-                            #reuseESPD>Reuse an existing ESPD</mat-radio-button>
+                            (change)="handleCASelection(reuseESPD)" translate
+                            #reuseESPD>{{'espd.init.reuse.espd' | translate}}</mat-radio-button>
           <mat-radio-button color="primary"
                             name="caOption"
                             value="reviewESPD"
-                            (change)="handleCASelection(reviewESPD)"
-                            #reviewESPD>Review ESPD
+                            (change)="handleCASelection(reviewESPD)" translate
+                            #reviewESPD>{{'espd.init.review.espd' | translate}}
           </mat-radio-button>
         </mat-radio-group>
       </div>
@@ -64,10 +62,10 @@
       </mat-radio-group>
     </mat-card-content>
 
-    <mat-card-title>Where is your Authority located?</mat-card-title>
+    <mat-card-title translate>espd.init.where.are.you.from.ca</mat-card-title>
     <mat-card-content>
       <mat-form-field>
-        <mat-select name="CACountry" placeholder="Select Country" ngModel>
+        <mat-select name="CACountry" placeholder="{{'espd.init.select.country' | translate}}" ngModel>
           <mat-option>None</mat-option>
           <mat-option *ngFor="let country of countries" [value]="country.code">{{country.name}}</mat-option>
         </mat-select>
@@ -76,9 +74,9 @@
   </mat-card>
 
   <mat-card *ngIf="(isReuseESPD || isReviewESPD)&& isCA">
-    <mat-card-title>Upload Document</mat-card-title>
+    <mat-card-title translate>espd.init.upload.document</mat-card-title>
     <mat-card-content>
-      <label for="fileUploadCA">Please upload an ESPD Request or an ESPD Response: </label>
+      <label for="fileUploadCA" translate>espd.init.upload.request.response</label>
       <br>
       <input type="file" id="fileUploadCA"
              name="importCA"
@@ -88,33 +86,33 @@
   </mat-card>
 
   <mat-card *ngIf="isEO">
-    <mat-card-title>What would you like to do?</mat-card-title>
+    <mat-card-title translate>espd.init.what.you.do</mat-card-title>
     <mat-card-content>
       <mat-radio-group name="eoOptions" ngModel>
         <mat-radio-button color="primary"
                           name="eoOption"
                           value="createResponse"
-                          (change)="handleEOSelection(createResponse)" #createResponse>Create Response
+                          (change)="handleEOSelection(createResponse)" #createResponse>{{'espd.init.create.response' | translate}}
         </mat-radio-button>
         <mat-radio-button color="primary"
                           name="eoOption"
                           value="importESPD"
-                          (change)="handleEOSelection(importESPD)" #importESPD>Import ESPD
+                          (change)="handleEOSelection(importESPD)" #importESPD>{{'espd.init.import.espd' | translate}}
         </mat-radio-button>
         <mat-radio-button color="primary"
                           name="eoOption"
                           value="reviewESPD"
                           (change)="handleEOSelection(reviewESPD)"
-                          #reviewESPD>Review ESPD
+                          #reviewESPD>{{'espd.init.review.espd' | translate}}
         </mat-radio-button>
       </mat-radio-group>
     </mat-card-content>
   </mat-card>
 
   <mat-card *ngIf="(isImportESPD || isReviewESPD) && isEO">
-    <mat-card-title>Upload Document</mat-card-title>
+    <mat-card-title translate>espd.init.upload.document</mat-card-title>
     <mat-card-content>
-      <label for="fileUploadEO">Please upload an ESPD Request or an ESPD Response: </label>
+      <label for="fileUploadEO" translate>espd.init.upload.request.response</label>
       <br>
       <input type="file" id="fileUploadEO"
              name="importEO"
@@ -142,10 +140,10 @@
       </mat-radio-group>
     </mat-card-content>
 
-    <mat-card-title>Where is your business located?</mat-card-title>
+    <mat-card-title translate>espd.init.where.are.you.from.eo</mat-card-title>
     <mat-card-content>
       <mat-form-field>
-        <mat-select name="EOCountry" placeholder="Select Country" ngModel>
+        <mat-select name="EOCountry" placeholder="{{'espd.init.select.country' | translate}}" ngModel>
           <mat-option>None</mat-option>
           <mat-option *ngFor="let country of countries" [value]="country.code">{{country.name}}</mat-option>
         </mat-select>
@@ -153,6 +151,6 @@
     </mat-card-content>
   </mat-card>
 
-  <button type="button" mat-raised-button color="primary" (click)="onStartSubmit(f)"  matStepperNext>Next</button>
+  <button type="button" mat-raised-button color="primary" (click)="onStartSubmit(f)"  matStepperNext>{{'espd.gui.next' | translate}}</button>
 
 </form>

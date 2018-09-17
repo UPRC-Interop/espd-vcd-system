@@ -1,11 +1,11 @@
-<h4 xmlns="http://www.w3.org/1999/html">Part III: Exclusion grounds</h4>
+<h4 translate>espd.part3.header</h4>
 <mat-accordion multi="true">
 <ng-container *ngIf="dataService.exclusionACriteriaForm">
   <form [formGroup]="dataService.exclusionACriteriaForm">
     <mat-expansion-panel expanded="true" *ngIf="exclusionACriteria">
       <mat-expansion-panel-header>
-        <mat-panel-title>
-          A: Grounds relating to criminal convictions
+        <mat-panel-title translate>
+          espd.part3.crit.grounds.criminal.conv.top.title
         </mat-panel-title>
         <mat-panel-description>
 
@@ -13,8 +13,9 @@
       </mat-expansion-panel-header>
       <ng-container *ngIf="exclusionACriteria.length !== 0">
         <div class="desc">
-          <h4>Article {{exclusionACriteria['0'].legislationReference.article}} of
-            {{exclusionACriteria['0'].legislationReference.title}} sets out the following reasons for exclusion</h4>
+          <h4 translate>espd.part3.crit.eu.eo.grounds.criminal.conv.main.title</h4>
+          <!--<h4>Article {{exclusionACriteria['0'].legislationReference.article}} of-->
+            <!--{{exclusionACriteria['0'].legislationReference.title}} sets out the following reasons for exclusion</h4>-->
         </div>
       </ng-container>
 
@@ -26,8 +27,8 @@
               <h4>{{cr.name}}</h4>
               <div class="critDesc">{{cr.description}}</div>
               <div class="eCertis">
-                <h5>eCertis Information ...</h5>
-                <div class="eCertDesc">no information...</div>
+                <!--<h5>eCertis Information ...</h5>-->
+                <div class="eCertDesc" translate>espd.ecertis.404</div>
               </div>
             </div>
           </div>
@@ -46,8 +47,8 @@
   <form [formGroup]="dataService.exclusionBCriteriaForm">
     <mat-expansion-panel expanded="true" *ngIf="exclusionBCriteria">
       <mat-expansion-panel-header>
-        <mat-panel-title>
-          B: Grounds relating to the payment of taxes or social security contributions
+        <mat-panel-title translate>
+          espd.part3.crit.top.grounds.payment.taxes.title
         </mat-panel-title>
         <mat-panel-description>
 
@@ -55,8 +56,9 @@
       </mat-expansion-panel-header>
       <ng-container *ngIf="exclusionBCriteria.length !== 0">
         <div class="desc">
-          <h4>Article {{exclusionBCriteria['0'].legislationReference.article}} of
-            {{exclusionBCriteria['0'].legislationReference.title}} sets out the following reasons for exclusion</h4>
+          <h4 translate>espd.part3.crit.eu.eo.payment.taxes.main.title</h4>
+          <!--<h4>Article {{exclusionBCriteria['0'].legislationReference.article}} of-->
+            <!--{{exclusionBCriteria['0'].legislationReference.title}} sets out the following reasons for exclusion</h4>-->
         </div>
       </ng-container>
       <mat-card *ngFor="let cr of exclusionBCriteria">
@@ -68,8 +70,8 @@
             </div>
 
             <div class="eCertis">
-              <h5>eCertis Information ...</h5>
-              <div class="eCertDesc">no information...</div>
+              <!--<h5>eCertis Information ...</h5>-->
+              <div class="eCertDesc" translate>espd.ecertis.404</div>
             </div>
           </div>
           <div class="answer">
@@ -85,8 +87,8 @@
   <form [formGroup]="dataService.exclusionCCriteriaForm">
     <mat-expansion-panel expanded="true" *ngIf="exclusionCCriteria">
       <mat-expansion-panel-header>
-        <mat-panel-title>
-          C: Grounds relating to insolvency, conflicts of interests or professional misconduct
+        <mat-panel-title translate>
+          espd.part3.crit.insolvency.conflicts.top.title
         </mat-panel-title>
         <mat-panel-description>
 
@@ -94,8 +96,9 @@
       </mat-expansion-panel-header>
       <ng-container *ngIf="exclusionCCriteria.length !== 0">
         <div class="desc">
-          <h4>Article {{exclusionCCriteria['0'].legislationReference.article}} of
-            {{exclusionCCriteria['0'].legislationReference.title}} sets out the following reasons for exclusion</h4>
+          <h4 translate>espd.part3.crit.eu.eo.main.breaching.obligations</h4>
+          <!--<h4>Article {{exclusionCCriteria['0'].legislationReference.article}} of-->
+            <!--{{exclusionCCriteria['0'].legislationReference.title}} sets out the following reasons for exclusion</h4>-->
         </div>
       </ng-container>
       <mat-card *ngFor="let cr of exclusionCCriteria">
@@ -106,8 +109,8 @@
               <div class="critDesc">{{cr.description}}</div>
             </div>
             <div class="eCertis">
-              <h5>eCertis Information ...</h5>
-              <div class="eCertDesc">no information...</div>
+              <!--<h5>eCertis Information ...</h5>-->
+              <div class="eCertDesc" translate>espd.ecertis.404</div>
             </div>
           </div>
           <div class="answer">
@@ -124,8 +127,8 @@
   <form [formGroup]="dataService.exclusionDCriteriaForm">
     <mat-expansion-panel expanded="true" *ngIf="exclusionDCriteria">
       <mat-expansion-panel-header>
-        <mat-panel-title>
-          D: Purely national exclusion grounds
+        <mat-panel-title translate>
+          espd.part3.crit.purely.national.top.title
         </mat-panel-title>
         <mat-panel-description>
 
@@ -133,8 +136,7 @@
       </mat-expansion-panel-header>
       <ng-container *ngIf="exclusionDCriteria.length !== 0">
         <div class="desc">
-          <h4>Do the purely national grounds of exclusion, which are specified in the relevant notice or in the
-            procurement documents, apply?</h4>
+          <h4 translate>espd.part3.crit.eu.main.purely.national</h4>
         </div>
       </ng-container>
       <mat-card *ngFor="let cr of exclusionDCriteria; let i=index">
@@ -145,8 +147,8 @@
               <div class="critDesc">{{cr.description}}</div>
             </div>
             <div class="eCertis">
-              <h5>eCertis Information ...</h5>
-              <div class="eCertDesc">no information...</div>
+              <!--<h5>eCertis Information ...</h5>-->
+              <div class="eCertDesc" translate>espd.ecertis.404</div>
             </div>
           </div>
           <div class="answer">
@@ -158,6 +160,6 @@
   </form>
 </ng-container>
 </mat-accordion>
-<button mat-raised-button color="primary" matStepperPrevious>Back</button>
-<button type="submit" mat-raised-button color="primary" matStepperNext (click)="onExclusionEOSubmit()">Next
+<button mat-raised-button color="primary" matStepperPrevious>{{'espd.gui.previous' | translate}}</button>
+<button type="submit" mat-raised-button color="primary" matStepperNext (click)="onExclusionEOSubmit()">{{'espd.gui.next' | translate}}
 </button>

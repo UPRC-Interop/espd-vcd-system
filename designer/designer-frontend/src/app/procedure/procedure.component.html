@@ -1,81 +1,81 @@
-<h4>Part I: Information concerning the procurement procedure and the contracting authority or contracting entity</h4>
+<h4 translate>espd.part1.header</h4>
 <form #f="ngForm">
   <mat-accordion multi="true">
     <mat-expansion-panel expanded="true">
       <mat-expansion-panel-header>
-        <mat-panel-title>
-          Information about Publication
+        <mat-panel-title translate>
+          espd.part1.info.pub
         </mat-panel-title>
         <mat-panel-description>
 
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div class="desc">
-        <p>For procurement procedures in which a call for competition has been published in the Official Journal of the European Union, the information required under Part I will be automatically retrieved, provided that the electronic ESPD-service is used to generate and fill in the ESPD. Reference of the relevant notice published in the Official Journal of the European Union:</p>
+        <p translate>espd.part1.to.be.filled.alert</p>
       </div>
       <mat-form-field>
         <!--<label for="noticeNumber">Received Notice Number</label>-->
-        <input matInput id="noticeNumber" name="receivedNoticeNumber" [(ngModel)]="dataService.receivedNoticeNumber" placeholder="Received notice number" [disabled]="this.dataService.isReadOnly()">
+        <input matInput id="noticeNumber" name="receivedNoticeNumber" [(ngModel)]="dataService.receivedNoticeNumber" placeholder="{{'espd.part1.ted.reception.id' | translate}}" [disabled]="this.dataService.isReadOnly()">
       </mat-form-field>
       <mat-form-field>
-        <input matInput name="noticeNumberOJS" [(ngModel)]="dataService.CADetails.procurementPublicationNumber" placeholder="Notice number in the OJS" [disabled]="this.dataService.isReadOnly()">
+        <input matInput name="noticeNumberOJS" [(ngModel)]="dataService.CADetails.procurementPublicationNumber" placeholder="{{'espd.part1.ojs.label' | translate}}" [disabled]="this.dataService.isReadOnly()">
       </mat-form-field>
       <mat-form-field>
-        <input matInput name="ojsURL" placeholder="OJS URL" [(ngModel)]="dataService.CADetails.procurementPublicationURI" [disabled]="this.dataService.isReadOnly()">
+        <input matInput name="ojsURL" placeholder="{{'espd.part1.ojs.url' | translate}}" [(ngModel)]="dataService.CADetails.procurementPublicationURI" [disabled]="this.dataService.isReadOnly()">
       </mat-form-field>
       <!--<mat-form-field>-->
         <!--<input matInput name="nationalJournal" placeholder="National Official Journal" [(ngModel)]="dataService.CADetails.nationalOfficialJournal">-->
       <!--</mat-form-field>-->
 
       <div class="desc">
-        <p>In case publication of a notice in the Official Journal of the European Union is not required, please give other information allowing the procurement procedure to be unequivocally identified (e. g. reference of a publication at national level)</p>
+        <p translate>espd.part1.official.journal.alert</p>
       </div>
     </mat-expansion-panel>
     <mat-expansion-panel expanded="true">
       <mat-expansion-panel-header>
-        <mat-panel-title>
-          Identity of the Procurer
+        <mat-panel-title translate>
+          espd.part1.contact.details.ca
         </mat-panel-title>
         <mat-panel-description>
 
         </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-form-field>
-        <input matInput placeholder="Official Name" name="CAofficialName" [(ngModel)]="dataService.CADetails.caofficialName" [disabled]="this.dataService.isReadOnly()">
+        <input matInput placeholder="{{'espd.part1.name' | translate}}" name="CAofficialName" [(ngModel)]="dataService.CADetails.caofficialName" [disabled]="this.dataService.isReadOnly()">
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Procurer Identification" name="CAofficialID" [(ngModel)]="dataService.CADetails.id" [disabled]="this.dataService.isReadOnly()">
+        <input matInput placeholder="{{'espd.part2.vat'| translate}}" name="CAofficialID" [(ngModel)]="dataService.CADetails.id" [disabled]="this.dataService.isReadOnly()">
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Procurer website" name="CAofficialWebSite" [(ngModel)]="dataService.CADetails.webSiteURI" [disabled]="this.dataService.isReadOnly()">
+        <input matInput placeholder="{{'espd.part1.website' | translate}}" name="CAofficialWebSite" [(ngModel)]="dataService.CADetails.webSiteURI" [disabled]="this.dataService.isReadOnly()">
       </mat-form-field>
       <ng-container *ngIf="dataService.CADetails.postalAddress || dataService.PostalAddress">
         <mat-form-field>
-          <input matInput placeholder="Procurer City" name="CAofficialCity" [(ngModel)]="dataService.PostalAddress.city" [disabled]="this.dataService.isReadOnly()">
+          <input matInput placeholder="{{'espd.part1.city' | translate}}" name="CAofficialCity" [(ngModel)]="dataService.PostalAddress.city" [disabled]="this.dataService.isReadOnly()">
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Street and Number" name="CAofficialStreet" [(ngModel)]="dataService.PostalAddress.addressLine1" [disabled]="this.dataService.isReadOnly()">
+          <input matInput placeholder="{{'espd.part1.street.and. num' | translate}}" name="CAofficialStreet" [(ngModel)]="dataService.PostalAddress.addressLine1" [disabled]="this.dataService.isReadOnly()">
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Post Code" name="CAofficialPostCode" [(ngModel)]="dataService.PostalAddress.postCode" [disabled]="this.dataService.isReadOnly()">
+          <input matInput placeholder="{{'espd.part1.postcode' | translate}}" name="CAofficialPostCode" [(ngModel)]="dataService.PostalAddress.postCode" [disabled]="this.dataService.isReadOnly()">
         </mat-form-field>
       </ng-container>
       <ng-container *ngIf="dataService.CADetails.contactingDetails || dataService.ContactingDetails">
         <mat-form-field>
-          <input matInput placeholder="Contact Point Name" name="CAofficialContactName" [(ngModel)]="dataService.ContactingDetails.contactPointName" [disabled]="this.dataService.isReadOnly()">
+          <input matInput placeholder="{{'espd.part1.contact.person' | translate}}" name="CAofficialContactName" [(ngModel)]="dataService.ContactingDetails.contactPointName" [disabled]="this.dataService.isReadOnly()">
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Contact Telephone Number" name="CAofficialContactTelephone" [(ngModel)]="dataService.ContactingDetails.telephoneNumber" [disabled]="this.dataService.isReadOnly()">
+          <input matInput placeholder="{{'espd.part1.telephone' | translate}}" name="CAofficialContactTelephone" [(ngModel)]="dataService.ContactingDetails.telephoneNumber" [disabled]="this.dataService.isReadOnly()">
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Contact Fax Number" name="CAofficialContactFaxNumber" [(ngModel)]="dataService.ContactingDetails.faxNumber" [disabled]="this.dataService.isReadOnly()">
+          <input matInput placeholder="{{'espd.part1.fax' | translate}}" name="CAofficialContactFaxNumber" [(ngModel)]="dataService.ContactingDetails.faxNumber" [disabled]="this.dataService.isReadOnly()">
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Contact email address" name="CAofficialContactEmail" [(ngModel)]="dataService.ContactingDetails.emailAddress" [disabled]="this.dataService.isReadOnly()">
+          <input matInput placeholder="{{'espd.part1.email' | translate}}" name="CAofficialContactEmail" [(ngModel)]="dataService.ContactingDetails.emailAddress" [disabled]="this.dataService.isReadOnly()">
         </mat-form-field>
       </ng-container>
       <mat-form-field>
-        <mat-select name="CACountry" placeholder="Select Country" [(ngModel)]="dataService.selectedCountry" [disabled]="this.dataService.isReadOnly()">
+        <mat-select name="CACountry" placeholder="{{'espd.part1.country' | translate}}" [(ngModel)]="dataService.selectedCountry" [disabled]="this.dataService.isReadOnly()">
           <mat-option>None</mat-option>
           <mat-option *ngFor="let country of countries" [value]="country.code">{{country.name}}</mat-option>
         </mat-select>
@@ -84,8 +84,8 @@
 
     <mat-expansion-panel expanded="true">
       <mat-expansion-panel-header>
-        <mat-panel-title>
-          Information about the procurement procedure
+        <mat-panel-title translate>
+          espd.part1.info.procurement.proc
         </mat-panel-title>
         <mat-panel-description>
 
@@ -98,22 +98,22 @@
         <!--</mat-select>-->
       <!--</mat-form-field>-->
       <mat-form-field>
-        <input matInput placeholder="Title" name="title" [(ngModel)]="dataService.CADetails.procurementProcedureTitle" [disabled]="this.dataService.isReadOnly()">
+        <input matInput placeholder="{{'espd.part1.procurer.name' | translate}}" name="title" [(ngModel)]="dataService.CADetails.procurementProcedureTitle" [disabled]="this.dataService.isReadOnly()">
       </mat-form-field>
       <mat-form-field>
         <!--<input matInput placeholder="Short Description">-->
         <textarea matInput
                   id="shortDesc" cols="30" rows="10"
-                  placeholder="Short Description"
+                  placeholder="{{'espd.part1.title.or.short.desc' | translate}}"
                   name="description"
                   [(ngModel)]="dataService.CADetails.procurementProcedureDesc" [disabled]="this.dataService.isReadOnly()"></textarea>
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="File Reference Number" name="fileReferenceNumber"
+        <input matInput placeholder="{{'espd.part1.file.ref.ca' | translate}}" name="fileReferenceNumber"
                [(ngModel)]="dataService.CADetails.procurementProcedureFileReferenceNo" [disabled]="this.dataService.isReadOnly()">
       </mat-form-field>
     </mat-expansion-panel>
   </mat-accordion>
-  <button mat-raised-button color="primary" matStepperPrevious>Back</button>
-  <button type="button" mat-raised-button color="primary" matStepperNext (click)="onProcedureSubmit(f)">Next</button>
+  <button mat-raised-button color="primary" matStepperPrevious>{{'espd.gui.previous' | translate}}</button>
+  <button type="button" mat-raised-button color="primary" matStepperNext (click)="onProcedureSubmit(f)">{{'espd.gui.next' | translate}}</button>
 </form>

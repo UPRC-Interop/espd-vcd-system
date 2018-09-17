@@ -3,11 +3,11 @@
 
   <mat-horizontal-stepper [linear]="isLinear" #stepper="matHorizontalStepper">
     <mat-step>
-      <ng-template matStepLabel>Start</ng-template>
+      <ng-template matStepLabel>{{'espd.gui.progress.start' | translate}}</ng-template>
       <app-start></app-start>
     </mat-step>
     <mat-step>
-      <ng-template matStepLabel>Procedure</ng-template>
+      <ng-template matStepLabel>{{'espd.gui.progress.procedure' | translate}}</ng-template>
       <app-procedure *ngIf="utilities.isCA"></app-procedure>
       <app-procedure-eo [formA] = 'dataService.eoRelatedACriteriaForm'
                         [formD] = 'dataService.eoRelatedDCriteriaForm'
@@ -18,7 +18,7 @@
                         *ngIf="utilities.isEO"></app-procedure-eo>
     </mat-step>
     <mat-step>
-      <ng-template matStepLabel>Exclusion</ng-template>
+      <ng-template matStepLabel>{{'espd.gui.progress.exclusion' | translate}}</ng-template>
       <app-exclusion  [exclusionACriteria] = 'dataService.exclusionACriteria'
                       [exclusionBCriteria] = 'dataService.exclusionBCriteria'
                       [exclusionCCriteria] = 'dataService.exclusionCCriteria'
@@ -35,7 +35,7 @@
         *ngIf="utilities.isEO"></app-exclusion-eo>
     </mat-step>
     <mat-step>
-      <ng-template matStepLabel>Selection</ng-template>
+      <ng-template matStepLabel>{{'espd.gui.progress.selection' | translate}}</ng-template>
       <app-selection [selectionACriteria] = 'dataService.selectionACriteria'
                      [selectionBCriteria] = 'dataService.selectionBCriteria'
                      [selectionCCriteria] = 'dataService.selectionCCriteria'
@@ -55,7 +55,7 @@
                         *ngIf="utilities.isEO"></app-selection-eo>
     </mat-step>
     <mat-step>
-      <ng-template matStepLabel>Finish</ng-template>
+      <ng-template matStepLabel>{{'espd.gui.progress.finish' | translate}}</ng-template>
       <app-finish *ngIf="utilities.isCA"></app-finish>
       <app-finish-eo [form]="dataService.reductionCriteriaForm"
                      [reductionCriteria]="dataService.reductionCriteria"
