@@ -1,7 +1,21 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "gradle.plugin.nl.javadude.gradle.plugins:license-gradle-plugin:0.14.0"
+    }
+}
+
+apply plugin: "com.github.hierynomus.license"
+
 subprojects { project ->
     apply plugin: 'java'
     apply plugin: 'maven'
     apply plugin: 'maven-publish'
+    apply plugin: "com.github.hierynomus.license"
 
     version = '2.0.2'
     group = 'eu.esens.espdvcd'
@@ -23,7 +37,14 @@ subprojects { project ->
         mavenCentral()
         jcenter()
     }
-    
+
+    license {
+        header = rootProject.file('LICENSE-HEADER-2.0.txt')
+        ext.year = '2016-2018'
+        ext.name = 'University of Piraeus Research Center'
+        excludes(["**/*.xlsx"])
+    }
+
 }
 
 // publishing definition
@@ -83,3 +104,14 @@ configure(subprojects)
 task wrapper(type: Wrapper) {
     gradleVersion = '3.5'
 }
+
+task licenseFormatDesignerFrontend(type: com.hierynomus.gradle.license.tasks.LicenseFormat) {
+    source = fileTree(dir: "designer/designer-frontend/src").exclude(["**/*.json", "**/*.ico"])
+
+    license {
+        header = rootProject.file('LICENSE-HEADER-2.0.txt')
+        ext.year = '2016-2018'
+        ext.name = 'University of Piraeus Research Center'
+    }
+}
+licenseFormat.dependsOn licenseFormatDesignerFrontend
