@@ -25,6 +25,8 @@ import {MatSnackBar} from '@angular/material';
 import {Evidence} from '../model/evidence.model';
 import {FormUtilService} from './form-util.service';
 import {UtilitiesService} from './utilities.service';
+import {TranslateService} from '@ngx-translate/core';
+import {Language} from '../model/language.model';
 
 @Injectable()
 export class DataService {
@@ -67,6 +69,7 @@ export class DataService {
   eoRelatedCCriteria: EoRelatedCriterion[] = null;
   eoRelatedDCriteria: EoRelatedCriterion[] = null;
   reductionCriteria: ReductionCriterion[] = null;
+  language: Language[] = null;
   // evidenceList: Evidence[] = [];
 
   notDefCriteria: EoRelatedCriterion[] = null;
@@ -114,9 +117,15 @@ export class DataService {
   constructor(private APIService: ApicallService,
               public snackBar: MatSnackBar,
               public formUtil: FormUtilService,
-              public utilities: UtilitiesService) {
+              public utilities: UtilitiesService,
+              public translate: TranslateService) {
+
+    this.AddLanguages();
+    translate.setDefaultLang('ESPD_en');
+    console.log(this.translate.getLangs());
 
   }
+
 
   /* ============================ snackbar ===================================== */
   openSnackBar(message: string, action: string) {
@@ -1097,8 +1106,51 @@ export class DataService {
 
   }
 
+  AddLanguages() {
+    this.getLanguages().then(res => {
+      // console.log(res);
+      let langs = [];
+      res.forEach(lang => {
+        langs.push('ESPD_' + lang.code.toLowerCase());
+      });
+
+      this.translate.addLangs(langs);
+      console.log(this.translate.getLangs());
+    })
+      .catch(err => {
+        console.log(err);
+        const message: string = err.error +
+          ' ' + err.message;
+        const action = 'close';
+        this.openSnackBar(message, action);
+      });
+  }
+
+  switchLanguage(language: string) {
+    this.translate.use(language);
+  }
 
   /* =================================  Get from Codelists ===========================*/
+
+  getLanguages(): Promise<Language[]> {
+    if (this.language != null) {
+      return Promise.resolve(this.language);
+    } else {
+      return this.APIService.getLangs()
+        .then(res => {
+          this.language = res;
+          return Promise.resolve(res);
+        })
+        .catch(err => {
+          console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
+          return Promise.reject(err);
+        });
+    }
+  }
 
 
   getCountries(): Promise<Country[]> {

@@ -11,6 +11,7 @@ import {Currency} from '../model/currency.model';
 import {ReductionCriterion} from '../model/reductionCriterion.model';
 import {ESPDResponse} from '../model/ESPDResponse.model';
 import {environment} from '../../environments/environment';
+import {Language} from '../model/language.model';
 
 // import {DataService} from '../services/data.service';
 
@@ -37,6 +38,10 @@ export class ApicallService {
 
   getCurr() {
     return this.http.get<Currency[]>(environment.apiUrl + 'v1/codelists/Currency').toPromise();
+  }
+
+  getLangs() {
+    return this.http.get<Language[]>(environment.apiUrl + 'v2/codelists/LanguageCodeEU').toPromise();
   }
 
 
