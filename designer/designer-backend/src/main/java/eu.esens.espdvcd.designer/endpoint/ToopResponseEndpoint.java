@@ -67,8 +67,24 @@ public class ToopResponseEndpoint extends Endpoint {
         final EODetails eoDetails = new EODetails();
 
         TOOPResponse.getDataElementRequest().forEach(e -> {
-            String providedDataName = e.getConceptRequest().getConceptRequestAtIndex(0).getConceptName().getValue();
-            String providedDataValue = e.getConceptRequest().getConceptRequestAtIndex(0).getConceptRequestAtIndex(0).getDataElementResponseValueAtIndex(0).getResponseDescription().getValue();
+            String providedDataName = e.getConceptRequest()
+                    .getConceptName()
+                    .getValue();
+            String providedDataValue = null;
+            try {
+                providedDataValue = e.getConceptRequest()
+                        .getConceptRequestAtIndex(0)
+                        .getConceptRequestAtIndex(0)
+                        .getDataElementResponseValueAtIndex(0)
+                        .getResponseDescription()
+                        .getValue();
+            } catch (IndexOutOfBoundsException e1) {
+                providedDataValue =  e.getConceptRequest()
+                        .getConceptRequestAtIndex(0)
+                        .getDataElementResponseValueAtIndex(0)
+                        .getResponseDescription()
+                        .getValue();
+            }
             if (providedDataName != null && providedDataValue != null) {
                 switch (providedDataName) {
                     case "CompanyCode":
