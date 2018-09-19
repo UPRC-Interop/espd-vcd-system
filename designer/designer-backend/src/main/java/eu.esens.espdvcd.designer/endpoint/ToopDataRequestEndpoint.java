@@ -157,7 +157,7 @@ public class ToopDataRequestEndpoint extends Endpoint {
             aReq.setDataElementRequestIdentifier (ToopXSDHelper.createIdentifier ("bla"));
             {
                 final TDEConceptRequestType aSrcConcept = new TDEConceptRequestType ();
-                aSrcConcept.setConceptTypeCode (ToopXSDHelper.createCode ("TC"));
+                aSrcConcept.setConceptTypeCode (ToopXSDHelper.createCode ("TOOP"));
                 aSrcConcept.setSemanticMappingExecutionIndicator (ToopXSDHelper.createIndicator (false));
                 aSrcConcept.setConceptNamespace (ToopXSDHelper.createIdentifier (aCV.getNamespace ()));
                 aSrcConcept.setConceptName (ToopXSDHelper.createText (aCV.getValue ()));
