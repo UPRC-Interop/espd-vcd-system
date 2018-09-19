@@ -726,7 +726,6 @@ export class DataService {
       this.utilities.isCA = false;
       if (form.value.EOCountry !== '') {
         this.selectedEOCountry = form.value.EOCountry;
-
       }
     }
 
