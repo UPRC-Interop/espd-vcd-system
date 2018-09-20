@@ -25,6 +25,8 @@ export class TOOPDialogComponent implements OnInit {
 
   onGetTOOPData(id: string) {
     this.showSpinner = true;
+    console.log('SELECTED COUNTRY before request: ');
+    console.log(this.dataService.selectedEOCountry);
     this.APIService.getTOOPData(id, this.dataService.selectedEOCountry)
       .then(res => {
         console.log(res);

@@ -7,4 +7,5 @@ export const environment = {
   production: false,
   apiUrl: 'http://localhost:8080/api/'
   // apiUrl: 'http://snf-822556.vm.okeanos.grnet.gr/api/'
+  // apiUrl: 'http://83.212.107.143:9090/api'
 };
