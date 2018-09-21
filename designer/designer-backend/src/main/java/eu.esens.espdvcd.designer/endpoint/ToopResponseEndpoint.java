@@ -56,10 +56,9 @@ public class ToopResponseEndpoint extends Endpoint {
             eoDetailsMessage.setResponse(extractEODetails(TOOPResponse));
             eoDetailsMessage.notify();
             LOGGER.info("Sent response to the other thread...");
-
 //        TOOPResponseQueue.add(extractEODetails(TOOPResponse));
-            return "";
         }
+        return "ΟΚ";
     }
 
     private EODetails extractEODetails(TDETOOPResponseType TOOPResponse) throws JsonProcessingException {

@@ -71,16 +71,18 @@ public class ToopDataRequestEndpoint extends Endpoint {
         LOGGER.info("Sent TOOP Request to the Connector.");
 
         Message<EODetails> theMessage = new Message<>();
+        TOOP_RESPONSE_MAP.put(dataConsumerID, theMessage);
         synchronized (theMessage) {
-            TOOP_RESPONSE_MAP.put(dataConsumerID, theMessage);
-            LOGGER.info("Added message to hashmap.");
-
+//            LOGGER.info("Added message to hashmap.");
             LOGGER.info("Waiting for response...");
-
-            theMessage.wait();
-
+            try {
+                theMessage.wait(10*1000);
+            } catch (InterruptedException e) {
+                response.status(504);
+                LOGGER.warning("Request timed out.");
+                return "TOOP Request to connector timed out.";
+            }
             EODetails toopDetails = theMessage.getResponse();
-
             LOGGER.info("Got response from other thread!");
             LOGGER.info("Sending response.");
             return WRITER.writeValueAsString(toopDetails);
