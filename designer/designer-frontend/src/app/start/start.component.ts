@@ -43,7 +43,7 @@ export class StartComponent implements OnInit {
 
   // procedureTypes:ProcedureType[];
 
-  constructor(private dataService: DataService, private APIService: ApicallService, public utilities: UtilitiesService) {
+  constructor(public dataService: DataService, private APIService: ApicallService, public utilities: UtilitiesService) {
   }
 
   ngOnInit() {

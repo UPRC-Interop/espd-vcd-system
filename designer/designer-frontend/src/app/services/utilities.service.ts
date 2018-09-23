@@ -28,6 +28,8 @@ export class UtilitiesService {
   isCreateResponse = false;
   isCreateNewESPD = false;
   isReviewESPD = false;
+  initLanguage = true;
+  start = false;
 
   constructor() { }
 

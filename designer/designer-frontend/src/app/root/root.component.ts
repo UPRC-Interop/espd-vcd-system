@@ -26,6 +26,7 @@ import {UtilitiesService} from '../services/utilities.service';
 export class RootComponent implements OnInit, OnChanges {
 
   isLinear = true;
+
   // eoRelatedFormA = this.dataService.eoRelatedACriteriaForm;
 
   constructor(public dataService: DataService, public utilities: UtilitiesService) {
@@ -35,6 +36,13 @@ export class RootComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
+  }
+
+  onLanguageSelection(language: string) {
+      // console.log(language);
+      this.dataService.switchLanguage(language);
+      this.utilities.initLanguage = false;
+      this.utilities.start = true;
   }
 
 }

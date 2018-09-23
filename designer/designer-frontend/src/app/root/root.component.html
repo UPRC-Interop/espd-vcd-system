@@ -16,7 +16,19 @@
 
 -->
 
-<div class="container">
+<div id="languageSwitcher" *ngIf="this.utilities.initLanguage">
+  <mat-card>
+    <mat-card-title>Select Language: </mat-card-title>
+    <mat-card-content>
+      <ul class="columnList">
+        <li *ngFor="let lang of this.dataService.langNames" (click)="onLanguageSelection(lang)">{{lang}}</li>
+      </ul>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+
+<div class="container" *ngIf="this.utilities.start">
 
   <mat-horizontal-stepper [linear]="isLinear" #stepper="matHorizontalStepper">
     <mat-step>
