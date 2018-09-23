@@ -70,7 +70,7 @@ public class ExportESPDEndpoint extends Endpoint {
                 return WRITER.writeValueAsString(new ErrorResponse.ErrorBuilder(400, DESERIALIZATION_ERROR + e.getMessage()).build());
             }
             rsp.header("Content-Type", "application/octet-stream");
-            rsp.header("Content-Disposition", "attachment; filename=espd-request.xml;");
+            rsp.header("Content-Disposition", "attachment; filename=\"espd-request.xml\";");
 
             try {
                 return service.exportESPDRequestAsInputStream(document);
@@ -100,7 +100,7 @@ public class ExportESPDEndpoint extends Endpoint {
                 return WRITER.writeValueAsString(new ErrorResponse.ErrorBuilder(400, DESERIALIZATION_ERROR + e.getMessage()).build());
             }
             rsp.header("Content-Type", "application/octet-stream");
-            rsp.header("Content-Disposition", "attachment; filename=espd-response.xml;");
+            rsp.header("Content-Disposition", "attachment; filename=\"espd-response.xml\";");
             try {
                 return service.exportESPDResponseAsInputStream(document);
             } catch (ValidationException e) {
