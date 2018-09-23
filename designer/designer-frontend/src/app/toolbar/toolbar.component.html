@@ -30,7 +30,7 @@
     <!--</select>-->
     <select #langSelect (change)="this.dataService.switchLanguage(langSelect.value)">
       <option value="">Select Language</option>
-      <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>
+      <option *ngFor="let lang of this.dataService.langNames" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>
     </select>
   </mat-toolbar-row>
 
