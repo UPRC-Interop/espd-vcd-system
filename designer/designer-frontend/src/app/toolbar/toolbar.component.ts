@@ -15,6 +15,8 @@
 ///
 
 import { Component, OnInit } from '@angular/core';
+import {TranslateService} from '@ngx-translate/core';
+import {DataService} from '../services/data.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -23,7 +25,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ToolbarComponent implements OnInit {
 
-  constructor() { }
+  constructor(public translate: TranslateService, public dataService: DataService) { }
 
   ngOnInit() {
   }

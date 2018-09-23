@@ -86,6 +86,7 @@ export class DataService {
   eoRelatedDCriteria: EoRelatedCriterion[] = null;
   reductionCriteria: ReductionCriterion[] = null;
   language: Language[] = null;
+  langTemplate = [];
   // evidenceList: Evidence[] = [];
 
   notDefCriteria: EoRelatedCriterion[] = null;
@@ -139,6 +140,7 @@ export class DataService {
     this.AddLanguages();
     translate.setDefaultLang('ESPD_en');
     console.log(this.translate.getLangs());
+    console.dir(this.translate.getLangs());
 
   }
 
@@ -1123,13 +1125,22 @@ export class DataService {
 
   AddLanguages() {
     this.getLanguages().then(res => {
-      // console.log(res);
       let langs = [];
+      console.log(res);
       res.forEach(lang => {
-        langs.push('ESPD_' + lang.code.toLowerCase());
+        // langs.push('ESPD_' + lang.code.toLowerCase());
+        langs.push(lang.name);
+        /* create associative template array in order to retrieve the code using the language name from the dropdown ui element */
+        this.langTemplate[lang.name] = lang.code;
+        console.log('LangTEMPLATE name --> code');
+        console.log(this.langTemplate);
+
+        console.log('langs ---> like getlangs');
+        console.log(langs);
       });
 
       this.translate.addLangs(langs);
+      console.log('translate.getLANGS');
       console.log(this.translate.getLangs());
     })
       .catch(err => {
@@ -1142,7 +1153,9 @@ export class DataService {
   }
 
   switchLanguage(language: string) {
-    this.translate.use(language);
+    const lang = 'ESPD_' + this.langTemplate[language].toLowerCase();
+    console.log(lang);
+    this.translate.use(lang);
   }
 
   /* =================================  Get from Codelists ===========================*/

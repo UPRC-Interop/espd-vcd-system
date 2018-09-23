@@ -24,6 +24,14 @@
       <li><a href="http://ec.europa.eu/growth/cookies/" translate>espd.gui.cookies</a> | </li>
       <li><a href="http://ec.europa.eu/growth/contact_en" translate>espd.gui.contact</a> | </li>
     </ul>
+    <!--<select #langSelect (change)="translate.use(langSelect.value)">-->
+      <!--<option value="">Select Language</option>-->
+      <!--<option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>-->
+    <!--</select>-->
+    <select #langSelect (change)="this.dataService.switchLanguage(langSelect.value)">
+      <option value="">Select Language</option>
+      <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>
+    </select>
   </mat-toolbar-row>
 
   <!--<mat-toolbar-row id="sub">-->

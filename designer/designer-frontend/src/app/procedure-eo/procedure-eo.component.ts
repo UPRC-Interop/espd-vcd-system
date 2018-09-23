@@ -75,6 +75,8 @@ export class ProcedureEoComponent implements OnInit {
       'procurementProjectLot': new FormControl(0)
     });
     this.dataService.EOForm = this.EOForm;
+
+    // TODO: implement valueChanges selectedEOCountry
   }
 
   ngOnInit() {
