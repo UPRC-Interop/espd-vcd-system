@@ -1,13 +1,19 @@
+
+<div mat-dialog-content *ngIf="!this.companyData && !this.showSpinner">
+  <mat-form-field>
+    <input matInput placeholder="Type your Company ID" [(ngModel)]="id">
+  </mat-form-field>
+</div>
+
 <h1 mat-dialog-title *ngIf="!this.companyData">Which data will be requested</h1>
 <h1 mat-dialog-title *ngIf="this.companyData">Data Requested to be used</h1>
 
 <mat-progress-spinner *ngIf="this.showSpinner" mode="indeterminate" diameter="30"></mat-progress-spinner>
 
 <div mat-dialog-content *ngIf="!this.companyData && !this.showSpinner">
-  <p>By agreeing to proceed the system will retrieve your company's information.</p>
-  <mat-form-field>
-    <input matInput placeholder="Type your ID" [(ngModel)]="id">
-  </mat-form-field>
+  <!--<mat-form-field>-->
+    <!--<input matInput placeholder="Type your Company ID" [(ngModel)]="id">-->
+  <!--</mat-form-field>-->
   <mat-list>
     <h3 mat-subheader>Company Details</h3>
     <mat-list-item>Name</mat-list-item>
@@ -18,10 +24,10 @@
     <mat-list-item>Country</mat-list-item>
     <mat-divider></mat-divider>
   </mat-list>
+  <p>By agreeing to proceed the system will retrieve your company's information.</p>
 </div>
 
 <div mat-dialog-content *ngIf="this.companyData">
-  <p>By agreeing to proceed the system will use the retrieved company's information.</p>
   <mat-list>
     <h3 mat-subheader>Company Details</h3>
     <mat-list-item>Name: {{companyData.name}}</mat-list-item>
@@ -32,6 +38,7 @@
     <mat-list-item>Country: {{companyData.postalAddress.countryCode}}</mat-list-item>
     <mat-divider></mat-divider>
   </mat-list>
+  <p>By agreeing to proceed the system will use the retrieved company's information.</p>
 </div>
 <mat-dialog-actions>
   <div *ngIf="!this.companyData">
