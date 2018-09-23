@@ -3,6 +3,11 @@
   <mat-form-field>
     <input matInput placeholder="Type your Company ID" [(ngModel)]="id">
   </mat-form-field>
+  <p>By agreeing to proceed the system will retrieve your company's information.</p>
+</div>
+
+<div mat-dialog-content *ngIf="this.companyData">
+  <p>By agreeing to proceed the system will use the retrieved company's information.</p>
 </div>
 
 <h1 mat-dialog-title *ngIf="!this.companyData">Which data will be requested</h1>
@@ -24,7 +29,6 @@
     <mat-list-item>Country</mat-list-item>
     <mat-divider></mat-divider>
   </mat-list>
-  <p>By agreeing to proceed the system will retrieve your company's information.</p>
 </div>
 
 <div mat-dialog-content *ngIf="this.companyData">
@@ -38,7 +42,7 @@
     <mat-list-item>Country: {{companyData.postalAddress.countryCode}}</mat-list-item>
     <mat-divider></mat-divider>
   </mat-list>
-  <p>By agreeing to proceed the system will use the retrieved company's information.</p>
+  <!--<p>By agreeing to proceed the system will use the retrieved company's information.</p>-->
 </div>
 <mat-dialog-actions>
   <div *ngIf="!this.companyData">
