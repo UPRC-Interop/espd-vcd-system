@@ -34,6 +34,7 @@ import oasis.names.specification.ubl.schema.xsd.unqualifieddatatypes_21.Identifi
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
 import spark.Request;
 import spark.Response;
 import spark.Service;
@@ -41,8 +42,6 @@ import spark.Service;
 import static eu.esens.espdvcd.designer.Server.TOOP_RESPONSE_MAP;
 
 public class ToopDataRequestEndpoint extends Endpoint {
-
-    private final static String dataConsumerID = UUID.randomUUID().toString();
 
     @Override
     public void configure(Service spark, String basePath) {
@@ -67,56 +66,60 @@ public class ToopDataRequestEndpoint extends Endpoint {
     private Object postRequest(Request request, Response response) throws IOException, InterruptedException {
         LOGGER.info("Got a TOOP data request.");
         ToopDataRequest toopDataRequest = MAPPER.readValue(request.body(), ToopDataRequest.class);
-        createRequestAndSendToToopConnector(toopDataRequest);
+        final String dataConsumerID = UUID.randomUUID().toString();
+        final Message<EODetails> theMessage = new Message<>();
+        TOOP_RESPONSE_MAP.put(dataConsumerID, theMessage);
+        createRequestAndSendToToopConnector(toopDataRequest, dataConsumerID);
         LOGGER.info("Sent TOOP Request to the Connector.");
 
-        Message<EODetails> theMessage = new Message<>();
-        TOOP_RESPONSE_MAP.put(dataConsumerID, theMessage);
         synchronized (theMessage) {
 //            LOGGER.info("Added message to hashmap.");
             LOGGER.info("Waiting for response...");
-            try {
-                theMessage.wait(10*1000);
-            } catch (InterruptedException e) {
+            theMessage.wait(20 * 1000);
+            if (theMessage.checkResponse()) {
                 response.status(504);
                 LOGGER.warning("Request timed out.");
+                TOOP_RESPONSE_MAP.remove(dataConsumerID);
                 return "TOOP Request to connector timed out.";
+            } else {
+                EODetails toopDetails = theMessage.getResponse();
+                LOGGER.info("Got response from other thread!");
+                LOGGER.info("Sending response.");
+                TOOP_RESPONSE_MAP.remove(dataConsumerID);
+                return WRITER.writeValueAsString(toopDetails);
             }
-            EODetails toopDetails = theMessage.getResponse();
-            LOGGER.info("Got response from other thread!");
-            LOGGER.info("Sending response.");
-            return WRITER.writeValueAsString(toopDetails);
         }
     }
 
-    private static TDETOOPRequestType createRequest (
-        final IdentifierType aSenderParticipantID,
-        final String sCountryCode,
-        final EPredefinedDocumentTypeIdentifier eDocumentTypeID,
-        final EPredefinedProcessIdentifier eProcessID) {
+    private static TDETOOPRequestType createRequest(
+            final IdentifierType aSenderParticipantID,
+            final String sCountryCode,
+            final EPredefinedDocumentTypeIdentifier eDocumentTypeID,
+            final EPredefinedProcessIdentifier eProcessID,
+            final String dataConsumerID) {
 
-        ValueEnforcer.notNull (aSenderParticipantID, "SenderParticipantID");
-        ValueEnforcer.notEmpty (sCountryCode, "CountryCode");
-        ValueEnforcer.notNull (eDocumentTypeID, "DocumentTypeID");
-        ValueEnforcer.notNull (eProcessID, "ProcessID");
+        ValueEnforcer.notNull(aSenderParticipantID, "SenderParticipantID");
+        ValueEnforcer.notEmpty(sCountryCode, "CountryCode");
+        ValueEnforcer.notNull(eDocumentTypeID, "DocumentTypeID");
+        ValueEnforcer.notNull(eProcessID, "ProcessID");
 
         //FIXME: HARDCODED CONCEPTVALUE LIST FOR NOW
         final Iterable<? extends ConceptValue> aValues = createConceptValues();
 
-        final TDETOOPRequestType aRet = new TDETOOPRequestType ();
-        aRet.setDocumentUniversalUniqueIdentifier (ToopXSDHelper
-            .createIdentifier (UUID.randomUUID().toString()));
-        aRet.setDocumentIssueDate (PDTXMLConverter.getXMLCalendarDateNow ());
-        aRet.setDocumentIssueTime (PDTXMLConverter.getXMLCalendarTimeNow ());
-        aRet.setCopyIndicator (ToopXSDHelper.createIndicator (false));
+        final TDETOOPRequestType aRet = new TDETOOPRequestType();
+        aRet.setDocumentUniversalUniqueIdentifier(ToopXSDHelper
+                .createIdentifier(UUID.randomUUID().toString()));
+        aRet.setDocumentIssueDate(PDTXMLConverter.getXMLCalendarDateNow());
+        aRet.setDocumentIssueTime(PDTXMLConverter.getXMLCalendarTimeNow());
+        aRet.setCopyIndicator(ToopXSDHelper.createIndicator(false));
         // Document type ID
-        aRet.setDocumentTypeIdentifier (ToopXSDHelper.createIdentifier (eDocumentTypeID.getScheme (),
-            eDocumentTypeID.getID ()));
-        aRet.setSpecificationIdentifier (ToopXSDHelper.createIdentifier ("bla"));
+        aRet.setDocumentTypeIdentifier(ToopXSDHelper.createIdentifier(eDocumentTypeID.getScheme(),
+                eDocumentTypeID.getID()));
+        aRet.setSpecificationIdentifier(ToopXSDHelper.createIdentifier("bla"));
         // Process ID
-        aRet.setProcessIdentifier (ToopXSDHelper.createIdentifier (eProcessID.getScheme (), eProcessID.getID ()));
-        aRet.setDataConsumerDocumentIdentifier (ToopXSDHelper.createIdentifier ("DC-ID-17"));
-        aRet.setDataRequestIdentifier (ToopXSDHelper.createIdentifier ("bla"));
+        aRet.setProcessIdentifier(ToopXSDHelper.createIdentifier(eProcessID.getScheme(), eProcessID.getID()));
+        aRet.setDataConsumerDocumentIdentifier(ToopXSDHelper.createIdentifier("DC-ID-17"));
+        aRet.setDataRequestIdentifier(ToopXSDHelper.createIdentifier("bla"));
 
         // Data Subject for which we make the request. Data comes from the UI (ID and country)
         {
@@ -126,28 +129,28 @@ public class ToopDataRequestEndpoint extends Endpoint {
 
             // ID Goes here
             aLegEnt.setLegalPersonUniqueIdentifier(aSenderParticipantID);
-            final TDEAddressType aAddress = new TDEAddressType ();
+            final TDEAddressType aAddress = new TDEAddressType();
 
             // Destination country to use
-            aAddress.setCountryCode (ToopXSDHelper.createCode (sCountryCode));
+            aAddress.setCountryCode(ToopXSDHelper.createCode(sCountryCode));
             aLegEnt.setLegalEntityLegalAddress(aAddress);
-            aLegEnt.setLegalName(ToopXSDHelper.createText("MHTSOS"));
+            aLegEnt.setLegalName(ToopXSDHelper.createText("DIMITRI"));
             aReqSub.setLegalEntity(aLegEnt);
             aRet.setDataRequestSubject(aReqSub);
         }
 
         {
-            final TDEDataConsumerType aDC = new TDEDataConsumerType ();
-            aDC.setDCUniqueIdentifier (ToopXSDHelper.createIdentifier ("EL-GSCCP-ESPD"));
-            aDC.setDCName (ToopXSDHelper.createText ("GSCCP ESPD System"));
+            final TDEDataConsumerType aDC = new TDEDataConsumerType();
+            aDC.setDCUniqueIdentifier(ToopXSDHelper.createIdentifier("EL-GSCCP-ESPD"));
+            aDC.setDCName(ToopXSDHelper.createText("GSCCP ESPD System"));
             // Sender participant ID
             IdentifierType dcElectronicAddressIdentifier = ToopXSDHelper.createIdentifier("9999:ESPD-ESIDIS");
             dcElectronicAddressIdentifier.setSchemeID("iso6523-actorid-upis");
-            aDC.setDCElectronicAddressIdentifier (dcElectronicAddressIdentifier);
-            final TDEAddressType aAddress = new TDEAddressType ();
-            aAddress.setCountryCode (ToopXSDHelper.createCode ("GR"));
-            aDC.setDCLegalAddress (aAddress);
-            aRet.setDataConsumer (aDC);
+            aDC.setDCElectronicAddressIdentifier(dcElectronicAddressIdentifier);
+            final TDEAddressType aAddress = new TDEAddressType();
+            aAddress.setCountryCode(ToopXSDHelper.createCode("GR"));
+            aDC.setDCLegalAddress(aAddress);
+            aRet.setDataConsumer(aDC);
         }
 
 //        {
@@ -155,24 +158,24 @@ public class ToopDataRequestEndpoint extends Endpoint {
 //        }
 
         for (final ConceptValue aCV : aValues) {
-            final TDEDataElementRequestType aReq = new TDEDataElementRequestType ();
-            aReq.setDataElementRequestIdentifier (ToopXSDHelper.createIdentifier ("bla"));
+            final TDEDataElementRequestType aReq = new TDEDataElementRequestType();
+            aReq.setDataElementRequestIdentifier(ToopXSDHelper.createIdentifier("bla"));
             {
-                final TDEConceptRequestType aSrcConcept = new TDEConceptRequestType ();
-                aSrcConcept.setConceptTypeCode (ToopXSDHelper.createCode ("TOOP"));
-                aSrcConcept.setSemanticMappingExecutionIndicator (ToopXSDHelper.createIndicator (false));
-                aSrcConcept.setConceptNamespace (ToopXSDHelper.createIdentifier (aCV.getNamespace ()));
-                aSrcConcept.setConceptName (ToopXSDHelper.createText (aCV.getValue ()));
-                aReq.setConceptRequest (aSrcConcept);
+                final TDEConceptRequestType aSrcConcept = new TDEConceptRequestType();
+                aSrcConcept.setConceptTypeCode(ToopXSDHelper.createCode("TOOP"));
+                aSrcConcept.setSemanticMappingExecutionIndicator(ToopXSDHelper.createIndicator(false));
+                aSrcConcept.setConceptNamespace(ToopXSDHelper.createIdentifier(aCV.getNamespace()));
+                aSrcConcept.setConceptName(ToopXSDHelper.createText(aCV.getValue()));
+                aReq.setConceptRequest(aSrcConcept);
             }
 
-            aRet.addDataElementRequest (aReq);
+            aRet.addDataElementRequest(aReq);
         }
         aRet.setDataConsumerGlobalSessionIdentifier(ToopXSDHelper.createIdentifier(dataConsumerID));
         return aRet;
     }
 
-    private static List<ConceptValue> createConceptValues(){
+    private static List<ConceptValue> createConceptValues() {
         List<ConceptValue> conceptValues = new ArrayList<>(4);
         final String NAMESPACE = "http://toop.eu/organization";
 
@@ -184,24 +187,28 @@ public class ToopDataRequestEndpoint extends Endpoint {
         return conceptValues;
     }
 
-    static void createRequestAndSendToToopConnector (ToopDataRequest toopDataRequest) throws IOException {
+    static void createRequestAndSendToToopConnector(ToopDataRequest toopDataRequest, String dataConsumerID) throws IOException {
 
-        final SignatureHelper aSH = new SignatureHelper (new DefaultResourceProvider().getInputStream (Config.getKeystorePath ()),
-                Config.getKeystorePassword (),
-                Config.getKeystoreKeyAlias (),
-                Config.getKeystoreKeyPassword ());
+        final SignatureHelper aSH = new SignatureHelper(new DefaultResourceProvider().getInputStream(Config.getKeystorePath()),
+                Config.getKeystorePassword(),
+                Config.getKeystoreKeyAlias(),
+                Config.getKeystoreKeyPassword());
 
-        try (final NonBlockingByteArrayOutputStream aBAOS = new NonBlockingByteArrayOutputStream ()) {
+        try (final NonBlockingByteArrayOutputStream aBAOS = new NonBlockingByteArrayOutputStream()) {
 
-            TDETOOPRequestType aRequest = createRequest(ToopXSDHelper.createIdentifier(toopDataRequest.getCompanyID()), toopDataRequest.getCountryCode(), EPredefinedDocumentTypeIdentifier.REQUEST_REGISTEREDORGANIZATION, EPredefinedProcessIdentifier.DATAREQUESTRESPONSE);
+            TDETOOPRequestType aRequest = createRequest(ToopXSDHelper.createIdentifier(toopDataRequest.getCompanyID()),
+                    toopDataRequest.getCountryCode(),
+                    EPredefinedDocumentTypeIdentifier.REQUEST_REGISTEREDORGANIZATION,
+                    EPredefinedProcessIdentifier.DATAREQUESTRESPONSE,
+                    dataConsumerID);
 
-            ToopMessageBuilder.createRequestMessage (aRequest, aBAOS, aSH);
+            ToopMessageBuilder.createRequestMessage(aRequest, aBAOS, aSH);
 
-            final String aFromDCUrl = Config.getToopConnectorDPUrl ();
+            final String aFromDCUrl = Config.getToopConnectorDPUrl();
 
             Files.write(aBAOS.toByteArray(), new File("request_last.asic"));
 
-            HttpClientInvoker.httpClientCallNoResponse (aFromDCUrl, aBAOS.toByteArray ());
+            HttpClientInvoker.httpClientCallNoResponse(aFromDCUrl, aBAOS.toByteArray());
         }
     }
 }

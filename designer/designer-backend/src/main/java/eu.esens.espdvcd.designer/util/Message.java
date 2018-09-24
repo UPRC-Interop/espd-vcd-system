@@ -4,6 +4,10 @@ public class Message<E> {
 
     private E response;
 
+    public Message() {
+        this.response = null;
+    }
+
     public E getResponse() {
         return response;
     }

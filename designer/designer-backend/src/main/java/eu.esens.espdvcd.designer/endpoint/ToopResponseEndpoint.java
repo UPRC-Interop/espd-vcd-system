@@ -51,7 +51,7 @@ public class ToopResponseEndpoint extends Endpoint {
 
         final String id = TOOPResponse.getDataConsumerGlobalSessionIdentifier().getValue();
         System.out.println(id);
-        Message<EODetails> eoDetailsMessage = TOOP_RESPONSE_MAP.get(id);
+        final Message<EODetails> eoDetailsMessage = TOOP_RESPONSE_MAP.get(id);
         synchronized (eoDetailsMessage) {
             eoDetailsMessage.setResponse(extractEODetails(TOOPResponse));
             eoDetailsMessage.notify();

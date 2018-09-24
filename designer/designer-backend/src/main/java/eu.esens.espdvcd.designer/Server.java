@@ -7,10 +7,6 @@ import eu.esens.espdvcd.model.EODetails;
 import eu.esens.espdvcd.schema.SchemaVersion;
 import spark.Service;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.logging.Level;
@@ -128,14 +124,12 @@ public class Server {
 
             String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
             if (accessControlRequestHeaders != null) {
-                if (accessControlRequestHeaders != null)
-                    response.header("Access-Control-Allow-Headers", accessControlRequestHeaders);
+                response.header("Access-Control-Allow-Headers", accessControlRequestHeaders);
             }
 
             String accessControlRequestMethod = request.headers("Access-Control-Request-Method");
             if (accessControlRequestMethod != null) {
-                if (accessControlRequestMethod != null)
-                    response.header("Access-Control-Allow-Methods", accessControlRequestMethod);
+                response.header("Access-Control-Allow-Methods", accessControlRequestMethod);
             }
 
             return "OK";
