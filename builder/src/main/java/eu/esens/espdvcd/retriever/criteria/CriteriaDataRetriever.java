@@ -1,5 +1,6 @@
 package eu.esens.espdvcd.retriever.criteria;
 
+import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
@@ -45,5 +46,13 @@ public interface CriteriaDataRetriever {
      * @throws eu.esens.espdvcd.retriever.exception.RetrieverException
      */
     List<Evidence> getEvidences(String ID) throws RetrieverException;
+
+    /**
+     * Specifies the language of the retrieved data.
+     *
+     * @param lang The language code (ISO 639-1:2002)
+     * @throws RetrieverException In case language code does not exist in relevant codelists.
+     */
+    void setLang(EULanguageCodeEnum lang) throws RetrieverException;
 
 }

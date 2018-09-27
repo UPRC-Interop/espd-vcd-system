@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.rholder.retry.RetryException;
 import eu.esens.espdvcd.builder.model.ModelFactory;
+import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
 import eu.esens.espdvcd.model.LegislationReference;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
@@ -201,6 +202,21 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
     }
 
     @Override
+    public List<Evidence> getEvidencesForCriterion(String ID, EULanguageCodeEnum lang) throws RetrieverException {
+
+        GetECertisCriterionRetryingTask task = new GetECertisCriterionRetryingTask(ID, lang);
+
+        try {
+            ECertisCriterion ec = task.call();
+            return ModelFactory.ESPD_REQUEST.extractEvidences(ec.getEvidenceGroups());
+
+        } catch (ExecutionException | RetryException | IOException e) {
+            throw new RetrieverException(e);
+        }
+
+    }
+
+    @Override
     public ResourceType getResourceType() {
         return ResourceType.ECERTIS;
     }
@@ -214,6 +230,24 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
      */
     public ECertisCriterion getECertisCriterion(String ID) throws RetrieverException {
         GetECertisCriterionRetryingTask task = new GetECertisCriterionRetryingTask(ID);
+
+        try {
+            return task.call();
+        } catch (ExecutionException | RetryException | IOException e) {
+            throw new RetrieverException(e);
+        }
+    }
+
+    /**
+     * Retrieves an e-Certis Criterion with full data in the specified language.
+     *
+     * @param ID   The Criterion ID
+     * @param lang The Criterion Language (ISO 639-1:2002)
+     * @return The e-Certis Criterion
+     * @throws RetrieverException
+     */
+    public ECertisCriterion getECertisCriterion(String ID, EULanguageCodeEnum lang) throws RetrieverException {
+        GetECertisCriterionRetryingTask task = new GetECertisCriterionRetryingTask(ID, lang);
 
         try {
             return task.call();

@@ -3,6 +3,7 @@ package eu.esens.espdvcd.retriever.criteria;
 import com.github.rholder.retry.RetryException;
 import eu.esens.espdvcd.builder.model.ModelFactory;
 import eu.esens.espdvcd.codelist.CodelistsV2;
+import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
 import eu.esens.espdvcd.model.LegislationReference;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
@@ -31,12 +32,31 @@ public class CriteriaDataRetrieverImpl implements CriteriaDataRetriever {
     private List<EvidencesResource> eResourceList;
     private ECertisResource eCertisResource;
 
+    private EULanguageCodeEnum lang;
+
     private enum CriterionOrigin {EUROPEAN, NATIONAL}
 
     /* package private constructor. Create only through factory */
     CriteriaDataRetrieverImpl(@NotEmpty List<EvidencesResource> eResourceList) {
         this.eResourceList = eResourceList;
+        this.lang = EULanguageCodeEnum.EN; // default language is English
         eCertisResource = new ECertisResource();
+    }
+
+    /**
+     * Specifies the language of the retrieved data.
+     *
+     * @param lang The language code (ISO 639-1:2002)
+     * @throws RetrieverException In case language code does not exist in relevant codelists.
+     */
+    @Override
+    public void setLang(EULanguageCodeEnum lang) throws RetrieverException {
+
+        if (isIdentificationCodeExist(lang)) {
+            this.lang = lang;
+        } else {
+            throw new RetrieverException(String.format("Error... Provided language Code %s is not Included in codelists", lang));
+        }
     }
 
     /**
@@ -74,6 +94,16 @@ public class CriteriaDataRetrieverImpl implements CriteriaDataRetriever {
 
         return CodelistsV2.LanguageCodeEU
                 .containsId(codeUpperCase);
+    }
+
+    /**
+     * Check if the given identification code, exist in the codelists.
+     *
+     * @param code The identification code (ISO 639-1:2002)
+     * @return true if exists, false if not
+     */
+    private boolean isIdentificationCodeExist(EULanguageCodeEnum code) {
+        return CodelistsV2.LanguageCodeEU.containsId(code.name());
     }
 
     /**
@@ -142,7 +172,7 @@ public class CriteriaDataRetrieverImpl implements CriteriaDataRetriever {
      */
     @Override
     public SelectableCriterion getCriterion(String ID) throws RetrieverException {
-        return ModelFactory.ESPD_REQUEST.extractSelectableCriterion(eCertisResource.getECertisCriterion(ID), true);
+        return ModelFactory.ESPD_REQUEST.extractSelectableCriterion(eCertisResource.getECertisCriterion(ID, lang), true);
     }
 
     /**
@@ -157,7 +187,7 @@ public class CriteriaDataRetrieverImpl implements CriteriaDataRetriever {
         List<Evidence> evidenceList = new ArrayList<>();
 
         for (EvidencesResource eResource : eResourceList) {
-            evidenceList.addAll(eResource.getEvidencesForCriterion(ID));
+            evidenceList.addAll(eResource.getEvidencesForCriterion(ID, lang));
         }
 
         return evidenceList;
