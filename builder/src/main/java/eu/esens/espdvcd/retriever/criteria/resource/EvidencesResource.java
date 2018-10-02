@@ -20,7 +20,7 @@ public interface EvidencesResource extends Resource {
     List<Evidence> getEvidencesForCriterion(String ID) throws RetrieverException;
 
     /**
-     * Get Evidences of a National Criterion.
+     * Get Evidences of a National Criterion in the selected language.
      *
      * @param ID   The National Criterion ID
      * @param lang The language code (ISO 639-1:2002)

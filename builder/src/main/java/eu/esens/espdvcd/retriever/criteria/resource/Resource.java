@@ -7,6 +7,11 @@ import eu.esens.espdvcd.retriever.criteria.resource.enums.ResourceType;
  */
 public interface Resource {
 
+    /**
+     * Resource type refers to the origin from where the resource will be retrieved.
+     *
+     * @return The resource type
+     */
     ResourceType getResourceType();
 
 }

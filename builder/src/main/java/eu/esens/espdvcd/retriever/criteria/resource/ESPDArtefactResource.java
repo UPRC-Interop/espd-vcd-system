@@ -1,6 +1,7 @@
 package eu.esens.espdvcd.retriever.criteria.resource;
 
 import eu.esens.espdvcd.builder.model.ModelFactory;
+import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
 import eu.esens.espdvcd.model.LegislationReference;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
@@ -17,12 +18,16 @@ import javax.xml.bind.JAXB;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 /**
  * @author Konstantinos Raptis
  */
 public class ESPDArtefactResource implements CriteriaResource, LegislationResource, RequirementsResource {
+
+    private static final Logger LOGGER = Logger.getLogger(ESPDArtefactResource.class.getName());
 
     private static final String ESPD_REQUEST_V1_REGULATED_RESOURCE = "/templates/v1_regulated/espd-request-2018.03.xml";
     private static final String ESPD_REQUEST_V2_REGULATED_RESOURCE = "/templates/v2_regulated/espd-request-v2_2018-05-30a.xml";
@@ -65,17 +70,50 @@ public class ESPDArtefactResource implements CriteriaResource, LegislationResour
 
     @Override
     public List<SelectableCriterion> getCriterionList() {
+        return getCriterionList(EULanguageCodeEnum.EN);
+    }
+
+    @Override
+    public List<SelectableCriterion> getCriterionList(EULanguageCodeEnum lang) {
+
+        // failback check
+        if (lang == null || lang != EULanguageCodeEnum.EN) {
+            LOGGER.log(Level.WARNING, "Warning... European Criteria Multilinguality not supported yet. Language set back to English");
+        }
+
         return criterionMap.values().stream()
                 .collect(Collectors.toList());
     }
 
     @Override
     public Map<String, SelectableCriterion> getCriterionMap() {
+        return getCriterionMap(EULanguageCodeEnum.EN);
+    }
+
+    @Override
+    public Map<String, SelectableCriterion> getCriterionMap(EULanguageCodeEnum lang) {
+
+        // failback check
+        if (lang == null || lang != EULanguageCodeEnum.EN) {
+            LOGGER.log(Level.WARNING, "Warning... European Criteria Multilinguality not supported yet. Language set back to English");
+        }
+
         return criterionMap;
     }
 
     @Override
     public LegislationReference getLegislationForCriterion(String ID) {
+        return getLegislationForCriterion(ID, EULanguageCodeEnum.EN);
+    }
+
+    @Override
+    public LegislationReference getLegislationForCriterion(String ID, EULanguageCodeEnum lang) {
+
+        // failback check
+        if (lang == null || lang != EULanguageCodeEnum.EN) {
+            LOGGER.log(Level.WARNING, "Warning... European Criteria Multilinguality not supported yet. Language set back to English");
+        }
+
         return criterionMap.containsKey(ID)
                 ? criterionMap.get(ID).getLegislationReference()
                 : null;
@@ -83,6 +121,17 @@ public class ESPDArtefactResource implements CriteriaResource, LegislationResour
 
     @Override
     public List<RequirementGroup> getRequirementsForCriterion(String ID) {
+        return getRequirementsForCriterion(ID, EULanguageCodeEnum.EN);
+    }
+
+    @Override
+    public List<RequirementGroup> getRequirementsForCriterion(String ID, EULanguageCodeEnum lang) {
+
+        // failback check
+        if (lang == null || lang != EULanguageCodeEnum.EN) {
+            LOGGER.log(Level.WARNING, "Warning... European Criteria Multilinguality not supported yet. Language set back to English");
+        }
+
         return criterionMap.containsKey(ID)
                 ? criterionMap.get(ID).getRequirementGroups()
                 : null;
