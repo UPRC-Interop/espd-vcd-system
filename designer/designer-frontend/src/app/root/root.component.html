@@ -18,11 +18,11 @@
 
 <div id="languageSwitcher" *ngIf="this.utilities.initLanguage">
   <mat-card>
-    <mat-card-title>Select Language: </mat-card-title>
+    <!--<mat-card-title>Select Language: </mat-card-title>-->
     <mat-card-content>
       <ul class="columnList">
         <li *ngFor="let lang of this.dataService.langNames" (click)="onLanguageSelection(lang)">
-          <span class="flag-icon flag-icon-{{this.dataService.langTemplate[lang].toLowerCase()}}"></span> {{lang}}</li>
+          <span class="flag-icon flag-icon-{{this.dataService.langISOCodes[lang].toLowerCase()}}"></span> {{lang}}</li>
       </ul>
     </mat-card-content>
   </mat-card>

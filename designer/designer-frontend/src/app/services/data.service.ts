@@ -88,6 +88,7 @@ export class DataService {
   language: Language[] = null;
   langTemplate = [];
   langNames = [];
+  langISOCodes = [];
   // evidenceList: Evidence[] = [];
 
   notDefCriteria: EoRelatedCriterion[] = null;
@@ -1128,14 +1129,41 @@ export class DataService {
       let langs = [];
       console.log(res);
       res.forEach(lang => {
-        // langs.push('ESPD_' + lang.code.toLowerCase());
-        langs.push(lang.name);
-        this.langNames.push(lang.name);
-        /* create associative template array in order to retrieve the code using the language name from the dropdown ui element */
-        this.langTemplate[lang.name] = lang.code;
-      });
+          // langs.push('ESPD_' + lang.code.toLowerCase());
+          langs.push(lang.name);
+          this.langNames.push(lang.name);
+          /* create associative template array in order to retrieve the code using the language name from the dropdown ui element */
+          this.langTemplate[lang.name] = lang.code;
+          // this.langISOCodes[lang.name] = lang.code;
+          // console.log(langs);
+        }
+      );
 
+      // this.langISOCodes = res;
       this.translate.addLangs(langs);
+      // MAP to ISO 3166-1-alpha-2 code for css flag library to work properly
+      res.map(x => {
+        x.code = x.code
+          .replace('EL', 'GR')
+          .replace('EN', 'GB')
+          .replace('ET', 'EE')
+          .replace('GA', 'IE')
+          .replace('SL', 'SI')
+          .replace('SV', 'SE')
+          .replace('DA', 'DK')
+          .replace('CS', 'CZ');
+        // console.log(x.code);
+        this.langISOCodes[x.name] = x.code;
+        return x;
+      });
+      // console.log('LANG TEMPLATE: ');
+      // console.log(this.langTemplate);
+      // console.log('LANG_ISO: ');
+      // console.log(this.langISOCodes);
+      // console.log('RESPONSE: ');
+      // console.log(res);
+
+
     })
       .catch(err => {
         console.log(err);
