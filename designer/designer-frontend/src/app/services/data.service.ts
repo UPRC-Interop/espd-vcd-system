@@ -451,19 +451,19 @@ export class DataService {
 
   createFile(response) {
     // const filename:string = "espd-request";
-    this.blob = new Blob([response.body], {type: 'text/xml'});
+    this.blob = new Blob([response.body], {type: 'application/xml'});
   }
 
 
   saveFile(blob) {
     if (this.utilities.isCA && this.APIService.version === 'v1') {
-      var filename = 'espd-request-v1';
+      var filename = 'espd-request-v1.xml';
     } else if (this.utilities.isEO && this.APIService.version === 'v1') {
-      var filename = 'espd-response-v1';
+      var filename = 'espd-response-v1.xml';
     } else if (this.utilities.isCA && this.APIService.version === 'v2') {
-      var filename = 'espd-request-v2';
+      var filename = 'espd-request-v2.xml';
     } else if (this.utilities.isEO && this.APIService.version === 'v2') {
-      var filename = 'espd-response-v2';
+      var filename = 'espd-response-v2.xml';
     }
 
     saveAs(blob, filename);
