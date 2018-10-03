@@ -4,10 +4,7 @@ import eu.esens.espdvcd.codelist.Codelists;
 import eu.esens.espdvcd.codelist.CodelistsV2;
 import eu.esens.espdvcd.designer.util.CodelistItem;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class CodelistsV2Service implements CodelistsService {
     private final Map<String, List<CodelistItem>> CODELISTS_MAP;
@@ -24,6 +21,7 @@ public class CodelistsV2Service implements CodelistsService {
             Map<String, String> theCodelistMap = CodelistsV2.valueOf(codelist).getDataMap();
             List<CodelistItem> theCodelistList = new ArrayList<>(theCodelistMap.size());
             theCodelistMap.forEach((key, value) -> theCodelistList.add(new CodelistItem(key, value)));
+            theCodelistList.sort(Comparator.comparing(CodelistItem::getName));
             CODELISTS_MAP.putIfAbsent(codelist, theCodelistList);
             return theCodelistList;
         }
@@ -38,6 +36,7 @@ public class CodelistsV2Service implements CodelistsService {
             Map<String, String> theCodelistMap = CodelistsV2.valueOf(codelist).getDataMap(language);
             List<CodelistItem> theCodelistList = new ArrayList<>(theCodelistMap.size());
             theCodelistMap.forEach((key, value) -> theCodelistList.add(new CodelistItem(key, value)));
+            theCodelistList.sort(Comparator.comparing(CodelistItem::getName));
             CODELISTS_MAP.putIfAbsent(codelist + '.' + language, theCodelistList);
             return theCodelistList;
         }
