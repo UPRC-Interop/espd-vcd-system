@@ -430,32 +430,52 @@ export class FormUtilService {
               r.response.evidenceURLCode || r.response.countryCode ||
               r.response.period || r.response.quantity || r.response.year || r.response.url || r.response.identifier || '');
 
+            // form reset in case of new espd
+            if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
+              group[r.uuid] = new FormControl('');
+            }
+
 
             // YES/NO if responseDataType is indicator then pass indicator value to formControl. (initial state problem fixed)
             if (r.responseDataType === 'INDICATOR') {
-              group[r.uuid] = new FormControl(r.response.indicator);
+              if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
+                group[r.uuid] = new FormControl(false);
+              } else {
+                group[r.uuid] = new FormControl(r.response.indicator);
+              }
             }
 
             if (r.response.date) {
-
-              group[r.uuid] = new FormControl(r.response.date);
+              if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
+                group[r.uuid] = new FormControl('');
+              } else {
+                group[r.uuid] = new FormControl(r.response.date);
+              }
             }
 
             // FIX: starDate-endDate null value case when AtoD Criteria are selected
             if (r.response.startDate) {
-              group[r.uuid + 'startDate'] = new FormControl(r.response.startDate);
+              if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
+                group[r.uuid + 'startDate'] = new FormControl('');
+              } else {
+                group[r.uuid + 'startDate'] = new FormControl(r.response.startDate);
+              }
             } else if (r.response.startDate === null) {
               group[r.uuid + 'startDate'] = new FormControl();
             }
             if (r.response.endDate) {
-              group[r.uuid + 'endDate'] = new FormControl(r.response.endDate);
+              if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
+                group[r.uuid + 'endDate'] = new FormControl('');
+              } else {
+                group[r.uuid + 'endDate'] = new FormControl(r.response.endDate);
+              }
             } else if (r.response.endDate === null) {
               group[r.uuid + 'endDate'] = new FormControl();
             }
 
             if (r.response.evidenceSuppliedId) {
 
-              // TODO find evidence in EvidenceList object and import it
+              // FIX: find evidence in EvidenceList object and import it
               const evi = this.evidenceList.find((ev) => {
                 if (ev.id === r.response.evidenceSuppliedId) {
                   // this.evidenceList[i].description = 'test';
@@ -468,12 +488,26 @@ export class FormUtilService {
               group[r.uuid + 'evidenceUrl'] = new FormControl(evi.evidenceURL);
               group[r.uuid + 'evidenceCode'] = new FormControl(evi.description);
               group[r.uuid + 'evidenceIssuer'] = new FormControl(evi.evidenceIssuer.name);
+
+              if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
+                group[r.uuid + 'evidenceUrl'] = new FormControl('');
+                group[r.uuid + 'evidenceCode'] = new FormControl('');
+                group[r.uuid + 'evidenceIssuer'] = new FormControl('');
+              }
             }
 
             if (r.response.currency || r.response.amount) {
-              group[r.uuid] = new FormControl(r.response.amount);
+              if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
+                group[r.uuid] = new FormControl('');
+              } else {
+                group[r.uuid] = new FormControl(r.response.amount);
+              }
               if (r.response.currency !== null && r.response.currency !== undefined) {
-                group[r.uuid + 'currency'] = new FormControl(r.response.currency);
+                if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
+                  group[r.uuid + 'currency'] = new FormControl('');
+                } else {
+                  group[r.uuid + 'currency'] = new FormControl(r.response.currency);
+                }
               }
             }
             // in case of request import
@@ -486,8 +520,6 @@ export class FormUtilService {
           } else {
             r.response = new RequirementResponse();
             group[r.uuid] = new FormControl(r.response.description || '');
-
-            // TODO: make util service that hold dataservice EO,CA etc...
             if (this.utilities.isEO) {
               if (r.responseDataType === 'INDICATOR') {
                 group[r.uuid] = new FormControl(false);
@@ -526,6 +558,11 @@ export class FormUtilService {
 
     // console.log(fg.getRawValue());
     return fg;
+  }
+
+
+  formReset() {
+
   }
 
 

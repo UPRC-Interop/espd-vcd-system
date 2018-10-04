@@ -14,7 +14,7 @@
 /// limitations under the License.
 ///
 
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Moment} from 'moment';
 import * as moment from 'moment';
 
@@ -30,8 +30,11 @@ export class UtilitiesService {
   isReviewESPD = false;
   initLanguage = true;
   start = false;
+  isReset = false;
+  isStarted = false;
 
-  constructor() { }
+  constructor() {
+  }
 
   /*  ======================================== Date Manipulation ================================*/
 
@@ -45,6 +48,20 @@ export class UtilitiesService {
 
       return moment(utcDate);
     }
+  }
+
+  isEmpty(obj: Object): Boolean {
+    if (Object.keys(obj).length === 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  setAllFields(obj: Object, val: any) {
+    Object.keys(obj).forEach(function(k) {
+      obj[k] = val;
+    });
   }
 
 

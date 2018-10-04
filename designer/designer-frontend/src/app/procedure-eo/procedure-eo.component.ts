@@ -27,6 +27,7 @@ import {Moment} from 'moment';
 import {Evidence} from '../model/evidence.model';
 import {EvidenceIssuer} from '../model/evidenceIssuer.model';
 import {FormUtilService} from '../services/form-util.service';
+import {UtilitiesService} from '../services/utilities.service';
 
 @Component({
   selector: 'app-procedure-eo',
@@ -53,7 +54,7 @@ export class ProcedureEoComponent implements OnInit {
   @Input() eoRelatedCCriteria: EoRelatedCriterion[];
   @Input() eoRelatedDCriteria: EoRelatedCriterion[];
 
-  constructor(public dataService: DataService, public formUtil: FormUtilService) {
+  constructor(public dataService: DataService, public formUtil: FormUtilService, public utilities: UtilitiesService) {
     this.EOForm = new FormGroup({
       'name': new FormControl(this.dataService.EODetails.name),
       'smeIndicator': new FormControl(false),
@@ -76,7 +77,6 @@ export class ProcedureEoComponent implements OnInit {
     });
     this.dataService.EOForm = this.EOForm;
 
-    // TODO: implement valueChanges selectedEOCountry
   }
 
   ngOnInit() {

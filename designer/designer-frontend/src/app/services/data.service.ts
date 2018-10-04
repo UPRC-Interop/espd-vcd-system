@@ -547,6 +547,7 @@ export class DataService {
           // Fill in EoDetails Form
 
           this.eoDetailsFormUpdate();
+          this.caDetailsFormUpdate();
           // console.log(this.EOForm.value);
 
           console.log(res.fullCriterionList);
@@ -705,15 +706,63 @@ export class DataService {
           'naturalPersons': this.EODetails.naturalPersons
         });
       }
-
     }
 
+    /* ====================== FORM RESET in case of creating new ESPD ================================ */
+    if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
+      this.EOForm.reset('');
+    }
+  }
+
+  caDetailsFormUpdate() {
+    if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
+      this.utilities.setAllFields(this.CADetails.postalAddress, '');
+      this.utilities.setAllFields(this.CADetails.contactingDetails, '');
+      this.utilities.setAllFields(this.CADetails, '');
+    }
   }
 
   startESPD(form: NgForm) {
     // console.log(form);
     // console.log(form.value);
     console.log('START ESPD');
+
+    // form reset
+    if (!this.utilities.isEmpty(this.CADetails) || !this.utilities.isEmpty(this.EODetails)) {
+      this.eoRelatedACriteriaForm = JSON.parse(JSON.stringify(null));
+      this.eoRelatedCCriteriaForm = JSON.parse(JSON.stringify(null));
+      this.eoRelatedDCriteriaForm = JSON.parse(JSON.stringify(null));
+      this.exclusionACriteriaForm = JSON.parse(JSON.stringify(null));
+      this.exclusionBCriteriaForm = JSON.parse(JSON.stringify(null));
+      this.exclusionCCriteriaForm = JSON.parse(JSON.stringify(null));
+      this.exclusionDCriteriaForm = JSON.parse(JSON.stringify(null));
+      this.selectionALLCriteriaForm = JSON.parse(JSON.stringify(null));
+      this.selectionACriteriaForm = JSON.parse(JSON.stringify(null));
+      this.selectionBCriteriaForm = JSON.parse(JSON.stringify(null));
+      this.selectionCCriteriaForm = JSON.parse(JSON.stringify(null));
+      this.selectionDCriteriaForm = JSON.parse(JSON.stringify(null));
+      this.reductionCriteriaForm = JSON.parse(JSON.stringify(null));
+      this.eoRelatedACriteria = JSON.parse(JSON.stringify(null));
+      this.eoRelatedCCriteria = JSON.parse(JSON.stringify(null));
+      this.eoRelatedDCriteria = JSON.parse(JSON.stringify(null));
+      this.exclusionACriteria = JSON.parse(JSON.stringify(null));
+      this.exclusionBCriteria = JSON.parse(JSON.stringify(null));
+      this.exclusionCCriteria = JSON.parse(JSON.stringify(null));
+      this.exclusionDCriteria = JSON.parse(JSON.stringify(null));
+      this.selectionALLCriteria = JSON.parse(JSON.stringify(null));
+      this.selectionACriteria = JSON.parse(JSON.stringify(null));
+      this.selectionBCriteria = JSON.parse(JSON.stringify(null));
+      this.selectionCCriteria = JSON.parse(JSON.stringify(null));
+      this.selectionDCriteria = JSON.parse(JSON.stringify(null));
+      this.reductionCriteria = JSON.parse(JSON.stringify(null));
+      this.utilities.setAllFields(this.PostalAddress, '');
+      this.utilities.setAllFields(this.ContactingDetails, '');
+      this.utilities.setAllFields(this.CADetails, '');
+      this.utilities.setAllFields(this.EODetails, '');
+      this.formUtil.evidenceList = [];
+      this.utilities.isReset = true;
+    }
+
 
     if (form.value.chooseRole === 'CA') {
       this.utilities.isCA = true;
@@ -742,7 +791,6 @@ export class DataService {
 
     /* ===================== create forms in case of predefined criteria ================== */
     if (this.utilities.isCreateResponse) {
-
       this.getEoRelatedACriteria()
         .then(res => {
 
@@ -754,10 +802,7 @@ export class DataService {
 
             console.log('This is create response');
           }
-
-
           this.eoRelatedACriteriaForm = this.formUtil.createEORelatedCriterionForm(this.eoRelatedACriteria);
-          console.log(this.eoRelatedACriteriaForm);
         })
         .catch(err => {
           console.log(err);

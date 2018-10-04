@@ -46,3 +46,12 @@
   order:2;
 }
 
+.reset {
+  border-left: 5px solid #ffd901;
+  background-color: #fff6c4;
+}
+
+.warning {
+  font-weight: bold;
+}
+

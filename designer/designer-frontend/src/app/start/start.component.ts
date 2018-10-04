@@ -20,6 +20,10 @@ import {ApicallService} from '../services/apicall.service';
 import {DataService} from '../services/data.service';
 import {Country} from '../model/country.model';
 import {UtilitiesService} from '../services/utilities.service';
+import {Cadetails} from '../model/caDetails.model';
+import {EoDetails} from '../model/eoDetails.model';
+import {PostalAddress} from '../model/postalAddress.model';
+import {ContactingDetails} from '../model/contactingDetails.model';
 
 // import {ProcedureType} from "../model/procedureType.model";
 
@@ -40,6 +44,7 @@ export class StartComponent implements OnInit {
   isImportESPD = false;
   isCreateResponse = false;
   fileToUpload: File[] = [];
+  reset = false;
 
   // procedureTypes:ProcedureType[];
 
@@ -136,7 +141,11 @@ export class StartComponent implements OnInit {
 
   onStartSubmit(form: NgForm) {
     // console.log(form);
-  console.log(this.dataService.isReadOnly());
+    // form and model reset in case of start
+    this.utilities.isStarted = true;
+
+
+    console.log(this.dataService.isReadOnly());
     // CA reuses ESPDRequest
     if (this.isCA) {
       const role = 'CA';

@@ -167,8 +167,17 @@
       </mat-card-content>
     </mat-card>
 
+    <ng-container *ngIf="this.utilities.isStarted">
+      <mat-card class="reset">
+        <mat-card-content>
+          <p><span class="warning">Warning:</span> Starting a new procedure will result on losing the previously filled in data.</p>
+        </mat-card-content>
+      </mat-card>
+    </ng-container>
+
     <button type="button" mat-raised-button color="primary" (click)="onStartSubmit(f)"  matStepperNext>{{'espd.gui.next' | translate}}</button>
 
   </form>
+
 
 
