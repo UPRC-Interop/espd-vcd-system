@@ -41,9 +41,17 @@ public class CriteriaDataRetrieverBuilderTest {
     }
 
     @Test
-    public void testGetCriterion() throws Exception {
+    public void testGetCriterionForDefaultLang() throws Exception {
 
         SelectableCriterion sc = r.getCriterion("7c351fc0-1fd0-4bad-bfd8-1717a9dcf9d1");
+        SelectableCriterionPrinter.print(sc);
+    }
+
+    @Test
+    public void testGetCriterionWithLangParam() throws Exception {
+        r.setLang(EULanguageCodeEnum.EL);
+
+        SelectableCriterion sc = r.getCriterion("14df34e8-15a9-411c-8c05-8c051693e277");
         SelectableCriterionPrinter.print(sc);
     }
 
@@ -80,9 +88,26 @@ public class CriteriaDataRetrieverBuilderTest {
 
 
     @Test
-    public void testGetEvidenceGroup() throws Exception {
+    public void testGetEvidencesForDefaultLang() throws Exception {
 
         final String ID = "fdab2c29-ab6d-4ce1-92c2-5663732dd022";
+
+        List<Evidence> eList = r.getEvidences(ID);
+        Assert.assertFalse(eList.isEmpty());
+
+        int index = 1;
+
+        for (Evidence e : r.getEvidences(ID)) {
+            System.out.printf("#Evidence %-2d\nID: %s Description: %s Evidence Url: %s\n", index++, e.getID(), e.getDescription(), e.getEvidenceURL());
+        }
+
+    }
+
+    @Test
+    public void testGetEvidencesWithLangParam() throws Exception {
+
+        final String ID = "14df34e8-15a9-411c-8c05-8c051693e277";
+        r.setLang(EULanguageCodeEnum.EL);
 
         List<Evidence> eList = r.getEvidences(ID);
         Assert.assertFalse(eList.isEmpty());

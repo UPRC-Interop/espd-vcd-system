@@ -19,6 +19,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.rholder.retry.RetryException;
 import eu.esens.espdvcd.builder.model.ModelFactory;
+import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
 import eu.esens.espdvcd.model.LegislationReference;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
@@ -36,6 +37,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.function.Function;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -179,6 +181,17 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
 
     @Override
     public List<SelectableCriterion> getCriterionList() throws RetrieverException {
+        return getCriterionList(EULanguageCodeEnum.EN);
+    }
+
+    @Override
+    public List<SelectableCriterion> getCriterionList(EULanguageCodeEnum lang) throws RetrieverException {
+
+        // failback check
+        if (lang == null || lang != EULanguageCodeEnum.EN) {
+            LOGGER.log(Level.WARNING, "Warning... European Criteria Multilinguality not supported yet. Language set back to English");
+        }
+
         initCriterionMap();
         return criterionMap.values().stream()
                 .map(ec -> ModelFactory.ESPD_REQUEST.extractSelectableCriterion(ec, true))
@@ -187,6 +200,17 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
 
     @Override
     public Map<String, SelectableCriterion> getCriterionMap() throws RetrieverException {
+        return getCriterionMap(EULanguageCodeEnum.EN);
+    }
+
+    @Override
+    public Map<String, SelectableCriterion> getCriterionMap(EULanguageCodeEnum lang) throws RetrieverException {
+
+        // failback check
+        if (lang == null || lang != EULanguageCodeEnum.EN) {
+            LOGGER.log(Level.WARNING, "Warning... European Criteria Multilinguality not supported yet. Language set back to English");
+        }
+
         initCriterionMap();
         return criterionMap.values().stream()
                 .map(ec -> ModelFactory.ESPD_REQUEST.extractSelectableCriterion(ec, true))
@@ -195,6 +219,17 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
 
     @Override
     public LegislationReference getLegislationForCriterion(String ID) throws RetrieverException {
+        return getLegislationForCriterion(ID, EULanguageCodeEnum.EN);
+    }
+
+    @Override
+    public LegislationReference getLegislationForCriterion(String ID, EULanguageCodeEnum lang) throws RetrieverException {
+
+        // failback check
+        if (lang == null || lang != EULanguageCodeEnum.EN) {
+            LOGGER.log(Level.WARNING, "Warning... European Criteria Multilinguality not supported yet. Language set back to English");
+        }
+
         initCriterionMap();
         return criterionMap.containsKey(ID)
                 ? criterionMap.get(ID).getLegislationReference()
@@ -216,6 +251,21 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
     }
 
     @Override
+    public List<Evidence> getEvidencesForCriterion(String ID, EULanguageCodeEnum lang) throws RetrieverException {
+
+        GetECertisCriterionRetryingTask task = new GetECertisCriterionRetryingTask(ID, lang);
+
+        try {
+            ECertisCriterion ec = task.call();
+            return ModelFactory.ESPD_REQUEST.extractEvidences(ec.getEvidenceGroups());
+
+        } catch (ExecutionException | RetryException | IOException e) {
+            throw new RetrieverException(e);
+        }
+
+    }
+
+    @Override
     public ResourceType getResourceType() {
         return ResourceType.ECERTIS;
     }
@@ -229,6 +279,24 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
      */
     public ECertisCriterion getECertisCriterion(String ID) throws RetrieverException {
         GetECertisCriterionRetryingTask task = new GetECertisCriterionRetryingTask(ID);
+
+        try {
+            return task.call();
+        } catch (ExecutionException | RetryException | IOException e) {
+            throw new RetrieverException(e);
+        }
+    }
+
+    /**
+     * Retrieves an e-Certis Criterion with full data in the specified language.
+     *
+     * @param ID   The Criterion ID
+     * @param lang The Criterion Language (ISO 639-1:2002)
+     * @return The e-Certis Criterion
+     * @throws RetrieverException
+     */
+    public ECertisCriterion getECertisCriterion(String ID, EULanguageCodeEnum lang) throws RetrieverException {
+        GetECertisCriterionRetryingTask task = new GetECertisCriterionRetryingTask(ID, lang);
 
         try {
             return task.call();

@@ -48,8 +48,9 @@ public class GetECertisCriterionRetryingTask implements Callable<ECertisCriterio
 
     @Override
     public ECertisCriterion call() throws ExecutionException, RetryException, IOException {
+        String theLang = lang.name().toLowerCase();
 
-        GetFromECertisTask task = new GetFromECertisTask(ALL_CRITERIA_URL + "/" + ID + "?lang=" + lang.name().toLowerCase());
+        GetFromECertisTask task = new GetFromECertisTask(ALL_CRITERIA_URL + "/" + ID + "?lang=" + theLang);
         GetFromECertisRetryingTask rTask = new GetFromECertisRetryingTask(task);
 
         ObjectMapper mapper = new ObjectMapper();

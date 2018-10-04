@@ -15,6 +15,7 @@
  */
 package eu.esens.espdvcd.retriever.criteria;
 
+import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.retriever.criteria.resource.CriteriaResource;
 import eu.esens.espdvcd.retriever.criteria.resource.LegislationResource;
@@ -40,6 +41,8 @@ public class CriteriaExtractorImpl implements CriteriaExtractor {
     private List<RequirementsResource> rgResourceList;
 
     private List<SelectableCriterion> criterionList;
+
+    private EULanguageCodeEnum lang;
 
     /* package private constructor. Create only through factory */
     CriteriaExtractorImpl(@NotEmpty List<CriteriaResource> cResourceList,
@@ -68,6 +71,18 @@ public class CriteriaExtractorImpl implements CriteriaExtractor {
             // add all requirement groups to that criteria from requirement group resources
             criterionList.forEach(this::addRequirementGroups);
         }
+    }
+
+    @Override
+    public void setLang(EULanguageCodeEnum lang) {
+
+        // failback check
+        if (lang == null || lang != EULanguageCodeEnum.EN) {
+            lang = EULanguageCodeEnum.EN;
+            LOGGER.log(Level.WARNING, "Warning... European Criteria Multilinguality not supported yet. Language set back to English");
+        }
+
+        this.lang = lang;
     }
 
     private void applyCriterionBasicInfoIfNotNull(SelectableCriterion from, SelectableCriterion to) {

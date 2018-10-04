@@ -16,6 +16,7 @@
 package eu.esens.espdvcd.retriever.criteria.resource;
 
 import eu.esens.espdvcd.codelist.enums.CriterionElementTypeEnum;
+import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.Requirement;
@@ -38,6 +39,8 @@ import java.util.stream.Collectors;
  * @author konstantinos Raptis
  */
 public class CriteriaTaxonomyResource implements CriteriaResource, RequirementsResource {
+
+    private static final Logger LOGGER = Logger.getLogger(CriteriaTaxonomyResource.class.getName());
 
     private static final String CRITERIA_TAXONOMY_RESOURCE = "/templates/v2_regulated/ESPD-CriteriaTaxonomy-REGULATED-V2.0.2.xlsx";
     // private static final String CRITERIA_TAXONOMY_RESOURCE = "/templates/v2_regulated/ESPD-CriteriaTaxonomy-REGULATED-V2.0.2-FIXED.xlsx";
@@ -206,16 +209,49 @@ public class CriteriaTaxonomyResource implements CriteriaResource, RequirementsR
 
     @Override
     public List<SelectableCriterion> getCriterionList() {
+        return getCriterionList(EULanguageCodeEnum.EN);
+    }
+
+    @Override
+    public List<SelectableCriterion> getCriterionList(EULanguageCodeEnum lang) {
+
+        // failback check
+        if (lang == null || lang != EULanguageCodeEnum.EN) {
+            LOGGER.log(Level.WARNING, "Warning... European Criteria Multilinguality not supported yet. Language set back to English");
+        }
+
         return criterionList;
     }
 
     @Override
     public Map<String, SelectableCriterion> getCriterionMap() {
+        return getCriterionMap(EULanguageCodeEnum.EN);
+    }
+
+    @Override
+    public Map<String, SelectableCriterion> getCriterionMap(EULanguageCodeEnum lang) {
+
+        // failback check
+        if (lang == null || lang != EULanguageCodeEnum.EN) {
+            LOGGER.log(Level.WARNING, "Warning... European Criteria Multilinguality not supported yet. Language set back to English");
+        }
+
         return criterionList.stream().collect(Collectors.toMap(sc -> sc.getID(), Function.identity()));
     }
 
     @Override
     public List<RequirementGroup> getRequirementsForCriterion(String ID) {
+        return getRequirementsForCriterion(ID, EULanguageCodeEnum.EN);
+    }
+
+    @Override
+    public List<RequirementGroup> getRequirementsForCriterion(String ID, EULanguageCodeEnum lang) {
+
+        // failback check
+        if (lang == null || lang != EULanguageCodeEnum.EN) {
+            LOGGER.log(Level.WARNING, "Warning... European Criteria Multilinguality not supported yet. Language set back to English");
+        }
+
         return rgMap.get(ID);
     }
 
