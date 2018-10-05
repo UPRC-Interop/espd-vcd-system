@@ -31,7 +31,13 @@ The **ESPD designer** has two parts:
     This will build all the sub projects' jar-files. Tests, if available should be run by each sub project. The clean task will clean up all the build files.
 2. ```$ ng build --prod```
     If run in the designer-frontend modules' folder, this will build the Angular web application.
-    
+    This will produce a `dist` folder that contains the self-contained angular web application ready for deployment in a web server.
+3. ```$ gradlew :designer:designer-backend:jar```
+    This will create a (fat) jar in the `designer/designer-backend/build/libs/` folder that contains the designer-backend and all of its dependencies, including the ESPD/VCD framework. 
+    To start the server from the jar file, simply run:
+    ```$ java -jar designer-backend-2.0.2.jar 8080``` 
+    8080 being the port that the server will listen to. If you do not specify a port argument, it will default to 8080.
+
 ## How to run the designer ##
 The actual deployable artifact is the ESPD/VCD Designer, found in the designer submodule. 
 
