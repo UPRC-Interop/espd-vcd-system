@@ -123,13 +123,21 @@ public interface SchemaExtractorV2 {
                 }
 
                 // 2018-03-20 UL: modifications to add capabilities to handle Received Notice Number
-                if ((cd.getProcurementProcedureDesc() != null && !cd.getProcurementProcedureDesc().isEmpty()) ||
-                        (cd.getReceivedNoticeNumber() != null && !cd.getReceivedNoticeNumber().isEmpty())) {
+                if ((cd.getProcurementProcedureDesc() != null && !cd.getProcurementProcedureDesc().isEmpty())
+                        || (cd.getReceivedNoticeNumber() != null && !cd.getReceivedNoticeNumber().isEmpty())) {
+
                     DescriptionType dt = new DescriptionType();
-                    dt.setValue(cd.getProcurementProcedureDesc() != null ? cd.getProcurementProcedureDesc() : "");
+
+                    dt.setValue(cd.getProcurementProcedureDesc() != null
+                            ? cd.getProcurementProcedureDesc()
+                            : "_"); // dummy content for the first description
+
+
+
                     if (dr.getAttachment().getExternalReference() == null) {
                         dr.getAttachment().setExternalReference(new ExternalReferenceType());
                     }
+
                     dr.getAttachment().getExternalReference().getDescription().add(0, dt);
 
                     if (cd.getReceivedNoticeNumber() != null && !cd.getReceivedNoticeNumber().isEmpty()) {
@@ -403,7 +411,6 @@ public interface SchemaExtractorV2 {
 
     /**
      * replaces {@link eu.esens.espdvcd.builder.schema.v1.SchemaExtractorV1#createCriterionRelatedIDType(String)}
-     *
      */
     default IDType createCriteriaTaxonomyIDType(String id) {
         IDType idType = createCustomSchemeIDIDType(id, "CriteriaTaxonomy");
@@ -434,7 +441,6 @@ public interface SchemaExtractorV2 {
 //        localIDType.setValue(id);
 //        return localIDType;
 //    }
-
     default CriterionTypeCodeType createCriteriaTypeCode(String code) {
         CriterionTypeCodeType tc = new CriterionTypeCodeType();
         tc.setListAgencyID("EU-COM-GROW");

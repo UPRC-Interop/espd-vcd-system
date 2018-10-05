@@ -127,6 +127,7 @@ public interface ModelExtractor {
                 if (ref.getID() != null) {
                     cd.setProcurementPublicationNumber(ref.getID().getValue());
                 }
+
                 if (ref.getAttachment() != null && ref.getAttachment().getExternalReference() != null) {
                     ExternalReferenceType ert = ref.getAttachment().getExternalReference();
 
@@ -141,6 +142,7 @@ public interface ModelExtractor {
                         if (ert.getDescription().size() > 1) {
                             cd.setReceivedNoticeNumber(ert.getDescription().get(1).getValue());
                         }
+
                     }
 
                     if (ert.getURI() != null) {
@@ -243,22 +245,25 @@ public interface ModelExtractor {
             }
         }
 
-
         if (contractFolderId != null && contractFolderId.getValue() != null) {
             cd.setProcurementProcedureFileReferenceNo(contractFolderId.getValue());
         }
+
         if (!additionalDocumentReferenceList.isEmpty()) {
 
             // Find an entry with TED_CN Value
             Optional<eu.espd.schema.v2.pre_award.commonaggregate.DocumentReferenceType> optRef = additionalDocumentReferenceList.stream()
                     .filter(r -> r.getDocumentTypeCode() != null && r.getDocumentTypeCode().getValue().equals("TED_CN"))
                     .findFirst();
+
             optRef.ifPresent(ref -> {
 
                 if (ref.getID() != null) {
                     cd.setProcurementPublicationNumber(ref.getID().getValue());
                 }
+
                 if (ref.getAttachment() != null && ref.getAttachment().getExternalReference() != null) {
+
                     eu.espd.schema.v2.pre_award.commonaggregate.ExternalReferenceType ert = ref.getAttachment().getExternalReference();
 
                     if (ert.getFileName() != null) {
@@ -267,6 +272,12 @@ public interface ModelExtractor {
 
                     if (!ert.getDescription().isEmpty()) {
                         cd.setProcurementProcedureDesc(ert.getDescription().get(0).getValue());
+
+                        // 2018-10-5 KR: modifications to add capabilities to handle Received Notice Number
+                        if (ert.getDescription().size() > 1) {
+                            cd.setReceivedNoticeNumber(ert.getDescription().get(1).getValue());
+                        }
+
                     }
 
                     if (ert.getURI() != null) {
