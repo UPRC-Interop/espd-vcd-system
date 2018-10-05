@@ -1,3 +1,19 @@
+///
+/// Copyright 2016-2018 University of Piraeus Research Center
+///
+/// Licensed under the Apache License, Version 2.0 (the "License");
+/// you may not use this file except in compliance with the License.
+/// You may obtain a copy of the License at
+///
+///     http://www.apache.org/licenses/LICENSE-2.0
+///
+/// Unless required by applicable law or agreed to in writing, software
+/// distributed under the License is distributed on an "AS IS" BASIS,
+/// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+/// See the License for the specific language governing permissions and
+/// limitations under the License.
+///
+
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
@@ -11,6 +27,7 @@ import {Currency} from '../model/currency.model';
 import {ReductionCriterion} from '../model/reductionCriterion.model';
 import {ESPDResponse} from '../model/ESPDResponse.model';
 import {environment} from '../../environments/environment';
+import {Language} from '../model/language.model';
 
 // import {DataService} from '../services/data.service';
 
@@ -37,6 +54,10 @@ export class ApicallService {
 
   getCurr() {
     return this.http.get<Currency[]>(environment.apiUrl + 'v1/codelists/Currency').toPromise();
+  }
+
+  getLangs() {
+    return this.http.get<Language[]>(environment.apiUrl + 'v2/codelists/LanguageCodeEU').toPromise();
   }
 
 

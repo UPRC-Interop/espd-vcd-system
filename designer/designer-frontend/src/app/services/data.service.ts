@@ -1,3 +1,19 @@
+///
+/// Copyright 2016-2018 University of Piraeus Research Center
+///
+/// Licensed under the Apache License, Version 2.0 (the "License");
+/// you may not use this file except in compliance with the License.
+/// You may obtain a copy of the License at
+///
+///     http://www.apache.org/licenses/LICENSE-2.0
+///
+/// Unless required by applicable law or agreed to in writing, software
+/// distributed under the License is distributed on an "AS IS" BASIS,
+/// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+/// See the License for the specific language governing permissions and
+/// limitations under the License.
+///
+
 import {Injectable} from '@angular/core';
 import {ApicallService} from './apicall.service';
 import {Country} from '../model/country.model';
@@ -25,6 +41,8 @@ import {MatSnackBar} from '@angular/material';
 import {Evidence} from '../model/evidence.model';
 import {FormUtilService} from './form-util.service';
 import {UtilitiesService} from './utilities.service';
+import {TranslateService} from '@ngx-translate/core';
+import {Language} from '../model/language.model';
 
 @Injectable()
 export class DataService {
@@ -67,6 +85,10 @@ export class DataService {
   eoRelatedCCriteria: EoRelatedCriterion[] = null;
   eoRelatedDCriteria: EoRelatedCriterion[] = null;
   reductionCriteria: ReductionCriterion[] = null;
+  language: Language[] = null;
+  langTemplate = [];
+  langNames = [];
+  langISOCodes = [];
   // evidenceList: Evidence[] = [];
 
   notDefCriteria: EoRelatedCriterion[] = null;
@@ -114,9 +136,15 @@ export class DataService {
   constructor(private APIService: ApicallService,
               public snackBar: MatSnackBar,
               public formUtil: FormUtilService,
-              public utilities: UtilitiesService) {
+              public utilities: UtilitiesService,
+              public translate: TranslateService) {
+
+    this.AddLanguages();
+    translate.setDefaultLang('ESPD_en');
+    console.log(this.translate.getLangs());
 
   }
+
 
   /* ============================ snackbar ===================================== */
   openSnackBar(message: string, action: string) {
@@ -423,19 +451,19 @@ export class DataService {
 
   createFile(response) {
     // const filename:string = "espd-request";
-    this.blob = new Blob([response.body], {type: 'text/xml'});
+    this.blob = new Blob([response.body], {type: 'application/xml'});
   }
 
 
   saveFile(blob) {
     if (this.utilities.isCA && this.APIService.version === 'v1') {
-      var filename = 'espd-request-v1';
+      var filename = 'espd-request-v1.xml';
     } else if (this.utilities.isEO && this.APIService.version === 'v1') {
-      var filename = 'espd-response-v1';
+      var filename = 'espd-response-v1.xml';
     } else if (this.utilities.isCA && this.APIService.version === 'v2') {
-      var filename = 'espd-request-v2';
+      var filename = 'espd-request-v2.xml';
     } else if (this.utilities.isEO && this.APIService.version === 'v2') {
-      var filename = 'espd-response-v2';
+      var filename = 'espd-response-v2.xml';
     }
 
     saveAs(blob, filename);
@@ -519,6 +547,7 @@ export class DataService {
           // Fill in EoDetails Form
 
           this.eoDetailsFormUpdate();
+          this.caDetailsFormUpdate();
           // console.log(this.EOForm.value);
 
           console.log(res.fullCriterionList);
@@ -677,15 +706,63 @@ export class DataService {
           'naturalPersons': this.EODetails.naturalPersons
         });
       }
-
     }
 
+    /* ====================== FORM RESET in case of creating new ESPD ================================ */
+    if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
+      this.EOForm.reset('');
+    }
+  }
+
+  caDetailsFormUpdate() {
+    if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
+      this.utilities.setAllFields(this.CADetails.postalAddress, '');
+      this.utilities.setAllFields(this.CADetails.contactingDetails, '');
+      this.utilities.setAllFields(this.CADetails, '');
+    }
   }
 
   startESPD(form: NgForm) {
     // console.log(form);
     // console.log(form.value);
     console.log('START ESPD');
+
+    // form reset
+    if (!this.utilities.isEmpty(this.CADetails) || !this.utilities.isEmpty(this.EODetails)) {
+      this.eoRelatedACriteriaForm = JSON.parse(JSON.stringify(null));
+      this.eoRelatedCCriteriaForm = JSON.parse(JSON.stringify(null));
+      this.eoRelatedDCriteriaForm = JSON.parse(JSON.stringify(null));
+      this.exclusionACriteriaForm = JSON.parse(JSON.stringify(null));
+      this.exclusionBCriteriaForm = JSON.parse(JSON.stringify(null));
+      this.exclusionCCriteriaForm = JSON.parse(JSON.stringify(null));
+      this.exclusionDCriteriaForm = JSON.parse(JSON.stringify(null));
+      this.selectionALLCriteriaForm = JSON.parse(JSON.stringify(null));
+      this.selectionACriteriaForm = JSON.parse(JSON.stringify(null));
+      this.selectionBCriteriaForm = JSON.parse(JSON.stringify(null));
+      this.selectionCCriteriaForm = JSON.parse(JSON.stringify(null));
+      this.selectionDCriteriaForm = JSON.parse(JSON.stringify(null));
+      this.reductionCriteriaForm = JSON.parse(JSON.stringify(null));
+      this.eoRelatedACriteria = JSON.parse(JSON.stringify(null));
+      this.eoRelatedCCriteria = JSON.parse(JSON.stringify(null));
+      this.eoRelatedDCriteria = JSON.parse(JSON.stringify(null));
+      this.exclusionACriteria = JSON.parse(JSON.stringify(null));
+      this.exclusionBCriteria = JSON.parse(JSON.stringify(null));
+      this.exclusionCCriteria = JSON.parse(JSON.stringify(null));
+      this.exclusionDCriteria = JSON.parse(JSON.stringify(null));
+      this.selectionALLCriteria = JSON.parse(JSON.stringify(null));
+      this.selectionACriteria = JSON.parse(JSON.stringify(null));
+      this.selectionBCriteria = JSON.parse(JSON.stringify(null));
+      this.selectionCCriteria = JSON.parse(JSON.stringify(null));
+      this.selectionDCriteria = JSON.parse(JSON.stringify(null));
+      this.reductionCriteria = JSON.parse(JSON.stringify(null));
+      this.utilities.setAllFields(this.PostalAddress, '');
+      this.utilities.setAllFields(this.ContactingDetails, '');
+      this.utilities.setAllFields(this.CADetails, '');
+      this.utilities.setAllFields(this.EODetails, '');
+      this.formUtil.evidenceList = [];
+      this.utilities.isReset = true;
+    }
+
 
     if (form.value.chooseRole === 'CA') {
       this.utilities.isCA = true;
@@ -701,7 +778,6 @@ export class DataService {
       this.utilities.isCA = false;
       if (form.value.EOCountry !== '') {
         this.selectedEOCountry = form.value.EOCountry;
-
       }
     }
 
@@ -715,7 +791,6 @@ export class DataService {
 
     /* ===================== create forms in case of predefined criteria ================== */
     if (this.utilities.isCreateResponse) {
-
       this.getEoRelatedACriteria()
         .then(res => {
 
@@ -727,10 +802,7 @@ export class DataService {
 
             console.log('This is create response');
           }
-
-
           this.eoRelatedACriteriaForm = this.formUtil.createEORelatedCriterionForm(this.eoRelatedACriteria);
-          console.log(this.eoRelatedACriteriaForm);
         })
         .catch(err => {
           console.log(err);
@@ -1097,8 +1169,84 @@ export class DataService {
 
   }
 
+  AddLanguages() {
+    this.getLanguages().then(res => {
+      let langs = [];
+      console.log(res);
+      res.forEach(lang => {
+          // langs.push('ESPD_' + lang.code.toLowerCase());
+          langs.push(lang.name);
+          this.langNames.push(lang.name);
+          /* create associative template array in order to retrieve the code using the language name from the dropdown ui element */
+          this.langTemplate[lang.name] = lang.code;
+          // this.langISOCodes[lang.name] = lang.code;
+          // console.log(langs);
+        }
+      );
+
+      // this.langISOCodes = res;
+      this.translate.addLangs(langs);
+      // MAP to ISO 3166-1-alpha-2 code for css flag library to work properly
+      res.map(x => {
+        x.code = x.code
+          .replace('EL', 'GR')
+          .replace('EN', 'GB')
+          .replace('ET', 'EE')
+          .replace('GA', 'IE')
+          .replace('SL', 'SI')
+          .replace('SV', 'SE')
+          .replace('DA', 'DK')
+          .replace('CS', 'CZ');
+        // console.log(x.code);
+        this.langISOCodes[x.name] = x.code;
+        return x;
+      });
+      // console.log('LANG TEMPLATE: ');
+      // console.log(this.langTemplate);
+      // console.log('LANG_ISO: ');
+      // console.log(this.langISOCodes);
+      // console.log('RESPONSE: ');
+      // console.log(res);
+
+
+    })
+      .catch(err => {
+        console.log(err);
+        const message: string = err.error +
+          ' ' + err.message;
+        const action = 'close';
+        this.openSnackBar(message, action);
+      });
+  }
+
+  switchLanguage(language: string) {
+    const lang = 'ESPD_' + this.langTemplate[language].toLowerCase();
+    console.log(lang);
+    this.translate.use(lang);
+    // this.AddLanguages();
+  }
 
   /* =================================  Get from Codelists ===========================*/
+
+  getLanguages(): Promise<Language[]> {
+    if (this.language != null) {
+      return Promise.resolve(this.language);
+    } else {
+      return this.APIService.getLangs()
+        .then(res => {
+          this.language = res;
+          return Promise.resolve(res);
+        })
+        .catch(err => {
+          console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
+          return Promise.reject(err);
+        });
+    }
+  }
 
 
   getCountries(): Promise<Country[]> {

@@ -1,13 +1,32 @@
-<h4>Part IV: Selection Criteria</h4>
+<!--
+
+    Copyright 2016-2018 University of Piraeus Research Center
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<h4 translate>espd.part4.header</h4>
 <form #f="ngForm">
 
   <mat-card>
     <mat-card-content>
-      <p>Contracting authorities must indicate which selection criteria will be applied by 'ticking' the checkbox placed before the relevant criterion.</p>
-      <span>Do you want to use the selection criteria from A to D? </span>
+      <p translate>espd.part4.alert</p>
+      <span translate>espd.gui.question.to.use.alpha</span>
       <mat-radio-group name="satisfiesALL" [disabled]="this.dataService.isReadOnly()">
-        <mat-radio-button color="primary" name="selALL" value="YES" [checked]="this.dataService.isReadOnly()" (change)="handleALL(YES)" #YES>YES</mat-radio-button>
-        <mat-radio-button color="primary" name="selALL" value="NO" [checked]="!this.dataService.isReadOnly()" (change)="handleALL(NO)" #NO>NO</mat-radio-button>
+        <mat-radio-button color="primary" name="selALL" value="YES" [checked]="this.dataService.isReadOnly()" (change)="handleALL(YES)" #YES>
+          {{'espd.gui.yes' | translate}}</mat-radio-button>
+        <mat-radio-button color="primary" name="selALL" value="NO" [checked]="!this.dataService.isReadOnly()" (change)="handleALL(NO)" #NO>
+          {{'espd.gui.no' | translate}}</mat-radio-button>
       </mat-radio-group>
     </mat-card-content>
   </mat-card>
@@ -15,14 +34,14 @@
   <mat-accordion multi="true" *ngIf="isSatisfiedALL">
     <mat-expansion-panel expanded="true" *ngIf="selectionALLCriteria">
       <mat-expansion-panel-header>
-        <mat-panel-title>
-          ɑ: Global indication for all selection criteria
+        <mat-panel-title translate>
+          espd.part4.all.selection.switch
         </mat-panel-title>
         <mat-panel-description>
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div class="desc">
-        <h4>Concerning the selection criteria the contracting authority declares that</h4>
+        <h4 translate>espd.part4.crit.selection.ca.declares.that</h4>
       </div>
       <mat-card>
 
@@ -49,13 +68,11 @@
                             checked="true"
                             disabled="true"
                             name="selectionSatisfiedALL">
-                <div class="critDesc">It satisfies all the required selection criteria</div>
+                <div class="critDesc" translate>espd.part4.crit.selection.eo.satisfies.all.criteria</div>
               </mat-checkbox>
             </div>
           </div>
         </ng-container>
-
-
       </mat-card>
     </mat-expansion-panel>
   </mat-accordion>
@@ -66,8 +83,8 @@
   <mat-accordion multi="true" *ngIf="isAtoD">
     <mat-expansion-panel expanded="true" *ngIf="selectionACriteria">
       <mat-expansion-panel-header>
-        <mat-panel-title>
-          A: Suitability
+        <mat-panel-title translate>
+          espd.part4.suitability
         </mat-panel-title>
         <mat-panel-description>
 
@@ -75,7 +92,8 @@
       </mat-expansion-panel-header>
       <ng-container *ngIf="selectionACriteria.length !== 0">
         <div class="desc">
-          <h4>Article {{selectionACriteria['0'].legislationReference.article}} of {{selectionACriteria['0'].legislationReference.title}} sets out the following selection criteria </h4>
+          <h4 translate>espd.part4.crit.selection.eo.suitability.article</h4>
+          <!--<h4>Article {{selectionACriteria['0'].legislationReference.article}} of {{selectionACriteria['0'].legislationReference.title}} sets out the following selection criteria </h4>-->
         </div>
       </ng-container>
       <mat-card *ngFor="let criteria of selectionACriteria; let i=index">
@@ -90,8 +108,8 @@
             <div class="critDesc">{{criteria.description}}</div>
           </div>
           <div class="eCertis">
-            <h5>eCertis Information ...</h5>
-            <div class="eCertDesc">no information...</div>
+            <!--<h5>eCertis Information ...</h5>-->
+            <div class="eCertDesc" translate>espd.ecertis.404</div>
           </div>
         </div>
       </mat-card>
@@ -99,13 +117,14 @@
 
     <mat-expansion-panel expanded="true" *ngIf="selectionBCriteria">
       <mat-expansion-panel-header>
-        <mat-panel-title>
-          B: Grounds relating to the payment of taxes or social security contributions
+        <mat-panel-title translate>
+          espd.part3.crit.top.grounds.payment.taxes.title
         </mat-panel-title>
       </mat-expansion-panel-header>
       <ng-container *ngIf="selectionBCriteria.length !== 0">
         <div class="desc">
-          <h4>Article {{selectionBCriteria['0'].legislationReference.article}} of {{selectionBCriteria['0'].legislationReference.title}} sets out the following selection criteria </h4>
+          <h4 translate>espd.part4.crit.selection.ca.economic.article</h4>
+          <!--<h4>Article {{selectionBCriteria['0'].legislationReference.article}} of {{selectionBCriteria['0'].legislationReference.title}} sets out the following selection criteria </h4>-->
         </div>
       </ng-container>
       <mat-card *ngFor="let criteria of selectionBCriteria; let i=index">
@@ -119,8 +138,8 @@
             <div class="critDesc">{{criteria.description}}</div>
           </div>
           <div class="eCertis">
-            <h5>eCertis Information ...</h5>
-            <div class="eCertDesc">no information...</div>
+            <!--<h5>eCertis Information ...</h5>-->
+            <div class="eCertDesc" translate>espd.ecertis.404</div>
           </div>
         </div>
       </mat-card>
@@ -128,13 +147,14 @@
 
     <mat-expansion-panel expanded="true" *ngIf="selectionCCriteria">
       <mat-expansion-panel-header>
-        <mat-panel-title>
-          C: Grounds relating to insolvency, conflicts of interests or professional misconduct
+        <mat-panel-title translate>
+          espd.part3.crit.insolvency.conflicts.top.title
         </mat-panel-title>
       </mat-expansion-panel-header>
       <ng-container *ngIf="selectionCCriteria.length !== 0">
         <div class="desc">
-          <h4>Article {{selectionCCriteria['0'].legislationReference.article}} of {{selectionCCriteria['0'].legislationReference.title}} sets out the following selection criteria </h4>
+          <h4 translate>espd.part4.crit.selection.technical.professional.ability.article</h4>
+          <!--<h4>Article {{selectionCCriteria['0'].legislationReference.article}} of {{selectionCCriteria['0'].legislationReference.title}} sets out the following selection criteria </h4>-->
         </div>
       </ng-container>
       <mat-card *ngFor="let criteria of selectionCCriteria; let i=index">
@@ -148,8 +168,8 @@
             <div class="critDesc">{{criteria.description}}</div>
           </div>
           <div class="eCertis">
-            <h5>eCertis Information ...</h5>
-            <div class="eCertDesc">no information...</div>
+            <!--<h5>eCertis Information ...</h5>-->
+            <div class="eCertDesc" translate>espd.ecertis.404</div>
           </div>
         </div>
       </mat-card>
@@ -157,13 +177,14 @@
 
     <mat-expansion-panel expanded="true" *ngIf="selectionDCriteria">
       <mat-expansion-panel-header>
-        <mat-panel-title>
-          D: Quality assurance schemes and environmental management standards
+        <mat-panel-title translate>
+          espd.part4.quality.assurance
         </mat-panel-title>
       </mat-expansion-panel-header>
       <ng-container *ngIf="selectionDCriteria.length !== 0">
         <div class="desc">
-          <h4>Article {{selectionDCriteria['0'].legislationReference.article}} of {{selectionDCriteria['0'].legislationReference.title}} sets out the following selection criteria </h4>
+          <h4 translate>espd.part4.crit.selection.technical.professional.ability.article</h4>
+          <!--<h4>Article {{selectionDCriteria['0'].legislationReference.article}} of {{selectionDCriteria['0'].legislationReference.title}} sets out the following selection criteria </h4>-->
         </div>
       </ng-container>
       <mat-card *ngFor="let criteria of selectionDCriteria; let i=index">
@@ -177,14 +198,14 @@
             <div class="critDesc">{{criteria.description}}</div>
           </div>
           <div class="eCertis">
-            <h5>eCertis Information ...</h5>
-            <div class="eCertDesc">no information...</div>
+            <!--<h5>eCertis Information ...</h5>-->
+            <div class="eCertDesc" translate>espd.ecertis.404</div>
           </div>
         </div>
       </mat-card>
     </mat-expansion-panel>
 
   </mat-accordion>
-  <button mat-raised-button color="primary" matStepperPrevious>Back</button>
-  <button type="submit" mat-raised-button color="primary" matStepperNext (click)="onSelectionSubmit(f)">Next</button>
+  <button mat-raised-button color="primary" matStepperPrevious>{{'espd.gui.previous' | translate}}</button>
+  <button type="submit" mat-raised-button color="primary" matStepperNext (click)="onSelectionSubmit(f)">{{'espd.gui.next' | translate}}</button>
 </form>

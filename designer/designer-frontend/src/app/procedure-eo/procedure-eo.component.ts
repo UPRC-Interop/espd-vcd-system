@@ -1,3 +1,19 @@
+///
+/// Copyright 2016-2018 University of Piraeus Research Center
+///
+/// Licensed under the Apache License, Version 2.0 (the "License");
+/// you may not use this file except in compliance with the License.
+/// You may obtain a copy of the License at
+///
+///     http://www.apache.org/licenses/LICENSE-2.0
+///
+/// Unless required by applicable law or agreed to in writing, software
+/// distributed under the License is distributed on an "AS IS" BASIS,
+/// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+/// See the License for the specific language governing permissions and
+/// limitations under the License.
+///
+
 import {Component, Input, OnChanges, OnInit, SimpleChange, SimpleChanges} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {ProcedureType} from '../model/procedureType.model';
@@ -11,6 +27,7 @@ import {Moment} from 'moment';
 import {Evidence} from '../model/evidence.model';
 import {EvidenceIssuer} from '../model/evidenceIssuer.model';
 import {FormUtilService} from '../services/form-util.service';
+import {UtilitiesService} from '../services/utilities.service';
 
 @Component({
   selector: 'app-procedure-eo',
@@ -37,7 +54,7 @@ export class ProcedureEoComponent implements OnInit {
   @Input() eoRelatedCCriteria: EoRelatedCriterion[];
   @Input() eoRelatedDCriteria: EoRelatedCriterion[];
 
-  constructor(public dataService: DataService, public formUtil: FormUtilService) {
+  constructor(public dataService: DataService, public formUtil: FormUtilService, public utilities: UtilitiesService) {
     this.EOForm = new FormGroup({
       'name': new FormControl(this.dataService.EODetails.name),
       'smeIndicator': new FormControl(false),
@@ -59,6 +76,7 @@ export class ProcedureEoComponent implements OnInit {
       'procurementProjectLot': new FormControl(0)
     });
     this.dataService.EOForm = this.EOForm;
+
   }
 
   ngOnInit() {

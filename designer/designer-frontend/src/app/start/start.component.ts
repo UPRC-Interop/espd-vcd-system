@@ -1,9 +1,29 @@
+///
+/// Copyright 2016-2018 University of Piraeus Research Center
+///
+/// Licensed under the Apache License, Version 2.0 (the "License");
+/// you may not use this file except in compliance with the License.
+/// You may obtain a copy of the License at
+///
+///     http://www.apache.org/licenses/LICENSE-2.0
+///
+/// Unless required by applicable law or agreed to in writing, software
+/// distributed under the License is distributed on an "AS IS" BASIS,
+/// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+/// See the License for the specific language governing permissions and
+/// limitations under the License.
+///
+
 import {Component, OnInit} from '@angular/core';
 import {FormControl, NgForm} from '@angular/forms/forms';
 import {ApicallService} from '../services/apicall.service';
 import {DataService} from '../services/data.service';
 import {Country} from '../model/country.model';
 import {UtilitiesService} from '../services/utilities.service';
+import {Cadetails} from '../model/caDetails.model';
+import {EoDetails} from '../model/eoDetails.model';
+import {PostalAddress} from '../model/postalAddress.model';
+import {ContactingDetails} from '../model/contactingDetails.model';
 
 // import {ProcedureType} from "../model/procedureType.model";
 
@@ -24,10 +44,11 @@ export class StartComponent implements OnInit {
   isImportESPD = false;
   isCreateResponse = false;
   fileToUpload: File[] = [];
+  reset = false;
 
   // procedureTypes:ProcedureType[];
 
-  constructor(private dataService: DataService, private APIService: ApicallService, public utilities: UtilitiesService) {
+  constructor(public dataService: DataService, private APIService: ApicallService, public utilities: UtilitiesService) {
   }
 
   ngOnInit() {
@@ -120,7 +141,11 @@ export class StartComponent implements OnInit {
 
   onStartSubmit(form: NgForm) {
     // console.log(form);
-  console.log(this.dataService.isReadOnly());
+    // form and model reset in case of start
+    this.utilities.isStarted = true;
+
+
+    console.log(this.dataService.isReadOnly());
     // CA reuses ESPDRequest
     if (this.isCA) {
       const role = 'CA';
