@@ -1,0 +1,1028 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+Es wir hier explizit auf einen DocType verzichten um diese Datei in der Transformation nutzen zu koennen, ohne das sie gegen die properties.dtd geprüft wird.
+Wenn die Datei als Properties gezogen wird, wird ein DocType zur Laufzeit eingetragen.
+-->
+<properties>
+    <entry key="espd.gui.about">Névjegy</entry>
+    <entry key="espd.part4.all.selection.switch">?: Az összes kiválasztási szempont általános jelzése</entry>
+    <entry key="espd.gui.app.environment">Felhívjuk a figyelmét, hogy jelenleg a tesztkörnyezetet használja. Kérjük,
+        kattintson a következ? linkre:
+    </entry>
+    <entry key="espd.gui.app.subtitle">Az ESPD kitöltését és újbóli felhasználását lehet?vé tév? szolgáltatás</entry>
+    <entry key="espd.gui.app.title">Egységes európai közbeszerzési dokumentum (ESPD)</entry>
+    <entry key="espd.gui.back.to.main">Vissza a f?oldalra</entry>
+    <entry key="espd.gui.cancel">Mégse</entry>
+    <entry key="espd.gui.click.here">kattintson ide.</entry>
+    <entry key="espd.gui.contact">Kapcsolat</entry>
+    <entry key="espd.gui.contact.header">Kapcsolat</entry>
+    <entry key="espd.gui.contact.info">&lt;p&gt;European Commission&lt;p&gt;Directorate General Internal Market, Industry,
+        Entrepreneurship and SMEs&lt;p&gt;Avenue d'Auderghem 45 / Oudergemselaan 45&lt;p&gt;B-1049 Bruxelles&lt;p&gt;Belgium
+    </entry>
+    <entry key="espd.gui.cookies">Cookie-k</entry>
+    <entry key="espd.gui.correct.errors">Csak a hibák kijavítása után tud továbblépni.</entry>
+    <entry key="espd.part1.city">Város:</entry>
+    <entry key="espd.part1.confirm.email">Er?sítse meg az e-mail címet:</entry>
+    <entry key="espd.part1.confirm.telephone">Er?sítse meg a telefonszámot:</entry>
+    <entry key="espd.part1.contact.details.ca">A beszerz? azonosítása</entry>
+    <entry key="espd.part1.contact.person">Kapcsolattartó személy:</entry>
+    <entry key="espd.part1.correct.errors">Csak a hibák kijavítása után tud továbblépni.</entry>
+    <entry key="espd.part1.country">Ország:</entry>
+    <entry key="espd.part1.email">E-mail cím:</entry>
+    <entry key="espd.part1.fax">faksas</entry>
+    <entry key="espd.part1.file.ref.ca">Az ajánlatkér? szerv vagy a közszolgáltató ajánlatkér? által a fájlhoz rendelt
+        hivatkozási szám (adott esetben):
+    </entry>
+    <entry key="espd.part1.header">I. rész: A közbeszerzési eljárásra és az ajánlatkér? szervre vagy a közszolgáltató
+        ajánlatkér?re vonatkozó információk
+    </entry>
+    <entry key="espd.part1.info.procedure">eljárás</entry>
+    <entry key="espd.part1.info.procurement.proc">A közbeszerzési eljárásra vonatkozó információk</entry>
+    <entry key="espd.part1.info.pub">Közzétételre vonatkozó információk</entry>
+    <entry key="espd.part1.name">Hivatalos név:</entry>
+    <entry key="espd.part1.nat.regnum">Nemzeti nyilvántartási szám (amennyiben ismert):</entry>
+    <entry key="espd.part1.official.journal.alert">Amennyiben az Európai Unió Hivatalos Lapjában nincs közzétéve a
+        közbeszerzési eljárást megindító hirdetmény, az ajánlatkér? szervnek vagy a közszolgáltató ajánlatkér?nek meg
+        kell adnia azokat az információkat, amelyek lehet?vé teszik a közbeszerzési eljárás egyértelm? azonosítását (pl.
+        a nemzeti szint? közzététel hivatkozási adatait)
+    </entry>
+    <entry key="espd.part1.ojs.label">A hirdetmény száma a Hivatalos Lap S sorozatában:</entry>
+    <entry key="espd.part1.ojs.url">HL S URL</entry>
+    <entry key="espd.part1.postcode">Irányítószám:</entry>
+    <entry key="espd.part1.procurer.name">Ajánlatkér?:</entry>
+    <entry key="espd.part1.street.and. num">Utca és házszám:</entry>
+    <entry key="espd.part1.ted.reception.id">Ez a ZIP mappában található ESPD-fájlokról szóló rövid összefoglaló
+        dokumentum.Chr(92)
+    </entry>
+    <entry key="espd.part1.telephone">Telefon:</entry>
+    <entry key="espd.part1.title.or.short.desc">Rövid leírás:</entry>
+    <entry key="espd.part1.to.be.filled.alert">Olyan közbeszerzési eljárásoknál, amelyekben az eljárást megindító
+        felhívást az Európai Unió Hivatalos Lapjában tették közzé, az I. részben el?írt információ automatikusan
+        beolvasásra kerül, feltéve, hogy a fent említett elektronikus ESPD-szolgáltatást használják az egységes európai
+        közbeszerzési dokumentum kitöltéséhez. Az Európai Unió Hivatalos lapjában közzétett vonatkozó hirdetmény
+        hivatkozási adatai:
+    </entry>
+    <entry key="espd.part1.website">Honlap (adott esetben):</entry>
+    <entry key="espd.part3.grounds.criminal.conv">Büntet?eljárásban hozott ítéletekkel kapcsolatos okok</entry>
+    <entry key="espd.part3.header">III. rész: Kizárási okok</entry>
+    <entry key="espd.part3.insolvency.conflicts">Fizetésképtelenséggel, összeférhetetlenséggel vagy szakmai
+        kötelességszegéssel kapcsolatos okok
+    </entry>
+    <entry key="espd.part5.concl.statements">VI. rész: Záró nyilatkozat</entry>
+    <entry key="espd.part5.concl.statements.signature">Keltezés, hely, és ? ahol el?írt vagy szükséges ? aláírás(ok):
+    </entry>
+    <entry key="espd.part5.concl.statements.text">Alulírott(ak) a hamis nyilatkozat következményeinek teljes tudatában
+        kijelenti(k), hogy a fenti II?V. részben megadott információk pontosak és helytállóak.
+        &lt;p&gt;Alulírott(ak) kijelenti(k), hogy a hivatkozott tanúsítványokat és egyéb igazolásokat kérésre képes(ek)
+            lesz(nek) késedelem nélkül rendelkezésre bocsátani, kivéve amennyiben:
+        &lt;/p&gt;
+        &lt;p&gt;a) Az ajánlatkér? szervnek vagy a közszolgáltató ajánlatkér?nek lehet?sége van arra, hogy egy bármely
+            tagállamban lév?, ingyenesen hozzáférhet? nemzeti adatbázisba belépve közvetlenül hozzájusson a kiegészít?
+            iratokhoz (feltéve, hogy a gazdasági szerepl? megadta a szükséges információt (internetcím, a kibocsátó
+            hatóság vagy testület, a dokumentáció pontos hivatkozási adatai), amely ezt lehet?vé teszi az ajánlatkér?
+            szerv vagy a közszolgáltató ajánlatkér? számára. Amennyiben szükséges, ehhez csatolni kell a hozzáférésre
+            vonatkozó jóváhagyást), vagy
+        &lt;/p&gt;
+        &lt;p&gt;b) Legkés?bb 2018. október 18-án (a 2014/24/EU irányelv 59. cikke (5) bekezdése második albekezdésének
+            nemzeti végrehajtásától függ?en) az ajánlatkér? szervnek vagy a közszolgáltató ajánlatkér?nek már birtokában
+            van az érintett dokumentáció.
+        &lt;/p&gt;
+        &lt;p&gt;Alulírott(ak) hozzájárul(nak) ahhoz, hogy [az I. rész A. szakaszában megadott ajánlatkér? szerv vagy
+            közszolgáltató ajánlatkér?] hozzáférjen a jelen egységes európai közbeszerzési dokumentum [a megfelel?
+            rész/szakasz/pont azonosítása] alatt a [a közbeszerzési eljárás azonosítása: (rövid ismertetés, hivatkozás
+            az Európai Unió Hivatalos Lapjában közzétett hirdetményre, hivatkozási szám)] céljára megadott információkat
+            igazoló dokumentumokhoz.
+        &lt;/p&gt;
+    </entry>
+    <entry key="espd.part5.export">Exportálás</entry>
+    <entry key="espd.part5.export.content">Az ?Exportálás? gombra kattintva letöltheti és elmentheti az ESPD-fájlt a
+        számítógépére. Az ajánlatkér? szerveknek biztosítaniuk kell azt, hogy ez az ESPD-fájl az egyéb közbeszerzési
+        dokumentumokkal együtt elérhet? legyen a gazdasági szerepl?k számára.
+    </entry>
+    <entry key="espd.part5.header">Befejezés</entry>
+    <entry key="espd.part5.reduction">V. rész: Az alkalmasnak min?sített részvételre jelentkez?k számának csökkentése
+    </entry>
+    <entry key="espd.part5.reduction.question">A gazdasági szerepl? kijelenti a következ?ket:</entry>
+    <entry key="espd.part5.text.eo.declares.that">Ha e tanúsítványok vagy egyéb igazolások valamelyike elektronikus
+        formában rendelkezésre áll, kérjük, hogy mindegyikre nézve adja meg a következ? információkat:
+    </entry>
+    <entry key="espd.part5.title.eo.declares.that">A következ? módon felel meg a részvételre jelentkez?k számának
+        csökkentésére alkalmazandó objektív és megkülönböztetésmentes szempontoknak vagy szabályoknak:&lt;p&gt;Amennyiben
+            bizonyos tanúsítványok vagy egyéb igazolások szükségesek, kérjük, tüntesse fel mindegyikre nézve, hogy a
+            gazdasági szerepl? rendelkezik-e az el?írt dokumentumokkal:
+        &lt;/p&gt;
+    </entry>
+    <entry key="espd.part5.toptext">A gazdasági szerepl?nek kizárólag abban az esetben kell információt megadnia, ha az
+        ajánlatkér? szerv vagy a közszolgáltató ajánlatkér? meghatározta az ajánlattételre vagy a párbeszédben való
+        részvételre felhívandó részvételre jelentkez?k számának csökkentésére alkalmazandó objektív és
+        megkülönböztetésmentes szempontokat vagy szabályokat. Ez az információ, amelyhez kapcsolódhatnak a
+        tanúsítványokra és egyéb igazolásokra (és azok típusára) vonatkozó követelmények, ha vannak ilyenek, a vonatkozó
+        hirdetményben vagy a hirdetményben hivatkozott közbeszerzési dokumentumokban található. Csak meghívásos eljárás,
+        tárgyalásos eljárás, versenypárbeszéd és innovációs partnerség esetében:
+    </entry>
+    <entry key="espd.part4.alert">Az ajánlatkér? szerveknek ? a vonatkozó szempontok el?tti négyzet bejelölésével ? meg
+        kell jelölniük, hogy mely kiválasztási szempontokat fogják alkalmazni.
+    </entry>
+    <entry key="espd.part4.economic.and.financial.standing">B: Gazdasági és pénzügyi helyzet</entry>
+    <entry key="espd.part4.header">IV. rész: Kiválasztási szempontok</entry>
+    <entry key="espd.part4.quality.assurance">D: Min?ségbiztosítási rendszerek és környezetgazdálkodási szabványok
+    </entry>
+    <entry key="espd.part4.suitability">A: Alkalmasság szakmai tevékenység végzésére</entry>
+    <entry key="espd.part4.technical.professional.ability">C: Technikai és szakmai alkalmasság</entry>
+    <entry key="espd.part2.add.complete.missing">Ezenkívül kérjük, hogy KIZÁRÓLAG akkor adja meg a hiányzó információkat
+        a IV. rész A., B., C. vagy D. szakaszában (az esett?l függ?en), ha a vonatkozó hirdetmény vagy közbeszerzési
+        dokumentumok ezt el?írják.
+    </entry>
+    <entry key="espd.part2.all.selection.covered">d) A jegyzékbe való felvétel vagy a tanúsítás az összes el?írt
+        kiválasztási szempontra kiterjed?
+    </entry>
+    <entry key="espd.part2.another.vat">Ha nincs héaazonosító szám, más nemzeti azonosító számot tüntessen fel, ha és
+        ahol szükséges.
+    </entry>
+    <entry key="espd.part2.answer.following.parts">Kérjük, válaszolja meg e szakasz további részeit, e rész B. szakaszát
+        és amennyiben releváns, e rész C. szakaszát, adott esetben töltse ki az V. részt, valamint mindenképpen töltse
+        ki és írja alá a VI. részt.
+    </entry>
+    <entry key="espd.part2.birth.date">Születési id?</entry>
+    <entry key="espd.part2.birth.place">Születési hely</entry>
+    <entry key="espd.part2.cert.e.avaliable">b) Ha a jegyzékbe való felvételr?l szóló igazolás vagy tanúsítvány
+        elektronikusan elérhet?, kérjük, adja meg, hol:
+    </entry>
+    <entry key="espd.part2.contact.person">Kapcsolattartó személy vagy személyek:</entry>
+    <entry key="espd.part2.detinfo.of.represent">Amennyiben szükséges, részletezze a képviseletre vonatkozó
+        információkat (a képviselet formája, köre, célja stb.):
+    </entry>
+    <entry key="espd.part2.disworkers.details">Ha szükséges, kérjük, jelölje, hogy az érintett munkavállalók a
+        fogyatékossággal él? vagy hátrányos helyzet? munkavállalók valamely konkrét kategóriájába tartoznak-e.
+    </entry>
+    <entry key="espd.part2.doc.e.avaliable">Ha a vonatkozó információ elektronikusan elérhet?, kérjük, adja meg a
+        következ? információkat:
+    </entry>
+    <entry key="espd.part2.email">E-mail cím:</entry>
+    <entry key="espd.part2.ensure.others.espd">Kérjük, legyen rá gondja, hogy a többi érintett külön ESPD-nyomtatványt
+        nyújtson be.
+    </entry>
+    <entry key="espd.part2.eo.approved.cert">Adott esetben a gazdasági szerepl? szerepel-e az elismert gazdasági
+        szerepl?k hivatalos jegyzékében, vagy rendelkezik-e azzal egyenérték? igazolással (pl. nemzeti (el?)min?sítési
+        rendszer keretében)?
+    </entry>
+    <entry key="espd.part2.eo.group.role">a) Kérjük, adja meg a gazdasági szerepl? csoportban betöltött szerepét
+        (vezet?, specifikus feladatokért felel?s, ?):
+    </entry>
+    <entry key="espd.part2.eo.has.cert.soc">e) A gazdasági szerepl? tud-e igazolást adni a társadalombiztosítási
+        járulékok és adók megfizetésér?l, vagy meg tudja-e adni azt az információt, amely lehet?vé teszi az ajánlatkér?
+        szerv vagy a közszolgáltató ajánlatkér? számára, hogy közvetlenül beszerezze azt bármely tagország díjmentesen
+        hozzáférhet? nemzeti adatbázisából?
+    </entry>
+    <entry key="espd.part2.eo.rely.other.entities">Az alábbi IV. részben feltüntetett kiválasztási szempontoknak és
+        (adott esetben) az alábbi V. részben feltüntetett kritériumoknak és szabályoknak való megfelelés során a
+        gazdasági szerepl? igénybe veszi-e más szervezetek kapacitásait?
+    </entry>
+    <entry key="espd.part2.first.name">Utónév</entry>
+    <entry key="espd.part2.header">II. rész: A gazdasági szerepl?re vonatkozó információk</entry>
+    <entry key="espd.part2.if.proc.reserved">Csak ha a közbeszerzés fenntartott: A gazdasági szerepl? védett m?hely,
+        szociális vállalkozás vagy védett munkahely-teremtési programok keretében fogja teljesíteni a szerz?dést?
+    </entry>
+    <entry key="espd.part2.info.eo">A: A gazdasági szerepl?re vonatkozó információk</entry>
+    <entry key="espd.part2.info.reliance">C: Más szervezetek kapacitásainak igénybevételére vonatkozó információk
+    </entry>
+    <entry key="espd.part2.info.respresent">B: A gazdasági szerepl? képvisel?ire vonatkozó információk</entry>
+    <entry key="espd.part2.information.subcontractors">D: Információk azokról az alvállalkozókról, akiknek kapacitásait
+        a gazdasági szerepl? nem veszi igénybe
+    </entry>
+    <entry key="espd.part2.information.subcontractors.description">Ha igen, és amennyiben az adatok ismertek, kérjük,
+        sorolja fel a javasolt alvállalkozókat:
+    </entry>
+    <entry key="espd.part2.information.subcontractors.footer">Ha az ajánlatkér? szerv vagy a közszolgáltató ajánlatkér?
+        kifejezetten kéri ezt az információt az I. részben lév? információn kívül, akkor kérjük, adja meg az e rész A.
+        és B. szakaszában és a III. részben el?írt információt mindegyik érintett alvállalkozóra (alvállakozói
+        kategóriára) nézve.
+    </entry>
+    <entry key="espd.part2.information.subcontractors.header">(Ezt a szakaszt csak akkor kell kitölteni, ha az
+        ajánlatkér? szerv vagy a közszolgáltató ajánlatkér? kifejezetten el?írja ezt az információt.)
+    </entry>
+    <entry key="espd.part2.information.subcontractors.title">Szándékozik-e a gazdasági szerepl? a szerz?dés bármely
+        részét alvállalkozásba adni harmadik félnek?
+    </entry>
+    <entry key="espd.part2.internet.addr.if.exists">Internetcím (adott esetben):</entry>
+    <entry key="espd.part2.is.eo.proc.together">A gazdasági szerepl? másokkal együtt vesz részt a közbeszerzési
+        eljárásban?
+    </entry>
+    <entry key="espd.part2.is.eo.sized">A gazdasági szerepl? mikro-, kis- vagy középvállalkozás?</entry>
+    <entry key="espd.part2.is.eo.sized.tooltip">Lásd a Bizottság 2003. május 6-i ajánlását a mikro-, kis és
+        középvállalkozások meghatározásáról (HL L 124., 2003.5.20., 36. o.). Ez az információ csak statisztikai célból
+        szükséges. Mikrovállalkozás: olyan vállalkozás, amely 10-nél kevesebb f?t foglalkoztat, és amelynek éves
+        forgalma és/vagy éves mérlegf?összege nem haladja meg a 2 millió eurót; Kisvállalkozás: olyan vállalkozás, amely
+        50-nél kevesebb f?t foglalkoztat, és amelynek éves forgalma és/vagy éves mérlegf?összege nem haladja meg a 10
+        millió eurót; Középvállalkozás: olyan vállalkozás, amely nem mikro- és nem kisvállalkozás, és amely 250-nél
+        kevesebb f?t foglalkoztat, és amelynek éves forgalma nem haladja meg az 50 millió eurót, és/vagy éves
+        mérlegf?összege nem haladja meg a 43 millió eurót.
+    </entry>
+    <entry key="espd.part2.last.name">Vezetéknév</entry>
+    <entry key="espd.part2.lots.concerned">Adott esetben annak a résznek (azoknak a részeknek) a feltüntetése, amelyekre
+        a gazdasági szerepl? pályázni kíván:
+    </entry>
+    <entry key="espd.part2.name">Név:</entry>
+    <entry key="espd.part2.name.part.group">c) Adott esetben a részt vev? csoport neve:</entry>
+    <entry key="espd.part2.other.eo.part">b) Kérjük, adja meg, mely gazdasági szerepl?k a közbeszerzési eljárásban
+        együtt részt vev? csoport tagjai:
+    </entry>
+    <entry key="espd.part2.percentage.disworkers">Mi a fogyatékossággal él? vagy hátrányos helyzet? munkavállalók
+        százalékos aránya?
+    </entry>
+    <entry key="espd.part2.person.empowered">Adott esetben adja meg azon személyek nevét és címét, akik a jelen
+        közbeszerzési eljárásban jogosultak képviselni a gazdasági szerepl?t:
+    </entry>
+    <entry key="espd.part2.pos.act.in.capacity">Beosztás/milyen min?ségben jár el:</entry>
+    <entry key="espd.part2.postal.adress">Postai cím:</entry>
+    <entry key="espd.part2.provide.regnumber">a) Kérjük, adott esetben adja meg a vonatkozó nyilvántartási vagy
+        igazolási számot:
+    </entry>
+    <entry key="espd.part2.ref.for.cert">c) Kérjük, tüntesse fel a referenciákat, amelyeken a jegyzékbe való felvétel
+        vagy a tanúsítás alapul, és adott esetben a hivatalos jegyzékben elért min?sítést:
+    </entry>
+    <entry key="espd.part2.separate.espd.sections.a.b">Kérjük, minden egyes érintett szervezetre vonatkozóan külön
+        egységes európai közbeszerzési dokumentumban adja meg az e rész A. és B. szakaszában, valamint a III. részben
+        meghatározott információkat, megfelel?en kitöltve és az érintett szervezetek által aláírva.<p/>Felhívjuk a
+        figyelmet, hogy ennek magában kell foglalnia azokat a szakembereket vagy m?szaki szervezeteket, akik/amelyek nem
+        tartoznak közvetlenül a gazdasági szerepl? vállalkozásához, különösen a min?ség-ellen?rzés felel?seit, továbbá
+        építési beruházásra irányuló közbeszerzési szerz?dés esetében azon szakembereket vagy m?szaki szervezeteket,
+        akiket/amelyeket a gazdasági szerepl? a beruházás kivitelezéséhez igénybe vehet.<p/>Amennyiben a gazdasági
+        szerepl? által igénybe vett meghatározott kapacitások tekintetében ez releváns, minden egyes szervezetre
+        vonatkozóan adja meg a IV. és az V. részben meghatározott információkat is.
+    </entry>
+    <entry key="espd.part2.telephone">Telefon:</entry>
+    <entry key="espd.part2.vat">Héaazonosító szám (uniós adószám), adott esetben:</entry>
+    <entry key="espd.part2sel.alert">A gazdasági szerepl?nek kizárólag abban az esetben kell információt megadnia,
+        amennyiben az érintett kiválasztási szempontot az ajánlatkér? szerv vagy a közszolgáltató ajánlatkér? el?írta a
+        vonatkozó hirdetményben vagy a hirdetményben hivatkozott közbeszerzési dokumentumokban.
+    </entry>
+    <entry key="espd.crit.amount">Összeg</entry>
+    <entry key="espd.crit.amount.concerned">Az érintett összeg</entry>
+    <entry key="espd.crit.average.turnover">Kibocsátó</entry>
+    <entry key="espd.crit.code">Kód</entry>
+    <entry key="espd.crit.country.member.state">Az érintett ország vagy tagállam</entry>
+    <entry key="espd.crit.date">Dátum</entry>
+    <entry key="espd.crit.date.of.conviction">Az ítélet dátuma</entry>
+    <entry key="espd.part3.crit.date.of.conviction.or.decision">Kérjük, adja meg az ítélet vagy a határozat dátumát.
+    </entry>
+    <entry key="espd.crit.decision.final.and.binding">Amennyiben a kötelezettségszegés megállapítása bírósági vagy
+        közigazgatási határozattal történt, a határozat joger?s és kötelez? volt?
+    </entry>
+    <entry key="espd.crit.description">Leírás</entry>
+    <entry key="espd.crit.do.you.allow.checks">Lehet?vé teszi Ön a vizsgálatokat?</entry>
+    <entry key="espd.crit.end.date">Évek száma</entry>
+    <entry key="espd.part3.crit.eu.main.breaching.obligations">A 2014/24/EU irányelv 57. cikkének (4) bekezdése a
+        következ? kizárási okokat határozza meg:
+    </entry>
+    <entry key="espd.part3.crit.eu.eo.main.breaching.obligations">A 2014/24/EU irányelv 57. cikkének (4) bekezdése a
+        következ? kizárási okokat határozza meg:
+    </entry>
+    <entry key="espd.part3.crit.eu.main.purely.national">Vonatkoznak-e a gazdasági szerepl?re azok a tisztán nemzeti
+        kizárási okok, amelyeket a vonatkozó hirdetmény vagy a közbeszerzési dokumentumok meghatároznak?
+    </entry>
+    <entry key="espd.part3.crit.eu.grounds.criminal.conv.main.title">A 2014/24/EU irányelv 57. cikkének (1) bekezdése a
+        következ? kizárási okokat határozza meg:
+    </entry>
+    <entry key="espd.part3.crit.eu.eo.grounds.criminal.conv.main.title">A 2014/24/EU irányelv 57. cikkének (1) bekezdése
+        a következ? kizárási okokat határozza meg:
+    </entry>
+    <entry key="espd.part3.crit.eu.payment.taxes.main.title">A 2014/24/EU irányelv 57. cikkének (2) bekezdése a
+        következ? kizárási okokat határozza meg:
+    </entry>
+    <entry key="espd.part3.crit.eu.eo.payment.taxes.main.title">A 2014/24/EU irányelv 57. cikkének (2) bekezdése a
+        következ? kizárási okokat határozza meg:
+    </entry>
+    <entry key="espd.crit.eu.text.agreement.economic">Kötött-e a gazdasági szerepl? a verseny torzítását célzó
+        megállapodást más gazdasági szerepl?kkel?
+    </entry>
+    <entry key="espd.crit.eu.text.arrangement.creditors">A gazdasági szerepl? hitelez?kkel cs?degyezséget kötött-e?
+    </entry>
+    <entry key="espd.crit.eu.text.bankrupt">A gazdasági szerepl? cs?deljárás alatt áll-e?</entry>
+    <entry key="espd.crit.eu.text.breaching.obligations.environmental">A gazdasági szerepl? tudomása szerint megszegte-e
+        kötelezettségeit a környezetvédelmi jog terén? E közbeszerzés alkalmazásában a nemzeti jogban, a vonatkozó
+        hirdetményben vagy a közbeszerzési dokumentumokban vagy a 2014/24/EU irányelv 18. cikke (2) bekezdésében
+        hivatkozottak szerint.
+    </entry>
+    <entry key="espd.crit.eu.text.breaching.obligations.labour">A gazdasági szerepl? tudomása szerint megszegte-e
+        kötelezettségeit a munkajog terén? E közbeszerzés alkalmazásában a nemzeti jogban, a vonatkozó hirdetményben
+        vagy a közbeszerzési dokumentumokban vagy a 2014/24/EU irányelv 18. cikke (2) bekezdésében hivatkozottak
+        szerint.
+    </entry>
+    <entry key="espd.crit.eu.text.breaching.obligations.social">A gazdasági szerepl? tudomása szerint megszegte-e
+        kötelezettségeit a szociális jog terén? E közbeszerzés alkalmazásában a nemzeti jogban, a vonatkozó
+        hirdetményben vagy a közbeszerzési dokumentumokban vagy a 2014/24/EU irányelv 18. cikke (2) bekezdésében
+        hivatkozottak szerint.
+    </entry>
+    <entry key="espd.crit.eu.text.child.labour">Joger?sen elítélték-e a gazdasági szerepl?t vagy a gazdasági szerepl?
+        igazgató, vezet? vagy felügyel? testületének tagját, illetve az e testületek képviseletére, az azokban való
+        döntéshozatalra vagy azok kontrolljára vonatkozó jogkörrel rendelkez? tagját gyermekmunkáért és az
+        emberkereskedelem más formáiért olyan ítéletben, amelyet nem több, mint öt évvel ezel?tt hoztak, vagy amelyben a
+        közvetlenül meghatározott kizárás id?tartama továbbra is alkalmazandó? Az emberkereskedelem megel?zésér?l, és az
+        ellene folytatott küzdelemr?l, az áldozatok védelmér?l, valamint a 2002/629/IB tanácsi kerethatározat
+        felváltásáról szóló, 2011. április 5-i 2011/36/EU európai parlamenti és tanácsi irányelv (HL L 101., 2011.4.15.,
+        1. o.) 2. cikkében meghatározottak szerint.
+    </entry>
+    <entry key="espd.crit.eu.text.conflict.interest">Van-e tudomása a gazdasági szerepl?nek bármilyen ?a nemzeti jog, a
+        vonatkozó hirdetmény vagy a közbeszerzési dokumentumok szerinti ? összeférhetetlenségr?l a közbeszerzési
+        eljárásban való részvételéb?l fakadóan?
+    </entry>
+    <entry key="espd.crit.eu.text.corruption">Joger?sen elítélték-e a gazdasági szerepl?t vagy a gazdasági szerepl?
+        igazgató, vezet? vagy felügyel? testületének tagját, illetve az e testületek képviseletére, az azokban való
+        döntéshozatalra vagy azok kontrolljára vonatkozó jogkörrel rendelkez? tagját korrupcióért olyan ítéletben,
+        amelyet nem több, mint öt évvel ezel?tt hoztak, vagy amelyben a közvetlenül meghatározott kizárás id?tartama
+        továbbra is alkalmazandó? Az Európai Közösségek tisztvisel?it és az Európai Unió tagállamainak tisztvisel?it
+        érint? korrupció elleni küzdelemr?l szóló egyezmény (HL C 195., 1997.6.25., 1. o.) 3. cikkében és a Tanács 2003.
+        július 22-i, a magánszektorban tapasztalható korrupció elleni küzdelemr?l szóló 2003/568/IB kerethatározatának
+        (HL L 192., 2003.7.31., 54. o.) 2. cikke (1) bekezdésében meghatározottak szerint. Ez a kizárási ok magában
+        foglalja az ajánlatkér? szerv (közszolgáltató ajánlatkér?) vagy a gazdasági szerepl? nemzeti jogában
+        meghatározott korrupciót is.
+    </entry>
+    <entry key="espd.crit.eu.text.early.termination">Tapasztalta-e a gazdasági szerepl? valamely korábbi közbeszerzési
+        szerz?dés vagy egy ajánlatkér? szervvel kötött korábbi szerz?dés vagy korábbi koncessziós szerz?dés lejárat
+        el?tti megszüntetését vagy az említett korábbi szerz?déshez kapcsolódó kártérítési követelést vagy egyéb hasonló
+        szankciókat?
+    </entry>
+    <entry key="espd.crit.eu.text.fraud">Joger?sen elítélték-e a gazdasági szerepl?t vagy a gazdasági szerepl? igazgató,
+        vezet? vagy felügyel? testületének tagját, illetve az e testületek képviseletére, az azokban való
+        döntéshozatalra vagy azok kontrolljára vonatkozó jogkörrel rendelkez? tagját csalásért olyan ítéletben, amelyet
+        nem több, mint öt évvel ezel?tt hoztak, vagy amelyben a közvetlenül meghatározott kizárás id?tartama továbbra is
+        alkalmazandó? Az Európai Közösségek pénzügyi érdekeinek védelmér?l szóló egyezmény 1. cikke értelmében (HL C
+        316., 1995.11.27., 48. o.)
+    </entry>
+    <entry key="espd.crit.eu.text.grounds.criminal.conv">Joger?sen elítélték-e a gazdasági szerepl?t vagy a gazdasági
+        szerepl? igazgató, vezet? vagy felügyel? testületének tagját, illetve az e testületek képviseletére, az azokban
+        való döntéshozatalra vagy azok kontrolljára vonatkozó jogkörrel rendelkez? tagját b?nszervezetben való
+        részvételért olyan ítéletben, amelyet nem több, mint öt évvel ezel?tt hoztak, vagy amelyben a közvetlenül
+        meghatározott kizárás id?tartama továbbra is alkalmazandó? A szervezett b?nözés elleni küzdelemr?l szóló, 2008.
+        október 24-i 2008/841/IB tanácsi kerethatározat (HL L 300., 2008.11.11., 42. o.) 2. cikkében meghatározottak
+        szerint.
+    </entry>
+    <entry key="espd.crit.eu.text.guilty.misconduct">Elkövetett-e a gazdasági szerepl? súlyos szakmai kötelességszegést?
+        Adott esetben lásd a nemzeti jog, a vonatkozó hirdetmény vagy a közbeszerzési dokumentumok meghatározásait.
+    </entry>
+    <entry key="espd.crit.eu.text.guilty.misinterpretation">Került-e a gazdasági szerepl? a következ? helyzetek
+        valamelyikébe?<p/>a) a kizárási okok fenn nem állásának, illetve a kiválasztási szempontok teljesülésének
+        ellen?rzéséhez szükséges információk szolgáltatása során hamis nyilatkozatot tett,<p/>b) visszatartott ilyen
+        információt,<p/>c) nem tudta határid?re benyújtani az ajánlatkér? szerv vagy a közszolgáltató ajánlatkér? által
+        bekért kiegészít? iratokat,<p/>d) megkísérelte jogtalanul befolyásolni az ajánlatkér? szerv vagy a
+        közszolgáltató ajánlatkér? döntéshozatali folyamatát, vagy olyan bizalmas információkat próbált megszerezni,
+        amelyek jogtalan el?nyöket biztosítanának számára a közbeszerzési eljárásban, vagy gondatlanságból olyan
+        félrevezet? információkat szolgáltatott, amelyek érdemben befolyásolhatják a kizárásra, a kiválasztásra vagy az
+        odaítélésre vonatkozó döntéseket.
+    </entry>
+    <entry key="espd.crit.eu.text.insolvency">A gazdasági szerepl? fizetésképtelenségi eljárás vagy felszámolási eljárás
+        alatt áll-e?
+    </entry>
+    <entry key="espd.crit.eu.text.involvement">Nyújtott-e a gazdasági szerepl? vagy valamely hozzá kapcsolódó
+        vállalkozás tanácsadást az ajánlatkér? szervnek vagy a közszolgáltató ajánlatkér?nek, vagy részt vett-e más
+        módon a közbeszerzési eljárás el?készítésében?
+    </entry>
+    <entry key="espd.crit.eu.text.liquidator">A gazdasági szerepl? vagyonát felszámoló vagy bíróság kezeli-e?</entry>
+    <entry key="espd.crit.eu.text.money.laundering">Joger?sen elítélték-e a gazdasági szerepl?t vagy a gazdasági
+        szerepl? igazgató, vezet? vagy felügyel? testületének tagját, illetve az e testületek képviseletére, az azokban
+        való döntéshozatalra vagy azok kontrolljára vonatkozó jogkörrel rendelkez? tagját pénzmosásért vagy terrorizmus
+        finanszírozásáért olyan ítéletben, amelyet nem több, mint öt évvel ezel?tt hoztak, vagy amelyben a közvetlenül
+        meghatározott kizárás id?tartama továbbra is alkalmazandó? A pénzügyi rendszereknek a pénzmosás, valamint
+        terrorizmus finanszírozása céljára való felhasználásának megel?zésér?l szóló, 2005. október 26-i 2005/60/EK
+        európai parlamenti és tanácsi irányelv (HL L 309., 2005.11.25., 15. o.) 1. cikkében meghatározottak szerint.
+    </entry>
+    <entry key="espd.crit.eu.text.national.bankruptcy">A gazdasági szerepl? a nemzeti törvények és rendeletek szerinti
+        hasonló eljárás következtében bármely, a cs?dhöz hasonló helyzetben van-e?
+    </entry>
+    <entry key="espd.crit.eu.text.payment.social.security">Megszegte-e a gazdasági szerepl? a társadalombiztosítási
+        járulékok megfizetésére irányuló kötelezettségét akár a székhelye szerinti országban, akár az ajánlatkér? szerv
+        vagy a közszolgáltató ajánlatkér? tagállamában, ha ez eltér a székhely szerinti országtól?
+    </entry>
+    <entry key="espd.crit.eu.text.payment.taxes">Megszegte-e a gazdasági szerepl? adófizetési kötelezettségét akár a
+        székhelye szerinti országban, akár az ajánlatkér? szerv vagy a közszolgáltató ajánlatkér? tagállamában, ha ez
+        eltér a székhely szerinti országtól?
+    </entry>
+    <entry key="espd.crit.eu.text.purely.national">Egyéb, adott esetben az ajánlatkér? szerv vagy a közszolgáltató
+        ajánlatkér? tagállamának nemzeti jogszabályaiban el?írt kizárási okok Vonatkoznak-e a gazdasági szerepl?re azok
+        a tisztán nemzeti kizárási okok, amelyeket a vonatkozó hirdetmény vagy a közbeszerzési dokumentumok
+        meghatároznak?
+    </entry>
+    <entry key="espd.crit.eu.text.suspended.business">A gazdasági szerepl? felfüggesztette-e üzleti tevékenységét?
+    </entry>
+    <entry key="espd.crit.eu.text.terrorist">Joger?sen elítélték-e a gazdasági szerepl?t vagy a gazdasági szerepl?
+        igazgató, vezet? vagy felügyel? testületének tagját, illetve az e testületek képviseletére, az azokban való
+        döntéshozatalra vagy azok kontrolljára vonatkozó jogkörrel rendelkez? tagját terrorista b?ncselekményért vagy
+        terrorista tevékenységekkel összefügg? b?ncselekményért olyan ítéletben, amelyet nem több, mint öt évvel ezel?tt
+        hoztak, vagy amelyben a közvetlenül meghatározott kizárás id?tartama továbbra is alkalmazandó? A terrorizmus
+        elleni küzdelemr?l szóló, 2002. június 13-i 2002/475/IB tanácsi kerethatározat (HL L 164., 2002.6.22., 3. o.) 1.
+        és 3. cikkében meghatározottak szerint. Ez a kizárási ok magában foglalja az említett kerethatározat 4. cikke
+        szerinti, b?ncselekményre való felbujtást, b?nsegélyt vagy kísérletet.
+    </entry>
+    <entry key="espd.crit.eu.title.agreement.economic">A verseny torzítását célzó megállapodás más gazdasági
+        szerepl?kkel
+    </entry>
+    <entry key="espd.crit.eu.title.arrangement.creditors">Cs?degyezség hitelez?kkel</entry>
+    <entry key="espd.crit.eu.title.bankrupt">Cs?deljárás</entry>
+    <entry key="espd.part3.crit.eu.eo.bankrupt.title">Az Ön szervezete cs?deljárás, fizetésképtelenségi eljárás vagy
+        felszámolási eljárás alatt áll-e, vagy cs?degyezséget kötött-e hitelez?kkel, vagy a nemzeti törvények és
+        rendeletek szerinti hasonló eljárás következtében bármely hasonló helyzetben van-e?
+    </entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.environmental">Környezetvédelmi jogszabályokban foglalt
+        kötelezettségek megszegése
+    </entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.environmental.eo">Környezetvédelmi jogszabályokban foglalt
+        kötelezettségek megszegése
+    </entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.labour">Munkajogi szabályozásban foglalt kötelezettségek
+        megszegése
+    </entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.social">Szociális jogszabályokban foglalt kötelezettségek
+        megszegése
+    </entry>
+    <entry key="espd.crit.eu.title.child.labour">Gyermekmunka és az emberkereskedelem más formái</entry>
+    <entry key="espd.crit.eu.title.conflict.interest">A közbeszerzési eljárásban való részvételb?l fakadó
+        összeférhetetlenség
+    </entry>
+    <entry key="espd.crit.eu.title.conflict.interest.eo">Érintett-e az Ön szervezete bármilyen összeférhetetlenségben a
+        közbeszerzési eljárásban való részvételéb?l fakadóan?
+    </entry>
+    <entry key="espd.crit.eu.title.corruption">Korrupció</entry>
+    <entry key="espd.crit.eu.title.early.termination">Lejárat el?tti megszüntetés, kártérítési követelés vagy egyéb
+        hasonló szankciók
+    </entry>
+    <entry key="espd.crit.eu.title.fraud">Csalás</entry>
+    <entry key="espd.crit.eu.title.grounds.criminal.conv">B?nszervezetben való részvétel</entry>
+    <entry key="espd.crit.eu.title.guilty.misconduct">Súlyos szakmai kötelességszegés elkövetése</entry>
+    <entry key="espd.crit.eu.title.guilty.misconduct.eo">Elkövetett-e az Ön szervezete súlyos szakmai
+        kötelességszegést?
+    </entry>
+    <entry key="espd.crit.eu.title.guilty.misinterpretation">Megtévesztés, információ visszatartása, képtelenség a
+        szükséges iratok benyújtására, bizalmas információk megszerzése.
+    </entry>
+    <entry key="espd.crit.eu.title.insolvency">Fizetésképtelenség</entry>
+    <entry key="espd.crit.eu.title.involvement">Közvetlen vagy közvetett részvétel a közbeszerzési eljárás
+        el?készítésében
+    </entry>
+    <entry key="espd.crit.eu.title.involvement.eo">Nyújtott-e az Ön szervezete vagy valamely ahhoz kapcsolódó
+        vállalkozás tanácsadást az ajánlatkér? szervnek, vagy részt vett-e más módon a közbeszerzési eljárás
+        el?készítésében?
+    </entry>
+    <entry key="espd.crit.eu.title.liquidator">Felszámoló által kezelt vagyon</entry>
+    <entry key="espd.crit.eu.title.money.laundering">Pénzmosás vagy terrorizmus finanszírozása</entry>
+    <entry key="espd.crit.eu.title.national.bankruptcy">A nemzeti törvények értelmében a cs?dhöz hasonló helyzet</entry>
+    <entry key="espd.crit.eu.title.payment.social.security">Társadalombiztosítási járulékfizetés elmulasztása</entry>
+    <entry key="espd.crit.eu.title.payment.taxes">Adófizetés elmulasztása</entry>
+    <entry key="espd.crit.eu.title.purely.national">Tisztán nemzeti kizárási okok</entry>
+    <entry key="espd.crit.eu.title.suspended.business">Üzleti tevékenység felfüggesztése</entry>
+    <entry key="espd.crit.eu.title.terrorist">Terrorista b?ncselekmény vagy terrorista tevékenységekkel összefügg?
+        b?ncselekmény
+    </entry>
+    <entry key="espd.part3.crit.eu.guilty.misconduct.eo.tooltip">Adott esetben lásd a nemzeti jog, a vonatkozó
+        hirdetmény vagy a közbeszerzési dokumentumok meghatározásait
+    </entry>
+    <entry key="espd.crit.explain.certificates.independent.environmental.description">Amennyiben nem, úgy kérjük, adja
+        meg ennek okát, valamint azt, hogy milyen egyéb bizonyítási eszközök bocsáthatók rendelkezésre a
+        környezetvédelmi vezetési rendszereket vagy szabványokat illet?en:
+    </entry>
+    <entry key="espd.part4.crit.explain.certificates.independent.quality.description">Amennyiben nem, úgy kérjük, adja
+        meg ennek okát, valamint azt, hogy milyen egyéb bizonyítási eszközök bocsáthatók rendelkezésre a
+        min?ségbiztosítási rendszert illet?en:
+    </entry>
+    <entry key="espd.part4.crit.explain.supply.contracts.quality.description">Amennyiben nem, úgy kérjük, adja meg ennek
+        okát, és azt, hogy milyen egyéb bizonyítási eszközök bocsáthatók rendelkezésre:
+    </entry>
+    <entry key="espd.crit.information.available.electronically">Ez az információ díjmentesen elérhet? a hatóságok
+        számára valamely uniós tagállam adatbázisában?
+    </entry>
+    <entry key="espd.crit.issuer">Letöltés formátuma</entry>
+    <entry key="espd.crit.length.period.exclusion">Amennyiben err?l az ítélet közvetlenül rendelkezik, a kizárás
+        id?tartama
+    </entry>
+    <entry key="espd.crit.number">Szám</entry>
+    <entry key="espd.crit.number.of.years">Átlagos árbevétel</entry>
+    <entry key="espd.crit.other.than.judicial.or.administrative.decision">A kötelezettségszegés megállapítása bírósági
+        vagy közigazgatási határozattól eltér? módon történt?
+    </entry>
+    <entry key="espd.crit.please.describe.them">Kérjük, ismertesse ezeket</entry>
+    <entry key="espd.crit.please.specify">Kérjük, adja meg a részleteket</entry>
+    <entry key="espd.crit.ratio">Arány</entry>
+    <entry key="espd.crit.reason">Ok</entry>
+    <entry key="espd.crit.reasons.nevertheless.contract">Ismertesse azokat az indokokat, amelyek alapján mindazonáltal
+        képes a szerz?dés teljesítésére. Ezt az információt nem kell megadni, ha ebben az esetben a gazdasági szerepl?k
+        kizárását a nemzeti jog kötelez?vé tette, és arra az esetre sem teszi lehet?vé az eltérést, ha a gazdasági
+        szerepl? mindazonáltal képes a szerz?dés teljesítésére.
+    </entry>
+    <entry key="espd.crit.recipients">Megrendel?k</entry>
+    <entry key="espd.part4.crit.selection.ca.declares.that">A kiválasztási szempontok tekintetében az ajánlatkér? szerv
+        az alábbi feltétel teljesülésének kijelentését várja el a gazdasági szerepl?t?l:
+    </entry>
+    <entry key="espd.part4.crit.selection.ca.economic.article">A 2014/24/EU irányelv 58. cikkének (3) bekezdése a
+        következ? kiválasztási szempontokat határozza meg:
+    </entry>
+    <entry key="espd.part4.crit.selection.declares.that.tooltip">A gazdasági szerepl?nek csak ezt a mez?t kell
+        kitöltenie abban az esetben, ha az ajánlatkér? szerv vagy a közszolgáltató ajánlatkér? a vonatkozó hirdetményben
+        vagy a hirdetményben hivatkozott közbeszerzési dokumentumokban jelezte, hogy a gazdasági szerepl? szorítkozhat a
+        IV. rész e pontjának kitöltésére anélkül, hogy a IV. rész A., B., C. vagy D. szakaszát ki kellene töltenie.
+    </entry>
+    <entry key="espd.crit.selection.economic.average.yearly.turnover.description">A gazdasági szerepl? átlagos éves
+        árbevétele a vonatkozó hirdetményben, a közbeszerzési dokumentumokban vagy az ESPD-ben el?írt számú évben a
+        következ?:
+    </entry>
+    <entry key="espd.crit.selection.economic.average.yearly.turnover.main">Átlagos éves árbevétel</entry>
+    <entry key="espd.crit.selection.economic.financial.ratio.description">A vonatkozó hirdetményben, a közbeszerzési
+        dokumentumokban vagy az ESPD-ben meghatározott pénzügyi mutatók (például az eszközök és a források aránya)
+        tekintetében a gazdasági szerepl? kijelenti, hogy az el?írt mutatók tényleges értékei a következ?k:
+    </entry>
+    <entry key="espd.crit.selection.economic.financial.ratio.main">Pénzügyi mutató</entry>
+    <entry key="espd.crit.selection.economic.financial.standing.article.tooltip">A gazdasági szerepl?nek kizárólag abban
+        az esetben kell információt megadnia, amennyiben az érintett kiválasztási szempontot az ajánlatkér? szerv vagy a
+        közszolgáltató ajánlatkér? el?írta a vonatkozó hirdetményben vagy a hirdetményben hivatkozott közbeszerzési
+        dokumentumokban.
+    </entry>
+    <entry key="espd.crit.selection.economic.general.yearly.turnover.description">A gazdasági szerepl? általános éves
+        árbevétele a vonatkozó hirdetményben, a közbeszerzési dokumentumokban vagy az ESPD-ben el?írt számú pénzügyi
+        évben a következ?:
+    </entry>
+    <entry key="espd.crit.selection.economic.general.yearly.turnover.main">Általános éves árbevétel</entry>
+    <entry key="espd.crit.selection.economic.other.financial.requirements.description">Az esetleges egyéb gazdasági vagy
+        pénzügyi követelmények tekintetében, amelyeket a vonatkozó hirdetményben vagy a közbeszerzési dokumentumokban
+        meghatároztak, a gazdasági szerepl? kijelenti a következ?ket:
+    </entry>
+    <entry key="espd.crit.selection.economic.other.financial.requirements.main">Egyéb gazdasági vagy pénzügyi
+        követelmények
+    </entry>
+    <entry key="espd.crit.selection.economic.professional.risk.insurance.description">Szakmai felel?sségbiztosításának
+        biztosítási összege a következ?:
+    </entry>
+    <entry key="espd.crit.selection.economic.professional.risk.insurance.main">Szakmai felel?sségbiztosítás</entry>
+    <entry key="espd.crit.selection.economic.setup.eo.description">Amennyiben az (általános vagy specifikus) árbevételre
+        vonatkozó információ nem áll rendelkezésre a kért id?szak egészére vonatkozóan, kérjük, adja meg a gazdasági
+        szerepl? létrejöttének dátumát vagy azt az id?pontot, amikor megkezdte üzleti tevékenységét:
+    </entry>
+    <entry key="espd.crit.selection.economic.setup.eo.main">A gazdasági szerepl? létrejötte</entry>
+    <entry key="espd.crit.selection.economic.specific.average.turnover.description">A gazdasági szerepl? átlagos, éves
+        specifikus árbevétele a szerz?dés által érintett üzleti területre vonatkozóan, a vonatkozó hirdetményben, a
+        közbeszerzési dokumentumokban vagy az ESPD-ben el?írt számú évben a következ?:
+    </entry>
+    <entry key="espd.crit.selection.economic.specific.average.turnover.main">Átlagos specifikus árbevétel</entry>
+    <entry key="espd.crit.selection.economic.specific.yearly.turnover.description">A gazdasági szerepl? éves specifikus
+        árbevétele a szerz?dés által érintett üzleti területre vonatkozóan, a vonatkozó hirdetményben, a közbeszerzési
+        dokumentumokban vagy az ESPD-ben el?írt számú pénzügyi évben a következ?:
+    </entry>
+    <entry key="espd.crit.selection.economic.specific.yearly.turnover.main">Éves specifikus árbevétel</entry>
+    <entry key="espd.part4.crit.selection.eo.declares.that">A kiválasztási szempontok tekintetében a gazdasági szerepl?
+        kijelenti a következ?ket:
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.declares.that.tooltip">A gazdasági szerepl?nek csak ezt a mez?t kell
+        kitöltenie abban az esetben, ha az ajánlatkér? szerv vagy a közszolgáltató ajánlatkér? a vonatkozó hirdetményben
+        vagy a hirdetményben hivatkozott közbeszerzési dokumentumokban jelezte, hogy a gazdasági szerepl? szorítkozhat a
+        IV. rész e pontjának kitöltésére anélkül, hogy a IV. rész A., B., C. vagy D. szakaszát ki kellene töltenie.
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.economic.article">A 2014/24/EU irányelv 58. cikkének (3) bekezdése a
+        következ? kiválasztási szempontokat határozza meg:
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.economic.article.tooltip">A gazdasági szerepl?nek kizárólag abban az
+        esetben kell információt megadnia, amennyiben az érintett kiválasztási szempontot az ajánlatkér? szerv vagy a
+        közszolgáltató ajánlatkér? el?írta a vonatkozó hirdetményben vagy a hirdetményben hivatkozott közbeszerzési
+        dokumentumokban.
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.economic.enrolement.description">Be van jegyezve a letelepedés helye
+        szerinti tagállamának vonatkozó szakmai vagy cégnyilvántartásába.
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.economic.enrolement.main">Szakmai vagy cégnyilvántartásba való bejegyzés
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.economic.service.contracts.description">A gazdasági szerepl?nek
+        meghatározott engedéllyel kell-e rendelkeznie vagy meghatározott szervezet tagjának kell-e lennie ahhoz, hogy a
+        gazdasági szerepl? letelepedési helye szerinti országban az adott szolgáltatást nyújthassa?
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.economic.service.contracts.main">Szolgáltatásnyújtásra irányuló szerz?dések
+        esetében: Meghatározott engedéllyel vagy tagsággal kell-e rendelkezni?
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.satisfies.all.criteria">Megfelel valamennyi el?írt kiválasztási
+        szempontnak:
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.article">A 2014/24/EU irányelv 58. cikkének (2) bekezdése a
+        következ? kiválasztási szempontokat határozza meg:
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.article.tooltip">A gazdasági szerepl?nek kizárólag abban az
+        esetben kell információt megadnia, amennyiben az érintett kiválasztási szempontot az ajánlatkér? szerv vagy a
+        közszolgáltató ajánlatkér? el?írta a vonatkozó hirdetményben vagy a hirdetményben hivatkozott közbeszerzési
+        dokumentumokban.
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.enrolment.description">Be van jegyezve a letelepedés helye
+        szerinti tagállamának vonatkozó szakmai vagy cégnyilvántartásába.
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.enrolment.main">Szakmai vagy cégnyilvántartásba való
+        bejegyzés
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.service.contracts.description">A gazdasági szerepl?nek
+        meghatározott engedéllyel kell-e rendelkeznie vagy meghatározott szervezet tagjának kell-e lennie ahhoz, hogy a
+        gazdasági szerepl? letelepedési helye szerinti országban az adott szolgáltatást nyújthassa?
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.service.contracts.main">Szolgáltatásnyújtásra irányuló
+        szerz?dések esetében: Meghatározott engedéllyel vagy tagsággal kell-e rendelkezni?
+    </entry>
+    <entry key="espd.part4.crit.selection.quality.assurance.article">A 2014/24/EU irányelv 62. cikkének (2) bekezdése a
+        következ? kiválasztási szempontokat határozza meg:
+    </entry>
+    <entry key="espd.part4.crit.selection.quality.assurance.tooltip">A gazdasági szerepl?nek kizárólag abban az esetben
+        kell információt megadnia, amennyiben az érintett kiválasztási szempontot az ajánlatkér? szerv vagy a
+        közszolgáltató ajánlatkér? el?írta a vonatkozó hirdetményben vagy a hirdetményben hivatkozott közbeszerzési
+        dokumentumokban.
+    </entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.environmental.description">Be tud-e nyújtani
+        a gazdasági szerepl? olyan, független testület által kiállított igazolást, amely tanúsítja, hogy a gazdasági
+        szerepl? az el?írt környezetvédelmi vezetési rendszereknek vagy szabványoknak megfelel?
+    </entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.environmental.main">Független testületek
+        által kiállított igazolás a környezetvédelmi vezetési rendszereknek vagy szabványoknak való megfelelésr?l
+    </entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.quality.description">Be tud-e nyújtani a
+        gazdasági szerepl? olyan, független testület által kiállított igazolást, amely tanúsítja, hogy a gazdasági
+        szerepl? egyes meghatározott min?ségbiztosítási szabványoknak megfelel, ideértve a fogyatékossággal él?k számára
+        biztosított hozzáférésére vonatkozó szabványokat is?
+    </entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.quality.main">Független testületek által
+        kiállított igazolás a min?ségbiztosítási szabványoknak való megfelelésr?l
+    </entry>
+    <entry key="espd.part4.crit.selection.satisfies.all.criteria">A gazdasági szerepl? megfelel a vonatkozó
+        hirdetményben vagy a hirdetményben hivatkozott közbeszerzési dokumentumokban foglalt valamennyi kiválasztási
+        szempontnak.
+    </entry>
+    <entry key="espd.part4.crit.selection.suitability.article">A 2014/24/EU irányelv 58. cikkének (2) bekezdése a
+        következ? kiválasztási szempontokat határozza meg:
+    </entry>
+    <entry key="espd.part4.crit.selection.suitability.article.tooltip">A gazdasági szerepl?nek csak ezt a mez?t kell
+        kitöltenie abban az esetben, ha az ajánlatkér? szerv vagy a közszolgáltató ajánlatkér? a vonatkozó hirdetményben
+        vagy a hirdetményben hivatkozott közbeszerzési dokumentumokban jelezte, hogy a gazdasági szerepl? szorítkozhat a
+        IV. rész ? szakaszának kitöltésére anélkül, hogy a IV. rész bármely további szakaszát ki kellene töltenie.
+    </entry>
+    <entry key="espd.crit.selection.suitability.enrolment.professional.register.description">Be van jegyezve a
+        letelepedés helye szerinti tagállamának a 2014/24/EU irányelv XI. mellékletében említett, vonatkozó szakmai
+        nyilvántartásába; egyes tagállamok gazdasági szerepl?inek egyes esetekben az adott mellékletben meghatározott
+        egyéb követelményeknek is meg kell felelniük.
+    </entry>
+    <entry key="espd.crit.selection.suitability.enrolment.professional.register.main">Vonatkozó szakmai nyilvántartásba
+        való bejegyzés
+    </entry>
+    <entry key="espd.crit.selection.suitability.enrolment.trade.register.description">Be van jegyezve a letelepedés
+        helye szerinti tagállamának a 2014/24/EU irányelv XI. mellékletében említett, vonatkozó cégnyilvántartásába;
+        egyes tagállamok gazdasági szerepl?inek egyes esetekben az adott mellékletben meghatározott egyéb
+        követelményeknek is meg kell felelniük.
+    </entry>
+    <entry key="espd.crit.selection.suitability.enrolment.trade.register.main">Vonatkozó cégnyilvántartásba való
+        bejegyzés
+    </entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.auth.description">Meghatározott engedély szükséges-e
+        ahhoz, hogy a gazdasági szerepl? a letelepedési helye szerinti országban az adott szolgáltatást nyújthassa?
+    </entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.auth.main">Szolgáltatásnyújtásra irányuló szerz?dések
+        esetében: meghatározott engedélyre van-e szükség?
+    </entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.membership.description">A gazdasági szerepl?nek
+        meghatározott szervezet tagjának kell-e lennie ahhoz, hogy a letelepedési helye szerinti országban az adott
+        szolgáltatást nyújthassa?
+    </entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.membership.main">Szolgáltatásnyújtásra irányuló
+        szerz?dések esetében: meghatározott szervezet tagjának kell-e lenni?
+    </entry>
+    <entry key="espd.crit.selection.technical.allowance.of.checks.description">Összetett leszállítandó termékek vagy
+        teljesítend? szolgáltatások, vagy ? rendkívüli esetben ? különleges célra szolgáló termékek vagy szolgáltatások
+        esetében: A gazdasági szerepl? lehet?vé teszi termelési vagy m?szaki kapacitásaira, és amennyiben szükséges, a
+        rendelkezésére álló tanulmányi és kutatási eszközökre és min?ség-ellen?rzési intézkedéseire vonatkozó
+        vizsgálatok elvégzését. A vizsgálatot az ajánlatkér? szerv vagy ? amennyiben az utóbbi ezt jóváhagyja ? nevében
+        a szállító/szolgáltató székhelye szerinti ország egy erre illetékes hivatalos szerve végezheti el.
+    </entry>
+    <entry key="espd.crit.selection.technical.allowance.of.checks.main">Vizsgálatok lehet?vé tétele</entry>
+    <entry key="espd.crit.selection.technical.average.annual.manpower.description">A gazdasági szerepl? átlagos éves
+        statisztikai állományi létszáma az utolsó három évre vonatkozóan a következ? volt:
+    </entry>
+    <entry key="espd.crit.selection.technical.average.annual.manpower.main">Átlagos statisztikai állományi létszám
+    </entry>
+    <entry key="espd.crit.selection.technical.educational.professional.qualifications.description">A szolgáltató vagy
+        maga a vállalkozó, és/vagy (a vonatkozó hirdetményben vagy a közbeszerzési dokumentumokban foglalt
+        követelményekt?l függ?en) annak vezet?i személyzete a következ? iskolai végzettséggel és szakképzettséggel
+        rendelkeznek:
+    </entry>
+    <entry key="espd.crit.selection.technical.educational.professional.qualifications.main">Iskolai végzettség és
+        szakképzettség
+    </entry>
+    <entry key="espd.crit.selection.technical.environment.management.features.description">A gazdasági szerepl? a
+        következ? környezetgazdálkodási intézkedéseket tudja alkalmazni a szerz?dés teljesítése során:
+    </entry>
+    <entry key="espd.crit.selection.technical.environment.management.features.main">Környezetgazdálkodási intézkedések
+    </entry>
+    <entry key="espd.crit.selection.technical.number.managerial.staff.description">A gazdasági szerepl? vezet?i létszáma
+        az utolsó három évre vonatkozóan a következ? volt:
+    </entry>
+    <entry key="espd.crit.selection.technical.number.managerial.staff.main">Vezet?i létszám</entry>
+    <entry key="espd.part4.crit.selection.technical.professional.ability.article">A 2014/24/EU irányelv 58. cikkének (4)
+        bekezdése a következ? kiválasztási szempontokat határozza meg:
+    </entry>
+    <entry key="espd.part4.crit.selection.technical.professional.ability.article.tooltip">A gazdasági szerepl?nek
+        kizárólag abban az esetben kell információt megadnia, amennyiben az érintett kiválasztási szempontot az
+        ajánlatkér? szerv vagy a közszolgáltató ajánlatkér? el?írta a vonatkozó hirdetményben vagy a hirdetményben
+        hivatkozott közbeszerzési dokumentumokban.
+    </entry>
+    <entry key="espd.crit.selection.technical.service.contracts.performance.services.description">Csak
+        szolgáltatásnyújtásra irányuló közbeszerzési szerz?dések esetében: A referencia-id?szak folyamán a gazdasági
+        szerepl? a meghatározott típusokon belül a következ? f?bb szolgáltatásokat nyújtotta. Az ajánlatkér? szervek nem
+        több, mint három évet írhatnak el?, és elfogadhatnak három évnél régebbi tapasztalatot.
+    </entry>
+    <entry key="espd.crit.selection.technical.service.contracts.performance.services.main">Szolgáltatásnyújtásra
+        irányuló szerz?dések esetében: a meghatározott típusú szolgáltatások nyújtása
+    </entry>
+    <entry key="espd.crit.selection.technical.study.research.facilities.description">A gazdasági szerepl? a következ?
+        tanulmányi és kutatási létesítményeket veszi igénybe:
+    </entry>
+    <entry key="espd.crit.selection.technical.study.research.facilities.main">Tanulmányi és kutatási létesítmények
+    </entry>
+    <entry key="espd.crit.selection.technical.subcontracting.proportion.description">A gazdasági szerepl? a szerz?dés
+        következ? részére (azaz százalékára) nézve kíván esetleg harmadik féllel szerz?dést kötni: Felhívjuk a
+        figyelmet, hogy amennyiben a gazdasági szerepl? úgy határozott, hogy a szerz?dés egy részére alvállalkozói
+        szerz?dést köt, és az alvállalkozó kapacitásait igénybe veszi annak a résznek a teljesítéséhez, akkor kérjük,
+        hogy mindegyik ilyen alvállalkozóra nézve külön egységes európai közbeszerzési dokumentumot töltsön ki, lásd a
+        fenti II. rész C. szakaszát.
+    </entry>
+    <entry key="espd.crit.selection.technical.subcontracting.proportion.main">Alvállalkozói arány</entry>
+    <entry key="espd.crit.selection.technical.supply.chain.management.description">A gazdasági szerepl? a következ?
+        ellátásilánc-irányítási és ellen?rzési rendszereket tudja alkalmazni a szerz?dés teljesítése során:
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.chain.management.main">Az ellátási lánc irányítása</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.certificate.quality.description">Rendelkezésre tudja-e
+        bocsátani a gazdasági szerepl? a vonatkozó hirdetményben vagy a közbeszerzési dokumentumokban foglalt, a
+        hatáskörrel rendelkez?ként elismert hivatalos min?ség-ellen?rz? intézetek vagy hivatalok által kiállított
+        bizonyítványokat, amelyek m?szaki leírásokra vagy szabványokra való egyértelm? hivatkozással igazolják a
+        termékek megfelel?ségét?
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.certificate.quality.main">Árubeszerzésre irányuló
+        szerz?dések esetében: min?ség-ellen?rz? intézetek által kiállított bizonyítványok
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.performance.deliveries.description">Csak árubeszerzésre
+        irányuló közbeszerzési szerz?dések esetében: A referencia-id?szak folyamán a gazdasági szerepl? a meghatározott
+        típusokon belül a következ? f?bb szállításokat végezte. Az ajánlatkér? szervek nem több, mint három évet
+        írhatnak el?, és elfogadhatnak három évnél régebbi tapasztalatot.
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.performance.deliveries.main">Árubeszerzésre irányuló
+        szerz?dések esetében: a meghatározott típusú szállítások végzése
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.with.ca.description">Árubeszerzésre irányuló
+        közbeszerzési szerz?dések esetében: A gazdasági szerepl? szállítani fogja a leszállítandó termékekre vonatkozó
+        mintákat, leírásokat vagy fényképeket, és adott esetben rendelkezésre bocsátja a hitelességi tanúsítványokat.
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.with.ca.main">Árubeszerzésre irányuló szerz?dések
+        esetében: hitelességi tanúsítvánnyal rendelkez? minták, leírások vagy fényképek
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.without.ca.description">Árubeszerzésre irányuló
+        közbeszerzési szerz?dések esetében: A gazdasági szerepl? szállítani fogja a leszállítandó termékekre vonatkozó
+        mintákat, leírásokat vagy fényképeket, amelyeket nem kell hitelességi tanúsítványnak kísérnie.
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.without.ca.main">Árubeszerzésre irányuló szerz?dések
+        esetében: hitelességi tanúsítvány nélküli minták, leírások vagy fényképek
+    </entry>
+    <entry key="espd.crit.selection.technical.technical.facilities.measures.description">A gazdasági szerepl? a min?ség
+        biztosítása érdekében a következ? m?szaki hátteret veszi igénybe, valamint tanulmányi és kutatási létesítményei
+        a következ?k:
+    </entry>
+    <entry key="espd.crit.selection.technical.technical.facilities.measures.main">A min?ség biztosítása érdekében
+        igénybe vett m?szaki háttér
+    </entry>
+    <entry key="espd.crit.selection.technical.technicians.technical.bodies.description">A gazdasági szerepl? a következ?
+        szakembereket vagy m?szaki szervezeteket veheti igénybe, különös tekintettel a min?ség-ellen?rzésért felel?s
+        szakemberekre vagy szervezetekre. Azon szakemberekre és m?szaki szervezetekre vonatkozóan, akiket/amelyeket nem
+        közvetlenül a gazdasági szerepl? vállalkozása alkalmaz, ám akik/amelyek kapacitását a gazdasági szerepl? igénybe
+        veszi, a II. rész C. szakaszában meghatározottak szerint, külön-külön egységes európai közbeszerzési
+        dokumentumot kell kitölteni.
+    </entry>
+    <entry key="espd.crit.selection.technical.technicians.technical.bodies.main">Min?ség-ellen?rzésért felel?s
+        szakemberek vagy m?szaki szervezetek
+    </entry>
+    <entry key="espd.crit.selection.technical.tools.plant.description">A következ? eszközök, berendezések vagy m?szaki
+        felszerelések fognak a gazdasági szerepl? rendelkezésére állni a szerz?dés teljesítéséhez:
+    </entry>
+    <entry key="espd.crit.selection.technical.tools.plant.main">Eszközök, berendezések vagy m?szaki felszerelések
+    </entry>
+    <entry key="espd.crit.selection.technical.work.contracts.performance.works.description">Csak építési beruházásra
+        vonatkozó közbeszerzési szerz?dések esetében: A referencia-id?szak folyamán a gazdasági szerepl? a meghatározott
+        típusú munkákból a következ?ket végezte: Az ajánlatkér? szervek nem több, mint öt évet írhatnak el?, és
+        elfogadhatnak öt évnél régebbi tapasztalatot.
+    </entry>
+    <entry key="espd.crit.selection.technical.work.contracts.performance.works.main">Építési beruházásra irányuló
+        szerz?dések esetében: a meghatározott típusú munkák végzése
+    </entry>
+    <entry key="espd.crit.selection.technical.work.contracts.technicians.description">Építési beruházásra vonatkozó
+        közbeszerzési szerz?dések esetében a gazdasági szerepl? a következ? szakembereket vagy m?szaki szervezeteket
+        veheti igénybe a munka elvégzéséhez:
+    </entry>
+    <entry key="espd.crit.selection.technical.work.contracts.technicians.main">Építési beruházásra irányuló szerz?dések
+        esetében: a munka elvégzéséhez igénybe vehet? szakemberek vagy m?szaki szervezetek
+    </entry>
+    <entry key="espd.crit.start.date">Záró dátum</entry>
+    <entry key="espd.crit.taken.self.cleaning.measures">Hozott-e olyan intézkedéseket, amelyek igazolják megbízhatóságát
+        (öntisztázás)?
+    </entry>
+    <entry key="espd.crit.taxes.eo.fulfilled.obligations">Teljesítette-e a gazdasági szerepl? kötelezettségeit oly
+        módon, hogy az esedékes adókat, társadalombiztosítási járulékokat és az esetleges kamatokat és bírságokat
+        megfizette, vagy ezek megfizetésére kötelezettséget vállalt?
+    </entry>
+    <entry key="espd.crit.taxes.length.period.of.exclusion">Ítélet esetén, amennyiben err?l közvetlenül rendelkezik, a
+        kizárási id?tartam hossza
+    </entry>
+    <entry key="espd.crit.taxes.means.description">Kérjük, ismertesse az alkalmazott módokat</entry>
+    <entry key="espd.part3.crit.grounds.criminal.conv.top.title">A: Büntet?eljárásban hozott ítéletekkel kapcsolatos
+        okok
+    </entry>
+    <entry key="espd.part3.crit.top.grounds.payment.taxes.title">B: Adófizetési vagy
+        társadalombiztosításijárulék-fizetési kötelezettség megszegésével kapcsolatos okok
+    </entry>
+    <entry key="espd.part3.crit.insolvency.conflicts.top.title">C: Fizetésképtelenséggel, összeférhetetlenséggel vagy
+        szakmai kötelességszegéssel kapcsolatos okok
+    </entry>
+    <entry key="espd.part3.crit.purely.national.top.title">D: Tisztán nemzeti kizárási okok</entry>
+    <entry key="espd.crit.url">URL</entry>
+    <entry key="espd.crit.who.convicted">Az elítélt személye</entry>
+    <entry key="espd.crit.year">Év</entry>
+    <entry key="espd.crit.your.answer">Az Ön válasza:</entry>
+    <entry key="espd.gui.download.as">Letöltés formátuma</entry>
+    <entry key="espd.gui.download.pdf">PDF formátum</entry>
+    <entry key="espd.gui.download.xml">XML formátum</entry>
+    <entry key="espd.gui.download.zip">Mindkét formátum</entry>
+    <entry key="espd.gui.ec">Európai Bizottság</entry>
+    <entry key="espd.ecertis.404">Nem állnak rendelkezésre ECERTIS-adatok</entry>
+    <entry key="espd.ecertis.issued">Kiállító hatóság</entry>
+    <entry key="espd.ecertis.language">Nyelv</entry>
+    <entry key="espd.ecertis.loading">Betöltés az ECERTIS-b?l...</entry>
+    <entry key="espd.ecertis.no.evidences">Nem áll rendelkezésre igazoló dokumentum</entry>
+    <entry key="espd.gui.error.ted.notice.not.supported">A feltöltött fájl hirdetmény, nem ESPD-fájl, ezért e
+        szolgáltatáshoz nem felhasználható.
+    </entry>
+    <entry key="espd.gui.espd">A feltöltött fájl nem olvasható megfelel?en. Érvényes ESPD-kérelmet vagy -választ töltött
+        fel?
+    </entry>
+    <entry key="espd.gui.espd.upload.error">A feltöltött fájl nem olvasható megfelel?en. Érvényes ESPD-kérelmet töltött
+        fel?
+    </entry>
+    <entry key="espd.gui.espd.upload.request.error">A feltöltött fájl nem olvasható megfelel?en. Érvényes ESPD-választ
+        töltött fel?
+    </entry>
+    <entry key="espd.gui.espd.upload.response.error">Egységes európai közbeszerzési dokumentum</entry>
+    <entry key="espd.gui.europa">Europa</entry>
+    <entry key="espd.gui.expire.reminder.message">A rendszer úgy érzékeli, hogy Ön az elmúlt órában nem végzett
+        semmilyen tevékenységet az ESPD-szolgáltatás felületén.
+        &lt;p&gt;
+        Az adatvesztés elkerülése érdekében kérjük, mentse el az e-ESPD-t.&lt;p&gt;A munka kés?bbi folytatásához bármikor
+        importálhatja az elmentett e-ESPD-t.
+    </entry>
+    <entry key="espd.gui.export">Elmentését</entry>
+    <entry key="espd.gui.faq.leaflet">GYIK tájékoztatót.</entry>
+    <entry key="espd.gui.faq.text.answers">Ha érdeklik az ESPD-vel kapcsolatban gyakran feltett kérdésekre adott
+        válaszok, kérjük, olvassa el a
+    </entry>
+    <entry key="espd.gui.faq.text.more.info">Az ESPD-vel kapcsolatos további információk</entry>
+    <entry key="espd.init.alert">
+        &lt;p&gt;Az egységes európai közbeszerzési dokumentum (ESPD) egy olyan nyilatkozat, melynek kitöltésével a
+            vállalkozások a közbeszerzési eljárások folyamán számot adhatnak pénzügyi helyzetükr?l, alkalmasságukról és
+            képességeikr?l. A dokumentum az EU összes hivatalos nyelvén rendelkezésre áll. Az EU egészében el?zetes
+            bizonyítékként szolgál arra vonatkozóan, hogy a pályázó uniós szinten megfelel a közbeszerzési eljárásokban
+            való részvétel összes feltételének. Az ESPD-szolgáltatásnak köszönhet?en a pályázók mentesülnek az eddigi
+            uniós közbeszerzési eljárások során megkövetelt többféle formanyomtatvány kitöltését?l és az igazoló
+            dokumentumok mindegyikének hiánytalan benyújtásától, ami nagy könnyebbséget jelent a határokon átnyúló
+            közbeszerzési eljárásokban való részvétel szempontjából. 2018. októberét?l kezdve az ESPD kizárólag
+            elektronikus formában lesz elérhet?.
+        &lt;/p&gt;
+        &lt;p&gt;Az Európai Bizottság ezt a webes szolgáltatást díjmentesen biztosítja a formanyomtatványt elektronikus
+            formában kitölteni kívánó beszerz?knek és ajánlattev?knek, illetve az egyéb érdekelt feleknek. Az online
+            formanyomtatvány a kitöltést követ?en kinyomtatható, és az ajánlat többi részével együtt elküldhet? a
+            beszerz?nek. Amennyiben a teljes közbeszerzési eljárás elektronikusan zajlik, az online kitöltött ESPD
+            exportálható, tárolható és elektronikusan benyújtható. Egy adott ESPD kés?bbi közbeszerzési eljárásokhoz is
+            felhasználható, feltéve, hogy a benne megadott információk továbbra is helytállóak és érvényesek. Az
+            ajánlattev? kizárható a közbeszerzési eljárásból, illetve büntet?eljárás alá vonható, ha az egységes európai
+            közbeszerzési dokumentumban általa megadott információk megtéveszt?ek, szándékosan hiányosak, vagy igazoló
+            dokumentumokkal nem alátámaszthatók.
+        &lt;/p&gt;
+    </entry>
+    <entry key="espd.init.create.espd">Új ESPD létrehozása</entry>
+    <entry key="espd.init.create.response">Válasz létrehozása</entry>
+    <entry key="espd.init.header">Üdvözöljük az ESPD-szolgáltatás felületén!</entry>
+    <entry key="espd.init.i.am.ca">Ajánlatkér? szerv</entry>
+    <entry key="espd.init.i.am.ce">Ajánlatkér? szerv</entry>
+    <entry key="espd.init.i.am.eop">Gazdasági szerepl?</entry>
+    <entry key="espd.init.import.espd">ESPD importálása</entry>
+    <entry key="espd.init.merge.espds">Két ESPD egyesítése</entry>
+    <entry key="espd.init.reuse.espd">Meglév? ESPD újbóli felhasználása</entry>
+    <entry key="espd.init.review.espd">ESPD áttekintése</entry>
+    <entry key="espd.init.select.country">Ország kiválasztása</entry>
+    <entry key="espd.init.ted.reception.id.placeholder">Kérjük, adja meg a hirdetmény azonosító számát.</entry>
+    <entry key="espd.init.upload.document">Dokumentum feltöltése</entry>
+    <entry key="espd.init.upload.documents">Dokumentumok feltöltése</entry>
+    <entry key="espd.init.upload.request">Kérjük, töltsön fel egy ESPD-kérelmet vagy -választ.</entry>
+    <entry key="espd.init.upload.request.response">Kérjük, egy az ajánlatkér? szerv által létrehozott ESPD-kérelmet
+        töltsön fel.
+    </entry>
+    <entry key="espd.init.upload.response">Kérjük, egy Ön által létrehozott, régi ESPD-választ töltsön fel.</entry>
+    <entry key="espd.init.what.you.do">Mi a kitöltés célja?</entry>
+    <entry key="espd.init.where.are.you.from.ca">Hol található az ajánlatkér? szerv székhelye?</entry>
+    <entry key="espd.init.where.are.you.from.eo">Hol található az Ön vállalkozásának székhelye?</entry>
+    <entry key="espd.init.who.are.you">Kérjük, adja meg, kinek a nevében tölti ki a dokumentumot.</entry>
+    <entry key="espd.gui.footer.last.update">Legutóbbi frissítés:</entry>
+    <entry key="espd.gui.grow">Grow</entry>
+    <entry key="espd.ecertis.information.for.country">Tájékoztatás {0} számára az e-Certis-r?l</entry>
+    <entry key="espd.gui.legal.notice">Jogi nyilatkozat</entry>
+    <entry key="espd.ecertis.less.information">Információk elrejtése</entry>
+    <entry key="espd.ecertis.more.information">B?vebb információk</entry>
+    <entry key="espd.gui.next">Következ?</entry>
+    <entry key="espd.gui.no">Nem</entry>
+    <entry key="espd.gui.not.applicable">Tárgytalan</entry>
+    <entry key="espd.gui.place">Hely</entry>
+    <entry key="espd.gui.previous">El?z?</entry>
+    <entry key="espd.gui.print">Áttekintés</entry>
+    <entry key="espd.gui.progress.exclusion">Kizárás</entry>
+    <entry key="espd.gui.progress.finish">Befejezés</entry>
+    <entry key="espd.gui.progress.procedure">Eljárás</entry>
+    <entry key="espd.gui.progress.selection">Kiválasztás</entry>
+    <entry key="espd.gui.progress.start">Kezdés</entry>
+    <entry key="espd.gui.question.to.use.alpha">Alkalmazni kívánja az A?D szakasz kiválasztási szempontjait?</entry>
+    <entry key="espd.gui.report.appliction.issue">Ha kérdése van az ESPD alkalmazással kapcsolatban, a következ?
+        e-mail-címen kaphat tájékoztatást:
+    </entry>
+    <entry key="espd.gui.report.security.incident">Biztonsági incidens esetén kérjük, vegye fel a kapcsolatot az Európai
+        Bizottsággal a következ? linkre kattintva:
+    </entry>
+    <entry key="espd.gui.report.security.incident.title">Információbiztonsági incidensr?l szóló jelentés</entry>
+    <entry key="espd.gui.role.ca">Szerep: Ajánlatkér? szerv (ASZ)</entry>
+    <entry key="espd.gui.role.eo">Szerep: Gazdasági szerepl? (GSZ)</entry>
+    <entry key="espd.gui.search">Keresés</entry>
+    <entry key="espd.gui.signature">Aláírás</entry>
+    <entry key="espd.gui.tools">Eszközök</entry>
+    <entry key="espd.init.ca.can.create.espd.tooltip">Az ajánlatkér? szerv létrehozhat teljesen új ESPD-t. Ebben az
+        esetben az ajánlatkér? szervnek minden releváns információt meg kell adnia az ESPD formanyomtatványában.
+    </entry>
+    <entry key="espd.init.ca.can.import.espd.tooltip">Amennyiben az ajánlatkér? szerv már korábbi közbeszerzési eljárás
+        során is használta az ESPD-szolgáltatást, lehet?sége van arra, hogy importálja a helyi hálózaton tárolt ESPD-t.
+        Ebben az esetben nincs szükség teljesen új ESPD létrehozására, de bizonyos adatokat ilyenkor is frissíteni kell,
+        figyelembe véve a jelenlegi közbeszerzési eljárást.
+    </entry>
+    <entry key="espd.init.ca.ref.buyer.tooltip">Az ajánlatkér? szerv kifejezés a beszerz?re utal.</entry>
+    <entry key="espd.init.ce.ref.buyer.tooltip">Az ajánlatkér? szerv kifejezés a víz-, energia-, közlekedés vagy postai
+        szolgáltatási ágazatban m?köd? beszerz?t jelöl. Azon ajánlatkér?knek, amelyek a felsorolt ágazatok
+        valamelyikében folytatják tevékenységüket, az ?Ajánlatkér? szerv? lehet?séget kell kiválasztaniuk.
+    </entry>
+    <entry key="espd.init.eo.can.reuse.espd.tooltip">A gazdasági szerepl? újra felhasználhatja a valamely korábbi
+        közbeszerzési eljárás során benyújtott ESPD-ben (korábbi ESPD) megadott információkat. Az ESPD-szolgáltatás
+        egyesíti a korábbi ESPD és az ajánlatkér? szerv által ezen közbeszerzési eljárás keretében el?készített
+        formanyomtatvány tartalmát.
+    </entry>
+    <entry key="espd.init.eo.ref.suppl.tooltip">A gazdasági szerepl? kifejezés a beszállítóra/ajánlattev?re utal.
+    </entry>
+    <entry key="espd.init.espd.used.both.ca.eo.tooltip">Az ESPD-szolgáltatást ajánlatkér? szervek és gazdasági szerepl?k
+        egyaránt használhatják. Kérjük, válassza ki, hogy ebben a közbeszerzési eljárásban Ön melyik kategóriába
+        tartozik.
+    </entry>
+    <entry key="espd.init.filter.create.response.tooltip">Új ESPD-válasz létrehozása</entry>
+    <entry key="espd.init.filter.eo.can.import.espd.tooltip">A gazdasági szerepl? importálni tudja az ajánlatkér? szerv
+        által az ezen közbeszerzési eljárás keretében el?re kitöltött, és a pályázati felhívással együtt közzétett ESPD
+        fájlt.
+    </entry>
+    <entry key="espd.init.filter.eo.merge.espds.tooltip">The ESPD service will merge the 'old' ESPD with the new form
+        prepared by the contracting authority for this procurement procedure.
+    </entry>
+    <entry key="espd.init.overview.received.espds.tooltip">Ez a funkció egy olyan táblázatot jelenít meg, amely
+        áttekintést nyújt az ajánlattev?k által egy adott közbeszerzési eljárás keretében benyújtott valamennyi ESPD-ben
+        szerepl? válaszokról.
+    </entry>
+    <entry key="espd.init.review.espd.tooltip">Az ajánlatkér? szerv ellen?rizheti/áttekintheti a gazdasági szerepl?t?l
+        kapott elektronikus ESPD-t.
+    </entry>
+    <entry key="espd.init.ted.reception.id.tooltip">Ezt az azonosító számot az ajánlatkér? szerv e-mail üzenetben kapja
+        meg a Kiadóhivataltól, amikor hirdetménye közzétételét kéri. Erre a számra lesz szükség, amikor az eljárással
+        vagy az ajánlatkér? szervvel kapcsolatos adatokat kell megadni a szolgáltatás felületén.
+    </entry>
+    <entry key="espd.validator.accept">Kérjük, érvényes kiterjesztéssel rendelkez? értéket adjon meg.</entry>
+    <entry key="espd.validator.creditcard">Kérjük, érvényes hitelkártyaszámot adjon meg.</entry>
+    <entry key="espd.validator.date">Kérjük, érvényes dátumot adjon meg.</entry>
+    <entry key="espd.validator.dateISO">Kérjük, érvényes dátumot (ISO) adjon meg.</entry>
+    <entry key="espd.validator.digits">Kérjük, csak számjegyeket adjon meg.</entry>
+    <entry key="espd.validator.email">Kérjük, érvényes e-mail címet adjon meg.</entry>
+    <entry key="espd.validator.equalTo">Kérjük, adja meg még egyszer.</entry>
+    <entry key="espd.validator.max">A megadott érték legfeljebb {0} lehet.</entry>
+    <entry key="espd.validator.maxlength">Kérjük, legfeljebb {0} karaktert adjon meg.</entry>
+    <entry key="espd.validator.min">A megadott érték legalább {0} legyen.</entry>
+    <entry key="espd.validator.minlength">Kérjük, adjon meg legalább {0} karaktert.</entry>
+    <entry key="espd.validator.number">Kérjük, érvényes számot adjon meg.</entry>
+    <entry key="espd.validator.range">Kérjük, {0} és {1} közötti értéket adjon meg.</entry>
+    <entry key="espd.validator.rangelength">Kérjük, {0} és {1} karakter közötti hosszúságú értéket adjon meg.</entry>
+    <entry key="espd.validator.remote">Kérjük, javítsa ezt a mez?t.</entry>
+    <entry key="espd.validator.required">Ezt a mez?t kötelez? kitölteni.</entry>
+    <entry key="espd.validator.url">Kérjük, érvényes URL-címet adjon meg.</entry>
+    <entry key="espd.gui.view.ca">Nézet: (ASZ)</entry>
+    <entry key="espd.gui.view.eo">Nézet: (GSZ)</entry>
+    <entry key="espd.gui.yes">Igen</entry>
+    <entry key="espd.gui.zip.instructions">Ez a ZIP mappában található ESPD-fájlokról szóló rövid összefoglaló
+        dokumentum.Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nespd.XML: Az XML-fájl az ESPD-szolgáltatás vagy más,
+        kompatibilis ESPD-szolgáltatások számára olvasható fájltípus. Az eESPD-fájl XML-fájlként való használatának
+        el?nye, hogy azt így a beszerz?k és a vállalkozások a jöv?ben más eljárásokban is újrahasznosíthatják. Az
+        XML-fájl a közbeszerzési dokumentumokkal együtt (az ajánlatkér? szerv részér?l a vállalkozásoknak), illetve az
+        ajánlat részeként továbbítandó (a vállalkozások részér?l az ajánlatkér?
+        szervnek).Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nespd.PDF: A PDF-fájl az eESPD felhasználó számára olvasható
+        változata. A PDF-fájt ajánlott referenciadokumentumként az XML-fájllal együtt mellékelni a közbeszerzési
+        dokumentumokhoz (az ajánlatkér? szerv részér?l a vállalkozásoknak), illetve az ajánlathoz (a vállalkozások
+        részér?l az ajánlatkér? szervnek).Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nAmennyiben kérdésük van a fájlokkal
+        kapcsolatban, kérjük, keressenek meg bennünket az alábbi e-mail-címen: grow-espd@ec.europa.eu.
+    </entry>
+</properties>

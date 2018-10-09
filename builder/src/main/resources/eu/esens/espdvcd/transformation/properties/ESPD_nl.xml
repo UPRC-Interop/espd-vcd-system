@@ -1,0 +1,998 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+Es wir hier explizit auf einen DocType verzichten um diese Datei in der Transformation nutzen zu koennen, ohne das sie gegen die properties.dtd geprüft wird.
+Wenn die Datei als Properties gezogen wird, wird ein DocType zur Laufzeit eingetragen.
+-->
+<properties>
+    <entry key="espd.gui.about">Over UEA</entry>
+    <entry key="espd.part4.all.selection.switch">?: Algemene aanwijzing voor alle selectiecriteria</entry>
+    <entry key="espd.gui.app.environment">Beste gebruiker, u gebruikt onze testomgeving. Gelieve de versie te gebruiken
+        op
+    </entry>
+    <entry key="espd.gui.app.subtitle">Hulpmiddel om het UEA in te vullen en opnieuw te gebruiken</entry>
+    <entry key="espd.gui.app.title">Uniform Europees Aanbestedingsdocument (UEA)</entry>
+    <entry key="espd.gui.back.to.main">Terug naar hoofdpagina</entry>
+    <entry key="espd.gui.cancel">Annuleer</entry>
+    <entry key="espd.gui.click.here">klik hier</entry>
+    <entry key="espd.gui.contact">Contact</entry>
+    <entry key="espd.gui.contact.header">Contactgegevens</entry>
+    <entry key="espd.gui.contact.info">&lt;p&gt;Europese Commissie&lt;p&gt;Directoraat-generaal Interne Markt, Industrie,
+        Ondernemerschap en Midden- en Kleinbedrijf&lt;p&gt;Oudergemselaan 45&lt;p&gt;1049 Brussel&lt;p&gt;BELGIË
+    </entry>
+    <entry key="espd.gui.cookies">Cookies</entry>
+    <entry key="espd.gui.correct.errors">U moet de fouten corrigeren voordat u verder kunt gaan.</entry>
+    <entry key="espd.part1.city">Plaats:</entry>
+    <entry key="espd.part1.confirm.email">Bevestig e-mailadres:</entry>
+    <entry key="espd.part1.confirm.telephone">Bevestig telefoonnummer:</entry>
+    <entry key="espd.part1.contact.details.ca">Identiteit van de aanbesteder</entry>
+    <entry key="espd.part1.contact.person">Contactpersoon:</entry>
+    <entry key="espd.part1.correct.errors">U moet de fouten corrigeren voordat u verder kunt gaan.</entry>
+    <entry key="espd.part1.country">Land:</entry>
+    <entry key="espd.part1.email">E-mail:</entry>
+    <entry key="espd.part1.fax">faks</entry>
+    <entry key="espd.part1.file.ref.ca">Referentienummer van het dossier bij de aanbestedende dienst of aanbestedende
+        entiteit (indien van toepassing):
+    </entry>
+    <entry key="espd.part1.header">Deel I: Gegevens over de aanbestedingsprocedure en de aanbestedende dienst of
+        aanbestedende entiteit
+    </entry>
+    <entry key="espd.part1.info.procedure">procedure</entry>
+    <entry key="espd.part1.info.procurement.proc">Informatie over de aanbestedingsprocedure</entry>
+    <entry key="espd.part1.info.pub">Informatie over bekendmaking</entry>
+    <entry key="espd.part1.name">Officiële benaming:</entry>
+    <entry key="espd.part1.nat.regnum">Nationaal registratienummer (indien bekend):</entry>
+    <entry key="espd.part1.official.journal.alert">Indien de oproep tot mededinging niet in het Publicatieblad van de
+        Europese Unie is bekendgemaakt of daarin niet hoeft te worden bekendgemaakt, moet de aanbestedende dienst of
+        aanbestedende entiteit gegevens invullen op basis waarvan ondubbelzinnig kan worden vastgesteld om welke
+        aanbestedingsprocedure het gaat (bv. verwijzing naar een bekendmaking op nationaal niveau)
+    </entry>
+    <entry key="espd.part1.ojs.label">Nummer van de aankondiging in het PB S:</entry>
+    <entry key="espd.part1.ojs.url">URL PB S</entry>
+    <entry key="espd.part1.postcode">Postcode:</entry>
+    <entry key="espd.part1.procurer.name">Titel:</entry>
+    <entry key="espd.part1.street.and. num">Straat en huisnummer:</entry>
+    <entry key="espd.part1.ted.reception.id">Dit is beknopte documentatie over de UEA-bestanden die u in deze zip-folder
+        aantreft.Chr(92)
+    </entry>
+    <entry key="espd.part1.telephone">Telefoonnummer:</entry>
+    <entry key="espd.part1.title.or.short.desc">Beknopte beschrijving:</entry>
+    <entry key="espd.part1.to.be.filled.alert">Voor een aanbestedingsprocedure waarvoor in het Publicatieblad van de
+        Europese Unie een oproep tot mededinging is bekendgemaakt, worden de in deel I gevraagde gegevens automatisch
+        opgezocht, mits voor het aanmaken en invullen van het UEA gebruik wordt gemaakt van de elektronische UEA-dienst.
+        Verwijzing naar de relevante aankondiging die in het Publicatieblad van de Europese Unie is bekendgemaakt:
+    </entry>
+    <entry key="espd.part1.website">Internetadres (indien van toepassing):</entry>
+    <entry key="espd.part3.grounds.criminal.conv">Gronden die verband houden met strafrechtelijke veroordelingen</entry>
+    <entry key="espd.part3.header">Deel III: Uitsluitingsgronden</entry>
+    <entry key="espd.part3.insolvency.conflicts">Gronden met betrekking tot insolventie, belangenconflicten of
+        beroepsfouten
+    </entry>
+    <entry key="espd.part5.concl.statements">Deel VI: Slotverklaringen</entry>
+    <entry key="espd.part5.concl.statements.signature">Datum, plaats en, indien vereist of noodzakelijk,
+        handtekening(en):
+    </entry>
+    <entry key="espd.part5.concl.statements.text">Ondergetekende(n) verklaart/verklaren formeel dat de door hem/haar/hen
+        hiervoor in de delen II-V verstrekte informatie accuraat en correct is en dat hij/zij zich volledig bewust
+        is/zijn van de consequenties van het afleggen van een valse verklaring.<p/>Ondergetekende(n) verklaart/verklaren
+        formeel desgevraagd en onverwijld de hiervoor bedoelde certificaten en andere vormen van bewijsstukken te kunnen
+        verstrekken, tenzij:<p/>a) de aanbestedende dienst of instantie de betrokken ondersteunende documenten
+        rechtstreeks kan verkrijgen door raadpleging in een lidstaat van een gratis toegankelijke nationale databank (op
+        voorwaarde dat de ondernemer de noodzakelijke informatie heeft verstrekt (internetadres, afgevende entiteit,
+        precieze referentienummers van de stukken) waardoor de aanbestedende dienst of aanbestedende instantie daartoe
+        in staat wordt gesteld. Indien voorgeschreven, moet dit vergezeld gaan van de betreffende instemming met een
+        dergelijke raadpleging), of<p/>de aanbestedende dienst of instantie met ingang van uiterlijk 18 oktober 2018
+        (afhankelijk van de nationale uitvoering van artikel 59, lid 5, tweede alinea van Richtlijn 2014/24/EU) reeds
+        over de betrokken informatie beschikt.<p/>Ondergetekende(n) stemt/stemmen er formeel mee in dat [vermeld de
+        aanbestedende dienst of aanbestedende entiteit bedoeld in deel I, afdeling A] toegang krijgt tot stukken tot
+        staving van de informatie die is verstrekt in [vermeld de betrokken delen/afdelingen/punten] van dit Uniform
+        Europees Aanbestedingsdocument met het oog op [vermeld de aanbestedingsprocedure: (beknopte beschrijving,
+        verwijzing naar bekendmaking in het Publicatieblad van de Europese Unie, referentienummer)].
+        <p/>
+    </entry>
+    <entry key="espd.part5.export">Exporteer</entry>
+    <entry key="espd.part5.export.content">U kunt nu op Chr(34)ExporteerChr(34) klikken om het UEA-bestand te downloaden
+        en op uw computer op te slaan. Aanbestedende diensten moeten ervoor zorgen dat dit UEA-bestand samen met de
+        overige aanbestedingsstukken voor de ondernemers beschikbaar is.
+    </entry>
+    <entry key="espd.part5.header">Klaar</entry>
+    <entry key="espd.part5.reduction">Deel V: Beperking van het aantal gekwalificeerde gegadigden</entry>
+    <entry key="espd.part5.reduction.question">De ondernemer verklaart dat:</entry>
+    <entry key="espd.part5.text.eo.declares.that">Vermeld, indien een aantal van deze certificaten of andere vormen van
+        bewijsstukken elektronisch beschikbaar zijn, voor elk daarvan:
+    </entry>
+    <entry key="espd.part5.title.eo.declares.that">Hij op de volgende wijze aan de objectieve en niet-discriminerende
+        criteria en regels ter beperking van het aantal gegadigden voldoet:&lt;p&gt;Geef, in geval bepaalde certificaten of
+            andere vormen van bewijsstukken zijn vereist, voor elk daarvan aan of de ondernemer over de vereiste
+            documenten beschikt:
+        &lt;/p&gt;
+    </entry>
+    <entry key="espd.part5.toptext">De ondernemer hoeft uitsluitend informatie te verstrekken wanneer de aanbestedende
+        dienst of aanbestedende entiteit de objectieve en niet-discriminerende criteria of regels heeft vastgesteld die
+        moeten worden toegepast ter beperking van het aantal gegadigden dat tot indiening van een inschrijving of tot
+        een dialoog zal worden uitgenodigd. Deze informatie, die vergezeld kan gaan van vereisten met betrekking tot de
+        eventueel te verstrekken (soorten) certificaten of andere vormen van bewijsstukken, wordt vermeld in de
+        betreffende aankondiging of in de in die aankondiging bedoelde aanbestedingsstukken. Het navolgende geldt
+        uitsluitend voor een niet-openbare procedure, een mededingingsprocedure met onderhandeling, een
+        concurrentiegerichte dialoog en een innovatiepartnerschap:
+    </entry>
+    <entry key="espd.part4.alert">Aanbestedende diensten moeten aangeven welke selectiecriteria van toepassing zijn,
+        door het hokje voor het betrokken criterium aan te vinken.
+    </entry>
+    <entry key="espd.part4.economic.and.financial.standing">B: Economische en financiële draagkracht</entry>
+    <entry key="espd.part4.header">Deel IV: Selectiecriteria</entry>
+    <entry key="espd.part4.quality.assurance">D: Kwaliteitsborgingsregelingen en normen inzake milieubeheer</entry>
+    <entry key="espd.part4.suitability">A: Geschiktheid</entry>
+    <entry key="espd.part4.technical.professional.ability">C: Technische en beroepsbekwaamheid</entry>
+    <entry key="espd.part2.add.complete.missing">Vul bovendien al naargelang het geval de ontbrekende gegevens in in
+        deel IV, afdelingen A, B, C of D, ALLEEN wanneer dit in de betrokken aankondiging of aanbestedingsstukken wordt
+        gevraagd
+    </entry>
+    <entry key="espd.part2.all.selection.covered">d) Heeft de registratie of certificering betrekking op alle
+        voorgeschreven selectiecriteria?
+    </entry>
+    <entry key="espd.part2.another.vat">Vermeld, indien er geen btw-nummer van toepassing is, een ander nationaal
+        identificatienummer, indien vereist en toepasselijk.
+    </entry>
+    <entry key="espd.part2.answer.following.parts">Beantwoord de resterende gedeelten van dit deel, afdeling B en,
+        indien relevant, afdeling C; vul deel V in, indien van toepassing, en vul in elk geval deel VI in en onderteken
+        dit.
+    </entry>
+    <entry key="espd.part2.birth.date">Geboortedatum</entry>
+    <entry key="espd.part2.birth.place">Geboorteplaats</entry>
+    <entry key="espd.part2.cert.e.avaliable">b) Indien het inschrijvings- of certificeringscertificaat elektronisch
+        beschikbaar is, vermeld dit:
+    </entry>
+    <entry key="espd.part2.contact.person">Contactpersoon of -personen:</entry>
+    <entry key="espd.part2.detinfo.of.represent">Vermeld zo nodig gedetailleerde informatie over de vertegenwoordiging
+        (vorm, reikwijdte, doel enz.):
+    </entry>
+    <entry key="espd.part2.disworkers.details">Vermeld, indien vereist, de categorie of categorieën gehandicapte of
+        kansarme werknemers waartoe de betrokken werknemers behoren.
+    </entry>
+    <entry key="espd.part2.doc.e.avaliable">Indien de relevante stukken elektronisch beschikbaar zijn, vermeld dit:
+    </entry>
+    <entry key="espd.part2.email">E-mail:</entry>
+    <entry key="espd.part2.ensure.others.espd">Zorg ervoor dat de overige betrokkenen een afzonderlijk UEA-formulier
+        indienen.
+    </entry>
+    <entry key="espd.part2.eo.approved.cert">Indien van toepassing: is de ondernemer ingeschreven op een officiële lijst
+        van erkende ondernemers of is hij in het bezit van een gelijkwaardig certificaat (bv. op grond van een nationaal
+        (voor)selectiesysteem)?
+    </entry>
+    <entry key="espd.part2.eo.group.role">a) Vermeld de rol van de ondernemer binnen de combinatie (leider,
+        verantwoordelijk voor specifieke taken enz.):
+    </entry>
+    <entry key="espd.part2.eo.has.cert.soc">e) Kan de ondernemer een certificaat verstrekken inzake de betaling van
+        socialezekerheidsbijdragen en belastingen of gegevens verstrekken met behulp waarvan de aanbestedende dienst of
+        aanbestedende entiteit een dergelijk certificaat rechtstreeks kan verkrijgen door in een lidstaat een gratis
+        toegankelijke nationale databank te raadplegen?
+    </entry>
+    <entry key="espd.part2.eo.rely.other.entities">Doet de ondernemer een beroep op de draagkracht van andere entiteiten
+        om te voldoen aan de selectiecriteria van deel IV en de (eventuele) criteria en regels van onderstaande afdeling
+        V?
+    </entry>
+    <entry key="espd.part2.first.name">Voornaam</entry>
+    <entry key="espd.part2.header">Deel II: Gegevens over de ondernemer</entry>
+    <entry key="espd.part2.if.proc.reserved">Alleen wanneer de aanbesteding voorbehouden is: is de ondernemer een
+        sociale werkplaats of een Chr(34)sociale ondernemingChr(34) of zorgt de ondernemer voor de uitvoering van het
+        contract in het kader van programma's voor beschermde arbeid?
+    </entry>
+    <entry key="espd.part2.info.eo">A: Gegevens over de ondernemer</entry>
+    <entry key="espd.part2.info.reliance">C: Informatie over beroep op draagkracht van andere entiteiten</entry>
+    <entry key="espd.part2.info.respresent">B: Informatie over de vertegenwoordigers van de ondernemer</entry>
+    <entry key="espd.part2.information.subcontractors">D: Informatie betreffende onderaannemers op wier draagkracht de
+        ondernemer geen beroep doet
+    </entry>
+    <entry key="espd.part2.information.subcontractors.description">Zo ja, noem, voor zover bekend, de onderaannemers die
+        worden voorgesteld:
+    </entry>
+    <entry key="espd.part2.information.subcontractors.footer">Vermeld de informatie die wordt gevraagd in de afdelingen
+        A en B van dit deel en deel III voor elk van de (categorieën van) betrokken onderaannemers indien de
+        aanbestedende dienst of aanbestedende entiteit expliciet om deze informatie vraagt naast de informatie in deel
+        I.
+    </entry>
+    <entry key="espd.part2.information.subcontractors.header">(Gedeelte dat alleen moet worden ingevuld wanneer de
+        aanbestedende dienst of aanbestedende entiteit expliciet om deze gegevens vraagt.)
+    </entry>
+    <entry key="espd.part2.information.subcontractors.title">Is de ondernemer van plan een gedeelte van de opdracht in
+        onderaanneming aan derden te geven?
+    </entry>
+    <entry key="espd.part2.internet.addr.if.exists">Internetadres (indien van toepassing):</entry>
+    <entry key="espd.part2.is.eo.proc.together">Neemt de ondernemer samen met anderen deel aan de
+        aanbestedingsprocedure?
+    </entry>
+    <entry key="espd.part2.is.eo.sized">Is de ondernemer een micro-, kleine of middelgrote onderneming?</entry>
+    <entry key="espd.part2.is.eo.sized.tooltip">In de zin van de Aanbeveling van de Commissie van 6 mei 2003 betreffende
+        de definitie van micro-, kleine en middelgrote ondernemingen (PB L 124 van 20.5.2003, blz. 36). Deze informatie
+        is uitsluitend vereist voor statistische doeleinden. Micro-onderneming: een onderneming met minder dan tien
+        werknemers en met een jaaromzet en/of jaarlijks balanstotaal van niet meer dan 2 miljoen euro. Kleine
+        onderneming: een onderneming met minder dan vijftig werknemers en met een jaaromzet en/of jaarlijks balanstotaal
+        van niet meer dan 10 miljoen euro. Middelgrote onderneming: een onderneming die micro noch klein is, met minder
+        dan 250 werknemers en een jaaromzet van niet meer dan 50 miljoen euro en/of een jaarlijks balanstotaal van niet
+        meer dan 43 miljoen euro.
+    </entry>
+    <entry key="espd.part2.last.name">Achternaam</entry>
+    <entry key="espd.part2.lots.concerned">Vermeld, indien van toepassing, het perceel/de percelen waarop de ondernemer
+        wil inschrijven:
+    </entry>
+    <entry key="espd.part2.name">Naam:</entry>
+    <entry key="espd.part2.name.part.group">c) Indien van toepassing, de benaming van de deelnemende combinatie:</entry>
+    <entry key="espd.part2.other.eo.part">b) Vermeld de identiteit van de andere ondernemers die gezamenlijk aan de
+        aanbestedingsprocedure deelnemen:
+    </entry>
+    <entry key="espd.part2.percentage.disworkers">Wat is het corresponderende percentage gehandicapte of kansarme
+        werknemers?
+    </entry>
+    <entry key="espd.part2.person.empowered">Vermeld, indien van toepassing, naam en adres van een of meer personen die
+        gemachtigd zijn om de ondernemer bij deze aanbestedingsprocedure te vertegenwoordigen:
+    </entry>
+    <entry key="espd.part2.pos.act.in.capacity">Functie/optredend als:</entry>
+    <entry key="espd.part2.postal.adress">Postadres:</entry>
+    <entry key="espd.part2.provide.regnumber">a) Vermeld het relevante registratie- of certificeringsnummer, indien van
+        toepassing:
+    </entry>
+    <entry key="espd.part2.ref.for.cert">c) Vermeld de referenties waarop de registratie of certificering is gebaseerd
+        en, indien van toepassing, de classificatie op de officiële lijst:
+    </entry>
+    <entry key="espd.part2.separate.espd.sections.a.b">Verstrek voor elk van de betrokken entiteiten een afzonderlijk
+        UEA-formulier met de informatie die wordt gevraagd in de afdelingen A en B van dit deel en deel III. Dit
+        formulier moet door de betrokken entiteiten naar behoren worden ingevuld en ondertekend.<p/>Er zij op gewezen
+        dat het daarbij ook gaat om niet rechtstreeks tot de onderneming van de ondernemer behorende technici of
+        technische organen, in het bijzonder die welke belast zijn met de kwaliteitscontrole en, in het geval van
+        overheidsopdrachten voor werken, de technici of technische organen die de ondernemer ter beschikking zullen
+        staan om de werkzaamheden uit te voeren.<p/>Vermeld, voor zover dit relevant is voor de specifieke draagkracht
+        waarop de ondernemer steunt, voor elk van de betrokken entiteiten de informatie bedoeld in de delen IV en V.
+    </entry>
+    <entry key="espd.part2.telephone">Telefoonnummer:</entry>
+    <entry key="espd.part2.vat">Btw-nummer, indien van toepassing:</entry>
+    <entry key="espd.part2sel.alert">De ondernemer hoeft uitsluitend informatie te verstrekken wanneer de betreffende
+        selectiecriteria door de aanbestedende dienst of aanbestedende entiteit in de betreffende aankondiging of in de
+        in die aankondiging bedoelde aanbestedingsstukken zijn voorgeschreven.
+    </entry>
+    <entry key="espd.crit.amount">Bedrag</entry>
+    <entry key="espd.crit.amount.concerned">Betrokken bedrag</entry>
+    <entry key="espd.crit.average.turnover">Uitgevende instantie</entry>
+    <entry key="espd.crit.code">Code</entry>
+    <entry key="espd.crit.country.member.state">Betrokken land of lidstaat</entry>
+    <entry key="espd.crit.date">Datum</entry>
+    <entry key="espd.crit.date.of.conviction">Datum veroordeling</entry>
+    <entry key="espd.part3.crit.date.of.conviction.or.decision">Vermeld de datum van de veroordeling of de beslissing
+    </entry>
+    <entry key="espd.crit.decision.final.and.binding">Indien deze niet-nakoming bij een rechterlijke of administratieve
+        beslissing is vastgesteld, is deze beslissing definitief en bindend?
+    </entry>
+    <entry key="espd.crit.description">Beschrijving</entry>
+    <entry key="espd.crit.do.you.allow.checks">Laat u controle toe?</entry>
+    <entry key="espd.crit.end.date">Aantal jaren</entry>
+    <entry key="espd.part3.crit.eu.main.breaching.obligations">Artikel 57, lid 4, van Richtlijn 2014/24/EU vermeldt de
+        volgende uitsluitingsgronden:
+    </entry>
+    <entry key="espd.part3.crit.eu.eo.main.breaching.obligations">Artikel 57, lid 4, van Richtlijn 2014/24/EU vermeldt
+        de volgende uitsluitingsgronden:
+    </entry>
+    <entry key="espd.part3.crit.eu.main.purely.national">Zijn de louter nationale uitsluitingsgronden die in de
+        betreffende aankondiging of in de aanbestedingsstukken worden vermeld, van toepassing?
+    </entry>
+    <entry key="espd.part3.crit.eu.grounds.criminal.conv.main.title">Artikel 57, lid 1, van Richtlijn 2014/24/EU
+        vermeldt de volgende uitsluitingsgronden:
+    </entry>
+    <entry key="espd.part3.crit.eu.eo.grounds.criminal.conv.main.title">Artikel 57, lid 1, van Richtlijn 2014/24/EU
+        vermeldt de volgende uitsluitingsgronden:
+    </entry>
+    <entry key="espd.part3.crit.eu.payment.taxes.main.title">Artikel 57, lid 2, van Richtlijn 2014/24/EU vermeldt de
+        volgende uitsluitingsgronden:
+    </entry>
+    <entry key="espd.part3.crit.eu.eo.payment.taxes.main.title">Artikel 57, lid 2, van Richtlijn 2014/24/EU vermeldt de
+        volgende uitsluitingsgronden:
+    </entry>
+    <entry key="espd.crit.eu.text.agreement.economic">Heeft de ondernemer met andere ondernemers overeenkomsten gesloten
+        die op vervalsing van de mededinging zijn gericht?
+    </entry>
+    <entry key="espd.crit.eu.text.arrangement.creditors">Heeft de ondernemer een regeling met schuldeisers getroffen?
+    </entry>
+    <entry key="espd.crit.eu.text.bankrupt">Is de ondernemer failliet?</entry>
+    <entry key="espd.crit.eu.text.breaching.obligations.environmental">Heeft de ondernemer, voor zover hij weet, zijn
+        verplichtingen op het gebied van het milieurecht geschonden? Als vermeld, voor zover het om deze
+        aanbestedingsprocedure gaat, in de nationale wetgeving, in de betreffende aankondiging of de
+        aanbestedingsstukken of in artikel 18, lid 2, van Richtlijn 2014/24/EU.
+    </entry>
+    <entry key="espd.crit.eu.text.breaching.obligations.labour">Heeft de ondernemer, voor zover hij weet, zijn
+        verplichtingen op het gebied van het arbeidsrecht geschonden? Als vermeld, voor zover het om deze
+        aanbestedingsprocedure gaat, in de nationale wetgeving, in de betreffende aankondiging of de
+        aanbestedingsstukken of in artikel 18, lid 2, van Richtlijn 2014/24/EU.
+    </entry>
+    <entry key="espd.crit.eu.text.breaching.obligations.social">Heeft de ondernemer, voor zover hij weet, zijn
+        verplichtingen op het gebied van het sociaal recht geschonden? Als vermeld, voor zover het om deze
+        aanbestedingsprocedure gaat, in de nationale wetgeving, in de betreffende aankondiging of de
+        aanbestedingsstukken of in artikel 18, lid 2, van Richtlijn 2014/24/EU.
+    </entry>
+    <entry key="espd.crit.eu.text.child.labour">Is de ondernemer zelf of iemand die lid is van het bestuurs-,
+        leidinggevend of toezichthoudend orgaan van de onderneming of daarin vertegenwoordigings-, beslissings- of
+        controlebevoegdheid heeft, wegens kinderarbeid en andere vormen van mensenhandel veroordeeld bij een definitief
+        geworden rechterlijke beslissing die niet ouder is dan vijf jaar of die expliciet een uitsluitingsperiode bevat
+        die nog steeds van toepassing is? In de zin van artikel 2 van Richtlijn 2011/36/EU van het Europees Parlement en
+        de Raad van 5 april 2011 inzake de voorkoming en bestrijding van mensenhandel en de bescherming van slachtoffers
+        daarvan, en ter vervanging van Kaderbesluit 2002/629/JBZ van de Raad (PB L 101 van 15.4.2011, blz. 1).
+    </entry>
+    <entry key="espd.crit.eu.text.conflict.interest">Is de ondernemer zich bewust van enig belangenconflict, zoals
+        vermeld in de nationale wetgeving, de betreffende aankondiging of de aanbestedingsstukken, als gevolg van zijn
+        deelneming aan de aanbestedingsprocedure?
+    </entry>
+    <entry key="espd.crit.eu.text.corruption">Is de ondernemer zelf of iemand die lid is van het bestuurs-,
+        leidinggevend of toezichthoudend orgaan van de onderneming of daarin vertegenwoordigings-, beslissings- of
+        controlebevoegdheid heeft, wegens corruptie veroordeeld bij een definitief geworden rechterlijke beslissing die
+        niet ouder is dan vijf jaar of die expliciet een uitsluitingsperiode bevat die nog steeds van toepassing is? In
+        de zin van artikel 3 van de Overeenkomst ter bestrijding van corruptie waarbij ambtenaren van de Europese
+        Gemeenschappen of van de lidstaten van de Europese Unie betrokken zijn (PB C 195 van 25.6.1997, blz. 1) en
+        artikel 2, lid 1, van Kaderbesluit 2003/568/JBZ van de Raad van 22 juli 2003 inzake de bestrijding van corruptie
+        in de privésector (PB L 192 van 31.7.2003, blz. 54). Deze uitsluitingsgrond omvat ook corruptie in de zin van de
+        nationale wetgeving van de aanbestedende dienst (aanbestedende entiteit) of de ondernemer.
+    </entry>
+    <entry key="espd.crit.eu.text.early.termination">Is het de ondernemer overkomen dat een eerdere overheidsopdracht,
+        een eerdere opdracht van een aanbestedende entiteit of een eerdere concessieovereenkomst heeft geleid tot
+        voortijdige beëindiging van die eerdere opdracht, tot schadevergoeding of tot andere vergelijkbare sancties?
+    </entry>
+    <entry key="espd.crit.eu.text.fraud">Is de ondernemer zelf of iemand die lid is van het bestuurs-, leidinggevend of
+        toezichthoudend orgaan van de onderneming of daarin vertegenwoordigings-, beslissings- of controlebevoegdheid
+        heeft, wegens fraude veroordeeld bij een definitief geworden rechterlijke beslissing die niet ouder is dan vijf
+        jaar of die expliciet een uitsluitingsperiode bevat die nog steeds van toepassing is? In de zin van artikel 1
+        van de Overeenkomst aangaande de bescherming van de financiële belangen van de Europese Gemeenschappen (PB C 316
+        van 27.11.1995, blz. 48).
+    </entry>
+    <entry key="espd.crit.eu.text.grounds.criminal.conv">Is de ondernemer zelf of iemand die lid is van het bestuurs-,
+        leidinggevend of toezichthoudend orgaan van de onderneming of daarin vertegenwoordigings-, beslissings- of
+        controlebevoegdheid heeft, wegens deelneming aan een criminele organisatie veroordeeld bij een definitief
+        geworden rechterlijke beslissing die niet ouder is dan vijf jaar of die expliciet een uitsluitingsperiode bevat
+        die nog steeds van toepassing is? In de zin van artikel 2 van Kaderbesluit 2008/841/JBZ van de Raad van 24
+        oktober 2008 ter bestrijding van georganiseerde criminaliteit (PB L 300 van 11.11.2008, blz. 42).
+    </entry>
+    <entry key="espd.crit.eu.text.guilty.misconduct">Heeft de ondernemer zich schuldig gemaakt aan ernstige
+        beroepsfouten? Zie, indien van toepassing, de definities in de nationale wetgeving, de betreffende aankondiging
+        of de aanbestedingsstukken.
+    </entry>
+    <entry key="espd.crit.eu.text.guilty.misinterpretation">Heeft de ondernemer in een van de volgende situaties
+        verkeerd:<p/>a) hij heeft zich in ernstige mate schuldig gemaakt aan valse verklaringen bij het verstrekken van
+        de informatie die nodig is om te controleren of er geen gronden voor uitsluiting zijn dan wel of aan de
+        selectiecriteria wordt voldaan,<p/>b) hij heeft dergelijke informatie achtergehouden,<p/>c) hij heeft de door de
+        aanbestedende dienst of aanbestedende entiteit gevraagde ondersteunende documenten niet onverwijld kunnen
+        verstrekken, en<p/>d) hij heeft getracht het besluitvormingsproces van de aanbestedende dienst of aanbestedende
+        entiteit onrechtmatig te beïnvloeden, om vertrouwelijke informatie te verkrijgen die hem onrechtmatige voordelen
+        in de aanbestedingsprocedure kan bezorgen, of om verwijtbaar misleidende informatie te verstrekken die een
+        belangrijke invloed kan hebben op besluiten inzake uitsluiting, selectie of gunning?
+    </entry>
+    <entry key="espd.crit.eu.text.insolvency">Is de ondernemer insolvent of in liquidatie?</entry>
+    <entry key="espd.crit.eu.text.involvement">Heeft de ondernemer of een met de ondernemer verbonden onderneming de
+        aanbestedende dienst of aanbestedende entiteit geadviseerd of is de ondernemer of een met hem verbonden
+        onderneming anderszins betrokken geweest bij de voorbereiding van de aanbestedingsprocedure?
+    </entry>
+    <entry key="espd.crit.eu.text.liquidator">Worden de activa van de ondernemer door een vereffenaar of door de
+        rechtbank beheerd?
+    </entry>
+    <entry key="espd.crit.eu.text.money.laundering">Is de ondernemer zelf of iemand die lid is van het bestuurs-,
+        leidinggevend of toezichthoudend orgaan van de onderneming of daarin vertegenwoordigings-, beslissings- of
+        controlebevoegdheid heeft, wegens witwassen van geld of financiering van terrorisme veroordeeld bij een
+        definitief geworden rechterlijke beslissing die niet ouder is dan vijf jaar of die expliciet een
+        uitsluitingsperiode bevat die nog steeds van toepassing is? In de zin van artikel 1 van Richtlijn 2005/60/EG van
+        het Europees Parlement en de Raad van 26 oktober 2005 tot voorkoming van het gebruik van het financiële stelsel
+        voor het witwassen van geld en de financiering van terrorisme (PB L 309 van 25.11.2005, blz. 15).
+    </entry>
+    <entry key="espd.crit.eu.text.national.bankruptcy">Verkeert de ondernemer in een andere, met faillissement
+        vergelijkbare toestand ingevolge een soortgelijke procedure uit hoofde van nationale wet- of regelgeving?
+    </entry>
+    <entry key="espd.crit.eu.text.payment.social.security">Heeft de ondernemer zijn verplichtingen geschonden met
+        betrekking tot de betaling van sociale premies, zowel in het land waar hij is gevestigd als in de lidstaat van
+        de aanbestedende dienst of aanbestedende entiteit indien dit een ander land is dan het land van vestiging?
+    </entry>
+    <entry key="espd.crit.eu.text.payment.taxes">Heeft de ondernemer zijn verplichtingen geschonden met betrekking tot
+        de betaling van belastingen, zowel in het land waar hij is gevestigd als in de lidstaat van de aanbestedende
+        dienst of aanbestedende entiteit indien dit een ander land is dan het land van vestiging?
+    </entry>
+    <entry key="espd.crit.eu.text.purely.national">Andere uitsluitingsgronden waarin de nationale wetgeving van de
+        lidstaat van de aanbestedende dienst of aanbestedende entiteit kan voorzien. Zijn de louter nationale
+        uitsluitingsgronden die in de betreffende aankondiging of in de aanbestedingsstukken worden vermeld, van
+        toepassing?
+    </entry>
+    <entry key="espd.crit.eu.text.suspended.business">Zijn de bedrijfsactiviteiten van de ondernemer gestaakt?</entry>
+    <entry key="espd.crit.eu.text.terrorist">Is de ondernemer zelf of iemand die lid is van het bestuurs-, leidinggevend
+        of toezichthoudend orgaan van de onderneming of daarin vertegenwoordigings-, beslissings- of controlebevoegdheid
+        heeft, wegens terroristische misdrijven of strafbare feiten in verband met terroristische activiteiten
+        veroordeeld bij een definitief geworden rechterlijke beslissing die niet ouder is dan vijf jaar of die expliciet
+        een uitsluitingsperiode bevat die nog steeds van toepassing is? In de zin van de artikelen 1 en 3 van
+        Kaderbesluit 2002/475/JBZ van de Raad van 13 juni 2002 inzake terrorismebestrijding (PB L 164 van 22.6.2002,
+        blz. 3). Deze uitsluitingsgrond omvat ook aanzetten tot, deelneming en medeplichtigheid aan of poging tot het
+        plegen van een strafbaar feit als bedoeld in artikel 4 van genoemd kaderbesluit.
+    </entry>
+    <entry key="espd.crit.eu.title.agreement.economic">Vervalsing van de mededinging</entry>
+    <entry key="espd.crit.eu.title.arrangement.creditors">Regeling met schuldeisers</entry>
+    <entry key="espd.crit.eu.title.bankrupt">Faillissement</entry>
+    <entry key="espd.part3.crit.eu.eo.bankrupt.title">Is uw organisatie failliet, insolvent of in liquidatie, heeft zij
+        een regeling met schuldeisers getroffen of verkeert zij in een andere vergelijkbare toestand ingevolge een
+        soortgelijke procedure uit hoofde van nationale wet- of regelgeving?
+    </entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.environmental">Niet-nakoming van verplichtingen op het gebied
+        van milieurecht
+    </entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.environmental.eo">Niet-nakoming van verplichtingen op het
+        gebied van milieurecht
+    </entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.labour">Niet-nakoming van verplichtingen op het gebied van
+        arbeidsrecht
+    </entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.social">Niet-nakoming van verplichtingen op het gebied van
+        sociaal recht
+    </entry>
+    <entry key="espd.crit.eu.title.child.labour">Kinderarbeid en andere vormen van mensenhandel</entry>
+    <entry key="espd.crit.eu.title.conflict.interest">Belangenconflict als gevolg van deelneming aan de
+        aanbestedingsprocedure
+    </entry>
+    <entry key="espd.crit.eu.title.conflict.interest.eo">Bevindt uw organisatie zich in een belangenconflict als gevolg
+        van deelneming aan de aanbestedingsprocedure?
+    </entry>
+    <entry key="espd.crit.eu.title.corruption">Corruptie</entry>
+    <entry key="espd.crit.eu.title.early.termination">Voortijdige beëindiging, schadevergoeding of andere vergelijkbare
+        sancties
+    </entry>
+    <entry key="espd.crit.eu.title.fraud">Fraude</entry>
+    <entry key="espd.crit.eu.title.grounds.criminal.conv">Deelneming aan een criminele organisatie</entry>
+    <entry key="espd.crit.eu.title.guilty.misconduct">Ernstige beroepsfouten</entry>
+    <entry key="espd.crit.eu.title.guilty.misconduct.eo">Is uw organisatie schuldig bevonden aan ernstige
+        beroepsfouten?
+    </entry>
+    <entry key="espd.crit.eu.title.guilty.misinterpretation">Valse verklaringen, achterhouden van informatie, niet in
+        staat vereiste documenten te verstrekken en verkrijging van vertrouwelijke informatie over deze procedure
+    </entry>
+    <entry key="espd.crit.eu.title.insolvency">Insolventie</entry>
+    <entry key="espd.crit.eu.title.involvement">Directe of indirecte betrokkenheid bij de voorbereiding van deze
+        aanbestedingsprocedure
+    </entry>
+    <entry key="espd.crit.eu.title.involvement.eo">Heeft uw organisatie of een met uw organisatie verbonden onderneming
+        de aanbestedende dienst of aanbestedende entiteit geadviseerd of is uw organisatie of een met uw organisatie
+        verbonden onderneming anderszins betrokken geweest bij de voorbereiding van de aanbestedingsprocedure?
+    </entry>
+    <entry key="espd.crit.eu.title.liquidator">Activa beheerd door vereffenaar</entry>
+    <entry key="espd.crit.eu.title.money.laundering">Witwassen van geld of financiering van terrorisme</entry>
+    <entry key="espd.crit.eu.title.national.bankruptcy">Met faillissement vergelijkbare toestand uit hoofde van
+        nationale recht
+    </entry>
+    <entry key="espd.crit.eu.title.payment.social.security">Betaling van sociale premies</entry>
+    <entry key="espd.crit.eu.title.payment.taxes">Betaling van belastingen</entry>
+    <entry key="espd.crit.eu.title.purely.national">Louter nationale uitsluitingsgronden</entry>
+    <entry key="espd.crit.eu.title.suspended.business">Staking van bedrijfsactiviteiten</entry>
+    <entry key="espd.crit.eu.title.terrorist">Terroristische misdrijven of strafbare feiten in verband met
+        terroristische activiteiten
+    </entry>
+    <entry key="espd.part3.crit.eu.guilty.misconduct.eo.tooltip">Zie, indien van toepassing, de definities in de
+        nationale wetgeving, de betreffende aankondiging of de aanbestedingsstukken
+    </entry>
+    <entry key="espd.crit.explain.certificates.independent.environmental.description">Zo nee, vermeld waarom en welke
+        andere bewijsmiddelen met betrekking tot de systemen of normen inzake milieubeheer kunnen worden verstrekt:
+    </entry>
+    <entry key="espd.part4.crit.explain.certificates.independent.quality.description">Zo nee, vermeld waarom en welke
+        andere bewijsmiddelen met betrekking tot de kwaliteitsborgingsregeling kunnen worden verstrekt:
+    </entry>
+    <entry key="espd.part4.crit.explain.supply.contracts.quality.description">Zo nee, vermeld waarom en welke andere
+        bewijsmiddelen kunnen worden verstrekt:
+    </entry>
+    <entry key="espd.crit.information.available.electronically">Zijn deze gegevens voor de aanbestedende diensten
+        kosteloos beschikbaar uit een databank van een EU-lidstaat?
+    </entry>
+    <entry key="espd.crit.issuer">Downloaden in</entry>
+    <entry key="espd.crit.length.period.exclusion">Duur van de uitsluitingsperiode voor zover deze rechtstreeks in de
+        veroordeling is bepaald.
+    </entry>
+    <entry key="espd.crit.number">Aantal</entry>
+    <entry key="espd.crit.number.of.years">Gemiddelde omzet</entry>
+    <entry key="espd.crit.other.than.judicial.or.administrative.decision">Is deze niet-nakoming met andere middelen
+        vastgesteld dan een rechterlijke of administratieve beslissing?
+    </entry>
+    <entry key="espd.crit.please.describe.them">Beschrijf de genomen maatregelen</entry>
+    <entry key="espd.crit.please.specify">Specificeer</entry>
+    <entry key="espd.crit.ratio">Ratio</entry>
+    <entry key="espd.crit.reason">Grond</entry>
+    <entry key="espd.crit.reasons.nevertheless.contract">Geef de redenen waarom de ondernemer desondanks in staat is om
+        de opdracht uit te voeren. Deze gegevens hoeven niet te worden verstrekt indien de uitsluiting van de ondernemer
+        in dit geval op grond van de toepasselijke nationale wetgeving verplicht is en geen afwijking toelaat indien de
+        ondernemer toch in staat is om de opdracht uit te voeren.
+    </entry>
+    <entry key="espd.crit.recipients">Ontvangers</entry>
+    <entry key="espd.part4.crit.selection.ca.declares.that">Wat de selectiecriteria betreft, vraagt de aanbestedende
+        dienst de ondernemer het volgende te verklaren:
+    </entry>
+    <entry key="espd.part4.crit.selection.ca.economic.article">Artikel 58, lid 3, van Richtlijn 2014/24/EU vermeldt de
+        volgende selectiecriteria:
+    </entry>
+    <entry key="espd.part4.crit.selection.declares.that.tooltip">De ondernemer hoeft dit veld alleen in te vullen
+        wanneer de aanbestedende dienst of aanbestedende entiteit in de betreffende aankondiging of in de in de
+        aankondiging bedoelde aanbestedingsstukken heeft aangegeven dat de ondernemer zich kan beperken tot het invullen
+        van dit punt van deel IV zonder dat hij de afdelingen A, B, C of D van deel IV hoeft in te vullen
+    </entry>
+    <entry key="espd.crit.selection.economic.average.yearly.turnover.description">De gemiddelde jaaromzet van de
+        onderneming voor het in de betreffende aankondiging, de aanbestedingsstukken of het UEA voorgeschreven aantal
+        boekjaren is als volgt:
+    </entry>
+    <entry key="espd.crit.selection.economic.average.yearly.turnover.main">Gemiddelde jaaromzet</entry>
+    <entry key="espd.crit.selection.economic.financial.ratio.description">Met betrekking tot de in de betreffende
+        aankondiging, de aanbestedingsdocumenten of het UEA vermelde financiële ratio's (bv. De verhouding tussen activa
+        en passiva) verklaart de ondernemer dat de actuele waarden inzake de vereiste ratio's als volgt zijn:
+    </entry>
+    <entry key="espd.crit.selection.economic.financial.ratio.main">Financiële ratio's</entry>
+    <entry key="espd.crit.selection.economic.financial.standing.article.tooltip">De ondernemer hoeft uitsluitend
+        informatie te verstrekken wanneer de betreffende selectiecriteria door de aanbestedende dienst of aanbestedende
+        entiteit in de betreffende aankondiging of in de in die aankondiging bedoelde aanbestedingsstukken zijn
+        voorgeschreven.
+    </entry>
+    <entry key="espd.crit.selection.economic.general.yearly.turnover.description">De algemene jaaromzet van de
+        onderneming voor het in de betreffende aankondiging, de aanbestedingsstukken of het UEA voorgeschreven aantal
+        boekjaren is als volgt:
+    </entry>
+    <entry key="espd.crit.selection.economic.general.yearly.turnover.main">Algemene jaaromzet</entry>
+    <entry key="espd.crit.selection.economic.other.financial.requirements.description">Met betrekking tot de eventuele
+        overige economische of financiële vereisten, die wellicht in de betreffende aankondiging of de
+        aanbestedingsstukken zijn vastgesteld, verklaart de ondernemer dat:
+    </entry>
+    <entry key="espd.crit.selection.economic.other.financial.requirements.main">Overige economische of financiële
+        vereisten
+    </entry>
+    <entry key="espd.crit.selection.economic.professional.risk.insurance.description">Het bedrag dat op grond van de
+        verzekering tegen beroepsrisico's van de ondernemer is verzekerd, is als volgt:
+    </entry>
+    <entry key="espd.crit.selection.economic.professional.risk.insurance.main">Verzekering tegen beroepsrisico's</entry>
+    <entry key="espd.crit.selection.economic.setup.eo.description">Vermeld indien de gegevens inzake de (algemene of
+        specifieke) omzet niet voor de hele voorgeschreven periode beschikbaar zijn, de oprichtingsdatum van de
+        onderneming of de datum waarop de ondernemer actief is geworden:
+    </entry>
+    <entry key="espd.crit.selection.economic.setup.eo.main">Oprichting van onderneming</entry>
+    <entry key="espd.crit.selection.economic.specific.average.turnover.description">De specifieke gemiddelde jaaromzet
+        van de onderneming op het ondernemingsgebied waarop de opdracht betrekking heeft, in het in de betreffende
+        aankondiging, de aanbestedingsstukken of het UEA voorgeschreven aantal boekjaren is als volgt:
+    </entry>
+    <entry key="espd.crit.selection.economic.specific.average.turnover.main">Specifieke gemiddelde omzet</entry>
+    <entry key="espd.crit.selection.economic.specific.yearly.turnover.description">De specifieke jaaromzet van de
+        onderneming op het ondernemingsgebied waarop de opdracht betrekking heeft, in het in de betreffende
+        aankondiging, de aanbestedingsstukken of het UEA voorgeschreven aantal boekjaren is als volgt:
+    </entry>
+    <entry key="espd.crit.selection.economic.specific.yearly.turnover.main">Specifieke jaaromzet</entry>
+    <entry key="espd.part4.crit.selection.eo.declares.that">Wat de selectiecriteria betreft, verklaart de ondernemer het
+        volgende:
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.declares.that.tooltip">De ondernemer hoeft dit veld alleen in te vullen
+        wanneer de aanbestedende dienst of aanbestedende entiteit in de betreffende aankondiging of in de in de
+        aankondiging bedoelde aanbestedingsstukken heeft aangegeven dat de ondernemer zich kan beperken tot het invullen
+        van dit punt van deel IV zonder dat hij de afdelingen A, B, C of D van deel IV hoeft in te vullen
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.economic.article">Artikel 58, lid 3, van Richtlijn 2014/24/EU vermeldt de
+        volgende selectiecriteria:
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.economic.article.tooltip">De ondernemer hoeft uitsluitend informatie te
+        verstrekken wanneer de betreffende selectiecriteria door de aanbestedende dienst of aanbestedende entiteit in de
+        betreffende aankondiging of in de in die aankondiging bedoelde aanbestedingsstukken zijn voorgeschreven.
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.economic.enrolement.description">De ondernemer is ingeschreven in het
+        relevante beroeps- of handelsregister dat wordt bijgehouden in de lidstaat waar de ondernemer is gevestigd
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.economic.enrolement.main">Inschrijving in beroeps- of handelsregister
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.economic.service.contracts.description">Moet de ondernemer in zijn land van
+        vestiging over een bepaalde vergunning beschikken of lid zijn van een bepaalde organisatie om de betrokken
+        dienst te kunnen verrichten?
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.economic.service.contracts.main">Voor een opdracht voor diensten:
+        vergunning of lidmaatschap
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.satisfies.all.criteria">Hij voldoet aan de voorgeschreven
+        selectiecriteria
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.article">Artikel 58, lid 2, van Richtlijn 2014/24/EU vermeldt
+        de volgende selectiecriteria:
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.article.tooltip">De ondernemer hoeft uitsluitend informatie te
+        verstrekken wanneer de betreffende selectiecriteria door de aanbestedende dienst of aanbestedende entiteit in de
+        betreffende aankondiging of in de in die aankondiging bedoelde aanbestedingsstukken zijn voorgeschreven.
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.enrolment.description">De ondernemer is ingeschreven in het
+        relevante beroeps- of handelsregister dat wordt bijgehouden in de lidstaat waar de ondernemer is gevestigd
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.enrolment.main">Inschrijving in beroeps- of handelsregister
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.service.contracts.description">Moet de ondernemer in zijn land
+        van vestiging over een bepaalde vergunning beschikken of lid zijn van een bepaalde organisatie om de betrokken
+        dienst te kunnen verrichten?
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.service.contracts.main">Voor een opdracht voor diensten:
+        vergunning of lidmaatschap
+    </entry>
+    <entry key="espd.part4.crit.selection.quality.assurance.article">Artikel 62, lid 2, van Richtlijn 2014/24/EU
+        vermeldt de volgende selectiecriteria:
+    </entry>
+    <entry key="espd.part4.crit.selection.quality.assurance.tooltip">De ondernemer hoeft uitsluitend informatie te
+        verstrekken wanneer de betreffende selectiecriteria door de aanbestedende dienst of aanbestedende entiteit in de
+        betreffende aankondiging of in de in die aankondiging bedoelde aanbestedingsstukken zijn voorgeschreven.
+    </entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.environmental.description">Kan de ondernemer
+        door onafhankelijke instanties opgestelde certificaten verstrekken waaruit blijkt dat de ondernemer voldoet aan
+        de voorgeschreven systemen of normen inzake milieubeheer?
+    </entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.environmental.main">Door onafhankelijke
+        instanties opgestelde certificaten over systemen of normen inzake milieubeheer
+    </entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.quality.description">Kan de ondernemer door
+        onafhankelijke instanties opgestelde certificaten verstrekken waaruit blijkt dat de ondernemer voldoet aan de
+        voorgeschreven kwaliteitsnormen, met inbegrip van normen inzake toegankelijkheid voor gehandicapten?
+    </entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.quality.main">Door onafhankelijke instanties
+        opgestelde certificaten over kwaliteitsnormen
+    </entry>
+    <entry key="espd.part4.crit.selection.satisfies.all.criteria">Hij voldoet aan alle criteria die in de betreffende
+        aankondiging of in de in de aankondiging bedoelde aanbestedingsstukken zijn voorschreven.
+    </entry>
+    <entry key="espd.part4.crit.selection.suitability.article">Artikel 58, lid 2, van Richtlijn 2014/24/EU vermeldt de
+        volgende selectiecriteria:
+    </entry>
+    <entry key="espd.part4.crit.selection.suitability.article.tooltip">De ondernemer hoeft dit veld alleen in te vullen
+        wanneer de aanbestedende dienst of aanbestedende entiteit in de betreffende aankondiging of in de in de
+        aankondiging bedoelde aanbestedingsstukken heeft aangegeven dat de ondernemer zich kan beperken tot het invullen
+        van afdeling ? van deel IV en dat geen andere afdeling van deel IV hoeft te worden ingevuld:
+    </entry>
+    <entry key="espd.crit.selection.suitability.enrolment.professional.register.description">Hij is ingeschreven in een
+        relevant beroepsregister dat wordt bijgehouden in de lidstaat waar de ondernemer is gevestigd, als beschreven in
+        bijlage XI bij Richtlijn 2014/24/EU; ondernemers uit bepaalde lidstaten moeten wellicht voldoen aan andere eisen
+        uit die bijlage.
+    </entry>
+    <entry key="espd.crit.selection.suitability.enrolment.professional.register.main">Inschrijving in een relevant
+        beroepsregister
+    </entry>
+    <entry key="espd.crit.selection.suitability.enrolment.trade.register.description">Hij is ingeschreven in een
+        handelsregister dat wordt bijgehouden in de lidstaat waar de ondernemer is gevestigd, als beschreven in bijlage
+        XI bij Richtlijn 2014/24/EU; ondernemers uit bepaalde lidstaten moeten wellicht voldoen aan andere eisen uit die
+        bijlage.
+    </entry>
+    <entry key="espd.crit.selection.suitability.enrolment.trade.register.main">Inschrijving in een handelsregister
+    </entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.auth.description">Moet de ondernemer in zijn land van
+        vestiging over een bepaalde vergunning beschikken om de betrokken dienst te kunnen verrichten?
+    </entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.auth.main">Voor een opdracht voor diensten: bepaalde
+        vergunning
+    </entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.membership.description">Moet de ondernemer in zijn
+        land van vestiging lid zijn van een bepaalde organisatie om de betrokken dienst te kunnen verrichten?
+    </entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.membership.main">Voor een opdracht voor diensten:
+        lidmaatschap van bepaalde organisatie
+    </entry>
+    <entry key="espd.crit.selection.technical.allowance.of.checks.description">In het geval van complexe producten of
+        diensten of wanneer deze bij wijze van uitzondering aan een bijzonder doel moeten beantwoorden: Zal de
+        ondernemer controle van zijn technische of productiecapaciteit toelaten en zo nodig van zijn mogelijkheden
+        inzake ontwerpen en onderzoek en de maatregelen om de kwaliteit te waarborgen? De controle moet worden verricht
+        door de aanbestedende dienst zelf of, indien deze laatste daarmee instemt, namens deze door een bevoegd
+        officieel orgaan van het land waar de leverancier of dienstverlener is gevestigd.
+    </entry>
+    <entry key="espd.crit.selection.technical.allowance.of.checks.main">Toelating van controle</entry>
+    <entry key="espd.crit.selection.technical.average.annual.manpower.description">De gemiddelde jaarlijkse
+        personeelsbezetting van de ondernemer was de afgelopen drie jaar als volgt:
+    </entry>
+    <entry key="espd.crit.selection.technical.average.annual.manpower.main">Gemiddelde jaarlijkse personeelsbezetting
+    </entry>
+    <entry key="espd.crit.selection.technical.educational.professional.qualifications.description">Over de volgende
+        onderwijs- en beroepskwalificaties beschikt de dienstverlener of de aannemer zelf, en/of (al naargelang de
+        vereisten in de betreffende aankondiging of de aanbestedingsstukken) de leidinggevenden van de onderneming.
+    </entry>
+    <entry key="espd.crit.selection.technical.educational.professional.qualifications.main">Onderwijs- en
+        beroepskwalificaties
+    </entry>
+    <entry key="espd.crit.selection.technical.environment.management.features.description">De ondernemer zal bij de
+        uitvoering van de opdracht de volgende maatregelen inzake milieubeheer kunnen toepassen:
+    </entry>
+    <entry key="espd.crit.selection.technical.environment.management.features.main">Maatregelen inzake milieubeheer
+    </entry>
+    <entry key="espd.crit.selection.technical.number.managerial.staff.description">Het aantal leidinggevenden van de
+        ondernemer was de afgelopen drie jaar als volgt:
+    </entry>
+    <entry key="espd.crit.selection.technical.number.managerial.staff.main">Aantal leidinggevenden</entry>
+    <entry key="espd.part4.crit.selection.technical.professional.ability.article">Artikel 58, lid 4, van Richtlijn
+        2014/24/EU vermeldt de volgende selectiecriteria:
+    </entry>
+    <entry key="espd.part4.crit.selection.technical.professional.ability.article.tooltip">De ondernemer hoeft
+        uitsluitend informatie te verstrekken wanneer de betreffende selectiecriteria door de aanbestedende dienst of
+        aanbestedende entiteit in de betreffende aankondiging of in de in die aankondiging bedoelde aanbestedingsstukken
+        zijn voorgeschreven.
+    </entry>
+    <entry key="espd.crit.selection.technical.service.contracts.performance.services.description">Uitsluitend voor een
+        overheidsopdracht voor diensten: De ondernemer heeft tijdens de referentieperiode de volgende voornaamste
+        diensten van de vastgestelde soort verricht. De aanbestedende diensten mogen tot drie jaar ervaring eisen en
+        mogen ervaring die meer dan drie jaar geleden is opgedaan, accepteren.
+    </entry>
+    <entry key="espd.crit.selection.technical.service.contracts.performance.services.main">Voor een opdracht voor
+        diensten: verrichting van diensten van de vastgestelde soort
+    </entry>
+    <entry key="espd.crit.selection.technical.study.research.facilities.description">Hij maakt gebruik van de volgende
+        ontwerp- en onderzoeksfaciliteiten:
+    </entry>
+    <entry key="espd.crit.selection.technical.study.research.facilities.main">Ontwerp- en onderzoeksfaciliteiten</entry>
+    <entry key="espd.crit.selection.technical.subcontracting.proportion.description">De ondernemer is voornemens
+        eventueel het volgende gedeelte (d.w.z. percentage) van de opdracht in onderaanneming te geven. Er zij op
+        gewezen dat indien de ondernemer heeft besloten om een gedeelte van de opdracht in onderaanneming te geven en
+        voor de uitvoering van dat gedeelte een beroep op de draagkracht van de onderaannemer doet, hij voor dergelijke
+        onderaannemers een afzonderlijk UEA moet invullen; zie deel II, afdeling C, hierboven.
+    </entry>
+    <entry key="espd.crit.selection.technical.subcontracting.proportion.main">Gedeelte in onderaanneming</entry>
+    <entry key="espd.crit.selection.technical.supply.chain.management.description">De ondernemer zal bij de uitvoering
+        van de opdracht de volgende systemen voor het beheer van de toeleveringsketen en traceersystemen kunnen
+        toepassen:
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.chain.management.main">Beheer van de toeleveringsketen</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.certificate.quality.description">Kan de ondernemer de
+        vereiste certificaten verstrekken die door erkende officiële instituten of diensten voor kwaliteitscontrole zijn
+        opgesteld en waarin wordt verklaard dat duidelijk door referenties geïdentificeerde producten beantwoorden aan
+        de technische specificaties of normen die in de betreffende aankondiging of aanbestedingsstukken zijn vermeld?
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.certificate.quality.main">Voor een opdracht voor
+        leveringen: certificaten van instituten voor kwaliteitscontrole
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.performance.deliveries.description">Uitsluitend voor een
+        overheidsopdracht voor leveringen: De ondernemer heeft tijdens de referentieperiode de volgende voornaamste
+        leveringen van de vastgestelde soort verricht. De aanbestedende diensten mogen tot drie jaar ervaring eisen en
+        mogen ervaring die meer dan drie jaar geleden is opgedaan, accepteren.
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.performance.deliveries.main">Voor een opdracht voor
+        leveringen: verrichting van leveringen van de vastgestelde soort
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.with.ca.description">Voor een overheidsopdracht voor
+        leveringen: De ondernemer zal de vereiste monsters, beschrijvingen of foto's van de te leveren producten
+        verstrekken en zal, indien van toepassing, een certificaat van echtheid verstrekken.
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.with.ca.main">Voor een opdracht voor leveringen:
+        monsters, beschrijvingen of foto's met certificaat van echtheid
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.without.ca.description">Voor een overheidsopdracht voor
+        leveringen: De ondernemer zal de vereiste monsters, beschrijvingen of foto's van de te leveren producten
+        verstrekken, die niet vergezeld hoeven te gaan van een certificaat van echtheid.
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.without.ca.main">Voor een opdracht voor leveringen:
+        monsters, beschrijvingen of foto's zonder certificaat van echtheid
+    </entry>
+    <entry key="espd.crit.selection.technical.technical.facilities.measures.description">De ondernemer bedient zich van
+        de volgende technische uitrusting en maatregelen om de kwaliteit te waarborgen en zijn mogelijkheden ten aanzien
+        van ontwerpen en onderzoek zijn als volgt:
+    </entry>
+    <entry key="espd.crit.selection.technical.technical.facilities.measures.main">Technische uitrusting en maatregelen
+        om de kwaliteit te waarborgen
+    </entry>
+    <entry key="espd.crit.selection.technical.technicians.technical.bodies.description">De ondernemer kan een beroep
+        doen op de volgende technici of technische organen, met name die welke verantwoordelijk zijn voor
+        kwaliteitscontrole. Voor de technici of technische organen die niet rechtstreeks tot de onderneming van de
+        ondernemer behoren, maar op wier draagkracht de ondernemer een beroep doet als vermeld in deel II, afdeling C,
+        moeten afzonderlijke UEA-formulieren worden ingevuld.
+    </entry>
+    <entry key="espd.crit.selection.technical.technicians.technical.bodies.main">Technici of technische organen voor
+        kwaliteitscontrole
+    </entry>
+    <entry key="espd.crit.selection.technical.tools.plant.description">De ondernemer zal voor het uitvoeren van de
+        opdracht over de volgende outillage, materieel en technische uitrusting beschikken:
+    </entry>
+    <entry key="espd.crit.selection.technical.tools.plant.main">Outillage, materieel en technische uitrusting</entry>
+    <entry key="espd.crit.selection.technical.work.contracts.performance.works.description">Uitsluitend voor een
+        overheidsopdracht voor werken: De ondernemer heeft tijdens de referentieperiode de volgende werken van de
+        vastgestelde soort verricht. De aanbestedende diensten mogen tot vijf jaar ervaring eisen en mogen ervaring die
+        meer dan vijf jaar geleden is opgedaan, accepteren.
+    </entry>
+    <entry key="espd.crit.selection.technical.work.contracts.performance.works.main">Voor een opdracht voor werken:
+        uitvoering van werken van de vastgestelde soort
+    </entry>
+    <entry key="espd.crit.selection.technical.work.contracts.technicians.description">In geval van overheidsopdrachten
+        voor werken zal de ondernemer voor de uitvoering van de werkzaamheden een beroep kunnen doen op de volgende
+        technici of technische organen:
+    </entry>
+    <entry key="espd.crit.selection.technical.work.contracts.technicians.main">Voor een opdracht voor werken: technici
+        of technische organen voor de uitvoering van de werkzaamheden
+    </entry>
+    <entry key="espd.crit.start.date">Einddatum</entry>
+    <entry key="espd.crit.taken.self.cleaning.measures">Heeft u maatregelen genomen om aan te tonen dat u betrouwbaar
+        bent (Chr(34)Self-CleaningChr(34))
+    </entry>
+    <entry key="espd.crit.taxes.eo.fulfilled.obligations">Is de ondernemer zijn verplichtingen nagekomen door het
+        betalen van de verschuldigde belastingen of sociale premies, met inbegrip van lopende rente of boeten indien
+        toepasselijk, of het aangaan van een bindende regeling daartoe?
+    </entry>
+    <entry key="espd.crit.taxes.length.period.of.exclusion">In geval van een veroordeling: vermeld de duur van de
+        uitsluiting voor zover die daarin expliciet is vastgesteld
+    </entry>
+    <entry key="espd.crit.taxes.means.description">Beschrijf welke middelen zijn gebruikt</entry>
+    <entry key="espd.part3.crit.grounds.criminal.conv.top.title">A: Gronden die verband houden met strafrechtelijke
+        veroordelingen
+    </entry>
+    <entry key="espd.part3.crit.top.grounds.payment.taxes.title">B: Gronden die verband houden met de betaling van
+        belastingen of sociale premies
+    </entry>
+    <entry key="espd.part3.crit.insolvency.conflicts.top.title">C: Gronden met betrekking tot insolventie,
+        belangenconflicten of beroepsfouten
+    </entry>
+    <entry key="espd.part3.crit.purely.national.top.title">D: Louter nationale uitsluitingsgronden</entry>
+    <entry key="espd.crit.url">URL (internetadres)</entry>
+    <entry key="espd.crit.who.convicted">Wie is veroordeeld</entry>
+    <entry key="espd.crit.year">Jaar</entry>
+    <entry key="espd.crit.your.answer">Uw antwoord?</entry>
+    <entry key="espd.gui.download.as">Downloaden in</entry>
+    <entry key="espd.gui.download.pdf">pdf-formaat</entry>
+    <entry key="espd.gui.download.xml">XML-formaat</entry>
+    <entry key="espd.gui.download.zip">beide formaten</entry>
+    <entry key="espd.gui.ec">European Commission</entry>
+    <entry key="espd.ecertis.404">Geen gegevens in e-Certis</entry>
+    <entry key="espd.ecertis.issued">Afgegeven door</entry>
+    <entry key="espd.ecertis.language">Taal</entry>
+    <entry key="espd.ecertis.loading">Gegevens aan het laden uit e-Certis...</entry>
+    <entry key="espd.ecertis.no.evidences">Geen bewijsstukken</entry>
+    <entry key="espd.gui.error.ted.notice.not.supported">Het geüploade bestand is een aankondiging en geen UEA, daarom
+        kan het in deze webdienst niet worden gebruikt.
+    </entry>
+    <entry key="espd.gui.espd">Het geüploade bestand kon niet correct worden gelezen. Is het een geldige UEA-aanvraag of
+        een geldig UEA-antwoord?
+    </entry>
+    <entry key="espd.gui.espd.upload.error">Het geüploade bestand kon niet correct worden gelezen. Is het een geldige
+        UEA-aanvraag?
+    </entry>
+    <entry key="espd.gui.espd.upload.request.error">Het geüploade bestand kon niet correct worden gelezen. Is het een
+        geldig UEA-antwoord?
+    </entry>
+    <entry key="espd.gui.espd.upload.response.error">Uniform Europees Aanbestedingsdocument</entry>
+    <entry key="espd.gui.europa">Europa</entry>
+    <entry key="espd.gui.expire.reminder.message">U heeft bijna een uur lang geen handelingen in de UEA-webdienst
+        verricht.
+        &lt;p&gt;
+        Bewaar het e-UEA om geen gegevens te verliezen.&lt;p&gt;U kunt uw e-UEA op elk moment importeren (hergebruiken) om
+        verder te werken.
+    </entry>
+    <entry key="espd.gui.export">Opslaan</entry>
+    <entry key="espd.gui.faq.leaflet">folder Veelgestelde vragen</entry>
+    <entry key="espd.gui.faq.text.answers">De antwoorden op de meestgestelde vragen over het UEA zijn te vinden in de
+    </entry>
+    <entry key="espd.gui.faq.text.more.info">Voor meer informatie over het UEA</entry>
+    <entry key="espd.init.alert">
+        &lt;p&gt;Het Uniform Europees Aanbestedingsdocument (UEA) is een eigen verklaring over de financiële toestand, de
+            bekwaamheden en de geschiktheid van ondernemingen voor een openbareaanbestedingsprocedure. Het is in alle
+            EU-talen beschikbaar en wordt als voorlopig bewijs gebruikt dat aan de vereiste voorwaarden van
+            openbareaanbestedingsprocedures in de hele EU wordt voldaan. Dankzij het UEA hoeven de inschrijvers niet
+            langer het volledige bewijsmateriaal en de verschillende formulieren te verstrekken die vroeger voor
+            overheidsopdrachten in de EU werden gebruikt, en dat betekent een aanzienlijke vereenvoudiging van de
+            toegang tot grensoverschrijdende overheidsopdrachten. Vanaf oktober 2018 wordt het UEA uitsluitend in
+            elektronische vorm verstrekt.
+        &lt;/p&gt;
+        &lt;p&gt;De Europese Commissie biedt kopers, inschrijvers en andere partijen die het UEA elektronisch willen invullen,
+            een gratis webdienst aan. Het onlineformulier kan worden ingevuld, afgedrukt en vervolgens samen met de
+            overige onderdelen van de inschrijving aan de koper worden gestuurd. Als de procedure elektronisch wordt
+            uitgevoerd, kan het UEA elektronisch worden geëxporteerd, opgeslagen en ingediend. Een UEA dat in een
+            eerdere openbareaanbestedingsprocedure is verstrekt, kan worden hergebruikt, zolang de daarin vermelde
+            informatie nog steeds correct is. Inschrijvers kunnen van de procedure worden uitgesloten of worden
+            vervolgd, indien zij zich in ernstige mate schuldig hebben gemaakt aan valse verklaringen bij het invullen
+            van het UEA, indien zij informatie hebben achtergehouden of indien zij niet in staat zijn de ondersteunende
+            documenten te verstrekken.
+        &lt;/p&gt;
+    </entry>
+    <entry key="espd.init.create.espd">Een nieuw UEA creëren</entry>
+    <entry key="espd.init.create.response">Een antwoord aanmaken</entry>
+    <entry key="espd.init.header">Welkom bij de UEA-dienst</entry>
+    <entry key="espd.init.i.am.ca">Ik ben een aanbestedende dienst</entry>
+    <entry key="espd.init.i.am.ce">Ik ben een aanbestedende entiteit</entry>
+    <entry key="espd.init.i.am.eop">Ik ben een ondernemer</entry>
+    <entry key="espd.init.import.espd">Een UEA importeren</entry>
+    <entry key="espd.init.merge.espds">Twee UEA's samenvoegen</entry>
+    <entry key="espd.init.reuse.espd">Een bestaand UEA opnieuw gebruiken</entry>
+    <entry key="espd.init.review.espd">Een UEA opnieuw bekijken</entry>
+    <entry key="espd.init.select.country">Selecteer land</entry>
+    <entry key="espd.init.ted.reception.id.placeholder">Vul het ontvangen nummer van de aankondiging in</entry>
+    <entry key="espd.init.upload.document">Geïmporteerd document</entry>
+    <entry key="espd.init.upload.documents">Documenten uploaden</entry>
+    <entry key="espd.init.upload.request">Upload een UEA-aanvraag of een UEA-antwoord</entry>
+    <entry key="espd.init.upload.request.response">Upload een UEA-aanvraag van de aanbestedende dienst</entry>
+    <entry key="espd.init.upload.response">Upload een oud UEA-antwoord van uzelf</entry>
+    <entry key="espd.init.what.you.do">Wat wilt u doen?</entry>
+    <entry key="espd.init.where.are.you.from.ca">Waar bevindt uw aanbestedende dienst zich?</entry>
+    <entry key="espd.init.where.are.you.from.eo">Waar bevindt uw onderneming zich?</entry>
+    <entry key="espd.init.who.are.you">Wie bent u?</entry>
+    <entry key="espd.gui.footer.last.update">Laatste actualisering:</entry>
+    <entry key="espd.gui.grow">GROW</entry>
+    <entry key="espd.ecertis.information.for.country">Informatie voor {0} over e-Certis</entry>
+    <entry key="espd.gui.legal.notice">Legal Notice</entry>
+    <entry key="espd.ecertis.less.information">Minder informatie</entry>
+    <entry key="espd.ecertis.more.information">Meer informatie</entry>
+    <entry key="espd.gui.next">Volgende</entry>
+    <entry key="espd.gui.no">Nee</entry>
+    <entry key="espd.gui.not.applicable">Niet van toepassing</entry>
+    <entry key="espd.gui.place">Plaats</entry>
+    <entry key="espd.gui.previous">Vorige</entry>
+    <entry key="espd.gui.print">Overzicht</entry>
+    <entry key="espd.gui.progress.exclusion">Uitsluiting</entry>
+    <entry key="espd.gui.progress.finish">Klaar</entry>
+    <entry key="espd.gui.progress.procedure">Procedure</entry>
+    <entry key="espd.gui.progress.selection">Selectie</entry>
+    <entry key="espd.gui.progress.start">Start</entry>
+    <entry key="espd.gui.question.to.use.alpha">Wilt u de selectiecriteria van A tot en met D gebruiken?</entry>
+    <entry key="espd.gui.report.appliction.issue">Bij problemen met de UEA-toepassing kunt u contact opnemen met</entry>
+    <entry key="espd.gui.report.security.incident">Bij incidenten op het gebied van informatiebeveiliging kunt u contact
+        opnemen met de Europese Commissie via het
+    </entry>
+    <entry key="espd.gui.report.security.incident.title">Verslag van een incident op het gebied van
+        informatiebeveiliging
+    </entry>
+    <entry key="espd.gui.role.ca">Rol: aanbestedende dienst</entry>
+    <entry key="espd.gui.role.eo">Rol: ondernemer</entry>
+    <entry key="espd.gui.search">Search</entry>
+    <entry key="espd.gui.signature">Handtekening</entry>
+    <entry key="espd.gui.tools">Instrumenten</entry>
+    <entry key="espd.init.ca.can.create.espd.tooltip">De aanbestedende dienst kan de opstelling van een UEA met een leeg
+        formulier beginnen. In dat geval moet de aanbestedende dienst alle relevante informatie in het UEA-formulier
+        opnemen.
+    </entry>
+    <entry key="espd.init.ca.can.import.espd.tooltip">Als de aanbestedende dienst de UEA-dienst eerder al eens voor een
+        andere aanbestedingsprocedure heeft gebruikt, kan hij het op het lokale netwerk opgeslagen UEA importeren. In
+        dat geval hoeven bepaalde gegevens niet meer in het UEA te worden ingevuld, maar moeten deze met het oog op de
+        nieuwe aanbestedingsprocedure wel worden geactualiseerd.
+    </entry>
+    <entry key="espd.init.ca.ref.buyer.tooltip">De term aanbestedende dienst betreft de koper.</entry>
+    <entry key="espd.init.ce.ref.buyer.tooltip">De term aanbestedende entiteit verwijst in deze context naar een koper
+        die actief is in de sectoren water- en energievoorziening, vervoer en postdiensten. Aanbestedende diensten die
+        ook in de eerder genoemde sectoren actief zijn, moeten Chr(34)Ik ben een aanbestedende dienstChr(34) selecteren.
+    </entry>
+    <entry key="espd.init.eo.can.reuse.espd.tooltip">De informatie die in een vorige aanbestedingsprocedure via een UEA
+        werd verstrekt (Chr(34)oudChr(34) UEA), kan door de ondernemer opnieuw worden gebruikt. De UEA-dienst zal het
+        Chr(34)oudeChr(34) UEA samenvoegen met het nieuwe formulier dat de aanbestedende dienst voor deze
+        aanbestedingsprocedure heeft opgesteld.
+    </entry>
+    <entry key="espd.init.eo.ref.suppl.tooltip">De term ondernemer betreft de leverancier / inschrijver.</entry>
+    <entry key="espd.init.espd.used.both.ca.eo.tooltip">De UEA-dienst kan zowel door aanbestedende diensten als door
+        ondernemers worden gebruikt. Kies de optie die met uw profiel in deze aanbestedingsprocedure overeenstemt.
+    </entry>
+    <entry key="espd.init.filter.create.response.tooltip">Een nieuw UEA-antwoord aanmaken</entry>
+    <entry key="espd.init.filter.eo.can.import.espd.tooltip">Het UEA-dossier, dat de aanbestedende dienst van tevoren
+        voor deze aanbestedingsprocedure heeft ingevuld en samen met de aankondiging van de opdracht heeft gepubliceerd,
+        kan door de ondernemer worden geïmporteerd.
+    </entry>
+    <entry key="espd.init.filter.eo.merge.espds.tooltip">The ESPD service will merge the 'old' ESPD with the new form
+        prepared by the contracting authority for this procurement procedure.
+    </entry>
+    <entry key="espd.init.overview.received.espds.tooltip">Deze functie geeft een tabel met een overzicht van alle
+        antwoorden die de inschrijvers in hun UEA voor een specifieke aanbestedingsprocedure hebben verstrekt.
+    </entry>
+    <entry key="espd.init.review.espd.tooltip">De aanbestedende dienst kan het van de ondernemer ontvangen elektronische
+        UEA controleren/opnieuw bekijken.
+    </entry>
+    <entry key="espd.init.ted.reception.id.tooltip">Wanneer de aanbestedende dienst een aankondiging ter bekendmaking
+        bij het Publicatiebureau heeft ingediend, ontvangt hij een e-mail van het Publicatiebureau. Deze e-mail bevat
+        een identificatiecode die bij de UEA-dienst kan worden gebruikt om informatie over de procedure en de
+        aanbestedende dienst in te vullen.
+    </entry>
+    <entry key="espd.validator.accept">Vul een waarde met een geldige extensie in.</entry>
+    <entry key="espd.validator.creditcard">Vul een geldig kredietkaartnummer in.</entry>
+    <entry key="espd.validator.date">Vul een geldige datum in.</entry>
+    <entry key="espd.validator.dateISO">Vul een geldige datum (ISO) in.</entry>
+    <entry key="espd.validator.digits">Vul alleen cijfers in.</entry>
+    <entry key="espd.validator.email">Vul een geldig e-mailadres in.</entry>
+    <entry key="espd.validator.equalTo">Vul nogmaals dezelfde waarde in.</entry>
+    <entry key="espd.validator.max">Vul een waarde kleiner dan of gelijk aan {0} in.</entry>
+    <entry key="espd.validator.maxlength">Vul maximaal {0} tekens in.</entry>
+    <entry key="espd.validator.min">Vul een waarde groter dan of gelijk aan {0} in.</entry>
+    <entry key="espd.validator.minlength">Vul minimaal {0} tekens in.</entry>
+    <entry key="espd.validator.number">Vul een geldig getal in.</entry>
+    <entry key="espd.validator.range">Vul een waarde tussen {0} en {1} in.</entry>
+    <entry key="espd.validator.rangelength">Vul een waarde tussen {0} en {1} tekens in.</entry>
+    <entry key="espd.validator.remote">Verbeter dit veld.</entry>
+    <entry key="espd.validator.required">Dit veld is verplicht.</entry>
+    <entry key="espd.validator.url">Voer een URL (internetadres) in.</entry>
+    <entry key="espd.gui.view.ca">Bekijken: (als aanbestedende dienst)</entry>
+    <entry key="espd.gui.view.eo">Bekijken: (als ondernemer)</entry>
+    <entry key="espd.gui.yes">Ja</entry>
+    <entry key="espd.gui.zip.instructions">Dit is beknopte documentatie over de UEA-bestanden die u in deze zip-folder
+        aantreft.Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nespd.XML: Het XML-bestand is een bestand dat door onze
+        UEA-webdienst of andere compatibele UEA-diensten kan worden gelezen. Het voordeel van het gebruik van het e-UEA
+        als XML-bestand is dat kopers en ondernemingen het later voor andere procedures kunnen hergebruiken. Het moet
+        samen met de aanbestedingsdocumenten (van aanbestedende dienst naar onderneming) of als onderdeel van de
+        inschrijving (van onderneming naar aanbestedende dienst) worden
+        verzonden.Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nespd.PDF: Het pdf-bestand is een voor mensen leesbare versie
+        van het e-UEA. Ook hier stellen wij voor dat u het naast het XML-bestand samen met de aanbestedingsdocumenten
+        (van aanbestedende dienst naar onderneming) of als onderdeel van de inschrijving (van onderneming naar
+        aanbestedende dienst) als referentiedocument gebruikt.Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nAls u vragen over
+        de bestanden heeft, aarzel dan niet contact met ons op te nemen via het volgende e-mailadres:
+        grow-espd@ec.europa.eu
+    </entry>
+
+</properties>

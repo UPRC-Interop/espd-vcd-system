@@ -1,0 +1,1035 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+Es wir hier explizit auf einen DocType verzichten um diese Datei in der Transformation nutzen zu koennen, ohne das sie gegen die properties.dtd geprüft wird.
+Wenn die Datei als Properties gezogen wird, wird ein DocType zur Laufzeit eingetragen.
+-->
+<properties>
+    <entry key="espd.gui.about">A proposito di</entry>
+    <entry key="espd.part4.all.selection.switch">?: Indicazione generale per tutti i criteri di selezione</entry>
+    <entry key="espd.gui.app.environment">Gentile utente, sta utilizzando il nostro ambiente di prova. Utilizzare
+        invece
+    </entry>
+    <entry key="espd.gui.app.subtitle">Servizio di compilazione e riutilizzo del DGUE</entry>
+    <entry key="espd.gui.app.title">Documento di gara unico europeo (DGUE)</entry>
+    <entry key="espd.gui.back.to.main">Ritornare alla pagina principale</entry>
+    <entry key="espd.gui.cancel">Cancellare</entry>
+    <entry key="espd.gui.click.here">cliccare qui</entry>
+    <entry key="espd.gui.contact">Contattare</entry>
+    <entry key="espd.gui.contact.header">Contattare</entry>
+    <entry key="espd.gui.contact.info">&lt;p&gt;Commissione europea&lt;p&gt;Direzione generale del Mercato interno, dell'industria,
+        dell'imprenditoria e delle PMI&lt;p&gt;Avenue d'Auderghem 45 / Oudergemselaan 45&lt;p&gt;B-1049 Brussels&lt;p&gt;Belgio
+    </entry>
+    <entry key="espd.gui.cookies">Cookies</entry>
+    <entry key="espd.gui.correct.errors">Prima di poter continuare è necessario correggere gli errori.</entry>
+    <entry key="espd.part1.city">Città:</entry>
+    <entry key="espd.part1.confirm.email">Confermare e-mail:</entry>
+    <entry key="espd.part1.confirm.telephone">Confermare il numero di telefono:</entry>
+    <entry key="espd.part1.contact.details.ca">Identità del committente</entry>
+    <entry key="espd.part1.contact.person">Persona di contatto:</entry>
+    <entry key="espd.part1.correct.errors">Prima di poter continuare è necessario correggere gli errori.</entry>
+    <entry key="espd.part1.country">Paese:</entry>
+    <entry key="espd.part1.email">E-mail:</entry>
+    <entry key="espd.part1.fax">fakss</entry>
+    <entry key="espd.part1.file.ref.ca">Numero di riferimento attribuito al fascicolo dall'amministrazione
+        aggiudicatrice o dall'ente aggiudicatore (se pertinente):
+    </entry>
+    <entry key="espd.part1.header">Parte I: Informazioni sulla procedura di appalto e sull'amministrazione
+        aggiudicatrice o ente aggiudicatore
+    </entry>
+    <entry key="espd.part1.info.procedure">procedura</entry>
+    <entry key="espd.part1.info.procurement.proc">Informazioni sulla procedura di appalto</entry>
+    <entry key="espd.part1.info.pub">Informazioni sulla pubblicazione</entry>
+    <entry key="espd.part1.name">Denominazione ufficiale:</entry>
+    <entry key="espd.part1.nat.regnum">Numero di registrazione nazionale (se noto):</entry>
+    <entry key="espd.part1.official.journal.alert">Se non è stato pubblicato un avviso di indizione di gara nella
+        Gazzetta ufficiale dell'Unione europea o se tale pubblicazione non è obbligatoria, l?amministrazione
+        aggiudicatrice o l?ente aggiudicatore deve inserire i dati in modo da permettere l?individuazione univoca della
+        procedura di appalto (ad esempio il rimando ad una pubblicazione a livello nazionale).
+    </entry>
+    <entry key="espd.part1.ojs.label">Numero dell'avviso nella GU S:</entry>
+    <entry key="espd.part1.ojs.url">URL della GU S</entry>
+    <entry key="espd.part1.postcode">Codice postale:</entry>
+    <entry key="espd.part1.procurer.name">Titolo:</entry>
+    <entry key="espd.part1.street.and. num">Via e numero civico:</entry>
+    <entry key="espd.part1.ted.reception.id">Numero dell'avviso o bando ricevuto</entry>
+    <entry key="espd.part1.telephone">Telefono:</entry>
+    <entry key="espd.part1.title.or.short.desc">Descrizione breve:</entry>
+    <entry key="espd.part1.to.be.filled.alert">Per le procedure di appalto per le quali è stato pubblicato un avviso di
+        indizione di gara nella Gazzetta ufficiale dell'Unione europea le informazioni richieste alla parte I saranno
+        acquisite automaticamente, a condizione che per generare e compilare il DGUE sia stato utilizzato il servizio
+        DGUE elettronico. Riferimento dell'avviso o bando pertinente pubblicato nella Gazzetta ufficiale dell'Unione
+        europea:
+    </entry>
+    <entry key="espd.part1.website">Sito web (se pertinente):</entry>
+    <entry key="espd.part3.grounds.criminal.conv">Motivi legati a condanne penali</entry>
+    <entry key="espd.part3.header">Parte III: Motivi di esclusione</entry>
+    <entry key="espd.part3.insolvency.conflicts">Motivi legati a insolvenza, conflitto di interessi o illeciti
+        professionali
+    </entry>
+    <entry key="espd.part5.concl.statements">Parte VI: Dichiarazioni finali</entry>
+    <entry key="espd.part5.concl.statements.signature">Data, luogo e, se richiesto o necessario, firma/firme:</entry>
+    <entry key="espd.part5.concl.statements.text">Il sottoscritto dichiara formalmente che le informazioni riportate
+        nelle precedenti parti da II a V sono veritiere e corrette e che il sottoscritto è consapevole delle conseguenze
+        di una grave falsa dichiarazione.
+        &lt;p&gt;Il sottoscritto dichiara formalmente di essere in grado di produrre, su richiesta e senza indugio, i
+            certificati e le altre forme di prove documentali del caso, con le seguenti eccezioni:
+        &lt;/p&gt;
+        &lt;p&gt;a) se l'amministrazione aggiudicatrice o l'ente aggiudicatore hanno la possibilità di acquisire direttamente
+            la documentazione complementare accedendo a una banca dati nazionale che sia disponibile gratuitamente in un
+            qualunque Stato membro (a condizione che l'operatore economico abbia fornito le informazioni necessarie -
+            indirizzo web, autorità o organismo di emanazione, riferimento preciso della documentazione - in modo da
+            consentire all'amministrazione aggiudicatrice o all'ente aggiudicatore di ottenere la documentazione; se
+            necessario, va allegato il pertinente assenso all'accesso) oppure
+        &lt;/p&gt;
+        &lt;p&gt;b) a decorrere al più tardi dal 18 ottobre 2018 (in funzione dell'attuazione nazionale dell'articolo 59,
+            paragrafo 5, secondo comma della direttiva 2014/24/UE) l'amministrazione aggiudicatrice o l'ente
+            aggiudicatore sono già in possesso della documentazione in questione.
+        &lt;/p&gt;
+        &lt;p&gt;Il sottoscritto autorizza formalmente [nome dell'amministrazione aggiudicatrice o ente aggiudicatore di cui
+            alla parte I, sezione A] ad accedere ai documenti complementari alle informazioni di cui [alla parte/alla
+            sezione/al punto o ai punti] del presente documento di gara unico europeo, ai fini della [identificare la
+            procedura di appalto: (descrizione sommaria, estremi della pubblicazione nella Gazzetta ufficiale
+            dell'Unione europea, numero di riferimento)].
+        &lt;/p&gt;
+    </entry>
+    <entry key="espd.part5.export">Esportare</entry>
+    <entry key="espd.part5.export.content">Si può ora premere Chr(34)EsportareChr(34) per scaricare il file DGUE sul
+        computer locale e salvarlo. Le amministrazioni aggiudicatrici devono garantire che questo file DGUE sia a
+        disposizione degli operatori economici insieme agli altri documenti di gara.
+    </entry>
+    <entry key="espd.part5.header">Fine</entry>
+    <entry key="espd.part5.reduction">Parte V: Riduzione del numero di candidati qualificati</entry>
+    <entry key="espd.part5.reduction.question">L'operatore economico dichiara:</entry>
+    <entry key="espd.part5.text.eo.declares.that">Se alcuni di tali certificati o altre forme di prove documentali sono
+        disponibili elettronicamente, indicare per ciascun documento:
+    </entry>
+    <entry key="espd.part5.title.eo.declares.that">di soddisfare i criteri e le regole, obiettivi e non discriminatori,
+        da applicare per limitare il numero di candidati, come di seguito indicato:&lt;p&gt;se sono richiesti determinati
+            certificati o altre forme di prove documentali, indicare per ciascun documento se l'operatore economico
+            dispone dei documenti richiesti:
+        &lt;/p&gt;
+    </entry>
+    <entry key="espd.part5.toptext">L'operatore economico deve fornire informazioni solo se l'amministrazione
+        aggiudicatrice o l'ente aggiudicatore ha specificato i criteri e le regole, obiettivi e non discriminatori, da
+        applicare per limitare il numero di candidati che saranno invitati a presentare un'offerta o a partecipare al
+        dialogo. Tali informazioni, che possono essere accompagnate da condizioni relative ai (tipi di) certificati o
+        alle forme di prove documentali da produrre eventualmente, sono riportate nell'avviso o bando pertinente o nei
+        documenti di gara ivi citati. Solo per le procedure ristrette, le procedure competitive con negoziazione, le
+        procedure di dialogo competitivo e i partenariati per l'innovazione:
+    </entry>
+    <entry key="espd.part4.alert">Le amministrazioni aggiudicatrici devono indicare quali criteri di selezione saranno
+        applicati Chr(34)spuntandoChr(34) la casella relativa al criterio pertinente.
+    </entry>
+    <entry key="espd.part4.economic.and.financial.standing">B: Capacità economica e finanziaria</entry>
+    <entry key="espd.part4.header">Parte IV: Criteri di selezione</entry>
+    <entry key="espd.part4.quality.assurance">D: Sistemi di garanzia della qualità e norme di gestione ambientale
+    </entry>
+    <entry key="espd.part4.suitability">A: Idoneità</entry>
+    <entry key="espd.part4.technical.professional.ability">C: Capacità tecniche e professionali</entry>
+    <entry key="espd.part2.add.complete.missing">Inserire inoltre tutte le informazioni mancanti nella parte IV, sezione
+        A, B, C, o D, secondo il caso, SOLO se richiesto dal pertinente avviso o bando o dai documenti di gara
+    </entry>
+    <entry key="espd.part2.all.selection.covered">d) L'iscrizione o la certificazione comprende tutti i criteri di
+        selezione richiesti?
+    </entry>
+    <entry key="espd.part2.another.vat">Se non è applicabile un numero di partita IVA indicare un altro numero di
+        identificazione nazionale, se richiesto e applicabile
+    </entry>
+    <entry key="espd.part2.answer.following.parts">Rispondere compilando le altre parti di questa sezione, la sezione B
+        e, ove pertinente, la sezione C della presente parte, compilare la parte V se applicabile, e in ogni caso
+        compilare e firmare la parte VI.
+    </entry>
+    <entry key="espd.part2.birth.date">Data di nascita</entry>
+    <entry key="espd.part2.birth.place">Luogo di nascita</entry>
+    <entry key="espd.part2.cert.e.avaliable">b) Se il certificato di iscrizione o la certificazione è disponibile
+        elettronicamente, indicare:
+    </entry>
+    <entry key="espd.part2.contact.person">Persona o persone di contatto:</entry>
+    <entry key="espd.part2.detinfo.of.represent">Se necessario, fornire precisazioni sulla rappresentanza (forma,
+        portata, scopo...):
+    </entry>
+    <entry key="espd.part2.disworkers.details">Se richiesto, specificare a quale categoria di lavoratori con disabilità
+        o svantaggiati appartengono i lavoratori interessati:
+    </entry>
+    <entry key="espd.part2.doc.e.avaliable">Se la documentazione pertinente è disponibile elettronicamente, indicare:
+    </entry>
+    <entry key="espd.part2.email">E-mail:</entry>
+    <entry key="espd.part2.ensure.others.espd">Accertarsi che gli altri operatori interessati forniscano un DGUE
+        distinto.
+    </entry>
+    <entry key="espd.part2.eo.approved.cert">Se pertinente: l'operatore economico è iscritto in un elenco ufficiale
+        degli operatori economici riconosciuti, oppure possiede un certificato equivalente (ad esempio rilasciato
+        nell'ambito di un sistema nazionale di qualificazione o prequalificazione)?
+    </entry>
+    <entry key="espd.part2.eo.group.role">a) Specificare il ruolo dell'operatore economico nel raggruppamento (capofila,
+        responsabile di compiti specifici ...):
+    </entry>
+    <entry key="espd.part2.eo.has.cert.soc">e) L'operatore economico potrà fornire un certificato per quanto riguarda il
+        pagamento dei contributi previdenziali e delle imposte, o fornire informazioni che permettano
+        all'amministrazione aggiudicatrice o all'ente aggiudicatore di acquisire tale documento direttamente accedendo a
+        una banca dati nazionale che sia disponibile gratuitamente in un qualunque Stato membro?
+    </entry>
+    <entry key="espd.part2.eo.rely.other.entities">L'operatore economico fa affidamento sulle capacità di altri soggetti
+        per soddisfare i criteri di selezione della parte IV e rispettare i criteri e le regole (eventuali) della parte
+        V?
+    </entry>
+    <entry key="espd.part2.first.name">Nome</entry>
+    <entry key="espd.part2.header">Parte II: Informazioni sull'operatore economico</entry>
+    <entry key="espd.part2.if.proc.reserved">Solo se l'appalto è riservato: l'operatore economico è un laboratorio
+        protetto, una Chr(34)impresa socialeChr(34) o provvederà all'esecuzione del contratto nel contesto di programmi
+        di lavoro protetti?
+    </entry>
+    <entry key="espd.part2.info.eo">A: Informazioni sull'operatore economico</entry>
+    <entry key="espd.part2.info.reliance">C: Informazioni sull'affidamento sulle capacità di altri soggetti</entry>
+    <entry key="espd.part2.info.respresent">B: Informazioni sui rappresentanti dell'operatore economico</entry>
+    <entry key="espd.part2.information.subcontractors">D: Informazioni sui subappaltatori sulle cui capacità l'operatore
+        economico non fa affidamento
+    </entry>
+    <entry key="espd.part2.information.subcontractors.description">In caso affermativo e nella misura in cui le
+        informazioni sono disponibili, elencare i subappaltatori proposti:
+    </entry>
+    <entry key="espd.part2.information.subcontractors.footer">Se l'amministrazione aggiudicatrice o l'ente aggiudicatore
+        richiede esplicitamente queste informazioni in aggiunta alle informazioni della parte I, fornire le informazioni
+        richieste alle sezioni A e B della presente parte e alla parte III per ognuno dei subappaltatori (o categorie di
+        subappaltatori) interessati.
+    </entry>
+    <entry key="espd.part2.information.subcontractors.header">(Questa sezione va compilata solo se tali informazioni
+        sono richieste esplicitamente dall'amministrazione aggiudicatrice o dall'ente aggiudicatore.)
+    </entry>
+    <entry key="espd.part2.information.subcontractors.title">L'operatore economico intende subappaltare parte del
+        contratto a terzi?
+    </entry>
+    <entry key="espd.part2.internet.addr.if.exists">Indirizzo Internet (sito web) (se applicabile):</entry>
+    <entry key="espd.part2.is.eo.proc.together">L'operatore economico partecipa alla procedura di appalto insieme ad
+        altri?
+    </entry>
+    <entry key="espd.part2.is.eo.sized">L'operatore economico è una microimpresa, oppure una piccola o media impresa?
+    </entry>
+    <entry key="espd.part2.is.eo.sized.tooltip">Cfr. raccomandazione della Commissione, del 6 maggio 2003, relativa alla
+        definizione delle microimprese, piccole e medie imprese (GU L 124 del 20.5.2003, pag. 36). Queste informazioni
+        sono richieste unicamente a fini statistici. Microimprese: imprese che occupano meno di 10 persone e realizzano
+        un fatturato annuo e/o un totale di bilancio annuo non superiori a 2 milioni di EUR. Piccole imprese: imprese
+        che occupano meno di 50 persone e realizzano un fatturato annuo e/o un totale di bilancio annuo non superiori a
+        10 milioni di EUR. Medie imprese: imprese che non appartengono alla categoria delle microimprese né a quella
+        delle piccole imprese, che occupano meno di 250 persone e il cui fatturato annuo non supera i 50 milioni di EUR,
+        e/o il cui totale di bilancio annuo non supera i 43 milioni di EUR.
+    </entry>
+    <entry key="espd.part2.last.name">Cognome</entry>
+    <entry key="espd.part2.lots.concerned">Se applicabile, indicare il lotto o i lotti per i quali si intende presentare
+        offerta:
+    </entry>
+    <entry key="espd.part2.name">Nome/denominazione:</entry>
+    <entry key="espd.part2.name.part.group">c) Se pertinente, indicare il nome del raggruppamento partecipante:</entry>
+    <entry key="espd.part2.other.eo.part">b) Individuare gli altri operatori economici che compartecipano alla procedura
+        di appalto:
+    </entry>
+    <entry key="espd.part2.percentage.disworkers">Qual è la percentuale corrispondente di lavoratori con disabilità o
+        svantaggiati?
+    </entry>
+    <entry key="espd.part2.person.empowered">Se applicabile, indicare nome e indirizzo delle persone abilitate ad agire
+        come rappresentanti dell'operatore economico ai fini della procedura di appalto in oggetto:
+    </entry>
+    <entry key="espd.part2.pos.act.in.capacity">Posizione/Titolo ad agire:</entry>
+    <entry key="espd.part2.postal.adress">Indirizzo postale:</entry>
+    <entry key="espd.part2.provide.regnumber">a) Indicare il pertinente numero di iscrizione o di certificazione, se
+        applicabile:
+    </entry>
+    <entry key="espd.part2.ref.for.cert">c) Indicare i riferimenti in base ai quali è stata ottenuta l'iscrizione o la
+        certificazione e, se applicabile, la classificazione ricevuta nell'elenco ufficiale:
+    </entry>
+    <entry key="espd.part2.separate.espd.sections.a.b">Presentare per ciascuno dei soggetti interessati un DGUE
+        distinto, con le informazioni richieste dalle sezioni A e B della presente parte e dalla parte III, debitamente
+        compilato e firmato dai soggetti interessati.
+        &lt;p&gt;Si noti che dovrebbero essere indicati anche i tecnici o gli organismi tecnici che non facciano parte
+            integrante dell'impresa dell'operatore economico, in particolare quelli responsabili del controllo della
+            qualità e, per gli appalti pubblici di lavori, quelli di cui l'operatore economico disporrà per l'esecuzione
+            dell'opera.
+        &lt;/p&gt;
+        &lt;p&gt;Se pertinente per le capacità specifiche su cui l'operatore economico fa affidamento, fornire per ciascuno
+            dei soggetti interessati le informazioni delle parti IV e V.
+        &lt;/p&gt;
+    </entry>
+    <entry key="espd.part2.telephone">Telefono:</entry>
+    <entry key="espd.part2.vat">Partita IVA, se applicabile:</entry>
+    <entry key="espd.part2sel.alert">L'operatore economico deve fornire informazioni solo se i criteri di selezione in
+        oggetto sono stati richiesti dall'amministrazione aggiudicatrice o dall'ente aggiudicatore nell'avviso o bando
+        pertinente o nei documenti di gara ivi citati.
+    </entry>
+    <entry key="espd.crit.amount">Importo</entry>
+    <entry key="espd.crit.amount.concerned">Di quale importo si tratta</entry>
+    <entry key="espd.crit.average.turnover">Fatturato medio</entry>
+    <entry key="espd.crit.code">Codice</entry>
+    <entry key="espd.crit.country.member.state">Paese o Stato membro interessato</entry>
+    <entry key="espd.crit.date">Data</entry>
+    <entry key="espd.crit.date.of.conviction">Data della condanna</entry>
+    <entry key="espd.part3.crit.date.of.conviction.or.decision">Indicare la data della sentenza di condanna o della
+        decisione
+    </entry>
+    <entry key="espd.crit.decision.final.and.binding">Se l'inottemperanza è stata accertata mediante una sentenza
+        giudiziaria o decisione amministrativa, tale sentenza o decisione è definitiva e vincolante?
+    </entry>
+    <entry key="espd.crit.description">Descrizione</entry>
+    <entry key="espd.crit.do.you.allow.checks">Il compilatore acconsente alle verifiche?</entry>
+    <entry key="espd.crit.end.date">Data di fine</entry>
+    <entry key="espd.part3.crit.eu.main.breaching.obligations">L'articolo 57, paragrafo 4, della direttiva 2014/24/UE
+        stabilisce i seguenti motivi di esclusione
+    </entry>
+    <entry key="espd.part3.crit.eu.eo.main.breaching.obligations">L'articolo 57, paragrafo 4, della direttiva 2014/24/UE
+        stabilisce i seguenti motivi di esclusione
+    </entry>
+    <entry key="espd.part3.crit.eu.main.purely.national">Si applicano motivi di esclusione previsti esclusivamente dalla
+        legislazione nazionale, specificati nell'avviso o bando pertinente o nei documenti di gara?
+    </entry>
+    <entry key="espd.part3.crit.eu.grounds.criminal.conv.main.title">L'articolo 57, paragrafo 1, della direttiva
+        2014/24/UE stabilisce i seguenti motivi di esclusione
+    </entry>
+    <entry key="espd.part3.crit.eu.eo.grounds.criminal.conv.main.title">L'articolo 57, paragrafo 1, della direttiva
+        2014/24/UE stabilisce i seguenti motivi di esclusione
+    </entry>
+    <entry key="espd.part3.crit.eu.payment.taxes.main.title">L'articolo 57, paragrafo 2, della direttiva 2014/24/UE
+        stabilisce i seguenti motivi di esclusione
+    </entry>
+    <entry key="espd.part3.crit.eu.eo.payment.taxes.main.title">L'articolo 57, paragrafo 2, della direttiva 2014/24/UE
+        stabilisce i seguenti motivi di esclusione
+    </entry>
+    <entry key="espd.crit.eu.text.agreement.economic">L'operatore economico ha sottoscritto accordi con altri operatori
+        economici intesi a falsare la concorrenza?
+    </entry>
+    <entry key="espd.crit.eu.text.arrangement.creditors">L'operatore economico è oggetto di una procedura di concordato
+        preventivo con i creditori?
+    </entry>
+    <entry key="espd.crit.eu.text.bankrupt">L'operatore economico si trova in stato di fallimento?</entry>
+    <entry key="espd.crit.eu.text.breaching.obligations.environmental">L'operatore economico ha violato, per quanto di
+        sua conoscenza, obblighi in materia di diritto ambientale? Così come stabiliti ai fini del presente appalto
+        dalla normativa nazionale, dall'avviso o bando pertinente o dai documenti di gara ovvero dall'articolo 18,
+        paragrafo 2, della direttiva 2014/24/UE.
+    </entry>
+    <entry key="espd.crit.eu.text.breaching.obligations.labour">L'operatore economico ha violato, per quanto di sua
+        conoscenza, obblighi applicabili in materia di diritto del lavoro? Così come stabiliti ai fini del presente
+        appalto dalla normativa nazionale, dall'avviso o bando pertinente o dai documenti di gara ovvero dall'articolo
+        18, paragrafo 2, della direttiva 2014/24/UE.
+    </entry>
+    <entry key="espd.crit.eu.text.breaching.obligations.social">L'operatore economico ha violato, per quanto di sua
+        conoscenza, obblighi applicabili in materia di diritto sociale? Così come stabiliti ai fini del presente appalto
+        dalla normativa nazionale, dall'avviso o bando pertinente o dai documenti di gara ovvero dall'articolo 18,
+        paragrafo 2, della direttiva 2014/24/UE.
+    </entry>
+    <entry key="espd.crit.eu.text.child.labour">L'operatore economico ovvero una persona che è membro del suo consiglio
+        di amministrazione, di direzione o di vigilanza o che vi ha poteri di rappresentanza, di decisione o di
+        controllo sono stati condannati con sentenza definitiva per lavoro minorile e altre forme di tratta di esseri
+        umani, con sentenza pronunciata non più di cinque anni fa o in seguito alla quale sia ancora applicabile un
+        periodo di esclusione stabilito direttamente nella sentenza? Quali definite all'articolo 2 della direttiva
+        2011/36/UE del Parlamento europeo e del Consiglio, del 5 aprile 2011, concernente la prevenzione e la
+        repressione della tratta di esseri umani e la protezione delle vittime, e che sostituisce la decisione quadro
+        del Consiglio 2002/629/GAI (GU L 101 del 15.4.2011, pag. 1).
+    </entry>
+    <entry key="espd.crit.eu.text.conflict.interest">L'operatore economico è a conoscenza di qualsiasi conflitto di
+        interessi, come definito dalla normativa nazionale, dall'avviso o bando pertinente o dai documenti di gara,
+        legato alla sua partecipazione alla procedura di appalto?
+    </entry>
+    <entry key="espd.crit.eu.text.corruption">L'operatore economico ovvero una persona che è membro del suo consiglio di
+        amministrazione, di direzione o di vigilanza o che vi ha poteri di rappresentanza, di decisione o di controllo
+        sono stati condannati con sentenza definitiva per corruzione, con sentenza pronunciata non più di cinque anni fa
+        o in seguito alla quale sia ancora applicabile un periodo di esclusione stabilito direttamente nella sentenza?
+        Quale definita all'articolo 3 della convenzione relativa alla lotta contro la corruzione nella quale sono
+        coinvolti funzionari delle Comunità europee o degli Stati membri dell'Unione europea (GU C 195 del 25.6.1997,
+        pag. 1) e all'articolo 2, paragrafo 1, della decisione quadro 2003/568/GAI del Consiglio, del 22 luglio 2003,
+        relativa alla lotta contro la corruzione nel settore privato (GU L 192 del 31.7.2003, pag. 54). Questo motivo di
+        esclusione comprende la corruzione così come definita nel diritto nazionale dell'amministrazione aggiudicatrice
+        (o ente aggiudicatore) o dell'operatore economico.
+    </entry>
+    <entry key="espd.crit.eu.text.early.termination">L'operatore economico ha già avuto esperienza di cessazione
+        anticipata di un precedente contratto di appalto pubblico, di un precedente contratto di appalto con un ente
+        aggiudicatore o di un precedente contratto di concessione, oppure di imposizione di un risarcimento danni o
+        altre sanzioni comparabili in relazione a tale precedente contratto di appalto?
+    </entry>
+    <entry key="espd.crit.eu.text.fraud">L'operatore economico ovvero una persona che è membro del suo consiglio di
+        amministrazione, di direzione o di vigilanza o che vi ha poteri di rappresentanza, di decisione o di controllo
+        sono stati condannati con sentenza definitiva per frode, con sentenza pronunciata non più di cinque anni fa o in
+        seguito alla quale sia ancora applicabile un periodo di esclusione stabilito direttamente nella sentenza? Ai
+        sensi dell'articolo 1 della convenzione relativa alla tutela degli interessi finanziari delle Comunità europee
+        (GU C 316 del 27.11.1995, pag. 48).
+    </entry>
+    <entry key="espd.crit.eu.text.grounds.criminal.conv">L'operatore economico, ovvero una persona che è membro del suo
+        consiglio di amministrazione, di direzione o di vigilanza o che vi ha poteri di rappresentanza, di decisione o
+        di controllo, è stato condannato con sentenza definitiva per partecipazione ad un'organizzazione criminale, con
+        sentenza pronunciata non più di cinque anni fa o in seguito alla quale sia ancora applicabile un periodo di
+        esclusione stabilito direttamente nella sentenza? Quale definita all'articolo 2 della decisione quadro
+        2008/841/GAI del Consiglio, del 24 ottobre 2008, relativa alla lotta contro la criminalità organizzata (GU L 300
+        dell'11.11.2008, pag. 42).
+    </entry>
+    <entry key="espd.crit.eu.text.guilty.misconduct">L'operatore economico si è reso colpevole di gravi illeciti
+        professionali? Vedere, ove pertinente, le definizioni nel diritto nazionale, l'avviso o bando pertinente o i
+        documenti di gara.
+    </entry>
+    <entry key="espd.crit.eu.text.guilty.misinterpretation">L'operatore economico si è trovato in una delle seguenti
+        situazioni:
+        &lt;p&gt;a) si è reso gravemente colpevole di false dichiarazioni nel fornire le informazioni richieste per verificare
+            l'assenza di motivi di esclusione o il rispetto dei criteri di selezione,
+        &lt;/p&gt;
+        &lt;p&gt;b) ha occultato tali informazioni,&lt;/p&gt;
+        &lt;p&gt;c) non è stato in grado di trasmettere senza indugio i documenti complementari richiesti da
+            un'amministrazione aggiudicatrice o da un ente aggiudicatore, e
+        &lt;/p&gt;
+        &lt;p&gt;d) ha influenzato indebitamente il procedimento decisionale dell'amministrazione aggiudicatrice o dell'ente
+            aggiudicatore, ha ottenuto informazioni confidenziali che possono conferirgli vantaggi indebiti nella
+            procedura di appalto, ha fornito per negligenza informazioni fuorvianti che possono avere un'influenza
+            notevole sulle decisioni riguardanti l'esclusione, la selezione o l'aggiudicazione?
+        &lt;/p&gt;
+    </entry>
+    <entry key="espd.crit.eu.text.insolvency">L'operatore economico è oggetto di una procedura di insolvenza o di
+        liquidazione?
+    </entry>
+    <entry key="espd.crit.eu.text.involvement">L'operatore economico o un'impresa a lui collegata ha fornito consulenza
+        all'amministrazione aggiudicatrice o all'ente aggiudicatore o ha altrimenti partecipato alla preparazione della
+        procedura di appalto?
+    </entry>
+    <entry key="espd.crit.eu.text.liquidator">L'operatore economico è in stato di amministrazione controllata?</entry>
+    <entry key="espd.crit.eu.text.money.laundering">L'operatore economico ovvero una persona che è membro del suo
+        consiglio di amministrazione, di direzione o di vigilanza o che vi ha poteri di rappresentanza, di decisione o
+        di controllo sono stati condannati con sentenza definitiva per riciclaggio di proventi di attività criminose o
+        finanziamento del terrorismo, con sentenza pronunciata non più di cinque anni fa o in seguito alla quale sia
+        ancora applicabile un periodo di esclusione stabilito direttamente nella sentenza? Quali definiti all'articolo 1
+        della direttiva 2005/60/CE del Parlamento europeo e del Consiglio, del 26 ottobre 2005, relativa alla
+        prevenzione dell'uso del sistema finanziario a scopo di riciclaggio dei proventi di attività criminose e di
+        finanziamento del terrorismo (GU L 309 del 25.11.2005, pag. 15).
+    </entry>
+    <entry key="espd.crit.eu.text.national.bankruptcy">L'operatore economico si trova in qualsiasi altra situazione
+        analoga al fallimento derivante da una procedura simile ai sensi di leggi e regolamenti nazionali?
+    </entry>
+    <entry key="espd.crit.eu.text.payment.social.security">L'operatore economico ha violato obblighi relativi al
+        pagamento di contributi previdenziali, sia nel paese dove è stabilito sia nello Stato membro
+        dell'amministrazione aggiudicatrice o dell'ente aggiudicatore, se diverso dal paese di stabilimento?
+    </entry>
+    <entry key="espd.crit.eu.text.payment.taxes">L'operatore economico ha violato obblighi relativi al pagamento di
+        imposte, sia nel paese dove è stabilito sia nello Stato membro dell'amministrazione aggiudicatrice o dell'ente
+        aggiudicatore, se diverso dal paese di stabilimento?
+    </entry>
+    <entry key="espd.crit.eu.text.purely.national">Altri motivi di esclusione eventualmente previsti dalla legislazione
+        nazionale dello Stato membro dell'amministrazione aggiudicatrice o dell'ente aggiudicatore. Si applicano motivi
+        di esclusione previsti esclusivamente dalla legislazione nazionale, specificati nell'avviso o bando pertinente o
+        nei documenti di gara?
+    </entry>
+    <entry key="espd.crit.eu.text.suspended.business">L'operatore economico ha cessato le sue attività?</entry>
+    <entry key="espd.crit.eu.text.terrorist">L'operatore economico ovvero una persona che è membro del suo consiglio di
+        amministrazione, di direzione o di vigilanza o che vi ha poteri di rappresentanza, di decisione o di controllo
+        sono stati condannati con sentenza definitiva per reati terroristici o reati connessi alle attività
+        terroristiche, con sentenza pronunciata non più di cinque anni fa o in seguito alla quale sia ancora applicabile
+        un periodo di esclusione stabilito direttamente nella sentenza? Quali definiti agli articoli 1 e 3 della
+        decisione quadro del Consiglio, del 13 giugno 2002, sulla lotta contro il terrorismo (GU L 164 del 22.6.2002,
+        pag. 3). Questo motivo di esclusione comprende anche l'istigazione, il concorso, il tentativo di commettere un
+        reato, come indicato all'articolo 4 di detta decisione quadro.
+    </entry>
+    <entry key="espd.crit.eu.title.agreement.economic">Accordi con altri operatori economici intesi a falsare la
+        concorrenza
+    </entry>
+    <entry key="espd.crit.eu.title.arrangement.creditors">Concordato preventivo con i creditori</entry>
+    <entry key="espd.crit.eu.title.bankrupt">Fallimento</entry>
+    <entry key="espd.part3.crit.eu.eo.bankrupt.title">L'impresa dell'operatore economico si trova in stato di
+        fallimento, o soggetta ad una procedura di insolvenza o di liquidazione, o in concordato preventivo con i
+        creditori, o in qualsiasi altra situazione analoga derivante da una procedura simile ai sensi di leggi e
+        regolamenti nazionali?
+    </entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.environmental">Violazione di obblighi in materia di diritto
+        ambientale
+    </entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.environmental.eo">Violazione di obblighi in materia di diritto
+        ambientale
+    </entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.labour">Violazione di obblighi in materia di diritto del
+        lavoro
+    </entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.social">Violazione di obblighi in materia di diritto sociale
+    </entry>
+    <entry key="espd.crit.eu.title.child.labour">Lavoro minorile e altre forme di tratta di esseri umani</entry>
+    <entry key="espd.crit.eu.title.conflict.interest">Conflitto di interessi legato alla partecipazione alla procedura
+        di appalto
+    </entry>
+    <entry key="espd.crit.eu.title.conflict.interest.eo">L'impresa dell'operatore economico si trova in un conflitto di
+        interessi legato alla partecipazione alla procedura di appalto?
+    </entry>
+    <entry key="espd.crit.eu.title.corruption">Corruzione</entry>
+    <entry key="espd.crit.eu.title.early.termination">Cessazione anticipata, risarcimento danni o altre sanzioni
+        comparabili
+    </entry>
+    <entry key="espd.crit.eu.title.fraud">Frode</entry>
+    <entry key="espd.crit.eu.title.grounds.criminal.conv">Partecipazione a un'organizzazione criminale</entry>
+    <entry key="espd.crit.eu.title.guilty.misconduct">Gravi illeciti professionali</entry>
+    <entry key="espd.crit.eu.title.guilty.misconduct.eo">L'impresa dell'operatore economico si è resa colpevole di gravi
+        illeciti professionali?
+    </entry>
+    <entry key="espd.crit.eu.title.guilty.misinterpretation">False dichiarazioni, omessa informazione, incapacità di
+        fornire i documenti e ottenimento di informazioni confidenziali in merito alla procedura in questione.
+    </entry>
+    <entry key="espd.crit.eu.title.insolvency">Insolvenza</entry>
+    <entry key="espd.crit.eu.title.involvement">Partecipazione diretta o indiretta alla preparazione della procedura di
+        appalto
+    </entry>
+    <entry key="espd.crit.eu.title.involvement.eo">L'operatore economico o un'impresa a lui collegata ha fornito
+        consulenza all'amministrazione aggiudicatrice o all'ente aggiudicatore o ha altrimenti partecipato alla
+        preparazione della procedura di appalto?
+    </entry>
+    <entry key="espd.crit.eu.title.liquidator">Amministrazione controllata</entry>
+    <entry key="espd.crit.eu.title.money.laundering">Riciclaggio di proventi di attività criminose o finanziamento del
+        terrorismo
+    </entry>
+    <entry key="espd.crit.eu.title.national.bankruptcy">Situazione analoga al fallimento ai sensi della normativa
+        nazionale
+    </entry>
+    <entry key="espd.crit.eu.title.payment.social.security">Pagamento di contributi previdenziali</entry>
+    <entry key="espd.crit.eu.title.payment.taxes">Pagamento di imposte</entry>
+    <entry key="espd.crit.eu.title.purely.national">Motivi di esclusione previsti esclusivamente dalla legislazione
+        nazionale
+    </entry>
+    <entry key="espd.crit.eu.title.suspended.business">Cessazione di attività</entry>
+    <entry key="espd.crit.eu.title.terrorist">Reati terroristici o reati connessi alle attività terroristiche</entry>
+    <entry key="espd.part3.crit.eu.guilty.misconduct.eo.tooltip">Si veda, ove pertinente, il diritto nazionale, l'avviso
+        o bando pertinente o i documenti di gara.
+    </entry>
+    <entry key="espd.crit.explain.certificates.independent.environmental.description">In caso negativo, spiegare perché
+        e precisare di quali altri mezzi di prova relativi ai sistemi o alle norme di gestione ambientale si dispone:
+    </entry>
+    <entry key="espd.part4.crit.explain.certificates.independent.quality.description">In caso negativo, spiegare perché
+        e precisare di quali altri mezzi di prova relativi al programma di garanzia della qualità si dispone:
+    </entry>
+    <entry key="espd.part4.crit.explain.supply.contracts.quality.description">In caso negativo, spiegare perché e
+        precisare di quali altri mezzi di prova si dispone:
+    </entry>
+    <entry key="espd.crit.information.available.electronically">Queste informazioni sono disponibili gratuitamente per
+        le autorità in una banca dati di uno Stato membro UE?
+    </entry>
+    <entry key="espd.crit.issuer">Emesso da</entry>
+    <entry key="espd.crit.length.period.exclusion">Se stabilita direttamente nella sentenza di condanna: durata del
+        periodo d'esclusione.
+    </entry>
+    <entry key="espd.crit.number">Numero</entry>
+    <entry key="espd.crit.number.of.years">Numero di esercizi</entry>
+    <entry key="espd.crit.other.than.judicial.or.administrative.decision">Tale inottemperanza è stata accertata in modo
+        diverso da una sentenza giudiziaria o decisione amministrativa?
+    </entry>
+    <entry key="espd.crit.please.describe.them">Descrivere tali misure</entry>
+    <entry key="espd.crit.please.specify">Specificare:</entry>
+    <entry key="espd.crit.ratio">Indice</entry>
+    <entry key="espd.crit.reason">Motivo</entry>
+    <entry key="espd.crit.reasons.nevertheless.contract">Indicare perché l'operatore economico sarà comunque in grado di
+        eseguire il contratto. Tali informazioni non devono essere indicate se l'esclusione degli operatori economici
+        per tale caso riveste carattere obbligatorio ai sensi della normativa nazionale applicabile senza nessuna
+        possibilità di deroga anche qualora l'operatore sia comunque in grado di eseguire il contratto.
+    </entry>
+    <entry key="espd.crit.recipients">Destinatari</entry>
+    <entry key="espd.part4.crit.selection.ca.declares.that">In merito ai criteri di selezione l'amministrazione
+        aggiudicatrice chiede all'operatore economico di dichiarare che
+    </entry>
+    <entry key="espd.part4.crit.selection.ca.economic.article">L'articolo 58, paragrafo 3, della direttiva 2014/24/UE
+        stabilisce i seguenti criteri di selezione
+    </entry>
+    <entry key="espd.part4.crit.selection.declares.that.tooltip">L'operatore economico deve compilare questo campo solo
+        se l'amministrazione aggiudicatrice o l'ente aggiudicatore ha indicato nell'avviso o bando pertinente o nei
+        documenti di gara ivi citati che l'operatore economico può limitarsi a compilare questo punto della parte IV
+        senza compilare le sezioni A, B, C o D della parte IV
+    </entry>
+    <entry key="espd.crit.selection.economic.average.yearly.turnover.description">Il fatturato annuo medio
+        dell'operatore economico per il numero di esercizi richiesti nell'avviso o bando pertinente, nei documenti di
+        gara o nel DGUE è il seguente:
+    </entry>
+    <entry key="espd.crit.selection.economic.average.yearly.turnover.main">Fatturato annuo medio</entry>
+    <entry key="espd.crit.selection.economic.financial.ratio.description">Per quanto riguarda gli indici finanziari
+        (come il rapporto tra attività e passività) specificati nell'avviso o bando pertinente, nei documenti di gara o
+        nel DGUE, l'operatore economico dichiara che i valori attuali degli indici richiesti sono i seguenti:
+    </entry>
+    <entry key="espd.crit.selection.economic.financial.ratio.main">Indice finanziario</entry>
+    <entry key="espd.crit.selection.economic.financial.standing.article.tooltip">L'operatore economico deve fornire
+        informazioni solo se i criteri di selezione in oggetto sono stati richiesti dall'amministrazione aggiudicatrice
+        o dall'ente aggiudicatore nell'avviso o bando pertinente o nei documenti di gara ivi citati.
+    </entry>
+    <entry key="espd.crit.selection.economic.general.yearly.turnover.description">Il fatturato annuo
+        (Chr(34)generaleChr(34)) dell'operatore economico per il numero di esercizi richiesto nell'avviso o bando
+        pertinente, nei documenti di gara o nel DGUE è il seguente:
+    </entry>
+    <entry key="espd.crit.selection.economic.general.yearly.turnover.main">Fatturato annuo generale</entry>
+    <entry key="espd.crit.selection.economic.other.financial.requirements.description">Per quanto riguarda gli eventuali
+        altri requisiti economici o finanziari specificati nell'avviso o bando pertinente o nei documenti di gara,
+        l'operatore economico dichiara che:
+    </entry>
+    <entry key="espd.crit.selection.economic.other.financial.requirements.main">Altri requisiti economici o finanziari
+    </entry>
+    <entry key="espd.crit.selection.economic.professional.risk.insurance.description">L'importo assicurato dalla
+        copertura contro i rischi professionali è il seguente:
+    </entry>
+    <entry key="espd.crit.selection.economic.professional.risk.insurance.main">Copertura contro i rischi professionali
+    </entry>
+    <entry key="espd.crit.selection.economic.setup.eo.description">Se le informazioni relative al fatturato (generale o
+        specifico) non sono disponibili per tutto il periodo richiesto, indicare la data di costituzione o di avvio
+        delle attività dell?operatore economico:
+    </entry>
+    <entry key="espd.crit.selection.economic.setup.eo.main">Costituzione o avvio dell'attività dell'operatore
+        economico
+    </entry>
+    <entry key="espd.crit.selection.economic.specific.average.turnover.description">Il fatturato annuo medio specifico
+        dell'operatore economico nel settore di attività oggetto dell'appalto per il numero di esercizi richiesti
+        nell'avviso o bando pertinente, nei documenti di gara o nel DGUE è il seguente:
+    </entry>
+    <entry key="espd.crit.selection.economic.specific.average.turnover.main">Fatturato medio specifico</entry>
+    <entry key="espd.crit.selection.economic.specific.yearly.turnover.description">Il fatturato annuo specifico
+        dell'operatore economico nel settore di attività oggetto dell'appalto per il numero di esercizi richiesti
+        nell'avviso o bando pertinente, nei documenti di gara o nel DGUE è il seguente:
+    </entry>
+    <entry key="espd.crit.selection.economic.specific.yearly.turnover.main">Fatturato annuo specifico</entry>
+    <entry key="espd.part4.crit.selection.eo.declares.that">In merito ai criteri di selezione l'operatore economico
+        dichiara che
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.declares.that.tooltip">L'operatore economico deve compilare questo campo
+        solo se l'amministrazione aggiudicatrice o l'ente aggiudicatore ha indicato nell'avviso o bando pertinente o nei
+        documenti di gara ivi citati che l'operatore economico può limitarsi a compilare questo punto della parte IV
+        senza compilare le sezioni A, B, C o D della parte IV
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.economic.article">L'articolo 58, paragrafo 3, della direttiva 2014/24/UE
+        stabilisce i seguenti criteri di selezione
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.economic.article.tooltip">L'operatore economico deve fornire informazioni
+        solo se i criteri di selezione in oggetto sono stati richiesti dall'amministrazione aggiudicatrice o dall'ente
+        aggiudicatore nell'avviso o bando pertinente o nei documenti di gara ivi citati.
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.economic.enrolement.description">È iscritto nei registri professionali o
+        commerciali pertinenti tenuti nello Stato membro di stabilimento
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.economic.enrolement.main">Iscrizione nei registri professionali o
+        commerciali
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.economic.service.contracts.description">È richiesta una particolare
+        autorizzazione o appartenenza a una particolare organizzazione per poter prestare il servizio di cui trattasi
+        nel paese di stabilimento dell'operatore economico?
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.economic.service.contracts.main">Per gli appalti di servizi: Obbligo di
+        un'autorizzazione o appartenenza
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.satisfies.all.criteria">Soddisfa tutti i criteri di selezione richiesti
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.article">L'articolo 58, paragrafo 2, della direttiva 2014/24/UE
+        stabilisce i seguenti criteri di selezione
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.article.tooltip">L'operatore economico deve fornire
+        informazioni solo se i criteri di selezione in oggetto sono stati richiesti dall'amministrazione aggiudicatrice
+        o dall'ente aggiudicatore nell'avviso o bando pertinente o nei documenti di gara ivi citati.
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.enrolment.description">È iscritto nei registri professionali o
+        commerciali pertinenti tenuti nello Stato membro di stabilimento
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.enrolment.main">Iscrizione nei registri professionali o
+        commerciali
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.service.contracts.description">È richiesta una particolare
+        autorizzazione o appartenenza a una particolare organizzazione per poter prestare il servizio di cui trattasi
+        nel paese di stabilimento dell'operatore economico?
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.service.contracts.main">Per gli appalti di servizi: Obbligo di
+        un'autorizzazione o appartenenza
+    </entry>
+    <entry key="espd.part4.crit.selection.quality.assurance.article">L'articolo 62, paragrafo 2, della direttiva
+        2014/24/UE stabilisce i seguenti criteri di selezione
+    </entry>
+    <entry key="espd.part4.crit.selection.quality.assurance.tooltip">L'operatore economico deve fornire informazioni
+        solo se i criteri di selezione in oggetto sono stati richiesti dall'amministrazione aggiudicatrice o dall'ente
+        aggiudicatore nell'avviso o bando pertinente o nei documenti di gara ivi citati.
+    </entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.environmental.description">L'operatore
+        economico potrà presentare certificati rilasciati da organismi indipendenti per attestare che egli rispetta i
+        sistemi o le norme di gestione ambientale prescritti?
+    </entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.environmental.main">Certificati rilasciati da
+        organismi indipendenti su sistemi o norme di gestione ambientale
+    </entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.quality.description">L'operatore economico
+        potrà presentare certificati rilasciati da organismi indipendenti per attestare che egli soddisfa le norme
+        prescritte di garanzia della qualità, compresa l'accessibilità per le persone con disabilità?
+    </entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.quality.main">Certificati rilasciati da
+        organismi indipendenti a conferma delle norme di garanzia della qualità
+    </entry>
+    <entry key="espd.part4.crit.selection.satisfies.all.criteria">Soddisfa tutti i criteri di selezione richiesti
+        indicati nell'avviso o bando pertinente o nei documenti di gara ivi citati.
+    </entry>
+    <entry key="espd.part4.crit.selection.suitability.article">L'articolo 58, paragrafo 2, della direttiva 2014/24/UE
+        stabilisce i seguenti criteri di selezione
+    </entry>
+    <entry key="espd.part4.crit.selection.suitability.article.tooltip">L'operatore economico deve compilare questo campo
+        solo se l'amministrazione aggiudicatrice o l'ente aggiudicatore ha indicato nell'avviso o bando pertinente o nei
+        documenti di gara ivi citati che l'operatore economico può limitarsi a compilare la sezione ? della parte IV
+        senza compilare nessun'altra sezione della parte IV:
+    </entry>
+    <entry key="espd.crit.selection.suitability.enrolment.professional.register.description">È iscritto nei registri
+        professionali pertinenti tenuti nello Stato membro di stabilimento come indicato nell'allegato XI della
+        direttiva 2014/24/UE; gli operatori economici di taluni Stati membri potrebbero dover soddisfare altri requisiti
+        previsti nello stesso allegato.
+    </entry>
+    <entry key="espd.crit.selection.suitability.enrolment.professional.register.main">Iscrizione in un registro
+        professionale pertinente
+    </entry>
+    <entry key="espd.crit.selection.suitability.enrolment.trade.register.description">È iscritto nei registri
+        commerciali tenuti nello Stato membro di stabilimento come indicato nell'allegato XI della direttiva 2014/24/UE;
+        gli operatori economici di taluni Stati membri potrebbero dover soddisfare altri requisiti previsti nello stesso
+        allegato.
+    </entry>
+    <entry key="espd.crit.selection.suitability.enrolment.trade.register.main">Iscrizione in un registro commerciale
+    </entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.auth.description">È richiesta un'autorizzazione
+        particolare per poter prestare il servizio di cui trattasi nel paese di stabilimento dell'operatore economico?
+    </entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.auth.main">Per gli appalti di servizi: necessità di
+        autorizzazione particolare
+    </entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.membership.description">È richiesta l'appartenenza a
+        una particolare organizzazione per poter prestare il servizio di cui trattasi nel paese di stabilimento
+        dell'operatore economico?
+    </entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.membership.main">Per gli appalti di servizi: obbligo
+        di appartenenza a una particolare organizzazione
+    </entry>
+    <entry key="espd.crit.selection.technical.allowance.of.checks.description">Per la fornitura di prodotti o la
+        prestazione di servizi complessi o, eccezionalmente, di prodotti o servizi richiesti per una finalità
+        particolare L'operatore economico consentirà l'esecuzione di verifiche delle sue capacità di produzione o
+        strutture tecniche e, se necessario, degli strumenti di studio e di ricerca di cui egli dispone, nonché delle
+        misure adottate per garantire la qualità? La verifica è eseguita dall'amministrazione aggiudicatrice o, se essa
+        acconsente, per suo conto da un organismo ufficiale competente del paese in cui è stabilito il fornitore o il
+        prestatore dei servizi.
+    </entry>
+    <entry key="espd.crit.selection.technical.allowance.of.checks.main">Esecuzione di verifiche</entry>
+    <entry key="espd.crit.selection.technical.average.annual.manpower.description">L'organico medio annuo dell'operatore
+        economico negli ultimi tre anni è il seguente:
+    </entry>
+    <entry key="espd.crit.selection.technical.average.annual.manpower.main">Organico medio annuo</entry>
+    <entry key="espd.crit.selection.technical.educational.professional.qualifications.description">Indicare i titoli di
+        studio e professionali di cui sono in possesso lo stesso prestatore di servizi o imprenditore e/o (in funzione
+        dei requisiti richiesti nell'avviso o bando pertinente o nei documenti di gara) i suoi dirigenti.
+    </entry>
+    <entry key="espd.crit.selection.technical.educational.professional.qualifications.main">Titoli di studio e
+        professionali
+    </entry>
+    <entry key="espd.crit.selection.technical.environment.management.features.description">L'operatore economico potrà
+        applicare durante l'esecuzione dell'appalto le seguenti misure di gestione ambientale:
+    </entry>
+    <entry key="espd.crit.selection.technical.environment.management.features.main">Misure di gestione ambientale
+    </entry>
+    <entry key="espd.crit.selection.technical.number.managerial.staff.description">Il numero dei dirigenti
+        dell'operatore economico negli ultimi tre anni è stato il seguente:
+    </entry>
+    <entry key="espd.crit.selection.technical.number.managerial.staff.main">Numero di dirigenti</entry>
+    <entry key="espd.part4.crit.selection.technical.professional.ability.article">L'articolo 58, paragrafo 4, della
+        direttiva 2014/24/UE stabilisce i seguenti criteri di selezione
+    </entry>
+    <entry key="espd.part4.crit.selection.technical.professional.ability.article.tooltip">L'operatore economico deve
+        fornire informazioni solo se i criteri di selezione in oggetto sono stati richiesti dall'amministrazione
+        aggiudicatrice o dall'ente aggiudicatore nell'avviso o bando pertinente o nei documenti di gara ivi citati.
+    </entry>
+    <entry key="espd.crit.selection.technical.service.contracts.performance.services.description">Unicamente per gli
+        appalti pubblici di servizi: Durante il periodo di riferimento l'operatore economico ha prestato i seguenti
+        principali servizi del tipo specificato. Le amministrazioni aggiudicatrici possono richiedere fino a tre anni e
+        ammettere un'esperienza che risale a più di tre anni prima.
+    </entry>
+    <entry key="espd.crit.selection.technical.service.contracts.performance.services.main">Per gli appalti di servizi:
+        prestazione di servizi del tipo specificato
+    </entry>
+    <entry key="espd.crit.selection.technical.study.research.facilities.description">Utilizza i seguenti strumenti di
+        studio e ricerca:
+    </entry>
+    <entry key="espd.crit.selection.technical.study.research.facilities.main">Strumenti di studio e ricerca</entry>
+    <entry key="espd.crit.selection.technical.subcontracting.proportion.description">L'operatore economico intende
+        eventualmente subappaltare la seguente quota (espressa in percentuale) dell'appalto. Si noti che se l'operatore
+        economico ha deciso di subappaltare una quota dell'appalto e fa affidamento sulle capacità del subappaltatore
+        per eseguire tale quota è necessario compilare un DGUE distinto per ogni subappaltatore, vedasi parte II,
+        sezione C.
+    </entry>
+    <entry key="espd.crit.selection.technical.subcontracting.proportion.main">Quota di subappalto</entry>
+    <entry key="espd.crit.selection.technical.supply.chain.management.description">Potrà applicare i seguenti sistemi di
+        gestione e di tracciabilità della catena di approvvigionamento durante l'esecuzione dell'appalto:
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.chain.management.main">Gestione della catena di
+        approvvigionamento
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.certificate.quality.description">L'operatore economico
+        può fornire i richiesti certificati rilasciati da istituti o servizi ufficiali incaricati del controllo della
+        qualità, di riconosciuta competenza, i quali attestino la conformità di prodotti ben individuati mediante
+        riferimenti alle specifiche tecniche o norme indicate nell'avviso o bando pertinente o nei documenti di gara?
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.certificate.quality.main">Per gli appalti di forniture:
+        certificati rilasciati da istituti di controllo della qualità
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.performance.deliveries.description">Unicamente per gli
+        appalti pubblici di forniture: Durante il periodo di riferimento l'operatore economico ha consegnato le seguenti
+        principali forniture del tipo specificato. Le amministrazioni aggiudicatrici possono richiedere fino a tre anni
+        e ammettere un'esperienza che risale a più di tre anni prima.
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.performance.deliveries.main">Per gli appalti di
+        forniture: consegna di forniture del tipo specificato
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.with.ca.description">Per gli appalti pubblici di
+        forniture: L'operatore economico fornirà i campioni, le descrizioni o le fotografie dei prodotti da fornire,
+        come richiesti, e provvederà alle certificazioni di autenticità ove del caso.
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.with.ca.main">Per gli appalti di forniture: campioni,
+        descrizioni o fotografie con certificazioni di autenticità
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.without.ca.description">Per gli appalti pubblici di
+        forniture: L'operatore economico fornirà i campioni, le descrizioni o le fotografie dei prodotti da fornire, non
+        necessariamente accompagnati dalle certificazioni di autenticità, come richiesti.
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.without.ca.main">Per gli appalti di forniture: campioni,
+        descrizioni o fotografie senza certificazioni di autenticità
+    </entry>
+    <entry key="espd.crit.selection.technical.technical.facilities.measures.description">Utilizza le seguenti
+        attrezzature tecniche e adotta le seguenti misure per garantire la qualità e dispone degli strumenti di studio e
+        ricerca indicati di seguito:
+    </entry>
+    <entry key="espd.crit.selection.technical.technical.facilities.measures.main">Attrezzature tecniche e misure per
+        garantire la qualità
+    </entry>
+    <entry key="espd.crit.selection.technical.technicians.technical.bodies.description">Può disporre dei seguenti
+        tecnici o organismi tecnici, citando in particolare quelli responsabili del controllo della qualità. Per i
+        tecnici o gli organismi tecnici che non fanno parte integrante dell'operatore economico, ma sulle cui capacità
+        l'operatore economico fa affidamento come previsto alla parte II, sezione C, devono essere compilati DGUE
+        distinti.
+    </entry>
+    <entry key="espd.crit.selection.technical.technicians.technical.bodies.main">Tecnici o organismi tecnici per il
+        controllo della qualità
+    </entry>
+    <entry key="espd.crit.selection.technical.tools.plant.description">Per l'esecuzione dell'appalto l'operatore
+        economico disporrà delle attrezzature, del materiale e dell'equipaggiamento tecnico seguenti:
+    </entry>
+    <entry key="espd.crit.selection.technical.tools.plant.main">Attrezzature, materiale ed equipaggiamento tecnico
+    </entry>
+    <entry key="espd.crit.selection.technical.work.contracts.performance.works.description">Unicamente per gli appalti
+        pubblici di lavori: Durante il periodo di riferimento l'operatore economico ha eseguito i seguenti lavori del
+        tipo specificato: Le amministrazioni aggiudicatrici possono richiedere fino a cinque anni e ammettere
+        un'esperienza che risale a più di cinque anni prima.
+    </entry>
+    <entry key="espd.crit.selection.technical.work.contracts.performance.works.main">Per gli appalti di lavori:
+        esecuzione di lavori del tipo specificato
+    </entry>
+    <entry key="espd.crit.selection.technical.work.contracts.technicians.description">Nel caso di appalti pubblici di
+        lavori l'operatore economico potrà disporre dei seguenti tecnici o organismi tecnici per l'esecuzione dei
+        lavori:
+    </entry>
+    <entry key="espd.crit.selection.technical.work.contracts.technicians.main">Per gli appalti di lavori: tecnici o
+        organismi tecnici per l'esecuzione dei lavori
+    </entry>
+    <entry key="espd.crit.start.date">Data di inizio</entry>
+    <entry key="espd.crit.taken.self.cleaning.measures">L'operatore economico ha preso misure per dimostrare la propria
+        affidabilità (Chr(34)autodisciplinaChr(34))?
+    </entry>
+    <entry key="espd.crit.taxes.eo.fulfilled.obligations">L'operatore economico ha ottemperato ai suoi obblighi, pagando
+        o impegnandosi in modo vincolante a pagare le imposte o i contributi previdenziali dovuti, compresi eventuali
+        interessi o multe?
+    </entry>
+    <entry key="espd.crit.taxes.length.period.of.exclusion">Nel caso di una sentenza di condanna, se stabilita
+        direttamente nella sentenza di condanna, la durata del periodo d'esclusione
+    </entry>
+    <entry key="espd.crit.taxes.means.description">Indicare in quale modo è stata accertata l'inottemperanza</entry>
+    <entry key="espd.part3.crit.grounds.criminal.conv.top.title">A: Motivi legati a condanne penali</entry>
+    <entry key="espd.part3.crit.top.grounds.payment.taxes.title">B: Motivi legati al pagamento di imposte o contributi
+        previdenziali
+    </entry>
+    <entry key="espd.part3.crit.insolvency.conflicts.top.title">C: Motivi legati a insolvenza, conflitti di interessi o
+        illeciti professionali
+    </entry>
+    <entry key="espd.part3.crit.purely.national.top.title">D: Motivi di esclusione previsti esclusivamente dalla
+        legislazione nazionale
+    </entry>
+    <entry key="espd.crit.url">URL</entry>
+    <entry key="espd.crit.who.convicted">Chi è stato condannato</entry>
+    <entry key="espd.crit.year">Anno</entry>
+    <entry key="espd.crit.your.answer">Risposta fornita?</entry>
+    <entry key="espd.gui.download.as">Scaricare nel formato</entry>
+    <entry key="espd.gui.download.pdf">PDF</entry>
+    <entry key="espd.gui.download.xml">XML</entry>
+    <entry key="espd.gui.download.zip">Entrambi</entry>
+    <entry key="espd.gui.ec">Commissione europea</entry>
+    <entry key="espd.ecertis.404">Nessuna informazione in eCERTIS</entry>
+    <entry key="espd.ecertis.issued">Rilasciato da</entry>
+    <entry key="espd.ecertis.language">Lingua</entry>
+    <entry key="espd.ecertis.loading">Il sistema sta caricando da eCERTIS...</entry>
+    <entry key="espd.ecertis.no.evidences">Nessuna prova</entry>
+    <entry key="espd.gui.error.ted.notice.not.supported">Il file caricato è un avviso o bando ma non un DGUE e quindi
+        non può essere utilizzato con questo servizio
+    </entry>
+    <entry key="espd.gui.espd">Documento di gara unico europeo</entry>
+    <entry key="espd.gui.espd.upload.error">Non è stato possibile leggere correttamente il file caricato. Si tratta di
+        un file ESPD Request (richiesta di DGUE) o di un file ESPD Response (DGUE di risposta) valido?
+    </entry>
+    <entry key="espd.gui.espd.upload.request.error">Non è stato possibile leggere correttamente il file caricato. Si
+        tratta di un file ESPD Request (richiesta di DGUE) valido?
+    </entry>
+    <entry key="espd.gui.espd.upload.response.error">Non è stato possibile leggere correttamente il file caricato. Si
+        tratta di un file ESPD Response (DGUE di risposta) valido?
+    </entry>
+    <entry key="espd.gui.europa">Europa</entry>
+    <entry key="espd.gui.expire.reminder.message">È trascorsa quasi un'ora senza attività nel servizio DGUE.&lt;p&gt;Salvare
+        il DGUEe per non perdere dati.&lt;p&gt;È possibile importare (riutilizzare) il DGUEe in qualsiasi momento per
+        continuare a lavorare.
+    </entry>
+    <entry key="espd.gui.export">Salvare</entry>
+    <entry key="espd.gui.faq.leaflet">Domande frequenti</entry>
+    <entry key="espd.gui.faq.text.answers">Per leggere le risposte alle domande più frequenti sul DGUE consultare la
+        parte
+    </entry>
+    <entry key="espd.gui.faq.text.more.info">Per ulteriori informazioni sul DGUE</entry>
+    <entry key="espd.init.alert">
+        &lt;p&gt;Il Documento di gara unico europeo (DGUE) è un'autodichiarazione dell'impresa sulla propria situazione
+            finanziaria, sulle proprie capacità e sulla propria idoneità per una procedura di appalto pubblico. È
+            disponibile in tutte le lingue dell'UE e si usa per indicare in via preliminare il soddisfacimento delle
+            condizioni prescritte nelle procedure di appalto pubblico nell'UE. Grazie al DGUE gli offerenti non devono
+            più fornire piene prove documentali e ricorrere ai diversi moduli precedentemente in uso negli appalti UE,
+            il che costituisce una notevole semplificazione dell'accesso agli appalti transfrontalieri. A partire da
+            ottobre 2018 il DGUE è fornito esclusivamente in forma elettronica.
+        &lt;/p&gt;
+        &lt;p&gt;La Commissione europea mette gratuitamente un servizio web a disposizione degli acquirenti, degli offerenti e
+            di altre parti interessate a compilare il DGUE elettronicamente. Il modulo on line può essere compilato,
+            stampato e poi inoltrato all'acquirente con le altre parti dell'offerta. Se la procedura è esperita
+            elettronicamente il DGUE può essere esportato, salvato e presentato elettronicamente. Il DGUE presentato in
+            una procedura di appalto pubblico precedente può essere riutilizzato a condizione che le informazioni siano
+            ancora valide. Gli offerenti possono essere esclusi dalla procedura di appalto o essere perseguiti se nel
+            DGUE sono presentate informazioni gravemente mendaci, omesse o che non possono essere comprovate dai
+            documenti complementari.
+        &lt;/p&gt;
+    </entry>
+    <entry key="espd.init.create.espd">Creare un nuovo DGUE</entry>
+    <entry key="espd.init.create.response">Creare risposta</entry>
+    <entry key="espd.init.header">Benvenuti al servizio DGUE</entry>
+    <entry key="espd.init.i.am.ca">Sono un'amministrazione aggiudicatrice</entry>
+    <entry key="espd.init.i.am.ce">Sono un ente aggiudicatore</entry>
+    <entry key="espd.init.i.am.eop">Sono un operatore economico</entry>
+    <entry key="espd.init.import.espd">Importare un DGUE</entry>
+    <entry key="espd.init.merge.espds">Unire due DGUE</entry>
+    <entry key="espd.init.reuse.espd">Riutilizzare un DGUE esistente</entry>
+    <entry key="espd.init.review.espd">Rivedere il DGUE</entry>
+    <entry key="espd.init.select.country">Selezionare il paese</entry>
+    <entry key="espd.init.ted.reception.id.placeholder">Specificare il numero dell'avviso ricevuto</entry>
+    <entry key="espd.init.upload.document">Caricare il documento.</entry>
+    <entry key="espd.init.upload.documents">Caricare il documento</entry>
+    <entry key="espd.init.upload.request">Caricare un file ESPD Request (richiesta di DGUE) proveniente
+        dall'amministrazione aggiudicatrice
+    </entry>
+    <entry key="espd.init.upload.request.response">Caricare un file ESPD Request (richiesta di DGUE) o ESPD Response
+        (DGUE di risposta)
+    </entry>
+    <entry key="espd.init.upload.response">Caricare un file ESPD response (DGUE di risposta) compilato in precedenza
+        dallo stesso operatore economico
+    </entry>
+    <entry key="espd.init.what.you.do">Che operazione si vuole eseguire?</entry>
+    <entry key="espd.init.where.are.you.from.ca">Dove si trova l'amministrazione o ente?</entry>
+    <entry key="espd.init.where.are.you.from.eo">Dove si trova la Sua impresa?</entry>
+    <entry key="espd.init.who.are.you">Chi è a compilare il DGUE?</entry>
+    <entry key="espd.gui.footer.last.update">Ultimo aggiornamento:</entry>
+    <entry key="espd.gui.grow">DG Growth</entry>
+    <entry key="espd.ecertis.information.for.country">Mostra più informazioni</entry>
+    <entry key="espd.gui.legal.notice">Avvertenza legale</entry>
+    <entry key="espd.ecertis.less.information">Vuoi usare i criteri di selezione da A a D?</entry>
+    <entry key="espd.ecertis.more.information">Mostra meno informazioni</entry>
+    <entry key="espd.gui.next">Avanti</entry>
+    <entry key="espd.gui.no">No</entry>
+    <entry key="espd.gui.not.applicable">Non applicabile</entry>
+    <entry key="espd.gui.place">Luogo</entry>
+    <entry key="espd.gui.previous">Indietro</entry>
+    <entry key="espd.gui.print">Quadro generale</entry>
+    <entry key="espd.gui.progress.exclusion">Esclusione</entry>
+    <entry key="espd.gui.progress.finish">Fine</entry>
+    <entry key="espd.gui.progress.procedure">Procedura</entry>
+    <entry key="espd.gui.progress.selection">Selezione</entry>
+    <entry key="espd.gui.progress.start">Avvio</entry>
+    <entry key="espd.gui.question.to.use.alpha">L'organico medio annuo dell'operatore economico negli ultimi tre anni è
+        il seguente:
+    </entry>
+    <entry key="espd.gui.report.appliction.issue">Per qualsiasi problema relativo all'applicazione DGUE rivolgersi a
+    </entry>
+    <entry key="espd.gui.report.security.incident">Segnalazione di un incidente relativo alla sicurezza delle
+        informazioni
+    </entry>
+    <entry key="espd.gui.report.security.incident.title">In caso di incidente relativo alla sicurezza contattare la
+        Commissione europea tramite la
+    </entry>
+    <entry key="espd.gui.role.ca">Ruolo del compilatore: Amministrazione aggiudicatrice (AG)</entry>
+    <entry key="espd.gui.role.eo">Ruolo del compilatore: Operatore economico (OE)</entry>
+    <entry key="espd.gui.search">Ricerca</entry>
+    <entry key="espd.gui.signature">Firma</entry>
+    <entry key="espd.gui.tools">Strumenti</entry>
+    <entry key="espd.init.ca.can.create.espd.tooltip">L'amministrazione aggiudicatrice può creare un DGUE partendo da
+        zero. In tal caso l'amministrazione aggiudicatrice deve compilare il modulo del DGUE inserendo tutte le
+        informazioni pertinenti.
+    </entry>
+    <entry key="espd.init.ca.can.import.espd.tooltip">Se l'amministrazione aggiudicatrice ha già utilizzato il servizio
+        DGUE in precedenza per un'altra procedura di appalto, essa può importare il DGUE contenuto nella rete locale. In
+        tal caso il DGUE non deve essere compilato partendo da zero ma alcuni dati devono comunque essere aggiornati per
+        corrispondere alla procedura di appalto in corso.
+    </entry>
+    <entry key="espd.init.ca.ref.buyer.tooltip">Il termine Chr(34)amministrazione aggiudicatriceChr(34) indica
+        l'acquirente.
+    </entry>
+    <entry key="espd.init.ce.ref.buyer.tooltip">In questo contesto il termine ente aggiudicatore indica un acquirente
+        operante nei settori dell'acqua, dell'energia, dei trasporti o dei servizi postali. Le amministrazioni
+        aggiudicatrici operanti anche nei settori suddetti devono selezionare la dicitura Chr(34)Sono un'amministrazione
+        aggiudicatriceChr(34)
+    </entry>
+    <entry key="espd.init.eo.can.reuse.espd.tooltip">L'operatore economico può riutilizzare le informazioni fornite
+        mediante un DGUE in una procedura di appalto pubblico precedente (DGUE Chr(34)vecchioChr(34)). Il servizio DGUE
+        unirà il DGUE Chr(34)vecchioChr(34) al nuovo modello predisposto dall'amministrazione aggiudicatrice per la
+        procedura di appalto in corso.
+    </entry>
+    <entry key="espd.init.eo.ref.suppl.tooltip">Il termine Chr(34)operatore economicoChr(34) indica il fornitore o
+        offerente.
+    </entry>
+    <entry key="espd.init.espd.used.both.ca.eo.tooltip">Il servizio DGUE può essere utilizzato sia dalle amministrazioni
+        aggiudicatrici sia dagli operatori economici. Selezionare l'opzione che corrisponde al profilo del compilatore
+        in questa procedura di appalto pubblico.
+    </entry>
+    <entry key="espd.init.filter.create.response.tooltip">Creare un nuovo file ESPD Response (DGUE di risposta)</entry>
+    <entry key="espd.init.filter.eo.can.import.espd.tooltip">L'operatore economico può importare il file del DGUE che
+        l'amministrazione aggiudicatrice ha precompilato per la procedura di appalto pubblico in questione e pubblicato
+        insieme al bando di gara.
+    </entry>
+    <entry key="espd.init.filter.eo.merge.espds.tooltip">The ESPD service will merge the 'old' ESPD with the new form
+        prepared by the contracting authority for this procurement procedure.
+    </entry>
+    <entry key="espd.init.overview.received.espds.tooltip">Questa funzione presenta una tabella con una panoramica delle
+        risposte contenute in tutti i DGUE forniti dagli offerenti per una data procedura di appalto.
+    </entry>
+    <entry key="espd.init.review.espd.tooltip">L'amministrazione aggiudicatrice può controllare/rivedere il DGUE
+        elettronico inoltrato dall'operatore economico.
+    </entry>
+    <entry key="espd.init.ted.reception.id.tooltip">L'amministrazione aggiudicatrice riceverà un messaggio di posta
+        elettronica dall'Ufficio delle pubblicazioni se ha inviato un avviso da pubblicare. Tale messaggio di posta
+        elettronica contiene un identificativo (ID) che si può usare in questo servizio per compilare informazioni
+        sull'appalto e sull'amministrazione.
+    </entry>
+    <entry key="espd.validator.accept">Inserire un valore con un'estensione valida.</entry>
+    <entry key="espd.validator.creditcard">Indicare un numero di carta di credito valido.</entry>
+    <entry key="espd.validator.date">Inserire una data valida.</entry>
+    <entry key="espd.validator.dateISO">Inserire una data valida (ISO).</entry>
+    <entry key="espd.validator.digits">Inserire solo cifre.</entry>
+    <entry key="espd.validator.email">Inserire un indirizzo e-mail valido.</entry>
+    <entry key="espd.validator.equalTo">Inserire di nuovo lo stesso valore.</entry>
+    <entry key="espd.validator.max">Inserire un valore inferiore o uguale a {0}.</entry>
+    <entry key="espd.validator.maxlength">Inserire non più di {0} caratteri.</entry>
+    <entry key="espd.validator.min">Inserire un valore superiore o uguale a {0}.</entry>
+    <entry key="espd.validator.minlength">Inserire almeno {0} caratteri.</entry>
+    <entry key="espd.validator.number">Inserire un numero valido.</entry>
+    <entry key="espd.validator.range">Inserire un valore compreso tra {0} e {1}.</entry>
+    <entry key="espd.validator.rangelength">Inserire un valore di lunghezza compresa tra {0} e {1} caratteri.</entry>
+    <entry key="espd.validator.remote">Correggere questo campo.</entry>
+    <entry key="espd.validator.required">Questo campo è obbligatorio.</entry>
+    <entry key="espd.validator.url">Indicare un URL valido.</entry>
+    <entry key="espd.gui.view.ca">Visualizzazione: (AG)</entry>
+    <entry key="espd.gui.view.eo">Visualizzazione: (OE)</entry>
+    <entry key="espd.gui.yes">Sì</entry>
+    <entry key="espd.gui.zip.instructions">Precisazioni sui file relativi al DGUE che si trovano in questa cartella con
+        estensione .zip.Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nespd.XML: il file XML è un file che può essere compreso
+        dal nostro servizio DGUE o da altri servizi DGUE compatibili. Il vantaggio di usare il DGUE elettronico nel
+        formato XML è che gli acquirenti e le imprese possono riutilizzarlo in futuro per altre procedure di appalto.
+        Questo file andrebbe spedito insieme ai documenti di gara (dall'amministrazione aggiudicatrice alle imprese) o
+        nel contesto di un'offerta (da un'impresa all'amministrazione
+        aggiudicatrice).Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nespd.PDF: questo file PDF è una versione del DGUE
+        elettronico leggibile per un utente umano. Anche in questo caso consigliamo di usarlo in parallelo al formato
+        XML insieme ai documenti di gara (trasmessi dall'amministrazione aggiudicatrice alle imprese) o nel contesto di
+        un'offerta (trasmessa da un'impresa all'amministrazione
+        aggiudicatrice).Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nPer qualsiasi domanda sui file rivolgersi al nostro
+        servizio al seguente indirizzo e-mail: grow-espd@ec.europa.eu
+    </entry>
+</properties>

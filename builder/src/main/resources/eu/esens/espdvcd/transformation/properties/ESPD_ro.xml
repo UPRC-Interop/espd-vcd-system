@@ -1,0 +1,1025 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+Es wir hier explizit auf einen DocType verzichten um diese Datei in der Transformation nutzen zu koennen, ohne das sie gegen die properties.dtd geprüft wird.
+Wenn die Datei als Properties gezogen wird, wird ein DocType zur Laufzeit eingetragen.
+-->
+<properties>
+    <entry key="espd.gui.about">Despre</entry>
+    <entry key="espd.part4.all.selection.switch">?: Indica?ie global? pentru toate criteriile de selec?ie</entry>
+    <entry key="espd.gui.app.environment">Stimate utilizator, acum utiliza?i mediul nostru de testare. V? rug?m s?
+        utiliza?i
+    </entry>
+    <entry key="espd.gui.app.subtitle">Serviciu de completare ?i reutilizare a DEAU</entry>
+    <entry key="espd.gui.app.title">Documentul european de achizi?ie unic (DEAU)</entry>
+    <entry key="espd.gui.back.to.main">Înapoi la pagina principal?</entry>
+    <entry key="espd.gui.cancel">Anulare</entry>
+    <entry key="espd.gui.click.here">ap?sa?i aici</entry>
+    <entry key="espd.gui.contact">Contact</entry>
+    <entry key="espd.gui.contact.header">Contact</entry>
+    <entry key="espd.gui.contact.info">&lt;p&gt;European Commission&lt;p&gt;Directorate General Internal Market, Industry,
+        Entrepreneurship and SMEs&lt;p&gt;Avenue d'Auderghem 45 / Oudergemselaan 45&lt;p&gt;B-1049 Brussels&lt;p&gt;Belgia
+    </entry>
+    <entry key="espd.gui.cookies">Cookie-uri</entry>
+    <entry key="espd.gui.correct.errors">Trebuie s? corecta?i erorile înainte de a putea continua.</entry>
+    <entry key="espd.part1.city">Ora?:</entry>
+    <entry key="espd.part1.confirm.email">Confirma?i adresa e-mail:</entry>
+    <entry key="espd.part1.confirm.telephone">Confirma?i num?rul de telefon:</entry>
+    <entry key="espd.part1.contact.details.ca">Identitatea achizitorului</entry>
+    <entry key="espd.part1.contact.person">Persoan? de contact:</entry>
+    <entry key="espd.part1.correct.errors">Trebuie s? corecta?i erorile înainte de a putea continua.</entry>
+    <entry key="espd.part1.country">?ar?:</entry>
+    <entry key="espd.part1.email">E-mail:</entry>
+    <entry key="espd.part1.fax">faks</entry>
+    <entry key="espd.part1.file.ref.ca">Num?rul de referin?? atribuit dosarului de c?tre autoritatea contractant? sau
+        entitatea contractant? (dac? este cazul):
+    </entry>
+    <entry key="espd.part1.header">Partea I: Informa?ii privind procedura de achizi?ii publice ?i autoritatea
+        contractant? sau entitatea contractant?
+    </entry>
+    <entry key="espd.part1.info.procedure">procedur?</entry>
+    <entry key="espd.part1.info.procurement.proc">Informa?ii privind procedura de achizi?ii publice</entry>
+    <entry key="espd.part1.info.pub">Informa?ii despre publicare</entry>
+    <entry key="espd.part1.name">Denumire oficial?:</entry>
+    <entry key="espd.part1.nat.regnum">Num?rul na?ional de înregistrare (dac? îl cunoa?te?i):</entry>
+    <entry key="espd.part1.official.journal.alert">În cazul în care nu exist? o invita?ie la o procedur? concuren?ial?
+        de ofertare în Jurnalul Oficial al Uniunii Europene sau, în cazul în care acesta nu este obligat? s? publice
+        acolo, atunci autoritatea contractant? sau entitatea contractant? trebuie s? completeze informa?iile care permit
+        identificarea f?r? echivoc a procedurii de achizi?ii publice (de exemplu, referin?a unei public?ri la nivel
+        na?ional)
+    </entry>
+    <entry key="espd.part1.ojs.label">Num?rul anun?ului în JO seria S:</entry>
+    <entry key="espd.part1.ojs.url">Adresa URL a JO seria S</entry>
+    <entry key="espd.part1.postcode">Cod po?tal:</entry>
+    <entry key="espd.part1.procurer.name">Denumire:</entry>
+    <entry key="espd.part1.street.and. num">Strada ?i num?rul:</entry>
+    <entry key="espd.part1.ted.reception.id">Aceasta este o scurt? documentare pentru fi?ierele DEAU pe care le g?si?i
+        în aceast? arhiv? ZIP.Chr(92)
+    </entry>
+    <entry key="espd.part1.telephone">Telefon:</entry>
+    <entry key="espd.part1.title.or.short.desc">Scurt? descriere:</entry>
+    <entry key="espd.part1.to.be.filled.alert">În cazul procedurilor de achizi?ii publice în care s-a publicat o
+        invita?ie la procedura concuren?ial? de ofertare în Jurnalul Oficial al Uniunii Europene, informa?iile
+        solicitate în partea I vor fi preluate automat, cu condi?ia ca serviciul electronic pentru DEAU s? fie utilizat
+        pentru generarea ?i completarea DEAU. Trimiterea la anun?ul relevant publicat în Jurnalul Oficial al Uniunii
+        Europene:
+    </entry>
+    <entry key="espd.part1.website">Site web (dac? este cazul):</entry>
+    <entry key="espd.part3.grounds.criminal.conv">Motive referitoare la condamn?rile penale</entry>
+    <entry key="espd.part3.header">Partea III: Motive de excludere</entry>
+    <entry key="espd.part3.insolvency.conflicts">Motive legate de insolven??, conflicte de interese sau abateri
+        profesionale
+    </entry>
+    <entry key="espd.part5.concl.statements">Partea VI: Declara?iile finale</entry>
+    <entry key="espd.part5.concl.statements.signature">Data, locul ?i, dac? se solicit? sau dac? este (sunt) necesar?
+        (necesare), semn?tura (semn?turile):
+    </entry>
+    <entry key="espd.part5.concl.statements.text">Subsemnatul declar c? informa?iile prezentate în p?r?ile II ? V de mai
+        sus sunt exacte ?i corecte ?i c? au fost furnizate cunoscând pe deplin consecin?ele cazurilor grave de
+        declara?ii false.
+        &lt;p&gt;Subsemnatul declar în mod oficial c? pot s? furnizez, la cerere ?i f?r? întârziere, certificatele ?i alte
+            forme de documente justificative men?ionate, cu excep?ia cazului în care:
+        &lt;/p&gt;
+        &lt;p&gt;a) Autoritatea contractant? sau entitatea contractant? are posibilitatea de a ob?ine documentele
+            justificative în cauz? direct prin accesarea unei baze de date na?ionale în orice stat membru, disponibil?
+            în mod gratuit, cu condi?ia ca operatorul economic s? fi furnizat informa?iile necesare [adresa de internet,
+            autoritatea sau organismul emitent(?), referin?a exact? a documenta?iei] care s? îi permit? autorit??ii
+            contractante sau entit??ii contractante s? fac? acest lucru. Dac? este cazul, aceste informa?ii trebuie s?
+            fie înso?ite de consim??mântul relevant în vederea acces?rii acestora sau
+        &lt;/p&gt;
+        &lt;p&gt;b) La 18 octombrie 2018 cel mai târziu, [în func?ie de aplicarea la nivel intern a articolului 59 alineatul
+            (5) paragraful al doilea din Directiva 2014/24/UE], autoritatea contractant? sau entitatea contractant?
+            posed? deja documenta?ia în cauz?.
+        &lt;/p&gt;
+        &lt;p&gt;Subsemnatul declar în mod oficial c? sunt de acord ca [identifica?i autoritatea contractant? sau entitatea
+            contractant?, astfel cum este descris? în partea I sec?iunea A] s? ob?in? acces la documentele justificative
+            privind informa?iile pe care le-am furnizat în [identifica?i partea / sec?iunea / punctul(punctele) în
+            cauz?] din prezentul documentul european de achizi?ie unic în scopul [identifica?i procedura de achizi?ii
+            publice: (scurt? descriere, referin?a de publicare în Jurnalul Oficial al Uniunii Europene, num?rul de
+            referin??)].
+        &lt;/p&gt;
+    </entry>
+    <entry key="espd.part5.export">Export</entry>
+    <entry key="espd.part5.export.content">Acum pute?i s? face?i clic pe ?export? ?i s? desc?rca?i ?i s? salva?i DEAU pe
+        calculatorul dumneavoastr?. Autorit??ile contractante trebuie s? se asigure c? acest dosar DEAU se afl? la
+        dispozi?ia operatorilor economici, al?turi de celelalte documente de licita?ie.
+    </entry>
+    <entry key="espd.part5.header">Finalizare</entry>
+    <entry key="espd.part5.reduction">Partea V: Reducerea num?rului de candida?i califica?i</entry>
+    <entry key="espd.part5.reduction.question">Operatorul economic declar? c?:</entry>
+    <entry key="espd.part5.text.eo.declares.that">Dac? unele dintre aceste certificate sau alte forme de documente
+        justificative sunt disponibile în format electronic, v? rug?m s? preciza?i pentru fiecare:
+    </entry>
+    <entry key="espd.part5.title.eo.declares.that">Îndepline?te criteriile sau regulile obiective ?i nediscriminatorii
+        aplicabile pentru limitarea num?rului de candida?i în urm?torul mod:&lt;p&gt;În cazul în care sunt solicitate anumite
+            certificate sau alte forme de documente justificative, v? rug?m s? preciza?i pentru fiecare dintre acestea
+            dac? operatorul economic dispune de documentele solicitate:
+        &lt;/p&gt;
+    </entry>
+    <entry key="espd.part5.toptext">Operatorul economic trebuie s? prezinte informa?ii numai dac? autoritatea
+        contractant? sau entitatea contractant? a specificat criteriile sau regulile obiective ?i nediscriminatorii
+        aplicabile pentru limitarea num?rului de candida?i care vor fi invita?i s? depun? oferte sau s? participe la
+        dialog. Aceste informa?ii, care pot fi înso?ite, dac? este cazul, de cerin?e privind certificatele (tipurile de
+        certificate) sau formele de documente justificative care trebuie furnizate, sunt prezentate în anun?ul relevant
+        sau în documentele achizi?iei men?ionate în anun?. Numai pentru procedurile restrânse, procedurile competitive
+        cu negociere, procedurile de dialog competitiv ?i parteneriatele pentru inovare:
+    </entry>
+    <entry key="espd.part4.alert">Autorit??ile contractante trebuie s? indice care vor fi criteriile de selec?ie
+        aplicate, bifând c?su?a care se g?se?te înainte de criteriul relevant.
+    </entry>
+    <entry key="espd.part4.economic.and.financial.standing">B: Capacitatea economic? ?i financiar?</entry>
+    <entry key="espd.part4.header">Partea IV: Criteriile de selec?ie</entry>
+    <entry key="espd.part4.quality.assurance">D: Sisteme de asigurare a calit??ii ?i standarde de management de mediu
+    </entry>
+    <entry key="espd.part4.suitability">A: Capacitatea de a corespunde cerin?elor</entry>
+    <entry key="espd.part4.technical.professional.ability">C: Capacitatea tehnic? ?i profesional?</entry>
+    <entry key="espd.part2.add.complete.missing">În plus, v? rug?m s? completa?i informa?iile-lips? în partea IV
+        sec?iunea A, B, C sau D, dup? caz, NUMAI dac? se solicit? acest lucru în anun?ul sau în documentele achizi?iei
+        relevante
+    </entry>
+    <entry key="espd.part2.all.selection.covered">d) Înregistrarea sau certificarea acoper? toate criteriile de selec?ie
+        impuse?
+    </entry>
+    <entry key="espd.part2.another.vat">Dac? nu se aplic? niciun num?r TVA, v? rug?m s? indica?i un alt num?r na?ional
+        de identificare, dac? acest lucru este impus ?i aplicabil
+    </entry>
+    <entry key="espd.part2.answer.following.parts">V? rug?m s? furniza?i r?spunsuri în cadrul celorlalte p?r?i din
+        prezenta sec?iune, al sec?iunii B ?i, dup? caz, al sec?iunii C din prezenta parte, s? completa?i partea V, dac?
+        este cazul, ?i, în orice caz, s? completa?i ?i s? semna?i partea VI.
+    </entry>
+    <entry key="espd.part2.birth.date">Data na?terii</entry>
+    <entry key="espd.part2.birth.place">Locul na?terii</entry>
+    <entry key="espd.part2.cert.e.avaliable">b) Dac? certificatul de înregistrare sau de certificare este disponibil în
+        format electronic, v? rug?m s? preciza?i:
+    </entry>
+    <entry key="espd.part2.contact.person">Persoana sau persoanele de contact:</entry>
+    <entry key="espd.part2.detinfo.of.represent">Dac? este cazul, v? rug?m s? furniza?i informa?ii detaliate privind
+        reprezentarea (formele, amploarea, scopul acesteia...):
+    </entry>
+    <entry key="espd.part2.disworkers.details">Dac? este necesar, v? rug?m s? specifica?i c?rei sau c?ror categorii de
+        lucr?tori cu dizabilit??i sau defavoriza?i le apar?in anga?ii în cauz??
+    </entry>
+    <entry key="espd.part2.doc.e.avaliable">Dac? documentele relevante sunt disponibile în format electronic, v? rug?m
+        s? preciza?i:
+    </entry>
+    <entry key="espd.part2.email">E-mail:</entry>
+    <entry key="espd.part2.ensure.others.espd">V? rug?m s? v? asigura?i c? celelalte p?r?i în cauz? prezint? un formular
+        DEAU separat.
+    </entry>
+    <entry key="espd.part2.eo.approved.cert">Dac? este cazul, operatorul economic este înscris pe o list? oficial? a
+        operatorilor economici agrea?i sau de?ine o certificare echivalent? [de exemplu, în cadrul unui sistem na?ional
+        de (pre) calificare]?
+    </entry>
+    <entry key="espd.part2.eo.group.role">a) V? rug?m s? preciza?i rolul operatorului economic în cadrul grupului
+        (lider, responsabil cu îndeplinirea unor sarcini specifice...):
+    </entry>
+    <entry key="espd.part2.eo.has.cert.soc">e) Operatorul economic va fi în m?sur? s? furnizeze un certificat cu privire
+        la plata contribu?iilor la asigur?rile sociale ?i plata impozitelor sau s? furnizeze informa?ii care s? îi
+        permit? autorit??ii contractante sau entit??ii contractante s? ob?in? acest certificat direct prin accesarea
+        unei baze de date na?ionale în orice stat membru, disponibil? în mod gratuit?
+    </entry>
+    <entry key="espd.part2.eo.rely.other.entities">Operatorul economic utilizeaz? capacit??ile altor entit??i pentru a
+        satisface criteriile de selec?ie prev?zute în partea IV, precum ?i (dac? este cazul) criteriile ?i regulile
+        men?ionate în partea V de mai jos:
+    </entry>
+    <entry key="espd.part2.first.name">Prenume</entry>
+    <entry key="espd.part2.header">Partea II: Informa?ii referitoare la operatorul economic</entry>
+    <entry key="espd.part2.if.proc.reserved">Numai în cazul în care achizi?ia public? este rezervat?: operatorul
+        economic este un atelier protejat sau o ?întreprindere social?? sau va asigura executarea contractului în
+        contextul programelor de angajare protejat??
+    </entry>
+    <entry key="espd.part2.info.eo">A: Informa?ii privind operatorul economic</entry>
+    <entry key="espd.part2.info.reliance">C: Informa?ii privind utilizarea capacit??ilor altor entit??i</entry>
+    <entry key="espd.part2.info.respresent">B: Informa?ii privind reprezentan?ii operatorului economic</entry>
+    <entry key="espd.part2.information.subcontractors">D: Informa?ii privind subcontractan?ii pe ale c?ror capacit??i
+        operatorul economic nu se bazeaz?
+    </entry>
+    <entry key="espd.part2.information.subcontractors.description">Dac? da ?i în m?sura în care se cunoa?te, v? rug?m s?
+        enumera?i subcontractan?ii propu?i:
+    </entry>
+    <entry key="espd.part2.information.subcontractors.footer">Dac? autoritatea contractant? sau entitatea contractant?
+        solicit? în mod explicit aceste informa?ii, în plus fa?? de informa?iile din partea I, v? rug?m s? furniza?i
+        informa?iile solicitate în sec?iunile A ?i B din aceast? parte ?i din partea III pentru fiecare dintre
+        subcontractan?ii (categoriile de subcontractan?i) în cauz?.
+    </entry>
+    <entry key="espd.part2.information.subcontractors.header">(Sec?iunea se completeaz? numai în cazul în care aceast?
+        informa?ie este solicitat? în mod explicit de c?tre autoritatea contractant? sau entitatea contractant?.)
+    </entry>
+    <entry key="espd.part2.information.subcontractors.title">Operatorul economic inten?ioneaz? s? subcontracteze vreo
+        parte din contract unor ter?i?
+    </entry>
+    <entry key="espd.part2.internet.addr.if.exists">Adresa de internet: (adresa web) (dac? este cazul):</entry>
+    <entry key="espd.part2.is.eo.proc.together">Operatorul economic particip? la procedura de achizi?ii publice împreun?
+        cu al?ii?
+    </entry>
+    <entry key="espd.part2.is.eo.sized">Operatorul economic este o microîntreprindere, o întreprindere mic? sau o
+        întreprindere mijlocie?
+    </entry>
+    <entry key="espd.part2.is.eo.sized.tooltip">A se vedea Recomandarea Comisiei din 6 mai 2003 privind definirea
+        microîntreprinderilor ?i a întreprinderilor mici ?i mijlocii (JO L 124, 20.5.2003, p. 36). Aceste informa?ii
+        sunt solicitate numai în scopuri statistice. Microîntreprinderi: o întreprindere care are mai pu?in de 10
+        angaja?i ?i o cifr? de afaceri anul? ?i/sau un bilan? anual total care nu dep??e?te 2 milioane EUR.
+        Întreprinderile mici: o întreprindere care are mai pu?in de 50 angaja?i ?i o cifr? de afaceri anul? ?i/sau un
+        bilan? anual total care nu dep??e?te 10 milioane EUR; întreprinderi care nu sunt nici microîntreprinderi, nici
+        întreprinderi mici ?i care au mai pu?in de 250 de angaja?i ?i o cifr? de afaceri anual? care nu dep??e?te 50 de
+        milioane EUR ?i/sau un bilan? anual total care nu dep??e?te 43 de milioane EUR
+    </entry>
+    <entry key="espd.part2.last.name">Nume</entry>
+    <entry key="espd.part2.lots.concerned">Dac? este cazul, se indic? lotul (loturile) pentru care operatorul economic
+        dore?te s? depun? oferte:
+    </entry>
+    <entry key="espd.part2.name">Denumire:</entry>
+    <entry key="espd.part2.name.part.group">c) Dac? este cazul, denumirea grupului participant:</entry>
+    <entry key="espd.part2.other.eo.part">b) V? rug?m s? îi identifica?i pe ceilal?i operatori economici care mai
+        particip? la procedura de achizi?ii publice:
+    </entry>
+    <entry key="espd.part2.percentage.disworkers">care este procentul corespunz?tor de lucr?tori cu dizabilit??i sau
+        defavoriza?i?
+    </entry>
+    <entry key="espd.part2.person.empowered">Dac? este cazul, v? rug?m s? indica?i numele ?i adresa (adresele) persoanei
+        (persoanelor) împuternicit? (împuternicite) s? îl reprezinte pe operatorul economic în scopurile acestei
+        proceduri de achizi?ii publice:
+    </entry>
+    <entry key="espd.part2.pos.act.in.capacity">Func?ie/ac?ionând în calitate de:</entry>
+    <entry key="espd.part2.postal.adress">Adresa po?tal?:</entry>
+    <entry key="espd.part2.provide.regnumber">a) V? rug?m s? furniza?i num?rul relevant de înregistrare sau de
+        certificare, dac? este cazul:
+    </entry>
+    <entry key="espd.part2.ref.for.cert">c) V? rug?m s? preciza?i referin?ele pe care se bazeaz? înregistrarea sau
+        certificarea ?i, dac? este cazul, clasificarea ob?inut? pe lista oficial?:
+    </entry>
+    <entry key="espd.part2.separate.espd.sections.a.b">V? rug?m s? prezenta?i un formular DEAU separat care s? cuprind?
+        informa?iile solicitate în sec?iunile A ?i B din aceast? parte ?i din partea III pentru fiecare dintre
+        entit??ile în cauz?, completat ?i semnat în mod corespunz?tor de entit??ile în cauz?.<p/>V? atragem aten?ia
+        asupra faptului c? trebuie inclu?i, de asemenea, tehnicienii sau organismele tehnice implicate, indiferent dac?
+        fac sau nu parte din întreprinderea operatorului economic, în special cei care r?spund de controlul calit??ii
+        ?i, în cazul contractelor de achizi?ii publice de lucr?ri, tehnicienii sau organismele tehnice la care poate
+        face apel operatorul economic în vederea execut?rii lucr?rilor.
+        <p/>
+        În m?sura în care este relevant pentru capacitatea (capacit??ile) specific? (specifice) utilizat? (utilizate) de
+        operatorul economic, v? rug?m s? include?i informa?iile prev?zute în p?r?ile IV ?i V pentru fiecare dintre
+        entit??ile în cauz?.
+    </entry>
+    <entry key="espd.part2.telephone">Telefon:</entry>
+    <entry key="espd.part2.vat">Num?rul TVA (dac? este cazul):</entry>
+    <entry key="espd.part2sel.alert">Operatorul economic trebuie s? furnizeze informa?ii numai în cazul în care
+        criteriile de selec?ie respective au fost impuse de autoritatea contractant? sau de entitatea contractant? în
+        anun?ul relevant sau în documentele achizi?iei men?ionate în anun?.
+    </entry>
+    <entry key="espd.crit.amount">Valoare</entry>
+    <entry key="espd.crit.amount.concerned">Suma în cauz?</entry>
+    <entry key="espd.crit.average.turnover">Emitent</entry>
+    <entry key="espd.crit.code">Cod</entry>
+    <entry key="espd.crit.country.member.state">?ara sau statul membru în cauz?</entry>
+    <entry key="espd.crit.date">Data</entry>
+    <entry key="espd.crit.date.of.conviction">Data condamn?rii</entry>
+    <entry key="espd.part3.crit.date.of.conviction.or.decision">V? rug?m s? preciza?i data condamn?rii</entry>
+    <entry key="espd.crit.decision.final.and.binding">În cazul în care aceast? înc?lcare a obliga?iilor a fost stabilit?
+        printr-o hot?râre judec?toreasc? sau administrativ?, aceast? decizie este definitiv? ?i obligatorie?
+    </entry>
+    <entry key="espd.crit.description">Descriere</entry>
+    <entry key="espd.crit.do.you.allow.checks">Permite?i verific?ri?</entry>
+    <entry key="espd.crit.end.date">Num?r de ani</entry>
+    <entry key="espd.part3.crit.eu.main.breaching.obligations">Articolul 57 alineatul (4) din Directiva 2014/24/UE
+        stabile?te urm?toarele motive de excludere
+    </entry>
+    <entry key="espd.part3.crit.eu.eo.main.breaching.obligations">Articolul 57 alineatul (4) din Directiva 2014/24/UE
+        stabile?te urm?toarele motive de excludere
+    </entry>
+    <entry key="espd.part3.crit.eu.main.purely.national">Se aplic? motivele de excludere pur na?ionale care sunt
+        specificate în anun?ul relevant sau în documentele achizi?iei?
+    </entry>
+    <entry key="espd.part3.crit.eu.grounds.criminal.conv.main.title">Articolul 57 alineatul (1) din Directiva 2014/24/UE
+        stabile?te urm?toarele motive de excludere
+    </entry>
+    <entry key="espd.part3.crit.eu.eo.grounds.criminal.conv.main.title">Articolul 57 alineatul (1) din Directiva
+        2014/24/UE stabile?te urm?toarele motive de excludere
+    </entry>
+    <entry key="espd.part3.crit.eu.payment.taxes.main.title">Articolul 57 alineatul (2) din Directiva 2014/24/UE
+        stabile?te urm?toarele motive de excludere
+    </entry>
+    <entry key="espd.part3.crit.eu.eo.payment.taxes.main.title">Articolul 57 alineatul (2) din Directiva 2014/24/UE
+        stabile?te urm?toarele motive de excludere
+    </entry>
+    <entry key="espd.crit.eu.text.agreement.economic">Operatorul economic a încheiat acorduri cu al?i operatori
+        economici care au ca obiect denaturarea concuren?ei?
+    </entry>
+    <entry key="espd.crit.eu.text.arrangement.creditors">Operatorul economic este în concordat preventiv?</entry>
+    <entry key="espd.crit.eu.text.bankrupt">Operatorul economic este în stare de faliment?</entry>
+    <entry key="espd.crit.eu.text.breaching.obligations.environmental">În m?sura cuno?tin?elor sale, operatorul economic
+        ?i-a înc?lcat obliga?iile în domeniul legisla?iei mediului? Astfel cum sunt men?ionate în scopul acestei
+        achizi?ii publice în legisla?ia na?ional?, în anun?ul relevant sau în documentele achizi?iei ori la articolul 18
+        alineatul (2) din Directiva 2014/24/UE.
+    </entry>
+    <entry key="espd.crit.eu.text.breaching.obligations.labour">În m?sura cuno?tin?elor sale, operatorul economic ?i-a
+        înc?lcat obliga?iile în domeniul legisla?iei muncii? Astfel cum sunt men?ionate în scopul acestei achizi?ii
+        publice în legisla?ia na?ional?, în anun?ul relevant sau în documentele achizi?iei ori la articolul 18 alineatul
+        (2) din Directiva 2014/24/UE.
+    </entry>
+    <entry key="espd.crit.eu.text.breaching.obligations.social">În m?sura cuno?tin?elor sale, operatorul economic ?i-a
+        înc?lcat obliga?iile în domeniul legisla?iei sociale? Astfel cum sunt men?ionate în scopul acestei achizi?ii
+        publice în legisla?ia na?ional?, în anun?ul relevant sau în documentele achizi?iei ori la articolul 18 alineatul
+        (2) din Directiva 2014/24/UE.
+    </entry>
+    <entry key="espd.crit.eu.text.child.labour">Operatorul economic însu?i sau orice persoan? care este membru al
+        organismului de administrare, de conducere sau de supraveghere al acestuia sau care are putere de reprezentare,
+        de decizie sau de control în cadrul acestuia a f?cut obiectul unei condamn?ri pronun?ate printr-o hot?râre
+        definitiv? pentru exploatare prin munc? a copiilor ?i alte forme de trafic de persoane, printr-o condamnare
+        pronun?at? cu cel mult cinci ani în urm? sau în care continu? s? se aplice o perioad? de excludere prev?zut? în
+        mod direct în condamnare? Astfel cum sunt definite la articolul 2 din Directiva 2011/36/UE a Parlamentului
+        European ?i a Consiliului din 5 aprilie 2011 privind prevenirea ?i combaterea traficului de persoane ?i
+        protejarea victimelor acestuia, precum ?i de înlocuire a Deciziei-cadru 2002/629/JAI a Consiliului (JO L 101,
+        15.4.2011, p. 1). V? rug?m s? repeta?i de câte ori este necesar.
+    </entry>
+    <entry key="espd.crit.eu.text.conflict.interest">Operatorul economic are cuno?tin?? de vreun conflict de interese,
+        astfel cum se precizeaz? în legisla?ia na?ional?, anun?ul relevant sau documentele achizi?iei, care decurge din
+        participarea sa la procedura de achizi?ii publice?
+    </entry>
+    <entry key="espd.crit.eu.text.corruption">Operatorul economic însu?i sau orice persoan? care este membru al
+        organismului de administrare, de conducere sau de supraveghere al acestuia sau care are putere de reprezentare,
+        de decizie sau de control în cadrul acestuia a f?cut obiectul unei condamn?ri pentru corup?ie pronun?ate
+        printr-o hot?râre definitiv?, printr-o condamnare pronun?at? cu cel mult cinci ani în urm? sau în care continu?
+        s? se aplice o perioad? de excludere prev?zut? în mod direct în condamnare? Astfel cum este definit? la
+        articolul 3 din Conven?ia privind lupta împotriva corup?iei care implic? func?ionari ai Comunit??ilor Europene
+        sau func?ionari ai statelor membre ale Uniunii Europene, JO C 195, 25.6.1997, p. 1, ?i la articolul 2 alineatul
+        (1) din Decizia-cadru 2003/568/JAI a Consiliului din 22 iulie 2003 privind combaterea corup?iei în sectorul
+        privat (JO L 192, 31.7.2003, p. 54). Acest motiv de excludere se refer?, de asemenea, la corup?ie, astfel cum
+        este definit? în dreptul na?ional al autorit??ii contractante (entit??ii contractante) sau al operatorului
+        economic.
+    </entry>
+    <entry key="espd.crit.eu.text.early.termination">Operatorul economic s-a aflat într-o situa?ie în care un contract
+        de achizi?ii publice anterior, un contract anterior încheiat cu o entitate contractant? sau un contract de
+        concesiune anterior a fost reziliat anticipat sau au fost impuse daune-interese sau alte sanc?iuni comparabile
+        în leg?tur? cu respectivul contract anterior?
+    </entry>
+    <entry key="espd.crit.eu.text.fraud">Operatorul economic însu?i sau orice persoan? care este membru al organismului
+        de administrare, de conducere sau de supraveghere al acestuia sau care are putere de reprezentare, de decizie
+        sau de control în cadrul acestuia a f?cut obiectul unei condamn?ri pentru fraud? pronun?ate printr-o hot?râre
+        definitiv?, printr-o condamnare pronun?at? cu cel mult cinci ani în urm? sau în care continu? s? se aplice o
+        perioad? de excludere prev?zut? în mod direct în condamnare? În sensul articolului 1 din Conven?ia privind
+        protejarea intereselor financiare ale Comunit??ilor Europene (JO C 316, 27.11.1995, p. 48).
+    </entry>
+    <entry key="espd.crit.eu.text.grounds.criminal.conv">Operatorul economic însu?i sau orice persoan? care este membru
+        al organismului de administrare, de conducere sau de supraveghere al acestuia sau care are putere de
+        reprezentare, de decizie sau de control în cadrul acestuia a f?cut obiectul unei condamn?ri pronun?ate printr-o
+        hot?râre definitiv? pentru participare la o organiza?ie criminal?, printr-o condamnare pronun?at? cu cel mult
+        cinci ani în urm? sau în care continu? s? se aplice o perioad? de excludere prev?zut? în mod direct în
+        condamnare? Astfel cum este definit? la articolul 2 din Decizia-cadru 2008/841/JAI a Consiliului din 24
+        octombrie 2008 privind lupta împotriva crimei organizate (JO L 300, 11.11.2008, p. 42).
+    </entry>
+    <entry key="espd.crit.eu.text.guilty.misconduct">Operatorul economic se face vinovat de o abatere profesional?
+        grav?? Dac? este cazul, a se vedea defini?iile din legisla?ia na?ional?, din anun?ul relevant sau din
+        documentele achizi?iei
+    </entry>
+    <entry key="espd.crit.eu.text.guilty.misinterpretation">Operatorul economic s-a aflat într-una dintre situa?iile
+        urm?toare:<p/>a) Nu s-a f?cut grav vinovat de declara?ii false la furnizarea informa?iilor necesare pentru
+        verificarea absen?ei motivelor de excludere sau a îndeplinirii criteriilor de selec?ie,<p/>b) a ascuns astfel de
+        informa?ii,<p/>c) nu a fost în m?sur? s? furnizeze, f?r? întârziere, documentele justificative solicitate de
+        autoritatea contractant? sau de entitatea contractant?, ?i<p/>d) a încercat s? influen?eze în mod nepermis
+        procesul decizional al autorit??ii contractante sau entit??ii contractante, s? ob?in? informa?ii confiden?iale
+        care i-ar putea conferi avantaje necuvenite în cadrul procedurii de achizi?ii publice sau c? a furnizat din
+        neglijen?? informa?ii false care pot avea o influen?? semnificativ? asupra deciziilor privind excluderea,
+        selec?ia ?i atribuirea?
+    </entry>
+    <entry key="espd.crit.eu.text.insolvency">Operatorul economic este în situa?ie de insolven?? sau de lichidare?
+    </entry>
+    <entry key="espd.crit.eu.text.involvement">Operatorul economic sau o întreprindere care are leg?turi cu acesta a
+        oferit consultan?? autorit??ii contractante sau entit??ii contractante sau a participat în orice alt mod la
+        preg?tirea procedurii de achizi?ii publice?
+    </entry>
+    <entry key="espd.crit.eu.text.liquidator">Activele operatorului economic sunt administrate de un lichidator sau de o
+        instan???
+    </entry>
+    <entry key="espd.crit.eu.text.money.laundering">Operatorul economic însu?i sau orice persoan? care este membru al
+        organismului de administrare, de conducere sau de supraveghere al acestuia sau care are putere de reprezentare,
+        de decizie sau de control în cadrul acestuia a f?cut obiectul unei condamn?ri pentru infrac?iuni teroriste sau
+        infrac?iuni legate de activit??i teroriste, pronun?ate printr-o hot?râre definitiv?, printr-o condamnare
+        pronun?at? cu cel mult cinci ani în urm? sau în care continu? s? se aplice o perioad? de excludere prev?zut? în
+        mod direct în condamnare? Astfel cum sunt definite la articolul 1 din Directiva 2005/60/CE a Parlamentului
+        European ?i a Consiliului din 26 octombrie 2005 privind prevenirea utiliz?rii sistemului financiar în scopul
+        sp?l?rii banilor ?i finan??rii terorismului (JO L 309, 25.11.2005, p. 15).
+    </entry>
+    <entry key="espd.crit.eu.text.national.bankruptcy">Operatorul economic se afl? într-o situa?ie similar?, cum ar fi
+        falimentul, care rezult? dintr-o procedur? similar? din legisla?iile sau reglement?rile na?ionale?
+    </entry>
+    <entry key="espd.crit.eu.text.payment.social.security">Operatorul economic ?i-a înc?lcat obliga?iile cu privire la
+        plata contribu?iilor la asigur?rile sociale, atât în ?ara în care este stabilit, cât ?i în statul membru al
+        autorit??ii contractante sau al entit??ii contractante, în cazul în care este diferit de ?ara de stabilire?
+    </entry>
+    <entry key="espd.crit.eu.text.payment.taxes">Operatorul economic ?i-a înc?lcat obliga?iile cu privire la plata
+        impozitelor, atât în ?ara în care este stabilit, cât ?i în statul membru al autorit??ii contractante sau al
+        entit??ii contractante, în cazul în care este diferit de ?ara de stabilire?
+    </entry>
+    <entry key="espd.crit.eu.text.purely.national">Alte motive de excludere care pot fi prev?zute în legisla?ia
+        na?ional? din statul membru al autorit??ii contractante sau al entit??ii contractante. Se aplic? motivele de
+        excludere pur na?ionale care sunt specificate în anun?ul relevant sau în documentele achizi?iei?
+    </entry>
+    <entry key="espd.crit.eu.text.suspended.business">Activit??ile economice ale operatorului economic sunt
+        suspendate?
+    </entry>
+    <entry key="espd.crit.eu.text.terrorist">Operatorul economic însu?i sau orice persoan? care este membru al
+        organismului de administrare, de conducere sau de supraveghere al acestuia sau care are putere de reprezentare,
+        de decizie sau de control în cadrul acestuia a f?cut obiectul unei condamn?ri pentru infrac?iuni teroriste sau
+        infrac?iuni legate de activit??i teroriste, pronun?ate printr-o hot?râre definitiv?, printr-o condamnare
+        pronun?at? cu cel mult cinci ani în urm? sau în care continu? s? se aplice o perioad? de excludere prev?zut? în
+        mod direct în condamnare? Astfel cum sunt definite la articolele 1 ?i 3 din Decizia-cadru a Consiliului din 13
+        iunie 2002 privind combaterea terorismului (JO L 164, 22.6.2002, p. 3). Acest motiv de excludere include, de
+        asemenea, instigare, complicitate sau tentativ? de a s?vâr?i o infrac?iune, în sensul articolului 4 din
+        respectiva decizie-cadru.
+    </entry>
+    <entry key="espd.crit.eu.title.agreement.economic">Acorduri cu al?i operatori economici care vizeaz? denaturarea
+        concuren?ei
+    </entry>
+    <entry key="espd.crit.eu.title.arrangement.creditors">Concordat preventiv</entry>
+    <entry key="espd.crit.eu.title.bankrupt">Falimentul</entry>
+    <entry key="espd.part3.crit.eu.eo.bankrupt.title">Organiza?ia dumneavoastr? este în stare de faliment sau în
+        situa?ie de insolven?? sau de lichidare, de concordat preventiv sau în orice alt? situa?ie similar? care rezult?
+        în urma unei proceduri de aceea?i natur? prev?zute de legisla?ia ?i reglement?rile na?ionale?
+    </entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.environmental">Înc?lcarea obliga?iilor în domeniul legisla?iei
+        de mediu
+    </entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.environmental.eo">Înc?lcarea obliga?iilor în domeniul
+        legisla?iei de mediu
+    </entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.labour">Înc?lcarea obliga?iilor în domeniul legisla?iei
+        muncii
+    </entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.social">Înc?lcarea obliga?iilor în domeniul legisla?iei
+        sociale
+    </entry>
+    <entry key="espd.crit.eu.title.child.labour">Exploatarea prin munc? a copiilor ?i alte forme de trafic de persoane
+    </entry>
+    <entry key="espd.crit.eu.title.conflict.interest">Conflict de interese care decurge din participarea la procedura de
+        achizi?ii publice
+    </entry>
+    <entry key="espd.crit.eu.title.conflict.interest.eo">Organiza?ia dumneavoastr? are vreun conflict de interese care
+        decurge din participarea sa la procedura de achizi?ii publice?
+    </entry>
+    <entry key="espd.crit.eu.title.corruption">Corup?ie</entry>
+    <entry key="espd.crit.eu.title.early.termination">Încetare anticipat?, daune-interese sau alte sanc?iuni
+        comparabile
+    </entry>
+    <entry key="espd.crit.eu.title.fraud">Fraude</entry>
+    <entry key="espd.crit.eu.title.grounds.criminal.conv">Participare la o organiza?ie criminal?</entry>
+    <entry key="espd.crit.eu.title.guilty.misconduct">Vinovat de comiterea unei abateri profesionale grave</entry>
+    <entry key="espd.crit.eu.title.guilty.misconduct.eo">Organiza?ia dumneavoastr? a fost g?sit? vinovat? de o abatere
+        profesional? grav??
+    </entry>
+    <entry key="espd.crit.eu.title.guilty.misinterpretation">Vinovat de interpretare eronat?, nedivulgare de informa?ii,
+        incapacitate de a furniza documentele necesare ?i ob?inere de informa?ii confiden?iale referitoare la aceast?
+        procedur?
+    </entry>
+    <entry key="espd.crit.eu.title.insolvency">Insolven??</entry>
+    <entry key="espd.crit.eu.title.involvement">Implicare direct? sau indirect? în preg?tirea acestei proceduri de
+        achizi?ii publice
+    </entry>
+    <entry key="espd.crit.eu.title.involvement.eo">Organiza?ia dumneavoastr? sau o întreprindere care are leg?turi cu
+        acesta a oferit consultan?? autorit??ii contractante sau a participat în orice alt mod la preg?tirea procedurii
+        de achizi?ii publice?
+    </entry>
+    <entry key="espd.crit.eu.title.liquidator">Active administrate de lichidator</entry>
+    <entry key="espd.crit.eu.title.money.laundering">Sp?lare de bani sau finan?area terorismului</entry>
+    <entry key="espd.crit.eu.title.national.bankruptcy">Situa?ii similare, în temeiul legisla?iei na?ionale, cum ar fi
+        falimentul
+    </entry>
+    <entry key="espd.crit.eu.title.payment.social.security">Plata asigur?rilor sociale</entry>
+    <entry key="espd.crit.eu.title.payment.taxes">Plata impozitelor</entry>
+    <entry key="espd.crit.eu.title.purely.national">Motivele de excludere pur na?ionale</entry>
+    <entry key="espd.crit.eu.title.suspended.business">Activit??ile economice sunt suspendate</entry>
+    <entry key="espd.crit.eu.title.terrorist">Infrac?iuni teroriste sau infrac?iuni legate de activit??ile teroriste
+    </entry>
+    <entry key="espd.part3.crit.eu.guilty.misconduct.eo.tooltip">Dac? este cazul, a se vedea defini?iile din legisla?ia
+        na?ional?, din anun?ul relevant sau din documentele achizi?iei
+    </entry>
+    <entry key="espd.crit.explain.certificates.independent.environmental.description">Dac? nu, v? rug?m s? explica?i de
+        ce ?i s? preciza?i ce alte mijloace de prob? privind sistemele sau standardele de management de mediu pot fi
+        furnizate:
+    </entry>
+    <entry key="espd.part4.crit.explain.certificates.independent.quality.description">Dac? nu, v? rug?m s? explica?i de
+        ce ?i s? preciza?i ce alte mijloace de prob? privind sistemul de asigurare a calit??ii pot fi furnizate:
+    </entry>
+    <entry key="espd.part4.crit.explain.supply.contracts.quality.description">Dac? nu, v? rug?m s? explica?i de ce ?i s?
+        preciza?i ce alte mijloace de prob? pot fi furnizate:
+    </entry>
+    <entry key="espd.crit.information.available.electronically">Aceste informa?ii sunt disponibile gratuit pentru
+        autorit??i, dintr-o baz? de date na?ional? a unui stat membru UE?
+    </entry>
+    <entry key="espd.crit.issuer">Descarcare sub form? de</entry>
+    <entry key="espd.crit.length.period.exclusion">În m?sura în care este stabilit? în mod direct în condamnare, durata
+        perioadei de excludere.
+    </entry>
+    <entry key="espd.crit.number">Num?r</entry>
+    <entry key="espd.crit.number.of.years">Cifra de afaceri medie</entry>
+    <entry key="espd.crit.other.than.judicial.or.administrative.decision">Aceast? înc?lcare a obliga?iilor a fost
+        stabilit? prin alte mijloace decât o hot?râre judec?toreasc? sau administrativ??
+    </entry>
+    <entry key="espd.crit.please.describe.them">V? rug?m s? le descrie?i</entry>
+    <entry key="espd.crit.please.specify">V? rug?m s? preciza?i</entry>
+    <entry key="espd.crit.ratio">Raport</entry>
+    <entry key="espd.crit.reason">Motivul</entry>
+    <entry key="espd.crit.reasons.nevertheless.contract">Preciza?i motivele pentru care ve?i putea fi, totu?i, în m?sur?
+        s? executa?i contractul. Nu este necesar s? se furnizeze aceste informa?ii în cazul în care excluderea
+        operatorilor economici în acest caz a devenit obligatorie în temeiul legisla?iei na?ionale aplicabile, f?r?
+        nicio posibilitate de derogare atunci când operatorul economic este, totu?i, în m?sur? s? execute contractul.
+    </entry>
+    <entry key="espd.crit.recipients">Beneficiari</entry>
+    <entry key="espd.part4.crit.selection.ca.declares.that">În ceea ce prive?te criteriile de selec?ie, autoritatea
+        contractant? cere operatorului economic s? declare c?
+    </entry>
+    <entry key="espd.part4.crit.selection.ca.economic.article">Articolul 58 alineatul (3) din Directiva 2014/24/UE
+        stabile?te urm?toarele motive de selec?ie
+    </entry>
+    <entry key="espd.part4.crit.selection.declares.that.tooltip">Operatorul economic trebuie s? completeze acest câmp
+        numai în cazul în care autoritatea contractant? sau entitatea contractant? a precizat în anun?ul relevant sau în
+        documentele achizi?iei men?ionate în anun? c? operatorul economic se poate limita la completarea respectivului
+        punct din partea IV f?r? s? trebuiasc? s? completeze nicio alt? sec?iune din partea IV, sec?iunile A, B, C sau D
+    </entry>
+    <entry key="espd.crit.selection.economic.average.yearly.turnover.description">Cifra sa de afaceri medie anual?
+        pentru num?rul de ani impus în anun?ul relevant, în documentele achizi?iei sau în DEAU, este dup? cum urmeaz?:
+    </entry>
+    <entry key="espd.crit.selection.economic.average.yearly.turnover.main">Cifr? de afaceri medie anual?</entry>
+    <entry key="espd.crit.selection.economic.financial.ratio.description">În ceea ce prive?te indicatorii financiari (de
+        exemplu, raportul dintre active ?i pasive) specifica?i în anun?ul relevant, în documentele achizi?iei sau în
+        DEAU, operatorul economic declar? c? valorile reale pentru indicatorii solicita?i sunt dup? cum urmeaz?:
+    </entry>
+    <entry key="espd.crit.selection.economic.financial.ratio.main">Indicator financiar</entry>
+    <entry key="espd.crit.selection.economic.financial.standing.article.tooltip">Operatorul economic trebuie s?
+        furnizeze informa?ii numai în cazul în care criteriile de selec?ie respective au fost impuse de autoritatea
+        contractant? sau de entitatea contractant? în anun?ul relevant sau în documentele achizi?iei men?ionate în
+        anun?.
+    </entry>
+    <entry key="espd.crit.selection.economic.general.yearly.turnover.description">Cifra sa de afaceri anual? general?
+        pentru num?rul de exerci?ii financiare impus în anun?ul relevant, în documentele achizi?iei sau în DEAU, este
+        dup? cum urmeaz?:
+    </entry>
+    <entry key="espd.crit.selection.economic.general.yearly.turnover.main">Cifra de afaceri anual? general?</entry>
+    <entry key="espd.crit.selection.economic.other.financial.requirements.description">În ceea ce prive?te alte cerin?e
+        economice sau financiare, dac? este cazul, care ar putea fi specificate în anun?ul relevant sau în documentele
+        achizi?iei, operatorul economic declar? c?:
+    </entry>
+    <entry key="espd.crit.selection.economic.other.financial.requirements.main">Alte cerin?e economice sau financiare
+    </entry>
+    <entry key="espd.crit.selection.economic.professional.risk.insurance.description">Suma asigurat? prin asigurarea sa
+        împotriva riscurilor profesionale este urm?toarea:
+    </entry>
+    <entry key="espd.crit.selection.economic.professional.risk.insurance.main">Asigurarea riscului profesional</entry>
+    <entry key="espd.crit.selection.economic.setup.eo.description">În cazul în care informa?iile privind cifra de
+        afaceri (general? sau specific?) nu sunt disponibile pentru întreaga perioad? impus?, v? rug?m s? preciza?i data
+        la care operatorul economic a fost înfiin?at sau ?i-a început activitatea:
+    </entry>
+    <entry key="espd.crit.selection.economic.setup.eo.main">Detalii privind operatorul economic</entry>
+    <entry key="espd.crit.selection.economic.specific.average.turnover.description">Cifra sa de afaceri medie anual?
+        specific? în domeniul la care se refer? contractul pentru num?rul de ani specificat în anun?ul relevant, în
+        documentele achizi?iei sau în DEAU este dup? cum urmeaz?:
+    </entry>
+    <entry key="espd.crit.selection.economic.specific.average.turnover.main">Cifra de afaceri medie specific?</entry>
+    <entry key="espd.crit.selection.economic.specific.yearly.turnover.description">Cifra sa de afaceri anual? specific?
+        în domeniul la care se refer? contractul pentru num?rul de exerci?ii financiare specificate în anun?ul relevant,
+        în documentele achizi?iei sau în DEAU este dup? cum urmeaz?:
+    </entry>
+    <entry key="espd.crit.selection.economic.specific.yearly.turnover.main">Specifica?i cifra de afaceri medie anual?
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.declares.that">În ceea ce prive?te criteriile de selec?ie, operatorul
+        economic declar? c?
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.declares.that.tooltip">Operatorul economic trebuie s? completeze acest câmp
+        numai în cazul în care autoritatea contractant? sau entitatea contractant? a precizat în anun?ul relevant sau în
+        documentele achizi?iei men?ionate în anun? c? operatorul economic se poate limita la completarea respectivului
+        punct din partea IV f?r? s? trebuiasc? s? completeze nicio alt? sec?iune din partea IV, sec?iunile A, B, C sau D
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.economic.article">Articolul 58 alineatul (3) din Directiva 2014/24/UE
+        stabile?te urm?toarele motive de selec?ie
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.economic.article.tooltip">Operatorul economic trebuie s? furnizeze
+        informa?ii numai în cazul în care criteriile de selec?ie respective au fost impuse de autoritatea contractant?
+        sau de entitatea contractant? în anun?ul relevant sau în documentele achizi?iei men?ionate în anun?.
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.economic.enrolement.description">Este înscris într-unul dintre registrele
+        profesionale sau comerciale relevante din statul membru în care este stabilit
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.economic.enrolement.main">Înscrierea în registre profesionale sau
+        comerciale
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.economic.service.contracts.description">Operatorul economic are nevoie de o
+        autoriza?ie special? sau trebuie s? fie membru al unei anumite organiza?ii pentru a putea presta serviciul în
+        cauz? în ?ara unde este stabilit?
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.economic.service.contracts.main">Pentru contractele de achizi?ie de
+        servicii: Necesitatea autoriz?rii sau a apartenen?ei
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.satisfies.all.criteria">Îndepline?te criteriile de selec?ie impuse</entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.article">Articolul 58 alineatul (2) din Directiva 2014/24/UE
+        stabile?te urm?toarele motive de selec?ie
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.article.tooltip">Operatorul economic trebuie s? furnizeze
+        informa?ii numai în cazul în care criteriile de selec?ie respective au fost impuse de autoritatea contractant?
+        sau de entitatea contractant? în anun?ul relevant sau în documentele achizi?iei men?ionate în anun?.
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.enrolment.description">Este înscris într-unul dintre registrele
+        profesionale sau comerciale relevante din statul membru în care este stabilit
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.enrolment.main">Înscrierea în registre profesionale sau
+        comerciale
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.service.contracts.description">Operatorul economic are nevoie
+        de o autoriza?ie special? sau trebuie s? fie membru al unei anumite organiza?ii pentru a putea presta serviciul
+        în cauz? în ?ara unde este stabilit?
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.service.contracts.main">Pentru contractele de achizi?ie de
+        servicii: Necesitatea autoriz?rii sau a apartenen?ei
+    </entry>
+    <entry key="espd.part4.crit.selection.quality.assurance.article">Articolul 62 alineatul (2) din Directiva 2014/24/UE
+        stabile?te urm?toarele motive de selec?ie
+    </entry>
+    <entry key="espd.part4.crit.selection.quality.assurance.tooltip">Operatorul economic trebuie s? furnizeze informa?ii
+        numai în cazul în care criteriile de selec?ie respective au fost impuse de autoritatea contractant? sau de
+        entitatea contractant? în anun?ul relevant sau în documentele achizi?iei men?ionate în anun?.
+    </entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.environmental.description">Operatorul
+        economic va putea s? prezinte certificate întocmite de organisme independente care s? ateste c? operatorul
+        economic respect? sistemele sau standardele de management de mediu cerute?
+    </entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.environmental.main">Certificate emise de
+        organisme independente cu privire la sistemele sau standardele de management de mediu
+    </entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.quality.description">Operatorul economic va
+        putea s? prezinte certificate întocmite de organisme independente care s? ateste c? operatorul economic respect?
+        standardele de asigurare a calit??ii cerute, inclusiv privind accesibilitatea pentru persoanele cu handicap?
+    </entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.quality.main">Certificate emise de organisme
+        independente cu privire la standardele de asigurare a calit??ii
+    </entry>
+    <entry key="espd.part4.crit.selection.satisfies.all.criteria">Acesta îndepline?te toate criteriile de selec?ie
+        impuse indicate în anun?ul relevant sau în documentele achizi?iei men?ionate în anun?.
+    </entry>
+    <entry key="espd.part4.crit.selection.suitability.article">Articolul 58 alineatul (2) din Directiva 2014/24/UE
+        stabile?te urm?toarele motive de selec?ie
+    </entry>
+    <entry key="espd.part4.crit.selection.suitability.article.tooltip">Operatorul economic trebuie s? completeze acest
+        câmp numai în cazul în care autoritatea contractant? sau entitatea contractant? a precizat în anun?ul relevant
+        sau în documentele achizi?iei men?ionate în anun? c? operatorul economic se poate limita la completarea
+        sec?iunii ? din partea IV f?r? s? trebuiasc? s? completeze nicio alt? sec?iune din partea IV:
+    </entry>
+    <entry key="espd.crit.selection.suitability.enrolment.professional.register.description">Este înscris în registrele
+        profesionale relevante în statul membru de stabilire, astfel cum este descris în anexa XI la Directiva
+        2014/24/UE; operatorii economici din anumite state membre pot avea obliga?ia de a respecta alte cerin?e
+        stabilite în anexa respectiv?.
+    </entry>
+    <entry key="espd.crit.selection.suitability.enrolment.professional.register.main">Înscrierea într-un registru
+        profesional relevant
+    </entry>
+    <entry key="espd.crit.selection.suitability.enrolment.trade.register.description">Este înscris în registrele
+        comerciale în statul membru de stabilire, astfel cum este descris în anexa XI la Directiva 2014/24/UE;
+        operatorii economici din anumite state membre pot avea obliga?ia de a respecta alte cerin?e stabilite în anexa
+        respectiv?.
+    </entry>
+    <entry key="espd.crit.selection.suitability.enrolment.trade.register.main">Înscrierea în registrul comer?ului
+    </entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.auth.description">Este necesar? o anumit? autoriza?ie
+        pentru ca operatorul economic s? poat? presta serviciul în cauz? în ?ara unde este stabilit?
+    </entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.auth.main">Pentru contractele de achizi?ie de
+        servicii: este necesar? o anumit? autoriza?ie
+    </entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.membership.description">Operatorul economic trebuie s?
+        fie membru al unei anumite organiza?ii pentru a putea presta serviciul în cauz? în ?ara unde este stabilit?
+    </entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.membership.main">Pentru contractele de achizi?ie de
+        servicii: apartenen?a la organiza?ia specific? este necesar?
+    </entry>
+    <entry key="espd.crit.selection.technical.allowance.of.checks.description">Pentru produsele sau serviciile complexe
+        care urmeaz? s? fie furnizate sau, în mod excep?ional, pentru produsele sau serviciile necesare cu un scop
+        anume: Operatorul economic va permite efectuarea de verific?ri ale capacit??ilor de produc?ie sau ale
+        capacit??ii tehnice a operatorului economic ?i, dac? este necesar, ale mijloacelor de studiu ?i de cercetare de
+        care dispune ?i ale m?surilor de control al calit??ii? V? rug?m s? re?ine?i c?, în cazul în care operatorul
+        economic a decis s? subcontracteze o parte din contract ?i se bazeaz? pe capacit??ile subcontractantului pentru
+        executarea p?r?ii respective, trebuie s? completa?i un DEAU separat pentru astfel de subcontractan?i.
+    </entry>
+    <entry key="espd.crit.selection.technical.allowance.of.checks.main">Permiterea controalelor</entry>
+    <entry key="espd.crit.selection.technical.average.annual.manpower.description">Efectivele medii anuale de personal
+        ale operatorului economic din ultimii trei ani au fost dup? cum urmeaz?:
+    </entry>
+    <entry key="espd.crit.selection.technical.average.annual.manpower.main">Efectivele medii anuale de personal</entry>
+    <entry key="espd.crit.selection.technical.educational.professional.qualifications.description">Urm?toarele
+        calific?ri educa?ionale ?i profesionale sunt de?inute de prestatorul de servicii sau de contractantul însu?i
+        ?i/sau (în func?ie de cerin?ele stabilite în anun?ul relevant sau în documentele procedurii de achizi?ie de
+        c?tre personalul s?u de conducere.
+    </entry>
+    <entry key="espd.crit.selection.technical.educational.professional.qualifications.main">Diplome de studii ?i
+        calific?ri profesionale
+    </entry>
+    <entry key="espd.crit.selection.technical.environment.management.features.description">Operatorul economic va putea
+        s? aplice urm?toarele m?suri de management de mediu atunci când execut? contractul:
+    </entry>
+    <entry key="espd.crit.selection.technical.environment.management.features.main">M?suri de management al mediului
+    </entry>
+    <entry key="espd.crit.selection.technical.number.managerial.staff.description">Num?rul membrilor personalului de
+        conducere ale operatorului economic din ultimii trei ani au fost dup? cum urmeaz?:
+    </entry>
+    <entry key="espd.crit.selection.technical.number.managerial.staff.main">Num?rul membrilor personalului de
+        conducere
+    </entry>
+    <entry key="espd.part4.crit.selection.technical.professional.ability.article">Articolul 58 alineatul (4) din
+        Directiva 2014/24/UE stabile?te urm?toarele motive de selec?ie
+    </entry>
+    <entry key="espd.part4.crit.selection.technical.professional.ability.article.tooltip">Operatorul economic trebuie s?
+        furnizeze informa?ii numai în cazul în care criteriile de selec?ie respective au fost impuse de autoritatea
+        contractant? sau de entitatea contractant? în anun?ul relevant sau în documentele achizi?iei men?ionate în
+        anun?.
+    </entry>
+    <entry key="espd.crit.selection.technical.service.contracts.performance.services.description">Numai pentru
+        contractele de achizi?ii publice de servicii: În perioada de referin??, operatorul economic a furnizat
+        urm?toarele servicii principale de tipul specificat. Autorit??ile contractante pot solicita experien?? de pân?
+        la trei ani ?i pot accepta experien?a acumulat? în urm? cu peste trei ani .
+    </entry>
+    <entry key="espd.crit.selection.technical.service.contracts.performance.services.main">Pentru contractele de
+        achizi?ie de servicii: executarea de servicii de tipul specificat
+    </entry>
+    <entry key="espd.crit.selection.technical.study.research.facilities.description">Utilizeaz? urm?toarele localuri de
+        studiu ?i cercetare:
+    </entry>
+    <entry key="espd.crit.selection.technical.study.research.facilities.main">Localuri de studiu ?i de cercetare</entry>
+    <entry key="espd.crit.selection.technical.subcontracting.proportion.description">Operatorul economic inten?ioneaz?
+        s? subcontracteze eventual urm?toarea parte (adic? procentaj) din contract. V? rug?m s? re?ine?i c?, în cazul în
+        care operatorul economic a decis s? subcontracteze o parte din contract ?i se bazeaz? pe capacit??ile
+        subcontractantului pentru executarea p?r?ii respective, trebuie s? completa?i un DEAU separat pentru astfel de
+        subcontractan?i; a se vedea partea II sec?iunea C de mai sus.
+    </entry>
+    <entry key="espd.crit.selection.technical.subcontracting.proportion.main">Propor?ia de subcontractare</entry>
+    <entry key="espd.crit.selection.technical.supply.chain.management.description">Va fi în m?sur? s? aplice urm?toarele
+        sisteme de management ?i de trasabilitate în cadrul lan?ului de aprovizionare pe durata execut?rii contractului:
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.chain.management.main">Gestionarea lan?ului de aprovizionare
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.certificate.quality.description">Operatorul economic
+        poate furniza certificatele solicitate emise de institute sau servicii oficiale de control al calit??ii cu
+        competen?e recunoscute, care s? ateste conformitatea produselor clar identificate prin trimiteri la
+        specifica?iile sau la standardele tehnice care sunt stabilite în anun?ul relevant sau în documentele achizi?iei?
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.certificate.quality.main">Pentru contractele de achizi?ie
+        de bunuri: certificate emise de organisme de control al calit??ii
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.performance.deliveries.description">Numai pentru
+        contractele de achizi?ii publice de bunuri: În perioada de referin??, operatorul economic a efectuat urm?toarele
+        livr?ri principale de tipul specificat sau a prestat urm?toarele servicii principale de tipul specificat:
+        Autorit??ile contractante pot solicita experien?? de pân? la trei ani ?i pot accepta experien?a acumulat? în
+        urm? cu peste trei ani .
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.performance.deliveries.main">Pentru contractele de
+        achizi?ie de bunuri: executarea de livr?ri de tipul specificat
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.with.ca.description">Pentru contractele de achizi?ii
+        publice de bunuri: Operatorul economic va furniza e?antioanele, descrierile sau fotografiile solicitate ale
+        produselor care urmeaz? s? fie furnizate ?i va furniza certificate de autenticitate, dac? este cazul.
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.with.ca.main">Pentru contractele de achizi?ie de bunuri:
+        e?antioane, descrieri sau fotografii, cu certificate de autenticitate
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.without.ca.description">Pentru contractele de achizi?ii
+        publice de bunuri: Operatorul economic va furniza e?antioanele, descrierile sau fotografiile solicitate ale
+        produselor care urmeaz? s? fie furnizate, care nu trebuie s? fie înso?ite de certificate de autenticitate.
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.without.ca.main">Pentru contractele de achizi?ie de
+        bunuri: e?antioane, descrieri sau fotografii, f?r? certificate de autenticitate
+    </entry>
+    <entry key="espd.crit.selection.technical.technical.facilities.measures.description">Utilizeaz? urm?toarele
+        instala?ii tehnice ?i m?suri de asigurare a calit??ii, iar resursele sale de studiu ?i de cercetare sunt dup?
+        cum urmeaz?:
+    </entry>
+    <entry key="espd.crit.selection.technical.technical.facilities.measures.main">Instala?ii tehnice ?i m?suri de
+        asigurare a calit??ii
+    </entry>
+    <entry key="espd.crit.selection.technical.technicians.technical.bodies.description">Poate recurge la urm?torii
+        tehnicieni sau la urm?toarele organisme tehnice, mai ales cei (cele) responsabili (responsabile) de controlul
+        calit??ii. Pentru tehnicienii sau organismele tehnice care nu fac parte în mod direct din întreprinderea
+        operatorului economic, îns? pe ale c?ror capacit??i se bazeaz? operatorul economic, astfel cum se descrie în
+        partea II sec?iunea C, trebuie completate formulare DEAU separate.
+    </entry>
+    <entry key="espd.crit.selection.technical.technicians.technical.bodies.main">Tehnicieni sau organisme tehnice pentru
+        controlul de calitate
+    </entry>
+    <entry key="espd.crit.selection.technical.tools.plant.description">Va dispune de urm?toarele utilaje, instala?ii sau
+        echipamente tehnice pentru executarea contractului:
+    </entry>
+    <entry key="espd.crit.selection.technical.tools.plant.main">Utilaje, instala?ii ?i echipament tehnic</entry>
+    <entry key="espd.crit.selection.technical.work.contracts.performance.works.description">Numai pentru contractele de
+        achizi?ii publice de lucr?ri: În perioada de referin??, operatorul economic a îndeplinit urm?toarele lucr?ri de
+        tipul specificat Autorit??ile contractante pot solicita experien?? de pân? la cinci ani ?i pot accepta
+        experien?a acumulat? în urm? cu peste cinci ani.
+    </entry>
+    <entry key="espd.crit.selection.technical.work.contracts.performance.works.main">Pentru contractele de achizi?ie de
+        lucr?ri: executarea de lucr?ri de tipul specificat
+    </entry>
+    <entry key="espd.crit.selection.technical.work.contracts.technicians.description">În cazul contractelor de achizi?ii
+        publice de lucr?ri, operatorul economic va putea recurge la urm?torii tehnicieni sau la urm?toarele organisme
+        tehnice:
+    </entry>
+    <entry key="espd.crit.selection.technical.work.contracts.technicians.main">Pentru contractele de achizi?ie de
+        lucr?ri: tehnicieni sau organisme tehnice pentru executarea lucr?rilor
+    </entry>
+    <entry key="espd.crit.start.date">Data de încheiere</entry>
+    <entry key="espd.crit.taken.self.cleaning.measures">A?i luat m?suri pentru a demonstra fiabilitatea dumneavoastr?
+        (?autocorectare?)
+    </entry>
+    <entry key="espd.crit.taxes.eo.fulfilled.obligations">Operatorul economic ?i-a îndeplinit obliga?iile pl?tind
+        impozitele sau contribu?iile la asigur?rile sociale datorate sau încheind un aranjament cu caracter obligatoriu
+        în vederea pl??ii acestora, inclusiv, dup? caz, a eventualelor dobânzi acumulate sau a amenzilor?
+    </entry>
+    <entry key="espd.crit.taxes.length.period.of.exclusion">În cazul unei condamn?ri, durata perioadei de excludere, în
+        m?sura în care aceasta este stabilit? direct în condamnare
+    </entry>
+    <entry key="espd.crit.taxes.means.description">Descrie?i ce mijloace au fost utilizate</entry>
+    <entry key="espd.part3.crit.grounds.criminal.conv.top.title">A: Motive referitoare la condamn?rile penale</entry>
+    <entry key="espd.part3.crit.top.grounds.payment.taxes.title">B: Motive legate de plata impozitelor sau a
+        contribu?iilor la asigur?rile sociale
+    </entry>
+    <entry key="espd.part3.crit.insolvency.conflicts.top.title">C: Motive legate de insolven??, conflicte de interese
+        sau abateri profesionale
+    </entry>
+    <entry key="espd.part3.crit.purely.national.top.title">D: Motivele de excludere pur na?ionale</entry>
+    <entry key="espd.crit.url">URL</entry>
+    <entry key="espd.crit.who.convicted">Cine a fost condamnat</entry>
+    <entry key="espd.crit.year">Anul</entry>
+    <entry key="espd.crit.your.answer">R?spunsul dumneavoastr??</entry>
+    <entry key="espd.gui.download.as">Descarcare sub form? de</entry>
+    <entry key="espd.gui.download.pdf">Format PDF</entry>
+    <entry key="espd.gui.download.xml">Format XML</entry>
+    <entry key="espd.gui.download.zip">Ambele formate</entry>
+    <entry key="espd.gui.ec">Comisia European?</entry>
+    <entry key="espd.ecertis.404">Nu exist? date e-Certis</entry>
+    <entry key="espd.ecertis.issued">Eliberat de</entry>
+    <entry key="espd.ecertis.language">Limba</entry>
+    <entry key="espd.ecertis.loading">Înc?rcare din e-Certis...</entry>
+    <entry key="espd.ecertis.no.evidences">Nu exist? probe</entry>
+    <entry key="espd.gui.error.ted.notice.not.supported">Fi?ierul înc?rcat este un aviz ?i nu un DEAU, prin urmare
+        acesta nu poate fi utilizat cu acest serviciu
+    </entry>
+    <entry key="espd.gui.espd">Fi?ierul înc?rcat nu a putut fi citit Este o cerere sau un r?spuns DEAU valabil(?)?
+    </entry>
+    <entry key="espd.gui.espd.upload.error">Fi?ierul înc?rcat nu a putut fi citit Este o cerere DEAU valabil??</entry>
+    <entry key="espd.gui.espd.upload.request.error">Fi?ierul înc?rcat nu a putut fi citit Este un r?spuns DEAU
+        valabil?
+    </entry>
+    <entry key="espd.gui.espd.upload.response.error">Documentul european de achizi?ie unic</entry>
+    <entry key="espd.gui.europa">Europa</entry>
+    <entry key="espd.gui.expire.reminder.message">Nu a?i efectuat nicio ac?iune în serviciul DEAU timp de aproape o or?.
+        &lt;p&gt;V? rug?m s? salva?i documentul eDEAU pentru a v? asigura c? nu pierde?i date.
+        &lt;p&gt;
+        Pute?i importa (reutiliza) documentul dumneavoastr? eDEAU în orice moment pentru a v? continua activitatea.
+    </entry>
+    <entry key="espd.gui.export">Salvare</entry>
+    <entry key="espd.gui.faq.leaflet">Bro?ur? cu întreb?ri frecvente (FAQ)</entry>
+    <entry key="espd.gui.faq.text.answers">În cazul în care sunte?i interesat de r?spunsurile la cele mai frecvente
+        întreb?ri în leg?tur? cu DEAU, v? rug?m s? consulta?i
+    </entry>
+    <entry key="espd.gui.faq.text.more.info">Pentru mai multe informa?ii privind DEAU, v? rug?m</entry>
+    <entry key="espd.init.alert">
+        &lt;p&gt;Documentul european de achizi?ie unic (DEAU) este o declara?ie pe proprie r?spundere privind situa?ia
+            financiar?, competen?ele ?i îndeplinirea de c?tre societ??i a criteriilor în vederea unei proceduri de
+            achizi?ii publice. El este disponibil în toate limbile UE ?i este utilizat ca dovad? preliminar? a
+            îndeplinirii condi?iilor necesare în cadrul procedurilor de achizi?ii publice în UE. Datorit? DEAU,
+            ofertan?ii nu mai trebuie s? furnizeze probe documentare complete ?i în formate diferite, astfel cum se
+            utilizau anterior în procedurile de achizi?ii publice în UE, ceea ce reprezint? o simplificare semnificativ?
+            a accesului la oportunit??ile de ofertare transfrontaliere. Începând din octombrie 2018, DEAU va fi
+            disponibil exclusiv în form? electronic?.
+        &lt;/p&gt;
+        &lt;p&gt;Comisia European? pune la dispozi?ie un serviciu web gratuit pentru cump?r?tori, ofertan?i ?i alte p?r?i
+            interesate de completarea DEAU în format electronic. Formularul online poate fi completat, imprimat ?i apoi
+            trimis cump?r?torului împreun? cu restul ofertei. Dac? procedura se desf??oar? electronic, DEAU poate fi
+            exportat, stocat ?i depus în format electronic. Un DEAU depus în cadrul unei proceduri de achizi?ii publice
+            anterioare poate fi reutilizat, cu condi?ia ca informa?iile s? r?mân? corecte. Ofertan?ii pot fi exclu?i din
+            procedura de achizi?ii publice sau pot fi urm?ri?i în justi?ie dac? informa?iile din DEAU sunt false,
+            nedivulgate sau nu pot fi sus?inute prin documente justificative.
+        &lt;/p&gt;
+    </entry>
+    <entry key="espd.init.create.espd">Crea?i un nou DEAU</entry>
+    <entry key="espd.init.create.response">Creare r?spuns</entry>
+    <entry key="espd.init.header">Bine a?i venit la serviciul DEAU</entry>
+    <entry key="espd.init.i.am.ca">Sunt o autoritate contractant?</entry>
+    <entry key="espd.init.i.am.ce">Sunt o entitate contractant?</entry>
+    <entry key="espd.init.i.am.eop">Sunt un operator economic</entry>
+    <entry key="espd.init.import.espd">Importa?i DEAU</entry>
+    <entry key="espd.init.merge.espds">Fuziona?i dou? DEAU</entry>
+    <entry key="espd.init.reuse.espd">Reutiliza?i un DEAU existent</entry>
+    <entry key="espd.init.review.espd">Revizui?i DEAU</entry>
+    <entry key="espd.init.select.country">Selecta?i ?ara</entry>
+    <entry key="espd.init.ted.reception.id.placeholder">V? rug?m s? specifica?i num?rul avizului primit</entry>
+    <entry key="espd.init.upload.document">înc?rca?i documentul</entry>
+    <entry key="espd.init.upload.documents">Înc?rca?i documentele</entry>
+    <entry key="espd.init.upload.request">V? rug?m s? înc?rca?i o cerere DEAU sau un r?spuns DEAU</entry>
+    <entry key="espd.init.upload.request.response">V? rug?m s? înc?rca?i o cerere DEAU de la autoritatea contractant?
+    </entry>
+    <entry key="espd.init.upload.response">V? rug?m s? înc?rca?i un r?spuns DEAU anterior al dumneavoastr?</entry>
+    <entry key="espd.init.what.you.do">Ce a?i dori s? face?i?</entry>
+    <entry key="espd.init.where.are.you.from.ca">Unde este situat? autoritatea dumneavoastr??</entry>
+    <entry key="espd.init.where.are.you.from.eo">Unde este situat? societatea dumneavoastr??</entry>
+    <entry key="espd.init.who.are.you">Cine sunte?i?</entry>
+    <entry key="espd.gui.footer.last.update">Ultima actualizare:</entry>
+    <entry key="espd.gui.grow">Grow</entry>
+    <entry key="espd.ecertis.information.for.country">Informa?ii pentru {0} în e-Certis</entry>
+    <entry key="espd.gui.legal.notice">Aviz juridic</entry>
+    <entry key="espd.ecertis.less.information">Mai pu?ine informa?ii</entry>
+    <entry key="espd.ecertis.more.information">Informa?ii suplimentare</entry>
+    <entry key="espd.gui.next">Urm?tor</entry>
+    <entry key="espd.gui.no">Nu</entry>
+    <entry key="espd.gui.not.applicable">Nu se aplic?</entry>
+    <entry key="espd.gui.place">Locul</entry>
+    <entry key="espd.gui.previous">Anterior</entry>
+    <entry key="espd.gui.print">Prezentare general?</entry>
+    <entry key="espd.gui.progress.exclusion">Excludere</entry>
+    <entry key="espd.gui.progress.finish">Finalizare</entry>
+    <entry key="espd.gui.progress.procedure">Procedura</entry>
+    <entry key="espd.gui.progress.selection">Selec?ie</entry>
+    <entry key="espd.gui.progress.start">Start</entry>
+    <entry key="espd.gui.question.to.use.alpha">Sunte?i sigur c? dori?i s? utiliza?i criteriile de selec?ie de la A la
+        D?
+    </entry>
+    <entry key="espd.gui.report.appliction.issue">Pentru orice aspecte legate de cererea DEAU, v? rug?m s? contacta?i
+    </entry>
+    <entry key="espd.gui.report.security.incident">În cazul unui incident de securitate, v? rug?m s? contacta?i Comisia
+        European? prin
+    </entry>
+    <entry key="espd.gui.report.security.incident.title">Raporta?i un incident de securitate a informa?iilor</entry>
+    <entry key="espd.gui.role.ca">Rol: Autoritate contractant? (AC)</entry>
+    <entry key="espd.gui.role.eo">Rol: Operator economic (OE)</entry>
+    <entry key="espd.gui.search">C?utare</entry>
+    <entry key="espd.gui.signature">Semn?tura</entry>
+    <entry key="espd.gui.tools">Unelte</entry>
+    <entry key="espd.init.ca.can.create.espd.tooltip">Autoritatea contractant? poate crea un DEAU de la zero. Într-un
+        astfel de caz, autoritatea contractant? trebuie s? completeze formularul DEAU, împreun? cu toate informa?iile
+        relevante.
+    </entry>
+    <entry key="espd.init.ca.can.import.espd.tooltip">În cazul în care autoritatea contractant? a utilizat deja
+        serviciiul DEAU pentru o alt? procedur? de achizi?ii în trecut, ea poate importa DEAU stocat pe re?eaua local?.
+        În acest caz, DEAU nu trebuie s? fie completat de la început, dar anumite date trebuie s? fie actualizate pentru
+        a ?ine cont de actuala procedur? de achizi?ii.
+    </entry>
+    <entry key="espd.init.ca.ref.buyer.tooltip">Termenul ?autoritate contractant?? se refer? la cump?r?tor.</entry>
+    <entry key="espd.init.ce.ref.buyer.tooltip">No?iunea de entitate contractant? se refer? aici la un cump?r?tor care
+        î?i desf??oar? activitatea în sectoarele apei, energiei, transportului ?i serviciilor po?tale. De asemenea,
+        pentru autorit??ile contractante care î?i desf??oar? activitatea în sectoarele men?ionate anterior trebuie
+        selectat? op?iunea ?Sunt o autoritate contractant??
+    </entry>
+    <entry key="espd.init.eo.can.reuse.espd.tooltip">Operatorul economic pot reutiliza informa?iile care au fost
+        furnizate într-un DEAU în cadrul unei proceduri de achizi?ii publice anterioare (DEAU ?anterior?). Serviciul
+        DEAU va fuziona DEAU ?anterior? cu noul formular DEAU preg?tit de autoritatea contractant? pentru prezenta
+        procedur? de achizi?ii.
+    </entry>
+    <entry key="espd.init.eo.ref.suppl.tooltip">Termenul ?operator economic? se refer? la furnizor/ofertant.</entry>
+    <entry key="espd.init.espd.used.both.ca.eo.tooltip">Serviciul DEAU poate fi utilizat atât de autorit??ile
+        contractante, cât ?i de operatorii economici. V? rug?m s? selecta?i op?iunea corespunz?toare profilului
+        dumneavoastr? la aceast? procedur? de achizi?ii publice.
+    </entry>
+    <entry key="espd.init.filter.create.response.tooltip">Crea?i un nou r?spuns DEAU</entry>
+    <entry key="espd.init.filter.eo.can.import.espd.tooltip">Operatorul economic poate importa DEAU fi?ierul, care a
+        fost completat în prealabil de autoritatea contractant? pentru prezenta procedur? de achizi?ii publice ?i
+        publicat în anun?ul de participare.
+    </entry>
+    <entry key="espd.init.filter.eo.merge.espds.tooltip">The ESPD service will merge the 'old' ESPD with the new form
+        prepared by the contracting authority for this procurement procedure.
+    </entry>
+    <entry key="espd.init.overview.received.espds.tooltip">Aceast? op?iune ofer? un tabel cu o prezentare general? a
+        r?spunsurilor incluse în toate DEAU furnizate de ofertan?i pentru o anumit? procedur? de achizi?ie.
+    </entry>
+    <entry key="espd.init.review.espd.tooltip">Autoritatea contractant? poate verifica/revizui DEAU electronice primite
+        de la operatorul economic.
+    </entry>
+    <entry key="espd.init.ted.reception.id.tooltip">Autoritatea contractant? va primi un e-mail de la oficiul de
+        publica?ii la depunerea unui aviz de publicare. Acst e-mail con?ine un ID care poate fi utilizat în cadrul
+        acestui serviciu pentru a copleta informa?iile în leg?tur? cu procedura ?i autoritatea.
+    </entry>
+    <entry key="espd.validator.accept">V? rug?m s? introduce?i o valoare cu o extensie valid?.</entry>
+    <entry key="espd.validator.creditcard">V? rug?m s? introduce?i un num?r de card de credit valabil.</entry>
+    <entry key="espd.validator.date">V? rug?m s? introduce?i o dat? valid?.</entry>
+    <entry key="espd.validator.dateISO">V? rug?m s? introduce?i o dat? valid? (ISO).</entry>
+    <entry key="espd.validator.digits">V? rug?m s? introduce?i doar cifre.</entry>
+    <entry key="espd.validator.email">V? rug?m s? introduce?i o adres? de e-mail valabil?.</entry>
+    <entry key="espd.validator.equalTo">V? rug?m s? introduce?i aceea?i valoare din nou.</entry>
+    <entry key="espd.validator.max">V? rug?m s? introduce?i o valoare mai mic? sau egal? cu {0}.</entry>
+    <entry key="espd.validator.maxlength">V? rug?m s? introduce?i maximum {0} caractere.</entry>
+    <entry key="espd.validator.min">V? rug?m s? introduce?i o valoare mai mare sau egal? cu {0}.</entry>
+    <entry key="espd.validator.minlength">V? rug?m s? introduce?i cel pu?in {0} caractere.</entry>
+    <entry key="espd.validator.number">V? rug?m s? introduce?i un num?r valabil.</entry>
+    <entry key="espd.validator.range">V? rug?m s? introduce?i o valoare cuprins? între {0} ?i {1}.</entry>
+    <entry key="espd.validator.rangelength">V? rug?m s? introduce?i o valoare cuprins? între {0} ?i {1} caractere.
+    </entry>
+    <entry key="espd.validator.remote">V? rug?m s? corecta?i acest câmp.</entry>
+    <entry key="espd.validator.required">Acest câmp este obligatoriu.</entry>
+    <entry key="espd.validator.url">V? rug?m s? introduce?i un URL valid.</entry>
+    <entry key="espd.gui.view.ca">Ecran: (AC)</entry>
+    <entry key="espd.gui.view.eo">Ecran: (OE)</entry>
+    <entry key="espd.gui.yes">Da</entry>
+    <entry key="espd.gui.zip.instructions">Aceasta este o scurt? documentare pentru fi?ierele DEAU pe care le g?si?i în
+        aceast? arhiv? ZIP.Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nespd.XML: Fi?ierul XML este un fi?ier pe care
+        serviciul nostru DEAU sau alte servicii compatibile cu DEAU îl pot în?elege. Avantajul de a utiliza eDEAU ca
+        fi?ier XML este acela c? achizitorii ?i societ??ile pot s?-l reutilizeze pentru alte proceduri viitoare. Acesta
+        ar trebui s? fie trimis împreun? cu documentele de achizi?ie (de la autoritate la întreprinderi) sau ca parte a
+        ofertei (societate sau autoritate).Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nespd.PDF: Fi?ierul PDF este un fi?ier
+        în form? lizibil? pentru om a eDEAU. Propunem aici ?i utilizarea acestuia în paralel cu formatul XML cu
+        documentele de achizi?ie (de la autoritate la întreprinderi) sau ca parte a ofertei (societate sau autoritate),
+        ca document de referin??.Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nÎn cazul în care ave?i întreb?ri cu privire la
+        fi?iere, v? rug?m s? nu ezita?i s? lua?i leg?tura cu noi prin intermediul adresei e-mail:
+        grow-espd@ec.europa.eu.
+    </entry>
+
+</properties>

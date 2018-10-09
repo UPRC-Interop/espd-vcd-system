@@ -1,0 +1,94 @@
+<!-- /*--><root>
+/*CSS-Definitionen fuer die Print/PDF-Version*/
+/*Diese Zeilen stehen lassen, damit die CSS-Datei in dem XSL eingebunden werden kann!<![CDATA[<!--*/
+-->
+
+
+@page {
+    size: A4 portrait;
+    margin: 1cm 2cm 2cm 2cm;
+
+    @bottom-left {
+        content: element(footer-content);
+    }
+
+    @bottom-right {
+        content: counter(page);
+        font-style: normal;
+    }
+}
+
+@page landscape {
+    size: A4 landscape;
+}
+
+
+/* ################################################# */
+
+
+.procedure-details {
+    padding-top: 0;
+}
+
+.procedure-details .procedure-header .footer-content {
+    display: block;
+    font-style: normal;
+    /* font-size gewaehlt, damit kein Zeilenumbruch im Seitenfuss des PDF entsteht */
+    font-size: 13px;
+    position: running(footer-content);
+}
+
+.procedure-details {
+    padding-top: 0;
+}
+
+.procedure-details .procedure-header h2 {
+    line-height: 1.4;
+}
+
+.procedure-details .section {
+    border: 0;
+    padding: 0;
+}
+
+.procedure-details .section:last-child {
+    page-break-after: avoid;
+}
+
+.procedure-details .chapter {
+    page-break-inside: avoid;
+}
+
+.procedure-details .chapter-headline{
+    page-break-after: avoid;
+    font-size: 23px;
+}
+
+
+textarea {
+    width: 95%;
+}
+
+.procedure-details .level-two .chapter-number,
+.procedure-details .level-two .chapter-headline {
+    font-size: 14px;
+    min-width: 54px;
+}
+
+
+.procedure-details h3 {
+    margin-top: 10px;
+    page-break-after: avoid;
+    background-color: #dedede;
+}
+
+.procedure-details h2 {
+    background-color: #b1b1b1;
+}
+/* ENDE Print-Anpassung */
+
+
+
+
+<!-- /*-->]]>!*Diese Zeilen stehen lassen, damit die CSS-Datei in dem XSL eingebunden werden kann!</root><!--*/
+-->

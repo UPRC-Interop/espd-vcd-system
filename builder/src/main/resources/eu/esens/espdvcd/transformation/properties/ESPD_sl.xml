@@ -1,0 +1,968 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+Es wir hier explizit auf einen DocType verzichten um diese Datei in der Transformation nutzen zu koennen, ohne das sie gegen die properties.dtd geprüft wird.
+Wenn die Datei als Properties gezogen wird, wird ein DocType zur Laufzeit eingetragen.
+-->
+<properties>
+    <entry key="espd.gui.about">O tej strani</entry>
+    <entry key="espd.part4.all.selection.switch">?: Skupna navedba za vse pogoje za sodelovanje</entry>
+    <entry key="espd.gui.app.environment">Spo?tovani uporabnik, uporabljate na?e testno okolje. Prosimo, uporabite
+    </entry>
+    <entry key="espd.gui.app.subtitle">Storitev za izpolnjevanje in ponovno uporabo ESPD</entry>
+    <entry key="espd.gui.app.title">Enotni evropski dokument v zvezi z oddajo javnega naro?ila (ESPD)</entry>
+    <entry key="espd.gui.back.to.main">Nazaj na glavno stran</entry>
+    <entry key="espd.gui.cancel">Prekli?i</entry>
+    <entry key="espd.gui.click.here">kliknite tu</entry>
+    <entry key="espd.gui.contact">Kontakt</entry>
+    <entry key="espd.gui.contact.header">Kontakt</entry>
+    <entry key="espd.gui.contact.info">&lt;p&gt;Evropska komisija
+        &lt;p&gt;
+        Generalni direktorat za notranji trg, industrijo, podjetni?tvo ter mala in srednja podjetja&lt;p&gt;Avenue d'Auderghem
+        45 / Oudergemselaan 45&lt;p&gt;B-1049 Bruselj
+        &lt;p&gt;
+        Belgija
+    </entry>
+    <entry key="espd.gui.cookies">Pi?kotki</entry>
+    <entry key="espd.gui.correct.errors">Preden lahko nadaljujete, morate popraviti napake.</entry>
+    <entry key="espd.part1.city">Kraj:</entry>
+    <entry key="espd.part1.confirm.email">Potrdite e-naslov:</entry>
+    <entry key="espd.part1.confirm.telephone">Potrdite telefonsko ?tevilko:</entry>
+    <entry key="espd.part1.contact.details.ca">Identiteta naro?nika</entry>
+    <entry key="espd.part1.contact.person">Kontaktna oseba:</entry>
+    <entry key="espd.part1.correct.errors">Preden lahko nadaljujete, morate popraviti napake.</entry>
+    <entry key="espd.part1.country">Dr?ava:</entry>
+    <entry key="espd.part1.email">E-naslov:</entry>
+    <entry key="espd.part1.fax">fax</entry>
+    <entry key="espd.part1.file.ref.ca">Referen?na ?tevilka spisa, ki jo je dolo?il javni naro?nik oziroma naro?nik (?e
+        je primerno):
+    </entry>
+    <entry key="espd.part1.header">Del I: Informacije o postopku oddaje javnega naro?ila in javnem naro?niku oziroma
+        naro?niku.
+    </entry>
+    <entry key="espd.part1.info.procedure">postopek</entry>
+    <entry key="espd.part1.info.procurement.proc">Informacije o postopku oddaje javnega naro?ila</entry>
+    <entry key="espd.part1.info.pub">Informacije o objavi</entry>
+    <entry key="espd.part1.name">Uradno ime:</entry>
+    <entry key="espd.part1.nat.regnum">Nacionalna registracijska ?tevilka (?e je znana):</entry>
+    <entry key="espd.part1.official.journal.alert">?e javni razpis ni objavljen v Uradnem listu Evropske unije ali ?e ga
+        tam ni treba objaviti, mora javni naro?nik oziroma naro?nik vnesti informacije, s katerimi je mogo?e nedvoumno
+        opredeliti postopek oddaje javnega naro?ila (npr. sklic na objavo na nacionalni ravni).
+    </entry>
+    <entry key="espd.part1.ojs.label">?tevilka obvestila v UL S:</entry>
+    <entry key="espd.part1.ojs.url">URL UL S</entry>
+    <entry key="espd.part1.postcode">Po?tna ?tevilka:</entry>
+    <entry key="espd.part1.procurer.name">Naziv:</entry>
+    <entry key="espd.part1.street.and. num">Ulica in ?tevilka:</entry>
+    <entry key="espd.part1.ted.reception.id">To je kratek pregled datotek ESPD, ki jih boste na?li v tej mapi
+        ZIP.Chr(92)
+    </entry>
+    <entry key="espd.part1.telephone">Telefonska ?tevilka:</entry>
+    <entry key="espd.part1.title.or.short.desc">Kratek opis:</entry>
+    <entry key="espd.part1.to.be.filled.alert">Pri postopkih oddaje javnega naro?ila, pri katerih je bil javni razpis
+        objavljen v Uradnem listu Evropske unije, bodo informacije, zahtevane v delu I, pridobljene samodejno, ?e bo
+        dokument ESPD ustvarjen in izpolnjen s storitvijo ESPD. Sklic na objavo ustreznega obvestila v Uradnem listu
+        Evropske unije:
+    </entry>
+    <entry key="espd.part1.website">Spletno mesto (?e je primerno):</entry>
+    <entry key="espd.part3.grounds.criminal.conv">Razlogi, povezani s kazenskimi obsodbami</entry>
+    <entry key="espd.part3.header">Del III: Razlogi za izklju?itev</entry>
+    <entry key="espd.part3.insolvency.conflicts">Razlogi, povezani z insolventnostjo, nasprotjem interesov ali kr?itvijo
+        poklicnih pravil
+    </entry>
+    <entry key="espd.part5.concl.statements">Del VI: Sklepne izjave</entry>
+    <entry key="espd.part5.concl.statements.signature">Datum, kraj in, ?e se zahteva ali ?e je potrebno, podpis/(i):
+    </entry>
+    <entry key="espd.part5.concl.statements.text">Podpisani uradno izjavljam/izjavljamo, da so informacije, ki sem jih
+        navedel/smo jih navedli v delih II?V, to?ne in pravilne in da sem jih podal/smo jih podali zavedajo? se posledic
+        resnega napa?nega prikazovanja.
+        &lt;p&gt;Podpisani uradno izjavljam/izjavljamo, da lahko na zahtevo nemudoma predlo?im/predlo?imo potrdila in druge
+            oblike listinskih dokazov, na katere se sklicujem/sklicujemo, razen kadar:
+        &lt;/p&gt;
+        &lt;p&gt;a) lahko javni naro?nik oziroma naro?nik zadevna dokazila pridobi neposredno iz brezpla?no dostopne
+            nacionalne zbirke podatkov v kateri koli dr?avi ?lanici (pod pogojem, da je gospodarski subjekt predlo?il
+            potrebne informacije (spletni naslov, organ ali telo, ki je izdalo dokumentacijo, natan?en sklic na
+            dokumentacijo), s pomo?jo katerih to lahko stori javni naro?nik oziroma naro?nik; kadar se zahteva, je treba
+            za tak dostop prilo?iti ustrezno soglasje), ali
+        &lt;/p&gt;
+        &lt;p&gt;b) najpozneje 18. oktobra 2018 javni naro?nik oziroma naro?nik ?e razpolaga z zadevnimi dokazili.&lt;/p&gt;
+        &lt;p&gt;Podpisani dajem/o uradno soglasje, da [navedite javnega naro?nika oziroma naro?nika, kakor je dolo?en v
+            oddelku A dela I] pridobi dostop do dokazil, ki sem jih predlo?il/smo jih predlo?ili v [navedite zadevne
+            to?ke/oddelke/dele] tega enotnega evropskega dokumenta v zvezi z oddajo javnega naro?ila za namene [navedite
+            postopek oddaje javnega naro?ila: (povzetek, sklic na objavo v Uradnem listu Evropske unije, referen?na
+            ?tevilka)].
+        &lt;/p&gt;
+    </entry>
+    <entry key="espd.part5.export">Izvozi</entry>
+    <entry key="espd.part5.export.content">Zdaj lahko kliknite ?Izvozi? ter tako prenesete enotni evropski dokument v
+        zvezi z oddajo javnega naro?ila in ga shranite na va? ra?unalnik. Javni naro?niki morajo zagotoviti, da je ESPD
+        gospodarskim subjektom na voljo skupaj z drugo razpisno dokumentacijo.
+    </entry>
+    <entry key="espd.part5.header">Zaklju?ek</entry>
+    <entry key="espd.part5.reduction">Del V: Zmanj?anje ?tevila ustreznih kandidatov</entry>
+    <entry key="espd.part5.reduction.question">Gospodarski subjekt izjavlja, da:</entry>
+    <entry key="espd.part5.text.eo.declares.that">?e so katera izmed teh potrdil ali oblik listinskih dokazov na voljo v
+        elektronski obliki, navedite za vsakega od njih:
+    </entry>
+    <entry key="espd.part5.title.eo.declares.that">izpolnjuje objektivne in nediskriminatorne pogoje ali pravila, ki se
+        uporabljajo za omejitev ?tevila kandidatov, na naslednji na?in:&lt;p&gt;?e se zahtevajo dolo?ena potrdila ali druge
+            oblike listinskih dokazov, navedite za vsakega od njih, ali ima gospodarski subjekt na razpolago zahtevane
+            dokumente:
+        &lt;/p&gt;
+    </entry>
+    <entry key="espd.part5.toptext">Gospodarski subjekt mora zagotoviti informacije samo, kadar je javni naro?nik
+        oziroma naro?nik navedel objektivne in nediskriminatorne pogoje ali pravila, ki jih namerava uporabiti za
+        omejitev ?tevila kandidatov, ki bodo povabljeni, da oddajo ponudbe ali sodelujejo v dialogu. Te informacije, ki
+        jih lahko spremljajo zahteve v zvezi s potrdili oziroma vrstami potrdil ali oblikami listinskih dokazov, ki jih
+        je treba predlo?iti, ?e so potrebna, so navedene v ustreznem obvestilu ali dokumentaciji v zvezi z oddajo
+        javnega naro?ila. Samo za omejene postopke, konkuren?ne postopke s pogajanji, postopke konkuren?nega dialoga in
+        partnerstva za inovacije:
+    </entry>
+    <entry key="espd.part4.alert">Javni naro?niki morajo odkljukati okence pred ustreznim pogojem in tako ozna?iti,
+        kateri pogoji za sodelovanje se bodo uporabljali.
+    </entry>
+    <entry key="espd.part4.economic.and.financial.standing">B: Ekonomski in finan?ni polo?aj</entry>
+    <entry key="espd.part4.header">Del IV: Pogoji za sodelovanje</entry>
+    <entry key="espd.part4.quality.assurance">D: Sheme za zagotavljanje kakovosti in standardi za okoljsko ravnanje
+    </entry>
+    <entry key="espd.part4.suitability">A: Ustreznost</entry>
+    <entry key="espd.part4.technical.professional.ability">C: Tehni?na in strokovna sposobnost</entry>
+    <entry key="espd.part2.add.complete.missing">Poleg tega vpi?ite manjkajo?e informacije v oddelkih A, B, C ali D dela
+        IV, kakor je ustrezno, SAMO ?e se to zahteva v ustreznem obvestilu ali dokumentaciji v zvezi z oddajo javnega
+        naro?ila
+    </entry>
+    <entry key="espd.part2.all.selection.covered">d) Ali registracija ali potrdilo zajema vse zahtevane pogoje za
+        sodelovanje?
+    </entry>
+    <entry key="espd.part2.another.vat">?e niste identificirani za namene DDV, navedite drugo nacionalno
+        identifikacijsko ?tevilko, ?e se zahteva in ?e je primerno
+    </entry>
+    <entry key="espd.part2.answer.following.parts">Odgovorite na vpra?anja v preostalem delu tega oddelka, oddelka B in,
+        kadar je relevantno, oddelka C tega dela, izpolnite del V, kadar je primerno, v vsakem primeru pa izpolnite in
+        podpi?ite del VI.
+    </entry>
+    <entry key="espd.part2.birth.date">Datum rojstva</entry>
+    <entry key="espd.part2.birth.place">Kraj rojstva</entry>
+    <entry key="espd.part2.cert.e.avaliable">b) Navedite, ?e je potrdilo o registraciji ali potrdilo na razpolago v
+        elektronski obliki:
+    </entry>
+    <entry key="espd.part2.contact.person">Kontaktna oseba ali osebe:</entry>
+    <entry key="espd.part2.detinfo.of.represent">?e je potrebno, navedite podrobne informacije o zastopstvu (njegove
+        oblike, obseg, namen ...):
+    </entry>
+    <entry key="espd.part2.disworkers.details">?e je potrebno, navedite kategorijo ali kategorije invalidnih ali
+        prikraj?anih delavcev, v katere zadevni zaposleni spadajo
+    </entry>
+    <entry key="espd.part2.doc.e.avaliable">Navedite, ?e je ustrezna dokumentacija na voljo v elektronski obliki:
+    </entry>
+    <entry key="espd.part2.email">E-naslov:</entry>
+    <entry key="espd.part2.ensure.others.espd">Zagotovite, da bodo drugi zadevni subjekti predlo?ili lo?en obrazec
+        ESPD.
+    </entry>
+    <entry key="espd.part2.eo.approved.cert">?e je primerno, ali je gospodarski subjekt vpisan na uradnem seznamu
+        potrjenih gospodarskih subjektov oziroma ima enakovredno potrdilo (npr. v skladu z nacionalnim
+        (pred)kvalifikacijskim sistemom)?
+    </entry>
+    <entry key="espd.part2.eo.group.role">a) Navedite vlogo gospodarskega subjekta v skupini (vodja, odgovoren za
+        posamezne naloge ...):
+    </entry>
+    <entry key="espd.part2.eo.has.cert.soc">e) Ali bo gospodarski subjekt lahko predlo?il potrdilo v zvezi s pla?ilom
+        prispevkov za socialno varnost in davkov oziroma predlo?il informacije, s pomo?jo katerih bo javni naro?nik
+        oziroma naro?nik to potrdilo lahko pridobil neposredno iz brezpla?no dostopne nacionalne zbirke podatkov v
+        kateri koli dr?avi ?lanici?
+    </entry>
+    <entry key="espd.part2.eo.rely.other.entities">Ali gospodarski subjekt uporablja zmogljivosti drugih subjektov, da
+        bi izpolnil pogoje za sodelovanje iz dela IV ter merila in pravila (?e obstajajo) iz dela V spodaj?
+    </entry>
+    <entry key="espd.part2.first.name">Ime</entry>
+    <entry key="espd.part2.header">Del II: Informacije glede gospodarskega subjekta</entry>
+    <entry key="espd.part2.if.proc.reserved">Samo v primeru pridr?anega javnega naro?ila: ali je gospodarski subjekt
+        invalidsko podjetje ali ?socialno podjetje? oziroma, ali bo omogo?il, da se javno naro?ilo izvede v okviru
+        programov za??itenega zaposlovanja?
+    </entry>
+    <entry key="espd.part2.info.eo">A: Informacije o gospodarskem subjektu</entry>
+    <entry key="espd.part2.info.reliance">C: Informacije o uporabi zmogljivosti drugih subjektov</entry>
+    <entry key="espd.part2.info.respresent">B: Informacije o predstavnikih gospodarskega subjekta</entry>
+    <entry key="espd.part2.information.subcontractors">D: Informacije o podizvajalcih, katerih zmogljivosti gospodarski
+        subjekt ne uporablja
+    </entry>
+    <entry key="espd.part2.information.subcontractors.description">?e ste odgovorili z da in kolikor je znano, navedite
+        predlagane podizvajalce:
+    </entry>
+    <entry key="espd.part2.information.subcontractors.footer">?e javni naro?nik oziroma naro?nik te informacije izrecno
+        zahteva poleg informacij iz dela I, navedite informacije iz oddelkov A in B tega dela ter dela III za vsakega
+        zadevnega podizvajalca oziroma za vsako kategorijo zadevnih podizvajalcev.
+    </entry>
+    <entry key="espd.part2.information.subcontractors.header">(Ta oddelek se izpolni samo, ?e te informacije izrecno
+        zahteva javni naro?nik oziroma naro?nik.)
+    </entry>
+    <entry key="espd.part2.information.subcontractors.title">Ali namerava gospodarski subjekt oddati del javnega
+        naro?ila v podizvajanje tretjim osebam?
+    </entry>
+    <entry key="espd.part2.internet.addr.if.exists">Spletni naslov (?e je primerno):</entry>
+    <entry key="espd.part2.is.eo.proc.together">Ali gospodarski subjekt sodeluje pri postopku oddaje javnega naro?ila
+        skupaj z drugimi subjekti?
+    </entry>
+    <entry key="espd.part2.is.eo.sized">Ali je gospodarski subjekt mikropodjetje, malo ali srednje podjetje?</entry>
+    <entry key="espd.part2.is.eo.sized.tooltip">Glej Priporo?ilo Komisije z dne 6. maja 2003 o opredelitvi mikro, malih
+        in srednje velikih podjetij (UL L 124, 20.5.2003, str. 36). Ta informacija se zahteva samo za statisti?ne
+        namene. Mikropodjetja: podjetje, ki ima manj kot 10 zaposlenih ter letni promet in/ali letno bilan?no vsoto, ki
+        ne presega 2 milijonov EUR. Mala podjetja: podjetje, ki ima manj kot 50 zaposlenih ter letni promet in/ali letno
+        bilan?no vsoto, ki ne presega 10 milijonov EUR. Srednja podjetja: podjetja, ki ne spadajo niti med mikro niti
+        mala podjetja, imajo manj kot 250 zaposlenih ter letni promet, ki ne presega 50 milijonov EUR, in/ali letno
+        bilan?no vsoto, ki ne presega 43 milijonov EUR.
+    </entry>
+    <entry key="espd.part2.last.name">Priimek</entry>
+    <entry key="espd.part2.lots.concerned">?e je primerno, navedite sklop (sklope), za katerega (katere) gospodarski
+        subjekt ?eli oddati ponudbo:
+    </entry>
+    <entry key="espd.part2.name">Ime:</entry>
+    <entry key="espd.part2.name.part.group">c) Kadar je primerno, navedite ime sodelujo?e skupine:</entry>
+    <entry key="espd.part2.other.eo.part">b) Navedite druge gospodarske subjekte, ki sodelujejo v postopku oddaje
+        javnega naro?ila:
+    </entry>
+    <entry key="espd.part2.percentage.disworkers">Kak?en je ustrezni dele? invalidnih ali prikraj?anih delavcev?</entry>
+    <entry key="espd.part2.person.empowered">Kadar je primerno, navedite imena in naslove oseb, ki so poobla??ene, da
+        zastopajo gospodarski subjekt za namene tega postopka oddaje javnega naro?ila:
+    </entry>
+    <entry key="espd.part2.pos.act.in.capacity">Polo?aj/nastopa v vlogi:</entry>
+    <entry key="espd.part2.postal.adress">Po?tni naslov:</entry>
+    <entry key="espd.part2.provide.regnumber">a) Navedite ustrezno registracijsko ?tevilko ali ?tevilko potrdila, ?e je
+        primerno:
+    </entry>
+    <entry key="espd.part2.ref.for.cert">c) Navedite reference, na katerih temelji registracija ali potrdilo in, kadar
+        je primerno, razvrstitev na uradnem seznamu:
+    </entry>
+    <entry key="espd.part2.separate.espd.sections.a.b">Za vsakega od zadevnih gospodarskih subjektov predlo?ite lo?en
+        obrazec ESPD, v katerem so navedene informacije, ki se zahtevajo v oddelkih A in B tega dela ter dela III,
+        obrazec pa morajo zadevni gospodarski subjekti ustrezno izpolniti in podpisati.<p/>Opozarjamo, da mora biti tu
+        navedeno tudi tehni?no osebje ali tehni?ni organi, ki ne pripadajo neposredno podjetju gospodarskega subjekta,
+        zlasti tisti, ki so odgovorni za kontrolo kakovosti, ter v primeru javnih naro?il gradenj tehni?no osebje ali
+        tehni?ni organi, od katerih lahko gospodarski subjekt zahteva, da opravijo gradnjo.<p/>Kolikor je to relevantno
+        za specifi?no zmogljivost ali zmogljivosti, ki jih gospodarski subjekt uporablja, vklju?ite informacije iz delov
+        IV in V za vsakega od zadevnih subjektov.
+    </entry>
+    <entry key="espd.part2.telephone">Telefonska ?tevilka:</entry>
+    <entry key="espd.part2.vat">?tevilka DDV, ?e je primerno:</entry>
+    <entry key="espd.part2sel.alert">Gospodarski subjekt mora zagotoviti informacije samo, kadar je zadevne pogoje za
+        sodelovanje zahteval javni naro?nik oziroma naro?nik v ustreznem obvestilu ali dokumentaciji v zvezi z oddajo
+        javnega naro?ila, na katero se sklicuje obvestilo.
+    </entry>
+    <entry key="espd.crit.amount">Znesek</entry>
+    <entry key="espd.crit.amount.concerned">Zadevni znesek</entry>
+    <entry key="espd.crit.average.turnover">Izdajatelj</entry>
+    <entry key="espd.crit.code">Oznaka</entry>
+    <entry key="espd.crit.country.member.state">Zadevna dr?ava ali dr?ava ?lanica</entry>
+    <entry key="espd.crit.date">Datum</entry>
+    <entry key="espd.crit.date.of.conviction">Datum obsodbe</entry>
+    <entry key="espd.part3.crit.date.of.conviction.or.decision">Navedite datum obsodbe ali odlo?be</entry>
+    <entry key="espd.crit.decision.final.and.binding">?e je bila ta kr?itev obveznosti ugotovljena s sodno ali upravno
+        odlo?bo, ali je bila ta odlo?itev pravnomo?na in zavezujo?a?
+    </entry>
+    <entry key="espd.crit.description">Opis</entry>
+    <entry key="espd.crit.do.you.allow.checks">Ali dovolite preglede?</entry>
+    <entry key="espd.crit.end.date">?tevilo let</entry>
+    <entry key="espd.part3.crit.eu.main.breaching.obligations">?len 57(4) Direktive 2014/24/EU dolo?a naslednje razloge
+        za izklju?itev
+    </entry>
+    <entry key="espd.part3.crit.eu.eo.main.breaching.obligations">?len 57(4) Direktive 2014/24/EU dolo?a naslednje
+        razloge za izklju?itev
+    </entry>
+    <entry key="espd.part3.crit.eu.main.purely.national">Ali se uporabljajo izklju?no nacionalni razlogi za izklju?itev,
+        navedeni v ustreznem obvestilu ali dokumentaciji v zvezi z oddajo javnega naro?ila?
+    </entry>
+    <entry key="espd.part3.crit.eu.grounds.criminal.conv.main.title">?len 57(1) Direktive 2014/24/EU dolo?a naslednje
+        razloge za izklju?itev
+    </entry>
+    <entry key="espd.part3.crit.eu.eo.grounds.criminal.conv.main.title">?len 57(1) Direktive 2014/24/EU dolo?a naslednje
+        razloge za izklju?itev
+    </entry>
+    <entry key="espd.part3.crit.eu.payment.taxes.main.title">?len 57(2) Direktive 2014/24/EU dolo?a naslednje razloge za
+        izklju?itev
+    </entry>
+    <entry key="espd.part3.crit.eu.eo.payment.taxes.main.title">?len 57(2) Direktive 2014/24/EU dolo?a naslednje razloge
+        za izklju?itev
+    </entry>
+    <entry key="espd.crit.eu.text.agreement.economic">Ali je gospodarski subjekt sklenil dogovore z drugimi
+        gospodarskimi subjekti z namenom izkrivljanja konkurence?
+    </entry>
+    <entry key="espd.crit.eu.text.arrangement.creditors">Ali ima gospodarski subjekt dogovor z upniki?</entry>
+    <entry key="espd.crit.eu.text.bankrupt">Ali je gospodarski subjekt v ste?aju?</entry>
+    <entry key="espd.crit.eu.text.breaching.obligations.environmental">Ali je gospodarski subjekt, kolikor mu je znano,
+        kr?il svoje obveznosti na podro?ju okoljskega prava? Kot je za namene tega javnega naro?ila navedeno v
+        nacionalni zakonodaji, v ustreznem obvestilu, dokumentaciji v zvezi z oddajo javnega naro?ila ali ?lenu 18(2)
+        Direktive 2014/24/EU.
+    </entry>
+    <entry key="espd.crit.eu.text.breaching.obligations.labour">Ali je gospodarski subjekt, kolikor mu je znano, kr?il
+        svoje obveznosti na podro?ju delovnega prava? Kot je za namene tega javnega naro?ila navedeno v nacionalni
+        zakonodaji, v ustreznem obvestilu, dokumentaciji v zvezi z oddajo javnega naro?ila ali ?lenu 18(2) Direktive
+        2014/24/EU.
+    </entry>
+    <entry key="espd.crit.eu.text.breaching.obligations.social">Ali je gospodarski subjekt, kolikor mu je znano, kr?il
+        svoje obveznosti na podro?ju socialnega prava? Kot je za namene tega javnega naro?ila navedeno v nacionalni
+        zakonodaji, v ustreznem obvestilu, dokumentaciji v zvezi z oddajo javnega naro?ila ali ?lenu 18(2) Direktive
+        2014/24/EU.
+    </entry>
+    <entry key="espd.crit.eu.text.child.labour">Ali je bila gospodarskemu subjektu ali kateri koli osebi, ki je ?lan
+        njegovega upravnega, upravljalskega ali nadzornega organa ali je poobla??ena za zastopanje, odlo?anje ali nadzor
+        v tem subjektu, izre?ena pravnomo?na obsodba zaradi dela otrok in drugih oblik trgovine z ljudmi, pri ?emer je
+        od obsodbe minilo najve? pet let ali pa v njenem primeru ?e vedno velja ?as izklju?itve, dolo?en neposredno v
+        obsodbi? Kot je opredeljeno v ?lenu 2 Direktive 2011/36/EU Evropskega parlamenta in Sveta z dne 5. aprila 2011 o
+        prepre?evanju trgovine z ljudmi in boju proti njej ter za??iti njenih ?rtev in o nadomestitvi Okvirnega sklepa
+        Sveta 2002/629/PNZ (UL L 101, 15.4.2011, str. 1).
+    </entry>
+    <entry key="espd.crit.eu.text.conflict.interest">Ali je gospodarskemu subjektu znano nasprotje interesov, kot je
+        opredeljeno v nacionalni zakonodaji, ustreznem obvestilu ali dokumentaciji v zvezi z oddajo javnega naro?ila,
+        zaradi njegovega sodelovanja v postopku oddaje javnega naro?ila?
+    </entry>
+    <entry key="espd.crit.eu.text.corruption">Ali je bila gospodarskemu subjektu ali kateri koli osebi, ki je ?lan
+        njegovega upravnega, upravljalskega ali nadzornega organa ali je poobla??ena za zastopanje, odlo?anje ali nadzor
+        v tem subjektu, izre?ena pravnomo?na obsodba zaradi korupcije, pri ?emer je od obsodbe minilo najve? pet let ali
+        pa v njenem primeru ?e vedno velja ?as izklju?itve, dolo?en neposredno v obsodbi? Kot je opredeljeno v ?lenu 3
+        Konvencije o boju proti korupciji uradnikov Evropskih skupnosti ali uradnikov dr?av ?lanic Evropske unije, UL C
+        195, 25.6.1997, str. 1, in ?lenu 2(1) Okvirnega sklepa Sveta 2003/568/PNZ z dne 22. julija 2003 o boju proti
+        korupciji v zasebnem sektorju (UL L 192, 31.7.2003, str. 54). Ta razlog za izklju?itev zajema tudi korupcijo,
+        kot je opredeljena v nacionalnem pravu javnega naro?nika (naro?nika) oziroma gospodarskega subjekta.
+    </entry>
+    <entry key="espd.crit.eu.text.early.termination">Ali se je gospodarskemu subjektu zgodilo, da je bila prej?nja
+        pogodba o izvedbi javnega naro?ila, prej?nja pogodba o izvedbi naro?ila, sklenjena z naro?nikom, ali prej?nja
+        koncesijska pogodba pred?asno odpovedana oziroma so bile v zvezi z navedeno prej?njo pogodbo nalo?ene od?kodnina
+        ali druge primerljive sankcije?
+    </entry>
+    <entry key="espd.crit.eu.text.fraud">Ali je bila gospodarskemu subjektu ali kateri koli osebi, ki je ?lan njegovega
+        upravnega, upravljalskega ali nadzornega organa ali je poobla??ena za zastopanje, odlo?anje ali nadzor v tem
+        subjektu, izre?ena pravnomo?na obsodba zaradi goljufije, pri ?emer je od obsodbe minilo najve? pet let ali pa v
+        njenem primeru ?e vedno velja ?as izklju?itve, dolo?en neposredno v obsodbi? V smislu ?lena 1 Konvencije o
+        za??iti finan?nih interesov Evropskih skupnosti (UL C 316, 27.11.1995, str. 48).
+    </entry>
+    <entry key="espd.crit.eu.text.grounds.criminal.conv">Ali je bila gospodarskemu subjektu ali kateri koli osebi, ki je
+        ?lan njegovega upravnega, upravljalskega ali nadzornega organa ali je poobla??ena za zastopanje, odlo?anje ali
+        nadzor v tem subjektu, izre?ena pravnomo?na obsodba zaradi sodelovanja v hudodelski dru?bi, pri ?emer je od
+        obsodbe minilo najve? pet let ali pa v njenem primeru ?e vedno velja ?as izklju?itve, dolo?en neposredno v
+        obsodbi? Kot je opredeljeno v ?lenu 2 Okvirnega sklepa Sveta 2008/841/PNZ z dne 24. oktobra 2008 o boju proti
+        organiziranemu kriminalu (UL L 300, 11.11.2008, str. 42).
+    </entry>
+    <entry key="espd.crit.eu.text.guilty.misconduct">Ali je gospodarski subjekt zagre?il huj?o kr?itev poklicnih pravil?
+        Kadar je primerno, glej opredelitve v nacionalni zakonodaji, ustrezno obvestilo ali dokumentacijo v zvezi z
+        oddajo javnega naro?ila.
+    </entry>
+    <entry key="espd.crit.eu.text.guilty.misinterpretation">Ali se je gospodarski subjekt zna?el v enem od naslednjih
+        polo?ajev:<p/>a) je bil kriv resnega napa?nega prikazovanja pri predlo?itvi informacij, ki so potrebne za
+        preverjanje, da ni razlogov za izklju?itev in da so izpolnjeni pogoji za sodelovanje,<p/>b) je tak?ne
+        informacije prikrival,<p/>c) dokazil na zahtevo javnega naro?nika oziroma naro?nika ni mogel predlo?iti brez
+        odla?anja in<p/>d) je sku?al neupravi?eno vplivati na postopek odlo?anja javnega naro?nika oziroma naro?nika,
+        pridobiti zaupne informacije, zaradi katerih bi lahko imel neupravi?eno prednost v postopku oddaje javnega
+        naro?ila, ali iz malomarnosti predlo?il zavajajo?e informacije, ki bi lahko bistveno vplivale na odlo?itve o
+        izklju?itvi, izboru ali podelitvi naro?ila?
+    </entry>
+    <entry key="espd.crit.eu.text.insolvency">Ali je gospodarski subjekt v postopku zaradi insolventnosti ali postopku
+        likvidacije?
+    </entry>
+    <entry key="espd.crit.eu.text.involvement">Ali je gospodarski subjekt ali podjetje, povezano z gospodarskim
+        subjektom, svetoval javnemu naro?niku ali naro?niku ali bil kako druga?e vklju?en v pripravo postopka oddaje
+        javnega naro?ila?
+    </entry>
+    <entry key="espd.crit.eu.text.liquidator">Ali sredstva gospodarskega subjekta upravlja ste?ajni upravitelj ali
+        sodi??e?
+    </entry>
+    <entry key="espd.crit.eu.text.money.laundering">Ali je bila gospodarskemu subjektu ali kateri koli osebi, ki je ?lan
+        njegovega upravnega, upravljalskega ali nadzornega organa ali je poobla??ena za zastopanje, odlo?anje ali nadzor
+        v tem subjektu, izre?ena pravnomo?na obsodba zaradi pranja denarja ali financiranje terorizma, pri ?emer je od
+        obsodbe minilo najve? pet let ali pa v njenem primeru ?e vedno velja ?as izklju?itve, dolo?en neposredno v
+        obsodbi? Kot je opredeljeno ?lenu 1 Direktive Evropskega parlamenta in Sveta 2005/60/ES z dne 26. oktobra 2005 o
+        prepre?evanju uporabe finan?nega sistema za pranje denarja in financiranje terorizma (UL L 309, 25.11.2005, str.
+        15).
+    </entry>
+    <entry key="espd.crit.eu.text.national.bankruptcy">Ali je gospodarski subjekt v polo?aju, podobnem ste?aju, ki
+        nastane zaradi podobnega postopka v skladu z nacionalnimi zakoni in predpisi?
+    </entry>
+    <entry key="espd.crit.eu.text.payment.social.security">Ali je gospodarski subjekt kr?il svoje obveznosti pla?evanja
+        prispevkov za socialno varnost v dr?avi, v kateri ima sede?, in dr?avi ?lanici javnega naro?nika oziroma
+        naro?nika, ?e ta ni ista kot dr?ava sede?a?
+    </entry>
+    <entry key="espd.crit.eu.text.payment.taxes">Ali je gospodarski subjekt kr?il svoje obveznosti pla?evanja davkov v
+        dr?avi, v kateri ima sede?, in dr?avi ?lanici javnega naro?nika oziroma naro?nika, ?e ta ni ista kot dr?ava
+        sede?a?
+    </entry>
+    <entry key="espd.crit.eu.text.purely.national">Drugi razlogi za izklju?itev, ki so lahko predvideni v nacionalni
+        zakonodaji dr?ave ?lanice javnega naro?nika oziroma naro?nika. Ali se uporabljajo izklju?no nacionalni razlogi
+        za izklju?itev, navedeni v ustreznem obvestilu ali dokumentaciji v zvezi z oddajo javnega naro?ila?
+    </entry>
+    <entry key="espd.crit.eu.text.suspended.business">Ali so poslovne dejavnosti gospodarskega subjekta za?asno
+        ustavljene?
+    </entry>
+    <entry key="espd.crit.eu.text.terrorist">Ali je bila gospodarskemu subjektu ali kateri koli osebi, ki je ?lan
+        njegovega upravnega, upravljalskega ali nadzornega organa ali je poobla??ena za zastopanje, odlo?anje ali nadzor
+        v tem subjektu, izre?ena pravnomo?na obsodba zaradi teroristi?nih kaznivih dejanj ali kaznivih dejanj, povezanih
+        s teroristi?nimi dejavnostmi, pri ?emer je od obsodbe minilo najve? pet let ali pa v njenem primeru ?e vedno
+        velja ?as izklju?itve, dolo?en neposredno v obsodbi? Kot so opredeljena v ?lenih 1 in 3 Okvirnega sklepa Sveta z
+        dne 13. junija 2002 o boju proti terorizmu (UL L 164, 22.6.2002, str. 3). Ta razlog za izklju?itev zajema tudi
+        spodbujanje k storitvi kaznivega dejanja, pomo? ali podporo pri tem ali poskus storitve kaznivega dejanja, kot
+        je navedeno v ?lenu 4 navedenega okvirnega sklepa.
+    </entry>
+    <entry key="espd.crit.eu.title.agreement.economic">Dogovori z drugimi gospodarskimi subjekti z namenom izkrivljanja
+        konkurence
+    </entry>
+    <entry key="espd.crit.eu.title.arrangement.creditors">Dogovor z upniki</entry>
+    <entry key="espd.crit.eu.title.bankrupt">Ste?aj</entry>
+    <entry key="espd.part3.crit.eu.eo.bankrupt.title">Ali je va?a organizacija v ste?aju oziroma v postopku zaradi
+        insolventnosti ali postopku likvidacije oziroma v dogovoru z upniki oziroma v podobnem polo?aju, ki nastane
+        zaradi podobnega postopka v skladu z nacionalnimi zakoni in predpisi?
+    </entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.environmental">Kr?itev obveznosti na podro?ju okoljskega
+        prava
+    </entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.environmental.eo">Kr?itev obveznosti na podro?ju okoljskega
+        prava
+    </entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.labour">Kr?itev obveznosti na podro?ju delovnega prava</entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.social">Kr?itev obveznosti na podro?ju socialnega prava</entry>
+    <entry key="espd.crit.eu.title.child.labour">Delo otrok in druge oblike trgovine z ljudmi</entry>
+    <entry key="espd.crit.eu.title.conflict.interest">Nasprotje interesov zaradi njegovega sodelovanja v postopku oddaje
+        javnega naro?ila
+    </entry>
+    <entry key="espd.crit.eu.title.conflict.interest.eo">Ali obstaja za va?o organizacijo nasprotje interesov zaradi
+        njenega sodelovanja v postopku oddaje javnega naro?ila?
+    </entry>
+    <entry key="espd.crit.eu.title.corruption">Korupcija</entry>
+    <entry key="espd.crit.eu.title.early.termination">Pred?asna odpoved pogodbe, od?kodnina ali druge primerljive
+        sankcije
+    </entry>
+    <entry key="espd.crit.eu.title.fraud">Goljufija</entry>
+    <entry key="espd.crit.eu.title.grounds.criminal.conv">Sodelovanje v hudodelski zdru?bi</entry>
+    <entry key="espd.crit.eu.title.guilty.misconduct">Huj?a kr?itev poklicnih pravil</entry>
+    <entry key="espd.crit.eu.title.guilty.misconduct.eo">Ali je bila va?a organizacija spoznana za krivo huj?e kr?itve
+        poklicnih pravil?
+    </entry>
+    <entry key="espd.crit.eu.title.guilty.misinterpretation">Napa?no prikazovanje, prikrivanje informacij, nezmo?nost
+        predlo?itve zahtevane dokumentacije in pridobivanje zaupnih informacij o tem postopku
+    </entry>
+    <entry key="espd.crit.eu.title.insolvency">Insolventnost</entry>
+    <entry key="espd.crit.eu.title.involvement">Neposredno ali posredno sodelovanje pri pripravi tega postopka oddaje
+        javnega naro?ila
+    </entry>
+    <entry key="espd.crit.eu.title.involvement.eo">Ali je va?a organizacija ali z njo povezano podjetje svetovala
+        javnemu naro?niku ali bila kako druga?e vklju?ena v pripravo postopka oddaje javnega naro?ila?
+    </entry>
+    <entry key="espd.crit.eu.title.liquidator">Sredstva upravlja ste?ajni upravitelj</entry>
+    <entry key="espd.crit.eu.title.money.laundering">Pranje denarja ali financiranje terorizma</entry>
+    <entry key="espd.crit.eu.title.national.bankruptcy">Polo?aj, ki je v skladu z nacionalno zakonodajo podoben
+        ste?aju
+    </entry>
+    <entry key="espd.crit.eu.title.payment.social.security">Pla?evanje prispevkov za socialno varnost</entry>
+    <entry key="espd.crit.eu.title.payment.taxes">Pla?evanje davkov</entry>
+    <entry key="espd.crit.eu.title.purely.national">Izklju?no nacionalni razlogi za izklju?itev</entry>
+    <entry key="espd.crit.eu.title.suspended.business">Poslovne dejavnosti so za?asno ustavljene</entry>
+    <entry key="espd.crit.eu.title.terrorist">Teroristi?na kazniva dejanja ali kazniva dejanja, povezana s
+        teroristi?nimi dejavnostmi
+    </entry>
+    <entry key="espd.part3.crit.eu.guilty.misconduct.eo.tooltip">Kadar je primerno, glej opredelitve v nacionalni
+        zakonodaji, ustrezno obvestilo ali dokumentacijo v zvezi z oddajo javnega naro?ila
+    </entry>
+    <entry key="espd.crit.explain.certificates.independent.environmental.description">?e ste odgovorili z ne, pojasnite
+        zakaj in navedite, katera druga dokazila v zvezi s sistemi oziroma standardi za okoljsko ravnanje je mogo?e
+        predlo?iti:
+    </entry>
+    <entry key="espd.part4.crit.explain.certificates.independent.quality.description">?e ste odgovorili z ne, pojasnite
+        zakaj in navedite, katera druga dokazila v zvezi s shemo zagotavljanja kakovosti je mogo?e predlo?iti:
+    </entry>
+    <entry key="espd.part4.crit.explain.supply.contracts.quality.description">?e ste odgovorili z ne, pojasnite zakaj in
+        navedite, katera druga dokazila je mogo?e predlo?iti:
+    </entry>
+    <entry key="espd.crit.information.available.electronically">Ali so te informacije organom brezpla?no dostopne iz
+        podatkovne zbirke dr?ave ?lanice EU?
+    </entry>
+    <entry key="espd.crit.issuer">Prenesi kot</entry>
+    <entry key="espd.crit.length.period.exclusion">Kolikor je to dolo?eno neposredno v obsodbi, dol?ina obdobja
+        izklju?itve.
+    </entry>
+    <entry key="espd.crit.number">?tevilo</entry>
+    <entry key="espd.crit.number.of.years">Povpre?ni promet</entry>
+    <entry key="espd.crit.other.than.judicial.or.administrative.decision">Ali je bila ta kr?itev obveznosti ugotovljena
+        druga?e kot s sodno ali upravno odlo?bo?
+    </entry>
+    <entry key="espd.crit.please.describe.them">Opi?ite jih</entry>
+    <entry key="espd.crit.please.specify">Navedite natan?neje</entry>
+    <entry key="espd.crit.ratio">Dele?</entry>
+    <entry key="espd.crit.reason">Razlog</entry>
+    <entry key="espd.crit.reasons.nevertheless.contract">Navedite razloge, zaradi katerih boste kljub temu lahko izvedli
+        naro?ilo. Teh informacij ni treba navesti, ?e je izklju?itev gospodarskih subjektov v tem primeru obvezna na
+        podlagi veljavne nacionalne zakonodaje brez mo?nosti odstopanja, kadar gospodarski subjekt kljub temu lahko
+        izvede javno naro?ilo.
+    </entry>
+    <entry key="espd.crit.recipients">Prejemniki</entry>
+    <entry key="espd.part4.crit.selection.ca.declares.that">Glede pogojev za sodelovanje javni naro?nik zahteva, da
+        gospodarski subjekt izjavlja, da
+    </entry>
+    <entry key="espd.part4.crit.selection.ca.economic.article">?len 58(3) Direktive 2014/24/EU dolo?a naslednje pogoje
+        za sodelovanje
+    </entry>
+    <entry key="espd.part4.crit.selection.declares.that.tooltip">Gospodarski subjekt mora to polje izpolniti samo, ?e je
+        javni naro?nik oziroma naro?nik v ustreznem obvestilu ali dokumentaciji v zvezi z oddajo javnega naro?ila, na
+        katero se sklicuje obvestilo, navedel, da se gospodarski subjekt lahko omeji na to, da izpolni to to?ko dela IV,
+        ne da bi moral izpolniti oddelke A, B, C ali D dela IV.
+    </entry>
+    <entry key="espd.crit.selection.economic.average.yearly.turnover.description">Njegov povpre?ni letni promet za
+        ?tevilo let, ki se zahteva v ustreznem obvestilu, dokumentaciji v zvezi z oddajo javnega naro?ila ali ESPD, je:
+    </entry>
+    <entry key="espd.crit.selection.economic.average.yearly.turnover.main">Povpre?ni letni promet</entry>
+    <entry key="espd.crit.selection.economic.financial.ratio.description">V zvezi s finan?nimi dele?i (kot je dele?
+        sredstev glede na obveznosti), navedenimi v ustreznem obvestilu, dokumentaciji v zvezi z oddajo javnega naro?ila
+        ali ESPD, gospodarski subjekt izjavlja, da so trenutne vrednosti za zahtevane dele?e:
+    </entry>
+    <entry key="espd.crit.selection.economic.financial.ratio.main">Finan?ni dele?</entry>
+    <entry key="espd.crit.selection.economic.financial.standing.article.tooltip">Gospodarski subjekt mora zagotoviti
+        informacije samo, kadar je zadevne pogoje za sodelovanje zahteval javni naro?nik oziroma naro?nik v ustreznem
+        obvestilu ali dokumentaciji v zvezi z oddajo javnega naro?ila, na katero se sklicuje obvestilo.
+    </entry>
+    <entry key="espd.crit.selection.economic.general.yearly.turnover.description">Njegov splo?ni letni promet za ?tevilo
+        poslovnih let, ki se zahteva v ustreznem obvestilu, dokumentaciji v zvezi z oddajo javnega naro?ila ali ESPD,
+        je:
+    </entry>
+    <entry key="espd.crit.selection.economic.general.yearly.turnover.main">Splo?ni letni promet</entry>
+    <entry key="espd.crit.selection.economic.other.financial.requirements.description">Glede drugih ekonomskih ali
+        finan?nih zahtev, ?e obstajajo, iz ustreznega obvestila ali dokumentacije v zvezi z oddajo javnega naro?ila,
+        gospodarski subjekt izjavlja, da:
+    </entry>
+    <entry key="espd.crit.selection.economic.other.financial.requirements.main">Druge ekonomske ali finan?ne zahteve
+    </entry>
+    <entry key="espd.crit.selection.economic.professional.risk.insurance.description">Zavarovalna vsota v njegovem
+        zavarovanju poklicne odgovornosti je:
+    </entry>
+    <entry key="espd.crit.selection.economic.professional.risk.insurance.main">Zavarovanje poklicne odgovornosti</entry>
+    <entry key="espd.crit.selection.economic.setup.eo.description">?e zahtevane informacije o (splo?nem ali posebnem)
+        prometu niso na voljo za celotno zahtevano obdobje, navedite datum, na katerega je bilo podjetje ustanovljeno
+        ali je za?el gospodarski subjekt poslovati:
+    </entry>
+    <entry key="espd.crit.selection.economic.setup.eo.main">Ustanovitev gospodarskega subjekta</entry>
+    <entry key="espd.crit.selection.economic.specific.average.turnover.description">Njegov povpre?ni posebni letni
+        promet na podro?ju poslovanja, zajetem v javnem naro?ilu, za ?tevilo let, ki se zahteva v ustreznem obvestilu,
+        dokumentaciji v zvezi z oddajo javnega naro?ila ali ESPD, je:
+    </entry>
+    <entry key="espd.crit.selection.economic.specific.average.turnover.main">Povpre?ni posebni promet</entry>
+    <entry key="espd.crit.selection.economic.specific.yearly.turnover.description">Njegov posebni letni promet na
+        podro?ju poslovanja, zajetem v javnem naro?ilu, za ?tevilo poslovnih let, ki se zahteva v ustreznem obvestilu,
+        dokumentaciji v zvezi z oddajo javnega naro?ila ali ESPD, je:
+    </entry>
+    <entry key="espd.crit.selection.economic.specific.yearly.turnover.main">Posebni letni promet</entry>
+    <entry key="espd.part4.crit.selection.eo.declares.that">Glede pogojev za sodelovanje gospodarski subjekt izjavlja,
+        da
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.declares.that.tooltip">Gospodarski subjekt mora to polje izpolniti samo, ?e
+        je javni naro?nik oziroma naro?nik v ustreznem obvestilu ali dokumentaciji v zvezi z oddajo javnega naro?ila, na
+        katero se sklicuje obvestilo, navedel, da se gospodarski subjekt lahko omeji na to, da izpolni to to?ko dela IV,
+        ne da bi moral izpolniti oddelke A, B, C ali D dela IV.
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.economic.article">?len 58(3) Direktive 2014/24/EU dolo?a naslednje pogoje
+        za sodelovanje
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.economic.article.tooltip">Gospodarski subjekt mora zagotoviti informacije
+        samo, kadar je zadevne pogoje za sodelovanje zahteval javni naro?nik oziroma naro?nik v ustreznem obvestilu ali
+        dokumentaciji v zvezi z oddajo javnega naro?ila, na katero se sklicuje obvestilo.
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.economic.enrolement.description">Je vpisan v enega od ustreznih poklicnih
+        ali trgovskih registrov, ki se vodijo v dr?avi ?lanici sede?a
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.economic.enrolement.main">Vpis v poklicni ali trgovski register</entry>
+    <entry key="espd.part4.crit.selection.eo.economic.service.contracts.description">Ali je v dr?avi ?lanici sede?a
+        gospodarskega subjekta za opravljanje zadevne storitve potrebno dolo?eno dovoljenje ali ?lanstvo v dolo?eni
+        organizaciji?
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.economic.service.contracts.main">Za naro?ila storitev: potreba po
+        dovoljenju ali ?lanstvu
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.satisfies.all.criteria">Izpolnjuje vse zahtevane pogoje za sodelovanje
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.article">?len 58(2) Direktive 2014/24/EU dolo?a naslednje
+        pogoje za sodelovanje
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.article.tooltip">Gospodarski subjekt mora zagotoviti
+        informacije samo, kadar je zadevne pogoje za sodelovanje zahteval javni naro?nik oziroma naro?nik v ustreznem
+        obvestilu ali dokumentaciji v zvezi z oddajo javnega naro?ila, na katero se sklicuje obvestilo.
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.enrolment.description">Je vpisan v enega od ustreznih poklicnih
+        ali trgovskih registrov, ki se vodijo v dr?avi ?lanici sede?a
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.enrolment.main">Vpis v poklicni ali trgovski register</entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.service.contracts.description">Ali je v dr?avi ?lanici sede?a
+        gospodarskega subjekta za opravljanje zadevne storitve potrebno dolo?eno dovoljenje ali ?lanstvo v dolo?eni
+        organizaciji?
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.service.contracts.main">Za naro?ila storitev: potreba po
+        dovoljenju ali ?lanstvu
+    </entry>
+    <entry key="espd.part4.crit.selection.quality.assurance.article">?len 62(2) Direktive 2014/24/EU dolo?a naslednje
+        pogoje za sodelovanje
+    </entry>
+    <entry key="espd.part4.crit.selection.quality.assurance.tooltip">Gospodarski subjekt mora zagotoviti informacije
+        samo, kadar je zadevne pogoje za sodelovanje zahteval javni naro?nik oziroma naro?nik v ustreznem obvestilu ali
+        dokumentaciji v zvezi z oddajo javnega naro?ila, na katero se sklicuje obvestilo.
+    </entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.environmental.description">Ali bo gospodarski
+        subjekt lahko predlo?il potrdila, ki jih izdajo neodvisni organi in ki potrjujejo, da gospodarski subjekt
+        upo?teva zahtevane sisteme oziroma standarde za okoljsko ravnanje?
+    </entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.environmental.main">Potrdila neodvisnih
+        organov o sistemih oziroma standardih za okoljsko ravnanje
+    </entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.quality.description">Ali bo gospodarski
+        subjekt lahko predlo?il potrdila, ki jih izdajo neodvisni organi in ki potrjujejo, da gospodarski subjekt
+        upo?teva zahtevane standarde za zagotavljanje kakovosti, vklju?no z dostopnostjo za invalide?
+    </entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.quality.main">Potrdila neodvisnih organov o
+        standardih za zagotavljanje kakovosti
+    </entry>
+    <entry key="espd.part4.crit.selection.satisfies.all.criteria">Izpolnjuje vse zahtevane pogoje za sodelovanje,
+        navedene v ustreznem obvestilu ali dokumentaciji v zvezi z oddajo javnega naro?ila, na katero se sklicuje
+        obvestilo.
+    </entry>
+    <entry key="espd.part4.crit.selection.suitability.article">?len 58(2) Direktive 2014/24/EU dolo?a naslednje pogoje
+        za sodelovanje
+    </entry>
+    <entry key="espd.part4.crit.selection.suitability.article.tooltip">Gospodarski subjekt mora to polje izpolniti samo,
+        ?e je javni naro?nik oziroma naro?nik v ustreznem obvestilu ali dokumentaciji v zvezi z oddajo javnega naro?ila,
+        na katero se sklicuje obvestilo, navedel, da se gospodarski subjekt lahko omeji na to, da izpolni oddelek ? dela
+        IV, ne da bi moral izpolniti kateri koli drugi oddelek dela IV:
+    </entry>
+    <entry key="espd.crit.selection.suitability.enrolment.professional.register.description">Je vpisan v ustrezne
+        poklicne registre, ki se vodijo v dr?avi ?lanici sede?a, kot je navedeno v Prilogi XI Direktive 2014/24/EU; od
+        gospodarskih subjektov iz nekaterih dr?av ?lanic se lahko zahteva, da izpolnijo druge zahteve iz navedene
+        priloge.
+    </entry>
+    <entry key="espd.crit.selection.suitability.enrolment.professional.register.main">Vpis v ustrezen poklicni
+        register
+    </entry>
+    <entry key="espd.crit.selection.suitability.enrolment.trade.register.description">Je vpisan v ustrezne trgovske
+        registre, ki se vodijo v dr?avi ?lanici sede?a, kot je navedeno v Prilogi XI Direktive 2014/24/EU; od
+        gospodarskih subjektov iz nekaterih dr?av ?lanic se lahko zahteva, da izpolnijo katere koli druge zahteve iz
+        navedene priloge.
+    </entry>
+    <entry key="espd.crit.selection.suitability.enrolment.trade.register.main">Vpis v trgovski register</entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.auth.description">Ali je v dr?avi ?lanici sede?a
+        gospodarskega subjekta za opravljanje zadevne storitve potrebno dolo?eno dovoljenje?
+    </entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.auth.main">Za naro?ila storitev: potrebno dolo?eno
+        dovoljenje
+    </entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.membership.description">Ali je v dr?avi ?lanici sede?a
+        gospodarskega subjekta za opravljanje zadevne storitve potrebno ?lanstvo v dolo?eni organizaciji?
+    </entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.membership.main">Za naro?ila storitev: potrebno
+        ?lanstvo dolo?ene organizacije
+    </entry>
+    <entry key="espd.crit.selection.technical.allowance.of.checks.description">Za kompleksne proizvode ali storitve, ki
+        jih je treba dobaviti oziroma zagotoviti, ali izjemoma za proizvode ali storitve, ki so potrebni za posebne
+        namene: Ali bo gospodarski subjekt dovolil preglede proizvodnih zmogljivosti ali tehni?nih zmogljivosti
+        gospodarskega subjekta ter po potrebi preglede sredstev za ?tudije in raziskave, ki jih ima na razpolago, ter
+        ukrepov za nadzor kakovosti? Pregled bo opravil javni naro?nik ali, ?e bo javni naro?nik s tem sogla?al, v
+        njegovem imenu pristojni uradni organ dr?ave, v kateri ima dobavitelj ali ponudnik storitev svoj sede?.
+    </entry>
+    <entry key="espd.crit.selection.technical.allowance.of.checks.main">Dovoljenje za preglede</entry>
+    <entry key="espd.crit.selection.technical.average.annual.manpower.description">Povpre?no letno ?tevilo zaposlenih
+        gospodarskega subjekta v zadnjih treh letih:
+    </entry>
+    <entry key="espd.crit.selection.technical.average.annual.manpower.main">Povpre?no letno ?tevilo zaposlenih</entry>
+    <entry key="espd.crit.selection.technical.educational.professional.qualifications.description">Ponudnik storitev ali
+        sam izvajalec in/ali (glede na zahteve iz ustreznega obvestila ali dokumentacije v zvezi z oddajo javnega
+        naro?ila) njegovi vodstveni delavci hranijo naslednja dokazila o izobrazbi in strokovni usposobljenosti.
+    </entry>
+    <entry key="espd.crit.selection.technical.educational.professional.qualifications.main">Izobrazba in strokovna
+        usposobljenost
+    </entry>
+    <entry key="espd.crit.selection.technical.environment.management.features.description">Gospodarski subjekt bo lahko
+        med izvajanjem naro?ila uporabil naslednje ukrepe za okoljsko ravnanje:
+    </entry>
+    <entry key="espd.crit.selection.technical.environment.management.features.main">Ukrepi za okoljsko ravnanje</entry>
+    <entry key="espd.crit.selection.technical.number.managerial.staff.description">?tevilo vodstvenih delavcev
+        gospodarskega subjekta v zadnjih treh letih:
+    </entry>
+    <entry key="espd.crit.selection.technical.number.managerial.staff.main">?tevilo vodstvenih delavcev</entry>
+    <entry key="espd.part4.crit.selection.technical.professional.ability.article">?len 58(4) Direktive 2014/24/EU dolo?a
+        naslednje pogoje za sodelovanje
+    </entry>
+    <entry key="espd.part4.crit.selection.technical.professional.ability.article.tooltip">Gospodarski subjekt mora
+        zagotoviti informacije samo, kadar je zadevne pogoje za sodelovanje zahteval javni naro?nik oziroma naro?nik v
+        ustreznem obvestilu ali dokumentaciji v zvezi z oddajo javnega naro?ila, na katero se sklicuje obvestilo.
+    </entry>
+    <entry key="espd.crit.selection.technical.service.contracts.performance.services.description">Samo za javna naro?ila
+        storitev: V referen?nem obdobju je gospodarski subjekt opravil naslednje najpomembnej?e storitve dolo?ene vrste.
+        Javni naro?niki lahko zahtevajo najve? tri leta izku?enj in dovolijo navedbo izku?enj iz obdobja pred ve? kot
+        tremi leti.
+    </entry>
+    <entry key="espd.crit.selection.technical.service.contracts.performance.services.main">Za naro?ila storitev: izvedba
+        storitev dolo?ene vrste
+    </entry>
+    <entry key="espd.crit.selection.technical.study.research.facilities.description">Uporablja naslednja sredstva za
+        ?tudije in raziskave:
+    </entry>
+    <entry key="espd.crit.selection.technical.study.research.facilities.main">Sredstva za ?tudije in raziskave</entry>
+    <entry key="espd.crit.selection.technical.subcontracting.proportion.description">Gospodarski subjekt namerava
+        morebiti oddati v podizvajanje naslednji dele? (tj. odstotek) javnega naro?ila. Opozarjamo, da morate v primeru,
+        da se je gospodarski subjekt odlo?il oddati del javnega naro?ila v podizvajanje in za izvedbo tega dela
+        uporablja podizvajal?eve zmogljivosti, za te podizvajalce izpolniti lo?en enotni evropski dokument v zvezi z
+        oddajo javnega naro?ila, glej oddelek C dela II zgoraj.
+    </entry>
+    <entry key="espd.crit.selection.technical.subcontracting.proportion.main">Dele? podizvajanja</entry>
+    <entry key="espd.crit.selection.technical.supply.chain.management.description">Med izvajanjem naro?ila bo lahko
+        uporabil naslednji sistem upravljanja dobavne verige in sistem za sledenje:
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.chain.management.main">Upravljanje dobavne verige</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.certificate.quality.description">Ali lahko gospodarski
+        subjekt predlo?i potrebna potrdila, ki jih pripravijo uradne pristojne ustanove ali agencije za nadzor kakovosti
+        in s katerimi se potrdi skladnost blaga na podlagi jasnih sklicevanj na tehni?ne specifikacije ali standarde, ki
+        so navedeni v ustreznem obvestilu ali dokumentaciji v zvezi z oddajo javnega naro?ila?
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.certificate.quality.main">Za naro?ila blaga: potrdila
+        pristojnih ustanov za nadzor kakovosti
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.performance.deliveries.description">Samo za javna
+        naro?ila blaga: V referen?nem obdobju je gospodarski subjekt opravil naslednje najpomembnej?e dobave blaga
+        dolo?ene vrste. Javni naro?niki lahko zahtevajo najve? tri leta izku?enj in dovolijo navedbo izku?enj iz obdobja
+        pred ve? kot tremi leti.
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.performance.deliveries.main">Za naro?ila blaga: izvedba
+        dobave blaga dolo?ene vrste
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.with.ca.description">Za javna naro?ila blaga: gospodarski
+        subjekt bo predlo?il vzorce, opise ali fotografije proizvodov, ki jih je treba dobaviti, in zagotovil potrdila o
+        njihovi pristnosti, kadar je primerno.
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.with.ca.main">Za naro?ila blaga: vzorci, opisi ali
+        fotografije s potrdilom o pristnosti
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.without.ca.description">Za javna naro?ila blaga:
+        gospodarski subjekt bo predlo?il vzorce, opise ali fotografije proizvodov, ki jih je treba dobaviti, za katere
+        ni treba prilo?iti potrdil o njihovi pristnosti.
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.without.ca.main">Za naro?ila blaga: vzorci, opisi ali
+        fotografije brez potrdila o pristnosti
+    </entry>
+    <entry key="espd.crit.selection.technical.technical.facilities.measures.description">Uporablja naslednja tehni?na
+        sredstva in ukrepe za zagotavljanje kakovosti ter sredstva za ?tudije in raziskave:
+    </entry>
+    <entry key="espd.crit.selection.technical.technical.facilities.measures.main">Tehni?na sredstva in ukrepi za
+        zagotovitev kakovosti
+    </entry>
+    <entry key="espd.crit.selection.technical.technicians.technical.bodies.description">Lahko zaprosi za pomo? naslednje
+        tehni?no osebje ali tehni?ne organe, zlasti tiste, ki so odgovorni za nadzor kakovosti. Za tehni?no osebje ali
+        tehni?ne organe, ki ne pripadajo neposredno podjetju gospodarskega subjekta, vendar gospodarski subjekt
+        uporablja njihove zmogljivosti, kakor je dolo?eno v oddelku C dela II, je treba izpolniti lo?ene obrazce ESPD.
+    </entry>
+    <entry key="espd.crit.selection.technical.technicians.technical.bodies.main">Tehni?no osebje ali tehni?ni organi,
+        odgovorni za nadzor kakovosti
+    </entry>
+    <entry key="espd.crit.selection.technical.tools.plant.description">Gospodarski subjekt bo imel za izvedbo naro?ila
+        na razpolago naslednje orodje, obrat ali tehni?no opremo:
+    </entry>
+    <entry key="espd.crit.selection.technical.tools.plant.main">Orodje, obrat ali tehni?na oprema</entry>
+    <entry key="espd.crit.selection.technical.work.contracts.performance.works.description">Samo za javna naro?ila
+        gradenj: V referen?nem obdobju je gospodarski subjekt izvedel naslednje gradnje dolo?ene vrste. Javni naro?niki
+        lahko zahtevajo navedbo najve? pet let izku?enj in dovolijo navedbo izku?enj iz obdobja pred ve? kot petimi
+        leti.
+    </entry>
+    <entry key="espd.crit.selection.technical.work.contracts.performance.works.main">Za naro?ila gradenj: izvedba
+        gradnje dolo?ene vrste
+    </entry>
+    <entry key="espd.crit.selection.technical.work.contracts.technicians.description">V primeru javnih naro?il gradenj
+        bo lahko gospodarski subjekt zahteval, da gradnjo opravi naslednje tehni?no osebje ali tehni?ni organi:
+    </entry>
+    <entry key="espd.crit.selection.technical.work.contracts.technicians.main">Za naro?ila gradenj: tehni?no osebje in
+        tehni?ni organi, ki opravijo gradnjo
+    </entry>
+    <entry key="espd.crit.start.date">Datum konca</entry>
+    <entry key="espd.crit.taken.self.cleaning.measures">Ali ste sprejeli ukrepe, s katerimi bi dokazali svojo
+        zanesljivost (?samoo?i??evanje?)?
+    </entry>
+    <entry key="espd.crit.taxes.eo.fulfilled.obligations">Ali je gospodarski subjekt izpolnil svoje obveznosti s
+        pla?ilom dolgovanih davkov ali prispevkov za socialno varnost, po potrebi skupaj z morebitnimi obra?unanimi
+        obrestmi ali globami, ali s sklenitvijo zavezujo?ega dogovora o takem pla?ilu?
+    </entry>
+    <entry key="espd.crit.taxes.length.period.of.exclusion">V primeru obsodbe navedite dol?ino obdobja izklju?itve,
+        kolikor je to dolo?eno neposredno v obsodbi
+    </entry>
+    <entry key="espd.crit.taxes.means.description">Opi?ite, katera sredstva so bila uporabljena</entry>
+    <entry key="espd.part3.crit.grounds.criminal.conv.top.title">A: Razlogi, povezani s kazenskimi obsodbami</entry>
+    <entry key="espd.part3.crit.top.grounds.payment.taxes.title">B: Razlogi, povezani s pla?ilom davkov ali prispevkov
+        za socialno varnost
+    </entry>
+    <entry key="espd.part3.crit.insolvency.conflicts.top.title">C: Razlogi, povezani z insolventnostjo, nasprotjem
+        interesov ali kr?itvijo poklicnih pravil
+    </entry>
+    <entry key="espd.part3.crit.purely.national.top.title">D: Izklju?no nacionalni razlogi za izklju?itev</entry>
+    <entry key="espd.crit.url">URL</entry>
+    <entry key="espd.crit.who.convicted">Kdo je bil obsojen?</entry>
+    <entry key="espd.crit.year">Leto</entry>
+    <entry key="espd.crit.your.answer">Va? odgovor?</entry>
+    <entry key="espd.gui.download.as">Prenesi kot</entry>
+    <entry key="espd.gui.download.pdf">PDF</entry>
+    <entry key="espd.gui.download.xml">XML</entry>
+    <entry key="espd.gui.download.zip">Oba formata</entry>
+    <entry key="espd.gui.ec">Evropska komisija</entry>
+    <entry key="espd.ecertis.404">Ni podatkov ECERTIS</entry>
+    <entry key="espd.ecertis.issued">Organ, ki ga je izdal</entry>
+    <entry key="espd.ecertis.language">Jezik</entry>
+    <entry key="espd.ecertis.loading">Nalaganje iz zbirke ECERTIS...</entry>
+    <entry key="espd.ecertis.no.evidences">Ni dokazov</entry>
+    <entry key="espd.gui.error.ted.notice.not.supported">Nalo?ena datoteka je obvestilo in ne obrazec ESPD, zato je ni
+        mogo?e uporabiti.
+    </entry>
+    <entry key="espd.gui.espd">Nalo?ene datoteke ni mogo?e pravilno prebrati. Ali je zahtevek ali odgovor ESPD
+        veljaven?
+    </entry>
+    <entry key="espd.gui.espd.upload.error">Nalo?ene datoteke ni mogo?e pravilno prebrati. Ali je zahtevek ESPD
+        veljaven?
+    </entry>
+    <entry key="espd.gui.espd.upload.request.error">Nalo?ene datoteke ni mogo?e pravilno prebrati. Ali je odgovor ESPD
+        veljaven?
+    </entry>
+    <entry key="espd.gui.espd.upload.response.error">Enotni evropski dokument v zvezi z oddajo javnega naro?ila</entry>
+    <entry key="espd.gui.europa">Evropa</entry>
+    <entry key="espd.gui.expire.reminder.message">?e skoraj eno uro niste uporabljali storitve ESPD.
+        &lt;p&gt;
+        Da ne boste izgubili podatkov iz elektronskega dokumenta eESPD, ga shranite.&lt;p&gt;Va?e podatke iz dokumenta eESPD
+        lahko uvozite (ponovno uporabite) kadar koli in tako nadaljujete z delom.
+    </entry>
+    <entry key="espd.gui.export">Shrani</entry>
+    <entry key="espd.gui.faq.leaflet">zlo?enko s pogosto zastavljenimi vpra?anji</entry>
+    <entry key="espd.gui.faq.text.answers">?e ?elite odgovore na najpogosteje zastavljena vpra?anja o ESPD, si oglejte
+    </entry>
+    <entry key="espd.gui.faq.text.more.info">Za ve? informacij o ESPD,</entry>
+    <entry key="espd.init.alert">
+        &lt;p&gt;Enotni evropski dokument v zvezi z oddajo javnega naro?ila (ESPD) je lastna izjava o finan?nem statusu
+            podjetja, njegovih sposobnostih in ustreznosti za postopek javnega naro?anja. Na voljo je v vseh jezikih EU
+            in se uporablja kot predhodni dokaz o izpolnjevanju pogojev iz postopkov javnega naro?anja v celotni EU. Po
+            zaslugi ESPD ponudnikom ni treba ve? predlo?iti vseh listinskih dokazov in razli?nih obrazcev, ki so jih
+            prej uporabljali pri javnem naro?anju v EU, kar pomeni znatno poenostavitev dostopa do prilo?nosti, ki jih
+            prina?a ?ezmejno oddajanje ponudb. Od oktobra 2018 naprej se bo ESPD zagotavljal izklju?no v elektronski
+            obliki.
+        &lt;/p&gt;
+        &lt;p&gt;Evropska komisija zagotavlja brezpla?no spletno storitev za kupce, ponudnike in druge strani, ki so
+            zainteresirane za elektronsko izpolnjevanje obrazca ESPD. Spletni obrazec lahko izpolnite, natisnete in nato
+            po?ljete kupcu skupaj s preostalo ponudbo. ?e postopek poteka elektronsko, lahko ESPD izvozite, shranite in
+            predlo?ite elektronsko. ESPD, predlo?en v prej?njem postopku javnega naro?anja, lahko ponovno uporabite, ?e
+            so te informacije ?e vedno to?ne. Ponudniki so lahko izklju?eni iz postopka javnega naro?anja ali kazensko
+            odgovarjajo, ?e so informacije iz ESPD resno napa?no prikazane, se prikrivajo ali pa jih ni mogo?e podpreti
+            z dokazili.
+        &lt;/p&gt;
+    </entry>
+    <entry key="espd.init.create.espd">Ustvariti nov ESPD.</entry>
+    <entry key="espd.init.create.response">Ustvari odgovor</entry>
+    <entry key="espd.init.header">Dobrodo?li v storitvi ESPD</entry>
+    <entry key="espd.init.i.am.ca">Sem javni naro?nik.</entry>
+    <entry key="espd.init.i.am.ce">Sem naro?nik.</entry>
+    <entry key="espd.init.i.am.eop">Sem gospodarski subjekt.</entry>
+    <entry key="espd.init.import.espd">Uvoziti ESPD.</entry>
+    <entry key="espd.init.merge.espds">Zdru?i dva dokumenta ESPD</entry>
+    <entry key="espd.init.reuse.espd">Ponovno uporabiti obstoje?i ESPD.</entry>
+    <entry key="espd.init.review.espd">Pregled ESPD</entry>
+    <entry key="espd.init.select.country">Izberite dr?avo.</entry>
+    <entry key="espd.init.ted.reception.id.placeholder">Navedite prejeto ?tevilko obvestila</entry>
+    <entry key="espd.init.upload.document">Nalo?i dokument</entry>
+    <entry key="espd.init.upload.documents">Nalo?i dokumente</entry>
+    <entry key="espd.init.upload.request">Nalo?ite zahtevek ESPD ali odgovor ESPD</entry>
+    <entry key="espd.init.upload.request.response">Nalo?ite zahtevek ESPD javnega naro?nika</entry>
+    <entry key="espd.init.upload.response">Nalo?ite va? stari odgovor ESPD</entry>
+    <entry key="espd.init.what.you.do">Kaj ?elite storiti?</entry>
+    <entry key="espd.init.where.are.you.from.ca">Kje je sede? va?ega javnega naro?nika?</entry>
+    <entry key="espd.init.where.are.you.from.eo">Kje je sede? va?ega podjetja?</entry>
+    <entry key="espd.init.who.are.you">Kdo ste?</entry>
+    <entry key="espd.gui.footer.last.update">Zadnja posodobitev:</entry>
+    <entry key="espd.gui.grow">GD za notranji trg, industrijo, podjetni?tvo ter mala in srednja podjetja</entry>
+    <entry key="espd.ecertis.information.for.country">Informacije za {0} e-Certis</entry>
+    <entry key="espd.gui.legal.notice">Pravno obvestilo</entry>
+    <entry key="espd.ecertis.less.information">Manj informacij</entry>
+    <entry key="espd.ecertis.more.information">Ve? informacij</entry>
+    <entry key="espd.gui.next">Naprej</entry>
+    <entry key="espd.gui.no">Ne</entry>
+    <entry key="espd.gui.not.applicable">Ni relevantno</entry>
+    <entry key="espd.gui.place">Kraj</entry>
+    <entry key="espd.gui.previous">Nazaj</entry>
+    <entry key="espd.gui.print">Pregled</entry>
+    <entry key="espd.gui.progress.exclusion">Izklju?itev</entry>
+    <entry key="espd.gui.progress.finish">Zaklju?ek</entry>
+    <entry key="espd.gui.progress.procedure">Postopek</entry>
+    <entry key="espd.gui.progress.selection">Izbor</entry>
+    <entry key="espd.gui.progress.start">Za?etek</entry>
+    <entry key="espd.gui.question.to.use.alpha">Ali ?elite uporabiti pogoje za sodelovanje od A do D?</entry>
+    <entry key="espd.gui.report.appliction.issue">Za kakr?na koli vpra?anja, povezana z uporabo ESPD, se obrnite na
+    </entry>
+    <entry key="espd.gui.report.security.incident">Za kakr?en koli varnostni incident se obrnite na Evropsko komisijo
+        prek
+    </entry>
+    <entry key="espd.gui.report.security.incident.title">Poro?ilo o incidentu glede varovanja tajnosti podatkov</entry>
+    <entry key="espd.gui.role.ca">Vloga: Javni naro?nik</entry>
+    <entry key="espd.gui.role.eo">Vloga: Gospodarski subjekt</entry>
+    <entry key="espd.gui.search">Iskanje</entry>
+    <entry key="espd.gui.signature">Podpis</entry>
+    <entry key="espd.gui.tools">Orodja</entry>
+    <entry key="espd.init.ca.can.create.espd.tooltip">Javni naro?nik lahko ESPD ustvari sam povsem od za?etka. V tem
+        primeru mora javni naro?nik v obrazec ESPD vnesti vse pomembne informacije.
+    </entry>
+    <entry key="espd.init.ca.can.import.espd.tooltip">?e je javni naro?nik storitev ESPD v preteklosti ?e uporabil za
+        drug postopek javnega naro?anja, lahko uvozi ESPD, shranjen na lokalnem omre?ju. V tem primeru ESPD ni treba
+        ustvariti povsem od za?etka, vendar pa je nekatere podatke vseeno treba posodobiti glede na aktualni postopek
+        javnega naro?anja.
+    </entry>
+    <entry key="espd.init.ca.ref.buyer.tooltip">Izraz javni naro?nik se nana?a na kupca.</entry>
+    <entry key="espd.init.ce.ref.buyer.tooltip">Pojem naro?nik se tu nana?a na kupca, ki deluje v vodnem, energetskem,
+        prometnem sektorju ali sektorju po?tnih storitev. Javni naro?niki, ki delujejo v navedenih sektorjih, morajo
+        izbrati ?Sem javni naro?nik?.
+    </entry>
+    <entry key="espd.init.eo.can.reuse.espd.tooltip">Gospodarski subjekt lahko ponovno uporabi informacije, ki jih je
+        prejel prek ESPD v prej?njem postopku javnega naro?anja (?stari? ESPD). Storitev ESPD bo zdru?ila ?stari? ESPD z
+        novim obrazcem, ki ga je javni naro?nik pripravil za ta postopek javnega naro?anja.
+    </entry>
+    <entry key="espd.init.eo.ref.suppl.tooltip">Izraz gospodarski subjekt se nana?a na dobavitelja/ponudnika.</entry>
+    <entry key="espd.init.espd.used.both.ca.eo.tooltip">Storitev ESPD lahko uporabljajo javni naro?niki in gospodarski
+        subjekti. Izberite mo?nost, ki ustreza va?emu profilu v tem postopku javnega naro?anja.
+    </entry>
+    <entry key="espd.init.filter.create.response.tooltip">Ustvariti nov odgovor ESPD.</entry>
+    <entry key="espd.init.filter.eo.can.import.espd.tooltip">Gospodarski subjekt lahko uvozi ESPD, ki ga je javni
+        naro?nik predhodno izpolnil za ta postopek javnega naro?anja, nato pa je bil objavljen v obvestilu o javnem
+        naro?ilu.
+    </entry>
+    <entry key="espd.init.filter.eo.merge.espds.tooltip">The ESPD service will merge the 'old' ESPD with the new form
+        prepared by the contracting authority for this procurement procedure.
+    </entry>
+    <entry key="espd.init.overview.received.espds.tooltip">S to funkcijo se ustvari preglednica s pregledom odgovorov
+        ponudnikov iz vseh dokumentov ESPD za dolo?en postopek javnega naro?anja.
+    </entry>
+    <entry key="espd.init.review.espd.tooltip">Javni naro?nik lahko preveri/pregleda elektronski ESPD, ki ga je prejel
+        od gospodarskega subjekta.
+    </entry>
+    <entry key="espd.init.ted.reception.id.tooltip">Javni naro?nik bo ob predlo?itvi obvestila za objavo prejel e-po?to
+        Urada za publikacije. Ta e-po?ta vsebuje identifikator, ki se lahko uporabi v tej storitvi za izpolnjevanje
+        informacij o postopku in javnemu naro?niku.
+    </entry>
+    <entry key="espd.validator.accept">Vnesite vrednost z veljavno kon?nico.</entry>
+    <entry key="espd.validator.creditcard">Vnesite veljavno ?tevilko kreditne kartice.</entry>
+    <entry key="espd.validator.date">Vnesite veljaven datum.</entry>
+    <entry key="espd.validator.dateISO">Vnesite veljaven datum (ISO).</entry>
+    <entry key="espd.validator.digits">Vnesite samo ?tevilke.</entry>
+    <entry key="espd.validator.email">Vnesite veljaven e-naslov.</entry>
+    <entry key="espd.validator.equalTo">Ponovno vnesite isto vrednost.</entry>
+    <entry key="espd.validator.max">Vnesite vrednost, ki je manj?a ali enaka {0}.</entry>
+    <entry key="espd.validator.maxlength">Najve?je ?tevilo znakov je {0}.</entry>
+    <entry key="espd.validator.min">Vnesite vrednost, ki je ve?ja ali enaka {0}.</entry>
+    <entry key="espd.validator.minlength">Najmanj?e ?tevilo znakov je {0}.</entry>
+    <entry key="espd.validator.number">Vnesite veljavno ?tevilko.</entry>
+    <entry key="espd.validator.range">Vnesite vrednost med {0} in {1}.</entry>
+    <entry key="espd.validator.rangelength">Vnesite vrednost, ki vsebuje od {0} do {1} znakov.</entry>
+    <entry key="espd.validator.remote">Popravite to polje.</entry>
+    <entry key="espd.validator.required">To polje je obvezno.</entry>
+    <entry key="espd.validator.url">Vnesite veljaven URL.</entry>
+    <entry key="espd.gui.view.ca">Pogled: Javni naro?nik</entry>
+    <entry key="espd.gui.view.eo">Pogled: Gospodarski subjekt</entry>
+    <entry key="espd.gui.yes">Da</entry>
+    <entry key="espd.gui.zip.instructions">To je kratek pregled datotek ESPD, ki jih boste na?li v tej mapi
+        ZIP.Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nespd.XML: Datoteka XML je datoteka, katero je mo?no obdelati v okviru
+        storitve ESPD ali druge storitve zdru?ljive z ESPD. Prednost uporabe elektronskega dokumenta eESPD kot datoteke
+        XML je, da jo kupci in podjetja lahko ponovno uporabijo za druge postopke v prihodnosti. Treba jo je poslati
+        skupaj z dokumentacijo v zvezi z oddajo javnega naro?ila (javni naro?nik podjetju) ali kot del ponudbe (podjetje
+        javnemu naro?niku).Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nespd.PDF: Datoteka PDF je elektronski dokument eESPD v
+        ?loveku berljivi obliki. Tudi tu predlagamo, da se uporablja kot referen?ni dokument skupaj s formatom XML z
+        dokumentacijo v zvezi z oddajo javnega naro?ila (javni naro?nik podjetju) ali kot del ponudbe (podjetje javnemu
+        naro?niku).Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)n?e imate vpra?anja o datotekah, nam pi?ite na e-naslov:
+        grow-espd@ec.europa.eu.
+    </entry>
+
+</properties>

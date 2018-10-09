@@ -1,0 +1,58 @@
+<!-- /*--><root>
+/*CSS-Definitionen fuer die Bekanntmachung*/
+/*Diese Zeilen stehen lassen, damit die CSS-Datei in dem XSL eingebunden werden kann!<![CDATA[<!--*/
+-->
+
+.procedure-details {
+    /*Falls die Font-Family geaendert wird, beachten, dass die PDF-Erzeugung auf Arial reagiert.*/
+    font-family: Arial, Verdana, Helvetica, sans-serif;
+    line-height: 1.4em;
+    font-size: 14px;
+    color: #000000;
+    max-width: 980px;
+    margin: 0 auto;
+    padding-top: 20px;
+}
+
+.procedure-details * {
+    box-sizing: border-box;
+}
+
+.procedure-details *:after,
+.procedure-details *:before {
+    box-sizing: border-box;
+}
+
+.procedure-details h2 {
+    /*User-Agent-Setting ueberschrieben*/
+    margin: 0 0 20px 0;
+}
+
+.procedure-details h3,
+.procedure-details h4,
+.procedure-details h5 {
+    /*User-Agent-Setting ueberschrieben*/
+    margin: 0 0 10px 0;
+}
+
+.procedure-details p {
+    line-height: 1.4em;
+    margin: 0 0 5px 0;
+}
+
+.procedure-details a {
+    color: #000000;
+    outline: none;
+    cursor: pointer;
+    font-size: 15px;
+    text-decoration: underline;
+}
+
+.procedure-details a:hover,
+.procedure-details a:focus {
+    color: #000000;
+    text-decoration: none;
+}
+
+<!-- /*-->]]>Diese Zeilen stehen lassen, damit die CSS-Datei in dem XSL eingebunden werden kann!</root><!--*/
+-->

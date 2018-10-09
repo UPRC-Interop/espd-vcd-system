@@ -1,0 +1,974 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+Es wir hier explizit auf einen DocType verzichten um diese Datei in der Transformation nutzen zu koennen, ohne das sie gegen die properties.dtd geprüft wird.
+Wenn die Datei als Properties gezogen wird, wird ein DocType zur Laufzeit eingetragen.
+-->
+<properties>
+    <entry key="espd.gui.about">Informácie</entry>
+    <entry key="espd.part4.all.selection.switch">?: Globálny údaj pre v?etky podmienky ú?asti</entry>
+    <entry key="espd.gui.app.environment">Vá?ený pou?ívate?, nachádzate sa v na?om testovacom prostredí. Prosím,
+        prejdite na:
+    </entry>
+    <entry key="espd.gui.app.subtitle">Slu?ba na vyplnenie a opätovné pou?itie JED</entry>
+    <entry key="espd.gui.app.title">Jednotný európsky dokument pre obstarávanie (JED)</entry>
+    <entry key="espd.gui.back.to.main">Spä? na hlavnú stránku</entry>
+    <entry key="espd.gui.cancel">Zru?i?</entry>
+    <entry key="espd.gui.click.here">kliknite sem.</entry>
+    <entry key="espd.gui.contact">Kontaktné údaje</entry>
+    <entry key="espd.gui.contact.header">Kontaktné údaje</entry>
+    <entry key="espd.gui.contact.info">&lt;p&gt;Európska komisia
+        &lt;p&gt;
+        Generálne riadite?stvo pre vnútorný trh, priemysel, podnikanie a MSP&lt;p&gt;Avenue d'Auderghem 45 / Oudergemselaan 45
+        &lt;p&gt;
+        B-1049 Brusel
+        &lt;p&gt;
+        Belgicko
+    </entry>
+    <entry key="espd.gui.cookies">Súbory cookie</entry>
+    <entry key="espd.gui.correct.errors">Predtým, ako budete pokra?ova?, musíte opravi? chyby.</entry>
+    <entry key="espd.part1.city">Mesto:</entry>
+    <entry key="espd.part1.confirm.email">Potvr?te e-mail:</entry>
+    <entry key="espd.part1.confirm.telephone">Potvr?te telefónne ?íslo:</entry>
+    <entry key="espd.part1.contact.details.ca">Identifikácia obstarávate?a</entry>
+    <entry key="espd.part1.contact.person">Kontaktná osoba:</entry>
+    <entry key="espd.part1.correct.errors">Predtým, ako budete pokra?ova?, musíte opravi? chyby.</entry>
+    <entry key="espd.part1.country">Krajina:</entry>
+    <entry key="espd.part1.email">E-mail:</entry>
+    <entry key="espd.part1.fax">fax</entry>
+    <entry key="espd.part1.file.ref.ca">Referen?né ?íslo spisu, ktoré pridelil verejný obstarávate? alebo obstarávate?
+        (ak existuje):
+    </entry>
+    <entry key="espd.part1.header">?as? I: Informácie týkajúce sa postupu verejného obstarávania a verejného
+        obstarávate?a alebo obstarávate?a
+    </entry>
+    <entry key="espd.part1.info.procedure">procedúra</entry>
+    <entry key="espd.part1.info.procurement.proc">Informácie o postupe verejného obstarávania</entry>
+    <entry key="espd.part1.info.pub">Informácie o uverejnení</entry>
+    <entry key="espd.part1.name">Úradný názov:</entry>
+    <entry key="espd.part1.nat.regnum">Národné registra?né ?íslo (ak je známe):</entry>
+    <entry key="espd.part1.official.journal.alert">Ak výzva na sú?a? nebola zverejnená v Úradnom vestníku Európskej únie
+        alebo ak ju nie je potrebné vo vestníku zverejni?, verejný obstarávate? alebo obstarávate? musí vyplni? údaje
+        umo??ujúce jednozna?nú identifikáciu postupu verejného obstarávania (napr. odkaz na uverejnenie na vnútro?tátnej
+        úrovni)
+    </entry>
+    <entry key="espd.part1.ojs.label">?íslo oznámenia v Úradnom vestníku S:</entry>
+    <entry key="espd.part1.ojs.url">Adresa URL Úradného vestníka S:</entry>
+    <entry key="espd.part1.postcode">PS?:</entry>
+    <entry key="espd.part1.procurer.name">Názov:</entry>
+    <entry key="espd.part1.street.and. num">Ulica a ?íslo:</entry>
+    <entry key="espd.part1.ted.reception.id">Toto je krátka dokumentácia týkajúca sa súborov jednotného európskeho
+        dokumentu pre obstarávanie, ktoré nájdete v tomto prie?inku ZIP.Chr(92)
+    </entry>
+    <entry key="espd.part1.telephone">Telefón:</entry>
+    <entry key="espd.part1.title.or.short.desc">Stru?ný opis:</entry>
+    <entry key="espd.part1.to.be.filled.alert">V prípade postupov verejného obstarávania, pri ktorých bola výzva na
+        sú?a? uverejnená v Úradnom vestníku Európskej únie, sa informácie po?adované v ?asti I zobrazia automaticky za
+        predpokladu, ?e na vytvorenie a vyplnenie JED sa pou?ije elektronická slu?ba JED. Referen?né ?íslo príslu?ného
+        oznámenia uverejneného v Úradnom vestníku Európskej únie:
+    </entry>
+    <entry key="espd.part1.website">Webové sídlo (ak existuje):</entry>
+    <entry key="espd.part3.grounds.criminal.conv">Dôvody týkajúce sa odsúdení za trestný ?in</entry>
+    <entry key="espd.part3.header">?as? III: Dôvody na vylú?enie</entry>
+    <entry key="espd.part3.insolvency.conflicts">Dôvody týkajúce sa konkurzu, konfliktu záujmov alebo odborného
+        pochybenia
+    </entry>
+    <entry key="espd.part5.concl.statements">?as? VI: Závere?né vyhlásenia</entry>
+    <entry key="espd.part5.concl.statements.signature">Dátum, miesto a, ak sa to vy?aduje alebo je to potrebné,
+        podpis(-y):
+    </entry>
+    <entry key="espd.part5.concl.statements.text">Podpísaný(podpísaní) vyhlasuje(-ú), ?e informácie uvedené v ?astiach
+        II ? V sú pravdivé a správne a ?e boli uvedené pri plnom vedomí následkov záva?ného skres?ovania skuto?ností.&lt;p&gt;
+            Podpísaný(podpísaní) vyhlasuje(-ú), ?e na po?iadanie okam?ite predlo?í(-ia) uvedené osved?enia a ostatné
+            formy listinných dôkazov, okrem prípadov, ke?:
+        &lt;/p&gt;
+        &lt;p&gt;a) verejný obstarávate? alebo obstarávate? má mo?nos? získa? sprievodnú dokumentáciu priamo na základe
+            prístupu do vnútro?tátnej databázy v ktoromko?vek ?lenskom ?táte, ktorá je dostupná bezplatne [pod
+            podmienkou, ?e hospodársky subjekt poskytol potrebné informácie (webová adresa, vydávajúci orgán alebo
+            subjekt, presný odkaz na dokumentáciu), ktoré umo??ujú verejnému obstarávate?ovi alebo obstarávate?ovi, aby
+            tak urobili. V prípade potreby to musí by? sprevádzané príslu?ným súhlasom s takýmto prístupom], alebo
+        &lt;/p&gt;
+        &lt;p&gt;b) najneskôr do 18. októbra 2018 (v závislosti od vnútro?tátnej implementácie ?lánku 59 ods. 5 druhého
+            pododseku smernice 2014/24/EÚ) bude ma? verejný obstarávate? alebo obstarávate? príslu?nú dokumentáciu k
+            dispozícii.
+        &lt;/p&gt;
+        &lt;p&gt;Ja(my), dolupodpísaný(dolupodpísaní) formálne súhlasím(-e), aby [identifikujte verejného obstarávate?a alebo
+            obstarávate?a, ako je stanovený v ?asti I oddiele A] získal prístup k podporným dokumentom obsahujúcim
+            informácie, ktoré som(sme) poskytol(poskytli) v [identifikujte príslu?nú ?as?/oddiel/body] tohto jednotného
+            európskeho dokumentu pre obstarávanie na ú?ely [identifikujte postup obstarávania: (opis zhrnutia, odkaz na
+            uverejnenie v Úradnom vestníku Európskej únie, referen?né ?íslo)].
+        &lt;/p&gt;
+    </entry>
+    <entry key="espd.part5.export">Exportova?</entry>
+    <entry key="espd.part5.export.content">Teraz mô?ete kliknutím na polo?ku ?Exportova?? stiahnu? a ulo?i? súbor JED do
+        svojho po?íta?a. Verejní obstarávatelia musia zabezpe?i?, aby bol tento súbor JED dostupný pre hospodárske
+        subjekty spolu s inými sú?a?nými podkladmi.
+    </entry>
+    <entry key="espd.part5.header">Koniec</entry>
+    <entry key="espd.part5.reduction">?as? V: Zní?enie po?tu kvalifikovaných uchádza?ov</entry>
+    <entry key="espd.part5.reduction.question">Hospodársky subjekt vyhlasuje, ?e:</entry>
+    <entry key="espd.part5.text.eo.declares.that">Ak sú niektoré z týchto osved?ení alebo foriem listinných dôkazov k
+        dispozícii v elektronickom formáte, uve?te pre ka?dé z nich:
+    </entry>
+    <entry key="espd.part5.title.eo.declares.that">Sp??a objektívne a nediskrimina?né kritériá alebo pravidlá, ktoré sa
+        budú uplat?ova? s cie?om obmedzi? po?et kandidátov, a to týmto spôsobom:&lt;p&gt;V prípade, ?e sa vy?adujú ur?ité
+            osved?enia alebo iné formy listinných dôkazov, pri ka?dom uve?te, ?i má hospodársky subjekt po?adované
+            dokumenty:
+        &lt;/p&gt;
+    </entry>
+    <entry key="espd.part5.toptext">Hospodársky subjekt by mal poskytnú? informácie len vtedy, ke? verejný obstarávate?
+        alebo obstarávate? stanovil objektívne a nediskrimina?né kritériá alebo pravidlá, ktoré sa budú uplat?ova? s
+        cie?om obmedzi? po?et uchádza?ov vyzvaných na predlo?enie ponuky alebo na vedenie dialógu. Tieto informácie,
+        ktoré sa mô?u doplni? po?iadavkami týkajúcimi sa (druhov) osved?ení alebo foriem listinných dôkazov, ktoré sa
+        majú v prípade potreby predlo?i?, sú stanovené v príslu?nom oznámení alebo v sú?a?ných podkladoch uvedených v
+        oznámení. Len v prípade u??ích sú?a?í, sú?a?ných konaní s rokovaním, sú?a?ných dialógov a inovatívnych
+        partnerstiev:
+    </entry>
+    <entry key="espd.part4.alert">Verejní obstarávatelia musia ozna?i?, ktoré podmienky ú?asti sa budú uplat?ova?, a to
+        za?krtnutím polí?ka umiestneného pred príslu?nou podmienkou.
+    </entry>
+    <entry key="espd.part4.economic.and.financial.standing">B: Ekonomické a finan?né postavenie</entry>
+    <entry key="espd.part4.header">?as? IV: Podmienky ú?asti</entry>
+    <entry key="espd.part4.quality.assurance">D: Systémy zabezpe?enia kvality a normy environmentálneho mana?érstva
+    </entry>
+    <entry key="espd.part4.suitability">A: Vhodnos?</entry>
+    <entry key="espd.part4.technical.professional.ability">C: Technická a odborná spôsobilos?</entry>
+    <entry key="espd.part2.add.complete.missing">Vypl?te navy?e aj chýbajúce informácie v ?asti IV, oddieloch A, B, C
+        alebo D, a to pod?a potreby LEN ak sa to vy?aduje v príslu?nom oznámení alebo sú?a?ných podkladoch
+    </entry>
+    <entry key="espd.part2.all.selection.covered">d) Vz?ahuje sa zápis alebo osved?enie na v?etky po?adované podmienky
+        ú?asti?
+    </entry>
+    <entry key="espd.part2.another.vat">Ak sa identifika?né ?íslo pre DPH neuplat?uje, uve?te iné národné identifika?né
+        ?íslo, ak sa vy?aduje a je uplatnite?né
+    </entry>
+    <entry key="espd.part2.answer.following.parts">Odpovedzte na zvy?né ?asti tohto oddielu, oddielu B a v príslu?nom
+        prípade oddielu C tejto ?asti, v prípade potreby vypl?te ?as? V a v ka?dom prípade vypl?te a podpí?te ?as? VI.
+    </entry>
+    <entry key="espd.part2.birth.date">Dátum narodenia</entry>
+    <entry key="espd.part2.birth.place">Miesto narodenia</entry>
+    <entry key="espd.part2.cert.e.avaliable">b) Ak je osved?enie o zápise alebo osved?enie k dispozícii v elektronickom
+        formáte, uve?te:
+    </entry>
+    <entry key="espd.part2.contact.person">Kontaktná osoba alebo osoby:</entry>
+    <entry key="espd.part2.detinfo.of.represent">Ak je to potrebné, uve?te podrobné informácie o zastúpení (jeho forma,
+        rozsah, ú?el...):
+    </entry>
+    <entry key="espd.part2.disworkers.details">Ak sa to vy?aduje, uve?te, do ktorej kategórie alebo kategórií zdravotne
+        postihnutých alebo znevýhodnených pracovníkov patria príslu?ní zamestnanci.
+    </entry>
+    <entry key="espd.part2.doc.e.avaliable">Ak je príslu?ná dokumentácia dostupná v elektronickom formáte, uve?te:
+    </entry>
+    <entry key="espd.part2.email">E-mail:</entry>
+    <entry key="espd.part2.ensure.others.espd">Zaistite, aby príslu?né iné subjekty poskytli osobitný formulár JED.
+    </entry>
+    <entry key="espd.part2.eo.approved.cert">V príslu?ných prípadoch: je hospodársky subjekt zapísaný v úradnom zozname
+        schválených hospodárskych subjektov alebo má rovnocenné osved?enie (napríklad v rámci národného
+        (pred)kvalifika?ného systému)?
+    </entry>
+    <entry key="espd.part2.eo.group.role">a) Uve?te úlohu hospodárskeho subjektu v rámci skupiny (vedúci subjekt,
+        subjekt zodpovedný za osobitné úlohy...):
+    </entry>
+    <entry key="espd.part2.eo.has.cert.soc">e) Bude môc? hospodársky subjekt poskytnú? osved?enie, pokia? ide o platbu
+        príspevkov na sociálne zabezpe?enie a daní, alebo informácie, ktoré verejnému obstarávate?ovi alebo
+        obstarávate?ovi umo?nia získa? toto osved?enie priamo prostredníctvom prístupu do vnútro?tátnej databázy v
+        ktoromko?vek ?lenskom ?táte, ktorá je k dispozícii bezplatne?
+    </entry>
+    <entry key="espd.part2.eo.rely.other.entities">Vyu?íva hospodársky subjekt kapacity iných subjektov, aby mohol
+        splni? podmienky ú?asti stanovené v ?asti IV a prípadne kritériá a pravidlá stanovené ?alej v ?asti V?
+    </entry>
+    <entry key="espd.part2.first.name">Meno</entry>
+    <entry key="espd.part2.header">?as? II: Informácie týkajúce sa hospodárskeho subjektu</entry>
+    <entry key="espd.part2.if.proc.reserved">Len v prípade, ak je verejné obstarávanie vyhradené: je hospodársky subjekt
+        chránená pracovná diel?a, ?sociálny podnik? alebo zabezpe?í plnenie zákazky v rámci programov chránených
+        pracovných miest?
+    </entry>
+    <entry key="espd.part2.info.eo">A: Informácie o hospodárskom subjekte</entry>
+    <entry key="espd.part2.info.reliance">C: Informácie o vyu?ívaní kapacít iných subjektov</entry>
+    <entry key="espd.part2.info.respresent">B: Informácie o zástupcoch hospodárskeho subjektu</entry>
+    <entry key="espd.part2.information.subcontractors">D: Informácie týkajúce sa subdodávate?ov, ktorých kapacity
+        hospodársky subjekt nevyu?íva
+    </entry>
+    <entry key="espd.part2.information.subcontractors.description">Ak áno a pokia? sú známe, uve?te zoznam navrhovaných
+        subdodávate?ov:
+    </entry>
+    <entry key="espd.part2.information.subcontractors.footer">Ak verejný obstarávate? alebo obstarávate? výslovne
+        po?iada o tieto informácie okrem informácií pod?a ?asti I, uve?te informácie po?adované v oddiele A a B tejto
+        ?asti a ?asti III pre ka?dého z príslu?ných subdodávate?ov (kategóriu subdodávate?ov).
+    </entry>
+    <entry key="espd.part2.information.subcontractors.header">(Tento oddiel sa vyplní len vtedy, ak verejný obstarávate?
+        alebo obstarávate? tieto informácie výslovne vy?aduje).
+    </entry>
+    <entry key="espd.part2.information.subcontractors.title">Má hospodársky subjekt v úmysle zada? niektorú ?as? zákazky
+        tretím stranám?
+    </entry>
+    <entry key="espd.part2.internet.addr.if.exists">Internetová adresa (webová adresa) (ak je k dispozícii):</entry>
+    <entry key="espd.part2.is.eo.proc.together">Zú?ast?uje sa hospodársky subjekt na postupe obstarávania spolo?ne s
+        inými subjektmi?
+    </entry>
+    <entry key="espd.part2.is.eo.sized">Hospodársky subjekt je mikropodnik, malý podnik alebo stredný podnik?</entry>
+    <entry key="espd.part2.is.eo.sized.tooltip">Porovnaj odporú?anie Komisie zo 6. mája 2003 týkajúce sa definície
+        mikropodnikov, malých a stredných podnikov (Ú. v. EÚ L 124, 20.5.2003, s. 36). Táto informácia je potrebná len
+        na ?tatistické ú?ely. Mikropodniky: podniky, ktoré zamestnávajú menej ne? 10 osôb a ktorých ro?ný obrat a/alebo
+        celková ro?ná súvaha neprekra?uje 2 milióny EUR. Malé podniky: podniky, ktoré zamestnávajú menej ne? 50 osôb a
+        ktorých ro?ný obrat a/alebo celková ro?ná súvaha neprekra?uje 10 miliónov EUR. Stredné podniky, podniky, ktoré
+        nie sú mikropodnikmi ani malými podnikmi a ktoré zamestnávajú menej ako 250 osôb a ktorých ro?ný obrat
+        nepresahuje 50 miliónov EUR a/alebo celková ro?ná súvaha nepresahuje 43 miliónov EUR.
+    </entry>
+    <entry key="espd.part2.last.name">Priezvisko</entry>
+    <entry key="espd.part2.lots.concerned">V prípade potreby ozna?enie série(-ií), pre ktoré chce hospodársky subjekt
+        predlo?i? ponuky:
+    </entry>
+    <entry key="espd.part2.name">Názov:</entry>
+    <entry key="espd.part2.name.part.group">c) V prípade potreby uve?te názov zú?astnenej skupiny:</entry>
+    <entry key="espd.part2.other.eo.part">b) Uve?te iné hospodárske subjekty, ktoré sa zú?ast?ujú na postupe
+        obstarávania spolo?ne:
+    </entry>
+    <entry key="espd.part2.percentage.disworkers">Aký je zodpovedajúci percentuálny podiel zdravotne postihnutých alebo
+        znevýhodnených pracovníkov?
+    </entry>
+    <entry key="espd.part2.person.empowered">V príslu?nom prípade uve?te meno (-á) a adresu (-y) osoby (osôb) oprávnenej
+        zastupova? hospodársky subjekt na ú?ely tohto postupu obstarávania:
+    </entry>
+    <entry key="espd.part2.pos.act.in.capacity">Pozícia/zastupujúci:</entry>
+    <entry key="espd.part2.postal.adress">Po?tová adresa:</entry>
+    <entry key="espd.part2.provide.regnumber">a) V príslu?nom prípade uve?te príslu?né ?íslo zápisu alebo osved?enia:
+    </entry>
+    <entry key="espd.part2.ref.for.cert">c) Uve?te odkazy, na ktorých je zalo?ený zápis alebo osved?enie, a v príslu?nom
+        prípade klasifikáciu získanú v úradnom zozname:
+    </entry>
+    <entry key="espd.part2.separate.espd.sections.a.b">Predlo?te samostatný formulár JED, v ktorom budú uvedené
+        informácie po?adované v oddiele A a B tejto ?asti a ?asti III pre ka?dý z príslu?ných subjektov, riadne vyplnený
+        a s podpisom príslu?ných subjektov.<p/>Upozor?ujeme, ?e tento formulár by mal zah??a? aj technikov alebo
+        technické orgány, ktoré priamo nepatria k podniku hospodárskeho subjektu, najmä tých, ktorí zodpovedajú za
+        kontrolu kvality, a v prípade verejných zákaziek na práce by mal zah??a? technikov alebo technické orgány, na
+        ktoré sa mô?e hospodársky subjekt obráti? so ?iados?ou o vykonanie práce.<p/>Pokia? je to relevantné pre
+        ?pecifickú kapacitu alebo kapacity, ktoré hospodársky subjekt vyu?íva, uve?te informácie v ?asti IV a V pre
+        ka?dý z príslu?ných subjektov.
+    </entry>
+    <entry key="espd.part2.telephone">Telefón:</entry>
+    <entry key="espd.part2.vat">Identifika?né ?íslo pre DPH, ak sa uplat?uje:</entry>
+    <entry key="espd.part2sel.alert">Hospodársky subjekt by mal poskytnú? informácie len vtedy, ke? verejný obstarávate?
+        alebo obstarávate? v príslu?nom oznámení alebo v sú?a?ných podkladoch uvedených v oznámení vy?adoval tieto
+        podmienky ú?asti.
+    </entry>
+    <entry key="espd.crit.amount">Suma</entry>
+    <entry key="espd.crit.amount.concerned">Príslu?ná suma</entry>
+    <entry key="espd.crit.average.turnover">Vystavite?</entry>
+    <entry key="espd.crit.code">Kód</entry>
+    <entry key="espd.crit.country.member.state">Príslu?ná krajina alebo ?lenský ?tát</entry>
+    <entry key="espd.crit.date">Dátum</entry>
+    <entry key="espd.crit.date.of.conviction">Dátum odsúdenia</entry>
+    <entry key="espd.part3.crit.date.of.conviction.or.decision">Uve?te dátum odsudzujúceho rozsudku alebo rozhodnutia
+    </entry>
+    <entry key="espd.crit.decision.final.and.binding">Ak bolo toto poru?enie povinností preukázané prostredníctvom
+        súdneho alebo správneho rozhodnutia, je toto rozhodnutie kone?né a záväzné?
+    </entry>
+    <entry key="espd.crit.description">Opis</entry>
+    <entry key="espd.crit.do.you.allow.checks">Umo??ujete vykonanie kontrol?</entry>
+    <entry key="espd.crit.end.date">Po?et rokov</entry>
+    <entry key="espd.part3.crit.eu.main.breaching.obligations">V ?lánku 57 ods. 4 smernice 2014/24/EÚ sa stanovujú tieto
+        dôvody vylú?enia
+    </entry>
+    <entry key="espd.part3.crit.eu.eo.main.breaching.obligations">V ?lánku 57 ods. 4 smernice 2014/24/EÚ sa stanovujú
+        tieto dôvody vylú?enia
+    </entry>
+    <entry key="espd.part3.crit.eu.main.purely.national">Uplat?ujú sa ?isto vnútro?tátne dôvody vylú?enia, ktoré sú
+        ?pecifikované v príslu?nom oznámení alebo v sú?a?ných podkladoch?
+    </entry>
+    <entry key="espd.part3.crit.eu.grounds.criminal.conv.main.title">V ?lánku 57 ods. 1 smernice 2014/24/EÚ sa stanovujú
+        tieto dôvody vylú?enia
+    </entry>
+    <entry key="espd.part3.crit.eu.eo.grounds.criminal.conv.main.title">V ?lánku 57 ods. 1 smernice 2014/24/EÚ sa
+        stanovujú tieto dôvody vylú?enia
+    </entry>
+    <entry key="espd.part3.crit.eu.payment.taxes.main.title">V ?lánku 57 ods. 2 smernice 2014/24/EÚ sa stanovujú tieto
+        dôvody vylú?enia
+    </entry>
+    <entry key="espd.part3.crit.eu.eo.payment.taxes.main.title">V ?lánku 57 ods. 2 smernice 2014/24/EÚ sa stanovujú
+        tieto dôvody vylú?enia
+    </entry>
+    <entry key="espd.crit.eu.text.agreement.economic">Uzatvoril hospodársky subjekt dohody s inými hospodárskymi
+        subjektmi s cie?om naru?i? hospodársku sú?a??
+    </entry>
+    <entry key="espd.crit.eu.text.arrangement.creditors">Je hospodársky subjekt vo vyrovnávacom konaní?</entry>
+    <entry key="espd.crit.eu.text.bankrupt">Je hospodársky subjekt v úpadku?</entry>
+    <entry key="espd.crit.eu.text.breaching.obligations.environmental">Poru?il hospodársky subjekt, pod?a svojich
+        vedomostí, svoje povinnosti v oblasti environmentálneho práva? Ako je uvedené na ú?ely tohto obstarávania vo
+        vnútro?tátnom práve, v príslu?nom oznámení alebo v sú?a?ných podkladoch alebo v ?lánku 18 ods. 2 smernice
+        2014/24/EÚ.
+    </entry>
+    <entry key="espd.crit.eu.text.breaching.obligations.labour">Poru?il hospodársky subjekt, pod?a svojich vedomostí,
+        svoje povinnosti v oblasti pracovného práva? Ako je uvedené na ú?ely tohto obstarávania vo vnútro?tátnom práve,
+        v príslu?nom oznámení alebo v sú?a?ných podkladoch alebo v ?lánku 18 ods. 2 smernice 2014/24/EÚ.
+    </entry>
+    <entry key="espd.crit.eu.text.breaching.obligations.social">Poru?il hospodársky subjekt, pod?a svojich vedomostí,
+        svoje povinnosti v oblasti sociálneho práva? Ako je uvedené na ú?ely tohto obstarávania vo vnútro?tátnom práve,
+        v príslu?nom oznámení alebo v sú?a?ných podkladoch alebo v ?lánku 18 ods. 2 smernice 2014/24/EÚ.
+    </entry>
+    <entry key="espd.crit.eu.text.child.labour">Bol samotný hospodársky subjekt alebo osoba, ktorá je ?lenom jeho
+        správneho, riadiaceho alebo kontrolného orgánu alebo ktorá v ?om má právomoc zastupova?, prijíma? rozhodnutia
+        alebo vykonáva? v ?om kontrolu, odsúdený za detskú prácu a iné formy obchodovania s ?u?mi kone?ným rozsudkom
+        vyneseným najviac pred piatimi rokmi, alebo v prípade ktorého sa lehota vylú?enia stanovená priamo v rozsudku
+        na?alej uplat?uje? V zmysle ?lánku 2 smernice Európskeho parlamentu a Rady 2011/36/EÚ z 5. apríla 2011 o
+        prevencii obchodovania s ?u?mi a boji proti nemu a o ochrane obetí obchodovania, ktorou sa nahrádza rámcové
+        rozhodnutie Rady 2002/629/SVV (Ú. v. EÚ L 101, 15.4.2011, s. 1).
+    </entry>
+    <entry key="espd.crit.eu.text.conflict.interest">Vie hospodársky subjekt o akomko?vek konflikte záujmov, ako sa
+        uvádza vo vnútro?tátnych právnych predpisoch, príslu?nom oznámení alebo sú?a?ných podkladoch, vzh?adom na svoju
+        ú?as? na postupe obstarávania?
+    </entry>
+    <entry key="espd.crit.eu.text.corruption">Bol samotný hospodársky subjekt alebo osoba, ktorá je ?lenom jeho
+        správneho, riadiaceho alebo kontrolného orgánu alebo ktorá v ?om má právomoc zastupova?, prijíma? rozhodnutia
+        alebo vykonáva? v ?om kontrolu, odsúdený za korupciu kone?ným rozsudkom vyneseným najviac pred piatimi rokmi,
+        alebo v prípade ktorého sa lehota vylú?enia stanovená priamo v rozsudku na?alej uplat?uje? V zmysle ?lánku 3
+        Dohovoru o boji proti korupcii úradníkov Európskych spolo?enstiev alebo úradníkov ?lenských ?tátov Európskej
+        únie, Ú. v. ES C 195, 25.6.1997, s. 1 a ?lánku 2 ods. 1 rámcového rozhodnutia Rady 2003/568/SVV z 22. júla 2003
+        o boji proti korupcii v súkromnom sektore (Ú. v. EÚ L 192, 31.7.2003, s. 54). Tento dôvod na vylú?enie zah??a aj
+        korupciu v zmysle vnútro?tátnych právnych predpisov verejného obstarávate?a (obstarávate?a) alebo hospodárskeho
+        subjektu.
+    </entry>
+    <entry key="espd.crit.eu.text.early.termination">Stalo sa hospodárskemu subjektu, ?e predchádzajúca verejná zákazka,
+        predchádzajúca verejná zákazka s obstarávate?om alebo predchádzajúca koncesná zmluva bola ukon?ená pred?asne,
+        alebo ?e do?lo k ?kode alebo iným porovnate?ným sankciám v súvislosti s touto predchádzajúcou zákazkou?
+    </entry>
+    <entry key="espd.crit.eu.text.fraud">Bol samotný hospodársky subjekt alebo osoba, ktorá je ?lenom jeho správneho,
+        riadiaceho alebo kontrolného orgánu alebo ktorá v ?om má právomoc zastupova?, prijíma? rozhodnutia alebo
+        vykonáva? v ?om kontrolu, odsúdený za podvod kone?ným rozsudkom vyneseným najviac pred piatimi rokmi, alebo v
+        prípade ktorého sa lehota vylú?enia stanovená priamo v rozsudku na?alej uplat?uje? V zmysle ?lánku 1 Dohovoru o
+        ochrane finan?ných záujmov Európskych spolo?enstiev (Ú. v. ES C 316, 27.11.1995, s. 48).
+    </entry>
+    <entry key="espd.crit.eu.text.grounds.criminal.conv">Bol samotný hospodársky subjekt alebo osoba, ktorá je ?lenom
+        jeho správneho, riadiaceho alebo kontrolného orgánu alebo ktorá v ?om má právomoc zastupova?, prijíma?
+        rozhodnutia alebo vykonáva? v ?om kontrolu, odsúdený za ú?as? v zlo?ineckej organizácii kone?ným rozsudkom
+        vyneseným najviac pred piatimi rokmi, alebo v prípade ktorého sa lehota vylú?enia stanovená priamo v rozsudku
+        na?alej uplat?uje? V zmysle ?lánku 2 rámcového rozhodnutia Rady 2008/841/SVV z 24. októbra 2008 o boji proti
+        organizovanému zlo?inu (Ú. v. EÚ L 300, 11.11.2008, s. 42).
+    </entry>
+    <entry key="espd.crit.eu.text.guilty.misconduct">Dopustil sa hospodársky subjekt záva?ného odborného pochybenia? V
+        prípade potreby pozri definície vo vnútro?tátnom práve, príslu?nom oznámení alebo v sú?a?ných podkladoch.
+    </entry>
+    <entry key="espd.crit.eu.text.guilty.misinterpretation">Nachádza sa hospodársky subjekt v jednej z týchto situácií?:
+        <p/>a) je vinný zo záva?ného skreslenia pri predkladaní informácií vy?adovaných na overenie neexistencie dôvodov
+        na vylú?enie alebo splnenia podmienok ú?asti,<p/>b) zadr?al takéto informácie,<p/>c) nebol schopný bezodkladne
+        predlo?i? podporné dokumenty po?adované verejným obstarávate?om alebo obstarávate?om a<p/>d) nenále?ite
+        ovplyv?oval rozhodovací proces verejného obstarávate?a alebo obstarávate?a s cie?om získa? dôverné informácie,
+        ktoré mu mô?u poskytnú? nenále?ité výhody v rámci postupu verejného obstarávania, alebo z nedbalosti neposkytol
+        zavádzajúce informácie, ktoré mô?u ma? podstatný vplyv na rozhodnutia týkajúce sa vylú?enia, výberu alebo
+        zadania zákazky?
+    </entry>
+    <entry key="espd.crit.eu.text.insolvency">Je hospodársky subjekt v konkurze alebo v likvidácii?</entry>
+    <entry key="espd.crit.eu.text.involvement">Poskytoval hospodársky subjekt alebo podnik súvisiaci s hospodárskym
+        subjektom poradenstvo verejnému obstarávate?ovi alebo obstarávate?ovi alebo bol iným spôsobom zapojený do
+        prípravy postupu obstarávania?
+    </entry>
+    <entry key="espd.crit.eu.text.liquidator">Spravuje aktíva hospodárskeho subjektu likvidátor alebo súd?</entry>
+    <entry key="espd.crit.eu.text.money.laundering">Bol samotný hospodársky subjekt alebo osoba, ktorá je ?lenom jeho
+        správneho, riadiaceho alebo kontrolného orgánu alebo ktorá v ?om má právomoc zastupova?, prijíma? rozhodnutia
+        alebo vykonáva? v ?om kontrolu, odsúdený za pranie ?pinavých pe?azí alebo financovanie terorizmu kone?ným
+        rozsudkom vyneseným najviac pred piatimi rokmi, alebo v prípade ktorého sa lehota vylú?enia stanovená priamo v
+        rozsudku na?alej uplat?uje? V zmysle ?lánku 1 smernice Európskeho parlamentu a Rady 2005/60/ES z 26. októbra
+        2005 o predchádzaní vyu?ívania finan?ného systému na ú?ely prania ?pinavých pe?azí a financovania terorizmu (Ú.
+        v. EÚ L 309, 25.11.2005, s. 15).
+    </entry>
+    <entry key="espd.crit.eu.text.national.bankruptcy">Je hospodársky subjekt v akejko?vek podobnej situácii ako úpadok
+        vyplývajúcej z podobného konania pod?a vnútro?tátnych zákonov a iných právnych predpisov?
+    </entry>
+    <entry key="espd.crit.eu.text.payment.social.security">Poru?il hospodársky subjekt svoje povinnosti týkajúce sa
+        platby príspevkov na sociálne zabezpe?enie v krajine, v ktorej má sídlo, a v ?lenskom ?táte verejného
+        obstarávate?a alebo obstarávate?a, ak je iná ako krajina sídla?
+    </entry>
+    <entry key="espd.crit.eu.text.payment.taxes">Poru?il hospodársky subjekt svoje povinnosti týkajúce sa platby daní v
+        krajine, v ktorej má sídlo, a v ?lenskom ?táte verejného obstarávate?a alebo obstarávate?a, ak je iná ako
+        krajina sídla?
+    </entry>
+    <entry key="espd.crit.eu.text.purely.national">Iné dôvody na vylú?enie, ktoré mô?u by? stanovené vo vnútro?tátnych
+        právnych predpisoch ?lenského ?tátu verejného obstarávate?a alebo obstarávate?a. Uplat?ujú sa ?isto vnútro?tátne
+        dôvody vylú?enia, ktoré sú ?pecifikované v príslu?nom oznámení alebo v sú?a?ných podkladoch?
+    </entry>
+    <entry key="espd.crit.eu.text.suspended.business">Sú podnikate?ské ?innosti hospodárskeho subjektu pozastavené?
+    </entry>
+    <entry key="espd.crit.eu.text.terrorist">Bol samotný hospodársky subjekt alebo osoba, ktorá je ?lenom jeho
+        správneho, riadiaceho alebo kontrolného orgánu alebo ktorá v ?om má právomoc zastupova?, prijíma? rozhodnutia
+        alebo vykonáva? v ?om kontrolu, odsúdený za teroristické trestné ?iny alebo trestné ?iny spojené s
+        teroristickými ?innos?ami kone?ným rozsudkom vyneseným najviac pred piatimi rokmi, alebo v prípade ktorého sa
+        lehota vylú?enia stanovená priamo v rozsudku na?alej uplat?uje? V zmysle ?lánkov 1 a 3 rámcového rozhodnutia
+        Rady z 13. júna 2002 o boji proti terorizmu (Ú. v. ES L 164, 22.6.2002, s. 3). Tento dôvod na vylú?enie zah??a
+        aj podnecovanie alebo napomáhanie alebo navádzanie alebo pokus o spáchanie trestného ?inu v súlade s ?lánkom 4
+        uvedeného rámcového rozhodnutia.
+    </entry>
+    <entry key="espd.crit.eu.title.agreement.economic">Dohody s inými hospodárskymi subjektmi s cie?om naru?i?
+        hospodársku sú?a?
+    </entry>
+    <entry key="espd.crit.eu.title.arrangement.creditors">Vyrovnávacie konanie</entry>
+    <entry key="espd.crit.eu.title.bankrupt">Úpadok</entry>
+    <entry key="espd.part3.crit.eu.eo.bankrupt.title">Je va?a organizácia v úpadku, konkurze, likvidácii alebo vo
+        vyrovnávacom konaní, alebo v akejko?vek podobnej situácii vyplývajúcej z podobného konania pod?a vnútro?tátnych
+        zákonov a predpisov?
+    </entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.environmental">Poru?enie povinností v oblasti environmentálneho
+        práva
+    </entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.environmental.eo">Poru?enie povinností v oblasti
+        environmentálneho práva
+    </entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.labour">Poru?enie povinností v oblasti pracovného práva</entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.social">Poru?enie povinností v oblasti sociálneho práva</entry>
+    <entry key="espd.crit.eu.title.child.labour">Detská práca a iné formy obchodovania s ?u?mi</entry>
+    <entry key="espd.crit.eu.title.conflict.interest">Konflikt záujmov z dôvodu ú?asti na postupe obstarávania</entry>
+    <entry key="espd.crit.eu.title.conflict.interest.eo">Dostala sa va?a organizácia v dôsledku ú?asti na postupe
+        obstarávania do konfliktu záujmov?
+    </entry>
+    <entry key="espd.crit.eu.title.corruption">Korupcia</entry>
+    <entry key="espd.crit.eu.title.early.termination">Pred?asné ukon?enie zmluvy, ?kody alebo iné porovnate?né sankcie
+    </entry>
+    <entry key="espd.crit.eu.title.fraud">Podvod</entry>
+    <entry key="espd.crit.eu.title.grounds.criminal.conv">Ú?as? v zlo?ineckej organizácii</entry>
+    <entry key="espd.crit.eu.title.guilty.misconduct">Dopustenie sa záva?ného odborného pochybenia</entry>
+    <entry key="espd.crit.eu.title.guilty.misconduct.eo">Bola va?a organizácia uznaná za vinnú zo záva?ného odborného
+        pochybenia?
+    </entry>
+    <entry key="espd.crit.eu.title.guilty.misinterpretation">Skreslenie informácií, zadr?anie informácií, neschopnos?
+        predlo?i? po?adované dokumenty a získanie dôverných informácií o tomto postupe
+    </entry>
+    <entry key="espd.crit.eu.title.insolvency">Konkurz</entry>
+    <entry key="espd.crit.eu.title.involvement">Priama alebo nepriama ú?as? na príprave tohto postupu obstarávania
+    </entry>
+    <entry key="espd.crit.eu.title.involvement.eo">Poskytla va?a organizácia alebo hospodársky subjekt, ktorý je s ?ou
+        prepojený, poradenstvo verejnému obstarávate?ovi alebo bola iným spôsobom zapojená do prípravy postupu
+        obstarávania?
+    </entry>
+    <entry key="espd.crit.eu.title.liquidator">Aktíva spravované likvidátorom</entry>
+    <entry key="espd.crit.eu.title.money.laundering">Pranie ?pinavých pe?azí alebo financovanie terorizmu</entry>
+    <entry key="espd.crit.eu.title.national.bankruptcy">Podobná situácia ako úpadok pod?a vnútro?tátneho práva</entry>
+    <entry key="espd.crit.eu.title.payment.social.security">Platba príspevkov na sociálne zabezpe?enie</entry>
+    <entry key="espd.crit.eu.title.payment.taxes">Platba daní</entry>
+    <entry key="espd.crit.eu.title.purely.national">?isto vnútro?tátne dôvody vylú?enia</entry>
+    <entry key="espd.crit.eu.title.suspended.business">Pozastavené podnikate?ské ?innosti</entry>
+    <entry key="espd.crit.eu.title.terrorist">Teroristické trestné ?iny alebo trestné ?iny spojené s teroristickými
+        ?innos?ami
+    </entry>
+    <entry key="espd.part3.crit.eu.guilty.misconduct.eo.tooltip">V prípade potreby pozri definície vo vnútro?tátnom
+        práve, príslu?nom oznámení alebo v sú?a?ných podkladoch
+    </entry>
+    <entry key="espd.crit.explain.certificates.independent.environmental.description">Ak nie, vysvetlite pre?o a uve?te,
+        ktoré iné dôkazné prostriedky týkajúce sa systémov alebo noriem environmentálneho riadenia mo?no poskytnú?:
+    </entry>
+    <entry key="espd.part4.crit.explain.certificates.independent.quality.description">Ak nie, vysvetlite pre?o a uve?te,
+        ktoré iné dôkazné prostriedky týkajúce sa systému zabezpe?enia kvality mo?no poskytnú?:
+    </entry>
+    <entry key="espd.part4.crit.explain.supply.contracts.quality.description">Ak nie, vysvetlite pre?o a uve?te, ktoré
+        iné dôkazné prostriedky mo?no poskytnú?:
+    </entry>
+    <entry key="espd.crit.information.available.electronically">Sú tieto informácie dostupné bezplatne pre orgány z
+        databázy ?lenského ?tátu EÚ?
+    </entry>
+    <entry key="espd.crit.issuer">Stiahnu? ako</entry>
+    <entry key="espd.crit.length.period.exclusion">Uve?te d??ku obdobia vylú?enia, ak je stanovená priamo v rozsudku.
+    </entry>
+    <entry key="espd.crit.number">?íslo</entry>
+    <entry key="espd.crit.number.of.years">Priemerný obrat</entry>
+    <entry key="espd.crit.other.than.judicial.or.administrative.decision">Bolo toto poru?enie povinností preukázané inak
+        ako prostredníctvom súdneho alebo správneho rozhodnutia?
+    </entry>
+    <entry key="espd.crit.please.describe.them">Opí?te ich</entry>
+    <entry key="espd.crit.please.specify">Uve?te</entry>
+    <entry key="espd.crit.ratio">Pomer</entry>
+    <entry key="espd.crit.reason">Dôvod</entry>
+    <entry key="espd.crit.reasons.nevertheless.contract">Uve?te, z akých dôvodov je napriek tomu schopný realizova?
+        zákazku. Tieto informácie sa nemusia uvies?, ak je vylú?enie hospodárskych subjektov v danom prípade povinné
+        pod?a platného vnútro?tátneho práva bez mo?nosti výnimky, ale hospodársky subjekt je aj napriek tomu schopný
+        realizova? zákazku.
+    </entry>
+    <entry key="espd.crit.recipients">Príjemcovia</entry>
+    <entry key="espd.part4.crit.selection.ca.declares.that">V súvislosti s podmienkami ú?asti verejný obstarávate?
+        po?aduje od hospodárskeho subjektu vyhlásenie o tom, ?e
+    </entry>
+    <entry key="espd.part4.crit.selection.ca.economic.article">V ?lánku 58 ods. 3 smernice 2014/24/EÚ sa stanovujú tieto
+        podmienky ú?asti
+    </entry>
+    <entry key="espd.part4.crit.selection.declares.that.tooltip">Hospodársky subjekt by mal vyplni? toto pole iba v
+        prípade, ke? verejný obstarávate? alebo obstarávate? uviedol v príslu?nom oznámení alebo v sú?a?ných podkladoch
+        uvedených v oznámení, ?e hospodársky subjekt mô?e vyplni? tento bod ?asti IV bez toho, aby musel vyplni? oddiely
+        A, B, C alebo D ?asti IV
+    </entry>
+    <entry key="espd.crit.selection.economic.average.yearly.turnover.description">Priemerný ro?ný obrat hospodárskeho
+        subjektu za nieko?ko rokov vy?adovaný v príslu?nom oznámení, sú?a?ných podkladoch alebo v jednotnom európskom
+        dokumente pre obstarávanie je takýto:
+    </entry>
+    <entry key="espd.crit.selection.economic.average.yearly.turnover.main">Priemerný ro?ný obrat</entry>
+    <entry key="espd.crit.selection.economic.financial.ratio.description">Pokia? ide o finan?né ukazovatele uvedené v
+        príslu?nom oznámení, sú?a?ných podkladoch alebo JED (ako napríklad pomer medzi aktívami a pasívami), hospodársky
+        subjekt vyhlasuje, ?e skuto?né hodnoty po?adovaných ukazovate?ov sú takéto:
+    </entry>
+    <entry key="espd.crit.selection.economic.financial.ratio.main">Finan?ný ukazovate?</entry>
+    <entry key="espd.crit.selection.economic.financial.standing.article.tooltip">Hospodársky subjekt by mal poskytnú?
+        informácie len vtedy, ke? verejný obstarávate? alebo obstarávate? v príslu?nom oznámení alebo v sú?a?ných
+        podkladoch uvedených v oznámení vy?adoval tieto podmienky ú?asti.
+    </entry>
+    <entry key="espd.crit.selection.economic.general.yearly.turnover.description">V?eobecný ro?ný obrat hospodárskeho
+        subjektu za nieko?ko finan?ných rokov vy?adovaný v príslu?nom oznámení, sú?a?ných podkladoch alebo jednotnom
+        európskom dokumente pre obstarávanie je takýto:
+    </entry>
+    <entry key="espd.crit.selection.economic.general.yearly.turnover.main">V?eobecný ro?ný obrat</entry>
+    <entry key="espd.crit.selection.economic.other.financial.requirements.description">Pokia? ide o prípadné iné
+        hospodárske alebo finan?né po?iadavky, ktoré by mohli by? stanovené v príslu?nom oznámení alebo v sú?a?ných
+        podkladoch, hospodársky subjekt vyhlasuje, ?e:
+    </entry>
+    <entry key="espd.crit.selection.economic.other.financial.requirements.main">Iné hospodárske alebo finan?né
+        po?iadavky
+    </entry>
+    <entry key="espd.crit.selection.economic.professional.risk.insurance.description">Poistená suma poistenia hmotnej
+        zodpovednosti je takáto:
+    </entry>
+    <entry key="espd.crit.selection.economic.professional.risk.insurance.main">Poistenie hmotnej zodpovednosti</entry>
+    <entry key="espd.crit.selection.economic.setup.eo.description">V prípade, ?e informácie týkajúce sa obratu
+        (v?eobecné alebo osobitné) nie sú k dispozícii za celé po?adované obdobie, uve?te dátum, ke? bol hospodársky
+        subjekt zriadený alebo za?al vykonáva? svoju ?innos?:
+    </entry>
+    <entry key="espd.crit.selection.economic.setup.eo.main">Zriadenie hospodárskeho subjektu</entry>
+    <entry key="espd.crit.selection.economic.specific.average.turnover.description">Osobitný priemerný ro?ný obrat
+        hospodárskeho subjektu v danej oblasti ?innosti, na ktorú sa vz?ahuje zmluva, za nieko?ko rokov vy?adovaný v
+        príslu?nom oznámení, sú?a?ných podkladoch alebo jednotnom európskom dokumente pre obstarávanie je takýto:
+    </entry>
+    <entry key="espd.crit.selection.economic.specific.average.turnover.main">Osobitný priemerný obrat</entry>
+    <entry key="espd.crit.selection.economic.specific.yearly.turnover.description">Osobitný ro?ný obrat hospodárskeho
+        subjektu v oblasti ?innosti, na ktorú sa vz?ahuje zmluva, za nieko?ko finan?ných rokov po?adovaný v príslu?nom
+        oznámení, sú?a?ných podkladoch alebo jednotnom európskom dokumente pre obstarávanie je takýto:
+    </entry>
+    <entry key="espd.crit.selection.economic.specific.yearly.turnover.main">Osobitný ro?ný obrat</entry>
+    <entry key="espd.part4.crit.selection.eo.declares.that">V súvislosti s podmienkami ú?asti hospodársky subjekt
+        vyhlasuje, ?e
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.declares.that.tooltip">Hospodársky subjekt by mal vyplni? toto pole iba v
+        prípade, ke? verejný obstarávate? alebo obstarávate? uviedol v príslu?nom oznámení alebo v sú?a?ných podkladoch
+        uvedených v oznámení, ?e hospodársky subjekt mô?e vyplni? tento bod ?asti IV bez toho, aby musel vyplni? oddiely
+        A, B, C alebo D ?asti IV
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.economic.article">V ?lánku 58 ods. 3 smernice 2014/24/EÚ sa stanovujú tieto
+        podmienky ú?asti
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.economic.article.tooltip">Hospodársky subjekt by mal poskytnú? informácie
+        len vtedy, ke? verejný obstarávate? alebo obstarávate? v príslu?nom oznámení alebo v sú?a?ných podkladoch
+        uvedených v oznámení vy?adoval tieto podmienky ú?asti.
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.economic.enrolement.description">Je zapísaný v príslu?ných profesijných
+        alebo obchodných registroch vedených v ?lenskom ?táte, v ktorom má hospodársky subjekt sídlo
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.economic.enrolement.main">Zápis do profesijných alebo obchodných
+        registrov
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.economic.service.contracts.description">Je osobitné povolenie alebo
+        ?lenstvo v konkrétnej organizácii potrebné na to, aby bolo mo?né poskytova? príslu?né slu?by v krajine, v ktorej
+        má hospodársky subjekt sídlo?
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.economic.service.contracts.main">V prípade zákaziek na poskytnutie slu?ieb:
+        Potreba povolenia alebo ?lenstva
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.satisfies.all.criteria">Sp??a v?etky po?adované podmienky ú?asti</entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.article">V ?lánku 58 ods. 2 smernice 2014/24/EÚ sa stanovujú
+        tieto podmienky ú?asti
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.article.tooltip">Hospodársky subjekt by mal poskytnú?
+        informácie len vtedy, ke? verejný obstarávate? alebo obstarávate? v príslu?nom oznámení alebo v sú?a?ných
+        podkladoch uvedených v oznámení vy?adoval tieto podmienky ú?asti.
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.enrolment.description">Je zapísaný v príslu?ných profesijných
+        alebo obchodných registroch vedených v ?lenskom ?táte, v ktorom má hospodársky subjekt sídlo
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.enrolment.main">Zápis do profesijných alebo obchodných
+        registrov
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.service.contracts.description">Je osobitné povolenie alebo
+        ?lenstvo v konkrétnej organizácii potrebné na to, aby bolo mo?né poskytova? príslu?né slu?by v krajine, v ktorej
+        má hospodársky subjekt sídlo?
+    </entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.service.contracts.main">V prípade zákaziek na poskytnutie
+        slu?ieb: Potreba povolenia alebo ?lenstva
+    </entry>
+    <entry key="espd.part4.crit.selection.quality.assurance.article">V ?lánku 62 ods. 2 smernice 2014/24/EÚ sa stanovujú
+        tieto podmienky ú?asti
+    </entry>
+    <entry key="espd.part4.crit.selection.quality.assurance.tooltip">Hospodársky subjekt by mal poskytnú? informácie len
+        vtedy, ke? verejný obstarávate? alebo obstarávate? v príslu?nom oznámení alebo v sú?a?ných podkladoch uvedených
+        v oznámení vy?adoval tieto podmienky ú?asti.
+    </entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.environmental.description">Bude môc?
+        hospodársky subjekt predlo?i? osved?enia vydané nezávislými orgánmi, v ktorých sa potvrdzuje, ?e hospodársky
+        subjekt dodr?iava po?adované systémy alebo normy environmentálneho riadenia?
+    </entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.environmental.main">Osved?enia od nezávislých
+        orgánov o systémoch alebo normách environmentálneho riadenia
+    </entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.quality.description">Bude môc? hospodársky
+        subjekt predlo?i? osved?enia vydané nezávislými orgánmi, v ktorých sa potvrdzuje, ?e hospodársky subjekt sp??a
+        po?adované normy zabezpe?enia kvality vrátane prístupu pre osoby so zdravotným postihnutím?
+    </entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.quality.main">Osved?enia od nezávislých
+        orgánov o normách zabezpe?enia kvality
+    </entry>
+    <entry key="espd.part4.crit.selection.satisfies.all.criteria">Sp??a v?etky po?adované podmienky ú?asti uvedené v
+        príslu?nom oznámení alebo v sú?a?ných podkladoch uvedených v oznámení.
+    </entry>
+    <entry key="espd.part4.crit.selection.suitability.article">V ?lánku 58 ods. 2 smernice 2014/24/EÚ sa stanovujú tieto
+        podmienky ú?asti
+    </entry>
+    <entry key="espd.part4.crit.selection.suitability.article.tooltip">Hospodársky subjekt by mal vyplni? toto pole iba
+        v prípade, ke? verejný obstarávate? alebo obstarávate? uviedol v príslu?nom oznámení alebo v sú?a?ných
+        podkladoch uvedených v oznámení, ?e hospodársky subjekt mô?e vyplni? oddiel ? ?asti IV bez toho, aby musel
+        vyplni? ostatné oddiely ?asti IV:
+    </entry>
+    <entry key="espd.crit.selection.suitability.enrolment.professional.register.description">Je zapísaný v príslu?ných
+        profesijných registroch vedených v ?lenskom ?táte, v ktorom má hospodársky subjekt sídlo, v súlade s prílohou XI
+        k smernici 2014/24/EÚ; na hospodárske subjekty z ur?itých ?lenských ?tátov sa mô?e vz?ahova? povinnos?
+        dodr?iava? iné po?iadavky stanovené v uvedenej prílohe.
+    </entry>
+    <entry key="espd.crit.selection.suitability.enrolment.professional.register.main">Zápis v príslu?nom profesijnom
+        registri
+    </entry>
+    <entry key="espd.crit.selection.suitability.enrolment.trade.register.description">Je zapísaný príslu?ných v
+        obchodných registroch vedených v ?lenskom ?táte, v ktorom má hospodársky subjekt sídlo, v súlade s prílohou XI k
+        smernici 2014/24/EÚ; na hospodárske subjekty z ur?itých ?lenských ?tátov sa mô?e vz?ahova? povinnos? dodr?iava?
+        iné po?iadavky stanovené v uvedenej prílohe.
+    </entry>
+    <entry key="espd.crit.selection.suitability.enrolment.trade.register.main">Zápis v obchodnom registri</entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.auth.description">Je na to, aby bolo v krajine, v
+        ktorej má hospodársky subjekt sídlo, mo?né poskytova? príslu?né slu?by, potrebné osobitné povolenie?
+    </entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.auth.main">V prípade zákaziek na poskytnutie slu?ieb:
+        je potrebné osobitné povolenie
+    </entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.membership.description">Je na to, aby bolo v krajine,
+        v ktorej má hospodársky subjekt sídlo, mo?né poskytova? príslu?né slu?by, potrebné osobitné ?lenstvo v
+        konkrétnej organizácii?
+    </entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.membership.main">V prípade zákaziek na poskytnutie
+        slu?ieb: potrebné ?lenstvo v konkrétnej organizácii
+    </entry>
+    <entry key="espd.crit.selection.technical.allowance.of.checks.description">V prípade zlo?itých výrobkov alebo
+        slu?ieb, ktoré majú by? dodané alebo poskytnuté, alebo výnimo?ne v prípade výrobkov alebo slu?ieb, ktoré sú
+        po?adované na osobitný ú?el: Umo?ní hospodársky subjekt vykonanie kontrol výrobných kapacít alebo technickej
+        spôsobilosti hospodárskeho subjektu a v prípade potreby ?tudijných a výskumných prostriedkov, ktoré má k
+        dispozícii, ako aj opatrení kontroly kvality? Kontrolu má vykona? verejný obstarávate? alebo v prípade, ?e
+        verejný obstarávate? vyjadrí súhlas, v jeho mene príslu?ný úradný orgán ?tátu, v ktorom má poskytovate? slu?ieb
+        alebo dodávate? sídlo.
+    </entry>
+    <entry key="espd.crit.selection.technical.allowance.of.checks.main">Umo?nenie vykonania kontrol</entry>
+    <entry key="espd.crit.selection.technical.average.annual.manpower.description">Ro?ný priemerný po?et zamestnancov
+        hospodárskeho subjektu za posledné tri roky je takýto:
+    </entry>
+    <entry key="espd.crit.selection.technical.average.annual.manpower.main">Ro?ný priemerný po?et zamestnancov</entry>
+    <entry key="espd.crit.selection.technical.educational.professional.qualifications.description">Samotný poskytovate?
+        slu?ieb alebo zhotovite? a/alebo (v závislosti od po?iadaviek uvedených v príslu?nom oznámení alebo v sú?a?ných
+        podkladoch) jeho riadiaci pracovníci musia ma? takéto vzdelanie a odbornú kvalifikáciu.
+    </entry>
+    <entry key="espd.crit.selection.technical.educational.professional.qualifications.main">Vzdelanie a odborná
+        kvalifikácia
+    </entry>
+    <entry key="espd.crit.selection.technical.environment.management.features.description">Hospodársky subjekt bude pri
+        plnení zákazky schopný uplat?ova? tieto opatrenia environmentálneho riadenia:
+    </entry>
+    <entry key="espd.crit.selection.technical.environment.management.features.main">Opatrenia environmentálneho
+        riadenia
+    </entry>
+    <entry key="espd.crit.selection.technical.number.managerial.staff.description">Po?et riadiacich pracovníkov
+        hospodárskeho subjektu za posledné tri roky je takýto:
+    </entry>
+    <entry key="espd.crit.selection.technical.number.managerial.staff.main">Po?et riadiacich pracovníkov</entry>
+    <entry key="espd.part4.crit.selection.technical.professional.ability.article">V ?lánku 58 ods. 4 smernice 2014/24/EÚ
+        sa stanovujú tieto podmienky ú?asti
+    </entry>
+    <entry key="espd.part4.crit.selection.technical.professional.ability.article.tooltip">Hospodársky subjekt by mal
+        poskytnú? informácie len vtedy, ke? verejný obstarávate? alebo obstarávate? v príslu?nom oznámení alebo v
+        sú?a?ných podkladoch uvedených v oznámení vy?adoval tieto podmienky ú?asti.
+    </entry>
+    <entry key="espd.crit.selection.technical.service.contracts.performance.services.description">Len v prípade
+        verejných zákaziek na poskytnutie slu?by: Po?as referen?ného obdobia hospodársky subjekt poskytol tieto hlavné
+        slu?by stanoveného typu. Verejní obstarávatelia mô?u po?adova? a? tri roky a umo?ni? skúsenosti z obdobia viac
+        ako tri roky.
+    </entry>
+    <entry key="espd.crit.selection.technical.service.contracts.performance.services.main">V prípade zákaziek na
+        poskytnutie slu?ieb: poskytovanie slu?ieb stanoveného typu
+    </entry>
+    <entry key="espd.crit.selection.technical.study.research.facilities.description">Hospodársky subjekt vyu?íva
+        ?tudijné a výskumné zariadenia:
+    </entry>
+    <entry key="espd.crit.selection.technical.study.research.facilities.main">?tudijné a výskumné zariadenia</entry>
+    <entry key="espd.crit.selection.technical.subcontracting.proportion.description">Hospodársky subjekt má v úmysle
+        prípadne zada? subdodávate?om túto ?as? (t. j. percento) zákazky. Upozor?ujeme, ?e ak hospodársky subjekt
+        rozhodol, ?e ?as? zákazky zadá subdodávate?om, a vyu?íva kapacity subdodávate?a, aby splnil túto ?as?, potom za
+        týchto subdodávate?ov vypl?te samostatný jednotný európsky dokument pre obstarávanie, pozri oddiel C ?asti II.
+    </entry>
+    <entry key="espd.crit.selection.technical.subcontracting.proportion.main">?as? subdodávky</entry>
+    <entry key="espd.crit.selection.technical.supply.chain.management.description">Hospodársky subjekt bude môc? pri
+        plnení zákazky uplat?ova? tento systém riadenia dodávate?ského re?azca a sledovací systém:
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.chain.management.main">Riadenie dodávate?ského re?azca</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.certificate.quality.description">Mô?e hospodársky subjekt
+        predlo?i? po?adované osved?enia vydané oficiálnymi ústavmi alebo agentúrami na kontrolu kvality, ktoré majú
+        priznanú právomoc vydáva? potvrdenia o zhode výrobkov, ktorá je jasne ur?ená odkazmi na technické ?pecifikácie
+        alebo normami, ktoré sú stanovené v príslu?nom oznámení alebo v sú?a?ných podkladoch?
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.certificate.quality.main">V prípade zákaziek na dodanie
+        tovaru: osved?enia od ústavov na kontrolu kvality
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.performance.deliveries.description">Len v prípade
+        verejných zákaziek na dodanie tovaru: Po?as referen?ného obdobia hospodársky subjekt doru?il tieto hlavné
+        zásielky stanoveného typu. Verejní obstarávatelia mô?u po?adova? a? tri roky a umo?ni? skúsenosti z obdobia viac
+        ako tri roky.
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.performance.deliveries.main">V prípade zákaziek na
+        dodanie tovaru: vykonávanie ur?itého typu dodávok
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.with.ca.description">V prípade verejných zákaziek na
+        dodanie tovaru: Hospodársky subjekt poskytne po?adované vzorky, opisy alebo fotografie tovaru, ktorý sa má
+        doda?, a poskytne v prípade potreby osved?enia o pravosti.
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.with.ca.main">V prípade zákaziek na dodanie tovaru:
+        vzorky, opisy alebo fotografie s osved?ením o pravosti
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.without.ca.description">V prípade verejných zákaziek na
+        dodanie tovaru: Hospodársky subjekt poskytne po?adované vzorky, opisy alebo fotografie tovaru, ktorý sa má
+        doda?, ku ktorým nemusia by? prilo?ené osved?enia o pravosti.
+    </entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.without.ca.main">V prípade zákaziek na dodanie tovaru:
+        vzorky, opisy alebo fotografie bez osved?enia o pravosti
+    </entry>
+    <entry key="espd.crit.selection.technical.technical.facilities.measures.description">Hospodársky subjekt vyu?íva
+        tieto technické zariadenia a opatrenia na zabezpe?enie kvality a jeho ?tudijné a výskumné zariadenia sú:
+    </entry>
+    <entry key="espd.crit.selection.technical.technical.facilities.measures.main">Technické zariadenia a opatrenia na
+        zabezpe?enie kvality
+    </entry>
+    <entry key="espd.crit.selection.technical.technicians.technical.bodies.description">Hospodársky subjekt mô?e
+        po?iada? nasledujúcich technikov alebo technické orgány, najmä tých, ktorí sú zodpovední za kontrolu kvality. V
+        prípade technikov alebo technických orgánov, ktoré nepatria priamo k podniku hospodárskeho subjektu, ale ktorých
+        kapacity hospodársky subjekt vyu?íva, ako je uvedené v ?asti II oddiele C, sa musia vyplni? samostatné formuláre
+        jednotného európskeho dokumentu pre obstarávanie.
+    </entry>
+    <entry key="espd.crit.selection.technical.technicians.technical.bodies.main">Technici alebo technické orgány na
+        kontrolu kvality
+    </entry>
+    <entry key="espd.crit.selection.technical.tools.plant.description">Hospodársky subjekt bude ma? k dispozícii na
+        realizáciu zákazky tieto nástroje, strojové alebo technické vybavenie:
+    </entry>
+    <entry key="espd.crit.selection.technical.tools.plant.main">Nástroje, strojové a technické vybavenie</entry>
+    <entry key="espd.crit.selection.technical.work.contracts.performance.works.description">Len v prípade verejných
+        zákaziek na uskuto?nenie stavebných prác: Po?as referen?ného obdobia hospodársky subjekt vykonal tieto stavebné
+        práce konkrétneho typu. Verejní obstarávatelia mô?u vy?adova? a? pä? rokov a umo?ni? skúsenosti z obdobia viac
+        ako pä? rokov.
+    </entry>
+    <entry key="espd.crit.selection.technical.work.contracts.performance.works.main">V prípade zákaziek na uskuto?nenie
+        stavebných prác: vykonávanie ur?itého typu prác
+    </entry>
+    <entry key="espd.crit.selection.technical.work.contracts.technicians.description">V prípade verejných zákaziek na
+        uskuto?nenie stavebných prác hospodársky subjekt bude môc? vyu?i? týchto technikov alebo technické orgány na
+        vykonanie práce:
+    </entry>
+    <entry key="espd.crit.selection.technical.work.contracts.technicians.main">V prípade zákaziek na uskuto?nenie
+        stavebných prác: technici alebo technické orgány na vykonávanie práce
+    </entry>
+    <entry key="espd.crit.start.date">Dátum ukon?enia</entry>
+    <entry key="espd.crit.taken.self.cleaning.measures">Prijali ste opatrenia, aby ste preukázali svoju spo?ahlivos?
+        (?samoo?istenie?)?
+    </entry>
+    <entry key="espd.crit.taxes.eo.fulfilled.obligations">Splnil hospodársky subjekt svoje povinnosti tým, ?e zaplatil
+        alebo uzavrel záväznú dohodu s cie?om zaplati? splatné dane alebo príspevky na sociálne zabezpe?enie vrátane
+        akýchko?vek prípadných vzniknutých úrokov alebo sankcií?
+    </entry>
+    <entry key="espd.crit.taxes.length.period.of.exclusion">V prípade odsúdenia, pokia? sa stanovuje priamo v rozsudku,
+        aj d??ku obdobia vylú?enia
+    </entry>
+    <entry key="espd.crit.taxes.means.description">Opí?te, aké prostriedky boli pou?ité</entry>
+    <entry key="espd.part3.crit.grounds.criminal.conv.top.title">A: Dôvody týkajúce sa odsúdení za trestný ?in</entry>
+    <entry key="espd.part3.crit.top.grounds.payment.taxes.title">B: Dôvody týkajúce sa platby daní alebo príspevkov na
+        sociálne zabezpe?enie
+    </entry>
+    <entry key="espd.part3.crit.insolvency.conflicts.top.title">C: Dôvody týkajúce sa konkurzu, konfliktu záujmov alebo
+        odborného pochybenia
+    </entry>
+    <entry key="espd.part3.crit.purely.national.top.title">D: ?isto vnútro?tátne dôvody vylú?enia</entry>
+    <entry key="espd.crit.url">URL</entry>
+    <entry key="espd.crit.who.convicted">Toto?nos? osoby, ktorá bola odsúdená</entry>
+    <entry key="espd.crit.year">Rok</entry>
+    <entry key="espd.crit.your.answer">Va?a odpove??</entry>
+    <entry key="espd.gui.download.as">Stiahnu? ako</entry>
+    <entry key="espd.gui.download.pdf">Formát PDF</entry>
+    <entry key="espd.gui.download.xml">Formát XML</entry>
+    <entry key="espd.gui.download.zip">Oba formáty</entry>
+    <entry key="espd.gui.ec">Európska komisia</entry>
+    <entry key="espd.ecertis.404">?iadne údaje v eCERTIS</entry>
+    <entry key="espd.ecertis.issued">Vydávajúci orgán</entry>
+    <entry key="espd.ecertis.language">Jazyk</entry>
+    <entry key="espd.ecertis.loading">Na?ítavanie z eCERTIS...</entry>
+    <entry key="espd.ecertis.no.evidences">Neexistujú ?iadne dôkazy</entry>
+    <entry key="espd.gui.error.ted.notice.not.supported">Nahraný súbor je oznámenie, a nie jednotný európsky dokument
+        pre obstarávanie, a preto nemô?e by? pou?itý s touto slu?bou
+    </entry>
+    <entry key="espd.gui.espd">Nahraný súbor nie je mo?né správne pre?íta?. Je to platná ?iados? alebo odpove? týkajúca
+        sa JED?
+    </entry>
+    <entry key="espd.gui.espd.upload.error">Nahraný súbor nie je mo?né správne pre?íta?. Je to platná ?iados? týkajúca
+        sa JED?
+    </entry>
+    <entry key="espd.gui.espd.upload.request.error">Nahraný súbor nie je mo?né správne pre?íta?. Je to platná odpove?
+        týkajúca sa JED?
+    </entry>
+    <entry key="espd.gui.espd.upload.response.error">Jednotný európsky dokument pre obstarávanie</entry>
+    <entry key="espd.gui.europa">Európa</entry>
+    <entry key="espd.gui.expire.reminder.message">U? takmer hodinu ste v slu?be jednotného európskeho dokumentu pre
+        obstarávanie (ESPD) nevykonali ?iadnu zmenu.&lt;p&gt;Ulo?te si eESPD, aby ste nestratili ?iadne údaje.
+        &lt;p&gt;
+        Svoje eESPD mô?ete kedyko?vek importova? (znova pou?i?) a pokra?ova? v práci.
+    </entry>
+    <entry key="espd.gui.export">Ulo?i?</entry>
+    <entry key="espd.gui.faq.leaflet">?asto kladené otázky</entry>
+    <entry key="espd.gui.faq.text.answers">Odpovede na naj?astej?ie kladené otázky o JED nájdete v tomto dokumente:
+    </entry>
+    <entry key="espd.gui.faq.text.more.info">Ak chcete získa? ?al?ie informácie o jednotnom európskom dokumente pre
+        obstarávanie
+    </entry>
+    <entry key="espd.init.alert">
+        &lt;p&gt;Jednotný európsky dokument pre obstarávanie (JED) je vlastné vyhlásenie podniku o jeho finan?nom stave,
+            schopnostiach a vhodnosti pre postup verejného obstarávania. Je dostupný vo v?etkých jazykoch EÚ a pou?íva
+            sa ako predbe?ný dôkaz o splnení podmienok po?adovaných v rámci postupov verejného obstarávania v celej EÚ.
+            V?aka jednotnému európskemu dokumentu pre obstarávanie u? uchádza?i nemusia predklada? úplné listinné dôkazy
+            a rôzne formuláre, ktoré sa v minulosti v obstarávaní v rámci EÚ pou?ívali, ?o znamená výrazné zjednodu?enie
+            prístupu k cezhrani?ným príle?itostiam verejného obstarávania. Od októbra 2018 bude JED poskytovaný výlu?ne
+            v elektronickej forme.
+        &lt;/p&gt;
+        &lt;p&gt;Európska komisia poskytuje bezplatnú webovú slu?bu pre kupujúcich, uchádza?ov a iné subjekty, ktoré majú
+            záujem vyplni? JED elektronicky. Online formulár je mo?né vyplni?, vytla?i? a potom odosla? kupujúcemu spolu
+            so zvy?kom ponuky. Ak postup prebieha elektronicky, JED je mo?né exportova?, ulo?i? a predlo?i?
+            elektronicky. JED predlo?ený v rámci predchádzajúceho postupu verejného obstarávania je mo?né znovu pou?i?,
+            pokia? sú informácie stále správne. V prípade záva?ného skres?ovania informácií uvedených v JED, zadr?ania
+            takýchto informácií alebo ak nie je mo?né takéto informácie dolo?i? podpornými dokumentmi, mô?u by?
+            uchádza?i vylú?ení z postupu obstarávania, alebo mô?u by? predmetom stíhania.
+        &lt;/p&gt;
+    </entry>
+    <entry key="espd.init.create.espd">Vytvori? nový JED</entry>
+    <entry key="espd.init.create.response">Vytvori? odpove?</entry>
+    <entry key="espd.init.header">Vitajte v slu?be jednotného európskeho dokumentu pre obstarávanie</entry>
+    <entry key="espd.init.i.am.ca">Som verejný obstarávate?</entry>
+    <entry key="espd.init.i.am.ce">Som obstarávate?</entry>
+    <entry key="espd.init.i.am.eop">Som hospodársky subjekt</entry>
+    <entry key="espd.init.import.espd">Importova? JED</entry>
+    <entry key="espd.init.merge.espds">Zlú?i? dva JED</entry>
+    <entry key="espd.init.reuse.espd">Opätovne pou?i? existujúci JED</entry>
+    <entry key="espd.init.review.espd">Preskúma? JED</entry>
+    <entry key="espd.init.select.country">Vyberte krajinu</entry>
+    <entry key="espd.init.ted.reception.id.placeholder">Opätovne pou?i? existujúci jednotný európsky dokument pre
+        obstarávanie
+    </entry>
+    <entry key="espd.init.upload.document">Nahra? dokument</entry>
+    <entry key="espd.init.upload.documents">Nahra? dokumenty</entry>
+    <entry key="espd.init.upload.request">Nahrajte ?iados? alebo odpove? týkajúcu sa JED</entry>
+    <entry key="espd.init.upload.request.response">Nahrajte ?iados? verejného obstarávate?a týkajúcu sa JED</entry>
+    <entry key="espd.init.upload.response">Nahrajte star?iu odpove? týkajúcu sa JED, ktorú ste poskytli</entry>
+    <entry key="espd.init.what.you.do">?o by ste chceli urobi??</entry>
+    <entry key="espd.init.where.are.you.from.ca">Kde má sídlo vá? obstarávate??</entry>
+    <entry key="espd.init.where.are.you.from.eo">Kde má sídlo vá? podnik?</entry>
+    <entry key="espd.init.who.are.you">Kto ste?</entry>
+    <entry key="espd.gui.footer.last.update">Posledná aktualizácia:</entry>
+    <entry key="espd.gui.grow">Grow</entry>
+    <entry key="espd.ecertis.information.for.country">Informácie o systéme e-Certis {0}</entry>
+    <entry key="espd.gui.legal.notice">Právne upozornenie</entry>
+    <entry key="espd.ecertis.less.information">Menej informácií</entry>
+    <entry key="espd.ecertis.more.information">Viac informácií</entry>
+    <entry key="espd.gui.next">?alej</entry>
+    <entry key="espd.gui.no">Nie</entry>
+    <entry key="espd.gui.not.applicable">Neuplat?uje sa</entry>
+    <entry key="espd.gui.place">Miesto</entry>
+    <entry key="espd.gui.previous">Spä?</entry>
+    <entry key="espd.gui.print">Preh?ad</entry>
+    <entry key="espd.gui.progress.exclusion">Vylú?enie</entry>
+    <entry key="espd.gui.progress.finish">Koniec</entry>
+    <entry key="espd.gui.progress.procedure">Postup</entry>
+    <entry key="espd.gui.progress.selection">Výber</entry>
+    <entry key="espd.gui.progress.start">Za?iatok</entry>
+    <entry key="espd.gui.question.to.use.alpha">Chcete pou?i? výberové kritériá A a? D?</entry>
+    <entry key="espd.gui.report.appliction.issue">V prípade otázok týkajúcich sa uplat?ovania JED napí?te na túto
+        adresu:
+    </entry>
+    <entry key="espd.gui.report.security.incident">Pri bezpe?nostnom incidente kontaktujte Európsku komisiu
+        prostredníctvom
+    </entry>
+    <entry key="espd.gui.report.security.incident.title">Hlásenie o incidente týkajúcom sa bezpe?nosti informácií
+    </entry>
+    <entry key="espd.gui.role.ca">Úloha: Verejný obstarávate? (VO)</entry>
+    <entry key="espd.gui.role.eo">Úloha: Hospodársky subjekt (HS)</entry>
+    <entry key="espd.gui.search">Vyh?adávanie</entry>
+    <entry key="espd.gui.signature">Podpis</entry>
+    <entry key="espd.gui.tools">Nástroje</entry>
+    <entry key="espd.init.ca.can.create.espd.tooltip">Verejný obstarávate? mô?e vytvori? úplne nový JED. V takom prípade
+        musí verejný obstarávate? vyplni? vo formulári JED v?etky relevantné informácie.
+    </entry>
+    <entry key="espd.init.ca.can.import.espd.tooltip">Ak verejný obstarávate? u? v minulosti vyu?il slu?bu JED pre iný
+        postup obstarávania, mô?e importova? JED ulo?ený v lokálnej sieti. V takom prípade nie je potrebné vyp??a? úplne
+        nový JED, ale niektoré údaje stále treba aktualizova? vzh?adom na aktuálny postup obstarávania.
+    </entry>
+    <entry key="espd.init.ca.ref.buyer.tooltip">Pojem verejný obstarávate? ozna?uje kupujúceho.</entry>
+    <entry key="espd.init.ce.ref.buyer.tooltip">Pod pojmom obstarávate? sa tu rozumie kupujúci pôsobiaci v odvetviach
+        vodného hospodárstva, energetiky, dopravy alebo po?tových slu?ieb. Verejní obstarávatelia, ktorí takisto pôsobia
+        v uvedených odvetviach, musia vybra? mo?nos? ?Som verejný obstarávate??
+    </entry>
+    <entry key="espd.init.eo.can.reuse.espd.tooltip">Hospodársky subjekt mô?e opätovne pou?i? informácie, ktoré poskytol
+        prostredníctvom JED v predchádzajúcom postupe obstarávania (?star?í? JED). Slu?ba JED zlú?i ?star?í? JED s novým
+        formulárom, ktorý pripravil verejný obstarávate? pre tento postup obstarávania.
+    </entry>
+    <entry key="espd.init.eo.ref.suppl.tooltip">Pojem hospodársky subjekt ozna?uje dodávate?a/uchádza?a.</entry>
+    <entry key="espd.init.espd.used.both.ca.eo.tooltip">Slu?bu JED mô?u vyu?íva? verejní obstarávatelia aj hospodárske
+        subjekty. Vyberte mo?nos?, ktorá zodpovedá vá?mu profilu v tomto postupe verejného obstarávania.
+    </entry>
+    <entry key="espd.init.filter.create.response.tooltip">Vytvori? novú odpove? týkajúcu sa JED</entry>
+    <entry key="espd.init.filter.eo.can.import.espd.tooltip">Hospodársky subjekt mô?e importova? súbor JED, ktorý pre
+        tento postup verejného obstarávania predbe?ne vyplnil verejný obstarávate? a uverejnil ho spolu s oznámením o
+        vyhlásení obstarávania.
+    </entry>
+    <entry key="espd.init.filter.eo.merge.espds.tooltip">The ESPD service will merge the 'old' ESPD with the new form
+        prepared by the contracting authority for this procurement procedure.
+    </entry>
+    <entry key="espd.init.overview.received.espds.tooltip">Táto funkcia poskytuje tabu?ku s preh?adom odpovedí uvedených
+        vo v?etkých JED, ktoré predlo?ili uchádza?i pre daný postup obstarávania.
+    </entry>
+    <entry key="espd.init.review.espd.tooltip">Verejný obstarávate? mô?e skontrolova?/preskúma? elektronický JED, ktorý
+        prijal od hospodárskeho subjektu.
+    </entry>
+    <entry key="espd.init.ted.reception.id.tooltip">Verejný obstarávate? dostane po predlo?ení oznámenia na zverejnenie
+        email od Úradu pre publikácie. Tento e-mail obsahuje identifikáciu, ktorú mo?no pou?i? v tejto slu?be na
+        vyplnenie informácií o postupe a obstarávate?ovi.
+    </entry>
+    <entry key="espd.validator.accept">Zadajte hodnotu s platnou príponou.</entry>
+    <entry key="espd.validator.creditcard">Zadajte platné ?íslo kreditnej karty.</entry>
+    <entry key="espd.validator.date">Zadajte platný dátum.</entry>
+    <entry key="espd.validator.dateISO">Zadajte platný dátum (ISO).</entry>
+    <entry key="espd.validator.digits">Zadajte len ?íslice.</entry>
+    <entry key="espd.validator.email">Zadajte platnú e-mailovú adresu.</entry>
+    <entry key="espd.validator.equalTo">Zadajte znova rovnakú hodnotu.</entry>
+    <entry key="espd.validator.max">Zadajte hodnotu, ktorá je men?ia alebo sa rovná {0}.</entry>
+    <entry key="espd.validator.maxlength">Zadajte najviac {0} znakov.</entry>
+    <entry key="espd.validator.min">Zadajte hodnotu, ktorá je vä??ia alebo sa rovná {0}.</entry>
+    <entry key="espd.validator.minlength">Zadajte najmenej {0} znakov.</entry>
+    <entry key="espd.validator.number">Zadajte platné ?íslo.</entry>
+    <entry key="espd.validator.range">Zadajte hodnotu medzi {0} a {1}.</entry>
+    <entry key="espd.validator.rangelength">Zadajte hodnotu s po?tom znakov {0} a? {1}.</entry>
+    <entry key="espd.validator.remote">Opravte toto pole.</entry>
+    <entry key="espd.validator.required">Toto pole je povinné.</entry>
+    <entry key="espd.validator.url">Zadajte platnú adresu URL.</entry>
+    <entry key="espd.gui.view.ca">Zobrazi?: (VO)</entry>
+    <entry key="espd.gui.view.eo">Zobrazi?: (HS)</entry>
+    <entry key="espd.gui.yes">Áno</entry>
+    <entry key="espd.gui.zip.instructions">Toto je krátka dokumentácia týkajúca sa súborov jednotného európskeho
+        dokumentu pre obstarávanie, ktoré nájdete v tomto prie?inku ZIP.Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nespd.XML:
+        Súbor XML je súbor, ktorý je zrozumite?ný pre na?u slu?bu jednotného európskeho dokumentu pre obstarávanie alebo
+        pre iné kompatibilné slu?by jednotného európskeho dokumentu pre obstarávanie. Výhodou pou?ívania elektronického
+        jednotného európskeho dokumentu pre obstarávanie vo forme súboru XML je, ?e kupujúci aj podniky ho v budúcnosti
+        mô?u opätovne pou?i? na ?al?ie postupy obstarávania. Mal by sa zasiela? spolu so sú?a?nými podkladmi (verejného
+        obstarávate?a ur?enými podnikom) alebo ako sú?as? ponuky (podniku ur?enej verejnému
+        obstarávate?ovi).Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nespd.PDF: Súbor PDF je ?udským okom ?itate?ný súbor
+        elektronického jednotného európskeho dokumentu pre obstarávanie. Aj tu odporú?ame, aby sa pou?íval spolu s
+        formátom XML so sú?a?nými podkladmi (verejného obstarávate?a ur?enými podnikom) alebo ako sú?as? ponuky (podniku
+        ur?enej verejnému obstarávate?ovi) ako referen?ný dokument.Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nAk máte
+        akéko?vek otázky týkajúce sa súborov, kontaktujte nás na tejto e-mailovej adrese: grow-espd@ec.europa.eu.
+    </entry>
+
+</properties>

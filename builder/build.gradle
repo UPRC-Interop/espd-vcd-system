@@ -35,6 +35,13 @@ dependencies {
     // schema
     compile("eu.europa.ec.grow.espd:exchange-model2:2.0.0-SNAPSHOT")
     compile group: 'eu.europa.ec.grow.espd', name: 'exchange-model', version: '1.0.2'
+
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
+    compile group: 'org.xmlunit', name: 'xmlunit-core', version: '2.2.1'
+    compile group: 'com.openhtmltopdf', name: 'openhtmltopdf-pdfbox', version: '0.0.1-RC5'
+    compile group: 'org.apache.xmlgraphics', name: 'fop', version: '0.93'
+
+    compile group: 'org.xmlunit', name: 'xmlunit-matchers', version: '2.2.1'
 }
 
 task copyTask(type: Copy) {

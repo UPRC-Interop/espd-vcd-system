@@ -1,0 +1,140 @@
+<!--
+/*--><root>
+/*Uebergreifende CSS-Definitionen fuer die Procedure-Details*/
+/*Diese Zeilen stehen lassen, damit die CSS-Datei in dem XSL eingebunden werden kann!<![CDATA[<!--*/
+-->
+
+textarea {
+    width: 800px;
+}
+
+.procedure-details label {
+    font-weight: bold;
+}
+
+.procedure-details hr {
+    border-bottom: 0.133em dotted #CDCDCD;
+    border-top: 0;
+    clear: both;
+    margin: 15px 0 15px 0;
+}
+
+.procedure-details .section {
+    margin-bottom: 20px;
+    border: 1px solid #cdcdcd;
+    padding: 15px;
+}
+
+.procedure-details .chapter .chapter-number,
+.procedure-details .chapter .chapter-headline {
+    font-weight: bold;
+    display: inline-block;
+    font-size: 14px;
+    margin-bottom: 5px;
+    vertical-align: top;
+}
+
+.procedure-details .level-two .chapter-number,
+.procedure-details .level-two .chapter-headline {
+    font-size: 14px;
+}
+
+.procedure-details .chapter-headline{
+    width: 90%;
+}
+
+.procedure-details .no-chapter-number .chapter-number {
+    display: none;
+}
+
+.procedure-details .chapter-number {
+    width: 50px;
+}
+
+.procedure-details .left-padding {
+    padding-left: 54px;
+}
+
+.procedure-details .chapter-content, .level-two {
+    padding-left: 54px;
+}
+
+.procedure-details .chapter-content > p {
+    word-wrap: break-word;
+}
+
+.level-three {
+    padding-left: 50px;
+}
+
+.level-four {
+    padding-left: 85px;
+}
+
+
+.procedure-details .chapter-content {
+    padding-left: 54px;
+}
+
+.procedure-details .content-left {
+    display: inline-block;
+    font-weight: bold;
+    margin-right: 20px;
+    vertical-align: top;
+    width: 160px;
+}
+
+.procedure-details .content-right {
+    display: inline-block;
+    width: 65%;
+    vertical-align: bottom;
+    word-wrap: break-word;
+}
+
+.procedure-details .content-long{
+    display: inline-block;
+    width: 65%;
+    vertical-align: top;
+    word-wrap: break-word;
+}
+
+.procedure-details .chapter {
+    margin-bottom: 10px;
+}
+.procedure-details .section-headline,
+.procedure-details .section-content {
+    min-height: 1px;
+    padding-left: 50px;
+    padding-right: 15px;
+    position: relative;
+}
+
+.procedure-details .section-headline-no-padding {
+    font-weight: bold;
+}
+
+.procedure-details .section-content-small-padding {
+    padding: 0 15px 0 15px;
+}
+
+.procedure-details .section-headline {
+    font-weight: bold;
+    padding-left: 35px;
+}
+
+.procedure-details .section-header {
+    margin: 15px 0 10px 0;
+}
+
+
+.procedure-details .procedure-header {
+    margin-bottom: 30px;
+}
+
+.procedure-details .footer-content {
+   display: none;
+}
+
+
+<!-- /*-->]]>/*Diese Zeilen stehen lassen, damit die CSS-Datei in dem XSL eingebunden werden kann!</root><!--*/
+-->
