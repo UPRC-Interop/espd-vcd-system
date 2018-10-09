@@ -1,12 +1,12 @@
 /**
  * Copyright 2016-2018 University of Piraeus Research Center
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,10 +17,8 @@ package eu.esens.espdvcd.retriever.criteria;
 
 import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
 import eu.esens.espdvcd.model.SelectableCriterion;
-import eu.esens.espdvcd.retriever.criteria.resource.CriteriaResource;
-import eu.esens.espdvcd.retriever.criteria.resource.LegislationResource;
-import eu.esens.espdvcd.retriever.criteria.resource.RequirementsResource;
-import eu.esens.espdvcd.retriever.criteria.resource.Resource;
+import eu.esens.espdvcd.model.requirement.RequirementGroup;
+import eu.esens.espdvcd.retriever.criteria.resource.*;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -39,6 +37,8 @@ public class CriteriaExtractorImpl implements CriteriaExtractor {
     private List<CriteriaResource> cResourceList;
     private List<LegislationResource> lResourceList;
     private List<RequirementsResource> rgResourceList;
+
+    private CriteriaTaxonomyResource taxonomyResource;
 
     private List<SelectableCriterion> criterionList;
 
@@ -142,7 +142,19 @@ public class CriteriaExtractorImpl implements CriteriaExtractor {
         initialSet.addAll(criterionList);
         initialList.forEach(sc -> sc.setSelected(addAsSelected));
         initialSet.addAll(initialList);
+        // apply taxonomy cardinalities before return
+        // applyTaxonomyCardinalities(initialList);
         return new ArrayList<>(initialSet);
+    }
+
+    private void applyTaxonomyCardinalities(List<SelectableCriterion> criterionList) {
+
+        // lazy initialization of criterion taxonomy resource
+        if (taxonomyResource == null) {
+            taxonomyResource = new CriteriaTaxonomyResource();
+        }
+
+        criterionList.forEach(sc -> taxonomyResource.applyCardinalities(sc));
     }
 
     private void addLegislationReference(SelectableCriterion sc) {

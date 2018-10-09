@@ -1,12 +1,12 @@
 /**
  * Copyright 2016-2018 University of Piraeus Research Center
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -24,6 +24,7 @@ import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.ResponseRequirement;
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractorBuilder;
+import eu.esens.espdvcd.retriever.criteria.resource.SelectableCriterionPrinter;
 import eu.esens.espdvcd.schema.EDMVersion;
 import eu.espd.schema.v1.espdresponse_1.ESPDResponseType;
 import org.junit.Assert;
@@ -314,6 +315,18 @@ public class BuilderESPDTest {
                 .createDocumentBuilderFor(espdResponse);
 
         System.out.println(xmlDocumentBuilderV2.getAsString());
+    }
+
+    @Test
+    public void checkCardinalitiesOfImportedArtefact() throws Exception {
+
+        ESPDResponse espdResponse = BuilderFactory.EDM_V2
+                .createRegulatedModelBuilder()
+                .importFrom(BuilderESPDTest.class.getResourceAsStream("/ESPDResponse_DA_Test-2.0.2-v0.1.xml"))
+                // .importFrom(BuilderESPDTest.class.getResourceAsStream("/espd-response.xml"))
+                .createESPDResponse();
+
+        SelectableCriterionPrinter.print(espdResponse.getFullCriterionList());
     }
 
 }
