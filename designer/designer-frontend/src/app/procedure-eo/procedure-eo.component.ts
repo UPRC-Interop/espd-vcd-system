@@ -14,18 +14,12 @@
 /// limitations under the License.
 ///
 
-import {Component, Input, OnChanges, OnInit, SimpleChange, SimpleChanges} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {ProcedureType} from '../model/procedureType.model';
 import {Country} from '../model/country.model';
-import {FormArray, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
+import {FormArray, FormControl, FormGroup, NgForm} from '@angular/forms';
 import {EoRelatedCriterion} from '../model/eoRelatedCriterion.model';
-import {RequirementGroup} from '../model/requirementGroup.model';
-import {RequirementResponse} from '../model/requirement-response.model';
-import * as moment from 'moment';
-import {Moment} from 'moment';
-import {Evidence} from '../model/evidence.model';
-import {EvidenceIssuer} from '../model/evidenceIssuer.model';
 import {FormUtilService} from '../services/form-util.service';
 import {UtilitiesService} from '../services/utilities.service';
 
@@ -36,6 +30,7 @@ import {UtilitiesService} from '../services/utilities.service';
 })
 export class ProcedureEoComponent implements OnInit {
 
+  @ViewChild('procedureForm') procedureForm: NgForm;
 
   public EOForm: FormGroup;
   // public formA = new FormGroup({});

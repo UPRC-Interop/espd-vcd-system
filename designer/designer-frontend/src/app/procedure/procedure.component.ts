@@ -14,13 +14,11 @@
 /// limitations under the License.
 ///
 
-import {Component, OnInit, OnChanges, SimpleChanges, Input} from '@angular/core';
+import {Component, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {ProcedureType} from '../model/procedureType.model';
 import {Country} from '../model/country.model';
-import {NgForm} from '@angular/forms/forms';
-import {EoRelatedCriterion} from '../model/eoRelatedCriterion.model';
-import {ReductionCriterion} from '../model/reductionCriterion.model';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-procedure',
@@ -29,6 +27,7 @@ import {ReductionCriterion} from '../model/reductionCriterion.model';
 })
 export class ProcedureComponent implements OnInit, OnChanges {
 
+  @ViewChild('procedureForm') procedureForm: NgForm;
   countries: Country[] = null;
   procedureTypes: ProcedureType[] = null;
   // @Input() eoRelatedCriteria: EoRelatedCriterion[];

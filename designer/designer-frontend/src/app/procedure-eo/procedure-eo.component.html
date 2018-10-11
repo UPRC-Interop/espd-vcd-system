@@ -16,7 +16,7 @@
 
 -->
 <h4 translate>espd.part1.header</h4>
-<form #f="ngForm">
+<form #procedureForm="ngForm">
   <mat-accordion multi="true">
     <mat-expansion-panel expanded="true">
       <mat-expansion-panel-header>
@@ -345,7 +345,7 @@
 
 
   <button mat-raised-button color="primary" matStepperPrevious>{{'espd.gui.previous' | translate}}</button>
-  <button type="button" mat-raised-button color="primary" matStepperNext (click)="onProcedureEOSubmit( f, EOForm)">{{'espd.gui.next' | translate}}
+  <button type="button" mat-raised-button color="primary" matStepperNext (click)="onProcedureEOSubmit( procedureForm, EOForm)">{{'espd.gui.next' | translate}}
   </button>
 </form>
 

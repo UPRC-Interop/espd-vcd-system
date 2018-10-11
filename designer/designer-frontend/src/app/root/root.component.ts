@@ -14,25 +14,34 @@
 /// limitations under the License.
 ///
 
-import {Component, OnChanges, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit, ViewChild} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {UtilitiesService} from '../services/utilities.service';
+import {StartComponent} from "../start/start.component";
+import {ProcedureComponent} from "../procedure/procedure.component";
+import {ProcedureEoComponent} from "../procedure-eo/procedure-eo.component";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './root.component.html',
-  styleUrls: ['./root.component.css']
+selector: 'app-root',
+templateUrl: './root.component.html',
+styleUrls: ['./root.component.css']
 })
 export class RootComponent implements OnInit, OnChanges {
 
-  isLinear = true;
+  @ViewChild('startComponent') startComponent: StartComponent;
+  @ViewChild('procedureCaComponent') procedureCaComponent: ProcedureComponent;
+  @ViewChild('procedureEoComponent') procedureEoComponent: ProcedureEoComponent;
+  startStepValid: boolean;
+  procedureStepValid: boolean;
 
-  // eoRelatedFormA = this.dataService.eoRelatedACriteriaForm;
+  isLinear = true;
 
   constructor(public dataService: DataService, public utilities: UtilitiesService) {
   }
 
   ngOnInit() {
+    this.startStepValid = true;
+    this.procedureStepValid = true;
   }
 
   ngOnChanges() {
@@ -43,6 +52,27 @@ export class RootComponent implements OnInit, OnChanges {
       this.dataService.switchLanguage(language);
       this.utilities.initLanguage = false;
       this.utilities.start = true;
+  }
+
+  validateStep(event) {
+    this.startStepValid = this.startComponent.startForm.valid;
+    this.procedureStepValid = this.validateProcedureForm();
+  }
+
+  validateProcedureForm(): boolean {
+    if ('undefined' !== typeof this.procedureCaComponent) {
+      return !this.procedureCaComponent.procedureForm.touched || this.procedureCaComponent.procedureForm.valid;
+    }
+
+    if ('undefined' !== typeof this.procedureEoComponent) {
+      return this.procedureEoComponent.procedureForm.touched || this.procedureEoComponent.procedureForm.valid
+        && !this.procedureEoComponent.EOForm.touched || this.procedureEoComponent.EOForm.valid
+        && (this.procedureEoComponent.formA == null || this.procedureEoComponent.formA.touched || this.procedureEoComponent.formA.valid)
+        && (this.procedureEoComponent.formC == null || this.procedureEoComponent.formC.touched || this.procedureEoComponent.formC.valid)
+        && (this.procedureEoComponent.formD == null || this.procedureEoComponent.formD.touched || this.procedureEoComponent.formD.valid);
+    }
+
+    return true;
   }
 
 }

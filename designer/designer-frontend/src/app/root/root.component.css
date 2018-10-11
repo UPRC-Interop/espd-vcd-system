@@ -37,3 +37,7 @@ mat-card{
   width: 80%;
   margin: 0 auto;
 }
+
+.invalid {
+  color: red;
+}

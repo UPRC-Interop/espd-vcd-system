@@ -31,21 +31,26 @@
 
 <div class="container" *ngIf="this.utilities.start">
 
-  <mat-horizontal-stepper [linear]="isLinear" #stepper="matHorizontalStepper">
+  <mat-horizontal-stepper (selectionChange)="validateStep($event)" [linear]="isLinear" #stepper="matHorizontalStepper">
     <mat-step>
-      <ng-template matStepLabel>{{'espd.gui.progress.start' | translate}}</ng-template>
-      <app-start></app-start>
+      <ng-template matStepLabel>
+        <span [class.invalid]="!startStepValid">{{'espd.gui.progress.start' | translate}}</span>
+      </ng-template>
+      <app-start #startComponent></app-start>
     </mat-step>
     <mat-step>
-      <ng-template matStepLabel>{{'espd.gui.progress.procedure' | translate}}</ng-template>
-      <app-procedure *ngIf="utilities.isCA"></app-procedure>
+      <ng-template matStepLabel>
+        <span [class.invalid]="!procedureStepValid">{{'espd.gui.progress.procedure' | translate}}</span>
+      </ng-template>
+      <app-procedure *ngIf="utilities.isCA" #procedureCaComponent></app-procedure>
       <app-procedure-eo [formA] = 'dataService.eoRelatedACriteriaForm'
                         [formD] = 'dataService.eoRelatedDCriteriaForm'
                         [formC] = 'dataService.eoRelatedCCriteriaForm'
                         [eoRelatedACriteria] = 'dataService.eoRelatedACriteria'
                         [eoRelatedCCriteria] = 'dataService.eoRelatedCCriteria'
                         [eoRelatedDCriteria] = 'dataService.eoRelatedDCriteria'
-                        *ngIf="utilities.isEO"></app-procedure-eo>
+                        *ngIf="utilities.isEO"
+                        #procedureEoComponent></app-procedure-eo>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>{{'espd.gui.progress.exclusion' | translate}}</ng-template>
