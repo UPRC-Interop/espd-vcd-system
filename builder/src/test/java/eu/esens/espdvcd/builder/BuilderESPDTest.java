@@ -322,7 +322,7 @@ public class BuilderESPDTest {
 
         ESPDResponse espdResponse = BuilderFactory.EDM_V2
                 .createRegulatedModelBuilder()
-                .importFrom(BuilderESPDTest.class.getResourceAsStream("/ESPDResponse_DA_Test-2.0.2-v0.1.xml"))
+                .importFrom(BuilderESPDTest.class.getResourceAsStream("/espd-response-v2-81.xml"))
                 // .importFrom(BuilderESPDTest.class.getResourceAsStream("/espd-response.xml"))
                 .createESPDResponse();
 

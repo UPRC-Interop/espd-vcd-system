@@ -15,7 +15,6 @@
  */
 package eu.esens.espdvcd.builder;
 
-import com.sun.org.apache.bcel.internal.generic.Select;
 import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.builder.model.ModelFactory;
 import eu.esens.espdvcd.builder.util.ArtefactUtils;
