@@ -28,27 +28,45 @@ public class RegulatedExportESPDV1Service implements ExportESPDService {
     public InputStream exportESPDRequestAsInputStream(ESPDRequest model) throws ValidationException {
         if (hasNullCriterion(model.getFullCriterionList()))
             throw new ValidationException("Null criteria are not permitted.");
-        return BuilderFactory.EDM_V1.createDocumentBuilderFor(model).getAsInputStream();
+        return BuilderFactory.EDM_V1.createDocumentBuilderFor(finalizeV1ESPD(model)).getAsInputStream();
     }
 
     @Override
     public String exportESPDRequestAsString(ESPDRequest model) throws ValidationException {
         if (hasNullCriterion(model.getFullCriterionList()))
             throw new ValidationException("Null criteria are not permitted.");
-        return BuilderFactory.EDM_V1.createDocumentBuilderFor(model).getAsString();
+        return BuilderFactory.EDM_V1.createDocumentBuilderFor(finalizeV1ESPD(model)).getAsString();
     }
 
     @Override
     public InputStream exportESPDResponseAsInputStream(ESPDResponse model) throws ValidationException {
         if (hasNullCriterion(model.getFullCriterionList()))
             throw new ValidationException("Null criteria are not permitted.");
-        return BuilderFactory.EDM_V1.createDocumentBuilderFor(model).getAsInputStream();
+        return BuilderFactory.EDM_V1.createDocumentBuilderFor(finalizeV1ESPD(model)).getAsInputStream();
     }
 
     @Override
     public String exportESPDResponseAsString(ESPDResponse model) throws ValidationException {
         if (hasNullCriterion(model.getFullCriterionList()))
             throw new ValidationException("Null criteria are not permitted.");
-        return BuilderFactory.EDM_V1.createDocumentBuilderFor(model).getAsString();
+        return BuilderFactory.EDM_V1.createDocumentBuilderFor(finalizeV1ESPD(model)).getAsString();
+    }
+
+    private ESPDRequest finalizeV1ESPD(final ESPDRequest model) {
+        model.getFullCriterionList()
+                .stream()
+                .filter(cr -> cr
+                        .getTypeCode()
+                        .equals("CRITERION.SELECTION.ALL_SATISFIED"))
+                .findFirst()
+                .ifPresent(cr -> {
+                    if (cr.isSelected())
+                        model.getFullCriterionList()
+                                .removeIf(selectableCriterion -> selectableCriterion
+                                        .getTypeCode()
+                                        .matches("CRITERION.SELECTION.*"));
+
+                });
+        return model;
     }
 }
