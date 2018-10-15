@@ -19,7 +19,8 @@
   <label *ngIf="req.responseDataType=='INDICATOR'" [attr.for]="req.uuid">{{req.description}}</label>
 
 
-  <div [ngSwitch]="req.responseDataType">
+  <!--SELF-CONTAINED: Hide the QUESTION fields if the user is a CA making a Request. Render only the REQUIREMENT and CAPTION fields.-->
+  <div [ngSwitch]="req.responseDataType" [hidden]="this.utilities.isCA && req.typeCode === 'QUESTION'">
 
     <mat-form-field *ngSwitchDefault>
       <label [attr.for]="req.uuid">{{req.description}}</label>
@@ -78,7 +79,7 @@
       <label [attr.for]="req.uuid">{{req.description}}</label>
       <br>
       <mat-form-field>
-        <input matInput [formControlName]="req.uuid" [id]="req.uuid" >
+        <input matInput [formControlName]="req.uuid" [id]="req.uuid">
       </mat-form-field>
       <mat-form-field>
         <mat-select [formControlName]="req.uuid+'currency'" [id]="req.uuid+'currency'">
