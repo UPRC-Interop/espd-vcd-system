@@ -15,8 +15,9 @@
  */
 package eu.esens.espdvcd.model;
 
-import java.io.Serializable;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * Contracting authority and procurement procedure details
@@ -102,8 +103,6 @@ public class CADetails implements Serializable{
     @NotNull
     private String procurementProcedureFileReferenceNo;
 
-
-
     /**
      * Notice number / identifier
      * <p>
@@ -186,6 +185,30 @@ public class CADetails implements Serializable{
      */
     private String procurementPublicationURI;
 
+    /**
+     *
+     */
+    private String procurementProcedureType;
+
+    /**
+     *
+     */
+    private String weightScoringMethodologyNote;
+
+    /**
+     *
+     */
+    private String weightingType;
+
+    /**
+     *
+     */
+    private String projectType;
+
+    /**
+     *
+     */
+    private List<String> classificationCodes;
 
     /**
      * Received notice number

@@ -15,8 +15,8 @@
  */
 package eu.esens.espdvcd.retriever.criteria.resource;
 
-import eu.esens.espdvcd.codelist.enums.CriterionElementTypeEnum;
 import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
+import eu.esens.espdvcd.codelist.enums.RequirementTypeEnum;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.Requirement;
@@ -147,7 +147,7 @@ public class CriteriaTaxonomyResource implements CriteriaResource, RequirementsR
                         ResponseTypeEnum.valueOf(getRowResponseType(d.getRow(i))),
                         getRowDescription(d.getRow(i)) //+ "(at " + i + "," + colNum + ")"
                 );
-                r.setTypeCode(CriterionElementTypeEnum.QUESTION);
+                r.setType(RequirementTypeEnum.QUESTION);
                 // setting cardinality here
                 CardinalityEnum cardinality = CardinalityUtils.extractCardinality(getRowCardinality(d.getRow(i)));
                 r.setMandatory(cardinality.isMandatory());

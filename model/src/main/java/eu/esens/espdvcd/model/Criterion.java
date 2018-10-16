@@ -16,6 +16,7 @@
 package eu.esens.espdvcd.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import eu.esens.espdvcd.codelist.enums.CriterionTypeEnum;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 
 import javax.validation.constraints.NotNull;
@@ -54,6 +55,9 @@ public class Criterion implements Serializable {
     @NotNull
     protected String ID;
 
+    /**
+     * For use by the ESPD Designer
+     */
     protected String UUID;
 
     public void setUUID(String UUID) {
@@ -63,6 +67,8 @@ public class Criterion implements Serializable {
     public String getUUID() {
         return UUID;
     }
+
+    protected CriterionTypeEnum type = CriterionTypeEnum.CRITERION;
 
     /**
      * Criterion type code
@@ -133,6 +139,16 @@ public class Criterion implements Serializable {
         this.ID = java.util.UUID.randomUUID().toString();
     }
 
+    public Criterion(String ID, String typeCode, CriterionTypeEnum type, String name, String description, LegislationReference legislationReference, List<RequirementGroup> requirementGroups) {
+        this.ID = ID;
+        this.typeCode = typeCode;
+        this.type = type;
+        this.name = name;
+        this.description = description;
+        this.legislationReference = legislationReference;
+        this.requirementGroups = requirementGroups;
+    }
+
     public Criterion(String ID, String typeCode, String name, String description, LegislationReference legislationReference, List<RequirementGroup> requirementGroups) {
         this.ID = ID;
         this.typeCode = typeCode;
@@ -165,6 +181,14 @@ public class Criterion implements Serializable {
 
     public void setTypeCode(String typeCode) {
         this.typeCode = typeCode;
+    }
+
+    public CriterionTypeEnum getType() {
+        return type;
+    }
+
+    public void setType(CriterionTypeEnum type) {
+        this.type = type;
     }
 
     public String getName() {

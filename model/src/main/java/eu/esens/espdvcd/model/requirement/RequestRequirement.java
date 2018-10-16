@@ -16,7 +16,7 @@
 package eu.esens.espdvcd.model.requirement;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import eu.esens.espdvcd.codelist.enums.CriterionElementTypeEnum;
+import eu.esens.espdvcd.codelist.enums.RequirementTypeEnum;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.requirement.response.Response;
 
@@ -80,7 +80,7 @@ public class RequestRequirement implements Requirement {
      * The type of property. Used to verify that structure of the property is correct
      * UBL syntax path:
      */
-    private CriterionElementTypeEnum typeCode = CriterionElementTypeEnum.QUESTION;
+    private RequirementTypeEnum type = RequirementTypeEnum.QUESTION;
 
     private boolean mandatory;
 
@@ -98,11 +98,11 @@ public class RequestRequirement implements Requirement {
     }
 
     public RequestRequirement(@JsonProperty("ID") String ID,
-                              @JsonProperty("typeCode") CriterionElementTypeEnum typeCode,
+                              @JsonProperty("type") RequirementTypeEnum type,
                               @JsonProperty("responseDataType") ResponseTypeEnum responseDataType,
                               @JsonProperty("description") String description) {
         this.ID = ID;
-        this.typeCode = typeCode;
+        this.type = type;
         this.responseDataType = responseDataType;
         this.description = description;
         // apply default cardinality 1
@@ -156,8 +156,8 @@ public class RequestRequirement implements Requirement {
     }
 
     @Override
-    public void setTypeCode(CriterionElementTypeEnum typeCode) {
-        this.typeCode = typeCode;
+    public RequirementTypeEnum getType() {
+        return type;
     }
 
     @Override
@@ -166,8 +166,8 @@ public class RequestRequirement implements Requirement {
     }
 
     @Override
-    public CriterionElementTypeEnum getTypeCode() {
-        return typeCode;
+    public void setType(RequirementTypeEnum type) {
+        this.type = type;
     }
 
     @Override

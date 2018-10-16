@@ -47,5 +47,8 @@ public enum ResponseTypeEnum {
     TRANSLATION_TYPE_CODE,              // ResponseDataType     v2 codelist - SELF CONTAINED
     CERTIFICATION_LEVEL_DESCRIPTION,    // ResponseDataType     v2 codelist - SELF CONTAINED
     COPY_QUALITY_TYPE_CODE,             // ResponseDataType     v2 codelist - SELF CONTAINED
-    TIME                                // ResponseDataType     v2 codelist - SELF CONTAINED
+    TIME,                               // ResponseDataType     v2 codelist - SELF CONTAINED
+    WEIGHT_INDICATOR,                   // EXTRA ResponseDataType     v2 codelist - SELF CONTAINED
+    LOTS_IDENTIFIER,                    // EXTRA ResponseDataType     v2 codelist - SELF CONTAINED
+    EO_IDENTIFIER                       // EXTRA ResponseDataType     v2 codelist - SELF CONTAINED
 }
