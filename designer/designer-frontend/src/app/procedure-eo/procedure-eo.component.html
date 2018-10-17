@@ -222,7 +222,7 @@
         </div>
         <ng-container *ngIf="dataService.eoRelatedACriteriaForm">
           <form [formGroup]="dataService.eoRelatedACriteriaForm">
-            <div class="eoRelatedCriteria" *ngFor="let cr of eoRelatedACriteria; let i=index">
+            <div class="eoRelatedCriteria" *ngFor="let cr of this.dataService.eoRelatedACriteria; let i=index">
               <mat-card>
                 <h4>{{cr.description}}</h4>
                 <div class="answer">
@@ -314,7 +314,7 @@
         </mat-expansion-panel-header>
         <ng-container *ngIf='this.dataService.eoRelatedCCriteriaForm!=null'>
           <form [formGroup]="dataService.eoRelatedCCriteriaForm">
-            <div class="eoRelatedCriteria" *ngFor="let cr of eoRelatedCCriteria; let i=index">
+            <div class="eoRelatedCriteria" *ngFor="let cr of this.dataService.eoRelatedCCriteria; let i=index">
               <span>{{cr.description}}</span>
               <div class="answer">
                 <app-criterion [criterion]="cr" [form]="dataService.eoRelatedCCriteriaForm.controls" [indicator]="true"></app-criterion>
@@ -331,7 +331,7 @@
         </mat-expansion-panel-header>
         <ng-container *ngIf='this.dataService.eoRelatedDCriteriaForm!=null'>
           <form [formGroup]="dataService.eoRelatedDCriteriaForm">
-            <div class="eoRelatedCriteria" *ngFor="let cr of eoRelatedDCriteria; let i=index">
+            <div class="eoRelatedCriteria" *ngFor="let cr of this.dataService.eoRelatedDCriteria; let i=index">
               <span>{{cr.description}}</span>
               <div class="answer">
                 <app-criterion [criterion]="cr" [form]="dataService.eoRelatedDCriteriaForm.controls" [indicator]="true"></app-criterion>

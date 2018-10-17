@@ -39,57 +39,22 @@
     <mat-step>
       <ng-template matStepLabel>{{'espd.gui.progress.procedure' | translate}}</ng-template>
       <app-procedure *ngIf="utilities.isCA"></app-procedure>
-      <app-procedure-eo [formA] = 'dataService.eoRelatedACriteriaForm'
-                        [formD] = 'dataService.eoRelatedDCriteriaForm'
-                        [formC] = 'dataService.eoRelatedCCriteriaForm'
-                        [eoRelatedACriteria] = 'dataService.eoRelatedACriteria'
-                        [eoRelatedCCriteria] = 'dataService.eoRelatedCCriteria'
-                        [eoRelatedDCriteria] = 'dataService.eoRelatedDCriteria'
-                        *ngIf="utilities.isEO"></app-procedure-eo>
+      <app-procedure-eo *ngIf="utilities.isEO"></app-procedure-eo>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>{{'espd.gui.progress.exclusion' | translate}}</ng-template>
-      <app-exclusion  [exclusionACriteria] = 'dataService.exclusionACriteria'
-                      [exclusionBCriteria] = 'dataService.exclusionBCriteria'
-                      [exclusionCCriteria] = 'dataService.exclusionCCriteria'
-                      [exclusionDCriteria] = 'dataService.exclusionDCriteria'
-                      *ngIf="utilities.isCA"></app-exclusion>
-      <app-exclusion-eo [formA] = 'dataService.exclusionACriteriaForm'
-                        [formB] = 'dataService.exclusionBCriteriaForm'
-                        [formC] = 'dataService.exclusionCCriteriaForm'
-                        [formD] = 'dataService.exclusionDCriteriaForm'
-                        [exclusionACriteria] = 'dataService.exclusionACriteria'
-                        [exclusionBCriteria] = 'dataService.exclusionBCriteria'
-                        [exclusionCCriteria] = 'dataService.exclusionCCriteria'
-                        [exclusionDCriteria] = 'dataService.exclusionDCriteria'
-        *ngIf="utilities.isEO"></app-exclusion-eo>
+      <app-exclusion *ngIf="utilities.isCA"></app-exclusion>
+      <app-exclusion-eo *ngIf="utilities.isEO"></app-exclusion-eo>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>{{'espd.gui.progress.selection' | translate}}</ng-template>
-      <app-selection [selectionACriteria] = 'dataService.selectionACriteria'
-                     [selectionBCriteria] = 'dataService.selectionBCriteria'
-                     [selectionCCriteria] = 'dataService.selectionCCriteria'
-                     [selectionDCriteria] = 'dataService.selectionDCriteria'
-                     [selectionALLCriteria]='dataService.selectionALLCriteria'
-        *ngIf="utilities.isCA"></app-selection>
-      <app-selection-eo [formA] = 'dataService.selectionACriteriaForm'
-                        [formB] = 'dataService.selectionBCriteriaForm'
-                        [formC] = 'dataService.selectionCCriteriaForm'
-                        [formD] = 'dataService.selectionDCriteriaForm'
-                        [formALL] = 'dataService.selectionALLCriteriaForm'
-                        [selectionACriteria] = 'dataService.selectionACriteria'
-                        [selectionBCriteria] = 'dataService.selectionBCriteria'
-                        [selectionCCriteria] = 'dataService.selectionCCriteria'
-                        [selectionDCriteria] = 'dataService.selectionDCriteria'
-                        [selectionALLCriteria]="dataService.selectionALLCriteria"
-                        *ngIf="utilities.isEO"></app-selection-eo>
+      <app-selection *ngIf="utilities.isCA"></app-selection>
+      <app-selection-eo *ngIf="utilities.isEO"></app-selection-eo>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>{{'espd.gui.progress.finish' | translate}}</ng-template>
       <app-finish *ngIf="utilities.isCA"></app-finish>
-      <app-finish-eo [form]="dataService.reductionCriteriaForm"
-                     [reductionCriteria]="dataService.reductionCriteria"
-        *ngIf="utilities.isEO"></app-finish-eo>
+      <app-finish-eo *ngIf="utilities.isEO"></app-finish-eo>
     </mat-step>
   </mat-horizontal-stepper>
 

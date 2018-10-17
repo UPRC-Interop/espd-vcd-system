@@ -14,8 +14,7 @@
 /// limitations under the License.
 ///
 
-import {Component, Input, OnInit} from '@angular/core';
-import {SelectionCriteria} from '../model/selectionCriteria.model';
+import {Component, OnInit} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {FormControl, NgForm} from '@angular/forms/forms';
 import {ApicallService} from '../services/apicall.service';
@@ -27,11 +26,6 @@ import {ApicallService} from '../services/apicall.service';
 })
 export class SelectionComponent implements OnInit {
 
-  @Input() selectionACriteria: SelectionCriteria[];
-  @Input() selectionBCriteria: SelectionCriteria[];
-  @Input() selectionCCriteria: SelectionCriteria[];
-  @Input() selectionDCriteria: SelectionCriteria[];
-  @Input() selectionALLCriteria: SelectionCriteria[];
   isSatisfiedALL = true;
   isAtoD = false;
 
@@ -64,10 +58,7 @@ export class SelectionComponent implements OnInit {
 
   onSelectionSubmit(form: NgForm) {
     console.log(form.value);
-    this.dataService.selectionSubmit(this.selectionACriteria,
-      this.selectionBCriteria,
-      this.selectionCCriteria,
-      this.selectionDCriteria,
+    this.dataService.selectionSubmit(
       this.isSatisfiedALL);
   }
 
