@@ -323,26 +323,18 @@ export class DataService {
 
   /* ============================= step submit actions =================================*/
 
-  exclusionSubmit(exclusionCriteriaA: ExclusionCriteria[],
-                  exclusionCriteriaB: ExclusionCriteria[],
-                  exclusionCriteriaC: ExclusionCriteria[],
-                  exclusionCriteriaD: ExclusionCriteria[]) {
-    this.exclusionACriteria = exclusionCriteriaA;
-    this.exclusionBCriteria = exclusionCriteriaB;
-    this.exclusionCCriteria = exclusionCriteriaC;
-    this.exclusionDCriteria = exclusionCriteriaD;
+  // exclusionSubmit(exclusionCriteriaA: ExclusionCriteria[],
+  //                 exclusionCriteriaB: ExclusionCriteria[],
+  //                 exclusionCriteriaC: ExclusionCriteria[],
+  //                 exclusionCriteriaD: ExclusionCriteria[]) {
+  //   this.exclusionACriteria = exclusionCriteriaA;
+  //   this.exclusionBCriteria = exclusionCriteriaB;
+  //   this.exclusionCCriteria = exclusionCriteriaC;
+  //   this.exclusionDCriteria = exclusionCriteriaD;
+  //
+  // }
 
-  }
-
-  selectionSubmit(selectionCriteriaA: SelectionCriteria[],
-                  selectionCriteriaB: SelectionCriteria[],
-                  selectionCriteriaC: SelectionCriteria[],
-                  selectionCriteriaD: SelectionCriteria[],
-                  isSatisfiedALL: boolean) {
-    this.selectionACriteria = selectionCriteriaA;
-    this.selectionBCriteria = selectionCriteriaB;
-    this.selectionCCriteria = selectionCriteriaC;
-    this.selectionDCriteria = selectionCriteriaD;
+  selectionSubmit(isSatisfiedALL: boolean) {
 
     // create ESPDRequest
     // console.dir(JSON.stringify(this.createESPDRequest(isSatisfiedALL)));
@@ -377,32 +369,36 @@ export class DataService {
 
   }
 
-
-  procedureEOSubmit(eoRelatedCriteriaA: EoRelatedCriterion[],
-                    eoRelatedCriteriaC: EoRelatedCriterion[],
-                    eoRelatedCriteriaD: EoRelatedCriterion[]) {
-    this.eoRelatedACriteria = eoRelatedCriteriaA;
-    this.eoRelatedCCriteria = eoRelatedCriteriaC;
-    this.eoRelatedDCriteria = eoRelatedCriteriaD;
-  }
-
-  selectionEOSubmit(selectionCriteriaA: SelectionCriteria[],
-                    selectionCriteriaB: SelectionCriteria[],
-                    selectionCriteriaC: SelectionCriteria[],
-                    selectionCriteriaD: SelectionCriteria[],
-                    isSatisfiedALL: boolean) {
-    this.selectionACriteria = selectionCriteriaA;
-    this.selectionBCriteria = selectionCriteriaB;
-    this.selectionCCriteria = selectionCriteriaC;
-    this.selectionDCriteria = selectionCriteriaD;
-
-    console.log(this.selectionALLCriteria);
+  selectionEOSubmit(isSatisfiedALL: boolean) {
     this.isSatisfiedALLeo = isSatisfiedALL;
 
   }
 
-  finishEOSubmit(reductionCriteria: ReductionCriterion[]) {
-    this.reductionCriteria = reductionCriteria;
+  finishEOSubmit() {
+
+    /* extract eoRelated criteria */
+    this.formUtil.extractFormValuesFromCriteria(this.eoRelatedACriteria, this.eoRelatedACriteriaForm, this.formUtil.evidenceList);
+    this.formUtil.extractFormValuesFromCriteria(this.eoRelatedCCriteria, this.eoRelatedCCriteriaForm, this.formUtil.evidenceList);
+    this.formUtil.extractFormValuesFromCriteria(this.eoRelatedDCriteria, this.eoRelatedDCriteriaForm, this.formUtil.evidenceList);
+
+    /* extract exclusion criteria */
+    this.formUtil.extractFormValuesFromCriteria(this.exclusionACriteria, this.exclusionACriteriaForm, this.formUtil.evidenceList);
+    this.formUtil.extractFormValuesFromCriteria(this.exclusionBCriteria, this.exclusionBCriteriaForm, this.formUtil.evidenceList);
+    this.formUtil.extractFormValuesFromCriteria(this.exclusionCCriteria, this.exclusionCCriteriaForm, this.formUtil.evidenceList);
+    this.formUtil.extractFormValuesFromCriteria(this.exclusionDCriteria, this.exclusionDCriteriaForm, this.formUtil.evidenceList);
+
+    /* extract selection criteria */
+    this.formUtil.extractFormValuesFromCriteria(this.selectionACriteria, this.selectionACriteriaForm, this.formUtil.evidenceList);
+    this.formUtil.extractFormValuesFromCriteria(this.selectionBCriteria, this.selectionBCriteriaForm, this.formUtil.evidenceList);
+    this.formUtil.extractFormValuesFromCriteria(this.selectionCCriteria, this.selectionCCriteriaForm, this.formUtil.evidenceList);
+    this.formUtil.extractFormValuesFromCriteria(this.selectionDCriteria, this.selectionDCriteriaForm, this.formUtil.evidenceList);
+
+    if (this.isSatisfiedALLeo) {
+      this.formUtil.extractFormValuesFromCriteria(this.selectionALLCriteria, this.selectionALLCriteriaForm, this.formUtil.evidenceList);
+    }
+
+    /* extract reduction criteria */
+    this.formUtil.extractFormValuesFromCriteria(this.reductionCriteria, this.reductionCriteriaForm, this.formUtil.evidenceList);
 
     // make full criterion list
     this.fullCriterionList = this.makeFullCriterionListEO(this.exclusionACriteria,

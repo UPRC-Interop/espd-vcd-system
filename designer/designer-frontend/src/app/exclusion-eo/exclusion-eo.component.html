@@ -21,7 +21,7 @@
 <mat-accordion multi="true">
 <ng-container *ngIf="dataService.exclusionACriteriaForm">
   <form [formGroup]="dataService.exclusionACriteriaForm">
-    <mat-expansion-panel expanded="true" *ngIf="exclusionACriteria">
+    <mat-expansion-panel expanded="true" *ngIf="this.dataService.exclusionACriteria">
       <mat-expansion-panel-header>
         <mat-panel-title translate>
           espd.part3.crit.grounds.criminal.conv.top.title
@@ -30,7 +30,7 @@
 
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <ng-container *ngIf="exclusionACriteria.length !== 0">
+      <ng-container *ngIf="this.dataService.exclusionACriteria.length !== 0">
         <div class="desc">
           <h4 translate>espd.part3.crit.eu.eo.grounds.criminal.conv.main.title</h4>
           <!--<h4>Article {{exclusionACriteria['0'].legislationReference.article}} of-->
@@ -38,7 +38,7 @@
         </div>
       </ng-container>
 
-      <mat-card *ngFor="let cr of exclusionACriteria; let i = index">
+      <mat-card *ngFor="let cr of this.dataService.exclusionACriteria; let i = index">
         <div class="exclusionCriteria">
 
           <div class="criterion-wrap">
@@ -64,7 +64,7 @@
 
 <ng-container *ngIf="dataService.exclusionBCriteriaForm">
   <form [formGroup]="dataService.exclusionBCriteriaForm">
-    <mat-expansion-panel expanded="true" *ngIf="exclusionBCriteria">
+    <mat-expansion-panel expanded="true" *ngIf="this.dataService.exclusionBCriteria">
       <mat-expansion-panel-header>
         <mat-panel-title translate>
           espd.part3.crit.top.grounds.payment.taxes.title
@@ -73,14 +73,14 @@
 
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <ng-container *ngIf="exclusionBCriteria.length !== 0">
+      <ng-container *ngIf="this.dataService.exclusionBCriteria.length !== 0">
         <div class="desc">
           <h4 translate>espd.part3.crit.eu.eo.payment.taxes.main.title</h4>
           <!--<h4>Article {{exclusionBCriteria['0'].legislationReference.article}} of-->
             <!--{{exclusionBCriteria['0'].legislationReference.title}} sets out the following reasons for exclusion</h4>-->
         </div>
       </ng-container>
-      <mat-card *ngFor="let cr of exclusionBCriteria">
+      <mat-card *ngFor="let cr of this.dataService.exclusionBCriteria">
         <div class="exclusionCriteria">
           <div class="criterion-wrap">
             <div class="criteria">
@@ -104,7 +104,7 @@
 
 <ng-container *ngIf="dataService.exclusionCCriteriaForm">
   <form [formGroup]="dataService.exclusionCCriteriaForm">
-    <mat-expansion-panel expanded="true" *ngIf="exclusionCCriteria">
+    <mat-expansion-panel expanded="true" *ngIf="this.dataService.exclusionCCriteria">
       <mat-expansion-panel-header>
         <mat-panel-title translate>
           espd.part3.crit.insolvency.conflicts.top.title
@@ -113,14 +113,14 @@
 
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <ng-container *ngIf="exclusionCCriteria.length !== 0">
+      <ng-container *ngIf="this.dataService.exclusionCCriteria.length !== 0">
         <div class="desc">
           <h4 translate>espd.part3.crit.eu.eo.main.breaching.obligations</h4>
           <!--<h4>Article {{exclusionCCriteria['0'].legislationReference.article}} of-->
             <!--{{exclusionCCriteria['0'].legislationReference.title}} sets out the following reasons for exclusion</h4>-->
         </div>
       </ng-container>
-      <mat-card *ngFor="let cr of exclusionCCriteria">
+      <mat-card *ngFor="let cr of this.dataService.exclusionCCriteria">
         <div class="exclusionCriteria">
           <div class="criterion-wrap">
             <div class="criteria">
@@ -144,7 +144,7 @@
 
 <ng-container *ngIf="dataService.exclusionDCriteriaForm">
   <form [formGroup]="dataService.exclusionDCriteriaForm">
-    <mat-expansion-panel expanded="true" *ngIf="exclusionDCriteria">
+    <mat-expansion-panel expanded="true" *ngIf="this.dataService.exclusionDCriteria">
       <mat-expansion-panel-header>
         <mat-panel-title translate>
           espd.part3.crit.purely.national.top.title
@@ -153,12 +153,12 @@
 
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <ng-container *ngIf="exclusionDCriteria.length !== 0">
+      <ng-container *ngIf="this.dataService.exclusionDCriteria.length !== 0">
         <div class="desc">
           <h4 translate>espd.part3.crit.eu.main.purely.national</h4>
         </div>
       </ng-container>
-      <mat-card *ngFor="let cr of exclusionDCriteria; let i=index">
+      <mat-card *ngFor="let cr of this.dataService.exclusionDCriteria; let i=index">
         <div class="exclusionCriteria">
           <div class="criterion-wrap">
             <div class="criteria">
@@ -180,5 +180,5 @@
 </ng-container>
 </mat-accordion>
 <button mat-raised-button color="primary" matStepperPrevious>{{'espd.gui.previous' | translate}}</button>
-<button type="submit" mat-raised-button color="primary" matStepperNext (click)="onExclusionEOSubmit()">{{'espd.gui.next' | translate}}
+<button type="submit" mat-raised-button color="primary" matStepperNext>{{'espd.gui.next' | translate}}
 </button>
