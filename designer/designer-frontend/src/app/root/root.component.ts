@@ -20,6 +20,12 @@ import {UtilitiesService} from '../services/utilities.service';
 import {StartComponent} from "../start/start.component";
 import {ProcedureComponent} from "../procedure/procedure.component";
 import {ProcedureEoComponent} from "../procedure-eo/procedure-eo.component";
+import {ExclusionComponent} from "../exclusion/exclusion.component";
+import {ExclusionEoComponent} from "../exclusion-eo/exclusion-eo.component";
+import {SelectionEoComponent} from "../selection-eo/selection-eo.component";
+import {FinishComponent} from "../finish/finish.component";
+import {FinishEoComponent} from "../finish-eo/finish-eo.component";
+import {SelectionComponent} from "../selection/selection.component";
 
 @Component({
 selector: 'app-root',
@@ -31,8 +37,18 @@ export class RootComponent implements OnInit, OnChanges {
   @ViewChild('startComponent') startComponent: StartComponent;
   @ViewChild('procedureCaComponent') procedureCaComponent: ProcedureComponent;
   @ViewChild('procedureEoComponent') procedureEoComponent: ProcedureEoComponent;
+  @ViewChild('exclusionCaComponent') exclusionCaComponent: ExclusionComponent;
+  @ViewChild('exclusionEoComponent') exclusionEoComponent: ExclusionEoComponent;
+  @ViewChild('selectionCaComponent') selectionCaComponent: SelectionComponent;
+  @ViewChild('selectionEoComponent') selectionEoComponent: SelectionEoComponent;
+  @ViewChild('finishCaComponent') finishCaComponent: FinishComponent;
+  @ViewChild('finishEoComponent') finishEoComponent: FinishEoComponent;
+
   startStepValid: boolean;
   procedureStepValid: boolean;
+  exclusionStepValid: boolean;
+  selectionStepValid: boolean;
+  finishStepValid: boolean;
 
   isLinear = true;
 
@@ -42,6 +58,9 @@ export class RootComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.startStepValid = true;
     this.procedureStepValid = true;
+    this.exclusionStepValid = true;
+    this.selectionStepValid = true;
+    this.finishStepValid = true;
   }
 
   ngOnChanges() {
@@ -54,25 +73,25 @@ export class RootComponent implements OnInit, OnChanges {
       this.utilities.start = true;
   }
 
-  validateStep(event) {
-    this.startStepValid = this.startComponent.startForm.valid;
-    this.procedureStepValid = this.validateProcedureForm();
+  private validateSteps() {
+    this.startStepValid = this.validateFormsInComponent(this.startComponent);
+    this.procedureStepValid = this.validateFormsInComponent(this.procedureCaComponent) && this.validateFormsInComponent(this.procedureEoComponent);
+    this.exclusionStepValid = this.validateFormsInComponent(this.exclusionCaComponent) && this.validateFormsInComponent(this.exclusionEoComponent);
+    this.selectionStepValid = this.validateFormsInComponent(this.selectionCaComponent) && this.validateFormsInComponent(this.selectionEoComponent);
+    this.finishStepValid = this.validateFormsInComponent(this.finishCaComponent) && this.validateFormsInComponent(this.finishEoComponent);
   }
 
-  validateProcedureForm(): boolean {
-    if ('undefined' !== typeof this.procedureCaComponent) {
-      return !this.procedureCaComponent.procedureForm.touched || this.procedureCaComponent.procedureForm.valid;
+  private validateFormsInComponent(component): boolean {
+    let valid: boolean = true;
+    if('undefined' !== typeof component) {
+      component.forms.forEach(ngForm => {
+        if (ngForm.form !== null && ngForm.form.touched && !ngForm.form.valid) {
+          valid = false;
+        }
+      });
     }
 
-    if ('undefined' !== typeof this.procedureEoComponent) {
-      return this.procedureEoComponent.procedureForm.touched || this.procedureEoComponent.procedureForm.valid
-        && !this.procedureEoComponent.EOForm.touched || this.procedureEoComponent.EOForm.valid
-        && (this.procedureEoComponent.formA == null || this.procedureEoComponent.formA.touched || this.procedureEoComponent.formA.valid)
-        && (this.procedureEoComponent.formC == null || this.procedureEoComponent.formC.touched || this.procedureEoComponent.formC.valid)
-        && (this.procedureEoComponent.formD == null || this.procedureEoComponent.formD.touched || this.procedureEoComponent.formD.valid);
-    }
-
-    return true;
+    return valid;
   }
 
 }

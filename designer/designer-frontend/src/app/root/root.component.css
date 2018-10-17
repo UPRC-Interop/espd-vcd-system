@@ -41,3 +41,9 @@ mat-card{
 .invalid {
   color: red;
 }
+
+.invalid-icon {
+  color: red;
+  display: inline-flex;
+  vertical-align: middle;
+}

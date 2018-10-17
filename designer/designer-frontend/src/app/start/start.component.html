@@ -17,7 +17,7 @@
 -->
 
   <app-welcome></app-welcome>
-  <form  #startForm="ngForm">
+  <form  #form="ngForm">
 
     <mat-card>
       <mat-card-title translate>espd.init.who.are.you</mat-card-title>
@@ -175,7 +175,7 @@
       </mat-card>
     </ng-container>
 
-    <button type="button" mat-raised-button color="primary" (click)="onStartSubmit(startForm)"  matStepperNext>{{'espd.gui.next' | translate}}</button>
+    <button type="button" mat-raised-button color="primary" (click)="onStartSubmit(form)"  matStepperNext>{{'espd.gui.next' | translate}}</button>
 
   </form>
 

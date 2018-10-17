@@ -14,7 +14,7 @@
 /// limitations under the License.
 ///
 
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {FormControl, NgForm} from '@angular/forms';
 import {ApicallService} from '../services/apicall.service';
 import {DataService} from '../services/data.service';
@@ -31,7 +31,8 @@ import {UtilitiesService} from '../services/utilities.service';
 })
 export class StartComponent implements OnInit {
 
-  @ViewChild('startForm') startForm: NgForm;
+  @ViewChildren('form') forms: QueryList<NgForm>;
+
   countries: Country[];
   isCA = false;
   isEO = false;

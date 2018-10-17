@@ -14,7 +14,7 @@
 /// limitations under the License.
 ///
 
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {ProcedureType} from '../model/procedureType.model';
 import {Country} from '../model/country.model';
@@ -30,7 +30,7 @@ import {UtilitiesService} from '../services/utilities.service';
 })
 export class ProcedureEoComponent implements OnInit {
 
-  @ViewChild('procedureForm') procedureForm: NgForm;
+  @ViewChildren('form') forms: QueryList<NgForm>;
 
   public EOForm: FormGroup;
   // public formA = new FormGroup({});

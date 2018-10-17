@@ -14,8 +14,9 @@
 /// limitations under the License.
 ///
 
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {DataService} from '../services/data.service';
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-finish',
@@ -23,6 +24,8 @@ import {DataService} from '../services/data.service';
   styleUrls: ['./finish.component.css']
 })
 export class FinishComponent implements OnInit {
+
+  @ViewChildren('form') forms: QueryList<NgForm>;
 
   constructor(public dataService: DataService) {
   }

@@ -20,7 +20,7 @@
 <h4 translate>espd.part3.header</h4>
 <mat-accordion multi="true">
 <ng-container *ngIf="dataService.exclusionACriteriaForm">
-  <form [formGroup]="dataService.exclusionACriteriaForm">
+  <form [formGroup]="dataService.exclusionACriteriaForm" #form="ngForm">
     <mat-expansion-panel expanded="true" *ngIf="exclusionACriteria">
       <mat-expansion-panel-header>
         <mat-panel-title translate>
@@ -63,7 +63,7 @@
 </ng-container>
 
 <ng-container *ngIf="dataService.exclusionBCriteriaForm">
-  <form [formGroup]="dataService.exclusionBCriteriaForm">
+  <form [formGroup]="dataService.exclusionBCriteriaForm" #form="ngForm">
     <mat-expansion-panel expanded="true" *ngIf="exclusionBCriteria">
       <mat-expansion-panel-header>
         <mat-panel-title translate>
@@ -103,7 +103,7 @@
 </ng-container>
 
 <ng-container *ngIf="dataService.exclusionCCriteriaForm">
-  <form [formGroup]="dataService.exclusionCCriteriaForm">
+  <form [formGroup]="dataService.exclusionCCriteriaForm" #form="ngForm">
     <mat-expansion-panel expanded="true" *ngIf="exclusionCCriteria">
       <mat-expansion-panel-header>
         <mat-panel-title translate>
@@ -143,7 +143,7 @@
 
 
 <ng-container *ngIf="dataService.exclusionDCriteriaForm">
-  <form [formGroup]="dataService.exclusionDCriteriaForm">
+  <form [formGroup]="dataService.exclusionDCriteriaForm" #form="ngForm">
     <mat-expansion-panel expanded="true" *ngIf="exclusionDCriteria">
       <mat-expansion-panel-header>
         <mat-panel-title translate>

@@ -14,10 +14,10 @@
 /// limitations under the License.
 ///
 
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {SelectionCriteria} from '../model/selectionCriteria.model';
 import {DataService} from '../services/data.service';
-import {FormControl, NgForm} from '@angular/forms/forms';
+import {FormControl, NgForm} from '@angular/forms';
 import {ApicallService} from '../services/apicall.service';
 
 @Component({
@@ -26,6 +26,8 @@ import {ApicallService} from '../services/apicall.service';
   styleUrls: ['./selection.component.css']
 })
 export class SelectionComponent implements OnInit {
+
+  @ViewChildren('form') forms: QueryList<NgForm>;
 
   @Input() selectionACriteria: SelectionCriteria[];
   @Input() selectionBCriteria: SelectionCriteria[];

@@ -14,9 +14,9 @@
 /// limitations under the License.
 ///
 
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {DataService} from '../services/data.service';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, NgForm} from '@angular/forms';
 import {SelectionCriteria} from '../model/selectionCriteria.model';
 import {FormUtilService} from '../services/form-util.service';
 
@@ -28,6 +28,7 @@ import {FormUtilService} from '../services/form-util.service';
 export class SelectionEoComponent implements OnInit {
   // selectionALLCriteria: SelectionCriteria[] = null;
 
+  @ViewChildren('form') forms: QueryList<NgForm>;
 
   @Input() selectionACriteria: SelectionCriteria[];
   @Input() selectionBCriteria: SelectionCriteria[];

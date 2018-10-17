@@ -14,16 +14,10 @@
 /// limitations under the License.
 ///
 
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {ReductionCriterion} from '../model/reductionCriterion.model';
-import {FormGroup} from '@angular/forms';
-import {RequirementResponse} from '../model/requirement-response.model';
-import {RequirementGroup} from '../model/requirementGroup.model';
-import {EoRelatedCriterion} from '../model/eoRelatedCriterion.model';
-import * as moment from 'moment';
-import {EvidenceIssuer} from '../model/evidenceIssuer.model';
-import {Evidence} from '../model/evidence.model';
+import {FormGroup, NgForm} from '@angular/forms';
 import {FormUtilService} from '../services/form-util.service';
 
 @Component({
@@ -32,6 +26,8 @@ import {FormUtilService} from '../services/form-util.service';
   styleUrls: ['./finish-eo.component.css']
 })
 export class FinishEoComponent implements OnInit {
+
+  @ViewChildren('form') forms: QueryList<NgForm>;
 
   @Input() reductionCriteria: ReductionCriterion[];
   @Input() form: FormGroup;

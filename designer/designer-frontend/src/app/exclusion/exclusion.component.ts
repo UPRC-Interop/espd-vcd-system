@@ -14,12 +14,10 @@
 /// limitations under the License.
 ///
 
-import {Component, Input, OnInit} from '@angular/core';
-import {ApicallService} from '../services/apicall.service';
+import {Component, Input, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {ExclusionCriteria} from '../model/exclusionCriteria.model';
-import {LegislationReference} from '../model/legislationReference.model';
 import {DataService} from '../services/data.service';
-import {NgForm} from '@angular/forms/forms';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-exclusion',
@@ -27,6 +25,8 @@ import {NgForm} from '@angular/forms/forms';
   styleUrls: ['./exclusion.component.css']
 })
 export class ExclusionComponent implements OnInit {
+
+  @ViewChildren('form') forms: QueryList<NgForm>;
 
   @Input() exclusionACriteria: ExclusionCriteria[];
   @Input() exclusionBCriteria: ExclusionCriteria[];

@@ -17,7 +17,7 @@
 
 -->
 <h4 translate>espd.part3.header</h4>
-<form #f="ngForm">
+<form #form="ngForm">
   <mat-accordion multi="true">
     <mat-expansion-panel expanded="true" *ngIf="exclusionACriteria">
       <mat-expansion-panel-header>
@@ -139,5 +139,5 @@
     </mat-expansion-panel>
   </mat-accordion>
   <button mat-raised-button color="primary" matStepperPrevious>{{'espd.gui.previous' | translate}}</button>
-  <button type="submit" mat-raised-button color="primary" matStepperNext (click)="onExclusionSubmit(f)">{{'espd.gui.next' | translate}}</button>
+  <button type="submit" mat-raised-button color="primary" matStepperNext (click)="onExclusionSubmit(form)">{{'espd.gui.next' | translate}}</button>
 </form>

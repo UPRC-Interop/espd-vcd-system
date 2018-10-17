@@ -14,16 +14,10 @@
 /// limitations under the License.
 ///
 
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {ExclusionCriteria} from '../model/exclusionCriteria.model';
 import {DataService} from '../services/data.service';
 import {FormGroup, NgForm} from '@angular/forms';
-import {RequirementGroup} from '../model/requirementGroup.model';
-import {RequirementResponse} from '../model/requirement-response.model';
-import {EoRelatedCriterion} from '../model/eoRelatedCriterion.model';
-import * as moment from 'moment';
-import {EvidenceIssuer} from '../model/evidenceIssuer.model';
-import {Evidence} from '../model/evidence.model';
 import {FormUtilService} from '../services/form-util.service';
 
 @Component({
@@ -32,6 +26,8 @@ import {FormUtilService} from '../services/form-util.service';
   styleUrls: ['./exclusion-eo.component.css']
 })
 export class ExclusionEoComponent implements OnInit {
+
+  @ViewChildren('form') forms: QueryList<NgForm>;
 
   @Input() exclusionACriteria: ExclusionCriteria[];
   @Input() exclusionBCriteria: ExclusionCriteria[];

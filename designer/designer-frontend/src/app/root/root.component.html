@@ -31,16 +31,22 @@
 
 <div class="container" *ngIf="this.utilities.start">
 
-  <mat-horizontal-stepper (selectionChange)="validateStep($event)" [linear]="isLinear" #stepper="matHorizontalStepper">
+  <mat-horizontal-stepper (selectionChange)="validateSteps()" [linear]="isLinear" #stepper="matHorizontalStepper">
     <mat-step>
       <ng-template matStepLabel>
-        <span [class.invalid]="!startStepValid">{{'espd.gui.progress.start' | translate}}</span>
+        <div [class.invalid]="!startStepValid">
+          <mat-icon *ngIf="!startStepValid" class="invalid-icon">warning</mat-icon>
+          <span>{{'espd.gui.progress.start' | translate}}</span>
+        </div>
       </ng-template>
       <app-start #startComponent></app-start>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>
-        <span [class.invalid]="!procedureStepValid">{{'espd.gui.progress.procedure' | translate}}</span>
+        <div [class.invalid]="!procedureStepValid">
+          <mat-icon *ngIf="!procedureStepValid" class="invalid-icon">warning</mat-icon>
+          <span>{{'espd.gui.progress.procedure' | translate}}</span>
+        </div>
       </ng-template>
       <app-procedure *ngIf="utilities.isCA" #procedureCaComponent></app-procedure>
       <app-procedure-eo [formA] = 'dataService.eoRelatedACriteriaForm'
@@ -53,12 +59,18 @@
                         #procedureEoComponent></app-procedure-eo>
     </mat-step>
     <mat-step>
-      <ng-template matStepLabel>{{'espd.gui.progress.exclusion' | translate}}</ng-template>
+      <ng-template matStepLabel>
+        <div [class.invalid]="!exclusionStepValid">
+          <mat-icon *ngIf="!exclusionStepValid" class="invalid-icon">warning</mat-icon>
+          <span>{{'espd.gui.progress.exclusion' | translate}}</span>
+        </div>
+      </ng-template>
       <app-exclusion  [exclusionACriteria] = 'dataService.exclusionACriteria'
                       [exclusionBCriteria] = 'dataService.exclusionBCriteria'
                       [exclusionCCriteria] = 'dataService.exclusionCCriteria'
                       [exclusionDCriteria] = 'dataService.exclusionDCriteria'
-                      *ngIf="utilities.isCA"></app-exclusion>
+                      *ngIf="utilities.isCA"
+                      #exclusionCaComponent></app-exclusion>
       <app-exclusion-eo [formA] = 'dataService.exclusionACriteriaForm'
                         [formB] = 'dataService.exclusionBCriteriaForm'
                         [formC] = 'dataService.exclusionCCriteriaForm'
@@ -67,16 +79,23 @@
                         [exclusionBCriteria] = 'dataService.exclusionBCriteria'
                         [exclusionCCriteria] = 'dataService.exclusionCCriteria'
                         [exclusionDCriteria] = 'dataService.exclusionDCriteria'
-        *ngIf="utilities.isEO"></app-exclusion-eo>
+                        *ngIf="utilities.isEO"
+                        #exclusionEoComponent></app-exclusion-eo>
     </mat-step>
     <mat-step>
-      <ng-template matStepLabel>{{'espd.gui.progress.selection' | translate}}</ng-template>
+      <ng-template matStepLabel>
+        <div [class.invalid]="!selectionStepValid">
+          <mat-icon *ngIf="!selectionStepValid" class="invalid-icon">warning</mat-icon>
+          <span>{{'espd.gui.progress.selection' | translate}}</span>
+        </div>
+      </ng-template>
       <app-selection [selectionACriteria] = 'dataService.selectionACriteria'
                      [selectionBCriteria] = 'dataService.selectionBCriteria'
                      [selectionCCriteria] = 'dataService.selectionCCriteria'
                      [selectionDCriteria] = 'dataService.selectionDCriteria'
                      [selectionALLCriteria]='dataService.selectionALLCriteria'
-        *ngIf="utilities.isCA"></app-selection>
+                      *ngIf="utilities.isCA"
+                      #selectionCaComponent></app-selection>
       <app-selection-eo [formA] = 'dataService.selectionACriteriaForm'
                         [formB] = 'dataService.selectionBCriteriaForm'
                         [formC] = 'dataService.selectionCCriteriaForm'
@@ -87,14 +106,21 @@
                         [selectionCCriteria] = 'dataService.selectionCCriteria'
                         [selectionDCriteria] = 'dataService.selectionDCriteria'
                         [selectionALLCriteria]="dataService.selectionALLCriteria"
-                        *ngIf="utilities.isEO"></app-selection-eo>
+                        *ngIf="utilities.isEO"
+                        #selectionEoComponent></app-selection-eo>
     </mat-step>
     <mat-step>
-      <ng-template matStepLabel>{{'espd.gui.progress.finish' | translate}}</ng-template>
-      <app-finish *ngIf="utilities.isCA"></app-finish>
+      <ng-template matStepLabel>
+        <div [class.invalid]="!finishStepValid">
+          <mat-icon *ngIf="!finishStepValid" class="invalid-icon">warning</mat-icon>
+          <span>{{'espd.gui.progress.finish' | translate}}</span>
+        </div>
+      </ng-template>
+      <app-finish *ngIf="utilities.isCA" #finishCaComponent></app-finish>
       <app-finish-eo [form]="dataService.reductionCriteriaForm"
                      [reductionCriteria]="dataService.reductionCriteria"
-        *ngIf="utilities.isEO"></app-finish-eo>
+                      *ngIf="utilities.isEO"
+                      #finishEoComponent></app-finish-eo>
     </mat-step>
   </mat-horizontal-stepper>
 

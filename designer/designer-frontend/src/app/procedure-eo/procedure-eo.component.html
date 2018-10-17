@@ -16,7 +16,7 @@
 
 -->
 <h4 translate>espd.part1.header</h4>
-<form #procedureForm="ngForm">
+<form #form="ngForm">
   <mat-accordion multi="true">
     <mat-expansion-panel expanded="true">
       <mat-expansion-panel-header>
@@ -143,7 +143,7 @@
 
   <h4 translate>espd.part2.header</h4>
 
-  <form [formGroup]="EOForm">
+  <form [formGroup]="EOForm" #form="ngForm">
     <mat-accordion multi="true">
       <mat-expansion-panel expanded="true">
         <mat-expansion-panel-header>
@@ -221,7 +221,7 @@
           </mat-radio-group>
         </div>
         <ng-container *ngIf="dataService.eoRelatedACriteriaForm">
-          <form [formGroup]="dataService.eoRelatedACriteriaForm">
+          <form [formGroup]="dataService.eoRelatedACriteriaForm" #form="ngForm">
             <div class="eoRelatedCriteria" *ngFor="let cr of eoRelatedACriteria; let i=index">
               <mat-card>
                 <h4>{{cr.description}}</h4>
@@ -313,7 +313,7 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
         <ng-container *ngIf='this.dataService.eoRelatedCCriteriaForm!=null'>
-          <form [formGroup]="dataService.eoRelatedCCriteriaForm">
+          <form [formGroup]="dataService.eoRelatedCCriteriaForm" #form="ngForm">
             <div class="eoRelatedCriteria" *ngFor="let cr of eoRelatedCCriteria; let i=index">
               <span>{{cr.description}}</span>
               <div class="answer">
@@ -330,7 +330,7 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
         <ng-container *ngIf='this.dataService.eoRelatedDCriteriaForm!=null'>
-          <form [formGroup]="dataService.eoRelatedDCriteriaForm">
+          <form [formGroup]="dataService.eoRelatedDCriteriaForm" #form="ngForm">
             <div class="eoRelatedCriteria" *ngFor="let cr of eoRelatedDCriteria; let i=index">
               <span>{{cr.description}}</span>
               <div class="answer">
@@ -345,7 +345,7 @@
 
 
   <button mat-raised-button color="primary" matStepperPrevious>{{'espd.gui.previous' | translate}}</button>
-  <button type="button" mat-raised-button color="primary" matStepperNext (click)="onProcedureEOSubmit( procedureForm, EOForm)">{{'espd.gui.next' | translate}}
+  <button type="button" mat-raised-button color="primary" matStepperNext (click)="onProcedureEOSubmit( form, EOForm)">{{'espd.gui.next' | translate}}
   </button>
 </form>
 

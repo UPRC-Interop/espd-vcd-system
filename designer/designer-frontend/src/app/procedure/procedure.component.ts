@@ -14,7 +14,7 @@
 /// limitations under the License.
 ///
 
-import {Component, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import {Component, OnChanges, OnInit, QueryList, SimpleChanges, ViewChildren} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {ProcedureType} from '../model/procedureType.model';
 import {Country} from '../model/country.model';
@@ -27,7 +27,8 @@ import {NgForm} from '@angular/forms';
 })
 export class ProcedureComponent implements OnInit, OnChanges {
 
-  @ViewChild('procedureForm') procedureForm: NgForm;
+  @ViewChildren('form') forms: QueryList<NgForm>;
+
   countries: Country[] = null;
   procedureTypes: ProcedureType[] = null;
   // @Input() eoRelatedCriteria: EoRelatedCriterion[];

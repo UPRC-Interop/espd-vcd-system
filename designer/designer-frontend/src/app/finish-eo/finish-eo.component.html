@@ -20,7 +20,7 @@
 <mat-accordion multi="true">
 
   <ng-container *ngIf="dataService.reductionCriteriaForm">
-    <form [formGroup]="dataService.reductionCriteriaForm">
+    <form [formGroup]="dataService.reductionCriteriaForm" #form="ngForm">
       <mat-expansion-panel expanded="true" *ngIf="reductionCriteria">
         <mat-expansion-panel-header>
           <mat-panel-title translate>
