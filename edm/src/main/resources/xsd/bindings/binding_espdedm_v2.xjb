@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jxb:bindings xmlns="http://java.sun.com/xml/ns/jaxb"
+    xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/jaxb http://java.sun.com/xml/ns/jaxb/bindingschema_2_0.xsd"
+    jxb:version="2.1">
+
+    <!-- Convert date and time here -->
+    <jxb:globalBindings>
+        <jxb:javaType name="java.time.LocalDate" xmlType="xs:date"
+                      parseMethod="eu.esens.espdvcd.schema.adapter.LocalDateAdapter.unmarshal"
+                      printMethod="eu.esens.espdvcd.schema.adapter.LocalDateAdapter.marshal"/>
+        <jxb:javaType name="java.time.LocalTime" xmlType="xs:time"
+                      parseMethod="eu.esens.espdvcd.schema.adapter.LocalTimeAdapter.unmarshal"
+                      printMethod="eu.esens.espdvcd.schema.adapter.LocalTimeAdapter.marshal"/>
+        <jxb:serializable uid="100"/>
+    </jxb:globalBindings>
+
+    <!--
+        
+        This file bindings are for edm version 2.0.0
+    
+    -->
+              
+    <!-- 
+        
+        ************************************************************************
+                                    maindoc
+        ************************************************************************
+        
+    -->    
+   
+   <!-- UBL-QualificationApplicationRequest-2.2-Pre-award -->
+    <jxb:bindings schemaLocation="../v2/maindoc/UBL-QualificationApplicationRequest-2.2-Pre-award.xsd" node="/xs:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="eu.espd.schema.v2.pre_award.qualificationapplicationrequest"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    
+    <!-- UBL-QualificationApplicationResponse-2.2-Pre-award -->
+    <jxb:bindings schemaLocation="../v2/maindoc/UBL-QualificationApplicationResponse-2.2-Pre-award.xsd" node="/xs:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="eu.espd.schema.v2.pre_award.qualificationapplicationresponse"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+   
+   <!-- 
+        
+        ************************************************************************
+                                    common 
+        ************************************************************************
+        
+    -->
+       
+    <!-- CCTS_CCT_SchemaModule-2.2 -->
+    <jxb:bindings schemaLocation="../v2/common/CCTS_CCT_SchemaModule-2.2.xsd" node="/xs:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="eu.espd.schema.v2.corecomponenttypeschemamodule._2"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    
+    <!-- UBL-CommonAggregateComponents-Pre-award -->
+    <jxb:bindings schemaLocation="../v2/common/UBL-CommonAggregateComponents-Pre-award.xsd" node="/xs:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="eu.espd.schema.v2.pre_award.commonaggregate"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    
+    <!-- UBL-CommonBasicComponents-Pre-award -->
+    <jxb:bindings schemaLocation="../v2/common/UBL-CommonBasicComponents-Pre-award.xsd" node="/xs:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="eu.espd.schema.v2.pre_award.commonbasic"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    
+    <!-- UBL-CommonExtensionComponents-Pre-award -->
+    <jxb:bindings schemaLocation="../v2/common/UBL-CommonExtensionComponents-Pre-award.xsd" node="/xs:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="eu.espd.schema.v2.commonextensioncomponents_2"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    
+    <!-- UBL-CommonSignatureComponents-2.2 -->
+    <jxb:bindings schemaLocation="../v2/common/UBL-CommonSignatureComponents-2.2.xsd" node="/xs:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="eu.espd.schema.v2.commonsignaturecomponents_2"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    
+    <!-- UBL-ExtensionContentDataType-Pre-award -->
+    
+    <!-- UBL-QualifiedDataTypes-Pre-award -->
+    <jxb:bindings schemaLocation="../v2/common/UBL-QualifiedDataTypes-Pre-award.xsd" node="/xs:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="eu.espd.schema.v2.qualifieddatatypes_2"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    
+    <!-- UBL-SignatureAggregateComponents-2.2 -->
+    <jxb:bindings schemaLocation="../v2/common/UBL-SignatureAggregateComponents-2.2.xsd" node="/xs:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="eu.espd.schema.v2.signatureaggregatecomponents_2"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    
+    <!-- UBL-SignatureBasicComponents-2.2 -->
+    <jxb:bindings schemaLocation="../v2/common/UBL-SignatureBasicComponents-2.2.xsd" node="/xs:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="eu.espd.schema.v2.signaturebasiccomponents_2"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    
+    <!-- UBL-UnqualifiedDataTypes-2.2 -->
+    <jxb:bindings schemaLocation="../v2/common/UBL-UnqualifiedDataTypes-2.2.xsd" node="/xs:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="eu.espd.schema.v2.unqualifieddatatypes_2"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    
+    <!-- UBL-XAdES01903v132-201601-2.2 -->
+    <jxb:bindings schemaLocation="../v2/common/UBL-XAdES01903v132-201601-2.2.xsd" node="/xs:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="eu.espd.schema.v2.uri._01903.v1_3"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    
+    <!-- UBL-XAdES01903v141-201601-2.2 -->
+    <jxb:bindings schemaLocation="../v2/common/UBL-XAdES01903v141-201601-2.2.xsd" node="/xs:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="eu.espd.schema.v2.uri._01903.v1_4"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    
+    <!-- UBL-xmldsig1-edm-2.2 -->
+    <jxb:bindings schemaLocation="../v2/common/UBL-xmldsig1-schema-2.2.xsd" node="/xs:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="eu.espd.schema.v2.xmldsig1"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    
+    <!-- UBL-xmldsig11-edm-2.2 -->
+    <jxb:bindings schemaLocation="../v2/common/UBL-xmldsig11-schema-2.2.xsd" node="/xs:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="eu.espd.schema.v2.xmldsig11"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    
+    <!-- UBL-xmldsig-core-edm-2.2 -->
+        
+</jxb:bindings>
+

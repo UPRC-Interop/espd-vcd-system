@@ -1,4 +1,21 @@
+/**
+ * Copyright 2016-2018 University of Piraeus Research Center
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package eu.esens.espdvcd.model;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.validation.constraints.NotNull;
 
@@ -15,8 +32,8 @@ public class LegislationReference {
      * <p>
      * Data type: Text<br>
      * Cardinality: 1..1<br>
-     * InfReqID: tir92-130<br>
-     * BusReqID: tbr92-015, tbr92-016<br>
+     * InfReqID: tir70-064, tir92-130<br>
+     * BusReqID: tbr70-013, tbr92-015, tbr92-016<br>
      * UBL syntax path: ccv:Criterion.LegislationReference.Title<br>
      */
 
@@ -30,8 +47,8 @@ public class LegislationReference {
      * <p>
      * Data type: Text<br>
      * Cardinality: 0..1<br>
-     * InfReqID: tir92-131<br>
-     * BusReqID: tbr92-015, tbr92-016<br>
+     * InfReqID: tir70-065, tir92-131<br>
+     * BusReqID: tbr70-013, tbr92-015, tbr92-016<br>
      * UBL syntax path: ccv:Criterion.LegislationReference.Description<br>
      */
     protected String description;
@@ -43,8 +60,8 @@ public class LegislationReference {
      * <p>
      * Data type: Text<br>
      * Cardinality: 0..1<br>
-     * InfReqID: tir92-132<br>
-     * BusReqID: tbr92-015, tbr92-016<br>
+     * InfReqID: tir70-066, tir92-132<br>
+     * BusReqID: tbr70-013, tbr92-015, tbr92-016<br>
      * UBL syntax path: ccv:Criterion.LegislationReference.JurisdictionLevelCode<br>
      */
     protected String jurisdictionLevelCode;
@@ -56,8 +73,8 @@ public class LegislationReference {
      * <p>
      * Data type: Text<br>
      * Cardinality: 0..1<br>
-     * InfReqID: tir92-133<br>
-     * BusReqID: tbr92-015, tbr92-016<br>
+     * InfReqID: tir70-067, tir92-133<br>
+     * BusReqID: tbr70-013, tbr92-015, tbr92-016<br>
      * UBL syntax path: ccv:Criterion.LegislationReference.Article<br>
      */
     protected String article;
@@ -69,13 +86,15 @@ public class LegislationReference {
      * <p>
      * Data type: <br>
      * Cardinality: 0..1<br>
-     * InfReqID: tir92-134<br>
-     * BusReqID: tbr92-015, tbr92-016<br>
+     * InfReqID: tir70-068, tir92-134<br>
+     * BusReqID: tbr70-013, tbr92-015, tbr92-016<br>
      * UBL syntax path: ccv:Criterion.LegislationReference.URI<br>
      */
     protected String URI;
 
-    public LegislationReference(String title, String description, String jurisdictionLevelCode, String article, String URI) {
+    public LegislationReference(@JsonProperty("title") String title, @JsonProperty("desccription") String description,
+                                @JsonProperty("jurisdictionLevelCode") String jurisdictionLevelCode,
+                                @JsonProperty("article") String article, @JsonProperty("URI") String URI) {
         this.title = title;
         this.description = description;
         this.jurisdictionLevelCode = jurisdictionLevelCode;

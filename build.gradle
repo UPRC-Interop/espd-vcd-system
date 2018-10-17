@@ -1,9 +1,38 @@
+/**
+ * Copyright 2016-2018 University of Piraeus Research Center
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "gradle.plugin.nl.javadude.gradle.plugins:license-gradle-plugin:0.14.0"
+    }
+}
+
+apply plugin: "com.github.hierynomus.license"
+
 subprojects { project ->
     apply plugin: 'java'
     apply plugin: 'maven'
     apply plugin: 'maven-publish'
+    apply plugin: "com.github.hierynomus.license"
 
-    version = '1.1.0-SNAPSHOT'
+    version = '2.0.2'
     group = 'eu.esens.espdvcd'
 
     project.ext.slf4j_version = '1.7.13'
@@ -23,7 +52,14 @@ subprojects { project ->
         mavenCentral()
         jcenter()
     }
-    
+
+    license {
+        header = rootProject.file('LICENSE-HEADER-2.0.txt')
+        ext.year = '2016-2018'
+        ext.name = 'University of Piraeus Research Center'
+        excludes(["**/*.xlsx"])
+    }
+
 }
 
 // publishing definition
@@ -36,16 +72,16 @@ configure (subprojects - project(':designer')) {
     task javadocJar(type: Jar) {
         classifier = 'javadoc'
         from javadoc
-    } 
+    }
 
     publishing {
         publications {
             mavenJava(MavenPublication) {
                 from components.java
                 
-                artifact sourceJar                
+                artifact sourceJar
                 artifact javadocJar
-                
+
             }
             
         }
@@ -55,7 +91,7 @@ configure (subprojects - project(':designer')) {
         repositories { 
             maven {
                 url "http://nexus.e-sens.gr/content/repositories/${project.version.endsWith('-SNAPSHOT') ? 'snapshots' : 'releases' }/"
-//                credentials { 
+//                credentials {
 //                    username 'username'
 //                    password 'password'
 //                }
@@ -73,9 +109,9 @@ configure(subprojects)
         compile libraries.slf4j_api
         compile libraries.log4j_slf4j_impl
         compile libraries.log4j_core
-        compile libraries.log4j_api   
-        testCompile 'junit:junit:4.12'
+        compile libraries.log4j_api       
         compile 'com.google.guava:guava:14.0'
+        testCompile group: 'junit', name: 'junit', version: '4.12'
     }
 }
 
@@ -83,3 +119,14 @@ configure(subprojects)
 task wrapper(type: Wrapper) {
     gradleVersion = '3.5'
 }
+
+task licenseFormatDesignerFrontend(type: com.hierynomus.gradle.license.tasks.LicenseFormat) {
+    source = fileTree(dir: "designer/designer-frontend/src").exclude(["**/*.json", "**/*.ico"])
+
+    license {
+        header = rootProject.file('LICENSE-HEADER-2.0.txt')
+        ext.year = '2016-2018'
+        ext.name = 'University of Piraeus Research Center'
+    }
+}
+licenseFormat.dependsOn licenseFormatDesignerFrontend

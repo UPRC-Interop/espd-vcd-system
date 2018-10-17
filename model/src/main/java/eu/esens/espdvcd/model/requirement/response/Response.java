@@ -1,9 +1,26 @@
+/**
+ * Copyright 2016-2018 University of Piraeus Research Center
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package eu.esens.espdvcd.model.requirement.response;
+
+import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 
 public abstract class Response {
 
@@ -18,26 +35,24 @@ public abstract class Response {
      * Data type: Identifier<br>
      * Cardinality: 0..1<br>
      * InfReqID: tir92-158<br>
-     * BusReqID: tbr92-018, tbr92-007, tbr92-005<br>
+     * BusReqID: tbr92-018, tbr92-007, tbr92-005, tbr92-006<br>
      * UBL syntax path:
      * ccv:Criterion.RequirementGroup.Requirement.DescriptionResponse.ID<br>
      */
-    private String ID;
 
-    /**
-     * Criterion fulfillment indicator
-     * <p>
-     * Indicates whether the economic operator states that he fulfills the
-     * specific criterion (true) or not (false).
-     * <p>
-     * Data type: Indicator<br>
-     * Cardinality: 0..1<br>
-     * InfReqID: tir92-160<br>
-     * BusReqID: tbr92-018, tbr92-007, tbr92-005<br>
-     * UBL syntax path:
-     * ccv:Criterion.RequirementGroup.Requirement.Response.Indicator<br>
-     */
-    private boolean fulfillmentIndicator;
+    private String UUID;
+    private String ID;
+    private String validatedCriterionPropertyID;
+    private String confidentialityLevelCode;
+    private ResponseTypeEnum responseType;
+
+    public String getUUID() {
+        return UUID;
+    }
+
+    public void setUUID(String UUID) {
+        this.UUID = UUID;
+    }
 
     public String getID() {
         return ID;
@@ -47,11 +62,27 @@ public abstract class Response {
         this.ID = ID;
     }
 
-    public boolean isFulfillmentIndicator() {
-        return fulfillmentIndicator;
+    public String getValidatedCriterionPropertyID() {
+        return validatedCriterionPropertyID;
     }
 
-    public void setFulfillmentIndicator(boolean fulfillmentIndicator) {
-        this.fulfillmentIndicator = fulfillmentIndicator;
+    public void setValidatedCriterionPropertyID(String validatedCriterionPropertyID) {
+        this.validatedCriterionPropertyID = validatedCriterionPropertyID;
+    }
+
+    public String getConfidentialityLevelCode() {
+        return confidentialityLevelCode;
+    }
+
+    public void setConfidentialityLevelCode(String confidentialityLevelCode) {
+        this.confidentialityLevelCode = confidentialityLevelCode;
+    }
+
+    public void setResponseType(ResponseTypeEnum responseType) {
+        this.responseType = responseType;
+    }
+
+    public ResponseTypeEnum getResponseType() {
+        return responseType;
     }
 }

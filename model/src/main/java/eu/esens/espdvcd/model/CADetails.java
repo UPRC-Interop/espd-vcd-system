@@ -1,3 +1,18 @@
+/**
+ * Copyright 2016-2018 University of Piraeus Research Center
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package eu.esens.espdvcd.model;
 
 import java.io.Serializable;
@@ -16,14 +31,27 @@ public class CADetails implements Serializable{
     private static final long serialVersionUID = -2251052431953226768L;
 
     /**
+     * Contracting body identifier
+     * <p>
+     * The national identifier of a contracting body as it is legally registered (e.g. VAT identification, such as KBO).
+     * <p>
+     * Data type: Identifier<br>
+     * Cardinality: 0..1<br>
+     * InfReqID: tir70-028<br>
+     * BusReqID: tbr70-001<br>
+     * UBL syntax path: cac: ContractingParty.Party.PartyIdentification<br>
+     */
+    private String ID;
+
+    /**
      * Contracting body name
      * <p>
      * The name of the contracting body as it is registered.
      * <p>
      * Data type: Text<br>
      * Cardinality: 1..1<br>
-     * InfReqID: tir92-009<br>
-     * BusReqID: tbr92-011<br>
+     * InfReqID: tir70-026, tir92-009<br>
+     * BusReqID: tbr70-001, tbr92-011<br>
      * UBL syntax path: cac:ContractingParty.Party.PartyName.Name<br>
      */
     @NotNull
@@ -36,9 +64,10 @@ public class CADetails implements Serializable{
      * <p>
      * Data type: Text<br>
      * Cardinality: 0..1<br>
-     * InfReqID: <br>
-     * BusReqID: tbr92-013<br>
-     * UBL syntax path: cac:AdditionalDocumentReference.Attachment.ExternalReference.FileName<br>
+     * InfReqID: tir70-306, tir92-306<br>
+     * BusReqID: tbr70-007, tbr92-013<br>
+     * UBL syntax path: cac:AdditionalDocumentReference.Attachment.ExternalReference.FileName
+     * - DocumentTypeCode TED_CN<br>
      */
     private String procurementProcedureTitle;
 
@@ -49,9 +78,10 @@ public class CADetails implements Serializable{
      * <p>
      * Data type: Text<br>
      * Cardinality: 0..1<br>
-     * InfReqID: <br>
-     * BusReqID: tbr92-013<br>
-     * UBL syntax path: cac:AdditionalDocumentReference.Attachment.ExternalReference.Description<br>
+     * InfReqID: tir070-307, tir92-307<br>
+     * BusReqID: tbr70-007, tbr92-013<br>
+     * UBL syntax path: cac:AdditionalDocumentReference.Attachment.ExternalReference.Description
+     * - DocumentTypeCode TED_CN, seq no. 1<br>
      */
     private String procurementProcedureDesc;
 
@@ -65,8 +95,8 @@ public class CADetails implements Serializable{
      * <p>
      * Data type: Identifier<br>
      * Cardinality: 1..1<br>
-     * InfReqID: <br>
-     * BusReqID: tbr92-013<br>
+     * InfReqID: tir70-005, tir92-013<br>
+     * BusReqID: tbr70-007, tbr92-013<br>
      * UBL syntax path: cbc:ContractFolderID<br>
      */
     @NotNull
@@ -83,28 +113,12 @@ public class CADetails implements Serializable{
      * <p>
      * Data type: Identifier<br>
      * Cardinality: 0..1<br>
-     * InfReqID: <br>
-     * BusReqID: tbr92-013<br>
-     * UBL syntax path: cac:AdditionalDocumentReference.ID<br>
+     * InfReqID: tir70-303, tir92-303<br>
+     * BusReqID: tbr70-007, tbr92-013<br>
+     * UBL syntax path: cac:AdditionalDocumentReference.ID
+     * - DocumentTypeCode TED_CN<br>
      */
     private String procurementPublicationNumber;
-   
-    //This could be changed to something that comes from an enumeration
-    /**
-     * Country code
-     * <p>
-     * A code that identifies the country. The lists of valid countries are registered with the
-     * ISO 3166-1 Maintenance agency, "Codes for the representation of names of countries and their
-     * subdivisions". It is recommended to use the alpha-2 representation.
-     * <p>
-     * Data type: Code<br>
-     * Cardinality: 1..1<br>
-     * InfReqID: tir92-016<br>
-     * BusReqID: tbr92-011<br>
-     * UBL syntax path: cac:ContractingParty.Party.PostalAddress.Country.IdentificationCode<br>
-     */
-    @NotNull
-    private String caCountry;
 
     /**
      * Contracting body electronic address identifier
@@ -113,11 +127,10 @@ public class CADetails implements Serializable{
      * <p>
      * Data type: Identifier<br>
      * Cardinality: 1..1<br>
-     * InfReqID: tir70-039<br>
-     * BusReqID: tbr70-001<br>
+     * InfReqID: tir70-039, tir92-011<br>
+     * BusReqID: tbr70-001, tbr92-011<br>
      * UBL syntax path: cac:ContractingParty.Party.EndpointID<br>
      */
-    @NotNull
     private String electronicAddressID;
 
     /**
@@ -127,8 +140,8 @@ public class CADetails implements Serializable{
      * <p>
      * Data type: Identifier<br>
      * Cardinality: 0..1<br>
-     * InfReqID: ?<br>
-     * BusReqID: ?<br>
+     * InfReqID: tir70-314, tir92-314<br>
+     * BusReqID: tbr70-006, tbr92-012<br>
      * UBL syntax path: cac:ContractingParty.Party.WebsiteURIID<br>
      */
     private String webSiteURI;
@@ -159,8 +172,53 @@ public class CADetails implements Serializable{
      */
     private ContactingDetails contactingDetails;
 
-    
+    /**
+     * Notice URI
+     * <p>
+     * The Uniform Resource Identifier (URI) that identifies where the notice is located.
+     * <p>
+     * Data type: Identifier<br>
+     * Cardinality: 0..1<br>
+     * InfReqID: tir070-305<br>
+     * BusReqID: tbr70-007<br>
+     * UBL syntax path: cac: AdditionalDocumentReference.Attachment.ExternalReference.URI
+     * - DocumentTypeCode TED_CN<br>
+     */
     private String procurementPublicationURI;
+
+
+    /**
+     * Received notice number
+     * <p>
+     * Additional attribute to ensure compatibility with DG GROW system (ESPD 1.0.2).
+     * <p>
+     * Data type: Text<br>
+     * Cardinality: 0..1<br>
+     * InfReqID: N/A<br>
+     * BusReqID: N/A<br>
+     * UBL syntax path: cac:AdditionalDocumentReference.Attachment.ExternalReference.Description
+     * - DocumentTypeCode TED_CN, seq no. 2<br>
+     */
+    private String receivedNoticeNumber;
+
+    /**
+     * National Official Journal
+     * <p>
+     * In case publication of a notice in the Official Journal of the European Union is not required,
+     * please give other information allowing the procurement procedure to be unequivocally identified
+     * (e. g. reference of a publication at national level)<br>
+     * Additional attribute to ensure compatibility with DG GROW system (ESPD 1.0.2).
+     * <p>
+     * Data type: Identifier<br>
+     * Cardinality: 0..1<br>
+     * InfReqID: N/A<br>
+     * BusReqID: N/A<br>
+     * UBL syntax path: cac:AdditionalDocumentReference.ID
+     * - DocumentTypeCode NGOJ<br>
+     */
+    private String nationalOfficialJournal;
+
+
 
     public String getProcurementPublicationURI() {
         return procurementPublicationURI;
@@ -202,12 +260,20 @@ public class CADetails implements Serializable{
         this.procurementProcedureFileReferenceNo = procurementProcedureFileReferenceNo;
     }
 
+    @Deprecated
     public String getCACountry() {
-        return caCountry;
+        if (postalAddress != null) {
+            return postalAddress.getCountryCode();
+        }
+        return null;//caCountry;
     }
 
+    @Deprecated
     public void setCACountry(String caCountry) {
-        this.caCountry = caCountry;
+        if (postalAddress != null) {
+            postalAddress.setCountryCode(caCountry);
+        }
+        //this.caCountry = caCountry;
     }
 
     public String getProcurementPublicationNumber() {
@@ -248,5 +314,29 @@ public class CADetails implements Serializable{
 
     public void setContactingDetails(ContactingDetails contactingDetails) {
         this.contactingDetails = contactingDetails;
+    }
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
+    public String getReceivedNoticeNumber() {
+        return receivedNoticeNumber;
+    }
+
+    public void setReceivedNoticeNumber(String receivedNoticeNumber) {
+        this.receivedNoticeNumber = receivedNoticeNumber;
+    }
+
+    public String getNationalOfficialJournal() {
+        return nationalOfficialJournal;
+    }
+
+    public void setNationalOfficialJournal(String nationalOfficialJournal) {
+        this.nationalOfficialJournal = nationalOfficialJournal;
     }
 }

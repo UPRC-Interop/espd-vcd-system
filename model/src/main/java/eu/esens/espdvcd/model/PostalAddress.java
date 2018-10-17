@@ -1,11 +1,24 @@
+/**
+ * Copyright 2016-2018 University of Piraeus Research Center
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package eu.esens.espdvcd.model;
 
 import javax.validation.constraints.NotNull;
 
 /**
  * Postal Address
- *
- * FIXME: add PostBox field.
  *
  * Address information.
  *
@@ -28,8 +41,8 @@ public class PostalAddress {
      * UBL syntax path: espd-cac: EconomicOperatorParty.Party. PostalAddress.StreetName<br>
      *
      * Usage for Contracting Authority:
-     * InfReqID: tir92-012<br>
-     * BusReqID: tbr92-012<br>
+     * InfReqID: tir70-029, tir92-012<br>
+     * BusReqID: tbr70-006, tbr92-012<br>
      * UBL syntax path: cac: ContractingParty. Party. PostalAddress.StreetName<br>
      *
      * Usage for Economic Operator Representative Natural Person:
@@ -37,10 +50,6 @@ public class PostalAddress {
      * BusReqID: tbr92-009<br>
      * UBL syntax path: espd-cac: EconomicOperatorParty.Party.Person.ResidenceAddress.StreetName<br>
      *
-     * Usage for Evidence Issuer (FIXME: not used anymore)
-     * InfReqID: tir92-145<br>
-     * BusReqID: tbr92-017<br>
-     * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.Response. Evidence.EvidenceIssuerParty.PostalAddress.StreetName<br>
      */
     private String addressLine1;
 
@@ -59,8 +68,8 @@ public class PostalAddress {
      * UBL syntax path: espd-cac: EconomicOperatorParty. Party. PostalAddress.CityName<br>
      *
      * Usage for Contracting Authority:
-     * InfReqID: tir92-013<br>
-     * BusReqID: tbr92-012<br>
+     * InfReqID: tir70-031, tir92-013<br>
+     * BusReqID: tbr70-006, tbr92-012<br>
      * UBL syntax path: cac: ContractingParty. Party. PostalAddress.CityName<br>
      *
      * Usage for Economic Operator Representative Natural Person:
@@ -68,10 +77,6 @@ public class PostalAddress {
      * BusReqID: tbr92-009<br>
      * UBL syntax path: espd-cac: EconomicOperatorParty.Party.Person.ResidenceAddress.CityName<br>
      *
-     * Usage for Evidence Issuer (FIXME: not used anymore)
-     * InfReqID: tir92-147<br>
-     * BusReqID: tbr92-017<br>
-     * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.Response. Evidence.EvidenceIssuerParty.PostalAddress.CityName<br>
      */
     private String city;
 
@@ -90,8 +95,8 @@ public class PostalAddress {
      * UBL syntax path: espd-cac: EconomicOperatorParty. Party. PostalAddress.PostalZone<br>
      *
      * Usage for Contracting Authority:
-     * InfReqID: tir92-014<br>
-     * BusReqID: tbr92-012<br>
+     * InfReqID: tir70-032, tir92-014<br>
+     * BusReqID: tbr70-006, tbr92-012<br>
      * UBL syntax path: cac: ContractingParty. Party. PostalAddress.PostalZone<br>
      *
      * Usage for Economic Operator Representative Natural Person:
@@ -99,45 +104,8 @@ public class PostalAddress {
      * BusReqID: tbr92-009<br>
      * UBL syntax path: espd-cac: EconomicOperatorParty.Party.Person.ResidenceAddress.PostalZone<br>
      *
-     * Usage for Evidence Issuer (FIXME: not used anymore)
-     * InfReqID: tir92-148<br>
-     * BusReqID: tbr92-017<br>
-     * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.Response. Evidence.EvidenceIssuerParty.PostalAddress.PostalZone<br>
      */
     private String postCode;
-
-
-    /**
-     * FIXME: not used according to specification
-     *
-     * Country subdivision
-     * <p>
-     * The subdivision of a country such as region, county, state, province etc.
-     * <p>
-     * Data type: Text<br>
-     * Cardinality: 0..1<br>
-     *
-     * Usage for Economic Operator:
-     * InfReqID: <br>
-     * BusReqID: <br>
-     * UBL syntax path: <br>
-     *
-     * Usage for Contracting Authority:
-     * InfReqID: <br>
-     * BusReqID: <br>
-     * UBL syntax path: <br>
-     *
-     * Usage for Economic Operator Representative Natural Person:
-     * InfReqID: <br>
-     * BusReqID: <br>
-     * UBL syntax path: <br>
-     *
-     * Usage for Evidence Issuer (FIXME: not used anymore)
-     * InfReqID: tir92-149<br>
-     * BusReqID: tbr92-017<br>
-     * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.Response. Evidence.EvidenceIssuerParty.PostalAddress.CountrySubentity<br>
-     */
-    private String countrySubdivision;
 
 
     /**
@@ -156,8 +124,8 @@ public class PostalAddress {
      * UBL syntax path: espd-cac: EconomicOperatorParty. Party. PostalAddress.Country.IdentificationCode<br>
      *
      * Usage for Contracting Authority:
-     * InfReqID: tir92-016<br>
-     * BusReqID: tbr92-011<br>
+     * InfReqID: tir70-034, tir92-016<br>
+     * BusReqID: tbr70-006, tbr92-011<br>
      * UBL syntax path: cac: ContractingParty. Party. PostalAddress.Country.IdentificationCode<br>
      *
      * Usage for Economic Operator Representative Natural Person:
@@ -165,10 +133,6 @@ public class PostalAddress {
      * BusReqID: tbr92-009<br>
      * UBL syntax path: espd-cac: EconomicOperatorParty.Party.Person.ResidenceAddress.Country.IdentificationCode<br>
      *
-     * Usage for Evidence Issuer (FIXME: not used anymore)
-     * InfReqID:  tir92-150<br>
-     * BusReqID: tbr92-017<br>
-     * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.Response. Evidence.EvidenceIssuerParty.PostalAddress.IdentificationCode<br>
      */
     @NotNull
     private String countryCode;
@@ -195,14 +159,6 @@ public class PostalAddress {
 
     public void setPostCode(String postCode) {
         this.postCode = postCode;
-    }
-
-    public String getCountrySubdivision() {
-        return countrySubdivision;
-    }
-
-    public void setCountrySubdivision(String countrySubdivision) {
-        this.countrySubdivision = countrySubdivision;
     }
 
     public String getCountryCode() {

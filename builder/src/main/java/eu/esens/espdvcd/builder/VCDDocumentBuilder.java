@@ -1,5 +1,21 @@
+/**
+ * Copyright 2016-2018 University of Piraeus Research Center
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package eu.esens.espdvcd.builder;
 
+import eu.esens.espdvcd.builder.schema.SchemaFactory;
 import eu.esens.espdvcd.model.ESPDRequest;
 
 import eu.esens.espdvcd.model.ESPDResponse;
@@ -8,10 +24,12 @@ import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.response.EvidenceURLResponse;
 import eu.esens.espdvcd.model.requirement.response.Response;
+import eu.espd.schema.v1.espdresponse_1.ESPDResponseType;
 import no.difi.asic.AsicWriterFactory;
 import no.difi.asic.AsicWriter;
 import no.difi.asic.MimeType;
 import no.difi.asic.SignatureHelper;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +40,7 @@ import java.net.URI;
 /**
  * Created by Ulf Lotzmann on 08/06/2016.
  */
-public class VCDDocumentBuilder extends DocumentBuilder {
+public class VCDDocumentBuilder extends DocumentBuilderV1 {
 
     private SignatureHelper signatureHelper;
 
@@ -37,7 +55,7 @@ public class VCDDocumentBuilder extends DocumentBuilder {
 
         // extract references to evidence documents from ESPDResponse
         if (req instanceof ESPDResponse) {
-            scanForDocuments((ESPDResponse)req);
+            scanForDocuments((ESPDResponse) req);
         }
     }
 
@@ -64,15 +82,14 @@ public class VCDDocumentBuilder extends DocumentBuilder {
         try {
             // Add the XML business document
             AsicWriter asicWriter = asicWriterFactory.newContainer(archiveOutputFile)
-                 .add(espdStream, "espd.xml", MimeType.forString("application/xml"));
+                    .add(espdStream, "espd.xml", MimeType.forString("application/xml"));
 
             // Add all found evidence documents with modified file entry name
             for (URI document : documents) {
                 asicWriter.add(new File(document), EvidenceHelper.getASiCResourcePath(document.toString()));
             }
             asicWriter.sign(signatureHelper);
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(VCDDocumentBuilder.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -89,6 +106,7 @@ public class VCDDocumentBuilder extends DocumentBuilder {
 
     /**
      * Scan the espd for references to locally stored ("java.io.tmpdir" folder) documents
+     *
      * @param espd
      */
     private void scanForDocuments(ESPDResponse espd) {
@@ -101,17 +119,18 @@ public class VCDDocumentBuilder extends DocumentBuilder {
 
     /**
      * Recursively scan requirement groups for references to locally stored documents
+     *
      * @param rg
      */
     private void scanRequirementGroup(RequirementGroup rg) {
-        for (RequirementGroup innerRg : rg.getRequirementGroups() ) {
+        for (RequirementGroup innerRg : rg.getRequirementGroups()) {
             scanRequirementGroup(innerRg);
         }
         for (Requirement rq : rg.getRequirements()) {
             Response resp = rq.getResponse();
             //if (rq.getResponseDataType().equals(ResponseTypeEnum.EVIDENCE_URL)) {
             if (resp instanceof EvidenceURLResponse) {
-                String uriStr = ((EvidenceURLResponse)resp).getEvidenceURL();
+                String uriStr = ((EvidenceURLResponse) resp).getEvidenceURL();
                 if (uriStr != null) {
                     try {
                         URI uri = URI.create(uriStr);
@@ -129,7 +148,15 @@ public class VCDDocumentBuilder extends DocumentBuilder {
     }
 
     @java.lang.Override
-    protected String getProfilID() {
+    protected String getProfileID() {
         return "56";
+    }
+
+
+    @Override
+    protected ESPDResponseType createXML(ESPDResponse res) {
+        ESPDResponseType resType = finalize(SchemaFactory.withEDM_V1().VCD_RESPONSE
+                .extractESPDResponseType(res));
+        return resType;
     }
 }

@@ -1,30 +1,38 @@
+/**
+ * Copyright 2016-2018 University of Piraeus Research Center
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package eu.esens.espdvcd.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
+
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
 
 /**
- *
- * documentation scheme of data fields:
+ * Criterion
  * <p>
- * name
  * <p>
- * descr
- * <p>
- * Data type: <br>
- * Cardinality: <br>
- * InfReqID: <br>
- * BusReqID: <br>
- * UBL syntax path: <br>
- *
- *
  * Created by Ulf Lotzmann on 05/03/2016.
  */
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+
 public class Criterion implements Serializable {
 
     private static final long serialVersionUID = 4541034499184281949L;
@@ -39,13 +47,22 @@ public class Criterion implements Serializable {
      * <p>
      * Data type: Identifier<br>
      * Cardinality: 1..1<br>
-     * InfReqID: tir92-070<br>
-     * BusReqID: tbr92-015<br>
+     * InfReqID: tir70-060, tir92-070<br>
+     * BusReqID: tbr70-010, tbr70-009, tbr92-015, tbr92-016<br>
      * UBL syntax path: ccv:Criterion.ID<br>
      */
-
-    @NotNull    
+    @NotNull
     protected String ID;
+
+    protected String UUID;
+
+    public void setUUID(String UUID) {
+        this.UUID = UUID;
+    }
+
+    public String getUUID() {
+        return UUID;
+    }
 
     /**
      * Criterion type code
@@ -53,15 +70,13 @@ public class Criterion implements Serializable {
      * Code specifying the type of criterion.
      * <p>
      * Data type: Code<br>
-     * Cardinality: 1..n - Remark: strings separated with delimiter TODO<br>
-     * InfReqID: tir92-071<br>
-     * BusReqID: tbr92-015<br>
+     * Cardinality: 1..n - Remark: strings separated with delimiter<br>
+     * InfReqID: tir70-061, tir92-071<br>
+     * BusReqID: tbr70-013, tbr92-015, tbr92-016<br>
      * UBL syntax path: ccv:Criterion.TypeCode<br>
      */
-
     @NotNull
     protected String typeCode;
-
 
     /**
      * Criterion name
@@ -72,8 +87,8 @@ public class Criterion implements Serializable {
      * <p>
      * Data type: Text<br>
      * Cardinality: 0..1<br>
-     * InfReqID: tir92-072<br>
-     * BusReqID: tbr92-015<br>
+     * InfReqID: tir70-062, tir92-072<br>
+     * BusReqID: tbr70-010, tbr70-009, tbr92-015, tbr92-016<br>
      * UBL syntax path: ccv:Criterion.Name<br>
      */
     protected String name;
@@ -85,8 +100,8 @@ public class Criterion implements Serializable {
      * <p>
      * Data type: Text<br>
      * Cardinality:	0..1<br>
-     * InfReqID: tir92-073<br>
-     * BusReqID: tbr92-015<br>
+     * InfReqID: tir70-063, tir92-073<br>
+     * BusReqID: tbr70-010, tbr70-009, tbr92-015, tbr92-016<br>
      * UBL syntax path: ccv:Criterion.Description<br>
      */
     protected String description;
@@ -115,9 +130,9 @@ public class Criterion implements Serializable {
 
     /** */
     public Criterion() {
-        this.ID = UUID.randomUUID().toString();    
+        this.ID = java.util.UUID.randomUUID().toString();
     }
-    
+
     public Criterion(String ID, String typeCode, String name, String description, LegislationReference legislationReference, List<RequirementGroup> requirementGroups) {
         this.ID = ID;
         this.typeCode = typeCode;
@@ -126,7 +141,7 @@ public class Criterion implements Serializable {
         this.legislationReference = legislationReference;
         this.requirementGroups = requirementGroups;
     }
-    
+
     public Criterion(String ID, String typeCode, String name, String description, LegislationReference legislationReference) {
         this.ID = ID;
         this.typeCode = typeCode;
@@ -186,14 +201,14 @@ public class Criterion implements Serializable {
     public void setLegislationReference(LegislationReference legislationReference) {
         this.legislationReference = legislationReference;
     }
-    
+
 
     public String getCriterionGroup() {
-          String[] ar= this.typeCode.split("\\.",4);
+        String[] ar = this.typeCode.split("\\.", 4);
         StringBuilder sb = new StringBuilder();
         int size = 3;
         if (ar.length < size) size = ar.length;
-        for (int i=0; i<size; i++) {
+        for (int i = 0; i < size; i++) {
             sb.append(ar[i]);
             sb.append(".");
         }
@@ -206,7 +221,7 @@ public class Criterion implements Serializable {
         hash = 29 * hash + Objects.hashCode(this.ID);
         hash = 29 * hash + Objects.hashCode(this.typeCode);
         hash = 29 * hash + Objects.hashCode(this.name);
-        hash = 29 * hash + Objects.hashCode(this.description);
+        // hash = 29 * hash + Objects.hashCode(this.description);
         return hash;
     }
 
@@ -222,14 +237,8 @@ public class Criterion implements Serializable {
             return false;
         }
         final Criterion other = (Criterion) obj;
-                            
-        if (!Objects.equals(this.ID, other.ID)) {
 
-            return false;
-        }
-                
-        return true;
+        return Objects.equals(this.ID, other.ID);
     }
-    
-    
+
 }

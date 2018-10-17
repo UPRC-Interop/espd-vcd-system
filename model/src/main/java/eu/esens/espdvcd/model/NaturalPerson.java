@@ -1,7 +1,24 @@
+/**
+ * Copyright 2016-2018 University of Piraeus Research Center
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package eu.esens.espdvcd.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.time.LocalDate;
-import java.util.Date;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -46,22 +63,6 @@ public class NaturalPerson {
 
 
     /**
-     * FIXME: not used according to specification
-     *
-     * Natural person identifier
-     * <p>
-     * Identifier of the natural person.
-     * <p>
-     * Data type: Identifier<br>
-     * Cardinality: 0..1<br>
-     * InfReqID: tir92-056<br>
-     * BusReqID: tbr92-009<br>
-     * UBL syntax path: espd-cac:EconomicOperatorParty.Party.Person.ID<br>
-     */
-    private String ID;
-
-
-    /**
      * Representative natural person role description
      * <p>
      * The short description for the role of the economic operators representative.
@@ -102,41 +103,6 @@ public class NaturalPerson {
      */
     private LocalDate birthDate;
 
-
-    /**
-     * FIXME: not used according to specification
-     *
-     * Natural person registration country
-     * <p>
-     * Country of registration of the natural person.
-     * <p>
-     * Data type: Code<br>
-     * Cardinality: 0..1<br>
-     * InfReqID: tir92-064<br>
-     * BusReqID: tbr92-009<br>
-     * UBL syntax path: espd-cac:EconomicOperatorParty.RepresentativeNaturalPerson.NaturalPersonRegistrationCountryCode<br>
-     */
-    private String registrationCountry;
-
-
-    /**
-     * FIXME: not used according to specification
-     *
-     * Power of attorney
-     * <p>
-     * Power of attorney of the natural person.
-     * Remark: No data type has been specified in domain vocabulary.
-     * Using a String according to implementation guidelines. FIXME
-     * <p>
-     * Data type: <br>
-     * Cardinality: 0..1<br>
-     * InfReqID: tir92-067<br>
-     * BusReqID: tbr92-010<br>
-     * UBL syntax path: espd-cac:EconomicOperatorParty.RepresentativeNaturalPerson.PowerOfAttorney.Description<br>
-     */
-    private String powerOfAttorney;
-
-
     /**
      * Postal address
      * <p>
@@ -150,7 +116,18 @@ public class NaturalPerson {
      */
     @NotNull
     private PostalAddress postalAddress;
-    
+
+    /**
+     * Representative natural person telephone number and email adress
+     * <p>
+     * A phone number and e-mail address for the contact point.
+     * <p>
+     * Data type: <br>
+     * Cardinality: 0..1<br>
+     * InfReqID: tir92-064, tir92-067<br>
+     * BusReqID: tbr92-009<br>
+     * UBL syntax path: espd-cac: EconomicOperatorParty.Party.Person.ResidenceAddress<br>
+     */
     private ContactingDetails contactDetails;
     
     
@@ -168,14 +145,6 @@ public class NaturalPerson {
 
     public void setFamilyName(String familyName) {
         this.familyName = familyName;
-    }
-    
-    public String getID() {
-        return ID;
-    }
-
-    public void setID(String ID) {
-        this.ID = ID;
     }
 
     public String getRole() {
@@ -200,22 +169,6 @@ public class NaturalPerson {
 
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
-    }
-
-    public String getRegistrationCountry() {
-        return registrationCountry;
-    }
-
-    public void setRegistrationCountry(String registrationCountry) {
-        this.registrationCountry = registrationCountry;
-    }
-
-    public String getPowerOfAttorney() {
-        return powerOfAttorney;
-    }
-
-    public void setPowerOfAttorney(String powerOfAttorney) {
-        this.powerOfAttorney = powerOfAttorney;
     }
 
     public PostalAddress getPostalAddress() {

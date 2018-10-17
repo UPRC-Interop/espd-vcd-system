@@ -1,0 +1,96 @@
+<!--
+
+    Copyright 2016-2018 University of Piraeus Research Center
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+
+<div id="languageSwitcher" *ngIf="this.utilities.initLanguage">
+  <mat-card>
+    <!--<mat-card-title>Select Language: </mat-card-title>-->
+    <mat-card-content>
+      <ul class="columnList">
+        <li *ngFor="let lang of this.dataService.langNames" (click)="onLanguageSelection(lang)">
+          <span class="flag-icon flag-icon-{{this.dataService.langISOCodes[lang].toLowerCase()}}"></span> {{lang}}</li>
+      </ul>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+
+<div class="container" *ngIf="this.utilities.start">
+
+  <mat-horizontal-stepper [linear]="isLinear" #stepper="matHorizontalStepper">
+    <mat-step>
+      <ng-template matStepLabel>{{'espd.gui.progress.start' | translate}}</ng-template>
+      <app-start></app-start>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>{{'espd.gui.progress.procedure' | translate}}</ng-template>
+      <app-procedure *ngIf="utilities.isCA"></app-procedure>
+      <app-procedure-eo [formA] = 'dataService.eoRelatedACriteriaForm'
+                        [formD] = 'dataService.eoRelatedDCriteriaForm'
+                        [formC] = 'dataService.eoRelatedCCriteriaForm'
+                        [eoRelatedACriteria] = 'dataService.eoRelatedACriteria'
+                        [eoRelatedCCriteria] = 'dataService.eoRelatedCCriteria'
+                        [eoRelatedDCriteria] = 'dataService.eoRelatedDCriteria'
+                        *ngIf="utilities.isEO"></app-procedure-eo>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>{{'espd.gui.progress.exclusion' | translate}}</ng-template>
+      <app-exclusion  [exclusionACriteria] = 'dataService.exclusionACriteria'
+                      [exclusionBCriteria] = 'dataService.exclusionBCriteria'
+                      [exclusionCCriteria] = 'dataService.exclusionCCriteria'
+                      [exclusionDCriteria] = 'dataService.exclusionDCriteria'
+                      *ngIf="utilities.isCA"></app-exclusion>
+      <app-exclusion-eo [formA] = 'dataService.exclusionACriteriaForm'
+                        [formB] = 'dataService.exclusionBCriteriaForm'
+                        [formC] = 'dataService.exclusionCCriteriaForm'
+                        [formD] = 'dataService.exclusionDCriteriaForm'
+                        [exclusionACriteria] = 'dataService.exclusionACriteria'
+                        [exclusionBCriteria] = 'dataService.exclusionBCriteria'
+                        [exclusionCCriteria] = 'dataService.exclusionCCriteria'
+                        [exclusionDCriteria] = 'dataService.exclusionDCriteria'
+        *ngIf="utilities.isEO"></app-exclusion-eo>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>{{'espd.gui.progress.selection' | translate}}</ng-template>
+      <app-selection [selectionACriteria] = 'dataService.selectionACriteria'
+                     [selectionBCriteria] = 'dataService.selectionBCriteria'
+                     [selectionCCriteria] = 'dataService.selectionCCriteria'
+                     [selectionDCriteria] = 'dataService.selectionDCriteria'
+                     [selectionALLCriteria]='dataService.selectionALLCriteria'
+        *ngIf="utilities.isCA"></app-selection>
+      <app-selection-eo [formA] = 'dataService.selectionACriteriaForm'
+                        [formB] = 'dataService.selectionBCriteriaForm'
+                        [formC] = 'dataService.selectionCCriteriaForm'
+                        [formD] = 'dataService.selectionDCriteriaForm'
+                        [formALL] = 'dataService.selectionALLCriteriaForm'
+                        [selectionACriteria] = 'dataService.selectionACriteria'
+                        [selectionBCriteria] = 'dataService.selectionBCriteria'
+                        [selectionCCriteria] = 'dataService.selectionCCriteria'
+                        [selectionDCriteria] = 'dataService.selectionDCriteria'
+                        [selectionALLCriteria]="dataService.selectionALLCriteria"
+                        *ngIf="utilities.isEO"></app-selection-eo>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>{{'espd.gui.progress.finish' | translate}}</ng-template>
+      <app-finish *ngIf="utilities.isCA"></app-finish>
+      <app-finish-eo [form]="dataService.reductionCriteriaForm"
+                     [reductionCriteria]="dataService.reductionCriteria"
+        *ngIf="utilities.isEO"></app-finish-eo>
+    </mat-step>
+  </mat-horizontal-stepper>
+
+</div>

@@ -1,26 +1,37 @@
+/**
+ * Copyright 2016-2018 University of Piraeus Research Center
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package eu.esens.espdvcd.model.requirement;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import eu.esens.espdvcd.codelist.enums.CriterionElementTypeEnum;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.requirement.response.Response;
-import eu.esens.espdvcd.model.Evidence;
-import eu.esens.espdvcd.model.requirement.response.ResponseFactory;
-import java.util.List;
+
 import javax.validation.constraints.NotNull;
 
 /**
  * Criterion requirement
- *
+ * <p>
  * Requirement to fulfill an specific criterion.
- *
+ * <p>
  * Created by ixuz on 2/24/16.
  */
 public class RequestRequirement implements Requirement {
 
     private static final long serialVersionUID = 528517963577425517L;
-
-
-
-
 
     /**
      * Criterion requirement identifier
@@ -29,12 +40,14 @@ public class RequestRequirement implements Requirement {
      * <p>
      * Data type: Identifier<br>
      * Cardinality: 1..1<br>
-     * InfReqID: tir070-080<br>
-     * BusReqID: tbr70-013, tbr70-004<br>
+     * InfReqID: tir70-080, tir92-135<br>
+     * BusReqID: tbr70-013, tbr70-004, tbr92-015, tbr92-016, tbr92-018<br>
      * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.ID<br>
      */
     @NotNull
     private String ID;
+
+    private String UUID;
 
     /**
      * Criterion requirement description
@@ -43,8 +56,8 @@ public class RequestRequirement implements Requirement {
      * <p>
      * Data type: Text<br>
      * Cardinality: 1..1<br>
-     * InfReqID: tir070-081<br>
-     * BusReqID: tbr70-013, tbr70-004<br>
+     * InfReqID: tir70-081, tir92-136<br>
+     * BusReqID: tbr70-013, tbr70-004, tbr92-015, tbr92-016, tbr92-018<br>
      * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.Description<br>
      */
     @NotNull
@@ -58,16 +71,43 @@ public class RequestRequirement implements Requirement {
      * Data type: Text<br>
      * Cardinality: 0..1<br>
      * InfReqID: <br>
-     * BusReqID: tbr92-015, tbr92-016, tbr92-018<br>
+     * BusReqID: tbr70-013, tbr70-004, tbr92-015, tbr92-016, tbr92-018<br>
      * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.ResponseDataType<br>
      */
     private ResponseTypeEnum responseDataType;
 
+    /**
+     * The type of property. Used to verify that structure of the property is correct
+     * UBL syntax path:
+     */
+    private CriterionElementTypeEnum typeCode = CriterionElementTypeEnum.QUESTION;
 
-    public RequestRequirement(String ID, ResponseTypeEnum responseDataType, String description) {
+    private boolean mandatory;
+
+    private boolean multiple;
+
+    public RequestRequirement(@JsonProperty("ID") String ID,
+                              @JsonProperty("responseDataType") ResponseTypeEnum responseDataType,
+                              @JsonProperty("description") String description) {
         this.ID = ID;
         this.responseDataType = responseDataType;
         this.description = description;
+        // apply default cardinality 1
+        this.mandatory = true;
+        this.multiple = false;
+    }
+
+    public RequestRequirement(@JsonProperty("ID") String ID,
+                              @JsonProperty("typeCode") CriterionElementTypeEnum typeCode,
+                              @JsonProperty("responseDataType") ResponseTypeEnum responseDataType,
+                              @JsonProperty("description") String description) {
+        this.ID = ID;
+        this.typeCode = typeCode;
+        this.responseDataType = responseDataType;
+        this.description = description;
+        // apply default cardinality 1
+        this.mandatory = true;
+        this.multiple = false;
     }
 
     @Override
@@ -78,6 +118,16 @@ public class RequestRequirement implements Requirement {
     @Override
     public void setID(String ID) {
         this.ID = ID;
+    }
+
+    @Override
+    public String getUUID() {
+        return UUID;
+    }
+
+    @Override
+    public void setUUID(String UUID) {
+        this.UUID = UUID;
     }
 
     @Override
@@ -101,22 +151,43 @@ public class RequestRequirement implements Requirement {
     }
 
     @Override
-    public List<Evidence> getEvidences() {
-        throw new UnsupportedOperationException("Not supported in ESPD request.");
-    }
-
-    @Override
-    public void setEvidences(List<Evidence> evidences) {
-        throw new UnsupportedOperationException("Not supported in ESPD request.");
-    }
-
-    @Override
     public void setResponseDataType(ResponseTypeEnum responseDataType) {
         this.responseDataType = responseDataType;
     }
 
     @Override
-    public ResponseTypeEnum getResponseDataType() {
-      return this.responseDataType;
+    public void setTypeCode(CriterionElementTypeEnum typeCode) {
+        this.typeCode = typeCode;
     }
+
+    @Override
+    public ResponseTypeEnum getResponseDataType() {
+        return this.responseDataType;
+    }
+
+    @Override
+    public CriterionElementTypeEnum getTypeCode() {
+        return typeCode;
+    }
+
+    @Override
+    public void setMandatory(boolean mandatory) {
+        this.mandatory = mandatory;
+    }
+
+    @Override
+    public void setMultiple(boolean multiple) {
+        this.multiple = multiple;
+    }
+
+    @Override
+    public boolean isMandatory() {
+        return mandatory;
+    }
+
+    @Override
+    public boolean isMultiple() {
+        return multiple;
+    }
+
 }

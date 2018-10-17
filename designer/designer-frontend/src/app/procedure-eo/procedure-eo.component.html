@@ -1,0 +1,351 @@
+<!--
+
+    Copyright 2016-2018 University of Piraeus Research Center
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<h4 translate>espd.part1.header</h4>
+<form #f="ngForm">
+  <mat-accordion multi="true">
+    <mat-expansion-panel expanded="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title translate>
+          espd.part1.info.pub
+        </mat-panel-title>
+        <mat-panel-description>
+
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="desc">
+        <p translate>espd.part1.to.be.filled.alert</p>
+      </div>
+      <mat-form-field>
+        <!--<label for="noticeNumber">Received Notice Number</label>-->
+        <input matInput id="noticeNumber" name="receivedNoticeNumber" [(ngModel)]="dataService.receivedNoticeNumber"
+               placeholder="{{'espd.part1.ted.reception.id' | translate}}" [disabled]="this.dataService.isReadOnly()">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput name="{{'espd.part1.ojs.label' | translate}}" [(ngModel)]="dataService.CADetails.procurementPublicationNumber"
+               placeholder="Notice number in the OJS" [disabled]="this.dataService.isReadOnly()">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput name="ojsURL" placeholder="{{'espd.part1.ojs.url' | translate}}"
+               [(ngModel)]="dataService.CADetails.procurementPublicationURI" [disabled]="this.dataService.isReadOnly()">
+      </mat-form-field>
+      <!--<mat-form-field>-->
+        <!--<input matInput name="nationalJournal" placeholder="National Official Journal"-->
+               <!--[(ngModel)]="dataService.CADetails.nationalOfficialJournal">-->
+      <!--</mat-form-field>-->
+
+      <div class="desc">
+        <p translate>espd.part1.official.journal.alert</p>
+      </div>
+    </mat-expansion-panel>
+    <mat-expansion-panel expanded="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title translate>
+          espd.part1.contact.details.ca
+        </mat-panel-title>
+        <mat-panel-description>
+
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-form-field>
+        <input matInput placeholder="{{'espd.part1.name' | translate}}" name="CAofficialName"
+               [(ngModel)]="dataService.CADetails.caofficialName" [disabled]="this.dataService.isReadOnly()">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="{{'espd.part2.vat'| translate}}" name="CAofficialID" [(ngModel)]="dataService.CADetails.id" [disabled]="this.dataService.isReadOnly()">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="{{'espd.part1.website' | translate}}" name="CAofficialWebSite" [(ngModel)]="dataService.CADetails.webSiteURI" [disabled]="this.dataService.isReadOnly()">
+      </mat-form-field>
+      <ng-container *ngIf="dataService.CADetails.postalAddress || dataService.PostalAddress">
+        <mat-form-field>
+          <input matInput placeholder="{{'espd.part1.city' | translate}}" name="CAofficialCity" [(ngModel)]="dataService.PostalAddress.city" [disabled]="this.dataService.isReadOnly()">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="{{'espd.part1.street.and. num' | translate}}" name="CAofficialStreet" [(ngModel)]="dataService.PostalAddress.addressLine1" [disabled]="this.dataService.isReadOnly()">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="{{'espd.part1.postcode' | translate}}" name="CAofficialPostCode" [(ngModel)]="dataService.PostalAddress.postCode" [disabled]="this.dataService.isReadOnly()">
+        </mat-form-field>
+      </ng-container>
+      <ng-container *ngIf="dataService.CADetails.contactingDetails || dataService.ContactingDetails">
+        <mat-form-field>
+          <input matInput placeholder="{{'espd.part1.contact.person' | translate}}" name="CAofficialContactName" [(ngModel)]="dataService.ContactingDetails.contactPointName" [disabled]="this.dataService.isReadOnly()">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="{{'espd.part1.telephone' | translate}}" name="CAofficialContactTelephone" [(ngModel)]="dataService.ContactingDetails.telephoneNumber" [disabled]="this.dataService.isReadOnly()">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="{{'espd.part1.fax' | translate}}" name="CAofficialContactFaxNumber" [(ngModel)]="dataService.ContactingDetails.faxNumber" [disabled]="this.dataService.isReadOnly()">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="{{'espd.part1.email' | translate}}" name="CAofficialContactEmail" [(ngModel)]="dataService.ContactingDetails.emailAddress" [disabled]="this.dataService.isReadOnly()">
+        </mat-form-field>
+      </ng-container>
+      <mat-form-field>
+        <mat-select name="CACountry" placeholder="{{'espd.part1.country' | translate}}" [(ngModel)]="dataService.selectedCountry" [disabled]="this.dataService.isReadOnly()">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let country of countries" [value]="country.code">{{country.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel expanded="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title translate>
+          espd.part1.info.procurement.proc
+        </mat-panel-title>
+        <mat-panel-description>
+
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <!-- TYPE OF PROCEDURE self-contained -->
+      <!--<mat-form-field>-->
+        <!--<mat-select placeholder="Type of Procedure" name="typeOfProcedure"-->
+                    <!--[(ngModel)]="dataService.CADetails.procurementProcedureType">-->
+          <!--<mat-option>None</mat-option>-->
+          <!--<mat-option *ngFor="let proc of procedureTypes" [value]="proc.code">{{proc.name}}</mat-option>-->
+        <!--</mat-select>-->
+      <!--</mat-form-field>-->
+      <mat-form-field>
+        <input matInput placeholder="{{'espd.part1.procurer.name' | translate}}" name="title" [(ngModel)]="dataService.CADetails.procurementProcedureTitle" [disabled]="this.dataService.isReadOnly()">
+      </mat-form-field>
+      <mat-form-field>
+        <!--<input matInput placeholder="Short Description">-->
+        <textarea matInput
+                  id="shortDesc" cols="30" rows="10"
+                  placeholder="{{'espd.part1.title.or.short.desc' | translate}}"
+                  name="description"
+                  [(ngModel)]="dataService.CADetails.procurementProcedureDesc"
+                  [disabled]="this.dataService.isReadOnly()"></textarea>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="{{'espd.part1.file.ref.ca' | translate}}" name="fileReferenceNumber"
+               [(ngModel)]="dataService.CADetails.procurementProcedureFileReferenceNo"
+               [disabled]="this.dataService.isReadOnly()">
+      </mat-form-field>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <h4 translate>espd.part2.header</h4>
+
+  <form [formGroup]="EOForm">
+    <mat-accordion multi="true">
+      <mat-expansion-panel expanded="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title translate>
+            espd.part2.info.eo
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="eoContainer">
+          <div class="eo1">
+            <mat-form-field class="eoField">
+              <input formControlName="name" matInput placeholder="{{'espd.part2.name' | translate}}" >
+            </mat-form-field>
+            <div class="postalAddress" formGroupName='postalAddress'>
+              <mat-form-field class="eoField">
+                <input formControlName="addressLine1" matInput placeholder="{{'espd.part1.street.and. Num' | translate}}">
+              </mat-form-field>
+              <mat-form-field class="eoField">
+                <input formControlName="postCode" matInput placeholder="{{'espd.part1.postcode' | translate}}">
+              </mat-form-field>
+              <mat-form-field class="eoField">
+                <input matInput placeholder="{{'espd.part1.city' | translate}}" formControlName="city">
+              </mat-form-field>
+              <mat-form-field class="eoField">
+                <mat-select formControlName="countryCode"
+                            placeholder="{{'espd.part1.country' | translate}}">
+                  <mat-option>None</mat-option>
+                  <mat-option *ngFor="let country of countries" [value]="country.code">{{country.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <mat-form-field class="eoField">
+              <input matInput placeholder="{{'espd.part2.lots.concerned' | translate}}" formControlName="procurementProjectLot">
+            </mat-form-field>
+
+          </div>
+
+
+          <div class="eo2">
+            <div class="contactingDetails" formGroupName="contactingDetails">
+              <mat-form-field class="eoField">
+                <input formControlName="emailAddress" matInput placeholder="{{'espd.part2.email' | translate}}">
+              </mat-form-field>
+              <mat-form-field class="eoField">
+                <input formControlName="telephoneNumber" matInput placeholder="{{'espd.part2.telephone' | translate}}">
+              </mat-form-field>
+              <mat-form-field class="eoField">
+                <input formControlName="faxNumber" matInput placeholder="{{'espd.part1.fax' | translate}}">
+              </mat-form-field>
+              <mat-form-field class="eoField">
+                <input formControlName="contactPointName" matInput placeholder="{{'espd.part2.contact.person' | translate}}">
+              </mat-form-field>
+            </div>
+            <mat-form-field class="eoField">
+              <input formControlName="id" matInput placeholder="{{'espd.part2.vat' | translate}}">
+            </mat-form-field>
+            <!--<mat-form-field class="eoField">-->
+            <!--<input matInput placeholder="Other number, if VAT not applicable">-->
+            <!--</mat-form-field>-->
+            <mat-form-field class="eoField">
+              <input formControlName="webSiteURI" matInput placeholder="{{'espd.part1.website' | translate}}">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="smeIndicator">
+          <span translate>espd.part2.is.eo.sized</span>
+          <mat-radio-group formControlName="smeIndicator">
+            <mat-radio-button color="primary"
+                              value="true"
+                              [value]="true">{{'espd.gui.yes' | translate}}
+            </mat-radio-button>
+            <mat-radio-button color="primary"
+                              value="false"
+                              [value]="false" [checked]="true">{{'espd.gui.no' | translate}}
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <ng-container *ngIf="dataService.eoRelatedACriteriaForm">
+          <form [formGroup]="dataService.eoRelatedACriteriaForm">
+            <div class="eoRelatedCriteria" *ngFor="let cr of eoRelatedACriteria; let i=index">
+              <mat-card>
+                <h4>{{cr.description}}</h4>
+                <div class="answer">
+                  <app-criterion [criterion]="cr" [form]="dataService.eoRelatedACriteriaForm.controls" [indicator]="true"></app-criterion>
+                </div>
+              </mat-card>
+            </div>
+          </form>
+        </ng-container>
+      </mat-expansion-panel>
+
+      <div formArrayName="naturalPersons">
+        <div *ngFor="let person of getNaturalPersonFormData().controls; let i = index;">
+          <mat-expansion-panel expanded="true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{'espd.part2.info.respresent' | translate}} #{{ i + 1}}
+              </mat-panel-title>
+              <mat-panel-description>
+                <div class="add">
+                  <a (click)="addPerson()">+</a>
+                </div>
+                <div class="remove">
+                  <a (click)="removePerson(i)">-</a>
+                </div>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <div [formGroupName]="i">
+              <div class="eoContainer">
+                <div class="eo1">
+                  <mat-form-field class="eoField">
+                    <input formControlName="firstName" matInput placeholder="{{'espd.part2.first.name' | translate}}">
+                  </mat-form-field>
+                  <mat-form-field class="eoField">
+                    <input formControlName="birthDate" matInput placeholder="{{'espd.part2.birth.date' | translate}}" matInput [matDatepicker]="picker">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+                  <div class="postalAddress" formGroupName='postalAddress'>
+                    <mat-form-field class="eoField">
+                      <input formControlName="addressLine1" matInput placeholder="{{'espd.part1.street.and. num' | translate}}">
+                    </mat-form-field>
+                    <mat-form-field class="eoField">
+                      <input formControlName="postCode" matInput placeholder="{{'espd.part1.postcode' | translate}}">
+                    </mat-form-field>
+                    <mat-form-field class="eoField">
+                      <input matInput placeholder="{{'espd.part1.city' | translate}}" formControlName="city">
+                    </mat-form-field>
+                    <mat-form-field class="eoField">
+                      <mat-select formControlName="countryCode"
+                                  placeholder="{{'espd.part1.country' | translate}}">
+                        <mat-option>None</mat-option>
+                        <mat-option *ngFor="let country of countries" [value]="country.code">{{country.name}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="eo2">
+                  <mat-form-field class="eoField">
+                    <input formControlName="familyName" matInput placeholder="{{'espd.part2.last.name' | translate}}">
+                  </mat-form-field>
+                  <mat-form-field class="eoField">
+                    <input formControlName="birthPlace" matInput placeholder="{{'espd.part2.birth.place' | translate}}">
+                  </mat-form-field>
+                  <div class="contactingDetails" formGroupName="contactDetails">
+                    <mat-form-field class="eoField">
+                      <input formControlName="emailAddress" matInput placeholder="{{'espd.part2.email' | translate}}">
+                    </mat-form-field>
+                    <mat-form-field class="eoField">
+                      <input formControlName="telephoneNumber" matInput placeholder="{{'espd.part2.telephone' | translate}}">
+                    </mat-form-field>
+                  </div>
+                  <mat-form-field class="eoField">
+                    <input formControlName="role" matInput placeholder="{{'espd.part2.pos.act.in.capacity' | translate}}">
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+
+          </mat-expansion-panel>
+        </div>
+      </div>
+      <mat-expansion-panel expanded="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title translate>
+            espd.part2.info.reliance
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <ng-container *ngIf='this.dataService.eoRelatedCCriteriaForm!=null'>
+          <form [formGroup]="dataService.eoRelatedCCriteriaForm">
+            <div class="eoRelatedCriteria" *ngFor="let cr of eoRelatedCCriteria; let i=index">
+              <span>{{cr.description}}</span>
+              <div class="answer">
+                <app-criterion [criterion]="cr" [form]="dataService.eoRelatedCCriteriaForm.controls" [indicator]="true"></app-criterion>
+              </div>
+            </div>
+          </form>
+        </ng-container>
+      </mat-expansion-panel>
+      <mat-expansion-panel expanded="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title translate>
+            espd.part2.information.subcontractors
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <ng-container *ngIf='this.dataService.eoRelatedDCriteriaForm!=null'>
+          <form [formGroup]="dataService.eoRelatedDCriteriaForm">
+            <div class="eoRelatedCriteria" *ngFor="let cr of eoRelatedDCriteria; let i=index">
+              <span>{{cr.description}}</span>
+              <div class="answer">
+                <app-criterion [criterion]="cr" [form]="dataService.eoRelatedDCriteriaForm.controls" [indicator]="true"></app-criterion>
+              </div>
+            </div>
+          </form>
+        </ng-container>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </form>
+
+
+  <button mat-raised-button color="primary" matStepperPrevious>{{'espd.gui.previous' | translate}}</button>
+  <button type="button" mat-raised-button color="primary" matStepperNext (click)="onProcedureEOSubmit( f, EOForm)">{{'espd.gui.next' | translate}}
+  </button>
+</form>
+
