@@ -64,7 +64,7 @@ public class RegulatedExportESPDV1Service implements ExportESPDService {
                         model.getFullCriterionList()
                                 .removeIf(selectableCriterion -> selectableCriterion
                                         .getTypeCode()
-                                        .matches("CRITERION.SELECTION.*"));
+                                        .matches("(?!.*ALL_SATISFIED*)^CRITERION.SELECTION.+"));
 
                 });
         return model;
