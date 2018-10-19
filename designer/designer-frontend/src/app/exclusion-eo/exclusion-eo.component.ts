@@ -19,6 +19,7 @@ import {ExclusionCriteria} from '../model/exclusionCriteria.model';
 import {DataService} from '../services/data.service';
 import {FormGroup, NgForm} from '@angular/forms';
 import {FormUtilService} from '../services/form-util.service';
+import {ValidationService} from "../services/validation.service";
 
 @Component({
   selector: 'app-exclusion-eo',
@@ -40,7 +41,11 @@ export class ExclusionEoComponent implements OnInit {
   @Input() formC: FormGroup;
 
 
-  constructor(public dataService: DataService, public formUtil: FormUtilService) {
+  constructor(
+    public dataService: DataService,
+    public formUtil: FormUtilService,
+    private validationService: ValidationService
+    ) {
   }
 
   ngOnInit() {
@@ -66,4 +71,7 @@ export class ExclusionEoComponent implements OnInit {
       this.exclusionDCriteria);
   }
 
+  public areFormsValid(): boolean {
+    return this.validationService.validateFormsInComponent(this.forms);
+  }
 }

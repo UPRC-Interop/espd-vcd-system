@@ -18,6 +18,7 @@ import {Component, Input, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {ExclusionCriteria} from '../model/exclusionCriteria.model';
 import {DataService} from '../services/data.service';
 import {NgForm} from '@angular/forms';
+import {ValidationService} from "../services/validation.service";
 
 @Component({
   selector: 'app-exclusion',
@@ -33,7 +34,10 @@ export class ExclusionComponent implements OnInit {
   @Input() exclusionCCriteria: ExclusionCriteria[];
   @Input() exclusionDCriteria: ExclusionCriteria[];
 
-  constructor(public dataService: DataService) {
+  constructor(
+    public dataService: DataService,
+    private validationService: ValidationService
+    ) {
   }
 
   ngOnInit() {
@@ -86,4 +90,7 @@ export class ExclusionComponent implements OnInit {
       this.exclusionDCriteria);
   }
 
+  public areFormsValid(): boolean {
+    return this.validationService.validateFormsInComponent(this.forms);
+  }
 }

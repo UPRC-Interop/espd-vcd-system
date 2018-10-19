@@ -17,6 +17,7 @@
 import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {NgForm} from "@angular/forms";
+import {ValidationService} from "../services/validation.service";
 
 @Component({
   selector: 'app-finish',
@@ -27,7 +28,10 @@ export class FinishComponent implements OnInit {
 
   @ViewChildren('form') forms: QueryList<NgForm>;
 
-  constructor(public dataService: DataService) {
+  constructor(
+    public dataService: DataService,
+    private validationService: ValidationService
+    ) {
   }
 
   ngOnInit() {
@@ -36,6 +40,10 @@ export class FinishComponent implements OnInit {
   exportFile() {
     // this.dataService.version = 'v1';
     this.dataService.saveFile(this.dataService.blob);
+  }
+
+  public areFormsValid(): boolean {
+    return this.validationService.validateFormsInComponent(this.forms);
   }
 
   // exportFile() {

@@ -20,6 +20,7 @@ import {ApicallService} from '../services/apicall.service';
 import {DataService} from '../services/data.service';
 import {Country} from '../model/country.model';
 import {UtilitiesService} from '../services/utilities.service';
+import {ValidationService} from "../services/validation.service";
 
 // import {ProcedureType} from "../model/procedureType.model";
 
@@ -27,7 +28,8 @@ import {UtilitiesService} from '../services/utilities.service';
 @Component({
   selector: 'app-start',
   templateUrl: './start.component.html',
-  styleUrls: ['./start.component.css']
+  styleUrls: ['./start.component.css'],
+  outputs: ['forms']
 })
 export class StartComponent implements OnInit {
 
@@ -46,7 +48,11 @@ export class StartComponent implements OnInit {
 
   // procedureTypes:ProcedureType[];
 
-  constructor(public dataService: DataService, private APIService: ApicallService, public utilities: UtilitiesService) {
+  constructor(
+    public dataService: DataService,
+    private APIService: ApicallService,
+    public utilities: UtilitiesService,
+    private validationService: ValidationService) {
   }
 
   ngOnInit() {
@@ -62,6 +68,9 @@ export class StartComponent implements OnInit {
 
   }
 
+  public areFormsValid(): boolean {
+    return this.validationService.validateFormsInComponent(this.forms);
+  }
 
   handleFileUpload(files: FileList) {
     console.log(files);

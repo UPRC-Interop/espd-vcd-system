@@ -73,25 +73,12 @@ export class RootComponent implements OnInit, OnChanges {
       this.utilities.start = true;
   }
 
-  private validateSteps() {
-    this.startStepValid = this.validateFormsInComponent(this.startComponent);
-    this.procedureStepValid = this.validateFormsInComponent(this.procedureCaComponent) && this.validateFormsInComponent(this.procedureEoComponent);
-    this.exclusionStepValid = this.validateFormsInComponent(this.exclusionCaComponent) && this.validateFormsInComponent(this.exclusionEoComponent);
-    this.selectionStepValid = this.validateFormsInComponent(this.selectionCaComponent) && this.validateFormsInComponent(this.selectionEoComponent);
-    this.finishStepValid = this.validateFormsInComponent(this.finishCaComponent) && this.validateFormsInComponent(this.finishEoComponent);
-  }
-
-  private validateFormsInComponent(component): boolean {
-    let valid: boolean = true;
-    if('undefined' !== typeof component) {
-      component.forms.forEach(ngForm => {
-        if (ngForm.form !== null && ngForm.form.touched && !ngForm.form.valid) {
-          valid = false;
-        }
-      });
-    }
-
-    return valid;
+  private validateSteps(event) {
+    this.startStepValid = this.startComponent.areFormsValid();
+    this.procedureStepValid = this.procedureCaComponent.areFormsValid() && this.procedureEoComponent.areFormsValid();
+    this.exclusionStepValid = this.exclusionCaComponent.areFormsValid() && this.exclusionEoComponent.areFormsValid();
+    this.selectionStepValid = this.selectionCaComponent.areFormsValid() && this.selectionEoComponent.areFormsValid();
+    this.finishStepValid = this.finishCaComponent.areFormsValid() && this.finishEoComponent.areFormsValid();
   }
 
 }

@@ -19,6 +19,7 @@ import {SelectionCriteria} from '../model/selectionCriteria.model';
 import {DataService} from '../services/data.service';
 import {FormControl, NgForm} from '@angular/forms';
 import {ApicallService} from '../services/apicall.service';
+import {ValidationService} from "../services/validation.service";
 
 @Component({
   selector: 'app-selection',
@@ -37,8 +38,11 @@ export class SelectionComponent implements OnInit {
   isSatisfiedALL = true;
   isAtoD = false;
 
-
-  constructor(public dataService: DataService, public APIService: ApicallService) {
+  constructor(
+    public dataService: DataService,
+    public APIService: ApicallService,
+    private validationService: ValidationService
+    ) {
   }
 
   ngOnInit() {
@@ -73,4 +77,7 @@ export class SelectionComponent implements OnInit {
       this.isSatisfiedALL);
   }
 
+  public areFormsValid(): boolean {
+    return this.validationService.validateFormsInComponent(this.forms);
+  }
 }

@@ -19,6 +19,7 @@ import {DataService} from '../services/data.service';
 import {ReductionCriterion} from '../model/reductionCriterion.model';
 import {FormGroup, NgForm} from '@angular/forms';
 import {FormUtilService} from '../services/form-util.service';
+import {ValidationService} from "../services/validation.service";
 
 @Component({
   selector: 'app-finish-eo',
@@ -32,7 +33,11 @@ export class FinishEoComponent implements OnInit {
   @Input() reductionCriteria: ReductionCriterion[];
   @Input() form: FormGroup;
 
-  constructor(public dataService: DataService, private formUtil: FormUtilService) {
+  constructor(
+    public dataService: DataService,
+    private formUtil: FormUtilService,
+    private validationService: ValidationService
+    ) {
   }
 
   ngOnInit() {
@@ -45,6 +50,9 @@ export class FinishEoComponent implements OnInit {
     this.dataService.finishEOSubmit(this.reductionCriteria);
   }
 
+  public areFormsValid(): boolean {
+    return this.validationService.validateFormsInComponent(this.forms);
+  }
 
   // onExportV1() {
   //   this.dataService.version = 'v1';

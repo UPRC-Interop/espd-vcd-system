@@ -19,6 +19,7 @@ import {DataService} from '../services/data.service';
 import {FormControl, FormGroup, NgForm} from '@angular/forms';
 import {SelectionCriteria} from '../model/selectionCriteria.model';
 import {FormUtilService} from '../services/form-util.service';
+import {ValidationService} from "../services/validation.service";
 
 @Component({
   selector: 'app-selection-eo',
@@ -44,8 +45,11 @@ export class SelectionEoComponent implements OnInit {
   isSatisfiedALL = true;
   isAtoD = false;
 
-  constructor(public dataService: DataService,
-              public formUtil: FormUtilService) {
+  constructor(
+    public dataService: DataService,
+    public formUtil: FormUtilService,
+    private validationService: ValidationService
+    ) {
   }
 
   ngOnInit() {
@@ -94,5 +98,9 @@ export class SelectionEoComponent implements OnInit {
       this.selectionCCriteria,
       this.selectionDCriteria,
       this.isSatisfiedALL);
+  }
+
+  public areFormsValid(): boolean {
+    return this.validationService.validateFormsInComponent(this.forms);
   }
 }

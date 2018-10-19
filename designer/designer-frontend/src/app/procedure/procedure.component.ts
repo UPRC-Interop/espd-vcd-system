@@ -19,6 +19,7 @@ import {DataService} from '../services/data.service';
 import {ProcedureType} from '../model/procedureType.model';
 import {Country} from '../model/country.model';
 import {NgForm} from '@angular/forms';
+import {ValidationService} from "../services/validation.service";
 
 @Component({
   selector: 'app-procedure',
@@ -35,7 +36,10 @@ export class ProcedureComponent implements OnInit, OnChanges {
   // @Input() reductionCriteria: ReductionCriterion[];
 
 
-  constructor(public dataService: DataService) {
+  constructor(
+    public dataService: DataService,
+    private validationService: ValidationService
+    ) {
   }
 
   ngOnInit() {
@@ -95,5 +99,7 @@ export class ProcedureComponent implements OnInit, OnChanges {
     // this.dataService.procedureSubmit(this.eoRelatedCriteria, this.reductionCriteria);
   }
 
-
+  public areFormsValid(): boolean {
+    return this.validationService.validateFormsInComponent(this.forms);
+  }
 }

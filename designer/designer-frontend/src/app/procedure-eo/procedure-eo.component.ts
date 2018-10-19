@@ -22,6 +22,7 @@ import {FormArray, FormControl, FormGroup, NgForm} from '@angular/forms';
 import {EoRelatedCriterion} from '../model/eoRelatedCriterion.model';
 import {FormUtilService} from '../services/form-util.service';
 import {UtilitiesService} from '../services/utilities.service';
+import {ValidationService} from "../services/validation.service";
 
 @Component({
   selector: 'app-procedure-eo',
@@ -49,7 +50,12 @@ export class ProcedureEoComponent implements OnInit {
   @Input() eoRelatedCCriteria: EoRelatedCriterion[];
   @Input() eoRelatedDCriteria: EoRelatedCriterion[];
 
-  constructor(public dataService: DataService, public formUtil: FormUtilService, public utilities: UtilitiesService) {
+  constructor(
+    public dataService: DataService,
+    public formUtil: FormUtilService,
+    public utilities: UtilitiesService,
+    private validationService: ValidationService
+  ) {
     this.EOForm = new FormGroup({
       'name': new FormControl(this.dataService.EODetails.name),
       'smeIndicator': new FormControl(false),
@@ -101,6 +107,9 @@ export class ProcedureEoComponent implements OnInit {
       });
   }
 
+  public areFormsValid(): boolean {
+    return this.validationService.validateFormsInComponent(this.forms);
+  }
 
   /* ================================================= natural person form ================================================ */
 
