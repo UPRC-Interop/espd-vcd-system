@@ -323,17 +323,6 @@ export class DataService {
 
   /* ============================= step submit actions =================================*/
 
-  // exclusionSubmit(exclusionCriteriaA: ExclusionCriteria[],
-  //                 exclusionCriteriaB: ExclusionCriteria[],
-  //                 exclusionCriteriaC: ExclusionCriteria[],
-  //                 exclusionCriteriaD: ExclusionCriteria[]) {
-  //   this.exclusionACriteria = exclusionCriteriaA;
-  //   this.exclusionBCriteria = exclusionCriteriaB;
-  //   this.exclusionCCriteria = exclusionCriteriaC;
-  //   this.exclusionDCriteria = exclusionCriteriaD;
-  //
-  // }
-
   selectionSubmit(isSatisfiedALL: boolean) {
 
     // create ESPDRequest
@@ -627,6 +616,18 @@ export class DataService {
 
           // create requirementGroup template objects required for multiple instances (cardinalities) function
           this.formUtil.createTemplateReqGroups(res.fullCriterionList);
+
+          /* find if CRITERION.SELECTION.ALL_SATISFIED exists */
+          this.utilities.satisfiedALLCriterionExists = this.utilities
+            .findCriterion(this.selectionALLCriteria, '7e7db838-eeac-46d9-ab39-42927486f22d');
+
+          if (this.utilities.satisfiedALLCriterionExists) {
+            this.utilities.isSatisfiedALL = true;
+            this.utilities.isAtoD = false;
+          } else {
+            this.utilities.isSatisfiedALL = false;
+            this.utilities.isAtoD = true;
+          }
 
 
           console.log(res);
@@ -1195,12 +1196,6 @@ export class DataService {
         this.langISOCodes[x.name] = x.code;
         return x;
       });
-      // console.log('LANG TEMPLATE: ');
-      // console.log(this.langTemplate);
-      // console.log('LANG_ISO: ');
-      // console.log(this.langISOCodes);
-      // console.log('RESPONSE: ');
-      // console.log(res);
 
 
     })

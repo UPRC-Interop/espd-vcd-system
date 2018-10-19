@@ -17,20 +17,27 @@
 
 -->
 <h4 translate>espd.part4.header</h4>
+
 <mat-card>
   <mat-card-content>
     <p translate>espd.part4.alert</p>
     <span translate>espd.gui.question.to.use.alpha</span>
-    <mat-radio-group name="satisfiesALL" [disabled]="this.dataService.isReadOnly()">
-      <mat-radio-button color="primary" name="selALL" value="YES" [checked]="this.dataService.isReadOnly()" (change)="handleALL(YES)" #YES>
+    <mat-radio-group name="satisfiesALL"
+                     [disabled]="this.dataService.isReadOnly() ||
+                     (this.utilities.satisfiedALLCriterionExists && this.utilities.isImportESPD)">
+      <mat-radio-button color="primary" name="selALL" value="YES"
+                        [checked]="!this.utilities.satisfiedALLCriterionExists && this.utilities.isImportESPD "
+                        (change)="handleALL(YES)" #YES>
         {{'espd.gui.yes' | translate}}</mat-radio-button>
-      <mat-radio-button color="primary" name="selALL" value="NO" [checked]="!this.dataService.isReadOnly()" (change)="handleALL(NO)" #NO>
+      <mat-radio-button color="primary" name="selALL" value="NO"
+                        [checked]="this.utilities.satisfiedALLCriterionExists && this.utilities.isImportESPD"
+                        (change)="handleALL(NO)" #NO>
         {{'espd.gui.no' | translate}}</mat-radio-button>
     </mat-radio-group>
   </mat-card-content>
 </mat-card>
 
-<mat-accordion multi="true" *ngIf="isSatisfiedALL">
+<mat-accordion multi="true" *ngIf="this.utilities.isSatisfiedALL">
   <form #f="ngForm">
     <mat-expansion-panel expanded="true" *ngIf="this.dataService.selectionALLCriteria">
       <mat-expansion-panel-header>
@@ -72,7 +79,7 @@
 </mat-accordion>
 
 
-<mat-accordion multi="true" *ngIf="isAtoD">
+<mat-accordion multi="true" *ngIf="this.utilities.isAtoD">
 <ng-container *ngIf="dataService.selectionACriteriaForm">
   <form [formGroup]="dataService.selectionACriteriaForm">
     <mat-expansion-panel expanded="true" *ngIf="this.dataService.selectionACriteria">

@@ -17,6 +17,7 @@
 import {Component, OnInit} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {FormControl} from '@angular/forms';
+import {UtilitiesService} from '../services/utilities.service';
 
 @Component({
   selector: 'app-selection-eo',
@@ -24,32 +25,33 @@ import {FormControl} from '@angular/forms';
   styleUrls: ['./selection-eo.component.css']
 })
 export class SelectionEoComponent implements OnInit {
-  isSatisfiedALL = true;
-  isAtoD = false;
+  // isSatisfiedALL = true;
+  // isAtoD = false;
 
-  constructor(public dataService: DataService) {
+  constructor(public dataService: DataService, public utilities: UtilitiesService) {
   }
 
   ngOnInit() {
+
     if (this.dataService.isReadOnly()) {
-      this.isAtoD = true;
-      this.isSatisfiedALL = false;
+      this.utilities.isAtoD = true;
+      this.utilities.isSatisfiedALL = false;
     }
   }
 
 
   handleALL(radio: FormControl) {
     if (radio.value === 'YES') {
-      this.isSatisfiedALL = false;
-      this.isAtoD = true;
+      this.utilities.isSatisfiedALL = false;
+      this.utilities.isAtoD = true;
     } else if (radio.value === 'NO') {
-      this.isSatisfiedALL = true;
-      this.isAtoD = false;
+      this.utilities.isSatisfiedALL = true;
+      this.utilities.isAtoD = false;
     }
   }
 
 
   onSelectionEOSubmit() {
-    this.dataService.selectionEOSubmit(this.isSatisfiedALL);
+    this.dataService.selectionEOSubmit(this.utilities.isSatisfiedALL);
   }
 }
