@@ -5,7 +5,7 @@ Wenn die Datei als Properties gezogen wird, wird ein DocType zur Laufzeit einget
 -->
 <properties>
     <entry key="espd.gui.about">Tietoa sivustosta</entry>
-    <entry key="espd.part4.all.selection.switch">?: Kaikkia valintaperusteita koskeva yleinen ilmoitus</entry>
+    <entry key="espd.part4.all.selection.switch">ɑ: Kaikkia valintaperusteita koskeva yleinen ilmoitus</entry>
     <entry key="espd.gui.app.environment">Arvoisa käyttäjä, käytät testausympäristöämme. Siirry sivulle</entry>
     <entry key="espd.gui.app.subtitle">Täyttö- ja jälleenkäyttöpalvelu</entry>
     <entry key="espd.gui.app.title">Yhteinen eurooppalainen hankinta-asiakirja (ESPD)</entry>
@@ -14,9 +14,7 @@ Wenn die Datei als Properties gezogen wird, wird ein DocType zur Laufzeit einget
     <entry key="espd.gui.click.here">täältä.</entry>
     <entry key="espd.gui.contact">Yhteystiedot</entry>
     <entry key="espd.gui.contact.header">Yhteystiedot</entry>
-    <entry key="espd.gui.contact.info">&lt;p&gt;Euroopan komissio&lt;p&gt;Sisämarkkinoiden, teollisuuden, yrittäjyyden ja
-        pk-yritystoiminnan pääosasto&lt;p&gt;Avenue d'Auderghem 45 / Oudergemselaan 45&lt;p&gt;B-1049 Bryssel&lt;p&gt;Belgia
-    </entry>
+    <entry key="espd.gui.contact.info">Euroopan komissio Sisämarkkinoiden, teollisuuden, yrittäjyyden ja pk-yritystoiminnan pääosasto Avenue d'Auderghem 45 / Oudergemselaan 45 B-1049 Bryssel Belgia</entry>
     <entry key="espd.gui.cookies">Evästeet</entry>
     <entry key="espd.gui.correct.errors">Virheet on korjattava ennen kuin voi jatkaa</entry>
     <entry key="espd.part1.city">Paikkakunta:</entry>
@@ -28,21 +26,14 @@ Wenn die Datei als Properties gezogen wird, wird ein DocType zur Laufzeit einget
     <entry key="espd.part1.country">Maa:</entry>
     <entry key="espd.part1.email">Sähköposti:</entry>
     <entry key="espd.part1.fax">faks</entry>
-    <entry key="espd.part1.file.ref.ca">Hankintaviranomaisen tai -yksikön asiakirja-aineistolle antama viitenumero (jos
-        sellainen on):
-    </entry>
-    <entry key="espd.part1.header">I osa: Hankintamenettelyä ja hankintaviranomaista tai -yksikköä koskevat tiedot
-    </entry>
+    <entry key="espd.part1.file.ref.ca">Hankintaviranomaisen tai -yksikön asiakirja-aineistolle antama viitenumero (jos sellainen on):</entry>
+    <entry key="espd.part1.header">I osa: Hankintamenettelyä ja hankintaviranomaista tai -yksikköä koskevat tiedot</entry>
     <entry key="espd.part1.info.procedure">menettely</entry>
     <entry key="espd.part1.info.procurement.proc">Hankintamenettelyä koskevat tiedot</entry>
     <entry key="espd.part1.info.pub">Julkaisemisesta tiedottaminen</entry>
     <entry key="espd.part1.name">Virallinen nimi:</entry>
     <entry key="espd.part1.nat.regnum">Kansallinen rekisterinumero (jos tiedossa):</entry>
-    <entry key="espd.part1.official.journal.alert">Jos tarjouskilpailukutsua ei ole julkaistu Euroopan unionin
-        virallisessa lehdessä tai jos sitä ei tarvitse julkaista, hankintaviranomaisen tai -yksikön on täytettävä
-        tiedot, joiden avulla hankintamenettely on tunnistettavissa yksiselitteisesti (esim. kansallisen tason julkaisun
-        viitetiedot).
-    </entry>
+    <entry key="espd.part1.official.journal.alert">Jos tarjouskilpailukutsua ei ole julkaistu Euroopan unionin virallisessa lehdessä tai jos sitä ei tarvitse julkaista, hankintaviranomaisen tai -yksikön on täytettävä tiedot, joiden avulla hankintamenettely on tunnistettavissa yksiselitteisesti (esim. kansallisen tason julkaisun viitetiedot).</entry>
     <entry key="espd.part1.ojs.label">Ilmoituksen numero EUVL:n S-sarjassa:</entry>
     <entry key="espd.part1.ojs.url">EUVL:n S-sarjan URL-osoite</entry>
     <entry key="espd.part1.postcode">Postinumero:</entry>
@@ -51,200 +42,75 @@ Wenn die Datei als Properties gezogen wird, wird ein DocType zur Laufzeit einget
     <entry key="espd.part1.ted.reception.id">Vastaanotetun ilmoituksen numero</entry>
     <entry key="espd.part1.telephone">Puhelin:</entry>
     <entry key="espd.part1.title.or.short.desc">Lyhyt kuvaus:</entry>
-    <entry key="espd.part1.to.be.filled.alert">Hankintamenettelyissä, joita koskeva tarjouskilpailukutsu on julkaistu
-        Euroopan unionin virallisessa lehdessä, I osassa vaadittavat tiedot haetaan automaattisesti edellyttäen, että
-        yhteisen eurooppalaisen hankinta-asiakirjan laatimisessa ja täyttämisessä käytetään sähköistä
-        hankinta-asiakirjapalvelua. Viittaus asiaa koskevaan, Euroopan unionin virallisessa lehdessä julkaistuun
-        ilmoitukseen:
-    </entry>
+    <entry key="espd.part1.to.be.filled.alert">Hankintamenettelyissä, joita koskeva tarjouskilpailukutsu on julkaistu Euroopan unionin virallisessa lehdessä, I osassa vaadittavat tiedot haetaan automaattisesti edellyttäen, että yhteisen eurooppalaisen hankinta-asiakirjan laatimisessa ja täyttämisessä käytetään sähköistä hankinta-asiakirjapalvelua. Viittaus asiaa koskevaan, Euroopan unionin virallisessa lehdessä julkaistuun ilmoitukseen:</entry>
     <entry key="espd.part1.website">Internet-sivusto (jos on):</entry>
     <entry key="espd.part3.grounds.criminal.conv">Tuomioihin liittyvät perusteet</entry>
     <entry key="espd.part3.header">III osa: Poissulkemisperusteet</entry>
-    <entry key="espd.part3.insolvency.conflicts">Maksukyvyttömyyteen, eturistiriitoihin tai ammatin harjoittamisessa
-        tapahtuneeseen virheeseen liittyvät perusteet
-    </entry>
+    <entry key="espd.part3.insolvency.conflicts">Maksukyvyttömyyteen, eturistiriitoihin tai ammatin harjoittamisessa tapahtuneeseen virheeseen liittyvät perusteet</entry>
     <entry key="espd.part5.concl.statements">VI osa: Loppulausumat</entry>
-    <entry key="espd.part5.concl.statements.signature">Aika, paikka ja vaadittaessa tai tarvittaessa allekirjoitus
-        (allekirjoitukset):
-    </entry>
-    <entry key="espd.part5.concl.statements.text">Allekirjoittanut (allekirjoittaneet) ilmoittaa (ilmoittavat), että
-        tiedot, jotka annetaan osissa II?V, ovat asianmukaisia ja oikeita ja että ne on esitetty täysin tietoisina
-        siitä, mitä väärien tietojen antamisesta seuraa.
-        &lt;p&gt;Allekirjoittanut (allekirjoittaneet) ilmoittaa (ilmoittavat) virallisesti pystyvänsä toimittamaan pyynnöstä
-            ja viipymättä ilmoitetut todistukset ja muut asiakirjanäytön muodot, lukuun ottamatta seuraavia tilanteita:
-        &lt;/p&gt;
-        &lt;p&gt;a) hankintaviranomaisella tai -yksiköllä on mahdollisuus hankkia kyseiset täydentävät asiakirjat suoraan
-            minkä tahansa jäsenvaltion kansallisesta tietokannasta, joka on käytettävissä maksutta (sillä
-            edellytyksellä, että talouden toimija on toimittanut tarvittavat tiedot (verkko-osoitteen, todistuksen
-            antaneen viranomaisen tai elimen nimi, asiakirjojen täsmälliset viitetiedot), jotta hankintaviranomainen tai
-            -yksikkö voi tehdä sen. Tähän on pyydettäessä liitettävä asiaankuuluva kyseistä tiedonsaantia koskeva
-            suostumus), tai
-        &lt;/p&gt;
-        &lt;p&gt;b) hankintaviranomaisella tai -yksiköllä on jo kyseiset asiakirjat hallussaan (direktiivin 2014/24/EU 59
-            artiklan 5 kohdan toisen alakohdan kansallisesta täytäntöönpanosta riippuen) viimeistään 18. lokakuuta 2018.
-        &lt;/p&gt;
-        &lt;p&gt;Allekirjoittanut (allekirjoittaneet) suostuu (suostuvat) siihen, että [yksilöidään hankintaviranomainen tai
-            -yksikkö I osan A jakson mukaisesti]:lle annetaan asiakirjat, jotka täydentävät tämän yhteisen
-            eurooppalaisen hankinta-asiakirjan [yksilöidään, missä osassa/jaksossa/kohdassa] annettuja tietoja,
-            hankintamenettelyssä [hankintamenettelyn yksilöintitiedot: (tiivistelmä, julkaisuviite Euroopan unionin
-            viralliseen lehteen, viitenumero)].
-        &lt;/p&gt;
-    </entry>
+    <entry key="espd.part5.concl.statements.signature">Aika, paikka ja vaadittaessa tai tarvittaessa allekirjoitus (allekirjoitukset):</entry>
+    <entry key="espd.part5.concl.statements.text">Allekirjoittanut (allekirjoittaneet) ilmoittaa (ilmoittavat), että tiedot, jotka annetaan osissa II–V, ovat asianmukaisia ja oikeita ja että ne on esitetty täysin tietoisina siitä, mitä väärien tietojen antamisesta seuraa. Allekirjoittanut (allekirjoittaneet) ilmoittaa (ilmoittavat) virallisesti pystyvänsä toimittamaan pyynnöstä ja viipymättä ilmoitetut todistukset ja muut asiakirjanäytön muodot, lukuun ottamatta seuraavia tilanteita: a) hankintaviranomaisella tai -yksiköllä on mahdollisuus hankkia kyseiset täydentävät asiakirjat suoraan minkä tahansa jäsenvaltion kansallisesta tietokannasta, joka on käytettävissä maksutta (sillä edellytyksellä, että talouden toimija on toimittanut tarvittavat tiedot (verkko-osoitteen, todistuksen antaneen viranomaisen tai elimen nimi, asiakirjojen täsmälliset viitetiedot), jotta hankintaviranomainen tai -yksikkö voi tehdä sen. Tähän on pyydettäessä liitettävä asiaankuuluva kyseistä tiedonsaantia koskeva suostumus), tai b) hankintaviranomaisella tai -yksiköllä on jo kyseiset asiakirjat hallussaan (direktiivin 2014/24/EU 59 artiklan 5 kohdan toisen alakohdan kansallisesta täytäntöönpanosta riippuen) viimeistään 18. lokakuuta 2018. Allekirjoittanut (allekirjoittaneet) suostuu (suostuvat) siihen, että [yksilöidään hankintaviranomainen tai -yksikkö I osan A jakson mukaisesti]:lle annetaan asiakirjat, jotka täydentävät tämän yhteisen eurooppalaisen hankinta-asiakirjan [yksilöidään, missä osassa/jaksossa/kohdassa] annettuja tietoja, hankintamenettelyssä [hankintamenettelyn yksilöintitiedot:  (tiivistelmä, julkaisuviite Euroopan unionin viralliseen lehteen, viitenumero)].</entry>
     <entry key="espd.part5.export">Vie</entry>
-    <entry key="espd.part5.export.content">Napauta nyt 'Vie'-painiketta ladataksesi ja tallentaaksesi yhteisen
-        eurooppalaisen hankinta-asiakirjan tiedoston tietokoneellesi. Hankintaviranomaisten on varmistettava, että
-        yhteisen eurooppalaisen hankinta-asiakirjan tiedosto on muiden tarjouspyyntöasiakirjojen ohella talouden
-        toimijoiden saatavilla.
-    </entry>
+    <entry key="espd.part5.export.content">Napauta nyt 'Vie'-painiketta ladataksesi ja tallentaaksesi yhteisen eurooppalaisen hankinta-asiakirjan tiedoston tietokoneellesi. Hankintaviranomaisten on varmistettava, että yhteisen eurooppalaisen hankinta-asiakirjan tiedosto on muiden tarjouspyyntöasiakirjojen ohella talouden toimijoiden saatavilla.</entry>
     <entry key="espd.part5.header">Loppu</entry>
     <entry key="espd.part5.reduction">V osa: Kelpuutettujen ehdokkaiden määrän vähentäminen</entry>
     <entry key="espd.part5.reduction.question">Talouden toimija ilmoittaa seuraavaa:</entry>
-    <entry key="espd.part5.text.eo.declares.that">Jos jotkin näistä todistuksista tai asiakirjanäytön muodoista ovat
-        saatavilla sähköisesti, ilmoitetaan kunkin osalta seuraavat tiedot:
-    </entry>
-    <entry key="espd.part5.title.eo.declares.that">Se täyttää puolueettomat ja syrjimättömät perusteet tai säännöt,
-        joita sovelletaan ehdokkaiden määrän vähentämiseksi, seuraavalla tavalla:&lt;p&gt;Jos vaaditaan tiettyjä todistuksia
-            tai muita asiakirjanäytön muotoja, ilmoitetaan kunkin näistä osalta, onko talouden toimijalla vaaditut
-            asiakirjat:
-        &lt;/p&gt;
-    </entry>
-    <entry key="espd.part5.toptext">Talouden toimijan olisi annettava nämä tiedot vain, jos hankintaviranomainen tai
-        -yksikkö on määrittänyt puolueettomat ja syrjimättömät perusteet tai säännöt sellaisten valintaperusteet
-        täyttävien ehdokkaiden määrän vähentämiseksi, jotka kutsutaan tarjouskilpailuun tai neuvotteluihin. Nämä tiedot,
-        joiden lisäksi voidaan mahdollisesti asettaa toimitettavia todistustyyppejä tai asiakirjanäytön muotoja koskevia
-        vaatimuksia, esitetään asianomaisessa ilmoituksessa tai hankinta-asiakirjoissa, joihin ilmoituksessa viitataan.
-        Ainoastaan rajoitetun menettelyn, tarjousperusteisen neuvottelumenettelyn, kilpailullisen neuvottelumenettelyn
-        ja innovaatiokumppanuuden osalta:
-    </entry>
-    <entry key="espd.part4.alert">Hankintaviranomaisen on ilmoitettava, mitä valintaperusteita sovelletaan,
-        rastittamalla asiaankuuluvan perusteen edessä oleva ruutu.
-    </entry>
+    <entry key="espd.part5.text.eo.declares.that">Jos jotkin näistä todistuksista tai asiakirjanäytön muodoista ovat saatavilla sähköisesti, ilmoitetaan kunkin osalta seuraavat tiedot:</entry>
+    <entry key="espd.part5.title.eo.declares.that">Se täyttää puolueettomat ja syrjimättömät perusteet tai säännöt, joita sovelletaan ehdokkaiden määrän vähentämiseksi, seuraavalla tavalla: Jos vaaditaan tiettyjä todistuksia tai muita asiakirjanäytön muotoja, ilmoitetaan kunkin näistä osalta, onko talouden toimijalla vaaditut asiakirjat:</entry>
+    <entry key="espd.part5.toptext">Talouden toimijan olisi annettava nämä tiedot vain, jos hankintaviranomainen tai -yksikkö on määrittänyt puolueettomat ja syrjimättömät perusteet tai säännöt sellaisten valintaperusteet täyttävien ehdokkaiden määrän vähentämiseksi, jotka kutsutaan tarjouskilpailuun tai neuvotteluihin. Nämä tiedot, joiden lisäksi voidaan mahdollisesti asettaa toimitettavia todistustyyppejä tai asiakirjanäytön muotoja koskevia vaatimuksia, esitetään asianomaisessa ilmoituksessa tai hankinta-asiakirjoissa, joihin ilmoituksessa viitataan. Ainoastaan rajoitetun menettelyn, tarjousperusteisen neuvottelumenettelyn, kilpailullisen neuvottelumenettelyn ja innovaatiokumppanuuden osalta:</entry>
+    <entry key="espd.part4.alert">Hankintaviranomaisen on ilmoitettava, mitä valintaperusteita sovelletaan, rastittamalla asiaankuuluvan perusteen edessä oleva ruutu.</entry>
     <entry key="espd.part4.economic.and.financial.standing">B: Taloudellinen tilanne ja rahoitusasema</entry>
     <entry key="espd.part4.header">IV osa: Valintaperusteet</entry>
-    <entry key="espd.part4.quality.assurance">D: Laadunvarmistusjärjestelmät ja ympäristöasioiden hallintaa koskevat
-        standardit
-    </entry>
+    <entry key="espd.part4.quality.assurance">D: Laadunvarmistusjärjestelmät ja ympäristöasioiden hallintaa koskevat standardit</entry>
     <entry key="espd.part4.suitability">A: Soveltuvuus</entry>
     <entry key="espd.part4.technical.professional.ability">C: Tekninen ja ammatillinen pätevyys</entry>
-    <entry key="espd.part2.add.complete.missing">Täytä lisäksi puuttuvat tiedot tapauksen mukaan IV osan A, B, C tai D
-        jaksossa VAIN, jos sitä vaaditaan asianomaisessa ilmoituksessa tai hankinta-asiakirjoissa:
-    </entry>
-    <entry key="espd.part2.all.selection.covered">d) Kattaako rekisteröinti tai sertifiointi kaikki vaaditut
-        valintaperusteet?
-    </entry>
-    <entry key="espd.part2.another.vat">Jos alv-numeroa ei ole, annetaan tarvittaessa muu kansallinen tunnistenumero,
-        jos sellainen vaaditaan ja jos sellainen on.
-    </entry>
-    <entry key="espd.part2.answer.following.parts">Vastaa tämän jakson, tämän osan B jakson ja (tarvittaessa) C jakson
-        kysymyksiin, täydennä (tarvittaessa) V osa ja täytä ja allekirjoita kaikissa tapauksissa VI osa.
-    </entry>
+    <entry key="espd.part2.add.complete.missing">Täytä lisäksi puuttuvat tiedot tapauksen mukaan IV osan A, B, C tai D jaksossa VAIN, jos sitä vaaditaan asianomaisessa ilmoituksessa tai hankinta-asiakirjoissa:</entry>
+    <entry key="espd.part2.all.selection.covered">d) Kattaako rekisteröinti tai sertifiointi kaikki vaaditut valintaperusteet?</entry>
+    <entry key="espd.part2.another.vat">Jos alv-numeroa ei ole, annetaan tarvittaessa muu kansallinen tunnistenumero, jos sellainen vaaditaan ja jos sellainen on.</entry>
+    <entry key="espd.part2.answer.following.parts">Vastaa tämän jakson, tämän osan B jakson ja (tarvittaessa) C jakson kysymyksiin, täydennä (tarvittaessa) V osa ja täytä ja allekirjoita kaikissa tapauksissa VI osa.</entry>
     <entry key="espd.part2.birth.date">Syntymäaika</entry>
     <entry key="espd.part2.birth.place">Syntymäpaikka</entry>
-    <entry key="espd.part2.cert.e.avaliable">b) Jos rekisteröinti- tai sertifiointitodistus on saatavilla sähköisesti,
-        anna seuraavat tiedot:
-    </entry>
+    <entry key="espd.part2.cert.e.avaliable">b) Jos rekisteröinti- tai sertifiointitodistus on saatavilla sähköisesti, anna seuraavat tiedot:</entry>
     <entry key="espd.part2.contact.person">Yhteyshenkilö tai -henkilöt:</entry>
-    <entry key="espd.part2.detinfo.of.represent">Anna tarvittaessa edustusta koskevia lisätietoja (edustuksen muoto,
-        laajuus, tarkoitus jne.):
-    </entry>
-    <entry key="espd.part2.disworkers.details">Tarkennetaan tarvittaessa, mihin vammaisten tai muita heikommassa
-        asemassa olevien työntekijöiden ryhmään tai ryhmiin kyseiset työntekijät kuuluvat.
-    </entry>
-    <entry key="espd.part2.doc.e.avaliable">Jos kyseiset asiakirjat ovat saatavilla sähköisesti, annetaan seuraavat
-        tiedot:
-    </entry>
+    <entry key="espd.part2.detinfo.of.represent">Anna tarvittaessa edustusta koskevia lisätietoja (edustuksen muoto, laajuus, tarkoitus jne.):</entry>
+    <entry key="espd.part2.disworkers.details">Tarkennetaan tarvittaessa, mihin vammaisten tai muita heikommassa asemassa olevien työntekijöiden ryhmään tai ryhmiin kyseiset työntekijät kuuluvat.</entry>
+    <entry key="espd.part2.doc.e.avaliable">Jos kyseiset asiakirjat ovat saatavilla sähköisesti, annetaan seuraavat tiedot:</entry>
     <entry key="espd.part2.email">Sähköposti:</entry>
-    <entry key="espd.part2.ensure.others.espd">Varmista, että muut asianomaiset osapuolet toimittavat erillisen
-        yhtenäisen eurooppalaisen hankinta-asiakirjan lomakkeen.
-    </entry>
-    <entry key="espd.part2.eo.approved.cert">Onko talouden toimija merkitty mahdolliseen hyväksyttyjen talouden
-        toimijoiden viralliseen luetteloon tai onko sillä vastaava sertifikaatti (esim. kansallisen
-        (esi-)karsintajärjestelmän perusteella)?
-    </entry>
-    <entry key="espd.part2.eo.group.role">a) Ilmoita, mikä on talouden toimijan asema ryhmässä (vetäjä, vastuussa
-        erityistehtävistä jne.):
-    </entry>
-    <entry key="espd.part2.eo.has.cert.soc">e) Kykeneekö talouden toimittaja toimittamaan todistuksen
-        sosiaaliturvamaksujen ja verojen maksamisesta tai antamaan tiedot, joiden avulla hankintaviranomainen tai
-        -yksikkö voi hankkia kyseisen todistuksen suoraan minkä tahansa jäsenvaltion maksuttomasta tietokannasta?
-    </entry>
-    <entry key="espd.part2.eo.rely.other.entities">Hyödyntääkö talouden toimija muiden yksiköiden voimavaroja
-        täyttääkseen IV osassa esitetyt valintaperusteet ja V osassa esitetyt perusteet ja (mahdolliset) säännöt?
-    </entry>
+    <entry key="espd.part2.ensure.others.espd">Varmista, että muut asianomaiset osapuolet toimittavat erillisen yhtenäisen eurooppalaisen hankinta-asiakirjan lomakkeen.</entry>
+    <entry key="espd.part2.eo.approved.cert">Onko talouden toimija merkitty mahdolliseen hyväksyttyjen talouden toimijoiden viralliseen luetteloon tai onko sillä vastaava sertifikaatti (esim. kansallisen (esi-)karsintajärjestelmän perusteella)?</entry>
+    <entry key="espd.part2.eo.group.role">a) Ilmoita, mikä on talouden toimijan asema ryhmässä (vetäjä, vastuussa erityistehtävistä jne.):</entry>
+    <entry key="espd.part2.eo.has.cert.soc">e) Kykeneekö talouden toimittaja toimittamaan todistuksen sosiaaliturvamaksujen ja verojen maksamisesta tai antamaan tiedot, joiden avulla hankintaviranomainen tai -yksikkö voi hankkia kyseisen todistuksen suoraan minkä tahansa jäsenvaltion maksuttomasta tietokannasta?</entry>
+    <entry key="espd.part2.eo.rely.other.entities">Hyödyntääkö talouden toimija muiden yksiköiden voimavaroja täyttääkseen IV osassa esitetyt valintaperusteet ja V osassa esitetyt perusteet ja (mahdolliset) säännöt?</entry>
     <entry key="espd.part2.first.name">Etunimi</entry>
     <entry key="espd.part2.header">II osa: Talouden toimijaa koskevat tiedot</entry>
-    <entry key="espd.part2.if.proc.reserved">Vain varatun hankinnan tapauksessa: Onko talouden toimija suojatyökeskus
-        tai nk. yhteiskunnallinen yritys taikka rajaako se hankintasopimusten toteuttamisen suojatyöohjelmien puitteissa
-        tapahtuvaksi?
-    </entry>
+    <entry key="espd.part2.if.proc.reserved">Vain varatun hankinnan tapauksessa: Onko talouden toimija suojatyökeskus tai nk. yhteiskunnallinen yritys taikka rajaako se hankintasopimusten toteuttamisen suojatyöohjelmien puitteissa tapahtuvaksi?</entry>
     <entry key="espd.part2.info.eo">A: Talouden toimijaa koskevat tiedot</entry>
     <entry key="espd.part2.info.reliance">C: Muiden yksiköiden voimavarojen hyödyntämistä koskevat tiedot</entry>
     <entry key="espd.part2.info.respresent">B: Talouden toimijan edustajia koskevat tiedot</entry>
-    <entry key="espd.part2.information.subcontractors">D: Sellaisia alihankkijoita koskevat tiedot, joiden voimavaroja
-        talouden toimija ei hyödynnä
-    </entry>
-    <entry key="espd.part2.information.subcontractors.description">Jos vastaus on kyllä ja alihankkijat ovat tiedossa,
-        luetellaan ehdotetut alihankkijat:
-    </entry>
-    <entry key="espd.part2.information.subcontractors.footer">Jos hankintaviranomainen tai -yksikkö nimenomaisesti
-        pyytää näitä tietoja I osan mukaisten tietojen lisäksi, tämän osan A ja B jaksossa ja III osassa pyydetyt tiedot
-        annetaan kustakin asianomaisesta alihankkijasta (alihankkijoiden ryhmästä) erikseen.
-    </entry>
-    <entry key="espd.part2.information.subcontractors.header">(Tämä jakso täytetään vain, jos hankintaviranomainen tai
-        -yksikkö nimenomaisesti pyytää näitä tietoja.)
-    </entry>
-    <entry key="espd.part2.information.subcontractors.title">Aikooko talouden toimija teettää osan hankintasopimuksesta
-        kolmansilla osapuolilla?
-    </entry>
+    <entry key="espd.part2.information.subcontractors">D: Sellaisia alihankkijoita koskevat tiedot, joiden voimavaroja talouden toimija ei hyödynnä</entry>
+    <entry key="espd.part2.information.subcontractors.description">Jos vastaus on kyllä ja alihankkijat ovat tiedossa, luetellaan ehdotetut alihankkijat:</entry>
+    <entry key="espd.part2.information.subcontractors.footer">Jos hankintaviranomainen tai -yksikkö nimenomaisesti pyytää näitä tietoja I osan mukaisten tietojen lisäksi, tämän osan A ja B jaksossa ja III osassa pyydetyt tiedot annetaan kustakin asianomaisesta alihankkijasta (alihankkijoiden ryhmästä) erikseen.</entry>
+    <entry key="espd.part2.information.subcontractors.header">(Tämä jakso täytetään vain, jos hankintaviranomainen tai -yksikkö nimenomaisesti pyytää näitä tietoja.)</entry>
+    <entry key="espd.part2.information.subcontractors.title">Aikooko talouden toimija teettää osan hankintasopimuksesta kolmansilla osapuolilla?</entry>
     <entry key="espd.part2.internet.addr.if.exists">Internetosoite (verkko-osoite) (soveltuvin osin):</entry>
-    <entry key="espd.part2.is.eo.proc.together">Osallistuuko talouden toimija hankintamenettelyyn yhdessä muiden
-        kanssa?
-    </entry>
+    <entry key="espd.part2.is.eo.proc.together">Osallistuuko talouden toimija hankintamenettelyyn yhdessä muiden kanssa?</entry>
     <entry key="espd.part2.is.eo.sized">Onko talouden toimija mikroyritys taikka pieni tai keskisuuri yritys?</entry>
-    <entry key="espd.part2.is.eo.sized.tooltip">Vrt. komission suositus, annettu 6 päivänä toukokuuta 2003,
-        mikroyritysten sekä pienten ja keskisuurten yritysten määritelmästä (EUVL L 124, 20.5.2003, s. 36). Näitä
-        tietoja pyydetään vain tilastoja varten. Mikroyritykset: yritykset, joiden palveluksessa on vähemmän kuin 10
-        työntekijää ja joiden vuosiliikevaihto ja/tai taseen loppusumma on enintään 2 miljoonaa euroa. Pienet yritykset:
-        yritykset, joiden palveluksessa on vähemmän kuin 50 työntekijää ja joiden vuosiliikevaihto ja/tai taseen
-        loppusumma on enintään 10 miljoonaa euroa. yritykset, jotka eivät ole mikroyrityksiä eivätkä pieniä yrityksiä ja
-        joiden palveluksessa on vähemmän kuin 250 työntekijää ja joiden vuosiliikevaihto on enintään 50 miljoonaa euroa
-        ja/tai taseen loppusumma on enintään 43 miljoonaa euroa.
-    </entry>
+    <entry key="espd.part2.is.eo.sized.tooltip">Vrt. komission suositus, annettu 6 päivänä toukokuuta 2003, mikroyritysten sekä pienten ja keskisuurten yritysten määritelmästä (EUVL L 124, 20.5.2003, s. 36). Näitä tietoja pyydetään vain tilastoja varten. Mikroyritykset: yritykset, joiden palveluksessa on vähemmän kuin 10 työntekijää ja joiden vuosiliikevaihto ja/tai taseen loppusumma on enintään 2 miljoonaa euroa. Pienet yritykset: yritykset, joiden palveluksessa on vähemmän kuin 50 työntekijää ja joiden vuosiliikevaihto ja/tai taseen loppusumma on enintään 10 miljoonaa euroa. yritykset, jotka eivät ole mikroyrityksiä eivätkä pieniä yrityksiä ja joiden palveluksessa on vähemmän kuin 250 työntekijää ja joiden vuosiliikevaihto on enintään 50 miljoonaa euroa ja/tai taseen loppusumma on enintään 43 miljoonaa euroa.</entry>
     <entry key="espd.part2.last.name">Sukunimi</entry>
-    <entry key="espd.part2.lots.concerned">Tarvittaessa osa(t), jo(i)ta koskevan tarjouksen talouden toimija haluaa
-        tehdä:
-    </entry>
+    <entry key="espd.part2.lots.concerned">Tarvittaessa osa(t), jo(i)ta koskevan tarjouksen talouden toimija haluaa tehdä:</entry>
     <entry key="espd.part2.name">Nimi:</entry>
     <entry key="espd.part2.name.part.group">c) Tarvittaessa osallistuvan ryhmän nimi:</entry>
-    <entry key="espd.part2.other.eo.part">b) Yksilöi hankintamenettelyyn yhdessä osallistuvat muut talouden toimijat:
-    </entry>
-    <entry key="espd.part2.percentage.disworkers">Mikä on vammaisten tai muita heikommassa asemassa olevien
-        työntekijöiden prosenttiosuus?
-    </entry>
-    <entry key="espd.part2.person.empowered">Anna tarvittaessa sellaisen yhden (tai useamman) henkilön nimi ja osoite,
-        joka on valtuutettu laillisesti edustamaan talouden toimijaa tässä hankintamenettelyssä:
-    </entry>
+    <entry key="espd.part2.other.eo.part">b) Yksilöi hankintamenettelyyn yhdessä osallistuvat muut talouden toimijat:</entry>
+    <entry key="espd.part2.percentage.disworkers">Mikä on vammaisten tai muita heikommassa asemassa olevien työntekijöiden prosenttiosuus?</entry>
+    <entry key="espd.part2.person.empowered">Anna tarvittaessa sellaisen yhden (tai useamman) henkilön nimi ja osoite, joka on valtuutettu laillisesti edustamaan talouden toimijaa tässä hankintamenettelyssä:</entry>
     <entry key="espd.part2.pos.act.in.capacity">Asema:</entry>
     <entry key="espd.part2.postal.adress">Postiosoite:</entry>
     <entry key="espd.part2.provide.regnumber">a) Anna rekisteri- tai sertifiointinumero, jos sellainen on:</entry>
-    <entry key="espd.part2.ref.for.cert">c) Viitteet, joihin rekisteröinti tai sertifiointi perustuu, ja tarvittaessa
-        luokitus virallisessa luettelossa:
-    </entry>
-    <entry key="espd.part2.separate.espd.sections.a.b">Toimita tämän osan A ja B jaksossa ja III osassa vaadittuja
-        tietoja varten kustakin yksiköstä erillinen yhteisen eurooppalaisen hankinta-asiakirjan lomake, joka on
-        asianmukaisesti täytetty ja jonka yksiköt ovat allekirjoittaneet .<p/>Tämä koskee myös talouden toimijan
-        yritykseen suoraan kuulumattomia teknisiä asiantuntijoita tai teknisiä laitoksia, erityisesti niitä, jotka
-        vastaavat laadunvalvonnasta ja, kun kyseessä ovat julkiset rakennusurakkasopimukset, niistä teknisistä
-        asiantuntijoista ja teknisistä laitoksista, jotka ovat talouden toimijan käytettävissä urakan toteuttamista
-        varten.<p/>Niiltä osin kuin talouden toimijan hyödyntämien voimavarojen osalta on tarpeen, ilmoitetaan IV ja V
-        osan tiedot kustakin yksiköstä erikseen.
-    </entry>
+    <entry key="espd.part2.ref.for.cert">c) Viitteet, joihin rekisteröinti tai sertifiointi perustuu, ja tarvittaessa luokitus virallisessa luettelossa:</entry>
+    <entry key="espd.part2.separate.espd.sections.a.b">Toimita tämän osan A ja B jaksossa ja III osassa vaadittuja tietoja varten kustakin yksiköstä erillinen yhteisen eurooppalaisen hankinta-asiakirjan lomake, joka on asianmukaisesti täytetty ja jonka yksiköt ovat allekirjoittaneet .<p/>Tämä koskee myös talouden toimijan yritykseen suoraan kuulumattomia teknisiä asiantuntijoita tai teknisiä laitoksia, erityisesti niitä, jotka vastaavat laadunvalvonnasta ja, kun kyseessä ovat julkiset rakennusurakkasopimukset, niistä teknisistä asiantuntijoista ja teknisistä laitoksista, jotka ovat talouden toimijan käytettävissä urakan toteuttamista varten.<p/>Niiltä osin kuin talouden toimijan hyödyntämien voimavarojen osalta on tarpeen, ilmoitetaan IV ja V osan tiedot kustakin yksiköstä erikseen.</entry>
     <entry key="espd.part2.telephone">Puhelin:</entry>
     <entry key="espd.part2.vat">Soveltuvissa tapauksissa alv-numero:</entry>
-    <entry key="espd.part2sel.alert">Talouden toimijan olisi annettava nämä tiedot vain, jos hankintaviranomainen tai
-        -yksikkö on vaatinut kyseisten valintaperusteiden täyttämistä asiaa koskevassa ilmoituksessa tai
-        hankinta-asiakirjoissa, joihin ilmoituksessa viitataan.
-    </entry>
+    <entry key="espd.part2sel.alert">Talouden toimijan olisi annettava nämä tiedot vain, jos hankintaviranomainen tai -yksikkö on vaatinut kyseisten valintaperusteiden täyttämistä asiaa koskevassa ilmoituksessa tai hankinta-asiakirjoissa, joihin ilmoituksessa viitataan.</entry>
     <entry key="espd.crit.amount">Määrä</entry>
     <entry key="espd.crit.amount.concerned">Kyseessä oleva määrä</entry>
     <entry key="espd.crit.average.turnover">Keskimääräinen liikevaihto</entry>
@@ -253,546 +119,184 @@ Wenn die Datei als Properties gezogen wird, wird ein DocType zur Laufzeit einget
     <entry key="espd.crit.date">Päivämäärä</entry>
     <entry key="espd.crit.date.of.conviction">Tuomion päiväys</entry>
     <entry key="espd.part3.crit.date.of.conviction.or.decision">Ilmoita tuomion tai päätöksen päiväys.</entry>
-    <entry key="espd.crit.decision.final.and.binding">Jos velvoitteiden rikkominen on todettu oikeudellisella tai
-        hallinnollisella päätöksellä, onko kyseinen päätös lopullinen ja sitova?
-    </entry>
+    <entry key="espd.crit.decision.final.and.binding">Jos velvoitteiden rikkominen on todettu oikeudellisella tai hallinnollisella päätöksellä, onko kyseinen päätös lopullinen ja sitova?</entry>
     <entry key="espd.crit.description">Kuvaus</entry>
     <entry key="espd.crit.do.you.allow.checks">Sallitko tarkastukset?</entry>
     <entry key="espd.crit.end.date">Päättymispäivä</entry>
-    <entry key="espd.part3.crit.eu.main.breaching.obligations">Direktiivin 2014/24/EU 57 artiklan 4 kohdassa esitetään
-        seuraavat poissulkemisperusteet:
-    </entry>
-    <entry key="espd.part3.crit.eu.eo.main.breaching.obligations">Direktiivin 2014/24/EU 57 artiklan 4 kohdassa
-        esitetään seuraavat poissulkemisperusteet:
-    </entry>
-    <entry key="espd.part3.crit.eu.main.purely.national">Sovelletaanko asiaa koskevassa ilmoituksessa tai
-        hankinta-asiakirjoissa määritettyjä puhtaasti kansallisia poissulkemisperusteita?
-    </entry>
-    <entry key="espd.part3.crit.eu.grounds.criminal.conv.main.title">Direktiivin 2014/24/EU 57 artiklan 1 kohdassa
-        esitetään seuraavat poissulkemisperusteet:
-    </entry>
-    <entry key="espd.part3.crit.eu.eo.grounds.criminal.conv.main.title">Direktiivin 2014/24/EU 57 artiklan 1 kohdassa
-        esitetään seuraavat poissulkemisperusteet:
-    </entry>
-    <entry key="espd.part3.crit.eu.payment.taxes.main.title">Direktiivin 2014/24/EU 57 artiklan 2 kohdassa esitetään
-        seuraavat poissulkemisperusteet:
-    </entry>
-    <entry key="espd.part3.crit.eu.eo.payment.taxes.main.title">Direktiivin 2014/24/EU 57 artiklan 2 kohdassa esitetään
-        seuraavat poissulkemisperusteet:
-    </entry>
-    <entry key="espd.crit.eu.text.agreement.economic">Onko talouden toimija tehnyt muiden talouden toimijoiden kanssa
-        sopimuksia, joilla pyritään vääristämään kilpailua?
-    </entry>
+    <entry key="espd.part3.crit.eu.main.breaching.obligations">Direktiivin 2014/24/EU 57 artiklan 4 kohdassa esitetään seuraavat poissulkemisperusteet:</entry>
+    <entry key="espd.part3.crit.eu.eo.main.breaching.obligations">Direktiivin 2014/24/EU 57 artiklan 4 kohdassa esitetään seuraavat poissulkemisperusteet:</entry>
+    <entry key="espd.part3.crit.eu.main.purely.national">Sovelletaanko asiaa koskevassa ilmoituksessa tai hankinta-asiakirjoissa määritettyjä puhtaasti kansallisia poissulkemisperusteita?</entry>
+    <entry key="espd.part3.crit.eu.grounds.criminal.conv.main.title">Direktiivin 2014/24/EU 57 artiklan 1 kohdassa esitetään seuraavat poissulkemisperusteet:</entry>
+    <entry key="espd.part3.crit.eu.eo.grounds.criminal.conv.main.title">Direktiivin 2014/24/EU 57 artiklan 1 kohdassa esitetään seuraavat poissulkemisperusteet:</entry>
+    <entry key="espd.part3.crit.eu.payment.taxes.main.title">Direktiivin 2014/24/EU 57 artiklan 2 kohdassa esitetään seuraavat poissulkemisperusteet:</entry>
+    <entry key="espd.part3.crit.eu.eo.payment.taxes.main.title">Direktiivin 2014/24/EU 57 artiklan 2 kohdassa esitetään seuraavat poissulkemisperusteet:</entry>
+    <entry key="espd.crit.eu.text.agreement.economic">Onko talouden toimija tehnyt muiden talouden toimijoiden kanssa sopimuksia, joilla pyritään vääristämään kilpailua?</entry>
     <entry key="espd.crit.eu.text.arrangement.creditors">Onko talouden toimijalla järjestelyjä velkojien kanssa?</entry>
     <entry key="espd.crit.eu.text.bankrupt">Onko talouden toimija konkurssissa?</entry>
-    <entry key="espd.crit.eu.text.breaching.obligations.environmental">Onko talouden toimija rikkonut oman tietonsa
-        mukaan ympäristölainsäädännön mukaisia velvoitteitaan? Kansallisessa lainsäädännössä, asiaa koskevassa
-        ilmoituksessa tai hankinta-asiakirjoissa taikka direktiivin 2014/24/EU 18 artiklan 2 kohdassa tämän hankinnan
-        osalta tarkoitetut velvoitteet.
-    </entry>
-    <entry key="espd.crit.eu.text.breaching.obligations.labour">Onko talouden toimija rikkonut oman tietonsa mukaan
-        työlainsäädännön mukaisia velvoitteitaan? Kansallisessa lainsäädännössä, asiaa koskevassa ilmoituksessa tai
-        hankinta-asiakirjoissa taikka direktiivin 2014/24/EU 18 artiklan 2 kohdassa tämän hankinnan osalta tarkoitetut
-        velvoitteet.
-    </entry>
-    <entry key="espd.crit.eu.text.breaching.obligations.social">Onko talouden toimija rikkonut oman tietonsa mukaan
-        sosiaalilainsäädännön mukaisia velvoitteitaan? Kansallisessa lainsäädännössä, asiaa koskevassa ilmoituksessa tai
-        hankinta-asiakirjoissa taikka direktiivin 2014/24/EU 18 artiklan 2 kohdassa tämän hankinnan osalta tarkoitetut
-        velvoitteet.
-    </entry>
-    <entry key="espd.crit.eu.text.child.labour">Onko talouden toimijalle itselleen tai mille tahansa henkilölle, joka on
-        sen hallinto-, johto- tai valvontaelimen jäsen tai jolla on siinä päätös-, edustus- tai valvontavaltaa, annettu
-        lapsityövoiman käytöstä tai muista ihmiskaupan muodoista lainvoimainen tuomio, joka on annettu enintään viisi
-        vuotta sitten tai jolla suoraan vahvistettu poissulkeminen on edelleen voimassa? Sellaisina kuin ne määritellään
-        ihmiskaupan ehkäisemisestä ja torjumisesta sekä ihmiskaupan uhrien suojelemisesta ja neuvoston puitepäätöksen
-        2002/629/YOS korvaamisesta 5 päivänä huhtikuuta 2011 annetun Euroopan parlamentin ja neuvoston direktiivin
-        2011/36/EU 2 artiklassa (EUVL L 101, 15.4.2011, s. 1).
-    </entry>
-    <entry key="espd.crit.eu.text.conflict.interest">Onko talouden toimija tietoinen eturistiriidoista, joita sen
-        hankintamenettelyyn osallistumisesta aiheutuu kansallisen lainsäädännön, asiaankuuluvan hankintailmoituksen tai
-        hankinta-asiakirjojen perusteella?
-    </entry>
-    <entry key="espd.crit.eu.text.corruption">Onko talouden toimijalle itselleen tai mille tahansa henkilölle, joka on
-        sen hallinto-, johto- tai valvontaelimen jäsen tai jolla on siinä päätös-, edustus- tai valvontavaltaa, annettu
-        lahjonnasta lainvoimainen tuomio, joka on annettu enintään viisi vuotta sitten tai jolla suoraan vahvistettu
-        poissulkeminen on edelleen voimassa? Sellaisena kuin se määritellään sellaisen lahjonnan torjumisesta, jossa on
-        osallisena Euroopan yhteisöjen virkamiehiä tai Euroopan unionin jäsenvaltioiden virkamiehiä, tehdyn
-        yleissopimuksen 3 artiklassa (EUVL C 195, 25.6.1997, s. 1) ja lahjonnan torjumisesta yksityisellä sektorilla 22
-        päivänä heinäkuuta 2003 annetun neuvoston puitepäätöksen 2003/568/YOS 2 artiklan 1 kohdassa (EUVL L 192,
-        31.7.2003, s. 54). Tämä poissulkemisperuste kattaa myös hankintaviranomaisen (-yksikön) tai talouden toimijan
-        kansallisen lainsäädännön määritelmän mukaisen korruption.
-    </entry>
-    <entry key="espd.crit.eu.text.early.termination">Onko talouden toimijalla kokemuksia siitä, että aikaisempi
-        hankintasopimus, hankintayksikön kanssa tehty aikaisempi hankintasopimus tai aikaisempi käyttöoikeussopimus on
-        irtisanottu ennenaikaisesti tai että kyseisen aikaisemman sopimuksen yhteydessä on vaadittu vahingonkorvauksia
-        tai määrätty muita vastaavia seuraamuksia?
-    </entry>
-    <entry key="espd.crit.eu.text.fraud">Onko talouden toimijalle itselleen tai mille tahansa henkilölle, joka on sen
-        hallinto-, johto- tai valvontaelimen jäsen tai jolla on siinä päätös-, edustus- tai valvontavaltaa, annettu
-        petoksesta lainvoimainen tuomio, joka on annettu enintään viisi vuotta sitten tai jolla suoraan vahvistettu
-        poissulkeminen on edelleen voimassa? Sellaisina kuin ne määritellään Euroopan yhteisöjen taloudellisten etujen
-        suojaamisesta tehdyn yleissopimuksen 1 artiklassa (EUVL C 316, 27.11.1995, s. 48).
-    </entry>
-    <entry key="espd.crit.eu.text.grounds.criminal.conv">Onko talouden toimijalle itselleen tai mille tahansa
-        henkilölle, joka on sen hallinto-, johto- tai valvontaelimen jäsen tai jolla on siinä päätös-, edustus- tai
-        valvontavaltaa, annettu rikollisjärjestön toimintaan osallistumisesta lainvoimainen tuomio, joka on annettu
-        enintään viisi vuotta sitten tai jolla suoraan vahvistettu poissulkeminen on edelleen voimassa? Sellaisena kuin
-        se määritellään järjestäytyneen rikollisuuden torjunnasta 24 päivänä lokakuuta 2008 annetun neuvoston
-        puitepäätöksen 2008/841/YOS 2 artiklassa (EUVL L 300, 11.11.2008, s. 42).
-    </entry>
-    <entry key="espd.crit.eu.text.guilty.misconduct">Onko talouden toimija syyllistynyt ammatin harjoittamiseen
-        liittyvään vakavaan virheeseen? Ks. tarvittaessa kansallisessa lainsäädännössä, asiaa koskevassa ilmoituksessa
-        tai hankinta-asiakirjoissa annetut määritelmät.
-    </entry>
-    <entry key="espd.crit.eu.text.guilty.misinterpretation">Koskeeko talouden toimijaa jokin seuraavista tilanteista? a)
-        on syyllistynyt vakavaan väärään tulkintaan antaessaan poissulkemisperusteiden puuttumisen tai
-        valintaperusteiden täyttymisen tarkistamiseen vaadittuja tietoja,<p/>b) on jättänyt antamatta tällaisia tietoja,
-        <p/>c) ei ole kyennyt toimittamaan viiveettä hankintaviranomaisen tai -yksikön vaatimia liiteasiakirjoja, ja<p/>
-        d) on yrittänyt vaikuttaa hankintaviranomaisen tai -yksikön päätöksentekoprosessiin asiattomalla tavalla tai
-        hankkinut luottamuksellista tietoa, joista voisi olla sille hankintamenettelyssä asiaankuulumatonta etua, taikka
-        on tuottamuksellisesti toimittanut harhaanjohtavia tietoja, joilla voi olla merkittävä vaikutus poissulkemista,
-        valintaa tai myöntämistä koskeviin päätöksiin?
-    </entry>
-    <entry key="espd.crit.eu.text.insolvency">Onko talouden toimijan osalta käynnistetty maksukyvyttömyys- tai
-        likvidaatiomenettelyjä?
-    </entry>
-    <entry key="espd.crit.eu.text.involvement">Onko talouden toimija tai talouden toimijaan liittyvä yritys antanut
-        hankintaviranomaiselle tai -yksikölle neuvoja tai muulla tavoin osallistunut hankintamenettelyn valmisteluun?
-    </entry>
-    <entry key="espd.crit.eu.text.liquidator">Ovatko talouden toimijan varat selvitysmiehen tai tuomioistuimen
-        hallinnassa?
-    </entry>
-    <entry key="espd.crit.eu.text.money.laundering">Onko talouden toimijalle itselleen tai mille tahansa henkilölle,
-        joka on sen hallinto-, johto- tai valvontaelimen jäsen tai jolla on siinä päätös-, edustus- tai valvontavaltaa,
-        annettu rahanpesusta tai terrorismin rahoituksesta lainvoimainen tuomio, joka on annettu enintään viisi vuotta
-        sitten tai jolla suoraan vahvistettu poissulkeminen on edelleen voimassa? Sellaisina kuin ne määritellään
-        rahoitusjärjestelmän käytön estämisestä rahanpesutarkoituksiin sekä terrorismin rahoitukseen 26 päivänä
-        lokakuuta 2005 annetun Euroopan parlamentin ja neuvoston direktiivin 2005/60/EY 1 artiklassa (EUVL L 309,
-        25.11.2005, s. 15).
-    </entry>
-    <entry key="espd.crit.eu.text.national.bankruptcy">Onko talouden toimija kansalliseen lainsäädäntöön ja kansallisiin
-        määräyksiin perustuvasta samankaltaisesta menettelystä johtuvassa konkurssissa tai muuta sellaista vastaavassa
-        tilanteessa?
-    </entry>
-    <entry key="espd.crit.eu.text.payment.social.security">Onko talouden toimija rikkonut sosiaaliturvamaksujen
-        maksamiseen liittyviä velvoitteitaan sekä maassa, johon toimija on sijoittautunut, että hankintaviranomaisen tai
-        -yksikön jäsenvaltiossa, jos se on muu kuin sijoittautumismaa?
-    </entry>
-    <entry key="espd.crit.eu.text.payment.taxes">Onko talouden toimija rikkonut verojen maksamiseen liittyviä
-        velvoitteitaan sekä maassa, johon toimija on sijoittautunut, että hankintaviranomaisen tai -yksikön
-        jäsenvaltiossa, jos se on muu kuin sijoittautumismaa?
-    </entry>
-    <entry key="espd.crit.eu.text.purely.national">Muut poissulkemisperusteet, joista voidaan säätää
-        hankintaviranomaisen tai -yksikön jäsenvaltion kansallisessa lainsäädännössä. Sovelletaanko asiaa koskevassa
-        ilmoituksessa tai hankinta-asiakirjoissa määritettyjä puhtaasti kansallisia poissulkemisperusteita?
-    </entry>
+    <entry key="espd.crit.eu.text.breaching.obligations.environmental">Onko talouden toimija rikkonut oman tietonsa mukaan ympäristölainsäädännön mukaisia velvoitteitaan? Kansallisessa lainsäädännössä, asiaa koskevassa ilmoituksessa tai hankinta-asiakirjoissa taikka direktiivin 2014/24/EU 18 artiklan 2 kohdassa tämän hankinnan osalta tarkoitetut velvoitteet.</entry>
+    <entry key="espd.crit.eu.text.breaching.obligations.labour">Onko talouden toimija rikkonut oman tietonsa mukaan työlainsäädännön mukaisia velvoitteitaan? Kansallisessa lainsäädännössä, asiaa koskevassa ilmoituksessa tai hankinta-asiakirjoissa taikka direktiivin 2014/24/EU 18 artiklan 2 kohdassa tämän hankinnan osalta tarkoitetut velvoitteet.</entry>
+    <entry key="espd.crit.eu.text.breaching.obligations.social">Onko talouden toimija rikkonut oman tietonsa mukaan sosiaalilainsäädännön mukaisia velvoitteitaan? Kansallisessa lainsäädännössä, asiaa koskevassa ilmoituksessa tai hankinta-asiakirjoissa taikka direktiivin 2014/24/EU 18 artiklan 2 kohdassa tämän hankinnan osalta tarkoitetut velvoitteet.</entry>
+    <entry key="espd.crit.eu.text.child.labour">Onko talouden toimijalle itselleen tai mille tahansa henkilölle, joka on sen hallinto-, johto- tai valvontaelimen jäsen tai jolla on siinä päätös-, edustus- tai valvontavaltaa, annettu lapsityövoiman käytöstä tai muista ihmiskaupan muodoista lainvoimainen tuomio, joka on annettu enintään viisi vuotta sitten tai jolla suoraan vahvistettu poissulkeminen on edelleen voimassa? Sellaisina kuin ne määritellään ihmiskaupan ehkäisemisestä ja torjumisesta sekä ihmiskaupan uhrien suojelemisesta ja neuvoston puitepäätöksen 2002/629/YOS korvaamisesta 5 päivänä huhtikuuta 2011 annetun Euroopan parlamentin ja neuvoston direktiivin 2011/36/EU 2 artiklassa (EUVL L 101, 15.4.2011, s. 1).</entry>
+    <entry key="espd.crit.eu.text.conflict.interest">Onko talouden toimija tietoinen eturistiriidoista, joita sen hankintamenettelyyn osallistumisesta aiheutuu kansallisen lainsäädännön, asiaankuuluvan hankintailmoituksen tai hankinta-asiakirjojen perusteella?</entry>
+    <entry key="espd.crit.eu.text.corruption">Onko talouden toimijalle itselleen tai mille tahansa henkilölle, joka on sen hallinto-, johto- tai valvontaelimen jäsen tai jolla on siinä päätös-, edustus- tai valvontavaltaa, annettu lahjonnasta lainvoimainen tuomio, joka on annettu enintään viisi vuotta sitten tai jolla suoraan vahvistettu poissulkeminen on edelleen voimassa? Sellaisena kuin se määritellään sellaisen lahjonnan torjumisesta, jossa on osallisena Euroopan yhteisöjen virkamiehiä tai Euroopan unionin jäsenvaltioiden virkamiehiä, tehdyn yleissopimuksen 3 artiklassa (EUVL C 195, 25.6.1997, s. 1) ja lahjonnan torjumisesta yksityisellä sektorilla 22 päivänä heinäkuuta 2003 annetun neuvoston puitepäätöksen 2003/568/YOS 2 artiklan 1 kohdassa (EUVL L 192, 31.7.2003, s. 54). Tämä poissulkemisperuste kattaa myös hankintaviranomaisen (-yksikön) tai talouden toimijan kansallisen lainsäädännön määritelmän mukaisen korruption.</entry>
+    <entry key="espd.crit.eu.text.early.termination">Onko talouden toimijalla kokemuksia siitä, että aikaisempi hankintasopimus, hankintayksikön kanssa tehty aikaisempi hankintasopimus tai aikaisempi käyttöoikeussopimus on irtisanottu ennenaikaisesti tai että kyseisen aikaisemman sopimuksen yhteydessä on vaadittu vahingonkorvauksia tai määrätty muita vastaavia seuraamuksia?</entry>
+    <entry key="espd.crit.eu.text.fraud">Onko talouden toimijalle itselleen tai mille tahansa henkilölle, joka on sen hallinto-, johto- tai valvontaelimen jäsen tai jolla on siinä päätös-, edustus- tai valvontavaltaa, annettu petoksesta lainvoimainen tuomio, joka on annettu enintään viisi vuotta sitten tai jolla suoraan vahvistettu poissulkeminen on edelleen voimassa? Sellaisina kuin ne määritellään Euroopan yhteisöjen taloudellisten etujen suojaamisesta tehdyn yleissopimuksen 1 artiklassa (EUVL C 316, 27.11.1995, s. 48).</entry>
+    <entry key="espd.crit.eu.text.grounds.criminal.conv">Onko talouden toimijalle itselleen tai mille tahansa henkilölle, joka on sen hallinto-, johto- tai valvontaelimen jäsen tai jolla on siinä päätös-, edustus- tai valvontavaltaa, annettu rikollisjärjestön toimintaan osallistumisesta lainvoimainen tuomio, joka on annettu enintään viisi vuotta sitten tai jolla suoraan vahvistettu poissulkeminen on edelleen voimassa? Sellaisena kuin se määritellään järjestäytyneen rikollisuuden torjunnasta 24 päivänä lokakuuta 2008 annetun neuvoston puitepäätöksen 2008/841/YOS 2 artiklassa (EUVL L 300, 11.11.2008, s. 42).</entry>
+    <entry key="espd.crit.eu.text.guilty.misconduct">Onko talouden toimija syyllistynyt ammatin harjoittamiseen liittyvään vakavaan virheeseen? Ks. tarvittaessa kansallisessa lainsäädännössä, asiaa koskevassa ilmoituksessa tai hankinta-asiakirjoissa annetut määritelmät.</entry>
+    <entry key="espd.crit.eu.text.guilty.misinterpretation">Koskeeko talouden toimijaa jokin seuraavista tilanteista? a) on syyllistynyt vakavaan väärään tulkintaan antaessaan poissulkemisperusteiden puuttumisen tai valintaperusteiden täyttymisen tarkistamiseen vaadittuja tietoja, <p/>b) on jättänyt antamatta tällaisia tietoja, <p/>c) ei ole kyennyt toimittamaan viiveettä hankintaviranomaisen tai -yksikön vaatimia liiteasiakirjoja, ja<p/>d) on yrittänyt vaikuttaa hankintaviranomaisen tai -yksikön päätöksentekoprosessiin asiattomalla tavalla tai hankkinut luottamuksellista tietoa, joista voisi olla sille hankintamenettelyssä asiaankuulumatonta etua, taikka on tuottamuksellisesti toimittanut harhaanjohtavia tietoja, joilla voi olla merkittävä vaikutus poissulkemista, valintaa tai myöntämistä koskeviin päätöksiin?</entry>
+    <entry key="espd.crit.eu.text.insolvency">Onko talouden toimijan osalta käynnistetty maksukyvyttömyys- tai likvidaatiomenettelyjä?</entry>
+    <entry key="espd.crit.eu.text.involvement">Onko talouden toimija tai talouden toimijaan liittyvä yritys antanut hankintaviranomaiselle tai -yksikölle neuvoja tai muulla tavoin osallistunut hankintamenettelyn valmisteluun?</entry>
+    <entry key="espd.crit.eu.text.liquidator">Ovatko talouden toimijan varat selvitysmiehen tai tuomioistuimen hallinnassa?</entry>
+    <entry key="espd.crit.eu.text.money.laundering">Onko talouden toimijalle itselleen tai mille tahansa henkilölle, joka on sen hallinto-, johto- tai valvontaelimen jäsen tai jolla on siinä päätös-, edustus- tai valvontavaltaa, annettu rahanpesusta tai terrorismin rahoituksesta lainvoimainen tuomio, joka on annettu enintään viisi vuotta sitten tai jolla suoraan vahvistettu poissulkeminen on edelleen voimassa? Sellaisina kuin ne määritellään rahoitusjärjestelmän käytön estämisestä rahanpesutarkoituksiin sekä terrorismin rahoitukseen 26 päivänä lokakuuta 2005 annetun Euroopan parlamentin ja neuvoston direktiivin 2005/60/EY 1 artiklassa (EUVL L 309, 25.11.2005, s. 15).</entry>
+    <entry key="espd.crit.eu.text.national.bankruptcy">Onko talouden toimija kansalliseen lainsäädäntöön ja kansallisiin määräyksiin perustuvasta samankaltaisesta menettelystä johtuvassa konkurssissa tai muuta sellaista vastaavassa tilanteessa?</entry>
+    <entry key="espd.crit.eu.text.payment.social.security">Onko talouden toimija rikkonut sosiaaliturvamaksujen maksamiseen liittyviä velvoitteitaan sekä maassa, johon toimija on sijoittautunut, että hankintaviranomaisen tai -yksikön jäsenvaltiossa, jos se on muu kuin sijoittautumismaa?</entry>
+    <entry key="espd.crit.eu.text.payment.taxes">Onko talouden toimija rikkonut verojen maksamiseen liittyviä velvoitteitaan sekä maassa, johon toimija on sijoittautunut, että hankintaviranomaisen tai -yksikön jäsenvaltiossa, jos se on muu kuin sijoittautumismaa?</entry>
+    <entry key="espd.crit.eu.text.purely.national">Muut poissulkemisperusteet, joista voidaan säätää hankintaviranomaisen tai -yksikön jäsenvaltion kansallisessa lainsäädännössä. Sovelletaanko asiaa koskevassa ilmoituksessa tai hankinta-asiakirjoissa määritettyjä puhtaasti kansallisia poissulkemisperusteita?</entry>
     <entry key="espd.crit.eu.text.suspended.business">Onko talouden toimijan liiketoiminta keskeytetty?</entry>
-    <entry key="espd.crit.eu.text.terrorist">Onko talouden toimijalle itselleen tai mille tahansa henkilölle, joka on
-        sen hallinto-, johto- tai valvontaelimen jäsen tai jolla on siinä päätös-, edustus- tai valvontavaltaa, annettu
-        terrorismirikoksesta tai terroritoimintaan liittyvästä rikoksesta lainvoimainen tuomio, joka on annettu enintään
-        viisi vuotta sitten tai jolla suoraan vahvistettu poissulkeminen on edelleen voimassa? Sellaisina kuin ne
-        määritellään terrorismin torjumisesta 13 päivänä kesäkuuta 2002 tehdyn neuvoston puitepäätöksen 1 ja 3
-        artiklassa (EUVL L 164, 22.6.2002, s. 3). Tämä poissulkemisperuste kattaa myös kyseisen puitepäätöksen 4
-        artiklassa tarkoitetun rikoksiin yllyttämisen tai niissä avun antamisen tai rikoksen yrityksen.
-    </entry>
-    <entry key="espd.crit.eu.title.agreement.economic">Toisten talouden toimijoiden kanssa kilpailun vääristämiseksi
-        tehdyt sopimukset
-    </entry>
+    <entry key="espd.crit.eu.text.terrorist">Onko talouden toimijalle itselleen tai mille tahansa henkilölle, joka on sen hallinto-, johto- tai valvontaelimen jäsen tai jolla on siinä päätös-, edustus- tai valvontavaltaa, annettu terrorismirikoksesta tai terroritoimintaan liittyvästä rikoksesta lainvoimainen tuomio, joka on annettu enintään viisi vuotta sitten tai jolla suoraan vahvistettu poissulkeminen on edelleen voimassa? Sellaisina kuin ne määritellään terrorismin torjumisesta 13 päivänä kesäkuuta 2002 tehdyn neuvoston puitepäätöksen 1 ja 3 artiklassa (EUVL L 164, 22.6.2002, s. 3). Tämä poissulkemisperuste kattaa myös kyseisen puitepäätöksen 4 artiklassa tarkoitetun rikoksiin yllyttämisen tai niissä avun antamisen tai rikoksen yrityksen.</entry>
+    <entry key="espd.crit.eu.title.agreement.economic">Toisten talouden toimijoiden kanssa kilpailun vääristämiseksi tehdyt sopimukset</entry>
     <entry key="espd.crit.eu.title.arrangement.creditors">Järjestelyt velkojien kanssa</entry>
     <entry key="espd.crit.eu.title.bankrupt">Konkurssi</entry>
-    <entry key="espd.part3.crit.eu.eo.bankrupt.title">Onko organisaatiosi konkurssissa, maksukyvyttömyys- tai
-        likvidaatiomenettelyn kohteena, velkojien kanssa sovitussa järjestelyssä tai vastaavassa tilanteessa, joka
-        johtuu kansalliseen lainsäädäntöön ja kansallisiin määräyksiin perustuvasta samankaltaisesta menettelystä?
-    </entry>
-    <entry key="espd.crit.eu.title.breaching.obligations.environmental">Ympäristölainsäädännön mukaisten velvoitteiden
-        rikkominen
-    </entry>
-    <entry key="espd.crit.eu.title.breaching.obligations.environmental.eo">Ympäristölainsäädännön mukaisten
-        velvoitteiden rikkominen
-    </entry>
-    <entry key="espd.crit.eu.title.breaching.obligations.labour">Työlainsäädännön mukaisten velvoitteiden rikkominen
-    </entry>
-    <entry key="espd.crit.eu.title.breaching.obligations.social">Sosiaalilainsäädännön mukaisten velvoitteiden
-        rikkominen
-    </entry>
+    <entry key="espd.part3.crit.eu.eo.bankrupt.title">Onko organisaatiosi konkurssissa, maksukyvyttömyys- tai likvidaatiomenettelyn kohteena, velkojien kanssa sovitussa järjestelyssä tai vastaavassa tilanteessa, joka johtuu kansalliseen lainsäädäntöön ja kansallisiin määräyksiin perustuvasta samankaltaisesta menettelystä?</entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.environmental">Ympäristölainsäädännön mukaisten velvoitteiden rikkominen</entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.environmental.eo">Ympäristölainsäädännön mukaisten velvoitteiden rikkominen</entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.labour">Työlainsäädännön mukaisten velvoitteiden rikkominen</entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.social">Sosiaalilainsäädännön mukaisten velvoitteiden rikkominen</entry>
     <entry key="espd.crit.eu.title.child.labour">Lapsityövoima ja muut ihmiskaupan muodot</entry>
-    <entry key="espd.crit.eu.title.conflict.interest">Talouden toimijan hankintamenettelyyn osallistumisesta johtuvat
-        eturistiriidat
-    </entry>
-    <entry key="espd.crit.eu.title.conflict.interest.eo">Onko organisaatiollasi hankintamenettelyyn osallistumisesta
-        johtuvia eturistiriitoja?
-    </entry>
+    <entry key="espd.crit.eu.title.conflict.interest">Talouden toimijan hankintamenettelyyn osallistumisesta johtuvat eturistiriidat</entry>
+    <entry key="espd.crit.eu.title.conflict.interest.eo">Onko organisaatiollasi hankintamenettelyyn osallistumisesta johtuvia eturistiriitoja?</entry>
     <entry key="espd.crit.eu.title.corruption">Korruptio</entry>
-    <entry key="espd.crit.eu.title.early.termination">Ennenaikainen irtisanominen, vahingonkorvaukset tai muut vastaavat
-        seuraamukset
-    </entry>
+    <entry key="espd.crit.eu.title.early.termination">Ennenaikainen irtisanominen, vahingonkorvaukset tai muut vastaavat seuraamukset</entry>
     <entry key="espd.crit.eu.title.fraud">Petokset</entry>
     <entry key="espd.crit.eu.title.grounds.criminal.conv">Rikollisjärjestön toimintaan osallistuminen</entry>
-    <entry key="espd.crit.eu.title.guilty.misconduct">Syyllistyminen ammatin harjoittamiseen liittyvään vakavaan
-        virheeseen
-    </entry>
-    <entry key="espd.crit.eu.title.guilty.misconduct.eo">Onko organisaatiosi syyllistynyt ammatin harjoittamiseen
-        liittyvään vakavaan virheeseen?
-    </entry>
-    <entry key="espd.crit.eu.title.guilty.misinterpretation">Syyllistyminen väärien tietojen antamiseen tai tietojen
-        antamatta jättämiseen, valmiudet toimittaa vaaditut asiakirjat ja tätä menettelyä koskevien tietojen
-        luottamuksellisten tietojen saaminen
-    </entry>
+    <entry key="espd.crit.eu.title.guilty.misconduct">Syyllistyminen ammatin harjoittamiseen liittyvään vakavaan virheeseen</entry>
+    <entry key="espd.crit.eu.title.guilty.misconduct.eo">Onko organisaatiosi syyllistynyt ammatin harjoittamiseen liittyvään vakavaan virheeseen?</entry>
+    <entry key="espd.crit.eu.title.guilty.misinterpretation">Syyllistyminen väärien tietojen antamiseen tai tietojen antamatta jättämiseen, valmiudet toimittaa vaaditut asiakirjat ja tätä menettelyä koskevien tietojen luottamuksellisten tietojen saaminen</entry>
     <entry key="espd.crit.eu.title.insolvency">Maksukyvyttömyys</entry>
-    <entry key="espd.crit.eu.title.involvement">Välitön tai välillinen osallistuminen tämän hankintamenettelyn
-        valmisteluun
-    </entry>
-    <entry key="espd.crit.eu.title.involvement.eo">Onko organisaatiosi tai siihen liittyvä yritys antanut
-        hankintaviranomaiselle neuvoja tai muulla tavoin osallistunut hankintamenettelyn valmisteluun?
-    </entry>
+    <entry key="espd.crit.eu.title.involvement">Välitön tai välillinen osallistuminen tämän hankintamenettelyn valmisteluun</entry>
+    <entry key="espd.crit.eu.title.involvement.eo">Onko organisaatiosi tai siihen liittyvä yritys antanut hankintaviranomaiselle neuvoja tai muulla tavoin osallistunut hankintamenettelyn valmisteluun?</entry>
     <entry key="espd.crit.eu.title.liquidator">Varat selvitysmiehen hallinnassa</entry>
     <entry key="espd.crit.eu.title.money.laundering">Rahanpesu tai terrorismin rahoitus</entry>
-    <entry key="espd.crit.eu.title.national.bankruptcy">Kansallisesta lainsäädännöstä johtuva konkurssia tai muuta
-        sellaista vastaava tilanne
-    </entry>
+    <entry key="espd.crit.eu.title.national.bankruptcy">Kansallisesta lainsäädännöstä johtuva konkurssia tai muuta sellaista vastaava tilanne</entry>
     <entry key="espd.crit.eu.title.payment.social.security">Sosiaaliturvamaksujen maksaminen</entry>
     <entry key="espd.crit.eu.title.payment.taxes">Verojen maksu</entry>
     <entry key="espd.crit.eu.title.purely.national">Puhtaasti kansalliset poissulkemisperusteet</entry>
     <entry key="espd.crit.eu.title.suspended.business">Liiketoiminta on keskeytetty</entry>
     <entry key="espd.crit.eu.title.terrorist">Terrorismirikokset tai terroritoimintaan liittyvät rikokset</entry>
-    <entry key="espd.part3.crit.eu.guilty.misconduct.eo.tooltip">Ks. tarvittaessa kansallisessa lainsäädännössä, asiaa
-        koskevassa ilmoituksessa tai hankinta-asiakirjoissa annetut määritelmät.
-    </entry>
-    <entry key="espd.crit.explain.certificates.independent.environmental.description">Jos vastaus on ei, selvitys siitä,
-        miksi näin on ja millaisia muita todisteita ympäristöasioiden hallintajärjestelmistä tai standardeista voidaan
-        esittää:
-    </entry>
-    <entry key="espd.part4.crit.explain.certificates.independent.quality.description">Jos vastaus on ei, selvitys siitä,
-        miksi näin on ja millaisia muita todisteita laadunvarmistusjärjestelmästä voidaan esittää:
-    </entry>
-    <entry key="espd.part4.crit.explain.supply.contracts.quality.description">Jos vastaus on ei, selvitys siitä, miksi
-        näin on ja millaisia muita todisteita voidaan esittää:
-    </entry>
-    <entry key="espd.crit.information.available.electronically">Saavatko viranomaiset nämä tiedot ilmaiseksi jonkin EU:n
-        jäsenvaltion tietokannasta?
-    </entry>
+    <entry key="espd.part3.crit.eu.guilty.misconduct.eo.tooltip">Ks. tarvittaessa kansallisessa lainsäädännössä, asiaa koskevassa ilmoituksessa tai hankinta-asiakirjoissa annetut määritelmät.</entry>
+    <entry key="espd.crit.explain.certificates.independent.environmental.description">Jos vastaus on ei, selvitys siitä, miksi näin on ja millaisia muita todisteita ympäristöasioiden hallintajärjestelmistä tai standardeista voidaan esittää:</entry>
+    <entry key="espd.part4.crit.explain.certificates.independent.quality.description">Jos vastaus on ei, selvitys siitä, miksi näin on ja millaisia muita todisteita laadunvarmistusjärjestelmästä voidaan esittää:</entry>
+    <entry key="espd.part4.crit.explain.supply.contracts.quality.description">Jos vastaus on ei, selvitys siitä, miksi näin on ja millaisia muita todisteita voidaan esittää:</entry>
+    <entry key="espd.crit.information.available.electronically">Saavatko viranomaiset nämä tiedot ilmaiseksi jonkin EU:n jäsenvaltion tietokannasta?</entry>
     <entry key="espd.crit.issuer">Laatija</entry>
-    <entry key="espd.crit.length.period.exclusion">Poissulkemisajan pituus, jos tuomiossa on mahdollisesti suoraan
-        määrätty poissulkemisen kesto.
-    </entry>
+    <entry key="espd.crit.length.period.exclusion">Poissulkemisajan pituus, jos tuomiossa on mahdollisesti suoraan määrätty poissulkemisen kesto.</entry>
     <entry key="espd.crit.number">Numero</entry>
     <entry key="espd.crit.number.of.years">Vuosien lukumäärä</entry>
-    <entry key="espd.crit.other.than.judicial.or.administrative.decision">Onko velvoitteiden rikkominen todettu muutoin
-        kuin oikeudellisella tai hallinnollisella päätöksellä?
-    </entry>
+    <entry key="espd.crit.other.than.judicial.or.administrative.decision">Onko velvoitteiden rikkominen todettu muutoin kuin oikeudellisella tai hallinnollisella päätöksellä?</entry>
     <entry key="espd.crit.please.describe.them">Kuvaa kyseisiä toimia.</entry>
     <entry key="espd.crit.please.specify">Tarkenna</entry>
     <entry key="espd.crit.ratio">Suhde</entry>
     <entry key="espd.crit.reason">Peruste</entry>
-    <entry key="espd.crit.reasons.nevertheless.contract">Ilmoita syyt siihen, että talouden toimija pystyy kaikesta
-        huolimatta suoriutumaan sopimuksesta. Näitä tietoja ei tarvitse antaa, jos talouden toimijoiden poissulkeminen
-        tässä tapauksessa on sovellettavan kansallisen lainsäädännön mukaan pakollista ilman mahdollisuutta poikkeuksen
-        myöntämiseen siinä tapauksessa, että talouden toimija kykenee kaikesta huolimatta suoriutumaan sopimuksesta.
-    </entry>
+    <entry key="espd.crit.reasons.nevertheless.contract">Ilmoita syyt siihen, että talouden toimija pystyy kaikesta huolimatta suoriutumaan sopimuksesta. Näitä tietoja ei tarvitse antaa, jos talouden toimijoiden poissulkeminen tässä tapauksessa on sovellettavan kansallisen lainsäädännön mukaan pakollista ilman mahdollisuutta poikkeuksen myöntämiseen siinä tapauksessa, että talouden toimija kykenee kaikesta huolimatta suoriutumaan sopimuksesta.</entry>
     <entry key="espd.crit.recipients">Tuensaajat</entry>
-    <entry key="espd.part4.crit.selection.ca.declares.that">Valintaperusteiden osalta hankintaviranomainen edellyttää
-        talouden toimijan ilmoittavan, että
-    </entry>
-    <entry key="espd.part4.crit.selection.ca.economic.article">Direktiivin 2014/24/EU 58 artiklan 3 kohdassa esitetään
-        seuraavat poissulkemisperusteet
-    </entry>
-    <entry key="espd.part4.crit.selection.declares.that.tooltip">Talouden toimijan olisi täytettävä tämä tietokenttä
-        vain siinä tapauksessa, että hankintaviranomainen tai -yksikkö on ilmoittanut asiaa koskevassa ilmoituksessa tai
-        hankinta-asiakirjoissa, joihin ilmoituksessa viitataan, että talouden toimija voi täyttää ainoastaan IV osan
-        tämän kohdan ja jättää IV osan A, B, C tai D jakson täyttämättä.
-    </entry>
-    <entry key="espd.crit.selection.economic.average.yearly.turnover.description">Sen keskimääräinen vuotuinen
-        liikevaihto niin monelta tilikaudelta kuin asiaa koskevassa ilmoituksessa, hankinta-asiakirjoissa tai yhteisessä
-        eurooppalaisessa hankinta-asiakirjassa vaaditaan, on seuraava:
-    </entry>
+    <entry key="espd.part4.crit.selection.ca.declares.that">Valintaperusteiden osalta hankintaviranomainen edellyttää talouden toimijan ilmoittavan, että</entry>
+    <entry key="espd.part4.crit.selection.ca.economic.article">Direktiivin 2014/24/EU 58 artiklan 3 kohdassa esitetään seuraavat poissulkemisperusteet</entry>
+    <entry key="espd.part4.crit.selection.declares.that.tooltip">Talouden toimijan olisi täytettävä tämä tietokenttä vain siinä tapauksessa, että hankintaviranomainen tai -yksikkö on ilmoittanut asiaa koskevassa ilmoituksessa tai hankinta-asiakirjoissa, joihin ilmoituksessa viitataan, että talouden toimija voi täyttää ainoastaan IV osan tämän kohdan ja jättää IV osan A, B, C tai D jakson täyttämättä.</entry>
+    <entry key="espd.crit.selection.economic.average.yearly.turnover.description">Sen keskimääräinen vuotuinen liikevaihto niin monelta tilikaudelta kuin asiaa koskevassa ilmoituksessa, hankinta-asiakirjoissa tai yhteisessä eurooppalaisessa hankinta-asiakirjassa vaaditaan, on seuraava:</entry>
     <entry key="espd.crit.selection.economic.average.yearly.turnover.main">Keskimääräinen vuotuinen liikevaihto</entry>
-    <entry key="espd.crit.selection.economic.financial.ratio.description">Asiaa koskevassa ilmoituksessa,
-        hankinta-asiakirjoissa tai yhteisessä eurooppalaisessa hankinta-asiakirjassa määritettyjen talouden toimijan
-        taloudellisten suhdelukujen osalta (esim. varojen ja velkojen suhde) talouden toimija ilmoittaa, että
-        vaadittujen suhdelukujen todelliset arvot ovat seuraavat:
-    </entry>
+    <entry key="espd.crit.selection.economic.financial.ratio.description">Asiaa koskevassa ilmoituksessa, hankinta-asiakirjoissa tai yhteisessä eurooppalaisessa hankinta-asiakirjassa määritettyjen talouden toimijan taloudellisten suhdelukujen osalta (esim. varojen ja velkojen suhde) talouden toimija ilmoittaa, että vaadittujen suhdelukujen todelliset arvot ovat seuraavat:</entry>
     <entry key="espd.crit.selection.economic.financial.ratio.main">Taloudellinen suhdeluku</entry>
-    <entry key="espd.crit.selection.economic.financial.standing.article.tooltip">Talouden toimijan olisi annettava nämä
-        tiedot vain, jos hankintaviranomainen tai -yksikkö on vaatinut kyseisten valintaperusteiden täyttämistä asiaa
-        koskevassa ilmoituksessa tai hankinta-asiakirjoissa, joihin ilmoituksessa viitataan.
-    </entry>
-    <entry key="espd.crit.selection.economic.general.yearly.turnover.description">Sen yleinen vuotuinen liikevaihto niin
-        monelta tilikaudelta kuin asiaa koskevassa ilmoituksessa, hankinta-asiakirjoissa tai yhteisessä eurooppalaisessa
-        hankinta-asiakirjassa vaaditaan, on seuraava:
-    </entry>
+    <entry key="espd.crit.selection.economic.financial.standing.article.tooltip">Talouden toimijan olisi annettava nämä tiedot vain, jos hankintaviranomainen tai -yksikkö on vaatinut kyseisten valintaperusteiden täyttämistä asiaa koskevassa ilmoituksessa tai hankinta-asiakirjoissa, joihin ilmoituksessa viitataan.</entry>
+    <entry key="espd.crit.selection.economic.general.yearly.turnover.description">Sen yleinen vuotuinen liikevaihto niin monelta tilikaudelta kuin asiaa koskevassa ilmoituksessa, hankinta-asiakirjoissa tai yhteisessä eurooppalaisessa hankinta-asiakirjassa vaaditaan, on seuraava:</entry>
     <entry key="espd.crit.selection.economic.general.yearly.turnover.main">Yleinen vuotuinen liikevaihto</entry>
-    <entry key="espd.crit.selection.economic.other.financial.requirements.description">Muiden sellaisten taloudellisten
-        tai rahoitusta koskevien vaatimusten osalta, jotka mahdollisesti määritetään asiaa koskevassa ilmoituksessa tai
-        hankinta-asiakirjoissa, talouden toimija ilmoittaa seuraavaa:
-    </entry>
-    <entry key="espd.crit.selection.economic.other.financial.requirements.main">Muut taloudelliset tai rahoitusta
-        koskevat vaatimukset
-    </entry>
-    <entry key="espd.crit.selection.economic.professional.risk.insurance.description">Sen ottaman ammatinharjoittajan
-        vastuuvakuutuksen vakuutussumma on seuraava:
-    </entry>
+    <entry key="espd.crit.selection.economic.other.financial.requirements.description">Muiden sellaisten taloudellisten tai rahoitusta koskevien vaatimusten osalta, jotka mahdollisesti määritetään asiaa koskevassa ilmoituksessa tai hankinta-asiakirjoissa, talouden toimija ilmoittaa seuraavaa:</entry>
+    <entry key="espd.crit.selection.economic.other.financial.requirements.main">Muut taloudelliset tai rahoitusta koskevat vaatimukset</entry>
+    <entry key="espd.crit.selection.economic.professional.risk.insurance.description">Sen ottaman ammatinharjoittajan vastuuvakuutuksen vakuutussumma on seuraava:</entry>
     <entry key="espd.crit.selection.economic.professional.risk.insurance.main">Ammatillinen vastuuvakuutus</entry>
-    <entry key="espd.crit.selection.economic.setup.eo.description">Jos liikevaihtoa (yleistä tai erityistä) koskevia
-        tietoja ei ole saatavilla koko vaaditulta jaksolta, ilmoitetaan päivämäärä, jona talouden toimija perustettiin
-        tai aloitti kaupallisen toimintansa:
-    </entry>
+    <entry key="espd.crit.selection.economic.setup.eo.description">Jos liikevaihtoa (yleistä tai erityistä) koskevia tietoja ei ole saatavilla koko vaaditulta jaksolta, ilmoitetaan päivämäärä, jona talouden toimija perustettiin tai aloitti kaupallisen toimintansa:</entry>
     <entry key="espd.crit.selection.economic.setup.eo.main">Talouden toimijan perustaminen</entry>
-    <entry key="espd.crit.selection.economic.specific.average.turnover.description">Sen keskimääräinen vuotuinen
-        liikevaihto niin monelta tilikaudelta kuin asiaa koskevassa ilmoituksessa, hankinta-asiakirjoissa tai yhteisessä
-        eurooppalaisessa hankinta-asiakirjassa vaaditaan, on seuraava:
-    </entry>
+    <entry key="espd.crit.selection.economic.specific.average.turnover.description">Sen keskimääräinen vuotuinen liikevaihto niin monelta tilikaudelta kuin asiaa koskevassa ilmoituksessa, hankinta-asiakirjoissa tai yhteisessä eurooppalaisessa hankinta-asiakirjassa vaaditaan, on seuraava:</entry>
     <entry key="espd.crit.selection.economic.specific.average.turnover.main">Erityinen vuotuinen liikevaihto</entry>
-    <entry key="espd.crit.selection.economic.specific.yearly.turnover.description">Sen erityinen vuotuinen liikevaihto
-        niin monelta tilikaudelta kuin asiaa koskevassa ilmoituksessa, hankinta-asiakirjoissa tai yhteisessä
-        eurooppalaisessa hankinta-asiakirjassa vaaditaan, on seuraava:
-    </entry>
+    <entry key="espd.crit.selection.economic.specific.yearly.turnover.description">Sen erityinen vuotuinen liikevaihto niin monelta tilikaudelta kuin asiaa koskevassa ilmoituksessa, hankinta-asiakirjoissa tai yhteisessä eurooppalaisessa hankinta-asiakirjassa vaaditaan, on seuraava:</entry>
     <entry key="espd.crit.selection.economic.specific.yearly.turnover.main">Erityinen vuotuinen liikevaihto</entry>
-    <entry key="espd.part4.crit.selection.eo.declares.that">Valintaperusteiden osalta talouden toimija ilmoittaa, että
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.declares.that.tooltip">Talouden toimijan olisi täytettävä tämä tietokenttä
-        vain siinä tapauksessa, että hankintaviranomainen tai -yksikkö on ilmoittanut asiaa koskevassa ilmoituksessa tai
-        hankinta-asiakirjoissa, joihin ilmoituksessa viitataan, että talouden toimija voi täyttää ainoastaan IV osan
-        tämän kohdan ja jättää IV osan A, B, C tai D jakson täyttämättä.
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.economic.article">Direktiivin 2014/24/EU 58 artiklan 3 kohdassa esitetään
-        seuraavat poissulkemisperusteet
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.economic.article.tooltip">Talouden toimijan olisi annettava nämä tiedot
-        vain, jos hankintaviranomainen tai -yksikkö on vaatinut kyseisten valintaperusteiden täyttämistä asianomaisessa
-        ilmoituksessa tai hankinta-asiakirjoissa, joihin ilmoituksessa viitataan.
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.economic.enrolement.description">Se on merkitty asiaankuuluviin
-        sijoittautumisjäsenvaltionsa pitämiin ammatti- tai kaupparekistereihin
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.economic.enrolement.main">Ammatti- tai kaupparekisteriin merkitseminen
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.economic.service.contracts.description">Tarvitaanko erityinen lupa tai
-        tietyn organisaation jäsenyys, jotta talouden toimija voi tarjota kyseisen palvelun sijoittautumismaassaan?
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.economic.service.contracts.main">Palveluhankintasopimukset: Luvan tai
-        jäsenyyden tarve
-    </entry>
+    <entry key="espd.part4.crit.selection.eo.declares.that">Valintaperusteiden osalta talouden toimija ilmoittaa, että</entry>
+    <entry key="espd.part4.crit.selection.eo.declares.that.tooltip">Talouden toimijan olisi täytettävä tämä tietokenttä vain siinä tapauksessa, että hankintaviranomainen tai -yksikkö on ilmoittanut asiaa koskevassa ilmoituksessa tai hankinta-asiakirjoissa, joihin ilmoituksessa viitataan, että talouden toimija voi täyttää ainoastaan IV osan tämän kohdan ja jättää IV osan A, B, C tai D jakson täyttämättä.</entry>
+    <entry key="espd.part4.crit.selection.eo.economic.article">Direktiivin 2014/24/EU 58 artiklan 3 kohdassa esitetään seuraavat poissulkemisperusteet</entry>
+    <entry key="espd.part4.crit.selection.eo.economic.article.tooltip">Talouden toimijan olisi annettava nämä tiedot vain, jos hankintaviranomainen tai -yksikkö on vaatinut kyseisten valintaperusteiden täyttämistä asianomaisessa ilmoituksessa tai hankinta-asiakirjoissa, joihin ilmoituksessa viitataan.</entry>
+    <entry key="espd.part4.crit.selection.eo.economic.enrolement.description">Se on merkitty asiaankuuluviin sijoittautumisjäsenvaltionsa pitämiin ammatti- tai kaupparekistereihin</entry>
+    <entry key="espd.part4.crit.selection.eo.economic.enrolement.main">Ammatti- tai kaupparekisteriin merkitseminen</entry>
+    <entry key="espd.part4.crit.selection.eo.economic.service.contracts.description">Tarvitaanko erityinen lupa tai tietyn organisaation jäsenyys, jotta talouden toimija voi tarjota kyseisen palvelun sijoittautumismaassaan?</entry>
+    <entry key="espd.part4.crit.selection.eo.economic.service.contracts.main">Palveluhankintasopimukset: Luvan tai jäsenyyden tarve</entry>
     <entry key="espd.part4.crit.selection.eo.satisfies.all.criteria">Se täyttää asetetut valintaperusteet</entry>
-    <entry key="espd.part4.crit.selection.eo.suitability.article">Direktiivin 2014/24/EU 58 artiklan 2 kohdassa
-        esitetään seuraavat poissulkemisperusteet:
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.suitability.article.tooltip">Talouden toimijan olisi annettava nämä tiedot
-        vain, jos hankintaviranomainen tai -yksikkö on vaatinut kyseisten valintaperusteiden täyttämistä asiaa
-        koskevassa ilmoituksessa tai hankinta-asiakirjoissa, joihin ilmoituksessa viitataan.
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.suitability.enrolment.description">Se on merkitty
-        sijoittautumisjäsenvaltionsa pitämiin asiaankuuluviin ammatti- tai kaupparekistereihin
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.suitability.enrolment.main">Ammatti- tai kaupparekisteriin merkitseminen
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.suitability.service.contracts.description">Tarvitaanko erityinen lupa tai
-        tietyn organisaation jäsenyys, jotta talouden toimija voi tarjota kyseisen palvelun sijoittautumismaassaan?
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.suitability.service.contracts.main">Palveluhankintasopimukset: Luvan tai
-        jäsenyyden tarve
-    </entry>
-    <entry key="espd.part4.crit.selection.quality.assurance.article">Direktiivin 2014/24/EU 62 artiklan 2 kohdassa
-        esitetään seuraavat valintaperusteet:
-    </entry>
-    <entry key="espd.part4.crit.selection.quality.assurance.tooltip">Talouden toimijan olisi annettava nämä tiedot vain,
-        jos hankintaviranomainen tai -yksikkö on vaatinut kyseisten valintaperusteiden täyttämistä asiaa koskevassa
-        ilmoituksessa tai hankinta-asiakirjoissa, joihin ilmoituksessa viitataan.
-    </entry>
-    <entry key="espd.crit.selection.quality.certificate.independent.bodies.environmental.description">Pystyykö talouden
-        toimija esittämään riippumattomien laitosten antamia todistuksia siitä, että talouden toimija noudattaa
-        vaadittuja ympäristöasioiden hallintajärjestelmiä tai standardeja?
-    </entry>
-    <entry key="espd.crit.selection.quality.certificate.independent.bodies.environmental.main">Riippumattomien laitosten
-        ympäristöasioiden hallintajärjestelmistä tai standardeista antamat todistukset
-    </entry>
-    <entry key="espd.crit.selection.quality.certificate.independent.bodies.quality.description">Pystyykö talouden
-        toimija esittämään riippumattomien laitosten antamia todistuksia siitä, että talouden toimija täyttää tiettyjen
-        laadunvarmistusstandardien vaatimukset, mukaan lukien esteettömyys vammaisille henkilöille?
-    </entry>
-    <entry key="espd.crit.selection.quality.certificate.independent.bodies.quality.main">Riippumattomien laitosten
-        laadunvarmistusstandardeista antamat todistukset
-    </entry>
-    <entry key="espd.part4.crit.selection.satisfies.all.criteria">Se täyttää kaikki asiaa koskevassa
-        hankintailmoituksessa tai kyseisessä ilmoituksessa tarkoitetuissa hankinta-asiakirjoissa esitetyt
-        valintaperusteet.
-    </entry>
-    <entry key="espd.part4.crit.selection.suitability.article">Direktiivin 2014/24/EU 58 artiklan 2 kohdassa esitetään
-        seuraavat poissulkemisperusteet:
-    </entry>
-    <entry key="espd.part4.crit.selection.suitability.article.tooltip">Talouden toimijan olisi täytettävä tämä
-        tietokenttä vain siinä tapauksessa, että hankintaviranomainen tai -yksikkö on ilmoittanut asiaa koskevassa
-        ilmoituksessa tai hankinta-asiakirjoissa, joihin ilmoituksessa viitataan, että talouden toimija voi täyttää
-        ainoastaan IV osan ? jakson ja jättää muut IV osan jaksot täyttämättä:
-    </entry>
-    <entry key="espd.crit.selection.suitability.enrolment.professional.register.description">Se on merkitty
-        sijoittautumisjäsenvaltion pitämään, direktiivin 2014/24/EU liitteessä XI kuvattuun ammattirekisteriin;
-        tietyistä jäsenvaltioista tulevien talouden toimijoiden täytyy mahdollisesti täyttää muita samassa liitteessä
-        säädettyjä vaatimuksia.
-    </entry>
-    <entry key="espd.crit.selection.suitability.enrolment.professional.register.main">Asiaankuuluvaan ammattirekisteriin
-        merkitseminen
-    </entry>
-    <entry key="espd.crit.selection.suitability.enrolment.trade.register.description">Se on merkitty
-        sijoittautumisjäsenvaltion pitämään, direktiivin 2014/24/EU liitteessä XI kuvattuun ammattirekisteriin;
-        tietyistä jäsenvaltioista tulevien talouden toimijoiden täytyy mahdollisesti täyttää muita samassa liitteessä
-        säädettyjä vaatimuksia.
-    </entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.article">Direktiivin 2014/24/EU 58 artiklan 2 kohdassa esitetään seuraavat poissulkemisperusteet:</entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.article.tooltip">Talouden toimijan olisi annettava nämä tiedot vain, jos hankintaviranomainen tai -yksikkö on vaatinut kyseisten valintaperusteiden täyttämistä asiaa koskevassa ilmoituksessa tai hankinta-asiakirjoissa, joihin ilmoituksessa viitataan.</entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.enrolment.description">Se on merkitty sijoittautumisjäsenvaltionsa pitämiin asiaankuuluviin ammatti- tai kaupparekistereihin</entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.enrolment.main">Ammatti- tai kaupparekisteriin merkitseminen</entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.service.contracts.description">Tarvitaanko erityinen lupa tai tietyn organisaation jäsenyys, jotta talouden toimija voi tarjota kyseisen palvelun sijoittautumismaassaan?</entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.service.contracts.main">Palveluhankintasopimukset: Luvan tai jäsenyyden tarve</entry>
+    <entry key="espd.part4.crit.selection.quality.assurance.article">Direktiivin 2014/24/EU 62 artiklan 2 kohdassa esitetään seuraavat valintaperusteet:</entry>
+    <entry key="espd.part4.crit.selection.quality.assurance.tooltip">Talouden toimijan olisi annettava nämä tiedot vain, jos hankintaviranomainen tai -yksikkö on vaatinut kyseisten valintaperusteiden täyttämistä asiaa koskevassa ilmoituksessa tai hankinta-asiakirjoissa, joihin ilmoituksessa viitataan.</entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.environmental.description">Pystyykö talouden toimija esittämään riippumattomien laitosten antamia todistuksia siitä, että talouden toimija noudattaa vaadittuja ympäristöasioiden hallintajärjestelmiä tai standardeja?</entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.environmental.main">Riippumattomien laitosten ympäristöasioiden hallintajärjestelmistä tai standardeista antamat todistukset</entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.quality.description">Pystyykö talouden toimija esittämään riippumattomien laitosten antamia todistuksia siitä, että talouden toimija täyttää tiettyjen laadunvarmistusstandardien vaatimukset, mukaan lukien esteettömyys vammaisille henkilöille?</entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.quality.main">Riippumattomien laitosten laadunvarmistusstandardeista antamat todistukset</entry>
+    <entry key="espd.part4.crit.selection.satisfies.all.criteria">Se täyttää kaikki asiaa koskevassa hankintailmoituksessa tai kyseisessä ilmoituksessa tarkoitetuissa hankinta-asiakirjoissa esitetyt valintaperusteet.</entry>
+    <entry key="espd.part4.crit.selection.suitability.article">Direktiivin 2014/24/EU 58 artiklan 2 kohdassa esitetään seuraavat poissulkemisperusteet:</entry>
+    <entry key="espd.part4.crit.selection.suitability.article.tooltip">Talouden toimijan olisi täytettävä tämä tietokenttä vain siinä tapauksessa, että hankintaviranomainen tai -yksikkö on ilmoittanut asiaa koskevassa ilmoituksessa tai hankinta-asiakirjoissa, joihin ilmoituksessa viitataan, että talouden toimija voi täyttää ainoastaan IV osan α jakson ja jättää muut IV osan jaksot täyttämättä:</entry>
+    <entry key="espd.crit.selection.suitability.enrolment.professional.register.description">Se on merkitty sijoittautumisjäsenvaltion pitämään, direktiivin 2014/24/EU liitteessä XI kuvattuun ammattirekisteriin; tietyistä jäsenvaltioista tulevien talouden toimijoiden täytyy mahdollisesti täyttää muita samassa liitteessä säädettyjä vaatimuksia.</entry>
+    <entry key="espd.crit.selection.suitability.enrolment.professional.register.main">Asiaankuuluvaan ammattirekisteriin merkitseminen</entry>
+    <entry key="espd.crit.selection.suitability.enrolment.trade.register.description">Se on merkitty sijoittautumisjäsenvaltion pitämään, direktiivin 2014/24/EU liitteessä XI kuvattuun ammattirekisteriin; tietyistä jäsenvaltioista tulevien talouden toimijoiden täytyy mahdollisesti täyttää muita samassa liitteessä säädettyjä vaatimuksia.</entry>
     <entry key="espd.crit.selection.suitability.enrolment.trade.register.main">Toimialarekisteriin merkitseminen</entry>
-    <entry key="espd.crit.selection.suitability.service.contracts.auth.description">Tarvitaanko tietty lupa, jotta
-        talouden toimija voi tarjota kyseisen palvelun sijoittautumismaassaan?
-    </entry>
-    <entry key="espd.crit.selection.suitability.service.contracts.auth.main">Palveluhankintasopimukset: edellyttää
-        tiettyä lupaa
-    </entry>
-    <entry key="espd.crit.selection.suitability.service.contracts.membership.description">Tarvitaanko tietyn
-        organisaation jäsenyys, jotta talouden toimija voi tarjota kyseisen palvelun sijoittautumismaassaan?
-    </entry>
-    <entry key="espd.crit.selection.suitability.service.contracts.membership.main">Palveluhankintasopimukset: tietyn
-        organisaation jäsenyys
-    </entry>
-    <entry key="espd.crit.selection.technical.allowance.of.checks.description">Monitahoisten tuotteiden tai palvelujen
-        toimittamisen tai poikkeuksellisesti erityistarkoitusta varten tarvittavien tuotteiden tai palvelujen osalta:
-        Salliiko talouden toimija tuotantokapasiteettinsa tai teknisen suorituskykynsä tarkastukset sekä tarvittaessa
-        käytössään olevien tutkimus- ja kehitysjärjestelmien sekä soveltamiensa laadunvalvontatoimenpiteiden
-        tarkastukset? Tarkastuksen tekee hankintaviranomainen tai, jos hankintaviranomainen tähän suostuu, tarkastuksen
-        tekee tavarantoimittajan tai palveluntarjoajan sijoittautumismaan toimivaltainen virallinen elin
-        hankintaviranomaisen puolesta.
-    </entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.auth.description">Tarvitaanko tietty lupa, jotta talouden toimija voi tarjota kyseisen palvelun sijoittautumismaassaan?</entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.auth.main">Palveluhankintasopimukset: edellyttää tiettyä lupaa</entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.membership.description">Tarvitaanko tietyn organisaation jäsenyys, jotta talouden toimija voi tarjota kyseisen palvelun sijoittautumismaassaan?</entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.membership.main">Palveluhankintasopimukset: tietyn organisaation jäsenyys</entry>
+    <entry key="espd.crit.selection.technical.allowance.of.checks.description">Monitahoisten tuotteiden tai palvelujen toimittamisen tai poikkeuksellisesti erityistarkoitusta varten tarvittavien tuotteiden tai palvelujen osalta: Salliiko talouden toimija tuotantokapasiteettinsa tai teknisen suorituskykynsä tarkastukset sekä tarvittaessa käytössään olevien tutkimus- ja kehitysjärjestelmien sekä soveltamiensa laadunvalvontatoimenpiteiden tarkastukset? Tarkastuksen tekee hankintaviranomainen tai, jos hankintaviranomainen tähän suostuu, tarkastuksen tekee tavarantoimittajan tai palveluntarjoajan sijoittautumismaan toimivaltainen virallinen elin hankintaviranomaisen puolesta.</entry>
     <entry key="espd.crit.selection.technical.allowance.of.checks.main">Tarkastusten salliminen</entry>
-    <entry key="espd.crit.selection.technical.average.annual.manpower.description">Talouden toimijan keskimääräinen
-        vuosittainen työvoima kolmena viime vuotena:
-    </entry>
+    <entry key="espd.crit.selection.technical.average.annual.manpower.description">Talouden toimijan keskimääräinen vuosittainen työvoima kolmena viime vuotena:</entry>
     <entry key="espd.crit.selection.technical.average.annual.manpower.main">Keskimääräinen vuosittainen työvoima</entry>
-    <entry key="espd.crit.selection.technical.educational.professional.qualifications.description">Palveluntarjoajalla
-        tai urakoitsijalla itsellään ja/tai (asiaa koskevassa ilmoituksessa tai hankinta-asiakirjoissa asetetuista
-        vaatimuksista riippuen) sen johtohenkilöstöllä on seuraava koulutus ja ammatillinen pätevyys.
-    </entry>
-    <entry key="espd.crit.selection.technical.educational.professional.qualifications.main">Koulutus ja
-        ammattipätevyys
-    </entry>
-    <entry key="espd.crit.selection.technical.environment.management.features.description">Talouden toimija voi
-        toteuttaa seuraavat ympäristöasioiden hallintatoimenpiteet hankintasopimuksen toteuttamisen yhteydessä:
-    </entry>
-    <entry key="espd.crit.selection.technical.environment.management.features.main">Ympäristöasioiden
-        hallintatoimenpiteet
-    </entry>
-    <entry key="espd.crit.selection.technical.number.managerial.staff.description">Talouden toimijan johtohenkilöstön
-        lukumäärä kolmena viime vuotena:
-    </entry>
+    <entry key="espd.crit.selection.technical.educational.professional.qualifications.description">Palveluntarjoajalla tai urakoitsijalla itsellään ja/tai (asiaa koskevassa ilmoituksessa tai hankinta-asiakirjoissa asetetuista vaatimuksista riippuen) sen johtohenkilöstöllä on seuraava koulutus ja ammatillinen pätevyys.</entry>
+    <entry key="espd.crit.selection.technical.educational.professional.qualifications.main">Koulutus ja ammattipätevyys</entry>
+    <entry key="espd.crit.selection.technical.environment.management.features.description">Talouden toimija voi toteuttaa seuraavat ympäristöasioiden hallintatoimenpiteet hankintasopimuksen toteuttamisen yhteydessä:</entry>
+    <entry key="espd.crit.selection.technical.environment.management.features.main">Ympäristöasioiden hallintatoimenpiteet</entry>
+    <entry key="espd.crit.selection.technical.number.managerial.staff.description">Talouden toimijan johtohenkilöstön lukumäärä kolmena viime vuotena:</entry>
     <entry key="espd.crit.selection.technical.number.managerial.staff.main">Johtohenkilöstön lukumäärä</entry>
-    <entry key="espd.part4.crit.selection.technical.professional.ability.article">Direktiivin 2014/24/EU 58 artiklan 4
-        kohdassa esitetään seuraavat poissulkemisperusteet
-    </entry>
-    <entry key="espd.part4.crit.selection.technical.professional.ability.article.tooltip">Talouden toimijan olisi
-        annettava nämä tiedot vain, jos hankintaviranomainen tai -yksikkö on vaatinut kyseisten valintaperusteiden
-        täyttämistä asiaa koskevassa ilmoituksessa tai hankinta-asiakirjoissa, joihin ilmoituksessa viitataan.
-    </entry>
-    <entry key="espd.crit.selection.technical.service.contracts.performance.services.description">Vain julkisia
-        palveluhankintoja koskevat sopimukset: Talouden toimija on suorittanut viitejakson aikana seuraavantyyppiset
-        pääasialliset palvelut: Hankintaviranomaiset voivat vaatia enintään viiden vuoden kokemuksen tai hyväksyä yli
-        viisi vuotta aikaisemmin hankitun kokemuksen.
-    </entry>
-    <entry key="espd.crit.selection.technical.service.contracts.performance.services.main">Palveluhankintasopimukset:
-        tietyntyyppisten palvelujen suorittaminen
-    </entry>
-    <entry key="espd.crit.selection.technical.study.research.facilities.description">Se käyttää seuraavia tutkimus- ja
-        kehitysjärjestelmiä:
-    </entry>
+    <entry key="espd.part4.crit.selection.technical.professional.ability.article">Direktiivin 2014/24/EU 58 artiklan 4 kohdassa esitetään seuraavat poissulkemisperusteet</entry>
+    <entry key="espd.part4.crit.selection.technical.professional.ability.article.tooltip">Talouden toimijan olisi annettava nämä tiedot vain, jos hankintaviranomainen tai -yksikkö on vaatinut kyseisten valintaperusteiden täyttämistä asiaa koskevassa ilmoituksessa tai hankinta-asiakirjoissa, joihin ilmoituksessa viitataan.</entry>
+    <entry key="espd.crit.selection.technical.service.contracts.performance.services.description">Vain julkisia palveluhankintoja koskevat sopimukset: Talouden toimija on suorittanut viitejakson aikana seuraavantyyppiset pääasialliset palvelut: Hankintaviranomaiset voivat vaatia enintään viiden vuoden kokemuksen tai hyväksyä yli viisi vuotta aikaisemmin hankitun kokemuksen.</entry>
+    <entry key="espd.crit.selection.technical.service.contracts.performance.services.main">Palveluhankintasopimukset: tietyntyyppisten palvelujen suorittaminen</entry>
+    <entry key="espd.crit.selection.technical.study.research.facilities.description">Se käyttää seuraavia tutkimus- ja kehitysjärjestelmiä:</entry>
     <entry key="espd.crit.selection.technical.study.research.facilities.main">Tutkimus- ja kehitysjärjestelmät</entry>
-    <entry key="espd.crit.selection.technical.subcontracting.proportion.description">Talouden toimija aikoo
-        mahdollisesti antaa seuraavan osuuden (ts. prosenttiosuuden) hankintasopimuksesta alihankkijoille: Jos talouden
-        toimija on päättänyt antaa osan hankintasopimuksesta alihankkijoille ja hyödyntää alihankkijan voimavaroja
-        kyseisen osan toteuttamisessa, kyseisistä alihankkijoista on täytettävä erilliset yhteisen eurooppalaisen
-        hankinta-asiakirjan lomakkeet, ks. II osan C jakso.
-    </entry>
+    <entry key="espd.crit.selection.technical.subcontracting.proportion.description">Talouden toimija aikoo mahdollisesti antaa seuraavan osuuden (ts. prosenttiosuuden) hankintasopimuksesta alihankkijoille: Jos talouden toimija on päättänyt antaa osan hankintasopimuksesta alihankkijoille ja hyödyntää alihankkijan voimavaroja kyseisen osan toteuttamisessa, kyseisistä alihankkijoista on täytettävä erilliset yhteisen eurooppalaisen hankinta-asiakirjan lomakkeet, ks. II osan C jakso.</entry>
     <entry key="espd.crit.selection.technical.subcontracting.proportion.main">Alihankinnan osuus</entry>
-    <entry key="espd.crit.selection.technical.supply.chain.management.description">Se voi käyttää seuraavia
-        toimitusketjun hallinnointi- ja seurantajärjestelmiä hankintasopimuksen toteuttamisen yhteydessä:
-    </entry>
+    <entry key="espd.crit.selection.technical.supply.chain.management.description">Se voi käyttää seuraavia toimitusketjun hallinnointi- ja seurantajärjestelmiä hankintasopimuksen toteuttamisen yhteydessä:</entry>
     <entry key="espd.crit.selection.technical.supply.chain.management.main">Toimitusketjun hallinta</entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.certificate.quality.description">Voiko talouden toimija
-        toimittaa vaaditut virallisten laadunvalvontaelinten tai toimivaltaisiksi tunnustettujen laitosten laatimat
-        todistukset, joissa selkeästi määriteltyjen tuotteiden vaatimustenmukaisuus osoitetaan viittaamalla asiaa
-        koskevassa ilmoituksessa tai hankinta-asiakirjoissa ilmoitettuihin teknisiin eritelmiin tai standardeihin?
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.certificate.quality.main">Tavarahankintasopimukset:
-        Virallisten laadunvalvontaelinten laatimat todistukset
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.performance.deliveries.description">Vain julkisia
-        tavarahankintoja koskevat sopimukset: Talouden toimija on suorittanut viitejakson aikana seuraavantyyppiset
-        pääasialliset toimitukset: Hankintaviranomaiset voivat vaatia enintään viiden vuoden kokemuksen tai hyväksyä yli
-        viisi vuotta aikaisemmin hankitun kokemuksen.
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.performance.deliveries.main">Tavarahankintasopimukset:
-        tietyntyyppisten toimitusten suorittaminen
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.with.ca.description">Julkiset tavarahankintoja koskevat
-        sopimukset: Talouden toimija toimittaa vaaditut toimitettavien tuotteiden näytteet, kuvaukset tai valokuvat sekä
-        tarvittaessa aitoustodistukset
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.with.ca.main">Tavarahankintasopimukset: Näytteet,
-        kuvaukset tai valokuvat, joihin on liitettävä aitoustodistukset
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.without.ca.description">Julkiset tavarahankintoja
-        koskevat sopimukset: Talouden toimija toimittaa vaaditut toimitettavien tuotteiden näytteet, kuvaukset tai
-        valokuvat, joihin ei tarvitse liittää aitoustodistuksia
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.without.ca.main">Tavarahankintasopimukset: Näytteet,
-        kuvaukset tai valokuvat, joihin ei tarvitse liittää aitoustodistuksia
-    </entry>
-    <entry key="espd.crit.selection.technical.technical.facilities.measures.description">Se käyttää laadunvarmistukseen
-        seuraavia teknisiä välineitä ja toimenpiteitä ja sen tutkimus- ja kehitysjärjestelmät ovat seuraavat:
-    </entry>
-    <entry key="espd.crit.selection.technical.technical.facilities.measures.main">Laadunvarmistukseen käytetyt tekniset
-        välineet ja toimenpiteet
-    </entry>
-    <entry key="espd.crit.selection.technical.technicians.technical.bodies.description">Sillä on käytettävissään
-        seuraavat (erityisesti laadunvalvonnasta vastaavat) tekniset asiantuntijat tai tekniset laitokset: Teknisistä
-        asiantuntijoista tai teknisistä laitoksista, jotka eivät suoraan kuulu talouden toimijan yritykseen mutta joiden
-        voimavaroja talouden toimija käyttää II osan C jakson mukaisesti, on täytettävä erilliset yhteisen
-        eurooppalaisen hankinta-asiakirjan lomakkeet.
-    </entry>
-    <entry key="espd.crit.selection.technical.technicians.technical.bodies.main">Laadunvalvonnasta vastaavat tekniset
-        asiantuntijat tai tekniset laitokset
-    </entry>
-    <entry key="espd.crit.selection.technical.tools.plant.description">Talouden toimijalla on käytettävissään seuraavat
-        työvälineet, kalusto tai tekniset laitteet hankintasopimuksen toteuttamiseksi:
-    </entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.certificate.quality.description">Voiko talouden toimija toimittaa vaaditut virallisten laadunvalvontaelinten tai toimivaltaisiksi tunnustettujen laitosten laatimat todistukset, joissa selkeästi määriteltyjen tuotteiden vaatimustenmukaisuus osoitetaan viittaamalla asiaa koskevassa ilmoituksessa tai hankinta-asiakirjoissa ilmoitettuihin teknisiin eritelmiin tai standardeihin?</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.certificate.quality.main">Tavarahankintasopimukset: Virallisten laadunvalvontaelinten laatimat todistukset</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.performance.deliveries.description">Vain julkisia tavarahankintoja koskevat sopimukset: Talouden toimija on suorittanut viitejakson aikana seuraavantyyppiset pääasialliset toimitukset: Hankintaviranomaiset voivat vaatia enintään viiden vuoden kokemuksen tai hyväksyä yli viisi vuotta aikaisemmin hankitun kokemuksen.</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.performance.deliveries.main">Tavarahankintasopimukset: tietyntyyppisten toimitusten suorittaminen</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.with.ca.description">Julkiset tavarahankintoja koskevat sopimukset: Talouden toimija toimittaa vaaditut toimitettavien tuotteiden näytteet, kuvaukset tai valokuvat sekä tarvittaessa aitoustodistukset</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.with.ca.main">Tavarahankintasopimukset: Näytteet, kuvaukset tai valokuvat, joihin on liitettävä aitoustodistukset</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.without.ca.description">Julkiset tavarahankintoja koskevat sopimukset: Talouden toimija toimittaa vaaditut toimitettavien tuotteiden näytteet, kuvaukset tai valokuvat, joihin ei tarvitse liittää aitoustodistuksia</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.without.ca.main">Tavarahankintasopimukset: Näytteet, kuvaukset tai valokuvat, joihin ei tarvitse liittää aitoustodistuksia</entry>
+    <entry key="espd.crit.selection.technical.technical.facilities.measures.description">Se käyttää laadunvarmistukseen seuraavia teknisiä välineitä ja toimenpiteitä ja sen tutkimus- ja kehitysjärjestelmät ovat seuraavat:</entry>
+    <entry key="espd.crit.selection.technical.technical.facilities.measures.main">Laadunvarmistukseen käytetyt tekniset välineet ja toimenpiteet</entry>
+    <entry key="espd.crit.selection.technical.technicians.technical.bodies.description">Sillä on käytettävissään seuraavat (erityisesti laadunvalvonnasta vastaavat) tekniset asiantuntijat tai tekniset laitokset: Teknisistä asiantuntijoista tai teknisistä laitoksista, jotka eivät suoraan kuulu talouden toimijan yritykseen mutta joiden voimavaroja talouden toimija käyttää II osan C jakson mukaisesti, on täytettävä erilliset yhteisen eurooppalaisen hankinta-asiakirjan lomakkeet.</entry>
+    <entry key="espd.crit.selection.technical.technicians.technical.bodies.main">Laadunvalvonnasta vastaavat tekniset asiantuntijat tai tekniset laitokset</entry>
+    <entry key="espd.crit.selection.technical.tools.plant.description">Talouden toimijalla on käytettävissään seuraavat työvälineet, kalusto tai tekniset laitteet hankintasopimuksen toteuttamiseksi:</entry>
     <entry key="espd.crit.selection.technical.tools.plant.main">Työvälineet, kalusto tai tekniset laitteet</entry>
-    <entry key="espd.crit.selection.technical.work.contracts.performance.works.description">Vain
-        rakennusurakkasopimukset: Talouden toimija on suorittanut viitejakson aikana seuraavat rakennusurakoiden tyypit:
-        Hankintaviranomaiset voivat vaatia enintään viiden vuoden kokemuksen tai hyväksyä yli viisi vuotta aikaisemmin
-        hankitun kokemuksen.
-    </entry>
-    <entry key="espd.crit.selection.technical.work.contracts.performance.works.main">Rakennusurakkasopimukset:
-        tietyntyyppisten rakennusurakoiden suorittaminen
-    </entry>
-    <entry key="espd.crit.selection.technical.work.contracts.technicians.description">Kun kyseessä ovat julkiset
-        rakennusurakkasopimukset, talouden toimijalla on käytettävissään seuraavat tekniset asiantuntijat tai tekniset
-        laitokset urakan toteuttamista varten:
-    </entry>
-    <entry key="espd.crit.selection.technical.work.contracts.technicians.main">Rakennusurakkasopimukset:
-        Rakennusurakoiden toteuttamisesta vastaavat tekniset asiantuntijat tai tekniset laitokset
-    </entry>
+    <entry key="espd.crit.selection.technical.work.contracts.performance.works.description">Vain rakennusurakkasopimukset: Talouden toimija on suorittanut viitejakson aikana seuraavat rakennusurakoiden tyypit: Hankintaviranomaiset voivat vaatia enintään viiden vuoden kokemuksen tai hyväksyä yli viisi vuotta aikaisemmin hankitun kokemuksen.</entry>
+    <entry key="espd.crit.selection.technical.work.contracts.performance.works.main">Rakennusurakkasopimukset: tietyntyyppisten rakennusurakoiden suorittaminen</entry>
+    <entry key="espd.crit.selection.technical.work.contracts.technicians.description">Kun kyseessä ovat julkiset rakennusurakkasopimukset, talouden toimijalla on käytettävissään seuraavat tekniset asiantuntijat tai tekniset laitokset urakan toteuttamista varten:</entry>
+    <entry key="espd.crit.selection.technical.work.contracts.technicians.main">Rakennusurakkasopimukset: Rakennusurakoiden toteuttamisesta vastaavat tekniset asiantuntijat tai tekniset laitokset</entry>
     <entry key="espd.crit.start.date">Aloituspäivä</entry>
-    <entry key="espd.crit.taken.self.cleaning.measures">Oletko ryhtynyt toimiin luotettavuutesi osoittamiseksi
-        (Chr(34)puhdistautuminenChr(34))?
-    </entry>
-    <entry key="espd.crit.taxes.eo.fulfilled.obligations">Onko talouden toimija täyttänyt velvollisuutensa maksamalla
-        verot tai sosiaaliturvamaksut taikka onko toimija sopinut sitovasta järjestelystä niiden maksamista varten,
-        mukaan lukien mahdolliset kertyneet korot tai sakot?
-    </entry>
-    <entry key="espd.crit.taxes.length.period.of.exclusion">Jos kyse on tuomiosta ja jos poissulkemisen kesto on
-        määrätty suoraan tuomiossa.
-    </entry>
+    <entry key="espd.crit.taken.self.cleaning.measures">Oletko ryhtynyt toimiin luotettavuutesi osoittamiseksi (Chr(34)puhdistautuminenChr(34))?</entry>
+    <entry key="espd.crit.taxes.eo.fulfilled.obligations">Onko talouden toimija täyttänyt velvollisuutensa maksamalla verot tai sosiaaliturvamaksut taikka onko toimija sopinut sitovasta järjestelystä niiden maksamista varten, mukaan lukien mahdolliset kertyneet korot tai sakot?</entry>
+    <entry key="espd.crit.taxes.length.period.of.exclusion">Jos kyse on tuomiosta ja jos poissulkemisen kesto on määrätty suoraan tuomiossa.</entry>
     <entry key="espd.crit.taxes.means.description">Syötä kuvaus käytetyistä välineistä</entry>
     <entry key="espd.part3.crit.grounds.criminal.conv.top.title">A: Tuomioihin liittyvät perusteet</entry>
-    <entry key="espd.part3.crit.top.grounds.payment.taxes.title">B: Verojen tai sosiaaliturvamaksujen maksamiseen
-        liittyvät perusteet
-    </entry>
-    <entry key="espd.part3.crit.insolvency.conflicts.top.title">C: Maksukyvyttömyyteen, eturistiriitoihin tai ammatin
-        harjoittamisessa tapahtuneeseen virheeseen liittyvät perusteet
-    </entry>
+    <entry key="espd.part3.crit.top.grounds.payment.taxes.title">B: Verojen tai sosiaaliturvamaksujen maksamiseen liittyvät perusteet</entry>
+    <entry key="espd.part3.crit.insolvency.conflicts.top.title">C: Maksukyvyttömyyteen, eturistiriitoihin tai ammatin harjoittamisessa tapahtuneeseen virheeseen liittyvät perusteet</entry>
     <entry key="espd.part3.crit.purely.national.top.title">D: Puhtaasti kansalliset poissulkemisperusteet</entry>
     <entry key="espd.crit.url">URL</entry>
     <entry key="espd.crit.who.convicted">Kuka on tuomittu?</entry>
@@ -808,49 +312,18 @@ Wenn die Datei als Properties gezogen wird, wird ein DocType zur Laufzeit einget
     <entry key="espd.ecertis.language">Kieli</entry>
     <entry key="espd.ecertis.loading">e-Certis lataa ...</entry>
     <entry key="espd.ecertis.no.evidences">Ei näyttöä</entry>
-    <entry key="espd.gui.error.ted.notice.not.supported">Ladattu tiedosto on ilmoitus eikä hankinta-asiakirja, joten
-        sitä ei voi käyttää tässä palvelussa.
-    </entry>
+    <entry key="espd.gui.error.ted.notice.not.supported">Ladattu tiedosto on ilmoitus eikä hankinta-asiakirja, joten sitä ei voi käyttää tässä palvelussa.</entry>
     <entry key="espd.gui.espd">Yhteinen eurooppalainen hankinta-asiakirja (ESPD)</entry>
-    <entry key="espd.gui.espd.upload.error">Lisätyn tiedoston lukeminen epäonnistui. Onko kyseessä oikea
-        hankinta-asiakirjaa koskeva pyyntö tai vastaus?
-    </entry>
-    <entry key="espd.gui.espd.upload.request.error">Lisätyn tiedoston lukeminen epäonnistui. Onko kyseessä oikea
-        hankinta-asiakirjaa koskeva pyyntö?
-    </entry>
-    <entry key="espd.gui.espd.upload.response.error">Lisätyn tiedoston lukeminen epäonnistui. Onko kyseessä oikea
-        hankinta-asiakirjaa koskeva vastaus?
-    </entry>
+    <entry key="espd.gui.espd.upload.error">Lisätyn tiedoston lukeminen epäonnistui. Onko kyseessä oikea hankinta-asiakirjaa koskeva pyyntö tai vastaus?</entry>
+    <entry key="espd.gui.espd.upload.request.error">Lisätyn tiedoston lukeminen epäonnistui. Onko kyseessä oikea hankinta-asiakirjaa koskeva pyyntö?</entry>
+    <entry key="espd.gui.espd.upload.response.error">Lisätyn tiedoston lukeminen epäonnistui. Onko kyseessä oikea hankinta-asiakirjaa koskeva vastaus?</entry>
     <entry key="espd.gui.europa">Europa</entry>
-    <entry key="espd.gui.expire.reminder.message">Et ole tehnyt yhteisen eurooppalaisen hankinta-asiakirjan
-        palvelusivulla mitään lähes tuntiin.&lt;p&gt;Tallenna sähköinen asiakirja, ettet menetä tietoja.&lt;p&gt;Voit tuoda
-        asiakirjan ja ottaa sen uudelleen työn alle koska tahansa.
-    </entry>
+    <entry key="espd.gui.expire.reminder.message">Et ole tehnyt yhteisen eurooppalaisen hankinta-asiakirjan palvelusivulla mitään lähes tuntiin.  Tallenna sähköinen asiakirja, ettet menetä tietoja.  Voit tuoda asiakirjan ja ottaa sen uudelleen työn alle koska tahansa.</entry>
     <entry key="espd.gui.export">Tallentaa</entry>
     <entry key="espd.gui.faq.leaflet">Usein kysyttyä</entry>
-    <entry key="espd.gui.faq.text.answers">Vastauksia usein kysyttyihin kysymyksiin yhteisestä eurooppalaisesta
-        hankinta-asiakirjasta löytyy täältä
-    </entry>
-    <entry key="espd.gui.faq.text.more.info">Yhteistä eurooppalaista hankinta-asiakirjaa koskevia lisätietoja varten
-    </entry>
-    <entry key="espd.init.alert">
-        &lt;p&gt;Yhteinen eurooppalainen hankinta-asiakirja on yritysten itse taloudellisesta asemastaan, valmiuksistaan ja
-            soveltuvuudestaan julkiseen hankintamenettelyyn laatima selvitys. Se on saatavilla kaikilla EU-kielillä, ja
-            sitä käytetään alustavana näyttönä julkisten hankintamenettelyjen edellytysten täyttymisestä kaikkialla
-            EU:ssa. Hankinta-asiakirjan ansiosta tarjousten tekijöiden ei enää tarvitse antaa täyttä asiakirjanäyttöä ja
-            EU:n hankinnoissa aikaisemmin käytettyjä eri lomakkeita, mikä yksinkertaistaa merkittävästi mahdollisuuksia
-            tehdä rajat ylittäviä tarjouksia. Lokakuusta 2018 alkaen hankinta-asiakirja on saatavilla ainoastaan
-            sähköisessä muodossa.
-        &lt;/p&gt;
-        &lt;p&gt;Euroopan komissio tarjoaa ilmaisen verkkopalvelun ostajille, tarjoajille ja muille sähköisen
-        hankinta-asiakirjan täyttämisestä kiinnostuneille osapuolille. Verkkolomakkeen voi täyttää, tulostaa ja lähettää
-        ostajalle yhdessä muun tarjousaineiston kanssa. Jos menettely suoritetaan sähköisesti, hankinta-asiakirjan voi
-        viedä, tallentaa ja toimittaa sähköisesti. Edellisessä hankintamenettelyssä toimitettua hankinta-asiakirjaa voi
-        käyttää uudelleen niin kauan kuin siinä annetut tiedot ovat oikein. Tarjoajat voidaan sulkea menettelyn
-        ulkopuolelle tai ne voidaan viedä oikeuteen, jos hankinta-asiakirjassa annetut tiedot ovat selvästi väärin tai
-        epätäydelliset tai jos niitä ei voida täydentää todistavilla asiakirjoilla.
-        &lt;p&gt;
-    </entry>
+    <entry key="espd.gui.faq.text.answers">Vastauksia usein kysyttyihin kysymyksiin yhteisestä eurooppalaisesta hankinta-asiakirjasta löytyy täältä</entry>
+    <entry key="espd.gui.faq.text.more.info">Yhteistä eurooppalaista hankinta-asiakirjaa koskevia lisätietoja varten</entry>
+    <entry key="espd.init.alert">Yhteinen eurooppalainen hankinta-asiakirja on yritysten itse taloudellisesta asemastaan, valmiuksistaan ja soveltuvuudestaan julkiseen hankintamenettelyyn laatima selvitys. Se on saatavilla kaikilla EU-kielillä, ja sitä käytetään alustavana näyttönä julkisten hankintamenettelyjen edellytysten täyttymisestä kaikkialla EU:ssa. Hankinta-asiakirjan ansiosta tarjousten tekijöiden ei enää tarvitse antaa täyttä asiakirjanäyttöä ja EU:n hankinnoissa aikaisemmin käytettyjä eri lomakkeita, mikä yksinkertaistaa merkittävästi mahdollisuuksia tehdä rajat ylittäviä tarjouksia. Lokakuusta 2018 alkaen hankinta-asiakirja on saatavilla ainoastaan sähköisessä muodossa. Euroopan komissio tarjoaa ilmaisen verkkopalvelun ostajille, tarjoajille ja muille sähköisen hankinta-asiakirjan täyttämisestä kiinnostuneille osapuolille. Verkkolomakkeen voi täyttää, tulostaa ja lähettää ostajalle yhdessä muun tarjousaineiston kanssa. Jos menettely suoritetaan sähköisesti, hankinta-asiakirjan voi viedä, tallentaa ja toimittaa sähköisesti. Edellisessä hankintamenettelyssä toimitettua hankinta-asiakirjaa voi käyttää uudelleen niin kauan kuin siinä annetut tiedot ovat oikein. Tarjoajat voidaan sulkea menettelyn ulkopuolelle tai ne voidaan viedä oikeuteen, jos hankinta-asiakirjassa annetut tiedot ovat selvästi väärin tai epätäydelliset tai jos niitä ei voida täydentää todistavilla asiakirjoilla. </entry>
     <entry key="espd.init.create.espd">Haluan luoda uuden yhteisen eurooppalaisen hankinta-asiakirjan.</entry>
     <entry key="espd.init.create.response">Luo vastaus</entry>
     <entry key="espd.init.header">Tervetuloa yhteisen eurooppalaisen hankinta-asiakirjan palvelusivulle</entry>
@@ -859,22 +332,15 @@ Wenn die Datei als Properties gezogen wird, wird ein DocType zur Laufzeit einget
     <entry key="espd.init.i.am.eop">Olen talouden toimija</entry>
     <entry key="espd.init.import.espd">Haluan tuoda yhteisen eurooppalaisen hankinta-asiakirjan.</entry>
     <entry key="espd.init.merge.espds">Yhdistä kaksi yhteistä eurooppalaista hankinta-asiakirjaa</entry>
-    <entry key="espd.init.reuse.espd">Haluan käyttää olemassa olevaa yhteistä eurooppalaista hankinta-asiakirjaa.
-    </entry>
+    <entry key="espd.init.reuse.espd">Haluan käyttää olemassa olevaa yhteistä eurooppalaista hankinta-asiakirjaa.</entry>
     <entry key="espd.init.review.espd">Haluan tarkastella yhteistä eurooppalaista hankinta-asiakirjaa.</entry>
     <entry key="espd.init.select.country">Valitse maa</entry>
     <entry key="espd.init.ted.reception.id.placeholder">Anna saatu ilmoitusnumero</entry>
     <entry key="espd.init.upload.document">Lataa asiakirja järjestelmään</entry>
     <entry key="espd.init.upload.documents">Lataa asiakirjoja</entry>
-    <entry key="espd.init.upload.request">Lataa yhteistä eurooppalaista hankinta-asiakirjaa koskeva hankintaviranomaisen
-        pyyntö
-    </entry>
-    <entry key="espd.init.upload.request.response">Lataa yhteistä eurooppalaista hankinta-asiakirjaa koskeva pyyntö tai
-        vastaus
-    </entry>
-    <entry key="espd.init.upload.response">Lataa vanha yhteistä eurooppalaista hankinta-asiakirjaa koskeva oma
-        vastauksesi
-    </entry>
+    <entry key="espd.init.upload.request">Lataa yhteistä eurooppalaista hankinta-asiakirjaa koskeva hankintaviranomaisen pyyntö</entry>
+    <entry key="espd.init.upload.request.response">Lataa yhteistä eurooppalaista hankinta-asiakirjaa koskeva pyyntö tai vastaus</entry>
+    <entry key="espd.init.upload.response">Lataa vanha yhteistä eurooppalaista hankinta-asiakirjaa koskeva oma vastauksesi</entry>
     <entry key="espd.init.what.you.do">Mitä haluat tehdä?</entry>
     <entry key="espd.init.where.are.you.from.ca">Missä maassa hankintaviranomainen sijaitsee?</entry>
     <entry key="espd.init.where.are.you.from.eo">Missä maassa yritys sijaitsee?</entry>
@@ -896,66 +362,28 @@ Wenn die Datei als Properties gezogen wird, wird ein DocType zur Laufzeit einget
     <entry key="espd.gui.progress.procedure">Menettely</entry>
     <entry key="espd.gui.progress.selection">Valinta</entry>
     <entry key="espd.gui.progress.start">Aloitus</entry>
-    <entry key="espd.gui.question.to.use.alpha">Haluatko käyttää valintaperusteita A?D?</entry>
-    <entry key="espd.gui.report.appliction.issue">Kaikissa yhteisen eurooppalaisen hankinta-asiakirjan soveltamiseen
-        liittyvissä kysymyksissä yhteystaho on
-    </entry>
+    <entry key="espd.gui.question.to.use.alpha">Haluatko käyttää valintaperusteita A–D?</entry>
+    <entry key="espd.gui.report.appliction.issue">Kaikissa yhteisen eurooppalaisen hankinta-asiakirjan soveltamiseen liittyvissä kysymyksissä yhteystaho on</entry>
     <entry key="espd.gui.report.security.incident">Ilmoitus tietoturvapoikkeamasta</entry>
-    <entry key="espd.gui.report.security.incident.title">Kaikissa tietoturvapoikkeamissa ottakaa yhteyttä Euroopan
-        komissioon seuraavaa kautta
-    </entry>
+    <entry key="espd.gui.report.security.incident.title">Kaikissa tietoturvapoikkeamissa ottakaa yhteyttä Euroopan komissioon seuraavaa kautta</entry>
     <entry key="espd.gui.role.ca">Asema: Hankintaviranomainen</entry>
     <entry key="espd.gui.role.eo">Asema: Talouden toimija</entry>
     <entry key="espd.gui.search">Haku</entry>
     <entry key="espd.gui.signature">Allekirjoitus</entry>
     <entry key="espd.gui.tools">Välineet</entry>
-    <entry key="espd.init.ca.can.create.espd.tooltip">Hankintaviranomainen voi luoda yhteisen eurooppalaisen
-        hankinta-asiakirjan alusta alkaen. Tällöin hankintaviranomaisen on täytettävä yhteisen eurooppalaisen
-        hankinta-asiakirjan lomakkeeseen kaikki asiaankuuluvat tiedot.
-    </entry>
-    <entry key="espd.init.ca.can.import.espd.tooltip">Jos hankintaviranomainen on jo käyttänyt yhteistä eurooppalaista
-        hankinta-asiakirjaa aikaisemmassa hankintamenettelyssä, se voi tuoda kyseisen paikallisverkkoon talletetun
-        yhteisen eurooppalaisen hankinta-asiakirjan palveluun. Tällöin yhteistä eurooppalaista hankinta-asiakirjaa ei
-        tarvitse täyttää alusta alkaen, mutta joitakin tietoja on kuitenkin päivitettävä tämän hankintamenettelyn
-        huomioon ottamiseksi.
-    </entry>
+    <entry key="espd.init.ca.can.create.espd.tooltip">Hankintaviranomainen voi luoda yhteisen eurooppalaisen hankinta-asiakirjan alusta alkaen. Tällöin hankintaviranomaisen on täytettävä yhteisen eurooppalaisen hankinta-asiakirjan lomakkeeseen kaikki asiaankuuluvat tiedot.</entry>
+    <entry key="espd.init.ca.can.import.espd.tooltip">Jos hankintaviranomainen on jo käyttänyt yhteistä eurooppalaista hankinta-asiakirjaa aikaisemmassa hankintamenettelyssä, se voi tuoda kyseisen paikallisverkkoon talletetun yhteisen eurooppalaisen hankinta-asiakirjan palveluun. Tällöin yhteistä eurooppalaista hankinta-asiakirjaa ei tarvitse täyttää alusta alkaen, mutta joitakin tietoja on kuitenkin päivitettävä tämän hankintamenettelyn huomioon ottamiseksi.</entry>
     <entry key="espd.init.ca.ref.buyer.tooltip">Hankintaviranomaisella tarkoitetaan ostajaa.</entry>
-    <entry key="espd.init.ce.ref.buyer.tooltip">Termillä ?hankintayksikkö? tarkoitetaan tässä ostajaa, joka toimii
-        vesi-, energia-, liikenne- tai postipalvelujen alalla. Hankintaviranomaiset, jotka myös toimivat edellä
-        mainituilla aloilla, valitsevat ?Edustan hankintaviranomaista?.
-    </entry>
-    <entry key="espd.init.eo.can.reuse.espd.tooltip">Talouden toimija voi käyttää uudelleen tietoja, jotka se on antanut
-        yhteisellä eurooppalaisella hankinta-asiakirjalla aikaisemmassa hankintamenettelyssä (ns. vanha
-        hankinta-asiakirja). Hankinta-asiakirjapalvelu yhdistää vanhan hankinta-asiakirjan uuteen lomakkeeseen, jonka
-        hankintaviranomainen on valmistellut tätä hankintamenettelyä varten.
-    </entry>
-    <entry key="espd.init.eo.ref.suppl.tooltip">Talouden toimijalla tarkoitetaan toimittajaa / tarjouksen tekijää.
-    </entry>
-    <entry key="espd.init.espd.used.both.ca.eo.tooltip">Yhteistä eurooppalaista hankinta-asiakirjaa koskevaa palvelua
-        voivat käyttää sekä hankintaviranomaiset että talouden toimijat. Valitse vaihtoehdoista se, joka vastaa asemaasi
-        tässä julkisen hankinnan menettelyssä.
-    </entry>
-    <entry key="espd.init.filter.create.response.tooltip">Haluan luoda uuden yhteistä eurooppalaista hankinta-asiakirjaa
-        koskevan vastauksen
-    </entry>
-    <entry key="espd.init.filter.eo.can.import.espd.tooltip">Talouden toimija voi tuoda yhteisen eurooppalaisen
-        hankinta-asiakirjan tiedoston, jonka hankintaviranomainen on esitäyttänyt tätä julkisen hankinnan menettelyä
-        varten ja julkaissut tarjouspyyntöilmoituksen yhteydessä.
-    </entry>
-    <entry key="espd.init.filter.eo.merge.espds.tooltip">The ESPD service will merge the 'old' ESPD with the new form
-        prepared by the contracting authority for this procurement procedure.
-    </entry>
-    <entry key="espd.init.overview.received.espds.tooltip">Tähän toimintoon sisältyy taulukko, jossa esitetään
-        yleiskatsaus vastauksiin, jotka tarjoajat ovat yhteisissä eurooppalaisissa hankinta-asiakirjoissaan kyseisessä
-        hankintamenettelyssä antaneet.
-    </entry>
-    <entry key="espd.init.review.espd.tooltip">Hankintaviranomainen voi tarkastaa/tarkastella talouden toimijalta saatua
-        sähköistä yhteistä eurooppalaista hankinta-asiakirjaa.
-    </entry>
-    <entry key="espd.init.ted.reception.id.tooltip">Hankintaviranomainen saa julkaisutoimistolta sähköpostin, kun se on
-        toimittanut julkaisua koskevan ilmoituksen. Kyseisessä sähköpostissa annetaan tunnistenumero, jota voi käyttää
-        tässä palvelussa menettelyä tai viranomaista koskevien tietojen antamiseen.
-    </entry>
+    <entry key="espd.init.ce.ref.buyer.tooltip"> Termillä ’hankintayksikkö’ tarkoitetaan tässä ostajaa, joka toimii vesi-, energia-, liikenne- tai postipalvelujen alalla. Hankintaviranomaiset, jotka myös toimivat edellä mainituilla aloilla, valitsevat ’Edustan hankintaviranomaista’.</entry>
+    <entry key="espd.init.eo.can.reuse.espd.tooltip">Talouden toimija voi käyttää uudelleen tietoja, jotka se on antanut yhteisellä eurooppalaisella hankinta-asiakirjalla aikaisemmassa hankintamenettelyssä (ns. vanha hankinta-asiakirja). Hankinta-asiakirjapalvelu yhdistää vanhan hankinta-asiakirjan uuteen lomakkeeseen, jonka hankintaviranomainen on valmistellut tätä hankintamenettelyä varten.</entry>
+    <entry key="espd.init.eo.ref.suppl.tooltip">Talouden toimijalla tarkoitetaan toimittajaa / tarjouksen tekijää.</entry>
+    <entry key="espd.init.espd.used.both.ca.eo.tooltip">Yhteistä eurooppalaista hankinta-asiakirjaa koskevaa palvelua voivat käyttää sekä hankintaviranomaiset että talouden toimijat. Valitse vaihtoehdoista se, joka vastaa asemaasi tässä julkisen hankinnan menettelyssä.</entry>
+    <entry key="espd.init.filter.create.response.tooltip">Haluan luoda uuden yhteistä eurooppalaista hankinta-asiakirjaa koskevan vastauksen</entry>
+    <entry key="espd.init.filter.eo.can.import.espd.tooltip">Talouden toimija voi tuoda yhteisen eurooppalaisen hankinta-asiakirjan tiedoston, jonka hankintaviranomainen on esitäyttänyt tätä julkisen hankinnan menettelyä varten ja julkaissut tarjouspyyntöilmoituksen yhteydessä.</entry>
+    <entry key="espd.init.filter.eo.merge.espds.tooltip">The ESPD service will merge the 'old' ESPD with the new form prepared by the contracting authority for this procurement procedure.</entry>
+    <entry key="espd.init.overview.received.espds.tooltip">Tähän toimintoon sisältyy taulukko, jossa esitetään yleiskatsaus vastauksiin, jotka tarjoajat ovat yhteisissä eurooppalaisissa hankinta-asiakirjoissaan kyseisessä hankintamenettelyssä antaneet.</entry>
+    <entry key="espd.init.review.espd.tooltip">Hankintaviranomainen voi tarkastaa/tarkastella talouden toimijalta saatua sähköistä yhteistä eurooppalaista hankinta-asiakirjaa.</entry>
+    <entry key="espd.init.ted.reception.id.tooltip">Hankintaviranomainen saa julkaisutoimistolta sähköpostin, kun se on toimittanut julkaisua koskevan ilmoituksen. Kyseisessä sähköpostissa annetaan tunnistenumero, jota voi käyttää tässä palvelussa menettelyä tai viranomaista koskevien tietojen antamiseen.</entry>
     <entry key="espd.validator.accept">Syötä arvo ja voimassa oleva tiedostotunniste</entry>
     <entry key="espd.validator.creditcard">Syötä voimassa olevan luottokortin numero</entry>
     <entry key="espd.validator.date">Syötä päivämäärä</entry>
@@ -976,17 +404,5 @@ Wenn die Datei als Properties gezogen wird, wird ein DocType zur Laufzeit einget
     <entry key="espd.gui.view.ca">Näkymä: Hankintaviranomainen</entry>
     <entry key="espd.gui.view.eo">Näkymä: Talouden toimija</entry>
     <entry key="espd.gui.yes">Kyllä</entry>
-    <entry key="espd.gui.zip.instructions">Tämä on lyhyt luettelo hankinta-asiakirjatiedostoista, jotka löytyvät tästä
-        ZIP-kansiosta.Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nespd.XML: XML-tiedosto on tiedosto, jonka tämä
-        hankinta-asiakirjapalvelu tai muut yhteensopivat hankinta-asiakirjapalvelut pystyvät lukemaan.
-        XML-tiedostomuodon käytössä sähköisenä yhteisen eurooppalaisen hankinta-asiakirjan tiedostomuotona on etuna se,
-        että ostajat ja yritykset voivat käyttää sitä uudelleen muissa menettelyissä myöhemmin. Se pitäisi lähettää
-        yhdessä hankinta-asiakirjojen kanssa (viranomaiselta yrityksille) tai osana tarjousta (yritykseltä
-        viranomaiselle).Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nespd.PDF: PDF-tiedosto on ihmisen luettavissa oleva
-        versio sähköisestä yhteisestä eurooppalaisesta hankinta-asiakirjasta. Ehdotamme, että PDF-tiedostoa käytetään
-        XML-tiedoston ohella yhdessä hankinta-asiakirjojen kanssa (viranomaiselta yrityksille) tai osana tarjousta
-        (yritykseltä viranomaiselle) viiteasiakirjana.Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nJos teillä on kysyttävää
-        näistä tiedostoista, ottakaa yhteyttä sähköpostilla osoitteeseen: grow-espd@ec.europa.eu.
-    </entry>
-
+    <entry key="espd.gui.zip.instructions">Tämä on lyhyt luettelo hankinta-asiakirjatiedostoista, jotka löytyvät tästä ZIP-kansiosta.Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nespd.XML: XML-tiedosto on tiedosto, jonka tämä hankinta-asiakirjapalvelu tai muut yhteensopivat hankinta-asiakirjapalvelut pystyvät lukemaan. XML-tiedostomuodon käytössä sähköisenä yhteisen eurooppalaisen hankinta-asiakirjan tiedostomuotona on etuna se, että ostajat ja yritykset voivat käyttää sitä uudelleen muissa menettelyissä myöhemmin. Se pitäisi lähettää yhdessä hankinta-asiakirjojen kanssa (viranomaiselta yrityksille) tai osana tarjousta (yritykseltä viranomaiselle).Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nespd.PDF: PDF-tiedosto on ihmisen luettavissa oleva versio sähköisestä yhteisestä eurooppalaisesta hankinta-asiakirjasta. Ehdotamme, että PDF-tiedostoa käytetään XML-tiedoston ohella yhdessä hankinta-asiakirjojen kanssa (viranomaiselta yrityksille) tai osana tarjousta (yritykseltä viranomaiselle) viiteasiakirjana.Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nJos teillä on kysyttävää näistä tiedostoista, ottakaa yhteyttä sähköpostilla osoitteeseen: grow-espd@ec.europa.eu.</entry>
 </properties>

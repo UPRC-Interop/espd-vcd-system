@@ -14,13 +14,7 @@ Wenn die Datei als Properties gezogen wird, wird ein DocType zur Laufzeit einget
     <entry key="espd.gui.click.here">klikk her</entry>
     <entry key="espd.gui.contact">Kontakt</entry>
     <entry key="espd.gui.contact.header">Kontakt</entry>
-    <entry key="espd.gui.contact.info">
-        &lt;p&gt;European Commission&lt;/p&gt;
-        &lt;p&gt;Directorate General Internal Market, Industry, Entrepreneurship and SMEs&lt;/p&gt;
-        &lt;p&gt;Avenue d'Auderghem 45 / Oudergemselaan 45&lt;/p&gt;
-        &lt;p&gt;B-1049 Brussels&lt;/p&gt;
-        &lt;p&gt;Belgium&lt;/p&gt;
-    </entry>
+    <entry key="espd.gui.contact.info">European Commission Directorate General Internal Market, Industry, Entrepreneurship and SMEs Avenue d'Auderghem 45 / Oudergemselaan 45 B-1049 Brussels Belgium</entry>
     <entry key="espd.gui.cookies">Cookies</entry>
     <entry key="espd.gui.correct.errors">Du må rette feil før du kan fortsette</entry>
     <entry key="espd.part1.city">BY</entry>
@@ -32,18 +26,14 @@ Wenn die Datei als Properties gezogen wird, wird ein DocType zur Laufzeit einget
     <entry key="espd.part1.country">Land</entry>
     <entry key="espd.part1.email">e-post</entry>
     <entry key="espd.part1.fax">fax</entry>
-    <entry key="espd.part1.file.ref.ca">Oppdragsgivers saksnummer (hvis relevant) :</entry>
+    <entry key="espd.part1.file.ref.ca">Oppdragsgivers saksnummer  (hvis relevant) :</entry>
     <entry key="espd.part1.header">Del I: Opplysninger om konkurransen og oppdragsgiver.</entry>
     <entry key="espd.part1.info.procedure">fremgangsmåte</entry>
     <entry key="espd.part1.info.procurement.proc">Opplysninger om konkurransen</entry>
     <entry key="espd.part1.info.pub">Opplysninger om offentliggjørelse</entry>
     <entry key="espd.part1.name">Navn</entry>
     <entry key="espd.part1.nat.regnum">Nasjonalt registreringsnummer (hvis kjent):</entry>
-    <entry key="espd.part1.official.journal.alert">Dersom konkurransen ikke er kunngjort i EUT, skal oppdragsgiver angi
-        opplysninger som gjør det mulig å identifisere konkurransen: Dersom kunngjøring i Den Europeiske Unions Tidende
-        ikke er påkrevd, skal det angis andre opplysninger som gjør det mulig å identifisere konkurransen (f.eks.
-        nasjonal kunngjøring)
-    </entry>
+    <entry key="espd.part1.official.journal.alert">Dersom konkurransen ikke er kunngjort i EUT, skal oppdragsgiver angi opplysninger som gjør det mulig å identifisere konkurransen: Dersom kunngjøring i Den Europeiske Unions Tidende ikke er påkrevd, skal det angis andre opplysninger som gjør det mulig å identifisere konkurransen (f.eks. nasjonal kunngjøring)</entry>
     <entry key="espd.part1.ojs.label">Kunngjøringsnummer i EUT</entry>
     <entry key="espd.part1.ojs.url">OJS URL</entry>
     <entry key="espd.part1.postcode">Postnummer:</entry>
@@ -52,193 +42,75 @@ Wenn die Datei als Properties gezogen wird, wird ein DocType zur Laufzeit einget
     <entry key="espd.part1.ted.reception.id">Midlertidig TED nummer</entry>
     <entry key="espd.part1.telephone">Telefon</entry>
     <entry key="espd.part1.title.or.short.desc">kort beskrivelse</entry>
-    <entry key="espd.part1.to.be.filled.alert">For konkurranser som er kunngjort i Den europeiske unions tidende blir
-        opplysningene som etterspørres i henhold til del I automatisk innhentet, forutsatt at den elektroniske
-        ESPD-tjenesten anvendes til å opprette og utfylle ESPD. Henvisning til den relevante meddelelse i Den Europeiske
-        Unions Tidende:
-    </entry>
+    <entry key="espd.part1.to.be.filled.alert">For konkurranser som er kunngjort i Den europeiske unions tidende blir opplysningene som etterspørres i henhold til del I automatisk innhentet, forutsatt at den elektroniske ESPD-tjenesten anvendes til å opprette og utfylle ESPD. Henvisning til den relevante meddelelse i Den Europeiske Unions Tidende:</entry>
     <entry key="espd.part1.website">nettside (hvis relevant)</entry>
-    <entry key="espd.part3.grounds.criminal.conv">Avvisningsgrunner som gjelder straffedommer i henhold til nasjonale
-        bestemmelser som gjennomfører avvisningsgrunnene fastsatt i direktivets artikkel 57 (1):
-    </entry>
+    <entry key="espd.part3.grounds.criminal.conv">Avvisningsgrunner som gjelder straffedommer i henhold til nasjonale bestemmelser som gjennomfører avvisningsgrunnene fastsatt i direktivets artikkel 57 (1):</entry>
     <entry key="espd.part3.header">Del III: Avvisningsgrunner</entry>
-    <entry key="espd.part3.insolvency.conflicts">Opplysninger som gjelder mulig insolvens, interessekonflikt eller
-        alvorlige feil i yrkesutøvelsen
-    </entry>
+    <entry key="espd.part3.insolvency.conflicts">Opplysninger som gjelder mulig insolvens, interessekonflikt eller alvorlige feil i yrkesutøvelsen</entry>
     <entry key="espd.part5.concl.statements">Del VI: Avsluttende erklæringer</entry>
-    <entry key="espd.part5.concl.statements.signature">Dato, sted og, hvor det er påkrevd eller nødvendig,
-        underskrift(er):
-    </entry>
-    <entry key="espd.part5.concl.statements.text">Undertegnede erklærer at opplysningene angitt i del II-IV ovenfor er
-        nøyaktige og korrekte, og at de har blitt avgitt i fullt kjennskap til konsekvensene av å oppgi uriktige
-        opplysninger.
-        &lt;p&gt;Undertegnede bekrefte å kunne fremlegge attester og andre former for dokumentasjon som det henvises til,
-            straks og på anmodning unntatt når:
-        &lt;/p&gt;
-        &lt;p&gt;a) oppdragsgiver har mulighet til å innhente de relevante støttedokumentene kostnadsfritt i en database i en
-            EØS-stat, hvis denne stilles gratis til rådighet, eller
-        &lt;/p&gt;
-        &lt;p&gt;b) oppdragsgiver allerede senest den 18. april 2018 er i besittelse av de aktuelle dokumentene.&lt;/p&gt;
-        &lt;p&gt;Undertegnede gir [vennligst angi oppdragsgiveren angitt i del I, avsnitt A] adgang til dokumentasjon til
-            støtte for de opplysninger som har blitt avgitt i [vennligst angi den relevante del, det relevante avsnitt,
-            det eller de relevante punkter] i dette europeiske egenerklæringsskjemaet med sikte på [angi konkurransen:
-            (kort beskrivelse, henvisning til Den Europæiske Unions Tidende, referanseenummer)].
-        &lt;/p&gt;
-    </entry>
+    <entry key="espd.part5.concl.statements.signature">Dato, sted og, hvor det er påkrevd eller nødvendig, underskrift(er):</entry>
+    <entry key="espd.part5.concl.statements.text">Undertegnede erklærer at opplysningene angitt i del II-IV ovenfor er nøyaktige og korrekte, og at de har blitt avgitt i fullt kjennskap til konsekvensene av å oppgi uriktige opplysninger. Undertegnede bekrefte å kunne fremlegge attester og andre former for dokumentasjon som det henvises til, straks og på anmodning unntatt når: a) oppdragsgiver har mulighet til å innhente de relevante støttedokumentene kostnadsfritt i en database i en EØS-stat, hvis denne stilles gratis til rådighet, eller b) oppdragsgiver allerede senest den 18. april 2018 er i besittelse av de aktuelle dokumentene. Undertegnede gir [vennligst angi oppdragsgiveren angitt i del I, avsnitt A] adgang til dokumentasjon til støtte for de opplysninger som har blitt avgitt i [vennligst angi den relevante del, det relevante avsnitt, det eller de relevante punkter] i dette europeiske egenerklæringsskjemaet med sikte på [angi konkurransen: (kort beskrivelse, henvisning til Den Europæiske Unions Tidende, referanseenummer)].</entry>
     <entry key="espd.part5.export">Last ned og lagre</entry>
     <entry key="espd.part5.export.content">Klikk 'Last ned' for å hente ned og lagre filen du har laget.</entry>
     <entry key="espd.part5.header">Avslutt</entry>
     <entry key="espd.part5.reduction">Del V: Utvelgelse av antallet av kvalifiserte leverandører</entry>
     <entry key="espd.part5.reduction.question">Leverandøren erklærer at:</entry>
-    <entry key="espd.part5.text.eo.declares.that">Hvis noen av disse attestene eller andre former for dokumentasjon er
-        tilgjengelige i elektronisk form , angis dette for hver enkelt:
-    </entry>
-    <entry key="espd.part5.title.eo.declares.that">Denne oppfyller de objektive og ikke-diskriminerende kriterier eller
-        regler som skal anvendes for å velge ut antallet av leverandører på følgende måte:&lt;p&gt;Hvis det anmodes om visse
-            attester eller andre former for dokumentasjon, angis for hver enkelt om leverandøren er i besittelse av
-            dokumentene som etterspørres:
-        &lt;/p&gt;
-    </entry>
-    <entry key="espd.part5.toptext">Leverandør skal bare gi opplysninger hvis oppdragsgiver har angitt hvilke objektive
-        og ikke-diskriminerende kriterier eller regler som skal anvendes for å velge ut antallet leverandører som vil
-        bli invitert å levere tilbud eller til dialog. Disse opplysningene, som kan ledsages av krav om hvilke (typer)
-        attester eller hvilke former for dokumentasjon - om noen - som skal fremlegges, er fastsatt i kunngjøringen
-        eller i anskaffelsesdokumentene.&lt;p&gt;Kun ved begrensede anbudskonkurranser, konkurranse med forhandling,
-            konkurransepreget dialog og innovasjonspartnerskap:
-        &lt;/p&gt;
-    </entry>
-    <entry key="espd.part4.alert">Oppdragsgiver angir hvilke kvalifikasjonskrav som gjelder i konkurransen ved å huke av
-        foran de aktuelle kravene (A-D).
-    </entry>
+    <entry key="espd.part5.text.eo.declares.that">Hvis noen av disse attestene eller andre former for dokumentasjon er tilgjengelige i elektronisk form , angis dette for hver enkelt:</entry>
+    <entry key="espd.part5.title.eo.declares.that">Denne oppfyller de objektive og ikke-diskriminerende kriterier eller regler som skal anvendes for å velge ut antallet av leverandører på følgende måte: Hvis det anmodes om visse attester eller andre former for dokumentasjon, angis for hver enkelt om leverandøren er i besittelse av dokumentene som etterspørres:</entry>
+    <entry key="espd.part5.toptext">Leverandør skal bare gi opplysninger hvis oppdragsgiver har angitt hvilke objektive og ikke-diskriminerende kriterier eller regler som skal anvendes for å velge ut antallet leverandører som vil bli invitert å levere tilbud eller til dialog. Disse opplysningene, som kan ledsages av krav om hvilke (typer) attester eller hvilke former for dokumentasjon - om noen - som skal fremlegges, er fastsatt i kunngjøringen eller i anskaffelsesdokumentene. Kun ved begrensede anbudskonkurranser, konkurranse med forhandling, konkurransepreget dialog og innovasjonspartnerskap:</entry>
+    <entry key="espd.part4.alert">Oppdragsgiver angir hvilke kvalifikasjonskrav som gjelder i konkurransen ved å huke av foran de aktuelle kravene (A-D).</entry>
     <entry key="espd.part4.economic.and.financial.standing">B: ØKONOMISK OG FINANSIELLE KAPASITET</entry>
     <entry key="espd.part4.header">Del IV: Kvalifikasjonskrav</entry>
     <entry key="espd.part4.quality.assurance">D: KVALITETSSIKRINGS- OG MILJØLEDELSESSTANDARDER</entry>
     <entry key="espd.part4.suitability">A: Egnethet</entry>
-    <entry key="espd.part4.technical.professional.ability">C: TEKNISKE OG FAGLIGE KVALIFIKASJONER</entry>
-    <entry key="espd.part2.add.complete.missing">Angi også opplysningene som mangler i del IV, avsnittene A, B, C eller
-        D, der det er relevant.
-    </entry>
-    <entry key="espd.part2.all.selection.covered">d) Omfatter registreringen eller sertifiseringen alle de påkrevde
-        kvalifikasjonskravene?
-    </entry>
-    <entry key="espd.part2.another.vat">Hvis leverandøren ikke har et MVA-nummer, skal han angi et annet nasjonalt
-        identifikasjonsnummer (hvis et slikt finnes og kreves):
-    </entry>
-    <entry key="espd.part2.answer.following.parts">Svar på de øvrige delene av dette avsnittet, avsnitt B og, hvis det
-        er relevant, avsnitt C i denne delen, fyll ut del V, hvis det er relevant, og fyll ut og signer i alle tilfeller
-        del VI.
-    </entry>
+    <entry key="espd.part4.technical.professional.ability">C: TEKNISKE OG FAGLIGE  KVALIFIKASJONER</entry>
+    <entry key="espd.part2.add.complete.missing">Angi også opplysningene som mangler i del IV, avsnittene A, B, C eller D, der det er relevant.</entry>
+    <entry key="espd.part2.all.selection.covered">d) Omfatter registreringen eller sertifiseringen alle de påkrevde kvalifikasjonskravene?</entry>
+    <entry key="espd.part2.another.vat">Hvis leverandøren ikke har et MVA-nummer, skal han angi et annet nasjonalt identifikasjonsnummer (hvis et slikt finnes og kreves):</entry>
+    <entry key="espd.part2.answer.following.parts">Svar på de øvrige delene av dette avsnittet, avsnitt B og, hvis det er relevant, avsnitt C i denne delen, fyll ut del V, hvis det er relevant, og fyll ut og signer i alle tilfeller del VI.</entry>
     <entry key="espd.part2.birth.date">Fødselsdato</entry>
     <entry key="espd.part2.birth.place">Fødested</entry>
-    <entry key="espd.part2.cert.e.avaliable">b) Hvis attesten for registreringen eller sertiseringen finnes i
-        elektronisk format, angis følgende:
-    </entry>
+    <entry key="espd.part2.cert.e.avaliable">b) Hvis attesten for registreringen eller sertiseringen finnes i elektronisk format, angis følgende:</entry>
     <entry key="espd.part2.contact.person">Kontaktperson(er)</entry>
-    <entry key="espd.part2.detinfo.of.represent">Om nødvendig, angis detaljerte opplysninger om representasjonen (form,
-        omfang, formål osv.):
-    </entry>
-    <entry key="espd.part2.disworkers.details">Dersom angitt som krav, spesifiser hvilken kategori eller hvilke
-        kategorier av funksjonshemmede eller vanskeligstilte personer som tilhører virksomheten.
-    </entry>
-    <entry key="espd.part2.doc.e.avaliable">Hvis den relevante dokumentasjonen er tilgengelig i elektronisk form, angi
-        følgende:
-    </entry>
+    <entry key="espd.part2.detinfo.of.represent">Om nødvendig, angis detaljerte opplysninger om representasjonen (form, omfang, formål osv.):</entry>
+    <entry key="espd.part2.disworkers.details">Dersom angitt som krav, spesifiser hvilken kategori eller hvilke kategorier av funksjonshemmede eller vanskeligstilte personer som tilhører virksomheten.</entry>
+    <entry key="espd.part2.doc.e.avaliable">Hvis den relevante dokumentasjonen er tilgengelig i elektronisk form, angi følgende:</entry>
     <entry key="espd.part2.email">E-post</entry>
-    <entry key="espd.part2.ensure.others.espd">Hvis ja, vennligst sørg for at de andre involverte leverandørene sender
-        egne ESPD.
-    </entry>
-    <entry key="espd.part2.eo.approved.cert">Hvis relevant, er leverandøren registrert på en offisiell liste over
-        godkjente leverandører, eller har denne en tilsvarende attest for sertifisering (f.eks. i henhold til en
-        nasjonal (pre)kvalifikasjonsordning)?
-    </entry>
-    <entry key="espd.part2.eo.group.role">a) Angi leverandørens rolle i gruppen (leder, ansvarlig for spesifikke
-        oppgaver osv.):
-    </entry>
-    <entry key="espd.part2.eo.has.cert.soc">e) Er leverandøren i stand til å fremlegge en attest for betaling av
-        skatter, avgifter og trygdeavgifter eller å fremlegge opplysninger som setter oppdragsgiver i stand til å
-        innhente opplysningene kostnadsfritt i en database i en EØS-stat?
-    </entry>
-    <entry key="espd.part2.eo.rely.other.entities">Støtter leverandør seg på andre virksomheters kapasitet for å
-        oppfylle kvalifikasjonskravene i del IV og eventuelle kriterier og regler fastsatt i del V nedenfor?
-    </entry>
+    <entry key="espd.part2.ensure.others.espd">Hvis ja, vennligst sørg for at de andre involverte leverandørene sender egne ESPD.</entry>
+    <entry key="espd.part2.eo.approved.cert">Hvis relevant, er leverandøren registrert på en offisiell liste over godkjente leverandører, eller har denne en tilsvarende attest for sertifisering (f.eks. i henhold til en nasjonal (pre)kvalifikasjonsordning)?</entry>
+    <entry key="espd.part2.eo.group.role">a) Angi leverandørens rolle i gruppen (leder, ansvarlig for spesifikke oppgaver osv.):</entry>
+    <entry key="espd.part2.eo.has.cert.soc">e) Er leverandøren i stand til å fremlegge en attest for betaling av skatter, avgifter og trygdeavgifter eller å fremlegge opplysninger som setter oppdragsgiver i stand til å innhente opplysningene kostnadsfritt i en database i en EØS-stat?</entry>
+    <entry key="espd.part2.eo.rely.other.entities">Støtter leverandør seg på andre virksomheters kapasitet for å oppfylle kvalifikasjonskravene  i del IV og eventuelle kriterier og regler fastsatt i del V nedenfor?</entry>
     <entry key="espd.part2.first.name">Fornavn</entry>
     <entry key="espd.part2.header">Del II: Opplysninger om leverandøren</entry>
-    <entry key="espd.part2.if.proc.reserved">Kun i forbindelse med en reservert kontrakt : Se kunngjøringens punkt
-        III.1.5. Er leverandør en vernet bedrift, en Chr(34)sosial virksomhetChr(34) , eller vil den utføre kontrakten
-        som ledd i programmer for vernet sysselsetting? Dvs. dens hovedformål er sosial og faglig integrasjon av
-        funksjonshemmede eller vanskeligstilte personer
-    </entry>
+    <entry key="espd.part2.if.proc.reserved">Kun i forbindelse med en reservert kontrakt : Se kunngjøringens punkt III.1.5. Er leverandør en vernet bedrift, en Chr(34)sosial virksomhetChr(34) , eller vil den utføre kontrakten som ledd i programmer for vernet sysselsetting? Dvs. dens hovedformål er sosial og faglig integrasjon av funksjonshemmede eller vanskeligstilte personer</entry>
     <entry key="espd.part2.info.eo">A: Opplysninger om leverandøren:</entry>
     <entry key="espd.part2.info.reliance">C: OPPLYSNINGER OM STØTTE FRA ANDRE VIRKSOMHETER</entry>
     <entry key="espd.part2.info.respresent">B: OPPLYSNINGER OM LEVERANDØRENS REPRESENTANTER</entry>
-    <entry key="espd.part2.information.subcontractors">D: Opplysninger om underleverandører som leverandøren ikke
-        støtter seg på
-    </entry>
-    <entry key="espd.part2.information.subcontractors.description">Hvis ja og dersom er kjent, angis de foreslåtte
-        underleverandører:
-    </entry>
-    <entry key="espd.part2.information.subcontractors.footer">Hvis oppdragsgiver uttrykkelig etterspør disse
-        opplysningene utover opplysningene i dette avsnittet, vennligst angi opplysningene som etterspørres i avsnitt A
-        og B i denne del og i del III for hver av (kategoriene av) underleverandørene.
-    </entry>
-    <entry key="espd.part2.information.subcontractors.header">(Dette avsnitt fylles bare ut hvis oppdragsgiver
-        uttrykkelig ber om opplysningene)
-    </entry>
-    <entry key="espd.part2.information.subcontractors.title">Har leverandøren til hensikt å bruke underleverandør til å
-        oppfylle kontrakten?
-    </entry>
+    <entry key="espd.part2.information.subcontractors">D: Opplysninger om underleverandører som leverandøren ikke støtter seg på</entry>
+    <entry key="espd.part2.information.subcontractors.description">Hvis ja og dersom er kjent, angis de foreslåtte underleverandører:</entry>
+    <entry key="espd.part2.information.subcontractors.footer">Hvis oppdragsgiver uttrykkelig etterspør disse opplysningene utover opplysningene i dette avsnittet, vennligst angi opplysningene som etterspørres i avsnitt A og B i denne del og i del III for hver av (kategoriene av) underleverandørene.</entry>
+    <entry key="espd.part2.information.subcontractors.header">(Dette avsnitt fylles bare ut hvis oppdragsgiver uttrykkelig ber om opplysningene)</entry>
+    <entry key="espd.part2.information.subcontractors.title">Har leverandøren til hensikt å bruke underleverandør til å oppfylle kontrakten?</entry>
     <entry key="espd.part2.internet.addr.if.exists">Evt. internettadresse (nettsted):</entry>
     <entry key="espd.part2.is.eo.proc.together">Deltar leverandøren i konkurransen sammen med andre</entry>
-    <entry key="espd.part2.is.eo.sized">Er leverandør en mikrovirksomhet, en liten eller en mellomstor virksomhet
-    </entry>
-    <entry key="espd.part2.is.eo.sized.tooltip">Jf. kommisjonens anbefaling av 6. mai 2003 om definisjonen av
-        mikrovirksomheter, små og mellomstore virksomheter (EUT L 124 av 20.5.2003, s. 36). Disse opplysningene anvendes
-        utelukkende til statistiske formål. Mikrovirksomheter: virksomheter, som sysselsetter under 10 personer, og som
-        har en årlig omsetning og/eller en samlet årlig balanse som ikke overstiger 2 mill. EUR. Små virksomheter:
-        virksomheter, som sysselsetter under 50 personer, og som har en årlig omsetning og/eller en samlet årlig balanse
-        som ikke overstiger 10 mill. EUR. Mellomstore virksomheter: virksomheter, som hverken er mikrovirksomheter eller
-        små virksomheter og som sysselsetter under 250 personer, og som har en årlig omsetning som ikke overstiger 50
-        mill. EUR og/eller en samlet årlig balanse som ikke overstiger 43 mill. EUR.
-    </entry>
+    <entry key="espd.part2.is.eo.sized">Er leverandør en mikrovirksomhet, en liten eller en mellomstor virksomhet</entry>
+    <entry key="espd.part2.is.eo.sized.tooltip">Jf. kommisjonens anbefaling av 6. mai 2003 om definisjonen av mikrovirksomheter, små og mellomstore virksomheter (EUT L 124 av 20.5.2003, s. 36). Disse opplysningene anvendes utelukkende til statistiske formål.  Mikrovirksomheter: virksomheter, som sysselsetter under 10 personer, og som har en årlig omsetning og/eller en samlet årlig balanse som ikke overstiger 2 mill. EUR.  Små virksomheter: virksomheter, som sysselsetter under 50 personer, og som har en årlig omsetning og/eller en samlet årlig balanse som ikke overstiger 10 mill. EUR.  Mellomstore virksomheter: virksomheter, som hverken er mikrovirksomheter eller små virksomheter og som sysselsetter under 250 personer, og som har en årlig omsetning som ikke overstiger 50 mill. EUR og/eller en samlet årlig balanse som ikke overstiger 43 mill. EUR.</entry>
     <entry key="espd.part2.last.name">Etternavn</entry>
-    <entry key="espd.part2.lots.concerned">Hvis det er relevant, angi den eller de delkontrakter som leverandøren ønsker
-        å gi tilbud på:
-    </entry>
+    <entry key="espd.part2.lots.concerned">Hvis det er relevant, angi den eller de delkontrakter som leverandøren ønsker å gi tilbud på:</entry>
     <entry key="espd.part2.name">Navn</entry>
     <entry key="espd.part2.name.part.group">c) Navnet på den deltakende gruppen, der det er relevant:</entry>
-    <entry key="espd.part2.other.eo.part">b) Angi de øvrige leverandørene som deltar i fellesskap i konkurransen:
-    </entry>
-    <entry key="espd.part2.percentage.disworkers">Hva er den prosentvise andel av funksjonshemmede eller vanskeligstilte
-        personer?
-    </entry>
-    <entry key="espd.part2.person.empowered">Hvis relevant, angi navn og adresser på den eller de personene som har
-        kompetanse til å representere leverandøren i forbindelse med denne konkurransen:
-    </entry>
+    <entry key="espd.part2.other.eo.part">b) Angi de øvrige leverandørene som deltar i fellesskap i konkurransen:</entry>
+    <entry key="espd.part2.percentage.disworkers">Hva er den prosentvise andel av funksjonshemmede eller vanskeligstilte personer?</entry>
+    <entry key="espd.part2.person.empowered">Hvis relevant, angi navn og adresser på den eller de personene som har kompetanse til å representere leverandøren i forbindelse med denne konkurransen:</entry>
     <entry key="espd.part2.pos.act.in.capacity">Stilling/opptrer i egenskap av:</entry>
     <entry key="espd.part2.postal.adress">Postadresse</entry>
-    <entry key="espd.part2.provide.regnumber">a) Angi navnet på listen eller attesten og det tilhørende registrerings-
-        eller sertifiseringsnummeret:
-    </entry>
-    <entry key="espd.part2.ref.for.cert">c) Angi hvilke opplysninger som har dannet grunnlag for registeringen eller
-        utstedelsen av attesten og, hvis aktuelt, hvilken klassifisering som følger av listen :Opplysningene og
-        klassifiseringen, hvis aktuelt, fremgår av attesten.
-    </entry>
-    <entry key="espd.part2.separate.espd.sections.a.b">Vennligst legg ved et eget ESPD-skjema med opplysningene som
-        etterspørres i avsnitt A og B i denne del og del III for hver av de aktuelle virksomhetene. ESPDene skal være
-        tilbørlig utfylt og underskrevet av de aktuelle virksomhetene. Legg merke til at dette også bør omfatte
-        teknikere eller tekniske organer som ikke direkte tilhører leverandørens virksomhet, særlig de som er ansvarlige
-        for kvalitetskontrollen og, hvis det dreier seg om offentlige bygge- og anleggskontrakter, de teknikere eller
-        tekniske organer som leverandøren kan råde over til utførelsen av arbeidet. I den grad det er relevant for den
-        eller de spesifikke kapasiteter som leverandøren støtter seg på, skal opplysningene i del IV og V angis for hver
-        av de aktuelle virksomhetene .F.eks. for tekniske organer som deltar i kvalitetskontroll: del IV, avsnitt C,
-        punkt 3.
-    </entry>
+    <entry key="espd.part2.provide.regnumber">a) Angi navnet på listen eller attesten og det tilhørende registrerings- eller sertifiseringsnummeret:</entry>
+    <entry key="espd.part2.ref.for.cert">c) Angi hvilke opplysninger som har dannet grunnlag for registeringen eller utstedelsen av attesten og, hvis aktuelt, hvilken klassifisering som følger av listen :Opplysningene og klassifiseringen, hvis aktuelt, fremgår av attesten.</entry>
+    <entry key="espd.part2.separate.espd.sections.a.b">Vennligst legg ved et eget ESPD-skjema med opplysningene som etterspørres i avsnitt A og B i denne del og del III for hver av de aktuelle virksomhetene. ESPDene skal være tilbørlig utfylt og underskrevet av de aktuelle virksomhetene. Legg merke til at dette også bør omfatte teknikere eller tekniske organer som ikke direkte tilhører leverandørens virksomhet, særlig de som er ansvarlige for kvalitetskontrollen og, hvis det dreier seg om offentlige bygge- og anleggskontrakter, de teknikere eller tekniske organer som leverandøren kan råde over til utførelsen av arbeidet. I den grad det er relevant for den eller de spesifikke kapasiteter som leverandøren støtter seg på, skal opplysningene i del IV og V angis for hver av de aktuelle virksomhetene .F.eks. for tekniske organer som deltar i kvalitetskontroll: del IV, avsnitt C, punkt 3.</entry>
     <entry key="espd.part2.telephone">Telefon</entry>
     <entry key="espd.part2.vat">MVA-nummer, hvis aktuelt</entry>
-    <entry key="espd.part2sel.alert">Leverandøren skal bare angi opplysningene hvis oppdragsgiver i kunngjøringen eller
-        i anskaffelsesdokumentene referert til i kunngjøringen har opplyst at disse kvalifikasjonskravene kreves
-        oppfylt.
-    </entry>
+    <entry key="espd.part2sel.alert">Leverandøren skal bare angi opplysningene hvis oppdragsgiver i kunngjøringen eller i anskaffelsesdokumentene referert til i kunngjøringen har opplyst at disse kvalifikasjonskravene kreves oppfylt.</entry>
     <entry key="espd.crit.amount">Beløp</entry>
     <entry key="espd.crit.amount.concerned">Beløpets størrelse</entry>
     <entry key="espd.crit.average.turnover">Gjennomsnittlig årsomsetning</entry>
@@ -247,562 +119,185 @@ Wenn die Datei als Properties gezogen wird, wird ein DocType zur Laufzeit einget
     <entry key="espd.crit.date">Dato</entry>
     <entry key="espd.crit.date.of.conviction">Dato for domsavsigelse</entry>
     <entry key="espd.part3.crit.date.of.conviction.or.decision">Angi dato for dommen eller forvaltningsvedtaket.</entry>
-    <entry key="espd.crit.decision.final.and.binding">Har den manglende oppfyllelse av forpliktelser blitt konstantert
-        ved en rettskkraftig dom eller endelig forvaltningsvedtak?
-    </entry>
+    <entry key="espd.crit.decision.final.and.binding">Har den manglende oppfyllelse av forpliktelser blitt konstantert ved en rettskkraftig dom eller endelig forvaltningsvedtak?</entry>
     <entry key="espd.crit.description">Beskrivelse</entry>
     <entry key="espd.crit.do.you.allow.checks">Tillater leverandøren kontroll?</entry>
     <entry key="espd.crit.end.date">Sluttdato</entry>
-    <entry key="espd.part3.crit.eu.main.breaching.obligations">I artikkel 57 (4) i direktiv 2014/24/EU fastsettes
-        følgende avvisningsgrunner:
-    </entry>
-    <entry key="espd.part3.crit.eu.eo.main.breaching.obligations">I artikkel 57 (4) i direktiv 2014/24/EU fastsettes
-        følgende avvisningsgrunner:
-    </entry>
-    <entry key="espd.part3.crit.eu.main.purely.national">Får de rent nasjonale avvisningsgrunnene, som er angitt i den
-        relevante kunngjøringen eller i anskaffelsesdokumentene, anvendelse?
-    </entry>
-    <entry key="espd.part3.crit.eu.grounds.criminal.conv.main.title">I artikkel 57 (1) i direktiv 2014/24/EU fastsettes
-        følgende avvisningsgrunner:
-    </entry>
-    <entry key="espd.part3.crit.eu.eo.grounds.criminal.conv.main.title">I artikkel 57 (1) i direktiv 2014/24/EU
-        fastsettes følgende avvisningsgrunner:
-    </entry>
-    <entry key="espd.part3.crit.eu.payment.taxes.main.title">I artikkel 57 (2) i direktiv 2014/24/EU fastsettes følgende
-        avvisningsgrunner:
-    </entry>
-    <entry key="espd.part3.crit.eu.eo.payment.taxes.main.title">I artikkel 57 (2) i direktiv 2014/24/EU fastsettes
-        følgende avvisningsgrunner:
-    </entry>
-    <entry key="espd.crit.eu.text.agreement.economic">Har leverandør inngått avtale(r) med andre leverandører med
-        hensikt å vri konkurransen?
-    </entry>
-    <entry key="espd.crit.eu.text.arrangement.creditors">Er leverandøren i en situasjon hvor han har fått tvungen
-        gjeldsordning? Angi hvorfor man under nevnte omstendigheter likevel er i stand til å utføre kontrakten, tatt i
-        betraktning gjeldende nasjonale bestemmelser og tiltak vedrørende fortsettelse av forretningsaktivitetene? Det
-        er ikke nødvendig å angi disse opplysningene hvis avvisning av leverandørerer gjort obligatorisk i henhold til
-        gjeldende nasjonal rett uten mulighet for unntak.
-    </entry>
-    <entry key="espd.crit.eu.text.bankrupt">Er leverandøren i en konkurssituasjon? Angi hvorfor man under nevnte
-        omstendigheter likevel er i stand til å utføre kontrakten, tatt i betraktning gjeldende nasjonale bestemmelser
-        og tiltak vedrørende fortsettelse av forretningsaktivitetene? Det er ikke nødvendig å angi disse opplysningene
-        hvis avvisning av leverandørerer gjort obligatorisk i henhold til gjeldende nasjonal rett uten mulighet for
-        unntak.
-    </entry>
-    <entry key="espd.crit.eu.text.breaching.obligations.environmental">Er leverandøren kjent med å ha begått brudd på
-        bestemmelser om miljø slik som de fremgår av nasjonal rett, den relevante kunngjøringen eller
-        anskaffelsesdokumentene eller artikkel 18 (2) i direktiv 2014/24/EU.
-    </entry>
-    <entry key="espd.crit.eu.text.breaching.obligations.labour">Er leverandøren kjent med å ha begått brudd på
-        bestemmelser om arbeidsforhold slik som de fremgår av nasjonal rett, den relevante kunngjøringen eller
-        anskaffelsesdokumentene eller artikkel 18 (2) i direktiv 2014/24/EU.
-    </entry>
-    <entry key="espd.crit.eu.text.breaching.obligations.social">Er leverandøren kjent med å ha begått brudd på
-        bestemmelser om sosiale forhold slik som de fremgår av nasjonal rett, den relevante kunngjøringen eller
-        anskaffelsesdokumentene eller artikkel 18 (2) i direktiv 2014/24/EU.
-    </entry>
-    <entry key="espd.crit.eu.text.child.labour">Er leverandøren selv eller en person, som er medlem av leverandørens
-        administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller
-        treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for barnearbeid og andre former for
-        menneskehandel ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i
-        dommen som fortsatt gjelder?&lt;p&gt;Barnearbeid og andre former for menneskehandel som definert i artikkel 2 i
-            Europaparlamentets og Rådets direktiv 2011/36/EU av 5. april 2011 om forebygging og bekjempelse av
-            menneskehandel og beskyttelse av dets ofre, og om erstatning av Rådets rammeavgjørelse 2002/629/RIA (EUT L
-            101 av 15.4.2011, s. 1).
-        &lt;/p&gt;
-    </entry>
-    <entry key="espd.crit.eu.text.conflict.interest">Er leverandør oppmerksom på en interessekonflikt slik denne er
-        angitt i nasjonal rett, den relevante kunngjøring eller anskaffelsesdokumentene?
-    </entry>
-    <entry key="espd.crit.eu.text.corruption">Er leverandøren selv eller en person, som er medlem av leverandørens
-        administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller
-        treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for korrupsjon ved en dom avsagt for ikke
-        mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder?&lt;p&gt;Korrupsjon
-            som definert i artikkel 3 i konvensjonen om bekjempelse av korrupsjon, som involverer tjenestemenn i De
-            Europeiske Fellesskapene eller i Den Europeiske Unions medlemsstater (EUT C 195 av 25.6.1997, s. 1), og i
-            artikkel 2, stk. 1, i Rådets rammeavgjørelse 2003/568/RIA av 22. juli 2003 om bekjempelse av korrupsjon i
-            den private sektor (EUT L 192 av 31.7.2003, s. 54). Denne avvisningsgrunnen omfatter også korrupsjon som
-            definert i nasjonal rett for oppdragsgiveren eller leverandøren.
-        &lt;/p&gt;
-    </entry>
-    <entry key="espd.crit.eu.text.early.termination">Har leverandør begått vesentlig kontraktsbrudd i forbindelse med
-        oppfyllelsen av en tidligere offentlig kontrakt, en tidligere kontrakt med en offentlig oppdragsgiver eller en
-        tidligere konsesjonskontrakt, der bruddet har ført til heving av kontrakten, erstatning eller andre lignende
-        sanksjoner?
-    </entry>
-    <entry key="espd.crit.eu.text.fraud">Er leverandøren selv eller en person, som er medlem av leverandørens
-        administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller
-        treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for bedrageri ved en dom avsagt for ikke
-        mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder?&lt;p&gt;Bedrageri som
-            omhandlet i artikkel 1 i konvensjonen om beskyttelse av De Europeiske Fellesskapenes finansielle interesser
-            (EFT C 316 av 27.11.1995, s. 48).
-        &lt;/p&gt;
-    </entry>
-    <entry key="espd.crit.eu.text.grounds.criminal.conv">Er leverandøren selv eller en person, som er medlem av
-        leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller
-        kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for deltakelse i en
-        kriminell organisasjon ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt
-        direkte i dommen som fortsatt gjelder?&lt;p&gt;Deltakelse i en kriminell organisasjon som definert i artikkel 2 i
-            Rådets rammeavgjørelse 2008/841/RIA av 24. oktober 2008 om bekjempelse av organisert kriminalitet (EUT L 300
-            av 11.11.2008, s. 42)
-        &lt;/p&gt;
-    </entry>
-    <entry key="espd.crit.eu.text.guilty.misconduct">Har leverandøren begått alvorlige feil i yrkesutøvelsen? Hvis det
-        er relevant, se definisjoner i nasjonal rett, den relevante kunngjøring eller anskaffelsesdokumentene.
-    </entry>
-    <entry key="espd.crit.eu.text.guilty.misinterpretation">Har leverandøren:
-        &lt;p&gt;a) gitt grovt uriktige opplysninger ved meddelelsen av opplysningene som kreves for å kontrollere at det ikke
-            er grunnlag for avvisning, eller av at kvalifikasjonskravene er oppfylt,
-        &lt;/p&gt;
-        &lt;p&gt;b) unnlatt å gi slike opplysninger,&lt;/p&gt;
-        &lt;p&gt;c) tatt forbehold om straks å fremlegge de støttedokumenter som oppdragsgiver anmoder om, eller&lt;/p&gt;
-        &lt;p&gt;d) urettmessig påvirket oppdragsgivers beslutningsprosess for å tilegne seg konfidensiell informasjon som kan
-            gi denne en urettmessig fordel i forbindelse med konkurransen, eller uaktsomt har gitt misvisende
-            opplysninger som kan få vesentlig innflytelse på beslutninger om avvisning, utvelgelse eller tildeling?
-        &lt;/p&gt;
-    </entry>
-    <entry key="espd.crit.eu.text.insolvency">Er leverandøren i en insolvenssituasjon? Angi hvorfor man under nevnte
-        omstendigheter likevel er i stand til å utføre kontrakten, tatt i betraktning gjeldende nasjonale bestemmelser
-        og tiltak vedrørende fortsettelse av forretningsaktivitetene? Det er ikke nødvendig å angi disse opplysningene
-        hvis avvisning av leverandørerer gjort obligatorisk i henhold til gjeldende nasjonal rett uten mulighet for
-        unntak.
-    </entry>
-    <entry key="espd.crit.eu.text.involvement">Har leverandør eller en virksomhet tilknyttet leverandøren gitt råd til
-        oppdragsgiver eller på annen måte vært involvert i planleggingen av konkurransen?
-    </entry>
-    <entry key="espd.crit.eu.text.liquidator">Angi hvorfor man under nevnte omstendigheter likevel er i stand til å
-        utføre kontrakten, tatt i betraktning gjeldende nasjonale bestemmelser og tiltak vedrørende fortsettelse av
-        forretningsaktivitetene? Det er ikke nødvendig å angi disse opplysningene hvis avvisning av leverandørerer gjort
-        obligatorisk i henhold til gjeldende nasjonal rett uten mulighet for unntak.
-    </entry>
-    <entry key="espd.crit.eu.text.money.laundering">Er leverandøren selv eller en person, som er medlem av leverandørens
-        administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller
-        treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for hvitvasking av penger eller
-        finansiering av terrorisme ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt
-        direkte i dommen som fortsatt gjelder?&lt;p&gt;Hvitvasking av penger eller finansiering av terrorismeSom definert i
-            artikkel 1 i Europaparlamentets og Rådets direktiv 2005/60/EF av 26. oktober 2005 om forebyggende tiltak mot
-            bruk av det finansielle system til hvitvasking av penger og finansiering av terrorisme (EUT L 309 av
-            25.11.2005, s. 15).
-        &lt;/p&gt;
-    </entry>
-    <entry key="espd.crit.eu.text.national.bankruptcy">Er leverandøren i en situasjon hvor han har fått tvungen
-        gjeldsordning? Angi hvorfor man under nevnte omstendigheter likevel er i stand til å utføre kontrakten, tatt i
-        betraktning gjeldende nasjonale bestemmelser og tiltak vedrørende fortsettelse av forretningsaktivitetene? Det
-        er ikke nødvendig å angi disse opplysningene hvis avvisning av leverandørerer gjort obligatorisk i henhold til
-        gjeldende nasjonal rett uten mulighet for unntak.
-    </entry>
-    <entry key="espd.crit.eu.text.payment.social.security">Har leverandør unnlatt å oppfylle alle sine forpliktelser til
-        å betale trygdeavgifter både i det land han er etablert i, og i oppdragsgivers medlemsstat, hvis dette er et
-        annet land enn det han er etablert i?
-    </entry>
-    <entry key="espd.crit.eu.text.payment.taxes">Har leverandøren unnlatt å oppfylle sine forpliktelser til å betale
-        skatter og avgifter i det land han er etablert i, og i oppdragsgivers medlemsstat, hvis dette er et annet land
-        enn det han er etablert i?
-    </entry>
-    <entry key="espd.crit.eu.text.purely.national">Huk av dersom det er angitt nasjonale avvisningsgrunner i
-        kunngjøringen eller i anskaffelsesdokumentene.
-    </entry>
-    <entry key="espd.crit.eu.text.suspended.business">Angi hvorfor man under nevnte omstendigheter likevel er i stand
-        til å utføre kontrakten, tatt i betraktning gjeldende nasjonale bestemmelser og tiltak vedrørende fortsettelse
-        av forretningsaktivitetene? Det er ikke nødvendig å angi disse opplysningene hvis avvisning av leverandørerer
-        gjort obligatorisk i henhold til gjeldende nasjonal rett uten mulighet for unntak.
-    </entry>
-    <entry key="espd.crit.eu.text.terrorist">Er leverandøren selv eller en person, som er medlem av leverandørens
-        administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller
-        treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for terrorhandlinger eller straffbare
-        handlinger med forbindelse til terroraktivitetved en dom avsagt for ikke mer enn fem år siden, eller en
-        avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder?&lt;p&gt;Terrorhandlinger eller straffbare handlinger
-            med forbindelse til terroraktivitet som definert i artikkel 1 og 3 i Rådets rammeavgjørelse 2002/475/RIA av
-            13. juni 2002 om bekjempelse av terrorisme (EFT L 164 af 22.6.2002, s. 3). Denne avvisningsgrunnen omfatter
-            også oppfordring til, medvirkning til eller forsøk på å begå slike handlinger som omhandlet i artikkel 4 i
-            nevnte rammeavgjørelse.
-        &lt;/p&gt;
-    </entry>
-    <entry key="espd.crit.eu.title.agreement.economic">Avtale(r) med andre leverandører med hensikt å vri konkurransen
-    </entry>
+    <entry key="espd.part3.crit.eu.main.breaching.obligations">I artikkel 57 (4) i direktiv 2014/24/EU fastsettes følgende avvisningsgrunner:</entry>
+    <entry key="espd.part3.crit.eu.eo.main.breaching.obligations">I artikkel 57 (4) i direktiv 2014/24/EU fastsettes følgende avvisningsgrunner:</entry>
+    <entry key="espd.part3.crit.eu.main.purely.national">Får de rent nasjonale avvisningsgrunnene, som er angitt i den relevante kunngjøringen eller i anskaffelsesdokumentene, anvendelse?</entry>
+    <entry key="espd.part3.crit.eu.grounds.criminal.conv.main.title">I artikkel 57 (1) i direktiv 2014/24/EU fastsettes følgende avvisningsgrunner:</entry>
+    <entry key="espd.part3.crit.eu.eo.grounds.criminal.conv.main.title">I artikkel 57 (1) i direktiv 2014/24/EU fastsettes følgende avvisningsgrunner:</entry>
+    <entry key="espd.part3.crit.eu.payment.taxes.main.title">I artikkel 57 (2) i direktiv 2014/24/EU fastsettes følgende avvisningsgrunner:</entry>
+    <entry key="espd.part3.crit.eu.eo.payment.taxes.main.title">I artikkel 57 (2) i direktiv 2014/24/EU fastsettes følgende avvisningsgrunner:</entry>
+    <entry key="espd.crit.eu.text.agreement.economic">Har leverandør inngått avtale(r) med andre leverandører med hensikt å vri konkurransen?</entry>
+    <entry key="espd.crit.eu.text.arrangement.creditors">Er leverandøren i en situasjon hvor han har fått tvungen gjeldsordning?  Angi hvorfor man under nevnte omstendigheter likevel er i stand til å utføre kontrakten, tatt i betraktning gjeldende nasjonale bestemmelser og tiltak vedrørende fortsettelse av forretningsaktivitetene? Det er ikke nødvendig å angi disse opplysningene hvis avvisning av leverandørerer gjort obligatorisk i henhold til gjeldende nasjonal rett uten mulighet for unntak.</entry>
+    <entry key="espd.crit.eu.text.bankrupt">Er leverandøren i en konkurssituasjon? Angi hvorfor man under nevnte omstendigheter likevel er i stand til å utføre kontrakten, tatt i betraktning gjeldende nasjonale bestemmelser og tiltak vedrørende fortsettelse av forretningsaktivitetene? Det er ikke nødvendig å angi disse opplysningene hvis avvisning av leverandørerer gjort obligatorisk i henhold til gjeldende nasjonal rett uten mulighet for unntak.</entry>
+    <entry key="espd.crit.eu.text.breaching.obligations.environmental">Er leverandøren kjent med å ha begått brudd på bestemmelser om miljø slik som de fremgår av nasjonal rett, den relevante kunngjøringen eller anskaffelsesdokumentene eller artikkel 18 (2) i direktiv 2014/24/EU.</entry>
+    <entry key="espd.crit.eu.text.breaching.obligations.labour">Er leverandøren kjent med å ha begått brudd på bestemmelser om arbeidsforhold slik som de fremgår av nasjonal rett, den relevante kunngjøringen eller anskaffelsesdokumentene eller artikkel 18 (2) i direktiv 2014/24/EU.</entry>
+    <entry key="espd.crit.eu.text.breaching.obligations.social">Er leverandøren kjent med å ha begått brudd på bestemmelser om sosiale forhold slik som de fremgår av nasjonal rett, den relevante kunngjøringen eller anskaffelsesdokumentene eller artikkel 18 (2) i direktiv 2014/24/EU.</entry>
+    <entry key="espd.crit.eu.text.child.labour">Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for barnearbeid og andre former for menneskehandel ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder? Barnearbeid og andre former for menneskehandel som definert i artikkel 2 i Europaparlamentets og Rådets direktiv 2011/36/EU av 5. april 2011 om forebygging og bekjempelse av menneskehandel og beskyttelse av dets ofre, og om erstatning av Rådets rammeavgjørelse 2002/629/RIA (EUT L 101 av 15.4.2011, s. 1).</entry>
+    <entry key="espd.crit.eu.text.conflict.interest">Er leverandør oppmerksom på en interessekonflikt slik denne er angitt i nasjonal rett, den relevante kunngjøring eller anskaffelsesdokumentene?</entry>
+    <entry key="espd.crit.eu.text.corruption">Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for korrupsjon ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder? Korrupsjon som definert i artikkel 3 i konvensjonen om bekjempelse av korrupsjon, som involverer tjenestemenn i De Europeiske Fellesskapene eller i Den Europeiske Unions medlemsstater (EUT C 195 av 25.6.1997, s. 1), og i artikkel 2, stk. 1, i Rådets rammeavgjørelse 2003/568/RIA av 22. juli 2003 om bekjempelse av korrupsjon i den private sektor (EUT L 192 av 31.7.2003, s. 54). Denne avvisningsgrunnen omfatter også korrupsjon som definert i nasjonal rett for oppdragsgiveren eller leverandøren.</entry>
+    <entry key="espd.crit.eu.text.early.termination">Har leverandør begått vesentlig kontraktsbrudd i forbindelse med oppfyllelsen av en tidligere offentlig kontrakt, en tidligere kontrakt med en offentlig oppdragsgiver eller en tidligere konsesjonskontrakt, der bruddet har ført til heving av kontrakten, erstatning eller andre lignende sanksjoner?</entry>
+    <entry key="espd.crit.eu.text.fraud">Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for bedrageri ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder? Bedrageri som  omhandlet i artikkel 1 i konvensjonen om beskyttelse av De Europeiske Fellesskapenes finansielle interesser (EFT C 316 av 27.11.1995, s. 48).</entry>
+    <entry key="espd.crit.eu.text.grounds.criminal.conv">Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for deltakelse i en kriminell organisasjon ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder?  Deltakelse i en kriminell organisasjon som definert i artikkel 2 i Rådets rammeavgjørelse 2008/841/RIA av 24. oktober 2008 om bekjempelse av organisert kriminalitet (EUT L 300 av 11.11.2008, s. 42)</entry>
+    <entry key="espd.crit.eu.text.guilty.misconduct">Har leverandøren begått alvorlige feil i yrkesutøvelsen? Hvis det er relevant, se definisjoner i nasjonal rett, den relevante kunngjøring eller anskaffelsesdokumentene.</entry>
+    <entry key="espd.crit.eu.text.guilty.misinterpretation">Har leverandøren: a) gitt grovt uriktige opplysninger ved meddelelsen av opplysningene som kreves for å kontrollere at det ikke er grunnlag for avvisning, eller av at kvalifikasjonskravene er oppfylt, b) unnlatt å gi slike opplysninger, c) tatt forbehold om straks å fremlegge de støttedokumenter som oppdragsgiver anmoder om, eller d) urettmessig påvirket oppdragsgivers beslutningsprosess for å tilegne seg konfidensiell informasjon som kan gi denne en urettmessig fordel i forbindelse med konkurransen, eller uaktsomt har gitt misvisende opplysninger som kan få vesentlig innflytelse på beslutninger om avvisning, utvelgelse eller tildeling?</entry>
+    <entry key="espd.crit.eu.text.insolvency">Er leverandøren i en insolvenssituasjon? Angi hvorfor man under nevnte omstendigheter likevel er i stand til å utføre kontrakten, tatt i betraktning gjeldende nasjonale bestemmelser og tiltak vedrørende fortsettelse av forretningsaktivitetene? Det er ikke nødvendig å angi disse opplysningene hvis avvisning av leverandørerer gjort obligatorisk i henhold til gjeldende nasjonal rett uten mulighet for unntak.</entry>
+    <entry key="espd.crit.eu.text.involvement">Har leverandør eller en virksomhet tilknyttet leverandøren gitt råd til oppdragsgiver eller på annen måte vært involvert i planleggingen av konkurransen?</entry>
+    <entry key="espd.crit.eu.text.liquidator">Angi hvorfor man under nevnte omstendigheter likevel er i stand til å utføre kontrakten, tatt i betraktning gjeldende nasjonale bestemmelser og tiltak vedrørende fortsettelse av forretningsaktivitetene? Det er ikke nødvendig å angi disse opplysningene hvis avvisning av leverandørerer gjort obligatorisk i henhold til gjeldende nasjonal rett uten mulighet for unntak.</entry>
+    <entry key="espd.crit.eu.text.money.laundering">Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for hvitvasking av penger eller finansiering av terrorisme ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder? Hvitvasking av penger eller finansiering av terrorismeSom definert i artikkel 1 i Europaparlamentets og Rådets direktiv 2005/60/EF av 26. oktober 2005 om forebyggende tiltak mot bruk av det finansielle system til hvitvasking av penger og finansiering av terrorisme (EUT L 309 av 25.11.2005, s. 15).</entry>
+    <entry key="espd.crit.eu.text.national.bankruptcy">Er leverandøren i en situasjon hvor han har fått tvungen gjeldsordning?  Angi hvorfor man under nevnte omstendigheter likevel er i stand til å utføre kontrakten, tatt i betraktning gjeldende nasjonale bestemmelser og tiltak vedrørende fortsettelse av forretningsaktivitetene? Det er ikke nødvendig å angi disse opplysningene hvis avvisning av leverandørerer gjort obligatorisk i henhold til gjeldende nasjonal rett uten mulighet for unntak.</entry>
+    <entry key="espd.crit.eu.text.payment.social.security">Har leverandør unnlatt å oppfylle alle sine forpliktelser til å betale trygdeavgifter både i det land han er etablert i, og i oppdragsgivers medlemsstat, hvis dette er et annet land enn det han er etablert i?</entry>
+    <entry key="espd.crit.eu.text.payment.taxes">Har leverandøren unnlatt å oppfylle sine forpliktelser til å betale skatter og avgifter i det land han er etablert i, og i oppdragsgivers medlemsstat, hvis dette er et annet land enn det han er etablert i?</entry>
+    <entry key="espd.crit.eu.text.purely.national">Huk av dersom det er angitt nasjonale avvisningsgrunner i kunngjøringen eller i anskaffelsesdokumentene.</entry>
+    <entry key="espd.crit.eu.text.suspended.business">Angi hvorfor man under nevnte omstendigheter likevel er i stand til å utføre kontrakten, tatt i betraktning gjeldende nasjonale bestemmelser og tiltak vedrørende fortsettelse av forretningsaktivitetene? Det er ikke nødvendig å angi disse opplysningene hvis avvisning av leverandørerer gjort obligatorisk i henhold til gjeldende nasjonal rett uten mulighet for unntak.</entry>
+    <entry key="espd.crit.eu.text.terrorist">Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for terrorhandlinger eller straffbare handlinger med forbindelse til terroraktivitetved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder?  Terrorhandlinger eller straffbare handlinger med forbindelse til terroraktivitet som definert i artikkel 1 og 3 i Rådets rammeavgjørelse 2002/475/RIA av 13. juni 2002 om bekjempelse av terrorisme (EFT L 164 af 22.6.2002, s. 3). Denne avvisningsgrunnen omfatter også oppfordring til, medvirkning til eller forsøk på å begå slike handlinger som omhandlet i artikkel 4 i nevnte rammeavgjørelse.</entry>
+    <entry key="espd.crit.eu.title.agreement.economic">Avtale(r) med andre leverandører med hensikt å vri konkurransen</entry>
     <entry key="espd.crit.eu.title.arrangement.creditors">Tvungen gjeldsordning</entry>
     <entry key="espd.crit.eu.title.bankrupt">Konkurs</entry>
-    <entry key="espd.part3.crit.eu.eo.bankrupt.title">Er leverandøren i en av følgende situasjoner: a) konkurs,b) er
-        gjenstand for insolvensbehandling eller under avvikling,c) har fått tvungen gjeldsordning, d) i en lignende
-        situasjon i henhold til en tilsvarende prosedyre som er fastsatt i nasjonal rett .
-    </entry>
+    <entry key="espd.part3.crit.eu.eo.bankrupt.title">Er leverandøren i en av følgende situasjoner: a) konkurs,b) er gjenstand for  insolvensbehandling eller under avvikling,c) har fått tvungen gjeldsordning, d) i en lignende situasjon i henhold til en tilsvarende prosedyre som er fastsatt i nasjonal rett  .</entry>
     <entry key="espd.crit.eu.title.breaching.obligations.environmental">Brudd på bestemmelsene om miljø</entry>
     <entry key="espd.crit.eu.title.breaching.obligations.environmental.eo">Brudd på bestemmelsene om miljø</entry>
     <entry key="espd.crit.eu.title.breaching.obligations.labour">Brudd på bestemmelsene om arbeidsforhold</entry>
     <entry key="espd.crit.eu.title.breaching.obligations.social">Brudd på bestemmelsene om sosiale forhold</entry>
     <entry key="espd.crit.eu.title.child.labour">Barnearbeid og andre former for menneskehandel</entry>
-    <entry key="espd.crit.eu.title.conflict.interest">Interessekonflikt som følge av sin deltakelse i konkurransen
-    </entry>
-    <entry key="espd.crit.eu.title.conflict.interest.eo">Er leverandør oppmerksom på en interessekonflikt som følge av
-        sin deltakelse i konkurransen?
-    </entry>
+    <entry key="espd.crit.eu.title.conflict.interest">Interessekonflikt som følge av sin deltakelse i konkurransen</entry>
+    <entry key="espd.crit.eu.title.conflict.interest.eo">Er leverandør oppmerksom på en interessekonflikt  som følge av sin deltakelse i konkurransen?</entry>
     <entry key="espd.crit.eu.title.corruption">Korrupsjon</entry>
-    <entry key="espd.crit.eu.title.early.termination">Heving av kontrakt, erstatning eller andre lignende sanksjoner
-    </entry>
+    <entry key="espd.crit.eu.title.early.termination">Heving av kontrakt, erstatning eller andre lignende sanksjoner</entry>
     <entry key="espd.crit.eu.title.fraud">Bedrageri</entry>
-    <entry key="espd.crit.eu.title.grounds.criminal.conv">Deltakelse i en kriminell organisasjon</entry>
+    <entry key="espd.crit.eu.title.grounds.criminal.conv"> Deltakelse i en kriminell organisasjon</entry>
     <entry key="espd.crit.eu.title.guilty.misconduct">Alvorlige feil i yrkesutøvelsen</entry>
-    <entry key="espd.crit.eu.title.guilty.misconduct.eo">Har leverandøren begått alvorlige feil i yreksutøvelsenr?
-    </entry>
-    <entry key="espd.crit.eu.title.guilty.misinterpretation">Grovt uriktige opplysninger, unnlatt å gi opplysninger, ute
-        av stand til å fremlegge etterspurte støttedokumenterog misvisende opplysninger som kan få innfytelse på
-        konkurransen
-    </entry>
+    <entry key="espd.crit.eu.title.guilty.misconduct.eo">Har leverandøren  begått alvorlige feil i yreksutøvelsenr?</entry>
+    <entry key="espd.crit.eu.title.guilty.misinterpretation">Grovt uriktige opplysninger, unnlatt å gi opplysninger, ute av stand til å fremlegge etterspurte støttedokumenterog misvisende opplysninger som kan få innfytelse på konkurransen</entry>
     <entry key="espd.crit.eu.title.insolvency">Insolvens</entry>
     <entry key="espd.crit.eu.title.involvement">Har leverandøren vært involvert i planleggingen av konkurransen?</entry>
-    <entry key="espd.crit.eu.title.involvement.eo">Har leverandør eller en virksomhet tilknyttet leverandøren gitt råd
-        til oppdragsgiver eller på annen måte vært involvert i planleggingen av konkurransen?
-    </entry>
-    <entry key="espd.crit.eu.title.liquidator">Er leverandøren i en situasjon hvor han har sine aktiva forvaltet av en
-        konkursforvalter eller av retten?
-    </entry>
+    <entry key="espd.crit.eu.title.involvement.eo">Har leverandør eller en virksomhet tilknyttet leverandøren gitt råd til oppdragsgiver eller på annen måte vært involvert i planleggingen av konkurransen?</entry>
+    <entry key="espd.crit.eu.title.liquidator">Er leverandøren i en situasjon hvor han har sine aktiva forvaltet av en konkursforvalter eller av retten?</entry>
     <entry key="espd.crit.eu.title.money.laundering">Hvitvasking av penger eller finansiering av terrorisme</entry>
-    <entry key="espd.crit.eu.title.national.bankruptcy">Er leverandøren i en lignende situasjon i henhold til en
-        tilsvarende prosedyre som er fastsatt i nasjonal rett? Se nasjonal rett, den relevante kunngjøring eller
-        anskaffelsesdokumentene.
-    </entry>
-    <entry key="espd.crit.eu.title.payment.social.security">Betaling av trygdeavgifter</entry>
+    <entry key="espd.crit.eu.title.national.bankruptcy">Er leverandøren i en lignende situasjon i henhold til en tilsvarende prosedyre som er fastsatt i nasjonal rett? Se nasjonal rett, den relevante kunngjøring eller anskaffelsesdokumentene.</entry>
+    <entry key="espd.crit.eu.title.payment.social.security"> Betaling av trygdeavgifter</entry>
     <entry key="espd.crit.eu.title.payment.taxes">Betaling av skatter og avgifter</entry>
     <entry key="espd.crit.eu.title.purely.national">Rent nasjonale avvisningsgrunner</entry>
     <entry key="espd.crit.eu.title.suspended.business">Har leverandørens forretningsførsel har blitt stanset?</entry>
-    <entry key="espd.crit.eu.title.terrorist">Terrorhandlinger eller straffbare handlinger med forbindelse til
-        terroraktivitet
-    </entry>
-    <entry key="espd.part3.crit.eu.guilty.misconduct.eo.tooltip">Hvis det er relevant ta i betraktning gjeldende
-        nasjonale bestemmelser og tiltak vedrørende fortsettelse av forretningsaktivitetene
-    </entry>
-    <entry key="espd.crit.explain.certificates.independent.environmental.description">Hvis ikke, vennligst forklar
-        hvorfor og angi hvilke andre former for bevis vedrørende miljøledelsessystemer eller -standarder som kan
-        fremlegges:
-    </entry>
-    <entry key="espd.part4.crit.explain.certificates.independent.quality.description">Hvis ikke, vennligst forklar
-        hvorfor, og angi hvilke andre former for bevis vedrørende kvalitetssikringsstandarder som kan fremlegges:
-    </entry>
-    <entry key="espd.part4.crit.explain.supply.contracts.quality.description">Hvis ikke, forklar hvorfor, og angi,
-        hvilke andre former for bevis som kan leveres:
-    </entry>
-    <entry key="espd.crit.information.available.electronically">Er disse opplysningene mulig for oppdragsgiver å
-        innhente kostnadsfritt i en database i en EØS-stat?
-    </entry>
+    <entry key="espd.crit.eu.title.terrorist">Terrorhandlinger eller straffbare handlinger med forbindelse til terroraktivitet</entry>
+    <entry key="espd.part3.crit.eu.guilty.misconduct.eo.tooltip">Hvis det er relevant ta i betraktning gjeldende nasjonale bestemmelser og tiltak vedrørende fortsettelse av forretningsaktivitetene</entry>
+    <entry key="espd.crit.explain.certificates.independent.environmental.description">Hvis ikke, vennligst forklar hvorfor og angi hvilke andre former for bevis vedrørende miljøledelsessystemer eller -standarder som kan fremlegges:</entry>
+    <entry key="espd.part4.crit.explain.certificates.independent.quality.description">Hvis ikke, vennligst forklar hvorfor, og angi hvilke andre former for bevis vedrørende kvalitetssikringsstandarder som kan fremlegges:</entry>
+    <entry key="espd.part4.crit.explain.supply.contracts.quality.description">Hvis ikke, forklar hvorfor, og angi, hvilke andre former for bevis som kan leveres:</entry>
+    <entry key="espd.crit.information.available.electronically">Er disse opplysningene mulig for oppdragsgiver å innhente kostnadsfritt i en database i en EØS-stat?</entry>
     <entry key="espd.crit.issuer">Utsteder</entry>
-    <entry key="espd.crit.length.period.exclusion">I den grad det er uttrykkelig fastsat i dommen: Avvisningsperiodens
-        varighet
-    </entry>
+    <entry key="espd.crit.length.period.exclusion">I den grad det er uttrykkelig fastsat i dommen: Avvisningsperiodens varighet</entry>
     <entry key="espd.crit.number">Nummer</entry>
     <entry key="espd.crit.number.of.years">Antall år</entry>
-    <entry key="espd.crit.other.than.judicial.or.administrative.decision">Har den manglende oppfyllelsen av
-        forpliktelsene blitt konstantert på andre måter enn ved en rettslig eller administrativ avgjørelse?
-    </entry>
+    <entry key="espd.crit.other.than.judicial.or.administrative.decision">Har den manglende oppfyllelsen av forpliktelsene blitt konstantert på andre måter enn ved en rettslig eller administrativ avgjørelse?</entry>
     <entry key="espd.crit.please.describe.them">Vennligst beskriv</entry>
     <entry key="espd.crit.please.specify">Vennligst spesifiser</entry>
     <entry key="espd.crit.ratio">Nøkkeltall</entry>
     <entry key="espd.crit.reason">Grunn(er) for domfellelse</entry>
-    <entry key="espd.crit.reasons.nevertheless.contract">Angi hvorfor man under nevnte omstendigheter likevel er i stand
-        til å utføre kontrakten
-    </entry>
+    <entry key="espd.crit.reasons.nevertheless.contract">Angi hvorfor man under nevnte omstendigheter likevel er i stand til å utføre kontrakten</entry>
     <entry key="espd.crit.recipients">Mottakere</entry>
-    <entry key="espd.part4.crit.selection.ca.declares.that">Når det gjelder kvalifikasjonskravene erklærer
-        oppdragsgiver
-    </entry>
-    <entry key="espd.part4.crit.selection.ca.economic.article">I artikkel 58 (3) i direktiv 2014/24/EU fastsettes
-        følgende kvalifikasjonskrav:
-    </entry>
-    <entry key="espd.part4.crit.selection.declares.that.tooltip">Leverandøren skal bare fylle ut dette feltet hvis
-        oppdragsgiver har angitt i kunngjøringen, eller i anskaffelsesdokumentene referert til i kunngjøringen, at
-        leverandørene kan nøye seg med å fylle ut avsnitt a i del IV og ikke behøver å fylle ut andre avsnitt i del IV
-        (A-D).
-    </entry>
-    <entry key="espd.crit.selection.economic.average.yearly.turnover.description">Leverandørens gjennomsnittlige
-        årsomsetning for det antall år som det anmodes om i kunngjøringen eller i anskaffelsesdokumentene er som følger:
-    </entry>
+    <entry key="espd.part4.crit.selection.ca.declares.that">Når det gjelder kvalifikasjonskravene  erklærer oppdragsgiver</entry>
+    <entry key="espd.part4.crit.selection.ca.economic.article">I artikkel 58 (3) i direktiv 2014/24/EU fastsettes følgende kvalifikasjonskrav:</entry>
+    <entry key="espd.part4.crit.selection.declares.that.tooltip">Leverandøren skal bare fylle ut dette feltet hvis oppdragsgiver har angitt i kunngjøringen, eller i anskaffelsesdokumentene referert til i kunngjøringen, at leverandørene kan nøye seg med å fylle ut avsnitt a i del IV og ikke behøver å fylle ut andre avsnitt i del IV (A-D).</entry>
+    <entry key="espd.crit.selection.economic.average.yearly.turnover.description">Leverandørens gjennomsnittlige årsomsetning for det antall år som det anmodes om i kunngjøringen eller i anskaffelsesdokumentene er som følger:</entry>
     <entry key="espd.crit.selection.economic.average.yearly.turnover.main">Gjennomsnittlig årsomsetning</entry>
-    <entry key="espd.crit.selection.economic.financial.ratio.description">Når det gjelder finansielle nøkkeltall som er
-        angitt i kunngjøringen eller i anskaffelsesdokumentene erklærer leverandøren at den eller de faktiske verdien(e)
-        for det eller de nøkkeltall(ene) som det anmodes om er som følger:
-    </entry>
+    <entry key="espd.crit.selection.economic.financial.ratio.description">Når det gjelder finansielle nøkkeltall som er angitt i kunngjøringen eller i anskaffelsesdokumentene erklærer leverandøren at den eller de faktiske verdien(e) for det eller de nøkkeltall(ene) som det anmodes om er som følger:</entry>
     <entry key="espd.crit.selection.economic.financial.ratio.main">Finansielle nøkkeltall</entry>
-    <entry key="espd.crit.selection.economic.financial.standing.article.tooltip">Leverandøren skal bare angi
-        opplysningene hvis oppdragsgiver i kunngjøringen eller i anskaffelsesdokumentene referert til i kunngjøringen
-        har opplyst at disse kvalifikasjonskravene kreves oppfylt.
-    </entry>
-    <entry key="espd.crit.selection.economic.general.yearly.turnover.description">Leverandørens (Chr(34)totaleChr(34))
-        årsomsetning for det antall regnskapsår som det anmodes om i kunngjøringen eller i anskaffelsesdokumentene, er
-        som følger:
-    </entry>
+    <entry key="espd.crit.selection.economic.financial.standing.article.tooltip">Leverandøren skal bare angi opplysningene hvis oppdragsgiver i kunngjøringen eller i anskaffelsesdokumentene referert til i kunngjøringen har opplyst at disse kvalifikasjonskravene kreves oppfylt.</entry>
+    <entry key="espd.crit.selection.economic.general.yearly.turnover.description">Leverandørens (Chr(34)totaleChr(34)) årsomsetning for det antall regnskapsår som det anmodes om i kunngjøringen eller i anskaffelsesdokumentene, er som følger:</entry>
     <entry key="espd.crit.selection.economic.general.yearly.turnover.main">Totale årsomsetning</entry>
-    <entry key="espd.crit.selection.economic.other.financial.requirements.description">Når det gjelder eventuelle øvrige
-        økonomiske og finansielle krav som har blitt angitt i kunngjøringen eller i anskaffelsesdokumentene erklærer
-        leverandøren at:
-    </entry>
-    <entry key="espd.crit.selection.economic.other.financial.requirements.main">Øvrige økonomiske og finansielle krav
-    </entry>
-    <entry key="espd.crit.selection.economic.professional.risk.insurance.description">Det forsikrede beløp i
-        leverandørens ansvarsforsikring er følgende:
-    </entry>
+    <entry key="espd.crit.selection.economic.other.financial.requirements.description">Når det gjelder eventuelle øvrige økonomiske og finansielle krav som har blitt angitt i kunngjøringen eller i anskaffelsesdokumentene erklærer leverandøren at:</entry>
+    <entry key="espd.crit.selection.economic.other.financial.requirements.main">Øvrige økonomiske og finansielle krav</entry>
+    <entry key="espd.crit.selection.economic.professional.risk.insurance.description">Det forsikrede beløp i leverandørens ansvarsforsikring er følgende:</entry>
     <entry key="espd.crit.selection.economic.professional.risk.insurance.main">Ansvarsforsikring</entry>
-    <entry key="espd.crit.selection.economic.setup.eo.description">Hvis opplysningene om omsetning (samlet eller
-        spesifikt) ikke er tilgjengelige for hele perioden som det anmodes om, vennligst angi den dato da virksomheten
-        ble etablert, eller leverandørene startet sin virksomhet:
-    </entry>
+    <entry key="espd.crit.selection.economic.setup.eo.description">Hvis opplysningene om omsetning (samlet eller spesifikt) ikke er tilgjengelige for hele perioden som det anmodes om, vennligst angi den dato da virksomheten ble etablert, eller leverandørene startet sin virksomhet:</entry>
     <entry key="espd.crit.selection.economic.setup.eo.main">Leverandørens etableringsdato</entry>
-    <entry key="espd.crit.selection.economic.specific.average.turnover.description">Er leverandørens gjennomsnitlige
-        årsomsetning innenfor det området kontrakten gjelder og spesifisert i kunngjøringen eller i
-        anskaffelsesdokumentene for det antall regnskapsår det anmodes om er som følger:
-    </entry>
+    <entry key="espd.crit.selection.economic.specific.average.turnover.description">Er leverandørens gjennomsnitlige årsomsetning innenfor det området kontrakten gjelder og spesifisert i kunngjøringen eller i anskaffelsesdokumentene for det antall regnskapsår det anmodes om er som følger:</entry>
     <entry key="espd.crit.selection.economic.specific.average.turnover.main">Gjennomsnittlig omsettning</entry>
-    <entry key="espd.crit.selection.economic.specific.yearly.turnover.description">Er leverandørens
-        (Chr(34)spesifikkeChr(34)) årsomsetning innenfor det området kontrakten gjelder og spesifisert i kunngjøringen
-        eller i anskaffelsesdokumentene for det antall regnskapsår det anmodes om er som følger:
-    </entry>
+    <entry key="espd.crit.selection.economic.specific.yearly.turnover.description">Er leverandørens (Chr(34)spesifikkeChr(34)) årsomsetning innenfor det området kontrakten gjelder og spesifisert i kunngjøringen eller i anskaffelsesdokumentene for det antall regnskapsår det anmodes om er som følger:</entry>
     <entry key="espd.crit.selection.economic.specific.yearly.turnover.main">Spesifikk årsomsetning</entry>
-    <entry key="espd.part4.crit.selection.eo.declares.that">Når det gjelder kvalifikasjonskravene (avsnitt a eller
-        avsnitt A-D i denne del), erklærer leverandøren:
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.declares.that.tooltip">Leverandøren skal bare fylle ut dette feltet hvis
-        oppdragsgiver har angitt i kunngjøringen eller i anskaffelsesdokumentene referert til i kunngjøringen at
-        leverandørene kan nøye seg med å fylle ut avsnitt a i del IV og ikke behøver å fylle ut andre avsnitt i del IV:
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.economic.article">I artikkel 58 (3) i direktiv 2014/24/EU fastsettes
-        følgende kvalifikasjonskrav:
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.economic.article.tooltip">Leverandøren skal bare angi opplysningene hvis
-        oppdragsgiver i kunngjøringen eller i anskaffelsesdokumentene referert til i kunngjøringen har opplyst at disse
-        kvalifikasjonskravene kreves oppfylt.
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.economic.enrolement.description">Leverandør er registrert i et
-        foretaksregister, faglig register eller et handelsregister i medlemsstaten som leverandøren er etablert i
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.economic.enrolement.main">Registrering i foretaksregister, faglig register
-        eller et handelsregister
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.economic.service.contracts.description">Er det nødvendig med en bestemt
-        autorisasjon eller medlemsskap i en bestemt organisasjon for å kunne utføre tjenesten i leverandørens hjemland?
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.economic.service.contracts.main">Ved tjenestekontrakter: Krav om
-        autorisasjon eller medlemsskap
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.satisfies.all.criteria">Leverandøren oppfyller de angitte
-        kvalifikasjonskravene:
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.suitability.article">I artikkel 58 (2) i direktiv 2014/24/EU fastsettes
-        følgende kvalifikasjonskrav:
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.suitability.article.tooltip">Leverandøren skal bare angi opplysningene hvis
-        oppdragsgiver i kunngjøringen eller i anskaffelsesdokumentene referert til i kunngjøringen har opplyst at disse
-        kvalifikasjonskravene kreves oppfylt.
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.suitability.enrolment.description">Leverandør er registrert i et faglig
-        register eller et handelsregister i medlemsstaten som leverandøren er etablert i
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.suitability.enrolment.main">Registrert i faglig registre eller
-        handelsregister
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.suitability.service.contracts.description">Er det nødvendig med en bestemt
-        autorisasjon eller medlemsskap i en bestemt organisasjon for å kunne utføre tjenesten i leverandørens hjemland?
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.suitability.service.contracts.main">Ved tjenestekontrakter: Medlemskap
-        eller autorisasjon nødvendig
-    </entry>
-    <entry key="espd.part4.crit.selection.quality.assurance.article">I artikkel 62 (2) i direktiv 2014/24/EU fastsettes
-        følgende kvalifikasjonskrav:
-    </entry>
-    <entry key="espd.part4.crit.selection.quality.assurance.tooltip">Leverandøren skal bare angi opplysningene hvis
-        oppdragsgiver i kunngjøringen eller i anskaffelsesdokumentene referert til i kunngjøringen har opplyst at disse
-        kvalifikasjonskravene kreves oppfylt.
-    </entry>
-    <entry key="espd.crit.selection.quality.certificate.independent.bodies.environmental.description">Er leverandøren i
-        stand til å fremlegge attester utstedt av uavhengige organer som dokumentasjon for at leverandøren oppfyller de
-        angitte miljøledelsessystemene eller -standardene?
-    </entry>
-    <entry key="espd.crit.selection.quality.certificate.independent.bodies.environmental.main">Attester utstedt av
-        uavhengige organer for miljøledelsesstandarder
-    </entry>
-    <entry key="espd.crit.selection.quality.certificate.independent.bodies.quality.description">Kan leverandør fremlegge
-        attester utstedt av uavhengige organer som dokumentasjon for at leverandøren oppfyller de angitte
-        kvalitetssikringsstandardene, inkludert krav til universell utforming?
-    </entry>
-    <entry key="espd.crit.selection.quality.certificate.independent.bodies.quality.main">Attester utstedt av uavhengige
-        organer for kvalitetssikringsstandarder
-    </entry>
-    <entry key="espd.part4.crit.selection.satisfies.all.criteria">Leverandøren oppfyller de angitte
-        kvalifikasjonskravene.
-    </entry>
-    <entry key="espd.part4.crit.selection.suitability.article">I artikkel 58 (2) i direktiv 2014/24/EU fastsettes
-        følgende kvalifikasjonskrav:
-    </entry>
-    <entry key="espd.part4.crit.selection.suitability.article.tooltip">Leverandøren skal bare angi opplysningene hvis
-        oppdragsgiver i kunngjøringen, eller i anskaffelsesdokumentene referert til i kunngjøringen, har opplyst at
-        disse kvalifikasjonskravene kreves oppfylt.
-    </entry>
-    <entry key="espd.crit.selection.suitability.enrolment.professional.register.description">Leverandør er registrert i
-        et faglig register i medlemsstaten som leverandøren er etablert i. Som beskrevet i bilag XI til direktiv
-        2014/24/EU; leverandører fra visse medlemsstater kan være nødt til å oppfylle andre krav i nevnte bilag.
-    </entry>
-    <entry key="espd.crit.selection.suitability.enrolment.professional.register.main">Registrert i faglig register
-    </entry>
-    <entry key="espd.crit.selection.suitability.enrolment.trade.register.description">Leverandør er registrert i et
-        foretaksregister eller et handelsregister i medlemsstaten som leverandøren er etablert i. Som beskrevet i bilag
-        XI til direktiv 2014/24/EU; leverandører fra visse medlemsstater kan være nødt til å oppfylle andre krav i
-        nevnte bilag.
-    </entry>
-    <entry key="espd.crit.selection.suitability.enrolment.trade.register.main">Registrert i handelsregister eller
-        foretaksregister
-    </entry>
-    <entry key="espd.crit.selection.suitability.service.contracts.auth.description">Er det nødvendig med en bestemt
-        autorisasjon fra en bestemt organisasjon for å kunne utføre tjenesten i leverandørens hjemland?
-    </entry>
-    <entry key="espd.crit.selection.suitability.service.contracts.auth.main">Ved tjenestekontrakter: Autorisasjoner fra
-        en bestemt organisasjon nødvendig
-    </entry>
-    <entry key="espd.crit.selection.suitability.service.contracts.membership.description">Er det nødvendig med et
-        bestemt medlemsskap i en bestemt organisasjon for å kunne utføre tjenesten i leverandørens hjemland?
-    </entry>
-    <entry key="espd.crit.selection.suitability.service.contracts.membership.main">Ved tjenestekontrakter: Medlemskap i
-        en bestemt organisasjon nødvendig
-    </entry>
-    <entry key="espd.crit.selection.technical.allowance.of.checks.description">For varer eller tjenester som er
-        kompliserte, eller som unntaksvis skal benyttes til et spesielt formål: Vil leverandøren tillate, at det foretas
-        kontroll av leverandørens produksjonskapasitet eller tekniske kapasitet og, hvor det er nødvendig, av de
-        undersøkelses- og forskningsfasiliteter som leverandøren råder over, og av kvalitetskontrolltiltak? Kontrollen
-        skal foretas av oppdragsgiveren eller oppdragsgiver kan overlate det til et kompetent offentlige organ i den
-        staten leverandøren er etablert.
-    </entry>
+    <entry key="espd.part4.crit.selection.eo.declares.that">Når det gjelder kvalifikasjonskravene (avsnitt a eller avsnitt A-D i denne del), erklærer leverandøren:</entry>
+    <entry key="espd.part4.crit.selection.eo.declares.that.tooltip">Leverandøren skal bare fylle ut dette feltet hvis oppdragsgiver har angitt i kunngjøringen eller i anskaffelsesdokumentene referert til i kunngjøringen at leverandørene kan nøye seg med å fylle ut avsnitt a i del IV og ikke behøver å fylle ut andre avsnitt i del IV:</entry>
+    <entry key="espd.part4.crit.selection.eo.economic.article">I artikkel 58 (3) i direktiv 2014/24/EU fastsettes følgende kvalifikasjonskrav:</entry>
+    <entry key="espd.part4.crit.selection.eo.economic.article.tooltip">Leverandøren skal bare angi opplysningene hvis oppdragsgiver i kunngjøringen eller i anskaffelsesdokumentene referert til i kunngjøringen har opplyst at disse kvalifikasjonskravene kreves oppfylt.</entry>
+    <entry key="espd.part4.crit.selection.eo.economic.enrolement.description">Leverandør er registrert i et foretaksregister, faglig register eller et handelsregister i medlemsstaten som leverandøren er etablert i</entry>
+    <entry key="espd.part4.crit.selection.eo.economic.enrolement.main">Registrering i foretaksregister, faglig register eller et handelsregister</entry>
+    <entry key="espd.part4.crit.selection.eo.economic.service.contracts.description">Er det nødvendig med en bestemt autorisasjon eller medlemsskap i en bestemt organisasjon for å kunne utføre tjenesten i leverandørens hjemland?</entry>
+    <entry key="espd.part4.crit.selection.eo.economic.service.contracts.main">Ved tjenestekontrakter: Krav om autorisasjon eller medlemsskap</entry>
+    <entry key="espd.part4.crit.selection.eo.satisfies.all.criteria">Leverandøren oppfyller de angitte kvalifikasjonskravene:</entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.article">I artikkel 58 (2) i direktiv 2014/24/EU fastsettes følgende kvalifikasjonskrav:</entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.article.tooltip">Leverandøren skal bare angi opplysningene hvis oppdragsgiver i kunngjøringen eller i anskaffelsesdokumentene referert til i kunngjøringen har opplyst at disse kvalifikasjonskravene kreves oppfylt.</entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.enrolment.description">Leverandør er registrert i et faglig register eller et handelsregister i medlemsstaten som leverandøren er etablert i</entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.enrolment.main">Registrert i faglig registre eller handelsregister</entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.service.contracts.description">Er det nødvendig med en bestemt autorisasjon eller medlemsskap i en bestemt organisasjon for å kunne utføre tjenesten i leverandørens hjemland?</entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.service.contracts.main">Ved tjenestekontrakter: Medlemskap eller autorisasjon nødvendig</entry>
+    <entry key="espd.part4.crit.selection.quality.assurance.article">I artikkel 62 (2) i direktiv 2014/24/EU fastsettes følgende kvalifikasjonskrav:</entry>
+    <entry key="espd.part4.crit.selection.quality.assurance.tooltip">Leverandøren skal bare angi opplysningene hvis oppdragsgiver i kunngjøringen eller i anskaffelsesdokumentene referert til i kunngjøringen har opplyst at disse kvalifikasjonskravene kreves oppfylt.</entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.environmental.description">Er leverandøren i stand til å fremlegge attester utstedt av uavhengige organer som dokumentasjon for at leverandøren oppfyller de angitte miljøledelsessystemene eller -standardene?</entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.environmental.main">Attester utstedt av uavhengige organer for miljøledelsesstandarder</entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.quality.description">Kan leverandør fremlegge attester utstedt av uavhengige organer som dokumentasjon for at leverandøren oppfyller de angitte kvalitetssikringsstandardene, inkludert krav til universell utforming?</entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.quality.main">Attester utstedt av uavhengige organer for kvalitetssikringsstandarder</entry>
+    <entry key="espd.part4.crit.selection.satisfies.all.criteria">Leverandøren oppfyller de angitte kvalifikasjonskravene.</entry>
+    <entry key="espd.part4.crit.selection.suitability.article">I artikkel 58 (2) i direktiv 2014/24/EU fastsettes følgende kvalifikasjonskrav:</entry>
+    <entry key="espd.part4.crit.selection.suitability.article.tooltip">Leverandøren skal bare angi opplysningene hvis oppdragsgiver i kunngjøringen, eller i anskaffelsesdokumentene referert til i kunngjøringen, har opplyst at disse kvalifikasjonskravene kreves oppfylt.</entry>
+    <entry key="espd.crit.selection.suitability.enrolment.professional.register.description">Leverandør er registrert i et faglig register i medlemsstaten som leverandøren er etablert i. Som beskrevet i bilag XI til direktiv 2014/24/EU; leverandører fra visse medlemsstater kan være nødt til å oppfylle andre krav i nevnte bilag.</entry>
+    <entry key="espd.crit.selection.suitability.enrolment.professional.register.main">Registrert i faglig register</entry>
+    <entry key="espd.crit.selection.suitability.enrolment.trade.register.description">Leverandør er registrert i et foretaksregister eller et handelsregister i medlemsstaten som leverandøren er etablert i. Som beskrevet i bilag XI til direktiv 2014/24/EU; leverandører fra visse medlemsstater kan være nødt til å oppfylle andre krav i nevnte bilag.</entry>
+    <entry key="espd.crit.selection.suitability.enrolment.trade.register.main">Registrert i handelsregister eller foretaksregister</entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.auth.description">Er det nødvendig med en bestemt autorisasjon fra en bestemt organisasjon for å kunne utføre tjenesten i leverandørens hjemland?</entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.auth.main">Ved tjenestekontrakter: Autorisasjoner fra en bestemt organisasjon nødvendig</entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.membership.description">Er det nødvendig med et bestemt medlemsskap i en bestemt organisasjon for å kunne utføre tjenesten i leverandørens hjemland?</entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.membership.main">Ved tjenestekontrakter: Medlemskap i en bestemt organisasjon nødvendig</entry>
+    <entry key="espd.crit.selection.technical.allowance.of.checks.description">For varer eller tjenester som er kompliserte,  eller som unntaksvis skal benyttes til et spesielt formål: Vil leverandøren tillate, at det foretas kontroll  av leverandørens produksjonskapasitet eller tekniske kapasitet og, hvor det er nødvendig, av de undersøkelses- og forskningsfasiliteter som leverandøren råder over, og av kvalitetskontrolltiltak? Kontrollen skal foretas av oppdragsgiveren eller oppdragsgiver kan overlate det til et kompetent offentlige organ i den staten leverandøren er etablert.</entry>
     <entry key="espd.crit.selection.technical.allowance.of.checks.main">Tillatelse til kontroll</entry>
-    <entry key="espd.crit.selection.technical.average.annual.manpower.description">Leverandørens gjennomsnittlige årlige
-        arbeidsstyrke i løpet av de siste tre årene har vært som følger:
-    </entry>
-    <entry key="espd.crit.selection.technical.average.annual.manpower.main">Gjennomsnittlige årlige arbeidsstyrke
-    </entry>
-    <entry key="espd.crit.selection.technical.educational.professional.qualifications.description">Følgende utdanning og
-        faglige kvalifikasjoner besittes av leverandøren og/eller (avhengig av hvilke krav som er fastsatt i
-        kunngjøringen eller i anskaffelsesdokumenterne) av de ledende medarbeiderne:
-    </entry>
-    <entry key="espd.crit.selection.technical.educational.professional.qualifications.main">Utdanning og faglige
-        kvalifikasjoner
-    </entry>
-    <entry key="espd.crit.selection.technical.environment.management.features.description">Leverandør kan anvende
-        følgende miljøledelsestiltak i forbindelse med utførelsen av kontrakten:
-    </entry>
+    <entry key="espd.crit.selection.technical.average.annual.manpower.description">Leverandørens gjennomsnittlige årlige arbeidsstyrke i løpet av de siste tre årene har vært som følger:</entry>
+    <entry key="espd.crit.selection.technical.average.annual.manpower.main">Gjennomsnittlige årlige arbeidsstyrke</entry>
+    <entry key="espd.crit.selection.technical.educational.professional.qualifications.description">Følgende utdanning og faglige kvalifikasjoner besittes av leverandøren og/eller (avhengig av hvilke krav som er fastsatt i kunngjøringen eller i anskaffelsesdokumenterne) av de ledende medarbeiderne:</entry>
+    <entry key="espd.crit.selection.technical.educational.professional.qualifications.main">Utdanning og faglige kvalifikasjoner</entry>
+    <entry key="espd.crit.selection.technical.environment.management.features.description">Leverandør kan anvende følgende miljøledelsestiltak i forbindelse med utførelsen av kontrakten:</entry>
     <entry key="espd.crit.selection.technical.environment.management.features.main">Miljøledelsestiltak</entry>
-    <entry key="espd.crit.selection.technical.number.managerial.staff.description">Leverandørens antall medarbeidere i
-        ledelsen i løpet av de siste tre årene var som følger:
-    </entry>
-    <entry key="espd.crit.selection.technical.number.managerial.staff.main">Antall medarbeidere i ledelsen</entry>
-    <entry key="espd.part4.crit.selection.technical.professional.ability.article">I artikkel 58 (4) i direktiv
-        2014/24/EU fastsettes følgende kvalifikasjonskrav:
-    </entry>
-    <entry key="espd.part4.crit.selection.technical.professional.ability.article.tooltip">Leverandøren skal bare angi
-        opplysningene hvis oppdragsgiver i kunngjøringen eller i anskaffelsesdokumentene referert til i kunngjøringen
-        har opplyst at disse kvalifikasjonskravene kreves oppfylt.
-    </entry>
-    <entry key="espd.crit.selection.technical.service.contracts.performance.services.description">Bare for tjenester: I
-        referanseperioden har leverandøren utført følgende viktige vareleveranser av den etterspurte type, eller
-        følgende viktige tjenester av den etterspurte type. Oppdragsgiver kan kreve opp til tre års erfaring og tillate
-        at det tas hensyn til erfaring fra tiden før de seneste tre år.
-    </entry>
+    <entry key="espd.crit.selection.technical.number.managerial.staff.description">Leverandørens antall medarbeidere i ledelsen i løpet av de siste tre årene var som følger:</entry>
+    <entry key="espd.crit.selection.technical.number.managerial.staff.main">Antall  medarbeidere i ledelsen</entry>
+    <entry key="espd.part4.crit.selection.technical.professional.ability.article">I artikkel 58 (4) i direktiv 2014/24/EU fastsettes følgende kvalifikasjonskrav:</entry>
+    <entry key="espd.part4.crit.selection.technical.professional.ability.article.tooltip">Leverandøren skal bare angi opplysningene hvis oppdragsgiver i kunngjøringen eller i anskaffelsesdokumentene referert til i kunngjøringen har opplyst at disse kvalifikasjonskravene kreves oppfylt.</entry>
+    <entry key="espd.crit.selection.technical.service.contracts.performance.services.description">Bare for tjenester: I referanseperioden  har leverandøren utført følgende viktige vareleveranser av den etterspurte type, eller følgende viktige tjenester av den etterspurte type. Oppdragsgiver kan kreve opp til tre års erfaring og tillate at det tas hensyn til erfaring fra tiden før de seneste tre år.</entry>
     <entry key="espd.crit.selection.technical.service.contracts.performance.services.main">Bare for tjenester</entry>
-    <entry key="espd.crit.selection.technical.study.research.facilities.description">Leverandørens undersøkelses- og
-        forskningsfasiliter er som følger:
-    </entry>
-    <entry key="espd.crit.selection.technical.study.research.facilities.main">Undersøkelses- og forskningsfasiliteter
-    </entry>
-    <entry key="espd.crit.selection.technical.subcontracting.proportion.description">Leverandør vurderer å sette bort
-        følgende del (i prosent) av kontrakten til underleverandører. Legg merke til at hvis leverandøren har besluttet
-        å sette bort en del av kontrakten til underleverandører og støtter seg på underleverandørenes kapasitet til å
-        utføre denne del, utfylles et særskilt ESPD for slike underleverandører, se del II, avsnitt C, ovenfor.
-    </entry>
-    <entry key="espd.crit.selection.technical.subcontracting.proportion.main">Andel av kontrakt til underleverandør
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.chain.management.description">Leverandøren vil være i stand til å
-        anvende følgende styring av leveringskjeden og sporingssystemer ved gjennomføring av kontrakten:
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.chain.management.main">Styring og sporing av leveransekjeden
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.certificate.quality.description">Kan leverandør levere
-        etterspurte attester utstedt av offisielle organer for kvalitetskontroll, og som kan bekrefte at varene, som er
-        klart identifisert ved henvisning til tekniske spesifikasjoner eller standarder, som er fastsatt i kunngjøringen
-        eller i anskaffelsesdokumentene, er i overensstemmelse med disse?
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.certificate.quality.main">Ved anskaffelse av varer:
-        Attester utstedt av offisielle organer for kvalitetskontroll
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.performance.deliveries.description">Bare for offentlige
-        vareleveranser: I referanseperioden har leverandøren utført følgende viktige vareleveranser av den etterspurte
-        type, eller følgende viktige tjenester av den etterspurte type. Oppdragsgiver kan kreve opp til tre års erfaring
-        og tillate at det tas hensyn til erfaring fra tiden før de seneste tre år.
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.performance.deliveries.main">Bare for offentlige
-        vareleveranser
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.with.ca.description">Ved anskaffelse av varer: Hvis det
-        etterspørres, erklærer leverandøren videre at denne vil levere de etterspurte attestene for at de er ekte.
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.with.ca.main">Ved anskaffelser av varer: Etterspurte
-        prøver, beskrivelser eller fotografier med attester .
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.without.ca.description">Ved anskaffelser av varer:
-        Leverandøren fremlegger for de varer som skal leveres, etterspurte prøver, beskrivelser eller fotografier, som
-        ikke behøver å være ledsaget av attester for at de er ekte
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.without.ca.main">Ved anskaffelser av varer: Etterspurte
-        prøver, beskrivelser eller fotografier, som ikke behøver å være ledsaget av attester for at de er ekte
-    </entry>
-    <entry key="espd.crit.selection.technical.technical.facilities.measures.description">Leverandøren anvender følgende
-        tekniske fasiliteter og kvalitetssikringstiltak, og leverandørens undersøkelses- og forskningsfasiliter er som
-        følger:
-    </entry>
-    <entry key="espd.crit.selection.technical.technical.facilities.measures.main">tekniske fasiliteter og
-        kvalitetssikringstiltak
-    </entry>
-    <entry key="espd.crit.selection.technical.technicians.technical.bodies.description">Leverandør kan råde over
-        følgende tekniske personell eller tekniske enheter , særlig dem som er ansvarlige for kvalitetskontrollen: For
-        teknisk personell eller tekniske enheter som ikke direkte hører til leverandørens virksomhet, men hvis kapasitet
-        leverandøren støtter seg på, jf. del II, avsnitt C, skal det utfylles særskilte ESPD-formularer.
-    </entry>
-    <entry key="espd.crit.selection.technical.technicians.technical.bodies.main">Teknisk personell eller tekniske
-        enheter
-    </entry>
-    <entry key="espd.crit.selection.technical.tools.plant.description">Leverandøren vil kunne råde over følgende
-        redskaper, materielle og teknisk utstyr til å utføre kontrakten:
-    </entry>
+    <entry key="espd.crit.selection.technical.study.research.facilities.description">Leverandørens undersøkelses- og forskningsfasiliter er som følger:</entry>
+    <entry key="espd.crit.selection.technical.study.research.facilities.main">Undersøkelses- og forskningsfasiliteter</entry>
+    <entry key="espd.crit.selection.technical.subcontracting.proportion.description">Leverandør vurderer å sette bort følgende del (i prosent) av kontrakten til underleverandører. Legg merke til at hvis leverandøren har besluttet å sette bort en del av kontrakten til underleverandører og støtter seg på underleverandørenes kapasitet til å utføre denne del, utfylles et særskilt ESPD for slike underleverandører, se del II, avsnitt C, ovenfor.</entry>
+    <entry key="espd.crit.selection.technical.subcontracting.proportion.main">Andel av kontrakt til underleverandør</entry>
+    <entry key="espd.crit.selection.technical.supply.chain.management.description">Leverandøren vil være i stand til å anvende følgende styring av leveringskjeden og sporingssystemer ved gjennomføring av kontrakten:</entry>
+    <entry key="espd.crit.selection.technical.supply.chain.management.main">Styring og sporing av leveransekjeden</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.certificate.quality.description">Kan leverandør levere etterspurte attester utstedt av offisielle organer for kvalitetskontroll, og som kan bekrefte at varene, som er klart identifisert ved henvisning til tekniske spesifikasjoner eller standarder, som er fastsatt i kunngjøringen eller i anskaffelsesdokumentene, er i overensstemmelse med disse?</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.certificate.quality.main">Ved anskaffelse av varer: Attester utstedt av offisielle organer for kvalitetskontroll</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.performance.deliveries.description">Bare for offentlige vareleveranser: I referanseperioden  har leverandøren utført følgende viktige vareleveranser av den etterspurte type, eller følgende viktige tjenester av den etterspurte type. Oppdragsgiver kan kreve opp til tre års erfaring og tillate at det tas hensyn til erfaring fra tiden før de seneste tre år.</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.performance.deliveries.main">Bare for offentlige vareleveranser</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.with.ca.description">Ved anskaffelse av varer: Hvis det etterspørres, erklærer leverandøren videre at denne vil levere de etterspurte attestene for at de er ekte.</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.with.ca.main">Ved anskaffelser av varer: Etterspurte prøver, beskrivelser eller fotografier med attester  .</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.without.ca.description">Ved anskaffelser av varer: Leverandøren fremlegger for de varer som skal leveres, etterspurte prøver, beskrivelser eller fotografier, som ikke behøver å være ledsaget av attester for at de er ekte</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.without.ca.main">Ved anskaffelser av varer: Etterspurte prøver, beskrivelser eller fotografier, som ikke behøver å være ledsaget av attester for at de er ekte</entry>
+    <entry key="espd.crit.selection.technical.technical.facilities.measures.description">Leverandøren anvender følgende tekniske fasiliteter og kvalitetssikringstiltak, og leverandørens undersøkelses- og forskningsfasiliter er som følger:</entry>
+    <entry key="espd.crit.selection.technical.technical.facilities.measures.main">tekniske fasiliteter og kvalitetssikringstiltak</entry>
+    <entry key="espd.crit.selection.technical.technicians.technical.bodies.description">Leverandør kan råde over følgende tekniske personell eller tekniske enheter , særlig dem som er ansvarlige for kvalitetskontrollen: For teknisk personell eller tekniske enheter som ikke direkte hører til leverandørens virksomhet, men hvis kapasitet leverandøren støtter seg på, jf. del II, avsnitt C, skal det utfylles særskilte ESPD-formularer.</entry>
+    <entry key="espd.crit.selection.technical.technicians.technical.bodies.main">Teknisk personell eller tekniske enheter</entry>
+    <entry key="espd.crit.selection.technical.tools.plant.description">Leverandøren vil kunne råde over følgende redskaper, materielle og teknisk utstyr til å utføre kontrakten:</entry>
     <entry key="espd.crit.selection.technical.tools.plant.main">Redskaper, materiell og teknisk utstyr</entry>
-    <entry key="espd.crit.selection.technical.work.contracts.performance.works.description">Bare for offentlige bygg- og
-        anleggsarbeider: I referanseperioden har leverandøren utført følgende arbeider av den etterspurte type.
-        Oppdragsgiver kan kreve opp til fem års erfaring og tillate at det tas hensyn til erfaring fra tiden før de
-        seneste fem år.
-    </entry>
-    <entry key="espd.crit.selection.technical.work.contracts.performance.works.main">Bare for bygg- og
-        anleggsarbeider:
-    </entry>
-    <entry key="espd.crit.selection.technical.work.contracts.technicians.description">I forbindelse med offentlige
-        bygge- og anleggsarbeider kan leverandøren råde over følgende tekniske personell eller tekniske enheter til å
-        utføre kontrakten:
-    </entry>
-    <entry key="espd.crit.selection.technical.work.contracts.technicians.main">For offentlige bygge- og anleggsarbeider,
-        teknisk personell eller enheter som skal utføre arbeidet
-    </entry>
+    <entry key="espd.crit.selection.technical.work.contracts.performance.works.description">Bare for offentlige bygg- og anleggsarbeider: I referanseperioden  har leverandøren utført følgende arbeider av den etterspurte type. Oppdragsgiver kan kreve opp til fem års erfaring og tillate at det tas hensyn til erfaring fra tiden før de seneste fem år.</entry>
+    <entry key="espd.crit.selection.technical.work.contracts.performance.works.main">Bare for bygg- og anleggsarbeider:</entry>
+    <entry key="espd.crit.selection.technical.work.contracts.technicians.description">I forbindelse med offentlige bygge- og anleggsarbeider kan leverandøren råde over følgende tekniske personell eller tekniske enheter til å utføre kontrakten:</entry>
+    <entry key="espd.crit.selection.technical.work.contracts.technicians.main">For offentlige bygge- og anleggsarbeider, teknisk personell eller enheter som skal utføre arbeidet</entry>
     <entry key="espd.crit.start.date">Startdato</entry>
-    <entry key="espd.crit.taken.self.cleaning.measures">Har leverandør gjennomført tiltak som viser at han likevel har
-        den nødvendige integritet som kontraktspart (Chr(34)selvrehabiliteringChr(34))?
-    </entry>
-    <entry key="espd.crit.taxes.eo.fulfilled.obligations">Har leverandøren misligholdt sine forpliktelser ved å betale
-        eller inngå en bindende betalingsavtale for å betale skyldige skatter, avgifter eller trygdeavgifter, inkludert
-        eventuelle renter og bøter.
-    </entry>
-    <entry key="espd.crit.taxes.length.period.of.exclusion">I tilfelle av en dom, dersom det uttrykkelig er fastsatt i
-        denne, varigheten på avvisningsperioden
-    </entry>
+    <entry key="espd.crit.taken.self.cleaning.measures">Har leverandør gjennomført tiltak som viser at han likevel har den nødvendige integritet som kontraktspart (Chr(34)selvrehabiliteringChr(34))?</entry>
+    <entry key="espd.crit.taxes.eo.fulfilled.obligations">Har leverandøren misligholdt sine forpliktelser ved å betale eller inngå en bindende betalingsavtale for å betale skyldige skatter, avgifter eller trygdeavgifter, inkludert eventuelle renter og bøter.</entry>
+    <entry key="espd.crit.taxes.length.period.of.exclusion"> I tilfelle av en dom, dersom det uttrykkelig er fastsatt i denne, varigheten på avvisningsperioden</entry>
     <entry key="espd.crit.taxes.means.description">Vennligst beskriv på hvilke måter</entry>
     <entry key="espd.part3.crit.grounds.criminal.conv.top.title">A: AVVISNINGSGRUNNER SOM GJELDER STRAFFEDOMMER</entry>
-    <entry key="espd.part3.crit.top.grounds.payment.taxes.title">B: AVVISNINGSGRUNNER SOM GJELDER BETALING AV SKATTER,
-        AVGIFTER OG TRYGDEAVGIFTER
-    </entry>
-    <entry key="espd.part3.crit.insolvency.conflicts.top.title">C: AVVISNINGSGRUNNER SOM GJELDER INSOLVENS,
-        INTERESSEKONFLIKTER ELLER ALVORLIGE FEIL I YRKESUTØVELSEN
-    </entry>
-    <entry key="espd.part3.crit.purely.national.top.title">D: ANDRE AVVISNINGSGRUNNER SOM ER FASTSATT I DEN NASJONALE
-        LOVGIVNINGEN I OPPDRAGSGIVERENS MEDLEMSSTAT
-    </entry>
+    <entry key="espd.part3.crit.top.grounds.payment.taxes.title">B: AVVISNINGSGRUNNER SOM GJELDER BETALING AV SKATTER, AVGIFTER OG TRYGDEAVGIFTER</entry>
+    <entry key="espd.part3.crit.insolvency.conflicts.top.title">C: AVVISNINGSGRUNNER SOM GJELDER INSOLVENS, INTERESSEKONFLIKTER ELLER ALVORLIGE FEIL I YRKESUTØVELSEN</entry>
+    <entry key="espd.part3.crit.purely.national.top.title">D: ANDRE AVVISNINGSGRUNNER SOM ER FASTSATT I DEN NASJONALE LOVGIVNINGEN I OPPDRAGSGIVERENS MEDLEMSSTAT</entry>
     <entry key="espd.crit.url">URL/nettadresse</entry>
     <entry key="espd.crit.who.convicted">Hvem som har blitt dømt</entry>
     <entry key="espd.crit.year">År</entry>
@@ -819,52 +314,21 @@ Wenn die Datei als Properties gezogen wird, wird ein DocType zur Laufzeit einget
     <entry key="espd.ecertis.no.evidences">No evidences</entry>
     <entry key="espd.gui.error.ted.notice.not.supported">Du forsøker å laste opp feil fil</entry>
     <entry key="espd.gui.espd">Europeisk egenerklæringsskjema</entry>
-    <entry key="espd.gui.espd.upload.error">Den opplastede filen kan ikke leses korrekt. Er det en gyldig
-        ESPD-forespørsel eller et gyldig ESPD-skjema som er lastet opp?
-    </entry>
-    <entry key="espd.gui.espd.upload.request.error">Den opplastede filen kan ikke leses korrekt. Er det en gyldig
-        ESPD-forespørsel som er lastet opp?
-    </entry>
-    <entry key="espd.gui.espd.upload.response.error">Den opplastede filen kan ikke leses korrekt. Er det et gyldig
-        ESPD-skjema som er lastet opp?
-    </entry>
+    <entry key="espd.gui.espd.upload.error">Den opplastede filen kan ikke leses korrekt. Er det en gyldig ESPD-forespørsel eller et gyldig ESPD-skjema som er lastet opp?</entry>
+    <entry key="espd.gui.espd.upload.request.error">Den opplastede filen kan ikke leses korrekt. Er det en gyldig ESPD-forespørsel som er lastet opp?</entry>
+    <entry key="espd.gui.espd.upload.response.error">Den opplastede filen kan ikke leses korrekt. Er det et gyldig ESPD-skjema som er lastet opp?</entry>
     <entry key="espd.gui.europa">Europa</entry>
-    <entry key="espd.gui.expire.reminder.message">You have not done any action in the ESPD service for almost one hour.
-        &lt;p&gt;Please save the eESPD to make sure that you do not lose data.&lt;/p&gt;
-        &lt;p&gt;You can import (reuse) your eESPD at any time to continue working.&lt;/p&gt;
-    </entry>
+    <entry key="espd.gui.expire.reminder.message">You have not done any action in the ESPD service for almost one hour. Please save the eESPD to make sure that you do not lose data. You can import (reuse) your eESPD at any time to continue working.</entry>
     <entry key="espd.gui.export">eksporter til fil</entry>
     <entry key="espd.gui.faq.leaflet">Ofte stilte spørsmål</entry>
-    <entry key="espd.gui.faq.text.answers">Hvis du ønsker å se svar på de oftest stilte spørsmål om ESPD, vennligst gå
-        til
-    </entry>
-    <entry key="espd.gui.faq.text.more.info">For mer informasjon om ESPD,</entry>
-    <entry key="espd.init.alert">
-        &lt;p&gt;Det europeiske egenerklæringsskjemaet (ESPD) er leverandørens egenerklæring om sin virksomhets økonomiske og
-            finansielle kapasitet, tekniske og faglige kvalifikasjoner og egnethet for den kunngjorte konkurransen.
-        &lt;/p&gt;
-        &lt;p&gt;Skjemaet er tilgjengelig på alle EØS-språk og brukes som en foreløpig dokumentasjon for at leverandøren
-            oppfyller kvalifikasjonskravene, at det ikke foreligger grunner for avvisning og at han oppfyller aktuelle
-            utvelgelseskriterier.
-        &lt;/p&gt;
-        &lt;p&gt;ESPD-skjemaet er en forenkling for leverandørene, da de ikke lenger trenger å levere dokumentasjonsbevis
-            sammen med tilbudet eller forespørselen om deltakelse i konkurransen. Bestemmelsene om elektronisk ESPD trer
-            1. januar 2017.
-        &lt;/p&gt;
-        &lt;p&gt;Denne ESPD-tjenesten er gratis å bruke. Skjemaet fylles ut elektronisk. Skjemaet kan enten sendes
-            oppdragsgiver elektronisk eller skrives ut og sendes som en PDF sammen med tilbudet/forespørselen om
-            deltakelse i konkurransen. Tidligere innleverte ESPD-skjemaer kan gjenbrukes så lenge all informasjon
-            fortsatt er gyldig og korrekt.
-        &lt;/p&gt;
-        &lt;p&gt;Leverandøren kan bli avvist fra konkurransen, eller bli rettsforfulgt dersom avgitt informasjon er alvorlig
-            misledende, tilbakeholdt eller ikke kan dokumenteres.
-        &lt;/p&gt;
-    </entry>
+    <entry key="espd.gui.faq.text.answers">Hvis du ønsker å se svar på de oftest stilte spørsmål om ESPD, vennligst gå til</entry>
+    <entry key="espd.gui.faq.text.more.info">For mer informasjon om ESPD, </entry>
+    <entry key="espd.init.alert">Det europeiske egenerklæringsskjemaet (ESPD) er leverandørens egenerklæring om sin virksomhets økonomiske og finansielle kapasitet, tekniske og faglige kvalifikasjoner og egnethet for den kunngjorte konkurransen.   Skjemaet er tilgjengelig på alle EØS-språk og brukes som en foreløpig dokumentasjon for at leverandøren oppfyller kvalifikasjonskravene, at det ikke foreligger grunner for avvisning og at han oppfyller aktuelle utvelgelseskriterier.   ESPD-skjemaet er en forenkling for leverandørene, da de ikke lenger trenger å levere dokumentasjonsbevis sammen med tilbudet eller forespørselen om deltakelse i konkurransen. Bestemmelsene om elektronisk ESPD trer 1. januar 2017.   Denne ESPD-tjenesten er gratis å bruke. Skjemaet fylles ut elektronisk. Skjemaet kan enten sendes oppdragsgiver elektronisk eller skrives ut og sendes som en PDF sammen med tilbudet/forespørselen om deltakelse i konkurransen. Tidligere innleverte ESPD-skjemaer kan gjenbrukes så lenge all informasjon fortsatt er gyldig og korrekt.   Leverandøren kan bli avvist fra konkurransen, eller bli rettsforfulgt dersom avgitt informasjon er alvorlig misledende, tilbakeholdt eller ikke kan dokumenteres.</entry>
     <entry key="espd.init.create.espd">Opprette en ny ESPD-forespørsel</entry>
     <entry key="espd.init.create.response">Lag en generisk ESPD-erklæring</entry>
     <entry key="espd.init.header">Velkommen til den elektroniske ESPD-tjenesten</entry>
     <entry key="espd.init.i.am.ca">Jeg er oppdragsgiver</entry>
-    <entry key="espd.init.i.am.ce">Dette valget benyttes ikke for norske oppdragsgivere</entry>
+    <entry key="espd.init.i.am.ce"> Dette valget benyttes ikke for norske oppdragsgivere</entry>
     <entry key="espd.init.i.am.eop">Jeg er leverandør</entry>
     <entry key="espd.init.import.espd">Importere ESPD-forespørsel for den aktuelle konkurransen</entry>
     <entry key="espd.init.merge.espds">Flett ESPD-forespørsel med en eksisterende ESPD-erklæring</entry>
@@ -875,9 +339,7 @@ Wenn die Datei als Properties gezogen wird, wird ein DocType zur Laufzeit einget
     <entry key="espd.init.upload.document">Last opp fil</entry>
     <entry key="espd.init.upload.documents">Last opp filer</entry>
     <entry key="espd.init.upload.request">Last opp oppdragsgivers ESPD-forespørsel</entry>
-    <entry key="espd.init.upload.request.response">Last opp oppdragsgivers ESPD-forespørsel eller en leverandørens
-        ESPD-skjema
-    </entry>
+    <entry key="espd.init.upload.request.response">Last opp oppdragsgivers ESPD-forespørsel eller en leverandørens ESPD-skjema</entry>
     <entry key="espd.init.upload.response">Last opp ESPD-skjemaet du vil gjenbruke</entry>
     <entry key="espd.init.what.you.do">Hva ønsker du å gjøre?</entry>
     <entry key="espd.init.where.are.you.from.ca">Hvilket land tilhører oppdragsgiver?</entry>
@@ -901,53 +363,27 @@ Wenn die Datei als Properties gezogen wird, wird ein DocType zur Laufzeit einget
     <entry key="espd.gui.progress.selection">Kvalifikasjon</entry>
     <entry key="espd.gui.progress.start">Start</entry>
     <entry key="espd.gui.question.to.use.alpha">Ønsker du å bruke kvalifikasjonskravene fra A til D?</entry>
-    <entry key="espd.gui.report.appliction.issue">For any issues related to the ESPD application please contact the
-    </entry>
+    <entry key="espd.gui.report.appliction.issue">For any issues related to the ESPD application please contact the</entry>
     <entry key="espd.gui.report.security.incident">Ved brudd på informasjonssikkerheten, rapporter her</entry>
-    <entry key="espd.gui.report.security.incident.title">For any security incident please contact the European
-        Commission through the
-    </entry>
+    <entry key="espd.gui.report.security.incident.title">For any security incident please contact the European Commission through the</entry>
     <entry key="espd.gui.role.ca">Rolle: Oppdragsgvier (O)</entry>
     <entry key="espd.gui.role.eo">Rolle: Leverandør (L)</entry>
     <entry key="espd.gui.search">Søk</entry>
     <entry key="espd.gui.signature">Underskrift</entry>
     <entry key="espd.gui.tools">Verktøy</entry>
-    <entry key="espd.init.ca.can.create.espd.tooltip">Du får en tom ESPD-forespørsel hvor all relevant informasjon må
-        fylles inn.
-    </entry>
-    <entry key="espd.init.ca.can.import.espd.tooltip">Laster du opp en tidligere brukt ESPD-forespørsel, må alle felt
-        som er spesifikke for denne konkurransen oppdateres.
-    </entry>
+    <entry key="espd.init.ca.can.create.espd.tooltip">Du får en tom ESPD-forespørsel hvor all relevant informasjon må fylles inn.</entry>
+    <entry key="espd.init.ca.can.import.espd.tooltip">Laster du opp en tidligere brukt ESPD-forespørsel, må alle felt som er spesifikke for denne konkurransen oppdateres.</entry>
     <entry key="espd.init.ca.ref.buyer.tooltip">Jeg har rollen som offentlig oppdragsgiver i denne konkurransen</entry>
-    <entry key="espd.init.ce.ref.buyer.tooltip">Norske oppdragsgivere skal velge Chr(34)Jeg er offentlig
-        oppdragsgiverChr(34)
-    </entry>
-    <entry key="espd.init.eo.can.reuse.espd.tooltip">Leverandøren kan gjenbruke opplysninger fra et tidligere brukt
-        ESPD-skjema. ESPD-tjenesten vil slå sammen det Chr(34)gamleChr(34) skjemaet med den ESPD-forespørselen fra
-        oppdragsgiver i denne konkurransen.
-    </entry>
+    <entry key="espd.init.ce.ref.buyer.tooltip">Norske oppdragsgivere skal velge Chr(34)Jeg er offentlig oppdragsgiverChr(34)</entry>
+    <entry key="espd.init.eo.can.reuse.espd.tooltip">Leverandøren kan gjenbruke opplysninger fra et tidligere brukt ESPD-skjema. ESPD-tjenesten vil slå sammen det Chr(34)gamleChr(34) skjemaet med den ESPD-forespørselen fra oppdragsgiver i denne konkurransen.</entry>
     <entry key="espd.init.eo.ref.suppl.tooltip">Jeg har rollen som leverandør i denne konkurransen</entry>
-    <entry key="espd.init.espd.used.both.ca.eo.tooltip">Denne tjenesten kan brukes av både oppdragsgiver og
-        leverandører. Velg alternativet som tilsvarer din rolle i denne anskaffelsen.
-    </entry>
-    <entry key="espd.init.filter.create.response.tooltip">Her kan du bygge opp en generisk ESPD-erklæring som du kan
-        gjenbruke i de fleste konkurranser.
-    </entry>
-    <entry key="espd.init.filter.eo.can.import.espd.tooltip">Her laster du opp denne konkurransens ESPD-forespørsel. Du
-        kan se ESPD-forespørselen fra oppdragsgiver, og eventuelt også besvare den direkte.
-    </entry>
-    <entry key="espd.init.filter.eo.merge.espds.tooltip">Her fletter du den aktuelle konkurransens ESPD-forespørsel med
-        en tidligere utfylt ESPD-erklæring. Last opp filene i feltene nederst på siden.
-    </entry>
-    <entry key="espd.init.overview.received.espds.tooltip">Denne funksjonen gir en oversikt over innleverte ESPD-skjema
-        i en nærmere angitt konkurranse
-    </entry>
-    <entry key="espd.init.review.espd.tooltip">Oppdragsgiver kan laste opp for å lese/kontrollere innlevert
-        ESPD-skjema.
-    </entry>
-    <entry key="espd.init.ted.reception.id.tooltip">Feltet refererer til et nummer som norske oppdragsgivere per i dag
-        ikke har tilgang til, og feltet skal inntil videre ikke brukes.
-    </entry>
+    <entry key="espd.init.espd.used.both.ca.eo.tooltip">Denne tjenesten kan brukes av både oppdragsgiver og leverandører. Velg alternativet som tilsvarer din rolle i denne anskaffelsen.</entry>
+    <entry key="espd.init.filter.create.response.tooltip">Her kan du bygge opp en generisk ESPD-erklæring som du kan gjenbruke i de fleste konkurranser.</entry>
+    <entry key="espd.init.filter.eo.can.import.espd.tooltip">Her laster du opp denne konkurransens ESPD-forespørsel. Du kan se ESPD-forespørselen fra oppdragsgiver, og eventuelt også besvare den direkte.</entry>
+    <entry key="espd.init.filter.eo.merge.espds.tooltip">Her fletter du den aktuelle konkurransens ESPD-forespørsel med en tidligere utfylt ESPD-erklæring. Last opp filene i feltene nederst på siden.</entry>
+    <entry key="espd.init.overview.received.espds.tooltip">Denne funksjonen gir en oversikt over innleverte ESPD-skjema i en nærmere angitt konkurranse</entry>
+    <entry key="espd.init.review.espd.tooltip">Oppdragsgiver kan laste opp for å lese/kontrollere innlevert ESPD-skjema.</entry>
+    <entry key="espd.init.ted.reception.id.tooltip">Feltet refererer til et nummer som norske oppdragsgivere per i dag ikke har tilgang til, og feltet skal inntil videre ikke brukes.</entry>
     <entry key="espd.validator.accept">Vennligst skriv inn en gyldig verdi med gyldig utløpsdato</entry>
     <entry key="espd.validator.creditcard">Vennligst skriv inn ett gyldig kredittkortnummer</entry>
     <entry key="espd.validator.date">Vennligst skriv inn en gyldig dato</entry>
@@ -955,24 +391,18 @@ Wenn die Datei als Properties gezogen wird, wird ein DocType zur Laufzeit einget
     <entry key="espd.validator.digits">Vennligst skriv inn bare tall</entry>
     <entry key="espd.validator.email">Vennligst skriv inn en gyldig e-postadresse</entry>
     <entry key="espd.validator.equalTo">Vennligst skriv inn den samme verdien én gang til</entry>
-    <entry key="espd.validator.max">Vennligst skriv inn verdi som er mindre enn, eller lik, {0}</entry>
+    <entry key="espd.validator.max">Vennligst  skriv inn verdi som er mindre enn, eller lik, {0}</entry>
     <entry key="espd.validator.maxlength">Vennligst ikke skriv inn mer enn {0} karakterer</entry>
-    <entry key="espd.validator.min">Vennligst skriv inn verdi som er større enn, eller lik, {0}</entry>
+    <entry key="espd.validator.min">Vennligst  skriv inn verdi som er større enn, eller lik, {0}</entry>
     <entry key="espd.validator.minlength">Vennligst skriv inn mer enn {0} karakterer</entry>
     <entry key="espd.validator.number">Vennligst skriv inn ett gyldig nummer</entry>
-    <entry key="espd.validator.range">Vennligst skriv inn en verdi som er mellom {0} og {1}</entry>
-    <entry key="espd.validator.rangelength">Vennligst skriv inn en verdi som er mellom {0} og {1} karakterer</entry>
+    <entry key="espd.validator.range">Vennligst  skriv inn en verdi som er mellom {0}  og {1}</entry>
+    <entry key="espd.validator.rangelength">Vennligst skriv inn en verdi som er mellom {0}  og {1} karakterer</entry>
     <entry key="espd.validator.remote">Vennligst rett opp i dette feltet</entry>
     <entry key="espd.validator.required">Dette feltet er obligatorisk</entry>
     <entry key="espd.validator.url">Vennligst skriv inn en gyldig URL (nettadresse)</entry>
     <entry key="espd.gui.view.ca">Vis: (O)</entry>
     <entry key="espd.gui.view.eo">Vis: (L)</entry>
     <entry key="espd.gui.yes">Ja</entry>
-    <entry key="espd.gui.zip.instructions">Kort informasjon om hvilke filer du finner i
-        ZIP-mappa.Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nespd.XML: XML er et format som den europeiske ESPD-tjenesten og
-        andre kompatible ESPD-tjenester kan lese/tolke. Fordelen med å bruke XML er at oppdragsgivere og leverandører
-        kan gjenbruke filer.Chr(92)rChr(92)nChr(92)rChr(92)nespd.PDF: PDF er et ordinær lesbart
-        format.Chr(92)rChr(92)nChr(92)rChr(92)nHar du spørsmål, se på https://www.anskaffelser.no/digitalisering/espd
-        eller ta kontakt med espd@difi.no
-    </entry>
+    <entry key="espd.gui.zip.instructions">Kort informasjon om hvilke filer du finner i ZIP-mappa.Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nespd.XML: XML er et format som den europeiske ESPD-tjenesten og andre kompatible ESPD-tjenester kan lese/tolke. Fordelen med å bruke XML er at oppdragsgivere og leverandører kan gjenbruke filer.Chr(92)rChr(92)nChr(92)rChr(92)nespd.PDF: PDF er et ordinær lesbart format.Chr(92)rChr(92)nChr(92)rChr(92)nHar du spørsmål, se på https://www.anskaffelser.no/digitalisering/espd eller ta kontakt med espd@difi.no</entry>
 </properties>

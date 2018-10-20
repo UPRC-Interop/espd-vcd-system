@@ -5,972 +5,404 @@ Wenn die Datei als Properties gezogen wird, wird ein DocType zur Laufzeit einget
 -->
 <properties>
     <entry key="espd.gui.about">Par</entry>
-    <entry key="espd.part4.all.selection.switch">?: Visp?r?ga inform?cija par visiem atlases krit?rijiem</entry>
-    <entry key="espd.gui.app.environment">Sveicin?ti! J?s izmantojat m?su test??anas vidi. L?dzu, izmantojiet</entry>
-    <entry key="espd.gui.app.subtitle">Pakalpojums ESPD aizpild??anai un atk?rtotai izmanto?anai</entry>
-    <entry key="espd.gui.app.title">Eiropas vienotais iepirkuma proced?ras dokuments (ESPD)</entry>
-    <entry key="espd.gui.back.to.main">Atpaka? uz s?kumlapu</entry>
+    <entry key="espd.part4.all.selection.switch">ɑ: Vispārīga informācija par visiem atlases kritērijiem</entry>
+    <entry key="espd.gui.app.environment">Sveicināti! Jūs izmantojat mūsu testēšanas vidi. Lūdzu, izmantojiet</entry>
+    <entry key="espd.gui.app.subtitle">Pakalpojums ESPD aizpildīšanai un atkārtotai izmantošanai</entry>
+    <entry key="espd.gui.app.title">Eiropas vienotais iepirkuma procedūras dokuments (ESPD)</entry>
+    <entry key="espd.gui.back.to.main">Atpakaļ uz sākumlapu</entry>
     <entry key="espd.gui.cancel">Atcelt</entry>
-    <entry key="espd.gui.click.here">klik??iniet ?eit</entry>
-    <entry key="espd.gui.contact">Kontaktinform?cija</entry>
-    <entry key="espd.gui.contact.header">Kontaktinform?cija</entry>
-    <entry key="espd.gui.contact.info">&lt;p&gt;Eiropas Komisija
-        &lt;p&gt;
-        Iek??j? tirgus, r?pniec?bas, uz??m?jdarb?bas un MVU ?ener?ldirektor?ts
-        &lt;p&gt;
-        Avenue d'Auderghem 45 / Oudergemselaan 45&lt;p&gt;B-1049 Brussels&lt;p&gt;Be??ija
-    </entry>
-    <entry key="espd.gui.cookies">S?kdatnes</entry>
-    <entry key="espd.gui.correct.errors">Lai turpin?tu, izlabojiet k??das.</entry>
-    <entry key="espd.part1.city">Pils?ta:</entry>
+    <entry key="espd.gui.click.here">klikšķiniet šeit</entry>
+    <entry key="espd.gui.contact">Kontaktinformācija</entry>
+    <entry key="espd.gui.contact.header">Kontaktinformācija</entry>
+    <entry key="espd.gui.contact.info">Eiropas Komisija  Iekšējā tirgus, rūpniecības, uzņēmējdarbības un MVU ģenerāldirektorāts  Avenue d'Auderghem 45 / Oudergemselaan 45 B-1049 Brussels Beļģija</entry>
+    <entry key="espd.gui.cookies">Sīkdatnes</entry>
+    <entry key="espd.gui.correct.errors">Lai turpinātu, izlabojiet kļūdas.</entry>
+    <entry key="espd.part1.city">Pilsēta:</entry>
     <entry key="espd.part1.confirm.email">Apstipriniet e-pasta adresi:</entry>
-    <entry key="espd.part1.confirm.telephone">Apstipriniet t?lru?a numuru:</entry>
-    <entry key="espd.part1.contact.details.ca">Zi?as par iepirkuma r?kot?ju</entry>
+    <entry key="espd.part1.confirm.telephone">Apstipriniet tālruņa numuru:</entry>
+    <entry key="espd.part1.contact.details.ca">Ziņas par iepirkuma rīkotāju</entry>
     <entry key="espd.part1.contact.person">Kontaktpersona:</entry>
-    <entry key="espd.part1.correct.errors">Lai turpin?tu, izlabojiet k??das.</entry>
+    <entry key="espd.part1.correct.errors">Lai turpinātu, izlabojiet kļūdas.</entry>
     <entry key="espd.part1.country">Valsts:</entry>
     <entry key="espd.part1.email">E-pasts:</entry>
     <entry key="espd.part1.fax">fax</entry>
-    <entry key="espd.part1.file.ref.ca">L?gumsl?dz?jas iest?des vai l?gumsl?dz?ja subjekta pie??irtais dokumenta
-        identifik?cijas numurs (ja piem?rojams):
-    </entry>
-    <entry key="espd.part1.header">I da?a. Inform?cija par iepirkuma proced?ru un l?gumsl?dz?ju iest?di vai
-        l?gumsl?dz?ju subjektu
-    </entry>
-    <entry key="espd.part1.info.procedure">proced?ra</entry>
-    <entry key="espd.part1.info.procurement.proc">Inform?ciju par iepirkuma proced?ru</entry>
-    <entry key="espd.part1.info.pub">Inform?cija par publik?ciju</entry>
-    <entry key="espd.part1.name">Ofici?lais nosaukums:</entry>
-    <entry key="espd.part1.nat.regnum">Valsts re?istr?cijas numurs (ja zin?ms):</entry>
-    <entry key="espd.part1.official.journal.alert">Ja Eiropas Savien?bas Ofici?laj? V?stnes? nav publik?cijas par
-        iepirkuma izsludin??anu vai t? ?eit nav j?public?, tad l?gumsl?dz?jai iest?dei vai l?gumsl?dz?jam j?aizpilda
-        inform?cija, p?c kuras var skaidri identific?t iepirkuma proced?ru (piem?ram, atsauce uz publik?ciju valsts
-        l?men?)
-    </entry>
-    <entry key="espd.part1.ojs.label">Pazi?ojuma numurs Ofici?laj? V?stnes?:</entry>
+    <entry key="espd.part1.file.ref.ca">Līgumslēdzējas iestādes vai līgumslēdzēja subjekta piešķirtais dokumenta identifikācijas numurs (ja piemērojams):</entry>
+    <entry key="espd.part1.header">I daļa. Informācija par iepirkuma procedūru un līgumslēdzēju iestādi vai līgumslēdzēju subjektu</entry>
+    <entry key="espd.part1.info.procedure">procedūra</entry>
+    <entry key="espd.part1.info.procurement.proc">Informāciju par iepirkuma procedūru</entry>
+    <entry key="espd.part1.info.pub">Informācija par publikāciju</entry>
+    <entry key="espd.part1.name">Oficiālais nosaukums:</entry>
+    <entry key="espd.part1.nat.regnum">Valsts reģistrācijas numurs (ja zināms):</entry>
+    <entry key="espd.part1.official.journal.alert">Ja Eiropas Savienības Oficiālajā Vēstnesī nav publikācijas par iepirkuma izsludināšanu vai tā šeit nav jāpublicē, tad līgumslēdzējai iestādei vai līgumslēdzējam jāaizpilda informācija, pēc kuras var skaidri identificēt iepirkuma procedūru (piemēram, atsauce uz publikāciju valsts līmenī)</entry>
+    <entry key="espd.part1.ojs.label">Paziņojuma numurs Oficiālajā Vēstnesī:</entry>
     <entry key="espd.part1.ojs.url">OV URL</entry>
     <entry key="espd.part1.postcode">Pasta indekss:</entry>
     <entry key="espd.part1.procurer.name">Virsraksts:</entry>
     <entry key="espd.part1.street.and. num">Iela un numurs:</entry>
-    <entry key="espd.part1.ted.reception.id">?aj? ZIP map? atrodamo ESPD dat?u ?ss apraksts.Chr(92)</entry>
-    <entry key="espd.part1.telephone">T?lru?a numurs:</entry>
-    <entry key="espd.part1.title.or.short.desc">?ss apraksts:</entry>
-    <entry key="espd.part1.to.be.filled.alert">Iepirkuma proced?r?s, par kur?m uzaicin?jums piedal?ties konkurs? ir
-        public?ts Eiropas Savien?bas Ofici?laj? V?stnes?, I da?? piepras?t? inform?cija tiks izg?ta autom?tiski, ja vien
-        ESPD izveidei un aizpild??anai ir izmantots iepriek? min?tais elektroniskais ESPD pakalpojums. Nor?de uz Eiropas
-        Savien?bas Ofici?laj? V?stnes? public?tu atbilsto?u pazi?ojumu:
-    </entry>
-    <entry key="espd.part1.website">T?mek?a vietne (ja ir):</entry>
-    <entry key="espd.part3.grounds.criminal.conv">Ar krimin?li noties?jo?u spriedumu saist?ti iemesli</entry>
-    <entry key="espd.part3.header">III da?a. Izsl?g?anas iemesli</entry>
-    <entry key="espd.part3.insolvency.conflicts">Ar maks?tnesp?ju, intere?u konfliktiem vai profesion?l?s darb?bas
-        p?rk?pumiem saist?ti iemesli
-    </entry>
-    <entry key="espd.part5.concl.statements">VI da?a. Nosl?guma apliecin?jumi</entry>
-    <entry key="espd.part5.concl.statements.signature">Datums, vieta un, ja oblig?ts vai nepiecie?ams, paraksts(-i):
-    </entry>
-    <entry key="espd.part5.concl.statements.text">Ar ?o ofici?li apliecinu, ka II?V da?? sniegt? inform?cija ir prec?za
-        un pareiza un ka t? ir iesniegta, piln?b? apzinoties inform?cijas nopietnas sagroz??anas sekas.
-        &lt;p&gt;Ar ?o ofici?li apliecinu, ka varu p?c piepras?juma un bez kav??an?s iesniegt sertifik?tus un citus min?tos
-            dokument?ros pier?d?jumus, iz?emot, ja:
-        &lt;/p&gt;
-        &lt;p&gt;a) l?gumsl?dz?jai iest?dei vai l?gumsl?dz?jam subjektam ir iesp?ja ieg?t attiec?gos apliecino?os dokumentus,
-            tie?i piek??stot bez maksas pieejamai valsts datub?zei jebkur? dal?bvalst? (ar noteikumu, ka ekonomikas
-            dal?bnieks ir sniedzis nepiecie?amo inform?ciju (t?mek?a adrese, izdev?jiest?de, prec?za dokument?cijas
-            atsauce), lai l?gumsl?dz?ja iest?de vai l?gumsl?dz?js subjekts pats var?tu ieg?t ??du inform?ciju. Ja
-            nepiecie?ams, ??dai inform?cijai pievieno atbilsto?u piekri?anu ??dai piek?uvei), vai
-        &lt;/p&gt;
-        &lt;p&gt;b v?l?kais 2018. gada 18. oktobr? (atkar?b? no Direkt?vas 2014/24/ES 59. panta 5. punkta otr? apak?punkta
-            ievie?anas katr? konkr?t? valst?) l?gumsl?dz?jai iest?dei vai l?gumsl?dz?jam subjektam jau ir attiec?gie
-            dokumenti.
-        &lt;/p&gt;
-        &lt;p&gt;Ar ?o ofici?li piekr?tu, ka [nor?d?t l?gumsl?dz?ju iest?di vai l?gumsl?dz?ju subjektu, k? noteikts I da?as A
-            ieda??] sa?em piek?uvi dokumentiem, kas apliecina inform?ciju, kas sniegta ?aj? Eiropas vienotaj? iepirkuma
-            dokument? [nor?d?t da?u/ieda?u/punktu(-s)] ??diem m?r?iem [nor?d?t iepirkuma proced?ru: (apraksta
-            kopsavilkums, atsauce uz publik?ciju Eiropas Savien?bas Ofici?laj? V?stnes?, atsauces numurs)].
-        &lt;/p&gt;
-    </entry>
-    <entry key="espd.part5.export">Eksport?t</entry>
-    <entry key="espd.part5.export.content">Nospiediet pogu ?Eksport?t?, lai lejupiel?d?tu un saglab?tu ESPD dokumentu
-        dator?. L?gumsl?dz?ju iest??u pien?kums ir nodro?in?t, ka ESPD l?dz ar citiem iepirkuma proced?ras dokumentiem
-        ir pieejams ekonomikas dal?bniekiem.
-    </entry>
+    <entry key="espd.part1.ted.reception.id">Šajā ZIP mapē atrodamo ESPD datņu īss apraksts.Chr(92)</entry>
+    <entry key="espd.part1.telephone">Tālruņa numurs:</entry>
+    <entry key="espd.part1.title.or.short.desc">Īss apraksts:</entry>
+    <entry key="espd.part1.to.be.filled.alert">Iepirkuma procedūrās, par kurām uzaicinājums piedalīties konkursā ir publicēts Eiropas Savienības Oficiālajā Vēstnesī, I daļā pieprasītā informācija tiks izgūta automātiski, ja vien ESPD izveidei un aizpildīšanai ir izmantots iepriekš minētais elektroniskais ESPD pakalpojums. Norāde uz Eiropas Savienības Oficiālajā Vēstnesī publicētu atbilstošu paziņojumu:</entry>
+    <entry key="espd.part1.website">Tīmekļa vietne (ja ir):</entry>
+    <entry key="espd.part3.grounds.criminal.conv">Ar krimināli notiesājošu spriedumu saistīti iemesli</entry>
+    <entry key="espd.part3.header">III daļa. Izslēgšanas iemesli</entry>
+    <entry key="espd.part3.insolvency.conflicts">Ar maksātnespēju, interešu konfliktiem vai profesionālās darbības pārkāpumiem saistīti iemesli</entry>
+    <entry key="espd.part5.concl.statements">VI daļa. Noslēguma apliecinājumi</entry>
+    <entry key="espd.part5.concl.statements.signature">Datums, vieta un, ja obligāts vai nepieciešams, paraksts(-i):</entry>
+    <entry key="espd.part5.concl.statements.text">Ar šo oficiāli apliecinu, ka II–V daļā sniegtā informācija ir precīza un pareiza un ka tā ir iesniegta, pilnībā apzinoties  informācijas nopietnas sagrozīšanas sekas. Ar šo oficiāli apliecinu, ka varu pēc pieprasījuma un bez kavēšanās iesniegt sertifikātus un citus minētos dokumentāros pierādījumus, izņemot, ja: a) līgumslēdzējai iestādei vai līgumslēdzējam subjektam ir iespēja iegūt attiecīgos apliecinošos dokumentus, tieši piekļūstot bez maksas pieejamai valsts datubāzei jebkurā dalībvalstī (ar noteikumu, ka ekonomikas dalībnieks ir sniedzis nepieciešamo informāciju (tīmekļa adrese, izdevējiestāde, precīza dokumentācijas atsauce), lai līgumslēdzēja iestāde vai līgumslēdzējs subjekts pats varētu iegūt šādu informāciju. Ja nepieciešams, šādai informācijai pievieno atbilstošu piekrišanu šādai piekļuvei), vai b vēlākais 2018. gada 18. oktobrī (atkarībā no Direktīvas 2014/24/ES 59. panta 5. punkta otrā apakšpunkta ieviešanas katrā konkrētā valstī) līgumslēdzējai iestādei vai līgumslēdzējam subjektam jau ir attiecīgie dokumenti. Ar šo oficiāli piekrītu, ka [norādīt līgumslēdzēju iestādi vai līgumslēdzēju subjektu, kā noteikts I daļas A iedaļā] saņem piekļuvi dokumentiem, kas apliecina informāciju, kas sniegta šajā Eiropas vienotajā iepirkuma dokumentā [norādīt daļu/iedaļu/punktu(-s)] šādiem mērķiem [norādīt iepirkuma procedūru:  (apraksta kopsavilkums, atsauce uz publikāciju Eiropas Savienības Oficiālajā Vēstnesī, atsauces numurs)].</entry>
+    <entry key="espd.part5.export">Eksportēt</entry>
+    <entry key="espd.part5.export.content">Nospiediet pogu “Eksportēt”, lai lejupielādētu un saglabātu ESPD dokumentu datorā. Līgumslēdzēju iestāžu pienākums ir nodrošināt, ka ESPD līdz ar citiem iepirkuma procedūras dokumentiem ir pieejams ekonomikas dalībniekiem.</entry>
     <entry key="espd.part5.header">Pabeigt</entry>
-    <entry key="espd.part5.reduction">V da?a. Kvalific?tu kandid?tu skaita samazin??ana</entry>
-    <entry key="espd.part5.reduction.question">Ekonomikas dal?bnieks apliecina, ka:</entry>
-    <entry key="espd.part5.text.eo.declares.that">Ja da?i no ?iem sertifik?tiem vai dokument?ru apliecin?jumu veidiem ir
-        pieejami elektroniski, l?dzu, nor?diet to katram ??dam sertifik?tam:
-    </entry>
-    <entry key="espd.part5.title.eo.declares.that">tas atbilst objekt?viem un nediskrimin?jo?iem krit?rijiem vai
-        noteikumiem, kas j?piem?ro, lai ierobe?otu kandid?tu skaitu ??di:&lt;p&gt;ja vajadz?gi konkr?ti sertifik?ti vai cita
-            veida dokument?ri pier?d?jumi, l?dzam attiec?b? uz katru no tiem nor?d?t, vai ekonomikas dal?bniekam ir
-            vajadz?gie dokumenti:
-        &lt;/p&gt;
-    </entry>
-    <entry key="espd.part5.toptext">Ekonomikas dal?bnieks sniedz inform?ciju tikai tad, ja l?gumsl?dz?ja iest?de vai
-        l?gumsl?dz?js subjekts ir nor?d?jis m?r?i un tiks piem?roti nediskrimin?jo?i krit?riji vai noteikumi, lai
-        ierobe?otu to kandid?tu skaitu, kuri tiks uzaicin?ti iesniegt pied?v?jumu vai piedal?ties sarun?s. Min?t?
-        inform?cija, kura var ietvert pras?bas par uzr?d?majiem sertifik?tiem (to veidu) vai citiem dokument?ru
-        apliecin?jumu veidiem (ja t?di ir), ir izkl?st?ta attiec?gaj? pazi?ojum? vai ??d? pazi?ojum? min?tajos iepirkuma
-        proced?ras dokumentos. Tikai attiec?b? uz sl?gt?m proced?r?m, konkursa proced?r?m ar sarun?m, konkursa dialogiem
-        un inov?cijas partner?b?m:
-    </entry>
-    <entry key="espd.part4.alert">Ar ?eks?ti izv?les r?ti?? pirms katra attiec?g? krit?rija l?gumsl?dz?jas iest?des
-        nor?da, kuri atlases krit?riji tiks piem?roti.
-    </entry>
-    <entry key="espd.part4.economic.and.financial.standing">B. Saimnieciskais un finansi?lais st?voklis</entry>
-    <entry key="espd.part4.header">IV da?a. Atlases krit?riji</entry>
-    <entry key="espd.part4.quality.assurance">D. Kvalit?tes nodro?in??anas sh?mas un vides vad?bas standarti</entry>
-    <entry key="espd.part4.suitability">A. Piem?rot?ba</entry>
-    <entry key="espd.part4.technical.professional.ability">C. Tehnisk?s un profesion?l?s sp?jas</entry>
-    <entry key="espd.part2.add.complete.missing">Papildus l?dzam sniegt tr?ksto?o inform?ciju IV da?as A, B, C vai D
-        ieda??, attiec?gi TIKAI tad, ja tas ir piepras?ts attiec?gaj? pazi?ojum? vai iepirkuma proced?ras dokumentos:
-    </entry>
-    <entry key="espd.part2.all.selection.covered">d) Vai re?istr?cija vai sertifik?cija aptver visus oblig?tos atlases
-        krit?rijus?
-    </entry>
-    <entry key="espd.part2.another.vat">Ja PVN maks?t?ja numurs nav piem?rojams, l?dzam nor?d?t citu valsts
-        identifik?cijas numuru, ja tas tiek piepras?ts un ir piem?rojams
-    </entry>
-    <entry key="espd.part2.answer.following.parts">L?dzu, sniedziet atbildes uz p?r?jiem jaut?jumiem ?aj? ieda??, B
-        ieda?? un attiec?g? gad?jum? ar? ??s da?as C ieda??, attiec?g? gad?jum? aizpildiet V da?u, un jebkur? gad?jum?
-        aizpildiet un parakstiet VI da?u.
-    </entry>
-    <entry key="espd.part2.birth.date">Dzim?anas datums</entry>
-    <entry key="espd.part2.birth.place">Dzim?anas vieta</entry>
-    <entry key="espd.part2.cert.e.avaliable">b) Ja re?istr?cijas apliec?ba vai sertifik?ts ir pieejams elektroniski,
-        l?dzu, nor?diet to:
-    </entry>
+    <entry key="espd.part5.reduction">V daļa. Kvalificētu kandidātu skaita samazināšana</entry>
+    <entry key="espd.part5.reduction.question">Ekonomikas dalībnieks apliecina, ka:</entry>
+    <entry key="espd.part5.text.eo.declares.that">Ja daži no šiem sertifikātiem vai dokumentāru apliecinājumu veidiem ir pieejami elektroniski, lūdzu, norādiet to katram šādam sertifikātam:</entry>
+    <entry key="espd.part5.title.eo.declares.that">tas atbilst objektīviem un nediskriminējošiem kritērijiem vai noteikumiem, kas jāpiemēro, lai ierobežotu kandidātu skaitu šādi: ja vajadzīgi konkrēti sertifikāti vai cita veida dokumentāri pierādījumi, lūdzam attiecībā uz katru no tiem norādīt, vai ekonomikas dalībniekam ir vajadzīgie dokumenti:</entry>
+    <entry key="espd.part5.toptext">Ekonomikas dalībnieks sniedz informāciju tikai tad, ja līgumslēdzēja iestāde vai līgumslēdzējs subjekts ir norādījis mērķi un tiks piemēroti nediskriminējoši kritēriji vai noteikumi, lai ierobežotu to kandidātu skaitu, kuri tiks uzaicināti iesniegt piedāvājumu vai piedalīties sarunās. Minētā informācija, kura var ietvert prasības par uzrādāmajiem sertifikātiem (to veidu) vai citiem dokumentāru apliecinājumu veidiem (ja tādi ir), ir izklāstīta attiecīgajā paziņojumā vai šādā paziņojumā minētajos iepirkuma procedūras dokumentos. Tikai attiecībā uz slēgtām procedūrām, konkursa procedūrām ar sarunām, konkursa dialogiem un inovācijas partnerībām:</entry>
+    <entry key="espd.part4.alert">Ar ķeksīti izvēles rūtiņā pirms katra attiecīgā kritērija līgumslēdzējas iestādes norāda, kuri atlases kritēriji tiks piemēroti.</entry>
+    <entry key="espd.part4.economic.and.financial.standing">B. Saimnieciskais un finansiālais stāvoklis</entry>
+    <entry key="espd.part4.header">IV daļa. Atlases kritēriji</entry>
+    <entry key="espd.part4.quality.assurance">D. Kvalitātes nodrošināšanas shēmas un vides vadības standarti</entry>
+    <entry key="espd.part4.suitability">A. Piemērotība</entry>
+    <entry key="espd.part4.technical.professional.ability">C. Tehniskās un profesionālās spējas</entry>
+    <entry key="espd.part2.add.complete.missing">Papildus lūdzam sniegt trūkstošo informāciju IV daļas A, B, C vai D iedaļā, attiecīgi TIKAI tad, ja tas ir pieprasīts attiecīgajā paziņojumā vai iepirkuma procedūras dokumentos:</entry>
+    <entry key="espd.part2.all.selection.covered">d) Vai reģistrācija vai sertifikācija aptver visus obligātos atlases kritērijus?</entry>
+    <entry key="espd.part2.another.vat">Ja PVN maksātāja numurs nav piemērojams, lūdzam norādīt citu valsts identifikācijas numuru, ja tas tiek pieprasīts un ir piemērojams</entry>
+    <entry key="espd.part2.answer.following.parts">Lūdzu, sniedziet atbildes uz pārējiem jautājumiem šajā iedaļā, B iedaļā un attiecīgā gadījumā arī šīs daļas C iedaļā, attiecīgā gadījumā aizpildiet V daļu, un jebkurā gadījumā aizpildiet un parakstiet VI daļu.</entry>
+    <entry key="espd.part2.birth.date">Dzimšanas datums</entry>
+    <entry key="espd.part2.birth.place">Dzimšanas vieta</entry>
+    <entry key="espd.part2.cert.e.avaliable">b) Ja reģistrācijas apliecība vai sertifikāts ir pieejams elektroniski, lūdzu, norādiet to:</entry>
     <entry key="espd.part2.contact.person">Kontaktpersona vai kontaktpersonas:</entry>
-    <entry key="espd.part2.detinfo.of.represent">Vajadz?bas gad?jum? l?dzam sniegt s?k?ku inform?ciju par p?rst?v?bu
-        (t?s veidi, apm?rs, m?r?is utt.):
-    </entry>
-    <entry key="espd.part2.disworkers.details">Ja nepiecie?ams, l?dzu, nor?diet, k?d? kategorij? vai kategorij?s
-        ietilpst attiec?gie darbinieki ar invalidit?ti vai nelabv?l?g? situ?cij? eso?ie darbinieki
-    </entry>
-    <entry key="espd.part2.doc.e.avaliable">Ja attiec?g? dokument?cija ir pieejama elektroniski, l?dzu, nor?diet to:
-    </entry>
+    <entry key="espd.part2.detinfo.of.represent">Vajadzības gadījumā lūdzam sniegt sīkāku informāciju par pārstāvību (tās veidi, apmērs, mērķis utt.):</entry>
+    <entry key="espd.part2.disworkers.details">Ja nepieciešams, lūdzu, norādiet, kādā kategorijā vai kategorijās ietilpst attiecīgie darbinieki ar invaliditāti vai nelabvēlīgā situācijā esošie darbinieki</entry>
+    <entry key="espd.part2.doc.e.avaliable">Ja attiecīgā dokumentācija ir pieejama elektroniski, lūdzu, norādiet to:</entry>
     <entry key="espd.part2.email">E-pasts:</entry>
-    <entry key="espd.part2.ensure.others.espd">L?dzu, nodro?in?t, lai citas iesaist?t?s puses iesniegtu atsevi??u ESPD
-        veidlapu.
-    </entry>
-    <entry key="espd.part2.eo.approved.cert">Ja piem?rojams, vai ekonomikas dal?bnieks ir re?istr?ts apstiprin?to
-        ekonomikas dal?bnieku ofici?laj? sarakst? vai tam ir l?dzv?rt?gs sertifik?ts (piem?ram, saska?? ar valst? sp?k?
-        eso?o (iepriek??j?s) kvalifik?cijas sist?mu)?
-    </entry>
-    <entry key="espd.part2.eo.group.role">a) L?dzu, nor?diet, k?da ir ekonomikas dal?bnieka loma grup? (vad?t?js,
-        atbild?gais par konkr?tiem uzdevumiem u. c.):
-    </entry>
-    <entry key="espd.part2.eo.has.cert.soc">e) Vai ekonomikas dal?bnieks sp?s iesniegt sertifik?tu par soci?l?
-        nodro?in?juma iemaksu un nodok?u maks?jumiem vai sniegt inform?ciju, uz kuru pamata l?gumsl?dz?ja iest?de vai
-        l?gumsl?dz?js subjekts pats var?s tie?i ieg?t min?to inform?ciju, piek??stot jebkuras dal?bvalsts datub?zei, kas
-        pieejama bez maksas?
-    </entry>
-    <entry key="espd.part2.eo.rely.other.entities">Vai ekonomikas dal?bnieks pa?aujas uz citu subjektu sp?j?m, lai
-        izpild?tu IV da?? noteiktos atlases krit?rijus un turpm?k V da?? noteiktos krit?rijus un noteikumus (ja t?di ir
-        noteikti)?
-    </entry>
-    <entry key="espd.part2.first.name">V?rds</entry>
-    <entry key="espd.part2.header">II da?a. Inform?cija par ekonomikas dal?bnieku</entry>
-    <entry key="espd.part2.if.proc.reserved">Tikai tad, ja ir rezerv?tas ties?bas piedal?ties iepirkuma proced?r?: vai
-        ekonomikas dal?bnieks ir aizsarg?ta darbn?ca vai soci?lais uz??mums jeb vai l?guma izpildei tiks izmantotas
-        aizsarg?tas nodarbin?t?bas programmas?
-    </entry>
-    <entry key="espd.part2.info.eo">A. Inform?cija par ekonomikas dal?bnieku</entry>
-    <entry key="espd.part2.info.reliance">C. Inform?cija par pa?au?anos uz citu subjektu sp?j?m</entry>
-    <entry key="espd.part2.info.respresent">B. Inform?cija par ekonomikas dal?bnieka p?rst?vjiem</entry>
-    <entry key="espd.part2.information.subcontractors">D. Inform?cija par apak?uz??m?jiem, uz kuru sp?j?m ekonomikas
-        dal?bnieks nepa?aujas
-    </entry>
-    <entry key="espd.part2.information.subcontractors.description">Ja ?j?? un tikt?l, cikt?l tas ir zin?ms, l?dzu,
-        nor?diet pied?v?tos apak?uz??m?jus:
-    </entry>
-    <entry key="espd.part2.information.subcontractors.footer">Ja l?gumsl?dz?ja iest?de vai l?gumsl?dz?js subjekts ir
-        skaidri piepras?jis ?o inform?ciju papildus I da?? sniedzamajai inform?cijai, l?dzu, sniedziet piepras?to
-        inform?ciju ??s da?as A un B ieda?? un III da?? par katru attiec?go apak?uz??m?ju (to kategorij?m).
-    </entry>
-    <entry key="espd.part2.information.subcontractors.header">(Ieda?u aizpilda tikai gad?jum?, kad l?gumsl?dz?ja iest?de
-        vai l?gumsl?dz?js subjekts ir skaidri piepras?jis ?o inform?ciju).
-    </entry>
-    <entry key="espd.part2.information.subcontractors.title">Vai ekonomikas dal?bnieks par k?du l?guma da?u ir
-        paredz?jis sl?gt apak?uz??muma l?gumus ar tre??m person?m?
-    </entry>
-    <entry key="espd.part2.internet.addr.if.exists">Interneta adrese (t?mek?a vietne) (ja piem?rojams):</entry>
-    <entry key="espd.part2.is.eo.proc.together">Vai ekonomikas dal?bnieks piedal?s iepirkuma proced?r? kop? ar citiem?
-    </entry>
-    <entry key="espd.part2.is.eo.sized">Vai ekonomikas dal?bnieks ir mikrouz??mums, mazais uz??mums vai vid?jais
-        uz??mums?
-    </entry>
-    <entry key="espd.part2.is.eo.sized.tooltip">Sk. Komisijas 2003. gada 6. maija Ieteikumu par mikrouz??mumu, mazo
-        uz??mumu un vid?jo uz??mumu defin?ciju (OV L 124, 20.5.2003., 36. lpp.). ?? inform?cija ir nepiecie?ama tikai
-        statistikai. Mikrouz??mumi: uz??mums, kur? nodarbin?tas maz?k nek? 10 personas un kura gada apgroz?jums un/vai
-        gada bilance kop? nep?rsniedz EUR 2 miljonus. Mazie uz??mumi: uz??mums, kur? nodarbin?tas maz?k nek? 50 personas
-        un kura gada apgroz?jums un/vai gada bilance kop? nep?rsniedz EUR 10 miljonus. Vid?jais uz??mums ir uz??mums,
-        kas nav ne mikrouz??mums, ne mazais uz??mums un kur? nodarbin?ti maz?k par 250 darbiniekiem, kura gada
-        apgroz?jums nep?rsniedz EUR 50 miljonus un/vai kura gada bilance kop? nep?rsniedz EUR 43 miljonus.
-    </entry>
-    <entry key="espd.part2.last.name">Uzv?rds</entry>
-    <entry key="espd.part2.lots.concerned">Attiec?g? gad?jum? nor?diet da?u vai da?as, kur?s ekonomikas dal?bnieks v?las
-        iesniegt pied?v?jumu:
-    </entry>
+    <entry key="espd.part2.ensure.others.espd">Lūdzu, nodrošināt, lai citas iesaistītās puses iesniegtu atsevišķu ESPD veidlapu.</entry>
+    <entry key="espd.part2.eo.approved.cert">Ja piemērojams, vai ekonomikas dalībnieks ir reģistrēts apstiprināto ekonomikas dalībnieku oficiālajā sarakstā vai tam ir līdzvērtīgs sertifikāts (piemēram, saskaņā ar valstī spēkā esošo (iepriekšējās) kvalifikācijas sistēmu)?</entry>
+    <entry key="espd.part2.eo.group.role">a) Lūdzu, norādiet, kāda ir ekonomikas dalībnieka loma grupā (vadītājs, atbildīgais par konkrētiem uzdevumiem u. c.):</entry>
+    <entry key="espd.part2.eo.has.cert.soc">e) Vai ekonomikas dalībnieks spēs iesniegt sertifikātu par sociālā nodrošinājuma iemaksu un nodokļu maksājumiem vai sniegt informāciju, uz kuru pamata līgumslēdzēja iestāde vai līgumslēdzējs subjekts pats varēs tieši iegūt minēto informāciju, piekļūstot jebkuras dalībvalsts datubāzei, kas pieejama bez maksas?</entry>
+    <entry key="espd.part2.eo.rely.other.entities">Vai ekonomikas dalībnieks paļaujas uz citu subjektu spējām, lai izpildītu IV daļā noteiktos atlases kritērijus un turpmāk V daļā noteiktos kritērijus un noteikumus (ja tādi ir noteikti)?</entry>
+    <entry key="espd.part2.first.name">Vārds</entry>
+    <entry key="espd.part2.header">II daļa. Informācija par ekonomikas dalībnieku</entry>
+    <entry key="espd.part2.if.proc.reserved">Tikai tad, ja ir rezervētas tiesības piedalīties iepirkuma procedūrā: vai ekonomikas dalībnieks ir aizsargāta darbnīca vai sociālais uzņēmums jeb vai līguma izpildei tiks izmantotas aizsargātas nodarbinātības programmas?</entry>
+    <entry key="espd.part2.info.eo">A. Informācija par ekonomikas dalībnieku</entry>
+    <entry key="espd.part2.info.reliance">C. Informācija par paļaušanos uz citu subjektu spējām</entry>
+    <entry key="espd.part2.info.respresent">B. Informācija par ekonomikas dalībnieka pārstāvjiem</entry>
+    <entry key="espd.part2.information.subcontractors">D. Informācija par apakšuzņēmējiem, uz kuru spējām ekonomikas dalībnieks nepaļaujas</entry>
+    <entry key="espd.part2.information.subcontractors.description">Ja “jā” un tiktāl, ciktāl tas ir zināms, lūdzu, norādiet piedāvātos apakšuzņēmējus:</entry>
+    <entry key="espd.part2.information.subcontractors.footer">Ja līgumslēdzēja iestāde vai līgumslēdzējs subjekts ir skaidri pieprasījis šo informāciju papildus I daļā sniedzamajai informācijai, lūdzu, sniedziet pieprasīto informāciju šīs daļas A un B iedaļā un III daļā par katru attiecīgo apakšuzņēmēju (to kategorijām).</entry>
+    <entry key="espd.part2.information.subcontractors.header">(Iedaļu aizpilda tikai gadījumā, kad līgumslēdzēja iestāde vai līgumslēdzējs subjekts ir skaidri pieprasījis šo informāciju).</entry>
+    <entry key="espd.part2.information.subcontractors.title">Vai ekonomikas dalībnieks par kādu līguma daļu ir paredzējis slēgt apakšuzņēmuma līgumus ar trešām personām?</entry>
+    <entry key="espd.part2.internet.addr.if.exists">Interneta adrese (tīmekļa vietne) (ja piemērojams):</entry>
+    <entry key="espd.part2.is.eo.proc.together">Vai ekonomikas dalībnieks piedalās iepirkuma procedūrā kopā ar citiem?</entry>
+    <entry key="espd.part2.is.eo.sized">Vai ekonomikas dalībnieks ir mikrouzņēmums, mazais uzņēmums vai vidējais uzņēmums?</entry>
+    <entry key="espd.part2.is.eo.sized.tooltip">Sk. Komisijas 2003. gada 6. maija Ieteikumu par mikrouzņēmumu, mazo uzņēmumu un vidējo uzņēmumu definīciju (OV L 124, 20.5.2003., 36. lpp.). Šī informācija ir nepieciešama tikai statistikai. Mikrouzņēmumi: uzņēmums, kurā nodarbinātas mazāk nekā 10 personas un kura gada apgrozījums un/vai gada bilance kopā nepārsniedz EUR 2 miljonus. Mazie uzņēmumi: uzņēmums, kurā nodarbinātas mazāk nekā 50 personas un kura gada apgrozījums un/vai gada bilance kopā nepārsniedz EUR 10 miljonus. Vidējais uzņēmums ir uzņēmums, kas nav ne mikrouzņēmums, ne mazais uzņēmums un kurā nodarbināti mazāk par 250 darbiniekiem, kura gada apgrozījums nepārsniedz EUR 50 miljonus un/vai kura gada bilance kopā nepārsniedz EUR 43 miljonus.</entry>
+    <entry key="espd.part2.last.name">Uzvārds</entry>
+    <entry key="espd.part2.lots.concerned">Attiecīgā gadījumā norādiet daļu vai daļas, kurās ekonomikas dalībnieks vēlas iesniegt piedāvājumu:</entry>
     <entry key="espd.part2.name">Nosaukums:</entry>
-    <entry key="espd.part2.name.part.group">c) Attiec?g? gad?jum? dal?bnieku grupas nosaukums:</entry>
-    <entry key="espd.part2.other.eo.part">b) L?dzu, sniedziet inform?ciju par p?r?jiem ekonomikas dal?bniekiem, kuri
-        kop? piedal?s iepirkuma proced?r?:
-    </entry>
-    <entry key="espd.part2.percentage.disworkers">K?da ir darbinieku ar invalidit?ti vai nelabv?l?g?k? situ?cij? eso?u
-        darbinieku attiec?g? procentu?l? da?a?
-    </entry>
-    <entry key="espd.part2.person.empowered">Attiec?g? gad?jum?, l?dzam nor?d?t to personu v?rdus, uzv?rdus un adreses,
-        kuras ir pilnvarotas p?rst?v?t ekonomikas dal?bnieku ??s iepirkuma proced?ras m?r?iem.
-    </entry>
-    <entry key="espd.part2.pos.act.in.capacity">Amats/darbojas ??d? status?:</entry>
+    <entry key="espd.part2.name.part.group">c) Attiecīgā gadījumā dalībnieku grupas nosaukums:</entry>
+    <entry key="espd.part2.other.eo.part">b) Lūdzu, sniedziet informāciju par pārējiem ekonomikas dalībniekiem, kuri kopā piedalās iepirkuma procedūrā:</entry>
+    <entry key="espd.part2.percentage.disworkers">Kāda ir darbinieku ar invaliditāti vai nelabvēlīgākā situācijā esošu darbinieku attiecīgā procentuālā daļa?</entry>
+    <entry key="espd.part2.person.empowered">Attiecīgā gadījumā, lūdzam norādīt to personu vārdus, uzvārdus un adreses, kuras ir pilnvarotas pārstāvēt ekonomikas dalībnieku šīs iepirkuma procedūras mērķiem.</entry>
+    <entry key="espd.part2.pos.act.in.capacity">Amats/darbojas šādā statusā:</entry>
     <entry key="espd.part2.postal.adress">Pasta adrese:</entry>
-    <entry key="espd.part2.provide.regnumber">a) L?dzu, ievadiet atbilst?go re?istr?cijas vai sertifik?ta numuru (ja
-        piem?rojams):
-    </entry>
-    <entry key="espd.part2.ref.for.cert">c) L?dzu, nor?diet atsauces, uz kuru pamata ir pie??irta re?istr?cija vai
-        sertifik?ts, un attiec?g? gad?jum? nor?diet ofici?laj? sarakst? pie??irto klasifik?ciju:
-    </entry>
-    <entry key="espd.part2.separate.espd.sections.a.b">L?dzu, iesniedziet atsevi??u ESPD veidlapu, kur? nor?d?ta ??s
-        da?as A un B ieda?? un III da?? piepras?t? inform?cija par katru attiec?go subjektu un kuru attiec?gie subjekti
-        ir pien?c?gi aizpild?ju?i un parakst?ju?i.<p/>L?dzam ?emt v?r?, ka taj? j?ietver ar? viss tehniskais person?ls
-        vai tehnisk?s strukt?ras, kuras nav tie?i saist?tas ar ekonomikas dal?bnieka uz??mumu, it ?pa?i t?s, kas atbild
-        par kvalit?tes kontroli, un ? publisku b?vdarbu l?gumu gad?jum? ? tehniskais person?ls vai tehnisk?s strukt?ras,
-        kurus ekonomikas dal?bnieks sp?s piesaist?t b?vdarbu izpildei.<p/>Cikt?l tas attiecas uz konkr?tu sp?ju vai
-        sp?j?m, uz kur?m pa?aujas ekonomikas dal?bnieks, l?dzam nor?d?t inform?ciju par katru attiec?go subjektu saska??
-        ar IV un V da?u.
-    </entry>
-    <entry key="espd.part2.telephone">T?lru?a numurs:</entry>
-    <entry key="espd.part2.vat">PVN maks?t?ja numurs, ja piem?rojams:</entry>
-    <entry key="espd.part2sel.alert">Ekonomikas dal?bnieks inform?ciju sniedz tikai tad, ja l?gumsl?dz?ja iest?de vai
-        l?gumsl?dz?js subjekts ir noteicis attiec?go atlases krit?riju attiec?gaj? pazi?ojum? vai ??d? pazi?ojum?
-        min?tajos iepirkuma proced?ras dokumentos.
-    </entry>
+    <entry key="espd.part2.provide.regnumber">a) Lūdzu, ievadiet atbilstīgo reģistrācijas vai sertifikāta numuru (ja piemērojams):</entry>
+    <entry key="espd.part2.ref.for.cert">c) Lūdzu, norādiet atsauces, uz kuru pamata ir piešķirta reģistrācija vai sertifikāts, un attiecīgā gadījumā norādiet oficiālajā sarakstā piešķirto klasifikāciju:</entry>
+    <entry key="espd.part2.separate.espd.sections.a.b">Lūdzu, iesniedziet atsevišķu ESPD veidlapu, kurā norādīta šīs daļas A un B iedaļā un III daļā pieprasītā informācija par katru attiecīgo subjektu un kuru attiecīgie subjekti ir pienācīgi aizpildījuši un parakstījuši.<p/>Lūdzam ņemt vērā, ka tajā jāietver arī viss tehniskais personāls vai tehniskās struktūras, kuras nav tieši saistītas ar ekonomikas dalībnieka uzņēmumu, it īpaši tās, kas atbild par kvalitātes kontroli, un – publisku būvdarbu līgumu gadījumā – tehniskais personāls vai tehniskās struktūras, kurus ekonomikas dalībnieks spēs piesaistīt būvdarbu izpildei.<p/>Ciktāl tas attiecas uz konkrētu spēju vai spējām, uz kurām paļaujas ekonomikas dalībnieks, lūdzam norādīt informāciju par katru attiecīgo subjektu saskaņā ar IV un V daļu.</entry>
+    <entry key="espd.part2.telephone">Tālruņa numurs:</entry>
+    <entry key="espd.part2.vat">PVN maksātāja numurs, ja piemērojams:</entry>
+    <entry key="espd.part2sel.alert">Ekonomikas dalībnieks informāciju sniedz tikai tad, ja līgumslēdzēja iestāde vai līgumslēdzējs subjekts ir noteicis attiecīgo atlases kritēriju attiecīgajā paziņojumā vai šādā paziņojumā minētajos iepirkuma procedūras dokumentos.</entry>
     <entry key="espd.crit.amount">Summa</entry>
-    <entry key="espd.crit.amount.concerned">Attiec?g? summa</entry>
-    <entry key="espd.crit.average.turnover">Izdev?js</entry>
+    <entry key="espd.crit.amount.concerned">Attiecīgā summa</entry>
+    <entry key="espd.crit.average.turnover">Izdevējs</entry>
     <entry key="espd.crit.code">Kods</entry>
-    <entry key="espd.crit.country.member.state">Attiec?g? valsts vai dal?bvalsts</entry>
+    <entry key="espd.crit.country.member.state">Attiecīgā valsts vai dalībvalsts</entry>
     <entry key="espd.crit.date">Datums</entry>
-    <entry key="espd.crit.date.of.conviction">Noties?jo?? sprieduma datums</entry>
-    <entry key="espd.part3.crit.date.of.conviction.or.decision">L?dzu, nor?d?t noties?jo?? sprieduma vai l?muma datumu
-    </entry>
-    <entry key="espd.crit.decision.final.and.binding">Ja pien?kumu p?rk?pums tika noteikts ar tiesas vai administrat?vu
-        l?mumu, vai ?is l?mums nebija p?rs?dzams un bija saisto?s?
-    </entry>
+    <entry key="espd.crit.date.of.conviction">Notiesājošā sprieduma datums</entry>
+    <entry key="espd.part3.crit.date.of.conviction.or.decision">Lūdzu, norādīt notiesājošā sprieduma vai lēmuma datumu</entry>
+    <entry key="espd.crit.decision.final.and.binding">Ja pienākumu pārkāpums tika noteikts ar tiesas vai administratīvu lēmumu, vai šis lēmums nebija pārsūdzams un bija saistošs?</entry>
     <entry key="espd.crit.description">Apraksts</entry>
-    <entry key="espd.crit.do.you.allow.checks">Vai at?aujat veikt p?rbaudes?</entry>
+    <entry key="espd.crit.do.you.allow.checks">Vai atļaujat veikt pārbaudes?</entry>
     <entry key="espd.crit.end.date">Gadu skaits</entry>
-    <entry key="espd.part3.crit.eu.main.breaching.obligations">Direkt?vas 2014/24/ES 57. panta 4. punkt? paredz?ti ??di
-        izsl?g?anas iemesli
-    </entry>
-    <entry key="espd.part3.crit.eu.eo.main.breaching.obligations">Direkt?vas 2014/24/ES 57. panta 4. punkt? paredz?ti
-        ??di izsl?g?anas iemesli
-    </entry>
-    <entry key="espd.part3.crit.eu.main.purely.national">Vai piem?rojami tikai valsts ties?bu norm?s paredz?tie
-        izsl?g?anas iemesli, kas ir nor?d?ti attiec?gaj? pazi?ojum? vai iepirkuma proced?ras dokumentos?
-    </entry>
-    <entry key="espd.part3.crit.eu.grounds.criminal.conv.main.title">Direkt?vas 2014/24/ES 57. panta 1. punkt? paredz?ti
-        ??di izsl?g?anas iemesli
-    </entry>
-    <entry key="espd.part3.crit.eu.eo.grounds.criminal.conv.main.title">Direkt?vas 2014/24/ES 57. panta 1. punkt?
-        paredz?ti ??di izsl?g?anas iemesli
-    </entry>
-    <entry key="espd.part3.crit.eu.payment.taxes.main.title">Direkt?vas 2014/24/ES 57. panta 2. punkt? paredz?ti ??di
-        izsl?g?anas iemesli
-    </entry>
-    <entry key="espd.part3.crit.eu.eo.payment.taxes.main.title">Direkt?vas 2014/24/ES 57. panta 2. punkt? paredz?ti ??di
-        izsl?g?anas iemesli
-    </entry>
-    <entry key="espd.crit.eu.text.agreement.economic">Vai ekonomikas dal?bnieks ir nosl?dzis ar citiem ekonomikas
-        dal?bniekiem nol?gumus, kuru m?r?is konkurences trauc??ana?
-    </entry>
-    <entry key="espd.crit.eu.text.arrangement.creditors">Vai ekonomikas dal?bniekam ir nosl?gta vieno?an?s ar
-        kreditoriem?
-    </entry>
-    <entry key="espd.crit.eu.text.bankrupt">Vai ekonomikas dal?bnieks ir bankrot?jis?</entry>
-    <entry key="espd.crit.eu.text.breaching.obligations.environmental">Vai ekonomikas dal?bnieks, cik tam zin?ms, nav
-        izpild?jis savas saist?bas vides ties?bu jom?s? K? ??s iepirkuma proced?ras m?r?iem ir noteikts valsts ties?bu
-        aktos, attiec?gaj? pazi?ojum?, iepirkuma proced?ras dokumentos vai Direkt?vas 2014/24/ES 18. panta 2. punkt?.
-    </entry>
-    <entry key="espd.crit.eu.text.breaching.obligations.labour">Vai ekonomikas dal?bnieks, cik tam zin?ms, nav
-        izpild?jis savas saist?bas darba ties?bu jom?? K? ??s iepirkuma proced?ras m?r?iem ir noteikts valsts ties?bu
-        aktos, attiec?gaj? pazi?ojum?, iepirkuma proced?ras dokumentos vai Direkt?vas 2014/24/ES 18. panta 2. punkt?.
-    </entry>
-    <entry key="espd.crit.eu.text.breaching.obligations.social">Vai ekonomikas dal?bnieks, cik tam zin?ms, nav
-        izpild?jis savas saist?bas soci?lo ties?bu jom?? K? ??s iepirkuma proced?ras m?r?iem ir noteikts valsts ties?bu
-        aktos, attiec?gaj? pazi?ojum?, iepirkuma proced?ras dokumentos vai Direkt?vas 2014/24/ES 18. panta 2. punkt?.
-    </entry>
-    <entry key="espd.crit.eu.text.child.labour">Vai pats ekonomikas dal?bnieks vai k?da persona, kas ir ekonomikas
-        dal?bnieka administrat?v?s, p?rvald?bas vai uzraudz?bas strukt?rvien?bas dal?bniece vai kurai ir p?rst?v?bas,
-        lem?anas vai kontroles pilnvaras, ar gal?gu spriedumu ir bijusi noties?ta par b?rnu ekspluat?ciju vai citiem
-        cilv?ku tirdzniec?bas veidiem, ??ds sods ir piespriests p?d?jo piecu gadu laik? un vai joproj?m attiecas tie?i
-        noties?jo?? spriedum? noteiktais izsl?g?anas laikposms? K? noteikts Eiropas Parlamenta un Padomes 2011. gada 5.
-        apr??a Direkt?vas 2011/36/ES par cilv?ku tirdzniec?bas nov?r?anu un apkaro?anu un cietu?o aizsardz?bu, un ar
-        kuru aizst?j Padomes Pamatl?mumu 2002/629/TI, 2. pant? (OV L 101, 15.4.2011., 1. lpp.).
-    </entry>
-    <entry key="espd.crit.eu.text.conflict.interest">Vai ekonomikas dal?bniekam ir zin?ms jebk?ds intere?u konflikts, k?
-        noteikts valsts ties?bu aktos, attiec?gaj? pazi?ojum? vai iepirkuma proced?ras dokumentos, t? dal?bas iepirkuma
-        proced?r? d???
-    </entry>
-    <entry key="espd.crit.eu.text.corruption">Vai pats ekonomikas dal?bnieks vai k?da persona, kas ir ekonomikas
-        dal?bnieka administrat?v?s, p?rvald?bas vai uzraudz?bas strukt?rvien?bas dal?bniece vai kurai ir p?rst?v?bas,
-        lem?anas vai kontroles pilnvaras, ar gal?gu spriedumu ir bijusi noties?ta par korupciju, ??ds sods ir
-        piespriests p?d?jo piecu gadu laik? un vai joproj?m attiecas tie?i noties?jo?? spriedum? noteiktais izsl?g?anas
-        laikposms? K? noteikts Konvencijas par c??u pret korupciju, kur? iesaist?tas Eiropas Kopienas amatpersonas vai
-        Eiropas Savien?bas dal?bvalstu amatpersonas, 3. pant? (OV C 195, 25.6.1997., 1. lpp) un Padomes 2003. gada 22.
-        j?lija Pamatl?muma 2003/568/TI par korupcijas apkaro?anu priv?taj? sektor? 2. panta 1. punkt? (OV L 192,
-        31.7.2003., 54. lpp.). ?is izsl?g?anas iemesls ietver ar? korupcijas j?dzienu, kas defin?ts l?gumsl?dz?jas
-        iest?des (l?gumsl?dz?ja subjekta) vai ekonomikas dal?bnieka valsts ties?bu aktos.
-    </entry>
-    <entry key="espd.crit.eu.text.early.termination">Vai iepriek? ar ekonomikas dal?bnieku ir ticis priek?laic?gi
-        izbeigts iepriek??js publiskais l?gums, l?gums ar l?gumsl?dz?ju subjektu vai iepriek??js koncesijas l?gums un
-        vai saist?b? ar ??du iepriek??ju l?gumu ir bijusi iesniegta zaud?jumu atl?dzin??anas pras?ba vai piem?rotas
-        jebk?das citas l?dz?gas sankcijas?
-    </entry>
-    <entry key="espd.crit.eu.text.fraud">Vai pats ekonomikas dal?bnieks vai k?da persona, kas ir ekonomikas dal?bnieka
-        administrat?v?s, p?rvald?bas vai uzraudz?bas strukt?rvien?bas dal?bniece vai kurai ir p?rst?v?bas, lem?anas vai
-        kontroles pilnvaras, ar gal?gu spriedumu ir bijusi noties?ta par kr?p?anu, ??ds sods ir piespriests p?d?jo piecu
-        gadu laik? un vai joproj?m attiecas tie?i noties?jo?? spriedum? noteiktais izsl?g?anas laikposms? Konvencijas
-        par Eiropas Kopienas finan?u intere?u aizsardz?bu 1. panta izpratn? (OV C 316, 27.11.1995., 48. lpp.).
-    </entry>
-    <entry key="espd.crit.eu.text.grounds.criminal.conv">Vai pats ekonomikas dal?bnieks vai jebk?da persona, kas ir
-        ekonomikas dal?bnieka administrat?v?s, p?rvald?bas vai uzraudz?bas strukt?rvien?bas dal?bniece vai kurai ir
-        p?rst?v?bas, lem?anas vai kontroles pilnvaras, ar gal?gu spriedumu ir bijusi noties?ta par dal?bu noziedz?g?
-        organiz?cij?, ??da sod?m?ba ir piespriesta p?d?jo piecu gadu laik? un vai joproj?m attiecas tie?i noties?jo??
-        spriedum? noteiktais izsl?g?anas laikposms? K? noteikts Padomes 2008. gada 24. oktobra Pamatl?muma 2008/841/TI
-        par c??u pret organiz?to noziedz?bu 2. pant? (OV L 300, 11.11.2008., 42. lpp.).
-    </entry>
-    <entry key="espd.crit.eu.text.guilty.misconduct">Vai ekonomikas dal?bnieks ir atz?ts par vain?gu k?d? ar
-        profesion?lo darb?bu saist?t? nopietn? p?rk?pum?? Attiec?g? gad?jum? skat?t defin?cijas valsts ties?bu aktos,
-        attiec?gaj? pazi?ojum? vai iepirkuma proced?ras dokumentos.
-    </entry>
-    <entry key="espd.crit.eu.text.guilty.misinterpretation">Vai ekonomikas dal?bnieks<p/>a) ir bijis atz?ts par vain?gu
-        inform?cijas, kas vajadz?ga izsl?g?anas iemeslu neesam?bas p?rbaudei vai atlases krit?riju izpildei, b?tisk?
-        sagroz??an? ??s inform?cijas iesnieg?anas laik?<p/>b) ??du inform?ciju sl?pis<p/>c) nav sp?jis bez kav??an?s
-        iesniegt l?gumsl?dz?jas iest?des vai l?gumsl?dz?ja subjekta piepras?tos pamatojuma dokumentus<p/>d) ir m??in?jis
-        nelikum?gi ietekm?t l?gumsl?dz?jas iest?des vai l?gumsl?dz?ja subjekta l?muma pie?em?anas procesu, lai ieg?tu
-        konfidenci?lu inform?ciju, kas var nodro?in?t dal?bniekam nepamatotas priek?roc?bas iepirkuma proced?r?, vai
-        nolaid?bas d?? sniedzis maldino?u inform?ciju, kas var b?tiski ietekm?t l?mumus par izsl?g?anu, atlasi vai
-        l?guma sl?g?anas ties?bu pie??ir?anu?
-    </entry>
-    <entry key="espd.crit.eu.text.insolvency">Vai ekonomikas dal?bniekam tiek piem?rota maks?tnesp?jas vai likvid?cijas
-        proced?ra?
-    </entry>
-    <entry key="espd.crit.eu.text.involvement">Vai ekonomikas dal?bnieks vai ar to saist?ts uz??mums ir konsult?jis
-        l?gumsl?dz?ju iest?di vai l?gumsl?dz?ju subjektu vai k? cit?di ir bijis iesaist?ts ??s iepirkuma proced?ras
-        sagatavo?an??
-    </entry>
-    <entry key="espd.crit.eu.text.liquidator">Kas p?rvalda ekonomikas dal?bnieka akt?vus ? likvidators vai tiesa?
-    </entry>
-    <entry key="espd.crit.eu.text.money.laundering">Vai pats ekonomikas dal?bnieks vai k?da persona, kas ir ekonomikas
-        dal?bnieka administrat?v?s, p?rvald?bas vai uzraudz?bas strukt?rvien?bas dal?bniece vai kurai ir p?rst?v?bas,
-        lem?anas vai kontroles pilnvaras, ar gal?gu spriedumu ir bijusi noties?ta par noziedz?gi ieg?tu l?dzek?u
-        legaliz?ciju vai teroristu finans??anu, ??ds sods ir piespriests p?d?jo piecu gadu laik? un vai joproj?m
-        attiecas tie?i noties?jo?? spriedum? noteiktais izsl?g?anas laikposms? K? noteikts Eiropas Parlamenta un Padomes
-        2005. gada 26. oktobra Direkt?vas 2005/60/EK par to, lai nepie?autu finan?u sist?mas izmanto?anu nelikum?gi
-        ieg?tu l?dzek?u legaliz??anai un teroristu finans??anai, 1. pant? (OV L 309, 25.11.2005., 15. lpp.).
-    </entry>
-    <entry key="espd.crit.eu.text.national.bankruptcy">Vai ekonomikas dal?bnieks atrodas k?d? cit? bankrotam l?dz?g?
-        situ?cij?, kas izriet no l?dz?gas proced?ras, kura paredz?ta valsts ties?bu aktos vai noteikumos?
-    </entry>
-    <entry key="espd.crit.eu.text.payment.social.security">Vai ekonomikas dal?bnieks nav izpild?jis savas saist?bas
-        attiec?b? uz soci?l? nodro?in?juma iemaksu maks?jumiem gan valst?, kur tas ir re?istr?ts, gan l?gumsl?dz?jas
-        iest?des vai l?gumsl?dz?ja subjekta valst?, ja t? at??iras no re?istr?cijas valsts?
-    </entry>
-    <entry key="espd.crit.eu.text.payment.taxes">Vai ekonomikas dal?bnieks nav izpild?jis savas saist?bas attiec?b? uz
-        nodok?u maks?jumiem gan valst?, kur tas ir re?istr?ts, gan l?gumsl?dz?jas iest?des vai l?gumsl?dz?ja subjekta
-        valst?, ja t? at??iras no re?istr?cijas valsts?
-    </entry>
-    <entry key="espd.crit.eu.text.purely.national">Citi izsl?g?anas iemesli, kurus var noteikt l?gumsl?dz?jas iest?des
-        vai l?gumsl?dz?ja subjekta dal?bvalsts ties?bu norm?s. Vai piem?rojami tikai valsts ties?bu norm?s paredz?tie
-        izsl?g?anas iemesli, kas ir nor?d?ti attiec?gaj? pazi?ojum? vai iepirkuma proced?ras dokumentos?
-    </entry>
-    <entry key="espd.crit.eu.text.suspended.business">Vai ekonomikas dal?bnieka saimniecisk? darb?ba ir aptur?ta?
-    </entry>
-    <entry key="espd.crit.eu.text.terrorist">Vai pats ekonomikas dal?bnieks vai k?da persona, kas ir ekonomikas
-        dal?bnieka administrat?v?s, p?rvald?bas vai uzraudz?bas strukt?rvien?bas dal?bniece vai kurai ir p?rst?v?bas,
-        lem?anas vai kontroles pilnvaras, ar gal?gu spriedumu ir bijusi noties?ta par teroristu nodar?jumiem vai
-        noziedz?giem nodar?jumiem, kas saist?ti ar teroristu darb?b?m, ??ds sods ir piespriests p?d?jo piecu gadu laik?
-        un vai joproj?m attiecas tie?i noties?jo?? spriedum? noteiktais izsl?g?anas laikposms? K? noteikts Padomes 2002.
-        gada 13. j?nija Pamatl?muma par terorisma apkaro?anu 1. un 3. pant? (OV L 164, 22.6.2002., 3. lpp.). ?is
-        izsl?g?anas iemesls ietver ar? k?d??anu uz ??du nodar?jumu, t? atbalst??anu, l?dzdal?bu taj? vai nodar?juma
-        m??in?jumu, k? ir noteikts min?t? pamatl?muma 4. pant?.
-    </entry>
-    <entry key="espd.crit.eu.title.agreement.economic">Nol?gumu ar citiem ekonomikas dal?bniekiem m?r?is ir konkurences
-        trauc??ana
-    </entry>
-    <entry key="espd.crit.eu.title.arrangement.creditors">Mierizl?gums ar kreditoriem</entry>
+    <entry key="espd.part3.crit.eu.main.breaching.obligations">Direktīvas 2014/24/ES 57. panta 4. punktā paredzēti šādi izslēgšanas iemesli</entry>
+    <entry key="espd.part3.crit.eu.eo.main.breaching.obligations">Direktīvas 2014/24/ES 57. panta 4. punktā paredzēti šādi izslēgšanas iemesli</entry>
+    <entry key="espd.part3.crit.eu.main.purely.national">Vai piemērojami tikai valsts tiesību normās paredzētie izslēgšanas iemesli, kas ir norādīti attiecīgajā paziņojumā vai iepirkuma procedūras dokumentos?</entry>
+    <entry key="espd.part3.crit.eu.grounds.criminal.conv.main.title">Direktīvas 2014/24/ES 57. panta 1. punktā paredzēti šādi izslēgšanas iemesli</entry>
+    <entry key="espd.part3.crit.eu.eo.grounds.criminal.conv.main.title">Direktīvas 2014/24/ES 57. panta 1. punktā paredzēti šādi izslēgšanas iemesli</entry>
+    <entry key="espd.part3.crit.eu.payment.taxes.main.title">Direktīvas 2014/24/ES 57. panta 2. punktā paredzēti šādi izslēgšanas iemesli</entry>
+    <entry key="espd.part3.crit.eu.eo.payment.taxes.main.title">Direktīvas 2014/24/ES 57. panta 2. punktā paredzēti šādi izslēgšanas iemesli</entry>
+    <entry key="espd.crit.eu.text.agreement.economic">Vai ekonomikas dalībnieks ir noslēdzis ar citiem ekonomikas dalībniekiem nolīgumus, kuru mērķis konkurences traucēšana?</entry>
+    <entry key="espd.crit.eu.text.arrangement.creditors">Vai ekonomikas dalībniekam ir noslēgta vienošanās ar kreditoriem?</entry>
+    <entry key="espd.crit.eu.text.bankrupt">Vai ekonomikas dalībnieks ir bankrotējis?</entry>
+    <entry key="espd.crit.eu.text.breaching.obligations.environmental">Vai ekonomikas dalībnieks, cik tam zināms, nav izpildījis savas saistības vides tiesību jomās? Kā šīs iepirkuma procedūras mērķiem ir noteikts valsts tiesību aktos, attiecīgajā paziņojumā, iepirkuma procedūras dokumentos vai Direktīvas 2014/24/ES 18. panta 2. punktā.</entry>
+    <entry key="espd.crit.eu.text.breaching.obligations.labour">Vai ekonomikas dalībnieks, cik tam zināms, nav izpildījis savas saistības darba tiesību jomā? Kā šīs iepirkuma procedūras mērķiem ir noteikts valsts tiesību aktos, attiecīgajā paziņojumā, iepirkuma procedūras dokumentos vai Direktīvas 2014/24/ES 18. panta 2. punktā.</entry>
+    <entry key="espd.crit.eu.text.breaching.obligations.social">Vai ekonomikas dalībnieks, cik tam zināms, nav izpildījis savas saistības sociālo tiesību jomā? Kā šīs iepirkuma procedūras mērķiem ir noteikts valsts tiesību aktos, attiecīgajā paziņojumā, iepirkuma procedūras dokumentos vai Direktīvas 2014/24/ES 18. panta 2. punktā.</entry>
+    <entry key="espd.crit.eu.text.child.labour">Vai pats ekonomikas dalībnieks vai kāda persona, kas ir ekonomikas dalībnieka administratīvās, pārvaldības vai uzraudzības struktūrvienības dalībniece vai kurai ir pārstāvības, lemšanas vai kontroles pilnvaras, ar galīgu spriedumu ir bijusi notiesāta par bērnu ekspluatāciju vai citiem cilvēku tirdzniecības veidiem, šāds sods ir piespriests pēdējo piecu gadu laikā un vai joprojām attiecas tieši notiesājošā spriedumā noteiktais izslēgšanas laikposms? Kā noteikts Eiropas Parlamenta un Padomes 2011. gada 5. aprīļa Direktīvas 2011/36/ES par cilvēku tirdzniecības novēršanu un apkarošanu un cietušo aizsardzību, un ar kuru aizstāj Padomes Pamatlēmumu 2002/629/TI, 2. pantā (OV L 101, 15.4.2011., 1. lpp.).</entry>
+    <entry key="espd.crit.eu.text.conflict.interest">Vai ekonomikas dalībniekam ir zināms jebkāds interešu konflikts, kā noteikts valsts tiesību aktos, attiecīgajā paziņojumā vai iepirkuma procedūras dokumentos, tā dalības iepirkuma procedūrā dēļ?</entry>
+    <entry key="espd.crit.eu.text.corruption">Vai pats ekonomikas dalībnieks vai kāda persona, kas ir ekonomikas dalībnieka administratīvās, pārvaldības vai uzraudzības struktūrvienības dalībniece vai kurai ir pārstāvības, lemšanas vai kontroles pilnvaras, ar galīgu spriedumu ir bijusi notiesāta par korupciju, šāds sods ir piespriests pēdējo piecu gadu laikā un vai joprojām attiecas tieši notiesājošā spriedumā noteiktais izslēgšanas laikposms? Kā noteikts Konvencijas par cīņu pret korupciju, kurā iesaistītas Eiropas Kopienas amatpersonas vai Eiropas Savienības dalībvalstu amatpersonas, 3. pantā (OV C 195, 25.6.1997., 1. lpp) un Padomes 2003. gada 22. jūlija Pamatlēmuma 2003/568/TI par korupcijas apkarošanu privātajā sektorā 2. panta 1. punktā (OV L 192, 31.7.2003., 54. lpp.). Šis izslēgšanas iemesls ietver arī korupcijas jēdzienu, kas definēts līgumslēdzējas iestādes (līgumslēdzēja subjekta) vai ekonomikas dalībnieka valsts tiesību aktos.</entry>
+    <entry key="espd.crit.eu.text.early.termination">Vai iepriekš ar ekonomikas dalībnieku ir ticis priekšlaicīgi izbeigts iepriekšējs publiskais līgums, līgums ar līgumslēdzēju subjektu vai iepriekšējs koncesijas līgums un vai saistībā ar šādu iepriekšēju līgumu ir bijusi iesniegta zaudējumu atlīdzināšanas prasība vai piemērotas jebkādas citas līdzīgas sankcijas?</entry>
+    <entry key="espd.crit.eu.text.fraud">Vai pats ekonomikas dalībnieks vai kāda persona, kas ir ekonomikas dalībnieka administratīvās, pārvaldības vai uzraudzības struktūrvienības dalībniece vai kurai ir pārstāvības, lemšanas vai kontroles pilnvaras, ar galīgu spriedumu ir bijusi notiesāta par krāpšanu, šāds sods ir piespriests pēdējo piecu gadu laikā un vai joprojām attiecas tieši notiesājošā spriedumā noteiktais izslēgšanas laikposms? Konvencijas par Eiropas Kopienas finanšu interešu aizsardzību 1. panta izpratnē (OV C 316, 27.11.1995., 48. lpp.).</entry>
+    <entry key="espd.crit.eu.text.grounds.criminal.conv">Vai pats ekonomikas dalībnieks vai jebkāda persona, kas ir ekonomikas dalībnieka administratīvās, pārvaldības vai uzraudzības struktūrvienības dalībniece vai kurai ir pārstāvības, lemšanas vai kontroles pilnvaras, ar galīgu spriedumu ir bijusi notiesāta par dalību noziedzīgā organizācijā, šāda sodāmība ir piespriesta pēdējo piecu gadu laikā un vai joprojām attiecas tieši notiesājošā spriedumā noteiktais izslēgšanas laikposms? Kā noteikts Padomes 2008. gada 24. oktobra Pamatlēmuma 2008/841/TI par cīņu pret organizēto noziedzību 2. pantā (OV L 300, 11.11.2008., 42. lpp.).</entry>
+    <entry key="espd.crit.eu.text.guilty.misconduct">Vai ekonomikas dalībnieks ir atzīts par vainīgu kādā ar profesionālo darbību saistītā nopietnā pārkāpumā? Attiecīgā gadījumā skatīt definīcijas valsts tiesību aktos, attiecīgajā paziņojumā vai iepirkuma procedūras dokumentos.</entry>
+    <entry key="espd.crit.eu.text.guilty.misinterpretation">Vai ekonomikas dalībnieks <p/>a) ir bijis atzīts par vainīgu informācijas, kas vajadzīga izslēgšanas iemeslu neesamības pārbaudei vai atlases kritēriju izpildei, būtiskā sagrozīšanā šīs informācijas iesniegšanas laikā<p/>b) šādu informāciju slēpis<p/>c) nav spējis bez kavēšanās iesniegt līgumslēdzējas iestādes vai līgumslēdzēja subjekta pieprasītos pamatojuma dokumentus<p/>d) ir mēģinājis nelikumīgi ietekmēt līgumslēdzējas iestādes vai līgumslēdzēja subjekta lēmuma pieņemšanas procesu, lai iegūtu konfidenciālu informāciju, kas var nodrošināt dalībniekam nepamatotas priekšrocības iepirkuma procedūrā, vai nolaidības dēļ sniedzis maldinošu informāciju, kas var būtiski ietekmēt lēmumus par izslēgšanu, atlasi vai līguma slēgšanas tiesību piešķiršanu?</entry>
+    <entry key="espd.crit.eu.text.insolvency">Vai ekonomikas dalībniekam tiek piemērota maksātnespējas vai likvidācijas procedūra?</entry>
+    <entry key="espd.crit.eu.text.involvement">Vai ekonomikas dalībnieks vai ar to saistīts uzņēmums ir konsultējis līgumslēdzēju iestādi vai līgumslēdzēju subjektu vai kā citādi ir bijis iesaistīts šīs iepirkuma procedūras sagatavošanā?</entry>
+    <entry key="espd.crit.eu.text.liquidator">Kas pārvalda ekonomikas dalībnieka aktīvus – likvidators vai tiesa?</entry>
+    <entry key="espd.crit.eu.text.money.laundering">Vai pats ekonomikas dalībnieks vai kāda persona, kas ir ekonomikas dalībnieka administratīvās, pārvaldības vai uzraudzības struktūrvienības dalībniece vai kurai ir pārstāvības, lemšanas vai kontroles pilnvaras, ar galīgu spriedumu ir bijusi notiesāta par noziedzīgi iegūtu līdzekļu legalizāciju vai teroristu finansēšanu, šāds sods ir piespriests pēdējo piecu gadu laikā un vai joprojām attiecas tieši notiesājošā spriedumā noteiktais izslēgšanas laikposms? Kā noteikts Eiropas Parlamenta un Padomes 2005. gada 26. oktobra Direktīvas 2005/60/EK par to, lai nepieļautu finanšu sistēmas izmantošanu nelikumīgi iegūtu līdzekļu legalizēšanai un teroristu finansēšanai, 1. pantā (OV L 309, 25.11.2005., 15. lpp.).</entry>
+    <entry key="espd.crit.eu.text.national.bankruptcy">Vai ekonomikas dalībnieks atrodas kādā citā bankrotam līdzīgā situācijā, kas izriet no līdzīgas procedūras, kura paredzēta valsts tiesību aktos vai noteikumos?</entry>
+    <entry key="espd.crit.eu.text.payment.social.security">Vai ekonomikas dalībnieks nav izpildījis savas saistības attiecībā uz sociālā nodrošinājuma iemaksu maksājumiem gan valstī, kur tas ir reģistrēts, gan līgumslēdzējas iestādes vai līgumslēdzēja subjekta valstī, ja tā atšķiras no reģistrācijas valsts?</entry>
+    <entry key="espd.crit.eu.text.payment.taxes">Vai ekonomikas dalībnieks nav izpildījis savas saistības attiecībā uz nodokļu maksājumiem gan valstī, kur tas ir reģistrēts, gan līgumslēdzējas iestādes vai līgumslēdzēja subjekta valstī, ja tā atšķiras no reģistrācijas valsts?</entry>
+    <entry key="espd.crit.eu.text.purely.national">Citi izslēgšanas iemesli, kurus var noteikt līgumslēdzējas iestādes vai līgumslēdzēja subjekta dalībvalsts tiesību normās. Vai piemērojami tikai valsts tiesību normās paredzētie izslēgšanas iemesli, kas ir norādīti attiecīgajā paziņojumā vai iepirkuma procedūras dokumentos?</entry>
+    <entry key="espd.crit.eu.text.suspended.business">Vai ekonomikas dalībnieka saimnieciskā darbība ir apturēta?</entry>
+    <entry key="espd.crit.eu.text.terrorist">Vai pats ekonomikas dalībnieks vai kāda persona, kas ir ekonomikas dalībnieka administratīvās, pārvaldības vai uzraudzības struktūrvienības dalībniece vai kurai ir pārstāvības, lemšanas vai kontroles pilnvaras, ar galīgu spriedumu ir bijusi notiesāta par teroristu nodarījumiem vai noziedzīgiem nodarījumiem, kas saistīti ar teroristu darbībām, šāds sods ir piespriests pēdējo piecu gadu laikā un vai joprojām attiecas tieši notiesājošā spriedumā noteiktais izslēgšanas laikposms? Kā noteikts Padomes 2002. gada 13. jūnija Pamatlēmuma par terorisma apkarošanu 1. un 3. pantā (OV L 164, 22.6.2002., 3. lpp.). Šis izslēgšanas iemesls ietver arī kūdīšanu uz šādu nodarījumu, tā atbalstīšanu, līdzdalību tajā vai nodarījuma mēģinājumu, kā ir noteikts minētā pamatlēmuma 4. pantā.</entry>
+    <entry key="espd.crit.eu.title.agreement.economic">Nolīgumu ar citiem ekonomikas dalībniekiem mērķis ir konkurences traucēšana</entry>
+    <entry key="espd.crit.eu.title.arrangement.creditors">Mierizlīgums ar kreditoriem</entry>
     <entry key="espd.crit.eu.title.bankrupt">Bankrots</entry>
-    <entry key="espd.part3.crit.eu.eo.bankrupt.title">Vai J?su organiz?cija ir bankrot?jusi vai tai tiek piem?rota
-        maks?tnesp?jas vai likvid?cijas proced?ra, vai tai ir mierizl?gums ar kreditoriem, vai t? ir k?d? cit? bankrotam
-        l?dz?g? situ?cij?, kas izriet no l?dz?gas proced?ras, kas paredz?ta valsts ties?bu aktos vai noteikumos?
-    </entry>
-    <entry key="espd.crit.eu.title.breaching.obligations.environmental">Saist?bu neizpilde vides ties?bu jom?s</entry>
-    <entry key="espd.crit.eu.title.breaching.obligations.environmental.eo">Saist?bu neizpilde vides ties?bu jom?s
-    </entry>
-    <entry key="espd.crit.eu.title.breaching.obligations.labour">Saist?bu neizpilde darba ties?bu jom?</entry>
-    <entry key="espd.crit.eu.title.breaching.obligations.social">Saist?bu neizpilde soci?lo ties?bu jom?</entry>
-    <entry key="espd.crit.eu.title.child.labour">B?rnu darbs un citi cilv?ku tirdzniec?bas veidi</entry>
-    <entry key="espd.crit.eu.title.conflict.interest">Intere?u konflikts dal?bas iepirkuma proced?r? d??</entry>
-    <entry key="espd.crit.eu.title.conflict.interest.eo">Vai J?su organiz?cijai ir jebk?di intere?u konflikti t?s
-        dal?bas iepirkuma proced?r? d???
-    </entry>
+    <entry key="espd.part3.crit.eu.eo.bankrupt.title">Vai Jūsu organizācija ir bankrotējusi vai tai tiek piemērota maksātnespējas vai likvidācijas procedūra, vai tai ir mierizlīgums ar kreditoriem, vai tā ir kādā citā bankrotam līdzīgā situācijā, kas izriet no līdzīgas procedūras, kas paredzēta valsts tiesību aktos vai noteikumos?</entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.environmental">Saistību neizpilde vides tiesību jomās</entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.environmental.eo">Saistību neizpilde vides tiesību jomās</entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.labour">Saistību neizpilde darba tiesību jomā</entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.social">Saistību neizpilde sociālo tiesību jomā</entry>
+    <entry key="espd.crit.eu.title.child.labour">Bērnu darbs un citi cilvēku tirdzniecības veidi</entry>
+    <entry key="espd.crit.eu.title.conflict.interest">Interešu konflikts dalības iepirkuma procedūrā dēļ</entry>
+    <entry key="espd.crit.eu.title.conflict.interest.eo">Vai Jūsu organizācijai ir jebkādi interešu konflikti tās dalības iepirkuma procedūrā dēļ?</entry>
     <entry key="espd.crit.eu.title.corruption">Korupcija</entry>
-    <entry key="espd.crit.eu.title.early.termination">Priek?laic?ga izbeig?ana, zaud?jumu atl?dzin??ana vai citas
-        l?dz?gas sankcijas
-    </entry>
-    <entry key="espd.crit.eu.title.fraud">Kr?p?ana</entry>
-    <entry key="espd.crit.eu.title.grounds.criminal.conv">Dal?ba noziedz?g? organiz?cij?</entry>
-    <entry key="espd.crit.eu.title.guilty.misconduct">Atz??ana par vain?gu ar profesion?lo darb?bu saist?t? nopietn?
-        p?rk?pum?
-    </entry>
-    <entry key="espd.crit.eu.title.guilty.misconduct.eo">Vai J?su organiz?cija ir atz?ta par vain?gu k?d? ar
-        profesion?lo darb?bu saist?t? nopietn? p?rk?pum??
-    </entry>
-    <entry key="espd.crit.eu.title.guilty.misinterpretation">Atz??ana par vain?gu inform?cijas nopietn? sagroz??an?,
-        inform?cijas sl?p?an?, nesp?ja iesniegt vajadz?gos dokumentus un konfidenci?lu inform?ciju par ?o proced?ru
-    </entry>
-    <entry key="espd.crit.eu.title.insolvency">Maks?tnesp?ja</entry>
-    <entry key="espd.crit.eu.title.involvement">Tie?a vai netie?a dal?ba ??s iepirkuma proced?ras sagatavo?an?</entry>
-    <entry key="espd.crit.eu.title.involvement.eo">Vai J?su organiz?cija vai ar to saist?ts uz??mums ir konsult?jis
-        l?gumsl?dz?ju iest?di vai k? cit?di ir bijis iesaist?ts ??s iepirkuma proced?ras sagatavo?an??
-    </entry>
-    <entry key="espd.crit.eu.title.liquidator">Akt?vi, ko p?rvalda likvidators</entry>
-    <entry key="espd.crit.eu.title.money.laundering">Nelikum?gi ieg?tu l?dzek?u legaliz?cija vai teroristu finans??ana
-    </entry>
-    <entry key="espd.crit.eu.title.national.bankruptcy">Bankrotam l?dz?ga situ?cija, kas paredz?ta valsts ties?bu
-        aktos
-    </entry>
-    <entry key="espd.crit.eu.title.payment.social.security">Soci?l? nodro?in?juma iemaksas</entry>
-    <entry key="espd.crit.eu.title.payment.taxes">Nodok?u maks?jumi</entry>
-    <entry key="espd.crit.eu.title.purely.national">Tikai valsts ties?bu norm?s paredz?tie izsl?g?anas iemesli</entry>
-    <entry key="espd.crit.eu.title.suspended.business">P?rtraukta saimniecisk? darb?ba</entry>
-    <entry key="espd.crit.eu.title.terrorist">Teroristu nodar?jumi vai nodar?jumi, kas saist?ti ar teroristu darb?b?m
-    </entry>
-    <entry key="espd.part3.crit.eu.guilty.misconduct.eo.tooltip">Attiec?g? gad?jum? skat?t defin?cijas valsts ties?bu
-        aktos, attiec?gaj? pazi?ojum? vai iepirkuma proced?ras dokumentos.
-    </entry>
-    <entry key="espd.crit.explain.certificates.independent.environmental.description">Ja ?n??, l?dzu, paskaidrojiet,
-        k?p?c, un nor?diet, k?dus cita veida apliecin?jumus var iesniegt par vides vad?bas sist?m?m vai standartiem:
-    </entry>
-    <entry key="espd.part4.crit.explain.certificates.independent.quality.description">Ja ?n??, l?dzu, paskaidrojiet,
-        k?p?c, un nor?diet, k?dus cita veida apliecin?jumus var iesniegt par kvalit?tes nodro?in??anas sh?mu:
-    </entry>
-    <entry key="espd.part4.crit.explain.supply.contracts.quality.description">Ja ?n??, l?dzu, paskaidrojiet, k?p?c, un
-        nor?diet, k?dus cita veida apliecin?jumus var iesniegt:
-    </entry>
-    <entry key="espd.crit.information.available.electronically">Vai ?? inform?cija no ES dal?bvalsts datub?zes iest?d?m
-        ir pieejama bez maksas?
-    </entry>
-    <entry key="espd.crit.issuer">Lejupiel?d?t</entry>
-    <entry key="espd.crit.length.period.exclusion">Izsl?g?anas perioda ilgums, cikt?l tas ir tie?i noteikts spriedum?.
-    </entry>
+    <entry key="espd.crit.eu.title.early.termination">Priekšlaicīga izbeigšana, zaudējumu atlīdzināšana vai citas līdzīgas sankcijas</entry>
+    <entry key="espd.crit.eu.title.fraud">Krāpšana</entry>
+    <entry key="espd.crit.eu.title.grounds.criminal.conv">Dalība noziedzīgā organizācijā</entry>
+    <entry key="espd.crit.eu.title.guilty.misconduct">Atzīšana par vainīgu ar profesionālo darbību saistītā nopietnā pārkāpumā</entry>
+    <entry key="espd.crit.eu.title.guilty.misconduct.eo">Vai Jūsu organizācija ir atzīta par vainīgu kādā ar profesionālo darbību saistītā nopietnā pārkāpumā?</entry>
+    <entry key="espd.crit.eu.title.guilty.misinterpretation">Atzīšana par vainīgu informācijas nopietnā sagrozīšanā, informācijas slēpšanā, nespēja iesniegt vajadzīgos dokumentus un konfidenciālu informāciju par šo procedūru</entry>
+    <entry key="espd.crit.eu.title.insolvency">Maksātnespēja</entry>
+    <entry key="espd.crit.eu.title.involvement">Tieša vai netieša dalība šīs iepirkuma procedūras sagatavošanā</entry>
+    <entry key="espd.crit.eu.title.involvement.eo">Vai Jūsu organizācija vai ar to saistīts uzņēmums ir konsultējis līgumslēdzēju iestādi vai kā citādi ir bijis iesaistīts šīs iepirkuma procedūras sagatavošanā?</entry>
+    <entry key="espd.crit.eu.title.liquidator">Aktīvi, ko pārvalda likvidators</entry>
+    <entry key="espd.crit.eu.title.money.laundering">Nelikumīgi iegūtu līdzekļu legalizācija vai teroristu finansēšana</entry>
+    <entry key="espd.crit.eu.title.national.bankruptcy">Bankrotam līdzīga situācija, kas paredzēta valsts tiesību aktos</entry>
+    <entry key="espd.crit.eu.title.payment.social.security">Sociālā nodrošinājuma iemaksas</entry>
+    <entry key="espd.crit.eu.title.payment.taxes">Nodokļu maksājumi</entry>
+    <entry key="espd.crit.eu.title.purely.national">Tikai valsts tiesību normās paredzētie izslēgšanas iemesli</entry>
+    <entry key="espd.crit.eu.title.suspended.business">Pārtraukta saimnieciskā darbība</entry>
+    <entry key="espd.crit.eu.title.terrorist">Teroristu nodarījumi vai nodarījumi, kas saistīti ar teroristu darbībām</entry>
+    <entry key="espd.part3.crit.eu.guilty.misconduct.eo.tooltip">Attiecīgā gadījumā skatīt definīcijas valsts tiesību aktos, attiecīgajā paziņojumā vai iepirkuma procedūras dokumentos.</entry>
+    <entry key="espd.crit.explain.certificates.independent.environmental.description">Ja “nē”, lūdzu, paskaidrojiet, kāpēc, un norādiet, kādus cita veida apliecinājumus var iesniegt par vides vadības sistēmām vai standartiem:</entry>
+    <entry key="espd.part4.crit.explain.certificates.independent.quality.description">Ja “nē”, lūdzu, paskaidrojiet, kāpēc, un norādiet, kādus cita veida apliecinājumus var iesniegt par kvalitātes nodrošināšanas shēmu:</entry>
+    <entry key="espd.part4.crit.explain.supply.contracts.quality.description">Ja “nē”, lūdzu, paskaidrojiet, kāpēc, un norādiet, kādus cita veida apliecinājumus var iesniegt:</entry>
+    <entry key="espd.crit.information.available.electronically">Vai šī informācija no ES dalībvalsts datubāzes iestādēm ir pieejama bez maksas?</entry>
+    <entry key="espd.crit.issuer">Lejupielādēt</entry>
+    <entry key="espd.crit.length.period.exclusion">Izslēgšanas perioda ilgums, ciktāl tas ir tieši noteikts spriedumā.</entry>
     <entry key="espd.crit.number">Skaits</entry>
-    <entry key="espd.crit.number.of.years">Vid?jais apgroz?jums</entry>
-    <entry key="espd.crit.other.than.judicial.or.administrative.decision">Vai ?is pien?kumu p?rk?pums tika noteikts cit?
-        veid?, nevis ar tiesas vai administrat?vu l?mumu?
-    </entry>
-    <entry key="espd.crit.please.describe.them">L?dzu, aprakstiet tos</entry>
-    <entry key="espd.crit.please.specify">L?dzu, preciz?jiet!</entry>
-    <entry key="espd.crit.ratio">Attiec?ba</entry>
+    <entry key="espd.crit.number.of.years">Vidējais apgrozījums</entry>
+    <entry key="espd.crit.other.than.judicial.or.administrative.decision">Vai šis pienākumu pārkāpums tika noteikts citā veidā, nevis ar tiesas vai administratīvu lēmumu?</entry>
+    <entry key="espd.crit.please.describe.them">Lūdzu, aprakstiet tos</entry>
+    <entry key="espd.crit.please.specify">Lūdzu, precizējiet!</entry>
+    <entry key="espd.crit.ratio">Attiecība</entry>
     <entry key="espd.crit.reason">Iemesls</entry>
-    <entry key="espd.crit.reasons.nevertheless.contract">Nor?diet iemeslus, kas, neraugoties uz to, ?auj izpild?t
-        l?gumsaist?bas. ?? inform?cija j?sniedz, ja ekonomikas dal?bnieka izsl?g?ana ?aj? gad?jum? ir oblig?ta saska??
-        ar piem?rojamajiem valsts ties?bu aktiem bez iesp?jas piem?rot atrunu gad?jum?, ja ekonomikas dal?bnieks tom?r
-        ir sp?j?gs izpild?t l?gumsaist?bas.
-    </entry>
-    <entry key="espd.crit.recipients">Sa??m?ji</entry>
-    <entry key="espd.part4.crit.selection.ca.declares.that">Attiec?b? uz atlases krit?rijiem l?gumsl?dz?ja iest?de liek
-        ekonomikas dal?bniekam apliecin?t, ka
-    </entry>
-    <entry key="espd.part4.crit.selection.ca.economic.article">Direkt?vas 2014/24/ES 58. panta 3. punkt? noteikti ??di
-        atlases krit?riji
-    </entry>
-    <entry key="espd.part4.crit.selection.declares.that.tooltip">Ekonomikas dal?bnieks ?o aili aizpilda tikai tad, ja
-        l?gumsl?dz?ja iest?de vai l?gumsl?dz?js subjekts attiec?gaj? pazi?ojum? vai ??d? pazi?ojum? min?tajos iepirkuma
-        proced?ras dokumentos ir nor?d?jis, ka ekonomikas dal?bnieks var aizpild?t tikai ?o IV da?as punktu, neaizpildot
-        IV da?as A, B, C vai D ieda?as
-    </entry>
-    <entry key="espd.crit.selection.economic.average.yearly.turnover.description">Ekonomikas dal?bnieka vid?jais gada
-        apgroz?jums finan?u gados, par kuriem ir piepras?ta inform?cija attiec?gaj? pazi?ojum?, iepirkuma proced?ras
-        dokumentos vai ESPD, ir ??ds:
-    </entry>
-    <entry key="espd.crit.selection.economic.average.yearly.turnover.main">Vid?jais gada apgroz?jums</entry>
-    <entry key="espd.crit.selection.economic.financial.ratio.description">Attiec?b? uz finansi?lo attiec?bu (piem?ram,
-        attiec?bu starp akt?viem un pas?viem), kas min?ta attiec?gaj? pazi?ojum?, iepirkuma proced?ras dokumentos vai
-        ESPD, ekonomikas dal?bnieks apliecina, ka piepras?t?s attiec?bas faktisk?s v?rt?bas ir ??das:
-    </entry>
-    <entry key="espd.crit.selection.economic.financial.ratio.main">Finansi?l? attiec?ba</entry>
-    <entry key="espd.crit.selection.economic.financial.standing.article.tooltip">Ekonomikas dal?bnieks inform?ciju
-        sniedz tikai tad, ja l?gumsl?dz?ja iest?de vai l?gumsl?dz?js subjekts ir noteicis attiec?go atlases krit?riju
-        attiec?gaj? pazi?ojum? vai ??d? pazi?ojum? min?tajos iepirkuma proced?ras dokumentos.
-    </entry>
-    <entry key="espd.crit.selection.economic.general.yearly.turnover.description">Ekonomikas dal?bnieka visp?r?jais gada
-        apgroz?jums finan?u gados, par kuriem ir piepras?ta inform?cija attiec?gaj? pazi?ojum?, iepirkuma proced?ras
-        dokumentos vai ESPD, ir ??ds:
-    </entry>
-    <entry key="espd.crit.selection.economic.general.yearly.turnover.main">Visp?r?jais gada apgroz?jums</entry>
-    <entry key="espd.crit.selection.economic.other.financial.requirements.description">Attiec?b? uz cit?m ekonomiskaj?m
-        vai finan?u pras?b?m (ja t?das ir noteiktas), kas var b?t nor?d?tas attiec?gaj? pazi?ojum? vai iepirkuma
-        proced?ras dokumentos, ekonomikas dal?bnieks apliecina, ka:
-    </entry>
-    <entry key="espd.crit.selection.economic.other.financial.requirements.main">Citas ekonomisk?s vai finan?u pras?bas
-    </entry>
-    <entry key="espd.crit.selection.economic.professional.risk.insurance.description">Apdro?in?t? summa ekonomikas
-        dal?bnieka profesion?l? riska apdro?in??anas l?gum? ir ??da:
-    </entry>
-    <entry key="espd.crit.selection.economic.professional.risk.insurance.main">Profesion?l? riska apdro?in??ana</entry>
-    <entry key="espd.crit.selection.economic.setup.eo.description">Ja inform?cija par apgroz?jumu (visp?r?jo vai
-        konkr?to) nav pieejama par visu piepras?to laika periodu, l?dzu, nor?diet datumu, kur? ekonomikas dal?bnieks
-        tika izveidots vai uzs?ka darb?bu:
-    </entry>
-    <entry key="espd.crit.selection.economic.setup.eo.main">Ekonomikas dal?bnieka izveide</entry>
-    <entry key="espd.crit.selection.economic.specific.average.turnover.description">Ekonomikas dal?bnieka noteiktais
-        vid?jais gada apgroz?jums l?gum? paredz?taj? uz??m?jdarb?bas jom? finan?u gados, par kuriem ir piepras?ta
-        inform?cija attiec?gaj? pazi?ojum?, iepirkuma proced?ras dokumentos vai ESPD, ir ??ds:
-    </entry>
-    <entry key="espd.crit.selection.economic.specific.average.turnover.main">Noteiktais vid?jais gada apgroz?jums
-    </entry>
-    <entry key="espd.crit.selection.economic.specific.yearly.turnover.description">Ekonomikas dal?bnieka noteiktais gada
-        apgroz?jums l?gum? paredz?taj? uz??m?jdarb?bas jom? finan?u gados, par kuriem ir piepras?ta inform?cija
-        attiec?gaj? pazi?ojum?, iepirkuma proced?ras dokumentos vai ESPD, ir ??ds:
-    </entry>
-    <entry key="espd.crit.selection.economic.specific.yearly.turnover.main">Noteiktais gada apgroz?jums</entry>
-    <entry key="espd.part4.crit.selection.eo.declares.that">Attiec?b? uz atlases krit?rijiem ekonomikas dal?bnieks
-        apliecina, ka
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.declares.that.tooltip">Ekonomikas dal?bnieks ?o aili aizpilda tikai tad, ja
-        l?gumsl?dz?ja iest?de vai l?gumsl?dz?js subjekts attiec?gaj? pazi?ojum? vai ??d? pazi?ojum? min?tajos iepirkuma
-        proced?ras dokumentos ir nor?d?jis, ka ekonomikas dal?bnieks var aizpild?t tikai ?o IV da?as punktu, neaizpildot
-        IV da?as A, B, C vai D ieda?as
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.economic.article">Direkt?vas 2014/24/ES 58. panta 3. punkt? noteikti ??di
-        atlases krit?riji
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.economic.article.tooltip">Ekonomikas dal?bnieks inform?ciju sniedz tikai
-        tad, ja l?gumsl?dz?ja iest?de vai l?gumsl?dz?js subjekts ir noteicis attiec?go atlases krit?riju attiec?gaj?
-        pazi?ojum? vai ??d? pazi?ojum? min?tajos iepirkuma proced?ras dokumentos.
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.economic.enrolement.description">Re?istr?cija attiec?gajos profesion?lajos
-        re?istros vai komercre?istros dal?bvalst?, kur? ekonomikas dal?bnieks veic uz??m?jdarb?bu
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.economic.enrolement.main">Re?istr?cija profesion?lajos re?istros vai
-        komercre?istros
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.economic.service.contracts.description">Vai ekonomikas dal?bniekam
-        vajadz?ga ?pa?a at?auja vai j?b?t k?das konkr?tas organiz?cijas dal?bniekam, lai tas var?tu sniegt attiec?go
-        pakalpojumu sav? uz??m?jdarb?bas valst??
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.economic.service.contracts.main">Attiec?b? uz pakalpojumu l?gumiem:
-        Vajadz?ga at?auja vai dal?ba
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.satisfies.all.criteria">Ekonomikas dal?bnieks atbilst visiem noteiktajiem
-        atlases krit?riji
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.suitability.article">Direkt?vas 2014/24/ES 58. panta 2. punkt? noteikti
-        ??di atlases krit?riji
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.suitability.article.tooltip">Ekonomikas dal?bnieks inform?ciju sniedz tikai
-        tad, ja l?gumsl?dz?ja iest?de vai l?gumsl?dz?js subjekts ir noteicis attiec?go atlases krit?riju attiec?gaj?
-        pazi?ojum? vai ??d? pazi?ojum? min?tajos iepirkuma proced?ras dokumentos.
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.suitability.enrolment.description">Re?istr?cija attiec?gajos
-        profesion?lajos re?istros vai komercre?istros dal?bvalst?, kur? ekonomikas dal?bnieks veic uz??m?jdarb?bu
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.suitability.enrolment.main">Re?istr?cija profesion?lajos re?istros vai
-        komercre?istros
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.suitability.service.contracts.description">Vai ekonomikas dal?bniekam
-        vajadz?ga ?pa?a at?auja vai j?b?t k?das konkr?tas organiz?cijas dal?bniekam, lai tas var?tu sniegt attiec?go
-        pakalpojumu sav? uz??m?jdarb?bas valst??
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.suitability.service.contracts.main">Attiec?b? uz pakalpojumu l?gumiem:
-        Vajadz?ga at?auja vai dal?ba
-    </entry>
-    <entry key="espd.part4.crit.selection.quality.assurance.article">Direkt?vas 2014/24/ES 62. panta 2. punkt? noteikti
-        ??di atlases krit?riji
-    </entry>
-    <entry key="espd.part4.crit.selection.quality.assurance.tooltip">Ekonomikas dal?bnieks inform?ciju sniedz tikai tad,
-        ja l?gumsl?dz?ja iest?de vai l?gumsl?dz?js subjekts ir noteicis attiec?go atlases krit?riju attiec?gaj?
-        pazi?ojum? vai ??d? pazi?ojum? min?tajos iepirkuma proced?ras dokumentos.
-    </entry>
-    <entry key="espd.crit.selection.quality.certificate.independent.bodies.environmental.description">Vai ekonomikas
-        dal?bnieks sp?s uzr?d?t sertifik?tus, kurus izsniegu?as neatkar?gas strukt?ras un kas apliecina, ka ekonomikas
-        dal?bnieks atbilst nepiecie?amaj?m vides vad?bas sist?m?m vai standartiem?
-    </entry>
-    <entry key="espd.crit.selection.quality.certificate.independent.bodies.environmental.main">Neatkar?gu strukt?ru
-        izsniegti sertifik?ti par vides vad?bas sist?m?m vai standartiem
-    </entry>
-    <entry key="espd.crit.selection.quality.certificate.independent.bodies.quality.description">Vai ekonomikas
-        dal?bnieks sp?s uzr?d?t sertifik?tus, kurus izsniegu?as neatkar?gas strukt?ras un kas apliecina, ka ekonomikas
-        dal?bnieks atbilst nepiecie?amajiem kvalit?tes nodro?in??anas standartiem, tostarp attiec?b? uz vides pieejam?bu
-        person?m ar invalidit?ti?
-    </entry>
-    <entry key="espd.crit.selection.quality.certificate.independent.bodies.quality.main">Neatkar?gu strukt?ru izsniegti
-        sertifik?ti par kvalit?tes nodro?in??anas standartiem
-    </entry>
-    <entry key="espd.part4.crit.selection.satisfies.all.criteria">Ekonomikas dal?bnieks atbilst visiem noteiktajiem
-        atlases krit?rijus, kas nor?d?ti attiec?gaj? pazi?ojum? vai ?aj? pazi?ojum? min?tajos iepirkuma proced?ras
-        dokumentos.
-    </entry>
-    <entry key="espd.part4.crit.selection.suitability.article">Direkt?vas 2014/24/ES 58. panta 2. punkt? noteikti ??di
-        atlases krit?riji
-    </entry>
-    <entry key="espd.part4.crit.selection.suitability.article.tooltip">Ekonomikas dal?bniekam ?? aile j?aizpilda tikai
-        tad, ja l?gumsl?dz?ja iest?de vai l?gumsl?dz?js subjekts atbilsto?? pazi?ojum? vai ??d? pazi?ojum? min?tajos
-        iepirkuma proced?ras dokumentos ir nor?d?jis, ka ekonomikas dal?bnieks var aizpild?t tikai IV da?as ?: ieda?u,
-        neaizpildot p?r?j?s IV da?as ieda?as:
-    </entry>
-    <entry key="espd.crit.selection.suitability.enrolment.professional.register.description">Re?istr?cija k?d? no
-        attiec?gajiem profesion?lajiem re?istriem dal?bvalst?, kur? ekonomikas dal?bnieks veic uz??m?jdarb?bu saska?? ar
-        Direkt?vas 2014/24/ES XI pielikumu; ekonomikas dal?bniekiem no noteikt?m dal?bvalst?m var b?t pien?kums iev?rot
-        citas min?taj? pielikum? noteikt?s pras?bas.
-    </entry>
-    <entry key="espd.crit.selection.suitability.enrolment.professional.register.main">Re?istr?cija attiec?g?
-        profesion?laj? re?istr?
-    </entry>
-    <entry key="espd.crit.selection.suitability.enrolment.trade.register.description">Re?istr?cija k?d? no
-        komercre?istriem dal?bvalst?, kur? ekonomikas dal?bnieks veic uz??m?jdarb?bu saska?? ar Direkt?vas 2014/24/ES XI
-        pielikumu; ekonomikas dal?bniekiem no noteikt?m dal?bvalst?m var b?t pien?kums iev?rot citas min?taj? pielikum?
-        noteikt?s pras?bas.
-    </entry>
-    <entry key="espd.crit.selection.suitability.enrolment.trade.register.main">Re?istr?cija komercre?istr?</entry>
-    <entry key="espd.crit.selection.suitability.service.contracts.auth.description">Vai ekonomikas dal?bniekam vajadz?ga
-        ?pa?a at?auja, lai tas var?tu sniegt attiec?go pakalpojumu sav? uz??m?jdarb?bas valst??
-    </entry>
-    <entry key="espd.crit.selection.suitability.service.contracts.auth.main">Attiec?b? uz pakalpojumu l?gumiem:
-        vajadz?ga ?pa?a at?auja
-    </entry>
-    <entry key="espd.crit.selection.suitability.service.contracts.membership.description">Vai ekonomikas dal?bniekam
-        j?b?t k?das organiz?cijas dal?bniekam, lai var?tu sniegt attiec?go pakalpojumu sav? uz??m?jdarb?bas valst??
-    </entry>
-    <entry key="espd.crit.selection.suitability.service.contracts.membership.main">Attiec?b? uz pakalpojumu l?gumiem:
-        nepiecie?ama dal?ba noteikt? organiz?cij?
-    </entry>
-    <entry key="espd.crit.selection.technical.allowance.of.checks.description">Attiec?b? uz pieg?d?jamajiem sare???tiem
-        izstr?d?jumiem vai sniedzamiem sare???tiem pakalpojumiem, vai ? iz??muma k?rt? ? attiec?b? uz izstr?d?jumiem vai
-        pakalpojumiem, kas paredz?ti ?pa?am m?r?im: Vai ekonomikas dal?bnieks ?aus veikt p?rbaudes attiec?b? uz
-        ekonomikas dal?bnieka ra?o?anas jaud?m vai tehnisko jaudu un vajadz?bas gad?jum? ar? attiec?b? uz tam
-        pieejamajiem m?c?bu un p?tniec?bas l?dzek?iem, k? ar? attiec?b? uz kvalit?tes kontroles pas?kumiem? P?rbaudi
-        veic l?gumsl?dz?ja iest?de vai gad?jum?, ja l?gumsl?dz?ja iest?de piekr?t, p?rbaudi t?s v?rd? var veikt t?s
-        valsts kompetent? ofici?l? iest?de, kur? pieg?d?t?js vai pakalpojumu sniedz?js ir re?istr?ts.
-    </entry>
-    <entry key="espd.crit.selection.technical.allowance.of.checks.main">At?auja veikt p?rbaudes</entry>
-    <entry key="espd.crit.selection.technical.average.annual.manpower.description">Ekonomikas dal?bnieka vid?jais gada
-        laik? nodarbin?to personu skaits p?d?jo tr?s gadu laik? bija ??ds:
-    </entry>
-    <entry key="espd.crit.selection.technical.average.annual.manpower.main">Vid?jais gada laik? nodarbin?to skaits:
-    </entry>
-    <entry key="espd.crit.selection.technical.educational.professional.qualifications.description">Pakalpojuma
-        sniedz?jam vai pa?am darbuz??m?jam un/vai (atkar?b? no attiec?gaj? pazi?ojum? vai iepirkuma proced?ras
-        dokumentos noteiktaj?m pras?b?m) t? vad?bas person?lam ir ??di izgl?t?bu vai profesion?lo kvalifik?ciju
-        apliecino?i dokumenti.
-    </entry>
-    <entry key="espd.crit.selection.technical.educational.professional.qualifications.main">Izgl?t?bu vai profesion?lo
-        kvalifik?ciju apliecino?i dokumenti
-    </entry>
-    <entry key="espd.crit.selection.technical.environment.management.features.description">Ekonomikas dal?bnieks l?guma
-        izpildes laik? sp?s ?stenot ??dus vides p?rvald?bas pas?kumus:
-    </entry>
-    <entry key="espd.crit.selection.technical.environment.management.features.main">Vides vad?bas pas?kumi</entry>
-    <entry key="espd.crit.selection.technical.number.managerial.staff.description">Ekonomikas dal?bnieka vad?bas
-        person?la skaits vismaz p?d?jo tr?s gadu laik? bija ??ds:
-    </entry>
-    <entry key="espd.crit.selection.technical.number.managerial.staff.main">Vad?bas person?la skaits</entry>
-    <entry key="espd.part4.crit.selection.technical.professional.ability.article">Direkt?vas 2014/24/ES 58. panta 4.
-        punkt? noteikti ??di atlases krit?riji
-    </entry>
-    <entry key="espd.part4.crit.selection.technical.professional.ability.article.tooltip">Ekonomikas dal?bnieks
-        inform?ciju sniedz tikai tad, ja l?gumsl?dz?ja iest?de vai l?gumsl?dz?js subjekts ir noteicis attiec?go atlases
-        krit?riju attiec?gaj? pazi?ojum? vai ??d? pazi?ojum? min?tajos iepirkuma proced?ras dokumentos.
-    </entry>
-    <entry key="espd.crit.selection.technical.service.contracts.performance.services.description">Tikai attiec?b?
-        publiskiem pakalpojumu l?gumiem: P?rskata period? ekonomikas dal?bnieks ir sniedzis ??dus galvenos noteikta
-        veida pakalpojumus: L?gumsl?dz?jas iest?des var piepras?t inform?ciju par laikposmu l?dz tr?s gadiem un atz?t
-        pieredzi, kas ieg?ta vair?k nek? tr?s gadu laikposm?.
-    </entry>
-    <entry key="espd.crit.selection.technical.service.contracts.performance.services.main">Attiec?b? uz pakalpojumu
-        l?gumiem: noteikta veida pakalpojumu snieg?ana
-    </entry>
-    <entry key="espd.crit.selection.technical.study.research.facilities.description">Tas izmanto ??das m?c?bu un
-        p?tniec?bas iek?rtas:
-    </entry>
-    <entry key="espd.crit.selection.technical.study.research.facilities.main">M?c?bu un p?tniec?bas iek?rtas</entry>
-    <entry key="espd.crit.selection.technical.subcontracting.proportion.description">Ekonomikas dal?bnieks pl?no, ka,
-        iesp?jams, ??da l?guma da?a (t. i., procentu?l? da?a) tiks nodota apak?uz??m?jam. L?dzu, ?emiet v?r?, ka
-        gad?jum?, ja ekonomikas dal?bnieks ir nol?mis da?u l?guma izpildes nodot apak?uz??m?jam un pa?aujas uz
-        apak?uz??m?ja sp?ju izpild?t ??du da?u, tad attiec?b? uz ??diem apak?uz??m?jiem ir j?aizpilda atsevi??s ESPD,
-        skat?t iepriek? II da?as C ieda?u.
-    </entry>
-    <entry key="espd.crit.selection.technical.subcontracting.proportion.main">Apak?uz??muma l?guma da?a</entry>
-    <entry key="espd.crit.selection.technical.supply.chain.management.description">Ekonomikas dal?bnieks l?guma izpildes
-        laik? sp?s izmantot ??das pieg?des ??des p?rvald?bas un izseko?anas sist?mas:
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.chain.management.main">Pieg?des ??des p?rvald?ba</entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.certificate.quality.description">Vai ekonomikas
-        dal?bnieks var iesniegt nepiecie?amos sertifik?tus, kurus sagatavoju?i ofici?li kvalit?tes kontroles instit?ti
-        vai a?ent?ras, kuru kompetence ir visp?ratz?ta, un kas apliecina produkcijas atbilst?bu, to skaidri
-        identific?jot ar atsauc?m uz attiec?gaj? pazi?ojum? vai iepirkuma proced?ras dokumentos nor?d?taj?m tehniskaj?m
-        specifik?cij?m vai standartiem?
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.certificate.quality.main">Attiec?b? uz pieg?des l?gumiem:
-        kvalit?tes kontroles instit?tu izsniegti sertifik?ti
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.performance.deliveries.description">Tikai attiec?b? uz
-        publiskiem pieg?des l?gumiem: P?rskata period? ekonomikas dal?bnieks ir veicis ??das galven?s nor?d?t? veida
-        pieg?des: L?gumsl?dz?jas iest?des var piepras?t inform?ciju par laikposmu l?dz tr?s gadiem un atz?t pieredzi,
-        kas ieg?ta vair?k nek? tr?s gadu laikposm?.
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.performance.deliveries.main">Attiec?b? uz pieg?des
-        l?gumiem: noteikta veida pieg?des izpilde
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.with.ca.description">Attiec?b? uz publiskajiem pieg?des
-        l?gumiem: Ekonomikas dal?bnieks pieg?d?s vajadz?gos pieg?d?jamo izstr?d?jumu paraugus, aprakstus vai
-        fotogr?fijas un attiec?g? gad?jum? iesniegs autentiskumu apstiprino?us sertifik?tus.
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.with.ca.main">Attiec?b? uz pieg?des l?gumiem: paraugi,
-        apraksti vai fotogr?fijas un to autentiskumu apliecino?ie sertifik?ti
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.without.ca.description">Attiec?b? uz publiskajiem
-        pieg?des l?gumiem: Ekonomikas dal?bnieks pieg?d?s vajadz?gos pieg?d?jamo izstr?d?jumu paraugus, aprakstus vai
-        fotogr?fijas, kuriem nav j?pievieno autentiskumu apstiprino?i sertifik?ti.
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.without.ca.main">Attiec?b? uz pieg?des l?gumiem: paraugi,
-        apraksti vai fotogr?fijas bez sertifik?tiem, kas apliecina to autentiskumu
-    </entry>
-    <entry key="espd.crit.selection.technical.technical.facilities.measures.description">Ekonomikas dal?bnieks izmanto
-        ??das tehnisk?s iek?rtas un pas?kumus kvalit?tes nodro?in??anai, k? ar? ??das m?c?bu un p?tniec?bas iek?rtas:
-    </entry>
-    <entry key="espd.crit.selection.technical.technical.facilities.measures.main">Tehnisk?s iek?rtas un pas?kumi
-        kvalit?tes nodro?in??anai
-    </entry>
-    <entry key="espd.crit.selection.technical.technicians.technical.bodies.description">Ekonomikas dal?bnieks var
-        piesaist?t ??du tehnisko person?lu vai tehnisk?s strukt?ras, jo ?pa?i t?s, kas atbild par kvalit?tes kontroli.
-        Attiec?b? uz tehnisko person?lu vai tehniskaj?m strukt?r?m, kuras tie?i neietilpst ekonomikas dal?bnieka
-        uz??mum?, ta?u uz kuru sp?j?m ekonomikas dal?bnieks pa?aujas saska?? ar II da?as C ieda?? izkl?st?to, j?aizpilda
-        atsevi??a ESPD veidlapa.
-    </entry>
-    <entry key="espd.crit.selection.technical.technicians.technical.bodies.main">Tehniskais person?ls vai tehnisk?s
-        strukt?ras kvalit?tes kontroles veik?anai
-    </entry>
-    <entry key="espd.crit.selection.technical.tools.plant.description">L?guma izpildei b?s pieejami ??di l?dzek?i,
-        iek?rtas vai tehniskais apr?kojums:
-    </entry>
-    <entry key="espd.crit.selection.technical.tools.plant.main">L?dzek?i, iek?rtas vai tehniskais apr?kojums</entry>
-    <entry key="espd.crit.selection.technical.work.contracts.performance.works.description">Tikai attiec?b? uz
-        publiskiem b?vdarbu l?gumiem: P?rskata period? ekonomikas dal?bnieks ir veicis ??dus noteikta veida b?vdarbus.
-        L?gumsl?dz?jas iest?des var piepras?t inform?ciju par laikposmu l?dz pieciem gadiem un atz?t pieredzi, kas
-        ieg?ta vair?k nek? piecu gadu laikposm?.
-    </entry>
-    <entry key="espd.crit.selection.technical.work.contracts.performance.works.main">Attiec?b? uz b?vdarbu l?gumiem:
-        noteikta veida b?vdarbu izpilde
-    </entry>
-    <entry key="espd.crit.selection.technical.work.contracts.technicians.description">Publisku b?vdarbu l?gumu gad?jum?
-        ekonomikas dal?bnieks sp?s piesaist?t ??du tehnisko person?lu vai tehnisk?s strukt?ras b?vdarbu izpildei:
-    </entry>
-    <entry key="espd.crit.selection.technical.work.contracts.technicians.main">Attiec?b? uz b?vdarbu l?gumiem:
-        tehniskais person?ls vai tehnisk?s strukt?ras b?vdarbu izpildei
-    </entry>
+    <entry key="espd.crit.reasons.nevertheless.contract">Norādiet iemeslus, kas, neraugoties uz to, ļauj izpildīt līgumsaistības. Šī informācija jāsniedz, ja ekonomikas dalībnieka izslēgšana šajā gadījumā ir obligāta saskaņā ar piemērojamajiem valsts tiesību aktiem bez iespējas piemērot atrunu gadījumā, ja ekonomikas dalībnieks tomēr ir spējīgs izpildīt līgumsaistības.</entry>
+    <entry key="espd.crit.recipients">Saņēmēji</entry>
+    <entry key="espd.part4.crit.selection.ca.declares.that">Attiecībā uz atlases kritērijiem līgumslēdzēja iestāde liek ekonomikas dalībniekam apliecināt, ka</entry>
+    <entry key="espd.part4.crit.selection.ca.economic.article">Direktīvas 2014/24/ES 58. panta 3. punktā noteikti šādi atlases kritēriji</entry>
+    <entry key="espd.part4.crit.selection.declares.that.tooltip">Ekonomikas dalībnieks šo aili aizpilda tikai tad, ja līgumslēdzēja iestāde vai līgumslēdzējs subjekts attiecīgajā paziņojumā vai šādā paziņojumā minētajos iepirkuma procedūras dokumentos ir norādījis, ka ekonomikas dalībnieks var aizpildīt tikai šo IV daļas punktu, neaizpildot IV daļas A, B, C vai D iedaļas</entry>
+    <entry key="espd.crit.selection.economic.average.yearly.turnover.description">Ekonomikas dalībnieka vidējais gada apgrozījums finanšu gados, par kuriem ir pieprasīta informācija attiecīgajā paziņojumā, iepirkuma procedūras dokumentos vai ESPD, ir šāds:</entry>
+    <entry key="espd.crit.selection.economic.average.yearly.turnover.main">Vidējais gada apgrozījums</entry>
+    <entry key="espd.crit.selection.economic.financial.ratio.description">Attiecībā uz finansiālo attiecību (piemēram, attiecību starp aktīviem un pasīviem), kas minēta attiecīgajā paziņojumā, iepirkuma procedūras dokumentos vai ESPD, ekonomikas dalībnieks apliecina, ka pieprasītās attiecības faktiskās vērtības ir šādas:</entry>
+    <entry key="espd.crit.selection.economic.financial.ratio.main">Finansiālā attiecība</entry>
+    <entry key="espd.crit.selection.economic.financial.standing.article.tooltip">Ekonomikas dalībnieks informāciju sniedz tikai tad, ja līgumslēdzēja iestāde vai līgumslēdzējs subjekts ir noteicis attiecīgo atlases kritēriju attiecīgajā paziņojumā vai šādā paziņojumā minētajos iepirkuma procedūras dokumentos.</entry>
+    <entry key="espd.crit.selection.economic.general.yearly.turnover.description">Ekonomikas dalībnieka vispārējais gada apgrozījums finanšu gados, par kuriem ir pieprasīta informācija attiecīgajā paziņojumā, iepirkuma procedūras dokumentos vai ESPD, ir šāds:</entry>
+    <entry key="espd.crit.selection.economic.general.yearly.turnover.main">Vispārējais gada apgrozījums</entry>
+    <entry key="espd.crit.selection.economic.other.financial.requirements.description">Attiecībā uz citām ekonomiskajām vai finanšu prasībām (ja tādas ir noteiktas), kas var būt norādītas attiecīgajā paziņojumā vai iepirkuma procedūras dokumentos, ekonomikas dalībnieks apliecina, ka:</entry>
+    <entry key="espd.crit.selection.economic.other.financial.requirements.main">Citas ekonomiskās vai finanšu prasības</entry>
+    <entry key="espd.crit.selection.economic.professional.risk.insurance.description">Apdrošinātā summa ekonomikas dalībnieka profesionālā riska apdrošināšanas līgumā ir šāda:</entry>
+    <entry key="espd.crit.selection.economic.professional.risk.insurance.main">Profesionālā riska apdrošināšana</entry>
+    <entry key="espd.crit.selection.economic.setup.eo.description">Ja informācija par apgrozījumu (vispārējo vai konkrēto) nav pieejama par visu pieprasīto laika periodu, lūdzu, norādiet datumu, kurā ekonomikas dalībnieks tika izveidots vai uzsāka darbību:</entry>
+    <entry key="espd.crit.selection.economic.setup.eo.main">Ekonomikas dalībnieka izveide</entry>
+    <entry key="espd.crit.selection.economic.specific.average.turnover.description">Ekonomikas dalībnieka noteiktais vidējais gada apgrozījums līgumā paredzētajā uzņēmējdarbības jomā finanšu gados, par kuriem ir pieprasīta informācija attiecīgajā paziņojumā, iepirkuma procedūras dokumentos vai ESPD, ir šāds:</entry>
+    <entry key="espd.crit.selection.economic.specific.average.turnover.main">Noteiktais vidējais gada apgrozījums</entry>
+    <entry key="espd.crit.selection.economic.specific.yearly.turnover.description">Ekonomikas dalībnieka noteiktais gada apgrozījums līgumā paredzētajā uzņēmējdarbības jomā finanšu gados, par kuriem ir pieprasīta informācija attiecīgajā paziņojumā, iepirkuma procedūras dokumentos vai ESPD, ir šāds:</entry>
+    <entry key="espd.crit.selection.economic.specific.yearly.turnover.main">Noteiktais gada apgrozījums</entry>
+    <entry key="espd.part4.crit.selection.eo.declares.that">Attiecībā uz atlases kritērijiem ekonomikas dalībnieks apliecina, ka</entry>
+    <entry key="espd.part4.crit.selection.eo.declares.that.tooltip">Ekonomikas dalībnieks šo aili aizpilda tikai tad, ja līgumslēdzēja iestāde vai līgumslēdzējs subjekts attiecīgajā paziņojumā vai šādā paziņojumā minētajos iepirkuma procedūras dokumentos ir norādījis, ka ekonomikas dalībnieks var aizpildīt tikai šo IV daļas punktu, neaizpildot IV daļas A, B, C vai D iedaļas</entry>
+    <entry key="espd.part4.crit.selection.eo.economic.article">Direktīvas 2014/24/ES 58. panta 3. punktā noteikti šādi atlases kritēriji</entry>
+    <entry key="espd.part4.crit.selection.eo.economic.article.tooltip">Ekonomikas dalībnieks informāciju sniedz tikai tad, ja līgumslēdzēja iestāde vai līgumslēdzējs subjekts ir noteicis attiecīgo atlases kritēriju attiecīgajā paziņojumā vai šādā paziņojumā minētajos iepirkuma procedūras dokumentos.</entry>
+    <entry key="espd.part4.crit.selection.eo.economic.enrolement.description">Reģistrācija attiecīgajos profesionālajos reģistros vai komercreģistros dalībvalstī, kurā ekonomikas dalībnieks veic uzņēmējdarbību</entry>
+    <entry key="espd.part4.crit.selection.eo.economic.enrolement.main">Reģistrācija profesionālajos reģistros vai komercreģistros</entry>
+    <entry key="espd.part4.crit.selection.eo.economic.service.contracts.description">Vai ekonomikas dalībniekam vajadzīga īpaša atļauja vai jābūt kādas konkrētas organizācijas dalībniekam, lai tas varētu sniegt attiecīgo pakalpojumu savā uzņēmējdarbības valstī?</entry>
+    <entry key="espd.part4.crit.selection.eo.economic.service.contracts.main">Attiecībā uz pakalpojumu līgumiem: Vajadzīga atļauja vai dalība</entry>
+    <entry key="espd.part4.crit.selection.eo.satisfies.all.criteria">Ekonomikas dalībnieks atbilst visiem noteiktajiem atlases kritēriji</entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.article">Direktīvas 2014/24/ES 58. panta 2. punktā noteikti šādi atlases kritēriji</entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.article.tooltip">Ekonomikas dalībnieks informāciju sniedz tikai tad, ja līgumslēdzēja iestāde vai līgumslēdzējs subjekts ir noteicis attiecīgo atlases kritēriju attiecīgajā paziņojumā vai šādā paziņojumā minētajos iepirkuma procedūras dokumentos.</entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.enrolment.description">Reģistrācija attiecīgajos profesionālajos reģistros vai komercreģistros dalībvalstī, kurā ekonomikas dalībnieks veic uzņēmējdarbību</entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.enrolment.main">Reģistrācija profesionālajos reģistros vai komercreģistros</entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.service.contracts.description">Vai ekonomikas dalībniekam vajadzīga īpaša atļauja vai jābūt kādas konkrētas organizācijas dalībniekam, lai tas varētu sniegt attiecīgo pakalpojumu savā uzņēmējdarbības valstī?</entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.service.contracts.main">Attiecībā uz pakalpojumu līgumiem: Vajadzīga atļauja vai dalība</entry>
+    <entry key="espd.part4.crit.selection.quality.assurance.article">Direktīvas 2014/24/ES 62. panta 2. punktā noteikti šādi atlases kritēriji</entry>
+    <entry key="espd.part4.crit.selection.quality.assurance.tooltip">Ekonomikas dalībnieks informāciju sniedz tikai tad, ja līgumslēdzēja iestāde vai līgumslēdzējs subjekts ir noteicis attiecīgo atlases kritēriju attiecīgajā paziņojumā vai šādā paziņojumā minētajos iepirkuma procedūras dokumentos.</entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.environmental.description">Vai ekonomikas dalībnieks spēs uzrādīt sertifikātus, kurus izsniegušas neatkarīgas struktūras un kas apliecina, ka ekonomikas dalībnieks atbilst nepieciešamajām vides vadības sistēmām vai standartiem?</entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.environmental.main">Neatkarīgu struktūru izsniegti sertifikāti par vides vadības sistēmām vai standartiem</entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.quality.description">Vai ekonomikas dalībnieks spēs uzrādīt sertifikātus, kurus izsniegušas neatkarīgas struktūras un kas apliecina, ka ekonomikas dalībnieks atbilst nepieciešamajiem kvalitātes nodrošināšanas standartiem, tostarp attiecībā uz vides pieejamību personām ar invaliditāti?</entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.quality.main">Neatkarīgu struktūru izsniegti sertifikāti par kvalitātes nodrošināšanas standartiem</entry>
+    <entry key="espd.part4.crit.selection.satisfies.all.criteria">Ekonomikas dalībnieks atbilst visiem noteiktajiem atlases kritērijus, kas norādīti attiecīgajā paziņojumā vai šajā paziņojumā minētajos iepirkuma procedūras dokumentos.</entry>
+    <entry key="espd.part4.crit.selection.suitability.article">Direktīvas 2014/24/ES 58. panta 2. punktā noteikti šādi atlases kritēriji</entry>
+    <entry key="espd.part4.crit.selection.suitability.article.tooltip">Ekonomikas dalībniekam šī aile jāaizpilda tikai tad, ja līgumslēdzēja iestāde vai līgumslēdzējs subjekts atbilstošā paziņojumā vai šādā paziņojumā minētajos iepirkuma procedūras dokumentos ir norādījis, ka ekonomikas dalībnieks var aizpildīt tikai IV daļas ɑ: iedaļu, neaizpildot pārējās IV daļas iedaļas:</entry>
+    <entry key="espd.crit.selection.suitability.enrolment.professional.register.description">Reģistrācija kādā no attiecīgajiem profesionālajiem reģistriem dalībvalstī, kurā ekonomikas dalībnieks veic uzņēmējdarbību saskaņā ar Direktīvas 2014/24/ES XI pielikumu; ekonomikas dalībniekiem no noteiktām dalībvalstīm var būt pienākums ievērot citas minētajā pielikumā noteiktās prasības.</entry>
+    <entry key="espd.crit.selection.suitability.enrolment.professional.register.main">Reģistrācija attiecīgā profesionālajā reģistrā</entry>
+    <entry key="espd.crit.selection.suitability.enrolment.trade.register.description">Reģistrācija kādā no komercreģistriem dalībvalstī, kurā ekonomikas dalībnieks veic uzņēmējdarbību saskaņā ar Direktīvas 2014/24/ES XI pielikumu; ekonomikas dalībniekiem no noteiktām dalībvalstīm var būt pienākums ievērot citas minētajā pielikumā noteiktās prasības.</entry>
+    <entry key="espd.crit.selection.suitability.enrolment.trade.register.main">Reģistrācija komercreģistrā</entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.auth.description">Vai ekonomikas dalībniekam vajadzīga īpaša atļauja, lai tas varētu sniegt attiecīgo pakalpojumu savā uzņēmējdarbības valstī?</entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.auth.main">Attiecībā uz pakalpojumu līgumiem: vajadzīga īpaša atļauja</entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.membership.description">Vai ekonomikas dalībniekam jābūt kādas organizācijas dalībniekam, lai varētu sniegt attiecīgo pakalpojumu savā uzņēmējdarbības valstī?</entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.membership.main">Attiecībā uz pakalpojumu līgumiem: nepieciešama dalība noteiktā organizācijā</entry>
+    <entry key="espd.crit.selection.technical.allowance.of.checks.description">Attiecībā uz piegādājamajiem sarežģītiem izstrādājumiem vai sniedzamiem sarežģītiem pakalpojumiem, vai – izņēmuma kārtā – attiecībā uz izstrādājumiem vai pakalpojumiem, kas paredzēti īpašam mērķim: Vai ekonomikas dalībnieks ļaus veikt pārbaudes attiecībā uz ekonomikas dalībnieka ražošanas jaudām vai tehnisko jaudu un vajadzības gadījumā arī attiecībā uz tam pieejamajiem mācību un pētniecības līdzekļiem, kā arī attiecībā uz kvalitātes kontroles pasākumiem? Pārbaudi veic līgumslēdzēja iestāde vai gadījumā, ja līgumslēdzēja iestāde piekrīt, pārbaudi tās vārdā var veikt tās valsts kompetentā oficiālā iestāde, kurā piegādātājs vai pakalpojumu sniedzējs ir reģistrēts.</entry>
+    <entry key="espd.crit.selection.technical.allowance.of.checks.main">Atļauja veikt pārbaudes</entry>
+    <entry key="espd.crit.selection.technical.average.annual.manpower.description">Ekonomikas dalībnieka vidējais gada laikā nodarbināto personu skaits pēdējo trīs gadu laikā bija šāds:</entry>
+    <entry key="espd.crit.selection.technical.average.annual.manpower.main">Vidējais gada laikā nodarbināto skaits:</entry>
+    <entry key="espd.crit.selection.technical.educational.professional.qualifications.description">Pakalpojuma sniedzējam vai pašam darbuzņēmējam un/vai (atkarībā no attiecīgajā paziņojumā vai iepirkuma procedūras dokumentos noteiktajām prasībām) tā vadības personālam ir šādi izglītību vai profesionālo kvalifikāciju apliecinoši dokumenti.</entry>
+    <entry key="espd.crit.selection.technical.educational.professional.qualifications.main">Izglītību vai profesionālo kvalifikāciju apliecinoši dokumenti</entry>
+    <entry key="espd.crit.selection.technical.environment.management.features.description">Ekonomikas dalībnieks līguma izpildes laikā spēs īstenot šādus vides pārvaldības pasākumus:</entry>
+    <entry key="espd.crit.selection.technical.environment.management.features.main">Vides vadības pasākumi</entry>
+    <entry key="espd.crit.selection.technical.number.managerial.staff.description">Ekonomikas dalībnieka vadības personāla skaits vismaz pēdējo trīs gadu laikā bija šāds:</entry>
+    <entry key="espd.crit.selection.technical.number.managerial.staff.main">Vadības personāla skaits</entry>
+    <entry key="espd.part4.crit.selection.technical.professional.ability.article">Direktīvas 2014/24/ES 58. panta 4. punktā noteikti šādi atlases kritēriji</entry>
+    <entry key="espd.part4.crit.selection.technical.professional.ability.article.tooltip">Ekonomikas dalībnieks informāciju sniedz tikai tad, ja līgumslēdzēja iestāde vai līgumslēdzējs subjekts ir noteicis attiecīgo atlases kritēriju attiecīgajā paziņojumā vai šādā paziņojumā minētajos iepirkuma procedūras dokumentos.</entry>
+    <entry key="espd.crit.selection.technical.service.contracts.performance.services.description">Tikai attiecībā publiskiem pakalpojumu līgumiem: Pārskata periodā ekonomikas dalībnieks ir sniedzis šādus galvenos noteikta veida pakalpojumus: Līgumslēdzējas iestādes var pieprasīt informāciju par laikposmu līdz trīs gadiem un atzīt pieredzi, kas iegūta vairāk nekā trīs gadu laikposmā.</entry>
+    <entry key="espd.crit.selection.technical.service.contracts.performance.services.main">Attiecībā uz pakalpojumu līgumiem: noteikta veida pakalpojumu sniegšana</entry>
+    <entry key="espd.crit.selection.technical.study.research.facilities.description">Tas izmanto šādas mācību un pētniecības iekārtas:</entry>
+    <entry key="espd.crit.selection.technical.study.research.facilities.main">Mācību un pētniecības iekārtas</entry>
+    <entry key="espd.crit.selection.technical.subcontracting.proportion.description">Ekonomikas dalībnieks plāno, ka, iespējams, šāda līguma daļa (t. i., procentuālā daļa) tiks nodota apakšuzņēmējam. Lūdzu, ņemiet vērā, ka gadījumā, ja ekonomikas dalībnieks ir nolēmis daļu līguma izpildes nodot apakšuzņēmējam un paļaujas uz apakšuzņēmēja spēju izpildīt šādu daļu, tad attiecībā uz šādiem apakšuzņēmējiem ir jāaizpilda atsevišķs ESPD, skatīt iepriekš II daļas C iedaļu.</entry>
+    <entry key="espd.crit.selection.technical.subcontracting.proportion.main">Apakšuzņēmuma līguma daļa</entry>
+    <entry key="espd.crit.selection.technical.supply.chain.management.description">Ekonomikas dalībnieks līguma izpildes laikā spēs izmantot šādas piegādes ķēdes pārvaldības un izsekošanas sistēmas:</entry>
+    <entry key="espd.crit.selection.technical.supply.chain.management.main">Piegādes ķēdes pārvaldība</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.certificate.quality.description">Vai ekonomikas dalībnieks var iesniegt nepieciešamos sertifikātus, kurus sagatavojuši oficiāli kvalitātes kontroles institūti vai aģentūras, kuru kompetence ir vispāratzīta, un kas apliecina produkcijas atbilstību, to skaidri identificējot ar atsaucēm uz attiecīgajā paziņojumā vai iepirkuma procedūras dokumentos norādītajām tehniskajām specifikācijām vai standartiem?</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.certificate.quality.main">Attiecībā uz piegādes līgumiem: kvalitātes kontroles institūtu izsniegti sertifikāti</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.performance.deliveries.description">Tikai attiecībā uz publiskiem piegādes līgumiem: Pārskata periodā ekonomikas dalībnieks ir veicis šādas galvenās norādītā veida piegādes: Līgumslēdzējas iestādes var pieprasīt informāciju par laikposmu līdz trīs gadiem un atzīt pieredzi, kas iegūta vairāk nekā trīs gadu laikposmā.</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.performance.deliveries.main">Attiecībā uz piegādes līgumiem: noteikta veida piegādes izpilde</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.with.ca.description">Attiecībā uz publiskajiem piegādes līgumiem: Ekonomikas dalībnieks piegādās vajadzīgos piegādājamo izstrādājumu paraugus, aprakstus vai fotogrāfijas un attiecīgā gadījumā iesniegs autentiskumu apstiprinošus sertifikātus.</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.with.ca.main">Attiecībā uz piegādes līgumiem: paraugi, apraksti vai fotogrāfijas un to autentiskumu apliecinošie sertifikāti</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.without.ca.description">Attiecībā uz publiskajiem piegādes līgumiem: Ekonomikas dalībnieks piegādās vajadzīgos piegādājamo izstrādājumu paraugus, aprakstus vai fotogrāfijas, kuriem nav jāpievieno autentiskumu apstiprinoši sertifikāti.</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.without.ca.main">Attiecībā uz piegādes līgumiem: paraugi, apraksti vai fotogrāfijas bez sertifikātiem, kas apliecina to autentiskumu</entry>
+    <entry key="espd.crit.selection.technical.technical.facilities.measures.description">Ekonomikas dalībnieks izmanto šādas tehniskās iekārtas un pasākumus kvalitātes nodrošināšanai, kā arī šādas mācību un pētniecības iekārtas:</entry>
+    <entry key="espd.crit.selection.technical.technical.facilities.measures.main">Tehniskās iekārtas un pasākumi kvalitātes nodrošināšanai</entry>
+    <entry key="espd.crit.selection.technical.technicians.technical.bodies.description">Ekonomikas dalībnieks var piesaistīt šādu tehnisko personālu vai tehniskās struktūras, jo īpaši tās, kas atbild par kvalitātes kontroli. Attiecībā uz tehnisko personālu vai tehniskajām struktūrām, kuras tieši neietilpst ekonomikas dalībnieka uzņēmumā, taču uz kuru spējām ekonomikas dalībnieks paļaujas saskaņā ar II daļas C iedaļā izklāstīto, jāaizpilda atsevišķa ESPD veidlapa.</entry>
+    <entry key="espd.crit.selection.technical.technicians.technical.bodies.main">Tehniskais personāls vai tehniskās struktūras kvalitātes kontroles veikšanai</entry>
+    <entry key="espd.crit.selection.technical.tools.plant.description">Līguma izpildei būs pieejami šādi līdzekļi, iekārtas vai tehniskais aprīkojums:</entry>
+    <entry key="espd.crit.selection.technical.tools.plant.main">Līdzekļi, iekārtas vai tehniskais aprīkojums</entry>
+    <entry key="espd.crit.selection.technical.work.contracts.performance.works.description">Tikai attiecībā uz publiskiem būvdarbu līgumiem: Pārskata periodā ekonomikas dalībnieks ir veicis šādus noteikta veida būvdarbus. Līgumslēdzējas iestādes var pieprasīt informāciju par laikposmu līdz pieciem gadiem un atzīt pieredzi, kas iegūta vairāk nekā piecu gadu laikposmā.</entry>
+    <entry key="espd.crit.selection.technical.work.contracts.performance.works.main">Attiecībā uz būvdarbu līgumiem: noteikta veida būvdarbu izpilde</entry>
+    <entry key="espd.crit.selection.technical.work.contracts.technicians.description">Publisku būvdarbu līgumu gadījumā ekonomikas dalībnieks spēs piesaistīt šādu tehnisko personālu vai tehniskās struktūras būvdarbu izpildei:</entry>
+    <entry key="espd.crit.selection.technical.work.contracts.technicians.main">Attiecībā uz būvdarbu līgumiem: tehniskais personāls vai tehniskās struktūras būvdarbu izpildei</entry>
     <entry key="espd.crit.start.date">Beigu datums</entry>
-    <entry key="espd.crit.taken.self.cleaning.measures">Vai esat veiku?i pas?kumus, kas apliecina J?su uzticam?bu
-        (?pa?att?r??an?s?)
-    </entry>
-    <entry key="espd.crit.taxes.eo.fulfilled.obligations">Vai ekonomikas dal?bnieks ir izpild?jis savas saist?bas,
-        samaks?jot vai nosl?dzot saisto?u vieno?anos, lai samaks?tu attiec?gos nodok?us vai attiec?gos soci?l?
-        nodro?in?juma iemaksu maks?jumus, tostarp attiec?gos gad?jumos jebk?dus uzr??in?tos procentus vai soda naudu?
-    </entry>
-    <entry key="espd.crit.taxes.length.period.of.exclusion">Sod?m?bas gad?jum?, l?dzu, nor?diet izsl?g?anas laikposma
-        termi?u, ja vien tas ir tie?i noteikts l?mum?
-    </entry>
-    <entry key="espd.crit.taxes.means.description">L?dzu, aprakstiet ?o veidu</entry>
-    <entry key="espd.part3.crit.grounds.criminal.conv.top.title">A. Ar krimin?li noties?jo?u spriedumu saist?ti
-        iemesli
-    </entry>
-    <entry key="espd.part3.crit.top.grounds.payment.taxes.title">B. Ar nodok?u vai soci?l? nodro?in?juma iemaksu
-        maks?jumiem saist?ti iemesli
-    </entry>
-    <entry key="espd.part3.crit.insolvency.conflicts.top.title">C. Ar maks?tnesp?ju, intere?u konfliktiem vai
-        profesion?l?s darb?bas p?rk?pumiem saist?ti iemesli
-    </entry>
-    <entry key="espd.part3.crit.purely.national.top.title">D. Tikai valsts ties?bu norm?s paredz?tie izsl?g?anas
-        iemesli
-    </entry>
+    <entry key="espd.crit.taken.self.cleaning.measures">Vai esat veikuši pasākumus, kas apliecina Jūsu uzticamību (“pašattīrīšanās”)</entry>
+    <entry key="espd.crit.taxes.eo.fulfilled.obligations">Vai ekonomikas dalībnieks ir izpildījis savas saistības, samaksājot vai noslēdzot saistošu vienošanos, lai samaksātu attiecīgos nodokļus vai attiecīgos sociālā nodrošinājuma iemaksu maksājumus, tostarp attiecīgos gadījumos jebkādus uzrēķinātos procentus vai soda naudu?</entry>
+    <entry key="espd.crit.taxes.length.period.of.exclusion">Sodāmības gadījumā, lūdzu, norādiet izslēgšanas laikposma termiņu, ja vien tas ir tieši noteikts lēmumā</entry>
+    <entry key="espd.crit.taxes.means.description">Lūdzu, aprakstiet šo veidu</entry>
+    <entry key="espd.part3.crit.grounds.criminal.conv.top.title">A. Ar krimināli notiesājošu spriedumu saistīti iemesli</entry>
+    <entry key="espd.part3.crit.top.grounds.payment.taxes.title">B. Ar nodokļu vai sociālā nodrošinājuma iemaksu maksājumiem saistīti iemesli</entry>
+    <entry key="espd.part3.crit.insolvency.conflicts.top.title">C. Ar maksātnespēju, interešu konfliktiem vai profesionālās darbības pārkāpumiem saistīti iemesli</entry>
+    <entry key="espd.part3.crit.purely.national.top.title">D. Tikai valsts tiesību normās paredzētie izslēgšanas iemesli</entry>
     <entry key="espd.crit.url">URL</entry>
-    <entry key="espd.crit.who.convicted">Kuram piem?rota sod?m?ba</entry>
+    <entry key="espd.crit.who.convicted">Kuram piemērota sodāmība</entry>
     <entry key="espd.crit.year">Gads</entry>
-    <entry key="espd.crit.your.answer">J?su atbilde?</entry>
-    <entry key="espd.gui.download.as">Lejupiel?d?t</entry>
-    <entry key="espd.gui.download.pdf">PDF form?ts</entry>
-    <entry key="espd.gui.download.xml">XML form?ts</entry>
-    <entry key="espd.gui.download.zip">Abi form?ti</entry>
+    <entry key="espd.crit.your.answer">Jūsu atbilde?</entry>
+    <entry key="espd.gui.download.as">Lejupielādēt</entry>
+    <entry key="espd.gui.download.pdf">PDF formāts</entry>
+    <entry key="espd.gui.download.xml">XML formāts</entry>
+    <entry key="espd.gui.download.zip">Abi formāti</entry>
     <entry key="espd.gui.ec">Eiropas Komisija</entry>
     <entry key="espd.ecertis.404">ECERTIS datu nav</entry>
-    <entry key="espd.ecertis.issued">Izdev?jiest?de</entry>
+    <entry key="espd.ecertis.issued">Izdevējiestāde</entry>
     <entry key="espd.ecertis.language">Valoda</entry>
-    <entry key="espd.ecertis.loading">Iel?d? no ECERTIS...</entry>
-    <entry key="espd.ecertis.no.evidences">Pier?d?jumu nav</entry>
-    <entry key="espd.gui.error.ted.notice.not.supported">Aug?upiel?d?t? datne ir pazi?ojums, nevis ESPD, t?p?c to nevar
-        izmantot ?aj? pakalpojum?
-    </entry>
-    <entry key="espd.gui.espd">Aug?upiel?d?to dokumentu nevar pareizi nolas?t. Vai tas ir der?gs ESPD piepras?jums vai
-        atbilde?
-    </entry>
-    <entry key="espd.gui.espd.upload.error">Aug?upiel?d?to dokumentu nevar pareizi nolas?t. Vai tas ir der?gs ESPD
-        piepras?jums?
-    </entry>
-    <entry key="espd.gui.espd.upload.request.error">Aug?upiel?d?to dokumentu nevar pareizi nolas?t. Vai t? ir der?ga
-        ESPD atbilde?
-    </entry>
-    <entry key="espd.gui.espd.upload.response.error">Eiropas vienotais iepirkuma proced?ras dokuments</entry>
+    <entry key="espd.ecertis.loading">Ielādē no ECERTIS...</entry>
+    <entry key="espd.ecertis.no.evidences">Pierādījumu nav</entry>
+    <entry key="espd.gui.error.ted.notice.not.supported">Augšupielādētā datne ir paziņojums, nevis ESPD, tāpēc to nevar izmantot šajā pakalpojumā</entry>
+    <entry key="espd.gui.espd">Augšupielādēto dokumentu nevar pareizi nolasīt. Vai tas ir derīgs ESPD pieprasījums vai atbilde?</entry>
+    <entry key="espd.gui.espd.upload.error">Augšupielādēto dokumentu nevar pareizi nolasīt. Vai tas ir derīgs ESPD pieprasījums?</entry>
+    <entry key="espd.gui.espd.upload.request.error">Augšupielādēto dokumentu nevar pareizi nolasīt. Vai tā ir derīga ESPD atbilde?</entry>
+    <entry key="espd.gui.espd.upload.response.error">Eiropas vienotais iepirkuma procedūras dokuments</entry>
     <entry key="espd.gui.europa">EUROPA</entry>
-    <entry key="espd.gui.expire.reminder.message">Gandr?z stundu neesat veicis nevienu darb?bu ESPD pakalpojum?.&lt;p&gt;
-        Saglab?jiet e-ESPD veikt?s izmai?as, lai nodro?in?tu, ka dati netiek zaud?ti.&lt;p&gt;J?s jebkur? laik? varat import?t
-        (atk?rtoti izmantot) savu e-ESPD, lai turpin?tu darbu.
-    </entry>
-    <entry key="espd.gui.export">Saglab?t</entry>
-    <entry key="espd.gui.faq.leaflet">Bie?i uzdoto jaut?jumu lapa</entry>
-    <entry key="espd.gui.faq.text.answers">Lai iepaz?tos ar atbild?m uz bie??k uzdotajiem jaut?jumiem par ESPD,
-        iel?kojieties
-    </entry>
-    <entry key="espd.gui.faq.text.more.info">Lai sa?emtu s?k?ku inform?ciju par ESPD,</entry>
-    <entry key="espd.init.alert">
-        &lt;p&gt;Eiropas vienotais iepirkuma proced?ras dokuments (ESPD) ir pa?deklar?cija par uz??muma finansi?lo st?vokli,
-            sp?j?m un piem?rot?bu publisk? iepirkuma proced?rai. Tas ir pieejams vis?s ES valod?s un tiek izmantots par
-            s?kotn?ju pier?d?jumu, ka ir izpild?ti nosac?jumi, kas vajadz?gi publisk? iepirkuma proced?r?s vis? ES.
-            Pateicoties ESPD, pretendentiem vairs nav j?sniedz piln?gi dokument?ri pier?d?jumi un da??das veidlapas, kas
-            agr?k tika izmantotas ES iepirkum?, un tas iev?rojami vienk?r?o piek?uvi iesp?j?m piedal?ties p?rrobe?u
-            konkursos. No 2018. gada oktobra ESPD sagatavo tikai elektronisk? form?.
-        &lt;/p&gt;
-        &lt;p&gt;Eiropas Komisija pied?v? pirc?jiem, pretendentiem un cit?m ieinteres?taj?m person?m bezmaksas t?mek?a
-            pakalpojumu - aizpild?t ESPD elektroniski. Tie?saistes veidlapu var aizpild?t, izdruk?t un nos?t?t pirc?jam
-            kop? ar p?r?jo pied?v?jumu. Ja proced?ru veic elektroniski, ESPD var eksport?t, saglab?t un iesniegt
-            elektroniski. Iepriek??j? publisk? iepirkuma proced?r? izmantoto ESPD var atk?rtoti izmantot tikm?r, kam?r
-            ?? inform?cija ir pareiza. Pretendentus var izsl?gt no proced?ras vai sod?t, ja inform?cija ESPD ir b?tiski
-            sagroz?ta, noklus?ta vai par to nevar iesniegt apliecino?us dokumentus.
-        &lt;/p&gt;
-    </entry>
+    <entry key="espd.gui.expire.reminder.message">Gandrīz stundu neesat veicis nevienu darbību ESPD pakalpojumā.  Saglabājiet e-ESPD veiktās izmaiņas, lai nodrošinātu, ka dati netiek zaudēti.  Jūs jebkurā laikā varat importēt (atkārtoti izmantot) savu e-ESPD, lai turpinātu darbu.</entry>
+    <entry key="espd.gui.export">Saglabāt</entry>
+    <entry key="espd.gui.faq.leaflet">Bieži uzdoto jautājumu lapa</entry>
+    <entry key="espd.gui.faq.text.answers">Lai iepazītos ar atbildēm uz biežāk uzdotajiem jautājumiem par ESPD, ielūkojieties</entry>
+    <entry key="espd.gui.faq.text.more.info">Lai saņemtu sīkāku informāciju par ESPD,</entry>
+    <entry key="espd.init.alert">Eiropas vienotais iepirkuma procedūras dokuments (ESPD) ir pašdeklarācija par uzņēmuma finansiālo stāvokli, spējām un piemērotību publiskā iepirkuma procedūrai. Tas ir pieejams visās ES valodās un tiek izmantots par sākotnēju pierādījumu, ka ir izpildīti nosacījumi, kas vajadzīgi publiskā iepirkuma procedūrās visā ES. Pateicoties ESPD, pretendentiem vairs nav jāsniedz pilnīgi dokumentāri pierādījumi un dažādas veidlapas, kas agrāk tika izmantotas ES iepirkumā, un tas ievērojami vienkāršo piekļuvi iespējām piedalīties pārrobežu konkursos. No 2018. gada oktobra ESPD sagatavo tikai elektroniskā formā. Eiropas Komisija piedāvā pircējiem, pretendentiem un citām ieinteresētajām personām bezmaksas tīmekļa pakalpojumu - aizpildīt ESPD elektroniski. Tiešsaistes veidlapu var aizpildīt, izdrukāt un nosūtīt pircējam kopā ar pārējo piedāvājumu. Ja procedūru veic elektroniski, ESPD var eksportēt, saglabāt un iesniegt elektroniski. Iepriekšējā publiskā iepirkuma procedūrā izmantoto  ESPD var atkārtoti izmantot tikmēr, kamēr šī informācija ir pareiza. Pretendentus var izslēgt no procedūras vai sodīt, ja informācija ESPD ir būtiski sagrozīta, noklusēta vai par to nevar iesniegt apliecinošus dokumentus.</entry>
     <entry key="espd.init.create.espd">Izveidot jaunu ESPD</entry>
     <entry key="espd.init.create.response">Izveidot atbildi</entry>
-    <entry key="espd.init.header">Laipni l?dzam ESPD pakalpojum?!</entry>
-    <entry key="espd.init.i.am.ca">L?gumsl?dz?ja iest?de</entry>
-    <entry key="espd.init.i.am.ce">Esmu l?gumsl?dz?js</entry>
-    <entry key="espd.init.i.am.eop">Ekonomikas dal?bnieks</entry>
-    <entry key="espd.init.import.espd">Import?t ESPD</entry>
-    <entry key="espd.init.merge.espds">Sapl?din?t divus ESPD</entry>
-    <entry key="espd.init.reuse.espd">Atk?rtoti izmantot eso?o ESPD</entry>
-    <entry key="espd.init.review.espd">P?rskat?t ESPD</entry>
-    <entry key="espd.init.select.country">Izv?lieties valsti</entry>
-    <entry key="espd.init.ted.reception.id.placeholder">L?dzu, nor?diet sa?emt? pazi?ojuma numuru</entry>
-    <entry key="espd.init.upload.document">Aug?upiel?d?t dokumentu</entry>
-    <entry key="espd.init.upload.documents">Aug?upiel?d?t dokumentus</entry>
-    <entry key="espd.init.upload.request">L?dzu, iel?d?jiet ESPD piepras?jumu vai ESPD atbildi</entry>
-    <entry key="espd.init.upload.request.response">L?dzu, iel?d?jiet ESPD piepras?jumu no l?gumsl?dz?jas iest?des
-    </entry>
-    <entry key="espd.init.upload.response">L?dzu, iel?d?jiet vecu ESPD atbildi no Jums</entry>
-    <entry key="espd.init.what.you.do">Ko J?s v?laties dar?t?</entry>
-    <entry key="espd.init.where.are.you.from.ca">Kur j?su iest?de atrodas?</entry>
-    <entry key="espd.init.where.are.you.from.eo">Kur j?su uz??mums atrodas?</entry>
-    <entry key="espd.init.who.are.you">Kas j?s esat?</entry>
-    <entry key="espd.gui.footer.last.update">P?d?j? atjaunin??ana:</entry>
+    <entry key="espd.init.header">Laipni lūdzam ESPD pakalpojumā!</entry>
+    <entry key="espd.init.i.am.ca">Līgumslēdzēja iestāde</entry>
+    <entry key="espd.init.i.am.ce">Esmu līgumslēdzējs</entry>
+    <entry key="espd.init.i.am.eop">Ekonomikas dalībnieks</entry>
+    <entry key="espd.init.import.espd">Importēt ESPD</entry>
+    <entry key="espd.init.merge.espds">Saplūdināt divus ESPD</entry>
+    <entry key="espd.init.reuse.espd">Atkārtoti izmantot esošo ESPD</entry>
+    <entry key="espd.init.review.espd">Pārskatīt ESPD</entry>
+    <entry key="espd.init.select.country">Izvēlieties valsti</entry>
+    <entry key="espd.init.ted.reception.id.placeholder">Lūdzu, norādiet saņemtā paziņojuma numuru</entry>
+    <entry key="espd.init.upload.document">Augšupielādēt dokumentu</entry>
+    <entry key="espd.init.upload.documents">Augšupielādēt dokumentus</entry>
+    <entry key="espd.init.upload.request">Lūdzu, ielādējiet ESPD pieprasījumu vai ESPD atbildi</entry>
+    <entry key="espd.init.upload.request.response">Lūdzu, ielādējiet ESPD pieprasījumu no līgumslēdzējas iestādes</entry>
+    <entry key="espd.init.upload.response">Lūdzu, ielādējiet vecu ESPD atbildi no Jums</entry>
+    <entry key="espd.init.what.you.do">Ko Jūs vēlaties darīt?</entry>
+    <entry key="espd.init.where.are.you.from.ca">Kur jūsu iestāde atrodas?</entry>
+    <entry key="espd.init.where.are.you.from.eo">Kur jūsu uzņēmums atrodas?</entry>
+    <entry key="espd.init.who.are.you">Kas jūs esat?</entry>
+    <entry key="espd.gui.footer.last.update">Pēdējā atjaunināšana:</entry>
     <entry key="espd.gui.grow">GROW</entry>
-    <entry key="espd.ecertis.information.for.country">Inform?cija [kam] {0} e-Certis re?istr?</entry>
-    <entry key="espd.gui.legal.notice">Juridisks pazi?ojums</entry>
-    <entry key="espd.ecertis.less.information">Maz?k inform?cijas</entry>
-    <entry key="espd.ecertis.more.information">Vair?k inform?cijas</entry>
-    <entry key="espd.gui.next">T?l?k</entry>
-    <entry key="espd.gui.no">N?</entry>
+    <entry key="espd.ecertis.information.for.country">Informācija [kam] {0} e-Certis reģistrā</entry>
+    <entry key="espd.gui.legal.notice">Juridisks paziņojums</entry>
+    <entry key="espd.ecertis.less.information">Mazāk informācijas</entry>
+    <entry key="espd.ecertis.more.information">Vairāk informācijas</entry>
+    <entry key="espd.gui.next">Tālāk</entry>
+    <entry key="espd.gui.no">Nē</entry>
     <entry key="espd.gui.not.applicable">Neattiecas</entry>
     <entry key="espd.gui.place">Vieta</entry>
-    <entry key="espd.gui.previous">Atpaka?</entry>
-    <entry key="espd.gui.print">P?rskats</entry>
-    <entry key="espd.gui.progress.exclusion">Izsl?g?ana</entry>
+    <entry key="espd.gui.previous">Atpakaļ</entry>
+    <entry key="espd.gui.print">Pārskats</entry>
+    <entry key="espd.gui.progress.exclusion">Izslēgšana</entry>
     <entry key="espd.gui.progress.finish">Pabeigt</entry>
-    <entry key="espd.gui.progress.procedure">Proced?ra</entry>
+    <entry key="espd.gui.progress.procedure">Procedūra</entry>
     <entry key="espd.gui.progress.selection">Atlase</entry>
-    <entry key="espd.gui.progress.start">S?kums</entry>
-    <entry key="espd.gui.question.to.use.alpha">Vai v?laties izmantot atlases krit?rijus no A l?dz D?</entry>
-    <entry key="espd.gui.report.appliction.issue">Par jaut?jumiem saist?b? ar ESPD piem?ro?anu l?dzu sazin?ties ar
-    </entry>
-    <entry key="espd.gui.report.security.incident">Par dro??bas incidentu l?dzu sazin?ties ar Eiropas Komisiju,
-        izmantojot
-    </entry>
-    <entry key="espd.gui.report.security.incident.title">Zi?ot par inform?cijas dro??bas incidentu</entry>
-    <entry key="espd.gui.role.ca">Loma: L?gumsl?dz?ja iest?de (CA)</entry>
-    <entry key="espd.gui.role.eo">Loma: Ekonomikas dal?bnieks (EO)</entry>
-    <entry key="espd.gui.search">Mekl?t</entry>
+    <entry key="espd.gui.progress.start">Sākums</entry>
+    <entry key="espd.gui.question.to.use.alpha">Vai vēlaties izmantot atlases kritērijus no A līdz D?</entry>
+    <entry key="espd.gui.report.appliction.issue">Par jautājumiem saistībā ar ESPD piemērošanu lūdzu sazināties ar</entry>
+    <entry key="espd.gui.report.security.incident">Par drošības incidentu lūdzu sazināties ar Eiropas Komisiju, izmantojot</entry>
+    <entry key="espd.gui.report.security.incident.title">Ziņot par informācijas drošības incidentu</entry>
+    <entry key="espd.gui.role.ca">Loma: Līgumslēdzēja iestāde (CA)</entry>
+    <entry key="espd.gui.role.eo">Loma: Ekonomikas dalībnieks (EO)</entry>
+    <entry key="espd.gui.search">Meklēt</entry>
     <entry key="espd.gui.signature">Paraksts</entry>
-    <entry key="espd.gui.tools">R?ki</entry>
-    <entry key="espd.init.ca.can.create.espd.tooltip">L?gumsl?dz?ja iest?de var izveidot ESPD no jauna. ?aj? gad?jum?
-        l?gumsl?dz?ja iest?de aizpilda ESPD veidlapu, nor?dot visu attiec?go inform?ciju.
-    </entry>
-    <entry key="espd.init.ca.can.import.espd.tooltip">Ja l?gumsl?dz?ja iest?de iepriek? jau ir izmantojusi ESPD
-        pakalpojumu cit? iepirkuma proced?r?, t? var import?t lok?laj? t?kl? saglab?to ESPD. ?aj? gad?jum? ESPD nav
-        j?aizpilda no jauna, tom?r atsevi??i dati ir j?atjaunina, ?emot v?r? pa?reiz?jo iepirkuma proced?ru.
-    </entry>
-    <entry key="espd.init.ca.ref.buyer.tooltip">Termins ?l?gumsl?dz?ja iest?de? attiecas uz pirc?ju.</entry>
-    <entry key="espd.init.ce.ref.buyer.tooltip">Termins ?l?gumsl?dz?js? ?eit attiecas uz pirc?ju, kas darbojas
-        ?densapg?des, ener??tikas, transporta vai pasta pakalpojumu nozar?. L?gumsl?dz?j?m iest?d?m, kas ar? darbojas
-        iepriek?min?taj?s nozar?s, j?nor?da ?L?gumsl?dz?ja iest?de?.
-    </entry>
-    <entry key="espd.init.eo.can.reuse.espd.tooltip">Ekonomikas dal?bnieks var atk?rtoti izmantot inform?ciju, kas
-        sniegta ESPD, kur? jau ir izmantots k?d? no iepriek??j?m iepirkuma proced?r?m (iepriek??jo ESPD). Izmantojot ?o
-        ESPD pakalpojumu, iepriek??jais ESPD tiks apvienots ar jauno veidlapu, ko l?gumsl?dz?ja iest?de sagatavojusi ?ai
-        iepirkuma proced?rai.
-    </entry>
-    <entry key="espd.init.eo.ref.suppl.tooltip">Termins ?ekonomikas dal?bnieks? attiecas uz pieg?d?t?ju/pretendentu.
-    </entry>
-    <entry key="espd.init.espd.used.both.ca.eo.tooltip">ESPD pakalpojumu var izmantot l?gumsl?dz?jas iest?des un
-        ekonomikas dal?bnieki. L?dzu, izv?lieties iesp?ju, kura atbilst J?su profilam ?aj? publisk? iepirkuma proced?r?.
-    </entry>
+    <entry key="espd.gui.tools">Rīki</entry>
+    <entry key="espd.init.ca.can.create.espd.tooltip">Līgumslēdzēja iestāde var izveidot ESPD no jauna. Šajā gadījumā līgumslēdzēja iestāde aizpilda ESPD veidlapu, norādot visu attiecīgo informāciju.</entry>
+    <entry key="espd.init.ca.can.import.espd.tooltip">Ja līgumslēdzēja iestāde iepriekš jau ir izmantojusi ESPD pakalpojumu citā iepirkuma procedūrā, tā var importēt lokālajā tīklā saglabāto ESPD. Šajā gadījumā ESPD nav jāaizpilda no jauna, tomēr atsevišķi dati ir jāatjaunina, ņemot vērā pašreizējo iepirkuma procedūru.</entry>
+    <entry key="espd.init.ca.ref.buyer.tooltip">Termins “līgumslēdzēja iestāde” attiecas uz pircēju.</entry>
+    <entry key="espd.init.ce.ref.buyer.tooltip"> Termins “līgumslēdzējs” šeit attiecas uz pircēju, kas darbojas ūdensapgādes, enerģētikas, transporta vai pasta pakalpojumu nozarē. Līgumslēdzējām iestādēm, kas arī darbojas iepriekšminētajās nozarēs, jānorāda “Līgumslēdzēja iestāde”.</entry>
+    <entry key="espd.init.eo.can.reuse.espd.tooltip">Ekonomikas dalībnieks var atkārtoti izmantot informāciju, kas sniegta ESPD, kurš jau ir izmantots kādā no iepriekšējām iepirkuma procedūrām (iepriekšējo ESPD). Izmantojot šo ESPD pakalpojumu, iepriekšējais ESPD tiks apvienots ar jauno veidlapu, ko līgumslēdzēja iestāde sagatavojusi šai iepirkuma procedūrai.</entry>
+    <entry key="espd.init.eo.ref.suppl.tooltip">Termins “ekonomikas dalībnieks” attiecas uz piegādātāju/pretendentu.</entry>
+    <entry key="espd.init.espd.used.both.ca.eo.tooltip">ESPD pakalpojumu var izmantot līgumslēdzējas iestādes un ekonomikas dalībnieki. Lūdzu, izvēlieties iespēju, kura atbilst Jūsu profilam šajā publiskā iepirkuma procedūrā.</entry>
     <entry key="espd.init.filter.create.response.tooltip">Izveidot jaunu ESPD atbildi</entry>
-    <entry key="espd.init.filter.eo.can.import.espd.tooltip">Ekonomikas dal?bnieks var import?t ESPD dokumentu, ko
-        iepriek? aizpild?jusi l?gumsl?dz?ja iest?de attiec?b? uz ?o iepirkuma proced?ru un kas public?ts ar pazi?ojumu
-        par konkursu.
-    </entry>
-    <entry key="espd.init.filter.eo.merge.espds.tooltip">The ESPD service will merge the 'old' ESPD with the new form
-        prepared by the contracting authority for this procurement procedure.
-    </entry>
-    <entry key="espd.init.overview.received.espds.tooltip">Izmantojot ?o funkciju, ieg?st tabulu ar p?rskatu par
-        atbild?m, kuras ietvertas visos ESPD un kuras sniegu?i pretendenti attiec?b? uz konkr?to iepirkuma proced?ru.
-    </entry>
-    <entry key="espd.init.review.espd.tooltip">L?gumsl?dz?ja iest?de var p?rbaud?t/p?rskat?t elektronisko ESPD, ko
-        iesniedzis ekonomikas dal?bnieks.
-    </entry>
-    <entry key="espd.init.ted.reception.id.tooltip">Kad pazi?ojums b?s iesniegts public??anai, l?gumsl?dz?ja iest?de
-        sa?ems e-v?stuli no Publik?ciju biroja. ?aj? e-v?stul? b?s iek?auta identifik?cija, ko var izmantot ?aj?
-        pakalpojum?, aizpildot inform?ciju par proced?ru un iest?di.
-    </entry>
-    <entry key="espd.validator.accept">L?dzu, ievadiet v?rt?bu ar der?gu papla?in?jumu.</entry>
-    <entry key="espd.validator.creditcard">L?dzu, ievadiet der?gu kred?tkartes numuru.</entry>
-    <entry key="espd.validator.date">L?dzu, ievadiet der?gu datumu.</entry>
-    <entry key="espd.validator.dateISO">L?dzu, ievadiet der?gu datumu (ISO).</entry>
-    <entry key="espd.validator.digits">L?dzu, ievadiet tikai ciparus.</entry>
-    <entry key="espd.validator.email">L?dzu, ievadiet der?gu e-pasta adresi.</entry>
-    <entry key="espd.validator.equalTo">L?dzu, ievadiet ?o v?rt?bu v?lreiz.</entry>
-    <entry key="espd.validator.max">L?dzu, ievadiet v?rt?bu, kas ir vien?da ar {0} vai maz?ka.</entry>
-    <entry key="espd.validator.maxlength">L?dzu, ievadiet ne vair?k par {0} z?m?m.</entry>
-    <entry key="espd.validator.min">L?dzu, ievadiet v?rt?bu, kas ir vien?da ar {0} vai liel?ka.</entry>
-    <entry key="espd.validator.minlength">L?dzu, ievadiet vismaz {0} z?mes.</entry>
-    <entry key="espd.validator.number">L?dzu, ievadiet der?gu numuru.</entry>
-    <entry key="espd.validator.range">L?dzu, ievadiet v?rt?bu skal? no {0} l?dz {1}.</entry>
-    <entry key="espd.validator.rangelength">L?dzu, ievadiet v?rt?bu, kas sast?v no {0} l?dz {1} z?m?m.</entry>
-    <entry key="espd.validator.remote">L?dzu, izlabojiet ?o lauku.</entry>
-    <entry key="espd.validator.required">?is lauks ir oblig?ts.</entry>
-    <entry key="espd.validator.url">L?dzu, ievadiet der?gu URL.</entry>
-    <entry key="espd.gui.view.ca">Skat?t: (CA)</entry>
-    <entry key="espd.gui.view.eo">Skat?t: (EO)</entry>
-    <entry key="espd.gui.yes">J?</entry>
-    <entry key="espd.gui.zip.instructions">?aj? ZIP map? atrodamo ESPD dat?u ?ss
-        apraksts.Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nespd.XML: XML datne ir datne, kuru sp?j nolas?t m?su ESPD
-        pakalpojums vai cits sader?gs ESPD pakalpojums. // .. m?su ... saprotama datne Priek?roc?ba XML datnes
-        izmanto?anai eESPD ir t?da, ka pirc?ji un uz??mumi to n?kotn? var atkal izmantot cit?s proced?r?s. T? b?tu
-        j?nos?ta kop? ar iepirkuma proced?ras dokumentiem (iest?de uz??mumiem) vai k? pied?v?juma da?a (uz??mums
-        iest?dei).Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nespd.PDF: PDF datne ir eESPD datne cilv?klas?m? form?. M?s
-        iesak?m to izmantot par atsauces dokumentu kop? ar XML form?ta datni iepirkuma proced?ras dokumentos (iest?de
-        uz??mumam) vai k? pied?v?juma da?u (uz??mums iest?dei).Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nJa jums ir
-        jaut?jumi par datn?m, l?dzu, sazinieties ar mums, izmantojot ??du e-pasta adresi: grow-espd@ec.europa.eu.
-    </entry>
-
+    <entry key="espd.init.filter.eo.can.import.espd.tooltip">Ekonomikas dalībnieks var importēt ESPD dokumentu, ko iepriekš aizpildījusi līgumslēdzēja iestāde attiecībā uz šo iepirkuma procedūru un kas publicēts ar paziņojumu par konkursu.</entry>
+    <entry key="espd.init.filter.eo.merge.espds.tooltip">The ESPD service will merge the 'old' ESPD with the new form prepared by the contracting authority for this procurement procedure.</entry>
+    <entry key="espd.init.overview.received.espds.tooltip">Izmantojot šo funkciju, iegūst tabulu ar pārskatu par atbildēm, kuras ietvertas visos ESPD un kuras snieguši pretendenti attiecībā uz konkrēto iepirkuma procedūru.</entry>
+    <entry key="espd.init.review.espd.tooltip">Līgumslēdzēja iestāde var pārbaudīt/pārskatīt elektronisko ESPD, ko iesniedzis ekonomikas dalībnieks.</entry>
+    <entry key="espd.init.ted.reception.id.tooltip">Kad paziņojums būs iesniegts publicēšanai, līgumslēdzēja iestāde saņems e-vēstuli no Publikāciju biroja. Šajā e-vēstulē būs iekļauta identifikācija, ko var izmantot šajā pakalpojumā, aizpildot informāciju par procedūru un iestādi.</entry>
+    <entry key="espd.validator.accept">Lūdzu, ievadiet vērtību ar derīgu paplašinājumu.</entry>
+    <entry key="espd.validator.creditcard">Lūdzu, ievadiet derīgu kredītkartes numuru.</entry>
+    <entry key="espd.validator.date">Lūdzu, ievadiet derīgu datumu.</entry>
+    <entry key="espd.validator.dateISO">Lūdzu, ievadiet derīgu datumu (ISO).</entry>
+    <entry key="espd.validator.digits">Lūdzu, ievadiet tikai ciparus.</entry>
+    <entry key="espd.validator.email">Lūdzu, ievadiet derīgu e-pasta adresi.</entry>
+    <entry key="espd.validator.equalTo">Lūdzu, ievadiet šo vērtību vēlreiz.</entry>
+    <entry key="espd.validator.max">Lūdzu, ievadiet vērtību, kas ir vienāda ar {0} vai mazāka.</entry>
+    <entry key="espd.validator.maxlength">Lūdzu, ievadiet ne vairāk par {0} zīmēm.</entry>
+    <entry key="espd.validator.min">Lūdzu, ievadiet vērtību, kas ir vienāda ar {0} vai lielāka.</entry>
+    <entry key="espd.validator.minlength">Lūdzu, ievadiet vismaz {0} zīmes.</entry>
+    <entry key="espd.validator.number">Lūdzu, ievadiet derīgu numuru.</entry>
+    <entry key="espd.validator.range">Lūdzu, ievadiet vērtību skalā no {0} līdz {1}.</entry>
+    <entry key="espd.validator.rangelength">Lūdzu, ievadiet vērtību, kas sastāv no {0} līdz {1} zīmēm.</entry>
+    <entry key="espd.validator.remote">Lūdzu, izlabojiet šo lauku.</entry>
+    <entry key="espd.validator.required">Šis lauks ir obligāts.</entry>
+    <entry key="espd.validator.url">Lūdzu, ievadiet derīgu URL.</entry>
+    <entry key="espd.gui.view.ca">Skatīt: (CA)</entry>
+    <entry key="espd.gui.view.eo">Skatīt: (EO)</entry>
+    <entry key="espd.gui.yes">Jā</entry>
+    <entry key="espd.gui.zip.instructions">Šajā ZIP mapē atrodamo ESPD datņu īss apraksts.Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nespd.XML: XML datne ir datne, kuru spēj nolasīt mūsu ESPD pakalpojums vai cits saderīgs ESPD pakalpojums. // .. mūsu ... saprotama datne Priekšrocība XML datnes izmantošanai eESPD ir tāda, ka pircēji un uzņēmumi to nākotnē var atkal izmantot citās procedūrās. Tā būtu jānosūta kopā ar iepirkuma procedūras dokumentiem (iestāde uzņēmumiem) vai kā piedāvājuma daļa (uzņēmums iestādei).Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nespd.PDF: PDF datne ir eESPD datne cilvēklasāmā formā. Mēs iesakām to izmantot par atsauces dokumentu kopā ar XML formāta datni iepirkuma procedūras dokumentos (iestāde uzņēmumam) vai kā piedāvājuma daļu (uzņēmums iestādei).Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nJa jums ir jautājumi par datnēm, lūdzu, sazinieties ar mums, izmantojot šādu e-pasta adresi: grow-espd@ec.europa.eu.</entry>
 </properties>

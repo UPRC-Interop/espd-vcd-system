@@ -5,821 +5,303 @@ Wenn die Datei als Properties gezogen wird, wird ein DocType zur Laufzeit einget
 -->
 <properties>
     <entry key="espd.gui.about">O stronie</entry>
-    <entry key="espd.part4.all.selection.switch">?: Ogólne o?wiadczenie dotycz?ce wszystkich kryteriów kwalifikacji
-    </entry>
-    <entry key="espd.gui.app.environment">Drogi u?ytkowniku, korzystasz z naszego ?rodowiska testowego. Prosz? u?y?
-    </entry>
-    <entry key="espd.gui.app.subtitle">Serwis umo?liwiaj?cy wype?nienie i ponowne wykorzystanie ESPD</entry>
+    <entry key="espd.part4.all.selection.switch">ɑ: Ogólne oświadczenie dotyczące wszystkich kryteriów kwalifikacji</entry>
+    <entry key="espd.gui.app.environment">Drogi użytkowniku, korzystasz z naszego środowiska testowego. Proszę użyć</entry>
+    <entry key="espd.gui.app.subtitle">Serwis umożliwiający wypełnienie i ponowne wykorzystanie ESPD</entry>
     <entry key="espd.gui.app.title">Jednolity europejski dokument zamówienia (ESPD)</entry>
-    <entry key="espd.gui.back.to.main">Powrót na stron? g?ówn?</entry>
+    <entry key="espd.gui.back.to.main">Powrót na stronę główną</entry>
     <entry key="espd.gui.cancel">Anuluj</entry>
-    <entry key="espd.gui.click.here">klikn?? tutaj</entry>
+    <entry key="espd.gui.click.here">kliknąć tutaj</entry>
     <entry key="espd.gui.contact">Kontakt</entry>
     <entry key="espd.gui.contact.header">Kontakt</entry>
-    <entry key="espd.gui.contact.info">&lt;p&gt;Komisja Europejska&lt;p&gt;Dyrekcja Generalna ds. Rynku Wewn?trznego, Przemys?u,
-        Przedsi?biorczo?ci i M?P&lt;p&gt;Avenue d'Auderghem 45 / Oudergemselaan 45&lt;p&gt;B-1049 Bruksela&lt;p&gt;Belgia
-    </entry>
+    <entry key="espd.gui.contact.info">Komisja Europejska Dyrekcja Generalna ds. Rynku Wewnętrznego, Przemysłu, Przedsiębiorczości i MŚP Avenue d'Auderghem 45 / Oudergemselaan 45 B-1049 Bruksela Belgia</entry>
     <entry key="espd.gui.cookies">Pliki cookie</entry>
-    <entry key="espd.gui.correct.errors">Nale?y poprawi? b??dy, zanim b?d? Pa?stwo kontynuowa?.</entry>
-    <entry key="espd.part1.city">Miejscowo??:</entry>
-    <entry key="espd.part1.confirm.email">Potwierd? adres e-mail:</entry>
-    <entry key="espd.part1.confirm.telephone">Potwierd? numer telefonu:</entry>
-    <entry key="espd.part1.contact.details.ca">To?samo?? zamawiaj?cego</entry>
+    <entry key="espd.gui.correct.errors">Należy poprawić błędy, zanim będą Państwo kontynuować.</entry>
+    <entry key="espd.part1.city">Miejscowość:</entry>
+    <entry key="espd.part1.confirm.email">Potwierdź adres e-mail:</entry>
+    <entry key="espd.part1.confirm.telephone">Potwierdź numer telefonu:</entry>
+    <entry key="espd.part1.contact.details.ca">Tożsamość zamawiającego</entry>
     <entry key="espd.part1.contact.person">Osoba wyznaczona do kontaktów:</entry>
-    <entry key="espd.part1.correct.errors">Nale?y poprawi? b??dy, zanim b?d? Pa?stwo kontynuowa?.</entry>
-    <entry key="espd.part1.country">Pa?stwo:</entry>
+    <entry key="espd.part1.correct.errors">Należy poprawić błędy, zanim będą Państwo kontynuować.</entry>
+    <entry key="espd.part1.country">Państwo:</entry>
     <entry key="espd.part1.email">E-mail:</entry>
     <entry key="espd.part1.fax">fax</entry>
-    <entry key="espd.part1.file.ref.ca">Numer referencyjny nadany sprawie przez instytucj? zamawiaj?c? lub podmiot
-        zamawiaj?cy (je?eli dotyczy):
-    </entry>
-    <entry key="espd.part1.header">Cz??? I: Informacje dotycz?ce post?powania o udzielenie zamówienia oraz instytucji
-        zamawiaj?cej lub podmiotu zamawiaj?cego
-    </entry>
+    <entry key="espd.part1.file.ref.ca">Numer referencyjny nadany sprawie przez instytucję zamawiającą lub podmiot zamawiający (jeżeli dotyczy):</entry>
+    <entry key="espd.part1.header">Część I: Informacje dotyczące postępowania o udzielenie zamówienia oraz instytucji zamawiającej lub podmiotu zamawiającego</entry>
     <entry key="espd.part1.info.procedure">procedura</entry>
-    <entry key="espd.part1.info.procurement.proc">Informacje na temat post?powania o udzielenie zamówienia</entry>
+    <entry key="espd.part1.info.procurement.proc">Informacje na temat postępowania o udzielenie zamówienia</entry>
     <entry key="espd.part1.info.pub">Informacje na temat publikacji</entry>
     <entry key="espd.part1.name">Oficjalna nazwa:</entry>
-    <entry key="espd.part1.nat.regnum">Krajowy numer rejestracyjny (je?li znany):</entry>
-    <entry key="espd.part1.official.journal.alert">W przypadku gdy zaproszenie do ubiegania si? o zamówienie nie zosta?o
-        opublikowane w Dzienniku Urz?dowym Unii Europejskiej b?d? gdy jego publikacja w Dzienniku Urz?dowym nie jest
-        wymagana, wówczas instytucja zamawiaj?ca lub podmiot zamawiaj?cy musi poda? informacje umo?liwiaj?ce
-        jednoznaczne zidentyfikowanie post?powania o udzielenie zamówienia (np. adres publikacyjny na poziomie
-        krajowym).
-    </entry>
-    <entry key="espd.part1.ojs.label">Numer og?oszenia w Dz.U. S:</entry>
+    <entry key="espd.part1.nat.regnum">Krajowy numer rejestracyjny (jeśli znany):</entry>
+    <entry key="espd.part1.official.journal.alert">W przypadku gdy zaproszenie do ubiegania się o zamówienie nie zostało opublikowane w Dzienniku Urzędowym Unii Europejskiej bądź gdy jego publikacja w Dzienniku Urzędowym nie jest wymagana, wówczas instytucja zamawiająca lub podmiot zamawiający musi podać informacje umożliwiające jednoznaczne zidentyfikowanie postępowania o udzielenie zamówienia (np. adres publikacyjny na poziomie krajowym).</entry>
+    <entry key="espd.part1.ojs.label">Numer ogłoszenia w Dz.U. S:</entry>
     <entry key="espd.part1.ojs.url">URL Dz.U. S</entry>
     <entry key="espd.part1.postcode">Kod pocztowy:</entry>
-    <entry key="espd.part1.procurer.name">Tytu?:</entry>
+    <entry key="espd.part1.procurer.name">Tytuł:</entry>
     <entry key="espd.part1.street.and. num">Ulica i numer:</entry>
-    <entry key="espd.part1.ted.reception.id">Otrzymany numer og?oszenia</entry>
+    <entry key="espd.part1.ted.reception.id">Otrzymany numer ogłoszenia</entry>
     <entry key="espd.part1.telephone">Telefon:</entry>
     <entry key="espd.part1.title.or.short.desc">Krótki opis:</entry>
-    <entry key="espd.part1.to.be.filled.alert">W przypadku post?powa? o udzielenie zamówienia, w ramach których
-        zaproszenie do ubiegania si? o zamówienie opublikowano w Dzienniku Urz?dowym Unii Europejskiej, informacje
-        wymagane w cz??ci I zostan? automatycznie wyszukane, pod warunkiem ?e do utworzenia i wype?nienia jednolitego
-        europejskiego dokumentu zamówienia wykorzystany zostanie elektroniczny serwis ESPD. Adres publikacyjny
-        stosownego og?oszenia w Dzienniku Urz?dowym Unii Europejskiej:
-    </entry>
-    <entry key="espd.part1.website">Strona internetowa (je?eli dotyczy):</entry>
-    <entry key="espd.part3.grounds.criminal.conv">Podstawy zwi?zane z wyrokami skazuj?cymi za przest?pstwo</entry>
-    <entry key="espd.part3.header">Cz??? III: Podstawy wykluczenia</entry>
-    <entry key="espd.part3.insolvency.conflicts">Podstawy zwi?zane z niewyp?acalno?ci?, konfliktem interesów lub
-        wykroczeniami zawodowymi
-    </entry>
-    <entry key="espd.part5.concl.statements">Cz??? VI: O?wiadczenia ko?cowe</entry>
-    <entry key="espd.part5.concl.statements.signature">Data, miejscowo?? oraz ? je?eli jest to wymagane lub konieczne ?
-        podpis(-y):
-    </entry>
-    <entry key="espd.part5.concl.statements.text">Ni?ej podpisany(-a)(-i) oficjalnie o?wiadcza(-j?), ?e informacje
-        podane powy?ej w cz??ciach II?V s? dok?adne i prawid?owe oraz ?e zosta?y przedstawione z pe?n? ?wiadomo?ci?
-        konsekwencji powa?nego wprowadzenia w b??d.
-        &lt;p&gt;Ni?ej podpisany(-a)(-i) oficjalnie o?wiadcza(-j?), ?e jest (s?) w stanie, na ??danie i bez zw?oki,
-            przedstawi? za?wiadczenia i inne rodzaje dowodów w formie dokumentów, z wyj?tkiem przypadków, w których:
-        &lt;/p&gt;
-        &lt;p&gt;a) instytucja zamawiaj?ca lub podmiot zamawiaj?cy ma mo?liwo?? uzyskania odpowiednich dokumentów
-            potwierdzaj?cych bezpo?rednio za pomoc? bezp?atnej krajowej bazy danych w dowolnym pa?stwie cz?onkowskim
-            (pod warunkiem ?e wykonawca przekaza? niezb?dne informacje (adres internetowy, dane wydaj?cego urz?du lub
-            organu, dok?adne dane referencyjne dokumentacji) umo?liwiaj?ce instytucji zamawiaj?cej lub podmiotowi
-            zamawiaj?cemu t? czynno??; w razie potrzeby musi temu towarzyszy? odpowiednia zgoda na uzyskanie takiego
-            dost?pu), lub
-        &lt;/p&gt;
-        &lt;p&gt;b) najpó?niej od dnia 18 pa?dziernika 2018 r. (w zale?no?ci od wdro?enia w danym kraju artyku?u 59 ust. 5
-            akapit drugi dyrektywy 2014/24/UE), instytucja zamawiaj?ca lub podmiot zamawiaj?cy ju? posiada odpowiedni?
-            dokumentacj?.
-        &lt;/p&gt;
-        &lt;p&gt;Ni?ej podpisany(-a)(-i) oficjalnie wyra?a(-j?) zgod? na to, aby [wskaza? instytucj? zamawiaj?c? lub podmiot
-            zamawiaj?cy okre?lone w cz??ci I, sekcja A] uzyska?(-a)(-o) dost?p do dokumentów potwierdzaj?cych
-            informacje, które zosta?y przedstawione w [wskaza? cz???/sekcj?/punkt(-y), których to dotyczy] niniejszego
-            jednolitego europejskiego dokumentu zamówienia, na potrzeby [okre?li? post?powanie o udzielenie zamówienia:
-            (skrócony opis, adres publikacyjny w Dzienniku Urz?dowym Unii Europejskiej, numer referencyjny)]
-        &lt;/p&gt;
-    </entry>
+    <entry key="espd.part1.to.be.filled.alert">W przypadku postępowań o udzielenie zamówienia, w ramach których zaproszenie do ubiegania się o zamówienie opublikowano w Dzienniku Urzędowym Unii Europejskiej, informacje wymagane w części I zostaną automatycznie wyszukane, pod warunkiem że do utworzenia i wypełnienia jednolitego europejskiego dokumentu zamówienia wykorzystany zostanie elektroniczny serwis ESPD. Adres publikacyjny stosownego ogłoszenia w Dzienniku Urzędowym Unii Europejskiej:</entry>
+    <entry key="espd.part1.website">Strona internetowa (jeżeli dotyczy):</entry>
+    <entry key="espd.part3.grounds.criminal.conv">Podstawy związane z wyrokami skazującymi za przestępstwo</entry>
+    <entry key="espd.part3.header">Część III: Podstawy wykluczenia</entry>
+    <entry key="espd.part3.insolvency.conflicts">Podstawy związane z niewypłacalnością, konfliktem interesów lub wykroczeniami zawodowymi</entry>
+    <entry key="espd.part5.concl.statements">Część VI: Oświadczenia końcowe</entry>
+    <entry key="espd.part5.concl.statements.signature">Data, miejscowość oraz – jeżeli jest to wymagane lub konieczne – podpis(-y):</entry>
+    <entry key="espd.part5.concl.statements.text">Niżej podpisany(-a)(-i) oficjalnie oświadcza(-ją), że informacje podane powyżej w częściach II–V są dokładne i prawidłowe oraz że zostały przedstawione z pełną świadomością konsekwencji poważnego wprowadzenia w błąd. Niżej podpisany(-a)(-i) oficjalnie oświadcza(-ją), że jest (są) w stanie, na żądanie i bez zwłoki, przedstawić zaświadczenia i inne rodzaje dowodów w formie dokumentów, z wyjątkiem przypadków, w których: a) instytucja zamawiająca lub podmiot zamawiający ma możliwość uzyskania odpowiednich dokumentów potwierdzających bezpośrednio za pomocą bezpłatnej krajowej bazy danych w dowolnym państwie członkowskim (pod warunkiem że wykonawca przekazał niezbędne informacje (adres internetowy, dane wydającego urzędu lub organu, dokładne dane referencyjne dokumentacji) umożliwiające instytucji zamawiającej lub podmiotowi zamawiającemu tę czynność; w razie potrzeby musi temu towarzyszyć odpowiednia zgoda na uzyskanie takiego dostępu), lub b) najpóźniej od dnia 18 października 2018 r. (w zależności od wdrożenia w danym kraju artykułu 59 ust. 5 akapit drugi dyrektywy 2014/24/UE), instytucja zamawiająca lub podmiot zamawiający już posiada odpowiednią dokumentację. Niżej podpisany(-a)(-i) oficjalnie wyraża(-ją) zgodę na to, aby [wskazać instytucję zamawiającą lub podmiot zamawiający określone w części I, sekcja A] uzyskał(-a)(-o) dostęp do dokumentów potwierdzających informacje, które zostały przedstawione w [wskazać część/sekcję/punkt(-y), których to dotyczy] niniejszego jednolitego europejskiego dokumentu zamówienia, na potrzeby [określić postępowanie o udzielenie zamówienia: (skrócony opis, adres publikacyjny w Dzienniku Urzędowym Unii Europejskiej, numer referencyjny)]</entry>
     <entry key="espd.part5.export">Eksportuj</entry>
-    <entry key="espd.part5.export.content">Teraz mo?na klikn?? ?Eksportuj?, aby pobra? i zapisa? plik ESPD na swoim
-        komputerze. Instytucje zamawiaj?ce musz? zapewni? wykonawcom dost?pno?? przedmiotowego pliku ESPD wraz z innymi
-        dokumentami przetargowymi.
-    </entry>
-    <entry key="espd.part5.header">Zako?cz</entry>
-    <entry key="espd.part5.reduction">Cz??? V: Ograniczanie liczby kwalifikuj?cych si? kandydatów</entry>
-    <entry key="espd.part5.reduction.question">Wykonawca o?wiadcza, ?e:</entry>
-    <entry key="espd.part5.text.eo.declares.that">Je?eli niektóre z tych za?wiadcze? lub rodzajów dowodów w formie
-        dokumentów s? dost?pne w postaci elektronicznej, prosz? wskaza? dla ka?dego z nich:
-    </entry>
-    <entry key="espd.part5.title.eo.declares.that">W nast?puj?cy sposób spe?nia obiektywne i niedyskryminacyjne kryteria
-        lub zasady, które maj? by? stosowane w celu ograniczenia liczby kandydatów:&lt;p&gt;W przypadku gdy wymagane s?
-            okre?lone za?wiadczenia lub inne rodzaje dowodów w formie dokumentów, prosz? wskaza? dla ka?dego z nich, czy
-            wykonawca posiada wymagane dokumenty:
-        &lt;/p&gt;
-    </entry>
-    <entry key="espd.part5.toptext">Wykonawca powinien przedstawi? informacje jedynie w przypadku gdy instytucja
-        zamawiaj?ca lub podmiot zamawiaj?cy okre?li?y obiektywne i niedyskryminacyjne kryteria lub zasady, które maj?
-        by? stosowane w celu ograniczenia liczby kandydatów, którzy zostan? zaproszeni do z?o?enia ofert lub prowadzenia
-        dialogu. Te informacje, którym mog? towarzyszy? wymogi dotycz?ce (rodzajów) za?wiadcze? lub rodzajów dowodów w
-        formie dokumentów, które ewentualnie nale?y przedstawi?, okre?lono w stosownym og?oszeniu lub w dokumentach
-        zamówienia, o których mowa w og?oszeniu. Dotyczy jedynie procedury ograniczonej, procedury konkurencyjnej z
-        negocjacjami, dialogu konkurencyjnego i partnerstwa innowacyjnego:
-    </entry>
-    <entry key="espd.part4.alert">Instytucja zamawiaj?ca musi wskaza?, które kryteria kwalifikacji b?d? stosowane,
-        zaznaczaj?c odpowiednie pole znajduj?ce si? przed danym kryterium.
-    </entry>
+    <entry key="espd.part5.export.content">Teraz można kliknąć „Eksportuj”, aby pobrać i zapisać plik ESPD na swoim komputerze. Instytucje zamawiające muszą zapewnić wykonawcom dostępność przedmiotowego pliku ESPD wraz z innymi dokumentami przetargowymi.</entry>
+    <entry key="espd.part5.header">Zakończ</entry>
+    <entry key="espd.part5.reduction">Część V: Ograniczanie liczby kwalifikujących się kandydatów</entry>
+    <entry key="espd.part5.reduction.question">Wykonawca oświadcza, że:</entry>
+    <entry key="espd.part5.text.eo.declares.that">Jeżeli niektóre z tych zaświadczeń lub rodzajów dowodów w formie dokumentów są dostępne w postaci elektronicznej, proszę wskazać dla każdego z nich:</entry>
+    <entry key="espd.part5.title.eo.declares.that">W następujący sposób spełnia obiektywne i niedyskryminacyjne kryteria lub zasady, które mają być stosowane w celu ograniczenia liczby kandydatów: W przypadku gdy wymagane są określone zaświadczenia lub inne rodzaje dowodów w formie dokumentów, proszę wskazać dla każdego z nich, czy wykonawca posiada wymagane dokumenty:</entry>
+    <entry key="espd.part5.toptext">Wykonawca powinien przedstawić informacje jedynie w przypadku gdy instytucja zamawiająca lub podmiot zamawiający określiły obiektywne i niedyskryminacyjne kryteria lub zasady, które mają być stosowane w celu ograniczenia liczby kandydatów, którzy zostaną zaproszeni do złożenia ofert lub prowadzenia dialogu. Te informacje, którym mogą towarzyszyć wymogi dotyczące (rodzajów) zaświadczeń lub rodzajów dowodów w formie dokumentów, które ewentualnie należy przedstawić, określono w stosownym ogłoszeniu lub w dokumentach zamówienia, o których mowa w ogłoszeniu. Dotyczy jedynie procedury ograniczonej, procedury konkurencyjnej z negocjacjami, dialogu konkurencyjnego i partnerstwa innowacyjnego:</entry>
+    <entry key="espd.part4.alert">Instytucja zamawiająca musi wskazać, które kryteria kwalifikacji będą stosowane, zaznaczając odpowiednie pole znajdujące się przed danym kryterium.</entry>
     <entry key="espd.part4.economic.and.financial.standing">B: Sytuacja ekonomiczna i finansowa</entry>
-    <entry key="espd.part4.header">Cz??? IV: Kryteria kwalifikacji</entry>
-    <entry key="espd.part4.quality.assurance">D: Systemy zapewniania jako?ci i normy zarz?dzania ?rodowiskowego</entry>
+    <entry key="espd.part4.header">Część IV: Kryteria kwalifikacji</entry>
+    <entry key="espd.part4.quality.assurance">D: Systemy zapewniania jakości i normy zarządzania środowiskowego</entry>
     <entry key="espd.part4.suitability">A: Kompetencje</entry>
-    <entry key="espd.part4.technical.professional.ability">C: Zdolno?? techniczna i zawodowa</entry>
-    <entry key="espd.part2.add.complete.missing">Prosz? dodatkowo uzupe?ni? brakuj?ce informacje w cz??ci IV w sekcjach
-        A, B, C lub D, w zale?no?ci od przypadku, WY??CZNIE je?eli jest to wymagane w danym og?oszeniu lub dokumentach
-        zamówienia
-    </entry>
-    <entry key="espd.part2.all.selection.covered">d) Czy wpis do wykazu lub wydane za?wiadczenie obejmuj? wszystkie
-        wymagane kryteria kwalifikacji?
-    </entry>
-    <entry key="espd.part2.another.vat">Je?eli numer VAT nie ma zastosowania, prosz? poda? inny krajowy numer
-        identyfikacyjny, je?eli jest wymagany i ma zastosowanie.
-    </entry>
-    <entry key="espd.part2.answer.following.parts">Prosz? udzieli? odpowiedzi w pozosta?ych fragmentach niniejszej
-        sekcji, w sekcji B oraz (w odpowiednich przypadkach) w sekcji C niniejszej cz??ci, uzupe?ni? cz??? V (w
-        stosownych przypadkach) oraz w ka?dym przypadku wype?ni? i podpisa? cz??? VI.
-    </entry>
+    <entry key="espd.part4.technical.professional.ability">C: Zdolność techniczna i zawodowa</entry>
+    <entry key="espd.part2.add.complete.missing">Proszę dodatkowo uzupełnić brakujące informacje w części IV w sekcjach A, B, C lub D, w zależności od przypadku, WYŁĄCZNIE jeżeli jest to wymagane w danym ogłoszeniu lub dokumentach zamówienia</entry>
+    <entry key="espd.part2.all.selection.covered">d) Czy wpis do wykazu lub wydane zaświadczenie obejmują wszystkie wymagane kryteria kwalifikacji?</entry>
+    <entry key="espd.part2.another.vat">Jeżeli numer VAT nie ma zastosowania, proszę podać inny krajowy numer identyfikacyjny, jeżeli jest wymagany i ma zastosowanie.</entry>
+    <entry key="espd.part2.answer.following.parts">Proszę udzielić odpowiedzi w pozostałych fragmentach niniejszej sekcji, w sekcji B oraz (w odpowiednich przypadkach) w sekcji C niniejszej części, uzupełnić część V (w stosownych przypadkach) oraz w każdym przypadku wypełnić i podpisać część VI.</entry>
     <entry key="espd.part2.birth.date">Data urodzenia</entry>
     <entry key="espd.part2.birth.place">Miejsce urodzenia</entry>
-    <entry key="espd.part2.cert.e.avaliable">b) Je?eli po?wiadczenie wpisu do wykazu lub wydania za?wiadczenia jest
-        dost?pne w formie elektronicznej, prosz? poda?:
-    </entry>
+    <entry key="espd.part2.cert.e.avaliable">b) Jeżeli poświadczenie wpisu do wykazu lub wydania zaświadczenia jest dostępne w formie elektronicznej, proszę podać:</entry>
     <entry key="espd.part2.contact.person">Osoba(-y) wyznaczona(-e) do kontaktów:</entry>
-    <entry key="espd.part2.detinfo.of.represent">W razie potrzeby prosz? poda? szczegó?owe informacje dotycz?ce
-        przedstawicielstwa (jego form, zakresu, celu itd.):
-    </entry>
-    <entry key="espd.part2.disworkers.details">Je?eli jest to wymagane, prosz? okre?li?, do której kategorii lub których
-        kategorii pracowników niepe?nosprawnych lub defaworyzowanych nale?? dani pracownicy.
-    </entry>
-    <entry key="espd.part2.doc.e.avaliable">Je?eli odno?na dokumentacja jest dost?pna w formie elektronicznej, prosz?
-        wskaza?:
-    </entry>
+    <entry key="espd.part2.detinfo.of.represent">W razie potrzeby proszę podać szczegółowe informacje dotyczące przedstawicielstwa (jego form, zakresu, celu itd.):</entry>
+    <entry key="espd.part2.disworkers.details">Jeżeli jest to wymagane, proszę określić, do której kategorii lub których kategorii pracowników niepełnosprawnych lub defaworyzowanych należą dani pracownicy.</entry>
+    <entry key="espd.part2.doc.e.avaliable">Jeżeli odnośna dokumentacja jest dostępna w formie elektronicznej, proszę wskazać:</entry>
     <entry key="espd.part2.email">E-mail:</entry>
-    <entry key="espd.part2.ensure.others.espd">Prosz? dopilnowa?, aby pozostali uczestnicy przedstawili odr?bne
-        jednolite europejskie dokumenty zamówienia.
-    </entry>
-    <entry key="espd.part2.eo.approved.cert">W stosownych przypadkach, czy wykonawca jest wpisany do urz?dowego wykazu
-        zatwierdzonych wykonawców lub posiada równowa?ne za?wiadczenie (np. w ramach krajowego systemu (wst?pnego)
-        kwalifikowania)?
-    </entry>
-    <entry key="espd.part2.eo.group.role">a) Prosz? wskaza? rol? wykonawcy w grupie (lider, odpowiedzialny za okre?lone
-        zadania itd.):
-    </entry>
-    <entry key="espd.part2.eo.has.cert.soc">e) Czy wykonawca b?dzie w stanie przedstawi? za?wiadczenie odnosz?ce si? do
-        p?atno?ci sk?adek na ubezpieczenie spo?eczne i podatków lub przedstawi? informacje, które umo?liwi? instytucji
-        zamawiaj?cej lub podmiotowi zamawiaj?cemu uzyskanie tego za?wiadczenia bezpo?rednio za pomoc? bezp?atnej
-        krajowej bazy danych w dowolnym pa?stwie cz?onkowskim?
-    </entry>
-    <entry key="espd.part2.eo.rely.other.entities">Czy wykonawca polega na zdolno?ci innych podmiotów w celu spe?nienia
-        kryteriów kwalifikacji okre?lonych poni?ej w cz??ci IV oraz (ewentualnych) kryteriów i zasad okre?lonych poni?ej
-        w cz??ci V?
-    </entry>
-    <entry key="espd.part2.first.name">Imi?</entry>
-    <entry key="espd.part2.header">Cz??? II: Informacje dotycz?ce wykonawcy</entry>
-    <entry key="espd.part2.if.proc.reserved">Jedynie w przypadku, gdy zamówienie jest zastrze?one: Czy wykonawca jest
-        zak?adem pracy chronionej, ?przedsi?biorstwem spo?ecznym? lub czy b?dzie realizowa? zamówienie w ramach
-        programów zatrudnienia chronionego?
-    </entry>
+    <entry key="espd.part2.ensure.others.espd">Proszę dopilnować, aby pozostali uczestnicy przedstawili odrębne jednolite europejskie dokumenty zamówienia.</entry>
+    <entry key="espd.part2.eo.approved.cert">W stosownych przypadkach, czy wykonawca jest wpisany do urzędowego wykazu zatwierdzonych wykonawców lub posiada równoważne zaświadczenie (np. w ramach krajowego systemu (wstępnego) kwalifikowania)?</entry>
+    <entry key="espd.part2.eo.group.role">a) Proszę wskazać rolę wykonawcy w grupie (lider, odpowiedzialny za określone zadania itd.):</entry>
+    <entry key="espd.part2.eo.has.cert.soc">e) Czy wykonawca będzie w stanie przedstawić zaświadczenie odnoszące się do płatności składek na ubezpieczenie społeczne i podatków lub przedstawić informacje, które umożliwią instytucji zamawiającej lub podmiotowi zamawiającemu uzyskanie tego zaświadczenia bezpośrednio za pomocą bezpłatnej krajowej bazy danych w dowolnym państwie członkowskim?</entry>
+    <entry key="espd.part2.eo.rely.other.entities">Czy wykonawca polega na zdolności innych podmiotów w celu spełnienia kryteriów kwalifikacji określonych poniżej w części IV oraz (ewentualnych) kryteriów i zasad określonych poniżej w części V?</entry>
+    <entry key="espd.part2.first.name">Imię</entry>
+    <entry key="espd.part2.header">Część II: Informacje dotyczące wykonawcy</entry>
+    <entry key="espd.part2.if.proc.reserved">Jedynie w przypadku, gdy zamówienie jest zastrzeżone: Czy wykonawca jest zakładem pracy chronionej, „przedsiębiorstwem społecznym” lub czy będzie realizował zamówienie w ramach programów zatrudnienia chronionego?</entry>
     <entry key="espd.part2.info.eo">A: Informacje na temat wykonawcy</entry>
-    <entry key="espd.part2.info.reliance">C: Informacje na temat polegania na zdolno?ci innych podmiotów</entry>
+    <entry key="espd.part2.info.reliance">C: Informacje na temat polegania na zdolności innych podmiotów</entry>
     <entry key="espd.part2.info.respresent">B: Informacje na temat przedstawicieli wykonawcy</entry>
-    <entry key="espd.part2.information.subcontractors">D: Informacje dotycz?ce podwykonawców, na których zdolno?ci
-        wykonawca nie polega
-    </entry>
-    <entry key="espd.part2.information.subcontractors.description">Je?eli tak i o ile jest to wiadome, prosz? poda?
-        wykaz proponowanych podwykonawców:
-    </entry>
-    <entry key="espd.part2.information.subcontractors.footer">Je?eli instytucja zamawiaj?ca lub podmiot zamawiaj?cy
-        wyra?nie ??da przedstawienia tych informacji, dodatkowo oprócz informacji wymaganych w cz??ci I, prosz?
-        przedstawi? ? dla ka?dego podwykonawcy (ka?dej kategorii podwykonawców), których to dotyczy ? informacje
-        wymagane w niniejszej cz??ci sekcja A i B oraz w cz??ci III.
-    </entry>
-    <entry key="espd.part2.information.subcontractors.header">(Sekcja, któr? nale?y wype?ni? jedynie w przypadku, gdy
-        instytucja zamawiaj?ca lub podmiot zamawiaj?cy wprost tego za??da.)
-    </entry>
-    <entry key="espd.part2.information.subcontractors.title">Czy wykonawca zamierza zleci? osobom trzecim podwykonawstwo
-        jakiejkolwiek cz??ci zamówienia?
-    </entry>
-    <entry key="espd.part2.internet.addr.if.exists">Adres internetowy (adres www) (je?eli dotyczy):</entry>
-    <entry key="espd.part2.is.eo.proc.together">Czy wykonawca bierze udzia? w post?powaniu o udzielenie zamówienia
-        wspólnie z innymi wykonawcami?
-    </entry>
-    <entry key="espd.part2.is.eo.sized">Czy wykonawca jest mikroprzedsi?biorstwem b?d? ma?ym lub ?rednim
-        przedsi?biorstwem?
-    </entry>
-    <entry key="espd.part2.is.eo.sized.tooltip">Por. zalecenie Komisji z dnia 6 maja 2003 r. dotycz?ce definicji
-        mikroprzedsi?biorstw oraz ma?ych i ?rednich przedsi?biorstw (Dz.U. L 124 z 20.5.2003, s. 36). Te informacje s?
-        wymagane wy??cznie do celów statystycznych. Mikroprzedsi?biorstwo: przedsi?biorstwo, które zatrudnia mniej ni?
-        10 osób i którego roczny obrót lub roczna suma bilansowa nie przekracza 2 milionów EUR. Ma?e przedsi?biorstwo:
-        przedsi?biorstwo, które zatrudnia mniej ni? 50 osób i którego roczny obrót lub roczna suma bilansowa nie
-        przekracza 10 milionów EUR. ?rednie przedsi?biorstwa: przedsi?biorstwa, które nie s? mikroprzedsi?biorstwami ani
-        ma?ymi przedsi?biorstwami i które zatrudniaj? mniej ni? 250 osób i których roczny obrót nie przekracza 50
-        milionów EUR lub roczna suma bilansowa nie przekracza 43 milionów EUR.
-    </entry>
+    <entry key="espd.part2.information.subcontractors">D: Informacje dotyczące podwykonawców, na których zdolności wykonawca nie polega</entry>
+    <entry key="espd.part2.information.subcontractors.description">Jeżeli tak i o ile jest to wiadome, proszę podać wykaz proponowanych podwykonawców:</entry>
+    <entry key="espd.part2.information.subcontractors.footer">Jeżeli instytucja zamawiająca lub podmiot zamawiający wyraźnie żąda przedstawienia tych informacji, dodatkowo oprócz informacji wymaganych w części I, proszę przedstawić – dla każdego podwykonawcy (każdej kategorii podwykonawców), których to dotyczy – informacje wymagane w niniejszej części sekcja A i B oraz w części III.</entry>
+    <entry key="espd.part2.information.subcontractors.header">(Sekcja, którą należy wypełnić jedynie w przypadku, gdy instytucja zamawiająca lub podmiot zamawiający wprost tego zażąda.)</entry>
+    <entry key="espd.part2.information.subcontractors.title">Czy wykonawca zamierza zlecić osobom trzecim podwykonawstwo jakiejkolwiek części zamówienia?</entry>
+    <entry key="espd.part2.internet.addr.if.exists">Adres internetowy (adres www) (jeżeli dotyczy):</entry>
+    <entry key="espd.part2.is.eo.proc.together">Czy wykonawca bierze udział w postępowaniu o udzielenie zamówienia wspólnie z innymi wykonawcami?</entry>
+    <entry key="espd.part2.is.eo.sized">Czy wykonawca jest mikroprzedsiębiorstwem bądź małym lub średnim przedsiębiorstwem?</entry>
+    <entry key="espd.part2.is.eo.sized.tooltip">Por. zalecenie Komisji z dnia 6 maja 2003 r. dotyczące definicji mikroprzedsiębiorstw oraz małych i średnich przedsiębiorstw (Dz.U. L 124 z 20.5.2003, s. 36). Te informacje są wymagane wyłącznie do celów statystycznych. Mikroprzedsiębiorstwo: przedsiębiorstwo, które zatrudnia mniej niż 10 osób i którego roczny obrót lub roczna suma bilansowa nie przekracza 2 milionów EUR. Małe przedsiębiorstwo: przedsiębiorstwo, które zatrudnia mniej niż 50 osób i którego roczny obrót lub roczna suma bilansowa nie przekracza 10 milionów EUR. Średnie przedsiębiorstwa: przedsiębiorstwa, które nie są mikroprzedsiębiorstwami ani małymi przedsiębiorstwami i które zatrudniają mniej niż 250 osób i których roczny obrót nie przekracza 50 milionów EUR lub roczna suma bilansowa nie przekracza 43 milionów EUR.</entry>
     <entry key="espd.part2.last.name">Nazwisko</entry>
-    <entry key="espd.part2.lots.concerned">W stosownych przypadkach, wskazanie cz??ci zamówienia, w odniesieniu do
-        której (których) wykonawca zamierza z?o?y? ofert?:
-    </entry>
+    <entry key="espd.part2.lots.concerned">W stosownych przypadkach, wskazanie części zamówienia, w odniesieniu do której (których) wykonawca zamierza złożyć ofertę:</entry>
     <entry key="espd.part2.name">Nazwa:</entry>
-    <entry key="espd.part2.name.part.group">c) W stosownych przypadkach, nazwa grupy bior?cej udzia?:</entry>
-    <entry key="espd.part2.other.eo.part">b) Prosz? wskaza? pozosta?ych wykonawców bior?cych wspólnie udzia? w
-        post?powaniu o udzielenie zamówienia:
-    </entry>
-    <entry key="espd.part2.percentage.disworkers">Jaki jest odpowiedni odsetek pracowników niepe?nosprawnych lub
-        defaworyzowanych?
-    </entry>
-    <entry key="espd.part2.person.empowered">W stosownych przypadkach prosz? poda? imi? i nazwisko (imiona i nazwiska)
-        oraz adres(-y) osoby (osób) upowa?nionej(-ych) do reprezentowania wykonawcy na potrzeby niniejszego post?powania
-        o udzielenie zamówienia:
-    </entry>
-    <entry key="espd.part2.pos.act.in.capacity">Stanowisko/Dzia?aj?cy(-a) jako:</entry>
+    <entry key="espd.part2.name.part.group">c) W stosownych przypadkach, nazwa grupy biorącej udział:</entry>
+    <entry key="espd.part2.other.eo.part">b) Proszę wskazać pozostałych wykonawców biorących wspólnie udział w postępowaniu o udzielenie zamówienia:</entry>
+    <entry key="espd.part2.percentage.disworkers">Jaki jest odpowiedni odsetek pracowników niepełnosprawnych lub defaworyzowanych?</entry>
+    <entry key="espd.part2.person.empowered">W stosownych przypadkach proszę podać imię i nazwisko (imiona i nazwiska) oraz adres(-y) osoby (osób) upoważnionej(-ych) do reprezentowania wykonawcy na potrzeby niniejszego postępowania o udzielenie zamówienia:</entry>
+    <entry key="espd.part2.pos.act.in.capacity">Stanowisko/Działający(-a) jako:</entry>
     <entry key="espd.part2.postal.adress">Adres pocztowy:</entry>
-    <entry key="espd.part2.provide.regnumber">a) Prosz? poda? odpowiedni numer rejestracyjny lub numer za?wiadczenia,
-        je?eli dotyczy:
-    </entry>
-    <entry key="espd.part2.ref.for.cert">c) Prosz? poda? dane referencyjne stanowi?ce podstaw? wpisu do wykazu lub
-        wydania za?wiadczenia oraz, w stosownych przypadkach, klasyfikacj? nadan? w urz?dowym wykazie:
-    </entry>
-    <entry key="espd.part2.separate.espd.sections.a.b">Prosz? przedstawi? odr?bne formularze ESPD zawieraj?ce informacje
-        wymagane zgodnie z sekcjami A i B niniejszej cz??ci oraz cz??ci? III dla ka?dego z podmiotów, których to
-        dotyczy, nale?ycie wype?nione i podpisane przez dane podmioty.<p/>Nale?y zauwa?y?, ?e dotyczy to równie?
-        wszystkich pracowników technicznych lub s?u?b technicznych, nienale??cych bezpo?rednio do przedsi?biorstwa
-        danego wykonawcy, w szczególno?ci tych odpowiedzialnych za kontrol? jako?ci, a w przypadku zamówie? publicznych
-        na roboty budowlane ? tych, do których wykonawca b?dzie móg? si? zwróci? o wykonanie robót budowlanych.<p/>O ile
-        ma to znaczenie dla okre?lonych zdolno?ci, na których polega wykonawca, prosz? do??czy? ? dla ka?dego z
-        podmiotów, których to dotyczy ? informacje wymagane zgodnie z cz??ciami IV i V.
-    </entry>
+    <entry key="espd.part2.provide.regnumber">a) Proszę podać odpowiedni numer rejestracyjny lub numer zaświadczenia, jeżeli dotyczy:</entry>
+    <entry key="espd.part2.ref.for.cert">c) Proszę podać dane referencyjne stanowiące podstawę wpisu do wykazu lub wydania zaświadczenia oraz, w stosownych przypadkach, klasyfikację nadaną w urzędowym wykazie:</entry>
+    <entry key="espd.part2.separate.espd.sections.a.b">Proszę przedstawić odrębne formularze ESPD zawierające informacje wymagane zgodnie z sekcjami A i B niniejszej części oraz częścią III dla każdego z podmiotów, których to dotyczy, należycie wypełnione i podpisane przez dane podmioty.<p/>Należy zauważyć, że dotyczy to również wszystkich pracowników technicznych lub służb technicznych, nienależących bezpośrednio do przedsiębiorstwa danego wykonawcy, w szczególności tych odpowiedzialnych za kontrolę jakości, a w przypadku zamówień publicznych na roboty budowlane – tych, do których wykonawca będzie mógł się zwrócić o wykonanie robót budowlanych.<p/>O ile ma to znaczenie dla określonych zdolności, na których polega wykonawca, proszę dołączyć – dla każdego z podmiotów, których to dotyczy – informacje wymagane zgodnie z częściami IV i V.</entry>
     <entry key="espd.part2.telephone">Telefon:</entry>
-    <entry key="espd.part2.vat">Numer VAT (je?eli dotyczy):</entry>
-    <entry key="espd.part2sel.alert">Wykonawca powinien przedstawi? informacje jedynie w przypadku, gdy instytucja
-        zamawiaj?ca lub podmiot zamawiaj?cy wymagaj? danych kryteriów kwalifikacji w stosownym og?oszeniu lub w
-        dokumentach zamówienia, o których mowa w og?oszeniu.
-    </entry>
+    <entry key="espd.part2.vat">Numer VAT (jeżeli dotyczy):</entry>
+    <entry key="espd.part2sel.alert">Wykonawca powinien przedstawić informacje jedynie w przypadku, gdy instytucja zamawiająca lub podmiot zamawiający wymagają danych kryteriów kwalifikacji w stosownym ogłoszeniu lub w dokumentach zamówienia, o których mowa w ogłoszeniu.</entry>
     <entry key="espd.crit.amount">kwota</entry>
     <entry key="espd.crit.amount.concerned">kwota, której to dotyczy</entry>
-    <entry key="espd.crit.average.turnover">?redni obrót</entry>
+    <entry key="espd.crit.average.turnover">Średni obrót</entry>
     <entry key="espd.crit.code">kod</entry>
-    <entry key="espd.crit.country.member.state">pa?stwo lub pa?stwo cz?onkowskie, którego to dotyczy</entry>
+    <entry key="espd.crit.country.member.state">państwo lub państwo członkowskie, którego to dotyczy</entry>
     <entry key="espd.crit.date">data</entry>
     <entry key="espd.crit.date.of.conviction">data wyroku</entry>
-    <entry key="espd.part3.crit.date.of.conviction.or.decision">Prosz? poda? dat? wyroku lub decyzji</entry>
-    <entry key="espd.crit.decision.final.and.binding">Je?eli naruszenie obowi?zków zosta?o ustalone w trybie decyzji
-        s?dowej lub administracyjnej, czy decyzja ta by?a ostateczna i wi???ca?
-    </entry>
+    <entry key="espd.part3.crit.date.of.conviction.or.decision">Proszę podać datę wyroku lub decyzji</entry>
+    <entry key="espd.crit.decision.final.and.binding">Jeżeli naruszenie obowiązków zostało ustalone w trybie decyzji sądowej lub administracyjnej, czy decyzja ta była ostateczna i wiążąca?</entry>
     <entry key="espd.crit.description">opis</entry>
-    <entry key="espd.crit.do.you.allow.checks">Czy zezwalaj? Pa?stwo na przeprowadzenie kontroli?</entry>
-    <entry key="espd.crit.end.date">Data ko?cowa</entry>
-    <entry key="espd.part3.crit.eu.main.breaching.obligations">W art. 57 ust. 4 dyrektywy 2014/24/UE okre?lono
-        nast?puj?ce powody wykluczenia
-    </entry>
-    <entry key="espd.part3.crit.eu.eo.main.breaching.obligations">W art. 57 ust. 4 dyrektywy 2014/24/UE okre?lono
-        nast?puj?ce powody wykluczenia
-    </entry>
-    <entry key="espd.part3.crit.eu.main.purely.national">Czy maj? zastosowanie podstawy wykluczenia o charakterze
-        wy??cznie krajowym okre?lone w stosownym og?oszeniu lub w dokumentach zamówienia?
-    </entry>
-    <entry key="espd.part3.crit.eu.grounds.criminal.conv.main.title">W art. 57 ust. 1 dyrektywy 2014/24/UE okre?lono
-        nast?puj?ce powody wykluczenia
-    </entry>
-    <entry key="espd.part3.crit.eu.eo.grounds.criminal.conv.main.title">W art. 57 ust. 1 dyrektywy 2014/24/UE okre?lono
-        nast?puj?ce powody wykluczenia
-    </entry>
-    <entry key="espd.part3.crit.eu.payment.taxes.main.title">W art. 57 ust. 2 dyrektywy 2014/24/UE okre?lono nast?puj?ce
-        powody wykluczenia
-    </entry>
-    <entry key="espd.part3.crit.eu.eo.payment.taxes.main.title">W art. 57 ust. 2 dyrektywy 2014/24/UE okre?lono
-        nast?puj?ce powody wykluczenia
-    </entry>
-    <entry key="espd.crit.eu.text.agreement.economic">Czy wykonawca zawar? z innymi wykonawcami porozumienia maj?ce na
-        celu zak?ócenie konkurencji?
-    </entry>
-    <entry key="espd.crit.eu.text.arrangement.creditors">Czy wykonawca zawar? uk?ad z wierzycielami?</entry>
-    <entry key="espd.crit.eu.text.bankrupt">Czy wykonawca znajduje si? w stanie upad?o?ci?</entry>
-    <entry key="espd.crit.eu.text.breaching.obligations.environmental">Czy wykonawca, wedle w?asnej wiedzy, naruszy?
-        swoje obowi?zki w dziedzinie prawa ochrony ?rodowiska? O których mowa, do celów niniejszego zamówienia, w prawie
-        krajowym, w stosownym og?oszeniu lub w dokumentach zamówienia b?d? w art. 18 ust. 2 dyrektywy 2014/24/UE.
-    </entry>
-    <entry key="espd.crit.eu.text.breaching.obligations.labour">Czy wykonawca, wedle w?asnej wiedzy, naruszy? swoje
-        obowi?zki w dziedzinie prawa pracy? O których mowa, do celów niniejszego zamówienia, w prawie krajowym, w
-        stosownym og?oszeniu lub w dokumentach zamówienia b?d? w art. 18 ust. 2 dyrektywy 2014/24/UE.
-    </entry>
-    <entry key="espd.crit.eu.text.breaching.obligations.social">Czy wykonawca, wedle w?asnej wiedzy, naruszy? swoje
-        obowi?zki w dziedzinie prawa socjalnego? O których mowa, do celów niniejszego zamówienia, w prawie krajowym, w
-        stosownym og?oszeniu lub w dokumentach zamówienia b?d? w art. 18 ust. 2 dyrektywy 2014/24/UE.
-    </entry>
-    <entry key="espd.crit.eu.text.child.labour">Czy w stosunku do samego wykonawcy b?d? jakiejkolwiek osoby b?d?cej
-        cz?onkiem organów administracyjnych, zarz?dzaj?cych lub nadzorczych wykonawcy, lub posiadaj?cej w
-        przedsi?biorstwie wykonawcy uprawnienia do reprezentowania, uprawnienia decyzyjne lub kontrolne, wydany zosta?
-        prawomocny wyrok za prac? dzieci i inne formy handlu lud?mi, orzeczeniem sprzed najwy?ej pi?ciu lat lub w którym
-        okres wykluczenia okre?lony bezpo?rednio w wyroku nadal obowi?zuje? Zgodnie z definicj? zawart? w art. 2
-        dyrektywy Parlamentu Europejskiego i Rady 2011/36/UE z dnia 5 kwietnia 2011 r. w sprawie zapobiegania handlowi
-        lud?mi i zwalczania tego procederu oraz ochrony ofiar, zast?puj?cej decyzj? ramow? Rady 2002/629/WSiSW (Dz.U. L
-        101 z 15.4.2011, s. 1).
-    </entry>
-    <entry key="espd.crit.eu.text.conflict.interest">Czy wykonawca wie o jakimkolwiek konflikcie interesów ? jak
-        wskazano w prawie krajowym, stosownym og?oszeniu lub dokumentach zamówienia ? spowodowanym jego udzia?em w
-        post?powaniu o udzielenie zamówienia?
-    </entry>
-    <entry key="espd.crit.eu.text.corruption">Czy w stosunku do samego wykonawcy b?d? jakiejkolwiek osoby b?d?cej
-        cz?onkiem organów administracyjnych, zarz?dzaj?cych lub nadzorczych wykonawcy, lub posiadaj?cej w
-        przedsi?biorstwie wykonawcy uprawnienia do reprezentowania, uprawnienia decyzyjne lub kontrolne, wydany zosta?
-        prawomocny wyrok za korupcj?, orzeczeniem sprzed najwy?ej pi?ciu lat lub w którym okres wykluczenia okre?lony
-        bezpo?rednio w wyroku nadal obowi?zuje? Zgodnie z definicj? zawart? w art. 3 Konwencji w sprawie zwalczania
-        korupcji urz?dników Wspólnot Europejskich i urz?dników pa?stw cz?onkowskich Unii Europejskiej (Dz.U. C 195 z
-        25.6.1997, s. 1) i w art. 2 ust. 1 decyzji ramowej Rady 2003/568/WSiSW z dnia 22 lipca 2003 r. w sprawie
-        zwalczania korupcji w sektorze prywatnym (Dz.U. L 192 z 31.7.2003, s. 54). Ta podstawa wykluczenia obejmuje
-        równie? korupcj? zdefiniowan? w prawie krajowym instytucji zamawiaj?cej (podmiotu zamawiaj?cego) lub wykonawcy.
-    </entry>
-    <entry key="espd.crit.eu.text.early.termination">Czy wykonawca znajdowa? si? w sytuacji, w której wcze?niejsza umowa
-        w sprawie zamówienia publicznego, wcze?niejsza umowa z podmiotem zamawiaj?cym lub wcze?niejsza umowa w sprawie
-        koncesji zosta?a rozwi?zana przed czasem, lub w której na?o?one zosta?o odszkodowanie b?d? inne porównywalne
-        sankcje w zwi?zku z t? wcze?niejsz? umow??
-    </entry>
-    <entry key="espd.crit.eu.text.fraud">Czy w stosunku do samego wykonawcy b?d? jakiejkolwiek osoby b?d?cej cz?onkiem
-        organów administracyjnych, zarz?dzaj?cych lub nadzorczych wykonawcy, lub posiadaj?cej w przedsi?biorstwie
-        wykonawcy uprawnienia do reprezentowania, uprawnienia decyzyjne lub kontrolne, wydany zosta? prawomocny wyrok za
-        nadu?ycie finansowe, orzeczeniem sprzed najwy?ej pi?ciu lat lub w którym okres wykluczenia okre?lony
-        bezpo?rednio w wyroku nadal obowi?zuje? W rozumieniu art. 1 Konwencji w sprawie ochrony interesów finansowych
-        Wspólnot Europejskich (Dz.U. C 316 z 27.11.1995, s. 48).
-    </entry>
-    <entry key="espd.crit.eu.text.grounds.criminal.conv">Czy w stosunku do samego wykonawcy b?d? jakiejkolwiek osoby
-        b?d?cej cz?onkiem organów administracyjnych, zarz?dzaj?cych lub nadzorczych wykonawcy, lub posiadaj?cej w
-        przedsi?biorstwie wykonawcy uprawnienia do reprezentowania, uprawnienia decyzyjne lub kontrolne, wydany zosta?
-        prawomocny wyrok za udzia? w organizacji przest?pczej, orzeczeniem sprzed najwy?ej pi?ciu lat lub w którym okres
-        wykluczenia okre?lony bezpo?rednio w wyroku nadal obowi?zuje? Zgodnie z definicj? zawart? w art. 2 decyzji
-        ramowej Rady 2008/841/WSiSW z dnia 24 pa?dziernika 2008 r. w sprawie zwalczania przest?pczo?ci zorganizowanej
-        (Dz.U. L 300 z 11.11.2008, s. 42).
-    </entry>
-    <entry key="espd.crit.eu.text.guilty.misconduct">Czy wykonawca jest winien powa?nego wykroczenia zawodowego? W
-        stosownych przypadkach zob. definicje w prawie krajowym, stosownym og?oszeniu lub dokumentach zamówienia.
-    </entry>
-    <entry key="espd.crit.eu.text.guilty.misinterpretation">Czy wykonawca znalaz? si? w jednej z poni?szych sytuacji:
-        <p/>a) by? winny powa?nego wprowadzenia w b??d przy dostarczaniu informacji wymaganych do weryfikacji braku
-        podstaw wykluczenia lub do weryfikacji spe?nienia kryteriów kwalifikacji;<p/>b) zatai? te informacje;<p/>c) nie
-        by? w stanie niezw?ocznie przedstawi? dokumentów potwierdzaj?cych wymaganych przez instytucj? zamawiaj?c? lub
-        podmiot zamawiaj?cy; oraz<p/>d) przedsi?wzi?? kroki, aby w bezprawny sposób wp?yn?? na proces podejmowania
-        decyzji przez instytucj? zamawiaj?c? lub podmiot zamawiaj?cy, pozyska? informacje poufne, które mog? da? mu
-        nienale?n? przewag? w post?powaniu o udzielenie zamówienia, lub wskutek zaniedbania przedstawi? wprowadzaj?ce w
-        b??d informacje, które mog? mie? istotny wp?yw na decyzje w sprawie wykluczenia, kwalifikacji lub udzielenia
-        zamówienia?
-    </entry>
-    <entry key="espd.crit.eu.text.insolvency">Czy wykonawca jest obj?ty post?powaniem upad?o?ciowym lub likwidacyjnym?
-    </entry>
-    <entry key="espd.crit.eu.text.involvement">Czy wykonawca lub przedsi?biorstwo zwi?zane z wykonawc? doradza?(-o)
-        instytucji zamawiaj?cej lub podmiotowi zamawiaj?cemu b?d? by?(-o) w inny sposób zaanga?owany(-e) w przygotowanie
-        post?powania o udzielenie zamówienia?
-    </entry>
-    <entry key="espd.crit.eu.text.liquidator">Czy aktywami wykonawcy zarz?dza likwidator lub s?d?</entry>
-    <entry key="espd.crit.eu.text.money.laundering">Czy w stosunku do samego wykonawcy b?d? jakiejkolwiek osoby b?d?cej
-        cz?onkiem organów administracyjnych, zarz?dzaj?cych lub nadzorczych wykonawcy, lub posiadaj?cej w
-        przedsi?biorstwie wykonawcy uprawnienia do reprezentowania, uprawnienia decyzyjne lub kontrolne, wydany zosta?
-        prawomocny wyrok za pranie pieni?dzy lub finansowanie terroryzmu, orzeczeniem sprzed najwy?ej pi?ciu lat lub w
-        którym okres wykluczenia okre?lony bezpo?rednio w wyroku nadal obowi?zuje? Zgodnie z definicj? zawart? w art. 1
-        dyrektywy 2005/60/WE Parlamentu Europejskiego i Rady z dnia 26 pa?dziernika 2005 r. w sprawie przeciwdzia?ania
-        korzystaniu z systemu finansowego w celu prania pieni?dzy oraz finansowania terroryzmu (Dz.U. L 309 z
-        25.11.2005, s. 15).
-    </entry>
-    <entry key="espd.crit.eu.text.national.bankruptcy">Czy wykonawca znajduje si? w innej sytuacji podobnej do upad?o?ci
-        wynikaj?cej z podobnej procedury przewidzianej w krajowych przepisach ustawowych i wykonawczych?
-    </entry>
-    <entry key="espd.crit.eu.text.payment.social.security">Czy wykonawca dopu?ci? si? naruszenia swoich obowi?zków
-        dotycz?cych p?atno?ci sk?adek na ubezpieczenie spo?eczne, zarówno w pa?stwie, w którym ma siedzib?, jak i w
-        pa?stwie cz?onkowskim instytucji zamawiaj?cej lub podmiotu zamawiaj?cego, je?eli jest ono inne ni? pa?stwo
-        siedziby?
-    </entry>
-    <entry key="espd.crit.eu.text.payment.taxes">Czy wykonawca dopu?ci? si? naruszenia swoich obowi?zków dotycz?cych
-        p?atno?ci podatków, zarówno w pa?stwie, w którym ma siedzib?, jak i w pa?stwie cz?onkowskim instytucji
-        zamawiaj?cej lub podmiotu zamawiaj?cego, je?eli jest ono inne ni? pa?stwo siedziby?
-    </entry>
-    <entry key="espd.crit.eu.text.purely.national">Inne podstawy wykluczenia, które mog? by? przewidziane w przepisach
-        krajowych pa?stwa cz?onkowskiego instytucji zamawiaj?cej lub podmiotu zamawiaj?cego. Czy maj? zastosowanie
-        podstawy wykluczenia o charakterze wy??cznie krajowym okre?lone w stosownym og?oszeniu lub w dokumentach
-        zamówienia?
-    </entry>
-    <entry key="espd.crit.eu.text.suspended.business">Czy dzia?alno?? gospodarcza wykonawcy jest zawieszona?</entry>
-    <entry key="espd.crit.eu.text.terrorist">Czy w stosunku do samego wykonawcy b?d? jakiejkolwiek osoby b?d?cej
-        cz?onkiem organów administracyjnych, zarz?dzaj?cych lub nadzorczych wykonawcy, lub posiadaj?cej w
-        przedsi?biorstwie wykonawcy uprawnienia do reprezentowania, uprawnienia decyzyjne lub kontrolne, wydany zosta?
-        prawomocny wyrok za przest?pstwa terrorystyczne lub przest?pstwa zwi?zane z dzia?alno?ci? terrorystyczn?,
-        orzeczeniem sprzed najwy?ej pi?ciu lat lub w którym okres wykluczenia okre?lony bezpo?rednio w wyroku nadal
-        obowi?zuje? Zgodnie z definicj? zawart? w art. 1 i 3 decyzji ramowej Rady z dnia 13 czerwca 2002 r. w sprawie
-        zwalczania terroryzmu (Dz.U. L 164 z 22.6.2002, s. 3). Ta podstawa wykluczenia obejmuje równie? pod?eganie do
-        pope?nienia przest?pstwa, pomocnictwo, wspó?sprawstwo lub usi?owanie pope?nienia przest?pstwa, o których to
-        czynach mowa w art. 4 tej?e decyzji ramowej.
-    </entry>
-    <entry key="espd.crit.eu.title.agreement.economic">porozumienia z innymi wykonawcami maj?ce na celu zak?ócenie
-        konkurencji
-    </entry>
-    <entry key="espd.crit.eu.title.arrangement.creditors">uk?ad z wierzycielami</entry>
-    <entry key="espd.crit.eu.title.bankrupt">upad?o??</entry>
-    <entry key="espd.part3.crit.eu.eo.bankrupt.title">Czy Pa?stwa organizacja znajduje si? w stanie upad?o?ci, b?d? jest
-        obj?ta post?powaniem upad?o?ciowym lub likwidacyjnym, b?d? zawar?a uk?ad z wierzycielami, b?d? znajduje si? w w
-        innej tego rodzaju sytuacji wynikaj?cej z podobnej procedury przewidzianej w krajowych przepisach ustawowych i
-        wykonawczych?
-    </entry>
-    <entry key="espd.crit.eu.title.breaching.obligations.environmental">naruszenie obowi?zków w dziedzinie prawa ochrony
-        ?rodowiska
-    </entry>
-    <entry key="espd.crit.eu.title.breaching.obligations.environmental.eo">naruszenie obowi?zków w dziedzinie prawa
-        ochrony ?rodowiska
-    </entry>
-    <entry key="espd.crit.eu.title.breaching.obligations.labour">naruszenie obowi?zków w dziedzinie prawa pracy</entry>
-    <entry key="espd.crit.eu.title.breaching.obligations.social">naruszenie obowi?zków w dziedzinie prawa socjalnego
-    </entry>
-    <entry key="espd.crit.eu.title.child.labour">praca dzieci i inne formy handlu lud?mi</entry>
-    <entry key="espd.crit.eu.title.conflict.interest">konflikt interesów spowodowany udzia?em w post?powaniu o
-        udzielenie zamówienia
-    </entry>
-    <entry key="espd.crit.eu.title.conflict.interest.eo">Czy Pa?stwa organizacja znajduje si? w sytuacji konfliktu
-        interesów spowodowanego udzia?em w post?powaniu o udzielenie zamówienia?
-    </entry>
+    <entry key="espd.crit.do.you.allow.checks">Czy zezwalają Państwo na przeprowadzenie kontroli?</entry>
+    <entry key="espd.crit.end.date">Data końcowa</entry>
+    <entry key="espd.part3.crit.eu.main.breaching.obligations">W art. 57 ust. 4 dyrektywy 2014/24/UE określono następujące powody wykluczenia</entry>
+    <entry key="espd.part3.crit.eu.eo.main.breaching.obligations">W art. 57 ust. 4 dyrektywy 2014/24/UE określono następujące powody wykluczenia</entry>
+    <entry key="espd.part3.crit.eu.main.purely.national">Czy mają zastosowanie podstawy wykluczenia o charakterze wyłącznie krajowym określone w stosownym ogłoszeniu lub w dokumentach zamówienia?</entry>
+    <entry key="espd.part3.crit.eu.grounds.criminal.conv.main.title">W art. 57 ust. 1 dyrektywy 2014/24/UE określono następujące powody wykluczenia</entry>
+    <entry key="espd.part3.crit.eu.eo.grounds.criminal.conv.main.title">W art. 57 ust. 1 dyrektywy 2014/24/UE określono następujące powody wykluczenia</entry>
+    <entry key="espd.part3.crit.eu.payment.taxes.main.title">W art. 57 ust. 2 dyrektywy 2014/24/UE określono następujące powody wykluczenia</entry>
+    <entry key="espd.part3.crit.eu.eo.payment.taxes.main.title">W art. 57 ust. 2 dyrektywy 2014/24/UE określono następujące powody wykluczenia</entry>
+    <entry key="espd.crit.eu.text.agreement.economic">Czy wykonawca zawarł z innymi wykonawcami porozumienia mające na celu zakłócenie konkurencji?</entry>
+    <entry key="espd.crit.eu.text.arrangement.creditors">Czy wykonawca zawarł układ z wierzycielami?</entry>
+    <entry key="espd.crit.eu.text.bankrupt">Czy wykonawca znajduje się w stanie upadłości?</entry>
+    <entry key="espd.crit.eu.text.breaching.obligations.environmental">Czy wykonawca, wedle własnej wiedzy, naruszył swoje obowiązki w dziedzinie prawa ochrony środowiska? O których mowa, do celów niniejszego zamówienia, w prawie krajowym, w stosownym ogłoszeniu lub w dokumentach zamówienia bądź w art. 18 ust. 2 dyrektywy 2014/24/UE.</entry>
+    <entry key="espd.crit.eu.text.breaching.obligations.labour">Czy wykonawca, wedle własnej wiedzy, naruszył swoje obowiązki w dziedzinie prawa pracy? O których mowa, do celów niniejszego zamówienia, w prawie krajowym, w stosownym ogłoszeniu lub w dokumentach zamówienia bądź w art. 18 ust. 2 dyrektywy 2014/24/UE.</entry>
+    <entry key="espd.crit.eu.text.breaching.obligations.social">Czy wykonawca, wedle własnej wiedzy, naruszył swoje obowiązki w dziedzinie prawa socjalnego? O których mowa, do celów niniejszego zamówienia, w prawie krajowym, w stosownym ogłoszeniu lub w dokumentach zamówienia bądź w art. 18 ust. 2 dyrektywy 2014/24/UE.</entry>
+    <entry key="espd.crit.eu.text.child.labour">Czy w stosunku do samego wykonawcy bądź jakiejkolwiek osoby będącej członkiem organów administracyjnych, zarządzających lub nadzorczych wykonawcy, lub posiadającej w przedsiębiorstwie wykonawcy uprawnienia do reprezentowania, uprawnienia decyzyjne lub kontrolne, wydany został prawomocny wyrok za pracę dzieci i inne formy handlu ludźmi, orzeczeniem sprzed najwyżej pięciu lat lub w którym okres wykluczenia określony bezpośrednio w wyroku nadal obowiązuje? Zgodnie z definicją zawartą w art. 2 dyrektywy Parlamentu Europejskiego i Rady 2011/36/UE z dnia 5 kwietnia 2011 r. w sprawie zapobiegania handlowi ludźmi i zwalczania tego procederu oraz ochrony ofiar, zastępującej decyzję ramową Rady 2002/629/WSiSW (Dz.U. L 101 z 15.4.2011, s. 1).</entry>
+    <entry key="espd.crit.eu.text.conflict.interest">Czy wykonawca wie o jakimkolwiek konflikcie interesów – jak wskazano w prawie krajowym, stosownym ogłoszeniu lub dokumentach zamówienia – spowodowanym jego udziałem w postępowaniu o udzielenie zamówienia?</entry>
+    <entry key="espd.crit.eu.text.corruption">Czy w stosunku do samego wykonawcy bądź jakiejkolwiek osoby będącej członkiem organów administracyjnych, zarządzających lub nadzorczych wykonawcy, lub posiadającej w przedsiębiorstwie wykonawcy uprawnienia do reprezentowania, uprawnienia decyzyjne lub kontrolne, wydany został prawomocny wyrok za korupcję, orzeczeniem sprzed najwyżej pięciu lat lub w którym okres wykluczenia określony bezpośrednio w wyroku nadal obowiązuje? Zgodnie z definicją zawartą w art. 3 Konwencji w sprawie zwalczania korupcji urzędników Wspólnot Europejskich i urzędników państw członkowskich Unii Europejskiej (Dz.U. C 195 z 25.6.1997, s. 1) i w art. 2 ust. 1 decyzji ramowej Rady 2003/568/WSiSW z dnia 22 lipca 2003 r. w sprawie zwalczania korupcji w sektorze prywatnym (Dz.U. L 192 z 31.7.2003, s. 54). Ta podstawa wykluczenia obejmuje również korupcję zdefiniowaną w prawie krajowym instytucji zamawiającej (podmiotu zamawiającego) lub wykonawcy.</entry>
+    <entry key="espd.crit.eu.text.early.termination">Czy wykonawca znajdował się w sytuacji, w której wcześniejsza umowa w sprawie zamówienia publicznego, wcześniejsza umowa z podmiotem zamawiającym lub wcześniejsza umowa w sprawie koncesji została rozwiązana przed czasem, lub w której nałożone zostało odszkodowanie bądź inne porównywalne sankcje w związku z tą wcześniejszą umową?</entry>
+    <entry key="espd.crit.eu.text.fraud">Czy w stosunku do samego wykonawcy bądź jakiejkolwiek osoby będącej członkiem organów administracyjnych, zarządzających lub nadzorczych wykonawcy, lub posiadającej w przedsiębiorstwie wykonawcy uprawnienia do reprezentowania, uprawnienia decyzyjne lub kontrolne, wydany został prawomocny wyrok za nadużycie finansowe, orzeczeniem sprzed najwyżej pięciu lat lub w którym okres wykluczenia określony bezpośrednio w wyroku nadal obowiązuje? W rozumieniu art. 1 Konwencji w sprawie ochrony interesów finansowych Wspólnot Europejskich (Dz.U. C 316 z 27.11.1995, s. 48).</entry>
+    <entry key="espd.crit.eu.text.grounds.criminal.conv">Czy w stosunku do samego wykonawcy bądź jakiejkolwiek osoby będącej członkiem organów administracyjnych, zarządzających lub nadzorczych wykonawcy, lub posiadającej w przedsiębiorstwie wykonawcy uprawnienia do reprezentowania, uprawnienia decyzyjne lub kontrolne, wydany został prawomocny wyrok za udział w organizacji przestępczej, orzeczeniem sprzed najwyżej pięciu lat lub w którym okres wykluczenia określony bezpośrednio w wyroku nadal obowiązuje? Zgodnie z definicją zawartą w art. 2 decyzji ramowej Rady 2008/841/WSiSW z dnia 24 października 2008 r. w sprawie zwalczania przestępczości zorganizowanej (Dz.U. L 300 z 11.11.2008, s. 42).</entry>
+    <entry key="espd.crit.eu.text.guilty.misconduct">Czy wykonawca jest winien poważnego wykroczenia zawodowego? W stosownych przypadkach zob. definicje w prawie krajowym, stosownym ogłoszeniu lub dokumentach zamówienia.</entry>
+    <entry key="espd.crit.eu.text.guilty.misinterpretation">Czy wykonawca znalazł się w jednej z poniższych sytuacji:<p/>a) był winny poważnego wprowadzenia w błąd przy dostarczaniu informacji wymaganych do weryfikacji braku podstaw wykluczenia lub do weryfikacji spełnienia kryteriów kwalifikacji;<p/>b) zataił te informacje;<p/>c) nie był w stanie niezwłocznie przedstawić dokumentów potwierdzających wymaganych przez instytucję zamawiającą lub podmiot zamawiający; oraz<p/>d) przedsięwziął kroki, aby w bezprawny sposób wpłynąć na proces podejmowania decyzji przez instytucję zamawiającą lub podmiot zamawiający, pozyskać informacje poufne, które mogą dać mu nienależną przewagę w postępowaniu o udzielenie zamówienia, lub wskutek zaniedbania przedstawić wprowadzające w błąd informacje, które mogą mieć istotny wpływ na decyzje w sprawie wykluczenia, kwalifikacji lub udzielenia zamówienia?</entry>
+    <entry key="espd.crit.eu.text.insolvency">Czy wykonawca jest objęty postępowaniem upadłościowym lub likwidacyjnym?</entry>
+    <entry key="espd.crit.eu.text.involvement">Czy wykonawca lub przedsiębiorstwo związane z wykonawcą doradzał(-o) instytucji zamawiającej lub podmiotowi zamawiającemu bądź był(-o) w inny sposób zaangażowany(-e) w przygotowanie postępowania o udzielenie zamówienia?</entry>
+    <entry key="espd.crit.eu.text.liquidator">Czy aktywami wykonawcy zarządza likwidator lub sąd?</entry>
+    <entry key="espd.crit.eu.text.money.laundering">Czy w stosunku do samego wykonawcy bądź jakiejkolwiek osoby będącej członkiem organów administracyjnych, zarządzających lub nadzorczych wykonawcy, lub posiadającej w przedsiębiorstwie wykonawcy uprawnienia do reprezentowania, uprawnienia decyzyjne lub kontrolne, wydany został prawomocny wyrok za pranie pieniędzy lub finansowanie terroryzmu, orzeczeniem sprzed najwyżej pięciu lat lub w którym okres wykluczenia określony bezpośrednio w wyroku nadal obowiązuje? Zgodnie z definicją zawartą w art. 1 dyrektywy 2005/60/WE Parlamentu Europejskiego i Rady z dnia 26 października 2005 r. w sprawie przeciwdziałania korzystaniu z systemu finansowego w celu prania pieniędzy oraz finansowania terroryzmu (Dz.U. L 309 z 25.11.2005, s. 15).</entry>
+    <entry key="espd.crit.eu.text.national.bankruptcy">Czy wykonawca znajduje się w innej sytuacji podobnej do upadłości wynikającej z podobnej procedury przewidzianej w krajowych przepisach ustawowych i wykonawczych?</entry>
+    <entry key="espd.crit.eu.text.payment.social.security">Czy wykonawca dopuścił się naruszenia swoich obowiązków dotyczących płatności składek na ubezpieczenie społeczne, zarówno w państwie, w którym ma siedzibę, jak i w państwie członkowskim instytucji zamawiającej lub podmiotu zamawiającego, jeżeli jest ono inne niż państwo siedziby?</entry>
+    <entry key="espd.crit.eu.text.payment.taxes">Czy wykonawca dopuścił się naruszenia swoich obowiązków dotyczących płatności podatków, zarówno w państwie, w którym ma siedzibę, jak i w państwie członkowskim instytucji zamawiającej lub podmiotu zamawiającego, jeżeli jest ono inne niż państwo siedziby?</entry>
+    <entry key="espd.crit.eu.text.purely.national">Inne podstawy wykluczenia, które mogą być przewidziane w przepisach krajowych państwa członkowskiego instytucji zamawiającej lub podmiotu zamawiającego. Czy mają zastosowanie podstawy wykluczenia o charakterze wyłącznie krajowym określone w stosownym ogłoszeniu lub w dokumentach zamówienia?</entry>
+    <entry key="espd.crit.eu.text.suspended.business">Czy działalność gospodarcza wykonawcy jest zawieszona?</entry>
+    <entry key="espd.crit.eu.text.terrorist">Czy w stosunku do samego wykonawcy bądź jakiejkolwiek osoby będącej członkiem organów administracyjnych, zarządzających lub nadzorczych wykonawcy, lub posiadającej w przedsiębiorstwie wykonawcy uprawnienia do reprezentowania, uprawnienia decyzyjne lub kontrolne, wydany został prawomocny wyrok za przestępstwa terrorystyczne lub przestępstwa związane z działalnością terrorystyczną, orzeczeniem sprzed najwyżej pięciu lat lub w którym okres wykluczenia określony bezpośrednio w wyroku nadal obowiązuje? Zgodnie z definicją zawartą w art. 1 i 3 decyzji ramowej Rady z dnia 13 czerwca 2002 r. w sprawie zwalczania terroryzmu (Dz.U. L 164 z 22.6.2002, s. 3). Ta podstawa wykluczenia obejmuje również podżeganie do popełnienia przestępstwa, pomocnictwo, współsprawstwo lub usiłowanie popełnienia przestępstwa, o których to czynach mowa w art. 4 tejże decyzji ramowej.</entry>
+    <entry key="espd.crit.eu.title.agreement.economic">porozumienia z innymi wykonawcami mające na celu zakłócenie konkurencji</entry>
+    <entry key="espd.crit.eu.title.arrangement.creditors">układ z wierzycielami</entry>
+    <entry key="espd.crit.eu.title.bankrupt">upadłość</entry>
+    <entry key="espd.part3.crit.eu.eo.bankrupt.title">Czy Państwa organizacja znajduje się w stanie upadłości, bądź jest objęta postępowaniem upadłościowym lub likwidacyjnym, bądź zawarła układ z wierzycielami, bądź znajduje się w w innej tego rodzaju sytuacji wynikającej z podobnej procedury przewidzianej w krajowych przepisach ustawowych i wykonawczych?</entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.environmental">naruszenie obowiązków w dziedzinie prawa ochrony środowiska</entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.environmental.eo">naruszenie obowiązków w dziedzinie prawa ochrony środowiska</entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.labour">naruszenie obowiązków w dziedzinie prawa pracy</entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.social">naruszenie obowiązków w dziedzinie prawa socjalnego</entry>
+    <entry key="espd.crit.eu.title.child.labour">praca dzieci i inne formy handlu ludźmi</entry>
+    <entry key="espd.crit.eu.title.conflict.interest">konflikt interesów spowodowany udziałem w postępowaniu o udzielenie zamówienia</entry>
+    <entry key="espd.crit.eu.title.conflict.interest.eo">Czy Państwa organizacja znajduje się w sytuacji konfliktu interesów spowodowanego udziałem w postępowaniu o udzielenie zamówienia?</entry>
     <entry key="espd.crit.eu.title.corruption">korupcja</entry>
-    <entry key="espd.crit.eu.title.early.termination">rozwi?zanie umowy przed czasem, odszkodowania lub inne
-        porównywalne sankcje
-    </entry>
-    <entry key="espd.crit.eu.title.fraud">nadu?ycie finansowe</entry>
-    <entry key="espd.crit.eu.title.grounds.criminal.conv">udzia? w organizacji przest?pczej</entry>
-    <entry key="espd.crit.eu.title.guilty.misconduct">winien powa?nego wykroczenia zawodowego</entry>
-    <entry key="espd.crit.eu.title.guilty.misconduct.eo">Czy wykonawca jest winny powa?nego wykroczenia zawodowego?
-    </entry>
-    <entry key="espd.crit.eu.title.guilty.misinterpretation">winien wprowadzenia w b??d, zatajenia informacji lub
-        niemo?no?ci przedstawienia wymaganych dokumentów lub uzyskania poufnych informacji na temat przedmiotowego
-        post?powania
-    </entry>
-    <entry key="espd.crit.eu.title.insolvency">niewyp?acalno??</entry>
-    <entry key="espd.crit.eu.title.involvement">bezpo?rednie lub po?rednie zaanga?owanie w przygotowanie przedmiotowego
-        post?powania o udzielenie zamówienia
-    </entry>
-    <entry key="espd.crit.eu.title.involvement.eo">Czy Pa?stwa organizacja lub zwi?zane z Pa?stwem przedsi?biorstwo
-        doradza?a(-o) instytucji zamawiaj?cej b?d? by?a(-o) w inny sposób zaanga?owana(-e) w przygotowanie post?powania
-        o udzielenie zamówienia?
-    </entry>
-    <entry key="espd.crit.eu.title.liquidator">aktywami zarz?dza likwidator</entry>
-    <entry key="espd.crit.eu.title.money.laundering">pranie pieni?dzy lub finansowanie terroryzmu</entry>
-    <entry key="espd.crit.eu.title.national.bankruptcy">inna sytuacja podobna do upad?o?ci wynikaj?ca z prawa
-        krajowego
-    </entry>
-    <entry key="espd.crit.eu.title.payment.social.security">p?atno?? sk?adek na ubezpieczenie spo?eczne</entry>
-    <entry key="espd.crit.eu.title.payment.taxes">p?atno?? podatków</entry>
-    <entry key="espd.crit.eu.title.purely.national">Podstawy wykluczenia o charakterze wy??cznie krajowym</entry>
-    <entry key="espd.crit.eu.title.suspended.business">dzia?alno?? gospodarcza jest zawieszona</entry>
-    <entry key="espd.crit.eu.title.terrorist">przest?pstwa terrorystyczne lub przest?pstwa zwi?zane z dzia?alno?ci?
-        terrorystyczn?
-    </entry>
-    <entry key="espd.part3.crit.eu.guilty.misconduct.eo.tooltip">W stosownych przypadkach zob. definicje w prawie
-        krajowym, stosownym og?oszeniu lub dokumentach zamówienia.
-    </entry>
-    <entry key="espd.crit.explain.certificates.independent.environmental.description">Je?eli nie, prosz? wyja?ni?
-        dlaczego, i okre?li?, jakie inne ?rodki dowodowe dotycz?ce systemów lub norm zarz?dzania ?rodowiskowego mog?
-        zosta? przedstawione:
-    </entry>
-    <entry key="espd.part4.crit.explain.certificates.independent.quality.description">Je?eli nie, prosz? wyja?ni?
-        dlaczego, i okre?li?, jakie inne ?rodki dowodowe dotycz?ce systemu zapewniania jako?ci mog? zosta?
-        przedstawione:
-    </entry>
-    <entry key="espd.part4.crit.explain.supply.contracts.quality.description">Je?eli nie, prosz? wyja?ni? dlaczego, i
-        wskaza?, jakie inne ?rodki dowodowe mog? zosta? przedstawione:
-    </entry>
-    <entry key="espd.crit.information.available.electronically">Czy informacje te mog? zosta? bezp?atnie uzyskane przez
-        instytucje z bazy danych pa?stwa cz?onkowskiego UE?
-    </entry>
-    <entry key="espd.crit.issuer">Wydaj?cy</entry>
-    <entry key="espd.crit.length.period.exclusion">O ile zosta?a okre?lona bezpo?rednio w wyroku ? d?ugo?? okresu
-        wykluczenia.
-    </entry>
+    <entry key="espd.crit.eu.title.early.termination">rozwiązanie umowy przed czasem, odszkodowania lub inne porównywalne sankcje</entry>
+    <entry key="espd.crit.eu.title.fraud">nadużycie finansowe</entry>
+    <entry key="espd.crit.eu.title.grounds.criminal.conv">udział w organizacji przestępczej</entry>
+    <entry key="espd.crit.eu.title.guilty.misconduct">winien poważnego wykroczenia zawodowego</entry>
+    <entry key="espd.crit.eu.title.guilty.misconduct.eo">Czy wykonawca jest winny poważnego wykroczenia zawodowego?</entry>
+    <entry key="espd.crit.eu.title.guilty.misinterpretation">winien wprowadzenia w błąd, zatajenia informacji lub niemożności przedstawienia wymaganych dokumentów lub uzyskania poufnych informacji na temat przedmiotowego postępowania</entry>
+    <entry key="espd.crit.eu.title.insolvency">niewypłacalność</entry>
+    <entry key="espd.crit.eu.title.involvement">bezpośrednie lub pośrednie zaangażowanie w przygotowanie przedmiotowego postępowania o udzielenie zamówienia</entry>
+    <entry key="espd.crit.eu.title.involvement.eo">Czy Państwa organizacja lub związane z Państwem przedsiębiorstwo doradzała(-o) instytucji zamawiającej bądź była(-o) w inny sposób zaangażowana(-e) w przygotowanie postępowania o udzielenie zamówienia?</entry>
+    <entry key="espd.crit.eu.title.liquidator">aktywami zarządza likwidator</entry>
+    <entry key="espd.crit.eu.title.money.laundering">pranie pieniędzy lub finansowanie terroryzmu</entry>
+    <entry key="espd.crit.eu.title.national.bankruptcy">inna sytuacja podobna do upadłości wynikająca z prawa krajowego</entry>
+    <entry key="espd.crit.eu.title.payment.social.security">płatność składek na ubezpieczenie społeczne</entry>
+    <entry key="espd.crit.eu.title.payment.taxes">płatność podatków</entry>
+    <entry key="espd.crit.eu.title.purely.national">Podstawy wykluczenia o charakterze wyłącznie krajowym</entry>
+    <entry key="espd.crit.eu.title.suspended.business">działalność gospodarcza jest zawieszona</entry>
+    <entry key="espd.crit.eu.title.terrorist">przestępstwa terrorystyczne lub przestępstwa związane z działalnością terrorystyczną</entry>
+    <entry key="espd.part3.crit.eu.guilty.misconduct.eo.tooltip">W stosownych przypadkach zob. definicje w prawie krajowym, stosownym ogłoszeniu lub dokumentach zamówienia.</entry>
+    <entry key="espd.crit.explain.certificates.independent.environmental.description">Jeżeli nie, proszę wyjaśnić dlaczego, i określić, jakie inne środki dowodowe dotyczące systemów lub norm zarządzania środowiskowego mogą zostać przedstawione:</entry>
+    <entry key="espd.part4.crit.explain.certificates.independent.quality.description">Jeżeli nie, proszę wyjaśnić dlaczego, i określić, jakie inne środki dowodowe dotyczące systemu zapewniania jakości mogą zostać przedstawione:</entry>
+    <entry key="espd.part4.crit.explain.supply.contracts.quality.description">Jeżeli nie, proszę wyjaśnić dlaczego, i wskazać, jakie inne środki dowodowe mogą zostać przedstawione:</entry>
+    <entry key="espd.crit.information.available.electronically">Czy informacje te mogą zostać bezpłatnie uzyskane przez instytucje z bazy danych państwa członkowskiego UE?</entry>
+    <entry key="espd.crit.issuer">Wydający</entry>
+    <entry key="espd.crit.length.period.exclusion">O ile została określona bezpośrednio w wyroku – długość okresu wykluczenia.</entry>
     <entry key="espd.crit.number">liczba (numer)</entry>
     <entry key="espd.crit.number.of.years">Liczba lat</entry>
-    <entry key="espd.crit.other.than.judicial.or.administrative.decision">Czy to naruszenie obowi?zków zosta?o ustalone
-        za pomoc? ?rodków innych ni? decyzja s?dowa lub administracyjna?
-    </entry>
-    <entry key="espd.crit.please.describe.them">Prosz? je opisa?</entry>
-    <entry key="espd.crit.please.specify">Prosz? okre?li?</entry>
-    <entry key="espd.crit.ratio">wska?nik</entry>
+    <entry key="espd.crit.other.than.judicial.or.administrative.decision">Czy to naruszenie obowiązków zostało ustalone za pomocą środków innych niż decyzja sądowa lub administracyjna?</entry>
+    <entry key="espd.crit.please.describe.them">Proszę je opisać</entry>
+    <entry key="espd.crit.please.specify">Proszę określić</entry>
+    <entry key="espd.crit.ratio">wskaźnik</entry>
     <entry key="espd.crit.reason">powód</entry>
-    <entry key="espd.crit.reasons.nevertheless.contract">Prosz? poda? powody, które pomimo powy?szej sytuacji
-        umo?liwiaj? realizacj? zamówienia. Nie trzeba podawa? tych informacji, je?eli wykluczenie wykonawców w tym
-        przypadku sta?o si? obowi?zkowe na mocy obowi?zuj?cego prawa krajowego bez ?adnej mo?liwo?ci odst?pstwa w
-        sytuacji, gdy wykonawcy s? pomimo to w stanie zrealizowa? zamówienie.
-    </entry>
+    <entry key="espd.crit.reasons.nevertheless.contract">Proszę podać powody, które pomimo powyższej sytuacji umożliwiają realizację zamówienia. Nie trzeba podawać tych informacji, jeżeli wykluczenie wykonawców w tym przypadku stało się obowiązkowe na mocy obowiązującego prawa krajowego bez żadnej możliwości odstępstwa w sytuacji, gdy wykonawcy są pomimo to w stanie zrealizować zamówienie.</entry>
     <entry key="espd.crit.recipients">odbiorcy</entry>
-    <entry key="espd.part4.crit.selection.ca.declares.that">W odniesieniu do kryteriów kwalifikacji instytucja
-        zamawiaj?ca wymaga, aby wykonawca o?wiadczy?, ?e
-    </entry>
-    <entry key="espd.part4.crit.selection.ca.economic.article">W art. 58 ust. 3 dyrektywy 2014/24/UE okre?lono
-        nast?puj?ce kryteria kwalifikacji
-    </entry>
-    <entry key="espd.part4.crit.selection.declares.that.tooltip">Wykonawca powinien wype?ni? to pole jedynie w
-        przypadku, gdy instytucja zamawiaj?ca lub podmiot zamawiaj?cy wskaza?y w stosownym og?oszeniu lub w dokumentach
-        zamówienia, o których mowa w og?oszeniu, ?e wykonawca mo?e ograniczy? si? do wype?nienia tego punktu w cz??ci IV
-        i nie musi wype?nia? sekcji A, B, C i D w cz??ci IV.
-    </entry>
-    <entry key="espd.crit.selection.economic.average.yearly.turnover.description">Jego ?redni roczny obrót w ci?gu
-        okre?lonej liczby lat ? wymagany w stosownym og?oszeniu, dokumentach zamówienia lub ESPD ? jest nast?puj?cy:
-    </entry>
-    <entry key="espd.crit.selection.economic.average.yearly.turnover.main">?redni roczny obrót</entry>
-    <entry key="espd.crit.selection.economic.financial.ratio.description">W odniesieniu do wska?ników finansowych (np.
-        stosunek aktywów do zobowi?za?) okre?lonych w stosownym og?oszeniu, dokumentach zamówienia lub ESPD wykonawca
-        o?wiadcza, ?e aktualne warto?ci wymaganych wska?ników s? nast?puj?ce:
-    </entry>
-    <entry key="espd.crit.selection.economic.financial.ratio.main">wska?nik finansowy</entry>
-    <entry key="espd.crit.selection.economic.financial.standing.article.tooltip">Wykonawca powinien przedstawi?
-        informacje jedynie w przypadku, gdy instytucja zamawiaj?ca lub podmiot zamawiaj?cy wymagaj? danych kryteriów
-        kwalifikacji w stosownym og?oszeniu lub w dokumentach zamówienia, o których mowa w og?oszeniu.
-    </entry>
-    <entry key="espd.crit.selection.economic.general.yearly.turnover.description">Jego ogólny roczny obrót w ci?gu
-        okre?lonej liczby lat obrotowych ? wymagany w stosownym og?oszeniu, dokumentach zamówienia lub ESPD ? jest
-        nast?puj?cy:
-    </entry>
+    <entry key="espd.part4.crit.selection.ca.declares.that">W odniesieniu do kryteriów kwalifikacji instytucja zamawiająca wymaga, aby wykonawca oświadczył, że</entry>
+    <entry key="espd.part4.crit.selection.ca.economic.article">W art. 58 ust. 3 dyrektywy 2014/24/UE określono następujące kryteria kwalifikacji</entry>
+    <entry key="espd.part4.crit.selection.declares.that.tooltip">Wykonawca powinien wypełnić to pole jedynie w przypadku, gdy instytucja zamawiająca lub podmiot zamawiający wskazały w stosownym ogłoszeniu lub w dokumentach zamówienia, o których mowa w ogłoszeniu, że wykonawca może ograniczyć się do wypełnienia tego punktu w części IV i nie musi wypełniać sekcji A, B, C i D w części IV.</entry>
+    <entry key="espd.crit.selection.economic.average.yearly.turnover.description">Jego średni roczny obrót w ciągu określonej liczby lat – wymagany w stosownym ogłoszeniu, dokumentach zamówienia lub ESPD – jest następujący:</entry>
+    <entry key="espd.crit.selection.economic.average.yearly.turnover.main">średni roczny obrót</entry>
+    <entry key="espd.crit.selection.economic.financial.ratio.description">W odniesieniu do wskaźników finansowych (np. stosunek aktywów do zobowiązań) określonych w stosownym ogłoszeniu, dokumentach zamówienia lub ESPD wykonawca oświadcza, że aktualne wartości wymaganych wskaźników są następujące:</entry>
+    <entry key="espd.crit.selection.economic.financial.ratio.main">wskaźnik finansowy</entry>
+    <entry key="espd.crit.selection.economic.financial.standing.article.tooltip">Wykonawca powinien przedstawić informacje jedynie w przypadku, gdy instytucja zamawiająca lub podmiot zamawiający wymagają danych kryteriów kwalifikacji w stosownym ogłoszeniu lub w dokumentach zamówienia, o których mowa w ogłoszeniu.</entry>
+    <entry key="espd.crit.selection.economic.general.yearly.turnover.description">Jego ogólny roczny obrót w ciągu określonej liczby lat obrotowych – wymagany w stosownym ogłoszeniu, dokumentach zamówienia lub ESPD – jest następujący:</entry>
     <entry key="espd.crit.selection.economic.general.yearly.turnover.main">ogólny roczny obrót</entry>
-    <entry key="espd.crit.selection.economic.other.financial.requirements.description">W odniesieniu do innych
-        ewentualnych wymogów ekonomicznych lub finansowych, które mog?y zosta? okre?lone w stosownym og?oszeniu lub
-        dokumentach zamówienia, wykonawca o?wiadcza, ?e:
-    </entry>
-    <entry key="espd.crit.selection.economic.other.financial.requirements.main">inne wymogi ekonomiczne lub finansowe
-    </entry>
-    <entry key="espd.crit.selection.economic.professional.risk.insurance.description">W ramach ubezpieczenia z tytu?u
-        ryzyka zawodowego wykonawca jest ubezpieczony na nast?puj?c? kwot?:
-    </entry>
-    <entry key="espd.crit.selection.economic.professional.risk.insurance.main">ubezpieczenie z tytu?u ryzyka
-        zawodowego
-    </entry>
-    <entry key="espd.crit.selection.economic.setup.eo.description">W przypadku gdy informacje dotycz?ce obrotu (ogólnego
-        lub w danym obszarze) nie s? dost?pne za ca?y wymagany okres, prosz? poda? dat? za?o?enia przedsi?biorstwa
-        wykonawcy lub rozpocz?cia dzia?alno?ci przez wykonawc?:
-    </entry>
-    <entry key="espd.crit.selection.economic.setup.eo.main">ustanowienie przedsi?biorstwa wykonawcy</entry>
-    <entry key="espd.crit.selection.economic.specific.average.turnover.description">Jego ?redni roczny obrót w danym
-        obszarze dzia?alno?ci obj?tym zamówieniem w ci?gu okre?lonej liczby lat ? wymagany w stosownym og?oszeniu,
-        dokumentach zamówienia lub ESPD ? jest nast?puj?cy:
-    </entry>
-    <entry key="espd.crit.selection.economic.specific.average.turnover.main">?redni obrót w danym obszarze</entry>
-    <entry key="espd.crit.selection.economic.specific.yearly.turnover.description">Jego roczny obrót w danym obszarze
-        dzia?alno?ci obj?tym zamówieniem w ci?gu okre?lonej liczby lat obrotowych ? wymagany w stosownym og?oszeniu,
-        dokumentach zamówienia lub ESPD ? jest nast?puj?cy:
-    </entry>
+    <entry key="espd.crit.selection.economic.other.financial.requirements.description">W odniesieniu do innych ewentualnych wymogów ekonomicznych lub finansowych, które mogły zostać określone w stosownym ogłoszeniu lub dokumentach zamówienia, wykonawca oświadcza, że:</entry>
+    <entry key="espd.crit.selection.economic.other.financial.requirements.main">inne wymogi ekonomiczne lub finansowe</entry>
+    <entry key="espd.crit.selection.economic.professional.risk.insurance.description">W ramach ubezpieczenia z tytułu ryzyka zawodowego wykonawca jest ubezpieczony na następującą kwotę:</entry>
+    <entry key="espd.crit.selection.economic.professional.risk.insurance.main">ubezpieczenie z tytułu ryzyka zawodowego</entry>
+    <entry key="espd.crit.selection.economic.setup.eo.description">W przypadku gdy informacje dotyczące obrotu (ogólnego lub w danym obszarze) nie są dostępne za cały wymagany okres, proszę podać datę założenia przedsiębiorstwa wykonawcy lub rozpoczęcia działalności przez wykonawcę:</entry>
+    <entry key="espd.crit.selection.economic.setup.eo.main">ustanowienie przedsiębiorstwa wykonawcy</entry>
+    <entry key="espd.crit.selection.economic.specific.average.turnover.description">Jego średni roczny obrót w danym obszarze działalności objętym zamówieniem w ciągu określonej liczby lat – wymagany w stosownym ogłoszeniu, dokumentach zamówienia lub ESPD – jest następujący:</entry>
+    <entry key="espd.crit.selection.economic.specific.average.turnover.main">średni obrót w danym obszarze</entry>
+    <entry key="espd.crit.selection.economic.specific.yearly.turnover.description">Jego roczny obrót w danym obszarze działalności objętym zamówieniem w ciągu określonej liczby lat obrotowych – wymagany w stosownym ogłoszeniu, dokumentach zamówienia lub ESPD – jest następujący:</entry>
     <entry key="espd.crit.selection.economic.specific.yearly.turnover.main">roczny obrót w danym obszarze</entry>
-    <entry key="espd.part4.crit.selection.eo.declares.that">W odniesieniu do kryteriów kwalifikacji wykonawca o?wiadcza,
-        ?e
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.declares.that.tooltip">Wykonawca powinien wype?ni? to pole jedynie w
-        przypadku, gdy instytucja zamawiaj?ca lub podmiot zamawiaj?cy wskaza?y w stosownym og?oszeniu lub w dokumentach
-        zamówienia, o których mowa w og?oszeniu, ?e wykonawca mo?e ograniczy? si? do wype?nienia tego punktu w cz??ci IV
-        i nie musi wype?nia? sekcji A, B, C i D w cz??ci IV.
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.economic.article">W art. 58 ust. 3 dyrektywy 2014/24/UE okre?lono
-        nast?puj?ce kryteria kwalifikacji
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.economic.article.tooltip">Wykonawca powinien przedstawi? informacje jedynie
-        w przypadku, gdy instytucja zamawiaj?ca lub podmiot zamawiaj?cy wymagaj? danych kryteriów kwalifikacji w
-        stosownym og?oszeniu lub w dokumentach zamówienia, o których mowa w og?oszeniu.
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.economic.enrolement.description">Figuruje w odpowiednim rejestrze zawodowym
-        lub handlowym prowadzonym w pa?stwie cz?onkowskim siedziby wykonawcy.
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.economic.enrolement.main">wpis do rejestru handlowego lub zawodowego
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.economic.service.contracts.description">Czy konieczne jest posiadanie
-        okre?lonego zezwolenia lub bycie cz?onkiem okre?lonej organizacji, aby mie? mo?liwo?? ?wiadczenia us?ugi, o
-        której mowa, w pa?stwie siedziby wykonawcy?
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.economic.service.contracts.main">W przypadku zamówie? na us?ugi:
-        konieczno?? posiadania zezwolenia lub cz?onkostwa
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.satisfies.all.criteria">Spe?nia wszystkie wymagane kryteria kwalifikacji.
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.suitability.article">W art. 58 ust. 2 dyrektywy 2014/24/UE okre?lono
-        nast?puj?ce kryteria kwalifikacji
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.suitability.article.tooltip">Wykonawca powinien przedstawi? informacje
-        jedynie w przypadku, gdy instytucja zamawiaj?ca lub podmiot zamawiaj?cy wymagaj? danych kryteriów kwalifikacji w
-        stosownym og?oszeniu lub w dokumentach zamówienia, o których mowa w og?oszeniu.
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.suitability.enrolment.description">Figuruje w odpowiednim rejestrze
-        zawodowym lub handlowym prowadzonym w pa?stwie cz?onkowskim siedziby wykonawcy.
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.suitability.enrolment.main">wpis do rejestru handlowego lub zawodowego
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.suitability.service.contracts.description">Czy konieczne jest posiadanie
-        okre?lonego zezwolenia lub bycie cz?onkiem okre?lonej organizacji, aby mie? mo?liwo?? ?wiadczenia us?ugi, o
-        której mowa, w pa?stwie siedziby wykonawcy?
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.suitability.service.contracts.main">W przypadku zamówie? na us?ugi:
-        konieczno?? posiadania zezwolenia lub cz?onkostwa
-    </entry>
-    <entry key="espd.part4.crit.selection.quality.assurance.article">W art. 62 ust. 2 dyrektywy 2014/24/UE okre?lono
-        nast?puj?ce kryteria kwalifikacji
-    </entry>
-    <entry key="espd.part4.crit.selection.quality.assurance.tooltip">Wykonawca powinien przedstawi? informacje jedynie w
-        przypadku, gdy instytucja zamawiaj?ca lub podmiot zamawiaj?cy wymagaj? danych kryteriów kwalifikacji w stosownym
-        og?oszeniu lub w dokumentach zamówienia, o których mowa w og?oszeniu.
-    </entry>
-    <entry key="espd.crit.selection.quality.certificate.independent.bodies.environmental.description">Czy wykonawca
-        b?dzie w stanie przedstawi? za?wiadczenia sporz?dzone przez niezale?ne jednostki, po?wiadczaj?ce spe?nienie
-        przez wykonawc? wymogów okre?lonych systemów lub norm zarz?dzania ?rodowiskowego?
-    </entry>
-    <entry key="espd.crit.selection.quality.certificate.independent.bodies.environmental.main">za?wiadczenia sporz?dzone
-        przez niezale?ne jednostki odno?nie do systemów lub norm zarz?dzania ?rodowiskowego
-    </entry>
-    <entry key="espd.crit.selection.quality.certificate.independent.bodies.quality.description">Czy wykonawca b?dzie w
-        stanie przedstawi? za?wiadczenia sporz?dzone przez niezale?ne jednostki, po?wiadczaj?ce spe?nienie przez
-        wykonawc? wymaganych norm zapewniania jako?ci, w tym w zakresie dost?pno?ci dla osób niepe?nosprawnych?
-    </entry>
-    <entry key="espd.crit.selection.quality.certificate.independent.bodies.quality.main">za?wiadczenia sporz?dzone przez
-        niezale?ne jednostki odno?nie do norm zapewniania jako?ci
-    </entry>
-    <entry key="espd.part4.crit.selection.satisfies.all.criteria">Spe?nia wszystkie wymagane kryteria kwalifikacji
-        wskazane w stosownym og?oszeniu lub w dokumentach zamówienia, o których mowa w og?oszeniu.
-    </entry>
-    <entry key="espd.part4.crit.selection.suitability.article">W art. 58 ust. 2 dyrektywy 2014/24/UE okre?lono
-        nast?puj?ce kryteria kwalifikacji
-    </entry>
-    <entry key="espd.part4.crit.selection.suitability.article.tooltip">Wykonawca powinien wype?ni? to pole jedynie w
-        przypadku, gdy instytucja zamawiaj?ca lub podmiot zamawiaj?cy wskaza?y w stosownym og?oszeniu lub w dokumentach
-        zamówienia, o których mowa w og?oszeniu, ?e wykonawca mo?e ograniczy? si? do wype?nienia sekcji ? w cz??ci IV i
-        nie musi wype?nia? ?adnej z pozosta?ych sekcji w cz??ci IV:
-    </entry>
-    <entry key="espd.crit.selection.suitability.enrolment.professional.register.description">Figuruje w odpowiednich
-        rejestrach zawodowych prowadzonych w pa?stwie cz?onkowskim siedziby wykonawcy zgodnie z opisem w za??czniku XI
-        do dyrektywy 2014/24/UE; wykonawcy z niektórych pa?stw cz?onkowskich mog? by? zobowi?zani do spe?nienia innych
-        wymogów okre?lonych w tym za??czniku.
-    </entry>
-    <entry key="espd.crit.selection.suitability.enrolment.professional.register.main">wpis do odpowiedniego rejestru
-        zawodowego
-    </entry>
-    <entry key="espd.crit.selection.suitability.enrolment.trade.register.description">Figuruje w odpowiednich rejestrach
-        handlowych prowadzonych w pa?stwie cz?onkowskim siedziby wykonawcy zgodnie z opisem w za??czniku XI do dyrektywy
-        2014/24/UE; wykonawcy z niektórych pa?stw cz?onkowskich mog? by? zobowi?zani do spe?nienia innych wymogów
-        okre?lonych w tym za??czniku.
-    </entry>
+    <entry key="espd.part4.crit.selection.eo.declares.that">W odniesieniu do kryteriów kwalifikacji wykonawca oświadcza, że</entry>
+    <entry key="espd.part4.crit.selection.eo.declares.that.tooltip">Wykonawca powinien wypełnić to pole jedynie w przypadku, gdy instytucja zamawiająca lub podmiot zamawiający wskazały w stosownym ogłoszeniu lub w dokumentach zamówienia, o których mowa w ogłoszeniu, że wykonawca może ograniczyć się do wypełnienia tego punktu w części IV i nie musi wypełniać sekcji A, B, C i D w części IV.</entry>
+    <entry key="espd.part4.crit.selection.eo.economic.article">W art. 58 ust. 3 dyrektywy 2014/24/UE określono następujące kryteria kwalifikacji</entry>
+    <entry key="espd.part4.crit.selection.eo.economic.article.tooltip">Wykonawca powinien przedstawić informacje jedynie w przypadku, gdy instytucja zamawiająca lub podmiot zamawiający wymagają danych kryteriów kwalifikacji w stosownym ogłoszeniu lub w dokumentach zamówienia, o których mowa w ogłoszeniu.</entry>
+    <entry key="espd.part4.crit.selection.eo.economic.enrolement.description">Figuruje w odpowiednim rejestrze zawodowym lub handlowym prowadzonym w państwie członkowskim siedziby wykonawcy.</entry>
+    <entry key="espd.part4.crit.selection.eo.economic.enrolement.main">wpis do rejestru handlowego lub zawodowego</entry>
+    <entry key="espd.part4.crit.selection.eo.economic.service.contracts.description">Czy konieczne jest posiadanie określonego zezwolenia lub bycie członkiem określonej organizacji, aby mieć możliwość świadczenia usługi, o której mowa, w państwie siedziby wykonawcy?</entry>
+    <entry key="espd.part4.crit.selection.eo.economic.service.contracts.main">W przypadku zamówień na usługi: konieczność posiadania zezwolenia lub członkostwa</entry>
+    <entry key="espd.part4.crit.selection.eo.satisfies.all.criteria">Spełnia wszystkie wymagane kryteria kwalifikacji.</entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.article">W art. 58 ust. 2 dyrektywy 2014/24/UE określono następujące kryteria kwalifikacji</entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.article.tooltip">Wykonawca powinien przedstawić informacje jedynie w przypadku, gdy instytucja zamawiająca lub podmiot zamawiający wymagają danych kryteriów kwalifikacji w stosownym ogłoszeniu lub w dokumentach zamówienia, o których mowa w ogłoszeniu.</entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.enrolment.description">Figuruje w odpowiednim rejestrze zawodowym lub handlowym prowadzonym w państwie członkowskim siedziby wykonawcy.</entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.enrolment.main">wpis do rejestru handlowego lub zawodowego</entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.service.contracts.description">Czy konieczne jest posiadanie określonego zezwolenia lub bycie członkiem określonej organizacji, aby mieć możliwość świadczenia usługi, o której mowa, w państwie siedziby wykonawcy?</entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.service.contracts.main">W przypadku zamówień na usługi: konieczność posiadania zezwolenia lub członkostwa</entry>
+    <entry key="espd.part4.crit.selection.quality.assurance.article">W art. 62 ust. 2 dyrektywy 2014/24/UE określono następujące kryteria kwalifikacji</entry>
+    <entry key="espd.part4.crit.selection.quality.assurance.tooltip">Wykonawca powinien przedstawić informacje jedynie w przypadku, gdy instytucja zamawiająca lub podmiot zamawiający wymagają danych kryteriów kwalifikacji w stosownym ogłoszeniu lub w dokumentach zamówienia, o których mowa w ogłoszeniu.</entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.environmental.description">Czy wykonawca będzie w stanie przedstawić zaświadczenia sporządzone przez niezależne jednostki, poświadczające spełnienie przez wykonawcę wymogów określonych systemów lub norm zarządzania środowiskowego?</entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.environmental.main">zaświadczenia sporządzone przez niezależne jednostki odnośnie do systemów lub norm zarządzania środowiskowego</entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.quality.description">Czy wykonawca będzie w stanie przedstawić zaświadczenia sporządzone przez niezależne jednostki, poświadczające spełnienie przez wykonawcę wymaganych norm zapewniania jakości, w tym w zakresie dostępności dla osób niepełnosprawnych?</entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.quality.main">zaświadczenia sporządzone przez niezależne jednostki odnośnie do norm zapewniania jakości</entry>
+    <entry key="espd.part4.crit.selection.satisfies.all.criteria">Spełnia wszystkie wymagane kryteria kwalifikacji wskazane w stosownym ogłoszeniu lub w dokumentach zamówienia, o których mowa w ogłoszeniu.</entry>
+    <entry key="espd.part4.crit.selection.suitability.article">W art. 58 ust. 2 dyrektywy 2014/24/UE określono następujące kryteria kwalifikacji</entry>
+    <entry key="espd.part4.crit.selection.suitability.article.tooltip">Wykonawca powinien wypełnić to pole jedynie w przypadku, gdy instytucja zamawiająca lub podmiot zamawiający wskazały w stosownym ogłoszeniu lub w dokumentach zamówienia, o których mowa w ogłoszeniu, że wykonawca może ograniczyć się do wypełnienia sekcji α w części IV i nie musi wypełniać żadnej z pozostałych sekcji w części IV:</entry>
+    <entry key="espd.crit.selection.suitability.enrolment.professional.register.description">Figuruje w odpowiednich rejestrach zawodowych prowadzonych w państwie członkowskim siedziby wykonawcy zgodnie z opisem w załączniku XI do dyrektywy 2014/24/UE; wykonawcy z niektórych państw członkowskich mogą być zobowiązani do spełnienia innych wymogów określonych w tym załączniku.</entry>
+    <entry key="espd.crit.selection.suitability.enrolment.professional.register.main">wpis do odpowiedniego rejestru zawodowego</entry>
+    <entry key="espd.crit.selection.suitability.enrolment.trade.register.description">Figuruje w odpowiednich rejestrach handlowych prowadzonych w państwie członkowskim siedziby wykonawcy zgodnie z opisem w załączniku XI do dyrektywy 2014/24/UE; wykonawcy z niektórych państw członkowskich mogą być zobowiązani do spełnienia innych wymogów określonych w tym załączniku.</entry>
     <entry key="espd.crit.selection.suitability.enrolment.trade.register.main">wpis do rejestru handlowego</entry>
-    <entry key="espd.crit.selection.suitability.service.contracts.auth.description">Czy konieczne jest posiadanie
-        okre?lonego zezwolenia, aby mie? mo?liwo?? ?wiadczenia us?ugi, o której mowa, w pa?stwie siedziby wykonawcy?
-    </entry>
-    <entry key="espd.crit.selection.suitability.service.contracts.auth.main">W przypadku zamówie? na us?ugi: konieczne
-        posiadanie okre?lonego zezwolenia
-    </entry>
-    <entry key="espd.crit.selection.suitability.service.contracts.membership.description">Czy konieczne jest bycie
-        cz?onkiem okre?lonej organizacji, aby mie? mo?liwo?? ?wiadczenia us?ugi, o której mowa, w pa?stwie siedziby
-        wykonawcy?
-    </entry>
-    <entry key="espd.crit.selection.suitability.service.contracts.membership.main">W przypadku zamówie? na us?ugi:
-        konieczne bycie cz?onkiem okre?lonej organizacji
-    </entry>
-    <entry key="espd.crit.selection.technical.allowance.of.checks.description">W odniesieniu do produktów lub us?ug o
-        z?o?onym charakterze, które maj? zosta? dostarczone, lub ? wyj?tkowo ? w odniesieniu do produktów lub us?ug o
-        szczególnym przeznaczeniu: Czy wykonawca zezwoli na przeprowadzenie kontroli swoich zdolno?ci produkcyjnych lub
-        zdolno?ci technicznych, a w razie konieczno?ci tak?e dost?pnych mu ?rodków naukowych i badawczych, jak równie?
-        ?rodków kontroli jako?ci? Kontrol? ma przeprowadza? instytucja zamawiaj?ca lub ? w przypadku gdy instytucja ta
-        wyrazi na to zgod? ? w jej imieniu, w?a?ciwy organ urz?dowy pa?stwa, w którym dostawca lub us?ugodawca ma
-        siedzib?.
-    </entry>
-    <entry key="espd.crit.selection.technical.allowance.of.checks.main">mo?liwo?? przeprowadzania kontroli</entry>
-    <entry key="espd.crit.selection.technical.average.annual.manpower.description">?rednie roczne zatrudnienie u
-        wykonawcy w ostatnich trzech latach by?o nast?puj?ce:
-    </entry>
-    <entry key="espd.crit.selection.technical.average.annual.manpower.main">?rednie roczne zatrudnienie</entry>
-    <entry key="espd.crit.selection.technical.educational.professional.qualifications.description">Sam us?ugodawca lub
-        wykonawca oraz/lub jego kadra kierownicza (w zale?no?ci od wymogów okre?lonych w stosownym og?oszeniu lub
-        dokumentach zamówienia) posiada nast?puj?ce wykszta?cenie i kwalifikacje zawodowe.
-    </entry>
-    <entry key="espd.crit.selection.technical.educational.professional.qualifications.main">wykszta?cenie i kwalifikacje
-        zawodowe
-    </entry>
-    <entry key="espd.crit.selection.technical.environment.management.features.description">Podczas realizacji zamówienia
-        wykonawca b?dzie móg? stosowa? nast?puj?ce ?rodki zarz?dzania ?rodowiskowego:
-    </entry>
-    <entry key="espd.crit.selection.technical.environment.management.features.main">?rodki zarz?dzania ?rodowiskowego
-    </entry>
-    <entry key="espd.crit.selection.technical.number.managerial.staff.description">Liczebno?? kadry kierowniczej
-        wykonawcy w ostatnich trzech latach by?a nast?puj?ca:
-    </entry>
-    <entry key="espd.crit.selection.technical.number.managerial.staff.main">liczebno?? kadry kierowniczej</entry>
-    <entry key="espd.part4.crit.selection.technical.professional.ability.article">W art. 58 ust. 4 dyrektywy 2014/24/UE
-        okre?lono nast?puj?ce kryteria kwalifikacji
-    </entry>
-    <entry key="espd.part4.crit.selection.technical.professional.ability.article.tooltip">Wykonawca powinien przedstawi?
-        informacje jedynie w przypadku, gdy instytucja zamawiaj?ca lub podmiot zamawiaj?cy wymagaj? danych kryteriów
-        kwalifikacji w stosownym og?oszeniu lub w dokumentach zamówienia, o których mowa w og?oszeniu.
-    </entry>
-    <entry key="espd.crit.selection.technical.service.contracts.performance.services.description">Jedynie w odniesieniu
-        do zamówie? publicznych na us?ugi: W okresie odniesienia wykonawca zrealizowa? nast?puj?ce g?ówne us?ugi
-        okre?lonego rodzaju: Instytucje zamawiaj?ce mog? wymaga?, aby okres ten wynosi? do trzech lat, i dopuszcza?
-        legitymowanie si? do?wiadczeniem sprzed ponad trzech lat.
-    </entry>
-    <entry key="espd.crit.selection.technical.service.contracts.performance.services.main">W przypadku zamówie? na
-        us?ugi: realizacja us?ug okre?lonego rodzaju
-    </entry>
-    <entry key="espd.crit.selection.technical.study.research.facilities.description">Korzysta z nast?puj?cego zaplecza
-        naukowo-badawczego:
-    </entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.auth.description">Czy konieczne jest posiadanie określonego zezwolenia, aby mieć możliwość świadczenia usługi, o której mowa, w państwie siedziby wykonawcy?</entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.auth.main">W przypadku zamówień na usługi: konieczne posiadanie określonego zezwolenia</entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.membership.description">Czy konieczne jest bycie członkiem określonej organizacji, aby mieć możliwość świadczenia usługi, o której mowa, w państwie siedziby wykonawcy?</entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.membership.main">W przypadku zamówień na usługi: konieczne bycie członkiem określonej organizacji</entry>
+    <entry key="espd.crit.selection.technical.allowance.of.checks.description">W odniesieniu do produktów lub usług o złożonym charakterze, które mają zostać dostarczone, lub – wyjątkowo – w odniesieniu do produktów lub usług o szczególnym przeznaczeniu: Czy wykonawca zezwoli na przeprowadzenie kontroli swoich zdolności produkcyjnych lub zdolności technicznych, a w razie konieczności także dostępnych mu środków naukowych i badawczych, jak również środków kontroli jakości? Kontrolę ma przeprowadzać instytucja zamawiająca lub – w przypadku gdy instytucja ta wyrazi na to zgodę – w jej imieniu, właściwy organ urzędowy państwa, w którym dostawca lub usługodawca ma siedzibę.</entry>
+    <entry key="espd.crit.selection.technical.allowance.of.checks.main">możliwość przeprowadzania kontroli</entry>
+    <entry key="espd.crit.selection.technical.average.annual.manpower.description">Średnie roczne zatrudnienie u wykonawcy w ostatnich trzech latach było następujące:</entry>
+    <entry key="espd.crit.selection.technical.average.annual.manpower.main">średnie roczne zatrudnienie</entry>
+    <entry key="espd.crit.selection.technical.educational.professional.qualifications.description">Sam usługodawca lub wykonawca oraz/lub jego kadra kierownicza (w zależności od wymogów określonych w stosownym ogłoszeniu lub dokumentach zamówienia) posiada następujące wykształcenie i kwalifikacje zawodowe.</entry>
+    <entry key="espd.crit.selection.technical.educational.professional.qualifications.main">wykształcenie i kwalifikacje zawodowe</entry>
+    <entry key="espd.crit.selection.technical.environment.management.features.description">Podczas realizacji zamówienia wykonawca będzie mógł stosować następujące środki zarządzania środowiskowego:</entry>
+    <entry key="espd.crit.selection.technical.environment.management.features.main">środki zarządzania środowiskowego</entry>
+    <entry key="espd.crit.selection.technical.number.managerial.staff.description">Liczebność kadry kierowniczej wykonawcy w ostatnich trzech latach była następująca:</entry>
+    <entry key="espd.crit.selection.technical.number.managerial.staff.main">liczebność kadry kierowniczej</entry>
+    <entry key="espd.part4.crit.selection.technical.professional.ability.article">W art. 58 ust. 4 dyrektywy 2014/24/UE określono następujące kryteria kwalifikacji</entry>
+    <entry key="espd.part4.crit.selection.technical.professional.ability.article.tooltip">Wykonawca powinien przedstawić informacje jedynie w przypadku, gdy instytucja zamawiająca lub podmiot zamawiający wymagają danych kryteriów kwalifikacji w stosownym ogłoszeniu lub w dokumentach zamówienia, o których mowa w ogłoszeniu.</entry>
+    <entry key="espd.crit.selection.technical.service.contracts.performance.services.description">Jedynie w odniesieniu do zamówień publicznych na usługi: W okresie odniesienia wykonawca zrealizował następujące główne usługi określonego rodzaju: Instytucje zamawiające mogą wymagać, aby okres ten wynosił do trzech lat, i dopuszczać legitymowanie się doświadczeniem sprzed ponad trzech lat.</entry>
+    <entry key="espd.crit.selection.technical.service.contracts.performance.services.main">W przypadku zamówień na usługi: realizacja usług określonego rodzaju</entry>
+    <entry key="espd.crit.selection.technical.study.research.facilities.description">Korzysta z następującego zaplecza naukowo-badawczego:</entry>
     <entry key="espd.crit.selection.technical.study.research.facilities.main">zaplecze naukowo-badawcze</entry>
-    <entry key="espd.crit.selection.technical.subcontracting.proportion.description">Wykonawca zamierza ewentualnie
-        zleci? podwykonawcom nast?puj?c? cz??? (procentow?) zamówienia: Nale?y zauwa?y?, ?e je?eli wykonawca postanowi?
-        zleci? podwykonawcom realizacj? cz??ci zamówienia oraz polega na zdolno?ci podwykonawców na potrzeby realizacji
-        tej cz??ci, to nale?y wype?ni? odr?bny jednolity europejski dokument zamówienia dla tych podwykonawców (zob.
-        cz??? II sekcja C powy?ej).
-    </entry>
-    <entry key="espd.crit.selection.technical.subcontracting.proportion.main">cz??? procentowa podwykonawstwa</entry>
-    <entry key="espd.crit.selection.technical.supply.chain.management.description">Podczas realizacji zamówienia b?dzie
-        móg? stosowa? nast?puj?ce systemy zarz?dzania ?a?cuchem dostaw i ?ledzenia ?a?cucha dostaw:
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.chain.management.main">zarz?dzanie ?a?cuchem dostaw</entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.certificate.quality.description">Czy wykonawca mo?e
-        przedstawi? wymagane za?wiadczenia sporz?dzone przez urz?dowe instytuty lub agencje kontroli jako?ci o uznanych
-        kompetencjach, potwierdzaj?ce zgodno?? produktów poprzez wyra?ne odniesienie do specyfikacji technicznych lub
-        norm, które zosta?y okre?lone w stosownym og?oszeniu lub dokumentach zamówienia?
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.certificate.quality.main">W przypadku zamówie? na
-        dostawy: za?wiadczenia sporz?dzone przez agencje kontroli jako?ci
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.performance.deliveries.description">Jedynie w odniesieniu
-        do zamówie? publicznych na dostawy: W okresie odniesienia wykonawca zrealizowa? nast?puj?ce g?ówne dostawy
-        okre?lonego rodzaju: Instytucje zamawiaj?ce mog? wymaga?, aby okres ten wynosi? do trzech lat, i dopuszcza?
-        legitymowanie si? do?wiadczeniem sprzed ponad trzech lat.
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.performance.deliveries.main">W przypadku zamówie? na
-        dostawy: realizacja dostaw okre?lonego rodzaju
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.with.ca.description">W przypadku zamówie? publicznych na
-        dostawy: Wykonawca dostarczy wymagane próbki, opisy lub fotografie produktów, które maj? by? dostarczone, oraz
-        przedstawi w stosownych przypadkach ?wiadectwa autentyczno?ci.
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.with.ca.main">W przypadku zamówie? na dostawy: próbki,
-        opisy lub fotografie ze ?wiadectwem autentyczno?ci
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.without.ca.description">W przypadku zamówie? publicznych
-        na dostawy: Wykonawca dostarczy wymagane próbki, opisy lub fotografie produktów, które maj? by? dostarczone i
-        którym nie musi towarzyszy? ?wiadectwo autentyczno?ci.
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.without.ca.main">W przypadku zamówie? na dostawy: próbki,
-        opisy lub fotografie bez ?wiadectwa autentyczno?ci
-    </entry>
-    <entry key="espd.crit.selection.technical.technical.facilities.measures.description">Korzysta z nast?puj?cych
-        urz?dze? technicznych oraz ?rodków w celu zapewnienia jako?ci, a jego zaplecze naukowo-badawcze jest
-        nast?puj?ce:
-    </entry>
-    <entry key="espd.crit.selection.technical.technical.facilities.measures.main">urz?dzenia techniczne oraz ?rodki w
-        celu zapewnienia jako?ci
-    </entry>
-    <entry key="espd.crit.selection.technical.technicians.technical.bodies.description">Mo?e skorzysta? z us?ug
-        nast?puj?cych pracowników technicznych lub s?u?b technicznych, w szczególno?ci tych odpowiedzialnych za kontrol?
-        jako?ci. W przypadku pracowników technicznych lub s?u?b technicznych nienale??cych bezpo?rednio do
-        przedsi?biorstwa danego wykonawcy, lecz na których zdolno?ci wykonawca ten polega, jak okre?lono w cz??ci II
-        sekcja C, nale?y wype?ni? odr?bne formularze jednolitego europejskiego dokumentu zamówienia.
-    </entry>
-    <entry key="espd.crit.selection.technical.technicians.technical.bodies.main">pracownicy techniczni lub s?u?by
-        techniczne odpowiedzialni(-e) za kontrol? jako?ci
-    </entry>
-    <entry key="espd.crit.selection.technical.tools.plant.description">B?dzie dysponowa? nast?puj?cymi narz?dziami,
-        wyposa?eniem zak?adu i urz?dzeniami technicznymi na potrzeby realizacji zamówienia:
-    </entry>
-    <entry key="espd.crit.selection.technical.tools.plant.main">narz?dzia, wyposa?enie zak?adu i urz?dzenia techniczne
-    </entry>
-    <entry key="espd.crit.selection.technical.work.contracts.performance.works.description">Jedynie w odniesieniu do
-        zamówie? publicznych na roboty budowlane: W okresie odniesienia wykonawca wykona? nast?puj?ce roboty budowlane
-        okre?lonego rodzaju: Instytucje zamawiaj?ce mog? wymaga?, aby okres ten wynosi? do pi?ciu lat, i dopuszcza?
-        legitymowanie si? do?wiadczeniem sprzed ponad pi?ciu lat.
-    </entry>
-    <entry key="espd.crit.selection.technical.work.contracts.performance.works.main">W przypadku zamówie? na roboty
-        budowlane: wykonanie robót budowlanych okre?lonego rodzaju
-    </entry>
-    <entry key="espd.crit.selection.technical.work.contracts.technicians.description">W przypadku zamówie? publicznych
-        na roboty budowlane wykonawca b?dzie móg? si? zwróci? do nast?puj?cych pracowników technicznych lub s?u?b
-        technicznych o wykonanie robót:
-    </entry>
-    <entry key="espd.crit.selection.technical.work.contracts.technicians.main">W przypadku zamówie? na roboty budowlane:
-        pracownicy techniczni lub s?u?by techniczne odpowiedzialni(-e) za wykonanie robót
-    </entry>
-    <entry key="espd.crit.start.date">Data pocz?tkowa</entry>
-    <entry key="espd.crit.taken.self.cleaning.measures">Czy przedsi?wzi?to ?rodki w celu wykazania Pa?stwa rzetelno?ci
-        (?samooczyszczenie?)?
-    </entry>
-    <entry key="espd.crit.taxes.eo.fulfilled.obligations">Czy wykonawca spe?ni? swoje obowi?zki, dokonuj?c p?atno?ci
-        nale?nych podatków lub sk?adek na ubezpieczenie spo?eczne, lub te? zawieraj?c wi???ce porozumienia w celu sp?aty
-        tych nale?no?ci, obejmuj?ce w stosownych przypadkach naros?e odsetki lub grzywny?
-    </entry>
-    <entry key="espd.crit.taxes.length.period.of.exclusion">W przypadku wyroku, o ile zosta?a w nim bezpo?rednio
-        okre?lona, d?ugo?? okresu wykluczenia:
-    </entry>
-    <entry key="espd.crit.taxes.means.description">Prosz? opisa?, jakie ?rodki zosta?y wykorzystane</entry>
-    <entry key="espd.part3.crit.grounds.criminal.conv.top.title">A: Podstawy zwi?zane z wyrokami skazuj?cymi za
-        przest?pstwo
-    </entry>
-    <entry key="espd.part3.crit.top.grounds.payment.taxes.title">B: Podstawy zwi?zane z p?atno?ci? podatków lub sk?adek
-        na ubezpieczenie spo?eczne
-    </entry>
-    <entry key="espd.part3.crit.insolvency.conflicts.top.title">C: Podstawy zwi?zane z niewyp?acalno?ci?, konfliktem
-        interesów lub wykroczeniami zawodowymi
-    </entry>
-    <entry key="espd.part3.crit.purely.national.top.title">D: Podstawy wykluczenia o charakterze wy??cznie krajowym
-    </entry>
+    <entry key="espd.crit.selection.technical.subcontracting.proportion.description">Wykonawca zamierza ewentualnie zlecić podwykonawcom następującą część (procentową) zamówienia: Należy zauważyć, że jeżeli wykonawca postanowił zlecić podwykonawcom realizację części zamówienia oraz polega na zdolności podwykonawców na potrzeby realizacji tej części, to należy wypełnić odrębny jednolity europejski dokument zamówienia dla tych podwykonawców (zob. część II sekcja C powyżej).</entry>
+    <entry key="espd.crit.selection.technical.subcontracting.proportion.main">część procentowa podwykonawstwa</entry>
+    <entry key="espd.crit.selection.technical.supply.chain.management.description">Podczas realizacji zamówienia będzie mógł stosować następujące systemy zarządzania łańcuchem dostaw i śledzenia łańcucha dostaw:</entry>
+    <entry key="espd.crit.selection.technical.supply.chain.management.main">zarządzanie łańcuchem dostaw</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.certificate.quality.description">Czy wykonawca może przedstawić wymagane zaświadczenia sporządzone przez urzędowe instytuty lub agencje kontroli jakości o uznanych kompetencjach, potwierdzające zgodność produktów poprzez wyraźne odniesienie do specyfikacji technicznych lub norm, które zostały określone w stosownym ogłoszeniu lub dokumentach zamówienia?</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.certificate.quality.main">W przypadku zamówień na dostawy: zaświadczenia sporządzone przez agencje kontroli jakości</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.performance.deliveries.description">Jedynie w odniesieniu do zamówień publicznych na dostawy: W okresie odniesienia wykonawca zrealizował następujące główne dostawy określonego rodzaju: Instytucje zamawiające mogą wymagać, aby okres ten wynosił do trzech lat, i dopuszczać legitymowanie się doświadczeniem sprzed ponad trzech lat.</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.performance.deliveries.main">W przypadku zamówień na dostawy: realizacja dostaw określonego rodzaju</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.with.ca.description">W przypadku zamówień publicznych na dostawy: Wykonawca dostarczy wymagane próbki, opisy lub fotografie produktów, które mają być dostarczone, oraz przedstawi w stosownych przypadkach świadectwa autentyczności.</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.with.ca.main">W przypadku zamówień na dostawy: próbki, opisy lub fotografie ze świadectwem autentyczności</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.without.ca.description">W przypadku zamówień publicznych na dostawy: Wykonawca dostarczy wymagane próbki, opisy lub fotografie produktów, które mają być dostarczone i którym nie musi towarzyszyć świadectwo autentyczności.</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.without.ca.main">W przypadku zamówień na dostawy: próbki, opisy lub fotografie bez świadectwa autentyczności</entry>
+    <entry key="espd.crit.selection.technical.technical.facilities.measures.description">Korzysta z następujących urządzeń technicznych oraz środków w celu zapewnienia jakości, a jego zaplecze naukowo-badawcze jest następujące:</entry>
+    <entry key="espd.crit.selection.technical.technical.facilities.measures.main">urządzenia techniczne oraz środki w celu zapewnienia jakości</entry>
+    <entry key="espd.crit.selection.technical.technicians.technical.bodies.description">Może skorzystać z usług następujących pracowników technicznych lub służb technicznych, w szczególności tych odpowiedzialnych za kontrolę jakości. W przypadku pracowników technicznych lub służb technicznych nienależących bezpośrednio do przedsiębiorstwa danego wykonawcy, lecz na których zdolności wykonawca ten polega, jak określono w części II sekcja C, należy wypełnić odrębne formularze jednolitego europejskiego dokumentu zamówienia.</entry>
+    <entry key="espd.crit.selection.technical.technicians.technical.bodies.main">pracownicy techniczni lub służby techniczne odpowiedzialni(-e) za kontrolę jakości</entry>
+    <entry key="espd.crit.selection.technical.tools.plant.description">Będzie dysponował następującymi narzędziami, wyposażeniem zakładu i urządzeniami technicznymi na potrzeby realizacji zamówienia:</entry>
+    <entry key="espd.crit.selection.technical.tools.plant.main">narzędzia, wyposażenie zakładu i urządzenia techniczne</entry>
+    <entry key="espd.crit.selection.technical.work.contracts.performance.works.description">Jedynie w odniesieniu do zamówień publicznych na roboty budowlane: W okresie odniesienia wykonawca wykonał następujące roboty budowlane określonego rodzaju: Instytucje zamawiające mogą wymagać, aby okres ten wynosił do pięciu lat, i dopuszczać legitymowanie się doświadczeniem sprzed ponad pięciu lat.</entry>
+    <entry key="espd.crit.selection.technical.work.contracts.performance.works.main">W przypadku zamówień na roboty budowlane: wykonanie robót budowlanych określonego rodzaju</entry>
+    <entry key="espd.crit.selection.technical.work.contracts.technicians.description">W przypadku zamówień publicznych na roboty budowlane wykonawca będzie mógł się zwrócić do następujących pracowników technicznych lub służb technicznych o wykonanie robót:</entry>
+    <entry key="espd.crit.selection.technical.work.contracts.technicians.main">W przypadku zamówień na roboty budowlane: pracownicy techniczni lub służby techniczne odpowiedzialni(-e) za wykonanie robót</entry>
+    <entry key="espd.crit.start.date">Data początkowa</entry>
+    <entry key="espd.crit.taken.self.cleaning.measures">Czy przedsięwzięto środki w celu wykazania Państwa rzetelności („samooczyszczenie”)?</entry>
+    <entry key="espd.crit.taxes.eo.fulfilled.obligations">Czy wykonawca spełnił swoje obowiązki, dokonując płatności należnych podatków lub składek na ubezpieczenie społeczne, lub też zawierając wiążące porozumienia w celu spłaty tych należności, obejmujące w stosownych przypadkach narosłe odsetki lub grzywny?</entry>
+    <entry key="espd.crit.taxes.length.period.of.exclusion">W przypadku wyroku, o ile została w nim bezpośrednio określona, długość okresu wykluczenia:</entry>
+    <entry key="espd.crit.taxes.means.description">Proszę opisać, jakie środki zostały wykorzystane</entry>
+    <entry key="espd.part3.crit.grounds.criminal.conv.top.title">A: Podstawy związane z wyrokami skazującymi za przestępstwo</entry>
+    <entry key="espd.part3.crit.top.grounds.payment.taxes.title">B: Podstawy związane z płatnością podatków lub składek na ubezpieczenie społeczne</entry>
+    <entry key="espd.part3.crit.insolvency.conflicts.top.title">C: Podstawy związane z niewypłacalnością, konfliktem interesów lub wykroczeniami zawodowymi</entry>
+    <entry key="espd.part3.crit.purely.national.top.title">D: Podstawy wykluczenia o charakterze wyłącznie krajowym</entry>
     <entry key="espd.crit.url">URL</entry>
-    <entry key="espd.crit.who.convicted">kto zosta? skazany</entry>
+    <entry key="espd.crit.who.convicted">kto został skazany</entry>
     <entry key="espd.crit.year">rok</entry>
-    <entry key="espd.crit.your.answer">Prosz? poda? odpowied?</entry>
+    <entry key="espd.crit.your.answer">Proszę podać odpowiedź</entry>
     <entry key="espd.gui.download.as">Pobierz jako</entry>
     <entry key="espd.gui.download.pdf">Format PDF</entry>
     <entry key="espd.gui.download.xml">Format XML</entry>
@@ -827,178 +309,100 @@ Wenn die Datei als Properties gezogen wird, wird ein DocType zur Laufzeit einget
     <entry key="espd.gui.ec">Komisja Europejska</entry>
     <entry key="espd.ecertis.404">Brak danych ECERTIS</entry>
     <entry key="espd.ecertis.issued">Wydane przez</entry>
-    <entry key="espd.ecertis.language">J?zyk</entry>
+    <entry key="espd.ecertis.language">Język</entry>
     <entry key="espd.ecertis.loading">Pobieranie z ECERTIS...</entry>
     <entry key="espd.ecertis.no.evidences">Brak dowodów</entry>
-    <entry key="espd.gui.error.ted.notice.not.supported">Za?adowany plik nie jest ESPD, lecz og?oszeniem, a w zwi?zku z
-        tym nie mo?na go wykorzysta? w ramach tego serwisu.
-    </entry>
+    <entry key="espd.gui.error.ted.notice.not.supported">Załadowany plik nie jest ESPD, lecz ogłoszeniem, a w związku z tym nie można go wykorzystać w ramach tego serwisu.</entry>
     <entry key="espd.gui.espd">Jednolity europejski dokument zamówienia</entry>
-    <entry key="espd.gui.espd.upload.error">Za?adowany plik nie móg? zosta? poprawnie odczytany. Czy to jest prawid?owy
-        plik wniosku lub odpowiedzi ESPD?
-    </entry>
-    <entry key="espd.gui.espd.upload.request.error">Za?adowany plik nie móg? zosta? poprawnie odczytany. Czy to jest
-        prawid?owy plik wniosku ESPD?
-    </entry>
-    <entry key="espd.gui.espd.upload.response.error">Za?adowany plik nie móg? zosta? poprawnie odczytany. Czy to jest
-        prawid?owy plik odpowiedzi ESPD?
-    </entry>
+    <entry key="espd.gui.espd.upload.error">Załadowany plik nie mógł zostać poprawnie odczytany. Czy to jest prawidłowy plik wniosku lub odpowiedzi ESPD?</entry>
+    <entry key="espd.gui.espd.upload.request.error">Załadowany plik nie mógł zostać poprawnie odczytany. Czy to jest prawidłowy plik wniosku ESPD?</entry>
+    <entry key="espd.gui.espd.upload.response.error">Załadowany plik nie mógł zostać poprawnie odczytany. Czy to jest prawidłowy plik odpowiedzi ESPD?</entry>
     <entry key="espd.gui.europa">Europa</entry>
-    <entry key="espd.gui.expire.reminder.message">Od prawie godziny nie wykonali Pa?stwo ?adnej czynno?ci w serwisie
-        ESPD.
-        &lt;p&gt;
-        Prosz? zapisa? eESPD w celu zabezpieczenia si? przed utrat? danych.&lt;p&gt;W dowolnym momencie mo?na zaimportowa?
-        (ponowne u?y?) eESPD, aby kontynuowa? prac?.
-    </entry>
+    <entry key="espd.gui.expire.reminder.message">Od prawie godziny nie wykonali Państwo żadnej czynności w serwisie ESPD.   Proszę zapisać eESPD w celu zabezpieczenia się przed utratą danych.  W dowolnym momencie można zaimportować (ponowne użyć) eESPD, aby kontynuować pracę.</entry>
     <entry key="espd.gui.export">Zapisywanie</entry>
     <entry key="espd.gui.faq.leaflet">Broszura FAQ</entry>
-    <entry key="espd.gui.faq.text.answers">Je?eli interesuj? Pa?stwa odpowiedzi na najcz??ciej zadawane pytania na temat
-        ESPD, prosimy zajrze? do
-    </entry>
-    <entry key="espd.gui.faq.text.more.info">Aby uzyska? wi?cej informacji o ESPD, prosz?</entry>
-    <entry key="espd.init.alert">
-        &lt;p&gt;Jednolity europejski dokument zamówienia (ESPD) jest o?wiadczeniem w?asnym na temat kondycji finansowej,
-            zdolno?ci i kompetencji przedsi?biorstwa na potrzeby post?powania o udzielenie zamówienia publicznego. Jest
-            on dost?pny we wszystkich j?zykach UE i stosowany jako wst?pny dowód spe?nienia warunków wymaganych w
-            procedurach udzielania zamówie? publicznych w ca?ej UE. Dzi?ki ESPD oferenci nie musz? ju? przedstawia?
-            pe?nej dokumentacji dowodowej i ró?nych formularzy stosowanych dotychczas w przetargach unijnych, co oznacza
-            znaczne uproszczenie dost?pu do potencjalnych zamówie? transgranicznych. Od pa?dziernika 2018 r. jednolity
-            europejski dokument zamówienia b?dzie przekazywany wy??cznie w formie elektronicznej.
-        &lt;/p&gt;
-        &lt;p&gt;Komisja Europejska udost?pnia bezp?atn? us?ug? internetow? dla nabywców, oferentów i innych zainteresowanych
-            stron w zakresie elektronicznego wype?niania ESPD. Formularz internetowy mo?na wype?ni?, wydrukowa? i
-            przes?a? nabywcy wraz z pozosta?? cz??ci? oferty. Je?li post?powanie prowadzone jest drog? elektroniczn?,
-            ESPD mo?na wyeksportowa?, zapisa? i przekaza? elektronicznie. Jednolity europejski dokument zamówienia
-            przed?o?ony we wcze?niejszym post?powaniu o udzielenie zamówienia publicznego mo?na ponownie wykorzysta?, o
-            ile przedmiotowe informacje s? nadal poprawne. Wykonawcy mog? zosta? wykluczeni z post?powania lub podlega?
-            odpowiedzialno?ci karnej, je?eli w zwi?zku z informacjami przedstawianymi w ESPD dochodzi do powa?nego
-            wprowadzenia w b??d, zatajenia b?d? niemo?no?ci przedstawienia dokumentów potwierdzaj?cych.
-        &lt;/p&gt;
-    </entry>
-    <entry key="espd.init.create.espd">stworzy? nowy ESPD</entry>
-    <entry key="espd.init.create.response">Stworzy? odpowied?</entry>
+    <entry key="espd.gui.faq.text.answers">Jeżeli interesują Państwa odpowiedzi na najczęściej zadawane pytania na temat ESPD, prosimy zajrzeć do</entry>
+    <entry key="espd.gui.faq.text.more.info">Aby uzyskać więcej informacji o ESPD, proszę</entry>
+    <entry key="espd.init.alert">Jednolity europejski dokument zamówienia (ESPD) jest oświadczeniem własnym na temat kondycji finansowej, zdolności i kompetencji przedsiębiorstwa na potrzeby postępowania o udzielenie zamówienia publicznego. Jest on dostępny we wszystkich językach UE i stosowany jako wstępny dowód spełnienia warunków wymaganych w procedurach udzielania zamówień publicznych w całej UE. Dzięki ESPD oferenci nie muszą już przedstawiać pełnej dokumentacji dowodowej i różnych formularzy stosowanych dotychczas w przetargach unijnych, co oznacza znaczne uproszczenie dostępu do potencjalnych zamówień transgranicznych. Od października 2018 r. jednolity europejski dokument zamówienia będzie przekazywany wyłącznie w formie elektronicznej. Komisja Europejska udostępnia bezpłatną usługę internetową dla nabywców, oferentów i innych zainteresowanych stron w zakresie elektronicznego wypełniania ESPD. Formularz internetowy można wypełnić, wydrukować i przesłać nabywcy wraz z pozostałą częścią oferty. Jeśli postępowanie prowadzone jest drogą elektroniczną, ESPD można wyeksportować, zapisać i przekazać elektronicznie. Jednolity europejski dokument zamówienia przedłożony we wcześniejszym postępowaniu o udzielenie zamówienia publicznego można ponownie wykorzystać, o ile przedmiotowe informacje są nadal poprawne. Wykonawcy mogą zostać wykluczeni z postępowania lub podlegać odpowiedzialności karnej, jeżeli w związku z informacjami przedstawianymi w ESPD dochodzi do poważnego wprowadzenia w błąd, zatajenia bądź niemożności przedstawienia dokumentów potwierdzających.</entry>
+    <entry key="espd.init.create.espd">stworzyć nowy ESPD</entry>
+    <entry key="espd.init.create.response">Stworzyć odpowiedź</entry>
     <entry key="espd.init.header">Witamy w serwisie ESPD</entry>
-    <entry key="espd.init.i.am.ca">Jestem instytucj? zamawiaj?c?</entry>
-    <entry key="espd.init.i.am.ce">Jestem podmiotem zamawiaj?cym</entry>
-    <entry key="espd.init.i.am.eop">Jestem wykonawc?</entry>
-    <entry key="espd.init.import.espd">zaimportowa? ESPD</entry>
-    <entry key="espd.init.merge.espds">Po??cz dwa ESPD</entry>
-    <entry key="espd.init.reuse.espd">ponownie wykorzysta? istniej?cy ESPD</entry>
+    <entry key="espd.init.i.am.ca">Jestem instytucją zamawiającą</entry>
+    <entry key="espd.init.i.am.ce">Jestem podmiotem zamawiającym</entry>
+    <entry key="espd.init.i.am.eop">Jestem wykonawcą</entry>
+    <entry key="espd.init.import.espd">zaimportować ESPD</entry>
+    <entry key="espd.init.merge.espds">Połącz dwa ESPD</entry>
+    <entry key="espd.init.reuse.espd">ponownie wykorzystać istniejący ESPD</entry>
     <entry key="espd.init.review.espd">Przejrzyj ESPD</entry>
-    <entry key="espd.init.select.country">Wybierz pa?stwo</entry>
-    <entry key="espd.init.ted.reception.id.placeholder">Prosz? poda? otrzymany numer og?oszenia</entry>
-    <entry key="espd.init.upload.document">Za?aduj dokument</entry>
-    <entry key="espd.init.upload.documents">Za?aduj dokumenty</entry>
-    <entry key="espd.init.upload.request">Prosz? za?adowa? wniosek ESPD instytucji zamawiaj?cej</entry>
-    <entry key="espd.init.upload.request.response">Prosz? za?adowa? wniosek ESPD lub odpowied? ESPD</entry>
-    <entry key="espd.init.upload.response">Prosz? za?adowa? Pa?stwa star? odpowied? ESPD</entry>
-    <entry key="espd.init.what.you.do">Co chcesz zrobi??</entry>
-    <entry key="espd.init.where.are.you.from.ca">Gdzie znajduje si? siedziba Pa?stwa instytucji?</entry>
-    <entry key="espd.init.where.are.you.from.eo">Gdzie znajduje si? siedziba Pa?stwa przedsi?biorstwa?</entry>
-    <entry key="espd.init.who.are.you">Kim jeste??</entry>
+    <entry key="espd.init.select.country">Wybierz państwo</entry>
+    <entry key="espd.init.ted.reception.id.placeholder">Proszę podać otrzymany numer ogłoszenia</entry>
+    <entry key="espd.init.upload.document">Załaduj dokument</entry>
+    <entry key="espd.init.upload.documents">Załaduj dokumenty</entry>
+    <entry key="espd.init.upload.request">Proszę załadować wniosek ESPD instytucji zamawiającej</entry>
+    <entry key="espd.init.upload.request.response">Proszę załadować wniosek ESPD lub odpowiedź ESPD</entry>
+    <entry key="espd.init.upload.response">Proszę załadować Państwa starą odpowiedź ESPD</entry>
+    <entry key="espd.init.what.you.do">Co chcesz zrobić?</entry>
+    <entry key="espd.init.where.are.you.from.ca">Gdzie znajduje się siedziba Państwa instytucji?</entry>
+    <entry key="espd.init.where.are.you.from.eo">Gdzie znajduje się siedziba Państwa przedsiębiorstwa?</entry>
+    <entry key="espd.init.who.are.you">Kim jesteś?</entry>
     <entry key="espd.gui.footer.last.update">Ostatnia aktualizacja:</entry>
     <entry key="espd.gui.grow">DG GROW</entry>
-    <entry key="espd.ecertis.information.for.country">Informacje dotycz?ce {0} w e-Certis</entry>
+    <entry key="espd.ecertis.information.for.country">Informacje dotyczące {0} w e-Certis</entry>
     <entry key="espd.gui.legal.notice">Informacje prawne</entry>
-    <entry key="espd.ecertis.less.information">Poka? mniej informacji</entry>
-    <entry key="espd.ecertis.more.information">Poka? wi?cej informacji</entry>
+    <entry key="espd.ecertis.less.information">Pokaż mniej informacji</entry>
+    <entry key="espd.ecertis.more.information">Pokaż więcej informacji</entry>
     <entry key="espd.gui.next">Dalej</entry>
     <entry key="espd.gui.no">Nie</entry>
     <entry key="espd.gui.not.applicable">Nie dotyczy</entry>
     <entry key="espd.gui.place">Miejsce</entry>
     <entry key="espd.gui.previous">Wstecz</entry>
-    <entry key="espd.gui.print">Przegl?d</entry>
+    <entry key="espd.gui.print">Przegląd</entry>
     <entry key="espd.gui.progress.exclusion">Wykluczenie</entry>
-    <entry key="espd.gui.progress.finish">Zako?cz</entry>
+    <entry key="espd.gui.progress.finish">Zakończ</entry>
     <entry key="espd.gui.progress.procedure">Procedura</entry>
     <entry key="espd.gui.progress.selection">Kwalifikacja</entry>
-    <entry key="espd.gui.progress.start">Rozpocz?cie</entry>
-    <entry key="espd.gui.question.to.use.alpha">Czy chcesz wykorzysta? kryteria kwalifikacji od A do D?</entry>
-    <entry key="espd.gui.report.appliction.issue">W przypadku wszelkich kwestii zwi?zanych z aplikacj? ESPD nale?y
-        kontaktowa? si? z
-    </entry>
-    <entry key="espd.gui.report.security.incident">Zg?oszenie incydentu zwi?zanego z bezpiecze?stwem informacji</entry>
-    <entry key="espd.gui.report.security.incident.title">W przypadku wszelkich incydentów zwi?zanych z bezpiecze?stwem
-        nale?y kontaktowa? si? z Komisj? Europejsk? za po?rednictwem
-    </entry>
-    <entry key="espd.gui.role.ca">Charakter: instytucja zamawiaj?ca (IZ)</entry>
+    <entry key="espd.gui.progress.start">Rozpoczęcie</entry>
+    <entry key="espd.gui.question.to.use.alpha">Czy chcesz wykorzystać kryteria kwalifikacji od A do D?</entry>
+    <entry key="espd.gui.report.appliction.issue">W przypadku wszelkich kwestii związanych z aplikacją ESPD należy kontaktować się z</entry>
+    <entry key="espd.gui.report.security.incident">Zgłoszenie incydentu związanego z bezpieczeństwem informacji</entry>
+    <entry key="espd.gui.report.security.incident.title">W przypadku wszelkich incydentów związanych z bezpieczeństwem należy kontaktować się z Komisją Europejską za pośrednictwem</entry>
+    <entry key="espd.gui.role.ca">Charakter: instytucja zamawiająca (IZ)</entry>
     <entry key="espd.gui.role.eo">Charakter: wykonawca (WY)</entry>
     <entry key="espd.gui.search">Szukaj</entry>
     <entry key="espd.gui.signature">Podpis</entry>
-    <entry key="espd.gui.tools">Narz?dzia</entry>
-    <entry key="espd.init.ca.can.create.espd.tooltip">Instytucja zamawiaj?ca mo?e stworzy? ESPD od pocz?tku. W takim
-        przypadku instytucja zamawiaj?ca musi wype?ni? formularz ESPD, podaj?c wszystkie stosowne informacje.
-    </entry>
-    <entry key="espd.init.ca.can.import.espd.tooltip">Je?eli instytucja zamawiaj?ca korzysta?a ju? w przesz?o?ci z
-        serwisu ESPD w zwi?zku z innym post?powaniem o udzielenie zamówienia, mo?e zaimportowa? ESPD przechowywany w
-        sieci lokalnej. W takim przypadku ESPD nie musi by? wype?niany od pocz?tku, ale nale?y zaktualizowa? niektóre
-        dane, uwzgl?dniaj?c aktualne post?powanie o udzielenie zamówienia.
-    </entry>
-    <entry key="espd.init.ca.ref.buyer.tooltip">Termin ?instytucja zamawiaj?ca? odnosi si? nabywcy.</entry>
-    <entry key="espd.init.ce.ref.buyer.tooltip">Termin ?podmiot zamawiaj?cy? odnosi si? tutaj do nabywcy, który prowadzi
-        dzia?alno?? w sektorach gospodarki wodnej, energetyki, transportu lub us?ug pocztowych. W przypadku instytucji
-        zamawiaj?cych, które dzia?aj? równie? w wymienionych wy?ej sektorach, nale?y wybra? ?Jestem instytucj?
-        zamawiaj?c??.
-    </entry>
-    <entry key="espd.init.eo.can.reuse.espd.tooltip">Wykonawca mo?e ponownie wykorzysta? informacje, które zosta?y
-        dostarczone za pomoc? ESPD we wcze?niejszym post?powaniu o udzielenie zamówienia (?stary? ESPD). Serwis ESPD
-        po??czy ?stary? ESPD z nowym formularzem przygotowanym przez instytucj? zamawiaj?c? na potrzeby przedmiotowego
-        post?powania o udzielenie zamówienia.
-    </entry>
-    <entry key="espd.init.eo.ref.suppl.tooltip">Termin ?wykonawca? odnosi si? do dostawcy / oferenta.</entry>
-    <entry key="espd.init.espd.used.both.ca.eo.tooltip">Serwis ESPD mo?e by? wykorzystywany zarówno przez instytucje
-        zamawiaj?ce, jak i wykonawców. Prosz? wybra? opcj?, która odpowiada Pa?stwa profilowi w przedmiotowym
-        post?powaniu o udzielenie zamówienia publicznego.
-    </entry>
-    <entry key="espd.init.filter.create.response.tooltip">Stworzy? now? odpowied? ESPD</entry>
-    <entry key="espd.init.filter.eo.can.import.espd.tooltip">Wykonawca mo?e zaimportowa? plik ESPD, który zosta?
-        uprzednio wype?niony przez instytucj? zamawiaj?c? na potrzeby przedmiotowego post?powania o udzielenie
-        zamówienia publicznego i opublikowany wraz z og?oszeniem przetargowym.
-    </entry>
-    <entry key="espd.init.filter.eo.merge.espds.tooltip">The ESPD service will merge the 'old' ESPD with the new form
-        prepared by the contracting authority for this procurement procedure.
-    </entry>
-    <entry key="espd.init.overview.received.espds.tooltip">Ta funkcja udost?pnia tabel? zawieraj?c? przegl?d odpowiedzi
-        zawartych we wszystkich ESPD przed?o?onych przez oferentów w danym post?powaniu o udzielenie zamówienia.
-    </entry>
-    <entry key="espd.init.review.espd.tooltip">Instytucja zamawiaj?ca mo?e sprawdzi?/przejrze? elektroniczny ESPD
-        otrzymany od wykonawcy.
-    </entry>
-    <entry key="espd.init.ted.reception.id.tooltip">Instytucja zamawiaj?ca otrzyma e-mail z Urz?du Publikacji po
-        przed?o?eniu og?oszenia do publikacji. Wspomniany e-mail zawiera numer identyfikacyjny, który mo?na wykorzysta?
-        w niniejszym serwisie do uzupe?nienia informacji dotycz?cych post?powania oraz instytucji.
-    </entry>
-    <entry key="espd.validator.accept">Prosz? poda? warto?? z prawid?owym rozszerzeniem.</entry>
-    <entry key="espd.validator.creditcard">Prosz? poda? prawid?owy numer karty kredytowej.</entry>
-    <entry key="espd.validator.date">Prosz? poda? prawid?ow? dat?.</entry>
-    <entry key="espd.validator.dateISO">Prosz? poda? prawid?ow? dat? (ISO).</entry>
-    <entry key="espd.validator.digits">Prosz? poda? tylko cyfry.</entry>
-    <entry key="espd.validator.email">Prosz? poda? prawid?owy adres e-mail.</entry>
-    <entry key="espd.validator.equalTo">Prosz? poda? ponownie t? sam? warto??.</entry>
-    <entry key="espd.validator.max">Prosz? poda? warto?? mniejsz? ni? lub równ? {0}.</entry>
-    <entry key="espd.validator.maxlength">Prosz? poda? nie wi?cej ni? {0} znak(i)(-ów).</entry>
-    <entry key="espd.validator.min">Prosz? poda? warto?? wi?ksz? ni? lub równ? {0}.</entry>
-    <entry key="espd.validator.minlength">Prosz? poda? co najmniej {0} znak(i)(-ów).</entry>
-    <entry key="espd.validator.number">Prosz? poda? prawid?ow? liczb?.</entry>
-    <entry key="espd.validator.range">Prosz? poda? warto?? pomi?dzy {0} i {1}.</entry>
-    <entry key="espd.validator.rangelength">Prosz? poda? warto?? o d?ugo?ci pomi?dzy {0} i {1} znak(i)(-ów).</entry>
-    <entry key="espd.validator.remote">Prosz? okre?li? to pole.</entry>
+    <entry key="espd.gui.tools">Narzędzia</entry>
+    <entry key="espd.init.ca.can.create.espd.tooltip">Instytucja zamawiająca może stworzyć ESPD od początku. W takim przypadku instytucja zamawiająca musi wypełnić formularz ESPD, podając wszystkie stosowne informacje.</entry>
+    <entry key="espd.init.ca.can.import.espd.tooltip">Jeżeli instytucja zamawiająca korzystała już w przeszłości z serwisu ESPD w związku z innym postępowaniem o udzielenie zamówienia, może zaimportować ESPD przechowywany w sieci lokalnej. W takim przypadku ESPD nie musi być wypełniany od początku, ale należy zaktualizować niektóre dane, uwzględniając aktualne postępowanie o udzielenie zamówienia.</entry>
+    <entry key="espd.init.ca.ref.buyer.tooltip">Termin „instytucja zamawiająca” odnosi się nabywcy.</entry>
+    <entry key="espd.init.ce.ref.buyer.tooltip"> Termin „podmiot zamawiający” odnosi się tutaj do nabywcy, który prowadzi działalność w sektorach gospodarki wodnej, energetyki, transportu lub usług pocztowych. W przypadku instytucji zamawiających, które działają również w wymienionych wyżej sektorach, należy wybrać „Jestem instytucją zamawiającą”.</entry>
+    <entry key="espd.init.eo.can.reuse.espd.tooltip">Wykonawca może ponownie wykorzystać informacje, które zostały dostarczone za pomocą ESPD we wcześniejszym postępowaniu o udzielenie zamówienia („stary” ESPD). Serwis ESPD połączy „stary” ESPD z nowym formularzem przygotowanym przez instytucję zamawiającą na potrzeby przedmiotowego postępowania o udzielenie zamówienia.</entry>
+    <entry key="espd.init.eo.ref.suppl.tooltip">Termin „wykonawca” odnosi się do dostawcy / oferenta.</entry>
+    <entry key="espd.init.espd.used.both.ca.eo.tooltip">Serwis ESPD może być wykorzystywany zarówno przez instytucje zamawiające, jak i wykonawców. Proszę wybrać opcję, która odpowiada Państwa profilowi w przedmiotowym postępowaniu o udzielenie zamówienia publicznego.</entry>
+    <entry key="espd.init.filter.create.response.tooltip">Stworzyć nową odpowiedź ESPD</entry>
+    <entry key="espd.init.filter.eo.can.import.espd.tooltip">Wykonawca może zaimportować plik ESPD, który został uprzednio wypełniony przez instytucję zamawiającą na potrzeby przedmiotowego postępowania o udzielenie zamówienia publicznego i opublikowany wraz z ogłoszeniem przetargowym.</entry>
+    <entry key="espd.init.filter.eo.merge.espds.tooltip">The ESPD service will merge the 'old' ESPD with the new form prepared by the contracting authority for this procurement procedure.</entry>
+    <entry key="espd.init.overview.received.espds.tooltip">Ta funkcja udostępnia tabelę zawierającą przegląd odpowiedzi zawartych we wszystkich ESPD przedłożonych przez oferentów w danym postępowaniu o udzielenie zamówienia.</entry>
+    <entry key="espd.init.review.espd.tooltip">Instytucja zamawiająca może sprawdzić/przejrzeć elektroniczny ESPD otrzymany od wykonawcy.</entry>
+    <entry key="espd.init.ted.reception.id.tooltip">Instytucja zamawiająca otrzyma e-mail z Urzędu Publikacji po przedłożeniu ogłoszenia do publikacji. Wspomniany e-mail zawiera numer identyfikacyjny, który można wykorzystać w niniejszym serwisie do uzupełnienia informacji dotyczących postępowania oraz instytucji.</entry>
+    <entry key="espd.validator.accept">Proszę podać wartość z prawidłowym rozszerzeniem.</entry>
+    <entry key="espd.validator.creditcard">Proszę podać prawidłowy numer karty kredytowej.</entry>
+    <entry key="espd.validator.date">Proszę podać prawidłową datę.</entry>
+    <entry key="espd.validator.dateISO">Proszę podać prawidłową datę (ISO).</entry>
+    <entry key="espd.validator.digits">Proszę podać tylko cyfry.</entry>
+    <entry key="espd.validator.email">Proszę podać prawidłowy adres e-mail.</entry>
+    <entry key="espd.validator.equalTo">Proszę podać ponownie tę samą wartość.</entry>
+    <entry key="espd.validator.max">Proszę podać wartość mniejszą niż lub równą {0}.</entry>
+    <entry key="espd.validator.maxlength">Proszę podać nie więcej niż {0} znak(i)(-ów).</entry>
+    <entry key="espd.validator.min">Proszę podać wartość większą niż lub równą {0}.</entry>
+    <entry key="espd.validator.minlength">Proszę podać co najmniej {0} znak(i)(-ów).</entry>
+    <entry key="espd.validator.number">Proszę podać prawidłową liczbę.</entry>
+    <entry key="espd.validator.range">Proszę podać wartość pomiędzy {0} i {1}.</entry>
+    <entry key="espd.validator.rangelength">Proszę podać wartość o długości pomiędzy {0} i {1} znak(i)(-ów).</entry>
+    <entry key="espd.validator.remote">Proszę określić to pole.</entry>
     <entry key="espd.validator.required">To pole jest wymagane.</entry>
-    <entry key="espd.validator.url">Prosz? poda? prawid?owy adres URL.</entry>
+    <entry key="espd.validator.url">Proszę podać prawidłowy adres URL.</entry>
     <entry key="espd.gui.view.ca">Widok: (IZ)</entry>
     <entry key="espd.gui.view.eo">Widok: (WY)</entry>
     <entry key="espd.gui.yes">Tak</entry>
-    <entry key="espd.gui.zip.instructions">Oto krótka dokumentacja plików ESPD, któr? znajd? Pa?stwo w tym folderze
-        ZIP.Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nespd.XML: Plik XML to plik, które mo?e zosta? odczytany przez nasz
-        serwis ESPD lub inne kompatybilne serwisy ESPD. Zaleta korzystania z eESPD jako pliku XML polega na tym, ?e
-        nabywcy i przedsi?biorstwa mog? wykorzysta? go ponownie do celów innych post?powa? w przysz?o?ci. Nale?y
-        przesy?a? go razem z dokumentami zamówienia (od zamawiaj?cego do przedsi?biorstw) lub w ramach oferty (od
-        przedsi?biorstw do zamawiaj?cego).Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nespd.PDF: Plik PDF to plik eESPD w
-        postaci czytelnej dla cz?owieka. Proponujemy równie? w tym miejscu, aby wykorzystywa? go obok formatu XML przy
-        dokumentach zamówienia (od zamawiaj?cego do przedsi?biorstw) lub w ramach oferty (od przedsi?biorstw do
-        zamawiaj?cego) jako dokument referencyjny.Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nJe?eli maj? Pa?stwo pytania
-        dotycz?ce plików, prosimy o kontaktowanie si? z nami za po?rednictwem nast?puj?cego adresu e-mail:
-        grow-espd@ec.europa.eu.
-    </entry>
-
+    <entry key="espd.gui.zip.instructions">Oto krótka dokumentacja plików ESPD, którą znajdą Państwo w tym folderze ZIP.Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nespd.XML: Plik XML to plik, które może zostać odczytany przez nasz serwis ESPD lub inne kompatybilne serwisy ESPD. Zaleta korzystania z eESPD jako pliku XML polega na tym, że nabywcy i przedsiębiorstwa mogą wykorzystać go ponownie do celów innych postępowań w przyszłości. Należy przesyłać go razem z dokumentami zamówienia (od zamawiającego do przedsiębiorstw) lub w ramach oferty (od przedsiębiorstw do zamawiającego).Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nespd.PDF: Plik PDF to plik eESPD w postaci czytelnej dla człowieka. Proponujemy również w tym miejscu, aby wykorzystywać go obok formatu XML przy dokumentach zamówienia (od zamawiającego do przedsiębiorstw) lub w ramach oferty (od przedsiębiorstw do zamawiającego) jako dokument referencyjny.Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nJeżeli mają Państwo pytania dotyczące plików, prosimy o kontaktowanie się z nami za pośrednictwem następującego adresu e-mail: grow-espd@ec.europa.eu.</entry>
 </properties>

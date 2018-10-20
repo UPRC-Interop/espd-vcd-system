@@ -5,972 +5,404 @@ Wenn die Datei als Properties gezogen wird, wird ein DocType zur Laufzeit einget
 -->
 <properties>
     <entry key="espd.gui.about">Apie</entry>
-    <entry key="espd.part4.all.selection.switch">?. Vis? atrankos kriterij? bendra nuoroda</entry>
+    <entry key="espd.part4.all.selection.switch">ɑ. Visų atrankos kriterijų bendra nuoroda</entry>
     <entry key="espd.gui.app.environment">Gerbiamas naudotojau, esate testavimo aplinkoje. Naudokite</entry>
-    <entry key="espd.gui.app.subtitle">EBVPD u?pildymo ir pakartotinio naudojimo paslauga</entry>
-    <entry key="espd.gui.app.title">Europos bendrasis vie??j? pirkim? dokumentas (EBVPD)</entry>
-    <entry key="espd.gui.back.to.main">Gr??ti ? pagrindin? puslap?</entry>
+    <entry key="espd.gui.app.subtitle">EBVPD užpildymo ir pakartotinio naudojimo paslauga</entry>
+    <entry key="espd.gui.app.title">Europos bendrasis viešųjų pirkimų dokumentas (EBVPD)</entry>
+    <entry key="espd.gui.back.to.main">Grįžti į pagrindinį puslapį</entry>
     <entry key="espd.gui.cancel">Panaikinti</entry>
-    <entry key="espd.gui.click.here">spustel?kite ?ia</entry>
+    <entry key="espd.gui.click.here">spustelėkite čia</entry>
     <entry key="espd.gui.contact">Kontaktiniai duomenys</entry>
-    <entry key="espd.gui.contact.header">Kontaktin? informacija</entry>
-    <entry key="espd.gui.contact.info">&lt;p&gt;European Commission&lt;p&gt;Directorate General Internal Market, Industry,
-        Entrepreneurship and SMEs&lt;p&gt;Avenue d'Auderghem 45 / Oudergemselaan 45&lt;p&gt;B-1049 Brussels&lt;p&gt;Belgija
-    </entry>
+    <entry key="espd.gui.contact.header">Kontaktinė informacija</entry>
+    <entry key="espd.gui.contact.info">European Commission Directorate General Internal Market, Industry, Entrepreneurship and SMEs Avenue d'Auderghem 45 / Oudergemselaan 45 B-1049 Brussels Belgija</entry>
     <entry key="espd.gui.cookies">Slapukai</entry>
-    <entry key="espd.gui.correct.errors">Kad gal?tum?te t?sti, turite i?taisyti klaidas.</entry>
+    <entry key="espd.gui.correct.errors">Kad galėtumėte tęsti, turite ištaisyti klaidas.</entry>
     <entry key="espd.part1.city">Miestas:</entry>
-    <entry key="espd.part1.confirm.email">Patvirtinkite e. pa?to adres?:</entry>
-    <entry key="espd.part1.confirm.telephone">Patvirtinkite telefono numer?:</entry>
-    <entry key="espd.part1.contact.details.ca">Perkan?iojo subjekto tapatyb?</entry>
-    <entry key="espd.part1.contact.person">Asmuo ry?iams:</entry>
-    <entry key="espd.part1.correct.errors">Kad gal?tum?te t?sti, turite i?taisyti klaidas.</entry>
-    <entry key="espd.part1.country">?alis:</entry>
-    <entry key="espd.part1.email">E. pa?tas:</entry>
+    <entry key="espd.part1.confirm.email">Patvirtinkite e. pašto adresą:</entry>
+    <entry key="espd.part1.confirm.telephone">Patvirtinkite telefono numerį:</entry>
+    <entry key="espd.part1.contact.details.ca">Perkančiojo subjekto tapatybė</entry>
+    <entry key="espd.part1.contact.person">Asmuo ryšiams:</entry>
+    <entry key="espd.part1.correct.errors">Kad galėtumėte tęsti, turite ištaisyti klaidas.</entry>
+    <entry key="espd.part1.country">Šalis:</entry>
+    <entry key="espd.part1.email">E. paštas:</entry>
     <entry key="espd.part1.fax">faks</entry>
-    <entry key="espd.part1.file.ref.ca">Perkan?iosios organizacijos ar perkan?iojo subjekto (jei taikoma) priskirtas
-        dokumento numeris:
-    </entry>
-    <entry key="espd.part1.header">I dalis. Informacija apie pirkimo proced?r? ir perkan?i?j? organizacij? ar perkant?j?
-        subjekt?
-    </entry>
-    <entry key="espd.part1.info.procedure">proced?ra</entry>
-    <entry key="espd.part1.info.procurement.proc">Informacija apie pirkimo proced?r?</entry>
-    <entry key="espd.part1.info.pub">Informacpia apie paskelbim?</entry>
+    <entry key="espd.part1.file.ref.ca">Perkančiosios organizacijos ar perkančiojo subjekto (jei taikoma) priskirtas dokumento numeris:</entry>
+    <entry key="espd.part1.header">I dalis. Informacija apie pirkimo procedūrą ir perkančiąją organizaciją ar perkantįjį subjektą</entry>
+    <entry key="espd.part1.info.procedure">procedūra</entry>
+    <entry key="espd.part1.info.procurement.proc">Informacija apie pirkimo procedūrą</entry>
+    <entry key="espd.part1.info.pub">Informacpia apie paskelbimą</entry>
     <entry key="espd.part1.name">Oficialus pavadinimas:</entry>
-    <entry key="espd.part1.nat.regnum">Nacionalinis registracijos numeris (jei ?inoma):</entry>
-    <entry key="espd.part1.official.journal.alert">Jei kvietimas dalyvauti konkurse neskelbiamas Europos S?jungos
-        oficialiajame leidinyje arba jei jo skelbti nereikalaujama, perkan?ioji organizacija arba perkantysis subjektas
-        turi ?ra?yti informacij?, kuri leist? nedviprasmi?kai atpa?inti pirkimo proced?r? (pvz., paskelbimo nacionaliniu
-        lygmeniu nuorod?).
-    </entry>
+    <entry key="espd.part1.nat.regnum">Nacionalinis registracijos numeris (jei žinoma):</entry>
+    <entry key="espd.part1.official.journal.alert">Jei kvietimas dalyvauti konkurse neskelbiamas Europos Sąjungos oficialiajame leidinyje arba jei jo skelbti nereikalaujama, perkančioji organizacija arba perkantysis subjektas turi įrašyti informaciją, kuri leistų nedviprasmiškai atpažinti pirkimo procedūrą (pvz., paskelbimo nacionaliniu lygmeniu nuorodą).</entry>
     <entry key="espd.part1.ojs.label">Skelbimo numeris OL S:</entry>
     <entry key="espd.part1.ojs.url">OL S URL</entry>
-    <entry key="espd.part1.postcode">Pa?to kodas:</entry>
-    <entry key="espd.part1.procurer.name">Vardas ir pavard? / Pavadinimas:</entry>
-    <entry key="espd.part1.street.and. num">Gatv? ir namo numeris:</entry>
-    <entry key="espd.part1.ted.reception.id">Tai ? trumpas EBVPD rinkmen?, kurias rasite ?iame ZIP aplanke,
-        apra?ymas.Chr(92)
-    </entry>
+    <entry key="espd.part1.postcode">Pašto kodas:</entry>
+    <entry key="espd.part1.procurer.name">Vardas ir pavardė / Pavadinimas:</entry>
+    <entry key="espd.part1.street.and. num">Gatvė ir namo numeris:</entry>
+    <entry key="espd.part1.ted.reception.id">Tai – trumpas EBVPD rinkmenų, kurias rasite šiame ZIP aplanke, aprašymas.Chr(92)</entry>
     <entry key="espd.part1.telephone">Telefonas:</entry>
-    <entry key="espd.part1.title.or.short.desc">Trumpas apra?ymas:</entry>
-    <entry key="espd.part1.to.be.filled.alert">Vykdant pirkimo proced?ras, kuri? kvietimas dalyvauti konkurse paskelbtas
-        Europos S?jungos oficialiajame leidinyje, informacija, kurios reikalaujama pagal I dal?, bus atsi?sta
-        automati?kai, jeigu EBVPD sukurti ir u?pildyti naudojama elektronin? EBVPD paslauga. Atitinkamo skelbimo Europos
-        S?jungos oficialiajame leidinyje nuoroda:
-    </entry>
-    <entry key="espd.part1.website">Interneto svetain? (jei taikoma):</entry>
-    <entry key="espd.part3.grounds.criminal.conv">Su baud?iamaisiais nuosprend?iais susij? pagrindai</entry>
-    <entry key="espd.part3.header">III dalis. Pa?alinimo pagrindai</entry>
-    <entry key="espd.part3.insolvency.conflicts">Su nemokumu, interes? konfliktu ar profesiniais nusi?engimais susij?
-        pagrindai
-    </entry>
-    <entry key="espd.part5.concl.statements">IV dalis. Baigiamieji parei?kimai</entry>
-    <entry key="espd.part5.concl.statements.signature">Data, vieta ir, jei reikia ar b?tina, para?as (-ai):</entry>
-    <entry key="espd.part5.concl.statements.text">Toliau pasira?iusieji oficialiai parei?kia, kad II?V dalyse pateikta
-        informacija yra tiksli ir teisinga ir kad ji pateikta visi?kai suvokiant didelio fakt? i?kreipimo padarinius.
-        &lt;p&gt;Toliau pasira?iusieji oficialiai parei?kia, kad pareikalavus gali nedelsdami pateikti nurodytus sertifikatus
-            ir kit? form? ?rodomuosius dokumentus, i?skyrus tuo atvejus, kai:
-        &lt;/p&gt;
-        &lt;p&gt;a) perkan?ioji organizacija ar perkantysis subjektas turi galimyb? atitinkamus patvirtinamuosius dokumentus
-            tiesiogiai gauti naudodamiesi prieiga prie bet kurios i? valstybi? nari? nemokamos nacionalin?s duomen?
-            baz?s (su s?lyga, kad ekonomin?s veiklos vykdytojas pateik? reikaling? informacij? (interneto adres?,
-            i?duodan?i?j? institucij? ar ?staig?, tikslias dokument? nuorodas), kuri perkan?iajai organizacijai ar
-            perkan?iajam subjektui leid?ia tai padaryti. Pareikalavus d?l tokios prieigos turi b?ti prid?tas atitinkamas
-            sutikimas) arba
-        &lt;/p&gt;
-        &lt;p&gt;b) (priklausomai nuo Direktyvos 2014/24/ES 59 straipsnio 5 dalies antros pastraipos ?gyvendinimo
-            nacionalin?je teis?je) ne v?liau kaip 2018 m. spalio 18 d. perkan?ioji organizacija ar perkantysis subjektas
-            yra gavusi susijusius dokumentus.
-        &lt;/p&gt;
-        &lt;p&gt;Toliau pasira?iusieji oficialiai sutinka [nurodyti perkan?i?j? organizacij? ar perkant?j? subjekt?, kaip
-            nustatyta I dalies A skirsnyje] leisti susipa?inti su dokumentais, kuriais patvirtinama informacija,
-            pateikta ?io Europos bendrojo vie??j? pirkim? dokumento [nurodyti atitinkam? dal? / skirsn? / punkt? (-us)],
-            d?l [nurodyti vie?ojo pirkimo proced?r?: (trumpas apra?ymas, paskelbimo Europos S?jungos oficialiajame
-            leidinyje nuoroda, nuorodos numeris)].
-        &lt;/p&gt;
-    </entry>
+    <entry key="espd.part1.title.or.short.desc">Trumpas aprašymas:</entry>
+    <entry key="espd.part1.to.be.filled.alert">Vykdant pirkimo procedūras, kurių kvietimas dalyvauti konkurse paskelbtas Europos Sąjungos oficialiajame leidinyje, informacija, kurios reikalaujama pagal I dalį, bus atsiųsta automatiškai, jeigu EBVPD sukurti ir užpildyti naudojama elektroninė EBVPD paslauga. Atitinkamo skelbimo Europos Sąjungos oficialiajame leidinyje nuoroda:</entry>
+    <entry key="espd.part1.website">Interneto svetainė (jei taikoma):</entry>
+    <entry key="espd.part3.grounds.criminal.conv">Su baudžiamaisiais nuosprendžiais susiję pagrindai</entry>
+    <entry key="espd.part3.header">III dalis. Pašalinimo pagrindai</entry>
+    <entry key="espd.part3.insolvency.conflicts">Su nemokumu, interesų konfliktu ar profesiniais nusižengimais susiję pagrindai</entry>
+    <entry key="espd.part5.concl.statements">IV dalis. Baigiamieji pareiškimai</entry>
+    <entry key="espd.part5.concl.statements.signature">Data, vieta ir, jei reikia ar būtina, parašas (-ai):</entry>
+    <entry key="espd.part5.concl.statements.text">Toliau pasirašiusieji oficialiai pareiškia, kad II–V dalyse pateikta informacija yra tiksli ir teisinga ir kad ji pateikta visiškai suvokiant didelio faktų iškreipimo padarinius. Toliau pasirašiusieji oficialiai pareiškia, kad pareikalavus gali nedelsdami pateikti nurodytus sertifikatus ir kitų formų įrodomuosius dokumentus, išskyrus tuo atvejus, kai: a) perkančioji organizacija ar perkantysis subjektas turi galimybę atitinkamus patvirtinamuosius dokumentus tiesiogiai gauti naudodamiesi prieiga prie bet kurios iš valstybių narių nemokamos nacionalinės duomenų bazės (su sąlyga, kad ekonominės veiklos vykdytojas pateikė reikalingą informaciją (interneto adresą, išduodančiąją instituciją ar įstaigą, tikslias dokumentų nuorodas), kuri perkančiajai organizacijai ar perkančiajam subjektui leidžia tai padaryti. Pareikalavus dėl tokios prieigos turi būti pridėtas atitinkamas sutikimas) arba b) (priklausomai nuo Direktyvos 2014/24/ES 59 straipsnio 5 dalies antros pastraipos įgyvendinimo nacionalinėje teisėje) ne vėliau kaip 2018 m. spalio 18 d. perkančioji organizacija ar perkantysis subjektas yra gavusi susijusius dokumentus. Toliau pasirašiusieji oficialiai sutinka [nurodyti perkančiąją organizaciją ar perkantįjį subjektą, kaip nustatyta I dalies A skirsnyje] leisti susipažinti su dokumentais, kuriais patvirtinama informacija, pateikta šio Europos bendrojo viešųjų pirkimų dokumento [nurodyti atitinkamą dalį / skirsnį / punktą (-us)], dėl [nurodyti viešojo pirkimo procedūrą: (trumpas aprašymas, paskelbimo Europos Sąjungos oficialiajame leidinyje nuoroda, nuorodos numeris)].</entry>
     <entry key="espd.part5.export">Eksportuoti</entry>
-    <entry key="espd.part5.export.content">Dabar spustel?kite mygtuk? ?Eksportuoti?, kad atsisi?stum?te ir i?saugotum?te
-        EBVPD rinkmen? savo kompiuteryje. Perkan?iosios organizacijos privalo u?tikrinti, kad ?i EBVPD rinkmena b?t?
-        prieinama ekonomin?s veiklos vykdytojams drauge su kitais vie?ojo pirkimo dokumentais.
-    </entry>
+    <entry key="espd.part5.export.content">Dabar spustelėkite mygtuką „Eksportuoti“, kad atsisiųstumėte ir išsaugotumėte EBVPD rinkmeną savo kompiuteryje.  Perkančiosios organizacijos privalo užtikrinti, kad ši EBVPD rinkmena būtų prieinama ekonominės veiklos vykdytojams drauge su kitais viešojo pirkimo dokumentais.</entry>
     <entry key="espd.part5.header">Baigti</entry>
-    <entry key="espd.part5.reduction">IV dalis. Kandidat?, kuri? kvalifikacija tinkama, skai?iaus suma?inimas</entry>
-    <entry key="espd.part5.reduction.question">Ekonomin?s veiklos vykdytojas parei?kia, kad:</entry>
-    <entry key="espd.part5.text.eo.declares.that">Jei kai kurie i? ?i? sertifikat? ar ?rodom?j? dokument? form?
-        prieinami elektroniniu b?du, nurodykite kiekvieno i? j?:
-    </entry>
-    <entry key="espd.part5.title.eo.declares.that">Jis atitinka objektyvius ir nediskriminacinius kriterijus ar
-        taisykles, taikytinus siekiant suma?inti kandidat? skai?i? toliau nurodytu b?du:&lt;p&gt;tais atvejais, kai
-            reikalaujama tam tikr? sertifikat? ar kit? form? ?rodom?j? dokument?, nurodykite, ar ekonomin?s veiklos
-            vykdytojas turi kiekvien? reikiam? dokument?:
-        &lt;/p&gt;
-    </entry>
-    <entry key="espd.part5.toptext">Ekonomin?s veiklos vykdytojas tur?t? teikti informacij?, tik jei perkan?ioji
-        organizacija ar perkantysis subjektas konkre?iai nurod? objektyvius ir nediskriminacinius kriterijus ar
-        taisykles, taikytinus siekiant suma?inti kandidat?, kurie bus pakviesti dalyvauti konkurse arba dialoge,
-        skai?i?. ?i informacija, kuri gali b?ti papildyta reikalavimais d?l reikalaujam? pateikti sertifikat? (tip?) ar
-        ?rodom?j? dokument? form? (jei toki? yra), i?d?styta atitinkamame skelbime ar skelbime nurodytuose pirkimo
-        dokumentuose. Tik ribot? konkurs?, konkurs? su derybomis, konkurencini? dialog? arba inovacij? partneryst?s
-        atveju:
-    </entry>
-    <entry key="espd.part4.alert">Perkan?iosios organizacijos turi nurodyti taikytinus atrankos kriterijus pa?ym?damos
-        ?alia atitinkamo kriterijaus esant? langel?.
-    </entry>
-    <entry key="espd.part4.economic.and.financial.standing">B. Ekonomin? ir finansin? b?kl?</entry>
+    <entry key="espd.part5.reduction">IV dalis. Kandidatų, kurių kvalifikacija tinkama, skaičiaus sumažinimas</entry>
+    <entry key="espd.part5.reduction.question">Ekonominės veiklos vykdytojas pareiškia, kad:</entry>
+    <entry key="espd.part5.text.eo.declares.that">Jei kai kurie iš šių sertifikatų ar įrodomųjų dokumentų formų prieinami elektroniniu būdu, nurodykite kiekvieno iš jų:</entry>
+    <entry key="espd.part5.title.eo.declares.that">Jis atitinka objektyvius ir nediskriminacinius kriterijus ar taisykles, taikytinus siekiant sumažinti kandidatų skaičių toliau nurodytu būdu: tais atvejais, kai reikalaujama tam tikrų sertifikatų ar kitų formų įrodomųjų dokumentų, nurodykite, ar ekonominės veiklos vykdytojas turi kiekvieną reikiamą dokumentą:</entry>
+    <entry key="espd.part5.toptext">Ekonominės veiklos vykdytojas turėtų teikti informaciją, tik jei perkančioji organizacija ar perkantysis subjektas konkrečiai nurodė objektyvius ir nediskriminacinius kriterijus ar taisykles, taikytinus siekiant sumažinti kandidatų, kurie bus pakviesti dalyvauti konkurse arba dialoge, skaičių. Ši informacija, kuri gali būti papildyta reikalavimais dėl reikalaujamų pateikti sertifikatų (tipų) ar įrodomųjų dokumentų formų (jei tokių yra), išdėstyta atitinkamame skelbime ar skelbime nurodytuose pirkimo dokumentuose. Tik ribotų konkursų, konkursų su derybomis, konkurencinių dialogų arba inovacijų partnerystės atveju:</entry>
+    <entry key="espd.part4.alert">Perkančiosios organizacijos turi nurodyti taikytinus atrankos kriterijus pažymėdamos šalia atitinkamo kriterijaus esantį langelį.</entry>
+    <entry key="espd.part4.economic.and.financial.standing">B. Ekonominė ir finansinė būklė</entry>
     <entry key="espd.part4.header">IV dalis. Atrankos kriterijai</entry>
-    <entry key="espd.part4.quality.assurance">D. Kokyb?s u?tikrinimo schemos ir aplinkosaugos vadybos standartai</entry>
+    <entry key="espd.part4.quality.assurance">D. Kokybės užtikrinimo schemos ir aplinkosaugos vadybos standartai</entry>
     <entry key="espd.part4.suitability">A. Tinkamumas</entry>
-    <entry key="espd.part4.technical.professional.ability">C. Techniniai ir profesiniai paj?gumai</entry>
-    <entry key="espd.part2.add.complete.missing">Be to, u?pildykite tr?kstam? informacij? IV dalies A, B, C arba D
-        skirsniuose, atsi?velgdami ? konkret? atvej? TIK jei to reikalaujama atitinkamame skelbime arba pirkimo
-        dokumentuose:
-    </entry>
-    <entry key="espd.part2.all.selection.covered">d) Ar registracija ar sertifikavimas apima visus reikalaujamus
-        atrankos kriterijus?
-    </entry>
-    <entry key="espd.part2.another.vat">Jei PVM mok?tojo kodo n?ra, nurodykite kit? nacionalin? identifikacin? numer?
-        (jei reikia ir jei toks yra)
-    </entry>
-    <entry key="espd.part2.answer.following.parts">Atsakykite ? likusius ?io skirsnio, ?ios dalies B skirsnio ir
-        reikiamais atvejais C skirsnio klausimus, u?pildykite V dal? (jei taikytina) ir bet kuriuo atveju u?pildykite ir
-        pasira?ykite VI dal?.
-    </entry>
+    <entry key="espd.part4.technical.professional.ability">C. Techniniai ir profesiniai pajėgumai</entry>
+    <entry key="espd.part2.add.complete.missing">Be to, užpildykite trūkstamą informaciją IV dalies A, B, C arba D skirsniuose, atsižvelgdami į konkretų atvejį TIK jei to reikalaujama atitinkamame skelbime arba pirkimo dokumentuose:</entry>
+    <entry key="espd.part2.all.selection.covered">d) Ar registracija ar sertifikavimas apima visus reikalaujamus atrankos kriterijus?</entry>
+    <entry key="espd.part2.another.vat">Jei PVM mokėtojo kodo nėra, nurodykite kitą nacionalinį identifikacinį numerį (jei reikia ir jei toks yra)</entry>
+    <entry key="espd.part2.answer.following.parts">Atsakykite į likusius šio skirsnio, šios dalies B skirsnio ir reikiamais atvejais C skirsnio klausimus, užpildykite V dalį (jei taikytina) ir bet kuriuo atveju užpildykite ir pasirašykite VI dalį.</entry>
     <entry key="espd.part2.birth.date">Gimimo data</entry>
     <entry key="espd.part2.birth.place">Gimimo vieta</entry>
-    <entry key="espd.part2.cert.e.avaliable">b) Jei registracijos ar sertifikavimo sertifikatas prieinamas elektroniniu
-        b?du, nurodykite:
-    </entry>
-    <entry key="espd.part2.contact.person">Asmuo ar asmenys ry?iams:</entry>
-    <entry key="espd.part2.detinfo.of.represent">Prireikus pateikite i?sami? informacij? apie atstovavim? (form?,
-        apr?pt?, paskirt? ir t. t.):
-    </entry>
-    <entry key="espd.part2.disworkers.details">Jei reikia, nurodykite, kuriai ne?gali?j? ar nepalankioje pad?tyje
-        esan?i? darbuotoj? kategorijai ar kategorijoms priskiriami susij? darbuotojai.
-    </entry>
-    <entry key="espd.part2.doc.e.avaliable">Jei atitinkami dokumentai prieinami elektroniniu b?du, nurodykite:</entry>
-    <entry key="espd.part2.email">E. pa?tas:</entry>
-    <entry key="espd.part2.ensure.others.espd">U?tikrinkite, kad kiti susij? asmenys pateikt? atskir? EBVPD form?.
-    </entry>
-    <entry key="espd.part2.eo.approved.cert">Jei taikoma, ar ekonomin?s veiklos vykdytojas ?trauktas ? oficial?
-        patvirtint? ekonomin?s veiklos vykdytoj? s?ra?? arba ar jis turi lygiavert? sertifikat? (pvz., pagal nacionalin?
-        (i?ankstin?) kvalifikacijos vertinimo sistem?)?
-    </entry>
-    <entry key="espd.part2.eo.group.role">a) Nurodykite ekonomin?s veiklos vykdytojo vaidmen? grup?je (vadovavimas,
-        atsakomyb? u? konkre?ias u?duotis ir t. t.):
-    </entry>
-    <entry key="espd.part2.eo.has.cert.soc">e) Ar ekonomin?s veiklos vykdytojas gal?s pateikti sertifikat? d?l
-        socialinio draudimo ?mok? ir mokes?i? mok?jimo arba pateikti informacij?, kuri leist? perkan?iajai organizacijai
-        ar perkan?iajam subjektui j? gauti tiesiogiai naudojantis prieiga prie bet kurios i? valstybi? nari? nemokamos
-        nacionalin?s duomen? baz?s?
-    </entry>
-    <entry key="espd.part2.eo.rely.other.entities">Ar siekdamas patenkinti IV dalyje nurodytus atrankos kriterijus ir V
-        dalyje nurodytus kriterijus bei taisykles (jei toki? yra) ekonomin?s veiklos vykdytojas remiasi kit? subjekt?
-        paj?gumais?
-    </entry>
+    <entry key="espd.part2.cert.e.avaliable">b) Jei registracijos ar sertifikavimo sertifikatas prieinamas elektroniniu būdu, nurodykite:</entry>
+    <entry key="espd.part2.contact.person">Asmuo ar asmenys ryšiams:</entry>
+    <entry key="espd.part2.detinfo.of.represent">Prireikus pateikite išsamią informaciją apie atstovavimą (formą, aprėptį, paskirtį ir t. t.):</entry>
+    <entry key="espd.part2.disworkers.details">Jei reikia, nurodykite, kuriai neįgaliųjų ar nepalankioje padėtyje esančių darbuotojų kategorijai ar kategorijoms priskiriami susiję darbuotojai.</entry>
+    <entry key="espd.part2.doc.e.avaliable">Jei atitinkami dokumentai prieinami elektroniniu būdu, nurodykite:</entry>
+    <entry key="espd.part2.email">E. paštas:</entry>
+    <entry key="espd.part2.ensure.others.espd">Užtikrinkite, kad kiti susiję asmenys pateiktų atskirą EBVPD formą.</entry>
+    <entry key="espd.part2.eo.approved.cert">Jei taikoma, ar ekonominės veiklos vykdytojas įtrauktas į oficialų patvirtintų ekonominės veiklos vykdytojų sąrašą arba ar jis turi lygiavertį sertifikatą (pvz., pagal nacionalinę (išankstinę) kvalifikacijos vertinimo sistemą)?</entry>
+    <entry key="espd.part2.eo.group.role">a) Nurodykite ekonominės veiklos vykdytojo vaidmenį grupėje (vadovavimas, atsakomybė už konkrečias užduotis ir t. t.):</entry>
+    <entry key="espd.part2.eo.has.cert.soc">e) Ar ekonominės veiklos vykdytojas galės pateikti sertifikatą dėl socialinio draudimo įmokų ir mokesčių mokėjimo arba pateikti informaciją, kuri leistų perkančiajai organizacijai ar perkančiajam subjektui jį gauti tiesiogiai naudojantis prieiga prie bet kurios iš valstybių narių nemokamos nacionalinės duomenų bazės?</entry>
+    <entry key="espd.part2.eo.rely.other.entities">Ar siekdamas patenkinti IV dalyje nurodytus atrankos kriterijus ir V dalyje nurodytus kriterijus bei taisykles (jei tokių yra) ekonominės veiklos vykdytojas remiasi kitų subjektų pajėgumais?</entry>
     <entry key="espd.part2.first.name">Vardas</entry>
-    <entry key="espd.part2.header">II dalis. Informacija apie ekonomin?s veiklos vykdytoj?</entry>
-    <entry key="espd.part2.if.proc.reserved">Tik tuo atveju, kai pirkimas rezervuotas: ar ekonomin?s veiklos vykdytojas
-        yra globojama darbo grup? (ne?gali?j? socialin? ?mon?), socialin? ?mon?? Ar jis vykdys sutart? pagal globojam?
-        darbo grupi? (ne?gali?j? socialini? ?moni?) u?imtumo programas?
-    </entry>
-    <entry key="espd.part2.info.eo">A. Informacija apie ekonomin?s veiklos vykdytoj?</entry>
-    <entry key="espd.part2.info.reliance">C. Informacija apie r?mim?si kit? subjekt? paj?gumais</entry>
-    <entry key="espd.part2.info.respresent">B. Informacija apie ekonomin?s veiklos vykdytojo teisinius atstovus</entry>
-    <entry key="espd.part2.information.subcontractors">D. Informacija apie subrangovus, kuri? paj?gumais ekonomin?s
-        veiklos vykdytojas nesiremia
-    </entry>
-    <entry key="espd.part2.information.subcontractors.description">Jei taip ir tiek, kiek ?inoma, i?vardykite si?lomus
-        subrangovus:
-    </entry>
-    <entry key="espd.part2.information.subcontractors.footer">Jei perkan?ioji organizacija ar perkantysis subjektas
-        ai?kiai pra?o ?ios informacijos, ?alia informacijos pagal ?? skirsn?, pateikite pagal ?ios dalies A ir B
-        skirsnius ir III dal? reikalaujam? informacij? apie kiekvien? susijus? subrangov? (subrangov? kategorijas).
-    </entry>
-    <entry key="espd.part2.information.subcontractors.header">(Skirsn? reikia pildyti, tik jei ?ios informacijos ai?kiai
-        reikalauja perkan?ioji organizacija ar perkantysis subjektas.)
-    </entry>
-    <entry key="espd.part2.information.subcontractors.title">Ar ekonomin?s veiklos vykdytojas ketina kurias nors
-        sutarties dalis subrangos sutartimi pavesti atlikti tre?iosioms ?alims?
-    </entry>
+    <entry key="espd.part2.header">II dalis. Informacija apie ekonominės veiklos vykdytoją</entry>
+    <entry key="espd.part2.if.proc.reserved">Tik tuo atveju, kai pirkimas rezervuotas: ar ekonominės veiklos vykdytojas yra globojama darbo grupė (neįgaliųjų socialinė įmonė), socialinė įmonė? Ar jis vykdys sutartį pagal globojamų darbo grupių (neįgaliųjų socialinių įmonių) užimtumo programas?</entry>
+    <entry key="espd.part2.info.eo">A. Informacija apie ekonominės veiklos vykdytoją</entry>
+    <entry key="espd.part2.info.reliance">C. Informacija apie rėmimąsi kitų subjektų pajėgumais</entry>
+    <entry key="espd.part2.info.respresent">B. Informacija apie ekonominės veiklos vykdytojo teisinius atstovus</entry>
+    <entry key="espd.part2.information.subcontractors">D. Informacija apie subrangovus, kurių pajėgumais ekonominės veiklos vykdytojas nesiremia</entry>
+    <entry key="espd.part2.information.subcontractors.description">Jei taip ir tiek, kiek žinoma, išvardykite siūlomus subrangovus:</entry>
+    <entry key="espd.part2.information.subcontractors.footer">Jei perkančioji organizacija ar perkantysis subjektas aiškiai prašo šios informacijos, šalia informacijos pagal šį skirsnį, pateikite pagal šios dalies A ir B skirsnius ir III dalį reikalaujamą informaciją apie kiekvieną susijusį subrangovą (subrangovų kategorijas).</entry>
+    <entry key="espd.part2.information.subcontractors.header">(Skirsnį reikia pildyti, tik jei šios informacijos aiškiai reikalauja perkančioji organizacija ar perkantysis subjektas.)</entry>
+    <entry key="espd.part2.information.subcontractors.title">Ar ekonominės veiklos vykdytojas ketina kurias nors sutarties dalis subrangos sutartimi pavesti atlikti trečiosioms šalims?</entry>
     <entry key="espd.part2.internet.addr.if.exists">Interneto adresas (jei taikoma):</entry>
-    <entry key="espd.part2.is.eo.proc.together">Ar ekonomin?s veiklos vykdytojas pirkimo proced?roje dalyvauja kartu su
-        kitais?
-    </entry>
-    <entry key="espd.part2.is.eo.sized">Ar ekonomin?s veiklos vykdytojas yra labai ma?a, ma?oji ar vidutin? ?mon??
-    </entry>
-    <entry key="espd.part2.is.eo.sized.tooltip">?r. 2003 m. gegu??s 6 d. Komisijos rekomendacij? d?l labai ma??, ma??j?
-        ir vidutini? ?moni? apibr??ties (OL L 124, 2003 5 20, p. 36). ?ios informacijos reikalaujama tik statistiniais
-        tikslais. Labai ma?os ?mon?s ? ?mon?s, kuriose dirba ma?iau nei 10 asmen? ir kuri? metin? apyvarta ir (arba)
-        bendras metinis balansas nevir?ija 2 mln. EUR. Ma?osios ?mon?s ? ?mon?s, kuriose dirba ma?iau nei 50 asmen? ir
-        kuri? metin? apyvarta ir (arba) bendras metinis balansas nevir?ija 10 mln. EUR. Vidutin?s ?mon?s ? ?mon?s,
-        kurios n?ra nei labai ma?os, nei ma?osios, kuriose dirba ma?iau nei 250 asmen? ir kuri? metin? apyvarta
-        nevir?ija 50 mln. EUR ir (arba) bendras metinis balansas nevir?ija 43 mln. EUR.
-    </entry>
-    <entry key="espd.part2.last.name">Pavard?</entry>
-    <entry key="espd.part2.lots.concerned">Jei taikytina, nuroda ? pirkimo dal? (-is), d?l kurios (-i?) ekonomin?s
-        veiklos vykdytojas nori dalyvauti konkurse:
-    </entry>
-    <entry key="espd.part2.name">Vardas ir pavard? / Pavadinimas:</entry>
-    <entry key="espd.part2.name.part.group">c) Jei taikytina, dalyvaujan?ios grup?s pavadinimas:</entry>
-    <entry key="espd.part2.other.eo.part">b) Nurodykite kitus ekonomin?s veiklos vykdytojus, kurie kartu dalyvauja
-        vie?ojo pirkimo proced?roje:
-    </entry>
-    <entry key="espd.part2.percentage.disworkers">Kokia yra atitinkama ne?gali? ar nepalankioje pad?tyje esan?i?
-        darbuotoj? procentin? dalis?
-    </entry>
-    <entry key="espd.part2.person.empowered">Jei taikytina, nurodykite asmens (-?), ?galioto (-?) atstovauti ekonomin?s
-        veiklos vykdytojui ?ios pirkimo proced?ros tikslais, vard? ir pavard? ir adres?:
-    </entry>
+    <entry key="espd.part2.is.eo.proc.together">Ar ekonominės veiklos vykdytojas pirkimo procedūroje dalyvauja kartu su kitais?</entry>
+    <entry key="espd.part2.is.eo.sized">Ar ekonominės veiklos vykdytojas yra labai maža, mažoji ar vidutinė įmonė?</entry>
+    <entry key="espd.part2.is.eo.sized.tooltip">Žr. 2003 m. gegužės 6 d. Komisijos rekomendaciją dėl labai mažų, mažųjų ir vidutinių įmonių apibrėžties (OL L 124, 2003 5 20, p. 36). Šios informacijos reikalaujama tik statistiniais tikslais. Labai mažos įmonės – įmonės, kuriose dirba mažiau nei 10 asmenų ir kurių metinė apyvarta ir (arba) bendras metinis balansas neviršija 2 mln. EUR. Mažosios įmonės – įmonės, kuriose dirba mažiau nei 50 asmenų ir kurių metinė apyvarta ir (arba) bendras metinis balansas neviršija 10 mln. EUR. Vidutinės įmonės – įmonės, kurios nėra nei labai mažos, nei mažosios, kuriose dirba mažiau nei 250 asmenų ir kurių metinė apyvarta neviršija 50 mln. EUR ir (arba) bendras metinis balansas neviršija 43 mln. EUR.</entry>
+    <entry key="espd.part2.last.name">Pavardė</entry>
+    <entry key="espd.part2.lots.concerned">Jei taikytina, nuroda į pirkimo dalį (-is), dėl kurios (-ių) ekonominės veiklos vykdytojas nori dalyvauti konkurse:</entry>
+    <entry key="espd.part2.name">Vardas ir pavardė / Pavadinimas:</entry>
+    <entry key="espd.part2.name.part.group">c) Jei taikytina, dalyvaujančios grupės pavadinimas:</entry>
+    <entry key="espd.part2.other.eo.part">b) Nurodykite kitus ekonominės veiklos vykdytojus, kurie kartu dalyvauja viešojo pirkimo procedūroje:</entry>
+    <entry key="espd.part2.percentage.disworkers">Kokia yra atitinkama neįgalių ar nepalankioje padėtyje esančių darbuotojų procentinė dalis?</entry>
+    <entry key="espd.part2.person.empowered">Jei taikytina, nurodykite asmens (-ų), įgalioto (-ų) atstovauti ekonominės veiklos vykdytojui šios pirkimo procedūros tikslais, vardą ir pavardę ir adresą:</entry>
     <entry key="espd.part2.pos.act.in.capacity">Pareigos arba statusas:</entry>
-    <entry key="espd.part2.postal.adress">Pa?to adresas:</entry>
-    <entry key="espd.part2.provide.regnumber">a) Nurodykite atitinkam? registracijos ar sertifikavimo numer?, jei
-        taikytina:
-    </entry>
-    <entry key="espd.part2.ref.for.cert">c) Pateikite nuorodas, kuriomis grind?iama registracija ar sertifikavimas ir,
-        jei taikytina, klasifikavimas oficialiajame s?ra?e:
-    </entry>
-    <entry key="espd.part2.separate.espd.sections.a.b">D?l kiekvieno i? susijusi? subjekt? pateikite atskir?, t?
-        subjekt? tinkamai u?pildyt? ir pasira?yt? EBVPD form? su informacija, kurios reikalaujama pagal ?ios dalies A ir
-        B skirsnius ir III dal?.<p/>Atkreipkite d?mes?, kad reik?t? ?traukti ir visus specialistus arba technines
-        ?staigas, nepriklausomai nuo to, ar jie tiesiogiai priklauso ekonomin?s veiklos vykdytojo ?monei, pirmiausia
-        atsakingus u? kokyb?s kontrol?, o vie?ojo darb? pirkimo sutar?i? atveju ? specialistus arba technines ?staigas,
-        ? kuriuos ekonomin?s veiklos vykdytojas gali kreiptis, siekdamas atlikti darb?.<p/>Jei svarbu prane?ti apie
-        konkret? paj?gum? arba paj?gumus, kuriais remiasi ekonomin?s veiklos vykdytojas, IV ir V dalyse reikalaujam?
-        informacij? pateikite apie kiekvien? susijus? subjekt?.
-    </entry>
+    <entry key="espd.part2.postal.adress">Pašto adresas:</entry>
+    <entry key="espd.part2.provide.regnumber">a) Nurodykite atitinkamą registracijos ar sertifikavimo numerį, jei taikytina:</entry>
+    <entry key="espd.part2.ref.for.cert">c) Pateikite nuorodas, kuriomis grindžiama registracija ar sertifikavimas ir, jei taikytina, klasifikavimas oficialiajame sąraše:</entry>
+    <entry key="espd.part2.separate.espd.sections.a.b">Dėl kiekvieno iš susijusių subjektų pateikite atskirą, tų subjektų tinkamai užpildytą ir pasirašytą EBVPD formą su informacija, kurios reikalaujama pagal šios dalies A ir B skirsnius ir III dalį. <p/>Atkreipkite dėmesį, kad reikėtų įtraukti ir visus specialistus arba technines įstaigas, nepriklausomai nuo to, ar jie tiesiogiai priklauso ekonominės veiklos vykdytojo įmonei, pirmiausia atsakingus už kokybės kontrolę, o viešojo darbų pirkimo sutarčių atveju – specialistus arba technines įstaigas, į kuriuos ekonominės veiklos vykdytojas gali kreiptis, siekdamas atlikti darbą.<p/>Jei svarbu pranešti apie konkretų pajėgumą arba pajėgumus, kuriais remiasi ekonominės veiklos vykdytojas, IV ir V dalyse reikalaujamą informaciją pateikite apie kiekvieną susijusį subjektą.</entry>
     <entry key="espd.part2.telephone">Telefonas:</entry>
-    <entry key="espd.part2.vat">PVM mok?tojo kodas, jei yra:</entry>
-    <entry key="espd.part2sel.alert">Ekonomin?s veiklos vykdytojas tur?t? teikti informacij?, tik jei perkan?ioji
-        organizacija ar perkantysis subjektas atitinkamame skelbime ar skelbime nurodytuose pirkimo dokumentuose jos
-        reikalauja apie susijusius atrankos kriterijus.
-    </entry>
+    <entry key="espd.part2.vat">PVM mokėtojo kodas, jei yra:</entry>
+    <entry key="espd.part2sel.alert">Ekonominės veiklos vykdytojas turėtų teikti informaciją, tik jei perkančioji organizacija ar perkantysis subjektas atitinkamame skelbime ar skelbime nurodytuose pirkimo dokumentuose jos reikalauja apie susijusius atrankos kriterijus.</entry>
     <entry key="espd.crit.amount">Suma</entry>
     <entry key="espd.crit.amount.concerned">Susijusi suma</entry>
     <entry key="espd.crit.average.turnover">Emitentas</entry>
     <entry key="espd.crit.code">Kodas</entry>
-    <entry key="espd.crit.country.member.state">Susijusi ?alis ar valstyb? nar?</entry>
+    <entry key="espd.crit.country.member.state">Susijusi šalis ar valstybė narė</entry>
     <entry key="espd.crit.date">Data</entry>
-    <entry key="espd.crit.date.of.conviction">Nuosprend?io data</entry>
-    <entry key="espd.part3.crit.date.of.conviction.or.decision">Nurodykite nuosprend?io ar sprendimo dat?</entry>
-    <entry key="espd.crit.decision.final.and.binding">Jei pareig? nevykdymas nustatytas teismo ar administraciniu
-        sprendimu, ar ?is sprendimas yra galutinis ir privalomas?
-    </entry>
-    <entry key="espd.crit.description">Apra?ymas</entry>
-    <entry key="espd.crit.do.you.allow.checks">Ar leid?iate atlikti patikras?</entry>
-    <entry key="espd.crit.end.date">Met? skai?ius</entry>
-    <entry key="espd.part3.crit.eu.main.breaching.obligations">Direktyvos 2014/24/ES 57 straipsnio 4 dalyje nustatytos
-        ?ios pa?alinimo prie?astys
-    </entry>
-    <entry key="espd.part3.crit.eu.eo.main.breaching.obligations">Direktyvos 2014/24/ES 57 straipsnio 4 dalyje nustatyti
-        ?ie pa?alinimo pagrindai
-    </entry>
-    <entry key="espd.part3.crit.eu.main.purely.national">Ar taikomi i?imtinai nacionaliniai pa?alinimo pagrindai,
-        nurodyti atitinkamame skelbime ar pirkimo dokumentuose?
-    </entry>
-    <entry key="espd.part3.crit.eu.grounds.criminal.conv.main.title">Direktyvos 2014/24/ES 57 straipsnio 1 dalyje
-        nustatytos ?ios pa?alinimo prie?astys
-    </entry>
-    <entry key="espd.part3.crit.eu.eo.grounds.criminal.conv.main.title">Direktyvos 2014/24/ES 57 straipsnio 1 dalyje
-        nustatyti ?ie pa?alinimo pagrindai
-    </entry>
-    <entry key="espd.part3.crit.eu.payment.taxes.main.title">Direktyvos 2014/24/ES 57 straipsnio 2 dalyje nustatytos
-        ?ios pa?alinimo prie?astys
-    </entry>
-    <entry key="espd.part3.crit.eu.eo.payment.taxes.main.title">Direktyvos 2014/24/ES 57 straipsnio 2 dalyje nustatytos
-        ?ios pa?alinimo prie?astys
-    </entry>
-    <entry key="espd.crit.eu.text.agreement.economic">Ar ekonomin?s veiklos vykdytojas su kitais ekonomin?s veiklos
-        vykdytojais yra sudar?s susitarim?, kuriais siekta i?kraipyti konkurencij??
-    </entry>
-    <entry key="espd.crit.eu.text.arrangement.creditors">Ar ekonomin?s veiklos vykdytojas yra sudar?s susitarim? su
-        kreditoriais?
-    </entry>
-    <entry key="espd.crit.eu.text.bankrupt">Ar ekonomin?s veiklos vykdytojas yra bankrutav?s?</entry>
-    <entry key="espd.crit.eu.text.breaching.obligations.environmental">Ar ekonomin?s veiklos vykdytojas, kiek jam
-        ?inoma, pa?eid? savo pareigas aplinkos teis?s srityje? Kaip ?io pirkimo tikslu nurodyta nacionalin?je teis?je,
-        atitinkamame skelbime ar pirkimo dokumentuose arba Direktyvos 2014/18/ES 24 straipsnio 2 dalyje.
-    </entry>
-    <entry key="espd.crit.eu.text.breaching.obligations.labour">Ar ekonomin?s veiklos vykdytojas, kiek jam ?inoma,
-        pa?eid? savo pareigas darbo teis?s srityje? Kaip ?io pirkimo tikslu nurodyta nacionalin?je teis?je, atitinkamame
-        skelbime ar pirkimo dokumentuose arba Direktyvos 2014/18/ES 24 straipsnio 2 dalyje.
-    </entry>
-    <entry key="espd.crit.eu.text.breaching.obligations.social">Ar ekonomin?s veiklos vykdytojas, kiek jam ?inoma,
-        pa?eid? savo pareigas socialin?s teis?s srityje? Kaip ?io pirkimo tikslu nurodyta nacionalin?je teis?je,
-        atitinkamame skelbime ar pirkimo dokumentuose arba Direktyvos 2014/18/ES 24 straipsnio 2 dalyje.
-    </entry>
-    <entry key="espd.crit.eu.text.child.labour">Ar pats ekonomin?s veiklos vykdytojas ar bet kuris asmuo, kuris yra jo
-        administracijos, valdymo ar prie?i?ros organo narys arba turi atstovavimo, sprendimo ar kontrol?s ?galiojimus to
-        ekonomin?s veiklos vykdytojo at?vilgiu, buvo nuteistas galutiniu teismo sprendimu u? vaik? darb? arba kitas
-        prekybos ?mon?mis formas, o nuosprendis priimtas prie? ne daugiau kaip penkerius metus arba kai nuosprendyje
-        ai?kiai nustatytas pa?alinimo laikotarpis tebesit?sia? Kaip apibr??ta 2011 m. baland?io 5 d. Europos Parlamento
-        ir Tarybos direktyvos 2011/36/ES d?l prekybos ?mon?mis prevencijos, kovos su ja ir auk? apsaugos, pakei?ian?ios
-        Tarybos pamatin? sprendim? 2002/629/TVR, 2 straipsnyje (OL L 101, 2011 4 15, p. 1).
-    </entry>
-    <entry key="espd.crit.eu.text.conflict.interest">Ar ekonomin?s veiklos vykdytojas ?ino apie kokius nors interes?
-        konfliktus, kaip nurodyta nacionalin?je teis?se, atitinkamame skelbime ar pirkimo dokumentuose, kylan?ius d?l jo
-        dalyvavimo pirkimo proced?roje?
-    </entry>
-    <entry key="espd.crit.eu.text.corruption">Ar pats ekonomin?s veiklos vykdytojas ar bet kuris asmuo, kuris yra jo
-        administracijos, valdymo ar prie?i?ros organo narys arba turi atstovavimo, sprendimo ar kontrol?s ?galiojimus to
-        ekonomin?s veiklos vykdytojo at?vilgiu, buvo nuteistas galutiniu teismo sprendimu u? korupcij?, o nuosprendis
-        priimtas prie? ne daugiau kaip penkerius metus arba kai nuosprendyje ai?kiai nustatytas pa?alinimo laikotarpis
-        tebesit?sia? Kaip apibr??ta Konvencijos d?l kovos su korupcija, susijusia su Europos Bendrij? pareig?nais ar
-        Europos S?jungos valstybi? nari? pareig?nais, 3 straipsnyje (OL C 195, 1997 6 25, p. 1) ir 2003 m. liepos 22 d.
-        Tarybos pamatinio sprendimo 2003/568/TVR d?l kovos su korupcija priva?iame sektoriuje 2 straipsnio 1 dalyje (OL
-        L 192, 2003 7 31, p. 54). ? pa?alinimo pagrindus taip pat ?traukta korupcija, kaip apibr??ta perkan?iosios
-        organizacijos (perkan?iojo subjekto) arba ekonomin?s veiklos vykdytojo nacionalin?je teis?je.
-    </entry>
-    <entry key="espd.crit.eu.text.early.termination">Ar ekonomin?s veiklos vykdytojas tur?jo tokios patirties: ankstesn?
-        vie?oji sutartis, ankstesn? sutartis su perkan?iuoju subjektu arba ankstesn? koncesijos sutartis buvo nutraukta
-        anks?iau laiko; arba buvo pareikalauta atlyginti su ankstesne sutartimi susijusi? ?al? ar skirtos kitos pana?ios
-        sankcijos?
-    </entry>
-    <entry key="espd.crit.eu.text.fraud">Ar pats ekonomin?s veiklos vykdytojas ar bet kuris asmuo, kuris yra jo
-        administracijos, valdymo ar prie?i?ros organo narys arba turi atstovavimo, sprendimo ar kontrol?s ?galiojimus to
-        ekonomin?s veiklos vykdytojo at?vilgiu, buvo nuteistas galutiniu teismo sprendimu u? suk?iavim?, o nuosprendis
-        priimtas prie? ne daugiau kaip penkerius metus arba kai nuosprendyje ai?kiai nustatytas pa?alinimo laikotarpis
-        tebesit?sia? Pagal Europos Bendrij? finansini? interes? apsaugos konvencijos 1 straipsn? (OL C 316, 1995 11 27,
-        p. 48).
-    </entry>
-    <entry key="espd.crit.eu.text.grounds.criminal.conv">Ar pats ekonomin?s veiklos vykdytojas ar bet kuris asmuo, kuris
-        yra jo administracijos, valdymo ar prie?i?ros organo narys arba turi atstovavimo, sprendimo ar kontrol?s
-        ?galiojimus to ekonomin?s veiklos vykdytojo at?vilgiu, buvo nuteistas galutiniu teismo sprendimu u? dalyvavim?
-        nusikalstamos organizacijos veikloje, o nuosprendis priimtas prie? ne daugiau kaip penkerius metus arba kai
-        nuosprendyje ai?kiai nustatytas pa?alinimo laikotarpis tebesit?sia? Kaip apibr??ta 2008 m. spalio 24 d. Tarybos
-        pamatinio sprendimo 2008/841/TVR d?l kovos su organizuotu nusikalstamumu 2 straipsnyje (OL L 300, 2008 11 11, p.
-        42).
-    </entry>
-    <entry key="espd.crit.eu.text.guilty.misconduct">Ar ekonomin?s veiklos vykdytojas yra pripa?intas kaltu d?l sunkaus
-        profesinio nusi?engimo? Jei taikytina, ?r. nacionalin?je teis?je, atitinkamame skelbime ar pirkimo dokumentuose
-        pateiktas apibr??tis.
-    </entry>
-    <entry key="espd.crit.eu.text.guilty.misinterpretation">Ar ekonomin?s veiklos vykdytojas yra susij?s su vienu i? ?i?
-        atvej?, kai jis :<p/>a) buvo labai i?kreip?s faktus pateikdamas informacij?, reikaling? patikrinti, ar n?ra
-        pagrind? pa?alinti, arba patikrinti atitikt? atrankos kriterijams;<p/>b) sl?p? toki? informacij?;<p/>c) dels?
-        pateikti patvirtinamuosius dokumentus, kuri? reikalavo perkan?ioji organizacija ar perkantysis subjektas, ir<p/>
-        d) siek? daryti neteis?t? ?tak? perkan?iosios organizacijos ar perkan?iojo subjekto sprendim? pri?mimo procesui,
-        kad gaut? konfidencialios informacijos, d?l kurios per pirkimo proced?r? ?gyt? nepagr?st? prana?um?, arba ty?ia
-        teikti klaidinan?ios informacijos, kuri gali tur?ti esmin?s ?takos sprendimams d?l pa?alinimo, atrankos ar
-        sutarties skyrimo?
-    </entry>
-    <entry key="espd.crit.eu.text.insolvency">Ar ekonomin?s veiklos vykdytojui taikoma nemokumo ar likvidavimo
-        proced?ra?
-    </entry>
-    <entry key="espd.crit.eu.text.involvement">Ar ekonomin?s veiklos vykdytojas arba su juo susijusi ?mon? konsultavo
-        perkan?i?j? organizacij? ar perkant?j? subjekt? arba kitaip dalyvavo rengiant pirkimo proced?r??
-    </entry>
-    <entry key="espd.crit.eu.text.liquidator">Ar ekonomin?s veiklos vykdytojo turt? administruoja likvidatorius arba
-        teismas?
-    </entry>
-    <entry key="espd.crit.eu.text.money.laundering">Ar pats ekonomin?s veiklos vykdytojas ar bet kuris asmuo, kuris yra
-        jo administracijos, valdymo ar prie?i?ros organo narys arba turi atstovavimo, sprendimo ar kontrol?s ?galiojimus
-        to ekonomin?s veiklos vykdytojo at?vilgiu, buvo nuteistas galutiniu teismo sprendimu u? pinig? plovim? arba
-        terorist? finansavim?, o nuosprendis priimtas prie? ne daugiau kaip penkerius metus arba kai nuosprendyje
-        ai?kiai nustatytas pa?alinimo laikotarpis tebesit?sia? Kaip apibr??ta 2005 m. spalio 26 d. Europos Parlamento ir
-        Tarybos direktyvos 2005/60/EB d?l finans? sistemos apsaugos nuo jos panaudojimo pinig? plovimui ir terorist?
-        finansavimui 1 straipsnyje (OL L 309, 2005 11 25, p. 15).
-    </entry>
-    <entry key="espd.crit.eu.text.national.bankruptcy">Ar ekonomin?s veiklos vykdytojas yra bet kokioje bankrotui
-        prilygstan?ioje situacijoje, susiklos?iusioje d?l pana?ios nacionaliniuose ?statymuose ir kituose teis?s aktuose
-        nustatytos proced?ros?
-    </entry>
-    <entry key="espd.crit.eu.text.payment.social.security">Ar ekonomin?s veiklos vykdytojas pa?eid? savo pareigas,
-        susijusias su socialinio draudimo ?mok? mok?jimu, tiek ?alyje, kurioje yra ?sisteig?s, tiek perkan?iosios
-        organizacijos ar perkan?iojo subjekto valstyb?je nar?je, jei tai n?ra jo ?sisteigimo ?alis?
-    </entry>
-    <entry key="espd.crit.eu.text.payment.taxes">Ar ekonomin?s veiklos vykdytojas pa?eid? savo pareigas, susijusias su
-        mokes?i? mok?jimu, tiek ?alyje, kurioje yra ?sisteig?s, tiek perkan?iosios organizacijos ar perkan?iojo subjekto
-        valstyb?je nar?je, jei tai n?ra jo ?sisteigimo ?alis?
-    </entry>
-    <entry key="espd.crit.eu.text.purely.national">Kiti pa?alinimo pagrindai, kurie gali b?ti numatyti perkan?iosios
-        organizacijos ar perkan?iojo subjekto valstyb?s nar?s nacionalin?s teis?s aktuose. Ar taikomi i?imtinai
-        nacionaliniai pa?alinimo pagrindai, nurodyti atitinkamame skelbime ar pirkimo dokumentuose?
-    </entry>
-    <entry key="espd.crit.eu.text.suspended.business">Ar ekonomin?s veiklos vykdytojo verslo veikla yra sustabdyta?
-    </entry>
-    <entry key="espd.crit.eu.text.terrorist">Ar pats ekonomin?s veiklos vykdytojas ar bet kuris asmuo, kuris yra jo
-        administracijos, valdymo ar prie?i?ros organo narys arba turi atstovavimo, sprendimo ar kontrol?s ?galiojimus to
-        ekonomin?s veiklos vykdytojo at?vilgiu, buvo nuteistas galutiniu teismo sprendimu u? teroristinius nusikaltimus
-        arba su teroristine veikla susijusius nusikaltimus, o nuosprendis priimtas prie? ne daugiau kaip penkerius metus
-        arba kai nuosprendyje ai?kiai nustatytas pa?alinimo laikotarpis tebesit?sia? Kaip apibr??ta 2002 m. bir?elio 13
-        d. Tarybos pamatinio sprendimo d?l kovos su terorizmu 1 ir 3 straipsniuose (OL L 164, 2002 6 22, p. 3). ?
-        pa?alinimo pagrindus taip pat ?trauktas nusikalstamos veikos kurstymas, pagalba ar bendrininkavimas j? vykdant
-        arba k?sinimasis j? ?vykdyti, kaip nurodyta to pamatinio sprendimo 4 straipsnyje.
-    </entry>
-    <entry key="espd.crit.eu.title.agreement.economic">Su kitais ekonomin?s veiklos vykdytojais sudaryti susitarimai,
-        kuriais siekta i?kraipyti konkurencij?
-    </entry>
+    <entry key="espd.crit.date.of.conviction">Nuosprendžio data</entry>
+    <entry key="espd.part3.crit.date.of.conviction.or.decision">Nurodykite nuosprendžio ar sprendimo datą</entry>
+    <entry key="espd.crit.decision.final.and.binding">Jei pareigų nevykdymas nustatytas teismo ar administraciniu sprendimu, ar šis sprendimas yra galutinis ir privalomas?</entry>
+    <entry key="espd.crit.description">Aprašymas</entry>
+    <entry key="espd.crit.do.you.allow.checks">Ar leidžiate atlikti patikras?</entry>
+    <entry key="espd.crit.end.date">Metų skaičius</entry>
+    <entry key="espd.part3.crit.eu.main.breaching.obligations">Direktyvos 2014/24/ES 57 straipsnio 4 dalyje nustatytos šios pašalinimo priežastys</entry>
+    <entry key="espd.part3.crit.eu.eo.main.breaching.obligations">Direktyvos 2014/24/ES 57 straipsnio 4 dalyje nustatyti šie pašalinimo pagrindai</entry>
+    <entry key="espd.part3.crit.eu.main.purely.national">Ar taikomi išimtinai nacionaliniai pašalinimo pagrindai, nurodyti atitinkamame skelbime ar pirkimo dokumentuose?</entry>
+    <entry key="espd.part3.crit.eu.grounds.criminal.conv.main.title">Direktyvos 2014/24/ES 57 straipsnio 1 dalyje nustatytos šios pašalinimo priežastys</entry>
+    <entry key="espd.part3.crit.eu.eo.grounds.criminal.conv.main.title">Direktyvos 2014/24/ES 57 straipsnio 1 dalyje nustatyti šie pašalinimo pagrindai</entry>
+    <entry key="espd.part3.crit.eu.payment.taxes.main.title">Direktyvos 2014/24/ES 57 straipsnio 2 dalyje nustatytos šios pašalinimo priežastys</entry>
+    <entry key="espd.part3.crit.eu.eo.payment.taxes.main.title">Direktyvos 2014/24/ES 57 straipsnio 2 dalyje nustatytos šios pašalinimo priežastys</entry>
+    <entry key="espd.crit.eu.text.agreement.economic">Ar ekonominės veiklos vykdytojas su kitais ekonominės veiklos vykdytojais yra sudaręs susitarimų, kuriais siekta iškraipyti konkurenciją?</entry>
+    <entry key="espd.crit.eu.text.arrangement.creditors">Ar ekonominės veiklos vykdytojas yra sudaręs susitarimą su kreditoriais?</entry>
+    <entry key="espd.crit.eu.text.bankrupt">Ar ekonominės veiklos vykdytojas yra bankrutavęs?</entry>
+    <entry key="espd.crit.eu.text.breaching.obligations.environmental">Ar ekonominės veiklos vykdytojas, kiek jam žinoma, pažeidė savo pareigas aplinkos teisės srityje? Kaip šio pirkimo tikslu nurodyta nacionalinėje teisėje, atitinkamame skelbime ar pirkimo dokumentuose arba Direktyvos 2014/18/ES 24 straipsnio 2 dalyje.</entry>
+    <entry key="espd.crit.eu.text.breaching.obligations.labour">Ar ekonominės veiklos vykdytojas, kiek jam žinoma, pažeidė savo pareigas darbo teisės srityje? Kaip šio pirkimo tikslu nurodyta nacionalinėje teisėje, atitinkamame skelbime ar pirkimo dokumentuose arba Direktyvos 2014/18/ES 24 straipsnio 2 dalyje.</entry>
+    <entry key="espd.crit.eu.text.breaching.obligations.social">Ar ekonominės veiklos vykdytojas, kiek jam žinoma, pažeidė savo pareigas socialinės teisės srityje? Kaip šio pirkimo tikslu nurodyta nacionalinėje teisėje, atitinkamame skelbime ar pirkimo dokumentuose arba Direktyvos 2014/18/ES 24 straipsnio 2 dalyje.</entry>
+    <entry key="espd.crit.eu.text.child.labour">Ar pats ekonominės veiklos vykdytojas ar bet kuris asmuo, kuris yra jo administracijos, valdymo ar priežiūros organo narys arba turi atstovavimo, sprendimo ar kontrolės įgaliojimus to ekonominės veiklos vykdytojo atžvilgiu, buvo nuteistas galutiniu teismo sprendimu už vaikų darbą arba kitas prekybos žmonėmis formas, o nuosprendis priimtas prieš ne daugiau kaip penkerius metus arba kai nuosprendyje aiškiai nustatytas pašalinimo laikotarpis tebesitęsia? Kaip apibrėžta 2011 m. balandžio 5 d. Europos Parlamento ir Tarybos direktyvos 2011/36/ES dėl prekybos žmonėmis prevencijos, kovos su ja ir aukų apsaugos, pakeičiančios Tarybos pamatinį sprendimą 2002/629/TVR, 2 straipsnyje (OL L 101, 2011 4 15, p. 1).</entry>
+    <entry key="espd.crit.eu.text.conflict.interest">Ar ekonominės veiklos vykdytojas žino apie kokius nors interesų konfliktus, kaip nurodyta nacionalinėje teisėse, atitinkamame skelbime ar pirkimo dokumentuose, kylančius dėl jo dalyvavimo pirkimo procedūroje?</entry>
+    <entry key="espd.crit.eu.text.corruption">Ar pats ekonominės veiklos vykdytojas ar bet kuris asmuo, kuris yra jo administracijos, valdymo ar priežiūros organo narys arba turi atstovavimo, sprendimo ar kontrolės įgaliojimus to ekonominės veiklos vykdytojo atžvilgiu, buvo nuteistas galutiniu teismo sprendimu už korupciją, o nuosprendis priimtas prieš ne daugiau kaip penkerius metus arba kai nuosprendyje aiškiai nustatytas pašalinimo laikotarpis tebesitęsia? Kaip apibrėžta Konvencijos dėl kovos su korupcija, susijusia su Europos Bendrijų pareigūnais ar Europos Sąjungos valstybių narių pareigūnais, 3 straipsnyje (OL C 195, 1997 6 25, p. 1) ir 2003 m. liepos 22 d. Tarybos pamatinio sprendimo 2003/568/TVR dėl kovos su korupcija privačiame sektoriuje 2 straipsnio 1 dalyje (OL L 192, 2003 7 31, p. 54). Į pašalinimo pagrindus taip pat įtraukta korupcija, kaip apibrėžta perkančiosios organizacijos (perkančiojo subjekto) arba ekonominės veiklos vykdytojo nacionalinėje teisėje.</entry>
+    <entry key="espd.crit.eu.text.early.termination">Ar ekonominės veiklos vykdytojas turėjo tokios patirties: ankstesnė viešoji sutartis, ankstesnė sutartis su perkančiuoju subjektu arba ankstesnė koncesijos sutartis buvo nutraukta anksčiau laiko; arba buvo pareikalauta atlyginti su ankstesne sutartimi susijusią žalą ar skirtos kitos panašios sankcijos?</entry>
+    <entry key="espd.crit.eu.text.fraud">Ar pats ekonominės veiklos vykdytojas ar bet kuris asmuo, kuris yra jo administracijos, valdymo ar priežiūros organo narys arba turi atstovavimo, sprendimo ar kontrolės įgaliojimus to ekonominės veiklos vykdytojo atžvilgiu, buvo nuteistas galutiniu teismo sprendimu už sukčiavimą, o nuosprendis priimtas prieš ne daugiau kaip penkerius metus arba kai nuosprendyje aiškiai nustatytas pašalinimo laikotarpis tebesitęsia? Pagal Europos Bendrijų finansinių interesų apsaugos konvencijos 1 straipsnį (OL C 316, 1995 11 27, p. 48).</entry>
+    <entry key="espd.crit.eu.text.grounds.criminal.conv">Ar pats ekonominės veiklos vykdytojas ar bet kuris asmuo, kuris yra jo administracijos, valdymo ar priežiūros organo narys arba turi atstovavimo, sprendimo ar kontrolės įgaliojimus to ekonominės veiklos vykdytojo atžvilgiu, buvo nuteistas galutiniu teismo sprendimu už dalyvavimą nusikalstamos organizacijos veikloje, o nuosprendis priimtas prieš ne daugiau kaip penkerius metus arba kai nuosprendyje aiškiai nustatytas pašalinimo laikotarpis tebesitęsia? Kaip apibrėžta 2008 m. spalio 24 d. Tarybos pamatinio sprendimo 2008/841/TVR dėl kovos su organizuotu nusikalstamumu 2 straipsnyje (OL L 300, 2008 11 11, p. 42).</entry>
+    <entry key="espd.crit.eu.text.guilty.misconduct">Ar ekonominės veiklos vykdytojas yra pripažintas kaltu dėl sunkaus profesinio nusižengimo? Jei taikytina, žr. nacionalinėje teisėje, atitinkamame skelbime ar pirkimo dokumentuose pateiktas apibrėžtis.</entry>
+    <entry key="espd.crit.eu.text.guilty.misinterpretation">Ar ekonominės veiklos vykdytojas yra susijęs su vienu iš šių atvejų, kai jis :<p/>a) buvo labai iškreipęs faktus pateikdamas informaciją, reikalingą patikrinti, ar nėra pagrindų pašalinti, arba patikrinti atitiktį atrankos kriterijams;<p/>b) slėpė tokią informaciją;<p/>c) delsė pateikti patvirtinamuosius dokumentus, kurių reikalavo perkančioji organizacija ar perkantysis subjektas, ir <p/>d) siekė daryti neteisėtą įtaką perkančiosios organizacijos ar perkančiojo subjekto sprendimų priėmimo procesui, kad gautų konfidencialios informacijos, dėl kurios per pirkimo procedūrą įgytų nepagrįstą pranašumą, arba tyčia teikti klaidinančios informacijos, kuri gali turėti esminės įtakos sprendimams dėl pašalinimo, atrankos ar sutarties skyrimo?</entry>
+    <entry key="espd.crit.eu.text.insolvency">Ar ekonominės veiklos vykdytojui taikoma nemokumo ar likvidavimo procedūra?</entry>
+    <entry key="espd.crit.eu.text.involvement">Ar ekonominės veiklos vykdytojas arba su juo susijusi įmonė konsultavo perkančiąją organizaciją ar perkantįjį subjektą arba kitaip dalyvavo rengiant pirkimo procedūrą?</entry>
+    <entry key="espd.crit.eu.text.liquidator">Ar ekonominės veiklos vykdytojo turtą administruoja likvidatorius arba teismas?</entry>
+    <entry key="espd.crit.eu.text.money.laundering">Ar pats ekonominės veiklos vykdytojas ar bet kuris asmuo, kuris yra jo administracijos, valdymo ar priežiūros organo narys arba turi atstovavimo, sprendimo ar kontrolės įgaliojimus to ekonominės veiklos vykdytojo atžvilgiu, buvo nuteistas galutiniu teismo sprendimu už pinigų plovimą arba teroristų finansavimą, o nuosprendis priimtas prieš ne daugiau kaip penkerius metus arba kai nuosprendyje aiškiai nustatytas pašalinimo laikotarpis tebesitęsia? Kaip apibrėžta 2005 m. spalio 26 d. Europos Parlamento ir Tarybos direktyvos 2005/60/EB dėl finansų sistemos apsaugos nuo jos panaudojimo pinigų plovimui ir teroristų finansavimui 1 straipsnyje (OL L 309, 2005 11 25, p. 15).</entry>
+    <entry key="espd.crit.eu.text.national.bankruptcy">Ar ekonominės veiklos vykdytojas yra bet kokioje bankrotui prilygstančioje situacijoje, susiklosčiusioje dėl panašios nacionaliniuose įstatymuose ir kituose teisės aktuose nustatytos procedūros?</entry>
+    <entry key="espd.crit.eu.text.payment.social.security">Ar ekonominės veiklos vykdytojas pažeidė savo pareigas, susijusias su socialinio draudimo įmokų mokėjimu, tiek šalyje, kurioje yra įsisteigęs, tiek perkančiosios organizacijos ar perkančiojo subjekto valstybėje narėje, jei tai nėra jo įsisteigimo šalis?</entry>
+    <entry key="espd.crit.eu.text.payment.taxes">Ar ekonominės veiklos vykdytojas pažeidė savo pareigas, susijusias su mokesčių mokėjimu, tiek šalyje, kurioje yra įsisteigęs, tiek perkančiosios organizacijos ar perkančiojo subjekto valstybėje narėje, jei tai nėra jo įsisteigimo šalis?</entry>
+    <entry key="espd.crit.eu.text.purely.national">Kiti pašalinimo pagrindai, kurie gali būti numatyti perkančiosios organizacijos ar perkančiojo subjekto valstybės narės nacionalinės teisės aktuose. Ar taikomi išimtinai nacionaliniai pašalinimo pagrindai, nurodyti atitinkamame skelbime ar pirkimo dokumentuose?</entry>
+    <entry key="espd.crit.eu.text.suspended.business">Ar ekonominės veiklos vykdytojo verslo veikla yra sustabdyta?</entry>
+    <entry key="espd.crit.eu.text.terrorist">Ar pats ekonominės veiklos vykdytojas ar bet kuris asmuo, kuris yra jo administracijos, valdymo ar priežiūros organo narys arba turi atstovavimo, sprendimo ar kontrolės įgaliojimus to ekonominės veiklos vykdytojo atžvilgiu, buvo nuteistas galutiniu teismo sprendimu už teroristinius nusikaltimus arba su teroristine veikla susijusius nusikaltimus, o nuosprendis priimtas prieš ne daugiau kaip penkerius metus arba kai nuosprendyje aiškiai nustatytas pašalinimo laikotarpis tebesitęsia? Kaip apibrėžta 2002 m. birželio 13 d. Tarybos pamatinio sprendimo dėl kovos su terorizmu 1 ir 3 straipsniuose (OL L 164, 2002 6 22, p. 3). Į pašalinimo pagrindus taip pat įtrauktas nusikalstamos veikos kurstymas, pagalba ar bendrininkavimas ją vykdant arba kėsinimasis ją įvykdyti, kaip nurodyta to pamatinio sprendimo 4 straipsnyje.</entry>
+    <entry key="espd.crit.eu.title.agreement.economic">Su kitais ekonominės veiklos vykdytojais sudaryti susitarimai, kuriais siekta iškraipyti konkurenciją</entry>
     <entry key="espd.crit.eu.title.arrangement.creditors">Susitarimas su kreditoriais</entry>
     <entry key="espd.crit.eu.title.bankrupt">Bankrotas</entry>
-    <entry key="espd.part3.crit.eu.eo.bankrupt.title">Ar j?s? organizacija yra bankrutavusi, ar jai taikoma nemokumo ar
-        likvidavimo proced?ra, ar ji yra sudariusi susitarim? su kreditoriais arba yra patekusi ? bet koki? analogi?k?
-        situacij?, susiklos?iusi? d?l pana?ios nacionaliniuose ?statymuose ir kituose teis?s aktuose nustatytos
-        proced?ros?
-    </entry>
-    <entry key="espd.crit.eu.title.breaching.obligations.environmental">Pareig? aplinkos teis?s srityje pa?eidimas
-    </entry>
-    <entry key="espd.crit.eu.title.breaching.obligations.environmental.eo">Pareig? aplinkos teis?s srityje pa?eidimas
-    </entry>
-    <entry key="espd.crit.eu.title.breaching.obligations.labour">Pareig? darbo teis?s srityje pa?eidimas</entry>
-    <entry key="espd.crit.eu.title.breaching.obligations.social">Pareig? socialin?s teis?s srityje pa?eidimas</entry>
-    <entry key="espd.crit.eu.title.child.labour">Vaik? darbas ir kitos prekybos ?mon?mis formos</entry>
-    <entry key="espd.crit.eu.title.conflict.interest">Interes? konfliktas d?l dalyvavimo pirkimo proced?roje</entry>
-    <entry key="espd.crit.eu.title.conflict.interest.eo">Ar j?s? organizacija turi koki? nors interes? konflikt? d?l jos
-        dalyvavimo pirkimo proced?roje?
-    </entry>
+    <entry key="espd.part3.crit.eu.eo.bankrupt.title">Ar jūsų organizacija yra bankrutavusi, ar jai taikoma nemokumo ar likvidavimo procedūra, ar ji yra sudariusi susitarimą su kreditoriais arba yra patekusi į bet kokią analogišką situaciją, susiklosčiusią dėl panašios nacionaliniuose įstatymuose ir kituose teisės aktuose nustatytos procedūros?</entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.environmental">Pareigų aplinkos teisės srityje pažeidimas</entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.environmental.eo">Pareigų aplinkos teisės srityje pažeidimas</entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.labour">Pareigų darbo teisės srityje pažeidimas</entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.social">Pareigų socialinės teisės srityje pažeidimas</entry>
+    <entry key="espd.crit.eu.title.child.labour">Vaikų darbas ir kitos prekybos žmonėmis formos</entry>
+    <entry key="espd.crit.eu.title.conflict.interest">Interesų konfliktas dėl dalyvavimo pirkimo procedūroje</entry>
+    <entry key="espd.crit.eu.title.conflict.interest.eo">Ar jūsų organizacija turi kokių nors interesų konfliktų dėl jos dalyvavimo pirkimo procedūroje?</entry>
     <entry key="espd.crit.eu.title.corruption">Korupcija</entry>
-    <entry key="espd.crit.eu.title.early.termination">Sutarties nutraukimas anks?iau laiko, ?ala ar kitos pana?ios
-        sankcijos
-    </entry>
-    <entry key="espd.crit.eu.title.fraud">Suk?iavimas</entry>
+    <entry key="espd.crit.eu.title.early.termination">Sutarties nutraukimas anksčiau laiko, žala ar kitos panašios sankcijos</entry>
+    <entry key="espd.crit.eu.title.fraud">Sukčiavimas</entry>
     <entry key="espd.crit.eu.title.grounds.criminal.conv">Dalyvavimas nusikalstamos organizacijos veikloje</entry>
-    <entry key="espd.crit.eu.title.guilty.misconduct">Pripa?inimas kaltu d?l sunkaus profesinio nusi?engimo</entry>
-    <entry key="espd.crit.eu.title.guilty.misconduct.eo">Ar j?s? organizacija yra pripa?inta kalta d?l sunkaus
-        profesinio nusi?engimo?
-    </entry>
-    <entry key="espd.crit.eu.title.guilty.misinterpretation">Pripa?inimas kaltu d?l fakt? i?kraipymo, informacijos
-        nusl?pimo, negal?jimas pateikti reikalaujam? dokument? ir su ?ia proced?ra susijusios konfidencialios
-        informacijos gavimas
-    </entry>
+    <entry key="espd.crit.eu.title.guilty.misconduct">Pripažinimas kaltu dėl sunkaus profesinio nusižengimo</entry>
+    <entry key="espd.crit.eu.title.guilty.misconduct.eo">Ar  jūsų organizacija yra pripažinta kalta dėl sunkaus profesinio nusižengimo?</entry>
+    <entry key="espd.crit.eu.title.guilty.misinterpretation">Pripažinimas kaltu dėl faktų iškraipymo, informacijos nuslėpimo, negalėjimas pateikti reikalaujamų dokumentų ir su šia procedūra susijusios konfidencialios informacijos gavimas</entry>
     <entry key="espd.crit.eu.title.insolvency">Nemokumas</entry>
-    <entry key="espd.crit.eu.title.involvement">Tiesioginis arba netiesioginis dalyvavimas rengiant ?i? pirkimo
-        proced?r?
-    </entry>
-    <entry key="espd.crit.eu.title.involvement.eo">Ar j?s? organizacija arba su ja susijusi ?mon? konsultavo perkan?i?j?
-        organizacij? arba kitaip dalyvavo rengiant pirkimo proced?r??
-    </entry>
+    <entry key="espd.crit.eu.title.involvement">Tiesioginis arba netiesioginis dalyvavimas rengiant šią pirkimo procedūrą</entry>
+    <entry key="espd.crit.eu.title.involvement.eo">Ar jūsų organizacija arba su ja susijusi įmonė konsultavo perkančiąją organizaciją arba kitaip dalyvavo rengiant pirkimo procedūrą?</entry>
     <entry key="espd.crit.eu.title.liquidator">Likvidatoriaus administruojamas turtas</entry>
-    <entry key="espd.crit.eu.title.money.laundering">Pinig? plovimas arba terorist? finansavimas</entry>
-    <entry key="espd.crit.eu.title.national.bankruptcy">Bankrotui prilygstanti situacija pagal nacionalinius ?statymus
-    </entry>
-    <entry key="espd.crit.eu.title.payment.social.security">Socialinio draudimo ?mok? mok?jimas</entry>
-    <entry key="espd.crit.eu.title.payment.taxes">Mokes?i? mok?jimas</entry>
-    <entry key="espd.crit.eu.title.purely.national">I?imtinai nacionaliniai pa?alinimo pagrindai</entry>
+    <entry key="espd.crit.eu.title.money.laundering">Pinigų plovimas arba teroristų finansavimas</entry>
+    <entry key="espd.crit.eu.title.national.bankruptcy">Bankrotui prilygstanti situacija pagal nacionalinius įstatymus</entry>
+    <entry key="espd.crit.eu.title.payment.social.security">Socialinio draudimo įmokų mokėjimas</entry>
+    <entry key="espd.crit.eu.title.payment.taxes">Mokesčių mokėjimas</entry>
+    <entry key="espd.crit.eu.title.purely.national">Išimtinai nacionaliniai pašalinimo pagrindai</entry>
     <entry key="espd.crit.eu.title.suspended.business">Sustabdyta verslo veikla</entry>
-    <entry key="espd.crit.eu.title.terrorist">Teroristiniai nusikaltimai arba su teroristine veikla susij?
-        nusikaltimai
-    </entry>
-    <entry key="espd.part3.crit.eu.guilty.misconduct.eo.tooltip">Jei taikytina, ?r. nacionalin?je teis?je, atitinkamame
-        skelbime ar pirkimo dokumentuose pateiktas apibr??tis.
-    </entry>
-    <entry key="espd.crit.explain.certificates.independent.environmental.description">Jei ne, paai?kinkite kod?l ir
-        patikslinkite, koki? kit? ?rodym? d?l aplinkosaugos vadybos sistem? ar standart? galite pateikti:
-    </entry>
-    <entry key="espd.part4.crit.explain.certificates.independent.quality.description">Jei ne, paai?kinkite kod?l ir
-        patikslinkite, koki? kit? ?rodym? d?l kokyb?s u?tikrinimo schem? galite pateikti:
-    </entry>
-    <entry key="espd.part4.crit.explain.supply.contracts.quality.description">Jei ne, paai?kinkite kod?l ir nurodykite,
-        koki? kit? ?rodym? galite pateikti:
-    </entry>
-    <entry key="espd.crit.information.available.electronically">Ar ?i informacija ES valstyb?s nar?s duomen? baz?je
-        nemokamai prieinama vald?ios institucijoms?
-    </entry>
-    <entry key="espd.crit.issuer">Parsisi?sdinti kaip</entry>
-    <entry key="espd.crit.length.period.exclusion">Kaip ai?kiai nustatyta nuosprendyje, pa?alinimo laikotarpio trukm?.
-    </entry>
-    <entry key="espd.crit.number">Skai?ius</entry>
-    <entry key="espd.crit.number.of.years">Vidutin? apyvarta</entry>
-    <entry key="espd.crit.other.than.judicial.or.administrative.decision">Ar pareig? nevykdymas nustatytas kitais b?dais
-        nei teismo ar administraciniu sprendimu?
-    </entry>
-    <entry key="espd.crit.please.describe.them">Apra?ykite jas</entry>
+    <entry key="espd.crit.eu.title.terrorist">Teroristiniai nusikaltimai arba su teroristine veikla susiję nusikaltimai</entry>
+    <entry key="espd.part3.crit.eu.guilty.misconduct.eo.tooltip">Jei taikytina, žr. nacionalinėje teisėje, atitinkamame skelbime ar pirkimo dokumentuose pateiktas apibrėžtis.</entry>
+    <entry key="espd.crit.explain.certificates.independent.environmental.description">Jei ne, paaiškinkite kodėl ir patikslinkite, kokių kitų įrodymų dėl aplinkosaugos vadybos sistemų ar standartų galite pateikti:</entry>
+    <entry key="espd.part4.crit.explain.certificates.independent.quality.description">Jei ne, paaiškinkite kodėl ir patikslinkite, kokių kitų įrodymų dėl kokybės užtikrinimo schemų galite pateikti:</entry>
+    <entry key="espd.part4.crit.explain.supply.contracts.quality.description">Jei ne, paaiškinkite kodėl ir nurodykite, kokių kitų įrodymų galite pateikti:</entry>
+    <entry key="espd.crit.information.available.electronically">Ar ši informacija ES valstybės narės duomenų bazėje nemokamai prieinama valdžios institucijoms?</entry>
+    <entry key="espd.crit.issuer">Parsisiųsdinti kaip</entry>
+    <entry key="espd.crit.length.period.exclusion">Kaip aiškiai nustatyta nuosprendyje, pašalinimo laikotarpio trukmė.</entry>
+    <entry key="espd.crit.number">Skaičius</entry>
+    <entry key="espd.crit.number.of.years">Vidutinė apyvarta</entry>
+    <entry key="espd.crit.other.than.judicial.or.administrative.decision">Ar pareigų nevykdymas nustatytas kitais būdais nei teismo ar administraciniu sprendimu?</entry>
+    <entry key="espd.crit.please.describe.them">Aprašykite jas</entry>
     <entry key="espd.crit.please.specify">Nurodykite</entry>
     <entry key="espd.crit.ratio">Santykis</entry>
-    <entry key="espd.crit.reason">Prie?astis</entry>
-    <entry key="espd.crit.reasons.nevertheless.contract">Nurodykite prie?astis, pagrind?ian?ias, kad galite ?vykdyti
-        sutart?. ?ios informacijos nereikia pateikti, jei pagal taikom? nacionalin? teis? ?iuo atveju ekonomin?s veiklos
-        vykdytojus privaloma pa?alinti be jokios galimyb?s pritaikyti nukrypti leid?ian?i? nuostat?, net jei ekonomin?s
-        veiklos vykdytojas vis tiek gali ?vykdyti sutart?.
-    </entry>
-    <entry key="espd.crit.recipients">Gav?jai</entry>
-    <entry key="espd.part4.crit.selection.ca.declares.that">D?l atrankos kriterij? perkan?ioji organizacija pra?o
-        ekonomin?s veiklos vykdytojas patvirtinti, kad
-    </entry>
-    <entry key="espd.part4.crit.selection.ca.economic.article">Direktyvos 2014/24/ES 58 straipsnio 3 dalyje nustatyti
-        ?ie atrankos kriterijai
-    </entry>
-    <entry key="espd.part4.crit.selection.declares.that.tooltip">Ekonomin?s veiklos vykdytojas ?? laukel? tur?t?
-        u?pildyti, tik jei perkan?ioji organizacija ar perkantysis subjektas atitinkamame skelbime ar skelbime
-        nurodytuose pirkimo dokumentuose nurod?, kad ekonomin?s veiklos vykdytojas gali apsiriboti ir u?pildyti tik ??
-        IV dalies skirsn? ir neprivalo pildyti IV dalies A, B, C arba D skirsni?:
-    </entry>
-    <entry key="espd.crit.selection.economic.average.yearly.turnover.description">Jo vidutin? metin? apyvarta visais
-        atitinkamame skelbime ar pirkimo dokumentuose ar EBVPD reikalaujamais metais yra tokia:
-    </entry>
-    <entry key="espd.crit.selection.economic.average.yearly.turnover.main">Vidutin? metin? apyvarta</entry>
-    <entry key="espd.crit.selection.economic.financial.ratio.description">D?l finansinio santykio (pvz., turto ir
-        ?sipareigojim? santykio), nurodyto atitinkamame skelbime, pirkimo dokumentuose ar EBVPD, ekonomin?s veiklos
-        vykdytojas parei?kia, kad reikalaujamo santykio faktin?s vert?s yra tokios:
-    </entry>
+    <entry key="espd.crit.reason">Priežastis</entry>
+    <entry key="espd.crit.reasons.nevertheless.contract">Nurodykite priežastis, pagrindžiančias, kad galite įvykdyti sutartį. Šios informacijos nereikia pateikti, jei pagal taikomą nacionalinę teisę šiuo atveju ekonominės veiklos vykdytojus privaloma pašalinti be jokios galimybės pritaikyti nukrypti leidžiančią nuostatą, net jei ekonominės veiklos vykdytojas vis tiek gali įvykdyti sutartį.</entry>
+    <entry key="espd.crit.recipients">Gavėjai</entry>
+    <entry key="espd.part4.crit.selection.ca.declares.that">Dėl atrankos kriterijų  perkančioji organizacija prašo ekonominės veiklos vykdytojas patvirtinti, kad</entry>
+    <entry key="espd.part4.crit.selection.ca.economic.article">Direktyvos 2014/24/ES 58 straipsnio 3 dalyje nustatyti šie atrankos kriterijai</entry>
+    <entry key="espd.part4.crit.selection.declares.that.tooltip">Ekonominės veiklos vykdytojas šį laukelį turėtų užpildyti, tik jei perkančioji organizacija ar perkantysis subjektas atitinkamame skelbime ar skelbime nurodytuose pirkimo dokumentuose nurodė, kad ekonominės veiklos vykdytojas gali apsiriboti ir užpildyti tik šį IV dalies skirsnį ir neprivalo pildyti IV dalies A, B, C arba D skirsnių:</entry>
+    <entry key="espd.crit.selection.economic.average.yearly.turnover.description">Jo vidutinė metinė apyvarta visais atitinkamame skelbime ar pirkimo dokumentuose ar EBVPD reikalaujamais metais yra tokia:</entry>
+    <entry key="espd.crit.selection.economic.average.yearly.turnover.main">Vidutinė metinė apyvarta</entry>
+    <entry key="espd.crit.selection.economic.financial.ratio.description">Dėl finansinio santykio (pvz., turto ir įsipareigojimų santykio), nurodyto atitinkamame skelbime, pirkimo dokumentuose ar EBVPD, ekonominės veiklos vykdytojas pareiškia, kad reikalaujamo santykio faktinės vertės yra tokios:</entry>
     <entry key="espd.crit.selection.economic.financial.ratio.main">Finansinis santykis</entry>
-    <entry key="espd.crit.selection.economic.financial.standing.article.tooltip">Ekonomin?s veiklos vykdytojas tur?t?
-        teikti informacij?, tik jei perkan?ioji organizacija ar perkantysis subjektas atitinkamame skelbime ar skelbime
-        nurodytuose pirkimo dokumentuose jos reikalauja apie susijusius atrankos kriterijus.-
-    </entry>
-    <entry key="espd.crit.selection.economic.general.yearly.turnover.description">Jo bendra metin? apyvarta visais
-        atitinkamame skelbime ar pirkimo dokumentuose ar EBVPD reikalaujamais finansiniais metais yra tokia:
-    </entry>
-    <entry key="espd.crit.selection.economic.general.yearly.turnover.main">Bendra metin? apyvarta</entry>
-    <entry key="espd.crit.selection.economic.other.financial.requirements.description">D?l kit? ekonomini? ar finansini?
-        reikalavim?, jei toki? yra, kurie gal?jo b?ti nurodyti atitinkamame skelbime ar pirkimo dokumentuose, ekonomin?s
-        veiklos vykdytojas parei?kia, kad:
-    </entry>
-    <entry key="espd.crit.selection.economic.other.financial.requirements.main">Kiti ekonominiai ar finansiniai
-        reikalavimai
-    </entry>
-    <entry key="espd.crit.selection.economic.professional.risk.insurance.description">Suma, kuria apdrausta profesin?s
-        rizikos civilin? atsakomyb?, yra:
-    </entry>
-    <entry key="espd.crit.selection.economic.professional.risk.insurance.main">Profesin?s rizikos civilin?s atsakomyb?s
-        draudimas
-    </entry>
-    <entry key="espd.crit.selection.economic.setup.eo.description">Jei n?ra galimyb?s pateikti informacijos apie
-        apyvart? visu reikalaujamu laikotarpiu, nurodykite ekonomin?s veiklos vykdytojo ?steigimo ar prekybos prad?ios
-        dat?:
-    </entry>
-    <entry key="espd.crit.selection.economic.setup.eo.main">Ekonomin?s veiklos vykdytojo ?steigimas</entry>
-    <entry key="espd.crit.selection.economic.specific.average.turnover.description">Jo konkreti vidutin? apyvarta verslo
-        srityje, kuriai taikoma sutartis, visais atitinkamame skelbime ar pirkimo dokumentuose ar EBVPD reikalaujamais
-        metais yra tokia:
-    </entry>
-    <entry key="espd.crit.selection.economic.specific.average.turnover.main">Konkreti vidutin? apyvarta</entry>
-    <entry key="espd.crit.selection.economic.specific.yearly.turnover.description">Jo konkreti metin? apyvarta verslo
-        srityje, kuriai taikoma sutartis, visais atitinkamame skelbime ar pirkimo dokumentuose ar EBVPD reikalaujamais
-        finansiniais metais yra tokia:
-    </entry>
-    <entry key="espd.crit.selection.economic.specific.yearly.turnover.main">Konkreti metin? apyvarta</entry>
-    <entry key="espd.part4.crit.selection.eo.declares.that">D?l atrankos kriterij? ekonomin?s veiklos vykdytojas
-        parei?kia, kad
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.declares.that.tooltip">Ekonomin?s veiklos vykdytojas ?? laukel? tur?t?
-        u?pildyti, tik jei perkan?ioji organizacija ar perkantysis subjektas atitinkamame skelbime ar skelbime
-        nurodytuose pirkimo dokumentuose nurod?, kad ekonomin?s veiklos vykdytojas gali apsiriboti ir u?pildyti tik ??
-        IV dalies skirsn? ir neprivalo pildyti IV dalies A, B, C arba D skirsni?:
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.economic.article">Direktyvos 2014/24/ES 58 straipsnio 3 dalyje nustatyti
-        ?ie atrankos kriterijai
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.economic.article.tooltip">Ekonomin?s veiklos vykdytojas tur?t? teikti
-        informacij?, tik jei perkan?ioji organizacija ar perkantysis subjektas atitinkamame skelbime ar skelbime
-        nurodytuose pirkimo dokumentuose jos reikalauja apie susijusius atrankos kriterijus.-
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.economic.enrolement.description">Jis ?trauktas ? susijusius profesinius ar
-        prekybos registrus, naudojamus ?sisteigimo valstyb?je nar?je
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.economic.enrolement.main">?traukimas ? profesinius arba prekybos
-        registrus
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.economic.service.contracts.description">Ar reikia konkretaus leidimo arba
-        naryst?s konkre?ioje organizacijoje, kad ekonomin?s veiklos vykdytojas gal?t? teikti atitinkam? paslaug? savo
-        ?sisteigimo ?alyje?
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.economic.service.contracts.main">Paslaug? pirkimo sutar?i? atveju:
-        reikalingas leidimas arba naryst?
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.satisfies.all.criteria">Jis atitinka visus reikalaujamus atrankos
-        kriterijus
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.suitability.article">Direktyvos 2014/24/ES 58 straipsnio 2 dalyje nustatyti
-        ?ie atrankos kriterijai
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.suitability.article.tooltip">Ekonomin?s veiklos vykdytojas tur?t? teikti
-        informacij?, tik jei perkan?ioji organizacija ar perkantysis subjektas atitinkamame skelbime ar skelbime
-        nurodytuose pirkimo dokumentuose jos reikalauja apie susijusius atrankos kriterijus.-
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.suitability.enrolment.description">Jis ?trauktas ? susijusius profesinius
-        ar prekybos registrus, naudojamus ?sisteigimo valstyb?je nar?je
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.suitability.enrolment.main">?traukimas ? profesinius arba prekybos
-        registrus
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.suitability.service.contracts.description">Ar reikia konkretaus leidimo
-        arba naryst?s konkre?ioje organizacijoje, kad ekonomin?s veiklos vykdytojas gal?t? teikti atitinkam? paslaug?
-        savo ?sisteigimo ?alyje?
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.suitability.service.contracts.main">Paslaug? pirkimo sutar?i? atveju:
-        reikalingas leidimas arba naryst?
-    </entry>
-    <entry key="espd.part4.crit.selection.quality.assurance.article">Direktyvos 2014/24/ES 62 straipsnio 2 dalyje
-        nustatyti ?ie atrankos kriterijai
-    </entry>
-    <entry key="espd.part4.crit.selection.quality.assurance.tooltip">Ekonomin?s veiklos vykdytojas tur?t? teikti
-        informacij?, tik jei perkan?ioji organizacija ar perkantysis subjektas atitinkamame skelbime ar skelbime
-        nurodytuose pirkimo dokumentuose jos reikalauja apie susijusius atrankos kriterijus.
-    </entry>
-    <entry key="espd.crit.selection.quality.certificate.independent.bodies.environmental.description">Ar ekonomin?s
-        veiklos vykdytojas gal?s pateikti nepriklausom? ?staig? i?duotus sertifikatus, kuriais patvirtinama, kad
-        ekonomin?s veiklos vykdytojas atitinka reikiamas aplinkosaugos vadybos sistemas ar standartus?
-    </entry>
-    <entry key="espd.crit.selection.quality.certificate.independent.bodies.environmental.main">Nepriklausom? ?staig?
-        i?duoti sertifikatai, kuriais patvirtinama atitiktis aplinkosaugos vadybos sistemoms ar standartams
-    </entry>
-    <entry key="espd.crit.selection.quality.certificate.independent.bodies.quality.description">Ar ekonomin?s veiklos
-        vykdytojas gal?s pateikti nepriklausom? ?staig? i?duotus sertifikatus, kuriais patvirtinama, kad ekonomin?s
-        veiklos vykdytojas atitinka reikiamus kokyb?s u?tikrinimo standartus, ?skaitant prieinamumo ne?galiesiems
-        standartus?
-    </entry>
-    <entry key="espd.crit.selection.quality.certificate.independent.bodies.quality.main">Nepriklausom? ?staig? i?duoti
-        sertifikatai, kuriais patvirtinama atitiktis kokyb?s u?tikrinimo standartams
-    </entry>
-    <entry key="espd.part4.crit.selection.satisfies.all.criteria">Jis atitinka visus reikalaujamus atrankos kriterijus,
-        nurodytus atitinkamame skelbime arba skelbime nurodytuose pirkimo dokumentuose.
-    </entry>
-    <entry key="espd.part4.crit.selection.suitability.article">Direktyvos 2014/24/ES 58 straipsnio 2 dalyje nustatyti
-        ?ie atrankos kriterijai
-    </entry>
-    <entry key="espd.part4.crit.selection.suitability.article.tooltip">Ekonomin?s veiklos vykdytojas ?? laukel? tur?t?
-        u?pildyti, tik jei perkan?ioji organizacija ar perkantysis subjektas atitinkamame skelbime ar skelbime
-        nurodytuose pirkimo dokumentuose nurod?, kad ekonomin?s veiklos vykdytojas gali apsiriboti ir u?pildyti tik IV
-        dalies ? skirsn? ir neprivalo pildyti jokio kito IV dalies skirsnio:
-    </entry>
-    <entry key="espd.crit.selection.suitability.enrolment.professional.register.description">Jis ?trauktas ? susijusius
-        profesinius registrus, naudojamus ?sisteigimo valstyb?je nar?je, kaip apra?yta Direktyvos 2014/24/ES XI priede;
-        tam tikr? valstybi? nari? ekonomin?s veiklos vykdytojai gali tur?ti tenkinti kitus tame priede nustatytus
-        reikalavimus.
-    </entry>
-    <entry key="espd.crit.selection.suitability.enrolment.professional.register.main">?traukimas ? susijus? profesin?
-        registr?
-    </entry>
-    <entry key="espd.crit.selection.suitability.enrolment.trade.register.description">Jis ?trauktas ? susijusius
-        prekybos registrus, naudojamus ?sisteigimo valstyb?je nar?je, kaip apra?yta Direktyvos 2014/24/ES XI priede; tam
-        tikr? valstybi? nari? ekonomin?s veiklos vykdytojai gali tur?ti tenkinti kitus tame priede nustatytus
-        reikalavimus.
-    </entry>
-    <entry key="espd.crit.selection.suitability.enrolment.trade.register.main">?traukimas ? prekybos registr?</entry>
-    <entry key="espd.crit.selection.suitability.service.contracts.auth.description">Ar reikia konkretaus leidimo, kad
-        ekonomin?s veiklos vykdytojas gal?t? teikti atitinkam? paslaug? savo ?sisteigimo ?alyje?
-    </entry>
-    <entry key="espd.crit.selection.suitability.service.contracts.auth.main">Paslaug? pirkimo sutar?i? atveju: reikia
-        konkretaus leidimo
-    </entry>
-    <entry key="espd.crit.selection.suitability.service.contracts.membership.description">Ar reikia naryst?s konkre?ioje
-        organizacijoje, kad ekonomin?s veiklos vykdytojas gal?t? teikti atitinkam? paslaug? savo ?sisteigimo ?alyje?
-    </entry>
-    <entry key="espd.crit.selection.suitability.service.contracts.membership.main">Paslaug? pirkimo sutar?i? atveju:
-        reikalinga naryst? konkre?ioje organizacijoje
-    </entry>
-    <entry key="espd.crit.selection.technical.allowance.of.checks.description">Jei tiektini produktai arba teiktinos
-        paslaugos yra sud?tingi arba, i?imtiniais atvejais, jie yra skirti specialiam tikslui: ar ekonomin?s veiklos
-        vykdytojas leis atlikti jo gamybos paj?gum? arba techninio paj?gumo ir, kai reikia, jam prieinam? tyrim? ir
-        mokslini? tyrim? priemoni? bei kokyb?s kontrol?s priemoni? patikr?? Patikr? turi atlikti perkan?ioji
-        organizacija arba, jei ji sutinka, jos vardu ?alies, kurioje ?sisteig?s produkt? tiek?jas ar paslaug? teik?jas,
-        kompetentinga oficiali ?staiga.
-    </entry>
-    <entry key="espd.crit.selection.technical.allowance.of.checks.main">Leidimas atlikti patikr?</entry>
-    <entry key="espd.crit.selection.technical.average.annual.manpower.description">Ekonomin?s veiklos vykdytojo
-        vidutinis metinis darbuotoj? skai?ius pra?jusiais trejais metais buvo toks:
-    </entry>
-    <entry key="espd.crit.selection.technical.average.annual.manpower.main">Vidutinis metinis darbuotoj? skai?ius
-    </entry>
-    <entry key="espd.crit.selection.technical.educational.professional.qualifications.description">Toliau nurodyt?
-        i?silavinim? ir profesin? kvalifikacij? turi pats paslaugos teik?jas ar rangovas ir (arba) (priklausomai nuo
-        atitinkamame skelbime ar pirkimo dokumentuose nustatyt? reikalavim?) jo vadovaujantysis personalas.
-    </entry>
-    <entry key="espd.crit.selection.technical.educational.professional.qualifications.main">I?silavinimas ir profesin?
-        kvalifikacija
-    </entry>
-    <entry key="espd.crit.selection.technical.environment.management.features.description">Vykdydamas sutart? ekonomin?s
-        veiklos vykdytojas gal?s taikyti ?ias aplinkosaugos vadybos priemones:
-    </entry>
-    <entry key="espd.crit.selection.technical.environment.management.features.main">Aplinkosaugos vadybos priemon?s
-    </entry>
-    <entry key="espd.crit.selection.technical.number.managerial.staff.description">Ekonomin?s veiklos vykdytojo
-        vadovaujan?iojo personalo skai?ius pra?jusiais trejais metais buvo toks:
-    </entry>
-    <entry key="espd.crit.selection.technical.number.managerial.staff.main">Vadovaujan?iojo personalo skai?ius</entry>
-    <entry key="espd.part4.crit.selection.technical.professional.ability.article">Direktyvos 2014/24/ES 58 straipsnio 4
-        dalyje nustatyti ?ie atrankos kriterijai
-    </entry>
-    <entry key="espd.part4.crit.selection.technical.professional.ability.article.tooltip">Ekonomin?s veiklos vykdytojas
-        tur?t? teikti informacij?, tik jei perkan?ioji organizacija ar perkantysis subjektas atitinkamame skelbime ar
-        skelbime nurodytuose pirkimo dokumentuose jos reikalauja apie susijusius atrankos kriterijus.-
-    </entry>
-    <entry key="espd.crit.selection.technical.service.contracts.performance.services.description">Tik vie?ojo paslaug?
-        pirkimo sutar?i? atveju: per ataskaitin? laikotarp? ekonomin?s veiklos vykdytojas suteik? ?ias pagrindines
-        nurodyto tipo paslaugas. Perkan?iosios organizacijos gali reikalauti nurodyti pastar?j? trej? met? patirt? ir
-        leisti ?traukti senesn? patirt?.
-    </entry>
-    <entry key="espd.crit.selection.technical.service.contracts.performance.services.main">Paslaug? pirkimo sutar?i?
-        atveju: nurodyto tipo paslaug? teikimas
-    </entry>
-    <entry key="espd.crit.selection.technical.study.research.facilities.description">Jo galimyb?s atlikti tyrimus bei
-        mokslinius tyrimus:
-    </entry>
-    <entry key="espd.crit.selection.technical.study.research.facilities.main">Galimyb?s atlikti tyrimus bei mokslinius
-        tyrimus
-    </entry>
-    <entry key="espd.crit.selection.technical.subcontracting.proportion.description">Ekonomin?s veiklos vykdytojas
-        ketina perduoti vykdyti pagal subrangos sutart? toki? (procentin?) sutarties dal?: Atkreipkite d?mes? ? tai, kad
-        jei ekonomin?s veiklos vykdytojas nusprend? sutarties dal? perduoti vykdyti pagal subrangos sutart? ir remiasi
-        subrangovo paj?gumais, kad ?vykdyt? t? sutarties dal?, kiekvienam tokiam subrangovui reikia u?pildyti atskir?
-        EBVPD, ?r. pirmiau II dalies C skirsn?.
-    </entry>
-    <entry key="espd.crit.selection.technical.subcontracting.proportion.main">Subrangos procentin? dalis</entry>
-    <entry key="espd.crit.selection.technical.supply.chain.management.description">Vykdydamas sutart? jis gal?s naudoti
-        ?ias tiekimo grandin?s valdymo ir lokalizavimo sistemas:
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.chain.management.main">Tiekimo grandin?s valdymas</entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.certificate.quality.description">Ar ekonomin?s veiklos
-        vykdytojas gali pateikti reikiamus oficiali? kokyb?s kontrol?s institucij? arba pripa?intos kompetencijos
-        agent?r? parengtus sertifikatus, kuriais patvirtinama produkt?, ai?kiai atpa??stam? i? atitinkamame skelbime ar
-        pirkimo dokumentuose pateikt? nuorod? ? technines specifikacijas ar standartus, atitiktis?
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.certificate.quality.main">Preki? pirkimo sutar?i? atveju:
-        kokyb?s kontrol?s institucij? sertifikatai
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.performance.deliveries.description">Tik vie?ojo preki?
-        pirkimo sutar?i? atveju: per ataskaitin? laikotarp? ekonomin?s veiklos vykdytojas pristat? ?ias svarbiausias
-        nurodyto tipo prekes. Perkan?iosios organizacijos gali reikalauti nurodyti pastar?j? trej? met? patirt? ir
-        leisti ?traukti senesn? patirt?.
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.performance.deliveries.main">Preki? pirkimo sutar?i?
-        atveju: nurodyto tipo preki? pristatymas
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.with.ca.description">Tik vie?ojo preki? pirkimo sutar?i?
-        atveju: ekonomin?s veiklos vykdytojas pateiks reikalaujamus tiektin? produkt? pavyzd?ius, apra?ymus ar
-        nuotraukas ir prireikus pateiks autenti?kumo sertifikatus.
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.with.ca.main">Preki? pirkimo sutar?i? atveju: tiektin?
-        produkt?, su kuriais reikia pateikti autenti?kumo sertifikat?, pavyzd?iai, apra?ymai ar nuotraukos
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.without.ca.description">Tik vie?ojo preki? pirkimo
-        sutar?i? atveju: ekonomin?s veiklos vykdytojas pateiks reikalaujamus tiektin? produkt?, su kuriais nereikia
-        pateikti autenti?kumo sertifikato, pavyzd?ius, apra?ymus ar nuotraukas.
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.without.ca.main">Preki? pirkimo sutar?i? atveju: tiektin?
-        produkt?, su kuriais nereikia pateikti autenti?kumo sertifikato, pavyzd?iai, apra?ymai ar nuotraukos
-    </entry>
-    <entry key="espd.crit.selection.technical.technical.facilities.measures.description">Jis naudojasi ?ia technine
-        ?ranga ir priemon?mis kokybei u?tikrinti, o jo galimyb?s atlikti tyrimus bei mokslinius tyrimus yra tokios:
-    </entry>
-    <entry key="espd.crit.selection.technical.technical.facilities.measures.main">Technin? ?ranga ir priemon?s kokybei
-        u?tikrinti
-    </entry>
-    <entry key="espd.crit.selection.technical.technicians.technical.bodies.description">Jis gali kreiptis ? ?iuos
-        specialistus arba technines ?staigas, ypa? atsakingus u? kokyb?s kontrol?. Informacija apie specialistus arba
-        technines ?staigas, kurie tiesiogiai nepriklauso ekonomin?s veiklos vykdytojo ?monei, bet kuri? paj?gumais
-        ekonomin?s veiklos vykdytojas remiasi, kaip nustatyta II dalies C skirsnyje, turi b?ti pateikta atskirose EBVPD
-        formose.
-    </entry>
-    <entry key="espd.crit.selection.technical.technicians.technical.bodies.main">U? kokyb?s kontrol? atsakingi
-        specialistai ir technin?s ?staigos
-    </entry>
-    <entry key="espd.crit.selection.technical.tools.plant.description">Vykdydamas sutart? jis gal?s naudotis ?iais
-        ?rankiais, ?renginiais ar technine ?ranga:
-    </entry>
-    <entry key="espd.crit.selection.technical.tools.plant.main">?rankiai, ?renginiai ar technin? ?ranga</entry>
-    <entry key="espd.crit.selection.technical.work.contracts.performance.works.description">Tik vie?ojo darb? pirkimo
-        sutar?i? atveju: per ataskaitin? laikotarp? ekonomin?s veiklos vykdytojas atliko ?iuos nurodyto tipo darbus.
-        Perkan?iosios organizacijos gali reikalauti nurodyti pastar?j? penkeri? met? patirt? ir leisti ?traukti senesn?
-        patirt?.
-    </entry>
-    <entry key="espd.crit.selection.technical.work.contracts.performance.works.main">Darb? pirkimo sutar?i? atveju:
-        nurodyto tipo darb? atlikimas
-    </entry>
-    <entry key="espd.crit.selection.technical.work.contracts.technicians.description">Vie?ojo darb? pirkimo sutar?i?
-        atveju ekonomin?s veiklos vykdytojas, siekdamas atlikti darb?, gal?s kreiptis ? ?iuos specialistus arba
-        technines ?staigas:
-    </entry>
-    <entry key="espd.crit.selection.technical.work.contracts.technicians.main">Darb? pirkimo sutar?i? atveju:
-        specialistai arba technin?s ?staigos, susij? su darb? atlikimu
-    </entry>
+    <entry key="espd.crit.selection.economic.financial.standing.article.tooltip">Ekonominės veiklos vykdytojas turėtų teikti informaciją, tik jei perkančioji organizacija ar perkantysis subjektas atitinkamame skelbime ar skelbime nurodytuose pirkimo dokumentuose jos reikalauja apie susijusius atrankos kriterijus.-</entry>
+    <entry key="espd.crit.selection.economic.general.yearly.turnover.description">Jo bendra metinė apyvarta visais atitinkamame skelbime ar pirkimo dokumentuose ar EBVPD reikalaujamais finansiniais metais yra tokia:</entry>
+    <entry key="espd.crit.selection.economic.general.yearly.turnover.main">Bendra metinė apyvarta</entry>
+    <entry key="espd.crit.selection.economic.other.financial.requirements.description">Dėl kitų ekonominių ar finansinių reikalavimų, jei tokių yra, kurie galėjo būti nurodyti atitinkamame skelbime ar pirkimo dokumentuose, ekonominės veiklos vykdytojas pareiškia, kad:</entry>
+    <entry key="espd.crit.selection.economic.other.financial.requirements.main">Kiti ekonominiai ar finansiniai reikalavimai</entry>
+    <entry key="espd.crit.selection.economic.professional.risk.insurance.description">Suma, kuria apdrausta profesinės rizikos civilinė atsakomybė, yra:</entry>
+    <entry key="espd.crit.selection.economic.professional.risk.insurance.main">Profesinės rizikos civilinės atsakomybės draudimas</entry>
+    <entry key="espd.crit.selection.economic.setup.eo.description">Jei nėra galimybės pateikti informacijos apie apyvartą visu reikalaujamu laikotarpiu, nurodykite ekonominės veiklos vykdytojo įsteigimo ar prekybos pradžios datą:</entry>
+    <entry key="espd.crit.selection.economic.setup.eo.main">Ekonominės veiklos vykdytojo įsteigimas</entry>
+    <entry key="espd.crit.selection.economic.specific.average.turnover.description">Jo konkreti vidutinė apyvarta verslo srityje, kuriai taikoma sutartis, visais atitinkamame skelbime ar pirkimo dokumentuose ar EBVPD reikalaujamais metais yra tokia:</entry>
+    <entry key="espd.crit.selection.economic.specific.average.turnover.main">Konkreti vidutinė apyvarta</entry>
+    <entry key="espd.crit.selection.economic.specific.yearly.turnover.description">Jo konkreti metinė apyvarta verslo srityje, kuriai taikoma sutartis, visais atitinkamame skelbime ar pirkimo dokumentuose ar EBVPD reikalaujamais finansiniais metais yra tokia:</entry>
+    <entry key="espd.crit.selection.economic.specific.yearly.turnover.main">Konkreti metinė apyvarta</entry>
+    <entry key="espd.part4.crit.selection.eo.declares.that">Dėl atrankos kriterijų ekonominės veiklos vykdytojas pareiškia, kad</entry>
+    <entry key="espd.part4.crit.selection.eo.declares.that.tooltip">Ekonominės veiklos vykdytojas šį laukelį turėtų užpildyti, tik jei perkančioji organizacija ar perkantysis subjektas atitinkamame skelbime ar skelbime nurodytuose pirkimo dokumentuose nurodė, kad ekonominės veiklos vykdytojas gali apsiriboti ir užpildyti tik šį IV dalies skirsnį ir neprivalo pildyti IV dalies A, B, C arba D skirsnių:</entry>
+    <entry key="espd.part4.crit.selection.eo.economic.article">Direktyvos 2014/24/ES 58 straipsnio 3 dalyje nustatyti šie atrankos kriterijai</entry>
+    <entry key="espd.part4.crit.selection.eo.economic.article.tooltip">Ekonominės veiklos vykdytojas turėtų teikti informaciją, tik jei perkančioji organizacija ar perkantysis subjektas atitinkamame skelbime ar skelbime nurodytuose pirkimo dokumentuose jos reikalauja apie susijusius atrankos kriterijus.-</entry>
+    <entry key="espd.part4.crit.selection.eo.economic.enrolement.description">Jis įtrauktas į susijusius profesinius ar prekybos registrus, naudojamus  įsisteigimo valstybėje narėje</entry>
+    <entry key="espd.part4.crit.selection.eo.economic.enrolement.main">Įtraukimas į profesinius arba prekybos registrus</entry>
+    <entry key="espd.part4.crit.selection.eo.economic.service.contracts.description">Ar reikia konkretaus leidimo arba narystės konkrečioje organizacijoje, kad ekonominės veiklos vykdytojas galėtų teikti atitinkamą paslaugą savo įsisteigimo šalyje?</entry>
+    <entry key="espd.part4.crit.selection.eo.economic.service.contracts.main">Paslaugų pirkimo sutarčių atveju: reikalingas leidimas arba narystė</entry>
+    <entry key="espd.part4.crit.selection.eo.satisfies.all.criteria">Jis atitinka visus reikalaujamus atrankos kriterijus</entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.article">Direktyvos 2014/24/ES 58 straipsnio 2 dalyje nustatyti šie atrankos kriterijai</entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.article.tooltip">Ekonominės veiklos vykdytojas turėtų teikti informaciją, tik jei perkančioji organizacija ar perkantysis subjektas atitinkamame skelbime ar skelbime nurodytuose pirkimo dokumentuose jos reikalauja apie susijusius atrankos kriterijus.-</entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.enrolment.description">Jis įtrauktas į susijusius profesinius ar prekybos registrus, naudojamus  įsisteigimo valstybėje narėje</entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.enrolment.main">Įtraukimas į profesinius arba prekybos registrus</entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.service.contracts.description">Ar reikia konkretaus leidimo arba narystės konkrečioje organizacijoje, kad ekonominės veiklos vykdytojas galėtų teikti atitinkamą paslaugą savo įsisteigimo šalyje?</entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.service.contracts.main">Paslaugų pirkimo sutarčių atveju: reikalingas leidimas arba narystė</entry>
+    <entry key="espd.part4.crit.selection.quality.assurance.article">Direktyvos 2014/24/ES 62 straipsnio 2 dalyje nustatyti šie atrankos kriterijai</entry>
+    <entry key="espd.part4.crit.selection.quality.assurance.tooltip">Ekonominės veiklos vykdytojas turėtų teikti informaciją, tik jei perkančioji organizacija ar perkantysis subjektas atitinkamame skelbime ar skelbime nurodytuose pirkimo dokumentuose jos reikalauja apie susijusius atrankos kriterijus.</entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.environmental.description">Ar ekonominės veiklos vykdytojas galės pateikti nepriklausomų įstaigų išduotus sertifikatus, kuriais patvirtinama, kad ekonominės veiklos vykdytojas atitinka reikiamas aplinkosaugos vadybos sistemas ar standartus?</entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.environmental.main">Nepriklausomų įstaigų išduoti sertifikatai, kuriais patvirtinama atitiktis aplinkosaugos vadybos sistemoms ar standartams</entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.quality.description">Ar ekonominės veiklos vykdytojas galės pateikti nepriklausomų įstaigų išduotus sertifikatus, kuriais patvirtinama, kad ekonominės veiklos vykdytojas atitinka reikiamus kokybės užtikrinimo standartus, įskaitant prieinamumo neįgaliesiems standartus?</entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.quality.main">Nepriklausomų įstaigų išduoti sertifikatai, kuriais patvirtinama atitiktis kokybės užtikrinimo standartams</entry>
+    <entry key="espd.part4.crit.selection.satisfies.all.criteria">Jis atitinka visus reikalaujamus atrankos kriterijus, nurodytus atitinkamame skelbime arba skelbime nurodytuose pirkimo dokumentuose.</entry>
+    <entry key="espd.part4.crit.selection.suitability.article">Direktyvos 2014/24/ES 58 straipsnio 2 dalyje nustatyti šie atrankos kriterijai</entry>
+    <entry key="espd.part4.crit.selection.suitability.article.tooltip">Ekonominės veiklos vykdytojas šį laukelį turėtų užpildyti, tik jei perkančioji organizacija ar perkantysis subjektas atitinkamame skelbime ar skelbime nurodytuose pirkimo dokumentuose nurodė, kad ekonominės veiklos vykdytojas gali apsiriboti ir užpildyti tik IV dalies  skirsnį ir neprivalo pildyti jokio kito IV dalies skirsnio:</entry>
+    <entry key="espd.crit.selection.suitability.enrolment.professional.register.description">Jis įtrauktas į susijusius profesinius registrus, naudojamus įsisteigimo valstybėje narėje, kaip aprašyta Direktyvos 2014/24/ES XI priede; tam tikrų valstybių narių ekonominės veiklos vykdytojai gali turėti tenkinti kitus tame priede nustatytus reikalavimus.</entry>
+    <entry key="espd.crit.selection.suitability.enrolment.professional.register.main">Įtraukimas į susijusį profesinį registrą</entry>
+    <entry key="espd.crit.selection.suitability.enrolment.trade.register.description">Jis įtrauktas į susijusius prekybos registrus, naudojamus įsisteigimo valstybėje narėje, kaip aprašyta Direktyvos 2014/24/ES XI priede; tam tikrų valstybių narių ekonominės veiklos vykdytojai gali turėti tenkinti kitus tame priede nustatytus reikalavimus.</entry>
+    <entry key="espd.crit.selection.suitability.enrolment.trade.register.main">Įtraukimas į prekybos registrą</entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.auth.description">Ar reikia konkretaus leidimo, kad ekonominės veiklos vykdytojas galėtų teikti atitinkamą paslaugą savo įsisteigimo šalyje?</entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.auth.main">Paslaugų pirkimo sutarčių atveju: reikia konkretaus leidimo</entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.membership.description">Ar reikia narystės konkrečioje organizacijoje, kad ekonominės veiklos vykdytojas galėtų teikti atitinkamą paslaugą savo įsisteigimo šalyje?</entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.membership.main">Paslaugų pirkimo sutarčių atveju: reikalinga narystė konkrečioje organizacijoje</entry>
+    <entry key="espd.crit.selection.technical.allowance.of.checks.description">Jei tiektini produktai arba teiktinos paslaugos yra sudėtingi arba, išimtiniais atvejais, jie yra skirti specialiam tikslui: ar ekonominės veiklos vykdytojas leis atlikti jo gamybos pajėgumų arba techninio pajėgumo ir, kai reikia, jam prieinamų tyrimų ir mokslinių tyrimų priemonių bei kokybės kontrolės priemonių patikrą? Patikrą turi atlikti perkančioji organizacija arba, jei ji sutinka, jos vardu šalies, kurioje įsisteigęs produktų tiekėjas ar paslaugų teikėjas, kompetentinga oficiali įstaiga.</entry>
+    <entry key="espd.crit.selection.technical.allowance.of.checks.main">Leidimas atlikti patikrą</entry>
+    <entry key="espd.crit.selection.technical.average.annual.manpower.description">Ekonominės veiklos vykdytojo vidutinis metinis darbuotojų skaičius praėjusiais trejais metais buvo toks:</entry>
+    <entry key="espd.crit.selection.technical.average.annual.manpower.main">Vidutinis metinis darbuotojų skaičius</entry>
+    <entry key="espd.crit.selection.technical.educational.professional.qualifications.description">Toliau nurodytą išsilavinimą ir profesinę kvalifikaciją turi pats paslaugos teikėjas ar rangovas ir (arba) (priklausomai nuo atitinkamame skelbime ar pirkimo dokumentuose nustatytų reikalavimų) jo vadovaujantysis personalas.</entry>
+    <entry key="espd.crit.selection.technical.educational.professional.qualifications.main">Išsilavinimas ir profesinė kvalifikacija</entry>
+    <entry key="espd.crit.selection.technical.environment.management.features.description">Vykdydamas sutartį ekonominės veiklos vykdytojas galės taikyti šias aplinkosaugos vadybos priemones:</entry>
+    <entry key="espd.crit.selection.technical.environment.management.features.main">Aplinkosaugos vadybos priemonės</entry>
+    <entry key="espd.crit.selection.technical.number.managerial.staff.description">Ekonominės veiklos vykdytojo vadovaujančiojo personalo skaičius praėjusiais trejais metais buvo toks:</entry>
+    <entry key="espd.crit.selection.technical.number.managerial.staff.main">Vadovaujančiojo personalo skaičius</entry>
+    <entry key="espd.part4.crit.selection.technical.professional.ability.article">Direktyvos 2014/24/ES 58 straipsnio 4 dalyje nustatyti šie atrankos kriterijai</entry>
+    <entry key="espd.part4.crit.selection.technical.professional.ability.article.tooltip">Ekonominės veiklos vykdytojas turėtų teikti informaciją, tik jei perkančioji organizacija ar perkantysis subjektas atitinkamame skelbime ar skelbime nurodytuose pirkimo dokumentuose jos reikalauja apie susijusius atrankos kriterijus.-</entry>
+    <entry key="espd.crit.selection.technical.service.contracts.performance.services.description">Tik viešojo paslaugų pirkimo sutarčių atveju: per ataskaitinį laikotarpį ekonominės veiklos vykdytojas suteikė šias pagrindines nurodyto tipo paslaugas. Perkančiosios organizacijos gali reikalauti nurodyti pastarųjų trejų metų patirtį ir leisti įtraukti senesnę patirtį.</entry>
+    <entry key="espd.crit.selection.technical.service.contracts.performance.services.main">Paslaugų pirkimo sutarčių atveju: nurodyto tipo paslaugų teikimas</entry>
+    <entry key="espd.crit.selection.technical.study.research.facilities.description">Jo galimybės atlikti tyrimus bei mokslinius tyrimus:</entry>
+    <entry key="espd.crit.selection.technical.study.research.facilities.main">Galimybės atlikti tyrimus bei mokslinius tyrimus</entry>
+    <entry key="espd.crit.selection.technical.subcontracting.proportion.description">Ekonominės veiklos vykdytojas ketina perduoti vykdyti pagal subrangos sutartį tokią (procentinę) sutarties dalį: Atkreipkite dėmesį į tai, kad jei ekonominės veiklos vykdytojas nusprendė sutarties dalį perduoti vykdyti pagal subrangos sutartį ir remiasi subrangovo pajėgumais, kad įvykdytų tą sutarties dalį, kiekvienam tokiam subrangovui reikia užpildyti atskirą EBVPD, žr. pirmiau II dalies C skirsnį.</entry>
+    <entry key="espd.crit.selection.technical.subcontracting.proportion.main">Subrangos procentinė dalis</entry>
+    <entry key="espd.crit.selection.technical.supply.chain.management.description">Vykdydamas sutartį jis galės naudoti šias tiekimo grandinės valdymo ir lokalizavimo sistemas:</entry>
+    <entry key="espd.crit.selection.technical.supply.chain.management.main">Tiekimo grandinės valdymas</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.certificate.quality.description">Ar ekonominės veiklos vykdytojas gali pateikti reikiamus oficialių kokybės kontrolės institucijų arba pripažintos kompetencijos agentūrų parengtus sertifikatus, kuriais patvirtinama produktų, aiškiai atpažįstamų iš atitinkamame skelbime ar pirkimo dokumentuose pateiktų nuorodų į technines specifikacijas ar standartus, atitiktis?</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.certificate.quality.main">Prekių pirkimo sutarčių atveju: kokybės kontrolės institucijų sertifikatai</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.performance.deliveries.description">Tik viešojo prekių pirkimo sutarčių atveju: per ataskaitinį laikotarpį ekonominės veiklos vykdytojas pristatė šias svarbiausias nurodyto tipo prekes. Perkančiosios organizacijos gali reikalauti nurodyti pastarųjų trejų metų patirtį ir leisti įtraukti senesnę patirtį.</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.performance.deliveries.main">Prekių pirkimo sutarčių atveju: nurodyto tipo prekių pristatymas</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.with.ca.description">Tik viešojo prekių pirkimo sutarčių atveju: ekonominės veiklos vykdytojas pateiks reikalaujamus tiektinų produktų pavyzdžius, aprašymus ar nuotraukas ir prireikus pateiks autentiškumo sertifikatus.</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.with.ca.main">Prekių pirkimo sutarčių atveju: tiektinų produktų, su kuriais reikia pateikti autentiškumo sertifikatą, pavyzdžiai, aprašymai ar nuotraukos</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.without.ca.description">Tik viešojo prekių pirkimo sutarčių atveju: ekonominės veiklos vykdytojas pateiks reikalaujamus tiektinų produktų, su kuriais nereikia pateikti autentiškumo sertifikato, pavyzdžius, aprašymus ar nuotraukas.</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.without.ca.main">Prekių pirkimo sutarčių atveju: tiektinų produktų, su kuriais nereikia pateikti autentiškumo sertifikato, pavyzdžiai, aprašymai ar nuotraukos</entry>
+    <entry key="espd.crit.selection.technical.technical.facilities.measures.description">Jis naudojasi šia technine įranga ir priemonėmis kokybei užtikrinti, o jo galimybės atlikti tyrimus bei mokslinius tyrimus yra tokios:</entry>
+    <entry key="espd.crit.selection.technical.technical.facilities.measures.main">Techninė įranga ir priemonės kokybei užtikrinti</entry>
+    <entry key="espd.crit.selection.technical.technicians.technical.bodies.description">Jis gali kreiptis į šiuos specialistus arba technines įstaigas, ypač  atsakingus už kokybės kontrolę. Informacija apie specialistus arba technines įstaigas, kurie tiesiogiai nepriklauso ekonominės veiklos vykdytojo įmonei, bet kurių pajėgumais ekonominės veiklos vykdytojas remiasi, kaip nustatyta II dalies C skirsnyje, turi būti pateikta atskirose EBVPD formose.</entry>
+    <entry key="espd.crit.selection.technical.technicians.technical.bodies.main">Už kokybės kontrolę atsakingi specialistai ir techninės įstaigos</entry>
+    <entry key="espd.crit.selection.technical.tools.plant.description">Vykdydamas sutartį jis galės naudotis šiais įrankiais, įrenginiais ar technine įranga:</entry>
+    <entry key="espd.crit.selection.technical.tools.plant.main">Įrankiai, įrenginiai ar techninė įranga</entry>
+    <entry key="espd.crit.selection.technical.work.contracts.performance.works.description">Tik viešojo darbų pirkimo sutarčių atveju: per ataskaitinį laikotarpį ekonominės veiklos vykdytojas atliko šiuos nurodyto tipo darbus. Perkančiosios organizacijos gali reikalauti nurodyti pastarųjų penkerių metų patirtį ir leisti įtraukti senesnę patirtį.</entry>
+    <entry key="espd.crit.selection.technical.work.contracts.performance.works.main">Darbų pirkimo sutarčių atveju: nurodyto tipo darbų atlikimas</entry>
+    <entry key="espd.crit.selection.technical.work.contracts.technicians.description">Viešojo darbų pirkimo sutarčių atveju ekonominės veiklos vykdytojas, siekdamas atlikti darbą, galės kreiptis į šiuos specialistus arba technines įstaigas:</entry>
+    <entry key="espd.crit.selection.technical.work.contracts.technicians.main">Darbų pirkimo sutarčių atveju: specialistai arba techninės įstaigos, susiję su darbų atlikimu</entry>
     <entry key="espd.crit.start.date">Pabaigos data</entry>
-    <entry key="espd.crit.taken.self.cleaning.measures">Ar ?m?t?s priemoni?, kad ?rodytum?te savo patikimum?
-        (reputacijos susigr??inimas)
-    </entry>
-    <entry key="espd.crit.taxes.eo.fulfilled.obligations">Ar ekonomin?s veiklos vykdytojas ?vykd? savo pareigas
-        sumok?damas mokes?ius ar socialinio draudimo ?mokas arba sudarydamas privalom? susitarim?, kuriuo ?sipareigoja
-        sumok?ti mok?tinus mokes?ius ar socialinio draudimo ?mokas, ?skaitant, jei taikytina, susikaupusias pal?kanas ar
-        baudas?
-    </entry>
-    <entry key="espd.crit.taxes.length.period.of.exclusion">Jei priimtas nuosprendis, jeigu jame tai tiesiogiai
-        nustatyta, pa?alinimo laikotarpio trukm?
-    </entry>
-    <entry key="espd.crit.taxes.means.description">Apra?ykite taikytus b?dus</entry>
-    <entry key="espd.part3.crit.grounds.criminal.conv.top.title">A. Su baud?iamaisiais nuosprend?iais susij? pagrindai
-    </entry>
-    <entry key="espd.part3.crit.top.grounds.payment.taxes.title">B. Su mokes?i? ar socialinio draudimo ?mok? mok?jimu
-        susij? pagrindai
-    </entry>
-    <entry key="espd.part3.crit.insolvency.conflicts.top.title">C. Su nemokumu, interes? konfliktu ar profesiniais
-        nusi?engimais susij? pagrindai
-    </entry>
-    <entry key="espd.part3.crit.purely.national.top.title">D. I?imtinai nacionaliniai pa?alinimo pagrindai</entry>
+    <entry key="espd.crit.taken.self.cleaning.measures">Ar ėmėtės priemonių, kad įrodytumėte savo patikimumą (reputacijos susigrąžinimas)</entry>
+    <entry key="espd.crit.taxes.eo.fulfilled.obligations">Ar ekonominės veiklos vykdytojas įvykdė savo pareigas sumokėdamas mokesčius ar socialinio draudimo įmokas arba sudarydamas privalomą susitarimą, kuriuo įsipareigoja sumokėti mokėtinus mokesčius ar socialinio draudimo įmokas, įskaitant, jei taikytina, susikaupusias palūkanas ar baudas?</entry>
+    <entry key="espd.crit.taxes.length.period.of.exclusion">Jei priimtas nuosprendis, jeigu jame tai tiesiogiai nustatyta, pašalinimo laikotarpio trukmę</entry>
+    <entry key="espd.crit.taxes.means.description">Aprašykite taikytus būdus</entry>
+    <entry key="espd.part3.crit.grounds.criminal.conv.top.title">A. Su baudžiamaisiais nuosprendžiais susiję pagrindai</entry>
+    <entry key="espd.part3.crit.top.grounds.payment.taxes.title">B. Su mokesčių ar socialinio draudimo įmokų mokėjimu susiję pagrindai</entry>
+    <entry key="espd.part3.crit.insolvency.conflicts.top.title">C. Su nemokumu, interesų konfliktu ar profesiniais nusižengimais susiję pagrindai</entry>
+    <entry key="espd.part3.crit.purely.national.top.title">D. Išimtinai nacionaliniai pašalinimo pagrindai</entry>
     <entry key="espd.crit.url">URL</entry>
     <entry key="espd.crit.who.convicted">Kas buvo nuteistas</entry>
     <entry key="espd.crit.year">Metai</entry>
-    <entry key="espd.crit.your.answer">J?s? atsakymas</entry>
-    <entry key="espd.gui.download.as">Parsisi?sdinti kaip</entry>
-    <entry key="espd.gui.download.pdf">PDF formato rinkmen?</entry>
-    <entry key="espd.gui.download.xml">XML formato rinkmen?</entry>
-    <entry key="espd.gui.download.zip">Abiej? format? rinkmenas</entry>
+    <entry key="espd.crit.your.answer">Jūsų atsakymas</entry>
+    <entry key="espd.gui.download.as">Parsisiųsdinti kaip</entry>
+    <entry key="espd.gui.download.pdf">PDF formato rinkmeną</entry>
+    <entry key="espd.gui.download.xml">XML formato rinkmeną</entry>
+    <entry key="espd.gui.download.zip">Abiejų formatų rinkmenas</entry>
     <entry key="espd.gui.ec">Europos Komisija</entry>
-    <entry key="espd.ecertis.404">ECERTIS duomen? n?ra</entry>
-    <entry key="espd.ecertis.issued">I?dav?</entry>
+    <entry key="espd.ecertis.404">ECERTIS duomenų nėra</entry>
+    <entry key="espd.ecertis.issued">Išdavė</entry>
     <entry key="espd.ecertis.language">Kalba</entry>
-    <entry key="espd.ecertis.loading">?keliama i? ECERTIS</entry>
-    <entry key="espd.ecertis.no.evidences">?rodym? n?ra</entry>
-    <entry key="espd.gui.error.ted.notice.not.supported">?kelta rinkmena yra prane?imas, o ne EBVPD, tod?l ji negali
-        b?ti naudojama naudojantis ?ia paslauga
-    </entry>
-    <entry key="espd.gui.espd">?keltos rinkmenos nebuvo galima skaityti. Ar tai tinkamas EBVPD pra?ymas ar atsakymas?
-    </entry>
-    <entry key="espd.gui.espd.upload.error">?keltos rinkmenos nebuvo galima skaityti. Ar tai tinkamas EBVPD pra?ymas?
-    </entry>
-    <entry key="espd.gui.espd.upload.request.error">?keltos rinkmenos nebuvo galima skaityti. Ar tai tinkamas EBVPD
-        atsakymas?
-    </entry>
-    <entry key="espd.gui.espd.upload.response.error">Europos bendrasis vie??j? pirkim? dokumentas</entry>
+    <entry key="espd.ecertis.loading">Įkeliama iš ECERTIS</entry>
+    <entry key="espd.ecertis.no.evidences">Įrodymų nėra</entry>
+    <entry key="espd.gui.error.ted.notice.not.supported">Įkelta rinkmena yra pranešimas, o ne EBVPD, todėl ji negali būti naudojama naudojantis šia paslauga</entry>
+    <entry key="espd.gui.espd">Įkeltos rinkmenos nebuvo galima skaityti. Ar tai tinkamas EBVPD prašymas ar atsakymas?</entry>
+    <entry key="espd.gui.espd.upload.error">Įkeltos rinkmenos nebuvo galima skaityti. Ar tai tinkamas EBVPD prašymas?</entry>
+    <entry key="espd.gui.espd.upload.request.error">Įkeltos rinkmenos nebuvo galima skaityti. Ar tai tinkamas EBVPD atsakymas?</entry>
+    <entry key="espd.gui.espd.upload.response.error">Europos bendrasis viešųjų pirkimų dokumentas</entry>
     <entry key="espd.gui.europa">Europa</entry>
-    <entry key="espd.gui.expire.reminder.message">EBVPD paslaugos puslapyje beveik vien? valand? neatlikote joki?
-        veiksm?.
-        &lt;p&gt;
-        I?saugokite e. EBVPD tam, kad neprarastum?te duomen?.
-        &lt;p&gt;
-        Bet kuriuo metu galite importuoti (i? naujo naudoti) e. EBVPD ir t?sti darb?.
-    </entry>
-    <entry key="espd.gui.export">I?saugoti</entry>
+    <entry key="espd.gui.expire.reminder.message">EBVPD paslaugos puslapyje beveik vieną valandą neatlikote jokių veiksmų.   Išsaugokite e. EBVPD tam, kad neprarastumėte duomenų.   Bet kuriuo metu galite importuoti (iš naujo naudoti) e. EBVPD ir tęsti darbą.</entry>
+    <entry key="espd.gui.export">Išsaugoti</entry>
     <entry key="espd.gui.faq.leaflet">DUK</entry>
-    <entry key="espd.gui.faq.text.answers">Jei norite gauti atsakymus ? da?niausiai u?duodamus klausimus apie EBVPD,
-        ie?kokite
-    </entry>
-    <entry key="espd.gui.faq.text.more.info">D?l i?samesn?s informacijos apie EBVPD</entry>
-    <entry key="espd.init.alert">
-        &lt;p&gt;Europos bendrasis vie??j? pirkim? dokumentas (EBVPD) ? ?moni? finansin?s pad?ties, paj?gum? ir tinkamumo
-            vie??j? pirkim? proced?rai savideklaracija. Jis parengtas visomis ES kalbomis ir naudojamas kaip
-            preliminarus ?rodymas, kad parei?k?jas tenkina b?tinas ES vie??j? pirkim? proced?r? s?lygas. Kadangi dabar
-            yra EBVPD, konkurso dalyviams nebereikia pateikti vis? ?rodom?j? dokument? ir skirting? form?, naudojam? ES
-            vie?uosiuose pirkimuose, o tai rei?kia, kad tarpvalstybin?mis vie??j? pirkim? proced?romis naudotis tapo
-            lengviau. Nuo 2018 m. spalio m?n. EBVPD bus teikiamas tik elektronine forma.
-        &lt;/p&gt;
-        &lt;p&gt;Europos Komisija teikia nemokamas internetines paslaugas pirk?jams, konkurso dalyviams ir kitiems subjektams,
-        norintiems pildyti EBVPD elektroniniu b?du. Elektronine forma galima u?pildyti, spausdinti ir kartu su pasi?lymu
-        nusi?sti pirk?jui. Jei proced?ra vykdoma elektroniniu b?du, EBVPD galima eksportuoti, saugoti ir pateikti
-        elektroniniu b?du. Ankstesn?je vie??j? pirkim? proced?roje pateikt? EBVPD galima pakartotinai panaudoti tol, kol
-        informacija i?lieka teisinga. Jei pildydami EBVPD konkurso dalyviai labai i?kraip? informacij?, j? nusl?p? ar
-        negali pateikti patvirtinam?j? dokument?, jie gali b?ti pa?alinti i? proced?ros arba jiems gali b?ti i?kelta
-        baud?iamoji byla.
-    </entry>
-    <entry key="espd.init.create.espd">Sukurti nauj? EBVPD</entry>
-    <entry key="espd.init.create.response">Sukurti atsakym?</entry>
-    <entry key="espd.init.header">Sveiki atvyk? ? EBVPD paslaugos puslap?.</entry>
-    <entry key="espd.init.i.am.ca">Esu perkan?ioji organizacija</entry>
+    <entry key="espd.gui.faq.text.answers">Jei norite gauti atsakymus į dažniausiai užduodamus klausimus apie EBVPD, ieškokite</entry>
+    <entry key="espd.gui.faq.text.more.info">Dėl išsamesnės informacijos apie EBVPD</entry>
+    <entry key="espd.init.alert"> Europos bendrasis viešųjų pirkimų dokumentas (EBVPD) – įmonių finansinės padėties, pajėgumų ir tinkamumo viešųjų pirkimų procedūrai savideklaracija. Jis parengtas visomis ES kalbomis ir naudojamas kaip preliminarus įrodymas, kad pareiškėjas tenkina būtinas ES viešųjų pirkimų procedūrų sąlygas. Kadangi dabar yra EBVPD, konkurso dalyviams nebereikia pateikti visų įrodomųjų dokumentų ir skirtingų formų, naudojamų ES viešuosiuose pirkimuose, o tai reiškia, kad tarpvalstybinėmis viešųjų pirkimų procedūromis naudotis tapo lengviau. Nuo 2018 m. spalio mėn. EBVPD bus teikiamas tik elektronine forma. Europos Komisija teikia nemokamas internetines paslaugas pirkėjams, konkurso dalyviams ir kitiems subjektams, norintiems pildyti  EBVPD elektroniniu būdu. Elektronine forma galima užpildyti, spausdinti ir kartu su pasiūlymu nusiųsti pirkėjui. Jei procedūra vykdoma elektroniniu būdu, EBVPD galima eksportuoti, saugoti ir pateikti elektroniniu būdu. Ankstesnėje viešųjų pirkimų procedūroje pateiktą EBVPD galima pakartotinai panaudoti tol, kol informacija išlieka teisinga. Jei pildydami EBVPD konkurso dalyviai labai iškraipė informaciją, ją nuslėpė ar negali pateikti patvirtinamųjų dokumentų, jie gali būti pašalinti iš procedūros arba jiems gali būti iškelta baudžiamoji byla.</entry>
+    <entry key="espd.init.create.espd">Sukurti naują EBVPD</entry>
+    <entry key="espd.init.create.response">Sukurti atsakymą</entry>
+    <entry key="espd.init.header">Sveiki atvykę į EBVPD paslaugos puslapį.</entry>
+    <entry key="espd.init.i.am.ca">Esu perkančioji organizacija</entry>
     <entry key="espd.init.i.am.ce">Esu perkantysis subjektas</entry>
-    <entry key="espd.init.i.am.eop">Esu ekonomin?s veiklos vykdytojas</entry>
+    <entry key="espd.init.i.am.eop">Esu ekonominės veiklos vykdytojas</entry>
     <entry key="espd.init.import.espd">Importuoti EBVPD</entry>
     <entry key="espd.init.merge.espds">Sujungti du EBVPD</entry>
-    <entry key="espd.init.reuse.espd">Pakartotinai panaudoti esam? EBVPD</entry>
-    <entry key="espd.init.review.espd">Per?i?r?ti EBVPD</entry>
-    <entry key="espd.init.select.country">Pasirinkite ?al?</entry>
-    <entry key="espd.init.ted.reception.id.placeholder">Nurodykite gaut? prane?imo numer?</entry>
-    <entry key="espd.init.upload.document">?kelti dokument?</entry>
-    <entry key="espd.init.upload.documents">?kelti dokumentus</entry>
-    <entry key="espd.init.upload.request">?kelkite EBVPD pra?ym? arba EBVPD atsakym?</entry>
-    <entry key="espd.init.upload.request.response">?kelkite perkan?iosios organizacijos EBVPD pra?ym?</entry>
-    <entry key="espd.init.upload.response">?kelkite ankstesn? j?s? EBVPD atsakym?</entry>
-    <entry key="espd.init.what.you.do">Kok? veiksm? norite atlikti?</entry>
-    <entry key="espd.init.where.are.you.from.ca">Kur ?steigta j?s? perkan?ioji organizacija?</entry>
-    <entry key="espd.init.where.are.you.from.eo">Kur ?steigtas j?s? verslas?</entry>
+    <entry key="espd.init.reuse.espd">Pakartotinai panaudoti esamą EBVPD</entry>
+    <entry key="espd.init.review.espd">Peržiūrėti EBVPD</entry>
+    <entry key="espd.init.select.country">Pasirinkite šalį</entry>
+    <entry key="espd.init.ted.reception.id.placeholder">Nurodykite gautą pranešimo numerį</entry>
+    <entry key="espd.init.upload.document">Įkelti dokumentą</entry>
+    <entry key="espd.init.upload.documents">Įkelti dokumentus</entry>
+    <entry key="espd.init.upload.request">Įkelkite EBVPD prašymą arba EBVPD atsakymą</entry>
+    <entry key="espd.init.upload.request.response">Įkelkite perkančiosios organizacijos EBVPD prašymą</entry>
+    <entry key="espd.init.upload.response">Įkelkite ankstesnį jūsų EBVPD atsakymą</entry>
+    <entry key="espd.init.what.you.do">Kokį veiksmą norite atlikti?</entry>
+    <entry key="espd.init.where.are.you.from.ca">Kur įsteigta jūsų perkančioji organizacija?</entry>
+    <entry key="espd.init.where.are.you.from.eo">Kur įsteigtas jūsų verslas?</entry>
     <entry key="espd.init.who.are.you">Kas esate?</entry>
     <entry key="espd.gui.footer.last.update">Paskutinis atnaujinimas:</entry>
-    <entry key="espd.gui.grow">Vidaus rinkos, pramon?s, verslumo ir MV? GD</entry>
-    <entry key="espd.ecertis.information.for.country">{0} skirta informacija apie ?e-Certis?</entry>
-    <entry key="espd.gui.legal.notice">Teisinis prane?imas</entry>
-    <entry key="espd.ecertis.less.information">Rodyti ma?iau informacijos</entry>
+    <entry key="espd.gui.grow">Vidaus rinkos, pramonės, verslumo ir MVĮ GD</entry>
+    <entry key="espd.ecertis.information.for.country">{0} skirta informacija apie „e-Certis“</entry>
+    <entry key="espd.gui.legal.notice">Teisinis pranešimas</entry>
+    <entry key="espd.ecertis.less.information">Rodyti mažiau informacijos </entry>
     <entry key="espd.ecertis.more.information">Rodyti daugiau informacijos</entry>
     <entry key="espd.gui.next">Pirmyn</entry>
     <entry key="espd.gui.no">Ne</entry>
     <entry key="espd.gui.not.applicable">Netaikoma</entry>
     <entry key="espd.gui.place">Vieta</entry>
     <entry key="espd.gui.previous">Atgal</entry>
-    <entry key="espd.gui.print">Ap?valga</entry>
-    <entry key="espd.gui.progress.exclusion">Pa?alinimas</entry>
+    <entry key="espd.gui.print">Apžvalga</entry>
+    <entry key="espd.gui.progress.exclusion">Pašalinimas</entry>
     <entry key="espd.gui.progress.finish">Pabaiga</entry>
-    <entry key="espd.gui.progress.procedure">Proced?ra</entry>
+    <entry key="espd.gui.progress.procedure">Procedūra</entry>
     <entry key="espd.gui.progress.selection">Atranka</entry>
-    <entry key="espd.gui.progress.start">Prad?ia</entry>
-    <entry key="espd.gui.question.to.use.alpha">Ar norite naudoti A?D atrankos kriterijus?</entry>
-    <entry key="espd.gui.report.appliction.issue">Kilus klausim? d?l EBVPD taikymo, kreipkit?s ?</entry>
-    <entry key="espd.gui.report.security.incident">D?l saugumo incidento kreipkit?s ? Europos Komisij? per</entry>
-    <entry key="espd.gui.report.security.incident.title">Prane?kite apie informacijos saugumo pa?eidim?</entry>
-    <entry key="espd.gui.role.ca">Funkcija: Perkan?ioji organizacija (PO)</entry>
-    <entry key="espd.gui.role.eo">Funkcija: Ekonomin?s veiklos vykdytojas (EVV)</entry>
-    <entry key="espd.gui.search">Paie?ka</entry>
-    <entry key="espd.gui.signature">Para?as</entry>
-    <entry key="espd.gui.tools">Priemon?s</entry>
-    <entry key="espd.init.ca.can.create.espd.tooltip">Perkan?ioji organizacija gali sukurti EBVPD nuo nulio. Tokiu
-        atveju perkan?ioji organizacija turi u?pildyti EBVPD form?, nurodydama vis? reikaling? informacij?.
-    </entry>
-    <entry key="espd.init.ca.can.import.espd.tooltip">Jei perkan?ioji organizacija EBVPD paslauga yra pasinaudojusi
-        vykdydama kit? pirkimo proced?r?, ji gali importuoti vietos tinkle saugom? EBVPD. ?iuo atveju EBVPD nereikia
-        pildyti nuo nulio, ta?iau atsi?velgiant ? nauj? pirkimo proced?r? b?tina atnaujinti kai kuriuos duomenis.
-    </entry>
-    <entry key="espd.init.ca.ref.buyer.tooltip">Terminas ?perkan?ioji organizacija? rei?kia pirk?j?.</entry>
-    <entry key="espd.init.ce.ref.buyer.tooltip">Terminas ?perkantysis subjektas? rei?kia pirk?j?, kuris vykdo veikl?
-        vandentvarkos, energetikos, transporto ar pa?to paslaug? sektoriuje. Perkan?iosios organizacijos, kurios taip
-        pat vykdo veikl? anks?iau min?tuose sektoriuose, turi pasirinkti ?Esu perkan?ioji organizacija?
-    </entry>
-    <entry key="espd.init.eo.can.reuse.espd.tooltip">Ekonomin?s veiklos vykdytojas gali pakartotinai panaudoti
-        informacij?, kuri buvo pateikta EBVPD per ankstesn? vie??j? pirkim? proced?r? (ankstesnis EBVPD). EBVPD paslauga
-        sujungs ankstesnio EBVPD form? su nauja forma, kuri? ?iai pirkimo proced?rai pareng? perkan?ioji organizacija.
-    </entry>
-    <entry key="espd.init.eo.ref.suppl.tooltip">Terminas ?ekonomin?s veiklos vykdytojas? rei?kia tiek?j? ir (arba)
-        konkurso dalyv?.
-    </entry>
-    <entry key="espd.init.espd.used.both.ca.eo.tooltip">EBVPD paslauga gali naudotis ir perkan?iosios organizacijos, ir
-        ekonomin?s veiklos vykdytojai. Pasirinkite parinkt?, atitinkan?i? j?s? vaidmen? ?ioje vie??j? pirkim?
-        proced?roje.
-    </entry>
-    <entry key="espd.init.filter.create.response.tooltip">Sukurti nauj? EBVPD atsakym?</entry>
-    <entry key="espd.init.filter.eo.can.import.espd.tooltip">Ekonomin?s veiklos vykdytojas gali importuoti EBVPD
-        rinkmen?, kuri yra perkan?iosios organizacijos i? anksto u?pildyta ?ios vie??j? pirkim? proced?ros duomenimis ir
-        paskelbta kartu su skelbimu apie pirkim?.
-    </entry>
-    <entry key="espd.init.filter.eo.merge.espds.tooltip">The ESPD service will merge the 'old' ESPD with the new form
-        prepared by the contracting authority for this procurement procedure.
-    </entry>
-    <entry key="espd.init.overview.received.espds.tooltip">Naudojant ?i? funkcij? pateikiama lentel?, kurioje
-        ap?velgiami visuose EBVPD konkurso dalyvi? pateikti atsakymai, susij? su atitinkama pirkimo proced?ra.
-    </entry>
-    <entry key="espd.init.review.espd.tooltip">Perkan?ioji organizacija gali patikrinti ir (arba) per?i?r?ti elektronin?
-        EBVPD, kur? pateik? ekonomin?s veiklos vykdytojas.
-    </entry>
-    <entry key="espd.init.ted.reception.id.tooltip">Pateikusi skelbti skirt? prane?im? perkan?ioji organizacija gaus e.
-        lai?k? i? Leidini? biuro. ?iame e. lai?ke pateikiamas identifikacinis kodas, kur? galima ?ra?yti pildant
-        informacij? apie proced?r? ir institucij?.
-    </entry>
-    <entry key="espd.validator.accept">?ra?ykite reik?m? su tinkamu pl?tiniu.</entry>
-    <entry key="espd.validator.creditcard">?ra?ykite kreditin?s kortel?s numer?.</entry>
-    <entry key="espd.validator.date">?ra?ykite dat?.</entry>
-    <entry key="espd.validator.dateISO">?ra?ykite dat? (ISO).</entry>
-    <entry key="espd.validator.digits">?ra?ykite tik skaitmenis.</entry>
-    <entry key="espd.validator.email">?ra?ykite galiojant? e. pa?to adres?.</entry>
-    <entry key="espd.validator.equalTo">Dar kart? ?ra?ykite t? pa?i? reik?m?.</entry>
-    <entry key="espd.validator.max">?ra?ykite reik?m?, kuri yra ne didesn? kaip {0}.</entry>
-    <entry key="espd.validator.maxlength">?ra?ykite ne daugiau kaip {0} ?enklus (-?).</entry>
-    <entry key="espd.validator.min">?ra?ykite reik?m?, kuri yra didesn? kaip {0}.</entry>
-    <entry key="espd.validator.minlength">?ra?ykite bent {0} ?enklus (-?).</entry>
-    <entry key="espd.validator.number">?ra?ykite numer?.</entry>
-    <entry key="espd.validator.range">?ra?ykite reik?m?, kuri yra nuo {0} iki {1} .</entry>
-    <entry key="espd.validator.rangelength">?ra?ykite reik?m?, kuri yra nuo {0} iki {1} ?enkl?.</entry>
-    <entry key="espd.validator.remote">Pataisykite ?? lauk?.</entry>
-    <entry key="espd.validator.required">?is laukas privalomas.</entry>
-    <entry key="espd.validator.url">?ra?ykite galiojant? interneto adres? (URL).</entry>
+    <entry key="espd.gui.progress.start">Pradžia</entry>
+    <entry key="espd.gui.question.to.use.alpha">Ar norite naudoti A–D atrankos kriterijus?</entry>
+    <entry key="espd.gui.report.appliction.issue">Kilus klausimų dėl EBVPD taikymo, kreipkitės į</entry>
+    <entry key="espd.gui.report.security.incident">Dėl saugumo incidento kreipkitės į Europos Komisiją per</entry>
+    <entry key="espd.gui.report.security.incident.title">Praneškite apie informacijos saugumo pažeidimą</entry>
+    <entry key="espd.gui.role.ca">Funkcija: Perkančioji organizacija (PO)</entry>
+    <entry key="espd.gui.role.eo">Funkcija: Ekonominės veiklos vykdytojas (EVV)</entry>
+    <entry key="espd.gui.search">Paieška</entry>
+    <entry key="espd.gui.signature">Parašas</entry>
+    <entry key="espd.gui.tools">Priemonės</entry>
+    <entry key="espd.init.ca.can.create.espd.tooltip">Perkančioji organizacija gali sukurti EBVPD nuo nulio. Tokiu atveju perkančioji organizacija turi užpildyti EBVPD formą, nurodydama visą reikalingą informaciją.</entry>
+    <entry key="espd.init.ca.can.import.espd.tooltip">Jei perkančioji organizacija EBVPD paslauga yra pasinaudojusi vykdydama kitą pirkimo procedūrą, ji gali importuoti vietos tinkle saugomą EBVPD. Šiuo atveju EBVPD nereikia pildyti nuo nulio, tačiau atsižvelgiant į naują pirkimo procedūrą būtina atnaujinti kai kuriuos duomenis.</entry>
+    <entry key="espd.init.ca.ref.buyer.tooltip">Terminas „perkančioji organizacija“ reiškia pirkėją.</entry>
+    <entry key="espd.init.ce.ref.buyer.tooltip"> Terminas „perkantysis subjektas“ reiškia pirkėją, kuris vykdo veiklą vandentvarkos, energetikos, transporto ar pašto paslaugų sektoriuje. Perkančiosios organizacijos, kurios taip pat vykdo veiklą anksčiau minėtuose sektoriuose, turi pasirinkti  „Esu perkančioji organizacija“</entry>
+    <entry key="espd.init.eo.can.reuse.espd.tooltip">Ekonominės veiklos vykdytojas gali pakartotinai panaudoti informaciją, kuri buvo pateikta EBVPD per ankstesnę viešųjų pirkimų procedūrą (ankstesnis  EBVPD). EBVPD paslauga sujungs ankstesnio EBVPD formą su nauja forma, kurią šiai pirkimo procedūrai parengė perkančioji organizacija.</entry>
+    <entry key="espd.init.eo.ref.suppl.tooltip">Terminas „ekonominės veiklos vykdytojas“ reiškia tiekėją ir (arba) konkurso dalyvį.</entry>
+    <entry key="espd.init.espd.used.both.ca.eo.tooltip">EBVPD paslauga gali naudotis ir perkančiosios organizacijos, ir ekonominės veiklos vykdytojai. Pasirinkite parinktį, atitinkančią jūsų vaidmenį šioje viešųjų pirkimų procedūroje.</entry>
+    <entry key="espd.init.filter.create.response.tooltip">Sukurti naują EBVPD atsakymą</entry>
+    <entry key="espd.init.filter.eo.can.import.espd.tooltip">Ekonominės veiklos vykdytojas gali importuoti EBVPD rinkmeną, kuri yra perkančiosios organizacijos iš anksto užpildyta šios viešųjų pirkimų procedūros duomenimis ir paskelbta kartu su skelbimu apie pirkimą.</entry>
+    <entry key="espd.init.filter.eo.merge.espds.tooltip">The ESPD service will merge the 'old' ESPD with the new form prepared by the contracting authority for this procurement procedure.</entry>
+    <entry key="espd.init.overview.received.espds.tooltip">Naudojant šią funkciją pateikiama lentelė, kurioje apžvelgiami visuose EBVPD konkurso dalyvių pateikti atsakymai, susiję su atitinkama pirkimo procedūra.</entry>
+    <entry key="espd.init.review.espd.tooltip">Perkančioji organizacija gali patikrinti ir (arba) peržiūrėti elektroninį EBVPD, kurį pateikė ekonominės veiklos vykdytojas.</entry>
+    <entry key="espd.init.ted.reception.id.tooltip">Pateikusi skelbti skirtą pranešimą perkančioji organizacija gaus e. laišką iš Leidinių biuro. Šiame e. laiške pateikiamas identifikacinis kodas, kurį galima įrašyti pildant informaciją apie procedūrą ir instituciją.</entry>
+    <entry key="espd.validator.accept">Įrašykite reikšmę su tinkamu plėtiniu.</entry>
+    <entry key="espd.validator.creditcard">Įrašykite kreditinės kortelės numerį.</entry>
+    <entry key="espd.validator.date">Įrašykite datą.</entry>
+    <entry key="espd.validator.dateISO">Įrašykite datą (ISO).</entry>
+    <entry key="espd.validator.digits">Įrašykite tik skaitmenis.</entry>
+    <entry key="espd.validator.email">Įrašykite galiojantį e. pašto adresą.</entry>
+    <entry key="espd.validator.equalTo">Dar kartą įrašykite tą pačią reikšmę.</entry>
+    <entry key="espd.validator.max">Įrašykite reikšmę, kuri yra ne didesnė kaip {0}.</entry>
+    <entry key="espd.validator.maxlength">Įrašykite ne daugiau kaip {0} ženklus (-ų).</entry>
+    <entry key="espd.validator.min">Įrašykite reikšmę, kuri yra didesnė kaip {0}.</entry>
+    <entry key="espd.validator.minlength">Įrašykite bent {0} ženklus (-ų).</entry>
+    <entry key="espd.validator.number">Įrašykite numerį.</entry>
+    <entry key="espd.validator.range">Įrašykite reikšmę, kuri yra nuo {0} iki {1} .</entry>
+    <entry key="espd.validator.rangelength">Įrašykite reikšmę, kuri yra nuo {0} iki {1} ženklų.</entry>
+    <entry key="espd.validator.remote">Pataisykite šį lauką.</entry>
+    <entry key="espd.validator.required">Šis laukas privalomas.</entry>
+    <entry key="espd.validator.url">Įrašykite galiojantį interneto adresą (URL).</entry>
     <entry key="espd.gui.view.ca">Rodyti: (PO)</entry>
     <entry key="espd.gui.view.eo">Rodyti: (EVV)</entry>
     <entry key="espd.gui.yes">Taip</entry>
-    <entry key="espd.gui.zip.instructions">Tai ? trumpas EBVPD rinkmen?, kurias rasite ?iame ZIP aplanke,
-        apra?ymas.Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nespd.XML: XML rinkmena ? tai m?s? EBVPD paslaugoms arba kitoms
-        su EBVPD suderinamoms paslaugoms suprantama rinkmena. Naudojimosi e. EBVPD kaip XML rinkmenos prana?umas yra
-        tai, kad pirk?jai ir bendrov?s gal?s j? panaudoti kitoms proced?roms ateityje. Ji tur?t? b?ti siun?iama kartu su
-        vie??j? pirkim? dokumentais (organizacija bendrovei) arba kaip pasi?lymo dalis (bendrov?
-        organizacijai).Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nespd.PDF: PDF rinkmena ? tai ?mon?ms suprantama e. EBVPD
-        rinkmena. Taip pat si?lome naudoti j? kaip informacin? dokument? kartu su XML formatu teikiant vie??j? pirkim?
-        dokumentus (organizacija bendrovei) arba kaip pasi?lymo dal? (bendrov?
-        organizacijai).Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nJei turite klausim? apie rinkmenas, nedvejodami
-        susisiekite su mumis ?iuo e. pa?to adresu: grow-espd@ec.europa.eu.
-    </entry>
-
+    <entry key="espd.gui.zip.instructions">Tai – trumpas EBVPD rinkmenų, kurias rasite šiame ZIP aplanke, aprašymas.Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nespd.XML: XML rinkmena – tai mūsų EBVPD paslaugoms arba kitoms su EBVPD suderinamoms paslaugoms suprantama rinkmena. Naudojimosi e. EBVPD kaip XML rinkmenos pranašumas yra tai, kad pirkėjai ir bendrovės galės ją panaudoti kitoms procedūroms ateityje. Ji turėtų būti siunčiama kartu su viešųjų pirkimų dokumentais (organizacija bendrovei) arba kaip pasiūlymo dalis (bendrovė organizacijai).Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nespd.PDF: PDF rinkmena – tai žmonėms suprantama e. EBVPD rinkmena. Taip pat siūlome naudoti  ją kaip informacinį dokumentą kartu su XML formatu teikiant viešųjų pirkimų dokumentus (organizacija bendrovei) arba kaip pasiūlymo dalį (bendrovė organizacijai).Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nJei turite klausimų apie rinkmenas, nedvejodami susisiekite su mumis šiuo e. pašto adresu: grow-espd@ec.europa.eu.</entry>
 </properties>

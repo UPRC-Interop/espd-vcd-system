@@ -5,992 +5,404 @@ Wenn die Datei als Properties gezogen wird, wird ein DocType zur Laufzeit einget
 -->
 <properties>
     <entry key="espd.gui.about">Dwar</entry>
-    <entry key="espd.part4.all.selection.switch">?: Indikazzjoni globali g?all-kriterji tal-g?a?la kollha</entry>
-    <entry key="espd.gui.app.environment">G?a?i? utent, b?alissa qed tu?a l-ambjent tat-ittestjar tag?na. Jekk jog??bok
-        u?a
-    </entry>
-    <entry key="espd.gui.app.subtitle">Servizz g?all-mili u l-u?u mill-?did tad-DEUA</entry>
-    <entry key="espd.gui.app.title">Dokument Ewropew Uniku g?all-Akkwist (DEUA)</entry>
-    <entry key="espd.gui.back.to.main">Lura lejn il-pa?na ewlenija</entry>
-    <entry key="espd.gui.cancel">Ikkan?ella</entry>
+    <entry key="espd.part4.all.selection.switch">ɑ: Indikazzjoni globali għall-kriterji tal-għażla kollha</entry>
+    <entry key="espd.gui.app.environment">Għażiż utent, bħalissa qed tuża l-ambjent tat-ittestjar tagħna. Jekk jogħġbok uża</entry>
+    <entry key="espd.gui.app.subtitle">Servizz għall-mili u l-użu mill-ġdid tad-DEUA</entry>
+    <entry key="espd.gui.app.title">Dokument Ewropew Uniku għall-Akkwist (DEUA)</entry>
+    <entry key="espd.gui.back.to.main">Lura lejn il-paġna ewlenija</entry>
+    <entry key="espd.gui.cancel">Ikkanċella</entry>
     <entry key="espd.gui.click.here">ikklikkja hawn</entry>
     <entry key="espd.gui.contact">Kuntatt</entry>
     <entry key="espd.gui.contact.header">Kuntatt</entry>
-    <entry key="espd.gui.contact.info">&lt;p&gt;Kummissjoni Ewropea&lt;p&gt;Direttorat ?enerali g?as-Suq Intern, l-Industrija,
-        l-Intraprenditorija u l-SMEs&lt;p&gt;Avenue d'Auderghem 45 / Oudergemselaan 45&lt;p&gt;B-1049 Brussell&lt;p&gt;Bel?ju
-    </entry>
+    <entry key="espd.gui.contact.info">Kummissjoni Ewropea Direttorat Ġenerali għas-Suq Intern, l-Industrija, l-Intraprenditorija u l-SMEs Avenue d'Auderghem 45 / Oudergemselaan 45 B-1049 Brussell Belġju</entry>
     <entry key="espd.gui.cookies">Cookies</entry>
-    <entry key="espd.gui.correct.errors">Je?tie? li tikkore?i l-i?balji qabel ma tkun tista' tkompli.</entry>
+    <entry key="espd.gui.correct.errors">Jeħtieġ li tikkoreġi l-iżbalji qabel ma tkun tista' tkompli.</entry>
     <entry key="espd.part1.city">Belt:</entry>
     <entry key="espd.part1.confirm.email">Ikkonferma l-email:</entry>
     <entry key="espd.part1.confirm.telephone">Ikkonferma t-telefown:</entry>
     <entry key="espd.part1.contact.details.ca">Identità tal-akkwirent</entry>
-    <entry key="espd.part1.contact.person">Persuna ta? Kuntatt:</entry>
-    <entry key="espd.part1.correct.errors">Je?tie? li tikkore?i l-i?balji qabel ma tkun tista' tkompli.</entry>
-    <entry key="espd.part1.country">Pajji?:</entry>
+    <entry key="espd.part1.contact.person">Persuna ta’ Kuntatt:</entry>
+    <entry key="espd.part1.correct.errors">Jeħtieġ li tikkoreġi l-iżbalji qabel ma tkun tista' tkompli.</entry>
+    <entry key="espd.part1.country">Pajjiż:</entry>
     <entry key="espd.part1.email">Email:</entry>
     <entry key="espd.part1.fax">faks</entry>
-    <entry key="espd.part1.file.ref.ca">Numru tar-referenza tal-fajl mog?ti mill-awtorità kontraenti jew entità
-        kontraenti (jekk applikabbli):
-    </entry>
-    <entry key="espd.part1.header">Parti I: Informazzjoni dwar il-pro?edura ta? akkwist u l-awtorità kontraenti jew
-        l-entità kontraenti
-    </entry>
-    <entry key="espd.part1.info.procedure">pro?edura</entry>
-    <entry key="espd.part1.info.procurement.proc">Informazzjoni dwar il-pro?edura ta? akkwist</entry>
+    <entry key="espd.part1.file.ref.ca">Numru tar-referenza tal-fajl mogħti mill-awtorità kontraenti jew entità kontraenti (jekk applikabbli):</entry>
+    <entry key="espd.part1.header">Parti I: Informazzjoni dwar il-proċedura ta’ akkwist u l-awtorità kontraenti jew l-entità kontraenti</entry>
+    <entry key="espd.part1.info.procedure">proċedura</entry>
+    <entry key="espd.part1.info.procurement.proc">Informazzjoni dwar il-proċedura ta’ akkwist</entry>
     <entry key="espd.part1.info.pub">Informazzjoni dwar il-pubblikazzjoni</entry>
-    <entry key="espd.part1.name">Isem uffi?jali:</entry>
-    <entry key="espd.part1.nat.regnum">Numru tar-re?istrazzjoni nazzjonali (jekk tafu):</entry>
-    <entry key="espd.part1.official.journal.alert">Jekk ma jkunx hemm sej?a g?al kompetizzjoni fil-?urnal Uffi?jali
-        tal-Unjoni Ewropea jew jekk ma jkunx hemm il-?tie?a ta' pubblikazzjoni fih, l-awtorità kontraenti jew l-entità
-        kontraenti g?andhom jimlew l-informazzjoni li tippermetti li l-pro?edura ta' akkwist ti?i identifikata ming?ajr
-        ekwivoku (pere?empju referenza ta' pubblikazzjoni fil-livell nazzjonali)
-    </entry>
-    <entry key="espd.part1.ojs.label">In-numru tal-avvi? fil-?U S:</entry>
-    <entry key="espd.part1.ojs.url">URL ?U S</entry>
-    <entry key="espd.part1.postcode">Kodi?i postali:</entry>
+    <entry key="espd.part1.name">Isem uffiċjali:</entry>
+    <entry key="espd.part1.nat.regnum">Numru tar-reġistrazzjoni nazzjonali (jekk tafu):</entry>
+    <entry key="espd.part1.official.journal.alert">Jekk ma jkunx hemm sejħa għal kompetizzjoni fil-Ġurnal Uffiċjali tal-Unjoni Ewropea jew jekk ma jkunx hemm il-ħtieġa ta' pubblikazzjoni fih, l-awtorità kontraenti jew l-entità kontraenti għandhom jimlew l-informazzjoni li tippermetti li l-proċedura ta' akkwist tiġi identifikata mingħajr ekwivoku (pereżempju referenza ta' pubblikazzjoni fil-livell nazzjonali)</entry>
+    <entry key="espd.part1.ojs.label">In-numru tal-avviż fil-ĠU S:</entry>
+    <entry key="espd.part1.ojs.url">URL ĠU S</entry>
+    <entry key="espd.part1.postcode">Kodiċi postali:</entry>
     <entry key="espd.part1.procurer.name">Titlu:</entry>
     <entry key="espd.part1.street.and. num">Triq u numru:</entry>
-    <entry key="espd.part1.ted.reception.id">In-numru tal-avvi? li wasal</entry>
+    <entry key="espd.part1.ted.reception.id">In-numru tal-avviż li wasal</entry>
     <entry key="espd.part1.telephone">Telefown:</entry>
     <entry key="espd.part1.title.or.short.desc">Deskrizzjoni qasira:</entry>
-    <entry key="espd.part1.to.be.filled.alert">G?al pro?eduri ta? akkwist li fihom tkun ?iet ippubblikata sej?a g?al
-        kompetizzjoni f?Il-?urnal Uffi?jali tal-Unjoni Ewropea, l-informazzjoni me?tie?a skont il-Parti I se tin?ibed
-        awtomatikament, dment li s-servizz tad-DEUA elettroniku huwa u?at biex ji??enera u jimla d-DEUA. Referenza
-        tal-avvi? rilevanti ppubblikat f'Il-?urnal Uffi?jali tal-Unjoni Ewropea:
-    </entry>
+    <entry key="espd.part1.to.be.filled.alert">Għal proċeduri ta’ akkwist li fihom tkun ġiet ippubblikata sejħa għal kompetizzjoni f’Il-Ġurnal Uffiċjali tal-Unjoni Ewropea, l-informazzjoni meħtieġa skont il-Parti I se tinġibed awtomatikament, dment li s-servizz tad-DEUA elettroniku huwa użat biex jiġġenera u jimla d-DEUA. Referenza tal-avviż rilevanti ppubblikat f'Il-Ġurnal Uffiċjali tal-Unjoni Ewropea:</entry>
     <entry key="espd.part1.website">Sit web (jekk applikabbli):</entry>
-    <entry key="espd.part3.grounds.criminal.conv">Ra?unijiet Relatati ma? Kundanni Kriminali</entry>
-    <entry key="espd.part3.header">Parti III: Ra?unijiet g?all-esklu?joni</entry>
-    <entry key="espd.part3.insolvency.conflicts">Ra?unijiet relatati ma' insolvenza, kunflitti ta? interess jew im?iba
-        professjonali ?a?ina
-    </entry>
-    <entry key="espd.part5.concl.statements">Parti VI: Dikjarazzjonijiet ta? konklu?joni</entry>
-    <entry key="espd.part5.concl.statements.signature">Data, post u, meta rikjest jew me?tie?, firma/firem:</entry>
-    <entry key="espd.part5.concl.statements.text">Is-sottoskritti formalment jiddikjaraw li l-informazzjoni spe?ifikata
-        ta?t il-Partijiet II - V ta' hawn fuq hija pre?i?a u korretta u li ?iet stabbilita b?g?arfien s?i?
-        tal-konsegwenzi ta? dikjarazzjoni falza gravi.
-        &lt;p&gt;Is-sottoskritti jiddikjaraw formalment li jistg?u, fuq talba u ming?ajr dewmien, jipprovdu ?-?ertifikati u
-            forom o?ra ta? evidenza dokumentata msemmija, ?lief meta:
-        &lt;/p&gt;
-        &lt;p&gt;a) L-awtorità kontraenti jew l-entità kontraenti g?andha l-possibbiltà li tikseb id-dokumentazzjoni ta?
-            sostenn ikkon?ernata direttament permezz ta? a??ess g?al ba?i tad-dejta nazzjonali fi kwalunkwe Stat Membru
-            li jkun disponibbli ming?ajr ?las (bil-kundizzjoni li l-operatur ekonomiku jkun ipprovda l-informazzjoni
-            me?tie?a (indirizz web, l-awtorità jew korp emittenti, referenza pre?i?a tad-dokumentazzjoni) u dan
-            jippermetti lill-awtorità kontraenti jew lill-entità kontraenti biex jag?mlu dan. Meta jkun me?tie?, dan
-            g?andu jkun akkumpanjat mill-kunsens rilevanti g?al dan l-a??ess), jew
-        &lt;/p&gt;
-        &lt;p&gt;b) Sa mhux aktar tard mit-18 ta? April 2018 (skont l-implimentazzjoni nazzjonali tat-tieni subparagrafu
-            tal-Artikolu 59(5) tad-Direttiva 2014/24/UE, l-awtorità kontraenti jew l-entità kontraenti di?à jkollha
-            d-dokumentazzjoni kkon?ernata.
-        &lt;/p&gt;
-        &lt;p&gt;Is-sottoskritti formalment jag?tu l-kunsens tag?hom biex [identifika l-awtorità kontraenti jew l-entità
-            kontraenti kif stipulat fil-Parti I, it-Taqsima A], jinkiseb a??ess g?al dokumenti li jappo??jaw
-            l-informazzjoni, li ng?atat fi [identifika l-Parti/it-Taqsima/il-Punt(i) kkon?ernati] ta? dan id-Dokument
-            Ewropew Uniku g?all-Akkwist g?all-finijiet ta? [identifika l-pro?edura ta? akkwist: (deskrizzjoni qasira,
-            referenza tal-pubblikazzjoni f?Il-?urnal Uffi?jali tal-Unjoni Ewropea, numru ta? referenza)].
-        &lt;/p&gt;
-    </entry>
+    <entry key="espd.part3.grounds.criminal.conv">Raġunijiet Relatati ma’ Kundanni Kriminali</entry>
+    <entry key="espd.part3.header">Parti III: Raġunijiet għall-esklużjoni</entry>
+    <entry key="espd.part3.insolvency.conflicts">Raġunijiet relatati ma' insolvenza, kunflitti ta’ interess jew imġiba professjonali ħażina</entry>
+    <entry key="espd.part5.concl.statements">Parti VI: Dikjarazzjonijiet ta’ konklużjoni</entry>
+    <entry key="espd.part5.concl.statements.signature">Data, post u, meta rikjest jew meħtieġ, firma/firem:</entry>
+    <entry key="espd.part5.concl.statements.text">Is-sottoskritti formalment jiddikjaraw li l-informazzjoni speċifikata taħt il-Partijiet II - V ta' hawn fuq hija preċiża u korretta u li ġiet stabbilita b’għarfien sħiħ tal-konsegwenzi ta’ dikjarazzjoni falza gravi.  Is-sottoskritti jiddikjaraw formalment li jistgħu, fuq talba u mingħajr dewmien, jipprovdu ċ-ċertifikati u forom oħra ta’ evidenza dokumentata msemmija, ħlief meta: a) L-awtorità kontraenti jew l-entità kontraenti għandha l-possibbiltà li tikseb id-dokumentazzjoni ta’ sostenn ikkonċernata direttament permezz ta’ aċċess għal bażi tad-dejta nazzjonali fi kwalunkwe Stat Membru li jkun disponibbli mingħajr ħlas (bil-kundizzjoni li l-operatur ekonomiku jkun ipprovda l-informazzjoni meħtieġa (indirizz web, l-awtorità jew korp emittenti, referenza preċiża tad-dokumentazzjoni) u dan jippermetti lill-awtorità kontraenti jew lill-entità kontraenti biex jagħmlu dan. Meta jkun meħtieġ, dan għandu jkun akkumpanjat mill-kunsens rilevanti għal dan l-aċċess), jew  b) Sa mhux aktar tard mit-18 ta’ April 2018 (skont l-implimentazzjoni nazzjonali tat-tieni subparagrafu tal-Artikolu 59(5) tad-Direttiva 2014/24/UE, l-awtorità kontraenti jew l-entità kontraenti diġà jkollha d-dokumentazzjoni kkonċernata.  Is-sottoskritti formalment jagħtu l-kunsens tagħhom biex [identifika l-awtorità kontraenti jew l-entità kontraenti kif stipulat fil-Parti I, it-Taqsima A], jinkiseb aċċess għal dokumenti li jappoġġjaw l-informazzjoni, li ngħatat fi [identifika l-Parti/it-Taqsima/il-Punt(i) kkonċernati] ta’ dan id-Dokument Ewropew Uniku għall-Akkwist għall-finijiet ta’ [identifika l-proċedura ta’ akkwist: (deskrizzjoni qasira, referenza tal-pubblikazzjoni f’Il-Ġurnal Uffiċjali tal-Unjoni Ewropea, numru ta’ referenza)].</entry>
     <entry key="espd.part5.export">Esporta</entry>
-    <entry key="espd.part5.export.content">Issa tista? tikklikkja fuq 'Esporta' biex tni??el u tissejvja l-fajl DEUA fuq
-        il-kompjuter tieg?ek. L-awtoritajiet kontraenti g?andhom ji?guraw li dan il-fajl DEUA jkun disponibbli
-        g?all-operaturi ekonomi?i flimkien mad-dokumenti l-o?ra tal-offerta.
-    </entry>
+    <entry key="espd.part5.export.content">Issa tista’ tikklikkja fuq 'Esporta' biex tniżżel u tissejvja l-fajl DEUA fuq il-kompjuter tiegħek. L-awtoritajiet kontraenti għandhom jiżguraw li dan il-fajl DEUA jkun disponibbli għall-operaturi ekonomiċi flimkien mad-dokumenti l-oħra tal-offerta.</entry>
     <entry key="espd.part5.header">Tmiem</entry>
-    <entry key="espd.part5.reduction">Parti V: Tnaqqis fl-g?add ta? kandidati kwalifikati</entry>
+    <entry key="espd.part5.reduction">Parti V: Tnaqqis fl-għadd ta’ kandidati kwalifikati</entry>
     <entry key="espd.part5.reduction.question">L-operatur ekonomiku jiddikjara li:</entry>
-    <entry key="espd.part5.text.eo.declares.that">Jekk xi w?ud minn dawn i?-?ertifikati jew forom o?rajn ta' evidenza
-        dokumentata jkunu disponibbli elettronikament, indika g?al kull wie?ed:
-    </entry>
-    <entry key="espd.part5.title.eo.declares.that">Huwa jissodisfa l-kriterji o??ettivi u nondiskriminatorji jew regoli
-        li g?andhom ji?u applikati sabiex ji?i limitat l-g?add ta? kandidati bil-mod li ?ej:&lt;p&gt;F?ka? li ?erti
-            ?ertifikati jew forom o?ra ta? evidenza dokumentata huma me?tie?a, jekk jog??bok indika g?al kull wie?ed
-            jekk l-operatur ekonomiku g?andux id-dokumenti me?tie?a:
-        &lt;/p&gt;
-    </entry>
-    <entry key="espd.part5.toptext">L-operatur ekonomiku g?andu jipprovdi informazzjoni biss meta l-awtorità kontraenti
-        jew entità kontraenti tkun spe?ifikat l-objettiv u l-kriterji nondiskriminatorji jew ir-regoli li g?andhom ji?u
-        applikati sabiex jillimitaw l-g?add ta' kandidati li se jkunu mistiedna jibag?tu l-offerta jew iwettqu djalogu.
-        G?andha ti?i prodotta din l-informazzjoni, li tista' tkun akkumpanjata bir-rekwi?iti li jikkon?ernaw
-        i?-?ertifikati (it-tipi tag?hom) jew forom ta' evidenza dokumentata, jekk ikun hemm, u li hija stabbilita
-        fl-avvi? rilevanti jew fid-dokumenti g?all-akkwist msemmija fl-avvi?. G?al pro?eduri ristretti, pro?eduri
-        kompetittivi permezz tan-negozjar, pro?eduri ta? djalogu kompetittiv u s?ubijiet g?all-innovazzjoni biss:
-    </entry>
-    <entry key="espd.part4.alert">L-awtoritajiet kontraenti g?andhom jindikaw liema kriterji tal-g?a?la se ji?u
-        applikati billi 'jimmarkaw' il-kaxxa li hemm quddiem il-kriterju rilevanti.
-    </entry>
-    <entry key="espd.part4.economic.and.financial.standing">B: Po?izzjoni ekonomika u finanzjarja</entry>
-    <entry key="espd.part4.header">Parti IV: Kriterji tal-g?a?la</entry>
-    <entry key="espd.part4.quality.assurance">D: Skemi ta? garanzija tal-kwalità u standards ta? ?estjoni ambjentali
-    </entry>
+    <entry key="espd.part5.text.eo.declares.that">Jekk xi wħud minn dawn iċ-ċertifikati jew forom oħrajn ta' evidenza dokumentata jkunu disponibbli elettronikament, indika għal kull wieħed:</entry>
+    <entry key="espd.part5.title.eo.declares.that">Huwa jissodisfa l-kriterji oġġettivi u nondiskriminatorji jew regoli li għandhom jiġu applikati sabiex jiġi limitat l-għadd ta’ kandidati bil-mod li ġej:  F’każ li ċerti ċertifikati jew forom oħra ta’ evidenza dokumentata huma meħtieġa, jekk jogħġbok indika għal kull wieħed jekk l-operatur ekonomiku għandux id-dokumenti meħtieġa:</entry>
+    <entry key="espd.part5.toptext">L-operatur ekonomiku għandu jipprovdi informazzjoni biss meta l-awtorità kontraenti jew entità kontraenti tkun speċifikat l-objettiv u l-kriterji nondiskriminatorji jew ir-regoli li għandhom jiġu applikati sabiex jillimitaw l-għadd ta' kandidati li se jkunu mistiedna jibagħtu l-offerta jew iwettqu djalogu. Għandha tiġi prodotta din l-informazzjoni, li tista' tkun akkumpanjata bir-rekwiżiti li jikkonċernaw iċ-ċertifikati (it-tipi tagħhom) jew forom ta' evidenza dokumentata, jekk ikun hemm, u li hija stabbilita fl-avviż rilevanti jew fid-dokumenti għall-akkwist msemmija fl-avviż. Għal proċeduri ristretti, proċeduri kompetittivi permezz tan-negozjar, proċeduri ta’ djalogu kompetittiv u sħubijiet għall-innovazzjoni biss:</entry>
+    <entry key="espd.part4.alert">L-awtoritajiet kontraenti għandhom jindikaw liema kriterji tal-għażla se jiġu applikati billi 'jimmarkaw' il-kaxxa li hemm quddiem il-kriterju rilevanti.</entry>
+    <entry key="espd.part4.economic.and.financial.standing">B: Pożizzjoni ekonomika u finanzjarja</entry>
+    <entry key="espd.part4.header">Parti IV: Kriterji tal-għażla</entry>
+    <entry key="espd.part4.quality.assurance">D: Skemi ta’ garanzija tal-kwalità u standards ta’ ġestjoni ambjentali</entry>
     <entry key="espd.part4.suitability">A: Adegwatezza</entry>
-    <entry key="espd.part4.technical.professional.ability">C: Kapa?ità teknika u professjonali</entry>
-    <entry key="espd.part2.add.complete.missing">Minbarra dan, jekk jog??bok imla l-informazzjoni nieqsa fil-Parti IV,
-        Taqsimiet A, B, C jew D skont il-ka? BISS jekk dan huwa me?tie? fl-avvi? rilevanti jew fid-dokumenti
-        g?all-akkwist
-    </entry>
-    <entry key="espd.part2.all.selection.covered">d) Ir-re?istrazzjoni jew i?-?ertifikazzjoni tkopri l-kriterji
-        tal-g?a?la kollha me?tie?a?
-    </entry>
-    <entry key="espd.part2.another.vat">Jekk l-ebda numru tal-VAT mhu applikabbli, jekk jog??bok indika numru ta'
-        identifikazzjoni nazzjonali ie?or, jekk me?tie? u applikabbli
-    </entry>
-    <entry key="espd.part2.answer.following.parts">Jekk jog??bok wie?eb il-partijiet li jifdal ta' din it-Taqsima,
-        it-Taqsima B u, fejn rilevanti, it-Taqsima C ta' din il-Parti, imla l-Parti V, fejn applikabbli, u, f'kull ka?,
-        imla u ffirma l-Parti VI.
-    </entry>
+    <entry key="espd.part4.technical.professional.ability">C: Kapaċità teknika u professjonali</entry>
+    <entry key="espd.part2.add.complete.missing">Minbarra dan, jekk jogħġbok imla l-informazzjoni nieqsa fil-Parti IV, Taqsimiet A, B, C jew D skont il-każ BISS jekk dan huwa meħtieġ fl-avviż rilevanti jew fid-dokumenti għall-akkwist</entry>
+    <entry key="espd.part2.all.selection.covered">d) Ir-reġistrazzjoni jew iċ-ċertifikazzjoni tkopri l-kriterji tal-għażla kollha meħtieġa?</entry>
+    <entry key="espd.part2.another.vat">Jekk l-ebda numru tal-VAT mhu applikabbli, jekk jogħġbok indika numru ta' identifikazzjoni nazzjonali ieħor, jekk meħtieġ u applikabbli</entry>
+    <entry key="espd.part2.answer.following.parts">Jekk jogħġbok wieġeb il-partijiet li jifdal ta' din it-Taqsima, it-Taqsima B u, fejn rilevanti, it-Taqsima C ta' din il-Parti, imla l-Parti V, fejn applikabbli, u, f'kull każ, imla u ffirma l-Parti VI.</entry>
     <entry key="espd.part2.birth.date">Data tat-twelid</entry>
     <entry key="espd.part2.birth.place">Post tat-twelid</entry>
-    <entry key="espd.part2.cert.e.avaliable">b) Jekk i?-?ertifikat ta' re?istrazzjoni jew ?ertifikazzjoni jkun
-        disponibbli elettronikament, jekk jog??bok iddikjara:
-    </entry>
+    <entry key="espd.part2.cert.e.avaliable">b) Jekk iċ-ċertifikat ta' reġistrazzjoni jew ċertifikazzjoni jkun disponibbli elettronikament, jekk jogħġbok iddikjara:</entry>
     <entry key="espd.part2.contact.person">Persuna jew persuni ta' kuntatt:</entry>
-    <entry key="espd.part2.detinfo.of.represent">Jekk me?tie?, jekk jog??bok ipprovdi informazzjoni dettaljata dwar
-        ir-rappre?entazzjoni (forma tag?ha, il-portata, l-g?an ?):
-    </entry>
-    <entry key="espd.part2.disworkers.details">Jekk me?tie?, jekk jog??bok spe?ifika g?al-liema kategorija jew
-        kategoriji ta? ?addiema b?di?abilità jew ?vanta??ati l-impjegati kkon?ernati jappartjenu?
-    </entry>
-    <entry key="espd.part2.doc.e.avaliable">Jekk id-dokumentazzjoni rilevanti hija disponibbli elettronikament, indika
-        jekk jog??bok:
-    </entry>
+    <entry key="espd.part2.detinfo.of.represent">Jekk meħtieġ, jekk jogħġbok ipprovdi informazzjoni dettaljata dwar ir-rappreżentazzjoni (forma tagħha, il-portata, l-għan …):</entry>
+    <entry key="espd.part2.disworkers.details">Jekk meħtieġ, jekk jogħġbok speċifika għal-liema kategorija jew kategoriji ta’ ħaddiema b’diżabilità jew żvantaġġati l-impjegati kkonċernati jappartjenu?</entry>
+    <entry key="espd.part2.doc.e.avaliable">Jekk id-dokumentazzjoni rilevanti hija disponibbli elettronikament, indika jekk jogħġbok:</entry>
     <entry key="espd.part2.email">Email:</entry>
-    <entry key="espd.part2.ensure.others.espd">Jekk jog??bok ?gura li l-o?rajn ikkon?ernati jipprovdu formola tad-DEUA
-        separata.
-    </entry>
-    <entry key="espd.part2.eo.approved.cert">Jekk applikabbli, l-operatur ekonomiku huwa rre?istrat fuq lista uffi?jali
-        ta' operaturi ekonomi?i approvati jew g?andu ?ertifikat ekwivalenti (pere?. ta?t sistema ta'
-        (pre)kwalifikazzjoni nazzjonali)?
-    </entry>
-    <entry key="espd.part2.eo.group.role">a) Jekk jog??bok indika r-rwol tal-operatur ekonomiku fil-grupp (kap,
-        responsabbli g?al kompiti spe?ifi?i ...):
-    </entry>
-    <entry key="espd.part2.eo.has.cert.soc">e) L-operatur ekonomiku se jkun jista' jipprovdi ?ertifikat fir-rigward
-        tal-?las g?all-kontribuzzjonijiet tas-sigurtà so?jali u t-taxxi jew jipprovdi informazzjoni li tippermetti
-        lill-awtorità kontraenti jew l-entità kontraenti tiksibha direttament billi ja??essa l-ba?i ta' dejta nazzjonali
-        fi kwalunkwe Stat Membru li jkun disponibbli bla ?las?
-    </entry>
-    <entry key="espd.part2.eo.rely.other.entities">L-operatur ekonomiku jiddependi mill-kapa?itajiet ta? entitajiet o?ra
-        sabiex jissodisfa l-kriterji tal-g?a?la stipulati fil-Parti IV u l-kriterji u r-regoli (jekk ikun hemm)
-        stipulati fil-Parti V ta' hawn ta?t?
-    </entry>
+    <entry key="espd.part2.ensure.others.espd">Jekk jogħġbok żgura li l-oħrajn ikkonċernati jipprovdu formola tad-DEUA separata.</entry>
+    <entry key="espd.part2.eo.approved.cert">Jekk applikabbli, l-operatur ekonomiku huwa rreġistrat fuq lista uffiċjali ta' operaturi ekonomiċi approvati jew għandu ċertifikat ekwivalenti (pereż. taħt sistema ta' (pre)kwalifikazzjoni nazzjonali)?</entry>
+    <entry key="espd.part2.eo.group.role">a) Jekk jogħġbok indika r-rwol tal-operatur ekonomiku fil-grupp (kap, responsabbli għal kompiti speċifiċi ...):</entry>
+    <entry key="espd.part2.eo.has.cert.soc">e) L-operatur ekonomiku se jkun jista' jipprovdi ċertifikat fir-rigward tal-ħlas għall-kontribuzzjonijiet tas-sigurtà soċjali u t-taxxi jew jipprovdi informazzjoni li tippermetti lill-awtorità kontraenti jew l-entità kontraenti tiksibha direttament billi jaċċessa l-bażi ta' dejta nazzjonali fi kwalunkwe Stat Membru li jkun disponibbli bla ħlas?</entry>
+    <entry key="espd.part2.eo.rely.other.entities">L-operatur ekonomiku jiddependi mill-kapaċitajiet ta’ entitajiet oħra sabiex jissodisfa l-kriterji tal-għażla stipulati fil-Parti IV u l-kriterji u r-regoli (jekk ikun hemm) stipulati fil-Parti V ta' hawn taħt?</entry>
     <entry key="espd.part2.first.name">Isem</entry>
     <entry key="espd.part2.header">Parti II: Informazzjoni li tirrigwarda lill-operatur ekonomiku</entry>
-    <entry key="espd.part2.if.proc.reserved">F'ka? biss li l-akkwist ikun ri?ervat: l-operatur ekonomiku huwa workshop
-        protett, Chr(34)negozju so?jaliChr(34) jew se jipprovdi g?at-twettiq tal-kuntratt fil-kuntest ta' programmi ta'
-        impjieg protetti?
-    </entry>
+    <entry key="espd.part2.if.proc.reserved">F'każ biss li l-akkwist ikun riżervat: l-operatur ekonomiku huwa workshop protett, Chr(34)negozju soċjaliChr(34) jew se jipprovdi għat-twettiq tal-kuntratt fil-kuntest ta' programmi ta' impjieg protetti?</entry>
     <entry key="espd.part2.info.eo">A: Informazzjoni dwar l-operatur ekonomiku</entry>
-    <entry key="espd.part2.info.reliance">C: Informazzjoni dwar id-dipendenza mill-kapa?itajiet ta' entitajiet o?ra
-    </entry>
-    <entry key="espd.part2.info.respresent">B: Informazzjoni dwar ir-rappre?entanti tal-operatur ekonomiku</entry>
-    <entry key="espd.part2.information.subcontractors">D: Informazzjoni li tikkon?erna s-sottokuntratturi li
-        mill-kapa?ità tag?hom l-operatur ekonomiku ma jiddependix
-    </entry>
-    <entry key="espd.part2.information.subcontractors.description">Jekk iva u sa fejn hu mag?ruf, jekk jog??bok elenka
-        s-sottokuntratturi proposti:
-    </entry>
-    <entry key="espd.part2.information.subcontractors.footer">Jekk l-awtorità kontraenti jew l-entità kontraenti b?mod
-        espli?itu titlob din l-informazzjoni flimkien mal-informazzjoni ta?t il-Parti I, jekk jog??bok ipprovdi
-        l-informazzjoni me?tie?a fit-Taqsimiet A u B ta? din il-Parti u Parti III g?al kull wie?ed mis-sottokuntratturi
-        kkon?ernati (jew kull wa?da mill-kategoriji tag?hom).
-    </entry>
-    <entry key="espd.part2.information.subcontractors.header">(Din it-taqsima g?andha timtela biss jekk din
-        l-informazzjoni tkun espli?itament me?tie?a mill-awtorità kontraenti jew entità kontraenti.)
-    </entry>
-    <entry key="espd.part2.information.subcontractors.title">L-operatur ekonomiku be?siebu jissottokuntratta xi parti
-        mill-kuntratt lil partijiet terzi?
-    </entry>
+    <entry key="espd.part2.info.reliance">C: Informazzjoni dwar id-dipendenza mill-kapaċitajiet ta' entitajiet oħra</entry>
+    <entry key="espd.part2.info.respresent">B: Informazzjoni dwar ir-rappreżentanti tal-operatur ekonomiku</entry>
+    <entry key="espd.part2.information.subcontractors">D: Informazzjoni li tikkonċerna s-sottokuntratturi li mill-kapaċità tagħhom l-operatur ekonomiku ma jiddependix</entry>
+    <entry key="espd.part2.information.subcontractors.description">Jekk iva u sa fejn hu magħruf, jekk jogħġbok elenka s-sottokuntratturi proposti:</entry>
+    <entry key="espd.part2.information.subcontractors.footer">Jekk l-awtorità kontraenti jew l-entità kontraenti b’mod espliċitu titlob din l-informazzjoni flimkien mal-informazzjoni taħt il-Parti I, jekk jogħġbok ipprovdi l-informazzjoni meħtieġa fit-Taqsimiet A u B ta’ din il-Parti u Parti III għal kull wieħed mis-sottokuntratturi kkonċernati (jew kull waħda mill-kategoriji tagħhom).</entry>
+    <entry key="espd.part2.information.subcontractors.header">(Din it-taqsima għandha timtela biss jekk din l-informazzjoni tkun espliċitament meħtieġa mill-awtorità kontraenti jew entità kontraenti.)</entry>
+    <entry key="espd.part2.information.subcontractors.title">L-operatur ekonomiku beħsiebu jissottokuntratta xi parti mill-kuntratt lil partijiet terzi?</entry>
     <entry key="espd.part2.internet.addr.if.exists">Indirizz tal-internet (indirizz web) (jekk applikabbli):</entry>
-    <entry key="espd.part2.is.eo.proc.together">L-operatur ekonomiku qieg?ed jipparte?ipa fil-pro?edura ta' akkwist
-        flimkien ma' o?rajn?
-    </entry>
-    <entry key="espd.part2.is.eo.sized">L-operatur ekonomiku huwa Mikrointrapri?a, Intrapri?a ?g?ira jew Intrapri?a
-        Medja?
-    </entry>
-    <entry key="espd.part2.is.eo.sized.tooltip">Ara r-Rakkomandazzjoni tal-Kummissjoni tas-6 ta? Mejju 2003 dwar
-        id-definizzjoni ta? mikrointrapri?i, intrapri?i ?g?ar u intrapri?i medji (?U L 124, 20.5.2003, p. 36). Din
-        l-informazzjoni hija me?tie?a g?al finijiet statisti?i biss. Mikrointrapri?i: intrapri?a li timpjega inqas minn
-        10 persuni u li l-fatturat annwali tag?ha u/jew it-total tal-karta bilan?jali annwali tag?ha ma jkunx jaqbe?
-        i?-EUR 2 miljun. Intrapri?i ?g?ar: intrapri?a li timpjega inqas minn 50 persuni u li l-fatturat annwali tag?ha
-        u/jew it-total tal-karta bilan?jali annwali tag?ha ma jkunx jaqbe? l-EUR 10 miljun; Intrapri?i medji, intrapri?i
-        li la huma mikrointrapri?i u lanqas intrapri?i ?g?ar u li jimpjegaw inqas minn 250 persuna u li g?andhom
-        fatturat annwali li ma jaqbi?x il-EUR 50 miljun, u/jew total tal-karta bilan?jali annwali li ma jaqbi?x it-EUR
-        43 miljun
-    </entry>
+    <entry key="espd.part2.is.eo.proc.together">L-operatur ekonomiku qiegħed jipparteċipa fil-proċedura ta' akkwist flimkien ma' oħrajn?</entry>
+    <entry key="espd.part2.is.eo.sized">L-operatur ekonomiku huwa Mikrointrapriża, Intrapriża Żgħira jew Intrapriża Medja?</entry>
+    <entry key="espd.part2.is.eo.sized.tooltip">Ara r-Rakkomandazzjoni tal-Kummissjoni tas-6 ta’ Mejju 2003 dwar id-definizzjoni ta’ mikrointrapriżi, intrapriżi żgħar u intrapriżi medji (ĠU L 124, 20.5.2003, p. 36). Din l-informazzjoni hija meħtieġa għal finijiet statistiċi biss. Mikrointrapriżi: intrapriża li timpjega inqas minn 10 persuni u li l-fatturat annwali tagħha u/jew it-total tal-karta bilanċjali annwali tagħha ma jkunx jaqbeż iż-EUR 2 miljun. Intrapriżi żgħar: intrapriża li timpjega inqas minn 50 persuni u li l-fatturat annwali tagħha u/jew it-total tal-karta bilanċjali annwali tagħha ma jkunx jaqbeż l-EUR 10 miljun; Intrapriżi medji, intrapriżi li la huma mikrointrapriżi u lanqas intrapriżi żgħar u li jimpjegaw inqas minn 250 persuna u li għandhom fatturat annwali li ma jaqbiżx il-EUR 50 miljun, u/jew total tal-karta bilanċjali annwali li ma jaqbiżx it-EUR 43 miljun</entry>
     <entry key="espd.part2.last.name">Kunjom</entry>
-    <entry key="espd.part2.lots.concerned">Fejn applikabbli, indika l-lott(ijiet) li g?alih(om) l-operatur ekonomiku
-        jixtieq jag?mel offerta:
-    </entry>
+    <entry key="espd.part2.lots.concerned">Fejn applikabbli, indika l-lott(ijiet) li għalih(om) l-operatur ekonomiku jixtieq jagħmel offerta:</entry>
     <entry key="espd.part2.name">Isem:</entry>
-    <entry key="espd.part2.name.part.group">c) Fejn applikabbli, isem il-grupp li qed jipparte?ipa:</entry>
-    <entry key="espd.part2.other.eo.part">b) Jekk jog??bok identifika lill-operaturi ekonomi?i o?ra li qed jipparte?ipaw
-        fil-pro?edura ta' akkwist flimkien:
-    </entry>
-    <entry key="espd.part2.percentage.disworkers">X'inhu l-persenta?? korrispondenti ta' ?addiema ?vanta??ati jew
-        b'di?abilità?
-    </entry>
-    <entry key="espd.part2.person.empowered">Fejn applikabbli, jekk jog??bok indika l-isem/ismijiet u l-indirizz(i)
-        tal-persuna/i bis-setg?a li jirrappre?entaw lill-operatur ekonomiku g?all-finijiet ta? din il-pro?edura ta?
-        akkwist:
-    </entry>
-    <entry key="espd.part2.pos.act.in.capacity">Il-po?izzjoni/Qed ta?ixxi fil-kapa?ità ta?:</entry>
+    <entry key="espd.part2.name.part.group">c) Fejn applikabbli, isem il-grupp li qed jipparteċipa:</entry>
+    <entry key="espd.part2.other.eo.part">b) Jekk jogħġbok identifika lill-operaturi ekonomiċi oħra li qed jipparteċipaw fil-proċedura ta' akkwist flimkien:</entry>
+    <entry key="espd.part2.percentage.disworkers">X'inhu l-persentaġġ korrispondenti ta' ħaddiema żvantaġġati jew b'diżabilità?</entry>
+    <entry key="espd.part2.person.empowered">Fejn applikabbli, jekk jogħġbok indika l-isem/ismijiet u l-indirizz(i) tal-persuna/i bis-setgħa li jirrappreżentaw lill-operatur ekonomiku għall-finijiet ta’ din il-proċedura ta’ akkwist:</entry>
+    <entry key="espd.part2.pos.act.in.capacity">Il-pożizzjoni/Qed taġixxi fil-kapaċità ta’:</entry>
     <entry key="espd.part2.postal.adress">Indirizz postali:</entry>
-    <entry key="espd.part2.provide.regnumber">a) Jekk jog??bok ag?ti n-numru ta? re?istrazzjoni jew ?ertifikazzjoni
-        rilevanti, jekk applikabbli:
-    </entry>
-    <entry key="espd.part2.ref.for.cert">c) Jekk jog??bok iddikjara r-referenzi li r-re?istrazzjoni jew
-        i?-?ertifikazzjoni hija bba?ata fuqhom, u, fejn applikabbli, il-klassifikazzjoni miksuba fil-lista uffi?jali:
-    </entry>
-    <entry key="espd.part2.separate.espd.sections.a.b">Jekk jog??bok ipprovdi formola separata tad-DEUA li tag?ti
-        l-informazzjoni me?tie?a fit-Taqsimiet A u B ta? din il-Parti u l-Parti III g?al kull wa?da mill-entitajiet
-        ikkon?ernati, mimlija b'mod xieraq u ffirmati mill-entitajiet ikkon?ernati.
-        <p/>
-        Jekk jog??bok innota li dan g?andu jinkludi wkoll kwalunkwe tekniku jew korpi tekni?i li ma jappartjenux
-        direttament lill-intrapri?a tal-operatur ekonomiku, spe?jalment dawk responsabbli g?all-kontroll ta? kwalità u,
-        fil-ka? ta? kuntratti ta? xog?lijiet pubbli?i, tekni?i jew korpi tekni?i li l-kuntrattur jista? jsejja? sabiex
-        iwettqu x-xog?ol.<p/>Safejn ikun rilevanti g?all-kapa?ità jew il-kapa?itajiet spe?ifi?i li minnhom l-operatur
-        ekonomiku jiddependi, jekk jog??bok inkludi l-informazzjoni ta?t il-Partijiet IV u V g?al kull wa?da
-        mill-entitajiet ikkon?ernati.
-    </entry>
+    <entry key="espd.part2.provide.regnumber">a) Jekk jogħġbok agħti n-numru ta’ reġistrazzjoni jew ċertifikazzjoni rilevanti, jekk applikabbli:</entry>
+    <entry key="espd.part2.ref.for.cert">c) Jekk jogħġbok iddikjara r-referenzi li r-reġistrazzjoni jew iċ-ċertifikazzjoni hija bbażata fuqhom, u, fejn applikabbli, il-klassifikazzjoni miksuba fil-lista uffiċjali:</entry>
+    <entry key="espd.part2.separate.espd.sections.a.b">Jekk jogħġbok ipprovdi formola separata tad-DEUA li tagħti l-informazzjoni meħtieġa fit-Taqsimiet A u B ta’ din il-Parti u l-Parti III għal kull waħda mill-entitajiet ikkonċernati, mimlija b'mod xieraq u ffirmati mill-entitajiet ikkonċernati.<p/> Jekk jogħġbok innota li dan għandu jinkludi wkoll kwalunkwe tekniku jew korpi tekniċi li ma jappartjenux direttament lill-intrapriża tal-operatur ekonomiku, speċjalment dawk responsabbli għall-kontroll ta’ kwalità u, fil-każ ta’ kuntratti ta’ xogħlijiet pubbliċi, tekniċi jew korpi tekniċi li l-kuntrattur jista’ jsejjaħ sabiex iwettqu x-xogħol.<p/>Safejn ikun rilevanti għall-kapaċità jew il-kapaċitajiet speċifiċi li minnhom l-operatur ekonomiku jiddependi, jekk jogħġbok inkludi l-informazzjoni taħt il-Partijiet IV u V għal kull waħda mill-entitajiet ikkonċernati.</entry>
     <entry key="espd.part2.telephone">Telefown:</entry>
     <entry key="espd.part2.vat">Numru tal-VAT, jekk applikabbli:</entry>
-    <entry key="espd.part2sel.alert">L-operatur ekonomiku g?andu jipprovdi informazzjoni biss meta l-kriterji tal-g?a?la
-        kkon?ernati jkunu me?tie?a mill-awtorità kontraenti jew entità kontraenti fl-avvi? rilevanti jew fid-dokumenti
-        g?all-akkwist msemmija fl-avvi?.
-    </entry>
+    <entry key="espd.part2sel.alert">L-operatur ekonomiku għandu jipprovdi informazzjoni biss meta l-kriterji tal-għażla kkonċernati jkunu meħtieġa mill-awtorità kontraenti jew entità kontraenti fl-avviż rilevanti jew fid-dokumenti għall-akkwist msemmija fl-avviż.</entry>
     <entry key="espd.crit.amount">Ammont</entry>
-    <entry key="espd.crit.amount.concerned">Ammont ikkon?ernat</entry>
+    <entry key="espd.crit.amount.concerned">Ammont ikkonċernat</entry>
     <entry key="espd.crit.average.turnover">Fatturat medju</entry>
-    <entry key="espd.crit.code">Kodi?i</entry>
-    <entry key="espd.crit.country.member.state">Pajji? jew Stat Membru kkon?ernat</entry>
+    <entry key="espd.crit.code">Kodiċi</entry>
+    <entry key="espd.crit.country.member.state">Pajjiż jew Stat Membru kkonċernat</entry>
     <entry key="espd.crit.date">Data</entry>
     <entry key="espd.crit.date.of.conviction">Data tal-kundanna</entry>
-    <entry key="espd.part3.crit.date.of.conviction.or.decision">Jekk jog??bok indika d-data tal-kundanna jew de?i?joni
-    </entry>
-    <entry key="espd.crit.decision.final.and.binding">Jekk dan il-ksur ta' obbligi ?ie stabbilit permezz ta? de?i?joni
-        ?udizzjarja jew amministrattiva, kienet din id-de?i?joni finali u vinkolanti?
-    </entry>
+    <entry key="espd.part3.crit.date.of.conviction.or.decision">Jekk jogħġbok indika d-data tal-kundanna jew deċiżjoni</entry>
+    <entry key="espd.crit.decision.final.and.binding">Jekk dan il-ksur ta' obbligi ġie stabbilit permezz ta’ deċiżjoni ġudizzjarja jew amministrattiva, kienet din id-deċiżjoni finali u vinkolanti?</entry>
     <entry key="espd.crit.description">Deskrizzjoni</entry>
     <entry key="espd.crit.do.you.allow.checks">Inti tippermetti kontolli?</entry>
     <entry key="espd.crit.end.date">Data tat-tmiem</entry>
-    <entry key="espd.part3.crit.eu.main.breaching.obligations">L-Artikolu 57(4) tad-Direttiva 2014/24/UE jistabbilixxi
-        r-ra?unijiet li ?ejjin g?all-esklu?joni
-    </entry>
-    <entry key="espd.part3.crit.eu.eo.main.breaching.obligations">L-Artikolu 57(4) tad-Direttiva 2014/24/UE
-        jistabbilixxi r-ra?unijiet li ?ejjin g?all-esklu?joni
-    </entry>
-    <entry key="espd.part3.crit.eu.main.purely.national">Ir-ra?unijiet purament nazzjonali g?all-esklu?joni, li jkunu
-        spe?ifikati fl-avvi? rilevanti jew fid-dokumenti g?all-akkwist, japplikaw?
-    </entry>
-    <entry key="espd.part3.crit.eu.grounds.criminal.conv.main.title">L-Artikolu 57(1) tad-Direttiva 2014/24/UE
-        jistabbilixxi r-ra?unijiet li ?ejjin g?all-esklu?joni
-    </entry>
-    <entry key="espd.part3.crit.eu.eo.grounds.criminal.conv.main.title">L-Artikolu 57(1) tad-Direttiva 2014/24/UE
-        jistabbilixxi r-ra?unijiet li ?ejjin g?all-esklu?joni
-    </entry>
-    <entry key="espd.part3.crit.eu.payment.taxes.main.title">L-Artikolu 57(2) tad-Direttiva 2014/24/UE jistabbilixxi
-        r-ra?unijiet li ?ejjin g?all-esklu?joni
-    </entry>
-    <entry key="espd.part3.crit.eu.eo.payment.taxes.main.title">L-Artikolu 57(2) tad-Direttiva 2014/24/UE jistabbilixxi
-        r-ra?unijiet li ?ejjin g?all-esklu?joni
-    </entry>
-    <entry key="espd.crit.eu.text.agreement.economic">L-operatur ekonomiku da?al fi ftehimiet ma' operaturi ekonomi?i
-        o?rajn bl-g?an li jo?olqu distorsjoni tal-kompetizzjoni?
-    </entry>
-    <entry key="espd.crit.eu.text.arrangement.creditors">L-operatur ekonomiku jinsab f'arran?amenti ma' kredituri?
-    </entry>
+    <entry key="espd.part3.crit.eu.main.breaching.obligations">L-Artikolu 57(4) tad-Direttiva 2014/24/UE jistabbilixxi r-raġunijiet li ġejjin għall-esklużjoni</entry>
+    <entry key="espd.part3.crit.eu.eo.main.breaching.obligations">L-Artikolu 57(4) tad-Direttiva 2014/24/UE jistabbilixxi r-raġunijiet li ġejjin għall-esklużjoni</entry>
+    <entry key="espd.part3.crit.eu.main.purely.national">Ir-raġunijiet purament nazzjonali għall-esklużjoni, li jkunu speċifikati fl-avviż rilevanti jew fid-dokumenti għall-akkwist, japplikaw?</entry>
+    <entry key="espd.part3.crit.eu.grounds.criminal.conv.main.title">L-Artikolu 57(1) tad-Direttiva 2014/24/UE jistabbilixxi r-raġunijiet li ġejjin għall-esklużjoni</entry>
+    <entry key="espd.part3.crit.eu.eo.grounds.criminal.conv.main.title">L-Artikolu 57(1) tad-Direttiva 2014/24/UE jistabbilixxi r-raġunijiet li ġejjin għall-esklużjoni</entry>
+    <entry key="espd.part3.crit.eu.payment.taxes.main.title">L-Artikolu 57(2) tad-Direttiva 2014/24/UE jistabbilixxi r-raġunijiet li ġejjin għall-esklużjoni</entry>
+    <entry key="espd.part3.crit.eu.eo.payment.taxes.main.title">L-Artikolu 57(2) tad-Direttiva 2014/24/UE jistabbilixxi r-raġunijiet li ġejjin għall-esklużjoni</entry>
+    <entry key="espd.crit.eu.text.agreement.economic">L-operatur ekonomiku daħal fi ftehimiet ma' operaturi ekonomiċi oħrajn bl-għan li joħolqu distorsjoni tal-kompetizzjoni?</entry>
+    <entry key="espd.crit.eu.text.arrangement.creditors">L-operatur ekonomiku jinsab f'arranġamenti ma' kredituri?</entry>
     <entry key="espd.crit.eu.text.bankrupt">L-operatur ekonomiku falla?</entry>
-    <entry key="espd.crit.eu.text.breaching.obligations.environmental">L-operatur ekonomiku kiser, safejn jaf hu,
-        l-obbligi tieg?u fil-qasam tal-li?i ambjentali? Kif imsemmi g?all-finijiet ta' dan l-akkwist fil-li?i
-        nazzjonali, fl-avvi? rilevanti jew fid-dokumenti g?all-akkwist jew fl-Artikolu 18(2) tad-Direttiva 2014/24/UE.
-    </entry>
-    <entry key="espd.crit.eu.text.breaching.obligations.labour">L-operatur ekonomiku kiser, safejn jaf hu, l-obbligi
-        tieg?u fil-qasam tal-li?i tax-xog?ol? Kif imsemmi g?all-finijiet ta' dan l-akkwist fil-li?i nazzjonali, fl-avvi?
-        rilevanti jew fid-dokumenti g?all-akkwist jew fl-Artikolu 18(2) tad-Direttiva 2014/24/UE.
-    </entry>
-    <entry key="espd.crit.eu.text.breaching.obligations.social">L-operatur ekonomiku kiser, safejn jaf hu, l-obbligi
-        tieg?u fil-qasam tal-li?i so?jali? Kif imsemmi g?all-finijiet ta' dan l-akkwist fil-li?i nazzjonali, fl-avvi?
-        rilevanti jew fid-dokumenti g?all-akkwist jew fl-Artikolu 18(2) tad-Direttiva 2014/24/UE.
-    </entry>
-    <entry key="espd.crit.eu.text.child.labour">L-operatur ekonomiku stess jew xi persuna li tkun membru tal-korp
-        amministrattiv, mani?erjali jew supervi?orju tieg?u jew li jkollha setg?at ta' rappre?entanza, de?i?joni jew
-        kontroll qatt kienu su??etti g?al kundanna b'sentenza finali g?al t?addim tat-tfal u forom o?ra ta' traffikar
-        tal-bnedmin, b'kundanna ta' mhux iktar minn ?ames snin ilu jew fejn perjodu ta' esklu?joni stabbilit direttament
-        fil-kundanna g?adu applikabbli? Kif definit fl-Artikolu 2 tad-Direttiva 2011/36/UE tal-Parlament Ewropew u
-        tal-Kunsill tal-5 ta? April 2011 dwar il-prevenzjoni u l-?lieda kontra t-traffikar tal-bnedmin u l-protezzjoni
-        tal-vittmi tieg?u, u li tissostitwixxi d-Direttiva Qafas tal-Kunsill 2002/629/?AI (?U L 101, 15.4.2011, p. 1).
-    </entry>
-    <entry key="espd.crit.eu.text.conflict.interest">L-operatur ekonomiku huwa konxju ta? xi kunflitt ta? interess, kif
-        indikat fil-li?i nazzjonali, l-avvi? rilevanti jew id-dokumenti g?all-akkwist min?abba l-parte?ipazzjoni tieg?u
-        fil-pro?edura ta? akkwist?
-    </entry>
-    <entry key="espd.crit.eu.text.corruption">L-operatur ekonomiku stess jew xi persuna li tkun membru tal-korp
-        amministrattiv, mani?erjali jew supervi?orju tieg?u jew li jkollha setg?at ta' rappre?entanza, de?i?joni jew
-        kontroll qatt kienu su??etti g?al kundanna b'sentenza finali g?al korruzzjoni, b'kundanna ta' mhux iktar minn
-        ?ames snin ilu jew fejn perjodu ta' esklu?joni stabbilit direttament fil-kundanna g?adu applikabbli? Kif definit
-        fl-Artikolu 3 tal-Konvenzjoni dwar il-?lieda kontra l-korruzzjoni li tinvolvi uffi?jali tal-Komunitajiet Ewropej
-        jew uffi?jali tal-Istati Membri tal-Unjoni Ewropea, ?U C 195, 25.6.1997, p. 1, u fl-Artikolu 2(1) tad-De?i?joni
-        Kwadru tal-Kunsill 2003/568/?AI tat-22 ta' Lulju 2003 dwar il-?lieda kontra l-korruzzjoni fis-settur privat (?U
-        L 192, 31.7.2003, p. 54). Din ir-ra?uni ta' esklu?joni tinkludi wkoll il-korruzzjoni kif definita fil-li?i
-        nazzjonali tal-awtorità kontraenti (entità kontraenti) jew l-operatur ekonomiku.
-    </entry>
-    <entry key="espd.crit.eu.text.early.termination">L-operatur ekonomiku kellu esperjenza ta' terminazzjoni bikrija ta'
-        kuntratt pubbliku pre?edenti, ta' kuntratt pre?edenti ma' entità kontraenti jew ta' kuntratt ta' kon?essjoni
-        pre?edenti, jew ta' impo?izzjoni ta' danni jew sanzjonijiet komparabbli b'konnessjoni ma' dak il-kuntratt
-        pre?edenti?
-    </entry>
-    <entry key="espd.crit.eu.text.fraud">L-operatur ekonomiku stess jew xi persuna li tkun membru tal-korp
-        amministrattiv, mani?erjali jew supervi?orju tieg?u jew li jkollha setg?at ta' rappre?entanza, de?i?joni jew
-        kontroll qatt kienu su??etti g?al kundanna b'sentenza finali g?al frodi, b'kundanna ta' mhux iktar minn ?ames
-        snin ilu jew fejn perjodu ta' esklu?joni stabbilit direttament fil-kundanna g?adu applikabbli? Fl-ambitu
-        tat-tifsira tal-Artikolu 1 tal-Konvenzjoni dwar il-protezzjoni tal-interessi finanzjarji tal-Komunitajiet
-        Ewropej (?U C 316, 27.11.1995, p. 48).
-    </entry>
-    <entry key="espd.crit.eu.text.grounds.criminal.conv">L-operatur ekonomiku stess jew xi persuna li tkun membru
-        tal-korp amministrattiv, mani?erjali jew supervi?orju tieg?u jew li jkollha setg?at ta' rappre?entanza,
-        de?i?joni jew kontroll qatt kienu su??etti g?al kundanna b'sentenza finali g?all-parte?ipazzjoni
-        f'organizzazzjoni kriminali, b'kundanna ta' mhux iktar minn ?ames snin ilu jew fejn perjodu ta' esklu?joni
-        stabbilit direttament fil-kundanna g?adu applikabbli? Kif definit fl-Artikolu 2 tad-De?i?joni Kwadru tal-Kunsill
-        2008/841/?AI tal-24 ta? Ottubru 2008 dwar il-?lieda kontra l-kriminalità organizzata (?U L 300, 11.11.2008, p.
-        42).
-    </entry>
-    <entry key="espd.crit.eu.text.guilty.misconduct">L-operatur ekonomiku huwa ?ati ta' m?iba ?a?ina professjonali
-        serja? Fejn applikabbli, ara d-definizzjonijiet fil-li?i nazzjonali, l-avvi? rilevanti jew id-dokumenti
-        g?all-akkwist.
-    </entry>
-    <entry key="espd.crit.eu.text.guilty.misinterpretation">L-operatur ekonomiku sab lilu nnifsu f'xi wa?da minn dawn
-        is-sitwazzjonijiet:<p/>a) Kien ?ati b'mod gravi ta? dikjarazzjoni falza fl-g?oti tal-informazzjoni me?tie?a
-        g?all-verifika tan-nuqqas ta? ra?unijiet g?all-esklu?joni jew l-issodisfar tal-kriterji ta? g?a?la,<p/>b) Satar
-        tali informazzjoni,<p/>c) Ma setax, ming?ajr dewmien, jippre?enta d-dokumenti ta? sostenn me?tie?a minn awtorità
-        kontraenti jew entità kontraenti, u<p/>d) Impenja ru?u li jinfluwenza b?mod mhux xieraq il-pro?ess ta? te?id ta?
-        de?i?joni tal-awtorità kontraenti jew l-entità kontraenti, biex jakkwista informazzjoni kunfidenzjali li tista?
-        tag?tih vanta??i mhux xierqa fil-pro?edura ta' akkwist jew biex jipprovdi b?negli?enza informazzjoni qarrieqa li
-        jista? jkollha influwenza materjali fuq id-de?i?jonijiet rigward l-esklu?joni, l-g?a?la jew l-g?otja?
-    </entry>
-    <entry key="espd.crit.eu.text.insolvency">L-operatur ekonomiku huwa s-su??ett ta' insolvenza jew ta' stral??</entry>
-    <entry key="espd.crit.eu.text.involvement">L-operatur ekonomiku jew impri?a relatata mieg?u taw parir lill-awtorità
-        kontraenti jew entità kontraenti jew kienu b'xi mod ie?or involuti fit-t?ejjija tal-pro?edura ta' akkwist?
-    </entry>
-    <entry key="espd.crit.eu.text.liquidator">L-assi tal-operatur ekonomiku qeg?din ji?u amministrati minn likwidatur
-        jew mill-qorti?
-    </entry>
-    <entry key="espd.crit.eu.text.money.laundering">L-operatur ekonomiku stess jew xi persuna li tkun membru tal-korp
-        amministrattiv, mani?erjali jew supervi?orju tieg?u jew li jkollha setg?at ta' rappre?entanza, de?i?joni jew
-        kontroll qatt kienu su??etti g?al kundanna b'sentenza finali g?al ?asil tal-flus jew finanzjament
-        tat-terrori?mu, b'kundanna ta' mhux iktar minn ?ames snin ilu jew fejn perjodu ta' esklu?joni stabbilit
-        direttament fil-kundanna g?adu applikabbli? Kif definit fl-Artikolu 1 tad-Direttiva 2005/60/KE tal-Parlament
-        Ewropew u tal-Kunsill tas-26 ta? Ottubru 2005 dwar il-prevenzjoni tal-u?u tas-sistema finanzjarja g?all-iskop
-        tal-?asil tal-flus u l-finanzjament tat-terrori?mu (?U L 309, 25.11.2005, p. 15).
-    </entry>
-    <entry key="espd.crit.eu.text.national.bankruptcy">L-operatur ekonomiku jinsab f'xi sitwazzjoni analoga
-        g?all-falliment b'ri?ultat ta' pro?edura simili skont ir-regoli u l-li?ijiet nazzjonali?
-    </entry>
-    <entry key="espd.crit.eu.text.payment.social.security">L-operatur ekonomiku kiser l-obbligi tieg?u relatati mal-?las
-        tal-kontribuzzjonijiet tas-sigurtà so?jali, kemm fil-pajji? fejn huwa stabbilit u kemm fl-Istat Membru
-        tal-awtorità kontraenti jew entità kontraenti jekk ma jkunx l-istess pajji? b?al tal-istabbiliment?
-    </entry>
-    <entry key="espd.crit.eu.text.payment.taxes">L-operatur ekonomiku kiser l-obbligi tieg?u relatati mal-?las
-        tat-taxxi, kemm fil-pajji? fejn huwa stabbilit u kemm fl-Istat Membru tal-awtorità kontraenti jew entità
-        kontraenti jekk ma jkunx l-istess pajji? b?al tal-istabbiliment?
-    </entry>
-    <entry key="espd.crit.eu.text.purely.national">Ra?unijiet o?ra g?all-esklu?joni li jistg?u jkunu previsti
-        fil-le?i?lazzjoni nazzjonali tal-awtorità kontraenti jew entità kontraenti tal-Istat Membru. Ir-ra?unijiet
-        purament nazzjonali g?all-esklu?joni, li jkunu spe?ifikati fl-avvi? rilevanti jew fid-dokumenti g?all-akkwist,
-        japplikaw?
-    </entry>
-    <entry key="espd.crit.eu.text.suspended.business">L-attivitajiet tan-negozju tal-operatur ekonomiku ?ew sospi?i?
-    </entry>
-    <entry key="espd.crit.eu.text.terrorist">L-operatur ekonomiku stess jew xi persuna li tkun membru tal-korp
-        amministrattiv, mani?erjali jew supervi?orju tieg?u jew li jkollha setg?at ta' rappre?entanza, de?i?joni jew
-        kontroll qatt kienu su??etti g?al kundanna b'sentenza finali g?al reati terroristi?i jew reati marbuta ma'
-        attivitajiet terroristi?i, b'kundanna ta' mhux iktar minn ?ames snin ilu jew fejn perjodu ta' esklu?joni
-        stabbilit direttament fil-kundanna g?adu applikabbli? Kif definiti fl-Artikoli 1 u 3 tad-De?i?joni Kwadru
-        tal-Kunsill tat-13 ta? ?unju 2002 dwar il-?lieda kontra t-terrori?mu (?U L 164, 22.6.2002, p. 3). Din ir-ra?uni
-        ta' esklu?joni tinkludi in?itazzjoni jew g?ajnuna jew tixwix jew tentattivi ta' twettiq ta? reat, kif spjegat
-        fl-Artikolu 4 ta? dik id-De?i?joni Kwadru.
-    </entry>
-    <entry key="espd.crit.eu.title.agreement.economic">Ftehimiet ma' operaturi ekonomi?i o?rajn li g?andhom l-g?an li
-        jikkaw?aw distorsjoni tal-kompetizzjoni
-    </entry>
-    <entry key="espd.crit.eu.title.arrangement.creditors">Arran?ament mal-kredituri</entry>
+    <entry key="espd.crit.eu.text.breaching.obligations.environmental">L-operatur ekonomiku kiser, safejn jaf hu, l-obbligi tiegħu fil-qasam tal-liġi ambjentali? Kif imsemmi għall-finijiet ta' dan l-akkwist fil-liġi nazzjonali, fl-avviż rilevanti jew fid-dokumenti għall-akkwist jew fl-Artikolu 18(2) tad-Direttiva 2014/24/UE.</entry>
+    <entry key="espd.crit.eu.text.breaching.obligations.labour">L-operatur ekonomiku kiser, safejn jaf hu, l-obbligi tiegħu fil-qasam tal-liġi tax-xogħol? Kif imsemmi għall-finijiet ta' dan l-akkwist fil-liġi nazzjonali, fl-avviż rilevanti jew fid-dokumenti għall-akkwist jew fl-Artikolu 18(2) tad-Direttiva 2014/24/UE.</entry>
+    <entry key="espd.crit.eu.text.breaching.obligations.social">L-operatur ekonomiku kiser, safejn jaf hu, l-obbligi tiegħu fil-qasam tal-liġi soċjali? Kif imsemmi għall-finijiet ta' dan l-akkwist fil-liġi nazzjonali, fl-avviż rilevanti jew fid-dokumenti għall-akkwist jew fl-Artikolu 18(2) tad-Direttiva 2014/24/UE.</entry>
+    <entry key="espd.crit.eu.text.child.labour">L-operatur ekonomiku stess jew xi persuna li tkun membru tal-korp amministrattiv, maniġerjali jew superviżorju tiegħu jew li jkollha setgħat ta' rappreżentanza, deċiżjoni jew kontroll qatt kienu suġġetti għal kundanna b'sentenza finali għal tħaddim tat-tfal u forom oħra ta' traffikar tal-bnedmin, b'kundanna ta' mhux iktar minn ħames snin ilu jew fejn perjodu ta' esklużjoni stabbilit direttament fil-kundanna għadu applikabbli? Kif definit fl-Artikolu 2 tad-Direttiva 2011/36/UE tal-Parlament Ewropew u tal-Kunsill tal-5 ta’ April 2011 dwar il-prevenzjoni u l-ġlieda kontra t-traffikar tal-bnedmin u l-protezzjoni tal-vittmi tiegħu, u li tissostitwixxi d-Direttiva Qafas tal-Kunsill 2002/629/ĠAI (ĠU L 101, 15.4.2011, p. 1).</entry>
+    <entry key="espd.crit.eu.text.conflict.interest">L-operatur ekonomiku huwa konxju ta’ xi kunflitt ta’ interess, kif indikat fil-liġi nazzjonali, l-avviż rilevanti jew id-dokumenti għall-akkwist minħabba l-parteċipazzjoni tiegħu fil-proċedura ta’ akkwist?</entry>
+    <entry key="espd.crit.eu.text.corruption">L-operatur ekonomiku stess jew xi persuna li tkun membru tal-korp amministrattiv, maniġerjali jew superviżorju tiegħu jew li jkollha setgħat ta' rappreżentanza, deċiżjoni jew kontroll qatt kienu suġġetti għal kundanna b'sentenza finali għal korruzzjoni, b'kundanna ta' mhux iktar minn ħames snin ilu jew fejn perjodu ta' esklużjoni stabbilit direttament fil-kundanna għadu applikabbli? Kif definit fl-Artikolu 3 tal-Konvenzjoni dwar il-ġlieda kontra l-korruzzjoni li tinvolvi uffiċjali tal-Komunitajiet Ewropej jew uffiċjali tal-Istati Membri tal-Unjoni Ewropea, ĠU C 195, 25.6.1997, p. 1, u fl-Artikolu 2(1) tad-Deċiżjoni Kwadru tal-Kunsill 2003/568/ĠAI tat-22 ta' Lulju 2003 dwar il-ġlieda kontra l-korruzzjoni fis-settur privat (ĠU L 192, 31.7.2003, p. 54). Din ir-raġuni ta' esklużjoni tinkludi wkoll il-korruzzjoni kif definita fil-liġi nazzjonali tal-awtorità kontraenti (entità kontraenti) jew l-operatur ekonomiku.</entry>
+    <entry key="espd.crit.eu.text.early.termination">L-operatur ekonomiku kellu esperjenza ta' terminazzjoni bikrija ta' kuntratt pubbliku preċedenti, ta' kuntratt preċedenti ma' entità kontraenti jew ta' kuntratt ta' konċessjoni preċedenti, jew ta' impożizzjoni ta' danni jew sanzjonijiet komparabbli b'konnessjoni ma' dak il-kuntratt preċedenti?</entry>
+    <entry key="espd.crit.eu.text.fraud">L-operatur ekonomiku stess jew xi persuna li tkun membru tal-korp amministrattiv, maniġerjali jew superviżorju tiegħu jew li jkollha setgħat ta' rappreżentanza, deċiżjoni jew kontroll qatt kienu suġġetti għal kundanna b'sentenza finali għal frodi, b'kundanna ta' mhux iktar minn ħames snin ilu jew fejn perjodu ta' esklużjoni stabbilit direttament fil-kundanna għadu applikabbli? Fl-ambitu tat-tifsira tal-Artikolu 1 tal-Konvenzjoni dwar il-protezzjoni tal-interessi finanzjarji tal-Komunitajiet Ewropej (ĠU C 316, 27.11.1995, p. 48).</entry>
+    <entry key="espd.crit.eu.text.grounds.criminal.conv">L-operatur ekonomiku stess jew xi persuna li tkun membru tal-korp amministrattiv, maniġerjali jew superviżorju tiegħu jew li jkollha setgħat ta' rappreżentanza, deċiżjoni jew kontroll qatt kienu suġġetti għal kundanna b'sentenza finali għall-parteċipazzjoni f'organizzazzjoni kriminali, b'kundanna ta' mhux iktar minn ħames snin ilu jew fejn perjodu ta' esklużjoni stabbilit direttament fil-kundanna għadu applikabbli? Kif definit fl-Artikolu 2 tad-Deċiżjoni Kwadru tal-Kunsill 2008/841/ĠAI tal-24 ta’ Ottubru 2008 dwar il-ġlieda kontra l-kriminalità organizzata (ĠU L 300, 11.11.2008, p. 42).</entry>
+    <entry key="espd.crit.eu.text.guilty.misconduct">L-operatur ekonomiku huwa ħati ta' mġiba ħażina professjonali serja? Fejn applikabbli, ara d-definizzjonijiet fil-liġi nazzjonali, l-avviż rilevanti jew id-dokumenti għall-akkwist.</entry>
+    <entry key="espd.crit.eu.text.guilty.misinterpretation">L-operatur ekonomiku sab lilu nnifsu f'xi waħda minn dawn is-sitwazzjonijiet: <p/>a) Kien ħati b'mod gravi ta’ dikjarazzjoni falza fl-għoti tal-informazzjoni meħtieġa għall-verifika tan-nuqqas ta’ raġunijiet għall-esklużjoni jew l-issodisfar tal-kriterji ta’ għażla,<p/>b) Satar tali informazzjoni,<p/>c) Ma setax, mingħajr dewmien, jippreżenta d-dokumenti ta’ sostenn meħtieġa minn awtorità kontraenti jew entità kontraenti, u<p/>d) Impenja ruħu li jinfluwenza b’mod mhux xieraq il-proċess ta’ teħid ta’ deċiżjoni tal-awtorità kontraenti jew l-entità kontraenti, biex jakkwista informazzjoni kunfidenzjali li tista’ tagħtih vantaġġi mhux xierqa fil-proċedura ta' akkwist jew biex jipprovdi b’negliġenza informazzjoni qarrieqa li jista’ jkollha influwenza materjali fuq id-deċiżjonijiet rigward l-esklużjoni, l-għażla jew l-għotja?</entry>
+    <entry key="espd.crit.eu.text.insolvency">L-operatur ekonomiku huwa s-suġġett ta' insolvenza jew ta' stralċ?</entry>
+    <entry key="espd.crit.eu.text.involvement">L-operatur ekonomiku jew impriża relatata miegħu taw parir lill-awtorità kontraenti jew entità kontraenti jew kienu b'xi mod ieħor involuti fit-tħejjija tal-proċedura ta' akkwist?</entry>
+    <entry key="espd.crit.eu.text.liquidator">L-assi tal-operatur ekonomiku qegħdin jiġu amministrati minn likwidatur jew mill-qorti?</entry>
+    <entry key="espd.crit.eu.text.money.laundering">L-operatur ekonomiku stess jew xi persuna li tkun membru tal-korp amministrattiv, maniġerjali jew superviżorju tiegħu jew li jkollha setgħat ta' rappreżentanza, deċiżjoni jew kontroll qatt kienu suġġetti għal kundanna b'sentenza finali għal ħasil tal-flus jew finanzjament tat-terroriżmu, b'kundanna ta' mhux iktar minn ħames snin ilu jew fejn perjodu ta' esklużjoni stabbilit direttament fil-kundanna għadu applikabbli? Kif definit fl-Artikolu 1 tad-Direttiva 2005/60/KE tal-Parlament Ewropew u tal-Kunsill tas-26 ta’ Ottubru 2005 dwar il-prevenzjoni tal-użu tas-sistema finanzjarja għall-iskop tal-ħasil tal-flus u l-finanzjament tat-terroriżmu (ĠU L 309, 25.11.2005, p. 15).</entry>
+    <entry key="espd.crit.eu.text.national.bankruptcy">L-operatur ekonomiku jinsab f'xi sitwazzjoni analoga għall-falliment b'riżultat ta' proċedura simili skont ir-regoli u l-liġijiet nazzjonali?</entry>
+    <entry key="espd.crit.eu.text.payment.social.security">L-operatur ekonomiku kiser l-obbligi tiegħu relatati mal-ħlas tal-kontribuzzjonijiet tas-sigurtà soċjali, kemm fil-pajjiż fejn huwa stabbilit u kemm fl-Istat Membru tal-awtorità kontraenti jew entità kontraenti jekk ma jkunx l-istess pajjiż bħal tal-istabbiliment?</entry>
+    <entry key="espd.crit.eu.text.payment.taxes">L-operatur ekonomiku kiser l-obbligi tiegħu relatati mal-ħlas tat-taxxi, kemm fil-pajjiż fejn huwa stabbilit u kemm fl-Istat Membru tal-awtorità kontraenti jew entità kontraenti jekk ma jkunx l-istess pajjiż bħal tal-istabbiliment?</entry>
+    <entry key="espd.crit.eu.text.purely.national">Raġunijiet oħra għall-esklużjoni li jistgħu jkunu previsti fil-leġiżlazzjoni nazzjonali tal-awtorità kontraenti jew entità kontraenti tal-Istat Membru. Ir-raġunijiet purament nazzjonali għall-esklużjoni, li jkunu speċifikati fl-avviż rilevanti jew fid-dokumenti għall-akkwist, japplikaw?</entry>
+    <entry key="espd.crit.eu.text.suspended.business">L-attivitajiet tan-negozju tal-operatur ekonomiku ġew sospiżi?</entry>
+    <entry key="espd.crit.eu.text.terrorist">L-operatur ekonomiku stess jew xi persuna li tkun membru tal-korp amministrattiv, maniġerjali jew superviżorju tiegħu jew li jkollha setgħat ta' rappreżentanza, deċiżjoni jew kontroll qatt kienu suġġetti għal kundanna b'sentenza finali għal reati terroristiċi jew reati marbuta ma' attivitajiet terroristiċi, b'kundanna ta' mhux iktar minn ħames snin ilu jew fejn perjodu ta' esklużjoni stabbilit direttament fil-kundanna għadu applikabbli? Kif definiti fl-Artikoli 1 u 3 tad-Deċiżjoni Kwadru tal-Kunsill tat-13 ta’ Ġunju 2002 dwar il-ġlieda kontra t-terroriżmu (ĠU L 164, 22.6.2002, p. 3). Din ir-raġuni ta' esklużjoni tinkludi inċitazzjoni jew għajnuna jew tixwix jew tentattivi ta' twettiq ta’ reat, kif spjegat fl-Artikolu 4 ta’ dik id-Deċiżjoni Kwadru.</entry>
+    <entry key="espd.crit.eu.title.agreement.economic">Ftehimiet ma' operaturi ekonomiċi oħrajn li għandhom l-għan li jikkawżaw distorsjoni tal-kompetizzjoni</entry>
+    <entry key="espd.crit.eu.title.arrangement.creditors">Arranġament mal-kredituri</entry>
     <entry key="espd.crit.eu.title.bankrupt">Falliment</entry>
-    <entry key="espd.part3.crit.eu.eo.bankrupt.title">L-organizzazzjoni tieg?ek hi falluta, jew su??etta g?al pro?eduri
-        ta? insolvenza jew stral?, jew f?arran?ament ma? kredituri, jew fi kwalunkwe sitwazzjoni analoga li tirri?ulta
-        minn pro?edura simili ta?t il-li?ijiet u r-regolamenti nazzjonali?
-    </entry>
-    <entry key="espd.crit.eu.title.breaching.obligations.environmental">Ksur tal-obbligi fil-qasam tal-li?i ambjentali
-    </entry>
-    <entry key="espd.crit.eu.title.breaching.obligations.environmental.eo">Ksur tal-obbligi fil-qasam tal-li?i
-        ambjentali
-    </entry>
-    <entry key="espd.crit.eu.title.breaching.obligations.labour">Ksur tal-obbligi fl-oqsma tal-li?i tax-xog?ol</entry>
-    <entry key="espd.crit.eu.title.breaching.obligations.social">Ksur tal-obbligi fil-qasam tal-li?i so?jali</entry>
-    <entry key="espd.crit.eu.title.child.labour">T?addim tat-tfal u forom o?ra ta' traffikar tal-bnedmin</entry>
-    <entry key="espd.crit.eu.title.conflict.interest">Kunflitt ta? interess min?abba l-parte?ipazzjoni tieg?u
-        fil-pro?edura ta? akkwist
-    </entry>
-    <entry key="espd.crit.eu.title.conflict.interest.eo">L-organizzazzjoni tieg?ek g?andha xi kunflitt ta? interess
-        min?abba l-parte?ipazzjoni tag?ha fil-pro?edura ta? akkwist?
-    </entry>
+    <entry key="espd.part3.crit.eu.eo.bankrupt.title">L-organizzazzjoni tiegħek hi falluta, jew suġġetta għal proċeduri ta’ insolvenza jew stralċ, jew f’arranġament ma’ kredituri, jew fi kwalunkwe sitwazzjoni analoga li tirriżulta minn proċedura simili taħt il-liġijiet u r-regolamenti nazzjonali?</entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.environmental">Ksur tal-obbligi fil-qasam tal-liġi ambjentali</entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.environmental.eo">Ksur tal-obbligi fil-qasam tal-liġi ambjentali</entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.labour">Ksur tal-obbligi fl-oqsma tal-liġi tax-xogħol</entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.social">Ksur tal-obbligi fil-qasam tal-liġi soċjali</entry>
+    <entry key="espd.crit.eu.title.child.labour">Tħaddim tat-tfal u forom oħra ta' traffikar tal-bnedmin</entry>
+    <entry key="espd.crit.eu.title.conflict.interest">Kunflitt ta’ interess minħabba l-parteċipazzjoni tiegħu fil-proċedura ta’ akkwist</entry>
+    <entry key="espd.crit.eu.title.conflict.interest.eo">L-organizzazzjoni tiegħek għandha xi kunflitt ta’ interess minħabba l-parteċipazzjoni tagħha fil-proċedura ta’ akkwist?</entry>
     <entry key="espd.crit.eu.title.corruption">Korruzzjoni</entry>
-    <entry key="espd.crit.eu.title.early.termination">Terminazzjoni bikrija, danni jew sanzjonijiet komparabbli o?ra
-    </entry>
+    <entry key="espd.crit.eu.title.early.termination">Terminazzjoni bikrija, danni jew sanzjonijiet komparabbli oħra</entry>
     <entry key="espd.crit.eu.title.fraud">Frodi</entry>
-    <entry key="espd.crit.eu.title.grounds.criminal.conv">Parte?ipazzjoni f?organizzazzjoni kriminali</entry>
-    <entry key="espd.crit.eu.title.guilty.misconduct">?ati ta? m?iba ?a?ina professjonali serja</entry>
-    <entry key="espd.crit.eu.title.guilty.misconduct.eo">L-organizzazzjoni tieg?ek nstabet ?atja ta' m?iba ?a?ina
-        professjonali serja?
-    </entry>
-    <entry key="espd.crit.eu.title.guilty.misinterpretation">?ati ta' dikjarazzjoni falza, ?eba informazzjoni, ma jistax
-        jipprovdi d-dokumenti me?tie?a u kiseb informazzjoni kunfidenzjali dwar din il-pro?edura
-    </entry>
+    <entry key="espd.crit.eu.title.grounds.criminal.conv">Parteċipazzjoni f’organizzazzjoni kriminali</entry>
+    <entry key="espd.crit.eu.title.guilty.misconduct">Ħati ta’ mġiba ħażina professjonali serja</entry>
+    <entry key="espd.crit.eu.title.guilty.misconduct.eo">L-organizzazzjoni tiegħek nstabet ħatja ta' mġiba ħażina professjonali serja?</entry>
+    <entry key="espd.crit.eu.title.guilty.misinterpretation">Ħati ta' dikjarazzjoni falza, ħeba informazzjoni, ma jistax jipprovdi d-dokumenti meħtieġa u kiseb informazzjoni kunfidenzjali dwar din il-proċedura</entry>
     <entry key="espd.crit.eu.title.insolvency">Insolvenza</entry>
-    <entry key="espd.crit.eu.title.involvement">Involviment dirett jew indirett fit-t?ejjija ta? din il-pro?edura ta?
-        akkwist
-    </entry>
-    <entry key="espd.crit.eu.title.involvement.eo">L-organizzazzjoni tieg?ek jew impri?a relatata mag?ha taw parir
-        lill-awtorità kontraenti jew kienu b'xi mod ie?or involuti fit-t?ejjija tal-pro?edura ta' akkwist?
-    </entry>
+    <entry key="espd.crit.eu.title.involvement">Involviment dirett jew indirett fit-tħejjija ta’ din il-proċedura ta’ akkwist</entry>
+    <entry key="espd.crit.eu.title.involvement.eo">L-organizzazzjoni tiegħek jew impriża relatata magħha taw parir lill-awtorità kontraenti jew kienu b'xi mod ieħor involuti fit-tħejjija tal-proċedura ta' akkwist?</entry>
     <entry key="espd.crit.eu.title.liquidator">Assijiet amministrati minn likwidatur</entry>
-    <entry key="espd.crit.eu.title.money.laundering">?asil tal-flus jew finanzjament tat-terrori?mu</entry>
-    <entry key="espd.crit.eu.title.national.bankruptcy">Sitwazzjoni analoga b?al falliment skont il-li?i nazzjonali
-    </entry>
-    <entry key="espd.crit.eu.title.payment.social.security">?las tas-sigurtà so?jali</entry>
-    <entry key="espd.crit.eu.title.payment.taxes">?las tat-taxxi</entry>
-    <entry key="espd.crit.eu.title.purely.national">Ra?unijiet purament nazzjonali g?all-esklu?joni</entry>
-    <entry key="espd.crit.eu.title.suspended.business">L-attivitajiet kummer?jali huma sospi?i</entry>
-    <entry key="espd.crit.eu.title.terrorist">Reati terroristi?i jew reati marbuta ma' attivitajiet terroristi?i</entry>
-    <entry key="espd.part3.crit.eu.guilty.misconduct.eo.tooltip">Meta applikabbli, ara d-definizzjonijiet fil-li?i
-        nazzjonali, l-avvi? rilevanti jew id-dokumenti g?all-akkwist
-    </entry>
-    <entry key="espd.crit.explain.certificates.independent.environmental.description">Jekk le, jekk jog??bok spjega
-        g?alfejn u spe?ifika x'mezzi o?ra ta? prova li jikkon?ernaw sistemi jew standards ta? ?estjoni ambjentali
-        jistg?u ji?u pprovduti:
-    </entry>
-    <entry key="espd.part4.crit.explain.certificates.independent.quality.description">Jekk le, jekk jog??bok spjega
-        g?alfejn u spe?ifika x'mezzi o?ra ta? prova li jikkon?ernaw l-iskema ta? assigurazzjoni tal-kwalità jistg?u ji?u
-        pprovduti:
-    </entry>
-    <entry key="espd.part4.crit.explain.supply.contracts.quality.description">Jekk le, jekk jog??bok spjega g?alfejn u
-        spe?ifika x'mezzi o?ra ta? prova jistg?u ji?u pprovduti:
-    </entry>
-    <entry key="espd.crit.information.available.electronically">Din l-informazzjoni hija disponibbli bla spejje?
-        g?all-awtoritajiet minn ba?i tad-dejta ta' Stat Membru tal-UE?
-    </entry>
+    <entry key="espd.crit.eu.title.money.laundering">Ħasil tal-flus jew finanzjament tat-terroriżmu</entry>
+    <entry key="espd.crit.eu.title.national.bankruptcy">Sitwazzjoni analoga bħal falliment skont il-liġi nazzjonali</entry>
+    <entry key="espd.crit.eu.title.payment.social.security">Ħlas tas-sigurtà soċjali</entry>
+    <entry key="espd.crit.eu.title.payment.taxes">Ħlas tat-taxxi</entry>
+    <entry key="espd.crit.eu.title.purely.national">Raġunijiet purament nazzjonali għall-esklużjoni</entry>
+    <entry key="espd.crit.eu.title.suspended.business">L-attivitajiet kummerċjali huma sospiżi</entry>
+    <entry key="espd.crit.eu.title.terrorist">Reati terroristiċi jew reati marbuta ma' attivitajiet terroristiċi</entry>
+    <entry key="espd.part3.crit.eu.guilty.misconduct.eo.tooltip">Meta applikabbli, ara d-definizzjonijiet fil-liġi nazzjonali, l-avviż rilevanti jew id-dokumenti għall-akkwist</entry>
+    <entry key="espd.crit.explain.certificates.independent.environmental.description">Jekk le, jekk jogħġbok spjega għalfejn u speċifika x'mezzi oħra ta’ prova li jikkonċernaw sistemi jew standards ta’ ġestjoni ambjentali jistgħu jiġu pprovduti:</entry>
+    <entry key="espd.part4.crit.explain.certificates.independent.quality.description">Jekk le, jekk jogħġbok spjega għalfejn u speċifika x'mezzi oħra ta’ prova li jikkonċernaw l-iskema ta’ assigurazzjoni tal-kwalità jistgħu jiġu pprovduti:</entry>
+    <entry key="espd.part4.crit.explain.supply.contracts.quality.description">Jekk le, jekk jogħġbok spjega għalfejn u speċifika x'mezzi oħra ta’ prova jistgħu jiġu pprovduti:</entry>
+    <entry key="espd.crit.information.available.electronically">Din l-informazzjoni hija disponibbli bla spejjeż għall-awtoritajiet minn bażi tad-dejta ta' Stat Membru tal-UE?</entry>
     <entry key="espd.crit.issuer">Emittent</entry>
-    <entry key="espd.crit.length.period.exclusion">It-tul tal-perjodu ta' esklu?joni safejn huwa kif stabbilit
-        direttament fil-kundanna.
-    </entry>
+    <entry key="espd.crit.length.period.exclusion"> It-tul tal-perjodu ta' esklużjoni safejn huwa kif stabbilit direttament fil-kundanna.</entry>
     <entry key="espd.crit.number">Numru</entry>
-    <entry key="espd.crit.number.of.years">G?add ta? snin</entry>
-    <entry key="espd.crit.other.than.judicial.or.administrative.decision">Dan il-ksur ta? obbligi ?ie stabbilit permezz
-        ta? mezzi o?ra minbarra de?i?joni ?udizzjarja jew amministrattiva?
-    </entry>
-    <entry key="espd.crit.please.describe.them">Jekk jog??bok iddeskrivihom</entry>
-    <entry key="espd.crit.please.specify">Jekk jog??bok spe?ifika</entry>
+    <entry key="espd.crit.number.of.years">Għadd ta’ snin</entry>
+    <entry key="espd.crit.other.than.judicial.or.administrative.decision">Dan il-ksur ta’ obbligi ġie stabbilit permezz ta’ mezzi oħra minbarra deċiżjoni ġudizzjarja jew amministrattiva?</entry>
+    <entry key="espd.crit.please.describe.them">Jekk jogħġbok iddeskrivihom</entry>
+    <entry key="espd.crit.please.specify">Jekk jogħġbok speċifika</entry>
     <entry key="espd.crit.ratio">Proporzjon</entry>
-    <entry key="espd.crit.reason">Ra?uni</entry>
-    <entry key="espd.crit.reasons.nevertheless.contract">Indika r-ra?unijiet g?aliex minkejja kollox l-operatur jista'
-        jonora l-kuntratt. Din l-informazzjoni jen?tie? li ting?ata jekk l-esklu?joni tal-operaturi ekonomi?i f'dan
-        il-ka? tkun saret obbligatorja skont il-li?i nazzjonali applikabbli ming?ajr ebda possibbiltà ta' deroga fil-ka?
-        li l-operatur ekonomiku jkun jista' jonora l-kuntratt minkejja kollox.
-    </entry>
-    <entry key="espd.crit.recipients">Ri?evituri</entry>
-    <entry key="espd.part4.crit.selection.ca.declares.that">Dwar il-kriterji tal-g?a?la l-awtorità kontraenti te?tie? li
-        l-operatur ekonomiku jiddikjara li
-    </entry>
-    <entry key="espd.part4.crit.selection.ca.economic.article">L-Artikolu 58(3) tad-Direttiva 2014/24/UE jistabbilixxi
-        l-kriterji tal-g?a?la li ?ejjin
-    </entry>
-    <entry key="espd.part4.crit.selection.declares.that.tooltip">L-operatur ekonomiku g?andu jimla din il-kaxxa biss
-        f'ka? li l-awtorità kontraenti jew entità kontraenti tkun indikat fl-avvi? rilevanti jew fid-dokumenti
-        g?all-akkwist msemmija fl-avvi? li l-operatur ekonomiku jista' jillimita ru?u li jimla dan il-punt fil-Parti IV
-        ming?ajr ma jkollu jimla l-Parti IV, Taqsimiet A, B, C jew D
-    </entry>
-    <entry key="espd.crit.selection.economic.average.yearly.turnover.description">Il-fatturat annwali ?enerali tieg?u
-        g?all-g?add ta' snin finanzjarji me?tie?a fl-avvi? rilevanti, id-dokumenti g?all-akkwist jew id-DEUA huwa kif
-        ?ej:
-    </entry>
-    <entry key="espd.crit.selection.economic.average.yearly.turnover.main">Fatturat annwali ?enerali</entry>
-    <entry key="espd.crit.selection.economic.financial.ratio.description">Fir-rigward tal-proporzjonijiet finanzjarji
-        (b?all-proporzjoni bejn l-assi u l-obbligazzjonijiet) spe?ifikati fl-avvi? rilevanti, id-dokumenti tal-akkwist
-        jew l-ESPD, l-operatur ekonomiku jiddikjara li l-valuri reali g?all-proporzjonijiet me?tie?a huma dawn:
-    </entry>
+    <entry key="espd.crit.reason">Raġuni</entry>
+    <entry key="espd.crit.reasons.nevertheless.contract">Indika r-raġunijiet għaliex minkejja kollox l-operatur jista' jonora l-kuntratt. Din l-informazzjoni jenħtieġ li tingħata jekk l-esklużjoni tal-operaturi ekonomiċi f'dan il-każ tkun saret obbligatorja skont il-liġi nazzjonali applikabbli mingħajr ebda possibbiltà ta' deroga fil-każ li l-operatur ekonomiku jkun jista' jonora l-kuntratt minkejja kollox.</entry>
+    <entry key="espd.crit.recipients">Riċevituri</entry>
+    <entry key="espd.part4.crit.selection.ca.declares.that">Dwar il-kriterji tal-għażla l-awtorità kontraenti teħtieġ li l-operatur ekonomiku jiddikjara li</entry>
+    <entry key="espd.part4.crit.selection.ca.economic.article">L-Artikolu 58(3) tad-Direttiva 2014/24/UE jistabbilixxi l-kriterji tal-għażla li ġejjin</entry>
+    <entry key="espd.part4.crit.selection.declares.that.tooltip">L-operatur ekonomiku għandu jimla din il-kaxxa biss f'każ li l-awtorità kontraenti jew entità kontraenti tkun indikat fl-avviż rilevanti jew fid-dokumenti għall-akkwist msemmija fl-avviż li l-operatur ekonomiku jista' jillimita ruħu li jimla dan il-punt fil-Parti IV mingħajr ma jkollu jimla l-Parti IV, Taqsimiet A, B, C jew D</entry>
+    <entry key="espd.crit.selection.economic.average.yearly.turnover.description">Il-fatturat annwali ġenerali tiegħu għall-għadd ta' snin finanzjarji meħtieġa fl-avviż rilevanti, id-dokumenti għall-akkwist jew id-DEUA huwa kif ġej:</entry>
+    <entry key="espd.crit.selection.economic.average.yearly.turnover.main">Fatturat annwali ġenerali</entry>
+    <entry key="espd.crit.selection.economic.financial.ratio.description">Fir-rigward tal-proporzjonijiet finanzjarji (bħall-proporzjoni bejn l-assi u l-obbligazzjonijiet) speċifikati fl-avviż rilevanti, id-dokumenti tal-akkwist jew l-ESPD, l-operatur ekonomiku jiddikjara li l-valuri reali għall-proporzjonijiet meħtieġa huma dawn:</entry>
     <entry key="espd.crit.selection.economic.financial.ratio.main">Proporzjon finanzjarju</entry>
-    <entry key="espd.crit.selection.economic.financial.standing.article.tooltip">L-operatur ekonomiku g?andu jipprovdi
-        informazzjoni biss meta l-kriterji tal-g?a?la kkon?ernati jkunu me?tie?a mill-awtorità kontraenti jew entità
-        kontraenti fl-avvi? rilevanti jew fid-dokumenti g?all-akkwist msemmija fl-avvi?.
-    </entry>
-    <entry key="espd.crit.selection.economic.general.yearly.turnover.description">Il-fatturat annwali ?enerali tieg?u
-        g?all-g?add ta' snin finanzjarji me?tie?a fl-avvi? rilevanti, id-dokumenti g?all-akkwist jew id-DEUA huwa kif
-        ?ej:
-    </entry>
-    <entry key="espd.crit.selection.economic.general.yearly.turnover.main">Fatturat annwali ?enerali</entry>
-    <entry key="espd.crit.selection.economic.other.financial.requirements.description">Rigward ir-rekwi?iti ekonomi?i u
-        finanzjarji l-o?rajn, jekk ikun hemm, li setg?u kienu spe?ifikati fl-avvi? rilevanti jew fid-dokumenti
-        g?all-akkwist, l-operatur ekonomiku jiddikjara li:
-    </entry>
-    <entry key="espd.crit.selection.economic.other.financial.requirements.main">Rekwi?iti ekonomi?i jew finanzjarji
-        o?ra
-    </entry>
-    <entry key="espd.crit.selection.economic.professional.risk.insurance.description">L-ammont assikurat
-        fl-assikurazzjoni ta' indennizz g?ar-riskji professjonali huwa dan li ?ej:
-    </entry>
-    <entry key="espd.crit.selection.economic.professional.risk.insurance.main">Assikurazzjoni ta' indennizz g?ar-riskji
-        professjonali
-    </entry>
-    <entry key="espd.crit.selection.economic.setup.eo.description">F?ka? li l-informazzjoni li tikkon?erna l-fatturat
-        (?enerali jew spe?ifika) ma tkunx disponibbli g?all-perjodu kollu me?tie?, indika jekk jog??bok id-data meta ?ie
-        stabbilit l-operatur ekonomiku jew meta beda l-attività tieg?u:
-    </entry>
-    <entry key="espd.crit.selection.economic.setup.eo.main">Stabbiliment ta? operatur ekonomiku</entry>
-    <entry key="espd.crit.selection.economic.specific.average.turnover.description">Il-fatturat annwali medju spe?ifiku
-        tieg?u fil-qasam tan-negozju kopert mill-kuntratt g?all-g?add ta' snin me?tie?a fl-avvi? rilevanti, id-dokumenti
-        g?all-akkwist jew id-DEUA huwa kif ?ej:
-    </entry>
-    <entry key="espd.crit.selection.economic.specific.average.turnover.main">Fatturat medju spe?ifiku</entry>
-    <entry key="espd.crit.selection.economic.specific.yearly.turnover.description">Il-fatturat annwali spe?ifiku tieg?u
-        fil-qasam tan-negozju kopert mill-kuntratt g?all-g?add ta' snin finanzjarji me?tie?a fl-avvi? rilevanti,
-        id-dokumenti g?all-akkwist jew id-DEUA huwa kif ?ej:
-    </entry>
-    <entry key="espd.crit.selection.economic.specific.yearly.turnover.main">Fatturat annwali spe?ifiku</entry>
-    <entry key="espd.part4.crit.selection.eo.declares.that">Dwar il-kriterji tal-g?a?la l-operatur ekonomiku jiddikjara
-        li
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.declares.that.tooltip">L-operatur ekonomiku g?andu jimla din il-kaxxa biss
-        f'ka? li l-awtorità kontraenti jew entità kontraenti tkun indikat fl-avvi? rilevanti jew fid-dokumenti
-        g?all-akkwist msemmija fl-avvi? li l-operatur ekonomiku jista' jillimita ru?u li jimla dan il-punt fil-Parti IV
-        ming?ajr ma jkollu jimla l-Parti IV, Taqsimiet A, B, C jew D
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.economic.article">L-Artikolu 58(3) tad-Direttiva 2014/24/UE jistabbilixxi
-        l-kriterji tal-g?a?la li ?ejjin
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.economic.article.tooltip">L-operatur ekonomiku g?andu jipprovdi
-        informazzjoni biss meta l-kriterji tal-g?a?la kkon?ernati jkunu me?tie?a mill-awtorità kontraenti jew entità
-        kontraenti fl-avvi? rilevanti jew fid-dokumenti g?all-akkwist msemmija fl-avvi?.
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.economic.enrolement.description">Huwa rre?istrat fir-re?istri professjonali
-        jew kummer?jali rilevanti mi?muma mill-Istat Membru tal-istabbiliment tieg?u
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.economic.enrolement.main">Re?istrazzjoni f're?istri professjonali jew
-        kummer?jali
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.economic.service.contracts.description">Hemm b?onn ta' awtorizzazzjoni
-        partikolari jew s?ubija f'organizzazzjoni partikolari sabiex wie?ed ikun jista' jwettaq is-servizz ikkon?ernat
-        fil-pajji? tal-istabbiliment tal-operatur ekonomiku?
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.economic.service.contracts.main">G?al kuntratti ta? servizz: ?tie?a ta'
-        awtorizzazzjoni jew s?ubija
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.satisfies.all.criteria">Jissodisfa l-kriterji tal-g?a?la me?tie?a</entry>
-    <entry key="espd.part4.crit.selection.eo.suitability.article">L-Artikolu 58(2) tad-Direttiva 2014/24/UE
-        jistabbilixxi l-kriterji tal-g?a?la li ?ejjin
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.suitability.article.tooltip">L-operatur ekonomiku g?andu jipprovdi
-        informazzjoni biss meta l-kriterji tal-g?a?la kkon?ernati jkunu me?tie?a mill-awtorità kontraenti jew entità
-        kontraenti fl-avvi? rilevanti jew fid-dokumenti g?all-akkwist msemmija fl-avvi?.
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.suitability.enrolment.description">Huwa rre?istrat fir-re?istri
-        professjonali jew kummer?jali rilevanti mi?muma mill-Istat Membru tal-istabbiliment tieg?u
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.suitability.enrolment.main">Re?istrazzjoni f're?istri professjonali jew
-        kummer?jali
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.suitability.service.contracts.description">Hemm b?onn ta' awtorizzazzjoni
-        partikolari jew s?ubija f'organizzazzjoni partikolari sabiex wie?ed ikun jista' jwettaq is-servizz ikkon?ernat
-        fil-pajji? tal-istabbiliment tal-operatur ekonomiku?
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.suitability.service.contracts.main">G?al kuntratti ta? servizz: ?tie?a ta'
-        awtorizzazzjoni jew s?ubija
-    </entry>
-    <entry key="espd.part4.crit.selection.quality.assurance.article">L-Artikolu 62(2) tad-Direttiva 2014/24/UE
-        jistabbilixxi l-kriterji tal-g?a?la li ?ejjin
-    </entry>
-    <entry key="espd.part4.crit.selection.quality.assurance.tooltip">L-operatur ekonomiku g?andu jipprovdi informazzjoni
-        biss meta l-kriterji tal-g?a?la kkon?ernati jkunu me?tie?a mill-awtorità kontraenti jew entità kontraenti
-        fl-avvi? rilevanti jew fid-dokumenti g?all-akkwist msemmija fl-avvi?.
-    </entry>
-    <entry key="espd.crit.selection.quality.certificate.independent.bodies.environmental.description">L-operatur
-        ekonomiku se jkun jista' jipprodu?i ?ertifikati mfassla minn korpi indipendenti li jattestaw li l-operatur
-        ekonomiku jikkonforma mas-sistemi jew standards ta? ?estjoni ambjentali?
-    </entry>
-    <entry key="espd.crit.selection.quality.certificate.independent.bodies.environmental.main">?ertifikati minn korpi
-        indipendenti dwar sistemi jew standards ta? ?estjoni ambjentali
-    </entry>
-    <entry key="espd.crit.selection.quality.certificate.independent.bodies.quality.description">L-operatur ekonomiku se
-        jkun jista' jipprodu?i ?ertifikati mfassla minn korpi indipendenti li jattestaw li l-operatur ekonomiku
-        jikkonforma mal-istandards ta' assigurazzjoni tal-kwalità me?tie?a, inklu?a l-a??essibbiltà g?al persuni
-        b?di?abbiltà?
-    </entry>
-    <entry key="espd.crit.selection.quality.certificate.independent.bodies.quality.main">?ertifikati minn korpi
-        indipendenti dwar standards ta? assigurazzjoni tal-kwalità
-    </entry>
-    <entry key="espd.part4.crit.selection.satisfies.all.criteria">Jissodisfa l-kriterji tal-g?a?la kollha me?tie?a
-        indikati fl-avvi? rilevanti jew fid-dokumenti g?all-akkwist msemmija fl-avvi?.
-    </entry>
-    <entry key="espd.part4.crit.selection.suitability.article">L-Artikolu 58(2) tad-Direttiva 2014/24/UE jistabbilixxi
-        l-kriterji tal-g?a?la li ?ejjin
-    </entry>
-    <entry key="espd.part4.crit.selection.suitability.article.tooltip">L-operatur ekonomiku g?andu jimla din il-kaxxa
-        biss f'ka? li l-awtorità kontraenti jew entità kontraenti tkun indikat fl-avvi? rilevanti jew fid-dokumenti
-        g?all-akkwist msemmija fl-avvi? li l-operatur ekonomiku jista' jillimita ru?u li jimla t-Taqsima ? tal-Parti IV
-        ming?ajr ma jkollu jimla xi Taqsima o?ra tal-Parti IV:
-    </entry>
-    <entry key="espd.crit.selection.suitability.enrolment.professional.register.description">Huwa rre?istrat f're?istri
-        professjonali rilevanti mi?muma fl-Istat Membru tal-istabbiliment tieg?u kif hemm deskritt fl-Anness XI
-        tad-Direttiva 2014/24/UE; l-operaturi ekonomi?i minn ?erti Stati Membri jista? jkollhom jikkonformaw ma?
-        rekwi?iti o?ra stabbiliti f?dak l-Anness.
-    </entry>
-    <entry key="espd.crit.selection.suitability.enrolment.professional.register.main">Re?istrazzjoni f're?istru
-        professjonali rilevanti
-    </entry>
-    <entry key="espd.crit.selection.suitability.enrolment.trade.register.description">Huwa rre?istrat f're?istri
-        kummer?jali mi?muma fl-Istat Membru tal-istabbiliment tieg?u kif hemm deskritt fl-Anness XI tad-Direttiva
-        2014/24/UE; l-operaturi ekonomi?i minn ?erti Stati Membri jista? jkollhom jikkonformaw ma? rekwi?iti o?ra
-        stabbiliti f?dak l-Anness.
-    </entry>
-    <entry key="espd.crit.selection.suitability.enrolment.trade.register.main">Re?istrazzjoni f're?istru kummer?jali
-    </entry>
-    <entry key="espd.crit.selection.suitability.service.contracts.auth.description">Hemm b?onn ta' awtorizzazzjoni
-        partikolari sabiex wie?ed ikun jista' jwettaq is-servizz ikkon?ernat fil-pajji? tal-istabbiliment tal-operatur
-        ekonomiku?
-    </entry>
-    <entry key="espd.crit.selection.suitability.service.contracts.auth.main">G?al kuntratti ta? servizz: awtorizzazzjoni
-        partikolari me?tie?a
-    </entry>
-    <entry key="espd.crit.selection.suitability.service.contracts.membership.description">Hemm b?onn ta' s?ubija
-        f'organizzazzjoni partikolari sabiex wie?ed ikun jista' jwettaq is-servizz ikkon?ernat fil-pajji?
-        tal-istabbiliment tal-operatur ekonomiku?
-    </entry>
-    <entry key="espd.crit.selection.suitability.service.contracts.membership.main">G?al kuntratti ta? servizz: s?ubija
-        f'organizzazzjoni partikolari me?tie?a
-    </entry>
-    <entry key="espd.crit.selection.technical.allowance.of.checks.description">G?al prodotti jew servizzi kumplessi li
-        g?andhom ji?u fornuti jew, e??ezzjonalment, g?al prodotti jew servizzi li huma me?tie?a g?al g?an spe?jali:
-        L-operatur ekonomiku se jippermetti kontrolli li g?andhom jitwettqu fuq il-kapa?itajiet tal-produzzjoni jew
-        il-kapa?ità teknika tal-operatur ekonomiku u, meta jkun ne?essarju, fuq il-mezzi ta' studju u ri?erka li huma
-        disponibbli g?alih u fuq il-mi?uri ta' kontroll tal-kwalità? Il-kontroll g?andu jsir mill-awtorità kontraenti
-        jew, f'ka? li din tal-a??ar tag?ti l-kunsens tag?ha g?al dan, f?isimha minn korp uffi?jali kompetenti tal-pajji?
-        fejn huwa stabbilit il-fornitur jew il-fornitur tas-servizz.
-    </entry>
+    <entry key="espd.crit.selection.economic.financial.standing.article.tooltip">L-operatur ekonomiku għandu jipprovdi informazzjoni biss meta l-kriterji tal-għażla kkonċernati jkunu meħtieġa mill-awtorità kontraenti jew entità kontraenti fl-avviż rilevanti jew fid-dokumenti għall-akkwist msemmija fl-avviż.</entry>
+    <entry key="espd.crit.selection.economic.general.yearly.turnover.description">Il-fatturat annwali ġenerali tiegħu għall-għadd ta' snin finanzjarji meħtieġa fl-avviż rilevanti, id-dokumenti għall-akkwist jew id-DEUA huwa kif ġej:</entry>
+    <entry key="espd.crit.selection.economic.general.yearly.turnover.main">Fatturat annwali ġenerali</entry>
+    <entry key="espd.crit.selection.economic.other.financial.requirements.description">Rigward ir-rekwiżiti ekonomiċi u finanzjarji l-oħrajn, jekk ikun hemm, li setgħu kienu speċifikati fl-avviż rilevanti jew fid-dokumenti għall-akkwist, l-operatur ekonomiku jiddikjara li:</entry>
+    <entry key="espd.crit.selection.economic.other.financial.requirements.main">Rekwiżiti ekonomiċi jew finanzjarji oħra</entry>
+    <entry key="espd.crit.selection.economic.professional.risk.insurance.description">L-ammont assikurat fl-assikurazzjoni ta' indennizz għar-riskji professjonali huwa dan li ġej:</entry>
+    <entry key="espd.crit.selection.economic.professional.risk.insurance.main">Assikurazzjoni ta' indennizz għar-riskji professjonali</entry>
+    <entry key="espd.crit.selection.economic.setup.eo.description">F’każ li l-informazzjoni li tikkonċerna l-fatturat (ġenerali jew speċifika) ma tkunx disponibbli għall-perjodu kollu meħtieġ, indika jekk jogħġbok id-data meta ġie stabbilit l-operatur ekonomiku jew meta beda l-attività tiegħu:</entry>
+    <entry key="espd.crit.selection.economic.setup.eo.main">Stabbiliment ta’ operatur ekonomiku</entry>
+    <entry key="espd.crit.selection.economic.specific.average.turnover.description">Il-fatturat annwali medju speċifiku tiegħu fil-qasam tan-negozju kopert mill-kuntratt għall-għadd ta' snin meħtieġa fl-avviż rilevanti, id-dokumenti għall-akkwist jew id-DEUA huwa kif ġej:</entry>
+    <entry key="espd.crit.selection.economic.specific.average.turnover.main">Fatturat medju speċifiku</entry>
+    <entry key="espd.crit.selection.economic.specific.yearly.turnover.description">Il-fatturat annwali speċifiku tiegħu fil-qasam tan-negozju kopert mill-kuntratt għall-għadd ta' snin finanzjarji meħtieġa fl-avviż rilevanti, id-dokumenti għall-akkwist jew id-DEUA huwa kif ġej:</entry>
+    <entry key="espd.crit.selection.economic.specific.yearly.turnover.main">Fatturat annwali speċifiku</entry>
+    <entry key="espd.part4.crit.selection.eo.declares.that">Dwar il-kriterji tal-għażla l-operatur ekonomiku jiddikjara li</entry>
+    <entry key="espd.part4.crit.selection.eo.declares.that.tooltip">L-operatur ekonomiku għandu jimla din il-kaxxa biss f'każ li l-awtorità kontraenti jew entità kontraenti tkun indikat fl-avviż rilevanti jew fid-dokumenti għall-akkwist msemmija fl-avviż li l-operatur ekonomiku jista' jillimita ruħu li jimla dan il-punt fil-Parti IV mingħajr ma jkollu jimla l-Parti IV, Taqsimiet A, B, C jew D</entry>
+    <entry key="espd.part4.crit.selection.eo.economic.article">L-Artikolu 58(3) tad-Direttiva 2014/24/UE jistabbilixxi l-kriterji tal-għażla li ġejjin</entry>
+    <entry key="espd.part4.crit.selection.eo.economic.article.tooltip">L-operatur ekonomiku għandu jipprovdi informazzjoni biss meta l-kriterji tal-għażla kkonċernati jkunu meħtieġa mill-awtorità kontraenti jew entità kontraenti fl-avviż rilevanti jew fid-dokumenti għall-akkwist msemmija fl-avviż.</entry>
+    <entry key="espd.part4.crit.selection.eo.economic.enrolement.description">Huwa rreġistrat fir-reġistri professjonali jew kummerċjali rilevanti miżmuma mill-Istat Membru tal-istabbiliment tiegħu</entry>
+    <entry key="espd.part4.crit.selection.eo.economic.enrolement.main">Reġistrazzjoni f'reġistri professjonali jew kummerċjali</entry>
+    <entry key="espd.part4.crit.selection.eo.economic.service.contracts.description">Hemm bżonn ta' awtorizzazzjoni partikolari jew sħubija f'organizzazzjoni partikolari sabiex wieħed ikun jista' jwettaq is-servizz ikkonċernat fil-pajjiż tal-istabbiliment tal-operatur ekonomiku?</entry>
+    <entry key="espd.part4.crit.selection.eo.economic.service.contracts.main">Għal kuntratti ta’ servizz: Ħtieġa ta' awtorizzazzjoni jew sħubija</entry>
+    <entry key="espd.part4.crit.selection.eo.satisfies.all.criteria">Jissodisfa l-kriterji tal-għażla meħtieġa</entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.article">L-Artikolu 58(2) tad-Direttiva 2014/24/UE jistabbilixxi l-kriterji tal-għażla li ġejjin</entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.article.tooltip">L-operatur ekonomiku għandu jipprovdi informazzjoni biss meta l-kriterji tal-għażla kkonċernati jkunu meħtieġa mill-awtorità kontraenti jew entità kontraenti fl-avviż rilevanti jew fid-dokumenti għall-akkwist msemmija fl-avviż.</entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.enrolment.description">Huwa rreġistrat fir-reġistri professjonali jew kummerċjali rilevanti miżmuma mill-Istat Membru tal-istabbiliment tiegħu</entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.enrolment.main">Reġistrazzjoni f'reġistri professjonali jew kummerċjali</entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.service.contracts.description">Hemm bżonn ta' awtorizzazzjoni partikolari jew sħubija f'organizzazzjoni partikolari sabiex wieħed ikun jista' jwettaq is-servizz ikkonċernat fil-pajjiż tal-istabbiliment tal-operatur ekonomiku?</entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.service.contracts.main">Għal kuntratti ta’ servizz: Ħtieġa ta' awtorizzazzjoni jew sħubija</entry>
+    <entry key="espd.part4.crit.selection.quality.assurance.article">L-Artikolu 62(2) tad-Direttiva 2014/24/UE jistabbilixxi l-kriterji tal-għażla li ġejjin</entry>
+    <entry key="espd.part4.crit.selection.quality.assurance.tooltip">L-operatur ekonomiku għandu jipprovdi informazzjoni biss meta l-kriterji tal-għażla kkonċernati jkunu meħtieġa mill-awtorità kontraenti jew entità kontraenti fl-avviż rilevanti jew fid-dokumenti għall-akkwist msemmija fl-avviż.</entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.environmental.description">L-operatur ekonomiku se jkun jista' jipproduċi ċertifikati mfassla minn korpi indipendenti li jattestaw li l-operatur ekonomiku jikkonforma mas-sistemi jew standards ta’ ġestjoni ambjentali?</entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.environmental.main">Ċertifikati minn korpi indipendenti dwar sistemi jew standards ta’ ġestjoni ambjentali</entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.quality.description">L-operatur ekonomiku se jkun jista' jipproduċi ċertifikati mfassla minn korpi indipendenti li jattestaw li l-operatur ekonomiku jikkonforma mal-istandards ta' assigurazzjoni tal-kwalità meħtieġa, inkluża l-aċċessibbiltà għal persuni b’diżabbiltà?</entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.quality.main">Ċertifikati minn korpi indipendenti dwar standards ta’ assigurazzjoni tal-kwalità</entry>
+    <entry key="espd.part4.crit.selection.satisfies.all.criteria">Jissodisfa l-kriterji tal-għażla kollha meħtieġa indikati fl-avviż rilevanti jew fid-dokumenti għall-akkwist msemmija fl-avviż.</entry>
+    <entry key="espd.part4.crit.selection.suitability.article">L-Artikolu 58(2) tad-Direttiva 2014/24/UE jistabbilixxi l-kriterji tal-għażla li ġejjin</entry>
+    <entry key="espd.part4.crit.selection.suitability.article.tooltip">L-operatur ekonomiku għandu jimla din il-kaxxa biss f'każ li l-awtorità kontraenti jew entità kontraenti tkun indikat fl-avviż rilevanti jew fid-dokumenti għall-akkwist msemmija fl-avviż li l-operatur ekonomiku jista' jillimita ruħu li jimla t-Taqsima α tal-Parti IV mingħajr ma jkollu jimla xi Taqsima oħra tal-Parti IV:</entry>
+    <entry key="espd.crit.selection.suitability.enrolment.professional.register.description">Huwa rreġistrat f'reġistri professjonali rilevanti miżmuma fl-Istat Membru tal-istabbiliment tiegħu kif hemm deskritt fl-Anness XI tad-Direttiva 2014/24/UE; l-operaturi ekonomiċi minn ċerti Stati Membri jista’ jkollhom jikkonformaw ma’ rekwiżiti oħra stabbiliti f’dak l-Anness.</entry>
+    <entry key="espd.crit.selection.suitability.enrolment.professional.register.main">Reġistrazzjoni f'reġistru professjonali rilevanti</entry>
+    <entry key="espd.crit.selection.suitability.enrolment.trade.register.description">Huwa rreġistrat f'reġistri kummerċjali miżmuma fl-Istat Membru tal-istabbiliment tiegħu kif hemm deskritt fl-Anness XI tad-Direttiva 2014/24/UE; l-operaturi ekonomiċi minn ċerti Stati Membri jista’ jkollhom jikkonformaw ma’ rekwiżiti oħra stabbiliti f’dak l-Anness.</entry>
+    <entry key="espd.crit.selection.suitability.enrolment.trade.register.main">Reġistrazzjoni f'reġistru kummerċjali</entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.auth.description">Hemm bżonn ta' awtorizzazzjoni partikolari sabiex wieħed ikun jista' jwettaq is-servizz ikkonċernat fil-pajjiż tal-istabbiliment tal-operatur ekonomiku?</entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.auth.main">Għal kuntratti ta’ servizz: awtorizzazzjoni partikolari meħtieġa</entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.membership.description">Hemm bżonn ta' sħubija f'organizzazzjoni partikolari sabiex wieħed ikun jista' jwettaq is-servizz ikkonċernat fil-pajjiż tal-istabbiliment tal-operatur ekonomiku?</entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.membership.main">Għal kuntratti ta’ servizz: sħubija f'organizzazzjoni partikolari meħtieġa</entry>
+    <entry key="espd.crit.selection.technical.allowance.of.checks.description">Għal prodotti jew servizzi kumplessi li għandhom jiġu fornuti jew, eċċezzjonalment, għal prodotti jew servizzi li huma meħtieġa għal għan speċjali: L-operatur ekonomiku se jippermetti kontrolli li għandhom jitwettqu fuq il-kapaċitajiet tal-produzzjoni jew il-kapaċità teknika tal-operatur ekonomiku u, meta jkun neċessarju, fuq il-mezzi ta' studju u riċerka li huma disponibbli għalih u fuq il-miżuri ta' kontroll tal-kwalità? Il-kontroll għandu jsir mill-awtorità kontraenti jew, f'każ li din tal-aħħar tagħti l-kunsens tagħha għal dan, f’isimha minn korp uffiċjali kompetenti tal-pajjiż fejn huwa stabbilit il-fornitur jew il-fornitur tas-servizz.</entry>
     <entry key="espd.crit.selection.technical.allowance.of.checks.main">Kontrolli permessi</entry>
-    <entry key="espd.crit.selection.technical.average.annual.manpower.description">Il-manodopera annwali medja
-        tal-operatur ekonomiku g?all-a??ar tliet snin kienet kif ?ej:
-    </entry>
+    <entry key="espd.crit.selection.technical.average.annual.manpower.description">Il-manodopera annwali medja tal-operatur ekonomiku għall-aħħar tliet snin kienet kif ġej:</entry>
     <entry key="espd.crit.selection.technical.average.annual.manpower.main">Manodopera annwali medja</entry>
-    <entry key="espd.crit.selection.technical.educational.professional.qualifications.description">Il-fornitur
-        tas-servizz jew il-kuntrattur innifsu g?andu l-kwalifiki edukattivi u professjonali li ?ejjin, u/jew (skont
-        ir-rekwi?iti stabbiliti fl-avvi? rilevanti jew id-dokumenti g?all-akkwist mill-persunal mani?erjali tieg?u.
-    </entry>
-    <entry key="espd.crit.selection.technical.educational.professional.qualifications.main">Kwalifiki edukattivi u
-        professjonali
-    </entry>
-    <entry key="espd.crit.selection.technical.environment.management.features.description">L-operatur ekonomiku se jkun
-        jista' japplika l-mi?uri ta' ?estjoni ambjentali li ?ejjin waqt it-twettiq tal-kuntratt:
-    </entry>
-    <entry key="espd.crit.selection.technical.environment.management.features.main">Mi?uri ta' ?estjoni ambjentali
-    </entry>
-    <entry key="espd.crit.selection.technical.number.managerial.staff.description">L-g?add ta' persunal mani?erjali
-        tal-operatur ekonomiku g?all-a??ar tliet snin kien kif ?ej:
-    </entry>
-    <entry key="espd.crit.selection.technical.number.managerial.staff.main">G?add ta' persunal mani?erjali</entry>
-    <entry key="espd.part4.crit.selection.technical.professional.ability.article">L-Artikolu 58(4) tad-Direttiva
-        2014/24/UE jistabbilixxi l-kriterji tal-g?a?la li ?ejjin
-    </entry>
-    <entry key="espd.part4.crit.selection.technical.professional.ability.article.tooltip">L-operatur ekonomiku g?andu
-        jipprovdi informazzjoni biss meta l-kriterji tal-g?a?la kkon?ernati jkunu me?tie?a mill-awtorità kontraenti jew
-        entità kontraenti fl-avvi? rilevanti jew fid-dokumenti g?all-akkwist msemmija fl-avvi?.
-    </entry>
-    <entry key="espd.crit.selection.technical.service.contracts.performance.services.description">G?al kuntratti g?al
-        servizzi pubbli?i biss: Matul il-perjodu referenzjarju, l-operatur ekonomiku pprovda s-servizzi ewlenin li
-        ?ejjin tat-tip spe?ifikat. L-awtoritajiet kontraenti jistg?u je?tie?u sa tliet snin u jippermettu esperjenza li
-        tmur lura g?al iktar minn tliet snin.
-    </entry>
-    <entry key="espd.crit.selection.technical.service.contracts.performance.services.main">G?al kuntratti ta? servizz:
-        twettiq tas-servizzi tat-tip spe?ifikat
-    </entry>
-    <entry key="espd.crit.selection.technical.study.research.facilities.description">Dan ju?a l-fa?ilitajiet ta? studju
-        u ri?erka kif ?ej:
-    </entry>
-    <entry key="espd.crit.selection.technical.study.research.facilities.main">Fa?ilitajiet ta' studju u ri?erka</entry>
-    <entry key="espd.crit.selection.technical.subcontracting.proportion.description">L-operatur ekonomiku be?siebu
-        possibbilment jissottokuntratta l-proporzjon li ?ej (ji?ifieri persenta??) tal-kuntratt. Jekk jog??bok innota li
-        jekk l-operatur ekonomiku jkun idde?ieda li jissottokuntratta parti mill-kuntratt u jiddependi mill-kapa?itajiet
-        tas-sottokuntrattur biex iwettaq dik il-parti, imla jekk jog??bok DEUA separat g?al dawn is-sottokuntratturi,
-        ara l-Parti II, it-Taqsima C ta' hawn fuq.
-    </entry>
+    <entry key="espd.crit.selection.technical.educational.professional.qualifications.description">Il-fornitur tas-servizz jew il-kuntrattur innifsu għandu l-kwalifiki edukattivi u professjonali li ġejjin, u/jew (skont ir-rekwiżiti stabbiliti fl-avviż rilevanti jew id-dokumenti għall-akkwist mill-persunal maniġerjali tiegħu.</entry>
+    <entry key="espd.crit.selection.technical.educational.professional.qualifications.main">Kwalifiki edukattivi u professjonali</entry>
+    <entry key="espd.crit.selection.technical.environment.management.features.description">L-operatur ekonomiku se jkun jista' japplika l-miżuri ta' ġestjoni ambjentali li ġejjin waqt it-twettiq tal-kuntratt:</entry>
+    <entry key="espd.crit.selection.technical.environment.management.features.main">Miżuri ta' ġestjoni ambjentali</entry>
+    <entry key="espd.crit.selection.technical.number.managerial.staff.description">L-għadd ta' persunal maniġerjali tal-operatur ekonomiku għall-aħħar tliet snin kien kif ġej:</entry>
+    <entry key="espd.crit.selection.technical.number.managerial.staff.main">Għadd ta' persunal maniġerjali</entry>
+    <entry key="espd.part4.crit.selection.technical.professional.ability.article">L-Artikolu 58(4) tad-Direttiva 2014/24/UE jistabbilixxi l-kriterji tal-għażla li ġejjin</entry>
+    <entry key="espd.part4.crit.selection.technical.professional.ability.article.tooltip">L-operatur ekonomiku għandu jipprovdi informazzjoni biss meta l-kriterji tal-għażla kkonċernati jkunu meħtieġa mill-awtorità kontraenti jew entità kontraenti fl-avviż rilevanti jew fid-dokumenti għall-akkwist msemmija fl-avviż.</entry>
+    <entry key="espd.crit.selection.technical.service.contracts.performance.services.description">Għal kuntratti għal servizzi pubbliċi biss: Matul il-perjodu referenzjarju, l-operatur ekonomiku pprovda s-servizzi ewlenin li ġejjin tat-tip speċifikat. L-awtoritajiet kontraenti jistgħu jeħtieġu sa tliet snin u jippermettu esperjenza li tmur lura għal iktar minn tliet snin.</entry>
+    <entry key="espd.crit.selection.technical.service.contracts.performance.services.main">Għal kuntratti ta’ servizz: twettiq tas-servizzi tat-tip speċifikat</entry>
+    <entry key="espd.crit.selection.technical.study.research.facilities.description">Dan juża l-faċilitajiet ta’ studju u riċerka kif ġej:</entry>
+    <entry key="espd.crit.selection.technical.study.research.facilities.main">Faċilitajiet ta' studju u riċerka</entry>
+    <entry key="espd.crit.selection.technical.subcontracting.proportion.description">L-operatur ekonomiku beħsiebu possibbilment jissottokuntratta l-proporzjon li ġej (jiġifieri persentaġġ) tal-kuntratt. Jekk jogħġbok innota li jekk l-operatur ekonomiku jkun iddeċieda li jissottokuntratta parti mill-kuntratt u jiddependi mill-kapaċitajiet tas-sottokuntrattur biex iwettaq dik il-parti, imla jekk jogħġbok DEUA separat għal dawn is-sottokuntratturi, ara l-Parti II, it-Taqsima C ta' hawn fuq.</entry>
     <entry key="espd.crit.selection.technical.subcontracting.proportion.main">Proporzjon ta' sottokuntrattar</entry>
-    <entry key="espd.crit.selection.technical.supply.chain.management.description">Huwa se jkun jista' japplika
-        s-sistemi ta' ?estjoni u ta' rintra??ar tal-katina ta' provvista waqt it-twettiq tal-kuntratt:
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.chain.management.main">?estjoni tal-katina ta' provvista</entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.certificate.quality.description">Jista' l-operatur
-        ekonomiku jipprovdi ?-?ertifikati me?tie?a mfassla minn a?enziji jew istituti tal-kontroll tal-kwalità
-        b?kompetenza rikonoxxuta li jattestaw il-konformità tal-prodotti identifikati b?mod ?ar b'referenzi
-        g?all-ispe?ifikazzjonijiet jew standards tekni?i, stabbiliti fl-avvi? rilevanti jew fid-dokumenti g?all-akkwist?
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.certificate.quality.main">G?al kuntratti ta? provvista:
-        ?ertifikati minn istituti tal-kontroll tal-kwalità
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.performance.deliveries.description">G?al kuntratti ta?
-        provvista pubblika biss: Matul il-perjodu referenzjarju, l-operatur ekonomiku wettaq il-konsenji prin?ipali li
-        ?ejjin tat-tip spe?ifikat. L-awtoritajiet kontraenti jistg?u je?tie?u sa tliet snin u jippermettu esperjenza li
-        tmur lura g?al iktar minn tliet snin.
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.performance.deliveries.main">G?al kuntratti ta?
-        provvista: twettiq tal-konsenji tat-tip spe?ifikat
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.with.ca.description">G?al kuntratti ta' provvista
-        pubblika: L-operatur ekonomiku se jforni l-kampjuni, id-deskrizzjonijiet jew ir-ritratti me?tie?a tal-prodotti
-        li g?andhom ji?u fornuti u se jipprovdi ?ertifikazzjonijiet ta' awtenti?ità fejn applikabbli.
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.with.ca.main">G?al kuntratti ta? provvista: kampjuni,
-        deskrizzjonijiet jew ritratti b'?ertifikazzjoni ta' awtenti?ità
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.without.ca.description">G?al kuntratti ta' provvista
-        pubblika: L-operatur ekonomiku se jforni l-kampjuni, id-deskrizzjonijiet jew ir-ritratti me?tie?a tal-prodotti
-        li g?andhom ji?u fornuti u li ma g?andhomx g?alfejn ikunu akkumpanjati minn ?ertifikazzjonijiet ta' awtenti?ità.
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.without.ca.main">G?al kuntratti ta? provvista: kampjuni,
-        deskrizzjonijiet jew ritratti ming?ajr ?ertifikazzjoni ta' awtenti?ità
-    </entry>
-    <entry key="espd.crit.selection.technical.technical.facilities.measures.description">Huwa ju?a l-fa?ilitajiet
-        tekni?i u l-mi?uri li ?ejjin biex ji?gura l-kwalità u fa?ilitajiet ta' studju u ri?erka tieg?u huma kif ?ej:
-    </entry>
-    <entry key="espd.crit.selection.technical.technical.facilities.measures.main">Fa?ilitajiet u mi?uri tekni?i biex
-        ti?i ?gurata l-kwalità
-    </entry>
-    <entry key="espd.crit.selection.technical.technicians.technical.bodies.description">Huwa jista' jsejja? lit-tekni?i
-        jew korpi tekni?i li ?ejjin, spe?jalment dawk responsabbli g?all-kontroll tal-kwalità. G?al tekni?i jew korpi
-        tekni?i li ma jkunux direttament jappartjenu g?all-impri?a tal-operatur ekonomiku i?da li l-operatur ekonomiku
-        jiddependi mill-kapa?itajiet tag?hom kif stabbilit fil-Parti II, Taqsima C, g?andhom jimtlew formoli separati
-        tad-DEUA.
-    </entry>
-    <entry key="espd.crit.selection.technical.technicians.technical.bodies.main">Tekni?i jew korpi tekni?i
-        g?all-kontroll tal-kwalità
-    </entry>
-    <entry key="espd.crit.selection.technical.tools.plant.description">L-g?odod, l-impjant u t-tag?mir tekniku li ?ejjin
-        se jkunu g?ad-dispo?izzjoni tieg?u g?at-twettiq tal-kuntratt:
-    </entry>
-    <entry key="espd.crit.selection.technical.tools.plant.main">G?odod, impjant u tag?mir tekniku</entry>
-    <entry key="espd.crit.selection.technical.work.contracts.performance.works.description">G?al kuntratti ta'
-        xog?lijiet pubbli?i biss: Matul il-perjodu referenzjarju, l-operatur ekonomiku wettaq ix-xog?lijiet li ?ejjin
-        tat-tip spe?ifikat. L-awtoritajiet kontraenti jistg?u je?tie?u sa ?ames snin u jippermettu esperjenza li tmur
-        lura g?al iktar minn ?ames snin.
-    </entry>
-    <entry key="espd.crit.selection.technical.work.contracts.performance.works.main">G?al kuntratti ta? xog?lijiet:
-        twettiq tax-xog?lijiet tat-tip spe?ifikat
-    </entry>
-    <entry key="espd.crit.selection.technical.work.contracts.technicians.description">Fil-ka? ta' kuntratti ta'
-        xog?lijiet pubbli?i, l-operatur ekonomiku se jkun jista' jsejja? lit-tekni?i jew korpi tekni?i li ?ejjin biex
-        iwettqu x-xog?ol:
-    </entry>
-    <entry key="espd.crit.selection.technical.work.contracts.technicians.main">G?al kuntratti ta? xog?lijiet: tekni?i
-        jew korpi tekni?i li jwettqu x-xog?ol
-    </entry>
+    <entry key="espd.crit.selection.technical.supply.chain.management.description">Huwa se jkun jista' japplika s-sistemi ta' ġestjoni u ta' rintraċċar tal-katina ta' provvista waqt it-twettiq tal-kuntratt:</entry>
+    <entry key="espd.crit.selection.technical.supply.chain.management.main">Ġestjoni tal-katina ta' provvista</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.certificate.quality.description">Jista' l-operatur ekonomiku jipprovdi ċ-ċertifikati meħtieġa mfassla minn aġenziji jew istituti tal-kontroll tal-kwalità b’kompetenza rikonoxxuta li jattestaw il-konformità tal-prodotti identifikati b’mod ċar b'referenzi għall-ispeċifikazzjonijiet jew standards tekniċi, stabbiliti fl-avviż rilevanti jew fid-dokumenti għall-akkwist?</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.certificate.quality.main">Għal kuntratti ta’ provvista: ċertifikati minn istituti tal-kontroll tal-kwalità</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.performance.deliveries.description">Għal kuntratti ta’ provvista pubblika biss: Matul il-perjodu referenzjarju, l-operatur ekonomiku wettaq il-konsenji prinċipali li ġejjin tat-tip speċifikat. L-awtoritajiet kontraenti jistgħu jeħtieġu sa tliet snin u jippermettu esperjenza li tmur lura għal iktar minn tliet snin.</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.performance.deliveries.main">Għal kuntratti ta’ provvista: twettiq tal-konsenji tat-tip speċifikat</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.with.ca.description">Għal kuntratti ta' provvista pubblika: L-operatur ekonomiku se jforni l-kampjuni, id-deskrizzjonijiet jew ir-ritratti meħtieġa tal-prodotti li għandhom jiġu fornuti u se jipprovdi ċertifikazzjonijiet ta' awtentiċità fejn applikabbli.</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.with.ca.main">Għal kuntratti ta’ provvista: kampjuni, deskrizzjonijiet jew ritratti b'ċertifikazzjoni ta' awtentiċità</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.without.ca.description">Għal kuntratti ta' provvista pubblika: L-operatur ekonomiku se jforni l-kampjuni, id-deskrizzjonijiet jew ir-ritratti meħtieġa tal-prodotti li għandhom jiġu fornuti u li ma għandhomx għalfejn ikunu akkumpanjati minn ċertifikazzjonijiet ta' awtentiċità.</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.without.ca.main">Għal kuntratti ta’ provvista: kampjuni, deskrizzjonijiet jew ritratti mingħajr ċertifikazzjoni ta' awtentiċità</entry>
+    <entry key="espd.crit.selection.technical.technical.facilities.measures.description">Huwa juża l-faċilitajiet tekniċi u l-miżuri li ġejjin biex jiżgura l-kwalità u faċilitajiet ta' studju u riċerka tiegħu huma kif ġej:</entry>
+    <entry key="espd.crit.selection.technical.technical.facilities.measures.main">Faċilitajiet u miżuri tekniċi biex tiġi żgurata l-kwalità</entry>
+    <entry key="espd.crit.selection.technical.technicians.technical.bodies.description">Huwa jista' jsejjaħ lit-tekniċi jew korpi tekniċi li ġejjin, speċjalment dawk responsabbli għall-kontroll tal-kwalità. Għal tekniċi jew korpi tekniċi li ma jkunux direttament jappartjenu għall-impriża tal-operatur ekonomiku iżda li l-operatur ekonomiku jiddependi mill-kapaċitajiet tagħhom kif stabbilit fil-Parti II, Taqsima C, għandhom jimtlew formoli separati tad-DEUA.</entry>
+    <entry key="espd.crit.selection.technical.technicians.technical.bodies.main">Tekniċi jew korpi tekniċi għall-kontroll tal-kwalità</entry>
+    <entry key="espd.crit.selection.technical.tools.plant.description">L-għodod, l-impjant u t-tagħmir tekniku li ġejjin se jkunu għad-dispożizzjoni tiegħu għat-twettiq tal-kuntratt:</entry>
+    <entry key="espd.crit.selection.technical.tools.plant.main">Għodod, impjant u tagħmir tekniku</entry>
+    <entry key="espd.crit.selection.technical.work.contracts.performance.works.description">Għal kuntratti ta' xogħlijiet pubbliċi biss: Matul il-perjodu referenzjarju, l-operatur ekonomiku wettaq ix-xogħlijiet li ġejjin tat-tip speċifikat. L-awtoritajiet kontraenti jistgħu jeħtieġu sa ħames snin u jippermettu esperjenza li tmur lura għal iktar minn ħames snin.</entry>
+    <entry key="espd.crit.selection.technical.work.contracts.performance.works.main">Għal kuntratti ta’ xogħlijiet: twettiq tax-xogħlijiet tat-tip speċifikat</entry>
+    <entry key="espd.crit.selection.technical.work.contracts.technicians.description">Fil-każ ta' kuntratti ta' xogħlijiet pubbliċi, l-operatur ekonomiku se jkun jista' jsejjaħ lit-tekniċi jew korpi tekniċi li ġejjin biex iwettqu x-xogħol:</entry>
+    <entry key="espd.crit.selection.technical.work.contracts.technicians.main">Għal kuntratti ta’ xogħlijiet: tekniċi jew korpi tekniċi li jwettqu x-xogħol</entry>
     <entry key="espd.crit.start.date">Data tal-bidu</entry>
-    <entry key="espd.crit.taken.self.cleaning.measures">Hadt mi?uri biex turi l-affidabbiltà tieg?ek
-        (?Awtodixxiplina?)?
-    </entry>
-    <entry key="espd.crit.taxes.eo.fulfilled.obligations">L-operatur ekonomiku ssodisfa l-obbligi tieg?u li j?allas jew
-        jid?ol fi ftehim vinkolanti bil-?sieb li j?allas it-taxxi jew il-kontribuzzjonijiet tas-sigurtà so?jali dovuti,
-        inklu?, meta applikabbli, kull interess akkumulat jew multi?
-    </entry>
-    <entry key="espd.crit.taxes.length.period.of.exclusion">F'ka? ta' kundanna, safejn stabbilit direttament fiha, tul
-        il-perjodu ta? esklu?joni
-    </entry>
-    <entry key="espd.crit.taxes.means.description">Jekk jog??bok iddeskrivi x?mezzi ntu?aw</entry>
-    <entry key="espd.part3.crit.grounds.criminal.conv.top.title">A: Ra?unijiet relatati ma? kundanni kriminali</entry>
-    <entry key="espd.part3.crit.top.grounds.payment.taxes.title">B: Ra?unijiet relatati mal-?las ta? taxxi jew
-        kontribuzzjonijiet tas-sigurtà so?jali
-    </entry>
-    <entry key="espd.part3.crit.insolvency.conflicts.top.title">C: Ra?unijiet relatati ma' insolvenza, kunflitti ta?
-        interess jew im?iba professjonali ?a?ina
-    </entry>
-    <entry key="espd.part3.crit.purely.national.top.title">D: Ra?unijiet purament nazzjonali g?all-esklu?joni</entry>
+    <entry key="espd.crit.taken.self.cleaning.measures">Hadt miżuri biex turi l-affidabbiltà tiegħek (“Awtodixxiplina”)?</entry>
+    <entry key="espd.crit.taxes.eo.fulfilled.obligations">L-operatur ekonomiku ssodisfa l-obbligi tiegħu li jħallas jew jidħol fi ftehim vinkolanti bil-ħsieb li jħallas it-taxxi jew il-kontribuzzjonijiet tas-sigurtà soċjali dovuti, inkluż, meta applikabbli, kull interess akkumulat jew multi?</entry>
+    <entry key="espd.crit.taxes.length.period.of.exclusion">F'każ ta' kundanna, safejn stabbilit direttament fiha, tul il-perjodu ta’ esklużjoni</entry>
+    <entry key="espd.crit.taxes.means.description">Jekk jogħġbok iddeskrivi x’mezzi ntużaw</entry>
+    <entry key="espd.part3.crit.grounds.criminal.conv.top.title">A: Raġunijiet relatati ma’ kundanni kriminali</entry>
+    <entry key="espd.part3.crit.top.grounds.payment.taxes.title">B: Raġunijiet relatati mal-ħlas ta’ taxxi jew kontribuzzjonijiet tas-sigurtà soċjali</entry>
+    <entry key="espd.part3.crit.insolvency.conflicts.top.title">C: Raġunijiet relatati ma' insolvenza, kunflitti ta’ interess jew imġiba professjonali ħażina</entry>
+    <entry key="espd.part3.crit.purely.national.top.title">D: Raġunijiet purament nazzjonali għall-esklużjoni</entry>
     <entry key="espd.crit.url">URL</entry>
-    <entry key="espd.crit.who.convicted">Min ?ie kkundannat</entry>
+    <entry key="espd.crit.who.convicted">Min ġie kkundannat</entry>
     <entry key="espd.crit.year">Sena</entry>
-    <entry key="espd.crit.your.answer">It-twe?iba tieg?ek?</entry>
-    <entry key="espd.gui.download.as">Ni??el b?ala</entry>
+    <entry key="espd.crit.your.answer">It-tweġiba tiegħek?</entry>
+    <entry key="espd.gui.download.as">Niżżel bħala</entry>
     <entry key="espd.gui.download.pdf">Format PDF</entry>
     <entry key="espd.gui.download.xml">Format XML</entry>
-    <entry key="espd.gui.download.zip">I?-?ew? formati</entry>
+    <entry key="espd.gui.download.zip">Iż-żewġ formati</entry>
     <entry key="espd.gui.ec">Kummissjoni Ewropea</entry>
     <entry key="espd.ecertis.404">L-ebda dejta tal-ECERTIS</entry>
-    <entry key="espd.ecertis.issued">Ma?ru? Minn</entry>
+    <entry key="espd.ecertis.issued">Maħruġ Minn</entry>
     <entry key="espd.ecertis.language">Lingwa</entry>
-    <entry key="espd.ecertis.loading">Qieg?ed jillowdja minn ECERTIS...</entry>
+    <entry key="espd.ecertis.loading">Qiegħed jillowdja minn ECERTIS...</entry>
     <entry key="espd.ecertis.no.evidences">L-ebda evidenza</entry>
-    <entry key="espd.gui.error.ted.notice.not.supported">Il-fajl imtella? huwa avvi? u mhux ESPD, u g?aldaqstant ma
-        jistax jintu?a ma? dan is-servizz
-    </entry>
-    <entry key="espd.gui.espd">Dokument Ewropew Uniku g?all-Akkwist</entry>
-    <entry key="espd.gui.espd.upload.error">Il-fajl applowdjat ma setax jinqara korrettament. Din hija Talba jew
-        Risposta g?al DEUA valida?
-    </entry>
-    <entry key="espd.gui.espd.upload.request.error">Il-fajl applowdjat ma setax jinqara korrettament. Din hija Talba
-        g?al DEUA valida?
-    </entry>
-    <entry key="espd.gui.espd.upload.response.error">Il-fajl applowdjat ma setax jinqara korrettament. Din hija Risposta
-        g?al DEUA valida?
-    </entry>
+    <entry key="espd.gui.error.ted.notice.not.supported">Il-fajl imtella’ huwa avviż u mhux ESPD, u għaldaqstant ma jistax jintuża ma’ dan is-servizz</entry>
+    <entry key="espd.gui.espd">Dokument Ewropew Uniku għall-Akkwist</entry>
+    <entry key="espd.gui.espd.upload.error">Il-fajl applowdjat ma setax jinqara korrettament. Din hija Talba jew Risposta għal DEUA valida?</entry>
+    <entry key="espd.gui.espd.upload.request.error">Il-fajl applowdjat ma setax jinqara korrettament. Din hija Talba għal DEUA valida?</entry>
+    <entry key="espd.gui.espd.upload.response.error">Il-fajl applowdjat ma setax jinqara korrettament. Din hija Risposta għal DEUA valida?</entry>
     <entry key="espd.gui.europa">Ewropa</entry>
-    <entry key="espd.gui.expire.reminder.message">Ma g?amilt l-ebda azzjoni fis-servizz tal-ESPD g?al kwa?i sieg?a.
-        &lt;p&gt;
-        Jekk jog??bok issejvja l-eESPD biex tag?mel ?gur li ma titlifx dejta.&lt;p&gt;Tista? timporta (tu?a mill-?did) l-eESPD
-        tieg?ek fi kwalunkwe ?in biex tkompli ta?dem.
-    </entry>
+    <entry key="espd.gui.expire.reminder.message">Ma għamilt l-ebda azzjoni fis-servizz tal-ESPD għal kważi siegħa.    Jekk jogħġbok issejvja l-eESPD biex tagħmel żgur li ma titlifx dejta.  Tista’ timporta (tuża mill-ġdid) l-eESPD tiegħek fi kwalunkwe ħin biex tkompli taħdem.</entry>
     <entry key="espd.gui.export">Biex issalva</entry>
     <entry key="espd.gui.faq.leaflet">Fuljett bil-mistoqsijiet l-aktar komuni</entry>
-    <entry key="espd.gui.faq.text.answers">Jekk int interessat fit-twe?ibiet g?all-mistoqsijiet l-aktar komuni dwar
-        l-ESPD, jekk jog??bok ara
-    </entry>
-    <entry key="espd.gui.faq.text.more.info">G?al aktar tag?rif dwar l-ESPD, tista?</entry>
-    <entry key="espd.init.alert">
-        &lt;p&gt;Id-Dokument Ewropew Uniku g?all-Akkwist (DEUA) huwa awtodikjarazzjoni tal-istatus finanzjarju,
-            tal-kapa?itajiet u tal-idoneità tan-negozji g?al pro?edura ta? akkwist pubbliku. Dan huwa disponibbli
-            fil-lingwi kollha tal-UE u jintu?a b?ala evidenza preliminari li ?ew sodisfatti l-kundizzjonijiet me?tie?a
-            fil-pro?eduri tal-akkwist pubbliku fl-UE kollha. Bis-sa??a tad-DEUA, l-offerenti ma g?andhomx g?alfejn
-            ikomplu jipprovdu evidenza dokumentata s?i?a u formoli differenti u?ati qabel fl-akkwist tal-UE, u dan
-            ifisser simplifikazzjoni sinifikanti ta? a??ess g?al opportunitajiet ta? offerti transkonfinali. Minn
-            Ottubru 2018 'il quddiem, id-DEUA g?andu ji?i pprovdut esklussivament f?forma elettronika.
-        &lt;/p&gt;
-        &lt;p&gt;Il-Kummissjoni Ewropea tipprovdi s-servizz tal-web bla ?las g?all-akkwirenti, l-offerenti u partijiet o?ra
-            interessati meta ji?u biex jimlew id-DEUA elettronikament. Il-formola onlajn tista? timtela, ti?i stampata u
-            mbag?ad tintbag?at lill-akkwirent flimkien mal-bqija tal-offerta. Jekk il-pro?edura titwettaq
-            elettronikament, id-DEUA jista' ji?i esportat, ma??un u mibg?ut elettronikament. Id-DEUA provdut fi
-            pro?edura ta? akkwist pubbliku pre?edenti jista' jer?a' jintu?a dment li l-informazzjoni tibqa' korretta.
-            L-offerenti jistg?u ji?u esklu?i mill-pro?edura jew ikunu su??etti g?al prosekuzzjoni jekk fid-DEUA, ti?i
-            ppre?entata informazzjoni gravement falza, tit?alla barra jew ma tistax ti?i kkomplementata b?dokumenti ta?
-            appo??.
-        &lt;/p&gt;
-    </entry>
-    <entry key="espd.init.create.espd">No?loq DEUA ?did</entry>
-    <entry key="espd.init.create.response">O?loq twe?iba</entry>
-    <entry key="espd.init.header">Mer?ba fis-Servizz tad-DEUA</entry>
+    <entry key="espd.gui.faq.text.answers">Jekk int interessat fit-tweġibiet għall-mistoqsijiet l-aktar komuni dwar l-ESPD, jekk jogħġbok ara</entry>
+    <entry key="espd.gui.faq.text.more.info">Għal aktar tagħrif dwar l-ESPD, tista’</entry>
+    <entry key="espd.init.alert">Id-Dokument Ewropew Uniku għall-Akkwist (DEUA) huwa awtodikjarazzjoni tal-istatus finanzjarju, tal-kapaċitajiet u tal-idoneità tan-negozji għal proċedura ta’ akkwist pubbliku. Dan huwa disponibbli fil-lingwi kollha tal-UE u jintuża bħala evidenza preliminari li ġew sodisfatti l-kundizzjonijiet meħtieġa fil-proċeduri tal-akkwist pubbliku fl-UE kollha. Bis-saħħa tad-DEUA, l-offerenti ma għandhomx għalfejn ikomplu jipprovdu evidenza dokumentata sħiħa u formoli differenti użati qabel fl-akkwist tal-UE, u dan ifisser simplifikazzjoni sinifikanti ta’ aċċess għal opportunitajiet ta’ offerti transkonfinali. Minn Ottubru 2018 'il quddiem, id-DEUA għandu jiġi pprovdut esklussivament f’forma elettronika. Il-Kummissjoni Ewropea tipprovdi s-servizz tal-web bla ħlas għall-akkwirenti, l-offerenti u partijiet oħra interessati meta jiġu biex jimlew id-DEUA elettronikament. Il-formola onlajn tista’ timtela, tiġi stampata u mbagħad tintbagħat lill-akkwirent flimkien mal-bqija tal-offerta. Jekk il-proċedura titwettaq elettronikament, id-DEUA jista' jiġi esportat, maħżun u mibgħut elettronikament. Id-DEUA provdut fi proċedura ta’ akkwist pubbliku preċedenti jista' jerġa' jintuża dment li l-informazzjoni tibqa' korretta. L-offerenti jistgħu jiġu esklużi mill-proċedura jew ikunu suġġetti għal prosekuzzjoni jekk fid-DEUA, tiġi ppreżentata informazzjoni gravement falza, titħalla barra jew ma tistax tiġi kkomplementata b’dokumenti ta’ appoġġ.</entry>
+    <entry key="espd.init.create.espd">Noħloq DEUA ġdid</entry>
+    <entry key="espd.init.create.response">Oħloq tweġiba</entry>
+    <entry key="espd.init.header">Merħba fis-Servizz tad-DEUA</entry>
     <entry key="espd.init.i.am.ca">Jiena awtorità kontraenti</entry>
     <entry key="espd.init.i.am.ce">Jien entità kontraenti</entry>
     <entry key="espd.init.i.am.eop">Jiena operatur ekonomiku</entry>
     <entry key="espd.init.import.espd">Nimporta DEUA</entry>
-    <entry key="espd.init.merge.espds">Ng?aqqad ?ew? DEUAi</entry>
-    <entry key="espd.init.reuse.espd">Nu?a mill-?did DEUA e?istenti</entry>
+    <entry key="espd.init.merge.espds">Ngħaqqad żewġ DEUAi</entry>
+    <entry key="espd.init.reuse.espd">Nuża mill-ġdid DEUA eżistenti</entry>
     <entry key="espd.init.review.espd">Nirrevedi d-DEUA</entry>
-    <entry key="espd.init.select.country">Ag??el il-pajji?</entry>
-    <entry key="espd.init.ted.reception.id.placeholder">Jekk jog??bok spe?ifika n-numru tal-avvi? li r?evejt</entry>
+    <entry key="espd.init.select.country">Agħżel il-pajjiż</entry>
+    <entry key="espd.init.ted.reception.id.placeholder">Jekk jogħġbok speċifika n-numru tal-avviż li rċevejt</entry>
     <entry key="espd.init.upload.document">Napplowdja d-dokument</entry>
     <entry key="espd.init.upload.documents">Napplowdja d-dokumenti</entry>
-    <entry key="espd.init.upload.request">Jekk jo???bok applowdja Talba g?al DEUA mill-awtorità kontraenti</entry>
-    <entry key="espd.init.upload.request.response">Jekk jo???bok applowdja Talba g?al DEUA jew Risposta g?al DEUA
-    </entry>
-    <entry key="espd.init.upload.response">Jekk jog??bok applowdja Risposta g?al DEUA qadima</entry>
-    <entry key="espd.init.what.you.do">X'tixtieq tag?mel?</entry>
-    <entry key="espd.init.where.are.you.from.ca">Fejn tinsab l-awtorità tieg?ek?</entry>
-    <entry key="espd.init.where.are.you.from.eo">Fejn jinsab in-negozju tieg?ek?</entry>
+    <entry key="espd.init.upload.request">Jekk joġħġbok applowdja Talba għal DEUA mill-awtorità kontraenti</entry>
+    <entry key="espd.init.upload.request.response">Jekk joġħġbok applowdja Talba għal DEUA jew Risposta għal DEUA</entry>
+    <entry key="espd.init.upload.response">Jekk jogħġbok applowdja Risposta għal DEUA qadima</entry>
+    <entry key="espd.init.what.you.do">X'tixtieq tagħmel?</entry>
+    <entry key="espd.init.where.are.you.from.ca">Fejn tinsab l-awtorità tiegħek?</entry>
+    <entry key="espd.init.where.are.you.from.eo">Fejn jinsab in-negozju tiegħek?</entry>
     <entry key="espd.init.who.are.you">Min int?</entry>
-    <entry key="espd.gui.footer.last.update">L-a??ar a??ornament:</entry>
+    <entry key="espd.gui.footer.last.update">L-aħħar aġġornament:</entry>
     <entry key="espd.gui.grow">Kabbar</entry>
     <entry key="espd.ecertis.information.for.country">Iktar informazzjoni</entry>
-    <entry key="espd.gui.legal.notice">Avvi? Legali</entry>
-    <entry key="espd.ecertis.less.information">Trid tu?a l-kriterji tal-g?a?la minn A sa D?</entry>
+    <entry key="espd.gui.legal.notice">Avviż Legali</entry>
+    <entry key="espd.ecertis.less.information">Trid tuża l-kriterji tal-għażla minn A sa D?</entry>
     <entry key="espd.ecertis.more.information">Inqas informazzjoni</entry>
     <entry key="espd.gui.next">Li jmiss</entry>
     <entry key="espd.gui.no">Le</entry>
     <entry key="espd.gui.not.applicable">Mhux applikabbli</entry>
     <entry key="espd.gui.place">Lok</entry>
-    <entry key="espd.gui.previous">Pre?edenti</entry>
-    <entry key="espd.gui.print">?arsa</entry>
-    <entry key="espd.gui.progress.exclusion">Esklu?joni</entry>
+    <entry key="espd.gui.previous">Preċedenti</entry>
+    <entry key="espd.gui.print">Ħarsa</entry>
+    <entry key="espd.gui.progress.exclusion">Esklużjoni</entry>
     <entry key="espd.gui.progress.finish">Tmiem</entry>
-    <entry key="espd.gui.progress.procedure">Pro?edura</entry>
-    <entry key="espd.gui.progress.selection">G?a?la</entry>
+    <entry key="espd.gui.progress.procedure">Proċedura</entry>
+    <entry key="espd.gui.progress.selection">Għażla</entry>
     <entry key="espd.gui.progress.start">Bidu</entry>
-    <entry key="espd.gui.question.to.use.alpha">Il-manodopera annwali medja tal-operatur ekonomiku g?all-a??ar tliet
-        snin kienet kif ?ej:
-    </entry>
-    <entry key="espd.gui.report.appliction.issue">G?al kwalunkwe kwistjoni b'rabta mal-applikazzjoni tal-ESPD jekk
-        jog??bok ikkuntattja lil
-    </entry>
-    <entry key="espd.gui.report.security.incident">Rapport dwar A??ident tas-Sigurtà tal-Informazzjoni</entry>
-    <entry key="espd.gui.report.security.incident.title">G?al kull a??ident b'rabta mas-sigurtà jekk jog??bok
-        ikkuntattja lill-Kummissjoni Ewropea permezz ta'
-    </entry>
+    <entry key="espd.gui.question.to.use.alpha">Il-manodopera annwali medja tal-operatur ekonomiku għall-aħħar tliet snin kienet kif ġej:</entry>
+    <entry key="espd.gui.report.appliction.issue">Għal kwalunkwe kwistjoni b'rabta mal-applikazzjoni tal-ESPD jekk jogħġbok ikkuntattja lil</entry>
+    <entry key="espd.gui.report.security.incident">Rapport dwar Aċċident tas-Sigurtà tal-Informazzjoni</entry>
+    <entry key="espd.gui.report.security.incident.title">Għal kull aċċident b'rabta mas-sigurtà jekk jogħġbok ikkuntattja lill-Kummissjoni Ewropea permezz ta'</entry>
     <entry key="espd.gui.role.ca">Rwol: Awtorità Kontraenti (AK)</entry>
     <entry key="espd.gui.role.eo">Rwol: Operatur ekonomiku (OE)</entry>
     <entry key="espd.gui.search">Fittex</entry>
     <entry key="espd.gui.signature">Firma</entry>
-    <entry key="espd.gui.tools">G?odod</entry>
-    <entry key="espd.init.ca.can.create.espd.tooltip">L-awtorità kontraenti tista? to?loq DEUA mill-bidunett. F?tali
-        ka?, l-awtorità kontraenti g?andha timla l-formola tad-DEUA bl-informazzjoni rilevanti kollha.
-    </entry>
-    <entry key="espd.init.ca.can.import.espd.tooltip">Jekk l-awtorità kontraenti tkun di?à u?at is-servizz tad-DEUA g?al
-        pro?edura o?ra ta' akkwist fil-passat, hija tista? timporta d-DEUA ma??un fin-netwerk lokali. F?dan il-ka?,
-        id-DEUA ma g?andux jimtela mill-bidunett i?da xi dejta g?ad trid ti?i a??ornata sabiex jittie?ed kont
-        tal-pro?edura ta? akkwist attwali.
-    </entry>
-    <entry key="espd.init.ca.ref.buyer.tooltip">It-terminu awtorità kontraenti jirreferi g?all-akkwirent.</entry>
-    <entry key="espd.init.ce.ref.buyer.tooltip">It-terminu entità kontraenti jirreferi g?al xerrej li jopera fl-oqsma
-        tal-ilma, tal-ener?ija, tat-trasport jew tas-servizzi postali. L-awtoritajiet kontraenti li qed joperaw ukoll
-        fl-oqsma msemmija qabel g?andhom jag??lu ?Jien awtorità kontraenti?
-    </entry>
-    <entry key="espd.init.eo.can.reuse.espd.tooltip">L-operatur ekonomiku jista? ju?a mill-?did l-informazzjoni, li
-        ng?atat permezz ta' DEUA fi pro?edura ta? akkwist pre?edenti (DEUA 'qadim'). Is-servizz tal-DEUA se jg?aqqad
-        d-DEUA 'qadim' mal-formola l-?dida m?ejjija mill-awtorità kontraenti g?al din il-pro?edura ta? akkwist.
-    </entry>
-    <entry key="espd.init.eo.ref.suppl.tooltip">It-terminu operatur ekonomiku jirreferi g?all-fornitur / l-offerent.
-    </entry>
-    <entry key="espd.init.espd.used.both.ca.eo.tooltip">Is-servizz tad-DEUA jista? jintu?a kemm mill-awtoritajiet
-        kontraenti kif ukoll mill-operaturi ekonomi?i. Jekk jog??bok immarka l-g?a?la li tikkorrispondi mal-profil
-        tieg?ek f?din il-pro?edura ta? akkwist pubbliku.
-    </entry>
-    <entry key="espd.init.filter.create.response.tooltip">O?loq Twe?iba tal-ESPD ?dida</entry>
-    <entry key="espd.init.filter.eo.can.import.espd.tooltip">L-operatur ekonomiku jista? jimporta l-fajl tad-DEUA, li
-        jkun imtela minn qabel mill-awtorità kontraenti g?al din il-pro?edura ta? akkwist pubbliku u ?ie ppubblikat
-        mal-avvi? tas-sej?a g?all-offerti.
-    </entry>
-    <entry key="espd.init.filter.eo.merge.espds.tooltip">The ESPD service will merge the 'old' ESPD with the new form
-        prepared by the contracting authority for this procurement procedure.
-    </entry>
-    <entry key="espd.init.overview.received.espds.tooltip">Din il-karatteristika tipprovdi tabella b??arsa ?enerali lejn
-        it-twe?ibiet inklu?i fid-DEUA kollha pprovduti mill-offerenti g?al pro?edura partikolari ta? akkwist.
-    </entry>
-    <entry key="espd.init.review.espd.tooltip">L-awtorità kontraenti tista? tivverifika/tirrevedi d-DEUA elettroniku li
-        jasal ming?and l-operatur ekonomiku.
-    </entry>
-    <entry key="espd.init.ted.reception.id.tooltip">L-awtorità kontraenti se tir?ievi email ming?and l-uffi??ju
-        tal-pubblikazzjonijiet meta jissottomettu avvi? g?all-pubblikazzjoni. Din l-email fiha ID li tista' tintu?a
-        f?dan is-servizz biex timtela l-informazzjoni dwar il-pro?edura u l-awtorità.
-    </entry>
-    <entry key="espd.validator.accept">Jekk jog??bok da??al valur b?estensjoni valida.</entry>
-    <entry key="espd.validator.creditcard">Jekk jog??bok da??al numru validu tal-karta ta' kreditu.</entry>
-    <entry key="espd.validator.date">Jekk jog??bok da??al data valida.</entry>
-    <entry key="espd.validator.dateISO">Jekk jog??bok da??al data valida (ISO).</entry>
-    <entry key="espd.validator.digits">Jekk jog??bok da??al biss figuri.</entry>
-    <entry key="espd.validator.email">Jekk jog??bok da??al indirizz tal-email validu.</entry>
-    <entry key="espd.validator.equalTo">Jekk jog??bok da??al l-istess valur mill-?did.</entry>
-    <entry key="espd.validator.max">Jekk jog??bok da??al valur daqs {0} jew inqas.</entry>
-    <entry key="espd.validator.maxlength">Jekk jog??bok da??al mhux aktar minn {0} karattri.</entry>
-    <entry key="espd.validator.min">Jekk jog??bok da??al valur daqs {0} jew akbar.</entry>
-    <entry key="espd.validator.minlength">Jekk jog??bok da??al mill-anqas {0} karattri.</entry>
-    <entry key="espd.validator.number">Jekk jog??bok da??al numru validu.</entry>
-    <entry key="espd.validator.range">Jekk jog??bok da??al valur bejn {0} u {1} karattru.</entry>
-    <entry key="espd.validator.rangelength">Jekk jog??bok da??al valur twil bejn {0} u {1} karattru.</entry>
-    <entry key="espd.validator.remote">Jekk jog??bok sewwi dan l-ispazju.</entry>
-    <entry key="espd.validator.required">Dan l-ispazju huwa me?tie?.</entry>
-    <entry key="espd.validator.url">Jekk jog??bok da??al URL validu.</entry>
-    <entry key="espd.gui.view.ca">Ivvi?walizza: (AK)</entry>
-    <entry key="espd.gui.view.eo">Ivvi?walizza: (OE)</entry>
+    <entry key="espd.gui.tools">Għodod</entry>
+    <entry key="espd.init.ca.can.create.espd.tooltip">L-awtorità kontraenti tista’ toħloq DEUA mill-bidunett. F’tali każ, l-awtorità kontraenti għandha timla l-formola tad-DEUA bl-informazzjoni rilevanti kollha.</entry>
+    <entry key="espd.init.ca.can.import.espd.tooltip">Jekk l-awtorità kontraenti tkun diġà użat is-servizz tad-DEUA għal proċedura oħra ta' akkwist fil-passat, hija tista’ timporta d-DEUA maħżun fin-netwerk lokali. F’dan il-każ, id-DEUA ma għandux jimtela mill-bidunett iżda xi dejta għad trid tiġi aġġornata sabiex jittieħed kont tal-proċedura ta’ akkwist attwali.</entry>
+    <entry key="espd.init.ca.ref.buyer.tooltip">It-terminu awtorità kontraenti jirreferi għall-akkwirent.</entry>
+    <entry key="espd.init.ce.ref.buyer.tooltip"> It-terminu entità kontraenti jirreferi għal xerrej li jopera fl-oqsma tal-ilma, tal-enerġija, tat-trasport jew tas-servizzi postali. L-awtoritajiet kontraenti li qed joperaw ukoll fl-oqsma msemmija qabel għandhom jagħżlu “Jien awtorità kontraenti”</entry>
+    <entry key="espd.init.eo.can.reuse.espd.tooltip">L-operatur ekonomiku jista’ juża mill-ġdid l-informazzjoni, li ngħatat permezz ta' DEUA fi proċedura ta’ akkwist preċedenti (DEUA 'qadim'). Is-servizz tal-DEUA se jgħaqqad d-DEUA 'qadim' mal-formola l-ġdida mħejjija mill-awtorità kontraenti għal din il-proċedura ta’ akkwist.</entry>
+    <entry key="espd.init.eo.ref.suppl.tooltip">It-terminu operatur ekonomiku jirreferi għall-fornitur / l-offerent.</entry>
+    <entry key="espd.init.espd.used.both.ca.eo.tooltip">Is-servizz tad-DEUA jista’ jintuża kemm mill-awtoritajiet kontraenti kif ukoll mill-operaturi ekonomiċi. Jekk jogħġbok immarka l-għażla li tikkorrispondi mal-profil tiegħek f’din il-proċedura ta’ akkwist pubbliku.</entry>
+    <entry key="espd.init.filter.create.response.tooltip">Oħloq Tweġiba tal-ESPD ġdida</entry>
+    <entry key="espd.init.filter.eo.can.import.espd.tooltip">L-operatur ekonomiku jista’ jimporta l-fajl tad-DEUA, li jkun imtela minn qabel mill-awtorità kontraenti għal din il-proċedura ta’ akkwist pubbliku u ġie ppubblikat mal-avviż tas-sejħa għall-offerti.</entry>
+    <entry key="espd.init.filter.eo.merge.espds.tooltip">The ESPD service will merge the 'old' ESPD with the new form prepared by the contracting authority for this procurement procedure.</entry>
+    <entry key="espd.init.overview.received.espds.tooltip">Din il-karatteristika tipprovdi tabella b’ħarsa ġenerali lejn it-tweġibiet inklużi fid-DEUA kollha pprovduti mill-offerenti għal proċedura partikolari ta’ akkwist.</entry>
+    <entry key="espd.init.review.espd.tooltip">L-awtorità kontraenti tista’ tivverifika/tirrevedi d-DEUA elettroniku li jasal mingħand l-operatur ekonomiku.</entry>
+    <entry key="espd.init.ted.reception.id.tooltip">L-awtorità kontraenti se tirċievi email mingħand l-uffiċċju tal-pubblikazzjonijiet meta jissottomettu avviż għall-pubblikazzjoni. Din l-email fiha ID li tista' tintuża f’dan is-servizz biex timtela l-informazzjoni dwar il-proċedura u l-awtorità.</entry>
+    <entry key="espd.validator.accept">Jekk jogħġbok daħħal valur b’estensjoni valida.</entry>
+    <entry key="espd.validator.creditcard">Jekk jogħġbok daħħal numru validu tal-karta ta' kreditu.</entry>
+    <entry key="espd.validator.date">Jekk jogħġbok daħħal data valida.</entry>
+    <entry key="espd.validator.dateISO">Jekk jogħġbok daħħal data valida (ISO).</entry>
+    <entry key="espd.validator.digits">Jekk jogħġbok daħħal biss figuri.</entry>
+    <entry key="espd.validator.email">Jekk jogħġbok daħħal indirizz tal-email validu.</entry>
+    <entry key="espd.validator.equalTo">Jekk jogħġbok daħħal l-istess valur mill-ġdid.</entry>
+    <entry key="espd.validator.max">Jekk jogħġbok daħħal valur daqs {0} jew inqas.</entry>
+    <entry key="espd.validator.maxlength">Jekk jogħġbok daħħal mhux aktar minn {0} karattri.</entry>
+    <entry key="espd.validator.min">Jekk jogħġbok daħħal valur daqs {0} jew akbar.</entry>
+    <entry key="espd.validator.minlength">Jekk jogħġbok daħħal mill-anqas {0} karattri.</entry>
+    <entry key="espd.validator.number">Jekk jogħġbok daħħal numru validu.</entry>
+    <entry key="espd.validator.range">Jekk jogħġbok daħħal valur bejn {0} u {1} karattru.</entry>
+    <entry key="espd.validator.rangelength">Jekk jogħġbok daħħal valur twil bejn {0} u {1} karattru.</entry>
+    <entry key="espd.validator.remote">Jekk jogħġbok sewwi dan l-ispazju.</entry>
+    <entry key="espd.validator.required">Dan l-ispazju huwa meħtieġ.</entry>
+    <entry key="espd.validator.url">Jekk jogħġbok daħħal URL validu.</entry>
+    <entry key="espd.gui.view.ca">Ivviżwalizza: (AK)</entry>
+    <entry key="espd.gui.view.eo">Ivviżwalizza: (OE)</entry>
     <entry key="espd.gui.yes">Iva</entry>
-    <entry key="espd.gui.zip.instructions">Din hija dokumentazzjoni qasira tal-fajls tal-ESPD li tista? ssib f'dan
-        il-folder ZIP.Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nespd.XML: Il-fajl XML huwa fajl li s-servizz tal-ESPD
-        tag?na jew servizzi tal-ESPD kompatibbli jistg?u jifhmuh. Il-vanta?? li jintu?a l-eESPD b?ala fajl XML huwa li
-        x-xerrejja u l-kumpaniji jistg?u jer?g?u ju?awh g?al pro?eduri o?ra fil-?ejjieni. G?andu jintbag?at
-        mad-dokumenti ta? akkwist (mill-awtoritajiet g?all-kumpaniji) jew b?ala parti mill-offerta (mill-kumpanija
-        g?all-awtorità).Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nespd.PDF: Il-fajl PDF huwa fajl tal-eESPD li jista?
-        jinqara mill-bniedem. Nissu??erixxu wkoll li dan jintu?a flimkien mal-format XML bid-dokumenti ta? akkwist
-        (mill-awtorità g?all-kumpaniji) jew b?ala parti minn offerta (mill-kumpanija g?all-awtorità) b?ala dokument ta?
-        referenza.Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nJekk g?andek xi mistoqsijiet dwar il-fajls tiddejjaqx tkellimna
-        permezz ta? dan l-indirizz tal-posta elettronika: grow-espd@ec.europa.eu.
-    </entry>
+    <entry key="espd.gui.zip.instructions">Din hija dokumentazzjoni qasira tal-fajls tal-ESPD li tista’ ssib f'dan il-folder ZIP.Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nespd.XML: Il-fajl XML huwa fajl li s-servizz tal-ESPD tagħna jew servizzi tal-ESPD kompatibbli jistgħu jifhmuh. Il-vantaġġ li jintuża l-eESPD bħala fajl XML huwa li x-xerrejja u l-kumpaniji jistgħu jerġgħu jużawh għal proċeduri oħra fil-ġejjieni. Għandu jintbagħat mad-dokumenti ta’ akkwist (mill-awtoritajiet għall-kumpaniji) jew bħala parti mill-offerta (mill-kumpanija għall-awtorità).Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nespd.PDF: Il-fajl PDF huwa fajl tal-eESPD li jista’ jinqara mill-bniedem. Nissuġġerixxu wkoll li dan jintuża flimkien mal-format XML bid-dokumenti ta’ akkwist (mill-awtorità għall-kumpaniji) jew bħala parti minn offerta (mill-kumpanija għall-awtorità) bħala dokument ta’ referenza.Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nJekk għandek xi mistoqsijiet dwar il-fajls tiddejjaqx tkellimna permezz ta’ dan l-indirizz tal-posta elettronika: grow-espd@ec.europa.eu.</entry>
 </properties>

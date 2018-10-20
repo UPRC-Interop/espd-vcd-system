@@ -5,10 +5,8 @@ Wenn die Datei als Properties gezogen wird, wird ein DocType zur Laufzeit einget
 -->
 <properties>
     <entry key="espd.gui.about">A propos de</entry>
-    <entry key="espd.part4.all.selection.switch">?: Indication globale pour tous les critères de sélection</entry>
-    <entry key="espd.gui.app.environment">Cher utilisateur, vous utilisez notre environnement d'essai. Veuillez
-        utiliser
-    </entry>
+    <entry key="espd.part4.all.selection.switch">ɑ: Indication globale pour  tous les critères de sélection</entry>
+    <entry key="espd.gui.app.environment">Cher utilisateur, vous utilisez notre environnement d'essai. Veuillez utiliser</entry>
     <entry key="espd.gui.app.subtitle">Service permettant de remplir et réutiliser le DUME</entry>
     <entry key="espd.gui.app.title">Document unique de marché européen (DUME)</entry>
     <entry key="espd.gui.back.to.main">Retour à la page principale</entry>
@@ -16,828 +14,290 @@ Wenn die Datei als Properties gezogen wird, wird ein DocType zur Laufzeit einget
     <entry key="espd.gui.click.here">cliquer ici</entry>
     <entry key="espd.gui.contact">Contact</entry>
     <entry key="espd.gui.contact.header">Contact</entry>
-    <entry key="espd.gui.contact.info">&lt;p&gt;Commission européenne&lt;p&gt;Direction générale du marché intérieur, de
-        l?industrie, de l?entrepreneuriat et des PME&lt;p&gt;Avenue d'Auderghem 45&lt;p&gt;B-1049 Bruxelles&lt;p&gt;Belgique
-    </entry>
+    <entry key="espd.gui.contact.info">Commission européenne Direction générale du marché intérieur, de l’industrie, de l’entrepreneuriat et des PME Avenue d'Auderghem 45 B-1049 Bruxelles Belgique</entry>
     <entry key="espd.gui.cookies">Cookies</entry>
     <entry key="espd.gui.correct.errors">Vous devez corriger les erreurs avant de poursuivre.</entry>
     <entry key="espd.part1.city">Ville:</entry>
-    <entry key="espd.part1.confirm.email">Confirmez l?adresse électronique:</entry>
+    <entry key="espd.part1.confirm.email">Confirmez l’adresse électronique:</entry>
     <entry key="espd.part1.confirm.telephone">Confirmez le numéro de téléphone:</entry>
-    <entry key="espd.part1.contact.details.ca">Identité de l?acheteur</entry>
+    <entry key="espd.part1.contact.details.ca">Identité de l’acheteur</entry>
     <entry key="espd.part1.contact.person">Personne de contact:</entry>
     <entry key="espd.part1.correct.errors">Vous devez corriger les erreurs avant de pouvoir poursuivre.</entry>
     <entry key="espd.part1.country">Pays:</entry>
     <entry key="espd.part1.email">Adresse électronique:</entry>
     <entry key="espd.part1.fax">fax</entry>
-    <entry key="espd.part1.file.ref.ca">Numéro de référence attribué au dossier par le pouvoir adjudicateur ou l?entité
-        adjudicatrice (le cas échéant):
-    </entry>
-    <entry key="espd.part1.header">Partie I: Informations concernant la procédure de passation et de marché et le
-        pouvoir adjudicateur ou l?entité adjudicatrice
-    </entry>
+    <entry key="espd.part1.file.ref.ca">Numéro de référence attribué au dossier par le pouvoir adjudicateur ou l’entité adjudicatrice (le cas échéant):</entry>
+    <entry key="espd.part1.header">Partie I: Informations concernant la procédure de passation et de marché et le pouvoir adjudicateur ou l’entité adjudicatrice</entry>
     <entry key="espd.part1.info.procedure">procédure</entry>
     <entry key="espd.part1.info.procurement.proc">Informations relatives à la procédure de passation de marché</entry>
     <entry key="espd.part1.info.pub">Informations concernant la publication</entry>
     <entry key="espd.part1.name">Nom officiel:</entry>
-    <entry key="espd.part1.nat.regnum">Numéro d?enregistrement national (si connu):</entry>
-    <entry key="espd.part1.official.journal.alert">Si aucun appel d'offres n'est publié au Journal officiel, ou s'il
-        n'est pas nécessaire d'en publier, l'autorité ou l'entité contractante doit identifier clairement la procédure
-        de passation de marché (par exemple, la référence à une publication de niveau national)
-    </entry>
-    <entry key="espd.part1.ojs.label">Numéro de l?avis dans le JO S:</entry>
+    <entry key="espd.part1.nat.regnum">Numéro d’enregistrement national (si connu):</entry>
+    <entry key="espd.part1.official.journal.alert">Si aucun appel d'offres n'est publié au Journal officiel, ou s'il n'est pas nécessaire d'en publier, l'autorité ou l'entité contractante doit identifier clairement la procédure de passation de marché (par exemple, la référence à une publication de niveau national)</entry>
+    <entry key="espd.part1.ojs.label">Numéro de l’avis dans le JO S:</entry>
     <entry key="espd.part1.ojs.url">URL du JO S</entry>
     <entry key="espd.part1.postcode">Code postal:</entry>
     <entry key="espd.part1.procurer.name">Titre:</entry>
     <entry key="espd.part1.street.and. num">Rue et numéro:</entry>
-    <entry key="espd.part1.ted.reception.id">Numéro de l?avis reçu</entry>
+    <entry key="espd.part1.ted.reception.id">Numéro de l’avis reçu</entry>
     <entry key="espd.part1.telephone">Téléphone:</entry>
     <entry key="espd.part1.title.or.short.desc">Brève description:</entry>
-    <entry key="espd.part1.to.be.filled.alert">Pour les procédures de passation de marché dans le cadre desquelles un
-        appel à concurrence a été publié au Journal officiel de l?Union européenne, les informations requises au titre
-        de la partie I seront automatiquement récupérées par voie électronique pour autant que le service DUME
-        électronique soit utilisé pour générer et remplir le DUME. Référence de l?avis pertinent publié au Journal
-        officiel de l?Union européenne:
-    </entry>
+    <entry key="espd.part1.to.be.filled.alert">Pour les procédures de passation de marché dans le cadre desquelles un appel à concurrence a été publié au Journal officiel de l’Union européenne, les informations requises au titre de la partie I seront automatiquement récupérées par voie électronique pour autant que le service DUME électronique soit utilisé pour générer et remplir le DUME. Référence de l’avis pertinent publié au Journal officiel de l’Union européenne:</entry>
     <entry key="espd.part1.website">Site web (le cas échéant):</entry>
     <entry key="espd.part3.grounds.criminal.conv">Motifs liés à des condamnations pénales</entry>
-    <entry key="espd.part3.header">Partie III: Motifs d?exclusion</entry>
-    <entry key="espd.part3.insolvency.conflicts">Motifs liés à l?insolvabilité, aux conflits d?intérêts ou à une faute
-        professionnelle
-    </entry>
+    <entry key="espd.part3.header">Partie III: Motifs d’exclusion</entry>
+    <entry key="espd.part3.insolvency.conflicts">Motifs liés à l’insolvabilité, aux conflits d’intérêts ou à une faute professionnelle</entry>
     <entry key="espd.part5.concl.statements">Partie VI: Déclarations finales</entry>
-    <entry key="espd.part5.concl.statements.signature">Date, lieu et, lorsque cela est requis ou nécessaire,
-        signature(s):
-    </entry>
-    <entry key="espd.part5.concl.statements.text">Les soussignés déclarent sur l?honneur que les informations fournies
-        au titre des parties II à V ci-dessus sont exactes et correctes et qu?elles ont été établies en parfaite
-        connaissance des conséquences de toute fausse déclaration.
-        &lt;p&gt;Les soussignés déclarent formellement être en mesure, sur demande et sans tarder, de fournir les certificats
-            et autres formes de pièces justificatives visés, sauf si:
-        &lt;/p&gt;
-        &lt;p&gt;a) Le pouvoir adjudicateur ou l?entité adjudicatrice a la possibilité d?obtenir directement les documents
-            justificatifs concernés en consultant une base de données nationale dans un État membre qui est accessible
-            gratuitement, à condition que l?opérateur économique ait fourni les informations nécessaires (adresse du
-            site web, l?autorité ou l?organisme de délivrance, la référence précise des documents) permettant au pouvoir
-            adjudicateur ou à l?entité adjudicatrice de les obtenir, avec l?autorisation d?accès correspondante, ou
-        &lt;/p&gt;
-        &lt;p&gt;b) À partir du 18 octobre 2018 au plus tard (en fonction de la transposition nationale du deuxième alinéa de
-            l?article 59, paragraphe 5, de la directive 2014/24/UE), le pouvoir adjudicateur ou l?entité adjudicatrice
-            est déjà en possession des documents concernés.
-        &lt;/p&gt;
-        &lt;p&gt;Les soussignés consentent formellement à ce que [désigner le pouvoir adjudicateur ou l?entité adjudicatrice
-            figurant à la partie I, section A] ait accès aux documents justificatifs étayant les informations fournies
-            dans [indiquer la/les partie(s)/section(s)/point(s) concerné(e)(s)] du présent document unique de marché
-            européen aux fins de [indiquer la procédure de passation de marché: (brève description, référence de la
-            publication au Journal officiel de l?Union européenne, numéro de référence)]. (brève description, référence
-            de la publication au Journal officiel de l?Union européenne, numéro de référence)].
-        &lt;/p&gt;
-    </entry>
+    <entry key="espd.part5.concl.statements.signature">Date, lieu et, lorsque cela est requis ou nécessaire, signature(s):</entry>
+    <entry key="espd.part5.concl.statements.text">Les soussignés déclarent sur l’honneur que les informations fournies au titre des parties II à V ci-dessus sont exactes et correctes et qu’elles ont été établies en parfaite connaissance des conséquences de toute fausse déclaration. Les soussignés déclarent formellement être en mesure, sur demande et sans tarder, de fournir les certificats et autres formes de pièces justificatives visés, sauf si: a) Le pouvoir adjudicateur ou l’entité adjudicatrice a la possibilité d’obtenir directement les documents justificatifs concernés en consultant une base de données nationale dans un État membre qui est accessible gratuitement, à condition que l’opérateur économique ait fourni les informations nécessaires (adresse du site web, l’autorité ou l’organisme de délivrance, la référence précise des documents) permettant au pouvoir adjudicateur ou à l’entité adjudicatrice de les obtenir, avec l’autorisation d’accès correspondante, ou b) À partir du 18 octobre 2018 au plus tard (en fonction de la transposition nationale du deuxième alinéa de l’article 59, paragraphe 5, de la directive 2014/24/UE), le pouvoir adjudicateur ou l’entité adjudicatrice est déjà en possession des documents concernés. Les soussignés consentent formellement à ce que [désigner le pouvoir adjudicateur ou l’entité adjudicatrice figurant à la partie I, section A] ait accès aux documents justificatifs étayant les informations fournies dans [indiquer la/les partie(s)/section(s)/point(s) concerné(e)(s)] du présent document unique de marché européen aux fins de [indiquer la procédure de passation de marché: (brève description, référence de la publication au Journal officiel de l’Union européenne, numéro de référence)]. (brève description, référence de la publication au Journal officiel de l’Union européenne, numéro de référence)].</entry>
     <entry key="espd.part5.export">Exporter</entry>
-    <entry key="espd.part5.export.content">Vous pouvez désormais cliquer sur «Exporter» pour télécharger et enregistrer
-        le dossier DUME sur votre ordinateur. Les pouvoirs adjudicateurs doivent veiller à ce que ce dossier DUME soit
-        mis à la disposition des opérateurs économiques au même titre que les autres documents de marché.
-    </entry>
+    <entry key="espd.part5.export.content">Vous pouvez désormais cliquer sur «Exporter» pour télécharger et enregistrer le dossier DUME sur votre ordinateur. Les pouvoirs adjudicateurs doivent veiller à ce que ce dossier DUME soit mis à la disposition des opérateurs économiques au même titre que les autres documents de marché.</entry>
     <entry key="espd.part5.header">Terminer</entry>
     <entry key="espd.part5.reduction">Partie V: Réduction du nombre de candidats qualifiés</entry>
-    <entry key="espd.part5.reduction.question">L?opérateur économique déclare que:</entry>
-    <entry key="espd.part5.text.eo.declares.that">Si certains de ces certificats ou formes de pièces justificatives sont
-        disponibles par voie électronique, veuillez indiquer pour chacun d?entre eux:
-    </entry>
-    <entry key="espd.part5.title.eo.declares.that">Il respecte de la manière suivante les critères ou règles objectifs
-        et non discriminatoires à appliquer pour limiter le nombre de candidats:&lt;p&gt;Dans le cas où certains certificats
-            ou autres formes de pièces justificatives sont exigés, veuillez indiquer pour chacun d?entre eux si
-            l?opérateur économique est en possession des documents requis:
-        &lt;/p&gt;
-    </entry>
-    <entry key="espd.part5.toptext">L?opérateur économique ne doit fournir les informations que lorsque le pouvoir
-        adjudicateur ou l?entité adjudicatrice a précisé les critères ou règles objectifs et non discriminatoires à
-        appliquer pour limiter le nombre de candidats qui seront invités à soumissionner ou à dialoguer. Ces
-        informations, qui peuvent être accompagnées d?exigences concernant les (types de) certificats ou formes de
-        pièces justificatives éventuellement à produire, sont indiquées dans l?avis pertinent ou dans les documents de
-        marché mentionnés dans l?avis. Uniquement pour les procédures restreintes, les procédures concurrentielles avec
-        négociation, les dialogues compétitifs et les partenariats d?innovation:
-    </entry>
-    <entry key="espd.part4.alert">Les pouvoirs adjudicateurs doivent indiquer quels critères de sélection seront
-        appliqués en cochant la case devant le critère concerné.
-    </entry>
+    <entry key="espd.part5.reduction.question">L’opérateur économique déclare que:</entry>
+    <entry key="espd.part5.text.eo.declares.that">Si certains de ces certificats ou formes de pièces justificatives sont disponibles par voie électronique, veuillez indiquer pour chacun d’entre eux:</entry>
+    <entry key="espd.part5.title.eo.declares.that">Il respecte de la manière suivante les critères ou règles objectifs et non discriminatoires à appliquer pour limiter le nombre de candidats: Dans le cas où certains certificats ou autres formes de pièces justificatives sont exigés, veuillez indiquer pour chacun d’entre eux si l’opérateur économique est en possession des documents requis:</entry>
+    <entry key="espd.part5.toptext">L’opérateur économique ne doit fournir les informations que lorsque le pouvoir adjudicateur ou l’entité adjudicatrice a précisé les critères ou règles objectifs et non discriminatoires à appliquer pour limiter le nombre de candidats qui seront invités à soumissionner ou à dialoguer. Ces informations, qui peuvent être accompagnées d’exigences concernant les (types de) certificats ou formes de pièces justificatives éventuellement à produire, sont indiquées dans l’avis pertinent ou dans les documents de marché mentionnés dans l’avis. Uniquement pour les procédures restreintes, les procédures concurrentielles avec négociation, les dialogues compétitifs et les partenariats d’innovation:</entry>
+    <entry key="espd.part4.alert">Les pouvoirs adjudicateurs doivent indiquer quels critères de sélection seront appliqués en cochant la case devant le critère concerné.</entry>
     <entry key="espd.part4.economic.and.financial.standing">B. Capacité économique et financière</entry>
     <entry key="espd.part4.header">Partie IV: Critères de sélection</entry>
-    <entry key="espd.part4.quality.assurance">D. Dispositifs d?assurance de la qualité et normes de gestion
-        environnementale
-    </entry>
+    <entry key="espd.part4.quality.assurance">D. Dispositifs d’assurance de la qualité et normes de gestion environnementale</entry>
     <entry key="espd.part4.suitability">A. Aptitude</entry>
     <entry key="espd.part4.technical.professional.ability">C. Capacité technique et professionnelle</entry>
-    <entry key="espd.part2.add.complete.missing">Veuillez en plus introduire les informations manquantes dans la partie
-        IV, sections A, B, C ou D selon le cas UNIQUEMENT si cela est demandé dans l?avis ou les documents de marché
-        pertinents:
-    </entry>
-    <entry key="espd.part2.all.selection.covered">d) L?inscription ou la certification couvre-t-elle tous les critères
-        de sélection requis?
-    </entry>
-    <entry key="espd.part2.another.vat">En l?absence de numéro de TVA, veuillez indiquer un autre numéro
-        d?identification national, le cas échéant et s?il y a lieu
-    </entry>
-    <entry key="espd.part2.answer.following.parts">Veuillez répondre aux autres parties de la présente section, à la
-        section B et, le cas échéant, à la section C de la présente partie, remplir le cas échéant la partie V et, dans
-        tous les cas, compléter et signer la partie VI.
-    </entry>
+    <entry key="espd.part2.add.complete.missing">Veuillez en plus introduire les informations manquantes dans la partie IV, sections A, B, C ou D selon le cas UNIQUEMENT si cela est demandé dans l’avis ou les documents de marché pertinents:</entry>
+    <entry key="espd.part2.all.selection.covered">d) L’inscription ou la certification couvre-t-elle tous les critères de sélection requis?</entry>
+    <entry key="espd.part2.another.vat">En l’absence de numéro de TVA, veuillez indiquer un autre numéro d’identification national, le cas échéant et s’il y a lieu</entry>
+    <entry key="espd.part2.answer.following.parts">Veuillez répondre aux autres parties de la présente section, à la section B et, le cas échéant, à la section C de la présente partie, remplir le cas échéant la partie V et, dans tous les cas, compléter et signer la partie VI.</entry>
     <entry key="espd.part2.birth.date">Date de naissance</entry>
     <entry key="espd.part2.birth.place">Lieu de naissance</entry>
-    <entry key="espd.part2.cert.e.avaliable">b) Si le certificat d?inscription ou de certification est disponible par
-        voie électronique, veuillez indiquer:
-    </entry>
+    <entry key="espd.part2.cert.e.avaliable">b) Si le certificat d’inscription ou de certification est disponible par voie électronique, veuillez indiquer:</entry>
     <entry key="espd.part2.contact.person">Personne ou personnes de contact:</entry>
-    <entry key="espd.part2.detinfo.of.represent">Le cas échéant, veuillez fournir des informations détaillées sur la
-        représentation (forme, étendue, finalité, etc.):
-    </entry>
-    <entry key="espd.part2.disworkers.details">Si nécessaire, veuillez préciser si les salariés concernés appartiennent
-        à une ou plusieurs catégories spécifiques de travailleurs handicapés ou défavorisés?
-    </entry>
-    <entry key="espd.part2.doc.e.avaliable">Si les documents pertinents sont disponibles par voie électronique, veuillez
-        indiquer:
-    </entry>
+    <entry key="espd.part2.detinfo.of.represent">Le cas échéant, veuillez fournir des informations détaillées sur la représentation (forme, étendue, finalité, etc.):</entry>
+    <entry key="espd.part2.disworkers.details">Si nécessaire, veuillez préciser si les salariés concernés appartiennent à une ou plusieurs catégories spécifiques de travailleurs handicapés ou défavorisés?</entry>
+    <entry key="espd.part2.doc.e.avaliable">Si les documents pertinents sont disponibles par voie électronique, veuillez indiquer:</entry>
     <entry key="espd.part2.email">Adresse électronique:</entry>
-    <entry key="espd.part2.ensure.others.espd">Veillez à ce que les autres parties concernées fournissent un formulaire
-        DUME distinct.
-    </entry>
-    <entry key="espd.part2.eo.approved.cert">Le cas échéant, l?opérateur économique est-il inscrit sur une liste
-        officielle d?opérateurs économiques agréés ou est-il muni d?un certificat équivalent [par exemple dans le cadre
-        d?un système national de (pré)qualification]?
-    </entry>
-    <entry key="espd.part2.eo.group.role">a) Veuillez préciser le rôle de l?opérateur économique au sein du groupement
-        d?opérateurs économiques (chef de groupe, responsable de l?exécution de tâches spécifiques, etc.):
-    </entry>
-    <entry key="espd.part2.eo.has.cert.soc">e) L?opérateur économique sera-t-il en mesure de fournir un certificat en ce
-        qui concerne le paiement des cotisations de sécurité sociale et des impôts et taxes ou de fournir des
-        informations permettant au pouvoir adjudicateur ou à l?entité adjudicatrice de l?obtenir directement en
-        consultant une base de données nationale dans un État membre qui est accessible gratuitement?
-    </entry>
-    <entry key="espd.part2.eo.rely.other.entities">L?opérateur économique a-t-il recours aux capacités d?autres entités
-        pour satisfaire aux critères de sélection figurant dans la partie IV et aux critères et règles figurant (le cas
-        échéant) dans la partie V ci-dessous?
-    </entry>
+    <entry key="espd.part2.ensure.others.espd">Veillez à ce que les autres parties concernées fournissent un formulaire DUME distinct.</entry>
+    <entry key="espd.part2.eo.approved.cert">Le cas échéant, l’opérateur économique est-il inscrit sur une liste officielle d’opérateurs économiques agréés ou est-il muni d’un certificat équivalent [par exemple dans le cadre d’un système national de (pré)qualification]?</entry>
+    <entry key="espd.part2.eo.group.role">a) Veuillez préciser le rôle de l’opérateur économique au sein du groupement d’opérateurs économiques (chef de groupe, responsable de l’exécution de tâches spécifiques, etc.):</entry>
+    <entry key="espd.part2.eo.has.cert.soc">e) L’opérateur économique sera-t-il en mesure de fournir un certificat en ce qui concerne le paiement des cotisations de sécurité sociale et des impôts et taxes ou de fournir des informations permettant au pouvoir adjudicateur ou à l’entité adjudicatrice de l’obtenir directement en consultant une base de données nationale dans un État membre qui est accessible gratuitement?</entry>
+    <entry key="espd.part2.eo.rely.other.entities">L’opérateur économique a-t-il recours aux capacités d’autres entités pour satisfaire aux critères de sélection figurant dans la partie IV et aux critères et règles figurant (le cas échéant) dans la partie V ci-dessous?</entry>
     <entry key="espd.part2.first.name">Prénom</entry>
-    <entry key="espd.part2.header">Partie II: Informations concernant l?opérateur économique</entry>
-    <entry key="espd.part2.if.proc.reserved">Uniquement dans le cas où le marché est réservé: l?opérateur économique
-        est-il un atelier protégé, une «entreprise sociale» ou prévoit-il l?exécution du marché dans le cadre de
-        programmes d?emplois protégés?
-    </entry>
-    <entry key="espd.part2.info.eo">Informations concernant l?opérateur économique</entry>
-    <entry key="espd.part2.info.reliance">C. Informations relatives au recours aux capacités d?autres entités</entry>
-    <entry key="espd.part2.info.respresent">B. Informations relatives aux représentants de l?opérateur économique
-    </entry>
-    <entry key="espd.part2.information.subcontractors">D: Informations relatives aux sous-contractants aux capacités
-        desquels l?opérateur économique n?a pas recours.
-    </entry>
-    <entry key="espd.part2.information.subcontractors.description">Dans l?affirmative et pour autant que vous le
-        sachiez, veuillez préciser à quels sous-traitants:
-    </entry>
-    <entry key="espd.part2.information.subcontractors.footer">Si le pouvoir adjudicateur ou l?entité adjudicatrice
-        demande explicitement ces informations en plus de celles visées à la partie I, veuillez communiquer les
-        informations demandées dans les sections A et B de cette partie et de la partie III pour chacun des (catégories
-        de) sous-traitants concernés.
-    </entry>
-    <entry key="espd.part2.information.subcontractors.header">(Section à remplir uniquement si ces informations sont
-        explicitement demandées par le pouvoir adjudicateur ou par l?entité adjudicatrice.)
-    </entry>
-    <entry key="espd.part2.information.subcontractors.title">L?opérateur économique a-t-il l?intention de sous-traiter
-        une partie du contrat à des tiers?
-    </entry>
+    <entry key="espd.part2.header">Partie II: Informations concernant l’opérateur économique</entry>
+    <entry key="espd.part2.if.proc.reserved">Uniquement dans le cas où le marché est réservé: l’opérateur économique est-il un atelier protégé, une «entreprise sociale» ou prévoit-il l’exécution du marché dans le cadre de programmes d’emplois protégés?</entry>
+    <entry key="espd.part2.info.eo">Informations concernant l’opérateur économique</entry>
+    <entry key="espd.part2.info.reliance">C. Informations relatives au recours aux capacités d’autres entités</entry>
+    <entry key="espd.part2.info.respresent">B.  Informations relatives aux représentants de l’opérateur économique</entry>
+    <entry key="espd.part2.information.subcontractors">D: Informations relatives aux sous-contractants aux capacités desquels l’opérateur économique n’a pas recours.</entry>
+    <entry key="espd.part2.information.subcontractors.description">Dans l’affirmative et pour autant que vous le sachiez, veuillez préciser à quels sous-traitants:</entry>
+    <entry key="espd.part2.information.subcontractors.footer">Si le pouvoir adjudicateur ou l’entité adjudicatrice demande explicitement ces informations en plus de celles visées à la partie I, veuillez communiquer les informations demandées dans les sections A et B de cette partie et de la partie III pour chacun des  (catégories de) sous-traitants concernés.</entry>
+    <entry key="espd.part2.information.subcontractors.header">(Section à remplir uniquement si ces informations sont explicitement demandées par le pouvoir adjudicateur ou par l’entité adjudicatrice.)</entry>
+    <entry key="espd.part2.information.subcontractors.title">L’opérateur économique a-t-il l’intention de sous-traiter une partie du contrat à des tiers?</entry>
     <entry key="espd.part2.internet.addr.if.exists">Adresse internet (adresse web) (le cas échéant):</entry>
-    <entry key="espd.part2.is.eo.proc.together">L?opérateur économique participe-t-il à la procédure de passation de
-        marché avec d?autres?
-    </entry>
-    <entry key="espd.part2.is.eo.sized">L?opérateur économique est-il une micro, une petite ou une moyenne entreprise?
-    </entry>
-    <entry key="espd.part2.is.eo.sized.tooltip">Voir la recommandation de la Commission du 6 mai 2003 concernant la
-        définition des micro, petites et moyennes entreprises (JO L 124 du 20.5.2003, p. 36). Cette information est
-        demandée uniquement à des fins statistiques. Microentreprise: entreprise qui occupe moins de 10 personnes et
-        dont le chiffre d?affaires annuel ou le total du bilan annuel n?excède pas 2 millions d?EUR. Petite entreprise:
-        entreprise qui occupe moins de 50 personnes et dont le chiffre d?affaires annuel ou le total du bilan annuel
-        n?excède pas 10 millions d?EUR; Moyenne entreprise: entreprise qui n?est ni une micro ni une petite entreprise
-        et qui occupe moins de 250 personnes, et dont le chiffre d?affaires annuel n?excède pas 50 millions d?EUR ou
-        dont le total du bilan annuel n?excède pas 43 millions d?EUR.
-    </entry>
+    <entry key="espd.part2.is.eo.proc.together">L’opérateur économique participe-t-il à la procédure de passation de marché avec d’autres?</entry>
+    <entry key="espd.part2.is.eo.sized">L’opérateur économique est-il une micro, une petite ou une moyenne entreprise?</entry>
+    <entry key="espd.part2.is.eo.sized.tooltip">Voir la recommandation de la Commission du 6 mai 2003 concernant la définition des micro, petites et moyennes entreprises (JO L 124 du 20.5.2003, p. 36). Cette information est demandée uniquement à des fins statistiques. Microentreprise: entreprise qui occupe moins de 10 personnes et dont le chiffre d’affaires annuel ou le total du bilan annuel n’excède pas 2 millions d’EUR. Petite entreprise: entreprise qui occupe moins de 50 personnes et dont le chiffre d’affaires annuel ou le total du bilan annuel n’excède pas 10 millions d’EUR; Moyenne entreprise: entreprise qui n’est ni une micro ni une petite entreprise et qui occupe moins de 250 personnes, et dont le chiffre d’affaires annuel n’excède pas 50 millions d’EUR ou dont le total du bilan annuel n’excède pas 43 millions d’EUR.</entry>
     <entry key="espd.part2.last.name">Nom</entry>
-    <entry key="espd.part2.lots.concerned">S?il y a lieu, indiquez le ou les lots que l?opérateur économique souhaite
-        soumettre à la procédure de passation de marché:
-    </entry>
+    <entry key="espd.part2.lots.concerned">S’il y a lieu, indiquez le ou les lots que l’opérateur économique souhaite soumettre à la procédure de passation de marché:</entry>
     <entry key="espd.part2.name">Nom:</entry>
     <entry key="espd.part2.name.part.group">c) Le cas échéant, nom du groupement participant:</entry>
-    <entry key="espd.part2.other.eo.part">b) Veuillez désigner les autres opérateurs économiques participant
-        conjointement à la procédure de passation de marché:
-    </entry>
-    <entry key="espd.part2.percentage.disworkers">Quel est le pourcentage correspondant de travailleurs handicapés ou
-        défavorisés?
-    </entry>
-    <entry key="espd.part2.person.empowered">Le cas échéant, veuillez indiquer les nom(s) et adresse(s) de la (/des)
-        personne(s) habilitée(s) à représenter l?opérateur économique aux fins de la présente procédure de passation de
-        marché:
-    </entry>
+    <entry key="espd.part2.other.eo.part">b) Veuillez désigner les autres opérateurs économiques participant conjointement à la procédure de passation de marché:</entry>
+    <entry key="espd.part2.percentage.disworkers">Quel est le pourcentage correspondant de travailleurs handicapés ou défavorisés?</entry>
+    <entry key="espd.part2.person.empowered">Le cas échéant, veuillez indiquer les nom(s) et adresse(s) de la (/des) personne(s) habilitée(s) à représenter l’opérateur économique aux fins de la présente procédure de passation de marché:</entry>
     <entry key="espd.part2.pos.act.in.capacity">Fonction/agissant en qualité de:</entry>
     <entry key="espd.part2.postal.adress">Adresse postale:</entry>
-    <entry key="espd.part2.provide.regnumber">a) Veuillez donner le numéro d?inscription ou de certification pertinent,
-        le cas échéant:
-    </entry>
-    <entry key="espd.part2.ref.for.cert">c) Veuillez indiquer les références sur lesquelles l?inscription ou la
-        certification est basée et, le cas échéant, le classement obtenu dans la liste officielle:
-    </entry>
-    <entry key="espd.part2.separate.espd.sections.a.b">Veuillez fournir pour chacune des entités concernées un
-        formulaire DUME distinct contenant les informations demandées dans les sections A et B de la présente partie et
-        à la partie III, dûment rempli et signé par les entités concernées.<p/>Veuillez noter que cela doit également
-        comprendre tous les techniciens ou les organismes techniques qui ne font pas directement partie de l?entreprise
-        de l?opérateur économique, en particulier ceux qui sont responsables du contrôle de la qualité et, lorsqu?il
-        s?agit de marchés publics de travaux, les techniciens ou les organismes techniques auxquels l?opérateur
-        économique pourra faire appel pour l?exécution de l?ouvrage.<p/>Dans la mesure où cela est pertinent pour la ou
-        les capacités spécifiques auxquelles l?opérateur économique a recours, veuillez inclure pour chacune des entités
-        concernées les informations demandées dans les parties IV et V.
-    </entry>
+    <entry key="espd.part2.provide.regnumber">a) Veuillez donner le numéro d’inscription ou de certification pertinent, le cas échéant:</entry>
+    <entry key="espd.part2.ref.for.cert">c) Veuillez indiquer les références sur lesquelles l’inscription ou la certification est basée et, le cas échéant, le classement obtenu dans la liste officielle:</entry>
+    <entry key="espd.part2.separate.espd.sections.a.b">Veuillez fournir pour chacune des entités concernées un formulaire DUME distinct contenant les informations demandées dans les sections A et B de la présente partie et à la partie III, dûment rempli et signé par les entités concernées.<p/>Veuillez noter que cela doit également comprendre tous les techniciens ou les organismes techniques qui ne font pas directement partie de l’entreprise de l’opérateur économique, en particulier ceux qui sont responsables du contrôle de la qualité et, lorsqu’il s’agit de marchés publics de travaux, les techniciens ou les organismes techniques auxquels l’opérateur économique pourra faire appel pour l’exécution de l’ouvrage.<p/>Dans la mesure où cela est pertinent pour la ou les capacités spécifiques auxquelles l’opérateur économique a recours, veuillez inclure pour chacune des entités concernées les informations demandées dans les parties IV et V.</entry>
     <entry key="espd.part2.telephone">Téléphone:</entry>
     <entry key="espd.part2.vat">Numéro de TVA (le cas échéant):</entry>
-    <entry key="espd.part2sel.alert">L?opérateur économique ne doit fournir des informations que pour les critères de
-        sélection requis par le pouvoir adjudicateur ou l?entité adjudicatrice dans l?avis ou les documents qui y sont
-        mentionnés.
-    </entry>
+    <entry key="espd.part2sel.alert">L’opérateur économique ne doit fournir des informations que pour les critères de sélection requis par le pouvoir adjudicateur ou l’entité adjudicatrice dans l’avis ou les documents qui y sont mentionnés.</entry>
     <entry key="espd.crit.amount">Montant</entry>
     <entry key="espd.crit.amount.concerned">Montant concerné</entry>
-    <entry key="espd.crit.average.turnover">Chiffre d?affaires moyen</entry>
+    <entry key="espd.crit.average.turnover">Chiffre d’affaires moyen</entry>
     <entry key="espd.crit.code">Code</entry>
     <entry key="espd.crit.country.member.state">Pays ou État membre concerné</entry>
     <entry key="espd.crit.date">Date</entry>
     <entry key="espd.crit.date.of.conviction">Date de la condamnation</entry>
-    <entry key="espd.part3.crit.date.of.conviction.or.decision">Veuillez indiquer la date de la condamnation ou de la
-        décision.
-    </entry>
-    <entry key="espd.crit.decision.final.and.binding">Si ce manquement aux obligations a été établi par une décision
-        judiciaire ou administrative, cette décision était-elle finale et contraignante?
-    </entry>
+    <entry key="espd.part3.crit.date.of.conviction.or.decision">Veuillez indiquer la date de la condamnation ou de la décision.</entry>
+    <entry key="espd.crit.decision.final.and.binding">Si ce manquement aux obligations a été établi par une décision judiciaire ou administrative, cette décision était-elle finale et contraignante?</entry>
     <entry key="espd.crit.description">Description</entry>
     <entry key="espd.crit.do.you.allow.checks">Autorisez-vous la réalisation de contrôles?</entry>
     <entry key="espd.crit.end.date">Date de fin</entry>
-    <entry key="espd.part3.crit.eu.main.breaching.obligations">L?article 57, paragraphe 4, de la directive 2014/24/UE
-        définit les motifs d?exclusion suivants
-    </entry>
-    <entry key="espd.part3.crit.eu.eo.main.breaching.obligations">L?article 57, paragraphe 4, de la directive 2014/24/UE
-        définit les motifs d?exclusion suivants
-    </entry>
-    <entry key="espd.part3.crit.eu.main.purely.national">Les motifs d?exclusion purement nationaux qui sont précisés
-        dans l?avis pertinent ou dans les documents de marché s?appliquent-ils?
-    </entry>
-    <entry key="espd.part3.crit.eu.grounds.criminal.conv.main.title">L?article 57, paragraphe 1, de la directive
-        2014/24/UE définit les motifs d?exclusion suivants
-    </entry>
-    <entry key="espd.part3.crit.eu.eo.grounds.criminal.conv.main.title">L?article 57, paragraphe 1, de la directive
-        2014/24/UE définit les motifs d?exclusion suivants
-    </entry>
-    <entry key="espd.part3.crit.eu.payment.taxes.main.title">L?article 57, paragraphe 2, de la directive 2014/24/UE
-        définit les motifs d?exclusion suivants
-    </entry>
-    <entry key="espd.part3.crit.eu.eo.payment.taxes.main.title">L?article 57, paragraphe 2, de la directive 2014/24/UE
-        définit les motifs d?exclusion suivants
-    </entry>
-    <entry key="espd.crit.eu.text.agreement.economic">L?opérateur économique a-t-il conclu des accords avec d?autres
-        opérateurs économiques en vue de fausser la concurrence?
-    </entry>
-    <entry key="espd.crit.eu.text.arrangement.creditors">L'opérateur économique a-t-il passé un accord avec ses
-        créanciers ?
-    </entry>
+    <entry key="espd.part3.crit.eu.main.breaching.obligations">L’article 57, paragraphe 4, de la directive 2014/24/UE définit les motifs d’exclusion suivants</entry>
+    <entry key="espd.part3.crit.eu.eo.main.breaching.obligations">L’article 57, paragraphe 4, de la directive 2014/24/UE définit les motifs d’exclusion suivants</entry>
+    <entry key="espd.part3.crit.eu.main.purely.national">Les motifs d’exclusion purement nationaux qui sont précisés dans l’avis pertinent ou dans les documents de marché s’appliquent-ils?</entry>
+    <entry key="espd.part3.crit.eu.grounds.criminal.conv.main.title">L’article 57, paragraphe 1, de la directive 2014/24/UE définit les motifs d’exclusion suivants</entry>
+    <entry key="espd.part3.crit.eu.eo.grounds.criminal.conv.main.title">L’article 57, paragraphe 1, de la directive 2014/24/UE définit les motifs d’exclusion suivants</entry>
+    <entry key="espd.part3.crit.eu.payment.taxes.main.title">L’article 57, paragraphe 2, de la directive 2014/24/UE définit les motifs d’exclusion suivants</entry>
+    <entry key="espd.part3.crit.eu.eo.payment.taxes.main.title">L’article 57, paragraphe 2, de la directive 2014/24/UE définit les motifs d’exclusion suivants</entry>
+    <entry key="espd.crit.eu.text.agreement.economic">L’opérateur économique a-t-il conclu des accords avec d’autres opérateurs économiques en vue de fausser la concurrence?</entry>
+    <entry key="espd.crit.eu.text.arrangement.creditors">L'opérateur économique a-t-il passé un accord avec ses créanciers ?</entry>
     <entry key="espd.crit.eu.text.bankrupt">L'opérateur économique est-il en faillite ?</entry>
-    <entry key="espd.crit.eu.text.breaching.obligations.environmental">L?opérateur économique a-t-il, à sa connaissance,
-        manqué à ses obligations dans le domaine du droit environnemental? Telles que visées aux fins du présent marché
-        dans le droit national, dans l?avis pertinent ou dans les documents de marché ou à l?article 18, paragraphe 2,
-        de la directive 2014/24/UE.
-    </entry>
-    <entry key="espd.crit.eu.text.breaching.obligations.labour">L?opérateur économique a-t-il, à sa connaissance, manqué
-        à ses obligations dans le domaine du droit du travail? Telles que visées aux fins du présent marché dans le
-        droit national, dans l?avis pertinent ou dans les documents de marché ou à l?article 18, paragraphe 2, de la
-        directive 2014/24/UE.
-    </entry>
-    <entry key="espd.crit.eu.text.breaching.obligations.social">L?opérateur économique a-t-il, à sa connaissance, manqué
-        à ses obligations dans le domaine du droit social? Telles que visées aux fins du présent marché dans le droit
-        national, dans l?avis pertinent ou dans les documents de marché ou à l?article 18, paragraphe 2, de la directive
-        2014/24/UE.
-    </entry>
-    <entry key="espd.crit.eu.text.child.labour">L?opérateur économique lui-même ou toute personne membre de son organe
-        administratif, de gestion ou de surveillance ou détenant un pouvoir de représentation, de décision ou de
-        contrôle en son sein ont-ils fait l?objet d?une condamnation prononcée par jugement définitif pour travail des
-        enfants et autres formes de traite des êtres humains, cette condamnation ayant été prononcée il n?y a pas plus
-        de cinq ans ou comportant une période d?exclusion encore applicable fixée directement dans la sentence? Telles
-        que définies à l?article 2 de la directive 2011/36/UE du Parlement européen et du Conseil du 5 avril 2011
-        concernant la prévention de la traite des êtres humains et la lutte contre ce phénomène ainsi que la protection
-        des victimes et remplaçant la décision-cadre 2002/629/JAI du Conseil (JO L 101 du 15.4.2011, p. 1).
-    </entry>
-    <entry key="espd.crit.eu.text.conflict.interest">L?opérateur économique a-t-il connaissance d?un conflit d?intérêt,
-        tel que visé dans la législation nationale, l?avis pertinent ou les documents de marché, créé par sa
-        participation à la procédure de passation de marché?
-    </entry>
-    <entry key="espd.crit.eu.text.corruption">L?opérateur économique lui-même ou toute personne membre de son organe
-        administratif, de gestion ou de surveillance ou détenant un pouvoir de représentation, de décision ou de
-        contrôle en son sein ont-ils fait l?objet d?une condamnation prononcée par jugement définitif pour corruption,
-        cette condamnation ayant été prononcée il n?y a pas plus de cinq ans ou comportant une période d?exclusion
-        encore applicable fixée directement dans la sentence? Telle que définie à l?article 3 de la convention relative
-        à la lutte contre la corruption impliquant des fonctionnaires des Communautés européennes ou des États membres
-        de l?Union européenne (JO C 195 du 25.6.1997, p. 1) et à l?article 2, paragraphe 1, de la décision-cadre
-        2003/568/JAI du Conseil du 22 juillet 2003 relative à la lutte contre la corruption dans le secteur privé (JO L
-        192 du 31.7.2003, p. 54). Ce motif d?exclusion comprend également la corruption telle que définie dans le droit
-        interne de l?État membre du pouvoir adjudicateur (entité adjudicatrice) ou de l?opérateur économique.
-    </entry>
-    <entry key="espd.crit.eu.text.early.termination">L?opérateur économique a-t-il fait l?objet d?une résiliation d?un
-        marché public antérieur, d?un marché antérieur passé avec une entité adjudicatrice ou d?une concession
-        antérieure, ou de dommages et intérêts ou d?une autre sanction comparable dans le cadre de ce marché ou de cette
-        concession antérieur(e)?
-    </entry>
-    <entry key="espd.crit.eu.text.fraud">L?opérateur économique lui-même ou toute personne membre de son organe
-        administratif, de gestion ou de surveillance ou détenant un pouvoir de représentation, de décision ou de
-        contrôle en son sein ont-ils fait l?objet d?une condamnation prononcée par jugement définitif pour fraude, cette
-        condamnation ayant été prononcée il n?y a pas plus de cinq ans ou comportant une période d?exclusion encore
-        applicable fixée directement dans la sentence? Au sens de l?article 1er de la convention relative à la
-        protection des intérêts financiers des Communautés européennes (JO C 316 du 27.11.1995, p. 48).
-    </entry>
-    <entry key="espd.crit.eu.text.grounds.criminal.conv">L?opérateur économique lui-même ou toute personne membre de son
-        organe administratif, de gestion ou de surveillance ou détenant un pouvoir de représentation, de décision ou de
-        contrôle en son sein ont-ils fait l?objet d?une condamnation prononcée par jugement définitif pour participation
-        à une organisation criminelle, cette condamnation ayant été prononcée il n?y a pas plus de cinq ans ou
-        comportant une période d?exclusion encore applicable fixée directement dans la sentence? Telle que définie à
-        l?article 2 de la décision-cadre 2008/841/JAI du Conseil du 24 octobre 2008 relative à la lutte contre la
-        criminalité organisée (JO L 300 du 11.11.2008, p. 42).
-    </entry>
-    <entry key="espd.crit.eu.text.guilty.misconduct">L?opérateur économique est-il coupable d?une faute professionnelle
-        grave? Le cas échéant, voir les définitions données dans la législation nationale, l?avis pertinent ou les
-        documents de marché.
-    </entry>
-    <entry key="espd.crit.eu.text.guilty.misinterpretation">L?opérateur économique s?est-il trouvé dans l?une des
-        situations suivantes:<p/>a) il s?est rendu coupable de fausses déclarations en fournissant les renseignements
-        exigés pour la vérification de l?absence de motifs d?exclusion ou la satisfaction des critères de sélection;<p/>
-        b) il a caché ces informations;<p/>c) il n?a pas été en mesure de présenter sans délai les documents
-        justificatifs requis par un pouvoir adjudicateur ou une entité adjudicatrice et;<p/>d) il a entrepris
-        d?influencer indûment le processus décisionnel du pouvoir adjudicateur ou de l?entité adjudicatrice, d?obtenir
-        des informations confidentielles susceptibles de lui donner un avantage indu lors de la procédure de passation
-        de marché, ni de fournir par négligence des informations trompeuses susceptibles d?avoir une influence
-        déterminante sur les décisions d?exclusion, de sélection ou d?attribution?
-    </entry>
+    <entry key="espd.crit.eu.text.breaching.obligations.environmental">L’opérateur économique a-t-il, à sa connaissance, manqué à ses obligations dans le domaine du droit environnemental? Telles que visées aux fins du présent marché dans le droit national, dans l’avis pertinent ou dans les documents de marché ou à l’article 18, paragraphe 2, de la directive 2014/24/UE.</entry>
+    <entry key="espd.crit.eu.text.breaching.obligations.labour">L’opérateur économique a-t-il, à sa connaissance, manqué à ses obligations dans le domaine du droit du travail? Telles que visées aux fins du présent marché dans le droit national, dans l’avis pertinent ou dans les documents de marché ou à l’article 18, paragraphe 2, de la directive 2014/24/UE.</entry>
+    <entry key="espd.crit.eu.text.breaching.obligations.social">L’opérateur économique a-t-il, à sa connaissance, manqué à ses obligations dans le domaine du droit social? Telles que visées aux fins du présent marché dans le droit national, dans l’avis pertinent ou dans les documents de marché ou à l’article 18, paragraphe 2, de la directive 2014/24/UE.</entry>
+    <entry key="espd.crit.eu.text.child.labour">L’opérateur économique lui-même ou toute personne membre de son organe administratif, de gestion ou de surveillance ou détenant un pouvoir de représentation, de décision ou de contrôle en son sein ont-ils fait l’objet d’une condamnation prononcée par jugement définitif pour travail des enfants et autres formes de traite des êtres humains, cette condamnation ayant été prononcée il n’y a pas plus de cinq ans ou comportant une période d’exclusion encore applicable fixée directement dans la sentence? Telles que définies à l’article 2 de la directive 2011/36/UE du Parlement européen et du Conseil du 5 avril 2011 concernant la prévention de la traite des êtres humains et la lutte contre ce phénomène ainsi que la protection des victimes et remplaçant la décision-cadre 2002/629/JAI du Conseil (JO L 101 du 15.4.2011, p. 1).</entry>
+    <entry key="espd.crit.eu.text.conflict.interest">L’opérateur économique a-t-il connaissance d’un conflit d’intérêt, tel que visé dans la législation nationale, l’avis pertinent ou les documents de marché, créé par sa participation à la procédure de passation de marché?</entry>
+    <entry key="espd.crit.eu.text.corruption">L’opérateur économique lui-même ou toute personne membre de son organe administratif, de gestion ou de surveillance ou détenant un pouvoir de représentation, de décision ou de contrôle en son sein ont-ils fait l’objet d’une condamnation prononcée par jugement définitif pour corruption, cette condamnation ayant été prononcée il n’y a pas plus de cinq ans ou comportant une période d’exclusion encore applicable fixée directement dans la sentence? Telle que définie à l’article 3 de la convention relative à la lutte contre la corruption impliquant des fonctionnaires des Communautés européennes ou des États membres de l’Union européenne (JO C 195 du 25.6.1997, p. 1) et à l’article 2, paragraphe 1, de la décision-cadre 2003/568/JAI du Conseil du 22 juillet 2003 relative à la lutte contre la corruption dans le secteur privé (JO L 192 du 31.7.2003, p. 54). Ce motif d’exclusion comprend également la corruption telle que définie dans le droit interne de l’État membre du pouvoir adjudicateur (entité adjudicatrice) ou de l’opérateur économique.</entry>
+    <entry key="espd.crit.eu.text.early.termination">L’opérateur économique a-t-il fait l’objet d’une résiliation d’un marché public antérieur, d’un marché antérieur passé avec une entité adjudicatrice ou d’une concession antérieure, ou de dommages et intérêts ou d’une autre sanction comparable dans le cadre de ce marché ou de cette concession antérieur(e)?</entry>
+    <entry key="espd.crit.eu.text.fraud">L’opérateur économique lui-même ou toute personne membre de son organe administratif, de gestion ou de surveillance ou détenant un pouvoir de représentation, de décision ou de contrôle en son sein ont-ils fait l’objet d’une condamnation prononcée par jugement définitif pour fraude, cette condamnation ayant été prononcée il n’y a pas plus de cinq ans ou comportant une période d’exclusion encore applicable fixée directement dans la sentence? Au sens de l’article 1er de la convention relative à la protection des intérêts financiers des Communautés européennes (JO C 316 du 27.11.1995, p. 48).</entry>
+    <entry key="espd.crit.eu.text.grounds.criminal.conv">L’opérateur économique lui-même ou toute personne membre de son organe administratif, de gestion ou de surveillance ou détenant un pouvoir de représentation, de décision ou de contrôle en son sein ont-ils fait l’objet d’une condamnation prononcée par jugement définitif pour participation à une organisation criminelle, cette condamnation ayant été prononcée il n’y a pas plus de cinq ans ou comportant une période d’exclusion encore applicable fixée directement dans la sentence? Telle que définie à l’article 2 de la décision-cadre 2008/841/JAI du Conseil du 24 octobre 2008 relative à la lutte contre la criminalité organisée (JO L 300 du 11.11.2008, p. 42).</entry>
+    <entry key="espd.crit.eu.text.guilty.misconduct">L’opérateur économique est-il coupable d’une faute professionnelle grave? Le cas échéant, voir les définitions données dans la législation nationale, l’avis pertinent ou les documents de marché.</entry>
+    <entry key="espd.crit.eu.text.guilty.misinterpretation">L’opérateur économique s’est-il trouvé dans l’une des situations suivantes:<p/>a) il s’est rendu coupable de fausses déclarations en fournissant les renseignements exigés pour la vérification de l’absence de motifs d’exclusion ou la satisfaction des critères de sélection;<p/>b) il a caché ces informations;<p/>c) il n’a pas été en mesure de présenter sans délai les documents justificatifs requis par un pouvoir adjudicateur ou une entité adjudicatrice et;<p/>d) il a entrepris d’influencer indûment le processus décisionnel du pouvoir adjudicateur ou de l’entité adjudicatrice, d’obtenir des informations confidentielles susceptibles de lui donner un avantage indu lors de la procédure de passation de marché, ni de fournir par négligence des informations trompeuses susceptibles d’avoir une influence déterminante sur les décisions d’exclusion, de sélection ou d’attribution?</entry>
     <entry key="espd.crit.eu.text.insolvency">L'opérateur économique est-il en liquidation judiciaire ?</entry>
-    <entry key="espd.crit.eu.text.involvement">L?opérateur économique, ou une entreprise qui lui est liée, a-t-il/elle
-        conseillé le pouvoir adjudicateur ou l?entité adjudicatrice, ou été autrement associé(e) à la préparation de la
-        procédure de passation de marché?
-    </entry>
-    <entry key="espd.crit.eu.text.liquidator">Les actifs de l'opérateur économique sont-ils gérés par un administrateur
-        ou par une instance judiciaire ?
-    </entry>
-    <entry key="espd.crit.eu.text.money.laundering">L?opérateur économique lui-même ou toute personne membre de son
-        organe administratif, de gestion ou de surveillance ou détenant un pouvoir de représentation, de décision ou de
-        contrôle en son sein ont-ils fait l?objet d?une condamnation prononcée par jugement définitif pour blanchiment
-        de capitaux ou financement du terrorisme, cette condamnation ayant été prononcée il n?y a pas plus de cinq ans
-        ou comportant une période d?exclusion encore applicable fixée directement dans la sentence? Tels que définis à
-        l?article 1er de la directive 2005/60/CE du Parlement européen et du Conseil du 26 octobre 2005 relative à la
-        prévention de l?utilisation du système financier aux fins du blanchiment de capitaux et du financement du
-        terrorisme (JO L 309 du 25.11.2005, p. 15).
-    </entry>
-    <entry key="espd.crit.eu.text.national.bankruptcy">L'opérateur économique est-il dans une situation similaire à un
-        cas de faillite en vertu du droit et de la réglementation nationale ?
-    </entry>
-    <entry key="espd.crit.eu.text.payment.social.security">L?opérateur économique a-t-il manqué à ses obligations
-        relatives au paiement de cotisations de sécurité sociale, tant dans le pays où il est établi que dans l?État
-        membre du pouvoir adjudicateur ou de l?entité adjudicatrice s?il diffère de son pays d?établissement?
-    </entry>
-    <entry key="espd.crit.eu.text.payment.taxes">L?opérateur économique a-t-il manqué à ses obligations relatives au
-        paiement d?impôts et taxes, tant dans le pays où il est établi que dans l?État membre du pouvoir adjudicateur ou
-        de l?entité adjudicatrice s?il diffère de son pays d?établissement?
-    </entry>
-    <entry key="espd.crit.eu.text.purely.national">Autres motifs d?exclusion pouvant être prévus par le droit interne de
-        l?État membre du pouvoir adjudicateur ou de l?entité adjudicatrice. Les motifs d?exclusion purement nationaux
-        qui sont précisés dans l?avis pertinent ou dans les documents de marché s?appliquent-ils?
-    </entry>
-    <entry key="espd.crit.eu.text.suspended.business">Les activités économiques de l'opérateur ont-elles été suspendues
-        ?
-    </entry>
-    <entry key="espd.crit.eu.text.terrorist">L?opérateur économique lui-même ou toute personne membre de son organe
-        administratif, de gestion ou de surveillance ou détenant un pouvoir de représentation, de décision ou de
-        contrôle en son sein ont-ils fait l?objet d?une condamnation prononcée par jugement définitif pour infraction
-        terroriste ou infraction liée aux activités terroristes, cette condamnation ayant été prononcée il n?y a pas
-        plus de cinq ans ou comportant une période d?exclusion encore applicable fixée directement dans la sentence?
-        Telles que définies aux articles 1er et 3 de la décision cadre du Conseil du 13 juin 2002 relative à la lutte
-        contre le terrorisme (JO L 164 du 22.6.2002, p. 3). Ce motif d?exclusion comprend également le fait d?inciter à
-        commettre une infraction, de se rendre complice d?une infraction ou de tenter de commettre une infraction, tel
-        que visé à l?article 4 de ladite décision-cadre.
-    </entry>
-    <entry key="espd.crit.eu.title.agreement.economic">Accords avec d?autres opérateurs économiques en vue de fausser la
-        concurrence
-    </entry>
+    <entry key="espd.crit.eu.text.involvement">L’opérateur économique, ou une entreprise qui lui est liée, a-t-il/elle conseillé le pouvoir adjudicateur ou l’entité adjudicatrice, ou été autrement associé(e) à la préparation de la procédure de passation de marché?</entry>
+    <entry key="espd.crit.eu.text.liquidator">Les actifs de l'opérateur économique sont-ils gérés par un administrateur ou par une instance judiciaire ?</entry>
+    <entry key="espd.crit.eu.text.money.laundering">L’opérateur économique lui-même ou toute personne membre de son organe administratif, de gestion ou de surveillance ou détenant un pouvoir de représentation, de décision ou de contrôle en son sein ont-ils fait l’objet d’une condamnation prononcée par jugement définitif pour blanchiment de capitaux ou financement du terrorisme, cette condamnation ayant été prononcée il n’y a pas plus de cinq ans ou comportant une période d’exclusion encore applicable fixée directement dans la sentence? Tels que définis à l’article 1er de la directive 2005/60/CE du Parlement européen et du Conseil du 26 octobre 2005 relative à la prévention de l’utilisation du système financier aux fins du blanchiment de capitaux et du financement du terrorisme (JO L 309 du 25.11.2005, p. 15).</entry>
+    <entry key="espd.crit.eu.text.national.bankruptcy">L'opérateur économique est-il dans une situation similaire à un cas de faillite en vertu du droit et de la réglementation nationale ?</entry>
+    <entry key="espd.crit.eu.text.payment.social.security">L’opérateur économique a-t-il manqué à ses obligations relatives au paiement de cotisations de sécurité sociale, tant dans le pays où il est établi que dans l’État membre du pouvoir adjudicateur ou de l’entité adjudicatrice s’il diffère de son pays d’établissement?</entry>
+    <entry key="espd.crit.eu.text.payment.taxes">L’opérateur économique a-t-il manqué à ses obligations relatives au paiement d’impôts et taxes, tant dans le pays où il est établi que dans l’État membre du pouvoir adjudicateur ou de l’entité adjudicatrice s’il diffère de son pays d’établissement?</entry>
+    <entry key="espd.crit.eu.text.purely.national">Autres motifs d’exclusion pouvant être prévus par le droit interne de l’État membre du pouvoir adjudicateur ou de l’entité adjudicatrice. Les motifs d’exclusion purement nationaux qui sont précisés dans l’avis pertinent ou dans les documents de marché s’appliquent-ils?</entry>
+    <entry key="espd.crit.eu.text.suspended.business">Les activités économiques de l'opérateur ont-elles été suspendues ?</entry>
+    <entry key="espd.crit.eu.text.terrorist">L’opérateur économique lui-même ou toute personne membre de son organe administratif, de gestion ou de surveillance ou détenant un pouvoir de représentation, de décision ou de contrôle en son sein ont-ils fait l’objet d’une condamnation prononcée par jugement définitif pour infraction terroriste ou infraction liée aux activités terroristes, cette condamnation ayant été prononcée il n’y a pas plus de cinq ans ou comportant une période d’exclusion encore applicable fixée directement dans la sentence? Telles que définies aux articles 1er et 3 de la décision cadre du Conseil du 13 juin 2002 relative à la lutte contre le terrorisme (JO L 164 du 22.6.2002, p. 3). Ce motif d’exclusion comprend également le fait d’inciter à commettre une infraction, de se rendre complice d’une infraction ou de tenter de commettre une infraction, tel que visé à l’article 4 de ladite décision-cadre.</entry>
+    <entry key="espd.crit.eu.title.agreement.economic">Accords avec d’autres opérateurs économiques en vue de fausser la concurrence</entry>
     <entry key="espd.crit.eu.title.arrangement.creditors">Concordat préventif</entry>
     <entry key="espd.crit.eu.title.bankrupt">Faillite</entry>
-    <entry key="espd.part3.crit.eu.eo.bankrupt.title">Votre organisation est-elle en état de faillite, ou fait-elle
-        l?objet d?une procédure d?insolvabilité ou de liquidation, ou a-t-elle conclu un concordat préventif, ou se
-        trouve-t-elle dans toute situation analogue résultant d?une procédure de même nature existant dans les
-        législations et réglementations nationales?
-    </entry>
-    <entry key="espd.crit.eu.title.breaching.obligations.environmental">Manquement aux obligations dans le domaine du
-        droit environnemental
-    </entry>
-    <entry key="espd.crit.eu.title.breaching.obligations.environmental.eo">Manquement aux obligations dans le domaine du
-        droit environnemental
-    </entry>
-    <entry key="espd.crit.eu.title.breaching.obligations.labour">Manquement aux obligations dans le domaine du droit du
-        travail
-    </entry>
-    <entry key="espd.crit.eu.title.breaching.obligations.social">Manquement aux obligations dans le domaine du droit
-        social
-    </entry>
-    <entry key="espd.crit.eu.title.child.labour">Travail des enfants et autres formes de traite des êtres humains
-    </entry>
-    <entry key="espd.crit.eu.title.conflict.interest">Conflit d?intérêt créé par sa participation à la procédure de
-        passation de marché
-    </entry>
-    <entry key="espd.crit.eu.title.conflict.interest.eo">Votre organisation se trouve-t-elle dans une situation de
-        conflit d?intérêts en raison de sa participation à la procédure de passation de marché?
-    </entry>
+    <entry key="espd.part3.crit.eu.eo.bankrupt.title">Votre organisation est-elle en état de faillite, ou fait-elle l’objet d’une procédure d’insolvabilité ou de liquidation, ou a-t-elle conclu un concordat préventif, ou se trouve-t-elle dans toute situation analogue résultant d’une procédure de même nature existant dans les législations et réglementations nationales?</entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.environmental">Manquement aux obligations dans le domaine du droit environnemental</entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.environmental.eo">Manquement aux obligations dans le domaine du droit environnemental</entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.labour">Manquement aux obligations dans le domaine du droit du travail</entry>
+    <entry key="espd.crit.eu.title.breaching.obligations.social">Manquement aux obligations dans le domaine du droit social</entry>
+    <entry key="espd.crit.eu.title.child.labour">Travail des enfants et autres formes de traite des êtres humains</entry>
+    <entry key="espd.crit.eu.title.conflict.interest">Conflit d’intérêt créé par sa participation à la procédure de passation de marché</entry>
+    <entry key="espd.crit.eu.title.conflict.interest.eo">Votre organisation se trouve-t-elle dans une situation de conflit d’intérêts en raison de sa participation à la procédure de passation de marché?</entry>
     <entry key="espd.crit.eu.title.corruption">Corruption</entry>
-    <entry key="espd.crit.eu.title.early.termination">Résiliation, dommages et intérêts ou autres sanctions
-        comparables
-    </entry>
+    <entry key="espd.crit.eu.title.early.termination">Résiliation, dommages et intérêts ou autres sanctions comparables</entry>
     <entry key="espd.crit.eu.title.fraud">Fraude</entry>
     <entry key="espd.crit.eu.title.grounds.criminal.conv">Participation à une organisation criminelle</entry>
-    <entry key="espd.crit.eu.title.guilty.misconduct">Coupable d?une faute professionnelle grave</entry>
-    <entry key="espd.crit.eu.title.guilty.misconduct.eo">Votre organisation s?est-elle rendue coupable de faute
-        professionnelle grave?
-    </entry>
-    <entry key="espd.crit.eu.title.guilty.misinterpretation">Coupable de fausses déclarations, dissimulation
-        d?informations, incapacité de présenter les documents requis et obtention d?informations confidentielles sur
-        cette procédure
-    </entry>
+    <entry key="espd.crit.eu.title.guilty.misconduct">Coupable d’une faute professionnelle grave</entry>
+    <entry key="espd.crit.eu.title.guilty.misconduct.eo">Votre organisation s’est-elle rendue coupable de faute professionnelle grave?</entry>
+    <entry key="espd.crit.eu.title.guilty.misinterpretation">Coupable de fausses déclarations, dissimulation d’informations, incapacité de présenter les documents requis et obtention d’informations confidentielles sur cette procédure</entry>
     <entry key="espd.crit.eu.title.insolvency">Insolvabilité</entry>
-    <entry key="espd.crit.eu.title.involvement">Association directe ou indirecte à la préparation de cette procédure de
-        passation de marché
-    </entry>
-    <entry key="espd.crit.eu.title.involvement.eo">Votre organisation, ou une entreprise qui lui est liée, a-t-elle
-        conseillé le pouvoir adjudicateur ou été autrement associée à la préparation de la procédure de passation de
-        marché?
-    </entry>
+    <entry key="espd.crit.eu.title.involvement">Association directe ou indirecte à la préparation de cette procédure de passation de marché</entry>
+    <entry key="espd.crit.eu.title.involvement.eo">Votre organisation, ou une entreprise qui lui est liée, a-t-elle conseillé le pouvoir adjudicateur ou été autrement associée à la préparation de la procédure de passation de marché?</entry>
     <entry key="espd.crit.eu.title.liquidator">Biens administrés par un liquidateur</entry>
     <entry key="espd.crit.eu.title.money.laundering">Blanchiment de capitaux ou financement du terrorisme</entry>
-    <entry key="espd.crit.eu.title.national.bankruptcy">Situation analogue à la faillite prévue dans la législation
-        nationale
-    </entry>
+    <entry key="espd.crit.eu.title.national.bankruptcy">Situation analogue à la faillite prévue dans la législation nationale</entry>
     <entry key="espd.crit.eu.title.payment.social.security">Paiement de cotisations de sécurité sociale</entry>
-    <entry key="espd.crit.eu.title.payment.taxes">Paiement d?impôts et taxes</entry>
-    <entry key="espd.crit.eu.title.purely.national">Motifs d?exclusion purement nationaux</entry>
-    <entry key="espd.crit.eu.title.suspended.business">État de cessation d?activités</entry>
+    <entry key="espd.crit.eu.title.payment.taxes">Paiement d’impôts et taxes</entry>
+    <entry key="espd.crit.eu.title.purely.national">Motifs d’exclusion purement nationaux</entry>
+    <entry key="espd.crit.eu.title.suspended.business">État de cessation d’activités</entry>
     <entry key="espd.crit.eu.title.terrorist">Infraction terroriste ou infraction liée aux activités terroristes</entry>
-    <entry key="espd.part3.crit.eu.guilty.misconduct.eo.tooltip">Le cas échéant, voir les définitions données dans la
-        législation nationale, l?avis pertinent ou les documents de marché.
-    </entry>
-    <entry key="espd.crit.explain.certificates.independent.environmental.description">Si la réponse est non, veuillez
-        expliquer pourquoi et préciser quels autres moyens de preuve concernant les systèmes ou normes de gestion
-        environnementale peuvent être fournis:
-    </entry>
-    <entry key="espd.part4.crit.explain.certificates.independent.quality.description">Si la réponse est non, veuillez
-        expliquer pourquoi et préciser quels autres moyens de preuve concernant le dispositif d?assurance de la qualité
-        peuvent être fournis:
-    </entry>
-    <entry key="espd.part4.crit.explain.supply.contracts.quality.description">Si la réponse est non, veuillez expliquer
-        pourquoi et indiquer quels autres moyens de preuve peuvent être fournis:
-    </entry>
-    <entry key="espd.crit.information.available.electronically">Les pouvoirs adjudicateurs peuvent-ils accéder
-        gratuitement à ces informations dans une base de données d?un État membre de l?UE?
-    </entry>
+    <entry key="espd.part3.crit.eu.guilty.misconduct.eo.tooltip">Le cas échéant, voir les définitions données dans la législation nationale, l’avis pertinent ou les documents de marché.</entry>
+    <entry key="espd.crit.explain.certificates.independent.environmental.description">Si la réponse est non, veuillez expliquer pourquoi et préciser quels autres moyens de preuve concernant les systèmes ou normes de gestion environnementale peuvent être fournis:</entry>
+    <entry key="espd.part4.crit.explain.certificates.independent.quality.description">Si la réponse est non, veuillez expliquer pourquoi et préciser quels autres moyens de preuve concernant le dispositif d’assurance de la qualité peuvent être fournis:</entry>
+    <entry key="espd.part4.crit.explain.supply.contracts.quality.description">Si la réponse est non, veuillez expliquer pourquoi et indiquer quels autres moyens de preuve peuvent être fournis:</entry>
+    <entry key="espd.crit.information.available.electronically">Les pouvoirs adjudicateurs peuvent-ils accéder gratuitement à ces informations dans une base de données d’un État membre de l’UE?</entry>
     <entry key="espd.crit.issuer">Émetteur</entry>
     <entry key="espd.crit.length.period.exclusion">Le cas échéat, durée de la période d'exclusion.</entry>
     <entry key="espd.crit.number">Numéro</entry>
-    <entry key="espd.crit.number.of.years">Nombre d?années</entry>
-    <entry key="espd.crit.other.than.judicial.or.administrative.decision">Ce manquement aux obligations a-t-il été
-        établi par d?autres moyens qu?une décision judiciaire ou administrative?
-    </entry>
+    <entry key="espd.crit.number.of.years">Nombre d’années</entry>
+    <entry key="espd.crit.other.than.judicial.or.administrative.decision">Ce manquement aux obligations a-t-il été établi par d’autres moyens qu’une décision judiciaire ou administrative?</entry>
     <entry key="espd.crit.please.describe.them">Veuillez les décrire</entry>
     <entry key="espd.crit.please.specify">Veuillez préciser</entry>
     <entry key="espd.crit.ratio">Ratio</entry>
     <entry key="espd.crit.reason">Motif</entry>
-    <entry key="espd.crit.reasons.nevertheless.contract">Indiquer les raisons autorisant néanmoins à remplir les
-        obligations du contrat. Ces données ne sont pas nécessaires si l'exclusion d'opérateurs économiques est
-        obligatoire en vertu de la législation nationale, sans possibilité de dérogation dans les cas où l'opérateur est
-        malgré tout en mesure de remplir le contrat.
-    </entry>
+    <entry key="espd.crit.reasons.nevertheless.contract">Indiquer les raisons autorisant néanmoins à remplir les obligations du contrat. Ces données ne sont pas nécessaires si l'exclusion d'opérateurs économiques est obligatoire en vertu de la législation nationale, sans possibilité de dérogation dans les cas où l'opérateur est malgré tout en mesure de remplir le contrat.</entry>
     <entry key="espd.crit.recipients">Bénéficiaires</entry>
-    <entry key="espd.part4.crit.selection.ca.declares.that">En ce qui concerne les critères de sélection, le pouvoir
-        adjudicateur requiert de l?opérateur économique qu?il déclare que
-    </entry>
-    <entry key="espd.part4.crit.selection.ca.economic.article">L?article 58, paragraphe 3, de la directive 2014/24/UE
-        définit les critères de sélection suivants:
-    </entry>
-    <entry key="espd.part4.crit.selection.declares.that.tooltip">L?opérateur économique ne doit remplir ce champ que si
-        le pouvoir adjudicateur ou l?entité adjudicatrice a indiqué dans l?avis pertinent ou dans les documents de
-        marché mentionnés dans l?avis que l?opérateur économique peut se contenter de remplir ce point de la partie IV
-        et est dispensé de remplir les sections A, B, C ou D de la partie IV
-    </entry>
-    <entry key="espd.crit.selection.economic.average.yearly.turnover.description">Son chiffre d?affaires annuel moyen
-        pour le nombre d?exercices requis dans l?avis pertinent, dans les documents de marché ou dans le DUME est le
-        suivant:
-    </entry>
-    <entry key="espd.crit.selection.economic.average.yearly.turnover.main">Chiffre d?affaires annuel moyen</entry>
-    <entry key="espd.crit.selection.economic.financial.ratio.description">En ce qui concerne les ratios financiers
-        (notamment actif et passif) indiqués dans la note pertinente, dans les documents de passation du marché ou dans
-        le DUME, l'opérateur économique déclare que les valeurs réelles des ratios concernés sont les suivantes:
-    </entry>
+    <entry key="espd.part4.crit.selection.ca.declares.that">En ce qui concerne les critères de sélection, le pouvoir adjudicateur requiert de l’opérateur économique qu’il déclare que</entry>
+    <entry key="espd.part4.crit.selection.ca.economic.article">L’article 58, paragraphe 3, de la directive 2014/24/UE définit les critères de sélection suivants:</entry>
+    <entry key="espd.part4.crit.selection.declares.that.tooltip">L’opérateur économique ne doit remplir ce champ que si le pouvoir adjudicateur ou l’entité adjudicatrice a indiqué dans l’avis pertinent ou dans les documents de marché mentionnés dans l’avis que l’opérateur économique peut se contenter de remplir ce point de la partie IV et est dispensé de remplir les sections A, B, C ou D de la partie IV</entry>
+    <entry key="espd.crit.selection.economic.average.yearly.turnover.description">Son chiffre d’affaires annuel moyen pour le nombre d’exercices requis dans l’avis pertinent, dans les documents de marché ou dans le DUME est le suivant:</entry>
+    <entry key="espd.crit.selection.economic.average.yearly.turnover.main">Chiffre d’affaires annuel moyen</entry>
+    <entry key="espd.crit.selection.economic.financial.ratio.description">En ce qui concerne les ratios financiers (notamment actif et passif) indiqués dans la note pertinente, dans les documents de passation du marché ou dans le DUME, l'opérateur économique déclare que les valeurs réelles des ratios concernés sont les suivantes:</entry>
     <entry key="espd.crit.selection.economic.financial.ratio.main">Ratios financiers</entry>
-    <entry key="espd.crit.selection.economic.financial.standing.article.tooltip">L?opérateur économique ne doit fournir
-        les informations que lorsque les critères de sélection concernés ont été exigés par le pouvoir adjudicateur ou
-        l?entité adjudicatrice dans l?avis pertinent ou dans les documents de marché mentionnés dans l?avis.
-    </entry>
-    <entry key="espd.crit.selection.economic.general.yearly.turnover.description">Son chiffre d?affaires annuel général
-        pour le nombre d?exercices requis dans l?avis pertinent, dans les documents de marché ou dans le DUME est le
-        suivant:
-    </entry>
-    <entry key="espd.crit.selection.economic.general.yearly.turnover.main">Chiffre d?affaires annuel général</entry>
-    <entry key="espd.crit.selection.economic.other.financial.requirements.description">Concernant les autres exigences
-        économiques ou financières éventuelles pouvant avoir été précisées dans l?avis pertinent ou les documents de
-        marché, l?opérateur économique déclare que:
-    </entry>
-    <entry key="espd.crit.selection.economic.other.financial.requirements.main">Autres exigences économiques ou
-        financières
-    </entry>
-    <entry key="espd.crit.selection.economic.professional.risk.insurance.description">Le montant couvert par l?assurance
-        contre les risques professionnels qu?il a souscrite est le suivant:
-    </entry>
-    <entry key="espd.crit.selection.economic.professional.risk.insurance.main">Assurance contre les risques
-        professionnels
-    </entry>
-    <entry key="espd.crit.selection.economic.setup.eo.description">Si les informations concernant le chiffre d?affaires
-        (général ou spécifique) ne sont pas disponibles pour toute la période requise, veuillez indiquer la date à
-        laquelle l?opérateur économique a été créé ou a commencé ses activités:
-    </entry>
-    <entry key="espd.crit.selection.economic.setup.eo.main">Création de l?opérateur économique</entry>
-    <entry key="espd.crit.selection.economic.specific.average.turnover.description">Son chiffre d?affaires annuel moyen
-        spécifique dans le domaine d?activité couvert par le marché pour le nombre d?exercices requis dans l?avis
-        pertinent, dans les documents de marché ou dans le DUME est le suivant:
-    </entry>
-    <entry key="espd.crit.selection.economic.specific.average.turnover.main">Chiffre d?affaires annuel moyen
-        spécifique
-    </entry>
-    <entry key="espd.crit.selection.economic.specific.yearly.turnover.description">Son chiffre d?affaires annuel
-        spécifique dans le domaine d?activité couvert par le marché pour le nombre d?exercices requis dans l?avis
-        pertinent, dans les documents de marché ou dans le DUME est le suivant:
-    </entry>
-    <entry key="espd.crit.selection.economic.specific.yearly.turnover.main">Chiffre d?affaires annuel spécifique</entry>
-    <entry key="espd.part4.crit.selection.eo.declares.that">En ce qui concerne les critères de sélection, l?opérateur
-        économique déclare que
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.declares.that.tooltip">L?opérateur économique ne doit remplir ce champ que
-        si le pouvoir adjudicateur ou l?entité adjudicatrice a indiqué dans l?avis pertinent ou dans les documents de
-        marché mentionnés dans l?avis que l?opérateur économique peut se contenter de remplir ce point de la partie IV
-        et est dispensé de remplir les sections A, B, C ou D de la partie IV
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.economic.article">L?article 58, paragraphe 3, de la directive 2014/24/UE
-        définit les critères de sélection suivants:
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.economic.article.tooltip">L?opérateur économique ne doit fournir les
-        informations que lorsque les critères de sélection concernés ont été exigés par le pouvoir adjudicateur ou
-        l?entité adjudicatrice dans l?avis pertinent ou dans les documents de marché mentionnés dans l?avis.
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.economic.enrolement.description">Il est inscrit sur le registre
-        professionnel ou le registre du commerce pertinent de l?État membre dans lequel il est établi
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.economic.enrolement.main">Inscription sur des registres professionnels ou
-        du commerce
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.economic.service.contracts.description">Est-il nécessaire de détenir une
-        autorisation spécifique ou d?être membre d?une organisation spécifique pour pouvoir fournir le service en
-        question dans le pays dans lequel l?opérateur économique est établi?
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.economic.service.contracts.main">Pour les marchés de services: Nécessité de
-        détenir une autorisation ou de disposer du statut de membre
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.satisfies.all.criteria">Il satisfait à tous les critères de sélection
-        exigés
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.suitability.article">L?article 58, paragraphe 2, de la directive 2014/24/UE
-        définit les critères de sélection suivants:
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.suitability.article.tooltip">L?opérateur économique ne doit fournir les
-        informations que lorsque les critères de sélection concernés ont été exigés par le pouvoir adjudicateur ou
-        l?entité adjudicatrice dans l?avis pertinent ou dans les documents de marché mentionnés dans l?avis.
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.suitability.enrolment.description">Il est inscrit sur le registre
-        professionnel ou le registre du commerce pertinent de l?État membre dans lequel il est établi
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.suitability.enrolment.main">Inscription sur des registres professionnels ou
-        du commerce
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.suitability.service.contracts.description">Est-il nécessaire de détenir une
-        autorisation spécifique ou d?être membre d?une organisation spécifique pour pouvoir fournir le service en
-        question dans le pays dans lequel l?opérateur économique est établi?
-    </entry>
-    <entry key="espd.part4.crit.selection.eo.suitability.service.contracts.main">Pour les marchés de services: Nécessité
-        de détenir une autorisation ou de disposer du statut de membre
-    </entry>
-    <entry key="espd.part4.crit.selection.quality.assurance.article">L?article 62, paragraphe 2, de la directive
-        2014/24/UE énonce les critères de sélection suivants
-    </entry>
-    <entry key="espd.part4.crit.selection.quality.assurance.tooltip">L?opérateur économique ne fournit des informations
-        sur les critères de sélection concernés que si ces derniers ont été retenus par le pouvoir adjudicateur ou
-        l?entité adjudicatrice dans l?avis pertinent ou dans les documents mentionnés dans cet avis.
-    </entry>
-    <entry key="espd.crit.selection.quality.certificate.independent.bodies.environmental.description">L?opérateur
-        économique sera-t-il en mesure de produire des certificats établis par des organismes indépendants, attestant
-        qu?il se conforme aux systèmes ou normes de gestion environnementale requis?
-    </entry>
-    <entry key="espd.crit.selection.quality.certificate.independent.bodies.environmental.main">Certificats établis par
-        des organismes indépendants concernant les systèmes ou normes de gestion environnementale
-    </entry>
-    <entry key="espd.crit.selection.quality.certificate.independent.bodies.quality.description">L?opérateur économique
-        sera-t-il en mesure de produire des certificats établis par des organismes indépendants, attestant qu?il se
-        conforme aux normes d?assurance de la qualité requises, y compris en ce qui concerne l?accessibilité pour les
-        personnes handicapées?
-    </entry>
-    <entry key="espd.crit.selection.quality.certificate.independent.bodies.quality.main">Certificats établis par des
-        organismes indépendants concernant les normes d?assurance de la qualité
-    </entry>
-    <entry key="espd.part4.crit.selection.satisfies.all.criteria">Il satisfait à tous les critères de sélection exigés,
-        tels qu?indiqués dans l?avis pertinent ou dans les documents de marché mentionnés dans l?avis.
-    </entry>
-    <entry key="espd.part4.crit.selection.suitability.article">L?article 58, paragraphe 2, de la directive 2014/24/UE
-        définit les critères de sélection suivants:
-    </entry>
-    <entry key="espd.part4.crit.selection.suitability.article.tooltip">L?opérateur économique ne doit remplir ce champ
-        que lorsque le pouvoir adjudicateur ou l?entité adjudicatrice a indiqué, dans l?avis pertinent ou dans les
-        documents de marché mentionnés dans l?avis, que l?opérateur économique peut se contenter de remplir la section ?
-        de la partie IV sans devoir remplir les autres sections de la partie IV.
-    </entry>
-    <entry key="espd.crit.selection.suitability.enrolment.professional.register.description">Il est inscrit sur les
-        registres professionnels pertinents de l?État membre dans lequel il est établi, comme décrit à l?annexe XI de la
-        directive 2014/24/UE; les opérateurs économiques de certains États membres peuvent être tenus de se conformer à
-        d?autres exigences mentionnées dans ladite annexe.
-    </entry>
-    <entry key="espd.crit.selection.suitability.enrolment.professional.register.main">Inscription sur un registre
-        professionnel pertinent
-    </entry>
-    <entry key="espd.crit.selection.suitability.enrolment.trade.register.description">Il est inscrit sur des registres
-        du commerce de l?État membre dans lequel il est établi, comme décrit à l?annexe XI de la directive 2014/24/UE;
-        les opérateurs économiques de certains États membres peuvent être tenus de se conformer à d?autres exigences
-        mentionnées dans ladite annexe.
-    </entry>
-    <entry key="espd.crit.selection.suitability.enrolment.trade.register.main">Inscription sur un registre du commerce
-    </entry>
-    <entry key="espd.crit.selection.suitability.service.contracts.auth.description">Est-il nécessaire de détenir une
-        autorisation spécifique pour pouvoir fournir le service en question dans le pays dans lequel l?opérateur
-        économique est établi?
-    </entry>
-    <entry key="espd.crit.selection.suitability.service.contracts.auth.main">Pour les marchés de services: nécessité de
-        détenir une autorisation spécifique
-    </entry>
-    <entry key="espd.crit.selection.suitability.service.contracts.membership.description">Est-il nécessaire d?être
-        membre d?une organisation spécifique pour pouvoir fournir le service en question dans le pays dans lequel
-        l?opérateur économique est établi?
-    </entry>
-    <entry key="espd.crit.selection.suitability.service.contracts.membership.main">Pour les marchés de services:
-        nécessité de disposer du statut de membre d?une organisation spécifique
-    </entry>
-    <entry key="espd.crit.selection.technical.allowance.of.checks.description">Pour les produits ou services à fournir
-        qui sont complexes ou, exceptionnellement, pour les produits ou services qui doivent répondre à un but
-        particulier: L?opérateur économique permettra la réalisation de contrôles portant sur ses capacités de
-        production ou sur sa capacité technique et, si nécessaire, sur les moyens d?étude et de recherche dont il
-        dispose ainsi que sur les mesures de contrôle de la qualité. Le contrôle sera effectué par le pouvoir
-        adjudicateur ou, si ce dernier y consent, en son nom, par un organisme officiel compétent du pays dans lequel le
-        fournisseur ou le prestataire de services est établi.
-    </entry>
+    <entry key="espd.crit.selection.economic.financial.standing.article.tooltip">L’opérateur économique ne doit fournir les informations que lorsque les critères de sélection concernés ont été exigés par le pouvoir adjudicateur ou l’entité adjudicatrice dans l’avis pertinent ou dans les documents de marché mentionnés dans l’avis.</entry>
+    <entry key="espd.crit.selection.economic.general.yearly.turnover.description">Son chiffre d’affaires annuel général pour le nombre d’exercices requis dans l’avis pertinent, dans les documents de marché ou dans le DUME est le suivant:</entry>
+    <entry key="espd.crit.selection.economic.general.yearly.turnover.main">Chiffre d’affaires annuel général</entry>
+    <entry key="espd.crit.selection.economic.other.financial.requirements.description">Concernant les autres exigences économiques ou financières éventuelles pouvant avoir été précisées dans l’avis pertinent ou les documents de marché, l’opérateur économique déclare que:</entry>
+    <entry key="espd.crit.selection.economic.other.financial.requirements.main">Autres exigences économiques ou financières</entry>
+    <entry key="espd.crit.selection.economic.professional.risk.insurance.description">Le montant couvert par l’assurance contre les risques professionnels qu’il a souscrite est le suivant:</entry>
+    <entry key="espd.crit.selection.economic.professional.risk.insurance.main">Assurance contre les risques professionnels</entry>
+    <entry key="espd.crit.selection.economic.setup.eo.description">Si les informations concernant le chiffre d’affaires (général ou spécifique) ne sont pas disponibles pour toute la période requise, veuillez indiquer la date à laquelle l’opérateur économique a été créé ou a commencé ses activités:</entry>
+    <entry key="espd.crit.selection.economic.setup.eo.main">Création de l’opérateur économique</entry>
+    <entry key="espd.crit.selection.economic.specific.average.turnover.description">Son chiffre d’affaires annuel moyen spécifique dans le domaine d’activité couvert par le marché pour le nombre d’exercices requis dans l’avis pertinent, dans les documents de marché ou dans le DUME est le suivant:</entry>
+    <entry key="espd.crit.selection.economic.specific.average.turnover.main">Chiffre d’affaires annuel moyen spécifique</entry>
+    <entry key="espd.crit.selection.economic.specific.yearly.turnover.description">Son chiffre d’affaires annuel spécifique dans le domaine d’activité couvert par le marché pour le nombre d’exercices requis dans l’avis pertinent, dans les documents de marché ou dans le DUME est le suivant:</entry>
+    <entry key="espd.crit.selection.economic.specific.yearly.turnover.main">Chiffre d’affaires annuel spécifique</entry>
+    <entry key="espd.part4.crit.selection.eo.declares.that">En ce qui concerne les critères de sélection, l’opérateur économique déclare que</entry>
+    <entry key="espd.part4.crit.selection.eo.declares.that.tooltip">L’opérateur économique ne doit remplir ce champ que si le pouvoir adjudicateur ou l’entité adjudicatrice a indiqué dans l’avis pertinent ou dans les documents de marché mentionnés dans l’avis que l’opérateur économique peut se contenter de remplir ce point de la partie IV et est dispensé de remplir les sections A, B, C ou D de la partie IV</entry>
+    <entry key="espd.part4.crit.selection.eo.economic.article">L’article 58, paragraphe 3, de la directive 2014/24/UE définit les critères de sélection suivants:</entry>
+    <entry key="espd.part4.crit.selection.eo.economic.article.tooltip">L’opérateur économique ne doit fournir les informations que lorsque les critères de sélection concernés ont été exigés par le pouvoir adjudicateur ou l’entité adjudicatrice dans l’avis pertinent ou dans les documents de marché mentionnés dans l’avis.</entry>
+    <entry key="espd.part4.crit.selection.eo.economic.enrolement.description">Il est inscrit sur le registre professionnel ou le registre du commerce pertinent de l’État membre dans lequel il est établi</entry>
+    <entry key="espd.part4.crit.selection.eo.economic.enrolement.main">Inscription sur des registres professionnels ou du commerce</entry>
+    <entry key="espd.part4.crit.selection.eo.economic.service.contracts.description">Est-il nécessaire de détenir une autorisation spécifique ou d’être membre d’une organisation spécifique pour pouvoir fournir le service en question dans le pays dans lequel l’opérateur économique est établi?</entry>
+    <entry key="espd.part4.crit.selection.eo.economic.service.contracts.main">Pour les marchés de services: Nécessité de détenir une autorisation ou de disposer du statut de membre</entry>
+    <entry key="espd.part4.crit.selection.eo.satisfies.all.criteria">Il satisfait à tous les critères de sélection exigés</entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.article">L’article 58, paragraphe 2, de la directive 2014/24/UE définit les critères de sélection suivants:</entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.article.tooltip">L’opérateur économique ne doit fournir les informations que lorsque les critères de sélection concernés ont été exigés par le pouvoir adjudicateur ou l’entité adjudicatrice dans l’avis pertinent ou dans les documents de marché mentionnés dans l’avis.</entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.enrolment.description">Il est inscrit sur le registre professionnel ou le registre du commerce pertinent de l’État membre dans lequel il est établi</entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.enrolment.main">Inscription sur des registres professionnels ou du commerce</entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.service.contracts.description">Est-il nécessaire de détenir une autorisation spécifique ou d’être membre d’une organisation spécifique pour pouvoir fournir le service en question dans le pays dans lequel l’opérateur économique est établi?</entry>
+    <entry key="espd.part4.crit.selection.eo.suitability.service.contracts.main">Pour les marchés de services: Nécessité de détenir une autorisation ou de disposer du statut de membre</entry>
+    <entry key="espd.part4.crit.selection.quality.assurance.article">L’article 62, paragraphe 2, de la directive 2014/24/UE énonce les critères de sélection suivants</entry>
+    <entry key="espd.part4.crit.selection.quality.assurance.tooltip">L’opérateur économique ne fournit des informations sur les critères de sélection concernés que si ces derniers ont été retenus par le pouvoir adjudicateur ou l’entité adjudicatrice dans l’avis pertinent ou dans les documents mentionnés dans cet avis.</entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.environmental.description">L’opérateur économique sera-t-il en mesure de produire des certificats établis par des organismes indépendants, attestant qu’il se conforme aux systèmes ou normes de gestion environnementale requis?</entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.environmental.main">Certificats établis par des organismes indépendants concernant les systèmes ou normes de gestion environnementale</entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.quality.description">L’opérateur économique sera-t-il en mesure de produire des certificats établis par des organismes indépendants, attestant qu’il se conforme aux normes d’assurance de la qualité requises, y compris en ce qui concerne l’accessibilité pour les personnes handicapées?</entry>
+    <entry key="espd.crit.selection.quality.certificate.independent.bodies.quality.main">Certificats établis par des organismes indépendants concernant les normes d’assurance de la qualité</entry>
+    <entry key="espd.part4.crit.selection.satisfies.all.criteria">Il satisfait à tous les critères de sélection exigés, tels qu’indiqués dans l’avis pertinent ou dans les documents de marché mentionnés dans l’avis.</entry>
+    <entry key="espd.part4.crit.selection.suitability.article">L’article 58, paragraphe 2, de la directive 2014/24/UE définit les critères de sélection suivants:</entry>
+    <entry key="espd.part4.crit.selection.suitability.article.tooltip">L’opérateur économique ne doit remplir ce champ que lorsque le pouvoir adjudicateur ou l’entité adjudicatrice a indiqué, dans l’avis pertinent ou dans les documents de marché mentionnés dans l’avis, que l’opérateur économique peut se contenter de remplir la section α de la partie IV sans devoir remplir les autres sections de la partie IV.</entry>
+    <entry key="espd.crit.selection.suitability.enrolment.professional.register.description">Il est inscrit sur les registres professionnels pertinents de l’État membre dans lequel il est établi, comme décrit à l’annexe XI de la directive 2014/24/UE; les opérateurs économiques de certains États membres peuvent être tenus de se conformer à d’autres exigences mentionnées dans ladite annexe.</entry>
+    <entry key="espd.crit.selection.suitability.enrolment.professional.register.main">Inscription sur un registre professionnel pertinent</entry>
+    <entry key="espd.crit.selection.suitability.enrolment.trade.register.description">Il est inscrit sur des registres du commerce de l’État membre dans lequel il est établi, comme décrit à l’annexe XI de la directive 2014/24/UE; les opérateurs économiques de certains États membres peuvent être tenus de se conformer à d’autres exigences mentionnées dans ladite annexe.</entry>
+    <entry key="espd.crit.selection.suitability.enrolment.trade.register.main">Inscription sur un registre du commerce</entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.auth.description">Est-il nécessaire de détenir une autorisation spécifique pour pouvoir fournir le service en question dans le pays dans lequel l’opérateur économique est établi?</entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.auth.main">Pour les marchés de services: nécessité de détenir une autorisation spécifique</entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.membership.description">Est-il nécessaire d’être membre d’une organisation spécifique pour pouvoir fournir le service en question dans le pays dans lequel l’opérateur économique est établi?</entry>
+    <entry key="espd.crit.selection.suitability.service.contracts.membership.main">Pour les marchés de services: nécessité de disposer du statut de membre d’une organisation spécifique</entry>
+    <entry key="espd.crit.selection.technical.allowance.of.checks.description">Pour les produits ou services à fournir qui sont complexes ou, exceptionnellement, pour les produits ou services qui doivent répondre à un but particulier: L’opérateur économique permettra la réalisation de contrôles portant sur ses capacités de production ou sur sa capacité technique et, si nécessaire, sur les moyens d’étude et de recherche dont il dispose ainsi que sur les mesures de contrôle de la qualité. Le contrôle sera effectué par le pouvoir adjudicateur ou, si ce dernier y consent, en son nom, par un organisme officiel compétent du pays dans lequel le fournisseur ou le prestataire de services est établi.</entry>
     <entry key="espd.crit.selection.technical.allowance.of.checks.main">Autorisation de réaliser des contrôles</entry>
-    <entry key="espd.crit.selection.technical.average.annual.manpower.description">Les effectifs moyens annuels de
-        l?opérateur économique pour les trois dernières années s?établissaient comme suit:
-    </entry>
+    <entry key="espd.crit.selection.technical.average.annual.manpower.description">Les effectifs moyens annuels de l’opérateur économique pour les trois dernières années s’établissaient comme suit:</entry>
     <entry key="espd.crit.selection.technical.average.annual.manpower.main">Effectifs moyens annuels</entry>
-    <entry key="espd.crit.selection.technical.educational.professional.qualifications.description">Les titres d?études
-        et professionnels suivants sont détenus par le prestataire de services ou le contractant lui-même, et/ou (selon
-        les exigences fixées dans l?avis pertinent ou dans les documents de marché) par son personnel d?encadrement.
-    </entry>
-    <entry key="espd.crit.selection.technical.educational.professional.qualifications.main">Titres d?études et
-        professionnels
-    </entry>
-    <entry key="espd.crit.selection.technical.environment.management.features.description">L?opérateur économique sera
-        en mesure d?appliquer les mesures de gestion environnementale suivantes lors de l?exécution du marché:
-    </entry>
-    <entry key="espd.crit.selection.technical.environment.management.features.main">Mesures de gestion
-        environnementale
-    </entry>
-    <entry key="espd.crit.selection.technical.number.managerial.staff.description">Le nombre de cadres de l?opérateur
-        économique pendant les trois dernières années est le suivant:
-    </entry>
+    <entry key="espd.crit.selection.technical.educational.professional.qualifications.description">Les titres d’études et professionnels suivants sont détenus par le prestataire de services ou le contractant lui-même, et/ou (selon les exigences fixées dans l’avis pertinent ou dans les documents de marché) par son personnel d’encadrement.</entry>
+    <entry key="espd.crit.selection.technical.educational.professional.qualifications.main">Titres d’études et professionnels</entry>
+    <entry key="espd.crit.selection.technical.environment.management.features.description">L’opérateur économique sera en mesure d’appliquer les mesures de gestion environnementale suivantes lors de l’exécution du marché:</entry>
+    <entry key="espd.crit.selection.technical.environment.management.features.main">Mesures de gestion environnementale</entry>
+    <entry key="espd.crit.selection.technical.number.managerial.staff.description">Le nombre de cadres de l’opérateur économique pendant les trois dernières années est le suivant:</entry>
     <entry key="espd.crit.selection.technical.number.managerial.staff.main">Nombre de cadres</entry>
-    <entry key="espd.part4.crit.selection.technical.professional.ability.article">L?article 58, paragraphe 4, de la
-        directive 2014/24/UE définit les critères de sélection suivants:
-    </entry>
-    <entry key="espd.part4.crit.selection.technical.professional.ability.article.tooltip">L?opérateur économique ne doit
-        fournir les informations que lorsque les critères de sélection concernés ont été exigés par le pouvoir
-        adjudicateur ou l?entité adjudicatrice dans l?avis pertinent ou dans les documents de marché mentionnés dans
-        l?avis.
-    </entry>
-    <entry key="espd.crit.selection.technical.service.contracts.performance.services.description">Uniquement pour les
-        marchés publics de services: Pendant la période de référence, l?opérateur économique a fourni les services
-        principaux du type spécifié qui suivent. Les pouvoirs adjudicateurs peuvent exiger jusqu?à trois années et
-        accepter l?expérience datant de plus de trois ans.
-    </entry>
-    <entry key="espd.crit.selection.technical.service.contracts.performance.services.main">Pour les marchés de services:
-        exécution des services du type spécifié
-    </entry>
-    <entry key="espd.crit.selection.technical.study.research.facilities.description">Ses moyens d?étude et de recherche
-        sont les suivants:
-    </entry>
-    <entry key="espd.crit.selection.technical.study.research.facilities.main">Moyens d?étude et de recherche</entry>
-    <entry key="espd.crit.selection.technical.subcontracting.proportion.description">L?opérateur économique a
-        l?intention d?éventuellement sous-traiter la fraction suivante (c?est-à-dire un pourcentage) du marché. Veuillez
-        noter que si l?opérateur économique a décidé de sous-traiter une partie du marché et a recours aux capacités de
-        sous-traitants pour exécuter cette partie du marché, veuillez alors remplir un DUME distinct pour ces
-        sous-traitants, voir partie II, section C, ci-dessus.
-    </entry>
-    <entry key="espd.crit.selection.technical.subcontracting.proportion.main">Sous-traitance d?une fraction du marché
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.chain.management.description">Il sera en mesure d?appliquer les
-        systèmes de gestion et de suivi de la chaîne d?approvisionnement suivants lors de l?exécution du marché:
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.chain.management.main">Gestion de la chaîne d?approvisionnement
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.certificate.quality.description">L?opérateur économique
-        peut-il fournir les certificats requis établis par des instituts ou services officiels chargés du contrôle de la
-        qualité et reconnus compétents, attestant la conformité de produits bien identifiée par des références aux
-        spécifications ou normes techniques, figurant dans l?avis pertinent ou les documents de marché?
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.certificate.quality.main">Dans le cas des marchés de
-        fournitures: certificats établis par des instituts chargés du contrôle de la qualité
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.performance.deliveries.description">Uniquement pour les
-        marchés publics de fournitures: Pendant la période de référence, l?opérateur économique a fourni les fournitures
-        principales du type spécifié qui suivent. Les pouvoirs adjudicateurs peuvent exiger jusqu?à trois années et
-        accepter l?expérience datant de plus de trois ans.
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.performance.deliveries.main">Pour les marchés de
-        fournitures: exécution des fournitures du type spécifié
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.with.ca.description">Dans le cas des marchés publics de
-        fournitures: L?opérateur économique fournira les échantillons, descriptions ou photographies requis des produits
-        à fournir et présentera les certificats d?authenticité le cas échéant.
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.with.ca.main">Dans le cas des marchés de fournitures:
-        échantillons, descriptions ou photographies avec certificats d?authenticité
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.without.ca.description">Dans le cas des marchés publics
-        de fournitures: L?opérateur économique fournira les échantillons, descriptions ou photographies requis des
-        produits à fournir, qui n?ont pas besoin d?être accompagnés de certificats d?authenticité.
-    </entry>
-    <entry key="espd.crit.selection.technical.supply.contracts.without.ca.main">Dans le cas des marchés de fournitures:
-        échantillons, descriptions ou photographies sans certificats d?authenticité
-    </entry>
-    <entry key="espd.crit.selection.technical.technical.facilities.measures.description">Il utilise l?équipement
-        technique et les mesures suivants pour s?assurer de la qualité et ses moyens d?étude et de recherche sont les
-        suivants:
-    </entry>
-    <entry key="espd.crit.selection.technical.technical.facilities.measures.main">Équipement technique et mesures pour
-        s?assurer de la qualité
-    </entry>
-    <entry key="espd.crit.selection.technical.technicians.technical.bodies.description">Il peut faire appel aux
-        techniciens ou organismes techniques suivants, en particulier ceux responsables du contrôle de la qualité: Pour
-        les techniciens ou les organismes techniques ne faisant pas directement partie de l?entreprise de l?opérateur
-        économique, mais aux capacités desquelles l?opérateur économique a recours, comme indiqué dans la partie II,
-        section C, des formulaires DUME distincts doivent être remplis.
-    </entry>
-    <entry key="espd.crit.selection.technical.technicians.technical.bodies.main">Techniciens ou organismes techniques
-        responsables du contrôle de la qualité
-    </entry>
-    <entry key="espd.crit.selection.technical.tools.plant.description">L?outillage, le matériel et l?équipement
-        technique suivants seront à sa disposition pour l?exécution du marché:
-    </entry>
+    <entry key="espd.part4.crit.selection.technical.professional.ability.article">L’article 58, paragraphe 4, de la directive 2014/24/UE définit les critères de sélection suivants:</entry>
+    <entry key="espd.part4.crit.selection.technical.professional.ability.article.tooltip">L’opérateur économique ne doit fournir les informations que lorsque les critères de sélection concernés ont été exigés par le pouvoir adjudicateur ou l’entité adjudicatrice dans l’avis pertinent ou dans les documents de marché mentionnés dans l’avis.</entry>
+    <entry key="espd.crit.selection.technical.service.contracts.performance.services.description">Uniquement pour les marchés publics de services: Pendant la période de référence, l’opérateur économique a fourni les services principaux du type spécifié qui suivent. Les pouvoirs adjudicateurs peuvent exiger jusqu’à trois années et accepter l’expérience datant de plus de trois ans.</entry>
+    <entry key="espd.crit.selection.technical.service.contracts.performance.services.main">Pour les marchés de services: exécution des services du type spécifié</entry>
+    <entry key="espd.crit.selection.technical.study.research.facilities.description">Ses moyens d’étude et de recherche sont les suivants: </entry>
+    <entry key="espd.crit.selection.technical.study.research.facilities.main">Moyens d’étude et de recherche</entry>
+    <entry key="espd.crit.selection.technical.subcontracting.proportion.description">L’opérateur économique a l’intention d’éventuellement sous-traiter la fraction suivante (c’est-à-dire un pourcentage) du marché. Veuillez noter que si l’opérateur économique a décidé de sous-traiter une partie du marché et a recours aux capacités de sous-traitants pour exécuter cette partie du marché, veuillez alors remplir un DUME distinct pour ces sous-traitants, voir partie II, section C, ci-dessus.</entry>
+    <entry key="espd.crit.selection.technical.subcontracting.proportion.main">Sous-traitance d’une fraction du marché</entry>
+    <entry key="espd.crit.selection.technical.supply.chain.management.description">Il sera en mesure d’appliquer les systèmes de gestion et de suivi de la chaîne d’approvisionnement suivants lors de l’exécution du marché:</entry>
+    <entry key="espd.crit.selection.technical.supply.chain.management.main">Gestion de la chaîne d’approvisionnement</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.certificate.quality.description">L’opérateur économique peut-il fournir les certificats requis établis par des instituts ou services officiels chargés du contrôle de la qualité et reconnus compétents, attestant la conformité de produits bien identifiée par des références aux spécifications ou normes techniques, figurant dans l’avis pertinent ou les documents de marché?</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.certificate.quality.main">Dans le cas des marchés de fournitures: certificats établis par des instituts chargés du contrôle de la qualité</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.performance.deliveries.description">Uniquement pour les marchés publics de fournitures: Pendant la période de référence, l’opérateur économique a fourni les fournitures principales du type spécifié qui suivent. Les pouvoirs adjudicateurs peuvent exiger jusqu’à trois années et accepter l’expérience datant de plus de trois ans.</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.performance.deliveries.main">Pour les marchés de fournitures: exécution des fournitures du type spécifié</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.with.ca.description">Dans le cas des marchés publics de fournitures: L’opérateur économique fournira les échantillons, descriptions ou photographies requis des produits à fournir et présentera les certificats d’authenticité le cas échéant.</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.with.ca.main">Dans le cas des marchés de fournitures: échantillons, descriptions ou photographies avec certificats d’authenticité</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.without.ca.description">Dans le cas des marchés publics de fournitures: L’opérateur économique fournira les échantillons, descriptions ou photographies requis des produits à fournir, qui n’ont pas besoin d’être accompagnés de certificats d’authenticité.</entry>
+    <entry key="espd.crit.selection.technical.supply.contracts.without.ca.main">Dans le cas des marchés de fournitures: échantillons, descriptions ou photographies sans certificats d’authenticité</entry>
+    <entry key="espd.crit.selection.technical.technical.facilities.measures.description">Il utilise l’équipement technique et les mesures suivants pour s’assurer de la qualité et ses moyens d’étude et de recherche sont les suivants: </entry>
+    <entry key="espd.crit.selection.technical.technical.facilities.measures.main">Équipement technique et mesures pour s’assurer de la qualité</entry>
+    <entry key="espd.crit.selection.technical.technicians.technical.bodies.description">Il peut faire appel aux techniciens ou organismes techniques suivants, en particulier ceux responsables du contrôle de la qualité: Pour les techniciens ou les organismes techniques ne faisant pas directement partie de l’entreprise de l’opérateur économique, mais aux capacités desquelles l’opérateur économique a recours, comme indiqué dans la partie II, section C, des formulaires DUME distincts doivent être remplis.</entry>
+    <entry key="espd.crit.selection.technical.technicians.technical.bodies.main">Techniciens ou organismes techniques responsables du contrôle de la qualité</entry>
+    <entry key="espd.crit.selection.technical.tools.plant.description">L’outillage, le matériel et l’équipement technique suivants seront à sa disposition pour l’exécution du marché:</entry>
     <entry key="espd.crit.selection.technical.tools.plant.main">Outillage, matériel et équipement technique</entry>
-    <entry key="espd.crit.selection.technical.work.contracts.performance.works.description">Uniquement pour les marchés
-        publics de travaux: Pendant la période de référence, l?opérateur économique a exécuté les travaux du type
-        spécifié qui suivent: Les pouvoirs adjudicateurs peuvent exiger jusqu?à cinq années et accepter l?expérience
-        datant de plus de cinq ans.
-    </entry>
-    <entry key="espd.crit.selection.technical.work.contracts.performance.works.main">Pour les marchés de travaux:
-        exécution des travaux du type spécifié
-    </entry>
-    <entry key="espd.crit.selection.technical.work.contracts.technicians.description">Dans le cas de marchés publics de
-        travaux, l?opérateur économique sera en mesure de faire appel aux techniciens ou organismes techniques suivants
-        pour exécuter les travaux:
-    </entry>
-    <entry key="espd.crit.selection.technical.work.contracts.technicians.main">Pour les marchés de travaux: techniciens
-        ou organismes techniques chargés d?exécuter les travaux
-    </entry>
+    <entry key="espd.crit.selection.technical.work.contracts.performance.works.description">Uniquement pour les marchés publics de travaux: Pendant la période de référence, l’opérateur économique a exécuté les travaux du type spécifié qui suivent: Les pouvoirs adjudicateurs peuvent exiger jusqu’à cinq années et accepter l’expérience datant de plus de cinq ans.</entry>
+    <entry key="espd.crit.selection.technical.work.contracts.performance.works.main">Pour les marchés de travaux: exécution des travaux du type spécifié</entry>
+    <entry key="espd.crit.selection.technical.work.contracts.technicians.description">Dans le cas de marchés publics de travaux, l’opérateur économique sera en mesure de faire appel aux techniciens ou organismes techniques suivants pour exécuter les travaux:</entry>
+    <entry key="espd.crit.selection.technical.work.contracts.technicians.main">Pour les marchés de travaux: techniciens ou organismes techniques chargés d’exécuter les travaux</entry>
     <entry key="espd.crit.start.date">Date de début</entry>
-    <entry key="espd.crit.taken.self.cleaning.measures">Avez-vous pris des mesures pour démontrer que vous êtes fiable
-        («auto-réhabilitation»)?
-    </entry>
-    <entry key="espd.crit.taxes.eo.fulfilled.obligations">L?opérateur économique a-t-il rempli ses obligations en payant
-        ou en concluant un accord contraignant en vue de payer les impôts et taxes ou cotisations de sécurité sociale
-        dus, y compris, le cas échéant, tout intérêt échu ou les éventuelles amendes?
-    </entry>
-    <entry key="espd.crit.taxes.length.period.of.exclusion">En cas de condamnation, la durée de la période d?exclusion
-        dans la mesure où celle-ci est fixée directement dans la condamnation
-    </entry>
+    <entry key="espd.crit.taken.self.cleaning.measures">Avez-vous pris des mesures pour démontrer que vous êtes fiable («auto-réhabilitation»)?</entry>
+    <entry key="espd.crit.taxes.eo.fulfilled.obligations">L’opérateur économique a-t-il rempli ses obligations en payant ou en concluant un accord contraignant en vue de payer les impôts et taxes ou cotisations de sécurité sociale dus, y compris, le cas échéant, tout intérêt échu ou les éventuelles amendes?</entry>
+    <entry key="espd.crit.taxes.length.period.of.exclusion">En cas de condamnation, la durée de la période d’exclusion dans la mesure où celle-ci est fixée directement dans la condamnation</entry>
     <entry key="espd.crit.taxes.means.description">Veuillez préciser les moyens utilisés</entry>
     <entry key="espd.part3.crit.grounds.criminal.conv.top.title">A. Motifs liés à des condamnations pénales</entry>
-    <entry key="espd.part3.crit.top.grounds.payment.taxes.title">B. Motifs liés au paiement d?impôts et taxes ou de
-        cotisations de sécurité sociale
-    </entry>
-    <entry key="espd.part3.crit.insolvency.conflicts.top.title">C. Motifs liés à l?insolvabilité, aux conflits
-        d?intérêts ou à une faute professionnelle
-    </entry>
-    <entry key="espd.part3.crit.purely.national.top.title">D. Motifs d?exclusion purement nationaux</entry>
+    <entry key="espd.part3.crit.top.grounds.payment.taxes.title">B. Motifs liés au paiement d’impôts et taxes ou de cotisations de sécurité sociale</entry>
+    <entry key="espd.part3.crit.insolvency.conflicts.top.title">C. Motifs liés à l’insolvabilité, aux conflits d’intérêts ou à une faute professionnelle</entry>
+    <entry key="espd.part3.crit.purely.national.top.title">D. Motifs d’exclusion purement nationaux</entry>
     <entry key="espd.crit.url">URL</entry>
     <entry key="espd.crit.who.convicted">Qui a été condamné</entry>
     <entry key="espd.crit.year">Année</entry>
@@ -852,50 +312,18 @@ Wenn die Datei als Properties gezogen wird, wird ein DocType zur Laufzeit einget
     <entry key="espd.ecertis.language">Langue</entry>
     <entry key="espd.ecertis.loading">Chargement ECERTIS...</entry>
     <entry key="espd.ecertis.no.evidences">Pas d'éléments</entry>
-    <entry key="espd.gui.error.ted.notice.not.supported">Le fichier téléchargé est un avis et non un DUME; il ne peut
-        donc être utilisé avec ce service.
-    </entry>
+    <entry key="espd.gui.error.ted.notice.not.supported">Le fichier téléchargé est un avis et non un DUME; il ne peut donc être utilisé avec ce service.</entry>
     <entry key="espd.gui.espd">Document unique de marché européen</entry>
-    <entry key="espd.gui.espd.upload.error">Le fichier téléchargé est illisible. S?agit-il d?une demande ou d?une
-        réponse DUME valide?
-    </entry>
-    <entry key="espd.gui.espd.upload.request.error">Le fichier téléchargé est illisible. S?agit-il d?une demande DUME
-        valide?
-    </entry>
-    <entry key="espd.gui.espd.upload.response.error">Le fichier téléchargé est illisible. S?agit-il d?une réponse DUME
-        valide?
-    </entry>
+    <entry key="espd.gui.espd.upload.error">Le fichier téléchargé est illisible. S’agit-il d’une demande ou d’une réponse DUME valide?</entry>
+    <entry key="espd.gui.espd.upload.request.error">Le fichier téléchargé est illisible. S’agit-il d’une demande DUME valide?</entry>
+    <entry key="espd.gui.espd.upload.response.error">Le fichier téléchargé est illisible. S’agit-il d’une réponse DUME valide?</entry>
     <entry key="espd.gui.europa">Europa</entry>
-    <entry key="espd.gui.expire.reminder.message">Si vous n?êtes plus intervenu dans le service DUME depuis presque une
-        heure, veuillez sauvegarder l?eDUME afin d?être sûr de ne pas perdre de données.&lt;p&gt;Vous pouvez importer
-        (réutiliser) votre eDUME à tout moment pour continuer à y travailler.
-    </entry>
+    <entry key="espd.gui.expire.reminder.message">Si vous n’êtes plus intervenu dans le service DUME depuis presque une heure, veuillez sauvegarder l’eDUME afin d’être sûr de ne pas perdre de données.  Vous pouvez importer (réutiliser) votre eDUME à tout moment pour continuer à y travailler.</entry>
     <entry key="espd.gui.export">Sauvegarder</entry>
     <entry key="espd.gui.faq.leaflet">Fascicule FAQ</entry>
-    <entry key="espd.gui.faq.text.answers">Si vous souhaitez en savoir plus sur les réponses aux questions les plus
-        fréquemment posées sur le DUME, veuillez consulter
-    </entry>
-    <entry key="espd.gui.faq.text.more.info">Pour plus d?informations sur le DUME, veuillez</entry>
-    <entry key="espd.init.alert">
-        &lt;p&gt;Le document unique de marché européen (DUME) est un formulaire par lequel les entreprises déclarent leur
-            statut financier, leurs capacités et leur aptitude pour participer à une procédure de marché public. Il est
-            disponible dans toutes les langues de l?Union et prouve a priori que les conditions requises pour participer
-            aux procédures de passation de marchés publics dans l?Union sont remplies. Grâce au DUME, les
-            soumissionnaires ne doivent plus fournir de justificatifs ni les différents formulaires utilisés auparavant
-            dans le cadre de procédures de passation de marchés publics, ce qui signifie que l?accès aux offres publiées
-            dans d?autres Etats est sensiblement simplifié. A partir d?octobre 2018, le DUME sera uniquement disponible
-            sous format électronique.
-        &lt;/p&gt;
-        &lt;p&gt;La Commission européenne met gratuitement à la disposition des acheteurs, des soumissionnaires et des autres
-            parties intéressées un site web leur permettant de remplir le document DUME en ligne. Le formulaire en ligne
-            peut être rempli, imprimé et puis envoyé avec l?offre. Si la procédure est gérée par voie électronique, le
-            DUME peut être exporté, stocké et envoyé par voie électronique. Tant que les informations demeurent
-            correctes, le DUME présenté dans le cadre d?une précédente procédure de passation de marché public peut être
-            réutilisé. Un soumissionnaire peut être exclu de la procédure de passation de marché ou faire l?objet de
-            poursuites s?il s?est rendu coupable de fausses déclarations en remplissant le DUME, ou s?il a caché ces
-            informations ou n?a pas présenté les justificatifs les complétant.
-        &lt;/p&gt;
-    </entry>
+    <entry key="espd.gui.faq.text.answers">Si vous souhaitez en savoir plus sur les réponses aux questions les plus fréquemment posées sur le DUME, veuillez consulter</entry>
+    <entry key="espd.gui.faq.text.more.info">Pour plus d’informations sur le DUME, veuillez</entry>
+    <entry key="espd.init.alert">Le document unique de marché européen (DUME) est un formulaire par lequel les entreprises déclarent leur statut financier, leurs capacités et leur aptitude pour participer à une procédure de marché public. Il est disponible dans toutes les langues de l’Union et prouve a priori que les conditions requises pour participer aux procédures de passation de marchés publics dans l’Union sont remplies. Grâce au DUME, les soumissionnaires ne doivent plus fournir de justificatifs ni les différents formulaires utilisés auparavant dans le cadre de procédures de passation de marchés publics, ce qui signifie que l’accès aux offres publiées dans d’autres Etats est sensiblement simplifié. A partir d’octobre 2018, le DUME sera uniquement disponible sous format électronique. La Commission européenne met gratuitement à la disposition des acheteurs, des soumissionnaires et des autres parties intéressées  un site web leur permettant de remplir le document DUME en ligne. Le formulaire en ligne peut être rempli, imprimé et puis envoyé  avec l’offre. Si la procédure est gérée par voie électronique, le DUME peut être exporté, stocké et envoyé par voie électronique.  Tant que les informations demeurent correctes, le DUME présenté dans le cadre d’une précédente procédure de passation de marché public peut être réutilisé. Un soumissionnaire peut être exclu de la procédure de passation de marché ou faire l’objet de poursuites s’il s’est rendu coupable de fausses déclarations en remplissant le DUME, ou s’il a caché ces informations ou n’a pas présenté les justificatifs les complétant.</entry>
     <entry key="espd.init.create.espd">Créer un nouveau DUME</entry>
     <entry key="espd.init.create.response">Générer réponse</entry>
     <entry key="espd.init.header">Bienvenue sur le service DUME</entry>
@@ -907,12 +335,12 @@ Wenn die Datei als Properties gezogen wird, wird ein DocType zur Laufzeit einget
     <entry key="espd.init.reuse.espd">Réutiliser un DUME existant</entry>
     <entry key="espd.init.review.espd">Examiner un DUME</entry>
     <entry key="espd.init.select.country">Sélectionnez un pays</entry>
-    <entry key="espd.init.ted.reception.id.placeholder">Veuillez préciser le numéro d?avis reçu</entry>
+    <entry key="espd.init.ted.reception.id.placeholder">Veuillez préciser le numéro d’avis reçu</entry>
     <entry key="espd.init.upload.document">Télécharger le document</entry>
     <entry key="espd.init.upload.documents">Télécharger le document</entry>
     <entry key="espd.init.upload.request">Veuillez télécharger une demande DUME du pouvoir adjudicateur</entry>
     <entry key="espd.init.upload.request.response">Veuillez télécharger une demande DUME ou une réponse DUME</entry>
-    <entry key="espd.init.upload.response">Veuillez télécharger l?une de vos anciennes réponses DUME</entry>
+    <entry key="espd.init.upload.response">Veuillez télécharger l’une de vos anciennes réponses DUME</entry>
     <entry key="espd.init.what.you.do">Quelle action souhaitez-vous effectuer?</entry>
     <entry key="espd.init.where.are.you.from.ca">Dans quel pays votre autorité est-elle située ?</entry>
     <entry key="espd.init.where.are.you.from.eo">Dans quel pays votre entreprise est-elle située ?</entry>
@@ -921,8 +349,8 @@ Wenn die Datei als Properties gezogen wird, wird ein DocType zur Laufzeit einget
     <entry key="espd.gui.grow">Grow</entry>
     <entry key="espd.ecertis.information.for.country">Informations sur {0} dans e-Certis</entry>
     <entry key="espd.gui.legal.notice">Avis juridique</entry>
-    <entry key="espd.ecertis.less.information">Moins d?informations</entry>
-    <entry key="espd.ecertis.more.information">Plus d?informations</entry>
+    <entry key="espd.ecertis.less.information">Moins d’informations</entry>
+    <entry key="espd.ecertis.more.information">Plus d’informations</entry>
     <entry key="espd.gui.next">Suivant</entry>
     <entry key="espd.gui.no">Non</entry>
     <entry key="espd.gui.not.applicable">Sans objet</entry>
@@ -934,63 +362,28 @@ Wenn die Datei als Properties gezogen wird, wird ein DocType zur Laufzeit einget
     <entry key="espd.gui.progress.procedure">Procédure</entry>
     <entry key="espd.gui.progress.selection">Sélection</entry>
     <entry key="espd.gui.progress.start">Commencer</entry>
-    <entry key="espd.gui.question.to.use.alpha">Souhaitez-vous utiliser les critères de sélection A à D?</entry>
-    <entry key="espd.gui.report.appliction.issue">Pour toute question concernant le DUME, veuillez vous adresser à
-    </entry>
-    <entry key="espd.gui.report.security.incident">Signaler un incident lié à la sécurité de l?information</entry>
-    <entry key="espd.gui.report.security.incident.title">Pour tout incident de sécurité, veuillez contacter la
-        Commission européenne par l'intermédiaire de
-    </entry>
+    <entry key="espd.gui.question.to.use.alpha">Souhaitez-vous utiliser les critères de sélection A à D? </entry>
+    <entry key="espd.gui.report.appliction.issue">Pour toute question concernant le DUME, veuillez vous adresser à</entry>
+    <entry key="espd.gui.report.security.incident">Signaler un incident lié à la sécurité de l’information</entry>
+    <entry key="espd.gui.report.security.incident.title">Pour tout incident de sécurité, veuillez contacter la Commission européenne par l'intermédiaire de</entry>
     <entry key="espd.gui.role.ca">Rôle: Pouvoir adjudicateur (PA)</entry>
     <entry key="espd.gui.role.eo">Rôle : Opérateur économique (OE)</entry>
     <entry key="espd.gui.search">Recherche</entry>
     <entry key="espd.gui.signature">Signature</entry>
     <entry key="espd.gui.tools">Outils</entry>
-    <entry key="espd.init.ca.can.create.espd.tooltip">Le pouvoir adjudicateur peut créer un DUME depuis le début. Dans
-        ce cas, il doit remplir le formulaire DUME avec toutes les informations pertinentes.
-    </entry>
-    <entry key="espd.init.ca.can.import.espd.tooltip">Si le pouvoir adjudicateur a déjà utilisé le service DUME pour une
-        précédente procédure de passation de marché, il peut importer le DUME enregistré sur le réseau local. Dans ce
-        cas, le DUME ne doit pas être rempli depuis le début, mais certaines données doivent être mises à jour pour
-        tenir compte de la procédure actuelle de passation de marché.
-    </entry>
-    <entry key="espd.init.ca.ref.buyer.tooltip">Le terme «pouvoir adjudicateur» désigne l?acheteur.</entry>
-    <entry key="espd.init.ce.ref.buyer.tooltip">On entend par «entité adjudicatrice» un acheteur qui opère dans les
-        secteurs de l?eau, de l?énergie, des transports ou des services postaux. Les pouvoirs adjudicateurs opérant
-        également dans les secteurs précités doivent sélectionner «Je suis un pouvoir adjudicateur».
-    </entry>
-    <entry key="espd.init.eo.can.reuse.espd.tooltip">L?opérateur économique peut réutiliser les informations qui ont été
-        fournies au moyen d?un DUME dans une précédente procédure de passation de marché («ancien» DUME). Le service
-        DUME fusionnera l?«ancien» DUME avec le nouveau formulaire élaboré par le pouvoir adjudicateur pour cette
-        procédure de passation de marché.
-    </entry>
-    <entry key="espd.init.eo.ref.suppl.tooltip">Le terme «opérateur économique» désigne le fournisseur/le
-        soumissionnaire.
-    </entry>
-    <entry key="espd.init.espd.used.both.ca.eo.tooltip">Le service DUME peut être utilisé par des pouvoirs adjudicateurs
-        et des opérateurs économiques. Veuillez sélectionner l?option qui correspond à votre profil dans cette procédure
-        de passation de marché public.
-    </entry>
+    <entry key="espd.init.ca.can.create.espd.tooltip">Le pouvoir adjudicateur peut créer un DUME depuis le début. Dans ce cas, il doit remplir le formulaire DUME avec toutes les informations pertinentes.</entry>
+    <entry key="espd.init.ca.can.import.espd.tooltip">Si le pouvoir adjudicateur a déjà utilisé le service DUME pour une précédente procédure de passation de marché, il peut importer le DUME enregistré sur le réseau local. Dans ce cas, le DUME ne doit pas être rempli depuis le début, mais certaines données doivent être mises à jour pour tenir compte de la procédure actuelle de passation de marché.</entry>
+    <entry key="espd.init.ca.ref.buyer.tooltip">Le terme «pouvoir adjudicateur» désigne l’acheteur.</entry>
+    <entry key="espd.init.ce.ref.buyer.tooltip">On entend par «entité adjudicatrice» un acheteur qui opère dans les secteurs de l’eau, de l’énergie, des transports ou des services postaux. Les pouvoirs adjudicateurs opérant également dans les secteurs précités doivent sélectionner «Je suis un pouvoir adjudicateur».</entry>
+    <entry key="espd.init.eo.can.reuse.espd.tooltip">L’opérateur économique peut réutiliser les informations qui ont été fournies au moyen d’un DUME dans une précédente procédure de passation de marché («ancien» DUME). Le service DUME fusionnera l’«ancien» DUME avec le nouveau formulaire élaboré par le pouvoir adjudicateur pour cette procédure de passation de marché.</entry>
+    <entry key="espd.init.eo.ref.suppl.tooltip">Le terme «opérateur économique» désigne le fournisseur/le soumissionnaire.</entry>
+    <entry key="espd.init.espd.used.both.ca.eo.tooltip">Le service DUME peut être utilisé par des pouvoirs adjudicateurs et des opérateurs économiques. Veuillez sélectionner l’option qui correspond à votre profil dans cette procédure de passation de marché public.</entry>
     <entry key="espd.init.filter.create.response.tooltip">Créer une nouvelle réponse DUME</entry>
-    <entry key="espd.init.filter.eo.can.import.espd.tooltip">L?opérateur économique peut importer le dossier DUME qui a
-        été prérempli par le pouvoir adjudicateur pour cette procédure de passation de marché public et publié avec
-        l?avis d?adjudication.
-    </entry>
-    <entry key="espd.init.filter.eo.merge.espds.tooltip">The ESPD service will merge the 'old' ESPD with the new form
-        prepared by the contracting authority for this procurement procedure.
-    </entry>
-    <entry key="espd.init.overview.received.espds.tooltip">Cette fonctionnalité permet d?afficher un tableau présentant
-        un aperçu des réponses comprises dans tous les DUME fournis par les soumissionnaires pour une procédure de
-        passation de marché donnée.
-    </entry>
-    <entry key="espd.init.review.espd.tooltip">Le pouvoir adjudicateur peut vérifier/examiner le DUME électronique reçu
-        de l?opérateur économique.
-    </entry>
-    <entry key="espd.init.ted.reception.id.tooltip">Le pouvoir adjudicateur recevra un courriel de l?office des
-        publications dès que ce dernier aura soumis un avis pour publication. Ce courriel contiendra un numéro
-        d?identification qui pourra être utilisé pour ce service afin de remplir des informations sur la procédure et le
-        pouvoir adjudicateur.
-    </entry>
+    <entry key="espd.init.filter.eo.can.import.espd.tooltip">L’opérateur économique peut importer le dossier DUME qui a été prérempli par le pouvoir adjudicateur pour cette procédure de passation de marché public et publié avec l’avis d’adjudication.</entry>
+    <entry key="espd.init.filter.eo.merge.espds.tooltip">The ESPD service will merge the 'old' ESPD with the new form prepared by the contracting authority for this procurement procedure.</entry>
+    <entry key="espd.init.overview.received.espds.tooltip">Cette fonctionnalité permet d’afficher un tableau présentant un aperçu des réponses comprises dans tous les DUME fournis par les soumissionnaires pour une procédure de passation de marché donnée.</entry>
+    <entry key="espd.init.review.espd.tooltip">Le pouvoir adjudicateur peut vérifier/examiner le DUME électronique reçu de l’opérateur économique.</entry>
+    <entry key="espd.init.ted.reception.id.tooltip">Le pouvoir adjudicateur recevra un courriel de l’office des publications dès que ce dernier aura soumis un avis pour publication. Ce courriel contiendra un numéro d’identification qui pourra être utilisé pour ce service afin de remplir des informations sur la procédure et le pouvoir adjudicateur.</entry>
     <entry key="espd.validator.accept">Veuillez indiquer une valeur avec une extension valide.</entry>
     <entry key="espd.validator.creditcard">Veuillez indiquer un numéro de carte de crédit valide.</entry>
     <entry key="espd.validator.date">Veuillez indiquer une date valide.</entry>
@@ -1011,17 +404,5 @@ Wenn die Datei als Properties gezogen wird, wird ein DocType zur Laufzeit einget
     <entry key="espd.gui.view.ca">Voir: (PA)</entry>
     <entry key="espd.gui.view.eo">Voir: (OE)</entry>
     <entry key="espd.gui.yes">Oui</entry>
-    <entry key="espd.gui.zip.instructions">Voici quelques brèves informations sur les fichiers DUME contenus dans le
-        dossier Zip.Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nespd.XML: Le fichier XML est un fichier que notre service
-        DUME ou d?autres services compatibles DUME peuvent comprendre. L?avantage d?utiliser l?eDUME avec un fichier XML
-        est que les acheteurs et les sociétés pourront le réutiliser plus tard pour d?autres procédures. Il convient de
-        l?envoyer avec les documents de marché (du pouvoir adjudicateur pour les sociétés) ou en tant que partie de
-        l?offre (de la société au pouvoir adjudicateur).Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nespd.PDF: Le fichier PDF
-        est un fichier de l?eDUME lisible par l?homme. Nous suggérons que ce fichier aussi soit utilisé parallèlement au
-        format XML avec les documents de marché (du pouvoir adjudicateur pour les sociétés) ou en tant que partie de
-        l?offre (de la société au pouvoir adjudicateur) en tant que document de
-        référence.Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nSi vous avez des questions sur ces fichiers, n?hésitez pas à
-        prendre contact avec nous en utilisant l?adresse électronique suivante: grow-espd@ec.europa.eu
-    </entry>
-
+    <entry key="espd.gui.zip.instructions">Voici quelques brèves informations sur les fichiers DUME contenus dans le dossier Zip.Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nespd.XML: Le fichier XML est un fichier que notre service DUME ou d’autres services compatibles DUME peuvent comprendre. L’avantage d’utiliser l’eDUME avec un fichier XML est que les acheteurs et les sociétés pourront le réutiliser plus tard pour d’autres procédures. Il convient de l’envoyer avec les documents de marché (du pouvoir adjudicateur pour les sociétés) ou en tant que partie de l’offre (de la société au pouvoir adjudicateur).Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nespd.PDF: Le fichier PDF est un fichier de l’eDUME lisible par l’homme. Nous suggérons que ce fichier aussi soit utilisé parallèlement au format XML avec les documents de marché (du pouvoir adjudicateur pour les sociétés) ou en tant que partie de l’offre (de la société au pouvoir adjudicateur) en tant que document de référence.Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nSi vous avez des questions sur ces fichiers, n’hésitez pas à prendre contact avec nous en utilisant l’adresse électronique suivante: grow-espd@ec.europa.eu</entry>
 </properties>
