@@ -63,24 +63,65 @@
     </xsl:template>
 
     <xsl:template name="sectionLabelForNode">
-        <xsl:param name="node" />
+        <xsl:param name="value" />
         <xsl:param name="propertyKey" />
         <xsl:variable name="propertyValue">
             <xsl:call-template name="getESPDProperty">
                 <xsl:with-param name="key" select="$propertyKey"/>
             </xsl:call-template>
         </xsl:variable>
-        <xsl:if test="$node">
+        <xsl:if test="$value">
             <xsl:call-template name="sectionLabel">
                 <xsl:with-param name="label">
                     <!--asd: -->
                     <xsl:value-of select="$propertyValue"/><xsl:if test="not(':' =substring($propertyValue, string-length($propertyValue)))">:</xsl:if>
                 </xsl:with-param>
                 <xsl:with-param name="text">
-                    <xsl:value-of select="$node"/>
+                    <xsl:copy-of select="$value"/>
                 </xsl:with-param>
             </xsl:call-template>
         </xsl:if>
+    </xsl:template>
+
+    <xsl:template name="sectionLabelForValueOfNode">
+        <xsl:param name="node" />
+        <xsl:param name="propertyKey" />
+        <xsl:call-template name="sectionLabelForNode">
+            <xsl:with-param name="propertyKey" select="$propertyKey"/>
+            <xsl:with-param name="value">
+                <xsl:value-of select="$node"/>
+            </xsl:with-param>
+        </xsl:call-template>
+    </xsl:template>
+
+    <xsl:template name="sectionLabelForMailValueOfNode">
+        <xsl:param name="node" />
+        <xsl:param name="propertyKey" />
+        <xsl:call-template name="sectionLabelForNode">
+            <xsl:with-param name="propertyKey" select="$propertyKey"/>
+            <xsl:with-param name="value">
+                <xsl:call-template name="formatMail">
+                    <xsl:with-param name="e-mail">
+                        <xsl:value-of select="$node"/>
+                    </xsl:with-param>
+                </xsl:call-template>
+            </xsl:with-param>
+        </xsl:call-template>
+    </xsl:template>
+
+    <xsl:template name="sectionLabelForUrlValueOfNode">
+        <xsl:param name="node" />
+        <xsl:param name="propertyKey" />
+        <xsl:call-template name="sectionLabelForNode">
+            <xsl:with-param name="propertyKey" select="$propertyKey"/>
+            <xsl:with-param name="value">
+                <xsl:call-template name="formatUrl">
+                    <xsl:with-param name="url">
+                        <xsl:value-of select="$node"/>
+                    </xsl:with-param>
+                </xsl:call-template>
+            </xsl:with-param>
+        </xsl:call-template>
     </xsl:template>
 
     <xsl:template name="leftPadding">
@@ -88,6 +129,31 @@
         <div class="left-padding">
             <xsl:copy-of select="$content"/>
         </div>
+    </xsl:template>
+
+    <xsl:template name="multiLineText">
+        <xsl:param name="pText"/>
+
+        <xsl:choose>
+            <xsl:when test="contains($pText, '&lt;br&gt;')">
+                <xsl:call-template name="paragraph">
+                    <xsl:with-param name="value">
+                        <xsl:value-of select="substring-before($pText,'&lt;br&gt;')"/>
+                    </xsl:with-param>
+                </xsl:call-template>
+                <xsl:call-template name="multiLineText">
+                    <xsl:with-param name="pText"
+                                    select="substring-after($pText,'&lt;br&gt;')"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:call-template name="paragraph">
+                    <xsl:with-param name="value">
+                        <xsl:value-of select="$pText"/>
+                    </xsl:with-param>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
 </xsl:stylesheet>

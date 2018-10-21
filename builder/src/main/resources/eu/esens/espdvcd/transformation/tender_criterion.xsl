@@ -97,6 +97,9 @@
                             <xsl:when test="cbc:ValueDataTypeCode = 'CODE'">
                                 <xsl:call-template name="codeValue" />
                             </xsl:when>
+                            <xsl:when test="cbc:ValueDataTypeCode = 'URL'">
+                                <xsl:call-template name="urlValue" />
+                            </xsl:when>
                         </xsl:choose>
                     </xsl:otherwise>
                 </xsl:choose>
@@ -203,6 +206,15 @@
 
         <xsl:call-template name="responseValueNode">
             <xsl:with-param name="responseValueNode" select="$tenderingCriterionResponse/cac:ResponseValue/cbc:ResponseCode"/>
+        </xsl:call-template>
+
+    </xsl:template>
+
+    <xsl:template name="urlValue">
+        <xsl:variable name="tenderingCriterionResponse" select="//cac:TenderingCriterionResponse[./cbc:ValidatedCriterionPropertyID = current()/cbc:ID]"/>
+
+        <xsl:call-template name="responseValueNode">
+            <xsl:with-param name="responseValueNode" select="$tenderingCriterionResponse/cac:ResponseValue/cbc:ResponseURI"/>
         </xsl:call-template>
 
     </xsl:template>

@@ -73,57 +73,57 @@
                 </xsl:with-param>
                 <xsl:with-param name="chapter-content">
 
-                    <xsl:call-template name="sectionLabelForNode">
+                    <xsl:call-template name="sectionLabelForValueOfNode">
                         <xsl:with-param name="node" select="cac:AgentParty/cac:Person/cbc:FirstName" />
                         <xsl:with-param name="propertyKey" select="'espd.part2.first.name'"/>
                     </xsl:call-template>
 
-                    <xsl:call-template name="sectionLabelForNode">
+                    <xsl:call-template name="sectionLabelForValueOfNode">
                         <xsl:with-param name="node" select="cac:AgentParty/cac:Person/cbc:FamilyName" />
                         <xsl:with-param name="propertyKey" select="'espd.part2.last.name'"/>
                     </xsl:call-template>
 
-                    <xsl:call-template name="sectionLabelForNode">
+                    <xsl:call-template name="sectionLabelForValueOfNode">
                         <xsl:with-param name="node" select="cac:AgentParty/cac:Person/cbc:BirthDate" />
                         <xsl:with-param name="propertyKey" select="'espd.part2.birth.date'"/>
                     </xsl:call-template>
 
-                    <xsl:call-template name="sectionLabelForNode">
+                    <xsl:call-template name="sectionLabelForValueOfNode">
                         <xsl:with-param name="node" select="cac:AgentParty/cac:Person/cbc:BirthplaceName" />
                         <xsl:with-param name="propertyKey" select="'espd.part2.birth.place'"/>
                     </xsl:call-template>
 
-                    <xsl:call-template name="sectionLabelForNode">
+                    <xsl:call-template name="sectionLabelForValueOfNode">
                         <xsl:with-param name="node" select="cac:AgentParty/cac:Person/cac:ResidenceAddress/cbc:StreetName" />
                         <xsl:with-param name="propertyKey" select="'espd.part1.street.and. num'"/>
                     </xsl:call-template>
 
-                    <xsl:call-template name="sectionLabelForNode">
+                    <xsl:call-template name="sectionLabelForValueOfNode">
                         <xsl:with-param name="node" select="cac:AgentParty/cac:Person/cac:ResidenceAddress/cbc:PostalZone" />
                         <xsl:with-param name="propertyKey" select="'espd.part1.postcode'"/>
                     </xsl:call-template>
 
-                    <xsl:call-template name="sectionLabelForNode">
+                    <xsl:call-template name="sectionLabelForValueOfNode">
                         <xsl:with-param name="node" select="cac:AgentParty/cac:Person/cac:ResidenceAddress/cbc:CityName" />
                         <xsl:with-param name="propertyKey" select="'espd.part1.city'"/>
                     </xsl:call-template>
 
-                    <xsl:call-template name="sectionLabelForNode">
+                    <xsl:call-template name="sectionLabelForValueOfNode">
                         <xsl:with-param name="node" select="cac:AgentParty/cac:Person/cac:ResidenceAddress/cac:Country/cbc:IdentificationCode" />
                         <xsl:with-param name="propertyKey" select="'espd.part1.country'"/>
                     </xsl:call-template>
 
-                    <xsl:call-template name="sectionLabelForNode">
+                    <xsl:call-template name="sectionLabelForValueOfNode">
                         <xsl:with-param name="node" select="cac:AgentParty/cac:Person/cac:Contact/cbc:Telephone" />
                         <xsl:with-param name="propertyKey" select="'espd.part2.telephone'"/>
                     </xsl:call-template>
 
-                    <xsl:call-template name="sectionLabelForNode">
+                    <xsl:call-template name="sectionLabelForValueOfNode">
                         <xsl:with-param name="node" select="cac:AgentParty/cac:Person/cac:Contact/cbc:ElectronicMail" />
                         <xsl:with-param name="propertyKey" select="'espd.part2.email'"/>
                     </xsl:call-template>
 
-                    <xsl:call-template name="sectionLabelForNode">
+                    <xsl:call-template name="sectionLabelForValueOfNode">
                         <xsl:with-param name="node" select="cbc:Description" />
                         <xsl:with-param name="propertyKey" select="'espd.part2.pos.act.in.capacity'"/>
                     </xsl:call-template>
@@ -137,65 +137,55 @@
 
     <xsl:template match="cac:EconomicOperatorParty">
 
-        <xsl:call-template name="sectionLabelForNode">
+        <xsl:call-template name="sectionLabelForValueOfNode">
             <xsl:with-param name="node" select="cac:Party/cac:PartyName/cbc:Name" />
             <xsl:with-param name="propertyKey" select="'espd.part2.name'"/>
         </xsl:call-template>
 
-        <xsl:call-template name="sectionLabelForNode">
+        <xsl:call-template name="sectionLabelForValueOfNode">
             <xsl:with-param name="node" select="cac:Party/cac:PostalAddress/cbc:StreetName" />
             <xsl:with-param name="propertyKey" select="'espd.part1.street.and. num'"/>
         </xsl:call-template>
 
-        <xsl:call-template name="sectionLabelForNode">
+        <xsl:call-template name="sectionLabelForValueOfNode">
             <xsl:with-param name="node" select="cac:Party/cac:PostalAddress/cbc:PostalZone" />
             <xsl:with-param name="propertyKey" select="'espd.part1.postcode'"/>
         </xsl:call-template>
 
-        <xsl:call-template name="sectionLabelForNode">
+        <xsl:call-template name="sectionLabelForValueOfNode">
             <xsl:with-param name="node" select="cac:Party/cac:PostalAddress/cbc:CityName" />
             <xsl:with-param name="propertyKey" select="'espd.part1.city'"/>
         </xsl:call-template>
 
-        <xsl:call-template name="sectionLabelForNode">
+        <xsl:call-template name="sectionLabelForValueOfNode">
             <xsl:with-param name="node" select="cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode" />
             <xsl:with-param name="propertyKey" select="'espd.part1.country'"/>
         </xsl:call-template>
 
-        <xsl:call-template name="sectionLabelForNode">
+        <xsl:call-template name="sectionLabelForMailValueOfNode">
             <xsl:with-param name="node" select="cac:Party/cac:Contact/cbc:ElectronicMail" />
             <xsl:with-param name="propertyKey" select="'espd.part1.email'"/>
         </xsl:call-template>
 
-        <xsl:call-template name="sectionLabelForNode">
+        <xsl:call-template name="sectionLabelForValueOfNode">
             <xsl:with-param name="node" select="cac:Party/cac:Contact/cbc:Telephone" />
             <xsl:with-param name="propertyKey" select="'espd.part1.telephone'"/>
         </xsl:call-template>
 
-        <xsl:call-template name="sectionLabelForNode">
+        <xsl:call-template name="sectionLabelForValueOfNode">
             <xsl:with-param name="node" select="cac:Party/cac:Contact/cbc:Telefax" />
             <xsl:with-param name="propertyKey" select="'espd.part1.fax'"/>
         </xsl:call-template>
 
-        <xsl:call-template name="sectionLabelForNode">
+        <xsl:call-template name="sectionLabelForValueOfNode">
             <xsl:with-param name="node" select="cac:Party/cac:PartyIdentification/cbc:ID" />
             <xsl:with-param name="propertyKey" select="'espd.part2.vat'"/>
         </xsl:call-template>
 
-        <xsl:if test="cac:Party/cbc:WebsiteURI">
-            <xsl:call-template name="sectionLabel">
-                <xsl:with-param name="label">
-                    <xsl:call-template name="getESPDProperty">
-                        <xsl:with-param name="key" select="'espd.part1.website'"/>
-                    </xsl:call-template>
-                </xsl:with-param>
-                <xsl:with-param name="text">
-                    <xsl:call-template name="formatUrl">
-                        <xsl:with-param name="url" select="cac:Party/cbc:WebsiteURI"/>
-                    </xsl:call-template>
-                </xsl:with-param>
-            </xsl:call-template>
-        </xsl:if>
+        <xsl:call-template name="sectionLabelForUrlValueOfNode">
+            <xsl:with-param name="node" select="cac:Party/cbc:WebsiteURI" />
+            <xsl:with-param name="propertyKey" select="'espd.part1.website'"/>
+        </xsl:call-template>
 
         <br />
 

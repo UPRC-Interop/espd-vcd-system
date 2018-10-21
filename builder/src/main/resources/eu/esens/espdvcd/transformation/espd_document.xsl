@@ -5,6 +5,7 @@
     <xsl:import href="procedure.xsl"/>
     <xsl:import href="exclusion.xsl"/>
     <xsl:import href="selection.xsl"/>
+    <xsl:import href="finish.xsl"/>
     <xsl:import href="propertyreader/property_reader.xsl"/>
 
 
@@ -28,6 +29,7 @@
                 <xsl:call-template name="procedureSection"/>
                 <xsl:call-template name="exclusionSection"/>
                 <xsl:call-template name="selectionSection"/>
+                <xsl:call-template name="finishSection"/>
             </xsl:with-param>
         </xsl:call-template>
     </xsl:template>
