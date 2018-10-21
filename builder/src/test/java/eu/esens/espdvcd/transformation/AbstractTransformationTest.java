@@ -1,5 +1,6 @@
 package eu.esens.espdvcd.transformation;
 
+import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
 import org.w3c.dom.Document;
 
 import javax.xml.transform.Source;
@@ -40,9 +41,9 @@ public class AbstractTransformationTest {
     /**
      * Erzeugt eine Tempfile mit der PDF und gibt dessen Pfad zur?ck
      */
-    Path writePdf(DOMSource source) throws IOException {
+    Path writePdf(Source source, EULanguageCodeEnum lang) throws IOException {
         final PdfHelperTest pdfHelperTest = new PdfHelperTest();
-        return pdfHelperTest.generateTempPDF((Document) source.getNode());
+        return pdfHelperTest.generateTempPDF(source, lang);
     }
 
     /**

@@ -1,5 +1,6 @@
 package eu.esens.espdvcd.transformation;
 
+import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -11,12 +12,14 @@ public class RequestTransformationIT  extends AbstractTransformationTest{
 
     private static DOMSource source;
 
+    private static final String XML_REF = "espd-request-v2.xml";
+
     @BeforeClass
     public static void transform() {
-        String xmlRef = "espd-request-v2.xml";
+
         String xslRef = "espd_document_de.xsl";
 
-        StreamSource xmlSource = new StreamSource(RequestTransformationIT.class.getResource(xmlRef).toExternalForm());
+        StreamSource xmlSource = new StreamSource(RequestTransformationIT.class.getResource(XML_REF).toExternalForm());
         StreamSource xslSource = new StreamSource(RequestTransformationIT.class.getResource(xslRef).toExternalForm());
         source =  new TransformationHelper().transform(xmlSource, xslSource);
     }
@@ -29,7 +32,7 @@ public class RequestTransformationIT  extends AbstractTransformationTest{
 
     @Test
     public void showPdf() throws Exception {
-        final Path path = writePdf(source);
+        final Path path = writePdf(new StreamSource(RequestTransformationIT.class.getResource(XML_REF).toExternalForm()), EULanguageCodeEnum.DE);
         openPath(path);
     }
 

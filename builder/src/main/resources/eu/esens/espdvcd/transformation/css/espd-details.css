@@ -8,25 +8,25 @@ textarea {
     width: 800px;
 }
 
-.procedure-details label {
+.espd-details label {
     font-weight: bold;
 }
 
-.procedure-details hr {
+.espd-details hr {
     border-bottom: 0.133em dotted #CDCDCD;
     border-top: 0;
     clear: both;
     margin: 15px 0 15px 0;
 }
 
-.procedure-details .section {
+.espd-details .section {
     margin-bottom: 20px;
     border: 1px solid #cdcdcd;
     padding: 15px;
 }
 
-.procedure-details .chapter .chapter-number,
-.procedure-details .chapter .chapter-headline {
+.espd-details .chapter .chapter-number,
+.espd-details .chapter .chapter-headline {
     font-weight: bold;
     display: inline-block;
     font-size: 14px;
@@ -34,32 +34,32 @@ textarea {
     vertical-align: top;
 }
 
-.procedure-details .level-two .chapter-number,
-.procedure-details .level-two .chapter-headline {
+.espd-details .level-two .chapter-number,
+.espd-details .level-two .chapter-headline {
     font-size: 14px;
 }
 
-.procedure-details .chapter-headline{
+.espd-details .chapter-headline{
     width: 90%;
 }
 
-.procedure-details .no-chapter-number .chapter-number {
+.espd-details .no-chapter-number .chapter-number {
     display: none;
 }
 
-.procedure-details .chapter-number {
+.espd-details .chapter-number {
     width: 50px;
 }
 
-.procedure-details .left-padding {
+.espd-details .left-padding {
     padding-left: 54px;
 }
 
-.procedure-details .chapter-content, .level-two {
+.espd-details .chapter-content, .level-two {
     padding-left: 54px;
 }
 
-.procedure-details .chapter-content > p {
+.espd-details .chapter-content > p {
     word-wrap: break-word;
 }
 
@@ -72,11 +72,11 @@ textarea {
 }
 
 
-.procedure-details .chapter-content {
+.espd-details .chapter-content {
     padding-left: 54px;
 }
 
-.procedure-details .content-left {
+.espd-details .content-left {
     display: inline-block;
     font-weight: bold;
     margin-right: 20px;
@@ -84,54 +84,54 @@ textarea {
     width: 35%;
 }
 
-.procedure-details .content-right {
+.espd-details .content-right {
     display: inline-block;
     width: 50%;
     vertical-align: bottom;
     word-wrap: break-word;
 }
 
-.procedure-details .content-long{
+.espd-details .content-long{
     display: inline-block;
     width: 65%;
     vertical-align: top;
     word-wrap: break-word;
 }
 
-.procedure-details .chapter {
+.espd-details .chapter {
     margin-bottom: 10px;
 }
-.procedure-details .section-headline,
-.procedure-details .section-content {
+.espd-details .section-headline,
+.espd-details .section-content {
     min-height: 1px;
     padding-left: 50px;
     padding-right: 15px;
     position: relative;
 }
 
-.procedure-details .section-headline-no-padding {
+.espd-details .section-headline-no-padding {
     font-weight: bold;
 }
 
-.procedure-details .section-content-small-padding {
+.espd-details .section-content-small-padding {
     padding: 0 15px 0 15px;
 }
 
-.procedure-details .section-headline {
+.espd-details .section-headline {
     font-weight: bold;
     padding-left: 35px;
 }
 
-.procedure-details .section-header {
+.espd-details .section-header {
     margin: 15px 0 10px 0;
 }
 
 
-.procedure-details .procedure-header {
+.espd-details .procedure-header {
     margin-bottom: 30px;
 }
 
-.procedure-details .footer-content {
+.espd-details .footer-content {
    display: none;
 }
 

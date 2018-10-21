@@ -16,6 +16,7 @@
 
 import {Component, OnInit} from '@angular/core';
 import {DataService} from '../services/data.service';
+import {ExportType} from "../export/export-type.enum";
 
 @Component({
   selector: 'app-finish',
@@ -30,9 +31,16 @@ export class FinishComponent implements OnInit {
   ngOnInit() {
   }
 
-  exportFile() {
-    // this.dataService.version = 'v1';
-    this.dataService.saveFile(this.dataService.blob);
+  exportHtmlFile() {
+    this.dataService.finishSubmit(ExportType.HTML);
+  }
+
+  exportPdfFile() {
+    this.dataService.finishSubmit(ExportType.PDF);
+  }
+
+  exportXmlFile() {
+    this.dataService.finishSubmit(ExportType.XML);
   }
 
   // exportFile() {

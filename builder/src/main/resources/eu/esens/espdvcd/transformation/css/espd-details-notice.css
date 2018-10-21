@@ -3,7 +3,7 @@
 /*Diese Zeilen stehen lassen, damit die CSS-Datei in dem XSL eingebunden werden kann!<![CDATA[<!--*/
 -->
 
-.procedure-details {
+.espd-details {
     /*Falls die Font-Family geaendert wird, beachten, dass die PDF-Erzeugung auf Arial reagiert.*/
     font-family: Arial, Verdana, Helvetica, sans-serif;
     line-height: 1.4em;
@@ -14,33 +14,33 @@
     padding-top: 20px;
 }
 
-.procedure-details * {
+.espd-details * {
     box-sizing: border-box;
 }
 
-.procedure-details *:after,
-.procedure-details *:before {
+.espd-details *:after,
+.espd-details *:before {
     box-sizing: border-box;
 }
 
-.procedure-details h2 {
+.espd-details h2 {
     /*User-Agent-Setting ueberschrieben*/
     margin: 0 0 20px 0;
 }
 
-.procedure-details h3,
-.procedure-details h4,
-.procedure-details h5 {
+.espd-details h3,
+.espd-details h4,
+.espd-details h5 {
     /*User-Agent-Setting ueberschrieben*/
     margin: 0 0 10px 0;
 }
 
-.procedure-details p {
+.espd-details p {
     line-height: 1.4em;
     margin: 0 0 5px 0;
 }
 
-.procedure-details a {
+.espd-details a {
     color: #000000;
     outline: none;
     cursor: pointer;
@@ -48,8 +48,8 @@
     text-decoration: underline;
 }
 
-.procedure-details a:hover,
-.procedure-details a:focus {
+.espd-details a:hover,
+.espd-details a:focus {
     color: #000000;
     text-decoration: none;
 }

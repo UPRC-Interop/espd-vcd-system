@@ -27,10 +27,18 @@ import java.util.Objects;
 public interface ExportESPDService {
     InputStream exportESPDRequestAsInputStream(ESPDRequest model) throws ValidationException;
 
+    InputStream exportESPDRequestHtmlAsInputStream(ESPDRequest model) throws ValidationException;
+
+    InputStream exportESPDRequestPdfAsInputStream(ESPDRequest model) throws ValidationException;
+
     String exportESPDRequestAsString(ESPDRequest model) throws ValidationException;
 
     InputStream exportESPDResponseAsInputStream(ESPDResponse model) throws ValidationException;
 
+    InputStream exportESPDResponseHtmlAsInputStream(ESPDResponse model) throws ValidationException;
+
+    InputStream exportESPDResponsePdfAsInputStream(ESPDResponse model) throws ValidationException;
+    
     String exportESPDResponseAsString(ESPDResponse model) throws ValidationException;
 
     default boolean hasNullCriterion(final List<SelectableCriterion> criteria) {

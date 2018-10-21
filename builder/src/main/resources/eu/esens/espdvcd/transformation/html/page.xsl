@@ -9,9 +9,9 @@
     <xsl:output method="xml" version="1.0" doctype-public="-//W3C//DTD XHTML 1.1//EN"
                 doctype-system="http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd" indent="yes" encoding="UTF-8"/>
 
-    <xsl:variable name="procedureDetailsCss" select="document('../css/procedure-details.css')"/>
-    <xsl:variable name="procedureDetailsNoticeCss" select="document('../css/procedure-details-notice.css')"/>
-    <xsl:variable name="printCss" select="document('../css/procedure-details-print.css')"/>
+    <xsl:variable name="espdDetailsCss" select="document('../css/espd-details.css')"/>
+    <xsl:variable name="espdDetailsNoticeCss" select="document('../css/espd-details-notice.css')"/>
+    <xsl:variable name="printCss" select="document('../css/espd-details-print.css')"/>
 
     <!-- Definition für normale HTML-Seite -->
     <xsl:template name="page">
@@ -51,7 +51,7 @@
         <xsl:element name="body">
 
                     <xsl:element name="div">
-                        <xsl:attribute name="class">procedure-details eu-form</xsl:attribute>
+                        <xsl:attribute name="class">espd-details eu-form</xsl:attribute>
                         <xsl:call-template name="procedureHeader">
                             <xsl:with-param name="content" select="$procedureHeader"/>
                         </xsl:call-template>
@@ -75,9 +75,6 @@
         </xsl:element>
     </xsl:template>
 
-
-    <!-- Header-Definition - Wenn es sich um eine Vorschau handelt, wird neben der CSS-Definition für Screen und Print
-    ebenfalls die Definition für die Preview einbezogen -->
     <xsl:template name="head">
         <xsl:param name="type"/>
         <xsl:element name="head">
@@ -100,7 +97,7 @@
             <xsl:attribute name="media">
                 <xsl:text>screen, print</xsl:text>
             </xsl:attribute>
-            <xsl:value-of select="$procedureDetailsCss" disable-output-escaping="yes"/>
+            <xsl:value-of select="$espdDetailsCss" disable-output-escaping="yes"/>
         </xsl:element>
 
         <xsl:element name="style">
@@ -110,7 +107,7 @@
             <xsl:attribute name="media">
                 <xsl:text>screen, print</xsl:text>
             </xsl:attribute>
-            <xsl:value-of select="$procedureDetailsNoticeCss" disable-output-escaping="yes"/>
+            <xsl:value-of select="$espdDetailsNoticeCss" disable-output-escaping="yes"/>
         </xsl:element>
 
 

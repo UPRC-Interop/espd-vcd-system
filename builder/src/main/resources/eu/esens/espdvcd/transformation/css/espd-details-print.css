@@ -26,11 +26,11 @@
 /* ################################################# */
 
 
-.procedure-details {
+.espd-details {
     padding-top: 0;
 }
 
-.procedure-details .procedure-header .footer-content {
+.espd-details .procedure-header .footer-content {
     display: block;
     font-style: normal;
     /* font-size gewaehlt, damit kein Zeilenumbruch im Seitenfuss des PDF entsteht */
@@ -38,28 +38,28 @@
     position: running(footer-content);
 }
 
-.procedure-details {
+.espd-details {
     padding-top: 0;
 }
 
-.procedure-details .procedure-header h2 {
+.espd-details .procedure-header h2 {
     line-height: 1.4;
 }
 
-.procedure-details .section {
+.espd-details .section {
     border: 0;
     padding: 0;
 }
 
-.procedure-details .section:last-child {
+.espd-details .section:last-child {
     page-break-after: avoid;
 }
 
-.procedure-details .chapter {
+.espd-details .chapter {
     page-break-inside: avoid;
 }
 
-.procedure-details .chapter-headline{
+.espd-details .chapter-headline{
     page-break-after: avoid;
     font-size: 23px;
 }
@@ -69,20 +69,20 @@ textarea {
     width: 95%;
 }
 
-.procedure-details .level-two .chapter-number,
-.procedure-details .level-two .chapter-headline {
+.espd-details .level-two .chapter-number,
+.espd-details .level-two .chapter-headline {
     font-size: 14px;
     min-width: 54px;
 }
 
 
-.procedure-details h3 {
+.espd-details h3 {
     margin-top: 10px;
     page-break-after: avoid;
     background-color: #dedede;
 }
 
-.procedure-details h2 {
+.espd-details h2 {
     background-color: #b1b1b1;
 }
 /* ENDE Print-Anpassung */

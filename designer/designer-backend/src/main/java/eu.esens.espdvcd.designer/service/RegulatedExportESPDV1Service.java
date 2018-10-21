@@ -20,6 +20,8 @@ import eu.esens.espdvcd.designer.exception.ValidationException;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDResponse;
 
+import javax.el.MethodNotFoundException;
+import javax.naming.OperationNotSupportedException;
 import java.io.InputStream;
 
 public class RegulatedExportESPDV1Service implements ExportESPDService {
@@ -29,6 +31,16 @@ public class RegulatedExportESPDV1Service implements ExportESPDService {
         if (hasNullCriterion(model.getFullCriterionList()))
             throw new ValidationException("Null criteria are not permitted.");
         return BuilderFactory.EDM_V1.createDocumentBuilderFor(finalizeV1ESPD(model)).getAsInputStream();
+    }
+
+    @Override
+    public InputStream exportESPDRequestHtmlAsInputStream(ESPDRequest model) throws ValidationException {
+        throw new MethodNotFoundException("not implemented");
+    }
+
+    @Override
+    public InputStream exportESPDRequestPdfAsInputStream(ESPDRequest model) throws ValidationException {
+        throw new MethodNotFoundException("not implemented");
     }
 
     @Override
@@ -43,6 +55,16 @@ public class RegulatedExportESPDV1Service implements ExportESPDService {
         if (hasNullCriterion(model.getFullCriterionList()))
             throw new ValidationException("Null criteria are not permitted.");
         return BuilderFactory.EDM_V1.createDocumentBuilderFor(finalizeV1ESPD(model)).getAsInputStream();
+    }
+
+    @Override
+    public InputStream exportESPDResponseHtmlAsInputStream(ESPDResponse model) throws ValidationException {
+        throw new MethodNotFoundException("not implemented");
+    }
+
+    @Override
+    public InputStream exportESPDResponsePdfAsInputStream(ESPDResponse model) throws ValidationException {
+        throw new MethodNotFoundException("not implemented");
     }
 
     @Override

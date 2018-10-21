@@ -16,24 +16,39 @@
 package eu.esens.espdvcd.designer.service;
 
 import eu.esens.espdvcd.builder.BuilderFactory;
+import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.designer.exception.ValidationException;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.response.IndicatorResponse;
+import eu.esens.espdvcd.transformation.TransformationService;
 
-import java.io.InputStream;
+import javax.xml.transform.stream.StreamSource;
+import java.io.*;
 import java.util.List;
 import java.util.logging.Logger;
 
 public class RegulatedExportESPDV2Service implements ExportESPDService {
+
+    private final TransformationService transformationService = new TransformationService();
 
     @Override
     public InputStream exportESPDRequestAsInputStream(ESPDRequest model) throws ValidationException {
         if (hasNullCriterion(model.getFullCriterionList()))
             throw new ValidationException("Null criteria are not permitted.");
         return BuilderFactory.EDM_V2.createDocumentBuilderFor(model).getAsInputStream();
+    }
+
+    @Override
+    public InputStream exportESPDRequestHtmlAsInputStream(ESPDRequest model) throws ValidationException {
+        return transformationService.createHtmlStream(new StreamSource(exportESPDRequestAsInputStream(model)), EULanguageCodeEnum.EN);
+    }
+
+    @Override
+    public InputStream exportESPDRequestPdfAsInputStream(ESPDRequest model) throws ValidationException {
+        return transformationService.createPdfStream(new StreamSource(exportESPDRequestAsInputStream(model)), EULanguageCodeEnum.EN);
     }
 
     @Override
@@ -49,6 +64,16 @@ public class RegulatedExportESPDV2Service implements ExportESPDService {
             throw new ValidationException("Null criteria are not permitted.");
         finalizeV2Response(model);
         return BuilderFactory.EDM_V2.createDocumentBuilderFor(model).getAsInputStream();
+    }
+
+    @Override
+    public InputStream exportESPDResponseHtmlAsInputStream(ESPDResponse model) throws ValidationException {
+        return transformationService.createHtmlStream(new StreamSource(exportESPDResponseAsInputStream(model)), EULanguageCodeEnum.EN);
+    }
+
+    @Override
+    public InputStream exportESPDResponsePdfAsInputStream(ESPDResponse model) throws ValidationException {
+        return transformationService.createPdfStream(new StreamSource(exportESPDResponseAsInputStream(model)), EULanguageCodeEnum.EN);
     }
 
     @Override

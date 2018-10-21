@@ -1,7 +1,9 @@
 package eu.esens.espdvcd.transformation;
 
+import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
 import org.w3c.dom.Document;
 
+import javax.xml.transform.Source;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -13,18 +15,18 @@ public class PdfHelperTest {
 
     private final TransformationService transformationService = new TransformationService();
 
-    private void generatePDF(Path target, Document doc) throws IOException {
+    private void generatePDF(Path target, Source doc, EULanguageCodeEnum lang) throws IOException {
         try (OutputStream os = new BufferedOutputStream(Files.newOutputStream(target))) {
-            transformationService.createPdf(doc, os);
+            transformationService.createPdf(doc, os, lang);
         }
     }
 
     /**
      * Erzeugt zwei Tempfiles mit der HTML und der PDF und gibt den Path der PDF zur?ck.
      */
-    public Path generateTempPDF(Document content) throws IOException {
+    public Path generateTempPDF(Source content, EULanguageCodeEnum lang) throws IOException {
         final Path target = Files.createTempFile("testpdf", ".pdf");
-        generatePDF(target, content);
+        generatePDF(target, content, lang);
 
         return target;
     }

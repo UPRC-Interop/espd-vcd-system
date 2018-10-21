@@ -18,13 +18,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {ReductionCriterion} from '../model/reductionCriterion.model';
 import {FormGroup} from '@angular/forms';
-import {RequirementResponse} from '../model/requirement-response.model';
-import {RequirementGroup} from '../model/requirementGroup.model';
-import {EoRelatedCriterion} from '../model/eoRelatedCriterion.model';
-import * as moment from 'moment';
-import {EvidenceIssuer} from '../model/evidenceIssuer.model';
-import {Evidence} from '../model/evidence.model';
 import {FormUtilService} from '../services/form-util.service';
+import {ExportType} from "../export/export-type.enum";
 
 @Component({
   selector: 'app-finish-eo',
@@ -43,12 +38,21 @@ export class FinishEoComponent implements OnInit {
 
   }
 
-  onExport() {
-    // this.dataService.version = 'v1';
+  onHtmlExport() {
     this.formUtil.extractFormValuesFromCriteria(this.reductionCriteria, this.form, this.formUtil.evidenceList);
-    this.dataService.finishEOSubmit(this.reductionCriteria);
+    this.dataService.finishEOSubmit(this.reductionCriteria, ExportType.HTML);
   }
 
+  onPdfExport() {
+    this.formUtil.extractFormValuesFromCriteria(this.reductionCriteria, this.form, this.formUtil.evidenceList);
+    this.dataService.finishEOSubmit(this.reductionCriteria, ExportType.PDF);
+  }
+
+  onXmlExport() {
+    // this.dataService.version = 'v1';
+    this.formUtil.extractFormValuesFromCriteria(this.reductionCriteria, this.form, this.formUtil.evidenceList);
+    this.dataService.finishEOSubmit(this.reductionCriteria, ExportType.XML);
+  }
 
   // onExportV1() {
   //   this.dataService.version = 'v1';

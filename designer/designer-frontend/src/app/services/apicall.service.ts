@@ -15,7 +15,7 @@
 ///
 
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
 import {Country} from '../model/country.model';
 import {ProcedureType} from '../model/procedureType.model';
@@ -159,7 +159,18 @@ export class ApicallService {
 
   /* ================= UPLOAD JSON GET XML Request ================================= */
   getXMLRequest(ESPDRequest: string) {
+    return this.getRequestExport(ESPDRequest, '/espd/request/xml');
+  }
 
+  getHTMLRequest(ESPDRequest: string) {
+    return this.getRequestExport(ESPDRequest, '/espd/request/html');
+  }
+
+  getPDFRequest(ESPDRequest: string) {
+    return this.getRequestExport(ESPDRequest, '/espd/request/pdf');
+  }
+
+  private getRequestExport(ESPDRequest: string, endpoint: string) {
     console.log(ESPDRequest);
     let header = new HttpHeaders();
     let _header = header.append('Content-Type', 'application/json; charset=utf-8');
@@ -171,7 +182,8 @@ export class ApicallService {
     };
 
     // headers = header.append('Content-Type', 'application/json; charset=utf-8');
-    return this.http.post<any>(environment.apiUrl + this.version + '/espd/request', ESPDRequest, options).toPromise();
+
+    return this.http.post<any>(environment.apiUrl + this.version + endpoint, ESPDRequest, options).toPromise();
   }
 
   getXMLRequestV2(ESPDRequest: string) {
@@ -189,8 +201,19 @@ export class ApicallService {
     return this.http.post<any>(environment.apiUrl + 'v2/espd/request', ESPDRequest, options).toPromise();
   }
 
-  getXMLResponse(ESPDResponse: string) {
+  getHTMLResponse(ESPDResponse: string) {
+    return this.getESPDResponseDocument(ESPDResponse, '/espd/response/html');
+  }
 
+  getPDFResponse(ESPDResponse: string) {
+    return this.getESPDResponseDocument(ESPDResponse, '/espd/response/pdf');
+  }
+
+  getXMLResponse(ESPDResponse: string) {
+    return this.getESPDResponseDocument(ESPDResponse, '/espd/response/xml');
+  }
+
+  private getESPDResponseDocument(ESPDResponse: string, endpoint: string) {
     console.log(ESPDResponse);
 
     let header = new HttpHeaders();
@@ -203,7 +226,7 @@ export class ApicallService {
     };
 
     // headers = header.append('Content-Type', 'application/json; charset=utf-8');
-    return this.http.post<any>(environment.apiUrl + this.version + '/espd/response', ESPDResponse, options).toPromise();
+    return this.http.post<any>(environment.apiUrl + this.version + endpoint, ESPDResponse, options).toPromise();
   }
 
   getXMLResponseV2(ESPDResponse: string) {
