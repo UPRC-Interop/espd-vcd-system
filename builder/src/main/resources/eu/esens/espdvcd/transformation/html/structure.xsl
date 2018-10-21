@@ -62,6 +62,27 @@
         </xsl:element>
     </xsl:template>
 
+    <xsl:template name="sectionLabelForNode">
+        <xsl:param name="node" />
+        <xsl:param name="propertyKey" />
+        <xsl:variable name="propertyValue">
+            <xsl:call-template name="getESPDProperty">
+                <xsl:with-param name="key" select="$propertyKey"/>
+            </xsl:call-template>
+        </xsl:variable>
+        <xsl:if test="$node">
+            <xsl:call-template name="sectionLabel">
+                <xsl:with-param name="label">
+                    <!--asd: -->
+                    <xsl:value-of select="$propertyValue"/><xsl:if test="not(':' =substring($propertyValue, string-length($propertyValue)))">:</xsl:if>
+                </xsl:with-param>
+                <xsl:with-param name="text">
+                    <xsl:value-of select="$node"/>
+                </xsl:with-param>
+            </xsl:call-template>
+        </xsl:if>
+    </xsl:template>
+
     <xsl:template name="leftPadding">
         <xsl:param name="content"/>
         <div class="left-padding">

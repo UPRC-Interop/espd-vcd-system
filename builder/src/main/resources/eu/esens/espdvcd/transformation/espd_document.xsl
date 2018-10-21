@@ -2,7 +2,9 @@
 
 
     <xsl:import href="html/page.xsl"/>
+    <xsl:import href="procedure.xsl"/>
     <xsl:import href="exclusion.xsl"/>
+    <xsl:import href="selection.xsl"/>
     <xsl:import href="propertyreader/property_reader.xsl"/>
 
 
@@ -23,7 +25,9 @@
                 </h2>
             </xsl:with-param>
             <xsl:with-param name="content">
+                <xsl:call-template name="procedureSection"/>
                 <xsl:call-template name="exclusionSection"/>
+                <xsl:call-template name="selectionSection"/>
             </xsl:with-param>
         </xsl:call-template>
     </xsl:template>

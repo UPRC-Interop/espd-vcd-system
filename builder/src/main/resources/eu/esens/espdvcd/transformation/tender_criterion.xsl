@@ -13,6 +13,13 @@
                 <xsl:apply-templates select="current()"/>
         </xsl:for-each>
     </xsl:template>
+    <xsl:template name="tenderingCriterionSectionByCriterionTypeCode">
+        <xsl:param name="criterionTypeCode"/>
+
+        <xsl:for-each select="//cac:TenderingCriterion[starts-with(./cbc:CriterionTypeCode, $criterionTypeCode)]">
+                <xsl:apply-templates select="current()"/>
+        </xsl:for-each>
+    </xsl:template>
 
     <xsl:template match="cac:TenderingCriterion">
         <xsl:call-template name="label">
@@ -82,8 +89,13 @@
                                 <xsl:call-template name="dateValue" />
                             </xsl:when>
                             <xsl:when test="cbc:ValueDataTypeCode = 'CODE_COUNTRY'">
-                                <!--ResponseCode-->
                                 <xsl:call-template name="countryValue" />
+                            </xsl:when>
+                            <xsl:when test="cbc:ValueDataTypeCode = 'IDENTIFIER'">
+                                <xsl:call-template name="identifierValue" />
+                            </xsl:when>
+                            <xsl:when test="cbc:ValueDataTypeCode = 'CODE'">
+                                <xsl:call-template name="codeValue" />
                             </xsl:when>
                         </xsl:choose>
                     </xsl:otherwise>
@@ -174,6 +186,23 @@
 
         <xsl:call-template name="responseValueNode">
             <xsl:with-param name="responseValueNode" select="$tenderingCriterionResponse/cac:ResponseValue/cbc:Description"/>
+        </xsl:call-template>
+
+    </xsl:template>
+
+    <xsl:template name="identifierValue">
+        <xsl:variable name="tenderingCriterionResponse" select="//cac:TenderingCriterionResponse[./cbc:ValidatedCriterionPropertyID = current()/cbc:ID]"/>
+
+        <xsl:call-template name="responseValueNode">
+            <xsl:with-param name="responseValueNode" select="$tenderingCriterionResponse/cac:ResponseValue/cbc:ResponseID"/>
+        </xsl:call-template>
+
+    </xsl:template>
+    <xsl:template name="codeValue">
+        <xsl:variable name="tenderingCriterionResponse" select="//cac:TenderingCriterionResponse[./cbc:ValidatedCriterionPropertyID = current()/cbc:ID]"/>
+
+        <xsl:call-template name="responseValueNode">
+            <xsl:with-param name="responseValueNode" select="$tenderingCriterionResponse/cac:ResponseValue/cbc:ResponseCode"/>
         </xsl:call-template>
 
     </xsl:template>

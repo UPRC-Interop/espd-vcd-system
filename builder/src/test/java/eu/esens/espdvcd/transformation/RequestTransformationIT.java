@@ -14,7 +14,7 @@ public class RequestTransformationIT  extends AbstractTransformationTest{
     @BeforeClass
     public static void transform() {
         String xmlRef = "espd-request-v2.xml";
-        String xslRef = "espd_document.xsl";
+        String xslRef = "espd_document_de.xsl";
 
         StreamSource xmlSource = new StreamSource(RequestTransformationIT.class.getResource(xmlRef).toExternalForm());
         StreamSource xslSource = new StreamSource(RequestTransformationIT.class.getResource(xslRef).toExternalForm());

@@ -81,12 +81,12 @@ textarea {
     font-weight: bold;
     margin-right: 20px;
     vertical-align: top;
-    width: 160px;
+    width: 35%;
 }
 
 .procedure-details .content-right {
     display: inline-block;
-    width: 65%;
+    width: 50%;
     vertical-align: bottom;
     word-wrap: break-word;
 }
