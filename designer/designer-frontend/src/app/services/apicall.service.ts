@@ -15,7 +15,7 @@
 ///
 
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
 import {Country} from '../model/country.model';
 import {ProcedureType} from '../model/procedureType.model';
@@ -158,27 +158,28 @@ export class ApicallService {
   }
 
   /* ================= UPLOAD JSON GET XML Request ================================= */
-  getXMLRequest(ESPDRequest: string) {
-    return this.getRequestExport(ESPDRequest, '/espd/request/xml');
+  getXMLRequest(ESPDRequest: string, language: string) {
+    return this.getRequestExport(ESPDRequest, '/espd/request/xml', language);
   }
 
-  getHTMLRequest(ESPDRequest: string) {
-    return this.getRequestExport(ESPDRequest, '/espd/request/html');
+  getHTMLRequest(ESPDRequest: string, language: string) {
+    return this.getRequestExport(ESPDRequest, '/espd/request/html', language);
   }
 
-  getPDFRequest(ESPDRequest: string) {
-    return this.getRequestExport(ESPDRequest, '/espd/request/pdf');
+  getPDFRequest(ESPDRequest: string, language: string) {
+    return this.getRequestExport(ESPDRequest, '/espd/request/pdf', language);
   }
 
-  private getRequestExport(ESPDRequest: string, endpoint: string) {
+  private getRequestExport(ESPDRequest: string, endpoint: string, language: string) {
     console.log(ESPDRequest);
     let header = new HttpHeaders();
     let _header = header.append('Content-Type', 'application/json; charset=utf-8');
-
+    let params = new HttpParams().set('language', language);
     let options: Object = {
       headers: _header,
       responseType: 'blob' as 'blob',
-      observe: 'response' as 'response'
+      observe: 'response' as 'response',
+      params: params
     };
 
     // headers = header.append('Content-Type', 'application/json; charset=utf-8');
@@ -201,28 +202,30 @@ export class ApicallService {
     return this.http.post<any>(environment.apiUrl + 'v2/espd/request', ESPDRequest, options).toPromise();
   }
 
-  getHTMLResponse(ESPDResponse: string) {
-    return this.getESPDResponseDocument(ESPDResponse, '/espd/response/html');
+  getHTMLResponse(ESPDResponse: string, language: string) {
+    return this.getESPDResponseDocument(ESPDResponse, '/espd/response/html', language);
   }
 
-  getPDFResponse(ESPDResponse: string) {
-    return this.getESPDResponseDocument(ESPDResponse, '/espd/response/pdf');
+  getPDFResponse(ESPDResponse: string, language: string) {
+    return this.getESPDResponseDocument(ESPDResponse, '/espd/response/pdf', language);
   }
 
-  getXMLResponse(ESPDResponse: string) {
-    return this.getESPDResponseDocument(ESPDResponse, '/espd/response/xml');
+  getXMLResponse(ESPDResponse: string, language: string) {
+    return this.getESPDResponseDocument(ESPDResponse, '/espd/response/xml', language);
   }
 
-  private getESPDResponseDocument(ESPDResponse: string, endpoint: string) {
+  private getESPDResponseDocument(ESPDResponse: string, endpoint: string, language: string) {
     console.log(ESPDResponse);
 
     let header = new HttpHeaders();
     let _header = header.append('Content-Type', 'application/json; charset=utf-8');
 
+    let params = new HttpParams().set('language', language);
     let options: Object = {
       headers: _header,
       responseType: 'blob' as 'blob',
-      observe: 'response' as 'response'
+      observe: 'response' as 'response',
+      params: params
     };
 
     // headers = header.append('Content-Type', 'application/json; charset=utf-8');

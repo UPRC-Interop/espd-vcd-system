@@ -83,6 +83,7 @@ export class DataService {
   eoRelatedDCriteria: EoRelatedCriterion[] = null;
   reductionCriteria: ReductionCriterion[] = null;
   language: Language[] = null;
+  selectedLanguage : string = null;
   langTemplate = [];
   langNames = [];
   langISOCodes = [];
@@ -382,7 +383,7 @@ export class DataService {
   }
 
   createRequestXmlFile() {
-    this.APIService.getXMLRequest(JSON.stringify(this.createESPDRequest()))
+    this.APIService.getXMLRequest(JSON.stringify(this.createESPDRequest()), this.selectedLanguage)
       .then(res => {
         this.createXmlFile(res);
         this.saveFile(this.blob, '.xml');
@@ -396,7 +397,7 @@ export class DataService {
   }
 
   createRequestHtmlFile() {
-    this.APIService.getHTMLRequest(JSON.stringify(this.createESPDRequest()))
+    this.APIService.getHTMLRequest(JSON.stringify(this.createESPDRequest()), this.selectedLanguage)
       .then(res => {
         this.createHtmlFile(res);
         this.saveFile(this.blob, '.html');
@@ -410,7 +411,7 @@ export class DataService {
   }
 
   createRequestPdfFile() {
-    this.APIService.getPDFRequest(JSON.stringify(this.createESPDRequest()))
+    this.APIService.getPDFRequest(JSON.stringify(this.createESPDRequest()), this.selectedLanguage)
       .then(res => {
         this.createPdfFile(res);
         this.saveFile(this.blob, '.pdf');
@@ -483,7 +484,7 @@ export class DataService {
   }
 
   createPdf() {
-    this.APIService.getPDFResponse(JSON.stringify(this.createESPDResponse()))
+    this.APIService.getPDFResponse(JSON.stringify(this.createESPDResponse()), this.selectedLanguage)
       .then(res => {
         this.createPdfFile(res);
         this.saveFile(this.blob, '.pdf');
@@ -497,7 +498,7 @@ export class DataService {
   }
 
   createHtml() {
-    this.APIService.getHTMLResponse(JSON.stringify(this.createESPDResponse()))
+    this.APIService.getHTMLResponse(JSON.stringify(this.createESPDResponse()), this.selectedLanguage)
       .then(res => {
         this.createHtmlFile(res);
         this.saveFile(this.blob, '.html');
@@ -511,7 +512,7 @@ export class DataService {
   }
 
   createXml() {
-    this.APIService.getXMLResponse(JSON.stringify(this.createESPDResponse()))
+    this.APIService.getXMLResponse(JSON.stringify(this.createESPDResponse()), this.selectedLanguage)
       .then(res => {
         console.log(res);
         this.createXmlFile(res);
@@ -1316,7 +1317,8 @@ export class DataService {
   }
 
   switchLanguage(language: string) {
-    const lang = 'ESPD_' + this.langTemplate[language].toLowerCase();
+    this.selectedLanguage = this.langTemplate[language].toLowerCase();
+    const lang = 'ESPD_' + this.selectedLanguage;
     console.log(lang);
     this.translate.use(lang);
     // this.AddLanguages();

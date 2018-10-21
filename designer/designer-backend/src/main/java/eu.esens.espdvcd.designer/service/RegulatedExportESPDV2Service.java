@@ -42,13 +42,13 @@ public class RegulatedExportESPDV2Service implements ExportESPDService {
     }
 
     @Override
-    public InputStream exportESPDRequestHtmlAsInputStream(ESPDRequest model) throws ValidationException {
-        return transformationService.createHtmlStream(new StreamSource(exportESPDRequestAsInputStream(model)), EULanguageCodeEnum.EN);
+    public InputStream exportESPDRequestHtmlAsInputStream(ESPDRequest model, EULanguageCodeEnum languageCodeEnum) throws ValidationException {
+        return transformationService.createHtmlStream(new StreamSource(exportESPDRequestAsInputStream(model)), languageCodeEnum);
     }
 
     @Override
-    public InputStream exportESPDRequestPdfAsInputStream(ESPDRequest model) throws ValidationException {
-        return transformationService.createPdfStream(new StreamSource(exportESPDRequestAsInputStream(model)), EULanguageCodeEnum.EN);
+    public InputStream exportESPDRequestPdfAsInputStream(ESPDRequest model, EULanguageCodeEnum languageCodeEnum) throws ValidationException {
+        return transformationService.createPdfStream(new StreamSource(exportESPDRequestAsInputStream(model)), languageCodeEnum);
     }
 
     @Override
@@ -67,13 +67,13 @@ public class RegulatedExportESPDV2Service implements ExportESPDService {
     }
 
     @Override
-    public InputStream exportESPDResponseHtmlAsInputStream(ESPDResponse model) throws ValidationException {
-        return transformationService.createHtmlStream(new StreamSource(exportESPDResponseAsInputStream(model)), EULanguageCodeEnum.EN);
+    public InputStream exportESPDResponseHtmlAsInputStream(ESPDResponse model, EULanguageCodeEnum languageCodeEnum) throws ValidationException {
+        return transformationService.createHtmlStream(new StreamSource(exportESPDResponseAsInputStream(model)), languageCodeEnum);
     }
 
     @Override
-    public InputStream exportESPDResponsePdfAsInputStream(ESPDResponse model) throws ValidationException {
-        return transformationService.createPdfStream(new StreamSource(exportESPDResponseAsInputStream(model)), EULanguageCodeEnum.EN);
+    public InputStream exportESPDResponsePdfAsInputStream(ESPDResponse model, EULanguageCodeEnum languageCodeEnum) throws ValidationException {
+        return transformationService.createPdfStream(new StreamSource(exportESPDResponseAsInputStream(model)), languageCodeEnum);
     }
 
     @Override

@@ -17,6 +17,7 @@ package eu.esens.espdvcd.designer.endpoint;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
 import eu.esens.espdvcd.designer.deserialiser.RequirementDeserialiser;
 import eu.esens.espdvcd.designer.exception.ValidationException;
 import eu.esens.espdvcd.designer.service.ExportESPDService;
@@ -42,6 +43,7 @@ public class ExportESPDEndpoint extends Endpoint {
     private static final String PDF_SUFFIX = ".pdf";
     private static final String HTML_SUFFIX = ".html";
     private static final String XML_SUFFIX = ".xml";
+    private static final String LANGUAGE = "language";
     private final ExportESPDService service;
     private final String DESERIALIZATION_ERROR = "Oops, the provided JSON document was not valid and could not be converted to an object. Did you provide the correct format? \nThis could help you:\n",
             LOGGER_DESERIALIZATION_ERROR = "Error occurred in ESPDEndpoint while converting a JSON object to XML. ";
@@ -122,8 +124,10 @@ public class ExportESPDEndpoint extends Endpoint {
     private Object handleESPDRequest(Request rq, Response rsp, ExportType exportType) throws JsonProcessingException {
         if (rq.contentType().contains("application/json")) {
             ESPDRequest document;
+            EULanguageCodeEnum languageCode;
             try {
                 document = MAPPER.readValue(rq.body(), RegulatedESPDRequest.class);
+                languageCode = EULanguageCodeEnum.valueOf(rq.queryParams(LANGUAGE).toUpperCase());
             } catch (IOException e) {
                 rsp.status(400);
                 LOGGER.severe(LOGGER_DESERIALIZATION_ERROR + e.getMessage());
@@ -134,7 +138,7 @@ public class ExportESPDEndpoint extends Endpoint {
             rsp.header("Content-Disposition", MessageFormat.format("attachment; filename=\"{0}\";", getRequestFilename(exportType)));
 
             try {
-                return exportESPDRequest(exportType, document);
+                return exportESPDRequest(exportType, document, languageCode);
 
             } catch (ValidationException e) {
                 LOGGER.severe(e.getMessage());
@@ -150,14 +154,14 @@ public class ExportESPDEndpoint extends Endpoint {
         }
     }
 
-    private Object exportESPDRequest(ExportType exportType, ESPDRequest document) throws ValidationException {
+    private Object exportESPDRequest(ExportType exportType, ESPDRequest document, EULanguageCodeEnum languageCodeEnum) throws ValidationException {
         switch (exportType) {
             case PDF:
-                return service.exportESPDRequestPdfAsInputStream(document);
+                return service.exportESPDRequestPdfAsInputStream(document, languageCodeEnum);
             case XML:
                 return service.exportESPDRequestAsInputStream(document);
             case HTML:
-                return service.exportESPDRequestHtmlAsInputStream(document);
+                return service.exportESPDRequestHtmlAsInputStream(document, languageCodeEnum);
             default:
                 throw new IllegalArgumentException(MessageFormat.format("No export operation defined for type ''{0}''.", exportType.name()));
         }
@@ -166,8 +170,10 @@ public class ExportESPDEndpoint extends Endpoint {
     private Object handleESPDResponse(Request rq, Response rsp, ExportType exportType) throws JsonProcessingException {
         if (rq.contentType().contains("application/json")) {
             ESPDResponse document;
+            EULanguageCodeEnum languageCode;
             try {
                 document = MAPPER.readValue(rq.body(), RegulatedESPDResponse.class);
+                languageCode = EULanguageCodeEnum.valueOf(rq.queryParams(LANGUAGE).toUpperCase());
             } catch (IOException e) {
                 rsp.status(400);
                 rsp.header("Content-Type", "application/json");
@@ -177,7 +183,7 @@ public class ExportESPDEndpoint extends Endpoint {
             rsp.header("Content-Type", "application/octet-stream");
             rsp.header("Content-Disposition", MessageFormat.format("attachment; filename=\"{0}\";", getReponseFilename(exportType)));
             try {
-                return exportESPDResponse(exportType, document);
+                return exportESPDResponse(exportType, document, languageCode);
             } catch (ValidationException e) {
                 LOGGER.severe(e.getMessage());
                 rsp.status(406);
@@ -192,14 +198,14 @@ public class ExportESPDEndpoint extends Endpoint {
         }
     }
 
-    private Object exportESPDResponse(ExportType exportType, ESPDResponse document) throws ValidationException {
+    private Object exportESPDResponse(ExportType exportType, ESPDResponse document, EULanguageCodeEnum languageCodeEnum) throws ValidationException {
         switch (exportType) {
             case PDF:
-                return service.exportESPDResponsePdfAsInputStream(document);
+                return service.exportESPDResponsePdfAsInputStream(document, languageCodeEnum);
             case XML:
                 return service.exportESPDResponseAsInputStream(document);
             case HTML:
-                return service.exportESPDResponseHtmlAsInputStream(document);
+                return service.exportESPDResponseHtmlAsInputStream(document, languageCodeEnum);
             default:
                 throw new IllegalArgumentException(MessageFormat.format("No export operation defined for type ''{0}''.", exportType.name()));
         }

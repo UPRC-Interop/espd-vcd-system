@@ -16,12 +16,12 @@
 package eu.esens.espdvcd.designer.service;
 
 import eu.esens.espdvcd.builder.BuilderFactory;
+import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
 import eu.esens.espdvcd.designer.exception.ValidationException;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDResponse;
 
 import javax.el.MethodNotFoundException;
-import javax.naming.OperationNotSupportedException;
 import java.io.InputStream;
 
 public class RegulatedExportESPDV1Service implements ExportESPDService {
@@ -34,12 +34,12 @@ public class RegulatedExportESPDV1Service implements ExportESPDService {
     }
 
     @Override
-    public InputStream exportESPDRequestHtmlAsInputStream(ESPDRequest model) throws ValidationException {
+    public InputStream exportESPDRequestHtmlAsInputStream(ESPDRequest model, EULanguageCodeEnum languageCodeEnum) throws ValidationException {
         throw new MethodNotFoundException("not implemented");
     }
 
     @Override
-    public InputStream exportESPDRequestPdfAsInputStream(ESPDRequest model) throws ValidationException {
+    public InputStream exportESPDRequestPdfAsInputStream(ESPDRequest model, EULanguageCodeEnum languageCodeEnum) throws ValidationException {
         throw new MethodNotFoundException("not implemented");
     }
 
@@ -58,12 +58,12 @@ public class RegulatedExportESPDV1Service implements ExportESPDService {
     }
 
     @Override
-    public InputStream exportESPDResponseHtmlAsInputStream(ESPDResponse model) throws ValidationException {
+    public InputStream exportESPDResponseHtmlAsInputStream(ESPDResponse model, EULanguageCodeEnum languageCodeEnum) throws ValidationException {
         throw new MethodNotFoundException("not implemented");
     }
 
     @Override
-    public InputStream exportESPDResponsePdfAsInputStream(ESPDResponse model) throws ValidationException {
+    public InputStream exportESPDResponsePdfAsInputStream(ESPDResponse model, EULanguageCodeEnum languageCodeEnum) throws ValidationException {
         throw new MethodNotFoundException("not implemented");
     }
 
