@@ -21,7 +21,7 @@
 
   <ng-container *ngIf="dataService.reductionCriteriaForm">
     <form [formGroup]="dataService.reductionCriteriaForm">
-      <mat-expansion-panel expanded="true" *ngIf="reductionCriteria">
+      <mat-expansion-panel expanded="true" *ngIf="this.dataService.reductionCriteria">
         <mat-expansion-panel-header>
           <mat-panel-title translate>
             espd.part5.reduction
@@ -31,7 +31,7 @@
           <mat-card>
             {{'espd.part5.toptext' | translate}}
           </mat-card>
-          <mat-card *ngFor="let cr of reductionCriteria; let i = index">
+          <mat-card *ngFor="let cr of this.dataService.reductionCriteria; let i = index">
             <div class="reductionCriteria">
 
               <div class="criterion-wrap">

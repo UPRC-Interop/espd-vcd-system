@@ -1,12 +1,12 @@
 /**
  * Copyright 2016-2018 University of Piraeus Research Center
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -32,6 +32,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.transform.stream.StreamSource;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -145,6 +146,13 @@ public abstract class RegulatedModelBuilder implements ModelBuilder {
      */
     abstract RegulatedModelBuilder addDefaultESPDCriteriaList();
 
+    /**
+     * Apply taxonomy cardinalities to given Criteria Requirements and RequirementGroups
+     *
+     * @param criterionList The Criterion List
+     */
+    protected abstract void applyTaxonomyCardinalities(List<SelectableCriterion> criterionList);
+
     public ESPDRequest createESPDRequest() throws BuilderException {
         ESPDRequest req;
         if (importStream != null) {
@@ -155,6 +163,11 @@ public abstract class RegulatedModelBuilder implements ModelBuilder {
                 } catch (RetrieverException ex) {
                     LOGGER.log(Level.SEVERE, null, ex);
                 }
+            } else {
+                // imported XML Criteria have default cardinalities, therefore
+                // taxonomy cardinalities will be applied to them in order to
+                // comply with designer needs.
+                applyTaxonomyCardinalities(req.getFullCriterionList());
             }
         } else {
             req = new RegulatedESPDRequest();
@@ -194,6 +207,11 @@ public abstract class RegulatedModelBuilder implements ModelBuilder {
                 } catch (RetrieverException ex) {
                     LOGGER.log(Level.SEVERE, null, ex);
                 }
+            } else {
+                // imported XML Criteria have default cardinalities, therefore
+                // taxonomy cardinalities will be applied to them in order to
+                // comply with designer needs.
+                applyTaxonomyCardinalities(res.getFullCriterionList());
             }
 
         } else {
