@@ -36,6 +36,9 @@ export class UtilitiesService {
   satisfiedALLCriterionExists = false;
   isSatisfiedALL = true;
   isAtoD = false;
+  qualificationApplicationType: string;
+  // qualificationApplicationType = 'SELF-CONTAINED';
+  // qualificationApplicationType = 'REGULATED';
 
   constructor() {
   }
