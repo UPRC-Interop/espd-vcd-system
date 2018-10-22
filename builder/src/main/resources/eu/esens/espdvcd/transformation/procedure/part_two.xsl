@@ -230,7 +230,7 @@
     </xsl:template>
 
     <xsl:template name="smeIndicator">
-        <xsl:variable name="isSME" select="//cac:Party/cac:PartyIdentification/cbc:ID/text() = 'SME'"/>
+        <xsl:variable name="isSME" select="//cac:EconomicOperatorParty/cac:Party/cac:PartyIdentification/cbc:ID/text() = 'SME'"/>
         <form>
             <xsl:element name="input">
                 <xsl:attribute name="name">yes_no</xsl:attribute>
@@ -239,10 +239,12 @@
                 <xsl:if test="$isSME">
                     <xsl:attribute name="checked" />
                 </xsl:if>
-                <xsl:call-template name="getESPDProperty">
-                    <xsl:with-param name="key" select="'espd.gui.yes'"/>
-                </xsl:call-template>
             </xsl:element>
+            &#8239;
+            <xsl:call-template name="getESPDProperty">
+                <xsl:with-param name="key" select="'espd.gui.yes'"/>
+            </xsl:call-template>
+            &#160;
             <xsl:element name="input">
                 <xsl:attribute name="name">yes_no</xsl:attribute>
                 <xsl:attribute name="type">radio</xsl:attribute>
@@ -250,10 +252,11 @@
                 <xsl:if test="not($isSME)">
                     <xsl:attribute name="checked" />
                 </xsl:if>
-                <xsl:call-template name="getESPDProperty">
-                    <xsl:with-param name="key" select="'espd.gui.no'"/>
-                </xsl:call-template>
             </xsl:element>
+            &#8239;
+            <xsl:call-template name="getESPDProperty">
+                <xsl:with-param name="key" select="'espd.gui.no'"/>
+            </xsl:call-template>
         </form>
     </xsl:template>
     

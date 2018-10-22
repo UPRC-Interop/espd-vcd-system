@@ -100,6 +100,9 @@
                             <xsl:when test="cbc:ValueDataTypeCode = 'URL'">
                                 <xsl:call-template name="urlValue" />
                             </xsl:when>
+                            <xsl:when test="cbc:ValueDataTypeCode = 'PERCENTAGE'">
+                                <xsl:call-template name="percentageValue" />
+                            </xsl:when>
                         </xsl:choose>
                     </xsl:otherwise>
                 </xsl:choose>
@@ -130,10 +133,12 @@
                         <xsl:attribute name="checked" />
                     </xsl:if>
                 </xsl:if>
-                <xsl:call-template name="getESPDProperty">
-                    <xsl:with-param name="key" select="'espd.gui.yes'"/>
-                </xsl:call-template>
             </xsl:element>
+            &#8239;
+            <xsl:call-template name="getESPDProperty">
+                <xsl:with-param name="key" select="'espd.gui.yes'"/>
+            </xsl:call-template>
+            &#160;
             <xsl:element name="input">
                 <xsl:attribute name="name">yes_no</xsl:attribute>
                 <xsl:attribute name="type">radio</xsl:attribute>
@@ -143,10 +148,11 @@
                         <xsl:attribute name="checked" />
                     </xsl:if>
                 </xsl:if>
-                <xsl:call-template name="getESPDProperty">
-                    <xsl:with-param name="key" select="'espd.gui.no'"/>
-                </xsl:call-template>
             </xsl:element>
+            &#8239;
+            <xsl:call-template name="getESPDProperty">
+                <xsl:with-param name="key" select="'espd.gui.no'"/>
+            </xsl:call-template>
         </form>
     </xsl:template>
 
@@ -218,6 +224,16 @@
         </xsl:call-template>
 
     </xsl:template>
+    <xsl:template name="percentageValue">
+        <xsl:variable name="tenderingCriterionResponse" select="//cac:TenderingCriterionResponse[./cbc:ValidatedCriterionPropertyID = current()/cbc:ID]"/>
+
+        <xsl:call-template name="responseValueNode">
+            <xsl:with-param name="responseValueNode">
+                <xsl:value-of select="$tenderingCriterionResponse/cac:ResponseValue/cbc:ResponseQuantity"/> &#37;
+            </xsl:with-param>
+        </xsl:call-template>
+
+    </xsl:template>
 
     <xsl:template name="responseValueNode">
         <xsl:param name="responseValueNode"/>
@@ -235,7 +251,7 @@
         <xsl:call-template name="paragraph">
             <xsl:with-param name="value">
                 <xsl:choose>
-                    <xsl:when test="$responseValue">
+                    <xsl:when test="$responseValue and not($responseValue = '')">
                         <xsl:copy-of select="$responseValue"/>
                     </xsl:when>
                     <xsl:otherwise>
