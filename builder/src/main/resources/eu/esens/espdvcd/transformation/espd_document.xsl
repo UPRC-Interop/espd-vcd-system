@@ -2,10 +2,10 @@
 
 
     <xsl:import href="html/page.xsl"/>
-    <xsl:import href="procedure.xsl"/>
-    <xsl:import href="exclusion.xsl"/>
-    <xsl:import href="selection.xsl"/>
-    <xsl:import href="finish.xsl"/>
+    <xsl:import href="base/procedure.xsl"/>
+    <xsl:import href="base/exclusion.xsl"/>
+    <xsl:import href="base/selection.xsl"/>
+    <xsl:import href="base/finish.xsl"/>
     <xsl:import href="propertyreader/property_reader.xsl"/>
 
 

@@ -30,18 +30,19 @@ public class ResponseTransformationEnTest {
     }
 
     @Test
-    public void hasLocalizedPartThreeTitle() {
-        assertThat(source, hasXPath("/html/body/div/div[2]/h3/text()", containsString("Part III: Exclusion grounds")));
+    public void hasLocalizedPartOneTitle() {
+        assertThat(source, hasXPath("/html/body/div/div[2]/h3/text()", containsString("Part I: Information concerning the procurement procedure and the contracting authority or contracting entity")));
     }
 
     @Test
-    public void hasLocalizedPartThreeATitle() {
-        assertThat(source, hasXPath("/html/body/div/div[2]/div[1]/div[1]/text()", containsString("A: Grounds relating to criminal convictions")));
+    public void hasLocalizedPublicationInfoTitle() {
+        assertThat(source, hasXPath("/html/body/div/div[2]/div[1]/div[1]/text()", containsString("Information about publication")));
     }
 
     @Test
-    public void hasLocalizedPartThreeASubTitle() {
-        assertThat(source, hasXPath("/html/body/div/div[2]/div[1]/div[2]/label[1]/text()", containsString("Article 57(1) of Directive 2014/24/EU sets out the following reasons for exclusion")));
+    public void hasLocalizedPartTwoTitle() {
+        assertThat(source, hasXPath("/html/body/div/div[3]/h3/text()", containsString("Part II: Information concerning the economic operator")));
     }
+
 
 }

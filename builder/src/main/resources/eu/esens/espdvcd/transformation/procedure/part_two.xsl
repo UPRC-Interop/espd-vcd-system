@@ -2,7 +2,7 @@
 
     <xsl:import href="../html/chapter.xsl"/>
     <xsl:import href="../propertyreader/property_reader.xsl"/>
-    <xsl:import href="../tender_criterion.xsl"/>
+    <xsl:import href="../base/tender_criterion.xsl"/>
 
     <xsl:template name="partTwo">
 
