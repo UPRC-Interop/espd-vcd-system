@@ -92,7 +92,18 @@ export class FormUtilService {
           if (req != null || req !== undefined) {
             // console.log('requirement uuid ' + req.uuid);
             // console.log(formValues[req.uuid.valueOf()]);
-            req.response = new RequirementResponse();
+            if (req.response !== null) {
+              // console.log('INSIDE ====================================');
+              // console.log(req.response);
+              // this.utilities.setAllFields(req.response, '');
+              // req.response = new RequirementResponse();
+              // console.log(req.response);
+            } else {
+              // console.log('RESPONSE IS NULL');
+              req.response = new RequirementResponse();
+            }
+            console.log(req.response);
+            // req.response = new RequirementResponse();
             if (req.responseDataType === 'INDICATOR') {
               if (formValues[req.uuid.valueOf()] === true) {
                 req.response.indicator = true;
@@ -170,9 +181,6 @@ export class FormUtilService {
               req.response.uuid = null;
             } else if (req.responseDataType === 'DATE') {
               req.response.date = formValues[req.uuid.valueOf()];
-              // console.log('CHECKING DATE-----------------------------------------------');
-              // console.log(req.response.date);
-              // console.log(typeof req.response.date);
               if (typeof req.response.date !== 'string' && req.response.date !== null && req.response.date !== undefined) {
                 const utcDate = this.utilities.toUTCDate(req.response.date);
                 req.response.date = moment(utcDate);
@@ -207,14 +215,16 @@ export class FormUtilService {
               req.response.uuid = null;
             } else if (req.responseDataType === 'AMOUNT') {
               const currencyid = req.uuid + 'currency';
-
               // AMOUNT quickfix
               if (formValues[req.uuid.valueOf()] === '' && formValues[currencyid.valueOf()] === null) {
                 req.response = null;
               } else {
+                console.log('SETTING AMOUNT....');
                 req.response.amount = formValues[req.uuid.valueOf()];
                 // console.log(formValues[currencyid.valueOf()]);
                 req.response.currency = formValues[currencyid.valueOf()];
+                console.log(req.response.amount);
+                console.log(req.response.currency);
                 req.response.uuid = null;
               }
             } else if (req.responseDataType === 'QUANTITY_INTEGER') {
@@ -558,11 +568,6 @@ export class FormUtilService {
 
     // console.log(fg.getRawValue());
     return fg;
-  }
-
-
-  formReset() {
-
   }
 
 

@@ -32,42 +32,10 @@ import {FormUtilService} from '../services/form-util.service';
   styleUrls: ['./exclusion-eo.component.css']
 })
 export class ExclusionEoComponent implements OnInit {
-
-  @Input() exclusionACriteria: ExclusionCriteria[];
-  @Input() exclusionBCriteria: ExclusionCriteria[];
-  @Input() exclusionCCriteria: ExclusionCriteria[];
-  @Input() exclusionDCriteria: ExclusionCriteria[];
-
-  @Input() formA: FormGroup;
-  @Input() formB: FormGroup;
-  @Input() formD: FormGroup;
-  @Input() formC: FormGroup;
-
-
-  constructor(public dataService: DataService, public formUtil: FormUtilService) {
+  constructor(public dataService: DataService) {
   }
 
   ngOnInit() {
 
   }
-
-
-  onExclusionEOSubmit() {
-    this.formUtil.extractFormValuesFromCriteria(this.exclusionACriteria, this.formA, this.formUtil.evidenceList);
-    this.formUtil.extractFormValuesFromCriteria(this.exclusionBCriteria, this.formB, this.formUtil.evidenceList);
-    this.formUtil.extractFormValuesFromCriteria(this.exclusionCCriteria, this.formC, this.formUtil.evidenceList);
-    this.formUtil.extractFormValuesFromCriteria(this.exclusionDCriteria, this.formD, this.formUtil.evidenceList);
-
-
-    console.log(this.exclusionACriteria);
-    console.log(this.exclusionBCriteria);
-    console.log(this.exclusionCCriteria);
-    console.log(this.exclusionDCriteria);
-
-    this.dataService.exclusionSubmit(this.exclusionACriteria,
-      this.exclusionBCriteria,
-      this.exclusionCCriteria,
-      this.exclusionDCriteria);
-  }
-
 }

@@ -81,13 +81,13 @@ public class SelectableCriterionPrinter {
             tabs += "\t";
         }
         final String finalTabs = tabs;
-        System.out.println("\n" + tabs + "RequirementGroup: " + rg.getID()
+        System.out.println("\n" + tabs + "[" + rg.getType().name() + "] RequirementGroup: " + rg.getID()
                 + " Cardinality: " + CardinalityUtils.extractCardinality(rg.isMandatory(), rg.isMultiple())
                 + " Condition: " + rg.getCondition());
 
         System.out.println(tabs + "Requirements: ");
         rg.getRequirements().forEach(r -> {
-            System.out.println(finalTabs + "\tReq ID: " + r.getID()
+            System.out.println(finalTabs + "\t[" + r.getType().name() + "] Req ID: " + r.getID()
                     + " Cardinality: " + CardinalityUtils.extractCardinality(r.isMandatory(), r.isMultiple())
                     + " Req Type:" + r.getResponseDataType() + " Req Desc:" + r.getDescription());
         });

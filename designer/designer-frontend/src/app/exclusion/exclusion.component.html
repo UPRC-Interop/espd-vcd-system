@@ -19,7 +19,7 @@
 <h4 translate>espd.part3.header</h4>
 <form #f="ngForm">
   <mat-accordion multi="true">
-    <mat-expansion-panel expanded="true" *ngIf="exclusionACriteria">
+    <mat-expansion-panel expanded="true" *ngIf="this.dataService.exclusionACriteria">
       <mat-expansion-panel-header>
         <mat-panel-title translate>
           espd.part3.crit.grounds.criminal.conv.top.title
@@ -28,17 +28,19 @@
 
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <ng-container *ngIf="exclusionACriteria.length !== 0">
+      <ng-container *ngIf="this.dataService.exclusionACriteria.length !== 0">
         <div class="desc">
           <h4 translate>espd.part3.crit.eu.grounds.criminal.conv.main.title</h4>
           <!--<h4>Article {{exclusionACriteria['0'].legislationReference.article}} of {{exclusionACriteria['0'].legislationReference.title}} sets out the following reasons for exclusion</h4>-->
         </div>
       </ng-container>
-     <mat-card *ngFor="let criteria of exclusionACriteria; let i = index">
+     <mat-card *ngFor="let criteria of this.dataService.exclusionACriteria; let i = index">
        <div class="exclusionCriteria" >
 
          <div class="criteria">
-           <mat-checkbox name=exclusionACriteria[i] color="primary" checked="exclusionACriteria[i].selected" [(ngModel)]="exclusionACriteria[i].selected" [disabled]="exclusionACriteria[i].selected">{{criteria.name}}</mat-checkbox>
+           <mat-checkbox name=exclusionACriteria[i] color="primary" checked="exclusionACriteria[i].selected"
+                         [(ngModel)]="this.dataService.exclusionACriteria[i].selected"
+                         [disabled]="this.dataService.exclusionACriteria[i].selected">{{criteria.name}}</mat-checkbox>
            <div class="critDesc">{{criteria.description}}</div>
          </div>
 
@@ -50,7 +52,7 @@
      </mat-card>
     </mat-expansion-panel>
 
-    <mat-expansion-panel expanded="true" *ngIf="exclusionBCriteria">
+    <mat-expansion-panel expanded="true" *ngIf="this.dataService.exclusionBCriteria">
       <mat-expansion-panel-header>
         <mat-panel-title translate>
           espd.part3.crit.top.grounds.payment.taxes.title
@@ -59,17 +61,17 @@
 
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <ng-container *ngIf="exclusionBCriteria.length !== 0">
+      <ng-container *ngIf="this.dataService.exclusionBCriteria.length !== 0">
         <div class="desc">
           <h4 translate>espd.part3.crit.eu.payment.taxes.main.title</h4>
           <!--<h4>Article {{exclusionBCriteria['0'].legislationReference.article}} of {{exclusionBCriteria['0'].legislationReference.title}} sets out the following reasons for exclusion</h4>-->
         </div>
       </ng-container>
-      <mat-card *ngFor="let criteria of exclusionBCriteria; let i = index">
+      <mat-card *ngFor="let criteria of this.dataService.exclusionBCriteria; let i = index">
         <div class="exclusionCriteria" >
 
           <div class="criteria">
-            <mat-checkbox color="primary" checked="criteria.selected" [disabled]="exclusionBCriteria[i].selected">{{criteria.name}}</mat-checkbox>
+            <mat-checkbox color="primary" checked="criteria.selected" [disabled]="this.dataService.exclusionBCriteria[i].selected">{{criteria.name}}</mat-checkbox>
             <div class="critDesc">{{criteria.description}}</div>
           </div>
 
@@ -81,7 +83,7 @@
       </mat-card>
     </mat-expansion-panel>
 
-    <mat-expansion-panel expanded="true" *ngIf="exclusionCCriteria">
+    <mat-expansion-panel expanded="true" *ngIf="this.dataService.exclusionCCriteria">
       <mat-expansion-panel-header>
         <mat-panel-title translate>
           espd.part3.crit.insolvency.conflicts.top.title
@@ -90,16 +92,16 @@
 
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <ng-container *ngIf="exclusionCCriteria.length !== 0">
+      <ng-container *ngIf="this.dataService.exclusionCCriteria.length !== 0">
         <div class="desc">
           <!--<h4>Article {{exclusionCCriteria['0'].legislationReference.article}} of {{exclusionCCriteria['0'].legislationReference.title}} sets out the following reasons for exclusion</h4>-->
         <h4 translate>espd.part3.crit.eu.main.breaching.obligations</h4>
         </div>
       </ng-container>
-      <mat-card *ngFor="let criteria of exclusionCCriteria; let i = index">
+      <mat-card *ngFor="let criteria of this.dataService.exclusionCCriteria; let i = index">
         <div class="exclusionCriteria" >
           <div class="criteria">
-            <mat-checkbox color="primary" checked="criteria.selected" [disabled]="exclusionCCriteria[i].selected">{{criteria.name}}</mat-checkbox>
+            <mat-checkbox color="primary" checked="criteria.selected" [disabled]="this.dataService.exclusionCCriteria[i].selected">{{criteria.name}}</mat-checkbox>
             <div class="critDesc">{{criteria.description}}</div>
           </div>
           <div class="eCertis">
@@ -110,7 +112,7 @@
       </mat-card>
     </mat-expansion-panel>
 
-    <mat-expansion-panel expanded="true" *ngIf="exclusionDCriteria">
+    <mat-expansion-panel expanded="true" *ngIf="this.dataService.exclusionDCriteria">
       <mat-expansion-panel-header>
         <mat-panel-title translate>
           espd.part3.crit.purely.national.top.title
@@ -119,15 +121,17 @@
 
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <ng-container *ngIf="exclusionDCriteria.length !== 0">
+      <ng-container *ngIf="this.dataService.exclusionDCriteria.length !== 0">
         <div class="desc">
           <h4 translate>espd.part3.crit.eu.main.purely.national</h4>
         </div>
       </ng-container>
-      <mat-card *ngFor="let criteria of exclusionDCriteria; let i=index">
+      <mat-card *ngFor="let criteria of this.dataService.exclusionDCriteria; let i=index">
         <div class="exclusionCriteria" >
           <div class="criteria">
-            <mat-checkbox color="primary" checked="criteria.selected" name="exclusionDCriteria" [(ngModel)]="exclusionDCriteria[i].selected" [disabled]="this.dataService.isReadOnly()">{{criteria.name}}</mat-checkbox>
+            <mat-checkbox color="primary" checked="criteria.selected" name="exclusionDCriteria"
+                          [(ngModel)]="this.dataService.exclusionDCriteria[i].selected"
+                          [disabled]="this.dataService.isReadOnly()">{{criteria.name}}</mat-checkbox>
             <div class="critDesc">{{criteria.description}}</div>
           </div>
           <div class="eCertis">
@@ -139,5 +143,5 @@
     </mat-expansion-panel>
   </mat-accordion>
   <button mat-raised-button color="primary" matStepperPrevious>{{'espd.gui.previous' | translate}}</button>
-  <button type="submit" mat-raised-button color="primary" matStepperNext (click)="onExclusionSubmit(f)">{{'espd.gui.next' | translate}}</button>
+  <button type="submit" mat-raised-button color="primary" matStepperNext>{{'espd.gui.next' | translate}}</button>
 </form>

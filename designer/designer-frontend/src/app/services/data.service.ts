@@ -325,26 +325,7 @@ export class DataService {
 
   /* ============================= step submit actions =================================*/
 
-  exclusionSubmit(exclusionCriteriaA: ExclusionCriteria[],
-                  exclusionCriteriaB: ExclusionCriteria[],
-                  exclusionCriteriaC: ExclusionCriteria[],
-                  exclusionCriteriaD: ExclusionCriteria[]) {
-    this.exclusionACriteria = exclusionCriteriaA;
-    this.exclusionBCriteria = exclusionCriteriaB;
-    this.exclusionCCriteria = exclusionCriteriaC;
-    this.exclusionDCriteria = exclusionCriteriaD;
-
-  }
-
-  selectionSubmit(selectionCriteriaA: SelectionCriteria[],
-                  selectionCriteriaB: SelectionCriteria[],
-                  selectionCriteriaC: SelectionCriteria[],
-                  selectionCriteriaD: SelectionCriteria[],
-                  isSatisfiedALL: boolean) {
-    this.selectionACriteria = selectionCriteriaA;
-    this.selectionBCriteria = selectionCriteriaB;
-    this.selectionCCriteria = selectionCriteriaC;
-    this.selectionDCriteria = selectionCriteriaD;
+  selectionSubmit(isSatisfiedALL: boolean) {
 
     // create ESPDRequest
     // console.dir(JSON.stringify(this.createESPDRequest(isSatisfiedALL)));
@@ -423,33 +404,36 @@ export class DataService {
         this.openSnackBar(message, action);
       });
   }
-
-
-  procedureEOSubmit(eoRelatedCriteriaA: EoRelatedCriterion[],
-                    eoRelatedCriteriaC: EoRelatedCriterion[],
-                    eoRelatedCriteriaD: EoRelatedCriterion[]) {
-    this.eoRelatedACriteria = eoRelatedCriteriaA;
-    this.eoRelatedCCriteria = eoRelatedCriteriaC;
-    this.eoRelatedDCriteria = eoRelatedCriteriaD;
-  }
-
-  selectionEOSubmit(selectionCriteriaA: SelectionCriteria[],
-                    selectionCriteriaB: SelectionCriteria[],
-                    selectionCriteriaC: SelectionCriteria[],
-                    selectionCriteriaD: SelectionCriteria[],
-                    isSatisfiedALL: boolean) {
-    this.selectionACriteria = selectionCriteriaA;
-    this.selectionBCriteria = selectionCriteriaB;
-    this.selectionCCriteria = selectionCriteriaC;
-    this.selectionDCriteria = selectionCriteriaD;
-
-    console.log(this.selectionALLCriteria);
+  selectionEOSubmit(isSatisfiedALL: boolean) {
     this.isSatisfiedALLeo = isSatisfiedALL;
 
   }
 
-  finishEOSubmit(reductionCriteria: ReductionCriterion[], exportType: ExportType) {
-    this.reductionCriteria = reductionCriteria;
+  finishEOSubmit(exportType : ExportType) {
+
+    /* extract eoRelated criteria */
+    this.formUtil.extractFormValuesFromCriteria(this.eoRelatedACriteria, this.eoRelatedACriteriaForm, this.formUtil.evidenceList);
+    this.formUtil.extractFormValuesFromCriteria(this.eoRelatedCCriteria, this.eoRelatedCCriteriaForm, this.formUtil.evidenceList);
+    this.formUtil.extractFormValuesFromCriteria(this.eoRelatedDCriteria, this.eoRelatedDCriteriaForm, this.formUtil.evidenceList);
+
+    /* extract exclusion criteria */
+    this.formUtil.extractFormValuesFromCriteria(this.exclusionACriteria, this.exclusionACriteriaForm, this.formUtil.evidenceList);
+    this.formUtil.extractFormValuesFromCriteria(this.exclusionBCriteria, this.exclusionBCriteriaForm, this.formUtil.evidenceList);
+    this.formUtil.extractFormValuesFromCriteria(this.exclusionCCriteria, this.exclusionCCriteriaForm, this.formUtil.evidenceList);
+    this.formUtil.extractFormValuesFromCriteria(this.exclusionDCriteria, this.exclusionDCriteriaForm, this.formUtil.evidenceList);
+
+    /* extract selection criteria */
+    this.formUtil.extractFormValuesFromCriteria(this.selectionACriteria, this.selectionACriteriaForm, this.formUtil.evidenceList);
+    this.formUtil.extractFormValuesFromCriteria(this.selectionBCriteria, this.selectionBCriteriaForm, this.formUtil.evidenceList);
+    this.formUtil.extractFormValuesFromCriteria(this.selectionCCriteria, this.selectionCCriteriaForm, this.formUtil.evidenceList);
+    this.formUtil.extractFormValuesFromCriteria(this.selectionDCriteria, this.selectionDCriteriaForm, this.formUtil.evidenceList);
+
+    if (this.isSatisfiedALLeo) {
+      this.formUtil.extractFormValuesFromCriteria(this.selectionALLCriteria, this.selectionALLCriteriaForm, this.formUtil.evidenceList);
+    }
+
+    /* extract reduction criteria */
+    this.formUtil.extractFormValuesFromCriteria(this.reductionCriteria, this.reductionCriteriaForm, this.formUtil.evidenceList);
 
     // make full criterion list
     this.fullCriterionList = this.makeFullCriterionListEO(this.exclusionACriteria,
@@ -556,9 +540,9 @@ export class DataService {
     } else if (this.utilities.isEO && this.APIService.version === 'v1') {
       var filename = 'espd-response-v1' + fileSuffix;
     } else if (this.utilities.isCA && this.APIService.version === 'v2') {
-      var filename = 'espd-request-v2.xml' + fileSuffix;
+      var filename = 'espd-request-v2' + fileSuffix;
     } else if (this.utilities.isEO && this.APIService.version === 'v2') {
-      var filename = 'espd-response-v2.xml' + fileSuffix;
+      var filename = 'espd-response-v2' + fileSuffix;
     }
 
     saveAs(blob, filename);
@@ -730,6 +714,18 @@ export class DataService {
 
           // create requirementGroup template objects required for multiple instances (cardinalities) function
           this.formUtil.createTemplateReqGroups(res.fullCriterionList);
+
+          /* find if CRITERION.SELECTION.ALL_SATISFIED exists */
+          this.utilities.satisfiedALLCriterionExists = this.utilities
+            .findCriterion(this.selectionALLCriteria, '7e7db838-eeac-46d9-ab39-42927486f22d');
+
+          if (this.utilities.satisfiedALLCriterionExists) {
+            this.utilities.isSatisfiedALL = true;
+            this.utilities.isAtoD = false;
+          } else {
+            this.utilities.isSatisfiedALL = false;
+            this.utilities.isAtoD = true;
+          }
 
 
           console.log(res);
@@ -1298,12 +1294,6 @@ export class DataService {
         this.langISOCodes[x.name] = x.code;
         return x;
       });
-      // console.log('LANG TEMPLATE: ');
-      // console.log(this.langTemplate);
-      // console.log('LANG_ISO: ');
-      // console.log(this.langISOCodes);
-      // console.log('RESPONSE: ');
-      // console.log(res);
 
 
     })
