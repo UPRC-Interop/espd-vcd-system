@@ -16,6 +16,7 @@
 package eu.esens.espdvcd.retriever.criteria.resource;
 
 import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
+import eu.esens.espdvcd.codelist.enums.RequirementGroupTypeEnum;
 import eu.esens.espdvcd.codelist.enums.RequirementTypeEnum;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.SelectableCriterion;
@@ -38,12 +39,10 @@ import java.util.stream.Collectors;
 /**
  * @author konstantinos Raptis
  */
-public class CriteriaTaxonomyResource implements CriteriaResource, RequirementsResource {
+abstract class CriteriaTaxonomyResource implements CriteriaResource, RequirementsResource {
 
     private static final Logger LOGGER = Logger.getLogger(CriteriaTaxonomyResource.class.getName());
 
-    private static final String CRITERIA_TAXONOMY_RESOURCE = "/templates/v2_regulated/ESPD-CriteriaTaxonomy-REGULATED-V2.0.2.xlsx";
-    // private static final String CRITERIA_TAXONOMY_RESOURCE = "/templates/v2_regulated/ESPD-CriteriaTaxonomy-REGULATED-V2.0.2-FIXED.xlsx";
     private final static int nameColumnIndex = 17;
     private final static int descriptionColumnIndex = 18;
     private final static int cardinalityColumnIndex = 20;
@@ -51,15 +50,15 @@ public class CriteriaTaxonomyResource implements CriteriaResource, RequirementsR
     private final static int elementUUIDColumnIndex = 22;
     private final static int elementCodeColumnIndex = 23;
 
-    private List<SelectableCriterion> criterionList;
-    private Map<String, List<RequirementGroup>> rgMap;
+    protected List<SelectableCriterion> criterionList;
+    protected Map<String, List<RequirementGroup>> rgMap;
 
-    public CriteriaTaxonomyResource() {
+    CriteriaTaxonomyResource(String path) {
         rgMap = new HashMap<>();
 
         try {
 
-            Workbook workbook = new XSSFWorkbook(CriteriaTaxonomyResource.class.getResourceAsStream(CRITERIA_TAXONOMY_RESOURCE));
+            Workbook workbook = new XSSFWorkbook(CriteriaTaxonomyResource.class.getResourceAsStream(path));
             criterionList = new ArrayList<>(65);
             workbook.forEach(sheet -> criterionList.addAll(readDataSheet(sheet)));
             workbook.close();
@@ -73,14 +72,15 @@ public class CriteriaTaxonomyResource implements CriteriaResource, RequirementsR
     }
 
     private List<SelectableCriterion> readDataSheet(Sheet dataSheet) {
-
         // The criteria Column is always the second one
         int criteriaColumn = 1;
 
         List<SelectableCriterion> crList = new ArrayList<>();
         Iterator<Row> it = dataSheet.iterator();
+
         while (it.hasNext()) {
             Row r = it.next();
+
             if ("{CRITERION".equals(getCellStringValueOrNull(r, criteriaColumn))) {
                 // we found row start. Now we need row end
                 boolean foundEnd = false;
@@ -96,7 +96,7 @@ public class CriteriaTaxonomyResource implements CriteriaResource, RequirementsR
                         sc.setTypeCode(getRowCode(r));
                         sc.setSelected(true);
                         sc.getRequirementGroups().addAll(
-                                extractQuestionGroups(dataSheet, r.getRowNum() + 1,
+                                extractAllRequirementGroupType(dataSheet, r.getRowNum() + 1,
                                         r2.getRowNum() + 1, criteriaColumn + 1));
                         crList.add(sc);
                     }
@@ -106,28 +106,35 @@ public class CriteriaTaxonomyResource implements CriteriaResource, RequirementsR
         return crList;
     }
 
-    private List<RequirementGroup> extractQuestionGroups(Sheet d, int startRowNum, int endRowNum,
-                                                         int colNum) {
+    private List<RequirementGroup> extractAllRequirementGroupType(Sheet d, int startRowNum, int endRowNum, int colNum) {
         List<RequirementGroup> rgList = new ArrayList<>();
 
         for (int i = startRowNum; i < endRowNum; i++) {
 
             if ("{QUESTION_GROUP".equals(getCellStringValueOrNull(d.getRow(i), colNum)) ||
-                    "{QUESTION_SUBGROUP".equals(getCellStringValueOrNull(d.getRow(i), colNum))) {
+                    "{QUESTION_SUBGROUP".equals(getCellStringValueOrNull(d.getRow(i), colNum)) ||
+                    "{REQUIREMENT_GROUP".equals(getCellStringValueOrNull(d.getRow(i), colNum)) ||
+                    "{REQUIREMENT_SUBGROUP".equals(getCellStringValueOrNull(d.getRow(i), colNum))) {
+
                 int sRow = i;
                 for (int j = i + 1; j < endRowNum; j++) {
 
-                    if ("QUESTION_GROUP}".equals(getCellStringValueOrNull(d.getRow(j), colNum)) ||
-                            "QUESTION_SUBGROUP}".equals(getCellStringValueOrNull(d.getRow(j), colNum))) {
+                    String cellValue = getCellStringValueOrNull(d.getRow(j), colNum);
+
+                    if ("QUESTION_GROUP}".equals(cellValue) ||
+                            "QUESTION_SUBGROUP}".equals(cellValue) ||
+                            "REQUIREMENT_GROUP}".equals(cellValue) ||
+                            "REQUIREMENT_SUBGROUP}".equals(cellValue)) {
+
                         i = j;
                         RequirementGroup rg = new RequirementGroup(getRowUUID(d.getRow(sRow)));
                         rg.setCondition(getRowCode(d.getRow(sRow)));
+                        rg.setType(extractRequirementGroupType(cellValue));
                         // setting cardinality here
-                        CardinalityEnum cardinality = CardinalityUtils.extractCardinality(getRowCardinality(d.getRow(sRow)));
-                        rg.setMandatory(cardinality.isMandatory());
-                        rg.setMultiple(cardinality.isMultiple());
-                        rg.getRequirementGroups().addAll(extractQuestionGroups(d, sRow, (j), colNum + 1));
-                        rg.getRequirements().addAll(extractQuestions(d, sRow, j, colNum + 1));
+                        CardinalityEnum c = CardinalityUtils.extractCardinality(getRowCardinality(d.getRow(sRow)));
+                        applyCardinality(rg, c);
+                        rg.getRequirementGroups().addAll(extractAllRequirementGroupType(d, sRow, (j), colNum + 1));
+                        rg.getRequirements().addAll(extractAllRequirementType(d, sRow, j, colNum + 1));
                         rgList.add(rg);
                         break;
                     }
@@ -137,23 +144,102 @@ public class CriteriaTaxonomyResource implements CriteriaResource, RequirementsR
         return rgList;
     }
 
-    private List<Requirement> extractQuestions(Sheet d, int rowNum, int endRowNum, int colNum) {
+    private Requirement createResponseRequirementOfType(ResponseTypeEnum responseType, String desc, RequirementTypeEnum type) {
+        Requirement r = new ResponseRequirement(
+                UUID.randomUUID().toString(),
+                responseType,
+                desc
+        );
+        r.setType(type);
+        return r;
+    }
 
+    /**
+     * Apply given Cardinality to given Requirement
+     *
+     * @param r The Requirement
+     * @param c The Cardinality
+     */
+    private void applyCardinality(Requirement r, CardinalityEnum c) {
+        r.setMandatory(c.isMandatory());
+        r.setMultiple(c.isMultiple());
+    }
+
+    /**
+     * Apply given Cardinality to given RequirementGroup
+     *
+     * @param rg The RequirementGroup
+     * @param c  The Cardinality
+     */
+    private void applyCardinality(RequirementGroup rg, CardinalityEnum c) {
+        rg.setMandatory(c.isMandatory());
+        rg.setMultiple(c.isMultiple());
+    }
+
+    private RequirementGroupTypeEnum extractRequirementGroupType(String value) {
+
+        switch (value) {
+
+            case "QUESTION_GROUP}":
+                return RequirementGroupTypeEnum.QUESTION_GROUP;
+
+            case "QUESTION_SUBGROUP}":
+                return RequirementGroupTypeEnum.QUESTION_SUBGROUP;
+
+            case "REQUIREMENT_GROUP}":
+                return RequirementGroupTypeEnum.REQUIREMENT_GROUP;
+
+            case "REQUIREMENT_SUBGROUP}":
+                return RequirementGroupTypeEnum.REQUIREMENT_SUBGROUP;
+
+            default:
+                return null;
+        }
+
+    }
+
+    private RequirementTypeEnum extractRequirementType(String value) {
+
+        switch (value) {
+
+            case "{QUESTION}":
+                return RequirementTypeEnum.QUESTION;
+
+            case "{REQUIREMENT}":
+                return RequirementTypeEnum.REQUIREMENT;
+
+            case "{CAPTION}":
+                return RequirementTypeEnum.CAPTION;
+
+            default:
+                return null;
+        }
+
+    }
+
+    private List<Requirement> extractAllRequirementType(Sheet d, int rowNum, int endRowNum, int colNum) {
         List<Requirement> rList = new ArrayList<>();
+
         for (int i = rowNum; i < endRowNum; i++) {
-            if ("{QUESTION}".equals(getCellStringValueOrNull(d.getRow(i), colNum))) {
-                Requirement r = new ResponseRequirement(
-                        UUID.randomUUID().toString(),
+
+            String cellValue = getCellStringValueOrNull(d.getRow(i), colNum);
+
+            if ("{QUESTION}".equals(cellValue) ||
+                    "{REQUIREMENT}".equals(cellValue) ||
+                    "{CAPTION}".equals(cellValue)) {
+
+                Requirement r = createResponseRequirementOfType(
                         ResponseTypeEnum.valueOf(getRowResponseType(d.getRow(i))),
-                        getRowDescription(d.getRow(i)) //+ "(at " + i + "," + colNum + ")"
+                        getRowDescription(d.getRow(i)), //+ "(at " + i + "," + colNum + ")"
+                        extractRequirementType(cellValue)
                 );
-                r.setType(RequirementTypeEnum.QUESTION);
+
                 // setting cardinality here
-                CardinalityEnum cardinality = CardinalityUtils.extractCardinality(getRowCardinality(d.getRow(i)));
-                r.setMandatory(cardinality.isMandatory());
-                r.setMultiple(cardinality.isMultiple());
+                CardinalityEnum c = CardinalityUtils.extractCardinality(getRowCardinality(d.getRow(i)));
+                applyCardinality(r, c);
                 rList.add(r);
             }
+
         }
         return rList;
     }
@@ -205,36 +291,6 @@ public class CriteriaTaxonomyResource implements CriteriaResource, RequirementsR
         }
 
         return null;
-    }
-
-    public void applyCardinalities(SelectableCriterion sc) {
-        // find root RequirementGroup/s of that criterion from taxonomy
-        final List<RequirementGroup> rgListFromTaxonomy = rgMap.get(sc.getID());
-        // apply cardinalities to all root RequirementGroup/s
-        sc.getRequirementGroups().forEach(rg -> applyCardinalities(
-                rgListFromTaxonomy.stream()
-                        .filter(rgFromTaxonomy -> rg.getID().equals(rgFromTaxonomy.getID()))
-                        .findFirst().orElse(null) // from
-                , rg));                                 //  to
-    }
-
-    public void applyCardinalities(RequirementGroup from, RequirementGroup to) {
-
-        if (from != null && to != null) {
-
-            // do the same for sub-RequirementGroup/s
-            to.getRequirementGroups().forEach(rg -> applyCardinalities(
-                    from.getRequirementGroups().stream()
-                            .filter(rgFromTaxonomy -> rg.getID().equals(rgFromTaxonomy.getID()))
-                            .findFirst().orElse(null) // from
-                    , rg));                                 //  to
-
-            // do the same for requirements
-            // to.getRequirements().forEach(rq -> from.getRequirements().forEach());
-
-            to.setMultiple(from.isMultiple());
-            to.setMandatory(from.isMandatory());
-        }
     }
 
     @Override

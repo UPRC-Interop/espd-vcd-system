@@ -38,7 +38,7 @@ public class CriteriaExtractorImpl implements CriteriaExtractor {
     private List<LegislationResource> lResourceList;
     private List<RequirementsResource> rgResourceList;
 
-    private CriteriaTaxonomyResource taxonomyResource;
+    private RegulatedCriteriaTaxonomyResource taxonomyResource;
 
     private List<SelectableCriterion> criterionList;
 
@@ -151,7 +151,7 @@ public class CriteriaExtractorImpl implements CriteriaExtractor {
 
         // lazy initialization of criterion taxonomy resource
         if (taxonomyResource == null) {
-            taxonomyResource = new CriteriaTaxonomyResource();
+            taxonomyResource = new RegulatedCriteriaTaxonomyResource();
         }
 
         criterionList.forEach(sc -> taxonomyResource.applyCardinalities(sc));

@@ -21,17 +21,23 @@ import org.junit.Test;
 
 public class CriteriaTaxonomyResourceTest {
 
-    private CriteriaTaxonomyResource r;
+    private RegulatedCriteriaTaxonomyResource regulated;
+    private SelfContainedCriteriaTaxonomyResource selfContained;
 
     @Before
     public void setUp() {
-        r = new CriteriaTaxonomyResource();
-        Assert.assertNotNull(r);
+        regulated = new RegulatedCriteriaTaxonomyResource();
+        Assert.assertNotNull(regulated);
+        selfContained = new SelfContainedCriteriaTaxonomyResource();
+        Assert.assertNotNull(selfContained);
     }
 
     @Test
     public void testGetFullList() {
-        SelectableCriterionPrinter.print(r.getCriterionList());
+        // SelectableCriterionPrinter.print(regulated.getCriterionList());
+        // SelectableCriterionPrinter.print(selfContained.getCriterionList());
+        Assert.assertTrue(regulated.getCriterionList().size() == 63);
+        Assert.assertTrue(selfContained.getCriterionList().size() == 64);
     }
 
 }
