@@ -362,7 +362,7 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
     public TenderingCriterionPropertyType extractTenderingCriterionPropertyType(Requirement rq) {
         TenderingCriterionPropertyType req = new TenderingCriterionPropertyType();
 
-        req.setTypeCode(createTypeCodeType(rq.getTypeCode().name()));
+        req.setTypeCode(createTypeCodeType(rq.getType().name()));
         req.setValueDataTypeCode(createValueDataTypeCodeType(rq.getResponseDataType().name()));
 
         req.getDescription().add(new DescriptionType());

@@ -94,7 +94,7 @@ public class ESPDRequestSchemaExtractorV2 implements SchemaExtractorV2 {
         // tbr070-013
         // FIXME (SELF-CONTAINED 2.0.2) The Regulated ESPD documents do not specify REQUIREMENTS, only QUESTIONS. The SELF-CONTAINED version does
         propertyType.setTypeCode(new TypeCodeType());
-        propertyType.getTypeCode().setValue(rq.getTypeCode().name());
+        propertyType.getTypeCode().setValue(rq.getType().name());
 
         propertyType.getTypeCode().setListID("CriterionElementType");
         propertyType.getTypeCode().setListAgencyID("EU-COM-GROW");

@@ -15,7 +15,7 @@
  */
 package eu.esens.espdvcd.model.requirement;
 
-import eu.esens.espdvcd.codelist.enums.CriterionElementTypeEnum;
+import eu.esens.espdvcd.codelist.enums.RequirementTypeEnum;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.requirement.response.Response;
 
@@ -55,9 +55,9 @@ public interface Requirement extends Serializable {
      *
      * @return
      */
-    CriterionElementTypeEnum getTypeCode();
+    RequirementTypeEnum getType();
 
-    void setTypeCode(CriterionElementTypeEnum typeCode);
+    void setType(RequirementTypeEnum type);
 
     String getDescription();
 

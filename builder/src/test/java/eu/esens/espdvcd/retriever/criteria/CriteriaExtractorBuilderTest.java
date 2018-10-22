@@ -15,7 +15,7 @@
  */
 package eu.esens.espdvcd.retriever.criteria;
 
-import eu.esens.espdvcd.retriever.criteria.resource.CriteriaTaxonomyResource;
+import eu.esens.espdvcd.retriever.criteria.resource.RegulatedCriteriaTaxonomyResource;
 import eu.esens.espdvcd.retriever.criteria.resource.ECertisResource;
 import eu.esens.espdvcd.retriever.criteria.resource.ESPDArtefactResource;
 import eu.esens.espdvcd.retriever.criteria.resource.SelectableCriterionPrinter;
@@ -38,7 +38,7 @@ public class CriteriaExtractorBuilderTest {
     @Test
     public void testBuilderWithAllResources() throws Exception {
 
-        CriteriaTaxonomyResource r1 = new CriteriaTaxonomyResource();
+        RegulatedCriteriaTaxonomyResource r1 = new RegulatedCriteriaTaxonomyResource();
         ECertisResource r2 = new ECertisResource();
         ESPDArtefactResource r3 = new ESPDArtefactResource(EDMVersion.V2);
 
