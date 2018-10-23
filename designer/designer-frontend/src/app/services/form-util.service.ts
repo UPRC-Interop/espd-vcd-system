@@ -443,14 +443,14 @@ export class FormUtilService {
                 r.response.percentage || r.response.evidenceURL ||
                 r.response.evidenceURLCode || r.response.countryCode ||
                 r.response.period || r.response.quantity || r.response.year || r.response.url || r.response.identifier || '',
-              disabled: (r.typeCode === 'REQUIREMENT' || r.typeCode === 'CAPTION') && this.utilities.isEO
+              disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
             });
 
             // form reset in case of new espd
             if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
               group[r.uuid] = new FormControl({
                 value: '',
-                disabled: (r.typeCode === 'REQUIREMENT' || r.typeCode === 'CAPTION') && this.utilities.isEO
+                disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
               });
             }
 
@@ -468,12 +468,12 @@ export class FormUtilService {
               if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
                 group[r.uuid] = new FormControl({
                   value: '',
-                  disabled: (r.typeCode === 'REQUIREMENT' || r.typeCode === 'CAPTION') && this.utilities.isEO
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
                 });
               } else {
                 group[r.uuid] = new FormControl({
                   value: r.response.date,
-                  disabled: (r.typeCode === 'REQUIREMENT' || r.typeCode === 'CAPTION') && this.utilities.isEO
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
                 });
               }
             }
@@ -483,36 +483,36 @@ export class FormUtilService {
               if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
                 group[r.uuid + 'startDate'] = new FormControl({
                   value: '',
-                  disabled: (r.typeCode === 'REQUIREMENT' || r.typeCode === 'CAPTION') && this.utilities.isEO
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
                 });
               } else {
                 group[r.uuid + 'startDate'] = new FormControl({
                   value: r.response.startDate,
-                  disabled: (r.typeCode === 'REQUIREMENT' || r.typeCode === 'CAPTION') && this.utilities.isEO
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
                 });
               }
             } else if (r.response.startDate === null) {
               group[r.uuid + 'startDate'] = new FormControl({
                 value: '',
-                disabled: (r.typeCode === 'REQUIREMENT' || r.typeCode === 'CAPTION') && this.utilities.isEO
+                disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
               });
             }
             if (r.response.endDate) {
               if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
                 group[r.uuid + 'endDate'] = new FormControl({
                   value: '',
-                  disabled: (r.typeCode === 'REQUIREMENT' || r.typeCode === 'CAPTION') && this.utilities.isEO
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
                 });
               } else {
                 group[r.uuid + 'endDate'] = new FormControl({
                   value: r.response.endDate,
-                  disabled: (r.typeCode === 'REQUIREMENT' || r.typeCode === 'CAPTION') && this.utilities.isEO
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
                 });
               }
             } else if (r.response.endDate === null) {
               group[r.uuid + 'endDate'] = new FormControl({
                 value: '',
-                disabled: (r.typeCode === 'REQUIREMENT' || r.typeCode === 'CAPTION') && this.utilities.isEO
+                disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
               });
             }
 
@@ -530,29 +530,29 @@ export class FormUtilService {
 
               group[r.uuid + 'evidenceUrl'] = new FormControl({
                 value: evi.evidenceURL,
-                disabled: (r.typeCode === 'REQUIREMENT' || r.typeCode === 'CAPTION') && this.utilities.isEO
+                disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
               });
               group[r.uuid + 'evidenceCode'] = new FormControl({
                 value: evi.description,
-                disabled: (r.typeCode === 'REQUIREMENT' || r.typeCode === 'CAPTION') && this.utilities.isEO
+                disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
               });
               group[r.uuid + 'evidenceIssuer'] = new FormControl({
                 value: evi.evidenceIssuer.name,
-                disabled: (r.typeCode === 'REQUIREMENT' || r.typeCode === 'CAPTION') && this.utilities.isEO
+                disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
               });
 
               if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
                 group[r.uuid + 'evidenceUrl'] = new FormControl({
                   value: '',
-                  disabled: (r.typeCode === 'REQUIREMENT' || r.typeCode === 'CAPTION') && this.utilities.isEO
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
                 });
                 group[r.uuid + 'evidenceCode'] = new FormControl({
                   value: '',
-                  disabled: (r.typeCode === 'REQUIREMENT' || r.typeCode === 'CAPTION') && this.utilities.isEO
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
                 });
                 group[r.uuid + 'evidenceIssuer'] = new FormControl({
                   value: '',
-                  disabled: (r.typeCode === 'REQUIREMENT' || r.typeCode === 'CAPTION') && this.utilities.isEO
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
                 });
               }
             }
@@ -561,24 +561,24 @@ export class FormUtilService {
               if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
                 group[r.uuid] = new FormControl({
                   value: '',
-                  disabled: (r.typeCode === 'REQUIREMENT' || r.typeCode === 'CAPTION') && this.utilities.isEO
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
                 });
               } else {
                 group[r.uuid] = new FormControl({
                   value: r.response.amount,
-                    disabled: (r.typeCode === 'REQUIREMENT' || r.typeCode === 'CAPTION') && this.utilities.isEO
+                    disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
                 });
               }
               if (r.response.currency !== null && r.response.currency !== undefined) {
                 if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
                   group[r.uuid + 'currency'] = new FormControl({
                     value: '',
-                    disabled: (r.typeCode === 'REQUIREMENT' || r.typeCode === 'CAPTION') && this.utilities.isEO
+                    disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
                   });
                 } else {
                   group[r.uuid + 'currency'] = new FormControl({
                     value: r.response.currency,
-                      disabled: (r.typeCode === 'REQUIREMENT' || r.typeCode === 'CAPTION') && this.utilities.isEO
+                      disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
                   });
                 }
               }
@@ -587,7 +587,7 @@ export class FormUtilService {
             if (r.response.currency === null || r.response.amount === '0') {
               group[r.uuid + 'currency'] = new FormControl({
                 value: '',
-                disabled: (r.typeCode === 'REQUIREMENT' || r.typeCode === 'CAPTION') && this.utilities.isEO
+                disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
               });
             }
 
@@ -603,7 +603,7 @@ export class FormUtilService {
               if (r.responseDataType === 'AMOUNT') {
                 group[r.uuid + 'currency'] = new FormControl({
                   value: '',
-                  disabled: (r.typeCode === 'REQUIREMENT' || r.typeCode === 'CAPTION') && this.utilities.isEO
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
                 });
               }
 
@@ -612,25 +612,25 @@ export class FormUtilService {
               if (r.responseDataType === 'PERIOD' && this.APIService.version === 'v2') {
                 group[r.uuid + 'startDate'] = new FormControl({
                   value: '',
-                  disabled: (r.typeCode === 'REQUIREMENT' || r.typeCode === 'CAPTION') && this.utilities.isEO
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
                 });
                 group[r.uuid + 'endDate'] = new FormControl({
                   value: '',
-                  disabled: (r.typeCode === 'REQUIREMENT' || r.typeCode === 'CAPTION') && this.utilities.isEO
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
                 });
               }
               if (r.responseDataType === 'EVIDENCE_IDENTIFIER') {
                 group[r.uuid + 'evidenceUrl'] = new FormControl({
                   value: '',
-                  disabled: (r.typeCode === 'REQUIREMENT' || r.typeCode === 'CAPTION') && this.utilities.isEO
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
                 });
                 group[r.uuid + 'evidenceCode'] = new FormControl({
                   value: '',
-                  disabled: (r.typeCode === 'REQUIREMENT' || r.typeCode === 'CAPTION') && this.utilities.isEO
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
                 });
                 group[r.uuid + 'evidenceIssuer'] = new FormControl({
                   value: '',
-                  disabled: (r.typeCode === 'REQUIREMENT' || r.typeCode === 'CAPTION') && this.utilities.isEO
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
                 });
               }
             }

@@ -20,7 +20,7 @@
 
 
   <!--SELF-CONTAINED: Hide the QUESTION fields if the user is a CA making a Request. Render only the REQUIREMENT and CAPTION fields.-->
-  <div [ngSwitch]="req.responseDataType" [hidden]="this.utilities.isCA && req.typeCode === 'QUESTION'">
+  <div [ngSwitch]="req.responseDataType" [hidden]="this.utilities.isCA && req.type === 'QUESTION'">
 
     <mat-form-field *ngSwitchDefault>
       <label [attr.for]="req.uuid">{{req.description}}</label>
