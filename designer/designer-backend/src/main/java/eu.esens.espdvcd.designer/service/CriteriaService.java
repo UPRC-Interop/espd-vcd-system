@@ -35,12 +35,23 @@ public interface CriteriaService {
     default List<SelectableCriterion> getFilteredCriteriaList(String criteriaType) throws RetrieverException, IllegalArgumentException {
         return getCriteria().stream()
                 .filter(cr -> cr.getTypeCode().matches(CriteriaType.valueOf(criteriaType).getRegex()))
+                .sorted(this::fixSatisfiesAllOrder)
                 .collect(Collectors.toList());
     }
 
     default List<SelectableCriterion> getFilteredTranslatedCriteriaList(String criteriaType, String lang) throws RetrieverException, IllegalArgumentException {
         return getTranslatedCriteria(lang).stream()
                 .filter(cr -> cr.getTypeCode().matches(CriteriaType.valueOf(criteriaType).getRegex()))
+                .sorted(this::fixSatisfiesAllOrder)
                 .collect(Collectors.toList());
+    }
+
+    default int fixSatisfiesAllOrder(SelectableCriterion cr1, SelectableCriterion cr2) {
+        if (cr1.getTypeCode().equals("CRITERION.SELECTION.ALL_SATISFIED"))
+            return -1;
+        else if (cr2.getTypeCode().equals("CRITERION.SELECTION.ALL_SATISFIED"))
+            return 1;
+        else
+            return 0;
     }
 }

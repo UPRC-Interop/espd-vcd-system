@@ -41,7 +41,7 @@ public class CriteriaExtractorBuilder {
     private EDMVersion version;
 
     private ESPDArtefactResource artefactResource;
-    private CriteriaTaxonomyResource taxonomyResource;
+    private RegulatedCriteriaTaxonomyResource taxonomyResource;
     private ECertisResource eCertisResource;
 
     /**
@@ -257,7 +257,7 @@ public class CriteriaExtractorBuilder {
     private void initCriteriaTaxonomyResource() {
 
         if (taxonomyResource == null) {
-            taxonomyResource = new CriteriaTaxonomyResource();
+            taxonomyResource = new RegulatedCriteriaTaxonomyResource();
             LOGGER.log(Level.INFO, "Criteria Taxonomy resource initialized");
         }
     }

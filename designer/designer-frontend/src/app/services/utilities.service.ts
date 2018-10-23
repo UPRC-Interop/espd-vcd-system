@@ -17,6 +17,7 @@
 import {Injectable} from '@angular/core';
 import {Moment} from 'moment';
 import * as moment from 'moment';
+import {SelectionCriteria} from '../model/selectionCriteria.model';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,9 @@ export class UtilitiesService {
   start = false;
   isReset = false;
   isStarted = false;
+  satisfiedALLCriterionExists = false;
+  isSatisfiedALL = true;
+  isAtoD = false;
 
   constructor() {
   }
@@ -58,8 +62,22 @@ export class UtilitiesService {
     }
   }
 
+  findCriterion(criteria: SelectionCriteria[], id: string): boolean {
+
+    const criterionFound = criteria.find((cr) => {
+      return cr.id === id;
+    });
+
+    if (criterionFound) {
+      return true;
+    } else if (criterionFound === undefined) {
+      return false;
+    }
+
+  }
+
   setAllFields(obj: Object, val: any) {
-    Object.keys(obj).forEach(function(k) {
+    Object.keys(obj).forEach(function (k) {
       obj[k] = val;
     });
   }

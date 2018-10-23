@@ -40,7 +40,7 @@ public class ECertisResourceTest {
     @Test
     public void testECertisCriterionResourceWithInitialIDList() throws Exception {
 
-        CriteriaTaxonomyResource taxonomyResource = new CriteriaTaxonomyResource();
+        CriteriaTaxonomyResource taxonomyResource = new RegulatedCriteriaTaxonomyResource();
 
         ECertisResource eCertisResource = new ECertisResource(taxonomyResource
                 .getCriterionList()

@@ -570,7 +570,7 @@ public interface ModelExtractor {
 
         Requirement r = new ResponseRequirement(
                 theId,
-                CriterionElementTypeEnum.valueOf(pt.getTypeCode().getValue()),
+                RequirementTypeEnum.valueOf(pt.getTypeCode().getValue()),
                 ResponseTypeEnum.valueOf(pt.getValueDataTypeCode().getValue()),
                 theDescription
         );
