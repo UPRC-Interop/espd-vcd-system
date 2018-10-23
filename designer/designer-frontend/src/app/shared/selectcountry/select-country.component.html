@@ -1,0 +1,6 @@
+<mat-form-field>
+  <mat-select name="EOCountry" (change)="changeClient($event.value)" placeholder="{{descriptionPropertyKey}}" [disabled]="!shouldEnable">
+    <mat-option>None</mat-option>
+    <mat-option *ngFor="let country of countries" [value]="country.code">{{country.name}}</mat-option>
+  </mat-select>
+</mat-form-field>

@@ -395,6 +395,7 @@
    "espd.validator.rangelength": "Geben Sie bitte einen Wert ein, der zwischen {0} und {1} Zeichen lang ist.",
    "espd.validator.remote": "Dieses Feld bitte korrigieren.",
    "espd.validator.required": "Dieses Feld ist erforderlich.",
+   "espd.validator.numberOjs": "Dieses Feld muss einer gültigen Bekanntmachungsnummer entsprechen.",
    "espd.validator.url": "Geben Sie bitte eine gültige URL ein.",
    "espd.gui.view.ca": "Ansicht: (CA)",
    "espd.gui.view.eo": "Ansicht: (EO)",

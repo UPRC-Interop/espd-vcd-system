@@ -17,12 +17,12 @@
 -->
 
   <app-welcome></app-welcome>
-  <form  #f="ngForm">
+  <form [formGroup]="myForm" (ngSubmit)="onStartSubmit()">
 
     <mat-card>
       <mat-card-title translate>espd.init.who.are.you</mat-card-title>
       <mat-card-content>
-        <mat-radio-group name="chooseRole" ngModel>
+        <mat-radio-group name="chooseRole" formControlName="role">
           <mat-radio-button color="primary" name="role" value="CA" (change)="handleRole(CA)" #CA>{{'espd.init.i.am.ca' | translate}}
           </mat-radio-button>
           <mat-radio-button color="primary" name="role" value="EO" (change)="handleRole(EO)" #EO translate>{{'espd.init.i.am.eop' | translate}}
@@ -35,9 +35,27 @@
       <mat-card-content>
         <div class="wrapper">
           <mat-form-field class="width">
-            <input matInput name="noticeNumber" placeholder="{{'espd.init.ted.reception.id.placeholder' | translate}}" required ngModel>
+            <input matInput name="noticeNumber" formControlName="numberOjs" placeholder="{{'espd.init.ted.reception.id.placeholder' | translate}}">
+            <!--<input-validation-error [formControl]="numberOjsControl"></input-validation-error>-->
+            <mat-error *ngIf="myForm.get('numberOjs').invalid && myForm.get('numberOjs').dirty">
+              <input-validation-error [formControlErrors]="myForm.get('numberOjs').errors"></input-validation-error>
+            </mat-error>
+
+            <!--<mat-error *ngFor="let er of numberOjsControl.errors">-->
+              <!--test-->
+            <!--</mat-error>-->
+
+            <!--<mat-error *ngIf="numberOjsControl.hasError('numberOjs')">-->
+              <!--Number OJS Invalid-->
+            <!--</mat-error>-->
+            <!--<mat-error *ngIf="numberOjsControl.hasError('required')">-->
+              <!--Number OJS required-->
+            <!--</mat-error>-->
+            <!--<mat-error>-->
+             <!--Empty-->
+            <!--</mat-error>-->
           </mat-form-field>
-          <mat-radio-group name="caOptions" ngModel>
+          <mat-radio-group name="caOptions" formControlName="caOptions">
             <mat-radio-button color="primary"
                               name="caOption"
                               value="createNewESPD"
@@ -63,7 +81,7 @@
 
       <mat-card-title>Select Version</mat-card-title>
       <mat-card-content>
-        <mat-radio-group name="versions" ngModel>
+        <mat-radio-group name="versions" formControlName="caVersion">
           <mat-radio-button color="primary"
                             name="version"
                             value="v1"
@@ -81,7 +99,7 @@
       <mat-card-title translate>espd.init.where.are.you.from.ca</mat-card-title>
       <mat-card-content>
         <mat-form-field>
-          <mat-select name="CACountry" placeholder="{{'espd.init.select.country' | translate}}" ngModel>
+          <mat-select name="CACountry" placeholder="{{'espd.init.select.country' | translate}}" formControlName="caCountry">
             <mat-option>None</mat-option>
             <mat-option *ngFor="let country of countries" [value]="country.code">{{country.name}}</mat-option>
           </mat-select>
@@ -104,7 +122,7 @@
     <mat-card *ngIf="isEO">
       <mat-card-title translate>espd.init.what.you.do</mat-card-title>
       <mat-card-content>
-        <mat-radio-group name="eoOptions" ngModel>
+        <mat-radio-group name="eoOptions" formControlName="eoOptions">
           <mat-radio-button color="primary"
                             name="eoOption"
                             value="createResponse"
@@ -141,7 +159,7 @@
 
       <mat-card-title>Select Version</mat-card-title>
       <mat-card-content>
-        <mat-radio-group name="versions" ngModel>
+        <mat-radio-group name="versions" formControlName="eoVersion">
           <mat-radio-button color="primary"
                             name="version"
                             value="v1"
@@ -159,7 +177,7 @@
       <mat-card-title translate>espd.init.where.are.you.from.eo</mat-card-title>
       <mat-card-content>
         <mat-form-field>
-          <mat-select name="EOCountry" placeholder="{{'espd.init.select.country' | translate}}" ngModel>
+          <mat-select name="EOCountry" placeholder="{{'espd.init.select.country' | translate}}" formControlCountry="EOCountry">
             <mat-option>None</mat-option>
             <mat-option *ngFor="let country of countries" [value]="country.code">{{country.name}}</mat-option>
           </mat-select>
@@ -175,7 +193,7 @@
       </mat-card>
     </ng-container>
 
-    <button type="button" mat-raised-button color="primary" (click)="onStartSubmit(f)"  matStepperNext>{{'espd.gui.next' | translate}}</button>
+    <button type="submit" mat-raised-button color="primary"  matStepperNext>{{'espd.gui.next' | translate}}</button>
 
   </form>
 

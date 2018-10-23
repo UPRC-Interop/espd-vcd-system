@@ -49,6 +49,11 @@ import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material'
  /* translations */
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { SelectCountryComponent } from './shared/selectcountry/select-country.component';
+import {LoggerModule, NGXLogger, NgxLoggerLevel} from "ngx-logger";
+import { NumberOjsDirective } from './directives/number-ojs/number-ojs.directive';
+import { InputValidationErrorComponent } from './shared/input-validation-error/input-validation-error.component';
+import { ValidationErrorDirective } from './directives/validation-error/validation-error.directive';
 
 @NgModule({
   declarations: [
@@ -67,7 +72,11 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
     RequirementComponent,
     RootComponent,
     CriterionComponent,
-    FinishEoComponent
+    FinishEoComponent,
+    SelectCountryComponent,
+    NumberOjsDirective,
+    InputValidationErrorComponent,
+    ValidationErrorDirective
   ],
   imports: [
     BrowserModule,
@@ -78,6 +87,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
     ReactiveFormsModule,
     AppRoutingModule,
     MatMomentDateModule,
+    LoggerModule.forRoot({serverLoggingUrl: '/api/logs', level: NgxLoggerLevel.DEBUG, serverLogLevel: NgxLoggerLevel.ERROR}),
     TranslateModule.forRoot({
       loader : {
         provide: TranslateLoader,
@@ -86,10 +96,11 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
       }
     })
   ],
-  providers: [ApicallService, DataService,
+  providers: [ApicallService, DataService,NGXLogger,
     {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
     {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
     {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS}],
+
   bootstrap: [AppComponent]
 })
 export class AppModule {

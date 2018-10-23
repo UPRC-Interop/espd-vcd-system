@@ -15,7 +15,7 @@
 ///
 
 import {Component, OnInit} from '@angular/core';
-import {FormControl, NgForm} from '@angular/forms/forms';
+import {FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 import {ApicallService} from '../services/apicall.service';
 import {DataService} from '../services/data.service';
 import {Country} from '../model/country.model';
@@ -24,9 +24,17 @@ import {Cadetails} from '../model/caDetails.model';
 import {EoDetails} from '../model/eoDetails.model';
 import {PostalAddress} from '../model/postalAddress.model';
 import {ContactingDetails} from '../model/contactingDetails.model';
+import {NumberOjs} from "../validation/number-ojs/number-ojs";
+import {TranslatePipe} from "@ngx-translate/core";
+import {NGXLogger} from "ngx-logger";
+import {logger} from "codelyzer/util/logger";
 
 // import {ProcedureType} from "../model/procedureType.model";
 
+export interface Animal {
+  name: string;
+  sound: string;
+}
 
 @Component({
   selector: 'app-start',
@@ -45,13 +53,29 @@ export class StartComponent implements OnInit {
   isCreateResponse = false;
   fileToUpload: File[] = [];
   reset = false;
+  myForm: FormGroup;
 
   // procedureTypes:ProcedureType[];
 
-  constructor(public dataService: DataService, private APIService: ApicallService, public utilities: UtilitiesService) {
+  constructor(public dataService: DataService, private APIService: ApicallService, public utilities: UtilitiesService, public logger: NGXLogger) {
   }
 
   ngOnInit() {
+
+    this.myForm = new FormGroup({
+      'role': new FormControl(null, Validators.required),
+      'numberOjs': new FormControl(null, [Validators.required ,NumberOjs()]),
+      'caOptions': new FormControl(null, Validators.required),
+      'caVersion': new FormControl(null, Validators.required),
+      'caCountry': new FormControl(null, Validators.required),
+      'eoOptions': new FormControl(null, Validators.required),
+      'eoVersion': new FormControl(null, Validators.required),
+    });
+
+    this.myForm.get('caOptions').valueChanges.subscribe(value => {
+      this.logger.info(`${value} for caOptions changed`);
+    })
+
     this.dataService.getCountries()
       .then(res => {
         this.countries = res;
@@ -139,7 +163,10 @@ export class StartComponent implements OnInit {
     }
   }
 
-  onStartSubmit(form: NgForm) {
+  onStartSubmit() {
+
+    console.log(this.myForm);
+    const role = this.myForm.get('role').value;
     // console.log(form);
     // form and model reset in case of start
     this.utilities.isStarted = true;
@@ -149,15 +176,15 @@ export class StartComponent implements OnInit {
     // CA reuses ESPDRequest
     if (this.isCA) {
       const role = 'CA';
-      this.dataService.ReuseESPD(this.fileToUpload, form, role);
+      //this.dataService.ReuseESPD(this.fileToUpload, form, role);
     } else if (this.isEO) {
       const role = 'EO';
-      this.dataService.ReuseESPD(this.fileToUpload, form, role);
+      //this.dataService.ReuseESPD(this.fileToUpload, form, role);
     }
-
+    //this.dataService.ReuseESPD(this.fileToUpload, form, role);
 
     // Start New ESPD
-    this.dataService.startESPD(form);
+    // this.dataService.startESPD(form);
 
 
   }

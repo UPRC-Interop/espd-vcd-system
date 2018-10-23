@@ -14,13 +14,12 @@
 /// limitations under the License.
 ///
 
-import {Component, OnInit, OnChanges, SimpleChanges, Input} from '@angular/core';
+import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {ProcedureType} from '../model/procedureType.model';
 import {Country} from '../model/country.model';
-import {NgForm} from '@angular/forms/forms';
-import {EoRelatedCriterion} from '../model/eoRelatedCriterion.model';
-import {ReductionCriterion} from '../model/reductionCriterion.model';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {NumberOjs} from "../validation/number-ojs/number-ojs";
 
 @Component({
   selector: 'app-procedure',
@@ -29,6 +28,7 @@ import {ReductionCriterion} from '../model/reductionCriterion.model';
 })
 export class ProcedureComponent implements OnInit, OnChanges {
 
+  myForm: FormGroup;
   countries: Country[] = null;
   procedureTypes: ProcedureType[] = null;
   // @Input() eoRelatedCriteria: EoRelatedCriterion[];
@@ -39,6 +39,32 @@ export class ProcedureComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
+
+    this.myForm = new FormGroup({
+      'pub': new FormGroup({
+        'noticenumber': new FormControl(null, [Validators.required]),
+        'noticeNumberOJS': new FormControl(null, [Validators.required, NumberOjs()]),
+        'ojsURL': new FormControl(null, [Validators.required])
+      }),
+      'details': new FormGroup({
+        'name': new FormControl(null, [Validators.required]),
+        'id': new FormControl(null, [Validators.required]),
+        'website': new FormControl(null, [Validators.required]),
+        'city': new FormControl(null, [Validators.required]),
+        'street': new FormControl(null, [Validators.required]),
+        'postcode': new FormControl(null, [Validators.required]),
+        'contactname': new FormControl(null, [Validators.required]),
+        'telephone': new FormControl(null, [Validators.required]),
+        'faxnumber': new FormControl(null, [Validators.required]),
+        'email': new FormControl(null, [Validators.required, Validators.email]),
+        'country': new FormControl(null, [Validators.required]),
+      }),
+      'procurement': new FormGroup({
+        'title': new FormControl(null,[Validators.required]),
+        'description': new FormControl(null,[Validators.required]),
+        'fileRefNumber': new FormControl(null,[Validators.required])
+      })
+    });
 
     this.dataService.getCountries()
       .then(res => {
@@ -83,15 +109,16 @@ export class ProcedureComponent implements OnInit, OnChanges {
     console.log(this.dataService.receivedNoticeNumber);
   }
 
-  onProcedureSubmit(form: NgForm) {
+  onProcedureSubmit() {
+    console.log(this.myForm);
     // console.log(form.value);
-    this.dataService.CADetails.cacountry = form.value.CACountry;
-    this.dataService.CADetails.receivedNoticeNumber = form.value.receivedNoticeNumber;
+    // this.dataService.CADetails.cacountry = form.value.CACountry;
+    // this.dataService.CADetails.receivedNoticeNumber = form.value.receivedNoticeNumber;
     // this.dataService.CADetails.postalAddress.countryCode = form.value.CACountry;
-    this.dataService.PostalAddress.countryCode = form.value.CACountry;
-    this.dataService.CADetails.postalAddress = this.dataService.PostalAddress;
-    this.dataService.CADetails.contactingDetails = this.dataService.ContactingDetails;
-    console.log(this.dataService.CADetails);
+    // this.dataService.PostalAddress.countryCode = form.value.CACountry;
+    // this.dataService.CADetails.postalAddress = this.dataService.PostalAddress;
+    // this.dataService.CADetails.contactingDetails = this.dataService.ContactingDetails;
+    // console.log(this.dataService.CADetails);
     // this.dataService.procedureSubmit(this.eoRelatedCriteria, this.reductionCriteria);
   }
 
