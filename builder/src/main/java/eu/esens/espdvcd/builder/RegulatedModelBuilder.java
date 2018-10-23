@@ -144,7 +144,7 @@ public abstract class RegulatedModelBuilder implements ModelBuilder {
      * @return the same ModelBuilder instance for incremental creation of the
      * required object.
      */
-    abstract RegulatedModelBuilder addDefaultESPDCriteriaList();
+    public abstract RegulatedModelBuilder addDefaultESPDCriteriaList();
 
     /**
      * Apply taxonomy cardinalities to given Criteria Requirements and RequirementGroups

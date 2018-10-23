@@ -16,7 +16,7 @@
 package eu.esens.espdvcd.builder;
 
 import eu.esens.espdvcd.model.SelectableCriterion;
-import eu.esens.espdvcd.retriever.criteria.CriteriaExtractorBuilder;
+import eu.esens.espdvcd.retriever.criteria.RegulatedCriteriaExtractorBuilder;
 import eu.esens.espdvcd.schema.EDMVersion;
 
 import java.util.List;
@@ -28,8 +28,8 @@ public class RegulatedModelBuilderV1 extends RegulatedModelBuilder {
     private static final Logger LOGGER = Logger.getLogger(RegulatedModelBuilderV1.class.getName());
 
     @Override
-    RegulatedModelBuilder addDefaultESPDCriteriaList() {
-        criteriaExtractor = new CriteriaExtractorBuilder(EDMVersion.V1).build();
+    public RegulatedModelBuilder addDefaultESPDCriteriaList() {
+        criteriaExtractor = new RegulatedCriteriaExtractorBuilder(EDMVersion.V1).build();
         return this;
     }
 

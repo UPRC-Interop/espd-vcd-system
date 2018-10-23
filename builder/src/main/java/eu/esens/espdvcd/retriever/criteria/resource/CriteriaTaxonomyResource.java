@@ -39,7 +39,7 @@ import java.util.stream.Collectors;
 /**
  * @author konstantinos Raptis
  */
-abstract class CriteriaTaxonomyResource implements CriteriaResource, RequirementsResource {
+public abstract class CriteriaTaxonomyResource implements CriteriaResource, RequirementsResource {
 
     private static final Logger LOGGER = Logger.getLogger(CriteriaTaxonomyResource.class.getName());
 
@@ -53,7 +53,7 @@ abstract class CriteriaTaxonomyResource implements CriteriaResource, Requirement
     protected List<SelectableCriterion> criterionList;
     protected Map<String, List<RequirementGroup>> rgMap;
 
-    CriteriaTaxonomyResource(String path) {
+    public CriteriaTaxonomyResource(String path) {
         rgMap = new HashMap<>();
 
         try {
@@ -70,6 +70,8 @@ abstract class CriteriaTaxonomyResource implements CriteriaResource, Requirement
         }
 
     }
+
+    public abstract void applyCardinalities(SelectableCriterion sc);
 
     private List<SelectableCriterion> readDataSheet(Sheet dataSheet) {
         // The criteria Column is always the second one

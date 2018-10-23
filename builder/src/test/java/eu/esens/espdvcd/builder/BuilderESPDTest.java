@@ -23,7 +23,7 @@ import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.ResponseRequirement;
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
-import eu.esens.espdvcd.retriever.criteria.CriteriaExtractorBuilder;
+import eu.esens.espdvcd.retriever.criteria.RegulatedCriteriaExtractorBuilder;
 import eu.esens.espdvcd.retriever.criteria.resource.SelectableCriterionPrinter;
 import eu.esens.espdvcd.schema.EDMVersion;
 import eu.espd.schema.v1.espdresponse_1.ESPDResponseType;
@@ -243,7 +243,7 @@ public class BuilderESPDTest {
                 .importFrom(BuilderESPDTest.class.getResourceAsStream("/REGULATED-ESPD-Request_2.0.2.xml"))
                 .createESPDRequest();
 
-        CriteriaExtractor extractor = new CriteriaExtractorBuilder(EDMVersion.V2).build();
+        CriteriaExtractor extractor = new RegulatedCriteriaExtractorBuilder(EDMVersion.V2).build();
         Assert.assertFalse(extractor.getFullList().isEmpty());
         espdRequest.setCriterionList(extractor.getFullList(espdRequest.getFullCriterionList()));
 
@@ -261,7 +261,7 @@ public class BuilderESPDTest {
                 .importFrom(BuilderESPDTest.class.getResourceAsStream("/REGULATED-ESPD-Response_2.0.2.xml"))
                 .createESPDResponse();
 
-        CriteriaExtractor extractor = new CriteriaExtractorBuilder(EDMVersion.V2).build();
+        CriteriaExtractor extractor = new RegulatedCriteriaExtractorBuilder(EDMVersion.V2).build();
         espdResponse.setCriterionList(extractor.getFullList());
 
         XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.EDM_V2
@@ -339,6 +339,22 @@ public class BuilderESPDTest {
 
         XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.EDM_V2
                 .createDocumentBuilderFor(espdResponse);
+
+        System.out.println(xmlDocumentBuilderV2.getAsString());
+    }
+
+    @Test
+    public void testImportSelfContainedRequest() throws Exception {
+
+        ESPDRequest espdRequest = BuilderFactory.EDM_V2
+                .createSelfContainedModelBuilder()
+                .importFrom(BuilderESPDTest.class.getResourceAsStream("/SELFCONTAINED_ESPD-Request.V2.0.2.xml"))
+                // .createRegulatedModelBuilder()
+                // .importFrom(BuilderESPDTest.class.getResourceAsStream("/ESPDRequest_DA_Test-2.0.2-v0.1.xml"))
+                .createESPDRequest();
+
+        XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.EDM_V2
+                .createDocumentBuilderFor(espdRequest);
 
         System.out.println(xmlDocumentBuilderV2.getAsString());
     }

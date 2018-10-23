@@ -31,6 +31,7 @@ public class RegulatedCriteriaTaxonomyResource extends CriteriaTaxonomyResource 
         super(RESOURCE_PATH);
     }
 
+    @Override
     public void applyCardinalities(SelectableCriterion sc) {
         // find root RequirementGroup/s of that criterion from taxonomy
         final List<RequirementGroup> rgListFromTaxonomy = rgMap.get(sc.getID());
@@ -42,7 +43,7 @@ public class RegulatedCriteriaTaxonomyResource extends CriteriaTaxonomyResource 
                 , rg));                                 //  to
     }
 
-    public void applyCardinalities(RequirementGroup from, RequirementGroup to) {
+    private void applyCardinalities(RequirementGroup from, RequirementGroup to) {
 
         if (from != null && to != null) {
 

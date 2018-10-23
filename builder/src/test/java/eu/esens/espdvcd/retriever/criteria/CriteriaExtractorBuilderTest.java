@@ -1,12 +1,12 @@
 /**
  * Copyright 2016-2018 University of Piraeus Research Center
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -26,13 +26,15 @@ import org.junit.Test;
 
 public class CriteriaExtractorBuilderTest {
 
-    private CriteriaExtractorBuilder b1;
-    private CriteriaExtractorBuilder b2;
+    private CriteriaExtractorBuilder regulatedBuilder1;
+    private CriteriaExtractorBuilder regulatedBuilder2;
+    private CriteriaExtractorBuilder selfContainedBuilder;
 
     @Before
     public void setUp() {
-        b1 = new CriteriaExtractorBuilder(EDMVersion.V1);
-        b2 = new CriteriaExtractorBuilder(EDMVersion.V2);
+        regulatedBuilder1 = new RegulatedCriteriaExtractorBuilder(EDMVersion.V1);
+        regulatedBuilder2 = new RegulatedCriteriaExtractorBuilder(EDMVersion.V2);
+        selfContainedBuilder = new SelfContainedCriteriaExtractorBuilder();
     }
 
     @Test
@@ -42,7 +44,7 @@ public class CriteriaExtractorBuilderTest {
         ECertisResource r2 = new ECertisResource();
         ESPDArtefactResource r3 = new ESPDArtefactResource(EDMVersion.V2);
 
-        CriteriaExtractor e = b2
+        CriteriaExtractor e = regulatedBuilder2
                 // Criteria resources
                 .addCriteriaResource(r1)
                 .addCriteriaResource(r2)
@@ -63,7 +65,7 @@ public class CriteriaExtractorBuilderTest {
 
         ESPDArtefactResource r = new ESPDArtefactResource(EDMVersion.V1);
 
-        CriteriaExtractor e = b2
+        CriteriaExtractor e = regulatedBuilder2
                 // Criteria resources
                 .addCriteriaResource(r)
                 // Legislation resources
@@ -78,19 +80,28 @@ public class CriteriaExtractorBuilderTest {
     @Test
     public void testDefaultCriteriaExtractorBuilderForEDMV1() throws Exception {
 
-        CriteriaExtractor e1 = b1.build();
-        Assert.assertNotNull(e1);
-        Assert.assertFalse(e1.getFullList().isEmpty());
-        SelectableCriterionPrinter.print(e1.getFullList());
+        CriteriaExtractor e = regulatedBuilder1.build();
+        Assert.assertNotNull(e);
+        Assert.assertFalse(e.getFullList().isEmpty());
+        SelectableCriterionPrinter.print(e.getFullList());
     }
 
     @Test
     public void testDefaultCriteriaExtractorBuilderForEDMV2() throws Exception {
 
-        CriteriaExtractor e2 = b2.build();
-        Assert.assertNotNull(e2);
-        Assert.assertFalse(e2.getFullList().isEmpty());
-        SelectableCriterionPrinter.print(e2.getFullList());
+        CriteriaExtractor e = regulatedBuilder2.build();
+        Assert.assertNotNull(e);
+        Assert.assertFalse(e.getFullList().isEmpty());
+        SelectableCriterionPrinter.print(e.getFullList());
+    }
+
+    @Test
+    public void testDefaultSelfContainedCriteriaExtractorBuilder() throws Exception {
+
+        CriteriaExtractor e = selfContainedBuilder.build();
+        Assert.assertNotNull(e);
+        Assert.assertFalse(e.getFullList().isEmpty());
+        SelectableCriterionPrinter.print(e.getFullList());
     }
 
 }
