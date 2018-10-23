@@ -15,6 +15,7 @@
  */
 package eu.esens.espdvcd.model.requirement;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import eu.esens.espdvcd.codelist.enums.RequirementGroupTypeEnum;
 import eu.esens.espdvcd.model.requirement.ruleset.RuleSet;
@@ -97,8 +98,8 @@ public class RequirementGroup implements Serializable {
         this.multiple = false;
     }
 
-    public RequirementGroup(@JsonProperty("ID") String ID,
-                            @JsonProperty("requirements") List<Requirement> requirements) {
+    public RequirementGroup(String ID,
+                            List<Requirement> requirements) {
         this.ID = ID;
         this.requirements = requirements;
         // apply default cardinality 1
@@ -106,6 +107,7 @@ public class RequirementGroup implements Serializable {
         this.multiple = false;
     }
 
+    @JsonCreator
     public RequirementGroup(@JsonProperty("ID") String ID,
                             @JsonProperty("requirements") List<Requirement> requirements,
                             @JsonProperty("type") RequirementGroupTypeEnum type) {

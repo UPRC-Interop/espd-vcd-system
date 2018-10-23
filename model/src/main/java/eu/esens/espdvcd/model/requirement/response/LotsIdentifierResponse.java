@@ -20,6 +20,7 @@ import java.util.List;
 
 public class LotsIdentifierResponse extends Response implements Serializable {
 
+    private static final long serialVersionUID = -7114827204655335550L;
     private List<String> lots;
 
     public LotsIdentifierResponse() {
