@@ -20,7 +20,6 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import eu.esens.espdvcd.builder.BuilderFactory;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDResponse;
-import eu.esens.espdvcd.schema.EDMVersion;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -55,7 +54,7 @@ public class ExportESPDServiceTest {
                 (ExportESPDServiceTest.class.getResourceAsStream("/espd-response.xml")).createESPDResponse();
         Assert.assertNotNull(response);
 
-        exportESPDService = new RegulatedExportESPDV1Service();
+        exportESPDService = RegulatedExportESPDV1Service.getInstance();
         writer = new ObjectMapper().writer().withDefaultPrettyPrinter();
     }
 
@@ -74,7 +73,7 @@ public class ExportESPDServiceTest {
         req.setCriterionList(req.getFullCriterionList().subList(0, req.getFullCriterionList().size() / 2));
         System.out.printf("Criteria count before getting the unselected: %s \n", req.getFullCriterionList().size());
 
-        CriteriaService criteriaService = new RetrieverCriteriaService(EDMVersion.V2);
+        CriteriaService criteriaService = RegulatedCriteriaService.getV2Instance();
         req.setCriterionList(criteriaService.getUnselectedCriteria(req.getFullCriterionList()));
         System.out.printf("Criteria count after getting the unselected: %s, should be: %s\n"
                 ,req.getFullCriterionList().size()

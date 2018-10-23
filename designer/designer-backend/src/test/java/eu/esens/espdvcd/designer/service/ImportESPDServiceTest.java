@@ -22,7 +22,6 @@ import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.Requirement;
-import eu.esens.espdvcd.schema.EDMVersion;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -58,14 +57,14 @@ public class ImportESPDServiceTest {
                 (ImportESPDServiceTest.class.getResourceAsStream("/espd-response.xml")).createESPDResponse();
         Assert.assertNotNull(response);
 
-        exportESPDService = new RegulatedExportESPDV1Service();
-        importESPDService = new ImportESPDResponseService();
+        exportESPDService = RegulatedExportESPDV1Service.getInstance();
+        importESPDService = ImportESPDResponseService.getInstance();
         writer = new ObjectMapper().writer().withDefaultPrettyPrinter();
     }
 
     @Test
     public void testQuantityIntegerImport() throws Exception {
-        ImportESPDService service = new ImportESPDResponseService();
+        ImportESPDService service = ImportESPDResponseService.getInstance();
         Assert.assertNotNull(espdResponse);
         ESPDResponse theResponse = (ESPDResponse) service.importESPDFile(espdResponse);
 
@@ -87,7 +86,7 @@ public class ImportESPDServiceTest {
 
     @Test
     public void generateRequirementGroupStructure() throws Exception {
-        CriteriaService service = new RetrieverCriteriaService(EDMVersion.V2);
+        CriteriaService service = RegulatedCriteriaService.getV1Instance();
 
         SelectableCriterion criterion = service.getCriteria().stream()
                 .filter(cr -> cr.getID().equals("005eb9ed-1347-4ca3-bb29-9bc0db64e1ab"))

@@ -102,6 +102,15 @@ public class RequirementDeserialiser extends StdDeserializer<ResponseRequirement
             case IDENTIFIER:
                 response = mapper.treeToValue(root.get("response"), IdentifierResponse.class);
                 break;
+            case EO_IDENTIFIER:
+                response = mapper.treeToValue(root.get("response"), EOIdentifierResponse.class);
+                break;
+            case LOTS_IDENTIFIER:
+                response = mapper.treeToValue(root.get("response"), LotsIdentifierResponse.class);
+                break;
+            case WEIGHT_INDICATOR:
+                response = mapper.treeToValue(root.get("response"), WeightIndicatorResponse.class);
+                break;
             default:
                 response = null;
                 LOGGER.warning("RESPONSE TYPE NOT FOUND");

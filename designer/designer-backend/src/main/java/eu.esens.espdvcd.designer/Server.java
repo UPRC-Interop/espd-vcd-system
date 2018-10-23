@@ -1,12 +1,12 @@
 /**
  * Copyright 2016-2018 University of Piraeus Research Center
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -58,28 +58,34 @@ public class Server {
             LOGGER.log(Level.SEVERE, e.getMessage(), e);
             System.exit(2);
         });
+
         enableCORS(spark);
+        dropTrailingSlashes(spark);
 
         LOGGER.info("Starting endpoint configuration");
 
-        RestContext v2Context = new RestContext("/api/v2", spark);
+        RestContext v2RegulatedContext = new RestContext("/api/v2/regulated", spark);
+        RestContext v2SelfContainedContext = new RestContext("/api/v2/self-contained", spark);
         RestContext v1Context = new RestContext("/api/v1", spark);
+        RestContext v2Context = new RestContext("/api/v2", spark);
         RestContext baseContext = new RestContext("/api", spark);
 
         LOGGER.info("Configuring codelistsV1 endpoint...");
-        Endpoint v1Codelists = new CodelistsEndpoint(new CodelistsV1Service());
+        Endpoint v1Codelists = new CodelistsEndpoint(CodelistsV1Service.getInstance());
         v1Context.addEndpoint(v1Codelists);
 
         LOGGER.info("Configuring codelistsV2 endpoint...");
-        Endpoint v2Codelists = new CodelistsEndpoint(new CodelistsV2Service());
+        Endpoint v2Codelists = new CodelistsEndpoint(CodelistsV2Service.getInstance());
         v2Context.addEndpoint(v2Codelists);
 
         LOGGER.info("Configuring predefinedCriteria endpoint...");
-        Endpoint predefCriteriaEndpointV1 = new CriteriaEndpoint(new RetrieverCriteriaService(EDMVersion.V1));
-        Endpoint predefCriteriaEndpointV2 = new CriteriaEndpoint(new RetrieverCriteriaService(EDMVersion.V2));
+        Endpoint predefCriteriaEndpointV1 = new CriteriaEndpoint(RegulatedCriteriaService.getV1Instance());
+        Endpoint predefCriteriaEndpointV2 = new CriteriaEndpoint(RegulatedCriteriaService.getV2Instance());
+        Endpoint predefCriteriaEndpointSelfContainedV2 = new CriteriaEndpoint(SelfContainedCriteriaService.getInstance());
 
         v1Context.addEndpoint(predefCriteriaEndpointV1);
-        v2Context.addEndpoint(predefCriteriaEndpointV2);
+        v2RegulatedContext.addEndpoint(predefCriteriaEndpointV2);
+        v2SelfContainedContext.addEndpoint(predefCriteriaEndpointSelfContainedV2);
 
         LOGGER.info("Configuring ExportESPDV1 endpoint...");
         Endpoint ESPDRequestV1Endpoint = new ExportESPDEndpoint(EDMVersion.V1);
@@ -90,11 +96,11 @@ public class Server {
         v2Context.addEndpoint(ESPDRequestV2Endpoint);
 
         LOGGER.info("Configuring ImportESPDRequest endpoint...");
-        Endpoint importESPDReq = new ImportESPDEndpoint(new ImportESPDRequestService());
+        Endpoint importESPDReq = new ImportESPDEndpoint(ImportESPDRequestService.getInstance());
         baseContext.addEndpointWithPath(importESPDReq, "/importESPD/request");
 
         LOGGER.info("Configuring ImportESPDResponse endpoint...");
-        Endpoint importESPDResp = new ImportESPDEndpoint(new ImportESPDResponseService());
+        Endpoint importESPDResp = new ImportESPDEndpoint(ImportESPDResponseService.getInstance());
         baseContext.addEndpointWithPath(importESPDResp, "/importESPD/response");
 
         LOGGER.info("Server is up and running at port " + portToBind);
@@ -107,14 +113,12 @@ public class Server {
         spark.options("/*", (request, response) -> {
 
             String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
-            if (accessControlRequestHeaders != null) {
+            if (accessControlRequestHeaders != null)
                 response.header("Access-Control-Allow-Headers", accessControlRequestHeaders);
-            }
 
             String accessControlRequestMethod = request.headers("Access-Control-Request-Method");
-            if (accessControlRequestMethod != null) {
+            if (accessControlRequestMethod != null)
                 response.header("Access-Control-Allow-Methods", accessControlRequestMethod);
-            }
 
             return "OK";
         });
@@ -125,7 +129,15 @@ public class Server {
             response.header("Access-Control-Allow-Headers", "Content-Type, Content-Disposition");
         });
 
-        LOGGER.info("CORS support is now enabled. Enjoy");
+        LOGGER.info("CORS support is now enabled. Enjoy ;)");
     }
 
+    //Drop trailing slashes from URLs so that you don't have to specify the routes twice
+    private static void dropTrailingSlashes(Service spark) {
+        spark.before((req, res) -> {
+            String path = req.pathInfo();
+            if (path.endsWith("/"))
+                res.redirect(path.substring(0, path.length() - 1), 301);
+        });
+    }
 }

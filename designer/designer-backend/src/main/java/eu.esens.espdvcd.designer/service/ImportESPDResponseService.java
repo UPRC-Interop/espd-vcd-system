@@ -16,16 +16,18 @@
 package eu.esens.espdvcd.designer.service;
 
 import eu.esens.espdvcd.builder.BuilderFactory;
-import eu.esens.espdvcd.builder.enums.ArtefactType;
 import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.builder.util.ArtefactUtils;
+import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
 import eu.esens.espdvcd.designer.exception.ValidationException;
-import eu.esens.espdvcd.designer.util.DocumentDetails;
+import eu.esens.espdvcd.designer.util.CriteriaUtil;
+import eu.esens.espdvcd.model.DocumentDetails;
 import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.schema.EDMVersion;
 import eu.esens.espdvcd.validator.ArtefactValidator;
 import org.xml.sax.SAXException;
 
+import javax.el.MethodNotFoundException;
 import javax.xml.bind.JAXBException;
 import java.io.File;
 import java.io.FileInputStream;
@@ -33,20 +35,25 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
 
-public class ImportESPDResponseService implements ImportESPDService<ESPDResponse> {
-    private final ValidatorService schemaValidationService, schematronValidationService;
+public enum ImportESPDResponseService implements ImportESPDService<ESPDResponse> {
+    INSTANCE;
 
-    public ImportESPDResponseService() {
-        schematronValidationService = new SchematronValidatorService();
-        schemaValidationService = new SchemaValidatorService();
+    private final ValidatorService schemaValidationService = SchemaValidatorService.getInstance();
+    private final ValidatorService schematronValidationService = SchematronValidatorService.getInstance();
+
+    public static ImportESPDService getInstance() {
+        return INSTANCE;
     }
 
     @Override
     public ESPDResponse importESPDFile(File XML) throws BuilderException, JAXBException, SAXException, ValidationException, IOException {
         EDMVersion artefactVersion = ArtefactUtils.findEDMVersion(XML);
+        QualificationApplicationTypeEnum qualificationApplicationType = ArtefactUtils.findQualificationApplicationType(XML);
 
         if (Objects.isNull(artefactVersion))
             throw new ValidationException("Cannot determine artefact version.");
+        if (qualificationApplicationType.equals(QualificationApplicationTypeEnum.UNKNOWN))
+            throw new ValidationException("Cannot determine artefact type.");
 
         ArtefactValidator schemaResult = schemaValidationService.validateESPDFile(XML);
         ArtefactValidator schematronResult = schematronValidationService.validateESPDFile(XML);
@@ -63,18 +70,23 @@ public class ImportESPDResponseService implements ImportESPDService<ESPDResponse
                 response = BuilderFactory.EDM_V1.createRegulatedModelBuilder().importFrom(is).createESPDResponse();
                 break;
             case V2:
-                response = BuilderFactory.EDM_V2.createRegulatedModelBuilder().importFrom(is).createESPDResponse();
+                switch (qualificationApplicationType) {
+                    case REGULATED:
+                        response = BuilderFactory.EDM_V2.createRegulatedModelBuilder().importFrom(is).createESPDResponse();
+                        break;
+                    case SELFCONTAINED:
+                        throw new MethodNotFoundException("Not yet implemented");
+
+//                        response = BuilderFactory.EDM_V2.createSelfContainedModelBuilder().importFrom(is).createESPDResponse();
+//                        break;
+                }
                 break;
         }
-        generateUUIDs(response);
+        CriteriaUtil.generateUUIDs(response.getFullCriterionList());
         is.close();
+        response.setDocumentDetails(new DocumentDetails(artefactVersion.name(),
+                ArtefactUtils.findArtefactType(XML).name(),
+                qualificationApplicationType.name()));
         return response;
     }
-
-    @Override
-    public DocumentDetails getDocumentDetails(File XML) {
-        return new DocumentDetails(ArtefactUtils.findEDMVersion(XML), ArtefactUtils.findArtefactType(XML));
-    }
-
-
 }

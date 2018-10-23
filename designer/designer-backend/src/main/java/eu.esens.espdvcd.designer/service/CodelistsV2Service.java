@@ -21,12 +21,11 @@ import eu.esens.espdvcd.designer.util.CodelistItem;
 
 import java.util.*;
 
-public class CodelistsV2Service implements CodelistsService {
-    private final Map<String, List<CodelistItem>> CODELISTS_MAP;
+public enum CodelistsV2Service implements CodelistsService {
+    INSTANCE;
 
-    public CodelistsV2Service() {
-        CODELISTS_MAP = new HashMap<>();
-    }
+    private final Map<String, List<CodelistItem>> CODELISTS_MAP = new HashMap<>();
+    ;
 
     @Override
     public List<CodelistItem> getCodelist(String codelist) throws IllegalArgumentException {
@@ -42,11 +41,21 @@ public class CodelistsV2Service implements CodelistsService {
         }
     }
 
+    public static CodelistsService getInstance() {
+        return INSTANCE;
+    }
+
+    @Override
+    public Codelists[] getAvailableCodelists() {
+        return CodelistsV2.values();
+    }
+
     @Override
     public List<CodelistItem> getTranslatedCodelist(String codelist, String language) throws IllegalArgumentException {
         if (CODELISTS_MAP.containsKey(codelist + '.' + language))
             return CODELISTS_MAP.get(codelist + '.' + language);
         else {
+
             //TODO: CHECK IF LANGUAGE CODE EXISTS BEFORE ADDING TO CODELIST MAP
             Map<String, String> theCodelistMap = CodelistsV2.valueOf(codelist).getDataMap(language);
             List<CodelistItem> theCodelistList = new ArrayList<>(theCodelistMap.size());
@@ -55,10 +64,5 @@ public class CodelistsV2Service implements CodelistsService {
             CODELISTS_MAP.putIfAbsent(codelist + '.' + language, theCodelistList);
             return theCodelistList;
         }
-    }
-
-    @Override
-    public Codelists[] getAvailableCodelists() {
-        return CodelistsV2.values();
     }
 }

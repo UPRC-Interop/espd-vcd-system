@@ -21,12 +21,10 @@ import eu.esens.espdvcd.designer.util.CodelistItem;
 
 import java.util.*;
 
-public class CodelistsV1Service implements CodelistsService {
-    private final Map<String, List<CodelistItem>> CODELISTS_MAP;
+public enum CodelistsV1Service implements CodelistsService {
+    INSTANCE;
 
-    public CodelistsV1Service() {
-        CODELISTS_MAP = new HashMap<>();
-    }
+    private final Map<String, List<CodelistItem>> CODELISTS_MAP = new HashMap<>();
 
     @Override
     public List<CodelistItem> getCodelist(String codelist) throws IllegalArgumentException {
@@ -50,5 +48,9 @@ public class CodelistsV1Service implements CodelistsService {
     @Override
     public Codelists[] getAvailableCodelists() {
         return CodelistsV1.values();
+    }
+
+    public static CodelistsService getInstance() {
+        return INSTANCE;
     }
 }

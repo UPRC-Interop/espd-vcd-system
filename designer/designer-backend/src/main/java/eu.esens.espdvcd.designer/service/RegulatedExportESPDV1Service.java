@@ -22,7 +22,14 @@ import eu.esens.espdvcd.model.ESPDResponse;
 
 import java.io.InputStream;
 
-public class RegulatedExportESPDV1Service implements ExportESPDService {
+import static eu.esens.espdvcd.designer.util.CriteriaUtil.hasNullCriterion;
+
+public enum RegulatedExportESPDV1Service implements ExportESPDService {
+    INSTANCE;
+
+    public static RegulatedExportESPDV1Service getInstance() {
+        return INSTANCE;
+    }
 
     @Override
     public InputStream exportESPDRequestAsInputStream(ESPDRequest model) throws ValidationException {

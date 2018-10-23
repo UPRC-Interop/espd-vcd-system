@@ -41,7 +41,7 @@ public class ErrorResponse {
         return responseObject;
     }
 
-    public static class ErrorBuilder {
+    static class ErrorBuilder {
 
         //required params
         private int code;
@@ -54,17 +54,17 @@ public class ErrorResponse {
 
         }
 
-        public ErrorBuilder(int code, String message) {
+        ErrorBuilder(int code, String message) {
             this.code = code;
             this.message = message;
         }
 
-        public ErrorBuilder withResponseObject(Object responseObject) {
+        ErrorBuilder withResponseObject(Object responseObject) {
             this.responseObject = responseObject;
             return this;
         }
 
-        public ErrorResponse build() {
+        ErrorResponse build() {
             return new ErrorResponse(this);
         }
     }

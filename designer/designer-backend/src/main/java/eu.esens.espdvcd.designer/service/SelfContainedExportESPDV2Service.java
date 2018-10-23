@@ -1,0 +1,43 @@
+package eu.esens.espdvcd.designer.service;
+
+import eu.esens.espdvcd.designer.exception.ValidationException;
+import eu.esens.espdvcd.model.ESPDRequest;
+import eu.esens.espdvcd.model.ESPDResponse;
+
+import javax.el.MethodNotFoundException;
+import java.io.InputStream;
+
+public class SelfContainedExportESPDV2Service implements ExportESPDService {
+
+    @Override
+    public InputStream exportESPDRequestAsInputStream(ESPDRequest model) throws ValidationException {
+//        if (hasNullCriterion(model.getFullCriterionList()))
+//            throw new ValidationException("Null criteria are not permitted.");
+//        return BuilderFactory.EDM_V2.createDocumentBuilderFor(model).getAsInputStream();
+        throw new MethodNotFoundException("Not yet implemented");
+    }
+
+    @Override
+    public String exportESPDRequestAsString(ESPDRequest model) throws ValidationException {
+//        if (hasNullCriterion(model.getFullCriterionList()))
+//            throw new ValidationException("Null criteria are not permitted.");
+//        return BuilderFactory.EDM_V1.createDocumentBuilderFor(model).getAsString();
+        throw new MethodNotFoundException("Not yet implemented");
+    }
+
+    @Override
+    public InputStream exportESPDResponseAsInputStream(ESPDResponse model) throws ValidationException {
+//        if (hasNullCriterion(model.getFullCriterionList()))
+//            throw new ValidationException("Null criteria are not permitted.");
+//        return BuilderFactory.EDM_V2.createDocumentBuilderFor(model).getAsInputStream();
+        throw new MethodNotFoundException("Not yet implemented");
+    }
+
+    @Override
+    public String exportESPDResponseAsString(ESPDResponse model) throws ValidationException {
+//        if (hasNullCriterion(model.getFullCriterionList()))
+//            throw new ValidationException("Null criteria are not permitted.");
+//        return BuilderFactory.EDM_V2.createDocumentBuilderFor(model).getAsString();
+        throw new MethodNotFoundException("Not yet implemented");
+    }
+}

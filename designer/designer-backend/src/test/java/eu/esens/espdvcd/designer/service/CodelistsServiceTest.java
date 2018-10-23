@@ -24,7 +24,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class CodelistsServiceTest {
     CodelistsService codelistsV1Service, codelistsV2Service;
@@ -34,8 +36,8 @@ public class CodelistsServiceTest {
 
     @Before
     public void setUp() throws Exception {
-        codelistsV1Service = new CodelistsV1Service();
-        codelistsV2Service = new CodelistsV2Service();
+        codelistsV1Service = CodelistsV1Service.getInstance();
+        codelistsV2Service = CodelistsV2Service.getInstance();
     }
 
     @Test
