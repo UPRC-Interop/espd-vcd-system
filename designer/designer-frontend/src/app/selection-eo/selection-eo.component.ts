@@ -20,13 +20,15 @@ import {FormControl, FormGroup, NgForm} from '@angular/forms';
 import {SelectionCriteria} from '../model/selectionCriteria.model';
 import {FormUtilService} from '../services/form-util.service';
 import {ValidationService} from "../services/validation.service";
+import {BaseStep} from "../base/base-step";
+import {WizardSteps} from "../base/wizard-steps.enum";
 
 @Component({
   selector: 'app-selection-eo',
   templateUrl: './selection-eo.component.html',
   styleUrls: ['./selection-eo.component.css']
 })
-export class SelectionEoComponent implements OnInit {
+export class SelectionEoComponent implements OnInit, BaseStep {
   // selectionALLCriteria: SelectionCriteria[] = null;
 
   @ViewChildren('form') forms: QueryList<NgForm>;
@@ -98,6 +100,10 @@ export class SelectionEoComponent implements OnInit {
       this.selectionCCriteria,
       this.selectionDCriteria,
       this.isSatisfiedALL);
+  }
+
+  getWizardStep(): WizardSteps {
+    return WizardSteps.SELECTION;
   }
 
   public areFormsValid(): boolean {

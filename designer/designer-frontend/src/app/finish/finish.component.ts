@@ -18,13 +18,15 @@ import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {NgForm} from "@angular/forms";
 import {ValidationService} from "../services/validation.service";
+import {BaseStep} from "../base/base-step";
+import {WizardSteps} from "../base/wizard-steps.enum";
 
 @Component({
   selector: 'app-finish',
   templateUrl: './finish.component.html',
   styleUrls: ['./finish.component.css']
 })
-export class FinishComponent implements OnInit {
+export class FinishComponent implements OnInit, BaseStep {
 
   @ViewChildren('form') forms: QueryList<NgForm>;
 
@@ -40,6 +42,10 @@ export class FinishComponent implements OnInit {
   exportFile() {
     // this.dataService.version = 'v1';
     this.dataService.saveFile(this.dataService.blob);
+  }
+
+  getWizardStep(): WizardSteps {
+    return WizardSteps.FINISH;
   }
 
   public areFormsValid(): boolean {

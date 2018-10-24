@@ -19,13 +19,15 @@ import {ExclusionCriteria} from '../model/exclusionCriteria.model';
 import {DataService} from '../services/data.service';
 import {NgForm} from '@angular/forms';
 import {ValidationService} from "../services/validation.service";
+import {BaseStep} from "../base/base-step";
+import {WizardSteps} from "../base/wizard-steps.enum";
 
 @Component({
   selector: 'app-exclusion',
   templateUrl: './exclusion.component.html',
   styleUrls: ['./exclusion.component.css']
 })
-export class ExclusionComponent implements OnInit {
+export class ExclusionComponent implements OnInit, BaseStep {
 
   @ViewChildren('form') forms: QueryList<NgForm>;
 
@@ -88,6 +90,10 @@ export class ExclusionComponent implements OnInit {
       this.exclusionBCriteria,
       this.exclusionCCriteria,
       this.exclusionDCriteria);
+  }
+
+  getWizardStep(): WizardSteps {
+    return WizardSteps.EXCLUSION;
   }
 
   public areFormsValid(): boolean {

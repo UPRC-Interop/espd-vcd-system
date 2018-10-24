@@ -20,13 +20,15 @@ import {DataService} from '../services/data.service';
 import {FormGroup, NgForm} from '@angular/forms';
 import {FormUtilService} from '../services/form-util.service';
 import {ValidationService} from "../services/validation.service";
+import {BaseStep} from "../base/base-step";
+import {WizardSteps} from "../base/wizard-steps.enum";
 
 @Component({
   selector: 'app-exclusion-eo',
   templateUrl: './exclusion-eo.component.html',
   styleUrls: ['./exclusion-eo.component.css']
 })
-export class ExclusionEoComponent implements OnInit {
+export class ExclusionEoComponent implements OnInit, BaseStep {
 
   @ViewChildren('form') forms: QueryList<NgForm>;
 
@@ -69,6 +71,10 @@ export class ExclusionEoComponent implements OnInit {
       this.exclusionBCriteria,
       this.exclusionCCriteria,
       this.exclusionDCriteria);
+  }
+
+  getWizardStep(): WizardSteps {
+    return WizardSteps.EXCLUSION;
   }
 
   public areFormsValid(): boolean {

@@ -26,6 +26,7 @@ import {SelectionEoComponent} from "../selection-eo/selection-eo.component";
 import {FinishComponent} from "../finish/finish.component";
 import {FinishEoComponent} from "../finish-eo/finish-eo.component";
 import {SelectionComponent} from "../selection/selection.component";
+import {WizardSteps} from "../base/wizard-steps.enum";
 
 @Component({
 selector: 'app-root',
@@ -74,11 +75,14 @@ export class RootComponent implements OnInit, OnChanges {
   }
 
   private validateSteps(event) {
-    this.startStepValid = this.startComponent.areFormsValid();
-    this.procedureStepValid = this.procedureCaComponent.areFormsValid() && this.procedureEoComponent.areFormsValid();
-    this.exclusionStepValid = this.exclusionCaComponent.areFormsValid() && this.exclusionEoComponent.areFormsValid();
-    this.selectionStepValid = this.selectionCaComponent.areFormsValid() && this.selectionEoComponent.areFormsValid();
-    this.finishStepValid = this.finishCaComponent.areFormsValid() && this.finishEoComponent.areFormsValid();
+    this.startStepValid = event.selectedIndex === WizardSteps.START || this.startComponent.areFormsValid();
+    this.procedureStepValid = event.selectedIndex === WizardSteps.PROCEDURE || RootComponent.anyComponentIsInitAndValid(this.procedureCaComponent, this.procedureEoComponent);
+    this.exclusionStepValid = event.selectedIndex === WizardSteps.EXCLUSION || RootComponent.anyComponentIsInitAndValid(this.exclusionCaComponent, this.exclusionEoComponent);
+    this.selectionStepValid = event.selectedIndex === WizardSteps.SELECTION || RootComponent.anyComponentIsInitAndValid(this.selectionCaComponent, this.selectionEoComponent);
+    this.finishStepValid = event.selectedIndex === WizardSteps.FINISH || RootComponent.anyComponentIsInitAndValid(this.finishCaComponent, this.finishEoComponent);
   }
 
+  private static anyComponentIsInitAndValid(componentCa, componentEo) {
+    return ('undefined' === typeof  componentCa || componentCa.areFormsValid()) && ('undefined' === typeof componentEo || componentEo.areFormsValid());
+  }
 }

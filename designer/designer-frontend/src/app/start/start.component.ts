@@ -21,6 +21,8 @@ import {DataService} from '../services/data.service';
 import {Country} from '../model/country.model';
 import {UtilitiesService} from '../services/utilities.service';
 import {ValidationService} from "../services/validation.service";
+import {BaseStep} from "../base/base-step";
+import {WizardSteps} from "../base/wizard-steps.enum";
 
 // import {ProcedureType} from "../model/procedureType.model";
 
@@ -31,7 +33,7 @@ import {ValidationService} from "../services/validation.service";
   styleUrls: ['./start.component.css'],
   outputs: ['forms']
 })
-export class StartComponent implements OnInit {
+export class StartComponent implements OnInit, BaseStep {
 
   @ViewChildren('form') forms: QueryList<NgForm>;
 
@@ -66,10 +68,6 @@ export class StartComponent implements OnInit {
       });
 
 
-  }
-
-  public areFormsValid(): boolean {
-    return this.validationService.validateFormsInComponent(this.forms);
   }
 
   handleFileUpload(files: FileList) {
@@ -167,6 +165,14 @@ export class StartComponent implements OnInit {
     this.dataService.startESPD(form);
 
 
+  }
+
+  getWizardStep(): WizardSteps {
+    return WizardSteps.START;
+  }
+
+  public areFormsValid(): boolean {
+    return this.validationService.validateFormsInComponent(this.forms);
   }
 
 }

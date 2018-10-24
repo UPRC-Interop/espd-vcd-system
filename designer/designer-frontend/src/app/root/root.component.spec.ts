@@ -43,7 +43,7 @@ import {RouterTestingModule} from "@angular/router/testing";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {HttpClient} from "@angular/common/http";
 import {HttpLoaderFactory} from "../app.module";
-import {Component, DebugElement} from "@angular/core";
+import {DebugElement} from "@angular/core";
 import {StartComponent} from "../start/start.component";
 
 describe('RootComponent', () => {

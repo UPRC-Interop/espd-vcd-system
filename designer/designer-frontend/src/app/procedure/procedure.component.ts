@@ -20,13 +20,15 @@ import {ProcedureType} from '../model/procedureType.model';
 import {Country} from '../model/country.model';
 import {NgForm} from '@angular/forms';
 import {ValidationService} from "../services/validation.service";
+import {BaseStep} from "../base/base-step";
+import {WizardSteps} from "../base/wizard-steps.enum";
 
 @Component({
   selector: 'app-procedure',
   templateUrl: './procedure.component.html',
   styleUrls: ['./procedure.component.css']
 })
-export class ProcedureComponent implements OnInit, OnChanges {
+export class ProcedureComponent implements OnInit, OnChanges, BaseStep {
 
   @ViewChildren('form') forms: QueryList<NgForm>;
 
@@ -97,6 +99,10 @@ export class ProcedureComponent implements OnInit, OnChanges {
     this.dataService.CADetails.contactingDetails = this.dataService.ContactingDetails;
     console.log(this.dataService.CADetails);
     // this.dataService.procedureSubmit(this.eoRelatedCriteria, this.reductionCriteria);
+  }
+
+  getWizardStep(): WizardSteps {
+    return WizardSteps.PROCEDURE;
   }
 
   public areFormsValid(): boolean {

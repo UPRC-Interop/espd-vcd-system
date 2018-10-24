@@ -20,13 +20,15 @@ import {ReductionCriterion} from '../model/reductionCriterion.model';
 import {FormGroup, NgForm} from '@angular/forms';
 import {FormUtilService} from '../services/form-util.service';
 import {ValidationService} from "../services/validation.service";
+import {BaseStep} from "../base/base-step";
+import {WizardSteps} from "../base/wizard-steps.enum";
 
 @Component({
   selector: 'app-finish-eo',
   templateUrl: './finish-eo.component.html',
   styleUrls: ['./finish-eo.component.css']
 })
-export class FinishEoComponent implements OnInit {
+export class FinishEoComponent implements OnInit, BaseStep {
 
   @ViewChildren('form') forms: QueryList<NgForm>;
 
@@ -48,6 +50,10 @@ export class FinishEoComponent implements OnInit {
     // this.dataService.version = 'v1';
     this.formUtil.extractFormValuesFromCriteria(this.reductionCriteria, this.form, this.formUtil.evidenceList);
     this.dataService.finishEOSubmit(this.reductionCriteria);
+  }
+
+  getWizardStep(): WizardSteps {
+    return WizardSteps.FINISH;
   }
 
   public areFormsValid(): boolean {

@@ -23,13 +23,15 @@ import {EoRelatedCriterion} from '../model/eoRelatedCriterion.model';
 import {FormUtilService} from '../services/form-util.service';
 import {UtilitiesService} from '../services/utilities.service';
 import {ValidationService} from "../services/validation.service";
+import {BaseStep} from "../base/base-step";
+import {WizardSteps} from "../base/wizard-steps.enum";
 
 @Component({
   selector: 'app-procedure-eo',
   templateUrl: './procedure-eo.component.html',
   styleUrls: ['./procedure-eo.component.css']
 })
-export class ProcedureEoComponent implements OnInit {
+export class ProcedureEoComponent implements OnInit, BaseStep {
 
   @ViewChildren('form') forms: QueryList<NgForm>;
 
@@ -105,6 +107,10 @@ export class ProcedureEoComponent implements OnInit {
       .catch(err => {
         console.log(err);
       });
+  }
+
+  getWizardStep(): WizardSteps {
+    return WizardSteps.PROCEDURE;
   }
 
   public areFormsValid(): boolean {

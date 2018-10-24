@@ -20,13 +20,15 @@ import {DataService} from '../services/data.service';
 import {FormControl, NgForm} from '@angular/forms';
 import {ApicallService} from '../services/apicall.service';
 import {ValidationService} from "../services/validation.service";
+import {BaseStep} from "../base/base-step";
+import {WizardSteps} from "../base/wizard-steps.enum";
 
 @Component({
   selector: 'app-selection',
   templateUrl: './selection.component.html',
   styleUrls: ['./selection.component.css']
 })
-export class SelectionComponent implements OnInit {
+export class SelectionComponent implements OnInit, BaseStep {
 
   @ViewChildren('form') forms: QueryList<NgForm>;
 
@@ -75,6 +77,10 @@ export class SelectionComponent implements OnInit {
       this.selectionCCriteria,
       this.selectionDCriteria,
       this.isSatisfiedALL);
+  }
+
+  getWizardStep(): WizardSteps {
+    return WizardSteps.SELECTION;
   }
 
   public areFormsValid(): boolean {
