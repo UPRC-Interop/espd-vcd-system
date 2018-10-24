@@ -19,6 +19,7 @@ import java.io.Serializable;
 
 public class WeightIndicatorResponse extends Response implements Serializable {
 
+    private static final long serialVersionUID = -3204508364109778286L;
     private String evaluationMethodType;
     private String evaluationMethodDescription;
     private float weight;
