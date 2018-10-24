@@ -15,6 +15,7 @@
  */
 package eu.esens.espdvcd.retriever.criteria.resource;
 
+import eu.esens.espdvcd.builder.util.ArtefactUtils;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
@@ -62,10 +63,11 @@ public class SelfContainedCriteriaTaxonomyResource extends CriteriaTaxonomyResou
                             .findFirst().orElse(null) // from
                     , rg));                                 //  to
 
-            // Requirements in Regulated are always of Cardinality 1 (default cardinality)
+            // do the same for requirement/s
             to.getRequirements().forEach(rq -> applyCardinalities(
                     from.getRequirements().stream()
-                            .filter(rqFromTaxonomy -> rq.getDescription().equals(rqFromTaxonomy.getDescription())
+                            .filter(rqFromTaxonomy -> ArtefactUtils.clearAllWhitespaces(rq.getDescription())
+                                    .equals(ArtefactUtils.clearAllWhitespaces(rqFromTaxonomy.getDescription()))
                                     && rq.getResponseDataType() == rqFromTaxonomy.getResponseDataType()
                                     && rq.getType() == rqFromTaxonomy.getType())
                             .findFirst().orElse(null) // from
@@ -73,6 +75,8 @@ public class SelfContainedCriteriaTaxonomyResource extends CriteriaTaxonomyResou
 
             to.setMultiple(from.isMultiple());
             to.setMandatory(from.isMandatory());
+
+            to.setType(from.getType());
         }
     }
 
@@ -81,6 +85,8 @@ public class SelfContainedCriteriaTaxonomyResource extends CriteriaTaxonomyResou
         if (from != null && to != null) {
             to.setMultiple(from.isMultiple());
             to.setMandatory(from.isMandatory());
+
+            to.setType(from.getType());
         }
     }
 

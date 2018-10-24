@@ -19,6 +19,7 @@ import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class RegulatedCriteriaTaxonomyResource extends CriteriaTaxonomyResource {
@@ -35,6 +36,12 @@ public class RegulatedCriteriaTaxonomyResource extends CriteriaTaxonomyResource 
     public void applyCardinalities(SelectableCriterion sc) {
         // find root RequirementGroup/s of that criterion from taxonomy
         final List<RequirementGroup> rgListFromTaxonomy = rgMap.get(sc.getID());
+
+        if (rgListFromTaxonomy == null) {
+            LOGGER.log(Level.SEVERE, "SC with ID " + sc.getID() + " cannot be found in rgMap");
+            return;
+        }
+
         // apply cardinalities to all root RequirementGroup/s
         sc.getRequirementGroups().forEach(rg -> applyCardinalities(
                 rgListFromTaxonomy.stream()

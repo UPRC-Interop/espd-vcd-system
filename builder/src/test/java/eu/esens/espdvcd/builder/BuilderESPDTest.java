@@ -349,14 +349,14 @@ public class BuilderESPDTest {
         ESPDRequest espdRequest = BuilderFactory.EDM_V2
                 .createSelfContainedModelBuilder()
                 .importFrom(BuilderESPDTest.class.getResourceAsStream("/SELFCONTAINED_ESPD-Request.V2.0.2.xml"))
-                // .createRegulatedModelBuilder()
-                // .importFrom(BuilderESPDTest.class.getResourceAsStream("/ESPDRequest_DA_Test-2.0.2-v0.1.xml"))
                 .createESPDRequest();
 
-        XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.EDM_V2
-                .createDocumentBuilderFor(espdRequest);
+//        XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.EDM_V2
+//                .createDocumentBuilderFor(espdRequest);
+//
+//        System.out.println(xmlDocumentBuilderV2.getAsString());
 
-        System.out.println(xmlDocumentBuilderV2.getAsString());
+        SelectableCriterionPrinter.print(espdRequest.getFullCriterionList());
     }
 
 }
