@@ -28,7 +28,6 @@ import eu.esens.espdvcd.schema.EDMVersion;
 import eu.esens.espdvcd.validator.ArtefactValidator;
 import org.xml.sax.SAXException;
 
-import javax.el.MethodNotFoundException;
 import javax.xml.bind.JAXBException;
 import java.io.File;
 import java.io.FileInputStream;
@@ -78,12 +77,12 @@ public enum ImportESPDRequestService implements ImportESPDService<ESPDRequest> {
                         break;
                     case SELFCONTAINED:
                         criteriaService = SelfContainedCriteriaService.getInstance();
-                        throw new MethodNotFoundException("Not yet implemented");
-//                        request = BuilderFactory.EDM_V2.createSelfContainedModelBuilder().importFrom(is).createESPDRequest();
-//                        break;
+                        request = BuilderFactory.EDM_V2.createSelfContainedModelBuilder().importFrom(is).createESPDRequest();
+                        break;
                 }
                 break;
         }
+        Objects.requireNonNull(request);
         request.setCriterionList(criteriaService.getUnselectedCriteria(request.getFullCriterionList()));
         CriteriaUtil.generateUUIDs(request.getFullCriterionList());
         is.close();

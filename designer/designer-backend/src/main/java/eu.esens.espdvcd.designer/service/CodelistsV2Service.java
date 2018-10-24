@@ -24,8 +24,11 @@ import java.util.*;
 public enum CodelistsV2Service implements CodelistsService {
     INSTANCE;
 
+    public static CodelistsService getInstance() {
+        return INSTANCE;
+    }
+
     private final Map<String, List<CodelistItem>> CODELISTS_MAP = new HashMap<>();
-    ;
 
     @Override
     public List<CodelistItem> getCodelist(String codelist) throws IllegalArgumentException {
@@ -41,9 +44,6 @@ public enum CodelistsV2Service implements CodelistsService {
         }
     }
 
-    public static CodelistsService getInstance() {
-        return INSTANCE;
-    }
 
     @Override
     public Codelists[] getAvailableCodelists() {

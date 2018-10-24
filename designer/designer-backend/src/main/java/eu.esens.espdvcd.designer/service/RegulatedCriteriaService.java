@@ -19,7 +19,7 @@ import eu.esens.espdvcd.designer.typeEnum.CriteriaType;
 import eu.esens.espdvcd.designer.util.CriteriaUtil;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
-import eu.esens.espdvcd.retriever.criteria.CriteriaExtractorBuilder;
+import eu.esens.espdvcd.retriever.criteria.RegulatedCriteriaExtractorBuilder;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import eu.esens.espdvcd.schema.EDMVersion;
 
@@ -32,7 +32,7 @@ public enum RegulatedCriteriaService implements CriteriaService {
     private final CriteriaExtractor predefinedExtractor;
 
     RegulatedCriteriaService(EDMVersion version) {
-        predefinedExtractor = new CriteriaExtractorBuilder(version).build();
+        predefinedExtractor = new RegulatedCriteriaExtractorBuilder(version).build();
     }
 
     public static RegulatedCriteriaService getV1Instance() {
