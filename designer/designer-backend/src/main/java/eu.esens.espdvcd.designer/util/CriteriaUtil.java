@@ -39,7 +39,7 @@ public final class CriteriaUtil {
         return criteria;
     }
 
-    private static void generateUUIDSForRequirementGroups(@NotNull final List<RequirementGroup> reqGroups, int i) {
+    private static void generateUUIDSForRequirementGroups(@NotNull final List<RequirementGroup> reqGroups, @NotNull int i) {
         for (RequirementGroup reqGroup : reqGroups) {
             i++;
             reqGroup.setUUID(String.format("%s-%d", reqGroup.getID(), i));

@@ -7,7 +7,12 @@ import eu.esens.espdvcd.model.ESPDResponse;
 import javax.el.MethodNotFoundException;
 import java.io.InputStream;
 
-public class SelfContainedExportESPDV2Service implements ExportESPDService {
+public enum SelfContainedExportESPDV2Service implements ExportESPDService {
+    INSTANCE;
+
+    public static SelfContainedExportESPDV2Service getInstance() {
+        return INSTANCE;
+    }
 
     @Override
     public InputStream exportESPDRequestAsInputStream(ESPDRequest model) throws ValidationException {

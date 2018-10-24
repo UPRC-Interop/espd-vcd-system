@@ -27,7 +27,6 @@ import eu.esens.espdvcd.schema.EDMVersion;
 import eu.esens.espdvcd.validator.ArtefactValidator;
 import org.xml.sax.SAXException;
 
-import javax.el.MethodNotFoundException;
 import javax.xml.bind.JAXBException;
 import java.io.File;
 import java.io.FileInputStream;
@@ -75,13 +74,12 @@ public enum ImportESPDResponseService implements ImportESPDService<ESPDResponse>
                         response = BuilderFactory.EDM_V2.createRegulatedModelBuilder().importFrom(is).createESPDResponse();
                         break;
                     case SELFCONTAINED:
-                        throw new MethodNotFoundException("Not yet implemented");
-
-//                        response = BuilderFactory.EDM_V2.createSelfContainedModelBuilder().importFrom(is).createESPDResponse();
-//                        break;
+                        response = BuilderFactory.EDM_V2.createSelfContainedModelBuilder().importFrom(is).createESPDResponse();
+                        break;
                 }
                 break;
         }
+        Objects.requireNonNull(response);
         CriteriaUtil.generateUUIDs(response.getFullCriterionList());
         is.close();
         response.setDocumentDetails(new DocumentDetails(artefactVersion.name(),

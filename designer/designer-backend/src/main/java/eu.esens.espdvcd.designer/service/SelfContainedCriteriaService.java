@@ -5,19 +5,15 @@ import eu.esens.espdvcd.designer.typeEnum.CriteriaType;
 import eu.esens.espdvcd.designer.util.CriteriaUtil;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
-import eu.esens.espdvcd.retriever.criteria.CriteriaExtractorBuilder;
-import eu.esens.espdvcd.retriever.criteria.resource.SelfContainedCriteriaTaxonomyResource;
+import eu.esens.espdvcd.retriever.criteria.SelfContainedCriteriaExtractorBuilder;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
-import eu.esens.espdvcd.schema.EDMVersion;
 
 import java.util.List;
 
 public enum SelfContainedCriteriaService implements CriteriaService {
     INSTANCE;
 
-    private final CriteriaExtractor extractor = new CriteriaExtractorBuilder(EDMVersion.V2)
-            .addCriteriaResource(new SelfContainedCriteriaTaxonomyResource())
-            .build();
+    private final CriteriaExtractor extractor = new SelfContainedCriteriaExtractorBuilder().build();
     private NationalCriteriaMappingService nationalCriteriaMappingService = NationalCriteriaMappingServiceImpl.getInstance();
 
     public static SelfContainedCriteriaService getInstance() {

@@ -21,10 +21,11 @@ import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import org.xml.sax.SAXException;
 
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.JAXBException;
 import java.io.File;
 import java.io.IOException;
 
 public interface ImportESPDService<T extends ESPDRequest> {
-    T importESPDFile(File XML) throws RetrieverException, BuilderException, JAXBException, SAXException, ValidationException, IOException;
+    T importESPDFile(@NotNull File XML) throws RetrieverException, BuilderException, JAXBException, SAXException, ValidationException, IOException;
 }
