@@ -37,22 +37,14 @@ import {RequirementComponent} from "../requirement/requirement.component";
 import {AppRoutingModule} from "../app-routing.module";
 import {ApicallService} from "../services/apicall.service";
 import {DataService} from "../services/data.service";
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatStepper} from "@angular/material";
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from "@angular/material";
 import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from "@angular/material-moment-adapter";
 import {RouterTestingModule} from "@angular/router/testing";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {HttpClient} from "@angular/common/http";
 import {HttpLoaderFactory} from "../app.module";
 import {Component, DebugElement} from "@angular/core";
-import {By} from "@angular/platform-browser";
-
-@Component({
-  selector: 'app-start',
-  template: ''
-})
-export class StartComponentMock {
-  areFormsValid = jasmine.createSpy('areFormsValid').and.returnValue(false);
-}
+import {StartComponent} from "../start/start.component";
 
 describe('RootComponent', () => {
   let component: RootComponent;
@@ -64,7 +56,7 @@ describe('RootComponent', () => {
       declarations: [
         AppComponent,
         ToolbarComponent,
-        StartComponentMock,
+        StartComponent,
         WelcomeComponent,
         ProcedureComponent,
         ExclusionComponent,
@@ -115,14 +107,5 @@ describe('RootComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  it('forms in StartComponent invalid', async(() => {
-    fixture.detectChanges();
-    let stepper: MatStepper = debugElement.query(By.css('#stepper')).nativeElement;
-
-    stepper.next();
-
-    expect(component.startStepValid).toBeFalsy();
-  }));
 
 });

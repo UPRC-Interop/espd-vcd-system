@@ -17,7 +17,7 @@
 import {Injectable} from '@angular/core';
 import {RequirementGroup} from '../model/requirementGroup.model';
 import {EoRelatedCriterion} from '../model/eoRelatedCriterion.model';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormControl, FormGroup} from '@angular/forms';
 import {RequirementResponse} from '../model/requirement-response.model';
 import {Evidence} from '../model/evidence.model';
 import {EvidenceIssuer} from '../model/evidenceIssuer.model';
@@ -531,7 +531,6 @@ export class FormUtilService {
               // group[r.uuid + 'endDate'] = new FormControl();
               if (r.responseDataType === 'PERIOD' && this.APIService.version === 'v2') {
                 group[r.uuid + 'startDate'] = new FormControl();
-                group[r.uuid + 'startDate'].setValidators(Validators.required);
                 group[r.uuid + 'endDate'] = new FormControl();
               }
               if (r.responseDataType === 'EVIDENCE_IDENTIFIER') {
