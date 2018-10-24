@@ -14,8 +14,7 @@
 /// limitations under the License.
 ///
 
-import {Component, Input, OnInit, QueryList, ViewChildren} from '@angular/core';
-import {SelectionCriteria} from '../model/selectionCriteria.model';
+import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {FormControl, NgForm} from '@angular/forms';
 import {ApicallService} from '../services/apicall.service';
@@ -32,11 +31,6 @@ export class SelectionComponent implements OnInit, BaseStep {
 
   @ViewChildren('form') forms: QueryList<NgForm>;
 
-  @Input() selectionACriteria: SelectionCriteria[];
-  @Input() selectionBCriteria: SelectionCriteria[];
-  @Input() selectionCCriteria: SelectionCriteria[];
-  @Input() selectionDCriteria: SelectionCriteria[];
-  @Input() selectionALLCriteria: SelectionCriteria[];
   isSatisfiedALL = true;
   isAtoD = false;
 
@@ -72,10 +66,7 @@ export class SelectionComponent implements OnInit, BaseStep {
 
   onSelectionSubmit(form: NgForm) {
     console.log(form.value);
-    this.dataService.selectionSubmit(this.selectionACriteria,
-      this.selectionBCriteria,
-      this.selectionCCriteria,
-      this.selectionDCriteria,
+    this.dataService.selectionSubmit(
       this.isSatisfiedALL);
   }
 

@@ -49,13 +49,7 @@
         </div>
       </ng-template>
       <app-procedure *ngIf="utilities.isCA" #procedureCaComponent></app-procedure>
-      <app-procedure-eo [formA] = 'dataService.eoRelatedACriteriaForm'
-                        [formD] = 'dataService.eoRelatedDCriteriaForm'
-                        [formC] = 'dataService.eoRelatedCCriteriaForm'
-                        [eoRelatedACriteria] = 'dataService.eoRelatedACriteria'
-                        [eoRelatedCCriteria] = 'dataService.eoRelatedCCriteria'
-                        [eoRelatedDCriteria] = 'dataService.eoRelatedDCriteria'
-                        *ngIf="utilities.isEO"
+      <app-procedure-eo *ngIf="utilities.isEO"
                         #procedureEoComponent></app-procedure-eo>
     </mat-step>
     <mat-step>
@@ -65,20 +59,10 @@
           <span>{{'espd.gui.progress.exclusion' | translate}}</span>
         </div>
       </ng-template>
-      <app-exclusion  [exclusionACriteria] = 'dataService.exclusionACriteria'
-                      [exclusionBCriteria] = 'dataService.exclusionBCriteria'
-                      [exclusionCCriteria] = 'dataService.exclusionCCriteria'
-                      [exclusionDCriteria] = 'dataService.exclusionDCriteria'
+      <app-exclusion
                       *ngIf="utilities.isCA"
                       #exclusionCaComponent></app-exclusion>
-      <app-exclusion-eo [formA] = 'dataService.exclusionACriteriaForm'
-                        [formB] = 'dataService.exclusionBCriteriaForm'
-                        [formC] = 'dataService.exclusionCCriteriaForm'
-                        [formD] = 'dataService.exclusionDCriteriaForm'
-                        [exclusionACriteria] = 'dataService.exclusionACriteria'
-                        [exclusionBCriteria] = 'dataService.exclusionBCriteria'
-                        [exclusionCCriteria] = 'dataService.exclusionCCriteria'
-                        [exclusionDCriteria] = 'dataService.exclusionDCriteria'
+      <app-exclusion-eo
                         *ngIf="utilities.isEO"
                         #exclusionEoComponent></app-exclusion-eo>
     </mat-step>
@@ -89,23 +73,10 @@
           <span>{{'espd.gui.progress.selection' | translate}}</span>
         </div>
       </ng-template>
-      <app-selection [selectionACriteria] = 'dataService.selectionACriteria'
-                     [selectionBCriteria] = 'dataService.selectionBCriteria'
-                     [selectionCCriteria] = 'dataService.selectionCCriteria'
-                     [selectionDCriteria] = 'dataService.selectionDCriteria'
-                     [selectionALLCriteria]='dataService.selectionALLCriteria'
+      <app-selection
                       *ngIf="utilities.isCA"
                       #selectionCaComponent></app-selection>
-      <app-selection-eo [formA] = 'dataService.selectionACriteriaForm'
-                        [formB] = 'dataService.selectionBCriteriaForm'
-                        [formC] = 'dataService.selectionCCriteriaForm'
-                        [formD] = 'dataService.selectionDCriteriaForm'
-                        [formALL] = 'dataService.selectionALLCriteriaForm'
-                        [selectionACriteria] = 'dataService.selectionACriteria'
-                        [selectionBCriteria] = 'dataService.selectionBCriteria'
-                        [selectionCCriteria] = 'dataService.selectionCCriteria'
-                        [selectionDCriteria] = 'dataService.selectionDCriteria'
-                        [selectionALLCriteria]="dataService.selectionALLCriteria"
+      <app-selection-eo
                         *ngIf="utilities.isEO"
                         #selectionEoComponent></app-selection-eo>
     </mat-step>
@@ -117,8 +88,7 @@
         </div>
       </ng-template>
       <app-finish *ngIf="utilities.isCA" #finishCaComponent></app-finish>
-      <app-finish-eo [form]="dataService.reductionCriteriaForm"
-                     [reductionCriteria]="dataService.reductionCriteria"
+      <app-finish-eo
                       *ngIf="utilities.isEO"
                       #finishEoComponent></app-finish-eo>
     </mat-step>

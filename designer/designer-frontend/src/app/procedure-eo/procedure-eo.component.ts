@@ -14,7 +14,7 @@
 /// limitations under the License.
 ///
 
-import {Component, Input, OnInit, QueryList, ViewChildren} from '@angular/core';
+import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {ProcedureType} from '../model/procedureType.model';
 import {Country} from '../model/country.model';
@@ -36,21 +36,11 @@ export class ProcedureEoComponent implements OnInit, BaseStep {
   @ViewChildren('form') forms: QueryList<NgForm>;
 
   public EOForm: FormGroup;
-  // public formA = new FormGroup({});
-  @Input() formA: FormGroup;
-  @Input() formD: FormGroup;
-  @Input() formC: FormGroup;
-  // public formC = new FormGroup({});
-  // public formD = new FormGroup({});
   test = true;
 
   countries: Country[] = null;
   procedureTypes: ProcedureType[] = null;
   eoRelatedCriteria: EoRelatedCriterion[] = null;
-  // eoRelatedACriteria: EoRelatedCriterion[] = null;
-  @Input() eoRelatedACriteria: EoRelatedCriterion[];
-  @Input() eoRelatedCCriteria: EoRelatedCriterion[];
-  @Input() eoRelatedDCriteria: EoRelatedCriterion[];
 
   constructor(
     public dataService: DataService,
@@ -159,19 +149,6 @@ export class ProcedureEoComponent implements OnInit, BaseStep {
 
 
   onProcedureEOSubmit(form: NgForm, eoForm: FormGroup) {
-    // console.log(form.value);
-    // console.log(eoForm.value);
-    // const formValues = this.formA.getRawValue();
-    // console.log(formValues);
-
-    this.formUtil.extractFormValuesFromCriteria(this.eoRelatedACriteria, this.formA, this.formUtil.evidenceList);
-    this.formUtil.extractFormValuesFromCriteria(this.eoRelatedCCriteria, this.formC, this.formUtil.evidenceList);
-    this.formUtil.extractFormValuesFromCriteria(this.eoRelatedDCriteria, this.formD, this.formUtil.evidenceList);
-
-
-    console.log(this.eoRelatedACriteria);
-    console.log(this.eoRelatedCCriteria);
-    console.log(this.eoRelatedDCriteria);
 
     this.dataService.CADetails.cacountry = form.value.CACountry;
     this.dataService.CADetails.receivedNoticeNumber = form.value.receivedNoticeNumber;
@@ -184,10 +161,6 @@ export class ProcedureEoComponent implements OnInit, BaseStep {
     console.log(this.dataService.CADetails);
     this.dataService.EODetails = eoForm.value;
     console.log(this.dataService.EODetails);
-    // console.log(this.dataService.CADetails);
-    this.dataService.procedureEOSubmit(this.eoRelatedACriteria,
-      this.eoRelatedCCriteria,
-      this.eoRelatedDCriteria);
   }
 
 }

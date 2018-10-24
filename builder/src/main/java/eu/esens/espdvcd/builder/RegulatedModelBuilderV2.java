@@ -17,14 +17,14 @@ package eu.esens.espdvcd.builder;
 
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractorBuilder;
-import eu.esens.espdvcd.retriever.criteria.resource.CriteriaTaxonomyResource;
+import eu.esens.espdvcd.retriever.criteria.resource.RegulatedCriteriaTaxonomyResource;
 import eu.esens.espdvcd.schema.EDMVersion;
 
 import java.util.List;
 
 public class RegulatedModelBuilderV2 extends RegulatedModelBuilder {
 
-    private CriteriaTaxonomyResource taxonomyResource;
+    private RegulatedCriteriaTaxonomyResource taxonomyResource;
 
     @Override
     RegulatedModelBuilder addDefaultESPDCriteriaList() {
@@ -36,7 +36,7 @@ public class RegulatedModelBuilderV2 extends RegulatedModelBuilder {
     protected void applyTaxonomyCardinalities(List<SelectableCriterion> criterionList) {
 
         if (taxonomyResource == null) {
-            taxonomyResource = new CriteriaTaxonomyResource();
+            taxonomyResource = new RegulatedCriteriaTaxonomyResource();
         }
 
         criterionList.forEach(sc -> taxonomyResource.applyCardinalities(sc));

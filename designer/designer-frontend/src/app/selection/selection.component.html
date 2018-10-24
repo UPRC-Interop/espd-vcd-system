@@ -32,7 +32,7 @@
   </mat-card>
 
   <mat-accordion multi="true" *ngIf="isSatisfiedALL">
-    <mat-expansion-panel expanded="true" *ngIf="selectionALLCriteria">
+    <mat-expansion-panel expanded="true" *ngIf="this.dataService.selectionALLCriteria">
       <mat-expansion-panel-header>
         <mat-panel-title translate>
           espd.part4.all.selection.switch
@@ -53,9 +53,9 @@
                             checked="selectionALLCriteria['0'].selected"
                             disabled
                             name="selectionSatisfiedALL"
-                            [(ngModel)]="selectionALLCriteria['0'].selected">{{selectionALLCriteria['0'].name}}
+                            [(ngModel)]="this.dataService.selectionALLCriteria['0'].selected">{{this.dataService.selectionALLCriteria['0'].name}}
               </mat-checkbox>
-              <div class="critDesc">{{selectionALLCriteria['0'].description}}</div>
+              <div class="critDesc">{{this.dataService.selectionALLCriteria['0'].description}}</div>
             </div>
           </div>
         </ng-container>
@@ -81,7 +81,7 @@
 
 
   <mat-accordion multi="true" *ngIf="isAtoD">
-    <mat-expansion-panel expanded="true" *ngIf="selectionACriteria">
+    <mat-expansion-panel expanded="true" *ngIf="this.dataService.selectionACriteria">
       <mat-expansion-panel-header>
         <mat-panel-title translate>
           espd.part4.suitability
@@ -90,20 +90,20 @@
 
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <ng-container *ngIf="selectionACriteria.length !== 0">
+      <ng-container *ngIf="this.dataService.selectionACriteria.length !== 0">
         <div class="desc">
           <h4 translate>espd.part4.crit.selection.eo.suitability.article</h4>
           <!--<h4>Article {{selectionACriteria['0'].legislationReference.article}} of {{selectionACriteria['0'].legislationReference.title}} sets out the following selection criteria </h4>-->
         </div>
       </ng-container>
-      <mat-card *ngFor="let criteria of selectionACriteria; let i=index">
+      <mat-card *ngFor="let criteria of this.dataService.selectionACriteria; let i=index">
         <div class="exclusionCriteria" >
 
           <div class="criteria">
             <mat-checkbox color="primary"
                           checked="criteria.selected"
                           name="selectionACriteria"
-                          [(ngModel)]="selectionACriteria[i].selected"
+                          [(ngModel)]="this.dataService.selectionACriteria[i].selected"
                           [disabled]="this.dataService.isReadOnly()">{{criteria.name}}</mat-checkbox>
             <div class="critDesc">{{criteria.description}}</div>
           </div>
@@ -115,25 +115,25 @@
       </mat-card>
     </mat-expansion-panel>
 
-    <mat-expansion-panel expanded="true" *ngIf="selectionBCriteria">
+    <mat-expansion-panel expanded="true" *ngIf="this.dataService.selectionBCriteria">
       <mat-expansion-panel-header>
         <mat-panel-title translate>
           espd.part3.crit.top.grounds.payment.taxes.title
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <ng-container *ngIf="selectionBCriteria.length !== 0">
+      <ng-container *ngIf="this.dataService.selectionBCriteria.length !== 0">
         <div class="desc">
           <h4 translate>espd.part4.crit.selection.ca.economic.article</h4>
           <!--<h4>Article {{selectionBCriteria['0'].legislationReference.article}} of {{selectionBCriteria['0'].legislationReference.title}} sets out the following selection criteria </h4>-->
         </div>
       </ng-container>
-      <mat-card *ngFor="let criteria of selectionBCriteria; let i=index">
+      <mat-card *ngFor="let criteria of this.dataService.selectionBCriteria; let i=index">
         <div class="exclusionCriteria">
           <div class="criteria">
             <mat-checkbox color="primary"
                           checked="criteria.selected"
                           name="selectionBCriteria"
-                          [(ngModel)]="selectionBCriteria[i].selected"
+                          [(ngModel)]="this.dataService.selectionBCriteria[i].selected"
                           [disabled]="this.dataService.isReadOnly()">{{criteria.name}}</mat-checkbox>
             <div class="critDesc">{{criteria.description}}</div>
           </div>
@@ -145,25 +145,25 @@
       </mat-card>
     </mat-expansion-panel>
 
-    <mat-expansion-panel expanded="true" *ngIf="selectionCCriteria">
+    <mat-expansion-panel expanded="true" *ngIf="this.dataService.selectionCCriteria">
       <mat-expansion-panel-header>
         <mat-panel-title translate>
           espd.part3.crit.insolvency.conflicts.top.title
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <ng-container *ngIf="selectionCCriteria.length !== 0">
+      <ng-container *ngIf="this.dataService.selectionCCriteria.length !== 0">
         <div class="desc">
           <h4 translate>espd.part4.crit.selection.technical.professional.ability.article</h4>
           <!--<h4>Article {{selectionCCriteria['0'].legislationReference.article}} of {{selectionCCriteria['0'].legislationReference.title}} sets out the following selection criteria </h4>-->
         </div>
       </ng-container>
-      <mat-card *ngFor="let criteria of selectionCCriteria; let i=index">
+      <mat-card *ngFor="let criteria of this.dataService.selectionCCriteria; let i=index">
         <div class="exclusionCriteria">
           <div class="criteria">
             <mat-checkbox color="primary"
                           checked="criteria.selected"
                           name="selectionCCriteria"
-                          [(ngModel)]="selectionCCriteria[i].selected"
+                          [(ngModel)]="this.dataService.selectionCCriteria[i].selected"
                           [disabled]="this.dataService.isReadOnly()">{{criteria.name}}</mat-checkbox>
             <div class="critDesc">{{criteria.description}}</div>
           </div>
@@ -175,25 +175,25 @@
       </mat-card>
     </mat-expansion-panel>
 
-    <mat-expansion-panel expanded="true" *ngIf="selectionDCriteria">
+    <mat-expansion-panel expanded="true" *ngIf="this.dataService.selectionDCriteria">
       <mat-expansion-panel-header>
         <mat-panel-title translate>
           espd.part4.quality.assurance
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <ng-container *ngIf="selectionDCriteria.length !== 0">
+      <ng-container *ngIf="this.dataService.selectionDCriteria.length !== 0">
         <div class="desc">
           <h4 translate>espd.part4.crit.selection.technical.professional.ability.article</h4>
           <!--<h4>Article {{selectionDCriteria['0'].legislationReference.article}} of {{selectionDCriteria['0'].legislationReference.title}} sets out the following selection criteria </h4>-->
         </div>
       </ng-container>
-      <mat-card *ngFor="let criteria of selectionDCriteria; let i=index">
+      <mat-card *ngFor="let criteria of this.dataService.selectionDCriteria; let i=index">
         <div class="exclusionCriteria">
           <div class="criteria">
             <mat-checkbox color="primary"
                           checked="criteria.selected"
                           name="selectionDCriteria"
-                          [(ngModel)]="selectionDCriteria[i].selected"
+                          [(ngModel)]="this.dataService.selectionDCriteria[i].selected"
                           [disabled]="this.dataService.isReadOnly()">{{criteria.name}}</mat-checkbox>
             <div class="critDesc">{{criteria.description}}</div>
           </div>

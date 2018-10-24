@@ -32,21 +32,21 @@ public class RegulatedExportESPDV2Service implements ExportESPDService {
     @Override
     public InputStream exportESPDRequestAsInputStream(ESPDRequest model) throws ValidationException {
         if (hasNullCriterion(model.getFullCriterionList()))
-            throw new ValidationException("Null criterions are not permitted.");
+            throw new ValidationException("Null criteria are not permitted.");
         return BuilderFactory.EDM_V2.createDocumentBuilderFor(model).getAsInputStream();
     }
 
     @Override
     public String exportESPDRequestAsString(ESPDRequest model) throws ValidationException {
         if (hasNullCriterion(model.getFullCriterionList()))
-            throw new ValidationException("Null criterions are not permitted.");
+            throw new ValidationException("Null criteria are not permitted.");
         return BuilderFactory.EDM_V1.createDocumentBuilderFor(model).getAsString();
     }
 
     @Override
     public InputStream exportESPDResponseAsInputStream(ESPDResponse model) throws ValidationException {
         if (hasNullCriterion(model.getFullCriterionList()))
-            throw new ValidationException("Null criterions are not permitted.");
+            throw new ValidationException("Null criteria are not permitted.");
         finalizeV2Response(model);
         return BuilderFactory.EDM_V2.createDocumentBuilderFor(model).getAsInputStream();
     }
@@ -54,7 +54,7 @@ public class RegulatedExportESPDV2Service implements ExportESPDService {
     @Override
     public String exportESPDResponseAsString(ESPDResponse model) throws ValidationException {
         if (hasNullCriterion(model.getFullCriterionList()))
-            throw new ValidationException("Null criterions are not permitted.");
+            throw new ValidationException("Null criteria are not permitted.");
         finalizeV2Response(model);
         return BuilderFactory.EDM_V2.createDocumentBuilderFor(model).getAsString();
     }

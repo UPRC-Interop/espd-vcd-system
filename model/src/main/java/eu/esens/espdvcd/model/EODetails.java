@@ -16,6 +16,7 @@
 package eu.esens.espdvcd.model;
 
 import eu.esens.espdvcd.codelist.enums.EORoleTypeEnum;
+import eu.esens.espdvcd.model.requirement.response.AmountResponse;
 
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -165,6 +166,21 @@ public class EODetails {
      */
     @NotNull
     private String procurementProjectLot;
+
+    /**
+     *
+     */
+    private int employeeQuantity;
+
+    /**
+     *
+     */
+    private AmountResponse generalTurnover;
+
+    /**
+     *
+     */
+    private String eoGroupName;
 
     /**
      * EO Role Code

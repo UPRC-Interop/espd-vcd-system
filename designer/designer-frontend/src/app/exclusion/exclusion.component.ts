@@ -14,8 +14,7 @@
 /// limitations under the License.
 ///
 
-import {Component, Input, OnInit, QueryList, ViewChildren} from '@angular/core';
-import {ExclusionCriteria} from '../model/exclusionCriteria.model';
+import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {NgForm} from '@angular/forms';
 import {ValidationService} from "../services/validation.service";
@@ -31,11 +30,6 @@ export class ExclusionComponent implements OnInit, BaseStep {
 
   @ViewChildren('form') forms: QueryList<NgForm>;
 
-  @Input() exclusionACriteria: ExclusionCriteria[];
-  @Input() exclusionBCriteria: ExclusionCriteria[];
-  @Input() exclusionCCriteria: ExclusionCriteria[];
-  @Input() exclusionDCriteria: ExclusionCriteria[];
-
   constructor(
     public dataService: DataService,
     private validationService: ValidationService
@@ -43,53 +37,6 @@ export class ExclusionComponent implements OnInit, BaseStep {
   }
 
   ngOnInit() {
-    // this.dataService.getExclusionACriteria()
-    //   .then(res => {
-    //     this.exclusionACriteria = res;
-    //     // console.log("This is exclusionACriteria: ");
-    //     // console.log(this.exclusionACriteria);
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
-    //
-    // this.dataService.getExclusionBCriteria()
-    //   .then(res => {
-    //     this.exclusionBCriteria = res;
-    //     // console.log(res);
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
-    //
-    // this.dataService.getExclusionCCriteria()
-    //   .then(res => {
-    //     this.exclusionCCriteria = res;
-    //     // console.log(res);
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
-    //
-    // this.dataService.getExclusionDCriteria()
-    //   .then(res => {
-    //     this.exclusionDCriteria = res;
-    //     // console.log(res);
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
-
-
-  }
-
-
-  onExclusionSubmit(form: NgForm) {
-    console.log(form.value);
-    this.dataService.exclusionSubmit(this.exclusionACriteria,
-      this.exclusionBCriteria,
-      this.exclusionCCriteria,
-      this.exclusionDCriteria);
   }
 
   getWizardStep(): WizardSteps {

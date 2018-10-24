@@ -15,7 +15,9 @@
  */
 package eu.esens.espdvcd.model.requirement;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import eu.esens.espdvcd.codelist.enums.RequirementGroupTypeEnum;
 import eu.esens.espdvcd.model.requirement.ruleset.RuleSet;
 
 import javax.validation.constraints.NotNull;
@@ -83,6 +85,8 @@ public class RequirementGroup implements Serializable {
     // condition for making this requirement group mandatory, e.g. GROUP_FULFILLED.ON_TRUE, GROUP_FULFILLED.ON_FALSE
     private String condition;
 
+    private RequirementGroupTypeEnum type = RequirementGroupTypeEnum.QUESTION_GROUP;
+
     private boolean mandatory;
 
     private boolean multiple;
@@ -94,10 +98,22 @@ public class RequirementGroup implements Serializable {
         this.multiple = false;
     }
 
-    public RequirementGroup(@JsonProperty("ID") String ID,
-                            @JsonProperty("requirements") List<Requirement> requirements) {
+    public RequirementGroup(String ID,
+                            List<Requirement> requirements) {
         this.ID = ID;
         this.requirements = requirements;
+        // apply default cardinality 1
+        this.mandatory = true;
+        this.multiple = false;
+    }
+
+    @JsonCreator
+    public RequirementGroup(@JsonProperty("ID") String ID,
+                            @JsonProperty("requirements") List<Requirement> requirements,
+                            @JsonProperty("type") RequirementGroupTypeEnum type) {
+        this.ID = ID;
+        this.requirements = requirements;
+        this.type = type;
         // apply default cardinality 1
         this.mandatory = true;
         this.multiple = false;
@@ -172,4 +188,13 @@ public class RequirementGroup implements Serializable {
     public void setMultiple(boolean multiple) {
         this.multiple = multiple;
     }
+
+    public RequirementGroupTypeEnum getType() {
+        return type;
+    }
+
+    public void setType(RequirementGroupTypeEnum type) {
+        this.type = type;
+    }
+
 }

@@ -70,6 +70,15 @@ public class ResponseFactory {
             case IDENTIFIER:
                 return new IdentifierResponse();
 
+            case WEIGHT_INDICATOR:
+                return new WeightIndicatorResponse();
+
+            case LOTS_IDENTIFIER:
+                return new LotsIdentifierResponse();
+
+            case EO_IDENTIFIER:
+                return new EOIdentifierResponse();
+
             default:
                 return null;
                    

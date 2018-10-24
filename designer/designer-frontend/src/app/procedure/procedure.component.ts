@@ -64,25 +64,6 @@ export class ProcedureComponent implements OnInit, OnChanges, BaseStep {
         console.log(err);
       });
 
-    // Get predefined eoRelated Criteria
-    // this.dataService.getEoRelatedCriteria()
-    //   .then(res => {
-    //     this.eoRelatedCriteria = res;
-    //     // console.log(this.eoRelatedCriteria);
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
-
-    // this.dataService.getReductionCriteria()
-    //   .then(res => {
-    //     this.reductionCriteria = res;
-    //     // console.log(this.reductionCriteria);
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
-
   }
 
   ngOnChanges(changes: SimpleChanges) {

@@ -1,12 +1,12 @@
 /**
  * Copyright 2016-2018 University of Piraeus Research Center
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,6 +16,7 @@
 package eu.esens.espdvcd.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import eu.esens.espdvcd.codelist.enums.CriterionTypeEnum;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 
 import javax.validation.constraints.NotNull;
@@ -54,15 +55,12 @@ public class Criterion implements Serializable {
     @NotNull
     protected String ID;
 
+    /**
+     * For use by the ESPD Designer
+     */
     protected String UUID;
 
-    public void setUUID(String UUID) {
-        this.UUID = UUID;
-    }
-
-    public String getUUID() {
-        return UUID;
-    }
+    protected CriterionTypeEnum type = CriterionTypeEnum.CRITERION;
 
     /**
      * Criterion type code
@@ -118,7 +116,7 @@ public class Criterion implements Serializable {
     protected LegislationReference legislationReference;
 
     /**
-     * Requirement group
+     * Requirement group List
      * <p>
      * Data type: Class<br>
      * Cardinality: 0..n<br>
@@ -128,9 +126,29 @@ public class Criterion implements Serializable {
      */
     protected List<RequirementGroup> requirementGroups;
 
-    /** */
+    /**
+     * The Sub-Criterion List contains the National Criteria
+     * <p>
+     * Data type: Class<br>
+     * Cardinality: 0..n<br>
+     * InfReqID:<br>
+     * BusReqID:<br>
+     * UBL syntax path:<br>
+     */
+    protected List<SelectableCriterion> subCriterionList;
+
     public Criterion() {
         this.ID = java.util.UUID.randomUUID().toString();
+    }
+
+    public Criterion(String ID, String typeCode, CriterionTypeEnum type, String name, String description, LegislationReference legislationReference, List<RequirementGroup> requirementGroups) {
+        this.ID = ID;
+        this.typeCode = typeCode;
+        this.type = type;
+        this.name = name;
+        this.description = description;
+        this.legislationReference = legislationReference;
+        this.requirementGroups = requirementGroups;
     }
 
     public Criterion(String ID, String typeCode, String name, String description, LegislationReference legislationReference, List<RequirementGroup> requirementGroups) {
@@ -150,6 +168,13 @@ public class Criterion implements Serializable {
         this.legislationReference = legislationReference;
     }
 
+    public void setUUID(String UUID) {
+        this.UUID = UUID;
+    }
+
+    public String getUUID() {
+        return UUID;
+    }
 
     public String getID() {
         return ID;
@@ -167,6 +192,14 @@ public class Criterion implements Serializable {
         this.typeCode = typeCode;
     }
 
+    public CriterionTypeEnum getType() {
+        return type;
+    }
+
+    public void setType(CriterionTypeEnum type) {
+        this.type = type;
+    }
+
     public String getName() {
         return name;
     }
@@ -181,6 +214,17 @@ public class Criterion implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<SelectableCriterion> getSubCriterionList() {
+        if (subCriterionList == null) {
+            subCriterionList = new ArrayList<>();
+        }
+        return subCriterionList;
+    }
+
+    public void setSubCriterionList(List<SelectableCriterion> subCriterionList) {
+        this.subCriterionList = subCriterionList;
     }
 
     public List<RequirementGroup> getRequirementGroups() {
