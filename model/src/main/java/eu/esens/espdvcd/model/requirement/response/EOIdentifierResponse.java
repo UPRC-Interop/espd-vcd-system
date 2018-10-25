@@ -18,6 +18,7 @@ package eu.esens.espdvcd.model.requirement.response;
 import java.io.Serializable;
 
 public class EOIdentifierResponse extends Response implements Serializable {
+    private static final long serialVersionUID = -5360297563987726650L;
     private String EOIDType;
     private String ID;
 
