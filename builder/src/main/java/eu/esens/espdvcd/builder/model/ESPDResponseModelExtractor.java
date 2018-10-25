@@ -113,7 +113,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
         }
 
         // Economic Operator Details
-        if (!qarType.getEconomicOperatorParty().isEmpty()) {
+        if (!qarType.getEconomicOperatorParty().isEmpty() && !qarType.getProcurementProjectLot().isEmpty()) {
             modelResponse.setEODetails(extractEODetails(qarType.getEconomicOperatorParty().get(0), qarType.getProcurementProjectLot().get(0)));
         } else {
             applyEODetailsStructure(modelResponse);
