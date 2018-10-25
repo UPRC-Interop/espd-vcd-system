@@ -17,7 +17,7 @@
 -->
 
   <app-welcome></app-welcome>
-  <form [formGroup]="myForm" (ngSubmit)="onStartSubmit()">
+  <form [formGroup]="startForm" (ngSubmit)="onStartSubmit()">
 
     <mat-card>
       <mat-card-title translate>espd.init.who.are.you</mat-card-title>
@@ -35,25 +35,15 @@
       <mat-card-content>
         <div class="wrapper">
           <mat-form-field class="width">
-            <input matInput name="noticeNumber" formControlName="numberOjs" placeholder="{{'espd.init.ted.reception.id.placeholder' | translate}}">
-            <!--<input-validation-error [formControl]="numberOjsControl"></input-validation-error>-->
-            <mat-error *ngIf="myForm.get('numberOjs').invalid && myForm.get('numberOjs').dirty">
-              <input-validation-error [formControlErrors]="myForm.get('numberOjs').errors"></input-validation-error>
+            <input matInput name="noticeNumber" formControlName="numberOjs" placeholder="{{'espd.init.ted.reception.id.placeholder' | translate}}" [errorStateMatcher]="matcher">
+            <mat-error *ngIf="startForm.get('numberOjs').invalid">
+              <input-validation-error [formControlErrors]="startForm.get('numberOjs').errors"></input-validation-error>
             </mat-error>
 
             <!--<mat-error *ngFor="let er of numberOjsControl.errors">-->
               <!--test-->
             <!--</mat-error>-->
 
-            <!--<mat-error *ngIf="numberOjsControl.hasError('numberOjs')">-->
-              <!--Number OJS Invalid-->
-            <!--</mat-error>-->
-            <!--<mat-error *ngIf="numberOjsControl.hasError('required')">-->
-              <!--Number OJS required-->
-            <!--</mat-error>-->
-            <!--<mat-error>-->
-             <!--Empty-->
-            <!--</mat-error>-->
           </mat-form-field>
           <mat-radio-group name="caOptions" formControlName="caOptions">
             <mat-radio-button color="primary"
@@ -93,6 +83,9 @@
                             (change)="handleVersionSelection(createV2)"
                             #createV2>Create v2
           </mat-radio-button>
+          <mat-error *validationError="startForm.get('caVersion')">
+            <input-validation-error [formControlErrors]="startForm.get('caVersion').errors"></input-validation-error>
+          </mat-error>
         </mat-radio-group>
       </mat-card-content>
 
@@ -103,6 +96,9 @@
             <mat-option>None</mat-option>
             <mat-option *ngFor="let country of countries" [value]="country.code">{{country.name}}</mat-option>
           </mat-select>
+          <mat-error *validationError="startForm.get('caCountry')">
+            <input-validation-error [formControlErrors]="startForm.get('caCountry').errors"></input-validation-error>
+          </mat-error>
         </mat-form-field>
       </mat-card-content>
     </mat-card>
@@ -139,6 +135,9 @@
                             (change)="handleEOSelection(reviewESPD)"
                             #reviewESPD>{{'espd.init.review.espd' | translate}}
           </mat-radio-button>
+          <mat-error *validationError="startForm.get('eoOptions')">
+            <input-validation-error [formControlErrors]="startForm.get('eoOptions').errors"></input-validation-error>
+          </mat-error>
         </mat-radio-group>
       </mat-card-content>
     </mat-card>
@@ -171,16 +170,22 @@
                             (change)="handleVersionSelection(createV2)"
                             #createV2>Create v2
           </mat-radio-button>
+          <mat-error *validationError="startForm.get('eoVersion')">
+            <input-validation-error [formControlErrors]="startForm.get('eoVersion').errors"></input-validation-error>
+          </mat-error>
         </mat-radio-group>
       </mat-card-content>
 
       <mat-card-title translate>espd.init.where.are.you.from.eo</mat-card-title>
       <mat-card-content>
         <mat-form-field>
-          <mat-select name="EOCountry" placeholder="{{'espd.init.select.country' | translate}}" formControlCountry="EOCountry">
+          <mat-select name="EOCountry" placeholder="{{'espd.init.select.country' | translate}}" formControlName="eoCountry" [errorStateMatcher]="matcher">
             <mat-option>None</mat-option>
             <mat-option *ngFor="let country of countries" [value]="country.code">{{country.name}}</mat-option>
           </mat-select>
+          <mat-error *ngIf="startForm.get('eoCountry').invalid">
+            <input-validation-error [formControlErrors]="startForm.get('eoCountry').errors"></input-validation-error>
+          </mat-error>
         </mat-form-field>
       </mat-card-content>
     </mat-card>

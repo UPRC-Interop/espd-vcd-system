@@ -17,7 +17,7 @@
 
 -->
 <h4 translate>espd.part1.header</h4>
-<form [formGroup]="myForm" (ngSubmit)="onProcedureSubmit()">
+<form [formGroup]="procedureForm" (ngSubmit)="onProcedureSubmit()">
   <mat-accordion multi="true">
     <mat-expansion-panel expanded="true" formGroupName="pub">
       <mat-expansion-panel-header>
@@ -33,21 +33,21 @@
       </div>
       <mat-form-field>
         <!--<label for="noticeNumber">Received Notice Number</label>-->
-        <input matInput formControlName="noticenumber" id="noticeNumber" name="receivedNoticeNumber" placeholder="{{'espd.part1.ted.reception.id' | translate}}" [disabled]="this.dataService.isReadOnly()">
-        <mat-error *validationError="myForm.get('pub.noticenumber')">
-          <input-validation-error [formControlErrors]="myForm.get('pub.noticenumber').errors"></input-validation-error>
+        <input matInput formControlName="receivedNoticeNumber" id="noticeNumber" name="receivedNoticeNumber" placeholder="{{'espd.part1.ted.reception.id' | translate}}" [disabled]="this.dataService.isReadOnly()" [errorStateMatcher]="matcher">
+        <mat-error *ngIf="procedureForm.get('pub.receivedNoticeNumber').invalid">
+          <input-validation-error [formControlErrors]="procedureForm.get('pub.receivedNoticeNumber').errors"></input-validation-error>
         </mat-error>
       </mat-form-field>
       <mat-form-field>
-        <input matInput formControlName="noticeNumberOJS" name="noticeNumberOJS" placeholder="{{'espd.part1.ojs.label' | translate}}" [disabled]="this.dataService.isReadOnly()">
-        <mat-error *validationError="myForm.get('pub.noticeNumberOJS')">
-          <input-validation-error [formControlErrors]="myForm.get('pub.noticeNumberOJS').errors"></input-validation-error>
+        <input matInput formControlName="noticeNumberOJS" name="noticeNumberOJS" placeholder="{{'espd.part1.ojs.label' | translate}}" [disabled]="this.dataService.isReadOnly()" [errorStateMatcher]="matcher">
+        <mat-error *ngIf="procedureForm.get('pub.noticeNumberOJS').invalid">
+          <input-validation-error [formControlErrors]="procedureForm.get('pub.noticeNumberOJS').errors"></input-validation-error>
         </mat-error>
       </mat-form-field>
       <mat-form-field>
-        <input matInput formControlName="ojsURL" name="ojsURL" placeholder="{{'espd.part1.ojs.url' | translate}}" [disabled]="this.dataService.isReadOnly()">
-        <mat-error>
-          <input-validation-error [formControlErrors]="myForm.get('pub.ojsURL').errors"></input-validation-error>
+        <input matInput formControlName="ojsURL" name="ojsURL" placeholder="{{'espd.part1.ojs.url' | translate}}" [disabled]="this.dataService.isReadOnly()" [errorStateMatcher]="matcher">
+        <mat-error *ngIf="procedureForm.get('pub.ojsURL').invalid">
+          <input-validation-error [formControlErrors]="procedureForm.get('pub.ojsURL').errors"></input-validation-error>
         </mat-error>
       </mat-form-field>
       <!--<mat-form-field>-->
@@ -74,7 +74,10 @@
         <input matInput formControlName="id" placeholder="{{'espd.part2.vat'| translate}}" name="CAofficialID" [disabled]="this.dataService.isReadOnly()">
       </mat-form-field>
       <mat-form-field>
-        <input matInput formControlName="website" placeholder="{{'espd.part1.website' | translate}}" name="CAofficialWebSite" [disabled]="this.dataService.isReadOnly()">
+        <input matInput formControlName="website" placeholder="{{'espd.part1.website' | translate}}" name="CAofficialWebSite" [disabled]="this.dataService.isReadOnly()" [errorStateMatcher]="matcher">
+        <mat-error *ngIf="procedureForm.get('details.website').invalid">
+          <input-validation-error [formControlErrors]="procedureForm.get('details.website').errors"></input-validation-error>
+        </mat-error>
       </mat-form-field>
       <ng-container *ngIf="dataService.CADetails.postalAddress || dataService.PostalAddress">
         <mat-form-field>
@@ -98,7 +101,10 @@
           <input matInput formControlName="faxnumber" placeholder="{{'espd.part1.fax' | translate}}" name="CAofficialContactFaxNumber" [disabled]="this.dataService.isReadOnly()">
         </mat-form-field>
         <mat-form-field>
-          <input matInput formControlName="email" placeholder="{{'espd.part1.email' | translate}}" name="CAofficialContactEmail"  [disabled]="this.dataService.isReadOnly()">
+          <input matInput formControlName="email" placeholder="{{'espd.part1.email' | translate}}" name="CAofficialContactEmail"  [disabled]="this.dataService.isReadOnly()" [errorStateMatcher]="matcher">
+          <mat-error *ngIf="procedureForm.get('details.website').invalid">
+            <input-validation-error [formControlErrors]="procedureForm.get('details.website').errors"></input-validation-error>
+          </mat-error>
         </mat-form-field>
       </ng-container>
       <mat-form-field>

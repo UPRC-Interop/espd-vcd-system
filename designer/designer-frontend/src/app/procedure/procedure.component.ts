@@ -19,7 +19,9 @@ import {DataService} from '../services/data.service';
 import {ProcedureType} from '../model/procedureType.model';
 import {Country} from '../model/country.model';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {NumberOjs} from "../validation/number-ojs/number-ojs";
+import {NumberOjsValidation} from "../validation/number-ojs/number-ojs-validation";
+import {InputValidationStateMatcher} from "../validation/input-validation-state-matcher/input-validation-state-matcher";
+import {UrlValidation} from "../validation/url/url-validation";
 
 @Component({
   selector: 'app-procedure',
@@ -28,43 +30,43 @@ import {NumberOjs} from "../validation/number-ojs/number-ojs";
 })
 export class ProcedureComponent implements OnInit, OnChanges {
 
-  myForm: FormGroup;
+  procedureForm: FormGroup;
   countries: Country[] = null;
   procedureTypes: ProcedureType[] = null;
+  matcher = new InputValidationStateMatcher();
   // @Input() eoRelatedCriteria: EoRelatedCriterion[];
   // @Input() reductionCriteria: ReductionCriterion[];
 
 
   constructor(public dataService: DataService) {
+    this.procedureForm = new FormGroup({
+      'pub': new FormGroup({
+        'receivedNoticeNumber': new FormControl(null, []), // National Notice Number
+        'noticeNumberOJS': new FormControl(null, [NumberOjsValidation]), // OJS
+        'ojsURL': new FormControl(null, [UrlValidation]) // URL
+      }),
+      'details': new FormGroup({
+        'name': new FormControl(null, []),
+        'id': new FormControl(null, []),
+        'website': new FormControl(null, [UrlValidation]), // URL
+        'city': new FormControl(null, []),
+        'street': new FormControl(null, []),
+        'postcode': new FormControl(null, []), // PostCode
+        'contactname': new FormControl(null, []),
+        'telephone': new FormControl(null, []), // Phone Number
+        'faxnumber': new FormControl(null, []), // Phone Number
+        'email': new FormControl(null, [Validators.email]), // Email
+        'country': new FormControl(null, []), // Country Code
+      }),
+      'procurement': new FormGroup({
+        'title': new FormControl(null, []),
+        'description': new FormControl(null, []),
+        'fileRefNumber': new FormControl(null, [])
+      })
+    });
   }
 
   ngOnInit() {
-
-    this.myForm = new FormGroup({
-      'pub': new FormGroup({
-        'noticenumber': new FormControl(null, [Validators.required]),
-        'noticeNumberOJS': new FormControl(null, [Validators.required, NumberOjs()]),
-        'ojsURL': new FormControl(null, [Validators.required])
-      }),
-      'details': new FormGroup({
-        'name': new FormControl(null, [Validators.required]),
-        'id': new FormControl(null, [Validators.required]),
-        'website': new FormControl(null, [Validators.required]),
-        'city': new FormControl(null, [Validators.required]),
-        'street': new FormControl(null, [Validators.required]),
-        'postcode': new FormControl(null, [Validators.required]),
-        'contactname': new FormControl(null, [Validators.required]),
-        'telephone': new FormControl(null, [Validators.required]),
-        'faxnumber': new FormControl(null, [Validators.required]),
-        'email': new FormControl(null, [Validators.required, Validators.email]),
-        'country': new FormControl(null, [Validators.required]),
-      }),
-      'procurement': new FormGroup({
-        'title': new FormControl(null,[Validators.required]),
-        'description': new FormControl(null,[Validators.required]),
-        'fileRefNumber': new FormControl(null,[Validators.required])
-      })
-    });
 
     this.dataService.getCountries()
       .then(res => {
@@ -91,15 +93,14 @@ export class ProcedureComponent implements OnInit, OnChanges {
   }
 
   onProcedureSubmit() {
-    console.log(this.myForm);
     // console.log(form.value);
-    // this.dataService.CADetails.cacountry = form.value.CACountry;
-    // this.dataService.CADetails.receivedNoticeNumber = form.value.receivedNoticeNumber;
-    // this.dataService.CADetails.postalAddress.countryCode = form.value.CACountry;
-    // this.dataService.PostalAddress.countryCode = form.value.CACountry;
-    // this.dataService.CADetails.postalAddress = this.dataService.PostalAddress;
-    // this.dataService.CADetails.contactingDetails = this.dataService.ContactingDetails;
-    // console.log(this.dataService.CADetails);
+    this.dataService.CADetails.cacountry = this.procedureForm.get('details.country').value;
+    this.dataService.CADetails.receivedNoticeNumber = this.procedureForm.get('pub.receivedNoticeNumber').value;
+    //this.dataService.CADetails.postalAddress.countryCode = form.value.CACountry;
+    this.dataService.PostalAddress.countryCode = this.procedureForm.get('details.country').value;
+    this.dataService.CADetails.postalAddress = this.dataService.PostalAddress;
+    this.dataService.CADetails.contactingDetails = this.dataService.ContactingDetails;
+    console.log(this.dataService.CADetails);
     // this.dataService.procedureSubmit(this.eoRelatedCriteria, this.reductionCriteria);
   }
 

@@ -453,7 +453,7 @@ export class DataService {
 
   /* ================================= CA REUSE ESPD REQUEST ====================== */
 
-  ReuseESPD(filesToUpload: File[], form: NgForm, role: string) {
+  ReuseESPD(filesToUpload: File[], numberOjs: string, role: string) {
     if (filesToUpload.length > 0 && role === 'CA') {
       this.APIService.postFile(filesToUpload)
         .then(res => {
@@ -643,21 +643,15 @@ export class DataService {
         });
     }
 
-    if (form.value.chooseRole == 'CA') {
+    if (role == 'CA') {
       this.utilities.isCA = true;
-      this.receivedNoticeNumber = form.value.noticeNumber;
+      this.receivedNoticeNumber = numberOjs;
     }
 
   }
 
   isReadOnly(): boolean {
-    if (this.utilities.isReviewESPD) {
-      // console.log('It is REVIEWESPD');
-      return true;
-    } else {
-      // console.log('It is NOT review espd');
-      return false;
-    }
+    return this.utilities.isReviewESPD;
   }
 
   eoDetailsFormUpdate() {
@@ -717,7 +711,7 @@ export class DataService {
     }
   }
 
-  startESPD(form: NgForm) {
+  startESPD(form: FormGroup) {
     // console.log(form);
     // console.log(form.value);
     console.log('START ESPD');
@@ -759,27 +753,27 @@ export class DataService {
     }
 
 
-    if (form.value.chooseRole === 'CA') {
+    if (form.get('role').value === 'CA') {
       this.utilities.isCA = true;
       this.utilities.isEO = false;
       this.receivedNoticeNumber = form.value.noticeNumber;
-      if (form.value.CACountry !== '') {
-        this.selectedCountry = form.value.CACountry;
+      if (form.get('caCountry').value !== '') {
+        this.selectedCountry = form.get('caCountry').value;
       }
     }
 
-    if (form.value.chooseRole === 'EO') {
+    if (form.get('role').value === 'EO') {
       this.utilities.isEO = true;
       this.utilities.isCA = false;
-      if (form.value.EOCountry !== '') {
-        this.selectedEOCountry = form.value.EOCountry;
+      if (form.get('eoCountry').value !== '') {
+        this.selectedEOCountry = form.get('eoCountry').value;
       }
     }
 
-    if (form.value.chooseRole == 'EO' && form.value.eoOptions == 'importESPD') {
+    if (form.get('role').value == 'EO' && form.get('eoOptions').value == 'importESPD') {
       this.utilities.isImportESPD = true;
       this.utilities.isCreateResponse = false;
-    } else if (form.value.chooseRole == 'EO' && form.value.eoOptions == 'createResponse') {
+    } else if (form.get('role').value == 'EO' && form.get('eoOptions').value == 'createResponse') {
       this.utilities.isImportESPD = false;
       this.utilities.isCreateResponse = true;
     }
