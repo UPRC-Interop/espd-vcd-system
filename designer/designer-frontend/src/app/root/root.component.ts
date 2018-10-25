@@ -76,13 +76,13 @@ export class RootComponent implements OnInit, OnChanges {
 
   private validateSteps(event) {
     this.startStepValid = event.selectedIndex === WizardSteps.START || this.startComponent.areFormsValid();
-    this.procedureStepValid = event.selectedIndex === WizardSteps.PROCEDURE || RootComponent.anyComponentIsInitAndValid(this.procedureCaComponent, this.procedureEoComponent);
-    this.exclusionStepValid = event.selectedIndex === WizardSteps.EXCLUSION || RootComponent.anyComponentIsInitAndValid(this.exclusionCaComponent, this.exclusionEoComponent);
-    this.selectionStepValid = event.selectedIndex === WizardSteps.SELECTION || RootComponent.anyComponentIsInitAndValid(this.selectionCaComponent, this.selectionEoComponent);
-    this.finishStepValid = event.selectedIndex === WizardSteps.FINISH || RootComponent.anyComponentIsInitAndValid(this.finishCaComponent, this.finishEoComponent);
+    this.procedureStepValid = event.selectedIndex === WizardSteps.PROCEDURE || RootComponent.anyComponentIsValid(this.procedureCaComponent, this.procedureEoComponent);
+    this.exclusionStepValid = event.selectedIndex === WizardSteps.EXCLUSION || RootComponent.anyComponentIsValid(this.exclusionCaComponent, this.exclusionEoComponent);
+    this.selectionStepValid = event.selectedIndex === WizardSteps.SELECTION || RootComponent.anyComponentIsValid(this.selectionCaComponent, this.selectionEoComponent);
+    this.finishStepValid = event.selectedIndex === WizardSteps.FINISH || RootComponent.anyComponentIsValid(this.finishCaComponent, this.finishEoComponent);
   }
 
-  private static anyComponentIsInitAndValid(componentCa, componentEo) {
+  private static anyComponentIsValid(componentCa, componentEo) {
     return ('undefined' === typeof  componentCa || componentCa.areFormsValid()) && ('undefined' === typeof componentEo || componentEo.areFormsValid());
   }
 }
