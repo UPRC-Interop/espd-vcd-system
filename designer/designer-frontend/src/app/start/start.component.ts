@@ -108,9 +108,9 @@ export class StartComponent implements OnInit {
   handleQATypeSelection(radio: FormControl) {
     console.log(radio.value);
     if (radio.value === 'REGULATED') {
-      this.utilities.qualificationApplicationType = 'REGULATED';
+      this.utilities.qualificationApplicationType = 'regulated';
     } else if (radio.value === 'SELF-CONTAINED') {
-      this.utilities.qualificationApplicationType = 'SELF-CONTAINED';
+      this.utilities.qualificationApplicationType = 'self-contained';
       this.APIService.version = 'v2';
     }
   }

@@ -28,6 +28,7 @@ import {ReductionCriterion} from '../model/reductionCriterion.model';
 import {ESPDResponse} from '../model/ESPDResponse.model';
 import {environment} from '../../environments/environment';
 import {Language} from '../model/language.model';
+import {UtilitiesService} from './utilities.service';
 
 // import {DataService} from '../services/data.service';
 
@@ -41,7 +42,7 @@ export class ApicallService {
   version: string;
 
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, public utilities: UtilitiesService) {
   }
 
   getCountryList() {
@@ -64,68 +65,83 @@ export class ApicallService {
   /* ==================== EO related criteria ========================= */
 
   getEO_RelatedCriteria() {
-    return this.http.get<EoRelatedCriterion[]>(environment.apiUrl + this.version + '/criteria/eo_related').toPromise();
+    return this.http.get<EoRelatedCriterion[]>(environment.apiUrl + this.version + '/' + this.utilities.qualificationApplicationType +
+      '/criteria/eo_related').toPromise();
   }
 
   getEO_RelatedACriteria() {
-    return this.http.get<EoRelatedCriterion[]>(environment.apiUrl + this.version + '/criteria/eo_related_A').toPromise();
+    return this.http.get<EoRelatedCriterion[]>(environment.apiUrl + this.version + '/' + this.utilities.qualificationApplicationType +
+      '/criteria/eo_related_A').toPromise();
   }
 
   getEO_RelatedCCriteria() {
-    return this.http.get<EoRelatedCriterion[]>(environment.apiUrl + this.version + '/criteria/eo_related_B').toPromise();
+    return this.http.get<EoRelatedCriterion[]>(environment.apiUrl + this.version + '/' + this.utilities.qualificationApplicationType +
+      '/criteria/eo_related_B').toPromise();
   }
 
   getEO_RelatedDCriteria() {
-    return this.http.get<EoRelatedCriterion[]>(environment.apiUrl + this.version + '/criteria/eo_related_C').toPromise();
+    return this.http.get<EoRelatedCriterion[]>(environment.apiUrl + this.version + '/' + this.utilities.qualificationApplicationType +
+      '/criteria/eo_related_C').toPromise();
   }
 
   /* =========================== Reduction of Candidates ================= */
 
   get_ReductionCriteria() {
-    return this.http.get<ReductionCriterion[]>(environment.apiUrl + this.version + '/criteria/reduction').toPromise();
+    return this.http.get<ReductionCriterion[]>(environment.apiUrl + this.version + '/' + this.utilities.qualificationApplicationType +
+      '/criteria/reduction').toPromise();
   }
 
   /* ============= EXCLUSION CRITERIA ===================*/
   getExclusionCriteria() {
-    return this.http.get<ExclusionCriteria[]>(environment.apiUrl + this.version + '/criteria/exclusion').toPromise();
+    return this.http.get<ExclusionCriteria[]>(environment.apiUrl + this.version + '/' + this.utilities.qualificationApplicationType +
+      '/criteria/exclusion').toPromise();
   }
 
   getExclusionCriteria_A() {
-    return this.http.get<ExclusionCriteria[]>(environment.apiUrl + this.version + '/criteria/exclusion_a').toPromise();
+    return this.http.get<ExclusionCriteria[]>(environment.apiUrl + this.version + '/' + this.utilities.qualificationApplicationType +
+      '/criteria/exclusion_a').toPromise();
   }
 
   getExclusionCriteria_B() {
-    return this.http.get<ExclusionCriteria[]>(environment.apiUrl + this.version + '/criteria/exclusion_b').toPromise();
+    return this.http.get<ExclusionCriteria[]>(environment.apiUrl + this.version + '/' + this.utilities.qualificationApplicationType +
+      '/criteria/exclusion_b').toPromise();
   }
 
   getExclusionCriteria_C() {
-    return this.http.get<ExclusionCriteria[]>(environment.apiUrl + this.version + '/criteria/exclusion_c').toPromise();
+    return this.http.get<ExclusionCriteria[]>(environment.apiUrl + this.version + '/' + this.utilities.qualificationApplicationType +
+      '/criteria/exclusion_c').toPromise();
   }
 
   getExclusionCriteria_D() {
-    return this.http.get<ExclusionCriteria[]>(environment.apiUrl + this.version + '/criteria/exclusion_d').toPromise();
+    return this.http.get<ExclusionCriteria[]>(environment.apiUrl + this.version + '/' + this.utilities.qualificationApplicationType +
+      '/criteria/exclusion_d').toPromise();
   }
 
   /* ============= SELECTION CRITERIA ===================*/
 
   getSelectionCriteria() {
-    return this.http.get<SelectionCriteria[]>(environment.apiUrl + this.version + '/criteria/selection').toPromise();
+    return this.http.get<SelectionCriteria[]>(environment.apiUrl + this.version + '/' + this.utilities.qualificationApplicationType +
+      '/criteria/selection').toPromise();
   }
 
   getSelectionCriteria_A() {
-    return this.http.get<SelectionCriteria[]>(environment.apiUrl + this.version + '/criteria/selection_a').toPromise();
+    return this.http.get<SelectionCriteria[]>(environment.apiUrl + this.version + '/' + this.utilities.qualificationApplicationType +
+      '/criteria/selection_a').toPromise();
   }
 
   getSelectionCriteria_B() {
-    return this.http.get<SelectionCriteria[]>(environment.apiUrl + this.version + '/criteria/selection_b').toPromise();
+    return this.http.get<SelectionCriteria[]>(environment.apiUrl + this.version + '/' + this.utilities.qualificationApplicationType +
+      '/criteria/selection_b').toPromise();
   }
 
   getSelectionCriteria_C() {
-    return this.http.get<SelectionCriteria[]>(environment.apiUrl + this.version + '/criteria/selection_c').toPromise();
+    return this.http.get<SelectionCriteria[]>(environment.apiUrl + this.version + '/' + this.utilities.qualificationApplicationType +
+      '/criteria/selection_c').toPromise();
   }
 
   getSelectionCriteria_D() {
-    return this.http.get<SelectionCriteria[]>(environment.apiUrl + this.version + '/criteria/selection_d').toPromise();
+    return this.http.get<SelectionCriteria[]>(environment.apiUrl + this.version + '/' + this.utilities.qualificationApplicationType +
+      '/criteria/selection_d').toPromise();
   }
 
   /* ============ UPLOAD XML GET JSON ================= */

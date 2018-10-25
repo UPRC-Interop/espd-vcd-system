@@ -652,7 +652,27 @@ export class FormUtilService {
                 group[r.uuid] = new FormControl(false);
               }
               if (r.responseDataType === 'AMOUNT') {
+                group[r.uuid] = new FormControl({
+                  value: '',
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
                 group[r.uuid + 'currency'] = new FormControl({
+                  value: '',
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
+              }
+
+              if (r.responseDataType === 'WEIGHT_INDICATOR') {
+                group[r.uuid] = new FormControl(false);
+                group[r.uuid + 'evaluationMethodType'] = new FormControl({
+                  value: '',
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
+                group[r.uuid + 'weight'] = new FormControl({
+                  value: '',
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
+                group[r.uuid + 'evaluationMethodDescription'] = new FormControl({
                   value: '',
                   disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
                 });

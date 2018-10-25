@@ -459,8 +459,8 @@ export class DataService {
         .then(res => {
           console.log('REUSE EPSD');
           this.APIService.version = res.documentDetails.version.toLowerCase();
-
-          /* SELF-CONTAINED: if a self-cointained artifact is imported then the version is v2 */
+          /* SELF-CONTAINED: if a self-contained artifact is imported then the version is v2 */
+          this.utilities.qualificationApplicationType = res.documentDetails.qualificationApplicationType.toLowerCase();
           if (res.documentDetails.qualificationApplicationType === 'SELF-CONTAINED') {
             this.APIService.version = 'v2';
           }
@@ -511,6 +511,7 @@ export class DataService {
         .then(res => {
           console.log(res);
           this.APIService.version = res.documentDetails.version.toLowerCase();
+          this.utilities.qualificationApplicationType = res.documentDetails.qualificationApplicationType.toLowerCase();
           /* SELF-CONTAINED: if a self-cointained artifact is imported then the version is v2 */
           if (res.documentDetails.qualificationApplicationType === 'SELF-CONTAINED') {
             this.APIService.version = 'v2';
