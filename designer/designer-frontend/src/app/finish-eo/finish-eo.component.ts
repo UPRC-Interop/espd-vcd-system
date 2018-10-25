@@ -33,7 +33,13 @@ export class FinishEoComponent implements OnInit, BaseStep {
   @ViewChildren('form') forms: QueryList<NgForm>;
 
   @Input() reductionCriteria: ReductionCriterion[];
+
   @Input() form: FormGroup;
+  @Input() startStepValid: boolean;
+  @Input() procedureStepValid: boolean;
+  @Input() exclusionStepValid: boolean;
+  @Input() selectionStepValid: boolean;
+  @Input() finishStepValid: boolean;
 
   constructor(
     public dataService: DataService,

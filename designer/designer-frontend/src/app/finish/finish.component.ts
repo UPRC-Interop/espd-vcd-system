@@ -14,7 +14,7 @@
 /// limitations under the License.
 ///
 
-import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
+import {Component, Input, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {NgForm} from "@angular/forms";
 import {ValidationService} from "../services/validation.service";
@@ -29,6 +29,12 @@ import {WizardSteps} from "../base/wizard-steps.enum";
 export class FinishComponent implements OnInit, BaseStep {
 
   @ViewChildren('form') forms: QueryList<NgForm>;
+
+  @Input() startStepValid: boolean;
+  @Input() procedureStepValid: boolean;
+  @Input() exclusionStepValid: boolean;
+  @Input() selectionStepValid: boolean;
+  @Input() finishStepValid: boolean;
 
   constructor(
     public dataService: DataService,

@@ -87,9 +87,19 @@
           <span>{{'espd.gui.progress.finish' | translate}}</span>
         </div>
       </ng-template>
-      <app-finish *ngIf="utilities.isCA" #finishCaComponent></app-finish>
-      <app-finish-eo
-                      *ngIf="utilities.isEO"
+      <app-finish *ngIf="utilities.isCA"
+                  [startStepValid]="startStepValid"
+                  [procedureStepValid]="procedureStepValid"
+                  [exclusionStepValid]="exclusionStepValid"
+                  [selectionStepValid]="selectionStepValid"
+                  [finishStepValid]="finishStepValid"
+                  #finishCaComponent></app-finish>
+      <app-finish-eo *ngIf="utilities.isEO"
+                     [startStepValid]="startStepValid"
+                     [procedureStepValid]="procedureStepValid"
+                     [exclusionStepValid]="exclusionStepValid"
+                     [selectionStepValid]="selectionStepValid"
+                     [finishStepValid]="finishStepValid"
                       #finishEoComponent></app-finish-eo>
     </mat-step>
   </mat-horizontal-stepper>

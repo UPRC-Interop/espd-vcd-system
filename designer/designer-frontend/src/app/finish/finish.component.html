@@ -56,7 +56,8 @@
 
   <button mat-raised-button color="primary" matStepperPrevious>{{'espd.gui.previous' | translate}}</button>
   <ng-container *ngIf="!this.dataService.isReadOnly()">
-    <button type="submit" mat-raised-button color="primary" matStepperNext (click)="exportFile()">{{'espd.part5.export' | translate}}</button>
+    <button [disabled]="!(startStepValid && procedureStepValid && exclusionStepValid && selectionStepValid && finishStepValid)"
+      type="submit" mat-raised-button color="primary" matStepperNext (click)="exportFile()">{{'espd.part5.export' | translate}}</button>
   </ng-container>
 
   <!--<button type="submit" mat-raised-button color="primary" matStepperNext (click)="exportFileV2()">Export V2</button>-->
