@@ -34,5 +34,11 @@
         </xsl:call-template>
     </xsl:template>
 
+    <xsl:template name="getFooterContent">
+        <xsl:call-template name="getESPDProperty">
+            <xsl:with-param name="key" select="'espd.gui.app.title'"/>
+        </xsl:call-template>
+    </xsl:template>
+
 
 </xsl:stylesheet>

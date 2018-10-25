@@ -13,17 +13,19 @@
                 </xsl:call-template>
             </xsl:with-param>
             <xsl:with-param name="content">
-                <xsl:call-template name="chapterOne">
-                    <xsl:with-param name="chapter-number"/>
-                    <xsl:with-param name="chapter-headline">
-                        <xsl:call-template name="getESPDProperty">
-                            <xsl:with-param name="key" select="'espd.part5.reduction'"/>
-                        </xsl:call-template>
-                    </xsl:with-param>
-                    <xsl:with-param name="chapter-content">
-                        <xsl:call-template name="partFive"/>
-                    </xsl:with-param>
-                </xsl:call-template>
+                <xsl:if test="//cac:EconomicOperatorParty">
+                    <xsl:call-template name="chapterOne">
+                        <xsl:with-param name="chapter-number"/>
+                        <xsl:with-param name="chapter-headline">
+                            <xsl:call-template name="getESPDProperty">
+                                <xsl:with-param name="key" select="'espd.part5.reduction'"/>
+                            </xsl:call-template>
+                        </xsl:with-param>
+                        <xsl:with-param name="chapter-content">
+                            <xsl:call-template name="partFive"/>
+                        </xsl:with-param>
+                    </xsl:call-template>
+                </xsl:if>
 
                 <xsl:call-template name="chapterOne">
                     <xsl:with-param name="chapter-number"/>
