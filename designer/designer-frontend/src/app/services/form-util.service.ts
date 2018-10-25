@@ -93,11 +93,6 @@ export class FormUtilService {
             // console.log('requirement uuid ' + req.uuid);
             // console.log(formValues[req.uuid.valueOf()]);
             if (req.response !== null) {
-              // console.log('INSIDE ====================================');
-              // console.log(req.response);
-              // this.utilities.setAllFields(req.response, '');
-              // req.response = new RequirementResponse();
-              // console.log(req.response);
             } else {
               // console.log('RESPONSE IS NULL');
               req.response = new RequirementResponse();
@@ -112,6 +107,34 @@ export class FormUtilService {
                 req.response.indicator = false;
                 req.response.uuid = null;
               }
+            } else if (req.responseDataType === 'WEIGHT_INDICATOR') {
+              if (formValues[req.uuid.valueOf()] === true) {
+                req.response.indicator = true;
+                req.response.uuid = null;
+              } else {
+                req.response.indicator = false;
+                req.response.uuid = null;
+              }
+              const evaluationMethodTypeID = req.uuid + 'evaluationMethodType';
+              const weightID = req.uuid + 'weight';
+              const evaluationMethodDescriptionID = req.uuid + 'evaluationMethodDescription';
+
+              if (formValues[evaluationMethodTypeID.valueOf()] === null) {
+                req.response.evaluationMethodType = null;
+              } else {
+                req.response.evaluationMethodType = formValues[evaluationMethodTypeID.valueOf()];
+              }
+              if (formValues[weightID.valueOf()] === null) {
+                req.response.weight = null;
+              } else {
+                req.response.weight = formValues[weightID.valueOf()];
+              }
+              if (formValues[evaluationMethodDescriptionID.valueOf()] === null) {
+                req.response.evaluationMethodDescription = null;
+              } else {
+                req.response.evaluationMethodDescription = formValues[evaluationMethodDescriptionID.valueOf()];
+              }
+
             } else if (req.responseDataType === 'DESCRIPTION') {
               req.response.description = formValues[req.uuid.valueOf()];
               req.response.uuid = null;
@@ -308,7 +331,7 @@ export class FormUtilService {
           // formValues = testFormValues;
         }
 
-        if (formValues[rg.uuid.valueOf()] == undefined) {
+        if (formValues[rg.uuid.valueOf()] === undefined) {
 
           // fix go up a level
           testFormValues = form.getRawValue();
@@ -318,7 +341,7 @@ export class FormUtilService {
 
           // console.log('THIS IS undefined');
           this.getFromForm(rg, cr, form, testFormValues, evidenceList);
-        } else if (formValues[rg.uuid.valueOf()] != undefined) {
+        } else if (formValues[rg.uuid.valueOf()] !== undefined) {
           // console.log('THIS IS DEFINED');
           formValues = formValues[rg.uuid.valueOf()];
           this.getFromForm(rg, cr, form, formValues, evidenceList);
@@ -349,6 +372,11 @@ export class FormUtilService {
             group[r.uuid + 'endDate'] = new FormControl();
           } else if (r.responseDataType === 'INDICATOR') {
             group[r.uuid] = new FormControl(false);
+          } else if (r.responseDataType === 'WEIGHT_INDICATOR') {
+            group[r.uuid] = new FormControl(false);
+            group[r.uuid + 'evaluationMethodType'] = new FormControl();
+            group[r.uuid + 'weight'] = new FormControl();
+            group[r.uuid + 'evaluationMethodDescription'] = new FormControl();
           } else if (r.responseDataType === 'AMOUNT') {
             group[r.uuid + 'currency'] = new FormControl();
           } else {
@@ -461,6 +489,20 @@ export class FormUtilService {
                 group[r.uuid] = new FormControl(false);
               } else {
                 group[r.uuid] = new FormControl(r.response.indicator);
+              }
+            }
+            /* SELF-CONTAINED: WEIGHT_INDICATOR */
+            if (r.responseDataType === 'WEIGHT_INDICATOR') {
+              if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
+                group[r.uuid] = new FormControl(false);
+                group[r.uuid + 'evaluationMethodType'] = new FormControl();
+                group[r.uuid + 'weight'] = new FormControl();
+                group[r.uuid + 'evaluationMethodDescription'] = new FormControl();
+              } else {
+                group[r.uuid] = new FormControl(r.response.indicator);
+                group[r.uuid + 'evaluationMethodType'] = new FormControl(r.response.evaluationMethodType);
+                group[r.uuid + 'weight'] = new FormControl(r.response.weight);
+                group[r.uuid + 'evaluationMethodDescription'] = new FormControl(r.response.evaluationMethodDescription);
               }
             }
 
@@ -596,6 +638,15 @@ export class FormUtilService {
           } else {
             r.response = new RequirementResponse();
             group[r.uuid] = new FormControl(r.response.description || '');
+            /* SELF-CONTAINED: WEIGHT_INDICATOR */
+            if (this.utilities.isCA) {
+              if (r.responseDataType === 'WEIGHT_INDICATOR') {
+                group[r.uuid] = new FormControl(false);
+                group[r.uuid + 'evaluationMethodType'] = new FormControl();
+                group[r.uuid + 'weight'] = new FormControl();
+                group[r.uuid + 'evaluationMethodDescription'] = new FormControl();
+              }
+            }
             if (this.utilities.isEO) {
               if (r.responseDataType === 'INDICATOR') {
                 group[r.uuid] = new FormControl(false);
