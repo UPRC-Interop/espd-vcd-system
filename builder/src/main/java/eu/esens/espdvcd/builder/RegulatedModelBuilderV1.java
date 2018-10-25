@@ -34,7 +34,7 @@ public class RegulatedModelBuilderV1 extends RegulatedModelBuilder {
     }
 
     @Override
-    protected void applyTaxonomyCardinalities(List<SelectableCriterion> criterionList) {
+    protected void applyTaxonomyData(List<SelectableCriterion> criterionList) {
         LOGGER.log(Level.WARNING, "V1 Taxonomy currently does not support cardinalities for Requirements/RequirementGroups");
     }
 

@@ -37,14 +37,14 @@ public class SelfContainedModelBuilder extends RegulatedModelBuilder {
     }
 
     @Override
-    protected void applyTaxonomyCardinalities(List<SelectableCriterion> criterionList) {
+    protected void applyTaxonomyData(List<SelectableCriterion> criterionList) {
 
         if (taxonomyResource == null) {
             taxonomyResource = new SelfContainedCriteriaTaxonomyResource();
         }
 
-        LOGGER.log(Level.INFO, "Applying taxonomy cardinalities to imported artefact...");
-        criterionList.forEach(sc -> taxonomyResource.applyCardinalities(sc));
+        LOGGER.log(Level.INFO, "Applying taxonomy cardinalities and REQUIREMENT_GROUP Types to the imported artefact...");
+        criterionList.forEach(sc -> taxonomyResource.applyTaxonomyData(sc));
     }
 
 

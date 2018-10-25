@@ -35,7 +35,7 @@ public class SelfContainedCriteriaTaxonomyResource extends CriteriaTaxonomyResou
     }
 
     @Override
-    public void applyCardinalities(SelectableCriterion sc) {
+    public void applyTaxonomyData(SelectableCriterion sc) {
         // find root RequirementGroup/s of that criterion from taxonomy
         final List<RequirementGroup> rgListFromTaxonomy = rgMap.get(sc.getID());
 
@@ -45,26 +45,26 @@ public class SelfContainedCriteriaTaxonomyResource extends CriteriaTaxonomyResou
         }
 
         // apply cardinalities to all root RequirementGroup/s
-        sc.getRequirementGroups().forEach(rg -> applyCardinalities(
+        sc.getRequirementGroups().forEach(rg -> applyTaxonomyData(
                 rgListFromTaxonomy.stream()
                         .filter(rgFromTaxonomy -> rg.getID().equals(rgFromTaxonomy.getID()))
                         .findFirst().orElse(null) // from
                 , rg));                                 //  to
     }
 
-    private void applyCardinalities(RequirementGroup from, RequirementGroup to) {
+    private void applyTaxonomyData(RequirementGroup from, RequirementGroup to) {
 
         if (from != null && to != null) {
 
             // do the same for sub-RequirementGroup/s
-            to.getRequirementGroups().forEach(rg -> applyCardinalities(
+            to.getRequirementGroups().forEach(rg -> applyTaxonomyData(
                     from.getRequirementGroups().stream()
                             .filter(rgFromTaxonomy -> rg.getID().equals(rgFromTaxonomy.getID()))
                             .findFirst().orElse(null) // from
                     , rg));                                 //  to
 
             // do the same for requirement/s
-            to.getRequirements().forEach(rq -> applyCardinalities(
+            to.getRequirements().forEach(rq -> applyTaxonomyData(
                     from.getRequirements().stream()
                             .filter(rqFromTaxonomy -> ArtefactUtils.clearAllWhitespaces(rq.getDescription())
                                     .equals(ArtefactUtils.clearAllWhitespaces(rqFromTaxonomy.getDescription()))
@@ -72,20 +72,21 @@ public class SelfContainedCriteriaTaxonomyResource extends CriteriaTaxonomyResou
                                     && rq.getType() == rqFromTaxonomy.getType())
                             .findFirst().orElse(null) // from
                     , rq));                                 // to
-
+            // cardinalities
             to.setMultiple(from.isMultiple());
             to.setMandatory(from.isMandatory());
-
+            // requirement group type
             to.setType(from.getType());
         }
     }
 
-    private void applyCardinalities(Requirement from, Requirement to) {
+    private void applyTaxonomyData(Requirement from, Requirement to) {
 
         if (from != null && to != null) {
+            // cardinalities
             to.setMultiple(from.isMultiple());
             to.setMandatory(from.isMandatory());
-
+            // requirement group type
             to.setType(from.getType());
         }
     }

@@ -71,7 +71,12 @@ public abstract class CriteriaTaxonomyResource implements CriteriaResource, Requ
 
     }
 
-    public abstract void applyCardinalities(SelectableCriterion sc);
+    /**
+     * Apply cardinalities and  type
+     *
+     * @param sc
+     */
+    public abstract void applyTaxonomyData(SelectableCriterion sc);
 
     private List<SelectableCriterion> readDataSheet(Sheet dataSheet) {
         // The criteria Column is always the second one
