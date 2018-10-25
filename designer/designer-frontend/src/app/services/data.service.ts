@@ -459,6 +459,12 @@ export class DataService {
         .then(res => {
           console.log('REUSE EPSD');
           this.APIService.version = res.documentDetails.version.toLowerCase();
+
+          /* SELF-CONTAINED: if a self-cointained artifact is imported then the version is v2 */
+          if (res.documentDetails.qualificationApplicationType === 'SELF-CONTAINED') {
+            this.APIService.version = 'v2';
+          }
+
           // res.cadetails=this.CADetails;
           // console.log(res.fullCriterionList);
           console.log(res.cadetails);
@@ -505,6 +511,10 @@ export class DataService {
         .then(res => {
           console.log(res);
           this.APIService.version = res.documentDetails.version.toLowerCase();
+          /* SELF-CONTAINED: if a self-cointained artifact is imported then the version is v2 */
+          if (res.documentDetails.qualificationApplicationType === 'SELF-CONTAINED') {
+            this.APIService.version = 'v2';
+          }
           // res.cadetails=this.CADetails;
           // console.log(res.fullCriterionList);
           // console.log(res.cadetails);
@@ -776,10 +786,10 @@ export class DataService {
       }
     }
 
-    if (form.value.chooseRole == 'EO' && form.value.eoOptions == 'importESPD') {
+    if (form.value.chooseRole === 'EO' && form.value.eoOptions === 'importESPD') {
       this.utilities.isImportESPD = true;
       this.utilities.isCreateResponse = false;
-    } else if (form.value.chooseRole == 'EO' && form.value.eoOptions == 'createResponse') {
+    } else if (form.value.chooseRole === 'EO' && form.value.eoOptions === 'createResponse') {
       this.utilities.isImportESPD = false;
       this.utilities.isCreateResponse = true;
     }

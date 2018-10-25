@@ -33,5 +33,10 @@ export class Cadetails {
   receivedNoticeNumber?: string;
   nationalOfficialJournal?: string;
   procurementProcedureType?: string;
+  classificationCodes?: string[];
+  procedureType?: string;
+  projectType?: string;
+  weightingType?: string;
+  weightingScoringMethodologyNote?: string;
 
 }

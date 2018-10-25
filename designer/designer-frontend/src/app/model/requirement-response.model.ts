@@ -39,4 +39,8 @@ export class RequirementResponse {
   validatedCriterionPropertyID?: string;
   mandatory?: boolean;
   multiple?: boolean;
+  evaluationMethodType?: string;
+  weight?: number;
+  evaluationMethodDescription?: string;
+  EOIDType?: string;
 }

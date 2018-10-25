@@ -21,6 +21,7 @@ import {DataService} from '../services/data.service';
 import {Country} from '../model/country.model';
 import {Currency} from '../model/currency.model';
 import {ApicallService} from '../services/apicall.service';
+import {UtilitiesService} from '../services/utilities.service';
 
 @Component({
   selector: 'app-requirement',
@@ -36,8 +37,9 @@ export class RequirementComponent implements OnInit, OnChanges {
 
   countries: Country[] = null;
   currency: Currency[] = null;
+  isWeighted = false;
 
-  constructor(public dataService: DataService, public APIService: ApicallService) {
+  constructor(public dataService: DataService, public APIService: ApicallService, public utilities: UtilitiesService) {
   }
 
   ngOnChanges() {
@@ -80,6 +82,21 @@ export class RequirementComponent implements OnInit, OnChanges {
         });
     } else {
       this.indicatorChanged.emit(true);
+    }
+
+
+    /* SELF-CONTAINED: WEIGHT_INDICATOR */
+    if (this.req.responseDataType === 'WEIGHT_INDICATOR') {
+      this.form.get(this.req.uuid)
+        .valueChanges
+        .subscribe(ev => {
+          console.log('emit weight: ' + ev);
+          // console.log(ev);
+          this.isWeighted = ev;
+          console.log(this.isWeighted);
+          // console.log(typeof ev);
+          // this.indicatorChanged.emit(ev);
+        });
     }
   }
 
