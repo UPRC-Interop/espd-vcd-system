@@ -19,7 +19,8 @@
   <label *ngIf="req.responseDataType=='INDICATOR'" [attr.for]="req.uuid">{{req.description}}</label>
 
 
-  <div [ngSwitch]="req.responseDataType">
+  <!--SELF-CONTAINED: Hide the QUESTION fields if the user is a CA making a Request. Render only the REQUIREMENT and CAPTION fields.-->
+  <div [ngSwitch]="req.responseDataType" [hidden]="this.utilities.isCA && req.type === 'QUESTION'">
 
     <mat-form-field *ngSwitchDefault>
       <label [attr.for]="req.uuid">{{req.description}}</label>
@@ -78,7 +79,7 @@
       <label [attr.for]="req.uuid">{{req.description}}</label>
       <br>
       <mat-form-field>
-        <input matInput [formControlName]="req.uuid" [id]="req.uuid" >
+        <input matInput [formControlName]="req.uuid" [id]="req.uuid">
       </mat-form-field>
       <mat-form-field>
         <mat-select [formControlName]="req.uuid+'currency'" [id]="req.uuid+'currency'">
@@ -116,6 +117,36 @@
                         [value]=false>NO
       </mat-radio-button>
     </mat-radio-group>
+
+    <!-- SELF-CONTAINED: WEIGHT_INDICATOR -->
+    <div class="weight_indicator" *ngSwitchCase="'WEIGHT_INDICATOR'">
+      <mat-radio-group [id]="req.uuid" [formControlName]="req.uuid">
+        <mat-radio-button color="primary"
+                          [value]=true>YES
+        </mat-radio-button>
+        <mat-radio-button color="primary"
+                          [value]=false>NO
+        </mat-radio-button>
+      </mat-radio-group>
+      <br>
+      <div class="weight" *ngIf="isWeighted">
+        <label [attr.for]="req.uuid+'evaluationMethodType'">Criterion evaluation method: </label>
+        <br>
+        <mat-form-field>
+          <input matInput [formControlName]="req.uuid+'evaluationMethodType'" [id]="req.uuid+'evaluationMethodType'" >
+        </mat-form-field>
+        <label [attr.for]="req.uuid+'weight'">Weight allocated to this criterion: </label>
+        <br>
+        <mat-form-field>
+          <input matInput [formControlName]="req.uuid+'weight'" [id]="req.uuid+'weight'" >
+        </mat-form-field>
+        <label [attr.for]="req.uuid+'evaluationMethodDescription'">Provide complementary information about the evaluation of the criterion: </label>
+        <br>
+        <mat-form-field>
+          <input matInput [formControlName]="req.uuid+'evaluationMethodDescription'" [id]="req.uuid+'evaluationMethodDescription'" >
+        </mat-form-field>
+      </div>
+    </div>
 
   </div>
 </div>

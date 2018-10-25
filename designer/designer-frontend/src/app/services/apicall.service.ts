@@ -206,20 +206,20 @@ export class ApicallService {
     return this.http.post<any>(environment.apiUrl + this.version + '/espd/response', ESPDResponse, options).toPromise();
   }
 
-  getXMLResponseV2(ESPDResponse: string) {
-
-    let header = new HttpHeaders();
-    let _header = header.append('Content-Type', 'application/json; charset=utf-8');
-
-    let options: Object = {
-      headers: _header,
-      responseType: 'blob' as 'blob',
-      observe: 'response' as 'response'
-    };
-
-    // headers = header.append('Content-Type', 'application/json; charset=utf-8');
-    return this.http.post<any>(environment.apiUrl + 'v2/espd/response', ESPDResponse, options).toPromise();
-  }
+  // getXMLResponseV2(ESPDResponse: string) {
+  //
+  //   let header = new HttpHeaders();
+  //   let _header = header.append('Content-Type', 'application/json; charset=utf-8');
+  //
+  //   let options: Object = {
+  //     headers: _header,
+  //     responseType: 'blob' as 'blob',
+  //     observe: 'response' as 'response'
+  //   };
+  //
+  //   // headers = header.append('Content-Type', 'application/json; charset=utf-8');
+  //   return this.http.post<any>(environment.apiUrl + 'v2/espd/response', ESPDResponse, options).toPromise();
+  // }
 
 
 }
