@@ -41,19 +41,15 @@ import {RequirementComponent} from './requirement/requirement.component';
 import {RootComponent} from './root/root.component';
 import {CriterionComponent} from './criterion/criterion.component';
 import {FinishEoComponent} from './finish-eo/finish-eo.component';
-
-/* dates and locale */
-import {MAT_MOMENT_DATE_FORMATS, MatMomentDateModule, MomentDateAdapter} from '@angular/material-moment-adapter';
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material';
-
- /* translations */
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { SelectCountryComponent } from './shared/selectcountry/select-country.component';
+/* translations */
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {SelectCountryComponent} from './shared/selectcountry/select-country.component';
 import {LoggerModule, NGXLogger, NgxLoggerLevel} from "ngx-logger";
-import { NumberOjsDirective } from './directives/number-ojs/number-ojs.directive';
-import { InputValidationErrorComponent } from './shared/input-validation-error/input-validation-error.component';
-import { ValidationErrorDirective } from './directives/validation-error/validation-error.directive';
+import {NumberOjsDirective} from './directives/number-ojs/number-ojs.directive';
+import {InputValidationErrorComponent} from './shared/input-validation-error/input-validation-error.component';
+import {ValidationErrorDirective} from './directives/validation-error/validation-error.directive';
+import {DatepickerModule} from "./datepicker/datepicker.module";
 
 @NgModule({
   declarations: [
@@ -86,7 +82,7 @@ import { ValidationErrorDirective } from './directives/validation-error/validati
     HttpClientModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    MatMomentDateModule,
+    DatepickerModule,
     LoggerModule.forRoot({serverLoggingUrl: '/api/logs', level: NgxLoggerLevel.DEBUG, serverLogLevel: NgxLoggerLevel.ERROR}),
     TranslateModule.forRoot({
       loader : {
@@ -96,11 +92,7 @@ import { ValidationErrorDirective } from './directives/validation-error/validati
       }
     })
   ],
-  providers: [ApicallService, DataService,NGXLogger,
-    {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
-    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
-    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS}],
-
+  providers: [ApicallService, DataService,NGXLogger],
   bootstrap: [AppComponent]
 })
 export class AppModule {
