@@ -21,6 +21,7 @@ import eu.esens.espdvcd.retriever.criteria.resource.CriteriaTaxonomyResource;
 import eu.esens.espdvcd.retriever.criteria.resource.SelfContainedCriteriaTaxonomyResource;
 
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class SelfContainedModelBuilder extends RegulatedModelBuilder {
@@ -42,6 +43,7 @@ public class SelfContainedModelBuilder extends RegulatedModelBuilder {
             taxonomyResource = new SelfContainedCriteriaTaxonomyResource();
         }
 
+        LOGGER.log(Level.INFO, "Applying taxonomy cardinalities to imported artefact...");
         criterionList.forEach(sc -> taxonomyResource.applyCardinalities(sc));
     }
 
