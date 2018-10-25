@@ -19,6 +19,7 @@ import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.designer.exception.ValidationException;
 import eu.esens.espdvcd.designer.service.ImportESPDService;
 import eu.esens.espdvcd.designer.util.Errors;
+import eu.esens.espdvcd.designer.util.JsonUtil;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import org.apache.poi.util.IOUtils;
 import org.xml.sax.SAXException;
@@ -55,9 +56,9 @@ public class ImportESPDEndpoint extends Endpoint {
             spark.get("", ((request, response) -> {
                 response.status(405);
                 return Errors.standardError(405, "You need to POST an artefact in XML.");
-            }));
+            }), JsonUtil.json());
 
-            spark.post("", this::postRequest);
+            spark.post("", this::postRequest, JsonUtil.json());
         });
         spark.after((req, res) -> res.type("application/json"));
 
