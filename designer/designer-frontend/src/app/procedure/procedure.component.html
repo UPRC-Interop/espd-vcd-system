@@ -102,8 +102,8 @@
         </mat-form-field>
         <mat-form-field>
           <input matInput formControlName="email" placeholder="{{'espd.part1.email' | translate}}" name="CAofficialContactEmail"  [disabled]="this.dataService.isReadOnly()" [errorStateMatcher]="matcher">
-          <mat-error *ngIf="procedureForm.get('details.website').invalid">
-            <input-validation-error [formControlErrors]="procedureForm.get('details.website').errors"></input-validation-error>
+          <mat-error *ngIf="procedureForm.get('details.email').invalid">
+            <input-validation-error [formControlErrors]="procedureForm.get('details.email').errors"></input-validation-error>
           </mat-error>
         </mat-form-field>
       </ng-container>
