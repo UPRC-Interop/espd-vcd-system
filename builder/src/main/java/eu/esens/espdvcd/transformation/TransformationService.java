@@ -1,5 +1,6 @@
 package eu.esens.espdvcd.transformation;
 
+import com.openhtmltopdf.outputdevice.helper.BaseRendererBuilder;
 import com.openhtmltopdf.pdfboxout.PdfBoxRenderer;
 import com.openhtmltopdf.pdfboxout.PdfRendererBuilder;
 import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
@@ -15,7 +16,6 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import java.io.*;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.text.MessageFormat;
 
@@ -33,14 +33,13 @@ public class TransformationService {
 
     private static final String ESPD_DOCUMENT = "espd_document_";
     private static final String XSL = ".xsl";
+    public static final String FREE_SANS = "Free Sans";
 
     /**
      * Transformiert das ?bergebene XML-Source mit der XSL-Source
      *
-     * @param xmlSource
-     *            XML als Source
-     * @param xslSource
-     *            XSL als Source
+     * @param xmlSource XML als Source
+     * @param xslSource XSL als Source
      * @return Ergebnis der Transformation als DomSource
      */
     public DOMSource transform(Source xmlSource, Source xslSource) {
@@ -74,17 +73,17 @@ public class TransformationService {
     public void createPdf(Source documentSource, OutputStream outputStream, EULanguageCodeEnum lang) throws IOException {
 
         Source xslSource = getSourceByReference(MessageFormat.format("{0}{1}{2}", ESPD_DOCUMENT, lang.name().toLowerCase(), XSL));
-        DOMSource transformed  = transform(documentSource, xslSource);
+        DOMSource transformed = transform(documentSource, xslSource);
 
         PdfRendererBuilder builder = new PdfRendererBuilder();
-        builder.withW3cDocument((Document)transformed.getNode(), null);
+        builder.withW3cDocument((Document) transformed.getNode(), null);
         createPdf(outputStream, builder);
     }
 
     public void createHtml(Source documentSource, OutputStream outputStream, EULanguageCodeEnum lang) {
 
         Source xslSource = getSourceByReference(MessageFormat.format("{0}{1}{2}", ESPD_DOCUMENT, lang.name().toLowerCase(), XSL));
-        DOMSource transformed  = transform(documentSource, xslSource);
+        DOMSource transformed = transform(documentSource, xslSource);
 
         Result outputTarget = new StreamResult(outputStream);
         try {
@@ -95,15 +94,13 @@ public class TransformationService {
     }
 
     private void createPdf(OutputStream outputStream, PdfRendererBuilder builder) throws IOException {
-        try {
-            builder.useFont(new File(getClass().getResource("\\font\\FreeSans.ttf").toURI()), "Free Sans");
-            builder.toStream(outputStream);
-            PdfBoxRenderer renderer = builder.buildPdfRenderer();
-            renderer.layout();
-            renderer.createPDF();
-        } catch (URISyntaxException e) {
-            LOGGER.error("Error while creating pdf document", e);
-        }
+        builder.useFont( //
+                () -> this.getClass().getResourceAsStream("FreeSans.ttf"), //
+                FREE_SANS, 400, BaseRendererBuilder.FontStyle.NORMAL, true);
+        builder.toStream(outputStream);
+        PdfBoxRenderer renderer = builder.buildPdfRenderer();
+        renderer.layout();
+        renderer.createPDF();
     }
 
     public InputStream createHtmlStream(StreamSource documentSource, EULanguageCodeEnum languageCodeEnum) {

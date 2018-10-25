@@ -3,6 +3,11 @@
 /*Diese Zeilen stehen lassen, damit die CSS-Datei in dem XSL eingebunden werden kann!<![CDATA[<!--*/
 -->
 
+@font-face {
+    font-family: "Free Sans";
+    src: url("../FreeSans.ttf") format("truetype"); /* Use an absolute or relative url. */
+}
+
 .espd-details {
     /*Falls die Font-Family geaendert wird, beachten, dass die PDF-Erzeugung auf Arial reagiert.*/
     font-family: "Free Sans", sans-serif;
