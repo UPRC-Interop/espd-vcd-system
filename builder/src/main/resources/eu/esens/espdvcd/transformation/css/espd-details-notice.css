@@ -5,7 +5,7 @@
 
 .espd-details {
     /*Falls die Font-Family geaendert wird, beachten, dass die PDF-Erzeugung auf Arial reagiert.*/
-    font-family: Arial, Verdana, Helvetica, sans-serif;
+    font-family: "Free Sans", sans-serif;
     line-height: 1.4em;
     font-size: 14px;
     color: #000000;

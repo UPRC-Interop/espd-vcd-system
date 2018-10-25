@@ -156,4 +156,29 @@
         </xsl:choose>
     </xsl:template>
 
+    <xsl:template name="yesNo">
+        <xsl:param name="value"/>
+        <xsl:choose>
+            <xsl:when test="$value = 'true'">
+                <xsl:call-template name="getESPDProperty">
+                    <xsl:with-param name="key" select="'espd.gui.yes'"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="$value = 'false'">
+                <xsl:call-template name="getESPDProperty">
+                    <xsl:with-param name="key" select="'espd.gui.no'"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:call-template name="getESPDProperty">
+                    <xsl:with-param name="key" select="'espd.gui.yes'"/>
+                </xsl:call-template>
+                /
+                <xsl:call-template name="getESPDProperty">
+                    <xsl:with-param name="key" select="'espd.gui.no'"/>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
 </xsl:stylesheet>

@@ -15,6 +15,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import java.io.*;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.text.MessageFormat;
 
@@ -94,11 +95,15 @@ public class TransformationService {
     }
 
     private void createPdf(OutputStream outputStream, PdfRendererBuilder builder) throws IOException {
-        builder.toStream(outputStream);
-        PdfBoxRenderer renderer = builder.buildPdfRenderer();
-
-        renderer.layout();
-        renderer.createPDF();
+        try {
+            builder.useFont(new File(getClass().getResource("\\font\\FreeSans.ttf").toURI()), "Free Sans");
+            builder.toStream(outputStream);
+            PdfBoxRenderer renderer = builder.buildPdfRenderer();
+            renderer.layout();
+            renderer.createPDF();
+        } catch (URISyntaxException e) {
+            LOGGER.error("Error while creating pdf document", e);
+        }
     }
 
     public InputStream createHtmlStream(StreamSource documentSource, EULanguageCodeEnum languageCodeEnum) {

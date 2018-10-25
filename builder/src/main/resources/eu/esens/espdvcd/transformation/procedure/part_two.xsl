@@ -230,34 +230,24 @@
     </xsl:template>
 
     <xsl:template name="smeIndicator">
-        <xsl:variable name="isSME" select="//cac:EconomicOperatorParty/cac:Party/cac:PartyIdentification/cbc:ID/text() = 'SME'"/>
-        <form>
-            <xsl:element name="input">
-                <xsl:attribute name="name">yes_no</xsl:attribute>
-                <xsl:attribute name="type">radio</xsl:attribute>
-                <xsl:attribute name="disabled" />
-                <xsl:if test="$isSME">
-                    <xsl:attribute name="checked" />
-                </xsl:if>
-            </xsl:element>
-            &#8239;
-            <xsl:call-template name="getESPDProperty">
-                <xsl:with-param name="key" select="'espd.gui.yes'"/>
-            </xsl:call-template>
-            &#160;
-            <xsl:element name="input">
-                <xsl:attribute name="name">yes_no</xsl:attribute>
-                <xsl:attribute name="type">radio</xsl:attribute>
-                <xsl:attribute name="disabled" />
-                <xsl:if test="not($isSME)">
-                    <xsl:attribute name="checked" />
-                </xsl:if>
-            </xsl:element>
-            &#8239;
-            <xsl:call-template name="getESPDProperty">
-                <xsl:with-param name="key" select="'espd.gui.no'"/>
-            </xsl:call-template>
-        </form>
+        <xsl:variable name="isSME">
+            <xsl:choose>
+                <xsl:when test="//cac:EconomicOperatorParty/cac:Party/cbc:IndustryClassificationCode/text() = 'SME'">
+                    <xsl:value-of select="'true'"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="'false'"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+
+        <xsl:call-template name="paragraph">
+            <xsl:with-param name="value">
+                <xsl:call-template name="yesNo">
+                    <xsl:with-param name="value" select="$isSME"/>
+                </xsl:call-template>
+            </xsl:with-param>
+        </xsl:call-template>
     </xsl:template>
     
 

@@ -123,37 +123,9 @@
 
     <xsl:template name="yesNoIndicator">
         <xsl:variable name="tenderingCriterionResponse" select="//cac:TenderingCriterionResponse[./cbc:ValidatedCriterionPropertyID = current()/cbc:ID]"/>
-        <form>
-            <xsl:element name="input">
-                <xsl:attribute name="name">yes_no</xsl:attribute>
-                <xsl:attribute name="type">radio</xsl:attribute>
-                <xsl:attribute name="disabled" />
-                <xsl:if test="$tenderingCriterionResponse">
-                    <xsl:if test="$tenderingCriterionResponse/cac:ResponseValue/cbc:ResponseIndicator = 'true'">
-                        <xsl:attribute name="checked" />
-                    </xsl:if>
-                </xsl:if>
-            </xsl:element>
-            &#8239;
-            <xsl:call-template name="getESPDProperty">
-                <xsl:with-param name="key" select="'espd.gui.yes'"/>
-            </xsl:call-template>
-            &#160;
-            <xsl:element name="input">
-                <xsl:attribute name="name">yes_no</xsl:attribute>
-                <xsl:attribute name="type">radio</xsl:attribute>
-                <xsl:attribute name="disabled" />
-                <xsl:if test="$tenderingCriterionResponse">
-                    <xsl:if test="$tenderingCriterionResponse/cac:ResponseValue/cbc:ResponseIndicator = 'false'">
-                        <xsl:attribute name="checked" />
-                    </xsl:if>
-                </xsl:if>
-            </xsl:element>
-            &#8239;
-            <xsl:call-template name="getESPDProperty">
-                <xsl:with-param name="key" select="'espd.gui.no'"/>
-            </xsl:call-template>
-        </form>
+        <xsl:call-template name="yesNo">
+            <xsl:with-param name="value" select="$tenderingCriterionResponse/cac:ResponseValue/cbc:ResponseIndicator"/>
+        </xsl:call-template>
     </xsl:template>
 
     <xsl:template name="countryValue">
