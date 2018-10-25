@@ -20,14 +20,42 @@
   <label *ngIf="req.responseDataType=='WEIGHT_INDICATOR'" [attr.for]="req.uuid">{{req.description}}</label>
 
 
-  <!--SELF-CONTAINED: Hide the QUESTION fields if the user is a CA making a Request. Render only the REQUIREMENT and CAPTION fields.-->
-  <div [ngSwitch]="req.responseDataType" [hidden]="this.utilities.isCA && req.type === 'QUESTION'">
 
-    <mat-form-field *ngSwitchDefault>
-      <label [attr.for]="req.uuid">{{req.description}}</label>
-      <br>
-      <input matInput [formControlName]="req.uuid" [id]="req.uuid" >
-    </mat-form-field>
+  <!--SELF-CONTAINED: Hide the QUESTION fields if the user is a CA making a Request. Render only the REQUIREMENT and CAPTION fields.
+  Don't show the REQUIREMENT fields if the user has the role of EO and creates a new ESPD response from scratch-->
+  <div [ngSwitch]="req.responseDataType" [hidden]="(this.utilities.isCA && req.type === 'QUESTION') || (this.utilities.isEO &&
+  (req.type ==='REQUIREMENT') && this.utilities.isCreateResponse)">
+
+    <!--<label *ngSwitchCase="req.responseDataType=='NONE'">{{req.description}} CAPTION</label>-->
+
+    <!--<mat-form-field *ngSwitchDefault>-->
+      <!--<label [attr.for]="req.uuid">{{req.description}}</label>-->
+      <!--<br>-->
+      <!--<input matInput [formControlName]="req.uuid" [id]="req.uuid" >-->
+    <!--</mat-form-field>-->
+
+    <div *ngSwitchDefault>
+      <div *ngIf="req.type === 'CAPTION'">
+        <p>{{req.description}}</p>
+      </div>
+      <div *ngIf="req.type === 'QUESTION'">
+        <mat-form-field>
+          <label [attr.for]="req.uuid">{{req.description}}</label>
+          <br>
+          <input matInput [formControlName]="req.uuid" [id]="req.uuid" >
+        </mat-form-field>
+      </div>
+      <div *ngIf="req.type === 'REQUIREMENT'">
+        <mat-form-field>
+          <label [attr.for]="req.uuid">{{req.description}}</label>
+          <br>
+          <input matInput [formControlName]="req.uuid" [id]="req.uuid" >
+        </mat-form-field>
+      </div>
+
+    </div>
+
+
 
     <mat-form-field *ngSwitchCase="'DATE'">
       <label [attr.for]="req.uuid">{{req.description}}</label>
