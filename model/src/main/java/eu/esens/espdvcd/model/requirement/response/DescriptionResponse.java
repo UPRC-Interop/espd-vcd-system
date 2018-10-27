@@ -41,7 +41,6 @@ public class DescriptionResponse extends Response implements Serializable {
      */
     protected String description;
 
-
     public DescriptionResponse() {
     }
 

@@ -18,8 +18,21 @@ package eu.esens.espdvcd.model.requirement.response;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Lots Identifier Response
+ */
 public class LotsIdentifierResponse extends Response implements Serializable {
 
+    /**
+     * Criterion Response for Self-Contained Lots
+     * <p>
+     * A list of Identifiers Representing the Lots that the EO applies for.
+     * </p>
+     * Data Type: List of Identifiers<br>
+     * Cardinality: 0..1<br>
+     * UBL syntax path:
+     * ccv:Criterion.RequirementGroup.Requirement.Response.Identifier<br>
+     */
     private static final long serialVersionUID = -7114827204655335550L;
     private List<String> lots;
 

@@ -1,12 +1,12 @@
 /**
  * Copyright 2016-2018 University of Piraeus Research Center
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -21,13 +21,11 @@ import java.util.List;
 
 /**
  * Contracting authority and procurement procedure details
- *
+ * <p>
  * The contracting authority or contracting entity who is buying supplies, services or public works using a
  * tendering procedure as described in the applicable directive (Directives 2014/24/EU, 2014/25/EU).
- *
- *
  */
-public class CADetails implements Serializable{
+public class CADetails implements Serializable {
 
     private static final long serialVersionUID = -2251052431953226768L;
 
@@ -186,27 +184,59 @@ public class CADetails implements Serializable{
     private String procurementPublicationURI;
 
     /**
-     *
+     * Type of procedure
+     * <p>
+     * The type of the procurement procedure. Uses ProcedureCode codelist values.
+     * </p>
+     * Data type: Code<br>
+     * Cardinality: 0..1<br>
+     * UBL syntax path: cbc:ProcedureCode
      */
     private String procurementProcedureType;
 
     /**
-     *
+     * Description of the weighting methodology
+     * <p>
+     * Free-form text for describing information about Weight Scoring Methodology.
+     * </p>
+     * Data type: Text<br>
+     * Cardinality: 0..1(0..n)<br>
+     * UBL syntax path: cbc:WeightScoringMethodologyNote
      */
     private String weightScoringMethodologyNote;
 
     /**
-     *
+     * Method of calculating the weights
+     * <p>
+     * A code specifying the type of the Weighting. Compulsory use of the code list WeightingType.
+     * </p>
+     * Data type: Code<br>
+     * Cardinality: 0..1<br>
+     * UBL syntax path: cbc:WeightingTypeCode
      */
     private String weightingType;
 
     /**
-     *
+     * Object of the project
+     * <p>
+     * A code to describe the object of the project
+     * (e.g. works, supplies, services, public work concessions, service concessions, other).
+     * Uses ProjectType codelist values.
+     * </p>
+     * Data type: Code<br>
+     * Cardinality: 0..1<br>
+     * UBL syntax path: cac:ProcurementProject/cbc:ProcurementTypeCode
      */
     private String projectType;
 
     /**
-     *
+     * CPV codes
+     * <p>
+     * CPV codes assigned to works and services.
+     * </p>
+     * Data type: Text<br>
+     * Cardinality: 0..n<br>
+     * UBL syntax path: cac:ProcurementProject/cac:MainCommodityClassification/cbc: ItemClassificationCode
      */
     private List<String> classificationCodes;
 
@@ -242,7 +272,6 @@ public class CADetails implements Serializable{
     private String nationalOfficialJournal;
 
 
-
     public String getProcurementPublicationURI() {
         return procurementPublicationURI;
     }
@@ -250,7 +279,7 @@ public class CADetails implements Serializable{
     public void setProcurementPublicationURI(String procurementPublicationURI) {
         this.procurementPublicationURI = procurementPublicationURI;
     }
-    
+
     public String getCAOfficialName() {
         return caOfficialName;
     }
