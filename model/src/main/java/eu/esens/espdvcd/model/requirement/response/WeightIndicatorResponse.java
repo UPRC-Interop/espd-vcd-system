@@ -1,12 +1,12 @@
 /**
  * Copyright 2016-2018 University of Piraeus Research Center
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,8 +17,28 @@ package eu.esens.espdvcd.model.requirement.response;
 
 import java.io.Serializable;
 
+/**
+ * Weight Indicator Response
+ */
 public class WeightIndicatorResponse extends Response implements Serializable {
 
+    /**
+     * Criterion response for weighting indicator
+     * <p>
+     * A special indicator that can also store the weighting information
+     * for a criterion.
+     * </p>
+     * Data types:<br>
+     * evaluationMethodType: Code<br>
+     * evaluationMethodDescription: Text<br>
+     * weight: Float<br>
+     * indicator: Boolean<br>
+     * Cardinality: 0..1<br>
+     * UBL syntax paths:
+     * evaluationMethodType: ccv:Criterion.EvaluationMethodTypeCode
+     * evaluationMethodDescription ccv:Criterion.WeightingConsiderationDescription
+     * weight ccv:Criterion.WeightNumeric
+     */
     private static final long serialVersionUID = -3204508364109778286L;
     private String evaluationMethodType;
     private String evaluationMethodDescription;

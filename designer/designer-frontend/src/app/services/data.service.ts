@@ -39,6 +39,8 @@ import {FormUtilService} from './form-util.service';
 import {UtilitiesService} from './utilities.service';
 import {TranslateService} from '@ngx-translate/core';
 import {Language} from '../model/language.model';
+import {EoIDType} from '../model/eoIDType.model';
+import {EvaluationMethodType} from '../model/evaluationMethodType.model';
 
 @Injectable()
 export class DataService {
@@ -66,6 +68,8 @@ export class DataService {
   countries: Country[] = null;
   procedureTypes: ProcedureType[] = null;
   currency: Currency[] = null;
+  eoIDType: EoIDType[] = null;
+  evaluationMethodType: EvaluationMethodType[] = null;
   exclusionACriteria: ExclusionCriteria[] = null;
   exclusionBCriteria: ExclusionCriteria[] = null;
   exclusionCCriteria: ExclusionCriteria[] = null;
@@ -1296,6 +1300,46 @@ export class DataService {
       return this.APIService.getCurr()
         .then(res => {
           this.currency = res;
+          return Promise.resolve(res);
+        })
+        .catch(err => {
+          console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
+          return Promise.reject(err);
+        });
+    }
+  }
+
+  getEoIDTypes(): Promise<EoIDType[]> {
+    if (this.eoIDType != null) {
+      return Promise.resolve(this.eoIDType);
+    } else {
+      return this.APIService.get_eoIDTypes()
+        .then(res => {
+          this.eoIDType = res;
+          return Promise.resolve(res);
+        })
+        .catch(err => {
+          console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
+          return Promise.reject(err);
+        });
+    }
+  }
+
+  getEvalutationMethodTypes(): Promise<EvaluationMethodType[]> {
+    if (this.evaluationMethodType != null) {
+      return Promise.resolve(this.evaluationMethodType);
+    } else {
+      return this.APIService.get_EvaluationMethodType()
+        .then(res => {
+          this.evaluationMethodType = res;
           return Promise.resolve(res);
         })
         .catch(err => {

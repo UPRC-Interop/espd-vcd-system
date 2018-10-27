@@ -60,6 +60,15 @@ public class Criterion implements Serializable {
      */
     protected String UUID;
 
+    /**
+     * Criterion type
+     * <p>
+     * Specifies whether the current element is a Criterion or a Subcriterion
+     * Uses a subset of the CriterionElementType codelist
+     * <p>
+     * Data type: Code<br>
+     */
+
     protected CriterionTypeEnum type = CriterionTypeEnum.CRITERION;
 
     /**
