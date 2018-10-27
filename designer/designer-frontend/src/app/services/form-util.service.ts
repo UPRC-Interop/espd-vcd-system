@@ -280,6 +280,11 @@ export class FormUtilService {
             } else if (req.responseDataType === 'URL') {
               req.response.url = formValues[req.uuid.valueOf()];
               req.response.uuid = null;
+            } else if (req.responseDataType === 'EO_IDENTIFIER') {
+              req.response.id = formValues[req.uuid.valueOf()];
+              const eoidtypeID = req.uuid + 'eoidtype';
+              req.response.eoidtype = formValues[eoidtypeID.valueOf()];
+              req.response.uuid = null;
             }
           }
         });
@@ -379,6 +384,8 @@ export class FormUtilService {
             group[r.uuid + 'evaluationMethodDescription'] = new FormControl();
           } else if (r.responseDataType === 'AMOUNT') {
             group[r.uuid + 'currency'] = new FormControl();
+          } else if (r.responseDataType === 'EO_IDENTIFIER') {
+            group[r.uuid + 'eoidtype'] = new FormControl();
           } else {
             group[r.uuid] = new FormControl();
           }
@@ -599,6 +606,12 @@ export class FormUtilService {
               }
             }
 
+            /* SELF-CONTAINED: EO_IDENTIFIER */
+            if (r.response.id || r.response.eoidtype) {
+              group[r.uuid] = new FormControl(r.response.id);
+              group[r.uuid + 'eoidtype'] = new FormControl(r.response.eoidtype);
+            }
+
             if (r.response.currency || r.response.amount) {
               if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
                 group[r.uuid] = new FormControl({
@@ -608,7 +621,7 @@ export class FormUtilService {
               } else {
                 group[r.uuid] = new FormControl({
                   value: r.response.amount,
-                    disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
                 });
               }
               if (r.response.currency !== null && r.response.currency !== undefined) {
@@ -620,7 +633,7 @@ export class FormUtilService {
                 } else {
                   group[r.uuid + 'currency'] = new FormControl({
                     value: r.response.currency,
-                      disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                    disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
                   });
                 }
               }
@@ -661,6 +674,18 @@ export class FormUtilService {
                   disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
                 });
               }
+
+              if (r.responseDataType === 'EO_IDENTIFIER') {
+                group[r.uuid] = new FormControl({
+                  value: '',
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
+                group[r.uuid + 'eoidtype'] = new FormControl({
+                  value: '',
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
+              }
+
 
               if (r.responseDataType === 'WEIGHT_INDICATOR') {
                 group[r.uuid] = new FormControl(false);

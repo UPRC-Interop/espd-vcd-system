@@ -134,7 +134,6 @@
       <mat-form-field>
         <input matInput [formControlName]="req.uuid+'evidenceIssuer'" [id]="req.uuid+'evidenceIssuer'" >
       </mat-form-field>
-
     </div>
 
 
@@ -161,9 +160,11 @@
       <div class="weight" *ngIf="isWeighted">
         <label [attr.for]="req.uuid+'evaluationMethodType'">Criterion evaluation method: </label>
         <br>
-        <!-- TODO: get from EvaluationMethodType codelist -->
         <mat-form-field>
-          <input matInput [formControlName]="req.uuid+'evaluationMethodType'" [id]="req.uuid+'evaluationMethodType'" >
+          <mat-select [formControlName]="req.uuid+'evaluationMethodType'" [id]="req.uuid+'evaluationMethodType'">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let type of evaluationMethodTypes" [value]="type.code">{{type.code}} ( {{type.name}} )</mat-option>
+          </mat-select>
         </mat-form-field>
         <label [attr.for]="req.uuid+'weight'">Weight allocated to this criterion: </label>
         <br>
@@ -177,6 +178,24 @@
         </mat-form-field>
       </div>
     </div>
+
+    <!-- SELF-CONTAINED: EO_IDENTIFIER -->
+    <div class="eo_identifier" *ngSwitchCase="'EO_IDENTIFIER'">
+      <label [attr.for]="req.uuid">{{req.description}}</label>
+      <br>
+      <mat-form-field>
+        <input matInput [formControlName]="req.uuid" [id]="req.uuid" >
+      </mat-form-field>
+      <label [attr.for]="req.uuid+'eoidtype'">Type of ID: </label>
+      <br>
+      <mat-form-field>
+        <mat-select [formControlName]="req.uuid+'eoidtype'" [id]="req.uuid+'eoidtype'">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let type of eoIDTypes" [value]="type.code">{{type.code}} ( {{type.name}} )</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
 
   </div>
 </div>

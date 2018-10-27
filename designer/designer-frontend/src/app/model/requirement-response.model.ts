@@ -42,5 +42,5 @@ export class RequirementResponse {
   evaluationMethodType?: string;
   weight?: number;
   evaluationMethodDescription?: string;
-  EOIDType?: string;
+  eoidtype?: string;
 }

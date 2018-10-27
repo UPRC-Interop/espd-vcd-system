@@ -29,6 +29,8 @@ import {ESPDResponse} from '../model/ESPDResponse.model';
 import {environment} from '../../environments/environment';
 import {Language} from '../model/language.model';
 import {UtilitiesService} from './utilities.service';
+import {EoIDType} from '../model/eoIDType.model';
+import {EvaluationMethodType} from '../model/evaluationMethodType.model';
 
 // import {DataService} from '../services/data.service';
 
@@ -49,16 +51,25 @@ export class ApicallService {
     return this.http.get<Country[]>(environment.apiUrl + 'v2/codelists/CountryIdentification').toPromise();
   }
 
-  getProcedureType() {
-    return this.http.get<ProcedureType[]>(environment.apiUrl + 'v2/codelists/ProcedureType').toPromise();
-  }
-
   getCurr() {
     return this.http.get<Currency[]>(environment.apiUrl + 'v1/codelists/Currency').toPromise();
   }
 
   getLangs() {
     return this.http.get<Language[]>(environment.apiUrl + 'v2/codelists/LanguageCodeEU').toPromise();
+  }
+
+  /* SELF-CONTAINED: Codelists*/
+  get_eoIDTypes() {
+    return this.http.get<EoIDType[]>(environment.apiUrl + 'v2/codelists/EOIDType').toPromise();
+  }
+
+  get_EvaluationMethodType() {
+    return this.http.get<EvaluationMethodType[]>(environment.apiUrl + 'v2/codelists/EvaluationMethodType').toPromise();
+  }
+
+  getProcedureType() {
+    return this.http.get<ProcedureType[]>(environment.apiUrl + 'v2/codelists/ProcedureType').toPromise();
   }
 
 

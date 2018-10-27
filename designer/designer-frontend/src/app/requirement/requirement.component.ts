@@ -22,6 +22,8 @@ import {Country} from '../model/country.model';
 import {Currency} from '../model/currency.model';
 import {ApicallService} from '../services/apicall.service';
 import {UtilitiesService} from '../services/utilities.service';
+import {EoIDType} from '../model/eoIDType.model';
+import {EvaluationMethodType} from '../model/evaluationMethodType.model';
 
 @Component({
   selector: 'app-requirement',
@@ -37,6 +39,8 @@ export class RequirementComponent implements OnInit, OnChanges {
 
   countries: Country[] = null;
   currency: Currency[] = null;
+  eoIDTypes: EoIDType[] = null;
+  evaluationMethodTypes: EvaluationMethodType[] = null;
   isWeighted = false;
 
   constructor(public dataService: DataService, public APIService: ApicallService, public utilities: UtilitiesService) {
@@ -64,6 +68,24 @@ export class RequirementComponent implements OnInit, OnChanges {
     this.dataService.getCurrency()
       .then(res => {
         this.currency = res;
+        // console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+    this.dataService.getEoIDTypes()
+      .then(res => {
+        this.eoIDTypes = res;
+        // console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+    this.dataService.getEvalutationMethodTypes()
+      .then(res => {
+        this.evaluationMethodTypes = res;
         // console.log(res);
       })
       .catch(err => {
