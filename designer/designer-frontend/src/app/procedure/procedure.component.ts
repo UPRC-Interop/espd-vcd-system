@@ -14,13 +14,11 @@
 /// limitations under the License.
 ///
 
-import {Component, OnInit, OnChanges, SimpleChanges, Input} from '@angular/core';
+import {Component, OnInit, OnChanges, SimpleChanges} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {ProcedureType} from '../model/procedureType.model';
 import {Country} from '../model/country.model';
 import {NgForm} from '@angular/forms/forms';
-import {EoRelatedCriterion} from '../model/eoRelatedCriterion.model';
-import {ReductionCriterion} from '../model/reductionCriterion.model';
 import {UtilitiesService} from '../services/utilities.service';
 import {ProjectType} from '../model/projectType.model';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
@@ -43,9 +41,6 @@ export class ProcedureComponent implements OnInit, OnChanges {
   countries: Country[] = null;
   procedureTypes: ProcedureType[] = null;
   projectTypes: ProjectType[] = null;
-  // @Input() eoRelatedCriteria: EoRelatedCriterion[];
-  // @Input() reductionCriteria: ReductionCriterion[];
-
 
   constructor(public dataService: DataService, public utilities: UtilitiesService) {
   }
@@ -106,7 +101,7 @@ export class ProcedureComponent implements OnInit, OnChanges {
     const input = event.input;
     const value = event.value;
 
-    // Add our fruit
+    // Add our cpv
     if ((value || '').trim()) {
       this.dataService.CADetails.classificationCodes.push(value.trim());
     }
