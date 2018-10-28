@@ -151,7 +151,6 @@ export class DataService {
     this.AddLanguages();
     translate.setDefaultLang('ESPD_en');
     console.log(this.translate.getLangs());
-
   }
 
 
@@ -309,6 +308,7 @@ export class DataService {
     }
     return filteredList;
   }
+
   filterCARelatedCriteria(regex: RegExp, criteriaList: FullCriterion[]): CaRelatedCriterion[] {
     const filteredList: FullCriterion[] = [];
     for (const fullCriterion of criteriaList) {
@@ -519,6 +519,10 @@ export class DataService {
           console.log(this.CADetails.postalAddress.postCode);
           this.selectedCountry = this.CADetails.cacountry;
 
+          if (this.utilities.qualificationApplicationType === 'self-contained') {
+            this.CADetails.classificationCodes = res.cadetails.classificationCodes;
+          }
+
           console.log(res.fullCriterionList);
 
           this.caRelatedCriteria = this.filterCARelatedCriteria(this.OTHER_CA_REGEXP, res.fullCriterionList);
@@ -587,6 +591,9 @@ export class DataService {
           this.PostalAddress = res.cadetails.postalAddress;
           this.ContactingDetails = res.cadetails.contactingDetails;
           this.receivedNoticeNumber = res.cadetails.receivedNoticeNumber;
+          if (this.utilities.qualificationApplicationType === 'self-contained') {
+            this.CADetails.classificationCodes = res.cadetails.classificationCodes;
+          }
           this.selectedCountry = this.CADetails.cacountry;
           this.EODetails = res.eodetails;
           console.log(this.EODetails);

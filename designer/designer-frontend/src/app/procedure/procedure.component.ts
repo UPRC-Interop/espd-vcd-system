@@ -52,7 +52,9 @@ export class ProcedureComponent implements OnInit, OnChanges {
 
   ngOnInit() {
 
-    this.dataService.CADetails.classificationCodes = ['test', 'test2', 'niar'];
+    if (this.dataService.CADetails) {
+      this.dataService.CADetails.classificationCodes = [];
+    }
 
     this.dataService.getCountries()
       .then(res => {
