@@ -141,6 +141,23 @@
             <mat-option *ngFor="let project of projectTypes" [value]="project.code">{{project.name}}</mat-option>
           </mat-select>
         </mat-form-field>
+        <br>
+        <mat-form-field class="cpv-chip-list">
+          <mat-chip-list #chipList>
+            <mat-chip color='primary' selected=true *ngFor="let cpv of dataService.CADetails.classificationCodes" [selectable]="selectable"
+                      [removable]="removable" (removed)="remove(cpv)">
+              {{cpv}}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <input placeholder="CPV Codes: "
+                   [matChipInputFor]="chipList"
+                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                   [matChipInputAddOnBlur]="addOnBlur"
+                   (matChipInputTokenEnd)="add($event)">
+          </mat-chip-list>
+        </mat-form-field>
+
+
         <ng-container *ngIf="dataService.caRelatedCriteriaForm">
           <form [formGroup]="dataService.caRelatedCriteriaForm">
             <div class="eoRelatedCriteria" *ngFor="let cr of this.dataService.caRelatedCriteria; let i=index">

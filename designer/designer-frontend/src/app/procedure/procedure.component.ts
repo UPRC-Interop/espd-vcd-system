@@ -23,6 +23,8 @@ import {EoRelatedCriterion} from '../model/eoRelatedCriterion.model';
 import {ReductionCriterion} from '../model/reductionCriterion.model';
 import {UtilitiesService} from '../services/utilities.service';
 import {ProjectType} from '../model/projectType.model';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {MatChipInputEvent} from '@angular/material';
 
 @Component({
   selector: 'app-procedure',
@@ -30,6 +32,13 @@ import {ProjectType} from '../model/projectType.model';
   styleUrls: ['./procedure.component.css']
 })
 export class ProcedureComponent implements OnInit, OnChanges {
+
+  /* CPV chips */
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
   countries: Country[] = null;
   procedureTypes: ProcedureType[] = null;
@@ -42,6 +51,8 @@ export class ProcedureComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
+
+    this.dataService.CADetails.classificationCodes = ['test', 'test2', 'niar'];
 
     this.dataService.getCountries()
       .then(res => {
@@ -76,6 +87,7 @@ export class ProcedureComponent implements OnInit, OnChanges {
     console.log(this.dataService.receivedNoticeNumber);
   }
 
+
   onProcedureSubmit(form: NgForm) {
     // console.log(form.value);
     this.dataService.CADetails.cacountry = form.value.CACountry;
@@ -86,6 +98,29 @@ export class ProcedureComponent implements OnInit, OnChanges {
     this.dataService.CADetails.contactingDetails = this.dataService.ContactingDetails;
     console.log(this.dataService.CADetails);
     // this.dataService.procedureSubmit(this.eoRelatedCriteria, this.reductionCriteria);
+  }
+
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    // Add our fruit
+    if ((value || '').trim()) {
+      this.dataService.CADetails.classificationCodes.push(value.trim());
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+  }
+
+  remove(cpv: string): void {
+    const index = this.dataService.CADetails.classificationCodes.indexOf(cpv);
+
+    if (index >= 0) {
+      this.dataService.CADetails.classificationCodes.splice(index, 1);
+    }
   }
 
 
