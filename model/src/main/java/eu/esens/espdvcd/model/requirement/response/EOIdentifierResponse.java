@@ -39,12 +39,12 @@ public class EOIdentifierResponse extends Response implements Serializable {
     private String EOIDType;
     private String identifier;
 
+    public EOIdentifierResponse() {
+    }
+
     public EOIdentifierResponse(String EOIDType, String identifier) {
         this.EOIDType = EOIDType;
         this.identifier = identifier;
-    }
-
-    public EOIdentifierResponse() {
     }
 
     public String getEOIDType() {

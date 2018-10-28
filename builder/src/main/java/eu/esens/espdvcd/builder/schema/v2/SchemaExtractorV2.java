@@ -25,6 +25,7 @@ import eu.espd.schema.v2.pre_award.commonbasic.*;
 import eu.espd.schema.v2.unqualifieddatatypes_2.CodeType;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 public interface SchemaExtractorV2 {
@@ -633,6 +634,13 @@ public interface SchemaExtractorV2 {
         codeType.setListVersionID("2.0.2");
         codeType.setValue(code);
         return codeType;
+    }
+
+    default ResponseValueType createResponseValueType() {
+        ResponseValueType valueType = new ResponseValueType();
+        valueType.setID(createDefaultIDType(UUID.randomUUID().toString()));
+        valueType.getID().setSchemeID("ISO/IEC 9834-8:2008 - 4UUID");
+        return valueType;
     }
 
 }

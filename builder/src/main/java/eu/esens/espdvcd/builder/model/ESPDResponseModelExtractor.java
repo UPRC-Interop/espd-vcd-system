@@ -515,7 +515,18 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 return weightInResp;
 
             case LOTS_IDENTIFIER:
-                return null;
+                LotsIdentifierResponse lotsIdeResp = new LotsIdentifierResponse();
+                res.getResponseValue().forEach(resValueType -> {
+
+                    if (resValueType.getResponseID() != null
+                            && resValueType.getResponseID().getValue() != null) {
+                        lotsIdeResp.getLots().add(resValueType.getResponseID().getValue());
+                    }
+                });
+                applyValidatedCriterionPropertyID(res.getValidatedCriterionPropertyID(), lotsIdeResp);
+                applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), lotsIdeResp);
+                lotsIdeResp.setResponseType(theType);
+                return lotsIdeResp;
 
             case EO_IDENTIFIER:
                 EOIdentifierResponse eoIdeResp = new EOIdentifierResponse();

@@ -51,7 +51,4 @@ public class LotsIdentifierResponse extends Response implements Serializable {
         return lots;
     }
 
-    public void setLots(List<String> lots) {
-        this.lots = lots;
-    }
 }
