@@ -15,7 +15,8 @@
     limitations under the License.
 
 -->
-<div *ngFor="let rg of criterion.requirementGroups" class="form-row">
+<div *ngFor="let rg of criterion.requirementGroups" class="form-row"
+     [hidden]="(((rg.type === 'QUESTION_SUBGROUP' || rg.type === 'QUESTION_GROUP') && this.utilities.isCA))">
   <app-requirement-group [reqGroup]="rg" [form] = "form.get(rg.uuid)" [indicator]="true"></app-requirement-group>
   <div *ngIf="rg.mandatory && rg.multiple" style="text-align: right">
     <button type="button" (click)="onAdd(rg)"><span class="material-icons" style="vertical-align: middle;">add_circle_outline</span></button>

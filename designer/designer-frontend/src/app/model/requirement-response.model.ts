@@ -22,6 +22,7 @@ export class RequirementResponse {
   description: string;
   evidenceURL?: string;
   evidenceURLCode?: string;
+  code?: string[];
   percentage?: string;
   period?: string;
   countryCode?: string;

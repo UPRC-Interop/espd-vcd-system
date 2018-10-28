@@ -16,8 +16,11 @@
 
 -->
 <div [formGroup]="form">
-  <label *ngIf="req.responseDataType=='INDICATOR'" [attr.for]="req.uuid">{{req.description}}</label>
-  <label *ngIf="req.responseDataType=='WEIGHT_INDICATOR'" [attr.for]="req.uuid">{{req.description}}</label>
+  <div>
+    <label *ngIf="req.responseDataType=='INDICATOR'" [attr.for]="req.uuid">{{req.description}}</label>
+    <label *ngIf="req.responseDataType=='WEIGHT_INDICATOR'" [attr.for]="req.uuid">{{req.description}}</label>
+  </div>
+
 
 
 

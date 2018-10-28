@@ -273,6 +273,9 @@ public class CADetails implements Serializable {
      */
     private String nationalOfficialJournal;
 
+    public CADetails() {
+    }
+
 
     public String getProcurementPublicationURI() {
         return procurementPublicationURI;

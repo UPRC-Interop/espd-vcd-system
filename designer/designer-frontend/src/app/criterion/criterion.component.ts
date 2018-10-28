@@ -21,6 +21,7 @@ import {RequirementGroup} from '../model/requirementGroup.model';
 import {FormUtilService} from '../services/form-util.service';
 import {UUID} from 'angular2-uuid';
 import {FullCriterion} from '../model/fullCriterion.model';
+import {UtilitiesService} from '../services/utilities.service';
 
 @Component({
   selector: 'app-criterion',
@@ -35,7 +36,7 @@ export class CriterionComponent implements OnInit {
   public placeHolder: any = {};
   fullCriterionList: FullCriterion[] = null;
 
-  constructor(public formUtil: FormUtilService) {
+  constructor(public formUtil: FormUtilService, public utilities: UtilitiesService) {
   }
 
   ngOnInit() {

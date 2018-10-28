@@ -30,6 +30,7 @@ import {ReductionCriterion} from '../model/reductionCriterion.model';
 import {UtilitiesService} from './utilities.service';
 import {FullCriterion} from '../model/fullCriterion.model';
 import {UUID} from 'angular2-uuid';
+import {CaRelatedCriterion} from '../model/caRelatedCriterion.model';
 
 @Injectable({
   providedIn: 'root'
@@ -199,7 +200,10 @@ export class FormUtilService {
 
               // console.log(JSON.stringify(this.dataService.evidenceList));
               req.response.uuid = null;
-            } else if (req.responseDataType === 'CODE') {
+            } else if (req.responseDataType === 'CODE' && this.utilities.qualificationApplicationType === 'regulated') {
+              req.response.evidenceURLCode = formValues[req.uuid.valueOf()];
+              req.response.uuid = null;
+            } else if (req.responseDataType === 'CODE' && this.utilities.qualificationApplicationType === 'self-contained') {
               req.response.evidenceURLCode = formValues[req.uuid.valueOf()];
               req.response.uuid = null;
             } else if (req.responseDataType === 'DATE') {
@@ -451,6 +455,18 @@ export class FormUtilService {
     return fg;
   }
 
+  createCARelatedCriterionForm(criteria: CaRelatedCriterion[]) {
+    let group: any = {};
+    criteria.forEach(cr => {
+      group[cr.uuid] = this.createFormGroups(cr.requirementGroups);
+      // console.log(group[cr.typeCode]);
+    });
+    let fg = new FormGroup(group);
+
+    // console.log(fg);
+    return fg;
+  }
+
 
   createFormGroups(reqGroups: RequirementGroup[]) {
     let group: any = {};
@@ -658,6 +674,26 @@ export class FormUtilService {
                 group[r.uuid + 'evaluationMethodType'] = new FormControl();
                 group[r.uuid + 'weight'] = new FormControl();
                 group[r.uuid + 'evaluationMethodDescription'] = new FormControl();
+              }
+              if (r.responseDataType === 'AMOUNT') {
+                group[r.uuid] = new FormControl({
+                  value: '',
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
+                group[r.uuid + 'currency'] = new FormControl({
+                  value: '',
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
+              }
+              if (r.responseDataType === 'PERIOD' && this.APIService.version === 'v2') {
+                group[r.uuid + 'startDate'] = new FormControl({
+                  value: '',
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
+                group[r.uuid + 'endDate'] = new FormControl({
+                  value: '',
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
               }
             }
             if (this.utilities.isEO) {

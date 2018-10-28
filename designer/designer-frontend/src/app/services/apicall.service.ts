@@ -31,6 +31,8 @@ import {Language} from '../model/language.model';
 import {UtilitiesService} from './utilities.service';
 import {EoIDType} from '../model/eoIDType.model';
 import {EvaluationMethodType} from '../model/evaluationMethodType.model';
+import {ProjectType} from '../model/projectType.model';
+import {BidType} from '../model/bidType.model';
 
 // import {DataService} from '../services/data.service';
 
@@ -72,6 +74,14 @@ export class ApicallService {
     return this.http.get<ProcedureType[]>(environment.apiUrl + 'v2/codelists/ProcedureType').toPromise();
   }
 
+  get_ProjectType() {
+    return this.http.get<ProjectType[]>(environment.apiUrl + 'v2/codelists/ProjectType').toPromise();
+  }
+
+  get_BidType() {
+    return this.http.get<BidType[]>(environment.apiUrl + 'v2/codelists/BidType').toPromise();
+  }
+
 
   /* ==================== EO related criteria ========================= */
 
@@ -93,6 +103,13 @@ export class ApicallService {
   getEO_RelatedDCriteria() {
     return this.http.get<EoRelatedCriterion[]>(environment.apiUrl + this.version + '/' + this.utilities.qualificationApplicationType +
       '/criteria/eo_related_C').toPromise();
+  }
+
+  /* SELF-CONTAINED: CA related Criterion - CA LOTS */
+
+  getCA_RelatedCriteria() {
+    return this.http.get<EoRelatedCriterion[]>(environment.apiUrl + this.version + '/' + this.utilities.qualificationApplicationType +
+      '/criteria/other_ca').toPromise();
   }
 
   /* =========================== Reduction of Candidates ================= */

@@ -109,12 +109,6 @@
 
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <!--<mat-form-field>-->
-        <!--<mat-select placeholder="Type of Procedure" name="typeOfProcedure" [(ngModel)]="dataService.CADetails.procurementProcedureType">-->
-          <!--<mat-option>None</mat-option>-->
-          <!--<mat-option *ngFor="let proc of procedureTypes" [value]="proc.code">{{proc.name}}</mat-option>-->
-        <!--</mat-select>-->
-      <!--</mat-form-field>-->
       <mat-form-field>
         <input matInput placeholder="{{'espd.part1.procurer.name' | translate}}" name="title" [(ngModel)]="dataService.CADetails.procurementProcedureTitle" [disabled]="this.dataService.isReadOnly()">
       </mat-form-field>
@@ -130,6 +124,53 @@
         <input matInput placeholder="{{'espd.part1.file.ref.ca' | translate}}" name="fileReferenceNumber"
                [(ngModel)]="dataService.CADetails.procurementProcedureFileReferenceNo" [disabled]="this.dataService.isReadOnly()">
       </mat-form-field>
+      <!-- SELF-CONTAINED: Type of Procedure -->
+      <div *ngIf="utilities.qualificationApplicationType === 'self-contained'">
+        <mat-form-field>
+          <mat-select placeholder="Type of Procedure: " name="typeOfProcedure"
+                      [(ngModel)]="dataService.CADetails.procurementProcedureType">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let proc of procedureTypes" [value]="proc.code">{{proc.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!-- SELF-CONTAINED: Bid Type - Object of Contracts -->
+        <mat-form-field>
+          <mat-select placeholder="Objects of Contracts: " name="projectType"
+                      [(ngModel)]="dataService.CADetails.projectType">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let project of projectTypes" [value]="project.code">{{project.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="cpv-chip-list">
+          <mat-chip-list #chipList>
+            <mat-chip color='primary' selected=true *ngFor="let cpv of dataService.CADetails.classificationCodes" [selectable]="selectable"
+                      [removable]="removable" (removed)="remove(cpv)">
+              {{cpv}}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <input placeholder="CPV Codes: "
+                   [matChipInputFor]="chipList"
+                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                   [matChipInputAddOnBlur]="addOnBlur"
+                   (matChipInputTokenEnd)="add($event)">
+          </mat-chip-list>
+        </mat-form-field>
+
+
+        <ng-container *ngIf="dataService.caRelatedCriteriaForm">
+          <form [formGroup]="dataService.caRelatedCriteriaForm">
+            <div class="eoRelatedCriteria" *ngFor="let cr of this.dataService.caRelatedCriteria; let i=index">
+              <mat-card>
+                <h4>{{cr.description}}</h4>
+                <div class="answer">
+                  <app-criterion [criterion]="cr" [form]="dataService.caRelatedCriteriaForm.controls" [indicator]="true"></app-criterion>
+                </div>
+              </mat-card>
+            </div>
+          </form>
+        </ng-container>
+      </div>
     </mat-expansion-panel>
   </mat-accordion>
   <button mat-raised-button color="primary" matStepperPrevious>{{'espd.gui.previous' | translate}}</button>

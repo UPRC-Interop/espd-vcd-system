@@ -41,6 +41,9 @@ import {TranslateService} from '@ngx-translate/core';
 import {Language} from '../model/language.model';
 import {EoIDType} from '../model/eoIDType.model';
 import {EvaluationMethodType} from '../model/evaluationMethodType.model';
+import {CaRelatedCriterion} from '../model/caRelatedCriterion.model';
+import {ProjectType} from '../model/projectType.model';
+import {BidType} from '../model/bidType.model';
 
 @Injectable()
 export class DataService {
@@ -64,9 +67,12 @@ export class DataService {
   EO_RELATED_D_REGEXP: RegExp = /^CRITERION.OTHER.EO_DATA.SUBCONTRACTS_WITH_THIRD_PARTIES*/;
   REDUCTION_OF_CANDIDATES_REGEXP: RegExp = /^CRITERION.OTHER.EO_DATA.MEETS_THE_OBJECTIVE*/;
 
+  OTHER_CA_REGEXP: RegExp = /^CRITERION.OTHER.CA_DATA.+/;
 
   countries: Country[] = null;
   procedureTypes: ProcedureType[] = null;
+  projectTypes: ProjectType[] = null;
+  bidTypes: BidType[] = null;
   currency: Currency[] = null;
   eoIDType: EoIDType[] = null;
   evaluationMethodType: EvaluationMethodType[] = null;
@@ -80,6 +86,7 @@ export class DataService {
   selectionDCriteria: SelectionCriteria[] = null;
   selectionALLCriteria: SelectionCriteria[] = null;
   fullCriterionList: FullCriterion[] = null;
+  caRelatedCriteria: CaRelatedCriterion[] = null;
   eoRelatedCriteria: EoRelatedCriterion[] = null;
   eoRelatedACriteria: EoRelatedCriterion[] = null;
   eoRelatedCCriteria: EoRelatedCriterion[] = null;
@@ -118,6 +125,8 @@ export class DataService {
   public eoRelatedCCriteriaForm: FormGroup = null;
   public eoRelatedDCriteriaForm: FormGroup = null;
 
+  public caRelatedCriteriaForm: FormGroup = null;
+
   public exclusionACriteriaForm: FormGroup = null;
   public exclusionBCriteriaForm: FormGroup = null;
   public exclusionCCriteriaForm: FormGroup = null;
@@ -142,7 +151,6 @@ export class DataService {
     this.AddLanguages();
     translate.setDefaultLang('ESPD_en');
     console.log(this.translate.getLangs());
-
   }
 
 
@@ -167,7 +175,8 @@ export class DataService {
     return filteredList;
   }
 
-  makeFullCriterionListCA(exclusionACriteria: ExclusionCriteria[],
+  makeFullCriterionListCA(caRelatedCriteria: CaRelatedCriterion[],
+                          exclusionACriteria: ExclusionCriteria[],
                           exclusionBCriteria: ExclusionCriteria[],
                           exclusionCCriteria: ExclusionCriteria[],
                           exclusionDCriteria: ExclusionCriteria[],
@@ -184,7 +193,8 @@ export class DataService {
     if (this.utilities.isCA) {
       if (isSatisfiedALL) {
         console.log(reductionCriteria);
-        var combineJsonArray = [...exclusionACriteria,
+        var combineJsonArray = [...caRelatedCriteria,
+          ...exclusionACriteria,
           ...exclusionBCriteria,
           ...exclusionCCriteria,
           ...exclusionDCriteria,
@@ -197,7 +207,7 @@ export class DataService {
 
       } else {
         console.log(reductionCriteria);
-        var combineJsonArray = [
+        var combineJsonArray = [...caRelatedCriteria,
           ...exclusionACriteria,
           ...exclusionBCriteria,
           ...exclusionCCriteria,
@@ -299,6 +309,16 @@ export class DataService {
     return filteredList;
   }
 
+  filterCARelatedCriteria(regex: RegExp, criteriaList: FullCriterion[]): CaRelatedCriterion[] {
+    const filteredList: FullCriterion[] = [];
+    for (const fullCriterion of criteriaList) {
+      if (regex.test(fullCriterion.typeCode)) {
+        filteredList.push(fullCriterion);
+      }
+    }
+    return filteredList;
+  }
+
 
   /* ================================= create ESPDRequest Object =======================*/
 
@@ -329,10 +349,24 @@ export class DataService {
 
   selectionSubmit(isSatisfiedALL: boolean) {
 
+    /* extract caRelated criteria */
+    this.formUtil.extractFormValuesFromCriteria(this.caRelatedCriteria, this.caRelatedCriteriaForm, this.formUtil.evidenceList);
+    /* extract exclusion criteria */
+    this.formUtil.extractFormValuesFromCriteria(this.exclusionACriteria, this.exclusionACriteriaForm, this.formUtil.evidenceList);
+    this.formUtil.extractFormValuesFromCriteria(this.exclusionBCriteria, this.exclusionBCriteriaForm, this.formUtil.evidenceList);
+    this.formUtil.extractFormValuesFromCriteria(this.exclusionCCriteria, this.exclusionCCriteriaForm, this.formUtil.evidenceList);
+    this.formUtil.extractFormValuesFromCriteria(this.exclusionDCriteria, this.exclusionDCriteriaForm, this.formUtil.evidenceList);
+    /* extract selection criteria */
+    this.formUtil.extractFormValuesFromCriteria(this.selectionACriteria, this.selectionACriteriaForm, this.formUtil.evidenceList);
+    this.formUtil.extractFormValuesFromCriteria(this.selectionBCriteria, this.selectionBCriteriaForm, this.formUtil.evidenceList);
+    this.formUtil.extractFormValuesFromCriteria(this.selectionCCriteria, this.selectionCCriteriaForm, this.formUtil.evidenceList);
+    this.formUtil.extractFormValuesFromCriteria(this.selectionDCriteria, this.selectionDCriteriaForm, this.formUtil.evidenceList);
+
     // create ESPDRequest
     // console.dir(JSON.stringify(this.createESPDRequest(isSatisfiedALL)));
     // console.log(this.reductionCriteria);
-    this.fullCriterionList = this.makeFullCriterionListCA(this.exclusionACriteria,
+    this.fullCriterionList = this.makeFullCriterionListCA(this.caRelatedCriteria,
+      this.exclusionACriteria,
       this.exclusionBCriteria,
       this.exclusionCCriteria,
       this.exclusionDCriteria,
@@ -373,6 +407,9 @@ export class DataService {
     this.formUtil.extractFormValuesFromCriteria(this.eoRelatedACriteria, this.eoRelatedACriteriaForm, this.formUtil.evidenceList);
     this.formUtil.extractFormValuesFromCriteria(this.eoRelatedCCriteria, this.eoRelatedCCriteriaForm, this.formUtil.evidenceList);
     this.formUtil.extractFormValuesFromCriteria(this.eoRelatedDCriteria, this.eoRelatedDCriteriaForm, this.formUtil.evidenceList);
+
+    /* extract caRelated criteria */
+    this.formUtil.extractFormValuesFromCriteria(this.caRelatedCriteria, this.caRelatedCriteriaForm, this.formUtil.evidenceList);
 
     /* extract exclusion criteria */
     this.formUtil.extractFormValuesFromCriteria(this.exclusionACriteria, this.exclusionACriteriaForm, this.formUtil.evidenceList);
@@ -482,14 +519,31 @@ export class DataService {
           console.log(this.CADetails.postalAddress.postCode);
           this.selectedCountry = this.CADetails.cacountry;
 
+          if (this.utilities.qualificationApplicationType === 'self-contained') {
+            this.CADetails.classificationCodes = res.cadetails.classificationCodes;
+          }
+
           console.log(res.fullCriterionList);
+
+          this.caRelatedCriteria = this.filterCARelatedCriteria(this.OTHER_CA_REGEXP, res.fullCriterionList);
+
+          this.caRelatedCriteriaForm = this.formUtil.createCARelatedCriterionForm(this.caRelatedCriteria);
 
           this.exclusionACriteria = this.filterExclusionCriteria(this.EXCLUSION_CONVICTION_REGEXP, res.fullCriterionList);
           this.exclusionBCriteria = this.filterExclusionCriteria(this.EXCLUSION_CONTRIBUTION_REGEXP, res.fullCriterionList);
           this.exclusionCCriteria = this.filterExclusionCriteria(this.EXCLUSION_SOCIAL_BUSINESS_MISCONDUCT_CONFLICT_REGEXP, res.fullCriterionList);
           this.exclusionDCriteria = this.filterExclusionCriteria(this.EXCLUSION_NATIONAL_REGEXP, res.fullCriterionList);
 
-          console.log(this.exclusionDCriteria);
+          this.exclusionACriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionACriteria);
+          // console.log(this.exclusionACriteriaForm);
+          this.exclusionBCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionBCriteria);
+          // console.log(this.exclusionBCriteriaForm);
+          this.exclusionCCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionCCriteria);
+          // console.log(this.exclusionCCriteriaForm);
+          this.exclusionDCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionDCriteria);
+          // console.log(this.exclusionDCriteriaForm);
+
+          // console.log(this.exclusionDCriteria);
 
           this.selectionACriteria = this.filterSelectionCriteria(this.SELECTION_SUITABILITY_REGEXP, res.fullCriterionList);
           this.selectionBCriteria = this.filterSelectionCriteria(this.SELECTION_ECONOMIC_REGEXP, res.fullCriterionList);
@@ -497,8 +551,21 @@ export class DataService {
           this.selectionDCriteria = this.filterSelectionCriteria(this.SELECTION_CERTIFICATES_REGEXP, res.fullCriterionList);
           this.selectionALLCriteria = this.filterSelectionCriteria(this.SELECTION_REGEXP, res.fullCriterionList);
 
+          this.selectionACriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionACriteria);
+          // console.log(this.selectionACriteriaForm);
+          this.selectionBCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionBCriteria);
+          // console.log(this.selectionBCriteriaForm);
+          this.selectionCCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionCCriteria);
+          // console.log(this.selectionCCriteriaForm);
+          this.selectionDCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionDCriteria);
+          // console.log(this.selectionDCriteriaForm);
+          this.selectionALLCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionALLCriteria);
+
           this.eoRelatedCriteria = this.filterEoRelatedCriteria(this.EO_RELATED_REGEXP, res.fullCriterionList);
           this.reductionCriteria = this.filterEoRelatedCriteria(this.REDUCTION_OF_CANDIDATES_REGEXP, res.fullCriterionList);
+
+          // create requirementGroup template objects required for multiple instances (cardinalities) function
+          this.formUtil.createTemplateReqGroups(res.fullCriterionList);
           console.log(res);
 
 
@@ -527,6 +594,9 @@ export class DataService {
           this.PostalAddress = res.cadetails.postalAddress;
           this.ContactingDetails = res.cadetails.contactingDetails;
           this.receivedNoticeNumber = res.cadetails.receivedNoticeNumber;
+          if (this.utilities.qualificationApplicationType === 'self-contained') {
+            this.CADetails.classificationCodes = res.cadetails.classificationCodes;
+          }
           this.selectedCountry = this.CADetails.cacountry;
           this.EODetails = res.eodetails;
           console.log(this.EODetails);
@@ -549,6 +619,9 @@ export class DataService {
           // console.log(this.EOForm.value);
 
           console.log(res.fullCriterionList);
+
+          this.caRelatedCriteria = this.filterCARelatedCriteria(this.OTHER_CA_REGEXP, res.fullCriterionList);
+          this.caRelatedCriteriaForm = this.formUtil.createCARelatedCriterionForm(this.caRelatedCriteria);
 
           this.eoRelatedACriteria = this.filterEoRelatedCriteria(this.EO_RELATED_A_REGEXP, res.fullCriterionList);
           // console.log(this.eoRelatedACriteria);
@@ -854,6 +927,24 @@ export class DataService {
           this.openSnackBar(message, action);
         });
 
+      /* =================== SELF-CONTAINED: predefined ca related criterion ============ */
+
+      if (this.utilities.qualificationApplicationType === 'self-contained') {
+        this.getCaRelatedCriteria()
+          .then(res => {
+            this.caRelatedCriteria = res;
+            this.caRelatedCriteriaForm = this.formUtil.createCARelatedCriterionForm(this.caRelatedCriteria);
+            // console.log(this.caRelatedCriteria);
+          })
+          .catch(err => {
+            console.log(err);
+            const message: string = err.error +
+              ' ' + err.message;
+            const action = 'close';
+            this.openSnackBar(message, action);
+          });
+      }
+
 
       /* ========================= predefined exclusion criteria response ============= */
       this.getExclusionACriteria()
@@ -1029,6 +1120,8 @@ export class DataService {
         .then(res => {
           this.reductionCriteria = res;
           // console.log(this.reductionCriteria);
+          /* [cardinalities]: create template requirementGroup */
+          this.formUtil.createTemplateReqGroups(this.reductionCriteria);
         })
         .catch(err => {
           console.log(err);
@@ -1052,13 +1145,35 @@ export class DataService {
           this.openSnackBar(message, action);
         });
 
+      /* ========================= SELF-CONTAINED: predefined other.ca criteria ============================= */
+
+      if (this.utilities.qualificationApplicationType === 'self-contained') {
+        this.getCaRelatedCriteria()
+          .then(res => {
+            this.caRelatedCriteria = res;
+            this.caRelatedCriteriaForm = this.formUtil.createCARelatedCriterionForm(this.caRelatedCriteria);
+            /* [cardinalities]: create template requirementGroup */
+            this.formUtil.createTemplateReqGroups(this.caRelatedCriteria);
+            // console.log(this.caRelatedCriteria);
+          })
+          .catch(err => {
+            console.log(err);
+            const message: string = err.error +
+              ' ' + err.message;
+            const action = 'close';
+            this.openSnackBar(message, action);
+          });
+      }
+
       /* ======================== predefined exclusion criteria ================================== */
 
       this.getExclusionACriteria()
         .then(res => {
           this.exclusionACriteria = res;
+          this.exclusionACriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionACriteria);
           // console.log("This is exclusionACriteria: ");
-          // console.log(this.exclusionACriteria);
+          /* [cardinalities]: create template requirementGroup */
+          this.formUtil.createTemplateReqGroups(this.exclusionACriteria);
         })
         .catch(err => {
           console.log(err);
@@ -1071,7 +1186,10 @@ export class DataService {
       this.getExclusionBCriteria()
         .then(res => {
           this.exclusionBCriteria = res;
+          this.exclusionBCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionBCriteria);
           // console.log(res);
+          /* [cardinalities]: create template requirementGroup */
+          this.formUtil.createTemplateReqGroups(this.exclusionBCriteria);
         })
         .catch(err => {
           console.log(err);
@@ -1084,7 +1202,10 @@ export class DataService {
       this.getExclusionCCriteria()
         .then(res => {
           this.exclusionCCriteria = res;
+          this.exclusionCCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionCCriteria);
           // console.log(res);
+          /* [cardinalities]: create template requirementGroup */
+          this.formUtil.createTemplateReqGroups(this.exclusionCCriteria);
         })
         .catch(err => {
           console.log(err);
@@ -1097,7 +1218,10 @@ export class DataService {
       this.getExclusionDCriteria()
         .then(res => {
           this.exclusionDCriteria = res;
+          this.exclusionDCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionDCriteria);
           // console.log(res);
+          /* [cardinalities]: create template requirementGroup */
+          this.formUtil.createTemplateReqGroups(this.exclusionDCriteria);
         })
         .catch(err => {
           console.log(err);
@@ -1112,6 +1236,7 @@ export class DataService {
       this.getSelectionALLCriteria()
         .then(res => {
           this.selectionALLCriteria = res;
+          this.selectionALLCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionALLCriteria);
           // console.log(res);
         })
         .catch(err => {
@@ -1125,6 +1250,9 @@ export class DataService {
       this.getSelectionACriteria()
         .then(res => {
           this.selectionACriteria = res;
+          this.selectionACriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionACriteria);
+          /* [cardinalities]: create template requirementGroup */
+          this.formUtil.createTemplateReqGroups(this.selectionACriteria);
           // console.log(res);
         })
         .catch(err => {
@@ -1139,7 +1267,9 @@ export class DataService {
       this.getSelectionBCriteria()
         .then(res => {
           this.selectionBCriteria = res;
+          this.selectionBCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionBCriteria);
           // console.log(res);
+          this.formUtil.createTemplateReqGroups(this.selectionBCriteria);
         })
         .catch(err => {
           console.log(err);
@@ -1152,7 +1282,9 @@ export class DataService {
       this.getSelectionCCriteria()
         .then(res => {
           this.selectionCCriteria = res;
+          this.selectionCCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionCCriteria);
           // console.log(res);
+          this.formUtil.createTemplateReqGroups(this.selectionCCriteria);
         })
         .catch(err => {
           console.log(err);
@@ -1165,6 +1297,8 @@ export class DataService {
       this.getSelectionDCriteria()
         .then(res => {
           this.selectionDCriteria = res;
+          this.selectionDCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionDCriteria);
+          this.formUtil.createTemplateReqGroups(this.selectionDCriteria);
           // console.log(res);
         })
         .catch(err => {
@@ -1273,13 +1407,13 @@ export class DataService {
     }
   }
 
-  getProcedureTypes(): Promise<ProcedureType[]> {
-    if (this.procedureTypes != null) {
-      return Promise.resolve(this.procedureTypes);
+  getCurrency(): Promise<Currency[]> {
+    if (this.currency != null) {
+      return Promise.resolve(this.currency);
     } else {
-      return this.APIService.getProcedureType()
+      return this.APIService.getCurr()
         .then(res => {
-          this.procedureTypes = res;
+          this.currency = res;
           return Promise.resolve(res);
         })
         .catch(err => {
@@ -1293,13 +1427,15 @@ export class DataService {
     }
   }
 
-  getCurrency(): Promise<Currency[]> {
-    if (this.currency != null) {
-      return Promise.resolve(this.currency);
+  /* ============================= SELF-CONTAINED: codelists ========================*/
+
+  getProcedureTypes(): Promise<ProcedureType[]> {
+    if (this.procedureTypes != null) {
+      return Promise.resolve(this.procedureTypes);
     } else {
-      return this.APIService.getCurr()
+      return this.APIService.getProcedureType()
         .then(res => {
-          this.currency = res;
+          this.procedureTypes = res;
           return Promise.resolve(res);
         })
         .catch(err => {
@@ -1340,6 +1476,46 @@ export class DataService {
       return this.APIService.get_EvaluationMethodType()
         .then(res => {
           this.evaluationMethodType = res;
+          return Promise.resolve(res);
+        })
+        .catch(err => {
+          console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
+          return Promise.reject(err);
+        });
+    }
+  }
+
+  getProjectTypes(): Promise<ProjectType[]> {
+    if (this.projectTypes != null) {
+      return Promise.resolve(this.projectTypes);
+    } else {
+      return this.APIService.get_ProjectType()
+        .then(res => {
+          this.projectTypes = res;
+          return Promise.resolve(res);
+        })
+        .catch(err => {
+          console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
+          return Promise.reject(err);
+        });
+    }
+  }
+
+  getBidTypes(): Promise<BidType[]> {
+    if (this.bidTypes != null) {
+      return Promise.resolve(this.bidTypes);
+    } else {
+      return this.APIService.get_BidType()
+        .then(res => {
+          this.bidTypes = res;
           return Promise.resolve(res);
         })
         .catch(err => {
@@ -1427,6 +1603,28 @@ export class DataService {
         .then(
           res => {
             this.eoRelatedDCriteria = res;
+            return Promise.resolve(res);
+          }
+        ).catch(err => {
+          console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
+          return Promise.reject(err);
+        });
+    }
+  }
+
+  /* =============================== SELF-CONTAINED: CA Related Criteria ======================== */
+  getCaRelatedCriteria(): Promise<CaRelatedCriterion[]> {
+    if (this.caRelatedCriteria != null) {
+      return Promise.resolve(this.caRelatedCriteria);
+    } else {
+      return this.APIService.getCA_RelatedCriteria()
+        .then(
+          res => {
+            this.caRelatedCriteria = res;
             return Promise.resolve(res);
           }
         ).catch(err => {

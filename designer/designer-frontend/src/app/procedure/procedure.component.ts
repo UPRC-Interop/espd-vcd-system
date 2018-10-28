@@ -14,13 +14,15 @@
 /// limitations under the License.
 ///
 
-import {Component, OnInit, OnChanges, SimpleChanges, Input} from '@angular/core';
+import {Component, OnInit, OnChanges, SimpleChanges} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {ProcedureType} from '../model/procedureType.model';
 import {Country} from '../model/country.model';
 import {NgForm} from '@angular/forms/forms';
-import {EoRelatedCriterion} from '../model/eoRelatedCriterion.model';
-import {ReductionCriterion} from '../model/reductionCriterion.model';
+import {UtilitiesService} from '../services/utilities.service';
+import {ProjectType} from '../model/projectType.model';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {MatChipInputEvent} from '@angular/material';
 
 @Component({
   selector: 'app-procedure',
@@ -29,16 +31,25 @@ import {ReductionCriterion} from '../model/reductionCriterion.model';
 })
 export class ProcedureComponent implements OnInit, OnChanges {
 
+  /* CPV chips */
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+
   countries: Country[] = null;
   procedureTypes: ProcedureType[] = null;
-  // @Input() eoRelatedCriteria: EoRelatedCriterion[];
-  // @Input() reductionCriteria: ReductionCriterion[];
+  projectTypes: ProjectType[] = null;
 
-
-  constructor(public dataService: DataService) {
+  constructor(public dataService: DataService, public utilities: UtilitiesService) {
   }
 
   ngOnInit() {
+
+    if (this.dataService.CADetails) {
+      this.dataService.CADetails.classificationCodes = [];
+    }
 
     this.dataService.getCountries()
       .then(res => {
@@ -58,11 +69,21 @@ export class ProcedureComponent implements OnInit, OnChanges {
         console.log(err);
       });
 
+    this.dataService.getProjectTypes()
+      .then(res => {
+        this.projectTypes = res;
+        // console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
   }
 
   ngOnChanges(changes: SimpleChanges) {
     console.log(this.dataService.receivedNoticeNumber);
   }
+
 
   onProcedureSubmit(form: NgForm) {
     // console.log(form.value);
@@ -74,6 +95,29 @@ export class ProcedureComponent implements OnInit, OnChanges {
     this.dataService.CADetails.contactingDetails = this.dataService.ContactingDetails;
     console.log(this.dataService.CADetails);
     // this.dataService.procedureSubmit(this.eoRelatedCriteria, this.reductionCriteria);
+  }
+
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    // Add our cpv
+    if ((value || '').trim()) {
+      this.dataService.CADetails.classificationCodes.push(value.trim());
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+  }
+
+  remove(cpv: string): void {
+    const index = this.dataService.CADetails.classificationCodes.indexOf(cpv);
+
+    if (index >= 0) {
+      this.dataService.CADetails.classificationCodes.splice(index, 1);
+    }
   }
 
 
