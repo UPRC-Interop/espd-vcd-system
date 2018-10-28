@@ -21,6 +21,8 @@ import {Country} from '../model/country.model';
 import {NgForm} from '@angular/forms/forms';
 import {EoRelatedCriterion} from '../model/eoRelatedCriterion.model';
 import {ReductionCriterion} from '../model/reductionCriterion.model';
+import {UtilitiesService} from '../services/utilities.service';
+import {ProjectType} from '../model/projectType.model';
 
 @Component({
   selector: 'app-procedure',
@@ -31,11 +33,12 @@ export class ProcedureComponent implements OnInit, OnChanges {
 
   countries: Country[] = null;
   procedureTypes: ProcedureType[] = null;
+  projectTypes: ProjectType[] = null;
   // @Input() eoRelatedCriteria: EoRelatedCriterion[];
   // @Input() reductionCriteria: ReductionCriterion[];
 
 
-  constructor(public dataService: DataService) {
+  constructor(public dataService: DataService, public utilities: UtilitiesService) {
   }
 
   ngOnInit() {
@@ -52,6 +55,15 @@ export class ProcedureComponent implements OnInit, OnChanges {
     this.dataService.getProcedureTypes()
       .then(res => {
         this.procedureTypes = res;
+        // console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+    this.dataService.getProjectTypes()
+      .then(res => {
+        this.projectTypes = res;
         // console.log(res);
       })
       .catch(err => {

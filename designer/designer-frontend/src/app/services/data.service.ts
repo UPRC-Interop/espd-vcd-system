@@ -41,6 +41,9 @@ import {TranslateService} from '@ngx-translate/core';
 import {Language} from '../model/language.model';
 import {EoIDType} from '../model/eoIDType.model';
 import {EvaluationMethodType} from '../model/evaluationMethodType.model';
+import {CaRelatedCriterion} from '../model/caRelatedCriterion.model';
+import {ProjectType} from '../model/projectType.model';
+import {BidType} from '../model/bidType.model';
 
 @Injectable()
 export class DataService {
@@ -67,6 +70,8 @@ export class DataService {
 
   countries: Country[] = null;
   procedureTypes: ProcedureType[] = null;
+  projectTypes: ProjectType[] = null;
+  bidTypes: BidType[] = null;
   currency: Currency[] = null;
   eoIDType: EoIDType[] = null;
   evaluationMethodType: EvaluationMethodType[] = null;
@@ -80,6 +85,7 @@ export class DataService {
   selectionDCriteria: SelectionCriteria[] = null;
   selectionALLCriteria: SelectionCriteria[] = null;
   fullCriterionList: FullCriterion[] = null;
+  caRelatedCriteria: CaRelatedCriterion[] = null;
   eoRelatedCriteria: EoRelatedCriterion[] = null;
   eoRelatedACriteria: EoRelatedCriterion[] = null;
   eoRelatedCCriteria: EoRelatedCriterion[] = null;
@@ -854,6 +860,23 @@ export class DataService {
           this.openSnackBar(message, action);
         });
 
+      /* =================== SELF-CONTAINED: predefined ca related criterion ============ */
+
+      if (this.utilities.qualificationApplicationType === 'self-contained') {
+        this.getCaRelatedCriteria()
+          .then(res => {
+            this.caRelatedCriteria = res;
+            // console.log(this.caRelatedCriteria);
+          })
+          .catch(err => {
+            console.log(err);
+            const message: string = err.error +
+              ' ' + err.message;
+            const action = 'close';
+            this.openSnackBar(message, action);
+          });
+      }
+
 
       /* ========================= predefined exclusion criteria response ============= */
       this.getExclusionACriteria()
@@ -1051,6 +1074,23 @@ export class DataService {
           const action = 'close';
           this.openSnackBar(message, action);
         });
+
+      /* ========================= SELF-CONTAINED: predefined other.ca criteria ============================= */
+
+      if (this.utilities.qualificationApplicationType === 'self-contained') {
+        this.getCaRelatedCriteria()
+          .then(res => {
+            this.caRelatedCriteria = res;
+            // console.log(this.caRelatedCriteria);
+          })
+          .catch(err => {
+            console.log(err);
+            const message: string = err.error +
+              ' ' + err.message;
+            const action = 'close';
+            this.openSnackBar(message, action);
+          });
+      }
 
       /* ======================== predefined exclusion criteria ================================== */
 
@@ -1273,13 +1313,13 @@ export class DataService {
     }
   }
 
-  getProcedureTypes(): Promise<ProcedureType[]> {
-    if (this.procedureTypes != null) {
-      return Promise.resolve(this.procedureTypes);
+  getCurrency(): Promise<Currency[]> {
+    if (this.currency != null) {
+      return Promise.resolve(this.currency);
     } else {
-      return this.APIService.getProcedureType()
+      return this.APIService.getCurr()
         .then(res => {
-          this.procedureTypes = res;
+          this.currency = res;
           return Promise.resolve(res);
         })
         .catch(err => {
@@ -1293,13 +1333,15 @@ export class DataService {
     }
   }
 
-  getCurrency(): Promise<Currency[]> {
-    if (this.currency != null) {
-      return Promise.resolve(this.currency);
+  /* ============================= SELF-CONTAINED: codelists ========================*/
+
+  getProcedureTypes(): Promise<ProcedureType[]> {
+    if (this.procedureTypes != null) {
+      return Promise.resolve(this.procedureTypes);
     } else {
-      return this.APIService.getCurr()
+      return this.APIService.getProcedureType()
         .then(res => {
-          this.currency = res;
+          this.procedureTypes = res;
           return Promise.resolve(res);
         })
         .catch(err => {
@@ -1340,6 +1382,46 @@ export class DataService {
       return this.APIService.get_EvaluationMethodType()
         .then(res => {
           this.evaluationMethodType = res;
+          return Promise.resolve(res);
+        })
+        .catch(err => {
+          console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
+          return Promise.reject(err);
+        });
+    }
+  }
+
+  getProjectTypes(): Promise<ProjectType[]> {
+    if (this.projectTypes != null) {
+      return Promise.resolve(this.projectTypes);
+    } else {
+      return this.APIService.get_ProjectType()
+        .then(res => {
+          this.projectTypes = res;
+          return Promise.resolve(res);
+        })
+        .catch(err => {
+          console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
+          return Promise.reject(err);
+        });
+    }
+  }
+
+  getBidTypes(): Promise<BidType[]> {
+    if (this.bidTypes != null) {
+      return Promise.resolve(this.bidTypes);
+    } else {
+      return this.APIService.get_BidType()
+        .then(res => {
+          this.bidTypes = res;
           return Promise.resolve(res);
         })
         .catch(err => {
@@ -1427,6 +1509,28 @@ export class DataService {
         .then(
           res => {
             this.eoRelatedDCriteria = res;
+            return Promise.resolve(res);
+          }
+        ).catch(err => {
+          console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
+          return Promise.reject(err);
+        });
+    }
+  }
+
+  /* =============================== SELF-CONTAINED: CA Related Criteria ======================== */
+  getCaRelatedCriteria(): Promise<CaRelatedCriterion[]> {
+    if (this.caRelatedCriteria != null) {
+      return Promise.resolve(this.caRelatedCriteria);
+    } else {
+      return this.APIService.getCA_RelatedCriteria()
+        .then(
+          res => {
+            this.caRelatedCriteria = res;
             return Promise.resolve(res);
           }
         ).catch(err => {

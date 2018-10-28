@@ -38,5 +38,4 @@ export class Cadetails {
   projectType?: string;
   weightingType?: string;
   weightingScoringMethodologyNote?: string;
-
 }
