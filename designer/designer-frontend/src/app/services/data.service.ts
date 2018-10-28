@@ -176,7 +176,8 @@ export class DataService {
     return filteredList;
   }
 
-  makeFullCriterionListCA(exclusionACriteria: ExclusionCriteria[],
+  makeFullCriterionListCA(caRelatedCriteria: CaRelatedCriterion[],
+                          exclusionACriteria: ExclusionCriteria[],
                           exclusionBCriteria: ExclusionCriteria[],
                           exclusionCCriteria: ExclusionCriteria[],
                           exclusionDCriteria: ExclusionCriteria[],
@@ -193,7 +194,8 @@ export class DataService {
     if (this.utilities.isCA) {
       if (isSatisfiedALL) {
         console.log(reductionCriteria);
-        var combineJsonArray = [...exclusionACriteria,
+        var combineJsonArray = [...caRelatedCriteria,
+          ...exclusionACriteria,
           ...exclusionBCriteria,
           ...exclusionCCriteria,
           ...exclusionDCriteria,
@@ -206,7 +208,7 @@ export class DataService {
 
       } else {
         console.log(reductionCriteria);
-        var combineJsonArray = [
+        var combineJsonArray = [...caRelatedCriteria,
           ...exclusionACriteria,
           ...exclusionBCriteria,
           ...exclusionCCriteria,
@@ -307,6 +309,15 @@ export class DataService {
     }
     return filteredList;
   }
+  filterCARelatedCriteria(regex: RegExp, criteriaList: FullCriterion[]): CaRelatedCriterion[] {
+    const filteredList: FullCriterion[] = [];
+    for (const fullCriterion of criteriaList) {
+      if (regex.test(fullCriterion.typeCode)) {
+        filteredList.push(fullCriterion);
+      }
+    }
+    return filteredList;
+  }
 
 
   /* ================================= create ESPDRequest Object =======================*/
@@ -338,10 +349,14 @@ export class DataService {
 
   selectionSubmit(isSatisfiedALL: boolean) {
 
+    /* extract caRelated criteria */
+    this.formUtil.extractFormValuesFromCriteria(this.caRelatedCriteria, this.caRelatedCriteriaForm, this.formUtil.evidenceList);
+
     // create ESPDRequest
     // console.dir(JSON.stringify(this.createESPDRequest(isSatisfiedALL)));
     // console.log(this.reductionCriteria);
-    this.fullCriterionList = this.makeFullCriterionListCA(this.exclusionACriteria,
+    this.fullCriterionList = this.makeFullCriterionListCA(this.caRelatedCriteria,
+      this.exclusionACriteria,
       this.exclusionBCriteria,
       this.exclusionCCriteria,
       this.exclusionDCriteria,

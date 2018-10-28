@@ -200,7 +200,10 @@ export class FormUtilService {
 
               // console.log(JSON.stringify(this.dataService.evidenceList));
               req.response.uuid = null;
-            } else if (req.responseDataType === 'CODE') {
+            } else if (req.responseDataType === 'CODE' && this.utilities.qualificationApplicationType === 'regulated') {
+              req.response.evidenceURLCode = formValues[req.uuid.valueOf()];
+              req.response.uuid = null;
+            } else if (req.responseDataType === 'CODE' && this.utilities.qualificationApplicationType === 'self-contained') {
               req.response.evidenceURLCode = formValues[req.uuid.valueOf()];
               req.response.uuid = null;
             } else if (req.responseDataType === 'DATE') {
