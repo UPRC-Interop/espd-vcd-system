@@ -351,6 +351,16 @@ export class DataService {
 
     /* extract caRelated criteria */
     this.formUtil.extractFormValuesFromCriteria(this.caRelatedCriteria, this.caRelatedCriteriaForm, this.formUtil.evidenceList);
+    /* extract exclusion criteria */
+    this.formUtil.extractFormValuesFromCriteria(this.exclusionACriteria, this.exclusionACriteriaForm, this.formUtil.evidenceList);
+    this.formUtil.extractFormValuesFromCriteria(this.exclusionBCriteria, this.exclusionBCriteriaForm, this.formUtil.evidenceList);
+    this.formUtil.extractFormValuesFromCriteria(this.exclusionCCriteria, this.exclusionCCriteriaForm, this.formUtil.evidenceList);
+    this.formUtil.extractFormValuesFromCriteria(this.exclusionDCriteria, this.exclusionDCriteriaForm, this.formUtil.evidenceList);
+    /* extract selection criteria */
+    this.formUtil.extractFormValuesFromCriteria(this.selectionACriteria, this.selectionACriteriaForm, this.formUtil.evidenceList);
+    this.formUtil.extractFormValuesFromCriteria(this.selectionBCriteria, this.selectionBCriteriaForm, this.formUtil.evidenceList);
+    this.formUtil.extractFormValuesFromCriteria(this.selectionCCriteria, this.selectionCCriteriaForm, this.formUtil.evidenceList);
+    this.formUtil.extractFormValuesFromCriteria(this.selectionDCriteria, this.selectionDCriteriaForm, this.formUtil.evidenceList);
 
     // create ESPDRequest
     // console.dir(JSON.stringify(this.createESPDRequest(isSatisfiedALL)));
@@ -1120,6 +1130,7 @@ export class DataService {
       this.getExclusionACriteria()
         .then(res => {
           this.exclusionACriteria = res;
+          this.exclusionACriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionACriteria);
           // console.log("This is exclusionACriteria: ");
           // console.log(this.exclusionACriteria);
         })
@@ -1134,6 +1145,7 @@ export class DataService {
       this.getExclusionBCriteria()
         .then(res => {
           this.exclusionBCriteria = res;
+          this.exclusionBCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionBCriteria);
           // console.log(res);
         })
         .catch(err => {
@@ -1147,6 +1159,7 @@ export class DataService {
       this.getExclusionCCriteria()
         .then(res => {
           this.exclusionCCriteria = res;
+          this.exclusionCCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionCCriteria);
           // console.log(res);
         })
         .catch(err => {
@@ -1160,6 +1173,7 @@ export class DataService {
       this.getExclusionDCriteria()
         .then(res => {
           this.exclusionDCriteria = res;
+          this.exclusionDCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionDCriteria);
           // console.log(res);
         })
         .catch(err => {
@@ -1175,6 +1189,7 @@ export class DataService {
       this.getSelectionALLCriteria()
         .then(res => {
           this.selectionALLCriteria = res;
+          this.selectionALLCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionALLCriteria);
           // console.log(res);
         })
         .catch(err => {
@@ -1188,6 +1203,7 @@ export class DataService {
       this.getSelectionACriteria()
         .then(res => {
           this.selectionACriteria = res;
+          this.selectionACriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionACriteria);
           // console.log(res);
         })
         .catch(err => {
@@ -1202,6 +1218,7 @@ export class DataService {
       this.getSelectionBCriteria()
         .then(res => {
           this.selectionBCriteria = res;
+          this.selectionBCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionBCriteria);
           // console.log(res);
         })
         .catch(err => {
@@ -1215,6 +1232,7 @@ export class DataService {
       this.getSelectionCCriteria()
         .then(res => {
           this.selectionCCriteria = res;
+          this.selectionCCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionCCriteria);
           // console.log(res);
         })
         .catch(err => {
@@ -1228,6 +1246,7 @@ export class DataService {
       this.getSelectionDCriteria()
         .then(res => {
           this.selectionDCriteria = res;
+          this.selectionDCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionDCriteria);
           // console.log(res);
         })
         .catch(err => {

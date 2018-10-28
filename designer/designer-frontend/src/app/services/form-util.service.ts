@@ -675,6 +675,26 @@ export class FormUtilService {
                 group[r.uuid + 'weight'] = new FormControl();
                 group[r.uuid + 'evaluationMethodDescription'] = new FormControl();
               }
+              if (r.responseDataType === 'AMOUNT') {
+                group[r.uuid] = new FormControl({
+                  value: '',
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
+                group[r.uuid + 'currency'] = new FormControl({
+                  value: '',
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
+              }
+              if (r.responseDataType === 'PERIOD' && this.APIService.version === 'v2') {
+                group[r.uuid + 'startDate'] = new FormControl({
+                  value: '',
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
+                group[r.uuid + 'endDate'] = new FormControl({
+                  value: '',
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
+              }
             }
             if (this.utilities.isEO) {
               if (r.responseDataType === 'INDICATOR') {
