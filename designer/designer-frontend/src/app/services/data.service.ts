@@ -64,6 +64,7 @@ export class DataService {
   EO_RELATED_D_REGEXP: RegExp = /^CRITERION.OTHER.EO_DATA.SUBCONTRACTS_WITH_THIRD_PARTIES*/;
   REDUCTION_OF_CANDIDATES_REGEXP: RegExp = /^CRITERION.OTHER.EO_DATA.MEETS_THE_OBJECTIVE*/;
 
+  OTHER_CA_REGEXP: RegExp = /^CRITERION.OTHER.CA_DATA.+/;
 
   countries: Country[] = null;
   procedureTypes: ProcedureType[] = null;
