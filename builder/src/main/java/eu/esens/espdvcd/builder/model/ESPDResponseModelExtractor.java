@@ -1,12 +1,12 @@
 /**
  * Copyright 2016-2018 University of Piraeus Research Center
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -30,6 +30,7 @@ import eu.espd.schema.v1.espd_commonaggregatecomponents_1.EconomicOperatorPartyT
 import eu.espd.schema.v1.espdresponse_1.ESPDResponseType;
 import eu.espd.schema.v2.pre_award.commonaggregate.EvidenceType;
 import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionResponseType;
+import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionType;
 import eu.espd.schema.v2.pre_award.commonbasic.ConfidentialityLevelCodeType;
 import eu.espd.schema.v2.pre_award.commonbasic.ValidatedCriterionPropertyIDType;
 import eu.espd.schema.v2.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
@@ -104,6 +105,17 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 qarType.getContractFolderID(),
                 qarType.getAdditionalDocumentReference()));
 
+        // Apply global weighting
+        modelResponse.getCADetails().getWeightScoringMethodologyNoteList()
+                .addAll(qarType.getWeightScoringMethodologyNote().stream()
+                        .map(noteType -> noteType.getValue())
+                        .collect(Collectors.toList()));
+
+        if (qarType.getWeightingTypeCode() != null
+                && qarType.getWeightingTypeCode().getValue() != null) {
+            modelResponse.getCADetails().setWeightingType(qarType.getWeightingTypeCode().getValue());
+        }
+
         // Service Provider Party Details extraction
         if (!qarType.getContractingParty().isEmpty()
                 && qarType.getContractingParty().get(0).getParty() != null
@@ -125,6 +137,11 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
         final Map<String, TenderingCriterionResponseType> tcrTypeMap = qarType.getTenderingCriterionResponse().stream()
                 .collect(Collectors.toMap(tcrType -> tcrType.getValidatedCriterionPropertyID().getValue(), Function.identity()));
 
+        // Create a Map with key -> Criterion ID, value -> TenderingCriterion in order to use it during
+        // weighting responses extraction process
+        final Map<String, TenderingCriterionType> criterionTypeMap = qarType.getTenderingCriterion().stream()
+                .collect(Collectors.toMap(criterionType -> criterionType.getID().getValue(), Function.identity()));
+
         // extract all responses
         modelResponse.getFullCriterionList()    // loop through all criteria
                 .forEach(sc -> sc.getRequirementGroups()    // loop through all RequirementGroups of current criterion
@@ -132,7 +149,8 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                                 .forEach(rq -> { // loop thought all of the extracted Requirements
 
                                     if (tcrTypeMap.containsKey(rq.getID())) { // try to find a response for that requirement
-                                        rq.setResponse(extractResponse(tcrTypeMap.get(rq.getID()), rq.getResponseDataType()));
+                                        rq.setResponse(extractResponse(tcrTypeMap.get(rq.getID()), rq.getResponseDataType(),
+                                                criterionTypeMap.get(sc.getID())));
                                     }
 
                                 })));
@@ -290,7 +308,8 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
         }
     }
 
-    public Response extractResponse(TenderingCriterionResponseType res, ResponseTypeEnum theType) {
+    public Response extractResponse(TenderingCriterionResponseType res, ResponseTypeEnum theType,
+                                    TenderingCriterionType criterionType) {
 
         switch (theType) {
 
@@ -464,6 +483,42 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), urlResp);
                 urlResp.setResponseType(theType);
                 return urlResp;
+
+            case WEIGHT_INDICATOR:
+                WeightIndicatorResponse weightInResp = new WeightIndicatorResponse();
+                if (!res.getResponseValue().isEmpty()
+                        && res.getResponseValue().get(0).getResponseIndicator() != null) {
+
+                    weightInResp.setIndicator(res.getResponseValue().get(0).getResponseIndicator().isValue());
+                }
+
+                if (criterionType.getEvaluationMethodTypeCode() != null
+                        && criterionType.getEvaluationMethodTypeCode().getValue() != null) {
+
+                    weightInResp.setEvaluationMethodType(criterionType.getEvaluationMethodTypeCode().getValue());
+                }
+
+                // add all weighting descriptions
+                criterionType.getWeightingConsiderationDescription()
+                        .forEach(weightDesc -> weightInResp.getEvaluationMethodDescriptionList()
+                                .add(weightDesc.getValue()));
+
+                if (criterionType.getWeightNumeric() != null
+                        && criterionType.getWeightNumeric().getValue() != null) {
+
+                    weightInResp.setWeight(criterionType.getWeightNumeric().getValue().floatValue());
+                }
+
+                applyValidatedCriterionPropertyID(res.getValidatedCriterionPropertyID(), weightInResp);
+                applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), weightInResp);
+                weightInResp.setResponseType(theType);
+                return weightInResp;
+
+            case LOTS_IDENTIFIER:
+                return null;
+
+            case EO_IDENTIFIER:
+                return null;
 
             default:
                 return null;

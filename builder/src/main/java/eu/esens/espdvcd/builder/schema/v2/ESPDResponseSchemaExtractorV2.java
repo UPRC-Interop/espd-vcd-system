@@ -1,12 +1,12 @@
 /**
  * Copyright 2016-2018 University of Piraeus Research Center
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -40,7 +40,9 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
@@ -70,6 +72,17 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
         qarType.getContractingParty().get(0).getParty().getServiceProviderParty()
                 .add(extractServiceProviderPartyType(modelResponse.getServiceProviderDetails()));
 
+        // apply global weighting
+        qarType.getWeightScoringMethodologyNote().addAll(modelResponse.getCADetails()
+                .getWeightScoringMethodologyNoteList().stream()
+                .map(note -> createWeightScoringMethodologyNoteType(note))
+                .collect(Collectors.toList()));
+
+        if (modelResponse.getCADetails().getWeightingType() != null) {
+            qarType.setWeightingTypeCode(createWeightingTypeCodeType(modelResponse
+                    .getCADetails().getWeightingType()));
+        }
+
         qarType.getTenderingCriterion().addAll(modelResponse.getFullCriterionList().stream()
                 .filter(sc -> sc.isSelected())
                 .map(sc -> extractTenderingCriterion(sc))
@@ -77,7 +90,12 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
 
         qarType.getEconomicOperatorParty().add(extractEODetails(modelResponse.getEODetails()));
 
-        qarType.getTenderingCriterionResponse().addAll(extractAllTenderingCriterionResponses(modelResponse));
+        // create a map with key = Criterion ID, value = TenderingCriterion in order to use it during weighting
+        // responses extraction process
+        Map<String, TenderingCriterionType> criterionTypeMap = qarType.getTenderingCriterion().stream()
+                .collect(Collectors.toMap(criterionType -> criterionType.getID().getValue(), Function.identity()));
+
+        qarType.getTenderingCriterionResponse().addAll(extractAllTenderingCriterionResponses(modelResponse, criterionTypeMap));
 
         qarType.getEvidence().addAll(modelResponse.getEvidenceList().stream()
                 .map(ev -> extractEvidenceType(ev))
@@ -98,26 +116,30 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
         return qarType;
     }
 
-    public List<TenderingCriterionResponseType> extractAllTenderingCriterionResponses(final ESPDResponse response) {
+    public List<TenderingCriterionResponseType> extractAllTenderingCriterionResponses(final ESPDResponse response,
+                                                                                      final Map<String, TenderingCriterionType> criterionTypeMap) {
         List<TenderingCriterionResponseType> tcrTypeList = new ArrayList<>();
-        response.getFullCriterionList().forEach(sc -> tcrTypeList.addAll(extractAllTenderingCriterionResponses(sc.getRequirementGroups())));
+        response.getFullCriterionList().forEach(sc -> tcrTypeList.addAll(extractAllTenderingCriterionResponses(sc.getRequirementGroups(),
+                criterionTypeMap.get(sc.getID()))));
         return tcrTypeList;
     }
 
-    public List<TenderingCriterionResponseType> extractAllTenderingCriterionResponses(final List<RequirementGroup> rgList) {
+    public List<TenderingCriterionResponseType> extractAllTenderingCriterionResponses(final List<RequirementGroup> rgList,
+                                                                                      final TenderingCriterionType criterionType) {
         final List<TenderingCriterionResponseType> tcrTypeList = new ArrayList<>();
-        rgList.forEach(rg -> tcrTypeList.addAll(extractAllTenderingCriterionResponses(rg)));
+        rgList.forEach(rg -> tcrTypeList.addAll(extractAllTenderingCriterionResponses(rg, criterionType)));
         return tcrTypeList;
     }
 
-    public List<TenderingCriterionResponseType> extractAllTenderingCriterionResponses(final RequirementGroup rg) {
+    public List<TenderingCriterionResponseType> extractAllTenderingCriterionResponses(final RequirementGroup rg,
+                                                                                      final TenderingCriterionType criterionType) {
         return extractAllRequirements(rg, null).stream()
                 .map(rq -> {
 
                     if (rq.getResponse() != null) {
                         rq.getResponse().setValidatedCriterionPropertyID(rq.getID());
                     }
-                    return extractTenderingCriterionResponse(rq.getResponse(), rq.getResponseDataType());
+                    return extractTenderingCriterionResponse(rq.getResponse(), rq.getResponseDataType(), criterionType);
                 })
                 .collect(Collectors.toList());
     }
@@ -373,7 +395,9 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
         return req;
     }
 
-    private TenderingCriterionResponseType extractTenderingCriterionResponse(Response response, ResponseTypeEnum respType) {
+    private TenderingCriterionResponseType extractTenderingCriterionResponse(Response response,
+                                                                             ResponseTypeEnum respType,
+                                                                             final TenderingCriterionType criterionType) {
 
         TenderingCriterionResponseType tcrType = new TenderingCriterionResponseType();
         ResponseValueType rvType = new ResponseValueType();
@@ -540,6 +564,32 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
                 }
                 tcrType.getResponseValue().add(rvType);
                 return tcrType;
+
+            case WEIGHT_INDICATOR:
+                WeightIndicatorResponse weightIndResp = (WeightIndicatorResponse) response;
+                // evaluationMethodDescription
+                criterionType.getWeightingConsiderationDescription().addAll(weightIndResp
+                        .getEvaluationMethodDescriptionList().stream()
+                        .map(desc -> createWeightingConsiderationDescriptionType(desc))
+                        .collect(Collectors.toList()));
+                // evaluationMethodType
+                if (weightIndResp.getEvaluationMethodType() != null) {
+                    criterionType.setEvaluationMethodTypeCode(createEvaluationMethodTypeCodeType(weightIndResp
+                            .getEvaluationMethodType()));
+                }
+                // weight
+                criterionType.setWeightNumeric(createWeightNumericType(weightIndResp.getWeight()));
+                // indicator
+                rvType.setResponseIndicator(new ResponseIndicatorType());
+                rvType.getResponseIndicator().setValue(((IndicatorResponse) response).isIndicator());
+                tcrType.getResponseValue().add(rvType);
+                return tcrType;
+
+            case LOTS_IDENTIFIER:
+                return null;
+
+            case EO_IDENTIFIER:
+                return null;
 
             default:
                 return null;

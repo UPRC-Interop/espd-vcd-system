@@ -351,12 +351,10 @@ public class BuilderESPDTest {
                 .importFrom(BuilderESPDTest.class.getResourceAsStream("/SELFCONTAINED_ESPD-Request.V2.0.2.xml"))
                 .createESPDRequest();
 
-//        XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.EDM_V2
-//                .createDocumentBuilderFor(espdRequest);
-//
-//        System.out.println(xmlDocumentBuilderV2.getAsString());
+        XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.EDM_V2
+                .createDocumentBuilderFor(espdRequest);
 
-        SelectableCriterionPrinter.print(espdRequest.getFullCriterionList());
+        System.out.println(xmlDocumentBuilderV2.getAsString());
     }
 
 }

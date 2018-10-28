@@ -16,11 +16,16 @@
 package eu.esens.espdvcd.model.requirement.response;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Weight Indicator Response
  */
 public class WeightIndicatorResponse extends Response implements Serializable {
+
+    private static final long serialVersionUID = -3204508364109778286L;
 
     /**
      * Criterion response for weighting indicator
@@ -39,9 +44,8 @@ public class WeightIndicatorResponse extends Response implements Serializable {
      * evaluationMethodDescription ccv:Criterion.WeightingConsiderationDescription
      * weight ccv:Criterion.WeightNumeric
      */
-    private static final long serialVersionUID = -3204508364109778286L;
     private String evaluationMethodType;
-    private String evaluationMethodDescription;
+    private List<String> evaluationMethodDescriptionList;
     private float weight;
     private boolean indicator;
 
@@ -56,12 +60,26 @@ public class WeightIndicatorResponse extends Response implements Serializable {
         this.evaluationMethodType = evaluationMethodType;
     }
 
-    public String getEvaluationMethodDescription() {
-        return evaluationMethodDescription;
+    public List<String> getEvaluationMethodDescriptionList() {
+        if (evaluationMethodDescriptionList == null) {
+            evaluationMethodDescriptionList = new ArrayList<>();
+        }
+        return evaluationMethodDescriptionList;
     }
 
-    public void setEvaluationMethodDescription(String evaluationMethodDescription) {
-        this.evaluationMethodDescription = evaluationMethodDescription;
+    public String getEvaluationMethodDescription() {
+        if (evaluationMethodDescriptionList == null) {
+            evaluationMethodDescriptionList = new ArrayList<>();
+        }
+        return String.join("\n", evaluationMethodDescriptionList);
+    }
+
+    public void setEvaluationMethodDescription(String description) {
+        if (evaluationMethodDescriptionList == null) {
+            evaluationMethodDescriptionList = new ArrayList<>();
+        }
+        String[] descArray = description.split("[\\r\\n]+");
+        evaluationMethodDescriptionList.addAll(Arrays.asList(descArray));
     }
 
     public float getWeight() {

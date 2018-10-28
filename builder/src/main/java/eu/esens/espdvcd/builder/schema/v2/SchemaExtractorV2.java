@@ -1,12 +1,12 @@
 /**
  * Copyright 2016-2018 University of Piraeus Research Center
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -24,6 +24,7 @@ import eu.espd.schema.v2.pre_award.commonaggregate.*;
 import eu.espd.schema.v2.pre_award.commonbasic.*;
 import eu.espd.schema.v2.unqualifieddatatypes_2.CodeType;
 
+import java.math.BigDecimal;
 import java.util.stream.Collectors;
 
 public interface SchemaExtractorV2 {
@@ -146,7 +147,6 @@ public interface SchemaExtractorV2 {
                     dt.setValue(cd.getProcurementProcedureDesc() != null
                             ? cd.getProcurementProcedureDesc()
                             : "_"); // dummy content for the first description
-
 
 
                     if (dr.getAttachment().getExternalReference() == null) {
@@ -600,6 +600,39 @@ public interface SchemaExtractorV2 {
         cfIdType.setSchemeAgencyID("TeD");
         cfIdType.setValue(id);
         return cfIdType;
+    }
+
+    default WeightingConsiderationDescriptionType createWeightingConsiderationDescriptionType(String desc) {
+        WeightingConsiderationDescriptionType descType = new WeightingConsiderationDescriptionType();
+        descType.setValue(desc);
+        return descType;
+    }
+
+    default EvaluationMethodTypeCodeType createEvaluationMethodTypeCodeType(String code) {
+        EvaluationMethodTypeCodeType codeType = new EvaluationMethodTypeCodeType();
+        codeType.setValue(code);
+        return codeType;
+    }
+
+    default WeightNumericType createWeightNumericType(float weight) {
+        WeightNumericType numericType = new WeightNumericType();
+        numericType.setValue(BigDecimal.valueOf(weight));
+        return numericType;
+    }
+
+    default WeightScoringMethodologyNoteType createWeightScoringMethodologyNoteType(String note) {
+        WeightScoringMethodologyNoteType noteType = new WeightScoringMethodologyNoteType();
+        noteType.setValue(note);
+        return noteType;
+    }
+
+    default WeightingTypeCodeType createWeightingTypeCodeType(String code) {
+        WeightingTypeCodeType codeType = new WeightingTypeCodeType();
+        codeType.setListID("ResponseDataType");
+        codeType.setListAgencyID("EU-COM-GROW");
+        codeType.setListVersionID("2.0.2");
+        codeType.setValue(code);
+        return codeType;
     }
 
 }

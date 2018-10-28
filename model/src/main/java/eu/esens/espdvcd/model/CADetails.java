@@ -17,6 +17,8 @@ package eu.esens.espdvcd.model;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -203,7 +205,7 @@ public class CADetails implements Serializable {
      * Cardinality: 0..1(0..n)<br>
      * UBL syntax path: cbc:WeightScoringMethodologyNote
      */
-    private String weightScoringMethodologyNote;
+    private List<String> weightScoringMethodologyNoteList;
 
     /**
      * Method of calculating the weights
@@ -390,5 +392,35 @@ public class CADetails implements Serializable {
 
     public void setNationalOfficialJournal(String nationalOfficialJournal) {
         this.nationalOfficialJournal = nationalOfficialJournal;
+    }
+
+    public List<String> getWeightScoringMethodologyNoteList() {
+        if (weightScoringMethodologyNoteList == null) {
+            weightScoringMethodologyNoteList = new ArrayList<>();
+        }
+        return weightScoringMethodologyNoteList;
+    }
+
+    public String getWeightScoringMethodologyNote() {
+        if (weightScoringMethodologyNoteList == null) {
+            weightScoringMethodologyNoteList = new ArrayList<>();
+        }
+        return String.join("\n", weightScoringMethodologyNoteList);
+    }
+
+    public void setWeightScoringMethodologyNote(String note) {
+        if (weightScoringMethodologyNoteList == null) {
+            weightScoringMethodologyNoteList = new ArrayList<>();
+        }
+        String[] descArray = note.split("[\\r\\n]+");
+        weightScoringMethodologyNoteList.addAll(Arrays.asList(descArray));
+    }
+
+    public String getWeightingType() {
+        return weightingType;
+    }
+
+    public void setWeightingType(String weightingType) {
+        this.weightingType = weightingType;
     }
 }
