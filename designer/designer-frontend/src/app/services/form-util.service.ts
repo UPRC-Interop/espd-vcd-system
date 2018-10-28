@@ -30,6 +30,7 @@ import {ReductionCriterion} from '../model/reductionCriterion.model';
 import {UtilitiesService} from './utilities.service';
 import {FullCriterion} from '../model/fullCriterion.model';
 import {UUID} from 'angular2-uuid';
+import {CaRelatedCriterion} from '../model/caRelatedCriterion.model';
 
 @Injectable({
   providedIn: 'root'
@@ -440,6 +441,18 @@ export class FormUtilService {
   }
 
   createEORelatedCriterionForm(criteria: EoRelatedCriterion[]) {
+    let group: any = {};
+    criteria.forEach(cr => {
+      group[cr.uuid] = this.createFormGroups(cr.requirementGroups);
+      // console.log(group[cr.typeCode]);
+    });
+    let fg = new FormGroup(group);
+
+    // console.log(fg);
+    return fg;
+  }
+
+  createCARelatedCriterionForm(criteria: CaRelatedCriterion[]) {
     let group: any = {};
     criteria.forEach(cr => {
       group[cr.uuid] = this.createFormGroups(cr.requirementGroups);

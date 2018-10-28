@@ -124,6 +124,8 @@ export class DataService {
   public eoRelatedCCriteriaForm: FormGroup = null;
   public eoRelatedDCriteriaForm: FormGroup = null;
 
+  public caRelatedCriteriaForm: FormGroup = null;
+
   public exclusionACriteriaForm: FormGroup = null;
   public exclusionBCriteriaForm: FormGroup = null;
   public exclusionCCriteriaForm: FormGroup = null;
@@ -379,6 +381,9 @@ export class DataService {
     this.formUtil.extractFormValuesFromCriteria(this.eoRelatedACriteria, this.eoRelatedACriteriaForm, this.formUtil.evidenceList);
     this.formUtil.extractFormValuesFromCriteria(this.eoRelatedCCriteria, this.eoRelatedCCriteriaForm, this.formUtil.evidenceList);
     this.formUtil.extractFormValuesFromCriteria(this.eoRelatedDCriteria, this.eoRelatedDCriteriaForm, this.formUtil.evidenceList);
+
+    /* extract caRelated criteria */
+    this.formUtil.extractFormValuesFromCriteria(this.caRelatedCriteria, this.caRelatedCriteriaForm, this.formUtil.evidenceList);
 
     /* extract exclusion criteria */
     this.formUtil.extractFormValuesFromCriteria(this.exclusionACriteria, this.exclusionACriteriaForm, this.formUtil.evidenceList);
@@ -866,6 +871,7 @@ export class DataService {
         this.getCaRelatedCriteria()
           .then(res => {
             this.caRelatedCriteria = res;
+            this.caRelatedCriteriaForm = this.formUtil.createCARelatedCriterionForm(this.caRelatedCriteria);
             // console.log(this.caRelatedCriteria);
           })
           .catch(err => {
@@ -1081,6 +1087,7 @@ export class DataService {
         this.getCaRelatedCriteria()
           .then(res => {
             this.caRelatedCriteria = res;
+            this.caRelatedCriteriaForm = this.formUtil.createCARelatedCriterionForm(this.caRelatedCriteria);
             // console.log(this.caRelatedCriteria);
           })
           .catch(err => {

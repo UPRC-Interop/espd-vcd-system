@@ -141,6 +141,18 @@
             <mat-option *ngFor="let project of projectTypes" [value]="project.code">{{project.name}}</mat-option>
           </mat-select>
         </mat-form-field>
+        <ng-container *ngIf="dataService.caRelatedCriteriaForm">
+          <form [formGroup]="dataService.caRelatedCriteriaForm">
+            <div class="eoRelatedCriteria" *ngFor="let cr of this.dataService.caRelatedCriteria; let i=index">
+              <mat-card>
+                <h4>{{cr.description}}</h4>
+                <div class="answer">
+                  <app-criterion [criterion]="cr" [form]="dataService.caRelatedCriteriaForm.controls" [indicator]="true"></app-criterion>
+                </div>
+              </mat-card>
+            </div>
+          </form>
+        </ng-container>
       </div>
     </mat-expansion-panel>
   </mat-accordion>
