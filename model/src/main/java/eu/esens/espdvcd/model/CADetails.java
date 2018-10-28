@@ -271,6 +271,9 @@ public class CADetails implements Serializable {
      */
     private String nationalOfficialJournal;
 
+    public CADetails() {
+    }
+
 
     public String getProcurementPublicationURI() {
         return procurementPublicationURI;
@@ -390,5 +393,45 @@ public class CADetails implements Serializable {
 
     public void setNationalOfficialJournal(String nationalOfficialJournal) {
         this.nationalOfficialJournal = nationalOfficialJournal;
+    }
+
+    public String getProcurementProcedureType() {
+        return procurementProcedureType;
+    }
+
+    public void setProcurementProcedureType(String procurementProcedureType) {
+        this.procurementProcedureType = procurementProcedureType;
+    }
+
+    public String getWeightScoringMethodologyNote() {
+        return weightScoringMethodologyNote;
+    }
+
+    public void setWeightScoringMethodologyNote(String weightScoringMethodologyNote) {
+        this.weightScoringMethodologyNote = weightScoringMethodologyNote;
+    }
+
+    public String getWeightingType() {
+        return weightingType;
+    }
+
+    public void setWeightingType(String weightingType) {
+        this.weightingType = weightingType;
+    }
+
+    public String getProjectType() {
+        return projectType;
+    }
+
+    public void setProjectType(String projectType) {
+        this.projectType = projectType;
+    }
+
+    public List<String> getClassificationCodes() {
+        return classificationCodes;
+    }
+
+    public void setClassificationCodes(List<String> classificationCodes) {
+        this.classificationCodes = classificationCodes;
     }
 }

@@ -302,4 +302,28 @@ public class EODetails {
     public void setEoRole(EORoleTypeEnum eoRole) {
         this.eoRole = eoRole;
     }
+
+    public int getEmployeeQuantity() {
+        return employeeQuantity;
+    }
+
+    public void setEmployeeQuantity(int employeeQuantity) {
+        this.employeeQuantity = employeeQuantity;
+    }
+
+    public AmountResponse getGeneralTurnover() {
+        return generalTurnover;
+    }
+
+    public void setGeneralTurnover(AmountResponse generalTurnover) {
+        this.generalTurnover = generalTurnover;
+    }
+
+    public String getEoGroupName() {
+        return eoGroupName;
+    }
+
+    public void setEoGroupName(String eoGroupName) {
+        this.eoGroupName = eoGroupName;
+    }
 }
