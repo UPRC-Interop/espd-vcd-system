@@ -426,4 +426,43 @@ public class CADetails implements Serializable {
     public void setWeightingType(String weightingType) {
         this.weightingType = weightingType;
     }
+
+    public String getCaOfficialName() {
+        return caOfficialName;
+    }
+
+    public void setCaOfficialName(String caOfficialName) {
+        this.caOfficialName = caOfficialName;
+    }
+
+    public String getProcurementProcedureType() {
+        return procurementProcedureType;
+    }
+
+    public void setProcurementProcedureType(String procurementProcedureType) {
+        this.procurementProcedureType = procurementProcedureType;
+    }
+
+    public void setWeightScoringMethodologyNoteList(List<String> weightScoringMethodologyNoteList) {
+        this.weightScoringMethodologyNoteList = weightScoringMethodologyNoteList;
+    }
+
+    public String getProjectType() {
+        return projectType;
+    }
+
+    public void setProjectType(String projectType) {
+        this.projectType = projectType;
+    }
+
+    public List<String> getClassificationCodes() {
+        if (classificationCodes == null) {
+            classificationCodes = new ArrayList<>();
+        }
+        return classificationCodes;
+    }
+
+    public void setClassificationCodes(List<String> classificationCodes) {
+        this.classificationCodes = classificationCodes;
+    }
 }
