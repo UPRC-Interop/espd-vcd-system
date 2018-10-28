@@ -28,6 +28,7 @@ import {Evidence} from '../model/evidence.model';
 import {EvidenceIssuer} from '../model/evidenceIssuer.model';
 import {FormUtilService} from '../services/form-util.service';
 import {UtilitiesService} from '../services/utilities.service';
+import {ProjectType} from '../model/projectType.model';
 
 @Component({
   selector: 'app-procedure-eo',
@@ -42,6 +43,7 @@ export class ProcedureEoComponent implements OnInit {
 
   countries: Country[] = null;
   procedureTypes: ProcedureType[] = null;
+  projectTypes: ProjectType[] = null;
   eoRelatedCriteria: EoRelatedCriterion[] = null;
 
 
@@ -90,6 +92,15 @@ export class ProcedureEoComponent implements OnInit {
     this.dataService.getProcedureTypes()
       .then(res => {
         this.procedureTypes = res;
+        // console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+    this.dataService.getProjectTypes()
+      .then(res => {
+        this.projectTypes = res;
         // console.log(res);
       })
       .catch(err => {
