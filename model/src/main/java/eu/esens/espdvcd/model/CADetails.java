@@ -443,9 +443,9 @@ public class CADetails implements Serializable {
         this.procurementProcedureType = procurementProcedureType;
     }
 
-    public void setWeightScoringMethodologyNoteList(List<String> weightScoringMethodologyNoteList) {
-        this.weightScoringMethodologyNoteList = weightScoringMethodologyNoteList;
-    }
+//    public void setWeightScoringMethodologyNoteList(List<String> weightScoringMethodologyNoteList) {
+//        this.weightScoringMethodologyNoteList = weightScoringMethodologyNoteList;
+//    }
 
     public String getProjectType() {
         return projectType;
@@ -462,7 +462,7 @@ public class CADetails implements Serializable {
         return classificationCodes;
     }
 
-    public void setClassificationCodes(List<String> classificationCodes) {
-        this.classificationCodes = classificationCodes;
-    }
+//    public void setClassificationCodes(List<String> classificationCodes) {
+//        this.classificationCodes = classificationCodes;
+//    }
 }

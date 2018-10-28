@@ -589,7 +589,18 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
                 return null;
 
             case EO_IDENTIFIER:
-                return null;
+                String eoResponseID = ((EOIdentifierResponse) response).getIdentifier();
+                String eoIDType = ((EOIdentifierResponse) response).getEOIDType();
+                if (eoResponseID != null) {
+                    rvType.setResponseID(new ResponseIDType());
+                    rvType.getResponseID().setSchemeAgencyID("EU-COM-GROW");
+                    if (eoIDType != null) {
+                        rvType.getResponseID().setSchemeName(eoIDType);
+                    }
+                    rvType.getResponseID().setValue(eoResponseID);
+                }
+                tcrType.getResponseValue().add(rvType);
+                return tcrType;
 
             default:
                 return null;

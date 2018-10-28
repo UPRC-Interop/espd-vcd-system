@@ -518,7 +518,21 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 return null;
 
             case EO_IDENTIFIER:
-                return null;
+                EOIdentifierResponse eoIdeResp = new EOIdentifierResponse();
+                if (!res.getResponseValue().isEmpty()
+                        && res.getResponseValue().get(0).getResponseID() != null
+                        && res.getResponseValue().get(0).getResponseID().getValue() != null) {
+
+                    eoIdeResp.setIdentifier(res.getResponseValue().get(0).getResponseID().getValue());
+
+                    if (res.getResponseValue().get(0).getResponseID().getSchemeName() != null) {
+                        eoIdeResp.setEOIDType(res.getResponseValue().get(0).getResponseID().getSchemeName());
+                    }
+                }
+                applyValidatedCriterionPropertyID(res.getValidatedCriterionPropertyID(), eoIdeResp);
+                applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), eoIdeResp);
+                eoIdeResp.setResponseType(theType);
+                return eoIdeResp;
 
             default:
                 return null;

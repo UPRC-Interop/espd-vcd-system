@@ -37,11 +37,11 @@ public class EOIdentifierResponse extends Response implements Serializable {
      * ccv:Criterion.RequirementGroup.Requirement.Response.Identifier<br>
      */
     private String EOIDType;
-    private String ID;
+    private String identifier;
 
-    public EOIdentifierResponse(String EOIDType, String ID) {
+    public EOIdentifierResponse(String EOIDType, String identifier) {
         this.EOIDType = EOIDType;
-        this.ID = ID;
+        this.identifier = identifier;
     }
 
     public EOIdentifierResponse() {
@@ -55,11 +55,11 @@ public class EOIdentifierResponse extends Response implements Serializable {
         this.EOIDType = EOIDType;
     }
 
-    public String getID() {
-        return ID;
+    public String getIdentifier() {
+        return identifier;
     }
 
-    public void setID(String ID) {
-        this.ID = ID;
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
     }
 }
