@@ -22,7 +22,6 @@ import {RequirementResponse} from '../model/requirement-response.model';
 import {Evidence} from '../model/evidence.model';
 import {EvidenceIssuer} from '../model/evidenceIssuer.model';
 import * as moment from 'moment';
-import {DataService} from './data.service';
 import {ApicallService} from './apicall.service';
 import {ExclusionCriteria} from '../model/exclusionCriteria.model';
 import {SelectionCriteria} from '../model/selectionCriteria.model';
@@ -30,6 +29,7 @@ import {ReductionCriterion} from '../model/reductionCriterion.model';
 import {UtilitiesService} from './utilities.service';
 import {FullCriterion} from '../model/fullCriterion.model';
 import {UUID} from 'angular2-uuid';
+import {UrlValidation} from "../validation/url/url-validation";
 
 @Injectable({
   providedIn: 'root'
@@ -495,12 +495,12 @@ export class FormUtilService {
               // console.log(evi);
               // console.log(typeof evi);
 
-              group[r.uuid + 'evidenceUrl'] = new FormControl(evi.evidenceURL);
+              group[r.uuid + 'evidenceUrl'] = new FormControl(evi.evidenceURL, [UrlValidation]);
               group[r.uuid + 'evidenceCode'] = new FormControl(evi.description);
               group[r.uuid + 'evidenceIssuer'] = new FormControl(evi.evidenceIssuer.name);
 
               if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
-                group[r.uuid + 'evidenceUrl'] = new FormControl('');
+                group[r.uuid + 'evidenceUrl'] = new FormControl('', [UrlValidation]);
                 group[r.uuid + 'evidenceCode'] = new FormControl('');
                 group[r.uuid + 'evidenceIssuer'] = new FormControl('');
               }
@@ -545,7 +545,7 @@ export class FormUtilService {
                 group[r.uuid + 'endDate'] = new FormControl();
               }
               if (r.responseDataType === 'EVIDENCE_IDENTIFIER') {
-                group[r.uuid + 'evidenceUrl'] = new FormControl();
+                group[r.uuid + 'evidenceUrl'] = new FormControl('', [UrlValidation]);
                 group[r.uuid + 'evidenceCode'] = new FormControl();
                 group[r.uuid + 'evidenceIssuer'] = new FormControl();
               }

@@ -93,6 +93,10 @@
       <br>
       <mat-form-field>
         <input matInput [formControlName]="req.uuid+'evidenceUrl'" [id]="req.uuid+'evidenceUrl'" >
+        <mat-error *ngIf="form.controls[''+ req.uuid+'evidenceUrl'].invalid">
+          <input-validation-error
+            [formControlErrors]="form.controls[''+ req.uuid+'evidenceUrl'].errors"></input-validation-error>
+        </mat-error>
       </mat-form-field>
       <label [attr.for]="req.uuid+'evidenceCode'">Reference/Code: </label>
       <br>
