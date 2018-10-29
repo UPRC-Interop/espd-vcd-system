@@ -15,6 +15,9 @@
  */
 package eu.esens.espdvcd.model.requirement.response;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -60,6 +63,7 @@ public class WeightIndicatorResponse extends Response implements Serializable {
         this.evaluationMethodType = evaluationMethodType;
     }
 
+    @JsonIgnore
     public List<String> getEvaluationMethodDescriptionList() {
         if (evaluationMethodDescriptionList == null) {
             evaluationMethodDescriptionList = new ArrayList<>();
@@ -74,6 +78,7 @@ public class WeightIndicatorResponse extends Response implements Serializable {
         return String.join("\n", evaluationMethodDescriptionList);
     }
 
+    @JsonCreator
     public void setEvaluationMethodDescription(String description) {
         if (evaluationMethodDescriptionList == null) {
             evaluationMethodDescriptionList = new ArrayList<>();

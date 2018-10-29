@@ -62,9 +62,9 @@ public class ExportESPDEndpoint extends Endpoint {
                 return Errors.artefactInWrongFormatError();
             }), JsonUtil.json());
 
-            spark.post("/request", this::handleESPDRequest, JsonUtil.json());
+            spark.post("/request", this::handleESPDRequest);
 
-            spark.post("/response", this::handleESPDResponse, JsonUtil.json());
+            spark.post("/response", this::handleESPDResponse);
         });
     }
 
