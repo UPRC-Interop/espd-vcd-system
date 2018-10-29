@@ -22,7 +22,6 @@ import {RequirementResponse} from '../model/requirement-response.model';
 import {Evidence} from '../model/evidence.model';
 import {EvidenceIssuer} from '../model/evidenceIssuer.model';
 import * as moment from 'moment';
-import {DataService} from './data.service';
 import {ApicallService} from './apicall.service';
 import {ExclusionCriteria} from '../model/exclusionCriteria.model';
 import {SelectionCriteria} from '../model/selectionCriteria.model';
@@ -446,7 +445,7 @@ export class FormUtilService {
             }
 
 
-            // YES/NO if responseDataType is indicator then pass indicator value to formControl. (initial state problem fixed)
+            // YES/NO if responseDataType is indicator then pass indicator value to appDateValidationFix. (initial state problem fixed)
             if (r.responseDataType === 'INDICATOR') {
               if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
                 group[r.uuid] = new FormControl(false);
