@@ -34,6 +34,7 @@ public class Server {
         //SERVER CONFIGURATION
         LOGGER.info("Starting port configuration");
         int portToBind = 0;
+        String initialPath = "";
         if (args.length == 0) {
             LOGGER.warning("No port specified in the parameters, defaulting to 8080");
             portToBind = 8080;
@@ -48,6 +49,9 @@ public class Server {
                 LOGGER.severe("Invalid port argument");
                 System.exit(1);
             }
+            if (args.length > 1) {
+                initialPath = args[1];
+            }
         }
 
         LOGGER.info("Attempting to bind to port " + portToBind);
@@ -56,19 +60,20 @@ public class Server {
         spark.initExceptionHandler(e -> {
             LOGGER.severe("Failed to ignite the Spark server");
             LOGGER.log(Level.SEVERE, e.getMessage(), e);
-            System.exit(2);
+            System.exit(-1);
         });
 
         enableCORS(spark);
+
         dropTrailingSlashes(spark);
 
         LOGGER.info("Starting endpoint configuration");
 
-        RestContext v2RegulatedContext = new RestContext("/api/v2/regulated", spark);
-        RestContext v2SelfContainedContext = new RestContext("/api/v2/self-contained", spark);
-        RestContext v1Context = new RestContext("/api/v1", spark);
-        RestContext v2Context = new RestContext("/api/v2", spark);
-        RestContext baseContext = new RestContext("/api", spark);
+        RestContext v2RegulatedContext = new RestContext(initialPath + "/api/v2/regulated", spark);
+        RestContext v2SelfContainedContext = new RestContext(initialPath + "/api/v2/self-contained", spark);
+        RestContext v1Context = new RestContext(initialPath + "/api/v1", spark);
+        RestContext v2Context = new RestContext(initialPath + "/api/v2", spark);
+        RestContext baseContext = new RestContext(initialPath + "/api", spark);
 
         LOGGER.info("Configuring codelistsV1 endpoint...");
         Endpoint v1Codelists = new CodelistsEndpoint(CodelistsV1Service.getInstance());
