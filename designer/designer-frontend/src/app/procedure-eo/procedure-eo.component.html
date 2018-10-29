@@ -36,12 +36,20 @@
                placeholder="{{'espd.part1.ted.reception.id' | translate}}" [disabled]="this.dataService.isReadOnly()">
       </mat-form-field>
       <mat-form-field>
-        <input matInput name="{{'espd.part1.ojs.label' | translate}}" [(ngModel)]="dataService.CADetails.procurementPublicationNumber"
-               placeholder="Notice number in the OJS" [disabled]="this.dataService.isReadOnly()">
+        <input #ojs="ngModel" matInput name="{{'espd.part1.ojs.label' | translate}}"
+               [(ngModel)]="dataService.CADetails.procurementPublicationNumber"
+               placeholder="Notice number in the OJS" [disabled]="this.dataService.isReadOnly()" numberOjs>
+        <mat-error *ngIf="ojs.invalid">
+          <input-validation-error [formControlErrors]="ojs.errors"></input-validation-error>
+        </mat-error>
       </mat-form-field>
       <mat-form-field>
-        <input matInput name="ojsURL" placeholder="{{'espd.part1.ojs.url' | translate}}"
-               [(ngModel)]="dataService.CADetails.procurementPublicationURI" [disabled]="this.dataService.isReadOnly()">
+        <input #url="ngModel" matInput name="ojsURL" placeholder="{{'espd.part1.ojs.url' | translate}}"
+               [(ngModel)]="dataService.CADetails.procurementPublicationURI" [disabled]="this.dataService.isReadOnly()"
+               url>
+        <mat-error *ngIf="url.invalid">
+          <input-validation-error [formControlErrors]="url.errors"></input-validation-error>
+        </mat-error>
       </mat-form-field>
       <!--<mat-form-field>-->
         <!--<input matInput name="nationalJournal" placeholder="National Official Journal"-->
@@ -69,7 +77,12 @@
         <input matInput placeholder="{{'espd.part2.vat'| translate}}" name="CAofficialID" [(ngModel)]="dataService.CADetails.id" [disabled]="this.dataService.isReadOnly()">
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="{{'espd.part1.website' | translate}}" name="CAofficialWebSite" [(ngModel)]="dataService.CADetails.webSiteURI" [disabled]="this.dataService.isReadOnly()">
+        <input matInput #website="ngModel" url placeholder="{{'espd.part1.website' | translate}}"
+               name="CAofficialWebSite" [(ngModel)]="dataService.CADetails.webSiteURI"
+               [disabled]="this.dataService.isReadOnly()">
+        <mat-error *ngIf="website.invalid">
+          <input-validation-error [formControlErrors]="website.errors"></input-validation-error>
+        </mat-error>
       </mat-form-field>
       <ng-container *ngIf="dataService.CADetails.postalAddress || dataService.PostalAddress">
         <mat-form-field>
@@ -93,7 +106,12 @@
           <input matInput placeholder="{{'espd.part1.fax' | translate}}" name="CAofficialContactFaxNumber" [(ngModel)]="dataService.ContactingDetails.faxNumber" [disabled]="this.dataService.isReadOnly()">
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="{{'espd.part1.email' | translate}}" name="CAofficialContactEmail" [(ngModel)]="dataService.ContactingDetails.emailAddress" [disabled]="this.dataService.isReadOnly()">
+          <input #contactMail="ngModel" matInput placeholder="{{'espd.part1.email' | translate}}"
+                 name="CAofficialContactEmail" [(ngModel)]="dataService.ContactingDetails.emailAddress" email
+                 [disabled]="this.dataService.isReadOnly()">
+          <mat-error *ngIf="contactMail.invalid">
+            <input-validation-error [formControlErrors]="contactMail.errors"></input-validation-error>
+          </mat-error>
         </mat-form-field>
       </ng-container>
       <mat-form-field>
@@ -158,7 +176,8 @@
             </mat-form-field>
             <div class="postalAddress" formGroupName='postalAddress'>
               <mat-form-field class="eoField">
-                <input formControlName="addressLine1" matInput placeholder="{{'espd.part1.street.and. Num' | translate}}">
+                <input formControlName="addressLine1" matInput
+                       placeholder="{{'espd.part1.street.and. num' | translate}}">
               </mat-form-field>
               <mat-form-field class="eoField">
                 <input formControlName="postCode" matInput placeholder="{{'espd.part1.postcode' | translate}}">
@@ -185,6 +204,10 @@
             <div class="contactingDetails" formGroupName="contactingDetails">
               <mat-form-field class="eoField">
                 <input formControlName="emailAddress" matInput placeholder="{{'espd.part2.email' | translate}}">
+                <mat-error *ngIf="EOForm.get('contactingDetails.emailAddress').invalid">
+                  <input-validation-error
+                    [formControlErrors]="EOForm.get('contactingDetails.emailAddress').errors"></input-validation-error>
+                </mat-error>
               </mat-form-field>
               <mat-form-field class="eoField">
                 <input formControlName="telephoneNumber" matInput placeholder="{{'espd.part2.telephone' | translate}}">
@@ -203,7 +226,11 @@
             <!--<input matInput placeholder="Other number, if VAT not applicable">-->
             <!--</mat-form-field>-->
             <mat-form-field class="eoField">
-              <input formControlName="webSiteURI" matInput placeholder="{{'espd.part1.website' | translate}}">
+              <input formControlName="webSiteURI" matInput placeholder="{{'espd.part1.website' | translate}}"
+                     [errorStateMatcher]="matcher">
+              <mat-error *ngIf="EOForm.get('webSiteURI').invalid">
+                <input-validation-error [formControlErrors]="EOForm.get('webSiteURI').errors"></input-validation-error>
+              </mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -291,6 +318,10 @@
                   <div class="contactingDetails" formGroupName="contactDetails">
                     <mat-form-field class="eoField">
                       <input formControlName="emailAddress" matInput placeholder="{{'espd.part2.email' | translate}}">
+                      <mat-error *ngIf="EOForm.get('i.emailAddress').invalid">
+                        <input-validation-error
+                          [formControlErrors]="EOForm.get('emailAddress').errors"></input-validation-error>
+                      </mat-error>
                     </mat-form-field>
                     <mat-form-field class="eoField">
                       <input formControlName="telephoneNumber" matInput placeholder="{{'espd.part2.telephone' | translate}}">

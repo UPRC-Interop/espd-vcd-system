@@ -14,20 +14,15 @@
 /// limitations under the License.
 ///
 
-import {Component, Input, OnChanges, OnInit, SimpleChange, SimpleChanges} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {ProcedureType} from '../model/procedureType.model';
 import {Country} from '../model/country.model';
 import {FormArray, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 import {EoRelatedCriterion} from '../model/eoRelatedCriterion.model';
-import {RequirementGroup} from '../model/requirementGroup.model';
-import {RequirementResponse} from '../model/requirement-response.model';
-import * as moment from 'moment';
-import {Moment} from 'moment';
-import {Evidence} from '../model/evidence.model';
-import {EvidenceIssuer} from '../model/evidenceIssuer.model';
-import {FormUtilService} from '../services/form-util.service';
 import {UtilitiesService} from '../services/utilities.service';
+import {UrlValidation} from "../validation/url/url-validation";
+import {InputValidationStateMatcher} from "../validation/input-validation-state-matcher/input-validation-state-matcher";
 
 @Component({
   selector: 'app-procedure-eo',
@@ -43,6 +38,7 @@ export class ProcedureEoComponent implements OnInit {
   countries: Country[] = null;
   procedureTypes: ProcedureType[] = null;
   eoRelatedCriteria: EoRelatedCriterion[] = null;
+  matcher = new InputValidationStateMatcher();
 
 
   constructor(public dataService: DataService, public utilities: UtilitiesService) {
@@ -57,13 +53,13 @@ export class ProcedureEoComponent implements OnInit {
       }),
       'contactingDetails': new FormGroup({
         'contactPointName': new FormControl(),
-        'emailAddress': new FormControl(),
+        'emailAddress': new FormControl(null, [Validators.email]),
         'faxNumber': new FormControl(),
         'telephoneNumber': new FormControl(),
       }),
       'naturalPersons': new FormArray([this.initNaturalPerson()]),
       'id': new FormControl(),
-      'webSiteURI': new FormControl(),
+      'webSiteURI': new FormControl(null, [UrlValidation]),
       'procurementProjectLot': new FormControl(0)
     });
     this.dataService.EOForm = this.EOForm;
@@ -115,7 +111,7 @@ export class ProcedureEoComponent implements OnInit {
       }),
       'contactDetails': new FormGroup({
         'contactPointName': new FormControl(),
-        'emailAddress': new FormControl(),
+        'emailAddress': new FormControl(null, [Validators.email]),
         'telephoneNumber': new FormControl(),
       })
     });

@@ -13,4 +13,9 @@ describe('NumberOjsValidation', () => {
 
     expect(errors).toBeNull();
   });
+  it('should not validate to error with empty string', () => {
+    let errors = NumberOjsValidation(new FormControl(' '));
+
+    expect(errors).toBeNull();
+  });
 });

@@ -46,10 +46,11 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {SelectCountryComponent} from './shared/selectcountry/select-country.component';
 import {LoggerModule, NGXLogger, NgxLoggerLevel} from "ngx-logger";
-import {NumberOjsDirective} from './directives/number-ojs/number-ojs.directive';
+import {NumberOjsValidationDirective} from './directives/number-ojs/number-ojs-validation.directive';
 import {InputValidationErrorComponent} from './shared/input-validation-error/input-validation-error.component';
 import {ValidationErrorDirective} from './directives/validation-error/validation-error.directive';
 import {DatepickerModule} from "./datepicker/datepicker.module";
+import {UrlValidationDirective} from "./directives/url/url-validation.directive";
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import {DatepickerModule} from "./datepicker/datepicker.module";
     CriterionComponent,
     FinishEoComponent,
     SelectCountryComponent,
-    NumberOjsDirective,
+    NumberOjsValidationDirective,
+    UrlValidationDirective,
     InputValidationErrorComponent,
     ValidationErrorDirective
   ],
