@@ -318,10 +318,10 @@
                   <div class="contactingDetails" formGroupName="contactDetails">
                     <mat-form-field class="eoField">
                       <input formControlName="emailAddress" matInput placeholder="{{'espd.part2.email' | translate}}">
-                      <mat-error *ngIf="EOForm.get('i.emailAddress').invalid">
-                        <input-validation-error
-                          [formControlErrors]="EOForm.get('emailAddress').errors"></input-validation-error>
-                      </mat-error>
+                      <!--<mat-error *ngIf="EOForm.get('i.emailAddress').invalid">-->
+                      <!--<input-validation-error-->
+                      <!--[formControlErrors]="EOForm.get('emailAddress').errors"></input-validation-error>-->
+                      <!--</mat-error>-->
                     </mat-form-field>
                     <mat-form-field class="eoField">
                       <input formControlName="telephoneNumber" matInput placeholder="{{'espd.part2.telephone' | translate}}">

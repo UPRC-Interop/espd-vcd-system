@@ -38,11 +38,19 @@
       </mat-form-field>
       <mat-form-field>
         <input matInput name="noticeNumberOJS" [(ngModel)]="dataService.CADetails.procurementPublicationNumber"
-               placeholder="{{'espd.part1.ojs.label' | translate}}" [disabled]="this.dataService.isReadOnly()">
+               placeholder="{{'espd.part1.ojs.label' | translate}}" [disabled]="this.dataService.isReadOnly()"
+               #numberOjs="ngModel" required numberOjs>
+        <mat-error *ngIf="numberOjs.invalid">
+          <input-validation-error [formControlErrors]="numberOjs.errors"></input-validation-error>
+        </mat-error>
       </mat-form-field>
       <mat-form-field>
         <input matInput name="ojsURL" placeholder="{{'espd.part1.ojs.url' | translate}}"
-               [(ngModel)]="dataService.CADetails.procurementPublicationURI" [disabled]="this.dataService.isReadOnly()">
+               [(ngModel)]="dataService.CADetails.procurementPublicationURI" [disabled]="this.dataService.isReadOnly()"
+               #ojsurl="ngModel" url>
+        <mat-error *ngIf="ojsurl.invalid">
+          <input-validation-error [formControlErrors]="ojsurl.errors"></input-validation-error>
+        </mat-error>
       </mat-form-field>
       <!--<mat-form-field>-->
       <!--<input matInput name="nationalJournal" placeholder="National Official Journal" [(ngModel)]="dataService.CADetails.nationalOfficialJournal">-->
@@ -71,7 +79,11 @@
       </mat-form-field>
       <mat-form-field>
         <input matInput placeholder="{{'espd.part1.website' | translate}}" name="CAofficialWebSite"
-               [(ngModel)]="dataService.CADetails.webSiteURI" [disabled]="this.dataService.isReadOnly()">
+               [(ngModel)]="dataService.CADetails.webSiteURI" [disabled]="this.dataService.isReadOnly()"
+               #website="ngModel" url>
+        <mat-error *ngIf="website.invalid">
+          <input-validation-error [formControlErrors]="website.errors"></input-validation-error>
+        </mat-error>
       </mat-form-field>
       <ng-container *ngIf="dataService.CADetails.postalAddress || dataService.PostalAddress">
         <mat-form-field>
@@ -103,7 +115,11 @@
         </mat-form-field>
         <mat-form-field>
           <input matInput placeholder="{{'espd.part1.email' | translate}}" name="CAofficialContactEmail"
-                 [(ngModel)]="dataService.ContactingDetails.emailAddress" [disabled]="this.dataService.isReadOnly()">
+                 [(ngModel)]="dataService.ContactingDetails.emailAddress" [disabled]="this.dataService.isReadOnly()"
+                 #email="ngModel" email>
+          <mat-error *ngIf="email.invalid">
+            <input-validation-error [formControlErrors]="email.errors"></input-validation-error>
+          </mat-error>
         </mat-form-field>
       </ng-container>
       <mat-form-field>
