@@ -14,10 +14,8 @@
 /// limitations under the License.
 ///
 
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {InputValidationErrorComponent} from "./input-validation-error.component";
-import {TranslatePipeMock} from "../../test/translate.pipe";
-
 
 
 describe('InputValidationErrorComponent', () => {
@@ -26,7 +24,7 @@ describe('InputValidationErrorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ InputValidationErrorComponent , TranslatePipeMock]
+      declarations: [InputValidationErrorComponent]
     })
       .compileComponents();
   }));
