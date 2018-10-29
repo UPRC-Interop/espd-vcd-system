@@ -38,7 +38,10 @@
       <div class="wrapper">
         <mat-form-field class="width">
           <input matInput name="noticeNumber" placeholder="{{'espd.init.ted.reception.id.placeholder' | translate}}"
-                 required ngModel>
+                 required numberOjs ngModel #noticeNumber="ngModel">
+          <mat-error *ngIf="noticeNumber.invalid">
+            <input-validation-error [formControlErrors]="noticeNumber.errors"></input-validation-error>
+          </mat-error>
         </mat-form-field>
         <mat-radio-group name="caOptions" ngModel>
           <mat-radio-button color="primary"
