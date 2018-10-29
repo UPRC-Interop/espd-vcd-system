@@ -8,6 +8,12 @@ describe('UrlValidation', () => {
     expect(errors).toEqual({'url': true});
 
   });
+  it('should validate to error when not starting with valid url', () => {
+    let errors = UrlValidation(new FormControl('__https://www.example.com'));
+
+    expect(errors).toEqual({'url': true});
+
+  });
   it('should not validate to error with valid url and subdomain', () => {
     let errors = UrlValidation(new FormControl('http://stash.ds.unipi.gr'));
 
