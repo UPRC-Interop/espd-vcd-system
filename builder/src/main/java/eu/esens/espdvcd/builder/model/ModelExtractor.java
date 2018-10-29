@@ -1,12 +1,12 @@
 /**
  * Copyright 2016-2018 University of Piraeus Research Center
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,6 +22,7 @@ import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.ResponseRequirement;
+import eu.esens.espdvcd.model.requirement.response.WeightIndicatorResponse;
 import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
 import eu.esens.espdvcd.model.retriever.ECertisCriterion;
 import eu.esens.espdvcd.model.retriever.ECertisEvidence;
@@ -390,7 +391,7 @@ public interface ModelExtractor {
         LegislationReference lr = extractDefaultLegalReferenceV2(tcType.getLegislation());
 
         List<RequirementGroup> rgList = tcType.getTenderingCriterionPropertyGroup().stream()
-                .map(t -> extractRequirementGroup(t))
+                .map(t -> extractRequirementGroup(t, tcType))
                 .collect(Collectors.toList());
 
         SelectableCriterion selCr = new SelectableCriterion(id, typeCode, name, desc, lr, rgList);
@@ -425,7 +426,8 @@ public interface ModelExtractor {
         return extractSelectableCriterion(ec, true);
     }
 
-    default RequirementGroup extractRequirementGroup(TenderingCriterionPropertyGroupType rgType) {
+    default RequirementGroup extractRequirementGroup(TenderingCriterionPropertyGroupType rgType,
+                                                     TenderingCriterionType criterionType) {
 
         RequirementGroup rg = null;
         if (rgType.getID() != null) {
@@ -438,10 +440,10 @@ public interface ModelExtractor {
 
         if (rg != null) {
             List<Requirement> rList = rgType.getTenderingCriterionProperty().stream()
-                    .map(r -> extractRequirement(r))
+                    .map(r -> extractRequirement(r, criterionType))
                     .collect(Collectors.toList());
             List<RequirementGroup> childRg = rgType.getSubsidiaryTenderingCriterionPropertyGroup().stream()
-                    .map(t -> extractRequirementGroup(t))
+                    .map(t -> extractRequirementGroup(t, criterionType))
                     .collect(Collectors.toList());
             rg.setRequirements(rList);
             rg.setRequirementGroups(childRg);
@@ -558,7 +560,8 @@ public interface ModelExtractor {
         return lr;
     }
 
-    default Requirement extractRequirement(TenderingCriterionPropertyType pt) {
+    default Requirement extractRequirement(TenderingCriterionPropertyType pt,
+                                           TenderingCriterionType criterionType) {
         String theId = null;
         if (pt.getID() != null) {
             theId = pt.getID().getValue();
@@ -574,6 +577,31 @@ public interface ModelExtractor {
                 ResponseTypeEnum.valueOf(pt.getValueDataTypeCode().getValue()),
                 theDescription
         );
+
+        // apply criterion level weighting info
+        if (pt.getValueDataTypeCode() != null
+                && pt.getValueDataTypeCode().getValue() != null
+                && pt.getValueDataTypeCode().getValue()
+                .equals(ResponseTypeEnum.WEIGHT_INDICATOR.name())) {
+
+            WeightIndicatorResponse weiIndResp = new WeightIndicatorResponse();
+            // EvaluationMethodTypeCode
+            if (criterionType.getEvaluationMethodTypeCode() != null
+                    && criterionType.getEvaluationMethodTypeCode().getValue() != null) {
+                weiIndResp.setEvaluationMethodType(criterionType.getEvaluationMethodTypeCode().getValue());
+            }
+            // WeightingConsiderationDescription
+            weiIndResp.getEvaluationMethodDescriptionList()
+                    .addAll(criterionType.getWeightingConsiderationDescription().stream()
+                            .map(descType -> descType.getValue())
+                            .collect(Collectors.toList()));
+            // WeightNumeric
+            if (criterionType.getWeightNumeric() != null
+                    && criterionType.getWeightNumeric().getValue() != null) {
+                weiIndResp.setWeight(criterionType.getWeightNumeric().getValue().floatValue());
+            }
+            r.setResponse(weiIndResp);
+        }
         return r;
     }
 

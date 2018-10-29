@@ -17,17 +17,18 @@ package eu.esens.espdvcd.builder.schema.v2;
 
 import eu.esens.espdvcd.codelist.enums.ProfileExecutionIDEnum;
 import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
+import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.ESPDRequest;
-import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.Requirement;
+import eu.esens.espdvcd.model.requirement.response.WeightIndicatorResponse;
 import eu.espd.schema.v2.pre_award.commonaggregate.DocumentReferenceType;
 import eu.espd.schema.v2.pre_award.commonaggregate.ProcurementProjectLotType;
 import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionPropertyType;
+import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionType;
 import eu.espd.schema.v2.pre_award.commonbasic.*;
 import eu.espd.schema.v2.pre_award.qualificationapplicationrequest.QualificationApplicationRequestType;
 
-import java.util.Map;
-import java.util.function.Function;
+import java.math.BigDecimal;
 import java.util.stream.Collectors;
 
 public class ESPDRequestSchemaExtractorV2 implements SchemaExtractorV2 {
@@ -75,19 +76,6 @@ public class ESPDRequestSchemaExtractorV2 implements SchemaExtractorV2 {
                 .map(cr -> extractTenderingCriterion(cr))
                 .collect(Collectors.toList()));
 
-        // create a Map<Key = Criterion ID, Value = The Criterion> in order to use it during criteria level weighting info extraction
-//        Map<String, SelectableCriterion> criterionMap = modelRequest.getFullCriterionList().stream()
-//                .collect(Collectors.toMap(sc -> sc.getID(), Function.identity()));
-
-        // apply criteria weighting info
-//        qarType.getTenderingCriterion().forEach(criterionType -> {
-//            /* the logic here is: find the 1st rq with WEIGHT_INDICATOR. That rq contains the TenderingCriterionType level weighting info */
-//            SelectableCriterion sc = criterionMap.get(criterionType.getID().getValue());
-//            if (sc != null) {
-//
-//            }
-//        });
-
         qarType.setUBLVersionID(createUBL22VersionIdType());
         qarType.setCustomizationID(createCENBIICustomizationIdType("urn:www.cenbii.eu:transaction:biitrdm070:ver3.0"));
         // FIXME: version id should be updated here
@@ -107,6 +95,41 @@ public class ESPDRequestSchemaExtractorV2 implements SchemaExtractorV2 {
         qarType.getCopyIndicator().setValue(false);
 
         return qarType;
+    }
+
+    @Override
+    public void applyTenderingCriterionWeightingData(Requirement rq, TenderingCriterionType criterionType) {
+
+        if (rq.getResponseDataType() == ResponseTypeEnum.WEIGHT_INDICATOR) {
+            WeightIndicatorResponse weiIndResp = (WeightIndicatorResponse) rq.getResponse();
+            if (weiIndResp != null) {
+                // EvaluationMethodTypeCode
+                if (criterionType.getEvaluationMethodTypeCode() == null) {
+                    criterionType.setEvaluationMethodTypeCode(new EvaluationMethodTypeCodeType());
+                }
+                if (weiIndResp.getEvaluationMethodType() != null
+                        && criterionType.getEvaluationMethodTypeCode().getValue() == null) {
+                    criterionType.getEvaluationMethodTypeCode().setValue(weiIndResp.getEvaluationMethodType());
+                }
+                // WeightingConsiderationDescription
+                if (criterionType.getWeightingConsiderationDescription().isEmpty()) {
+                    criterionType.getWeightingConsiderationDescription().addAll(weiIndResp.getEvaluationMethodDescriptionList().stream()
+                            .map(desc -> {
+                                WeightingConsiderationDescriptionType descType = new WeightingConsiderationDescriptionType();
+                                descType.setValue(desc);
+                                return descType;
+                            })
+                            .collect(Collectors.toList()));
+                }
+                // WeightNumeric
+                if (criterionType.getWeightNumeric() == null) {
+                    criterionType.setWeightNumeric(new WeightNumericType());
+                }
+                if (criterionType.getWeightNumeric().getValue() == null) {
+                    criterionType.getWeightNumeric().setValue(BigDecimal.valueOf(weiIndResp.getWeight()));
+                }
+            }
+        }
     }
 
     @Override

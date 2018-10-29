@@ -81,6 +81,10 @@ public interface SchemaExtractorV2 {
         return lt;
     }
 
+    default void applyTenderingCriterionWeightingData(Requirement rq, TenderingCriterionType criterionType) {
+        // do nothing here. This method will be overridden in ESPDRequestSchemaExtractorV2
+    }
+
     default TenderingCriterionPropertyGroupType extractTenderingCriterionPropertyGroupType(RequirementGroup rg, TenderingCriterionType criterionType) {
 
         TenderingCriterionPropertyGroupType rgType = new TenderingCriterionPropertyGroupType();
@@ -91,39 +95,8 @@ public interface SchemaExtractorV2 {
 
         rgType.getTenderingCriterionProperty().addAll(rg.getRequirements().stream()
                 .map(r1 -> {
-
                     // apply criterion level weighting info
-                    if (r1.getResponseDataType() == ResponseTypeEnum.WEIGHT_INDICATOR) {
-                        WeightIndicatorResponse weiIndResp = (WeightIndicatorResponse) r1.getResponse();
-                        if (weiIndResp != null) {
-                            // EvaluationMethodTypeCode
-                            if (criterionType.getEvaluationMethodTypeCode() == null) {
-                                criterionType.setEvaluationMethodTypeCode(new EvaluationMethodTypeCodeType());
-                            }
-                            if (weiIndResp.getEvaluationMethodType() != null
-                                    && criterionType.getEvaluationMethodTypeCode().getValue() == null) {
-                                criterionType.getEvaluationMethodTypeCode().setValue(weiIndResp.getEvaluationMethodType());
-                            }
-                            // WeightingConsiderationDescription
-                            if (criterionType.getWeightingConsiderationDescription().isEmpty()) {
-                                criterionType.getWeightingConsiderationDescription().addAll(weiIndResp.getEvaluationMethodDescriptionList().stream()
-                                        .map(desc -> {
-                                            WeightingConsiderationDescriptionType descType = new WeightingConsiderationDescriptionType();
-                                            descType.setValue(desc);
-                                            return descType;
-                                        })
-                                        .collect(Collectors.toList()));
-                            }
-                            // WeightNumeric
-                            if (criterionType.getWeightNumeric() == null) {
-                                criterionType.setWeightNumeric(new WeightNumericType());
-                            }
-                            if (criterionType.getWeightNumeric().getValue() == null) {
-                                criterionType.getWeightNumeric().setValue(BigDecimal.valueOf(weiIndResp.getWeight()));
-                            }
-                        }
-                    }
-
+                    applyTenderingCriterionWeightingData(r1, criterionType);
                     return extractTenderingCriterionPropertyType(r1);
                 })
                 .collect(Collectors.toList()));
