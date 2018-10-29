@@ -7,7 +7,7 @@ public final class Errors {
     }
 
     /**
-     * Helper static method for creating a basic error
+     * Creates a basic error
      *
      * @param code    error code
      * @param message error message
@@ -18,7 +18,7 @@ public final class Errors {
     }
 
     /**
-     * Helper static method for creating an error with additional information
+     * Creates an error with additional information
      *
      * @param code    error code
      * @param message error message
@@ -30,7 +30,7 @@ public final class Errors {
     }
 
     /**
-     * Helper static method for creating a 404 - Resource not found error
+     * Creates a 404 - Resource not found error
      *
      * @param message custom message
      * @return ErrorResponse object to be serialized in JSON
@@ -40,7 +40,7 @@ public final class Errors {
     }
 
     /**
-     * Helper static method for creating a 406 - Input not acceptable error
+     * Creates a 406 - Input not acceptable error
      *
      * @param message custom message
      * @return ErrorResponse object to be serialized in JSON
@@ -63,11 +63,11 @@ public final class Errors {
     }
 
     public static ErrorResponse artefactDeserialisationError() {
-        return new ErrorResponse.ErrorBuilder(400, "Oops, the provided JSON document was not valid and could not be converted to an object. Did you provide the correct format?").build();
+        return new ErrorResponse.ErrorBuilder(400, "The provided JSON document was not valid and could not be converted to an object. Did you provide the correct format?").build();
     }
 
     public static ErrorResponse artefactDeserialisationError(String message) {
-        return new ErrorResponse.ErrorBuilder(400, "Oops, the provided JSON document was not valid and could not be converted to an object. Did you provide the correct format? \nThis could help you:\n" + message).build();
+        return new ErrorResponse.ErrorBuilder(400, "The provided JSON document was not valid and could not be converted to an object. Did you provide the correct format? \nThis could help you:\n" + message).build();
     }
 
     public static ErrorResponse unacceptableContentType() {

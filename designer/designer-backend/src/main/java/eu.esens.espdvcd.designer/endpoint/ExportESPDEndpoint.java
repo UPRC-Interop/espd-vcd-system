@@ -62,9 +62,9 @@ public class ExportESPDEndpoint extends Endpoint {
                 return Errors.artefactInWrongFormatError();
             }), JsonUtil.json());
 
-            spark.post("/request", this::handleESPDRequest, JsonUtil.json());
+            spark.post("/request", this::handleESPDRequest);
 
-            spark.post("/response", this::handleESPDResponse, JsonUtil.json());
+            spark.post("/response", this::handleESPDResponse);
         });
     }
 
@@ -76,6 +76,7 @@ public class ExportESPDEndpoint extends Endpoint {
             } catch (IOException e) {
                 rsp.status(400);
                 LOGGER.severe(LOGGER_DESERIALIZATION_ERROR + e.getMessage());
+                e.printStackTrace();
                 rsp.header("Content-Type", "application/json");
                 return Errors.artefactDeserialisationError(e.getMessage());
             }
@@ -107,6 +108,7 @@ public class ExportESPDEndpoint extends Endpoint {
                 rsp.status(400);
                 rsp.header("Content-Type", "application/json");
                 LOGGER.severe(LOGGER_DESERIALIZATION_ERROR + e.getMessage());
+                e.printStackTrace();
                 return Errors.artefactDeserialisationError(e.getMessage());
             }
             rsp.header("Content-Type", "application/octet-stream");

@@ -15,10 +15,14 @@
  */
 package eu.esens.espdvcd.model.requirement.response;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Weight Indicator Response
@@ -60,6 +64,7 @@ public class WeightIndicatorResponse extends Response implements Serializable {
         this.evaluationMethodType = evaluationMethodType;
     }
 
+    @JsonIgnore
     public List<String> getEvaluationMethodDescriptionList() {
         if (evaluationMethodDescriptionList == null) {
             evaluationMethodDescriptionList = new ArrayList<>();
@@ -67,6 +72,7 @@ public class WeightIndicatorResponse extends Response implements Serializable {
         return evaluationMethodDescriptionList;
     }
 
+    @JsonProperty("evaluationMethodDescription")
     public String getEvaluationMethodDescription() {
         if (evaluationMethodDescriptionList == null) {
             evaluationMethodDescriptionList = new ArrayList<>();
@@ -74,12 +80,16 @@ public class WeightIndicatorResponse extends Response implements Serializable {
         return String.join("\n", evaluationMethodDescriptionList);
     }
 
-    public void setEvaluationMethodDescription(String description) {
+    public void setEvaluationMethodDescription(@JsonProperty("evaluationMethodDescription") String description) {
         if (evaluationMethodDescriptionList == null) {
             evaluationMethodDescriptionList = new ArrayList<>();
         }
-        String[] descArray = description.split("[\\r\\n]+");
-        evaluationMethodDescriptionList.addAll(Arrays.asList(descArray));
+        if (Objects.nonNull(description)) {
+            String[] descArray = description.split("[\\r\\n]+");
+            evaluationMethodDescriptionList.addAll(Arrays.asList(descArray));
+        } else {
+            evaluationMethodDescriptionList = new ArrayList<>();
+        }
     }
 
 //    public void setEvaluationMethodDescriptionList(List<String> evaluationMethodDescriptionList) {
