@@ -18,10 +18,7 @@ import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {ProcedureType} from '../model/procedureType.model';
 import {Country} from '../model/country.model';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {NumberOjsValidation} from "../validation/number-ojs/number-ojs-validation";
-import {InputValidationStateMatcher} from "../validation/input-validation-state-matcher/input-validation-state-matcher";
-import {UrlValidation} from "../validation/url/url-validation";
+import {NgForm} from '@angular/forms/forms';
 
 @Component({
   selector: 'app-procedure',
@@ -30,40 +27,13 @@ import {UrlValidation} from "../validation/url/url-validation";
 })
 export class ProcedureComponent implements OnInit, OnChanges {
 
-  procedureForm: FormGroup;
   countries: Country[] = null;
   procedureTypes: ProcedureType[] = null;
-  matcher = new InputValidationStateMatcher();
   // @Input() eoRelatedCriteria: EoRelatedCriterion[];
   // @Input() reductionCriteria: ReductionCriterion[];
 
 
   constructor(public dataService: DataService) {
-    this.procedureForm = new FormGroup({
-      'pub': new FormGroup({
-        'receivedNoticeNumber': new FormControl(null, []), // National Notice Number
-        'noticeNumberOJS': new FormControl(null, [NumberOjsValidation]), // OJS
-        'ojsURL': new FormControl(null, [UrlValidation]) // URL
-      }),
-      'details': new FormGroup({
-        'name': new FormControl(null, []),
-        'id': new FormControl(null, []),
-        'website': new FormControl(null, [UrlValidation]), // URL
-        'city': new FormControl(null, []),
-        'street': new FormControl(null, []),
-        'postcode': new FormControl(null, []), // PostCode
-        'contactname': new FormControl(null, []),
-        'telephone': new FormControl(null, []), // Phone Number
-        'faxnumber': new FormControl(null, []), // Phone Number
-        'email': new FormControl(null, [Validators.email]), // Email
-        'country': new FormControl(null, []), // Country Code
-      }),
-      'procurement': new FormGroup({
-        'title': new FormControl(null, []),
-        'description': new FormControl(null, []),
-        'fileRefNumber': new FormControl(null, [])
-      })
-    });
   }
 
   ngOnInit() {
@@ -86,18 +56,37 @@ export class ProcedureComponent implements OnInit, OnChanges {
         console.log(err);
       });
 
+    // Get predefined eoRelated Criteria
+    // this.dataService.getEoRelatedCriteria()
+    //   .then(res => {
+    //     this.eoRelatedCriteria = res;
+    //     // console.log(this.eoRelatedCriteria);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
+
+    // this.dataService.getReductionCriteria()
+    //   .then(res => {
+    //     this.reductionCriteria = res;
+    //     // console.log(this.reductionCriteria);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
+
   }
 
   ngOnChanges(changes: SimpleChanges) {
     console.log(this.dataService.receivedNoticeNumber);
   }
 
-  onProcedureSubmit() {
+  onProcedureSubmit(form: NgForm) {
     // console.log(form.value);
-    this.dataService.CADetails.cacountry = this.procedureForm.get('details.country').value;
-    this.dataService.CADetails.receivedNoticeNumber = this.procedureForm.get('pub.receivedNoticeNumber').value;
-    //this.dataService.CADetails.postalAddress.countryCode = form.value.CACountry;
-    this.dataService.PostalAddress.countryCode = this.procedureForm.get('details.country').value;
+    this.dataService.CADetails.cacountry = form.value.CACountry;
+    this.dataService.CADetails.receivedNoticeNumber = form.value.receivedNoticeNumber;
+    // this.dataService.CADetails.postalAddress.countryCode = form.value.CACountry;
+    this.dataService.PostalAddress.countryCode = form.value.CACountry;
     this.dataService.CADetails.postalAddress = this.dataService.PostalAddress;
     this.dataService.CADetails.contactingDetails = this.dataService.ContactingDetails;
     console.log(this.dataService.CADetails);

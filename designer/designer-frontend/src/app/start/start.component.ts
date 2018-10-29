@@ -15,21 +15,14 @@
 ///
 
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormControl, NgForm} from '@angular/forms/forms';
 import {ApicallService} from '../services/apicall.service';
 import {DataService} from '../services/data.service';
 import {Country} from '../model/country.model';
 import {UtilitiesService} from '../services/utilities.service';
-import {NumberOjsValidation} from "../validation/number-ojs/number-ojs-validation";
-import {NGXLogger} from "ngx-logger";
-import {InputValidationStateMatcher} from "../validation/input-validation-state-matcher/input-validation-state-matcher";
 
 // import {ProcedureType} from "../model/procedureType.model";
 
-export interface Animal {
-  name: string;
-  sound: string;
-}
 
 @Component({
   selector: 'app-start',
@@ -48,27 +41,13 @@ export class StartComponent implements OnInit {
   isCreateResponse = false;
   fileToUpload: File[] = [];
   reset = false;
-  startForm: FormGroup;
-  matcher = new InputValidationStateMatcher();
 
   // procedureTypes:ProcedureType[];
 
-  constructor(public dataService: DataService, private APIService: ApicallService, public utilities: UtilitiesService, public logger: NGXLogger) {
+  constructor(public dataService: DataService, private APIService: ApicallService, public utilities: UtilitiesService) {
   }
 
   ngOnInit() {
-
-    this.startForm = new FormGroup({
-      'role': new FormControl(null, Validators.required),
-      'numberOjs': new FormControl(null, [Validators.required, NumberOjsValidation]),
-      'caOptions': new FormControl(null, Validators.required),
-      'caVersion': new FormControl(null, Validators.required),
-      'caCountry': new FormControl(null, Validators.required),
-      'eoOptions': new FormControl(null, Validators.required),
-      'eoVersion': new FormControl(null, Validators.required),
-      'eoCountry': new FormControl(null, Validators.required),
-    });
-
     this.dataService.getCountries()
       .then(res => {
         this.countries = res;
@@ -156,10 +135,7 @@ export class StartComponent implements OnInit {
     }
   }
 
-  onStartSubmit() {
-
-    console.log(this.startForm);
-    const role = this.startForm.get('role').value;
+  onStartSubmit(form: NgForm) {
     // console.log(form);
     // form and model reset in case of start
     this.utilities.isStarted = true;
@@ -168,16 +144,16 @@ export class StartComponent implements OnInit {
     console.log(this.dataService.isReadOnly());
     // CA reuses ESPDRequest
     if (this.isCA) {
-      // const role = 'CA';
-      // this.dataService.ReuseESPD(this.fileToUpload, form, role);
+      const role = 'CA';
+      this.dataService.ReuseESPD(this.fileToUpload, form, role);
     } else if (this.isEO) {
-      // const role = 'EO';
-      // this.dataService.ReuseESPD(this.fileToUpload, form, role);
+      const role = 'EO';
+      this.dataService.ReuseESPD(this.fileToUpload, form, role);
     }
-    this.dataService.ReuseESPD(this.fileToUpload, this.startForm.get('numberOjs').value, role);
+
 
     // Start New ESPD
-    this.dataService.startESPD(this.startForm);
+    this.dataService.startESPD(form);
 
 
   }
