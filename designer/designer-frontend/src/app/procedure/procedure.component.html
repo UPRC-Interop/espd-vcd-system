@@ -75,7 +75,11 @@
       </mat-form-field>
       <mat-form-field>
         <input matInput placeholder="{{'espd.part2.vat'| translate}}" name="CAofficialID"
-               [(ngModel)]="dataService.CADetails.id" [disabled]="this.dataService.isReadOnly()">
+               [(ngModel)]="dataService.CADetails.id" [disabled]="this.dataService.isReadOnly()" #CAofficialID="ngModel"
+               required>
+        <mat-error *ngIf="CAofficialID.invalid">
+          <input-validation-error [formControlErrors]="CAofficialID.errors"></input-validation-error>
+        </mat-error>
       </mat-form-field>
       <mat-form-field>
         <input matInput placeholder="{{'espd.part1.website' | translate}}" name="CAofficialWebSite"
@@ -162,7 +166,10 @@
       <mat-form-field>
         <input matInput placeholder="{{'espd.part1.file.ref.ca' | translate}}" name="fileReferenceNumber"
                [(ngModel)]="dataService.CADetails.procurementProcedureFileReferenceNo"
-               [disabled]="this.dataService.isReadOnly()">
+               [disabled]="this.dataService.isReadOnly()" required #fileReferenceNumber="ngModel">
+        <mat-error *ngIf="fileReferenceNumber.invalid">
+          <input-validation-error [formControlErrors]="fileReferenceNumber.errors"></input-validation-error>
+        </mat-error>
       </mat-form-field>
     </mat-expansion-panel>
   </mat-accordion>
