@@ -111,9 +111,9 @@ public class RequirementDeserialiser extends StdDeserializer<ResponseRequirement
             case WEIGHT_INDICATOR:
                 response = mapper.treeToValue(root.get("response"), WeightIndicatorResponse.class);
                 break;
-//            case NONE:
-//                response =
-//                break;
+            case NONE:
+                response = null;
+                break;
             default:
                 response = null;
                 LOGGER.warning("RESPONSE TYPE NOT FOUND");
