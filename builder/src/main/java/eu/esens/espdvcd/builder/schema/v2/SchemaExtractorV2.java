@@ -17,9 +17,11 @@ package eu.esens.espdvcd.builder.schema.v2;
 
 import eu.esens.espdvcd.codelist.enums.ProfileExecutionIDEnum;
 import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
+import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
+import eu.esens.espdvcd.model.requirement.response.WeightIndicatorResponse;
 import eu.espd.schema.v2.pre_award.commonaggregate.*;
 import eu.espd.schema.v2.pre_award.commonbasic.*;
 import eu.espd.schema.v2.unqualifieddatatypes_2.CodeType;
@@ -30,11 +32,6 @@ import java.util.stream.Collectors;
 
 public interface SchemaExtractorV2 {
 
-    /**
-     * TenderingCriterionPropertyType replaces
-     * {@link eu.espd.schema.v1.ccv_commonaggregatecomponents_1.RequirementType}
-     * in edm version 2.0.x
-     */
     TenderingCriterionPropertyType extractTenderingCriterionPropertyType(Requirement rq);
 
     default TenderingCriterionType extractTenderingCriterion(Criterion c) {
@@ -58,7 +55,7 @@ public interface SchemaExtractorV2 {
         tct.setCriterionTypeCode(createCriteriaTypeCode(c.getTypeCode()));
 
         tct.getTenderingCriterionPropertyGroup().addAll(c.getRequirementGroups().stream()
-                .map(rg -> extractTenderingCriterionPropertyGroupType(rg))
+                .map(rg -> extractTenderingCriterionPropertyGroupType(rg, tct))
                 .collect(Collectors.toList()));
 
         return tct;
@@ -84,23 +81,54 @@ public interface SchemaExtractorV2 {
         return lt;
     }
 
-    // This is RequirementGroup equivalent in edm version 2.0.x
-    default TenderingCriterionPropertyGroupType extractTenderingCriterionPropertyGroupType(RequirementGroup rg) {
+    default TenderingCriterionPropertyGroupType extractTenderingCriterionPropertyGroupType(RequirementGroup rg, TenderingCriterionType criterionType) {
 
         TenderingCriterionPropertyGroupType rgType = new TenderingCriterionPropertyGroupType();
 
-        //TODO: Apply Defaults() method for adding default attributes etc
         rgType.getSubsidiaryTenderingCriterionPropertyGroup().addAll(rg.getRequirementGroups().stream()
-                .map(rg1 -> extractTenderingCriterionPropertyGroupType(rg1))
+                .map(rg1 -> extractTenderingCriterionPropertyGroupType(rg1, criterionType))
                 .collect(Collectors.toList()));
-        // This is Requirement equivalent in edm version 2.0.x
+
         rgType.getTenderingCriterionProperty().addAll(rg.getRequirements().stream()
-                .map(r1 -> extractTenderingCriterionPropertyType(r1))
+                .map(r1 -> {
+
+                    // apply criterion level weighting info
+                    if (r1.getResponseDataType() == ResponseTypeEnum.WEIGHT_INDICATOR) {
+                        WeightIndicatorResponse weiIndResp = (WeightIndicatorResponse) r1.getResponse();
+                        if (weiIndResp != null) {
+                            // EvaluationMethodTypeCode
+                            if (criterionType.getEvaluationMethodTypeCode() == null) {
+                                criterionType.setEvaluationMethodTypeCode(new EvaluationMethodTypeCodeType());
+                            }
+                            if (weiIndResp.getEvaluationMethodType() != null
+                                    && criterionType.getEvaluationMethodTypeCode().getValue() == null) {
+                                criterionType.getEvaluationMethodTypeCode().setValue(weiIndResp.getEvaluationMethodType());
+                            }
+                            // WeightingConsiderationDescription
+                            if (criterionType.getWeightingConsiderationDescription().isEmpty()) {
+                                criterionType.getWeightingConsiderationDescription().addAll(weiIndResp.getEvaluationMethodDescriptionList().stream()
+                                        .map(desc -> {
+                                            WeightingConsiderationDescriptionType descType = new WeightingConsiderationDescriptionType();
+                                            descType.setValue(desc);
+                                            return descType;
+                                        })
+                                        .collect(Collectors.toList()));
+                            }
+                            // WeightNumeric
+                            if (criterionType.getWeightNumeric() == null) {
+                                criterionType.setWeightNumeric(new WeightNumericType());
+                            }
+                            if (criterionType.getWeightNumeric().getValue() == null) {
+                                criterionType.getWeightNumeric().setValue(BigDecimal.valueOf(weiIndResp.getWeight()));
+                            }
+                        }
+                    }
+
+                    return extractTenderingCriterionPropertyType(r1);
+                })
                 .collect(Collectors.toList()));
 
         rgType.setID(createDefaultIDType(rg.getID()));
-        // rgType.setID(createCriteriaTaxonomyIDType(rg.getID()));
-
         // RequirementGroup "PI" attribute: the "processing instruction" attribute is not defined in UBL-2.2.
         // Instead, if needed, use the "cbc:PropertyGroupTypeCode" component
         rgType.setPropertyGroupTypeCode(createPropertyGroupTypeCodeType(rg.getCondition()));
