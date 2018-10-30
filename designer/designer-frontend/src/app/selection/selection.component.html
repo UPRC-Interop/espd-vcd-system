@@ -187,10 +187,10 @@
             <span class="weight">Provide the general method used to score and evaluate the weighted criteria: </span>
             <mat-form-field>
               <textarea matInput
-                        name="weightingScoringMethodologyNote"
+                        name="weightScoringMethodologyNote"
                         id="shortDesc" cols="30" rows="10"
                         placeholder="Weighting Scoring methodology note"
-                        [(ngModel)]="dataService.CADetails.weightingScoringMethodologyNote"
+                        [(ngModel)]="this.dataService.CADetails.weightScoringMethodologyNote"
                         [disabled]="this.dataService.isReadOnly()">
               </textarea>
             </mat-form-field>

@@ -527,6 +527,8 @@ export class DataService {
 
           if (this.utilities.qualificationApplicationType === 'self-contained') {
             this.CADetails.classificationCodes = res.cadetails.classificationCodes;
+            this.CADetails.weightScoringMethodologyNote = res.cadetails.weightScoringMethodologyNote;
+            this.CADetails.weightingType = res.cadetails.weightingType;
           }
 
           console.log(res.fullCriterionList);
@@ -573,6 +575,7 @@ export class DataService {
           // create requirementGroup template objects required for multiple instances (cardinalities) function
           this.formUtil.createTemplateReqGroups(res.fullCriterionList);
           console.log(res);
+          console.log(this.CADetails);
 
 
         })
