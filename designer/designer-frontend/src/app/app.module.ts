@@ -83,7 +83,6 @@ import {PercentageValidationDirective} from './directives/percentage/percentage-
     DateValidationFixDirective,
     PhoneNumberValidationDirective,
     IntegerValidationDirective,
-    DateValidationFixDirective,
     PercentageValidationDirective
   ],
   imports: [
