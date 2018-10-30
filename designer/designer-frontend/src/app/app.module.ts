@@ -53,6 +53,7 @@ import {UrlValidationDirective} from "./directives/url/url-validation.directive"
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from "@angular/material";
 import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from "@angular/material-moment-adapter";
 import {DateValidationFixDirective} from './directives/validation-date-fix/date-validation-fix.directive';
+import {PhoneNumberValidationDirective} from './directives/phone-number/phone-number-validation.directive';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import {DateValidationFixDirective} from './directives/validation-date-fix/date-
     UrlValidationDirective,
     InputValidationErrorComponent,
     ValidationErrorDirective,
-    DateValidationFixDirective
+    DateValidationFixDirective,
+    PhoneNumberValidationDirective
   ],
   imports: [
     BrowserModule,

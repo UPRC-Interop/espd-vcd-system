@@ -107,11 +107,19 @@
         </mat-form-field>
         <mat-form-field>
           <input matInput placeholder="{{'espd.part1.telephone' | translate}}" name="CAofficialContactTelephone"
-                 [(ngModel)]="dataService.ContactingDetails.telephoneNumber" [disabled]="this.dataService.isReadOnly()">
+                 [(ngModel)]="dataService.ContactingDetails.telephoneNumber" [disabled]="this.dataService.isReadOnly()"
+                 #telephone="ngModel" phoneNumber>
+          <mat-error *ngIf="telephone.invalid">
+            <input-validation-error [formControlErrors]="telephone.errors"></input-validation-error>
+          </mat-error>
         </mat-form-field>
         <mat-form-field>
           <input matInput placeholder="{{'espd.part1.fax' | translate}}" name="CAofficialContactFaxNumber"
-                 [(ngModel)]="dataService.ContactingDetails.faxNumber" [disabled]="this.dataService.isReadOnly()">
+                 [(ngModel)]="dataService.ContactingDetails.faxNumber" [disabled]="this.dataService.isReadOnly()"
+                 #fax="ngModel" phoneNumber>
+          <mat-error *ngIf="fax.invalid">
+            <input-validation-error [formControlErrors]="fax.errors"></input-validation-error>
+          </mat-error>
         </mat-form-field>
         <mat-form-field>
           <input matInput placeholder="{{'espd.part1.email' | translate}}" name="CAofficialContactEmail"
