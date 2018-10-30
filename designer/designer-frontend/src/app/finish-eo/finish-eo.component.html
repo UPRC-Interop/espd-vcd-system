@@ -93,7 +93,10 @@
       <p translate>espd.part5.concl.statements.signature</p>
 
       <mat-form-field>
-        <input matInput [matDatepicker]="picker" placeholder="Date">
+        <input [appDateValidationFix]="dateInput.control" matInput [matDatepicker]="picker" placeholder="Date" #dateInput="ngModel" ngModel required>
+        <mat-error *ngIf="dateInput.control.invalid">
+          <input-validation-error [formControlErrors]="dateInput.control.errors"></input-validation-error>
+        </mat-error>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
