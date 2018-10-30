@@ -446,7 +446,7 @@ export class FormUtilService {
             }
 
 
-            // YES/NO if responseDataType is indicator then pass indicator value to formControl. (initial state problem fixed)
+            // YES/NO if responseDataType is indicator then pass indicator value to appDateValidationFix. (initial state problem fixed)
             if (r.responseDataType === 'INDICATOR') {
               if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
                 group[r.uuid] = new FormControl(false);

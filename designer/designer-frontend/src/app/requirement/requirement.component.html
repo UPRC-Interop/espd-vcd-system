@@ -28,9 +28,12 @@
     </mat-form-field>
 
     <mat-form-field *ngSwitchCase="'DATE'">
-      <label [attr.for]="req.uuid">{{req.description}}</label>
+      <label [attr.for]="req.uuid">DATE {{req.description}}</label>
       <br>
-      <input matInput [matDatepicker]="picker" [formControlName]="req.uuid" [id]="req.uuid">
+      <input [appDateValidationFix]="form.get(req.uuid)" matInput [matDatepicker]="picker" [formControlName]="req.uuid" [id]="req.uuid">
+      <mat-error *ngIf="form.get(req.uuid).invalid">
+        <input-validation-error [formControlErrors]="form.get(req.uuid).errors"></input-validation-error>
+      </mat-error>
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
@@ -40,7 +43,10 @@
         <label [attr.for]="req.uuid+'startDate'">Start Date: </label>
         <br>
         <mat-form-field >
-          <input matInput [matDatepicker]="startPicker" [formControlName]="req.uuid+'startDate'" [id]="req.uuid+'startDate'">
+          <input [appDateValidationFix]="form.get(req.uuid+'startDate')" matInput [matDatepicker]="startPicker" [formControlName]="req.uuid+'startDate'" [id]="req.uuid+'startDate'">
+          <mat-error *ngIf="form.get(req.uuid+'startDate').invalid">
+            <input-validation-error [formControlErrors]="form.get(req.uuid+'startDate').errors"></input-validation-error>
+          </mat-error>
           <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
           <mat-datepicker #startPicker></mat-datepicker>
         </mat-form-field>
@@ -48,7 +54,10 @@
         <label [attr.for]="req.uuid+'endDate'">End Date: </label>
         <br>
         <mat-form-field >
-          <input matInput [matDatepicker]="endPicker" [formControlName]="req.uuid+'endDate'" [id]="req.uuid+'endDate'">
+          <input [appDateValidationFix]="form.get(req.uuid+'endDate')" matInput [matDatepicker]="endPicker" [formControlName]="req.uuid+'endDate'" [id]="req.uuid+'endDate'">
+          <mat-error *ngIf="form.get(req.uuid+'endDate').invalid">
+            <input-validation-error [formControlErrors]="form.get(req.uuid+'endDate').errors"></input-validation-error>
+          </mat-error>
           <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
           <mat-datepicker #endPicker></mat-datepicker>
         </mat-form-field>

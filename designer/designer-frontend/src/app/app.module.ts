@@ -49,8 +49,10 @@ import {LoggerModule, NGXLogger, NgxLoggerLevel} from "ngx-logger";
 import {NumberOjsValidationDirective} from './directives/number-ojs/number-ojs-validation.directive';
 import {InputValidationErrorComponent} from './shared/input-validation-error/input-validation-error.component';
 import {ValidationErrorDirective} from './directives/validation-error/validation-error.directive';
-import {DatepickerModule} from "./datepicker/datepicker.module";
 import {UrlValidationDirective} from "./directives/url/url-validation.directive";
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from "@angular/material";
+import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from "@angular/material-moment-adapter";
+import {DateValidationFixDirective} from './directives/validation-date-fix/date-validation-fix.directive';
 
 @NgModule({
   declarations: [
@@ -74,7 +76,8 @@ import {UrlValidationDirective} from "./directives/url/url-validation.directive"
     NumberOjsValidationDirective,
     UrlValidationDirective,
     InputValidationErrorComponent,
-    ValidationErrorDirective
+    ValidationErrorDirective,
+    DateValidationFixDirective
   ],
   imports: [
     BrowserModule,
@@ -84,7 +87,6 @@ import {UrlValidationDirective} from "./directives/url/url-validation.directive"
     HttpClientModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    DatepickerModule,
     LoggerModule.forRoot({serverLoggingUrl: '/api/logs', level: NgxLoggerLevel.DEBUG, serverLogLevel: NgxLoggerLevel.ERROR}),
     TranslateModule.forRoot({
       loader : {
@@ -94,7 +96,11 @@ import {UrlValidationDirective} from "./directives/url/url-validation.directive"
       }
     })
   ],
-  providers: [ApicallService, DataService,NGXLogger],
+  providers: [ApicallService, DataService, NGXLogger,
+    {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
+    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
