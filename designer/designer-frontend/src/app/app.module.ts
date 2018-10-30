@@ -82,7 +82,7 @@ import {PercentageValidationDirective} from './directives/percentage/percentage-
     ValidationErrorDirective,
     DateValidationFixDirective,
     PhoneNumberValidationDirective,
-    IntegerValidationDirective
+    IntegerValidationDirective,
     DateValidationFixDirective,
     PercentageValidationDirective
   ],
