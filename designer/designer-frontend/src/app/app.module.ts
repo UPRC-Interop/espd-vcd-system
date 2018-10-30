@@ -53,6 +53,8 @@ import {UrlValidationDirective} from "./directives/url/url-validation.directive"
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from "@angular/material";
 import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from "@angular/material-moment-adapter";
 import {DateValidationFixDirective} from './directives/validation-date-fix/date-validation-fix.directive';
+import {PhoneNumberValidationDirective} from './directives/phone-number/phone-number-validation.directive';
+import {IntegerValidationDirective} from './directives/integer/integer-validation.directive';
 import {PercentageValidationDirective} from './directives/percentage/percentage-validation.directive';
 
 @NgModule({
@@ -79,6 +81,9 @@ import {PercentageValidationDirective} from './directives/percentage/percentage-
     InputValidationErrorComponent,
     ValidationErrorDirective,
     DateValidationFixDirective,
+    PhoneNumberValidationDirective,
+    IntegerValidationDirective
+    DateValidationFixDirective,
     PercentageValidationDirective
   ],
   imports: [
@@ -89,9 +94,13 @@ import {PercentageValidationDirective} from './directives/percentage/percentage-
     HttpClientModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    LoggerModule.forRoot({serverLoggingUrl: '/api/logs', level: NgxLoggerLevel.DEBUG, serverLogLevel: NgxLoggerLevel.ERROR}),
+    LoggerModule.forRoot({
+      serverLoggingUrl: '/api/logs',
+      level: NgxLoggerLevel.DEBUG,
+      serverLogLevel: NgxLoggerLevel.ERROR
+    }),
     TranslateModule.forRoot({
-      loader : {
+      loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
