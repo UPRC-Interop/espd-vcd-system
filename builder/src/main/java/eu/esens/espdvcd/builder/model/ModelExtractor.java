@@ -560,30 +560,9 @@ public interface ModelExtractor {
         return lr;
     }
 
-    default Requirement extractRequirement(TenderingCriterionPropertyType pt,
-                                           TenderingCriterionType criterionType) {
-        String theId = null;
-        if (pt.getID() != null) {
-            theId = pt.getID().getValue();
-        }
-        String theDescription = null;
-        if (!pt.getDescription().isEmpty() && pt.getDescription().get(0) != null) {
-            theDescription = pt.getDescription().get(0).getValue();
-        }
+    default void applyCriterionWeightingData(Requirement rq, TenderingCriterionType criterionType) {
 
-        Requirement r = new ResponseRequirement(
-                theId,
-                RequirementTypeEnum.valueOf(pt.getTypeCode().getValue()),
-                ResponseTypeEnum.valueOf(pt.getValueDataTypeCode().getValue()),
-                theDescription
-        );
-
-        // apply criterion level weighting info
-        if (pt.getValueDataTypeCode() != null
-                && pt.getValueDataTypeCode().getValue() != null
-                && pt.getValueDataTypeCode().getValue()
-                .equals(ResponseTypeEnum.WEIGHT_INDICATOR.name())) {
-
+        if (rq.getResponseDataType() == ResponseTypeEnum.WEIGHT_INDICATOR) {
             WeightIndicatorResponse weiIndResp = new WeightIndicatorResponse();
             // EvaluationMethodTypeCode
             if (criterionType.getEvaluationMethodTypeCode() != null
@@ -600,8 +579,28 @@ public interface ModelExtractor {
                     && criterionType.getWeightNumeric().getValue() != null) {
                 weiIndResp.setWeight(criterionType.getWeightNumeric().getValue().floatValue());
             }
-            r.setResponse(weiIndResp);
+            rq.setResponse(weiIndResp);
         }
+    }
+
+    default Requirement extractRequirement(TenderingCriterionPropertyType rqType, TenderingCriterionType criterionType) {
+        String theId = null;
+        if (rqType.getID() != null) {
+            theId = rqType.getID().getValue();
+        }
+        String theDescription = null;
+        if (!rqType.getDescription().isEmpty() && rqType.getDescription().get(0) != null) {
+            theDescription = rqType.getDescription().get(0).getValue();
+        }
+
+        Requirement r = new ResponseRequirement(
+                theId,
+                RequirementTypeEnum.valueOf(rqType.getTypeCode().getValue()),
+                ResponseTypeEnum.valueOf(rqType.getValueDataTypeCode().getValue()),
+                theDescription
+        );
+        // apply criterion level weighting info
+        applyCriterionWeightingData(r, criterionType);
         return r;
     }
 

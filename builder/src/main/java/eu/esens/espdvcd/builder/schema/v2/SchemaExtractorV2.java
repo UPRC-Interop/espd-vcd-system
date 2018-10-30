@@ -27,6 +27,8 @@ import eu.espd.schema.v2.pre_award.commonbasic.*;
 import eu.espd.schema.v2.unqualifieddatatypes_2.CodeType;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -82,7 +84,40 @@ public interface SchemaExtractorV2 {
     }
 
     default void applyTenderingCriterionWeightingData(Requirement rq, TenderingCriterionType criterionType) {
-        // do nothing here. This method will be overridden in ESPDRequestSchemaExtractorV2
+
+        if (rq.getResponseDataType() == ResponseTypeEnum.WEIGHT_INDICATOR) {
+            WeightIndicatorResponse weiIndResp = (WeightIndicatorResponse) rq.getResponse();
+            if (weiIndResp != null) {
+                // EvaluationMethodTypeCode
+                if (criterionType.getEvaluationMethodTypeCode() == null) {
+                    criterionType.setEvaluationMethodTypeCode(new EvaluationMethodTypeCodeType());
+                }
+                if (weiIndResp.getEvaluationMethodType() != null
+                        && criterionType.getEvaluationMethodTypeCode().getValue() == null) {
+                    criterionType.getEvaluationMethodTypeCode().setValue(weiIndResp.getEvaluationMethodType());
+                }
+                // WeightingConsiderationDescription
+                if (criterionType.getWeightingConsiderationDescription().isEmpty()) {
+                    criterionType.getWeightingConsiderationDescription().addAll(weiIndResp.getEvaluationMethodDescriptionList().stream()
+                            .map(desc -> {
+                                WeightingConsiderationDescriptionType descType = new WeightingConsiderationDescriptionType();
+                                descType.setValue(desc);
+                                return descType;
+                            })
+                            .collect(Collectors.toList()));
+                }
+                // WeightNumeric
+                if (criterionType.getWeightNumeric() == null) {
+                    criterionType.setWeightNumeric(new WeightNumericType());
+                }
+                if (criterionType.getWeightNumeric().getValue() == null) {
+                    String weight = String.valueOf(weiIndResp.getWeight());
+                    int integerPlaces = weight.indexOf(".");
+                    criterionType.getWeightNumeric().setValue(new BigDecimal(weiIndResp.getWeight())
+                            .setScale(weight.length() - integerPlaces - 1, BigDecimal.ROUND_HALF_UP));
+                }
+            }
+        }
     }
 
     default TenderingCriterionPropertyGroupType extractTenderingCriterionPropertyGroupType(RequirementGroup rg, TenderingCriterionType criterionType) {
