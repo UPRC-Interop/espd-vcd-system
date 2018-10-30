@@ -92,10 +92,6 @@ public class WeightIndicatorResponse extends Response implements Serializable {
         }
     }
 
-//    public void setEvaluationMethodDescriptionList(List<String> evaluationMethodDescriptionList) {
-//        this.evaluationMethodDescriptionList = evaluationMethodDescriptionList;
-//    }
-
     public float getWeight() {
         return weight;
     }
