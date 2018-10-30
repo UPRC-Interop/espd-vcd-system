@@ -12,7 +12,7 @@ export function IntegerValidation(control: AbstractControl): { [key: string]: bo
   }
   if (!integerRegEx.test(integer)) {
     return {
-      'integer': true
+      'number': true
     }
   }
   return null;

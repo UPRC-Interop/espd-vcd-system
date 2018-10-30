@@ -403,6 +403,5 @@
   "espd.validator.numberOjs": "Please enter a publication number in the valid format \"yyyy /S sss-nnnnnn\"",
   "espd.validator.matDatepickerParse": "Please enter a valid date in DD/MM/YYYY format.",
   "espd.validator.phoneNumber": "Please enter a valid phone number.",
-  "espd.validator.integer": "Please enter a whole number.",
   "espd.ojs.hint": "Hint: The format corresponds to the scheme \"yyyy /S sss-nnnnnn\""
 }
