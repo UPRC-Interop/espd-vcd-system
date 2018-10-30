@@ -15,6 +15,9 @@
  */
 package eu.esens.espdvcd.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -397,6 +400,7 @@ public class CADetails implements Serializable {
         this.nationalOfficialJournal = nationalOfficialJournal;
     }
 
+    @JsonIgnore
     public List<String> getWeightScoringMethodologyNoteList() {
         if (weightScoringMethodologyNoteList == null) {
             weightScoringMethodologyNoteList = new ArrayList<>();
@@ -404,6 +408,7 @@ public class CADetails implements Serializable {
         return weightScoringMethodologyNoteList;
     }
 
+    @JsonProperty("weightScoringMethodologyNote")
     public String getWeightScoringMethodologyNote() {
         if (weightScoringMethodologyNoteList == null) {
             weightScoringMethodologyNoteList = new ArrayList<>();
@@ -411,7 +416,7 @@ public class CADetails implements Serializable {
         return String.join("\n", weightScoringMethodologyNoteList);
     }
 
-    public void setWeightScoringMethodologyNote(String note) {
+    public void setWeightScoringMethodologyNote(@JsonProperty("weightScoringMethodologyNote") String note) {
         if (weightScoringMethodologyNoteList == null) {
             weightScoringMethodologyNoteList = new ArrayList<>();
         }
