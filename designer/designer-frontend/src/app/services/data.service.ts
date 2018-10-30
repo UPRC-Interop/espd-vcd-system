@@ -484,10 +484,14 @@ export class DataService {
       var filename = 'espd-request-v1.xml';
     } else if (this.utilities.isEO && this.APIService.version === 'v1') {
       var filename = 'espd-response-v1.xml';
-    } else if (this.utilities.isCA && this.APIService.version === 'v2') {
+    } else if (this.utilities.isCA && this.APIService.version === 'v2' && this.utilities.qualificationApplicationType === 'regulated') {
       var filename = 'espd-request-v2.xml';
-    } else if (this.utilities.isEO && this.APIService.version === 'v2') {
+    } else if (this.utilities.isEO && this.APIService.version === 'v2' && this.utilities.qualificationApplicationType === 'regulated') {
       var filename = 'espd-response-v2.xml';
+    } else if (this.utilities.isCA && this.utilities.qualificationApplicationType === 'self-contained') {
+      var filename = 'espd-self-contained-request.xml';
+    } else if (this.utilities.isEO && this.utilities.qualificationApplicationType === 'self-contained') {
+      var filename = 'espd-self-contained-response.xml';
     }
 
     saveAs(blob, filename);
