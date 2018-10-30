@@ -23,20 +23,16 @@
     <form [formGroup]="dataService.reductionCriteriaForm">
       <mat-expansion-panel expanded="true" *ngIf="this.dataService.reductionCriteria">
         <mat-expansion-panel-header>
-          <mat-panel-title translate>
-            espd.part5.reduction
-          </mat-panel-title>
+          <mat-panel-title [innerHTML]="'espd.part5.reduction' | translate"></mat-panel-title>
         </mat-expansion-panel-header>
         <div class="desc">
-          <mat-card>
-            {{'espd.part5.toptext' | translate}}
-          </mat-card>
+          <mat-card [innerHTML]="'espd.part5.toptext' | translate"></mat-card>
           <mat-card *ngFor="let cr of this.dataService.reductionCriteria; let i = index">
             <div class="reductionCriteria">
 
               <div class="criterion-wrap">
                 <div class="criteria">
-                  <h4 translate>espd.part5.reduction.question</h4>
+                  <h4 [innerHTML]="'espd.part5.reduction.question' | translate"></h4>
                   <h4>{{cr.name}}</h4>
                   <div class="critDesc">{{cr.description}}</div>
                   <!--<div class="eCertis">-->
@@ -64,7 +60,7 @@
       </mat-panel-title>
     </mat-expansion-panel-header>
     <div class="desc">
-      <p translate>espd.part5.concl.statements.text</p>
+      <p [innerHTML]="'espd.part5.concl.statements.text' | translate"></p>
       <!--<p>-->
         <!--The economic operator formally declare that the information stated under Parts II - V above is accurate and-->
         <!--correct and that it has been set out in full awareness of the consequences of serious misrepresentation.-->
@@ -115,16 +111,16 @@
       </mat-panel-title>
     </mat-expansion-panel-header>
     <div class="desc">
-      <p translate>espd.part5.export.content</p>
+      <p [innerHTML]="'espd.part5.export.content' | translate"></p>
     </div>
   </mat-expansion-panel>
 
 
 </mat-accordion>
 
-<button mat-raised-button color="primary" matStepperPrevious>{{'espd.gui.previous' | translate}}</button>
+<button mat-raised-button color="primary" matStepperPrevious [innerHTML]="'espd.gui.previous' | translate"></button>
 <ng-container *ngIf="!this.dataService.isReadOnly()">
-  <button type="submit" mat-raised-button color="primary" matStepperNext (click)="onExport()">{{'espd.part5.export' | translate}}</button>
+  <button type="submit" mat-raised-button color="primary" matStepperNext (click)="onExport()" [innerHTML]="'espd.part5.export' | translate"></button>
 </ng-container>
 
 <!--<button type="submit" mat-raised-button color="primary" matStepperNext (click)="onExportV2()">Export V2</button>-->
