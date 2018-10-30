@@ -403,5 +403,6 @@
   "espd.validator.numberOjs": "Geben Sie bitten eine Bekanntmachungsnummer im gültigen Format an \"yyyy /S sss-nnnnnn\"",
   "espd.validator.matDatepickerParse": "Geben Sie bitte ein gültiges Datum im Format DD/MM/YYYY ein.",
   "espd.validator.phoneNumber": "Geben Sie bitte eine gültige Rufnummer ein.",
+  "espd.validator.integer": "Geben Sie bitte eine ganze Zahl ein.",
   "espd.ojs.hint": "Ausfüllhinweis: Das Format entspricht dem Schema \"yyyy /S sss-nnnnnn\""
 }
