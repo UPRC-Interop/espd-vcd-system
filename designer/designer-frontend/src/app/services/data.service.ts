@@ -44,6 +44,7 @@ import {EvaluationMethodType} from '../model/evaluationMethodType.model';
 import {CaRelatedCriterion} from '../model/caRelatedCriterion.model';
 import {ProjectType} from '../model/projectType.model';
 import {BidType} from '../model/bidType.model';
+import {WeightingType} from '../model/weightingType.model';
 
 @Injectable()
 export class DataService {
@@ -75,6 +76,7 @@ export class DataService {
   bidTypes: BidType[] = null;
   currency: Currency[] = null;
   eoIDType: EoIDType[] = null;
+  weightingType: WeightingType[] = null;
   evaluationMethodType: EvaluationMethodType[] = null;
   exclusionACriteria: ExclusionCriteria[] = null;
   exclusionBCriteria: ExclusionCriteria[] = null;
@@ -1516,6 +1518,26 @@ export class DataService {
       return this.APIService.get_BidType()
         .then(res => {
           this.bidTypes = res;
+          return Promise.resolve(res);
+        })
+        .catch(err => {
+          console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
+          return Promise.reject(err);
+        });
+    }
+  }
+
+  getWeightingType(): Promise<WeightingType[]> {
+    if (this.weightingType != null) {
+      return Promise.resolve(this.weightingType);
+    } else {
+      return this.APIService.get_WeightingType()
+        .then(res => {
+          this.weightingType = res;
           return Promise.resolve(res);
         })
         .catch(err => {
