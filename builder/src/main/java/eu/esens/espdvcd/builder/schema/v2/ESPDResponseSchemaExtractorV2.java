@@ -582,7 +582,7 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
                 WeightIndicatorResponse weightIndResp = (WeightIndicatorResponse) response;
                 applyTenderingCriterionWeightingData(weightIndResp, criterionType);
                 // Indicator
-                weightIndRvType.setResponseIndicator(createResponseIndicatorType(weightIndResp.isWeighted()));
+                weightIndRvType.setResponseIndicator(createResponseIndicatorType(weightIndResp.isIndicator()));
                 tcrType.getResponseValue().add(weightIndRvType);
                 return tcrType;
 
