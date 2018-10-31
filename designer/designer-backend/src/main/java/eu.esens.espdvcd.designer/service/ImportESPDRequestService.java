@@ -78,6 +78,7 @@ public enum ImportESPDRequestService implements ImportESPDService<ESPDRequest> {
                     case SELFCONTAINED:
                         criteriaService = SelfContainedCriteriaService.getInstance();
                         request = BuilderFactory.EDM_V2.createSelfContainedModelBuilder().importFrom(is).createESPDRequest();
+                        CriteriaUtil.generateWeightIndicators(request.getFullCriterionList());
                         break;
                 }
                 break;

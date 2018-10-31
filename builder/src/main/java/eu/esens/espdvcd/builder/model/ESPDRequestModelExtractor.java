@@ -15,11 +15,18 @@
  */
 package eu.esens.espdvcd.builder.model;
 
+import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.RegulatedESPDRequest;
+import eu.esens.espdvcd.model.requirement.Requirement;
+import eu.esens.espdvcd.model.requirement.RequirementGroup;
+import eu.esens.espdvcd.model.requirement.response.WeightIndicatorResponse;
 import eu.espd.schema.v1.espdrequest_1.ESPDRequestType;
+import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionType;
 import eu.espd.schema.v2.pre_award.qualificationapplicationrequest.QualificationApplicationRequestType;
 
+import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 
@@ -45,31 +52,62 @@ public class ESPDRequestModelExtractor implements ModelExtractor {
         return req;
     }
 
-    public ESPDRequest extractESPDRequest(QualificationApplicationRequestType reqType) {
+    public ESPDRequest extractESPDRequest(QualificationApplicationRequestType qarType) {
 
-        RegulatedESPDRequest req = new RegulatedESPDRequest();
+        RegulatedESPDRequest modelRequest = new RegulatedESPDRequest();
 
-        req.getFullCriterionList().addAll(reqType.getTenderingCriterion().stream()
+        modelRequest.getFullCriterionList().addAll(qarType.getTenderingCriterion().stream()
                 .map(c -> extractSelectableCriterion(c))
                 .collect(Collectors.toList()));
-        req.setCADetails(extractCADetails(reqType.getContractingParty(),
-                reqType.getContractFolderID(),
-                reqType.getAdditionalDocumentReference()));
 
-        // Apply global weighting
-        req.getCADetails().getWeightScoringMethodologyNoteList()
-                .addAll(reqType.getWeightScoringMethodologyNote().stream()
+        modelRequest.setCADetails(extractCADetails(qarType.getContractingParty(),
+                qarType.getContractFolderID(),
+                qarType.getAdditionalDocumentReference()));
+
+        // apply global weighting
+        modelRequest.getCADetails().getWeightScoringMethodologyNoteList()
+                .addAll(qarType.getWeightScoringMethodologyNote().stream()
                         .map(noteType -> noteType.getValue())
                         .collect(Collectors.toList()));
 
-        if (reqType.getWeightingTypeCode() != null
-                && reqType.getWeightingTypeCode().getValue() != null) {
-            req.getCADetails().setWeightingType(reqType.getWeightingTypeCode().getValue());
+        if (qarType.getWeightingTypeCode() != null
+                && qarType.getWeightingTypeCode().getValue() != null) {
+            modelRequest.getCADetails().setWeightingType(qarType.getWeightingTypeCode().getValue());
         }
 
-        req.setServiceProviderDetails(extractServiceProviderDetails(reqType.getContractingParty()));
+        // apply criterion level weighting
+        Map<String, TenderingCriterionType> criterionTypeMap = qarType.getTenderingCriterion().stream()
+                .collect(Collectors.toMap(criterionType -> criterionType.getID().getValue(), Function.identity()));
 
-        return req;
+        modelRequest.getFullCriterionList()
+                .forEach(sc -> sc.getRequirementGroups()
+                        .forEach(rg -> applyCriterionWeightingData(rg, criterionTypeMap.get(sc.getID()))));
+
+        modelRequest.setServiceProviderDetails(extractServiceProviderDetails(qarType.getContractingParty()));
+
+        return modelRequest;
+    }
+
+    private void applyCriterionWeightingData(RequirementGroup rg,
+                                             TenderingCriterionType criterionType) {
+
+        if (criterionType != null) {
+            rg.getRequirementGroups()
+                    .forEach(subRg -> applyCriterionWeightingData(subRg, criterionType));
+
+            rg.getRequirements()
+                    .forEach(rq -> applyCriterionWeightingData(rq, criterionType));
+        }
+
+    }
+
+    private void applyCriterionWeightingData(Requirement rq, TenderingCriterionType criterionType) {
+
+        if (rq.getResponseDataType() == ResponseTypeEnum.WEIGHT_INDICATOR) {
+            WeightIndicatorResponse weightIndResp = new WeightIndicatorResponse();
+            applyCriterionWeightingData(weightIndResp, criterionType);
+            rq.setResponse(weightIndResp);
+        }
     }
 
 }

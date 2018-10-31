@@ -357,4 +357,18 @@ public class BuilderESPDTest {
         System.out.println(xmlDocumentBuilderV2.getAsString());
     }
 
+    @Test
+    public void testImportSelfContainedResponse() throws Exception {
+
+        ESPDResponse espdResponse = BuilderFactory.EDM_V2
+                .createSelfContainedModelBuilder()
+                .importFrom(BuilderESPDTest.class.getResourceAsStream("/SELFCONTAINED_ESPD_Response_2.0.2.xml"))
+                .createESPDResponse();
+
+        XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.EDM_V2
+                .createDocumentBuilderFor(espdResponse);
+
+        System.out.println(xmlDocumentBuilderV2.getAsString());
+    }
+
 }

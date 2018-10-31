@@ -27,7 +27,7 @@ import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.response.*;
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
-import eu.esens.espdvcd.retriever.criteria.CriteriaExtractorBuilder;
+import eu.esens.espdvcd.retriever.criteria.RegulatedCriteriaExtractorBuilder;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import eu.esens.espdvcd.schema.EDMVersion;
 import org.junit.Assert;
@@ -68,8 +68,8 @@ public class CriteriaServiceTest {
         predefinedCriteriaServiceV2 = RegulatedCriteriaService.getV2Instance();
         selfContainedCriteriaService = SelfContainedCriteriaService.getInstance();
 
-        criteriaExtractorV1 = new CriteriaExtractorBuilder(EDMVersion.V1).build();
-        criteriaExtractorV2 = new CriteriaExtractorBuilder(EDMVersion.V2).build();
+        criteriaExtractorV1 = new RegulatedCriteriaExtractorBuilder(EDMVersion.V1).build();
+        criteriaExtractorV2 = new RegulatedCriteriaExtractorBuilder(EDMVersion.V2).build();
     }
 
     @Test

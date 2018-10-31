@@ -40,7 +40,6 @@ import eu.espd.schema.v1.commonbasiccomponents_2.ContractFolderIDType;
 import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionPropertyGroupType;
 import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionPropertyType;
 import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionType;
-import eu.espd.schema.v2.pre_award.commonbasic.IndustryClassificationCodeType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -391,7 +390,7 @@ public interface ModelExtractor {
         LegislationReference lr = extractDefaultLegalReferenceV2(tcType.getLegislation());
 
         List<RequirementGroup> rgList = tcType.getTenderingCriterionPropertyGroup().stream()
-                .map(t -> extractRequirementGroup(t, tcType))
+                .map(t -> extractRequirementGroup(t))
                 .collect(Collectors.toList());
 
         SelectableCriterion selCr = new SelectableCriterion(id, typeCode, name, desc, lr, rgList);
@@ -426,8 +425,7 @@ public interface ModelExtractor {
         return extractSelectableCriterion(ec, true);
     }
 
-    default RequirementGroup extractRequirementGroup(TenderingCriterionPropertyGroupType rgType,
-                                                     TenderingCriterionType criterionType) {
+    default RequirementGroup extractRequirementGroup(TenderingCriterionPropertyGroupType rgType) {
 
         RequirementGroup rg = null;
         if (rgType.getID() != null) {
@@ -440,10 +438,10 @@ public interface ModelExtractor {
 
         if (rg != null) {
             List<Requirement> rList = rgType.getTenderingCriterionProperty().stream()
-                    .map(r -> extractRequirement(r, criterionType))
+                    .map(r -> extractRequirement(r))
                     .collect(Collectors.toList());
             List<RequirementGroup> childRg = rgType.getSubsidiaryTenderingCriterionPropertyGroup().stream()
-                    .map(t -> extractRequirementGroup(t, criterionType))
+                    .map(t -> extractRequirementGroup(t))
                     .collect(Collectors.toList());
             rg.setRequirements(rList);
             rg.setRequirementGroups(childRg);
@@ -560,30 +558,30 @@ public interface ModelExtractor {
         return lr;
     }
 
-    default void applyCriterionWeightingData(Requirement rq, TenderingCriterionType criterionType) {
+    default void applyCriterionWeightingData(WeightIndicatorResponse response, TenderingCriterionType criterionType) {
 
-        if (rq.getResponseDataType() == ResponseTypeEnum.WEIGHT_INDICATOR) {
-            WeightIndicatorResponse weiIndResp = new WeightIndicatorResponse();
+        if (response != null) {
             // EvaluationMethodTypeCode
             if (criterionType.getEvaluationMethodTypeCode() != null
                     && criterionType.getEvaluationMethodTypeCode().getValue() != null) {
-                weiIndResp.setEvaluationMethodType(criterionType.getEvaluationMethodTypeCode().getValue());
+
+                response.setEvaluationMethodType(criterionType.getEvaluationMethodTypeCode().getValue());
             }
             // WeightingConsiderationDescription
-            weiIndResp.getEvaluationMethodDescriptionList()
+            response.getEvaluationMethodDescriptionList()
                     .addAll(criterionType.getWeightingConsiderationDescription().stream()
                             .map(descType -> descType.getValue())
                             .collect(Collectors.toList()));
-            // WeightNumeric
+            // Weight
             if (criterionType.getWeightNumeric() != null
                     && criterionType.getWeightNumeric().getValue() != null) {
-                weiIndResp.setWeight(criterionType.getWeightNumeric().getValue().floatValue());
+
+                response.setWeight(criterionType.getWeightNumeric().getValue().floatValue());
             }
-            rq.setResponse(weiIndResp);
         }
     }
 
-    default Requirement extractRequirement(TenderingCriterionPropertyType rqType, TenderingCriterionType criterionType) {
+    default Requirement extractRequirement(TenderingCriterionPropertyType rqType) {
         String theId = null;
         if (rqType.getID() != null) {
             theId = rqType.getID().getValue();
@@ -599,8 +597,6 @@ public interface ModelExtractor {
                 ResponseTypeEnum.valueOf(rqType.getValueDataTypeCode().getValue()),
                 theDescription
         );
-        // apply criterion level weighting info
-        applyCriterionWeightingData(r, criterionType);
         return r;
     }
 

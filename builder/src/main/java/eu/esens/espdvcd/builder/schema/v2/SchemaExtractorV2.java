@@ -17,7 +17,6 @@ package eu.esens.espdvcd.builder.schema.v2;
 
 import eu.esens.espdvcd.codelist.enums.ProfileExecutionIDEnum;
 import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
-import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
@@ -27,8 +26,6 @@ import eu.espd.schema.v2.pre_award.commonbasic.*;
 import eu.espd.schema.v2.unqualifieddatatypes_2.CodeType;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
-import java.math.RoundingMode;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -57,7 +54,7 @@ public interface SchemaExtractorV2 {
         tct.setCriterionTypeCode(createCriteriaTypeCode(c.getTypeCode()));
 
         tct.getTenderingCriterionPropertyGroup().addAll(c.getRequirementGroups().stream()
-                .map(rg -> extractTenderingCriterionPropertyGroupType(rg, tct))
+                .map(rg -> extractTenderingCriterionPropertyGroupType(rg))
                 .collect(Collectors.toList()));
 
         return tct;
@@ -83,57 +80,34 @@ public interface SchemaExtractorV2 {
         return lt;
     }
 
-    default void applyTenderingCriterionWeightingData(Requirement rq, TenderingCriterionType criterionType) {
+    default void applyTenderingCriterionWeightingData(WeightIndicatorResponse response, TenderingCriterionType criterionType) {
 
-        if (rq.getResponseDataType() == ResponseTypeEnum.WEIGHT_INDICATOR) {
-            WeightIndicatorResponse weiIndResp = (WeightIndicatorResponse) rq.getResponse();
-            if (weiIndResp != null) {
-                // EvaluationMethodTypeCode
-                if (criterionType.getEvaluationMethodTypeCode() == null) {
-                    criterionType.setEvaluationMethodTypeCode(new EvaluationMethodTypeCodeType());
-                }
-                if (weiIndResp.getEvaluationMethodType() != null
-                        && criterionType.getEvaluationMethodTypeCode().getValue() == null) {
-                    criterionType.getEvaluationMethodTypeCode().setValue(weiIndResp.getEvaluationMethodType());
-                }
-                // WeightingConsiderationDescription
-                if (criterionType.getWeightingConsiderationDescription().isEmpty()) {
-                    criterionType.getWeightingConsiderationDescription().addAll(weiIndResp.getEvaluationMethodDescriptionList().stream()
-                            .map(desc -> {
-                                WeightingConsiderationDescriptionType descType = new WeightingConsiderationDescriptionType();
-                                descType.setValue(desc);
-                                return descType;
-                            })
-                            .collect(Collectors.toList()));
-                }
-                // WeightNumeric
-                if (criterionType.getWeightNumeric() == null) {
-                    criterionType.setWeightNumeric(new WeightNumericType());
-                }
-                if (criterionType.getWeightNumeric().getValue() == null) {
-                    String weight = String.valueOf(weiIndResp.getWeight());
-                    int integerPlaces = weight.indexOf(".");
-                    criterionType.getWeightNumeric().setValue(new BigDecimal(weiIndResp.getWeight())
-                            .setScale(weight.length() - integerPlaces - 1, BigDecimal.ROUND_HALF_UP));
-                }
+        if (response != null) {
+            // EvaluationMethodTypeCode
+            if (response.getEvaluationMethodType() != null) {
+                criterionType.setEvaluationMethodTypeCode((createEvaluationMethodTypeCodeType(response
+                        .getEvaluationMethodType())));
             }
+            // WeightingConsiderationDescription
+            criterionType.getWeightingConsiderationDescription().addAll(response
+                    .getEvaluationMethodDescriptionList().stream()
+                    .map(desc -> createWeightingConsiderationDescriptionType(desc))
+                    .collect(Collectors.toList()));
+            // Weight
+            criterionType.setWeightNumeric(createWeightNumericType(response.getWeight()));
         }
     }
 
-    default TenderingCriterionPropertyGroupType extractTenderingCriterionPropertyGroupType(RequirementGroup rg, TenderingCriterionType criterionType) {
+    default TenderingCriterionPropertyGroupType extractTenderingCriterionPropertyGroupType(RequirementGroup rg) {
 
         TenderingCriterionPropertyGroupType rgType = new TenderingCriterionPropertyGroupType();
 
         rgType.getSubsidiaryTenderingCriterionPropertyGroup().addAll(rg.getRequirementGroups().stream()
-                .map(rg1 -> extractTenderingCriterionPropertyGroupType(rg1, criterionType))
+                .map(rg1 -> extractTenderingCriterionPropertyGroupType(rg1))
                 .collect(Collectors.toList()));
 
         rgType.getTenderingCriterionProperty().addAll(rg.getRequirements().stream()
-                .map(r1 -> {
-                    // apply criterion level weighting info
-                    applyTenderingCriterionWeightingData(r1, criterionType);
-                    return extractTenderingCriterionPropertyType(r1);
-                })
+                .map(r1 -> extractTenderingCriterionPropertyType(r1))
                 .collect(Collectors.toList()));
 
         rgType.setID(createDefaultIDType(rg.getID()));
@@ -653,7 +627,10 @@ public interface SchemaExtractorV2 {
 
     default WeightNumericType createWeightNumericType(float weight) {
         WeightNumericType numericType = new WeightNumericType();
-        numericType.setValue(BigDecimal.valueOf(weight));
+        String theWeight = String.valueOf(weight);
+        int integerPlaces = theWeight.indexOf(".");
+        numericType.setValue(new BigDecimal(weight)
+                .setScale(theWeight.length() - integerPlaces - 1, BigDecimal.ROUND_HALF_UP));
         return numericType;
     }
 
@@ -677,6 +654,12 @@ public interface SchemaExtractorV2 {
         valueType.setID(createDefaultIDType(UUID.randomUUID().toString()));
         valueType.getID().setSchemeID("ISO/IEC 9834-8:2008 - 4UUID");
         return valueType;
+    }
+
+    default ResponseIndicatorType createResponseIndicatorType(boolean indicator) {
+        ResponseIndicatorType indicatorType = new ResponseIndicatorType();
+        indicatorType.setValue(indicator);
+        return indicatorType;
     }
 
 }
