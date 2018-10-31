@@ -163,14 +163,15 @@
       </div>
       <br>
       <div class="weight" *ngIf="isWeighted">
-        <label [attr.for]="req.uuid+'evaluationMethodType'">Criterion evaluation method: </label>
-        <br>
-        <mat-form-field>
-          <mat-select [formControlName]="req.uuid+'evaluationMethodType'" [id]="req.uuid+'evaluationMethodType'">
-            <mat-option>None</mat-option>
-            <mat-option *ngFor="let type of evaluationMethodTypes" [value]="type.code">{{type.code}} ( {{type.name}} )</mat-option>
-          </mat-select>
-        </mat-form-field>
+        <!-- REMOVED: EvaluationMethodType dropdown, the user answers YES/NO to the question and the dropdown is redundant -->
+        <!--<label [attr.for]="req.uuid+'evaluationMethodType'">Criterion evaluation method: </label>-->
+        <!--<br>-->
+        <!--<mat-form-field>-->
+          <!--<mat-select [formControlName]="req.uuid+'evaluationMethodType'" [id]="req.uuid+'evaluationMethodType'">-->
+            <!--<mat-option>None</mat-option>-->
+            <!--<mat-option *ngFor="let type of evaluationMethodTypes" [value]="type.code">{{type.code}} ( {{type.name}} )</mat-option>-->
+          <!--</mat-select>-->
+        <!--</mat-form-field>-->
         <label [attr.for]="req.uuid+'weight'">Weight allocated to this criterion: </label>
         <br>
         <mat-form-field>
