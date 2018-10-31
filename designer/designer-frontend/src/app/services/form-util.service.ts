@@ -110,11 +110,11 @@ export class FormUtilService {
               }
             } else if (req.responseDataType === 'WEIGHT_INDICATOR') {
               if (formValues[req.uuid.valueOf()] === true) {
-                req.response.indicator = true;
+                // req.response.indicator = true;
                 req.response.uuid = null;
                 req.response.evaluationMethodType = 'WEIGHTED';
               } else {
-                req.response.indicator = false;
+                // req.response.indicator = false;
                 req.response.uuid = null;
                 req.response.evaluationMethodType = 'PASSFAIL';
               }
