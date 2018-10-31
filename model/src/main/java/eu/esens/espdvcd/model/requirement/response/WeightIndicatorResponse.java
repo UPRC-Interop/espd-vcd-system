@@ -17,6 +17,7 @@ package eu.esens.espdvcd.model.requirement.response;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import eu.esens.espdvcd.codelist.enums.EvaluationMethodTypeEnum;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -51,7 +52,7 @@ public class WeightIndicatorResponse extends Response implements Serializable {
     private String evaluationMethodType;
     private List<String> evaluationMethodDescriptionList;
     private float weight;
-    private boolean indicator;
+    private boolean weighted;
 
     public WeightIndicatorResponse() {
     }
@@ -61,6 +62,9 @@ public class WeightIndicatorResponse extends Response implements Serializable {
     }
 
     public void setEvaluationMethodType(String evaluationMethodType) {
+        if (EvaluationMethodTypeEnum.WEIGHTED.name().equals(evaluationMethodType)) {
+            this.weighted = true;
+        }
         this.evaluationMethodType = evaluationMethodType;
     }
 
@@ -100,11 +104,11 @@ public class WeightIndicatorResponse extends Response implements Serializable {
         this.weight = weight;
     }
 
-    public boolean isIndicator() {
-        return indicator;
-    }
+//    public void setWeighted(boolean weighted) {
+//        this.weighted = weighted;
+//    }
 
-    public void setIndicator(boolean indicator) {
-        this.indicator = indicator;
+    public boolean isWeighted() {
+        return weighted;
     }
 }

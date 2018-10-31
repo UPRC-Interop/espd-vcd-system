@@ -125,8 +125,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
         }
 
         // Economic Operator Details
-        // if (!qarType.getEconomicOperatorParty().isEmpty() && !qarType.getProcurementProjectLot().isEmpty()) {
-        if (!qarType.getEconomicOperatorParty().isEmpty()) {
+        if (!qarType.getEconomicOperatorParty().isEmpty() && !qarType.getProcurementProjectLot().isEmpty()) {
             modelResponse.setEODetails(extractEODetails(qarType.getEconomicOperatorParty().get(0), qarType.getProcurementProjectLot().get(0)));
         } else {
             applyEODetailsStructure(modelResponse);
@@ -308,240 +307,218 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
         }
     }
 
-    public Response extractResponse(TenderingCriterionResponseType res, ResponseTypeEnum theType,
+    public Response extractResponse(TenderingCriterionResponseType responseType, ResponseTypeEnum theType,
                                     TenderingCriterionType criterionType) {
 
         switch (theType) {
 
             case INDICATOR:
-                IndicatorResponse resp = new IndicatorResponse();
-                if (res.getResponseValue().get(0).getResponseIndicator() != null) {
-                    resp.setIndicator(res.getResponseValue().get(0).getResponseIndicator().isValue());
+                IndicatorResponse indicatorResp = new IndicatorResponse();
+                if (responseType.getResponseValue().get(0).getResponseIndicator() != null) {
+                    indicatorResp.setIndicator(responseType.getResponseValue().get(0).getResponseIndicator().isValue());
                 }
-                applyValidatedCriterionPropertyID(res.getValidatedCriterionPropertyID(), resp);
-                applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), resp);
-                resp.setResponseType(theType);
-                return resp;
+                applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), indicatorResp);
+                applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), indicatorResp);
+                indicatorResp.setResponseType(theType);
+                return indicatorResp;
 
             case DATE:
-                DateResponse dResp = new DateResponse();
-                if (res.getResponseValue().get(0).getResponseDate() != null &&
-                        res.getResponseValue().get(0).getResponseDate().getValue() != null) {
-                    dResp.setDate(res.getResponseValue().get(0).getResponseDate().getValue());
+                DateResponse dateResp = new DateResponse();
+                if (responseType.getResponseValue().get(0).getResponseDate() != null &&
+                        responseType.getResponseValue().get(0).getResponseDate().getValue() != null) {
+                    dateResp.setDate(responseType.getResponseValue().get(0).getResponseDate().getValue());
                 }
-                applyValidatedCriterionPropertyID(res.getValidatedCriterionPropertyID(), dResp);
-                applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), dResp);
-                dResp.setResponseType(theType);
-                return dResp;
+                applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), dateResp);
+                applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), dateResp);
+                dateResp.setResponseType(theType);
+                return dateResp;
 
             case DESCRIPTION:
-                DescriptionResponse deResp = new DescriptionResponse();
-                if (res.getResponseValue().get(0).getDescription().get(0) != null &&
-                        res.getResponseValue().get(0).getDescription().get(0).getValue() != null) {
-                    deResp.setDescription(res.getResponseValue().get(0).getDescription().get(0).getValue());
+                DescriptionResponse descriptionResp = new DescriptionResponse();
+                if (responseType.getResponseValue().get(0).getDescription().get(0) != null &&
+                        responseType.getResponseValue().get(0).getDescription().get(0).getValue() != null) {
+                    descriptionResp.setDescription(responseType.getResponseValue().get(0).getDescription().get(0).getValue());
                 }
-                applyValidatedCriterionPropertyID(res.getValidatedCriterionPropertyID(), deResp);
-                applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), deResp);
-                deResp.setResponseType(theType);
-                return deResp;
+                applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), descriptionResp);
+                applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), descriptionResp);
+                descriptionResp.setResponseType(theType);
+                return descriptionResp;
 
             case QUANTITY:
-                QuantityResponse qResp = new QuantityResponse();
-                if (res.getResponseValue().get(0).getResponseQuantity() != null &&
-                        res.getResponseValue().get(0).getResponseQuantity().getValue() != null) {
-                    qResp.setQuantity(res.getResponseValue().get(0).getResponseQuantity().getValue().floatValue());
+                QuantityResponse quantityResp = new QuantityResponse();
+                if (responseType.getResponseValue().get(0).getResponseQuantity() != null &&
+                        responseType.getResponseValue().get(0).getResponseQuantity().getValue() != null) {
+                    quantityResp.setQuantity(responseType.getResponseValue().get(0).getResponseQuantity().getValue().floatValue());
                 }
-                applyValidatedCriterionPropertyID(res.getValidatedCriterionPropertyID(), qResp);
-                applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), qResp);
-                qResp.setResponseType(theType);
-                return qResp;
+                applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), quantityResp);
+                applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), quantityResp);
+                quantityResp.setResponseType(theType);
+                return quantityResp;
 
             case QUANTITY_YEAR:
-                QuantityYearResponse qyResp = new QuantityYearResponse();
-                if (res.getResponseValue().get(0).getResponseQuantity() != null
-                        && res.getResponseValue().get(0).getResponseQuantity().getValue() != null) {
-                    qyResp.setYear(res.getResponseValue().get(0).getResponseQuantity().getValue().intValueExact());
+                QuantityYearResponse quantityYearResp = new QuantityYearResponse();
+                if (responseType.getResponseValue().get(0).getResponseQuantity() != null
+                        && responseType.getResponseValue().get(0).getResponseQuantity().getValue() != null) {
+                    quantityYearResp.setYear(responseType.getResponseValue().get(0).getResponseQuantity().getValue().intValueExact());
                 }
-                applyValidatedCriterionPropertyID(res.getValidatedCriterionPropertyID(), qyResp);
-                applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), qyResp);
-                qyResp.setResponseType(theType);
-                return qyResp;
+                applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), quantityYearResp);
+                applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), quantityYearResp);
+                quantityYearResp.setResponseType(theType);
+                return quantityYearResp;
 
             case QUANTITY_INTEGER:
-                QuantityIntegerResponse qiResp = new QuantityIntegerResponse();
-                if (res.getResponseValue().get(0).getResponseQuantity() != null
-                        && res.getResponseValue().get(0).getResponseQuantity().getValue() != null) {
-                    qiResp.setQuantity(res.getResponseValue().get(0).getResponseQuantity().getValue().intValueExact());
+                QuantityIntegerResponse quantityIntResp = new QuantityIntegerResponse();
+                if (responseType.getResponseValue().get(0).getResponseQuantity() != null
+                        && responseType.getResponseValue().get(0).getResponseQuantity().getValue() != null) {
+                    quantityIntResp.setQuantity(responseType.getResponseValue().get(0).getResponseQuantity().getValue().intValueExact());
                 }
-                return qiResp;
+                return quantityIntResp;
 
             case AMOUNT:
-                AmountResponse aResp = new AmountResponse();
-                if (res.getResponseValue().get(0).getResponseAmount() != null &&
-                        res.getResponseValue().get(0).getResponseAmount().getValue() != null) {
-                    aResp.setAmount(res.getResponseValue().get(0).getResponseAmount().getValue().floatValue());
-                    if (res.getResponseValue().get(0).getResponseAmount().getCurrencyID() != null) {
-                        aResp.setCurrency(res.getResponseValue().get(0).getResponseAmount().getCurrencyID());
+                AmountResponse amountResp = new AmountResponse();
+                if (responseType.getResponseValue().get(0).getResponseAmount() != null &&
+                        responseType.getResponseValue().get(0).getResponseAmount().getValue() != null) {
+                    amountResp.setAmount(responseType.getResponseValue().get(0).getResponseAmount().getValue().floatValue());
+                    if (responseType.getResponseValue().get(0).getResponseAmount().getCurrencyID() != null) {
+                        amountResp.setCurrency(responseType.getResponseValue().get(0).getResponseAmount().getCurrencyID());
                     }
                 }
-                applyValidatedCriterionPropertyID(res.getValidatedCriterionPropertyID(), aResp);
-                applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), aResp);
-                aResp.setResponseType(theType);
-                return aResp;
+                applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), amountResp);
+                applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), amountResp);
+                amountResp.setResponseType(theType);
+                return amountResp;
 
             case CODE_COUNTRY:
-                CountryCodeResponse cResp = new CountryCodeResponse();
-                if (res.getResponseValue().get(0).getResponseCode() != null &&
-                        res.getResponseValue().get(0).getResponseCode().getValue() != null) {
-                    cResp.setCountryCode(res.getResponseValue().get(0).getResponseCode().getValue());
+                CountryCodeResponse codeCountryResp = new CountryCodeResponse();
+                if (responseType.getResponseValue().get(0).getResponseCode() != null &&
+                        responseType.getResponseValue().get(0).getResponseCode().getValue() != null) {
+                    codeCountryResp.setCountryCode(responseType.getResponseValue().get(0).getResponseCode().getValue());
                 }
-                applyValidatedCriterionPropertyID(res.getValidatedCriterionPropertyID(), cResp);
-                applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), cResp);
-                cResp.setResponseType(theType);
-                return cResp;
+                applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), codeCountryResp);
+                applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), codeCountryResp);
+                codeCountryResp.setResponseType(theType);
+                return codeCountryResp;
 
             case PERCENTAGE:
-                PercentageResponse pResp = new PercentageResponse();
-                if (res.getResponseValue().get(0).getResponseNumeric() != null &&
-                        res.getResponseValue().get(0).getResponseNumeric().getValue() != null) {
-                    pResp.setPercentage(res.getResponseValue().get(0).getResponseNumeric().getValue().floatValue());
+                PercentageResponse percentageResp = new PercentageResponse();
+                if (responseType.getResponseValue().get(0).getResponseNumeric() != null &&
+                        responseType.getResponseValue().get(0).getResponseNumeric().getValue() != null) {
+                    percentageResp.setPercentage(responseType.getResponseValue().get(0).getResponseNumeric().getValue().floatValue());
                 }
-                applyValidatedCriterionPropertyID(res.getValidatedCriterionPropertyID(), pResp);
-                applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), pResp);
-                pResp.setResponseType(theType);
-                return pResp;
+                applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), percentageResp);
+                applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), percentageResp);
+                percentageResp.setResponseType(theType);
+                return percentageResp;
 
             case PERIOD:
-                ApplicablePeriodResponse apResp = new ApplicablePeriodResponse();
-                if (!res.getApplicablePeriod().isEmpty()) {
+                ApplicablePeriodResponse periodResp = new ApplicablePeriodResponse();
+                if (!responseType.getApplicablePeriod().isEmpty()) {
 
-                    if (res.getApplicablePeriod().get(0).getStartDate() != null
-                            && res.getApplicablePeriod().get(0).getStartDate().getValue() != null) {
+                    if (responseType.getApplicablePeriod().get(0).getStartDate() != null
+                            && responseType.getApplicablePeriod().get(0).getStartDate().getValue() != null) {
 
-                        apResp.setStartDate(res.getApplicablePeriod().get(0).getStartDate().getValue());
+                        periodResp.setStartDate(responseType.getApplicablePeriod().get(0).getStartDate().getValue());
                     }
 
-                    if (res.getApplicablePeriod().get(0).getEndDate() != null
-                            && res.getApplicablePeriod().get(0).getEndDate().getValue() != null) {
+                    if (responseType.getApplicablePeriod().get(0).getEndDate() != null
+                            && responseType.getApplicablePeriod().get(0).getEndDate().getValue() != null) {
 
-                        apResp.setEndDate(res.getApplicablePeriod().get(0).getEndDate().getValue());
+                        periodResp.setEndDate(responseType.getApplicablePeriod().get(0).getEndDate().getValue());
                     }
 
                 }
-                applyValidatedCriterionPropertyID(res.getValidatedCriterionPropertyID(), apResp);
-                applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), apResp);
-                apResp.setResponseType(theType);
-                return apResp;
+                applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), periodResp);
+                applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), periodResp);
+                periodResp.setResponseType(theType);
+                return periodResp;
 
             case CODE:
-                EvidenceURLCodeResponse ecResp = new EvidenceURLCodeResponse();
-                if (res.getResponseValue().get(0).getResponseCode() != null
-                        && res.getResponseValue().get(0).getResponseCode().getValue() != null) {
-                    ecResp.setEvidenceURLCode(res.getResponseValue().get(0).getResponseCode().getValue());
+                EvidenceURLCodeResponse codeResp = new EvidenceURLCodeResponse();
+                if (responseType.getResponseValue().get(0).getResponseCode() != null
+                        && responseType.getResponseValue().get(0).getResponseCode().getValue() != null) {
+                    codeResp.setEvidenceURLCode(responseType.getResponseValue().get(0).getResponseCode().getValue());
                 }
-                applyValidatedCriterionPropertyID(res.getValidatedCriterionPropertyID(), ecResp);
-                applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), ecResp);
-                ecResp.setResponseType(theType);
-                return ecResp;
+                applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), codeResp);
+                applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), codeResp);
+                codeResp.setResponseType(theType);
+                return codeResp;
 
             case EVIDENCE_IDENTIFIER:
                 // in regulated v1 response this maps to EVIDENCE_URL, CODE, DESCRIPTION
-                EvidenceIdentifierResponse eiResp = new EvidenceIdentifierResponse();
-                if (!res.getEvidenceSupplied().isEmpty()
-                        && res.getEvidenceSupplied().get(0).getID() != null
-                        && res.getEvidenceSupplied().get(0).getID().getValue() != null) {
+                EvidenceIdentifierResponse evidenceIdeResp = new EvidenceIdentifierResponse();
+                if (!responseType.getEvidenceSupplied().isEmpty()
+                        && responseType.getEvidenceSupplied().get(0).getID() != null
+                        && responseType.getEvidenceSupplied().get(0).getID().getValue() != null) {
 
-                    eiResp.setEvidenceSuppliedId(res.getEvidenceSupplied().get(0).getID().getValue());
+                    evidenceIdeResp.setEvidenceSuppliedId(responseType.getEvidenceSupplied().get(0).getID().getValue());
                 }
-                applyValidatedCriterionPropertyID(res.getValidatedCriterionPropertyID(), eiResp);
-                applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), eiResp);
-                eiResp.setResponseType(theType);
-                return eiResp;
+                applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), evidenceIdeResp);
+                applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), evidenceIdeResp);
+                evidenceIdeResp.setResponseType(theType);
+                return evidenceIdeResp;
 
             case IDENTIFIER:
-                IdentifierResponse iResp = new IdentifierResponse();
-                if (!res.getResponseValue().isEmpty()
-                        && res.getResponseValue().get(0).getResponseID() != null
-                        && res.getResponseValue().get(0).getResponseID().getValue() != null) {
+                IdentifierResponse identifierResp = new IdentifierResponse();
+                if (!responseType.getResponseValue().isEmpty()
+                        && responseType.getResponseValue().get(0).getResponseID() != null
+                        && responseType.getResponseValue().get(0).getResponseID().getValue() != null) {
 
-                    iResp.setIdentifier(res.getResponseValue().get(0).getResponseID().getValue());
+                    identifierResp.setIdentifier(responseType.getResponseValue().get(0).getResponseID().getValue());
                 }
-                applyValidatedCriterionPropertyID(res.getValidatedCriterionPropertyID(), iResp);
-                applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), iResp);
-                iResp.setResponseType(theType);
-                return iResp;
+                applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), identifierResp);
+                applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), identifierResp);
+                identifierResp.setResponseType(theType);
+                return identifierResp;
 
             case URL:
                 URLResponse urlResp = new URLResponse();
-                if (!res.getResponseValue().isEmpty()
-                        && res.getResponseValue().get(0).getResponseURI() != null
-                        && res.getResponseValue().get(0).getResponseURI().getValue() != null) {
+                if (!responseType.getResponseValue().isEmpty()
+                        && responseType.getResponseValue().get(0).getResponseURI() != null
+                        && responseType.getResponseValue().get(0).getResponseURI().getValue() != null) {
 
-                    urlResp.setUrl(res.getResponseValue().get(0).getResponseURI().getValue());
+                    urlResp.setUrl(responseType.getResponseValue().get(0).getResponseURI().getValue());
                 }
-                applyValidatedCriterionPropertyID(res.getValidatedCriterionPropertyID(), urlResp);
-                applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), urlResp);
+                applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), urlResp);
+                applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), urlResp);
                 urlResp.setResponseType(theType);
                 return urlResp;
 
             case WEIGHT_INDICATOR:
-                WeightIndicatorResponse weightInResp = new WeightIndicatorResponse();
-                if (!res.getResponseValue().isEmpty()
-                        && res.getResponseValue().get(0).getResponseIndicator() != null) {
-
-                    weightInResp.setIndicator(res.getResponseValue().get(0).getResponseIndicator().isValue());
-                }
-
-                if (criterionType.getEvaluationMethodTypeCode() != null
-                        && criterionType.getEvaluationMethodTypeCode().getValue() != null) {
-
-                    weightInResp.setEvaluationMethodType(criterionType.getEvaluationMethodTypeCode().getValue());
-                }
-
-                // add all weighting descriptions
-                criterionType.getWeightingConsiderationDescription()
-                        .forEach(weightDesc -> weightInResp.getEvaluationMethodDescriptionList()
-                                .add(weightDesc.getValue()));
-
-                if (criterionType.getWeightNumeric() != null
-                        && criterionType.getWeightNumeric().getValue() != null) {
-
-                    weightInResp.setWeight(criterionType.getWeightNumeric().getValue().floatValue());
-                }
-
-                applyValidatedCriterionPropertyID(res.getValidatedCriterionPropertyID(), weightInResp);
-                applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), weightInResp);
-                weightInResp.setResponseType(theType);
-                return weightInResp;
+                WeightIndicatorResponse weightIndResp = new WeightIndicatorResponse();
+                applyCriterionWeightingData(weightIndResp, criterionType);
+                applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), weightIndResp);
+                applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), weightIndResp);
+                weightIndResp.setResponseType(theType);
+                return weightIndResp;
 
             case LOTS_IDENTIFIER:
                 LotsIdentifierResponse lotsIdeResp = new LotsIdentifierResponse();
-                res.getResponseValue().forEach(resValueType -> {
+                responseType.getResponseValue().forEach(resValueType -> {
 
                     if (resValueType.getResponseID() != null
                             && resValueType.getResponseID().getValue() != null) {
                         lotsIdeResp.getLots().add(resValueType.getResponseID().getValue());
                     }
                 });
-                applyValidatedCriterionPropertyID(res.getValidatedCriterionPropertyID(), lotsIdeResp);
-                applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), lotsIdeResp);
+                applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), lotsIdeResp);
+                applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), lotsIdeResp);
                 lotsIdeResp.setResponseType(theType);
                 return lotsIdeResp;
 
             case EO_IDENTIFIER:
                 EOIdentifierResponse eoIdeResp = new EOIdentifierResponse();
-                if (!res.getResponseValue().isEmpty()
-                        && res.getResponseValue().get(0).getResponseID() != null
-                        && res.getResponseValue().get(0).getResponseID().getValue() != null) {
+                if (!responseType.getResponseValue().isEmpty()
+                        && responseType.getResponseValue().get(0).getResponseID() != null
+                        && responseType.getResponseValue().get(0).getResponseID().getValue() != null) {
 
-                    eoIdeResp.setIdentifier(res.getResponseValue().get(0).getResponseID().getValue());
+                    eoIdeResp.setIdentifier(responseType.getResponseValue().get(0).getResponseID().getValue());
 
-                    if (res.getResponseValue().get(0).getResponseID().getSchemeName() != null) {
-                        eoIdeResp.setEOIDType(res.getResponseValue().get(0).getResponseID().getSchemeName());
+                    if (responseType.getResponseValue().get(0).getResponseID().getSchemeName() != null) {
+                        eoIdeResp.setEOIDType(responseType.getResponseValue().get(0).getResponseID().getSchemeName());
                     }
                 }
-                applyValidatedCriterionPropertyID(res.getValidatedCriterionPropertyID(), eoIdeResp);
-                applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), eoIdeResp);
+                applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), eoIdeResp);
+                applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), eoIdeResp);
                 eoIdeResp.setResponseType(theType);
                 return eoIdeResp;
 

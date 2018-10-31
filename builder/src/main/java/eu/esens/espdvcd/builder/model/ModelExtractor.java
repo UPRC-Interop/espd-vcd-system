@@ -40,7 +40,6 @@ import eu.espd.schema.v1.commonbasiccomponents_2.ContractFolderIDType;
 import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionPropertyGroupType;
 import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionPropertyType;
 import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionType;
-import eu.espd.schema.v2.pre_award.commonbasic.IndustryClassificationCodeType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -560,26 +559,26 @@ public interface ModelExtractor {
         return lr;
     }
 
-    default void applyCriterionWeightingData(Requirement rq, TenderingCriterionType criterionType) {
+    default void applyCriterionWeightingData(WeightIndicatorResponse response, TenderingCriterionType criterionType) {
 
-        if (rq.getResponseDataType() == ResponseTypeEnum.WEIGHT_INDICATOR) {
-            WeightIndicatorResponse weiIndResp = new WeightIndicatorResponse();
+        if (response != null) {
             // EvaluationMethodTypeCode
             if (criterionType.getEvaluationMethodTypeCode() != null
                     && criterionType.getEvaluationMethodTypeCode().getValue() != null) {
-                weiIndResp.setEvaluationMethodType(criterionType.getEvaluationMethodTypeCode().getValue());
+
+                response.setEvaluationMethodType(criterionType.getEvaluationMethodTypeCode().getValue());
             }
             // WeightingConsiderationDescription
-            weiIndResp.getEvaluationMethodDescriptionList()
+            response.getEvaluationMethodDescriptionList()
                     .addAll(criterionType.getWeightingConsiderationDescription().stream()
                             .map(descType -> descType.getValue())
                             .collect(Collectors.toList()));
-            // WeightNumeric
+            // Weight
             if (criterionType.getWeightNumeric() != null
                     && criterionType.getWeightNumeric().getValue() != null) {
-                weiIndResp.setWeight(criterionType.getWeightNumeric().getValue().floatValue());
+
+                response.setWeight(criterionType.getWeightNumeric().getValue().floatValue());
             }
-            rq.setResponse(weiIndResp);
         }
     }
 
@@ -599,8 +598,6 @@ public interface ModelExtractor {
                 ResponseTypeEnum.valueOf(rqType.getValueDataTypeCode().getValue()),
                 theDescription
         );
-        // apply criterion level weighting info
-        applyCriterionWeightingData(r, criterionType);
         return r;
     }
 

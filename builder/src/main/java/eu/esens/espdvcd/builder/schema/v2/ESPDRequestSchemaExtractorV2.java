@@ -17,14 +17,20 @@ package eu.esens.espdvcd.builder.schema.v2;
 
 import eu.esens.espdvcd.codelist.enums.ProfileExecutionIDEnum;
 import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
+import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.requirement.Requirement;
+import eu.esens.espdvcd.model.requirement.RequirementGroup;
+import eu.esens.espdvcd.model.requirement.response.WeightIndicatorResponse;
 import eu.espd.schema.v2.pre_award.commonaggregate.DocumentReferenceType;
 import eu.espd.schema.v2.pre_award.commonaggregate.ProcurementProjectLotType;
 import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionPropertyType;
+import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionType;
 import eu.espd.schema.v2.pre_award.commonbasic.*;
 import eu.espd.schema.v2.pre_award.qualificationapplicationrequest.QualificationApplicationRequestType;
 
+import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class ESPDRequestSchemaExtractorV2 implements SchemaExtractorV2 {
@@ -72,6 +78,14 @@ public class ESPDRequestSchemaExtractorV2 implements SchemaExtractorV2 {
                 .map(cr -> extractTenderingCriterion(cr))
                 .collect(Collectors.toList()));
 
+        // apply Criterion level weighting info
+        Map<String, TenderingCriterionType> criterionTypeMap = qarType.getTenderingCriterion().stream()
+                .collect(Collectors.toMap(criterionType -> criterionType.getID().getValue(), Function.identity()));
+
+        modelRequest.getFullCriterionList()
+                .forEach(sc -> sc.getRequirementGroups()
+                        .forEach(rg -> applyTenderingCriterionWeightingData(rg, criterionTypeMap.get(sc.getID()))));
+
         qarType.setUBLVersionID(createUBL22VersionIdType());
         qarType.setCustomizationID(createCENBIICustomizationIdType("urn:www.cenbii.eu:transaction:biitrdm070:ver3.0"));
         // FIXME: version id should be updated here
@@ -80,7 +94,7 @@ public class ESPDRequestSchemaExtractorV2 implements SchemaExtractorV2 {
 
         qarType.setQualificationApplicationTypeCode(createQualificationApplicationTypeCodeType(QualificationApplicationTypeEnum.REGULATED));
 
-        //Procurement Project Lot is always 0 in Request and not part of the UI
+        // Procurement Project Lot is always 0 in Request and not part of the UI
         ProcurementProjectLotType pplt = new ProcurementProjectLotType();
         pplt.setID(new IDType());
         pplt.getID().setValue("0");
@@ -91,6 +105,26 @@ public class ESPDRequestSchemaExtractorV2 implements SchemaExtractorV2 {
         qarType.getCopyIndicator().setValue(false);
 
         return qarType;
+    }
+
+    private void applyTenderingCriterionWeightingData(RequirementGroup rg,
+                                                      TenderingCriterionType criterionType) {
+
+        if (criterionType != null) {
+            rg.getRequirementGroups()
+                    .forEach(subRg -> applyTenderingCriterionWeightingData(subRg, criterionType));
+
+            rg.getRequirements()
+                    .forEach(rq -> applyTenderingCriterionWeightingData(rq, criterionType));
+        }
+    }
+
+    private void applyTenderingCriterionWeightingData(Requirement rq, TenderingCriterionType criterionType) {
+
+        if (rq.getResponseDataType() == ResponseTypeEnum.WEIGHT_INDICATOR) {
+            WeightIndicatorResponse weightIndResp = (WeightIndicatorResponse) rq.getResponse();
+            applyTenderingCriterionWeightingData(weightIndResp, criterionType);
+        }
     }
 
     @Override
@@ -104,7 +138,6 @@ public class ESPDRequestSchemaExtractorV2 implements SchemaExtractorV2 {
         propertyType.getDescription().add(new DescriptionType());
         propertyType.getDescription().get(0).setValue(rq.getDescription());
         // tbr070-013
-        // FIXME (SELF-CONTAINED 2.0.2) The Regulated ESPD documents do not specify REQUIREMENTS, only QUESTIONS. The SELF-CONTAINED version does
         propertyType.setTypeCode(new TypeCodeType());
         propertyType.getTypeCode().setValue(rq.getType().name());
 
