@@ -110,13 +110,13 @@ export class FormUtilService {
               }
             } else if (req.responseDataType === 'WEIGHT_INDICATOR') {
               if (formValues[req.uuid.valueOf()] === true) {
-                // req.response.indicator = true;
+                req.response.indicator = true;
                 req.response.uuid = null;
-                req.response.evaluationMethodType = 'WEIGHTED';
+                // req.response.evaluationMethodType = 'WEIGHTED';
               } else {
-                // req.response.indicator = false;
+                req.response.indicator = false;
                 req.response.uuid = null;
-                req.response.evaluationMethodType = 'PASSFAIL';
+                // req.response.evaluationMethodType = 'PASSFAIL';
               }
               // const evaluationMethodTypeID = req.uuid + 'evaluationMethodType';
               const weightID = req.uuid + 'weight';
@@ -133,7 +133,8 @@ export class FormUtilService {
               /* IF user selects NO in the global weight radio button,
               then the 'weightable criteria's evaluationMethodType is set to PASSFAIL */
               if (!this.utilities.isGloballyWeighted) {
-                req.response.evaluationMethodType = 'PASSFAIL';
+                // req.response.evaluationMethodType = 'PASSFAIL';
+                req.response.indicator = false;
               }
               if (formValues[weightID.valueOf()] === null) {
                 req.response.weight = null;
