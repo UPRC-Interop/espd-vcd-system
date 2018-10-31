@@ -56,6 +56,7 @@ import {DateValidationFixDirective} from './directives/validation-date-fix/date-
 import {PhoneNumberValidationDirective} from './directives/phone-number/phone-number-validation.directive';
 import {IntegerValidationDirective} from './directives/integer/integer-validation.directive';
 import {PercentageValidationDirective} from './directives/percentage/percentage-validation.directive';
+import {VatNumberValidationDirective} from './directives/vat-number/vat-number-validation.directive';
 
 @NgModule({
   declarations: [
@@ -83,7 +84,8 @@ import {PercentageValidationDirective} from './directives/percentage/percentage-
     DateValidationFixDirective,
     PhoneNumberValidationDirective,
     IntegerValidationDirective,
-    PercentageValidationDirective
+    PercentageValidationDirective,
+    VatNumberValidationDirective
   ],
   imports: [
     BrowserModule,

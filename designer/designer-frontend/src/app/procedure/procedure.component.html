@@ -76,7 +76,11 @@
       </mat-form-field>
       <mat-form-field>
         <input matInput placeholder="{{'espd.part2.vat'| translate}}" name="CAofficialID"
-               [(ngModel)]="dataService.CADetails.id" [disabled]="this.dataService.isReadOnly()">
+               [(ngModel)]="dataService.CADetails.id" [disabled]="this.dataService.isReadOnly()" #vat="ngModel"
+               vatNumber>
+        <mat-error *ngIf="vat.invalid">
+          <input-validation-error [formControlErrors]="vat.errors"></input-validation-error>
+        </mat-error>
       </mat-form-field>
       <mat-form-field>
         <input matInput placeholder="{{'espd.part1.website' | translate}}" name="CAofficialWebSite"

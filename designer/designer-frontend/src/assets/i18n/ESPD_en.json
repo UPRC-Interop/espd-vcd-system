@@ -404,5 +404,6 @@
   "espd.validator.matDatepickerParse": "Please enter a valid date in DD/MM/YYYY format.",
   "espd.validator.phoneNumber": "Please enter a valid phone number.",
   "espd.ojs.hint": "Hint: The format corresponds to the scheme \"yyyy /S sss-nnnnnn\"",
-  "espd.validator.percentage": "Please enter a percentage in valid format, e. g. \"1.23\""
+  "espd.validator.percentage": "Please enter a percentage in valid format, e. g. \"1.23\"",
+  "espd.validator.vatNumber": "Please enter a valid VAT identification number."
 }

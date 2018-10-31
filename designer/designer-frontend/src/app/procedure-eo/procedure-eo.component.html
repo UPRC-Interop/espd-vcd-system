@@ -75,7 +75,12 @@
                [(ngModel)]="dataService.CADetails.caofficialName" [disabled]="this.dataService.isReadOnly()">
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="{{'espd.part2.vat'| translate}}" name="CAofficialID" [(ngModel)]="dataService.CADetails.id" [disabled]="this.dataService.isReadOnly()">
+        <input matInput placeholder="{{'espd.part2.vat'| translate}}" name="CAofficialID"
+               [(ngModel)]="dataService.CADetails.id" [disabled]="this.dataService.isReadOnly()" #vat="ngModel"
+               vatNumber>
+        <mat-error *ngIf="vat.invalid">
+          <input-validation-error [formControlErrors]="vat.errors"></input-validation-error>
+        </mat-error>
       </mat-form-field>
       <mat-form-field>
         <input matInput #website="ngModel" url placeholder="{{'espd.part1.website' | translate}}"
@@ -240,7 +245,10 @@
               </mat-form-field>
             </div>
             <mat-form-field class="eoField">
-              <input formControlName="id" matInput placeholder="{{'espd.part2.vat' | translate}}">
+              <input formControlName="id" matInput placeholder="{{'espd.part2.vat' | translate}}" vatNumber>
+              <mat-error *ngIf="EOForm.get('id').invalid">
+                <input-validation-error [formControlErrors]="EOForm.get('id').errors"></input-validation-error>
+              </mat-error>
             </mat-form-field>
             <!--<mat-form-field class="eoField">-->
             <!--<input matInput placeholder="Other number, if VAT not applicable">-->
