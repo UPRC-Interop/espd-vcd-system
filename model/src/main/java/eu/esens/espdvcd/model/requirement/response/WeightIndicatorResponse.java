@@ -52,7 +52,7 @@ public class WeightIndicatorResponse extends Response implements Serializable {
      * evaluationMethodDescription ccv:Criterion.WeightingConsiderationDescription
      * weight ccv:Criterion.WeightNumeric
      */
-    private String evaluationMethodType = EvaluationMethodTypeEnum.PASSFAIL.name(); // Since the default value for boolean is false, this should default to PASSFAIL
+    // private String evaluationMethodType = EvaluationMethodTypeEnum.PASSFAIL.name(); // Since the default value for boolean is false, this should default to PASSFAIL
     private List<String> evaluationMethodDescriptionList;
     private float weight;
     private boolean indicator;
@@ -61,41 +61,35 @@ public class WeightIndicatorResponse extends Response implements Serializable {
     }
 
     public String getEvaluationMethodType() {
-        return evaluationMethodType;
+        return indicator
+                ? EvaluationMethodTypeEnum.WEIGHTED.name()
+                : EvaluationMethodTypeEnum.PASSFAIL.name();
     }
 
-    public void setEvaluationMethodType(String evaluationMethodType) {
-        if (EvaluationMethodTypeEnum.WEIGHTED.name().equals(evaluationMethodType)) {
-            this.indicator = true;
+    private void initEvaluationMethodDescriptionList() {
+        if (evaluationMethodDescriptionList == null) {
+            evaluationMethodDescriptionList = new ArrayList<>();
         }
-        this.evaluationMethodType = evaluationMethodType;
     }
 
     @JsonIgnore
     public List<String> getEvaluationMethodDescriptionList() {
-        if (evaluationMethodDescriptionList == null) {
-            evaluationMethodDescriptionList = new ArrayList<>();
-        }
+        initEvaluationMethodDescriptionList();
         return evaluationMethodDescriptionList;
     }
 
     @JsonProperty("evaluationMethodDescription")
     public String getEvaluationMethodDescription() {
-        if (evaluationMethodDescriptionList == null) {
-            evaluationMethodDescriptionList = new ArrayList<>();
-        }
+        initEvaluationMethodDescriptionList();
         return String.join("\n", evaluationMethodDescriptionList);
     }
 
     public void setEvaluationMethodDescription(@JsonProperty("evaluationMethodDescription") String description) {
-        if (evaluationMethodDescriptionList == null) {
-            evaluationMethodDescriptionList = new ArrayList<>();
-        }
+        initEvaluationMethodDescriptionList();
+        evaluationMethodDescriptionList.clear();
         if (Objects.nonNull(description)) {
             String[] descArray = description.split("[\\r\\n]+");
             evaluationMethodDescriptionList.addAll(Arrays.asList(descArray));
-        } else {
-            evaluationMethodDescriptionList = new ArrayList<>();
         }
     }
 
@@ -107,7 +101,12 @@ public class WeightIndicatorResponse extends Response implements Serializable {
         this.weight = weight;
     }
 
+    public void setIndicator(boolean indicator) {
+        this.indicator = indicator;
+    }
+
     public boolean isIndicator() {
         return indicator;
     }
+
 }

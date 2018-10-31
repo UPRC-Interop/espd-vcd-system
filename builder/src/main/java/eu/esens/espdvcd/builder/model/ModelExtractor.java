@@ -561,11 +561,12 @@ public interface ModelExtractor {
     default void applyCriterionWeightingData(WeightIndicatorResponse response, TenderingCriterionType criterionType) {
 
         if (response != null) {
-            // EvaluationMethodTypeCode
+            // Indicator
             if (criterionType.getEvaluationMethodTypeCode() != null
                     && criterionType.getEvaluationMethodTypeCode().getValue() != null) {
 
-                response.setEvaluationMethodType(criterionType.getEvaluationMethodTypeCode().getValue());
+                response.setIndicator(criterionType.getEvaluationMethodTypeCode().getValue()
+                        .equals(EvaluationMethodTypeEnum.WEIGHTED.name()));
             }
             // WeightingConsiderationDescription
             response.getEvaluationMethodDescriptionList()
