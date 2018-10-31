@@ -54,7 +54,7 @@ public interface SchemaExtractorV2 {
         tct.setCriterionTypeCode(createCriteriaTypeCode(c.getTypeCode()));
 
         tct.getTenderingCriterionPropertyGroup().addAll(c.getRequirementGroups().stream()
-                .map(rg -> extractTenderingCriterionPropertyGroupType(rg, tct))
+                .map(rg -> extractTenderingCriterionPropertyGroupType(rg))
                 .collect(Collectors.toList()));
 
         return tct;
@@ -98,12 +98,12 @@ public interface SchemaExtractorV2 {
         }
     }
 
-    default TenderingCriterionPropertyGroupType extractTenderingCriterionPropertyGroupType(RequirementGroup rg, TenderingCriterionType criterionType) {
+    default TenderingCriterionPropertyGroupType extractTenderingCriterionPropertyGroupType(RequirementGroup rg) {
 
         TenderingCriterionPropertyGroupType rgType = new TenderingCriterionPropertyGroupType();
 
         rgType.getSubsidiaryTenderingCriterionPropertyGroup().addAll(rg.getRequirementGroups().stream()
-                .map(rg1 -> extractTenderingCriterionPropertyGroupType(rg1, criterionType))
+                .map(rg1 -> extractTenderingCriterionPropertyGroupType(rg1))
                 .collect(Collectors.toList()));
 
         rgType.getTenderingCriterionProperty().addAll(rg.getRequirements().stream()

@@ -390,7 +390,7 @@ public interface ModelExtractor {
         LegislationReference lr = extractDefaultLegalReferenceV2(tcType.getLegislation());
 
         List<RequirementGroup> rgList = tcType.getTenderingCriterionPropertyGroup().stream()
-                .map(t -> extractRequirementGroup(t, tcType))
+                .map(t -> extractRequirementGroup(t))
                 .collect(Collectors.toList());
 
         SelectableCriterion selCr = new SelectableCriterion(id, typeCode, name, desc, lr, rgList);
@@ -425,8 +425,7 @@ public interface ModelExtractor {
         return extractSelectableCriterion(ec, true);
     }
 
-    default RequirementGroup extractRequirementGroup(TenderingCriterionPropertyGroupType rgType,
-                                                     TenderingCriterionType criterionType) {
+    default RequirementGroup extractRequirementGroup(TenderingCriterionPropertyGroupType rgType) {
 
         RequirementGroup rg = null;
         if (rgType.getID() != null) {
@@ -439,10 +438,10 @@ public interface ModelExtractor {
 
         if (rg != null) {
             List<Requirement> rList = rgType.getTenderingCriterionProperty().stream()
-                    .map(r -> extractRequirement(r, criterionType))
+                    .map(r -> extractRequirement(r))
                     .collect(Collectors.toList());
             List<RequirementGroup> childRg = rgType.getSubsidiaryTenderingCriterionPropertyGroup().stream()
-                    .map(t -> extractRequirementGroup(t, criterionType))
+                    .map(t -> extractRequirementGroup(t))
                     .collect(Collectors.toList());
             rg.setRequirements(rList);
             rg.setRequirementGroups(childRg);
@@ -582,7 +581,7 @@ public interface ModelExtractor {
         }
     }
 
-    default Requirement extractRequirement(TenderingCriterionPropertyType rqType, TenderingCriterionType criterionType) {
+    default Requirement extractRequirement(TenderingCriterionPropertyType rqType) {
         String theId = null;
         if (rqType.getID() != null) {
             theId = rqType.getID().getValue();
