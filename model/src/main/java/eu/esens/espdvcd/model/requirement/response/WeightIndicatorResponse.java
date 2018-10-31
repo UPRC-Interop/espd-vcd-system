@@ -52,7 +52,7 @@ public class WeightIndicatorResponse extends Response implements Serializable {
     private String evaluationMethodType;
     private List<String> evaluationMethodDescriptionList;
     private float weight;
-    private boolean weighted;
+    private boolean indicator;
 
     public WeightIndicatorResponse() {
     }
@@ -63,7 +63,7 @@ public class WeightIndicatorResponse extends Response implements Serializable {
 
     public void setEvaluationMethodType(String evaluationMethodType) {
         if (EvaluationMethodTypeEnum.WEIGHTED.name().equals(evaluationMethodType)) {
-            this.weighted = true;
+            this.indicator = true;
         }
         this.evaluationMethodType = evaluationMethodType;
     }
@@ -104,11 +104,7 @@ public class WeightIndicatorResponse extends Response implements Serializable {
         this.weight = weight;
     }
 
-//    public void setWeighted(boolean weighted) {
-//        this.weighted = weighted;
-//    }
-
-    public boolean isWeighted() {
-        return weighted;
+    public boolean isIndicator() {
+        return indicator;
     }
 }

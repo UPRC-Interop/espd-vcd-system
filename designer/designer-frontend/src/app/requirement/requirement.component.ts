@@ -40,7 +40,7 @@ export class RequirementComponent implements OnInit, OnChanges {
   countries: Country[] = null;
   currency: Currency[] = null;
   eoIDTypes: EoIDType[] = null;
-  evaluationMethodTypes: EvaluationMethodType[] = null;
+  // evaluationMethodTypes: EvaluationMethodType[] = null;
   isWeighted = false;
 
   constructor(public dataService: DataService, public APIService: ApicallService, public utilities: UtilitiesService) {
@@ -83,14 +83,14 @@ export class RequirementComponent implements OnInit, OnChanges {
         console.log(err);
       });
 
-    this.dataService.getEvalutationMethodTypes()
-      .then(res => {
-        this.evaluationMethodTypes = res;
-        // console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    // this.dataService.getEvalutationMethodTypes()
+    //   .then(res => {
+    //     this.evaluationMethodTypes = res;
+    //     // console.log(res);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
 
 
     if (this.req.responseDataType === 'INDICATOR') {

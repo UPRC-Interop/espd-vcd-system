@@ -110,20 +110,30 @@ export class FormUtilService {
               }
             } else if (req.responseDataType === 'WEIGHT_INDICATOR') {
               if (formValues[req.uuid.valueOf()] === true) {
-                req.response.indicator = true;
+                // req.response.indicator = true;
                 req.response.uuid = null;
+                req.response.evaluationMethodType = 'WEIGHTED';
               } else {
-                req.response.indicator = false;
+                // req.response.indicator = false;
                 req.response.uuid = null;
+                req.response.evaluationMethodType = 'PASSFAIL';
               }
-              const evaluationMethodTypeID = req.uuid + 'evaluationMethodType';
+              // const evaluationMethodTypeID = req.uuid + 'evaluationMethodType';
               const weightID = req.uuid + 'weight';
               const evaluationMethodDescriptionID = req.uuid + 'evaluationMethodDescription';
 
-              if (formValues[evaluationMethodTypeID.valueOf()] === null) {
-                req.response.evaluationMethodType = null;
-              } else {
-                req.response.evaluationMethodType = formValues[evaluationMethodTypeID.valueOf()];
+            /* REMOVED: evaluationMethodType dropdown, it's redundant since we have a YES/NO radio button that answers the question. */
+              // if (formValues[evaluationMethodTypeID.valueOf()] === null) {
+              //   req.response.evaluationMethodType = null;
+              // } else {
+              //   req.response.evaluationMethodType = formValues[evaluationMethodTypeID.valueOf()];
+              // }
+
+
+              /* IF user selects NO in the global weight radio button,
+              then the 'weightable criteria's evaluationMethodType is set to PASSFAIL */
+              if (!this.utilities.isGloballyWeighted) {
+                req.response.evaluationMethodType = 'PASSFAIL';
               }
               if (formValues[weightID.valueOf()] === null) {
                 req.response.weight = null;
@@ -383,7 +393,7 @@ export class FormUtilService {
             group[r.uuid] = new FormControl(false);
           } else if (r.responseDataType === 'WEIGHT_INDICATOR') {
             group[r.uuid] = new FormControl(false);
-            group[r.uuid + 'evaluationMethodType'] = new FormControl();
+            // group[r.uuid + 'evaluationMethodType'] = new FormControl();
             group[r.uuid + 'weight'] = new FormControl();
             group[r.uuid + 'evaluationMethodDescription'] = new FormControl();
           } else if (r.responseDataType === 'AMOUNT') {
@@ -518,12 +528,12 @@ export class FormUtilService {
             if (r.responseDataType === 'WEIGHT_INDICATOR') {
               if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
                 group[r.uuid] = new FormControl(false);
-                group[r.uuid + 'evaluationMethodType'] = new FormControl();
+                // group[r.uuid + 'evaluationMethodType'] = new FormControl();
                 group[r.uuid + 'weight'] = new FormControl();
                 group[r.uuid + 'evaluationMethodDescription'] = new FormControl();
               } else {
                 group[r.uuid] = new FormControl(r.response.indicator);
-                group[r.uuid + 'evaluationMethodType'] = new FormControl(r.response.evaluationMethodType);
+                // group[r.uuid + 'evaluationMethodType'] = new FormControl(r.response.evaluationMethodType);
                 group[r.uuid + 'weight'] = new FormControl(r.response.weight);
                 group[r.uuid + 'evaluationMethodDescription'] = new FormControl(r.response.evaluationMethodDescription);
               }
@@ -671,7 +681,7 @@ export class FormUtilService {
             if (this.utilities.isCA) {
               if (r.responseDataType === 'WEIGHT_INDICATOR') {
                 group[r.uuid] = new FormControl(false);
-                group[r.uuid + 'evaluationMethodType'] = new FormControl();
+                // group[r.uuid + 'evaluationMethodType'] = new FormControl();
                 group[r.uuid + 'weight'] = new FormControl();
                 group[r.uuid + 'evaluationMethodDescription'] = new FormControl();
               }
@@ -725,10 +735,10 @@ export class FormUtilService {
 
               if (r.responseDataType === 'WEIGHT_INDICATOR') {
                 group[r.uuid] = new FormControl(false);
-                group[r.uuid + 'evaluationMethodType'] = new FormControl({
-                  value: '',
-                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
-                });
+                // group[r.uuid + 'evaluationMethodType'] = new FormControl({
+                //   value: '',
+                //   disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                // });
                 group[r.uuid + 'weight'] = new FormControl({
                   value: '',
                   disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
