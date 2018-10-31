@@ -33,6 +33,7 @@ import {EoIDType} from '../model/eoIDType.model';
 import {EvaluationMethodType} from '../model/evaluationMethodType.model';
 import {ProjectType} from '../model/projectType.model';
 import {BidType} from '../model/bidType.model';
+import {WeightingType} from '../model/weightingType.model';
 
 // import {DataService} from '../services/data.service';
 
@@ -80,6 +81,10 @@ export class ApicallService {
 
   get_BidType() {
     return this.http.get<BidType[]>(environment.apiUrl + 'v2/codelists/BidType').toPromise();
+  }
+
+  get_WeightingType() {
+    return this.http.get<WeightingType[]>(environment.apiUrl + 'v2/codelists/WeightingType').toPromise();
   }
 
 

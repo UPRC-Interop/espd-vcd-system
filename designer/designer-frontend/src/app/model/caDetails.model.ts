@@ -37,5 +37,5 @@ export class Cadetails {
   procedureType?: string;
   projectType?: string;
   weightingType?: string;
-  weightingScoringMethodologyNote?: string;
+  weightScoringMethodologyNote?: string;
 }

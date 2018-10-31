@@ -1,8 +1,10 @@
 package eu.esens.espdvcd.designer.util;
 
+import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
+import eu.esens.espdvcd.model.requirement.response.WeightIndicatorResponse;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -26,6 +28,28 @@ public final class CriteriaUtil {
             return 1;
         else
             return 0;
+    }
+
+    public static List<SelectableCriterion> generateWeightIndicators(@NotNull final List<SelectableCriterion> criteria) {
+        Objects.requireNonNull(criteria);
+        criteria.forEach(selectableCriterion -> generateWeightIndicatorsForRequirementGroups(selectableCriterion.getRequirementGroups()));
+        return criteria;
+    }
+
+    private static void generateWeightIndicatorsForRequirementGroups(@NotNull final List<RequirementGroup> requirementGroups) {
+        requirementGroups.forEach(requirementGroup -> {
+            requirementGroup.getRequirements()
+                    .stream()
+                    .filter(requirement -> requirement.getResponseDataType().equals(ResponseTypeEnum.WEIGHT_INDICATOR))
+                    .findAny()
+                    .ifPresent(requirement -> {
+                        WeightIndicatorResponse response = (WeightIndicatorResponse) requirement.getResponse();
+                        if (Objects.nonNull(response.getEvaluationMethodType()) && response.getEvaluationMethodType().equals("WEIGHTED"))
+                            response.setIndicator(true);
+
+                    });
+            generateWeightIndicatorsForRequirementGroups(requirementGroup.getRequirementGroups());
+        });
     }
 
     public static List<SelectableCriterion> generateUUIDs(@NotNull final List<SelectableCriterion> criteria) {

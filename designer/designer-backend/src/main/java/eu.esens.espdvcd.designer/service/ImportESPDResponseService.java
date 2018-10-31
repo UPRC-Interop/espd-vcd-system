@@ -75,6 +75,7 @@ public enum ImportESPDResponseService implements ImportESPDService<ESPDResponse>
                         break;
                     case SELFCONTAINED:
                         response = BuilderFactory.EDM_V2.createSelfContainedModelBuilder().importFrom(is).createESPDResponse();
+                        CriteriaUtil.generateWeightIndicators(response.getFullCriterionList());
                         break;
                 }
                 break;

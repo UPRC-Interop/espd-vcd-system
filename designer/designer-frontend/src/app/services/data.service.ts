@@ -44,6 +44,7 @@ import {EvaluationMethodType} from '../model/evaluationMethodType.model';
 import {CaRelatedCriterion} from '../model/caRelatedCriterion.model';
 import {ProjectType} from '../model/projectType.model';
 import {BidType} from '../model/bidType.model';
+import {WeightingType} from '../model/weightingType.model';
 
 @Injectable()
 export class DataService {
@@ -75,6 +76,7 @@ export class DataService {
   bidTypes: BidType[] = null;
   currency: Currency[] = null;
   eoIDType: EoIDType[] = null;
+  weightingType: WeightingType[] = null;
   evaluationMethodType: EvaluationMethodType[] = null;
   exclusionACriteria: ExclusionCriteria[] = null;
   exclusionBCriteria: ExclusionCriteria[] = null;
@@ -482,10 +484,14 @@ export class DataService {
       var filename = 'espd-request-v1.xml';
     } else if (this.utilities.isEO && this.APIService.version === 'v1') {
       var filename = 'espd-response-v1.xml';
-    } else if (this.utilities.isCA && this.APIService.version === 'v2') {
+    } else if (this.utilities.isCA && this.APIService.version === 'v2' && this.utilities.qualificationApplicationType === 'regulated') {
       var filename = 'espd-request-v2.xml';
-    } else if (this.utilities.isEO && this.APIService.version === 'v2') {
+    } else if (this.utilities.isEO && this.APIService.version === 'v2' && this.utilities.qualificationApplicationType === 'regulated') {
       var filename = 'espd-response-v2.xml';
+    } else if (this.utilities.isCA && this.utilities.qualificationApplicationType === 'self-contained') {
+      var filename = 'espd-self-contained-request.xml';
+    } else if (this.utilities.isEO && this.utilities.qualificationApplicationType === 'self-contained') {
+      var filename = 'espd-self-contained-response.xml';
     }
 
     saveAs(blob, filename);
@@ -521,6 +527,8 @@ export class DataService {
 
           if (this.utilities.qualificationApplicationType === 'self-contained') {
             this.CADetails.classificationCodes = res.cadetails.classificationCodes;
+            this.CADetails.weightScoringMethodologyNote = res.cadetails.weightScoringMethodologyNote;
+            this.CADetails.weightingType = res.cadetails.weightingType;
           }
 
           console.log(res.fullCriterionList);
@@ -567,6 +575,7 @@ export class DataService {
           // create requirementGroup template objects required for multiple instances (cardinalities) function
           this.formUtil.createTemplateReqGroups(res.fullCriterionList);
           console.log(res);
+          console.log(this.CADetails);
 
 
         })
@@ -1516,6 +1525,26 @@ export class DataService {
       return this.APIService.get_BidType()
         .then(res => {
           this.bidTypes = res;
+          return Promise.resolve(res);
+        })
+        .catch(err => {
+          console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
+          return Promise.reject(err);
+        });
+    }
+  }
+
+  getWeightingType(): Promise<WeightingType[]> {
+    if (this.weightingType != null) {
+      return Promise.resolve(this.weightingType);
+    } else {
+      return this.APIService.get_WeightingType()
+        .then(res => {
+          this.weightingType = res;
           return Promise.resolve(res);
         })
         .catch(err => {

@@ -118,7 +118,9 @@
                   id="shortDesc" cols="30" rows="10"
                   placeholder="{{'espd.part1.title.or.short.desc' | translate}}"
                   name="description"
-                  [(ngModel)]="dataService.CADetails.procurementProcedureDesc" [disabled]="this.dataService.isReadOnly()"></textarea>
+                  [(ngModel)]="dataService.CADetails.procurementProcedureDesc" [disabled]="this.dataService.isReadOnly()">
+
+        </textarea>
       </mat-form-field>
       <mat-form-field>
         <input matInput placeholder="{{'espd.part1.file.ref.ca' | translate}}" name="fileReferenceNumber"

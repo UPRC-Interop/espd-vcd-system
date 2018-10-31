@@ -17,7 +17,6 @@ package eu.esens.espdvcd.designer.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
-import eu.esens.espdvcd.builder.BuilderFactory;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.model.SelectableCriterion;
@@ -36,6 +35,7 @@ public class ImportESPDServiceTest {
     File espdResponseFile;
     ESPDRequest request;
     ESPDResponse response;
+    ESPDRequest selfContainedRequest;
     ExportESPDService exportESPDService;
     ImportESPDService importESPDService;
     ObjectWriter writer;
@@ -49,13 +49,16 @@ public class ImportESPDServiceTest {
         Assert.assertNotNull(espdResponseFile);
         espdResponse = new File(this.getClass().getClassLoader().getResource("espd-response-v2-60.xml").toURI());
 
-        request = BuilderFactory.EDM_V1.createRegulatedModelBuilder().importFrom
-                (ImportESPDServiceTest.class.getResourceAsStream("/espd-request.xml")).createESPDRequest();
-        Assert.assertNotNull(request);
+//        request = BuilderFactory.EDM_V1.createRegulatedModelBuilder().importFrom
+//                (ImportESPDServiceTest.class.getResourceAsStream("/espd-request.xml")).createESPDRequest();
+//        Assert.assertNotNull(request);
 
-        response = BuilderFactory.EDM_V1.createRegulatedModelBuilder().importFrom
-                (ImportESPDServiceTest.class.getResourceAsStream("/espd-response.xml")).createESPDResponse();
-        Assert.assertNotNull(response);
+//        response = BuilderFactory.EDM_V1.createRegulatedModelBuilder().importFrom
+//                (ImportESPDServiceTest.class.getResourceAsStream("/espd-response.xml")).createESPDResponse();
+//        Assert.assertNotNull(response);
+
+//        selfContainedRequest = BuilderFactory.EDM_V2.createSelfContainedModelBuilder().importFrom
+//                (ImportESPDServiceTest.class.getResourceAsStream("SELFCONTAINED-ESPD-Request_2.0.2_weights.xml")).createESPDRequest();
 
         exportESPDService = RegulatedExportESPDV1Service.getInstance();
         importESPDService = ImportESPDResponseService.getInstance();
@@ -110,5 +113,12 @@ public class ImportESPDServiceTest {
     public void responseJSONFromResponseTest() throws Exception {
         ESPDResponse response = (ESPDResponse) importESPDService.importESPDFile(espdResponseFile);
         Assert.assertNotNull(response);
+    }
+
+    @Test
+    public void requestSelfContainedImport() throws Exception {
+        ESPDRequest request = ImportESPDRequestService.getInstance().importESPDFile(new File(this.getClass().getClassLoader().getResource("SELFCONTAINED-ESPD-Request_2.0.2_weights.xml").toURI()));
+
+        System.out.println(writer.writeValueAsString(request));
     }
 }
