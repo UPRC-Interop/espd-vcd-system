@@ -5,10 +5,13 @@ import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.response.WeightIndicatorResponse;
+import sun.reflect.misc.FieldUtil;
 
 import javax.validation.constraints.NotNull;
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Objects;
+import java.util.logging.Logger;
 
 public final class CriteriaUtil {
 
@@ -44,9 +47,18 @@ public final class CriteriaUtil {
                     .findAny()
                     .ifPresent(requirement -> {
                         WeightIndicatorResponse response = (WeightIndicatorResponse) requirement.getResponse();
-                        if (Objects.nonNull(response.getEvaluationMethodType()) && response.getEvaluationMethodType().equals("WEIGHTED"))
-                            response.setIndicator(true);
-
+                        if (Objects.nonNull(response.getEvaluationMethodType()) && response.getEvaluationMethodType().equals("WEIGHTED")) {
+//                            response.setIndicator(true);
+                            try {
+                                Field f = FieldUtil.getField(response.getClass(), "indicator");
+                                f.setAccessible(true);
+                                f.setBoolean(response, true);
+                            } catch (NoSuchFieldException e) {
+                                Logger.getLogger(CriteriaUtil.class.getName()).warning("Indicator field not found.");
+                            } catch (IllegalAccessException e) {
+                                Logger.getLogger(CriteriaUtil.class.getName()).warning("Indicator field cannot be set.");
+                            }
+                        }
                     });
             generateWeightIndicatorsForRequirementGroups(requirementGroup.getRequirementGroups());
         });

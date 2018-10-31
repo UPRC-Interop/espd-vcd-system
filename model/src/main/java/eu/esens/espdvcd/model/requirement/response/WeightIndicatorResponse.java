@@ -16,6 +16,7 @@
 package eu.esens.espdvcd.model.requirement.response;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import eu.esens.espdvcd.codelist.enums.EvaluationMethodTypeEnum;
 
@@ -28,6 +29,8 @@ import java.util.Objects;
 /**
  * Weight Indicator Response
  */
+
+@JsonIgnoreProperties(value = {"indicator"})
 public class WeightIndicatorResponse extends Response implements Serializable {
 
     private static final long serialVersionUID = -3204508364109778286L;
@@ -49,7 +52,7 @@ public class WeightIndicatorResponse extends Response implements Serializable {
      * evaluationMethodDescription ccv:Criterion.WeightingConsiderationDescription
      * weight ccv:Criterion.WeightNumeric
      */
-    private String evaluationMethodType;
+    private String evaluationMethodType = EvaluationMethodTypeEnum.PASSFAIL.name(); // Since the default value for boolean is false, this should default to PASSFAIL
     private List<String> evaluationMethodDescriptionList;
     private float weight;
     private boolean indicator;
