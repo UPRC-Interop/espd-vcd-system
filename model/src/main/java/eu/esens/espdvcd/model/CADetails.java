@@ -23,6 +23,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Contracting authority and procurement procedure details
@@ -400,28 +401,31 @@ public class CADetails implements Serializable {
         this.nationalOfficialJournal = nationalOfficialJournal;
     }
 
-    @JsonIgnore
-    public List<String> getWeightScoringMethodologyNoteList() {
+    private void initWeightScoringMethodologyNoteList() {
         if (weightScoringMethodologyNoteList == null) {
             weightScoringMethodologyNoteList = new ArrayList<>();
         }
+    }
+
+    @JsonIgnore
+    public List<String> getWeightScoringMethodologyNoteList() {
+        initWeightScoringMethodologyNoteList();
         return weightScoringMethodologyNoteList;
     }
 
     @JsonProperty("weightScoringMethodologyNote")
     public String getWeightScoringMethodologyNote() {
-        if (weightScoringMethodologyNoteList == null) {
-            weightScoringMethodologyNoteList = new ArrayList<>();
-        }
+        initWeightScoringMethodologyNoteList();
         return String.join("\n", weightScoringMethodologyNoteList);
     }
 
     public void setWeightScoringMethodologyNote(@JsonProperty("weightScoringMethodologyNote") String note) {
-        if (weightScoringMethodologyNoteList == null) {
-            weightScoringMethodologyNoteList = new ArrayList<>();
+        initWeightScoringMethodologyNoteList();
+        weightScoringMethodologyNoteList.clear();
+        if (Objects.nonNull(note)) {
+            String[] descArray = note.split("[\\r\\n]+");
+            weightScoringMethodologyNoteList.addAll(Arrays.asList(descArray));
         }
-        String[] descArray = note.split("[\\r\\n]+");
-        weightScoringMethodologyNoteList.addAll(Arrays.asList(descArray));
     }
 
     public String getWeightingType() {
@@ -448,10 +452,6 @@ public class CADetails implements Serializable {
         this.procurementProcedureType = procurementProcedureType;
     }
 
-//    public void setWeightScoringMethodologyNoteList(List<String> weightScoringMethodologyNoteList) {
-//        this.weightScoringMethodologyNoteList = weightScoringMethodologyNoteList;
-//    }
-
     public String getProjectType() {
         return projectType;
     }
@@ -467,7 +467,4 @@ public class CADetails implements Serializable {
         return classificationCodes;
     }
 
-//    public void setClassificationCodes(List<String> classificationCodes) {
-//        this.classificationCodes = classificationCodes;
-//    }
 }
