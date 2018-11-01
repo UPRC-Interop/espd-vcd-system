@@ -17,7 +17,7 @@
 
 -->
 <h4 translate>espd.part1.header</h4>
-<form #f="ngForm">
+<form #form="ngForm">
   <mat-accordion multi="true">
     <mat-expansion-panel expanded="true">
       <mat-expansion-panel-header>
@@ -159,22 +159,27 @@
           </mat-chip-list>
         </mat-form-field>
 
-
-        <ng-container *ngIf="dataService.caRelatedCriteriaForm">
-          <form [formGroup]="dataService.caRelatedCriteriaForm">
-            <div class="eoRelatedCriteria" *ngFor="let cr of this.dataService.caRelatedCriteria; let i=index">
-              <mat-card>
-                <h4>{{cr.description}}</h4>
-                <div class="answer">
-                  <app-criterion [criterion]="cr" [form]="dataService.caRelatedCriteriaForm.controls" [indicator]="true"></app-criterion>
-                </div>
-              </mat-card>
-            </div>
-          </form>
-        </ng-container>
+        <mat-form-field>
+          <input matInput name="procurementProjectLots" placeholder="Number of Lots: " [(ngModel)]="dataService.CADetails.procurementProjectLots"
+                 [disabled]="this.dataService.isReadOnly()">
+        </mat-form-field>
+        <div *ngIf="this.utilities.isDividedIntoLots">
+          <ng-container *ngIf="dataService.caRelatedCriteriaForm">
+            <form [formGroup]="dataService.caRelatedCriteriaForm">
+              <div class="eoRelatedCriteria" *ngFor="let cr of this.dataService.caRelatedCriteria; let i=index">
+                <mat-card>
+                  <h4>{{cr.description}}</h4>
+                  <div class="answer">
+                    <app-criterion [criterion]="cr" [form]="dataService.caRelatedCriteriaForm.controls" [indicator]="true"></app-criterion>
+                  </div>
+                </mat-card>
+              </div>
+            </form>
+          </ng-container>
+        </div>
       </div>
     </mat-expansion-panel>
   </mat-accordion>
   <button mat-raised-button color="primary" matStepperPrevious>{{'espd.gui.previous' | translate}}</button>
-  <button type="button" mat-raised-button color="primary" matStepperNext (click)="onProcedureSubmit(f)">{{'espd.gui.next' | translate}}</button>
+  <button type="button" mat-raised-button color="primary" matStepperNext (click)="onProcedureSubmit(form)">{{'espd.gui.next' | translate}}</button>
 </form>

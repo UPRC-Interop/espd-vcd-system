@@ -44,4 +44,5 @@ export class RequirementResponse {
   weight?: number;
   evaluationMethodDescription?: string;
   eoidtype?: string;
+  lots?: string[];
 }

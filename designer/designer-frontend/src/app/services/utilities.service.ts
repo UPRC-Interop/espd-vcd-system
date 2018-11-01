@@ -38,6 +38,7 @@ export class UtilitiesService {
   isAtoD = false;
   qualificationApplicationType: string;
   isGloballyWeighted = false;
+  isDividedIntoLots = false;
   // qualificationApplicationType = 'SELF-CONTAINED';
   // qualificationApplicationType = 'REGULATED';
 

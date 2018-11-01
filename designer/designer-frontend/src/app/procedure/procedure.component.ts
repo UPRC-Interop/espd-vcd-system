@@ -14,11 +14,11 @@
 /// limitations under the License.
 ///
 
-import {Component, OnInit, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, OnInit, OnChanges, SimpleChanges, ViewChild, AfterViewInit} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {ProcedureType} from '../model/procedureType.model';
 import {Country} from '../model/country.model';
-import {NgForm} from '@angular/forms/forms';
+import {NgForm} from '@angular/forms';
 import {UtilitiesService} from '../services/utilities.service';
 import {ProjectType} from '../model/projectType.model';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
@@ -41,6 +41,8 @@ export class ProcedureComponent implements OnInit, OnChanges {
   countries: Country[] = null;
   procedureTypes: ProcedureType[] = null;
   projectTypes: ProjectType[] = null;
+
+  @ViewChild('form') form: NgForm;
 
   constructor(public dataService: DataService, public utilities: UtilitiesService) {
   }
@@ -78,7 +80,21 @@ export class ProcedureComponent implements OnInit, OnChanges {
         console.log(err);
       });
 
+    this.form.form.valueChanges.subscribe(x => {
+      /* SELF-CONTAINED: Set isDividedIntoLots boolean in order to show/hide the OTHER_CA lots criterion */
+      if (x.procurementProjectLots !== undefined) {
+        if (parseInt(x.procurementProjectLots, 10) === 0 || parseInt(x.procurementProjectLots, 10) === 1) {
+          this.utilities.isDividedIntoLots = false;
+          // console.log(this.utilities.isDividedIntoLots);
+        } else {
+          this.utilities.isDividedIntoLots = true;
+          // console.log(this.utilities.isDividedIntoLots);
+        }
+      }
+    });
+
   }
+
 
   ngOnChanges(changes: SimpleChanges) {
     console.log(this.dataService.receivedNoticeNumber);

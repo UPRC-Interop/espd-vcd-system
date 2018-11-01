@@ -14,7 +14,7 @@
 /// limitations under the License.
 ///
 
-import {Component, Input, Output, OnInit, EventEmitter, OnChanges} from '@angular/core';
+import {Component, Input, Output, OnInit, EventEmitter, OnChanges, AfterViewInit} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {Requirement} from '../model/requirement.model';
 import {DataService} from '../services/data.service';
