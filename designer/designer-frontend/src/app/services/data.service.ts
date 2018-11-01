@@ -98,6 +98,7 @@ export class DataService {
   langTemplate = [];
   langNames = [];
   langISOCodes = [];
+  projectLots = [];
   // evidenceList: Evidence[] = [];
 
   notDefCriteria: EoRelatedCriterion[] = null;

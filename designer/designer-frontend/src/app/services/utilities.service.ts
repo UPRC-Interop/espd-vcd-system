@@ -87,5 +87,16 @@ export class UtilitiesService {
     });
   }
 
+  createLotList(lots: number): string[] {
+    const projectLotsList = [];
+    for (let i = 1; i <= lots; i++) {
+      projectLotsList.push('Lot' + i);
+    }
+
+    console.log(projectLotsList);
+
+    return projectLotsList;
+  }
+
 
 }
