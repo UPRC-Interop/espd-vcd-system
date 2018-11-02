@@ -415,13 +415,11 @@ public class CADetails implements Serializable {
 
     @JsonProperty("weightScoringMethodologyNote")
     public String getWeightScoringMethodologyNote() {
-        initWeightScoringMethodologyNoteList();
-        return String.join("\n", weightScoringMethodologyNoteList);
+        return String.join("\n", getWeightScoringMethodologyNoteList());
     }
 
     public void setWeightScoringMethodologyNote(@JsonProperty("weightScoringMethodologyNote") String note) {
-        initWeightScoringMethodologyNoteList();
-        weightScoringMethodologyNoteList.clear();
+        getWeightScoringMethodologyNoteList().clear();
         if (Objects.nonNull(note)) {
             String[] descArray = note.split("[\\r\\n]+");
             weightScoringMethodologyNoteList.addAll(Arrays.asList(descArray));

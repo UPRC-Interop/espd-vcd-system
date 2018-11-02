@@ -52,7 +52,6 @@ public class WeightIndicatorResponse extends Response implements Serializable {
      * evaluationMethodDescription ccv:Criterion.WeightingConsiderationDescription
      * weight ccv:Criterion.WeightNumeric
      */
-    // private String evaluationMethodType = EvaluationMethodTypeEnum.PASSFAIL.name(); // Since the default value for boolean is false, this should default to PASSFAIL
     private List<String> evaluationMethodDescriptionList;
     private float weight;
     private boolean indicator;
@@ -80,13 +79,11 @@ public class WeightIndicatorResponse extends Response implements Serializable {
 
     @JsonProperty("evaluationMethodDescription")
     public String getEvaluationMethodDescription() {
-        initEvaluationMethodDescriptionList();
-        return String.join("\n", evaluationMethodDescriptionList);
+        return String.join("\n", getEvaluationMethodDescriptionList());
     }
 
     public void setEvaluationMethodDescription(@JsonProperty("evaluationMethodDescription") String description) {
-        initEvaluationMethodDescriptionList();
-        evaluationMethodDescriptionList.clear();
+        getEvaluationMethodDescriptionList().clear();
         if (Objects.nonNull(description)) {
             String[] descArray = description.split("[\\r\\n]+");
             evaluationMethodDescriptionList.addAll(Arrays.asList(descArray));
