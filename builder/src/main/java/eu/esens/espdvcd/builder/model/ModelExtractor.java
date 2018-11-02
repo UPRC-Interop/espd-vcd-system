@@ -577,7 +577,7 @@ public interface ModelExtractor {
             if (criterionType.getWeightNumeric() != null
                     && criterionType.getWeightNumeric().getValue() != null) {
 
-                response.setWeight(criterionType.getWeightNumeric().getValue().floatValue());
+                response.setWeight(criterionType.getWeightNumeric().getValue());
             }
         }
     }
