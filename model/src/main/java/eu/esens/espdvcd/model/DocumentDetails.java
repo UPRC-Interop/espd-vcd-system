@@ -7,7 +7,6 @@ public class DocumentDetails implements Serializable {
     private static final long serialVersionUID = 5723048808969930122L;
     /**
      * Class that contains information about the ESPD document
-     * Used by the designer-frontend submodule to describe the
      */
 
     private final String version;

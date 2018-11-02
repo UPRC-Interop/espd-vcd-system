@@ -16,7 +16,6 @@
 package eu.esens.espdvcd.model.requirement.response;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import eu.esens.espdvcd.codelist.enums.EvaluationMethodTypeEnum;
 
@@ -30,7 +29,6 @@ import java.util.Objects;
  * Weight Indicator Response
  */
 
-@JsonIgnoreProperties(value = {"indicator"})
 public class WeightIndicatorResponse extends Response implements Serializable {
 
     private static final long serialVersionUID = -3204508364109778286L;

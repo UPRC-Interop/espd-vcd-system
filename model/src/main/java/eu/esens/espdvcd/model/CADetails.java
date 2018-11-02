@@ -277,6 +277,20 @@ public class CADetails implements Serializable {
      */
     private String nationalOfficialJournal;
 
+    /**
+     * Lot reference
+     * <p>
+     * An identifier for the lot.
+     * <p>
+     * Data type: Identifier<br>
+     * Cardinality: 1..1 (1..n)<br>
+     * InfReqID: tir92-130<br>
+     * BusReqID: tbr92-014<br>
+     * UBL syntax path: cac:ProcurementProjectLot.ID<br>
+     */
+    @NotNull
+    private int procurementProjectLots;
+
     public CADetails() {
     }
 
@@ -463,6 +477,14 @@ public class CADetails implements Serializable {
             classificationCodes = new ArrayList<>();
         }
         return classificationCodes;
+    }
+
+    public int getProcurementProjectLots() {
+        return procurementProjectLots;
+    }
+
+    public void setProcurementProjectLots(int procurementProjectLots) {
+        this.procurementProjectLots = procurementProjectLots;
     }
 
 }

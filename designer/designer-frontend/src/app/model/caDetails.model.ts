@@ -22,6 +22,7 @@ export class Cadetails {
   procurementProcedureDesc: string;
   procurementProcedureFileReferenceNo: string;
   procurementPublicationNumber: string;
+  procurementProjectLots?: number;
   electronicAddressID?: string;
   webSiteURI?: string;
   postalAddress?: PostalAddress;
