@@ -47,9 +47,10 @@ public class ESPDRequestSchemaExtractorV2 implements SchemaExtractorV2 {
 
         if (modelRequest.getCADetails().getProcurementProcedureFileReferenceNo() != null) {
             qarType.setContractFolderID(createContractFolderIDType(modelRequest.getCADetails().getProcurementProcedureFileReferenceNo()));
-        } else {
-            qarType.setContractFolderID(createContractFolderIDType("PPID-test1"));
         }
+//        } else {
+//            qarType.setContractFolderID(createContractFolderIDType("PPID-test1"));
+//        }
 
         qarType.getAdditionalDocumentReference().add(extractCADetailsDocumentReference(modelRequest.getCADetails()));
 

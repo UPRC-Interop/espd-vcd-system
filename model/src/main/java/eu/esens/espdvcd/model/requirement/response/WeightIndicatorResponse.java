@@ -20,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import eu.esens.espdvcd.codelist.enums.EvaluationMethodTypeEnum;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -50,9 +51,8 @@ public class WeightIndicatorResponse extends Response implements Serializable {
      * evaluationMethodDescription ccv:Criterion.WeightingConsiderationDescription
      * weight ccv:Criterion.WeightNumeric
      */
-    // private String evaluationMethodType = EvaluationMethodTypeEnum.PASSFAIL.name(); // Since the default value for boolean is false, this should default to PASSFAIL
     private List<String> evaluationMethodDescriptionList;
-    private float weight;
+    private BigDecimal weight;
     private boolean indicator;
 
     public WeightIndicatorResponse() {
@@ -78,24 +78,22 @@ public class WeightIndicatorResponse extends Response implements Serializable {
 
     @JsonProperty("evaluationMethodDescription")
     public String getEvaluationMethodDescription() {
-        initEvaluationMethodDescriptionList();
-        return String.join("\n", evaluationMethodDescriptionList);
+        return String.join("\n", getEvaluationMethodDescriptionList());
     }
 
     public void setEvaluationMethodDescription(@JsonProperty("evaluationMethodDescription") String description) {
-        initEvaluationMethodDescriptionList();
-        evaluationMethodDescriptionList.clear();
+        getEvaluationMethodDescriptionList().clear();
         if (Objects.nonNull(description)) {
             String[] descArray = description.split("[\\r\\n]+");
             evaluationMethodDescriptionList.addAll(Arrays.asList(descArray));
         }
     }
 
-    public float getWeight() {
+    public BigDecimal getWeight() {
         return weight;
     }
 
-    public void setWeight(float weight) {
+    public void setWeight(BigDecimal weight) {
         this.weight = weight;
     }
 

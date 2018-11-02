@@ -17,11 +17,15 @@ package eu.esens.espdvcd.designer;
 
 import eu.esens.espdvcd.designer.endpoint.*;
 import eu.esens.espdvcd.designer.service.*;
+import eu.esens.espdvcd.designer.util.Errors;
+import eu.esens.espdvcd.designer.util.JsonUtil;
 import eu.esens.espdvcd.schema.EDMVersion;
 import spark.Service;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import static spark.debug.DebugScreen.enableDebugScreen;
 
 public class Server {
 
@@ -55,7 +59,7 @@ public class Server {
         }
 
         LOGGER.info("Attempting to bind to port " + portToBind);
-        Service spark = Service.ignite().port(portToBind);                                //SET THE SPARK SERVER ON FIRE
+        Service spark = Service.ignite().port(portToBind);
 
         spark.initExceptionHandler(e -> {
             LOGGER.severe("Failed to ignite the Spark server");
@@ -67,11 +71,17 @@ public class Server {
 
         dropTrailingSlashes(spark);
 
+        enableDebugScreen();
+
+        spark.notFound((request, response) -> JsonUtil.toJson(Errors.notFoundError("Endpoint not found.")));
+
         LOGGER.info("Starting endpoint configuration");
 
         RestContext v2RegulatedContext = new RestContext(initialPath + "/api/v2/regulated", spark);
         RestContext v2SelfContainedContext = new RestContext(initialPath + "/api/v2/self-contained", spark);
         RestContext v1Context = new RestContext(initialPath + "/api/v1", spark);
+        RestContext v1RegulatedContext = new RestContext(initialPath + "/api/v1/regulated", spark);
+
         RestContext v2Context = new RestContext(initialPath + "/api/v2", spark);
         RestContext baseContext = new RestContext(initialPath + "/api", spark);
 
@@ -88,6 +98,7 @@ public class Server {
         Endpoint predefCriteriaEndpointV2 = new CriteriaEndpoint(RegulatedCriteriaService.getV2Instance());
         Endpoint predefCriteriaEndpointSelfContainedV2 = new CriteriaEndpoint(SelfContainedCriteriaService.getInstance());
 
+        v1RegulatedContext.addEndpoint(predefCriteriaEndpointV1);
         v1Context.addEndpoint(predefCriteriaEndpointV1);
         v2RegulatedContext.addEndpoint(predefCriteriaEndpointV2);
         v2SelfContainedContext.addEndpoint(predefCriteriaEndpointSelfContainedV2);
