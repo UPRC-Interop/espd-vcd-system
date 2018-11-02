@@ -14,8 +14,8 @@
 /// limitations under the License.
 ///
 
-import {Component, Input, Output, OnInit, EventEmitter, OnChanges, AfterViewInit} from '@angular/core';
-import {FormGroup} from '@angular/forms';
+import {Component, Input, Output, OnInit, EventEmitter, OnChanges, AfterViewInit, ViewChild, ViewChildren} from '@angular/core';
+import {FormArray, FormGroup} from '@angular/forms';
 import {Requirement} from '../model/requirement.model';
 import {DataService} from '../services/data.service';
 import {Country} from '../model/country.model';
@@ -24,6 +24,7 @@ import {ApicallService} from '../services/apicall.service';
 import {UtilitiesService} from '../services/utilities.service';
 import {EoIDType} from '../model/eoIDType.model';
 import {EvaluationMethodType} from '../model/evaluationMethodType.model';
+import {MatSelectionList} from '@angular/material';
 
 @Component({
   selector: 'app-requirement',
@@ -42,6 +43,7 @@ export class RequirementComponent implements OnInit, OnChanges {
   eoIDTypes: EoIDType[] = null;
   // evaluationMethodTypes: EvaluationMethodType[] = null;
   isWeighted = false;
+  @ViewChildren('lots') lots: MatSelectionList;
 
   constructor(public dataService: DataService, public APIService: ApicallService, public utilities: UtilitiesService) {
   }
@@ -55,6 +57,9 @@ export class RequirementComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
+    if (this.lots !== undefined) {
+      console.log(typeof this.lots);
+    }
 
     this.dataService.getCountries()
       .then(res => {
@@ -120,6 +125,11 @@ export class RequirementComponent implements OnInit, OnChanges {
           // this.indicatorChanged.emit(ev);
         });
     }
+
+  }
+
+  getLotFormData(id: string) {
+    return <FormArray>this.form.controls[id];
   }
 
 

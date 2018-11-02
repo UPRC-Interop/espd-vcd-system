@@ -17,7 +17,7 @@
 import {Injectable} from '@angular/core';
 import {RequirementGroup} from '../model/requirementGroup.model';
 import {EoRelatedCriterion} from '../model/eoRelatedCriterion.model';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormArray, FormControl, FormGroup} from '@angular/forms';
 import {RequirementResponse} from '../model/requirement-response.model';
 import {Evidence} from '../model/evidence.model';
 import {EvidenceIssuer} from '../model/evidenceIssuer.model';
@@ -98,7 +98,7 @@ export class FormUtilService {
               // console.log('RESPONSE IS NULL');
               req.response = new RequirementResponse();
             }
-            console.log(req.response);
+            // console.log(req.response);
             // req.response = new RequirementResponse();
             if (req.responseDataType === 'INDICATOR') {
               if (formValues[req.uuid.valueOf()] === true) {
@@ -122,7 +122,7 @@ export class FormUtilService {
               const weightID = req.uuid + 'weight';
               const evaluationMethodDescriptionID = req.uuid + 'evaluationMethodDescription';
 
-            /* REMOVED: evaluationMethodType dropdown, it's redundant since we have a YES/NO radio button that answers the question. */
+              /* REMOVED: evaluationMethodType dropdown, it's redundant since we have a YES/NO radio button that answers the question. */
               // if (formValues[evaluationMethodTypeID.valueOf()] === null) {
               //   req.response.evaluationMethodType = null;
               // } else {
@@ -538,6 +538,17 @@ export class FormUtilService {
                 group[r.uuid + 'weight'] = new FormControl(r.response.weight);
                 group[r.uuid + 'evaluationMethodDescription'] = new FormControl(r.response.evaluationMethodDescription);
               }
+            }
+
+            /* SELF-CONTAINED: LOTS_IDENTIFIER */
+            if (r.responseDataType === 'LOTS_IDENTIFIER') {
+
+              const controls = this.utilities.projectLots.map(c => new FormControl(false));
+
+              group[r.uuid] = new FormArray(controls);
+              // group[r.uuid] = new FormGroup({
+              //   'lots': new FormArray(controls)
+              // });
             }
 
             if (r.response.date) {

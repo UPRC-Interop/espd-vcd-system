@@ -201,6 +201,33 @@
         </mat-select>
       </mat-form-field>
     </div>
+    <!-- SELF-CONTAINED: LOTS_IDENTIFIER -->
+    <div class="lots_identifier" *ngSwitchCase="'LOTS_IDENTIFIER'">
+      <!--<label [attr.for]="req.uuid">{{req.description}}</label>-->
+      <!--<br>-->
+      <!--<div *ngFor="let lot of this.dataService.CADetails.procurementProjectLots">-->
+        <!--{{lot}}-->
+      <!--</div>-->
+
+      <mat-selection-list #lots>
+        <mat-list-option *ngFor="let lot of this.utilities.projectLots" [value]="lot">
+          {{lot}}
+        </mat-list-option>
+      </mat-selection-list>
+      <p>SELECTED lots:</p>
+      <div *ngFor="let lt of lots.selectedOptions.selected" #selectedLots>
+        {{lt.value}}
+      </div>
+      <!--<mat-form-field>-->
+        <!--&lt;!&ndash;<input matInput [formControlName]="req.uuid" [id]="req.uuid" >&ndash;&gt;-->
+      <!--</mat-form-field>-->
+
+      <!--<label formArrayName="req.uuid" *ngFor="let lot of this.dataService.CADetails.procurementProjectLots; let i = index">-->
+        <!--<input type="checkbox" [formControlName]="i">-->
+        <!--{{lot[i]}}-->
+      <!--</label>-->
+
+    </div>
 
 
   </div>

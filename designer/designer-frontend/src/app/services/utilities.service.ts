@@ -39,6 +39,7 @@ export class UtilitiesService {
   qualificationApplicationType: string;
   isGloballyWeighted = false;
   isDividedIntoLots = false;
+  projectLots = [];
   // qualificationApplicationType = 'SELF-CONTAINED';
   // qualificationApplicationType = 'REGULATED';
 

@@ -1293,6 +1293,8 @@ export class DataService {
         .then(res => {
           this.selectionCCriteria = res;
           this.selectionCCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionCCriteria);
+          // console.log('SELECTION C CRITERIA FORM:  ========================================================= ');
+          // console.log(this.selectionCCriteriaForm);
           // console.log(res);
           this.formUtil.createTemplateReqGroups(this.selectionCCriteria);
         })
