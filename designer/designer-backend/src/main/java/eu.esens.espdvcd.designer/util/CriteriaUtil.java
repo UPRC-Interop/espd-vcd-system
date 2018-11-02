@@ -28,37 +28,6 @@ public final class CriteriaUtil {
             return 0;
     }
 
-//    public static List<SelectableCriterion> generateWeightIndicators(@NotNull final List<SelectableCriterion> criteria) {
-//        Objects.requireNonNull(criteria);
-//        criteria.forEach(selectableCriterion -> generateWeightIndicatorsForRequirementGroups(selectableCriterion.getRequirementGroups()));
-//        return criteria;
-//    }
-//
-//    private static void generateWeightIndicatorsForRequirementGroups(@NotNull final List<RequirementGroup> requirementGroups) {
-//        requirementGroups.forEach(requirementGroup -> {
-//            requirementGroup.getRequirements()
-//                    .stream()
-//                    .filter(requirement -> requirement.getResponseDataType().equals(ResponseTypeEnum.WEIGHT_INDICATOR))
-//                    .findAny()
-//                    .ifPresent(requirement -> {
-//                        WeightIndicatorResponse response = (WeightIndicatorResponse) requirement.getResponse();
-//                        if (Objects.nonNull(response.getEvaluationMethodType()) && response.getEvaluationMethodType().equals("WEIGHTED")) {
-////                            response.setIndicator(true);
-//                            try {
-//                                Field f = FieldUtil.getField(response.getClass(), "indicator");
-//                                f.setAccessible(true);
-//                                f.setBoolean(response, true);
-//                            } catch (NoSuchFieldException e) {
-//                                Logger.getLogger(CriteriaUtil.class.getName()).warning("Indicator field not found.");
-//                            } catch (IllegalAccessException e) {
-//                                Logger.getLogger(CriteriaUtil.class.getName()).warning("Indicator field cannot be set.");
-//                            }
-//                        }
-//                    });
-//            generateWeightIndicatorsForRequirementGroups(requirementGroup.getRequirementGroups());
-//        });
-//    }
-
     public static List<SelectableCriterion> generateUUIDs(@NotNull final List<SelectableCriterion> criteria) {
         Objects.requireNonNull(criteria);
         int i = 0;
