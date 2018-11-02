@@ -87,9 +87,9 @@ public enum ImportESPDRequestService implements ImportESPDService<ESPDRequest> {
         request.setCriterionList(criteriaService.getUnselectedCriteria(request.getFullCriterionList()));
         CriteriaUtil.generateUUIDs(request.getFullCriterionList());
         is.close();
-        request.setDocumentDetails(new DocumentDetails(artefactVersion.name(),
-                ArtefactUtils.findArtefactType(XML).name(),
-                qualificationApplicationType.name()));
+        request.setDocumentDetails(new DocumentDetails(artefactVersion,
+                ArtefactUtils.findArtefactType(XML),
+                qualificationApplicationType));
         return request;
     }
 }

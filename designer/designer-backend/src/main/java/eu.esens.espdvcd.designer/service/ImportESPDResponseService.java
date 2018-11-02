@@ -83,9 +83,9 @@ public enum ImportESPDResponseService implements ImportESPDService<ESPDResponse>
         Objects.requireNonNull(response);
         CriteriaUtil.generateUUIDs(response.getFullCriterionList());
         is.close();
-        response.setDocumentDetails(new DocumentDetails(artefactVersion.name(),
-                ArtefactUtils.findArtefactType(XML).name(),
-                qualificationApplicationType.name()));
+        response.setDocumentDetails(new DocumentDetails(artefactVersion,
+                ArtefactUtils.findArtefactType(XML),
+                qualificationApplicationType));
         return response;
     }
 }
