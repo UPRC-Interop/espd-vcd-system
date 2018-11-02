@@ -25,7 +25,7 @@ import spark.Service;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static spark.debug.DebugScreen.enableDebugScreen;
+//import static spark.debug.DebugScreen.enableDebugScreen;
 
 public class Server {
 
@@ -71,7 +71,7 @@ public class Server {
 
         dropTrailingSlashes(spark);
 
-        enableDebugScreen();
+//        enableDebugScreen();
 
         spark.notFound((request, response) -> JsonUtil.toJson(Errors.notFoundError("Endpoint not found.")));
 
