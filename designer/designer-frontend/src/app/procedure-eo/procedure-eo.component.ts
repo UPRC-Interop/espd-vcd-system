@@ -22,7 +22,6 @@ import {FormArray, FormControl, FormGroup, NgForm, Validators} from '@angular/fo
 import {EoRelatedCriterion} from '../model/eoRelatedCriterion.model';
 import {UtilitiesService} from '../services/utilities.service';
 import {UrlValidation} from "../validation/url/url-validation";
-import {InputValidationStateMatcher} from "../validation/input-validation-state-matcher/input-validation-state-matcher";
 
 @Component({
   selector: 'app-procedure-eo',
@@ -38,7 +37,6 @@ export class ProcedureEoComponent implements OnInit {
   countries: Country[] = null;
   procedureTypes: ProcedureType[] = null;
   eoRelatedCriteria: EoRelatedCriterion[] = null;
-  matcher = new InputValidationStateMatcher();
 
 
   constructor(public dataService: DataService, public utilities: UtilitiesService) {
