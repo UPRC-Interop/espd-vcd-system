@@ -17,6 +17,8 @@ package eu.esens.espdvcd.designer;
 
 import eu.esens.espdvcd.designer.endpoint.*;
 import eu.esens.espdvcd.designer.service.*;
+import eu.esens.espdvcd.designer.util.Errors;
+import eu.esens.espdvcd.designer.util.JsonUtil;
 import eu.esens.espdvcd.schema.EDMVersion;
 import spark.Service;
 
@@ -70,6 +72,8 @@ public class Server {
         dropTrailingSlashes(spark);
 
         enableDebugScreen();
+
+        spark.notFound((request, response) -> JsonUtil.toJson(Errors.notFoundError("Endpoint not found.")));
 
         LOGGER.info("Starting endpoint configuration");
 
