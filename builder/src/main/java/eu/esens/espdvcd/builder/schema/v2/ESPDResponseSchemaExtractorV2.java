@@ -55,9 +55,10 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
 
         if (modelResponse.getCADetails().getProcurementProcedureFileReferenceNo() != null) {
             qarType.setContractFolderID(createContractFolderIDType(modelResponse.getCADetails().getProcurementProcedureFileReferenceNo()));
-        } else {
-            qarType.setContractFolderID(createContractFolderIDType("PPID-test1"));
         }
+//        } else {
+//            qarType.setContractFolderID(createContractFolderIDType("PPID-test1"));
+//        }
 
         qarType.getAdditionalDocumentReference().add(extractCADetailsDocumentReference(modelResponse.getCADetails()));
 
