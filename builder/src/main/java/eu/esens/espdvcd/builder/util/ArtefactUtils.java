@@ -15,9 +15,9 @@
  */
 package eu.esens.espdvcd.builder.util;
 
-import eu.esens.espdvcd.builder.enums.ArtefactType;
 import eu.esens.espdvcd.codelist.enums.ProfileExecutionIDEnum;
 import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
+import eu.esens.espdvcd.codelist.enums.internal.ArtefactType;
 import eu.esens.espdvcd.schema.EDMVersion;
 
 import java.io.*;

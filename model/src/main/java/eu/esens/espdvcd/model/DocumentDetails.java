@@ -1,5 +1,9 @@
 package eu.esens.espdvcd.model;
 
+import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
+import eu.esens.espdvcd.codelist.enums.internal.ArtefactType;
+import eu.esens.espdvcd.schema.EDMVersion;
+
 import java.io.Serializable;
 
 public class DocumentDetails implements Serializable {
@@ -9,9 +13,9 @@ public class DocumentDetails implements Serializable {
      * Class that contains information about the ESPD document
      */
 
-    private final String version;
-    private final String artefactType;
-    private final String qualificationApplicationType;
+    private final EDMVersion version;
+    private final ArtefactType artefactType;
+    private final QualificationApplicationTypeEnum qualificationApplicationType;
 
     /**
      * Constructor for the DocumentDetails object
@@ -20,21 +24,21 @@ public class DocumentDetails implements Serializable {
      * @param type                         type of the ESPD (ArtefactType enum: ESPD_REQUEST, ESPD_RESPONSE)
      * @param qualificationApplicationType whether the ESPD is SELF_CONTAINED or REQULATED
      */
-    public DocumentDetails(String version, String type, String qualificationApplicationType) {
+    public DocumentDetails(EDMVersion version, ArtefactType type, QualificationApplicationTypeEnum qualificationApplicationType) {
         this.version = version;
         this.artefactType = type;
         this.qualificationApplicationType = qualificationApplicationType;
     }
 
-    public String getVersion() {
+    public EDMVersion getVersion() {
         return version;
     }
 
-    public String getType() {
+    public ArtefactType getType() {
         return artefactType;
     }
 
-    public String getQualificationApplicationType() {
+    public QualificationApplicationTypeEnum getQualificationApplicationType() {
         return qualificationApplicationType;
     }
 }

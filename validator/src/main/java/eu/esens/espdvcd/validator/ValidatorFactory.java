@@ -15,8 +15,8 @@
  */
 package eu.esens.espdvcd.validator;
 
-import eu.esens.espdvcd.builder.enums.ArtefactType;
 import eu.esens.espdvcd.builder.util.ArtefactUtils;
+import eu.esens.espdvcd.codelist.enums.internal.ArtefactType;
 import eu.esens.espdvcd.schema.EDMVersion;
 import eu.esens.espdvcd.schema.XSD;
 import eu.esens.espdvcd.schematron.SchematronV1;

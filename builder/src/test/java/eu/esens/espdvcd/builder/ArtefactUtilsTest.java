@@ -15,10 +15,10 @@
  */
 package eu.esens.espdvcd.builder;
 
-import eu.esens.espdvcd.builder.enums.ArtefactType;
 import eu.esens.espdvcd.builder.util.ArtefactUtils;
 import eu.esens.espdvcd.codelist.enums.ProfileExecutionIDEnum;
 import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
+import eu.esens.espdvcd.codelist.enums.internal.ArtefactType;
 import eu.esens.espdvcd.schema.EDMVersion;
 import org.junit.Assert;
 import org.junit.Before;
