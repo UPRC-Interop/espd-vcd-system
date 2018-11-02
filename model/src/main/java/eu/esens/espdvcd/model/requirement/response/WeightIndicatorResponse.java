@@ -20,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import eu.esens.espdvcd.codelist.enums.EvaluationMethodTypeEnum;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -51,7 +52,7 @@ public class WeightIndicatorResponse extends Response implements Serializable {
      * weight ccv:Criterion.WeightNumeric
      */
     private List<String> evaluationMethodDescriptionList;
-    private float weight;
+    private BigDecimal weight;
     private boolean indicator;
 
     public WeightIndicatorResponse() {
@@ -88,11 +89,11 @@ public class WeightIndicatorResponse extends Response implements Serializable {
         }
     }
 
-    public float getWeight() {
+    public BigDecimal getWeight() {
         return weight;
     }
 
-    public void setWeight(float weight) {
+    public void setWeight(BigDecimal weight) {
         this.weight = weight;
     }
 
