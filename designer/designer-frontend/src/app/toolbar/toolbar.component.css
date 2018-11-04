@@ -44,3 +44,16 @@ ul li a:active {
   background-color:white;
   color:#476065;
 }
+
+.logo {
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
+}
+
+.container {
+  height: 80px;
+  overflow: hidden;
+  resize: both;
+  width: 200px;
+}
