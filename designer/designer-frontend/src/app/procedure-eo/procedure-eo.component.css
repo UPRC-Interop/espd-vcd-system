@@ -32,7 +32,7 @@
 
 }
 .mat-expansion-panel-header {
-  background-color:#3F51B5;
+  background-color:#476065;
 }
 
 .mat-expansion-panel {
@@ -40,7 +40,7 @@
 }
 
 .mat.expansion-panel:hover{
-  background:#3F51B5;
+  background:#476065;
 }
 
 mat-card {
@@ -48,30 +48,30 @@ mat-card {
 }
 
 mat-expansion-panel-header:hover {
-  background-color:#3F51B5;
+  background-color:#476065;
 }
 mat-expansion-panel-header:focus {
-  background-color:#3F51B5;
+  background-color:#476065;
 }
 mat-expansion-panel-header:active {
-  background-color:#3F51B5;
+  background-color:#476065;
 }
 
 mat-panel-title, mat-panel-description {
   color:white;
 }
 mat-expansion-panel-header.mat-expanded {
-  background-color:#3F51B5;
+  background-color:#476065;
 }
 
 mat-expansion-panel-header.mat-expanded:hover {
-  background-color:#3F51B5;
+  background-color:#476065;
 }
 mat-expansion-panel-header.mat-expanded:focus {
-  background-color:#3F51B5;
+  background-color:#476065;
 }
 mat-expansion-panel-header.mat-expanded:active{
-  background-color:#3F51B5;
+  background-color:#476065;
 }
 
 button {
