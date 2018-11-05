@@ -59,6 +59,8 @@ public class Server {
         LOGGER.info("Attempting to bind to port " + portToBind);
         Service spark = Service.ignite().port(portToBind);
 
+        spark.staticFileLocation("/public");
+
         spark.initExceptionHandler(e -> {
             LOGGER.severe("Failed to ignite the Spark server");
             LOGGER.log(Level.SEVERE, e.getMessage(), e);
