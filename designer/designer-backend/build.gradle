@@ -51,12 +51,10 @@ run {
 }
 
 task copyWebAppResources(type: Exec){
-    doLast {
         copy {
             from "$webappDir/dist"
             into "$projectDir/src/main/resources/public"
         }
-    }
 }
 
 task npmInstallWebApp(type: Exec) {
