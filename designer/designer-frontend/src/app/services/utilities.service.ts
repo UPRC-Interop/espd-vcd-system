@@ -41,6 +41,7 @@ export class UtilitiesService {
   isGloballyWeighted = false;
   isDividedIntoLots = false;
   projectLots = [];
+  lotTemplate = [];
   // qualificationApplicationType = 'SELF-CONTAINED';
   // qualificationApplicationType = 'REGULATED';
 
@@ -101,7 +102,7 @@ export class UtilitiesService {
   }
 
   createLotListInCriterion(lots: MatListOption[]): string[] {
-    const reqLot = lots.map((lot, i) => {
+    const reqLot = lots.map(lot => {
       return lot.value;
     });
     return reqLot;

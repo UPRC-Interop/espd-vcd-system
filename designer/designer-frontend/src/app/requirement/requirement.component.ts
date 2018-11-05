@@ -14,8 +14,8 @@
 /// limitations under the License.
 ///
 
-import {Component, Input, Output, OnInit, EventEmitter, OnChanges, AfterViewInit, ViewChild, ViewChildren} from '@angular/core';
-import {FormArray, FormGroup} from '@angular/forms';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild} from '@angular/core';
+import {FormGroup} from '@angular/forms';
 import {Requirement} from '../model/requirement.model';
 import {DataService} from '../services/data.service';
 import {Country} from '../model/country.model';
@@ -23,7 +23,6 @@ import {Currency} from '../model/currency.model';
 import {ApicallService} from '../services/apicall.service';
 import {UtilitiesService} from '../services/utilities.service';
 import {EoIDType} from '../model/eoIDType.model';
-import {EvaluationMethodType} from '../model/evaluationMethodType.model';
 import {MatSelectionList} from '@angular/material';
 
 @Component({
@@ -37,6 +36,7 @@ export class RequirementComponent implements OnInit, OnChanges {
   @Input() form: FormGroup;
 
   @Output() indicatorChanged = new EventEmitter();
+  // @Output() lotsInReq = new EventEmitter();
 
   reqLots: string[] = [];
   countries: Country[] = null;
@@ -127,24 +127,15 @@ export class RequirementComponent implements OnInit, OnChanges {
           // this.indicatorChanged.emit(ev);
         });
     }
-
-    // if (this.lots !== undefined && this.lots.selectedOptions !== undefined && this.lots.selectedOptions.selected !== undefined) {
-    //
-    //   this.pushSelectedLot();
-    // }
-
   }
 
-  // createReqLot(index, lot) {
-  //   // console.log('THIS IS INDEX: ' + index + 'THIS IS LOT: ' + lot.value);
-  //   console.log(lot);
-  //   console.log(lot.value);
-  //   return lot.value;
-  // }
 
   pushSelectedLot() {
     if (this.lots.selectedOptions.selected !== undefined) {
-      this.reqLots = this.utilities.createLotListInCriterion(this.lots.selectedOptions.selected);
+      this.utilities.lotTemplate[this.req.uuid] = this.utilities.createLotListInCriterion(this.lots.selectedOptions.selected);
+      console.log(this.utilities.lotTemplate);
+      // console.log(this.utilities.lotTemplate['270317fa-6790-42ec-8f1a-575d82ed1d63-27']);
+      // this.reqLots = this.utilities.createLotListInCriterion(this.lots.selectedOptions.selected);
       // console.log(this.reqLots);
     }
   }

@@ -257,12 +257,9 @@ export class FormUtilService {
               if (formValues[req.uuid.valueOf()] === '' && formValues[currencyid.valueOf()] === null) {
                 req.response = null;
               } else {
-                console.log('SETTING AMOUNT....');
                 req.response.amount = formValues[req.uuid.valueOf()];
                 // console.log(formValues[currencyid.valueOf()]);
                 req.response.currency = formValues[currencyid.valueOf()];
-                console.log(req.response.amount);
-                console.log(req.response.currency);
                 req.response.uuid = null;
               }
             } else if (req.responseDataType === 'QUANTITY_INTEGER') {
@@ -300,6 +297,8 @@ export class FormUtilService {
               const eoidtypeID = req.uuid + 'eoidtype';
               req.response.eoidtype = formValues[eoidtypeID.valueOf()];
               req.response.uuid = null;
+            } else if (req.responseDataType === 'LOTS_IDENTIFIER') {
+              req.response.lots = this.utilities.lotTemplate[req.uuid];
             }
           }
         });
@@ -541,15 +540,9 @@ export class FormUtilService {
             }
 
             /* SELF-CONTAINED: LOTS_IDENTIFIER */
-            if (r.responseDataType === 'LOTS_IDENTIFIER') {
-
-              const controls = this.utilities.projectLots.map(c => new FormControl(false));
-
-              group[r.uuid] = new FormArray(controls);
-              // group[r.uuid] = new FormGroup({
-              //   'lots': new FormArray(controls)
-              // });
-            }
+            // if (r.responseDataType === 'LOTS_IDENTIFIER') {
+            //   /* */
+            // }
 
             if (r.response.date) {
               if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
