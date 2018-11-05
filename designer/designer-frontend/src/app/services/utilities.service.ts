@@ -18,6 +18,7 @@ import {Injectable} from '@angular/core';
 import {Moment} from 'moment';
 import * as moment from 'moment';
 import {SelectionCriteria} from '../model/selectionCriteria.model';
+import {MatListOption} from '@angular/material';
 
 @Injectable({
   providedIn: 'root'
@@ -97,6 +98,14 @@ export class UtilitiesService {
     console.log(projectLotsList);
 
     return projectLotsList;
+  }
+
+  createLotListInCriterion(lots: MatListOption[]): string[] {
+    const reqLot = lots.map((lot, i) => {
+      return lot.value;
+    });
+    return reqLot;
+    // console.log(reqLot);
   }
 
 

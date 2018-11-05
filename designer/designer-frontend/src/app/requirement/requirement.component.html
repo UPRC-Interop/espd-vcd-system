@@ -210,12 +210,14 @@
       <!--</div>-->
 
       <mat-selection-list #lots>
-        <mat-list-option *ngFor="let lot of this.utilities.projectLots" [value]="lot">
+        <mat-list-option *ngFor="let lot of this.utilities.projectLots" [value]="lot"
+                         (click)="pushSelectedLot()">
           {{lot}}
         </mat-list-option>
       </mat-selection-list>
       <p>SELECTED lots:</p>
       <div *ngFor="let lt of lots.selectedOptions.selected" #selectedLots>
+        <!--{{pushSelectedLot()}}-->
         {{lt.value}}
       </div>
       <!--<mat-form-field>-->

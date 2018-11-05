@@ -38,12 +38,14 @@ export class RequirementComponent implements OnInit, OnChanges {
 
   @Output() indicatorChanged = new EventEmitter();
 
+  reqLots: string[] = [];
   countries: Country[] = null;
   currency: Currency[] = null;
   eoIDTypes: EoIDType[] = null;
   // evaluationMethodTypes: EvaluationMethodType[] = null;
   isWeighted = false;
-  @ViewChildren('lots') lots: MatSelectionList;
+
+  @ViewChild('lots') lots: MatSelectionList;
 
   constructor(public dataService: DataService, public APIService: ApicallService, public utilities: UtilitiesService) {
   }
@@ -57,9 +59,9 @@ export class RequirementComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    if (this.lots !== undefined) {
-      console.log(typeof this.lots);
-    }
+    // if (this.lots !== undefined) {
+    //   console.log(this.lots);
+    // }
 
     this.dataService.getCountries()
       .then(res => {
@@ -126,11 +128,25 @@ export class RequirementComponent implements OnInit, OnChanges {
         });
     }
 
+    // if (this.lots !== undefined && this.lots.selectedOptions !== undefined && this.lots.selectedOptions.selected !== undefined) {
+    //
+    //   this.pushSelectedLot();
+    // }
+
   }
 
-  getLotFormData(id: string) {
-    return <FormArray>this.form.controls[id];
-  }
+  // createReqLot(index, lot) {
+  //   // console.log('THIS IS INDEX: ' + index + 'THIS IS LOT: ' + lot.value);
+  //   console.log(lot);
+  //   console.log(lot.value);
+  //   return lot.value;
+  // }
 
+  pushSelectedLot() {
+    if (this.lots.selectedOptions.selected !== undefined) {
+      this.reqLots = this.utilities.createLotListInCriterion(this.lots.selectedOptions.selected);
+      // console.log(this.reqLots);
+    }
+  }
 
 }
