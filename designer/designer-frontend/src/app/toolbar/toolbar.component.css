@@ -51,9 +51,12 @@ ul li a:active {
   width: 100%;
 }
 
+/*.mat-toolbar-row {*/
+  /*overflow: hidden;*/
+/*}*/
+
 .container {
-  height: 80px;
+  height: 55px;
   overflow: hidden;
-  resize: both;
   width: 200px;
 }
