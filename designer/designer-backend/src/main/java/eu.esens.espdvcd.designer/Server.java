@@ -25,8 +25,6 @@ import spark.Service;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-//import static spark.debug.DebugScreen.enableDebugScreen;
-
 public class Server {
 
     private final static Logger LOGGER = Logger.getLogger(Server.class.getName());
@@ -71,9 +69,11 @@ public class Server {
 
         dropTrailingSlashes(spark);
 
-//        enableDebugScreen();
-
         spark.notFound((request, response) -> JsonUtil.toJson(Errors.notFoundError("Endpoint not found.")));
+
+        spark.internalServerError((request, response) -> JsonUtil.toJson(Errors.standardError(
+                500,
+                "An internal error has occured. Please check your inputs. If this keeps happening, contact the server administrator.")));
 
         LOGGER.info("Starting endpoint configuration");
 
