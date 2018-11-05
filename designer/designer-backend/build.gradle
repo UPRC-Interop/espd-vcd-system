@@ -30,7 +30,7 @@ dependencies {
 }
 
 jar {
-    dependsOn "buildWebApp"
+    dependsOn "copyWebAppResources"
 
     manifest {
         attributes "Main-Class": "eu.esens.espdvcd.designer.Server"
@@ -48,6 +48,15 @@ jar {
 
 run {
     dependsOn "buildWebApp"
+}
+
+task copyWebAppResources(type: Exec){
+    doLast {
+        copy {
+            from "$webappDir/dist"
+            into "$projectDir/src/main/resources/public"
+        }
+    }
 }
 
 task npmInstallWebApp(type: Exec) {

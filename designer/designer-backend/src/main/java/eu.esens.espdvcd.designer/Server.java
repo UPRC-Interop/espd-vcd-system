@@ -51,9 +51,9 @@ public class Server {
                 LOGGER.severe("Invalid port argument");
                 System.exit(1);
             }
-            if (args.length > 1) {
-                initialPath = args[1];
-            }
+//            if (args.length > 1) {
+//                initialPath = args[1];
+//            }
         }
 
         LOGGER.info("Attempting to bind to port " + portToBind);
