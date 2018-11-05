@@ -1,5 +1,5 @@
 FROM java:8-alpine
-ARG baseHREF=""
+ARG baseHREF
 
 WORKDIR /designer
 
