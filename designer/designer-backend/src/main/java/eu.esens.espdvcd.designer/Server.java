@@ -25,8 +25,6 @@ import spark.Service;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static spark.debug.DebugScreen.enableDebugScreen;
-
 public class Server {
 
     private final static Logger LOGGER = Logger.getLogger(Server.class.getName());
@@ -53,13 +51,14 @@ public class Server {
                 LOGGER.severe("Invalid port argument");
                 System.exit(1);
             }
-            if (args.length > 1) {
-                initialPath = args[1];
-            }
+//            if (args.length > 1) {
+//                initialPath = args[1];
+//            }
         }
 
         LOGGER.info("Attempting to bind to port " + portToBind);
         Service spark = Service.ignite().port(portToBind);
+        spark.staticFiles.location("/public");
 
         spark.initExceptionHandler(e -> {
             LOGGER.severe("Failed to ignite the Spark server");
@@ -71,9 +70,11 @@ public class Server {
 
         dropTrailingSlashes(spark);
 
-        enableDebugScreen();
-
         spark.notFound((request, response) -> JsonUtil.toJson(Errors.notFoundError("Endpoint not found.")));
+
+        spark.internalServerError((request, response) -> JsonUtil.toJson(Errors.standardError(
+                500,
+                "An internal error has occured. Please check your inputs. If this keeps happening, contact the server administrator.")));
 
         LOGGER.info("Starting endpoint configuration");
 

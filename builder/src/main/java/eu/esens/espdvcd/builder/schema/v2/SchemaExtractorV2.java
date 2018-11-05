@@ -625,12 +625,13 @@ public interface SchemaExtractorV2 {
         return codeType;
     }
 
-    default WeightNumericType createWeightNumericType(float weight) {
+    default WeightNumericType createWeightNumericType(BigDecimal weight) {
         WeightNumericType numericType = new WeightNumericType();
         String theWeight = String.valueOf(weight);
         int integerPlaces = theWeight.indexOf(".");
-        numericType.setValue(new BigDecimal(weight)
-                .setScale(theWeight.length() - integerPlaces - 1, BigDecimal.ROUND_HALF_UP));
+//        numericType.setValue(new BigDecimal(weight)
+//                .setScale(theWeight.length() - integerPlaces - 1, BigDecimal.ROUND_HALF_UP));
+        numericType.setValue(weight);
         return numericType;
     }
 

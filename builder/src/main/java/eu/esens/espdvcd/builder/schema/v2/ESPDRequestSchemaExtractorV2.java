@@ -16,7 +16,6 @@
 package eu.esens.espdvcd.builder.schema.v2;
 
 import eu.esens.espdvcd.codelist.enums.ProfileExecutionIDEnum;
-import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.requirement.Requirement;
@@ -91,10 +90,18 @@ public class ESPDRequestSchemaExtractorV2 implements SchemaExtractorV2 {
         qarType.setCustomizationID(createCENBIICustomizationIdType("urn:www.cenbii.eu:transaction:biitrdm070:ver3.0"));
         // FIXME: version id should be updated here
         qarType.setVersionID(createVersionIDType("2018.01.01"));
-        qarType.setProfileExecutionID(createProfileExecutionIDType(ProfileExecutionIDEnum.ESPD_EDM_V2_0_2_REGULATED));
 
-        qarType.setQualificationApplicationTypeCode(createQualificationApplicationTypeCodeType(QualificationApplicationTypeEnum.REGULATED));
-
+        if (modelRequest.getDocumentDetails() != null) {
+            switch (modelRequest.getDocumentDetails().getQualificationApplicationType()) {
+                case REGULATED:
+                    qarType.setProfileExecutionID(createProfileExecutionIDType(ProfileExecutionIDEnum.ESPD_EDM_V2_0_2_REGULATED));
+                    break;
+                case SELFCONTAINED:
+                    qarType.setProfileExecutionID(createProfileExecutionIDType(ProfileExecutionIDEnum.ESPD_EDM_V2_0_2_SELFCONTAINED));
+                    break;
+            }
+            qarType.setQualificationApplicationTypeCode(createQualificationApplicationTypeCodeType(modelRequest.getDocumentDetails().getQualificationApplicationType()));
+        }
         // Procurement Project Lot is always 0 in Request and not part of the UI
         ProcurementProjectLotType pplt = new ProcurementProjectLotType();
         pplt.setID(new IDType());

@@ -1,12 +1,12 @@
 /**
  * Copyright 2016-2018 University of Piraeus Research Center
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -51,8 +51,6 @@ public enum ImportESPDResponseService implements ImportESPDService<ESPDResponse>
 
         if (Objects.isNull(artefactVersion))
             throw new ValidationException("Cannot determine artefact version.");
-        if (qualificationApplicationType.equals(QualificationApplicationTypeEnum.UNKNOWN))
-            throw new ValidationException("Cannot determine artefact type.");
 
         ArtefactValidator schemaResult = schemaValidationService.validateESPDFile(XML);
         ArtefactValidator schematronResult = schematronValidationService.validateESPDFile(XML);
@@ -75,17 +73,15 @@ public enum ImportESPDResponseService implements ImportESPDService<ESPDResponse>
                         break;
                     case SELFCONTAINED:
                         response = BuilderFactory.EDM_V2.createSelfContainedModelBuilder().importFrom(is).createESPDResponse();
-//                        CriteriaUtil.generateWeightIndicators(response.getFullCriterionList());
                         break;
                 }
                 break;
         }
-        Objects.requireNonNull(response);
         CriteriaUtil.generateUUIDs(response.getFullCriterionList());
         is.close();
-        response.setDocumentDetails(new DocumentDetails(artefactVersion.name(),
-                ArtefactUtils.findArtefactType(XML).name(),
-                qualificationApplicationType.name()));
+        response.setDocumentDetails(new DocumentDetails(artefactVersion,
+                ArtefactUtils.findArtefactType(XML),
+                qualificationApplicationType));
         return response;
     }
 }

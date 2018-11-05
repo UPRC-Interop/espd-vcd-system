@@ -78,7 +78,6 @@ public enum ImportESPDRequestService implements ImportESPDService<ESPDRequest> {
                     case SELFCONTAINED:
                         criteriaService = SelfContainedCriteriaService.getInstance();
                         request = BuilderFactory.EDM_V2.createSelfContainedModelBuilder().importFrom(is).createESPDRequest();
-//                        CriteriaUtil.generateWeightIndicators(request.getFullCriterionList());
                         break;
                 }
                 break;
@@ -87,9 +86,9 @@ public enum ImportESPDRequestService implements ImportESPDService<ESPDRequest> {
         request.setCriterionList(criteriaService.getUnselectedCriteria(request.getFullCriterionList()));
         CriteriaUtil.generateUUIDs(request.getFullCriterionList());
         is.close();
-        request.setDocumentDetails(new DocumentDetails(artefactVersion.name(),
-                ArtefactUtils.findArtefactType(XML).name(),
-                qualificationApplicationType.name()));
+        request.setDocumentDetails(new DocumentDetails(artefactVersion,
+                ArtefactUtils.findArtefactType(XML),
+                qualificationApplicationType));
         return request;
     }
 }
