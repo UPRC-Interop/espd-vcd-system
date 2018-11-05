@@ -88,6 +88,7 @@ export class ProcedureComponent implements OnInit, OnChanges {
           // console.log(this.utilities.isDividedIntoLots);
         } else {
           this.utilities.isDividedIntoLots = true;
+          this.utilities.projectLots = this.utilities.createLotList(x.procurementProjectLots);
           // console.log(this.utilities.isDividedIntoLots);
         }
       }
