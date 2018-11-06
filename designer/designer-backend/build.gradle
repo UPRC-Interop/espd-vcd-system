@@ -48,6 +48,7 @@ jar {
 
 run {
     dependsOn "buildWebApp"
+    dependsOn "copyWebAppResources"
 }
 
 task copyWebAppResources{
