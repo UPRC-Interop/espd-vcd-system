@@ -523,6 +523,9 @@ export class DataService {
     if (filesToUpload.length > 0 && role === 'CA') {
       this.APIService.postFile(filesToUpload)
         .then(res => {
+          /* DUMMY ESPD for testing */
+          // res = this.utilities.makeDummyESPDRequest();
+          // console.log(res);
           console.log('REUSE EPSD');
           this.APIService.version = res.documentDetails.version.toLowerCase();
           /* SELF-CONTAINED: if a self-contained artifact is imported then the version is v2 */

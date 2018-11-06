@@ -188,6 +188,7 @@ export class ApicallService {
     // const header = new HttpHeaders({'Content-Type':'application/xml; charset=utf-8'});
     let header = new HttpHeaders();
     header = header.set('Content-Type', 'application/xml; charset=utf-8');
+    // return this.http.post<ESPDRequest>(environment.apiUrl + '/importESPD/request', formData).toPromise();
     return this.http.post<ESPDRequest>(environment.apiUrl + '/importESPD/request', formData).toPromise();
 
   }
