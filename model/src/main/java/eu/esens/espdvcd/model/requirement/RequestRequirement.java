@@ -86,6 +86,8 @@ public class RequestRequirement implements Requirement {
 
     private boolean multiple;
 
+    private String responseValuesRelatedArtefact;
+
     public RequestRequirement(@JsonProperty("ID") String ID,
                               @JsonProperty("responseDataType") ResponseTypeEnum responseDataType,
                               @JsonProperty("description") String description) {
@@ -188,6 +190,16 @@ public class RequestRequirement implements Requirement {
     @Override
     public boolean isMultiple() {
         return multiple;
+    }
+
+    @Override
+    public String getResponseValuesRelatedArtefact() {
+        return responseValuesRelatedArtefact;
+    }
+
+    @Override
+    public void setResponseValuesRelatedArtefact(String responseValuesRelatedArtefact) {
+        this.responseValuesRelatedArtefact = responseValuesRelatedArtefact;
     }
 
 }

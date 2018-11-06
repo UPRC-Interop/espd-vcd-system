@@ -75,4 +75,8 @@ public interface Requirement extends Serializable {
 
     boolean isMultiple();
 
+    String getResponseValuesRelatedArtefact();
+
+    void setResponseValuesRelatedArtefact(String responseValuesRelatedArtefact);
+
 }
