@@ -116,7 +116,6 @@ public class ImportESPDServiceTest {
         Assert.assertNotNull(response);
     }
 
-    @Ignore
     @Test
     public void requestSelfContainedImport() throws Exception {
         ESPDRequest request = ImportESPDRequestService.getInstance().importESPDFile(new File(this.getClass().getClassLoader().getResource("SELFCONTAINED-ESPD-Request_2.0.2_weights.xml").toURI()));
