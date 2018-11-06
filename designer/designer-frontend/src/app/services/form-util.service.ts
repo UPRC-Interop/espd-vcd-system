@@ -608,18 +608,21 @@ export class FormUtilService {
               // console.log(evi);
               // console.log(typeof evi);
 
-              group[r.uuid + 'evidenceUrl'] = new FormControl({
-                value: evi.evidenceURL,
-                disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
-              });
-              group[r.uuid + 'evidenceCode'] = new FormControl({
-                value: evi.description,
-                disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
-              });
-              group[r.uuid + 'evidenceIssuer'] = new FormControl({
-                value: evi.evidenceIssuer.name,
-                disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
-              });
+              /* FIX: self-contained cannot set evidenceURL of undefined issue */
+              if (evi !== undefined) {
+                group[r.uuid + 'evidenceUrl'] = new FormControl({
+                  value: evi.evidenceURL,
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
+                group[r.uuid + 'evidenceCode'] = new FormControl({
+                  value: evi.description,
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
+                group[r.uuid + 'evidenceIssuer'] = new FormControl({
+                  value: evi.evidenceIssuer.name,
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
+              }
 
               if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
                 group[r.uuid + 'evidenceUrl'] = new FormControl({
