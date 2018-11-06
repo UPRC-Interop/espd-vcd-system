@@ -797,6 +797,11 @@ export class DataService {
       'name': this.EODetails.name,
       'smeIndicator': this.EODetails.smeIndicator,
       'eoRole': this.EODetails.eoRole,
+      'employeeQuantity': this.EODetails.employeeQuantity,
+      'generalTurnover': {
+        'amount': this.EODetails.generalTurnover.amount,
+        'currency': this.EODetails.generalTurnover.currency
+      },
       'postalAddress': {
         'addressLine1': this.EODetails.postalAddress.addressLine1,
         'postCode': this.EODetails.postalAddress.postCode,

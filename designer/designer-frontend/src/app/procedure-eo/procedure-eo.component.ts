@@ -30,6 +30,7 @@ import {FormUtilService} from '../services/form-util.service';
 import {UtilitiesService} from '../services/utilities.service';
 import {ProjectType} from '../model/projectType.model';
 import {EoRoleType} from '../model/eoRoleType.model';
+import {Currency} from '../model/currency.model';
 
 @Component({
   selector: 'app-procedure-eo',
@@ -42,6 +43,7 @@ export class ProcedureEoComponent implements OnInit {
   public EOForm: FormGroup;
 
   countries: Country[] = null;
+  currency: Currency[] = null;
   procedureTypes: ProcedureType[] = null;
   projectTypes: ProjectType[] = null;
   eoRoleTypes: EoRoleType[] = null;
@@ -51,7 +53,12 @@ export class ProcedureEoComponent implements OnInit {
     this.EOForm = new FormGroup({
       'name': new FormControl(this.dataService.EODetails.name),
       'smeIndicator': new FormControl(false),
+      'employeeQuantity': new FormControl(),
       'eoRole': new FormControl(),
+      'generalTurnover': new FormGroup({
+        'amount': new FormControl(),
+        'currency': new FormControl()
+      }),
       'postalAddress': new FormGroup({
         'addressLine1': new FormControl(),
         'postCode': new FormControl(),
@@ -119,6 +126,15 @@ export class ProcedureEoComponent implements OnInit {
         console.log(err);
       }
     );
+
+    this.dataService.getCurrency()
+      .then(res => {
+        this.currency = res;
+        // console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
 
