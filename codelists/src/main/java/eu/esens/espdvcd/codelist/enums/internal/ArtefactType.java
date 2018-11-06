@@ -17,6 +17,6 @@ package eu.esens.espdvcd.codelist.enums.internal;
 
 public enum ArtefactType {
 
-    ESPD_REQUEST, ESPD_RESPONSE, UNKNOWN
+    ESPD_REQUEST, ESPD_RESPONSE
 
 }

@@ -1,12 +1,12 @@
 /**
  * Copyright 2016-2018 University of Piraeus Research Center
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -69,7 +69,11 @@ public class ImportESPDEndpoint extends Endpoint {
         if (Objects.nonNull(rq.contentType())) {
             String LOGGER_DOCUMENT_ERROR = "Error occurred in ESPDEndpoint while converting an XML response to an object. ";
             if (rq.contentType().contains("multipart/form-data")) {
-                MultipartConfigElement multipartConfigElement = new MultipartConfigElement("file-uploads", 1024 * 1024 * 2, 1024 * 1024 * 3, 0);
+                MultipartConfigElement multipartConfigElement = new MultipartConfigElement(
+                        "file-uploads",
+                        1024 * 1024 * 2,
+                        1024 * 1024 * 3,
+                        0);
                 rq.raw().setAttribute("org.eclipse.jetty.multipartConfig", multipartConfigElement);
                 Collection<Part> parts = rq.raw().getParts();
                 if (parts.iterator().hasNext()) {
@@ -77,11 +81,9 @@ public class ImportESPDEndpoint extends Endpoint {
                     File tempFile = File.createTempFile("espd-file", ".tmp");
                     tempFile.deleteOnExit();
 
-                    try (InputStream input = part.getInputStream()) {
-                        FileOutputStream out = new FileOutputStream(tempFile);
+                    try (InputStream input = part.getInputStream();
+                         FileOutputStream out = new FileOutputStream(tempFile)) {
                         IOUtils.copy(input, out);
-                        out.close();
-                        out.flush();
                     } catch (IOException e) {
                         LOGGER.severe(LOGGER_DOCUMENT_ERROR + e.getMessage());
                         rsp.status(500);
@@ -93,11 +95,10 @@ public class ImportESPDEndpoint extends Endpoint {
                         LOGGER.severe(LOGGER_DOCUMENT_ERROR + e.getMessage());
                         rsp.status(406);
                         return Errors.notAcceptableError(e.getMessage());
-                    } catch (ValidationException e) {
+                    } catch (ValidationException | IllegalStateException e) {
                         LOGGER.severe(e.getMessage());
                         rsp.status(406);
-                        return Errors.objectError(406, e.getMessage(), e.getResults());
-
+                        return Errors.standardError(406, e.getMessage());
                     }
 //                finally {
 //                     Files.deleteIfExists(tempFile.toPath());
@@ -118,10 +119,10 @@ public class ImportESPDEndpoint extends Endpoint {
                     LOGGER.severe(LOGGER_DOCUMENT_ERROR + e.getMessage());
                     rsp.status(406);
                     return Errors.notAcceptableError(e.getMessage());
-                } catch (ValidationException e) {
+                } catch (ValidationException | IllegalStateException e) {
                     LOGGER.severe(e.getMessage());
                     rsp.status(406);
-                    return Errors.objectError(406, e.getMessage(), e.getResults());
+                    return Errors.standardError(406, e.getMessage());
                 } finally {
                     Files.deleteIfExists(tempFile);
                 }

@@ -30,7 +30,8 @@ import {
   MatGridListModule,
   MatDatepickerModule,
   MatSnackBarModule,
-  MatChipsModule
+  MatChipsModule,
+  MatListModule
 } from '@angular/material';
 import {MatMomentDateModule} from '@angular/material-moment-adapter';
 
@@ -51,11 +52,12 @@ import {MatMomentDateModule} from '@angular/material-moment-adapter';
     MatDatepickerModule,
     MatMomentDateModule,
     MatSnackBarModule,
-    MatChipsModule
+    MatChipsModule,
+    MatListModule
   ],
   exports: [MatButtonModule, MatToolbarModule, MatIconModule, MatStepperModule, MatCardModule, MatRadioModule, MatInputModule,
     MatSelectModule, MatExpansionModule, MatCheckboxModule, MatGridListModule, MatDatepickerModule, MatMomentDateModule,
-    MatSnackBarModule, MatChipsModule],
+    MatSnackBarModule, MatChipsModule, MatListModule],
   declarations: []
 })
 export class MaterialModule {

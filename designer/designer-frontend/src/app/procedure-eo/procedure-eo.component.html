@@ -131,7 +131,7 @@
                [disabled]="this.dataService.isReadOnly()">
       </mat-form-field>
       <!-- SELF-CONTAINED: Type of Procedure -->
-      <div *ngIf="utilities.qualificationApplicationType === 'self-contained'">
+      <div *ngIf="utilities.qualificationApplicationType === 'selfcontained'">
         <mat-form-field>
           <mat-select placeholder="Type of Procedure" name="typeOfProcedure"
                       [(ngModel)]="dataService.CADetails.procurementProcedureType">

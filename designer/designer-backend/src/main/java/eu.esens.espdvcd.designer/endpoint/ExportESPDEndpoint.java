@@ -15,6 +15,7 @@
  */
 package eu.esens.espdvcd.designer.endpoint;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import eu.esens.espdvcd.designer.deserialiser.RequirementDeserialiser;
 import eu.esens.espdvcd.designer.exception.ValidationException;
@@ -68,7 +69,7 @@ public class ExportESPDEndpoint extends Endpoint {
         });
     }
 
-    private Object handleESPDRequest(Request rq, Response rsp) {
+    private Object handleESPDRequest(Request rq, Response rsp) throws JsonProcessingException {
         if (rq.contentType().contains("application/json")) {
             ESPDRequest document;
             try {
@@ -78,7 +79,7 @@ public class ExportESPDEndpoint extends Endpoint {
                 LOGGER.severe(LOGGER_DESERIALIZATION_ERROR + e.getMessage());
                 e.printStackTrace();
                 rsp.header("Content-Type", "application/json");
-                return Errors.artefactDeserialisationError(e.getMessage());
+                return JsonUtil.toJson(Errors.artefactDeserialisationError(e.getMessage()));
             }
             rsp.header("Content-Type", "application/octet-stream");
             rsp.header("Content-Disposition", "attachment; filename=\"espd-request.xml\";");
@@ -89,17 +90,17 @@ public class ExportESPDEndpoint extends Endpoint {
                 LOGGER.severe(e.getMessage());
                 rsp.status(406);
                 rsp.header("Content-Type", "application/json");
-                return Errors.notAcceptableError(e.getMessage());
+                return JsonUtil.toJson(Errors.notAcceptableError(e.getMessage()));
             }
         } else {
             LOGGER.severe("Got unexpected content-type: " + rq.contentType());
             rsp.status(406);
             rsp.header("Content-Type", "application/json");
-            return Errors.unacceptableContentType();
+            return JsonUtil.toJson(Errors.unacceptableContentType());
         }
     }
 
-    private Object handleESPDResponse(Request rq, Response rsp) {
+    private Object handleESPDResponse(Request rq, Response rsp) throws JsonProcessingException {
         if (rq.contentType().contains("application/json")) {
             ESPDResponse document;
             try {
@@ -108,8 +109,7 @@ public class ExportESPDEndpoint extends Endpoint {
                 rsp.status(400);
                 rsp.header("Content-Type", "application/json");
                 LOGGER.severe(LOGGER_DESERIALIZATION_ERROR + e.getMessage());
-                e.printStackTrace();
-                return Errors.artefactDeserialisationError(e.getMessage());
+                return JsonUtil.toJson(Errors.artefactDeserialisationError(e.getMessage()));
             }
             rsp.header("Content-Type", "application/octet-stream");
             rsp.header("Content-Disposition", "attachment; filename=\"espd-response.xml\";");
@@ -119,13 +119,13 @@ public class ExportESPDEndpoint extends Endpoint {
                 LOGGER.severe(e.getMessage());
                 rsp.status(406);
                 rsp.header("Content-Type", "application/json");
-                return Errors.notAcceptableError(e.getMessage());
+                return JsonUtil.toJson(Errors.notAcceptableError(e.getMessage()));
             }
         } else {
             LOGGER.severe("Got unexpected content-type: " + rq.contentType());
             rsp.status(406);
             rsp.header("Content-Type", "application/json");
-            return Errors.unacceptableContentType();
+            return JsonUtil.toJson(Errors.unacceptableContentType());
         }
     }
 }

@@ -201,6 +201,15 @@
         </mat-select>
       </mat-form-field>
     </div>
+    <!-- SELF-CONTAINED: LOTS_IDENTIFIER -->
+    <div class="lots_identifier" *ngSwitchCase="'LOTS_IDENTIFIER'">
+      <mat-selection-list #lots>
+        <mat-list-option *ngFor="let lot of this.utilities.projectLots" [value]="lot"
+                         (click)="pushSelectedLot()">
+          {{lot}}
+        </mat-list-option>
+      </mat-selection-list>
+    </div>
 
 
   </div>
