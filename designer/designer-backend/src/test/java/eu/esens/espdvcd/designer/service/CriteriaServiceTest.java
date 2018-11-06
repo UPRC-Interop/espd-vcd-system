@@ -32,6 +32,7 @@ import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import eu.esens.espdvcd.schema.EDMVersion;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
@@ -72,11 +73,13 @@ public class CriteriaServiceTest {
         criteriaExtractorV2 = new RegulatedCriteriaExtractorBuilder(EDMVersion.V2).build();
     }
 
+    @Ignore
     @Test
     public void testV1Criteria() throws RetrieverException {
         Assert.assertArrayEquals(predefinedCriteriaServiceV1.getCriteria().toArray(), criteriaExtractorV1.getFullList().toArray());
     }
 
+    @Ignore
     @Test
     public void testV2Criteria() throws RetrieverException {
         Assert.assertArrayEquals(predefinedCriteriaServiceV2.getCriteria().toArray(), criteriaExtractorV2.getFullList().toArray());
