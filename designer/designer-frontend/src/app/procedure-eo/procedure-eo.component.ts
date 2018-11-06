@@ -29,6 +29,7 @@ import {EvidenceIssuer} from '../model/evidenceIssuer.model';
 import {FormUtilService} from '../services/form-util.service';
 import {UtilitiesService} from '../services/utilities.service';
 import {ProjectType} from '../model/projectType.model';
+import {EoRoleType} from '../model/eoRoleType.model';
 
 @Component({
   selector: 'app-procedure-eo',
@@ -39,18 +40,18 @@ export class ProcedureEoComponent implements OnInit {
 
 
   public EOForm: FormGroup;
-  test = true;
 
   countries: Country[] = null;
   procedureTypes: ProcedureType[] = null;
   projectTypes: ProjectType[] = null;
-  eoRelatedCriteria: EoRelatedCriterion[] = null;
+  eoRoleTypes: EoRoleType[] = null;
 
 
   constructor(public dataService: DataService, public utilities: UtilitiesService) {
     this.EOForm = new FormGroup({
       'name': new FormControl(this.dataService.EODetails.name),
       'smeIndicator': new FormControl(false),
+      'eoRole': new FormControl(),
       'postalAddress': new FormGroup({
         'addressLine1': new FormControl(),
         'postCode': new FormControl(),
@@ -109,6 +110,15 @@ export class ProcedureEoComponent implements OnInit {
       .catch(err => {
         console.log(err);
       });
+
+    this.dataService.getEORoleTypes()
+      .then(res => {
+        this.eoRoleTypes = res;
+      })
+      .catch(err => {
+        console.log(err);
+      }
+    );
   }
 
 

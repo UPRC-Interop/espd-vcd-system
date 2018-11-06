@@ -184,9 +184,21 @@
                 </mat-select>
               </mat-form-field>
             </div>
-            <mat-form-field class="eoField">
-              <input matInput placeholder="{{'espd.part2.lots.concerned' | translate}}" formControlName="procurementProjectLot">
-            </mat-form-field>
+            <div *ngIf="this.utilities.qualificationApplicationType === 'regulated'">
+              <mat-form-field class="eoField">
+                <input matInput placeholder="{{'espd.part2.lots.concerned' | translate}}" formControlName="procurementProjectLot">
+              </mat-form-field>
+            </div>
+            <div *ngIf="this.utilities.qualificationApplicationType === 'selfcontained'">
+              <mat-form-field class="eoField">
+                <mat-select formControlName="eoRole"
+                            placeholder="Role: ">
+                  <mat-option>None</mat-option>
+                  <mat-option *ngFor="let role of eoRoleTypes" [value]="role.code">{{role.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
 
           </div>
 

@@ -796,6 +796,7 @@ export class DataService {
     this.EOForm.patchValue({
       'name': this.EODetails.name,
       'smeIndicator': this.EODetails.smeIndicator,
+      'eoRole': this.EODetails.eoRole,
       'postalAddress': {
         'addressLine1': this.EODetails.postalAddress.addressLine1,
         'postCode': this.EODetails.postalAddress.postCode,
