@@ -45,6 +45,7 @@ import {CaRelatedCriterion} from '../model/caRelatedCriterion.model';
 import {ProjectType} from '../model/projectType.model';
 import {BidType} from '../model/bidType.model';
 import {WeightingType} from '../model/weightingType.model';
+import {DocumentDetails} from '../model/documentDetails.model';
 
 @Injectable()
 export class DataService {
@@ -113,6 +114,7 @@ export class DataService {
   EODetails: EoDetails = new EoDetails();
   PostalAddress: PostalAddress = new PostalAddress();
   ContactingDetails: ContactingDetails = new ContactingDetails();
+  documentDetails: DocumentDetails = new DocumentDetails();
   espdRequest: ESPDRequest;
   espdResponse: ESPDResponse;
   version: string;
@@ -326,8 +328,12 @@ export class DataService {
   /* ================================= create ESPDRequest Object =======================*/
 
   createESPDRequest(): ESPDRequest {
-
-    this.espdRequest = new ESPDRequest(this.CADetails, this.fullCriterionList);
+    /* SET DOCUMENT DETAILS */
+    this.documentDetails.qualificationApplicationType = this.utilities.qualificationApplicationType.toUpperCase();
+    this.documentDetails.type = this.utilities.type.toUpperCase();
+    this.documentDetails.version = this.APIService.version.toUpperCase();
+    /* CREATE ESPD REQUEST */
+    this.espdRequest = new ESPDRequest(this.CADetails, this.fullCriterionList, this.documentDetails);
     console.log(this.espdRequest);
     return this.espdRequest;
 
@@ -335,7 +341,19 @@ export class DataService {
 
 
   createESPDResponse(): ESPDResponse {
-    this.espdResponse = new ESPDResponse(this.CADetails, this.EODetails, this.fullCriterionList, this.formUtil.evidenceList);
+
+    /* SET DOCUMENT DETAILS */
+    this.documentDetails.qualificationApplicationType = this.utilities.qualificationApplicationType.toUpperCase();
+    this.documentDetails.type = this.utilities.type.toUpperCase();
+    this.documentDetails.version = this.APIService.version.toUpperCase();
+
+    /* CREATE ESPD RESPONSE */
+    this.espdResponse = new ESPDResponse(
+      this.CADetails,
+      this.EODetails,
+      this.fullCriterionList,
+      this.formUtil.evidenceList,
+      this.documentDetails);
 
     if (typeof this.espdResponse.eodetails.naturalPersons[0].birthDate !== 'string'
       && this.espdResponse.eodetails.naturalPersons[0].birthDate !== null) {
@@ -489,9 +507,9 @@ export class DataService {
       var filename = 'espd-request-v2.xml';
     } else if (this.utilities.isEO && this.APIService.version === 'v2' && this.utilities.qualificationApplicationType === 'regulated') {
       var filename = 'espd-response-v2.xml';
-    } else if (this.utilities.isCA && this.utilities.qualificationApplicationType === 'self-contained') {
+    } else if (this.utilities.isCA && this.utilities.qualificationApplicationType === 'selfcontained') {
       var filename = 'espd-self-contained-request.xml';
-    } else if (this.utilities.isEO && this.utilities.qualificationApplicationType === 'self-contained') {
+    } else if (this.utilities.isEO && this.utilities.qualificationApplicationType === 'selfcontained') {
       var filename = 'espd-self-contained-response.xml';
     }
 
@@ -509,7 +527,7 @@ export class DataService {
           this.APIService.version = res.documentDetails.version.toLowerCase();
           /* SELF-CONTAINED: if a self-contained artifact is imported then the version is v2 */
           this.utilities.qualificationApplicationType = res.documentDetails.qualificationApplicationType.toLowerCase();
-          if (res.documentDetails.qualificationApplicationType === 'SELF-CONTAINED') {
+          if (res.documentDetails.qualificationApplicationType === 'SELFCONTAINED') {
             this.APIService.version = 'v2';
           }
 
@@ -526,7 +544,7 @@ export class DataService {
           console.log(this.CADetails.postalAddress.postCode);
           this.selectedCountry = this.CADetails.cacountry;
 
-          if (this.utilities.qualificationApplicationType === 'self-contained') {
+          if (this.utilities.qualificationApplicationType === 'selfcontained') {
             this.CADetails.classificationCodes = res.cadetails.classificationCodes;
             this.CADetails.weightScoringMethodologyNote = res.cadetails.weightScoringMethodologyNote;
             this.CADetails.weightingType = res.cadetails.weightingType;
@@ -594,7 +612,7 @@ export class DataService {
           this.APIService.version = res.documentDetails.version.toLowerCase();
           this.utilities.qualificationApplicationType = res.documentDetails.qualificationApplicationType.toLowerCase();
           /* SELF-CONTAINED: if a self-cointained artifact is imported then the version is v2 */
-          if (res.documentDetails.qualificationApplicationType === 'SELF-CONTAINED') {
+          if (res.documentDetails.qualificationApplicationType === 'SELFCONTAINED') {
             this.APIService.version = 'v2';
           }
           // res.cadetails=this.CADetails;
@@ -604,7 +622,7 @@ export class DataService {
           this.PostalAddress = res.cadetails.postalAddress;
           this.ContactingDetails = res.cadetails.contactingDetails;
           this.receivedNoticeNumber = res.cadetails.receivedNoticeNumber;
-          if (this.utilities.qualificationApplicationType === 'self-contained') {
+          if (this.utilities.qualificationApplicationType === 'selfcontained') {
             this.CADetails.classificationCodes = res.cadetails.classificationCodes;
           }
           this.selectedCountry = this.CADetails.cacountry;
@@ -939,7 +957,7 @@ export class DataService {
 
       /* =================== SELF-CONTAINED: predefined ca related criterion ============ */
 
-      if (this.utilities.qualificationApplicationType === 'self-contained') {
+      if (this.utilities.qualificationApplicationType === 'selfcontained') {
         this.getCaRelatedCriteria()
           .then(res => {
             this.caRelatedCriteria = res;
@@ -1157,7 +1175,7 @@ export class DataService {
 
       /* ========================= SELF-CONTAINED: predefined other.ca criteria ============================= */
 
-      if (this.utilities.qualificationApplicationType === 'self-contained') {
+      if (this.utilities.qualificationApplicationType === 'selfcontained') {
         this.getCaRelatedCriteria()
           .then(res => {
             this.caRelatedCriteria = res;
