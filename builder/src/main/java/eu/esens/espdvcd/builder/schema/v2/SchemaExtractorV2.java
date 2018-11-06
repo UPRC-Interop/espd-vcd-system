@@ -677,7 +677,7 @@ public interface SchemaExtractorV2 {
                     String description = ((DescriptionResponse) rq.getResponse()).getDescription();
                     if (description != null) {
                         rqType.setExpectedDescription(new ExpectedDescriptionType());
-                        rqType.getExpectedDescription().setValue(((DescriptionResponse) rq.getResponse()).getDescription());
+                        rqType.getExpectedDescription().setValue(description);
                     }
                     break;
 
@@ -736,8 +736,13 @@ public interface SchemaExtractorV2 {
                     break;
 
                 case URL:
-
+                    String url = ((URLResponse) rq.getResponse()).getUrl();
+                    if (url != null) {
+                        rqType.setExpectedDescription(new ExpectedDescriptionType());
+                        rqType.getExpectedDescription().setValue(url);
+                    }
                     break;
+
             }
         }
     }
