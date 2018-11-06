@@ -46,6 +46,7 @@ import {ProjectType} from '../model/projectType.model';
 import {BidType} from '../model/bidType.model';
 import {WeightingType} from '../model/weightingType.model';
 import {DocumentDetails} from '../model/documentDetails.model';
+import {EoRoleType} from '../model/eoRoleType.model';
 
 @Injectable()
 export class DataService {
@@ -76,6 +77,7 @@ export class DataService {
   procedureTypes: ProcedureType[] = null;
   projectTypes: ProjectType[] = null;
   bidTypes: BidType[] = null;
+  eoRoleTypes: EoRoleType[] = null;
   currency: Currency[] = null;
   eoIDType: EoIDType[] = null;
   weightingType: WeightingType[] = null;
@@ -1570,6 +1572,26 @@ export class DataService {
       return this.APIService.get_WeightingType()
         .then(res => {
           this.weightingType = res;
+          return Promise.resolve(res);
+        })
+        .catch(err => {
+          console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
+          return Promise.reject(err);
+        });
+    }
+  }
+
+  getEORoleTypes(): Promise<EoRoleType[]> {
+    if (this.eoRoleTypes != null) {
+      return Promise.resolve(this.eoRoleTypes);
+    } else {
+      return this.APIService.get_eoRoleType()
+        .then(res => {
+          this.eoRoleTypes= res;
           return Promise.resolve(res);
         })
         .catch(err => {
