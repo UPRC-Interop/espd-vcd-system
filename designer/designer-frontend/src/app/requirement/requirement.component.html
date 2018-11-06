@@ -27,7 +27,7 @@
   <!--SELF-CONTAINED: Hide the QUESTION fields if the user is a CA making a Request. Render only the REQUIREMENT and CAPTION fields.
   Don't show the REQUIREMENT fields if the user has the role of EO and creates a new ESPD response from scratch-->
   <div [ngSwitch]="req.responseDataType" [hidden]="(this.utilities.isCA && req.type === 'QUESTION') || (this.utilities.isEO &&
-  (req.type ==='REQUIREMENT') && this.utilities.isCreateResponse)">
+  (req.type ==='REQUIREMENT') && this.utilities.isCreateResponse) || req.type === 'CAPTION'">
 
     <!--<label *ngSwitchCase="req.responseDataType=='NONE'">{{req.description}} CAPTION</label>-->
 
@@ -39,7 +39,7 @@
 
     <div *ngSwitchDefault>
       <div *ngIf="req.type === 'CAPTION'">
-        <p>{{req.description}}</p>
+        <!-- SKIP captions and deal with question and requirement only -->
       </div>
       <div *ngIf="req.type === 'QUESTION'">
         <mat-form-field>
