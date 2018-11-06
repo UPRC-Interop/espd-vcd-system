@@ -348,7 +348,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 QuantityResponse quantityResp = new QuantityResponse();
                 if (responseType.getResponseValue().get(0).getResponseQuantity() != null &&
                         responseType.getResponseValue().get(0).getResponseQuantity().getValue() != null) {
-                    quantityResp.setQuantity(responseType.getResponseValue().get(0).getResponseQuantity().getValue().floatValue());
+                    quantityResp.setQuantity(responseType.getResponseValue().get(0).getResponseQuantity().getValue());
                 }
                 applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), quantityResp);
                 applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), quantityResp);
@@ -378,7 +378,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 AmountResponse amountResp = new AmountResponse();
                 if (responseType.getResponseValue().get(0).getResponseAmount() != null &&
                         responseType.getResponseValue().get(0).getResponseAmount().getValue() != null) {
-                    amountResp.setAmount(responseType.getResponseValue().get(0).getResponseAmount().getValue().floatValue());
+                    amountResp.setAmount(responseType.getResponseValue().get(0).getResponseAmount().getValue());
                     if (responseType.getResponseValue().get(0).getResponseAmount().getCurrencyID() != null) {
                         amountResp.setCurrency(responseType.getResponseValue().get(0).getResponseAmount().getCurrencyID());
                     }
@@ -403,7 +403,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 PercentageResponse percentageResp = new PercentageResponse();
                 if (responseType.getResponseValue().get(0).getResponseNumeric() != null &&
                         responseType.getResponseValue().get(0).getResponseNumeric().getValue() != null) {
-                    percentageResp.setPercentage(responseType.getResponseValue().get(0).getResponseNumeric().getValue().floatValue());
+                    percentageResp.setPercentage(responseType.getResponseValue().get(0).getResponseNumeric().getValue());
                 }
                 applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), percentageResp);
                 applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), percentageResp);
@@ -497,7 +497,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
 
                     if (resValueType.getResponseID() != null
                             && resValueType.getResponseID().getValue() != null) {
-                        lotsIdeResp.getLots().add(resValueType.getResponseID().getValue());
+                        lotsIdeResp.getLotsList().add(resValueType.getResponseID().getValue());
                     }
                 });
                 applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), lotsIdeResp);
@@ -556,7 +556,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
             case QUANTITY:
                 QuantityResponse qResp = new QuantityResponse();
                 if (res.getQuantity() != null && res.getQuantity().getValue() != null) {
-                    qResp.setQuantity(res.getQuantity().getValue().floatValue());
+                    qResp.setQuantity(res.getQuantity().getValue());
                 }
                 return qResp;
 
@@ -577,7 +577,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
             case AMOUNT:
                 AmountResponse aResp = new AmountResponse();
                 if (res.getAmount() != null && res.getAmount().getValue() != null) {
-                    aResp.setAmount(res.getAmount().getValue().floatValue());
+                    aResp.setAmount(res.getAmount().getValue());
                     if (res.getAmount().getCurrencyID() != null) {
                         aResp.setCurrency(res.getAmount().getCurrencyID());
                     }
@@ -595,7 +595,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
             case PERCENTAGE:
                 PercentageResponse pResp = new PercentageResponse();
                 if (res.getPercent() != null && res.getPercent().getValue() != null) {
-                    pResp.setPercentage(res.getPercent().getValue().floatValue());
+                    pResp.setPercentage(res.getPercent().getValue());
                 }
                 return pResp;
 
