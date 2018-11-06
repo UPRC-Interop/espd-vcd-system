@@ -97,6 +97,7 @@ export class DataService {
   eoRelatedACriteria: EoRelatedCriterion[] = null;
   eoRelatedCCriteria: EoRelatedCriterion[] = null;
   eoRelatedDCriteria: EoRelatedCriterion[] = null;
+  eoLotCriterion: EoRelatedCriterion[] = null;
   reductionCriteria: ReductionCriterion[] = null;
   language: Language[] = null;
   langTemplate = [];
@@ -132,6 +133,7 @@ export class DataService {
   public eoRelatedACriteriaForm: FormGroup = null;
   public eoRelatedCCriteriaForm: FormGroup = null;
   public eoRelatedDCriteriaForm: FormGroup = null;
+  public eoLotCriterionForm: FormGroup = null;
 
   public caRelatedCriteriaForm: FormGroup = null;
 
@@ -1197,6 +1199,21 @@ export class DataService {
             const action = 'close';
             this.openSnackBar(message, action);
           });
+
+
+        /* SELF-CONTAINED: OTHER_EO LOT TENDERED CRITERION */
+        this.getEOLotCriterion()
+          .then(res => {
+            this.eoLotCriterion = res;
+            this.eoLotCriterionForm = this.formUtil.createEORelatedCriterionForm(this.eoLotCriterion);
+          })
+          .catch(err => {
+            console.log(err);
+            const message: string = err.error +
+              ' ' + err.message;
+            const action = 'close';
+            this.openSnackBar(message, action);
+          });
       }
 
       /* ======================== predefined exclusion criteria ================================== */
@@ -1679,6 +1696,27 @@ export class DataService {
         .then(
           res => {
             this.eoRelatedDCriteria = res;
+            return Promise.resolve(res);
+          }
+        ).catch(err => {
+          console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
+          return Promise.reject(err);
+        });
+    }
+  }
+
+  getEOLotCriterion(): Promise<EoRelatedCriterion[]> {
+    if (this.eoLotCriterion != null) {
+      return Promise.resolve(this.eoLotCriterion);
+    } else {
+      return this.APIService.getEO_LotCriterion()
+        .then(
+          res => {
+            this.eoLotCriterion = res;
             return Promise.resolve(res);
           }
         ).catch(err => {

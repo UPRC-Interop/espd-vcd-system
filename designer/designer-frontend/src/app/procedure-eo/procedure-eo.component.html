@@ -242,6 +242,18 @@
             </div>
           </form>
         </ng-container>
+        <ng-container *ngIf="dataService.eoLotCriterionForm">
+          <form [formGroup]="dataService.eoLotCriterionForm">
+            <div class="eoRelatedCriteria" *ngFor="let cr of this.dataService.eoLotCriterion; let i=index">
+              <mat-card>
+                <h4>{{cr.description}}</h4>
+                <div class="answer">
+                  <app-criterion [criterion]="cr" [form]="dataService.eoLotCriterionForm.controls" [indicator]="true"></app-criterion>
+                </div>
+              </mat-card>
+            </div>
+          </form>
+        </ng-container>
       </mat-expansion-panel>
 
       <div formArrayName="naturalPersons">
