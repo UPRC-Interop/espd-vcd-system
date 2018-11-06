@@ -15,6 +15,10 @@
  */
 package eu.esens.espdvcd.model.requirement.response;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -52,21 +56,25 @@ public class LotIdentifierResponse extends Response implements Serializable {
         }
     }
 
+    @JsonCreator
+    @JsonProperty("lots")
     public List<String> getLotsList() {
         initLotsList();
         return lots;
     }
 
+    @JsonIgnore
+    public String getLots() {
+        return String.join(",", getLotsList());
+    }
+
+    @JsonIgnore
     public void setLots(String lots) {
         getLotsList().clear();
         if (Objects.nonNull(lots)) {
             String[] lotsArray = lots.split(",");
             this.lots.addAll(Arrays.asList(lotsArray));
         }
-    }
-
-    public String getLots() {
-        return String.join(",", getLotsList());
     }
 
 }
