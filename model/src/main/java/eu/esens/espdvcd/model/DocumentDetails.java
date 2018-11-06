@@ -4,6 +4,7 @@ import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
 import eu.esens.espdvcd.codelist.enums.internal.ArtefactType;
 import eu.esens.espdvcd.schema.EDMVersion;
 
+
 import java.io.Serializable;
 
 public class DocumentDetails implements Serializable {
