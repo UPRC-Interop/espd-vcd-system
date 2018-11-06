@@ -32,8 +32,7 @@
     <!-- The type of the ESPD (REGULATED or SELFCONTAINED) -->
     <cbc:QualificationApplicationTypeCode listID="QualificationApplicationType"
                                           listAgencyID="EU-COM-GROW" listVersionID="2.0.2"
-    >SELFCONTAINED
-    </cbc:QualificationApplicationTypeCode>
+    >SELFCONTAINED</cbc:QualificationApplicationTypeCode>
     <cac:ContractingParty>
         <cac:Party>
             <cac:PartyIdentification>
