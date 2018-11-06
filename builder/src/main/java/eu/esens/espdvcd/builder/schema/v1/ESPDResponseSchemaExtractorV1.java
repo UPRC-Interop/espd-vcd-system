@@ -291,7 +291,7 @@ public class ESPDResponseSchemaExtractorV1 implements SchemaExtractorV1 {
                 rType.setQuantity(new QuantityType());
                 //rType.getQuantity().setValue(BigDecimal.valueOf(((QuantityResponse) response).getQuantity()));
                 // UL 2017-10-20: workaround for rounding issues with BigDecimal (e.g. 0.005 became 0.004999999888241291)
-                rType.getQuantity().setValue(new BigDecimal(Float.toString(((QuantityResponse) response).getQuantity())));
+                rType.getQuantity().setValue(((QuantityResponse) response).getQuantity());
                 return rType;
 
             case QUANTITY_INTEGER:
@@ -301,9 +301,9 @@ public class ESPDResponseSchemaExtractorV1 implements SchemaExtractorV1 {
                 return rType;
 
             case AMOUNT:
-                float amount = ((AmountResponse) response).getAmount();
+                BigDecimal amount = ((AmountResponse) response).getAmount();
                 String currency = ((AmountResponse) response).getCurrency();
-                if ( (amount != 0) ||
+                if ( (amount.floatValue() != 0) ||
                         ( currency != null && !currency.isEmpty() ) ) {
                     // Only generate a proper response if for at least one of the variables "amount" and
                     // "currency" a value different from the default is detected.
@@ -311,7 +311,7 @@ public class ESPDResponseSchemaExtractorV1 implements SchemaExtractorV1 {
                     rType.setAmount(new AmountType());
                     //rType.getAmount().setValue(BigDecimal.valueOf(amount));
                     // UL 2017-10-20: workaround for rounding issues with BigDecimal
-                    rType.getAmount().setValue(new BigDecimal(Float.toString(amount)));
+                    rType.getAmount().setValue(amount);
                     rType.getAmount().setCurrencyID(currency);
                 }
                 return rType;
@@ -335,7 +335,7 @@ public class ESPDResponseSchemaExtractorV1 implements SchemaExtractorV1 {
                 rType.setPercent(new PercentType());
                 //rType.getPercent().setValue(BigDecimal.valueOf(((PercentageResponse) response).getPercentage()));
                 // UL 2017-10-20: workaround for rounding issues with BigDecimal
-                rType.getPercent().setValue(new BigDecimal(Float.toString(((PercentageResponse) response).getPercentage())));
+                rType.getPercent().setValue(((PercentageResponse) response).getPercentage());
                 return rType;
 
             case DATE:

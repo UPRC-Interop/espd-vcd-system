@@ -182,7 +182,7 @@ public class CriteriaServiceTest {
                         requirement.setResponse(new WeightIndicatorResponse());
                         break;
                     case LOTS_IDENTIFIER:
-                        requirement.setResponse(new LotsIdentifierResponse());
+                        requirement.setResponse(new LotIdentifierResponse());
                         break;
                     case EO_IDENTIFIER:
                         requirement.setResponse(new EOIdentifierResponse());

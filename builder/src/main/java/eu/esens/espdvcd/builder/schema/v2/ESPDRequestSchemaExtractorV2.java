@@ -47,9 +47,6 @@ public class ESPDRequestSchemaExtractorV2 implements SchemaExtractorV2 {
         if (modelRequest.getCADetails().getProcurementProcedureFileReferenceNo() != null) {
             qarType.setContractFolderID(createContractFolderIDType(modelRequest.getCADetails().getProcurementProcedureFileReferenceNo()));
         }
-//        } else {
-//            qarType.setContractFolderID(createContractFolderIDType("PPID-test1"));
-//        }
 
         qarType.getAdditionalDocumentReference().add(extractCADetailsDocumentReference(modelRequest.getCADetails()));
 
@@ -138,28 +135,31 @@ public class ESPDRequestSchemaExtractorV2 implements SchemaExtractorV2 {
     @Override
     public TenderingCriterionPropertyType extractTenderingCriterionPropertyType(Requirement rq) {
 
-        TenderingCriterionPropertyType propertyType = new TenderingCriterionPropertyType();
+        TenderingCriterionPropertyType rqType = new TenderingCriterionPropertyType();
 
         // tbr070-013
-        propertyType.setID(createCriteriaTaxonomyIDType(rq.getID()));
+        rqType.setID(createCriteriaTaxonomyIDType(rq.getID()));
         // tbr070-013
-        propertyType.getDescription().add(new DescriptionType());
-        propertyType.getDescription().get(0).setValue(rq.getDescription());
+        rqType.getDescription().add(new DescriptionType());
+        rqType.getDescription().get(0).setValue(rq.getDescription());
         // tbr070-013
-        propertyType.setTypeCode(new TypeCodeType());
-        propertyType.getTypeCode().setValue(rq.getType().name());
+        rqType.setTypeCode(new TypeCodeType());
+        rqType.getTypeCode().setValue(rq.getType().name());
 
-        propertyType.getTypeCode().setListID("CriterionElementType");
-        propertyType.getTypeCode().setListAgencyID("EU-COM-GROW");
-        propertyType.getTypeCode().setListVersionID("2.0.2");
+        rqType.getTypeCode().setListID("CriterionElementType");
+        rqType.getTypeCode().setListAgencyID("EU-COM-GROW");
+        rqType.getTypeCode().setListVersionID("2.0.2");
 
         // tbr070-013
-        propertyType.setValueDataTypeCode(new ValueDataTypeCodeType());
-        propertyType.getValueDataTypeCode().setValue(rq.getResponseDataType().name());
-        propertyType.getValueDataTypeCode().setListID("ResponseDataType");
-        propertyType.getValueDataTypeCode().setListAgencyID("EU-COM-GROW");
-        propertyType.getValueDataTypeCode().setListVersionID("2.0.2");
+        rqType.setValueDataTypeCode(new ValueDataTypeCodeType());
+        rqType.getValueDataTypeCode().setValue(rq.getResponseDataType().name());
+        rqType.getValueDataTypeCode().setListID("ResponseDataType");
+        rqType.getValueDataTypeCode().setListAgencyID("EU-COM-GROW");
+        rqType.getValueDataTypeCode().setListVersionID("2.0.2");
 
-        return propertyType;
+        applyCAResponseToXML(rq, rqType);
+
+        return rqType;
     }
+
 }

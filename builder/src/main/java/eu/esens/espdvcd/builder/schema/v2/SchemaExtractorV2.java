@@ -17,15 +17,17 @@ package eu.esens.espdvcd.builder.schema.v2;
 
 import eu.esens.espdvcd.codelist.enums.ProfileExecutionIDEnum;
 import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
+import eu.esens.espdvcd.codelist.enums.RequirementTypeEnum;
 import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
-import eu.esens.espdvcd.model.requirement.response.WeightIndicatorResponse;
+import eu.esens.espdvcd.model.requirement.response.*;
 import eu.espd.schema.v2.pre_award.commonaggregate.*;
 import eu.espd.schema.v2.pre_award.commonbasic.*;
 import eu.espd.schema.v2.unqualifieddatatypes_2.CodeType;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -661,6 +663,83 @@ public interface SchemaExtractorV2 {
         ResponseIndicatorType indicatorType = new ResponseIndicatorType();
         indicatorType.setValue(indicator);
         return indicatorType;
+    }
+
+    default void applyCAResponseToXML(Requirement rq, TenderingCriterionPropertyType rqType) {
+
+        if (rq.getType() == RequirementTypeEnum.REQUIREMENT
+                && rq.getResponse() != null
+                && rq.getResponse().getResponseType() != null) {
+
+            switch (rq.getResponse().getResponseType()) {
+
+                case DESCRIPTION:
+                    String description = ((DescriptionResponse) rq.getResponse()).getDescription();
+                    if (description != null) {
+                        rqType.setExpectedDescription(new ExpectedDescriptionType());
+                        rqType.getExpectedDescription().setValue(((DescriptionResponse) rq.getResponse()).getDescription());
+                    }
+                    break;
+
+                case AMOUNT:
+                    BigDecimal amount = ((AmountResponse) rq.getResponse()).getAmount();
+                    String currency = ((AmountResponse) rq.getResponse()).getCurrency();
+                    if ((amount.floatValue() != 0) || (currency != null && !currency.isEmpty())) {
+                        // Only generate a proper response if for at least one of the variables "amount" and
+                        // "currency" a value different from the default is detected.
+
+                        rqType.setExpectedAmount(new ExpectedAmountType());
+                        rqType.getExpectedAmount().setValue(amount);
+                        rqType.getExpectedAmount().setCurrencyID(currency);
+                    }
+                    break;
+
+                case CODE:
+                    String code = ((EvidenceURLCodeResponse) rq.getResponse()).getEvidenceURLCode();
+                    if (code != null && !code.isEmpty()) {
+                        rqType.setExpectedCode(new ExpectedCodeType());
+                        rqType.getExpectedCode().setValue(code);
+                    }
+                    break;
+
+                case LOTS_IDENTIFIER:
+                    String lots = ((LotIdentifierResponse) rq.getResponse()).getLots();
+                    if (lots != null && !lots.isEmpty()) {
+                        rqType.setExpectedID(new ExpectedIDType());
+                        rqType.getExpectedID().setValue(lots);
+                    }
+                    break;
+
+                case QUANTITY_INTEGER:
+                    int quantityInt = ((QuantityIntegerResponse) rq.getResponse()).getQuantity();
+                    rqType.setExpectedValueNumeric(new ExpectedValueNumericType());
+                    rqType.getExpectedValueNumeric().setValue(BigDecimal.valueOf(quantityInt));
+                    break;
+
+                case QUANTITY:
+                    BigDecimal quantity = ((QuantityResponse) rq.getResponse()).getQuantity();
+                    rqType.setExpectedValueNumeric(new ExpectedValueNumericType());
+                    rqType.getExpectedValueNumeric().setValue(quantity);
+                    break;
+
+                case PERIOD:
+                    LocalDate startDate = ((ApplicablePeriodResponse) rq.getResponse()).getStartDate();
+                    LocalDate endDate = ((ApplicablePeriodResponse) rq.getResponse()).getStartDate();
+                    if (startDate != null && endDate != null) {
+                        PeriodType periodType = new PeriodType();
+                        periodType.setStartDate(new StartDateType());
+                        periodType.setEndDate(new EndDateType());
+                        periodType.getStartDate().setValue(startDate);
+                        periodType.getEndDate().setValue(endDate);
+                        rqType.getApplicablePeriod().add(periodType);
+                    }
+                    break;
+
+                case URL:
+
+                    break;
+            }
+        }
     }
 
 }

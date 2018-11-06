@@ -74,7 +74,7 @@ public class ResponseFactory {
                 return new WeightIndicatorResponse();
 
             case LOTS_IDENTIFIER:
-                return new LotsIdentifierResponse();
+                return new LotIdentifierResponse();
 
             case EO_IDENTIFIER:
                 return new EOIdentifierResponse();

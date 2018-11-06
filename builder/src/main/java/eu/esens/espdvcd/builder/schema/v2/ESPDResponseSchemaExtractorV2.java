@@ -394,17 +394,19 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
 
     @Override
     public TenderingCriterionPropertyType extractTenderingCriterionPropertyType(Requirement rq) {
-        TenderingCriterionPropertyType req = new TenderingCriterionPropertyType();
+        TenderingCriterionPropertyType reqType = new TenderingCriterionPropertyType();
 
-        req.setTypeCode(createTypeCodeType(rq.getType().name()));
-        req.setValueDataTypeCode(createValueDataTypeCodeType(rq.getResponseDataType().name()));
+        reqType.setTypeCode(createTypeCodeType(rq.getType().name()));
+        reqType.setValueDataTypeCode(createValueDataTypeCodeType(rq.getResponseDataType().name()));
 
-        req.getDescription().add(new DescriptionType());
-        req.getDescription().get(0).setValue(rq.getDescription());
+        reqType.getDescription().add(new DescriptionType());
+        reqType.getDescription().get(0).setValue(rq.getDescription());
 
-        req.setID(createCriteriaTaxonomyIDType(rq.getID()));
+        reqType.setID(createCriteriaTaxonomyIDType(rq.getID()));
 
-        return req;
+        applyCAResponseToXML(rq, reqType);
+
+        return reqType;
     }
 
     private TenderingCriterionResponseType extractTenderingCriterionResponse(Response response,
@@ -457,7 +459,7 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
             case QUANTITY:
                 ResponseValueType quaRvType = createResponseValueType();
                 quaRvType.setResponseQuantity(new ResponseQuantityType());
-                quaRvType.getResponseQuantity().setValue(new BigDecimal(Float.toString(((QuantityResponse) response).getQuantity())));
+                quaRvType.getResponseQuantity().setValue(((QuantityResponse) response).getQuantity());
                 tcrType.getResponseValue().add(quaRvType);
                 return tcrType;
 
@@ -471,14 +473,14 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
 
             case AMOUNT:
                 ResponseValueType amRvType = createResponseValueType();
-                float amount = ((AmountResponse) response).getAmount();
+                BigDecimal amount = ((AmountResponse) response).getAmount();
                 String currency = ((AmountResponse) response).getCurrency();
-                if ((amount != 0) || (currency != null && !currency.isEmpty())) {
+                if ((amount.floatValue() != 0) || (currency != null && !currency.isEmpty())) {
                     // Only generate a proper response if for at least one of the variables "amount" and
                     // "currency" a value different from the default is detected.
 
                     amRvType.setResponseAmount(new ResponseAmountType());
-                    amRvType.getResponseAmount().setValue(new BigDecimal(Float.toString(amount)));
+                    amRvType.getResponseAmount().setValue(amount);
                     amRvType.getResponseAmount().setCurrencyID(currency);
                 }
                 tcrType.getResponseValue().add(amRvType);
@@ -509,7 +511,7 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
                 ResponseValueType perRvType = createResponseValueType();
                 perRvType.setResponseQuantity(new ResponseQuantityType());
                 perRvType.getResponseQuantity().setUnitCode("PERCENTAGE");
-                perRvType.getResponseQuantity().setValue(new BigDecimal(Float.toString(((PercentageResponse) response).getPercentage())));
+                perRvType.getResponseQuantity().setValue(((PercentageResponse) response).getPercentage());
                 tcrType.getResponseValue().add(perRvType);
                 return tcrType;
 
@@ -599,8 +601,8 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
                 return tcrType;
 
             case LOTS_IDENTIFIER:
-                LotsIdentifierResponse lotIdeResp = (LotsIdentifierResponse) response;
-                lotIdeResp.getLots().forEach(lot -> {
+                LotIdentifierResponse lotIdeResp = (LotIdentifierResponse) response;
+                lotIdeResp.getLotsList().forEach(lot -> {
                     ResponseValueType lotIdeRvType = createResponseValueType();
                     lotIdeRvType.setResponseID(new ResponseIDType());
                     lotIdeRvType.getResponseID().setValue(lot);

@@ -492,7 +492,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 return weightIndResp;
 
             case LOTS_IDENTIFIER:
-                LotsIdentifierResponse lotsIdeResp = new LotsIdentifierResponse();
+                LotIdentifierResponse lotsIdeResp = new LotIdentifierResponse();
                 responseType.getResponseValue().forEach(resValueType -> {
 
                     if (resValueType.getResponseID() != null

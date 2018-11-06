@@ -16,6 +16,7 @@
 package eu.esens.espdvcd.model.requirement.response;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * Percentage response
@@ -39,20 +40,20 @@ public class PercentageResponse extends Response implements Serializable {
      * BusReqID: tbr92-018, tbr92-005<br>
      * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.Response.Percent<br>
      */
-    private float percentage;
+    private BigDecimal percentage;
 
     public PercentageResponse() {
     }
 
-    public PercentageResponse(float percentage) {
+    public PercentageResponse(BigDecimal percentage) {
         this.percentage = percentage;
     }
 
-    public float getPercentage() {
+    public BigDecimal getPercentage() {
         return percentage;
     }
 
-    public void setPercentage(float percentage) {
+    public void setPercentage(BigDecimal percentage) {
         this.percentage = percentage;
     }
 }
