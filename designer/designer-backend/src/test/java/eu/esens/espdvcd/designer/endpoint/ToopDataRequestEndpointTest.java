@@ -12,7 +12,7 @@ public class ToopDataRequestEndpointTest {
     @Test
     public void testToopDataRequest() throws IOException {
         ToopDataRequest x = new ToopDataRequest("DE/GB/45452312Z","SE");
-        ToopDataRequestEndpoint.createRequestAndSendToToopConnector(x);
+        ToopDataRequestEndpoint.createRequestAndSendToToopConnector(x, "espd");
     }
 
 }
