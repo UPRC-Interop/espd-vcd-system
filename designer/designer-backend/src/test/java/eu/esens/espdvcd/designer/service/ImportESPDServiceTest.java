@@ -23,6 +23,7 @@ import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.File;
@@ -115,6 +116,7 @@ public class ImportESPDServiceTest {
         Assert.assertNotNull(response);
     }
 
+    @Ignore
     @Test
     public void requestSelfContainedImport() throws Exception {
         ESPDRequest request = ImportESPDRequestService.getInstance().importESPDFile(new File(this.getClass().getClassLoader().getResource("SELFCONTAINED-ESPD-Request_2.0.2_weights.xml").toURI()));
