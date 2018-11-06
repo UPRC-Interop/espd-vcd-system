@@ -50,7 +50,7 @@ run {
     dependsOn "buildWebApp"
 }
 
-task copyWebAppResources(type: Exec){
+task copyWebAppResources{
         copy {
             from "$webappDir/dist"
             into "$projectDir/src/main/resources/public"
@@ -78,13 +78,13 @@ task buildWebApp(type: Exec) {
     } else {
         commandLine "ng", "build", "--prod"
     }
-
-    doLast {
-        copy {
-            from "$webappDir/dist"
-            into "$projectDir/src/main/resources/public"
-        }
-    }
+//
+//    doLast {
+//        copy {
+//            from "$webappDir/dist"
+//            into "$projectDir/src/main/resources/public"
+//        }
+//    }
 }
 
 task runWebApp(type: Exec) {
