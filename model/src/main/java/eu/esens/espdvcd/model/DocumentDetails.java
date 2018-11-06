@@ -15,6 +15,8 @@
  */
 package eu.esens.espdvcd.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
 import eu.esens.espdvcd.codelist.enums.internal.ArtefactType;
 import eu.esens.espdvcd.schema.EDMVersion;
@@ -39,7 +41,10 @@ public class DocumentDetails implements Serializable {
      * @param type                         type of the ESPD (ArtefactType enum: ESPD_REQUEST, ESPD_RESPONSE)
      * @param qualificationApplicationType whether the ESPD is SELF_CONTAINED or REQULATED
      */
-    public DocumentDetails(EDMVersion version, ArtefactType type, QualificationApplicationTypeEnum qualificationApplicationType) {
+    @JsonCreator
+    public DocumentDetails(@JsonProperty("version") EDMVersion version,
+                           @JsonProperty("type") ArtefactType type,
+                           @JsonProperty("qualificationApplicationType") QualificationApplicationTypeEnum qualificationApplicationType) {
         this.version = version;
         this.artefactType = type;
         this.qualificationApplicationType = qualificationApplicationType;
