@@ -292,12 +292,12 @@ export class FormUtilService {
             } else if (req.responseDataType === 'URL') {
               req.response.url = formValues[req.uuid.valueOf()];
               req.response.uuid = null;
-            } else if (req.responseDataType === 'EO_IDENTIFIER') {
+            } else if (req.responseDataType === 'ECONOMIC_OPERATOR_IDENTIFIER') {
               req.response.id = formValues[req.uuid.valueOf()];
               const eoidtypeID = req.uuid + 'eoidtype';
               req.response.eoidtype = formValues[eoidtypeID.valueOf()];
               req.response.uuid = null;
-            } else if (req.responseDataType === 'LOTS_IDENTIFIER') {
+            } else if (req.responseDataType === 'LOT_IDENTIFIER') {
               req.response.lots = this.utilities.lotTemplate[req.uuid];
             }
           }
@@ -398,7 +398,7 @@ export class FormUtilService {
             group[r.uuid + 'evaluationMethodDescription'] = new FormControl();
           } else if (r.responseDataType === 'AMOUNT') {
             group[r.uuid + 'currency'] = new FormControl();
-          } else if (r.responseDataType === 'EO_IDENTIFIER') {
+          } else if (r.responseDataType === 'ECONOMIC_OPERATOR_IDENTIFIER') {
             group[r.uuid + 'eoidtype'] = new FormControl();
           } else {
             group[r.uuid] = new FormControl();
@@ -539,8 +539,8 @@ export class FormUtilService {
               }
             }
 
-            /* SELF-CONTAINED: LOTS_IDENTIFIER */
-            // if (r.responseDataType === 'LOTS_IDENTIFIER') {
+            /* SELF-CONTAINED: LOT_IDENTIFIER */
+            // if (r.responseDataType === 'LOT_IDENTIFIER') {
             //   /* */
             // }
 
@@ -637,7 +637,7 @@ export class FormUtilService {
               }
             }
 
-            /* SELF-CONTAINED: EO_IDENTIFIER */
+            /* SELF-CONTAINED: ECONOMIC_OPERATOR_IDENTIFIER */
             if (r.response.id || r.response.eoidtype) {
               group[r.uuid] = new FormControl(r.response.id);
               group[r.uuid + 'eoidtype'] = new FormControl(r.response.eoidtype);
@@ -726,7 +726,7 @@ export class FormUtilService {
                 });
               }
 
-              if (r.responseDataType === 'EO_IDENTIFIER') {
+              if (r.responseDataType === 'ECONOMIC_OPERATOR_IDENTIFIER') {
                 group[r.uuid] = new FormControl({
                   value: '',
                   disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
