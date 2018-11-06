@@ -42,6 +42,7 @@ export class UtilitiesService {
   isDividedIntoLots = false;
   projectLots = [];
   lotTemplate = [];
+  type: string;
   // qualificationApplicationType = 'SELF-CONTAINED';
   // qualificationApplicationType = 'REGULATED';
 

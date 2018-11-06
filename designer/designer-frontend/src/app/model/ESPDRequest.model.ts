@@ -23,8 +23,9 @@ export class ESPDRequest {
   fullCriterionList: FullCriterion[];
   documentDetails: DocumentDetails;
 
-  constructor(cadetails: Cadetails, fullCriterionList: FullCriterion[]) {
+  constructor(cadetails: Cadetails, fullCriterionList: FullCriterion[], documentDetails: DocumentDetails) {
     this.cadetails = cadetails;
     this.fullCriterionList = fullCriterionList;
+    this.documentDetails = documentDetails;
   }
 }

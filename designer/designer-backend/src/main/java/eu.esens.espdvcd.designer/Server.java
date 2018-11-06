@@ -79,7 +79,7 @@ public class Server {
         LOGGER.info("Starting endpoint configuration");
 
         RestContext v2RegulatedContext = new RestContext(initialPath + "/api/v2/regulated", spark);
-        RestContext v2SelfContainedContext = new RestContext(initialPath + "/api/v2/self-contained", spark);
+        RestContext v2SelfContainedContext = new RestContext(initialPath + "/api/v2/selfcontained", spark);
         RestContext v1Context = new RestContext(initialPath + "/api/v1", spark);
         RestContext v1RegulatedContext = new RestContext(initialPath + "/api/v1/regulated", spark);
 
