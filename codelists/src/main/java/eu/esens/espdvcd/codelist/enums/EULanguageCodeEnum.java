@@ -22,7 +22,7 @@ public enum EULanguageCodeEnum {
      */
     PL,
     /**
-     * Portugu�?s
+     * Portugues
      */
     PT,
     /**
@@ -58,11 +58,11 @@ public enum EULanguageCodeEnum {
      */
     FR,
     /**
-     * Sloven�?ina
+     * Slovenina
      */
     SK,
     /**
-     * Slovenš�?ina
+     * Slovenšina
      */
     SL,
     /**
@@ -90,7 +90,7 @@ public enum EULanguageCodeEnum {
      */
     MT,
     /**
-     * б�?лгар�?ки
+     * бuлгарiки
      */
     BG,
     /**
@@ -102,7 +102,7 @@ public enum EULanguageCodeEnum {
      */
     DA,
     /**
-     * �?eština
+     * �?eština
      */
     CS,
     /**
