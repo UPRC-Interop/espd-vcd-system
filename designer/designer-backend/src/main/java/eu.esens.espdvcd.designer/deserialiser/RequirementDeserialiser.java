@@ -102,10 +102,10 @@ public class RequirementDeserialiser extends StdDeserializer<ResponseRequirement
             case IDENTIFIER:
                 response = mapper.treeToValue(root.get("response"), IdentifierResponse.class);
                 break;
-            case EO_IDENTIFIER:
+            case ECONOMIC_OPERATOR_IDENTIFIER:
                 response = mapper.treeToValue(root.get("response"), EOIdentifierResponse.class);
                 break;
-            case LOTS_IDENTIFIER:
+            case LOT_IDENTIFIER:
                 response = mapper.treeToValue(root.get("response"), LotIdentifierResponse.class);
                 break;
             case WEIGHT_INDICATOR:

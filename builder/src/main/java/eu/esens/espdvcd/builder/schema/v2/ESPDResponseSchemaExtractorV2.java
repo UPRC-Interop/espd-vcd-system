@@ -600,7 +600,7 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
                 tcrType.getResponseValue().add(weightIndRvType);
                 return tcrType;
 
-            case LOTS_IDENTIFIER:
+            case LOT_IDENTIFIER:
                 LotIdentifierResponse lotIdeResp = (LotIdentifierResponse) response;
                 lotIdeResp.getLotsList().forEach(lot -> {
                     ResponseValueType lotIdeRvType = createResponseValueType();
@@ -610,7 +610,7 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
                 });
                 return tcrType;
 
-            case EO_IDENTIFIER:
+            case ECONOMIC_OPERATOR_IDENTIFIER:
                 ResponseValueType eoIdeRvType = createResponseValueType();
                 String eoResponseID = ((EOIdentifierResponse) response).getIdentifier();
                 String eoIDType = ((EOIdentifierResponse) response).getEOIDType();

@@ -702,7 +702,7 @@ public interface SchemaExtractorV2 {
                     }
                     break;
 
-                case LOTS_IDENTIFIER:
+                case LOT_IDENTIFIER:
                     String lots = ((LotIdentifierResponse) rq.getResponse()).getLots();
                     if (lots != null && !lots.isEmpty()) {
                         rqType.setExpectedID(new ExpectedIDType());

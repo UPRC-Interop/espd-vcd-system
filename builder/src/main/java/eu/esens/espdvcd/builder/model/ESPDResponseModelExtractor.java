@@ -491,7 +491,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 weightIndResp.setResponseType(theType);
                 return weightIndResp;
 
-            case LOTS_IDENTIFIER:
+            case LOT_IDENTIFIER:
                 LotIdentifierResponse lotsIdeResp = new LotIdentifierResponse();
                 responseType.getResponseValue().forEach(resValueType -> {
 
@@ -505,7 +505,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 lotsIdeResp.setResponseType(theType);
                 return lotsIdeResp;
 
-            case EO_IDENTIFIER:
+            case ECONOMIC_OPERATOR_IDENTIFIER:
                 EOIdentifierResponse eoIdeResp = new EOIdentifierResponse();
                 if (!responseType.getResponseValue().isEmpty()
                         && responseType.getResponseValue().get(0).getResponseID() != null
