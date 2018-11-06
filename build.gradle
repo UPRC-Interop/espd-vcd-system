@@ -63,6 +63,10 @@ subprojects { project ->
         ignoreFailures = true
     }
 
+    test{
+        maxHeapSize = "512m"
+    }
+
 }
 
 // publishing definition
