@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright 2016-2018 University of Piraeus Research Center
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<!--
+	eDocument		:	CEV-CommonAggregateComponents. Syntax Binding based on OASIS UBL-2.1
+	Version				:	1.0.2
+	Last update		: 	20160726Tu
+	Author				:	enric.staromiejski.torregrosa@everis.com
+	Project Owner	: 	DG GROW, European Commission, Unit G4 - Innovative and E-Procurement 
+	Project Officers	:	Ivo.Locatelli@ec.europa.eu; Marc-Christopher.SCHMIDT@ec.europa.eu
+	-->
+<xsd:schema xmlns="urn:isa:names:specification:ubl:schema:xsd:CEV-CommonAggregateComponents-1" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cev-cbc="urn:isa:names:specification:ubl:schema:xsd:CEV-CommonBasicComponents-1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:isa:names:specification:ubl:schema:xsd:CEV-CommonAggregateComponents-1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0.2">
+	<xsd:import namespace="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" schemaLocation="UBL-CommonAggregateComponents-2.1.xsd"/>
+	<xsd:import namespace="urn:isa:names:specification:ubl:schema:xsd:CEV-CommonBasicComponents-1" schemaLocation="CEV-CommonBasicComponents-1.0.xsd"/>
+	<!-- Element declaration -->
+	<xsd:element name="Evidence" type="EvidenceType"/>
+	<xsd:element name="EvidenceDocumentReference" type="cac:DocumentReferenceType"/>
+	<xsd:element name="EvidenceIssuerParty" type="cac:PartyType"/>
+	<!-- Element definition -->
+	<xsd:complexType name="EvidenceType">
+		<xsd:sequence>
+			<xsd:element ref="cev-cbc:EvidenceName" minOccurs="0"/>
+			<xsd:element ref="cev-cbc:EmbeddedEvidenceIndicator" minOccurs="0"/>
+			<xsd:element ref="EvidenceIssuerParty" minOccurs="0"/>
+			<xsd:element ref="EvidenceDocumentReference" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

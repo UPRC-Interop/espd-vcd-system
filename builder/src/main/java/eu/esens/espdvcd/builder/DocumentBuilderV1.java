@@ -1,10 +1,25 @@
+/**
+ * Copyright 2016-2018 University of Piraeus Research Center
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package eu.esens.espdvcd.builder;
 
 import eu.esens.espdvcd.builder.schema.SchemaFactory;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.schema.SchemaUtil;
-import eu.esens.espdvcd.schema.SchemaVersion;
+import eu.esens.espdvcd.schema.EDMVersion;
 import eu.espd.schema.v1.commonbasiccomponents_2.IssueDateType;
 import eu.espd.schema.v1.commonbasiccomponents_2.IssueTimeType;
 import eu.espd.schema.v1.commonbasiccomponents_2.ProfileIDType;
@@ -48,7 +63,8 @@ public class DocumentBuilderV1 {
      * @return a JAXB ESPDRequestType instance from an ESPDRequest Model instance
      */
     private ESPDRequestType createXML(ESPDRequest req) {
-        ESPDRequestType reqType = finalize(SchemaFactory.withSchemaVersion1().ESPD_REQUEST.extractESPDRequestType(req));
+        ESPDRequestType reqType = finalize(SchemaFactory.withEDM_V1().ESPD_REQUEST
+                .extractESPDRequestType(req));
         return reqType;
 
     }
@@ -58,7 +74,8 @@ public class DocumentBuilderV1 {
      * @return a JAXB ESPDResponseType instance from an ESPDResponse Model instance
      */
     protected ESPDResponseType createXML(ESPDResponse res) {
-        ESPDResponseType resType = finalize(SchemaFactory.withSchemaVersion1().ESPD_RESPONSE.extractESPDResponseType(res));
+        ESPDResponseType resType = finalize(SchemaFactory.withEDM_V1().ESPD_RESPONSE
+                .extractESPDResponseType(res));
         return resType;
     }
 
@@ -80,7 +97,8 @@ public class DocumentBuilderV1 {
 
         reqType.setProfileID(createBIIProfileIdType(getProfileID()));
 
-        reqType.setID(SchemaFactory.withSchemaVersion1().ESPD_REQUEST.createISOIECIDType(UUID.randomUUID().toString()));
+        reqType.setID(SchemaFactory.withEDM_V1().ESPD_REQUEST
+                .createISOIECIDType(UUID.randomUUID().toString()));
         return reqType;
     }
 
@@ -102,7 +120,8 @@ public class DocumentBuilderV1 {
 
         resType.setProfileID(createBIIProfileIdType(getProfileID()));
 
-        resType.setID(SchemaFactory.withSchemaVersion1().ESPD_RESPONSE.createISOIECIDType(UUID.randomUUID().toString()));
+        resType.setID(SchemaFactory.withEDM_V1().ESPD_RESPONSE
+                .createISOIECIDType(UUID.randomUUID().toString()));
         return resType;
     }
 
@@ -119,11 +138,11 @@ public class DocumentBuilderV1 {
         try {
             if (theReq instanceof ESPDResponse) {
                 eu.espd.schema.v1.espdresponse_1.ObjectFactory of = new eu.espd.schema.v1.espdresponse_1.ObjectFactory();
-                SchemaUtil.getMarshaller(SchemaVersion.V1).marshal(of.createESPDResponse(createXML((ESPDResponse) theReq)), result);
+                SchemaUtil.getMarshaller(EDMVersion.V1).marshal(of.createESPDResponse(createXML((ESPDResponse) theReq)), result);
 
             } else {
                 eu.espd.schema.v1.espdrequest_1.ObjectFactory of = new eu.espd.schema.v1.espdrequest_1.ObjectFactory();
-                SchemaUtil.getMarshaller(SchemaVersion.V1).marshal(of.createESPDRequest(createXML(theReq)), result);
+                SchemaUtil.getMarshaller(EDMVersion.V1).marshal(of.createESPDRequest(createXML(theReq)), result);
             }
         } catch (JAXBException ex) {
             Logger.getLogger(XMLDocumentBuilderV1.class.getName()).log(Level.SEVERE, null, ex);

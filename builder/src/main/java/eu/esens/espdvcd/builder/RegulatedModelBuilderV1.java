@@ -1,28 +1,41 @@
+/**
+ * Copyright 2016-2018 University of Piraeus Research Center
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package eu.esens.espdvcd.builder;
 
-import eu.esens.espdvcd.retriever.criteria.CriteriaExtractorFactory;
-import eu.esens.espdvcd.retriever.criteria.CriteriaExtractorFactoryProducer;
-import eu.esens.espdvcd.retriever.criteria.MultilingualCriteriaExtractorFactory;
-import eu.esens.espdvcd.retriever.criteria.enums.FactoryType;
-import eu.esens.espdvcd.retriever.criteria.enums.MultilingualFactoryType;
-import eu.esens.espdvcd.schema.SchemaVersion;
+import eu.esens.espdvcd.model.SelectableCriterion;
+import eu.esens.espdvcd.retriever.criteria.RegulatedCriteriaExtractorBuilder;
+import eu.esens.espdvcd.schema.EDMVersion;
+
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class RegulatedModelBuilderV1 extends RegulatedModelBuilder {
 
-    private static final SchemaVersion VERSION = SchemaVersion.V1;
+    private static final Logger LOGGER = Logger.getLogger(RegulatedModelBuilderV1.class.getName());
 
     @Override
-    RegulatedModelBuilder addDefaultESPDCriteriaList() {
-        CriteriaExtractorFactory f = CriteriaExtractorFactoryProducer.getFactory(FactoryType.PREDEFINED_ESPD);
-        criteriaExtractor = f.createCriteriaExtractor(VERSION);
+    public RegulatedModelBuilder addDefaultESPDCriteriaList() {
+        criteriaExtractor = new RegulatedCriteriaExtractorBuilder(EDMVersion.V1).build();
         return this;
     }
 
     @Override
-    RegulatedModelBuilder addECertisESPDCriteriaList() {
-        MultilingualCriteriaExtractorFactory f = CriteriaExtractorFactoryProducer.getMultilingualFactory(MultilingualFactoryType.ECERTIS);
-        criteriaExtractor = f.createMultilingualCriteriaExtractor(VERSION);
-        return this;
+    protected void applyTaxonomyData(List<SelectableCriterion> criterionList) {
+        LOGGER.log(Level.WARNING, "V1 Taxonomy currently does not support cardinalities for Requirements/RequirementGroups");
     }
 
 }

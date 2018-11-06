@@ -1,7 +1,22 @@
+/**
+ * Copyright 2016-2018 University of Piraeus Research Center
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package eu.esens.espdvcd.model.requirement;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import eu.esens.espdvcd.codelist.enums.CriterionElementTypeEnum;
+import eu.esens.espdvcd.codelist.enums.RequirementTypeEnum;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.requirement.response.Response;
 
@@ -9,9 +24,9 @@ import javax.validation.constraints.NotNull;
 
 /**
  * Criterion requirement
- *
+ * <p>
  * Requirement to fulfill an specific criterion.
- *
+ * <p>
  * Created by ixuz on 2/24/16.
  */
 public class RequestRequirement implements Requirement {
@@ -65,7 +80,13 @@ public class RequestRequirement implements Requirement {
      * The type of property. Used to verify that structure of the property is correct
      * UBL syntax path:
      */
-    private CriterionElementTypeEnum typeCode = CriterionElementTypeEnum.QUESTION;
+    private RequirementTypeEnum type = RequirementTypeEnum.QUESTION;
+
+    private boolean mandatory;
+
+    private boolean multiple;
+
+    private String responseValuesRelatedArtefact;
 
     public RequestRequirement(@JsonProperty("ID") String ID,
                               @JsonProperty("responseDataType") ResponseTypeEnum responseDataType,
@@ -73,16 +94,22 @@ public class RequestRequirement implements Requirement {
         this.ID = ID;
         this.responseDataType = responseDataType;
         this.description = description;
+        // apply default cardinality 1
+        this.mandatory = true;
+        this.multiple = false;
     }
 
     public RequestRequirement(@JsonProperty("ID") String ID,
-                              @JsonProperty("typeCode") CriterionElementTypeEnum typeCode,
+                              @JsonProperty("type") RequirementTypeEnum type,
                               @JsonProperty("responseDataType") ResponseTypeEnum responseDataType,
                               @JsonProperty("description") String description) {
         this.ID = ID;
-        this.typeCode = typeCode;
+        this.type = type;
         this.responseDataType = responseDataType;
         this.description = description;
+        // apply default cardinality 1
+        this.mandatory = true;
+        this.multiple = false;
     }
 
     @Override
@@ -131,18 +158,48 @@ public class RequestRequirement implements Requirement {
     }
 
     @Override
-    public void setTypeCode(CriterionElementTypeEnum typeCode) {
-        this.typeCode = typeCode;
+    public RequirementTypeEnum getType() {
+        return type;
     }
 
     @Override
     public ResponseTypeEnum getResponseDataType() {
-      return this.responseDataType;
+        return this.responseDataType;
     }
 
     @Override
-    public CriterionElementTypeEnum getTypeCode() {
-        return typeCode;
+    public void setType(RequirementTypeEnum type) {
+        this.type = type;
+    }
+
+    @Override
+    public void setMandatory(boolean mandatory) {
+        this.mandatory = mandatory;
+    }
+
+    @Override
+    public void setMultiple(boolean multiple) {
+        this.multiple = multiple;
+    }
+
+    @Override
+    public boolean isMandatory() {
+        return mandatory;
+    }
+
+    @Override
+    public boolean isMultiple() {
+        return multiple;
+    }
+
+    @Override
+    public String getResponseValuesRelatedArtefact() {
+        return responseValuesRelatedArtefact;
+    }
+
+    @Override
+    public void setResponseValuesRelatedArtefact(String responseValuesRelatedArtefact) {
+        this.responseValuesRelatedArtefact = responseValuesRelatedArtefact;
     }
 
 }

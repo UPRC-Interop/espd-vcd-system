@@ -1,0 +1,60 @@
+/**
+ * Copyright 2016-2018 University of Piraeus Research Center
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "gradle.plugin.org.openrepose:gradle-jaxb-plugin:2.2.3"
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+apply plugin: 'org.openrepose.gradle.plugins.jaxb'
+
+dependencies {
+    jaxb "com.sun.xml.bind:jaxb-core:${jaxb_impl_version}"
+    jaxb "com.sun.xml.bind:jaxb-xjc:${jaxb_impl_version}"
+    jaxb "com.sun.xml.bind:jaxb-impl:${jaxb_impl_version}"
+    jaxb "javax.xml.bind:jaxb-api:${jaxb_impl_version}"
+    
+    compile group: 'com.googlecode.jaxb-namespaceprefixmapper-interfaces', name: 'JAXBNamespacePrefixMapper', version: '2.2.4'
+}
+
+jaxb {
+    // System.setProperty('javax.xml.accessExternalSchema', 'all')
+    
+    // espd edm v 2.0.2
+    bindingsDir = "${project.rootDir}/src/main/resources/xsd/bindings"
+    xsdDir = "${project.projectDir}/src/main/resources/xsd/v2"
+    bindings = ["binding_espdedm_v2.xjb"]
+    
+    xjc {
+        // taskClassname = "com.sun.tools.xjc.XJC2Task"
+        destinationDir = "${project.buildDir}/generated-sources/xjc"
+        args = ["-verbose"]
+    }
+        
+}
+
+compileJava.dependsOn xjc

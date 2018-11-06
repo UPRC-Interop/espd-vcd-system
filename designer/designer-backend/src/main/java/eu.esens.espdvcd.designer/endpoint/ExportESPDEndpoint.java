@@ -1,106 +1,131 @@
+/**
+ * Copyright 2016-2018 University of Piraeus Research Center
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package eu.esens.espdvcd.designer.endpoint;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.designer.deserialiser.RequirementDeserialiser;
 import eu.esens.espdvcd.designer.exception.ValidationException;
-import eu.esens.espdvcd.designer.service.ModeltoESPDService;
-import eu.esens.espdvcd.designer.typeEnum.ArtefactType;
+import eu.esens.espdvcd.designer.service.ExportESPDService;
+import eu.esens.espdvcd.designer.service.RegulatedExportESPDV1Service;
+import eu.esens.espdvcd.designer.service.RegulatedExportESPDV2Service;
+import eu.esens.espdvcd.designer.util.Errors;
+import eu.esens.espdvcd.designer.util.JsonUtil;
+import eu.esens.espdvcd.model.ESPDRequest;
+import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.model.RegulatedESPDRequest;
 import eu.esens.espdvcd.model.RegulatedESPDResponse;
 import eu.esens.espdvcd.model.requirement.Requirement;
-import eu.esens.espdvcd.retriever.exception.RetrieverException;
-import eu.esens.espdvcd.validator.ValidationResult;
-import org.xml.sax.SAXException;
+import eu.esens.espdvcd.schema.EDMVersion;
 import spark.Request;
 import spark.Response;
 import spark.Service;
 
-import javax.servlet.MultipartConfigElement;
-import javax.servlet.ServletException;
-import javax.servlet.http.Part;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.UnmarshalException;
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.nio.file.StandardOpenOption;
-import java.util.Collection;
-import java.util.List;
-import java.util.UUID;
 
 public class ExportESPDEndpoint extends Endpoint {
-    private final ModeltoESPDService service;
-    private final ArtefactType artefactType;
-    private final String DESERIALIZATION_ERROR = "Oops, the provided JSON document was not valid and could not be converted to an object. Did you provide the correct format? \nThis could help you:\n",
-            LOGGER_DESERIALIZATION_ERROR = "Error occurred in ESPDEndpoint while converting a JSON object to XML. ";
+    private final ExportESPDService service;
+    private static final String LOGGER_DESERIALIZATION_ERROR = "Error occurred in ESPDEndpoint while converting a JSON to XML. ";
 
-    public ExportESPDEndpoint(ModeltoESPDService service) {
-        this.service = service;
-        artefactType = service.getArtefactType();
-
-        SimpleModule desrModule = new SimpleModule();
-        desrModule.addDeserializer(Requirement.class, new RequirementDeserialiser());
-        MAPPER.registerModule(desrModule);
+    public ExportESPDEndpoint(EDMVersion version) {
+        MAPPER.registerModule(new SimpleModule().addDeserializer(Requirement.class, new RequirementDeserialiser(version)));
+        switch (version) {
+            case V1:
+                this.service = RegulatedExportESPDV1Service.getInstance();
+                break;
+            case V2:
+                this.service = RegulatedExportESPDV2Service.getInstance();
+                break;
+            default:
+                throw new IllegalArgumentException("Version supplied cannot be null.");
+        }
     }
 
     @Override
     public void configure(Service spark, String basePath) {
-        spark.path(basePath, () -> {
-            spark.get("", ((request, response) -> {
+        spark.path(basePath + "/espd", () -> {
+            spark.get("*", ((request, response) -> {
                 response.status(405);
-                return "You need to POST an artefact in json format.";
-            }));
+                response.header("Content-Type", "application/json");
+                return Errors.artefactInWrongFormatError();
+            }), JsonUtil.json());
 
-            spark.get("/", ((request, response) -> {
-                response.status(405);
-                return "You need to POST an artefact in json format.";
-            }));
+            spark.post("/request", this::handleESPDRequest);
 
-            spark.post("", this::postRequest);
-
-            spark.post("/", this::postRequest);
-
+            spark.post("/response", this::handleESPDResponse);
         });
     }
 
-    private Object postRequest(Request rq, Response rsp) throws IOException, ServletException, JAXBException, SAXException {
+    private Object handleESPDRequest(Request rq, Response rsp) throws JsonProcessingException {
         if (rq.contentType().contains("application/json")) {
-            Object document = null;
+            ESPDRequest document;
             try {
-                switch (artefactType) {
-                    case REQUEST:
-                        document = MAPPER.readValue(rq.body(), RegulatedESPDRequest.class);
-                        break;
-                    case RESPONSE:
-                        document = MAPPER.readValue(rq.body(), RegulatedESPDResponse.class);
-                        break;
-                }
+                document = MAPPER.readValue(rq.body(), RegulatedESPDRequest.class);
             } catch (IOException e) {
                 rsp.status(400);
                 LOGGER.severe(LOGGER_DESERIALIZATION_ERROR + e.getMessage());
-                return DESERIALIZATION_ERROR + e.getMessage();
+                e.printStackTrace();
+                rsp.header("Content-Type", "application/json");
+                return JsonUtil.toJson(Errors.artefactDeserialisationError(e.getMessage()));
             }
             rsp.header("Content-Type", "application/octet-stream");
-            switch (artefactType) {
-                case REQUEST:
-                    rsp.header("Content-Disposition", "attachment; filename=espd-request.xml;");
-                    break;
-                case RESPONSE:
-                    rsp.header("Content-Disposition", "attachment; filename=espd-response.xml;");
-                    break;
+            rsp.header("Content-Disposition", "attachment; filename=\"espd-request.xml\";");
+
+            try {
+                return service.exportESPDRequestAsInputStream(document);
+            } catch (ValidationException e) {
+                LOGGER.severe(e.getMessage());
+                rsp.status(406);
+                rsp.header("Content-Type", "application/json");
+                return JsonUtil.toJson(Errors.notAcceptableError(e.getMessage()));
             }
-            return service.CreateXMLStreamFromModel(document);
         } else {
             LOGGER.severe("Got unexpected content-type: " + rq.contentType());
             rsp.status(406);
-            return "Unacceptable content-type specified.";
+            rsp.header("Content-Type", "application/json");
+            return JsonUtil.toJson(Errors.unacceptableContentType());
         }
     }
 
-
+    private Object handleESPDResponse(Request rq, Response rsp) throws JsonProcessingException {
+        if (rq.contentType().contains("application/json")) {
+            ESPDResponse document;
+            try {
+                document = MAPPER.readValue(rq.body(), RegulatedESPDResponse.class);
+            } catch (IOException e) {
+                rsp.status(400);
+                rsp.header("Content-Type", "application/json");
+                LOGGER.severe(LOGGER_DESERIALIZATION_ERROR + e.getMessage());
+                return JsonUtil.toJson(Errors.artefactDeserialisationError(e.getMessage()));
+            }
+            rsp.header("Content-Type", "application/octet-stream");
+            rsp.header("Content-Disposition", "attachment; filename=\"espd-response.xml\";");
+            try {
+                return service.exportESPDResponseAsInputStream(document);
+            } catch (ValidationException e) {
+                LOGGER.severe(e.getMessage());
+                rsp.status(406);
+                rsp.header("Content-Type", "application/json");
+                return JsonUtil.toJson(Errors.notAcceptableError(e.getMessage()));
+            }
+        } else {
+            LOGGER.severe("Got unexpected content-type: " + rq.contentType());
+            rsp.status(406);
+            rsp.header("Content-Type", "application/json");
+            return JsonUtil.toJson(Errors.unacceptableContentType());
+        }
+    }
 }

@@ -1,213 +1,190 @@
+/**
+ * Copyright 2016-2018 University of Piraeus Research Center
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package eu.esens.espdvcd.validator;
 
-import eu.esens.espdvcd.validator.schematron.SchematronOrigin;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
-import java.io.InputStream;
-import java.net.URISyntaxException;
-import java.nio.file.Paths;
-import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 public class ESPDSchematronValidatorTest {
 
-    // ESPD Request
-    File aValidESPDRequestFile;
-    File anInvalidESPDRequestFile;
-    InputStream aValidESPDRequest;
-    InputStream anInvalidESPDRequest;
-    // ESPD Response
-    File aValidESPDResponseFile;
-    InputStream aValidESPDResponse;
-    InputStream anInvalidESPDResponse;
+    private static final Logger LOGGER = Logger.getLogger(ESPDSchematronValidatorTest.class.getName());
+
+    // EDM example artefacts
+    private File regulatedRequestV2;
+    private File regulatedResponseV2;
+    private File selfContainedRequestV2;
+    private File selfContainedResponseV2;
+
+    private File validRegulatedRequestV1;
+    private File invalidRegulatedRequestV1;
+
+    private File invalidRegulatedResponseV2;
+    private File invalidRegulatedResponseV2_12;
+    private File invalidRegulatedResponseV2_31;
+    private File invalidRegulatedResponseV2_37;
+    private File invalidRegulatedResponseV2_38;
+    private File invalidRegulatedResponseV2_60;
+
+    private File invalidSelfContainedRequestV2;
+    private File invalidSelfContainedResponseV2;
 
     @Before
     public void setUp() {
-        aValidESPDRequest = ESPDSchematronValidatorTest.class.getResourceAsStream("/espd-request.xml");
-        Assert.assertNotNull(aValidESPDRequest);
+        regulatedRequestV2 = new File(getClass().getClassLoader().getResource("REGULATED_ESPD_Request_2.0.2.xml").getFile());
+        Assert.assertNotNull(regulatedRequestV2);
 
-        try {
-            aValidESPDRequestFile = Paths.get(getClass().getClassLoader()
-                    .getResource("espd-request.xml").toURI()).toFile();
-            anInvalidESPDRequestFile = Paths.get(getClass().getClassLoader()
-                    .getResource("ESPDRequest_DA_Test.xml").toURI()).toFile();
-             aValidESPDResponseFile = Paths.get(getClass().getClassLoader()
-                     .getResource("espd-response.xml").toURI()).toFile();
+        regulatedResponseV2 = new File(getClass().getClassLoader().getResource("REGULATED_ESPD_Response_2.0.2.xml").getFile());
+        Assert.assertNotNull(regulatedResponseV2);
 
-        } catch (URISyntaxException e) {
-            Logger.getLogger(ESPDSchematronValidatorTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+        selfContainedRequestV2 = new File(getClass().getClassLoader().getResource("SELFCONTAINED-ESPD-Request_2.0.2.xml").getFile());
+        Assert.assertNotNull(selfContainedRequestV2);
+
+        selfContainedResponseV2 = new File(getClass().getClassLoader().getResource("SELFCONTAINED_ESPD_Response_2.0.2.xml").getFile());
+        Assert.assertNotNull(selfContainedResponseV2);
+
+        validRegulatedRequestV1 = new File(getClass().getClassLoader().getResource("espd-request.xml").getFile());
+        Assert.assertNotNull(validRegulatedRequestV1);
+
+        invalidRegulatedRequestV1 = new File(getClass().getClassLoader().getResource("espd-request-invalid.xml").getFile());
+        Assert.assertNotNull(invalidRegulatedRequestV1);
+
+        invalidRegulatedResponseV2 = new File(getClass().getClassLoader().getResource("espd-response-v2-11.xml").getFile());
+        Assert.assertNotNull(invalidRegulatedResponseV2);
+
+        invalidRegulatedResponseV2_12 = new File(getClass().getClassLoader().getResource("espd-response-v2-12.xml").getFile());
+        Assert.assertNotNull(invalidRegulatedResponseV2_12);
+
+        invalidRegulatedResponseV2_31 = new File(getClass().getClassLoader().getResource("espd-response-v2-31.xml").getFile());
+        Assert.assertNotNull(invalidRegulatedResponseV2_31);
+
+        invalidRegulatedResponseV2_37 = new File(getClass().getClassLoader().getResource("espd-response-v2-37.xml").getFile());
+        Assert.assertNotNull(invalidRegulatedResponseV2_37);
+
+        invalidRegulatedResponseV2_38 = new File(getClass().getClassLoader().getResource("espd-response-v2-38.xml").getFile());
+        Assert.assertNotNull(invalidRegulatedResponseV2_38);
+
+        invalidRegulatedResponseV2_60 = new File(getClass().getClassLoader().getResource("espd-response-v2-60.xml").getFile());
+        Assert.assertNotNull(invalidRegulatedResponseV2_60);
+
+        invalidSelfContainedRequestV2 = new File(getClass().getClassLoader().getResource("SELFCONTAINED-ESPD-Request_2.0.2.xml").getFile());
+        Assert.assertNotNull(invalidSelfContainedRequestV2);
+
+        invalidSelfContainedResponseV2 = new File(getClass().getClassLoader().getResource("SELFCONTAINED_ESPD_Response_2.0.2.xml").getFile());
+        Assert.assertNotNull(invalidSelfContainedResponseV2);
+    }
+
+    @Test
+    public void testCreateESPDSchematronValidator() {
+
+//        ArtefactValidator v1 = ValidatorFactory.createESPDSchematronValidator(regulatedRequestV2);
+//        Assert.assertNotNull(v1);
+//        printErrorsIfExist(v1);
+//        Assert.assertTrue(v1.isValid());
+//
+//        ArtefactValidator v2 = ValidatorFactory.createESPDSchematronValidator(regulatedResponseV2);
+//        Assert.assertNotNull(v2);
+//        printErrorsIfExist(v2);
+//        Assert.assertTrue(v2.isValid());
+//
+//        ArtefactValidator v3 = ValidatorFactory.createESPDSchematronValidator(selfContainedRequestV2);
+//        Assert.assertNotNull(v3);
+//        printErrorsIfExist(v3);
+//        Assert.assertTrue(v3.isValid());
+//
+//        ArtefactValidator v4 = ValidatorFactory.createESPDSchematronValidator(selfContainedResponseV2);
+//        Assert.assertNotNull(v4);
+//        printErrorsIfExist(v4);
+//        // after schematron files correction this is not valid anymore
+//        Assert.assertFalse(v4.isValid());
+//
+//        ArtefactValidator v5 = ValidatorFactory.createESPDSchematronValidator(validRegulatedRequestV1);
+//        Assert.assertNotNull(v5);
+//        printErrorsIfExist(v5);
+//        Assert.assertTrue(v5.isValid());
+//
+//        ArtefactValidator v6 = ValidatorFactory.createESPDSchematronValidator(invalidRegulatedRequestV1);
+//        Assert.assertNotNull(v6);
+//        printErrorsIfExist(v6);
+//        Assert.assertFalse(v6.isValid());
+//
+//        ArtefactValidator v7 = ValidatorFactory.createESPDSchematronValidator(invalidRegulatedResponseV2);
+//        Assert.assertNotNull(v7);
+//        printErrorsIfExist(v7);
+//        Assert.assertFalse(v7.isValid());
+//
+//        ArtefactValidator v8 = ValidatorFactory.createESPDSchematronValidator(invalidRegulatedResponseV2_12);
+//        Assert.assertNotNull(v8);
+//        printErrorsIfExist(v8);
+//        Assert.assertFalse(v8.isValid());
+//
+//        ArtefactValidator v9 = ValidatorFactory.createESPDSchematronValidator(invalidRegulatedResponseV2_31);
+//        Assert.assertNotNull(v9);
+//        printErrorsIfExist(v9);
+//        Assert.assertFalse(v9.isValid());
+//
+//        ArtefactValidator v10 = ValidatorFactory.createESPDSchematronValidator(invalidRegulatedResponseV2_37);
+//        Assert.assertNotNull(v10);
+//        printErrorsIfExist(v10);
+//        Assert.assertFalse(v10.isValid());
+//
+//        ArtefactValidator v11 = ValidatorFactory.createESPDSchematronValidator(invalidRegulatedResponseV2_38);
+//        Assert.assertNotNull(v11);
+//        printErrorsIfExist(v11);
+//        Assert.assertFalse(v11.isValid());
+
+        ArtefactValidator v12 = ValidatorFactory.createESPDSchematronValidator(invalidRegulatedResponseV2_60);
+        Assert.assertNotNull(v12);
+        printErrorsIfExist(v12);
+        Assert.assertTrue(v12.isValid());
+
+//        ArtefactValidator v13 = ValidatorFactory.createESPDSchematronValidator(invalidSelfContainedRequestV2);
+//        Assert.assertNotNull(v13);
+//        printErrorsIfExist(v13);
+//        Assert.assertTrue(v13.isValid());
+//
+//        ArtefactValidator v14 = ValidatorFactory.createESPDSchematronValidator(invalidSelfContainedResponseV2);
+//        Assert.assertNotNull(v14);
+//        printErrorsIfExist(v14);
+//        Assert.assertFalse(v14.isValid());
+    }
+
+    private void printErrorsIfExist(ArtefactValidator v) {
+        if (!v.isValid()) {
+
+            int index = 1;
+
+            for (ValidationResult re : v.getValidationMessages()) {
+                System.out.printf("%-3d: [%s] (%s) %s: %s => %s \n", index++, re.getFlag(), re.getId(), re.getLocation(), re.getTest(), re.getText());
+            }
         }
 
-        Assert.assertNotNull(aValidESPDRequestFile);
-        Assert.assertNotNull(aValidESPDResponseFile);
+        System.out.println("Total number of errors: " + v.getValidationMessages().stream()
+                .filter(vr -> !"warning".equals(vr.getFlag()))
+                .collect(Collectors.toList())
+                .size());
 
-        anInvalidESPDRequest = ESPDSchematronValidatorTest.class.getResourceAsStream("/espd-request-invalid.xml");
-        Assert.assertNotNull(anInvalidESPDRequest);
-
-        aValidESPDResponse = ESPDSchematronValidatorTest.class.getResourceAsStream("/espd-response.xml");
-        Assert.assertNotNull(aValidESPDResponse);
-    }
-
-    @Test
-    public void testIsESPDRequestValidForEHF1() {
-        // create ESPD request validator object for valid ESPD request and check if ESPD Request artifact is valid
-        ArtefactValidator validatorForValidRequest = ValidatorFactory
-                .createESPDArtefactSchematronValidator(aValidESPDRequest, "/rules/v1/ehf/ESPDRequest/EHF-ESPD-REQUEST.sch");
-        if (!validatorForValidRequest.isValid()){
-            validatorForValidRequest.getValidationMessages().forEach(re -> System.out.printf("(%s) %s: %s => %s \n",re.getId(), re.getLocation(), re.getTest(), re.getText()));
-        }
-        //EHF Schematrons break the validation because of criteria taxonomy issues so we comment the assertion
-        //Assert.assertTrue(validatorForValidRequest.isValid());
-    }
-
-    @Test
-    public void testIsESPDResponseValidForEHF1() {
-        // Create ESPD response validator object for a valid ESPD response and check if ESPD response artifact is valid
-        ArtefactValidator validatorForValidResponse = ValidatorFactory
-                .createESPDArtefactSchematronValidator(aValidESPDResponse, "/rules/v1/ehf/ESPDResponse/EHF-ESPD-RESPONSE.sch");
-        if (!validatorForValidResponse.isValid()){
-            validatorForValidResponse.getValidationMessages().forEach(re -> System.out.printf("(%s) %s: %s => %s \n",re.getId(), re.getLocation(), re.getTest(), re.getText()));
-        }
-      //EHF Schematrons break the validation because of criteria taxonomy issues so we comment the assertion
-      //Assert.assertTrue(validatorForValidResponse.isValid());
-    }
-
-    @Test
-    public void testIsESPDRequestValidForEU1() {
-        // create ESPD request validator object for valid ESPD request and check if ESPD Request artifact is valid
-        ArtefactValidator validatorForValidRequest = ValidatorFactory
-                .createESPDArtefactSchematronValidator(aValidESPDRequest, "/rules/v1/eu/ESPDRequest/sch/02-ESPD-CL-attrb-rules.sch");
-        if (!validatorForValidRequest.isValid()){
-            validatorForValidRequest.getValidationMessages().forEach(re -> System.out.printf("(%s) %s: %s => %s \n",re.getId(), re.getLocation(), re.getTest(), re.getText()));
-        }
-        Assert.assertTrue(validatorForValidRequest.isValid());
-    }
-
-    @Test
-    public void testIsESPDResponseValidForEU1() {
-        // Create ESPD response validator object for a valid ESPD response and check if ESPD response artifact is valid
-        ArtefactValidator validatorForValidResponse = ValidatorFactory
-                .createESPDArtefactSchematronValidator(aValidESPDResponse, "/rules/v1/eu/ESPDResponse/sch/02-ESPD-CL-attrb-rules.sch");
-        if (!validatorForValidResponse.isValid()){
-            validatorForValidResponse
-                    .getValidationMessages().forEach(re -> System.out.printf("(%s) %s: %s => %s \n",re.getId(), re.getLocation(), re.getTest(), re.getText()));
-        }
-        Assert.assertTrue(validatorForValidResponse.isValid());
-    }
-
-    @Test
-    public void testIsESPDRequestValidForEU2() {
-        // create ESPD request validator object for valid ESPD request and check if ESPD Request artifact is valid
-        ArtefactValidator validatorForValid2 = ValidatorFactory
-                .createESPDArtefactSchematronValidator(aValidESPDRequest, "/rules/v1/eu/ESPDRequest/sch/03-ESPD-ID-attrb-rules.sch");
-        if (!validatorForValid2.isValid()){
-            validatorForValid2
-                    .getValidationMessages().forEach(re -> System.out.printf("(%s) %s: %s => %s \n",re.getId(), re.getLocation(), re.getTest(), re.getText()));
-        }
-        Assert.assertTrue(validatorForValid2.isValid());
-    }
-
-    @Test
-    public void testIsESPDResponseValidForEU2() {
-        // Create ESPD response validator object for a valid ESPD response and check if ESPD response artifact is valid
-        ArtefactValidator validatorForValidResponse = ValidatorFactory
-                .createESPDArtefactSchematronValidator(aValidESPDResponse, "/rules/v1/eu/ESPDResponse/sch/03-ESPD-ID-attrb-rules.sch");
-        if (!validatorForValidResponse.isValid()){
-            validatorForValidResponse
-                    .getValidationMessages().forEach(re -> System.out.printf("(%s) %s: %s => %s \n",re.getId(), re.getLocation(), re.getTest(), re.getText()));
-        }
-        Assert.assertTrue(validatorForValidResponse.isValid());
-    }
-
-    @Test
-    public void testIsESPDRequestValidForEU3() {
-        // create ESPD request validator object for valid ESPD request and check if ESPD Request artifact is valid
-        ArtefactValidator validatorForValid3 = ValidatorFactory
-                .createESPDArtefactSchematronValidator(aValidESPDRequest, "/rules/v1/eu/ESPDRequest/sch/04-ESPD-Common-BR-rules.sch");
-        if (!validatorForValid3.isValid()){
-            validatorForValid3
-                    .getValidationMessages().forEach(re -> System.out.printf("(%s) %s: %s => %s \n",re.getId(), re.getLocation(), re.getTest(), re.getText()));
-        }
-        Assert.assertTrue(validatorForValid3.isValid());
-    }
-
-    @Test
-    public void testIsESPDResponseValidForEU3() {
-        // Create ESPD response validator object for a valid ESPD response and check if ESPD response artifact is valid
-        ArtefactValidator validatorForValidResponse = ValidatorFactory
-                .createESPDArtefactSchematronValidator(aValidESPDResponse, "/rules/v1/eu/ESPDResponse/sch/04-ESPD-Common-BR-rules.sch");
-        if (!validatorForValidResponse.isValid()){
-            validatorForValidResponse
-                    .getValidationMessages().forEach(re -> System.out.printf("(%s) %s: %s => %s \n",re.getId(), re.getLocation(), re.getTest(), re.getText()));
-        }
-        Assert.assertTrue(validatorForValidResponse.isValid());
-    }
-
-    @Test
-    public void testIsESPDResponseValidForEU4() {
-        // Create ESPD response validator object for a valid ESPD response and check if ESPD response artifact is valid
-        ArtefactValidator validatorForValidResponse = ValidatorFactory
-                .createESPDArtefactSchematronValidator(aValidESPDResponse, "/rules/v1/eu/ESPDResponse/sch/05-ESPD-Spec-BR-rules.sch");
-        if (!validatorForValidResponse.isValid()){
-            validatorForValidResponse
-                    .getValidationMessages().forEach(re -> System.out.printf("(%s) %s: %s => %s \n",re.getId(), re.getLocation(), re.getTest(), re.getText()));
-        }
-        Assert.assertTrue(validatorForValidResponse.isValid());
-    }
-
-    @Test
-    public void testIsESPDRequestValidForEU() {
-        ArtefactValidator validatorForValidRequest = ValidatorFactory
-                .createESPDRequestSchematronValidator(aValidESPDRequestFile, SchematronOrigin.EU);
-        Assert.assertTrue(validatorForValidRequest.isValid());
-  //      Assert.assertTrue(validatorForValidRequest.getValidationMessagesFiltered("fatal").size() == 0);
-        Assert.assertTrue(validatorForValidRequest.getValidationMessages().size() == 0);
-
-        ArtefactValidator validatorForInvalidRequest = ValidatorFactory
-                .createESPDRequestSchematronValidator(anInvalidESPDRequestFile, SchematronOrigin.EU);
-        Assert.assertFalse(validatorForInvalidRequest.isValid());
-
-//        Assert.assertTrue(validatorForInvalidRequest.getValidationMessagesFiltered("fatal").size() > 0);
-        Assert.assertTrue(validatorForInvalidRequest.getValidationMessages().size() > 0);
-    }
-
-    @Test
-    public void testIsESPDRequestValidForEHF() {
-        ArtefactValidator validatorForValidRequest = ValidatorFactory
-                .createESPDRequestSchematronValidator(aValidESPDRequestFile, SchematronOrigin.EHF);
-      //EHF Schematrons break the validation because of criteria taxonomy issues so we comment the assertion
-//        Assert.assertTrue(validatorForValidRequest.isValid());
-//        Assert.assertTrue(validatorForValidRequest.getValidationMessagesFiltered("fatal").size() == 0);
-//        Assert.assertTrue(validatorForValidRequest.getValidationMessages().size() == 0);
-
-        ArtefactValidator validatorForInvalidRequest = ValidatorFactory
-                .createESPDRequestSchematronValidator(anInvalidESPDRequestFile, SchematronOrigin.EHF);
-      //EHF Schematrons break the validation because of criteria taxonomy issues so we comment the assertion
-//        Assert.assertFalse(validatorForInvalidRequest.isValid());
-//        Assert.assertTrue(validatorForInvalidRequest.getValidationMessagesFiltered("fatal").size() > 0);
-//        Assert.assertTrue(validatorForInvalidRequest.getValidationMessages().size() > 0);
-    }
-
-    @Test
-    public void testIsESPDResponseValidForEU() {
-        ArtefactValidator validatorForValidResponse = ValidatorFactory
-                .createESPDResponseSchematronValidator(aValidESPDResponseFile, SchematronOrigin.EU);
-        Assert.assertTrue(validatorForValidResponse.isValid());
-    //    Assert.assertTrue(validatorForValidResponse.getValidationMessagesFiltered("fatal").size() == 0);
-        Assert.assertTrue(validatorForValidResponse.getValidationMessages().size() == 0);
-    }
-
-    @Test
-    public void testIsESPDResponseValidForEHF() {
-        ArtefactValidator validatorForValidResponse = ValidatorFactory
-                .createESPDResponseSchematronValidator(aValidESPDResponseFile, SchematronOrigin.EHF);
-      //EHF Schematrons break the validation because of criteria taxonomy issues so we comment the assertion
-//        Assert.assertTrue(validatorForValidResponse.isValid());
-//        Assert.assertTrue(validatorForValidResponse.getValidationMessagesFiltered("fatal").size() == 0);
-//        Assert.assertTrue(validatorForValidResponse.getValidationMessages().size() == 0);
+        System.out.println("Total number of warnings: " + v.getValidationMessages().stream()
+                .filter(vr -> "warning".equals(vr.getFlag()))
+                .collect(Collectors.toList())
+                .size());
     }
 
 }

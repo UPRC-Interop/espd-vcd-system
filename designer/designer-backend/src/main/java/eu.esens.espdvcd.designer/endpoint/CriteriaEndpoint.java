@@ -1,23 +1,34 @@
+/**
+ * Copyright 2016-2018 University of Piraeus Research Center
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package eu.esens.espdvcd.designer.endpoint;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.module.SimpleAbstractTypeResolver;
-import com.fasterxml.jackson.databind.module.SimpleModule;
-import eu.esens.espdvcd.designer.deserialiser.RequirementDeserialiser;
 import eu.esens.espdvcd.designer.service.CriteriaService;
-import eu.esens.espdvcd.model.requirement.Requirement;
-import eu.esens.espdvcd.model.requirement.ResponseRequirement;
+import eu.esens.espdvcd.designer.util.Errors;
+import eu.esens.espdvcd.designer.util.JsonUtil;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import spark.Request;
 import spark.Response;
 import spark.Service;
 
+import java.util.Objects;
+
 public class CriteriaEndpoint extends Endpoint {
 
     private final CriteriaService service;
-    private final String CRITERIA_ERROR = "Criteria requested not found",
-            TRANSLATION_ERROR = "Translation not supported",
-            RETRIEVER_ERROR = "Failed to get criteria with error: \n";
 
     public CriteriaEndpoint(CriteriaService service) {
         this.service = service;
@@ -25,87 +36,110 @@ public class CriteriaEndpoint extends Endpoint {
 
     @Override
     public void configure(Service spark, String basePath) {
-        spark.path(basePath, () -> {
+
+        spark.path(basePath + "/criteria", () -> {
+            spark.get("/lang/:lang", (request, response) -> {
+                String lang = request.params("lang");
+                return getNoFilter(response, lang);
+            }, JsonUtil.json());
             spark.get("", (request, response) -> {
-                String lang = request.queryParams("lang");
+                String lang = request.params("lang");
                 return getNoFilter(response, lang);
-            });
+            }, JsonUtil.json());
+            spark.get("/getFilters", this::getFilters, JsonUtil.json());
+            spark.get("/:filter/lang/:lang", this::getFilter, JsonUtil.json());
+            spark.get("/:filter", this::getFilter, JsonUtil.json());
+            spark.get("/national/:countryCode", this::getNational, JsonUtil.json());
+            spark.get("/national/:countryCode/lang/:lang", this::getNational, JsonUtil.json());
 
-            spark.get("/", (request, response) -> {
-                String lang = request.queryParams("lang");
-                return getNoFilter(response, lang);
-            });
-
-            spark.get("/:filter", (request, response) -> {
-                String lang = request.queryParams("lang");
-                return getFilter(request, response, lang);
-            });
-
-            spark.get("/:filter/", (request, response) -> {
-                String lang = request.queryParams("lang");
-                return getFilter(request, response, lang);
-            });
         });
 
+        spark.after((req, res) -> res.type("application/json"));
     }
 
     private Object getNoFilter(Response response, String lang) throws JsonProcessingException {
-        if (lang == null) {
+        if (Objects.isNull(lang)) {
             try {
-                response.header("Content-Type", "application/json");
-                return WRITER.writeValueAsString(service.getCriteria());
+                return service.getCriteria();
             } catch (RetrieverException e) {
-                response.status(500);
+                response.status(502);
                 LOGGER.severe(e.getMessage());
-                return RETRIEVER_ERROR + e.getMessage();
+                return Errors.retrieverError(e.getMessage());
             }
         } else {
             try {
-                response.header("Content-Type", "application/json");
-                return WRITER.writeValueAsString(service.getTranslatedCriteria(lang));
+                return service.getTranslatedCriteria(lang);
             } catch (UnsupportedOperationException e) {
                 response.status(406);
                 LOGGER.warning(e.getMessage());
-                return TRANSLATION_ERROR;
+                return Errors.notAcceptableError(e.getMessage());
             } catch (RetrieverException e) {
-                response.status(500);
+                response.status(502);
                 LOGGER.severe(e.getMessage());
-                return RETRIEVER_ERROR + e.getMessage();
+                return Errors.retrieverError(e.getMessage());
             }
         }
     }
 
-    private Object getFilter(Request request, Response response, String lang) throws JsonProcessingException {
-        if (lang == null) {
+    private Object getFilter(Request request, Response response) throws JsonProcessingException {
+        String lang = request.params("lang");
+        if (Objects.isNull(lang)) {
             try {
-                response.header("Content-Type", "application/json");
-                return WRITER.writeValueAsString(service.getFilteredCriteriaList(request.params("filter").toUpperCase()));
+                return service.getFilteredCriteriaList(request.params("filter").toUpperCase());
             } catch (IllegalArgumentException e) {
                 response.status(404);
                 LOGGER.warning(e.getMessage());
-                return CRITERIA_ERROR;
+                return Errors.criteriaNotFoundError();
             } catch (RetrieverException e) {
-                response.status(500);
+                response.status(502);
                 LOGGER.severe(e.getMessage());
-                return RETRIEVER_ERROR + e.getMessage();
+                return Errors.retrieverError(e.getMessage());
             }
         } else {
             try {
-                response.header("Content-Type", "application/json");
-                return WRITER.writeValueAsString(service.getFilteredTranslatedCriteriaList(request.params("filter").toUpperCase(), lang));
+                return service.getFilteredTranslatedCriteriaList(request.params("filter").toUpperCase(), lang);
             } catch (IllegalArgumentException e) {
                 response.status(404);
                 LOGGER.warning(e.getMessage());
-                return CRITERIA_ERROR;
+                return Errors.criteriaNotFoundError();
             } catch (UnsupportedOperationException e) {
                 response.status(406);
                 LOGGER.warning(e.getMessage());
-                return TRANSLATION_ERROR;
+                return Errors.notAcceptableError(e.getMessage());
             } catch (RetrieverException e) {
-                response.status(500);
+                response.status(502);
                 LOGGER.severe(e.getMessage());
-                return RETRIEVER_ERROR + e.getMessage();
+                return Errors.retrieverError(e.getMessage());
             }
         }
+    }
+
+    private Object getNational(Request request, Response response) throws JsonProcessingException {
+        String lang = request.params("lang");
+        String countryCode = request.params("countryCode");
+        if (Objects.isNull(lang) && Objects.nonNull(countryCode)) {
+            try {
+                return service.getCriteria(countryCode);
+            } catch (RetrieverException e) {
+                response.status(502);
+                LOGGER.severe(e.getMessage());
+                return Errors.retrieverError(e.getMessage());
+            }
+        } else if (Objects.isNull(countryCode)) {
+            response.status(406);
+            return Errors.notAcceptableError("Empty country code is not allowed.");
+        } else {
+            try {
+                return service.getTranslatedCriteria(countryCode, lang);
+            } catch (RetrieverException e) {
+                response.status(502);
+                LOGGER.severe(e.getMessage());
+                return Errors.retrieverError(e.getMessage());
+            }
+        }
+    }
+
+    private Object getFilters(Request request, Response response) throws JsonProcessingException {
+        return service.getCriteriaFilters();
     }
 }

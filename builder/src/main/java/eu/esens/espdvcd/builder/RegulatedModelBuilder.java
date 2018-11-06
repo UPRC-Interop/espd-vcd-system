@@ -1,3 +1,18 @@
+/**
+ * Copyright 2016-2018 University of Piraeus Research Center
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package eu.esens.espdvcd.builder;
 
 import eu.esens.espdvcd.builder.exception.BuilderException;
@@ -6,8 +21,8 @@ import eu.esens.espdvcd.builder.util.ArtefactUtils;
 import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
+import eu.esens.espdvcd.schema.EDMVersion;
 import eu.esens.espdvcd.schema.SchemaUtil;
-import eu.esens.espdvcd.schema.SchemaVersion;
 import eu.espd.schema.v1.espdrequest_1.ESPDRequestType;
 import eu.espd.schema.v1.espdresponse_1.ESPDResponseType;
 import eu.espd.schema.v2.pre_award.qualificationapplicationrequest.QualificationApplicationRequestType;
@@ -17,10 +32,13 @@ import javax.xml.bind.JAXBException;
 import javax.xml.transform.stream.StreamSource;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public abstract class RegulatedModelBuilder implements ModelBuilder {
+
+    private static final Logger LOGGER = Logger.getLogger(RegulatedModelBuilder.class.getName());
 
     private EODetails eoDetails = null;
     private CADetails caDetails = null;
@@ -126,9 +144,15 @@ public abstract class RegulatedModelBuilder implements ModelBuilder {
      * @return the same ModelBuilder instance for incremental creation of the
      * required object.
      */
-    abstract RegulatedModelBuilder addDefaultESPDCriteriaList();
+    public abstract RegulatedModelBuilder addDefaultESPDCriteriaList();
 
-    abstract RegulatedModelBuilder addECertisESPDCriteriaList();
+    /**
+     * Apply taxonomy cardinalities to REQUIREMENT and REQUIREMENT_GROUP and
+     * REQUIREMENT_GROUP type {@link eu.esens.espdvcd.codelist.enums.RequirementGroupTypeEnum}
+     *
+     * @param criterionList The Criterion List
+     */
+    protected abstract void applyTaxonomyData(List<SelectableCriterion> criterionList);
 
     public ESPDRequest createESPDRequest() throws BuilderException {
         ESPDRequest req;
@@ -138,8 +162,13 @@ public abstract class RegulatedModelBuilder implements ModelBuilder {
                 try {
                     req.setCriterionList(criteriaExtractor.getFullList(req.getFullCriterionList()));
                 } catch (RetrieverException ex) {
-                    Logger.getLogger(RegulatedModelBuilder.class.getName()).log(Level.SEVERE, null, ex);
+                    LOGGER.log(Level.SEVERE, null, ex);
                 }
+            } else {
+                // imported XML Criteria have default cardinalities, therefore
+                // taxonomy cardinalities will be applied to them in order to
+                // comply with designer needs.
+                applyTaxonomyData(req.getFullCriterionList());
             }
         } else {
             req = new RegulatedESPDRequest();
@@ -177,8 +206,13 @@ public abstract class RegulatedModelBuilder implements ModelBuilder {
                 try {
                     res.setCriterionList(criteriaExtractor.getFullList(res.getFullCriterionList(), true));
                 } catch (RetrieverException ex) {
-                    Logger.getLogger(RegulatedModelBuilder.class.getName()).log(Level.SEVERE, null, ex);
+                    LOGGER.log(Level.SEVERE, null, ex);
                 }
+            } else {
+                // imported XML Criteria have default cardinalities, therefore
+                // taxonomy cardinalities will be applied to them in order to
+                // comply with designer needs.
+                applyTaxonomyData(res.getFullCriterionList());
             }
 
         } else {
@@ -189,6 +223,7 @@ public abstract class RegulatedModelBuilder implements ModelBuilder {
         if (res.getCADetails() == null) {
             res.setCADetails(createDefaultCADetails());
         }
+
         if (res.getEODetails() == null) {
             res.setEODetails(createDefaultEODetails());
         }
@@ -226,15 +261,15 @@ public abstract class RegulatedModelBuilder implements ModelBuilder {
 
         try (InputStream bis = ArtefactUtils.getBufferedInputStream(xmlESPD)) {
             // Check and read the file in the JAXB Object
-            // but first identify the artefact schema version
-            switch (ArtefactUtils.findSchemaVersion(xmlESPD)) {
+            // but first identify the artefact edm version
+            switch (ArtefactUtils.findEDMVersion(xmlESPD)) {
                 case V1:
-                    Logger.getLogger(RegulatedModelBuilder.class.getName()).log(Level.INFO, "v1 artefact has been imported...");
+                    LOGGER.log(Level.INFO, "v1 artefact has been imported...");
                     ESPDRequestType espdRequestType = readESPDRequestFromStream(bis);
                     req = ModelFactory.ESPD_REQUEST.extractESPDRequest(espdRequestType); // Create the Model Object
                     break;
                 case V2:
-                    Logger.getLogger(RegulatedModelBuilder.class.getName()).log(Level.INFO, "v2 artefact has been imported...");
+                    LOGGER.log(Level.INFO, "v2 artefact has been imported...");
                     QualificationApplicationRequestType qualificationApplicationRequestType = readQualificationApplicationRequestFromStream(bis);
                     req = ModelFactory.ESPD_REQUEST.extractESPDRequest(qualificationApplicationRequestType); // Create the Model Object
                     break;
@@ -243,7 +278,7 @@ public abstract class RegulatedModelBuilder implements ModelBuilder {
             }
 
         } catch (IOException | JAXBException ex) {
-            Logger.getLogger(RegulatedModelBuilder.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.log(Level.SEVERE, null, ex);
             throw new BuilderException("Error in Reading XML Input Stream", ex);
         }
 
@@ -264,17 +299,17 @@ public abstract class RegulatedModelBuilder implements ModelBuilder {
 
         try (InputStream bis = ArtefactUtils.getBufferedInputStream(xmlESPDRes)) {
             // Check and read the file in the JAXB Object
-            // but first identify the artefact schema version
-            switch (ArtefactUtils.findSchemaVersion(xmlESPDRes)) {
+            // but first identify the artefact edm version
+            switch (ArtefactUtils.findEDMVersion(xmlESPDRes)) {
                 case V1:
-                    Logger.getLogger(RegulatedModelBuilder.class.getName()).log(Level.INFO, "v1 artefact has been imported...");
+                    LOGGER.log(Level.INFO, "v1 artefact has been imported...");
                     // Check and read the file in the JAXB Object
                     ESPDResponseType espdResponseType = readESPDResponseFromStream(bis);
                     // Create the Model Object
                     res = ModelFactory.ESPD_RESPONSE.extractESPDResponse(espdResponseType);
                     break;
                 case V2:
-                    Logger.getLogger(RegulatedModelBuilder.class.getName()).log(Level.INFO, "v2 artefact has been imported...");
+                    LOGGER.log(Level.INFO, "v2 artefact has been imported...");
                     // Check and read the file in the JAXB Object
                     QualificationApplicationResponseType qualificationApplicationResponseType = readQualificationApplicationResponseFromStream(bis);
                     // Create the Model Object
@@ -285,7 +320,7 @@ public abstract class RegulatedModelBuilder implements ModelBuilder {
             }
 
         } catch (IOException | JAXBException ex) {
-            Logger.getLogger(RegulatedModelBuilder.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.log(Level.SEVERE, null, ex);
             throw new BuilderException("Error in Reading Input Stream for ESPD Response", ex);
         }
 
@@ -295,25 +330,25 @@ public abstract class RegulatedModelBuilder implements ModelBuilder {
     private QualificationApplicationRequestType readQualificationApplicationRequestFromStream(InputStream is) throws JAXBException {
         // Start with the convenience methods provided by JAXB. If there are
         // performance issues we will switch back to the JAXB API Usage
-        return SchemaUtil.getUnmarshaller(SchemaVersion.V2).unmarshal(new StreamSource(is), QualificationApplicationRequestType.class).getValue();
+        return SchemaUtil.getUnmarshaller(EDMVersion.V2).unmarshal(new StreamSource(is), QualificationApplicationRequestType.class).getValue();
     }
 
     protected QualificationApplicationResponseType readQualificationApplicationResponseFromStream(InputStream is) throws JAXBException {
         // Start with the convenience methods provided by JAXB. If there are
         // performance issues we will switch back to the JAXB API Usage
-        return SchemaUtil.getUnmarshaller(SchemaVersion.V2).unmarshal(new StreamSource(is), QualificationApplicationResponseType.class).getValue();
+        return SchemaUtil.getUnmarshaller(EDMVersion.V2).unmarshal(new StreamSource(is), QualificationApplicationResponseType.class).getValue();
     }
 
     private ESPDRequestType readESPDRequestFromStream(InputStream is) throws JAXBException {
         // Start with the convenience methods provided by JAXB. If there are
         // performance issues we will switch back to the JAXB API Usage
-        return SchemaUtil.getUnmarshaller(SchemaVersion.V1).unmarshal(new StreamSource(is), ESPDRequestType.class).getValue();
+        return SchemaUtil.getUnmarshaller(EDMVersion.V1).unmarshal(new StreamSource(is), ESPDRequestType.class).getValue();
     }
 
     protected ESPDResponseType readESPDResponseFromStream(InputStream is) throws JAXBException {
         // Start with the convenience methods provided by JAXB. If there are
         // performance issues we will switch back to the JAXB API Usage
-        return SchemaUtil.getUnmarshaller(SchemaVersion.V1).unmarshal(new StreamSource(is), ESPDResponseType.class).getValue();
+        return SchemaUtil.getUnmarshaller(EDMVersion.V1).unmarshal(new StreamSource(is), ESPDResponseType.class).getValue();
     }
 
     private void handleNullCriteriaExtractor(ESPDRequest req) {
@@ -321,7 +356,7 @@ public abstract class RegulatedModelBuilder implements ModelBuilder {
             try {
                 req.setCriterionList(criteriaExtractor.getFullList());
             } catch (RetrieverException ex) {
-                Logger.getLogger(RegulatedModelBuilder.class.getName()).log(Level.SEVERE, null, ex);
+                LOGGER.log(Level.SEVERE, null, ex);
             }
         } else {
             req.setCriterionList(getEmptyCriteriaList());

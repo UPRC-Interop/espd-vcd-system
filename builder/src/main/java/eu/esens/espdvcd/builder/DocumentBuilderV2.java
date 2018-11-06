@@ -1,10 +1,25 @@
+/**
+ * Copyright 2016-2018 University of Piraeus Research Center
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package eu.esens.espdvcd.builder;
 
 import eu.esens.espdvcd.builder.schema.SchemaFactory;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.schema.SchemaUtil;
-import eu.esens.espdvcd.schema.SchemaVersion;
+import eu.esens.espdvcd.schema.EDMVersion;
 import eu.espd.schema.v2.pre_award.commonbasic.IssueDateType;
 import eu.espd.schema.v2.pre_award.commonbasic.IssueTimeType;
 import eu.espd.schema.v2.pre_award.commonbasic.ProfileIDType;
@@ -45,7 +60,7 @@ public class DocumentBuilderV2 {
      * @return a JAXB QualificationApplicationRequestType instance from an ESPDRequest Model instance
      */
     private QualificationApplicationRequestType createXML(ESPDRequest req) {
-        QualificationApplicationRequestType reqType = finalize(SchemaFactory.withSchemaVersion2().ESPD_REQUEST
+        QualificationApplicationRequestType reqType = finalize(SchemaFactory.withEDM_V2().ESPD_REQUEST
                 .extractQualificationApplicationRequestType(req));
         return reqType;
     }
@@ -55,8 +70,8 @@ public class DocumentBuilderV2 {
      * @return a JAXB QualificationApplicationResponseType instance from an ESPDResponse Model instance
      */
     protected QualificationApplicationResponseType createXML(ESPDResponse res) {
-        QualificationApplicationResponseType resType =
-                finalize(SchemaFactory.withSchemaVersion2().ESPD_RESPONSE.extractQualificationApplicationResponseType(res));
+        QualificationApplicationResponseType resType = finalize(SchemaFactory.withEDM_V2().ESPD_RESPONSE
+                .extractQualificationApplicationResponseType(res));
         return resType;
     }
 
@@ -78,9 +93,10 @@ public class DocumentBuilderV2 {
 
 
         reqType.setProfileID(createCENBIIProfileIdType(getProfileID()));
-        // FIXME local id value here may have to be changed (temporary value has been applied)
-        reqType.setID(SchemaFactory.withSchemaVersion2().ESPD_REQUEST.createLocalIDType("ESPDREQ-DGPE-ad63141780"));
-        reqType.setUUID(SchemaFactory.withSchemaVersion2().ESPD_REQUEST.createISOIECUUIDType(UUID.randomUUID().toString()));
+        reqType.setID(SchemaFactory.withEDM_V2().ESPD_REQUEST
+                .createISOIECIDType(UUID.randomUUID().toString()));
+        reqType.setUUID(SchemaFactory.withEDM_V2().ESPD_REQUEST
+                .createISOIECUUIDType(UUID.randomUUID().toString()));
 
         return reqType;
     }
@@ -102,9 +118,10 @@ public class DocumentBuilderV2 {
         resType.getIssueTime().setValue(LocalTime.now());
 
         resType.setProfileID(createCENBIIProfileIdType(getProfileID()));
-        // FIXME local id value here may have to be changed (temporary value has been applied)
-        resType.setID(SchemaFactory.withSchemaVersion2().ESPD_REQUEST.createLocalIDType("ESPDREQ-DGPE-ad63141780"));
-        resType.setUUID(SchemaFactory.withSchemaVersion2().ESPD_RESPONSE.createISOIECUUIDType(UUID.randomUUID().toString()));
+        resType.setID(SchemaFactory.withEDM_V2().ESPD_RESPONSE
+                .createISOIECIDType(UUID.randomUUID().toString()));
+        resType.setUUID(SchemaFactory.withEDM_V2().ESPD_RESPONSE
+                .createISOIECUUIDType(UUID.randomUUID().toString()));
 
         return resType;
     }
@@ -122,11 +139,11 @@ public class DocumentBuilderV2 {
         try {
             if (theReq instanceof ESPDResponse) {
                 eu.espd.schema.v2.pre_award.qualificationapplicationresponse.ObjectFactory of = new eu.espd.schema.v2.pre_award.qualificationapplicationresponse.ObjectFactory();
-                SchemaUtil.getMarshaller(SchemaVersion.V2).marshal(of.createQualificationApplicationResponse(createXML((ESPDResponse) theReq)), result);
+                SchemaUtil.getMarshaller(EDMVersion.V2).marshal(of.createQualificationApplicationResponse(createXML((ESPDResponse) theReq)), result);
 
             } else {
                 eu.espd.schema.v2.pre_award.qualificationapplicationrequest.ObjectFactory of = new eu.espd.schema.v2.pre_award.qualificationapplicationrequest.ObjectFactory();
-                SchemaUtil.getMarshaller(SchemaVersion.V2).marshal(of.createQualificationApplicationRequest(createXML(theReq)), result);
+                SchemaUtil.getMarshaller(EDMVersion.V2).marshal(of.createQualificationApplicationRequest(createXML(theReq)), result);
             }
         } catch (JAXBException ex) {
             Logger.getLogger(XMLDocumentBuilderV2.class.getName()).log(Level.SEVERE, null, ex);
@@ -142,11 +159,11 @@ public class DocumentBuilderV2 {
      * @return
      */
     private ProfileIDType createCENBIIProfileIdType(String id) {
-        ProfileIDType pid = new ProfileIDType();
-        pid.setSchemeAgencyID("CEN-BII");
-        pid.setSchemeVersionID("2.0");
-        pid.setValue(id);
-        return pid;
+        ProfileIDType pIdType = new ProfileIDType();
+        pIdType.setSchemeAgencyID("CEN-BII");
+        pIdType.setSchemeVersionID("2.0");
+        pIdType.setValue(id);
+        return pIdType;
     }
 
     protected String getProfileID() {

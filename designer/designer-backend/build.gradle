@@ -1,6 +1,22 @@
+/**
+ * Copyright 2016-2018 University of Piraeus Research Center
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 apply plugin: 'application'
 
 sourceCompatibility = 1.8
+mainClassName = 'eu.esens.espdvcd.designer.Server'
 
 dependencies {
     compile project(':builder')
@@ -8,8 +24,9 @@ dependencies {
     compile project(':model')
     compile project(':validator')
 
-    compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.4'
-    compile 'com.sparkjava:spark-core:2.7.1'
+    compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.7'
+    compile 'com.sparkjava:spark-core:2.7.2'
+//    compile 'com.sparkjava:spark-debug-tools:0.5'
     // https://mvnrepository.com/artifact/eu.toop/toop-commons
     compile group: 'eu.toop', name: 'toop-commons', version: '0.9.1'
 // https://mvnrepository.com/artifact/com.helger/ph-web
@@ -19,10 +36,11 @@ dependencies {
     // https://mvnrepository.com/artifact/com.helger/ph-httpclient
     compile group: 'com.helger', name: 'ph-httpclient', version: '9.0.1'
 
-
 }
 
 jar {
+    dependsOn "buildWebApp"
+
     manifest {
         attributes "Main-Class": "eu.esens.espdvcd.designer.Server"
     }
@@ -30,7 +48,84 @@ jar {
     doFirst {
         from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     }
-    exclude 'META-INF/*.RSA', 'META-INF/*.SF','META-INF/*.DSA'
+    exclude 'META-INF/*.RSA', 'META-INF/*.SF', 'META-INF/*.DSA'
+
+    finalizedBy "deleteWebAppResources"
 }
 
-mainClassName='eu.esens.espdvcd.designer.Server'
+run {
+    dependsOn "buildWebApp"
+    finalizedBy "deleteWebAppResources"
+}
+
+task createJarFromExistingResources(type: Jar) {
+    dependsOn "copyWebAppResources"
+
+    manifest {
+        attributes "Main-Class": "eu.esens.espdvcd.designer.Server"
+    }
+
+    doFirst {
+        from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    }
+    from sourceSets.main.runtimeClasspath
+    exclude 'META-INF/*.RSA', 'META-INF/*.SF', 'META-INF/*.DSA'
+    finalizedBy "deleteWebAppResources"
+}
+
+task deleteWebAppResources {
+    doLast {
+        delete "$webappDir/dist"
+        delete "$projectDir/src/main/resources/public"
+    }
+}
+
+task copyWebAppResources {
+    doFirst {
+        copy {
+            from "$webappDir/dist"
+            into "$projectDir/src/main/resources/public"
+        }
+    }
+}
+
+task npmInstallWebApp(type: Exec) {
+    workingDir "$webappDir"
+    inputs.dir "$webappDir"
+    group = BasePlugin.BUILD_GROUP
+    if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")) {
+        commandLine "npm.cmd", "install"
+    } else {
+        commandLine "npm", "install"
+    }
+}
+
+task buildWebApp(type: Exec) {
+    dependsOn "npmInstallWebApp"
+    workingDir "$webappDir"
+    inputs.dir "$webappDir"
+    group = BasePlugin.BUILD_GROUP
+    if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")) {
+        commandLine "ng.cmd", "build", "--prod", "--optimization", "--build-optimizer"
+    } else {
+        commandLine "ng", "build", "--prod", "--optimization", "--build-optimizer"
+    }
+    doLast {
+        copy {
+            from "$webappDir/dist"
+            into "$projectDir/src/main/resources/public"
+        }
+    }
+}
+
+task runWebApp(type: Exec) {
+    dependsOn "npmInstallWebApp"
+    workingDir "$webappDir"
+    inputs.dir "$webappDir"
+    group = BasePlugin.BUILD_GROUP
+    if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")) {
+        commandLine "ng.cmd", "serve", "--aot"
+    } else {
+        commandLine "ng", "serve", "--aot"
+    }
+}

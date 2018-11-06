@@ -1,21 +1,39 @@
+/**
+ * Copyright 2016-2018 University of Piraeus Research Center
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package eu.esens.espdvcd.model;
 
+import eu.esens.espdvcd.codelist.enums.EORoleTypeEnum;
+import eu.esens.espdvcd.model.requirement.response.AmountResponse;
+
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
-import javax.validation.constraints.NotNull;
 
 /**
  * Economic operator
- *
+ * <p>
  * Any natural or legal person or public entity or group of such persons and/or
  * entities, including any temporary association of undertakings, which offers
  * the execution of works and/or a work, the supply of products or the provision
  * of services on the market. Information about the party submitting the
  * qualification.
- *
+ * <p>
  * BusReqID: tbr92-017, tbr92-010, tbr92-028, tbr92-029
- *
- *
+ * <p>
+ * <p>
  * Created by Ulf Lotzmann on 21/03/2016.
  */
 public class EODetails {
@@ -134,7 +152,7 @@ public class EODetails {
      * espd-cac: EconomicOperatorParty.RepresentativeNaturalPerson.PowerOfAttorney.Description.AgentParty.Person<br>
      */
     private List<NaturalPerson> naturalPersons;
-    
+
     /**
      * Lot reference
      * <p>
@@ -148,6 +166,59 @@ public class EODetails {
      */
     @NotNull
     private String procurementProjectLot;
+
+    /**
+     * Employee Quantity
+     * <p>
+     * The quantity of the employees the Economic Operator has.
+     * Needed in Self-Contained ESPD
+     * </p>
+     * Data type: Number<br>
+     * Cardinality: 1..1<br>
+     * UBL syntax path: cac:EconomicOperatorParty.QualifyingParty.EmployeeQuantity<br>
+     */
+    @NotNull
+    private int employeeQuantity;
+
+    /**
+     * Economic operator general turnover
+     * <p>
+     * The general turnover of the Economic Operator.
+     * Needed in Self-Contained ESPD
+     * </p>
+     * Data type: Amount<br>
+     * Cardinality: 0..n<br>
+     * UBL syntax path: cac:EconomicOperatorParty.QualifyingParty.FinancialCapability.ValueAmount<br>
+     */
+    @NotNull
+    private AmountResponse generalTurnover;
+
+    /**
+     * Economic operator group name
+     * <p>
+     * The name of the Group of the Economic Operators.
+     * Needed in Self-Contained ESPD
+     * </p>
+     * Data type: Text<br>
+     * Cardinality: 0..1<br>
+     * UBL syntax path: cbc:EconomicOperatorGroupName<br>
+     */
+    @NotNull
+    private String eoGroupName;
+
+    /**
+     * EO Role Code
+     * <p>
+     * Identifies the role of the economic operator in the bid.
+     * Rule: Compulsory use of the Code List EORoleType.
+     * <p>
+     * Data type: Code<br>
+     * Cardinality: 1...1<br>
+     * InfReqID:
+     * BusReqID
+     * UBL syntax path: EconomicOperatorParty.EconomicOperatorRole.RoleCode<br>
+     */
+    private EORoleTypeEnum eoRole;
 
     public String getProcurementProjectLot() {
         return procurementProjectLot;
@@ -222,5 +293,37 @@ public class EODetails {
 
     public void setWebSiteURI(String webSiteURI) {
         this.webSiteURI = webSiteURI;
+    }
+
+    public EORoleTypeEnum getEoRole() {
+        return eoRole;
+    }
+
+    public void setEoRole(EORoleTypeEnum eoRole) {
+        this.eoRole = eoRole;
+    }
+
+    public int getEmployeeQuantity() {
+        return employeeQuantity;
+    }
+
+    public void setEmployeeQuantity(int employeeQuantity) {
+        this.employeeQuantity = employeeQuantity;
+    }
+
+    public AmountResponse getGeneralTurnover() {
+        return generalTurnover;
+    }
+
+    public void setGeneralTurnover(AmountResponse generalTurnover) {
+        this.generalTurnover = generalTurnover;
+    }
+
+    public String getEoGroupName() {
+        return eoGroupName;
+    }
+
+    public void setEoGroupName(String eoGroupName) {
+        this.eoGroupName = eoGroupName;
     }
 }

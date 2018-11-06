@@ -1,11 +1,26 @@
+/**
+ * Copyright 2016-2018 University of Piraeus Research Center
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package eu.esens.espdvcd.builder.util;
 
 import eu.esens.espdvcd.codelist.enums.ProfileExecutionIDEnum;
-import eu.esens.espdvcd.schema.SchemaVersion;
+import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
+import eu.esens.espdvcd.codelist.enums.internal.ArtefactType;
+import eu.esens.espdvcd.schema.EDMVersion;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,6 +30,17 @@ import java.util.regex.Pattern;
 public class ArtefactUtils {
 
     private static final Logger LOGGER = Logger.getLogger(ArtefactUtils.class.getName());
+
+    public static String clearCRLF(String stringToClear) {
+        return stringToClear
+                .replace("\n", "")
+                .replace("\r", "");
+    }
+
+    public static String clearAllWhitespaces(String stringToClear) {
+        return stringToClear
+                .replaceAll("\\s+", "");
+    }
 
     public static InputStream getBufferedInputStream(InputStream xmlESPD) {
         // We require a marked input stream
@@ -28,38 +54,68 @@ public class ArtefactUtils {
     }
 
     /**
-     * Identify schema version of given ESPD XML artefact
+     * Identify Exchange Data Model (EDM) version of given ESPD artefact String representation.
+     * <p>
+     * Warning!!! Do not make this method public or package private.
+     *
+     * @param partOfTheArtefact A String representation of the ESPD XML artefact or part of it
+     * @return The EDM version
+     */
+    private static EDMVersion findEDMVersion(final String partOfTheArtefact) {
+        String smallerPartOfTheArtefact = partOfTheArtefact.substring(0, 99); // 100 chars
+
+        final String v1ArtefactRegex = "<\\S*(ESPDRequest|ESPDResponse)";
+        final String v2ArtefactRegex = "<\\S*(QualificationApplicationRequest|QualificationApplicationResponse)";
+
+        boolean isV1Artefact = Pattern.compile(v1ArtefactRegex).matcher(smallerPartOfTheArtefact).find();
+
+        if (isV1Artefact) {
+            return EDMVersion.V1;
+        }
+
+        boolean isV2Artefact = Pattern.compile(v2ArtefactRegex).matcher(smallerPartOfTheArtefact).find();
+
+        if (isV2Artefact) {
+            return EDMVersion.V2;
+        }
+
+        throw new IllegalStateException("Error... Imported XML Artefact EDM Version cannot be classified either as V1 nor as V2.");
+    }
+
+    /**
+     * Identify Exchange Data Model (EDM) version of given ESPD XML artefact
      *
      * @param xmlESPD The ESPD XML artefact
-     * @return The schema version
+     * @return The EDM version
      */
-    public static SchemaVersion findSchemaVersion(InputStream xmlESPD) {
-        SchemaVersion version = null;
+    public static EDMVersion findEDMVersion(InputStream xmlESPD) {
 
         try {
             String partOfTheArtefact = getPartOfTheArtefact(xmlESPD, 128); //  better stay below 256
-
-            final String v1ArtefactRegex = "<\\S*(ESPDRequest|ESPDResponse)";
-            final String v2ArtefactRegex = "<\\S*(QualificationApplicationRequest|QualificationApplicationResponse)";
-
-            boolean isV1Artefact = Pattern.compile(v1ArtefactRegex).matcher(partOfTheArtefact).find();
-
-            if (isV1Artefact) {
-                version = SchemaVersion.V1;
-            } else {
-
-                boolean isV2Artefact = Pattern.compile(v2ArtefactRegex).matcher(partOfTheArtefact).find();
-
-                if (isV2Artefact) {
-                    version = SchemaVersion.V2;
-                }
-            }
+            return findEDMVersion(partOfTheArtefact);
 
         } catch (IOException ex) {
-            LOGGER.log(Level.SEVERE, null, ex);
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
         }
 
-        return version;
+        return null;
+    }
+
+    /**
+     * Identify Exchange Data Model (EDM) version of given ESPD XML artefact
+     *
+     * @param xmlESPD The ESPD XML artefact
+     * @return The EDM version
+     */
+    public static EDMVersion findEDMVersion(File xmlESPD) {
+
+        try {
+            return findEDMVersion(new FileInputStream(xmlESPD));
+        } catch (FileNotFoundException e) {
+            LOGGER.log(Level.SEVERE, e.getMessage(), e);
+        }
+
+        return null;
     }
 
     public static String getPartOfTheArtefact(InputStream xmlESPD, int bytesToRead) throws IOException {
@@ -69,15 +125,18 @@ public class ArtefactUtils {
         byte[] contents = new byte[bytesToRead];
         int bytesRead;
         bis.mark(bytesToRead);
+
         while ((bytesRead = bis.read(contents)) != -1) {
+
             partOfTheArtefact.append(new String(contents, 0, bytesRead));
+
             if (bytesRead >= bytesToRead) {
                 break;
             }
         }
         bis.reset();
 
-        return partOfTheArtefact.toString();
+        return clearCRLF(partOfTheArtefact.toString());
     }
 
     /**
@@ -86,16 +145,16 @@ public class ArtefactUtils {
      * @param xmlESPD The ESPD XML artefact
      * @return The profile execution id
      */
-    public static ProfileExecutionIDEnum findEDMVersion(InputStream xmlESPD) {
-        ProfileExecutionIDEnum profileExecutionIDEnum = null;
+    public static ProfileExecutionIDEnum findProfileExecutionID(InputStream xmlESPD) {
 
         try {
             String partOfTheArtefact = getPartOfTheArtefact(xmlESPD, 2048);
 
-            switch (findSchemaVersion(xmlESPD)) {
+            switch (findEDMVersion(partOfTheArtefact)) {
+
                 case V1:
-                    profileExecutionIDEnum = ProfileExecutionIDEnum.ESPD_EDM_V1_0_2;
-                    break;
+                    return ProfileExecutionIDEnum.ESPD_EDM_V1_0_2;
+
                 case V2:
                     /**
                      * in v2.0.x artefacts <cbc:ProfileExecutionID> is mandatory element
@@ -108,21 +167,146 @@ public class ArtefactUtils {
                     if (m.find()) {
                         // extract <cbc:ProfileExecutionID> value
                         final String theId = m.group(1);
-                        profileExecutionIDEnum = Arrays.stream(ProfileExecutionIDEnum.values())
+                        return Arrays.stream(ProfileExecutionIDEnum.values())
                                 .filter(id -> id.getValue().equals(theId))
-                                .findAny().orElseThrow(() -> new IOException("Error... ProfileExecutionID element value doesn't match with any ProfileExecutionID Codelist value."));
+                                .findAny().orElseThrow(() -> new IllegalStateException("Error... Imported XML Artefact Profile Execution ID cannot be classified."));
                     } else {
-                        throw new IOException("Error... Matcher couldn't find profile execution id value, by using regular expression.");
+                        throw new IllegalStateException("Error... Matcher couldn't find Profile Execution ID value, by using regular expression.");
                     }
-                    break;
+
                 default:
-                    throw new IOException("Error... Imported artefact could not be identified as either v1 or v2.");
+                    throw new IllegalStateException("Error... Imported XML Artefact EDM Version cannot be classified either as V1 nor as V2.");
             }
 
         } catch (IOException ex) {
             LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
         }
-        return profileExecutionIDEnum;
+
+        throw new IllegalStateException("Error... Imported XML Artefact Profile Execution ID cannot be classified.");
+    }
+
+    /**
+     * Identify type of given ESPD artefact String representation (request or response)
+     * <p>
+     * Warning!!! Do not make this method public or package private.
+     *
+     * @param partOfTheArtefact A String representation of the ESPD XML artefact or part of it
+     * @return The artefact type
+     */
+    private static ArtefactType findArtefactType(final String partOfTheArtefact) {
+        String smallerPartOfTheArtefact = clearCRLF(partOfTheArtefact.substring(0, 99)); // 100 chars
+
+        final String requestRegex = "<\\S*(ESPDRequest|QualificationApplicationRequest)";
+        final String responseRegex = "<\\S*(ESPDResponse|QualificationApplicationResponse)";
+
+        boolean isRequest = Pattern.compile(requestRegex).matcher(smallerPartOfTheArtefact).find();
+
+        if (isRequest) {
+            return ArtefactType.ESPD_REQUEST;
+        }
+
+        boolean isResponse = Pattern.compile(responseRegex).matcher(smallerPartOfTheArtefact).find();
+
+        if (isResponse) {
+            return ArtefactType.ESPD_RESPONSE;
+        }
+
+        throw new IllegalStateException("Error... Imported XML Artefact Type cannot be classified either as ESPD Request nor as ESPD Response.");
+    }
+
+    /**
+     * Identify type of given ESPD XML artefact (request or response)
+     *
+     * @param xmlESPD The ESPD XML artefact
+     * @return The artefact type
+     */
+    public static ArtefactType findArtefactType(InputStream xmlESPD) {
+
+        try {
+            String partOfTheArtefact = getPartOfTheArtefact(xmlESPD, 128); //  better stay below 256
+            return findArtefactType(partOfTheArtefact);
+
+        } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, e.getMessage(), e);
+        }
+
+        throw new IllegalStateException("Error... Imported XML Artefact Type cannot be classified either as ESPD Request nor as ESPD Response.");
+    }
+
+    /**
+     * Identify type of given ESPD XML artefact (request or response)
+     *
+     * @param xmlESPD The ESPD XML artefact
+     * @return The artefact type
+     */
+    public static ArtefactType findArtefactType(File xmlESPD) {
+
+        try {
+            return findArtefactType(new FileInputStream(xmlESPD));
+        } catch (FileNotFoundException e) {
+            LOGGER.log(Level.SEVERE, e.getMessage(), e);
+        }
+
+        throw new IllegalStateException("Error... Imported XML Artefact Type cannot be classified either as ESPD Request nor as ESPD Response.");
+    }
+
+    /**
+     * Identify QualificationApplicationTypeCode of given ESPD XML
+     * artefact (regulated or self-contained).
+     *
+     * @param xmlESPD The ESPD XML artefact
+     * @return The QualificationApplicationTypeCode
+     */
+    public static QualificationApplicationTypeEnum findQualificationApplicationType(File xmlESPD) {
+
+        try {
+            return findQualificationApplicationType(new FileInputStream(xmlESPD));
+        } catch (FileNotFoundException e) {
+            LOGGER.log(Level.SEVERE, e.getMessage(), e);
+        }
+
+        throw new IllegalStateException("Error... Imported XML Artefact Qualification Application Type cannot be classified either as Regulated nor as Self-Contained.");
+    }
+
+    /**
+     * Identify QualificationApplicationTypeCode of given ESPD XML
+     * artefact (regulated or self-contained).
+     *
+     * @param xmlESPD The ESPD XML artefact
+     * @return The QualificationApplicationTypeCode
+     */
+    public static QualificationApplicationTypeEnum findQualificationApplicationType(InputStream xmlESPD) {
+
+        try {
+            String partOfTheArtefact = getPartOfTheArtefact(xmlESPD, 4056);
+
+            switch (findEDMVersion(partOfTheArtefact)) {
+
+                case V1:
+                    return QualificationApplicationTypeEnum.REGULATED;
+
+                case V2:
+                    String extractionRegex = ".*<cbc:QualificationApplicationTypeCode.*?>(.*?)</cbc:QualificationApplicationTypeCode>.*";
+                    Matcher m = Pattern.compile(extractionRegex, Pattern.DOTALL & Pattern.MULTILINE)
+                            .matcher(partOfTheArtefact);
+                    if (m.find()) {
+                        final String theType = m.group(1);
+                        return Arrays.stream(QualificationApplicationTypeEnum.values())
+                                .filter(type -> type.name().equals(theType))
+                                .findAny().orElseThrow(() -> new IllegalStateException("Error... Imported XML Artefact Qualification Application Type cannot be classified either as Regulated nor as Self-Contained."));
+                    } else {
+                        throw new IOException("Error... Matcher couldn't find Qualification Application Type value by using regular expression.");
+                    }
+
+                default:
+                    throw new IllegalStateException("Error... Imported XML Artefact EDM Version cannot be classified either as V1 nor as V2.");
+            }
+
+        } catch (IOException ex) {
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+
+        throw new IllegalStateException("Error... Imported XML Artefact Qualification Application Type cannot be classified either as Regulated nor as Self-Contained.");
     }
 
 }

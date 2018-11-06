@@ -1,17 +1,37 @@
+/**
+ * Copyright 2016-2018 University of Piraeus Research Center
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package eu.esens.espdvcd.model;
 
-import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * Contracting authority and procurement procedure details
- *
+ * <p>
  * The contracting authority or contracting entity who is buying supplies, services or public works using a
  * tendering procedure as described in the applicable directive (Directives 2014/24/EU, 2014/25/EU).
- *
- *
  */
-public class CADetails implements Serializable{
+public class CADetails implements Serializable {
 
     private static final long serialVersionUID = -2251052431953226768L;
 
@@ -86,8 +106,6 @@ public class CADetails implements Serializable{
      */
     @NotNull
     private String procurementProcedureFileReferenceNo;
-
-
 
     /**
      * Notice number / identifier
@@ -171,6 +189,62 @@ public class CADetails implements Serializable{
      */
     private String procurementPublicationURI;
 
+    /**
+     * Type of procedure
+     * <p>
+     * The type of the procurement procedure. Uses ProcedureCode codelist values.
+     * </p>
+     * Data type: Code<br>
+     * Cardinality: 0..1<br>
+     * UBL syntax path: cbc:ProcedureCode
+     */
+    private String procurementProcedureType;
+
+    /**
+     * Description of the weighting methodology
+     * <p>
+     * Free-form text for describing information about Weight Scoring Methodology.
+     * </p>
+     * Data type: Text<br>
+     * Cardinality: 0..1(0..n)<br>
+     * UBL syntax path: cbc:WeightScoringMethodologyNote
+     */
+    private List<String> weightScoringMethodologyNoteList;
+
+    /**
+     * Method of calculating the weights
+     * <p>
+     * A code specifying the type of the Weighting. Compulsory use of the code list WeightingType.
+     * </p>
+     * Data type: Code<br>
+     * Cardinality: 0..1<br>
+     * UBL syntax path: cbc:WeightingTypeCode
+     */
+    private String weightingType;
+
+    /**
+     * Object of the project
+     * <p>
+     * A code to describe the object of the project
+     * (e.g. works, supplies, services, public work concessions, service concessions, other).
+     * Uses ProjectType codelist values.
+     * </p>
+     * Data type: Code<br>
+     * Cardinality: 0..1<br>
+     * UBL syntax path: cac:ProcurementProject/cbc:ProcurementTypeCode
+     */
+    private String projectType;
+
+    /**
+     * CPV codes
+     * <p>
+     * CPV codes assigned to works and services.
+     * </p>
+     * Data type: Text<br>
+     * Cardinality: 0..n<br>
+     * UBL syntax path: cac:ProcurementProject/cac:MainCommodityClassification/cbc: ItemClassificationCode
+     */
+    private List<String> classificationCodes;
 
     /**
      * Received notice number
@@ -203,6 +277,22 @@ public class CADetails implements Serializable{
      */
     private String nationalOfficialJournal;
 
+    /**
+     * Lot reference
+     * <p>
+     * An identifier for the lot.
+     * <p>
+     * Data type: Identifier<br>
+     * Cardinality: 1..1 (1..n)<br>
+     * InfReqID: tir92-130<br>
+     * BusReqID: tbr92-014<br>
+     * UBL syntax path: cac:ProcurementProjectLot.ID<br>
+     */
+    @NotNull
+    private int procurementProjectLots;
+
+    public CADetails() {
+    }
 
 
     public String getProcurementPublicationURI() {
@@ -212,7 +302,7 @@ public class CADetails implements Serializable{
     public void setProcurementPublicationURI(String procurementPublicationURI) {
         this.procurementPublicationURI = procurementPublicationURI;
     }
-    
+
     public String getCAOfficialName() {
         return caOfficialName;
     }
@@ -324,4 +414,77 @@ public class CADetails implements Serializable{
     public void setNationalOfficialJournal(String nationalOfficialJournal) {
         this.nationalOfficialJournal = nationalOfficialJournal;
     }
+
+    private void initWeightScoringMethodologyNoteList() {
+        if (weightScoringMethodologyNoteList == null) {
+            weightScoringMethodologyNoteList = new ArrayList<>();
+        }
+    }
+
+    @JsonIgnore
+    public List<String> getWeightScoringMethodologyNoteList() {
+        initWeightScoringMethodologyNoteList();
+        return weightScoringMethodologyNoteList;
+    }
+
+    @JsonProperty("weightScoringMethodologyNote")
+    public String getWeightScoringMethodologyNote() {
+        return String.join("\n", getWeightScoringMethodologyNoteList());
+    }
+
+    public void setWeightScoringMethodologyNote(@JsonProperty("weightScoringMethodologyNote") String note) {
+        getWeightScoringMethodologyNoteList().clear();
+        if (Objects.nonNull(note)) {
+            String[] descArray = note.split("[\\r\\n]+");
+            weightScoringMethodologyNoteList.addAll(Arrays.asList(descArray));
+        }
+    }
+
+    public String getWeightingType() {
+        return weightingType;
+    }
+
+    public void setWeightingType(String weightingType) {
+        this.weightingType = weightingType;
+    }
+
+    public String getCaOfficialName() {
+        return caOfficialName;
+    }
+
+    public void setCaOfficialName(String caOfficialName) {
+        this.caOfficialName = caOfficialName;
+    }
+
+    public String getProcurementProcedureType() {
+        return procurementProcedureType;
+    }
+
+    public void setProcurementProcedureType(String procurementProcedureType) {
+        this.procurementProcedureType = procurementProcedureType;
+    }
+
+    public String getProjectType() {
+        return projectType;
+    }
+
+    public void setProjectType(String projectType) {
+        this.projectType = projectType;
+    }
+
+    public List<String> getClassificationCodes() {
+        if (classificationCodes == null) {
+            classificationCodes = new ArrayList<>();
+        }
+        return classificationCodes;
+    }
+
+    public int getProcurementProjectLots() {
+        return procurementProjectLots;
+    }
+
+    public void setProcurementProjectLots(int procurementProjectLots) {
+        this.procurementProjectLots = procurementProjectLots;
+    }
+
 }

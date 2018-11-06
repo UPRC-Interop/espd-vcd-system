@@ -1,8 +1,29 @@
+///
+/// Copyright 2016-2018 University of Piraeus Research Center
+///
+/// Licensed under the Apache License, Version 2.0 (the "License");
+/// you may not use this file except in compliance with the License.
+/// You may obtain a copy of the License at
+///
+///     http://www.apache.org/licenses/LICENSE-2.0
+///
+/// Unless required by applicable law or agreed to in writing, software
+/// distributed under the License is distributed on an "AS IS" BASIS,
+/// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+/// See the License for the specific language governing permissions and
+/// limitations under the License.
+///
+
 import {Component, OnInit} from '@angular/core';
 import {FormControl, NgForm} from '@angular/forms/forms';
 import {ApicallService} from '../services/apicall.service';
 import {DataService} from '../services/data.service';
 import {Country} from '../model/country.model';
+import {UtilitiesService} from '../services/utilities.service';
+import {Cadetails} from '../model/caDetails.model';
+import {EoDetails} from '../model/eoDetails.model';
+import {PostalAddress} from '../model/postalAddress.model';
+import {ContactingDetails} from '../model/contactingDetails.model';
 
 // import {ProcedureType} from "../model/procedureType.model";
 
@@ -15,10 +36,19 @@ import {Country} from '../model/country.model';
 export class StartComponent implements OnInit {
 
   countries: Country[];
+  isCA = false;
+  isEO = false;
+  isCreateNewESPD = false;
+  isReuseESPD = false;
+  isReviewESPD = false;
+  isImportESPD = false;
+  isCreateResponse = false;
+  fileToUpload: File[] = [];
+  reset = false;
 
   // procedureTypes:ProcedureType[];
 
-  constructor(private dataService: DataService, private APIService: ApicallService) {
+  constructor(public dataService: DataService, private APIService: ApicallService, public utilities: UtilitiesService) {
   }
 
   ngOnInit() {
@@ -34,15 +64,6 @@ export class StartComponent implements OnInit {
 
   }
 
-  isCA: boolean = false;
-  isEO: boolean = false;
-  isCreateNewESPD: boolean = false;
-  isReuseESPD: boolean = false;
-  isReviewESPD: boolean = false;
-  isImportESPD: boolean = false;
-  isCreateResponse: boolean = false;
-  fileToUpload: File[] = [];
-
 
   handleFileUpload(files: FileList) {
     console.log(files);
@@ -54,30 +75,45 @@ export class StartComponent implements OnInit {
     if (radio.value === 'CA') {
       this.isCA = true;
       this.isEO = false;
+      this.utilities.type = 'ESPD_REQUEST';
       // console.log("This is CA: "+this.isCA);
       // console.log("This is EO: "+this.isEO);
     } else if (radio.value === 'EO') {
       this.isEO = true;
       this.isCA = false;
+      this.utilities.type = 'ESPD_RESPONSE';
     }
   }
 
   handleCASelection(radio: FormControl) {
     if (radio.value === 'createNewESPD') {
       this.isCreateNewESPD = true;
-      this.dataService.isCreateNewESPD = true;
+      this.utilities.isCreateNewESPD = true;
       this.isReuseESPD = false;
       this.isReviewESPD = false;
+      this.utilities.isReviewESPD = false;
     } else if (radio.value === 'reuseESPD') {
       this.isCreateNewESPD = false;
-      this.dataService.isCreateNewESPD = false;
+      this.utilities.isCreateNewESPD = false;
       this.isReuseESPD = true;
       this.isReviewESPD = false;
+      this.utilities.isReviewESPD = false;
     } else if (radio.value === 'reviewESPD') {
       this.isCreateNewESPD = false;
-      this.dataService.isCreateNewESPD = false;
+      this.utilities.isCreateNewESPD = false;
       this.isReuseESPD = false;
       this.isReviewESPD = true;
+      this.utilities.isReviewESPD = true;
+    }
+  }
+
+  handleQATypeSelection(radio: FormControl) {
+    console.log(radio.value);
+    if (radio.value === 'REGULATED') {
+      this.utilities.qualificationApplicationType = 'regulated';
+    } else if (radio.value === 'SELF-CONTAINED') {
+      this.utilities.qualificationApplicationType = 'selfcontained';
+      this.APIService.version = 'v2';
     }
   }
 
@@ -93,27 +129,41 @@ export class StartComponent implements OnInit {
   handleEOSelection(radio: FormControl) {
     if (radio.value === 'importESPD') {
       this.isImportESPD = true;
-      this.dataService.isImportESPD = true;
+      this.utilities.isImportESPD = true;
       this.isCreateResponse = false;
-      this.dataService.isCreateResponse = false;
+      this.utilities.isCreateResponse = false;
+      this.isReviewESPD = false;
+      this.utilities.isReviewESPD = false;
     } else if (radio.value === 'createResponse') {
       this.isImportESPD = false;
-      this.dataService.isImportESPD = false;
+      this.utilities.isImportESPD = false;
       this.isCreateResponse = true;
-      this.dataService.isCreateResponse = true;
+      this.utilities.isCreateResponse = true;
+      this.isReviewESPD = false;
+      this.utilities.isReviewESPD = false;
+    } else if (radio.value === 'reviewESPD') {
+      this.isImportESPD = false;
+      this.utilities.isImportESPD = false;
+      this.isCreateResponse = false;
+      this.utilities.isCreateResponse = false;
+      this.isReviewESPD = true;
+      this.utilities.isReviewESPD = true;
     }
   }
 
   onStartSubmit(form: NgForm) {
     // console.log(form);
+    // form and model reset in case of start
+    this.utilities.isStarted = true;
 
+
+    console.log(this.dataService.isReadOnly());
     // CA reuses ESPDRequest
     if (this.isCA) {
-      let role = 'CA';
+      const role = 'CA';
       this.dataService.ReuseESPD(this.fileToUpload, form, role);
     } else if (this.isEO) {
-      // TODO EOReuseESPD
-      let role = 'EO';
+      const role = 'EO';
       this.dataService.ReuseESPD(this.fileToUpload, form, role);
     }
 

@@ -1,15 +1,33 @@
+/**
+ * Copyright 2016-2018 University of Piraeus Research Center
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package eu.esens.espdvcd.builder.model;
 
 import eu.esens.espdvcd.builder.BuilderFactory;
 import eu.esens.espdvcd.builder.exception.BuilderException;
-import eu.esens.espdvcd.codelist.enums.CriterionElementTypeEnum;
-import eu.esens.espdvcd.codelist.enums.EOIndustryClassificationCodeEnum;
-import eu.esens.espdvcd.codelist.enums.LegislationTypeEnum;
-import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
+import eu.esens.espdvcd.codelist.enums.*;
 import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.ResponseRequirement;
+import eu.esens.espdvcd.model.requirement.response.WeightIndicatorResponse;
+import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
+import eu.esens.espdvcd.model.retriever.ECertisCriterion;
+import eu.esens.espdvcd.model.retriever.ECertisEvidence;
+import eu.esens.espdvcd.model.retriever.ECertisEvidenceGroup;
+import eu.esens.espdvcd.model.retriever.ECertisEvidenceIssuerParty;
 import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.CriterionType;
 import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.LegislationType;
 import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.RequirementGroupType;
@@ -23,6 +41,7 @@ import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionPropertyGro
 import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionPropertyType;
 import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionType;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -123,6 +142,7 @@ public interface ModelExtractor {
                 if (ref.getID() != null) {
                     cd.setProcurementPublicationNumber(ref.getID().getValue());
                 }
+
                 if (ref.getAttachment() != null && ref.getAttachment().getExternalReference() != null) {
                     ExternalReferenceType ert = ref.getAttachment().getExternalReference();
 
@@ -137,6 +157,7 @@ public interface ModelExtractor {
                         if (ert.getDescription().size() > 1) {
                             cd.setReceivedNoticeNumber(ert.getDescription().get(1).getValue());
                         }
+
                     }
 
                     if (ert.getURI() != null) {
@@ -239,22 +260,25 @@ public interface ModelExtractor {
             }
         }
 
-
         if (contractFolderId != null && contractFolderId.getValue() != null) {
             cd.setProcurementProcedureFileReferenceNo(contractFolderId.getValue());
         }
+
         if (!additionalDocumentReferenceList.isEmpty()) {
 
             // Find an entry with TED_CN Value
             Optional<eu.espd.schema.v2.pre_award.commonaggregate.DocumentReferenceType> optRef = additionalDocumentReferenceList.stream()
                     .filter(r -> r.getDocumentTypeCode() != null && r.getDocumentTypeCode().getValue().equals("TED_CN"))
                     .findFirst();
+
             optRef.ifPresent(ref -> {
 
                 if (ref.getID() != null) {
                     cd.setProcurementPublicationNumber(ref.getID().getValue());
                 }
+
                 if (ref.getAttachment() != null && ref.getAttachment().getExternalReference() != null) {
+
                     eu.espd.schema.v2.pre_award.commonaggregate.ExternalReferenceType ert = ref.getAttachment().getExternalReference();
 
                     if (ert.getFileName() != null) {
@@ -263,6 +287,12 @@ public interface ModelExtractor {
 
                     if (!ert.getDescription().isEmpty()) {
                         cd.setProcurementProcedureDesc(ert.getDescription().get(0).getValue());
+
+                        // 2018-10-5 KR: modifications to add capabilities to handle Received Notice Number
+                        if (ert.getDescription().size() > 1) {
+                            cd.setReceivedNoticeNumber(ert.getDescription().get(1).getValue());
+                        }
+
                     }
 
                     if (ert.getURI() != null) {
@@ -307,8 +337,8 @@ public interface ModelExtractor {
 
         try {
             // return the default service provider details
-            return BuilderFactory.withEDMVersion1()
-                    .getRegulatedModelBuilder()
+            return BuilderFactory.EDM_V1
+                    .createRegulatedModelBuilder()
                     .createESPDRequest()
                     .getServiceProviderDetails();
         } catch (BuilderException e) {
@@ -320,8 +350,8 @@ public interface ModelExtractor {
 
     default ServiceProviderDetails extractServiceProviderDetails(List<eu.espd.schema.v2.pre_award.commonaggregate.ContractingPartyType> sppt) {
         try {
-            return BuilderFactory.withEDMVersion2()
-                    .getRegulatedModelBuilder()
+            return BuilderFactory.EDM_V2
+                    .createRegulatedModelBuilder()
                     .createESPDRequest()
                     .getServiceProviderDetails();
         } catch (BuilderException e) {
@@ -370,6 +400,29 @@ public interface ModelExtractor {
 
     default SelectableCriterion extractSelectableCriterion(TenderingCriterionType tct) {
         return extractSelectableCriterion(tct, true);
+    }
+
+    /**
+     * Create a new selectable criterion from an e-Certis criterion.
+     *
+     * @param ec         The e-Certis criterion
+     * @param isSelected
+     * @return
+     */
+    default SelectableCriterion extractSelectableCriterion(ECertisCriterion ec, boolean isSelected) {
+        String id = ec.getID();
+        String name = ec.getName();
+        String desc = ec.getDescription();
+
+        LegislationReference lr = ec.getLegislationReference();
+
+        SelectableCriterion sc = new SelectableCriterion(id, null, name, desc, lr, null);
+        sc.setSelected(isSelected);
+        return sc;
+    }
+
+    default SelectableCriterion extractSelectableCriterion(ECertisCriterion ec) {
+        return extractSelectableCriterion(ec, true);
     }
 
     default RequirementGroup extractRequirementGroup(TenderingCriterionPropertyGroupType rgType) {
@@ -505,20 +558,44 @@ public interface ModelExtractor {
         return lr;
     }
 
-    default Requirement extractRequirement(TenderingCriterionPropertyType pt) {
+    default void applyCriterionWeightingData(WeightIndicatorResponse response, TenderingCriterionType criterionType) {
+
+        if (response != null) {
+            // Indicator
+            if (criterionType.getEvaluationMethodTypeCode() != null
+                    && criterionType.getEvaluationMethodTypeCode().getValue() != null) {
+
+                response.setIndicator(criterionType.getEvaluationMethodTypeCode().getValue()
+                        .equals(EvaluationMethodTypeEnum.WEIGHTED.name()));
+            }
+            // WeightingConsiderationDescription
+            response.getEvaluationMethodDescriptionList()
+                    .addAll(criterionType.getWeightingConsiderationDescription().stream()
+                            .map(descType -> descType.getValue())
+                            .collect(Collectors.toList()));
+            // Weight
+            if (criterionType.getWeightNumeric() != null
+                    && criterionType.getWeightNumeric().getValue() != null) {
+
+                response.setWeight(criterionType.getWeightNumeric().getValue());
+            }
+        }
+    }
+
+    default Requirement extractRequirement(TenderingCriterionPropertyType rqType) {
         String theId = null;
-        if (pt.getID() != null) {
-            theId = pt.getID().getValue();
+        if (rqType.getID() != null) {
+            theId = rqType.getID().getValue();
         }
         String theDescription = null;
-        if (!pt.getDescription().isEmpty() && pt.getDescription().get(0) != null) {
-            theDescription = pt.getDescription().get(0).getValue();
+        if (!rqType.getDescription().isEmpty() && rqType.getDescription().get(0) != null) {
+            theDescription = rqType.getDescription().get(0).getValue();
         }
 
         Requirement r = new ResponseRequirement(
                 theId,
-                CriterionElementTypeEnum.valueOf(pt.getTypeCode().getValue()),
-                ResponseTypeEnum.valueOf(pt.getValueDataTypeCode().getValue()),
+                RequirementTypeEnum.valueOf(rqType.getTypeCode().getValue()),
+                ResponseTypeEnum.valueOf(rqType.getValueDataTypeCode().getValue()),
                 theDescription
         );
         return r;
@@ -541,10 +618,61 @@ public interface ModelExtractor {
         return r;
     }
 
-    default boolean isSMEIndicator(eu.espd.schema.v2.pre_award.commonaggregate.EconomicOperatorPartyType eop) {
+    default Evidence extractEvidence(ECertisEvidence evidence) {
+        Evidence e = new Evidence();
+        e.setID(evidence.getID());
+        e.setDescription(evidence.getDescription());
+        e.setConfidentialityLevelCode(ConfidentialityLevelEnum.PUBLIC.name());
+
+        if (!evidence.getEvidenceDocumentReference().isEmpty()
+                && evidence.getEvidenceDocumentReference().get(0).getAttachment() != null
+                && evidence.getEvidenceDocumentReference().get(0).getAttachment().getExternalReference() != null
+                && evidence.getEvidenceDocumentReference().get(0).getAttachment().getExternalReference().getURI() != null) {
+
+            e.setEvidenceURL(evidence.getEvidenceDocumentReference().get(0).getAttachment().getExternalReference().getURI());
+        }
+
+        if (!evidence.getEvidenceIssuerParty().isEmpty()) {
+            e.setEvidenceIssuer(extractEvidenceIssuerDetails(evidence.getEvidenceIssuerParty().get(0)));
+        }
+
+        return e;
+    }
+
+    default List<Evidence> extractEvidences(ECertisEvidenceGroup eg) {
+        return eg.getEvidences()
+                .stream()
+                .map(e -> extractEvidence(e))
+                .collect(Collectors.toList());
+    }
+
+    default List<Evidence> extractEvidences(List<ECertisEvidenceGroup> egList) {
+        List<Evidence> evidenceList = new ArrayList<>();
+
+        for (ECertisEvidenceGroup eg : egList) {
+            evidenceList.addAll(extractEvidences(eg));
+        }
+
+        return evidenceList;
+    }
+
+    default EvidenceIssuerDetails extractEvidenceIssuerDetails(ECertisEvidenceIssuerParty evidenceIssuerParty) {
+        EvidenceIssuerDetails issuerDetails = new EvidenceIssuerDetails();
+
+        if (!evidenceIssuerParty.getPartyName().isEmpty()
+                && evidenceIssuerParty.getPartyName().get(0).getName() != null) {
+
+            issuerDetails.setName(evidenceIssuerParty.getPartyName().get(0).getName());
+        }
+
+        issuerDetails.setWebsite(evidenceIssuerParty.getWebsiteURI());
+
+        return issuerDetails;
+    }
+
+    default boolean isSME(String icc) {
         boolean isSME = false;
-        EOIndustryClassificationCodeEnum code = EOIndustryClassificationCodeEnum.valueOf(eop.getQualifyingParty()
-                .get(0).getParty().getIndustryClassificationCode().getValue());
+        EOIndustryClassificationCodeEnum code = EOIndustryClassificationCodeEnum.valueOf(icc);
         if (code != EOIndustryClassificationCodeEnum.LARGE) {
             isSME = true;
         }

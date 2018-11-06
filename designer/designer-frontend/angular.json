@@ -21,7 +21,8 @@
               "src/favicon.ico"
             ],
             "styles": [
-              "src/gsccp-styles.scss"
+              "src/gsccp-styles.scss",
+              "node_modules/flag-icon-css/css/flag-icon.min.css"
             ],
             "scripts": []
           },
@@ -43,7 +44,7 @@
                 }
               ]
             },
-              "snf": {
+            "snf": {
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -57,6 +58,23 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.snf.ts"
+                }
+              ]
+            },
+            "snf-dev": {
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.snf-dev.ts"
                 }
               ]
             }
