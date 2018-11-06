@@ -79,6 +79,9 @@ export class ProcedureEoComponent implements OnInit {
       this.EOForm.disable();
     }
 
+    /* OTHER_EO_LOT TENDERED CRITERION DEMO */
+    this.utilities.projectLots = this.utilities.createLotList(5);
+
 
     this.dataService.getCountries()
       .then(res => {

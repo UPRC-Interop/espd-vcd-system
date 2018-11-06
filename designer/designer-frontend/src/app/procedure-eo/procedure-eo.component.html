@@ -242,6 +242,7 @@
             </div>
           </form>
         </ng-container>
+
         <ng-container *ngIf="dataService.eoLotCriterionForm">
           <form [formGroup]="dataService.eoLotCriterionForm">
             <div class="eoRelatedCriteria" *ngFor="let cr of this.dataService.eoLotCriterion; let i=index">
@@ -254,6 +255,7 @@
             </div>
           </form>
         </ng-container>
+
       </mat-expansion-panel>
 
       <div formArrayName="naturalPersons">

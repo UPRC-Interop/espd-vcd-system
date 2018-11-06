@@ -979,6 +979,20 @@ export class DataService {
             const action = 'close';
             this.openSnackBar(message, action);
           });
+
+        this.getEOLotCriterion()
+          .then(res => {
+            this.eoLotCriterion = res;
+            this.eoLotCriterionForm = this.formUtil.createEORelatedCriterionForm(this.eoLotCriterion);
+            // console.log(this.caRelatedCriteria);
+          })
+          .catch(err => {
+            console.log(err);
+            const message: string = err.error +
+              ' ' + err.message;
+            const action = 'close';
+            this.openSnackBar(message, action);
+          });
       }
 
 
