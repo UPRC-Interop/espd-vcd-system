@@ -15,11 +15,19 @@
  */
 package eu.esens.espdvcd.designer.service;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import eu.esens.espdvcd.builder.BuilderFactory;
+import eu.esens.espdvcd.designer.deserialiser.RequirementDeserialiser;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDResponse;
+import eu.esens.espdvcd.model.RegulatedESPDRequest;
+import eu.esens.espdvcd.model.SelectableCriterion;
+import eu.esens.espdvcd.model.requirement.Requirement;
+import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,6 +35,9 @@ import org.junit.Test;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.List;
+
+import static eu.esens.espdvcd.schema.EDMVersion.V2;
 
 public class ExportESPDServiceTest {
 
@@ -91,5 +102,31 @@ public class ExportESPDServiceTest {
     public void XMLStringFromResponse() throws Exception{
         String is = exportESPDService.exportESPDResponseAsString(response);
         Assert.assertNotNull(is);
+    }
+
+    @Test
+    public void testExportSFC() throws Exception{
+        InputStream theJson = this.getClass().getClassLoader().getResourceAsStream("requestAfterResponseDataTypeChange.json");
+        ObjectMapper MAPPER = new ObjectMapper()
+                .registerModule(new JavaTimeModule())
+                .disable(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE)
+                .registerModule(new SimpleModule().addDeserializer(Requirement.class, new RequirementDeserialiser(V2)));
+
+        ESPDRequest theRequest = MAPPER.readValue(theJson, RegulatedESPDRequest.class);
+
+        for (SelectableCriterion selectableCriterion : theRequest.getFullCriterionList()) {
+            assertNotNullReqInfo(selectableCriterion.getRequirementGroups());
+        }
+
+    }
+
+    private void assertNotNullReqInfo(List<RequirementGroup> requirementGroups) throws Exception{
+        for (RequirementGroup requirementGroup : requirementGroups) {
+            for (Requirement requirement : requirementGroup.getRequirements()) {
+                Assert.assertNotNull(requirement.getType());
+                Assert.assertNotNull(requirement.getResponseDataType());
+            }
+            assertNotNullReqInfo(requirementGroup.getRequirementGroups());
+        }
     }
 }
