@@ -34,7 +34,8 @@ subprojects { project ->
 
     version = '2.0.2'
     group = 'eu.esens.espdvcd'
-
+    
+    project.ext.webappDir = "$rootProject.projectDir/designer/designer-frontend"
     project.ext.slf4j_version = '1.7.13'
     project.ext.log4j2_version = '2.4.1'
     project.ext.jaxb_impl_version = '2.2.11'
@@ -60,6 +61,10 @@ subprojects { project ->
         excludes(["**/*.xlsx", "**/*.xml", "**/*.xsl", "**/*.doc", "**/*.pdf", "**/*.jks", "**/*.gc", "**/*.cva", "**/*.sch", "**/*.xslt", "**/*.xjb"])
         skipExistingHeaders = true
         ignoreFailures = true
+    }
+
+    test{
+        maxHeapSize = "512m"
     }
 
 }

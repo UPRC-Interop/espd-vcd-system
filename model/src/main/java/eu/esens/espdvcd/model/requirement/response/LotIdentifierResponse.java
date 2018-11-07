@@ -15,14 +15,20 @@
  */
 package eu.esens.espdvcd.model.requirement.response;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Lots Identifier Response
  */
-public class LotsIdentifierResponse extends Response implements Serializable {
+public class LotIdentifierResponse extends Response implements Serializable {
 
     /**
      * Criterion Response for Self-Contained Lots
@@ -37,18 +43,38 @@ public class LotsIdentifierResponse extends Response implements Serializable {
     private static final long serialVersionUID = -7114827204655335550L;
     private List<String> lots;
 
-    public LotsIdentifierResponse() {
+    public LotIdentifierResponse() {
     }
 
-    public LotsIdentifierResponse(List<String> lots) {
+    public LotIdentifierResponse(List<String> lots) {
         this.lots = lots;
     }
 
-    public List<String> getLots() {
+    private void initLotsList() {
         if (lots == null) {
             lots = new ArrayList<>();
         }
+    }
+
+    @JsonCreator
+    @JsonProperty("lots")
+    public List<String> getLotsList() {
+        initLotsList();
         return lots;
+    }
+
+    @JsonIgnore
+    public String getLots() {
+        return String.join(",", getLotsList());
+    }
+
+    @JsonIgnore
+    public void setLots(String lots) {
+        getLotsList().clear();
+        if (Objects.nonNull(lots)) {
+            String[] lotsArray = lots.split(",");
+            this.lots.addAll(Arrays.asList(lotsArray));
+        }
     }
 
 }

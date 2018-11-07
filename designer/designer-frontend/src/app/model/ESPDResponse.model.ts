@@ -27,10 +27,15 @@ export class ESPDResponse {
   documentDetails: DocumentDetails;
   evidenceList: Evidence[];
 
-  constructor(cadetails: Cadetails, eodetails: EoDetails, fullCriterionList: FullCriterion[], evidenceList: Evidence[]) {
+  constructor(cadetails: Cadetails,
+              eodetails: EoDetails,
+              fullCriterionList: FullCriterion[],
+              evidenceList: Evidence[],
+              documentDetails: DocumentDetails) {
     this.cadetails = cadetails;
     this.eodetails = eodetails;
     this.fullCriterionList = fullCriterionList;
     this.evidenceList = evidenceList;
+    this.documentDetails = documentDetails;
   }
 }

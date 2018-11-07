@@ -14,7 +14,7 @@
 /// limitations under the License.
 ///
 
-import {Component, Input, Output, OnInit, EventEmitter, OnChanges, AfterViewInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {Requirement} from '../model/requirement.model';
 import {DataService} from '../services/data.service';
@@ -23,7 +23,7 @@ import {Currency} from '../model/currency.model';
 import {ApicallService} from '../services/apicall.service';
 import {UtilitiesService} from '../services/utilities.service';
 import {EoIDType} from '../model/eoIDType.model';
-import {EvaluationMethodType} from '../model/evaluationMethodType.model';
+import {MatSelectionList} from '@angular/material';
 
 @Component({
   selector: 'app-requirement',
@@ -36,12 +36,16 @@ export class RequirementComponent implements OnInit, OnChanges {
   @Input() form: FormGroup;
 
   @Output() indicatorChanged = new EventEmitter();
+  // @Output() lotsInReq = new EventEmitter();
 
+  reqLots: string[] = [];
   countries: Country[] = null;
   currency: Currency[] = null;
   eoIDTypes: EoIDType[] = null;
   // evaluationMethodTypes: EvaluationMethodType[] = null;
   isWeighted = false;
+
+  @ViewChild('lots') lots: MatSelectionList;
 
   constructor(public dataService: DataService, public APIService: ApicallService, public utilities: UtilitiesService) {
   }
@@ -55,6 +59,9 @@ export class RequirementComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
+    // if (this.lots !== undefined) {
+    //   console.log(this.lots);
+    // }
 
     this.dataService.getCountries()
       .then(res => {
@@ -122,5 +129,15 @@ export class RequirementComponent implements OnInit, OnChanges {
     }
   }
 
+
+  pushSelectedLot() {
+    if (this.lots.selectedOptions.selected !== undefined) {
+      this.utilities.lotTemplate[this.req.uuid] = this.utilities.createLotListInCriterion(this.lots.selectedOptions.selected);
+      console.log(this.utilities.lotTemplate);
+      // console.log(this.utilities.lotTemplate['270317fa-6790-42ec-8f1a-575d82ed1d63-27']);
+      // this.reqLots = this.utilities.createLotListInCriterion(this.lots.selectedOptions.selected);
+      // console.log(this.reqLots);
+    }
+  }
 
 }

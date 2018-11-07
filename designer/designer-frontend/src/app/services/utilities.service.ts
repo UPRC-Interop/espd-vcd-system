@@ -18,6 +18,7 @@ import {Injectable} from '@angular/core';
 import {Moment} from 'moment';
 import * as moment from 'moment';
 import {SelectionCriteria} from '../model/selectionCriteria.model';
+import {MatListOption} from '@angular/material';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +40,9 @@ export class UtilitiesService {
   qualificationApplicationType: string;
   isGloballyWeighted = false;
   isDividedIntoLots = false;
+  projectLots = [];
+  lotTemplate = [];
+  type: string;
   // qualificationApplicationType = 'SELF-CONTAINED';
   // qualificationApplicationType = 'REGULATED';
 
@@ -85,6 +89,25 @@ export class UtilitiesService {
     Object.keys(obj).forEach(function (k) {
       obj[k] = val;
     });
+  }
+
+  createLotList(lots: number): string[] {
+    const projectLotsList = [];
+    for (let i = 1; i <= lots; i++) {
+      projectLotsList.push('Lot' + i);
+    }
+
+    console.log(projectLotsList);
+
+    return projectLotsList;
+  }
+
+  createLotListInCriterion(lots: MatListOption[]): string[] {
+    const reqLot = lots.map(lot => {
+      return lot.value;
+    });
+    return reqLot;
+    // console.log(reqLot);
   }
 
 

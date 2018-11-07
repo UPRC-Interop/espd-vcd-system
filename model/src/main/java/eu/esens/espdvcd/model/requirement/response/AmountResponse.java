@@ -16,6 +16,7 @@
 package eu.esens.espdvcd.model.requirement.response;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * Amount response
@@ -39,7 +40,7 @@ public class AmountResponse extends Response implements Serializable {
      * BusReqID: tbr92-018<br>
      * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.Response.Amount<br>
      */
-    private float amount;
+    private BigDecimal amount;
 
     /**
      * Currency
@@ -54,16 +55,15 @@ public class AmountResponse extends Response implements Serializable {
      */
     private String currency;
 
-    
     public AmountResponse() {
     }
     
-    public AmountResponse(float amount, String currency) {
+    public AmountResponse(BigDecimal amount, String currency) {
         this.amount = amount;
         this.currency = currency;
     }
 
-    public float getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
     
@@ -71,7 +71,7 @@ public class AmountResponse extends Response implements Serializable {
         return currency;
     }
 
-    public void setAmount(float amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
     

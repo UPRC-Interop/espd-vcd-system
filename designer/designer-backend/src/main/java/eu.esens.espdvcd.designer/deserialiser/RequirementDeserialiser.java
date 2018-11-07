@@ -19,6 +19,7 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import eu.esens.espdvcd.codelist.enums.RequirementTypeEnum;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.requirement.ResponseRequirement;
 import eu.esens.espdvcd.model.requirement.response.*;
@@ -47,10 +48,11 @@ public class RequirementDeserialiser extends StdDeserializer<ResponseRequirement
         final ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule()).disable(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE).configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
         JsonNode root = p.getCodec().readTree(p);
         JsonNode responseType = root.get("responseDataType");
+        JsonNode type = root.get("type");
         JsonNode ID = root.get("id");
         JsonNode description = root.get("description");
 
-        ResponseRequirement responseRequirement = new ResponseRequirement(ID.asText(), ResponseTypeEnum.valueOf(responseType.asText()), description.asText());
+        ResponseRequirement responseRequirement = new ResponseRequirement(ID.asText(), RequirementTypeEnum.valueOf(type.asText()), ResponseTypeEnum.valueOf(responseType.asText()), description.asText());
         Response response;
 
         switch (responseRequirement.getResponseDataType()) {
@@ -102,11 +104,11 @@ public class RequirementDeserialiser extends StdDeserializer<ResponseRequirement
             case IDENTIFIER:
                 response = mapper.treeToValue(root.get("response"), IdentifierResponse.class);
                 break;
-            case EO_IDENTIFIER:
+            case ECONOMIC_OPERATOR_IDENTIFIER:
                 response = mapper.treeToValue(root.get("response"), EOIdentifierResponse.class);
                 break;
-            case LOTS_IDENTIFIER:
-                response = mapper.treeToValue(root.get("response"), LotsIdentifierResponse.class);
+            case LOT_IDENTIFIER:
+                response = mapper.treeToValue(root.get("response"), LotIdentifierResponse.class);
                 break;
             case WEIGHT_INDICATOR:
                 response = mapper.treeToValue(root.get("response"), WeightIndicatorResponse.class);
