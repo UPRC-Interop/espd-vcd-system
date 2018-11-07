@@ -269,7 +269,8 @@ public abstract class CriteriaTaxonomyResource implements CriteriaResource, Requ
     }
 
     private String getRowCode(Row r) {
-        return getCellStringValueOrNull(r, elementCodeColumnIndex);
+        String elementCode = getCellStringValueOrNull(r, elementCodeColumnIndex);
+        return elementCode != null ? elementCode.trim() : elementCode;
     }
 
     private String getRowResponseType(Row r) {

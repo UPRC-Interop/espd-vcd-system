@@ -631,11 +631,11 @@ public interface ModelExtractor {
 
         if (rqType.getTypeCode() != null
                 && rqType.getTypeCode().getValue() != null
-                && rqType.getTypeCode().getValue().equals(RequirementTypeEnum.REQUIREMENT)
+                && rqType.getTypeCode().getValue().equals(RequirementTypeEnum.REQUIREMENT.name())
                 && rqType.getValueDataTypeCode() != null
                 && rqType.getValueDataTypeCode().getValue() != null) {
 
-            switch (ResponseTypeEnum.valueOf(rqType.getTypeCode().getValue())) {
+            switch (ResponseTypeEnum.valueOf(rqType.getValueDataTypeCode().getValue())) {
 
                 case DESCRIPTION:
                     if (rqType.getExpectedDescription() != null
