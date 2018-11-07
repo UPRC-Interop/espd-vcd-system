@@ -19,6 +19,7 @@ import {Moment} from 'moment';
 import * as moment from 'moment';
 import {SelectionCriteria} from '../model/selectionCriteria.model';
 import {MatListOption} from '@angular/material';
+import {ESPDRequest} from '../model/ESPDRequest.model';
 
 @Injectable({
   providedIn: 'root'
@@ -45,6 +46,7 @@ export class UtilitiesService {
   type: string;
   // qualificationApplicationType = 'SELF-CONTAINED';
   // qualificationApplicationType = 'REGULATED';
+
 
   constructor() {
   }
@@ -109,6 +111,11 @@ export class UtilitiesService {
     return reqLot;
     // console.log(reqLot);
   }
+
+  // makeDummyESPDRequest(): ESPDRequest {
+  //   const json = JSON.parse(this.requestJSON);
+  //   return new ESPDRequest(json.cadetails, json.fullCriterionList, json.documentDetails);
+  // }
 
 
 }
