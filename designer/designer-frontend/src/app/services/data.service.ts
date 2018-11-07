@@ -39,6 +39,7 @@ import {FormUtilService} from './form-util.service';
 import {UtilitiesService} from './utilities.service';
 import {TranslateService} from '@ngx-translate/core';
 import {Language} from '../model/language.model';
+import {ExportType} from "../export/export-type.enum";
 
 @Injectable()
 export class DataService {
@@ -82,6 +83,7 @@ export class DataService {
   eoRelatedDCriteria: EoRelatedCriterion[] = null;
   reductionCriteria: ReductionCriterion[] = null;
   language: Language[] = null;
+  selectedLanguage : string = null;
   langTemplate = [];
   langNames = [];
   langISOCodes = [];
@@ -343,27 +345,71 @@ export class DataService {
 
     console.log(this.fullCriterionList);
     // apicall service post
-    this.APIService.getXMLRequest(JSON.stringify(this.createESPDRequest()))
+
+
+  }
+
+  finishSubmit(exportType: ExportType) {
+
+    switch (exportType) {
+      case ExportType.XML:
+        this.createRequestXmlFile();
+        break;
+      case ExportType.HTML:
+        this.createRequestHtmlFile();
+        break;
+      case ExportType.PDF:
+        this.createRequestPdfFile();
+    }
+  }
+
+  createRequestXmlFile() {
+    this.APIService.getXMLRequest(JSON.stringify(this.createESPDRequest()), this.selectedLanguage)
       .then(res => {
-        console.log(res);
-        this.createFile(res);
+        this.createXmlFile(res);
+        this.saveFile(this.blob, '.xml');
       })
       .catch(err => {
-        console.log(err);
         const message: string = err.error +
           ' ' + err.message;
         const action = 'close';
         this.openSnackBar(message, action);
       });
-
   }
 
+  createRequestHtmlFile() {
+    this.APIService.getHTMLRequest(JSON.stringify(this.createESPDRequest()), this.selectedLanguage)
+      .then(res => {
+        this.createHtmlFile(res);
+        this.saveFile(this.blob, '.html');
+      })
+      .catch(err => {
+        const message: string = err.error +
+          ' ' + err.message;
+        const action = 'close';
+        this.openSnackBar(message, action);
+      });
+  }
+
+  createRequestPdfFile() {
+    this.APIService.getPDFRequest(JSON.stringify(this.createESPDRequest()), this.selectedLanguage)
+      .then(res => {
+        this.createPdfFile(res);
+        this.saveFile(this.blob, '.pdf');
+      })
+      .catch(err => {
+        const message: string = err.error +
+          ' ' + err.message;
+        const action = 'close';
+        this.openSnackBar(message, action);
+      });
+  }
   selectionEOSubmit(isSatisfiedALL: boolean) {
     this.isSatisfiedALLeo = isSatisfiedALL;
 
   }
 
-  finishEOSubmit() {
+  finishEOSubmit(exportType : ExportType) {
 
     /* extract eoRelated criteria */
     this.formUtil.extractFormValuesFromCriteria(this.eoRelatedACriteria, this.eoRelatedACriteriaForm, this.formUtil.evidenceList);
@@ -408,12 +454,53 @@ export class DataService {
 
     console.log(this.fullCriterionList);
 
+    switch (exportType) {
+      case ExportType.XML:
+        this.createXml();
+        break;
+      case ExportType.HTML:
+        this.createHtml();
+        break;
+      case ExportType.PDF:
+        this.createPdf();
+    }
 
-    this.APIService.getXMLResponse(JSON.stringify(this.createESPDResponse()))
+  }
+
+  createPdf() {
+    this.APIService.getPDFResponse(JSON.stringify(this.createESPDResponse()), this.selectedLanguage)
+      .then(res => {
+        this.createPdfFile(res);
+        this.saveFile(this.blob, '.pdf');
+      })
+      .catch(err => {
+        const message: string = err.error +
+          ' ' + err.message;
+        const action = 'close';
+        this.openSnackBar(message, action);
+      });
+  }
+
+  createHtml() {
+    this.APIService.getHTMLResponse(JSON.stringify(this.createESPDResponse()), this.selectedLanguage)
+      .then(res => {
+        this.createHtmlFile(res);
+        this.saveFile(this.blob, '.html');
+      })
+      .catch(err => {
+        const message: string = err.error +
+          ' ' + err.message;
+        const action = 'close';
+        this.openSnackBar(message, action);
+      });
+  }
+
+  createXml() {
+    this.APIService.getXMLResponse(JSON.stringify(this.createESPDResponse()), this.selectedLanguage)
       .then(res => {
         console.log(res);
-        this.createFile(res);
-        this.saveFile(this.blob);
+        this.createXmlFile(res);
+        this.saveFile(this.blob, '.xml');
       })
       .catch(err => {
         console.log(err);
@@ -423,28 +510,39 @@ export class DataService {
         const action = 'close';
         this.openSnackBar(message, action);
       });
-
   }
 
 
   /* ================================== EXPORT FILES ============================= */
 
-
-  createFile(response) {
-    // const filename:string = "espd-request";
-    this.blob = new Blob([response.body], {type: 'application/xml'});
+  createHtmlFile(response) {
+    this.createFile(response, 'application/html');
+  }
+  createPdfFile(response) {
+    this.createFile(response, 'application/pdf');
+  }
+  createXmlFile(response) {
+    this.createFile(response, 'application/xml');
   }
 
+  private createFile(response, type: string) {
+// const filename:string = "espd-request";
+    this.blob = new Blob([response.body], {type: type});
+  }
 
-  saveFile(blob) {
+  isVersionTwo() : boolean {
+    return this.APIService.version === 'v2'
+  }
+
+  saveFile(blob, fileSuffix: String) {
     if (this.utilities.isCA && this.APIService.version === 'v1') {
-      var filename = 'espd-request-v1.xml';
+      var filename = 'espd-request-v1' + fileSuffix;
     } else if (this.utilities.isEO && this.APIService.version === 'v1') {
-      var filename = 'espd-response-v1.xml';
+      var filename = 'espd-response-v1' + fileSuffix;
     } else if (this.utilities.isCA && this.APIService.version === 'v2') {
-      var filename = 'espd-request-v2.xml';
+      var filename = 'espd-request-v2' + fileSuffix;
     } else if (this.utilities.isEO && this.APIService.version === 'v2') {
-      var filename = 'espd-response-v2.xml';
+      var filename = 'espd-response-v2' + fileSuffix;
     }
 
     saveAs(blob, filename);
@@ -1209,7 +1307,8 @@ export class DataService {
   }
 
   switchLanguage(language: string) {
-    const lang = 'ESPD_' + this.langTemplate[language].toLowerCase();
+    this.selectedLanguage = this.langTemplate[language].toLowerCase();
+    const lang = 'ESPD_' + this.selectedLanguage;
     console.log(lang);
     this.translate.use(lang);
     // this.AddLanguages();
