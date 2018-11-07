@@ -27,4 +27,5 @@ export class Requirement {
   uuid: string;
   mandatory?: boolean;
   multiple?: boolean;
+  responseValuesRelatedArtefact?: string;
 }

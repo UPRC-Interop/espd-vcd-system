@@ -48,6 +48,7 @@ import {WeightingType} from '../model/weightingType.model';
 import {DocumentDetails} from '../model/documentDetails.model';
 import {EoRoleType} from '../model/eoRoleType.model';
 import {Amount} from '../model/amount.model';
+import {FinancialRatioType} from '../model/financialRatioType.model';
 
 @Injectable()
 export class DataService {
@@ -81,6 +82,7 @@ export class DataService {
   eoRoleTypes: EoRoleType[] = null;
   currency: Currency[] = null;
   eoIDType: EoIDType[] = null;
+  financialRatioTypes: FinancialRatioType[] = null;
   weightingType: WeightingType[] = null;
   evaluationMethodType: EvaluationMethodType[] = null;
   exclusionACriteria: ExclusionCriteria[] = null;
@@ -563,7 +565,6 @@ export class DataService {
           console.log(res.fullCriterionList);
 
           this.caRelatedCriteria = this.filterCARelatedCriteria(this.OTHER_CA_REGEXP, res.fullCriterionList);
-
           this.caRelatedCriteriaForm = this.formUtil.createCARelatedCriterionForm(this.caRelatedCriteria);
 
           this.exclusionACriteria = this.filterExclusionCriteria(this.EXCLUSION_CONVICTION_REGEXP, res.fullCriterionList);
@@ -599,6 +600,8 @@ export class DataService {
           this.selectionALLCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionALLCriteria);
 
           this.eoRelatedCriteria = this.filterEoRelatedCriteria(this.EO_RELATED_REGEXP, res.fullCriterionList);
+          this.eoLotCriterion = this.filterCARelatedCriteria(this.EO_LOT_REGEXP, res.fullCriterionList);
+          // this.eoLotCriterionForm = this.formUtil.createEORelatedCriterionForm(this.eoLotCriterion);
           this.reductionCriteria = this.filterEoRelatedCriteria(this.REDUCTION_OF_CANDIDATES_REGEXP, res.fullCriterionList);
 
           // create requirementGroup template objects required for multiple instances (cardinalities) function
@@ -671,6 +674,9 @@ export class DataService {
 
           this.caRelatedCriteria = this.filterCARelatedCriteria(this.OTHER_CA_REGEXP, res.fullCriterionList);
           this.caRelatedCriteriaForm = this.formUtil.createCARelatedCriterionForm(this.caRelatedCriteria);
+
+          this.eoLotCriterion = this.filterCARelatedCriteria(this.EO_LOT_REGEXP, res.fullCriterionList);
+          this.eoLotCriterionForm = this.formUtil.createEORelatedCriterionForm(this.eoLotCriterion);
 
           this.eoRelatedACriteria = this.filterEoRelatedCriteria(this.EO_RELATED_A_REGEXP, res.fullCriterionList);
           // console.log(this.eoRelatedACriteria);
@@ -1607,6 +1613,26 @@ export class DataService {
       return this.APIService.get_BidType()
         .then(res => {
           this.bidTypes = res;
+          return Promise.resolve(res);
+        })
+        .catch(err => {
+          console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
+          return Promise.reject(err);
+        });
+    }
+  }
+
+  getFinancialRatioTypes(): Promise<FinancialRatioType[]> {
+    if (this.financialRatioTypes != null) {
+      return Promise.resolve(this.financialRatioTypes);
+    } else {
+      return this.APIService.get_financialRatioType()
+        .then(res => {
+          this.financialRatioTypes = res;
           return Promise.resolve(res);
         })
         .catch(err => {
