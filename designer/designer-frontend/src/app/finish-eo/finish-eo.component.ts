@@ -14,7 +14,7 @@
 /// limitations under the License.
 ///
 
-import {Component, Input, OnInit, QueryList, ViewChildren} from '@angular/core';
+import {Component, Input, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {ReductionCriterion} from '../model/reductionCriterion.model';
 import {FormGroup, NgForm} from '@angular/forms';
@@ -31,6 +31,7 @@ import {WizardSteps} from "../base/wizard-steps.enum";
 export class FinishEoComponent implements OnInit, BaseStep {
 
   @ViewChildren('form') forms: QueryList<NgForm>;
+  @ViewChild('dateInput') dateInput: NgForm;
 
   @Input() reductionCriteria: ReductionCriterion[];
 
@@ -61,6 +62,6 @@ export class FinishEoComponent implements OnInit, BaseStep {
   }
 
   public areFormsValid(): boolean {
-    return this.validationService.validateFormsInComponent(this.forms);
+    return this.validationService.validateFormsInComponent(this.forms) && this.validationService.validateForm(this.dateInput);
   }
 }

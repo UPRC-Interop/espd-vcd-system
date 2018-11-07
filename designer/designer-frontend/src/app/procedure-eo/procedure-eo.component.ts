@@ -14,7 +14,7 @@
 /// limitations under the License.
 ///
 
-import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
+import {Component, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {ProcedureType} from '../model/procedureType.model';
 import {Country} from '../model/country.model';
@@ -35,6 +35,7 @@ import {UrlValidation} from "../validation/url/url-validation";
 export class ProcedureEoComponent implements OnInit, BaseStep {
 
   @ViewChildren('form') forms: QueryList<NgForm>;
+  @ViewChild('ojs') ojsForm: NgForm;
 
   public EOForm: FormGroup;
   test = true;
@@ -105,7 +106,7 @@ export class ProcedureEoComponent implements OnInit, BaseStep {
   }
 
   public areFormsValid(): boolean {
-    return this.validationService.validateFormsInComponent(this.forms);
+    return this.validationService.validateFormsInComponent(this.forms) && this.validationService.validateForm(this.ojsForm);
   }
 
   /* ================================================= natural person form ================================================ */
