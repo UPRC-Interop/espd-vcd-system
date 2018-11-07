@@ -37,3 +37,13 @@ mat-card{
   width: 80%;
   margin: 0 auto;
 }
+
+.invalid {
+  color: red;
+}
+
+.invalid-icon {
+  color: red;
+  display: inline-flex;
+  vertical-align: middle;
+}

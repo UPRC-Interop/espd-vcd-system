@@ -31,30 +31,76 @@
 
 <div class="container" *ngIf="this.utilities.start">
 
-  <mat-horizontal-stepper [linear]="isLinear" #stepper="matHorizontalStepper">
+  <mat-horizontal-stepper (selectionChange)="validateSteps($event)" [linear]="isLinear" #stepper="matHorizontalStepper">
     <mat-step>
-      <ng-template matStepLabel>{{'espd.gui.progress.start' | translate}}</ng-template>
-      <app-start></app-start>
+      <ng-template matStepLabel>
+        <div [class.invalid]="!startStepValid">
+          <mat-icon *ngIf="!startStepValid" class="invalid-icon">warning</mat-icon>
+          <span>{{'espd.gui.progress.start' | translate}}</span>
+        </div>
+      </ng-template>
+      <app-start #startComponent></app-start>
     </mat-step>
     <mat-step>
-      <ng-template matStepLabel>{{'espd.gui.progress.procedure' | translate}}</ng-template>
-      <app-procedure *ngIf="utilities.isCA"></app-procedure>
-      <app-procedure-eo *ngIf="utilities.isEO"></app-procedure-eo>
+      <ng-template matStepLabel>
+        <div [class.invalid]="!procedureStepValid">
+          <mat-icon *ngIf="!procedureStepValid" class="invalid-icon">warning</mat-icon>
+          <span>{{'espd.gui.progress.procedure' | translate}}</span>
+        </div>
+      </ng-template>
+      <app-procedure *ngIf="utilities.isCA" #procedureCaComponent></app-procedure>
+      <app-procedure-eo *ngIf="utilities.isEO"
+                        #procedureEoComponent></app-procedure-eo>
     </mat-step>
     <mat-step>
-      <ng-template matStepLabel>{{'espd.gui.progress.exclusion' | translate}}</ng-template>
-      <app-exclusion *ngIf="utilities.isCA"></app-exclusion>
-      <app-exclusion-eo *ngIf="utilities.isEO"></app-exclusion-eo>
+      <ng-template matStepLabel>
+        <div [class.invalid]="!exclusionStepValid">
+          <mat-icon *ngIf="!exclusionStepValid" class="invalid-icon">warning</mat-icon>
+          <span>{{'espd.gui.progress.exclusion' | translate}}</span>
+        </div>
+      </ng-template>
+      <app-exclusion
+                      *ngIf="utilities.isCA"
+                      #exclusionCaComponent></app-exclusion>
+      <app-exclusion-eo
+                        *ngIf="utilities.isEO"
+                        #exclusionEoComponent></app-exclusion-eo>
     </mat-step>
     <mat-step>
-      <ng-template matStepLabel>{{'espd.gui.progress.selection' | translate}}</ng-template>
-      <app-selection *ngIf="utilities.isCA"></app-selection>
-      <app-selection-eo *ngIf="utilities.isEO"></app-selection-eo>
+      <ng-template matStepLabel>
+        <div [class.invalid]="!selectionStepValid">
+          <mat-icon *ngIf="!selectionStepValid" class="invalid-icon">warning</mat-icon>
+          <span>{{'espd.gui.progress.selection' | translate}}</span>
+        </div>
+      </ng-template>
+      <app-selection
+                      *ngIf="utilities.isCA"
+                      #selectionCaComponent></app-selection>
+      <app-selection-eo
+                        *ngIf="utilities.isEO"
+                        #selectionEoComponent></app-selection-eo>
     </mat-step>
     <mat-step>
-      <ng-template matStepLabel>{{'espd.gui.progress.finish' | translate}}</ng-template>
-      <app-finish *ngIf="utilities.isCA"></app-finish>
-      <app-finish-eo *ngIf="utilities.isEO"></app-finish-eo>
+      <ng-template matStepLabel>
+        <div [class.invalid]="!finishStepValid">
+          <mat-icon *ngIf="!finishStepValid" class="invalid-icon">warning</mat-icon>
+          <span>{{'espd.gui.progress.finish' | translate}}</span>
+        </div>
+      </ng-template>
+      <app-finish *ngIf="utilities.isCA"
+                  [startStepValid]="startStepValid"
+                  [procedureStepValid]="procedureStepValid"
+                  [exclusionStepValid]="exclusionStepValid"
+                  [selectionStepValid]="selectionStepValid"
+                  [finishStepValid]="finishStepValid"
+                  #finishCaComponent></app-finish>
+      <app-finish-eo *ngIf="utilities.isEO"
+                     [startStepValid]="startStepValid"
+                     [procedureStepValid]="procedureStepValid"
+                     [exclusionStepValid]="exclusionStepValid"
+                     [selectionStepValid]="selectionStepValid"
+                     [finishStepValid]="finishStepValid"
+                      #finishEoComponent></app-finish-eo>
     </mat-step>
   </mat-horizontal-stepper>
 
