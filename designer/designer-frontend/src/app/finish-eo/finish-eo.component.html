@@ -93,7 +93,7 @@
       <p translate>espd.part5.concl.statements.signature</p>
 
       <mat-form-field>
-        <input [appDateValidationFix]="dateInput.control" matInput [matDatepicker]="picker" placeholder="Date" #dateInput="ngModel" ngModel required>
+        <input [appDateValidationFix]="dateInput.control" matInput [matDatepicker]="picker" placeholder="Date" #dateInput="ngModel" ngModel>
         <mat-error *ngIf="dateInput.control.invalid">
           <input-validation-error [formControlErrors]="dateInput.control.errors"></input-validation-error>
         </mat-error>
@@ -124,7 +124,7 @@
 
 <button mat-raised-button color="primary" matStepperPrevious [innerHTML]="'espd.gui.previous' | translate"></button>
 <ng-container *ngIf="!this.dataService.isReadOnly()">
-  <button [disabled]="!(startStepValid && procedureStepValid && exclusionStepValid && selectionStepValid && finishStepValid)"
+  <button [disabled]="!(startStepValid && procedureStepValid && exclusionStepValid && selectionStepValid && finishStepValid && !dateInput.invalid)"
     type="submit" mat-raised-button color="primary" matStepperNext (click)="onExport()" [innerHTML]="'espd.part5.export' | translate"></button>
 </ng-container>
 
