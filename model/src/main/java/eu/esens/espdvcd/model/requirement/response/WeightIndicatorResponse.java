@@ -43,7 +43,7 @@ public class WeightIndicatorResponse extends Response implements Serializable {
      * Data types:<br>
      * evaluationMethodType: Code<br>
      * evaluationMethodDescription: Text<br>
-     * weight: Float<br>
+     * weight: BigDecimal<br>
      * indicator: Boolean<br>
      * Cardinality: 0..1<br>
      * UBL syntax paths:
