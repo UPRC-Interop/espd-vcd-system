@@ -22,7 +22,7 @@ import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.ResponseRequirement;
-import eu.esens.espdvcd.model.requirement.response.WeightIndicatorResponse;
+import eu.esens.espdvcd.model.requirement.response.*;
 import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
 import eu.esens.espdvcd.model.retriever.ECertisCriterion;
 import eu.esens.espdvcd.model.retriever.ECertisEvidence;
@@ -40,6 +40,8 @@ import eu.espd.schema.v1.commonbasiccomponents_2.ContractFolderIDType;
 import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionPropertyGroupType;
 import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionPropertyType;
 import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionType;
+import eu.espd.schema.v2.pre_award.commonbasic.ConfidentialityLevelCodeType;
+import eu.espd.schema.v2.pre_award.commonbasic.ValidatedCriterionPropertyIDType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -603,12 +605,143 @@ public interface ModelExtractor {
         return rq;
     }
 
+    default void applyValidatedCriterionPropertyID(final ValidatedCriterionPropertyIDType vcpIDType, final Response resp) {
+
+        if (vcpIDType != null && vcpIDType.getValue() != null) {
+            applyValidatedCriterionPropertyID(vcpIDType.getValue(), resp);
+        }
+    }
+
+    default void applyValidatedCriterionPropertyID(String ID, final Response resp) {
+        resp.setValidatedCriterionPropertyID(ID);
+    }
+
+    default void applyConfidentialityLevelCode(final ConfidentialityLevelCodeType clcType, final Response resp) {
+
+        if (clcType != null && clcType.getValue() != null) {
+            applyConfidentialityLevelCode(clcType.getValue(), resp);
+        }
+    }
+
+    default void applyConfidentialityLevelCode(String code, final Response resp) {
+        resp.setConfidentialityLevelCode(code);
+    }
+
     default void applyCAResponseToModel(TenderingCriterionPropertyType rqType, Requirement rq) {
 
-//        if (rqType.get) {
-//
-//        }
+        if (rqType.getTypeCode() != null
+                && rqType.getTypeCode().getValue() != null
+                && rqType.getTypeCode().getValue().equals(RequirementTypeEnum.REQUIREMENT)
+                && rqType.getValueDataTypeCode() != null
+                && rqType.getValueDataTypeCode().getValue() != null) {
 
+            switch (ResponseTypeEnum.valueOf(rqType.getTypeCode().getValue())) {
+
+                case DESCRIPTION:
+                    if (rqType.getExpectedDescription() != null
+                            && rqType.getExpectedDescription().getValue() != null) {
+
+                        DescriptionResponse descResp = new DescriptionResponse();
+                        descResp.setDescription(rqType.getExpectedDescription().getValue());
+                        applyValidatedCriterionPropertyID(rqType.getID().getValue(), descResp);
+                        applyConfidentialityLevelCode(ConfidentialityLevelEnum.PUBLIC.name(), descResp);
+                        rq.setResponse(descResp);
+                    }
+                    break;
+
+                case AMOUNT:
+                    if (rqType.getExpectedAmount() != null
+                            && rqType.getExpectedAmount().getValue() != null) {
+
+                        AmountResponse amountResp = new AmountResponse();
+                        amountResp.setAmount(rqType.getExpectedAmount().getValue());
+                        if (rqType.getExpectedAmount().getCurrencyID() != null) {
+                            amountResp.setCurrency(rqType.getExpectedAmount().getCurrencyID());
+                        }
+                        applyValidatedCriterionPropertyID(rqType.getID().getValue(), amountResp);
+                        applyConfidentialityLevelCode(ConfidentialityLevelEnum.PUBLIC.name(), amountResp);
+                        rq.setResponse(amountResp);
+                    }
+                    break;
+
+                case CODE:
+                    if (rqType.getExpectedCode() != null
+                            && rqType.getExpectedCode().getValue() != null) {
+
+                        EvidenceURLCodeResponse codeResp = new EvidenceURLCodeResponse();
+                        codeResp.setEvidenceURLCode(rqType.getExpectedCode().getValue());
+                        applyValidatedCriterionPropertyID(rqType.getID().getValue(), codeResp);
+                        applyConfidentialityLevelCode(ConfidentialityLevelEnum.PUBLIC.name(), codeResp);
+                        rq.setResponse(codeResp);
+                    }
+                    break;
+
+                case LOT_IDENTIFIER:
+                    if (rqType.getExpectedID() != null
+                            && rqType.getExpectedID().getValue() != null) {
+
+                        LotIdentifierResponse lotIdeResp = new LotIdentifierResponse();
+                        lotIdeResp.setLots(rqType.getExpectedID().getValue());
+                        applyValidatedCriterionPropertyID(rqType.getID().getValue(), lotIdeResp);
+                        applyConfidentialityLevelCode(ConfidentialityLevelEnum.PUBLIC.name(), lotIdeResp);
+                        rq.setResponse(lotIdeResp);
+                    }
+                    break;
+
+                case QUANTITY_INTEGER:
+                    if (rqType.getExpectedValueNumeric() != null
+                            && rqType.getExpectedValueNumeric().getValue() != null) {
+
+                        QuantityIntegerResponse quantityIntResp = new QuantityIntegerResponse();
+                        quantityIntResp.setQuantity(rqType.getExpectedValueNumeric().getValue().intValueExact());
+                        applyValidatedCriterionPropertyID(rqType.getID().getValue(), quantityIntResp);
+                        applyConfidentialityLevelCode(ConfidentialityLevelEnum.PUBLIC.name(), quantityIntResp);
+                        rq.setResponse(quantityIntResp);
+                    }
+                    break;
+
+                case QUANTITY:
+                    if (rqType.getExpectedValueNumeric() != null
+                            && rqType.getExpectedValueNumeric().getValue() != null) {
+
+                        QuantityResponse quantityResp = new QuantityResponse();
+                        quantityResp.setQuantity(rqType.getExpectedValueNumeric().getValue());
+                        applyValidatedCriterionPropertyID(rqType.getID().getValue(), quantityResp);
+                        applyConfidentialityLevelCode(ConfidentialityLevelEnum.PUBLIC.name(), quantityResp);
+                        rq.setResponse(quantityResp);
+                    }
+                    break;
+
+                case PERIOD:
+                    if (!rqType.getApplicablePeriod().isEmpty()
+                            && rqType.getApplicablePeriod().get(0).getStartDate() != null
+                            && rqType.getApplicablePeriod().get(0).getEndDate() != null
+                            && rqType.getApplicablePeriod().get(0).getStartDate().getValue() != null
+                            && rqType.getApplicablePeriod().get(0).getEndDate().getValue() != null) {
+
+                        ApplicablePeriodResponse periodResp = new ApplicablePeriodResponse();
+                        periodResp.setStartDate(rqType.getApplicablePeriod().get(0).getStartDate().getValue());
+                        periodResp.setEndDate(rqType.getApplicablePeriod().get(0).getEndDate().getValue());
+                        applyValidatedCriterionPropertyID(rqType.getID().getValue(), periodResp);
+                        applyConfidentialityLevelCode(ConfidentialityLevelEnum.PUBLIC.name(), periodResp);
+                        rq.setResponse(periodResp);
+                    }
+                    break;
+
+                case URL:
+                    if (rqType.getExpectedDescription() != null
+                            && rqType.getExpectedDescription().getValue() != null) {
+
+                        URLResponse urlResp = new URLResponse();
+                        urlResp.setUrl(rqType.getExpectedDescription().getValue());
+                        applyValidatedCriterionPropertyID(rqType.getID().getValue(), urlResp);
+                        applyConfidentialityLevelCode(ConfidentialityLevelEnum.PUBLIC.name(), urlResp);
+                        rq.setResponse(urlResp);
+                    }
+                    break;
+
+            }
+        }
     }
 
     default Requirement extractRequirement(RequirementType rqType) {

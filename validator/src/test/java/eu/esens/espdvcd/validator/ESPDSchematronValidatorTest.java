@@ -155,7 +155,7 @@ public class ESPDSchematronValidatorTest {
 //        printErrorsIfExist(v11);
 //        Assert.assertFalse(v11.isValid());
 
-        ArtefactValidator v12 = ValidatorFactory.createESPDSchematronValidator(selfContainedRequestV2_full);
+        ArtefactValidator v12 = ValidatorFactory.createESPDSchematronValidator(invalidRegulatedResponseV2_60);
         Assert.assertNotNull(v12);
         printErrorsIfExist(v12);
         Assert.assertTrue(v12.isValid());

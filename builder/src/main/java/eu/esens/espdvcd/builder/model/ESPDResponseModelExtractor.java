@@ -293,20 +293,6 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
         return r;
     }
 
-    private void applyValidatedCriterionPropertyID(final ValidatedCriterionPropertyIDType vcpIDType, final Response resp) {
-
-        if (vcpIDType != null && vcpIDType.getValue() != null) {
-            resp.setValidatedCriterionPropertyID(vcpIDType.getValue());
-        }
-    }
-
-    private void applyConfidentialityLevelCode(final ConfidentialityLevelCodeType clcType, final Response resp) {
-
-        if (clcType != null && clcType.getValue() != null) {
-            resp.setConfidentialityLevelCode(clcType.getValue());
-        }
-    }
-
     public Response extractResponse(TenderingCriterionResponseType responseType, ResponseTypeEnum theType,
                                     TenderingCriterionType criterionType) {
 
