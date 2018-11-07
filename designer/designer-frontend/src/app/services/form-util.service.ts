@@ -31,6 +31,7 @@ import {UtilitiesService} from './utilities.service';
 import {FullCriterion} from '../model/fullCriterion.model';
 import {UUID} from 'angular2-uuid';
 import {CaRelatedCriterion} from '../model/caRelatedCriterion.model';
+import {stringify} from 'querystring';
 
 @Injectable({
   providedIn: 'root'
@@ -571,7 +572,7 @@ export class FormUtilService {
                   disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
                 });
               }
-            } else if (r.response.startDate === null) {
+            } else if (r.response.startDate === null || stringify(r.response.startDate) === '') {
               group[r.uuid + 'startDate'] = new FormControl({
                 value: '',
                 disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
@@ -589,7 +590,7 @@ export class FormUtilService {
                   disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
                 });
               }
-            } else if (r.response.endDate === null) {
+            } else if (r.response.endDate === null || stringify(r.response.endDate) === '') {
               group[r.uuid + 'endDate'] = new FormControl({
                 value: '',
                 disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
@@ -608,18 +609,21 @@ export class FormUtilService {
               // console.log(evi);
               // console.log(typeof evi);
 
-              group[r.uuid + 'evidenceUrl'] = new FormControl({
-                value: evi.evidenceURL,
-                disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
-              });
-              group[r.uuid + 'evidenceCode'] = new FormControl({
-                value: evi.description,
-                disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
-              });
-              group[r.uuid + 'evidenceIssuer'] = new FormControl({
-                value: evi.evidenceIssuer.name,
-                disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
-              });
+              /* FIX: self-contained cannot set evidenceURL of undefined issue */
+              if (evi !== undefined) {
+                group[r.uuid + 'evidenceUrl'] = new FormControl({
+                  value: evi.evidenceURL,
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
+                group[r.uuid + 'evidenceCode'] = new FormControl({
+                  value: evi.description,
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
+                group[r.uuid + 'evidenceIssuer'] = new FormControl({
+                  value: evi.evidenceIssuer.name,
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
+              }
 
               if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
                 group[r.uuid + 'evidenceUrl'] = new FormControl({
@@ -670,7 +674,7 @@ export class FormUtilService {
               }
             }
             // in case of request import
-            if (r.response.currency === null || r.response.amount === '0') {
+            if (r.response.currency === null || r.response.amount === '0' || r.response.currency === '' || r.response.amount === '') {
               group[r.uuid + 'currency'] = new FormControl({
                 value: '',
                 disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO

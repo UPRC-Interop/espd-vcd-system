@@ -184,9 +184,21 @@
                 </mat-select>
               </mat-form-field>
             </div>
-            <mat-form-field class="eoField">
-              <input matInput placeholder="{{'espd.part2.lots.concerned' | translate}}" formControlName="procurementProjectLot">
-            </mat-form-field>
+            <div *ngIf="this.utilities.qualificationApplicationType === 'regulated'">
+              <mat-form-field class="eoField">
+                <input matInput placeholder="{{'espd.part2.lots.concerned' | translate}}" formControlName="procurementProjectLot">
+              </mat-form-field>
+            </div>
+            <div *ngIf="this.utilities.qualificationApplicationType === 'selfcontained'">
+              <mat-form-field class="eoField">
+                <mat-select formControlName="eoRole"
+                            placeholder="Role: ">
+                  <mat-option>None</mat-option>
+                  <mat-option *ngFor="let role of eoRoleTypes" [value]="role.code">{{role.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
 
           </div>
 
@@ -230,6 +242,22 @@
             </mat-radio-button>
           </mat-radio-group>
         </div>
+        <div *ngIf="this.utilities.qualificationApplicationType === 'selfcontained'">
+          <mat-form-field>
+            <input formControlName="employeeQuantity" matInput placeholder="Number of Employees: ">
+          </mat-form-field>
+          <div class="generalTurnover" formGroupName="generalTurnover">
+            <mat-form-field>
+              <input formControlName="amount" matInput placeholder="Turnover: ">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-select formControlName="currency" matInput placeholder="Currency: ">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let curr of currency" [value]="curr.code">{{curr.code}} ( {{curr.name}} )</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
         <ng-container *ngIf="dataService.eoRelatedACriteriaForm">
           <form [formGroup]="dataService.eoRelatedACriteriaForm">
             <div class="eoRelatedCriteria" *ngFor="let cr of this.dataService.eoRelatedACriteria; let i=index">
@@ -242,6 +270,20 @@
             </div>
           </form>
         </ng-container>
+
+        <ng-container *ngIf="dataService.eoLotCriterionForm">
+          <form [formGroup]="dataService.eoLotCriterionForm">
+            <div class="eoRelatedCriteria" *ngFor="let cr of this.dataService.eoLotCriterion; let i=index">
+              <mat-card>
+                <h4>{{cr.description}}</h4>
+                <div class="answer">
+                  <app-criterion [criterion]="cr" [form]="dataService.eoLotCriterionForm.controls" [indicator]="true"></app-criterion>
+                </div>
+              </mat-card>
+            </div>
+          </form>
+        </ng-container>
+
       </mat-expansion-panel>
 
       <div formArrayName="naturalPersons">
