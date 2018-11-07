@@ -47,6 +47,7 @@ import {BidType} from '../model/bidType.model';
 import {WeightingType} from '../model/weightingType.model';
 import {DocumentDetails} from '../model/documentDetails.model';
 import {EoRoleType} from '../model/eoRoleType.model';
+import {Amount} from '../model/amount.model';
 
 @Injectable()
 export class DataService {
@@ -118,6 +119,7 @@ export class DataService {
   EODetails: EoDetails = new EoDetails();
   PostalAddress: PostalAddress = new PostalAddress();
   ContactingDetails: ContactingDetails = new ContactingDetails();
+  generalTurnover: Amount = new Amount();
   documentDetails: DocumentDetails = new DocumentDetails();
   espdRequest: ESPDRequest;
   espdResponse: ESPDResponse;
@@ -630,15 +632,26 @@ export class DataService {
           this.PostalAddress = res.cadetails.postalAddress;
           this.ContactingDetails = res.cadetails.contactingDetails;
           this.receivedNoticeNumber = res.cadetails.receivedNoticeNumber;
-          if (this.utilities.qualificationApplicationType === 'selfcontained') {
-            this.CADetails.classificationCodes = res.cadetails.classificationCodes;
-          }
           this.selectedCountry = this.CADetails.cacountry;
           this.EODetails = res.eodetails;
           console.log(this.EODetails);
           console.log(this.EODetails.naturalPersons);
           // console.log(this.EODetails.naturalPersons['birthDate']);
           this.selectedEOCountry = this.EODetails.postalAddress.countryCode;
+          if (this.utilities.qualificationApplicationType === 'selfcontained') {
+            this.CADetails.classificationCodes = res.cadetails.classificationCodes;
+            // this.EODetails.generalTurnover.amount = res.eodetails.generalTurnover.amount;
+            // this.EODetails.generalTurnover.currency = res.eodetails.generalTurnover.currency;
+            if (res.eodetails.generalTurnover !== null || res.eodetails.generalTurnover !== undefined) {
+              this.generalTurnover = res.eodetails.generalTurnover;
+            } else if (res.eodetails.generalTurnover === null) {
+              this.generalTurnover = new Amount();
+              // this.generalTurnover.amount = 0;
+              // this.generalTurnover.currency = '';
+
+              this.EODetails.generalTurnover = this.generalTurnover;
+            }
+          }
 
           // get evidence list only in v2
           if (this.APIService.version === 'v2') {
@@ -798,10 +811,6 @@ export class DataService {
       'smeIndicator': this.EODetails.smeIndicator,
       'eoRole': this.EODetails.eoRole,
       'employeeQuantity': this.EODetails.employeeQuantity,
-      'generalTurnover': {
-        'amount': this.EODetails.generalTurnover.amount,
-        'currency': this.EODetails.generalTurnover.currency
-      },
       'postalAddress': {
         'addressLine1': this.EODetails.postalAddress.addressLine1,
         'postCode': this.EODetails.postalAddress.postCode,
@@ -812,6 +821,15 @@ export class DataService {
       'webSiteURI': this.EODetails.webSiteURI,
       'procurementProjectLot': this.EODetails.procurementProjectLot
     });
+
+    if (this.EODetails.generalTurnover !== null && this.EODetails.generalTurnover !== undefined) {
+      this.EOForm.patchValue({
+        'generalTurnover': {
+          'amount': this.EODetails.generalTurnover.amount,
+          'currency': this.EODetails.generalTurnover.currency
+        }
+      });
+    }
 
     if (this.EODetails.contactingDetails !== null) {
       this.EOForm.patchValue({

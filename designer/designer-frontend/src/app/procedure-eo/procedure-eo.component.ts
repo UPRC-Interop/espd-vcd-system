@@ -31,6 +31,7 @@ import {UtilitiesService} from '../services/utilities.service';
 import {ProjectType} from '../model/projectType.model';
 import {EoRoleType} from '../model/eoRoleType.model';
 import {Currency} from '../model/currency.model';
+import {Amount} from '../model/amount.model';
 
 @Component({
   selector: 'app-procedure-eo',
@@ -50,6 +51,7 @@ export class ProcedureEoComponent implements OnInit {
 
 
   constructor(public dataService: DataService, public utilities: UtilitiesService) {
+
     this.EOForm = new FormGroup({
       'name': new FormControl(this.dataService.EODetails.name),
       'smeIndicator': new FormControl(false),
@@ -123,9 +125,9 @@ export class ProcedureEoComponent implements OnInit {
         this.eoRoleTypes = res;
       })
       .catch(err => {
-        console.log(err);
-      }
-    );
+          console.log(err);
+        }
+      );
 
     this.dataService.getCurrency()
       .then(res => {

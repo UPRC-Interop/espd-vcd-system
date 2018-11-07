@@ -242,7 +242,7 @@
             </mat-radio-button>
           </mat-radio-group>
         </div>
-        <div>
+        <div *ngIf="this.utilities.qualificationApplicationType === 'selfcontained'">
           <mat-form-field>
             <input formControlName="employeeQuantity" matInput placeholder="Number of Employees: ">
           </mat-form-field>
