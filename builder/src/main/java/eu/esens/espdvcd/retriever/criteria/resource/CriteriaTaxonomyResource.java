@@ -256,7 +256,8 @@ public abstract class CriteriaTaxonomyResource implements CriteriaResource, Requ
     }
 
     private String getRowUUID(Row r) {
-        return getCellStringValueOrNull(r, elementUUIDColumnIndex);
+        String UUID = getCellStringValueOrNull(r, elementUUIDColumnIndex);
+        return UUID != null ? UUID.trim() : UUID;
     }
 
     private String getRowName(Row r) {

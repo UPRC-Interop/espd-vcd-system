@@ -96,7 +96,9 @@ public interface SchemaExtractorV2 {
                     .map(desc -> createWeightingConsiderationDescriptionType(desc))
                     .collect(Collectors.toList()));
             // Weight
-            criterionType.setWeightNumeric(createWeightNumericType(response.getWeight()));
+            if (response.getWeight() != null) {
+                criterionType.setWeightNumeric(createWeightNumericType(response.getWeight()));
+            }
         }
     }
 
