@@ -44,6 +44,8 @@ public class ESPDSchematronValidatorTest {
     private File invalidRegulatedResponseV2_60;
 
     private File invalidSelfContainedRequestV2;
+    private File selfContainedRequestV2_full;
+
     private File invalidSelfContainedResponseV2;
 
     @Before
@@ -86,6 +88,9 @@ public class ESPDSchematronValidatorTest {
 
         invalidSelfContainedRequestV2 = new File(getClass().getClassLoader().getResource("SELFCONTAINED-ESPD-Request_2.0.2.xml").getFile());
         Assert.assertNotNull(invalidSelfContainedRequestV2);
+
+        selfContainedRequestV2_full = new File(getClass().getClassLoader().getResource("espd-self-contained-request-full.xml").getFile());
+        Assert.assertNotNull(selfContainedRequestV2_full);
 
         invalidSelfContainedResponseV2 = new File(getClass().getClassLoader().getResource("SELFCONTAINED_ESPD_Response_2.0.2.xml").getFile());
         Assert.assertNotNull(invalidSelfContainedResponseV2);
@@ -150,7 +155,7 @@ public class ESPDSchematronValidatorTest {
 //        printErrorsIfExist(v11);
 //        Assert.assertFalse(v11.isValid());
 
-        ArtefactValidator v12 = ValidatorFactory.createESPDSchematronValidator(invalidRegulatedResponseV2_60);
+        ArtefactValidator v12 = ValidatorFactory.createESPDSchematronValidator(selfContainedRequestV2_full);
         Assert.assertNotNull(v12);
         printErrorsIfExist(v12);
         Assert.assertTrue(v12.isValid());

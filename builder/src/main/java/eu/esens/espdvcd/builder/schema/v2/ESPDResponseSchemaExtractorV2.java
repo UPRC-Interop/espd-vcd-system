@@ -1,12 +1,12 @@
 /**
  * Copyright 2016-2018 University of Piraeus Research Center
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,7 +17,6 @@ package eu.esens.espdvcd.builder.schema.v2;
 
 import eu.esens.espdvcd.codelist.enums.EOIndustryClassificationCodeEnum;
 import eu.esens.espdvcd.codelist.enums.ProfileExecutionIDEnum;
-import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.EODetails;
 import eu.esens.espdvcd.model.ESPDRequestDetails;
@@ -40,7 +39,9 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
@@ -53,9 +54,10 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
 
         if (modelResponse.getCADetails().getProcurementProcedureFileReferenceNo() != null) {
             qarType.setContractFolderID(createContractFolderIDType(modelResponse.getCADetails().getProcurementProcedureFileReferenceNo()));
-        } else {
-            qarType.setContractFolderID(createContractFolderIDType("PPID-test1"));
         }
+//        } else {
+//            qarType.setContractFolderID(createContractFolderIDType("PPID-test1"));
+//        }
 
         qarType.getAdditionalDocumentReference().add(extractCADetailsDocumentReference(modelResponse.getCADetails()));
 
@@ -70,6 +72,17 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
         qarType.getContractingParty().get(0).getParty().getServiceProviderParty()
                 .add(extractServiceProviderPartyType(modelResponse.getServiceProviderDetails()));
 
+        // apply global weighting
+        qarType.getWeightScoringMethodologyNote().addAll(modelResponse.getCADetails()
+                .getWeightScoringMethodologyNoteList().stream()
+                .map(note -> createWeightScoringMethodologyNoteType(note))
+                .collect(Collectors.toList()));
+
+        if (modelResponse.getCADetails().getWeightingType() != null) {
+            qarType.setWeightingTypeCode(createWeightingTypeCodeType(modelResponse
+                    .getCADetails().getWeightingType()));
+        }
+
         qarType.getTenderingCriterion().addAll(modelResponse.getFullCriterionList().stream()
                 .filter(sc -> sc.isSelected())
                 .map(sc -> extractTenderingCriterion(sc))
@@ -77,7 +90,12 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
 
         qarType.getEconomicOperatorParty().add(extractEODetails(modelResponse.getEODetails()));
 
-        qarType.getTenderingCriterionResponse().addAll(extractAllTenderingCriterionResponses(modelResponse));
+        // create a map with key = Criterion ID, value = TenderingCriterion in order to use it during weighting
+        // responses extraction process
+        Map<String, TenderingCriterionType> criterionTypeMap = qarType.getTenderingCriterion().stream()
+                .collect(Collectors.toMap(criterionType -> criterionType.getID().getValue(), Function.identity()));
+
+        qarType.getTenderingCriterionResponse().addAll(extractAllTenderingCriterionResponses(modelResponse, criterionTypeMap));
 
         qarType.getEvidence().addAll(modelResponse.getEvidenceList().stream()
                 .map(ev -> extractEvidenceType(ev))
@@ -90,34 +108,50 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
         qarType.setUBLVersionID(createUBL22VersionIdType());
         qarType.setCustomizationID(createCENBIICustomizationIdType("urn:www.cenbii.eu:transaction:biitrdm092:ver3.0"));
         qarType.setVersionID(createVersionIDType("2018.01.01"));
-        qarType.setProfileExecutionID(createProfileExecutionIDType(ProfileExecutionIDEnum.ESPD_EDM_V2_0_2_REGULATED));
-        qarType.setQualificationApplicationTypeCode(createQualificationApplicationTypeCodeType(QualificationApplicationTypeEnum.REGULATED));
+//        qarType.setProfileExecutionID(createProfileExecutionIDType(ProfileExecutionIDEnum.ESPD_EDM_V2_0_2_REGULATED));
+//        qarType.setQualificationApplicationTypeCode(createQualificationApplicationTypeCodeType(QualificationApplicationTypeEnum.REGULATED));
+
+        if (modelResponse.getDocumentDetails() != null) {
+            switch (modelResponse.getDocumentDetails().getQualificationApplicationType()) {
+                case REGULATED:
+                    qarType.setProfileExecutionID(createProfileExecutionIDType(ProfileExecutionIDEnum.ESPD_EDM_V2_0_2_REGULATED));
+                    break;
+                case SELFCONTAINED:
+                    qarType.setProfileExecutionID(createProfileExecutionIDType(ProfileExecutionIDEnum.ESPD_EDM_V2_0_2_SELFCONTAINED));
+                    break;
+            }
+            qarType.setQualificationApplicationTypeCode(createQualificationApplicationTypeCodeType(modelResponse.getDocumentDetails().getQualificationApplicationType()));
+        }
         qarType.setCopyIndicator(new CopyIndicatorType());
         qarType.getCopyIndicator().setValue(false);
 
         return qarType;
     }
 
-    public List<TenderingCriterionResponseType> extractAllTenderingCriterionResponses(final ESPDResponse response) {
+    public List<TenderingCriterionResponseType> extractAllTenderingCriterionResponses(final ESPDResponse response,
+                                                                                      final Map<String, TenderingCriterionType> criterionTypeMap) {
         List<TenderingCriterionResponseType> tcrTypeList = new ArrayList<>();
-        response.getFullCriterionList().forEach(sc -> tcrTypeList.addAll(extractAllTenderingCriterionResponses(sc.getRequirementGroups())));
+        response.getFullCriterionList().forEach(sc -> tcrTypeList.addAll(extractAllTenderingCriterionResponses(sc.getRequirementGroups(),
+                criterionTypeMap.get(sc.getID()))));
         return tcrTypeList;
     }
 
-    public List<TenderingCriterionResponseType> extractAllTenderingCriterionResponses(final List<RequirementGroup> rgList) {
+    public List<TenderingCriterionResponseType> extractAllTenderingCriterionResponses(final List<RequirementGroup> rgList,
+                                                                                      final TenderingCriterionType criterionType) {
         final List<TenderingCriterionResponseType> tcrTypeList = new ArrayList<>();
-        rgList.forEach(rg -> tcrTypeList.addAll(extractAllTenderingCriterionResponses(rg)));
+        rgList.forEach(rg -> tcrTypeList.addAll(extractAllTenderingCriterionResponses(rg, criterionType)));
         return tcrTypeList;
     }
 
-    public List<TenderingCriterionResponseType> extractAllTenderingCriterionResponses(final RequirementGroup rg) {
+    public List<TenderingCriterionResponseType> extractAllTenderingCriterionResponses(final RequirementGroup rg,
+                                                                                      final TenderingCriterionType criterionType) {
         return extractAllRequirements(rg, null).stream()
                 .map(rq -> {
 
                     if (rq.getResponse() != null) {
                         rq.getResponse().setValidatedCriterionPropertyID(rq.getID());
                     }
-                    return extractTenderingCriterionResponse(rq.getResponse(), rq.getResponseDataType());
+                    return extractTenderingCriterionResponse(rq.getResponse(), rq.getResponseDataType(), criterionType);
                 })
                 .collect(Collectors.toList());
     }
@@ -360,23 +394,27 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
 
     @Override
     public TenderingCriterionPropertyType extractTenderingCriterionPropertyType(Requirement rq) {
-        TenderingCriterionPropertyType req = new TenderingCriterionPropertyType();
+        TenderingCriterionPropertyType reqType = new TenderingCriterionPropertyType();
 
-        req.setTypeCode(createTypeCodeType(rq.getType().name()));
-        req.setValueDataTypeCode(createValueDataTypeCodeType(rq.getResponseDataType().name()));
+        reqType.setTypeCode(createTypeCodeType(rq.getType().name()));
+        reqType.setValueDataTypeCode(createValueDataTypeCodeType(rq.getResponseDataType().name()));
 
-        req.getDescription().add(new DescriptionType());
-        req.getDescription().get(0).setValue(rq.getDescription());
+        reqType.getDescription().add(new DescriptionType());
+        reqType.getDescription().get(0).setValue(rq.getDescription());
 
-        req.setID(createCriteriaTaxonomyIDType(rq.getID()));
+        reqType.setID(createCriteriaTaxonomyIDType(rq.getID()));
 
-        return req;
+        applyCAResponseToXML(rq, reqType);
+
+        return reqType;
     }
 
-    private TenderingCriterionResponseType extractTenderingCriterionResponse(Response response, ResponseTypeEnum respType) {
+    private TenderingCriterionResponseType extractTenderingCriterionResponse(Response response,
+                                                                             ResponseTypeEnum respType,
+                                                                             final TenderingCriterionType criterionType) {
 
         TenderingCriterionResponseType tcrType = new TenderingCriterionResponseType();
-        ResponseValueType rvType = new ResponseValueType();
+        // ResponseValueType rvType = new ResponseValueType();
         EvidenceSuppliedType evsType = new EvidenceSuppliedType();
 
         if (response == null) {
@@ -393,60 +431,66 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
 
         tcrType.setID(createDefaultIDType(UUID.randomUUID().toString()));
         tcrType.getID().setSchemeID("ISO/IEC 9834-8:2008 - 4UUID");
-        rvType.setID(createDefaultIDType(UUID.randomUUID().toString()));
-        rvType.getID().setSchemeID("ISO/IEC 9834-8:2008 - 4UUID");
+        // rvType.setID(createDefaultIDType(UUID.randomUUID().toString()));
+        // rvType.getID().setSchemeID("ISO/IEC 9834-8:2008 - 4UUID");
 
         switch (respType) {
             case DESCRIPTION:
+                ResponseValueType descRvType = createResponseValueType();
                 String description = ((DescriptionResponse) response).getDescription();
-                rvType.getDescription().add(new DescriptionType());
+                descRvType.getDescription().add(new DescriptionType());
                 if (description != null && !description.isEmpty()) {
                     // rvType.getDescription().add(new DescriptionType());
-                    rvType.getDescription().get(0).setValue(description);
+                    descRvType.getDescription().get(0).setValue(description);
                 }
-                tcrType.getResponseValue().add(rvType);
+                tcrType.getResponseValue().add(descRvType);
                 return tcrType;
 
             case QUANTITY_YEAR:
+                ResponseValueType quaYearRvType = createResponseValueType();
                 if (((QuantityYearResponse) response).getYear() != 0) {
-                    rvType.setResponseQuantity(new ResponseQuantityType());
-                    rvType.getResponseQuantity().setUnitCode("YEAR");
-                    rvType.getResponseQuantity().setValue(BigDecimal.valueOf(((QuantityYearResponse) response).getYear()));
+                    quaYearRvType.setResponseQuantity(new ResponseQuantityType());
+                    quaYearRvType.getResponseQuantity().setUnitCode("YEAR");
+                    quaYearRvType.getResponseQuantity().setValue(BigDecimal.valueOf(((QuantityYearResponse) response).getYear()));
                 }
-                tcrType.getResponseValue().add(rvType);
+                tcrType.getResponseValue().add(quaYearRvType);
                 return tcrType;
 
             case QUANTITY:
-                rvType.setResponseQuantity(new ResponseQuantityType());
-                rvType.getResponseQuantity().setValue(new BigDecimal(Float.toString(((QuantityResponse) response).getQuantity())));
-                tcrType.getResponseValue().add(rvType);
+                ResponseValueType quaRvType = createResponseValueType();
+                quaRvType.setResponseQuantity(new ResponseQuantityType());
+                quaRvType.getResponseQuantity().setValue(((QuantityResponse) response).getQuantity());
+                tcrType.getResponseValue().add(quaRvType);
                 return tcrType;
 
             case QUANTITY_INTEGER:
-                rvType.setResponseQuantity(new ResponseQuantityType());
-                rvType.getResponseQuantity().setUnitCode("NUMBER");
-                rvType.getResponseQuantity().setValue(BigDecimal.valueOf(((QuantityIntegerResponse) response).getQuantity()));
-                tcrType.getResponseValue().add(rvType);
+                ResponseValueType quaIntRvType = createResponseValueType();
+                quaIntRvType.setResponseQuantity(new ResponseQuantityType());
+                quaIntRvType.getResponseQuantity().setUnitCode("NUMBER");
+                quaIntRvType.getResponseQuantity().setValue(BigDecimal.valueOf(((QuantityIntegerResponse) response).getQuantity()));
+                tcrType.getResponseValue().add(quaIntRvType);
                 return tcrType;
 
             case AMOUNT:
-                float amount = ((AmountResponse) response).getAmount();
+                ResponseValueType amRvType = createResponseValueType();
+                BigDecimal amount = ((AmountResponse) response).getAmount();
                 String currency = ((AmountResponse) response).getCurrency();
-                if ((amount != 0) || (currency != null && !currency.isEmpty())) {
+                if ((amount != null) || (currency != null && !currency.isEmpty())) {
                     // Only generate a proper response if for at least one of the variables "amount" and
                     // "currency" a value different from the default is detected.
 
-                    rvType.setResponseAmount(new ResponseAmountType());
-                    rvType.getResponseAmount().setValue(new BigDecimal(Float.toString(amount)));
-                    rvType.getResponseAmount().setCurrencyID(currency);
+                    amRvType.setResponseAmount(new ResponseAmountType());
+                    amRvType.getResponseAmount().setValue(amount);
+                    amRvType.getResponseAmount().setCurrencyID(currency);
                 }
-                tcrType.getResponseValue().add(rvType);
+                tcrType.getResponseValue().add(amRvType);
                 return tcrType;
 
             case INDICATOR:
-                rvType.setResponseIndicator(new ResponseIndicatorType());
-                rvType.getResponseIndicator().setValue(((IndicatorResponse) response).isIndicator());
-                tcrType.getResponseValue().add(rvType);
+                ResponseValueType indRvType = createResponseValueType();
+                indRvType.setResponseIndicator(new ResponseIndicatorType());
+                indRvType.getResponseIndicator().setValue(((IndicatorResponse) response).isIndicator());
+                tcrType.getResponseValue().add(indRvType);
                 return tcrType;
 
             case PERIOD:
@@ -464,13 +508,15 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
                 return tcrType;
 
             case PERCENTAGE:
-                rvType.setResponseQuantity(new ResponseQuantityType());
-                rvType.getResponseQuantity().setUnitCode("PERCENTAGE");
-                rvType.getResponseQuantity().setValue(new BigDecimal(Float.toString(((PercentageResponse) response).getPercentage())));
-                tcrType.getResponseValue().add(rvType);
+                ResponseValueType perRvType = createResponseValueType();
+                perRvType.setResponseQuantity(new ResponseQuantityType());
+                perRvType.getResponseQuantity().setUnitCode("PERCENTAGE");
+                perRvType.getResponseQuantity().setValue(((PercentageResponse) response).getPercentage());
+                tcrType.getResponseValue().add(perRvType);
                 return tcrType;
 
             case DATE:
+                ResponseValueType dateRvType = createResponseValueType();
                 if (((DateResponse) response).getDate() != null) {
                     LocalDate respDate = ((DateResponse) response).getDate();
                     try {
@@ -480,36 +526,38 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
                                         respDate.getMonthValue(),
                                         respDate.getDayOfMonth(),
                                         DatatypeConstants.FIELD_UNDEFINED);
-                        rvType.setResponseDate(new ResponseDateType());
-                        rvType.getResponseDate().setValue(xcal.toGregorianCalendar().toZonedDateTime().toLocalDate());
+                        dateRvType.setResponseDate(new ResponseDateType());
+                        dateRvType.getResponseDate().setValue(xcal.toGregorianCalendar().toZonedDateTime().toLocalDate());
 
                     } catch (DatatypeConfigurationException ex) {
-                        LOGGER.error("Could not create XMLGregorialCalendar Date Object", ex);
+                        LOGGER.error("Could not create XMLGregorianCalendar Date Object", ex);
                         return null;
                     }
                 }
-                tcrType.getResponseValue().add(rvType);
+                tcrType.getResponseValue().add(dateRvType);
                 return tcrType;
 
             case CODE:
+                ResponseValueType codeRvType = createResponseValueType();
                 String evidenceURLCode = ((EvidenceURLCodeResponse) response).getEvidenceURLCode();
                 if (evidenceURLCode != null && !evidenceURLCode.isEmpty()) {
-                    rvType.setResponseCode(new ResponseCodeType());
-                    rvType.getResponseCode().setValue(evidenceURLCode);
+                    codeRvType.setResponseCode(new ResponseCodeType());
+                    codeRvType.getResponseCode().setValue(evidenceURLCode);
                 }
-                tcrType.getResponseValue().add(rvType);
+                tcrType.getResponseValue().add(codeRvType);
                 return tcrType;
 
             case CODE_COUNTRY:
+                ResponseValueType codeCouRvType = createResponseValueType();
                 String countryCode = ((CountryCodeResponse) response).getCountryCode();
                 if (countryCode != null && !countryCode.isEmpty()) {
-                    rvType.setResponseCode(new ResponseCodeType());
-                    rvType.getResponseCode().setListAgencyID("ISO");
-                    rvType.getResponseCode().setListID("ISO 3166-1");
-                    rvType.getResponseCode().setListVersionID("2.0.2");
-                    rvType.getResponseCode().setValue(countryCode);
+                    codeCouRvType.setResponseCode(new ResponseCodeType());
+                    codeCouRvType.getResponseCode().setListAgencyID("ISO");
+                    codeCouRvType.getResponseCode().setListID("ISO 3166-1");
+                    codeCouRvType.getResponseCode().setListVersionID("2.0.2");
+                    codeCouRvType.getResponseCode().setValue(countryCode);
                 }
-                tcrType.getResponseValue().add(rvType);
+                tcrType.getResponseValue().add(codeCouRvType);
                 return tcrType;
 
             case EVIDENCE_IDENTIFIER:
@@ -523,22 +571,58 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
                 return tcrType;
 
             case IDENTIFIER:
+                ResponseValueType ideRvType = createResponseValueType();
                 String responseID = ((IdentifierResponse) response).getIdentifier();
                 if (responseID != null) {
-                    rvType.setResponseID(new ResponseIDType());
-                    rvType.getResponseID().setSchemeAgencyID("EU-COM-GROW");
-                    rvType.getResponseID().setValue(responseID);
+                    ideRvType.setResponseID(new ResponseIDType());
+                    ideRvType.getResponseID().setSchemeAgencyID("EU-COM-GROW");
+                    ideRvType.getResponseID().setValue(responseID);
                 }
-                tcrType.getResponseValue().add(rvType);
+                tcrType.getResponseValue().add(ideRvType);
                 return tcrType;
 
             case URL:
+                ResponseValueType urlRvType = createResponseValueType();
                 String url = ((URLResponse) response).getUrl();
                 if (url != null) {
-                    rvType.setResponseURI(new ResponseURIType());
-                    rvType.getResponseURI().setValue(url);
+                    urlRvType.setResponseURI(new ResponseURIType());
+                    urlRvType.getResponseURI().setValue(url);
                 }
-                tcrType.getResponseValue().add(rvType);
+                tcrType.getResponseValue().add(urlRvType);
+                return tcrType;
+
+            case WEIGHT_INDICATOR:
+                ResponseValueType weightIndRvType = createResponseValueType();
+                WeightIndicatorResponse weightIndResp = (WeightIndicatorResponse) response;
+                applyTenderingCriterionWeightingData(weightIndResp, criterionType);
+                // Indicator
+                weightIndRvType.setResponseIndicator(createResponseIndicatorType(weightIndResp.isIndicator()));
+                tcrType.getResponseValue().add(weightIndRvType);
+                return tcrType;
+
+            case LOT_IDENTIFIER:
+                LotIdentifierResponse lotIdeResp = (LotIdentifierResponse) response;
+                lotIdeResp.getLotsList().forEach(lot -> {
+                    ResponseValueType lotIdeRvType = createResponseValueType();
+                    lotIdeRvType.setResponseID(new ResponseIDType());
+                    lotIdeRvType.getResponseID().setValue(lot);
+                    tcrType.getResponseValue().add(lotIdeRvType);
+                });
+                return tcrType;
+
+            case ECONOMIC_OPERATOR_IDENTIFIER:
+                ResponseValueType eoIdeRvType = createResponseValueType();
+                String eoResponseID = ((EOIdentifierResponse) response).getIdentifier();
+                String eoIDType = ((EOIdentifierResponse) response).getEOIDType();
+                if (eoResponseID != null) {
+                    eoIdeRvType.setResponseID(new ResponseIDType());
+                    eoIdeRvType.getResponseID().setSchemeAgencyID("EU-COM-GROW");
+                    if (eoIDType != null) {
+                        eoIdeRvType.getResponseID().setSchemeName(eoIDType);
+                    }
+                    eoIdeRvType.getResponseID().setValue(eoResponseID);
+                }
+                tcrType.getResponseValue().add(eoIdeRvType);
                 return tcrType;
 
             default:

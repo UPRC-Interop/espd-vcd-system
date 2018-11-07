@@ -144,14 +144,15 @@ public abstract class RegulatedModelBuilder implements ModelBuilder {
      * @return the same ModelBuilder instance for incremental creation of the
      * required object.
      */
-    abstract RegulatedModelBuilder addDefaultESPDCriteriaList();
+    public abstract RegulatedModelBuilder addDefaultESPDCriteriaList();
 
     /**
-     * Apply taxonomy cardinalities to given Criteria Requirements and RequirementGroups
+     * Apply taxonomy cardinalities to REQUIREMENT and REQUIREMENT_GROUP and
+     * REQUIREMENT_GROUP type {@link eu.esens.espdvcd.codelist.enums.RequirementGroupTypeEnum}
      *
      * @param criterionList The Criterion List
      */
-    protected abstract void applyTaxonomyCardinalities(List<SelectableCriterion> criterionList);
+    protected abstract void applyTaxonomyData(List<SelectableCriterion> criterionList);
 
     public ESPDRequest createESPDRequest() throws BuilderException {
         ESPDRequest req;
@@ -167,7 +168,7 @@ public abstract class RegulatedModelBuilder implements ModelBuilder {
                 // imported XML Criteria have default cardinalities, therefore
                 // taxonomy cardinalities will be applied to them in order to
                 // comply with designer needs.
-                applyTaxonomyCardinalities(req.getFullCriterionList());
+                applyTaxonomyData(req.getFullCriterionList());
             }
         } else {
             req = new RegulatedESPDRequest();
@@ -211,7 +212,7 @@ public abstract class RegulatedModelBuilder implements ModelBuilder {
                 // imported XML Criteria have default cardinalities, therefore
                 // taxonomy cardinalities will be applied to them in order to
                 // comply with designer needs.
-                applyTaxonomyCardinalities(res.getFullCriterionList());
+                applyTaxonomyData(res.getFullCriterionList());
             }
 
         } else {

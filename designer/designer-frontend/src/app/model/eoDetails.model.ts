@@ -17,6 +17,7 @@
 import {PostalAddress} from './postalAddress.model';
 import {ContactingDetails} from './contactingDetails.model';
 import {NaturalPerson} from './naturalPerson.model';
+import {Amount} from './amount.model';
 
 export class EoDetails {
   electronicAddressID: string;
@@ -28,4 +29,8 @@ export class EoDetails {
   naturalPersons: NaturalPerson[];
   procurementProjectLot: number;
   id: string;
+  employeeQuantity?: number;
+  eoGroupName?: string;
+  generalTurnover?: Amount;
+  eoRole: string;
 }

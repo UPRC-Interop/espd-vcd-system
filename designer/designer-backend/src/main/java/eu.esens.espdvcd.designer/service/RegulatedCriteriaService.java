@@ -16,35 +16,41 @@
 package eu.esens.espdvcd.designer.service;
 
 import eu.esens.espdvcd.designer.typeEnum.CriteriaType;
+import eu.esens.espdvcd.designer.util.CriteriaUtil;
 import eu.esens.espdvcd.model.SelectableCriterion;
-import eu.esens.espdvcd.model.requirement.Requirement;
-import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
-import eu.esens.espdvcd.retriever.criteria.CriteriaExtractorBuilder;
+import eu.esens.espdvcd.retriever.criteria.RegulatedCriteriaExtractorBuilder;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import eu.esens.espdvcd.schema.EDMVersion;
 
+import javax.el.MethodNotFoundException;
 import java.util.List;
 
-public class RetrieverCriteriaService implements CriteriaService {
+public enum RegulatedCriteriaService implements CriteriaService {
+    V1(EDMVersion.V1), V2(EDMVersion.V2);
 
     private final CriteriaExtractor predefinedExtractor;
-    private int counter = 0;
 
-    public RetrieverCriteriaService(EDMVersion version) {
-        CriteriaExtractorBuilder b = new CriteriaExtractorBuilder(version);
-        predefinedExtractor = b.build();
+    RegulatedCriteriaService(EDMVersion version) {
+        predefinedExtractor = new RegulatedCriteriaExtractorBuilder(version).build();
+    }
+
+    public static RegulatedCriteriaService getV1Instance() {
+        return V1;
+    }
+
+    public static RegulatedCriteriaService getV2Instance() {
+        return V2;
     }
 
     @Override
     public List<SelectableCriterion> getCriteria() throws RetrieverException {
-        List<SelectableCriterion> criteria = predefinedExtractor.getFullList();
-        counter = 0;
-        criteria.forEach(cr -> {
-            cr.setUUID(cr.getID());
-            idFix(cr.getRequirementGroups());
-        });
-        return criteria;
+        return CriteriaUtil.generateUUIDs(predefinedExtractor.getFullList());
+    }
+
+    @Override
+    public List<SelectableCriterion> getCriteria(String euCountryCode) throws RetrieverException {
+        throw new MethodNotFoundException("Not Implemented for regulated criteria");
     }
 
     @Override
@@ -54,22 +60,17 @@ public class RetrieverCriteriaService implements CriteriaService {
 
     @Override
     public List<SelectableCriterion> getTranslatedCriteria(String lang) {
-        throw new UnsupportedOperationException("Translation is not yet supported for the criteria");
+        throw new UnsupportedOperationException("Translation is not yet supported for the EU criteria");
+    }
+
+    @Override
+    public List<SelectableCriterion> getTranslatedCriteria(String euCountryCode, String lang) throws RetrieverException {
+        throw new MethodNotFoundException("Not Implemented for regulated criteria");
     }
 
     @Override
     public CriteriaType[] getCriteriaFilters() {
         return CriteriaType.values();
-    }
-
-    private void idFix(List<RequirementGroup> reqGroups) {
-        counter++;
-        for (RequirementGroup reqGroup : reqGroups) {
-            reqGroup.setUUID(reqGroup.getID() + "-" + counter);
-            idFix(reqGroup.getRequirementGroups());
-            List<Requirement> reqs = reqGroup.getRequirements();
-            reqs.forEach(req -> req.setUUID(req.getID() + "-" + counter));
-        }
     }
 }
 

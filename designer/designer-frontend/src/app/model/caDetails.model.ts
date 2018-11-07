@@ -22,6 +22,7 @@ export class Cadetails {
   procurementProcedureDesc: string;
   procurementProcedureFileReferenceNo: string;
   procurementPublicationNumber: string;
+  procurementProjectLots?: number;
   electronicAddressID?: string;
   webSiteURI?: string;
   postalAddress?: PostalAddress;
@@ -33,5 +34,9 @@ export class Cadetails {
   receivedNoticeNumber?: string;
   nationalOfficialJournal?: string;
   procurementProcedureType?: string;
-
+  classificationCodes?: string[];
+  procedureType?: string;
+  projectType?: string;
+  weightingType?: string;
+  weightScoringMethodologyNote?: string;
 }

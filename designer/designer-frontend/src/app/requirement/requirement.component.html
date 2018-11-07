@@ -16,16 +16,49 @@
 
 -->
 <div [formGroup]="form">
-  <label *ngIf="req.responseDataType=='INDICATOR'" [attr.for]="req.uuid">{{req.description}}</label>
+  <div>
+    <label *ngIf="req.responseDataType=='INDICATOR'" [attr.for]="req.uuid">{{req.description}}</label>
+    <label *ngIf="req.responseDataType=='WEIGHT_INDICATOR' && this.utilities.isGloballyWeighted" [attr.for]="req.uuid">{{req.description}}</label>
+  </div>
 
 
-  <div [ngSwitch]="req.responseDataType">
 
-    <mat-form-field *ngSwitchDefault>
-      <label [attr.for]="req.uuid">{{req.description}}</label>
-      <br>
-      <input matInput [formControlName]="req.uuid" [id]="req.uuid" >
-    </mat-form-field>
+
+  <!--SELF-CONTAINED: Hide the QUESTION fields if the user is a CA making a Request. Render only the REQUIREMENT and CAPTION fields.
+  Don't show the REQUIREMENT fields if the user has the role of EO and creates a new ESPD response from scratch-->
+  <div [ngSwitch]="req.responseDataType" [hidden]="(this.utilities.isCA && req.type === 'QUESTION') || (this.utilities.isEO &&
+  req.type ==='REQUIREMENT' && this.utilities.isCreateResponse) || req.type === 'CAPTION'">
+
+    <!--<label *ngSwitchCase="req.responseDataType=='NONE'">{{req.description}} CAPTION</label>-->
+
+    <!--<mat-form-field *ngSwitchDefault>-->
+      <!--<label [attr.for]="req.uuid">{{req.description}}</label>-->
+      <!--<br>-->
+      <!--<input matInput [formControlName]="req.uuid" [id]="req.uuid" >-->
+    <!--</mat-form-field>-->
+
+    <div *ngSwitchDefault>
+      <div *ngIf="req.type === 'CAPTION'">
+        <!-- SKIP captions and deal with question and requirement only -->
+      </div>
+      <div *ngIf="req.type === 'QUESTION'">
+        <mat-form-field>
+          <label [attr.for]="req.uuid">{{req.description}}</label>
+          <br>
+          <input matInput [formControlName]="req.uuid" [id]="req.uuid" >
+        </mat-form-field>
+      </div>
+      <div *ngIf="req.type === 'REQUIREMENT'">
+        <mat-form-field>
+          <label [attr.for]="req.uuid">{{req.description}}</label>
+          <br>
+          <input matInput [formControlName]="req.uuid" [id]="req.uuid" >
+        </mat-form-field>
+      </div>
+
+    </div>
+
+
 
     <mat-form-field *ngSwitchCase="'DATE'">
       <label [attr.for]="req.uuid">{{req.description}}</label>
@@ -78,7 +111,7 @@
       <label [attr.for]="req.uuid">{{req.description}}</label>
       <br>
       <mat-form-field>
-        <input matInput [formControlName]="req.uuid" [id]="req.uuid" >
+        <input matInput [formControlName]="req.uuid" [id]="req.uuid">
       </mat-form-field>
       <mat-form-field>
         <mat-select [formControlName]="req.uuid+'currency'" [id]="req.uuid+'currency'">
@@ -104,7 +137,6 @@
       <mat-form-field>
         <input matInput [formControlName]="req.uuid+'evidenceIssuer'" [id]="req.uuid+'evidenceIssuer'" >
       </mat-form-field>
-
     </div>
 
 
@@ -116,6 +148,69 @@
                         [value]=false>NO
       </mat-radio-button>
     </mat-radio-group>
+
+    <!-- SELF-CONTAINED: WEIGHT_INDICATOR -->
+    <div class="weight_indicator" *ngSwitchCase="'WEIGHT_INDICATOR'">
+      <div *ngIf="this.utilities.isGloballyWeighted">
+        <mat-radio-group [id]="req.uuid" [formControlName]="req.uuid">
+          <mat-radio-button color="primary"
+                            [value]=true>YES
+          </mat-radio-button>
+          <mat-radio-button color="primary"
+                            [value]=false>NO
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <br>
+      <div class="weight" *ngIf="isWeighted">
+        <!-- REMOVED: EvaluationMethodType dropdown, the user answers YES/NO to the question and the dropdown is redundant -->
+        <!--<label [attr.for]="req.uuid+'evaluationMethodType'">Criterion evaluation method: </label>-->
+        <!--<br>-->
+        <!--<mat-form-field>-->
+          <!--<mat-select [formControlName]="req.uuid+'evaluationMethodType'" [id]="req.uuid+'evaluationMethodType'">-->
+            <!--<mat-option>None</mat-option>-->
+            <!--<mat-option *ngFor="let type of evaluationMethodTypes" [value]="type.code">{{type.code}} ( {{type.name}} )</mat-option>-->
+          <!--</mat-select>-->
+        <!--</mat-form-field>-->
+        <label [attr.for]="req.uuid+'weight'">Weight allocated to this criterion: </label>
+        <br>
+        <mat-form-field>
+          <input matInput [formControlName]="req.uuid+'weight'" [id]="req.uuid+'weight'" >
+        </mat-form-field>
+        <label [attr.for]="req.uuid+'evaluationMethodDescription'">Provide complementary information about the evaluation of the criterion: </label>
+        <br>
+        <mat-form-field>
+          <input matInput [formControlName]="req.uuid+'evaluationMethodDescription'" [id]="req.uuid+'evaluationMethodDescription'" >
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- SELF-CONTAINED: EO_IDENTIFIER -->
+    <div class="eo_identifier" *ngSwitchCase="'ECONOMIC_OPERATOR_IDENTIFIER'">
+      <label [attr.for]="req.uuid">{{req.description}}</label>
+      <br>
+      <mat-form-field>
+        <input matInput [formControlName]="req.uuid" [id]="req.uuid" >
+      </mat-form-field>
+      <label [attr.for]="req.uuid+'eoidtype'">Type of ID: </label>
+      <br>
+      <mat-form-field>
+        <mat-select [formControlName]="req.uuid+'eoidtype'" [id]="req.uuid+'eoidtype'">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let type of eoIDTypes" [value]="type.code">{{type.code}} ( {{type.name}} )</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <!-- SELF-CONTAINED: LOTS_IDENTIFIER -->
+    <div class="lots_identifier" *ngSwitchCase="'LOT_IDENTIFIER'">
+      <mat-selection-list #lots>
+        <mat-list-option *ngFor="let lot of this.utilities.projectLots" [value]="lot"
+                         (click)="pushSelectedLot()">
+          {{lot}}
+        </mat-list-option>
+      </mat-selection-list>
+    </div>
+
 
   </div>
 </div>

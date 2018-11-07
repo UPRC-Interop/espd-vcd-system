@@ -1,12 +1,12 @@
 /**
  * Copyright 2016-2018 University of Piraeus Research Center
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,11 +16,12 @@
 package eu.esens.espdvcd.designer.service;
 
 import eu.esens.espdvcd.builder.BuilderFactory;
-import eu.esens.espdvcd.builder.enums.ArtefactType;
 import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.builder.util.ArtefactUtils;
+import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
 import eu.esens.espdvcd.designer.exception.ValidationException;
-import eu.esens.espdvcd.designer.util.DocumentDetails;
+import eu.esens.espdvcd.designer.util.CriteriaUtil;
+import eu.esens.espdvcd.model.DocumentDetails;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import eu.esens.espdvcd.schema.EDMVersion;
@@ -34,18 +35,20 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
 
-public class ImportESPDRequestService implements ImportESPDService<ESPDRequest> {
+public enum ImportESPDRequestService implements ImportESPDService<ESPDRequest> {
+    INSTANCE;
 
-    private final ValidatorService schemaValidationService, schematronValidationService;
+    private final ValidatorService schemaValidationService = SchemaValidatorService.getInstance();
+    private final ValidatorService schematronValidationService = SchematronValidatorService.getInstance();
 
-    public ImportESPDRequestService() {
-        schematronValidationService = new SchematronValidatorService();
-        schemaValidationService = new SchemaValidatorService();
+    public static ImportESPDService getInstance() {
+        return INSTANCE;
     }
 
     @Override
     public ESPDRequest importESPDFile(File XML) throws RetrieverException, BuilderException, JAXBException, SAXException, ValidationException, IOException {
         EDMVersion artefactVersion = ArtefactUtils.findEDMVersion(new FileInputStream(XML));
+        QualificationApplicationTypeEnum qualificationApplicationType = ArtefactUtils.findQualificationApplicationType(XML);
 
         if (Objects.isNull(artefactVersion))
             throw new ValidationException("Cannot determine artefact version.");
@@ -60,24 +63,32 @@ public class ImportESPDRequestService implements ImportESPDService<ESPDRequest> 
 
         InputStream is = new FileInputStream(XML);
         ESPDRequest request = null;
+        CriteriaService criteriaService = null;
         switch (artefactVersion) {
             case V1:
                 request = BuilderFactory.EDM_V1.createRegulatedModelBuilder().importFrom(is).createESPDRequest();
+                criteriaService = RegulatedCriteriaService.getV1Instance();
                 break;
             case V2:
-                request = BuilderFactory.EDM_V2.createRegulatedModelBuilder().importFrom(is).createESPDRequest();
+                switch (qualificationApplicationType) {
+                    case REGULATED:
+                        request = BuilderFactory.EDM_V2.createRegulatedModelBuilder().importFrom(is).createESPDRequest();
+                        criteriaService = RegulatedCriteriaService.getV2Instance();
+                        break;
+                    case SELFCONTAINED:
+                        criteriaService = SelfContainedCriteriaService.getInstance();
+                        request = BuilderFactory.EDM_V2.createSelfContainedModelBuilder().importFrom(is).createESPDRequest();
+                        break;
+                }
                 break;
         }
-
-        CriteriaService criteriaService = new RetrieverCriteriaService(artefactVersion);
+        Objects.requireNonNull(request);
         request.setCriterionList(criteriaService.getUnselectedCriteria(request.getFullCriterionList()));
-        generateUUIDs(request);
+        CriteriaUtil.generateUUIDs(request.getFullCriterionList());
         is.close();
+        request.setDocumentDetails(new DocumentDetails(artefactVersion,
+                ArtefactUtils.findArtefactType(XML),
+                qualificationApplicationType));
         return request;
-    }
-
-    @Override
-    public DocumentDetails getDocumentDetails(File XML) {
-        return new DocumentDetails(ArtefactUtils.findEDMVersion(XML), ArtefactUtils.findArtefactType(XML));
     }
 }

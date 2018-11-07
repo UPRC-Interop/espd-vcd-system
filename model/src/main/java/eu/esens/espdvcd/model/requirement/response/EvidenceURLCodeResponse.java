@@ -22,6 +22,7 @@ import java.io.Serializable;
  *
  * Created by Ulf Lotzmann on 21/03/2016.
  */
+// FIXME This class represent's CODE and need generalization
 public class EvidenceURLCodeResponse extends Response implements Serializable {
 
     private static final long serialVersionUID = -1738098273888763636L;

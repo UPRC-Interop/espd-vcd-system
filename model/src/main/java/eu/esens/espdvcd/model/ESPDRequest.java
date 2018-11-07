@@ -15,7 +15,6 @@
  */
 package eu.esens.espdvcd.model;
 
-import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
 import eu.esens.espdvcd.model.types.ESPDRequestModelType;
 
 import java.io.Serializable;
@@ -121,4 +120,13 @@ public interface ESPDRequest extends Serializable {
      */
     void setModelType(ESPDRequestModelType modelType);
 
+    /**
+     * @return
+     */
+    DocumentDetails getDocumentDetails();
+
+    /**
+     * @param documentDetails
+     */
+    void setDocumentDetails(DocumentDetails documentDetails);
 }

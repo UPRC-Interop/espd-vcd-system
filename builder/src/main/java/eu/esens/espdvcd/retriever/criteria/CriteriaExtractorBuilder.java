@@ -1,12 +1,12 @@
 /**
  * Copyright 2016-2018 University of Piraeus Research Center
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,6 +15,7 @@
  */
 package eu.esens.espdvcd.retriever.criteria;
 
+import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.retriever.criteria.resource.*;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
@@ -30,7 +31,7 @@ import java.util.logging.Logger;
 /**
  * @author konstantinos Raptis
  */
-public class CriteriaExtractorBuilder {
+abstract class CriteriaExtractorBuilder {
 
     private static final Logger LOGGER = Logger.getLogger(CriteriaExtractorBuilder.class.getName());
 
@@ -39,10 +40,15 @@ public class CriteriaExtractorBuilder {
     private List<RequirementsResource> rgResourceList;
 
     private EDMVersion version;
+    private QualificationApplicationTypeEnum type;
 
     private ESPDArtefactResource artefactResource;
-    private RegulatedCriteriaTaxonomyResource taxonomyResource;
+    private CriteriaTaxonomyResource taxonomyResource;
     private ECertisResource eCertisResource;
+
+    CriteriaExtractorBuilder() {
+
+    }
 
     /**
      * Criteria extractor builder constructor
@@ -57,8 +63,17 @@ public class CriteriaExtractorBuilder {
      *                {@link CriteriaExtractorBuilder#addLegislationResource(LegislationResource)},
      *                {@link CriteriaExtractorBuilder#addRequirementsResource(RequirementsResource)}
      */
-    public CriteriaExtractorBuilder(@NotNull EDMVersion version) {
+    CriteriaExtractorBuilder(@NotNull EDMVersion version, @NotNull QualificationApplicationTypeEnum type) {
         this.version = version;
+
+        // version 1 does not support self-contained
+        if (version == EDMVersion.V1 && type == QualificationApplicationTypeEnum.SELFCONTAINED) {
+            LOGGER.log(Level.WARNING, "Warning... Exchange Data Model (EDM) v1 does not " +
+                    "support self-contained type. Type was set to regulated");
+            this.type = QualificationApplicationTypeEnum.REGULATED;
+        } else {
+            this.type = type;
+        }
     }
 
     /**
@@ -257,7 +272,22 @@ public class CriteriaExtractorBuilder {
     private void initCriteriaTaxonomyResource() {
 
         if (taxonomyResource == null) {
-            taxonomyResource = new RegulatedCriteriaTaxonomyResource();
+
+            switch (type) {
+
+                case REGULATED:
+                    taxonomyResource = new RegulatedCriteriaTaxonomyResource();
+                    break;
+
+                case SELFCONTAINED:
+                    taxonomyResource = new SelfContainedCriteriaTaxonomyResource();
+                    break;
+
+                default:
+                    LOGGER.log(Level.SEVERE, "Error... Invalid QualificationApplicationType value");
+
+            }
+
             LOGGER.log(Level.INFO, "Criteria Taxonomy resource initialized");
         }
     }

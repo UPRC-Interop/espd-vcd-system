@@ -18,6 +18,9 @@ import {Component, OnInit} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {FormControl, NgForm} from '@angular/forms/forms';
 import {ApicallService} from '../services/apicall.service';
+import {EoIDType} from '../model/eoIDType.model';
+import {WeightingType} from '../model/weightingType.model';
+import {UtilitiesService} from '../services/utilities.service';
 
 @Component({
   selector: 'app-selection',
@@ -28,9 +31,12 @@ export class SelectionComponent implements OnInit {
 
   isSatisfiedALL = true;
   isAtoD = false;
+  weightingType: WeightingType[] = null;
 
 
-  constructor(public dataService: DataService, public APIService: ApicallService) {
+  constructor(public dataService: DataService,
+              public APIService: ApicallService,
+              public utilities: UtilitiesService) {
   }
 
   ngOnInit() {
@@ -38,6 +44,18 @@ export class SelectionComponent implements OnInit {
       this.isAtoD = true;
       this.isSatisfiedALL = false;
     }
+
+    this.dataService.getWeightingType()
+      .then(res => {
+        this.weightingType = res;
+        // console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+    console.log(this.dataService.CADetails);
+
 
   }
 
@@ -53,7 +71,14 @@ export class SelectionComponent implements OnInit {
       this.isSatisfiedALL = true;
       this.isAtoD = false;
     }
+  }
 
+  handleGlobalWeight(radio: FormControl) {
+    if (radio.value === 'YES') {
+      this.utilities.isGloballyWeighted = true;
+    } else if (radio.value === 'NO') {
+      this.utilities.isGloballyWeighted = false;
+    }
   }
 
   onSelectionSubmit(form: NgForm) {

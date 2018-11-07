@@ -17,7 +17,6 @@ package eu.esens.espdvcd.retriever.criteria;
 
 import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
 import eu.esens.espdvcd.model.SelectableCriterion;
-import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.retriever.criteria.resource.*;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -142,19 +141,7 @@ public class CriteriaExtractorImpl implements CriteriaExtractor {
         initialSet.addAll(criterionList);
         initialList.forEach(sc -> sc.setSelected(addAsSelected));
         initialSet.addAll(initialList);
-        // apply taxonomy cardinalities before return
-        // applyTaxonomyCardinalities(initialList);
         return new ArrayList<>(initialSet);
-    }
-
-    private void applyTaxonomyCardinalities(List<SelectableCriterion> criterionList) {
-
-        // lazy initialization of criterion taxonomy resource
-        if (taxonomyResource == null) {
-            taxonomyResource = new RegulatedCriteriaTaxonomyResource();
-        }
-
-        criterionList.forEach(sc -> taxonomyResource.applyCardinalities(sc));
     }
 
     private void addLegislationReference(SelectableCriterion sc) {

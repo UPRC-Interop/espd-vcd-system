@@ -19,6 +19,7 @@ import {RequirementGroup} from './requirementGroup.model';
 import {RequirementResponse} from './requirement-response.model';
 
 export class FullCriterion {
+  type: string;
   typeCode: string;
   name: string;
   description: string;

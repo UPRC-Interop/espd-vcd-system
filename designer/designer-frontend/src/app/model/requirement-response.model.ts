@@ -22,6 +22,7 @@ export class RequirementResponse {
   description: string;
   evidenceURL?: string;
   evidenceURLCode?: string;
+  code?: string[];
   percentage?: string;
   period?: string;
   countryCode?: string;
@@ -39,4 +40,9 @@ export class RequirementResponse {
   validatedCriterionPropertyID?: string;
   mandatory?: boolean;
   multiple?: boolean;
+  evaluationMethodType?: string;
+  weight?: number;
+  evaluationMethodDescription?: string;
+  eoidtype?: string;
+  lots?: string[];
 }

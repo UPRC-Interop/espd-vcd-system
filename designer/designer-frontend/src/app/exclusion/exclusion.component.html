@@ -48,6 +48,12 @@
            <!--<h5>eCertis Information ...</h5>-->
            <div class="eCertDesc" translate>espd.ecertis.404</div>
          </div>
+         <div *ngIf="dataService.exclusionACriteriaForm">
+           <div class="answer">
+             <app-criterion [criterion]="criteria" [form]="dataService.exclusionACriteriaForm.controls"
+                            [indicator]="true"></app-criterion>
+           </div>
+         </div>
        </div>
      </mat-card>
     </mat-expansion-panel>
@@ -79,6 +85,12 @@
             <!--<h5>eCertis Information ...</h5>-->
             <div class="eCertDesc" translate>espd.ecertis.404</div>
           </div>
+          <div *ngIf="dataService.exclusionBCriteriaForm">
+            <div class="answer">
+              <app-criterion [criterion]="criteria" [form]="dataService.exclusionBCriteriaForm.controls"
+                             [indicator]="true"></app-criterion>
+            </div>
+          </div>
         </div>
       </mat-card>
     </mat-expansion-panel>
@@ -107,6 +119,12 @@
           <div class="eCertis">
             <!--<h5>eCertis Information ...</h5>-->
             <div class="eCertDesc" translate>espd.ecertis.404</div>
+          </div>
+          <div *ngIf="dataService.exclusionCCriteriaForm">
+            <div class="answer">
+              <app-criterion [criterion]="criteria" [form]="dataService.exclusionCCriteriaForm.controls"
+                             [indicator]="true"></app-criterion>
+            </div>
           </div>
         </div>
       </mat-card>
@@ -137,6 +155,12 @@
           <div class="eCertis">
             <!--<h5>eCertis Information ...</h5>-->
             <div class="eCertDesc" translate>espd.ecertis.404</div>
+          </div>
+          <div *ngIf="dataService.exclusionDCriteriaForm">
+            <div class="answer">
+              <app-criterion [criterion]="criteria" [form]="dataService.exclusionDCriteriaForm.controls"
+                             [indicator]="true"></app-criterion>
+            </div>
           </div>
         </div>
       </mat-card>

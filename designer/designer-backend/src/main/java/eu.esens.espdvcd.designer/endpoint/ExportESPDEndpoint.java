@@ -23,7 +23,8 @@ import eu.esens.espdvcd.designer.exception.ValidationException;
 import eu.esens.espdvcd.designer.service.ExportESPDService;
 import eu.esens.espdvcd.designer.service.RegulatedExportESPDV1Service;
 import eu.esens.espdvcd.designer.service.RegulatedExportESPDV2Service;
-import eu.esens.espdvcd.designer.util.ErrorResponse;
+import eu.esens.espdvcd.designer.util.Errors;
+import eu.esens.espdvcd.designer.util.JsonUtil;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.model.RegulatedESPDRequest;
@@ -68,8 +69,8 @@ public class ExportESPDEndpoint extends Endpoint {
             spark.get("*", ((request, response) -> {
                 response.status(405);
                 response.header("Content-Type", "application/json");
-                return WRITER.writeValueAsString(new ErrorResponse.ErrorBuilder(405, "You need to POST an artefact in json format.").build());
-            }));
+                return Errors.artefactInWrongFormatError();
+            }), JsonUtil.json());
 
             spark.post("/request/xml", this::handleESPDXmlRequest);
 
@@ -131,8 +132,9 @@ public class ExportESPDEndpoint extends Endpoint {
             } catch (IOException e) {
                 rsp.status(400);
                 LOGGER.severe(LOGGER_DESERIALIZATION_ERROR + e.getMessage());
+                e.printStackTrace();
                 rsp.header("Content-Type", "application/json");
-                return WRITER.writeValueAsString(new ErrorResponse.ErrorBuilder(400, DESERIALIZATION_ERROR + e.getMessage()).build());
+                return JsonUtil.toJson(Errors.artefactDeserialisationError(e.getMessage()));
             }
             rsp.header("Content-Type", "application/octet-stream");
             rsp.header("Content-Disposition", MessageFormat.format("attachment; filename=\"{0}\";", getRequestFilename(exportType)));
@@ -144,13 +146,13 @@ public class ExportESPDEndpoint extends Endpoint {
                 LOGGER.severe(e.getMessage());
                 rsp.status(406);
                 rsp.header("Content-Type", "application/json");
-                return WRITER.writeValueAsString(new ErrorResponse.ErrorBuilder(406, e.getMessage()).build());
+                return JsonUtil.toJson(Errors.notAcceptableError(e.getMessage()));
             }
         } else {
             LOGGER.severe("Got unexpected content-type: " + rq.contentType());
             rsp.status(406);
             rsp.header("Content-Type", "application/json");
-            return WRITER.writeValueAsString(new ErrorResponse.ErrorBuilder(406, "Unacceptable content-type specified.").build());
+            return JsonUtil.toJson(Errors.unacceptableContentType());
         }
     }
 
@@ -178,7 +180,7 @@ public class ExportESPDEndpoint extends Endpoint {
                 rsp.status(400);
                 rsp.header("Content-Type", "application/json");
                 LOGGER.severe(LOGGER_DESERIALIZATION_ERROR + e.getMessage());
-                return WRITER.writeValueAsString(new ErrorResponse.ErrorBuilder(400, DESERIALIZATION_ERROR + e.getMessage()).build());
+                return JsonUtil.toJson(Errors.artefactDeserialisationError(e.getMessage()));
             }
             rsp.header("Content-Type", "application/octet-stream");
             rsp.header("Content-Disposition", MessageFormat.format("attachment; filename=\"{0}\";", getReponseFilename(exportType)));
@@ -188,13 +190,13 @@ public class ExportESPDEndpoint extends Endpoint {
                 LOGGER.severe(e.getMessage());
                 rsp.status(406);
                 rsp.header("Content-Type", "application/json");
-                return WRITER.writeValueAsString(new ErrorResponse.ErrorBuilder(406, e.getMessage()).build());
+                return JsonUtil.toJson(Errors.notAcceptableError(e.getMessage()));
             }
         } else {
             LOGGER.severe("Got unexpected content-type: " + rq.contentType());
             rsp.status(406);
             rsp.header("Content-Type", "application/json");
-            return WRITER.writeValueAsString(new ErrorResponse.ErrorBuilder(406, "Unacceptable content-type specified.").build());
+            return JsonUtil.toJson(Errors.unacceptableContentType());
         }
     }
 

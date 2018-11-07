@@ -28,6 +28,10 @@ import {Evidence} from '../model/evidence.model';
 import {EvidenceIssuer} from '../model/evidenceIssuer.model';
 import {FormUtilService} from '../services/form-util.service';
 import {UtilitiesService} from '../services/utilities.service';
+import {ProjectType} from '../model/projectType.model';
+import {EoRoleType} from '../model/eoRoleType.model';
+import {Currency} from '../model/currency.model';
+import {Amount} from '../model/amount.model';
 
 @Component({
   selector: 'app-procedure-eo',
@@ -38,17 +42,25 @@ export class ProcedureEoComponent implements OnInit {
 
 
   public EOForm: FormGroup;
-  test = true;
 
   countries: Country[] = null;
+  currency: Currency[] = null;
   procedureTypes: ProcedureType[] = null;
-  eoRelatedCriteria: EoRelatedCriterion[] = null;
+  projectTypes: ProjectType[] = null;
+  eoRoleTypes: EoRoleType[] = null;
 
 
   constructor(public dataService: DataService, public utilities: UtilitiesService) {
+
     this.EOForm = new FormGroup({
       'name': new FormControl(this.dataService.EODetails.name),
       'smeIndicator': new FormControl(false),
+      'employeeQuantity': new FormControl(),
+      'eoRole': new FormControl(),
+      'generalTurnover': new FormGroup({
+        'amount': new FormControl(),
+        'currency': new FormControl()
+      }),
       'postalAddress': new FormGroup({
         'addressLine1': new FormControl(),
         'postCode': new FormControl(),
@@ -77,6 +89,9 @@ export class ProcedureEoComponent implements OnInit {
       this.EOForm.disable();
     }
 
+    /* OTHER_EO_LOT TENDERED CRITERION DEMO */
+    this.utilities.projectLots = this.utilities.createLotList(5);
+
 
     this.dataService.getCountries()
       .then(res => {
@@ -90,6 +105,33 @@ export class ProcedureEoComponent implements OnInit {
     this.dataService.getProcedureTypes()
       .then(res => {
         this.procedureTypes = res;
+        // console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+    this.dataService.getProjectTypes()
+      .then(res => {
+        this.projectTypes = res;
+        // console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+    this.dataService.getEORoleTypes()
+      .then(res => {
+        this.eoRoleTypes = res;
+      })
+      .catch(err => {
+          console.log(err);
+        }
+      );
+
+    this.dataService.getCurrency()
+      .then(res => {
+        this.currency = res;
         // console.log(res);
       })
       .catch(err => {

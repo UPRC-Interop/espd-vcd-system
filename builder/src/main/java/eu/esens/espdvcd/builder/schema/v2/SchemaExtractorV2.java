@@ -1,12 +1,12 @@
 /**
  * Copyright 2016-2018 University of Piraeus Research Center
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,22 +17,22 @@ package eu.esens.espdvcd.builder.schema.v2;
 
 import eu.esens.espdvcd.codelist.enums.ProfileExecutionIDEnum;
 import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
+import eu.esens.espdvcd.codelist.enums.RequirementTypeEnum;
 import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
+import eu.esens.espdvcd.model.requirement.response.*;
 import eu.espd.schema.v2.pre_award.commonaggregate.*;
 import eu.espd.schema.v2.pre_award.commonbasic.*;
 import eu.espd.schema.v2.unqualifieddatatypes_2.CodeType;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 public interface SchemaExtractorV2 {
 
-    /**
-     * TenderingCriterionPropertyType replaces
-     * {@link eu.espd.schema.v1.ccv_commonaggregatecomponents_1.RequirementType}
-     * in edm version 2.0.x
-     */
     TenderingCriterionPropertyType extractTenderingCriterionPropertyType(Requirement rq);
 
     default TenderingCriterionType extractTenderingCriterion(Criterion c) {
@@ -82,23 +82,39 @@ public interface SchemaExtractorV2 {
         return lt;
     }
 
-    // This is RequirementGroup equivalent in edm version 2.0.x
+    default void applyTenderingCriterionWeightingData(WeightIndicatorResponse response, TenderingCriterionType criterionType) {
+
+        if (response != null) {
+            // EvaluationMethodTypeCode
+            if (response.getEvaluationMethodType() != null) {
+                criterionType.setEvaluationMethodTypeCode((createEvaluationMethodTypeCodeType(response
+                        .getEvaluationMethodType())));
+            }
+            // WeightingConsiderationDescription
+            criterionType.getWeightingConsiderationDescription().addAll(response
+                    .getEvaluationMethodDescriptionList().stream()
+                    .map(desc -> createWeightingConsiderationDescriptionType(desc))
+                    .collect(Collectors.toList()));
+            // Weight
+            if (response.getWeight() != null) {
+                criterionType.setWeightNumeric(createWeightNumericType(response.getWeight()));
+            }
+        }
+    }
+
     default TenderingCriterionPropertyGroupType extractTenderingCriterionPropertyGroupType(RequirementGroup rg) {
 
         TenderingCriterionPropertyGroupType rgType = new TenderingCriterionPropertyGroupType();
 
-        //TODO: Apply Defaults() method for adding default attributes etc
         rgType.getSubsidiaryTenderingCriterionPropertyGroup().addAll(rg.getRequirementGroups().stream()
                 .map(rg1 -> extractTenderingCriterionPropertyGroupType(rg1))
                 .collect(Collectors.toList()));
-        // This is Requirement equivalent in edm version 2.0.x
+
         rgType.getTenderingCriterionProperty().addAll(rg.getRequirements().stream()
                 .map(r1 -> extractTenderingCriterionPropertyType(r1))
                 .collect(Collectors.toList()));
 
         rgType.setID(createDefaultIDType(rg.getID()));
-        // rgType.setID(createCriteriaTaxonomyIDType(rg.getID()));
-
         // RequirementGroup "PI" attribute: the "processing instruction" attribute is not defined in UBL-2.2.
         // Instead, if needed, use the "cbc:PropertyGroupTypeCode" component
         rgType.setPropertyGroupTypeCode(createPropertyGroupTypeCodeType(rg.getCondition()));
@@ -146,7 +162,6 @@ public interface SchemaExtractorV2 {
                     dt.setValue(cd.getProcurementProcedureDesc() != null
                             ? cd.getProcurementProcedureDesc()
                             : "_"); // dummy content for the first description
-
 
 
                     if (dr.getAttachment().getExternalReference() == null) {
@@ -600,6 +615,136 @@ public interface SchemaExtractorV2 {
         cfIdType.setSchemeAgencyID("TeD");
         cfIdType.setValue(id);
         return cfIdType;
+    }
+
+    default WeightingConsiderationDescriptionType createWeightingConsiderationDescriptionType(String desc) {
+        WeightingConsiderationDescriptionType descType = new WeightingConsiderationDescriptionType();
+        descType.setValue(desc);
+        return descType;
+    }
+
+    default EvaluationMethodTypeCodeType createEvaluationMethodTypeCodeType(String code) {
+        EvaluationMethodTypeCodeType codeType = new EvaluationMethodTypeCodeType();
+        codeType.setValue(code);
+        return codeType;
+    }
+
+    default WeightNumericType createWeightNumericType(BigDecimal weight) {
+        WeightNumericType numericType = new WeightNumericType();
+        numericType.setValue(weight);
+        return numericType;
+    }
+
+    default WeightScoringMethodologyNoteType createWeightScoringMethodologyNoteType(String note) {
+        WeightScoringMethodologyNoteType noteType = new WeightScoringMethodologyNoteType();
+        noteType.setValue(note);
+        return noteType;
+    }
+
+    default WeightingTypeCodeType createWeightingTypeCodeType(String code) {
+        WeightingTypeCodeType codeType = new WeightingTypeCodeType();
+        codeType.setListID("ResponseDataType");
+        codeType.setListAgencyID("EU-COM-GROW");
+        codeType.setListVersionID("2.0.2");
+        codeType.setValue(code);
+        return codeType;
+    }
+
+    default ResponseValueType createResponseValueType() {
+        ResponseValueType valueType = new ResponseValueType();
+        valueType.setID(createDefaultIDType(UUID.randomUUID().toString()));
+        valueType.getID().setSchemeID("ISO/IEC 9834-8:2008 - 4UUID");
+        return valueType;
+    }
+
+    default ResponseIndicatorType createResponseIndicatorType(boolean indicator) {
+        ResponseIndicatorType indicatorType = new ResponseIndicatorType();
+        indicatorType.setValue(indicator);
+        return indicatorType;
+    }
+
+    default void applyCAResponseToXML(Requirement rq, TenderingCriterionPropertyType rqType) {
+
+        if (rq.getType() == RequirementTypeEnum.REQUIREMENT
+                && rq.getResponse() != null
+                && rq.getResponseDataType() != null) {
+
+            switch (rq.getResponseDataType()) {
+
+                case DESCRIPTION:
+                    String description = ((DescriptionResponse) rq.getResponse()).getDescription();
+                    if (description != null) {
+                        rqType.setExpectedDescription(new ExpectedDescriptionType());
+                        rqType.getExpectedDescription().setValue(description);
+                    }
+                    break;
+
+                case AMOUNT:
+                    BigDecimal amount = ((AmountResponse) rq.getResponse()).getAmount();
+                    String currency = ((AmountResponse) rq.getResponse()).getCurrency();
+                    if ((amount != null) || (currency != null && !currency.isEmpty())) {
+                        // Only generate a proper response if for at least one of the variables "amount" and
+                        // "currency" a value different from the default is detected.
+
+                        rqType.setExpectedAmount(new ExpectedAmountType());
+                        rqType.getExpectedAmount().setValue(amount);
+                        rqType.getExpectedAmount().setCurrencyID(currency);
+                    }
+                    break;
+
+                case CODE:
+                    String code = ((EvidenceURLCodeResponse) rq.getResponse()).getEvidenceURLCode();
+                    if (code != null && !code.isEmpty()) {
+                        rqType.setExpectedCode(new ExpectedCodeType());
+                        rqType.getExpectedCode().setValue(code);
+                    }
+                    break;
+
+                case LOT_IDENTIFIER:
+                    String lots = ((LotIdentifierResponse) rq.getResponse()).getLots();
+                    if (lots != null && !lots.isEmpty()) {
+                        rqType.setExpectedID(new ExpectedIDType());
+                        rqType.getExpectedID().setValue(lots);
+                    }
+                    break;
+
+                case QUANTITY_INTEGER:
+                    int quantityInt = ((QuantityIntegerResponse) rq.getResponse()).getQuantity();
+                    rqType.setExpectedValueNumeric(new ExpectedValueNumericType());
+                    rqType.getExpectedValueNumeric().setValue(BigDecimal.valueOf(quantityInt));
+                    break;
+
+                case QUANTITY:
+                    BigDecimal quantity = ((QuantityResponse) rq.getResponse()).getQuantity();
+                    if (quantity != null) {
+                        rqType.setExpectedValueNumeric(new ExpectedValueNumericType());
+                        rqType.getExpectedValueNumeric().setValue(quantity);
+                    }
+                    break;
+
+                case PERIOD:
+                    LocalDate startDate = ((ApplicablePeriodResponse) rq.getResponse()).getStartDate();
+                    LocalDate endDate = ((ApplicablePeriodResponse) rq.getResponse()).getStartDate();
+                    if (startDate != null && endDate != null) {
+                        PeriodType periodType = new PeriodType();
+                        periodType.setStartDate(new StartDateType());
+                        periodType.setEndDate(new EndDateType());
+                        periodType.getStartDate().setValue(startDate);
+                        periodType.getEndDate().setValue(endDate);
+                        rqType.getApplicablePeriod().add(periodType);
+                    }
+                    break;
+
+                case URL:
+                    String url = ((URLResponse) rq.getResponse()).getUrl();
+                    if (url != null) {
+                        rqType.setExpectedDescription(new ExpectedDescriptionType());
+                        rqType.getExpectedDescription().setValue(url);
+                    }
+                    break;
+
+            }
+        }
     }
 
 }

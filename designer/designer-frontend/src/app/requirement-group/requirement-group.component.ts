@@ -19,6 +19,7 @@ import {RequirementGroup} from '../model/requirementGroup.model';
 import {FormGroup} from '@angular/forms';
 import {FormUtilService} from '../services/form-util.service';
 import {UUID} from 'angular2-uuid';
+import {UtilitiesService} from '../services/utilities.service';
 
 @Component({
   selector: 'app-requirement-group',
@@ -35,7 +36,7 @@ export class RequirementGroupComponent implements OnInit, OnChanges {
 
   public showIndicator: boolean;
 
-  constructor(public formUtil: FormUtilService) {
+  constructor(public formUtil: FormUtilService, public utilities: UtilitiesService) {
   }
 
   ngOnInit() {

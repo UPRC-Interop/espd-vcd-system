@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<espd-res:ESPDResponse xmlns:ccv-cbc="urn:isa:names:specification:ubl:schema:xsd:CCV-CommonBasicComponents-1" xmlns:espd-cbc="urn:grow:names:specification:ubl:schema:xsd:ESPD-CommonBasicComponents-1" xmlns:ccv-cac="urn:isa:names:specification:ubl:schema:xsd:CCV-CommonAggregateComponents-1" xmlns:espd-cac="urn:grow:names:specification:ubl:schema:xsd:ESPD-CommonAggregateComponents-1" xmlns:ubl-ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns:espd-req="urn:grow:names:specification:ubl:schema:xsd:ESPDRequest-1" xmlns:cev-cac="urn:isa:names:specification:ubl:schema:xsd:CEV-CommonAggregateComponents-1" xmlns:ubl-cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cev-cbc="urn:isa:names:specification:ubl:schema:xsd:CEV-CommonBasicComponents-1" xmlns:espd-res="urn:grow:names:specification:ubl:schema:xsd:ESPDResponse-1" xmlns:ubl-cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+<espd-res:ESPDResponse xmlns:ccv-cbc="urn:isa:names:specification:ubl:schema:xsd:CCV-CommonBasicComponents-1"
+                       xmlns:espd-cbc="urn:grow:names:specification:ubl:schema:xsd:ESPD-CommonBasicComponents-1"
+                       xmlns:ccv-cac="urn:isa:names:specification:ubl:schema:xsd:CCV-CommonAggregateComponents-1"
+                       xmlns:espd-cac="urn:grow:names:specification:ubl:schema:xsd:ESPD-CommonAggregateComponents-1"
+                       xmlns:cev-cac="urn:isa:names:specification:ubl:schema:xsd:CEV-CommonAggregateComponents-1"
+                       xmlns:ubl-cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+                       xmlns:espd-res="urn:grow:names:specification:ubl:schema:xsd:ESPDResponse-1"
+                       xmlns:ubl-cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
     <ubl-cbc:UBLVersionID schemeAgencyID="OASIS-UBL-TC">2.1</ubl-cbc:UBLVersionID>
     <ubl-cbc:CustomizationID schemeName="CustomizationID" schemeAgencyID="BII" schemeVersionID="3.0">urn:www.cenbii.eu:transaction:biitrns092:ver3.0</ubl-cbc:CustomizationID>
     <ubl-cbc:ProfileID schemeAgencyID="BII">ESPD</ubl-cbc:ProfileID>

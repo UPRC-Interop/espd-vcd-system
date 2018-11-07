@@ -72,3 +72,7 @@ mat-card {
 mat-checkbox {
   font-weight:bold;
 }
+
+.weight {
+  font-weight: bold;
+}

@@ -22,12 +22,19 @@ import org.xml.sax.SAXException;
 import javax.xml.bind.JAXBException;
 import java.io.File;
 import java.util.List;
+import java.util.logging.Logger;
 
-public class SchemaValidatorService implements ValidatorService {
+public enum SchemaValidatorService implements ValidatorService {
+    INSTANCE;
+
+    public static ValidatorService getInstance() {
+        return INSTANCE;
+    }
+
     @Override
     public ArtefactValidator validateESPDFile(File request) throws JAXBException, SAXException {
 //        return ValidatorFactory.createESPDSchemaValidator(request);
-
+        Logger.getLogger(this.getClass().getName()).warning("Schema Validation has been disabled for debug purposes!");
         return new ArtefactValidator() {
             @Override
             public boolean isValid() {

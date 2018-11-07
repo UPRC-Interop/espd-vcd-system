@@ -1,12 +1,12 @@
 /**
  * Copyright 2016-2018 University of Piraeus Research Center
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,11 +16,12 @@
 package eu.esens.espdvcd.designer.service;
 
 import eu.esens.espdvcd.builder.BuilderFactory;
-import eu.esens.espdvcd.builder.enums.ArtefactType;
 import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.builder.util.ArtefactUtils;
+import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
 import eu.esens.espdvcd.designer.exception.ValidationException;
-import eu.esens.espdvcd.designer.util.DocumentDetails;
+import eu.esens.espdvcd.designer.util.CriteriaUtil;
+import eu.esens.espdvcd.model.DocumentDetails;
 import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.schema.EDMVersion;
 import eu.esens.espdvcd.validator.ArtefactValidator;
@@ -33,17 +34,20 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
 
-public class ImportESPDResponseService implements ImportESPDService<ESPDResponse> {
-    private final ValidatorService schemaValidationService, schematronValidationService;
+public enum ImportESPDResponseService implements ImportESPDService<ESPDResponse> {
+    INSTANCE;
 
-    public ImportESPDResponseService() {
-        schematronValidationService = new SchematronValidatorService();
-        schemaValidationService = new SchemaValidatorService();
+    private final ValidatorService schemaValidationService = SchemaValidatorService.getInstance();
+    private final ValidatorService schematronValidationService = SchematronValidatorService.getInstance();
+
+    public static ImportESPDService getInstance() {
+        return INSTANCE;
     }
 
     @Override
     public ESPDResponse importESPDFile(File XML) throws BuilderException, JAXBException, SAXException, ValidationException, IOException {
         EDMVersion artefactVersion = ArtefactUtils.findEDMVersion(XML);
+        QualificationApplicationTypeEnum qualificationApplicationType = ArtefactUtils.findQualificationApplicationType(XML);
 
         if (Objects.isNull(artefactVersion))
             throw new ValidationException("Cannot determine artefact version.");
@@ -63,18 +67,21 @@ public class ImportESPDResponseService implements ImportESPDService<ESPDResponse
                 response = BuilderFactory.EDM_V1.createRegulatedModelBuilder().importFrom(is).createESPDResponse();
                 break;
             case V2:
-                response = BuilderFactory.EDM_V2.createRegulatedModelBuilder().importFrom(is).createESPDResponse();
+                switch (qualificationApplicationType) {
+                    case REGULATED:
+                        response = BuilderFactory.EDM_V2.createRegulatedModelBuilder().importFrom(is).createESPDResponse();
+                        break;
+                    case SELFCONTAINED:
+                        response = BuilderFactory.EDM_V2.createSelfContainedModelBuilder().importFrom(is).createESPDResponse();
+                        break;
+                }
                 break;
         }
-        generateUUIDs(response);
+        CriteriaUtil.generateUUIDs(response.getFullCriterionList());
         is.close();
+        response.setDocumentDetails(new DocumentDetails(artefactVersion,
+                ArtefactUtils.findArtefactType(XML),
+                qualificationApplicationType));
         return response;
     }
-
-    @Override
-    public DocumentDetails getDocumentDetails(File XML) {
-        return new DocumentDetails(ArtefactUtils.findEDMVersion(XML), ArtefactUtils.findArtefactType(XML));
-    }
-
-
 }

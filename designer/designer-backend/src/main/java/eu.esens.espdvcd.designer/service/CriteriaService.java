@@ -16,6 +16,7 @@
 package eu.esens.espdvcd.designer.service;
 
 import eu.esens.espdvcd.designer.typeEnum.CriteriaType;
+import eu.esens.espdvcd.designer.util.CriteriaUtil;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 
@@ -26,32 +27,27 @@ public interface CriteriaService {
 
     List<SelectableCriterion> getCriteria() throws RetrieverException;
 
+    List<SelectableCriterion> getCriteria(String euCountryCode) throws RetrieverException;
+
     List<SelectableCriterion> getUnselectedCriteria(List<SelectableCriterion> initialList) throws RetrieverException;
 
     List<SelectableCriterion> getTranslatedCriteria(String lang) throws RetrieverException;
+
+    List<SelectableCriterion> getTranslatedCriteria(String euCountryCode, String lang) throws RetrieverException;
 
     CriteriaType[] getCriteriaFilters();
 
     default List<SelectableCriterion> getFilteredCriteriaList(String criteriaType) throws RetrieverException, IllegalArgumentException {
         return getCriteria().stream()
                 .filter(cr -> cr.getTypeCode().matches(CriteriaType.valueOf(criteriaType).getRegex()))
-                .sorted(this::fixSatisfiesAllOrder)
+                .sorted(CriteriaUtil::satisfiesAllComparator)
                 .collect(Collectors.toList());
     }
 
     default List<SelectableCriterion> getFilteredTranslatedCriteriaList(String criteriaType, String lang) throws RetrieverException, IllegalArgumentException {
         return getTranslatedCriteria(lang).stream()
                 .filter(cr -> cr.getTypeCode().matches(CriteriaType.valueOf(criteriaType).getRegex()))
-                .sorted(this::fixSatisfiesAllOrder)
+                .sorted(CriteriaUtil::satisfiesAllComparator)
                 .collect(Collectors.toList());
-    }
-
-    default int fixSatisfiesAllOrder(SelectableCriterion cr1, SelectableCriterion cr2) {
-        if (cr1.getTypeCode().equals("CRITERION.SELECTION.ALL_SATISFIED"))
-            return -1;
-        else if (cr2.getTypeCode().equals("CRITERION.SELECTION.ALL_SATISFIED"))
-            return 1;
-        else
-            return 0;
     }
 }

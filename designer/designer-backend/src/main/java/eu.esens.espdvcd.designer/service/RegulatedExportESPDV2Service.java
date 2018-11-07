@@ -1,12 +1,12 @@
 /**
  * Copyright 2016-2018 University of Piraeus Research Center
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -30,7 +30,14 @@ import java.io.*;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class RegulatedExportESPDV2Service implements ExportESPDService {
+import static eu.esens.espdvcd.designer.util.CriteriaUtil.hasNullCriterion;
+
+public enum RegulatedExportESPDV2Service implements ExportESPDService {
+    INSTANCE;
+
+    public static RegulatedExportESPDV2Service getInstance() {
+        return INSTANCE;
+    }
 
     private final TransformationService transformationService = new TransformationService();
 
@@ -86,10 +93,10 @@ public class RegulatedExportESPDV2Service implements ExportESPDService {
 
     private void finalizeV2Response(final ESPDResponse document) {
         document.getEvidenceList().removeIf(e -> e.getEvidenceURL() == null);
-        document.getFullCriterionList().forEach(cr -> fixResponses(cr.getRequirementGroups()));
+        document.getFullCriterionList().forEach(cr -> finalizeResponses(cr.getRequirementGroups()));
     }
 
-    private void fixResponses(final List<RequirementGroup> requirementGroupList) {
+    private void finalizeResponses(final List<RequirementGroup> requirementGroupList) {
         for (RequirementGroup rg : requirementGroupList) {
             if (rg.getRequirements().get(0).getResponseDataType().equals(ResponseTypeEnum.INDICATOR) && rg.getRequirementGroups().size() > 0) {
                 IndicatorResponse indicator = (IndicatorResponse) rg.getRequirements().get(0).getResponse();
@@ -113,7 +120,7 @@ public class RegulatedExportESPDV2Service implements ExportESPDService {
                     });
                 }
             }
-            fixResponses(rg.getRequirementGroups());
+            finalizeResponses(rg.getRequirementGroups());
         }
     }
 }

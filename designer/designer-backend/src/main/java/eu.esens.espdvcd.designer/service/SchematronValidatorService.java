@@ -20,12 +20,19 @@ import eu.esens.espdvcd.validator.ValidationResult;
 
 import java.io.File;
 import java.util.List;
+import java.util.logging.Logger;
 
-public class SchematronValidatorService implements ValidatorService {
+public enum SchematronValidatorService implements ValidatorService {
+    INSTANCE;
+
+    public static ValidatorService getInstance() {
+        return INSTANCE;
+    }
+
     @Override
     public ArtefactValidator validateESPDFile(File request) {
 //        return ValidatorFactory.createESPDSchematronValidator(request);
-
+        Logger.getLogger(this.getClass().getName()).warning("Schematron Validation has been disabled for debug purposes!");
         return new ArtefactValidator() {
             @Override
             public boolean isValid() {

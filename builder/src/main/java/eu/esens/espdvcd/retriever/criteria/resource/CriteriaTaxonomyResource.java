@@ -39,7 +39,7 @@ import java.util.stream.Collectors;
 /**
  * @author konstantinos Raptis
  */
-abstract class CriteriaTaxonomyResource implements CriteriaResource, RequirementsResource {
+public abstract class CriteriaTaxonomyResource implements CriteriaResource, RequirementsResource {
 
     private static final Logger LOGGER = Logger.getLogger(CriteriaTaxonomyResource.class.getName());
 
@@ -49,11 +49,12 @@ abstract class CriteriaTaxonomyResource implements CriteriaResource, Requirement
     private final static int propertyDataTypeColumnIndex = 21;
     private final static int elementUUIDColumnIndex = 22;
     private final static int elementCodeColumnIndex = 23;
+    private final static int codelistColumnIndex = 24;
 
     protected List<SelectableCriterion> criterionList;
     protected Map<String, List<RequirementGroup>> rgMap;
 
-    CriteriaTaxonomyResource(String path) {
+    public CriteriaTaxonomyResource(String path) {
         rgMap = new HashMap<>();
 
         try {
@@ -70,6 +71,13 @@ abstract class CriteriaTaxonomyResource implements CriteriaResource, Requirement
         }
 
     }
+
+    /**
+     * Apply cardinalities and  type
+     *
+     * @param sc
+     */
+    public abstract void applyTaxonomyData(SelectableCriterion sc);
 
     private List<SelectableCriterion> readDataSheet(Sheet dataSheet) {
         // The criteria Column is always the second one
@@ -95,6 +103,7 @@ abstract class CriteriaTaxonomyResource implements CriteriaResource, Requirement
                         sc.setID(getRowUUID(r));
                         sc.setTypeCode(getRowCode(r));
                         sc.setSelected(true);
+
                         sc.getRequirementGroups().addAll(
                                 extractAllRequirementGroupType(dataSheet, r.getRowNum() + 1,
                                         r2.getRowNum() + 1, criteriaColumn + 1));
@@ -234,9 +243,11 @@ abstract class CriteriaTaxonomyResource implements CriteriaResource, Requirement
                         extractRequirementType(cellValue)
                 );
 
-                // setting cardinality here
+                // set cardinality here
                 CardinalityEnum c = CardinalityUtils.extractCardinality(getRowCardinality(d.getRow(i)));
                 applyCardinality(r, c);
+                // set codelist
+                r.setResponseValuesRelatedArtefact(getRowCodelist(d.getRow(i)));
                 rList.add(r);
             }
 
@@ -245,7 +256,8 @@ abstract class CriteriaTaxonomyResource implements CriteriaResource, Requirement
     }
 
     private String getRowUUID(Row r) {
-        return getCellStringValueOrNull(r, elementUUIDColumnIndex);
+        String UUID = getCellStringValueOrNull(r, elementUUIDColumnIndex);
+        return UUID != null ? UUID.trim() : UUID;
     }
 
     private String getRowName(Row r) {
@@ -266,6 +278,10 @@ abstract class CriteriaTaxonomyResource implements CriteriaResource, Requirement
 
     private String getRowCardinality(Row r) {
         return getCellStringOrNumericValueOrNull(r, cardinalityColumnIndex);
+    }
+
+    private String getRowCodelist(Row r) {
+        return getCellStringValueOrNull(r, codelistColumnIndex);
     }
 
     private String getCellStringValueOrNull(Row r, int index) {

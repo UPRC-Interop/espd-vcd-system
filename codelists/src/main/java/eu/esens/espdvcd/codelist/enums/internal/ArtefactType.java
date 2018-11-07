@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package eu.esens.espdvcd.builder.enums;
+package eu.esens.espdvcd.codelist.enums.internal;
 
 public enum ArtefactType {
 
-    ESPD_REQUEST, ESPD_RESPONSE, UNKNOWN
+    ESPD_REQUEST, ESPD_RESPONSE
 
 }

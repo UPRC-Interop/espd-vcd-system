@@ -89,7 +89,8 @@ public class SelectableCriterionPrinter {
         rg.getRequirements().forEach(r -> {
             System.out.println(finalTabs + "\t[" + r.getType().name() + "] Req ID: " + r.getID()
                     + " Cardinality: " + CardinalityUtils.extractCardinality(r.isMandatory(), r.isMultiple())
-                    + " Req Type:" + r.getResponseDataType() + " Req Desc:" + r.getDescription());
+                    + " Req Type:" + r.getResponseDataType() + " Req Desc:" + r.getDescription()
+                    + " Code Type: " + r.getResponseValuesRelatedArtefact());
         });
         final int innerDepth = depth + 1;
         rg.getRequirementGroups().forEach(rg1 -> printRequirementGroup(rg1, innerDepth));

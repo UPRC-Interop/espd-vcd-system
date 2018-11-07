@@ -34,9 +34,9 @@
       <mat-card-title translate>espd.init.what.you.do</mat-card-title>
       <mat-card-content>
         <div class="wrapper">
-          <mat-form-field class="width">
-            <input matInput name="noticeNumber" placeholder="{{'espd.init.ted.reception.id.placeholder' | translate}}" required ngModel>
-          </mat-form-field>
+          <!--<mat-form-field class="width">-->
+            <!--<input matInput name="noticeNumber" placeholder="{{'espd.init.ted.reception.id.placeholder' | translate}}" required ngModel>-->
+          <!--</mat-form-field>-->
           <mat-radio-group name="caOptions" ngModel>
             <mat-radio-button color="primary"
                               name="caOption"
@@ -60,23 +60,45 @@
     </mat-card>
 
     <mat-card *ngIf="isCreateNewESPD && isCA">
-
-      <mat-card-title>Select Version</mat-card-title>
+      <!-- SELF-CONTAINED: select whether the document is REGULATED or SELF-CONTAINED -->
+      <mat-card-title>Is the ESPD "Regulated" or "Self-Contained"?</mat-card-title>
       <mat-card-content>
-        <mat-radio-group name="versions" ngModel>
+        <mat-radio-group name="qaTypes" ngModel>
           <mat-radio-button color="primary"
-                            name="version"
-                            value="v1"
-                            (change)="handleVersionSelection(createV1)"
-                            #createV1>Create v1</mat-radio-button>
+                            name="qualificationApplicationType"
+                            value="REGULATED"
+                            (change)="handleQATypeSelection(createRegulated)"
+                            #createRegulated>Create Regulated
+          </mat-radio-button>
           <mat-radio-button color="primary"
-                            name="version"
-                            value="v2"
-                            (change)="handleVersionSelection(createV2)"
-                            #createV2>Create v2
+                            name="qualificationApplicationType"
+                            value="SELF-CONTAINED"
+                            (change)="handleQATypeSelection(createSelfContained)"
+                            #createSelfContained>Create Self-Contained
           </mat-radio-button>
         </mat-radio-group>
       </mat-card-content>
+
+      <!-- REGULATED: You can choose the version only if the qualificationApplication type is REGULATED -->
+      <div class="version" *ngIf="this.utilities.qualificationApplicationType === 'regulated'">
+        <mat-card-title>Select Version</mat-card-title>
+        <mat-card-content>
+          <mat-radio-group name="versions" ngModel>
+            <mat-radio-button color="primary"
+                              name="version"
+                              value="v1"
+                              (change)="handleVersionSelection(createV1)"
+                              #createV1>Create v1
+            </mat-radio-button>
+            <mat-radio-button color="primary"
+                              name="version"
+                              value="v2"
+                              (change)="handleVersionSelection(createV2)"
+                              #createV2>Create v2
+            </mat-radio-button>
+          </mat-radio-group>
+        </mat-card-content>
+      </div>
 
       <mat-card-title translate>espd.init.where.are.you.from.ca</mat-card-title>
       <mat-card-content>
@@ -138,23 +160,45 @@
     </mat-card>
 
     <mat-card *ngIf="isCreateResponse && isEO">
-
-      <mat-card-title>Select Version</mat-card-title>
+      <!-- SELF-CONTAINED: select whether the document is REGULATED or SELF-CONTAINED -->
+      <mat-card-title>Is the ESPD "Regulated" or "Self-Contained"?</mat-card-title>
       <mat-card-content>
-        <mat-radio-group name="versions" ngModel>
+        <mat-radio-group name="qaTypes" ngModel>
           <mat-radio-button color="primary"
-                            name="version"
-                            value="v1"
-                            (change)="handleVersionSelection(createV1)"
-                            #createV1>Create v1</mat-radio-button>
+                            name="qualificationApplicationType"
+                            value="REGULATED"
+                            (change)="handleQATypeSelection(createRegulated)"
+                            #createRegulated>Create Regulated
+          </mat-radio-button>
           <mat-radio-button color="primary"
-                            name="version"
-                            value="v2"
-                            (change)="handleVersionSelection(createV2)"
-                            #createV2>Create v2
+                            name="qualificationApplicationType"
+                            value="SELF-CONTAINED"
+                            (change)="handleQATypeSelection(createSelfContained)"
+                            #createSelfContained>Create Self-Contained
           </mat-radio-button>
         </mat-radio-group>
       </mat-card-content>
+
+      <!-- REGULATED: You can choose the version only if the qualificationApplication type is REGULATED -->
+      <div class="version" *ngIf="this.utilities.qualificationApplicationType === 'regulated'">
+        <mat-card-title>Select Version</mat-card-title>
+        <mat-card-content>
+          <mat-radio-group name="versions" ngModel>
+            <mat-radio-button color="primary"
+                              name="version"
+                              value="v1"
+                              (change)="handleVersionSelection(createV1)"
+                              #createV1>Create v1
+            </mat-radio-button>
+            <mat-radio-button color="primary"
+                              name="version"
+                              value="v2"
+                              (change)="handleVersionSelection(createV2)"
+                              #createV2>Create v2
+            </mat-radio-button>
+          </mat-radio-group>
+        </mat-card-content>
+      </div>
 
       <mat-card-title translate>espd.init.where.are.you.from.eo</mat-card-title>
       <mat-card-content>

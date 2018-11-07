@@ -75,11 +75,13 @@ export class StartComponent implements OnInit {
     if (radio.value === 'CA') {
       this.isCA = true;
       this.isEO = false;
+      this.utilities.type = 'ESPD_REQUEST';
       // console.log("This is CA: "+this.isCA);
       // console.log("This is EO: "+this.isEO);
     } else if (radio.value === 'EO') {
       this.isEO = true;
       this.isCA = false;
+      this.utilities.type = 'ESPD_RESPONSE';
     }
   }
 
@@ -102,6 +104,16 @@ export class StartComponent implements OnInit {
       this.isReuseESPD = false;
       this.isReviewESPD = true;
       this.utilities.isReviewESPD = true;
+    }
+  }
+
+  handleQATypeSelection(radio: FormControl) {
+    console.log(radio.value);
+    if (radio.value === 'REGULATED') {
+      this.utilities.qualificationApplicationType = 'regulated';
+    } else if (radio.value === 'SELF-CONTAINED') {
+      this.utilities.qualificationApplicationType = 'selfcontained';
+      this.APIService.version = 'v2';
     }
   }
 

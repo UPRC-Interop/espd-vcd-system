@@ -18,11 +18,18 @@
 <div *ngIf="showIndicator">
   <mat-card>
     <mat-card-content>
-      <div *ngFor="let r of reqGroup.requirements" class="form-row">
-        <app-requirement [req]="r" [form] = "form" (indicatorChanged)="childIndicatorChangedHandler($event)"></app-requirement>
+      <div *ngFor="let r of reqGroup.requirements" class="form-row"
+           [hidden]="((r.type === 'QUESTION' && this.utilities.isCA) ||
+             (this.utilities.isEO && r.type ==='REQUIREMENT' && this.utilities.isCreateResponse))">
+        <app-requirement [req]="r"
+                         [form] = "form"
+                         (indicatorChanged)="childIndicatorChangedHandler($event)"></app-requirement>
       </div>
-        <div *ngFor="let rg of reqGroup.requirementGroups" class="form-row">
-          <app-requirement-group [reqGroup]="rg" [form] = "form.get(rg.uuid)" [indicator]="childIndicator"></app-requirement-group>
+        <div *ngFor="let rg of reqGroup.requirementGroups" class="form-row"
+             [hidden]="(((rg.type === 'QUESTION_SUBGROUP' || rg.type === 'QUESTION_GROUP') && this.utilities.isCA))">
+          <app-requirement-group [reqGroup]="rg"
+                                 [form] = "form.get(rg.uuid)"
+                                 [indicator]="childIndicator"></app-requirement-group>
           <div *ngIf="childIndicator && rg.multiple" style="text-align: right">
             <button type="button" (click)="onAdd(rg)"><span class="material-icons" style="vertical-align: middle;">add_circle_outline</span></button>
             <button type="button" (click)="onRemove(rg)"><span class="material-icons" style="vertical-align: middle;">remove_circle_outline</span></button>

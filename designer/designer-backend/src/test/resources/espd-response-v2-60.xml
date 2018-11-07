@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<ns5:QualificationApplicationResponse xmlns="urn:X-test:UBL:Pre-award:QualificationApplicationRequest" xmlns:ns5="urn:X-test:UBL:Pre-award:QualificationApplicationResponse" xmlns:cac="urn:X-test:UBL:Pre-award:CommonAggregate" xmlns:cbc="urn:X-test:UBL:Pre-award:CommonBasic" xmlns:ns2="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
+<ns5:QualificationApplicationResponse xmlns:ns5="urn:X-test:UBL:Pre-award:QualificationApplicationResponse"
+                                      xmlns:cac="urn:X-test:UBL:Pre-award:CommonAggregate"
+                                      xmlns:cbc="urn:X-test:UBL:Pre-award:CommonBasic"
+                                      xmlns="urn:X-test:UBL:Pre-award:QualificationApplicationRequest">
     <cbc:UBLVersionID schemeAgencyID="OASIS-UBL-TC">2.2</cbc:UBLVersionID>
     <cbc:CustomizationID schemeName="CustomizationID" schemeAgencyID="CEN-BII" schemeVersionID="2.0">urn:www.cenbii.eu:transaction:biitrdm092:ver3.0</cbc:CustomizationID>
     <cbc:ProfileID schemeAgencyID="CEN-BII" schemeVersionID="2.0">4.1</cbc:ProfileID>

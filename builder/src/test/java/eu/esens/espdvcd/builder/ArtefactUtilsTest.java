@@ -1,12 +1,12 @@
 /**
  * Copyright 2016-2018 University of Piraeus Research Center
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,14 +15,13 @@
  */
 package eu.esens.espdvcd.builder;
 
-import eu.esens.espdvcd.builder.enums.ArtefactType;
 import eu.esens.espdvcd.builder.util.ArtefactUtils;
 import eu.esens.espdvcd.codelist.enums.ProfileExecutionIDEnum;
 import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
+import eu.esens.espdvcd.codelist.enums.internal.ArtefactType;
 import eu.esens.espdvcd.schema.EDMVersion;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.File;
@@ -59,14 +58,13 @@ public class ArtefactUtilsTest {
 
         // SELFCONTAINED_ESPD-Request.V2.0.2.xml
 
-        selfContainedRequestV2IS = getClass().getClassLoader().getResourceAsStream("SELFCONTAINED_ESPD-Request.V2.0.2.xml");
+        selfContainedRequestV2IS = getClass().getClassLoader().getResourceAsStream("SELFCONTAINED-ESPD-Request_2.0.2.xml");
         Assert.assertNotNull(selfContainedRequestV2IS);
 
-        selfContainedRequestV2File = new File(getClass().getClassLoader().getResource("SELFCONTAINED_ESPD-Request.V2.0.2.xml").getFile());
+        selfContainedRequestV2File = new File(getClass().getClassLoader().getResource("SELFCONTAINED-ESPD-Request_2.0.2.xml").getFile());
         Assert.assertNotNull(selfContainedRequestV2File);
     }
 
-    @Ignore
     @Test
     public void testFindEDMVersion() {
         Assert.assertEquals(ProfileExecutionIDEnum.ESPD_EDM_V2_0_1_REGULATED, findProfileExecutionID(espdRequestRegulatedV2_0_1));
@@ -77,7 +75,6 @@ public class ArtefactUtilsTest {
         Assert.assertEquals(ProfileExecutionIDEnum.ESPD_EDM_V2_0_2_REGULATED, findProfileExecutionID(espdResponseRegulatedV2_0_2));
     }
 
-    @Ignore
     @Test
     public void testFindSchemaVersion() {
         Assert.assertEquals(EDMVersion.V2, findEDMVersion(espdRequestRegulatedV2_0_1));
@@ -90,7 +87,6 @@ public class ArtefactUtilsTest {
         Assert.assertNotEquals(EDMVersion.V1, findEDMVersion(espdResponseRegulatedV2_0_2));
     }
 
-    @Ignore
     @Test
     public void testFindArtefactType() {
         Assert.assertEquals(ArtefactType.ESPD_REQUEST, findArtefactType(espdRequestRegulatedV1_0_2));
@@ -99,7 +95,6 @@ public class ArtefactUtilsTest {
         Assert.assertEquals(ArtefactType.ESPD_RESPONSE, findArtefactType(espdResponseRegulatedV2_0_2));
     }
 
-    @Ignore
     @Test
     public void testUseTwoArtefactUtilsMethodsForTheSameStreamRepeatedly() {
         Assert.assertEquals(ProfileExecutionIDEnum.ESPD_EDM_V1_0_2, findProfileExecutionID(espdRequestRegulatedV1_0_2));
@@ -107,7 +102,6 @@ public class ArtefactUtilsTest {
         Assert.assertEquals(ArtefactType.ESPD_REQUEST, findArtefactType(espdRequestRegulatedV1_0_2));
     }
 
-    @Ignore
     @Test
     public void testUseTwoArtefactUtilsMethodsForTheSameFileInputStreamRepeatedly() throws Exception {
         Assert.assertEquals(ProfileExecutionIDEnum.ESPD_EDM_V2_0_2_REGULATED, findProfileExecutionID(new FileInputStream(regulatedRequestV2)));
@@ -115,11 +109,17 @@ public class ArtefactUtilsTest {
         Assert.assertEquals(ArtefactType.ESPD_REQUEST, findArtefactType(new FileInputStream(regulatedRequestV2)));
     }
 
-    @Ignore
     @Test
     public void testFindQualificationApplicationType() {
         Assert.assertEquals(QualificationApplicationTypeEnum.SELFCONTAINED, ArtefactUtils.findQualificationApplicationType(selfContainedRequestV2File));
         Assert.assertEquals(QualificationApplicationTypeEnum.SELFCONTAINED, ArtefactUtils.findQualificationApplicationType(selfContainedRequestV2IS));
+    }
+
+    @Test
+    public void testClearAllWhitespaces() {
+        String originalString = "Reference\n" +
+                "                                                  description";
+        Assert.assertEquals("Referencedescription", ArtefactUtils.clearAllWhitespaces(originalString));
     }
 
 }

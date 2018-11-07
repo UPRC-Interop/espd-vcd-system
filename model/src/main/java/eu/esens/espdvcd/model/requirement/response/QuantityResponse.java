@@ -16,6 +16,7 @@
 package eu.esens.espdvcd.model.requirement.response;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * Quantity response
@@ -39,20 +40,20 @@ public class QuantityResponse extends Response implements Serializable {
      * BusReqID: tbr92-018<br>
      * UBL syntax path: ccv:Criterion.RequirementGroup.Requirement.Response.Quantity<br>
      */
-    private float quantity;
+    private BigDecimal quantity;
 
     public QuantityResponse() {
     }
 
-    public QuantityResponse(float quantity) {
+    public QuantityResponse(BigDecimal quantity) {
         this.quantity = quantity;
     }
 
-    public float getQuantity() {
+    public BigDecimal getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(float quantity) {
+    public void setQuantity(BigDecimal quantity) {
         this.quantity = quantity;
     }
 }

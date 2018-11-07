@@ -1,12 +1,12 @@
 /**
  * Copyright 2016-2018 University of Piraeus Research Center
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -288,10 +288,10 @@ public class ESPDResponseSchemaExtractorV1 implements SchemaExtractorV1 {
                 return rType;
 
             case QUANTITY:
-                rType.setQuantity(new QuantityType());
-                //rType.getQuantity().setValue(BigDecimal.valueOf(((QuantityResponse) response).getQuantity()));
-                // UL 2017-10-20: workaround for rounding issues with BigDecimal (e.g. 0.005 became 0.004999999888241291)
-                rType.getQuantity().setValue(new BigDecimal(Float.toString(((QuantityResponse) response).getQuantity())));
+                if (((QuantityResponse) response).getQuantity() != null) {
+                    rType.setQuantity(new QuantityType());
+                    rType.getQuantity().setValue(((QuantityResponse) response).getQuantity());
+                }
                 return rType;
 
             case QUANTITY_INTEGER:
@@ -301,17 +301,16 @@ public class ESPDResponseSchemaExtractorV1 implements SchemaExtractorV1 {
                 return rType;
 
             case AMOUNT:
-                float amount = ((AmountResponse) response).getAmount();
+                BigDecimal amount = ((AmountResponse) response).getAmount();
                 String currency = ((AmountResponse) response).getCurrency();
-                if ( (amount != 0) ||
-                        ( currency != null && !currency.isEmpty() ) ) {
+                if ((amount != null) || (currency != null && !currency.isEmpty())) {
                     // Only generate a proper response if for at least one of the variables "amount" and
                     // "currency" a value different from the default is detected.
 
                     rType.setAmount(new AmountType());
                     //rType.getAmount().setValue(BigDecimal.valueOf(amount));
                     // UL 2017-10-20: workaround for rounding issues with BigDecimal
-                    rType.getAmount().setValue(new BigDecimal(Float.toString(amount)));
+                    rType.getAmount().setValue(amount);
                     rType.getAmount().setCurrencyID(currency);
                 }
                 return rType;
@@ -332,10 +331,10 @@ public class ESPDResponseSchemaExtractorV1 implements SchemaExtractorV1 {
                 return rType;
 
             case PERCENTAGE:
-                rType.setPercent(new PercentType());
-                //rType.getPercent().setValue(BigDecimal.valueOf(((PercentageResponse) response).getPercentage()));
-                // UL 2017-10-20: workaround for rounding issues with BigDecimal
-                rType.getPercent().setValue(new BigDecimal(Float.toString(((PercentageResponse) response).getPercentage())));
+                if (((PercentageResponse) response).getPercentage() != null) {
+                    rType.setPercent(new PercentType());
+                    rType.getPercent().setValue(((PercentageResponse) response).getPercentage());
+                }
                 return rType;
 
             case DATE:

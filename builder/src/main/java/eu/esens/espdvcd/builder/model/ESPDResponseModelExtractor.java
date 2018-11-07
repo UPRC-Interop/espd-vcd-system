@@ -1,12 +1,12 @@
 /**
  * Copyright 2016-2018 University of Piraeus Research Center
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -30,6 +30,7 @@ import eu.espd.schema.v1.espd_commonaggregatecomponents_1.EconomicOperatorPartyT
 import eu.espd.schema.v1.espdresponse_1.ESPDResponseType;
 import eu.espd.schema.v2.pre_award.commonaggregate.EvidenceType;
 import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionResponseType;
+import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionType;
 import eu.espd.schema.v2.pre_award.commonbasic.ConfidentialityLevelCodeType;
 import eu.espd.schema.v2.pre_award.commonbasic.ValidatedCriterionPropertyIDType;
 import eu.espd.schema.v2.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
@@ -104,6 +105,17 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 qarType.getContractFolderID(),
                 qarType.getAdditionalDocumentReference()));
 
+        // Apply global weighting
+        modelResponse.getCADetails().getWeightScoringMethodologyNoteList()
+                .addAll(qarType.getWeightScoringMethodologyNote().stream()
+                        .map(noteType -> noteType.getValue())
+                        .collect(Collectors.toList()));
+
+        if (qarType.getWeightingTypeCode() != null
+                && qarType.getWeightingTypeCode().getValue() != null) {
+            modelResponse.getCADetails().setWeightingType(qarType.getWeightingTypeCode().getValue());
+        }
+
         // Service Provider Party Details extraction
         if (!qarType.getContractingParty().isEmpty()
                 && qarType.getContractingParty().get(0).getParty() != null
@@ -113,7 +125,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
         }
 
         // Economic Operator Details
-        if (!qarType.getEconomicOperatorParty().isEmpty()) {
+        if (!qarType.getEconomicOperatorParty().isEmpty() && !qarType.getProcurementProjectLot().isEmpty()) {
             modelResponse.setEODetails(extractEODetails(qarType.getEconomicOperatorParty().get(0), qarType.getProcurementProjectLot().get(0)));
         } else {
             applyEODetailsStructure(modelResponse);
@@ -124,6 +136,11 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
         final Map<String, TenderingCriterionResponseType> tcrTypeMap = qarType.getTenderingCriterionResponse().stream()
                 .collect(Collectors.toMap(tcrType -> tcrType.getValidatedCriterionPropertyID().getValue(), Function.identity()));
 
+        // Create a Map with key -> Criterion ID, value -> TenderingCriterion in order to use it during
+        // weighting responses extraction process
+        final Map<String, TenderingCriterionType> criterionTypeMap = qarType.getTenderingCriterion().stream()
+                .collect(Collectors.toMap(criterionType -> criterionType.getID().getValue(), Function.identity()));
+
         // extract all responses
         modelResponse.getFullCriterionList()    // loop through all criteria
                 .forEach(sc -> sc.getRequirementGroups()    // loop through all RequirementGroups of current criterion
@@ -131,7 +148,8 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                                 .forEach(rq -> { // loop thought all of the extracted Requirements
 
                                     if (tcrTypeMap.containsKey(rq.getID())) { // try to find a response for that requirement
-                                        rq.setResponse(extractResponse(tcrTypeMap.get(rq.getID()), rq.getResponseDataType()));
+                                        rq.setResponse(extractResponse(tcrTypeMap.get(rq.getID()), rq.getResponseDataType(),
+                                                criterionTypeMap.get(sc.getID())));
                                     }
 
                                 })));
@@ -289,180 +307,220 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
         }
     }
 
-    public Response extractResponse(TenderingCriterionResponseType res, ResponseTypeEnum theType) {
+    public Response extractResponse(TenderingCriterionResponseType responseType, ResponseTypeEnum theType,
+                                    TenderingCriterionType criterionType) {
 
         switch (theType) {
 
             case INDICATOR:
-                IndicatorResponse resp = new IndicatorResponse();
-                if (res.getResponseValue().get(0).getResponseIndicator() != null) {
-                    resp.setIndicator(res.getResponseValue().get(0).getResponseIndicator().isValue());
+                IndicatorResponse indicatorResp = new IndicatorResponse();
+                if (responseType.getResponseValue().get(0).getResponseIndicator() != null) {
+                    indicatorResp.setIndicator(responseType.getResponseValue().get(0).getResponseIndicator().isValue());
                 }
-                applyValidatedCriterionPropertyID(res.getValidatedCriterionPropertyID(), resp);
-                applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), resp);
-                resp.setResponseType(theType);
-                return resp;
+                applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), indicatorResp);
+                applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), indicatorResp);
+                // indicatorResp.setResponseType(theType);
+                return indicatorResp;
 
             case DATE:
-                DateResponse dResp = new DateResponse();
-                if (res.getResponseValue().get(0).getResponseDate() != null &&
-                        res.getResponseValue().get(0).getResponseDate().getValue() != null) {
-                    dResp.setDate(res.getResponseValue().get(0).getResponseDate().getValue());
+                DateResponse dateResp = new DateResponse();
+                if (responseType.getResponseValue().get(0).getResponseDate() != null &&
+                        responseType.getResponseValue().get(0).getResponseDate().getValue() != null) {
+                    dateResp.setDate(responseType.getResponseValue().get(0).getResponseDate().getValue());
                 }
-                applyValidatedCriterionPropertyID(res.getValidatedCriterionPropertyID(), dResp);
-                applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), dResp);
-                dResp.setResponseType(theType);
-                return dResp;
+                applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), dateResp);
+                applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), dateResp);
+                // dateResp.setResponseType(theType);
+                return dateResp;
 
             case DESCRIPTION:
-                DescriptionResponse deResp = new DescriptionResponse();
-                if (res.getResponseValue().get(0).getDescription().get(0) != null &&
-                        res.getResponseValue().get(0).getDescription().get(0).getValue() != null) {
-                    deResp.setDescription(res.getResponseValue().get(0).getDescription().get(0).getValue());
+                DescriptionResponse descriptionResp = new DescriptionResponse();
+                if (responseType.getResponseValue().get(0).getDescription().get(0) != null &&
+                        responseType.getResponseValue().get(0).getDescription().get(0).getValue() != null) {
+                    descriptionResp.setDescription(responseType.getResponseValue().get(0).getDescription().get(0).getValue());
                 }
-                applyValidatedCriterionPropertyID(res.getValidatedCriterionPropertyID(), deResp);
-                applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), deResp);
-                deResp.setResponseType(theType);
-                return deResp;
+                applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), descriptionResp);
+                applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), descriptionResp);
+                // descriptionResp.setResponseType(theType);
+                return descriptionResp;
 
             case QUANTITY:
-                QuantityResponse qResp = new QuantityResponse();
-                if (res.getResponseValue().get(0).getResponseQuantity() != null &&
-                        res.getResponseValue().get(0).getResponseQuantity().getValue() != null) {
-                    qResp.setQuantity(res.getResponseValue().get(0).getResponseQuantity().getValue().floatValue());
+                QuantityResponse quantityResp = new QuantityResponse();
+                if (responseType.getResponseValue().get(0).getResponseQuantity() != null &&
+                        responseType.getResponseValue().get(0).getResponseQuantity().getValue() != null) {
+                    quantityResp.setQuantity(responseType.getResponseValue().get(0).getResponseQuantity().getValue());
                 }
-                applyValidatedCriterionPropertyID(res.getValidatedCriterionPropertyID(), qResp);
-                applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), qResp);
-                qResp.setResponseType(theType);
-                return qResp;
+                applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), quantityResp);
+                applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), quantityResp);
+                // quantityResp.setResponseType(theType);
+                return quantityResp;
 
             case QUANTITY_YEAR:
-                QuantityYearResponse qyResp = new QuantityYearResponse();
-                if (res.getResponseValue().get(0).getResponseQuantity() != null
-                        && res.getResponseValue().get(0).getResponseQuantity().getValue() != null) {
-                    qyResp.setYear(res.getResponseValue().get(0).getResponseQuantity().getValue().intValueExact());
+                QuantityYearResponse quantityYearResp = new QuantityYearResponse();
+                if (responseType.getResponseValue().get(0).getResponseQuantity() != null
+                        && responseType.getResponseValue().get(0).getResponseQuantity().getValue() != null) {
+                    quantityYearResp.setYear(responseType.getResponseValue().get(0).getResponseQuantity().getValue().intValueExact());
                 }
-                applyValidatedCriterionPropertyID(res.getValidatedCriterionPropertyID(), qyResp);
-                applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), qyResp);
-                qyResp.setResponseType(theType);
-                return qyResp;
+                applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), quantityYearResp);
+                applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), quantityYearResp);
+                // quantityYearResp.setResponseType(theType);
+                return quantityYearResp;
 
             case QUANTITY_INTEGER:
-                QuantityIntegerResponse qiResp = new QuantityIntegerResponse();
-                if (res.getResponseValue().get(0).getResponseQuantity() != null
-                        && res.getResponseValue().get(0).getResponseQuantity().getValue() != null) {
-                    qiResp.setQuantity(res.getResponseValue().get(0).getResponseQuantity().getValue().intValueExact());
+                QuantityIntegerResponse quantityIntResp = new QuantityIntegerResponse();
+                if (responseType.getResponseValue().get(0).getResponseQuantity() != null
+                        && responseType.getResponseValue().get(0).getResponseQuantity().getValue() != null) {
+                    quantityIntResp.setQuantity(responseType.getResponseValue().get(0).getResponseQuantity().getValue().intValueExact());
                 }
-                return qiResp;
+                return quantityIntResp;
 
             case AMOUNT:
-                AmountResponse aResp = new AmountResponse();
-                if (res.getResponseValue().get(0).getResponseAmount() != null &&
-                        res.getResponseValue().get(0).getResponseAmount().getValue() != null) {
-                    aResp.setAmount(res.getResponseValue().get(0).getResponseAmount().getValue().floatValue());
-                    if (res.getResponseValue().get(0).getResponseAmount().getCurrencyID() != null) {
-                        aResp.setCurrency(res.getResponseValue().get(0).getResponseAmount().getCurrencyID());
+                AmountResponse amountResp = new AmountResponse();
+                if (responseType.getResponseValue().get(0).getResponseAmount() != null &&
+                        responseType.getResponseValue().get(0).getResponseAmount().getValue() != null) {
+                    amountResp.setAmount(responseType.getResponseValue().get(0).getResponseAmount().getValue());
+                    if (responseType.getResponseValue().get(0).getResponseAmount().getCurrencyID() != null) {
+                        amountResp.setCurrency(responseType.getResponseValue().get(0).getResponseAmount().getCurrencyID());
                     }
                 }
-                applyValidatedCriterionPropertyID(res.getValidatedCriterionPropertyID(), aResp);
-                applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), aResp);
-                aResp.setResponseType(theType);
-                return aResp;
+                applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), amountResp);
+                applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), amountResp);
+                // amountResp.setResponseType(theType);
+                return amountResp;
 
             case CODE_COUNTRY:
-                CountryCodeResponse cResp = new CountryCodeResponse();
-                if (res.getResponseValue().get(0).getResponseCode() != null &&
-                        res.getResponseValue().get(0).getResponseCode().getValue() != null) {
-                    cResp.setCountryCode(res.getResponseValue().get(0).getResponseCode().getValue());
+                CountryCodeResponse codeCountryResp = new CountryCodeResponse();
+                if (responseType.getResponseValue().get(0).getResponseCode() != null &&
+                        responseType.getResponseValue().get(0).getResponseCode().getValue() != null) {
+                    codeCountryResp.setCountryCode(responseType.getResponseValue().get(0).getResponseCode().getValue());
                 }
-                applyValidatedCriterionPropertyID(res.getValidatedCriterionPropertyID(), cResp);
-                applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), cResp);
-                cResp.setResponseType(theType);
-                return cResp;
+                applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), codeCountryResp);
+                applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), codeCountryResp);
+                // codeCountryResp.setResponseType(theType);
+                return codeCountryResp;
 
             case PERCENTAGE:
-                PercentageResponse pResp = new PercentageResponse();
-                if (res.getResponseValue().get(0).getResponseQuantity() != null &&
-                        res.getResponseValue().get(0).getResponseQuantity().getValue() != null) {
-                    pResp.setPercentage(res.getResponseValue().get(0).getResponseQuantity().getValue().floatValue());
+                PercentageResponse percentageResp = new PercentageResponse();
+                if (responseType.getResponseValue().get(0).getResponseNumeric() != null &&
+                        responseType.getResponseValue().get(0).getResponseNumeric().getValue() != null) {
+                    percentageResp.setPercentage(responseType.getResponseValue().get(0).getResponseNumeric().getValue());
                 }
-                applyValidatedCriterionPropertyID(res.getValidatedCriterionPropertyID(), pResp);
-                applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), pResp);
-                pResp.setResponseType(theType);
-                return pResp;
+                applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), percentageResp);
+                applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), percentageResp);
+                // percentageResp.setResponseType(theType);
+                return percentageResp;
 
             case PERIOD:
-                ApplicablePeriodResponse apResp = new ApplicablePeriodResponse();
-                if (!res.getApplicablePeriod().isEmpty()) {
+                ApplicablePeriodResponse periodResp = new ApplicablePeriodResponse();
+                if (!responseType.getApplicablePeriod().isEmpty()) {
 
-                    if (res.getApplicablePeriod().get(0).getStartDate() != null
-                            && res.getApplicablePeriod().get(0).getStartDate().getValue() != null) {
+                    if (responseType.getApplicablePeriod().get(0).getStartDate() != null
+                            && responseType.getApplicablePeriod().get(0).getStartDate().getValue() != null) {
 
-                        apResp.setStartDate(res.getApplicablePeriod().get(0).getStartDate().getValue());
+                        periodResp.setStartDate(responseType.getApplicablePeriod().get(0).getStartDate().getValue());
                     }
 
-                    if (res.getApplicablePeriod().get(0).getEndDate() != null
-                            && res.getApplicablePeriod().get(0).getEndDate().getValue() != null) {
+                    if (responseType.getApplicablePeriod().get(0).getEndDate() != null
+                            && responseType.getApplicablePeriod().get(0).getEndDate().getValue() != null) {
 
-                        apResp.setEndDate(res.getApplicablePeriod().get(0).getEndDate().getValue());
+                        periodResp.setEndDate(responseType.getApplicablePeriod().get(0).getEndDate().getValue());
                     }
 
                 }
-                applyValidatedCriterionPropertyID(res.getValidatedCriterionPropertyID(), apResp);
-                applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), apResp);
-                apResp.setResponseType(theType);
-                return apResp;
+                applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), periodResp);
+                applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), periodResp);
+                // periodResp.setResponseType(theType);
+                return periodResp;
 
             case CODE:
-                EvidenceURLCodeResponse ecResp = new EvidenceURLCodeResponse();
-                if (res.getResponseValue().get(0).getResponseCode() != null
-                        && res.getResponseValue().get(0).getResponseCode().getValue() != null) {
-                    ecResp.setEvidenceURLCode(res.getResponseValue().get(0).getResponseCode().getValue());
+                EvidenceURLCodeResponse codeResp = new EvidenceURLCodeResponse();
+                if (responseType.getResponseValue().get(0).getResponseCode() != null
+                        && responseType.getResponseValue().get(0).getResponseCode().getValue() != null) {
+                    codeResp.setEvidenceURLCode(responseType.getResponseValue().get(0).getResponseCode().getValue());
                 }
-                applyValidatedCriterionPropertyID(res.getValidatedCriterionPropertyID(), ecResp);
-                applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), ecResp);
-                ecResp.setResponseType(theType);
-                return ecResp;
+                applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), codeResp);
+                applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), codeResp);
+                // codeResp.setResponseType(theType);
+                return codeResp;
 
             case EVIDENCE_IDENTIFIER:
                 // in regulated v1 response this maps to EVIDENCE_URL, CODE, DESCRIPTION
-                EvidenceIdentifierResponse eiResp = new EvidenceIdentifierResponse();
-                if (!res.getEvidenceSupplied().isEmpty()
-                        && res.getEvidenceSupplied().get(0).getID() != null
-                        && res.getEvidenceSupplied().get(0).getID().getValue() != null) {
+                EvidenceIdentifierResponse evidenceIdeResp = new EvidenceIdentifierResponse();
+                if (!responseType.getEvidenceSupplied().isEmpty()
+                        && responseType.getEvidenceSupplied().get(0).getID() != null
+                        && responseType.getEvidenceSupplied().get(0).getID().getValue() != null) {
 
-                    eiResp.setEvidenceSuppliedId(res.getEvidenceSupplied().get(0).getID().getValue());
+                    evidenceIdeResp.setEvidenceSuppliedId(responseType.getEvidenceSupplied().get(0).getID().getValue());
                 }
-                applyValidatedCriterionPropertyID(res.getValidatedCriterionPropertyID(), eiResp);
-                applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), eiResp);
-                eiResp.setResponseType(theType);
-                return eiResp;
+                applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), evidenceIdeResp);
+                applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), evidenceIdeResp);
+                // evidenceIdeResp.setResponseType(theType);
+                return evidenceIdeResp;
 
             case IDENTIFIER:
-                IdentifierResponse iResp = new IdentifierResponse();
-                if (!res.getResponseValue().isEmpty()
-                        && res.getResponseValue().get(0).getResponseID() != null
-                        && res.getResponseValue().get(0).getResponseID().getValue() != null) {
+                IdentifierResponse identifierResp = new IdentifierResponse();
+                if (!responseType.getResponseValue().isEmpty()
+                        && responseType.getResponseValue().get(0).getResponseID() != null
+                        && responseType.getResponseValue().get(0).getResponseID().getValue() != null) {
 
-                    iResp.setIdentifier(res.getResponseValue().get(0).getResponseID().getValue());
+                    identifierResp.setIdentifier(responseType.getResponseValue().get(0).getResponseID().getValue());
                 }
-                applyValidatedCriterionPropertyID(res.getValidatedCriterionPropertyID(), iResp);
-                applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), iResp);
-                iResp.setResponseType(theType);
-                return iResp;
+                applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), identifierResp);
+                applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), identifierResp);
+                // identifierResp.setResponseType(theType);
+                return identifierResp;
 
             case URL:
                 URLResponse urlResp = new URLResponse();
-                if (!res.getResponseValue().isEmpty()
-                        && res.getResponseValue().get(0).getResponseURI() != null
-                        && res.getResponseValue().get(0).getResponseURI().getValue() != null) {
+                if (!responseType.getResponseValue().isEmpty()
+                        && responseType.getResponseValue().get(0).getResponseURI() != null
+                        && responseType.getResponseValue().get(0).getResponseURI().getValue() != null) {
 
-                    urlResp.setUrl(res.getResponseValue().get(0).getResponseURI().getValue());
+                    urlResp.setUrl(responseType.getResponseValue().get(0).getResponseURI().getValue());
                 }
-                applyValidatedCriterionPropertyID(res.getValidatedCriterionPropertyID(), urlResp);
-                applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), urlResp);
-                urlResp.setResponseType(theType);
+                applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), urlResp);
+                applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), urlResp);
+                // urlResp.setResponseType(theType);
                 return urlResp;
+
+            case WEIGHT_INDICATOR:
+                WeightIndicatorResponse weightIndResp = new WeightIndicatorResponse();
+                applyCriterionWeightingData(weightIndResp, criterionType);
+                applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), weightIndResp);
+                applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), weightIndResp);
+                // weightIndResp.setResponseType(theType);
+                return weightIndResp;
+
+            case LOT_IDENTIFIER:
+                LotIdentifierResponse lotsIdeResp = new LotIdentifierResponse();
+                responseType.getResponseValue().forEach(resValueType -> {
+
+                    if (resValueType.getResponseID() != null
+                            && resValueType.getResponseID().getValue() != null) {
+                        lotsIdeResp.getLotsList().add(resValueType.getResponseID().getValue());
+                    }
+                });
+                applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), lotsIdeResp);
+                applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), lotsIdeResp);
+                // lotsIdeResp.setResponseType(theType);
+                return lotsIdeResp;
+
+            case ECONOMIC_OPERATOR_IDENTIFIER:
+                EOIdentifierResponse eoIdeResp = new EOIdentifierResponse();
+                if (!responseType.getResponseValue().isEmpty()
+                        && responseType.getResponseValue().get(0).getResponseID() != null
+                        && responseType.getResponseValue().get(0).getResponseID().getValue() != null) {
+
+                    eoIdeResp.setIdentifier(responseType.getResponseValue().get(0).getResponseID().getValue());
+
+                    if (responseType.getResponseValue().get(0).getResponseID().getSchemeName() != null) {
+                        eoIdeResp.setEOIDType(responseType.getResponseValue().get(0).getResponseID().getSchemeName());
+                    }
+                }
+                applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), eoIdeResp);
+                applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), eoIdeResp);
+                // eoIdeResp.setResponseType(theType);
+                return eoIdeResp;
 
             default:
                 return null;
@@ -498,7 +556,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
             case QUANTITY:
                 QuantityResponse qResp = new QuantityResponse();
                 if (res.getQuantity() != null && res.getQuantity().getValue() != null) {
-                    qResp.setQuantity(res.getQuantity().getValue().floatValue());
+                    qResp.setQuantity(res.getQuantity().getValue());
                 }
                 return qResp;
 
@@ -519,7 +577,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
             case AMOUNT:
                 AmountResponse aResp = new AmountResponse();
                 if (res.getAmount() != null && res.getAmount().getValue() != null) {
-                    aResp.setAmount(res.getAmount().getValue().floatValue());
+                    aResp.setAmount(res.getAmount().getValue());
                     if (res.getAmount().getCurrencyID() != null) {
                         aResp.setCurrency(res.getAmount().getCurrencyID());
                     }
@@ -537,7 +595,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
             case PERCENTAGE:
                 PercentageResponse pResp = new PercentageResponse();
                 if (res.getPercent() != null && res.getPercent().getValue() != null) {
-                    pResp.setPercentage(res.getPercent().getValue().floatValue());
+                    pResp.setPercentage(res.getPercent().getValue());
                 }
                 return pResp;
 

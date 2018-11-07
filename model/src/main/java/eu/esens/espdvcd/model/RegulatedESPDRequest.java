@@ -17,6 +17,7 @@ package eu.esens.espdvcd.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import eu.esens.espdvcd.model.types.ESPDRequestModelType;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -41,6 +42,7 @@ public class RegulatedESPDRequest implements ESPDRequest {
     private CADetails caDetails;
     private ServiceProviderDetails serviceProviderDetails;
     private List<SelectableCriterion> criterionList;
+    private DocumentDetails documentDetails;
     
     private static final String SELECTION_REGEXP = "^CRITERION.SELECTION.+";
     private static final String EXCLUSION_REGEXP = "^CRITERION.EXCLUSION.+";
@@ -90,6 +92,16 @@ public class RegulatedESPDRequest implements ESPDRequest {
     @Override
     public void setModelType(ESPDRequestModelType modelType) {
         this.modelType = modelType;
+    }
+
+    @Override
+    public DocumentDetails getDocumentDetails() {
+        return documentDetails;
+    }
+
+    @Override
+    public void setDocumentDetails(DocumentDetails documentDetails) {
+        this.documentDetails = documentDetails;
     }
 
     @Override

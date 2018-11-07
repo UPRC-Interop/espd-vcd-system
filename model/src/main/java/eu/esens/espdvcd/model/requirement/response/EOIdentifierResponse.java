@@ -17,17 +17,34 @@ package eu.esens.espdvcd.model.requirement.response;
 
 import java.io.Serializable;
 
+/**
+ * Economic Identifier Response Class
+ * Added for storing an Identifier along with an EOIDType codelist value
+ */
 public class EOIdentifierResponse extends Response implements Serializable {
     private static final long serialVersionUID = -5360297563987726650L;
-    private String EOIDType;
-    private String ID;
 
-    public EOIdentifierResponse(String EOIDType, String ID) {
-        this.EOIDType = EOIDType;
-        this.ID = ID;
-    }
+    /**
+     * Economic Identifier Response
+     * <p>
+     * An Identifier that also contains information about it's type.
+     * Necessary for describing an EO identifier with it's corresponding
+     * EOIDType.
+     * </p>
+     * Data Type: Text, Code<br>
+     * Cardinality: 0..n<br>
+     * UBL syntax path:
+     * ccv:Criterion.RequirementGroup.Requirement.Response.Identifier<br>
+     */
+    private String EOIDType;
+    private String identifier;
 
     public EOIdentifierResponse() {
+    }
+
+    public EOIdentifierResponse(String EOIDType, String identifier) {
+        this.EOIDType = EOIDType;
+        this.identifier = identifier;
     }
 
     public String getEOIDType() {
@@ -38,11 +55,11 @@ public class EOIdentifierResponse extends Response implements Serializable {
         this.EOIDType = EOIDType;
     }
 
-    public String getID() {
-        return ID;
+    public String getIdentifier() {
+        return identifier;
     }
 
-    public void setID(String ID) {
-        this.ID = ID;
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
     }
 }

@@ -17,7 +17,7 @@
 import {Injectable} from '@angular/core';
 import {RequirementGroup} from '../model/requirementGroup.model';
 import {EoRelatedCriterion} from '../model/eoRelatedCriterion.model';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormArray, FormControl, FormGroup} from '@angular/forms';
 import {RequirementResponse} from '../model/requirement-response.model';
 import {Evidence} from '../model/evidence.model';
 import {EvidenceIssuer} from '../model/evidenceIssuer.model';
@@ -30,6 +30,8 @@ import {ReductionCriterion} from '../model/reductionCriterion.model';
 import {UtilitiesService} from './utilities.service';
 import {FullCriterion} from '../model/fullCriterion.model';
 import {UUID} from 'angular2-uuid';
+import {CaRelatedCriterion} from '../model/caRelatedCriterion.model';
+import {stringify} from 'querystring';
 
 @Injectable({
   providedIn: 'root'
@@ -93,16 +95,11 @@ export class FormUtilService {
             // console.log('requirement uuid ' + req.uuid);
             // console.log(formValues[req.uuid.valueOf()]);
             if (req.response !== null) {
-              // console.log('INSIDE ====================================');
-              // console.log(req.response);
-              // this.utilities.setAllFields(req.response, '');
-              // req.response = new RequirementResponse();
-              // console.log(req.response);
             } else {
               // console.log('RESPONSE IS NULL');
               req.response = new RequirementResponse();
             }
-            console.log(req.response);
+            // console.log(req.response);
             // req.response = new RequirementResponse();
             if (req.responseDataType === 'INDICATOR') {
               if (formValues[req.uuid.valueOf()] === true) {
@@ -112,6 +109,45 @@ export class FormUtilService {
                 req.response.indicator = false;
                 req.response.uuid = null;
               }
+            } else if (req.responseDataType === 'WEIGHT_INDICATOR') {
+              if (formValues[req.uuid.valueOf()] === true) {
+                req.response.indicator = true;
+                req.response.uuid = null;
+                // req.response.evaluationMethodType = 'WEIGHTED';
+              } else {
+                req.response.indicator = false;
+                req.response.uuid = null;
+                // req.response.evaluationMethodType = 'PASSFAIL';
+              }
+              // const evaluationMethodTypeID = req.uuid + 'evaluationMethodType';
+              const weightID = req.uuid + 'weight';
+              const evaluationMethodDescriptionID = req.uuid + 'evaluationMethodDescription';
+
+              /* REMOVED: evaluationMethodType dropdown, it's redundant since we have a YES/NO radio button that answers the question. */
+              // if (formValues[evaluationMethodTypeID.valueOf()] === null) {
+              //   req.response.evaluationMethodType = null;
+              // } else {
+              //   req.response.evaluationMethodType = formValues[evaluationMethodTypeID.valueOf()];
+              // }
+
+
+              /* IF user selects NO in the global weight radio button,
+              then the 'weightable criteria's evaluationMethodType is set to PASSFAIL */
+              if (!this.utilities.isGloballyWeighted) {
+                // req.response.evaluationMethodType = 'PASSFAIL';
+                req.response.indicator = false;
+              }
+              if (formValues[weightID.valueOf()] === null) {
+                req.response.weight = null;
+              } else {
+                req.response.weight = formValues[weightID.valueOf()];
+              }
+              if (formValues[evaluationMethodDescriptionID.valueOf()] === null) {
+                req.response.evaluationMethodDescription = null;
+              } else {
+                req.response.evaluationMethodDescription = formValues[evaluationMethodDescriptionID.valueOf()];
+              }
+
             } else if (req.responseDataType === 'DESCRIPTION') {
               req.response.description = formValues[req.uuid.valueOf()];
               req.response.uuid = null;
@@ -176,7 +212,10 @@ export class FormUtilService {
 
               // console.log(JSON.stringify(this.dataService.evidenceList));
               req.response.uuid = null;
-            } else if (req.responseDataType === 'CODE') {
+            } else if (req.responseDataType === 'CODE' && this.utilities.qualificationApplicationType === 'regulated') {
+              req.response.evidenceURLCode = formValues[req.uuid.valueOf()];
+              req.response.uuid = null;
+            } else if (req.responseDataType === 'CODE' && this.utilities.qualificationApplicationType === 'self-contained') {
               req.response.evidenceURLCode = formValues[req.uuid.valueOf()];
               req.response.uuid = null;
             } else if (req.responseDataType === 'DATE') {
@@ -219,12 +258,9 @@ export class FormUtilService {
               if (formValues[req.uuid.valueOf()] === '' && formValues[currencyid.valueOf()] === null) {
                 req.response = null;
               } else {
-                console.log('SETTING AMOUNT....');
                 req.response.amount = formValues[req.uuid.valueOf()];
                 // console.log(formValues[currencyid.valueOf()]);
                 req.response.currency = formValues[currencyid.valueOf()];
-                console.log(req.response.amount);
-                console.log(req.response.currency);
                 req.response.uuid = null;
               }
             } else if (req.responseDataType === 'QUANTITY_INTEGER') {
@@ -257,6 +293,13 @@ export class FormUtilService {
             } else if (req.responseDataType === 'URL') {
               req.response.url = formValues[req.uuid.valueOf()];
               req.response.uuid = null;
+            } else if (req.responseDataType === 'ECONOMIC_OPERATOR_IDENTIFIER') {
+              req.response.id = formValues[req.uuid.valueOf()];
+              const eoidtypeID = req.uuid + 'eoidtype';
+              req.response.eoidtype = formValues[eoidtypeID.valueOf()];
+              req.response.uuid = null;
+            } else if (req.responseDataType === 'LOT_IDENTIFIER') {
+              req.response.lots = this.utilities.lotTemplate[req.uuid];
             }
           }
         });
@@ -308,7 +351,7 @@ export class FormUtilService {
           // formValues = testFormValues;
         }
 
-        if (formValues[rg.uuid.valueOf()] == undefined) {
+        if (formValues[rg.uuid.valueOf()] === undefined) {
 
           // fix go up a level
           testFormValues = form.getRawValue();
@@ -318,7 +361,7 @@ export class FormUtilService {
 
           // console.log('THIS IS undefined');
           this.getFromForm(rg, cr, form, testFormValues, evidenceList);
-        } else if (formValues[rg.uuid.valueOf()] != undefined) {
+        } else if (formValues[rg.uuid.valueOf()] !== undefined) {
           // console.log('THIS IS DEFINED');
           formValues = formValues[rg.uuid.valueOf()];
           this.getFromForm(rg, cr, form, formValues, evidenceList);
@@ -349,8 +392,15 @@ export class FormUtilService {
             group[r.uuid + 'endDate'] = new FormControl();
           } else if (r.responseDataType === 'INDICATOR') {
             group[r.uuid] = new FormControl(false);
+          } else if (r.responseDataType === 'WEIGHT_INDICATOR') {
+            group[r.uuid] = new FormControl(false);
+            // group[r.uuid + 'evaluationMethodType'] = new FormControl();
+            group[r.uuid + 'weight'] = new FormControl();
+            group[r.uuid + 'evaluationMethodDescription'] = new FormControl();
           } else if (r.responseDataType === 'AMOUNT') {
             group[r.uuid + 'currency'] = new FormControl();
+          } else if (r.responseDataType === 'ECONOMIC_OPERATOR_IDENTIFIER') {
+            group[r.uuid + 'eoidtype'] = new FormControl();
           } else {
             group[r.uuid] = new FormControl();
           }
@@ -416,6 +466,18 @@ export class FormUtilService {
     return fg;
   }
 
+  createCARelatedCriterionForm(criteria: CaRelatedCriterion[]) {
+    let group: any = {};
+    criteria.forEach(cr => {
+      group[cr.uuid] = this.createFormGroups(cr.requirementGroups);
+      // console.log(group[cr.typeCode]);
+    });
+    let fg = new FormGroup(group);
+
+    // console.log(fg);
+    return fg;
+  }
+
 
   createFormGroups(reqGroups: RequirementGroup[]) {
     let group: any = {};
@@ -435,14 +497,23 @@ export class FormUtilService {
       if (rg.requirements != undefined) {
         rg.requirements.forEach(r => {
           if (r.response != null || r.response != undefined) {
-            group[r.uuid] = new FormControl(r.response.description ||
-              r.response.percentage || r.response.evidenceURL ||
-              r.response.evidenceURLCode || r.response.countryCode ||
-              r.response.period || r.response.quantity || r.response.year || r.response.url || r.response.identifier || '');
+
+            /* SELF-CONTAINED: Disable fields with typeCode REQUIREMENT or CAPTION when the user has the role of EO.
+            These fields need to be non editable */
+            group[r.uuid] = new FormControl({
+              value: r.response.description ||
+                r.response.percentage || r.response.evidenceURL ||
+                r.response.evidenceURLCode || r.response.countryCode ||
+                r.response.period || r.response.quantity || r.response.year || r.response.url || r.response.identifier || '',
+              disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+            });
 
             // form reset in case of new espd
             if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
-              group[r.uuid] = new FormControl('');
+              group[r.uuid] = new FormControl({
+                value: '',
+                disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+              });
             }
 
 
@@ -454,33 +525,76 @@ export class FormUtilService {
                 group[r.uuid] = new FormControl(r.response.indicator);
               }
             }
+            /* SELF-CONTAINED: WEIGHT_INDICATOR */
+            if (r.responseDataType === 'WEIGHT_INDICATOR') {
+              if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
+                group[r.uuid] = new FormControl(false);
+                // group[r.uuid + 'evaluationMethodType'] = new FormControl();
+                group[r.uuid + 'weight'] = new FormControl();
+                group[r.uuid + 'evaluationMethodDescription'] = new FormControl();
+              } else {
+                group[r.uuid] = new FormControl(r.response.indicator);
+                // group[r.uuid + 'evaluationMethodType'] = new FormControl(r.response.evaluationMethodType);
+                group[r.uuid + 'weight'] = new FormControl(r.response.weight);
+                group[r.uuid + 'evaluationMethodDescription'] = new FormControl(r.response.evaluationMethodDescription);
+              }
+            }
+
+            /* SELF-CONTAINED: LOT_IDENTIFIER */
+            // if (r.responseDataType === 'LOT_IDENTIFIER') {
+            //   /* */
+            // }
 
             if (r.response.date) {
               if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
-                group[r.uuid] = new FormControl('');
+                group[r.uuid] = new FormControl({
+                  value: '',
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
               } else {
-                group[r.uuid] = new FormControl(r.response.date);
+                group[r.uuid] = new FormControl({
+                  value: r.response.date,
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
               }
             }
 
             // FIX: starDate-endDate null value case when AtoD Criteria are selected
             if (r.response.startDate) {
               if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
-                group[r.uuid + 'startDate'] = new FormControl('');
+                group[r.uuid + 'startDate'] = new FormControl({
+                  value: '',
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
               } else {
-                group[r.uuid + 'startDate'] = new FormControl(r.response.startDate);
+                group[r.uuid + 'startDate'] = new FormControl({
+                  value: r.response.startDate,
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
               }
-            } else if (r.response.startDate === null) {
-              group[r.uuid + 'startDate'] = new FormControl();
+            } else if (r.response.startDate === null || stringify(r.response.startDate) === '') {
+              group[r.uuid + 'startDate'] = new FormControl({
+                value: '',
+                disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+              });
             }
             if (r.response.endDate) {
               if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
-                group[r.uuid + 'endDate'] = new FormControl('');
+                group[r.uuid + 'endDate'] = new FormControl({
+                  value: '',
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
               } else {
-                group[r.uuid + 'endDate'] = new FormControl(r.response.endDate);
+                group[r.uuid + 'endDate'] = new FormControl({
+                  value: r.response.endDate,
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
               }
-            } else if (r.response.endDate === null) {
-              group[r.uuid + 'endDate'] = new FormControl();
+            } else if (r.response.endDate === null || stringify(r.response.endDate) === '') {
+              group[r.uuid + 'endDate'] = new FormControl({
+                value: '',
+                disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+              });
             }
 
             if (r.response.evidenceSuppliedId) {
@@ -495,34 +609,76 @@ export class FormUtilService {
               // console.log(evi);
               // console.log(typeof evi);
 
-              group[r.uuid + 'evidenceUrl'] = new FormControl(evi.evidenceURL);
-              group[r.uuid + 'evidenceCode'] = new FormControl(evi.description);
-              group[r.uuid + 'evidenceIssuer'] = new FormControl(evi.evidenceIssuer.name);
+              /* FIX: self-contained cannot set evidenceURL of undefined issue */
+              if (evi !== undefined) {
+                group[r.uuid + 'evidenceUrl'] = new FormControl({
+                  value: evi.evidenceURL,
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
+                group[r.uuid + 'evidenceCode'] = new FormControl({
+                  value: evi.description,
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
+                group[r.uuid + 'evidenceIssuer'] = new FormControl({
+                  value: evi.evidenceIssuer.name,
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
+              }
 
               if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
-                group[r.uuid + 'evidenceUrl'] = new FormControl('');
-                group[r.uuid + 'evidenceCode'] = new FormControl('');
-                group[r.uuid + 'evidenceIssuer'] = new FormControl('');
+                group[r.uuid + 'evidenceUrl'] = new FormControl({
+                  value: '',
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
+                group[r.uuid + 'evidenceCode'] = new FormControl({
+                  value: '',
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
+                group[r.uuid + 'evidenceIssuer'] = new FormControl({
+                  value: '',
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
               }
+            }
+
+            /* SELF-CONTAINED: ECONOMIC_OPERATOR_IDENTIFIER */
+            if (r.response.id || r.response.eoidtype) {
+              group[r.uuid] = new FormControl(r.response.id);
+              group[r.uuid + 'eoidtype'] = new FormControl(r.response.eoidtype);
             }
 
             if (r.response.currency || r.response.amount) {
               if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
-                group[r.uuid] = new FormControl('');
+                group[r.uuid] = new FormControl({
+                  value: '',
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
               } else {
-                group[r.uuid] = new FormControl(r.response.amount);
+                group[r.uuid] = new FormControl({
+                  value: r.response.amount,
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
               }
               if (r.response.currency !== null && r.response.currency !== undefined) {
                 if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
-                  group[r.uuid + 'currency'] = new FormControl('');
+                  group[r.uuid + 'currency'] = new FormControl({
+                    value: '',
+                    disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                  });
                 } else {
-                  group[r.uuid + 'currency'] = new FormControl(r.response.currency);
+                  group[r.uuid + 'currency'] = new FormControl({
+                    value: r.response.currency,
+                    disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                  });
                 }
               }
             }
             // in case of request import
-            if (r.response.currency === null || r.response.amount === '0') {
-              group[r.uuid + 'currency'] = new FormControl();
+            if (r.response.currency === null || r.response.amount === '0' || r.response.currency === '' || r.response.amount === '') {
+              group[r.uuid + 'currency'] = new FormControl({
+                value: '',
+                disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+              });
             }
 
 
@@ -530,24 +686,103 @@ export class FormUtilService {
           } else {
             r.response = new RequirementResponse();
             group[r.uuid] = new FormControl(r.response.description || '');
+            /* SELF-CONTAINED: WEIGHT_INDICATOR */
+            if (this.utilities.isCA) {
+              if (r.responseDataType === 'WEIGHT_INDICATOR') {
+                group[r.uuid] = new FormControl(false);
+                // group[r.uuid + 'evaluationMethodType'] = new FormControl();
+                group[r.uuid + 'weight'] = new FormControl();
+                group[r.uuid + 'evaluationMethodDescription'] = new FormControl();
+              }
+              if (r.responseDataType === 'AMOUNT') {
+                group[r.uuid] = new FormControl({
+                  value: '',
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
+                group[r.uuid + 'currency'] = new FormControl({
+                  value: '',
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
+              }
+              if (r.responseDataType === 'PERIOD' && this.APIService.version === 'v2') {
+                group[r.uuid + 'startDate'] = new FormControl({
+                  value: '',
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
+                group[r.uuid + 'endDate'] = new FormControl({
+                  value: '',
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
+              }
+            }
             if (this.utilities.isEO) {
               if (r.responseDataType === 'INDICATOR') {
                 group[r.uuid] = new FormControl(false);
               }
               if (r.responseDataType === 'AMOUNT') {
-                group[r.uuid + 'currency'] = new FormControl();
+                group[r.uuid] = new FormControl({
+                  value: '',
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
+                group[r.uuid + 'currency'] = new FormControl({
+                  value: '',
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
+              }
+
+              if (r.responseDataType === 'ECONOMIC_OPERATOR_IDENTIFIER') {
+                group[r.uuid] = new FormControl({
+                  value: '',
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
+                group[r.uuid + 'eoidtype'] = new FormControl({
+                  value: '',
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
+              }
+
+
+              if (r.responseDataType === 'WEIGHT_INDICATOR') {
+                group[r.uuid] = new FormControl(false);
+                // group[r.uuid + 'evaluationMethodType'] = new FormControl({
+                //   value: '',
+                //   disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                // });
+                group[r.uuid + 'weight'] = new FormControl({
+                  value: '',
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
+                group[r.uuid + 'evaluationMethodDescription'] = new FormControl({
+                  value: '',
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
               }
 
               // group[r.uuid + 'startDate'] = new FormControl();
               // group[r.uuid + 'endDate'] = new FormControl();
               if (r.responseDataType === 'PERIOD' && this.APIService.version === 'v2') {
-                group[r.uuid + 'startDate'] = new FormControl();
-                group[r.uuid + 'endDate'] = new FormControl();
+                group[r.uuid + 'startDate'] = new FormControl({
+                  value: '',
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
+                group[r.uuid + 'endDate'] = new FormControl({
+                  value: '',
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
               }
               if (r.responseDataType === 'EVIDENCE_IDENTIFIER') {
-                group[r.uuid + 'evidenceUrl'] = new FormControl();
-                group[r.uuid + 'evidenceCode'] = new FormControl();
-                group[r.uuid + 'evidenceIssuer'] = new FormControl();
+                group[r.uuid + 'evidenceUrl'] = new FormControl({
+                  value: '',
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
+                group[r.uuid + 'evidenceCode'] = new FormControl({
+                  value: '',
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
+                group[r.uuid + 'evidenceIssuer'] = new FormControl({
+                  value: '',
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
               }
             }
 

@@ -1,12 +1,12 @@
 /**
  * Copyright 2016-2018 University of Piraeus Research Center
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,6 +22,7 @@ import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.ResponseRequirement;
+import eu.esens.espdvcd.model.requirement.response.WeightIndicatorResponse;
 import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
 import eu.esens.espdvcd.model.retriever.ECertisCriterion;
 import eu.esens.espdvcd.model.retriever.ECertisEvidence;
@@ -39,7 +40,6 @@ import eu.espd.schema.v1.commonbasiccomponents_2.ContractFolderIDType;
 import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionPropertyGroupType;
 import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionPropertyType;
 import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionType;
-import eu.espd.schema.v2.pre_award.commonbasic.IndustryClassificationCodeType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -558,23 +558,57 @@ public interface ModelExtractor {
         return lr;
     }
 
-    default Requirement extractRequirement(TenderingCriterionPropertyType pt) {
+    default void applyCriterionWeightingData(WeightIndicatorResponse response, TenderingCriterionType criterionType) {
+
+        if (response != null) {
+            // Indicator
+            if (criterionType.getEvaluationMethodTypeCode() != null
+                    && criterionType.getEvaluationMethodTypeCode().getValue() != null) {
+
+                response.setIndicator(criterionType.getEvaluationMethodTypeCode().getValue()
+                        .equals(EvaluationMethodTypeEnum.WEIGHTED.name()));
+            }
+            // WeightingConsiderationDescription
+            response.getEvaluationMethodDescriptionList()
+                    .addAll(criterionType.getWeightingConsiderationDescription().stream()
+                            .map(descType -> descType.getValue())
+                            .collect(Collectors.toList()));
+            // Weight
+            if (criterionType.getWeightNumeric() != null
+                    && criterionType.getWeightNumeric().getValue() != null) {
+
+                response.setWeight(criterionType.getWeightNumeric().getValue());
+            }
+        }
+    }
+
+    default Requirement extractRequirement(TenderingCriterionPropertyType rqType) {
         String theId = null;
-        if (pt.getID() != null) {
-            theId = pt.getID().getValue();
+        if (rqType.getID() != null) {
+            theId = rqType.getID().getValue();
         }
         String theDescription = null;
-        if (!pt.getDescription().isEmpty() && pt.getDescription().get(0) != null) {
-            theDescription = pt.getDescription().get(0).getValue();
+        if (!rqType.getDescription().isEmpty() && rqType.getDescription().get(0) != null) {
+            theDescription = rqType.getDescription().get(0).getValue();
         }
 
-        Requirement r = new ResponseRequirement(
+        Requirement rq = new ResponseRequirement(
                 theId,
-                RequirementTypeEnum.valueOf(pt.getTypeCode().getValue()),
-                ResponseTypeEnum.valueOf(pt.getValueDataTypeCode().getValue()),
+                RequirementTypeEnum.valueOf(rqType.getTypeCode().getValue()),
+                ResponseTypeEnum.valueOf(rqType.getValueDataTypeCode().getValue()),
                 theDescription
         );
-        return r;
+
+        applyCAResponseToModel(rqType, rq);
+        return rq;
+    }
+
+    default void applyCAResponseToModel(TenderingCriterionPropertyType rqType, Requirement rq) {
+
+//        if (rqType.get) {
+//
+//        }
+
     }
 
     default Requirement extractRequirement(RequirementType rqType) {
