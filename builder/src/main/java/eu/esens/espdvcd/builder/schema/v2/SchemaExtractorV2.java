@@ -629,10 +629,6 @@ public interface SchemaExtractorV2 {
 
     default WeightNumericType createWeightNumericType(BigDecimal weight) {
         WeightNumericType numericType = new WeightNumericType();
-        String theWeight = String.valueOf(weight);
-        int integerPlaces = theWeight.indexOf(".");
-//        numericType.setValue(new BigDecimal(weight)
-//                .setScale(theWeight.length() - integerPlaces - 1, BigDecimal.ROUND_HALF_UP));
         numericType.setValue(weight);
         return numericType;
     }
@@ -669,9 +665,9 @@ public interface SchemaExtractorV2 {
 
         if (rq.getType() == RequirementTypeEnum.REQUIREMENT
                 && rq.getResponse() != null
-                && rq.getResponse().getResponseType() != null) {
+                && rq.getResponseDataType() != null) {
 
-            switch (rq.getResponse().getResponseType()) {
+            switch (rq.getResponseDataType()) {
 
                 case DESCRIPTION:
                     String description = ((DescriptionResponse) rq.getResponse()).getDescription();
@@ -684,7 +680,7 @@ public interface SchemaExtractorV2 {
                 case AMOUNT:
                     BigDecimal amount = ((AmountResponse) rq.getResponse()).getAmount();
                     String currency = ((AmountResponse) rq.getResponse()).getCurrency();
-                    if ((amount.floatValue() != 0) || (currency != null && !currency.isEmpty())) {
+                    if ((amount != null) || (currency != null && !currency.isEmpty())) {
                         // Only generate a proper response if for at least one of the variables "amount" and
                         // "currency" a value different from the default is detected.
 
@@ -718,8 +714,10 @@ public interface SchemaExtractorV2 {
 
                 case QUANTITY:
                     BigDecimal quantity = ((QuantityResponse) rq.getResponse()).getQuantity();
-                    rqType.setExpectedValueNumeric(new ExpectedValueNumericType());
-                    rqType.getExpectedValueNumeric().setValue(quantity);
+                    if (quantity != null) {
+                        rqType.setExpectedValueNumeric(new ExpectedValueNumericType());
+                        rqType.getExpectedValueNumeric().setValue(quantity);
+                    }
                     break;
 
                 case PERIOD:

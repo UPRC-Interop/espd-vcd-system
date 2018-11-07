@@ -592,13 +592,23 @@ public interface ModelExtractor {
             theDescription = rqType.getDescription().get(0).getValue();
         }
 
-        Requirement r = new ResponseRequirement(
+        Requirement rq = new ResponseRequirement(
                 theId,
                 RequirementTypeEnum.valueOf(rqType.getTypeCode().getValue()),
                 ResponseTypeEnum.valueOf(rqType.getValueDataTypeCode().getValue()),
                 theDescription
         );
-        return r;
+
+        applyCAResponseToModel(rqType, rq);
+        return rq;
+    }
+
+    default void applyCAResponseToModel(TenderingCriterionPropertyType rqType, Requirement rq) {
+
+//        if (rqType.get) {
+//
+//        }
+
     }
 
     default Requirement extractRequirement(RequirementType rqType) {
