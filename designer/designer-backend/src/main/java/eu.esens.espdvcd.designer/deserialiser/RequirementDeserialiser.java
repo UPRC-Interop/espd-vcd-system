@@ -52,7 +52,11 @@ public class RequirementDeserialiser extends StdDeserializer<ResponseRequirement
         JsonNode ID = root.get("id");
         JsonNode description = root.get("description");
 
-        ResponseRequirement responseRequirement = new ResponseRequirement(ID.asText(), RequirementTypeEnum.valueOf(type.asText()), ResponseTypeEnum.valueOf(responseType.asText()), description.asText());
+        ResponseRequirement responseRequirement = new ResponseRequirement(
+                ID.asText(),
+                RequirementTypeEnum.valueOf(type.asText()),
+                ResponseTypeEnum.valueOf(responseType.asText()),
+                description.asText());
         Response response;
 
         switch (responseRequirement.getResponseDataType()) {

@@ -18,7 +18,6 @@ package eu.esens.espdvcd.model.requirement.response;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 
 public abstract class Response {
-
     /**
      * Criterion response identifier
      * <p>
@@ -39,7 +38,6 @@ public abstract class Response {
     private String ID;
     private String validatedCriterionPropertyID;
     private String confidentialityLevelCode;
-    private ResponseTypeEnum responseType;
 
     public String getUUID() {
         return UUID;
@@ -71,13 +69,5 @@ public abstract class Response {
 
     public void setConfidentialityLevelCode(String confidentialityLevelCode) {
         this.confidentialityLevelCode = confidentialityLevelCode;
-    }
-
-    public void setResponseType(ResponseTypeEnum responseType) {
-        this.responseType = responseType;
-    }
-
-    public ResponseTypeEnum getResponseType() {
-        return responseType;
     }
 }
