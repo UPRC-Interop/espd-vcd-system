@@ -22,6 +22,7 @@ import {FormUtilService} from '../services/form-util.service';
 import {ValidationService} from "../services/validation.service";
 import {BaseStep} from "../base/base-step";
 import {WizardSteps} from "../base/wizard-steps.enum";
+import {ExportType} from "../export/export-type.enum";
 
 @Component({
   selector: 'app-finish-eo',
@@ -53,12 +54,19 @@ export class FinishEoComponent implements OnInit, BaseStep {
 
   }
 
-  onExport() {
-    this.dataService.finishEOSubmit();
+  onHtmlExport() {
+    this.dataService.finishEOSubmit(ExportType.HTML);
+  }
+
+  onPdfExport() {
+    this.dataService.finishEOSubmit(ExportType.PDF);
   }
 
   getWizardStep(): WizardSteps {
     return WizardSteps.FINISH;
+  }
+  onXmlExport() {
+    this.dataService.finishEOSubmit(ExportType.XML);
   }
 
   public areFormsValid(): boolean {

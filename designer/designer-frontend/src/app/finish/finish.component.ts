@@ -20,6 +20,7 @@ import {NgForm} from "@angular/forms";
 import {ValidationService} from "../services/validation.service";
 import {BaseStep} from "../base/base-step";
 import {WizardSteps} from "../base/wizard-steps.enum";
+import {ExportType} from "../export/export-type.enum";
 
 @Component({
   selector: 'app-finish',
@@ -45,9 +46,16 @@ export class FinishComponent implements OnInit, BaseStep {
   ngOnInit() {
   }
 
-  exportFile() {
-    // this.dataService.version = 'v1';
-    this.dataService.saveFile(this.dataService.blob);
+  exportHtmlFile() {
+    this.dataService.finishSubmit(ExportType.HTML);
+  }
+
+  exportPdfFile() {
+    this.dataService.finishSubmit(ExportType.PDF);
+  }
+
+  exportXmlFile() {
+    this.dataService.finishSubmit(ExportType.XML);
   }
 
   getWizardStep(): WizardSteps {
