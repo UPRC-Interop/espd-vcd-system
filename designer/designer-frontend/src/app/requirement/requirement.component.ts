@@ -24,6 +24,8 @@ import {ApicallService} from '../services/apicall.service';
 import {UtilitiesService} from '../services/utilities.service';
 import {EoIDType} from '../model/eoIDType.model';
 import {MatSelectionList} from '@angular/material';
+import {BidType} from '../model/bidType.model';
+import {FinancialRatioType} from '../model/financialRatioType.model';
 
 @Component({
   selector: 'app-requirement',
@@ -42,6 +44,8 @@ export class RequirementComponent implements OnInit, OnChanges {
   countries: Country[] = null;
   currency: Currency[] = null;
   eoIDTypes: EoIDType[] = null;
+  bidTypes: BidType[] = null;
+  financialRatioTypes: FinancialRatioType[] = null;
   // evaluationMethodTypes: EvaluationMethodType[] = null;
   isWeighted = false;
 
@@ -84,6 +88,24 @@ export class RequirementComponent implements OnInit, OnChanges {
     this.dataService.getEoIDTypes()
       .then(res => {
         this.eoIDTypes = res;
+        // console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+    this.dataService.getBidTypes()
+      .then(res => {
+        this.bidTypes = res;
+        // console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+    this.dataService.getFinancialRatioTypes()
+      .then(res => {
+        this.financialRatioTypes = res;
         // console.log(res);
       })
       .catch(err => {

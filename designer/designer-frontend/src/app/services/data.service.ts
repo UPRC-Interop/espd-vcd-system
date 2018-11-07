@@ -48,6 +48,7 @@ import {WeightingType} from '../model/weightingType.model';
 import {DocumentDetails} from '../model/documentDetails.model';
 import {EoRoleType} from '../model/eoRoleType.model';
 import {Amount} from '../model/amount.model';
+import {FinancialRatioType} from '../model/financialRatioType.model';
 
 @Injectable()
 export class DataService {
@@ -81,6 +82,7 @@ export class DataService {
   eoRoleTypes: EoRoleType[] = null;
   currency: Currency[] = null;
   eoIDType: EoIDType[] = null;
+  financialRatioTypes: FinancialRatioType[] = null;
   weightingType: WeightingType[] = null;
   evaluationMethodType: EvaluationMethodType[] = null;
   exclusionACriteria: ExclusionCriteria[] = null;
@@ -1611,6 +1613,26 @@ export class DataService {
       return this.APIService.get_BidType()
         .then(res => {
           this.bidTypes = res;
+          return Promise.resolve(res);
+        })
+        .catch(err => {
+          console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
+          return Promise.reject(err);
+        });
+    }
+  }
+
+  getFinancialRatioTypes(): Promise<FinancialRatioType[]> {
+    if (this.financialRatioTypes != null) {
+      return Promise.resolve(this.financialRatioTypes);
+    } else {
+      return this.APIService.get_financialRatioType()
+        .then(res => {
+          this.financialRatioTypes = res;
           return Promise.resolve(res);
         })
         .catch(err => {

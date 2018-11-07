@@ -89,7 +89,7 @@ export class ProcedureEoComponent implements OnInit {
       this.EOForm.disable();
     }
 
-    /* OTHER_EO_LOT TENDERED CRITERION DEMO ---> TODO: CREATE LOT in EO view */
+    /* OTHER_EO_LOT TENDERED CRITERION lot generation */
     this.utilities.projectLots = this.utilities.createLotList(this.dataService.CADetails.procurementProjectLots);
 
 

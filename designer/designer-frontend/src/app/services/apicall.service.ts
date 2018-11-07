@@ -34,6 +34,8 @@ import {EvaluationMethodType} from '../model/evaluationMethodType.model';
 import {ProjectType} from '../model/projectType.model';
 import {BidType} from '../model/bidType.model';
 import {WeightingType} from '../model/weightingType.model';
+import {EoRoleType} from '../model/eoRoleType.model';
+import {FinancialRatioType} from '../model/financialRatioType.model';
 
 // import {DataService} from '../services/data.service';
 
@@ -88,7 +90,11 @@ export class ApicallService {
   }
 
   get_eoRoleType() {
-    return this.http.get<WeightingType[]>(environment.apiUrl + 'v2/codelists/EORoleType').toPromise();
+    return this.http.get<EoRoleType[]>(environment.apiUrl + 'v2/codelists/EORoleType').toPromise();
+  }
+
+  get_financialRatioType() {
+    return this.http.get<FinancialRatioType[]>(environment.apiUrl + 'v2/codelists/FinancialRatioType').toPromise();
   }
 
 
