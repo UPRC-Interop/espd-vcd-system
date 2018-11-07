@@ -89,7 +89,7 @@ export class ProcedureEoComponent implements OnInit {
       this.EOForm.disable();
     }
 
-    /* OTHER_EO_LOT TENDERED CRITERION DEMO */
+    /* OTHER_EO_LOT TENDERED CRITERION DEMO ---> TODO: Create Response from scratch flow will be removed */
     this.utilities.projectLots = this.utilities.createLotList(5);
 
 
