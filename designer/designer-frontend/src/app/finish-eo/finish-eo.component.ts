@@ -72,4 +72,8 @@ export class FinishEoComponent implements OnInit, BaseStep {
   public areFormsValid(): boolean {
     return this.validationService.validateFormsInComponent(this.forms) && this.validationService.validateForm(this.dateInput);
   }
+
+  isExportPossible(): boolean {
+    return this.startStepValid && this.procedureStepValid && this.exclusionStepValid && this.selectionStepValid && this.finishStepValid && !this.dateInput.invalid;
+  }
 }

@@ -124,9 +124,9 @@
 
 <button mat-raised-button color="primary" matStepperPrevious [innerHTML]="'espd.gui.previous' | translate"></button>
 <ng-container *ngIf="!this.dataService.isReadOnly()">
-  <button type="submit" mat-raised-button color="primary" matStepperNext (click)="onXmlExport()">{{'espd.part5.export' | translate}} (XML)</button>
-  <button type="submit" *ngIf="this.dataService.isVersionTwo()" mat-raised-button color="primary" matStepperNext (click)="onHtmlExport()">{{'espd.part5.export' | translate}} (HTML)</button>
-  <button type="submit" *ngIf="this.dataService.isVersionTwo()" mat-raised-button color="primary" matStepperNext (click)="onPdfExport()">{{'espd.part5.export' | translate}} (PDF)</button>
+  <button [disabled]="!isExportPossible()" type="submit" mat-raised-button color="primary" matStepperNext (click)="onXmlExport()">{{'espd.part5.export' | translate}} (XML)</button>
+  <button [disabled]="!isExportPossible()" type="submit" *ngIf="this.dataService.isVersionTwo()" mat-raised-button color="primary" matStepperNext (click)="onHtmlExport()">{{'espd.part5.export' | translate}} (HTML)</button>
+  <button [disabled]="!isExportPossible()" type="submit" *ngIf="this.dataService.isVersionTwo()" mat-raised-button color="primary" matStepperNext (click)="onPdfExport()">{{'espd.part5.export' | translate}} (PDF)</button>
 </ng-container>
 
 <!--<button type="submit" mat-raised-button color="primary" matStepperNext (click)="onExportV2()">Export V2</button>-->
