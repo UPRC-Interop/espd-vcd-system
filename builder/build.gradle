@@ -46,6 +46,13 @@ dependencies {
 
     compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.5'
     compile "com.github.rholder:guava-retrying:2.0.0"
+
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
+    compile group: 'org.xmlunit', name: 'xmlunit-core', version: '2.2.1'
+    compile group: 'xerces', name: 'xercesImpl', version: '2.12.0'
+    compile group: 'com.openhtmltopdf', name: 'openhtmltopdf-pdfbox', version: '0.0.1-RC17'
+    compile group: 'org.apache.xmlgraphics', name: 'fop', version: '0.93'
+    compile group: 'org.xmlunit', name: 'xmlunit-matchers', version: '2.2.1'
 }
 
 task copyTask(type: Copy) {

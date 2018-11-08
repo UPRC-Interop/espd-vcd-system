@@ -15,6 +15,7 @@
  */
 package eu.esens.espdvcd.designer.service;
 
+import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
 import eu.esens.espdvcd.designer.exception.ValidationException;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDResponse;
@@ -24,9 +25,17 @@ import java.io.InputStream;
 public interface ExportESPDService {
     InputStream exportESPDRequestAsInputStream(ESPDRequest model) throws ValidationException;
 
+    InputStream exportESPDRequestHtmlAsInputStream(ESPDRequest model, EULanguageCodeEnum languageCodeEnum) throws ValidationException;
+
+    InputStream exportESPDRequestPdfAsInputStream(ESPDRequest model, EULanguageCodeEnum languageCodeEnum) throws ValidationException;
+
     String exportESPDRequestAsString(ESPDRequest model) throws ValidationException;
 
     InputStream exportESPDResponseAsInputStream(ESPDResponse model) throws ValidationException;
 
+    InputStream exportESPDResponseHtmlAsInputStream(ESPDResponse model, EULanguageCodeEnum languageCodeEnum) throws ValidationException;
+
+    InputStream exportESPDResponsePdfAsInputStream(ESPDResponse model, EULanguageCodeEnum languageCodeEnum) throws ValidationException;
+    
     String exportESPDResponseAsString(ESPDResponse model) throws ValidationException;
 }

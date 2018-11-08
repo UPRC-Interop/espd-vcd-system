@@ -131,16 +131,17 @@ public class CriteriaExtractorImpl implements CriteriaExtractor {
 
     @Override
     public List<SelectableCriterion> getFullList(List<SelectableCriterion> initialList) {
-        return getFullList(initialList, false);
+        return getFullList(initialList, true);
     }
 
     @Override
     public List<SelectableCriterion> getFullList(List<SelectableCriterion> initialList, boolean addAsSelected) {
         initCriterionList();
         Set<SelectableCriterion> initialSet = new LinkedHashSet<>();
-        initialSet.addAll(criterionList);
         initialList.forEach(sc -> sc.setSelected(addAsSelected));
+        criterionList.forEach(sc -> sc.setSelected(false));
         initialSet.addAll(initialList);
+        initialSet.addAll(criterionList);
         return new ArrayList<>(initialSet);
     }
 

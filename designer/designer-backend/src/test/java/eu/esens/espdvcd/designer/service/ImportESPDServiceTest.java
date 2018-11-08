@@ -39,7 +39,7 @@ public class ImportESPDServiceTest {
     ESPDRequest selfContainedRequest;
     ExportESPDService exportESPDService;
     ImportESPDService importESPDService;
-    ObjectWriter writer;
+//    ObjectWriter writer;
 
     @Before
     public void setUp() throws Exception {

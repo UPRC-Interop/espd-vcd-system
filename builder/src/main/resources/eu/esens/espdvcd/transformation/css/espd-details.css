@@ -1,0 +1,140 @@
+<!--
+/*--><root>
+/*Uebergreifende CSS-Definitionen fuer die Procedure-Details*/
+/*Diese Zeilen stehen lassen, damit die CSS-Datei in dem XSL eingebunden werden kann!<![CDATA[<!--*/
+-->
+
+textarea {
+    width: 800px;
+}
+
+.espd-details label {
+    font-weight: bold;
+}
+
+.espd-details hr {
+    border-bottom: 0.133em dotted #CDCDCD;
+    border-top: 0;
+    clear: both;
+    margin: 15px 0 15px 0;
+}
+
+.espd-details .section {
+    margin-bottom: 20px;
+    border: 1px solid #cdcdcd;
+    padding: 15px;
+}
+
+.espd-details .chapter .chapter-number,
+.espd-details .chapter .chapter-headline {
+    font-weight: bold;
+    display: inline-block;
+    font-size: 14px;
+    margin-bottom: 5px;
+    vertical-align: top;
+}
+
+.espd-details .level-two .chapter-number,
+.espd-details .level-two .chapter-headline {
+    font-size: 14px;
+}
+
+.espd-details .chapter-headline{
+    width: 90%;
+}
+
+.espd-details .no-chapter-number .chapter-number {
+    display: none;
+}
+
+.espd-details .chapter-number {
+    width: 50px;
+}
+
+.espd-details .left-padding {
+    padding-left: 54px;
+}
+
+.espd-details .chapter-content, .level-two {
+    padding-left: 54px;
+}
+
+.espd-details .chapter-content > p {
+    word-wrap: break-word;
+}
+
+.level-three {
+    padding-left: 50px;
+}
+
+.level-four {
+    padding-left: 85px;
+}
+
+
+.espd-details .chapter-content {
+    padding-left: 54px;
+}
+
+.espd-details .content-left {
+    display: inline-block;
+    font-weight: bold;
+    margin-right: 20px;
+    vertical-align: top;
+    width: 35%;
+}
+
+.espd-details .content-right {
+    display: inline-block;
+    width: 50%;
+    vertical-align: bottom;
+    word-wrap: break-word;
+}
+
+.espd-details .content-long{
+    display: inline-block;
+    width: 65%;
+    vertical-align: top;
+    word-wrap: break-word;
+}
+
+.espd-details .chapter {
+    margin-bottom: 10px;
+}
+.espd-details .section-headline,
+.espd-details .section-content {
+    min-height: 1px;
+    padding-left: 50px;
+    padding-right: 15px;
+    position: relative;
+}
+
+.espd-details .section-headline-no-padding {
+    font-weight: bold;
+}
+
+.espd-details .section-content-small-padding {
+    padding: 0 15px 0 15px;
+}
+
+.espd-details .section-headline {
+    font-weight: bold;
+    padding-left: 35px;
+}
+
+.espd-details .section-header {
+    margin: 15px 0 10px 0;
+}
+
+
+.espd-details .procedure-header {
+    margin-bottom: 30px;
+}
+
+.espd-details .footer-content {
+   display: none;
+}
+
+
+<!-- /*-->]]>/*Diese Zeilen stehen lassen, damit die CSS-Datei in dem XSL eingebunden werden kann!</root><!--*/
+-->

@@ -16,10 +16,12 @@
 package eu.esens.espdvcd.designer.service;
 
 import eu.esens.espdvcd.builder.BuilderFactory;
+import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
 import eu.esens.espdvcd.designer.exception.ValidationException;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDResponse;
 
+import javax.el.MethodNotFoundException;
 import java.io.InputStream;
 
 import static eu.esens.espdvcd.designer.util.CriteriaUtil.hasNullCriterion;
@@ -39,6 +41,16 @@ public enum RegulatedExportESPDV1Service implements ExportESPDService {
     }
 
     @Override
+    public InputStream exportESPDRequestHtmlAsInputStream(ESPDRequest model, EULanguageCodeEnum languageCodeEnum) throws ValidationException {
+        throw new MethodNotFoundException("not implemented");
+    }
+
+    @Override
+    public InputStream exportESPDRequestPdfAsInputStream(ESPDRequest model, EULanguageCodeEnum languageCodeEnum) throws ValidationException {
+        throw new MethodNotFoundException("not implemented");
+    }
+
+    @Override
     public String exportESPDRequestAsString(ESPDRequest model) throws ValidationException {
         if (hasNullCriterion(model.getFullCriterionList()))
             throw new ValidationException("Null criteria are not permitted.");
@@ -50,6 +62,16 @@ public enum RegulatedExportESPDV1Service implements ExportESPDService {
         if (hasNullCriterion(model.getFullCriterionList()))
             throw new ValidationException("Null criteria are not permitted.");
         return BuilderFactory.EDM_V1.createDocumentBuilderFor(finalizeV1ESPD(model)).getAsInputStream();
+    }
+
+    @Override
+    public InputStream exportESPDResponseHtmlAsInputStream(ESPDResponse model, EULanguageCodeEnum languageCodeEnum) throws ValidationException {
+        throw new MethodNotFoundException("not implemented");
+    }
+
+    @Override
+    public InputStream exportESPDResponsePdfAsInputStream(ESPDResponse model, EULanguageCodeEnum languageCodeEnum) throws ValidationException {
+        throw new MethodNotFoundException("not implemented");
     }
 
     @Override
