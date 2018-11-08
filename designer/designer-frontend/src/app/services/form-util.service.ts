@@ -215,8 +215,14 @@ export class FormUtilService {
             } else if (req.responseDataType === 'CODE' && this.utilities.qualificationApplicationType === 'regulated') {
               req.response.evidenceURLCode = formValues[req.uuid.valueOf()];
               req.response.uuid = null;
-            } else if (req.responseDataType === 'CODE' && this.utilities.qualificationApplicationType === 'self-contained') {
-              req.response.evidenceURLCode = formValues[req.uuid.valueOf()];
+            } else if (req.responseDataType === 'CODE' && this.utilities.qualificationApplicationType === 'selfcontained') {
+              if (req.responseValuesRelatedArtefact === 'CPVCodes') {
+                console.log('THIS IS INSIDE CPV CODE IF ');
+                req.response.evidenceURLCode = this.utilities.cpvTemplate[req.uuid];
+              } else {
+                console.log('THIS IS OUTSIDE CPV CODE IF ');
+                req.response.evidenceURLCode = formValues[req.uuid.valueOf()];
+              }
               req.response.uuid = null;
             } else if (req.responseDataType === 'DATE') {
               req.response.date = formValues[req.uuid.valueOf()];

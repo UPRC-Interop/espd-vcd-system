@@ -114,6 +114,24 @@
         </mat-form-field>
         <div *ngSwitchCase="'CPVCodes'">
           <!-- TODO cpvs like the classificationCodes -->
+          <mat-form-field class="cpv-chip-list">
+            <mat-chip-list #chipList>
+              <mat-chip color='primary' selected=true *ngFor="let cpv of cpvCodes" [selectable]="selectable"
+                        [removable]="removable" (removed)="remove(cpv)">
+                {{cpv}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+              <input placeholder="CPV Codes: "
+                     [matChipInputFor]="chipList"
+                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                     [matChipInputAddOnBlur]="addOnBlur"
+                     (matChipInputTokenEnd)="add($event)"
+                     (keyup.enter)= 'createChips()'>
+            </mat-chip-list>
+          </mat-form-field>
+
+
+
         </div>
       </div>
     </div>
