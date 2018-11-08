@@ -88,6 +88,8 @@ public class SelfContainedCriteriaTaxonomyResource extends CriteriaTaxonomyResou
             to.setMandatory(from.isMandatory());
             // requirement group type
             to.setType(from.getType());
+            // apply related response value artefact
+            to.setResponseValuesRelatedArtefact(from.getResponseValuesRelatedArtefact());
         }
     }
 
