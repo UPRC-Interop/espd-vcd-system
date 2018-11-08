@@ -71,6 +71,11 @@ task deleteWebAppResources {
     }
 }
 
+task runBackendOnly (type: JavaExec){
+    main = mainClassName
+    classpath = sourceSets.main.runtimeClasspath
+}
+
 task copyWebAppResources {
     doFirst {
         copy {
