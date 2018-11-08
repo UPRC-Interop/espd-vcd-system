@@ -43,6 +43,7 @@ export class UtilitiesService {
   isDividedIntoLots = false;
   projectLots = [];
   lotTemplate = [];
+  cpvTemplate = [];
   type: string;
   // qualificationApplicationType = 'SELF-CONTAINED';
   // qualificationApplicationType = 'REGULATED';
@@ -110,6 +111,14 @@ export class UtilitiesService {
     });
     return reqLot;
     // console.log(reqLot);
+  }
+
+  cpvCodeToString(cpvs: string[]): string {
+    return cpvs.join(',');
+  }
+
+  stringToCpvCode(cpvString: string): string[] {
+    return cpvString.split(',');
   }
 
   // makeDummyESPDRequest(): ESPDRequest {
