@@ -810,21 +810,6 @@ export class DataService {
       });
     }
 
-  eoDetailsFromTOOPFormUpdate() {
-
-    this.EOForm.patchValue({
-      'name': this.EODetails.name,
-      'smeIndicator': this.EODetails.smeIndicator,
-      'postalAddress': {
-        'addressLine1': this.EODetails.postalAddress.addressLine1,
-        'postCode': this.EODetails.postalAddress.postCode,
-        'city': this.EODetails.postalAddress.city,
-        'countryCode': this.EODetails.postalAddress.countryCode,
-      },
-      'id': this.EODetails.id,
-    });
-  }
-
     if (this.EODetails.naturalPersons !== null || this.EODetails.naturalPersons !== undefined) {
       // TODO find better way to handle null fields in naturalperson's objects
       if (this.EODetails.naturalPersons[0].firstName !== null) {
@@ -838,6 +823,21 @@ export class DataService {
     if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
       this.EOForm.reset('');
     }
+  }
+
+  eoDetailsFromTOOPFormUpdate() {
+
+    this.EOForm.patchValue({
+      'name': this.EODetails.name,
+      'smeIndicator': this.EODetails.smeIndicator,
+      'postalAddress': {
+        'addressLine1': this.EODetails.postalAddress.addressLine1,
+        'postCode': this.EODetails.postalAddress.postCode,
+        'city': this.EODetails.postalAddress.city,
+        'countryCode': this.EODetails.postalAddress.countryCode,
+      },
+      'id': this.EODetails.id,
+    });
   }
 
   caDetailsFormUpdate() {

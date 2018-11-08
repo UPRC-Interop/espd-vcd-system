@@ -34,6 +34,7 @@ import {EvaluationMethodType} from '../model/evaluationMethodType.model';
 import {ProjectType} from '../model/projectType.model';
 import {BidType} from '../model/bidType.model';
 import {WeightingType} from '../model/weightingType.model';
+import {ToopCompanyData} from "../model/toopCompanyData.model";
 
 // import {DataService} from '../services/data.service';
 
