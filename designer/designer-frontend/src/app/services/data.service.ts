@@ -39,7 +39,7 @@ import {FormUtilService} from './form-util.service';
 import {UtilitiesService} from './utilities.service';
 import {TranslateService} from '@ngx-translate/core';
 import {Language} from '../model/language.model';
-import {ExportType} from "../export/export-type.enum";
+import {ExportType} from '../export/export-type.enum';
 import {EoIDType} from '../model/eoIDType.model';
 import {EvaluationMethodType} from '../model/evaluationMethodType.model';
 import {CaRelatedCriterion} from '../model/caRelatedCriterion.model';
@@ -104,7 +104,7 @@ export class DataService {
   eoLotCriterion: EoRelatedCriterion[] = null;
   reductionCriteria: ReductionCriterion[] = null;
   language: Language[] = null;
-  selectedLanguage : string = null;
+  selectedLanguage: string = null;
   langTemplate = [];
   langNames = [];
   langISOCodes = [];
@@ -382,7 +382,9 @@ export class DataService {
   selectionSubmit(isSatisfiedALL: boolean) {
 
     /* extract caRelated criteria */
-    this.formUtil.extractFormValuesFromCriteria(this.caRelatedCriteria, this.caRelatedCriteriaForm, this.formUtil.evidenceList);
+    if (this.utilities.qualificationApplicationType === 'selfcontained') {
+      this.formUtil.extractFormValuesFromCriteria(this.caRelatedCriteria, this.caRelatedCriteriaForm, this.formUtil.evidenceList);
+    }
     /* extract exclusion criteria */
     this.formUtil.extractFormValuesFromCriteria(this.exclusionACriteria, this.exclusionACriteriaForm, this.formUtil.evidenceList);
     this.formUtil.extractFormValuesFromCriteria(this.exclusionBCriteria, this.exclusionBCriteriaForm, this.formUtil.evidenceList);
@@ -472,12 +474,13 @@ export class DataService {
         this.openSnackBar(message, action);
       });
   }
+
   selectionEOSubmit(isSatisfiedALL: boolean) {
     this.isSatisfiedALLeo = isSatisfiedALL;
 
   }
 
-  finishEOSubmit(exportType : ExportType) {
+  finishEOSubmit(exportType: ExportType) {
 
     /* extract eoRelated criteria */
     this.formUtil.extractFormValuesFromCriteria(this.eoRelatedACriteria, this.eoRelatedACriteriaForm, this.formUtil.evidenceList);
@@ -485,7 +488,9 @@ export class DataService {
     this.formUtil.extractFormValuesFromCriteria(this.eoRelatedDCriteria, this.eoRelatedDCriteriaForm, this.formUtil.evidenceList);
 
     /* extract caRelated criteria */
-    this.formUtil.extractFormValuesFromCriteria(this.caRelatedCriteria, this.caRelatedCriteriaForm, this.formUtil.evidenceList);
+    if (this.utilities.qualificationApplicationType === 'selfcontained') {
+      this.formUtil.extractFormValuesFromCriteria(this.caRelatedCriteria, this.caRelatedCriteriaForm, this.formUtil.evidenceList);
+    }
 
     /* extract exclusion criteria */
     this.formUtil.extractFormValuesFromCriteria(this.exclusionACriteria, this.exclusionACriteriaForm, this.formUtil.evidenceList);
@@ -589,9 +594,11 @@ export class DataService {
   createHtmlFile(response) {
     this.createFile(response, 'application/html');
   }
+
   createPdfFile(response) {
     this.createFile(response, 'application/pdf');
   }
+
   createXmlFile(response) {
     this.createFile(response, 'application/xml');
   }
@@ -601,8 +608,8 @@ export class DataService {
     this.blob = new Blob([response.body], {type: type});
   }
 
-  isVersionTwo() : boolean {
-    return this.APIService.version === 'v2'
+  isVersionTwo(): boolean {
+    return this.APIService.version === 'v2';
   }
 
   saveFile(blob, fileSuffix: String) {
@@ -661,8 +668,12 @@ export class DataService {
 
           console.log(res.fullCriterionList);
 
-          this.caRelatedCriteria = this.filterCARelatedCriteria(this.OTHER_CA_REGEXP, res.fullCriterionList);
-          this.caRelatedCriteriaForm = this.formUtil.createCARelatedCriterionForm(this.caRelatedCriteria);
+          if (this.utilities.qualificationApplicationType === 'selfcontained') {
+            this.caRelatedCriteria = this.filterCARelatedCriteria(this.OTHER_CA_REGEXP, res.fullCriterionList);
+            this.caRelatedCriteriaForm = this.formUtil.createCARelatedCriterionForm(this.caRelatedCriteria);
+            this.eoLotCriterion = this.filterCARelatedCriteria(this.EO_LOT_REGEXP, res.fullCriterionList);
+          }
+
 
           this.exclusionACriteria = this.filterExclusionCriteria(this.EXCLUSION_CONVICTION_REGEXP, res.fullCriterionList);
           this.exclusionBCriteria = this.filterExclusionCriteria(this.EXCLUSION_CONTRIBUTION_REGEXP, res.fullCriterionList);
@@ -697,7 +708,6 @@ export class DataService {
           this.selectionALLCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionALLCriteria);
 
           this.eoRelatedCriteria = this.filterEoRelatedCriteria(this.EO_RELATED_REGEXP, res.fullCriterionList);
-          this.eoLotCriterion = this.filterCARelatedCriteria(this.EO_LOT_REGEXP, res.fullCriterionList);
           // this.eoLotCriterionForm = this.formUtil.createEORelatedCriterionForm(this.eoLotCriterion);
           this.reductionCriteria = this.filterEoRelatedCriteria(this.REDUCTION_OF_CANDIDATES_REGEXP, res.fullCriterionList);
 
@@ -769,11 +779,14 @@ export class DataService {
 
           console.log(res.fullCriterionList);
 
-          this.caRelatedCriteria = this.filterCARelatedCriteria(this.OTHER_CA_REGEXP, res.fullCriterionList);
-          this.caRelatedCriteriaForm = this.formUtil.createCARelatedCriterionForm(this.caRelatedCriteria);
+          if (this.utilities.qualificationApplicationType === 'selfcontained') {
+            this.caRelatedCriteria = this.filterCARelatedCriteria(this.OTHER_CA_REGEXP, res.fullCriterionList);
+            this.caRelatedCriteriaForm = this.formUtil.createCARelatedCriterionForm(this.caRelatedCriteria);
 
-          this.eoLotCriterion = this.filterCARelatedCriteria(this.EO_LOT_REGEXP, res.fullCriterionList);
-          this.eoLotCriterionForm = this.formUtil.createEORelatedCriterionForm(this.eoLotCriterion);
+            this.eoLotCriterion = this.filterCARelatedCriteria(this.EO_LOT_REGEXP, res.fullCriterionList);
+            this.eoLotCriterionForm = this.formUtil.createEORelatedCriterionForm(this.eoLotCriterion);
+          }
+
 
           this.eoRelatedACriteria = this.filterEoRelatedCriteria(this.EO_RELATED_A_REGEXP, res.fullCriterionList);
           // console.log(this.eoRelatedACriteria);
@@ -1120,6 +1133,9 @@ export class DataService {
             const action = 'close';
             this.openSnackBar(message, action);
           });
+      } else {
+        this.caRelatedCriteria = [];
+        this.eoLotCriterion = [];
       }
 
 
@@ -1355,6 +1371,9 @@ export class DataService {
             const action = 'close';
             this.openSnackBar(message, action);
           });
+      } else {
+        this.caRelatedCriteria = [];
+        this.eoLotCriterion = [];
       }
 
       /* ======================== predefined exclusion criteria ================================== */
@@ -1770,7 +1789,7 @@ export class DataService {
     } else {
       return this.APIService.get_eoRoleType()
         .then(res => {
-          this.eoRoleTypes= res;
+          this.eoRoleTypes = res;
           return Promise.resolve(res);
         })
         .catch(err => {
