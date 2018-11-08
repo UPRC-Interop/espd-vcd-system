@@ -30,7 +30,7 @@ dependencies {
 }
 
 jar {
-    dependsOn "buildWebApp"
+    dependsOn "buildWebAppDeploy"
 
     manifest {
         attributes "Main-Class": "eu.esens.espdvcd.designer.Server"
@@ -92,6 +92,24 @@ task npmInstallWebApp(type: Exec) {
 }
 
 task buildWebApp(type: Exec) {
+    dependsOn "npmInstallWebApp"
+    workingDir "$webappDir"
+    inputs.dir "$webappDir"
+    group = BasePlugin.BUILD_GROUP
+    if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")) {
+        commandLine "ng.cmd", "build"
+    } else {
+        commandLine "ng", "build"
+    }
+    doLast {
+        copy {
+            from "$webappDir/dist"
+            into "$projectDir/src/main/resources/public"
+        }
+    }
+}
+
+task buildWebAppDeploy(type: Exec) {
     dependsOn "npmInstallWebApp"
     workingDir "$webappDir"
     inputs.dir "$webappDir"

@@ -18,6 +18,7 @@ package eu.esens.espdvcd.builder.schema.v2;
 import eu.esens.espdvcd.codelist.enums.ProfileExecutionIDEnum;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.ESPDRequest;
+import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.response.WeightIndicatorResponse;
@@ -53,7 +54,7 @@ public class ESPDRequestSchemaExtractorV2 implements SchemaExtractorV2 {
         // apply global weighting info
         qarType.getWeightScoringMethodologyNote().addAll(modelRequest.getCADetails()
                 .getWeightScoringMethodologyNoteList().stream()
-                .map(note -> createWeightScoringMethodologyNoteType(note))
+                .map(this::createWeightScoringMethodologyNoteType)
                 .collect(Collectors.toList()));
 
         if (modelRequest.getCADetails().getWeightingType() != null) {
@@ -71,8 +72,8 @@ public class ESPDRequestSchemaExtractorV2 implements SchemaExtractorV2 {
 
         // extract criteria
         qarType.getTenderingCriterion().addAll(modelRequest.getFullCriterionList().stream()
-                .filter(cr -> cr.isSelected())
-                .map(cr -> extractTenderingCriterion(cr))
+                .filter(SelectableCriterion::isSelected)
+                .map(this::extractTenderingCriterion)
                 .collect(Collectors.toList()));
 
         // apply Criterion level weighting info
@@ -101,6 +102,7 @@ public class ESPDRequestSchemaExtractorV2 implements SchemaExtractorV2 {
         }
         // Procurement Project Lot is always 0 in Request and not part of the UI
         ProcurementProjectLotType pplt = new ProcurementProjectLotType();
+
         pplt.setID(new IDType());
         pplt.getID().setValue("0");
         pplt.getID().setSchemeAgencyID("EU-COM-GROW");
