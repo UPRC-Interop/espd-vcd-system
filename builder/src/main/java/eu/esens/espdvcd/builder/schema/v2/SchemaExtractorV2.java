@@ -648,6 +648,9 @@ public interface SchemaExtractorV2 {
 
     default EvaluationMethodTypeCodeType createEvaluationMethodTypeCodeType(String code) {
         EvaluationMethodTypeCodeType codeType = new EvaluationMethodTypeCodeType();
+        codeType.setListID("EvaluationMethodType");
+        codeType.setListAgencyID("EU-COM-GROW");
+        codeType.setListVersionID("2.0.2");
         codeType.setValue(code);
         return codeType;
     }
