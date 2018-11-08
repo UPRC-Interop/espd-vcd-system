@@ -36,6 +36,7 @@ import {BidType} from '../model/bidType.model';
 import {WeightingType} from '../model/weightingType.model';
 import {EoRoleType} from '../model/eoRoleType.model';
 import {FinancialRatioType} from '../model/financialRatioType.model';
+import {ToopCompanyData} from "../model/toopCompanyData.model";
 
 // import {DataService} from '../services/data.service';
 
