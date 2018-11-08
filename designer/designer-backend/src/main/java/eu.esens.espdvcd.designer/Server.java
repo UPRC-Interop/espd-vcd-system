@@ -17,11 +17,10 @@ package eu.esens.espdvcd.designer;
 
 import eu.esens.espdvcd.designer.endpoint.*;
 import eu.esens.espdvcd.designer.service.*;
-import eu.esens.espdvcd.designer.util.Message;
-import eu.esens.espdvcd.model.EODetails;
-import eu.esens.espdvcd.schema.SchemaVersion;
 import eu.esens.espdvcd.designer.util.Errors;
 import eu.esens.espdvcd.designer.util.JsonUtil;
+import eu.esens.espdvcd.designer.util.Message;
+import eu.esens.espdvcd.model.EODetails;
 import eu.esens.espdvcd.schema.EDMVersion;
 import spark.Service;
 
@@ -125,20 +124,12 @@ public class Server {
         LOGGER.info("Configuring ImportESPDResponse endpoint...");
         Endpoint importESPDResp = new ImportESPDEndpoint(ImportESPDResponseService.getInstance());
         baseContext.addEndpointWithPath(importESPDResp, "/importESPD/response");
-            LOGGER.info("Configuring ImportESPDResponse endpoint...");
-            Endpoint importESPDResp = new ImportESPDEndpoint(new ESPDResponseToModelService());
-            unversionedContext.addEndpointWithPath(importESPDResp, "/importESPD/response");
 
-            LOGGER.info("Configuring TOOP endpoints...");
-            Endpoint toopRequestEnd = new ToopDataRequestEndpoint();
-            unversionedContext.addEndpointWithPath(toopRequestEnd, "/toopDataRequest");
-            Endpoint toopResponseEnd = new ToopResponseEndpoint();
-            unversionedContext.addEndpointWithPath(toopResponseEnd, "/to-dc");
-
-        } catch (Exception e) {
-            LOGGER.severe("Failed to initialize the endpoints with error " + e.getMessage());
-            System.exit(3);
-        }
+        LOGGER.info("Configuring TOOP endpoints...");
+        Endpoint toopRequestEnd = new ToopDataRequestEndpoint();
+        baseContext.addEndpointWithPath(toopRequestEnd, "/toopDataRequest");
+        Endpoint toopResponseEnd = new ToopResponseEndpoint();
+        baseContext.addEndpointWithPath(toopResponseEnd, "/to-dc");
 
         LOGGER.info("Server is up and running at port " + portToBind);
     }
@@ -150,11 +141,11 @@ public class Server {
         spark.options("/*", (request, response) -> {
 
             String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
-            if (accessControlRequestHeaders != null) {
+            if (accessControlRequestHeaders != null)
                 response.header("Access-Control-Allow-Headers", accessControlRequestHeaders);
 
             String accessControlRequestMethod = request.headers("Access-Control-Request-Method");
-            if (accessControlRequestMethod != null) {
+            if (accessControlRequestMethod != null)
                 response.header("Access-Control-Allow-Methods", accessControlRequestMethod);
 
             return "OK";
