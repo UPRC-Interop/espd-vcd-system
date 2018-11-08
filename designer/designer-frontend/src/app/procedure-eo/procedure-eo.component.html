@@ -114,7 +114,12 @@
           </mat-error>
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="{{'espd.part1.fax' | translate}}" name="CAofficialContactFaxNumber" [(ngModel)]="dataService.ContactingDetails.faxNumber" [disabled]="this.dataService.isReadOnly()">
+          <input matInput placeholder="{{'espd.part1.fax' | translate}}" name="CAofficialContactFaxNumber"
+                 [(ngModel)]="dataService.ContactingDetails.faxNumber" [disabled]="this.dataService.isReadOnly()"
+                 phoneNumber #fax="ngModel">
+          <mat-error *ngIf="fax.invalid">
+            <input-validation-error [formControlErrors]="fax.errors"></input-validation-error>
+          </mat-error>
         </mat-form-field>
         <mat-form-field>
           <input #contactMail="ngModel" matInput placeholder="{{'espd.part1.email' | translate}}"
