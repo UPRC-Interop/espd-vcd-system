@@ -16,7 +16,6 @@
 package eu.esens.espdvcd.builder.schema.v2;
 
 import eu.esens.espdvcd.codelist.enums.EOIndustryClassificationCodeEnum;
-import eu.esens.espdvcd.codelist.enums.ProfileExecutionIDEnum;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.EODetails;
 import eu.esens.espdvcd.model.ESPDRequestDetails;
@@ -55,9 +54,6 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
         if (modelResponse.getCADetails().getProcurementProcedureFileReferenceNo() != null) {
             qarType.setContractFolderID(createContractFolderIDType(modelResponse.getCADetails().getProcurementProcedureFileReferenceNo()));
         }
-//        } else {
-//            qarType.setContractFolderID(createContractFolderIDType("PPID-test1"));
-//        }
 
         qarType.getAdditionalDocumentReference().add(extractCADetailsDocumentReference(modelResponse.getCADetails()));
 
@@ -108,20 +104,26 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
         qarType.setUBLVersionID(createUBL22VersionIdType());
         qarType.setCustomizationID(createCENBIICustomizationIdType("urn:www.cenbii.eu:transaction:biitrdm092:ver3.0"));
         qarType.setVersionID(createVersionIDType("2018.01.01"));
-//        qarType.setProfileExecutionID(createProfileExecutionIDType(ProfileExecutionIDEnum.ESPD_EDM_V2_0_2_REGULATED));
-//        qarType.setQualificationApplicationTypeCode(createQualificationApplicationTypeCodeType(QualificationApplicationTypeEnum.REGULATED));
 
-        if (modelResponse.getDocumentDetails() != null) {
-            switch (modelResponse.getDocumentDetails().getQualificationApplicationType()) {
-                case REGULATED:
-                    qarType.setProfileExecutionID(createProfileExecutionIDType(ProfileExecutionIDEnum.ESPD_EDM_V2_0_2_REGULATED));
-                    break;
-                case SELFCONTAINED:
-                    qarType.setProfileExecutionID(createProfileExecutionIDType(ProfileExecutionIDEnum.ESPD_EDM_V2_0_2_SELFCONTAINED));
-                    break;
-            }
-            qarType.setQualificationApplicationTypeCode(createQualificationApplicationTypeCodeType(modelResponse.getDocumentDetails().getQualificationApplicationType()));
+        if (modelResponse.getDocumentDetails() != null
+                && modelResponse.getDocumentDetails().getQualificationApplicationType() != null) {
+            // Profile Execution ID
+            qarType.setProfileExecutionID(createProfileExecutionIDType(modelResponse
+                    .getDocumentDetails().getQualificationApplicationType()));
+            // Qualification Application Type
+            qarType.setQualificationApplicationTypeCode(createQualificationApplicationTypeCodeType(modelResponse
+                    .getDocumentDetails().getQualificationApplicationType()));
+            // Set Lots
+            qarType.getProcurementProjectLot().addAll(createProcurementProjectLotType(modelResponse
+                            .getDocumentDetails().getQualificationApplicationType() // REGULATED or SELF-CONTAINED
+                    , modelResponse.getCADetails().getProcurementProjectLots()));    // Number of lots
         }
+        // Procedure Code
+        if (modelResponse.getCADetails().getProcurementProcedureType() != null) {
+            qarType.setProcedureCode(createProcedureCodeType(modelResponse
+                    .getCADetails().getProcurementProcedureType()));
+        }
+
         qarType.setCopyIndicator(new CopyIndicatorType());
         qarType.getCopyIndicator().setValue(false);
 

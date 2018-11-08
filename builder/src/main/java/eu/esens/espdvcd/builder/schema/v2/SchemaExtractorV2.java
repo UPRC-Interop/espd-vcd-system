@@ -24,12 +24,16 @@ import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.response.*;
 import eu.espd.schema.v2.pre_award.commonaggregate.*;
 import eu.espd.schema.v2.pre_award.commonbasic.*;
+import eu.espd.schema.v2.pre_award.qualificationapplicationrequest.QualificationApplicationRequestType;
 import eu.espd.schema.v2.unqualifieddatatypes_2.CodeType;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public interface SchemaExtractorV2 {
 
@@ -596,6 +600,25 @@ public interface SchemaExtractorV2 {
         return qaTypeCode;
     }
 
+    default ProfileExecutionIDType createProfileExecutionIDType(QualificationApplicationTypeEnum type) {
+        ProfileExecutionIDType peIdType = new ProfileExecutionIDType();
+        peIdType.setSchemeAgencyID("EU-COM-GROW");
+        peIdType.setSchemeVersionID("2.0.2");
+
+        switch (type) {
+
+            case REGULATED:
+                peIdType.setValue(ProfileExecutionIDEnum.ESPD_EDM_V2_0_2_REGULATED.getValue());
+                break;
+
+            case SELFCONTAINED:
+                peIdType.setValue(ProfileExecutionIDEnum.ESPD_EDM_V2_0_2_SELFCONTAINED.getValue());
+                break;
+
+        }
+        return peIdType;
+    }
+
     /**
      * Compulsory use of the CodeList ProfileExecutionID.
      *
@@ -661,6 +684,53 @@ public interface SchemaExtractorV2 {
         ResponseIndicatorType indicatorType = new ResponseIndicatorType();
         indicatorType.setValue(indicator);
         return indicatorType;
+    }
+
+    default ProcedureCodeType createProcedureCodeType(String code) {
+        ProcedureCodeType codeType = new ProcedureCodeType();
+        codeType.setListID("ProcedureType");
+        codeType.setListAgencyName("EU-COM-OP");
+        codeType.setListVersionID("1.0");
+        codeType.setValue(code);
+        return codeType;
+    }
+
+    /**
+     * The Regulated ESPD requires the presence of one Lot, identified with a '0' to indicate that
+     * the procedure is not divided into Lots. Additional Lots may be specified, in which case each
+     * Lot needs to be identified differently.
+     *
+     * @param type The type of XML ESPD Artefact (REGULATED or SELF-CONTAINED)
+     * @param numberOfLots The number of lots
+     * @return
+     */
+    default List<ProcurementProjectLotType> createProcurementProjectLotType(QualificationApplicationTypeEnum type,
+                                                                            int numberOfLots) {
+
+        List<ProcurementProjectLotType> lotList = new ArrayList<>();
+
+        switch (type) {
+
+            case REGULATED:
+                lotList.add(createProcurementProjectLotType("0"));
+                break;
+
+            case SELFCONTAINED:
+                IntStream.of(numberOfLots)
+                        .forEach(number -> lotList.add(createProcurementProjectLotType("Lot" + number)));
+                break;
+
+        }
+
+        return lotList;
+    }
+
+    default ProcurementProjectLotType createProcurementProjectLotType(String value) {
+        ProcurementProjectLotType lotType = new ProcurementProjectLotType();
+        lotType.setID(new IDType());
+        lotType.getID().setValue(value);
+        lotType.getID().setSchemeAgencyID("EU-COM-GROW");
+        return lotType;
     }
 
     default void applyCAResponseToXML(Requirement rq, TenderingCriterionPropertyType rqType) {

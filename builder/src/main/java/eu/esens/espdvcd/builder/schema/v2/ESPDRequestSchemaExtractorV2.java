@@ -15,7 +15,6 @@
  */
 package eu.esens.espdvcd.builder.schema.v2;
 
-import eu.esens.espdvcd.codelist.enums.ProfileExecutionIDEnum;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.SelectableCriterion;
@@ -23,7 +22,6 @@ import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.response.WeightIndicatorResponse;
 import eu.espd.schema.v2.pre_award.commonaggregate.DocumentReferenceType;
-import eu.espd.schema.v2.pre_award.commonaggregate.ProcurementProjectLotType;
 import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionPropertyType;
 import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionType;
 import eu.espd.schema.v2.pre_award.commonbasic.*;
@@ -89,24 +87,25 @@ public class ESPDRequestSchemaExtractorV2 implements SchemaExtractorV2 {
         // FIXME: version id should be updated here
         qarType.setVersionID(createVersionIDType("2018.01.01"));
 
-        if (modelRequest.getDocumentDetails() != null) {
-            switch (modelRequest.getDocumentDetails().getQualificationApplicationType()) {
-                case REGULATED:
-                    qarType.setProfileExecutionID(createProfileExecutionIDType(ProfileExecutionIDEnum.ESPD_EDM_V2_0_2_REGULATED));
-                    break;
-                case SELFCONTAINED:
-                    qarType.setProfileExecutionID(createProfileExecutionIDType(ProfileExecutionIDEnum.ESPD_EDM_V2_0_2_SELFCONTAINED));
-                    break;
-            }
-            qarType.setQualificationApplicationTypeCode(createQualificationApplicationTypeCodeType(modelRequest.getDocumentDetails().getQualificationApplicationType()));
+        if (modelRequest.getDocumentDetails() != null
+                && modelRequest.getDocumentDetails().getQualificationApplicationType() != null) {
+            // Profile Execution ID
+            qarType.setProfileExecutionID(createProfileExecutionIDType(modelRequest
+                    .getDocumentDetails().getQualificationApplicationType()));
+            // Qualification Application Type
+            qarType.setQualificationApplicationTypeCode(createQualificationApplicationTypeCodeType(modelRequest
+                    .getDocumentDetails().getQualificationApplicationType()));
+            // Set Lots
+            qarType.getProcurementProjectLot().addAll(createProcurementProjectLotType(modelRequest
+                            .getDocumentDetails().getQualificationApplicationType() // REGULATED or SELF-CONTAINED
+                    , modelRequest.getCADetails().getProcurementProjectLots()));    // Number of lots
         }
-        // Procurement Project Lot is always 0 in Request and not part of the UI
-        ProcurementProjectLotType pplt = new ProcurementProjectLotType();
-
-        pplt.setID(new IDType());
-        pplt.getID().setValue("0");
-        pplt.getID().setSchemeAgencyID("EU-COM-GROW");
-        qarType.getProcurementProjectLot().add(pplt);
+        // Procedure Code
+        if (modelRequest.getCADetails() != null
+                && modelRequest.getCADetails().getProcurementProcedureType() != null) {
+            qarType.setProcedureCode(createProcedureCodeType(modelRequest
+                    .getCADetails().getProcurementProcedureType()));
+        }
 
         qarType.setCopyIndicator(new CopyIndicatorType());
         qarType.getCopyIndicator().setValue(false);
