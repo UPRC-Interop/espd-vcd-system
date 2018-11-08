@@ -14,18 +14,23 @@
 /// limitations under the License.
 ///
 
-import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, OnChanges, OnInit, QueryList, SimpleChanges, ViewChildren} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {ProcedureType} from '../model/procedureType.model';
 import {Country} from '../model/country.model';
-import {NgForm} from '@angular/forms/forms';
+import {NgForm} from '@angular/forms';
+import {ValidationService} from "../services/validation.service";
+import {BaseStep} from "../base/base-step";
+import {WizardSteps} from "../base/wizard-steps.enum";
 
 @Component({
   selector: 'app-procedure',
   templateUrl: './procedure.component.html',
   styleUrls: ['./procedure.component.css']
 })
-export class ProcedureComponent implements OnInit, OnChanges {
+export class ProcedureComponent implements OnInit, OnChanges, BaseStep {
+
+  @ViewChildren('form') forms: QueryList<NgForm>;
 
   countries: Country[] = null;
   procedureTypes: ProcedureType[] = null;
@@ -33,7 +38,10 @@ export class ProcedureComponent implements OnInit, OnChanges {
   // @Input() reductionCriteria: ReductionCriterion[];
 
 
-  constructor(public dataService: DataService) {
+  constructor(
+    public dataService: DataService,
+    private validationService: ValidationService
+    ) {
   }
 
   ngOnInit() {
@@ -56,25 +64,6 @@ export class ProcedureComponent implements OnInit, OnChanges {
         console.log(err);
       });
 
-    // Get predefined eoRelated Criteria
-    // this.dataService.getEoRelatedCriteria()
-    //   .then(res => {
-    //     this.eoRelatedCriteria = res;
-    //     // console.log(this.eoRelatedCriteria);
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
-
-    // this.dataService.getReductionCriteria()
-    //   .then(res => {
-    //     this.reductionCriteria = res;
-    //     // console.log(this.reductionCriteria);
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
-
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -93,5 +82,11 @@ export class ProcedureComponent implements OnInit, OnChanges {
     // this.dataService.procedureSubmit(this.eoRelatedCriteria, this.reductionCriteria);
   }
 
+  getWizardStep(): WizardSteps {
+    return WizardSteps.PROCEDURE;
+  }
 
+  public areFormsValid(): boolean {
+    return this.validationService.validateFormsInComponent(this.forms);
+  }
 }

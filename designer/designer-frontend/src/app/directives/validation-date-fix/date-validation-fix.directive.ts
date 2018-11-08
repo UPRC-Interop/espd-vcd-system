@@ -18,7 +18,7 @@ export class DateValidationFixDirective {
 
   @HostListener('blur') onFocusLost() {
     let nativeElementValue = this.elementRef.nativeElement.value;
-    if (this.formControl.value === null && !StringHelperService.isBlank(nativeElementValue)) {
+    if ((this.formControl.value === null || this.formControl.value === "") && !StringHelperService.isBlank(nativeElementValue)) {
       this.formControl.setErrors({'matDatepickerParse': true});
     }
     else {

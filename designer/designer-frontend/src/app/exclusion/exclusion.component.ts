@@ -14,26 +14,36 @@
 /// limitations under the License.
 ///
 
-import {Component, Input, OnInit} from '@angular/core';
-import {ApicallService} from '../services/apicall.service';
-import {ExclusionCriteria} from '../model/exclusionCriteria.model';
-import {LegislationReference} from '../model/legislationReference.model';
+import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {DataService} from '../services/data.service';
-import {NgForm} from '@angular/forms/forms';
+import {NgForm} from '@angular/forms';
+import {ValidationService} from "../services/validation.service";
+import {BaseStep} from "../base/base-step";
+import {WizardSteps} from "../base/wizard-steps.enum";
 
 @Component({
   selector: 'app-exclusion',
   templateUrl: './exclusion.component.html',
   styleUrls: ['./exclusion.component.css']
 })
-export class ExclusionComponent implements OnInit {
+export class ExclusionComponent implements OnInit, BaseStep {
 
+  @ViewChildren('form') forms: QueryList<NgForm>;
 
-  constructor(public dataService: DataService) {
+  constructor(
+    public dataService: DataService,
+    private validationService: ValidationService
+    ) {
   }
 
   ngOnInit() {
   }
 
+  getWizardStep(): WizardSteps {
+    return WizardSteps.EXCLUSION;
+  }
 
+  public areFormsValid(): boolean {
+    return this.validationService.validateFormsInComponent(this.forms);
+  }
 }

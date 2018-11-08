@@ -18,10 +18,7 @@ package eu.esens.espdvcd.designer.service;
 import eu.esens.espdvcd.codelist.CodelistsV1;
 import eu.esens.espdvcd.codelist.CodelistsV2;
 import eu.esens.espdvcd.designer.util.CodelistItem;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.rules.ExpectedException;
 
 import java.util.*;
@@ -60,6 +57,7 @@ public class CodelistsServiceTest {
         codelistsV2Service.getCodelist("blahBlah");
     }
 
+    @Ignore
     @Test
     public void testV1Codelist() {
         Map<String, String> theV1Codelist = CodelistsV1.Currency.getDataMap();
@@ -69,6 +67,7 @@ public class CodelistsServiceTest {
         Assert.assertArrayEquals(theCodelistItemList.toArray(), codelistsV1Service.getCodelist("Currency").toArray());
     }
 
+    @Ignore
     @Test
     public void testV2TranslatedCodelist() {
         Map<String, String> theV2Codelist = CodelistsV2.Currency.getDataMap("ell");
@@ -78,6 +77,7 @@ public class CodelistsServiceTest {
         Assert.assertArrayEquals(theCodelistItemList.toArray(), codelistsV2Service.getTranslatedCodelist("Currency", "ell").toArray());
     }
 
+    @Ignore
     @Test
     public void testV2Codelist() {
         Map<String, String> theV2Codelist = CodelistsV2.Currency.getDataMap();

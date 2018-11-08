@@ -382,9 +382,9 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
 
             case PERCENTAGE:
                 PercentageResponse pResp = new PercentageResponse();
-                if (res.getResponseValue().get(0).getResponseNumeric() != null &&
-                        res.getResponseValue().get(0).getResponseNumeric().getValue() != null) {
-                    pResp.setPercentage(res.getResponseValue().get(0).getResponseNumeric().getValue().floatValue());
+                if (res.getResponseValue().get(0).getResponseQuantity() != null &&
+                        res.getResponseValue().get(0).getResponseQuantity().getValue() != null) {
+                    pResp.setPercentage(res.getResponseValue().get(0).getResponseQuantity().getValue().floatValue());
                 }
                 applyValidatedCriterionPropertyID(res.getValidatedCriterionPropertyID(), pResp);
                 applyConfidentialityLevelCode(res.getConfidentialityLevelCode(), pResp);

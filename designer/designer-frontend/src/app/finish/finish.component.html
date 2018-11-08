@@ -18,7 +18,7 @@
 -->
 <h4 translate>espd.part5.header</h4>
 
-<form #f="ngForm">
+<form #form="ngForm">
 
   <mat-accordion multi="true">
     <mat-expansion-panel expanded="true">
@@ -52,7 +52,9 @@
 
   <button mat-raised-button color="primary" matStepperPrevious [innerHTML]="'espd.gui.previous' | translate"></button>
   <ng-container *ngIf="!this.dataService.isReadOnly()">
-    <button type="submit" mat-raised-button color="primary" matStepperNext (click)="exportFile()" [innerHTML]="'espd.part5.export' | translate"></button>
+    <button type="submit" mat-raised-button color="primary" matStepperNext (click)="exportXmlFile()">{{'espd.part5.export' | translate}} (XML)</button>
+    <button type="submit" *ngIf="this.dataService.isVersionTwo()" mat-raised-button color="primary" matStepperNext (click)="exportHtmlFile()">{{'espd.part5.export' | translate}} (HTML)</button>
+    <button type="submit" *ngIf="this.dataService.isVersionTwo()" mat-raised-button color="primary" matStepperNext (click)="exportPdfFile()">{{'espd.part5.export' | translate}} (PDF)</button>
   </ng-container>
 
   <!--<button type="submit" mat-raised-button color="primary" matStepperNext (click)="exportFileV2()">Export V2</button>-->

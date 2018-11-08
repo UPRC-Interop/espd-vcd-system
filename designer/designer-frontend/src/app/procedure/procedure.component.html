@@ -17,7 +17,7 @@
 
 -->
 <h4 translate>espd.part1.header</h4>
-<form #f="ngForm">
+<form #form="ngForm">
   <mat-accordion multi="true">
     <mat-expansion-panel expanded="true">
       <mat-expansion-panel-header>
@@ -180,7 +180,7 @@
     </mat-expansion-panel>
   </mat-accordion>
   <button mat-raised-button color="primary" matStepperPrevious>{{'espd.gui.previous' | translate}}</button>
-  <button type="button" mat-raised-button color="primary" matStepperNext (click)="onProcedureSubmit(f)">
+  <button type="button" mat-raised-button color="primary" matStepperNext (click)="onProcedureSubmit(form)">
     {{'espd.gui.next' | translate}}
   </button>
 </form>
