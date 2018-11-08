@@ -6,11 +6,9 @@ import com.helger.commons.ValueEnforcer;
 import com.helger.commons.io.resourceprovider.DefaultResourceProvider;
 import com.helger.commons.io.stream.NonBlockingByteArrayOutputStream;
 import com.helger.datetime.util.PDTXMLConverter;
-import eu.esens.espdvcd.designer.util.Config;
+import eu.esens.espdvcd.designer.util.*;
 import eu.esens.espdvcd.designer.model.ToopDataRequest;
-import eu.esens.espdvcd.designer.util.HttpClientInvoker;
 
-import eu.esens.espdvcd.designer.util.Message;
 import eu.esens.espdvcd.model.EODetails;
 import eu.toop.commons.codelist.EPredefinedDocumentTypeIdentifier;
 import eu.toop.commons.codelist.EPredefinedProcessIdentifier;
@@ -48,17 +46,11 @@ public class ToopDataRequestEndpoint extends Endpoint {
         spark.path(basePath, () -> {
             spark.get("", ((request, response) -> {
                 response.status(405);
-                return "You need to POST a Toop data request.";
-            }));
+                return Errors.standardError(405,"You need to POST a Toop data request.");
+            }), JsonUtil.json());
 
-            spark.get("/", ((request, response) -> {
-                response.status(405);
-                return "You need to POST a Toop data request.";
-            }));
-
-            spark.post("", this::postRequest);
-
-            spark.post("/", this::postRequest);
+            spark.post("", this::postRequest, JsonUtil.json());
+            spark.post("/", this::postRequest, JsonUtil.json());
 
         });
     }
@@ -86,7 +78,7 @@ public class ToopDataRequestEndpoint extends Endpoint {
                 LOGGER.info("Got response from other thread!");
                 LOGGER.info("Sending response.");
                 TOOP_RESPONSE_MAP.remove(dataConsumerID);
-                return WRITER.writeValueAsString(toopDetails);
+                return toopDetails;
             }
         }
     }

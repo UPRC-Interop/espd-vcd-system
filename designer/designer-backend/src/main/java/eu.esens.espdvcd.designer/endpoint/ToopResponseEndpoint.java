@@ -2,6 +2,8 @@ package eu.esens.espdvcd.designer.endpoint;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.io.Files;
+import eu.esens.espdvcd.designer.util.Errors;
+import eu.esens.espdvcd.designer.util.JsonUtil;
 import eu.esens.espdvcd.designer.util.Message;
 import eu.esens.espdvcd.model.EODetails;
 import eu.esens.espdvcd.model.PostalAddress;
@@ -27,13 +29,8 @@ public class ToopResponseEndpoint extends Endpoint {
         spark.path(basePath, () -> {
             spark.get("", ((request, response) -> {
                 response.status(405);
-                return "You need to POST an ASIC container.";
-            }));
-
-            spark.get("/", ((request, response) -> {
-                response.status(405);
-                return "You need to POST an ASIC container.";
-            }));
+                return Errors.standardError(405,"You need to POST an ASIC container.");
+            }), JsonUtil.json());
 
             spark.post("", this::postRequest);
 
