@@ -10,14 +10,14 @@ import java.io.InputStream;
 
 import static eu.esens.espdvcd.designer.util.CriteriaUtil.hasNullCriterion;
 
-public enum SelfContainedExportESPDV2Service implements ExportESPDService {
+public enum SelfContainedExportESPDV2Service {
     INSTANCE;
 
     public static SelfContainedExportESPDV2Service getInstance() {
         return INSTANCE;
     }
 
-    @Override
+//    @Override
     public InputStream exportESPDRequestAsInputStream(ESPDRequest model) throws ValidationException {
         if (hasNullCriterion(model.getFullCriterionList()))
             throw new ValidationException("Null criteria are not permitted.");
@@ -25,7 +25,7 @@ public enum SelfContainedExportESPDV2Service implements ExportESPDService {
 //        throw new MethodNotFoundException("Not yet implemented");
     }
 
-    @Override
+//    @Override
     public String exportESPDRequestAsString(ESPDRequest model) throws ValidationException {
 //        if (hasNullCriterion(model.getFullCriterionList()))
 //            throw new ValidationException("Null criteria are not permitted.");
@@ -33,7 +33,7 @@ public enum SelfContainedExportESPDV2Service implements ExportESPDService {
         throw new MethodNotFoundException("Not yet implemented");
     }
 
-    @Override
+//    @Override
     public InputStream exportESPDResponseAsInputStream(ESPDResponse model) throws ValidationException {
 //        if (hasNullCriterion(model.getFullCriterionList()))
 //            throw new ValidationException("Null criteria are not permitted.");
@@ -41,7 +41,7 @@ public enum SelfContainedExportESPDV2Service implements ExportESPDService {
         throw new MethodNotFoundException("Not yet implemented");
     }
 
-    @Override
+//    @Override
     public String exportESPDResponseAsString(ESPDResponse model) throws ValidationException {
 //        if (hasNullCriterion(model.getFullCriterionList()))
 //            throw new ValidationException("Null criteria are not permitted.");

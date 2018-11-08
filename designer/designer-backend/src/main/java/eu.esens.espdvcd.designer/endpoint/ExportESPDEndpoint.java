@@ -53,10 +53,10 @@ public class ExportESPDEndpoint extends Endpoint {
         MAPPER.registerModule(new SimpleModule().addDeserializer(Requirement.class, new RequirementDeserialiser(version)));
         switch (version) {
             case V1:
-                this.service = new RegulatedExportESPDV1Service();
+                this.service = RegulatedExportESPDV1Service.getInstance();
                 break;
             case V2:
-                this.service = new RegulatedExportESPDV2Service();
+                this.service = RegulatedExportESPDV2Service.getInstance();
                 break;
             default:
                 throw new IllegalArgumentException("Version supplied cannot be null.");

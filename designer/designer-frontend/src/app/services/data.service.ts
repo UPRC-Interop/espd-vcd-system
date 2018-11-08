@@ -615,9 +615,9 @@ export class DataService {
     } else if (this.utilities.isEO && this.APIService.version === 'v2' && this.utilities.qualificationApplicationType === 'regulated') {
       var filename = 'espd-response-v2' + fileSuffix;
     } else if (this.utilities.isCA && this.utilities.qualificationApplicationType === 'selfcontained') {
-      var filename = 'espd-self-contained-request' +filesuffix;
+      var filename = 'espd-self-contained-request' + fileSuffix;
     } else if (this.utilities.isEO && this.utilities.qualificationApplicationType === 'selfcontained') {
-      var filename = 'espd-self-contained-response' + filesuffix;
+      var filename = 'espd-self-contained-response' + fileSuffix;
     }
     saveAs(blob, filename);
   }
