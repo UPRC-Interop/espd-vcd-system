@@ -57,7 +57,8 @@ export class RequirementComponent implements OnInit, OnChanges {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
   @ViewChild('lots') lots: MatSelectionList;
-  cpvCodes: string[] = ['chip1', 'chip2'];
+  cpvCodes: string[] = [];
+  cpvCodeString: string;
 
   constructor(public dataService: DataService, public APIService: ApicallService, public utilities: UtilitiesService) {
   }
@@ -159,22 +160,25 @@ export class RequirementComponent implements OnInit, OnChanges {
     }
 
     /* SELF-CONTAINED: CODE with CPVCodes as responseValuesRelatedArtefact*/
-    // if (this.req.responseDataType === 'CODE' && this.req.responseValuesRelatedArtefact === 'CPVCodes') {
-    //   console.log('TEEEEEEEEEEEEEEEEST');
-    //   // console.log(this.form.get(this.req.uuid).value);
-    //   console.log(this.form.get(this.req.uuid).valueChanges);
-    //   this.form.get(this.req.uuid)
-    //     .valueChanges
-    //     .subscribe(x => {
-    //       console.log(x);
-    //     });
-    // }
+    if (this.req.responseDataType === 'CODE' && this.req.responseValuesRelatedArtefact === 'CPVCodes') {
+      // console.log(this.form.get(this.req.uuid).value);
+      // this.form.get(this.req.uuid)
+      //   .valueChanges
+      //   .subscribe(x => {
+      //     console.log(x);
+      //   });
+    }
+
 
   }
 
+  /* SELF-CONTAINED: CODE with CPVCodes as responseValuesRelatedArtefact */
   createChips() {
     console.log('CHIPS DEMO');
     console.log(this.cpvCodes);
+    this.utilities.cpvTemplate[this.req.uuid] = this.utilities.cpvCodeToString(this.cpvCodes);
+    console.log(this.utilities.cpvTemplate);
+    // console.log(this.utilities.cpvTemplate['0157cebc-4ba4-4d65-9a6e-3cd5d57a08fb-34']);
   }
 
 
