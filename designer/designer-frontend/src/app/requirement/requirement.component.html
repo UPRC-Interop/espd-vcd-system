@@ -20,11 +20,28 @@
 
 
   <div [ngSwitch]="req.responseDataType">
-
     <mat-form-field *ngSwitchDefault>
       <label [attr.for]="req.uuid">{{req.description}}</label>
       <br>
       <input matInput [formControlName]="req.uuid" [id]="req.uuid" >
+    </mat-form-field>
+
+    <mat-form-field *ngSwitchCase="'QUANTITY_YEAR'">
+      <label [attr.for]="req.uuid">{{req.description}}</label>
+      <br>
+      <input matInput [formControlName]="req.uuid" [id]="req.uuid" integer>
+      <mat-error *ngIf="form.get(req.uuid).invalid">
+        <input-validation-error [formControlErrors]="form.get(req.uuid).errors"></input-validation-error>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field *ngSwitchCase="'QUANTITY_INTEGER'">
+      <label [attr.for]="req.uuid">{{req.description}}</label>
+      <br>
+      <input matInput [formControlName]="req.uuid" [id]="req.uuid" integer>
+      <mat-error *ngIf="form.get(req.uuid).invalid">
+        <input-validation-error [formControlErrors]="form.get(req.uuid).errors"></input-validation-error>
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field *ngSwitchCase="'DATE'">
@@ -98,7 +115,10 @@
       <label [attr.for]="req.uuid">{{req.description}}</label>
       <br>
       <mat-form-field>
-        <input matInput [formControlName]="req.uuid" [id]="req.uuid" >
+        <input matInput [formControlName]="req.uuid" [id]="req.uuid" integer>
+        <mat-error *ngIf="form.get(req.uuid).invalid">
+          <input-validation-error [formControlErrors]="form.get(req.uuid).errors"></input-validation-error>
+        </mat-error>
       </mat-form-field>
       <mat-form-field>
         <mat-select [formControlName]="req.uuid+'currency'" [id]="req.uuid+'currency'">
