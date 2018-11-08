@@ -46,6 +46,9 @@ import {ProjectType} from '../model/projectType.model';
 import {BidType} from '../model/bidType.model';
 import {WeightingType} from '../model/weightingType.model';
 import {DocumentDetails} from '../model/documentDetails.model';
+import {EoRoleType} from '../model/eoRoleType.model';
+import {Amount} from '../model/amount.model';
+import {FinancialRatioType} from '../model/financialRatioType.model';
 
 @Injectable()
 export class DataService {
@@ -64,19 +67,22 @@ export class DataService {
   SELECTION_CERTIFICATES_REGEXP: RegExp = /^CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY.CERTIFICATES.+/;
 
   EO_RELATED_REGEXP: RegExp = /(?!.*MEETS_THE_OBJECTIVE*)^CRITERION.OTHER.EO_DATA.+/;
-  EO_RELATED_A_REGEXP: RegExp = /(^CRITERION.OTHER.EO_DATA.REGISTERED_IN_OFFICIAL_LIST*)|(^CRITERION.OTHER.EO_DATA.SHELTERED_WORKSHOP*)|(^CRITERION.OTHER.EO_DATA.TOGETHER_WITH_OTHERS*)/;
+  EO_RELATED_A_REGEXP: RegExp = /(^CRITERION.OTHER.EO_DATA.REGISTERED_IN_OFFICIAL_LIST*)|(^CRITERION.OTHER.EO_DATA.SHELTERED_WORKSHOP*)|(^CRITERION.OTHER.EO_DATA.TOGETHER_WITH_OTHERS*)|(^CRITERION.OTHER.EO_DATA.CONTRIBUTIONS_CERTIFICATES*)/;
   EO_RELATED_C_REGEXP: RegExp = /^CRITERION.OTHER.EO_DATA.RELIES_ON_OTHER_CAPACITIES*/;
   EO_RELATED_D_REGEXP: RegExp = /^CRITERION.OTHER.EO_DATA.SUBCONTRACTS_WITH_THIRD_PARTIES*/;
   REDUCTION_OF_CANDIDATES_REGEXP: RegExp = /^CRITERION.OTHER.EO_DATA.MEETS_THE_OBJECTIVE*/;
 
   OTHER_CA_REGEXP: RegExp = /^CRITERION.OTHER.CA_DATA.+/;
+  EO_LOT_REGEXP: RegExp = /^CRITERION.OTHER.EO_DATA.LOTS_TENDERED/;
 
   countries: Country[] = null;
   procedureTypes: ProcedureType[] = null;
   projectTypes: ProjectType[] = null;
   bidTypes: BidType[] = null;
+  eoRoleTypes: EoRoleType[] = null;
   currency: Currency[] = null;
   eoIDType: EoIDType[] = null;
+  financialRatioTypes: FinancialRatioType[] = null;
   weightingType: WeightingType[] = null;
   evaluationMethodType: EvaluationMethodType[] = null;
   exclusionACriteria: ExclusionCriteria[] = null;
@@ -94,6 +100,7 @@ export class DataService {
   eoRelatedACriteria: EoRelatedCriterion[] = null;
   eoRelatedCCriteria: EoRelatedCriterion[] = null;
   eoRelatedDCriteria: EoRelatedCriterion[] = null;
+  eoLotCriterion: EoRelatedCriterion[] = null;
   reductionCriteria: ReductionCriterion[] = null;
   language: Language[] = null;
   langTemplate = [];
@@ -114,6 +121,7 @@ export class DataService {
   EODetails: EoDetails = new EoDetails();
   PostalAddress: PostalAddress = new PostalAddress();
   ContactingDetails: ContactingDetails = new ContactingDetails();
+  generalTurnover: Amount = new Amount();
   documentDetails: DocumentDetails = new DocumentDetails();
   espdRequest: ESPDRequest;
   espdResponse: ESPDResponse;
@@ -129,6 +137,7 @@ export class DataService {
   public eoRelatedACriteriaForm: FormGroup = null;
   public eoRelatedCCriteriaForm: FormGroup = null;
   public eoRelatedDCriteriaForm: FormGroup = null;
+  public eoLotCriterionForm: FormGroup = null;
 
   public caRelatedCriteriaForm: FormGroup = null;
 
@@ -523,6 +532,9 @@ export class DataService {
     if (filesToUpload.length > 0 && role === 'CA') {
       this.APIService.postFile(filesToUpload)
         .then(res => {
+          /* DUMMY ESPD for testing */
+          // res = this.utilities.makeDummyESPDRequest();
+          // console.log(res);
           console.log('REUSE EPSD');
           this.APIService.version = res.documentDetails.version.toLowerCase();
           /* SELF-CONTAINED: if a self-contained artifact is imported then the version is v2 */
@@ -553,7 +565,6 @@ export class DataService {
           console.log(res.fullCriterionList);
 
           this.caRelatedCriteria = this.filterCARelatedCriteria(this.OTHER_CA_REGEXP, res.fullCriterionList);
-
           this.caRelatedCriteriaForm = this.formUtil.createCARelatedCriterionForm(this.caRelatedCriteria);
 
           this.exclusionACriteria = this.filterExclusionCriteria(this.EXCLUSION_CONVICTION_REGEXP, res.fullCriterionList);
@@ -589,6 +600,8 @@ export class DataService {
           this.selectionALLCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionALLCriteria);
 
           this.eoRelatedCriteria = this.filterEoRelatedCriteria(this.EO_RELATED_REGEXP, res.fullCriterionList);
+          this.eoLotCriterion = this.filterCARelatedCriteria(this.EO_LOT_REGEXP, res.fullCriterionList);
+          // this.eoLotCriterionForm = this.formUtil.createEORelatedCriterionForm(this.eoLotCriterion);
           this.reductionCriteria = this.filterEoRelatedCriteria(this.REDUCTION_OF_CANDIDATES_REGEXP, res.fullCriterionList);
 
           // create requirementGroup template objects required for multiple instances (cardinalities) function
@@ -622,15 +635,26 @@ export class DataService {
           this.PostalAddress = res.cadetails.postalAddress;
           this.ContactingDetails = res.cadetails.contactingDetails;
           this.receivedNoticeNumber = res.cadetails.receivedNoticeNumber;
-          if (this.utilities.qualificationApplicationType === 'selfcontained') {
-            this.CADetails.classificationCodes = res.cadetails.classificationCodes;
-          }
           this.selectedCountry = this.CADetails.cacountry;
           this.EODetails = res.eodetails;
           console.log(this.EODetails);
           console.log(this.EODetails.naturalPersons);
           // console.log(this.EODetails.naturalPersons['birthDate']);
           this.selectedEOCountry = this.EODetails.postalAddress.countryCode;
+          if (this.utilities.qualificationApplicationType === 'selfcontained') {
+            this.CADetails.classificationCodes = res.cadetails.classificationCodes;
+            // this.EODetails.generalTurnover.amount = res.eodetails.generalTurnover.amount;
+            // this.EODetails.generalTurnover.currency = res.eodetails.generalTurnover.currency;
+            if (res.eodetails.generalTurnover !== null || res.eodetails.generalTurnover !== undefined) {
+              this.generalTurnover = res.eodetails.generalTurnover;
+            } else if (res.eodetails.generalTurnover === null) {
+              this.generalTurnover = new Amount();
+              // this.generalTurnover.amount = 0;
+              // this.generalTurnover.currency = '';
+
+              this.EODetails.generalTurnover = this.generalTurnover;
+            }
+          }
 
           // get evidence list only in v2
           if (this.APIService.version === 'v2') {
@@ -650,6 +674,9 @@ export class DataService {
 
           this.caRelatedCriteria = this.filterCARelatedCriteria(this.OTHER_CA_REGEXP, res.fullCriterionList);
           this.caRelatedCriteriaForm = this.formUtil.createCARelatedCriterionForm(this.caRelatedCriteria);
+
+          this.eoLotCriterion = this.filterCARelatedCriteria(this.EO_LOT_REGEXP, res.fullCriterionList);
+          this.eoLotCriterionForm = this.formUtil.createEORelatedCriterionForm(this.eoLotCriterion);
 
           this.eoRelatedACriteria = this.filterEoRelatedCriteria(this.EO_RELATED_A_REGEXP, res.fullCriterionList);
           // console.log(this.eoRelatedACriteria);
@@ -788,6 +815,8 @@ export class DataService {
     this.EOForm.patchValue({
       'name': this.EODetails.name,
       'smeIndicator': this.EODetails.smeIndicator,
+      'eoRole': this.EODetails.eoRole,
+      'employeeQuantity': this.EODetails.employeeQuantity,
       'postalAddress': {
         'addressLine1': this.EODetails.postalAddress.addressLine1,
         'postCode': this.EODetails.postalAddress.postCode,
@@ -798,6 +827,15 @@ export class DataService {
       'webSiteURI': this.EODetails.webSiteURI,
       'procurementProjectLot': this.EODetails.procurementProjectLot
     });
+
+    if (this.EODetails.generalTurnover !== null && this.EODetails.generalTurnover !== undefined) {
+      this.EOForm.patchValue({
+        'generalTurnover': {
+          'amount': this.EODetails.generalTurnover.amount,
+          'currency': this.EODetails.generalTurnover.currency
+        }
+      });
+    }
 
     if (this.EODetails.contactingDetails !== null) {
       this.EOForm.patchValue({
@@ -978,6 +1016,20 @@ export class DataService {
           .then(res => {
             this.caRelatedCriteria = res;
             this.caRelatedCriteriaForm = this.formUtil.createCARelatedCriterionForm(this.caRelatedCriteria);
+            // console.log(this.caRelatedCriteria);
+          })
+          .catch(err => {
+            console.log(err);
+            const message: string = err.error +
+              ' ' + err.message;
+            const action = 'close';
+            this.openSnackBar(message, action);
+          });
+
+        this.getEOLotCriterion()
+          .then(res => {
+            this.eoLotCriterion = res;
+            this.eoLotCriterionForm = this.formUtil.createEORelatedCriterionForm(this.eoLotCriterion);
             // console.log(this.caRelatedCriteria);
           })
           .catch(err => {
@@ -1199,6 +1251,21 @@ export class DataService {
             /* [cardinalities]: create template requirementGroup */
             this.formUtil.createTemplateReqGroups(this.caRelatedCriteria);
             // console.log(this.caRelatedCriteria);
+          })
+          .catch(err => {
+            console.log(err);
+            const message: string = err.error +
+              ' ' + err.message;
+            const action = 'close';
+            this.openSnackBar(message, action);
+          });
+
+
+        /* SELF-CONTAINED: OTHER_EO LOT TENDERED CRITERION */
+        this.getEOLotCriterion()
+          .then(res => {
+            this.eoLotCriterion = res;
+            this.eoLotCriterionForm = this.formUtil.createEORelatedCriterionForm(this.eoLotCriterion);
           })
           .catch(err => {
             console.log(err);
@@ -1575,6 +1642,26 @@ export class DataService {
     }
   }
 
+  getFinancialRatioTypes(): Promise<FinancialRatioType[]> {
+    if (this.financialRatioTypes != null) {
+      return Promise.resolve(this.financialRatioTypes);
+    } else {
+      return this.APIService.get_financialRatioType()
+        .then(res => {
+          this.financialRatioTypes = res;
+          return Promise.resolve(res);
+        })
+        .catch(err => {
+          console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
+          return Promise.reject(err);
+        });
+    }
+  }
+
   getWeightingType(): Promise<WeightingType[]> {
     if (this.weightingType != null) {
       return Promise.resolve(this.weightingType);
@@ -1582,6 +1669,26 @@ export class DataService {
       return this.APIService.get_WeightingType()
         .then(res => {
           this.weightingType = res;
+          return Promise.resolve(res);
+        })
+        .catch(err => {
+          console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
+          return Promise.reject(err);
+        });
+    }
+  }
+
+  getEORoleTypes(): Promise<EoRoleType[]> {
+    if (this.eoRoleTypes != null) {
+      return Promise.resolve(this.eoRoleTypes);
+    } else {
+      return this.APIService.get_eoRoleType()
+        .then(res => {
+          this.eoRoleTypes= res;
           return Promise.resolve(res);
         })
         .catch(err => {
@@ -1669,6 +1776,27 @@ export class DataService {
         .then(
           res => {
             this.eoRelatedDCriteria = res;
+            return Promise.resolve(res);
+          }
+        ).catch(err => {
+          console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.openSnackBar(message, action);
+          return Promise.reject(err);
+        });
+    }
+  }
+
+  getEOLotCriterion(): Promise<EoRelatedCriterion[]> {
+    if (this.eoLotCriterion != null) {
+      return Promise.resolve(this.eoLotCriterion);
+    } else {
+      return this.APIService.getEO_LotCriterion()
+        .then(
+          res => {
+            this.eoLotCriterion = res;
             return Promise.resolve(res);
           }
         ).catch(err => {

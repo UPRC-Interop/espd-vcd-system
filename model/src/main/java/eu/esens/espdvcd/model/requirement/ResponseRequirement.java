@@ -46,9 +46,9 @@ public class ResponseRequirement extends RequestRequirement {
      */
     private Response response;
 
-    public ResponseRequirement(@JsonProperty("ID") String ID,
-                               @JsonProperty("responseDataType") ResponseTypeEnum responseDataType,
-                               @JsonProperty("description") String description) {
+    public ResponseRequirement(String ID,
+                               ResponseTypeEnum responseDataType,
+                               String description) {
         super(ID, responseDataType, description);
     }
 

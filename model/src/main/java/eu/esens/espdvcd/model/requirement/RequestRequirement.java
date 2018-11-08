@@ -88,9 +88,9 @@ public class RequestRequirement implements Requirement {
 
     private String responseValuesRelatedArtefact;
 
-    public RequestRequirement(@JsonProperty("ID") String ID,
-                              @JsonProperty("responseDataType") ResponseTypeEnum responseDataType,
-                              @JsonProperty("description") String description) {
+    public RequestRequirement(String ID,
+                              ResponseTypeEnum responseDataType,
+                              String description) {
         this.ID = ID;
         this.responseDataType = responseDataType;
         this.description = description;

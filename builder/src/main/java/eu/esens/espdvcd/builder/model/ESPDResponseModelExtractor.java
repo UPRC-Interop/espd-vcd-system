@@ -293,20 +293,6 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
         return r;
     }
 
-    private void applyValidatedCriterionPropertyID(final ValidatedCriterionPropertyIDType vcpIDType, final Response resp) {
-
-        if (vcpIDType != null && vcpIDType.getValue() != null) {
-            resp.setValidatedCriterionPropertyID(vcpIDType.getValue());
-        }
-    }
-
-    private void applyConfidentialityLevelCode(final ConfidentialityLevelCodeType clcType, final Response resp) {
-
-        if (clcType != null && clcType.getValue() != null) {
-            resp.setConfidentialityLevelCode(clcType.getValue());
-        }
-    }
-
     public Response extractResponse(TenderingCriterionResponseType responseType, ResponseTypeEnum theType,
                                     TenderingCriterionType criterionType) {
 
@@ -319,7 +305,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 }
                 applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), indicatorResp);
                 applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), indicatorResp);
-                indicatorResp.setResponseType(theType);
+                // indicatorResp.setResponseType(theType);
                 return indicatorResp;
 
             case DATE:
@@ -330,7 +316,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 }
                 applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), dateResp);
                 applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), dateResp);
-                dateResp.setResponseType(theType);
+                // dateResp.setResponseType(theType);
                 return dateResp;
 
             case DESCRIPTION:
@@ -341,7 +327,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 }
                 applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), descriptionResp);
                 applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), descriptionResp);
-                descriptionResp.setResponseType(theType);
+                // descriptionResp.setResponseType(theType);
                 return descriptionResp;
 
             case QUANTITY:
@@ -352,7 +338,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 }
                 applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), quantityResp);
                 applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), quantityResp);
-                quantityResp.setResponseType(theType);
+                // quantityResp.setResponseType(theType);
                 return quantityResp;
 
             case QUANTITY_YEAR:
@@ -363,7 +349,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 }
                 applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), quantityYearResp);
                 applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), quantityYearResp);
-                quantityYearResp.setResponseType(theType);
+                // quantityYearResp.setResponseType(theType);
                 return quantityYearResp;
 
             case QUANTITY_INTEGER:
@@ -385,7 +371,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 }
                 applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), amountResp);
                 applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), amountResp);
-                amountResp.setResponseType(theType);
+                // amountResp.setResponseType(theType);
                 return amountResp;
 
             case CODE_COUNTRY:
@@ -396,7 +382,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 }
                 applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), codeCountryResp);
                 applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), codeCountryResp);
-                codeCountryResp.setResponseType(theType);
+                // codeCountryResp.setResponseType(theType);
                 return codeCountryResp;
 
             case PERCENTAGE:
@@ -407,7 +393,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 }
                 applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), percentageResp);
                 applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), percentageResp);
-                percentageResp.setResponseType(theType);
+                // percentageResp.setResponseType(theType);
                 return percentageResp;
 
             case PERIOD:
@@ -429,7 +415,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 }
                 applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), periodResp);
                 applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), periodResp);
-                periodResp.setResponseType(theType);
+                // periodResp.setResponseType(theType);
                 return periodResp;
 
             case CODE:
@@ -440,7 +426,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 }
                 applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), codeResp);
                 applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), codeResp);
-                codeResp.setResponseType(theType);
+                // codeResp.setResponseType(theType);
                 return codeResp;
 
             case EVIDENCE_IDENTIFIER:
@@ -454,7 +440,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 }
                 applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), evidenceIdeResp);
                 applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), evidenceIdeResp);
-                evidenceIdeResp.setResponseType(theType);
+                // evidenceIdeResp.setResponseType(theType);
                 return evidenceIdeResp;
 
             case IDENTIFIER:
@@ -467,7 +453,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 }
                 applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), identifierResp);
                 applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), identifierResp);
-                identifierResp.setResponseType(theType);
+                // identifierResp.setResponseType(theType);
                 return identifierResp;
 
             case URL:
@@ -480,7 +466,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 }
                 applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), urlResp);
                 applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), urlResp);
-                urlResp.setResponseType(theType);
+                // urlResp.setResponseType(theType);
                 return urlResp;
 
             case WEIGHT_INDICATOR:
@@ -488,7 +474,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 applyCriterionWeightingData(weightIndResp, criterionType);
                 applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), weightIndResp);
                 applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), weightIndResp);
-                weightIndResp.setResponseType(theType);
+                // weightIndResp.setResponseType(theType);
                 return weightIndResp;
 
             case LOT_IDENTIFIER:
@@ -502,7 +488,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 });
                 applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), lotsIdeResp);
                 applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), lotsIdeResp);
-                lotsIdeResp.setResponseType(theType);
+                // lotsIdeResp.setResponseType(theType);
                 return lotsIdeResp;
 
             case ECONOMIC_OPERATOR_IDENTIFIER:
@@ -519,7 +505,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 }
                 applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), eoIdeResp);
                 applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), eoIdeResp);
-                eoIdeResp.setResponseType(theType);
+                // eoIdeResp.setResponseType(theType);
                 return eoIdeResp;
 
             default:

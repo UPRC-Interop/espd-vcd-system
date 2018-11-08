@@ -31,6 +31,7 @@ import {UtilitiesService} from './utilities.service';
 import {FullCriterion} from '../model/fullCriterion.model';
 import {UUID} from 'angular2-uuid';
 import {CaRelatedCriterion} from '../model/caRelatedCriterion.model';
+import {stringify} from 'querystring';
 
 @Injectable({
   providedIn: 'root'
@@ -292,12 +293,12 @@ export class FormUtilService {
             } else if (req.responseDataType === 'URL') {
               req.response.url = formValues[req.uuid.valueOf()];
               req.response.uuid = null;
-            } else if (req.responseDataType === 'EO_IDENTIFIER') {
+            } else if (req.responseDataType === 'ECONOMIC_OPERATOR_IDENTIFIER') {
               req.response.id = formValues[req.uuid.valueOf()];
               const eoidtypeID = req.uuid + 'eoidtype';
               req.response.eoidtype = formValues[eoidtypeID.valueOf()];
               req.response.uuid = null;
-            } else if (req.responseDataType === 'LOTS_IDENTIFIER') {
+            } else if (req.responseDataType === 'LOT_IDENTIFIER') {
               req.response.lots = this.utilities.lotTemplate[req.uuid];
             }
           }
@@ -398,7 +399,7 @@ export class FormUtilService {
             group[r.uuid + 'evaluationMethodDescription'] = new FormControl();
           } else if (r.responseDataType === 'AMOUNT') {
             group[r.uuid + 'currency'] = new FormControl();
-          } else if (r.responseDataType === 'EO_IDENTIFIER') {
+          } else if (r.responseDataType === 'ECONOMIC_OPERATOR_IDENTIFIER') {
             group[r.uuid + 'eoidtype'] = new FormControl();
           } else {
             group[r.uuid] = new FormControl();
@@ -539,8 +540,8 @@ export class FormUtilService {
               }
             }
 
-            /* SELF-CONTAINED: LOTS_IDENTIFIER */
-            // if (r.responseDataType === 'LOTS_IDENTIFIER') {
+            /* SELF-CONTAINED: LOT_IDENTIFIER */
+            // if (r.responseDataType === 'LOT_IDENTIFIER') {
             //   /* */
             // }
 
@@ -571,7 +572,7 @@ export class FormUtilService {
                   disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
                 });
               }
-            } else if (r.response.startDate === null) {
+            } else if (r.response.startDate === null || stringify(r.response.startDate) === '') {
               group[r.uuid + 'startDate'] = new FormControl({
                 value: '',
                 disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
@@ -589,7 +590,7 @@ export class FormUtilService {
                   disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
                 });
               }
-            } else if (r.response.endDate === null) {
+            } else if (r.response.endDate === null || stringify(r.response.endDate) === '') {
               group[r.uuid + 'endDate'] = new FormControl({
                 value: '',
                 disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
@@ -608,18 +609,21 @@ export class FormUtilService {
               // console.log(evi);
               // console.log(typeof evi);
 
-              group[r.uuid + 'evidenceUrl'] = new FormControl({
-                value: evi.evidenceURL,
-                disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
-              });
-              group[r.uuid + 'evidenceCode'] = new FormControl({
-                value: evi.description,
-                disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
-              });
-              group[r.uuid + 'evidenceIssuer'] = new FormControl({
-                value: evi.evidenceIssuer.name,
-                disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
-              });
+              /* FIX: self-contained cannot set evidenceURL of undefined issue */
+              if (evi !== undefined) {
+                group[r.uuid + 'evidenceUrl'] = new FormControl({
+                  value: evi.evidenceURL,
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
+                group[r.uuid + 'evidenceCode'] = new FormControl({
+                  value: evi.description,
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
+                group[r.uuid + 'evidenceIssuer'] = new FormControl({
+                  value: evi.evidenceIssuer.name,
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
+              }
 
               if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
                 group[r.uuid + 'evidenceUrl'] = new FormControl({
@@ -637,7 +641,7 @@ export class FormUtilService {
               }
             }
 
-            /* SELF-CONTAINED: EO_IDENTIFIER */
+            /* SELF-CONTAINED: ECONOMIC_OPERATOR_IDENTIFIER */
             if (r.response.id || r.response.eoidtype) {
               group[r.uuid] = new FormControl(r.response.id);
               group[r.uuid + 'eoidtype'] = new FormControl(r.response.eoidtype);
@@ -670,7 +674,7 @@ export class FormUtilService {
               }
             }
             // in case of request import
-            if (r.response.currency === null || r.response.amount === '0') {
+            if (r.response.currency === null || r.response.amount === '0' || r.response.currency === '' || r.response.amount === '') {
               group[r.uuid + 'currency'] = new FormControl({
                 value: '',
                 disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
@@ -726,7 +730,7 @@ export class FormUtilService {
                 });
               }
 
-              if (r.responseDataType === 'EO_IDENTIFIER') {
+              if (r.responseDataType === 'ECONOMIC_OPERATOR_IDENTIFIER') {
                 group[r.uuid] = new FormControl({
                   value: '',
                   disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO

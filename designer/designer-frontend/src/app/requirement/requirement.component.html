@@ -27,7 +27,7 @@
   <!--SELF-CONTAINED: Hide the QUESTION fields if the user is a CA making a Request. Render only the REQUIREMENT and CAPTION fields.
   Don't show the REQUIREMENT fields if the user has the role of EO and creates a new ESPD response from scratch-->
   <div [ngSwitch]="req.responseDataType" [hidden]="(this.utilities.isCA && req.type === 'QUESTION') || (this.utilities.isEO &&
-  (req.type ==='REQUIREMENT') && this.utilities.isCreateResponse) || req.type === 'CAPTION'">
+  req.type ==='REQUIREMENT' && this.utilities.isCreateResponse) || req.type === 'CAPTION'">
 
     <!--<label *ngSwitchCase="req.responseDataType=='NONE'">{{req.description}} CAPTION</label>-->
 
@@ -92,6 +92,29 @@
         <mat-form-field >
           <input matInput [formControlName]="req.uuid" [id]="req.uuid" >
         </mat-form-field>
+      </div>
+    </div>
+    <div *ngSwitchCase="'CODE'">
+      <div [ngSwitch]="req.responseValuesRelatedArtefact">
+        <mat-form-field *ngSwitchCase="'BidType'">
+          <label [attr.for]="req.uuid">{{req.description}}</label>
+          <br>
+          <mat-select [formControlName]="req.uuid" [id]="req.uuid">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let bid of bidTypes" [value]="bid.code">{{bid.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field *ngSwitchCase="'FinancialRatioType'">
+          <label [attr.for]="req.uuid">{{req.description}}</label>
+          <br>
+          <mat-select [formControlName]="req.uuid" [id]="req.uuid">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let type of financialRatioTypes" [value]="type.code">{{type.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div *ngSwitchCase="'CPVCodes'">
+          <!-- TODO cpvs like the classificationCodes -->
+        </div>
       </div>
     </div>
 
@@ -186,7 +209,7 @@
     </div>
 
     <!-- SELF-CONTAINED: EO_IDENTIFIER -->
-    <div class="eo_identifier" *ngSwitchCase="'EO_IDENTIFIER'">
+    <div class="eo_identifier" *ngSwitchCase="'ECONOMIC_OPERATOR_IDENTIFIER'">
       <label [attr.for]="req.uuid">{{req.description}}</label>
       <br>
       <mat-form-field>
@@ -202,7 +225,7 @@
       </mat-form-field>
     </div>
     <!-- SELF-CONTAINED: LOTS_IDENTIFIER -->
-    <div class="lots_identifier" *ngSwitchCase="'LOTS_IDENTIFIER'">
+    <div class="lots_identifier" *ngSwitchCase="'LOT_IDENTIFIER'">
       <mat-selection-list #lots>
         <mat-list-option *ngFor="let lot of this.utilities.projectLots" [value]="lot"
                          (click)="pushSelectedLot()">

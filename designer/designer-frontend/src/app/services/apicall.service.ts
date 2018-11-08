@@ -34,7 +34,8 @@ import {EvaluationMethodType} from '../model/evaluationMethodType.model';
 import {ProjectType} from '../model/projectType.model';
 import {BidType} from '../model/bidType.model';
 import {WeightingType} from '../model/weightingType.model';
-import {ToopCompanyData} from "../model/toopCompanyData.model";
+import {EoRoleType} from '../model/eoRoleType.model';
+import {FinancialRatioType} from '../model/financialRatioType.model';
 
 // import {DataService} from '../services/data.service';
 
@@ -88,6 +89,14 @@ export class ApicallService {
     return this.http.get<WeightingType[]>(environment.apiUrl + 'v2/codelists/WeightingType').toPromise();
   }
 
+  get_eoRoleType() {
+    return this.http.get<EoRoleType[]>(environment.apiUrl + 'v2/codelists/EORoleType').toPromise();
+  }
+
+  get_financialRatioType() {
+    return this.http.get<FinancialRatioType[]>(environment.apiUrl + 'v2/codelists/FinancialRatioType').toPromise();
+  }
+
 
   /* ==================== EO related criteria ========================= */
 
@@ -109,6 +118,11 @@ export class ApicallService {
   getEO_RelatedDCriteria() {
     return this.http.get<EoRelatedCriterion[]>(environment.apiUrl + this.version + '/' + this.utilities.qualificationApplicationType +
       '/criteria/eo_related_C').toPromise();
+  }
+
+  getEO_LotCriterion() {
+    return this.http.get<EoRelatedCriterion[]>(environment.apiUrl + this.version + '/' + this.utilities.qualificationApplicationType +
+      '/criteria/eo_lots').toPromise();
   }
 
   /* SELF-CONTAINED: CA related Criterion - CA LOTS */
@@ -189,6 +203,7 @@ export class ApicallService {
     // const header = new HttpHeaders({'Content-Type':'application/xml; charset=utf-8'});
     let header = new HttpHeaders();
     header = header.set('Content-Type', 'application/xml; charset=utf-8');
+    // return this.http.post<ESPDRequest>(environment.apiUrl + '/importESPD/request', formData).toPromise();
     return this.http.post<ESPDRequest>(environment.apiUrl + '/importESPD/request', formData).toPromise();
 
   }

@@ -475,7 +475,7 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
                 ResponseValueType amRvType = createResponseValueType();
                 BigDecimal amount = ((AmountResponse) response).getAmount();
                 String currency = ((AmountResponse) response).getCurrency();
-                if ((amount.floatValue() != 0) || (currency != null && !currency.isEmpty())) {
+                if ((amount != null) || (currency != null && !currency.isEmpty())) {
                     // Only generate a proper response if for at least one of the variables "amount" and
                     // "currency" a value different from the default is detected.
 

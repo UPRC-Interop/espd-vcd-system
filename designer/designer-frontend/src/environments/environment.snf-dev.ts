@@ -16,5 +16,5 @@
 
 export const environment = {
   production: true,
-  apiUrl: 'http://snf-822556.vm.okeanos.grnet.gr/nightly_dev/api/'
+  apiUrl: 'http://espdint.ds.unipi.gr/nightly_dev/api/'
 };
