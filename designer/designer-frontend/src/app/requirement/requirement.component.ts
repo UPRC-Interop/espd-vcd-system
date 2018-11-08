@@ -48,6 +48,7 @@ export class RequirementComponent implements OnInit, OnChanges {
   bidTypes: BidType[] = null;
   financialRatioTypes: FinancialRatioType[] = null;
   // evaluationMethodTypes: EvaluationMethodType[] = null;
+  cpvCodes: string[] = [];
   isWeighted = false;
   /* CPV chips */
   visible = true;
@@ -57,9 +58,10 @@ export class RequirementComponent implements OnInit, OnChanges {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
   @ViewChild('lots') lots: MatSelectionList;
-  cpvCodes: string[] = [];
+
 
   constructor(public dataService: DataService, public APIService: ApicallService, public utilities: UtilitiesService) {
+
   }
 
   ngOnChanges() {
@@ -72,7 +74,7 @@ export class RequirementComponent implements OnInit, OnChanges {
 
   ngOnInit() {
 
-    if (this.req.responseDataType === 'CODE' && this.req.responseValuesRelatedArtefact === 'CPVCodes') {
+    if (this.req.responseDataType === 'CODE' && this.req.responseValuesRelatedArtefact === 'CPVCodes' && this.utilities.isImportESPD) {
       // init cpvCodes when import
       this.cpvCodes = this.utilities.renderCpvTemplate[this.req.uuid];
     }
@@ -186,7 +188,9 @@ export class RequirementComponent implements OnInit, OnChanges {
 
     // Add our cpv
     if ((value || '').trim()) {
-      this.cpvCodes.push(value.trim());
+      if (this.cpvCodes !== null && this.cpvCodes !== undefined) {
+        this.cpvCodes.push(value.trim());
+      }
     }
 
     // Reset the input value
