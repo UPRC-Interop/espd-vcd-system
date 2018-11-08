@@ -217,10 +217,8 @@ export class FormUtilService {
               req.response.uuid = null;
             } else if (req.responseDataType === 'CODE' && this.utilities.qualificationApplicationType === 'selfcontained') {
               if (req.responseValuesRelatedArtefact === 'CPVCodes') {
-                console.log('THIS IS INSIDE CPV CODE IF ');
                 req.response.evidenceURLCode = this.utilities.cpvTemplate[req.uuid];
               } else {
-                console.log('THIS IS OUTSIDE CPV CODE IF ');
                 req.response.evidenceURLCode = formValues[req.uuid.valueOf()];
               }
               req.response.uuid = null;
@@ -508,8 +506,7 @@ export class FormUtilService {
             These fields need to be non editable */
             group[r.uuid] = new FormControl({
               value: r.response.description ||
-                r.response.percentage || r.response.evidenceURL ||
-                r.response.evidenceURLCode || r.response.countryCode ||
+                r.response.percentage || r.response.evidenceURL || r.response.countryCode ||
                 r.response.period || r.response.quantity || r.response.year || r.response.url || r.response.identifier || '',
               disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
             });
@@ -551,6 +548,27 @@ export class FormUtilService {
             //   /* */
             // }
 
+            /* SELF-CONTAINED: responseDataType: CODE ---> CpvCodes*/
+            if (r.responseDataType === 'CODE' && r.responseValuesRelatedArtefact === 'CPVCodes') {
+              if (r.response.evidenceURLCode) {
+                this.utilities.renderCpvTemplate[r.uuid] = this.utilities.stringToCpvCode(r.response.evidenceURLCode.toString());
+              }
+            }
+            if (r.responseDataType === 'CODE' && this.utilities.qualificationApplicationType === 'regulated') {
+              if (r.response.evidenceURLCode) {
+                if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
+                  group[r.uuid] = new FormControl({
+                    value: '',
+                    disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                  });
+                } else {
+                  group[r.uuid] = new FormControl({
+                    value: r.response.evidenceURLCode,
+                    disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                  });
+                }
+              }
+            }
             if (r.response.date) {
               if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
                 group[r.uuid] = new FormControl({

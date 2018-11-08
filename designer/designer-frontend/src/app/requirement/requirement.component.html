@@ -28,15 +28,6 @@
   Don't show the REQUIREMENT fields if the user has the role of EO and creates a new ESPD response from scratch-->
   <div [ngSwitch]="req.responseDataType" [hidden]="(this.utilities.isCA && req.type === 'QUESTION') || (this.utilities.isEO &&
   req.type ==='REQUIREMENT' && this.utilities.isCreateResponse) || req.type === 'CAPTION'">
-
-    <!--<label *ngSwitchCase="req.responseDataType=='NONE'">{{req.description}} CAPTION</label>-->
-
-    <!--<mat-form-field *ngSwitchDefault>-->
-      <!--<label [attr.for]="req.uuid">{{req.description}}</label>-->
-      <!--<br>-->
-      <!--<input matInput [formControlName]="req.uuid" [id]="req.uuid" >-->
-    <!--</mat-form-field>-->
-
     <div *ngSwitchDefault>
       <div *ngIf="req.type === 'CAPTION'">
         <!-- SKIP captions and deal with question and requirement only -->

@@ -664,17 +664,12 @@ export class DataService {
             this.CADetails.classificationCodes = res.cadetails.classificationCodes;
             this.CADetails.weightScoringMethodologyNote = res.cadetails.weightScoringMethodologyNote;
             this.CADetails.weightingType = res.cadetails.weightingType;
-          }
 
-          console.log(res.fullCriterionList);
-
-          if (this.utilities.qualificationApplicationType === 'selfcontained') {
             this.caRelatedCriteria = this.filterCARelatedCriteria(this.OTHER_CA_REGEXP, res.fullCriterionList);
             this.caRelatedCriteriaForm = this.formUtil.createCARelatedCriterionForm(this.caRelatedCriteria);
             this.eoLotCriterion = this.filterCARelatedCriteria(this.EO_LOT_REGEXP, res.fullCriterionList);
           }
-
-
+          console.log(res.fullCriterionList);
           this.exclusionACriteria = this.filterExclusionCriteria(this.EXCLUSION_CONVICTION_REGEXP, res.fullCriterionList);
           this.exclusionBCriteria = this.filterExclusionCriteria(this.EXCLUSION_CONTRIBUTION_REGEXP, res.fullCriterionList);
           this.exclusionCCriteria = this.filterExclusionCriteria(this.EXCLUSION_SOCIAL_BUSINESS_MISCONDUCT_CONFLICT_REGEXP, res.fullCriterionList);
@@ -750,6 +745,8 @@ export class DataService {
           this.selectedEOCountry = this.EODetails.postalAddress.countryCode;
           if (this.utilities.qualificationApplicationType === 'selfcontained') {
             this.CADetails.classificationCodes = res.cadetails.classificationCodes;
+            this.CADetails.weightScoringMethodologyNote = res.cadetails.weightScoringMethodologyNote;
+            this.CADetails.weightingType = res.cadetails.weightingType;
             // this.EODetails.generalTurnover.amount = res.eodetails.generalTurnover.amount;
             // this.EODetails.generalTurnover.currency = res.eodetails.generalTurnover.currency;
             if (res.eodetails.generalTurnover !== null || res.eodetails.generalTurnover !== undefined) {

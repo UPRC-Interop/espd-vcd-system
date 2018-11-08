@@ -44,6 +44,8 @@ export class UtilitiesService {
   projectLots = [];
   lotTemplate = [];
   cpvTemplate = [];
+  renderCpvTemplate = [];
+  cpvString = [];
   type: string;
   // qualificationApplicationType = 'SELF-CONTAINED';
   // qualificationApplicationType = 'REGULATED';

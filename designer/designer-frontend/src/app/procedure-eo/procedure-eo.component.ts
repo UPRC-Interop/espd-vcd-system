@@ -32,6 +32,8 @@ import {ProjectType} from '../model/projectType.model';
 import {EoRoleType} from '../model/eoRoleType.model';
 import {Currency} from '../model/currency.model';
 import {Amount} from '../model/amount.model';
+import {COMMA, ENTER} from '../../../node_modules/@angular/cdk/keycodes';
+import {MatChipInputEvent} from '@angular/material';
 
 @Component({
   selector: 'app-procedure-eo',
@@ -48,6 +50,13 @@ export class ProcedureEoComponent implements OnInit {
   procedureTypes: ProcedureType[] = null;
   projectTypes: ProjectType[] = null;
   eoRoleTypes: EoRoleType[] = null;
+
+  /* CPV chips */
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
 
   constructor(public dataService: DataService, public utilities: UtilitiesService) {
@@ -194,6 +203,29 @@ export class ProcedureEoComponent implements OnInit {
     console.log(this.dataService.CADetails);
     this.dataService.EODetails = eoForm.value;
     console.log(this.dataService.EODetails);
+  }
+
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    // Add our cpv
+    if ((value || '').trim()) {
+      this.dataService.CADetails.classificationCodes.push(value.trim());
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+  }
+
+  remove(cpv: string): void {
+    const index = this.dataService.CADetails.classificationCodes.indexOf(cpv);
+
+    if (index >= 0) {
+      this.dataService.CADetails.classificationCodes.splice(index, 1);
+    }
   }
 
 }
