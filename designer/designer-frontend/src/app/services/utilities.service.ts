@@ -100,7 +100,7 @@ export class UtilitiesService {
       projectLotsList.push('Lot' + i);
     }
 
-    console.log(projectLotsList);
+    // console.log(projectLotsList);
 
     return projectLotsList;
   }
