@@ -23,9 +23,10 @@ import {Currency} from '../model/currency.model';
 import {ApicallService} from '../services/apicall.service';
 import {UtilitiesService} from '../services/utilities.service';
 import {EoIDType} from '../model/eoIDType.model';
-import {MatSelectionList} from '@angular/material';
+import {MatChipInputEvent, MatSelectionList} from '@angular/material';
 import {BidType} from '../model/bidType.model';
 import {FinancialRatioType} from '../model/financialRatioType.model';
+import {COMMA, ENTER} from '../../../node_modules/@angular/cdk/keycodes';
 
 @Component({
   selector: 'app-requirement',
@@ -48,8 +49,15 @@ export class RequirementComponent implements OnInit, OnChanges {
   financialRatioTypes: FinancialRatioType[] = null;
   // evaluationMethodTypes: EvaluationMethodType[] = null;
   isWeighted = false;
+  /* CPV chips */
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
   @ViewChild('lots') lots: MatSelectionList;
+  cpvCodes: string[] = ['chip1', 'chip2'];
 
   constructor(public dataService: DataService, public APIService: ApicallService, public utilities: UtilitiesService) {
   }
@@ -149,6 +157,24 @@ export class RequirementComponent implements OnInit, OnChanges {
           // this.indicatorChanged.emit(ev);
         });
     }
+
+    /* SELF-CONTAINED: CODE with CPVCodes as responseValuesRelatedArtefact*/
+    // if (this.req.responseDataType === 'CODE' && this.req.responseValuesRelatedArtefact === 'CPVCodes') {
+    //   console.log('TEEEEEEEEEEEEEEEEST');
+    //   // console.log(this.form.get(this.req.uuid).value);
+    //   console.log(this.form.get(this.req.uuid).valueChanges);
+    //   this.form.get(this.req.uuid)
+    //     .valueChanges
+    //     .subscribe(x => {
+    //       console.log(x);
+    //     });
+    // }
+
+  }
+
+  createChips() {
+    console.log('CHIPS DEMO');
+    console.log(this.cpvCodes);
   }
 
 
@@ -161,5 +187,30 @@ export class RequirementComponent implements OnInit, OnChanges {
       // console.log(this.reqLots);
     }
   }
+
+  /* CPV Chip handling */
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    // Add our cpv
+    if ((value || '').trim()) {
+      this.cpvCodes.push(value.trim());
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+  }
+
+  remove(cpv: string): void {
+    const index = this.cpvCodes.indexOf(cpv);
+
+    if (index >= 0) {
+      this.cpvCodes.splice(index, 1);
+    }
+  }
+
 
 }
