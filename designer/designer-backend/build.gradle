@@ -29,6 +29,36 @@ dependencies {
 //    compile 'com.sparkjava:spark-debug-tools:0.5'
 }
 
+/**
+ * * * * * RUN TASKS * * * * *
+ */
+
+run {
+    dependsOn "buildWebApp"
+    finalizedBy "deleteWebAppResources"
+}
+
+task runBackendOnly(type: JavaExec) {
+    main = mainClassName
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+task runWebApp(type: Exec) {
+    dependsOn "npmInstallWebApp"
+    workingDir "$webappDir"
+    inputs.dir "$webappDir"
+    group = BasePlugin.BUILD_GROUP
+    if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")) {
+        commandLine "ng.cmd", "serve", "--aot"
+    } else {
+        commandLine "ng", "serve", "--aot"
+    }
+}
+
+/**
+ * * * * * JAR TASKS * * * * *
+ */
+
 jar {
     dependsOn "buildWebAppDeploy"
 
@@ -44,10 +74,6 @@ jar {
     finalizedBy "deleteWebAppResources"
 }
 
-run {
-    dependsOn "buildWebApp"
-    finalizedBy "deleteWebAppResources"
-}
 
 task createJarFromExistingResources(type: Jar) {
     dependsOn "copyWebAppResources"
@@ -64,26 +90,9 @@ task createJarFromExistingResources(type: Jar) {
     finalizedBy "deleteWebAppResources"
 }
 
-task deleteWebAppResources {
-    doLast {
-        delete "$webappDir/dist"
-        delete "$projectDir/src/main/resources/public"
-    }
-}
-
-task runBackendOnly (type: JavaExec){
-    main = mainClassName
-    classpath = sourceSets.main.runtimeClasspath
-}
-
-task copyWebAppResources {
-    doFirst {
-        copy {
-            from "$webappDir/dist"
-            into "$projectDir/src/main/resources/public"
-        }
-    }
-}
+/**
+ * * * * * BUILD TASKS * * * * *
+ */
 
 task npmInstallWebApp(type: Exec) {
     workingDir "$webappDir"
@@ -132,14 +141,23 @@ task buildWebAppDeploy(type: Exec) {
     }
 }
 
-task runWebApp(type: Exec) {
-    dependsOn "npmInstallWebApp"
-    workingDir "$webappDir"
-    inputs.dir "$webappDir"
-    group = BasePlugin.BUILD_GROUP
-    if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")) {
-        commandLine "ng.cmd", "serve", "--aot"
-    } else {
-        commandLine "ng", "serve", "--aot"
+/**
+ * * * * * HELPER TASKS * * * * *
+ */
+
+
+task deleteWebAppResources {
+    doLast {
+        delete "$webappDir/dist"
+        delete "$projectDir/src/main/resources/public"
+    }
+}
+
+task copyWebAppResources {
+    doFirst {
+        copy {
+            from "$webappDir/dist"
+            into "$projectDir/src/main/resources/public"
+        }
     }
 }
