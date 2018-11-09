@@ -2338,6 +2338,7 @@ var RequirementComponent = /** @class */ (function () {
         this.bidTypes = null;
         this.financialRatioTypes = null;
         // evaluationMethodTypes: EvaluationMethodType[] = null;
+        this.cpvCodes = [];
         this.isWeighted = false;
         /* CPV chips */
         this.visible = true;
@@ -2345,7 +2346,6 @@ var RequirementComponent = /** @class */ (function () {
         this.removable = true;
         this.addOnBlur = true;
         this.separatorKeysCodes = [_node_modules_angular_cdk_keycodes__WEBPACK_IMPORTED_MODULE_7__["ENTER"], _node_modules_angular_cdk_keycodes__WEBPACK_IMPORTED_MODULE_7__["COMMA"]];
-        this.cpvCodes = [];
     }
     RequirementComponent.prototype.ngOnChanges = function () {
         if (this.req.responseDataType === 'INDICATOR') {
@@ -2355,7 +2355,7 @@ var RequirementComponent = /** @class */ (function () {
     };
     RequirementComponent.prototype.ngOnInit = function () {
         var _this = this;
-        if (this.req.responseDataType === 'CODE' && this.req.responseValuesRelatedArtefact === 'CPVCodes') {
+        if (this.req.responseDataType === 'CODE' && this.req.responseValuesRelatedArtefact === 'CPVCodes' && this.utilities.isImportESPD) {
             // init cpvCodes when import
             this.cpvCodes = this.utilities.renderCpvTemplate[this.req.uuid];
         }
@@ -2455,7 +2455,9 @@ var RequirementComponent = /** @class */ (function () {
         var value = event.value;
         // Add our cpv
         if ((value || '').trim()) {
-            this.cpvCodes.push(value.trim());
+            if (this.cpvCodes !== null && this.cpvCodes !== undefined) {
+                this.cpvCodes.push(value.trim());
+            }
         }
         // Reset the input value
         if (input) {
