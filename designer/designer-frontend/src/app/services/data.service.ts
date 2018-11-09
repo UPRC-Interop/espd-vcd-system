@@ -39,6 +39,7 @@ import {FormUtilService} from './form-util.service';
 import {UtilitiesService} from './utilities.service';
 import {TranslateService} from '@ngx-translate/core';
 import {Language} from '../model/language.model';
+import {ExportType} from '../export/export-type.enum';
 import {EoIDType} from '../model/eoIDType.model';
 import {EvaluationMethodType} from '../model/evaluationMethodType.model';
 import {CaRelatedCriterion} from '../model/caRelatedCriterion.model';
@@ -103,6 +104,7 @@ export class DataService {
   eoLotCriterion: EoRelatedCriterion[] = null;
   reductionCriteria: ReductionCriterion[] = null;
   language: Language[] = null;
+  selectedLanguage: string = null;
   langTemplate = [];
   langNames = [];
   langISOCodes = [];
@@ -380,7 +382,9 @@ export class DataService {
   selectionSubmit(isSatisfiedALL: boolean) {
 
     /* extract caRelated criteria */
-    this.formUtil.extractFormValuesFromCriteria(this.caRelatedCriteria, this.caRelatedCriteriaForm, this.formUtil.evidenceList);
+    if (this.utilities.qualificationApplicationType === 'selfcontained') {
+      this.formUtil.extractFormValuesFromCriteria(this.caRelatedCriteria, this.caRelatedCriteriaForm, this.formUtil.evidenceList);
+    }
     /* extract exclusion criteria */
     this.formUtil.extractFormValuesFromCriteria(this.exclusionACriteria, this.exclusionACriteriaForm, this.formUtil.evidenceList);
     this.formUtil.extractFormValuesFromCriteria(this.exclusionBCriteria, this.exclusionBCriteriaForm, this.formUtil.evidenceList);
@@ -411,19 +415,64 @@ export class DataService {
 
     console.log(this.fullCriterionList);
     // apicall service post
-    this.APIService.getXMLRequest(JSON.stringify(this.createESPDRequest()))
+
+
+  }
+
+  finishSubmit(exportType: ExportType) {
+
+    switch (exportType) {
+      case ExportType.XML:
+        this.createRequestXmlFile();
+        break;
+      case ExportType.HTML:
+        this.createRequestHtmlFile();
+        break;
+      case ExportType.PDF:
+        this.createRequestPdfFile();
+    }
+  }
+
+  createRequestXmlFile() {
+    this.APIService.getXMLRequest(JSON.stringify(this.createESPDRequest()), this.selectedLanguage)
       .then(res => {
-        console.log(res);
-        this.createFile(res);
+        this.createXmlFile(res);
+        this.saveFile(this.blob, '.xml');
       })
       .catch(err => {
-        console.log(err);
         const message: string = err.error +
           ' ' + err.message;
         const action = 'close';
         this.openSnackBar(message, action);
       });
+  }
 
+  createRequestHtmlFile() {
+    this.APIService.getHTMLRequest(JSON.stringify(this.createESPDRequest()), this.selectedLanguage)
+      .then(res => {
+        this.createHtmlFile(res);
+        this.saveFile(this.blob, '.html');
+      })
+      .catch(err => {
+        const message: string = err.error +
+          ' ' + err.message;
+        const action = 'close';
+        this.openSnackBar(message, action);
+      });
+  }
+
+  createRequestPdfFile() {
+    this.APIService.getPDFRequest(JSON.stringify(this.createESPDRequest()), this.selectedLanguage)
+      .then(res => {
+        this.createPdfFile(res);
+        this.saveFile(this.blob, '.pdf');
+      })
+      .catch(err => {
+        const message: string = err.error +
+          ' ' + err.message;
+        const action = 'close';
+        this.openSnackBar(message, action);
+      });
   }
 
   selectionEOSubmit(isSatisfiedALL: boolean) {
@@ -431,7 +480,7 @@ export class DataService {
 
   }
 
-  finishEOSubmit() {
+  finishEOSubmit(exportType: ExportType) {
 
     /* extract eoRelated criteria */
     this.formUtil.extractFormValuesFromCriteria(this.eoRelatedACriteria, this.eoRelatedACriteriaForm, this.formUtil.evidenceList);
@@ -439,7 +488,9 @@ export class DataService {
     this.formUtil.extractFormValuesFromCriteria(this.eoRelatedDCriteria, this.eoRelatedDCriteriaForm, this.formUtil.evidenceList);
 
     /* extract caRelated criteria */
-    this.formUtil.extractFormValuesFromCriteria(this.caRelatedCriteria, this.caRelatedCriteriaForm, this.formUtil.evidenceList);
+    if (this.utilities.qualificationApplicationType === 'selfcontained') {
+      this.formUtil.extractFormValuesFromCriteria(this.caRelatedCriteria, this.caRelatedCriteriaForm, this.formUtil.evidenceList);
+    }
 
     /* extract exclusion criteria */
     this.formUtil.extractFormValuesFromCriteria(this.exclusionACriteria, this.exclusionACriteriaForm, this.formUtil.evidenceList);
@@ -479,12 +530,53 @@ export class DataService {
 
     console.log(this.fullCriterionList);
 
+    switch (exportType) {
+      case ExportType.XML:
+        this.createXml();
+        break;
+      case ExportType.HTML:
+        this.createHtml();
+        break;
+      case ExportType.PDF:
+        this.createPdf();
+    }
 
-    this.APIService.getXMLResponse(JSON.stringify(this.createESPDResponse()))
+  }
+
+  createPdf() {
+    this.APIService.getPDFResponse(JSON.stringify(this.createESPDResponse()), this.selectedLanguage)
+      .then(res => {
+        this.createPdfFile(res);
+        this.saveFile(this.blob, '.pdf');
+      })
+      .catch(err => {
+        const message: string = err.error +
+          ' ' + err.message;
+        const action = 'close';
+        this.openSnackBar(message, action);
+      });
+  }
+
+  createHtml() {
+    this.APIService.getHTMLResponse(JSON.stringify(this.createESPDResponse()), this.selectedLanguage)
+      .then(res => {
+        this.createHtmlFile(res);
+        this.saveFile(this.blob, '.html');
+      })
+      .catch(err => {
+        const message: string = err.error +
+          ' ' + err.message;
+        const action = 'close';
+        this.openSnackBar(message, action);
+      });
+  }
+
+  createXml() {
+    this.APIService.getXMLResponse(JSON.stringify(this.createESPDResponse()), this.selectedLanguage)
       .then(res => {
         console.log(res);
-        this.createFile(res);
-        this.saveFile(this.blob);
+        this.createXmlFile(res);
+        this.saveFile(this.blob, '.xml');
       })
       .catch(err => {
         console.log(err);
@@ -494,34 +586,46 @@ export class DataService {
         const action = 'close';
         this.openSnackBar(message, action);
       });
-
   }
 
 
   /* ================================== EXPORT FILES ============================= */
 
-
-  createFile(response) {
-    // const filename:string = "espd-request";
-    this.blob = new Blob([response.body], {type: 'application/xml'});
+  createHtmlFile(response) {
+    this.createFile(response, 'application/html');
   }
 
+  createPdfFile(response) {
+    this.createFile(response, 'application/pdf');
+  }
 
-  saveFile(blob) {
+  createXmlFile(response) {
+    this.createFile(response, 'application/xml');
+  }
+
+  private createFile(response, type: string) {
+// const filename:string = "espd-request";
+    this.blob = new Blob([response.body], {type: type});
+  }
+
+  isVersionTwo(): boolean {
+    return this.APIService.version === 'v2';
+  }
+
+  saveFile(blob, fileSuffix: String) {
     if (this.utilities.isCA && this.APIService.version === 'v1') {
-      var filename = 'espd-request-v1.xml';
+      var filename = 'espd-request-v1' + fileSuffix;
     } else if (this.utilities.isEO && this.APIService.version === 'v1') {
-      var filename = 'espd-response-v1.xml';
+      var filename = 'espd-response-v1' + fileSuffix;
     } else if (this.utilities.isCA && this.APIService.version === 'v2' && this.utilities.qualificationApplicationType === 'regulated') {
-      var filename = 'espd-request-v2.xml';
+      var filename = 'espd-request-v2' + fileSuffix;
     } else if (this.utilities.isEO && this.APIService.version === 'v2' && this.utilities.qualificationApplicationType === 'regulated') {
-      var filename = 'espd-response-v2.xml';
+      var filename = 'espd-response-v2' + fileSuffix;
     } else if (this.utilities.isCA && this.utilities.qualificationApplicationType === 'selfcontained') {
-      var filename = 'espd-self-contained-request.xml';
+      var filename = 'espd-self-contained-request' + fileSuffix;
     } else if (this.utilities.isEO && this.utilities.qualificationApplicationType === 'selfcontained') {
-      var filename = 'espd-self-contained-response.xml';
+      var filename = 'espd-self-contained-response' + fileSuffix;
     }
-
     saveAs(blob, filename);
   }
 
@@ -560,13 +664,12 @@ export class DataService {
             this.CADetails.classificationCodes = res.cadetails.classificationCodes;
             this.CADetails.weightScoringMethodologyNote = res.cadetails.weightScoringMethodologyNote;
             this.CADetails.weightingType = res.cadetails.weightingType;
+
+            this.caRelatedCriteria = this.filterCARelatedCriteria(this.OTHER_CA_REGEXP, res.fullCriterionList);
+            this.caRelatedCriteriaForm = this.formUtil.createCARelatedCriterionForm(this.caRelatedCriteria);
+            this.eoLotCriterion = this.filterCARelatedCriteria(this.EO_LOT_REGEXP, res.fullCriterionList);
           }
-
           console.log(res.fullCriterionList);
-
-          this.caRelatedCriteria = this.filterCARelatedCriteria(this.OTHER_CA_REGEXP, res.fullCriterionList);
-          this.caRelatedCriteriaForm = this.formUtil.createCARelatedCriterionForm(this.caRelatedCriteria);
-
           this.exclusionACriteria = this.filterExclusionCriteria(this.EXCLUSION_CONVICTION_REGEXP, res.fullCriterionList);
           this.exclusionBCriteria = this.filterExclusionCriteria(this.EXCLUSION_CONTRIBUTION_REGEXP, res.fullCriterionList);
           this.exclusionCCriteria = this.filterExclusionCriteria(this.EXCLUSION_SOCIAL_BUSINESS_MISCONDUCT_CONFLICT_REGEXP, res.fullCriterionList);
@@ -600,7 +703,6 @@ export class DataService {
           this.selectionALLCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionALLCriteria);
 
           this.eoRelatedCriteria = this.filterEoRelatedCriteria(this.EO_RELATED_REGEXP, res.fullCriterionList);
-          this.eoLotCriterion = this.filterCARelatedCriteria(this.EO_LOT_REGEXP, res.fullCriterionList);
           // this.eoLotCriterionForm = this.formUtil.createEORelatedCriterionForm(this.eoLotCriterion);
           this.reductionCriteria = this.filterEoRelatedCriteria(this.REDUCTION_OF_CANDIDATES_REGEXP, res.fullCriterionList);
 
@@ -643,6 +745,8 @@ export class DataService {
           this.selectedEOCountry = this.EODetails.postalAddress.countryCode;
           if (this.utilities.qualificationApplicationType === 'selfcontained') {
             this.CADetails.classificationCodes = res.cadetails.classificationCodes;
+            this.CADetails.weightScoringMethodologyNote = res.cadetails.weightScoringMethodologyNote;
+            this.CADetails.weightingType = res.cadetails.weightingType;
             // this.EODetails.generalTurnover.amount = res.eodetails.generalTurnover.amount;
             // this.EODetails.generalTurnover.currency = res.eodetails.generalTurnover.currency;
             if (res.eodetails.generalTurnover !== null || res.eodetails.generalTurnover !== undefined) {
@@ -672,11 +776,14 @@ export class DataService {
 
           console.log(res.fullCriterionList);
 
-          this.caRelatedCriteria = this.filterCARelatedCriteria(this.OTHER_CA_REGEXP, res.fullCriterionList);
-          this.caRelatedCriteriaForm = this.formUtil.createCARelatedCriterionForm(this.caRelatedCriteria);
+          if (this.utilities.qualificationApplicationType === 'selfcontained') {
+            this.caRelatedCriteria = this.filterCARelatedCriteria(this.OTHER_CA_REGEXP, res.fullCriterionList);
+            this.caRelatedCriteriaForm = this.formUtil.createCARelatedCriterionForm(this.caRelatedCriteria);
 
-          this.eoLotCriterion = this.filterCARelatedCriteria(this.EO_LOT_REGEXP, res.fullCriterionList);
-          this.eoLotCriterionForm = this.formUtil.createEORelatedCriterionForm(this.eoLotCriterion);
+            this.eoLotCriterion = this.filterCARelatedCriteria(this.EO_LOT_REGEXP, res.fullCriterionList);
+            this.eoLotCriterionForm = this.formUtil.createEORelatedCriterionForm(this.eoLotCriterion);
+          }
+
 
           this.eoRelatedACriteria = this.filterEoRelatedCriteria(this.EO_RELATED_A_REGEXP, res.fullCriterionList);
           // console.log(this.eoRelatedACriteria);
@@ -1039,6 +1146,9 @@ export class DataService {
             const action = 'close';
             this.openSnackBar(message, action);
           });
+      } else {
+        this.caRelatedCriteria = [];
+        this.eoLotCriterion = [];
       }
 
 
@@ -1274,6 +1384,9 @@ export class DataService {
             const action = 'close';
             this.openSnackBar(message, action);
           });
+      } else {
+        this.caRelatedCriteria = [];
+        this.eoLotCriterion = [];
       }
 
       /* ======================== predefined exclusion criteria ================================== */
@@ -1471,7 +1584,8 @@ export class DataService {
   }
 
   switchLanguage(language: string) {
-    const lang = 'ESPD_' + this.langTemplate[language].toLowerCase();
+    this.selectedLanguage = this.langTemplate[language].toLowerCase();
+    const lang = 'ESPD_' + this.selectedLanguage;
     console.log(lang);
     this.translate.use(lang);
     // this.AddLanguages();
@@ -1688,7 +1802,7 @@ export class DataService {
     } else {
       return this.APIService.get_eoRoleType()
         .then(res => {
-          this.eoRoleTypes= res;
+          this.eoRoleTypes = res;
           return Promise.resolve(res);
         })
         .catch(err => {

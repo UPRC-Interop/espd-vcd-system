@@ -15,12 +15,16 @@
  */
 package eu.esens.espdvcd.builder.model;
 
+import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
+import eu.esens.espdvcd.codelist.enums.internal.ArtefactType;
+import eu.esens.espdvcd.model.DocumentDetails;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.RegulatedESPDRequest;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.response.WeightIndicatorResponse;
+import eu.esens.espdvcd.schema.EDMVersion;
 import eu.espd.schema.v1.espdrequest_1.ESPDRequestType;
 import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionType;
 import eu.espd.schema.v2.pre_award.qualificationapplicationrequest.QualificationApplicationRequestType;
@@ -38,30 +42,45 @@ public class ESPDRequestModelExtractor implements ModelExtractor {
 
     public ESPDRequest extractESPDRequest(ESPDRequestType reqType) {
 
-        RegulatedESPDRequest req = new RegulatedESPDRequest();
+        RegulatedESPDRequest modelRequest = new RegulatedESPDRequest();
 
-        req.getFullCriterionList().addAll(reqType.getCriterion().stream()
+        // apply document details
+        modelRequest.setDocumentDetails(new DocumentDetails(EDMVersion.V1, ArtefactType.ESPD_REQUEST,
+                QualificationApplicationTypeEnum.REGULATED));
+
+        modelRequest.getFullCriterionList().addAll(reqType.getCriterion().stream()
                 .map(c -> extractSelectableCriterion(c))
                 .collect(Collectors.toList()));
-        req.setCADetails(extractCADetails(reqType.getContractingParty(),
+        modelRequest.setCADetails(extractCADetails(reqType.getContractingParty(),
                 reqType.getContractFolderID(),
                 reqType.getAdditionalDocumentReference()));
 
-        req.setServiceProviderDetails(extractServiceProviderDetails(reqType.getServiceProviderParty()));
+        modelRequest.setServiceProviderDetails(extractServiceProviderDetails(reqType.getServiceProviderParty()));
 
-        return req;
+        return modelRequest;
     }
 
     public ESPDRequest extractESPDRequest(QualificationApplicationRequestType qarType) {
 
         RegulatedESPDRequest modelRequest = new RegulatedESPDRequest();
 
+        // apply document details
+        if (qarType.getQualificationApplicationTypeCode() != null &&
+                qarType.getQualificationApplicationTypeCode().getValue() != null) {
+            modelRequest.setDocumentDetails(new DocumentDetails(EDMVersion.V2, ArtefactType.ESPD_REQUEST
+                    , QualificationApplicationTypeEnum.valueOf(qarType.getQualificationApplicationTypeCode().getValue())));
+        } else {
+            throw new IllegalStateException("Error... Unable to extract Qualification Application Type Code");
+        }
+
         modelRequest.getFullCriterionList().addAll(qarType.getTenderingCriterion().stream()
                 .map(c -> extractSelectableCriterion(c))
                 .collect(Collectors.toList()));
 
+        // extract CA Details
         modelRequest.setCADetails(extractCADetails(qarType.getContractingParty(),
                 qarType.getContractFolderID(),
+                qarType.getProcedureCode(),
                 qarType.getAdditionalDocumentReference()));
 
         // apply global weighting
@@ -69,6 +88,9 @@ public class ESPDRequestModelExtractor implements ModelExtractor {
                 .addAll(qarType.getWeightScoringMethodologyNote().stream()
                         .map(noteType -> noteType.getValue())
                         .collect(Collectors.toList()));
+
+        // apply lots
+        modelRequest.getCADetails().setProcurementProjectLots(qarType.getProcurementProjectLot().size());
 
         if (qarType.getWeightingTypeCode() != null
                 && qarType.getWeightingTypeCode().getValue() != null) {

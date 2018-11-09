@@ -15,8 +15,6 @@
  */
 package eu.esens.espdvcd.codelist;
 
-import eu.esens.espdvcd.codelist.Codelists;
-
 import java.util.Map;
 import java.util.Optional;
 

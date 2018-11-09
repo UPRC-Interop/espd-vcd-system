@@ -41,6 +41,7 @@ import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionPropertyGro
 import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionPropertyType;
 import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionType;
 import eu.espd.schema.v2.pre_award.commonbasic.ConfidentialityLevelCodeType;
+import eu.espd.schema.v2.pre_award.commonbasic.ProcedureCodeType;
 import eu.espd.schema.v2.pre_award.commonbasic.ValidatedCriterionPropertyIDType;
 
 import java.util.ArrayList;
@@ -186,6 +187,7 @@ public interface ModelExtractor {
 
     default CADetails extractCADetails(List<eu.espd.schema.v2.pre_award.commonaggregate.ContractingPartyType> caParty,
                                        eu.espd.schema.v2.pre_award.commonbasic.ContractFolderIDType contractFolderId,
+                                       eu.espd.schema.v2.pre_award.commonbasic.ProcedureCodeType procedureCodeType,
                                        List<eu.espd.schema.v2.pre_award.commonaggregate.DocumentReferenceType> additionalDocumentReferenceList) {
 
         CADetails cd = new CADetails();
@@ -262,8 +264,14 @@ public interface ModelExtractor {
             }
         }
 
-        if (contractFolderId != null && contractFolderId.getValue() != null) {
+        if (contractFolderId != null
+                && contractFolderId.getValue() != null) {
             cd.setProcurementProcedureFileReferenceNo(contractFolderId.getValue());
+        }
+
+        if (procedureCodeType != null
+                && procedureCodeType.getValue() != null) {
+            cd.setProcurementProcedureType(procedureCodeType.getValue());
         }
 
         if (!additionalDocumentReferenceList.isEmpty()) {

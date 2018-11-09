@@ -16,12 +16,15 @@
 package eu.esens.espdvcd.builder.model;
 
 import eu.esens.espdvcd.codelist.enums.EORoleTypeEnum;
+import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
+import eu.esens.espdvcd.codelist.enums.internal.ArtefactType;
 import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.response.*;
 import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
+import eu.esens.espdvcd.schema.EDMVersion;
 import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.RequirementType;
 import eu.espd.schema.v1.commonaggregatecomponents_2.DocumentReferenceType;
 import eu.espd.schema.v1.commonaggregatecomponents_2.PersonType;
@@ -31,8 +34,6 @@ import eu.espd.schema.v1.espdresponse_1.ESPDResponseType;
 import eu.espd.schema.v2.pre_award.commonaggregate.EvidenceType;
 import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionResponseType;
 import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionType;
-import eu.espd.schema.v2.pre_award.commonbasic.ConfidentialityLevelCodeType;
-import eu.espd.schema.v2.pre_award.commonbasic.ValidatedCriterionPropertyIDType;
 import eu.espd.schema.v2.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
 
 import javax.validation.constraints.NotNull;
@@ -55,6 +56,10 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
     public ESPDResponse extractESPDResponse(ESPDResponseType resType) {
 
         RegulatedESPDResponse modelResponse = new RegulatedESPDResponse();
+
+        // apply document details
+        modelResponse.setDocumentDetails(new DocumentDetails(EDMVersion.V1, ArtefactType.ESPD_RESPONSE,
+                QualificationApplicationTypeEnum.REGULATED));
 
         modelResponse.getFullCriterionList().addAll(resType.getCriterion().stream()
                 .map(c -> extractSelectableCriterion(c))
@@ -96,6 +101,15 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
 
         RegulatedESPDResponse modelResponse = new RegulatedESPDResponse();
 
+        // apply document details
+        if (qarType.getQualificationApplicationTypeCode() != null &&
+                qarType.getQualificationApplicationTypeCode().getValue() != null) {
+            modelResponse.setDocumentDetails(new DocumentDetails(EDMVersion.V2, ArtefactType.ESPD_RESPONSE
+                    , QualificationApplicationTypeEnum.valueOf(qarType.getQualificationApplicationTypeCode().getValue())));
+        } else {
+            throw new IllegalStateException("Error... Unable to extract Qualification Application Type Code");
+        }
+
         modelResponse.getFullCriterionList().addAll(qarType.getTenderingCriterion().stream()
                 .map(c -> extractSelectableCriterion(c))
                 .collect(Collectors.toList()));
@@ -103,6 +117,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
         // Contracting Authority Details
         modelResponse.setCADetails(extractCADetails(qarType.getContractingParty(),
                 qarType.getContractFolderID(),
+                qarType.getProcedureCode(),
                 qarType.getAdditionalDocumentReference()));
 
         // Apply global weighting
@@ -110,6 +125,9 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 .addAll(qarType.getWeightScoringMethodologyNote().stream()
                         .map(noteType -> noteType.getValue())
                         .collect(Collectors.toList()));
+
+        // apply lots
+        modelResponse.getCADetails().setProcurementProjectLots(qarType.getProcurementProjectLot().size());
 
         if (qarType.getWeightingTypeCode() != null
                 && qarType.getWeightingTypeCode().getValue() != null) {

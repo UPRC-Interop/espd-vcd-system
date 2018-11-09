@@ -28,15 +28,6 @@
   Don't show the REQUIREMENT fields if the user has the role of EO and creates a new ESPD response from scratch-->
   <div [ngSwitch]="req.responseDataType" [hidden]="(this.utilities.isCA && req.type === 'QUESTION') || (this.utilities.isEO &&
   req.type ==='REQUIREMENT' && this.utilities.isCreateResponse) || req.type === 'CAPTION'">
-
-    <!--<label *ngSwitchCase="req.responseDataType=='NONE'">{{req.description}} CAPTION</label>-->
-
-    <!--<mat-form-field *ngSwitchDefault>-->
-      <!--<label [attr.for]="req.uuid">{{req.description}}</label>-->
-      <!--<br>-->
-      <!--<input matInput [formControlName]="req.uuid" [id]="req.uuid" >-->
-    <!--</mat-form-field>-->
-
     <div *ngSwitchDefault>
       <div *ngIf="req.type === 'CAPTION'">
         <!-- SKIP captions and deal with question and requirement only -->
@@ -114,6 +105,24 @@
         </mat-form-field>
         <div *ngSwitchCase="'CPVCodes'">
           <!-- TODO cpvs like the classificationCodes -->
+          <mat-form-field class="cpv-chip-list">
+            <mat-chip-list #chipList>
+              <mat-chip color='primary' selected=true *ngFor="let cpv of cpvCodes" [selectable]="selectable"
+                        [removable]="removable" (removed)="remove(cpv)">
+                {{cpv}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+              <input placeholder="CPV Codes: "
+                     [matChipInputFor]="chipList"
+                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                     [matChipInputAddOnBlur]="addOnBlur"
+                     (matChipInputTokenEnd)="add($event)"
+                     (keyup.enter)= 'createChips()'>
+            </mat-chip-list>
+          </mat-form-field>
+
+
+
         </div>
       </div>
     </div>
@@ -203,7 +212,11 @@
         <label [attr.for]="req.uuid+'evaluationMethodDescription'">Provide complementary information about the evaluation of the criterion: </label>
         <br>
         <mat-form-field>
-          <input matInput [formControlName]="req.uuid+'evaluationMethodDescription'" [id]="req.uuid+'evaluationMethodDescription'" >
+          <textarea matInput
+                    [formControlName]="req.uuid+'evaluationMethodDescription'" [id]="req.uuid+'evaluationMethodDescription'"
+                    id="shortDesc" cols="30" rows="10">
+          </textarea>
+          <!--<input matInput [formControlName]="req.uuid+'evaluationMethodDescription'" [id]="req.uuid+'evaluationMethodDescription'" >-->
         </mat-form-field>
       </div>
     </div>

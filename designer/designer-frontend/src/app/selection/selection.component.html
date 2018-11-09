@@ -163,46 +163,47 @@
           espd.part3.crit.insolvency.conflicts.top.title
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <mat-card>
-        <mat-card-content>
-          <span class="weight">One or More Criteria will be weighted: </span>
-          <mat-radio-group name="isGloballyWeighted" [disabled]="this.dataService.isReadOnly()">
-            <mat-radio-button color="primary" name="globalWeight" value="YES" [checked]="this.dataService.isReadOnly()" (change)="handleGlobalWeight(YES)" #YES>
-              {{'espd.gui.yes' | translate}}</mat-radio-button>
-            <mat-radio-button color="primary" name="globalWeight" value="NO" [checked]="!this.dataService.isReadOnly()" (change)="handleGlobalWeight(NO)" #NO>
-              {{'espd.gui.no' | translate}}</mat-radio-button>
-          </mat-radio-group>
-          <br>
-          <br>
-          <div *ngIf="this.utilities.isGloballyWeighted">
-            <span class="weight">Criterion Weighting Type: </span>
-            <mat-form-field>
-              <mat-select placeholder="Weighting Type"
-                          name="weightingType"
-                          [(ngModel)]="dataService.CADetails.weightingType">
-                <mat-option *ngFor="let type of weightingType" [value]="type.code">{{type.code}}</mat-option>
-              </mat-select>
-            </mat-form-field>
+      <div *ngIf="this.utilities.qualificationApplicationType === 'selfcontained'">
+        <mat-card>
+          <mat-card-content>
+            <span class="weight">One or More Criteria will be weighted: </span>
+            <mat-radio-group name="isGloballyWeighted" [disabled]="this.dataService.isReadOnly()">
+              <mat-radio-button color="primary" name="globalWeight" value="YES"
+                                [checked]="this.dataService.isReadOnly()" (change)="handleGlobalWeight(YES)" #YES>
+                {{'espd.gui.yes' | translate}}
+              </mat-radio-button>
+              <mat-radio-button color="primary" name="globalWeight" value="NO"
+                                [checked]="!this.dataService.isReadOnly()" (change)="handleGlobalWeight(NO)" #NO>
+                {{'espd.gui.no' | translate}}
+              </mat-radio-button>
+            </mat-radio-group>
             <br>
-            <span class="weight">Provide the general method used to score and evaluate the weighted criteria: </span>
-            <mat-form-field>
-              <textarea matInput
-                        name="weightScoringMethodologyNote"
-                        id="shortDesc" cols="30" rows="10"
-                        placeholder="Weighting Scoring methodology note"
-                        [(ngModel)]="this.dataService.CADetails.weightScoringMethodologyNote"
-                        [disabled]="this.dataService.isReadOnly()">
-              </textarea>
-            </mat-form-field>
             <br>
-          </div>
-
-        </mat-card-content>
-      </mat-card>
-
-
-
-
+            <div *ngIf="this.utilities.isGloballyWeighted">
+              <span class="weight">Criterion Weighting Type: </span>
+              <mat-form-field>
+                <mat-select placeholder="Weighting Type"
+                            name="weightingType"
+                            [(ngModel)]="dataService.CADetails.weightingType">
+                  <mat-option *ngFor="let type of weightingType" [value]="type.code">{{type.code}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <br>
+              <span class="weight">Provide the general method used to score and evaluate the weighted criteria: </span>
+              <mat-form-field>
+                    <textarea matInput
+                              name="weightScoringMethodologyNote"
+                              id="shortDesc" cols="30" rows="10"
+                              placeholder="Weighting Scoring methodology note"
+                              [(ngModel)]="this.dataService.CADetails.weightScoringMethodologyNote"
+                              [disabled]="this.dataService.isReadOnly()">
+                    </textarea>
+              </mat-form-field>
+              <br>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
       <ng-container *ngIf="this.dataService.selectionCCriteria.length !== 0">
         <div class="desc">
           <h4 translate>espd.part4.crit.selection.technical.professional.ability.article</h4>

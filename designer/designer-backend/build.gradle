@@ -38,8 +38,38 @@ dependencies {
 
 }
 
-jar {
+/**
+ * * * * * RUN TASKS * * * * *
+ */
+
+run {
     dependsOn "buildWebApp"
+    finalizedBy "deleteWebAppResources"
+}
+
+task runBackendOnly(type: JavaExec) {
+    main = mainClassName
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+task runWebApp(type: Exec) {
+    dependsOn "npmInstallWebApp"
+    workingDir "$webappDir"
+    inputs.dir "$webappDir"
+    group = BasePlugin.BUILD_GROUP
+    if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")) {
+        commandLine "ng.cmd", "serve", "--aot"
+    } else {
+        commandLine "ng", "serve", "--aot"
+    }
+}
+
+/**
+ * * * * * JAR TASKS * * * * *
+ */
+
+jar {
+    dependsOn "buildWebAppDeploy"
 
     manifest {
         attributes "Main-Class": "eu.esens.espdvcd.designer.Server"
@@ -53,10 +83,6 @@ jar {
     finalizedBy "deleteWebAppResources"
 }
 
-run {
-    dependsOn "buildWebApp"
-    finalizedBy "deleteWebAppResources"
-}
 
 task createJarFromExistingResources(type: Jar) {
     dependsOn "copyWebAppResources"
@@ -73,21 +99,9 @@ task createJarFromExistingResources(type: Jar) {
     finalizedBy "deleteWebAppResources"
 }
 
-task deleteWebAppResources {
-    doLast {
-        delete "$webappDir/dist"
-        delete "$projectDir/src/main/resources/public"
-    }
-}
-
-task copyWebAppResources {
-    doFirst {
-        copy {
-            from "$webappDir/dist"
-            into "$projectDir/src/main/resources/public"
-        }
-    }
-}
+/**
+ * * * * * BUILD TASKS * * * * *
+ */
 
 task npmInstallWebApp(type: Exec) {
     workingDir "$webappDir"
@@ -106,6 +120,24 @@ task buildWebApp(type: Exec) {
     inputs.dir "$webappDir"
     group = BasePlugin.BUILD_GROUP
     if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")) {
+        commandLine "ng.cmd", "build"
+    } else {
+        commandLine "ng", "build"
+    }
+    doLast {
+        copy {
+            from "$webappDir/dist"
+            into "$projectDir/src/main/resources/public"
+        }
+    }
+}
+
+task buildWebAppDeploy(type: Exec) {
+    dependsOn "npmInstallWebApp"
+    workingDir "$webappDir"
+    inputs.dir "$webappDir"
+    group = BasePlugin.BUILD_GROUP
+    if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")) {
         commandLine "ng.cmd", "build", "--prod", "--optimization", "--build-optimizer"
     } else {
         commandLine "ng", "build", "--prod", "--optimization", "--build-optimizer"
@@ -118,14 +150,23 @@ task buildWebApp(type: Exec) {
     }
 }
 
-task runWebApp(type: Exec) {
-    dependsOn "npmInstallWebApp"
-    workingDir "$webappDir"
-    inputs.dir "$webappDir"
-    group = BasePlugin.BUILD_GROUP
-    if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")) {
-        commandLine "ng.cmd", "serve", "--aot"
-    } else {
-        commandLine "ng", "serve", "--aot"
+/**
+ * * * * * HELPER TASKS * * * * *
+ */
+
+
+task deleteWebAppResources {
+    doLast {
+        delete "$webappDir/dist"
+        delete "$projectDir/src/main/resources/public"
+    }
+}
+
+task copyWebAppResources {
+    doFirst {
+        copy {
+            from "$webappDir/dist"
+            into "$projectDir/src/main/resources/public"
+        }
     }
 }

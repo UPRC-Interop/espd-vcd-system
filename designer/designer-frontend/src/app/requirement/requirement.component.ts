@@ -23,9 +23,10 @@ import {Currency} from '../model/currency.model';
 import {ApicallService} from '../services/apicall.service';
 import {UtilitiesService} from '../services/utilities.service';
 import {EoIDType} from '../model/eoIDType.model';
-import {MatSelectionList} from '@angular/material';
+import {MatChipInputEvent, MatSelectionList} from '@angular/material';
 import {BidType} from '../model/bidType.model';
 import {FinancialRatioType} from '../model/financialRatioType.model';
+import {COMMA, ENTER} from '../../../node_modules/@angular/cdk/keycodes';
 
 @Component({
   selector: 'app-requirement',
@@ -47,11 +48,20 @@ export class RequirementComponent implements OnInit, OnChanges {
   bidTypes: BidType[] = null;
   financialRatioTypes: FinancialRatioType[] = null;
   // evaluationMethodTypes: EvaluationMethodType[] = null;
+  cpvCodes: string[] = [];
   isWeighted = false;
+  /* CPV chips */
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
   @ViewChild('lots') lots: MatSelectionList;
 
+
   constructor(public dataService: DataService, public APIService: ApicallService, public utilities: UtilitiesService) {
+
   }
 
   ngOnChanges() {
@@ -63,9 +73,11 @@ export class RequirementComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    // if (this.lots !== undefined) {
-    //   console.log(this.lots);
-    // }
+
+    if (this.req.responseDataType === 'CODE' && this.req.responseValuesRelatedArtefact === 'CPVCodes' && this.utilities.isImportESPD) {
+      // init cpvCodes when import
+      this.cpvCodes = this.utilities.renderCpvTemplate[this.req.uuid];
+    }
 
     this.dataService.getCountries()
       .then(res => {
@@ -151,6 +163,13 @@ export class RequirementComponent implements OnInit, OnChanges {
     }
   }
 
+  /* SELF-CONTAINED: CODE with CPVCodes as responseValuesRelatedArtefact */
+  createChips() {
+    this.utilities.cpvTemplate[this.req.uuid] = this.utilities.cpvCodeToString(this.cpvCodes);
+    // console.log(this.utilities.cpvTemplate);
+    // console.log(this.utilities.cpvTemplate['0157cebc-4ba4-4d65-9a6e-3cd5d57a08fb-34']);
+  }
+
 
   pushSelectedLot() {
     if (this.lots.selectedOptions.selected !== undefined) {
@@ -161,5 +180,32 @@ export class RequirementComponent implements OnInit, OnChanges {
       // console.log(this.reqLots);
     }
   }
+
+  /* CPV Chip handling */
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    // Add our cpv
+    if ((value || '').trim()) {
+      if (this.cpvCodes !== null && this.cpvCodes !== undefined) {
+        this.cpvCodes.push(value.trim());
+      }
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+  }
+
+  remove(cpv: string): void {
+    const index = this.cpvCodes.indexOf(cpv);
+
+    if (index >= 0) {
+      this.cpvCodes.splice(index, 1);
+    }
+  }
+
 
 }

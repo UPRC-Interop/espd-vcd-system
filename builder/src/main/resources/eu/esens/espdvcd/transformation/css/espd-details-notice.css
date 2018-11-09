@@ -1,0 +1,63 @@
+<!-- /*--><root>
+/*CSS-Definitionen fuer die Bekanntmachung*/
+/*Diese Zeilen stehen lassen, damit die CSS-Datei in dem XSL eingebunden werden kann!<![CDATA[<!--*/
+-->
+
+@font-face {
+    font-family: "Free Sans";
+    src: url("../FreeSans.ttf") format("truetype"); /* Use an absolute or relative url. */
+}
+
+.espd-details {
+    /*Falls die Font-Family geaendert wird, beachten, dass die PDF-Erzeugung auf Arial reagiert.*/
+    font-family: "Free Sans", sans-serif;
+    line-height: 1.4em;
+    font-size: 14px;
+    color: #000000;
+    max-width: 980px;
+    margin: 0 auto;
+    padding-top: 20px;
+}
+
+.espd-details * {
+    box-sizing: border-box;
+}
+
+.espd-details *:after,
+.espd-details *:before {
+    box-sizing: border-box;
+}
+
+.espd-details h2 {
+    /*User-Agent-Setting ueberschrieben*/
+    margin: 0 0 20px 0;
+}
+
+.espd-details h3,
+.espd-details h4,
+.espd-details h5 {
+    /*User-Agent-Setting ueberschrieben*/
+    margin: 0 0 10px 0;
+}
+
+.espd-details p {
+    line-height: 1.4em;
+    margin: 0 0 5px 0;
+}
+
+.espd-details a {
+    color: #000000;
+    outline: none;
+    cursor: pointer;
+    font-size: 15px;
+    text-decoration: underline;
+}
+
+.espd-details a:hover,
+.espd-details a:focus {
+    color: #000000;
+    text-decoration: none;
+}
+
+<!-- /*-->]]>Diese Zeilen stehen lassen, damit die CSS-Datei in dem XSL eingebunden werden kann!</root><!--*/
+-->
