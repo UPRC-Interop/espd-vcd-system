@@ -57,6 +57,7 @@ import {PhoneNumberValidationDirective} from './directives/phone-number/phone-nu
 import {IntegerValidationDirective} from './directives/integer/integer-validation.directive';
 import {PercentageValidationDirective} from './directives/percentage/percentage-validation.directive';
 import {VatNumberValidationDirective} from './directives/vat-number/vat-number-validation.directive';
+import {AmountDirective} from './directives/amount/amount.directive';
 
 @NgModule({
   declarations: [
@@ -85,7 +86,8 @@ import {VatNumberValidationDirective} from './directives/vat-number/vat-number-v
     PhoneNumberValidationDirective,
     IntegerValidationDirective,
     PercentageValidationDirective,
-    VatNumberValidationDirective
+    VatNumberValidationDirective,
+    AmountDirective
   ],
   imports: [
     BrowserModule,
