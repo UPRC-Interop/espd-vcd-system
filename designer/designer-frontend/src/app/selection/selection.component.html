@@ -37,7 +37,7 @@
     </mat-card>
   </div>
 
-  <mat-accordion multi="true" *ngIf="isSatisfiedALL">
+  <mat-accordion multi="true" *ngIf="this.utilities.isSatisfiedALL">
     <mat-expansion-panel expanded="true" *ngIf="this.dataService.selectionALLCriteria">
       <mat-expansion-panel-header>
         <mat-panel-title translate>
@@ -86,7 +86,7 @@
 
 
 
-  <mat-accordion multi="true" *ngIf="isAtoD">
+  <mat-accordion multi="true" *ngIf="this.utilities.isAtoD">
     <mat-expansion-panel expanded="true" *ngIf="this.dataService.selectionACriteria">
       <mat-expansion-panel-header>
         <mat-panel-title translate>

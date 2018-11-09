@@ -675,6 +675,8 @@ export class DataService {
             this.CADetails.classificationCodes = res.cadetails.classificationCodes;
             this.CADetails.weightScoringMethodologyNote = res.cadetails.weightScoringMethodologyNote;
             this.CADetails.weightingType = res.cadetails.weightingType;
+            this.utilities.isAtoD = true;
+            this.utilities.isSatisfiedALL = false;
 
             this.caRelatedCriteria = this.filterCARelatedCriteria(this.OTHER_CA_REGEXP, res.fullCriterionList);
             this.caRelatedCriteriaForm = this.formUtil.createCARelatedCriterionForm(this.caRelatedCriteria);
@@ -758,8 +760,10 @@ export class DataService {
             this.CADetails.classificationCodes = res.cadetails.classificationCodes;
             this.CADetails.weightScoringMethodologyNote = res.cadetails.weightScoringMethodologyNote;
             this.CADetails.weightingType = res.cadetails.weightingType;
-            // this.EODetails.generalTurnover.amount = res.eodetails.generalTurnover.amount;
-            // this.EODetails.generalTurnover.currency = res.eodetails.generalTurnover.currency;
+
+            this.utilities.isAtoD = true;
+            this.utilities.isSatisfiedALL = false;
+
             if (res.eodetails.generalTurnover !== null || res.eodetails.generalTurnover !== undefined) {
               this.generalTurnover = res.eodetails.generalTurnover;
             } else if (res.eodetails.generalTurnover === null) {
