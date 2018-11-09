@@ -380,6 +380,15 @@ export class DataService {
   /* ============================= step submit actions =================================*/
 
   selectionSubmit(isSatisfiedALL: boolean) {
+    console.log('THIS IS SELECTION ISSUE: ');
+    console.log(isSatisfiedALL);
+    console.log(this.selectionALLCriteria);
+    console.log(this.utilities.qualificationApplicationType);
+
+    /* WORKAROUND-FIX: satisfiesALL Criteria null issue when it's self-contained */
+    if (this.utilities.qualificationApplicationType === 'selfcontained') {
+      this.selectionALLCriteria = [];
+    }
 
     /* extract caRelated criteria */
     if (this.utilities.qualificationApplicationType === 'selfcontained') {
@@ -482,15 +491,17 @@ export class DataService {
 
   finishEOSubmit(exportType: ExportType) {
 
+    /* extract caRelated criteria */
+    if (this.utilities.qualificationApplicationType === 'selfcontained') {
+      /* WORKAROUND-FIX: satisfiesALL Criteria null issue when it's self-contained */
+      this.selectionALLCriteria = [];
+      this.formUtil.extractFormValuesFromCriteria(this.caRelatedCriteria, this.caRelatedCriteriaForm, this.formUtil.evidenceList);
+    }
+
     /* extract eoRelated criteria */
     this.formUtil.extractFormValuesFromCriteria(this.eoRelatedACriteria, this.eoRelatedACriteriaForm, this.formUtil.evidenceList);
     this.formUtil.extractFormValuesFromCriteria(this.eoRelatedCCriteria, this.eoRelatedCCriteriaForm, this.formUtil.evidenceList);
     this.formUtil.extractFormValuesFromCriteria(this.eoRelatedDCriteria, this.eoRelatedDCriteriaForm, this.formUtil.evidenceList);
-
-    /* extract caRelated criteria */
-    if (this.utilities.qualificationApplicationType === 'selfcontained') {
-      this.formUtil.extractFormValuesFromCriteria(this.caRelatedCriteria, this.caRelatedCriteriaForm, this.formUtil.evidenceList);
-    }
 
     /* extract exclusion criteria */
     this.formUtil.extractFormValuesFromCriteria(this.exclusionACriteria, this.exclusionACriteriaForm, this.formUtil.evidenceList);
@@ -664,6 +675,8 @@ export class DataService {
             this.CADetails.classificationCodes = res.cadetails.classificationCodes;
             this.CADetails.weightScoringMethodologyNote = res.cadetails.weightScoringMethodologyNote;
             this.CADetails.weightingType = res.cadetails.weightingType;
+            this.utilities.isAtoD = true;
+            this.utilities.isSatisfiedALL = false;
 
             this.caRelatedCriteria = this.filterCARelatedCriteria(this.OTHER_CA_REGEXP, res.fullCriterionList);
             this.caRelatedCriteriaForm = this.formUtil.createCARelatedCriterionForm(this.caRelatedCriteria);
@@ -747,8 +760,10 @@ export class DataService {
             this.CADetails.classificationCodes = res.cadetails.classificationCodes;
             this.CADetails.weightScoringMethodologyNote = res.cadetails.weightScoringMethodologyNote;
             this.CADetails.weightingType = res.cadetails.weightingType;
-            // this.EODetails.generalTurnover.amount = res.eodetails.generalTurnover.amount;
-            // this.EODetails.generalTurnover.currency = res.eodetails.generalTurnover.currency;
+
+            this.utilities.isAtoD = true;
+            this.utilities.isSatisfiedALL = false;
+
             if (res.eodetails.generalTurnover !== null || res.eodetails.generalTurnover !== undefined) {
               this.generalTurnover = res.eodetails.generalTurnover;
             } else if (res.eodetails.generalTurnover === null) {

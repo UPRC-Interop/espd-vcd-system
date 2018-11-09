@@ -18,20 +18,26 @@
 <h4 translate>espd.part4.header</h4>
 <form #f="ngForm">
 
-  <mat-card>
-    <mat-card-content>
-      <p translate>espd.part4.alert</p>
-      <span translate>espd.gui.question.to.use.alpha</span>
-      <mat-radio-group name="satisfiesALL" [disabled]="this.dataService.isReadOnly()">
-        <mat-radio-button color="primary" name="selALL" value="YES" [checked]="this.dataService.isReadOnly()" (change)="handleALL(YES)" #YES>
-          {{'espd.gui.yes' | translate}}</mat-radio-button>
-        <mat-radio-button color="primary" name="selALL" value="NO" [checked]="!this.dataService.isReadOnly()" (change)="handleALL(NO)" #NO>
-          {{'espd.gui.no' | translate}}</mat-radio-button>
-      </mat-radio-group>
-    </mat-card-content>
-  </mat-card>
+  <div *ngIf="this.utilities.qualificationApplicationType === 'regulated'">
+    <mat-card>
+      <mat-card-content>
+        <p translate>espd.part4.alert</p>
+        <span translate>espd.gui.question.to.use.alpha</span>
+        <mat-radio-group name="satisfiesALL" [disabled]="this.dataService.isReadOnly()">
+          <mat-radio-button color="primary" name="selALL" value="YES" [checked]="this.dataService.isReadOnly()"
+                            (change)="handleALL(YES)" #YES>
+            {{'espd.gui.yes' | translate}}
+          </mat-radio-button>
+          <mat-radio-button color="primary" name="selALL" value="NO" [checked]="!this.dataService.isReadOnly()"
+                            (change)="handleALL(NO)" #NO>
+            {{'espd.gui.no' | translate}}
+          </mat-radio-button>
+        </mat-radio-group>
+      </mat-card-content>
+    </mat-card>
+  </div>
 
-  <mat-accordion multi="true" *ngIf="isSatisfiedALL">
+  <mat-accordion multi="true" *ngIf="this.utilities.isSatisfiedALL">
     <mat-expansion-panel expanded="true" *ngIf="this.dataService.selectionALLCriteria">
       <mat-expansion-panel-header>
         <mat-panel-title translate>
@@ -80,7 +86,7 @@
 
 
 
-  <mat-accordion multi="true" *ngIf="isAtoD">
+  <mat-accordion multi="true" *ngIf="this.utilities.isAtoD">
     <mat-expansion-panel expanded="true" *ngIf="this.dataService.selectionACriteria">
       <mat-expansion-panel-header>
         <mat-panel-title translate>

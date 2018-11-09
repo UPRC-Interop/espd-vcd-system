@@ -49,50 +49,50 @@ public class ESPDSchematronValidatorTest {
     private File invalidSelfContainedResponseV2;
 
     @Before
-    public void setUp() {
-        regulatedRequestV2 = new File(getClass().getClassLoader().getResource("REGULATED_ESPD_Request_2.0.2.xml").getFile());
+    public void setUp() throws Exception {
+        regulatedRequestV2 = new File(getClass().getClassLoader().getResource("REGULATED_ESPD_Request_2.0.2.xml").toURI());
         Assert.assertNotNull(regulatedRequestV2);
 
-        regulatedResponseV2 = new File(getClass().getClassLoader().getResource("REGULATED_ESPD_Response_2.0.2.xml").getFile());
+        regulatedResponseV2 = new File(getClass().getClassLoader().getResource("REGULATED_ESPD_Response_2.0.2.xml").toURI());
         Assert.assertNotNull(regulatedResponseV2);
 
-        selfContainedRequestV2 = new File(getClass().getClassLoader().getResource("SELFCONTAINED-ESPD-Request_2.0.2.xml").getFile());
+        selfContainedRequestV2 = new File(getClass().getClassLoader().getResource("SELFCONTAINED-ESPD-Request_2.0.2.xml").toURI());
         Assert.assertNotNull(selfContainedRequestV2);
 
-        selfContainedResponseV2 = new File(getClass().getClassLoader().getResource("SELFCONTAINED_ESPD_Response_2.0.2.xml").getFile());
+        selfContainedResponseV2 = new File(getClass().getClassLoader().getResource("SELFCONTAINED_ESPD_Response_2.0.2.xml").toURI());
         Assert.assertNotNull(selfContainedResponseV2);
 
-        validRegulatedRequestV1 = new File(getClass().getClassLoader().getResource("espd-request.xml").getFile());
+        validRegulatedRequestV1 = new File(getClass().getClassLoader().getResource("espd-request.xml").toURI());
         Assert.assertNotNull(validRegulatedRequestV1);
 
-        invalidRegulatedRequestV1 = new File(getClass().getClassLoader().getResource("espd-request-invalid.xml").getFile());
+        invalidRegulatedRequestV1 = new File(getClass().getClassLoader().getResource("espd-request-invalid.xml").toURI());
         Assert.assertNotNull(invalidRegulatedRequestV1);
 
-        invalidRegulatedResponseV2 = new File(getClass().getClassLoader().getResource("espd-response-v2-11.xml").getFile());
+        invalidRegulatedResponseV2 = new File(getClass().getClassLoader().getResource("espd-response-v2-11.xml").toURI());
         Assert.assertNotNull(invalidRegulatedResponseV2);
 
-        invalidRegulatedResponseV2_12 = new File(getClass().getClassLoader().getResource("espd-response-v2-12.xml").getFile());
+        invalidRegulatedResponseV2_12 = new File(getClass().getClassLoader().getResource("espd-response-v2-12.xml").toURI());
         Assert.assertNotNull(invalidRegulatedResponseV2_12);
 
-        invalidRegulatedResponseV2_31 = new File(getClass().getClassLoader().getResource("espd-response-v2-31.xml").getFile());
+        invalidRegulatedResponseV2_31 = new File(getClass().getClassLoader().getResource("espd-response-v2-31.xml").toURI());
         Assert.assertNotNull(invalidRegulatedResponseV2_31);
 
-        invalidRegulatedResponseV2_37 = new File(getClass().getClassLoader().getResource("espd-response-v2-37.xml").getFile());
+        invalidRegulatedResponseV2_37 = new File(getClass().getClassLoader().getResource("espd-response-v2-37.xml").toURI());
         Assert.assertNotNull(invalidRegulatedResponseV2_37);
 
-        invalidRegulatedResponseV2_38 = new File(getClass().getClassLoader().getResource("espd-response-v2-38.xml").getFile());
+        invalidRegulatedResponseV2_38 = new File(getClass().getClassLoader().getResource("espd-response-v2-38.xml").toURI());
         Assert.assertNotNull(invalidRegulatedResponseV2_38);
 
-        invalidRegulatedResponseV2_60 = new File(getClass().getClassLoader().getResource("espd-response-v2-60.xml").getFile());
+        invalidRegulatedResponseV2_60 = new File(getClass().getClassLoader().getResource("espd-response-v2-60.xml").toURI());
         Assert.assertNotNull(invalidRegulatedResponseV2_60);
 
-        invalidSelfContainedRequestV2 = new File(getClass().getClassLoader().getResource("SELFCONTAINED-ESPD-Request_2.0.2.xml").getFile());
+        invalidSelfContainedRequestV2 = new File(getClass().getClassLoader().getResource("SELFCONTAINED-ESPD-Request_2.0.2.xml").toURI());
         Assert.assertNotNull(invalidSelfContainedRequestV2);
 
-        selfContainedRequestV2_full = new File(getClass().getClassLoader().getResource("espd-self-contained-request-full.xml").getFile());
+        selfContainedRequestV2_full = new File(getClass().getClassLoader().getResource("espd-self-contained-request-full.xml").toURI());
         Assert.assertNotNull(selfContainedRequestV2_full);
 
-        invalidSelfContainedResponseV2 = new File(getClass().getClassLoader().getResource("SELFCONTAINED_ESPD_Response_2.0.2.xml").getFile());
+        invalidSelfContainedResponseV2 = new File(getClass().getClassLoader().getResource("SELFCONTAINED_ESPD_Response_2.0.2.xml").toURI());
         Assert.assertNotNull(invalidSelfContainedResponseV2);
     }
 
