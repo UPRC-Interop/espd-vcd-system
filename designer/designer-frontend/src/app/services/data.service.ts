@@ -380,6 +380,15 @@ export class DataService {
   /* ============================= step submit actions =================================*/
 
   selectionSubmit(isSatisfiedALL: boolean) {
+    console.log('THIS IS SELECTION ISSUE: ');
+    console.log(isSatisfiedALL);
+    console.log(this.selectionALLCriteria);
+    console.log(this.utilities.qualificationApplicationType);
+
+    /* WORKAROUND-FIX: satisfiesALL Criteria null issue when it's self-contained */
+    if (this.utilities.qualificationApplicationType === 'selfcontained') {
+      this.selectionALLCriteria = [];
+    }
 
     /* extract caRelated criteria */
     if (this.utilities.qualificationApplicationType === 'selfcontained') {
@@ -482,15 +491,28 @@ export class DataService {
 
   finishEOSubmit(exportType: ExportType) {
 
+    console.log('THIS IS FINISH response =================================================');
+    console.log(this.reductionCriteria);
+    console.log(this.selectionALLCriteria);
+    console.log(this.isSatisfiedALLeo);
+
+    /* extract caRelated criteria */
+    if (this.utilities.qualificationApplicationType === 'selfcontained') {
+      /* WORKAROUND-FIX: satisfiesALL Criteria null issue when it's self-contained */
+      this.selectionALLCriteria = [];
+      this.formUtil.extractFormValuesFromCriteria(this.caRelatedCriteria, this.caRelatedCriteriaForm, this.formUtil.evidenceList);
+    }
+
+    console.log(this.selectionALLCriteria);
+    console.log(this.selectionACriteria);
+    console.log(this.selectionBCriteria);
+    console.log(this.selectionCCriteria);
+    console.log(this.selectionDCriteria);
+
     /* extract eoRelated criteria */
     this.formUtil.extractFormValuesFromCriteria(this.eoRelatedACriteria, this.eoRelatedACriteriaForm, this.formUtil.evidenceList);
     this.formUtil.extractFormValuesFromCriteria(this.eoRelatedCCriteria, this.eoRelatedCCriteriaForm, this.formUtil.evidenceList);
     this.formUtil.extractFormValuesFromCriteria(this.eoRelatedDCriteria, this.eoRelatedDCriteriaForm, this.formUtil.evidenceList);
-
-    /* extract caRelated criteria */
-    if (this.utilities.qualificationApplicationType === 'selfcontained') {
-      this.formUtil.extractFormValuesFromCriteria(this.caRelatedCriteria, this.caRelatedCriteriaForm, this.formUtil.evidenceList);
-    }
 
     /* extract exclusion criteria */
     this.formUtil.extractFormValuesFromCriteria(this.exclusionACriteria, this.exclusionACriteriaForm, this.formUtil.evidenceList);

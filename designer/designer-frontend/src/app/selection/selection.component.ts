@@ -40,7 +40,7 @@ export class SelectionComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.dataService.isReadOnly()) {
+    if (this.dataService.isReadOnly() || this.utilities.qualificationApplicationType === 'selfcontained') {
       this.isAtoD = true;
       this.isSatisfiedALL = false;
     }

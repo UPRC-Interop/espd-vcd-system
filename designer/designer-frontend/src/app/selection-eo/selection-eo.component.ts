@@ -35,7 +35,7 @@ export class SelectionEoComponent implements OnInit {
 
   ngOnInit() {
 
-    if (this.dataService.isReadOnly()) {
+    if (this.dataService.isReadOnly() || this.utilities.qualificationApplicationType === 'selfcontained') {
       this.utilities.isAtoD = true;
       this.utilities.isSatisfiedALL = false;
     }
