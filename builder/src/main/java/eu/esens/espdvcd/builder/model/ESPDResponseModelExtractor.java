@@ -145,7 +145,9 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
 
         // Economic Operator Details
         if (!qarType.getEconomicOperatorParty().isEmpty() && !qarType.getProcurementProjectLot().isEmpty()) {
-            modelResponse.setEODetails(extractEODetails(qarType.getEconomicOperatorParty().get(0), qarType.getProcurementProjectLot().get(0)));
+            modelResponse.setEODetails(extractEODetails(qarType.getEconomicOperatorParty().get(0)
+                    , qarType.getProcurementProjectLot().get(0)
+                    , qarType.getEconomicOperatorGroupName())); // This is for SELF-CONTAINED
         } else {
             applyEODetailsStructure(modelResponse);
         }
@@ -839,7 +841,8 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
     }
 
     public EODetails extractEODetails(eu.espd.schema.v2.pre_award.commonaggregate.EconomicOperatorPartyType eoPartyType,
-                                      eu.espd.schema.v2.pre_award.commonaggregate.ProcurementProjectLotType pplType) {
+                                      eu.espd.schema.v2.pre_award.commonaggregate.ProcurementProjectLotType pplType,
+                                      eu.espd.schema.v2.pre_award.commonbasic.EconomicOperatorGroupNameType eoGroupNameType) {
 
         final EODetails eoDetails = new EODetails();
 
@@ -866,6 +869,35 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
 //
 //                }
 
+            }
+
+            // Economic Operator Group Name
+            if (eoGroupNameType != null
+                    && eoGroupNameType.getValue() != null) {
+                eoDetails.setEOGroupName(eoGroupNameType.getValue());
+            }
+
+            // Employee quantity
+            if (!eoPartyType.getQualifyingParty().isEmpty()
+                    && eoPartyType.getQualifyingParty().get(0).getEmployeeQuantity() != null
+                    && eoPartyType.getQualifyingParty().get(0).getEmployeeQuantity().getValue() != null) {
+
+                eoDetails.setEmployeeQuantity(eoPartyType.getQualifyingParty().get(0)
+                        .getEmployeeQuantity().getValue().intValueExact());
+            }
+
+            // General turnover
+            if (!eoPartyType.getQualifyingParty().isEmpty()
+                    && !eoPartyType.getQualifyingParty().get(0).getFinancialCapability().isEmpty()
+                    && eoPartyType.getQualifyingParty().get(0).getFinancialCapability().get(0).getValueAmount() != null
+                    && eoPartyType.getQualifyingParty().get(0).getFinancialCapability().get(0).getValueAmount().getValue() != null
+                    && eoPartyType.getQualifyingParty().get(0).getFinancialCapability().get(0).getValueAmount().getCurrencyID() != null) {
+
+                eoDetails.setGeneralTurnover(new AmountResponse());
+                eoDetails.getGeneralTurnover().setAmount(eoPartyType.getQualifyingParty().get(0)
+                        .getFinancialCapability().get(0).getValueAmount().getValue());
+                eoDetails.getGeneralTurnover().setCurrency(eoPartyType.getQualifyingParty().get(0)
+                        .getFinancialCapability().get(0).getValueAmount().getCurrencyID());
             }
 
             // (3) Path: .../cac:EconomicOperatorParty/cac:Party
