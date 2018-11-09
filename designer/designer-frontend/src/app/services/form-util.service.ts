@@ -542,11 +542,12 @@ export class FormUtilService {
                 group[r.uuid + 'evaluationMethodDescription'] = new FormControl(r.response.evaluationMethodDescription);
               }
             }
-
             /* SELF-CONTAINED: LOT_IDENTIFIER */
-            // if (r.responseDataType === 'LOT_IDENTIFIER') {
-            //   /* */
-            // }
+            if (r.responseDataType === 'LOT_IDENTIFIER') {
+              if (r.response.lots !== undefined && r.response.lots !== null) {
+                this.utilities.renderLotTemplate[r.uuid] = r.response.lots;
+              }
+            }
 
             /* SELF-CONTAINED: responseDataType: CODE ---> CpvCodes*/
             if (r.responseDataType === 'CODE' && r.responseValuesRelatedArtefact === 'CPVCodes') {

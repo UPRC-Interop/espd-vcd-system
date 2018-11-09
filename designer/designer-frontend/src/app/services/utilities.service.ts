@@ -18,7 +18,7 @@ import {Injectable} from '@angular/core';
 import {Moment} from 'moment';
 import * as moment from 'moment';
 import {SelectionCriteria} from '../model/selectionCriteria.model';
-import {MatListOption} from '@angular/material';
+import {MatListOption, MatSelectionList} from '@angular/material';
 import {ESPDRequest} from '../model/ESPDRequest.model';
 
 @Injectable({
@@ -45,6 +45,7 @@ export class UtilitiesService {
   lotTemplate = [];
   cpvTemplate = [];
   renderCpvTemplate = [];
+  renderLotTemplate = [];
   cpvString = [];
   type: string;
   // qualificationApplicationType = 'SELF-CONTAINED';
@@ -121,6 +122,18 @@ export class UtilitiesService {
 
   stringToCpvCode(cpvString: string): string[] {
     return cpvString.split(',');
+  }
+
+  lotToSelectedMatListOption(lots: string[], selectedLots: MatSelectionList): MatSelectionList {
+
+    selectedLots.selectedOptions.selected.map((selected, i) => {
+      console.log(selected);
+      selected.selected = true;
+      return selected.value = lots[i];
+    });
+    console.log('THIS IS RESULT OF SELECTED LOTS: ');
+    console.log(selectedLots);
+    return selectedLots;
   }
 
   // makeDummyESPDRequest(): ESPDRequest {

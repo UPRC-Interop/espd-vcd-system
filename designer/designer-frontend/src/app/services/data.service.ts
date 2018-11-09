@@ -380,15 +380,21 @@ export class DataService {
   /* ============================= step submit actions =================================*/
 
   selectionSubmit(isSatisfiedALL: boolean) {
-    console.log('THIS IS SELECTION ISSUE: ');
-    console.log(isSatisfiedALL);
-    console.log(this.selectionALLCriteria);
-    console.log(this.utilities.qualificationApplicationType);
+    // console.log('THIS IS SELECTION ISSUE: ');
+    // console.log(isSatisfiedALL);
+    // console.log(this.selectionALLCriteria);
+    // console.log(this.caRelatedCriteria);
+    // console.log(this.selectionACriteria);
+    // console.log(this.selectionBCriteria);
+    // console.log(this.selectionCCriteria);
+    // console.log(this.selectionDCriteria);
+    // console.log(this.utilities.qualificationApplicationType);
 
     /* WORKAROUND-FIX: satisfiesALL Criteria null issue when it's self-contained */
     if (this.utilities.qualificationApplicationType === 'selfcontained') {
       this.selectionALLCriteria = [];
     }
+    console.log(this.selectionALLCriteria);
 
     /* extract caRelated criteria */
     if (this.utilities.qualificationApplicationType === 'selfcontained') {

@@ -23,10 +23,11 @@ import {Currency} from '../model/currency.model';
 import {ApicallService} from '../services/apicall.service';
 import {UtilitiesService} from '../services/utilities.service';
 import {EoIDType} from '../model/eoIDType.model';
-import {MatChipInputEvent, MatSelectionList} from '@angular/material';
+import {MatChipInputEvent, MatListOption, MatSelectionList} from '@angular/material';
 import {BidType} from '../model/bidType.model';
 import {FinancialRatioType} from '../model/financialRatioType.model';
 import {COMMA, ENTER} from '../../../node_modules/@angular/cdk/keycodes';
+import {SelectionModel} from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-requirement',
@@ -41,7 +42,7 @@ export class RequirementComponent implements OnInit, OnChanges {
   @Output() indicatorChanged = new EventEmitter();
   // @Output() lotsInReq = new EventEmitter();
 
-  reqLots: string[] = [];
+  reqLots: string[] = ['Lot1', 'Lot2', 'Lot3'];
   countries: Country[] = null;
   currency: Currency[] = null;
   eoIDTypes: EoIDType[] = null;
@@ -73,6 +74,10 @@ export class RequirementComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
+
+    if (this.req.responseDataType === 'LOT_IDENTIFIER') {
+      this.importSelectedLots();
+    }
 
     if (this.req.responseDataType === 'CODE' && this.req.responseValuesRelatedArtefact === 'CPVCodes' && this.utilities.isImportESPD) {
       // init cpvCodes when import
@@ -173,11 +178,24 @@ export class RequirementComponent implements OnInit, OnChanges {
 
   pushSelectedLot() {
     if (this.lots.selectedOptions.selected !== undefined) {
+      console.log(this.lots);
+      console.log(this.lots.selectedOptions);
+      console.log(typeof this.lots.selectedOptions);
+      console.log(this.lots.selectedOptions.selected);
+      console.log(typeof this.lots.selectedOptions.selected);
       this.utilities.lotTemplate[this.req.uuid] = this.utilities.createLotListInCriterion(this.lots.selectedOptions.selected);
       console.log(this.utilities.lotTemplate);
       // console.log(this.utilities.lotTemplate['270317fa-6790-42ec-8f1a-575d82ed1d63-27']);
       // this.reqLots = this.utilities.createLotListInCriterion(this.lots.selectedOptions.selected);
       // console.log(this.reqLots);
+    }
+  }
+
+  importSelectedLots() {
+    if (this.req.responseDataType === 'LOT_IDENTIFIER') {
+      /* test lot import */
+      this.lots.selectedOptions = new SelectionModel<MatListOption>(false);
+      console.log(this.utilities.lotToSelectedMatListOption(this.reqLots, this.lots));
     }
   }
 
