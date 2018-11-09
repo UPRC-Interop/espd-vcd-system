@@ -212,7 +212,11 @@
         <label [attr.for]="req.uuid+'evaluationMethodDescription'">Provide complementary information about the evaluation of the criterion: </label>
         <br>
         <mat-form-field>
-          <input matInput [formControlName]="req.uuid+'evaluationMethodDescription'" [id]="req.uuid+'evaluationMethodDescription'" >
+          <textarea matInput
+                    [formControlName]="req.uuid+'evaluationMethodDescription'" [id]="req.uuid+'evaluationMethodDescription'"
+                    id="shortDesc" cols="30" rows="10">
+          </textarea>
+          <!--<input matInput [formControlName]="req.uuid+'evaluationMethodDescription'" [id]="req.uuid+'evaluationMethodDescription'" >-->
         </mat-form-field>
       </div>
     </div>

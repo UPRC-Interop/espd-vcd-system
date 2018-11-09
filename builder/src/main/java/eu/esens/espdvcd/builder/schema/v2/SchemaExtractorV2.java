@@ -692,8 +692,8 @@ public interface SchemaExtractorV2 {
     default ProcedureCodeType createProcedureCodeType(String code) {
         ProcedureCodeType codeType = new ProcedureCodeType();
         codeType.setListID("ProcedureType");
-        codeType.setListAgencyName("EU-COM-OP");
-        codeType.setListVersionID("1.0");
+        codeType.setListAgencyID("EU-COM-GROW");
+        codeType.setListVersionID("2.0.2");
         codeType.setValue(code);
         return codeType;
     }
@@ -703,7 +703,7 @@ public interface SchemaExtractorV2 {
      * the procedure is not divided into Lots. Additional Lots may be specified, in which case each
      * Lot needs to be identified differently.
      *
-     * @param type The type of XML ESPD Artefact (REGULATED or SELF-CONTAINED)
+     * @param type         The type of XML ESPD Artefact (REGULATED or SELF-CONTAINED)
      * @param numberOfLots The number of lots
      * @return
      */
@@ -769,6 +769,8 @@ public interface SchemaExtractorV2 {
                     String code = ((EvidenceURLCodeResponse) rq.getResponse()).getEvidenceURLCode();
                     if (code != null && !code.isEmpty()) {
                         rqType.setExpectedCode(new ExpectedCodeType());
+                        rqType.getExpectedCode().setListID("BidType");
+                        rqType.getExpectedCode().setListAgencyID("EU-COM-GROW");
                         rqType.getExpectedCode().setValue(code);
                     }
                     break;
