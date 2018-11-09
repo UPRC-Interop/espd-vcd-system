@@ -706,7 +706,7 @@ public interface SchemaExtractorV2 {
 
     default WeightingTypeCodeType createWeightingTypeCodeType(String code) {
         WeightingTypeCodeType codeType = new WeightingTypeCodeType();
-        codeType.setListID("ResponseDataType");
+        codeType.setListID("WeightingType");
         codeType.setListAgencyID("EU-COM-GROW");
         codeType.setListVersionID("2.0.2");
         codeType.setValue(code);
@@ -729,8 +729,8 @@ public interface SchemaExtractorV2 {
     default ProcedureCodeType createProcedureCodeType(String code) {
         ProcedureCodeType codeType = new ProcedureCodeType();
         codeType.setListID("ProcedureType");
-        codeType.setListAgencyID("EU-COM-GROW");
-        codeType.setListVersionID("2.0.2");
+        codeType.setListAgencyID("EU-COM-OP");
+        codeType.setListVersionID("1.0");
         codeType.setValue(code);
         return codeType;
     }
@@ -823,10 +823,10 @@ public interface SchemaExtractorV2 {
                                     rqType.getExpectedCode().setListVersionID("1.0");
                                     break;
 
-//                                case "CPVCodes":
-//                                    rqType.getExpectedCode().setListAgencyID("");
-//                                    rqType.getExpectedCode().setListVersionID("1.0");
-//                                    break;
+                                case "CPVCodes":
+                                    rqType.getExpectedCode().setListAgencyID("EU-COM-OP");
+                                    rqType.getExpectedCode().setListVersionID("1.0");
+                                    break;
 
                             }
 
@@ -840,6 +840,7 @@ public interface SchemaExtractorV2 {
                     String lots = ((LotIdentifierResponse) rq.getResponse()).getLots();
                     if (lots != null && !lots.isEmpty()) {
                         rqType.setExpectedID(new ExpectedIDType());
+                        rqType.getExpectedID().setSchemeAgencyID("EU-COM-GROW");
                         rqType.getExpectedID().setValue(lots);
                     }
                     break;
@@ -876,6 +877,7 @@ public interface SchemaExtractorV2 {
                     String url = ((URLResponse) rq.getResponse()).getUrl();
                     if (url != null) {
                         rqType.setExpectedID(new ExpectedIDType());
+                        rqType.getExpectedID().setSchemeAgencyID("EU-COM-GROW");
                         rqType.getExpectedID().setSchemeID("URI");
                         rqType.getExpectedID().setValue(url);
                     }
