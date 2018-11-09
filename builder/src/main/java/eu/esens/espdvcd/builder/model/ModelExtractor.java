@@ -279,7 +279,7 @@ public interface ModelExtractor {
             // No need to set that here
             // if (!procurementProjectType.getName().isEmpty()
             //        && procurementProjectType.getName().get(0).getValue() != null) {
-            //    cd.setCAOfficialName(procurementProjectType.getName().get(0).getValue());
+            //    cd.setProcurementProcedureTitle(procurementProjectType.getName().get(0).getValue());
             // }
 
             // No need to set that here

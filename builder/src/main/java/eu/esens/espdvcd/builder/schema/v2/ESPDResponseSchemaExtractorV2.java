@@ -122,7 +122,7 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
             if (modelResponse.getDocumentDetails().getQualificationApplicationType()
                     == QualificationApplicationTypeEnum.SELFCONTAINED) {
 
-                qarType.setProcurementProject(createProcurementProjectType(modelResponse.getCADetails().getCAOfficialName()
+                qarType.setProcurementProject(createProcurementProjectType(modelResponse.getCADetails().getProcurementProcedureTitle()
                         , modelResponse.getCADetails().getProcurementProcedureDesc()
                         , modelResponse.getCADetails().getProjectType()              // Procurement typeCode
                         , modelResponse.getCADetails().getClassificationCodes()));   // CPV codes
