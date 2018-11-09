@@ -223,7 +223,7 @@ public class CADetails implements Serializable {
     private String weightingType;
 
     /**
-     * Object of the project
+     * Object of the projectProcurementProject
      * <p>
      * A code to describe the object of the project
      * (e.g. works, supplies, services, public work concessions, service concessions, other).
@@ -446,14 +446,6 @@ public class CADetails implements Serializable {
 
     public void setWeightingType(String weightingType) {
         this.weightingType = weightingType;
-    }
-
-    public String getCaOfficialName() {
-        return caOfficialName;
-    }
-
-    public void setCaOfficialName(String caOfficialName) {
-        this.caOfficialName = caOfficialName;
     }
 
     public String getProcurementProcedureType() {

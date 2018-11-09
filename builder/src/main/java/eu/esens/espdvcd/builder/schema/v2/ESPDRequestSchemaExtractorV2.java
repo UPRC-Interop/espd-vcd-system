@@ -15,15 +15,14 @@
  */
 package eu.esens.espdvcd.builder.schema.v2;
 
+import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.response.WeightIndicatorResponse;
-import eu.espd.schema.v2.pre_award.commonaggregate.DocumentReferenceType;
-import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionPropertyType;
-import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionType;
+import eu.espd.schema.v2.pre_award.commonaggregate.*;
 import eu.espd.schema.v2.pre_award.commonbasic.*;
 import eu.espd.schema.v2.pre_award.qualificationapplicationrequest.QualificationApplicationRequestType;
 
@@ -99,6 +98,15 @@ public class ESPDRequestSchemaExtractorV2 implements SchemaExtractorV2 {
             qarType.getProcurementProjectLot().addAll(createProcurementProjectLotType(modelRequest
                             .getDocumentDetails().getQualificationApplicationType() // REGULATED or SELF-CONTAINED
                     , modelRequest.getCADetails().getProcurementProjectLots()));    // Number of lots
+            // Procurement Project (only in SELF-CONTAINED)
+            if (modelRequest.getDocumentDetails().getQualificationApplicationType()
+                    == QualificationApplicationTypeEnum.SELFCONTAINED) {
+
+                qarType.setProcurementProject(createProcurementProjectType(modelRequest.getCADetails().getCAOfficialName()
+                        , modelRequest.getCADetails().getProcurementProcedureDesc()
+                        , modelRequest.getCADetails().getProjectType()              // Procurement typeCode
+                        , modelRequest.getCADetails().getClassificationCodes()));   // CPV codes);
+            }
         }
         // Procedure Code
         if (modelRequest.getCADetails() != null

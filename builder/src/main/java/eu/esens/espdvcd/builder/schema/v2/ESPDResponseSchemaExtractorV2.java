@@ -16,6 +16,7 @@
 package eu.esens.espdvcd.builder.schema.v2;
 
 import eu.esens.espdvcd.codelist.enums.EOIndustryClassificationCodeEnum;
+import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.EODetails;
 import eu.esens.espdvcd.model.ESPDRequestDetails;
@@ -117,6 +118,15 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
             qarType.getProcurementProjectLot().addAll(createProcurementProjectLotType(modelResponse
                             .getDocumentDetails().getQualificationApplicationType() // REGULATED or SELF-CONTAINED
                     , modelResponse.getCADetails().getProcurementProjectLots()));    // Number of lots
+            // Procurement Project (only in SELF-CONTAINED)
+            if (modelResponse.getDocumentDetails().getQualificationApplicationType()
+                    == QualificationApplicationTypeEnum.SELFCONTAINED) {
+
+                qarType.setProcurementProject(createProcurementProjectType(modelResponse.getCADetails().getCAOfficialName()
+                        , modelResponse.getCADetails().getProcurementProcedureDesc()
+                        , modelResponse.getCADetails().getProjectType()              // Procurement typeCode
+                        , modelResponse.getCADetails().getClassificationCodes()));   // CPV codes
+            }
         }
         // Procedure Code
         if (modelResponse.getCADetails().getProcurementProcedureType() != null) {

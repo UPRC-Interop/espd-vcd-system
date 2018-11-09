@@ -600,6 +600,44 @@ public interface SchemaExtractorV2 {
         return qaTypeCode;
     }
 
+    default ProcurementProjectType createProcurementProjectType(String caOfficialName,
+                                                                String procurementProcedureDesc,
+                                                                String projectType,
+                                                                List<String> classificationCodes) {
+
+        ProcurementProjectType procurementProjectType = new ProcurementProjectType();
+
+        // Name
+        if (caOfficialName != null) {
+            procurementProjectType.getName().add(new NameType());
+            procurementProjectType.getName().get(0).setValue(caOfficialName);
+        }
+
+        // Description
+        if (procurementProcedureDesc != null) {
+            procurementProjectType.getDescription().add(new DescriptionType());
+            procurementProjectType.getDescription().get(0).setValue(procurementProcedureDesc);
+        }
+
+        // CPV codes
+        procurementProjectType.getMainCommodityClassification().addAll(classificationCodes.stream()
+                .map(cpvCode -> {
+                    CommodityClassificationType classificationType = new CommodityClassificationType();
+                    classificationType.setItemClassificationCode(new ItemClassificationCodeType());
+                    classificationType.getItemClassificationCode().setValue(cpvCode);
+                    return classificationType;
+                })
+                .collect(Collectors.toList()));
+
+        // Project Type
+        if (projectType != null) {
+            procurementProjectType.setProcurementTypeCode(new ProcurementTypeCodeType());
+            procurementProjectType.getProcurementTypeCode().setValue(projectType);
+        }
+
+        return procurementProjectType;
+    }
+
     default ProfileExecutionIDType createProfileExecutionIDType(QualificationApplicationTypeEnum type) {
         ProfileExecutionIDType peIdType = new ProfileExecutionIDType();
         peIdType.setSchemeAgencyID("EU-COM-GROW");
