@@ -106,4 +106,4 @@ gradle-app.setting
 
 # Ignore angular build files
 
-designer/designer-backend/resources/public/*
+designer/designer-backend/resources/public
