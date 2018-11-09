@@ -719,7 +719,7 @@ public interface SchemaExtractorV2 {
                 break;
 
             case SELFCONTAINED:
-                IntStream.of(numberOfLots)
+                IntStream.rangeClosed(1, numberOfLots)
                         .forEach(number -> lotList.add(createProcurementProjectLotType("Lot" + number)));
                 break;
 
