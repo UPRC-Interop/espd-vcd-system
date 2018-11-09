@@ -15,6 +15,7 @@
  */
 package eu.esens.espdvcd.designer.endpoint;
 
+import eu.esens.espdvcd.designer.exception.LanguageNotExistsException;
 import eu.esens.espdvcd.designer.service.CodelistsService;
 import eu.esens.espdvcd.designer.util.Errors;
 import eu.esens.espdvcd.designer.util.JsonUtil;
@@ -51,6 +52,9 @@ public class CodelistsEndpoint extends Endpoint {
                 } catch (UnsupportedOperationException e) {
                     response.status(406);
                     return Errors.notAcceptableError("Translation is not supported for V1 Codelists.");
+                } catch (LanguageNotExistsException e){
+                    response.status(404);
+                    return Errors.notFoundError(e.getMessage());
                 }
             }, JsonUtil.json());
 
