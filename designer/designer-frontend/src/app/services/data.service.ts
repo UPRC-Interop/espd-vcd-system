@@ -491,23 +491,12 @@ export class DataService {
 
   finishEOSubmit(exportType: ExportType) {
 
-    console.log('THIS IS FINISH response =================================================');
-    console.log(this.reductionCriteria);
-    console.log(this.selectionALLCriteria);
-    console.log(this.isSatisfiedALLeo);
-
     /* extract caRelated criteria */
     if (this.utilities.qualificationApplicationType === 'selfcontained') {
       /* WORKAROUND-FIX: satisfiesALL Criteria null issue when it's self-contained */
       this.selectionALLCriteria = [];
       this.formUtil.extractFormValuesFromCriteria(this.caRelatedCriteria, this.caRelatedCriteriaForm, this.formUtil.evidenceList);
     }
-
-    console.log(this.selectionALLCriteria);
-    console.log(this.selectionACriteria);
-    console.log(this.selectionBCriteria);
-    console.log(this.selectionCCriteria);
-    console.log(this.selectionDCriteria);
 
     /* extract eoRelated criteria */
     this.formUtil.extractFormValuesFromCriteria(this.eoRelatedACriteria, this.eoRelatedACriteriaForm, this.formUtil.evidenceList);
