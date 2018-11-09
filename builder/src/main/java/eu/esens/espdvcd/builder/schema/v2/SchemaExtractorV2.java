@@ -24,7 +24,6 @@ import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.response.*;
 import eu.espd.schema.v2.pre_award.commonaggregate.*;
 import eu.espd.schema.v2.pre_award.commonbasic.*;
-import eu.espd.schema.v2.pre_award.qualificationapplicationrequest.QualificationApplicationRequestType;
 import eu.espd.schema.v2.unqualifieddatatypes_2.CodeType;
 
 import java.math.BigDecimal;
@@ -849,10 +848,12 @@ public interface SchemaExtractorV2 {
                     break;
 
                 case URL:
+                    // https://github.com/ESPD/ESPD-EDM/issues/181
                     String url = ((URLResponse) rq.getResponse()).getUrl();
                     if (url != null) {
-                        rqType.setExpectedDescription(new ExpectedDescriptionType());
-                        rqType.getExpectedDescription().setValue(url);
+                        rqType.setExpectedID(new ExpectedIDType());
+                        rqType.getExpectedID().setSchemeID("URI");
+                        rqType.getExpectedID().setValue(url);
                     }
                     break;
 
