@@ -28,6 +28,7 @@ export class UtilitiesService {
   isCA = false;
   isEO = false;
   isImportESPD = false;
+  isImportReq = false;
   isCreateResponse = false;
   isCreateNewESPD = false;
   isReviewESPD = false;
@@ -124,16 +125,29 @@ export class UtilitiesService {
     return cpvString.split(',');
   }
 
-  lotToSelectedMatListOption(lots: string[], selectedLots: MatSelectionList): MatSelectionList {
+  lotToSelectedMatListOption(lots: string[], selectedLots: MatSelectionList) {
+    // console.log(selectedLots);
 
-    selectedLots.selectedOptions.selected.map((selected, i) => {
-      console.log(selected);
-      selected.selected = true;
-      return selected.value = lots[i];
-    });
-    console.log('THIS IS RESULT OF SELECTED LOTS: ');
-    console.log(selectedLots);
-    return selectedLots;
+    // for (let i = 0; i < lots.length; i++) {
+    //   console.log('THIS IS TEST');
+    //   console.log(selectedLots.selectedOptions.selected);
+    //   console.log(selectedLots.selectedOptions);
+    // }
+
+    // selectedLots.selectedOptions.selected.map((selected, i) => {
+    //   console.log('selected inside map before: ');
+    //   console.log(selected);
+    //   selected.selected = true;
+    //   console.log('selected inside map after: ');
+    //   return selected.value = lots[i];
+    // });
+    // console.log('THIS IS RESULT OF SELECTED LOTS: ');
+    // console.log(selectedLots);
+    // return selectedLots;
+  }
+
+  isImport(): boolean {
+    return this.isImportReq || this.isImportESPD || this.isReviewESPD;
   }
 
   // makeDummyESPDRequest(): ESPDRequest {

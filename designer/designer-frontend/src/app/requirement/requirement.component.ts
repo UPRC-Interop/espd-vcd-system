@@ -14,7 +14,7 @@
 /// limitations under the License.
 ///
 
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {Requirement} from '../model/requirement.model';
 import {DataService} from '../services/data.service';
@@ -34,7 +34,7 @@ import {SelectionModel} from '@angular/cdk/collections';
   templateUrl: './requirement.component.html',
   styleUrls: ['./requirement.component.css']
 })
-export class RequirementComponent implements OnInit, OnChanges {
+export class RequirementComponent implements OnInit, OnChanges, AfterViewInit {
 
   @Input() req: Requirement;
   @Input() form: FormGroup;
@@ -42,7 +42,7 @@ export class RequirementComponent implements OnInit, OnChanges {
   @Output() indicatorChanged = new EventEmitter();
   // @Output() lotsInReq = new EventEmitter();
 
-  reqLots: string[] = ['Lot1', 'Lot2', 'Lot3'];
+  // reqLots: string[] = ['Lot1', 'Lot2', 'Lot3'];
   countries: Country[] = null;
   currency: Currency[] = null;
   eoIDTypes: EoIDType[] = null;
@@ -74,10 +74,6 @@ export class RequirementComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-
-    if (this.req.responseDataType === 'LOT_IDENTIFIER') {
-      this.importSelectedLots();
-    }
 
     if (this.req.responseDataType === 'CODE' && this.req.responseValuesRelatedArtefact === 'CPVCodes' && this.utilities.isImportESPD) {
       // init cpvCodes when import
@@ -168,34 +164,36 @@ export class RequirementComponent implements OnInit, OnChanges {
     }
   }
 
+  ngAfterViewInit() {
+    if (this.req.responseDataType === 'LOT_IDENTIFIER') {
+      console.log('LOT MODEL for req.uuid: ' + this.req.uuid);
+      console.log(this.utilities.renderLotTemplate[this.req.uuid]);
+      // this.lots.selectedOptions = new SelectionModel<MatListOption>(true);
+      // console.log(this.lots);
+      // console.log(this.lots.selectedOptions);
+      // console.log(this.lots.selectedOptions.selected);
+      // this.importSelectedLots();
+    }
+  }
+
   /* SELF-CONTAINED: CODE with CPVCodes as responseValuesRelatedArtefact */
   createChips() {
     this.utilities.cpvTemplate[this.req.uuid] = this.utilities.cpvCodeToString(this.cpvCodes);
-    // console.log(this.utilities.cpvTemplate);
-    // console.log(this.utilities.cpvTemplate['0157cebc-4ba4-4d65-9a6e-3cd5d57a08fb-34']);
   }
 
 
   pushSelectedLot() {
     if (this.lots.selectedOptions.selected !== undefined) {
-      console.log(this.lots);
-      console.log(this.lots.selectedOptions);
-      console.log(typeof this.lots.selectedOptions);
-      console.log(this.lots.selectedOptions.selected);
-      console.log(typeof this.lots.selectedOptions.selected);
       this.utilities.lotTemplate[this.req.uuid] = this.utilities.createLotListInCriterion(this.lots.selectedOptions.selected);
       console.log(this.utilities.lotTemplate);
-      // console.log(this.utilities.lotTemplate['270317fa-6790-42ec-8f1a-575d82ed1d63-27']);
-      // this.reqLots = this.utilities.createLotListInCriterion(this.lots.selectedOptions.selected);
-      // console.log(this.reqLots);
+      // console.log(this.lots);
     }
   }
 
   importSelectedLots() {
-    if (this.req.responseDataType === 'LOT_IDENTIFIER') {
+    if (this.req.responseDataType === 'LOT_IDENTIFIER' && this.utilities.isImport()) {
       /* test lot import */
-      this.lots.selectedOptions = new SelectionModel<MatListOption>(false);
-      console.log(this.utilities.lotToSelectedMatListOption(this.reqLots, this.lots));
+      // this.utilities.lotToSelectedMatListOption(this.reqLots, this.lots);
     }
   }
 
@@ -223,6 +221,11 @@ export class RequirementComponent implements OnInit, OnChanges {
     if (index >= 0) {
       this.cpvCodes.splice(index, 1);
     }
+  }
+
+  onNgModelChange(event: Event) {
+    console.log('MODEL CHANGE for req.uuid: ' + this.req.uuid );
+    console.log(this.utilities.renderLotTemplate[this.req.uuid]);
   }
 
 

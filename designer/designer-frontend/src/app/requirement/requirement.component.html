@@ -236,7 +236,9 @@
     </div>
     <!-- SELF-CONTAINED: LOTS_IDENTIFIER -->
     <div class="lots_identifier" *ngSwitchCase="'LOT_IDENTIFIER'">
-      <mat-selection-list #lots>
+      <mat-selection-list #lots
+                          [(ngModel)]="this.utilities.renderLotTemplate[req.uuid]"
+                          [ngModelOptions]="{standalone: true}" (ngModelChange)="onNgModelChange($event)">
         <mat-list-option *ngFor="let lot of this.utilities.projectLots" [value]="lot"
                          (click)="pushSelectedLot()">
           {{lot}}

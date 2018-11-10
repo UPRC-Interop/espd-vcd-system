@@ -546,6 +546,8 @@ export class FormUtilService {
             if (r.responseDataType === 'LOT_IDENTIFIER') {
               if (r.response.lots !== undefined && r.response.lots !== null) {
                 this.utilities.renderLotTemplate[r.uuid] = r.response.lots;
+              } else {
+                this.utilities.renderLotTemplate[r.uuid] = [];
               }
             }
 

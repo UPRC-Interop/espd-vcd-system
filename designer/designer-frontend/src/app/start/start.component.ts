@@ -91,10 +91,12 @@ export class StartComponent implements OnInit {
       this.utilities.isCreateNewESPD = true;
       this.isReuseESPD = false;
       this.isReviewESPD = false;
+      this.utilities.isImportReq = false;
       this.utilities.isReviewESPD = false;
     } else if (radio.value === 'reuseESPD') {
       this.isCreateNewESPD = false;
       this.utilities.isCreateNewESPD = false;
+      this.utilities.isImportReq = true;
       this.isReuseESPD = true;
       this.isReviewESPD = false;
       this.utilities.isReviewESPD = false;
@@ -103,6 +105,7 @@ export class StartComponent implements OnInit {
       this.utilities.isCreateNewESPD = false;
       this.isReuseESPD = false;
       this.isReviewESPD = true;
+      this.utilities.isImportReq = false;
       this.utilities.isReviewESPD = true;
     }
   }
