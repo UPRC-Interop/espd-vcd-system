@@ -632,8 +632,8 @@ public interface SchemaExtractorV2 {
         if (projectType != null) {
             procurementProjectType.setProcurementTypeCode(new ProcurementTypeCodeType());
             procurementProjectType.getProcurementTypeCode().setListID("ProjectType");
-            procurementProjectType.getProcurementTypeCode().setListAgencyID("EU-COM-GROW");
-            procurementProjectType.getProcurementTypeCode().setListVersionID("2.0.2");
+            procurementProjectType.getProcurementTypeCode().setListAgencyID("EU-COM-OP");
+            procurementProjectType.getProcurementTypeCode().setListVersionID("1.0");
             procurementProjectType.getProcurementTypeCode().setValue(projectType);
         }
 
