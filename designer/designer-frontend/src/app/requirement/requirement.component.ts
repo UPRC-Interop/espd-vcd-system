@@ -33,7 +33,7 @@ import {COMMA, ENTER} from '../../../node_modules/@angular/cdk/keycodes';
   templateUrl: './requirement.component.html',
   styleUrls: ['./requirement.component.css']
 })
-export class RequirementComponent implements OnInit, OnChanges{
+export class RequirementComponent implements OnInit, OnChanges {
 
   @Input() req: Requirement;
   @Input() form: FormGroup;

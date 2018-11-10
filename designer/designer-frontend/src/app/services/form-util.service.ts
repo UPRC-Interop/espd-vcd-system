@@ -539,6 +539,8 @@ export class FormUtilService {
                 if (r.response.indicator) {
                   group[r.uuid] = new FormControl(true);
                   this.utilities.criterionWeightIndicators[r.uuid] = true;
+                  /* if even one criterion's indicator is true then the global indicator is true also */
+                  this.utilities.isGloballyWeighted = true;
                 } else {
                   group[r.uuid] = new FormControl(false);
                   this.utilities.criterionWeightIndicators[r.uuid] = false;
