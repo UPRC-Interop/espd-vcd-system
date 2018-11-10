@@ -46,11 +46,7 @@
           <input matInput [formControlName]="req.uuid" [id]="req.uuid" >
         </mat-form-field>
       </div>
-
     </div>
-
-
-
     <mat-form-field *ngSwitchCase="'DATE'">
       <label [attr.for]="req.uuid">{{req.description}}</label>
       <br>
@@ -120,9 +116,6 @@
                      (keyup.enter)= 'createChips()'>
             </mat-chip-list>
           </mat-form-field>
-
-
-
         </div>
       </div>
     </div>

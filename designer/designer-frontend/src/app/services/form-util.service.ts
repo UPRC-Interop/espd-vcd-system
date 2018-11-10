@@ -536,18 +536,19 @@ export class FormUtilService {
                 group[r.uuid + 'weight'] = new FormControl();
                 group[r.uuid + 'evaluationMethodDescription'] = new FormControl();
               } else {
-                group[r.uuid] = new FormControl(r.response.indicator);
+                if (r.response.indicator) {
+                  group[r.uuid] = new FormControl(true);
+                  this.utilities.criterionWeightIndicators[r.uuid] = true;
+                } else {
+                  group[r.uuid] = new FormControl(false);
+                  this.utilities.criterionWeightIndicators[r.uuid] = false;
+                }
+
                 // group[r.uuid + 'evaluationMethodType'] = new FormControl(r.response.evaluationMethodType);
                 group[r.uuid + 'weight'] = new FormControl(r.response.weight);
                 group[r.uuid + 'evaluationMethodDescription'] = new FormControl(r.response.evaluationMethodDescription);
               }
             }
-
-            /* SELF-CONTAINED: LOT_IDENTIFIER */
-            // if (r.responseDataType === 'LOT_IDENTIFIER') {
-            //   /* */
-            // }
-
             /* SELF-CONTAINED: responseDataType: CODE ---> CpvCodes*/
             if (r.responseDataType === 'CODE' && r.responseValuesRelatedArtefact === 'CPVCodes') {
               if (r.response.evidenceURLCode) {
@@ -555,6 +556,21 @@ export class FormUtilService {
               }
             }
             if (r.responseDataType === 'CODE' && this.utilities.qualificationApplicationType === 'regulated') {
+              if (r.response.evidenceURLCode) {
+                if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
+                  group[r.uuid] = new FormControl({
+                    value: '',
+                    disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                  });
+                } else {
+                  group[r.uuid] = new FormControl({
+                    value: r.response.evidenceURLCode,
+                    disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                  });
+                }
+              }
+            }
+            if (r.responseDataType === 'CODE' && this.utilities.qualificationApplicationType === 'selfcontained') {
               if (r.response.evidenceURLCode) {
                 if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
                   group[r.uuid] = new FormControl({

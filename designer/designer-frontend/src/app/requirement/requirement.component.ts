@@ -23,7 +23,7 @@ import {Currency} from '../model/currency.model';
 import {ApicallService} from '../services/apicall.service';
 import {UtilitiesService} from '../services/utilities.service';
 import {EoIDType} from '../model/eoIDType.model';
-import {MatChipInputEvent, MatSelectionList} from '@angular/material';
+import {MatChipInputEvent, MatRadioGroup, MatSelectionList} from '@angular/material';
 import {BidType} from '../model/bidType.model';
 import {FinancialRatioType} from '../model/financialRatioType.model';
 import {COMMA, ENTER} from '../../../node_modules/@angular/cdk/keycodes';
@@ -33,7 +33,7 @@ import {COMMA, ENTER} from '../../../node_modules/@angular/cdk/keycodes';
   templateUrl: './requirement.component.html',
   styleUrls: ['./requirement.component.css']
 })
-export class RequirementComponent implements OnInit, OnChanges {
+export class RequirementComponent implements OnInit, OnChanges{
 
   @Input() req: Requirement;
   @Input() form: FormGroup;
@@ -73,6 +73,10 @@ export class RequirementComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
+
+    if (this.req.responseDataType === 'WEIGHT_INDICATOR' && this.utilities.isImport()) {
+      this.isWeighted = this.utilities.criterionWeightIndicators[this.req.uuid];
+    }
 
     if (this.req.responseDataType === 'CODE' && this.req.responseValuesRelatedArtefact === 'CPVCodes' && this.utilities.isImportESPD) {
       // init cpvCodes when import
@@ -162,6 +166,7 @@ export class RequirementComponent implements OnInit, OnChanges {
         });
     }
   }
+
 
   /* SELF-CONTAINED: CODE with CPVCodes as responseValuesRelatedArtefact */
   createChips() {
