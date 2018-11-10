@@ -28,6 +28,7 @@ export class UtilitiesService {
   isCA = false;
   isEO = false;
   isImportESPD = false;
+  isImportReq = false;
   isCreateResponse = false;
   isCreateNewESPD = false;
   isReviewESPD = false;
@@ -45,6 +46,7 @@ export class UtilitiesService {
   lotTemplate = [];
   cpvTemplate = [];
   renderCpvTemplate = [];
+  criterionWeightIndicators = [];
   cpvString = [];
   type: string;
   // qualificationApplicationType = 'SELF-CONTAINED';
@@ -128,5 +130,8 @@ export class UtilitiesService {
   //   return new ESPDRequest(json.cadetails, json.fullCriterionList, json.documentDetails);
   // }
 
+  isImport(): boolean {
+    return this.isImportReq || this.isImportESPD || this.isReviewESPD;
+  }
 
 }

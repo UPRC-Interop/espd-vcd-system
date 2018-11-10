@@ -175,11 +175,11 @@
               <span class="weight">One or More Criteria will be weighted: </span>
               <mat-radio-group name="isGloballyWeighted" [disabled]="this.dataService.isReadOnly()">
                 <mat-radio-button color="primary" name="globalWeight" value="YES"
-                                  [checked]="this.dataService.isReadOnly()" (change)="handleGlobalWeight(YES)" #YES>
+                                  [checked]="this.utilities.isGloballyWeighted" (change)="handleGlobalWeight(YES)" #YES>
                   {{'espd.gui.yes' | translate}}
                 </mat-radio-button>
                 <mat-radio-button color="primary" name="globalWeight" value="NO"
-                                  [checked]="!this.dataService.isReadOnly()" (change)="handleGlobalWeight(NO)" #NO>
+                                  [checked]="!this.utilities.isGloballyWeighted" (change)="handleGlobalWeight(NO)" #NO>
                   {{'espd.gui.no' | translate}}
                 </mat-radio-button>
               </mat-radio-group>

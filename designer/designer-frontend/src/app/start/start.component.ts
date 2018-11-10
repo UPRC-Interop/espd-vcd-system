@@ -89,18 +89,21 @@ export class StartComponent implements OnInit {
     if (radio.value === 'createNewESPD') {
       this.isCreateNewESPD = true;
       this.utilities.isCreateNewESPD = true;
+      this.utilities.isImportReq = false;
       this.isReuseESPD = false;
       this.isReviewESPD = false;
       this.utilities.isReviewESPD = false;
     } else if (radio.value === 'reuseESPD') {
       this.isCreateNewESPD = false;
       this.utilities.isCreateNewESPD = false;
+      this.utilities.isImportReq = true;
       this.isReuseESPD = true;
       this.isReviewESPD = false;
       this.utilities.isReviewESPD = false;
     } else if (radio.value === 'reviewESPD') {
       this.isCreateNewESPD = false;
       this.utilities.isCreateNewESPD = false;
+      this.utilities.isImportReq = false;
       this.isReuseESPD = false;
       this.isReviewESPD = true;
       this.utilities.isReviewESPD = true;
