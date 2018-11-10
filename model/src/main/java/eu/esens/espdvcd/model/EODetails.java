@@ -319,11 +319,11 @@ public class EODetails {
         this.generalTurnover = generalTurnover;
     }
 
-    public String getEoGroupName() {
+    public String getEOGroupName() {
         return eoGroupName;
     }
 
-    public void setEoGroupName(String eoGroupName) {
+    public void setEOGroupName(String eoGroupName) {
         this.eoGroupName = eoGroupName;
     }
 }

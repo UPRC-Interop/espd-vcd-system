@@ -64,8 +64,17 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
         }
 
         qarType.getContractingParty().add(extractContractingPartyType(modelResponse.getCADetails()));
+        // Economic Operator Details
         qarType.getProcurementProjectLot().add(extractProcurementProjectLot(modelResponse.getEODetails()));
 
+        // Economic Operator Group Name (This is in EODetails)
+        if (modelResponse.getEODetails().getEOGroupName() != null) {
+            qarType.setEconomicOperatorGroupName(new EconomicOperatorGroupNameType());
+            qarType.getEconomicOperatorGroupName().setValue((modelResponse
+                    .getEODetails().getEOGroupName()));
+        }
+
+        // Service Provider Details
         qarType.getContractingParty().get(0).getParty().getServiceProviderParty()
                 .add(extractServiceProviderPartyType(modelResponse.getServiceProviderDetails()));
 
@@ -122,7 +131,7 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
             if (modelResponse.getDocumentDetails().getQualificationApplicationType()
                     == QualificationApplicationTypeEnum.SELFCONTAINED) {
 
-                qarType.setProcurementProject(createProcurementProjectType(modelResponse.getCADetails().getCAOfficialName()
+                qarType.setProcurementProject(createProcurementProjectType(modelResponse.getCADetails().getProcurementProcedureTitle()
                         , modelResponse.getCADetails().getProcurementProcedureDesc()
                         , modelResponse.getCADetails().getProjectType()              // Procurement typeCode
                         , modelResponse.getCADetails().getClassificationCodes()));   // CPV codes
@@ -246,9 +255,9 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
         return evType;
     }
 
-    public EconomicOperatorPartyType extractEODetails(EODetails eod) {
+    public EconomicOperatorPartyType extractEODetails(EODetails eoDetails) {
 
-        if (eod == null) {
+        if (eoDetails == null) {
             return null;
         }
 
@@ -257,86 +266,104 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
         eoPartyType.getQualifyingParty().get(0).setParty(new PartyType());
         eoPartyType.setParty(new PartyType());
 
-        String icc = eod.isSmeIndicator() ? EOIndustryClassificationCodeEnum.SME.name()
+        String icc = eoDetails.isSmeIndicator() ? EOIndustryClassificationCodeEnum.SME.name()
                 : EOIndustryClassificationCodeEnum.LARGE.name();
         eoPartyType.getParty().setIndustryClassificationCode(createIndustryClassificationCodeType(icc));
 
+        // Employee quantity
+        if (eoDetails.getEmployeeQuantity() > 0) {
+            eoPartyType.getQualifyingParty().get(0)
+                    .setEmployeeQuantity(new EmployeeQuantityType());
+            eoPartyType.getQualifyingParty().get(0)
+                    .getEmployeeQuantity().setValue(BigDecimal.valueOf(eoDetails.getEmployeeQuantity()));
+        }
 
-        if (eod.getEoRole() != null) {
+        // General turnover
+        if (eoDetails.getGeneralTurnover() != null
+                && eoDetails.getGeneralTurnover().getAmount() != null
+                && eoDetails.getGeneralTurnover().getCurrency() != null) {
+            eoPartyType.getQualifyingParty().get(0)
+                    .getFinancialCapability().get(0).setValueAmount(new ValueAmountType());
+            eoPartyType.getQualifyingParty().get(0)
+                    .getFinancialCapability().get(0).getValueAmount()
+                    .setValue(eoDetails.getGeneralTurnover().getAmount());
+        }
+
+        if (eoDetails.getEoRole() != null) {
             eoPartyType.setEconomicOperatorRole(new EconomicOperatorRoleType());
             eoPartyType.getEconomicOperatorRole().setRoleCode(new RoleCodeType());
             eoPartyType.getEconomicOperatorRole().getRoleCode().setListID("EORoleType");
             eoPartyType.getEconomicOperatorRole().getRoleCode().setListAgencyName("DG GROW (European Commission)");
             eoPartyType.getEconomicOperatorRole().getRoleCode().setListAgencyID("EU-COM-GROW");
             eoPartyType.getEconomicOperatorRole().getRoleCode().setListVersionID("2.0.2");
-            eoPartyType.getEconomicOperatorRole().getRoleCode().setValue(eod.getEoRole().name());
+            eoPartyType.getEconomicOperatorRole().getRoleCode().setValue(eoDetails.getEoRole().name());
         }
 
-        if (eod.getID() != null) {
+        if (eoDetails.getID() != null) {
             PartyIdentificationType pit = new PartyIdentificationType();
             pit.setID(new IDType());
-            pit.getID().setValue(eod.getID());
+            pit.getID().setValue(eoDetails.getID());
             pit.getID().setSchemeAgencyID("EU-COM-GROW");
             eoPartyType.getParty().getPartyIdentification().add(pit);
         }
 
-        if (eod.getName() != null) {
+        if (eoDetails.getName() != null) {
             PartyNameType pnt = new PartyNameType();
             pnt.setName(new NameType());
-            pnt.getName().setValue(eod.getName());
+            pnt.getName().setValue(eoDetails.getName());
             eoPartyType.getParty().getPartyName().add(pnt);
         }
 
-        if (eod.getElectronicAddressID() != null) {
+        if (eoDetails.getElectronicAddressID() != null) {
             EndpointIDType eid = new EndpointIDType();
             eid.setSchemeID("ISO/IEC 9834-8:2008 - 4UUID");
             eid.setSchemeAgencyID("EU-COM-GROW");
-            eid.setValue(eod.getElectronicAddressID());
+            eid.setValue(eoDetails.getElectronicAddressID());
             eoPartyType.getParty().setEndpointID(eid);
         }
 
-        if (eod.getWebSiteURI() != null) {
+        if (eoDetails.getWebSiteURI() != null) {
             WebsiteURIType wsuri = new WebsiteURIType();
-            wsuri.setValue(eod.getWebSiteURI());
+            wsuri.setValue(eoDetails.getWebSiteURI());
             eoPartyType.getParty().setWebsiteURI(wsuri);
         }
 
-        if (eod.getPostalAddress() != null) {
+        if (eoDetails.getPostalAddress() != null) {
             AddressType at = new AddressType();
 
             at.setStreetName(new StreetNameType());
-            at.getStreetName().setValue(eod.getPostalAddress().getAddressLine1());
+            at.getStreetName().setValue(eoDetails.getPostalAddress().getAddressLine1());
 
             at.setCityName(new CityNameType());
-            at.getCityName().setValue(eod.getPostalAddress().getCity());
+            at.getCityName().setValue(eoDetails.getPostalAddress().getCity());
 
             at.setPostalZone(new PostalZoneType());
-            at.getPostalZone().setValue(eod.getPostalAddress().getPostCode());
+            at.getPostalZone().setValue(eoDetails.getPostalAddress().getPostCode());
 
             at.setCountry(new CountryType());
-            at.getCountry().setIdentificationCode(createISOCountryIdCodeType(eod.getPostalAddress().getCountryCode()));
+            at.getCountry().setIdentificationCode(createISOCountryIdCodeType(eoDetails.getPostalAddress().getCountryCode()));
 
             eoPartyType.getParty().setPostalAddress(at);
         }
 
-        if (eod.getContactingDetails() != null) {
+        if (eoDetails.getContactingDetails() != null) {
             ContactType ct = new ContactType();
             ct.setName(new NameType());
-            ct.getName().setValue(eod.getContactingDetails().getContactPointName());
+            ct.getName().setValue(eoDetails.getContactingDetails().getContactPointName());
 
             ct.setTelephone(new TelephoneType());
-            ct.getTelephone().setValue(eod.getContactingDetails().getTelephoneNumber());
+            ct.getTelephone().setValue(eoDetails.getContactingDetails().getTelephoneNumber());
 
             ct.setElectronicMail(new ElectronicMailType());
-            ct.getElectronicMail().setValue(eod.getContactingDetails().getEmailAddress());
+            ct.getElectronicMail().setValue(eoDetails.getContactingDetails().getEmailAddress());
 
             ct.setTelefax(new TelefaxType());
-            ct.getTelefax().setValue(eod.getContactingDetails().getFaxNumber());
+            ct.getTelefax().setValue(eoDetails.getContactingDetails().getFaxNumber());
 
             eoPartyType.getParty().setContact(ct);
         }
 
-        eod.getNaturalPersons().forEach(np -> {
+        eoDetails.getNaturalPersons().forEach(np -> {
 
             PowerOfAttorneyType poa = new PowerOfAttorneyType();
 

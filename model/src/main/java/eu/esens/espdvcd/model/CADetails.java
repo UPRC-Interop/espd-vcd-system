@@ -294,7 +294,6 @@ public class CADetails implements Serializable {
     public CADetails() {
     }
 
-
     public String getProcurementPublicationURI() {
         return procurementPublicationURI;
     }

@@ -37,12 +37,10 @@ import eu.espd.schema.v1.commonaggregatecomponents_2.DocumentReferenceType;
 import eu.espd.schema.v1.commonaggregatecomponents_2.ExternalReferenceType;
 import eu.espd.schema.v1.commonaggregatecomponents_2.ServiceProviderPartyType;
 import eu.espd.schema.v1.commonbasiccomponents_2.ContractFolderIDType;
-import eu.espd.schema.v2.pre_award.commonaggregate.ProcurementProjectType;
 import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionPropertyGroupType;
 import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionPropertyType;
 import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionType;
 import eu.espd.schema.v2.pre_award.commonbasic.ConfidentialityLevelCodeType;
-import eu.espd.schema.v2.pre_award.commonbasic.ProcedureCodeType;
 import eu.espd.schema.v2.pre_award.commonbasic.ValidatedCriterionPropertyIDType;
 
 import java.util.ArrayList;
@@ -281,7 +279,7 @@ public interface ModelExtractor {
             // No need to set that here
             // if (!procurementProjectType.getName().isEmpty()
             //        && procurementProjectType.getName().get(0).getValue() != null) {
-            //    cd.setCAOfficialName(procurementProjectType.getName().get(0).getValue());
+            //    cd.setProcurementProcedureTitle(procurementProjectType.getName().get(0).getValue());
             // }
 
             // No need to set that here
@@ -771,11 +769,12 @@ public interface ModelExtractor {
                     break;
 
                 case URL:
-                    if (rqType.getExpectedDescription() != null
-                            && rqType.getExpectedDescription().getValue() != null) {
+                    // https://github.com/ESPD/ESPD-EDM/issues/181
+                    if (rqType.getExpectedID() != null
+                            && rqType.getExpectedID().getValue() != null) {
 
                         URLResponse urlResp = new URLResponse();
-                        urlResp.setUrl(rqType.getExpectedDescription().getValue());
+                        urlResp.setUrl(rqType.getExpectedID().getValue());
                         applyValidatedCriterionPropertyID(rqType.getID().getValue(), urlResp);
                         applyConfidentialityLevelCode(ConfidentialityLevelEnum.PUBLIC.name(), urlResp);
                         rq.setResponse(urlResp);

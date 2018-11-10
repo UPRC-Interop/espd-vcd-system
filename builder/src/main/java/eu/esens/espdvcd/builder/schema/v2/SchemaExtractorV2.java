@@ -24,7 +24,6 @@ import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.response.*;
 import eu.espd.schema.v2.pre_award.commonaggregate.*;
 import eu.espd.schema.v2.pre_award.commonbasic.*;
-import eu.espd.schema.v2.pre_award.qualificationapplicationrequest.QualificationApplicationRequestType;
 import eu.espd.schema.v2.unqualifieddatatypes_2.CodeType;
 
 import java.math.BigDecimal;
@@ -600,7 +599,7 @@ public interface SchemaExtractorV2 {
         return qaTypeCode;
     }
 
-    default ProcurementProjectType createProcurementProjectType(String caOfficialName,
+    default ProcurementProjectType createProcurementProjectType(String procurementProcedureTitle,
                                                                 String procurementProcedureDesc,
                                                                 String projectType,
                                                                 List<String> classificationCodes) {
@@ -608,9 +607,9 @@ public interface SchemaExtractorV2 {
         ProcurementProjectType procurementProjectType = new ProcurementProjectType();
 
         // Name
-        if (caOfficialName != null) {
+        if (procurementProcedureTitle != null) {
             procurementProjectType.getName().add(new NameType());
-            procurementProjectType.getName().get(0).setValue(caOfficialName);
+            procurementProjectType.getName().get(0).setValue(procurementProcedureTitle);
         }
 
         // Description
@@ -707,7 +706,7 @@ public interface SchemaExtractorV2 {
 
     default WeightingTypeCodeType createWeightingTypeCodeType(String code) {
         WeightingTypeCodeType codeType = new WeightingTypeCodeType();
-        codeType.setListID("ResponseDataType");
+        codeType.setListID("WeightingType");
         codeType.setListAgencyID("EU-COM-GROW");
         codeType.setListVersionID("2.0.2");
         codeType.setValue(code);
@@ -730,8 +729,8 @@ public interface SchemaExtractorV2 {
     default ProcedureCodeType createProcedureCodeType(String code) {
         ProcedureCodeType codeType = new ProcedureCodeType();
         codeType.setListID("ProcedureType");
-        codeType.setListAgencyID("EU-COM-GROW");
-        codeType.setListVersionID("2.0.2");
+        codeType.setListAgencyID("EU-COM-OP");
+        codeType.setListVersionID("1.0");
         codeType.setValue(code);
         return codeType;
     }
@@ -807,7 +806,31 @@ public interface SchemaExtractorV2 {
                     String code = ((EvidenceURLCodeResponse) rq.getResponse()).getEvidenceURLCode();
                     if (code != null && !code.isEmpty()) {
                         rqType.setExpectedCode(new ExpectedCodeType());
-                        rqType.getExpectedCode().setListID("BidType");
+                        if (rq.getResponseValuesRelatedArtefact() != null) {
+//                            rqType.getExpectedCode().setListID(rq.getResponseValuesRelatedArtefact());
+
+                            switch (rq.getResponseValuesRelatedArtefact()) {
+
+                                case "FinancialRatioType":
+                                    rqType.getExpectedCode().setListID(rq.getResponseValuesRelatedArtefact());
+                                    rqType.getExpectedCode().setListAgencyID("BACH");
+                                    rqType.getExpectedCode().setListVersionID("1.0");
+                                    break;
+
+                                case "BidType":
+                                    rqType.getExpectedCode().setListID(rq.getResponseValuesRelatedArtefact());
+                                    rqType.getExpectedCode().setListAgencyID("EU-COM-OP");
+                                    rqType.getExpectedCode().setListVersionID("1.0");
+                                    break;
+
+                                case "CPVCodes":
+                                    rqType.getExpectedCode().setListAgencyID("EU-COM-OP");
+                                    rqType.getExpectedCode().setListVersionID("1.0");
+                                    break;
+
+                            }
+
+                        }
                         rqType.getExpectedCode().setListAgencyID("EU-COM-GROW");
                         rqType.getExpectedCode().setValue(code);
                     }
@@ -817,6 +840,7 @@ public interface SchemaExtractorV2 {
                     String lots = ((LotIdentifierResponse) rq.getResponse()).getLots();
                     if (lots != null && !lots.isEmpty()) {
                         rqType.setExpectedID(new ExpectedIDType());
+                        rqType.getExpectedID().setSchemeAgencyID("EU-COM-GROW");
                         rqType.getExpectedID().setValue(lots);
                     }
                     break;
@@ -849,10 +873,13 @@ public interface SchemaExtractorV2 {
                     break;
 
                 case URL:
+                    // https://github.com/ESPD/ESPD-EDM/issues/181
                     String url = ((URLResponse) rq.getResponse()).getUrl();
                     if (url != null) {
-                        rqType.setExpectedDescription(new ExpectedDescriptionType());
-                        rqType.getExpectedDescription().setValue(url);
+                        rqType.setExpectedID(new ExpectedIDType());
+                        rqType.getExpectedID().setSchemeAgencyID("EU-COM-GROW");
+                        rqType.getExpectedID().setSchemeID("URI");
+                        rqType.getExpectedID().setValue(url);
                     }
                     break;
 
