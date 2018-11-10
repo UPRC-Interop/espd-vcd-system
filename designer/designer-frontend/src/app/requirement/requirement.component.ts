@@ -78,7 +78,7 @@ export class RequirementComponent implements OnInit, OnChanges {
       this.isWeighted = this.utilities.criterionWeightIndicators[this.req.uuid];
     }
 
-    if (this.req.responseDataType === 'CODE' && this.req.responseValuesRelatedArtefact === 'CPVCodes' && this.utilities.isImportESPD) {
+    if (this.req.responseDataType === 'CODE' && this.req.responseValuesRelatedArtefact === 'CPVCodes' && this.utilities.isImport()) {
       // init cpvCodes when import
       this.cpvCodes = this.utilities.renderCpvTemplate[this.req.uuid];
     }

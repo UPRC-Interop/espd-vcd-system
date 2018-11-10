@@ -551,7 +551,7 @@ export class FormUtilService {
                 group[r.uuid + 'evaluationMethodDescription'] = new FormControl(r.response.evaluationMethodDescription);
               }
             }
-            /* SELF-CONTAINED: responseDataType: CODE ---> CpvCodes*/
+            /* SELF-CONTAINED: responseDataType: CODE ---> CpvCodes */
             if (r.responseDataType === 'CODE' && r.responseValuesRelatedArtefact === 'CPVCodes') {
               if (r.response.evidenceURLCode) {
                 this.utilities.renderCpvTemplate[r.uuid] = this.utilities.stringToCpvCode(r.response.evidenceURLCode.toString());
