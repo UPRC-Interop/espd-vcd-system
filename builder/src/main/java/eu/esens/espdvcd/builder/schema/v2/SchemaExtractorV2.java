@@ -631,6 +631,9 @@ public interface SchemaExtractorV2 {
         // Project Type
         if (projectType != null) {
             procurementProjectType.setProcurementTypeCode(new ProcurementTypeCodeType());
+            procurementProjectType.getProcurementTypeCode().setListID("ProjectType");
+            procurementProjectType.getProcurementTypeCode().setListAgencyID("EU-COM-GROW");
+            procurementProjectType.getProcurementTypeCode().setListVersionID("2.0.2");
             procurementProjectType.getProcurementTypeCode().setValue(projectType);
         }
 
@@ -807,25 +810,20 @@ public interface SchemaExtractorV2 {
                     if (code != null && !code.isEmpty()) {
                         rqType.setExpectedCode(new ExpectedCodeType());
                         if (rq.getResponseValuesRelatedArtefact() != null) {
-//                            rqType.getExpectedCode().setListID(rq.getResponseValuesRelatedArtefact());
-
+                            rqType.getExpectedCode().setListID(rq.getResponseValuesRelatedArtefact());
+                            rqType.getExpectedCode().setListVersionID("1.0");
                             switch (rq.getResponseValuesRelatedArtefact()) {
 
                                 case "FinancialRatioType":
-                                    rqType.getExpectedCode().setListID(rq.getResponseValuesRelatedArtefact());
                                     rqType.getExpectedCode().setListAgencyID("BACH");
-                                    rqType.getExpectedCode().setListVersionID("1.0");
                                     break;
 
                                 case "BidType":
-                                    rqType.getExpectedCode().setListID(rq.getResponseValuesRelatedArtefact());
                                     rqType.getExpectedCode().setListAgencyID("EU-COM-OP");
-                                    rqType.getExpectedCode().setListVersionID("1.0");
                                     break;
 
                                 case "CPVCodes":
                                     rqType.getExpectedCode().setListAgencyID("EU-COM-OP");
-                                    rqType.getExpectedCode().setListVersionID("1.0");
                                     break;
 
                             }
