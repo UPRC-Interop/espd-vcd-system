@@ -102,7 +102,7 @@
         <div *ngSwitchCase="'CPVCodes'">
           <!-- TODO cpvs like the classificationCodes -->
           <mat-form-field class="cpv-chip-list">
-            <mat-chip-list #chipList>
+            <mat-chip-list #chipList [disabled]="disabled">
               <mat-chip color='primary' selected=true *ngFor="let cpv of cpvCodes" [selectable]="selectable"
                         [removable]="removable" (removed)="remove(cpv)">
                 {{cpv}}

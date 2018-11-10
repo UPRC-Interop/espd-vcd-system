@@ -55,6 +55,7 @@ export class RequirementComponent implements OnInit, OnChanges {
   selectable = true;
   removable = true;
   addOnBlur = true;
+  disabled = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
   @ViewChild('lots') lots: MatSelectionList;
@@ -81,6 +82,11 @@ export class RequirementComponent implements OnInit, OnChanges {
     if (this.req.responseDataType === 'CODE' && this.req.responseValuesRelatedArtefact === 'CPVCodes' && this.utilities.isImport()) {
       // init cpvCodes when import
       this.cpvCodes = this.utilities.renderCpvTemplate[this.req.uuid];
+      /* Make Chips non editable when user is EO and is requirement */
+      if (this.utilities.isEO && this.req.type === 'REQUIREMENT') {
+        this.disabled = true;
+        this.removable = false;
+      }
     }
 
     this.dataService.getCountries()
