@@ -453,7 +453,6 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
                                                                              final TenderingCriterionType criterionType) {
 
         TenderingCriterionResponseType tcrType = new TenderingCriterionResponseType();
-        // ResponseValueType rvType = new ResponseValueType();
         EvidenceSuppliedType evsType = new EvidenceSuppliedType();
 
         if (response == null) {
