@@ -478,8 +478,6 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
 
         tcrType.setID(createDefaultIDType(UUID.randomUUID().toString()));
         tcrType.getID().setSchemeID("ISO/IEC 9834-8:2008 - 4UUID");
-        // rvType.setID(createDefaultIDType(UUID.randomUUID().toString()));
-        // rvType.getID().setSchemeID("ISO/IEC 9834-8:2008 - 4UUID");
 
         switch (respType) {
             case DESCRIPTION:
