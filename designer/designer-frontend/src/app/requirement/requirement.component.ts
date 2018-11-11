@@ -56,6 +56,7 @@ export class RequirementComponent implements OnInit, OnChanges, AfterViewInit {
   selectable = true;
   removable = true;
   addOnBlur = true;
+
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
   @ViewChild('lots') lots: MatSelectionList;
@@ -183,11 +184,11 @@ export class RequirementComponent implements OnInit, OnChanges, AfterViewInit {
 
 
   pushSelectedLot() {
-    if (this.lots.selectedOptions.selected !== undefined) {
-      this.utilities.lotTemplate[this.req.uuid] = this.utilities.createLotListInCriterion(this.lots.selectedOptions.selected);
-      console.log(this.utilities.lotTemplate);
+//    if (this.lots.selectedOptions.selected !== undefined) {
+//      this.utilities.lotTemplate[this.req.uuid] = this.utilities.createLotListInCriterion(this.lots.selectedOptions.selected);
+//      console.log(this.utilities.lotTemplate);
       // console.log(this.lots);
-    }
+ //   }
   }
 
   importSelectedLots() {
@@ -195,6 +196,11 @@ export class RequirementComponent implements OnInit, OnChanges, AfterViewInit {
       /* test lot import */
       // this.utilities.lotToSelectedMatListOption(this.reqLots, this.lots);
     }
+  }
+
+  compareWith (o1: string, o2: string): boolean {
+    console.log(`COMPARE ${o1} with ${o2} ${o1 === o2}`);
+    return o1 === o2;
   }
 
   /* CPV Chip handling */
@@ -227,6 +233,4 @@ export class RequirementComponent implements OnInit, OnChanges, AfterViewInit {
     console.log('MODEL CHANGE for req.uuid: ' + this.req.uuid );
     console.log(this.utilities.renderLotTemplate[this.req.uuid]);
   }
-
-
 }

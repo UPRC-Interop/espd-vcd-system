@@ -545,8 +545,10 @@ export class FormUtilService {
             /* SELF-CONTAINED: LOT_IDENTIFIER */
             if (r.responseDataType === 'LOT_IDENTIFIER') {
               if (r.response.lots !== undefined && r.response.lots !== null) {
+                group[r.uuid] = new FormControl(r.response.lots);
                 this.utilities.renderLotTemplate[r.uuid] = r.response.lots;
               } else {
+                group[r.uuid] = new FormControl();
                 this.utilities.renderLotTemplate[r.uuid] = [];
               }
             }
