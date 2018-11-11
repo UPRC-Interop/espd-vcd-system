@@ -178,6 +178,12 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
                     if (rq.getResponse() != null) {
                         rq.getResponse().setValidatedCriterionPropertyID(rq.getID());
                     }
+
+                    if (rq.getResponseDataType() == ResponseTypeEnum.WEIGHT_INDICATOR) {
+                        WeightIndicatorResponse weightIndResp = (WeightIndicatorResponse) rq.getResponse();
+                        applyTenderingCriterionWeightingData(weightIndResp, criterionType);
+                    }
+
                     return extractTenderingCriterionResponse(rq.getResponse(), rq.getResponseDataType(), criterionType);
                 })
                 .collect(Collectors.toList());
@@ -636,14 +642,14 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
                 tcrType.getResponseValue().add(urlRvType);
                 return tcrType;
 
-            case WEIGHT_INDICATOR:
-                ResponseValueType weightIndRvType = createResponseValueType();
-                WeightIndicatorResponse weightIndResp = (WeightIndicatorResponse) response;
-                applyTenderingCriterionWeightingData(weightIndResp, criterionType);
-                // Indicator
-                weightIndRvType.setResponseIndicator(createResponseIndicatorType(weightIndResp.isIndicator()));
-                tcrType.getResponseValue().add(weightIndRvType);
-                return tcrType;
+//            case WEIGHT_INDICATOR:
+//                ResponseValueType weightIndRvType = createResponseValueType();
+//                WeightIndicatorResponse weightIndResp = (WeightIndicatorResponse) response;
+//                applyTenderingCriterionWeightingData(weightIndResp, criterionType);
+//                // Indicator
+//                weightIndRvType.setResponseIndicator(createResponseIndicatorType(weightIndResp.isIndicator()));
+//                tcrType.getResponseValue().add(weightIndRvType);
+//                return tcrType;
 
             case LOT_IDENTIFIER:
                 LotIdentifierResponse lotIdeResp = (LotIdentifierResponse) response;
