@@ -42,11 +42,11 @@ export class RequirementComponent implements OnInit, OnChanges {
   // @Output() lotsInReq = new EventEmitter();
 
   reqLots: string[] = [];
-  countries: Country[] = null;
-  currency: Currency[] = null;
-  eoIDTypes: EoIDType[] = null;
-  bidTypes: BidType[] = null;
-  financialRatioTypes: FinancialRatioType[] = null;
+  countries: Country[] = [];
+  currency: Currency[] = [];
+  eoIDTypes: EoIDType[] = [];
+  bidTypes: BidType[] = [];
+  financialRatioTypes: FinancialRatioType[] = [];
   // evaluationMethodTypes: EvaluationMethodType[] = null;
   cpvCodes: string[] = [];
   isWeighted = false;
@@ -95,50 +95,50 @@ export class RequirementComponent implements OnInit, OnChanges {
       }
     }
 
-    this.dataService.getCountries()
-      .then(res => {
-        this.countries = res;
-        // console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-
-    this.dataService.getCurrency()
-      .then(res => {
-        this.currency = res;
-        // console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-
-    this.dataService.getEoIDTypes()
-      .then(res => {
-        this.eoIDTypes = res;
-        // console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-
-    this.dataService.getBidTypes()
-      .then(res => {
-        this.bidTypes = res;
-        // console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-
-    this.dataService.getFinancialRatioTypes()
-      .then(res => {
-        this.financialRatioTypes = res;
-        // console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    // this.dataService.getCountries()
+    //   .then(res => {
+    //     this.countries = res;
+    //     // console.log(res);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
+    //
+    // this.dataService.getCurrency()
+    //   .then(res => {
+    //     this.currency = res;
+    //     // console.log(res);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
+    //
+    // this.dataService.getEoIDTypes()
+    //   .then(res => {
+    //     this.eoIDTypes = res;
+    //     // console.log(res);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
+    //
+    // this.dataService.getBidTypes()
+    //   .then(res => {
+    //     this.bidTypes = res;
+    //     // console.log(res);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
+    //
+    // this.dataService.getFinancialRatioTypes()
+    //   .then(res => {
+    //     this.financialRatioTypes = res;
+    //     // console.log(res);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
 
     // this.dataService.getEvalutationMethodTypes()
     //   .then(res => {
