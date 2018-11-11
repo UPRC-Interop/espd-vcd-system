@@ -79,9 +79,14 @@ export class RequirementComponent implements OnInit, OnChanges {
       this.isWeighted = this.utilities.criterionWeightIndicators[this.req.uuid];
     }
 
+
     if (this.req.responseDataType === 'CODE' && this.req.responseValuesRelatedArtefact === 'CPVCodes' && this.utilities.isImport()) {
       // init cpvCodes when import
       this.cpvCodes = this.utilities.renderCpvTemplate[this.req.uuid];
+
+      /* make cpvTemplate with chips that are pre-existing at the imported artifact */
+      this.utilities.cpvTemplate[this.req.uuid] = this.utilities.cpvCodeToString(this.cpvCodes);
+
       /* Make Chips non editable when user is EO and is requirement */
       if (this.utilities.isEO && this.req.type === 'REQUIREMENT') {
         this.disabled = true;
@@ -177,7 +182,7 @@ export class RequirementComponent implements OnInit, OnChanges {
   /* SELF-CONTAINED: CODE with CPVCodes as responseValuesRelatedArtefact */
   createChips() {
     this.utilities.cpvTemplate[this.req.uuid] = this.utilities.cpvCodeToString(this.cpvCodes);
-    // console.log(this.utilities.cpvTemplate);
+    console.log(this.utilities.cpvTemplate);
     // console.log(this.utilities.cpvTemplate['0157cebc-4ba4-4d65-9a6e-3cd5d57a08fb-34']);
   }
 

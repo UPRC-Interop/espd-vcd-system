@@ -675,6 +675,8 @@ export class DataService {
             this.CADetails.classificationCodes = res.cadetails.classificationCodes;
             this.CADetails.weightScoringMethodologyNote = res.cadetails.weightScoringMethodologyNote;
             this.CADetails.weightingType = res.cadetails.weightingType;
+
+            /* SATISFIES_ALL (alpha criterion) SECTION DOES NOT RENDER WHEN ARTIFACT IS SELF-CONTAINED */
             this.utilities.isAtoD = true;
             this.utilities.isSatisfiedALL = false;
 
@@ -760,7 +762,10 @@ export class DataService {
             this.CADetails.classificationCodes = res.cadetails.classificationCodes;
             this.CADetails.weightScoringMethodologyNote = res.cadetails.weightScoringMethodologyNote;
             this.CADetails.weightingType = res.cadetails.weightingType;
-
+            /* create the Lot list to be rendered as 'global' unchecked lots */
+            // this.CADetails.procurementProjectLots = res.cadetails.procurementProjectLots;
+            // this.utilities.projectLots = this.utilities.createLotList(this.CADetails.procurementProjectLots);
+            /* SATISFIES_ALL (alpha criterion) SECTION DOES NOT RENDER WHEN ARTIFACT IS SELF-CONTAINED */
             this.utilities.isAtoD = true;
             this.utilities.isSatisfiedALL = false;
 
