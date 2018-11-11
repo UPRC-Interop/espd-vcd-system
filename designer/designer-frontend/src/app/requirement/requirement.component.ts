@@ -23,7 +23,7 @@ import {Currency} from '../model/currency.model';
 import {ApicallService} from '../services/apicall.service';
 import {UtilitiesService} from '../services/utilities.service';
 import {EoIDType} from '../model/eoIDType.model';
-import {MatChipInputEvent, MatRadioGroup, MatSelectionList} from '@angular/material';
+import {MatChipInputEvent, MatSelectionList} from '@angular/material';
 import {BidType} from '../model/bidType.model';
 import {FinancialRatioType} from '../model/financialRatioType.model';
 import {COMMA, ENTER} from '../../../node_modules/@angular/cdk/keycodes';

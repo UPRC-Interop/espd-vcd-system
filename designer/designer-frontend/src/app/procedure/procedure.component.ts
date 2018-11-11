@@ -14,7 +14,7 @@
 /// limitations under the License.
 ///
 
-import {Component, OnInit, OnChanges, SimpleChanges, ViewChild, AfterViewInit} from '@angular/core';
+import {Component, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {ProcedureType} from '../model/procedureType.model';
 import {Country} from '../model/country.model';

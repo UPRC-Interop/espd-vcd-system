@@ -14,24 +14,15 @@
 /// limitations under the License.
 ///
 
-import {Component, Input, OnChanges, OnInit, SimpleChange, SimpleChanges} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {ProcedureType} from '../model/procedureType.model';
 import {Country} from '../model/country.model';
-import {FormArray, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
-import {EoRelatedCriterion} from '../model/eoRelatedCriterion.model';
-import {RequirementGroup} from '../model/requirementGroup.model';
-import {RequirementResponse} from '../model/requirement-response.model';
-import * as moment from 'moment';
-import {Moment} from 'moment';
-import {Evidence} from '../model/evidence.model';
-import {EvidenceIssuer} from '../model/evidenceIssuer.model';
-import {FormUtilService} from '../services/form-util.service';
+import {FormArray, FormControl, FormGroup, NgForm} from '@angular/forms';
 import {UtilitiesService} from '../services/utilities.service';
 import {ProjectType} from '../model/projectType.model';
 import {EoRoleType} from '../model/eoRoleType.model';
 import {Currency} from '../model/currency.model';
-import {Amount} from '../model/amount.model';
 import {COMMA, ENTER} from '../../../node_modules/@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material';
 

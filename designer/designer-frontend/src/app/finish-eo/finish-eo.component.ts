@@ -16,7 +16,7 @@
 
 import {Component, OnInit} from '@angular/core';
 import {DataService} from '../services/data.service';
-import {ExportType} from "../export/export-type.enum";
+import {ExportType} from '../export/export-type.enum';
 
 @Component({
   selector: 'app-finish-eo',
