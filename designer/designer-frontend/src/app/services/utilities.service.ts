@@ -19,7 +19,6 @@ import {Moment} from 'moment';
 import * as moment from 'moment';
 import {SelectionCriteria} from '../model/selectionCriteria.model';
 import {MatListOption} from '@angular/material';
-import {ESPDRequest} from '../model/ESPDRequest.model';
 
 @Injectable({
   providedIn: 'root'

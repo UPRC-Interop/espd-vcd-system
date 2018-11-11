@@ -18,7 +18,6 @@ import {Component} from '@angular/core';
 import {DataService} from './services/data.service';
 import {TranslateService} from '@ngx-translate/core';
 import {Language} from './model/language.model';
-import {Currency} from './model/currency.model';
 
 // import {NgForm, FormControl} from "@angular/forms";
 

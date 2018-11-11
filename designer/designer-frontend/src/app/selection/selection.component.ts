@@ -18,7 +18,6 @@ import {Component, OnInit} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {FormControl, NgForm} from '@angular/forms/forms';
 import {ApicallService} from '../services/apicall.service';
-import {EoIDType} from '../model/eoIDType.model';
 import {WeightingType} from '../model/weightingType.model';
 import {UtilitiesService} from '../services/utilities.service';
 
