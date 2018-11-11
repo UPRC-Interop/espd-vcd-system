@@ -45,9 +45,13 @@ public class RequirementDeserialiser extends StdDeserializer<ResponseRequirement
 
     @Override
     public ResponseRequirement deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        final ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule()).disable(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE).configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+        final ObjectMapper mapper = new ObjectMapper().registerModule(
+                new JavaTimeModule())
+                .disable(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE)
+                .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
         JsonNode root = p.getCodec().readTree(p);
         JsonNode responseType = root.get("responseDataType");
+        JsonNode responseValuesRelatedArtefact = root.get("responseValuesRelatedArtefact");
         JsonNode type = root.get("type");
         JsonNode ID = root.get("id");
         JsonNode description = root.get("description");
@@ -57,6 +61,7 @@ public class RequirementDeserialiser extends StdDeserializer<ResponseRequirement
                 RequirementTypeEnum.valueOf(type.asText()),
                 ResponseTypeEnum.valueOf(responseType.asText()),
                 description.asText());
+        responseRequirement.setResponseValuesRelatedArtefact(responseValuesRelatedArtefact.asText());
         Response response;
 
         switch (responseRequirement.getResponseDataType()) {
