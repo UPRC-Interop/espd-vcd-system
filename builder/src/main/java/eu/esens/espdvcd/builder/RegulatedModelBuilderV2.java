@@ -22,8 +22,12 @@ import eu.esens.espdvcd.retriever.criteria.resource.RegulatedCriteriaTaxonomyRes
 import eu.esens.espdvcd.schema.EDMVersion;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class RegulatedModelBuilderV2 extends RegulatedModelBuilder {
+
+    private static final Logger LOGGER = Logger.getLogger(RegulatedModelBuilderV2.class.getName());
 
     private CriteriaTaxonomyResource taxonomyResource;
 
@@ -40,6 +44,7 @@ public class RegulatedModelBuilderV2 extends RegulatedModelBuilder {
             taxonomyResource = new RegulatedCriteriaTaxonomyResource();
         }
 
+        LOGGER.log(Level.INFO, "Applying regulated v2 taxonomy cardinalities and REQUIREMENT_GROUP Types to the imported artefact...");
         criterionList.forEach(sc -> taxonomyResource.applyTaxonomyData(sc));
     }
 

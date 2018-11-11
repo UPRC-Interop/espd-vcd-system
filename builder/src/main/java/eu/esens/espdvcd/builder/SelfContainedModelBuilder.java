@@ -43,7 +43,7 @@ public class SelfContainedModelBuilder extends RegulatedModelBuilder {
             taxonomyResource = new SelfContainedCriteriaTaxonomyResource();
         }
 
-        LOGGER.log(Level.INFO, "Applying taxonomy cardinalities and REQUIREMENT_GROUP Types to the imported artefact...");
+        LOGGER.log(Level.INFO, "Applying self-contained taxonomy cardinalities and REQUIREMENT_GROUP Types to the imported artefact...");
         criterionList.forEach(sc -> taxonomyResource.applyTaxonomyData(sc));
     }
 

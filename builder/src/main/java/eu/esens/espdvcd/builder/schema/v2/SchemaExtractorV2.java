@@ -26,15 +26,20 @@ import eu.espd.schema.v2.pre_award.commonaggregate.*;
 import eu.espd.schema.v2.pre_award.commonbasic.*;
 import eu.espd.schema.v2.unqualifieddatatypes_2.CodeType;
 
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public interface SchemaExtractorV2 {
+
+    Logger LOGGER = Logger.getLogger(SchemaExtractorV2.class.getCanonicalName());
 
     TenderingCriterionPropertyType extractTenderingCriterionPropertyType(Requirement rq);
 
@@ -811,7 +816,7 @@ public interface SchemaExtractorV2 {
                         rqType.setExpectedCode(new ExpectedCodeType());
                         if (rq.getResponseValuesRelatedArtefact() != null) {
                             rqType.getExpectedCode().setListID(rq.getResponseValuesRelatedArtefact());
-                            rqType.getExpectedCode().setListVersionID("1.0");
+
                             switch (rq.getResponseValuesRelatedArtefact()) {
 
                                 case "FinancialRatioType":
@@ -828,7 +833,10 @@ public interface SchemaExtractorV2 {
 
                             }
 
+                        } else {
+                            LOGGER.log(Level.WARNING, "Requirement's: " + rq.getID() + " ResponseValuesRelatedArtefact is null ");
                         }
+                        rqType.getExpectedCode().setListVersionID("1.0");
                         rqType.getExpectedCode().setListAgencyID("EU-COM-GROW");
                         rqType.getExpectedCode().setValue(code);
                     }
