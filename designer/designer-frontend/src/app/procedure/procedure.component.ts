@@ -16,13 +16,11 @@
 
 import {Component, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {DataService} from '../services/data.service';
-import {ProcedureType} from '../model/procedureType.model';
-import {Country} from '../model/country.model';
 import {NgForm} from '@angular/forms';
 import {UtilitiesService} from '../services/utilities.service';
-import {ProjectType} from '../model/projectType.model';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material';
+import {CodeList} from '../model/codeList.model';
 
 @Component({
   selector: 'app-procedure',
@@ -38,9 +36,9 @@ export class ProcedureComponent implements OnInit, OnChanges {
   addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
-  countries: Country[] = null;
-  procedureTypes: ProcedureType[] = null;
-  projectTypes: ProjectType[] = null;
+  countries: CodeList[] = null;
+  procedureTypes: CodeList[] = null;
+  projectTypes: CodeList[] = null;
 
   @ViewChild('form') form: NgForm;
 

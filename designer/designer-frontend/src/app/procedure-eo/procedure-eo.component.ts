@@ -16,15 +16,11 @@
 
 import {Component, OnInit} from '@angular/core';
 import {DataService} from '../services/data.service';
-import {ProcedureType} from '../model/procedureType.model';
-import {Country} from '../model/country.model';
 import {FormArray, FormControl, FormGroup, NgForm} from '@angular/forms';
 import {UtilitiesService} from '../services/utilities.service';
-import {ProjectType} from '../model/projectType.model';
-import {EoRoleType} from '../model/eoRoleType.model';
-import {Currency} from '../model/currency.model';
 import {COMMA, ENTER} from '../../../node_modules/@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material';
+import {CodeList} from '../model/codeList.model';
 
 @Component({
   selector: 'app-procedure-eo',
@@ -36,11 +32,11 @@ export class ProcedureEoComponent implements OnInit {
 
   public EOForm: FormGroup;
 
-  countries: Country[] = null;
-  currency: Currency[] = null;
-  procedureTypes: ProcedureType[] = null;
-  projectTypes: ProjectType[] = null;
-  eoRoleTypes: EoRoleType[] = null;
+  countries: CodeList[] = null;
+  currency: CodeList[] = null;
+  procedureTypes: CodeList[] = null;
+  projectTypes: CodeList[] = null;
+  eoRoleTypes: CodeList[] = null;
 
   /* CPV chips */
   visible = true;

@@ -18,8 +18,8 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, NgForm} from '@angular/forms/forms';
 import {ApicallService} from '../services/apicall.service';
 import {DataService} from '../services/data.service';
-import {Country} from '../model/country.model';
 import {UtilitiesService} from '../services/utilities.service';
+import {CodeList} from '../model/codeList.model';
 
 // import {ProcedureType} from "../model/procedureType.model";
 
@@ -31,7 +31,7 @@ import {UtilitiesService} from '../services/utilities.service';
 })
 export class StartComponent implements OnInit {
 
-  countries: Country[];
+  countries: CodeList[];
   isCA = false;
   isEO = false;
   isCreateNewESPD = false;

@@ -16,8 +16,6 @@
 
 import {Injectable} from '@angular/core';
 import {ApicallService} from './apicall.service';
-import {Country} from '../model/country.model';
-import {ProcedureType} from '../model/procedureType.model';
 import {ExclusionCriteria} from '../model/exclusionCriteria.model';
 import {SelectionCriteria} from '../model/selectionCriteria.model';
 import {FormGroup, NgForm} from '@angular/forms';
@@ -27,10 +25,8 @@ import {FullCriterion} from '../model/fullCriterion.model';
 import {saveAs} from 'file-saver/FileSaver';
 import {EoDetails} from '../model/eoDetails.model';
 import {EoRelatedCriterion} from '../model/eoRelatedCriterion.model';
-import {Currency} from '../model/currency.model';
 import {ReductionCriterion} from '../model/reductionCriterion.model';
 import {ESPDResponse} from '../model/ESPDResponse.model';
-
 import * as moment from 'moment';
 import {PostalAddress} from '../model/postalAddress.model';
 import {ContactingDetails} from '../model/contactingDetails.model';
@@ -40,16 +36,10 @@ import {UtilitiesService} from './utilities.service';
 import {TranslateService} from '@ngx-translate/core';
 import {Language} from '../model/language.model';
 import {ExportType} from '../export/export-type.enum';
-import {EoIDType} from '../model/eoIDType.model';
-import {EvaluationMethodType} from '../model/evaluationMethodType.model';
 import {CaRelatedCriterion} from '../model/caRelatedCriterion.model';
-import {ProjectType} from '../model/projectType.model';
-import {BidType} from '../model/bidType.model';
-import {WeightingType} from '../model/weightingType.model';
 import {DocumentDetails} from '../model/documentDetails.model';
-import {EoRoleType} from '../model/eoRoleType.model';
 import {Amount} from '../model/amount.model';
-import {FinancialRatioType} from '../model/financialRatioType.model';
+import {CodeList} from '../model/codeList.model';
 
 @Injectable()
 export class DataService {
@@ -76,16 +66,16 @@ export class DataService {
   OTHER_CA_REGEXP: RegExp = /^CRITERION.OTHER.CA_DATA.+/;
   EO_LOT_REGEXP: RegExp = /^CRITERION.OTHER.EO_DATA.LOTS_TENDERED/;
 
-  countries: Country[] = null;
-  procedureTypes: ProcedureType[] = null;
-  projectTypes: ProjectType[] = null;
-  bidTypes: BidType[] = null;
-  eoRoleTypes: EoRoleType[] = null;
-  currency: Currency[] = null;
-  eoIDType: EoIDType[] = null;
-  financialRatioTypes: FinancialRatioType[] = null;
-  weightingType: WeightingType[] = null;
-  evaluationMethodType: EvaluationMethodType[] = null;
+  countries: CodeList[] = null;
+  procedureTypes: CodeList[] = null;
+  projectTypes: CodeList[] = null;
+  bidTypes: CodeList[] = null;
+  eoRoleTypes: CodeList[] = null;
+  currency: CodeList[] = null;
+  eoIDType: CodeList[] = null;
+  financialRatioTypes: CodeList[] = null;
+  weightingType: CodeList[] = null;
+  evaluationMethodType: CodeList[] = null;
   exclusionACriteria: ExclusionCriteria[] = null;
   exclusionBCriteria: ExclusionCriteria[] = null;
   exclusionCCriteria: ExclusionCriteria[] = null;
@@ -1619,7 +1609,7 @@ export class DataService {
   }
 
 
-  getCountries(): Promise<Country[]> {
+  getCountries(): Promise<CodeList[]> {
     if (this.countries != null) {
       return Promise.resolve(this.countries);
     } else {
@@ -1639,7 +1629,7 @@ export class DataService {
     }
   }
 
-  getCurrency(): Promise<Currency[]> {
+  getCurrency(): Promise<CodeList[]> {
     if (this.currency != null) {
       return Promise.resolve(this.currency);
     } else {
@@ -1661,7 +1651,7 @@ export class DataService {
 
   /* ============================= SELF-CONTAINED: codelists ========================*/
 
-  getProcedureTypes(): Promise<ProcedureType[]> {
+  getProcedureTypes(): Promise<CodeList[]> {
     if (this.procedureTypes != null) {
       return Promise.resolve(this.procedureTypes);
     } else {
@@ -1681,7 +1671,7 @@ export class DataService {
     }
   }
 
-  getEoIDTypes(): Promise<EoIDType[]> {
+  getEoIDTypes(): Promise<CodeList[]> {
     if (this.eoIDType != null) {
       return Promise.resolve(this.eoIDType);
     } else {
@@ -1701,7 +1691,7 @@ export class DataService {
     }
   }
 
-  getEvalutationMethodTypes(): Promise<EvaluationMethodType[]> {
+  getEvalutationMethodTypes(): Promise<CodeList[]> {
     if (this.evaluationMethodType != null) {
       return Promise.resolve(this.evaluationMethodType);
     } else {
@@ -1721,7 +1711,7 @@ export class DataService {
     }
   }
 
-  getProjectTypes(): Promise<ProjectType[]> {
+  getProjectTypes(): Promise<CodeList[]> {
     if (this.projectTypes != null) {
       return Promise.resolve(this.projectTypes);
     } else {
@@ -1741,7 +1731,7 @@ export class DataService {
     }
   }
 
-  getBidTypes(): Promise<BidType[]> {
+  getBidTypes(): Promise<CodeList[]> {
     if (this.bidTypes != null) {
       return Promise.resolve(this.bidTypes);
     } else {
@@ -1761,7 +1751,7 @@ export class DataService {
     }
   }
 
-  getFinancialRatioTypes(): Promise<FinancialRatioType[]> {
+  getFinancialRatioTypes(): Promise<CodeList[]> {
     if (this.financialRatioTypes != null) {
       return Promise.resolve(this.financialRatioTypes);
     } else {
@@ -1781,7 +1771,7 @@ export class DataService {
     }
   }
 
-  getWeightingType(): Promise<WeightingType[]> {
+  getWeightingType(): Promise<CodeList[]> {
     if (this.weightingType != null) {
       return Promise.resolve(this.weightingType);
     } else {
@@ -1801,7 +1791,7 @@ export class DataService {
     }
   }
 
-  getEORoleTypes(): Promise<EoRoleType[]> {
+  getEORoleTypes(): Promise<CodeList[]> {
     if (this.eoRoleTypes != null) {
       return Promise.resolve(this.eoRoleTypes);
     } else {

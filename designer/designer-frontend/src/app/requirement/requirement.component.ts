@@ -18,15 +18,11 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild} fr
 import {FormGroup} from '@angular/forms';
 import {Requirement} from '../model/requirement.model';
 import {DataService} from '../services/data.service';
-import {Country} from '../model/country.model';
-import {Currency} from '../model/currency.model';
 import {ApicallService} from '../services/apicall.service';
 import {UtilitiesService} from '../services/utilities.service';
-import {EoIDType} from '../model/eoIDType.model';
 import {MatChipInputEvent, MatSelectionList} from '@angular/material';
-import {BidType} from '../model/bidType.model';
-import {FinancialRatioType} from '../model/financialRatioType.model';
 import {COMMA, ENTER} from '../../../node_modules/@angular/cdk/keycodes';
+import {CodeList} from '../model/codeList.model';
 
 @Component({
   selector: 'app-requirement',
@@ -42,11 +38,11 @@ export class RequirementComponent implements OnInit, OnChanges {
   // @Output() lotsInReq = new EventEmitter();
 
   reqLots: string[] = [];
-  countries: Country[] = [];
-  currency: Currency[] = [];
-  eoIDTypes: EoIDType[] = [];
-  bidTypes: BidType[] = [];
-  financialRatioTypes: FinancialRatioType[] = [];
+  countries: CodeList[] = [];
+  currency: CodeList[] = [];
+  eoIDTypes: CodeList[] = [];
+  bidTypes: CodeList[] = [];
+  financialRatioTypes: CodeList[] = [];
   // evaluationMethodTypes: EvaluationMethodType[] = null;
   cpvCodes: string[] = [];
   isWeighted = false;

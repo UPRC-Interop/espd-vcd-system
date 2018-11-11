@@ -18,7 +18,7 @@ import {Component, OnInit} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {FormControl} from '@angular/forms';
 import {UtilitiesService} from '../services/utilities.service';
-import {WeightingType} from '../model/weightingType.model';
+import {CodeList} from '../model/codeList.model';
 
 @Component({
   selector: 'app-selection-eo',
@@ -28,7 +28,7 @@ import {WeightingType} from '../model/weightingType.model';
 export class SelectionEoComponent implements OnInit {
   // isSatisfiedALL = true;
   // isAtoD = false;
-  weightingType: WeightingType[] = null;
+  weightingType: CodeList[] = null;
 
   constructor(public dataService: DataService, public utilities: UtilitiesService) {
   }

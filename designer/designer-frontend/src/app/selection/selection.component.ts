@@ -18,8 +18,8 @@ import {Component, OnInit} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {FormControl, NgForm} from '@angular/forms/forms';
 import {ApicallService} from '../services/apicall.service';
-import {WeightingType} from '../model/weightingType.model';
 import {UtilitiesService} from '../services/utilities.service';
+import {CodeList} from '../model/codeList.model';
 
 @Component({
   selector: 'app-selection',
@@ -30,7 +30,7 @@ export class SelectionComponent implements OnInit {
 
   // isSatisfiedALL = true;
   // isAtoD = false;
-  weightingType: WeightingType[] = null;
+  weightingType: CodeList[] = null;
 
 
   constructor(public dataService: DataService,
