@@ -15,11 +15,11 @@
  */
 package eu.esens.espdvcd.codelist;
 
-import java.util.*;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.*;
 
 public class CodelistsTest {
 

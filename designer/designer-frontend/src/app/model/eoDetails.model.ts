@@ -32,4 +32,5 @@ export class EoDetails {
   employeeQuantity?: number;
   eoGroupName?: string;
   generalTurnover?: Amount;
+  eoRole: string;
 }

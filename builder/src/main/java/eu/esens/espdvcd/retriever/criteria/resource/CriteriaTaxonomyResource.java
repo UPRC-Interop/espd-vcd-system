@@ -256,7 +256,8 @@ public abstract class CriteriaTaxonomyResource implements CriteriaResource, Requ
     }
 
     private String getRowUUID(Row r) {
-        return getCellStringValueOrNull(r, elementUUIDColumnIndex);
+        String UUID = getCellStringValueOrNull(r, elementUUIDColumnIndex);
+        return UUID != null ? UUID.trim() : UUID;
     }
 
     private String getRowName(Row r) {
@@ -268,7 +269,8 @@ public abstract class CriteriaTaxonomyResource implements CriteriaResource, Requ
     }
 
     private String getRowCode(Row r) {
-        return getCellStringValueOrNull(r, elementCodeColumnIndex);
+        String elementCode = getCellStringValueOrNull(r, elementCodeColumnIndex);
+        return elementCode != null ? elementCode.trim() : elementCode;
     }
 
     private String getRowResponseType(Row r) {

@@ -19,6 +19,7 @@ import eu.esens.espdvcd.builder.BuilderFactory;
 import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.builder.util.ArtefactUtils;
 import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
+import eu.esens.espdvcd.codelist.enums.internal.ArtefactType;
 import eu.esens.espdvcd.designer.exception.ValidationException;
 import eu.esens.espdvcd.designer.util.CriteriaUtil;
 import eu.esens.espdvcd.model.DocumentDetails;
@@ -80,7 +81,7 @@ public enum ImportESPDResponseService implements ImportESPDService<ESPDResponse>
         CriteriaUtil.generateUUIDs(response.getFullCriterionList());
         is.close();
         response.setDocumentDetails(new DocumentDetails(artefactVersion,
-                ArtefactUtils.findArtefactType(XML),
+                ArtefactType.ESPD_RESPONSE,
                 qualificationApplicationType));
         return response;
     }

@@ -27,6 +27,7 @@ export class UtilitiesService {
   isCA = false;
   isEO = false;
   isImportESPD = false;
+  isImportReq = false;
   isCreateResponse = false;
   isCreateNewESPD = false;
   isReviewESPD = false;
@@ -42,9 +43,15 @@ export class UtilitiesService {
   isDividedIntoLots = false;
   projectLots = [];
   lotTemplate = [];
+  cpvTemplate = [];
+  renderCpvTemplate = [];
+  criterionWeightIndicators = [];
+  cpvString = [];
   type: string;
+  selectedLang = 'en';
   // qualificationApplicationType = 'SELF-CONTAINED';
   // qualificationApplicationType = 'REGULATED';
+
 
   constructor() {
   }
@@ -97,7 +104,7 @@ export class UtilitiesService {
       projectLotsList.push('Lot' + i);
     }
 
-    console.log(projectLotsList);
+    // console.log(projectLotsList);
 
     return projectLotsList;
   }
@@ -110,5 +117,21 @@ export class UtilitiesService {
     // console.log(reqLot);
   }
 
+  cpvCodeToString(cpvs: string[]): string {
+    return cpvs.join(',');
+  }
+
+  stringToCpvCode(cpvString: string): string[] {
+    return cpvString.split(',');
+  }
+
+  // makeDummyESPDRequest(): ESPDRequest {
+  //   const json = JSON.parse(this.requestJSON);
+  //   return new ESPDRequest(json.cadetails, json.fullCriterionList, json.documentDetails);
+  // }
+
+  isImport(): boolean {
+    return this.isImportReq || this.isImportESPD || this.isReviewESPD;
+  }
 
 }

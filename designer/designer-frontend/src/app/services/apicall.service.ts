@@ -34,6 +34,8 @@ import {EvaluationMethodType} from '../model/evaluationMethodType.model';
 import {ProjectType} from '../model/projectType.model';
 import {BidType} from '../model/bidType.model';
 import {WeightingType} from '../model/weightingType.model';
+import {EoRoleType} from '../model/eoRoleType.model';
+import {FinancialRatioType} from '../model/financialRatioType.model';
 
 // import {DataService} from '../services/data.service';
 
@@ -51,40 +53,53 @@ export class ApicallService {
   }
 
   getCountryList() {
-    return this.http.get<Country[]>(environment.apiUrl + 'v2/codelists/CountryIdentification').toPromise();
+    return this.http.get<Country[]>(environment.apiUrl + 'v2/codelists/CountryIdentification/lang/'
+      + this.utilities.selectedLang).toPromise();
   }
 
   getCurr() {
-    return this.http.get<Currency[]>(environment.apiUrl + 'v1/codelists/Currency').toPromise();
+    return this.http.get<Currency[]>(environment.apiUrl + 'v2/codelists/Currency/lang/' + this.utilities.selectedLang).toPromise();
   }
 
   getLangs() {
-    return this.http.get<Language[]>(environment.apiUrl + 'v2/codelists/LanguageCodeEU').toPromise();
+    return this.http.get<Language[]>(environment.apiUrl + 'v2/codelists/LanguageCodeEU/lang/' + this.utilities.selectedLang).toPromise();
   }
 
   /* SELF-CONTAINED: Codelists*/
   get_eoIDTypes() {
-    return this.http.get<EoIDType[]>(environment.apiUrl + 'v2/codelists/EOIDType').toPromise();
+    return this.http.get<EoIDType[]>(environment.apiUrl + 'v2/codelists/EOIDType/lang/' + this.utilities.selectedLang).toPromise();
   }
 
   get_EvaluationMethodType() {
-    return this.http.get<EvaluationMethodType[]>(environment.apiUrl + 'v2/codelists/EvaluationMethodType').toPromise();
+    return this.http.get<EvaluationMethodType[]>(environment.apiUrl + 'v2/codelists/EvaluationMethodType/lang/'
+      + this.utilities.selectedLang).toPromise();
   }
 
   getProcedureType() {
-    return this.http.get<ProcedureType[]>(environment.apiUrl + 'v2/codelists/ProcedureType').toPromise();
+    return this.http.get<ProcedureType[]>(environment.apiUrl + 'v2/codelists/ProcedureType/lang/'
+      + this.utilities.selectedLang).toPromise();
   }
 
   get_ProjectType() {
-    return this.http.get<ProjectType[]>(environment.apiUrl + 'v2/codelists/ProjectType').toPromise();
+    return this.http.get<ProjectType[]>(environment.apiUrl + 'v2/codelists/ProjectType/lang/' + this.utilities.selectedLang).toPromise();
   }
 
   get_BidType() {
-    return this.http.get<BidType[]>(environment.apiUrl + 'v2/codelists/BidType').toPromise();
+    return this.http.get<BidType[]>(environment.apiUrl + 'v2/codelists/BidType/lang/' + this.utilities.selectedLang).toPromise();
   }
 
   get_WeightingType() {
-    return this.http.get<WeightingType[]>(environment.apiUrl + 'v2/codelists/WeightingType').toPromise();
+    return this.http.get<WeightingType[]>(environment.apiUrl + 'v2/codelists/WeightingType/lang/'
+      + this.utilities.selectedLang).toPromise();
+  }
+
+  get_eoRoleType() {
+    return this.http.get<EoRoleType[]>(environment.apiUrl + 'v2/codelists/EORoleType/lang/' + this.utilities.selectedLang).toPromise();
+  }
+
+  get_financialRatioType() {
+    return this.http.get<FinancialRatioType[]>(environment.apiUrl + 'v2/codelists/FinancialRatioType/lang/'
+      + this.utilities.selectedLang).toPromise();
   }
 
 
@@ -108,6 +123,11 @@ export class ApicallService {
   getEO_RelatedDCriteria() {
     return this.http.get<EoRelatedCriterion[]>(environment.apiUrl + this.version + '/' + this.utilities.qualificationApplicationType +
       '/criteria/eo_related_C').toPromise();
+  }
+
+  getEO_LotCriterion() {
+    return this.http.get<EoRelatedCriterion[]>(environment.apiUrl + this.version + '/' + this.utilities.qualificationApplicationType +
+      '/criteria/eo_lots').toPromise();
   }
 
   /* SELF-CONTAINED: CA related Criterion - CA LOTS */
@@ -188,6 +208,7 @@ export class ApicallService {
     // const header = new HttpHeaders({'Content-Type':'application/xml; charset=utf-8'});
     let header = new HttpHeaders();
     header = header.set('Content-Type', 'application/xml; charset=utf-8');
+    // return this.http.post<ESPDRequest>(environment.apiUrl + '/importESPD/request', formData).toPromise();
     return this.http.post<ESPDRequest>(environment.apiUrl + '/importESPD/request', formData).toPromise();
 
   }
@@ -207,20 +228,33 @@ export class ApicallService {
   }
 
   /* ================= UPLOAD JSON GET XML Request ================================= */
-  getXMLRequest(ESPDRequest: string) {
+  getXMLRequest(ESPDRequest: string, language: string) {
+    return this.getRequestExport(ESPDRequest, '/espd/request/xml', language);
+  }
 
+  getHTMLRequest(ESPDRequest: string, language: string) {
+    return this.getRequestExport(ESPDRequest, '/espd/request/html', language);
+  }
+
+  getPDFRequest(ESPDRequest: string, language: string) {
+    return this.getRequestExport(ESPDRequest, '/espd/request/pdf', language);
+  }
+
+  private getRequestExport(ESPDRequest: string, endpoint: string, language: string) {
     console.log(ESPDRequest);
     let header = new HttpHeaders();
     let _header = header.append('Content-Type', 'application/json; charset=utf-8');
-
+    let params = new HttpParams().set('language', language);
     let options: Object = {
       headers: _header,
       responseType: 'blob' as 'blob',
-      observe: 'response' as 'response'
+      observe: 'response' as 'response',
+      params: params
     };
 
     // headers = header.append('Content-Type', 'application/json; charset=utf-8');
-    return this.http.post<any>(environment.apiUrl + this.version + '/espd/request', ESPDRequest, options).toPromise();
+
+    return this.http.post<any>(environment.apiUrl + this.version + endpoint, ESPDRequest, options).toPromise();
   }
 
   getXMLRequestV2(ESPDRequest: string) {
@@ -238,21 +272,34 @@ export class ApicallService {
     return this.http.post<any>(environment.apiUrl + 'v2/espd/request', ESPDRequest, options).toPromise();
   }
 
-  getXMLResponse(ESPDResponse: string) {
+  getHTMLResponse(ESPDResponse: string, language: string) {
+    return this.getESPDResponseDocument(ESPDResponse, '/espd/response/html', language);
+  }
 
+  getPDFResponse(ESPDResponse: string, language: string) {
+    return this.getESPDResponseDocument(ESPDResponse, '/espd/response/pdf', language);
+  }
+
+  getXMLResponse(ESPDResponse: string, language: string) {
+    return this.getESPDResponseDocument(ESPDResponse, '/espd/response/xml', language);
+  }
+
+  private getESPDResponseDocument(ESPDResponse: string, endpoint: string, language: string) {
     console.log(ESPDResponse);
 
     let header = new HttpHeaders();
     let _header = header.append('Content-Type', 'application/json; charset=utf-8');
 
+    let params = new HttpParams().set('language', language);
     let options: Object = {
       headers: _header,
       responseType: 'blob' as 'blob',
-      observe: 'response' as 'response'
+      observe: 'response' as 'response',
+      params: params
     };
 
     // headers = header.append('Content-Type', 'application/json; charset=utf-8');
-    return this.http.post<any>(environment.apiUrl + this.version + '/espd/response', ESPDResponse, options).toPromise();
+    return this.http.post<any>(environment.apiUrl + this.version + endpoint, ESPDResponse, options).toPromise();
   }
 
   // getXMLResponseV2(ESPDResponse: string) {

@@ -58,9 +58,6 @@ public class ImportESPDServiceTest {
 //                (ImportESPDServiceTest.class.getResourceAsStream("/espd-response.xml")).createESPDResponse();
 //        Assert.assertNotNull(response);
 
-//        selfContainedRequest = BuilderFactory.EDM_V2.createSelfContainedModelBuilder().importFrom
-//                (ImportESPDServiceTest.class.getResourceAsStream("SELFCONTAINED-ESPD-Request_2.0.2_weights.xml")).createESPDRequest();
-
         exportESPDService = RegulatedExportESPDV1Service.getInstance();
         importESPDService = ImportESPDResponseService.getInstance();
         writer = new ObjectMapper().writer().withDefaultPrettyPrinter();
@@ -118,8 +115,7 @@ public class ImportESPDServiceTest {
 
     @Test
     public void requestSelfContainedImport() throws Exception {
-        ESPDRequest request = ImportESPDRequestService.getInstance().importESPDFile(new File(this.getClass().getClassLoader().getResource("SELFCONTAINED-ESPD-Request_2.0.2_weights.xml").toURI()));
-
+        ESPDRequest request = ImportESPDRequestService.getInstance().importESPDFile(new File(this.getClass().getClassLoader().getResource("espd-self-contained-request-full-8-11-2018.xml").toURI()));
         System.out.println(writer.writeValueAsString(request));
     }
 }

@@ -348,7 +348,7 @@ public class BuilderESPDTest {
 
         ESPDRequest espdRequest = BuilderFactory.EDM_V2
                 .createSelfContainedModelBuilder()
-                .importFrom(BuilderESPDTest.class.getResourceAsStream("/SELFCONTAINED-ESPD-Request_2.0.2.xml"))
+                .importFrom(BuilderESPDTest.class.getResourceAsStream("/FULL_espd-self-contained-request-full-10-11-2018.xml"))
                 .createESPDRequest();
 
         XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.EDM_V2

@@ -23,7 +23,10 @@ import {Currency} from '../model/currency.model';
 import {ApicallService} from '../services/apicall.service';
 import {UtilitiesService} from '../services/utilities.service';
 import {EoIDType} from '../model/eoIDType.model';
-import {MatSelectionList} from '@angular/material';
+import {MatChipInputEvent, MatSelectionList} from '@angular/material';
+import {BidType} from '../model/bidType.model';
+import {FinancialRatioType} from '../model/financialRatioType.model';
+import {COMMA, ENTER} from '../../../node_modules/@angular/cdk/keycodes';
 
 @Component({
   selector: 'app-requirement',
@@ -39,15 +42,27 @@ export class RequirementComponent implements OnInit, OnChanges {
   // @Output() lotsInReq = new EventEmitter();
 
   reqLots: string[] = [];
-  countries: Country[] = null;
-  currency: Currency[] = null;
-  eoIDTypes: EoIDType[] = null;
+  countries: Country[] = [];
+  currency: Currency[] = [];
+  eoIDTypes: EoIDType[] = [];
+  bidTypes: BidType[] = [];
+  financialRatioTypes: FinancialRatioType[] = [];
   // evaluationMethodTypes: EvaluationMethodType[] = null;
+  cpvCodes: string[] = [];
   isWeighted = false;
+  /* CPV chips */
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  disabled = true;
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
   @ViewChild('lots') lots: MatSelectionList;
 
+
   constructor(public dataService: DataService, public APIService: ApicallService, public utilities: UtilitiesService) {
+
   }
 
   ngOnChanges() {
@@ -59,36 +74,71 @@ export class RequirementComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    // if (this.lots !== undefined) {
-    //   console.log(this.lots);
-    // }
 
-    this.dataService.getCountries()
-      .then(res => {
-        this.countries = res;
-        // console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    if (this.req.responseDataType === 'WEIGHT_INDICATOR' && this.utilities.isImport()) {
+      this.isWeighted = this.utilities.criterionWeightIndicators[this.req.uuid];
+    }
 
-    this.dataService.getCurrency()
-      .then(res => {
-        this.currency = res;
-        // console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
 
-    this.dataService.getEoIDTypes()
-      .then(res => {
-        this.eoIDTypes = res;
-        // console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    if (this.req.responseDataType === 'CODE' && this.req.responseValuesRelatedArtefact === 'CPVCodes' && this.utilities.isImport()) {
+      // init cpvCodes when import
+      this.cpvCodes = this.utilities.renderCpvTemplate[this.req.uuid];
+
+      /* Make Chips non editable when user is EO and is requirement */
+      if (this.utilities.isEO && this.req.type === 'REQUIREMENT') {
+        this.disabled = true;
+        this.removable = false;
+      }
+      /* make cpvTemplate with chips that are pre-existing at the imported artifact */
+      if (this.cpvCodes !== undefined) {
+        this.utilities.cpvTemplate[this.req.uuid] = this.utilities.cpvCodeToString(this.cpvCodes);
+      }
+    }
+
+    // this.dataService.getCountries()
+    //   .then(res => {
+    //     this.countries = res;
+    //     // console.log(res);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
+    //
+    // this.dataService.getCurrency()
+    //   .then(res => {
+    //     this.currency = res;
+    //     // console.log(res);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
+    //
+    // this.dataService.getEoIDTypes()
+    //   .then(res => {
+    //     this.eoIDTypes = res;
+    //     // console.log(res);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
+    //
+    // this.dataService.getBidTypes()
+    //   .then(res => {
+    //     this.bidTypes = res;
+    //     // console.log(res);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
+    //
+    // this.dataService.getFinancialRatioTypes()
+    //   .then(res => {
+    //     this.financialRatioTypes = res;
+    //     // console.log(res);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
 
     // this.dataService.getEvalutationMethodTypes()
     //   .then(res => {
@@ -130,6 +180,14 @@ export class RequirementComponent implements OnInit, OnChanges {
   }
 
 
+  /* SELF-CONTAINED: CODE with CPVCodes as responseValuesRelatedArtefact */
+  createChips() {
+    this.utilities.cpvTemplate[this.req.uuid] = this.utilities.cpvCodeToString(this.cpvCodes);
+    console.log(this.utilities.cpvTemplate);
+    // console.log(this.utilities.cpvTemplate['0157cebc-4ba4-4d65-9a6e-3cd5d57a08fb-34']);
+  }
+
+
   pushSelectedLot() {
     if (this.lots.selectedOptions.selected !== undefined) {
       this.utilities.lotTemplate[this.req.uuid] = this.utilities.createLotListInCriterion(this.lots.selectedOptions.selected);
@@ -139,5 +197,34 @@ export class RequirementComponent implements OnInit, OnChanges {
       // console.log(this.reqLots);
     }
   }
+
+  /* CPV Chip handling */
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    // Add our cpv
+    if ((value || '').trim()) {
+      if (this.cpvCodes !== null && this.cpvCodes !== undefined) {
+        this.cpvCodes.push(value.trim());
+      }
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+  }
+
+  remove(cpv: string): void {
+    const index = this.cpvCodes.indexOf(cpv);
+
+    if (index >= 0) {
+      this.cpvCodes.splice(index, 1);
+    }
+    /* re-create chip template when chips are removed */
+    this.createChips();
+  }
+
 
 }

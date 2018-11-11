@@ -26,12 +26,20 @@ import eu.espd.schema.v2.pre_award.commonaggregate.*;
 import eu.espd.schema.v2.pre_award.commonbasic.*;
 import eu.espd.schema.v2.unqualifieddatatypes_2.CodeType;
 
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public interface SchemaExtractorV2 {
+
+    Logger LOGGER = Logger.getLogger(SchemaExtractorV2.class.getCanonicalName());
 
     TenderingCriterionPropertyType extractTenderingCriterionPropertyType(Requirement rq);
 
@@ -96,7 +104,9 @@ public interface SchemaExtractorV2 {
                     .map(desc -> createWeightingConsiderationDescriptionType(desc))
                     .collect(Collectors.toList()));
             // Weight
-            criterionType.setWeightNumeric(createWeightNumericType(response.getWeight()));
+            if (response.getWeight() != null) {
+                criterionType.setWeightNumeric(createWeightNumericType(response.getWeight()));
+            }
         }
     }
 
@@ -576,6 +586,66 @@ public interface SchemaExtractorV2 {
         return qaTypeCode;
     }
 
+    default ProcurementProjectType createProcurementProjectType(String procurementProcedureTitle,
+                                                                String procurementProcedureDesc,
+                                                                String projectType,
+                                                                List<String> classificationCodes) {
+
+        ProcurementProjectType procurementProjectType = new ProcurementProjectType();
+
+        // Name
+        if (procurementProcedureTitle != null) {
+            procurementProjectType.getName().add(new NameType());
+            procurementProjectType.getName().get(0).setValue(procurementProcedureTitle);
+        }
+
+        // Description
+        if (procurementProcedureDesc != null) {
+            procurementProjectType.getDescription().add(new DescriptionType());
+            procurementProjectType.getDescription().get(0).setValue(procurementProcedureDesc);
+        }
+
+        // CPV codes
+        procurementProjectType.getMainCommodityClassification().addAll(classificationCodes.stream()
+                .map(cpvCode -> {
+                    CommodityClassificationType classificationType = new CommodityClassificationType();
+                    classificationType.setItemClassificationCode(new ItemClassificationCodeType());
+                    classificationType.getItemClassificationCode().setValue(cpvCode);
+                    return classificationType;
+                })
+                .collect(Collectors.toList()));
+
+        // Project Type
+        if (projectType != null) {
+            procurementProjectType.setProcurementTypeCode(new ProcurementTypeCodeType());
+            procurementProjectType.getProcurementTypeCode().setListID("ProjectType");
+            procurementProjectType.getProcurementTypeCode().setListAgencyID("EU-COM-OP");
+            procurementProjectType.getProcurementTypeCode().setListVersionID("1.0");
+            procurementProjectType.getProcurementTypeCode().setValue(projectType);
+        }
+
+        return procurementProjectType;
+    }
+
+    default ProfileExecutionIDType createProfileExecutionIDType(QualificationApplicationTypeEnum type) {
+        ProfileExecutionIDType peIdType = new ProfileExecutionIDType();
+        peIdType.setSchemeAgencyID("EU-COM-GROW");
+        peIdType.setSchemeVersionID("2.0.2");
+
+        switch (type) {
+
+            case REGULATED:
+                peIdType.setValue(ProfileExecutionIDEnum.ESPD_EDM_V2_0_2_REGULATED.getValue());
+                break;
+
+            case SELFCONTAINED:
+                peIdType.setValue(ProfileExecutionIDEnum.ESPD_EDM_V2_0_2_SELFCONTAINED.getValue());
+                break;
+
+        }
+        return peIdType;
+    }
+
     /**
      * Compulsory use of the CodeList ProfileExecutionID.
      *
@@ -605,6 +675,9 @@ public interface SchemaExtractorV2 {
 
     default EvaluationMethodTypeCodeType createEvaluationMethodTypeCodeType(String code) {
         EvaluationMethodTypeCodeType codeType = new EvaluationMethodTypeCodeType();
+        codeType.setListID("EvaluationMethodType");
+        codeType.setListAgencyID("EU-COM-GROW");
+        codeType.setListVersionID("2.0.2");
         codeType.setValue(code);
         return codeType;
     }
@@ -623,7 +696,7 @@ public interface SchemaExtractorV2 {
 
     default WeightingTypeCodeType createWeightingTypeCodeType(String code) {
         WeightingTypeCodeType codeType = new WeightingTypeCodeType();
-        codeType.setListID("ResponseDataType");
+        codeType.setListID("WeightingType");
         codeType.setListAgencyID("EU-COM-GROW");
         codeType.setListVersionID("2.0.2");
         codeType.setValue(code);
@@ -643,13 +716,60 @@ public interface SchemaExtractorV2 {
         return indicatorType;
     }
 
+    default ProcedureCodeType createProcedureCodeType(String code) {
+        ProcedureCodeType codeType = new ProcedureCodeType();
+        codeType.setListID("ProcedureType");
+        codeType.setListAgencyID("EU-COM-OP");
+        codeType.setListVersionID("1.0");
+        codeType.setValue(code);
+        return codeType;
+    }
+
+    /**
+     * The Regulated ESPD requires the presence of one Lot, identified with a '0' to indicate that
+     * the procedure is not divided into Lots. Additional Lots may be specified, in which case each
+     * Lot needs to be identified differently.
+     *
+     * @param type         The type of XML ESPD Artefact (REGULATED or SELF-CONTAINED)
+     * @param numberOfLots The number of lots
+     * @return
+     */
+    default List<ProcurementProjectLotType> createProcurementProjectLotType(QualificationApplicationTypeEnum type,
+                                                                            int numberOfLots) {
+
+        List<ProcurementProjectLotType> lotList = new ArrayList<>();
+
+        switch (type) {
+
+            case REGULATED:
+                lotList.add(createProcurementProjectLotType("0"));
+                break;
+
+            case SELFCONTAINED:
+                IntStream.rangeClosed(1, numberOfLots)
+                        .forEach(number -> lotList.add(createProcurementProjectLotType("Lot" + number)));
+                break;
+
+        }
+
+        return lotList;
+    }
+
+    default ProcurementProjectLotType createProcurementProjectLotType(String value) {
+        ProcurementProjectLotType lotType = new ProcurementProjectLotType();
+        lotType.setID(new IDType());
+        lotType.getID().setValue(value);
+        lotType.getID().setSchemeAgencyID("EU-COM-GROW");
+        return lotType;
+    }
+
     default void applyCAResponseToXML(Requirement rq, TenderingCriterionPropertyType rqType) {
 
         if (rq.getType() == RequirementTypeEnum.REQUIREMENT
                 && rq.getResponse() != null
-                && rq.getResponse().getResponseType() != null) {
+                && rq.getResponseDataType() != null) {
 
-            switch (rq.getResponse().getResponseType()) {
+            switch (rq.getResponseDataType()) {
 
                 case DESCRIPTION:
                     String description = ((DescriptionResponse) rq.getResponse()).getDescription();
@@ -662,7 +782,7 @@ public interface SchemaExtractorV2 {
                 case AMOUNT:
                     BigDecimal amount = ((AmountResponse) rq.getResponse()).getAmount();
                     String currency = ((AmountResponse) rq.getResponse()).getCurrency();
-                    if ((amount.floatValue() != 0) || (currency != null && !currency.isEmpty())) {
+                    if ((amount != null) || (currency != null && !currency.isEmpty())) {
                         // Only generate a proper response if for at least one of the variables "amount" and
                         // "currency" a value different from the default is detected.
 
@@ -676,6 +796,30 @@ public interface SchemaExtractorV2 {
                     String code = ((EvidenceURLCodeResponse) rq.getResponse()).getEvidenceURLCode();
                     if (code != null && !code.isEmpty()) {
                         rqType.setExpectedCode(new ExpectedCodeType());
+                        if (rq.getResponseValuesRelatedArtefact() != null) {
+                            rqType.getExpectedCode().setListID(rq.getResponseValuesRelatedArtefact());
+
+                            switch (rq.getResponseValuesRelatedArtefact()) {
+
+                                case "FinancialRatioType":
+                                    rqType.getExpectedCode().setListAgencyID("BACH");
+                                    break;
+
+                                case "BidType":
+                                    rqType.getExpectedCode().setListAgencyID("EU-COM-OP");
+                                    break;
+
+                                case "CPVCodes":
+                                    rqType.getExpectedCode().setListAgencyID("EU-COM-OP");
+                                    break;
+
+                            }
+
+                        } else {
+                            LOGGER.log(Level.WARNING, "Requirement's: " + rq.getID() + " ResponseValuesRelatedArtefact is null ");
+                        }
+                        rqType.getExpectedCode().setListVersionID("1.0");
+                        rqType.getExpectedCode().setListAgencyID("EU-COM-GROW");
                         rqType.getExpectedCode().setValue(code);
                     }
                     break;
@@ -684,6 +828,7 @@ public interface SchemaExtractorV2 {
                     String lots = ((LotIdentifierResponse) rq.getResponse()).getLots();
                     if (lots != null && !lots.isEmpty()) {
                         rqType.setExpectedID(new ExpectedIDType());
+                        rqType.getExpectedID().setSchemeAgencyID("EU-COM-GROW");
                         rqType.getExpectedID().setValue(lots);
                     }
                     break;
@@ -696,8 +841,10 @@ public interface SchemaExtractorV2 {
 
                 case QUANTITY:
                     BigDecimal quantity = ((QuantityResponse) rq.getResponse()).getQuantity();
-                    rqType.setExpectedValueNumeric(new ExpectedValueNumericType());
-                    rqType.getExpectedValueNumeric().setValue(quantity);
+                    if (quantity != null) {
+                        rqType.setExpectedValueNumeric(new ExpectedValueNumericType());
+                        rqType.getExpectedValueNumeric().setValue(quantity);
+                    }
                     break;
 
                 case PERIOD:
@@ -714,10 +861,13 @@ public interface SchemaExtractorV2 {
                     break;
 
                 case URL:
+                    // https://github.com/ESPD/ESPD-EDM/issues/181
                     String url = ((URLResponse) rq.getResponse()).getUrl();
                     if (url != null) {
-                        rqType.setExpectedDescription(new ExpectedDescriptionType());
-                        rqType.getExpectedDescription().setValue(url);
+                        rqType.setExpectedID(new ExpectedIDType());
+                        rqType.getExpectedID().setSchemeAgencyID("EU-COM-GROW");
+                        rqType.getExpectedID().setSchemeID("URI");
+                        rqType.getExpectedID().setValue(url);
                     }
                     break;
 

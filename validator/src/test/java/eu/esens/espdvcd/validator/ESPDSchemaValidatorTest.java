@@ -35,17 +35,17 @@ public class ESPDSchemaValidatorTest {
     private File invalidRegulatedResponseV2_46;
 
     @Before
-    public void setUp() {
-        validRegulatedRequestV1 = new File(getClass().getClassLoader().getResource("ESPDRequest_DA_Test.xml").getFile());
+    public void setUp() throws Exception{
+        validRegulatedRequestV1 = new File(getClass().getClassLoader().getResource("ESPDRequest_DA_Test.xml").toURI());
         Assert.assertNotNull(validRegulatedRequestV1);
 
-        invalidRegulatedRequestV1 = new File(getClass().getClassLoader().getResource("espd-request-invalid.xml").getFile());
+        invalidRegulatedRequestV1 = new File(getClass().getClassLoader().getResource("espd-request-invalid.xml").toURI());
         Assert.assertNotNull(invalidRegulatedRequestV1);
 
-        validRegulatedResponseV1 = new File(getClass().getClassLoader().getResource("ESPDResponse_DA_Test.xml").getFile());
+        validRegulatedResponseV1 = new File(getClass().getClassLoader().getResource("ESPDResponse_DA_Test.xml").toURI());
         Assert.assertNotNull(validRegulatedResponseV1);
 
-        invalidRegulatedResponseV2_46 = new File(getClass().getClassLoader().getResource("espd-response-v2-46.xml").getFile());
+        invalidRegulatedResponseV2_46 = new File(getClass().getClassLoader().getResource("espd-response-v2-46.xml").toURI());
         Assert.assertNotNull(invalidRegulatedResponseV2_46);
     }
 

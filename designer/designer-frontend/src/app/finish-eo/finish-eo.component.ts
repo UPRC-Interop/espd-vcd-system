@@ -16,6 +16,7 @@
 
 import {Component, OnInit} from '@angular/core';
 import {DataService} from '../services/data.service';
+import {ExportType} from '../export/export-type.enum';
 
 @Component({
   selector: 'app-finish-eo',
@@ -31,9 +32,16 @@ export class FinishEoComponent implements OnInit {
 
   }
 
-  onExport() {
-    this.dataService.finishEOSubmit();
+  onHtmlExport() {
+    this.dataService.finishEOSubmit(ExportType.HTML);
   }
 
+  onPdfExport() {
+    this.dataService.finishEOSubmit(ExportType.PDF);
+  }
+
+  onXmlExport() {
+    this.dataService.finishEOSubmit(ExportType.XML);
+  }
 
 }

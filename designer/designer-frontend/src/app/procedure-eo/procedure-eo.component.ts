@@ -14,21 +14,17 @@
 /// limitations under the License.
 ///
 
-import {Component, Input, OnChanges, OnInit, SimpleChange, SimpleChanges} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {ProcedureType} from '../model/procedureType.model';
 import {Country} from '../model/country.model';
-import {FormArray, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
-import {EoRelatedCriterion} from '../model/eoRelatedCriterion.model';
-import {RequirementGroup} from '../model/requirementGroup.model';
-import {RequirementResponse} from '../model/requirement-response.model';
-import * as moment from 'moment';
-import {Moment} from 'moment';
-import {Evidence} from '../model/evidence.model';
-import {EvidenceIssuer} from '../model/evidenceIssuer.model';
-import {FormUtilService} from '../services/form-util.service';
+import {FormArray, FormControl, FormGroup, NgForm} from '@angular/forms';
 import {UtilitiesService} from '../services/utilities.service';
 import {ProjectType} from '../model/projectType.model';
+import {EoRoleType} from '../model/eoRoleType.model';
+import {Currency} from '../model/currency.model';
+import {COMMA, ENTER} from '../../../node_modules/@angular/cdk/keycodes';
+import {MatChipInputEvent} from '@angular/material';
 
 @Component({
   selector: 'app-procedure-eo',
@@ -39,18 +35,32 @@ export class ProcedureEoComponent implements OnInit {
 
 
   public EOForm: FormGroup;
-  test = true;
 
   countries: Country[] = null;
+  currency: Currency[] = null;
   procedureTypes: ProcedureType[] = null;
   projectTypes: ProjectType[] = null;
-  eoRelatedCriteria: EoRelatedCriterion[] = null;
+  eoRoleTypes: EoRoleType[] = null;
+
+  /* CPV chips */
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
 
   constructor(public dataService: DataService, public utilities: UtilitiesService) {
+
     this.EOForm = new FormGroup({
       'name': new FormControl(this.dataService.EODetails.name),
       'smeIndicator': new FormControl(false),
+      'employeeQuantity': new FormControl(),
+      'eoRole': new FormControl(),
+      'generalTurnover': new FormGroup({
+        'amount': new FormControl(),
+        'currency': new FormControl()
+      }),
       'postalAddress': new FormGroup({
         'addressLine1': new FormControl(),
         'postCode': new FormControl(),
@@ -79,6 +89,9 @@ export class ProcedureEoComponent implements OnInit {
       this.EOForm.disable();
     }
 
+    /* OTHER_EO_LOT TENDERED CRITERION lot generation */
+    this.utilities.projectLots = this.utilities.createLotList(this.dataService.CADetails.procurementProjectLots);
+
 
     this.dataService.getCountries()
       .then(res => {
@@ -101,6 +114,24 @@ export class ProcedureEoComponent implements OnInit {
     this.dataService.getProjectTypes()
       .then(res => {
         this.projectTypes = res;
+        // console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+    this.dataService.getEORoleTypes()
+      .then(res => {
+        this.eoRoleTypes = res;
+      })
+      .catch(err => {
+          console.log(err);
+        }
+      );
+
+    this.dataService.getCurrency()
+      .then(res => {
+        this.currency = res;
         // console.log(res);
       })
       .catch(err => {
@@ -163,6 +194,29 @@ export class ProcedureEoComponent implements OnInit {
     console.log(this.dataService.CADetails);
     this.dataService.EODetails = eoForm.value;
     console.log(this.dataService.EODetails);
+  }
+
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    // Add our cpv
+    if ((value || '').trim()) {
+      this.dataService.CADetails.classificationCodes.push(value.trim());
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+  }
+
+  remove(cpv: string): void {
+    const index = this.dataService.CADetails.classificationCodes.indexOf(cpv);
+
+    if (index >= 0) {
+      this.dataService.CADetails.classificationCodes.splice(index, 1);
+    }
   }
 
 }

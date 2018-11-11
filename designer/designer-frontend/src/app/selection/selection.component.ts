@@ -18,7 +18,6 @@ import {Component, OnInit} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {FormControl, NgForm} from '@angular/forms/forms';
 import {ApicallService} from '../services/apicall.service';
-import {EoIDType} from '../model/eoIDType.model';
 import {WeightingType} from '../model/weightingType.model';
 import {UtilitiesService} from '../services/utilities.service';
 
@@ -29,8 +28,8 @@ import {UtilitiesService} from '../services/utilities.service';
 })
 export class SelectionComponent implements OnInit {
 
-  isSatisfiedALL = true;
-  isAtoD = false;
+  // isSatisfiedALL = true;
+  // isAtoD = false;
   weightingType: WeightingType[] = null;
 
 
@@ -40,9 +39,10 @@ export class SelectionComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.dataService.isReadOnly()) {
-      this.isAtoD = true;
-      this.isSatisfiedALL = false;
+
+    if (this.dataService.isReadOnly() || this.utilities.qualificationApplicationType === 'selfcontained') {
+      this.utilities.isAtoD = true;
+      this.utilities.isSatisfiedALL = false;
     }
 
     this.dataService.getWeightingType()
@@ -63,13 +63,13 @@ export class SelectionComponent implements OnInit {
   handleALL(radio: FormControl) {
     // console.dir(typeof(radio.value));
     if (radio.value === 'YES') {
-      this.isSatisfiedALL = false;
-      this.isAtoD = true;
+      this.utilities.isSatisfiedALL = false;
+      this.utilities.isAtoD = true;
       // console.log("This is CA: "+this.isCA);
       // console.log("This is EO: "+this.isEO);
     } else if (radio.value === 'NO') {
-      this.isSatisfiedALL = true;
-      this.isAtoD = false;
+      this.utilities.isSatisfiedALL = true;
+      this.utilities.isAtoD = false;
     }
   }
 
@@ -84,7 +84,7 @@ export class SelectionComponent implements OnInit {
   onSelectionSubmit(form: NgForm) {
     console.log(form.value);
     this.dataService.selectionSubmit(
-      this.isSatisfiedALL);
+      this.utilities.isSatisfiedALL);
   }
 
 }

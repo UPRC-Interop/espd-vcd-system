@@ -17,6 +17,7 @@ package eu.esens.espdvcd.designer.service;
 
 import eu.esens.espdvcd.codelist.Codelists;
 import eu.esens.espdvcd.codelist.CodelistsV2;
+import eu.esens.espdvcd.designer.exception.LanguageNotExistsException;
 import eu.esens.espdvcd.designer.util.CodelistItem;
 
 import java.util.*;
@@ -44,14 +45,14 @@ public enum CodelistsV2Service implements CodelistsService {
         }
     }
 
-
     @Override
     public Codelists[] getAvailableCodelists() {
         return CodelistsV2.values();
     }
 
     @Override
-    public List<CodelistItem> getTranslatedCodelist(String codelist, String language) throws IllegalArgumentException {
+    public List<CodelistItem> getTranslatedCodelist(String codelist, String threeLetterLang) throws IllegalArgumentException, LanguageNotExistsException {
+        String language = findISO6393LangCode(threeLetterLang.toLowerCase());
         if (CODELISTS_MAP.containsKey(codelist + '.' + language))
             return CODELISTS_MAP.get(codelist + '.' + language);
         else {
