@@ -242,7 +242,7 @@
       {{this.utilities.projectLots | json}}
       <mat-selection-list [formControlName]="req.uuid" [compareWith]="compareWith">
         <mat-list-option *ngFor="let lot of this.utilities.projectLots" [value]="lot"
-                         (click)="pushSelectedLot()">
+                         (click)="pushSelectedLot()" >
           {{lot}}
         </mat-list-option>
       </mat-selection-list>

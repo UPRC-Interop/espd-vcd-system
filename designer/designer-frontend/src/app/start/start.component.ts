@@ -162,18 +162,10 @@ export class StartComponent implements OnInit {
 
     console.log(this.dataService.isReadOnly());
     // CA reuses ESPDRequest
-    if (this.isCA) {
-      const role = 'CA';
-      this.dataService.ReuseESPD(this.fileToUpload, form, role);
-    } else if (this.isEO) {
-      const role = 'EO';
-      this.dataService.ReuseESPD(this.fileToUpload, form, role);
-    }
-
-
+    const role = ( this.isCA ? 'CA' : 'EO');
+    this.dataService.ReuseESPD(this.fileToUpload, form, role);
     // Start New ESPD
     this.dataService.startESPD(form);
-
 
   }
 
