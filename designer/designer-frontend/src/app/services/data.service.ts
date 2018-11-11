@@ -1589,6 +1589,7 @@ export class DataService {
 
   switchLanguage(language: string) {
     this.selectedLanguage = this.langTemplate[language].toLowerCase();
+    this.utilities.selectedLang = this.selectedLanguage;
     const lang = 'ESPD_' + this.selectedLanguage;
     console.log(lang);
     this.translate.use(lang);

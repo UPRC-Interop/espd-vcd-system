@@ -49,6 +49,7 @@ export class UtilitiesService {
   criterionWeightIndicators = [];
   cpvString = [];
   type: string;
+  selectedLang = 'en';
   // qualificationApplicationType = 'SELF-CONTAINED';
   // qualificationApplicationType = 'REGULATED';
 
