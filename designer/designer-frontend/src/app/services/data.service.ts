@@ -51,6 +51,8 @@ import {EoRoleType} from '../model/eoRoleType.model';
 import {Amount} from '../model/amount.model';
 import {FinancialRatioType} from '../model/financialRatioType.model';
 
+import _ from "lodash";
+
 @Injectable()
 export class DataService {
 
@@ -662,6 +664,8 @@ export class DataService {
           this.utilities.qualificationApplicationType = res.documentDetails.qualificationApplicationType.toLowerCase();
           if (res.documentDetails.qualificationApplicationType === 'SELFCONTAINED') {
             this.APIService.version = 'v2';
+            // Create the lots here:
+            this.utilities.projectLots = _.range(res.cadetails.procurementProjectLots).map(i => `Lot${i+1}`);
           }
 
           // res.cadetails=this.CADetails;
