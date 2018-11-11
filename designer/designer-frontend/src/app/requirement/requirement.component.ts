@@ -34,7 +34,7 @@ import {SelectionModel} from '@angular/cdk/collections';
   templateUrl: './requirement.component.html',
   styleUrls: ['./requirement.component.css']
 })
-export class RequirementComponent implements OnInit, OnChanges, AfterViewInit {
+export class RequirementComponent implements OnInit, OnChanges {
 
   @Input() req: Requirement;
   @Input() form: FormGroup;
@@ -165,18 +165,6 @@ export class RequirementComponent implements OnInit, OnChanges, AfterViewInit {
     }
   }
 
-  ngAfterViewInit() {
-    if (this.req.responseDataType === 'LOT_IDENTIFIER') {
-      console.log('LOT MODEL for req.uuid: ' + this.req.uuid);
-      console.log(this.utilities.renderLotTemplate[this.req.uuid]);
-      // this.lots.selectedOptions = new SelectionModel<MatListOption>(true);
-      // console.log(this.lots);
-      // console.log(this.lots.selectedOptions);
-      // console.log(this.lots.selectedOptions.selected);
-      // this.importSelectedLots();
-    }
-  }
-
   /* SELF-CONTAINED: CODE with CPVCodes as responseValuesRelatedArtefact */
   createChips() {
     this.utilities.cpvTemplate[this.req.uuid] = this.utilities.cpvCodeToString(this.cpvCodes);
@@ -198,10 +186,6 @@ export class RequirementComponent implements OnInit, OnChanges, AfterViewInit {
     }
   }
 
-  compareWith (o1: string, o2: string): boolean {
-    console.log(`COMPARE ${o1} with ${o2} ${o1 === o2}`);
-    return o1 === o2;
-  }
 
   /* CPV Chip handling */
   add(event: MatChipInputEvent): void {

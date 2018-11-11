@@ -651,8 +651,10 @@ export class DataService {
 
   /* ================================= CA REUSE ESPD REQUEST ====================== */
 
-  ReuseESPD(filesToUpload: File[], form: NgForm, role: string) {
-    if (filesToUpload.length > 0 && role === 'CA') {
+  ReuseESPD(filesToUpload: File[], form: NgForm, role: string):Promise<void> {
+    const promise = new Promise<void>((resolve , reject) => {
+
+     if (filesToUpload.length > 0 && role === 'CA') {
       this.APIService.postFile(filesToUpload)
         .then(res => {
           /* DUMMY ESPD for testing */
@@ -733,8 +735,7 @@ export class DataService {
           this.formUtil.createTemplateReqGroups(res.fullCriterionList);
           console.log(res);
           console.log(this.CADetails);
-
-
+          resolve();
         })
         .catch(err => {
           console.log(err);
@@ -742,187 +743,187 @@ export class DataService {
             ' ' + err.message;
           const action = 'close';
           this.openSnackBar(message, action);
-        });
-    } else if (filesToUpload.length > 0 && role === 'EO') {
-      this.APIService.postFileResponse(filesToUpload)
-        .then(res => {
-          console.log(res);
-          this.APIService.version = res.documentDetails.version.toLowerCase();
-          this.utilities.qualificationApplicationType = res.documentDetails.qualificationApplicationType.toLowerCase();
-          /* SELF-CONTAINED: if a self-cointained artifact is imported then the version is v2 */
-          if (res.documentDetails.qualificationApplicationType === 'SELFCONTAINED') {
-            this.APIService.version = 'v2';
-          }
-          // res.cadetails=this.CADetails;
-          // console.log(res.fullCriterionList);
-          // console.log(res.cadetails);
-          this.CADetails = res.cadetails;
-          this.PostalAddress = res.cadetails.postalAddress;
-          this.ContactingDetails = res.cadetails.contactingDetails;
-          this.receivedNoticeNumber = res.cadetails.receivedNoticeNumber;
-          this.selectedCountry = this.CADetails.cacountry;
-          this.EODetails = res.eodetails;
-          console.log(this.EODetails);
-          console.log(this.EODetails.naturalPersons);
-          // console.log(this.EODetails.naturalPersons['birthDate']);
-          this.selectedEOCountry = this.EODetails.postalAddress.countryCode;
-          if (this.utilities.qualificationApplicationType === 'selfcontained') {
-            this.CADetails.classificationCodes = res.cadetails.classificationCodes;
-            this.CADetails.weightScoringMethodologyNote = res.cadetails.weightScoringMethodologyNote;
-            this.CADetails.weightingType = res.cadetails.weightingType;
-
-            this.utilities.isAtoD = true;
-            this.utilities.isSatisfiedALL = false;
-
-            if (res.eodetails.generalTurnover !== null || res.eodetails.generalTurnover !== undefined) {
-              this.generalTurnover = res.eodetails.generalTurnover;
-            } else if (res.eodetails.generalTurnover === null) {
-              this.generalTurnover = new Amount();
-              // this.generalTurnover.amount = 0;
-              // this.generalTurnover.currency = '';
-
-              this.EODetails.generalTurnover = this.generalTurnover;
-            }
-          }
-
-          // get evidence list only in v2
-          if (this.APIService.version === 'v2') {
-            this.formUtil.evidenceList = res.evidenceList;
-            this.formUtil.evidenceList = res.evidenceList;
-            console.log(this.formUtil.evidenceList);
-          }
-
-
-          // Fill in EoDetails Form
-
-          this.eoDetailsFormUpdate();
-          this.caDetailsFormUpdate();
-          // console.log(this.EOForm.value);
-
-          console.log(res.fullCriterionList);
-
-          if (this.utilities.qualificationApplicationType === 'selfcontained') {
-            this.caRelatedCriteria = this.filterCARelatedCriteria(this.OTHER_CA_REGEXP, res.fullCriterionList);
-            this.caRelatedCriteriaForm = this.formUtil.createCARelatedCriterionForm(this.caRelatedCriteria);
-
-            this.eoLotCriterion = this.filterCARelatedCriteria(this.EO_LOT_REGEXP, res.fullCriterionList);
-            this.eoLotCriterionForm = this.formUtil.createEORelatedCriterionForm(this.eoLotCriterion);
-          }
-
-
-          this.eoRelatedACriteria = this.filterEoRelatedCriteria(this.EO_RELATED_A_REGEXP, res.fullCriterionList);
-          // console.log(this.eoRelatedACriteria);
-          this.eoRelatedCCriteria = this.filterEoRelatedCriteria(this.EO_RELATED_C_REGEXP, res.fullCriterionList);
-          // console.log(this.eoRelatedCCriteria);
-          this.eoRelatedDCriteria = this.filterEoRelatedCriteria(this.EO_RELATED_D_REGEXP, res.fullCriterionList);
-          // console.log(this.eoRelatedDCriteria);
-          this.eoRelatedACriteriaForm = this.formUtil.createEORelatedCriterionForm(this.eoRelatedACriteria);
-          // console.log(this.eoRelatedACriteriaForm);
-          this.eoRelatedCCriteriaForm = this.formUtil.createEORelatedCriterionForm(this.eoRelatedCCriteria);
-          // console.log(this.eoRelatedCCriteriaForm);
-          this.eoRelatedDCriteriaForm = this.formUtil.createEORelatedCriterionForm(this.eoRelatedDCriteria);
-          // console.log(this.eoRelatedDCriteriaForm);
-
-
-          this.exclusionACriteria = this.filterExclusionCriteria(this.EXCLUSION_CONVICTION_REGEXP, res.fullCriterionList);
-          // console.log(this.exclusionACriteria);
-          this.exclusionBCriteria = this.filterExclusionCriteria(this.EXCLUSION_CONTRIBUTION_REGEXP, res.fullCriterionList);
-          // console.log(this.exclusionBCriteria);
-          this.exclusionCCriteria = this.filterExclusionCriteria(this.EXCLUSION_SOCIAL_BUSINESS_MISCONDUCT_CONFLICT_REGEXP, res.fullCriterionList);
-          // console.log(this.exclusionCCriteria);
-          this.exclusionDCriteria = this.filterExclusionCriteria(this.EXCLUSION_NATIONAL_REGEXP, res.fullCriterionList);
-          // console.log(this.exclusionDCriteria);
-
-          this.exclusionACriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionACriteria);
-          console.log(this.exclusionACriteriaForm);
-          this.exclusionBCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionBCriteria);
-          console.log(this.exclusionBCriteriaForm);
-          this.exclusionCCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionCCriteria);
-          // console.log(this.exclusionCCriteriaForm);
-          this.exclusionDCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionDCriteria);
-          // console.log(this.exclusionDCriteriaForm);
-
-
-          this.selectionACriteria = this.filterSelectionCriteria(this.SELECTION_SUITABILITY_REGEXP, res.fullCriterionList);
-          // console.log(this.selectionACriteria);
-          this.selectionBCriteria = this.filterSelectionCriteria(this.SELECTION_ECONOMIC_REGEXP, res.fullCriterionList);
-          // console.log(this.selectionBCriteria);
-          this.selectionCCriteria = this.filterSelectionCriteria(this.SELECTION_TECHNICAL_REGEXP, res.fullCriterionList);
-          // console.log(this.selectionCCriteria);
-          this.selectionDCriteria = this.filterSelectionCriteria(this.SELECTION_CERTIFICATES_REGEXP, res.fullCriterionList);
-          // console.log(this.selectionDCriteria);
-          this.selectionALLCriteria = this.filterSelectionCriteria(this.SELECTION_REGEXP, res.fullCriterionList);
-          console.log(this.selectionALLCriteria);
-
-
-          this.selectionACriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionACriteria);
-          // console.log(this.selectionACriteriaForm);
-          this.selectionBCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionBCriteria);
-          // console.log(this.selectionBCriteriaForm);
-          this.selectionCCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionCCriteria);
-          // console.log(this.selectionCCriteriaForm);
-          this.selectionDCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionDCriteria);
-          // console.log(this.selectionDCriteriaForm);
-          this.selectionALLCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionALLCriteria);
-
-
-          this.reductionCriteria = this.filterReductionCriteria(this.REDUCTION_OF_CANDIDATES_REGEXP, res.fullCriterionList);
-          if (!this.reductionCriteria) {
-
-          }
-          this.reductionCriteriaForm = this.formUtil.createReductionCriterionForm(this.reductionCriteria);
-
-          // REVIEW ESPD: make forms non editable if user selected Review ESPD
-          if (this.isReadOnly()) {
-            this.exclusionACriteriaForm.disable();
-            this.exclusionBCriteriaForm.disable();
-            this.exclusionCCriteriaForm.disable();
-            this.exclusionDCriteriaForm.disable();
-            this.selectionALLCriteriaForm.disable();
-            this.selectionACriteriaForm.disable();
-            this.selectionBCriteriaForm.disable();
-            this.selectionCCriteriaForm.disable();
-            this.selectionDCriteriaForm.disable();
-            this.eoRelatedACriteriaForm.disable();
-            this.eoRelatedCCriteriaForm.disable();
-            this.eoRelatedDCriteriaForm.disable();
-            this.reductionCriteriaForm.disable();
-          }
-
-          // create requirementGroup template objects required for multiple instances (cardinalities) function
-          this.formUtil.createTemplateReqGroups(res.fullCriterionList);
-
-          /* find if CRITERION.SELECTION.ALL_SATISFIED exists */
-          this.utilities.satisfiedALLCriterionExists = this.utilities
-            .findCriterion(this.selectionALLCriteria, '7e7db838-eeac-46d9-ab39-42927486f22d');
-
-          if (this.utilities.satisfiedALLCriterionExists) {
-            this.utilities.isSatisfiedALL = true;
-            this.utilities.isAtoD = false;
-          } else {
-            this.utilities.isSatisfiedALL = false;
-            this.utilities.isAtoD = true;
-          }
-
-
-          console.log(res);
-
-
-        })
-        .catch(err => {
-          console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
-          const action = 'close';
-          this.openSnackBar(message, action);
+          reject();
         });
     }
+    else if (filesToUpload.length > 0 && role === 'EO') {
+       this.APIService.postFileResponse(filesToUpload)
+       .then(res => {
+         console.log(res);
+         this.APIService.version = res.documentDetails.version.toLowerCase();
+         this.utilities.qualificationApplicationType = res.documentDetails.qualificationApplicationType.toLowerCase();
+         /* SELF-CONTAINED: if a self-cointained artifact is imported then the version is v2 */
+         if (res.documentDetails.qualificationApplicationType === 'SELFCONTAINED') {
+           this.APIService.version = 'v2';
+           // Create the lots here:
+           this.utilities.projectLots = _.range(res.cadetails.procurementProjectLots).map(i => `Lot${i+1}`);
+         }
+         // res.cadetails=this.CADetails;
+         // console.log(res.fullCriterionList);
+         // console.log(res.cadetails);
+         this.CADetails = res.cadetails;
+         this.PostalAddress = res.cadetails.postalAddress;
+         this.ContactingDetails = res.cadetails.contactingDetails;
+         this.receivedNoticeNumber = res.cadetails.receivedNoticeNumber;
+         this.selectedCountry = this.CADetails.cacountry;
+         this.EODetails = res.eodetails;
+         console.log(this.EODetails);
+         console.log(this.EODetails.naturalPersons);
+         // console.log(this.EODetails.naturalPersons['birthDate']);
+         this.selectedEOCountry = this.EODetails.postalAddress.countryCode;
+         if (this.utilities.qualificationApplicationType === 'selfcontained') {
+           this.CADetails.classificationCodes = res.cadetails.classificationCodes;
+           this.CADetails.weightScoringMethodologyNote = res.cadetails.weightScoringMethodologyNote;
+           this.CADetails.weightingType = res.cadetails.weightingType;
 
-    if (form.value.chooseRole == 'CA') {
-      this.utilities.isCA = true;
-      this.receivedNoticeNumber = form.value.noticeNumber;
-    }
+           this.utilities.isAtoD = true;
+           this.utilities.isSatisfiedALL = false;
 
+           if (res.eodetails.generalTurnover !== null || res.eodetails.generalTurnover !== undefined) {
+             this.generalTurnover = res.eodetails.generalTurnover;
+           } else if (res.eodetails.generalTurnover === null) {
+             this.generalTurnover = new Amount();
+             // this.generalTurnover.amount = 0;
+             // this.generalTurnover.currency = '';
+
+             this.EODetails.generalTurnover = this.generalTurnover;
+           }
+         }
+
+         // get evidence list only in v2
+         if (this.APIService.version === 'v2') {
+           this.formUtil.evidenceList = res.evidenceList;
+           this.formUtil.evidenceList = res.evidenceList;
+           console.log(this.formUtil.evidenceList);
+         }
+
+
+         // Fill in EoDetails Form
+
+         this.eoDetailsFormUpdate();
+         this.caDetailsFormUpdate();
+         // console.log(this.EOForm.value);
+
+         console.log(res.fullCriterionList);
+
+         if (this.utilities.qualificationApplicationType === 'selfcontained') {
+           this.caRelatedCriteria = this.filterCARelatedCriteria(this.OTHER_CA_REGEXP, res.fullCriterionList);
+           this.caRelatedCriteriaForm = this.formUtil.createCARelatedCriterionForm(this.caRelatedCriteria);
+
+           this.eoLotCriterion = this.filterCARelatedCriteria(this.EO_LOT_REGEXP, res.fullCriterionList);
+           this.eoLotCriterionForm = this.formUtil.createEORelatedCriterionForm(this.eoLotCriterion);
+         }
+
+
+         this.eoRelatedACriteria = this.filterEoRelatedCriteria(this.EO_RELATED_A_REGEXP, res.fullCriterionList);
+         // console.log(this.eoRelatedACriteria);
+         this.eoRelatedCCriteria = this.filterEoRelatedCriteria(this.EO_RELATED_C_REGEXP, res.fullCriterionList);
+         // console.log(this.eoRelatedCCriteria);
+         this.eoRelatedDCriteria = this.filterEoRelatedCriteria(this.EO_RELATED_D_REGEXP, res.fullCriterionList);
+         // console.log(this.eoRelatedDCriteria);
+         this.eoRelatedACriteriaForm = this.formUtil.createEORelatedCriterionForm(this.eoRelatedACriteria);
+         // console.log(this.eoRelatedACriteriaForm);
+         this.eoRelatedCCriteriaForm = this.formUtil.createEORelatedCriterionForm(this.eoRelatedCCriteria);
+         // console.log(this.eoRelatedCCriteriaForm);
+         this.eoRelatedDCriteriaForm = this.formUtil.createEORelatedCriterionForm(this.eoRelatedDCriteria);
+         // console.log(this.eoRelatedDCriteriaForm);
+
+
+         this.exclusionACriteria = this.filterExclusionCriteria(this.EXCLUSION_CONVICTION_REGEXP, res.fullCriterionList);
+         // console.log(this.exclusionACriteria);
+         this.exclusionBCriteria = this.filterExclusionCriteria(this.EXCLUSION_CONTRIBUTION_REGEXP, res.fullCriterionList);
+         // console.log(this.exclusionBCriteria);
+         this.exclusionCCriteria = this.filterExclusionCriteria(this.EXCLUSION_SOCIAL_BUSINESS_MISCONDUCT_CONFLICT_REGEXP, res.fullCriterionList);
+         // console.log(this.exclusionCCriteria);
+         this.exclusionDCriteria = this.filterExclusionCriteria(this.EXCLUSION_NATIONAL_REGEXP, res.fullCriterionList);
+         // console.log(this.exclusionDCriteria);
+
+         this.exclusionACriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionACriteria);
+         console.log(this.exclusionACriteriaForm);
+         this.exclusionBCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionBCriteria);
+         console.log(this.exclusionBCriteriaForm);
+         this.exclusionCCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionCCriteria);
+         // console.log(this.exclusionCCriteriaForm);
+         this.exclusionDCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionDCriteria);
+         // console.log(this.exclusionDCriteriaForm);
+
+
+         this.selectionACriteria = this.filterSelectionCriteria(this.SELECTION_SUITABILITY_REGEXP, res.fullCriterionList);
+         // console.log(this.selectionACriteria);
+         this.selectionBCriteria = this.filterSelectionCriteria(this.SELECTION_ECONOMIC_REGEXP, res.fullCriterionList);
+         // console.log(this.selectionBCriteria);
+         this.selectionCCriteria = this.filterSelectionCriteria(this.SELECTION_TECHNICAL_REGEXP, res.fullCriterionList);
+         // console.log(this.selectionCCriteria);
+         this.selectionDCriteria = this.filterSelectionCriteria(this.SELECTION_CERTIFICATES_REGEXP, res.fullCriterionList);
+         // console.log(this.selectionDCriteria);
+         this.selectionALLCriteria = this.filterSelectionCriteria(this.SELECTION_REGEXP, res.fullCriterionList);
+         console.log(this.selectionALLCriteria);
+
+
+         this.selectionACriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionACriteria);
+         // console.log(this.selectionACriteriaForm);
+         this.selectionBCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionBCriteria);
+         // console.log(this.selectionBCriteriaForm);
+         this.selectionCCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionCCriteria);
+         // console.log(this.selectionCCriteriaForm);
+         this.selectionDCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionDCriteria);
+         // console.log(this.selectionDCriteriaForm);
+         this.selectionALLCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionALLCriteria);
+
+
+         this.reductionCriteria = this.filterReductionCriteria(this.REDUCTION_OF_CANDIDATES_REGEXP, res.fullCriterionList);
+         if (!this.reductionCriteria) {
+
+         }
+         this.reductionCriteriaForm = this.formUtil.createReductionCriterionForm(this.reductionCriteria);
+
+         // REVIEW ESPD: make forms non editable if user selected Review ESPD
+         if (this.isReadOnly()) {
+           this.exclusionACriteriaForm.disable();
+           this.exclusionBCriteriaForm.disable();
+           this.exclusionCCriteriaForm.disable();
+           this.exclusionDCriteriaForm.disable();
+           this.selectionALLCriteriaForm.disable();
+           this.selectionACriteriaForm.disable();
+           this.selectionBCriteriaForm.disable();
+           this.selectionCCriteriaForm.disable();
+           this.selectionDCriteriaForm.disable();
+           this.eoRelatedACriteriaForm.disable();
+           this.eoRelatedCCriteriaForm.disable();
+           this.eoRelatedDCriteriaForm.disable();
+           this.reductionCriteriaForm.disable();
+         }
+
+         // create requirementGroup template objects required for multiple instances (cardinalities) function
+         this.formUtil.createTemplateReqGroups(res.fullCriterionList);
+
+         /* find if CRITERION.SELECTION.ALL_SATISFIED exists */
+         this.utilities.satisfiedALLCriterionExists = this.utilities
+         .findCriterion(this.selectionALLCriteria, '7e7db838-eeac-46d9-ab39-42927486f22d');
+
+         if (this.utilities.satisfiedALLCriterionExists) {
+           this.utilities.isSatisfiedALL = true;
+           this.utilities.isAtoD = false;
+         } else {
+           this.utilities.isSatisfiedALL = false;
+           this.utilities.isAtoD = true;
+         }
+
+
+         console.log(res);
+         resolve();
+       })
+       .catch(err => {
+         console.log(err);
+         const message: string = err.error +
+           ' ' + err.message;
+         const action = 'close';
+         this.openSnackBar(message, action);
+         reject();
+       });
+     }
+    });
+    return promise;
   }
 
   isReadOnly(): boolean {
@@ -1007,6 +1008,7 @@ export class DataService {
     // console.log(form);
     // console.log(form.value);
     console.log('START ESPD');
+    console.log(form);
 
     // form reset
     if (!this.utilities.isEmpty(this.CADetails) || !this.utilities.isEmpty(this.EODetails)) {

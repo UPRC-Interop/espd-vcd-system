@@ -21,6 +21,7 @@ import {MaterialModule} from './material/material.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {AppRoutingModule} from './app-routing.module';
+import { NgxLoadingModule } from 'ngx-loading';
 
 import {DataService} from './services/data.service';
 import {ApicallService} from './services/apicall.service';
@@ -78,6 +79,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
     ReactiveFormsModule,
     AppRoutingModule,
     MatMomentDateModule,
+    NgxLoadingModule.forRoot({}),
     TranslateModule.forRoot({
       loader : {
         provide: TranslateLoader,

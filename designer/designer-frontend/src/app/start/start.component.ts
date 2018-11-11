@@ -14,12 +14,13 @@
 /// limitations under the License.
 ///
 
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, NgForm} from '@angular/forms/forms';
 import {ApicallService} from '../services/apicall.service';
 import {DataService} from '../services/data.service';
 import {Country} from '../model/country.model';
 import {UtilitiesService} from '../services/utilities.service';
+import {MatStepper} from '@angular/material';
 import {Cadetails} from '../model/caDetails.model';
 import {EoDetails} from '../model/eoDetails.model';
 import {PostalAddress} from '../model/postalAddress.model';
@@ -45,6 +46,10 @@ export class StartComponent implements OnInit {
   isCreateResponse = false;
   fileToUpload: File[] = [];
   reset = false;
+  isLoading = false;
+
+  @Input()
+  parentStepper: MatStepper;
 
   // procedureTypes:ProcedureType[];
 
@@ -155,18 +160,15 @@ export class StartComponent implements OnInit {
   }
 
   onStartSubmit(form: NgForm) {
-    // console.log(form);
-    // form and model reset in case of start
-    this.utilities.isStarted = true;
-
-
-    console.log(this.dataService.isReadOnly());
-    // CA reuses ESPDRequest
+    this.isLoading = true;
+    this.dataService.startESPD(form)
     const role = ( this.isCA ? 'CA' : 'EO');
-    this.dataService.ReuseESPD(this.fileToUpload, form, role);
-    // Start New ESPD
-    this.dataService.startESPD(form);
-
+    this.dataService.ReuseESPD(this.fileToUpload, form, role)
+    .then(() => {
+      this.isLoading = false;
+        this.parentStepper.next();
+        this.utilities.isStarted = true;
+    })
+    .catch(() => {this.isLoading = false});
   }
-
 }

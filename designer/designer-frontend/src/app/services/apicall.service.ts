@@ -16,7 +16,7 @@
 
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import 'rxjs/add/operator/toPromise';
+
 import {Country} from '../model/country.model';
 import {ProcedureType} from '../model/procedureType.model';
 import {ExclusionCriteria} from '../model/exclusionCriteria.model';

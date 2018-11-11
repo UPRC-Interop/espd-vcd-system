@@ -15,10 +15,9 @@
     limitations under the License.
 
 -->
-<p>{{req.uuid}}</p>
+<!--p>{{req.uuid}}</p-->
 
 <div [formGroup]="form">
-  {{this.form.get(req.uuid).value | json}}
   <div>
     <label *ngIf="req.responseDataType=='INDICATOR'" [attr.for]="req.uuid">{{req.description}}</label>
     <label *ngIf="req.responseDataType=='WEIGHT_INDICATOR' && this.utilities.isGloballyWeighted" [attr.for]="req.uuid">{{req.description}}</label>
@@ -238,11 +237,8 @@
     </div>
     <!-- SELF-CONTAINED: LOTS_IDENTIFIER -->
     <div class="lots_identifier" *ngSwitchCase="'LOT_IDENTIFIER'">
-      {{this.form.get(req.uuid).value | json}}
-      {{this.utilities.projectLots | json}}
-      <mat-selection-list [formControlName]="req.uuid" [compareWith]="compareWith">
-        <mat-list-option *ngFor="let lot of this.utilities.projectLots" [value]="lot"
-                         (click)="pushSelectedLot()" >
+      <mat-selection-list [formControlName]="req.uuid">
+        <mat-list-option *ngFor="let lot of this.utilities.projectLots" [value]="lot">
           {{lot}}
         </mat-list-option>
       </mat-selection-list>
