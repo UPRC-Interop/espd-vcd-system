@@ -222,6 +222,8 @@ export class RequirementComponent implements OnInit, OnChanges {
     if (index >= 0) {
       this.cpvCodes.splice(index, 1);
     }
+    /* re-create chip template when chips are removed */
+    this.createChips();
   }
 
 
