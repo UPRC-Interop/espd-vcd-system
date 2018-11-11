@@ -96,17 +96,22 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
 
         qarType.getEconomicOperatorParty().add(extractEODetails(modelResponse.getEODetails()));
 
-        // create a map with key = Criterion ID, value = TenderingCriterion in order to use it during weighting
-        // responses extraction process
+        /*
+        create a map with key = Criterion ID, value = TenderingCriterion
+        in order to use it during responses extraction process
+         */
         Map<String, TenderingCriterionType> criterionTypeMap = qarType.getTenderingCriterion().stream()
                 .collect(Collectors.toMap(criterionType -> criterionType.getID().getValue(), Function.identity()));
 
+        // Responses extraction
         qarType.getTenderingCriterionResponse().addAll(extractAllTenderingCriterionResponses(modelResponse, criterionTypeMap));
 
+        // Evidences extraction
         qarType.getEvidence().addAll(modelResponse.getEvidenceList().stream()
                 .map(ev -> extractEvidenceType(ev))
                 .collect(Collectors.toList()));
 
+        // Additional Document Reference extraction
         if (modelResponse.getESPDRequestDetails() != null) {
             qarType.getAdditionalDocumentReference().add(extractESPDRequestDetails(modelResponse.getESPDRequestDetails()));
         }
@@ -149,12 +154,13 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
         return qarType;
     }
 
-    public List<TenderingCriterionResponseType> extractAllTenderingCriterionResponses(final ESPDResponse response,
+    public List<TenderingCriterionResponseType> extractAllTenderingCriterionResponses(final ESPDResponse modelResponse,
                                                                                       final Map<String, TenderingCriterionType> criterionTypeMap) {
-        List<TenderingCriterionResponseType> tcrTypeList = new ArrayList<>();
-        response.getFullCriterionList().forEach(sc -> tcrTypeList.addAll(extractAllTenderingCriterionResponses(sc.getRequirementGroups(),
-                criterionTypeMap.get(sc.getID()))));
-        return tcrTypeList;
+        List<TenderingCriterionResponseType> responseTypeList = new ArrayList<>();
+        modelResponse.getFullCriterionList()
+                .forEach(sc -> responseTypeList.addAll(extractAllTenderingCriterionResponses(sc.getRequirementGroups()
+                        , criterionTypeMap.get(sc.getID()))));
+        return responseTypeList;
     }
 
     public List<TenderingCriterionResponseType> extractAllTenderingCriterionResponses(final List<RequirementGroup> rgList,
@@ -266,9 +272,10 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
         eoPartyType.getQualifyingParty().get(0).setParty(new PartyType());
         eoPartyType.setParty(new PartyType());
 
-        String icc = eoDetails.isSmeIndicator() ? EOIndustryClassificationCodeEnum.SME.name()
+        // SME
+        String sme = eoDetails.isSmeIndicator() ? EOIndustryClassificationCodeEnum.SME.name()
                 : EOIndustryClassificationCodeEnum.LARGE.name();
-        eoPartyType.getParty().setIndustryClassificationCode(createIndustryClassificationCodeType(icc));
+        eoPartyType.getParty().setIndustryClassificationCode(createIndustryClassificationCodeType(sme));
 
         // Employee quantity
         if (eoDetails.getEmployeeQuantity() > 0) {
@@ -282,11 +289,13 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
         if (eoDetails.getGeneralTurnover() != null
                 && eoDetails.getGeneralTurnover().getAmount() != null
                 && eoDetails.getGeneralTurnover().getCurrency() != null) {
-            eoPartyType.getQualifyingParty().get(0)
-                    .getFinancialCapability().get(0).setValueAmount(new ValueAmountType());
-            eoPartyType.getQualifyingParty().get(0)
-                    .getFinancialCapability().get(0).getValueAmount()
-                    .setValue(eoDetails.getGeneralTurnover().getAmount());
+            eoPartyType.getQualifyingParty().get(0).getFinancialCapability().add(new CapabilityType());
+            eoPartyType.getQualifyingParty().get(0).getFinancialCapability().get(0)
+                    .setValueAmount(new ValueAmountType());
+            eoPartyType.getQualifyingParty().get(0).getFinancialCapability().get(0)
+                    .getValueAmount().setValue(eoDetails.getGeneralTurnover().getAmount());
+            eoPartyType.getQualifyingParty().get(0).getFinancialCapability().get(0)
+                    .getValueAmount().setCurrencyID(eoDetails.getGeneralTurnover().getCurrency());
         }
 
         if (eoDetails.getEoRole() != null) {
@@ -469,8 +478,6 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
 
         tcrType.setID(createDefaultIDType(UUID.randomUUID().toString()));
         tcrType.getID().setSchemeID("ISO/IEC 9834-8:2008 - 4UUID");
-        // rvType.setID(createDefaultIDType(UUID.randomUUID().toString()));
-        // rvType.getID().setSchemeID("ISO/IEC 9834-8:2008 - 4UUID");
 
         switch (respType) {
             case DESCRIPTION:

@@ -4,12 +4,12 @@
     <cbc:CustomizationID schemeName="CustomizationID" schemeAgencyID="CEN-BII" schemeVersionID="2.0">urn:www.cenbii.eu:transaction:biitrdm070:ver3.0</cbc:CustomizationID>
     <cbc:ProfileID schemeAgencyID="CEN-BII" schemeVersionID="2.0">4.1</cbc:ProfileID>
     <cbc:ProfileExecutionID schemeAgencyID="EU-COM-GROW" schemeVersionID="2.0.2">ESPD-EDMv2.0.2-SELFCONTAINED</cbc:ProfileExecutionID>
-    <cbc:ID schemeID="ISO/IEC 9834-8:2008 - 4UUID" schemeAgencyID="EU-COM-GROW" schemeAgencyName="DG GROW (European Commission)" schemeVersionID="1.1">0f9d9fc0-7e03-461b-8d06-320dddfa9f40</cbc:ID>
+    <cbc:ID schemeID="ISO/IEC 9834-8:2008 - 4UUID" schemeAgencyID="EU-COM-GROW" schemeAgencyName="DG GROW (European Commission)" schemeVersionID="1.1">5100a198-dd80-4f52-82c9-6594a9c8accf</cbc:ID>
     <cbc:CopyIndicator>false</cbc:CopyIndicator>
-    <cbc:UUID schemeID="ISO/IEC 9834-8:2008 - 4UUID" schemeAgencyID="EU-COM-GROW" schemeVersionID="2.0">41a68d2d-f4ef-423f-b3d9-f29cabd8c177</cbc:UUID>
+    <cbc:UUID schemeID="ISO/IEC 9834-8:2008 - 4UUID" schemeAgencyID="EU-COM-GROW" schemeVersionID="2.0">46ff5786-aa3a-40cb-9c7c-457d60fa416b</cbc:UUID>
     <cbc:ContractFolderID schemeAgencyID="TeD">1234</cbc:ContractFolderID>
     <cbc:IssueDate>2018-11-10</cbc:IssueDate>
-    <cbc:IssueTime>20:01:29</cbc:IssueTime>
+    <cbc:IssueTime>21:23:10</cbc:IssueTime>
     <cbc:VersionID schemeAgencyID="EU-COM-GROW" schemeVersionID="2.0.2">2018.01.01</cbc:VersionID>
     <cbc:ProcedureCode listID="ProcedureType" listAgencyID="EU-COM-OP" listVersionID="1.0">NEGOTIATED_ACCELERATED</cbc:ProcedureCode>
     <cbc:QualificationApplicationTypeCode listID="QualificationApplicationType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">SELFCONTAINED</cbc:QualificationApplicationTypeCode>
@@ -90,7 +90,7 @@
                 <cbc:Description>Tenders may be submitted for</cbc:Description>
                 <cbc:TypeCode listID="CriterionElementType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">REQUIREMENT</cbc:TypeCode>
                 <cbc:ValueDataTypeCode listID="ResponseDataType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">CODE</cbc:ValueDataTypeCode>
-                <cbc:ExpectedCode listAgencyID="EU-COM-GROW">LOT_ALL</cbc:ExpectedCode>
+                <cbc:ExpectedCode listAgencyID="EU-COM-GROW">NOT_APPLICABLE</cbc:ExpectedCode>
             </cac:TenderingCriterionProperty>
             <cac:TenderingCriterionProperty>
                 <cbc:ID schemeID="CriteriaTaxonomy" schemeAgencyID="EU-COM-GROW" schemeVersionID="2.0.2">d30638b5-ff43-4e9f-90c7-7faa76281a9a</cbc:ID>
@@ -2070,7 +2070,7 @@
                 <cbc:Description>LotIDs</cbc:Description>
                 <cbc:TypeCode listID="CriterionElementType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">REQUIREMENT</cbc:TypeCode>
                 <cbc:ValueDataTypeCode listID="ResponseDataType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">LOT_IDENTIFIER</cbc:ValueDataTypeCode>
-                <cbc:ExpectedID schemeAgencyID="EU-COM-GROW">Lot3,Lot4</cbc:ExpectedID>
+                <cbc:ExpectedID schemeAgencyID="EU-COM-GROW">Lot2,Lot3</cbc:ExpectedID>
             </cac:TenderingCriterionProperty>
             <cac:SubsidiaryTenderingCriterionPropertyGroup>
                 <cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="2.0.2">3aacb82e-afba-440c-b64e-1834007965a2</cbc:ID>
@@ -2168,7 +2168,7 @@
                 <cbc:Description>LotIDs</cbc:Description>
                 <cbc:TypeCode listID="CriterionElementType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">REQUIREMENT</cbc:TypeCode>
                 <cbc:ValueDataTypeCode listID="ResponseDataType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">LOT_IDENTIFIER</cbc:ValueDataTypeCode>
-                <cbc:ExpectedID schemeAgencyID="EU-COM-GROW">Lot1,Lot4</cbc:ExpectedID>
+                <cbc:ExpectedID schemeAgencyID="EU-COM-GROW">Lot1,Lot3,Lot4</cbc:ExpectedID>
             </cac:TenderingCriterionProperty>
             <cac:SubsidiaryTenderingCriterionPropertyGroup>
                 <cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="2.0.2">3aacb82e-afba-440c-b64e-1834007965a2</cbc:ID>
@@ -2266,7 +2266,7 @@
                 <cbc:Description>LotIDs</cbc:Description>
                 <cbc:TypeCode listID="CriterionElementType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">REQUIREMENT</cbc:TypeCode>
                 <cbc:ValueDataTypeCode listID="ResponseDataType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">LOT_IDENTIFIER</cbc:ValueDataTypeCode>
-                <cbc:ExpectedID schemeAgencyID="EU-COM-GROW">Lot3,Lot4</cbc:ExpectedID>
+                <cbc:ExpectedID schemeAgencyID="EU-COM-GROW">Lot2,Lot4,Lot5</cbc:ExpectedID>
             </cac:TenderingCriterionProperty>
             <cac:SubsidiaryTenderingCriterionPropertyGroup>
                 <cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="2.0.2">3aacb82e-afba-440c-b64e-1834007965a2</cbc:ID>
@@ -2518,7 +2518,7 @@
                     <cbc:Description>CPV Code</cbc:Description>
                     <cbc:TypeCode listID="CriterionElementType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">REQUIREMENT</cbc:TypeCode>
                     <cbc:ValueDataTypeCode listID="ResponseDataType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">CODE</cbc:ValueDataTypeCode>
-                    <cbc:ExpectedCode listAgencyID="EU-COM-GROW">555555,11111111,3333333</cbc:ExpectedCode>
+                    <cbc:ExpectedCode listAgencyID="EU-COM-GROW">22222,654545,11111</cbc:ExpectedCode>
                 </cac:TenderingCriterionProperty>
             </cac:SubsidiaryTenderingCriterionPropertyGroup>
             <cac:SubsidiaryTenderingCriterionPropertyGroup>
@@ -2609,7 +2609,7 @@
                     <cbc:Description>CPV Code</cbc:Description>
                     <cbc:TypeCode listID="CriterionElementType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">REQUIREMENT</cbc:TypeCode>
                     <cbc:ValueDataTypeCode listID="ResponseDataType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">CODE</cbc:ValueDataTypeCode>
-                    <cbc:ExpectedCode listAgencyID="EU-COM-GROW">45454545,151511515</cbc:ExpectedCode>
+                    <cbc:ExpectedCode listAgencyID="EU-COM-GROW">9797979,3115135</cbc:ExpectedCode>
                 </cac:TenderingCriterionProperty>
             </cac:SubsidiaryTenderingCriterionPropertyGroup>
             <cac:SubsidiaryTenderingCriterionPropertyGroup>
@@ -2804,7 +2804,7 @@
                     <cbc:Description>Lot ID</cbc:Description>
                     <cbc:TypeCode listID="CriterionElementType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">REQUIREMENT</cbc:TypeCode>
                     <cbc:ValueDataTypeCode listID="ResponseDataType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">LOT_IDENTIFIER</cbc:ValueDataTypeCode>
-                    <cbc:ExpectedID schemeAgencyID="EU-COM-GROW">Lot3</cbc:ExpectedID>
+                    <cbc:ExpectedID schemeAgencyID="EU-COM-GROW">Lot3,Lot4</cbc:ExpectedID>
                 </cac:TenderingCriterionProperty>
             </cac:SubsidiaryTenderingCriterionPropertyGroup>
             <cac:SubsidiaryTenderingCriterionPropertyGroup>
@@ -2898,7 +2898,7 @@
                     <cbc:Description>Lot ID</cbc:Description>
                     <cbc:TypeCode listID="CriterionElementType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">REQUIREMENT</cbc:TypeCode>
                     <cbc:ValueDataTypeCode listID="ResponseDataType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">LOT_IDENTIFIER</cbc:ValueDataTypeCode>
-                    <cbc:ExpectedID schemeAgencyID="EU-COM-GROW">Lot3</cbc:ExpectedID>
+                    <cbc:ExpectedID schemeAgencyID="EU-COM-GROW">Lot1,Lot4</cbc:ExpectedID>
                 </cac:TenderingCriterionProperty>
             </cac:SubsidiaryTenderingCriterionPropertyGroup>
             <cac:SubsidiaryTenderingCriterionPropertyGroup>
@@ -3048,6 +3048,7 @@
                         <cbc:Description>The following requirements apply to lots</cbc:Description>
                         <cbc:TypeCode listID="CriterionElementType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">REQUIREMENT</cbc:TypeCode>
                         <cbc:ValueDataTypeCode listID="ResponseDataType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">LOT_IDENTIFIER</cbc:ValueDataTypeCode>
+                        <cbc:ExpectedID schemeAgencyID="EU-COM-GROW">Lot2</cbc:ExpectedID>
                     </cac:TenderingCriterionProperty>
                 </cac:SubsidiaryTenderingCriterionPropertyGroup>
             </cac:SubsidiaryTenderingCriterionPropertyGroup>
@@ -3211,6 +3212,7 @@
                         <cbc:Description>The following requirements apply to lots</cbc:Description>
                         <cbc:TypeCode listID="CriterionElementType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">REQUIREMENT</cbc:TypeCode>
                         <cbc:ValueDataTypeCode listID="ResponseDataType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">LOT_IDENTIFIER</cbc:ValueDataTypeCode>
+                        <cbc:ExpectedID schemeAgencyID="EU-COM-GROW">Lot4</cbc:ExpectedID>
                     </cac:TenderingCriterionProperty>
                 </cac:SubsidiaryTenderingCriterionPropertyGroup>
             </cac:SubsidiaryTenderingCriterionPropertyGroup>
@@ -3374,6 +3376,7 @@
                         <cbc:Description>The following requirements apply to lots</cbc:Description>
                         <cbc:TypeCode listID="CriterionElementType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">REQUIREMENT</cbc:TypeCode>
                         <cbc:ValueDataTypeCode listID="ResponseDataType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">LOT_IDENTIFIER</cbc:ValueDataTypeCode>
+                        <cbc:ExpectedID schemeAgencyID="EU-COM-GROW">Lot2,Lot5</cbc:ExpectedID>
                     </cac:TenderingCriterionProperty>
                 </cac:SubsidiaryTenderingCriterionPropertyGroup>
             </cac:SubsidiaryTenderingCriterionPropertyGroup>
