@@ -84,13 +84,14 @@ export class RequirementComponent implements OnInit, OnChanges {
       // init cpvCodes when import
       this.cpvCodes = this.utilities.renderCpvTemplate[this.req.uuid];
 
-      /* make cpvTemplate with chips that are pre-existing at the imported artifact */
-      this.utilities.cpvTemplate[this.req.uuid] = this.utilities.cpvCodeToString(this.cpvCodes);
-
       /* Make Chips non editable when user is EO and is requirement */
       if (this.utilities.isEO && this.req.type === 'REQUIREMENT') {
         this.disabled = true;
         this.removable = false;
+      }
+      /* make cpvTemplate with chips that are pre-existing at the imported artifact */
+      if (this.cpvCodes !== undefined) {
+        this.utilities.cpvTemplate[this.req.uuid] = this.utilities.cpvCodeToString(this.cpvCodes);
       }
     }
 
