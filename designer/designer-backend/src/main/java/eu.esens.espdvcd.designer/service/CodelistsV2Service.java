@@ -45,7 +45,6 @@ public enum CodelistsV2Service implements CodelistsService {
         }
     }
 
-
     @Override
     public Codelists[] getAvailableCodelists() {
         return CodelistsV2.values();

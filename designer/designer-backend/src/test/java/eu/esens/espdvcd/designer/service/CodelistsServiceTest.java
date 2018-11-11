@@ -17,6 +17,7 @@ package eu.esens.espdvcd.designer.service;
 
 import eu.esens.espdvcd.codelist.CodelistsV1;
 import eu.esens.espdvcd.codelist.CodelistsV2;
+import eu.esens.espdvcd.designer.exception.LanguageNotExistsException;
 import eu.esens.espdvcd.designer.util.CodelistItem;
 import org.junit.*;
 import org.junit.rules.ExpectedException;
@@ -71,12 +72,12 @@ public class CodelistsServiceTest {
 
     @Ignore
     @Test
-    public void testV2TranslatedCodelist() {
+    public void testV2TranslatedCodelist() throws LanguageNotExistsException {
         Map<String, String> theV2Codelist = CodelistsV2.Currency.getDataMap("ell");
         List<CodelistItem> theCodelistItemList = new ArrayList<>(theV2Codelist.size());
         theV2Codelist.forEach((key, value) -> theCodelistItemList.add(new CodelistItem(key, value)));
 
-        Assert.assertArrayEquals(theCodelistItemList.toArray(), codelistsV2Service.getTranslatedCodelist("Currency", "ell").toArray());
+        Assert.assertArrayEquals(theCodelistItemList.toArray(), codelistsV2Service.getTranslatedCodelist("Currency", "el").toArray());
     }
 
     @Ignore
