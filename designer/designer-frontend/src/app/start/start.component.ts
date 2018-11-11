@@ -19,7 +19,7 @@ import {FormControl, NgForm} from '@angular/forms/forms';
 import {ApicallService} from '../services/apicall.service';
 import {DataService} from '../services/data.service';
 import {UtilitiesService} from '../services/utilities.service';
-import {CodeList} from '../model/codeList.model';
+import {CodelistService} from '../services/codelist.service';
 
 // import {ProcedureType} from "../model/procedureType.model";
 
@@ -31,7 +31,7 @@ import {CodeList} from '../model/codeList.model';
 })
 export class StartComponent implements OnInit {
 
-  countries: CodeList[];
+  // countries: CodeList[];
   isCA = false;
   isEO = false;
   isCreateNewESPD = false;
@@ -44,19 +44,13 @@ export class StartComponent implements OnInit {
 
   // procedureTypes:ProcedureType[];
 
-  constructor(public dataService: DataService, private APIService: ApicallService, public utilities: UtilitiesService) {
+  constructor(public dataService: DataService,
+              private APIService: ApicallService,
+              public utilities: UtilitiesService,
+              public codelist: CodelistService) {
   }
 
   ngOnInit() {
-    this.dataService.getCountries()
-      .then(res => {
-        this.countries = res;
-        // console.log("this is from start component"); console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-
 
   }
 

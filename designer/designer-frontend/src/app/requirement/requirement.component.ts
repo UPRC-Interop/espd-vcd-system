@@ -23,6 +23,7 @@ import {UtilitiesService} from '../services/utilities.service';
 import {MatChipInputEvent, MatSelectionList} from '@angular/material';
 import {COMMA, ENTER} from '../../../node_modules/@angular/cdk/keycodes';
 import {CodeList} from '../model/codeList.model';
+import {CodelistService} from '../services/codelist.service';
 
 @Component({
   selector: 'app-requirement',
@@ -37,13 +38,10 @@ export class RequirementComponent implements OnInit, OnChanges {
   @Output() indicatorChanged = new EventEmitter();
   // @Output() lotsInReq = new EventEmitter();
 
+  eoIDType: CodeList[];
+  currency: CodeList[];
+
   reqLots: string[] = [];
-  countries: CodeList[] = [];
-  currency: CodeList[] = [];
-  eoIDTypes: CodeList[] = [];
-  bidTypes: CodeList[] = [];
-  financialRatioTypes: CodeList[] = [];
-  // evaluationMethodTypes: EvaluationMethodType[] = null;
   cpvCodes: string[] = [];
   isWeighted = false;
   /* CPV chips */
@@ -57,7 +55,11 @@ export class RequirementComponent implements OnInit, OnChanges {
   @ViewChild('lots') lots: MatSelectionList;
 
 
-  constructor(public dataService: DataService, public APIService: ApicallService, public utilities: UtilitiesService) {
+  constructor(public dataService: DataService,
+              public APIService: ApicallService,
+              public utilities: UtilitiesService,
+              public codelist: CodelistService) {
+
 
   }
 
@@ -91,54 +93,58 @@ export class RequirementComponent implements OnInit, OnChanges {
       }
     }
 
-    // this.dataService.getCountries()
+
+    // this.codelist.getCurrency()
     //   .then(res => {
-    //     this.countries = res;
+    //     this.codelist.currency = res;
     //     // console.log(res);
     //   })
     //   .catch(err => {
     //     console.log(err);
     //   });
     //
-    // this.dataService.getCurrency()
-    //   .then(res => {
-    //     this.currency = res;
-    //     // console.log(res);
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
     //
-    // this.dataService.getEoIDTypes()
+    // this.codelist.getCountries()
     //   .then(res => {
-    //     this.eoIDTypes = res;
-    //     // console.log(res);
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
-    //
-    // this.dataService.getBidTypes()
-    //   .then(res => {
-    //     this.bidTypes = res;
-    //     // console.log(res);
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
-    //
-    // this.dataService.getFinancialRatioTypes()
-    //   .then(res => {
-    //     this.financialRatioTypes = res;
+    //     this.codelist.countries = res;
     //     // console.log(res);
     //   })
     //   .catch(err => {
     //     console.log(err);
     //   });
 
-    // this.dataService.getEvalutationMethodTypes()
+    // if (this.eoIDType !== null && this.eoIDType !== undefined) {
+    //   this.codelist.getEoIDTypes()
+    //     .then(res => {
+    //       this.eoIDType = res;
+    //       // console.log(res);
+    //     })
+    //     .catch(err => {
+    //       console.log(err);
+    //     });
+    // }
+    //
+    // this.codelist.getBidTypes()
     //   .then(res => {
-    //     this.evaluationMethodTypes = res;
+    //     this.codelist.bidTypes = res;
+    //     // console.log(res);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
+    //
+    // this.codelist.getFinancialRatioTypes()
+    //   .then(res => {
+    //     this.codelist.financialRatioTypes = res;
+    //     // console.log(res);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
+
+    // this.codelist.getEvalutationMethodTypes()
+    //   .then(res => {
+    //     this.codelist.evaluationMethodTypes = res;
     //     // console.log(res);
     //   })
     //   .catch(err => {

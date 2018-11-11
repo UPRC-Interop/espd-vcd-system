@@ -20,7 +20,7 @@ import {NgForm} from '@angular/forms';
 import {UtilitiesService} from '../services/utilities.service';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material';
-import {CodeList} from '../model/codeList.model';
+import {CodelistService} from '../services/codelist.service';
 
 @Component({
   selector: 'app-procedure',
@@ -36,13 +36,12 @@ export class ProcedureComponent implements OnInit, OnChanges {
   addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
-  countries: CodeList[] = null;
-  procedureTypes: CodeList[] = null;
-  projectTypes: CodeList[] = null;
 
   @ViewChild('form') form: NgForm;
 
-  constructor(public dataService: DataService, public utilities: UtilitiesService) {
+  constructor(public dataService: DataService,
+              public utilities: UtilitiesService,
+              public codelist: CodelistService) {
   }
 
   ngOnInit() {
@@ -50,33 +49,6 @@ export class ProcedureComponent implements OnInit, OnChanges {
     if (this.dataService.CADetails) {
       this.dataService.CADetails.classificationCodes = [];
     }
-
-    this.dataService.getCountries()
-      .then(res => {
-        this.countries = res;
-        // console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-
-    this.dataService.getProcedureTypes()
-      .then(res => {
-        this.procedureTypes = res;
-        // console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-
-    this.dataService.getProjectTypes()
-      .then(res => {
-        this.projectTypes = res;
-        // console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
 
     this.form.form.valueChanges.subscribe(x => {
       /* SELF-CONTAINED: Set isDividedIntoLots boolean in order to show/hide the OTHER_CA lots criterion */

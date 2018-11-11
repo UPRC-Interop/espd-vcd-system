@@ -88,7 +88,7 @@
           <br>
           <mat-select [formControlName]="req.uuid" [id]="req.uuid">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let bid of bidTypes" [value]="bid.code">{{bid.name}}</mat-option>
+            <mat-option *ngFor="let bid of codelist.bidTypes" [value]="bid.code">{{bid.name}}</mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field *ngSwitchCase="'FinancialRatioType'">
@@ -96,7 +96,7 @@
           <br>
           <mat-select [formControlName]="req.uuid" [id]="req.uuid">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let type of financialRatioTypes" [value]="type.code">{{type.name}}</mat-option>
+            <mat-option *ngFor="let type of codelist.financialRatioTypes" [value]="type.code">{{type.name}}</mat-option>
           </mat-select>
         </mat-form-field>
         <div *ngSwitchCase="'CPVCodes'">
@@ -127,7 +127,7 @@
       <br>
       <mat-select  [formControlName]="req.uuid" [id]="req.uuid">
         <mat-option>None</mat-option>
-        <mat-option *ngFor="let country of countries" [value]="country.code">{{country.name}}</mat-option>
+        <mat-option *ngFor="let country of codelist.countries" [value]="country.code">{{country.name}}</mat-option>
       </mat-select>
     </mat-form-field>
 
@@ -141,7 +141,7 @@
       <mat-form-field>
         <mat-select [formControlName]="req.uuid+'currency'" [id]="req.uuid+'currency'">
           <mat-option>None</mat-option>
-          <mat-option *ngFor="let curr of currency" [value]="curr.code">{{curr.code}} ( {{curr.name}} )</mat-option>
+          <mat-option *ngFor="let curr of codelist.currency" [value]="curr.code">{{curr.code}} ( {{curr.name}} )</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
@@ -226,7 +226,7 @@
       <mat-form-field>
         <mat-select [formControlName]="req.uuid+'eoidtype'" [id]="req.uuid+'eoidtype'">
           <mat-option>None</mat-option>
-          <mat-option *ngFor="let type of eoIDTypes" [value]="type.code">{{type.code}} ( {{type.name}} )</mat-option>
+          <mat-option *ngFor="let type of codelist.eoIDType" [value]="type.code">{{type.code}} ( {{type.name}} )</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
@@ -239,8 +239,6 @@
         </mat-list-option>
       </mat-selection-list>
     </div>
-
-
   </div>
 </div>
 

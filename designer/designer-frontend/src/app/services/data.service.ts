@@ -66,16 +66,7 @@ export class DataService {
   OTHER_CA_REGEXP: RegExp = /^CRITERION.OTHER.CA_DATA.+/;
   EO_LOT_REGEXP: RegExp = /^CRITERION.OTHER.EO_DATA.LOTS_TENDERED/;
 
-  countries: CodeList[] = null;
-  procedureTypes: CodeList[] = null;
-  projectTypes: CodeList[] = null;
-  bidTypes: CodeList[] = null;
-  eoRoleTypes: CodeList[] = null;
-  currency: CodeList[] = null;
-  eoIDType: CodeList[] = null;
-  financialRatioTypes: CodeList[] = null;
-  weightingType: CodeList[] = null;
-  evaluationMethodType: CodeList[] = null;
+
   exclusionACriteria: ExclusionCriteria[] = null;
   exclusionBCriteria: ExclusionCriteria[] = null;
   exclusionCCriteria: ExclusionCriteria[] = null;
@@ -119,8 +110,8 @@ export class DataService {
   espdResponse: ESPDResponse;
   version: string;
   receivedNoticeNumber: string;
-  selectedCountry: string = '';
-  selectedEOCountry: string = '';
+  selectedCountry = '';
+  selectedEOCountry = '';
   public EOForm: FormGroup;
 
 
@@ -149,7 +140,6 @@ export class DataService {
 
 
   constructor(private APIService: ApicallService,
-              public snackBar: MatSnackBar,
               public formUtil: FormUtilService,
               public utilities: UtilitiesService,
               public translate: TranslateService) {
@@ -157,12 +147,6 @@ export class DataService {
     this.AddLanguages();
     translate.setDefaultLang('ESPD_en');
     console.log(this.translate.getLangs());
-  }
-
-
-  /* ============================ snackbar ===================================== */
-  openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action);
   }
 
 
@@ -442,7 +426,7 @@ export class DataService {
         const message: string = err.error +
           ' ' + err.message;
         const action = 'close';
-        this.openSnackBar(message, action);
+        this.utilities.openSnackBar(message, action);
       });
   }
 
@@ -456,7 +440,7 @@ export class DataService {
         const message: string = err.error +
           ' ' + err.message;
         const action = 'close';
-        this.openSnackBar(message, action);
+        this.utilities.openSnackBar(message, action);
       });
   }
 
@@ -470,7 +454,7 @@ export class DataService {
         const message: string = err.error +
           ' ' + err.message;
         const action = 'close';
-        this.openSnackBar(message, action);
+        this.utilities.openSnackBar(message, action);
       });
   }
 
@@ -554,7 +538,7 @@ export class DataService {
         const message: string = err.error +
           ' ' + err.message;
         const action = 'close';
-        this.openSnackBar(message, action);
+        this.utilities.openSnackBar(message, action);
       });
   }
 
@@ -568,7 +552,7 @@ export class DataService {
         const message: string = err.error +
           ' ' + err.message;
         const action = 'close';
-        this.openSnackBar(message, action);
+        this.utilities.openSnackBar(message, action);
       });
   }
 
@@ -585,7 +569,7 @@ export class DataService {
         const message: string = err.error +
           ' ' + err.message;
         const action = 'close';
-        this.openSnackBar(message, action);
+        this.utilities.openSnackBar(message, action);
       });
   }
 
@@ -723,7 +707,7 @@ export class DataService {
           const message: string = err.error +
             ' ' + err.message;
           const action = 'close';
-          this.openSnackBar(message, action);
+          this.utilities.openSnackBar(message, action);
         });
     } else if (filesToUpload.length > 0 && role === 'EO') {
       this.APIService.postFileResponse(filesToUpload)
@@ -899,7 +883,7 @@ export class DataService {
           const message: string = err.error +
             ' ' + err.message;
           const action = 'close';
-          this.openSnackBar(message, action);
+          this.utilities.openSnackBar(message, action);
         });
     }
 
@@ -1075,7 +1059,7 @@ export class DataService {
           const message: string = err.error +
             ' ' + err.message;
           const action = 'close';
-          this.openSnackBar(message, action);
+          this.utilities.openSnackBar(message, action);
         });
 
       this.getEoRelatedCCriteria()
@@ -1091,7 +1075,7 @@ export class DataService {
           const message: string = err.error +
             ' ' + err.message;
           const action = 'close';
-          this.openSnackBar(message, action);
+          this.utilities.openSnackBar(message, action);
         });
 
       this.getEoRelatedDCriteria()
@@ -1107,7 +1091,7 @@ export class DataService {
           const message: string = err.error +
             ' ' + err.message;
           const action = 'close';
-          this.openSnackBar(message, action);
+          this.utilities.openSnackBar(message, action);
         });
 
       /* =================== SELF-CONTAINED: predefined ca related criterion ============ */
@@ -1124,7 +1108,7 @@ export class DataService {
             const message: string = err.error +
               ' ' + err.message;
             const action = 'close';
-            this.openSnackBar(message, action);
+            this.utilities.openSnackBar(message, action);
           });
 
         this.getEOLotCriterion()
@@ -1138,7 +1122,7 @@ export class DataService {
             const message: string = err.error +
               ' ' + err.message;
             const action = 'close';
-            this.openSnackBar(message, action);
+            this.utilities.openSnackBar(message, action);
           });
       } else {
         this.caRelatedCriteria = [];
@@ -1162,7 +1146,7 @@ export class DataService {
           const message: string = err.error +
             ' ' + err.message;
           const action = 'close';
-          this.openSnackBar(message, action);
+          this.utilities.openSnackBar(message, action);
         });
 
       this.getExclusionBCriteria()
@@ -1178,7 +1162,7 @@ export class DataService {
           const message: string = err.error +
             ' ' + err.message;
           const action = 'close';
-          this.openSnackBar(message, action);
+          this.utilities.openSnackBar(message, action);
         });
 
       this.getExclusionCCriteria()
@@ -1194,7 +1178,7 @@ export class DataService {
           const message: string = err.error +
             ' ' + err.message;
           const action = 'close';
-          this.openSnackBar(message, action);
+          this.utilities.openSnackBar(message, action);
         });
 
       this.getExclusionDCriteria()
@@ -1210,7 +1194,7 @@ export class DataService {
           const message: string = err.error +
             ' ' + err.message;
           const action = 'close';
-          this.openSnackBar(message, action);
+          this.utilities.openSnackBar(message, action);
         });
 
       /* ======================== predefined selection criteria ============================ */
@@ -1226,7 +1210,7 @@ export class DataService {
           const message: string = err.error +
             ' ' + err.message;
           const action = 'close';
-          this.openSnackBar(message, action);
+          this.utilities.openSnackBar(message, action);
         });
 
 
@@ -1242,7 +1226,7 @@ export class DataService {
           const message: string = err.error +
             ' ' + err.message;
           const action = 'close';
-          this.openSnackBar(message, action);
+          this.utilities.openSnackBar(message, action);
         });
 
 
@@ -1258,7 +1242,7 @@ export class DataService {
           const message: string = err.error +
             ' ' + err.message;
           const action = 'close';
-          this.openSnackBar(message, action);
+          this.utilities.openSnackBar(message, action);
         });
 
       this.getSelectionCCriteria()
@@ -1273,7 +1257,7 @@ export class DataService {
           const message: string = err.error +
             ' ' + err.message;
           const action = 'close';
-          this.openSnackBar(message, action);
+          this.utilities.openSnackBar(message, action);
         });
 
       this.getSelectionDCriteria()
@@ -1288,7 +1272,7 @@ export class DataService {
           const message: string = err.error +
             ' ' + err.message;
           const action = 'close';
-          this.openSnackBar(message, action);
+          this.utilities.openSnackBar(message, action);
         });
 
       /* =========================== predefined reduction criteria ================================= */
@@ -1307,7 +1291,7 @@ export class DataService {
           const message: string = err.error +
             ' ' + err.message;
           const action = 'close';
-          this.openSnackBar(message, action);
+          this.utilities.openSnackBar(message, action);
         });
 
     }
@@ -1328,7 +1312,7 @@ export class DataService {
           const message: string = err.error +
             ' ' + err.message;
           const action = 'close';
-          this.openSnackBar(message, action);
+          this.utilities.openSnackBar(message, action);
         });
 
       /* ========================= predefined other.eo criteria ====================================*/
@@ -1342,7 +1326,7 @@ export class DataService {
           const message: string = err.error +
             ' ' + err.message;
           const action = 'close';
-          this.openSnackBar(message, action);
+          this.utilities.openSnackBar(message, action);
         });
 
       /* ========================= SELF-CONTAINED: predefined other.ca criteria ============================= */
@@ -1361,7 +1345,7 @@ export class DataService {
             const message: string = err.error +
               ' ' + err.message;
             const action = 'close';
-            this.openSnackBar(message, action);
+            this.utilities.openSnackBar(message, action);
           });
 
 
@@ -1376,7 +1360,7 @@ export class DataService {
             const message: string = err.error +
               ' ' + err.message;
             const action = 'close';
-            this.openSnackBar(message, action);
+            this.utilities.openSnackBar(message, action);
           });
       } else {
         this.caRelatedCriteria = [];
@@ -1398,7 +1382,7 @@ export class DataService {
           const message: string = err.error +
             ' ' + err.message;
           const action = 'close';
-          this.openSnackBar(message, action);
+          this.utilities.openSnackBar(message, action);
         });
 
       this.getExclusionBCriteria()
@@ -1414,7 +1398,7 @@ export class DataService {
           const message: string = err.error +
             ' ' + err.message;
           const action = 'close';
-          this.openSnackBar(message, action);
+          this.utilities.openSnackBar(message, action);
         });
 
       this.getExclusionCCriteria()
@@ -1430,7 +1414,7 @@ export class DataService {
           const message: string = err.error +
             ' ' + err.message;
           const action = 'close';
-          this.openSnackBar(message, action);
+          this.utilities.openSnackBar(message, action);
         });
 
       this.getExclusionDCriteria()
@@ -1446,7 +1430,7 @@ export class DataService {
           const message: string = err.error +
             ' ' + err.message;
           const action = 'close';
-          this.openSnackBar(message, action);
+          this.utilities.openSnackBar(message, action);
         });
 
 
@@ -1462,7 +1446,7 @@ export class DataService {
           const message: string = err.error +
             ' ' + err.message;
           const action = 'close';
-          this.openSnackBar(message, action);
+          this.utilities.openSnackBar(message, action);
         });
 
       this.getSelectionACriteria()
@@ -1478,7 +1462,7 @@ export class DataService {
           const message: string = err.error +
             ' ' + err.message;
           const action = 'close';
-          this.openSnackBar(message, action);
+          this.utilities.openSnackBar(message, action);
         });
 
 
@@ -1494,7 +1478,7 @@ export class DataService {
           const message: string = err.error +
             ' ' + err.message;
           const action = 'close';
-          this.openSnackBar(message, action);
+          this.utilities.openSnackBar(message, action);
         });
 
       this.getSelectionCCriteria()
@@ -1511,7 +1495,7 @@ export class DataService {
           const message: string = err.error +
             ' ' + err.message;
           const action = 'close';
-          this.openSnackBar(message, action);
+          this.utilities.openSnackBar(message, action);
         });
 
       this.getSelectionDCriteria()
@@ -1526,7 +1510,7 @@ export class DataService {
           const message: string = err.error +
             ' ' + err.message;
           const action = 'close';
-          this.openSnackBar(message, action);
+          this.utilities.openSnackBar(message, action);
         });
 
     }
@@ -1573,7 +1557,7 @@ export class DataService {
         const message: string = err.error +
           ' ' + err.message;
         const action = 'close';
-        this.openSnackBar(message, action);
+        this.utilities.openSnackBar(message, action);
       });
   }
 
@@ -1586,7 +1570,7 @@ export class DataService {
     // this.AddLanguages();
   }
 
-  /* =================================  Get from Codelists ===========================*/
+  /* =================================  Get Language ===========================*/
 
   getLanguages(): Promise<Language[]> {
     if (this.language != null) {
@@ -1602,210 +1586,7 @@ export class DataService {
           const message: string = err.error +
             ' ' + err.message;
           const action = 'close';
-          this.openSnackBar(message, action);
-          return Promise.reject(err);
-        });
-    }
-  }
-
-
-  getCountries(): Promise<CodeList[]> {
-    if (this.countries != null) {
-      return Promise.resolve(this.countries);
-    } else {
-      return this.APIService.getCountryList()
-        .then(res => {
-          this.countries = res;
-          return Promise.resolve(res);
-        })
-        .catch(err => {
-          console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
-          const action = 'close';
-          this.openSnackBar(message, action);
-          return Promise.reject(err);
-        });
-    }
-  }
-
-  getCurrency(): Promise<CodeList[]> {
-    if (this.currency != null) {
-      return Promise.resolve(this.currency);
-    } else {
-      return this.APIService.getCurr()
-        .then(res => {
-          this.currency = res;
-          return Promise.resolve(res);
-        })
-        .catch(err => {
-          console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
-          const action = 'close';
-          this.openSnackBar(message, action);
-          return Promise.reject(err);
-        });
-    }
-  }
-
-  /* ============================= SELF-CONTAINED: codelists ========================*/
-
-  getProcedureTypes(): Promise<CodeList[]> {
-    if (this.procedureTypes != null) {
-      return Promise.resolve(this.procedureTypes);
-    } else {
-      return this.APIService.getProcedureType()
-        .then(res => {
-          this.procedureTypes = res;
-          return Promise.resolve(res);
-        })
-        .catch(err => {
-          console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
-          const action = 'close';
-          this.openSnackBar(message, action);
-          return Promise.reject(err);
-        });
-    }
-  }
-
-  getEoIDTypes(): Promise<CodeList[]> {
-    if (this.eoIDType != null) {
-      return Promise.resolve(this.eoIDType);
-    } else {
-      return this.APIService.get_eoIDTypes()
-        .then(res => {
-          this.eoIDType = res;
-          return Promise.resolve(res);
-        })
-        .catch(err => {
-          console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
-          const action = 'close';
-          this.openSnackBar(message, action);
-          return Promise.reject(err);
-        });
-    }
-  }
-
-  getEvalutationMethodTypes(): Promise<CodeList[]> {
-    if (this.evaluationMethodType != null) {
-      return Promise.resolve(this.evaluationMethodType);
-    } else {
-      return this.APIService.get_EvaluationMethodType()
-        .then(res => {
-          this.evaluationMethodType = res;
-          return Promise.resolve(res);
-        })
-        .catch(err => {
-          console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
-          const action = 'close';
-          this.openSnackBar(message, action);
-          return Promise.reject(err);
-        });
-    }
-  }
-
-  getProjectTypes(): Promise<CodeList[]> {
-    if (this.projectTypes != null) {
-      return Promise.resolve(this.projectTypes);
-    } else {
-      return this.APIService.get_ProjectType()
-        .then(res => {
-          this.projectTypes = res;
-          return Promise.resolve(res);
-        })
-        .catch(err => {
-          console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
-          const action = 'close';
-          this.openSnackBar(message, action);
-          return Promise.reject(err);
-        });
-    }
-  }
-
-  getBidTypes(): Promise<CodeList[]> {
-    if (this.bidTypes != null) {
-      return Promise.resolve(this.bidTypes);
-    } else {
-      return this.APIService.get_BidType()
-        .then(res => {
-          this.bidTypes = res;
-          return Promise.resolve(res);
-        })
-        .catch(err => {
-          console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
-          const action = 'close';
-          this.openSnackBar(message, action);
-          return Promise.reject(err);
-        });
-    }
-  }
-
-  getFinancialRatioTypes(): Promise<CodeList[]> {
-    if (this.financialRatioTypes != null) {
-      return Promise.resolve(this.financialRatioTypes);
-    } else {
-      return this.APIService.get_financialRatioType()
-        .then(res => {
-          this.financialRatioTypes = res;
-          return Promise.resolve(res);
-        })
-        .catch(err => {
-          console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
-          const action = 'close';
-          this.openSnackBar(message, action);
-          return Promise.reject(err);
-        });
-    }
-  }
-
-  getWeightingType(): Promise<CodeList[]> {
-    if (this.weightingType != null) {
-      return Promise.resolve(this.weightingType);
-    } else {
-      return this.APIService.get_WeightingType()
-        .then(res => {
-          this.weightingType = res;
-          return Promise.resolve(res);
-        })
-        .catch(err => {
-          console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
-          const action = 'close';
-          this.openSnackBar(message, action);
-          return Promise.reject(err);
-        });
-    }
-  }
-
-  getEORoleTypes(): Promise<CodeList[]> {
-    if (this.eoRoleTypes != null) {
-      return Promise.resolve(this.eoRoleTypes);
-    } else {
-      return this.APIService.get_eoRoleType()
-        .then(res => {
-          this.eoRoleTypes = res;
-          return Promise.resolve(res);
-        })
-        .catch(err => {
-          console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
-          const action = 'close';
-          this.openSnackBar(message, action);
+          this.utilities.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -1829,7 +1610,7 @@ export class DataService {
           const message: string = err.error +
             ' ' + err.message;
           const action = 'close';
-          this.openSnackBar(message, action);
+          this.utilities.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -1850,7 +1631,7 @@ export class DataService {
           const message: string = err.error +
             ' ' + err.message;
           const action = 'close';
-          this.openSnackBar(message, action);
+          this.utilities.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -1871,7 +1652,7 @@ export class DataService {
           const message: string = err.error +
             ' ' + err.message;
           const action = 'close';
-          this.openSnackBar(message, action);
+          this.utilities.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -1892,7 +1673,7 @@ export class DataService {
           const message: string = err.error +
             ' ' + err.message;
           const action = 'close';
-          this.openSnackBar(message, action);
+          this.utilities.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -1913,7 +1694,7 @@ export class DataService {
           const message: string = err.error +
             ' ' + err.message;
           const action = 'close';
-          this.openSnackBar(message, action);
+          this.utilities.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -1935,7 +1716,7 @@ export class DataService {
           const message: string = err.error +
             ' ' + err.message;
           const action = 'close';
-          this.openSnackBar(message, action);
+          this.utilities.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -1957,7 +1738,7 @@ export class DataService {
           const message: string = err.error +
             ' ' + err.message;
           const action = 'close';
-          this.openSnackBar(message, action);
+          this.utilities.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -1979,7 +1760,7 @@ export class DataService {
           const message: string = err.error +
             ' ' + err.message;
           const action = 'close';
-          this.openSnackBar(message, action);
+          this.utilities.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -1999,7 +1780,7 @@ export class DataService {
           const message: string = err.error +
             ' ' + err.message;
           const action = 'close';
-          this.openSnackBar(message, action);
+          this.utilities.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -2019,7 +1800,7 @@ export class DataService {
           const message: string = err.error +
             ' ' + err.message;
           const action = 'close';
-          this.openSnackBar(message, action);
+          this.utilities.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -2039,7 +1820,7 @@ export class DataService {
           const message: string = err.error +
             ' ' + err.message;
           const action = 'close';
-          this.openSnackBar(message, action);
+          this.utilities.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -2061,7 +1842,7 @@ export class DataService {
           const message: string = err.error +
             ' ' + err.message;
           const action = 'close';
-          this.openSnackBar(message, action);
+          this.utilities.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -2082,7 +1863,7 @@ export class DataService {
           const message: string = err.error +
             ' ' + err.message;
           const action = 'close';
-          this.openSnackBar(message, action);
+          this.utilities.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -2102,7 +1883,7 @@ export class DataService {
           const message: string = err.error +
             ' ' + err.message;
           const action = 'close';
-          this.openSnackBar(message, action);
+          this.utilities.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -2122,7 +1903,7 @@ export class DataService {
           const message: string = err.error +
             ' ' + err.message;
           const action = 'close';
-          this.openSnackBar(message, action);
+          this.utilities.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }
@@ -2142,7 +1923,7 @@ export class DataService {
           const message: string = err.error +
             ' ' + err.message;
           const action = 'close';
-          this.openSnackBar(message, action);
+          this.utilities.openSnackBar(message, action);
           return Promise.reject(err);
         });
     }

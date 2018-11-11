@@ -20,6 +20,7 @@ import {FormControl, NgForm} from '@angular/forms/forms';
 import {ApicallService} from '../services/apicall.service';
 import {UtilitiesService} from '../services/utilities.service';
 import {CodeList} from '../model/codeList.model';
+import {CodelistService} from '../services/codelist.service';
 
 @Component({
   selector: 'app-selection',
@@ -35,7 +36,8 @@ export class SelectionComponent implements OnInit {
 
   constructor(public dataService: DataService,
               public APIService: ApicallService,
-              public utilities: UtilitiesService) {
+              public utilities: UtilitiesService,
+              public codelist: CodelistService) {
   }
 
   ngOnInit() {
@@ -44,15 +46,6 @@ export class SelectionComponent implements OnInit {
       this.utilities.isAtoD = true;
       this.utilities.isSatisfiedALL = false;
     }
-
-    this.dataService.getWeightingType()
-      .then(res => {
-        this.weightingType = res;
-        // console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
 
     console.log(this.dataService.CADetails);
 
