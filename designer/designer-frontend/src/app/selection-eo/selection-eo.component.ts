@@ -18,7 +18,8 @@ import {Component, OnInit} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {FormControl} from '@angular/forms';
 import {UtilitiesService} from '../services/utilities.service';
-import {WeightingType} from '../model/weightingType.model';
+import {CodeList} from '../model/codeList.model';
+import {CodelistService} from '../services/codelist.service';
 
 @Component({
   selector: 'app-selection-eo',
@@ -28,9 +29,11 @@ import {WeightingType} from '../model/weightingType.model';
 export class SelectionEoComponent implements OnInit {
   // isSatisfiedALL = true;
   // isAtoD = false;
-  weightingType: WeightingType[] = null;
 
-  constructor(public dataService: DataService, public utilities: UtilitiesService) {
+
+  constructor(public dataService: DataService,
+              public utilities: UtilitiesService,
+              public codelist: CodelistService) {
   }
 
   ngOnInit() {
@@ -39,14 +42,6 @@ export class SelectionEoComponent implements OnInit {
       this.utilities.isAtoD = true;
       this.utilities.isSatisfiedALL = false;
     }
-    this.dataService.getWeightingType()
-      .then(res => {
-        this.weightingType = res;
-        // console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
   }
 
   handleALL(radio: FormControl) {

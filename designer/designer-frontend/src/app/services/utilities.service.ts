@@ -18,7 +18,7 @@ import {Injectable} from '@angular/core';
 import {Moment} from 'moment';
 import * as moment from 'moment';
 import {SelectionCriteria} from '../model/selectionCriteria.model';
-import {MatListOption} from '@angular/material';
+import {MatListOption, MatSnackBar} from '@angular/material';
 
 @Injectable({
   providedIn: 'root'
@@ -53,7 +53,7 @@ export class UtilitiesService {
   // qualificationApplicationType = 'REGULATED';
 
 
-  constructor() {
+  constructor(public snackBar: MatSnackBar) {
   }
 
   /*  ======================================== Date Manipulation ================================*/
@@ -132,6 +132,11 @@ export class UtilitiesService {
 
   isImport(): boolean {
     return this.isImportReq || this.isImportESPD || this.isReviewESPD;
+  }
+
+  /* ============================ snackbar ===================================== */
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action);
   }
 
 }

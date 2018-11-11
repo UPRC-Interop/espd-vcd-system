@@ -17,25 +17,16 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
-import {Country} from '../model/country.model';
-import {ProcedureType} from '../model/procedureType.model';
 import {ExclusionCriteria} from '../model/exclusionCriteria.model';
 import {SelectionCriteria} from '../model/selectionCriteria.model';
 import {ESPDRequest} from '../model/ESPDRequest.model';
 import {EoRelatedCriterion} from '../model/eoRelatedCriterion.model';
-import {Currency} from '../model/currency.model';
 import {ReductionCriterion} from '../model/reductionCriterion.model';
 import {ESPDResponse} from '../model/ESPDResponse.model';
 import {environment} from '../../environments/environment';
 import {Language} from '../model/language.model';
 import {UtilitiesService} from './utilities.service';
-import {EoIDType} from '../model/eoIDType.model';
-import {EvaluationMethodType} from '../model/evaluationMethodType.model';
-import {ProjectType} from '../model/projectType.model';
-import {BidType} from '../model/bidType.model';
-import {WeightingType} from '../model/weightingType.model';
-import {EoRoleType} from '../model/eoRoleType.model';
-import {FinancialRatioType} from '../model/financialRatioType.model';
+import {CodeList} from '../model/codeList.model';
 
 // import {DataService} from '../services/data.service';
 
@@ -53,12 +44,12 @@ export class ApicallService {
   }
 
   getCountryList() {
-    return this.http.get<Country[]>(environment.apiUrl + 'v2/codelists/CountryIdentification/lang/'
+    return this.http.get<CodeList[]>(environment.apiUrl + 'v2/codelists/CountryIdentification/lang/'
       + this.utilities.selectedLang).toPromise();
   }
 
   getCurr() {
-    return this.http.get<Currency[]>(environment.apiUrl + 'v2/codelists/Currency/lang/' + this.utilities.selectedLang).toPromise();
+    return this.http.get<CodeList[]>(environment.apiUrl + 'v2/codelists/Currency/lang/' + this.utilities.selectedLang).toPromise();
   }
 
   getLangs() {
@@ -67,38 +58,38 @@ export class ApicallService {
 
   /* SELF-CONTAINED: Codelists*/
   get_eoIDTypes() {
-    return this.http.get<EoIDType[]>(environment.apiUrl + 'v2/codelists/EOIDType/lang/' + this.utilities.selectedLang).toPromise();
+    return this.http.get<CodeList[]>(environment.apiUrl + 'v2/codelists/EOIDType/lang/' + this.utilities.selectedLang).toPromise();
   }
 
   get_EvaluationMethodType() {
-    return this.http.get<EvaluationMethodType[]>(environment.apiUrl + 'v2/codelists/EvaluationMethodType/lang/'
+    return this.http.get<CodeList[]>(environment.apiUrl + 'v2/codelists/EvaluationMethodType/lang/'
       + this.utilities.selectedLang).toPromise();
   }
 
   getProcedureType() {
-    return this.http.get<ProcedureType[]>(environment.apiUrl + 'v2/codelists/ProcedureType/lang/'
+    return this.http.get<CodeList[]>(environment.apiUrl + 'v2/codelists/ProcedureType/lang/'
       + this.utilities.selectedLang).toPromise();
   }
 
   get_ProjectType() {
-    return this.http.get<ProjectType[]>(environment.apiUrl + 'v2/codelists/ProjectType/lang/' + this.utilities.selectedLang).toPromise();
+    return this.http.get<CodeList[]>(environment.apiUrl + 'v2/codelists/ProjectType/lang/' + this.utilities.selectedLang).toPromise();
   }
 
   get_BidType() {
-    return this.http.get<BidType[]>(environment.apiUrl + 'v2/codelists/BidType/lang/' + this.utilities.selectedLang).toPromise();
+    return this.http.get<CodeList[]>(environment.apiUrl + 'v2/codelists/BidType/lang/' + this.utilities.selectedLang).toPromise();
   }
 
   get_WeightingType() {
-    return this.http.get<WeightingType[]>(environment.apiUrl + 'v2/codelists/WeightingType/lang/'
+    return this.http.get<CodeList[]>(environment.apiUrl + 'v2/codelists/WeightingType/lang/'
       + this.utilities.selectedLang).toPromise();
   }
 
   get_eoRoleType() {
-    return this.http.get<EoRoleType[]>(environment.apiUrl + 'v2/codelists/EORoleType/lang/' + this.utilities.selectedLang).toPromise();
+    return this.http.get<CodeList[]>(environment.apiUrl + 'v2/codelists/EORoleType/lang/' + this.utilities.selectedLang).toPromise();
   }
 
   get_financialRatioType() {
-    return this.http.get<FinancialRatioType[]>(environment.apiUrl + 'v2/codelists/FinancialRatioType/lang/'
+    return this.http.get<CodeList[]>(environment.apiUrl + 'v2/codelists/FinancialRatioType/lang/'
       + this.utilities.selectedLang).toPromise();
   }
 

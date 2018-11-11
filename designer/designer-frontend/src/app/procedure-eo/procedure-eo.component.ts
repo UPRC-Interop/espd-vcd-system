@@ -16,15 +16,12 @@
 
 import {Component, OnInit} from '@angular/core';
 import {DataService} from '../services/data.service';
-import {ProcedureType} from '../model/procedureType.model';
-import {Country} from '../model/country.model';
 import {FormArray, FormControl, FormGroup, NgForm} from '@angular/forms';
 import {UtilitiesService} from '../services/utilities.service';
-import {ProjectType} from '../model/projectType.model';
-import {EoRoleType} from '../model/eoRoleType.model';
-import {Currency} from '../model/currency.model';
 import {COMMA, ENTER} from '../../../node_modules/@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material';
+import {CodeList} from '../model/codeList.model';
+import {CodelistService} from '../services/codelist.service';
 
 @Component({
   selector: 'app-procedure-eo',
@@ -36,12 +33,6 @@ export class ProcedureEoComponent implements OnInit {
 
   public EOForm: FormGroup;
 
-  countries: Country[] = null;
-  currency: Currency[] = null;
-  procedureTypes: ProcedureType[] = null;
-  projectTypes: ProjectType[] = null;
-  eoRoleTypes: EoRoleType[] = null;
-
   /* CPV chips */
   visible = true;
   selectable = true;
@@ -50,7 +41,9 @@ export class ProcedureEoComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
 
-  constructor(public dataService: DataService, public utilities: UtilitiesService) {
+  constructor(public dataService: DataService,
+              public utilities: UtilitiesService,
+              public codelist: CodelistService) {
 
     this.EOForm = new FormGroup({
       'name': new FormControl(this.dataService.EODetails.name),
@@ -92,51 +85,6 @@ export class ProcedureEoComponent implements OnInit {
     /* OTHER_EO_LOT TENDERED CRITERION lot generation */
     this.utilities.projectLots = this.utilities.createLotList(this.dataService.CADetails.procurementProjectLots);
 
-
-    this.dataService.getCountries()
-      .then(res => {
-        this.countries = res;
-        // console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-
-    this.dataService.getProcedureTypes()
-      .then(res => {
-        this.procedureTypes = res;
-        // console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-
-    this.dataService.getProjectTypes()
-      .then(res => {
-        this.projectTypes = res;
-        // console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-
-    this.dataService.getEORoleTypes()
-      .then(res => {
-        this.eoRoleTypes = res;
-      })
-      .catch(err => {
-          console.log(err);
-        }
-      );
-
-    this.dataService.getCurrency()
-      .then(res => {
-        this.currency = res;
-        // console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
   }
 
 
