@@ -15,6 +15,8 @@
     limitations under the License.
 
 -->
+<!--p>{{req.uuid}}</p-->
+
 <div [formGroup]="form">
   <div>
     <label *ngIf="req.responseDataType=='INDICATOR'" [attr.for]="req.uuid">{{req.description}}</label>
@@ -24,10 +26,12 @@
 
 
 
+
   <!--SELF-CONTAINED: Hide the QUESTION fields if the user is a CA making a Request. Render only the REQUIREMENT and CAPTION fields.
   Don't show the REQUIREMENT fields if the user has the role of EO and creates a new ESPD response from scratch-->
-  <div [ngSwitch]="req.responseDataType" [hidden]="(this.utilities.isCA && req.type === 'QUESTION') || (this.utilities.isEO &&
-  req.type ==='REQUIREMENT' && this.utilities.isCreateResponse) || req.type === 'CAPTION'">
+  <div [ngSwitch]="req.responseDataType" [hidden]="(this.utilities.isCA && req.type === 'QUESTION')
+  || (this.utilities.isEO && req.type ==='REQUIREMENT' && this.utilities.isCreateResponse)
+  || req.type === 'CAPTION'">
     <div *ngSwitchDefault>
       <div *ngIf="req.type === 'CAPTION'">
         <!-- SKIP captions and deal with question and requirement only -->
@@ -232,9 +236,8 @@
     </div>
     <!-- SELF-CONTAINED: LOTS_IDENTIFIER -->
     <div class="lots_identifier" *ngSwitchCase="'LOT_IDENTIFIER'">
-      <mat-selection-list #lots>
-        <mat-list-option *ngFor="let lot of this.utilities.projectLots" [value]="lot"
-                         (click)="pushSelectedLot()">
+      <mat-selection-list [formControlName]="req.uuid">
+        <mat-list-option *ngFor="let lot of this.utilities.projectLots" [value]="lot">
           {{lot}}
         </mat-list-option>
       </mat-selection-list>

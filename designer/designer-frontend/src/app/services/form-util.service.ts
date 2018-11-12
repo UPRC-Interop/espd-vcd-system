@@ -302,7 +302,12 @@ export class FormUtilService {
               req.response.eoidtype = formValues[eoidtypeID.valueOf()];
               req.response.uuid = null;
             } else if (req.responseDataType === 'LOT_IDENTIFIER') {
-              req.response.lots = this.utilities.lotTemplate[req.uuid];
+              // req.response.lots = this.utilities.lotTemplate[req.uuid];
+              if (formValues[req.uuid.valueOf()] === null || formValues[req.uuid.valueOf()] === '' || formValues[req.uuid.valueOf()].length === 0) {
+                req.response.lots = [];
+              } else {
+                req.response.lots = formValues[req.uuid.valueOf()];
+              }
             }
           }
         });
@@ -550,7 +555,18 @@ export class FormUtilService {
                 group[r.uuid + 'evaluationMethodDescription'] = new FormControl(r.response.evaluationMethodDescription);
               }
             }
-            /* SELF-CONTAINED: responseDataType: CODE ---> CpvCodes */
+            /* SELF-CONTAINED: LOT_IDENTIFIER */
+            if (r.responseDataType === 'LOT_IDENTIFIER') {
+              if (r.response.lots !== undefined && r.response.lots !== null) {
+                group[r.uuid] = new FormControl(r.response.lots);
+                this.utilities.renderLotTemplate[r.uuid] = r.response.lots;
+              } else {
+                group[r.uuid] = new FormControl();
+                this.utilities.renderLotTemplate[r.uuid] = [];
+              }
+            }
+
+            /* SELF-CONTAINED: responseDataType: CODE ---> CpvCodes*/
             if (r.responseDataType === 'CODE' && r.responseValuesRelatedArtefact === 'CPVCodes') {
               if (r.response.evidenceURLCode) {
                 // console.log('RENDERING CPVS: ');

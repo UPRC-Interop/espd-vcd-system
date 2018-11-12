@@ -34,7 +34,7 @@
   <mat-horizontal-stepper [linear]="isLinear" #stepper="matHorizontalStepper">
     <mat-step>
       <ng-template matStepLabel>{{'espd.gui.progress.start' | translate}}</ng-template>
-      <app-start></app-start>
+      <app-start [parentStepper]="stepper"></app-start>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>{{'espd.gui.progress.procedure' | translate}}</ng-template>
