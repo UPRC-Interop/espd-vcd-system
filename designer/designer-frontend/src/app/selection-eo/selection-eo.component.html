@@ -175,7 +175,7 @@
             <mat-card>
               <mat-card-content>
                 <span class="weight">One or More Criteria will be weighted: </span>
-                <mat-radio-group name="isGloballyWeighted" [disabled]="this.dataService.isReadOnly()">
+                <mat-radio-group name="isGloballyWeighted" [disabled]="this.dataService.isReadOnly() || (this.utilities.isImport() && this.utilities.isEO)">
                   <mat-radio-button color="primary" name="globalWeight" value="YES"
                                     [checked]="this.utilities.isGloballyWeighted" (change)="handleGlobalWeight(YES)" #YES>
                     {{'espd.gui.yes' | translate}}

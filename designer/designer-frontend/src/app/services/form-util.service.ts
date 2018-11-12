@@ -541,18 +541,30 @@ export class FormUtilService {
                 group[r.uuid + 'evaluationMethodDescription'] = new FormControl();
               } else {
                 if (r.response.indicator) {
-                  group[r.uuid] = new FormControl(true);
+                  group[r.uuid] = new FormControl({
+                    value: true,
+                    disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                  });
                   this.utilities.criterionWeightIndicators[r.uuid] = true;
                   /* if even one criterion's indicator is true then the global indicator is true also */
                   this.utilities.isGloballyWeighted = true;
                 } else {
-                  group[r.uuid] = new FormControl(false);
+                  group[r.uuid] = new FormControl({
+                    value: false,
+                    disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                  });
                   this.utilities.criterionWeightIndicators[r.uuid] = false;
                 }
 
                 // group[r.uuid + 'evaluationMethodType'] = new FormControl(r.response.evaluationMethodType);
-                group[r.uuid + 'weight'] = new FormControl(r.response.weight);
-                group[r.uuid + 'evaluationMethodDescription'] = new FormControl(r.response.evaluationMethodDescription);
+                group[r.uuid + 'weight'] = new FormControl({
+                  value: r.response.weight,
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
+                group[r.uuid + 'evaluationMethodDescription'] = new FormControl({
+                  value: r.response.evaluationMethodDescription,
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
               }
             }
             /* SELF-CONTAINED: LOT_IDENTIFIER */
