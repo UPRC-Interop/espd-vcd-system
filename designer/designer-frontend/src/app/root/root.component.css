@@ -14,26 +14,19 @@
  * limitations under the License.
  */
 .container {
-  width:80%;
-  margin:0 auto;
+  width: 80%;
+  margin: 0 auto;
 }
 
 .columnList {
-  column-count: 2;
-}
-
-ul li {
-  list-style: none;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
   font-size: 1.6em;
-  /*text-align: justify;*/
-  /*margin: 10px;*/
 }
 
-ul li:hover {
-  cursor: pointer;
-}
-
-mat-card{
+mat-card {
   width: 80%;
   margin: 0 auto;
   padding: 20px;
@@ -52,7 +45,7 @@ mat-card-content {
 
 .logo {
   /*display: inline-block;*/
-  width: 650px;
+  width: 70%;
   height: auto;
   /*margin: 0 auto;*/
 }
@@ -64,7 +57,7 @@ mat-card-content {
 }
 
 .EUlogo {
-  width: 450px;
+  width: 60%;
   height: auto;
 }
 
@@ -94,6 +87,34 @@ mat-card-content {
   align-items: center;
 }
 
+@media screen and (max-width: 450px) {
+  #videoplayer {
+    height: 180px;
+    width: 250px;
+  }
+}
+
+@media screen and (max-width: 800px) and (min-width: 450px) {
+  #videoplayer {
+    height: 217px;
+    width: 385px;
+  }
+}
+
+@media screen and (min-width: 800px) and (max-width: 1034px) {
+  #videoplayer {
+    height: 351px;
+    width: 620px;
+  }
+}
+
+@media screen and (min-width: 1034px) {
+  #videoplayer {
+    height: 480px;
+    width: 852px;
+  }
+}
+
 mat-card-subtitle {
   text-align: center;
 }
@@ -113,10 +134,16 @@ iframe {
   height: 80px;
 }
 
-
 .langBlock {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  flex-direction: row;
+  flex-direction: column;
+  padding-left: 25px;
+  padding-right: 25px;
+  text-align: center;
+}
+
+.langBlock:hover {
+  cursor: pointer;
 }

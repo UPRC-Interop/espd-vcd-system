@@ -321,7 +321,7 @@ export class ApicallService {
 
     console.log(TOOPReqJSON);
 
-    return this.http.post<ToopCompanyData>(environment.apiUrl + 'toopDataRequest', TOOPReqJSON).toPromise();
+    return this.http.post<ToopCompanyData>('http://snf-819447.vm.okeanos.grnet.gr:9090/api/toopDataRequest', TOOPReqJSON).toPromise();
   }
 
 
