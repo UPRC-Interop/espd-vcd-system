@@ -18,7 +18,8 @@ import {Injectable} from '@angular/core';
 import {Moment} from 'moment';
 import * as moment from 'moment';
 import {SelectionCriteria} from '../model/selectionCriteria.model';
-import {MatListOption, MatSnackBar} from '@angular/material';
+import {MatListOption, MatSnackBar, MatSelectionList} from '@angular/material';
+
 
 @Injectable({
   providedIn: 'root'
@@ -46,6 +47,7 @@ export class UtilitiesService {
   cpvTemplate = [];
   renderCpvTemplate = [];
   criterionWeightIndicators = [];
+  renderLotTemplate = [];
   cpvString = [];
   type: string;
   selectedLang = 'en';
@@ -125,14 +127,36 @@ export class UtilitiesService {
     return cpvString.split(',');
   }
 
+  lotToSelectedMatListOption(lots: string[], selectedLots: MatSelectionList) {
+    // console.log(selectedLots);
+
+    // for (let i = 0; i < lots.length; i++) {
+    //   console.log('THIS IS TEST');
+    //   console.log(selectedLots.selectedOptions.selected);
+    //   console.log(selectedLots.selectedOptions);
+    // }
+
+    // selectedLots.selectedOptions.selected.map((selected, i) => {
+    //   console.log('selected inside map before: ');
+    //   console.log(selected);
+    //   selected.selected = true;
+    //   console.log('selected inside map after: ');
+    //   return selected.value = lots[i];
+    // });
+    // console.log('THIS IS RESULT OF SELECTED LOTS: ');
+    // console.log(selectedLots);
+    // return selectedLots;
+  }
+
+  isImport(): boolean {
+    return this.isImportReq || this.isImportESPD || this.isReviewESPD;
+  }
+
   // makeDummyESPDRequest(): ESPDRequest {
   //   const json = JSON.parse(this.requestJSON);
   //   return new ESPDRequest(json.cadetails, json.fullCriterionList, json.documentDetails);
   // }
 
-  isImport(): boolean {
-    return this.isImportReq || this.isImportESPD || this.isReviewESPD;
-  }
 
   /* ============================ snackbar ===================================== */
   openSnackBar(message: string, action: string) {

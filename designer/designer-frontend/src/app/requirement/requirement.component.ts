@@ -25,6 +25,7 @@ import {COMMA, ENTER} from '../../../node_modules/@angular/cdk/keycodes';
 import {CodeList} from '../model/codeList.model';
 import {CodelistService} from '../services/codelist.service';
 
+
 @Component({
   selector: 'app-requirement',
   templateUrl: './requirement.component.html',
@@ -40,7 +41,6 @@ export class RequirementComponent implements OnInit, OnChanges {
 
   eoIDType: CodeList[];
   currency: CodeList[];
-
   reqLots: string[] = [];
   cpvCodes: string[] = [];
   isWeighted = false;
@@ -50,6 +50,7 @@ export class RequirementComponent implements OnInit, OnChanges {
   removable = true;
   addOnBlur = true;
   disabled = true;
+
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
   @ViewChild('lots') lots: MatSelectionList;
@@ -93,65 +94,6 @@ export class RequirementComponent implements OnInit, OnChanges {
       }
     }
 
-
-    // this.codelist.getCurrency()
-    //   .then(res => {
-    //     this.codelist.currency = res;
-    //     // console.log(res);
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
-    //
-    //
-    // this.codelist.getCountries()
-    //   .then(res => {
-    //     this.codelist.countries = res;
-    //     // console.log(res);
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
-
-    // if (this.eoIDType !== null && this.eoIDType !== undefined) {
-    //   this.codelist.getEoIDTypes()
-    //     .then(res => {
-    //       this.eoIDType = res;
-    //       // console.log(res);
-    //     })
-    //     .catch(err => {
-    //       console.log(err);
-    //     });
-    // }
-    //
-    // this.codelist.getBidTypes()
-    //   .then(res => {
-    //     this.codelist.bidTypes = res;
-    //     // console.log(res);
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
-    //
-    // this.codelist.getFinancialRatioTypes()
-    //   .then(res => {
-    //     this.codelist.financialRatioTypes = res;
-    //     // console.log(res);
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
-
-    // this.codelist.getEvalutationMethodTypes()
-    //   .then(res => {
-    //     this.codelist.evaluationMethodTypes = res;
-    //     // console.log(res);
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
-
-
     if (this.req.responseDataType === 'INDICATOR') {
       this.form.get(this.req.uuid)
         .valueChanges
@@ -191,14 +133,20 @@ export class RequirementComponent implements OnInit, OnChanges {
 
 
   pushSelectedLot() {
-    if (this.lots.selectedOptions.selected !== undefined) {
-      this.utilities.lotTemplate[this.req.uuid] = this.utilities.createLotListInCriterion(this.lots.selectedOptions.selected);
-      console.log(this.utilities.lotTemplate);
-      // console.log(this.utilities.lotTemplate['270317fa-6790-42ec-8f1a-575d82ed1d63-27']);
-      // this.reqLots = this.utilities.createLotListInCriterion(this.lots.selectedOptions.selected);
-      // console.log(this.reqLots);
+//    if (this.lots.selectedOptions.selected !== undefined) {
+//      this.utilities.lotTemplate[this.req.uuid] = this.utilities.createLotListInCriterion(this.lots.selectedOptions.selected);
+//      console.log(this.utilities.lotTemplate);
+      // console.log(this.lots);
+ //   }
+  }
+
+  importSelectedLots() {
+    if (this.req.responseDataType === 'LOT_IDENTIFIER' && this.utilities.isImport()) {
+      /* test lot import */
+      // this.utilities.lotToSelectedMatListOption(this.reqLots, this.lots);
     }
   }
+
 
   /* CPV Chip handling */
   add(event: MatChipInputEvent): void {
@@ -228,5 +176,8 @@ export class RequirementComponent implements OnInit, OnChanges {
     this.createChips();
   }
 
-
+  onNgModelChange(event: Event) {
+    console.log('MODEL CHANGE for req.uuid: ' + this.req.uuid );
+    console.log(this.utilities.renderLotTemplate[this.req.uuid]);
+  }
 }

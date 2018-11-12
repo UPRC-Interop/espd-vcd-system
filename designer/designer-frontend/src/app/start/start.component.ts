@@ -14,12 +14,13 @@
 /// limitations under the License.
 ///
 
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, NgForm} from '@angular/forms/forms';
 import {ApicallService} from '../services/apicall.service';
 import {DataService} from '../services/data.service';
 import {UtilitiesService} from '../services/utilities.service';
 import {CodelistService} from '../services/codelist.service';
+import {MatStepper} from '@angular/material';
 
 // import {ProcedureType} from "../model/procedureType.model";
 
@@ -41,6 +42,10 @@ export class StartComponent implements OnInit {
   isCreateResponse = false;
   fileToUpload: File[] = [];
   reset = false;
+  isLoading = false;
+
+  @Input()
+  parentStepper: MatStepper;
 
   // procedureTypes:ProcedureType[];
 
@@ -82,6 +87,7 @@ export class StartComponent implements OnInit {
       this.utilities.isImportReq = false;
       this.isReuseESPD = false;
       this.isReviewESPD = false;
+      this.utilities.isImportReq = false;
       this.utilities.isReviewESPD = false;
     } else if (radio.value === 'reuseESPD') {
       this.isCreateNewESPD = false;
@@ -96,6 +102,7 @@ export class StartComponent implements OnInit {
       this.utilities.isImportReq = false;
       this.isReuseESPD = false;
       this.isReviewESPD = true;
+      this.utilities.isImportReq = false;
       this.utilities.isReviewESPD = true;
     }
   }
@@ -145,26 +152,23 @@ export class StartComponent implements OnInit {
   }
 
   onStartSubmit(form: NgForm) {
-    // console.log(form);
-    // form and model reset in case of start
-    this.utilities.isStarted = true;
-
-
-    console.log(this.dataService.isReadOnly());
-    // CA reuses ESPDRequest
-    if (this.isCA) {
-      const role = 'CA';
-      this.dataService.ReuseESPD(this.fileToUpload, form, role);
-    } else if (this.isEO) {
-      const role = 'EO';
-      this.dataService.ReuseESPD(this.fileToUpload, form, role);
-    }
-
-
-    // Start New ESPD
-    this.dataService.startESPD(form);
-
-
+    this.isLoading = true;
+    this.dataService.startESPD(form).then(() => {
+      this.isLoading = false;
+      this.parentStepper.next();
+      this.utilities.isStarted = true;
+    }).catch(() => {
+      this.isLoading = false;
+    });
+    const role = (this.isCA ? 'CA' : 'EO');
+    this.dataService.ReuseESPD(this.fileToUpload, form, role)
+      .then(() => {
+        this.isLoading = false;
+        this.parentStepper.next();
+        this.utilities.isStarted = true;
+      })
+      .catch(() => {
+        this.isLoading = false;
+      });
   }
-
 }
