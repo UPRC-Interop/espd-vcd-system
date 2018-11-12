@@ -36,4 +36,58 @@ ul li:hover {
 mat-card{
   width: 80%;
   margin: 0 auto;
+  padding: 20px;
+}
+
+mat-card-content {
+  margin: 20px auto;
+  padding: 10px;
+}
+
+.logoContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  /*display: inline-block;*/
+  width: 650px;
+  height: auto;
+  /*margin: 0 auto;*/
+}
+
+.EUContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.EUlogo {
+  width: 450px;
+  height: auto;
+}
+
+.text {
+  text-align: justify;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.content-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.langTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+mat-card-subtitle {
+  text-align: center;
 }
