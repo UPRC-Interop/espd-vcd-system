@@ -15,6 +15,8 @@
     limitations under the License.
 
 -->
+<!--p>{{req.uuid}}</p-->
+
 <div [formGroup]="form">
   <div>
     <label *ngIf="req.responseDataType=='INDICATOR'" [attr.for]="req.uuid">{{req.description}}</label>
@@ -24,10 +26,12 @@
 
 
 
+
   <!--SELF-CONTAINED: Hide the QUESTION fields if the user is a CA making a Request. Render only the REQUIREMENT and CAPTION fields.
   Don't show the REQUIREMENT fields if the user has the role of EO and creates a new ESPD response from scratch-->
-  <div [ngSwitch]="req.responseDataType" [hidden]="(this.utilities.isCA && req.type === 'QUESTION') || (this.utilities.isEO &&
-  req.type ==='REQUIREMENT' && this.utilities.isCreateResponse) || req.type === 'CAPTION'">
+  <div [ngSwitch]="req.responseDataType" [hidden]="(this.utilities.isCA && req.type === 'QUESTION')
+  || (this.utilities.isEO && req.type ==='REQUIREMENT' && this.utilities.isCreateResponse)
+  || req.type === 'CAPTION'">
     <div *ngSwitchDefault>
       <div *ngIf="req.type === 'CAPTION'">
         <!-- SKIP captions and deal with question and requirement only -->
@@ -46,11 +50,7 @@
           <input matInput [formControlName]="req.uuid" [id]="req.uuid" >
         </mat-form-field>
       </div>
-
     </div>
-
-
-
     <mat-form-field *ngSwitchCase="'DATE'">
       <label [attr.for]="req.uuid">{{req.description}}</label>
       <br>
@@ -92,7 +92,7 @@
           <br>
           <mat-select [formControlName]="req.uuid" [id]="req.uuid">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let bid of bidTypes" [value]="bid.code">{{bid.name}}</mat-option>
+            <mat-option *ngFor="let bid of codelist.bidTypes" [value]="bid.code">{{bid.name}}</mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field *ngSwitchCase="'FinancialRatioType'">
@@ -100,13 +100,13 @@
           <br>
           <mat-select [formControlName]="req.uuid" [id]="req.uuid">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let type of financialRatioTypes" [value]="type.code">{{type.name}}</mat-option>
+            <mat-option *ngFor="let type of codelist.financialRatioTypes" [value]="type.code">{{type.name}}</mat-option>
           </mat-select>
         </mat-form-field>
         <div *ngSwitchCase="'CPVCodes'">
           <!-- TODO cpvs like the classificationCodes -->
           <mat-form-field class="cpv-chip-list">
-            <mat-chip-list #chipList>
+            <mat-chip-list #chipList [disabled]="disabled">
               <mat-chip color='primary' selected=true *ngFor="let cpv of cpvCodes" [selectable]="selectable"
                         [removable]="removable" (removed)="remove(cpv)">
                 {{cpv}}
@@ -120,9 +120,6 @@
                      (keyup.enter)= 'createChips()'>
             </mat-chip-list>
           </mat-form-field>
-
-
-
         </div>
       </div>
     </div>
@@ -134,7 +131,7 @@
       <br>
       <mat-select  [formControlName]="req.uuid" [id]="req.uuid">
         <mat-option>None</mat-option>
-        <mat-option *ngFor="let country of countries" [value]="country.code">{{country.name}}</mat-option>
+        <mat-option *ngFor="let country of codelist.countries" [value]="country.code">{{country.name}}</mat-option>
       </mat-select>
     </mat-form-field>
 
@@ -148,7 +145,7 @@
       <mat-form-field>
         <mat-select [formControlName]="req.uuid+'currency'" [id]="req.uuid+'currency'">
           <mat-option>None</mat-option>
-          <mat-option *ngFor="let curr of currency" [value]="curr.code">{{curr.code}} ( {{curr.name}} )</mat-option>
+          <mat-option *ngFor="let curr of codelist.currency" [value]="curr.code">{{curr.code}} ( {{curr.name}} )</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
@@ -233,21 +230,18 @@
       <mat-form-field>
         <mat-select [formControlName]="req.uuid+'eoidtype'" [id]="req.uuid+'eoidtype'">
           <mat-option>None</mat-option>
-          <mat-option *ngFor="let type of eoIDTypes" [value]="type.code">{{type.code}} ( {{type.name}} )</mat-option>
+          <mat-option *ngFor="let type of codelist.eoIDType" [value]="type.code">{{type.code}} ( {{type.name}} )</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
     <!-- SELF-CONTAINED: LOTS_IDENTIFIER -->
     <div class="lots_identifier" *ngSwitchCase="'LOT_IDENTIFIER'">
-      <mat-selection-list #lots>
-        <mat-list-option *ngFor="let lot of this.utilities.projectLots" [value]="lot"
-                         (click)="pushSelectedLot()">
+      <mat-selection-list [formControlName]="req.uuid">
+        <mat-list-option *ngFor="let lot of this.utilities.projectLots" [value]="lot">
           {{lot}}
         </mat-list-option>
       </mat-selection-list>
     </div>
-
-
   </div>
 </div>
 

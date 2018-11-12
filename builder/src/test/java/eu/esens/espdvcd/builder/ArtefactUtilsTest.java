@@ -43,7 +43,7 @@ public class ArtefactUtilsTest {
     private File selfContainedRequestV2File;
 
     @Before
-    public void setUp() {
+    public void setUp() throws Exception{
         espdRequestRegulatedV1_0_2 = ArtefactUtilsTest.class.getResourceAsStream("/espd-request.xml");
         Assert.assertNotNull(espdRequestRegulatedV1_0_2);
         espdRequestRegulatedV2_0_1 = ArtefactUtilsTest.class.getResourceAsStream("/espd-request-v2_2018-05-30a.xml");
@@ -53,7 +53,7 @@ public class ArtefactUtilsTest {
         espdResponseRegulatedV2_0_2 = ArtefactUtilsTest.class.getResourceAsStream("/REGULATED-ESPD-Response_2.0.2.xml");
         Assert.assertNotNull(espdResponseRegulatedV2_0_2);
 
-        regulatedRequestV2 = new File(getClass().getClassLoader().getResource("REGULATED-ESPD-Request_2.0.2.xml").getFile());
+        regulatedRequestV2 = new File(getClass().getClassLoader().getResource("REGULATED-ESPD-Request_2.0.2.xml").toURI());
         Assert.assertNotNull(regulatedRequestV2);
 
         // SELFCONTAINED_ESPD-Request.V2.0.2.xml
@@ -61,7 +61,7 @@ public class ArtefactUtilsTest {
         selfContainedRequestV2IS = getClass().getClassLoader().getResourceAsStream("SELFCONTAINED-ESPD-Request_2.0.2.xml");
         Assert.assertNotNull(selfContainedRequestV2IS);
 
-        selfContainedRequestV2File = new File(getClass().getClassLoader().getResource("SELFCONTAINED-ESPD-Request_2.0.2.xml").getFile());
+        selfContainedRequestV2File = new File(getClass().getClassLoader().getResource("SELFCONTAINED-ESPD-Request_2.0.2.xml").toURI());
         Assert.assertNotNull(selfContainedRequestV2File);
     }
 

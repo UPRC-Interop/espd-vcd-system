@@ -58,9 +58,9 @@ task runWebApp(type: Exec) {
     inputs.dir "$webappDir"
     group = BasePlugin.BUILD_GROUP
     if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")) {
-        commandLine "ng.cmd", "serve", "--aot"
+        commandLine "ng.cmd", "serve"
     } else {
-        commandLine "ng", "serve", "--aot"
+        commandLine "ng", "serve"
     }
 }
 

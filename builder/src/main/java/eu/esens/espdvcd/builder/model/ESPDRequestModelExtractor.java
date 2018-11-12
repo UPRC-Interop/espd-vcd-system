@@ -81,6 +81,7 @@ public class ESPDRequestModelExtractor implements ModelExtractor {
         modelRequest.setCADetails(extractCADetails(qarType.getContractingParty(),
                 qarType.getContractFolderID(),
                 qarType.getProcedureCode(),
+                qarType.getProcurementProject(),
                 qarType.getAdditionalDocumentReference()));
 
         // apply global weighting

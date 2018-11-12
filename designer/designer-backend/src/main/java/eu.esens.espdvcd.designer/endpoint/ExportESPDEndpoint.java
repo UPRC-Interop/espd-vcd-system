@@ -15,7 +15,6 @@
  */
 package eu.esens.espdvcd.designer.endpoint;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
 import eu.esens.espdvcd.designer.deserialiser.RequirementDeserialiser;
@@ -31,23 +30,15 @@ import eu.esens.espdvcd.model.RegulatedESPDRequest;
 import eu.esens.espdvcd.model.RegulatedESPDResponse;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.schema.EDMVersion;
-import spark.Request;
-import spark.Response;
 import spark.Service;
 
 import java.io.IOException;
 import java.text.MessageFormat;
 
 public class ExportESPDEndpoint extends Endpoint {
-    private static final String ESPD_RESPONSE = "espd-response";
-    private static final String ESPD_REQUEST = "espd-request";
-    private static final String PDF_SUFFIX = ".pdf";
-    private static final String HTML_SUFFIX = ".html";
-    private static final String XML_SUFFIX = ".xml";
     private static final String LANGUAGE = "language";
     private final ExportESPDService service;
-    private final String DESERIALIZATION_ERROR = "Oops, the provided JSON document was not valid and could not be converted to an object. Did you provide the correct format? \nThis could help you:\n",
-            LOGGER_DESERIALIZATION_ERROR = "Error occurred in ESPDEndpoint while converting a JSON object to XML. ";
+    private final String LOGGER_DESERIALIZATION_ERROR = "Error occurred in ESPDEndpoint while converting a JSON object to XML.";
 
     public ExportESPDEndpoint(EDMVersion version) {
         MAPPER.registerModule(new SimpleModule().addDeserializer(Requirement.class, new RequirementDeserialiser(version)));
@@ -72,174 +63,88 @@ public class ExportESPDEndpoint extends Endpoint {
                 return Errors.artefactInWrongFormatError();
             }), JsonUtil.json());
 
-            spark.post("/request/xml", this::handleESPDXmlRequest);
+            spark.post("/:artefactType/:exportType",
+                    (rq, rsp) -> {
+                        ExportType exportType;
+                        try {
+                            exportType = ExportType.valueOf(rq.params("exportType").toUpperCase());
+                        } catch (IllegalArgumentException e) {
+                            rsp.type("application/json");
+                            return JsonUtil.toJson(Errors.standardError(404, "Requested export type not found."));
+                        }
 
-            spark.post("/request/xml/", this::handleESPDXmlRequest);
+                        EULanguageCodeEnum languageCode;
+                        try {
+                            languageCode = EULanguageCodeEnum.valueOf(rq.queryParams(LANGUAGE).toUpperCase());
+                        } catch (IllegalArgumentException e) {
+                            rsp.status(404);
+                            return JsonUtil.toJson(Errors.standardError(404, "Requested language not found."));
+                        }
 
-            spark.post("/request/pdf", this::handleESPDPdfRequest);
-
-            spark.post("/request/pdf/", this::handleESPDPdfRequest);
-
-            spark.post("/request/html", this::handleESPDHtmlRequest);
-
-            spark.post("/request/html/", this::handleESPDHtmlRequest);
-
-            spark.post("/response/xml", this::handleESPDXmlResponse);
-
-            spark.post("/response/xml/", this::handleESPDXmlResponse);
-
-            spark.post("/response/pdf", this::handleESPDPdfResponse);
-
-            spark.post("/response/pdf/", this::handleESPDPdfResponse);
-
-            spark.post("/response/html", this::handleESPDHtmlResponse);
-
-            spark.post("/response/html/", this::handleESPDHtmlResponse);
+                        String artefactType = rq.params("artefactType");
+                        if (rq.contentType().contains("application/json")) {
+                            try {
+                                rsp.type("application/octet-stream");
+                                rsp.header("Content-Disposition", String.format(
+                                        "attachment; filename=\"%s.%s\";", artefactType.toLowerCase(), exportType.name().toLowerCase()));
+                                if (artefactType.equalsIgnoreCase("request")) {
+                                    //Handle request
+                                    ESPDRequest document;
+                                    document = MAPPER.readValue(rq.body(), RegulatedESPDRequest.class);
+                                    switch (exportType) {
+                                        case PDF:
+                                            return service.exportESPDRequestPdfAsInputStream(document, languageCode);
+                                        case XML:
+                                            return service.exportESPDRequestAsInputStream(document);
+                                        case HTML:
+                                            return service.exportESPDRequestHtmlAsInputStream(document, languageCode);
+                                        default:
+                                            throw new IllegalArgumentException(
+                                                    MessageFormat.format("No export operation defined for type ''{0}''.", exportType.name()));
+                                    }
+                                } else if (artefactType.equalsIgnoreCase("response")) {
+                                    //Handle response
+                                    ESPDResponse document;
+                                    document = MAPPER.readValue(rq.body(), RegulatedESPDResponse.class);
+                                    switch (exportType) {
+                                        case PDF:
+                                            return service.exportESPDResponsePdfAsInputStream(document, languageCode);
+                                        case XML:
+                                            return service.exportESPDResponseAsInputStream(document);
+                                        case HTML:
+                                            return service.exportESPDResponseHtmlAsInputStream(document, languageCode);
+                                        default:
+                                            throw new IllegalArgumentException(
+                                                    MessageFormat.format("No export operation defined for type ''{0}''.", exportType.name()));
+                                    }
+                                } else {
+                                    rsp.status(400);
+                                    return JsonUtil.toJson(Errors.standardError(400, "You need to specify if the ESPD is a request or response."));
+                                }
+                            } catch (IOException e) {
+                                rsp.status(400);
+                                LOGGER.severe(LOGGER_DESERIALIZATION_ERROR + e.getMessage());
+                                rsp.type("application/json");
+                                rsp.header("Content-Disposition", "");
+                                return JsonUtil.toJson(Errors.artefactDeserialisationError(e.getMessage()));
+                            } catch (ValidationException e) {
+                                LOGGER.severe(e.getMessage());
+                                rsp.status(406);
+                                rsp.type("application/json");
+                                rsp.header("Content-Disposition", "");
+                                return JsonUtil.toJson(Errors.notAcceptableError(e.getMessage()));
+                            }
+                        } else {
+                            LOGGER.warning("Got unexpected content-type: " + rq.contentType());
+                            rsp.status(406);
+                            rsp.type("application/json");
+                            return JsonUtil.toJson(Errors.unacceptableContentType());
+                        }
+                    });
         });
     }
 
-    private Object handleESPDXmlRequest(Request request, Response response) throws JsonProcessingException {
-        return handleESPDRequest(request, response, ExportType.XML);
-    }
-
-    private Object handleESPDHtmlRequest(Request request, Response response) throws JsonProcessingException {
-        return handleESPDRequest(request, response, ExportType.HTML);
-    }
-
-    private Object handleESPDPdfRequest(Request request, Response response) throws JsonProcessingException {
-        return handleESPDRequest(request, response, ExportType.PDF);
-    }
-
-    private Object handleESPDHtmlResponse(Request request, Response response) throws JsonProcessingException {
-        return handleESPDResponse(request, response, ExportType.HTML);
-    }
-
-    private Object handleESPDPdfResponse(Request request, Response response) throws JsonProcessingException {
-        return handleESPDResponse(request, response, ExportType.PDF);
-    }
-
-    private Object handleESPDXmlResponse(Request request, Response response) throws JsonProcessingException {
-        return handleESPDResponse(request, response, ExportType.XML);
-    }
-
-    private Object handleESPDRequest(Request rq, Response rsp, ExportType exportType) throws JsonProcessingException {
-        if (rq.contentType().contains("application/json")) {
-            ESPDRequest document;
-            EULanguageCodeEnum languageCode;
-            try {
-                document = MAPPER.readValue(rq.body(), RegulatedESPDRequest.class);
-                languageCode = EULanguageCodeEnum.valueOf(rq.queryParams(LANGUAGE).toUpperCase());
-            } catch (IOException e) {
-                rsp.status(400);
-                LOGGER.severe(LOGGER_DESERIALIZATION_ERROR + e.getMessage());
-                e.printStackTrace();
-                rsp.header("Content-Type", "application/json");
-                return JsonUtil.toJson(Errors.artefactDeserialisationError(e.getMessage()));
-            }
-            rsp.header("Content-Type", "application/octet-stream");
-            rsp.header("Content-Disposition", MessageFormat.format("attachment; filename=\"{0}\";", getRequestFilename(exportType)));
-
-            try {
-                return exportESPDRequest(exportType, document, languageCode);
-
-            } catch (ValidationException e) {
-                LOGGER.severe(e.getMessage());
-                rsp.status(406);
-                rsp.header("Content-Type", "application/json");
-                return JsonUtil.toJson(Errors.notAcceptableError(e.getMessage()));
-            }
-        } else {
-            LOGGER.severe("Got unexpected content-type: " + rq.contentType());
-            rsp.status(406);
-            rsp.header("Content-Type", "application/json");
-            return JsonUtil.toJson(Errors.unacceptableContentType());
-        }
-    }
-
-    private Object exportESPDRequest(ExportType exportType, ESPDRequest document, EULanguageCodeEnum languageCodeEnum) throws ValidationException {
-        switch (exportType) {
-            case PDF:
-                return service.exportESPDRequestPdfAsInputStream(document, languageCodeEnum);
-            case XML:
-                return service.exportESPDRequestAsInputStream(document);
-            case HTML:
-                return service.exportESPDRequestHtmlAsInputStream(document, languageCodeEnum);
-            default:
-                throw new IllegalArgumentException(MessageFormat.format("No export operation defined for type ''{0}''.", exportType.name()));
-        }
-    }
-
-    private Object handleESPDResponse(Request rq, Response rsp, ExportType exportType) throws JsonProcessingException {
-        if (rq.contentType().contains("application/json")) {
-            ESPDResponse document;
-            EULanguageCodeEnum languageCode;
-            try {
-                document = MAPPER.readValue(rq.body(), RegulatedESPDResponse.class);
-                languageCode = EULanguageCodeEnum.valueOf(rq.queryParams(LANGUAGE).toUpperCase());
-            } catch (IOException e) {
-                rsp.status(400);
-                rsp.header("Content-Type", "application/json");
-                LOGGER.severe(LOGGER_DESERIALIZATION_ERROR + e.getMessage());
-                return JsonUtil.toJson(Errors.artefactDeserialisationError(e.getMessage()));
-            }
-            rsp.header("Content-Type", "application/octet-stream");
-            rsp.header("Content-Disposition", MessageFormat.format("attachment; filename=\"{0}\";", getReponseFilename(exportType)));
-            try {
-                return exportESPDResponse(exportType, document, languageCode);
-            } catch (ValidationException e) {
-                LOGGER.severe(e.getMessage());
-                rsp.status(406);
-                rsp.header("Content-Type", "application/json");
-                return JsonUtil.toJson(Errors.notAcceptableError(e.getMessage()));
-            }
-        } else {
-            LOGGER.severe("Got unexpected content-type: " + rq.contentType());
-            rsp.status(406);
-            rsp.header("Content-Type", "application/json");
-            return JsonUtil.toJson(Errors.unacceptableContentType());
-        }
-    }
-
-    private Object exportESPDResponse(ExportType exportType, ESPDResponse document, EULanguageCodeEnum languageCodeEnum) throws ValidationException {
-        switch (exportType) {
-            case PDF:
-                return service.exportESPDResponsePdfAsInputStream(document, languageCodeEnum);
-            case XML:
-                return service.exportESPDResponseAsInputStream(document);
-            case HTML:
-                return service.exportESPDResponseHtmlAsInputStream(document, languageCodeEnum);
-            default:
-                throw new IllegalArgumentException(MessageFormat.format("No export operation defined for type ''{0}''.", exportType.name()));
-        }
-    }
-
-    private String getRequestFilename(ExportType exportType) {
-        return MessageFormat.format("{0}{1}", ESPD_REQUEST, getSuffix(exportType));
-    }
-
-    private String getReponseFilename(ExportType exportType) {
-        return MessageFormat.format("{0}{1}", ESPD_RESPONSE, getSuffix(exportType));
-    }
-
-    private String getSuffix(ExportType exportType) {
-        String suffix;
-        switch (exportType) {
-            case PDF:
-                suffix = PDF_SUFFIX;
-                break;
-            case XML:
-                suffix = XML_SUFFIX;
-                break;
-            case HTML:
-                suffix = HTML_SUFFIX;
-                break;
-            default:
-                throw new IllegalArgumentException(MessageFormat.format("No suffix defined for type ''{0}''.", exportType.name()));
-        }
-        return suffix;
-    }
-
-    enum ExportType {
+    private enum ExportType {
         PDF, HTML, XML
     }
 }

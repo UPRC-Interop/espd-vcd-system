@@ -14,9 +14,10 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 
---><app-welcome></app-welcome>
+-->
 
-<form #f="ngForm">
+  <app-welcome></app-welcome>
+  <form  #f="ngForm">
 
     <mat-card>
       <mat-card-title translate>espd.init.who.are.you</mat-card-title>
@@ -81,29 +82,30 @@
       <!-- REGULATED: You can choose the version only if the qualificationApplication type is REGULATED -->
       <div class="version" *ngIf="this.utilities.qualificationApplicationType === 'regulated'">
         <mat-card-title>Select Version</mat-card-title>
-    <mat-card-content>
-      <mat-radio-group name="versions" ngModel>
-        <mat-radio-button color="primary"
-                          name="version"
-                          value="v1"
-                          (change)="handleVersionSelection(createV1)"
-                          #createV1>Create v1
-        </mat-radio-button>
-        <mat-radio-button color="primary"
-                          name="version"
-                          value="v2"
-                          (change)="handleVersionSelection(createV2)"
-                          #createV2>Create v2
-        </mat-radio-button>
-      </mat-radio-group>
-    </mat-card-content></div>
+        <mat-card-content>
+          <mat-radio-group name="versions" ngModel>
+            <mat-radio-button color="primary"
+                              name="version"
+                              value="v1"
+                              (change)="handleVersionSelection(createV1)"
+                              #createV1>Create v1
+            </mat-radio-button>
+            <mat-radio-button color="primary"
+                              name="version"
+                              value="v2"
+                              (change)="handleVersionSelection(createV2)"
+                              #createV2>Create v2
+            </mat-radio-button>
+          </mat-radio-group>
+        </mat-card-content>
+      </div>
 
       <mat-card-title translate>espd.init.where.are.you.from.ca</mat-card-title>
       <mat-card-content>
         <mat-form-field>
           <mat-select name="CACountry" placeholder="{{'espd.init.select.country' | translate}}" ngModel>
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let country of countries" [value]="country.code">{{country.name}}</mat-option>
+            <mat-option *ngFor="let country of codelist.countries" [value]="country.code">{{country.name}}</mat-option>
           </mat-select>
         </mat-form-field>
       </mat-card-content>
@@ -145,10 +147,10 @@
       </mat-card-content>
     </mat-card>
 
-    <mat-card *ngIf="(isImportESPD || isReviewESPD)&& isEO">
-    <mat-card-title translate>espd.init.upload.document</mat-card-title>
-    <mat-card-content>
-      <label for="fileUploadEO" translate>espd.init.upload.request.response</label>
+    <mat-card *ngIf="(isImportESPD || isReviewESPD) && isEO">
+      <mat-card-title translate>espd.init.upload.document</mat-card-title>
+      <mat-card-content>
+        <label for="fileUploadEO" translate>espd.init.upload.request.response</label>
         <br>
         <input type="file" id="fileUploadEO"
                name="importEO"
@@ -180,29 +182,30 @@
       <!-- REGULATED: You can choose the version only if the qualificationApplication type is REGULATED -->
       <div class="version" *ngIf="this.utilities.qualificationApplicationType === 'regulated'">
         <mat-card-title>Select Version</mat-card-title>
-    <mat-card-content>
-      <mat-radio-group name="versions" ngModel>
-        <mat-radio-button color="primary"
-                          name="version"
-                          value="v1"
-                          (change)="handleVersionSelection(createV1)"
-                          #createV1>Create v1
-        </mat-radio-button>
-        <mat-radio-button color="primary"
-                          name="version"
-                          value="v2"
-                          (change)="handleVersionSelection(createV2)"
-                          #createV2>Create v2
-        </mat-radio-button>
-      </mat-radio-group>
-    </mat-card-content></div>
+        <mat-card-content>
+          <mat-radio-group name="versions" ngModel>
+            <mat-radio-button color="primary"
+                              name="version"
+                              value="v1"
+                              (change)="handleVersionSelection(createV1)"
+                              #createV1>Create v1
+            </mat-radio-button>
+            <mat-radio-button color="primary"
+                              name="version"
+                              value="v2"
+                              (change)="handleVersionSelection(createV2)"
+                              #createV2>Create v2
+            </mat-radio-button>
+          </mat-radio-group>
+        </mat-card-content>
+      </div>
 
       <mat-card-title translate>espd.init.where.are.you.from.eo</mat-card-title>
       <mat-card-content>
         <mat-form-field>
           <mat-select name="EOCountry" placeholder="{{'espd.init.select.country' | translate}}" ngModel>
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let country of countries" [value]="country.code">{{country.name}}</mat-option>
+            <mat-option *ngFor="let country of codelist.countries" [value]="country.code">{{country.name}}</mat-option>
           </mat-select>
         </mat-form-field>
       </mat-card-content>
@@ -216,11 +219,9 @@
       </mat-card>
     </ng-container>
 
-    <button type="button" mat-raised-button color="primary" (click)="onStartSubmit(f)" matStepperNext>
-    {{ 'espd.gui.next' | translate}}
-  </button>
-
+    <button type="button" mat-raised-button color="primary" (click)="onStartSubmit(f)">{{'espd.gui.next' | translate}}</button>
   </form>
+<ngx-loading [show]="isLoading" [config]="{ backdropBorderRadius: '3px', fullScreenBackdrop: true }"></ngx-loading>
 
 
 

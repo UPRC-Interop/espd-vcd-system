@@ -41,21 +41,22 @@ import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionPropertyGro
 import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionPropertyType;
 import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionType;
 import eu.espd.schema.v2.pre_award.commonbasic.ConfidentialityLevelCodeType;
-import eu.espd.schema.v2.pre_award.commonbasic.ProcedureCodeType;
 import eu.espd.schema.v2.pre_award.commonbasic.ValidatedCriterionPropertyIDType;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public interface ModelExtractor {
 
+    Logger LOGGER = Logger.getLogger(ModelExtractor.class.getCanonicalName());
+
     default CADetails extractCADetails(ContractingPartyType caParty,
                                        ContractFolderIDType contractFolderId,
                                        List<DocumentReferenceType> additionalDocumentReferenceList) {
-
         CADetails cd = new CADetails();
 
         if (caParty != null && caParty.getParty() != null) {
@@ -188,6 +189,7 @@ public interface ModelExtractor {
     default CADetails extractCADetails(List<eu.espd.schema.v2.pre_award.commonaggregate.ContractingPartyType> caParty,
                                        eu.espd.schema.v2.pre_award.commonbasic.ContractFolderIDType contractFolderId,
                                        eu.espd.schema.v2.pre_award.commonbasic.ProcedureCodeType procedureCodeType,
+                                       eu.espd.schema.v2.pre_award.commonaggregate.ProcurementProjectType procurementProjectType,
                                        List<eu.espd.schema.v2.pre_award.commonaggregate.DocumentReferenceType> additionalDocumentReferenceList) {
 
         CADetails cd = new CADetails();
@@ -274,6 +276,34 @@ public interface ModelExtractor {
             cd.setProcurementProcedureType(procedureCodeType.getValue());
         }
 
+        if (procurementProjectType != null) {
+
+            // No need to set that here
+            // if (!procurementProjectType.getName().isEmpty()
+            //        && procurementProjectType.getName().get(0).getValue() != null) {
+            //    cd.setProcurementProcedureTitle(procurementProjectType.getName().get(0).getValue());
+            // }
+
+            // No need to set that here
+            // if (!procurementProjectType.getDescription().isEmpty()
+            //        && procurementProjectType.getDescription().get(0).getValue() != null) {
+            //    cd.setProcurementProcedureDesc(procurementProjectType.getDescription().get(0).getValue());
+            // }
+
+            // Project Type
+            if (procurementProjectType.getProcurementTypeCode() != null
+                    && procurementProjectType.getProcurementTypeCode().getValue() != null) {
+                cd.setProjectType(procurementProjectType.getProcurementTypeCode().getValue());
+            }
+
+            // CPV codes
+            cd.getClassificationCodes().addAll(procurementProjectType.getMainCommodityClassification().stream()
+                    .filter(classificationType -> classificationType.getItemClassificationCode() != null
+                            && classificationType.getItemClassificationCode().getValue() != null)
+                    .map(classificationType -> classificationType.getItemClassificationCode().getValue())
+                    .collect(Collectors.toList()));
+        }
+
         if (!additionalDocumentReferenceList.isEmpty()) {
 
             // Find an entry with TED_CN Value
@@ -358,7 +388,8 @@ public interface ModelExtractor {
 
     }
 
-    default ServiceProviderDetails extractServiceProviderDetails(List<eu.espd.schema.v2.pre_award.commonaggregate.ContractingPartyType> sppt) {
+    default ServiceProviderDetails extractServiceProviderDetails
+            (List<eu.espd.schema.v2.pre_award.commonaggregate.ContractingPartyType> sppt) {
         try {
             return BuilderFactory.EDM_V2
                     .createRegulatedModelBuilder()
@@ -484,7 +515,8 @@ public interface ModelExtractor {
         return rg;
     }
 
-    default LegislationReference extractDefaultLegalReferenceV2(List<eu.espd.schema.v2.pre_award.commonaggregate.LegislationType> lrList) {
+    default LegislationReference extractDefaultLegalReferenceV2
+            (List<eu.espd.schema.v2.pre_award.commonaggregate.LegislationType> lrList) {
 
         //First check if there is an EU_* jurisdiction
         LegislationReference lr;
@@ -506,7 +538,8 @@ public interface ModelExtractor {
         return lr;
     }
 
-    default LegislationReference extractEULegalReferenceV2(List<eu.espd.schema.v2.pre_award.commonaggregate.LegislationType> lrList) {
+    default LegislationReference extractEULegalReferenceV2
+            (List<eu.espd.schema.v2.pre_award.commonaggregate.LegislationType> lrList) {
         return lrList.stream()
                 .filter(lr -> {
                     String jl = lr.getJurisdictionLevel().stream()
@@ -527,7 +560,8 @@ public interface ModelExtractor {
                 .orElse(null);
     }
 
-    default LegislationReference extractNationalLegalReferenceV2(List<eu.espd.schema.v2.pre_award.commonaggregate.LegislationType> lrList) {
+    default LegislationReference extractNationalLegalReferenceV2
+            (List<eu.espd.schema.v2.pre_award.commonaggregate.LegislationType> lrList) {
         return lrList.stream()
                 .filter(lr -> {
                     String jl = lr.getJurisdictionLevel().stream()
@@ -737,14 +771,28 @@ public interface ModelExtractor {
                     break;
 
                 case URL:
-                    if (rqType.getExpectedDescription() != null
-                            && rqType.getExpectedDescription().getValue() != null) {
+                    // https://github.com/ESPD/ESPD-EDM/issues/181
+                    if (rqType.getExpectedID() != null
+                            && rqType.getExpectedID().getValue() != null) {
 
                         URLResponse urlResp = new URLResponse();
-                        urlResp.setUrl(rqType.getExpectedDescription().getValue());
+                        urlResp.setUrl(rqType.getExpectedID().getValue());
                         applyValidatedCriterionPropertyID(rqType.getID().getValue(), urlResp);
                         applyConfidentialityLevelCode(ConfidentialityLevelEnum.PUBLIC.name(), urlResp);
                         rq.setResponse(urlResp);
+                    }
+                    break;
+
+                case INDICATOR:
+                    // https://github.com/ESPD/ESPD-EDM/issues/182
+                    if (rqType.getExpectedCode() != null
+                            && rqType.getExpectedCode().getValue() != null) {
+
+                        IndicatorResponse indicatorResp = new IndicatorResponse();
+                        indicatorResp.setIndicator(rqType.getExpectedCode().getValue().equals("TRUE"));
+                        applyValidatedCriterionPropertyID(rqType.getID().getValue(), indicatorResp);
+                        applyConfidentialityLevelCode(ConfidentialityLevelEnum.PUBLIC.name(), indicatorResp);
+                        rq.setResponse(indicatorResp);
                     }
                     break;
 

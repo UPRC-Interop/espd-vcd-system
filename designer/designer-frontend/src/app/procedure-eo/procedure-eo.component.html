@@ -99,7 +99,7 @@
       <mat-form-field>
         <mat-select name="CACountry" placeholder="{{'espd.part1.country' | translate}}" [(ngModel)]="dataService.selectedCountry" [disabled]="this.dataService.isReadOnly()">
           <mat-option>None</mat-option>
-          <mat-option *ngFor="let country of countries" [value]="country.code">{{country.name}}</mat-option>
+          <mat-option *ngFor="let country of codelist.countries" [value]="country.code">{{country.name}}</mat-option>
         </mat-select>
       </mat-form-field>
     </mat-expansion-panel>
@@ -136,7 +136,7 @@
           <mat-select placeholder="Type of Procedure" name="typeOfProcedure"
                       [(ngModel)]="dataService.CADetails.procurementProcedureType">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let proc of procedureTypes" [value]="proc.code">{{proc.name}}</mat-option>
+            <mat-option *ngFor="let proc of codelist.procedureTypes" [value]="proc.code">{{proc.name}}</mat-option>
           </mat-select>
         </mat-form-field>
         <!-- SELF-CONTAINED: Bid Type - Object of Contracts -->
@@ -144,7 +144,7 @@
           <mat-select placeholder="Objects of Contracts: " name="projectType"
                       [(ngModel)]="dataService.CADetails.projectType">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let project of projectTypes" [value]="project.code">{{project.name}}</mat-option>
+            <mat-option *ngFor="let project of codelist.projectTypes" [value]="project.code">{{project.name}}</mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field class="cpv-chip-list">
@@ -183,7 +183,7 @@
             </mat-form-field>
             <div class="postalAddress" formGroupName='postalAddress'>
               <mat-form-field class="eoField">
-                <input formControlName="addressLine1" matInput placeholder="{{'espd.part1.street.and. Num' | translate}}">
+                <input formControlName="addressLine1" matInput placeholder="{{'espd.part1.street.and. num' | translate}}">
               </mat-form-field>
               <mat-form-field class="eoField">
                 <input formControlName="postCode" matInput placeholder="{{'espd.part1.postcode' | translate}}">
@@ -195,7 +195,7 @@
                 <mat-select formControlName="countryCode"
                             placeholder="{{'espd.part1.country' | translate}}" [(ngModel)]="dataService.selectedEOCountry">
                   <mat-option>None</mat-option>
-                  <mat-option *ngFor="let country of countries" [value]="country.code">{{country.name}}</mat-option>
+                  <mat-option *ngFor="let country of codelist.countries" [value]="country.code">{{country.name}}</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
@@ -209,15 +209,11 @@
                 <mat-select formControlName="eoRole"
                             placeholder="Role: ">
                   <mat-option>None</mat-option>
-                  <mat-option *ngFor="let role of eoRoleTypes" [value]="role.code">{{role.name}}</mat-option>
+                  <mat-option *ngFor="let role of codelist.eoRoleTypes" [value]="role.code">{{role.name}}</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
-
-
           </div>
-
-
           <div class="eo2">
             <div class="contactingDetails" formGroupName="contactingDetails">
               <mat-form-field class="eoField">
@@ -268,7 +264,7 @@
             <mat-form-field>
               <mat-select formControlName="currency" matInput placeholder="Currency: ">
                 <mat-option>None</mat-option>
-                <mat-option *ngFor="let curr of currency" [value]="curr.code">{{curr.code}} ( {{curr.name}} )</mat-option>
+                <mat-option *ngFor="let curr of codelist.currency" [value]="curr.code">{{curr.code}} ( {{curr.name}} )</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
@@ -343,7 +339,7 @@
                       <mat-select formControlName="countryCode"
                                   placeholder="{{'espd.part1.country' | translate}}">
                         <mat-option>None</mat-option>
-                        <mat-option *ngFor="let country of countries" [value]="country.code">{{country.name}}</mat-option>
+                        <mat-option *ngFor="let country of codelist.countries" [value]="country.code">{{country.name}}</mat-option>
                       </mat-select>
                     </mat-form-field>
                   </div>

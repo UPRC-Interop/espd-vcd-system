@@ -17,12 +17,11 @@
 import {Injectable} from '@angular/core';
 import {RequirementGroup} from '../model/requirementGroup.model';
 import {EoRelatedCriterion} from '../model/eoRelatedCriterion.model';
-import {FormArray, FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup} from '@angular/forms';
 import {RequirementResponse} from '../model/requirement-response.model';
 import {Evidence} from '../model/evidence.model';
 import {EvidenceIssuer} from '../model/evidenceIssuer.model';
 import * as moment from 'moment';
-import {DataService} from './data.service';
 import {ApicallService} from './apicall.service';
 import {ExclusionCriteria} from '../model/exclusionCriteria.model';
 import {SelectionCriteria} from '../model/selectionCriteria.model';
@@ -303,7 +302,12 @@ export class FormUtilService {
               req.response.eoidtype = formValues[eoidtypeID.valueOf()];
               req.response.uuid = null;
             } else if (req.responseDataType === 'LOT_IDENTIFIER') {
-              req.response.lots = this.utilities.lotTemplate[req.uuid];
+              // req.response.lots = this.utilities.lotTemplate[req.uuid];
+              if (formValues[req.uuid.valueOf()] === null || formValues[req.uuid.valueOf()] === '' || formValues[req.uuid.valueOf()].length === 0) {
+                req.response.lots = [];
+              } else {
+                req.response.lots = formValues[req.uuid.valueOf()];
+              }
             }
           }
         });
@@ -536,25 +540,57 @@ export class FormUtilService {
                 group[r.uuid + 'weight'] = new FormControl();
                 group[r.uuid + 'evaluationMethodDescription'] = new FormControl();
               } else {
-                group[r.uuid] = new FormControl(r.response.indicator);
+                if (r.response.indicator) {
+                  group[r.uuid] = new FormControl(true);
+                  this.utilities.criterionWeightIndicators[r.uuid] = true;
+                  /* if even one criterion's indicator is true then the global indicator is true also */
+                  this.utilities.isGloballyWeighted = true;
+                } else {
+                  group[r.uuid] = new FormControl(false);
+                  this.utilities.criterionWeightIndicators[r.uuid] = false;
+                }
+
                 // group[r.uuid + 'evaluationMethodType'] = new FormControl(r.response.evaluationMethodType);
                 group[r.uuid + 'weight'] = new FormControl(r.response.weight);
                 group[r.uuid + 'evaluationMethodDescription'] = new FormControl(r.response.evaluationMethodDescription);
               }
             }
-
             /* SELF-CONTAINED: LOT_IDENTIFIER */
-            // if (r.responseDataType === 'LOT_IDENTIFIER') {
-            //   /* */
-            // }
+            if (r.responseDataType === 'LOT_IDENTIFIER') {
+              if (r.response.lots !== undefined && r.response.lots !== null) {
+                group[r.uuid] = new FormControl(r.response.lots);
+                this.utilities.renderLotTemplate[r.uuid] = r.response.lots;
+              } else {
+                group[r.uuid] = new FormControl();
+                this.utilities.renderLotTemplate[r.uuid] = [];
+              }
+            }
 
             /* SELF-CONTAINED: responseDataType: CODE ---> CpvCodes*/
             if (r.responseDataType === 'CODE' && r.responseValuesRelatedArtefact === 'CPVCodes') {
               if (r.response.evidenceURLCode) {
+                // console.log('RENDERING CPVS: ');
                 this.utilities.renderCpvTemplate[r.uuid] = this.utilities.stringToCpvCode(r.response.evidenceURLCode.toString());
+                // console.log(this.utilities.renderCpvTemplate[r.uuid]);
+                // console.log(this.utilities.renderCpvTemplate);
               }
             }
             if (r.responseDataType === 'CODE' && this.utilities.qualificationApplicationType === 'regulated') {
+              if (r.response.evidenceURLCode) {
+                if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
+                  group[r.uuid] = new FormControl({
+                    value: '',
+                    disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                  });
+                } else {
+                  group[r.uuid] = new FormControl({
+                    value: r.response.evidenceURLCode,
+                    disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                  });
+                }
+              }
+            }
+            if (r.responseDataType === 'CODE' && this.utilities.qualificationApplicationType === 'selfcontained') {
               if (r.response.evidenceURLCode) {
                 if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
                   group[r.uuid] = new FormControl({

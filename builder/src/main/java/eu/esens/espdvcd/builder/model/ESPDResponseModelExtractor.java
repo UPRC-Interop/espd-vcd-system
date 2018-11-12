@@ -118,6 +118,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
         modelResponse.setCADetails(extractCADetails(qarType.getContractingParty(),
                 qarType.getContractFolderID(),
                 qarType.getProcedureCode(),
+                qarType.getProcurementProject(),
                 qarType.getAdditionalDocumentReference()));
 
         // Apply global weighting
@@ -144,14 +145,16 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
 
         // Economic Operator Details
         if (!qarType.getEconomicOperatorParty().isEmpty() && !qarType.getProcurementProjectLot().isEmpty()) {
-            modelResponse.setEODetails(extractEODetails(qarType.getEconomicOperatorParty().get(0), qarType.getProcurementProjectLot().get(0)));
+            modelResponse.setEODetails(extractEODetails(qarType.getEconomicOperatorParty().get(0)
+                    , qarType.getProcurementProjectLot().get(0)
+                    , qarType.getEconomicOperatorGroupName())); // This is for SELF-CONTAINED
         } else {
             applyEODetailsStructure(modelResponse);
         }
 
         // Create a Map with key -> ValidatedCriterionPropertyID , value -> TenderingCriterionResponseType in order to use it
         // during responses extraction process
-        final Map<String, TenderingCriterionResponseType> tcrTypeMap = qarType.getTenderingCriterionResponse().stream()
+        final Map<String, TenderingCriterionResponseType> responseTypeMap = qarType.getTenderingCriterionResponse().stream()
                 .collect(Collectors.toMap(tcrType -> tcrType.getValidatedCriterionPropertyID().getValue(), Function.identity()));
 
         // Create a Map with key -> Criterion ID, value -> TenderingCriterion in order to use it during
@@ -165,9 +168,16 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                         .forEach(rg -> extractAllRequirements(rg, null) // extract all Requirements of current RequirementGroup
                                 .forEach(rq -> { // loop thought all of the extracted Requirements
 
-                                    if (tcrTypeMap.containsKey(rq.getID())) { // try to find a response for that requirement
-                                        rq.setResponse(extractResponse(tcrTypeMap.get(rq.getID()), rq.getResponseDataType(),
+                                    if (responseTypeMap.containsKey(rq.getID())) { // try to find a response for that requirement
+                                        rq.setResponse(extractResponse(responseTypeMap.get(rq.getID()), rq.getResponseDataType(),
                                                 criterionTypeMap.get(sc.getID())));
+                                    }
+
+                                    // Apply Criterion Level Weighting data
+                                    if (rq.getResponseDataType() == ResponseTypeEnum.WEIGHT_INDICATOR) {
+                                        WeightIndicatorResponse weightIndResp = new WeightIndicatorResponse();
+                                        applyCriterionWeightingData(weightIndResp, criterionTypeMap.get(sc.getID()));
+                                        rq.setResponse(weightIndResp);
                                     }
 
                                 })));
@@ -323,7 +333,6 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 }
                 applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), indicatorResp);
                 applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), indicatorResp);
-                // indicatorResp.setResponseType(theType);
                 return indicatorResp;
 
             case DATE:
@@ -334,7 +343,6 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 }
                 applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), dateResp);
                 applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), dateResp);
-                // dateResp.setResponseType(theType);
                 return dateResp;
 
             case DESCRIPTION:
@@ -345,7 +353,6 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 }
                 applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), descriptionResp);
                 applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), descriptionResp);
-                // descriptionResp.setResponseType(theType);
                 return descriptionResp;
 
             case QUANTITY:
@@ -356,7 +363,6 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 }
                 applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), quantityResp);
                 applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), quantityResp);
-                // quantityResp.setResponseType(theType);
                 return quantityResp;
 
             case QUANTITY_YEAR:
@@ -367,7 +373,6 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 }
                 applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), quantityYearResp);
                 applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), quantityYearResp);
-                // quantityYearResp.setResponseType(theType);
                 return quantityYearResp;
 
             case QUANTITY_INTEGER:
@@ -389,7 +394,6 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 }
                 applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), amountResp);
                 applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), amountResp);
-                // amountResp.setResponseType(theType);
                 return amountResp;
 
             case CODE_COUNTRY:
@@ -400,18 +404,16 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 }
                 applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), codeCountryResp);
                 applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), codeCountryResp);
-                // codeCountryResp.setResponseType(theType);
                 return codeCountryResp;
 
             case PERCENTAGE:
                 PercentageResponse percentageResp = new PercentageResponse();
-                if (responseType.getResponseValue().get(0).getResponseNumeric() != null &&
-                        responseType.getResponseValue().get(0).getResponseNumeric().getValue() != null) {
-                    percentageResp.setPercentage(responseType.getResponseValue().get(0).getResponseNumeric().getValue());
+                if (responseType.getResponseValue().get(0).getResponseQuantity() != null &&
+                        responseType.getResponseValue().get(0).getResponseQuantity().getValue() != null) {
+                    percentageResp.setPercentage(responseType.getResponseValue().get(0).getResponseQuantity().getValue());
                 }
                 applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), percentageResp);
                 applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), percentageResp);
-                // percentageResp.setResponseType(theType);
                 return percentageResp;
 
             case PERIOD:
@@ -433,7 +435,6 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 }
                 applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), periodResp);
                 applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), periodResp);
-                // periodResp.setResponseType(theType);
                 return periodResp;
 
             case CODE:
@@ -444,11 +445,9 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 }
                 applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), codeResp);
                 applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), codeResp);
-                // codeResp.setResponseType(theType);
                 return codeResp;
 
             case EVIDENCE_IDENTIFIER:
-                // in regulated v1 response this maps to EVIDENCE_URL, CODE, DESCRIPTION
                 EvidenceIdentifierResponse evidenceIdeResp = new EvidenceIdentifierResponse();
                 if (!responseType.getEvidenceSupplied().isEmpty()
                         && responseType.getEvidenceSupplied().get(0).getID() != null
@@ -458,7 +457,6 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 }
                 applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), evidenceIdeResp);
                 applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), evidenceIdeResp);
-                // evidenceIdeResp.setResponseType(theType);
                 return evidenceIdeResp;
 
             case IDENTIFIER:
@@ -471,7 +469,6 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 }
                 applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), identifierResp);
                 applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), identifierResp);
-                // identifierResp.setResponseType(theType);
                 return identifierResp;
 
             case URL:
@@ -484,16 +481,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 }
                 applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), urlResp);
                 applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), urlResp);
-                // urlResp.setResponseType(theType);
                 return urlResp;
-
-            case WEIGHT_INDICATOR:
-                WeightIndicatorResponse weightIndResp = new WeightIndicatorResponse();
-                applyCriterionWeightingData(weightIndResp, criterionType);
-                applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), weightIndResp);
-                applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), weightIndResp);
-                // weightIndResp.setResponseType(theType);
-                return weightIndResp;
 
             case LOT_IDENTIFIER:
                 LotIdentifierResponse lotsIdeResp = new LotIdentifierResponse();
@@ -506,7 +494,6 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 });
                 applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), lotsIdeResp);
                 applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), lotsIdeResp);
-                // lotsIdeResp.setResponseType(theType);
                 return lotsIdeResp;
 
             case ECONOMIC_OPERATOR_IDENTIFIER:
@@ -523,7 +510,6 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 }
                 applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), eoIdeResp);
                 applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), eoIdeResp);
-                // eoIdeResp.setResponseType(theType);
                 return eoIdeResp;
 
             default:
@@ -838,7 +824,8 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
     }
 
     public EODetails extractEODetails(eu.espd.schema.v2.pre_award.commonaggregate.EconomicOperatorPartyType eoPartyType,
-                                      eu.espd.schema.v2.pre_award.commonaggregate.ProcurementProjectLotType pplType) {
+                                      eu.espd.schema.v2.pre_award.commonaggregate.ProcurementProjectLotType pplType,
+                                      eu.espd.schema.v2.pre_award.commonbasic.EconomicOperatorGroupNameType eoGroupNameType) {
 
         final EODetails eoDetails = new EODetails();
 
@@ -865,6 +852,35 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
 //
 //                }
 
+            }
+
+            // Economic Operator Group Name
+            if (eoGroupNameType != null
+                    && eoGroupNameType.getValue() != null) {
+                eoDetails.setEOGroupName(eoGroupNameType.getValue());
+            }
+
+            // Employee quantity
+            if (!eoPartyType.getQualifyingParty().isEmpty()
+                    && eoPartyType.getQualifyingParty().get(0).getEmployeeQuantity() != null
+                    && eoPartyType.getQualifyingParty().get(0).getEmployeeQuantity().getValue() != null) {
+
+                eoDetails.setEmployeeQuantity(eoPartyType.getQualifyingParty().get(0)
+                        .getEmployeeQuantity().getValue().intValueExact());
+            }
+
+            // General turnover
+            if (!eoPartyType.getQualifyingParty().isEmpty()
+                    && !eoPartyType.getQualifyingParty().get(0).getFinancialCapability().isEmpty()
+                    && eoPartyType.getQualifyingParty().get(0).getFinancialCapability().get(0).getValueAmount() != null
+                    && eoPartyType.getQualifyingParty().get(0).getFinancialCapability().get(0).getValueAmount().getValue() != null
+                    && eoPartyType.getQualifyingParty().get(0).getFinancialCapability().get(0).getValueAmount().getCurrencyID() != null) {
+
+                eoDetails.setGeneralTurnover(new AmountResponse());
+                eoDetails.getGeneralTurnover().setAmount(eoPartyType.getQualifyingParty().get(0)
+                        .getFinancialCapability().get(0).getValueAmount().getValue());
+                eoDetails.getGeneralTurnover().setCurrency(eoPartyType.getQualifyingParty().get(0)
+                        .getFinancialCapability().get(0).getValueAmount().getCurrencyID());
             }
 
             // (3) Path: .../cac:EconomicOperatorParty/cac:Party

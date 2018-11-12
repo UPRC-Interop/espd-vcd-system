@@ -14,16 +14,13 @@
 /// limitations under the License.
 ///
 
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, NgForm} from '@angular/forms/forms';
 import {ApicallService} from '../services/apicall.service';
 import {DataService} from '../services/data.service';
-import {Country} from '../model/country.model';
 import {UtilitiesService} from '../services/utilities.service';
-import {Cadetails} from '../model/caDetails.model';
-import {EoDetails} from '../model/eoDetails.model';
-import {PostalAddress} from '../model/postalAddress.model';
-import {ContactingDetails} from '../model/contactingDetails.model';
+import {CodelistService} from '../services/codelist.service';
+import {MatStepper} from '@angular/material';
 
 // import {ProcedureType} from "../model/procedureType.model";
 
@@ -35,7 +32,7 @@ import {ContactingDetails} from '../model/contactingDetails.model';
 })
 export class StartComponent implements OnInit {
 
-  countries: Country[];
+  // countries: CodeList[];
   isCA = false;
   isEO = false;
   isCreateNewESPD = false;
@@ -45,22 +42,20 @@ export class StartComponent implements OnInit {
   isCreateResponse = false;
   fileToUpload: File[] = [];
   reset = false;
+  isLoading = false;
+
+  @Input()
+  parentStepper: MatStepper;
 
   // procedureTypes:ProcedureType[];
 
-  constructor(public dataService: DataService, private APIService: ApicallService, public utilities: UtilitiesService) {
+  constructor(public dataService: DataService,
+              private APIService: ApicallService,
+              public utilities: UtilitiesService,
+              public codelist: CodelistService) {
   }
 
   ngOnInit() {
-    this.dataService.getCountries()
-      .then(res => {
-        this.countries = res;
-        // console.log("this is from start component"); console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-
 
   }
 
@@ -89,20 +84,25 @@ export class StartComponent implements OnInit {
     if (radio.value === 'createNewESPD') {
       this.isCreateNewESPD = true;
       this.utilities.isCreateNewESPD = true;
+      this.utilities.isImportReq = false;
       this.isReuseESPD = false;
       this.isReviewESPD = false;
+      this.utilities.isImportReq = false;
       this.utilities.isReviewESPD = false;
     } else if (radio.value === 'reuseESPD') {
       this.isCreateNewESPD = false;
       this.utilities.isCreateNewESPD = false;
+      this.utilities.isImportReq = true;
       this.isReuseESPD = true;
       this.isReviewESPD = false;
       this.utilities.isReviewESPD = false;
     } else if (radio.value === 'reviewESPD') {
       this.isCreateNewESPD = false;
       this.utilities.isCreateNewESPD = false;
+      this.utilities.isImportReq = false;
       this.isReuseESPD = false;
       this.isReviewESPD = true;
+      this.utilities.isImportReq = false;
       this.utilities.isReviewESPD = true;
     }
   }
@@ -152,26 +152,23 @@ export class StartComponent implements OnInit {
   }
 
   onStartSubmit(form: NgForm) {
-    // console.log(form);
-    // form and model reset in case of start
-    this.utilities.isStarted = true;
-
-
-    console.log(this.dataService.isReadOnly());
-    // CA reuses ESPDRequest
-    if (this.isCA) {
-      const role = 'CA';
-      this.dataService.ReuseESPD(this.fileToUpload, form, role);
-    } else if (this.isEO) {
-      const role = 'EO';
-      this.dataService.ReuseESPD(this.fileToUpload, form, role);
-    }
-
-
-    // Start New ESPD
-    this.dataService.startESPD(form);
-
-
+    this.isLoading = true;
+    this.dataService.startESPD(form).then(() => {
+      this.isLoading = false;
+      this.parentStepper.next();
+      this.utilities.isStarted = true;
+    }).catch(() => {
+      this.isLoading = false;
+    });
+    const role = (this.isCA ? 'CA' : 'EO');
+    this.dataService.ReuseESPD(this.fileToUpload, form, role)
+      .then(() => {
+        this.isLoading = false;
+        this.parentStepper.next();
+        this.utilities.isStarted = true;
+      })
+      .catch(() => {
+        this.isLoading = false;
+      });
   }
-
 }

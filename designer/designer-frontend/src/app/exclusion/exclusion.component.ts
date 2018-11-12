@@ -14,12 +14,8 @@
 /// limitations under the License.
 ///
 
-import {Component, Input, OnInit} from '@angular/core';
-import {ApicallService} from '../services/apicall.service';
-import {ExclusionCriteria} from '../model/exclusionCriteria.model';
-import {LegislationReference} from '../model/legislationReference.model';
+import {Component, OnInit} from '@angular/core';
 import {DataService} from '../services/data.service';
-import {NgForm} from '@angular/forms/forms';
 
 @Component({
   selector: 'app-exclusion',

@@ -16,6 +16,7 @@
 package eu.esens.espdvcd.builder.schema.v2;
 
 import eu.esens.espdvcd.codelist.enums.EOIndustryClassificationCodeEnum;
+import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.EODetails;
 import eu.esens.espdvcd.model.ESPDRequestDetails;
@@ -63,8 +64,17 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
         }
 
         qarType.getContractingParty().add(extractContractingPartyType(modelResponse.getCADetails()));
+        // Economic Operator Details
         qarType.getProcurementProjectLot().add(extractProcurementProjectLot(modelResponse.getEODetails()));
 
+        // Economic Operator Group Name (This is in EODetails)
+        if (modelResponse.getEODetails().getEOGroupName() != null) {
+            qarType.setEconomicOperatorGroupName(new EconomicOperatorGroupNameType());
+            qarType.getEconomicOperatorGroupName().setValue((modelResponse
+                    .getEODetails().getEOGroupName()));
+        }
+
+        // Service Provider Details
         qarType.getContractingParty().get(0).getParty().getServiceProviderParty()
                 .add(extractServiceProviderPartyType(modelResponse.getServiceProviderDetails()));
 
@@ -86,17 +96,22 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
 
         qarType.getEconomicOperatorParty().add(extractEODetails(modelResponse.getEODetails()));
 
-        // create a map with key = Criterion ID, value = TenderingCriterion in order to use it during weighting
-        // responses extraction process
+        /*
+        create a map with key = Criterion ID, value = TenderingCriterion
+        in order to use it during responses extraction process
+         */
         Map<String, TenderingCriterionType> criterionTypeMap = qarType.getTenderingCriterion().stream()
                 .collect(Collectors.toMap(criterionType -> criterionType.getID().getValue(), Function.identity()));
 
+        // Responses extraction
         qarType.getTenderingCriterionResponse().addAll(extractAllTenderingCriterionResponses(modelResponse, criterionTypeMap));
 
+        // Evidences extraction
         qarType.getEvidence().addAll(modelResponse.getEvidenceList().stream()
                 .map(ev -> extractEvidenceType(ev))
                 .collect(Collectors.toList()));
 
+        // Additional Document Reference extraction
         if (modelResponse.getESPDRequestDetails() != null) {
             qarType.getAdditionalDocumentReference().add(extractESPDRequestDetails(modelResponse.getESPDRequestDetails()));
         }
@@ -117,6 +132,15 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
             qarType.getProcurementProjectLot().addAll(createProcurementProjectLotType(modelResponse
                             .getDocumentDetails().getQualificationApplicationType() // REGULATED or SELF-CONTAINED
                     , modelResponse.getCADetails().getProcurementProjectLots()));    // Number of lots
+            // Procurement Project (only in SELF-CONTAINED)
+            if (modelResponse.getDocumentDetails().getQualificationApplicationType()
+                    == QualificationApplicationTypeEnum.SELFCONTAINED) {
+
+                qarType.setProcurementProject(createProcurementProjectType(modelResponse.getCADetails().getProcurementProcedureTitle()
+                        , modelResponse.getCADetails().getProcurementProcedureDesc()
+                        , modelResponse.getCADetails().getProjectType()              // Procurement typeCode
+                        , modelResponse.getCADetails().getClassificationCodes()));   // CPV codes
+            }
         }
         // Procedure Code
         if (modelResponse.getCADetails().getProcurementProcedureType() != null) {
@@ -130,12 +154,13 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
         return qarType;
     }
 
-    public List<TenderingCriterionResponseType> extractAllTenderingCriterionResponses(final ESPDResponse response,
+    public List<TenderingCriterionResponseType> extractAllTenderingCriterionResponses(final ESPDResponse modelResponse,
                                                                                       final Map<String, TenderingCriterionType> criterionTypeMap) {
-        List<TenderingCriterionResponseType> tcrTypeList = new ArrayList<>();
-        response.getFullCriterionList().forEach(sc -> tcrTypeList.addAll(extractAllTenderingCriterionResponses(sc.getRequirementGroups(),
-                criterionTypeMap.get(sc.getID()))));
-        return tcrTypeList;
+        List<TenderingCriterionResponseType> responseTypeList = new ArrayList<>();
+        modelResponse.getFullCriterionList()
+                .forEach(sc -> responseTypeList.addAll(extractAllTenderingCriterionResponses(sc.getRequirementGroups()
+                        , criterionTypeMap.get(sc.getID()))));
+        return responseTypeList;
     }
 
     public List<TenderingCriterionResponseType> extractAllTenderingCriterionResponses(final List<RequirementGroup> rgList,
@@ -153,6 +178,12 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
                     if (rq.getResponse() != null) {
                         rq.getResponse().setValidatedCriterionPropertyID(rq.getID());
                     }
+
+                    if (rq.getResponseDataType() == ResponseTypeEnum.WEIGHT_INDICATOR) {
+                        WeightIndicatorResponse weightIndResp = (WeightIndicatorResponse) rq.getResponse();
+                        applyTenderingCriterionWeightingData(weightIndResp, criterionType);
+                    }
+
                     return extractTenderingCriterionResponse(rq.getResponse(), rq.getResponseDataType(), criterionType);
                 })
                 .collect(Collectors.toList());
@@ -236,9 +267,9 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
         return evType;
     }
 
-    public EconomicOperatorPartyType extractEODetails(EODetails eod) {
+    public EconomicOperatorPartyType extractEODetails(EODetails eoDetails) {
 
-        if (eod == null) {
+        if (eoDetails == null) {
             return null;
         }
 
@@ -247,86 +278,107 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
         eoPartyType.getQualifyingParty().get(0).setParty(new PartyType());
         eoPartyType.setParty(new PartyType());
 
-        String icc = eod.isSmeIndicator() ? EOIndustryClassificationCodeEnum.SME.name()
+        // SME
+        String sme = eoDetails.isSmeIndicator() ? EOIndustryClassificationCodeEnum.SME.name()
                 : EOIndustryClassificationCodeEnum.LARGE.name();
-        eoPartyType.getParty().setIndustryClassificationCode(createIndustryClassificationCodeType(icc));
+        eoPartyType.getParty().setIndustryClassificationCode(createIndustryClassificationCodeType(sme));
 
+        // Employee quantity
+        if (eoDetails.getEmployeeQuantity() > 0) {
+            eoPartyType.getQualifyingParty().get(0)
+                    .setEmployeeQuantity(new EmployeeQuantityType());
+            eoPartyType.getQualifyingParty().get(0)
+                    .getEmployeeQuantity().setValue(BigDecimal.valueOf(eoDetails.getEmployeeQuantity()));
+        }
 
-        if (eod.getEoRole() != null) {
+        // General turnover
+        if (eoDetails.getGeneralTurnover() != null
+                && eoDetails.getGeneralTurnover().getAmount() != null
+                && eoDetails.getGeneralTurnover().getCurrency() != null) {
+            eoPartyType.getQualifyingParty().get(0).getFinancialCapability().add(new CapabilityType());
+            eoPartyType.getQualifyingParty().get(0).getFinancialCapability().get(0)
+                    .setValueAmount(new ValueAmountType());
+            eoPartyType.getQualifyingParty().get(0).getFinancialCapability().get(0)
+                    .getValueAmount().setValue(eoDetails.getGeneralTurnover().getAmount());
+            eoPartyType.getQualifyingParty().get(0).getFinancialCapability().get(0)
+                    .getValueAmount().setCurrencyID(eoDetails.getGeneralTurnover().getCurrency());
+        }
+
+        if (eoDetails.getEoRole() != null) {
             eoPartyType.setEconomicOperatorRole(new EconomicOperatorRoleType());
             eoPartyType.getEconomicOperatorRole().setRoleCode(new RoleCodeType());
             eoPartyType.getEconomicOperatorRole().getRoleCode().setListID("EORoleType");
             eoPartyType.getEconomicOperatorRole().getRoleCode().setListAgencyName("DG GROW (European Commission)");
             eoPartyType.getEconomicOperatorRole().getRoleCode().setListAgencyID("EU-COM-GROW");
             eoPartyType.getEconomicOperatorRole().getRoleCode().setListVersionID("2.0.2");
-            eoPartyType.getEconomicOperatorRole().getRoleCode().setValue(eod.getEoRole().name());
+            eoPartyType.getEconomicOperatorRole().getRoleCode().setValue(eoDetails.getEoRole().name());
         }
 
-        if (eod.getID() != null) {
+        if (eoDetails.getID() != null) {
             PartyIdentificationType pit = new PartyIdentificationType();
             pit.setID(new IDType());
-            pit.getID().setValue(eod.getID());
+            pit.getID().setValue(eoDetails.getID());
             pit.getID().setSchemeAgencyID("EU-COM-GROW");
             eoPartyType.getParty().getPartyIdentification().add(pit);
         }
 
-        if (eod.getName() != null) {
+        if (eoDetails.getName() != null) {
             PartyNameType pnt = new PartyNameType();
             pnt.setName(new NameType());
-            pnt.getName().setValue(eod.getName());
+            pnt.getName().setValue(eoDetails.getName());
             eoPartyType.getParty().getPartyName().add(pnt);
         }
 
-        if (eod.getElectronicAddressID() != null) {
+        if (eoDetails.getElectronicAddressID() != null) {
             EndpointIDType eid = new EndpointIDType();
             eid.setSchemeID("ISO/IEC 9834-8:2008 - 4UUID");
             eid.setSchemeAgencyID("EU-COM-GROW");
-            eid.setValue(eod.getElectronicAddressID());
+            eid.setValue(eoDetails.getElectronicAddressID());
             eoPartyType.getParty().setEndpointID(eid);
         }
 
-        if (eod.getWebSiteURI() != null) {
+        if (eoDetails.getWebSiteURI() != null) {
             WebsiteURIType wsuri = new WebsiteURIType();
-            wsuri.setValue(eod.getWebSiteURI());
+            wsuri.setValue(eoDetails.getWebSiteURI());
             eoPartyType.getParty().setWebsiteURI(wsuri);
         }
 
-        if (eod.getPostalAddress() != null) {
+        if (eoDetails.getPostalAddress() != null) {
             AddressType at = new AddressType();
 
             at.setStreetName(new StreetNameType());
-            at.getStreetName().setValue(eod.getPostalAddress().getAddressLine1());
+            at.getStreetName().setValue(eoDetails.getPostalAddress().getAddressLine1());
 
             at.setCityName(new CityNameType());
-            at.getCityName().setValue(eod.getPostalAddress().getCity());
+            at.getCityName().setValue(eoDetails.getPostalAddress().getCity());
 
             at.setPostalZone(new PostalZoneType());
-            at.getPostalZone().setValue(eod.getPostalAddress().getPostCode());
+            at.getPostalZone().setValue(eoDetails.getPostalAddress().getPostCode());
 
             at.setCountry(new CountryType());
-            at.getCountry().setIdentificationCode(createISOCountryIdCodeType(eod.getPostalAddress().getCountryCode()));
+            at.getCountry().setIdentificationCode(createISOCountryIdCodeType(eoDetails.getPostalAddress().getCountryCode()));
 
             eoPartyType.getParty().setPostalAddress(at);
         }
 
-        if (eod.getContactingDetails() != null) {
+        if (eoDetails.getContactingDetails() != null) {
             ContactType ct = new ContactType();
             ct.setName(new NameType());
-            ct.getName().setValue(eod.getContactingDetails().getContactPointName());
+            ct.getName().setValue(eoDetails.getContactingDetails().getContactPointName());
 
             ct.setTelephone(new TelephoneType());
-            ct.getTelephone().setValue(eod.getContactingDetails().getTelephoneNumber());
+            ct.getTelephone().setValue(eoDetails.getContactingDetails().getTelephoneNumber());
 
             ct.setElectronicMail(new ElectronicMailType());
-            ct.getElectronicMail().setValue(eod.getContactingDetails().getEmailAddress());
+            ct.getElectronicMail().setValue(eoDetails.getContactingDetails().getEmailAddress());
 
             ct.setTelefax(new TelefaxType());
-            ct.getTelefax().setValue(eod.getContactingDetails().getFaxNumber());
+            ct.getTelefax().setValue(eoDetails.getContactingDetails().getFaxNumber());
 
             eoPartyType.getParty().setContact(ct);
         }
 
-        eod.getNaturalPersons().forEach(np -> {
+        eoDetails.getNaturalPersons().forEach(np -> {
 
             PowerOfAttorneyType poa = new PowerOfAttorneyType();
 
@@ -416,7 +468,6 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
                                                                              final TenderingCriterionType criterionType) {
 
         TenderingCriterionResponseType tcrType = new TenderingCriterionResponseType();
-        // ResponseValueType rvType = new ResponseValueType();
         EvidenceSuppliedType evsType = new EvidenceSuppliedType();
 
         if (response == null) {
@@ -433,8 +484,6 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
 
         tcrType.setID(createDefaultIDType(UUID.randomUUID().toString()));
         tcrType.getID().setSchemeID("ISO/IEC 9834-8:2008 - 4UUID");
-        // rvType.setID(createDefaultIDType(UUID.randomUUID().toString()));
-        // rvType.getID().setSchemeID("ISO/IEC 9834-8:2008 - 4UUID");
 
         switch (respType) {
             case DESCRIPTION:
@@ -593,14 +642,14 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
                 tcrType.getResponseValue().add(urlRvType);
                 return tcrType;
 
-            case WEIGHT_INDICATOR:
-                ResponseValueType weightIndRvType = createResponseValueType();
-                WeightIndicatorResponse weightIndResp = (WeightIndicatorResponse) response;
-                applyTenderingCriterionWeightingData(weightIndResp, criterionType);
-                // Indicator
-                weightIndRvType.setResponseIndicator(createResponseIndicatorType(weightIndResp.isIndicator()));
-                tcrType.getResponseValue().add(weightIndRvType);
-                return tcrType;
+//            case WEIGHT_INDICATOR:
+//                ResponseValueType weightIndRvType = createResponseValueType();
+//                WeightIndicatorResponse weightIndResp = (WeightIndicatorResponse) response;
+//                applyTenderingCriterionWeightingData(weightIndResp, criterionType);
+//                // Indicator
+//                weightIndRvType.setResponseIndicator(createResponseIndicatorType(weightIndResp.isIndicator()));
+//                tcrType.getResponseValue().add(weightIndRvType);
+//                return tcrType;
 
             case LOT_IDENTIFIER:
                 LotIdentifierResponse lotIdeResp = (LotIdentifierResponse) response;

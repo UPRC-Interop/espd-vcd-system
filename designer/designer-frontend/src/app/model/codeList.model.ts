@@ -1,4 +1,4 @@
-export class WeightingType {
+export class CodeList {
   code: string;
   name: string;
 }
