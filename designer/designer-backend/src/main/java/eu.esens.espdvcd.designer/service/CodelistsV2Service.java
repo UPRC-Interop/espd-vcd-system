@@ -39,14 +39,13 @@ public enum CodelistsV2Service implements CodelistsService {
         if (CODELISTS_MAP.containsKey(codelist + ".eng"))
             return CODELISTS_MAP.get(codelist + ".eng");
         else {
-            Map<String, String> theCodelistMap;
+            Map<String, String> theCodelistMap = CodelistsV2.valueOf(codelist).getDataMap();
             if (codelist.equalsIgnoreCase("LanguageCodeEU")) {
-                theCodelistMap = new HashMap<>();
-                theCodelistMap.put("EN", "English (en)");
-                theCodelistMap.put("EL", "Ελληνικά (el)");
-            } else
-                theCodelistMap = CodelistsV2.valueOf(codelist).getDataMap();
-
+                Map<String, String> myMap = new HashMap<>();
+                myMap.put("EN", theCodelistMap.getOrDefault("EN", "FAIL"));
+                myMap.put("EL", theCodelistMap.getOrDefault("EL", "FAIL"));
+                theCodelistMap = myMap;
+            }
             List<CodelistItem> theCodelistList = new ArrayList<>(theCodelistMap.size());
             putToList(theCodelistMap, theCodelistList);
             CODELISTS_MAP.putIfAbsent(codelist, theCodelistList);
@@ -65,13 +64,14 @@ public enum CodelistsV2Service implements CodelistsService {
         if (CODELISTS_MAP.containsKey(codelist + '.' + language))
             return CODELISTS_MAP.get(codelist + '.' + language);
         else {
-            Map<String, String> theCodelistMap;
+            Map<String, String> theCodelistMap = CodelistsV2.valueOf(codelist).getDataMap(language);
             if (codelist.equalsIgnoreCase("LanguageCodeEU")) {
-                theCodelistMap = new HashMap<>();
-                theCodelistMap.put("EN", "English (en)");
-                theCodelistMap.put("EL", "Ελληνικά (el)");
-            } else
-                theCodelistMap = CodelistsV2.valueOf(codelist).getDataMap(language);
+                Map<String, String> myMap = new HashMap<>();
+                myMap.put("EN", theCodelistMap.getOrDefault("EN", "FAIL"));
+                myMap.put("EL", theCodelistMap.getOrDefault("EL", "FAIL"));
+                theCodelistMap = myMap;
+            }
+
             List<CodelistItem> theCodelistList = new ArrayList<>(theCodelistMap.size());
             putToList(theCodelistMap, theCodelistList);
             CODELISTS_MAP.putIfAbsent(codelist + '.' + language, theCodelistList);
