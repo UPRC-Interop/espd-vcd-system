@@ -18,6 +18,7 @@ package eu.esens.espdvcd.builder.schema.v2;
 import eu.esens.espdvcd.codelist.enums.ProfileExecutionIDEnum;
 import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
 import eu.esens.espdvcd.codelist.enums.RequirementTypeEnum;
+import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
@@ -793,6 +794,7 @@ public interface SchemaExtractorV2 {
                     break;
 
                 case CODE:
+                case INDICATOR: // https://github.com/ESPD/ESPD-EDM/issues/182
                     String code = ((EvidenceURLCodeResponse) rq.getResponse()).getEvidenceURLCode();
                     if (code != null && !code.isEmpty()) {
                         rqType.setExpectedCode(new ExpectedCodeType());
@@ -818,6 +820,12 @@ public interface SchemaExtractorV2 {
                         } else {
                             LOGGER.log(Level.WARNING, "Requirement's: " + rq.getID() + " ResponseValuesRelatedArtefact is null ");
                         }
+
+                        if (rq.getResponseDataType() == ResponseTypeEnum.INDICATOR) {
+                            rqType.getExpectedCode().setListID("IndicatorType");
+                            rqType.getExpectedCode().setListAgencyID("EU-COM-OP");
+                        }
+
                         rqType.getExpectedCode().setListVersionID("1.0");
                         rqType.getExpectedCode().setListAgencyID("EU-COM-GROW");
                         rqType.getExpectedCode().setValue(code);

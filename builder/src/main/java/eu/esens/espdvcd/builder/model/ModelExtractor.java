@@ -705,6 +705,7 @@ public interface ModelExtractor {
                     break;
 
                 case CODE:
+                case INDICATOR: // https://github.com/ESPD/ESPD-EDM/issues/182
                     if (rqType.getExpectedCode() != null
                             && rqType.getExpectedCode().getValue() != null) {
 
