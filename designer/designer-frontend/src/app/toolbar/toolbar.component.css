@@ -84,10 +84,6 @@ ul li a:active {
   select {
     display: block;
   }
-
-  #lastBar {
-    display: block;
-  }
 }
 
 .container {
