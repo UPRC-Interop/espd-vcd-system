@@ -111,6 +111,17 @@ export class CodelistService {
         );
     }
 
+    if (this.weightingType === null) {
+      this.getWeightingType()
+        .then(res => {
+          this.weightingType = res;
+        })
+        .catch(err => {
+            console.log(err);
+          }
+        );
+    }
+
 
 
     // if (this.evaluationMethodType === null) {
