@@ -24,6 +24,7 @@ import {FormGroup, NgForm} from '@angular/forms';
 import {Cadetails} from '../model/caDetails.model';
 import {ESPDRequest} from '../model/ESPDRequest.model';
 import {FullCriterion} from '../model/fullCriterion.model';
+// import {saveAs} from 'file-saver/FileSaver';
 import {saveAs} from 'file-saver/FileSaver';
 import {EoDetails} from '../model/eoDetails.model';
 import {EoRelatedCriterion} from '../model/eoRelatedCriterion.model';
@@ -51,7 +52,7 @@ import {EoRoleType} from '../model/eoRoleType.model';
 import {Amount} from '../model/amount.model';
 import {FinancialRatioType} from '../model/financialRatioType.model';
 
-import _ from "lodash";
+import _ from 'lodash';
 
 @Injectable()
 export class DataService {
@@ -651,277 +652,276 @@ export class DataService {
 
   /* ================================= CA REUSE ESPD REQUEST ====================== */
 
-  ReuseESPD(filesToUpload: File[], form: NgForm, role: string):Promise<void> {
-    const promise = new Promise<void>((resolve , reject) => {
+  ReuseESPD(filesToUpload: File[], form: NgForm, role: string): Promise<void> {
+    const promise = new Promise<void>((resolve, reject) => {
 
-     if (filesToUpload.length > 0 && role === 'CA') {
-      this.APIService.postFile(filesToUpload)
-        .then(res => {
-          /* DUMMY ESPD for testing */
-          // res = this.utilities.makeDummyESPDRequest();
-          // console.log(res);
-          console.log('REUSE EPSD');
-          this.APIService.version = res.documentDetails.version.toLowerCase();
-          /* SELF-CONTAINED: if a self-contained artifact is imported then the version is v2 */
-          this.utilities.qualificationApplicationType = res.documentDetails.qualificationApplicationType.toLowerCase();
-          if (res.documentDetails.qualificationApplicationType === 'SELFCONTAINED') {
-            this.APIService.version = 'v2';
-            // Create the lots here:
-            this.utilities.projectLots = _.range(res.cadetails.procurementProjectLots).map(i => `Lot${i+1}`);
-          }
+      if (filesToUpload.length > 0 && role === 'CA') {
+        this.APIService.postFile(filesToUpload)
+          .then(res => {
+            /* DUMMY ESPD for testing */
+            // res = this.utilities.makeDummyESPDRequest();
+            // console.log(res);
+            console.log('REUSE EPSD');
+            this.APIService.version = res.documentDetails.version.toLowerCase();
+            /* SELF-CONTAINED: if a self-contained artifact is imported then the version is v2 */
+            this.utilities.qualificationApplicationType = res.documentDetails.qualificationApplicationType.toLowerCase();
+            if (res.documentDetails.qualificationApplicationType === 'SELFCONTAINED') {
+              this.APIService.version = 'v2';
+              // Create the lots here:
+              this.utilities.projectLots = _.range(res.cadetails.procurementProjectLots).map(i => `Lot${i + 1}`);
+            }
 
-          // res.cadetails=this.CADetails;
-          // console.log(res.fullCriterionList);
-          console.log(res.cadetails);
-          this.CADetails = res.cadetails;
-          this.receivedNoticeNumber = res.cadetails.receivedNoticeNumber;
-          this.PostalAddress = res.cadetails.postalAddress;
-          this.ContactingDetails = res.cadetails.contactingDetails;
-          // console.log(res.cadetails.postalAddress);
-          console.log(this.CADetails.postalAddress.addressLine1);
-          console.log(this.CADetails.postalAddress.city);
-          console.log(this.CADetails.postalAddress.postCode);
-          this.selectedCountry = this.CADetails.cacountry;
+            // res.cadetails=this.CADetails;
+            // console.log(res.fullCriterionList);
+            console.log(res.cadetails);
+            this.CADetails = res.cadetails;
+            this.receivedNoticeNumber = res.cadetails.receivedNoticeNumber;
+            this.PostalAddress = res.cadetails.postalAddress;
+            this.ContactingDetails = res.cadetails.contactingDetails;
+            // console.log(res.cadetails.postalAddress);
+            console.log(this.CADetails.postalAddress.addressLine1);
+            console.log(this.CADetails.postalAddress.city);
+            console.log(this.CADetails.postalAddress.postCode);
+            this.selectedCountry = this.CADetails.cacountry;
 
-          if (this.utilities.qualificationApplicationType === 'selfcontained') {
-            this.CADetails.classificationCodes = res.cadetails.classificationCodes;
-            this.CADetails.weightScoringMethodologyNote = res.cadetails.weightScoringMethodologyNote;
-            this.CADetails.weightingType = res.cadetails.weightingType;
-            this.utilities.isAtoD = true;
-            this.utilities.isSatisfiedALL = false;
+            if (this.utilities.qualificationApplicationType === 'selfcontained') {
+              this.CADetails.classificationCodes = res.cadetails.classificationCodes;
+              this.CADetails.weightScoringMethodologyNote = res.cadetails.weightScoringMethodologyNote;
+              this.CADetails.weightingType = res.cadetails.weightingType;
+              this.utilities.isAtoD = true;
+              this.utilities.isSatisfiedALL = false;
 
-            this.caRelatedCriteria = this.filterCARelatedCriteria(this.OTHER_CA_REGEXP, res.fullCriterionList);
-            this.caRelatedCriteriaForm = this.formUtil.createCARelatedCriterionForm(this.caRelatedCriteria);
-            this.eoLotCriterion = this.filterCARelatedCriteria(this.EO_LOT_REGEXP, res.fullCriterionList);
-          }
-          console.log(res.fullCriterionList);
-          this.exclusionACriteria = this.filterExclusionCriteria(this.EXCLUSION_CONVICTION_REGEXP, res.fullCriterionList);
-          this.exclusionBCriteria = this.filterExclusionCriteria(this.EXCLUSION_CONTRIBUTION_REGEXP, res.fullCriterionList);
-          this.exclusionCCriteria = this.filterExclusionCriteria(this.EXCLUSION_SOCIAL_BUSINESS_MISCONDUCT_CONFLICT_REGEXP, res.fullCriterionList);
-          this.exclusionDCriteria = this.filterExclusionCriteria(this.EXCLUSION_NATIONAL_REGEXP, res.fullCriterionList);
+              this.caRelatedCriteria = this.filterCARelatedCriteria(this.OTHER_CA_REGEXP, res.fullCriterionList);
+              this.caRelatedCriteriaForm = this.formUtil.createCARelatedCriterionForm(this.caRelatedCriteria);
+              this.eoLotCriterion = this.filterCARelatedCriteria(this.EO_LOT_REGEXP, res.fullCriterionList);
+            }
+            console.log(res.fullCriterionList);
+            this.exclusionACriteria = this.filterExclusionCriteria(this.EXCLUSION_CONVICTION_REGEXP, res.fullCriterionList);
+            this.exclusionBCriteria = this.filterExclusionCriteria(this.EXCLUSION_CONTRIBUTION_REGEXP, res.fullCriterionList);
+            this.exclusionCCriteria = this.filterExclusionCriteria(this.EXCLUSION_SOCIAL_BUSINESS_MISCONDUCT_CONFLICT_REGEXP, res.fullCriterionList);
+            this.exclusionDCriteria = this.filterExclusionCriteria(this.EXCLUSION_NATIONAL_REGEXP, res.fullCriterionList);
 
-          this.exclusionACriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionACriteria);
-          // console.log(this.exclusionACriteriaForm);
-          this.exclusionBCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionBCriteria);
-          // console.log(this.exclusionBCriteriaForm);
-          this.exclusionCCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionCCriteria);
-          // console.log(this.exclusionCCriteriaForm);
-          this.exclusionDCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionDCriteria);
-          // console.log(this.exclusionDCriteriaForm);
+            this.exclusionACriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionACriteria);
+            // console.log(this.exclusionACriteriaForm);
+            this.exclusionBCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionBCriteria);
+            // console.log(this.exclusionBCriteriaForm);
+            this.exclusionCCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionCCriteria);
+            // console.log(this.exclusionCCriteriaForm);
+            this.exclusionDCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionDCriteria);
+            // console.log(this.exclusionDCriteriaForm);
 
-          // console.log(this.exclusionDCriteria);
+            // console.log(this.exclusionDCriteria);
 
-          this.selectionACriteria = this.filterSelectionCriteria(this.SELECTION_SUITABILITY_REGEXP, res.fullCriterionList);
-          this.selectionBCriteria = this.filterSelectionCriteria(this.SELECTION_ECONOMIC_REGEXP, res.fullCriterionList);
-          this.selectionCCriteria = this.filterSelectionCriteria(this.SELECTION_TECHNICAL_REGEXP, res.fullCriterionList);
-          this.selectionDCriteria = this.filterSelectionCriteria(this.SELECTION_CERTIFICATES_REGEXP, res.fullCriterionList);
-          this.selectionALLCriteria = this.filterSelectionCriteria(this.SELECTION_REGEXP, res.fullCriterionList);
+            this.selectionACriteria = this.filterSelectionCriteria(this.SELECTION_SUITABILITY_REGEXP, res.fullCriterionList);
+            this.selectionBCriteria = this.filterSelectionCriteria(this.SELECTION_ECONOMIC_REGEXP, res.fullCriterionList);
+            this.selectionCCriteria = this.filterSelectionCriteria(this.SELECTION_TECHNICAL_REGEXP, res.fullCriterionList);
+            this.selectionDCriteria = this.filterSelectionCriteria(this.SELECTION_CERTIFICATES_REGEXP, res.fullCriterionList);
+            this.selectionALLCriteria = this.filterSelectionCriteria(this.SELECTION_REGEXP, res.fullCriterionList);
 
-          this.selectionACriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionACriteria);
-          // console.log(this.selectionACriteriaForm);
-          this.selectionBCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionBCriteria);
-          // console.log(this.selectionBCriteriaForm);
-          this.selectionCCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionCCriteria);
-          // console.log(this.selectionCCriteriaForm);
-          this.selectionDCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionDCriteria);
-          // console.log(this.selectionDCriteriaForm);
-          this.selectionALLCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionALLCriteria);
+            this.selectionACriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionACriteria);
+            // console.log(this.selectionACriteriaForm);
+            this.selectionBCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionBCriteria);
+            // console.log(this.selectionBCriteriaForm);
+            this.selectionCCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionCCriteria);
+            // console.log(this.selectionCCriteriaForm);
+            this.selectionDCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionDCriteria);
+            // console.log(this.selectionDCriteriaForm);
+            this.selectionALLCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionALLCriteria);
 
-          this.eoRelatedCriteria = this.filterEoRelatedCriteria(this.EO_RELATED_REGEXP, res.fullCriterionList);
-          // this.eoLotCriterionForm = this.formUtil.createEORelatedCriterionForm(this.eoLotCriterion);
-          this.reductionCriteria = this.filterEoRelatedCriteria(this.REDUCTION_OF_CANDIDATES_REGEXP, res.fullCriterionList);
+            this.eoRelatedCriteria = this.filterEoRelatedCriteria(this.EO_RELATED_REGEXP, res.fullCriterionList);
+            // this.eoLotCriterionForm = this.formUtil.createEORelatedCriterionForm(this.eoLotCriterion);
+            this.reductionCriteria = this.filterEoRelatedCriteria(this.REDUCTION_OF_CANDIDATES_REGEXP, res.fullCriterionList);
 
-          // create requirementGroup template objects required for multiple instances (cardinalities) function
-          this.formUtil.createTemplateReqGroups(res.fullCriterionList);
-          console.log(res);
-          console.log(this.CADetails);
-          resolve();
-        })
-        .catch(err => {
-          console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
-          const action = 'close';
-          this.openSnackBar(message, action);
-          reject();
-        });
-    }
-    else if (filesToUpload.length > 0 && role === 'EO') {
-       this.APIService.postFileResponse(filesToUpload)
-       .then(res => {
-         console.log(res);
-         this.APIService.version = res.documentDetails.version.toLowerCase();
-         this.utilities.qualificationApplicationType = res.documentDetails.qualificationApplicationType.toLowerCase();
-         /* SELF-CONTAINED: if a self-cointained artifact is imported then the version is v2 */
-         if (res.documentDetails.qualificationApplicationType === 'SELFCONTAINED') {
-           this.APIService.version = 'v2';
-           // Create the lots here:
-           this.utilities.projectLots = _.range(res.cadetails.procurementProjectLots).map(i => `Lot${i+1}`);
-         }
-         // res.cadetails=this.CADetails;
-         // console.log(res.fullCriterionList);
-         // console.log(res.cadetails);
-         this.CADetails = res.cadetails;
-         this.PostalAddress = res.cadetails.postalAddress;
-         this.ContactingDetails = res.cadetails.contactingDetails;
-         this.receivedNoticeNumber = res.cadetails.receivedNoticeNumber;
-         this.selectedCountry = this.CADetails.cacountry;
-         this.EODetails = res.eodetails;
-         console.log(this.EODetails);
-         console.log(this.EODetails.naturalPersons);
-         // console.log(this.EODetails.naturalPersons['birthDate']);
-         this.selectedEOCountry = this.EODetails.postalAddress.countryCode;
-         if (this.utilities.qualificationApplicationType === 'selfcontained') {
-           this.CADetails.classificationCodes = res.cadetails.classificationCodes;
-           this.CADetails.weightScoringMethodologyNote = res.cadetails.weightScoringMethodologyNote;
-           this.CADetails.weightingType = res.cadetails.weightingType;
+            // create requirementGroup template objects required for multiple instances (cardinalities) function
+            this.formUtil.createTemplateReqGroups(res.fullCriterionList);
+            console.log(res);
+            console.log(this.CADetails);
+            resolve();
+          })
+          .catch(err => {
+            console.log(err);
+            const message: string = err.error +
+              ' ' + err.message;
+            const action = 'close';
+            this.openSnackBar(message, action);
+            reject();
+          });
+      } else if (filesToUpload.length > 0 && role === 'EO') {
+        this.APIService.postFileResponse(filesToUpload)
+          .then(res => {
+            console.log(res);
+            this.APIService.version = res.documentDetails.version.toLowerCase();
+            this.utilities.qualificationApplicationType = res.documentDetails.qualificationApplicationType.toLowerCase();
+            /* SELF-CONTAINED: if a self-cointained artifact is imported then the version is v2 */
+            if (res.documentDetails.qualificationApplicationType === 'SELFCONTAINED') {
+              this.APIService.version = 'v2';
+              // Create the lots here:
+              this.utilities.projectLots = _.range(res.cadetails.procurementProjectLots).map(i => `Lot${i + 1}`);
+            }
+            // res.cadetails=this.CADetails;
+            // console.log(res.fullCriterionList);
+            // console.log(res.cadetails);
+            this.CADetails = res.cadetails;
+            this.PostalAddress = res.cadetails.postalAddress;
+            this.ContactingDetails = res.cadetails.contactingDetails;
+            this.receivedNoticeNumber = res.cadetails.receivedNoticeNumber;
+            this.selectedCountry = this.CADetails.cacountry;
+            this.EODetails = res.eodetails;
+            console.log(this.EODetails);
+            console.log(this.EODetails.naturalPersons);
+            // console.log(this.EODetails.naturalPersons['birthDate']);
+            this.selectedEOCountry = this.EODetails.postalAddress.countryCode;
+            if (this.utilities.qualificationApplicationType === 'selfcontained') {
+              this.CADetails.classificationCodes = res.cadetails.classificationCodes;
+              this.CADetails.weightScoringMethodologyNote = res.cadetails.weightScoringMethodologyNote;
+              this.CADetails.weightingType = res.cadetails.weightingType;
 
-           this.utilities.isAtoD = true;
-           this.utilities.isSatisfiedALL = false;
+              this.utilities.isAtoD = true;
+              this.utilities.isSatisfiedALL = false;
 
-           if (res.eodetails.generalTurnover !== null || res.eodetails.generalTurnover !== undefined) {
-             this.generalTurnover = res.eodetails.generalTurnover;
-           } else if (res.eodetails.generalTurnover === null) {
-             this.generalTurnover = new Amount();
-             // this.generalTurnover.amount = 0;
-             // this.generalTurnover.currency = '';
+              if (res.eodetails.generalTurnover !== null || res.eodetails.generalTurnover !== undefined) {
+                this.generalTurnover = res.eodetails.generalTurnover;
+              } else if (res.eodetails.generalTurnover === null) {
+                this.generalTurnover = new Amount();
+                // this.generalTurnover.amount = 0;
+                // this.generalTurnover.currency = '';
 
-             this.EODetails.generalTurnover = this.generalTurnover;
-           }
-         }
+                this.EODetails.generalTurnover = this.generalTurnover;
+              }
+            }
 
-         // get evidence list only in v2
-         if (this.APIService.version === 'v2') {
-           this.formUtil.evidenceList = res.evidenceList;
-           this.formUtil.evidenceList = res.evidenceList;
-           console.log(this.formUtil.evidenceList);
-         }
-
-
-         // Fill in EoDetails Form
-
-         this.eoDetailsFormUpdate();
-         this.caDetailsFormUpdate();
-         // console.log(this.EOForm.value);
-
-         console.log(res.fullCriterionList);
-
-         if (this.utilities.qualificationApplicationType === 'selfcontained') {
-           this.caRelatedCriteria = this.filterCARelatedCriteria(this.OTHER_CA_REGEXP, res.fullCriterionList);
-           this.caRelatedCriteriaForm = this.formUtil.createCARelatedCriterionForm(this.caRelatedCriteria);
-
-           this.eoLotCriterion = this.filterCARelatedCriteria(this.EO_LOT_REGEXP, res.fullCriterionList);
-           this.eoLotCriterionForm = this.formUtil.createEORelatedCriterionForm(this.eoLotCriterion);
-         }
+            // get evidence list only in v2
+            if (this.APIService.version === 'v2') {
+              this.formUtil.evidenceList = res.evidenceList;
+              this.formUtil.evidenceList = res.evidenceList;
+              console.log(this.formUtil.evidenceList);
+            }
 
 
-         this.eoRelatedACriteria = this.filterEoRelatedCriteria(this.EO_RELATED_A_REGEXP, res.fullCriterionList);
-         // console.log(this.eoRelatedACriteria);
-         this.eoRelatedCCriteria = this.filterEoRelatedCriteria(this.EO_RELATED_C_REGEXP, res.fullCriterionList);
-         // console.log(this.eoRelatedCCriteria);
-         this.eoRelatedDCriteria = this.filterEoRelatedCriteria(this.EO_RELATED_D_REGEXP, res.fullCriterionList);
-         // console.log(this.eoRelatedDCriteria);
-         this.eoRelatedACriteriaForm = this.formUtil.createEORelatedCriterionForm(this.eoRelatedACriteria);
-         // console.log(this.eoRelatedACriteriaForm);
-         this.eoRelatedCCriteriaForm = this.formUtil.createEORelatedCriterionForm(this.eoRelatedCCriteria);
-         // console.log(this.eoRelatedCCriteriaForm);
-         this.eoRelatedDCriteriaForm = this.formUtil.createEORelatedCriterionForm(this.eoRelatedDCriteria);
-         // console.log(this.eoRelatedDCriteriaForm);
+            // Fill in EoDetails Form
+
+            this.eoDetailsFormUpdate();
+            this.caDetailsFormUpdate();
+            // console.log(this.EOForm.value);
+
+            console.log(res.fullCriterionList);
+
+            if (this.utilities.qualificationApplicationType === 'selfcontained') {
+              this.caRelatedCriteria = this.filterCARelatedCriteria(this.OTHER_CA_REGEXP, res.fullCriterionList);
+              this.caRelatedCriteriaForm = this.formUtil.createCARelatedCriterionForm(this.caRelatedCriteria);
+
+              this.eoLotCriterion = this.filterCARelatedCriteria(this.EO_LOT_REGEXP, res.fullCriterionList);
+              this.eoLotCriterionForm = this.formUtil.createEORelatedCriterionForm(this.eoLotCriterion);
+            }
 
 
-         this.exclusionACriteria = this.filterExclusionCriteria(this.EXCLUSION_CONVICTION_REGEXP, res.fullCriterionList);
-         // console.log(this.exclusionACriteria);
-         this.exclusionBCriteria = this.filterExclusionCriteria(this.EXCLUSION_CONTRIBUTION_REGEXP, res.fullCriterionList);
-         // console.log(this.exclusionBCriteria);
-         this.exclusionCCriteria = this.filterExclusionCriteria(this.EXCLUSION_SOCIAL_BUSINESS_MISCONDUCT_CONFLICT_REGEXP, res.fullCriterionList);
-         // console.log(this.exclusionCCriteria);
-         this.exclusionDCriteria = this.filterExclusionCriteria(this.EXCLUSION_NATIONAL_REGEXP, res.fullCriterionList);
-         // console.log(this.exclusionDCriteria);
-
-         this.exclusionACriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionACriteria);
-         console.log(this.exclusionACriteriaForm);
-         this.exclusionBCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionBCriteria);
-         console.log(this.exclusionBCriteriaForm);
-         this.exclusionCCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionCCriteria);
-         // console.log(this.exclusionCCriteriaForm);
-         this.exclusionDCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionDCriteria);
-         // console.log(this.exclusionDCriteriaForm);
+            this.eoRelatedACriteria = this.filterEoRelatedCriteria(this.EO_RELATED_A_REGEXP, res.fullCriterionList);
+            // console.log(this.eoRelatedACriteria);
+            this.eoRelatedCCriteria = this.filterEoRelatedCriteria(this.EO_RELATED_C_REGEXP, res.fullCriterionList);
+            // console.log(this.eoRelatedCCriteria);
+            this.eoRelatedDCriteria = this.filterEoRelatedCriteria(this.EO_RELATED_D_REGEXP, res.fullCriterionList);
+            // console.log(this.eoRelatedDCriteria);
+            this.eoRelatedACriteriaForm = this.formUtil.createEORelatedCriterionForm(this.eoRelatedACriteria);
+            // console.log(this.eoRelatedACriteriaForm);
+            this.eoRelatedCCriteriaForm = this.formUtil.createEORelatedCriterionForm(this.eoRelatedCCriteria);
+            // console.log(this.eoRelatedCCriteriaForm);
+            this.eoRelatedDCriteriaForm = this.formUtil.createEORelatedCriterionForm(this.eoRelatedDCriteria);
+            // console.log(this.eoRelatedDCriteriaForm);
 
 
-         this.selectionACriteria = this.filterSelectionCriteria(this.SELECTION_SUITABILITY_REGEXP, res.fullCriterionList);
-         // console.log(this.selectionACriteria);
-         this.selectionBCriteria = this.filterSelectionCriteria(this.SELECTION_ECONOMIC_REGEXP, res.fullCriterionList);
-         // console.log(this.selectionBCriteria);
-         this.selectionCCriteria = this.filterSelectionCriteria(this.SELECTION_TECHNICAL_REGEXP, res.fullCriterionList);
-         // console.log(this.selectionCCriteria);
-         this.selectionDCriteria = this.filterSelectionCriteria(this.SELECTION_CERTIFICATES_REGEXP, res.fullCriterionList);
-         // console.log(this.selectionDCriteria);
-         this.selectionALLCriteria = this.filterSelectionCriteria(this.SELECTION_REGEXP, res.fullCriterionList);
-         console.log(this.selectionALLCriteria);
+            this.exclusionACriteria = this.filterExclusionCriteria(this.EXCLUSION_CONVICTION_REGEXP, res.fullCriterionList);
+            // console.log(this.exclusionACriteria);
+            this.exclusionBCriteria = this.filterExclusionCriteria(this.EXCLUSION_CONTRIBUTION_REGEXP, res.fullCriterionList);
+            // console.log(this.exclusionBCriteria);
+            this.exclusionCCriteria = this.filterExclusionCriteria(this.EXCLUSION_SOCIAL_BUSINESS_MISCONDUCT_CONFLICT_REGEXP, res.fullCriterionList);
+            // console.log(this.exclusionCCriteria);
+            this.exclusionDCriteria = this.filterExclusionCriteria(this.EXCLUSION_NATIONAL_REGEXP, res.fullCriterionList);
+            // console.log(this.exclusionDCriteria);
+
+            this.exclusionACriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionACriteria);
+            console.log(this.exclusionACriteriaForm);
+            this.exclusionBCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionBCriteria);
+            console.log(this.exclusionBCriteriaForm);
+            this.exclusionCCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionCCriteria);
+            // console.log(this.exclusionCCriteriaForm);
+            this.exclusionDCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionDCriteria);
+            // console.log(this.exclusionDCriteriaForm);
 
 
-         this.selectionACriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionACriteria);
-         // console.log(this.selectionACriteriaForm);
-         this.selectionBCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionBCriteria);
-         // console.log(this.selectionBCriteriaForm);
-         this.selectionCCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionCCriteria);
-         // console.log(this.selectionCCriteriaForm);
-         this.selectionDCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionDCriteria);
-         // console.log(this.selectionDCriteriaForm);
-         this.selectionALLCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionALLCriteria);
+            this.selectionACriteria = this.filterSelectionCriteria(this.SELECTION_SUITABILITY_REGEXP, res.fullCriterionList);
+            // console.log(this.selectionACriteria);
+            this.selectionBCriteria = this.filterSelectionCriteria(this.SELECTION_ECONOMIC_REGEXP, res.fullCriterionList);
+            // console.log(this.selectionBCriteria);
+            this.selectionCCriteria = this.filterSelectionCriteria(this.SELECTION_TECHNICAL_REGEXP, res.fullCriterionList);
+            // console.log(this.selectionCCriteria);
+            this.selectionDCriteria = this.filterSelectionCriteria(this.SELECTION_CERTIFICATES_REGEXP, res.fullCriterionList);
+            // console.log(this.selectionDCriteria);
+            this.selectionALLCriteria = this.filterSelectionCriteria(this.SELECTION_REGEXP, res.fullCriterionList);
+            console.log(this.selectionALLCriteria);
 
 
-         this.reductionCriteria = this.filterReductionCriteria(this.REDUCTION_OF_CANDIDATES_REGEXP, res.fullCriterionList);
-         if (!this.reductionCriteria) {
-
-         }
-         this.reductionCriteriaForm = this.formUtil.createReductionCriterionForm(this.reductionCriteria);
-
-         // REVIEW ESPD: make forms non editable if user selected Review ESPD
-         if (this.isReadOnly()) {
-           this.exclusionACriteriaForm.disable();
-           this.exclusionBCriteriaForm.disable();
-           this.exclusionCCriteriaForm.disable();
-           this.exclusionDCriteriaForm.disable();
-           this.selectionALLCriteriaForm.disable();
-           this.selectionACriteriaForm.disable();
-           this.selectionBCriteriaForm.disable();
-           this.selectionCCriteriaForm.disable();
-           this.selectionDCriteriaForm.disable();
-           this.eoRelatedACriteriaForm.disable();
-           this.eoRelatedCCriteriaForm.disable();
-           this.eoRelatedDCriteriaForm.disable();
-           this.reductionCriteriaForm.disable();
-         }
-
-         // create requirementGroup template objects required for multiple instances (cardinalities) function
-         this.formUtil.createTemplateReqGroups(res.fullCriterionList);
-
-         /* find if CRITERION.SELECTION.ALL_SATISFIED exists */
-         this.utilities.satisfiedALLCriterionExists = this.utilities
-         .findCriterion(this.selectionALLCriteria, '7e7db838-eeac-46d9-ab39-42927486f22d');
-
-         if (this.utilities.satisfiedALLCriterionExists) {
-           this.utilities.isSatisfiedALL = true;
-           this.utilities.isAtoD = false;
-         } else {
-           this.utilities.isSatisfiedALL = false;
-           this.utilities.isAtoD = true;
-         }
+            this.selectionACriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionACriteria);
+            // console.log(this.selectionACriteriaForm);
+            this.selectionBCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionBCriteria);
+            // console.log(this.selectionBCriteriaForm);
+            this.selectionCCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionCCriteria);
+            // console.log(this.selectionCCriteriaForm);
+            this.selectionDCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionDCriteria);
+            // console.log(this.selectionDCriteriaForm);
+            this.selectionALLCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionALLCriteria);
 
 
-         console.log(res);
-         resolve();
-       })
-       .catch(err => {
-         console.log(err);
-         const message: string = err.error +
-           ' ' + err.message;
-         const action = 'close';
-         this.openSnackBar(message, action);
-         reject();
-       });
-     }
+            this.reductionCriteria = this.filterReductionCriteria(this.REDUCTION_OF_CANDIDATES_REGEXP, res.fullCriterionList);
+            if (!this.reductionCriteria) {
+
+            }
+            this.reductionCriteriaForm = this.formUtil.createReductionCriterionForm(this.reductionCriteria);
+
+            // REVIEW ESPD: make forms non editable if user selected Review ESPD
+            if (this.isReadOnly()) {
+              this.exclusionACriteriaForm.disable();
+              this.exclusionBCriteriaForm.disable();
+              this.exclusionCCriteriaForm.disable();
+              this.exclusionDCriteriaForm.disable();
+              this.selectionALLCriteriaForm.disable();
+              this.selectionACriteriaForm.disable();
+              this.selectionBCriteriaForm.disable();
+              this.selectionCCriteriaForm.disable();
+              this.selectionDCriteriaForm.disable();
+              this.eoRelatedACriteriaForm.disable();
+              this.eoRelatedCCriteriaForm.disable();
+              this.eoRelatedDCriteriaForm.disable();
+              this.reductionCriteriaForm.disable();
+            }
+
+            // create requirementGroup template objects required for multiple instances (cardinalities) function
+            this.formUtil.createTemplateReqGroups(res.fullCriterionList);
+
+            /* find if CRITERION.SELECTION.ALL_SATISFIED exists */
+            this.utilities.satisfiedALLCriterionExists = this.utilities
+              .findCriterion(this.selectionALLCriteria, '7e7db838-eeac-46d9-ab39-42927486f22d');
+
+            if (this.utilities.satisfiedALLCriterionExists) {
+              this.utilities.isSatisfiedALL = true;
+              this.utilities.isAtoD = false;
+            } else {
+              this.utilities.isSatisfiedALL = false;
+              this.utilities.isAtoD = true;
+            }
+
+
+            console.log(res);
+            resolve();
+          })
+          .catch(err => {
+            console.log(err);
+            const message: string = err.error +
+              ' ' + err.message;
+            const action = 'close';
+            this.openSnackBar(message, action);
+            reject();
+          });
+      }
     });
     return promise;
   }
@@ -1004,137 +1004,108 @@ export class DataService {
     }
   }
 
-  startESPD(form: NgForm) {
-    // console.log(form);
-    // console.log(form.value);
-    console.log('START ESPD');
-    console.log(form);
+  startESPD(form: NgForm): Promise<void> {
 
-    // form reset
-    if (!this.utilities.isEmpty(this.CADetails) || !this.utilities.isEmpty(this.EODetails)) {
-      this.eoRelatedACriteriaForm = JSON.parse(JSON.stringify(null));
-      this.eoRelatedCCriteriaForm = JSON.parse(JSON.stringify(null));
-      this.eoRelatedDCriteriaForm = JSON.parse(JSON.stringify(null));
-      this.exclusionACriteriaForm = JSON.parse(JSON.stringify(null));
-      this.exclusionBCriteriaForm = JSON.parse(JSON.stringify(null));
-      this.exclusionCCriteriaForm = JSON.parse(JSON.stringify(null));
-      this.exclusionDCriteriaForm = JSON.parse(JSON.stringify(null));
-      this.selectionALLCriteriaForm = JSON.parse(JSON.stringify(null));
-      this.selectionACriteriaForm = JSON.parse(JSON.stringify(null));
-      this.selectionBCriteriaForm = JSON.parse(JSON.stringify(null));
-      this.selectionCCriteriaForm = JSON.parse(JSON.stringify(null));
-      this.selectionDCriteriaForm = JSON.parse(JSON.stringify(null));
-      this.reductionCriteriaForm = JSON.parse(JSON.stringify(null));
-      this.eoRelatedACriteria = JSON.parse(JSON.stringify(null));
-      this.eoRelatedCCriteria = JSON.parse(JSON.stringify(null));
-      this.eoRelatedDCriteria = JSON.parse(JSON.stringify(null));
-      this.exclusionACriteria = JSON.parse(JSON.stringify(null));
-      this.exclusionBCriteria = JSON.parse(JSON.stringify(null));
-      this.exclusionCCriteria = JSON.parse(JSON.stringify(null));
-      this.exclusionDCriteria = JSON.parse(JSON.stringify(null));
-      this.selectionALLCriteria = JSON.parse(JSON.stringify(null));
-      this.selectionACriteria = JSON.parse(JSON.stringify(null));
-      this.selectionBCriteria = JSON.parse(JSON.stringify(null));
-      this.selectionCCriteria = JSON.parse(JSON.stringify(null));
-      this.selectionDCriteria = JSON.parse(JSON.stringify(null));
-      this.reductionCriteria = JSON.parse(JSON.stringify(null));
-      this.utilities.setAllFields(this.PostalAddress, '');
-      this.utilities.setAllFields(this.ContactingDetails, '');
-      this.utilities.setAllFields(this.CADetails, '');
-      this.utilities.setAllFields(this.EODetails, '');
-      this.formUtil.evidenceList = [];
-      this.utilities.isReset = true;
-    }
+    const promise = new Promise<void>((resolve, reject) => {
+      // console.log(form);
+      // console.log(form.value);
+      console.log('START ESPD');
+      console.log(form);
 
-
-    if (form.value.chooseRole === 'CA') {
-      this.utilities.isCA = true;
-      this.utilities.isEO = false;
-      this.receivedNoticeNumber = form.value.noticeNumber;
-      if (form.value.CACountry !== '') {
-        this.selectedCountry = form.value.CACountry;
+      // form reset
+      if (!this.utilities.isEmpty(this.CADetails) || !this.utilities.isEmpty(this.EODetails)) {
+        this.eoRelatedACriteriaForm = JSON.parse(JSON.stringify(null));
+        this.eoRelatedCCriteriaForm = JSON.parse(JSON.stringify(null));
+        this.eoRelatedDCriteriaForm = JSON.parse(JSON.stringify(null));
+        this.exclusionACriteriaForm = JSON.parse(JSON.stringify(null));
+        this.exclusionBCriteriaForm = JSON.parse(JSON.stringify(null));
+        this.exclusionCCriteriaForm = JSON.parse(JSON.stringify(null));
+        this.exclusionDCriteriaForm = JSON.parse(JSON.stringify(null));
+        this.selectionALLCriteriaForm = JSON.parse(JSON.stringify(null));
+        this.selectionACriteriaForm = JSON.parse(JSON.stringify(null));
+        this.selectionBCriteriaForm = JSON.parse(JSON.stringify(null));
+        this.selectionCCriteriaForm = JSON.parse(JSON.stringify(null));
+        this.selectionDCriteriaForm = JSON.parse(JSON.stringify(null));
+        this.reductionCriteriaForm = JSON.parse(JSON.stringify(null));
+        this.eoRelatedACriteria = JSON.parse(JSON.stringify(null));
+        this.eoRelatedCCriteria = JSON.parse(JSON.stringify(null));
+        this.eoRelatedDCriteria = JSON.parse(JSON.stringify(null));
+        this.exclusionACriteria = JSON.parse(JSON.stringify(null));
+        this.exclusionBCriteria = JSON.parse(JSON.stringify(null));
+        this.exclusionCCriteria = JSON.parse(JSON.stringify(null));
+        this.exclusionDCriteria = JSON.parse(JSON.stringify(null));
+        this.selectionALLCriteria = JSON.parse(JSON.stringify(null));
+        this.selectionACriteria = JSON.parse(JSON.stringify(null));
+        this.selectionBCriteria = JSON.parse(JSON.stringify(null));
+        this.selectionCCriteria = JSON.parse(JSON.stringify(null));
+        this.selectionDCriteria = JSON.parse(JSON.stringify(null));
+        this.reductionCriteria = JSON.parse(JSON.stringify(null));
+        this.utilities.setAllFields(this.PostalAddress, '');
+        this.utilities.setAllFields(this.ContactingDetails, '');
+        this.utilities.setAllFields(this.CADetails, '');
+        this.utilities.setAllFields(this.EODetails, '');
+        this.formUtil.evidenceList = [];
+        this.utilities.isReset = true;
       }
-    }
 
-    if (form.value.chooseRole === 'EO') {
-      this.utilities.isEO = true;
-      this.utilities.isCA = false;
-      if (form.value.EOCountry !== '') {
-        this.selectedEOCountry = form.value.EOCountry;
+      if (form.value.chooseRole === 'CA') {
+        this.utilities.isCA = true;
+        this.utilities.isEO = false;
+        this.receivedNoticeNumber = form.value.noticeNumber;
+        if (form.value.CACountry !== '') {
+          this.selectedCountry = form.value.CACountry;
+        }
       }
-    }
 
-    if (form.value.chooseRole === 'EO' && form.value.eoOptions === 'importESPD') {
-      this.utilities.isImportESPD = true;
-      this.utilities.isCreateResponse = false;
-    } else if (form.value.chooseRole === 'EO' && form.value.eoOptions === 'createResponse') {
-      this.utilities.isImportESPD = false;
-      this.utilities.isCreateResponse = true;
-    }
+      if (form.value.chooseRole === 'EO') {
+        this.utilities.isEO = true;
+        this.utilities.isCA = false;
+        if (form.value.EOCountry !== '') {
+          this.selectedEOCountry = form.value.EOCountry;
+        }
+      }
 
-    /* ===================== create forms in case of predefined criteria ================== */
-    if (this.utilities.isCreateResponse) {
-      this.getEoRelatedACriteria()
-        .then(res => {
+      if (form.value.chooseRole === 'EO' && form.value.eoOptions === 'importESPD') {
+        this.utilities.isImportESPD = true;
+        this.utilities.isCreateResponse = false;
+      } else if (form.value.chooseRole === 'EO' && form.value.eoOptions === 'createResponse') {
+        this.utilities.isImportESPD = false;
+        this.utilities.isCreateResponse = true;
+      }
 
-          if (this.utilities.isCreateResponse) {
-            this.eoRelatedACriteria = res;
+      /* ===================== create forms in case of predefined criteria ================== */
+      if (this.utilities.isCreateResponse) {
+        this.getEoRelatedACriteria()
+          .then(res => {
+
+            if (this.utilities.isCreateResponse) {
+              this.eoRelatedACriteria = res;
+
+              /* [cardinalities]: create template requirementGroup */
+              this.formUtil.createTemplateReqGroups(this.eoRelatedACriteria);
+
+              console.log('This is create response');
+            }
+            this.eoRelatedACriteriaForm = this.formUtil.createEORelatedCriterionForm(this.eoRelatedACriteria);
+            resolve();
+          })
+          .catch(err => {
+            console.log(err);
+            const message: string = err.error +
+              ' ' + err.message;
+            const action = 'close';
+            this.openSnackBar(message, action);
+            reject();
+          });
+
+        this.getEoRelatedCCriteria()
+          .then(res => {
+            this.eoRelatedCCriteria = res;
+            this.eoRelatedCCriteriaForm = this.formUtil.createEORelatedCriterionForm(this.eoRelatedCCriteria);
 
             /* [cardinalities]: create template requirementGroup */
-            this.formUtil.createTemplateReqGroups(this.eoRelatedACriteria);
-
-            console.log('This is create response');
-          }
-          this.eoRelatedACriteriaForm = this.formUtil.createEORelatedCriterionForm(this.eoRelatedACriteria);
-        })
-        .catch(err => {
-          console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
-          const action = 'close';
-          this.openSnackBar(message, action);
-        });
-
-      this.getEoRelatedCCriteria()
-        .then(res => {
-          this.eoRelatedCCriteria = res;
-          this.eoRelatedCCriteriaForm = this.formUtil.createEORelatedCriterionForm(this.eoRelatedCCriteria);
-
-          /* [cardinalities]: create template requirementGroup */
-          this.formUtil.createTemplateReqGroups(this.eoRelatedCCriteria);
-        })
-        .catch(err => {
-          console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
-          const action = 'close';
-          this.openSnackBar(message, action);
-        });
-
-      this.getEoRelatedDCriteria()
-        .then(res => {
-          this.eoRelatedDCriteria = res;
-          this.eoRelatedDCriteriaForm = this.formUtil.createEORelatedCriterionForm(this.eoRelatedDCriteria);
-
-          /* [cardinalities]: create template requirementGroup */
-          this.formUtil.createTemplateReqGroups(this.eoRelatedDCriteria);
-        })
-        .catch(err => {
-          console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
-          const action = 'close';
-          this.openSnackBar(message, action);
-        });
-
-      /* =================== SELF-CONTAINED: predefined ca related criterion ============ */
-
-      if (this.utilities.qualificationApplicationType === 'selfcontained') {
-        this.getCaRelatedCriteria()
-          .then(res => {
-            this.caRelatedCriteria = res;
-            this.caRelatedCriteriaForm = this.formUtil.createCARelatedCriterionForm(this.caRelatedCriteria);
-            // console.log(this.caRelatedCriteria);
+            this.formUtil.createTemplateReqGroups(this.eoRelatedCCriteria);
+            resolve();
           })
           .catch(err => {
             console.log(err);
@@ -1142,236 +1113,17 @@ export class DataService {
               ' ' + err.message;
             const action = 'close';
             this.openSnackBar(message, action);
+            reject();
           });
 
-        this.getEOLotCriterion()
+        this.getEoRelatedDCriteria()
           .then(res => {
-            this.eoLotCriterion = res;
-            this.eoLotCriterionForm = this.formUtil.createEORelatedCriterionForm(this.eoLotCriterion);
-            // console.log(this.caRelatedCriteria);
-          })
-          .catch(err => {
-            console.log(err);
-            const message: string = err.error +
-              ' ' + err.message;
-            const action = 'close';
-            this.openSnackBar(message, action);
-          });
-      } else {
-        this.caRelatedCriteria = [];
-        this.eoLotCriterion = [];
-      }
+            this.eoRelatedDCriteria = res;
+            this.eoRelatedDCriteriaForm = this.formUtil.createEORelatedCriterionForm(this.eoRelatedDCriteria);
 
-
-      /* ========================= predefined exclusion criteria response ============= */
-      this.getExclusionACriteria()
-        .then(res => {
-          this.exclusionACriteria = res;
-          this.exclusionACriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionACriteria);
-          console.log(this.exclusionACriteriaForm);
-
-          /* [cardinalities]: create template requirementGroup */
-          this.formUtil.createTemplateReqGroups(this.exclusionACriteria);
-
-        })
-        .catch(err => {
-          console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
-          const action = 'close';
-          this.openSnackBar(message, action);
-        });
-
-      this.getExclusionBCriteria()
-        .then(res => {
-          this.exclusionBCriteria = res;
-          this.exclusionBCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionBCriteria);
-          console.log(this.exclusionBCriteriaForm);
-          /* [cardinalities]: create template requirementGroup */
-          this.formUtil.createTemplateReqGroups(this.exclusionBCriteria);
-        })
-        .catch(err => {
-          console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
-          const action = 'close';
-          this.openSnackBar(message, action);
-        });
-
-      this.getExclusionCCriteria()
-        .then(res => {
-          this.exclusionCCriteria = res;
-          this.exclusionCCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionCCriteria);
-          // console.log(res);
-          /* [cardinalities]: create template requirementGroup */
-          this.formUtil.createTemplateReqGroups(this.exclusionCCriteria);
-        })
-        .catch(err => {
-          console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
-          const action = 'close';
-          this.openSnackBar(message, action);
-        });
-
-      this.getExclusionDCriteria()
-        .then(res => {
-          this.exclusionDCriteria = res;
-          this.exclusionDCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionDCriteria);
-          // console.log(res);
-          /* [cardinalities]: create template requirementGroup */
-          this.formUtil.createTemplateReqGroups(this.exclusionDCriteria);
-        })
-        .catch(err => {
-          console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
-          const action = 'close';
-          this.openSnackBar(message, action);
-        });
-
-      /* ======================== predefined selection criteria ============================ */
-      this.getSelectionALLCriteria()
-        .then(res => {
-          this.selectionALLCriteria = res;
-          this.selectionALLCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionALLCriteria);
-          /* [cardinalities]: create template requirementGroup */
-          this.formUtil.createTemplateReqGroups(this.selectionALLCriteria);
-        })
-        .catch(err => {
-          console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
-          const action = 'close';
-          this.openSnackBar(message, action);
-        });
-
-
-      this.getSelectionACriteria()
-        .then(res => {
-          this.selectionACriteria = res;
-          this.selectionACriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionACriteria);
-          /* [cardinalities]: create template requirementGroup */
-          this.formUtil.createTemplateReqGroups(this.selectionACriteria);
-        })
-        .catch(err => {
-          console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
-          const action = 'close';
-          this.openSnackBar(message, action);
-        });
-
-
-      this.getSelectionBCriteria()
-        .then(res => {
-          this.selectionBCriteria = res;
-          this.selectionBCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionBCriteria);
-          /* [cardinalities]: create template requirementGroup */
-          this.formUtil.createTemplateReqGroups(this.selectionBCriteria);
-        })
-        .catch(err => {
-          console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
-          const action = 'close';
-          this.openSnackBar(message, action);
-        });
-
-      this.getSelectionCCriteria()
-        .then(res => {
-          this.selectionCCriteria = res;
-          this.selectionCCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionCCriteria);
-          /* [cardinalities]: create template requirementGroup */
-          this.formUtil.createTemplateReqGroups(this.selectionCCriteria);
-        })
-        .catch(err => {
-          console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
-          const action = 'close';
-          this.openSnackBar(message, action);
-        });
-
-      this.getSelectionDCriteria()
-        .then(res => {
-          this.selectionDCriteria = res;
-          this.selectionDCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionDCriteria);
-          /* [cardinalities]: create template requirementGroup */
-          this.formUtil.createTemplateReqGroups(this.selectionDCriteria);
-        })
-        .catch(err => {
-          console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
-          const action = 'close';
-          this.openSnackBar(message, action);
-        });
-
-      /* =========================== predefined reduction criteria ================================= */
-      this.getReductionCriteria()
-        .then(res => {
-          this.reductionCriteria = res;
-          this.reductionCriteriaForm = this.formUtil.createReductionCriterionForm(this.reductionCriteria);
-          /* [cardinalities]: create template requirementGroup */
-          this.formUtil.createTemplateReqGroups(this.reductionCriteria);
-          console.log('TEMPLATE ARRAY: ');
-          console.log(this.formUtil.template);
-
-        })
-        .catch(err => {
-          console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
-          const action = 'close';
-          this.openSnackBar(message, action);
-        });
-
-    }
-
-    // get predefined criteria (ca)
-    if (this.utilities.isCreateNewESPD) {
-
-      /* =========================== predefined reduction criteria ================================= */
-      this.getReductionCriteria()
-        .then(res => {
-          this.reductionCriteria = res;
-          // console.log(this.reductionCriteria);
-          /* [cardinalities]: create template requirementGroup */
-          this.formUtil.createTemplateReqGroups(this.reductionCriteria);
-        })
-        .catch(err => {
-          console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
-          const action = 'close';
-          this.openSnackBar(message, action);
-        });
-
-      /* ========================= predefined other.eo criteria ====================================*/
-      this.getEoRelatedCriteria()
-        .then(res => {
-          this.eoRelatedCriteria = res;
-          // console.log(this.eoRelatedCriteria);
-        })
-        .catch(err => {
-          console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
-          const action = 'close';
-          this.openSnackBar(message, action);
-        });
-
-      /* ========================= SELF-CONTAINED: predefined other.ca criteria ============================= */
-
-      if (this.utilities.qualificationApplicationType === 'selfcontained') {
-        this.getCaRelatedCriteria()
-          .then(res => {
-            this.caRelatedCriteria = res;
-            this.caRelatedCriteriaForm = this.formUtil.createCARelatedCriterionForm(this.caRelatedCriteria);
             /* [cardinalities]: create template requirementGroup */
-            this.formUtil.createTemplateReqGroups(this.caRelatedCriteria);
-            // console.log(this.caRelatedCriteria);
+            this.formUtil.createTemplateReqGroups(this.eoRelatedDCriteria);
+            resolve();
           })
           .catch(err => {
             console.log(err);
@@ -1379,14 +1131,60 @@ export class DataService {
               ' ' + err.message;
             const action = 'close';
             this.openSnackBar(message, action);
+            reject();
           });
 
+        /* =================== SELF-CONTAINED: predefined ca related criterion ============ */
 
-        /* SELF-CONTAINED: OTHER_EO LOT TENDERED CRITERION */
-        this.getEOLotCriterion()
+        if (this.utilities.qualificationApplicationType === 'selfcontained') {
+          this.getCaRelatedCriteria()
+            .then(res => {
+              this.caRelatedCriteria = res;
+              this.caRelatedCriteriaForm = this.formUtil.createCARelatedCriterionForm(this.caRelatedCriteria);
+              // console.log(this.caRelatedCriteria);
+              resolve();
+            })
+            .catch(err => {
+              console.log(err);
+              const message: string = err.error +
+                ' ' + err.message;
+              const action = 'close';
+              this.openSnackBar(message, action);
+              reject();
+            });
+
+          this.getEOLotCriterion()
+            .then(res => {
+              this.eoLotCriterion = res;
+              this.eoLotCriterionForm = this.formUtil.createEORelatedCriterionForm(this.eoLotCriterion);
+              // console.log(this.caRelatedCriteria);
+              resolve();
+            })
+            .catch(err => {
+              console.log(err);
+              const message: string = err.error +
+                ' ' + err.message;
+              const action = 'close';
+              this.openSnackBar(message, action);
+              reject();
+            });
+        } else {
+          this.caRelatedCriteria = [];
+          this.eoLotCriterion = [];
+        }
+
+
+        /* ========================= predefined exclusion criteria response ============= */
+        this.getExclusionACriteria()
           .then(res => {
-            this.eoLotCriterion = res;
-            this.eoLotCriterionForm = this.formUtil.createEORelatedCriterionForm(this.eoLotCriterion);
+            this.exclusionACriteria = res;
+            this.exclusionACriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionACriteria);
+            console.log(this.exclusionACriteriaForm);
+
+            /* [cardinalities]: create template requirementGroup */
+            this.formUtil.createTemplateReqGroups(this.exclusionACriteria);
+            resolve();
+
           })
           .catch(err => {
             console.log(err);
@@ -1394,160 +1192,417 @@ export class DataService {
               ' ' + err.message;
             const action = 'close';
             this.openSnackBar(message, action);
+            reject();
           });
-      } else {
-        this.caRelatedCriteria = [];
-        this.eoLotCriterion = [];
+
+        this.getExclusionBCriteria()
+          .then(res => {
+            this.exclusionBCriteria = res;
+            this.exclusionBCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionBCriteria);
+            console.log(this.exclusionBCriteriaForm);
+            /* [cardinalities]: create template requirementGroup */
+            this.formUtil.createTemplateReqGroups(this.exclusionBCriteria);
+            resolve();
+          })
+          .catch(err => {
+            console.log(err);
+            const message: string = err.error +
+              ' ' + err.message;
+            const action = 'close';
+            this.openSnackBar(message, action);
+            reject();
+          });
+
+        this.getExclusionCCriteria()
+          .then(res => {
+            this.exclusionCCriteria = res;
+            this.exclusionCCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionCCriteria);
+            // console.log(res);
+            /* [cardinalities]: create template requirementGroup */
+            this.formUtil.createTemplateReqGroups(this.exclusionCCriteria);
+            resolve();
+          })
+          .catch(err => {
+            console.log(err);
+            const message: string = err.error +
+              ' ' + err.message;
+            const action = 'close';
+            this.openSnackBar(message, action);
+            reject();
+          });
+
+        this.getExclusionDCriteria()
+          .then(res => {
+            this.exclusionDCriteria = res;
+            this.exclusionDCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionDCriteria);
+            // console.log(res);
+            /* [cardinalities]: create template requirementGroup */
+            this.formUtil.createTemplateReqGroups(this.exclusionDCriteria);
+            resolve();
+          })
+          .catch(err => {
+            console.log(err);
+            const message: string = err.error +
+              ' ' + err.message;
+            const action = 'close';
+            this.openSnackBar(message, action);
+            reject();
+          });
+
+        /* ======================== predefined selection criteria ============================ */
+        this.getSelectionALLCriteria()
+          .then(res => {
+            this.selectionALLCriteria = res;
+            this.selectionALLCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionALLCriteria);
+            /* [cardinalities]: create template requirementGroup */
+            this.formUtil.createTemplateReqGroups(this.selectionALLCriteria);
+            resolve();
+          })
+          .catch(err => {
+            console.log(err);
+            const message: string = err.error +
+              ' ' + err.message;
+            const action = 'close';
+            this.openSnackBar(message, action);
+            reject();
+          });
+
+
+        this.getSelectionACriteria()
+          .then(res => {
+            this.selectionACriteria = res;
+            this.selectionACriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionACriteria);
+            /* [cardinalities]: create template requirementGroup */
+            this.formUtil.createTemplateReqGroups(this.selectionACriteria);
+            resolve();
+          })
+          .catch(err => {
+            console.log(err);
+            const message: string = err.error +
+              ' ' + err.message;
+            const action = 'close';
+            this.openSnackBar(message, action);
+            reject();
+          });
+
+
+        this.getSelectionBCriteria()
+          .then(res => {
+            this.selectionBCriteria = res;
+            this.selectionBCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionBCriteria);
+            /* [cardinalities]: create template requirementGroup */
+            this.formUtil.createTemplateReqGroups(this.selectionBCriteria);
+            resolve();
+          })
+          .catch(err => {
+            console.log(err);
+            const message: string = err.error +
+              ' ' + err.message;
+            const action = 'close';
+            this.openSnackBar(message, action);
+            reject();
+          });
+
+        this.getSelectionCCriteria()
+          .then(res => {
+            this.selectionCCriteria = res;
+            this.selectionCCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionCCriteria);
+            /* [cardinalities]: create template requirementGroup */
+            this.formUtil.createTemplateReqGroups(this.selectionCCriteria);
+            resolve();
+          })
+          .catch(err => {
+            console.log(err);
+            const message: string = err.error +
+              ' ' + err.message;
+            const action = 'close';
+            this.openSnackBar(message, action);
+            reject();
+          });
+
+        this.getSelectionDCriteria()
+          .then(res => {
+            this.selectionDCriteria = res;
+            this.selectionDCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionDCriteria);
+            /* [cardinalities]: create template requirementGroup */
+            this.formUtil.createTemplateReqGroups(this.selectionDCriteria);
+            resolve();
+          })
+          .catch(err => {
+            console.log(err);
+            const message: string = err.error +
+              ' ' + err.message;
+            const action = 'close';
+            this.openSnackBar(message, action);
+            reject();
+          });
+
+        /* =========================== predefined reduction criteria ================================= */
+        this.getReductionCriteria()
+          .then(res => {
+            this.reductionCriteria = res;
+            this.reductionCriteriaForm = this.formUtil.createReductionCriterionForm(this.reductionCriteria);
+            /* [cardinalities]: create template requirementGroup */
+            this.formUtil.createTemplateReqGroups(this.reductionCriteria);
+            console.log('TEMPLATE ARRAY: ');
+            console.log(this.formUtil.template);
+            resolve();
+          })
+          .catch(err => {
+            console.log(err);
+            const message: string = err.error +
+              ' ' + err.message;
+            const action = 'close';
+            this.openSnackBar(message, action);
+            reject();
+          });
+
       }
+      // get predefined criteria (ca)
+      if (this.utilities.isCreateNewESPD) {
 
-      /* ======================== predefined exclusion criteria ================================== */
+        /* =========================== predefined reduction criteria ================================= */
+        this.getReductionCriteria()
+          .then(res => {
+            this.reductionCriteria = res;
+            // console.log(this.reductionCriteria);
+            /* [cardinalities]: create template requirementGroup */
+            this.formUtil.createTemplateReqGroups(this.reductionCriteria);
+            resolve();
+          })
+          .catch(err => {
+            console.log(err);
+            const message: string = err.error +
+              ' ' + err.message;
+            const action = 'close';
+            this.openSnackBar(message, action);
+            reject();
+          });
 
-      this.getExclusionACriteria()
-        .then(res => {
-          this.exclusionACriteria = res;
-          this.exclusionACriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionACriteria);
-          // console.log("This is exclusionACriteria: ");
-          /* [cardinalities]: create template requirementGroup */
-          this.formUtil.createTemplateReqGroups(this.exclusionACriteria);
-        })
-        .catch(err => {
-          console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
-          const action = 'close';
-          this.openSnackBar(message, action);
-        });
+        /* ========================= predefined other.eo criteria ====================================*/
+        this.getEoRelatedCriteria()
+          .then(res => {
+            this.eoRelatedCriteria = res;
+            // console.log(this.eoRelatedCriteria);
+            resolve();
+          })
+          .catch(err => {
+            console.log(err);
+            const message: string = err.error +
+              ' ' + err.message;
+            const action = 'close';
+            this.openSnackBar(message, action);
+            reject();
+          });
 
-      this.getExclusionBCriteria()
-        .then(res => {
-          this.exclusionBCriteria = res;
-          this.exclusionBCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionBCriteria);
-          // console.log(res);
-          /* [cardinalities]: create template requirementGroup */
-          this.formUtil.createTemplateReqGroups(this.exclusionBCriteria);
-        })
-        .catch(err => {
-          console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
-          const action = 'close';
-          this.openSnackBar(message, action);
-        });
+        /* ========================= SELF-CONTAINED: predefined other.ca criteria ============================= */
 
-      this.getExclusionCCriteria()
-        .then(res => {
-          this.exclusionCCriteria = res;
-          this.exclusionCCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionCCriteria);
-          // console.log(res);
-          /* [cardinalities]: create template requirementGroup */
-          this.formUtil.createTemplateReqGroups(this.exclusionCCriteria);
-        })
-        .catch(err => {
-          console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
-          const action = 'close';
-          this.openSnackBar(message, action);
-        });
-
-      this.getExclusionDCriteria()
-        .then(res => {
-          this.exclusionDCriteria = res;
-          this.exclusionDCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionDCriteria);
-          // console.log(res);
-          /* [cardinalities]: create template requirementGroup */
-          this.formUtil.createTemplateReqGroups(this.exclusionDCriteria);
-        })
-        .catch(err => {
-          console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
-          const action = 'close';
-          this.openSnackBar(message, action);
-        });
+        if (this.utilities.qualificationApplicationType === 'selfcontained') {
+          this.getCaRelatedCriteria()
+            .then(res => {
+              this.caRelatedCriteria = res;
+              this.caRelatedCriteriaForm = this.formUtil.createCARelatedCriterionForm(this.caRelatedCriteria);
+              /* [cardinalities]: create template requirementGroup */
+              this.formUtil.createTemplateReqGroups(this.caRelatedCriteria);
+              // console.log(this.caRelatedCriteria);
+              resolve();
+            })
+            .catch(err => {
+              console.log(err);
+              const message: string = err.error +
+                ' ' + err.message;
+              const action = 'close';
+              this.openSnackBar(message, action);
+              reject();
+            });
 
 
-      /* ============================= predefined selection criteria =========================== */
-      this.getSelectionALLCriteria()
-        .then(res => {
-          this.selectionALLCriteria = res;
-          this.selectionALLCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionALLCriteria);
-          // console.log(res);
-        })
-        .catch(err => {
-          console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
-          const action = 'close';
-          this.openSnackBar(message, action);
-        });
+          /* SELF-CONTAINED: OTHER_EO LOT TENDERED CRITERION */
+          this.getEOLotCriterion()
+            .then(res => {
+              this.eoLotCriterion = res;
+              this.eoLotCriterionForm = this.formUtil.createEORelatedCriterionForm(this.eoLotCriterion);
+              resolve();
+            })
+            .catch(err => {
+              console.log(err);
+              const message: string = err.error +
+                ' ' + err.message;
+              const action = 'close';
+              this.openSnackBar(message, action);
+              reject();
+            });
+        } else {
+          this.caRelatedCriteria = [];
+          this.eoLotCriterion = [];
+        }
 
-      this.getSelectionACriteria()
-        .then(res => {
-          this.selectionACriteria = res;
-          this.selectionACriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionACriteria);
-          /* [cardinalities]: create template requirementGroup */
-          this.formUtil.createTemplateReqGroups(this.selectionACriteria);
-          // console.log(res);
-        })
-        .catch(err => {
-          console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
-          const action = 'close';
-          this.openSnackBar(message, action);
-        });
+        /* ======================== predefined exclusion criteria ================================== */
+
+        this.getExclusionACriteria()
+          .then(res => {
+            this.exclusionACriteria = res;
+            this.exclusionACriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionACriteria);
+            // console.log("This is exclusionACriteria: ");
+            /* [cardinalities]: create template requirementGroup */
+            this.formUtil.createTemplateReqGroups(this.exclusionACriteria);
+            resolve();
+          })
+          .catch(err => {
+            console.log(err);
+            const message: string = err.error +
+              ' ' + err.message;
+            const action = 'close';
+            this.openSnackBar(message, action);
+            reject();
+          });
+
+        this.getExclusionBCriteria()
+          .then(res => {
+            this.exclusionBCriteria = res;
+            this.exclusionBCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionBCriteria);
+            // console.log(res);
+            /* [cardinalities]: create template requirementGroup */
+            this.formUtil.createTemplateReqGroups(this.exclusionBCriteria);
+            resolve();
+          })
+          .catch(err => {
+            console.log(err);
+            const message: string = err.error +
+              ' ' + err.message;
+            const action = 'close';
+            this.openSnackBar(message, action);
+            reject();
+          });
+
+        this.getExclusionCCriteria()
+          .then(res => {
+            this.exclusionCCriteria = res;
+            this.exclusionCCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionCCriteria);
+            // console.log(res);
+            /* [cardinalities]: create template requirementGroup */
+            this.formUtil.createTemplateReqGroups(this.exclusionCCriteria);
+            resolve();
+          })
+          .catch(err => {
+            console.log(err);
+            const message: string = err.error +
+              ' ' + err.message;
+            const action = 'close';
+            this.openSnackBar(message, action);
+            reject();
+          });
+
+        this.getExclusionDCriteria()
+          .then(res => {
+            this.exclusionDCriteria = res;
+            this.exclusionDCriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionDCriteria);
+            // console.log(res);
+            /* [cardinalities]: create template requirementGroup */
+            this.formUtil.createTemplateReqGroups(this.exclusionDCriteria);
+            resolve();
+          })
+          .catch(err => {
+            console.log(err);
+            const message: string = err.error +
+              ' ' + err.message;
+            const action = 'close';
+            this.openSnackBar(message, action);
+            reject();
+          });
 
 
-      this.getSelectionBCriteria()
-        .then(res => {
-          this.selectionBCriteria = res;
-          this.selectionBCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionBCriteria);
-          // console.log(res);
-          this.formUtil.createTemplateReqGroups(this.selectionBCriteria);
-        })
-        .catch(err => {
-          console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
-          const action = 'close';
-          this.openSnackBar(message, action);
-        });
+        /* ============================= predefined selection criteria =========================== */
+        this.getSelectionALLCriteria()
+          .then(res => {
+            this.selectionALLCriteria = res;
+            this.selectionALLCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionALLCriteria);
+            // console.log(res);
+            resolve();
+          })
+          .catch(err => {
+            console.log(err);
+            const message: string = err.error +
+              ' ' + err.message;
+            const action = 'close';
+            this.openSnackBar(message, action);
+            reject();
+          });
 
-      this.getSelectionCCriteria()
-        .then(res => {
-          this.selectionCCriteria = res;
-          this.selectionCCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionCCriteria);
-          // console.log('SELECTION C CRITERIA FORM:  ========================================================= ');
-          // console.log(this.selectionCCriteriaForm);
-          // console.log(res);
-          this.formUtil.createTemplateReqGroups(this.selectionCCriteria);
-        })
-        .catch(err => {
-          console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
-          const action = 'close';
-          this.openSnackBar(message, action);
-        });
+        this.getSelectionACriteria()
+          .then(res => {
+            this.selectionACriteria = res;
+            this.selectionACriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionACriteria);
+            /* [cardinalities]: create template requirementGroup */
+            this.formUtil.createTemplateReqGroups(this.selectionACriteria);
+            // console.log(res);
+            resolve();
+          })
+          .catch(err => {
+            console.log(err);
+            const message: string = err.error +
+              ' ' + err.message;
+            const action = 'close';
+            this.openSnackBar(message, action);
+            reject();
+          });
 
-      this.getSelectionDCriteria()
-        .then(res => {
-          this.selectionDCriteria = res;
-          this.selectionDCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionDCriteria);
-          this.formUtil.createTemplateReqGroups(this.selectionDCriteria);
-          // console.log(res);
-        })
-        .catch(err => {
-          console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
-          const action = 'close';
-          this.openSnackBar(message, action);
-        });
 
-    }
+        this.getSelectionBCriteria()
+          .then(res => {
+            this.selectionBCriteria = res;
+            this.selectionBCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionBCriteria);
+            // console.log(res);
+            this.formUtil.createTemplateReqGroups(this.selectionBCriteria);
+            resolve();
+          })
+          .catch(err => {
+            console.log(err);
+            const message: string = err.error +
+              ' ' + err.message;
+            const action = 'close';
+            this.openSnackBar(message, action);
+            reject();
+          });
 
+        this.getSelectionCCriteria()
+          .then(res => {
+            this.selectionCCriteria = res;
+            this.selectionCCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionCCriteria);
+            // console.log('SELECTION C CRITERIA FORM:  ========================================================= ');
+            // console.log(this.selectionCCriteriaForm);
+            // console.log(res);
+            this.formUtil.createTemplateReqGroups(this.selectionCCriteria);
+            resolve();
+          })
+          .catch(err => {
+            console.log(err);
+            const message: string = err.error +
+              ' ' + err.message;
+            const action = 'close';
+            this.openSnackBar(message, action);
+            reject();
+          });
+
+        this.getSelectionDCriteria()
+          .then(res => {
+            this.selectionDCriteria = res;
+            this.selectionDCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionDCriteria);
+            this.formUtil.createTemplateReqGroups(this.selectionDCriteria);
+            // console.log(res);
+            resolve();
+          })
+          .catch(err => {
+            console.log(err);
+            const message: string = err.error +
+              ' ' + err.message;
+            const action = 'close';
+            this.openSnackBar(message, action);
+            reject();
+          });
+      }
+    });
+    return promise;
   }
 
   AddLanguages() {

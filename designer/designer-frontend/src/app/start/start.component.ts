@@ -161,14 +161,22 @@ export class StartComponent implements OnInit {
 
   onStartSubmit(form: NgForm) {
     this.isLoading = true;
-    this.dataService.startESPD(form)
-    const role = ( this.isCA ? 'CA' : 'EO');
-    this.dataService.ReuseESPD(this.fileToUpload, form, role)
-    .then(() => {
+    this.dataService.startESPD(form).then(() => {
       this.isLoading = false;
+      this.parentStepper.next();
+      this.utilities.isStarted = true;
+    }).catch(() => {
+      this.isLoading = false;
+    });
+    const role = (this.isCA ? 'CA' : 'EO');
+    this.dataService.ReuseESPD(this.fileToUpload, form, role)
+      .then(() => {
+        this.isLoading = false;
         this.parentStepper.next();
         this.utilities.isStarted = true;
-    })
-    .catch(() => {this.isLoading = false});
+      })
+      .catch(() => {
+        this.isLoading = false;
+      });
   }
 }
