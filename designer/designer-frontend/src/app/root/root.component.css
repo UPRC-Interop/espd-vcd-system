@@ -46,6 +46,7 @@ mat-card-content {
 .logo {
   /*display: inline-block;*/
   width: 70%;
+  max-width: 650px;
   height: auto;
   /*margin: 0 auto;*/
 }
@@ -58,6 +59,7 @@ mat-card-content {
 
 .EUlogo {
   width: 60%;
+  max-width: 450px;
   height: auto;
 }
 
