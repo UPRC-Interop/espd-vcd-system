@@ -14,7 +14,7 @@
 /// limitations under the License.
 ///
 
-import {BrowserModule} from '@angular/platform-browser';
+import {BrowserModule, Title} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule} from './material/material.module';
@@ -93,7 +93,7 @@ import { TOOPDialogComponent } from './toopdialog/toopdialog.component';
   ], entryComponents: [
     TOOPDialogComponent
   ],
-  providers: [ApicallService, DataService,
+  providers: [ApicallService, DataService, Title,
     {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
     {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
     {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS}],

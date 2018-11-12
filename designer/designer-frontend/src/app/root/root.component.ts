@@ -17,6 +17,7 @@
 import {Component, OnChanges, OnInit} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {UtilitiesService} from '../services/utilities.service';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -26,10 +27,13 @@ import {UtilitiesService} from '../services/utilities.service';
 export class RootComponent implements OnInit, OnChanges {
 
   isLinear = true;
+  elTitle = 'Προμηθεύς ESPDint – ηλεκτρονική υπηρεσία σύνταξης του Ενιαίου Ευρωπαϊκού Εγγράφου Σύμβασης (ΕΕΕΣ)';
+  enTitle = 'Promitheus ESPDint – e-Service to fill out the European Single Procurement Document (ESPD)';
 
   // eoRelatedFormA = this.dataService.eoRelatedACriteriaForm;
 
-  constructor(public dataService: DataService, public utilities: UtilitiesService) {
+  constructor(public dataService: DataService,
+              public utilities: UtilitiesService, private titleService: Title) {
   }
 
   ngOnInit() {
@@ -43,6 +47,12 @@ export class RootComponent implements OnInit, OnChanges {
       this.dataService.switchLanguage(language);
       this.utilities.initLanguage = false;
       this.utilities.start = true;
+    this.setTitle(this.utilities.selectedLang);
+  }
+
+   setTitle( lang: string) {
+     const title = ( lang === 'el' ? this.elTitle : this.enTitle);
+    this.titleService.setTitle(title);
   }
 
 }
