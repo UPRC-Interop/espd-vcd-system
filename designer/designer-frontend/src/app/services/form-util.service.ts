@@ -304,9 +304,12 @@ export class FormUtilService {
             } else if (req.responseDataType === 'LOT_IDENTIFIER') {
               // req.response.lots = this.utilities.lotTemplate[req.uuid];
               if (formValues[req.uuid.valueOf()] === null || formValues[req.uuid.valueOf()] === '' || formValues[req.uuid.valueOf()].length === 0) {
-                req.response.lots = [];
+                req.response.lots = null;
               } else {
                 req.response.lots = formValues[req.uuid.valueOf()];
+                if (this.utilities.isEmptyStringArray(req.response.lots)) {
+                  req.response = null;
+                }
               }
             }
           }

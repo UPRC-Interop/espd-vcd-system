@@ -73,11 +73,16 @@ export class UtilitiesService {
   }
 
   isEmpty(obj: Object): Boolean {
+    // console.log(Object.keys(obj).length);
     if (Object.keys(obj).length === 0) {
       return true;
     } else {
       return false;
     }
+  }
+
+  isEmptyStringArray(arr: string[]): Boolean {
+    return arr.every(item => item.trim() === '');
   }
 
   findCriterion(criteria: SelectionCriteria[], id: string): boolean {
