@@ -68,6 +68,12 @@ mat-card-content {
   height: auto;
 }
 
+.text-container {
+  display: block;
+  width: 90%;
+  margin: 20px auto;
+}
+
 .text {
   text-align: justify;
 }
@@ -90,4 +96,9 @@ mat-card-content {
 
 mat-card-subtitle {
   text-align: center;
+}
+
+iframe {
+  display: block;
+  margin: 20px auto;
 }
