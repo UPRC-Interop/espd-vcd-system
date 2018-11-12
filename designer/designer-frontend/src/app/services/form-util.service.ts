@@ -303,7 +303,12 @@ export class FormUtilService {
               req.response.eoidtype = formValues[eoidtypeID.valueOf()];
               req.response.uuid = null;
             } else if (req.responseDataType === 'LOT_IDENTIFIER') {
-              req.response.lots = this.utilities.lotTemplate[req.uuid];
+              // req.response.lots = this.utilities.lotTemplate[req.uuid];
+              if (formValues[req.uuid.valueOf()] === null || formValues[req.uuid.valueOf()] === '' || formValues[req.uuid.valueOf()].length === 0) {
+                req.response.lots = [];
+              } else {
+                req.response.lots = formValues[req.uuid.valueOf()];
+              }
             }
           }
         });
