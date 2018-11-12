@@ -47,14 +47,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public interface ModelExtractor {
 
+    Logger LOGGER = Logger.getLogger(ModelExtractor.class.getCanonicalName());
+
     default CADetails extractCADetails(ContractingPartyType caParty,
                                        ContractFolderIDType contractFolderId,
                                        List<DocumentReferenceType> additionalDocumentReferenceList) {
-
         CADetails cd = new CADetails();
 
         if (caParty != null && caParty.getParty() != null) {
@@ -705,7 +707,6 @@ public interface ModelExtractor {
                     break;
 
                 case CODE:
-                case INDICATOR: // https://github.com/ESPD/ESPD-EDM/issues/182
                     if (rqType.getExpectedCode() != null
                             && rqType.getExpectedCode().getValue() != null) {
 
@@ -779,6 +780,19 @@ public interface ModelExtractor {
                         applyValidatedCriterionPropertyID(rqType.getID().getValue(), urlResp);
                         applyConfidentialityLevelCode(ConfidentialityLevelEnum.PUBLIC.name(), urlResp);
                         rq.setResponse(urlResp);
+                    }
+                    break;
+
+                case INDICATOR:
+                    // https://github.com/ESPD/ESPD-EDM/issues/182
+                    if (rqType.getExpectedCode() != null
+                            && rqType.getExpectedCode().getValue() != null) {
+
+                        IndicatorResponse indicatorResp = new IndicatorResponse();
+                        indicatorResp.setIndicator(rqType.getExpectedCode().getValue().equals("TRUE"));
+                        applyValidatedCriterionPropertyID(rqType.getID().getValue(), indicatorResp);
+                        applyConfidentialityLevelCode(ConfidentialityLevelEnum.PUBLIC.name(), indicatorResp);
+                        rq.setResponse(indicatorResp);
                     }
                     break;
 
