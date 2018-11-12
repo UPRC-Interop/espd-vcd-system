@@ -570,10 +570,16 @@ export class FormUtilService {
             /* SELF-CONTAINED: LOT_IDENTIFIER */
             if (r.responseDataType === 'LOT_IDENTIFIER') {
               if (r.response.lots !== undefined && r.response.lots !== null) {
-                group[r.uuid] = new FormControl(r.response.lots);
+                group[r.uuid] = new FormControl({
+                  value: r.response.lots,
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
                 this.utilities.renderLotTemplate[r.uuid] = r.response.lots;
               } else {
-                group[r.uuid] = new FormControl();
+                group[r.uuid] = new FormControl({
+                  value: '',
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
                 this.utilities.renderLotTemplate[r.uuid] = [];
               }
             }
