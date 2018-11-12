@@ -30,6 +30,7 @@ public enum CodelistsV2Service implements CodelistsService {
     public static CodelistsService getInstance() {
         return INSTANCE;
     }
+
     private final Map<String, List<CodelistItem>> CODELISTS_MAP = new HashMap<>();
     private static final Pattern pattern = Pattern.compile("\\|(.*?)\\)");
 
@@ -38,10 +39,16 @@ public enum CodelistsV2Service implements CodelistsService {
         if (CODELISTS_MAP.containsKey(codelist + ".eng"))
             return CODELISTS_MAP.get(codelist + ".eng");
         else {
-            Map<String, String> theCodelistMap = CodelistsV2.valueOf(codelist).getDataMap();
+            Map<String, String> theCodelistMap;
+            if (codelist.equalsIgnoreCase("LanguageCodeEU")) {
+                theCodelistMap = new HashMap<>();
+                theCodelistMap.put("EN", "English (en)");
+                theCodelistMap.put("EL", "Ελληνικά (el)");
+            } else
+                theCodelistMap = CodelistsV2.valueOf(codelist).getDataMap();
+
             List<CodelistItem> theCodelistList = new ArrayList<>(theCodelistMap.size());
             putToList(theCodelistMap, theCodelistList);
-            theCodelistList.sort(Comparator.comparing(CodelistItem::getName));
             CODELISTS_MAP.putIfAbsent(codelist, theCodelistList);
             return theCodelistList;
         }
@@ -58,10 +65,15 @@ public enum CodelistsV2Service implements CodelistsService {
         if (CODELISTS_MAP.containsKey(codelist + '.' + language))
             return CODELISTS_MAP.get(codelist + '.' + language);
         else {
-            Map<String, String> theCodelistMap = CodelistsV2.valueOf(codelist).getDataMap(language);
+            Map<String, String> theCodelistMap;
+            if (codelist.equalsIgnoreCase("LanguageCodeEU")) {
+                theCodelistMap = new HashMap<>();
+                theCodelistMap.put("EN", "English (en)");
+                theCodelistMap.put("EL", "Ελληνικά (el)");
+            } else
+                theCodelistMap = CodelistsV2.valueOf(codelist).getDataMap(language);
             List<CodelistItem> theCodelistList = new ArrayList<>(theCodelistMap.size());
             putToList(theCodelistMap, theCodelistList);
-            theCodelistList.sort(Comparator.comparing(CodelistItem::getName));
             CODELISTS_MAP.putIfAbsent(codelist + '.' + language, theCodelistList);
             return theCodelistList;
         }
@@ -75,5 +87,6 @@ public enum CodelistsV2Service implements CodelistsService {
             else
                 theCodelistList.add(new CodelistItem(key, value));
         });
+        theCodelistList.sort(Comparator.comparing(CodelistItem::getName));
     }
 }
