@@ -19,14 +19,14 @@
 }
 
 .columnList {
-  column-count: 4;
+  column-count: 2;
 }
 
 ul li {
   list-style: none;
   font-size: 1.6em;
-  text-align: justify;
-  margin: 10px;
+  /*text-align: justify;*/
+  /*margin: 10px;*/
 }
 
 ul li:hover {
@@ -101,4 +101,31 @@ mat-card-subtitle {
 iframe {
   display: block;
   margin: 20px auto;
+}
+
+.flag {
+  display: block;
+}
+
+.flag-icon {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+}
+
+.flag-icon-en, .flag-icon-el {
+  padding: 0;
+  margin: 0;
+}
+
+.block {
+  display: block;
+}
+
+.langBlock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 10px;
 }

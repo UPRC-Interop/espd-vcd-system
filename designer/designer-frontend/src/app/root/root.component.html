@@ -29,7 +29,10 @@
         <mat-card-content>
           <ul class="columnList">
             <li *ngFor="let lang of this.dataService.langNames" (click)="onLanguageSelection(lang)">
-              <span class="flag-icon flag-icon-{{this.dataService.langISOCodes[lang].toLowerCase()}}"></span> {{lang}}
+              <div class="langBlock">
+                <span class="block" class="flag-icon flag-icon-{{this.dataService.langISOCodes[lang].toLowerCase()}}"></span>
+                <span class="block">{{lang}}</span>
+              </div>
             </li>
           </ul>
           <iframe src="https://europa.eu/!nY89JQ" id="videoplayer" width="852" height="480" frameborder="0"
