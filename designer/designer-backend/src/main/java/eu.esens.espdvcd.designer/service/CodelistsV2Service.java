@@ -1,12 +1,12 @@
 /**
  * Copyright 2016-2018 University of Piraeus Research Center
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -30,10 +30,8 @@ public enum CodelistsV2Service implements CodelistsService {
     public static CodelistsService getInstance() {
         return INSTANCE;
     }
-
     private final Map<String, List<CodelistItem>> CODELISTS_MAP = new HashMap<>();
     private static final Pattern pattern = Pattern.compile("\\|(.*?)\\)");
-
 
     @Override
     public List<CodelistItem> getCodelist(String codelist) throws IllegalArgumentException {
@@ -49,7 +47,6 @@ public enum CodelistsV2Service implements CodelistsService {
         }
     }
 
-
     @Override
     public Codelists[] getAvailableCodelists() {
         return CodelistsV2.values();
@@ -61,7 +58,6 @@ public enum CodelistsV2Service implements CodelistsService {
         if (CODELISTS_MAP.containsKey(codelist + '.' + language))
             return CODELISTS_MAP.get(codelist + '.' + language);
         else {
-            //TODO: CHECK IF LANGUAGE CODE EXISTS BEFORE ADDING TO CODELIST MAP
             Map<String, String> theCodelistMap = CodelistsV2.valueOf(codelist).getDataMap(language);
             List<CodelistItem> theCodelistList = new ArrayList<>(theCodelistMap.size());
             putToList(theCodelistMap, theCodelistList);
