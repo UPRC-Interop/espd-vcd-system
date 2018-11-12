@@ -16,24 +16,13 @@
 
 import {Component, OnInit} from '@angular/core';
 import {DataService} from '../services/data.service';
-import {ProcedureType} from '../model/procedureType.model';
-import {Country} from '../model/country.model';
-import {FormArray, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
-import {EoRelatedCriterion} from '../model/eoRelatedCriterion.model';
-import {RequirementGroup} from '../model/requirementGroup.model';
-import {RequirementResponse} from '../model/requirement-response.model';
-import * as moment from 'moment';
-import {Moment} from 'moment';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-import {TOOPDialogComponent} from '../toopdialog/toopdialog.component';
-import {Evidence} from '../model/evidence.model';
-import {EvidenceIssuer} from '../model/evidenceIssuer.model';
-import {FormUtilService} from '../services/form-util.service';
+// import {ProcedureType} from '../model/procedureType.model';
+// import {Country} from '../model/country.model';
 import {FormArray, FormControl, FormGroup, NgForm} from '@angular/forms';
+import {MatChipInputEvent, MatDialog} from '@angular/material';
+import {TOOPDialogComponent} from '../toopdialog/toopdialog.component';
 import {UtilitiesService} from '../services/utilities.service';
 import {COMMA, ENTER} from '../../../node_modules/@angular/cdk/keycodes';
-import {MatChipInputEvent} from '@angular/material';
-import {CodeList} from '../model/codeList.model';
 import {CodelistService} from '../services/codelist.service';
 
 @Component({
