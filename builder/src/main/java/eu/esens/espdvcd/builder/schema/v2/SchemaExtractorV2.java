@@ -762,6 +762,13 @@ public interface SchemaExtractorV2 {
         return lotType;
     }
 
+    default ResponseIDType createResponseIDType(String id) {
+        ResponseIDType idType = new ResponseIDType();
+        idType.setSchemeAgencyID("EU-COM-GROW");
+        idType.setValue(id);
+        return idType;
+    }
+
     default void applyCAResponseToXML(Requirement rq, TenderingCriterionPropertyType rqType) {
 
         if (rq.getType() == RequirementTypeEnum.REQUIREMENT
