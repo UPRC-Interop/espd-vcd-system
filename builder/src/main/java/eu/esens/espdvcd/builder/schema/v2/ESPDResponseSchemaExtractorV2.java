@@ -17,6 +17,7 @@ package eu.esens.espdvcd.builder.schema.v2;
 
 import eu.esens.espdvcd.codelist.enums.EOIndustryClassificationCodeEnum;
 import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
+import eu.esens.espdvcd.codelist.enums.RequirementTypeEnum;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.EODetails;
 import eu.esens.espdvcd.model.ESPDRequestDetails;
@@ -173,17 +174,20 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
     public List<TenderingCriterionResponseType> extractAllTenderingCriterionResponses(final RequirementGroup rg,
                                                                                       final TenderingCriterionType criterionType) {
         return extractAllRequirements(rg, null).stream()
-                .map(rq -> {
-
-                    if (rq.getResponse() != null) {
-                        rq.getResponse().setValidatedCriterionPropertyID(rq.getID());
-                    }
+                .filter(rq -> {
 
                     if (rq.getResponseDataType() == ResponseTypeEnum.WEIGHT_INDICATOR) {
                         WeightIndicatorResponse weightIndResp = (WeightIndicatorResponse) rq.getResponse();
                         applyTenderingCriterionWeightingData(weightIndResp, criterionType);
                     }
 
+                    return rq.getType() == RequirementTypeEnum.QUESTION;
+                })
+                .map(rq -> {
+
+                    if (rq.getResponse() != null) {
+                        rq.getResponse().setValidatedCriterionPropertyID(rq.getID());
+                    }
                     return extractTenderingCriterionResponse(rq.getResponse(), rq.getResponseDataType(), criterionType);
                 })
                 .collect(Collectors.toList());
@@ -642,21 +646,11 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
                 tcrType.getResponseValue().add(urlRvType);
                 return tcrType;
 
-//            case WEIGHT_INDICATOR:
-//                ResponseValueType weightIndRvType = createResponseValueType();
-//                WeightIndicatorResponse weightIndResp = (WeightIndicatorResponse) response;
-//                applyTenderingCriterionWeightingData(weightIndResp, criterionType);
-//                // Indicator
-//                weightIndRvType.setResponseIndicator(createResponseIndicatorType(weightIndResp.isIndicator()));
-//                tcrType.getResponseValue().add(weightIndRvType);
-//                return tcrType;
-
             case LOT_IDENTIFIER:
                 LotIdentifierResponse lotIdeResp = (LotIdentifierResponse) response;
                 lotIdeResp.getLotsList().forEach(lot -> {
                     ResponseValueType lotIdeRvType = createResponseValueType();
-                    lotIdeRvType.setResponseID(new ResponseIDType());
-                    lotIdeRvType.getResponseID().setValue(lot);
+                    lotIdeRvType.setResponseID(createResponseIDType(lot));
                     tcrType.getResponseValue().add(lotIdeRvType);
                 });
                 return tcrType;
@@ -666,12 +660,10 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
                 String eoResponseID = ((EOIdentifierResponse) response).getIdentifier();
                 String eoIDType = ((EOIdentifierResponse) response).getEOIDType();
                 if (eoResponseID != null) {
-                    eoIdeRvType.setResponseID(new ResponseIDType());
-                    eoIdeRvType.getResponseID().setSchemeAgencyID("EU-COM-GROW");
+                    eoIdeRvType.setResponseID(createResponseIDType(eoResponseID));
                     if (eoIDType != null) {
                         eoIdeRvType.getResponseID().setSchemeName(eoIDType);
                     }
-                    eoIdeRvType.getResponseID().setValue(eoResponseID);
                 }
                 tcrType.getResponseValue().add(eoIdeRvType);
                 return tcrType;

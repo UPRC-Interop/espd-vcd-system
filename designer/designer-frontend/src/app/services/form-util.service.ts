@@ -720,9 +720,14 @@ export class FormUtilService {
             }
 
             /* SELF-CONTAINED: ECONOMIC_OPERATOR_IDENTIFIER */
-            if (r.response.id || r.response.eoidtype) {
-              group[r.uuid] = new FormControl(r.response.id);
-              group[r.uuid + 'eoidtype'] = new FormControl(r.response.eoidtype);
+            if (r.responseDataType === 'ECONOMIC_OPERATOR_IDENTIFIER') {
+              if (r.response.id !== null || r.response.eoidtype !== null) {
+                group[r.uuid] = new FormControl(r.response.id);
+                group[r.uuid + 'eoidtype'] = new FormControl(r.response.eoidtype);
+              } else {
+                group[r.uuid] = new FormControl();
+                group[r.uuid + 'eoidtype'] = new FormControl();
+              }
             }
 
             if (r.response.currency || r.response.amount) {
