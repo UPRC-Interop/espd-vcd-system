@@ -29,8 +29,6 @@ import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
 import eu.espd.schema.v2.pre_award.commonaggregate.*;
 import eu.espd.schema.v2.pre_award.commonbasic.*;
 import eu.espd.schema.v2.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeConstants;
@@ -43,11 +41,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.function.Function;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(ESPDResponseSchemaExtractorV2.class);
+    Logger LOGGER = Logger.getLogger(ESPDResponseSchemaExtractorV2.class.getName());
 
     public QualificationApplicationResponseType extractQualificationApplicationResponseType(ESPDResponse modelResponse) {
 
@@ -408,7 +408,7 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
                                     DatatypeConstants.FIELD_UNDEFINED);
                     personType.getBirthDate().setValue(xcal.toGregorianCalendar().toZonedDateTime().toLocalDate());
                 } catch (DatatypeConfigurationException ex) {
-                    LOGGER.error("Could not create XML Date Object", ex);
+                    LOGGER.log(Level.SEVERE, "Could not create XML Date Object", ex);
                 }
             }
 
@@ -585,7 +585,7 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
                         dateRvType.getResponseDate().setValue(xcal.toGregorianCalendar().toZonedDateTime().toLocalDate());
 
                     } catch (DatatypeConfigurationException ex) {
-                        LOGGER.error("Could not create XMLGregorianCalendar Date Object", ex);
+                        LOGGER.log(Level.SEVERE, "Could not create XMLGregorianCalendar Date Object", ex);
                         return null;
                     }
                 }
@@ -649,10 +649,16 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
             case LOT_IDENTIFIER:
                 LotIdentifierResponse lotIdeResp = (LotIdentifierResponse) response;
                 lotIdeResp.getLotsList().forEach(lot -> {
-                    ResponseValueType lotIdeRvType = createResponseValueType();
-                    lotIdeRvType.setResponseID(createResponseIDType(lot));
-                    tcrType.getResponseValue().add(lotIdeRvType);
+                    if (!lot.isEmpty()) {
+                        ResponseValueType lotIdeRvType = createResponseValueType();
+                        lotIdeRvType.setResponseID(createResponseIDType(lot));
+                        tcrType.getResponseValue().add(lotIdeRvType);
+                    }
                 });
+
+                if (tcrType.getResponseValue().isEmpty()) {
+                    return null;
+                }
                 return tcrType;
 
             case ECONOMIC_OPERATOR_IDENTIFIER:
@@ -664,6 +670,8 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
                     if (eoIDType != null) {
                         eoIdeRvType.getResponseID().setSchemeName(eoIDType);
                     }
+                } else {
+                    LOGGER.log(Level.WARNING, "EO ResponseID is Null");
                 }
                 tcrType.getResponseValue().add(eoIdeRvType);
                 return tcrType;
@@ -694,7 +702,7 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
             idt.setValue(xcalDate.toGregorianCalendar().toZonedDateTime().toLocalDate());
             drt.setIssueDate(idt);
         } catch (DatatypeConfigurationException ex) {
-            LOGGER.error("Could not create XMLGregorianCalendar Date Object", ex);
+            LOGGER.log(Level.SEVERE, "Could not create XML Date Object", ex);
         }
 
 
@@ -709,7 +717,7 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
             itt.setValue(xcalTime.toGregorianCalendar().toZonedDateTime().toLocalTime());
             drt.setIssueTime(itt);
         } catch (DatatypeConfigurationException ex) {
-            LOGGER.error("Could not create XMLGregorianCalendar Date Object", ex);
+            LOGGER.log(Level.SEVERE, "Could not create XML Date Object", ex);
         }
 
 
