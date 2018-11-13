@@ -15,6 +15,8 @@
  */
 package eu.esens.espdvcd.model.requirement.response;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 
 /**
@@ -42,24 +44,27 @@ public class EOIdentifierResponse extends Response implements Serializable {
     public EOIdentifierResponse() {
     }
 
-    public EOIdentifierResponse(String EOIDType, String identifier) {
+    public EOIdentifierResponse(@JsonProperty("eoidtype") String EOIDType,
+                                @JsonProperty("id") String identifier) {
         this.EOIDType = EOIDType;
         this.identifier = identifier;
     }
 
+    @JsonProperty("eoidtype")
     public String getEOIDType() {
         return EOIDType;
     }
 
-    public void setEOIDType(String EOIDType) {
+    public void setEOIDType(@JsonProperty("eoidtype") String EOIDType) {
         this.EOIDType = EOIDType;
     }
 
+    @JsonProperty("id")
     public String getIdentifier() {
         return identifier;
     }
 
-    public void setIdentifier(String identifier) {
+    public void setIdentifier(@JsonProperty("id") String identifier) {
         this.identifier = identifier;
     }
 }
