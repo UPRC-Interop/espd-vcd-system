@@ -16,9 +16,7 @@
 package eu.esens.espdvcd.builder;
 
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
-import eu.esens.espdvcd.model.ESPDRequest;
-import eu.esens.espdvcd.model.ESPDResponse;
-import eu.esens.espdvcd.model.SelectableCriterion;
+import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.ResponseRequirement;
@@ -31,6 +29,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.rules.Timeout;
 
 import java.io.InputStream;
 
@@ -369,6 +368,21 @@ public class BuilderESPDTest {
                 .createDocumentBuilderFor(espdResponse);
 
         System.out.println(xmlDocumentBuilderV2.getAsString());
+    }
+
+    @Test
+    public void testCreateSelfContainedRequestFromScratch() throws Exception {
+
+        ESPDRequest modelRequest = BuilderFactory.EDM_V2
+                .createSelfContainedModelBuilder()
+                .createESPDRequest();
+
+        modelRequest.getCADetails().setProcurementProjectLots(5);
+
+        XMLDocumentBuilderV2 xmlDocBuilder = BuilderFactory.EDM_V2
+                .createDocumentBuilderFor(modelRequest);
+
+        System.out.println(xmlDocBuilder.getAsString());
     }
 
 }

@@ -28,6 +28,7 @@ import eu.espd.schema.v2.pre_award.qualificationapplicationrequest.Qualification
 
 import java.util.Map;
 import java.util.function.Function;
+import java.util.logging.Level;
 import java.util.stream.Collectors;
 
 public class ESPDRequestSchemaExtractorV2 implements SchemaExtractorV2 {
@@ -36,12 +37,7 @@ public class ESPDRequestSchemaExtractorV2 implements SchemaExtractorV2 {
 
         QualificationApplicationRequestType qarType = new QualificationApplicationRequestType();
 
-        if (modelRequest.getCADetails().getProcurementProcedureFileReferenceNo() != null) {
-            qarType.setContractFolderID(new ContractFolderIDType());
-            qarType.getContractFolderID().setSchemeAgencyID("TeD");
-            qarType.getContractFolderID().setValue(modelRequest.getCADetails().getProcurementProcedureFileReferenceNo());
-        }
-
+        // Contract Folder ID
         if (modelRequest.getCADetails().getProcurementProcedureFileReferenceNo() != null) {
             qarType.setContractFolderID(createContractFolderIDType(modelRequest.getCADetails().getProcurementProcedureFileReferenceNo()));
         }
@@ -94,7 +90,9 @@ public class ESPDRequestSchemaExtractorV2 implements SchemaExtractorV2 {
             // Qualification Application Type
             qarType.setQualificationApplicationTypeCode(createQualificationApplicationTypeCodeType(modelRequest
                     .getDocumentDetails().getQualificationApplicationType()));
-            // Set Lots
+            // apply Lots
+            // LOGGER.log(Level.INFO, "Number of Lots: " + modelRequest.getCADetails().getProcurementProjectLots());
+            // LOGGER.log(Level.INFO, modelRequest.getDocumentDetails().toString());
             qarType.getProcurementProjectLot().addAll(createProcurementProjectLotType(modelRequest
                             .getDocumentDetails().getQualificationApplicationType() // REGULATED or SELF-CONTAINED
                     , modelRequest.getCADetails().getProcurementProjectLots()));    // Number of lots

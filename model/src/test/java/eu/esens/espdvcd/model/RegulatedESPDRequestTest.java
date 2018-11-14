@@ -26,7 +26,7 @@ import org.junit.Ignore;
  */
 public class RegulatedESPDRequestTest {
     
-    ESPDRequest req = new RegulatedESPDRequest();
+    ESPDRequest req = new ESPDRequestImpl();
     
     @Before
     public void setUp() {

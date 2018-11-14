@@ -26,8 +26,8 @@ import eu.esens.espdvcd.designer.util.Errors;
 import eu.esens.espdvcd.designer.util.JsonUtil;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDResponse;
-import eu.esens.espdvcd.model.RegulatedESPDRequest;
-import eu.esens.espdvcd.model.RegulatedESPDResponse;
+import eu.esens.espdvcd.model.ESPDRequestImpl;
+import eu.esens.espdvcd.model.ESPDResponseImpl;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.schema.EDMVersion;
 import spark.Service;
@@ -90,7 +90,7 @@ public class ExportESPDEndpoint extends Endpoint {
                                 if (artefactType.equalsIgnoreCase("request")) {
                                     //Handle request
                                     ESPDRequest document;
-                                    document = MAPPER.readValue(rq.body(), RegulatedESPDRequest.class);
+                                    document = MAPPER.readValue(rq.body(), ESPDRequestImpl.class);
                                     switch (exportType) {
                                         case PDF:
                                             return service.exportESPDRequestPdfAsInputStream(document, languageCode);
@@ -105,7 +105,7 @@ public class ExportESPDEndpoint extends Endpoint {
                                 } else if (artefactType.equalsIgnoreCase("response")) {
                                     //Handle response
                                     ESPDResponse document;
-                                    document = MAPPER.readValue(rq.body(), RegulatedESPDResponse.class);
+                                    document = MAPPER.readValue(rq.body(), ESPDResponseImpl.class);
                                     switch (exportType) {
                                         case PDF:
                                             return service.exportESPDResponsePdfAsInputStream(document, languageCode);

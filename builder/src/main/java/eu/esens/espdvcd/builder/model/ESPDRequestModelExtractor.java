@@ -20,7 +20,7 @@ import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.codelist.enums.internal.ArtefactType;
 import eu.esens.espdvcd.model.DocumentDetails;
 import eu.esens.espdvcd.model.ESPDRequest;
-import eu.esens.espdvcd.model.RegulatedESPDRequest;
+import eu.esens.espdvcd.model.ESPDRequestImpl;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.response.WeightIndicatorResponse;
@@ -42,7 +42,7 @@ public class ESPDRequestModelExtractor implements ModelExtractor {
 
     public ESPDRequest extractESPDRequest(ESPDRequestType reqType) {
 
-        RegulatedESPDRequest modelRequest = new RegulatedESPDRequest();
+        ESPDRequestImpl modelRequest = new ESPDRequestImpl();
 
         // apply document details
         modelRequest.setDocumentDetails(new DocumentDetails(EDMVersion.V1, ArtefactType.ESPD_REQUEST,
@@ -62,7 +62,7 @@ public class ESPDRequestModelExtractor implements ModelExtractor {
 
     public ESPDRequest extractESPDRequest(QualificationApplicationRequestType qarType) {
 
-        RegulatedESPDRequest modelRequest = new RegulatedESPDRequest();
+        ESPDRequestImpl modelRequest = new ESPDRequestImpl();
 
         // apply document details
         if (qarType.getQualificationApplicationTypeCode() != null &&

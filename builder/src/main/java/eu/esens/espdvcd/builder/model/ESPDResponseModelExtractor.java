@@ -55,7 +55,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
 
     public ESPDResponse extractESPDResponse(ESPDResponseType resType) {
 
-        RegulatedESPDResponse modelResponse = new RegulatedESPDResponse();
+        ESPDResponseImpl modelResponse = new ESPDResponseImpl();
 
         // apply document details
         modelResponse.setDocumentDetails(new DocumentDetails(EDMVersion.V1, ArtefactType.ESPD_RESPONSE,
@@ -99,7 +99,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
 
     public ESPDResponse extractESPDResponse(QualificationApplicationResponseType qarType) {
 
-        RegulatedESPDResponse modelResponse = new RegulatedESPDResponse();
+        ESPDResponseImpl modelResponse = new ESPDResponseImpl();
 
         // apply document details
         if (qarType.getQualificationApplicationTypeCode() != null &&
@@ -207,7 +207,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
         return modelResponse;
     }
 
-    private void applyEODetailsStructure(RegulatedESPDResponse modelResponse) {
+    private void applyEODetailsStructure(ESPDResponseImpl modelResponse) {
         EODetails eod = new EODetails();
         eod.setContactingDetails(new ContactingDetails());
         eod.setPostalAddress(new PostalAddress());
@@ -831,27 +831,10 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
 
         if (eoPartyType != null) {
 
-            // (1) Path: .../cac:EconomicOperatorParty/cac:QualifyingParty
-//            if (!eoPartyType.getQualifyingParty().isEmpty()
-//                    && eoPartyType.getQualifyingParty().get(0).getParty() != null) {
-//
-//            }
-
-            // (2) Path: .../cac:EconomicOperatorParty/cac:EconomicOperatorRole
-            if (eoPartyType.getEconomicOperatorRole() != null) {
-
-                if (eoPartyType.getEconomicOperatorRole().getRoleCode() != null) {
-                    eoDetails.setEoRole(EORoleTypeEnum.valueOf(eoPartyType.getEconomicOperatorRole().getRoleCode().getValue()));
-                }
-
-                /*
-                 * FIXME Rule: Software applications should retrieve and reuse the description from the Code List EORoleType. There is no description in the referenced codelist
-                 */
-//                if (!eoPartyType.getEconomicOperatorRole().getRoleDescription().isEmpty()
-//                        && eoPartyType.getEconomicOperatorRole().getRoleDescription().get(0).getValue() != null) {
-//
-//                }
-
+            // Economic Operator Role
+            if (eoPartyType.getEconomicOperatorRole() != null
+                    && eoPartyType.getEconomicOperatorRole().getRoleCode() != null) {
+                eoDetails.setEoRole(EORoleTypeEnum.valueOf(eoPartyType.getEconomicOperatorRole().getRoleCode().getValue()));
             }
 
             // Economic Operator Group Name
@@ -883,18 +866,12 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                         .getFinancialCapability().get(0).getValueAmount().getCurrencyID());
             }
 
-            // (3) Path: .../cac:EconomicOperatorParty/cac:Party
             if (eoPartyType.getParty() != null) {
 
                 if (!eoPartyType.getParty().getPartyName().isEmpty()
                         && eoPartyType.getParty().getPartyName().get(0).getName() != null) {
                     eoDetails.setName(eoPartyType.getParty().getPartyName().get(0).getName().getValue());
                 }
-
-                // only criterion is used for tenderer role - changed also in BIS
-                /*if (eoPartyType.getEconomicOperatorRoleCode() != null) {
-                    eoDetails.setRole(eoPartyType.getEconomicOperatorRoleCode().getValue());
-                }*/
 
                 if (eoPartyType.getParty().getIndustryClassificationCode() != null
                         && eoPartyType.getParty().getIndustryClassificationCode().getValue() != null) {

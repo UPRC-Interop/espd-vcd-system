@@ -24,7 +24,7 @@ import eu.esens.espdvcd.builder.BuilderFactory;
 import eu.esens.espdvcd.designer.deserialiser.RequirementDeserialiser;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDResponse;
-import eu.esens.espdvcd.model.RegulatedESPDRequest;
+import eu.esens.espdvcd.model.ESPDRequestImpl;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
@@ -112,7 +112,7 @@ public class ExportESPDServiceTest {
                 .disable(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE)
                 .registerModule(new SimpleModule().addDeserializer(Requirement.class, new RequirementDeserialiser(V2)));
 
-        ESPDRequest theRequest = MAPPER.readValue(theJson, RegulatedESPDRequest.class);
+        ESPDRequest theRequest = MAPPER.readValue(theJson, ESPDRequestImpl.class);
 
         for (SelectableCriterion selectableCriterion : theRequest.getFullCriterionList()) {
             assertNotNullReqInfo(selectableCriterion.getRequirementGroups());

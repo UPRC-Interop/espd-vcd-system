@@ -31,16 +31,16 @@ public class DocumentDetails implements Serializable {
      * Class that contains information about the ESPD document
      */
 
-    private final EDMVersion version;
-    private final ArtefactType artefactType;
-    private final QualificationApplicationTypeEnum qualificationApplicationType;
+    private EDMVersion version;
+    private ArtefactType artefactType;
+    private QualificationApplicationTypeEnum qualificationApplicationType;
 
     /**
      * Constructor for the DocumentDetails object
      *
      * @param version                      version of the ESPD (EDMVersion enum: V1, V2)
      * @param type                         type of the ESPD (ArtefactType enum: ESPD_REQUEST, ESPD_RESPONSE)
-     * @param qualificationApplicationType whether the ESPD is SELF_CONTAINED or REQULATED
+     * @param qualificationApplicationType whether the ESPD is SELF_CONTAINED or REGULATED
      */
     @JsonCreator
     public DocumentDetails(@JsonProperty("version") EDMVersion version,
@@ -61,5 +61,14 @@ public class DocumentDetails implements Serializable {
 
     public QualificationApplicationTypeEnum getQualificationApplicationType() {
         return qualificationApplicationType;
+    }
+
+    @Override
+    public String toString() {
+        return "DocumentDetails{" +
+                "version=" + version +
+                ", artefactType=" + artefactType +
+                ", qualificationApplicationType=" + qualificationApplicationType +
+                '}';
     }
 }

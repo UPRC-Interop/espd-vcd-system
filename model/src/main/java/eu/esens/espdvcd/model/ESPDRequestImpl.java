@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
  */
 
 
-public class RegulatedESPDRequest implements ESPDRequest {
+public class ESPDRequestImpl implements ESPDRequest {
 
     private static final long serialVersionUID = -8366478868586274094L;
 
@@ -49,7 +49,7 @@ public class RegulatedESPDRequest implements ESPDRequest {
     private static final String EO_RELATED_REGEXP = "(?!.*MEETS_THE_OBJECTIVE*)^CRITERION.OTHER.EO_DATA.+";
     private static final String REDUCTION_OF_CANDIDATES_REGEXP = "^CRITERION.OTHER.EO_DATA.MEETS_THE_OBJECTIVE*";   
         
-    public RegulatedESPDRequest() {
+    public ESPDRequestImpl() {
 
     }
 

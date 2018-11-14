@@ -15,7 +15,6 @@
  */
 package eu.esens.espdvcd.model;
 
-import eu.esens.espdvcd.model.requirement.response.Response;
 import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
 
 import java.net.URL;
@@ -26,7 +25,7 @@ import java.util.List;
  * POJO implementation of {@link ESPDResponse}.
  *
  */
-public class RegulatedESPDResponse extends RegulatedESPDRequest implements ESPDResponse {
+public class ESPDResponseImpl extends ESPDRequestImpl implements ESPDResponse {
 
     private static final long serialVersionUID = -3343982328572347289L;
     

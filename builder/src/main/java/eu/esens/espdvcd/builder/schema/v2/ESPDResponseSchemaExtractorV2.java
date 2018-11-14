@@ -64,9 +64,8 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
             qarType.getAdditionalDocumentReference().add(drt);
         }
 
+        // extract CA details
         qarType.getContractingParty().add(extractContractingPartyType(modelResponse.getCADetails()));
-        // Economic Operator Details
-        qarType.getProcurementProjectLot().add(extractProcurementProjectLot(modelResponse.getEODetails()));
 
         // Economic Operator Group Name (This is in EODetails)
         if (modelResponse.getEODetails().getEOGroupName() != null) {
@@ -129,9 +128,11 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
             // Qualification Application Type
             qarType.setQualificationApplicationTypeCode(createQualificationApplicationTypeCodeType(modelResponse
                     .getDocumentDetails().getQualificationApplicationType()));
-            // Set Lots
+            // apply Lots
+            // LOGGER.log(Level.INFO, "Number of Lots: " + modelResponse.getCADetails().getProcurementProjectLots());
+            // LOGGER.log(Level.INFO, modelResponse.getDocumentDetails().toString());
             qarType.getProcurementProjectLot().addAll(createProcurementProjectLotType(modelResponse
-                            .getDocumentDetails().getQualificationApplicationType() // REGULATED or SELF-CONTAINED
+                            .getDocumentDetails().getQualificationApplicationType()  // REGULATED or SELF-CONTAINED
                     , modelResponse.getCADetails().getProcurementProjectLots()));    // Number of lots
             // Procurement Project (only in SELF-CONTAINED)
             if (modelResponse.getDocumentDetails().getQualificationApplicationType()
