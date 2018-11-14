@@ -279,21 +279,23 @@ public abstract class RegulatedModelBuilder implements ModelBuilder {
      */
     private ESPDRequest createESPDRequestFromXML(InputStream xmlESPD) throws BuilderException {
 
-        ESPDRequest req;
+        ESPDRequest modelRequest;
 
         try (InputStream bis = ArtefactUtils.getBufferedInputStream(xmlESPD)) {
             // Check and read the file in the JAXB Object
             // but first identify the artefact edm version
             switch (ArtefactUtils.findEDMVersion(xmlESPD)) {
                 case V1:
-                    LOGGER.log(Level.INFO, "v1 artefact has been imported...");
+                    LOGGER.log(Level.INFO, "V1 " + ArtefactUtils.findQualificationApplicationType(xmlESPD)
+                            + " Request XML Artefact has been imported...");
                     ESPDRequestType espdRequestType = readESPDRequestFromStream(bis);
-                    req = ModelFactory.ESPD_REQUEST.extractESPDRequest(espdRequestType); // Create the Model Object
+                    modelRequest = ModelFactory.ESPD_REQUEST.extractESPDRequest(espdRequestType); // Create the Model Object
                     break;
                 case V2:
-                    LOGGER.log(Level.INFO, "v2 artefact has been imported...");
-                    QualificationApplicationRequestType qualificationApplicationRequestType = readQualificationApplicationRequestFromStream(bis);
-                    req = ModelFactory.ESPD_REQUEST.extractESPDRequest(qualificationApplicationRequestType); // Create the Model Object
+                    LOGGER.log(Level.INFO, "V2 " + ArtefactUtils.findQualificationApplicationType(xmlESPD)
+                            + " Request XML Artefact has been imported...");
+                    QualificationApplicationRequestType qarType = readQualificationApplicationRequestFromStream(bis);
+                    modelRequest = ModelFactory.ESPD_REQUEST.extractESPDRequest(qarType); // Create the Model Object
                     break;
                 default:
                     throw new BuilderException("Error... Imported artefact could not be identified as either v1 or v2.");
@@ -304,38 +306,40 @@ public abstract class RegulatedModelBuilder implements ModelBuilder {
             throw new BuilderException("Error in Reading XML Input Stream", ex);
         }
 
-        return req;
+        return modelRequest;
     }
 
     /**
      * Parses the input stream and creates an ESPDResponse model instance.
      *
-     * @param xmlESPDRes The input stream of the XML document to be parsed
+     * @param xmlESPD The input stream of the XML document to be parsed
      * @return a prefilled ESPDRequest based on the input data
      * @throws BuilderException when the parsing from XML to ESPDResponse Model
      *                          fails
      */
-    protected ESPDResponse createESPDResponseFromXML(InputStream xmlESPDRes) throws BuilderException {
+    protected ESPDResponse createESPDResponseFromXML(InputStream xmlESPD) throws BuilderException {
 
-        ESPDResponse res;
+        ESPDResponse modelResponse;
 
-        try (InputStream bis = ArtefactUtils.getBufferedInputStream(xmlESPDRes)) {
+        try (InputStream bis = ArtefactUtils.getBufferedInputStream(xmlESPD)) {
             // Check and read the file in the JAXB Object
             // but first identify the artefact edm version
-            switch (ArtefactUtils.findEDMVersion(xmlESPDRes)) {
+            switch (ArtefactUtils.findEDMVersion(xmlESPD)) {
                 case V1:
-                    LOGGER.log(Level.INFO, "v1 artefact has been imported...");
+                    LOGGER.log(Level.INFO, "V1 " + ArtefactUtils.findQualificationApplicationType(xmlESPD)
+                            + " Response XML Artefact has been imported...");
                     // Check and read the file in the JAXB Object
                     ESPDResponseType espdResponseType = readESPDResponseFromStream(bis);
                     // Create the Model Object
-                    res = ModelFactory.ESPD_RESPONSE.extractESPDResponse(espdResponseType);
+                    modelResponse = ModelFactory.ESPD_RESPONSE.extractESPDResponse(espdResponseType);
                     break;
                 case V2:
-                    LOGGER.log(Level.INFO, "v2 artefact has been imported...");
+                    LOGGER.log(Level.INFO, "V2 " + ArtefactUtils.findQualificationApplicationType(xmlESPD)
+                            + " Response XML Artefact has been imported...");
                     // Check and read the file in the JAXB Object
-                    QualificationApplicationResponseType qualificationApplicationResponseType = readQualificationApplicationResponseFromStream(bis);
+                    QualificationApplicationResponseType qarType = readQualificationApplicationResponseFromStream(bis);
                     // Create the Model Object
-                    res = ModelFactory.ESPD_RESPONSE.extractESPDResponse(qualificationApplicationResponseType);
+                    modelResponse = ModelFactory.ESPD_RESPONSE.extractESPDResponse(qarType);
                     break;
                 default:
                     throw new BuilderException("Error... Imported artefact could not be identified as either v1 or v2.");
@@ -346,7 +350,7 @@ public abstract class RegulatedModelBuilder implements ModelBuilder {
             throw new BuilderException("Error in Reading Input Stream for ESPD Response", ex);
         }
 
-        return res;
+        return modelResponse;
     }
 
     private QualificationApplicationRequestType readQualificationApplicationRequestFromStream(InputStream is) throws JAXBException {
