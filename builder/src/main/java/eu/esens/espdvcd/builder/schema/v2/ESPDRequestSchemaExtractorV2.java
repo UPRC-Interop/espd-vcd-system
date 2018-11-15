@@ -22,13 +22,17 @@ import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.response.WeightIndicatorResponse;
-import eu.espd.schema.v2.pre_award.commonaggregate.*;
-import eu.espd.schema.v2.pre_award.commonbasic.*;
+import eu.espd.schema.v2.pre_award.commonaggregate.DocumentReferenceType;
+import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionPropertyType;
+import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionType;
+import eu.espd.schema.v2.pre_award.commonbasic.CopyIndicatorType;
+import eu.espd.schema.v2.pre_award.commonbasic.DescriptionType;
+import eu.espd.schema.v2.pre_award.commonbasic.TypeCodeType;
+import eu.espd.schema.v2.pre_award.commonbasic.ValueDataTypeCodeType;
 import eu.espd.schema.v2.pre_award.qualificationapplicationrequest.QualificationApplicationRequestType;
 
 import java.util.Map;
 import java.util.function.Function;
-import java.util.logging.Level;
 import java.util.stream.Collectors;
 
 public class ESPDRequestSchemaExtractorV2 implements SchemaExtractorV2 {
@@ -79,7 +83,6 @@ public class ESPDRequestSchemaExtractorV2 implements SchemaExtractorV2 {
 
         qarType.setUBLVersionID(createUBL22VersionIdType());
         qarType.setCustomizationID(createCENBIICustomizationIdType("urn:www.cenbii.eu:transaction:biitrdm070:ver3.0"));
-        // FIXME: version id should be updated here
         qarType.setVersionID(createVersionIDType("2018.01.01"));
 
         if (modelRequest.getDocumentDetails() != null
@@ -90,12 +93,20 @@ public class ESPDRequestSchemaExtractorV2 implements SchemaExtractorV2 {
             // Qualification Application Type
             qarType.setQualificationApplicationTypeCode(createQualificationApplicationTypeCodeType(modelRequest
                     .getDocumentDetails().getQualificationApplicationType()));
-            // apply Lots
-            // LOGGER.log(Level.INFO, "Number of Lots: " + modelRequest.getCADetails().getProcurementProjectLots());
-            // LOGGER.log(Level.INFO, modelRequest.getDocumentDetails().toString());
-            qarType.getProcurementProjectLot().addAll(createProcurementProjectLotType(modelRequest
-                            .getDocumentDetails().getQualificationApplicationType() // REGULATED or SELF-CONTAINED
-                    , modelRequest.getCADetails().getProcurementProjectLots()));    // Number of lots
+            // extract Lots
+            switch (modelRequest.getDocumentDetails().getQualificationApplicationType()) {
+
+                case REGULATED:
+                    qarType.getProcurementProjectLot()
+                            .add(createProcurementProjectLotType("0"));
+                    break;
+
+                case SELFCONTAINED:
+                    qarType.getProcurementProjectLot()
+                            .addAll(extractProcurementProjectLotType(modelRequest.getCADetails()));
+                    break;
+
+            }
             // Procurement Project (only in SELF-CONTAINED)
             if (modelRequest.getDocumentDetails().getQualificationApplicationType()
                     == QualificationApplicationTypeEnum.SELFCONTAINED) {
