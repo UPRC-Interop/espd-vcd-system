@@ -28,7 +28,6 @@ import eu.espd.schema.v2.unqualifieddatatypes_2.CodeType;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -187,20 +186,6 @@ public interface SchemaExtractorV2 {
         return dr;
     }
 
-    // FIXME NOT SURE IF NEEDED
-    default ProcurementProjectLotType extractProcurementProjectLot(EODetails eoDetails) {
-
-        ProcurementProjectLotType pplt = new ProcurementProjectLotType();
-        pplt.setID(new IDType());
-
-        pplt.getID().setValue((eoDetails.getProcurementProjectLot() == null) ||
-                eoDetails.getProcurementProjectLot().isEmpty() ? "0" : eoDetails.getProcurementProjectLot());
-
-        pplt.getID().setSchemeAgencyID("EU-COM-GROW");
-
-        return pplt;
-    }
-
     /* @TODO code has to be checked again */
     default DocumentReferenceType extractCADetailsNationalDocumentReference(CADetails cd) {
 
@@ -215,7 +200,7 @@ public interface SchemaExtractorV2 {
             }
 
             dr.setDocumentTypeCode(createDocumentTypeCode("NGOJ"));
-       }
+        }
         return dr;
     }
 
@@ -714,39 +699,31 @@ public interface SchemaExtractorV2 {
     }
 
     /**
-     * The Regulated ESPD requires the presence of one Lot, identified with a '0' to indicate that
-     * the procedure is not divided into Lots. Additional Lots may be specified, in which case each
-     * Lot needs to be identified differently.
+     * Extract the lots for which the economic operator wishes to tender.
+     * <p>
+     * (used in regulated 2.0.2)
      *
-     * @param type         The type of XML ESPD Artefact (REGULATED or SELF-CONTAINED)
-     * @param numberOfLots The number of lots
-     * @return
+     * @param eoDetails
+     * @return The lot
      */
-    default List<ProcurementProjectLotType> createProcurementProjectLotType(QualificationApplicationTypeEnum type,
-                                                                            int numberOfLots) {
+    default ProcurementProjectLotType extractProcurementProjectLot(EODetails eoDetails) {
+        return createProcurementProjectLotType((eoDetails.getProcurementProjectLot() == null) ||
+                eoDetails.getProcurementProjectLot().isEmpty() ? "0" : eoDetails.getProcurementProjectLot());
+    }
 
-//        LOGGER.log(Level.INFO, "Creating Lots list...");
-
-        List<ProcurementProjectLotType> lotList = new ArrayList<>();
-
-        switch (type) {
-
-            case REGULATED:
-                lotList.add(createProcurementProjectLotType("0"));
-                break;
-
-            case SELFCONTAINED:
-                IntStream.rangeClosed(1, numberOfLots)
-                        .forEach(number -> lotList.add(createProcurementProjectLotType("Lot" + number)));
-                break;
-
-        }
-
-//        LOGGER.log(Level.INFO, "Creating Lots list... " + lotList.stream()
-//                .map(lotType -> lotType.getID().getValue())
-//                .collect(Collectors.toList()).toString());
-
-        return lotList;
+    /**
+     * Extract a list which contains the lots in which the
+     * contracting authority wishes to divide the tender.
+     * <p>
+     * (used in self-contained 2.0.2)
+     *
+     * @param caDetails
+     * @return A list which contains contracting authority lots
+     */
+    default List<ProcurementProjectLotType> extractProcurementProjectLotType(CADetails caDetails) {
+        return IntStream.rangeClosed(1, caDetails.getProcurementProjectLots())
+                .mapToObj(number -> createProcurementProjectLotType("Lot" + number))
+                .collect(Collectors.toList());
     }
 
     default ProcurementProjectLotType createProcurementProjectLotType(String value) {
