@@ -218,7 +218,8 @@ export class DataService {
   }
 
 
-  makeFullCriterionListEO(exclusionACriteria: ExclusionCriteria[],
+  makeFullCriterionListEO(caRelatedCriteria: CaRelatedCriterion[],
+                          exclusionACriteria: ExclusionCriteria[],
                           exclusionBCriteria: ExclusionCriteria[],
                           exclusionCCriteria: ExclusionCriteria[],
                           exclusionDCriteria: ExclusionCriteria[],
@@ -239,7 +240,8 @@ export class DataService {
         console.log(eoRelatedACriteria);
         console.log(eoRelatedCCriteria);
         console.log(eoRelatedDCriteria);
-        var combineJsonArray = [...exclusionACriteria,
+        var combineJsonArray = [...caRelatedCriteria,
+          ...exclusionACriteria,
           ...exclusionBCriteria,
           ...exclusionCCriteria,
           ...exclusionDCriteria,
@@ -252,7 +254,7 @@ export class DataService {
         return combineJsonArray;
 
       } else {
-        var combineJsonArray = [
+        var combineJsonArray = [...caRelatedCriteria,
           ...exclusionACriteria,
           ...exclusionBCriteria,
           ...exclusionCCriteria,
@@ -506,7 +508,8 @@ export class DataService {
     this.formUtil.extractFormValuesFromCriteria(this.reductionCriteria, this.reductionCriteriaForm, this.formUtil.evidenceList);
 
     // make full criterion list
-    this.fullCriterionList = this.makeFullCriterionListEO(this.exclusionACriteria,
+    this.fullCriterionList = this.makeFullCriterionListEO(this.caRelatedCriteria,
+      this.exclusionACriteria,
       this.exclusionBCriteria,
       this.exclusionCCriteria,
       this.exclusionDCriteria,
@@ -782,9 +785,16 @@ export class DataService {
 
             if (this.utilities.qualificationApplicationType === 'selfcontained') {
               this.caRelatedCriteria = this.filterCARelatedCriteria(this.OTHER_CA_REGEXP, res.fullCriterionList);
+              console.log('FILTERED CA RELATED CRITERIA');
+              console.log(this.caRelatedCriteria);
+
               this.caRelatedCriteriaForm = this.formUtil.createCARelatedCriterionForm(this.caRelatedCriteria);
+              console.log('FILTERED CA RELATED CRITERIA FORM');
+              console.log(this.caRelatedCriteriaForm);
 
               this.eoLotCriterion = this.filterCARelatedCriteria(this.EO_LOT_REGEXP, res.fullCriterionList);
+              console.log('FILTERED EO LOT RELATED CRITERIA');
+              console.log(this.eoLotCriterion);
               this.eoLotCriterionForm = this.formUtil.createEORelatedCriterionForm(this.eoLotCriterion);
             }
 
