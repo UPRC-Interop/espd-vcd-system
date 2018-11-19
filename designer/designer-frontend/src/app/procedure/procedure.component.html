@@ -71,8 +71,11 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-form-field>
-        <input matInput placeholder="{{'espd.part1.name' | translate}}" name="CAofficialName"
-               [(ngModel)]="dataService.CADetails.caofficialName" [disabled]="this.dataService.isReadOnly()">
+        <input #CAofficialName="ngModel" matInput placeholder="{{'espd.part1.name' | translate}}" name="CAofficialName"
+               [(ngModel)]="dataService.CADetails.caofficialName" required [disabled]="this.dataService.isReadOnly()">
+        <mat-error *ngIf="CAofficialName.invalid">
+          <input-validation-error [formControlErrors]="CAofficialName.errors"></input-validation-error>
+        </mat-error>
       </mat-form-field>
       <mat-form-field>
         <input matInput placeholder="{{'espd.part2.vat'| translate}}" name="CAofficialID"
@@ -136,11 +139,14 @@
         </mat-form-field>
       </ng-container>
       <mat-form-field>
-        <mat-select name="CACountry" placeholder="{{'espd.part1.country' | translate}}"
-                    [(ngModel)]="dataService.selectedCountry" [disabled]="this.dataService.isReadOnly()">
+        <mat-select #CACountry="ngModel" name="CACountry" placeholder="{{'espd.part1.country' | translate}}"
+                    [(ngModel)]="dataService.selectedCountry" required [disabled]="this.dataService.isReadOnly()">
           <mat-option>None</mat-option>
           <mat-option *ngFor="let country of countries" [value]="country.code">{{country.name}}</mat-option>
         </mat-select>
+        <mat-error *ngIf="CACountry.invalid">
+          <input-validation-error [formControlErrors]="CACountry.errors"></input-validation-error>
+        </mat-error>
       </mat-form-field>
     </mat-expansion-panel>
 
