@@ -23,13 +23,16 @@
     <mat-form-field *ngSwitchDefault>
       <label [attr.for]="req.uuid">{{req.description}}</label>
       <br>
-      <input matInput [formControlName]="req.uuid" [id]="req.uuid" >
+      <input matInput [formControlName]="req.uuid" [id]="req.uuid" [required]="req.mandatory">
+      <mat-error *ngIf="form.get(req.uuid).invalid">
+        <input-validation-error [formControlErrors]="form.get(req.uuid).errors"></input-validation-error>
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field *ngSwitchCase="'QUANTITY_YEAR'">
       <label [attr.for]="req.uuid">{{req.description}}</label>
       <br>
-      <input matInput [formControlName]="req.uuid" [id]="req.uuid" integer>
+      <input matInput [formControlName]="req.uuid" [id]="req.uuid" [required]="req.mandatory" integer>
       <mat-error *ngIf="form.get(req.uuid).invalid">
         <input-validation-error [formControlErrors]="form.get(req.uuid).errors"></input-validation-error>
       </mat-error>
@@ -38,16 +41,17 @@
     <mat-form-field *ngSwitchCase="'QUANTITY_INTEGER'">
       <label [attr.for]="req.uuid">{{req.description}}</label>
       <br>
-      <input matInput [formControlName]="req.uuid" [id]="req.uuid" integer>
+      <input matInput [formControlName]="req.uuid" [id]="req.uuid" [required]="req.mandatory" integer>
       <mat-error *ngIf="form.get(req.uuid).invalid">
         <input-validation-error [formControlErrors]="form.get(req.uuid).errors"></input-validation-error>
       </mat-error>
     </mat-form-field>
 
     <mat-form-field *ngSwitchCase="'DATE'">
-      <label [attr.for]="req.uuid">DATE {{req.description}}</label>
+      <label [attr.for]="req.uuid">{{req.description}}</label>
       <br>
-      <input [appDateValidationFix]="form.get(req.uuid)" matInput [matDatepicker]="picker" [formControlName]="req.uuid" [id]="req.uuid">
+      <input [appDateValidationFix]="form.get(req.uuid)" matInput [matDatepicker]="picker" [formControlName]="req.uuid"
+             [id]="req.uuid" [required]="req.mandatory">
       <mat-error *ngIf="form.get(req.uuid).invalid">
         <input-validation-error [formControlErrors]="form.get(req.uuid).errors"></input-validation-error>
       </mat-error>
@@ -58,7 +62,7 @@
     <div *ngSwitchCase="'PERCENTAGE'">
       <label class="no-margin" [attr.for]="req.uuid">{{req.description}}</label>
       <mat-form-field>
-        <input matInput [formControlName]="req.uuid" [id]="req.uuid" percentage>
+        <input matInput [formControlName]="req.uuid" [id]="req.uuid" percentage [required]="req.mandatory">
         <span matPrefix>%&nbsp;</span>
         <mat-error *ngIf="form.get(req.uuid).invalid">
           <input-validation-error [formControlErrors]="form.get(req.uuid).errors"></input-validation-error>
@@ -71,7 +75,8 @@
         <label [attr.for]="req.uuid+'startDate'">Start Date: </label>
         <br>
         <mat-form-field >
-          <input [appDateValidationFix]="form.get(req.uuid+'startDate')" matInput [matDatepicker]="startPicker" [formControlName]="req.uuid+'startDate'" [id]="req.uuid+'startDate'">
+          <input [appDateValidationFix]="form.get(req.uuid+'startDate')" matInput [matDatepicker]="startPicker"
+                 [formControlName]="req.uuid+'startDate'" [id]="req.uuid+'startDate'" [required]="req.mandatory">
           <mat-error *ngIf="form.get(req.uuid+'startDate').invalid">
             <input-validation-error [formControlErrors]="form.get(req.uuid+'startDate').errors"></input-validation-error>
           </mat-error>
@@ -82,7 +87,8 @@
         <label [attr.for]="req.uuid+'endDate'">End Date: </label>
         <br>
         <mat-form-field >
-          <input [appDateValidationFix]="form.get(req.uuid+'endDate')" matInput [matDatepicker]="endPicker" [formControlName]="req.uuid+'endDate'" [id]="req.uuid+'endDate'">
+          <input [appDateValidationFix]="form.get(req.uuid+'endDate')" matInput [matDatepicker]="endPicker"
+                 [formControlName]="req.uuid+'endDate'" [id]="req.uuid+'endDate'" [required]="req.mandatory">
           <mat-error *ngIf="form.get(req.uuid+'endDate').invalid">
             <input-validation-error [formControlErrors]="form.get(req.uuid+'endDate').errors"></input-validation-error>
           </mat-error>
@@ -104,10 +110,13 @@
     <mat-form-field *ngSwitchCase="'CODE_COUNTRY'">
       <label [attr.for]="req.uuid">{{req.description}}</label>
       <br>
-      <mat-select  [formControlName]="req.uuid" [id]="req.uuid">
+      <mat-select [formControlName]="req.uuid" [id]="req.uuid" [required]="req.mandatory">
         <mat-option>None</mat-option>
         <mat-option *ngFor="let country of countries" [value]="country.code">{{country.name}}</mat-option>
       </mat-select>
+      <mat-error *ngIf="form.get(req.uuid).invalid">
+        <input-validation-error [formControlErrors]="form.get(req.uuid).errors"></input-validation-error>
+      </mat-error>
     </mat-form-field>
 
 
@@ -115,7 +124,7 @@
       <label [attr.for]="req.uuid">{{req.description}}</label>
       <br>
       <mat-form-field>
-        <input matInput [formControlName]="req.uuid" [id]="req.uuid" amount>
+        <input matInput [formControlName]="req.uuid" [id]="req.uuid" amount [required]="req.mandatory">
         <mat-error *ngIf="form.get(req.uuid).invalid">
           <input-validation-error [formControlErrors]="form.get(req.uuid).errors"></input-validation-error>
         </mat-error>
@@ -125,6 +134,9 @@
           <mat-option>None</mat-option>
           <mat-option *ngFor="let curr of currency" [value]="curr.code">{{curr.code}} ( {{curr.name}} )</mat-option>
         </mat-select>
+        <mat-error *ngIf="form.get(req.uuid+'currency').invalid">
+          <input-validation-error [formControlErrors]="form.get(req.uuid+'currency').errors"></input-validation-error>
+        </mat-error>
       </mat-form-field>
     </div>
 
@@ -132,7 +144,8 @@
       <label [attr.for]="req.uuid+'evidenceUrl'">URL: </label>
       <br>
       <mat-form-field>
-        <input matInput [formControlName]="req.uuid+'evidenceUrl'" [id]="req.uuid+'evidenceUrl'" >
+        <input matInput [formControlName]="req.uuid+'evidenceUrl'" [id]="req.uuid+'evidenceUrl'"
+               [required]="req.mandatory">
         <mat-error *ngIf="form.controls[''+ req.uuid+'evidenceUrl'].invalid">
           <input-validation-error
             [formControlErrors]="form.controls[''+ req.uuid+'evidenceUrl'].errors"></input-validation-error>
@@ -141,12 +154,22 @@
       <label [attr.for]="req.uuid+'evidenceCode'">Reference/Code: </label>
       <br>
       <mat-form-field>
-        <input matInput [formControlName]="req.uuid+'evidenceCode'" [id]="req.uuid+'evidenceCode'" >
+        <input matInput [formControlName]="req.uuid+'evidenceCode'" [id]="req.uuid+'evidenceCode'"
+               [required]="req.mandatory">
+        <mat-error *ngIf="form.controls[''+ req.uuid+'evidenceCode'].invalid">
+          <input-validation-error
+            [formControlErrors]="form.controls[''+ req.uuid+'evidenceCode'].errors"></input-validation-error>
+        </mat-error>
       </mat-form-field>
       <label [attr.for]="req.uuid+'evidenceIssuer'">Issuer: </label>
       <br>
       <mat-form-field>
-        <input matInput [formControlName]="req.uuid+'evidenceIssuer'" [id]="req.uuid+'evidenceIssuer'" >
+        <input matInput [formControlName]="req.uuid+'evidenceIssuer'" [id]="req.uuid+'evidenceIssuer'"
+               [required]="req.mandatory">
+        <mat-error *ngIf="form.controls[''+ req.uuid+'evidenceIssuer'].invalid">
+          <input-validation-error
+            [formControlErrors]="form.controls[''+ req.uuid+'evidenceIssuer'].errors"></input-validation-error>
+        </mat-error>
       </mat-form-field>
 
     </div>
