@@ -1,20 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
+  Library:           UBL Pre-award Development Test Version csd02wd01pa06
+  Release Date:      04 September 2017
+  Module:            UBL-UnqualifiedDataTypes-2.2.xsd
+  Generated on:      2016-06-24 19:50(UTC)
+  Copyright (c) OASIS Open 2016. All Rights Reserved.
 
-    Copyright 2016-2018 University of Piraeus Research Center
+  This schema fragment implements UBL unqualified datatypes using core
+  component types with all supplementary components as described in
+  CCTS 2.01 http://www.unece.org/cefact/ebxml/CCTS_V2-01_Final.pdf tables
+  8-1, 8-2 and 8-3.
 
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
+  Per table 8-3, the graphic, picture, sound and video types are based on
+  "Binary Object. Type" as they are secondary representation terms.
 
-        http://www.apache.org/licenses/LICENSE-2.0
+  Per table 8-3, the value, rate and percentage types are based on
+  "Numeric. Type" as they are secondary representation terms.
 
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
+  Per table 8-3, the name type is based on "Text. Type" as it is a 
+  secondary representation term.
 
+  Per XSD lexical constraints, the following unqualified data types 
+  corresponding to core component types and secondary representation terms 
+  are based on XSD types (accordingly, the supplementary component "format" 
+  is not made available for these types):
+
+        Date Time. Type  on  xsd:dateTime
+        Date. Type       on  xsd:date
+        Time. Type       on  xsd:time
+        Indicator. Type  on  xsd:boolean
+
+  Per UBL 2.0 the following supplementary components are restricted to be
+  required rather than optional:
+
+   Amount. Currency. Identifier  as  (AmountType)/@currencyID
+   Binary Object. Mime. Code     as  (BinaryObjectType)/@mimeCode
+   Graphic. Mime. Code           as  (GraphicType)/@mimeCode
+   Picture. Mime. Code           as  (PictureType)/@mimeCode
+   Sound. Mime. Code             as  (SoundType)/@mimeCode
+   Video. Mime. Code             as  (VideoType)/@mimeCode
+   Measure. Unit. Code           as  (MeasureType)/@unitCode
+
+  All other unqualified data types inherit the core component types complete
+  with their supplementary components.
 -->
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
 targetNamespace="urn:oasis:names:specification:ubl:schema:xsd:UnqualifiedDataTypes-2" 

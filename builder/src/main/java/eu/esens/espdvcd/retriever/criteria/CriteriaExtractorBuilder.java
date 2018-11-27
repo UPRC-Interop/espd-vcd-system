@@ -260,9 +260,9 @@ abstract class CriteriaExtractorBuilder {
                 to.setName(from.getName());
             }
 
-            if (from.getDescription() != null) {
-                to.setDescription(from.getDescription());
-            }
+//            if (from.getDescription() != null) {
+//                to.setDescription(from.getDescription());
+//            }
         }
     }
 
