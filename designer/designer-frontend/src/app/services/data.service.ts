@@ -232,6 +232,7 @@ export class DataService {
                           eoRelatedACriteria?: EoRelatedCriterion[],
                           eoRelatedCCriteria?: EoRelatedCriterion[],
                           eoRelatedDCriteria?: EoRelatedCriterion[],
+                          eoLotRelatedCriteria?: EoRelatedCriterion[],
                           reductionCriteria?: ReductionCriterion[]
   ): FullCriterion[] {
     if (this.utilities.isEO) {
@@ -249,6 +250,7 @@ export class DataService {
           ...eoRelatedACriteria,
           ...eoRelatedCCriteria,
           ...eoRelatedDCriteria,
+          ...eoLotRelatedCriteria,
           ...reductionCriteria];
         // console.dir(combineJsonArray);
         return combineJsonArray;
@@ -266,6 +268,7 @@ export class DataService {
           ...eoRelatedACriteria,
           ...eoRelatedCCriteria,
           ...eoRelatedDCriteria,
+          ...eoLotRelatedCriteria,
           ...reductionCriteria];
         // console.dir(combineJsonArray);
         return combineJsonArray;
@@ -487,6 +490,7 @@ export class DataService {
     this.formUtil.extractFormValuesFromCriteria(this.eoRelatedACriteria, this.eoRelatedACriteriaForm, this.formUtil.evidenceList);
     this.formUtil.extractFormValuesFromCriteria(this.eoRelatedCCriteria, this.eoRelatedCCriteriaForm, this.formUtil.evidenceList);
     this.formUtil.extractFormValuesFromCriteria(this.eoRelatedDCriteria, this.eoRelatedDCriteriaForm, this.formUtil.evidenceList);
+    this.formUtil.extractFormValuesFromCriteria(this.eoLotCriterion, this.eoLotCriterionForm, this.formUtil.evidenceList);
 
     /* extract exclusion criteria */
     this.formUtil.extractFormValuesFromCriteria(this.exclusionACriteria, this.exclusionACriteriaForm, this.formUtil.evidenceList);
@@ -522,6 +526,7 @@ export class DataService {
       this.eoRelatedACriteria,
       this.eoRelatedCCriteria,
       this.eoRelatedDCriteria,
+      this.eoLotCriterion,
       this.reductionCriteria
     );
 
@@ -671,6 +676,8 @@ export class DataService {
               this.caRelatedCriteria = this.filterCARelatedCriteria(this.OTHER_CA_REGEXP, res.fullCriterionList);
               this.caRelatedCriteriaForm = this.formUtil.createCARelatedCriterionForm(this.caRelatedCriteria);
               this.eoLotCriterion = this.filterCARelatedCriteria(this.EO_LOT_REGEXP, res.fullCriterionList);
+              console.log('THIS IS LOTS_TENDERED');
+              console.log(this.eoLotCriterion);
             }
             console.log(res.fullCriterionList);
             this.exclusionACriteria = this.filterExclusionCriteria(this.EXCLUSION_CONVICTION_REGEXP, res.fullCriterionList);
