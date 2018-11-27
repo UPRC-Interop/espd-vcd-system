@@ -423,7 +423,7 @@ export class FormUtilService {
       if (rg.requirementGroups != null || rg.requirementGroups !== undefined) {
         rg.requirementGroups.forEach(rg => {
           // console.log('Req Group ' + rg.uuid);
-          group[rg.uuid] = this.toFormGroup(rg);
+          group[rg.uuid] = this.toTemplateFormGroup(rg);
         });
       }
     }

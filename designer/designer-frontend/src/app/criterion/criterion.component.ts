@@ -44,8 +44,8 @@ export class CriterionComponent implements OnInit {
   }
 
   onAdd(reqGroup: RequirementGroup) {
-    console.log(`Called onAdd with groupId ${reqGroup.uuid}:`);
-    console.log(this.formUtil.template[reqGroup.uuid]);
+    // console.log(`Called onAdd with groupId ${reqGroup.uuid}:`);
+    // console.log(this.formUtil.template[reqGroup.uuid]);
 
     if (this.formUtil.template[reqGroup.uuid] !== undefined) {
 
@@ -54,8 +54,8 @@ export class CriterionComponent implements OnInit {
       console.log('The Requirement Group created from the Template: ');
       console.log(fg);
 
-      console.log('THIS IS TEST WHETHER THERE IS REQUIREMENT OR NOT');
-      console.log(this.utilities.CAReqExists(this.formUtil.template[reqGroup.uuid]));
+      // console.log('THIS IS TEST WHETHER THERE IS REQUIREMENT OR NOT');
+      // console.log(this.utilities.CAReqExists(this.formUtil.template[reqGroup.uuid]));
 
 // push to json Structure
 
