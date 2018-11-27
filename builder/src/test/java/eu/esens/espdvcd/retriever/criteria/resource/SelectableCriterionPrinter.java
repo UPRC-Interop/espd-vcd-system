@@ -17,6 +17,7 @@ package eu.esens.espdvcd.retriever.criteria.resource;
 
 import eu.esens.espdvcd.model.LegislationReference;
 import eu.esens.espdvcd.model.SelectableCriterion;
+import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.retriever.criteria.resource.utils.CardinalityUtils;
 
@@ -88,12 +89,20 @@ public class SelectableCriterionPrinter {
         System.out.println(tabs + "Requirements: ");
         rg.getRequirements().forEach(r -> {
             System.out.println(finalTabs + "\t[" + r.getType().name() + "] Req ID: " + r.getID()
-                    + " Cardinality: " + CardinalityUtils.extractCardinality(r.isMandatory(), r.isMultiple())
-                    + " Req Type:" + r.getResponseDataType() + " Req Desc:" + r.getDescription()
-                    + " Code Type: " + r.getResponseValuesRelatedArtefact());
+                    + ", Cardinality: " + CardinalityUtils.extractCardinality(r.isMandatory(), r.isMultiple())
+                    + ", Req Type: " + r.getResponseDataType() + ", Req Desc: " + r.getDescription()
+                    + ", Code Type: " + r.getResponseValuesRelatedArtefact());
         });
         final int innerDepth = depth + 1;
         rg.getRequirementGroups().forEach(rg1 -> printRequirementGroup(rg1, innerDepth));
     }
+
+    public static void printRequirement(Requirement rq) {
+        System.out.println("\t[" + rq.getType().name() + "] Req ID: " + rq.getID()
+                + ", Cardinality: " + CardinalityUtils.extractCardinality(rq.isMandatory(), rq.isMultiple())
+                + ", Req Type: " + rq.getResponseDataType() + ", Req Desc: " + rq.getDescription()
+                + ", Code Type: " + rq.getResponseValuesRelatedArtefact());
+    }
+
 
 }

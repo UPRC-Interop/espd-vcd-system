@@ -26,7 +26,7 @@ public class RegulatedCriteriaTaxonomyResource extends CriteriaTaxonomyResource 
 
     private static final Logger LOGGER = Logger.getLogger(RegulatedCriteriaTaxonomyResource.class.getName());
 
-    private static final String RESOURCE_PATH = "/templates/v2_regulated/ESPD-CriteriaTaxonomy-REGULATED-V2.0.2.xlsx";
+    private static final String RESOURCE_PATH = "/templates/v2_regulated/ESPD-CriteriaTaxonomy-REGULATED-V2.1.0.xlsx";
 
     public RegulatedCriteriaTaxonomyResource() {
         super(RESOURCE_PATH);

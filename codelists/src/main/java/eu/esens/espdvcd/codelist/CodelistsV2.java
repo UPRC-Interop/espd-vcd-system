@@ -1,12 +1,12 @@
 /**
  * Copyright 2016-2018 University of Piraeus Research Center
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -70,10 +70,6 @@ public enum CodelistsV2 implements MultilingualCodelists {
      */
     FinancialRatioType("/gc/v2/FinancialRatioType-CodeList.gc"),
     /**
-     * Criterion Jurisdiction Level for the ESPD Criteria Codelist
-     */
-    LegislationType("/gc/v2/LegislationType-CodeList.gc"),
-    /**
      * Qualification Application Type, created in order to specify whether the ESPD is "Regulated" or
      * "Self-contained"
      */
@@ -92,12 +88,10 @@ public enum CodelistsV2 implements MultilingualCodelists {
      * Response Data type codelist, used to infer the type of response a requirement requires.
      */
     ResponseDataType("/gc/v2/ResponseDataType-CodeList.gc"),
-    PeriodMeasureType("/gc/v2/PeriodMeasureType-CodeList.gc"),
     ProcedureType("/gc/v2/ProcedureType-CodeList.gc"),
     ProfileExecutionID("/gc/v2/ProfileExecutionID-CodeList.gc"),
     ProjectType("/gc/v2/ProjectType-CodeList.gc"),
     ServicesProjectSubType("/gc/v2/ServicesProjectSubType-CodeList.gc"),
-    TechnicalCapabilityType("/gc/v2/TechnicalCapabilityType-CodeList.gc"),
     EORoleType("/gc/v2/EORoleType-CodeList.gc"),
     PropertyGroupType("/gc/v2/PropertyGroupType-CodeList.gc");
 

@@ -1,20 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-
-    Copyright 2016-2018 University of Piraeus Research Center
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-        http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
-
+  Library:           UBL Pre-award Development Test Version csd02wd01pa06
+  Release Date:      04 September 2017
+  Module:            UBL-ExtensionContentDataType-2.2.xsd
+  Generated on:      2016-05-30 13:40(UTC)
+  Copyright (c) OASIS Open 2016. All Rights Reserved.
 -->
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns=
      "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
