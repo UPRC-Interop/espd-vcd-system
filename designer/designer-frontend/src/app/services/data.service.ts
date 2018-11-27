@@ -1373,6 +1373,8 @@ export class DataService {
           .then(res => {
             this.eoRelatedCriteria = res;
             // console.log(this.eoRelatedCriteria);
+            /* [cardinalities]: create template requirementGroup */
+            this.formUtil.createTemplateReqGroups(this.eoRelatedCriteria);
             resolve();
           })
           .catch(err => {

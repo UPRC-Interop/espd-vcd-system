@@ -412,6 +412,9 @@ export class FormUtilService {
             group[r.uuid + 'currency'] = new FormControl();
           } else if (r.responseDataType === 'ECONOMIC_OPERATOR_IDENTIFIER') {
             group[r.uuid + 'eoidtype'] = new FormControl();
+          } else if (r.responseDataType === 'LOT_IDENTIFIER') {
+            group[r.uuid] = new FormControl();
+            this.utilities.renderLotTemplate[r.uuid] = [];
           } else {
             group[r.uuid] = new FormControl();
           }
