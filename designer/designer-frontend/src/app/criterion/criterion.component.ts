@@ -54,6 +54,9 @@ export class CriterionComponent implements OnInit {
       console.log('The Requirement Group created from the Template: ');
       console.log(fg);
 
+      console.log('THIS IS TEST WHETHER THERE IS REQUIREMENT OR NOT');
+      console.log(this.utilities.CAReqExists(this.formUtil.template[reqGroup.uuid]));
+
 // push to json Structure
 
 // Overwrite FIX: don't assign by reference.
