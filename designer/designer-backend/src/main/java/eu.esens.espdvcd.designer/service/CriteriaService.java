@@ -27,13 +27,9 @@ public interface CriteriaService {
 
     List<SelectableCriterion> getCriteria() throws RetrieverException;
 
-    List<SelectableCriterion> getCriteria(String euCountryCode) throws RetrieverException;
-
     List<SelectableCriterion> getUnselectedCriteria(List<SelectableCriterion> initialList) throws RetrieverException;
 
     List<SelectableCriterion> getTranslatedCriteria(String lang) throws RetrieverException;
-
-    List<SelectableCriterion> getTranslatedCriteria(String euCountryCode, String lang) throws RetrieverException;
 
     CriteriaType[] getCriteriaFilters();
 

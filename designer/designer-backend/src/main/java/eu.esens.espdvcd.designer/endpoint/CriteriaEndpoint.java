@@ -17,6 +17,7 @@ package eu.esens.espdvcd.designer.endpoint;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import eu.esens.espdvcd.designer.service.CriteriaService;
+import eu.esens.espdvcd.designer.service.NationalCriteriaMappingService;
 import eu.esens.espdvcd.designer.util.Errors;
 import eu.esens.espdvcd.designer.util.JsonUtil;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
@@ -49,9 +50,8 @@ public class CriteriaEndpoint extends Endpoint {
             spark.get("/getFilters", this::getFilters, JsonUtil.json());
             spark.get("/:filter/lang/:lang", this::getFilter, JsonUtil.json());
             spark.get("/:filter", this::getFilter, JsonUtil.json());
-            spark.get("/national/:countryCode", this::getNational, JsonUtil.json());
-            spark.get("/national/:countryCode/lang/:lang", this::getNational, JsonUtil.json());
-
+            spark.get("/eCertisData/:criterionID/country/:countryCode", this::getNational, JsonUtil.json());
+            spark.get("/eCertisData/:criterionID/country/:countryCode/lang/:lang", this::getNational, JsonUtil.json());
         });
 
         spark.after((req, res) -> res.type("application/json"));
@@ -117,25 +117,34 @@ public class CriteriaEndpoint extends Endpoint {
     private Object getNational(Request request, Response response) throws JsonProcessingException {
         String lang = request.params("lang");
         String countryCode = request.params("countryCode");
-        if (Objects.isNull(lang) && Objects.nonNull(countryCode)) {
+        String criterionID = request.params("criterionID");
+        if (Objects.nonNull(lang) && Objects.nonNull(countryCode) && Objects.nonNull(criterionID)) {
             try {
-                return service.getCriteria(countryCode);
+                return NationalCriteriaMappingService.getInstance().getTranslatedNationalCriteria(criterionID, countryCode, lang);
             } catch (RetrieverException e) {
                 response.status(502);
                 LOGGER.severe(e.getMessage());
                 return Errors.retrieverError(e.getMessage());
+            } catch (IllegalArgumentException e) {
+                response.status(406);
+                LOGGER.warning(e.getMessage());
+                return Errors.notAcceptableError("Language code does not exist.");
             }
-        } else if (Objects.isNull(countryCode)) {
-            response.status(406);
-            return Errors.notAcceptableError("Empty country code is not allowed.");
+        } else if (Objects.isNull(lang) && Objects.nonNull(countryCode) && Objects.nonNull(criterionID)) {
+            try {
+                return NationalCriteriaMappingService.getInstance().getNationalCriteria(criterionID, countryCode);
+            } catch (RetrieverException e) {
+                response.status(502);
+                LOGGER.severe(e.getMessage());
+                return Errors.retrieverError(e.getMessage());
+            } catch (IllegalArgumentException e) {
+                response.status(406);
+                LOGGER.warning(e.getMessage());
+                return Errors.notAcceptableError("Language code does not exist.");
+            }
         } else {
-            try {
-                return service.getTranslatedCriteria(countryCode, lang);
-            } catch (RetrieverException e) {
-                response.status(502);
-                LOGGER.severe(e.getMessage());
-                return Errors.retrieverError(e.getMessage());
-            }
+            response.status(406);
+            return Errors.notAcceptableError("Please specify the country code and the criterionID.");
         }
     }
 

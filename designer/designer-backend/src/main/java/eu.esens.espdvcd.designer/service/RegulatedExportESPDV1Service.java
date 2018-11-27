@@ -1,12 +1,12 @@
 /**
  * Copyright 2016-2018 University of Piraeus Research Center
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -24,6 +24,7 @@ import eu.esens.espdvcd.model.ESPDResponse;
 import javax.el.MethodNotFoundException;
 import java.io.InputStream;
 
+import static eu.esens.espdvcd.designer.util.CriteriaUtil.finalizeESPDResponse;
 import static eu.esens.espdvcd.designer.util.CriteriaUtil.hasNullCriterion;
 
 public enum RegulatedExportESPDV1Service implements ExportESPDService {
@@ -35,9 +36,7 @@ public enum RegulatedExportESPDV1Service implements ExportESPDService {
 
     @Override
     public InputStream exportESPDRequestAsInputStream(ESPDRequest model) throws ValidationException {
-        if (hasNullCriterion(model.getFullCriterionList()))
-            throw new ValidationException("Null criteria are not permitted.");
-        return BuilderFactory.EDM_V1.createDocumentBuilderFor(finalizeV1ESPD(model)).getAsInputStream();
+        return BuilderFactory.EDM_V1.createDocumentBuilderFor(finalizeBeforeExport(model)).getAsInputStream();
     }
 
     @Override
@@ -52,16 +51,12 @@ public enum RegulatedExportESPDV1Service implements ExportESPDService {
 
     @Override
     public String exportESPDRequestAsString(ESPDRequest model) throws ValidationException {
-        if (hasNullCriterion(model.getFullCriterionList()))
-            throw new ValidationException("Null criteria are not permitted.");
-        return BuilderFactory.EDM_V1.createDocumentBuilderFor(finalizeV1ESPD(model)).getAsString();
+        return BuilderFactory.EDM_V1.createDocumentBuilderFor(finalizeBeforeExport(model)).getAsString();
     }
 
     @Override
     public InputStream exportESPDResponseAsInputStream(ESPDResponse model) throws ValidationException {
-        if (hasNullCriterion(model.getFullCriterionList()))
-            throw new ValidationException("Null criteria are not permitted.");
-        return BuilderFactory.EDM_V1.createDocumentBuilderFor(finalizeV1ESPD(model)).getAsInputStream();
+        return BuilderFactory.EDM_V1.createDocumentBuilderFor(finalizeBeforeExport(model)).getAsInputStream();
     }
 
     @Override
@@ -76,12 +71,12 @@ public enum RegulatedExportESPDV1Service implements ExportESPDService {
 
     @Override
     public String exportESPDResponseAsString(ESPDResponse model) throws ValidationException {
-        if (hasNullCriterion(model.getFullCriterionList()))
-            throw new ValidationException("Null criteria are not permitted.");
-        return BuilderFactory.EDM_V1.createDocumentBuilderFor(finalizeV1ESPD(model)).getAsString();
+        return BuilderFactory.EDM_V1.createDocumentBuilderFor(finalizeBeforeExport(model)).getAsString();
     }
 
-    private ESPDRequest finalizeV1ESPD(final ESPDRequest model) {
+    private ESPDRequest finalizeBeforeExport(final ESPDRequest model) throws ValidationException {
+        if (hasNullCriterion(model.getFullCriterionList()))
+            throw new ValidationException("Null criteria are not permitted.");
         model.getFullCriterionList()
                 .stream()
                 .filter(cr -> cr
@@ -96,6 +91,12 @@ public enum RegulatedExportESPDV1Service implements ExportESPDService {
                                         .matches("(?!.*ALL_SATISFIED*)^CRITERION.SELECTION.+"));
 
                 });
+        return model;
+    }
+
+    private ESPDResponse finalizeBeforeExport(final ESPDResponse model) throws ValidationException {
+        finalizeBeforeExport((ESPDRequest) model);
+        finalizeESPDResponse(model);
         return model;
     }
 }
