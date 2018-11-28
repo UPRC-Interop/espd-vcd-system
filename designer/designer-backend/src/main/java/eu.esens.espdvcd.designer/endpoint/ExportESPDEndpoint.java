@@ -25,8 +25,8 @@ import eu.esens.espdvcd.designer.service.RegulatedExportESPDV2Service;
 import eu.esens.espdvcd.designer.util.Errors;
 import eu.esens.espdvcd.designer.util.JsonUtil;
 import eu.esens.espdvcd.model.ESPDRequest;
-import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.model.ESPDRequestImpl;
+import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.model.ESPDResponseImpl;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.schema.EDMVersion;
@@ -84,7 +84,7 @@ public class ExportESPDEndpoint extends Endpoint {
                         String artefactType = rq.params("artefactType");
                         if (rq.contentType().contains("application/json")) {
                             try {
-                                rsp.type("application/octet-stream");
+                                rsp.type("application/xml");
                                 rsp.header("Content-Disposition", String.format(
                                         "attachment; filename=\"%s.%s\";", artefactType.toLowerCase(), exportType.name().toLowerCase()));
                                 if (artefactType.equalsIgnoreCase("request")) {
