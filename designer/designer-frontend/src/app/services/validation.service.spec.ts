@@ -81,4 +81,61 @@ describe('ValidationService', () => {
     // then
     expect(result).toBeFalsy();
   }));
+
+  it('form is not null, untouched and valid, then validation should return true', inject([ValidationService, FormBuilder], (service: ValidationService, formBuilder: FormBuilder) => {
+    // given
+    const form = formBuilder.group({
+      testField: ['']
+    });
+    // when
+    const result = service.validateForm(form);
+    // then
+    expect(result).toBeTruthy();
+  }));
+
+  it('form is null, then validation should return true', inject([ValidationService], (service: ValidationService) => {
+    // given
+    const form = null;
+    // when
+    const result = service.validateForm(form);
+    // then
+    expect(result).toBeTruthy();
+  }));
+
+  it('form is not null, but touched and valid, then validation should return true', inject([ValidationService, FormBuilder], (service: ValidationService, formBuilder: FormBuilder) => {
+    // given
+    const form = formBuilder.group({
+      testField: ['']
+    });
+    form.markAsTouched();
+    // when
+    const result = service.validateForm(form);
+    // then
+    expect(result).toBeTruthy();
+  }));
+
+  it('form is not null, untouched but invalid, then validation should return true', inject([ValidationService, FormBuilder], (service: ValidationService, formBuilder: FormBuilder) => {
+    // given
+    const form = formBuilder.group({
+      testField: ['']
+    });
+    form.setErrors({error: true});
+    // when
+    const result = service.validateForm(form);
+    // then
+    expect(result).toBeTruthy();
+  }));
+
+  it('form is not null, touched and invalid, then validation should return false', inject([ValidationService, FormBuilder], (service: ValidationService, formBuilder: FormBuilder) => {
+    // given
+    const form = formBuilder.group({
+      testField: ['']
+    });
+    form.setErrors({error: true});
+    form.markAsTouched();
+    // when
+    const result = service.validateForm(form);
+    // then
+    expect(result).toBeFalsy();
+  }));
 });
