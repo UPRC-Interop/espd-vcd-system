@@ -17,19 +17,15 @@ package eu.esens.espdvcd.designer.service;
 
 import eu.esens.espdvcd.builder.BuilderFactory;
 import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
-import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.designer.exception.ValidationException;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDResponse;
-import eu.esens.espdvcd.model.requirement.RequirementGroup;
-import eu.esens.espdvcd.model.requirement.response.IndicatorResponse;
 import eu.esens.espdvcd.transformation.TransformationService;
 
 import javax.xml.transform.stream.StreamSource;
-import java.io.*;
-import java.util.List;
-import java.util.logging.Logger;
+import java.io.InputStream;
 
+import static eu.esens.espdvcd.designer.util.CriteriaUtil.finalizeESPDResponse;
 import static eu.esens.espdvcd.designer.util.CriteriaUtil.hasNullCriterion;
 
 public enum RegulatedExportESPDV2Service implements ExportESPDService {
@@ -43,9 +39,7 @@ public enum RegulatedExportESPDV2Service implements ExportESPDService {
 
     @Override
     public InputStream exportESPDRequestAsInputStream(ESPDRequest model) throws ValidationException {
-        if (hasNullCriterion(model.getFullCriterionList()))
-            throw new ValidationException("Null criteria are not permitted.");
-        return BuilderFactory.EDM_V2.createDocumentBuilderFor(model).getAsInputStream();
+        return BuilderFactory.EDM_V2.createDocumentBuilderFor(finalizeBeforeExport(model)).getAsInputStream();
     }
 
     @Override
@@ -60,17 +54,12 @@ public enum RegulatedExportESPDV2Service implements ExportESPDService {
 
     @Override
     public String exportESPDRequestAsString(ESPDRequest model) throws ValidationException {
-        if (hasNullCriterion(model.getFullCriterionList()))
-            throw new ValidationException("Null criteria are not permitted.");
-        return BuilderFactory.EDM_V1.createDocumentBuilderFor(model).getAsString();
+        return BuilderFactory.EDM_V1.createDocumentBuilderFor(finalizeBeforeExport(model)).getAsString();
     }
 
     @Override
     public InputStream exportESPDResponseAsInputStream(ESPDResponse model) throws ValidationException {
-        if (hasNullCriterion(model.getFullCriterionList()))
-            throw new ValidationException("Null criteria are not permitted.");
-        finalizeV2Response(model);
-        return BuilderFactory.EDM_V2.createDocumentBuilderFor(model).getAsInputStream();
+        return BuilderFactory.EDM_V2.createDocumentBuilderFor(finalizeBeforeExport(model)).getAsInputStream();
     }
 
     @Override
@@ -85,42 +74,18 @@ public enum RegulatedExportESPDV2Service implements ExportESPDService {
 
     @Override
     public String exportESPDResponseAsString(ESPDResponse model) throws ValidationException {
+        return BuilderFactory.EDM_V2.createDocumentBuilderFor(finalizeBeforeExport(model)).getAsString();
+    }
+
+    private ESPDRequest finalizeBeforeExport(final ESPDRequest model) throws ValidationException {
         if (hasNullCriterion(model.getFullCriterionList()))
             throw new ValidationException("Null criteria are not permitted.");
-        finalizeV2Response(model);
-        return BuilderFactory.EDM_V2.createDocumentBuilderFor(model).getAsString();
+        return model;
     }
 
-    private void finalizeV2Response(final ESPDResponse document) {
-        document.getEvidenceList().removeIf(e -> e.getEvidenceURL() == null);
-        document.getFullCriterionList().forEach(cr -> finalizeResponses(cr.getRequirementGroups()));
-    }
-
-    private void finalizeResponses(final List<RequirementGroup> requirementGroupList) {
-        for (RequirementGroup rg : requirementGroupList) {
-            if (rg.getRequirements().get(0).getResponseDataType().equals(ResponseTypeEnum.INDICATOR) && rg.getRequirementGroups().size() > 0) {
-                IndicatorResponse indicator = (IndicatorResponse) rg.getRequirements().get(0).getResponse();
-                if (indicator != null) {
-                    rg.getRequirementGroups().forEach(requirementGroup -> {
-                        switch (requirementGroup.getCondition()) {
-                            case "ONTRUE":
-                                if (!indicator.isIndicator()) {
-                                    requirementGroup.getRequirements().forEach(rq -> rq.setResponse(null));
-                                }
-                                break;
-                            case "ONFALSE":
-                                if (indicator.isIndicator()) {
-                                    requirementGroup.getRequirements().forEach(rq -> rq.setResponse(null));
-                                }
-                                break;
-                            default:
-                                Logger.getLogger(ExportESPDService.class.getName()).warning("Ignoring condition " + requirementGroup.getCondition());
-                                break;
-                        }
-                    });
-                }
-            }
-            finalizeResponses(rg.getRequirementGroups());
-        }
+    private ESPDResponse finalizeBeforeExport(final ESPDResponse model) throws ValidationException {
+        finalizeBeforeExport((ESPDRequest) model);
+        finalizeESPDResponse(model);
+        return model;
     }
 }

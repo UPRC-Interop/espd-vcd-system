@@ -28,7 +28,7 @@ public class SelfContainedCriteriaTaxonomyResource extends CriteriaTaxonomyResou
 
     private static final Logger LOGGER = Logger.getLogger(SelfContainedCriteriaTaxonomyResource.class.getName());
 
-    private static final String RESOURCE_PATH = "/templates/v2_selfcontained/ESPD-CriteriaTaxonomy-SELFCONTAINED-V2.0.3.xlsx";
+    private static final String RESOURCE_PATH = "/templates/v2_selfcontained/ESPD-CriteriaTaxonomy-SELFCONTAINED-V2.1.0.xlsx";
 
     public SelfContainedCriteriaTaxonomyResource() {
         super(RESOURCE_PATH);
