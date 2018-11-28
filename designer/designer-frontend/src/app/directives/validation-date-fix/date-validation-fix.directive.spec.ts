@@ -81,4 +81,19 @@ describe('DateValidationFixDirective', () => {
     // then
     expect(directive.formControl.hasError('matDatepickerParse')).toBeTruthy();
   });
+
+  it('should validate to error on empty form control', () => {
+    // given
+    const elementRef = new ElementRef(document.createElement('input'));
+    elementRef.nativeElement.value = '123';
+
+    const directive = new DateValidationFixDirective(elementRef);
+    directive.formControl = new FormControl('');
+
+    // when
+    directive.onFocusLost();
+
+    // then
+    expect(directive.formControl.hasError('matDatepickerParse')).toBeTruthy();
+  });
 });
