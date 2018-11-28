@@ -64,7 +64,8 @@ export class DataService {
   EO_RELATED_A_REGEXP: RegExp = /(^CRITERION.OTHER.EO_DATA.REGISTERED_IN_OFFICIAL_LIST*)|(^CRITERION.OTHER.EO_DATA.SHELTERED_WORKSHOP*)|(^CRITERION.OTHER.EO_DATA.TOGETHER_WITH_OTHERS*)|(^CRITERION.OTHER.EO_DATA.CONTRIBUTIONS_CERTIFICATES*)/;
   EO_RELATED_C_REGEXP: RegExp = /^CRITERION.OTHER.EO_DATA.RELIES_ON_OTHER_CAPACITIES*/;
   EO_RELATED_D_REGEXP: RegExp = /^CRITERION.OTHER.EO_DATA.SUBCONTRACTS_WITH_THIRD_PARTIES*/;
-  REDUCTION_OF_CANDIDATES_REGEXP: RegExp = /(^CRITERION.OTHER.EO_DATA.MEETS_THE_OBJECTIVE*)|(^CRITERION.OTHER.EO_DATA.REDUCTION_OF_CANDIDATES)/;
+  REDUCTION_OF_CANDIDATES_REGEXP: RegExp = /^CRITERION.OTHER.EO_DATA.MEETS_THE_OBJECTIVE*/;
+  // REDUCTION_OF_CANDIDATES_REGEXP: RegExp = /(^CRITERION.OTHER.EO_DATA.MEETS_THE_OBJECTIVE*)|(^CRITERION.OTHER.EO_DATA.REDUCTION_OF_CANDIDATES)/;
 
   OTHER_CA_REGEXP: RegExp = /^CRITERION.OTHER.CA_DATA.+/;
   EO_LOT_REGEXP: RegExp = /^CRITERION.OTHER.EO_DATA.LOTS_TENDERED/;
@@ -715,6 +716,7 @@ export class DataService {
             this.eoRelatedCriteria = this.filterEoRelatedCriteria(this.EO_RELATED_REGEXP, res.fullCriterionList);
             // this.eoLotCriterionForm = this.formUtil.createEORelatedCriterionForm(this.eoLotCriterion);
             this.reductionCriteria = this.filterEoRelatedCriteria(this.REDUCTION_OF_CANDIDATES_REGEXP, res.fullCriterionList);
+            this.reductionCriteriaForm = this.formUtil.createReductionCriterionForm(this.reductionCriteria);
 
             // create requirementGroup template objects required for multiple instances (cardinalities) function
             this.formUtil.createTemplateReqGroups(res.fullCriterionList);
