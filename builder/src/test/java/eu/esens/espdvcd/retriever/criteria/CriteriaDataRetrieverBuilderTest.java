@@ -48,7 +48,7 @@ public class CriteriaDataRetrieverBuilderTest {
     }
 
     @Test
-    public void testGetCriterionWithLangParam() throws Exception {
+    public void testGetNationalCriterionWithGreekLangParam() throws Exception {
         r.setLang(EULanguageCodeEnum.EL);
 
         SelectableCriterion sc = r.getCriterion("14df34e8-15a9-411c-8c05-8c051693e277");
@@ -56,19 +56,33 @@ public class CriteriaDataRetrieverBuilderTest {
     }
 
     @Test
+    public void testGetNationalCriterionWithGermanLangParam() throws Exception {
+        r.setLang(EULanguageCodeEnum.DE);
+
+        SelectableCriterion sc = r.getCriterion("bf5baa60-98fe-4832-af84-de8451b0f17f");
+        SelectableCriterionPrinter.print(sc);
+    }
+
+    @Test
     public void testEuToNationalMapping() throws Exception {
 
         // String ID = "14df34e8-15a9-411c-8c05-8c051693e277";
-        String ID = "005eb9ed-1347-4ca3-bb29-9bc0db64e1ab";
-        String code = EULanguageCodeEnum.EL.name();
+        // String ID = "005eb9ed-1347-4ca3-bb29-9bc0db64e1ab";
+        String ID = "14df34e8-15a9-411c-8c05-8c051693e277";
 
-        List<String> ncList = r.getNationalCriterionMapping(ID, code)
-                .stream()
-                .map(c -> c.getID())
-                .collect(Collectors.toList());
+        String code = EULanguageCodeEnum.DE.name();
 
-        System.out.printf("European Criterion with ID %s mapped to National (%s) Criterion/s --> %s\n"
-                , ID, CodelistsV2.LanguageCodeEU.getValueForId(code), ncList);
+//        List<String> ncList = r.getNationalCriterionMapping(ID, code)
+//                .stream()
+//                .map(c -> c.getID())
+//                .collect(Collectors.toList());
+
+//        System.out.printf("European Criterion with ID %s mapped to National (%s) Criterion/s --> %s\n"
+//                , ID, CodelistsV2.LanguageCodeEU.getValueForId(code), ncList);
+
+        r.setLang(EULanguageCodeEnum.DE);
+
+        SelectableCriterionPrinter.print(r.getNationalCriterionMapping(ID, code));
     }
 
     @Test

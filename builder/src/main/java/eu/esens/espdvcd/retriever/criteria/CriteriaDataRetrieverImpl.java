@@ -142,7 +142,7 @@ public class CriteriaDataRetrieverImpl implements CriteriaDataRetriever {
 
         if (isIdentificationCodeExist(code)) {
 
-            GetECertisCriterionRetryingTask task = new GetECertisCriterionRetryingTask(ID);
+            GetECertisCriterionRetryingTask task = new GetECertisCriterionRetryingTask(ID, lang);
             String codeLowerCase = code.toLowerCase();
 
             try {
@@ -156,7 +156,7 @@ public class CriteriaDataRetrieverImpl implements CriteriaDataRetriever {
                         break;
                     case NATIONAL:
                         // Get the EU Parent Criterion
-                        ECertisCriterion parent = eCertisResource.getParentCriterion(source);
+                        ECertisCriterion parent = eCertisResource.getParentCriterion(source, lang);
                         // Extract National Criteria
                         nationalCriterionTypeList = eCertisResource.getSubCriterionList(parent, codeLowerCase);
                         break;
