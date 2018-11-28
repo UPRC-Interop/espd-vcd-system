@@ -500,6 +500,7 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
 
         switch (respType) {
             case DESCRIPTION:
+            case ECONOMIC_OPERATOR_ROLE_CODE:
                 ResponseValueType descRvType = createResponseValueType();
                 String description = ((DescriptionResponse) response).getDescription();
                 descRvType.getDescription().add(new DescriptionType());
@@ -551,6 +552,8 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
                 return tcrType;
 
             case INDICATOR:
+            case CODE_BOOLEAN:
+            case ALPHA_INDICATOR:
                 ResponseValueType indRvType = createResponseValueType();
                 indRvType.setResponseIndicator(new ResponseIndicatorType());
                 indRvType.getResponseIndicator().setValue(((IndicatorResponse) response).isIndicator());
