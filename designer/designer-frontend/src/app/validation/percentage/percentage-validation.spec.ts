@@ -42,11 +42,6 @@ describe('PercentageValidation', () => {
     expect(errors).toBeNull();
   });
 
-  it('should not validate error for zero percent ', () => {
-    let errors = PercentageValidation(new FormControl('0'));
-    expect(errors).toBeNull();
-  });
-
   it('should not validate error for int value', () => {
     let errors = PercentageValidation(new FormControl('1'));
     expect(errors).toBeNull();
