@@ -44,7 +44,7 @@ public class RequirementDeserialiser extends StdDeserializer<ResponseRequirement
     }
 
     @Override
-    public ResponseRequirement deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+    public ResponseRequirement deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, IllegalArgumentException {
         final ObjectMapper mapper = new ObjectMapper().registerModule(
                 new JavaTimeModule())
                 .disable(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE)
@@ -75,12 +75,15 @@ public class RequirementDeserialiser extends StdDeserializer<ResponseRequirement
                 response = mapper.treeToValue(root.get("response"), QuantityResponse.class);
                 break;
             case INDICATOR:
+            case CODE_BOOLEAN:
+            case ALPHA_INDICATOR:
                 response = mapper.treeToValue(root.get("response"), IndicatorResponse.class);
                 break;
             case PERCENTAGE:
                 response = mapper.treeToValue(root.get("response"), PercentageResponse.class);
                 break;
             case DESCRIPTION:
+            case ECONOMIC_OPERATOR_ROLE_CODE:
                 response = mapper.treeToValue(root.get("response"), DescriptionResponse.class);
                 break;
             case CODE_COUNTRY:
@@ -126,10 +129,10 @@ public class RequirementDeserialiser extends StdDeserializer<ResponseRequirement
                 response = null;
                 break;
             default:
-                response = null;
-                LOGGER.warning("RESPONSE TYPE NOT FOUND");
-                LOGGER.warning(responseRequirement.getResponseDataType().name());
-                break;
+                LOGGER.severe("Response type not found: " + responseRequirement.getResponseDataType().name());
+                throw new IllegalArgumentException(
+                        String.format("Response type %s does not exist.",
+                                responseRequirement.getResponseDataType().name()));
         }
         responseRequirement.setResponse(response);
         return responseRequirement;
