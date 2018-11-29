@@ -300,8 +300,8 @@ export class FormUtilService {
               const eoidtypeID = req.uuid + 'eoidtype';
               req.response.eoidtype = formValues[eoidtypeID.valueOf()];
               req.response.uuid = null;
-            // else if (req.responseDataType === 'ECONOMIC_OPERATOR_ROLE_CODE') {
-            //   req.response.description = formValues[req.uuid.valueOf()];
+              // else if (req.responseDataType === 'ECONOMIC_OPERATOR_ROLE_CODE') {
+              //   req.response.description = formValues[req.uuid.valueOf()];
             } else if (req.responseDataType === 'LOT_IDENTIFIER') {
               // req.response.lots = this.utilities.lotTemplate[req.uuid];
               if (formValues[req.uuid.valueOf()] === null || formValues[req.uuid.valueOf()] === '' || formValues[req.uuid.valueOf()].length === 0) {
@@ -736,13 +736,13 @@ export class FormUtilService {
             }
 
             /* SELF-CONTAINED 2.1.0 : ECONOMIC_OPERATOR_ROLE_CODE */
-            if (r.responseDataType === 'ECONOMIC_OPERATOR_ROLE_CODE') {
-              if (r.response.description !== null) {
-                group[r.uuid] = new FormControl(r.response.description);
-              } else {
-                group[r.uuid] = new FormControl();
-              }
-            }
+            // if (r.responseDataType === 'ECONOMIC_OPERATOR_ROLE_CODE') {
+            //   if (r.response.description !== null) {
+            //     group[r.uuid] = new FormControl(r.response.description);
+            //   } else {
+            //     group[r.uuid] = new FormControl();
+            //   }
+            // }
 
             if (r.response.currency || r.response.amount) {
               if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
@@ -825,6 +825,9 @@ export class FormUtilService {
                   disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
                 });
               }
+              if (r.responseDataType === 'CODE' && r.responseValuesRelatedArtefact === 'CPVCodes') {
+                this.utilities.renderCpvTemplate[r.uuid] = [];
+              }
               if (r.responseDataType === 'AMOUNT') {
                 group[r.uuid] = new FormControl({
                   value: '',
@@ -847,12 +850,12 @@ export class FormUtilService {
                 });
               }
               /* SELF-CONTAINED 2.1.0: ECONOMIC_OPERATOR_ROLE_CODE */
-              if (r.responseDataType === 'ECONOMIC_OPERATOR_ROLE_CODE') {
-                group[r.uuid] = new FormControl({
-                  value: '',
-                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
-                });
-              }
+              // if (r.responseDataType === 'ECONOMIC_OPERATOR_ROLE_CODE') {
+              //   group[r.uuid] = new FormControl({
+              //     value: '',
+              //     disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+              //   });
+              // }
 
 
               if (r.responseDataType === 'WEIGHT_INDICATOR') {
