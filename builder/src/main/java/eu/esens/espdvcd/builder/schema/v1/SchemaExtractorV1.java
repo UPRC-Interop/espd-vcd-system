@@ -1,12 +1,12 @@
 /**
  * Copyright 2016-2018 University of Piraeus Research Center
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -448,18 +448,17 @@ public interface SchemaExtractorV1 {
 
     }
 
+    default ProcurementProjectLotType createProcurementProjectLotType(String value) {
+        ProcurementProjectLotType lotType = new ProcurementProjectLotType();
+        lotType.setID(new IDType());
+        lotType.getID().setSchemeAgencyID("EU-COM-GROW");
+        lotType.getID().setValue(value);
+        return lotType;
+    }
 
     default ProcurementProjectLotType extractProcurementProjectLot(EODetails eoDetails) {
-
-        ProcurementProjectLotType pplt = new ProcurementProjectLotType();
-        pplt.setID(new IDType());
-
-        pplt.getID().setValue((eoDetails.getProcurementProjectLot() == null) ||
+        return createProcurementProjectLotType((eoDetails.getProcurementProjectLot() == null) ||
                 eoDetails.getProcurementProjectLot().isEmpty() ? "0" : eoDetails.getProcurementProjectLot());
-
-        pplt.getID().setSchemeAgencyID("EU-COM-GROW");
-
-        return pplt;
     }
 
 }

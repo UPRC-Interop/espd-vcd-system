@@ -64,9 +64,8 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
             qarType.getAdditionalDocumentReference().add(drt);
         }
 
+        // extract CA details
         qarType.getContractingParty().add(extractContractingPartyType(modelResponse.getCADetails()));
-        // Economic Operator Details
-        qarType.getProcurementProjectLot().add(extractProcurementProjectLot(modelResponse.getEODetails()));
 
         // Economic Operator Group Name (This is in EODetails)
         if (modelResponse.getEODetails().getEOGroupName() != null) {
@@ -129,10 +128,20 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
             // Qualification Application Type
             qarType.setQualificationApplicationTypeCode(createQualificationApplicationTypeCodeType(modelResponse
                     .getDocumentDetails().getQualificationApplicationType()));
-            // Set Lots
-            qarType.getProcurementProjectLot().addAll(createProcurementProjectLotType(modelResponse
-                            .getDocumentDetails().getQualificationApplicationType() // REGULATED or SELF-CONTAINED
-                    , modelResponse.getCADetails().getProcurementProjectLots()));    // Number of lots
+            // extract Lots
+            switch (modelResponse.getDocumentDetails().getQualificationApplicationType()) {
+
+                case REGULATED:
+                    qarType.getProcurementProjectLot()
+                            .add(extractProcurementProjectLot(modelResponse.getEODetails()));
+                    break;
+
+                case SELFCONTAINED:
+                    qarType.getProcurementProjectLot()
+                            .addAll(extractProcurementProjectLotType(modelResponse.getCADetails()));
+                    break;
+
+            }
             // Procurement Project (only in SELF-CONTAINED)
             if (modelResponse.getDocumentDetails().getQualificationApplicationType()
                     == QualificationApplicationTypeEnum.SELFCONTAINED) {
@@ -491,6 +500,7 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
 
         switch (respType) {
             case DESCRIPTION:
+            case ECONOMIC_OPERATOR_ROLE_CODE:
                 ResponseValueType descRvType = createResponseValueType();
                 String description = ((DescriptionResponse) response).getDescription();
                 descRvType.getDescription().add(new DescriptionType());
@@ -542,6 +552,8 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
                 return tcrType;
 
             case INDICATOR:
+            case CODE_BOOLEAN:
+            case ALPHA_INDICATOR:
                 ResponseValueType indRvType = createResponseValueType();
                 indRvType.setResponseIndicator(new ResponseIndicatorType());
                 indRvType.getResponseIndicator().setValue(((IndicatorResponse) response).isIndicator());

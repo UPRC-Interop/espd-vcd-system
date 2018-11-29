@@ -18,6 +18,8 @@ package eu.esens.espdvcd.builder;
 import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.builder.model.ModelFactory;
 import eu.esens.espdvcd.builder.util.ArtefactUtils;
+import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
+import eu.esens.espdvcd.codelist.enums.internal.ArtefactType;
 import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
@@ -46,8 +48,13 @@ public abstract class RegulatedModelBuilder implements ModelBuilder {
     protected CriteriaExtractor criteriaExtractor = null;
     private InputStream importStream = null;
 
+    protected EDMVersion version;
+    protected QualificationApplicationTypeEnum qualificationApplicationType;
+
     /* package private constructor. Create only through factory */
-    RegulatedModelBuilder() {
+    RegulatedModelBuilder(EDMVersion version, QualificationApplicationTypeEnum qualificationApplicationType) {
+        this.version = version;
+        this.qualificationApplicationType = qualificationApplicationType;
     }
 
     /**
@@ -155,12 +162,14 @@ public abstract class RegulatedModelBuilder implements ModelBuilder {
     protected abstract void applyTaxonomyData(List<SelectableCriterion> criterionList);
 
     public ESPDRequest createESPDRequest() throws BuilderException {
-        ESPDRequest req;
+
+        ESPDRequest modelRequest;
+
         if (importStream != null) {
-            req = createESPDRequestFromXML(importStream);
+            modelRequest = createESPDRequestFromXML(importStream);
             if (criteriaExtractor != null) {
                 try {
-                    req.setCriterionList(criteriaExtractor.getFullList(req.getFullCriterionList()));
+                    modelRequest.setCriterionList(criteriaExtractor.getFullList(modelRequest.getFullCriterionList()));
                 } catch (RetrieverException ex) {
                     LOGGER.log(Level.SEVERE, null, ex);
                 }
@@ -168,28 +177,33 @@ public abstract class RegulatedModelBuilder implements ModelBuilder {
                 // imported XML Criteria have default cardinalities, therefore
                 // taxonomy cardinalities will be applied to them in order to
                 // comply with designer needs.
-                applyTaxonomyData(req.getFullCriterionList());
+                applyTaxonomyData(modelRequest.getFullCriterionList());
             }
         } else {
-            req = new RegulatedESPDRequest();
-            handleNullCriteriaExtractor(req);
-            req.setCADetails(createDefaultCADetails());
-            req.setServiceProviderDetails(createDefaultServiceProviderDetails());
+            modelRequest = new ESPDRequestImpl();
+            handleNullCriteriaExtractor(modelRequest);
+            modelRequest.setCADetails(createDefaultCADetails());
+            modelRequest.setServiceProviderDetails(createDefaultServiceProviderDetails());
+        }
+
+        if (modelRequest.getDocumentDetails() == null) {
+            modelRequest.setDocumentDetails(new DocumentDetails(version, ArtefactType.ESPD_REQUEST
+                    , qualificationApplicationType));
         }
 
         //Overriding the default/imported ca details
         if (caDetails != null) {
-            req.setCADetails(caDetails);
+            modelRequest.setCADetails(caDetails);
         }
 
         // Overriding the default/imported service provider details
         if (serviceProviderDetails != null) {
-            req.setServiceProviderDetails(serviceProviderDetails);
+            modelRequest.setServiceProviderDetails(serviceProviderDetails);
         }
 
         // Apply workaround
-        req.getFullCriterionList().forEach(this::applyCriteriaWorkaround);
-        return req;
+        modelRequest.getFullCriterionList().forEach(this::applyCriteriaWorkaround);
+        return modelRequest;
     }
 
     /**
@@ -199,12 +213,14 @@ public abstract class RegulatedModelBuilder implements ModelBuilder {
      * @throws BuilderException if the import failed.
      */
     public ESPDResponse createESPDResponse() throws BuilderException {
-        ESPDResponse res;
+
+        ESPDResponse modelResponse;
+
         if (importStream != null) {
-            res = createESPDResponseFromXML(importStream);
+            modelResponse = createESPDResponseFromXML(importStream);
             if (criteriaExtractor != null) {
                 try {
-                    res.setCriterionList(criteriaExtractor.getFullList(res.getFullCriterionList(), true));
+                    modelResponse.setCriterionList(criteriaExtractor.getFullList(modelResponse.getFullCriterionList(), true));
                 } catch (RetrieverException ex) {
                     LOGGER.log(Level.SEVERE, null, ex);
                 }
@@ -212,40 +228,46 @@ public abstract class RegulatedModelBuilder implements ModelBuilder {
                 // imported XML Criteria have default cardinalities, therefore
                 // taxonomy cardinalities will be applied to them in order to
                 // comply with designer needs.
-                applyTaxonomyData(res.getFullCriterionList());
+                applyTaxonomyData(modelResponse.getFullCriterionList());
             }
 
         } else {
-            res = new RegulatedESPDResponse();
-            handleNullCriteriaExtractor(res);
+            modelResponse = new ESPDResponseImpl();
+            handleNullCriteriaExtractor(modelResponse);
         }
 
-        if (res.getCADetails() == null) {
-            res.setCADetails(createDefaultCADetails());
+        if (modelResponse.getDocumentDetails() == null) {
+            modelResponse.setDocumentDetails(new DocumentDetails(version, ArtefactType.ESPD_RESPONSE
+                    , qualificationApplicationType));
         }
 
-        if (res.getEODetails() == null) {
-            res.setEODetails(createDefaultEODetails());
+        if (modelResponse.getCADetails() == null) {
+            modelResponse.setCADetails(createDefaultCADetails());
         }
-        if (res.getServiceProviderDetails() == null) {
-            res.setServiceProviderDetails(createDefaultServiceProviderDetails());
+
+        if (modelResponse.getEODetails() == null) {
+            modelResponse.setEODetails(createDefaultEODetails());
+        }
+
+        if (modelResponse.getServiceProviderDetails() == null) {
+            modelResponse.setServiceProviderDetails(createDefaultServiceProviderDetails());
         }
 
         if (caDetails != null) {
-            res.setCADetails(caDetails);
+            modelResponse.setCADetails(caDetails);
         }
 
         if (eoDetails != null) {
-            res.setEODetails(eoDetails);
+            modelResponse.setEODetails(eoDetails);
         }
 
         if (serviceProviderDetails != null) {
-            res.setServiceProviderDetails(serviceProviderDetails);
+            modelResponse.setServiceProviderDetails(serviceProviderDetails);
         }
 
         // Apply workaround
-        res.getFullCriterionList().forEach(this::applyCriteriaWorkaround);
-        return res;
+        modelResponse.getFullCriterionList().forEach(this::applyCriteriaWorkaround);
+        return modelResponse;
     }
 
     /**
@@ -257,21 +279,23 @@ public abstract class RegulatedModelBuilder implements ModelBuilder {
      */
     private ESPDRequest createESPDRequestFromXML(InputStream xmlESPD) throws BuilderException {
 
-        ESPDRequest req;
+        ESPDRequest modelRequest;
 
         try (InputStream bis = ArtefactUtils.getBufferedInputStream(xmlESPD)) {
             // Check and read the file in the JAXB Object
             // but first identify the artefact edm version
             switch (ArtefactUtils.findEDMVersion(xmlESPD)) {
                 case V1:
-                    LOGGER.log(Level.INFO, "v1 artefact has been imported...");
+                    LOGGER.log(Level.INFO, "V1 " + ArtefactUtils.findQualificationApplicationType(xmlESPD)
+                            + " Request XML Artefact has been imported...");
                     ESPDRequestType espdRequestType = readESPDRequestFromStream(bis);
-                    req = ModelFactory.ESPD_REQUEST.extractESPDRequest(espdRequestType); // Create the Model Object
+                    modelRequest = ModelFactory.ESPD_REQUEST.extractESPDRequest(espdRequestType); // Create the Model Object
                     break;
                 case V2:
-                    LOGGER.log(Level.INFO, "v2 artefact has been imported...");
-                    QualificationApplicationRequestType qualificationApplicationRequestType = readQualificationApplicationRequestFromStream(bis);
-                    req = ModelFactory.ESPD_REQUEST.extractESPDRequest(qualificationApplicationRequestType); // Create the Model Object
+                    LOGGER.log(Level.INFO, "V2 " + ArtefactUtils.findQualificationApplicationType(xmlESPD)
+                            + " Request XML Artefact has been imported...");
+                    QualificationApplicationRequestType qarType = readQualificationApplicationRequestFromStream(bis);
+                    modelRequest = ModelFactory.ESPD_REQUEST.extractESPDRequest(qarType); // Create the Model Object
                     break;
                 default:
                     throw new BuilderException("Error... Imported artefact could not be identified as either v1 or v2.");
@@ -282,38 +306,40 @@ public abstract class RegulatedModelBuilder implements ModelBuilder {
             throw new BuilderException("Error in Reading XML Input Stream", ex);
         }
 
-        return req;
+        return modelRequest;
     }
 
     /**
      * Parses the input stream and creates an ESPDResponse model instance.
      *
-     * @param xmlESPDRes The input stream of the XML document to be parsed
+     * @param xmlESPD The input stream of the XML document to be parsed
      * @return a prefilled ESPDRequest based on the input data
      * @throws BuilderException when the parsing from XML to ESPDResponse Model
      *                          fails
      */
-    protected ESPDResponse createESPDResponseFromXML(InputStream xmlESPDRes) throws BuilderException {
+    protected ESPDResponse createESPDResponseFromXML(InputStream xmlESPD) throws BuilderException {
 
-        ESPDResponse res;
+        ESPDResponse modelResponse;
 
-        try (InputStream bis = ArtefactUtils.getBufferedInputStream(xmlESPDRes)) {
+        try (InputStream bis = ArtefactUtils.getBufferedInputStream(xmlESPD)) {
             // Check and read the file in the JAXB Object
             // but first identify the artefact edm version
-            switch (ArtefactUtils.findEDMVersion(xmlESPDRes)) {
+            switch (ArtefactUtils.findEDMVersion(xmlESPD)) {
                 case V1:
-                    LOGGER.log(Level.INFO, "v1 artefact has been imported...");
+                    LOGGER.log(Level.INFO, "V1 " + ArtefactUtils.findQualificationApplicationType(xmlESPD)
+                            + " Response XML Artefact has been imported...");
                     // Check and read the file in the JAXB Object
                     ESPDResponseType espdResponseType = readESPDResponseFromStream(bis);
                     // Create the Model Object
-                    res = ModelFactory.ESPD_RESPONSE.extractESPDResponse(espdResponseType);
+                    modelResponse = ModelFactory.ESPD_RESPONSE.extractESPDResponse(espdResponseType);
                     break;
                 case V2:
-                    LOGGER.log(Level.INFO, "v2 artefact has been imported...");
+                    LOGGER.log(Level.INFO, "V2 " + ArtefactUtils.findQualificationApplicationType(xmlESPD)
+                            + " Response XML Artefact has been imported...");
                     // Check and read the file in the JAXB Object
-                    QualificationApplicationResponseType qualificationApplicationResponseType = readQualificationApplicationResponseFromStream(bis);
+                    QualificationApplicationResponseType qarType = readQualificationApplicationResponseFromStream(bis);
                     // Create the Model Object
-                    res = ModelFactory.ESPD_RESPONSE.extractESPDResponse(qualificationApplicationResponseType);
+                    modelResponse = ModelFactory.ESPD_RESPONSE.extractESPDResponse(qarType);
                     break;
                 default:
                     throw new BuilderException("Error... Imported artefact could not be identified as either v1 or v2.");
@@ -324,7 +350,7 @@ public abstract class RegulatedModelBuilder implements ModelBuilder {
             throw new BuilderException("Error in Reading Input Stream for ESPD Response", ex);
         }
 
-        return res;
+        return modelResponse;
     }
 
     private QualificationApplicationRequestType readQualificationApplicationRequestFromStream(InputStream is) throws JAXBException {

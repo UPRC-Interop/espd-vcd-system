@@ -23,7 +23,6 @@ import eu.esens.espdvcd.retriever.criteria.RegulatedCriteriaExtractorBuilder;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import eu.esens.espdvcd.schema.EDMVersion;
 
-import javax.el.MethodNotFoundException;
 import java.util.List;
 
 public enum RegulatedCriteriaService implements CriteriaService {
@@ -49,11 +48,6 @@ public enum RegulatedCriteriaService implements CriteriaService {
     }
 
     @Override
-    public List<SelectableCriterion> getCriteria(String euCountryCode) throws RetrieverException {
-        throw new MethodNotFoundException("Not Implemented for regulated criteria");
-    }
-
-    @Override
     public List<SelectableCriterion> getUnselectedCriteria(List<SelectableCriterion> initialList) throws RetrieverException {
         return predefinedExtractor.getFullList(initialList);
     }
@@ -61,11 +55,6 @@ public enum RegulatedCriteriaService implements CriteriaService {
     @Override
     public List<SelectableCriterion> getTranslatedCriteria(String lang) {
         throw new UnsupportedOperationException("Translation is not yet supported for the EU criteria");
-    }
-
-    @Override
-    public List<SelectableCriterion> getTranslatedCriteria(String euCountryCode, String lang) throws RetrieverException {
-        throw new MethodNotFoundException("Not Implemented for regulated criteria");
     }
 
     @Override

@@ -66,8 +66,8 @@ export class RequirementGroupComponent implements OnInit, OnChanges {
   }
 
   onAdd(rg: RequirementGroup) {
-    console.log(`Called onAdd with groupId ${rg.uuid}:`);
-    console.log(this.formUtil.template[rg.uuid]);
+    // console.log(`Called onAdd with groupId ${rg.uuid}:`);
+    // console.log(this.formUtil.template[rg.uuid]);
 
     if (this.formUtil.template[rg.uuid] !== undefined) {
 
@@ -75,6 +75,9 @@ export class RequirementGroupComponent implements OnInit, OnChanges {
       const fg = this.formUtil.createTemplateFormGroup(rg.uuid);
       console.log('The Requirement Group created from the Template:');
       console.log(fg);
+
+      // console.log('THIS IS TEST WHETHER THERE IS REQUIREMENT OR NOT');
+      // console.log(this.utilities.CAReqExists(this.formUtil.template[rg.uuid]));
 
       // push to json Structure
 

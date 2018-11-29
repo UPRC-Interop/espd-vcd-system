@@ -19,6 +19,7 @@ import {Moment} from 'moment';
 import * as moment from 'moment';
 import {SelectionCriteria} from '../model/selectionCriteria.model';
 import {MatListOption, MatSnackBar, MatSelectionList} from '@angular/material';
+import {RequirementGroup} from '../model/requirementGroup.model';
 
 
 @Injectable({
@@ -132,29 +133,33 @@ export class UtilitiesService {
     return cpvString.split(',');
   }
 
-  lotToSelectedMatListOption(lots: string[], selectedLots: MatSelectionList) {
-    // console.log(selectedLots);
-
-    // for (let i = 0; i < lots.length; i++) {
-    //   console.log('THIS IS TEST');
-    //   console.log(selectedLots.selectedOptions.selected);
-    //   console.log(selectedLots.selectedOptions);
-    // }
-
-    // selectedLots.selectedOptions.selected.map((selected, i) => {
-    //   console.log('selected inside map before: ');
-    //   console.log(selected);
-    //   selected.selected = true;
-    //   console.log('selected inside map after: ');
-    //   return selected.value = lots[i];
-    // });
-    // console.log('THIS IS RESULT OF SELECTED LOTS: ');
-    // console.log(selectedLots);
-    // return selectedLots;
-  }
-
   isImport(): boolean {
     return this.isImportReq || this.isImportESPD || this.isReviewESPD;
+  }
+
+  CAReqExists(rg: RequirementGroup): boolean {
+    let result: boolean;
+    if (rg) {
+      if (rg.requirements !== undefined) {
+        result = rg.requirements.some(req => {
+          return req.type === 'REQUIREMENT';
+        });
+      }
+    }
+
+    if (rg.requirementGroups != null || rg.requirementGroups != undefined) {
+      rg.requirementGroups.forEach(rg => {
+        // console.log('Req Group ' + rg.uuid);
+        this.CAReqExists(rg);
+      });
+    }
+
+
+    if (result) {
+      return true;
+    } else if (result === undefined) {
+      return false;
+    }
   }
 
   // makeDummyESPDRequest(): ESPDRequest {

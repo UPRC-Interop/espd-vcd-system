@@ -28,7 +28,6 @@ import eu.espd.schema.v2.unqualifieddatatypes_2.CodeType;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -129,15 +128,14 @@ public interface SchemaExtractorV2 {
         return rgType;
     }
 
-    /* @TODO code has to be checked again */
-    default DocumentReferenceType extractCADetailsDocumentReference(CADetails cd) {
+    default DocumentReferenceType extractCADetailsDocumentReference(CADetails caDetails) {
 
         DocumentReferenceType dr = new DocumentReferenceType();
 
-        if (cd != null) {
+        if (caDetails != null) {
 
-            if (cd.getProcurementPublicationNumber() != null) {
-                dr.setID(createGROWTemporaryId(cd.getProcurementPublicationNumber()));
+            if (caDetails.getProcurementPublicationNumber() != null) {
+                dr.setID(createGROWTemporaryId(caDetails.getProcurementPublicationNumber()));
             } else {
                 dr.setID(createGROWTemporaryId("0000/S 000-000000"));
             }
@@ -146,28 +144,28 @@ public interface SchemaExtractorV2 {
 
             //dr.setDocumentType(createDocumentType("")); // to be filled with official description, when available
 
-            if (cd.getProcurementProcedureTitle() != null || cd.getProcurementProcedureDesc() != null) {
+            if (caDetails.getProcurementProcedureTitle() != null || caDetails.getProcurementProcedureDesc() != null) {
                 dr.setAttachment(new AttachmentType());
 
-                if (cd.getProcurementProcedureTitle() != null) {
+                if (caDetails.getProcurementProcedureTitle() != null) {
                     dr.getAttachment().setExternalReference(new ExternalReferenceType());
                     dr.getAttachment().getExternalReference().setFileName(new FileNameType());
-                    dr.getAttachment().getExternalReference().getFileName().setValue(cd.getProcurementProcedureTitle());
-                    if (cd.getProcurementPublicationURI() != null) {
+                    dr.getAttachment().getExternalReference().getFileName().setValue(caDetails.getProcurementProcedureTitle());
+                    if (caDetails.getProcurementPublicationURI() != null) {
                         dr.getAttachment().getExternalReference().setURI(new URIType());
-                        dr.getAttachment().getExternalReference().getURI().setValue(cd.getProcurementPublicationURI());
+                        dr.getAttachment().getExternalReference().getURI().setValue(caDetails.getProcurementPublicationURI());
                     }
 
                 }
 
                 // 2018-03-20 UL: modifications to add capabilities to handle Received Notice Number
-                if ((cd.getProcurementProcedureDesc() != null && !cd.getProcurementProcedureDesc().isEmpty())
-                        || (cd.getReceivedNoticeNumber() != null && !cd.getReceivedNoticeNumber().isEmpty())) {
+                if ((caDetails.getProcurementProcedureDesc() != null && !caDetails.getProcurementProcedureDesc().isEmpty())
+                        || (caDetails.getReceivedNoticeNumber() != null && !caDetails.getReceivedNoticeNumber().isEmpty())) {
 
                     DescriptionType dt = new DescriptionType();
 
-                    dt.setValue(cd.getProcurementProcedureDesc() != null
-                            ? cd.getProcurementProcedureDesc()
+                    dt.setValue(caDetails.getProcurementProcedureDesc() != null
+                            ? caDetails.getProcurementProcedureDesc()
                             : "_"); // dummy content for the first description
 
 
@@ -177,28 +175,15 @@ public interface SchemaExtractorV2 {
 
                     dr.getAttachment().getExternalReference().getDescription().add(0, dt);
 
-                    if (cd.getReceivedNoticeNumber() != null && !cd.getReceivedNoticeNumber().isEmpty()) {
+                    if (caDetails.getReceivedNoticeNumber() != null && !caDetails.getReceivedNoticeNumber().isEmpty()) {
                         DescriptionType dtRNN = new DescriptionType();
-                        dtRNN.setValue(cd.getReceivedNoticeNumber());
+                        dtRNN.setValue(caDetails.getReceivedNoticeNumber());
                         dr.getAttachment().getExternalReference().getDescription().add(1, dtRNN);
                     }
                 }
             }
         }
         return dr;
-    }
-
-    default ProcurementProjectLotType extractProcurementProjectLot(EODetails eoDetails) {
-
-        ProcurementProjectLotType pplt = new ProcurementProjectLotType();
-        pplt.setID(new IDType());
-
-        pplt.getID().setValue((eoDetails.getProcurementProjectLot() == null) ||
-                eoDetails.getProcurementProjectLot().isEmpty() ? "0" : eoDetails.getProcurementProjectLot());
-
-        pplt.getID().setSchemeAgencyID("EU-COM-GROW");
-
-        return pplt;
     }
 
     /* @TODO code has to be checked again */
@@ -215,17 +200,13 @@ public interface SchemaExtractorV2 {
             }
 
             dr.setDocumentTypeCode(createDocumentTypeCode("NGOJ"));
-
-            //dr.setDocumentType(createDocumentType("")); // to be filled with official description, when available
-
         }
         return dr;
     }
 
-    /* @TODO code has to be checked again */
-    default ContractingPartyType extractContractingPartyType(CADetails cd) {
+    default ContractingPartyType extractContractingPartyType(CADetails caDetails) {
 
-        if (cd == null) {
+        if (caDetails == null) {
             return null;
         }
 
@@ -233,82 +214,75 @@ public interface SchemaExtractorV2 {
         PartyType pt = new PartyType();
         cpp.setParty(pt);
 
-        if (cd.getCAOfficialName() != null) {
+        if (caDetails.getCAOfficialName() != null) {
             PartyNameType nt = new PartyNameType();
             nt.setName(new NameType());
-            nt.getName().setValue(cd.getCAOfficialName());
+            nt.getName().setValue(caDetails.getCAOfficialName());
             pt.getPartyName().add(nt);
         }
 
-        // UL: replaced by the respective PostalAddress model element, see below
-        //pt.setPostalAddress(new AddressType());
-        //pt.getPostalAddress().setCountry(new CountryType());
-        //pt.getPostalAddress().getCountry().setIdentificationCode(createISOCountryIdCodeType(cd.getCACountry()));
-
-
-        if (cd.getID() != null) {
+        if (caDetails.getID() != null) {
             PartyIdentificationType pit = new PartyIdentificationType();
             pit.setID(new IDType());
-            pit.getID().setValue(cd.getID());
+            pit.getID().setValue(caDetails.getID());
             pit.getID().setSchemeAgencyID("EU-COM-GROW");
             pt.getPartyIdentification().add(pit);
         }
 
-        //FIXME: SCHEMEID ON CONTRACTINGPARTY>PARTY>ENDPOINTID MAY BE INCORRECT
         // UBL syntax path: cac:ContractingParty.Party.EndpointID
-        if (cd.getElectronicAddressID() != null) {
+        if (caDetails.getElectronicAddressID() != null) {
             EndpointIDType eid = new EndpointIDType();
             eid.setSchemeAgencyID("EU-COM-GROW");
-            eid.setValue(cd.getElectronicAddressID());
+            eid.setValue(caDetails.getElectronicAddressID());
             eid.setSchemeID("ISO/IEC 9834-8:2008 - 4UUID");
             pt.setEndpointID(eid);
         }
 
         // UBL syntax path: cac:ContractingParty.Party.WebsiteURIID
-        if (cd.getWebSiteURI() != null) {
+        if (caDetails.getWebSiteURI() != null) {
             WebsiteURIType wsuri = new WebsiteURIType();
-            wsuri.setValue(cd.getWebSiteURI());
+            wsuri.setValue(caDetails.getWebSiteURI());
             pt.setWebsiteURI(wsuri);
         }
 
-        if (cd.getPostalAddress() != null) {
+        if (caDetails.getPostalAddress() != null) {
             // UBL syntax path: cac:ContractingParty.Party.PostalAddress
 
             AddressType at = new AddressType();
 
             at.setStreetName(new StreetNameType());
-            at.getStreetName().setValue(cd.getPostalAddress().getAddressLine1());
+            at.getStreetName().setValue(caDetails.getPostalAddress().getAddressLine1());
 
             at.setCityName(new CityNameType());
-            at.getCityName().setValue(cd.getPostalAddress().getCity());
+            at.getCityName().setValue(caDetails.getPostalAddress().getCity());
 
             //at.setPostbox(new PostboxType());
             //at.getPostbox().setValue(cd.getPostalAddress().getPostCode());
             // UL 2017-10-10: write post code to cbc:PostalZone
             at.setPostalZone(new PostalZoneType());
-            at.getPostalZone().setValue(cd.getPostalAddress().getPostCode());
+            at.getPostalZone().setValue(caDetails.getPostalAddress().getPostCode());
 
             at.setCountry(new CountryType());
-            at.getCountry().setIdentificationCode(createISOCountryIdCodeType(cd.getPostalAddress().getCountryCode()));
+            at.getCountry().setIdentificationCode(createISOCountryIdCodeType(caDetails.getPostalAddress().getCountryCode()));
             at.getCountry().getIdentificationCode().setListID("CountryCodeIdentifier");
             cpp.getParty().setPostalAddress(at);
         }
 
-        if (cd.getContactingDetails() != null) {
+        if (caDetails.getContactingDetails() != null) {
             // UBL syntax path: cac:ContractingParty.Party.Contact
 
             ContactType ct = new ContactType();
             ct.setName(new NameType());
-            ct.getName().setValue(cd.getContactingDetails().getContactPointName());
+            ct.getName().setValue(caDetails.getContactingDetails().getContactPointName());
 
             ct.setTelephone(new TelephoneType());
-            ct.getTelephone().setValue(cd.getContactingDetails().getTelephoneNumber());
+            ct.getTelephone().setValue(caDetails.getContactingDetails().getTelephoneNumber());
 
             ct.setElectronicMail(new ElectronicMailType());
-            ct.getElectronicMail().setValue(cd.getContactingDetails().getEmailAddress());
+            ct.getElectronicMail().setValue(caDetails.getContactingDetails().getEmailAddress());
 
             ct.setTelefax(new TelefaxType());
-            ct.getTelefax().setValue(cd.getContactingDetails().getFaxNumber());
+            ct.getTelefax().setValue(caDetails.getContactingDetails().getFaxNumber());
 
             cpp.getParty().setContact(ct);
         }
@@ -725,33 +699,31 @@ public interface SchemaExtractorV2 {
     }
 
     /**
-     * The Regulated ESPD requires the presence of one Lot, identified with a '0' to indicate that
-     * the procedure is not divided into Lots. Additional Lots may be specified, in which case each
-     * Lot needs to be identified differently.
+     * Extract the lots for which the economic operator wishes to tender.
+     * <p>
+     * (used in regulated 2.0.2)
      *
-     * @param type         The type of XML ESPD Artefact (REGULATED or SELF-CONTAINED)
-     * @param numberOfLots The number of lots
-     * @return
+     * @param eoDetails
+     * @return The lot
      */
-    default List<ProcurementProjectLotType> createProcurementProjectLotType(QualificationApplicationTypeEnum type,
-                                                                            int numberOfLots) {
+    default ProcurementProjectLotType extractProcurementProjectLot(EODetails eoDetails) {
+        return createProcurementProjectLotType((eoDetails.getProcurementProjectLot() == null) ||
+                eoDetails.getProcurementProjectLot().isEmpty() ? "0" : eoDetails.getProcurementProjectLot());
+    }
 
-        List<ProcurementProjectLotType> lotList = new ArrayList<>();
-
-        switch (type) {
-
-            case REGULATED:
-                lotList.add(createProcurementProjectLotType("0"));
-                break;
-
-            case SELFCONTAINED:
-                IntStream.rangeClosed(1, numberOfLots)
-                        .forEach(number -> lotList.add(createProcurementProjectLotType("Lot" + number)));
-                break;
-
-        }
-
-        return lotList;
+    /**
+     * Extract a list which contains the lots in which the
+     * contracting authority wishes to divide the tender.
+     * <p>
+     * (used in self-contained 2.0.2)
+     *
+     * @param caDetails
+     * @return A list which contains contracting authority lots
+     */
+    default List<ProcurementProjectLotType> extractProcurementProjectLotType(CADetails caDetails) {
+        return IntStream.rangeClosed(1, caDetails.getProcurementProjectLots())
+                .mapToObj(number -> createProcurementProjectLotType("Lot" + number))
+                .collect(Collectors.toList());
     }
 
     default ProcurementProjectLotType createProcurementProjectLotType(String value) {

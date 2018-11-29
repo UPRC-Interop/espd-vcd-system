@@ -65,6 +65,7 @@ export class DataService {
   EO_RELATED_C_REGEXP: RegExp = /^CRITERION.OTHER.EO_DATA.RELIES_ON_OTHER_CAPACITIES*/;
   EO_RELATED_D_REGEXP: RegExp = /^CRITERION.OTHER.EO_DATA.SUBCONTRACTS_WITH_THIRD_PARTIES*/;
   REDUCTION_OF_CANDIDATES_REGEXP: RegExp = /^CRITERION.OTHER.EO_DATA.MEETS_THE_OBJECTIVE*/;
+  // REDUCTION_OF_CANDIDATES_REGEXP: RegExp = /(^CRITERION.OTHER.EO_DATA.MEETS_THE_OBJECTIVE*)|(^CRITERION.OTHER.EO_DATA.REDUCTION_OF_CANDIDATES)/;
 
   OTHER_CA_REGEXP: RegExp = /^CRITERION.OTHER.CA_DATA.+/;
   EO_LOT_REGEXP: RegExp = /^CRITERION.OTHER.EO_DATA.LOTS_TENDERED/;
@@ -218,7 +219,8 @@ export class DataService {
   }
 
 
-  makeFullCriterionListEO(exclusionACriteria: ExclusionCriteria[],
+  makeFullCriterionListEO(caRelatedCriteria: CaRelatedCriterion[],
+                          exclusionACriteria: ExclusionCriteria[],
                           exclusionBCriteria: ExclusionCriteria[],
                           exclusionCCriteria: ExclusionCriteria[],
                           exclusionDCriteria: ExclusionCriteria[],
@@ -231,6 +233,7 @@ export class DataService {
                           eoRelatedACriteria?: EoRelatedCriterion[],
                           eoRelatedCCriteria?: EoRelatedCriterion[],
                           eoRelatedDCriteria?: EoRelatedCriterion[],
+                          eoLotRelatedCriteria?: EoRelatedCriterion[],
                           reductionCriteria?: ReductionCriterion[]
   ): FullCriterion[] {
     if (this.utilities.isEO) {
@@ -239,7 +242,8 @@ export class DataService {
         console.log(eoRelatedACriteria);
         console.log(eoRelatedCCriteria);
         console.log(eoRelatedDCriteria);
-        var combineJsonArray = [...exclusionACriteria,
+        var combineJsonArray = [...caRelatedCriteria,
+          ...exclusionACriteria,
           ...exclusionBCriteria,
           ...exclusionCCriteria,
           ...exclusionDCriteria,
@@ -247,12 +251,13 @@ export class DataService {
           ...eoRelatedACriteria,
           ...eoRelatedCCriteria,
           ...eoRelatedDCriteria,
+          ...eoLotRelatedCriteria,
           ...reductionCriteria];
         // console.dir(combineJsonArray);
         return combineJsonArray;
 
       } else {
-        var combineJsonArray = [
+        var combineJsonArray = [...caRelatedCriteria,
           ...exclusionACriteria,
           ...exclusionBCriteria,
           ...exclusionCCriteria,
@@ -264,6 +269,7 @@ export class DataService {
           ...eoRelatedACriteria,
           ...eoRelatedCCriteria,
           ...eoRelatedDCriteria,
+          ...eoLotRelatedCriteria,
           ...reductionCriteria];
         // console.dir(combineJsonArray);
         return combineJsonArray;
@@ -485,6 +491,7 @@ export class DataService {
     this.formUtil.extractFormValuesFromCriteria(this.eoRelatedACriteria, this.eoRelatedACriteriaForm, this.formUtil.evidenceList);
     this.formUtil.extractFormValuesFromCriteria(this.eoRelatedCCriteria, this.eoRelatedCCriteriaForm, this.formUtil.evidenceList);
     this.formUtil.extractFormValuesFromCriteria(this.eoRelatedDCriteria, this.eoRelatedDCriteriaForm, this.formUtil.evidenceList);
+    this.formUtil.extractFormValuesFromCriteria(this.eoLotCriterion, this.eoLotCriterionForm, this.formUtil.evidenceList);
 
     /* extract exclusion criteria */
     this.formUtil.extractFormValuesFromCriteria(this.exclusionACriteria, this.exclusionACriteriaForm, this.formUtil.evidenceList);
@@ -506,7 +513,8 @@ export class DataService {
     this.formUtil.extractFormValuesFromCriteria(this.reductionCriteria, this.reductionCriteriaForm, this.formUtil.evidenceList);
 
     // make full criterion list
-    this.fullCriterionList = this.makeFullCriterionListEO(this.exclusionACriteria,
+    this.fullCriterionList = this.makeFullCriterionListEO(this.caRelatedCriteria,
+      this.exclusionACriteria,
       this.exclusionBCriteria,
       this.exclusionCCriteria,
       this.exclusionDCriteria,
@@ -519,6 +527,7 @@ export class DataService {
       this.eoRelatedACriteria,
       this.eoRelatedCCriteria,
       this.eoRelatedDCriteria,
+      this.eoLotCriterion,
       this.reductionCriteria
     );
 
@@ -668,6 +677,8 @@ export class DataService {
               this.caRelatedCriteria = this.filterCARelatedCriteria(this.OTHER_CA_REGEXP, res.fullCriterionList);
               this.caRelatedCriteriaForm = this.formUtil.createCARelatedCriterionForm(this.caRelatedCriteria);
               this.eoLotCriterion = this.filterCARelatedCriteria(this.EO_LOT_REGEXP, res.fullCriterionList);
+              console.log('THIS IS LOTS_TENDERED');
+              console.log(this.eoLotCriterion);
             }
             console.log(res.fullCriterionList);
             this.exclusionACriteria = this.filterExclusionCriteria(this.EXCLUSION_CONVICTION_REGEXP, res.fullCriterionList);
@@ -705,6 +716,7 @@ export class DataService {
             this.eoRelatedCriteria = this.filterEoRelatedCriteria(this.EO_RELATED_REGEXP, res.fullCriterionList);
             // this.eoLotCriterionForm = this.formUtil.createEORelatedCriterionForm(this.eoLotCriterion);
             this.reductionCriteria = this.filterEoRelatedCriteria(this.REDUCTION_OF_CANDIDATES_REGEXP, res.fullCriterionList);
+            this.reductionCriteriaForm = this.formUtil.createReductionCriterionForm(this.reductionCriteria);
 
             // create requirementGroup template objects required for multiple instances (cardinalities) function
             this.formUtil.createTemplateReqGroups(res.fullCriterionList);
@@ -782,9 +794,16 @@ export class DataService {
 
             if (this.utilities.qualificationApplicationType === 'selfcontained') {
               this.caRelatedCriteria = this.filterCARelatedCriteria(this.OTHER_CA_REGEXP, res.fullCriterionList);
+              console.log('FILTERED CA RELATED CRITERIA');
+              console.log(this.caRelatedCriteria);
+
               this.caRelatedCriteriaForm = this.formUtil.createCARelatedCriterionForm(this.caRelatedCriteria);
+              console.log('FILTERED CA RELATED CRITERIA FORM');
+              console.log(this.caRelatedCriteriaForm);
 
               this.eoLotCriterion = this.filterCARelatedCriteria(this.EO_LOT_REGEXP, res.fullCriterionList);
+              console.log('FILTERED EO LOT RELATED CRITERIA');
+              console.log(this.eoLotCriterion);
               this.eoLotCriterionForm = this.formUtil.createEORelatedCriterionForm(this.eoLotCriterion);
             }
 
@@ -1371,6 +1390,8 @@ export class DataService {
           .then(res => {
             this.eoRelatedCriteria = res;
             // console.log(this.eoRelatedCriteria);
+            /* [cardinalities]: create template requirementGroup */
+            this.formUtil.createTemplateReqGroups(this.eoRelatedCriteria);
             resolve();
           })
           .catch(err => {

@@ -49,7 +49,7 @@ export class RequirementComponent implements OnInit, OnChanges {
   selectable = true;
   removable = true;
   addOnBlur = true;
-  disabled = true;
+  disabled = false;
 
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
@@ -131,23 +131,6 @@ export class RequirementComponent implements OnInit, OnChanges {
     // console.log(this.utilities.cpvTemplate['0157cebc-4ba4-4d65-9a6e-3cd5d57a08fb-34']);
   }
 
-
-  pushSelectedLot() {
-//    if (this.lots.selectedOptions.selected !== undefined) {
-//      this.utilities.lotTemplate[this.req.uuid] = this.utilities.createLotListInCriterion(this.lots.selectedOptions.selected);
-//      console.log(this.utilities.lotTemplate);
-      // console.log(this.lots);
- //   }
-  }
-
-  importSelectedLots() {
-    if (this.req.responseDataType === 'LOT_IDENTIFIER' && this.utilities.isImport()) {
-      /* test lot import */
-      // this.utilities.lotToSelectedMatListOption(this.reqLots, this.lots);
-    }
-  }
-
-
   /* CPV Chip handling */
   add(event: MatChipInputEvent): void {
     const input = event.input;
@@ -177,7 +160,7 @@ export class RequirementComponent implements OnInit, OnChanges {
   }
 
   onNgModelChange(event: Event) {
-    console.log('MODEL CHANGE for req.uuid: ' + this.req.uuid );
+    console.log('MODEL CHANGE for req.uuid: ' + this.req.uuid);
     console.log(this.utilities.renderLotTemplate[this.req.uuid]);
   }
 }

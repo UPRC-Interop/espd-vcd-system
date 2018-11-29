@@ -306,6 +306,21 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
     }
 
     /**
+     * Get Parent Criterion of a National Criterion in the specified language.
+     *
+     * @param ec
+     * @param lang
+     * @return
+     * @throws RetrieverException
+     */
+    public ECertisCriterion getParentCriterion(ECertisCriterion ec, EULanguageCodeEnum lang) throws RetrieverException {
+        if (ec.getParentCriterion() == null) {
+            throw new RetrieverException("Error... Unable to Extract Parent Criterion of " + ec.getID());
+        }
+        return getECertisCriterion(ec.getParentCriterion().getID(), lang);
+    }
+
+    /**
      * Get Parent Criterion of a National Criterion
      *
      * @param ec

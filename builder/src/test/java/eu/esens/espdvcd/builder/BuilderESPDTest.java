@@ -371,4 +371,19 @@ public class BuilderESPDTest {
         System.out.println(xmlDocumentBuilderV2.getAsString());
     }
 
+    @Test
+    public void testCreateSelfContainedRequestFromScratch() throws Exception {
+
+        ESPDRequest modelRequest = BuilderFactory.EDM_V2
+                .createSelfContainedModelBuilder()
+                .createESPDRequest();
+
+        modelRequest.getCADetails().setProcurementProjectLots(5);
+
+        XMLDocumentBuilderV2 xmlDocBuilder = BuilderFactory.EDM_V2
+                .createDocumentBuilderFor(modelRequest);
+
+        System.out.println(xmlDocBuilder.getAsString());
+    }
+
 }

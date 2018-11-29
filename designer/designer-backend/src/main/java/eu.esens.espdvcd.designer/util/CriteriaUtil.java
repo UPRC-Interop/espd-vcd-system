@@ -1,12 +1,17 @@
 package eu.esens.espdvcd.designer.util;
 
+import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
+import eu.esens.espdvcd.designer.service.ExportESPDService;
+import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
+import eu.esens.espdvcd.model.requirement.response.IndicatorResponse;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Objects;
+import java.util.logging.Logger;
 
 public final class CriteriaUtil {
 
@@ -26,6 +31,42 @@ public final class CriteriaUtil {
             return 1;
         else
             return 0;
+    }
+
+    public static void finalizeESPDResponse(final ESPDResponse document) {
+        document.getEvidenceList().removeIf(e -> e.getEvidenceURL() == null);
+        document.getFullCriterionList().forEach(cr -> finalizeRequirementGroups(cr.getRequirementGroups()));
+    }
+
+    private static void finalizeRequirementGroups(@NotNull final List<RequirementGroup> requirementGroupList) {
+        Objects.requireNonNull(requirementGroupList);
+        for (RequirementGroup rg : requirementGroupList) {
+            if (rg.getRequirements().size() > 0) {
+                if (rg.getRequirements().get(0).getResponseDataType().equals(ResponseTypeEnum.INDICATOR) && rg.getRequirementGroups().size() > 0) {
+                    IndicatorResponse indicator = (IndicatorResponse) rg.getRequirements().get(0).getResponse();
+                    if (indicator != null) {
+                        rg.getRequirementGroups().forEach(requirementGroup -> {
+                            switch (requirementGroup.getCondition()) {
+                                case "ONTRUE":
+                                    if (!indicator.isIndicator()) {
+                                        requirementGroup.getRequirements().forEach(rq -> rq.setResponse(null));
+                                    }
+                                    break;
+                                case "ONFALSE":
+                                    if (indicator.isIndicator()) {
+                                        requirementGroup.getRequirements().forEach(rq -> rq.setResponse(null));
+                                    }
+                                    break;
+                                default:
+                                    Logger.getLogger(ExportESPDService.class.getName()).warning("Ignoring condition " + requirementGroup.getCondition());
+                                    break;
+                            }
+                        });
+                    }
+                }
+                finalizeRequirementGroups(rg.getRequirementGroups());
+            }
+        }
     }
 
     public static List<SelectableCriterion> generateUUIDs(@NotNull final List<SelectableCriterion> criteria) {

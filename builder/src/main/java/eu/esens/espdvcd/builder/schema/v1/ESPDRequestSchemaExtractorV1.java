@@ -1,12 +1,12 @@
 /**
  * Copyright 2016-2018 University of Piraeus Research Center
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,12 +19,11 @@ import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.RequirementType;
 import eu.espd.schema.v1.commonaggregatecomponents_2.DocumentReferenceType;
-import eu.espd.schema.v1.commonaggregatecomponents_2.ProcurementProjectLotType;
 import eu.espd.schema.v1.commonbasiccomponents_2.ContractFolderIDType;
 import eu.espd.schema.v1.commonbasiccomponents_2.CopyIndicatorType;
 import eu.espd.schema.v1.commonbasiccomponents_2.DescriptionType;
-import eu.espd.schema.v1.commonbasiccomponents_2.IDType;
 import eu.espd.schema.v1.espdrequest_1.ESPDRequestType;
+
 import java.util.stream.Collectors;
 
 public class ESPDRequestSchemaExtractorV1 implements SchemaExtractorV1 {
@@ -59,11 +58,7 @@ public class ESPDRequestSchemaExtractorV1 implements SchemaExtractorV1 {
         reqType.setVersionID(createVersionIDType("2017.01.01"));
 
         //Procurement Project Lot is always 0 in Request and not part of the UI
-        ProcurementProjectLotType pplt = new ProcurementProjectLotType();
-        pplt.setID(new IDType());
-        pplt.getID().setValue("0");
-        pplt.getID().setSchemeAgencyID("EU-COM-GROW");
-        reqType.getProcurementProjectLot().add(pplt);
+        reqType.getProcurementProjectLot().add(createProcurementProjectLotType("0"));
 
         reqType.setCopyIndicator(new CopyIndicatorType());
         reqType.getCopyIndicator().setValue(false);

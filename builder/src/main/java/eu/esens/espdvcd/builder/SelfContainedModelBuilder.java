@@ -15,10 +15,13 @@
  */
 package eu.esens.espdvcd.builder;
 
+import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
+import eu.esens.espdvcd.model.DocumentDetails;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.retriever.criteria.SelfContainedCriteriaExtractorBuilder;
 import eu.esens.espdvcd.retriever.criteria.resource.CriteriaTaxonomyResource;
 import eu.esens.espdvcd.retriever.criteria.resource.SelfContainedCriteriaTaxonomyResource;
+import eu.esens.espdvcd.schema.EDMVersion;
 
 import java.util.List;
 import java.util.logging.Level;
@@ -29,6 +32,10 @@ public class SelfContainedModelBuilder extends RegulatedModelBuilder {
     private static final Logger LOGGER = Logger.getLogger(SelfContainedModelBuilder.class.getName());
 
     private CriteriaTaxonomyResource taxonomyResource;
+
+    SelfContainedModelBuilder() {
+        super(EDMVersion.V2, QualificationApplicationTypeEnum.SELFCONTAINED);
+    }
 
     @Override
     public RegulatedModelBuilder addDefaultESPDCriteriaList() {

@@ -15,6 +15,8 @@
  */
 package eu.esens.espdvcd.builder;
 
+import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
+import eu.esens.espdvcd.model.DocumentDetails;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.retriever.criteria.RegulatedCriteriaExtractorBuilder;
 import eu.esens.espdvcd.retriever.criteria.resource.CriteriaTaxonomyResource;
@@ -30,6 +32,10 @@ public class RegulatedModelBuilderV2 extends RegulatedModelBuilder {
     private static final Logger LOGGER = Logger.getLogger(RegulatedModelBuilderV2.class.getName());
 
     private CriteriaTaxonomyResource taxonomyResource;
+
+    RegulatedModelBuilderV2() {
+        super(EDMVersion.V2, QualificationApplicationTypeEnum.REGULATED);
+    }
 
     @Override
     public RegulatedModelBuilder addDefaultESPDCriteriaList() {
