@@ -327,8 +327,6 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
         switch (theType) {
 
             case INDICATOR:
-            case CODE_BOOLEAN:
-            case ALPHA_INDICATOR:
                 IndicatorResponse indicatorResp = new IndicatorResponse();
                 if (responseType.getResponseValue().get(0).getResponseIndicator() != null) {
                     indicatorResp.setIndicator(responseType.getResponseValue().get(0).getResponseIndicator().isValue());
@@ -348,7 +346,6 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 return dateResp;
 
             case DESCRIPTION:
-            case ECONOMIC_OPERATOR_ROLE_CODE:
                 DescriptionResponse descriptionResp = new DescriptionResponse();
                 if (responseType.getResponseValue().get(0).getDescription().get(0) != null &&
                         responseType.getResponseValue().get(0).getDescription().get(0).getValue() != null) {

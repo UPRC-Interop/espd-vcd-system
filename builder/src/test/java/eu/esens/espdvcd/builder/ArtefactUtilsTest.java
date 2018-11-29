@@ -42,6 +42,9 @@ public class ArtefactUtilsTest {
     private InputStream selfContainedRequestV2IS;
     private File selfContainedRequestV2File;
 
+    private InputStream selfContainedDARequestV2IS;
+    private File selfContainedDARequestV2File;
+
     @Before
     public void setUp() throws Exception{
         espdRequestRegulatedV1_0_2 = ArtefactUtilsTest.class.getResourceAsStream("/espd-request.xml");
@@ -56,13 +59,17 @@ public class ArtefactUtilsTest {
         regulatedRequestV2 = new File(getClass().getClassLoader().getResource("REGULATED-ESPD-Request_2.0.2.xml").toURI());
         Assert.assertNotNull(regulatedRequestV2);
 
-        // SELFCONTAINED_ESPD-Request.V2.0.2.xml
-
         selfContainedRequestV2IS = getClass().getClassLoader().getResourceAsStream("SELFCONTAINED-ESPD-Request_2.0.2.xml");
         Assert.assertNotNull(selfContainedRequestV2IS);
 
         selfContainedRequestV2File = new File(getClass().getClassLoader().getResource("SELFCONTAINED-ESPD-Request_2.0.2.xml").toURI());
         Assert.assertNotNull(selfContainedRequestV2File);
+
+        selfContainedDARequestV2IS = getClass().getClassLoader().getResourceAsStream("artefacts/selfcontained/UPRC-ESPD-Self-Contained-Request-2.1.0-DA-Artefact.xml");
+        Assert.assertNotNull(selfContainedDARequestV2IS);
+
+        selfContainedDARequestV2File = new File(getClass().getClassLoader().getResource("artefacts/selfcontained/UPRC-ESPD-Self-Contained-Request-2.1.0-DA-Artefact.xml").toURI());
+        Assert.assertNotNull(selfContainedDARequestV2File);
     }
 
     @Test
@@ -73,6 +80,7 @@ public class ArtefactUtilsTest {
         Assert.assertEquals(ProfileExecutionIDEnum.ESPD_EDM_V1_0_2, findProfileExecutionID(espdRequestRegulatedV1_0_2));
         Assert.assertEquals(ProfileExecutionIDEnum.ESPD_EDM_V1_0_2, findProfileExecutionID(espdResponseRegulatedV1_0_2));
         Assert.assertEquals(ProfileExecutionIDEnum.ESPD_EDM_V2_0_2_REGULATED, findProfileExecutionID(espdResponseRegulatedV2_0_2));
+        Assert.assertEquals(ProfileExecutionIDEnum.ESPD_EDM_V2_1_0_SELFCONTAINED, findProfileExecutionID(selfContainedDARequestV2IS));
     }
 
     @Test
@@ -85,6 +93,7 @@ public class ArtefactUtilsTest {
         Assert.assertEquals(EDMVersion.V1, findEDMVersion(espdResponseRegulatedV1_0_2));
         Assert.assertEquals(EDMVersion.V2, findEDMVersion(espdResponseRegulatedV2_0_2));
         Assert.assertNotEquals(EDMVersion.V1, findEDMVersion(espdResponseRegulatedV2_0_2));
+        Assert.assertEquals(EDMVersion.V2, findEDMVersion(selfContainedDARequestV2IS));
     }
 
     @Test
@@ -93,13 +102,19 @@ public class ArtefactUtilsTest {
         Assert.assertEquals(ArtefactType.ESPD_REQUEST, findArtefactType(espdRequestRegulatedV2_0_1));
         Assert.assertEquals(ArtefactType.ESPD_RESPONSE, findArtefactType(espdResponseRegulatedV1_0_2));
         Assert.assertEquals(ArtefactType.ESPD_RESPONSE, findArtefactType(espdResponseRegulatedV2_0_2));
+        Assert.assertEquals(ArtefactType.ESPD_REQUEST, findArtefactType(selfContainedDARequestV2IS));
     }
 
     @Test
     public void testUseTwoArtefactUtilsMethodsForTheSameStreamRepeatedly() {
+        // for a v1 regulated
         Assert.assertEquals(ProfileExecutionIDEnum.ESPD_EDM_V1_0_2, findProfileExecutionID(espdRequestRegulatedV1_0_2));
         Assert.assertEquals(EDMVersion.V1, findEDMVersion(espdRequestRegulatedV1_0_2));
         Assert.assertEquals(ArtefactType.ESPD_REQUEST, findArtefactType(espdRequestRegulatedV1_0_2));
+        // for a v2 self-contained
+        Assert.assertEquals(ProfileExecutionIDEnum.ESPD_EDM_V2_1_0_SELFCONTAINED, findProfileExecutionID(selfContainedDARequestV2IS));
+        Assert.assertEquals(EDMVersion.V2, findEDMVersion(selfContainedDARequestV2IS));
+        Assert.assertEquals(ArtefactType.ESPD_REQUEST, findArtefactType(selfContainedDARequestV2IS));
     }
 
     @Test
@@ -107,6 +122,10 @@ public class ArtefactUtilsTest {
         Assert.assertEquals(ProfileExecutionIDEnum.ESPD_EDM_V2_0_2_REGULATED, findProfileExecutionID(new FileInputStream(regulatedRequestV2)));
         Assert.assertEquals(EDMVersion.V2, findEDMVersion(new FileInputStream(regulatedRequestV2)));
         Assert.assertEquals(ArtefactType.ESPD_REQUEST, findArtefactType(new FileInputStream(regulatedRequestV2)));
+
+        Assert.assertEquals(ProfileExecutionIDEnum.ESPD_EDM_V2_1_0_SELFCONTAINED, findProfileExecutionID(new FileInputStream(selfContainedDARequestV2File)));
+        Assert.assertEquals(EDMVersion.V2, findEDMVersion(new FileInputStream(selfContainedDARequestV2File)));
+        Assert.assertEquals(ArtefactType.ESPD_REQUEST, findArtefactType(new FileInputStream(selfContainedDARequestV2File)));
     }
 
     @Test

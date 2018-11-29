@@ -283,17 +283,20 @@ public abstract class RegulatedModelBuilder implements ModelBuilder {
 
         try (InputStream bis = ArtefactUtils.getBufferedInputStream(xmlESPD)) {
             // Check and read the file in the JAXB Object
-            // but first identify the artefact edm version
-            switch (ArtefactUtils.findEDMVersion(xmlESPD)) {
+            // but first identify the xml artefact edm version
+            DocumentDetails docDetails = ArtefactUtils.findDocumentDetails(xmlESPD);
+
+            LOGGER.log(Level.INFO, docDetails.getVersion()
+                    + " " + docDetails.getQualificationApplicationType()
+                    + " " + docDetails.getType()
+                    + " XML Artefact has been imported...");
+
+            switch (docDetails.getVersion()) {
                 case V1:
-                    LOGGER.log(Level.INFO, "V1 " + ArtefactUtils.findQualificationApplicationType(xmlESPD)
-                            + " Request XML Artefact has been imported...");
                     ESPDRequestType espdRequestType = readESPDRequestFromStream(bis);
                     modelRequest = ModelFactory.ESPD_REQUEST.extractESPDRequest(espdRequestType); // Create the Model Object
                     break;
                 case V2:
-                    LOGGER.log(Level.INFO, "V2 " + ArtefactUtils.findQualificationApplicationType(xmlESPD)
-                            + " Request XML Artefact has been imported...");
                     QualificationApplicationRequestType qarType = readQualificationApplicationRequestFromStream(bis);
                     modelRequest = ModelFactory.ESPD_REQUEST.extractESPDRequest(qarType); // Create the Model Object
                     break;
@@ -324,18 +327,21 @@ public abstract class RegulatedModelBuilder implements ModelBuilder {
         try (InputStream bis = ArtefactUtils.getBufferedInputStream(xmlESPD)) {
             // Check and read the file in the JAXB Object
             // but first identify the artefact edm version
+            DocumentDetails docDetails = ArtefactUtils.findDocumentDetails(xmlESPD);
+
+            LOGGER.log(Level.INFO, docDetails.getVersion()
+                    + " " + docDetails.getQualificationApplicationType()
+                    + " " + docDetails.getType()
+                    + " XML Artefact has been imported...");
+
             switch (ArtefactUtils.findEDMVersion(xmlESPD)) {
                 case V1:
-                    LOGGER.log(Level.INFO, "V1 " + ArtefactUtils.findQualificationApplicationType(xmlESPD)
-                            + " Response XML Artefact has been imported...");
                     // Check and read the file in the JAXB Object
                     ESPDResponseType espdResponseType = readESPDResponseFromStream(bis);
                     // Create the Model Object
                     modelResponse = ModelFactory.ESPD_RESPONSE.extractESPDResponse(espdResponseType);
                     break;
                 case V2:
-                    LOGGER.log(Level.INFO, "V2 " + ArtefactUtils.findQualificationApplicationType(xmlESPD)
-                            + " Response XML Artefact has been imported...");
                     // Check and read the file in the JAXB Object
                     QualificationApplicationResponseType qarType = readQualificationApplicationResponseFromStream(bis);
                     // Create the Model Object

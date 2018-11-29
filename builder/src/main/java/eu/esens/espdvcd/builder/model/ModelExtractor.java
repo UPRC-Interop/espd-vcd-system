@@ -796,6 +796,19 @@ public interface ModelExtractor {
                     }
                     break;
 
+                case CODE_BOOLEAN:
+                    if (rqType.getExpectedCode() != null
+                            && rqType.getExpectedCode().getValue() != null) {
+
+                        IndicatorResponse indicatorResp = new IndicatorResponse();
+                        indicatorResp.setIndicator(rqType.getExpectedCode().getValue()
+                                .equals(BooleanGUIControlTypeEnum.RADIO_BUTTON_TRUE.name()));
+                        applyValidatedCriterionPropertyID(rqType.getID().getValue(), indicatorResp);
+                        applyConfidentialityLevelCode(ConfidentialityLevelEnum.PUBLIC.name(), indicatorResp);
+                        rq.setResponse(indicatorResp);
+                    }
+                    break;
+
             }
         }
     }

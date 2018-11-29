@@ -51,7 +51,5 @@ public enum ResponseTypeEnum {
     WEIGHT_INDICATOR,                   // EXTRA ResponseDataType     v2 codelist - SELF CONTAINED
     LOT_IDENTIFIER,                     // EXTRA ResponseDataType     v2 codelist - SELF CONTAINED
     ECONOMIC_OPERATOR_IDENTIFIER,       // EXTRA ResponseDataType     v2 codelist - SELF CONTAINED
-    ECONOMIC_OPERATOR_ROLE_CODE,        // EXTRA ResponseDataType     v2 codelist - SELF CONTAINED
     CODE_BOOLEAN,                       // EXTRA ResponseDataType     v2 codelist - SELF CONTAINED
-    ALPHA_INDICATOR                     // EXTRA ResponseDataType     v2 codelist - REGULATED
 }
