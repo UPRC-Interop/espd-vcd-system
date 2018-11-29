@@ -100,7 +100,7 @@ export class FormUtilService {
             }
             // console.log(req.response);
             // req.response = new RequirementResponse();
-            if (req.responseDataType === 'INDICATOR') {
+            if (req.responseDataType === 'INDICATOR' || req.responseDataType === 'CODE_BOOLEAN') {
               if (formValues[req.uuid.valueOf()] === true) {
                 req.response.indicator = true;
                 req.response.uuid = null;
@@ -300,8 +300,8 @@ export class FormUtilService {
               const eoidtypeID = req.uuid + 'eoidtype';
               req.response.eoidtype = formValues[eoidtypeID.valueOf()];
               req.response.uuid = null;
-            } else if (req.responseDataType === 'ECONOMIC_OPERATOR_ROLE_CODE') {
-              req.response.description = formValues[req.uuid.valueOf()];
+            // else if (req.responseDataType === 'ECONOMIC_OPERATOR_ROLE_CODE') {
+            //   req.response.description = formValues[req.uuid.valueOf()];
             } else if (req.responseDataType === 'LOT_IDENTIFIER') {
               // req.response.lots = this.utilities.lotTemplate[req.uuid];
               if (formValues[req.uuid.valueOf()] === null || formValues[req.uuid.valueOf()] === '' || formValues[req.uuid.valueOf()].length === 0) {
@@ -402,7 +402,7 @@ export class FormUtilService {
           } else if (r.responseDataType === 'PERIOD' && this.APIService.version === 'v2') {
             group[r.uuid + 'startDate'] = new FormControl();
             group[r.uuid + 'endDate'] = new FormControl();
-          } else if (r.responseDataType === 'INDICATOR') {
+          } else if (r.responseDataType === 'INDICATOR' || r.responseDataType === 'CODE_BOOLEAN') {
             group[r.uuid] = new FormControl(false);
           } else if (r.responseDataType === 'WEIGHT_INDICATOR') {
             group[r.uuid] = new FormControl(false);
@@ -411,8 +411,6 @@ export class FormUtilService {
             group[r.uuid + 'evaluationMethodDescription'] = new FormControl();
           } else if (r.responseDataType === 'AMOUNT') {
             group[r.uuid + 'currency'] = new FormControl();
-          } else if (r.responseDataType === 'ECONOMIC_OPERATOR_IDENTIFIER') {
-            group[r.uuid + 'eoidtype'] = new FormControl();
           } else if (r.responseDataType === 'LOT_IDENTIFIER') {
             group[r.uuid] = new FormControl();
             this.utilities.renderLotTemplate[r.uuid] = [];
@@ -532,7 +530,7 @@ export class FormUtilService {
 
 
             // YES/NO if responseDataType is indicator then pass indicator value to formControl. (initial state problem fixed)
-            if (r.responseDataType === 'INDICATOR') {
+            if (r.responseDataType === 'INDICATOR' || r.responseDataType === 'CODE_BOOLEAN') {
               if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
                 group[r.uuid] = new FormControl(false);
               } else {
@@ -793,6 +791,12 @@ export class FormUtilService {
                 group[r.uuid + 'weight'] = new FormControl();
                 group[r.uuid + 'evaluationMethodDescription'] = new FormControl();
               }
+              if (r.responseDataType === 'INDICATOR' || r.responseDataType === 'CODE_BOOLEAN') {
+                group[r.uuid] = new FormControl({
+                  value: false,
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
+              }
               if (r.responseDataType === 'AMOUNT') {
                 group[r.uuid] = new FormControl({
                   value: '',
@@ -815,8 +819,11 @@ export class FormUtilService {
               }
             }
             if (this.utilities.isEO) {
-              if (r.responseDataType === 'INDICATOR') {
-                group[r.uuid] = new FormControl(false);
+              if (r.responseDataType === 'INDICATOR' || r.responseDataType === 'CODE_BOOLEAN') {
+                group[r.uuid] = new FormControl({
+                  value: false,
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
               }
               if (r.responseDataType === 'AMOUNT') {
                 group[r.uuid] = new FormControl({

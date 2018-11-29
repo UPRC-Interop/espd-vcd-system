@@ -65,7 +65,7 @@ export class RequirementComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    if (this.req.responseDataType === 'INDICATOR') {
+    if (this.req.responseDataType === 'INDICATOR' || this.req.responseDataType === 'CODE_BOOLEAN') {
       this.indicatorChanged.emit(this.form.get(this.req.uuid).value);
     }
     // this.indicatorChanged.emit(this.form.get(this.req.uuid).value);
@@ -94,7 +94,7 @@ export class RequirementComponent implements OnInit, OnChanges {
       }
     }
 
-    if (this.req.responseDataType === 'INDICATOR') {
+    if (this.req.responseDataType === 'INDICATOR' || this.req.responseDataType === 'CODE_BOOLEAN') {
       this.form.get(this.req.uuid)
         .valueChanges
         .subscribe(ev => {
