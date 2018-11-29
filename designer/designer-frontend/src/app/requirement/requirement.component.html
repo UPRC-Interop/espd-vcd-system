@@ -103,6 +103,14 @@
             <mat-option *ngFor="let type of codelist.financialRatioTypes" [value]="type.code">{{type.name}}</mat-option>
           </mat-select>
         </mat-form-field>
+        <mat-form-field *ngSwitchCase="'EORoleType'">
+          <label [attr.for]="req.uuid">{{req.description}}</label>
+          <br>
+          <mat-select  [formControlName]="req.uuid" [id]="req.uuid">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let role of codelist.eoRoleTypes" [value]="role.code">{{role.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
         <div *ngSwitchCase="'CPVCodes'">
           <!-- TODO cpvs like the classificationCodes -->
           <mat-form-field class="cpv-chip-list">
@@ -243,14 +251,14 @@
     </div>
 
     <!-- SELF-CONTAINED 2.1.0: ECONOMIC_OPERATOR_ROLE_CODE -->
-    <mat-form-field *ngSwitchCase="'ECONOMIC_OPERATOR_ROLE_CODE'">
-      <label [attr.for]="req.uuid">{{req.description}}</label>
-      <br>
-      <mat-select  [formControlName]="req.uuid" [id]="req.uuid">
-        <mat-option>None</mat-option>
-        <mat-option *ngFor="let role of codelist.eoRoleTypes" [value]="role.code">{{role.name}}</mat-option>
-      </mat-select>
-    </mat-form-field>
+    <!--<mat-form-field *ngSwitchCase="'ECONOMIC_OPERATOR_ROLE_CODE'">-->
+      <!--<label [attr.for]="req.uuid">{{req.description}}</label>-->
+      <!--<br>-->
+      <!--<mat-select  [formControlName]="req.uuid" [id]="req.uuid">-->
+        <!--<mat-option>None</mat-option>-->
+        <!--<mat-option *ngFor="let role of codelist.eoRoleTypes" [value]="role.code">{{role.name}}</mat-option>-->
+      <!--</mat-select>-->
+    <!--</mat-form-field>-->
 
   </div>
 </div>

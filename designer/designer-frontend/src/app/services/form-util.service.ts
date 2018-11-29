@@ -300,8 +300,8 @@ export class FormUtilService {
               const eoidtypeID = req.uuid + 'eoidtype';
               req.response.eoidtype = formValues[eoidtypeID.valueOf()];
               req.response.uuid = null;
-            } else if (req.responseDataType === 'ECONOMIC_OPERATOR_ROLE_CODE') {
-              req.response.description = formValues[req.uuid.valueOf()];
+            // else if (req.responseDataType === 'ECONOMIC_OPERATOR_ROLE_CODE') {
+            //   req.response.description = formValues[req.uuid.valueOf()];
             } else if (req.responseDataType === 'LOT_IDENTIFIER') {
               // req.response.lots = this.utilities.lotTemplate[req.uuid];
               if (formValues[req.uuid.valueOf()] === null || formValues[req.uuid.valueOf()] === '' || formValues[req.uuid.valueOf()].length === 0) {
@@ -411,8 +411,6 @@ export class FormUtilService {
             group[r.uuid + 'evaluationMethodDescription'] = new FormControl();
           } else if (r.responseDataType === 'AMOUNT') {
             group[r.uuid + 'currency'] = new FormControl();
-          } else if (r.responseDataType === 'ECONOMIC_OPERATOR_IDENTIFIER') {
-            group[r.uuid + 'eoidtype'] = new FormControl();
           } else if (r.responseDataType === 'LOT_IDENTIFIER') {
             group[r.uuid] = new FormControl();
             this.utilities.renderLotTemplate[r.uuid] = [];
