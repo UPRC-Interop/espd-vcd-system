@@ -20,6 +20,7 @@
 <div [formGroup]="form">
   <div>
     <label *ngIf="req.responseDataType=='INDICATOR'" [attr.for]="req.uuid">{{req.description}}</label>
+    <label *ngIf="req.responseDataType=='CODE_BOOLEAN'" [attr.for]="req.uuid">{{req.description}}</label>
     <label *ngIf="req.responseDataType=='WEIGHT_INDICATOR' && this.utilities.isGloballyWeighted" [attr.for]="req.uuid">{{req.description}}</label>
   </div>
 
@@ -185,6 +186,16 @@
       </mat-radio-button>
     </mat-radio-group>
 
+    <!-- SELF-CONTAINED 2.1.0: CODE_BOOLEAN PropertyDataType -->
+    <mat-radio-group [id]="req.uuid" *ngSwitchCase="'CODE_BOOLEAN'" [formControlName]="req.uuid">
+      <mat-radio-button color="primary"
+                        [value]=true>YES
+      </mat-radio-button>
+      <mat-radio-button color="primary"
+                        [value]=false>NO
+      </mat-radio-button>
+    </mat-radio-group>
+
     <!-- SELF-CONTAINED: WEIGHT_INDICATOR -->
     <div class="weight_indicator" *ngSwitchCase="'WEIGHT_INDICATOR'">
       <div *ngIf="this.utilities.isGloballyWeighted">
@@ -241,7 +252,7 @@
         </mat-select>
       </mat-form-field>
     </div>
-    <!-- SELF-CONTAINED: LOTS_IDENTIFIER -->
+    <!-- SELF-CONTAINED: LOT_IDENTIFIER -->
     <div class="lots_identifier" *ngSwitchCase="'LOT_IDENTIFIER'">
       <mat-selection-list [formControlName]="req.uuid">
         <mat-list-option *ngFor="let lot of this.utilities.projectLots" [value]="lot">
