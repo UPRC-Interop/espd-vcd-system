@@ -47,6 +47,13 @@ export class SelectionComponent implements OnInit {
       this.utilities.isSatisfiedALL = false;
     }
 
+    // if (this.utilities.qualificationApplicationType === 'regulated') {
+    //   if (this.APIService.version === 'v2' && this.dataService.selectionALLCriteria !== null) {
+    //     console.log('regulated satisfies all criterion: ');
+    //     console.log(this.utilities.getSatisfiesALLCriterion(this.dataService.selectionALLCriteria, 'f4dc58dd-af45-4602-a4c8-3dca30fac082'));
+    //   }
+    // }
+
     console.log(this.dataService.CADetails);
 
 

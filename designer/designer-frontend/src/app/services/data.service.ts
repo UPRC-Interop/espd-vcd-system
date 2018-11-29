@@ -900,8 +900,13 @@ export class DataService {
             this.formUtil.createTemplateReqGroups(res.fullCriterionList);
 
             /* find if CRITERION.SELECTION.ALL_SATISFIED exists */
-            this.utilities.satisfiedALLCriterionExists = this.utilities
-              .findCriterion(this.selectionALLCriteria, '7e7db838-eeac-46d9-ab39-42927486f22d');
+            if (this.APIService.version === 'v1') {
+              this.utilities.satisfiedALLCriterionExists = this.utilities
+                .findCriterion(this.selectionALLCriteria, '7e7db838-eeac-46d9-ab39-42927486f22d');
+            } else if (this.APIService.version === 'v2') {
+              this.utilities.satisfiedALLCriterionExists = this.utilities
+                .findCriterion(this.selectionALLCriteria, 'f4dc58dd-af45-4602-a4c8-3dca30fac082');
+            }
 
             if (this.utilities.satisfiedALLCriterionExists) {
               this.utilities.isSatisfiedALL = true;

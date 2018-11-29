@@ -15,10 +15,10 @@
 ///
 
 import {Injectable} from '@angular/core';
-import {Moment} from 'moment';
 import * as moment from 'moment';
+import {Moment} from 'moment';
 import {SelectionCriteria} from '../model/selectionCriteria.model';
-import {MatListOption, MatSnackBar, MatSelectionList} from '@angular/material';
+import {MatListOption, MatSnackBar} from '@angular/material';
 import {RequirementGroup} from '../model/requirementGroup.model';
 
 
@@ -99,6 +99,14 @@ export class UtilitiesService {
     }
 
   }
+
+
+  getSatisfiesALLCriterion(criteria: SelectionCriteria[], id: string): SelectionCriteria {
+    return criteria.find((cr) => {
+      return cr.id === id;
+    });
+  }
+
 
   setAllFields(obj: Object, val: any) {
     Object.keys(obj).forEach(function (k) {
