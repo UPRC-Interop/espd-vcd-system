@@ -79,14 +79,12 @@ public class RequirementDeserialiser extends StdDeserializer<ResponseRequirement
                 break;
             case INDICATOR:
             case CODE_BOOLEAN:
-            case ALPHA_INDICATOR:
                 response = mapper.treeToValue(root.get("response"), IndicatorResponse.class);
                 break;
             case PERCENTAGE:
                 response = mapper.treeToValue(root.get("response"), PercentageResponse.class);
                 break;
             case DESCRIPTION:
-            case ECONOMIC_OPERATOR_ROLE_CODE:
                 response = mapper.treeToValue(root.get("response"), DescriptionResponse.class);
                 break;
             case CODE_COUNTRY:
