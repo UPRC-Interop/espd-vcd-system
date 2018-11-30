@@ -29,7 +29,7 @@ public class Server {
 
     private final static Logger LOGGER = Logger.getLogger(Server.class.getName());
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
 
         LOGGER.info("Starting up espd-designer server");
 
