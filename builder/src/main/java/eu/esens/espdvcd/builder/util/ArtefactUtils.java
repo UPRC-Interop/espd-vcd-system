@@ -18,6 +18,7 @@ package eu.esens.espdvcd.builder.util;
 import eu.esens.espdvcd.codelist.enums.ProfileExecutionIDEnum;
 import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
 import eu.esens.espdvcd.codelist.enums.internal.ArtefactType;
+import eu.esens.espdvcd.model.DocumentDetails;
 import eu.esens.espdvcd.schema.EDMVersion;
 
 import java.io.*;
@@ -307,6 +308,13 @@ public class ArtefactUtils {
         }
 
         throw new IllegalStateException("Error... Imported XML Artefact Qualification Application Type cannot be classified either as Regulated nor as Self-Contained.");
+    }
+
+    public static DocumentDetails findDocumentDetails(InputStream xmlESPD) {
+        EDMVersion version = findEDMVersion(xmlESPD);
+        QualificationApplicationTypeEnum qualificationApplicationType = findQualificationApplicationType(xmlESPD);
+        ArtefactType artefactType = findArtefactType(xmlESPD);
+        return new DocumentDetails(version, artefactType, qualificationApplicationType);
     }
 
 }

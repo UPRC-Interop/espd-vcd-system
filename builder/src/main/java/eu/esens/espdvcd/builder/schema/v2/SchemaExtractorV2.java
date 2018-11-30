@@ -15,6 +15,7 @@
  */
 package eu.esens.espdvcd.builder.schema.v2;
 
+import eu.esens.espdvcd.codelist.enums.BooleanGUIControlTypeEnum;
 import eu.esens.espdvcd.codelist.enums.ProfileExecutionIDEnum;
 import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
 import eu.esens.espdvcd.codelist.enums.RequirementTypeEnum;
@@ -608,11 +609,11 @@ public interface SchemaExtractorV2 {
         switch (type) {
 
             case REGULATED:
-                peIdType.setValue(ProfileExecutionIDEnum.ESPD_EDM_V2_0_2_REGULATED.getValue());
+                peIdType.setValue(ProfileExecutionIDEnum.ESPD_EDM_V2_1_0_REGULATED.getValue());
                 break;
 
             case SELFCONTAINED:
-                peIdType.setValue(ProfileExecutionIDEnum.ESPD_EDM_V2_0_2_SELFCONTAINED.getValue());
+                peIdType.setValue(ProfileExecutionIDEnum.ESPD_EDM_V2_1_0_SELFCONTAINED.getValue());
                 break;
 
         }
@@ -857,6 +858,17 @@ public interface SchemaExtractorV2 {
                     rqType.getExpectedCode().setListAgencyID("EU-COM-OP");
                     rqType.getExpectedCode().setListVersionID("1.0");
                     rqType.getExpectedCode().setValue(indicator);
+                    break;
+
+                case CODE_BOOLEAN:
+                    String codeBoolean = ((IndicatorResponse) rq.getResponse()).isIndicator()
+                            ? BooleanGUIControlTypeEnum.RADIO_BUTTON_TRUE.name()
+                            : BooleanGUIControlTypeEnum.RADIO_BUTTON_FALSE.name();
+                    rqType.setExpectedCode(new ExpectedCodeType());
+                    rqType.getExpectedCode().setListID("BooleanGUIControlType");
+                    rqType.getExpectedCode().setListAgencyID("EU-COM-OP");
+                    rqType.getExpectedCode().setListVersionID("1.0");
+                    rqType.getExpectedCode().setValue(codeBoolean);
                     break;
 
             }

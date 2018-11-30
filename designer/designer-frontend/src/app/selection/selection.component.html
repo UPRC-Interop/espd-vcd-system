@@ -71,10 +71,13 @@
           <div class="exclusionCriteria" >
             <div class="criteria">
               <mat-checkbox color="primary"
-                            checked="true"
+                            checked="this.utilities.getSatisfiesALLCriterion(this.dataService.selectionALLCriteria, 'f4dc58dd-af45-4602-a4c8-3dca30fac082').selected"
                             disabled="true"
-                            name="selectionSatisfiedALL">
-                <div class="critDesc" translate>espd.part4.crit.selection.eo.satisfies.all.criteria</div>
+                            name="selectionSatisfiedALL"
+                            [(ngModel)]="this.utilities.getSatisfiesALLCriterion(this.dataService.selectionALLCriteria, 'f4dc58dd-af45-4602-a4c8-3dca30fac082').selected">
+                <div class="critDesc" translate>
+                  espd.part4.crit.selection.eo.satisfies.all.criteria
+                </div>
               </mat-checkbox>
             </div>
           </div>

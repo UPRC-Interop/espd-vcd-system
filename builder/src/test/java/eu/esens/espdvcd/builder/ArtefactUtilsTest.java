@@ -56,8 +56,6 @@ public class ArtefactUtilsTest {
         regulatedRequestV2 = new File(getClass().getClassLoader().getResource("REGULATED-ESPD-Request_2.0.2.xml").toURI());
         Assert.assertNotNull(regulatedRequestV2);
 
-        // SELFCONTAINED_ESPD-Request.V2.0.2.xml
-
         selfContainedRequestV2IS = getClass().getClassLoader().getResourceAsStream("SELFCONTAINED-ESPD-Request_2.0.2.xml");
         Assert.assertNotNull(selfContainedRequestV2IS);
 

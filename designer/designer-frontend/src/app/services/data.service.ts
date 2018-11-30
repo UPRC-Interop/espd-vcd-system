@@ -485,14 +485,22 @@ export class DataService {
       /* WORKAROUND-FIX: satisfiesALL Criteria null issue when it's self-contained */
       this.selectionALLCriteria = [];
       this.formUtil.extractFormValuesFromCriteria(this.caRelatedCriteria, this.caRelatedCriteriaForm, this.formUtil.evidenceList);
+      this.formUtil.extractFormValuesFromCriteria(this.eoLotCriterion, this.eoLotCriterionForm, this.formUtil.evidenceList);
+    }
+
+    if (this.utilities.qualificationApplicationType === 'regulated' && this.APIService.version === 'v1') {
+      this.caRelatedCriteria = [];
+      this.eoLotCriterion = [];
+    }
+
+    if (this.utilities.qualificationApplicationType === 'regulated' && this.APIService.version === 'v2') {
+      this.caRelatedCriteria = [];
     }
 
     /* extract eoRelated criteria */
     this.formUtil.extractFormValuesFromCriteria(this.eoRelatedACriteria, this.eoRelatedACriteriaForm, this.formUtil.evidenceList);
     this.formUtil.extractFormValuesFromCriteria(this.eoRelatedCCriteria, this.eoRelatedCCriteriaForm, this.formUtil.evidenceList);
     this.formUtil.extractFormValuesFromCriteria(this.eoRelatedDCriteria, this.eoRelatedDCriteriaForm, this.formUtil.evidenceList);
-    this.formUtil.extractFormValuesFromCriteria(this.eoLotCriterion, this.eoLotCriterionForm, this.formUtil.evidenceList);
-
     /* extract exclusion criteria */
     this.formUtil.extractFormValuesFromCriteria(this.exclusionACriteria, this.exclusionACriteriaForm, this.formUtil.evidenceList);
     this.formUtil.extractFormValuesFromCriteria(this.exclusionBCriteria, this.exclusionBCriteriaForm, this.formUtil.evidenceList);
@@ -511,6 +519,7 @@ export class DataService {
 
     /* extract reduction criteria */
     this.formUtil.extractFormValuesFromCriteria(this.reductionCriteria, this.reductionCriteriaForm, this.formUtil.evidenceList);
+
 
     // make full criterion list
     this.fullCriterionList = this.makeFullCriterionListEO(this.caRelatedCriteria,
@@ -891,8 +900,13 @@ export class DataService {
             this.formUtil.createTemplateReqGroups(res.fullCriterionList);
 
             /* find if CRITERION.SELECTION.ALL_SATISFIED exists */
-            this.utilities.satisfiedALLCriterionExists = this.utilities
-              .findCriterion(this.selectionALLCriteria, '7e7db838-eeac-46d9-ab39-42927486f22d');
+            if (this.APIService.version === 'v1') {
+              this.utilities.satisfiedALLCriterionExists = this.utilities
+                .findCriterion(this.selectionALLCriteria, '7e7db838-eeac-46d9-ab39-42927486f22d');
+            } else if (this.APIService.version === 'v2') {
+              this.utilities.satisfiedALLCriterionExists = this.utilities
+                .findCriterion(this.selectionALLCriteria, 'f4dc58dd-af45-4602-a4c8-3dca30fac082');
+            }
 
             if (this.utilities.satisfiedALLCriterionExists) {
               this.utilities.isSatisfiedALL = true;
