@@ -65,7 +65,7 @@ export class RequirementGroupComponent implements OnInit, OnChanges {
     this.childIndicator = (event);
   }
 
-  onAdd(rg: RequirementGroup) {
+  onAdd(rg: RequirementGroup, i: number) {
     // console.log(`Called onAdd with groupId ${rg.uuid}:`);
     // console.log(this.formUtil.template[rg.uuid]);
 
@@ -95,7 +95,8 @@ export class RequirementGroupComponent implements OnInit, OnChanges {
       // change requirement ids
       this.formUtil.changeReqId(this.placeHolder);
 
-      this.reqGroup.requirementGroups.push(this.placeHolder);
+      // this.reqGroup.requirementGroups.push(this.placeHolder);
+      this.reqGroup.requirementGroups.splice(i + 1, 0, this.placeHolder);
       console.log('NEW Local ReqGroup:');
       console.log(this.reqGroup);
       // add formGroup to Form object
