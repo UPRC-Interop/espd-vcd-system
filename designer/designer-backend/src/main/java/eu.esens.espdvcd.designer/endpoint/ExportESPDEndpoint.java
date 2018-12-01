@@ -33,6 +33,7 @@ import eu.esens.espdvcd.schema.EDMVersion;
 import spark.Service;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.MessageFormat;
 
 public class ExportESPDEndpoint extends Endpoint {
@@ -66,6 +67,7 @@ public class ExportESPDEndpoint extends Endpoint {
             spark.post("/:artefactType/:exportType",
                     (rq, rsp) -> {
                         ExportType exportType;
+                        InputStream streamToReturn;
                         try {
                             exportType = ExportType.valueOf(rq.params("exportType").toUpperCase());
                         } catch (IllegalArgumentException e) {
@@ -84,20 +86,20 @@ public class ExportESPDEndpoint extends Endpoint {
                         String artefactType = rq.params("artefactType");
                         if (rq.contentType().contains("application/json")) {
                             try {
-                                rsp.type("application/xml");
-                                rsp.header("Content-Disposition", String.format(
-                                        "attachment; filename=\"%s.%s\";", artefactType.toLowerCase(), exportType.name().toLowerCase()));
                                 if (artefactType.equalsIgnoreCase("request")) {
                                     //Handle request
                                     ESPDRequest document;
                                     document = MAPPER.readValue(rq.body(), ESPDRequestImpl.class);
                                     switch (exportType) {
                                         case PDF:
-                                            return service.exportESPDRequestPdfAsInputStream(document, languageCode);
+                                            streamToReturn = service.exportESPDRequestPdfAsInputStream(document, languageCode);
+                                            break;
                                         case XML:
-                                            return service.exportESPDRequestAsInputStream(document);
+                                            streamToReturn = service.exportESPDRequestAsInputStream(document);
+                                            break;
                                         case HTML:
-                                            return service.exportESPDRequestHtmlAsInputStream(document, languageCode);
+                                            streamToReturn = service.exportESPDRequestHtmlAsInputStream(document, languageCode);
+                                            break;
                                         default:
                                             throw new IllegalArgumentException(
                                                     MessageFormat.format("No export operation defined for type ''{0}''.", exportType.name()));
@@ -108,19 +110,28 @@ public class ExportESPDEndpoint extends Endpoint {
                                     document = MAPPER.readValue(rq.body(), ESPDResponseImpl.class);
                                     switch (exportType) {
                                         case PDF:
-                                            return service.exportESPDResponsePdfAsInputStream(document, languageCode);
+                                            streamToReturn = service.exportESPDResponsePdfAsInputStream(document, languageCode);
+                                            break;
                                         case XML:
-                                            return service.exportESPDResponseAsInputStream(document);
+                                            streamToReturn = service.exportESPDResponseAsInputStream(document);
+                                            break;
                                         case HTML:
-                                            return service.exportESPDResponseHtmlAsInputStream(document, languageCode);
+                                            streamToReturn = service.exportESPDResponseHtmlAsInputStream(document, languageCode);
+                                            break;
                                         default:
                                             throw new IllegalArgumentException(
                                                     MessageFormat.format("No export operation defined for type ''{0}''.", exportType.name()));
                                     }
                                 } else {
                                     rsp.status(400);
-                                    return JsonUtil.toJson(Errors.standardError(400, "You need to specify if the ESPD is a request or response."));
+                                    return JsonUtil.toJson(Errors.standardError(
+                                            400,
+                                            "You need to specify if the ESPD is a request or response."));
                                 }
+                                rsp.type("application/xml");
+                                rsp.header("Content-Disposition", String.format(
+                                        "attachment; filename=\"%s.%s\";", artefactType.toLowerCase(), exportType.name().toLowerCase()));
+                                return streamToReturn;
                             } catch (IOException e) {
                                 rsp.status(400);
                                 LOGGER.severe(LOGGER_DESERIALIZATION_ERROR + e.getMessage());

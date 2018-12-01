@@ -357,20 +357,6 @@ public class BuilderESPDTest {
         System.out.println(xmlDocumentBuilderV2.getAsString());
     }
 
-//    @Test
-//    public void testImportSelfContainedDARequest() throws Exception {
-//
-//        ESPDRequest espdRequest = BuilderFactory.EDM_V2
-//                .createSelfContainedModelBuilder()
-//                .importFrom(BuilderESPDTest.class.getResourceAsStream("/artefacts/selfcontained/UPRC-ESPD-Self-Contained-Request-2.1.0-DA-Artefact.xml"))
-//                .createESPDRequest();
-//
-//        XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.EDM_V2
-//                .createDocumentBuilderFor(espdRequest);
-//
-//        System.out.println(xmlDocumentBuilderV2.getAsString());
-//    }
-
     @Test
     public void testImportSelfContainedResponse() throws Exception {
 
