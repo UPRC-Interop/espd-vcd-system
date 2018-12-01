@@ -297,20 +297,20 @@
       </mat-expansion-panel>
 
       <div formArrayName="naturalPersons">
-        <div *ngFor="let person of getNaturalPersonFormData().controls; let i = index;">
-          <mat-expansion-panel expanded="true">
+        <div *ngFor="let person of getNaturalPersonFormData().controls; let i = index; first as isFirst">
+          <mat-expansion-panel expanded="true" [disabled]="true">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                {{'espd.part2.info.respresent' | translate}} #{{ i + 1}}
+                  {{'espd.part2.info.respresent' | translate}} #{{ i + 1}}
               </mat-panel-title>
-              <mat-panel-description>
+              <div class="card-btn-container">
                 <div class="add">
-                  <a (click)="addPerson()">+</a>
+                  <a mat-raised-button (click)="addPerson()">+</a>
                 </div>
-                <div class="remove">
-                  <a (click)="removePerson(i)">-</a>
+                <div class="remove" *ngIf="!isFirst">
+                  <a mat-raised-button (click)="removePerson(i)">-</a>
                 </div>
-              </mat-panel-description>
+              </div>
             </mat-expansion-panel-header>
 
             <div [formGroupName]="i">

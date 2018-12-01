@@ -75,6 +75,16 @@ mat-expansion-panel-header:active {
   background-color:#3F51B5;
 }
 
+.mat-expansion-panel-header-title {
+  padding: 10px;
+}
+
+.mat-expansion-panel-header[aria-disabled=true] {
+  color: white;
+  line-height: normal;
+  vertical-align: middle;
+}
+
 mat-panel-title, mat-panel-description {
   color:white;
 }
@@ -115,4 +125,8 @@ mat-grid-tile {
   display:inline-block;
   margin-left: 25px;
   font-size: 22px;
+}
+
+.card-btn-container {
+  float: left;
 }
