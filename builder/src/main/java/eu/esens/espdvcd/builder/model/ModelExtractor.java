@@ -466,6 +466,18 @@ public interface ModelExtractor {
         return extractSelectableCriterion(ec, true);
     }
 
+    default boolean isRequirementType(TenderingCriterionPropertyType rqType) {
+        return rqType.getTypeCode() != null
+                && rqType.getTypeCode().getValue() != null
+                && rqType.getTypeCode().getValue().equals(RequirementTypeEnum.REQUIREMENT);
+    }
+
+    default boolean isLotRequirement(TenderingCriterionPropertyType rqType) {
+        return rqType.getValueDataTypeCode() != null
+                && rqType.getValueDataTypeCode().getValue() != null
+                && rqType.getValueDataTypeCode().getValue().equals(ResponseTypeEnum.LOT_IDENTIFIER.name());
+    }
+
     default RequirementGroup extractRequirementGroup(TenderingCriterionPropertyGroupType rgType) {
 
         RequirementGroup rg = null;
@@ -478,9 +490,44 @@ public interface ModelExtractor {
         }
 
         if (rg != null) {
-            List<Requirement> rList = rgType.getTenderingCriterionProperty().stream()
-                    .map(r -> extractRequirement(r))
-                    .collect(Collectors.toList());
+            Requirement lotRequirement = null;
+            List<Requirement> rList = new ArrayList<>();
+
+            for (TenderingCriterionPropertyType rqType : rgType.getTenderingCriterionProperty()) {
+
+                if (isLotRequirement(rqType)) {
+
+                    // we want to instantiate only one model class for all possible TenderingCriterionProperty
+                    // of LOT_IDENTIFIER response data type may exist in a TenderingCriterionPropertyGroup
+                    if (lotRequirement == null) {
+                        lotRequirement = extractRequirement(rqType);
+
+                        if (rqType.getExpectedID() != null
+                                && rqType.getExpectedID().getValue() != null) {
+
+                            LotIdentifierResponse lotIdeResp = new LotIdentifierResponse();
+                            lotIdeResp.getLotsList().add(rqType.getExpectedID().getValue());
+                            applyValidatedCriterionPropertyID(rqType.getID().getValue(), lotIdeResp);
+                            applyConfidentialityLevelCode(ConfidentialityLevelEnum.PUBLIC.name(), lotIdeResp);
+                            lotRequirement.setResponse(lotIdeResp);
+                        }
+                        rList.add(lotRequirement);
+
+                    } else {
+
+                        if (rqType.getExpectedID() != null
+                                && rqType.getExpectedID().getValue() != null) {
+                            ((LotIdentifierResponse) lotRequirement.getResponse()).getLotsList()
+                                    .add(rqType.getExpectedID().getValue());
+                        }
+                    }
+
+                } else {
+                    rList.add(extractRequirement(rqType));
+                }
+
+            }
+
             List<RequirementGroup> childRg = rgType.getSubsidiaryTenderingCriterionPropertyGroup().stream()
                     .map(t -> extractRequirementGroup(t))
                     .collect(Collectors.toList());
@@ -626,6 +673,7 @@ public interface ModelExtractor {
         }
     }
 
+    // default Requirement extractRequirement(TenderingCriterionPropertyType rqType, RequirementGroup parent) {
     default Requirement extractRequirement(TenderingCriterionPropertyType rqType) {
         String theId = null;
         if (rqType.getID() != null) {
@@ -669,6 +717,7 @@ public interface ModelExtractor {
         resp.setConfidentialityLevelCode(code);
     }
 
+    // default void applyCAResponseToModel(TenderingCriterionPropertyType rqType, Requirement rq, RequirementGroup parent) {
     default void applyCAResponseToModel(TenderingCriterionPropertyType rqType, Requirement rq) {
 
         if (rqType.getTypeCode() != null
@@ -715,18 +764,6 @@ public interface ModelExtractor {
                         applyValidatedCriterionPropertyID(rqType.getID().getValue(), codeResp);
                         applyConfidentialityLevelCode(ConfidentialityLevelEnum.PUBLIC.name(), codeResp);
                         rq.setResponse(codeResp);
-                    }
-                    break;
-
-                case LOT_IDENTIFIER:
-                    if (rqType.getExpectedID() != null
-                            && rqType.getExpectedID().getValue() != null) {
-
-                        LotIdentifierResponse lotIdeResp = new LotIdentifierResponse();
-                        lotIdeResp.setLots(rqType.getExpectedID().getValue());
-                        applyValidatedCriterionPropertyID(rqType.getID().getValue(), lotIdeResp);
-                        applyConfidentialityLevelCode(ConfidentialityLevelEnum.PUBLIC.name(), lotIdeResp);
-                        rq.setResponse(lotIdeResp);
                     }
                     break;
 

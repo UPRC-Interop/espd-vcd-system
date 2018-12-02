@@ -15,10 +15,7 @@
  */
 package eu.esens.espdvcd.builder.schema.v2;
 
-import eu.esens.espdvcd.codelist.enums.BooleanGUIControlTypeEnum;
-import eu.esens.espdvcd.codelist.enums.ProfileExecutionIDEnum;
-import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
-import eu.esens.espdvcd.codelist.enums.RequirementTypeEnum;
+import eu.esens.espdvcd.codelist.enums.*;
 import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
@@ -29,6 +26,8 @@ import eu.espd.schema.v2.unqualifieddatatypes_2.CodeType;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -109,6 +108,34 @@ public interface SchemaExtractorV2 {
         }
     }
 
+    default boolean isLotRequirement(Requirement rq) {
+        return rq.getResponseDataType() != null
+                && rq.getResponseDataType() == ResponseTypeEnum.LOT_IDENTIFIER;
+    }
+
+    default ExpectedIDType createExpectedIDType(String ID) {
+        ExpectedIDType idType = new ExpectedIDType();
+        idType.setSchemeAgencyID("EU-COM-GROW");
+        idType.setValue(ID);
+        return idType;
+    }
+
+    default List<TenderingCriterionPropertyType> createLotRequirements(Requirement rq) {
+
+        if (isLotRequirement(rq)
+                && rq.getResponse() != null) {
+            return ((LotIdentifierResponse) rq.getResponse()).getLotsList().stream()
+                    .map(lot -> {
+                        TenderingCriterionPropertyType rqType = extractTenderingCriterionPropertyType(rq);
+                        rqType.setExpectedID(createExpectedIDType(lot));
+                        return rqType;
+                    })
+                    .collect(Collectors.toList());
+        }
+
+        return Collections.emptyList();
+    }
+
     default TenderingCriterionPropertyGroupType extractTenderingCriterionPropertyGroupType(RequirementGroup rg) {
 
         TenderingCriterionPropertyGroupType rgType = new TenderingCriterionPropertyGroupType();
@@ -117,9 +144,21 @@ public interface SchemaExtractorV2 {
                 .map(rg1 -> extractTenderingCriterionPropertyGroupType(rg1))
                 .collect(Collectors.toList()));
 
-        rgType.getTenderingCriterionProperty().addAll(rg.getRequirements().stream()
-                .map(r1 -> extractTenderingCriterionPropertyType(r1))
-                .collect(Collectors.toList()));
+        List<TenderingCriterionPropertyType> rqTypeList = new ArrayList<>();
+
+        for (Requirement r1 : rg.getRequirements()) {
+
+            // lot Requirement found
+            // create all lot TenderingCriterionPropertyTypes
+            if (isLotRequirement(r1)) {
+                rqTypeList.addAll(createLotRequirements(r1));
+            } else {
+                rqTypeList.add(extractTenderingCriterionPropertyType(r1));
+            }
+
+        }
+
+        rgType.getTenderingCriterionProperty().addAll(rqTypeList);
 
         rgType.setID(createDefaultIDType(rg.getID()));
         // RequirementGroup "PI" attribute: the "processing instruction" attribute is not defined in UBL-2.2.
@@ -468,8 +507,6 @@ public interface SchemaExtractorV2 {
 
     default JurisdictionLevelType createJurisdictionLevel(String code) {
         JurisdictionLevelType jlType = new JurisdictionLevelType();
-        // FIXME: not sure if setLanguageID is mandatory here
-        jlType.setLanguageID("en");
         jlType.setValue(code);
         return jlType;
     }
@@ -742,7 +779,8 @@ public interface SchemaExtractorV2 {
         return idType;
     }
 
-    default void applyCAResponseToXML(Requirement rq, TenderingCriterionPropertyType rqType) {
+    default void applyCAResponseToXML(Requirement rq,
+                                      TenderingCriterionPropertyType rqType) {
 
         if (rq.getType() == RequirementTypeEnum.REQUIREMENT
                 && rq.getResponse() != null
@@ -800,15 +838,6 @@ public interface SchemaExtractorV2 {
                         rqType.getExpectedCode().setListVersionID("1.0");
                         rqType.getExpectedCode().setListAgencyID("EU-COM-GROW");
                         rqType.getExpectedCode().setValue(code);
-                    }
-                    break;
-
-                case LOT_IDENTIFIER:
-                    String lots = ((LotIdentifierResponse) rq.getResponse()).getLots();
-                    if (lots != null && !lots.isEmpty()) {
-                        rqType.setExpectedID(new ExpectedIDType());
-                        rqType.getExpectedID().setSchemeAgencyID("EU-COM-GROW");
-                        rqType.getExpectedID().setValue(lots);
                     }
                     break;
 
