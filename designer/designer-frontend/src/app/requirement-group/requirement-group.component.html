@@ -25,14 +25,17 @@
                          [form] = "form"
                          (indicatorChanged)="childIndicatorChangedHandler($event)"></app-requirement>
       </div>
-        <div *ngFor="let rg of reqGroup.requirementGroups" class="form-row"
+        <div *ngFor="let rg of reqGroup.requirementGroups; first as isFirst; index as i" class="form-row"
              [hidden]="(((rg.type === 'QUESTION_SUBGROUP' || rg.type === 'QUESTION_GROUP') && this.utilities.isCA))">
           <app-requirement-group [reqGroup]="rg"
                                  [form] = "form.get(rg.uuid)"
                                  [indicator]="childIndicator"></app-requirement-group>
           <div *ngIf="childIndicator && rg.multiple && !(this.utilities.CAReqExists(rg) && this.utilities.isEO)" style="text-align: right">
-            <button type="button" (click)="onAdd(rg)"><span class="material-icons" style="vertical-align: middle;">add_circle_outline</span></button>
-            <button type="button" (click)="onRemove(rg)"><span class="material-icons" style="vertical-align: middle;">remove_circle_outline</span></button>
+            <button type="button" (click)="onAdd(rg, i)"><span class="material-icons" style="vertical-align: middle;">add_circle_outline</span></button>
+            <div *ngIf="!isFirst" class="remove-btn">
+              <button type="button" (click)="onRemove(rg)"><span class="material-icons" style="vertical-align: middle;">remove_circle_outline</span>
+              </button>
+            </div>
           </div>
           <!--<div *ngIf="rg.mandatory && rg.multiple" style="text-align: right">-->
             <!--<button type="button" (click)="onAdd(rg.id)"><span class="material-icons" style="vertical-align: middle;">add_circle_outline</span></button>-->

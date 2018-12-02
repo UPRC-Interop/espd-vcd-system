@@ -43,7 +43,7 @@ export class CriterionComponent implements OnInit {
     this.form = this.form[this.criterion.uuid];
   }
 
-  onAdd(reqGroup: RequirementGroup) {
+  onAdd(reqGroup: RequirementGroup, i: number) {
     // console.log(`Called onAdd with groupId ${reqGroup.uuid}:`);
     // console.log(this.formUtil.template[reqGroup.uuid]);
 
@@ -74,7 +74,8 @@ export class CriterionComponent implements OnInit {
       this.formUtil.changeReqId(this.placeHolder);
 
 
-      this.criterion.requirementGroups.push(this.placeHolder);
+      // this.criterion.requirementGroups.push(this.placeHolder);
+      this.criterion.requirementGroups.splice(i + 1, 0, this.placeHolder);
       console.log('NEW Local ReqGroup:');
       console.log(reqGroup);
 // add formGroup to Form object
