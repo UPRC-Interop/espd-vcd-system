@@ -386,4 +386,19 @@ public class BuilderESPDTest {
         System.out.println(xmlDocBuilder.getAsString());
     }
 
+    @Test
+    public void testLotsLogic() throws Exception {
+
+        ESPDRequest espdRequest = BuilderFactory.EDM_V2
+                .createSelfContainedModelBuilder()
+                .importFrom(BuilderESPDTest.class.getResourceAsStream("/artefacts/selfcontained/test/lots-test-sfc-request-2.1.0.xml"))
+                .createESPDRequest();
+
+        XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.EDM_V2
+                .createDocumentBuilderFor(espdRequest);
+
+        System.out.println(xmlDocumentBuilderV2.getAsString());
+
+    }
+
 }
