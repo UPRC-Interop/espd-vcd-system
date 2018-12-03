@@ -23,6 +23,7 @@ import eu.esens.espdvcd.model.requirement.response.*;
 import eu.espd.schema.v2.pre_award.commonaggregate.*;
 import eu.espd.schema.v2.pre_award.commonbasic.*;
 import eu.espd.schema.v2.unqualifieddatatypes_2.CodeType;
+import org.bouncycastle.cert.ocsp.Req;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -108,9 +109,25 @@ public interface SchemaExtractorV2 {
         }
     }
 
-    default boolean isLotRequirement(Requirement rq) {
+    default boolean isLotIdentifier(Requirement rq) {
         return rq.getResponseDataType() != null
                 && rq.getResponseDataType() == ResponseTypeEnum.LOT_IDENTIFIER;
+    }
+
+    default boolean isRequirementType(Requirement rq) {
+        return rq.getType() == RequirementTypeEnum.REQUIREMENT;
+    }
+
+    default boolean isQuestionType(Requirement rq) {
+        return rq.getType() == RequirementTypeEnum.QUESTION;
+    }
+
+    default boolean isLotRequirementType(Requirement rq) {
+        return isRequirementType(rq) && isLotIdentifier(rq);
+    }
+
+    default boolean isLotQuestionType(Requirement rq) {
+        return isQuestionType(rq) && isLotIdentifier(rq);
     }
 
     default ExpectedIDType createExpectedIDType(String ID) {
@@ -122,7 +139,7 @@ public interface SchemaExtractorV2 {
 
     default List<TenderingCriterionPropertyType> createLotRequirements(Requirement rq) {
 
-        if (isLotRequirement(rq)
+        if (isLotRequirementType(rq)
                 && rq.getResponse() != null) {
             return ((LotIdentifierResponse) rq.getResponse()).getLotsList().stream()
                     .map(lot -> {
@@ -150,7 +167,7 @@ public interface SchemaExtractorV2 {
 
             // lot Requirement found
             // create all lot TenderingCriterionPropertyTypes
-            if (isLotRequirement(r1)) {
+            if (isLotRequirementType(r1)) {
                 rqTypeList.addAll(createLotRequirements(r1));
             } else {
                 rqTypeList.add(extractTenderingCriterionPropertyType(r1));

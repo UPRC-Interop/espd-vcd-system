@@ -469,10 +469,24 @@ public interface ModelExtractor {
                 && rqType.getTypeCode().getValue().equals(RequirementTypeEnum.REQUIREMENT);
     }
 
-    default boolean isLotRequirement(TenderingCriterionPropertyType rqType) {
+    default boolean isQuestionType(TenderingCriterionPropertyType rqType) {
+        return rqType.getTypeCode() != null
+                && rqType.getTypeCode().getValue() != null
+                && rqType.getTypeCode().getValue().equals(RequirementTypeEnum.QUESTION);
+    }
+
+    default boolean isLotIdentifier(TenderingCriterionPropertyType rqType) {
         return rqType.getValueDataTypeCode() != null
                 && rqType.getValueDataTypeCode().getValue() != null
                 && rqType.getValueDataTypeCode().getValue().equals(ResponseTypeEnum.LOT_IDENTIFIER.name());
+    }
+
+    default boolean isLotRequirementType(TenderingCriterionPropertyType rqType) {
+        return isRequirementType(rqType) && isLotIdentifier(rqType);
+    }
+
+    default boolean isLotQuestionType(TenderingCriterionPropertyType rqType) {
+        return isQuestionType(rqType) && isLotIdentifier(rqType);
     }
 
     default RequirementGroup extractRequirementGroup(TenderingCriterionPropertyGroupType rgType) {
@@ -492,7 +506,7 @@ public interface ModelExtractor {
 
             for (TenderingCriterionPropertyType rqType : rgType.getTenderingCriterionProperty()) {
 
-                if (isLotRequirement(rqType)) {
+                if (isLotRequirementType(rqType)) {
 
                     // we want to instantiate only one model class for all possible TenderingCriterionProperty
                     // of LOT_IDENTIFIER response data type may exist in a TenderingCriterionPropertyGroup
