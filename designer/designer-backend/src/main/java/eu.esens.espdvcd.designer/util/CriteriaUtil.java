@@ -2,6 +2,7 @@ package eu.esens.espdvcd.designer.util;
 
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.designer.service.ExportESPDService;
+import eu.esens.espdvcd.designer.typeEnum.CriteriaType;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.model.SelectableCriterion;
@@ -13,6 +14,7 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Objects;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 public final class CriteriaUtil {
 
@@ -26,9 +28,9 @@ public final class CriteriaUtil {
     }
 
     public static int satisfiesAllComparator(final SelectableCriterion cr1, final SelectableCriterion cr2) {
-        if (cr1.getTypeCode().equals("CRITERION.SELECTION.ALL_SATISFIED"))
+        if (cr1.getTypeCode().matches(CriteriaType.ALL_SATISFIED.getRegex()))
             return -1;
-        else if (cr2.getTypeCode().equals("CRITERION.SELECTION.ALL_SATISFIED"))
+        else if (cr2.getTypeCode().equals(CriteriaType.ALL_SATISFIED.getRegex()))
             return 1;
         else
             return 0;
@@ -39,17 +41,29 @@ public final class CriteriaUtil {
                 .stream()
                 .filter(cr -> cr
                         .getTypeCode()
-                        .equals("CRITERION.SELECTION.ALL_SATISFIED"))
+                        .matches(CriteriaType.ALL_SATISFIED.getRegex()))
                 .findFirst()
                 .ifPresent(cr -> {
                     if (cr.isSelected())
                         model.getFullCriterionList()
                                 .removeIf(selectableCriterion -> selectableCriterion
                                         .getTypeCode()
-                                        .matches("(?!.*ALL_SATISFIED*)(?!.*SELECTION.ALL*)^CRITERION.SELECTION.+"));
+                                        .matches(CriteriaType.SELECTION_NO_ALPHA.getRegex()));
 
                 });
         return model;
+    }
+
+    public static List<SelectableCriterion> markAsSelected(List<SelectableCriterion> criteria) {
+        return criteria.stream()
+                .peek(selectableCriterion -> {
+                    if (selectableCriterion.getTypeCode().matches(CriteriaType.SELECTION_NO_ALPHA.getRegex())) {
+                        selectableCriterion.setSelected(false);
+                    } else {
+                        selectableCriterion.setSelected(true);
+                    }
+                })
+                .collect(Collectors.toList());
     }
 
     public static ESPDResponse finalizeESPDResponse(@NotNull final ESPDResponse model) {

@@ -19,7 +19,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import eu.esens.espdvcd.model.LegislationReference;
 import eu.esens.espdvcd.model.util.CustomLegislationReferenceDeserializer;
 import eu.esens.espdvcd.model.util.CustomStringValueDeserializer;
 import eu.esens.espdvcd.model.util.CustomTextValueDeserializer;
@@ -52,7 +51,7 @@ public class ECertisCriterionImpl implements ECertisCriterion {
     private String description;
     private String domainID;
     private String versionID;
-    private LegislationReference legislationReference;
+    private ECertisLegislationReference legislationReference;
     private List<ECertisEvidenceGroup> evidenceGroups;
     private List<ECertisCriterion> subCriterions;
     private ECertisCriterion parentCriterion;
@@ -131,14 +130,14 @@ public class ECertisCriterionImpl implements ECertisCriterion {
 
     @Override
     @JsonProperty("LegislationReference")
-    public LegislationReference getLegislationReference() {
+    public ECertisLegislationReference getLegislationReference() {
         return legislationReference;
     }
         
     @Override
     @JsonSetter("LegislationReference")
     @JsonDeserialize(as = ECertisLegislationReferenceImpl.class, using = CustomLegislationReferenceDeserializer.class)
-    public void setLegislationReference(LegislationReference legislationReference) {
+    public void setLegislationReference(ECertisLegislationReference legislationReference) {
         this.legislationReference = legislationReference;
     }
    

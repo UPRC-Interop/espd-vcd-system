@@ -32,6 +32,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
+import java.util.Scanner;
 
 public enum ImportESPDRequestService implements ImportESPDService<ESPDRequest> {
     INSTANCE;
@@ -53,6 +54,12 @@ public enum ImportESPDRequestService implements ImportESPDService<ESPDRequest> {
 
         schemaValidationService.validateESPDFile(XML);
         schematronValidationService.validateESPDFile(XML);
+
+        Scanner filereader = new Scanner(XML);
+
+        while (filereader.hasNext()) {
+            System.out.println(filereader.nextLine());
+        }
 
         InputStream is = new FileInputStream(XML);
         ESPDRequest request = null;

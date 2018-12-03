@@ -21,10 +21,10 @@ public enum SelfContainedCriteriaService implements CriteriaService {
 
     @Override
     public List<SelectableCriterion> getCriteria() throws RetrieverException {
-        List<SelectableCriterion> criteria = extractor.getFullList();
         extractor.setLang(EULanguageCodeEnum.EN);
+        List<SelectableCriterion> criteria = extractor.getFullList();
         CriteriaUtil.generateUUIDs(criteria);
-        return criteria;
+        return CriteriaUtil.markAsSelected(criteria);
     }
 
     @Override
