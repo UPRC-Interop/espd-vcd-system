@@ -18,19 +18,15 @@ package eu.esens.espdvcd.designer.endpoint;
 import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.designer.exception.ValidationException;
 import eu.esens.espdvcd.designer.service.ImportESPDService;
+import eu.esens.espdvcd.designer.util.Config;
 import eu.esens.espdvcd.designer.util.Errors;
 import eu.esens.espdvcd.designer.util.JsonUtil;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import org.apache.poi.util.IOUtils;
-import org.xml.sax.SAXException;
-import spark.Request;
-import spark.Response;
 import spark.Service;
 
 import javax.servlet.MultipartConfigElement;
-import javax.servlet.ServletException;
 import javax.servlet.http.Part;
-import javax.xml.bind.JAXBException;
 import javax.xml.bind.UnmarshalException;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -39,7 +35,10 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.Objects;
 
@@ -55,86 +54,110 @@ public class ImportESPDEndpoint extends Endpoint {
         spark.path(basePath, () -> {
             spark.get("", ((request, response) -> {
                 response.status(405);
-                return Errors.standardError(405, "You need to POST an artefact in XML.");
+                return Errors.standardError(405, "You need to POST an XML artefact.");
             }), JsonUtil.json());
 
-            spark.post("", this::postRequest, JsonUtil.json());
-        });
-        spark.after((req, res) -> res.type("application/json"));
+            spark.post("", (rq, rsp) -> {
+                rsp.header("Content-Type", "application/json");
+                if (Objects.nonNull(rq.contentType())) {
+                    String LOGGER_DOCUMENT_ERROR = "Error occurred in ESPDEndpoint while converting an XML response to an object. ";
+                    if (rq.contentType().contains("multipart/form-data")) {
+                        MultipartConfigElement multipartConfigElement = new MultipartConfigElement(
+                                "file-uploads",
+                                1024 * 1024 * 2,
+                                1024 * 1024 * 3,
+                                0);
+                        rq.raw().setAttribute("org.eclipse.jetty.multipartConfig", multipartConfigElement);
+                        Collection<Part> parts = rq.raw().getParts();
+                        if (parts.iterator().hasNext()) {
+                            Part part = parts.iterator().next();
+                            File tempFile = File.createTempFile("espd-file", ".tmp");
+                            tempFile.deleteOnExit();
 
-    }
+                            try (InputStream input = part.getInputStream();
+                                 FileOutputStream out = new FileOutputStream(tempFile)) {
+                                IOUtils.copy(input, out);
+                            } catch (IOException e) {
+                                LOGGER.severe(LOGGER_DOCUMENT_ERROR + e.getMessage());
+                                rsp.status(500);
+                                return Errors.standardError(500, "Unable to save uploaded file. More info:\n" + e.getMessage());
+                            }
 
-    private Object postRequest(Request rq, Response rsp) throws IOException, ServletException, JAXBException, SAXException {
-        rsp.header("Content-Type", "application/json");
-        if (Objects.nonNull(rq.contentType())) {
-            String LOGGER_DOCUMENT_ERROR = "Error occurred in ESPDEndpoint while converting an XML response to an object. ";
-            if (rq.contentType().contains("multipart/form-data")) {
-                MultipartConfigElement multipartConfigElement = new MultipartConfigElement(
-                        "file-uploads",
-                        1024 * 1024 * 2,
-                        1024 * 1024 * 3,
-                        0);
-                rq.raw().setAttribute("org.eclipse.jetty.multipartConfig", multipartConfigElement);
-                Collection<Part> parts = rq.raw().getParts();
-                if (parts.iterator().hasNext()) {
-                    Part part = parts.iterator().next();
-                    File tempFile = File.createTempFile("espd-file", ".tmp");
-                    tempFile.deleteOnExit();
-
-                    try (InputStream input = part.getInputStream();
-                         FileOutputStream out = new FileOutputStream(tempFile)) {
-                        IOUtils.copy(input, out);
-                    } catch (IOException e) {
-                        LOGGER.severe(LOGGER_DOCUMENT_ERROR + e.getMessage());
-                        rsp.status(500);
-                        return Errors.standardError(500, "Unable to save uploaded file. More info:\n" + e.getMessage());
-                    }
-                    try {
-                        return service.importESPDFile(tempFile);
-                    } catch (RetrieverException | BuilderException | NullPointerException e) {
-                        LOGGER.severe(LOGGER_DOCUMENT_ERROR + e.getMessage());
-                        rsp.status(406);
-                        return Errors.notAcceptableError(e.getMessage());
-                    } catch (ValidationException | IllegalStateException e) {
-                        LOGGER.severe(e.getMessage());
-                        rsp.status(406);
-                        return Errors.standardError(406, e.getMessage());
-                    }
+                            if (part.getSubmittedFileName().endsWith("json")) {
+                                return new String(IOUtils.toByteArray(part.getInputStream()));
+                            }
+                            writeDumpedFile(tempFile);
+                            try {
+                                return service.importESPDFile(tempFile);
+                            } catch (RetrieverException | BuilderException | NullPointerException e) {
+                                LOGGER.severe(LOGGER_DOCUMENT_ERROR + e.getMessage());
+                                rsp.status(406);
+                                return Errors.notAcceptableError(e.getMessage());
+                            } catch (IllegalStateException e) {
+                                LOGGER.severe(e.getMessage());
+                                rsp.status(406);
+                                return Errors.standardError(406, e.getMessage());
+                            } catch (ValidationException e) {
+                                LOGGER.severe(e.getMessage());
+                                rsp.status(406);
+                                return Errors.validationError(e.getMessage(), e.getResults());
+                            }
 //                finally {
 //                     Files.deleteIfExists(tempFile.toPath());
 //                }
-                } else {
-                    rsp.status(400);
-                    return Errors.standardError(400, "There was no file found in your upload, please check your input.");
-                }
-            } else if (rq.contentType().contains("application/xml")) {
-                Path tempFile = Files.createTempFile("espd-file", ".tmp");
-                try {
-                    byte[] xmlStream = rq.body().getBytes(StandardCharsets.UTF_8);
-                    Files.write(tempFile, xmlStream, StandardOpenOption.CREATE);
-                    File espdFile = tempFile.toFile();
+                        } else {
+                            rsp.status(400);
+                            return Errors.standardError(400, "There was no file found in your upload, please check your input.");
+                        }
+                    } else if (rq.contentType().contains("application/xml")) {
+                        Path tempFile = Files.createTempFile("espd-file", ".tmp");
+                        try {
+                            byte[] xmlStream = rq.body().getBytes(StandardCharsets.UTF_8);
+                            Files.write(tempFile, xmlStream, StandardOpenOption.CREATE);
+                            File espdFile = tempFile.toFile();
 
-                    return service.importESPDFile(espdFile);
-                } catch (RetrieverException | BuilderException | UnmarshalException e) {
-                    LOGGER.severe(LOGGER_DOCUMENT_ERROR + e.getMessage());
+                            writeDumpedFile(espdFile);
+
+                            return service.importESPDFile(espdFile);
+                        } catch (RetrieverException | BuilderException | UnmarshalException e) {
+                            LOGGER.severe(LOGGER_DOCUMENT_ERROR + e.getMessage());
+                            rsp.status(406);
+                            return Errors.notAcceptableError(e.getMessage());
+                        } catch (IllegalStateException e) {
+                            LOGGER.severe(e.getMessage());
+                            rsp.status(406);
+                            return Errors.standardError(406, e.getMessage());
+                        } catch (ValidationException e) {
+                            LOGGER.severe(e.getMessage());
+                            rsp.status(406);
+                            return Errors.validationError(e.getMessage(), e.getResults());
+                        } finally {
+                            Files.deleteIfExists(tempFile);
+                        }
+                    } else {
+                        LOGGER.warning("Got unexpected content-type: " + rq.contentType());
+                        rsp.status(406);
+                        return Errors.unacceptableContentType();
+                    }
+                } else {
+                    LOGGER.warning("Got null content-type");
                     rsp.status(406);
-                    return Errors.notAcceptableError(e.getMessage());
-                } catch (ValidationException | IllegalStateException e) {
-                    LOGGER.severe(e.getMessage());
-                    rsp.status(406);
-                    return Errors.standardError(406, e.getMessage());
-                } finally {
-                    Files.deleteIfExists(tempFile);
+                    return Errors.unacceptableContentType();
                 }
-            } else {
-                LOGGER.warning("Got unexpected content-type: " + rq.contentType());
-                rsp.status(406);
-                return Errors.unacceptableContentType();
-            }
-        } else {
-            LOGGER.warning("Got null content-type");
-            rsp.status(406);
-            return Errors.unacceptableContentType();
+            }, JsonUtil.json());
+        });
+
+        spark.after((req, res) -> res.type("application/json"));
+    }
+
+    private void writeDumpedFile(File espdFile) throws IOException {
+        if (Config.isArtefactDumpingEnabled()) {
+            Files.createDirectories(Paths.get(Config.dumpIncomingArtefactsLocation() + "/xml/"));
+            File dumpedFile = new File(Config.dumpIncomingArtefactsLocation()
+                    + "/xml/" + ZonedDateTime.now().format(DateTimeFormatter.ofPattern("uuuuMMddHHmmss")) + ".xml");
+            Files.copy(espdFile.toPath(), dumpedFile.toPath());
+            LOGGER.info("Dumping imported xml artefact to " + dumpedFile.getAbsolutePath());
+
         }
     }
 }

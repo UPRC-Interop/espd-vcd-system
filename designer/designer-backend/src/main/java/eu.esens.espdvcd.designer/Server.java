@@ -17,6 +17,7 @@ package eu.esens.espdvcd.designer;
 
 import eu.esens.espdvcd.designer.endpoint.*;
 import eu.esens.espdvcd.designer.service.*;
+import eu.esens.espdvcd.designer.util.Config;
 import eu.esens.espdvcd.designer.util.Errors;
 import eu.esens.espdvcd.designer.util.JsonUtil;
 import eu.esens.espdvcd.schema.EDMVersion;
@@ -35,25 +36,12 @@ public class Server {
 
         //SERVER CONFIGURATION
         LOGGER.info("Starting port configuration");
-        int portToBind = 0;
+        int portToBind = Config.getServerPort();
         String initialPath = "";
-        if (args.length == 0) {
-            LOGGER.warning("No port specified in the parameters, defaulting to 8080");
-            portToBind = 8080;
-        } else {
-            try {
-                portToBind = Integer.parseInt(args[0]);
-                if ((portToBind < 0) || (portToBind > 65535)) {
-                    LOGGER.severe("Invalid port specified");
-                    System.exit(1);
-                }
-            } catch (NumberFormatException e) {
-                LOGGER.severe("Invalid port argument");
-                System.exit(1);
-            }
-//            if (args.length > 1) {
-//                initialPath = args[1];
-//            }
+
+        if ((portToBind < 0) || (portToBind > 65535)) {
+            LOGGER.severe("Invalid port specified");
+            System.exit(1);
         }
 
         LOGGER.info("Attempting to bind to port " + portToBind);
@@ -66,7 +54,8 @@ public class Server {
             System.exit(-1);
         });
 
-        enableCORS(spark);
+        if (Config.isCORSEnabled())
+            enableCORS(spark);
 
         dropTrailingSlashes(spark);
 

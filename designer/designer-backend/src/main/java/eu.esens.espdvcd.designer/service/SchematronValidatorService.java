@@ -15,11 +15,12 @@
  */
 package eu.esens.espdvcd.designer.service;
 
+import eu.esens.espdvcd.designer.exception.ValidationException;
+import eu.esens.espdvcd.designer.util.Config;
 import eu.esens.espdvcd.validator.ArtefactValidator;
-import eu.esens.espdvcd.validator.ValidationResult;
+import eu.esens.espdvcd.validator.ValidatorFactory;
 
 import java.io.File;
-import java.util.List;
 import java.util.logging.Logger;
 
 public enum SchematronValidatorService implements ValidatorService {
@@ -30,24 +31,15 @@ public enum SchematronValidatorService implements ValidatorService {
     }
 
     @Override
-    public ArtefactValidator validateESPDFile(File request) {
-//        return ValidatorFactory.createESPDSchematronValidator(request);
-        Logger.getLogger(this.getClass().getName()).warning("Schematron Validation has been disabled for debug purposes!");
-        return new ArtefactValidator() {
-            @Override
-            public boolean isValid() {
-                return true;
-            }
-
-            @Override
-            public List<ValidationResult> getValidationMessages() {
-                return null;
-            }
-
-            @Override
-            public List<ValidationResult> getValidationMessagesFiltered(String keyWord) {
-                return null;
-            }
-        };
+    public ArtefactValidator validateESPDFile(File request) throws ValidationException {
+        if (Config.isValidatorEnabled()) {
+            ArtefactValidator validationResult = ValidatorFactory.createESPDSchematronValidator(request);
+            if (validationResult != null && !validationResult.isValid())
+                throw new ValidationException("Schematron validation failed on the supplied xml document.", validationResult.getValidationMessages());
+            return validationResult;
+        } else {
+            Logger.getLogger(this.getClass().getName()).warning("Schematron validation has been disabled.");
+            return disabledValidationResponse();
+        }
     }
 }

@@ -2,6 +2,7 @@ package eu.esens.espdvcd.designer.util;
 
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.designer.service.ExportESPDService;
+import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.Requirement;
@@ -24,7 +25,7 @@ public final class CriteriaUtil {
                 .anyMatch(Objects::isNull);
     }
 
-    public static int satisfiesAllComparator(SelectableCriterion cr1, SelectableCriterion cr2) {
+    public static int satisfiesAllComparator(final SelectableCriterion cr1, final SelectableCriterion cr2) {
         if (cr1.getTypeCode().equals("CRITERION.SELECTION.ALL_SATISFIED"))
             return -1;
         else if (cr2.getTypeCode().equals("CRITERION.SELECTION.ALL_SATISFIED"))
@@ -33,9 +34,28 @@ public final class CriteriaUtil {
             return 0;
     }
 
-    public static void finalizeESPDResponse(final ESPDResponse document) {
-        document.getEvidenceList().removeIf(e -> e.getEvidenceURL() == null);
-        document.getFullCriterionList().forEach(cr -> finalizeRequirementGroups(cr.getRequirementGroups()));
+    public static ESPDRequest removeSelectionCriteriaIfAlpha(ESPDRequest model) {
+        model.getFullCriterionList()
+                .stream()
+                .filter(cr -> cr
+                        .getTypeCode()
+                        .equals("CRITERION.SELECTION.ALL_SATISFIED"))
+                .findFirst()
+                .ifPresent(cr -> {
+                    if (cr.isSelected())
+                        model.getFullCriterionList()
+                                .removeIf(selectableCriterion -> selectableCriterion
+                                        .getTypeCode()
+                                        .matches("(?!.*ALL_SATISFIED*)(?!.*SELECTION.ALL*)^CRITERION.SELECTION.+"));
+
+                });
+        return model;
+    }
+
+    public static ESPDResponse finalizeESPDResponse(@NotNull final ESPDResponse model) {
+        model.getEvidenceList().removeIf(e -> e.getEvidenceURL() == null);
+        model.getFullCriterionList().forEach(cr -> finalizeRequirementGroups(cr.getRequirementGroups()));
+        return model;
     }
 
     private static void finalizeRequirementGroups(@NotNull final List<RequirementGroup> requirementGroupList) {

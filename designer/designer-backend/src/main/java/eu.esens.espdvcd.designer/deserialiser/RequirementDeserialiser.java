@@ -69,7 +69,6 @@ public class RequirementDeserialiser extends StdDeserializer<ResponseRequirement
         switch (responseRequirement.getResponseDataType()) {
             case CODE:
                 response = mapper.treeToValue(root.get("response"), EvidenceURLCodeResponse.class);
-
                 break;
             case AMOUNT:
                 response = mapper.treeToValue(root.get("response"), AmountResponse.class);

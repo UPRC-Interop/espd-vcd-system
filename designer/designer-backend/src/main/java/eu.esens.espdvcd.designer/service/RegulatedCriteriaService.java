@@ -24,6 +24,7 @@ import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import eu.esens.espdvcd.schema.EDMVersion;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public enum RegulatedCriteriaService implements CriteriaService {
     V1(EDMVersion.V1), V2(EDMVersion.V2);
@@ -44,12 +45,21 @@ public enum RegulatedCriteriaService implements CriteriaService {
 
     @Override
     public List<SelectableCriterion> getCriteria() throws RetrieverException {
-        return CriteriaUtil.generateUUIDs(predefinedExtractor.getFullList());
+        return CriteriaUtil.generateUUIDs(predefinedExtractor.getFullList()
+                .stream()
+                .peek(selectableCriterion -> {
+                    if (selectableCriterion.getTypeCode().matches("(?!.*ALL_SATISFIED*)(?!.*SELECTION.ALL*)^CRITERION.SELECTION.+")) {
+                        selectableCriterion.setSelected(false);
+                    } else {
+                        selectableCriterion.setSelected(true);
+                    }
+                })
+                .collect(Collectors.toList()));
     }
 
     @Override
     public List<SelectableCriterion> getUnselectedCriteria(List<SelectableCriterion> initialList) throws RetrieverException {
-        return predefinedExtractor.getFullList(initialList);
+        return predefinedExtractor.getFullList(initialList, true);
     }
 
     @Override
