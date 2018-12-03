@@ -27,7 +27,7 @@ public enum SchematronV2 {
 
     ESPDCommonCLAttributes("schematron/v2/common", "01-ESPD-Common-CL-Attributes"),
 
-    ESPDCommonCLValuesRestrictions("schematron/v2/common", "01-ESPD-Common-CL-Values-Restrictions"), // only 2.1.0
+    // ESPDCommonCLValuesRestrictions("schematron/v2/common", "01-ESPD-Common-CL-Values-Restrictions"), // only 2.1.0
 
     ESPDCommonCriterionBR("schematron/v2/common", "03-ESPD-Common-Criterion-BR"),
 
@@ -73,7 +73,7 @@ public enum SchematronV2 {
      * @return
      */
     public String sch() {
-        return basicPath + "/sch/" + nameWithoutFileExtension + ".sch";
+        return basicPath + "-2.0.2" + "/sch/" + nameWithoutFileExtension + ".sch";
     }
 
     /**
@@ -82,7 +82,7 @@ public enum SchematronV2 {
      * @return
      */
     public String xslt() {
-        return basicPath + "/xslt/" + nameWithoutFileExtension + ".xslt";
+        return basicPath + "-2.0.2" + "/xslt/" + nameWithoutFileExtension + ".xslt";
     }
 
 }
