@@ -19,26 +19,29 @@ public class JsonUtil {
     private static final Logger LOGGER = Logger.getLogger(JsonUtil.class.getName());
 
     public static String toJson(Object object) throws JsonProcessingException {
-        return new ObjectMapper()
-                .registerModule(new JavaTimeModule())
-                .registerModule(new SimpleModule().setSerializerModifier(new BeanSerializerModifier() {
-                    @Override
-                    public List<BeanPropertyWriter> changeProperties(SerializationConfig config, BeanDescription beanDesc, List<BeanPropertyWriter> beanProperties) {
-                        return beanProperties.stream().map(bpw -> new BeanPropertyWriter(bpw) {
-                            @Override
-                            public void serializeAsField(Object bean, JsonGenerator gen, SerializerProvider prov) throws Exception {
-                                try {
-                                    super.serializeAsField(bean, gen, prov);
-                                } catch (Exception e) {
-                                    LOGGER.warning(String.format("Ignoring %s for field '%s' of %s instance", e.getClass().getName(), this.getName(), bean.getClass().getName()));
+        if (object instanceof String)
+            return (String) object;
+        else
+            return new ObjectMapper()
+                    .registerModule(new JavaTimeModule())
+                    .registerModule(new SimpleModule().setSerializerModifier(new BeanSerializerModifier() {
+                        @Override
+                        public List<BeanPropertyWriter> changeProperties(SerializationConfig config, BeanDescription beanDesc, List<BeanPropertyWriter> beanProperties) {
+                            return beanProperties.stream().map(bpw -> new BeanPropertyWriter(bpw) {
+                                @Override
+                                public void serializeAsField(Object bean, JsonGenerator gen, SerializerProvider prov) throws Exception {
+                                    try {
+                                        super.serializeAsField(bean, gen, prov);
+                                    } catch (Exception e) {
+                                        LOGGER.warning(String.format("Ignoring %s for field '%s' of %s instance", e.getClass().getName(), this.getName(), bean.getClass().getName()));
+                                    }
                                 }
-                            }
-                        }).collect(Collectors.toList());
-                    }
-                }))
-                .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
-                .setDateFormat(new StdDateFormat())
-                .writer().withDefaultPrettyPrinter().writeValueAsString(object);
+                            }).collect(Collectors.toList());
+                        }
+                    }))
+                    .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+                    .setDateFormat(new StdDateFormat())
+                    .writer().withDefaultPrettyPrinter().writeValueAsString(object);
     }
 
     public static ResponseTransformer json() {

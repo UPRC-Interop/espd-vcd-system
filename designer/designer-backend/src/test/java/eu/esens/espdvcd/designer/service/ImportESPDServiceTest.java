@@ -23,7 +23,6 @@ import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.File;
@@ -58,7 +57,7 @@ public class ImportESPDServiceTest {
 //                (ImportESPDServiceTest.class.getResourceAsStream("/espd-response.xml")).createESPDResponse();
 //        Assert.assertNotNull(response);
 
-        exportESPDService = RegulatedExportESPDV1Service.getInstance();
+        exportESPDService = ExportESPDV1Service.getInstance();
         importESPDService = ImportESPDResponseService.getInstance();
         writer = new ObjectMapper().writer().withDefaultPrettyPrinter();
     }
@@ -96,15 +95,6 @@ public class ImportESPDServiceTest {
 
         criterion.getRequirementGroups().get(0).getRequirementGroups().add(criterion.getRequirementGroups().get(0).getRequirementGroups().get(0));
         System.out.println(new ObjectMapper().writer().withDefaultPrettyPrinter().writeValueAsString(criterion));
-    }
-
-    @Test
-    public void responseJSONFromRequestTest() throws Exception {
-        ESPDResponse response = (ESPDResponse) importESPDService.importESPDFile(espdRequestFile);
-        Assert.assertNotNull(response);
-        String exportedString = exportESPDService.exportESPDRequestAsString(response);
-        Assert.assertNotNull(exportedString);
-        System.out.println(exportedString);
     }
 
     @Test

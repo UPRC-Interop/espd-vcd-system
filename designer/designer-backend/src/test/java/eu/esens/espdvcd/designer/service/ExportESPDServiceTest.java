@@ -23,8 +23,8 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import eu.esens.espdvcd.builder.BuilderFactory;
 import eu.esens.espdvcd.designer.deserialiser.RequirementDeserialiser;
 import eu.esens.espdvcd.model.ESPDRequest;
-import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.model.ESPDRequestImpl;
+import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
@@ -65,7 +65,7 @@ public class ExportESPDServiceTest {
                 (ExportESPDServiceTest.class.getResourceAsStream("/espd-response.xml")).createESPDResponse();
         Assert.assertNotNull(response);
 
-        exportESPDService = RegulatedExportESPDV1Service.getInstance();
+        exportESPDService = ExportESPDV1Service.getInstance();
         writer = new ObjectMapper().writer().withDefaultPrettyPrinter();
     }
 
@@ -94,15 +94,10 @@ public class ExportESPDServiceTest {
 
     @Test
     public void XMLStreamFromResponse() throws Exception{
-        InputStream is = exportESPDService.exportESPDResponseAsInputStream(response);
+        InputStream is = exportESPDService.exportESPDResponse(response);
         Assert.assertNotNull(is);
     }
 
-    @Test
-    public void XMLStringFromResponse() throws Exception{
-        String is = exportESPDService.exportESPDResponseAsString(response);
-        Assert.assertNotNull(is);
-    }
 
     @Test
     public void testExportSFC() throws Exception{

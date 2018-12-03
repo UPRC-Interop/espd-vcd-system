@@ -17,25 +17,21 @@ package eu.esens.espdvcd.designer.service;
 
 import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
 import eu.esens.espdvcd.designer.exception.ValidationException;
+import eu.esens.espdvcd.designer.typeEnum.ExportType;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDResponse;
+import org.xml.sax.SAXException;
 
+import javax.xml.bind.JAXBException;
+import java.io.IOException;
 import java.io.InputStream;
 
 public interface ExportESPDService {
-    InputStream exportESPDRequestAsInputStream(ESPDRequest model) throws ValidationException;
+    InputStream exportESPDRequest(ESPDRequest model) throws ValidationException, JAXBException, IOException, SAXException;
 
-    InputStream exportESPDRequestHtmlAsInputStream(ESPDRequest model, EULanguageCodeEnum languageCodeEnum) throws ValidationException;
+    InputStream exportESPDRequestAs(ESPDRequest model, EULanguageCodeEnum languageCodeEnum, ExportType exportType) throws ValidationException, JAXBException, IOException, SAXException;
 
-    InputStream exportESPDRequestPdfAsInputStream(ESPDRequest model, EULanguageCodeEnum languageCodeEnum) throws ValidationException;
+    InputStream exportESPDResponse(ESPDResponse model) throws ValidationException, JAXBException, IOException, SAXException;
 
-    String exportESPDRequestAsString(ESPDRequest model) throws ValidationException;
-
-    InputStream exportESPDResponseAsInputStream(ESPDResponse model) throws ValidationException;
-
-    InputStream exportESPDResponseHtmlAsInputStream(ESPDResponse model, EULanguageCodeEnum languageCodeEnum) throws ValidationException;
-
-    InputStream exportESPDResponsePdfAsInputStream(ESPDResponse model, EULanguageCodeEnum languageCodeEnum) throws ValidationException;
-    
-    String exportESPDResponseAsString(ESPDResponse model) throws ValidationException;
+    InputStream exportESPDResponseAs(ESPDResponse model, EULanguageCodeEnum languageCodeEnum, ExportType exportType) throws ValidationException, JAXBException, IOException, SAXException;
 }

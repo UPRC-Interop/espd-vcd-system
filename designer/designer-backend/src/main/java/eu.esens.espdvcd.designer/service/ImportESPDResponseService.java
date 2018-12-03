@@ -19,13 +19,10 @@ import eu.esens.espdvcd.builder.BuilderFactory;
 import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.builder.util.ArtefactUtils;
 import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
-import eu.esens.espdvcd.codelist.enums.internal.ArtefactType;
 import eu.esens.espdvcd.designer.exception.ValidationException;
 import eu.esens.espdvcd.designer.util.CriteriaUtil;
-import eu.esens.espdvcd.model.DocumentDetails;
 import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.schema.EDMVersion;
-import eu.esens.espdvcd.validator.ArtefactValidator;
 import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBException;
@@ -53,13 +50,8 @@ public enum ImportESPDResponseService implements ImportESPDService<ESPDResponse>
         if (Objects.isNull(artefactVersion))
             throw new ValidationException("Cannot determine artefact version.");
 
-        ArtefactValidator schemaResult = schemaValidationService.validateESPDFile(XML);
-        ArtefactValidator schematronResult = schematronValidationService.validateESPDFile(XML);
-
-        if (!schemaResult.isValid())
-            throw new ValidationException("XSD validation failed on the supplied xml document.", schemaResult.getValidationMessages());
-        if (!schematronResult.isValid())
-            throw new ValidationException("Schematron validation failed on the supplied xml document.", schematronResult.getValidationMessages());
+        schemaValidationService.validateESPDFile(XML);
+        schematronValidationService.validateESPDFile(XML);
 
         InputStream is = new FileInputStream(XML);
         ESPDResponse response = null;
@@ -80,9 +72,9 @@ public enum ImportESPDResponseService implements ImportESPDService<ESPDResponse>
         }
         CriteriaUtil.generateUUIDs(response.getFullCriterionList());
         is.close();
-        response.setDocumentDetails(new DocumentDetails(artefactVersion,
-                ArtefactType.ESPD_RESPONSE,
-                qualificationApplicationType));
+//        response.setDocumentDetails(new DocumentDetails(artefactVersion,
+//                ArtefactType.ESPD_RESPONSE,
+//                qualificationApplicationType));
         return response;
     }
 }
