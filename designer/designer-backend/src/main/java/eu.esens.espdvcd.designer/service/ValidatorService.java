@@ -31,7 +31,7 @@ import java.util.List;
 public interface ValidatorService {
     ArtefactValidator validateESPDFile(File request) throws JAXBException, SAXException, ValidationException;
 
-    default ArtefactValidator validateESPDStream(String theXML) throws IOException, JAXBException, SAXException, ValidationException {
+    default ArtefactValidator validateESPDString(String theXML) throws IOException, JAXBException, SAXException, ValidationException {
         Path tempFile = Files.createTempFile("espd", ".tmp");
         Files.write(tempFile, theXML.getBytes(StandardCharsets.UTF_8));
         return validateESPDFile(tempFile.toFile());
