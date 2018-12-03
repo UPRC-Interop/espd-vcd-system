@@ -24,8 +24,10 @@ import eu.esens.espdvcd.model.ESPDResponse;
 import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBException;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
 import static eu.esens.espdvcd.designer.util.CriteriaUtil.*;
@@ -42,10 +44,10 @@ public enum ExportESPDV1Service implements ExportESPDService {
 
     @Override
     public InputStream exportESPDRequest(ESPDRequest model) throws ValidationException, JAXBException, IOException, SAXException {
-        InputStream xmlStream = BuilderFactory.EDM_V1.createDocumentBuilderFor(finalizeBeforeExport(model)).getAsInputStream();
-        schematronValidationService.validateESPDStream(xmlStream);
-        schemaValidationService.validateESPDStream(xmlStream);
-        return xmlStream;
+        String theXML = BuilderFactory.EDM_V1.createDocumentBuilderFor(finalizeBeforeExport(model)).getAsString();
+        schematronValidationService.validateESPDStream(theXML);
+        schemaValidationService.validateESPDStream(theXML);
+        return new ByteArrayInputStream(theXML.getBytes(StandardCharsets.UTF_8));
     }
 
     @Override
@@ -59,10 +61,10 @@ public enum ExportESPDV1Service implements ExportESPDService {
 
     @Override
     public InputStream exportESPDResponse(ESPDResponse model) throws ValidationException, JAXBException, IOException, SAXException {
-        InputStream xmlStream = BuilderFactory.EDM_V1.createDocumentBuilderFor(finalizeBeforeExport(model)).getAsInputStream();
-        schematronValidationService.validateESPDStream(xmlStream);
-        schemaValidationService.validateESPDStream(xmlStream);
-        return xmlStream;
+        String theXML = BuilderFactory.EDM_V1.createDocumentBuilderFor(finalizeBeforeExport(model)).getAsString();
+        schematronValidationService.validateESPDStream(theXML);
+        schemaValidationService.validateESPDStream(theXML);
+        return new ByteArrayInputStream(theXML.getBytes(StandardCharsets.UTF_8));
     }
 
     @Override

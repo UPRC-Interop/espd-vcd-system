@@ -147,7 +147,7 @@ public class CriteriaDataRetrieverImpl implements CriteriaDataRetriever {
 
             try {
                 ECertisCriterion source = task.call();
-                CriterionOrigin origin = extractCriterionOrigin(source.getLegislationReference());
+                CriterionOrigin origin = extractCriterionOrigin(new LegislationReference(source.getLegislationReference()));
 
                 switch (origin) {
                     case EUROPEAN:

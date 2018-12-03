@@ -15,8 +15,6 @@
  */
 package eu.esens.espdvcd.model.retriever;
 
-import eu.esens.espdvcd.model.LegislationReference;
-
 import java.util.List;
 
 /**
@@ -48,10 +46,10 @@ public interface ECertisCriterion {
     void setVersionID(String versionID);
     
     String getVersionID();
-    
-    void setLegislationReference(LegislationReference legislationReference);
-        
-    LegislationReference getLegislationReference();
+
+    ECertisLegislationReference getLegislationReference();
+
+    void setLegislationReference(ECertisLegislationReference legislationReference);
         
     void setEvidenceGroups(List<ECertisEvidenceGroup> evidenceGroups);
     

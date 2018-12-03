@@ -24,10 +24,7 @@ import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.ResponseRequirement;
 import eu.esens.espdvcd.model.requirement.response.*;
 import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
-import eu.esens.espdvcd.model.retriever.ECertisCriterion;
-import eu.esens.espdvcd.model.retriever.ECertisEvidence;
-import eu.esens.espdvcd.model.retriever.ECertisEvidenceGroup;
-import eu.esens.espdvcd.model.retriever.ECertisEvidenceIssuerParty;
+import eu.esens.espdvcd.model.retriever.*;
 import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.CriterionType;
 import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.LegislationType;
 import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.RequirementGroupType;
@@ -455,9 +452,9 @@ public interface ModelExtractor {
         String name = ec.getName();
         String desc = ec.getDescription();
 
-        LegislationReference lr = ec.getLegislationReference();
+        ECertisLegislationReference lr = ec.getLegislationReference();
 
-        SelectableCriterion sc = new SelectableCriterion(id, null, name, desc, lr, null);
+        SelectableCriterion sc = new SelectableCriterion(id, null, name, desc, new LegislationReference(lr), null);
         sc.setSelected(isSelected);
         return sc;
     }
