@@ -197,7 +197,7 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
                     if (rq.getResponse() != null) {
                         rq.getResponse().setValidatedCriterionPropertyID(rq.getID());
                     }
-                    return extractTenderingCriterionResponse(rq.getResponse(), rq.getResponseDataType(), criterionType);
+                    return extractTenderingCriterionResponse(rq.getResponse(), rq.getResponseDataType());
                 })
                 .collect(Collectors.toList());
     }
@@ -477,8 +477,7 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
     }
 
     private TenderingCriterionResponseType extractTenderingCriterionResponse(Response response,
-                                                                             ResponseTypeEnum respType,
-                                                                             final TenderingCriterionType criterionType) {
+                                                                             ResponseTypeEnum respType) {
 
         TenderingCriterionResponseType tcrType = new TenderingCriterionResponseType();
         EvidenceSuppliedType evsType = new EvidenceSuppliedType();

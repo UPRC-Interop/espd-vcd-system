@@ -161,7 +161,8 @@ public class ArtefactUtils {
                      * in v2.0.x artefacts <cbc:ProfileExecutionID> is mandatory element
                      * and get values from: {@link eu.esens.espdvcd.codelist.CodelistsV2#ProfileExecutionID}
                      */
-                    String profileExecutionIDExtractionRegex = ".*<cbc:ProfileExecutionID.*?>(.*?)</cbc:ProfileExecutionID>.*";
+                    // String profileExecutionIDExtractionRegex = ".*<cbc:ProfileExecutionID.*?>(.*?)</cbc:ProfileExecutionID>.*";
+                    String profileExecutionIDExtractionRegex = ".*<ProfileExecutionID.*?>(.*?)</ProfileExecutionID>.*";
                     Matcher m = Pattern.compile(profileExecutionIDExtractionRegex,
                             Pattern.DOTALL & Pattern.MULTILINE)
                             .matcher(partOfTheArtefact);
@@ -287,7 +288,8 @@ public class ArtefactUtils {
                     return QualificationApplicationTypeEnum.REGULATED;
 
                 case V2:
-                    String extractionRegex = ".*<cbc:QualificationApplicationTypeCode.*?>(.*?)</cbc:QualificationApplicationTypeCode>.*";
+                    // String extractionRegex = ".*<cbc:QualificationApplicationTypeCode.*?>(.*?)</cbc:QualificationApplicationTypeCode>.*";
+                    String extractionRegex = ".*<QualificationApplicationTypeCode.*?>(.*?)</QualificationApplicationTypeCode>.*";
                     Matcher m = Pattern.compile(extractionRegex, Pattern.DOTALL & Pattern.MULTILINE)
                             .matcher(partOfTheArtefact);
                     if (m.find()) {
