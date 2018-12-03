@@ -21,7 +21,7 @@ import {MaterialModule} from './material/material.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {AppRoutingModule} from './app-routing.module';
-import { NgxLoadingModule } from 'ngx-loading';
+import {NgxLoadingModule} from 'ngx-loading';
 
 import {DataService} from './services/data.service';
 import {ApicallService} from './services/apicall.service';
@@ -42,14 +42,12 @@ import {RequirementComponent} from './requirement/requirement.component';
 import {RootComponent} from './root/root.component';
 import {CriterionComponent} from './criterion/criterion.component';
 import {FinishEoComponent} from './finish-eo/finish-eo.component';
-
 /* dates and locale */
 import {MAT_MOMENT_DATE_FORMATS, MatMomentDateModule, MomentDateAdapter} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material';
-
- /* translations */
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+/* translations */
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 @NgModule({
   declarations: [
@@ -99,5 +97,5 @@ export class AppModule {
 
 /* required for AOT */
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http);
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }

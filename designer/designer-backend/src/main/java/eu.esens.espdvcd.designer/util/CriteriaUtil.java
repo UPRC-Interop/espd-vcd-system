@@ -2,6 +2,7 @@ package eu.esens.espdvcd.designer.util;
 
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.designer.service.ExportESPDService;
+import eu.esens.espdvcd.designer.typeEnum.CriteriaType;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.model.SelectableCriterion;
@@ -13,6 +14,7 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Objects;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 public final class CriteriaUtil {
 
@@ -46,10 +48,22 @@ public final class CriteriaUtil {
                         model.getFullCriterionList()
                                 .removeIf(selectableCriterion -> selectableCriterion
                                         .getTypeCode()
-                                        .matches("(?!.*ALL_SATISFIED*)(?!.*SELECTION.ALL*)^CRITERION.SELECTION.+"));
+                                        .matches(CriteriaType.SELECTION_NO_ALPHA.getRegex()));
 
                 });
         return model;
+    }
+
+    public static List<SelectableCriterion> markAsSelected(List<SelectableCriterion> criteria) {
+        return criteria.stream()
+                .peek(selectableCriterion -> {
+                    if (selectableCriterion.getTypeCode().matches(CriteriaType.SELECTION_NO_ALPHA.getRegex())) {
+                        selectableCriterion.setSelected(false);
+                    } else {
+                        selectableCriterion.setSelected(true);
+                    }
+                })
+                .collect(Collectors.toList());
     }
 
     public static ESPDResponse finalizeESPDResponse(@NotNull final ESPDResponse model) {
