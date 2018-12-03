@@ -27,35 +27,37 @@ public enum SchematronV2 {
 
     ESPDCommonCLAttributes("schematron/v2/common", "01-ESPD-Common-CL-Attributes"),
 
+    ESPDCommonCLValuesRestrictions("schematron/v2/common", "01-ESPD-Common-CL-Values-Restrictions"), // only 2.1.0
+
     ESPDCommonCriterionBR("schematron/v2/common", "03-ESPD-Common-Criterion-BR"),
 
     ESPDCommonOtherBR("schematron/v2/common", "04-ESPD-Common-Other-BR"),
 
     // ESPD Request
-    ESPDReqCardinality("schematron/v2/ESPDRequest-2.0.2", "02-ESPD-Req-Cardinality-BR"),
+    ESPDReqCardinality("schematron/v2/ESPDRequest", "02-ESPD-Req-Cardinality-BR"),
 
-    ESPDReqCriterionBR("schematron/v2/ESPDRequest-2.0.2", "03-ESPD-Req-Criterion-BR"),
+    ESPDReqCriterionBR("schematron/v2/ESPDRequest", "03-ESPD-Req-Criterion-BR"),
 
-    ESPDReqOtherBR("schematron/v2/ESPDRequest-2.0.2", "04-ESPD-Req-Other-BR"),
+    ESPDReqOtherBR("schematron/v2/ESPDRequest", "04-ESPD-Req-Other-BR"),
 
-    ESPDReqProcurerBR("schematron/v2/ESPDRequest-2.0.2", "05-ESPD-Req-Procurer-BR"),
+    ESPDReqProcurerBR("schematron/v2/ESPDRequest", "05-ESPD-Req-Procurer-BR"),
 
-    ESPDReqSelfContained("schematron/v2/ESPDRequest-2.0.2", "05-ESPD-Req-Self-contained-BR"),
+    ESPDReqSelfContained("schematron/v2/ESPDRequest", "05-ESPD-Req-Self-contained-BR"),
 
     // ESPD Response
-    ESPDRespCardinalityBR("schematron/v2/ESPDResponse-2.0.2", "02-ESPD-Resp-Cardinality-BR"),
+    ESPDRespCardinalityBR("schematron/v2/ESPDResponse", "02-ESPD-Resp-Cardinality-BR"),
 
-    ESPDRespCriterionBR("schematron/v2/ESPDResponse-2.0.2", "03-ESPD-Resp-Criterion-BR"),
+    ESPDRespCriterionBR("schematron/v2/ESPDResponse", "03-ESPD-Resp-Criterion-BR"),
 
-    ESPDRespOtherBR("schematron/v2/ESPDResponse-2.0.2", "04-ESPD-Resp-Other-BR"),
+    ESPDRespOtherBR("schematron/v2/ESPDResponse", "04-ESPD-Resp-Other-BR"),
 
-    ESPDRespEOBR("schematron/v2/ESPDResponse-2.0.2", "05-ESPD-Resp-EO-BR"),
+    ESPDRespEOBR("schematron/v2/ESPDResponse", "05-ESPD-Resp-EO-BR"),
 
-    ESPDRespQualificationBR("schematron/v2/ESPDResponse-2.0.2", "05-ESPD-Resp-Qualification-BR"),
+    ESPDRespQualificationBR("schematron/v2/ESPDResponse", "05-ESPD-Resp-Qualification-BR"),
 
-    ESPDRespRoleBR("schematron/v2/ESPDResponse-2.0.2", "05-ESPD-Resp-Role-BR"),
+    ESPDRespRoleBR("schematron/v2/ESPDResponse", "05-ESPD-Resp-Role-BR"),
 
-    ESPDRespSelfContainedBR("schematron/v2/ESPDResponse-2.0.2", "05-ESPD-Resp-Self-contained-BR");
+    ESPDRespSelfContainedBR("schematron/v2/ESPDResponse", "05-ESPD-Resp-Self-contained-BR");
 
     private String basicPath;
     private String nameWithoutFileExtension;

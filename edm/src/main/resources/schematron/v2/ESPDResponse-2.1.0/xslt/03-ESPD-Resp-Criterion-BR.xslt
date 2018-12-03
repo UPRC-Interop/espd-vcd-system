@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<xsl:stylesheet version="2.0" xmlns:cac="urn:X-test:UBL:Pre-award:CommonAggregate" xmlns:cbc="urn:X-test:UBL:Pre-award:CommonBasic" xmlns:espd="urn:X-test:UBL:Pre-award:QualificationApplicationResponse" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:schold="http://www.ascc.net/xml/schematron" xmlns:svrl="http://purl.oclc.org/dsdl/svrl" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:stylesheet version="2.0" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:espd="urn:oasis:names:specification:ubl:schema:xsd:QualificationApplicationResponse-2" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:schold="http://www.ascc.net/xml/schematron" xmlns:svrl="http://purl.oclc.org/dsdl/svrl" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 <!--Implementers: please note that overriding process-prolog or process-root is 
     the preferred method for meta-stylesheets to use where possible. -->
 
@@ -161,10 +161,10 @@
 		 <xsl:value-of select="$fileNameParameter" />  
 		 <xsl:value-of select="$fileDirParameter" />
       </xsl:comment>
-      <svrl:ns-prefix-in-attribute-values prefix="cac" uri="urn:X-test:UBL:Pre-award:CommonAggregate" />
-      <svrl:ns-prefix-in-attribute-values prefix="cbc" uri="urn:X-test:UBL:Pre-award:CommonBasic" />
+      <svrl:ns-prefix-in-attribute-values prefix="cac" uri="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" />
+      <svrl:ns-prefix-in-attribute-values prefix="cbc" uri="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" />
       <svrl:ns-prefix-in-attribute-values prefix="ext" uri="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" />
-      <svrl:ns-prefix-in-attribute-values prefix="espd" uri="urn:X-test:UBL:Pre-award:QualificationApplicationResponse" />
+      <svrl:ns-prefix-in-attribute-values prefix="espd" uri="urn:oasis:names:specification:ubl:schema:xsd:QualificationApplicationResponse-2" />
       <svrl:ns-prefix-in-attribute-values prefix="fn" uri="http://www.w3.org/2005/xpath-functions" />
       <svrl:active-pattern>
         <xsl:attribute name="document">
@@ -232,9 +232,9 @@
 
 		<!--ASSERT -->
 <xsl:choose>
-      <xsl:when test="(count(cac:ResponseValue) + count(cac:ApplicablePeriod) + count(cac:EvidenceSupplied))=1" />
+      <xsl:when test="(count(cac:ResponseValue)=0 and (count(cac:ApplicablePeriod) + count(cac:EvidenceSupplied))=1) or ((count(cac:ApplicablePeriod) + count(cac:EvidenceSupplied))=0 and count(cac:ResponseValue)>0)" />
       <xsl:otherwise>
-        <svrl:failed-assert test="(count(cac:ResponseValue) + count(cac:ApplicablePeriod) + count(cac:EvidenceSupplied))=1">
+        <svrl:failed-assert test="(count(cac:ResponseValue)=0 and (count(cac:ApplicablePeriod) + count(cac:EvidenceSupplied))=1) or ((count(cac:ApplicablePeriod) + count(cac:EvidenceSupplied))=0 and count(cac:ResponseValue)>0)">
           <xsl:attribute name="id">BR-TCR-03</xsl:attribute>
           <xsl:attribute name="flag">fatal</xsl:attribute>
           <xsl:attribute name="location">
@@ -334,6 +334,23 @@
 
 		<!--ASSERT -->
 <xsl:choose>
+      <xsl:when test="( ($currentDataType = 'CODE_BOOLEAN') and (cac:ResponseValue/cbc:ResponseCode) ) or not($currentDataType = 'CODE_BOOLEAN')" />
+      <xsl:otherwise>
+        <svrl:failed-assert test="( ($currentDataType = 'CODE_BOOLEAN') and (cac:ResponseValue/cbc:ResponseCode) ) or not($currentDataType = 'CODE_BOOLEAN')">
+          <xsl:attribute name="id">BR-TCR-08-26</xsl:attribute>
+          <xsl:attribute name="flag">fatal</xsl:attribute>
+          <xsl:attribute name="location">
+            <xsl:apply-templates mode="schematron-select-full-path" select="." />
+          </xsl:attribute>
+          <svrl:text>The type of answer expected by the contracting authority is 'CODE_BOOLEAN' ('cac:ResponseValue/cbc:ResponseCode' element) - ('cbc:ID' is <xsl:text />
+            <xsl:value-of select="cbc:ID" />
+            <xsl:text />).</svrl:text>
+        </svrl:failed-assert>
+      </xsl:otherwise>
+    </xsl:choose>
+
+		<!--ASSERT -->
+<xsl:choose>
       <xsl:when test="( ($currentDataType = 'DATE') and (cac:ResponseValue/cbc:ResponseDate) ) or not($currentDataType = 'DATE')" />
       <xsl:otherwise>
         <svrl:failed-assert test="( ($currentDataType = 'DATE') and (cac:ResponseValue/cbc:ResponseDate) ) or not($currentDataType = 'DATE')">
@@ -402,15 +419,15 @@
 
 		<!--ASSERT -->
 <xsl:choose>
-      <xsl:when test="( ($currentDataType = 'PERCENTAGE') and (cac:ResponseValue/cbc:ResponseMeasure/@unitCode = 'PERCENTAGE') ) or not($currentDataType = 'PERCENTAGE')" />
+      <xsl:when test="( ($currentDataType = 'PERCENTAGE') and (cac:ResponseValue/cbc:ResponseQuantity/@unitCode = 'PERCENTAGE') ) or not($currentDataType = 'PERCENTAGE')" />
       <xsl:otherwise>
-        <svrl:failed-assert test="( ($currentDataType = 'PERCENTAGE') and (cac:ResponseValue/cbc:ResponseMeasure/@unitCode = 'PERCENTAGE') ) or not($currentDataType = 'PERCENTAGE')">
+        <svrl:failed-assert test="( ($currentDataType = 'PERCENTAGE') and (cac:ResponseValue/cbc:ResponseQuantity/@unitCode = 'PERCENTAGE') ) or not($currentDataType = 'PERCENTAGE')">
           <xsl:attribute name="id">BR-TCR-08-08</xsl:attribute>
           <xsl:attribute name="flag">fatal</xsl:attribute>
           <xsl:attribute name="location">
             <xsl:apply-templates mode="schematron-select-full-path" select="." />
           </xsl:attribute>
-          <svrl:text>The type of answer expected by the contracting authority is 'PERCENTAGE' ('cac:ResponseValue/cbc:ResponseMeasure' element) - ('cbc:ID' is <xsl:text />
+          <svrl:text>The type of answer expected by the contracting authority is 'PERCENTAGE' ('cac:ResponseValue/cbc:ResponseQuantity' element) - ('cbc:ID' is <xsl:text />
             <xsl:value-of select="cbc:ID" />
             <xsl:text />).</svrl:text>
         </svrl:failed-assert>
@@ -436,15 +453,15 @@
 
 		<!--ASSERT -->
 <xsl:choose>
-      <xsl:when test="( ($currentDataType = 'QUANTITY_INTEGER') and (cac:ResponseValue/cbc:ResponseMeasure) ) or not($currentDataType = 'QUANTITY_INTEGER')" />
+      <xsl:when test="( ($currentDataType = 'QUANTITY_INTEGER') and (cac:ResponseValue/cbc:ResponseQuantity) ) or not($currentDataType = 'QUANTITY_INTEGER')" />
       <xsl:otherwise>
-        <svrl:failed-assert test="( ($currentDataType = 'QUANTITY_INTEGER') and (cac:ResponseValue/cbc:ResponseMeasure) ) or not($currentDataType = 'QUANTITY_INTEGER')">
+        <svrl:failed-assert test="( ($currentDataType = 'QUANTITY_INTEGER') and (cac:ResponseValue/cbc:ResponseQuantity) ) or not($currentDataType = 'QUANTITY_INTEGER')">
           <xsl:attribute name="id">BR-TCR-08-10</xsl:attribute>
           <xsl:attribute name="flag">fatal</xsl:attribute>
           <xsl:attribute name="location">
             <xsl:apply-templates mode="schematron-select-full-path" select="." />
           </xsl:attribute>
-          <svrl:text>The type of answer expected by the contracting authority is 'QUANTITY_INTEGER' ('cac:ResponseValue/cbc:ResponseMeasure' element) - ('cbc:ID' is <xsl:text />
+          <svrl:text>The type of answer expected by the contracting authority is 'QUANTITY_INTEGER' ('cac:ResponseValue/cbc:ResponseQuantity' element) - ('cbc:ID' is <xsl:text />
             <xsl:value-of select="cbc:ID" />
             <xsl:text />).</svrl:text>
         </svrl:failed-assert>
@@ -453,15 +470,15 @@
 
 		<!--ASSERT -->
 <xsl:choose>
-      <xsl:when test="( ($currentDataType = 'QUANTITY_YEAR') and (cac:ResponseValue/cbc:ResponseMeasure/@unitCode='YEAR') ) or not($currentDataType = 'QUANTITY_YEAR')" />
+      <xsl:when test="( ($currentDataType = 'QUANTITY_YEAR') and (cac:ResponseValue/cbc:ResponseQuantity/@unitCode='YEAR') ) or not($currentDataType = 'QUANTITY_YEAR')" />
       <xsl:otherwise>
-        <svrl:failed-assert test="( ($currentDataType = 'QUANTITY_YEAR') and (cac:ResponseValue/cbc:ResponseMeasure/@unitCode='YEAR') ) or not($currentDataType = 'QUANTITY_YEAR')">
+        <svrl:failed-assert test="( ($currentDataType = 'QUANTITY_YEAR') and (cac:ResponseValue/cbc:ResponseQuantity/@unitCode='YEAR') ) or not($currentDataType = 'QUANTITY_YEAR')">
           <xsl:attribute name="id">BR-TCR-08-11</xsl:attribute>
           <xsl:attribute name="flag">fatal</xsl:attribute>
           <xsl:attribute name="location">
             <xsl:apply-templates mode="schematron-select-full-path" select="." />
           </xsl:attribute>
-          <svrl:text>The type of answer expected by the contracting authority is 'QUANTITY_YEAR' ('cac:ResponseValue/cbc:ResponseMeasure' element) - ('cbc:ID' is <xsl:text />
+          <svrl:text>The type of answer expected by the contracting authority is 'QUANTITY_YEAR' ('cac:ResponseValue/cbc:ResponseQuantity' element) - ('cbc:ID' is <xsl:text />
             <xsl:value-of select="cbc:ID" />
             <xsl:text />).</svrl:text>
         </svrl:failed-assert>
@@ -632,6 +649,57 @@
             <xsl:apply-templates mode="schematron-select-full-path" select="." />
           </xsl:attribute>
           <svrl:text>The type of answer expected by the contracting authority is 'TIME' ('cac:ResponseValue/cbc:ResponseTime' element) - ('cbc:ID' is <xsl:text />
+            <xsl:value-of select="cbc:ID" />
+            <xsl:text />).</svrl:text>
+        </svrl:failed-assert>
+      </xsl:otherwise>
+    </xsl:choose>
+
+		<!--ASSERT -->
+<xsl:choose>
+      <xsl:when test="( ($currentDataType = 'ECONOMIC_OPERATOR_IDENTIFIER') and (cac:ResponseValue/cbc:ResponseID) ) or not($currentDataType = 'ECONOMIC_OPERATOR_IDENTIFIER')" />
+      <xsl:otherwise>
+        <svrl:failed-assert test="( ($currentDataType = 'ECONOMIC_OPERATOR_IDENTIFIER') and (cac:ResponseValue/cbc:ResponseID) ) or not($currentDataType = 'ECONOMIC_OPERATOR_IDENTIFIER')">
+          <xsl:attribute name="id">BR-TCR-08-22</xsl:attribute>
+          <xsl:attribute name="flag">fatal</xsl:attribute>
+          <xsl:attribute name="location">
+            <xsl:apply-templates mode="schematron-select-full-path" select="." />
+          </xsl:attribute>
+          <svrl:text>The type of answer expected by the contracting authority is 'ECONOMIC_OPERATOR_IDENTIFIER' ('cac:ResponseValue/cbc:ResponseID' element) - ('cbc:ID' is <xsl:text />
+            <xsl:value-of select="cbc:ID" />
+            <xsl:text />).</svrl:text>
+        </svrl:failed-assert>
+      </xsl:otherwise>
+    </xsl:choose>
+
+		<!--ASSERT -->
+<xsl:choose>
+      <xsl:when test="( ($currentDataType = 'LOT_IDENTIFIER') and (cac:ResponseValue/cbc:ResponseID) ) or not($currentDataType = 'LOT_IDENTIFIER')" />
+      <xsl:otherwise>
+        <svrl:failed-assert test="( ($currentDataType = 'LOT_IDENTIFIER') and (cac:ResponseValue/cbc:ResponseID) ) or not($currentDataType = 'LOT_IDENTIFIER')">
+          <xsl:attribute name="id">BR-TCR-08-23</xsl:attribute>
+          <xsl:attribute name="flag">fatal</xsl:attribute>
+          <xsl:attribute name="location">
+            <xsl:apply-templates mode="schematron-select-full-path" select="." />
+          </xsl:attribute>
+          <svrl:text>The type of answer expected by the contracting authority is 'LOT_IDENTIFIER' ('cac:ResponseValue/cbc:ResponseID' element) - ('cbc:ID' is <xsl:text />
+            <xsl:value-of select="cbc:ID" />
+            <xsl:text />).</svrl:text>
+        </svrl:failed-assert>
+      </xsl:otherwise>
+    </xsl:choose>
+
+		<!--ASSERT -->
+<xsl:choose>
+      <xsl:when test="( ($currentDataType = 'WEIGHT_INDICATOR') and (cac:ResponseValue/cbc:ResponseIndicator) ) or not($currentDataType = 'WEIGHT_INDICATOR')" />
+      <xsl:otherwise>
+        <svrl:failed-assert test="( ($currentDataType = 'WEIGHT_INDICATOR') and (cac:ResponseValue/cbc:ResponseIndicator) ) or not($currentDataType = 'WEIGHT_INDICATOR')">
+          <xsl:attribute name="id">BR-TCR-08-24</xsl:attribute>
+          <xsl:attribute name="flag">fatal</xsl:attribute>
+          <xsl:attribute name="location">
+            <xsl:apply-templates mode="schematron-select-full-path" select="." />
+          </xsl:attribute>
+          <svrl:text>The type of answer expected by the contracting authority is 'WEIGHT_INDICATOR' ('cac:ResponseValue/cbc:ResponseIndicator' element) - ('cbc:ID' is <xsl:text />
             <xsl:value-of select="cbc:ID" />
             <xsl:text />).</svrl:text>
         </svrl:failed-assert>
