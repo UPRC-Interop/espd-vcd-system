@@ -32,7 +32,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
-import java.util.Scanner;
 
 public enum ImportESPDRequestService implements ImportESPDService<ESPDRequest> {
     INSTANCE;
@@ -49,18 +48,12 @@ public enum ImportESPDRequestService implements ImportESPDService<ESPDRequest> {
         EDMVersion artefactVersion = ArtefactUtils.findEDMVersion(new FileInputStream(XML));
         QualificationApplicationTypeEnum qualificationApplicationType = ArtefactUtils.findQualificationApplicationType(XML);
 
-        if (Objects.isNull(artefactVersion))
+        if (Objects.isNull(artefactVersion)) {
             throw new ValidationException("Cannot determine artefact version.");
+        }
 
         schemaValidationService.validateESPDFile(XML);
         schematronValidationService.validateESPDFile(XML);
-
-        Scanner filereader = new Scanner(XML);
-
-        while (filereader.hasNext()) {
-            System.out.println(filereader.nextLine());
-        }
-
         InputStream is = new FileInputStream(XML);
         ESPDRequest request = null;
         CriteriaService criteriaService = null;
@@ -86,9 +79,6 @@ public enum ImportESPDRequestService implements ImportESPDService<ESPDRequest> {
         request.setCriterionList(criteriaService.getUnselectedCriteria(request.getFullCriterionList()));
         CriteriaUtil.generateUUIDs(request.getFullCriterionList());
         is.close();
-//        request.setDocumentDetails(new DocumentDetails(artefactVersion,
-//                ArtefactType.ESPD_REQUEST,
-//                qualificationApplicationType));
         return request;
     }
 }

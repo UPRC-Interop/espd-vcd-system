@@ -48,8 +48,8 @@ public enum ExportESPDV2Service implements ExportESPDService {
     @Override
     public InputStream exportESPDRequest(ESPDRequest model) throws ValidationException, JAXBException, IOException, SAXException {
         String theXML = BuilderFactory.EDM_V2.createDocumentBuilderFor(finalizeBeforeExport(model)).getAsString();
-        schematronValidationService.validateESPDStream(theXML);
-        schemaValidationService.validateESPDStream(theXML);
+        schematronValidationService.validateESPDString(theXML);
+        schemaValidationService.validateESPDString(theXML);
         return new ByteArrayInputStream(theXML.getBytes(StandardCharsets.UTF_8));
     }
 
@@ -71,8 +71,8 @@ public enum ExportESPDV2Service implements ExportESPDService {
     @Override
     public InputStream exportESPDResponse(ESPDResponse model) throws ValidationException, JAXBException, IOException, SAXException {
         String theXML = BuilderFactory.EDM_V2.createDocumentBuilderFor(finalizeBeforeExport(model)).getAsString();
-        schematronValidationService.validateESPDStream(theXML);
-        schemaValidationService.validateESPDStream(theXML);
+        schematronValidationService.validateESPDString(theXML);
+        schemaValidationService.validateESPDString(theXML);
         return new ByteArrayInputStream(theXML.getBytes(StandardCharsets.UTF_8));
     }
 
