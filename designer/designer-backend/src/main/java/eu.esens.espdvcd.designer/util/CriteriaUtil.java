@@ -76,31 +76,33 @@ public final class CriteriaUtil {
         Objects.requireNonNull(requirementGroupList);
         for (RequirementGroup rg : requirementGroupList) {
             if (rg.getRequirements().size() > 0) {
-                if (rg.getRequirements().get(0).getResponseDataType().equals(ResponseTypeEnum.INDICATOR) && rg.getRequirementGroups().size() > 0) {
-                    IndicatorResponse indicator = (IndicatorResponse) rg.getRequirements().get(0).getResponse();
-                    if (indicator != null) {
-                        rg.getRequirementGroups().forEach(requirementGroup -> {
-                            switch (requirementGroup.getCondition()) {
-                                case "ONTRUE":
-                                case "GROUP_FULFILLED.ON_TRUE":
-                                    if (!indicator.isIndicator()) {
-                                        requirementGroup.getRequirements().forEach(rq -> rq.setResponse(null));
-                                    }
-                                    break;
-                                case "ONFALSE":
-                                case "GROUP_FULFILLED.ON_FALSE":
-                                    if (indicator.isIndicator()) {
-                                        requirementGroup.getRequirements().forEach(rq -> rq.setResponse(null));
-                                    }
-                                    break;
-                                default:
-                                    Logger.getLogger(ExportESPDService.class.getName()).warning("Ignoring condition " + requirementGroup.getCondition());
-                                    break;
-                            }
-                        });
+                for (int i = 0; i < rg.getRequirements().size(); i++) {
+                    if (rg.getRequirements().get(i).getResponseDataType().equals(ResponseTypeEnum.INDICATOR) && rg.getRequirementGroups().size() > 0) {
+                        IndicatorResponse indicator = (IndicatorResponse) rg.getRequirements().get(i).getResponse();
+                        if (indicator != null) {
+                            rg.getRequirementGroups().forEach(requirementGroup -> {
+                                switch (requirementGroup.getCondition()) {
+                                    case "ONTRUE":
+                                    case "GROUP_FULFILLED.ON_TRUE":
+                                        if (!indicator.isIndicator()) {
+                                            requirementGroup.getRequirements().forEach(rq -> rq.setResponse(null));
+                                        }
+                                        break;
+                                    case "ONFALSE":
+                                    case "GROUP_FULFILLED.ON_FALSE":
+                                        if (indicator.isIndicator()) {
+                                            requirementGroup.getRequirements().forEach(rq -> rq.setResponse(null));
+                                        }
+                                        break;
+                                    default:
+                                        Logger.getLogger(ExportESPDService.class.getName()).warning("Ignoring condition " + requirementGroup.getCondition());
+                                        break;
+                                }
+                            });
+                        }
                     }
+                    finalizeRequirementGroups(rg.getRequirementGroups());
                 }
-                finalizeRequirementGroups(rg.getRequirementGroups());
             }
         }
     }
