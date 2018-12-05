@@ -816,6 +816,13 @@ export class DataService {
               this.eoLotCriterionForm = this.formUtil.createEORelatedCriterionForm(this.eoLotCriterion);
             }
 
+            if (this.utilities.qualificationApplicationType === 'regulated' && this.APIService.version === 'v2') {
+              this.eoLotCriterion = this.filterCARelatedCriteria(this.EO_LOT_REGEXP, res.fullCriterionList);
+              console.log('FILTERED EO LOT RELATED CRITERIA');
+              console.log(this.eoLotCriterion);
+              this.eoLotCriterionForm = this.formUtil.createEORelatedCriterionForm(this.eoLotCriterion);
+            }
+
 
             this.eoRelatedACriteria = this.filterEoRelatedCriteria(this.EO_RELATED_A_REGEXP, res.fullCriterionList);
             // console.log(this.eoRelatedACriteria);
