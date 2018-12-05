@@ -82,11 +82,13 @@ public final class CriteriaUtil {
                         rg.getRequirementGroups().forEach(requirementGroup -> {
                             switch (requirementGroup.getCondition()) {
                                 case "ONTRUE":
+                                case "GROUP_FULFILLED.ON_TRUE":
                                     if (!indicator.isIndicator()) {
                                         requirementGroup.getRequirements().forEach(rq -> rq.setResponse(null));
                                     }
                                     break;
                                 case "ONFALSE":
+                                case "GROUP_FULFILLED.ON_FALSE":
                                     if (indicator.isIndicator()) {
                                         requirementGroup.getRequirements().forEach(rq -> rq.setResponse(null));
                                     }
