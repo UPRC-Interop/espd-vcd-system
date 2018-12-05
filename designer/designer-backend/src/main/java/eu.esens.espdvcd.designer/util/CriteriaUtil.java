@@ -67,7 +67,7 @@ public final class CriteriaUtil {
     }
 
     public static ESPDResponse finalizeESPDResponse(@NotNull final ESPDResponse model) {
-        model.getEvidenceList().removeIf(e -> e.getEvidenceURL() == null);
+        model.getEvidenceList().removeIf(e -> e.getEvidenceURL().isEmpty());
         model.getFullCriterionList().forEach(cr -> finalizeRequirementGroups(cr.getRequirementGroups()));
         return model;
     }
