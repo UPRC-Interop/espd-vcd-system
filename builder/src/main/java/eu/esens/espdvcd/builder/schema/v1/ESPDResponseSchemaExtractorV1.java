@@ -322,7 +322,7 @@ public class ESPDResponseSchemaExtractorV1 implements SchemaExtractorV1 {
 
             case PERIOD:
                 String descr = ((PeriodResponse) response).getDescription();
-                if (descr != null && !descr.isEmpty()) {
+                if (descr != null) {
                     rType.setPeriod(new PeriodType());
                     DescriptionType dt = new DescriptionType();
                     dt.setValue(descr);

@@ -131,7 +131,7 @@ public class RequirementDeserialiser extends StdDeserializer<ResponseRequirement
             default:
                 LOGGER.severe("Response type not found: " + responseRequirement.getResponseDataType().name());
                 throw new IllegalArgumentException(
-                        String.format("Response type %s does not exist.", responseRequirement.getResponseDataType().name()));
+                        String.format("Response type %s cannot be deserialised.", responseRequirement.getResponseDataType().name()));
         }
         responseRequirement.setResponse(response);
         return responseRequirement;
