@@ -99,6 +99,9 @@ public final class CriteriaUtil {
                                         break;
                                 }
                             });
+                        } else {
+                            //If null, erase everything anyway
+                            rg.getRequirementGroups().forEach(requirementGroup -> requirementGroup.getRequirements().forEach(rq -> rq.setResponse(null)));
                         }
                     }
                     finalizeRequirementGroups(rg.getRequirementGroups());
