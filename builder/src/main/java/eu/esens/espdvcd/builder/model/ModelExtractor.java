@@ -466,13 +466,13 @@ public interface ModelExtractor {
     default boolean isRequirementType(TenderingCriterionPropertyType rqType) {
         return rqType.getTypeCode() != null
                 && rqType.getTypeCode().getValue() != null
-                && rqType.getTypeCode().getValue().equals(RequirementTypeEnum.REQUIREMENT);
+                && rqType.getTypeCode().getValue().equals(RequirementTypeEnum.REQUIREMENT.name());
     }
 
     default boolean isQuestionType(TenderingCriterionPropertyType rqType) {
         return rqType.getTypeCode() != null
                 && rqType.getTypeCode().getValue() != null
-                && rqType.getTypeCode().getValue().equals(RequirementTypeEnum.QUESTION);
+                && rqType.getTypeCode().getValue().equals(RequirementTypeEnum.QUESTION.name());
     }
 
     default boolean isLotIdentifier(TenderingCriterionPropertyType rqType) {
