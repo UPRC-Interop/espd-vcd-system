@@ -44,10 +44,10 @@ public class BuilderESPDTest {
 
     @Before
     public void setUp() {
-        isReq = BuilderESPDTest.class.getResourceAsStream("/espd-request.xml");
+        isReq = BuilderESPDTest.class.getResourceAsStream("/artefacts/regulated/v1/espd-request.xml");
         Assert.assertNotNull(isReq);
 
-        isRes = BuilderESPDTest.class.getResourceAsStream("/espd-response.xml");
+        isRes = BuilderESPDTest.class.getResourceAsStream("/artefacts/regulated/v1/espd-response.xml");
         Assert.assertNotNull(isRes);
     }
 
@@ -227,7 +227,7 @@ public class BuilderESPDTest {
 
         ESPDRequest espdRequest = BuilderFactory.EDM_V2
                 .createRegulatedModelBuilder()
-                .importFrom(BuilderESPDTest.class.getResourceAsStream("/REGULATED-ESPD-Request_2.0.2.xml"))
+                .importFrom(BuilderESPDTest.class.getResourceAsStream("/artefacts/regulated/v2/2.1.0/REGULATED-ESPD-Request_2.0.2.xml"))
                 .createESPDRequest();
 
         XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.EDM_V2
@@ -240,7 +240,7 @@ public class BuilderESPDTest {
 
         ESPDRequest espdRequest = BuilderFactory.EDM_V2
                 .createRegulatedModelBuilder()
-                .importFrom(BuilderESPDTest.class.getResourceAsStream("/REGULATED-ESPD-Request_2.0.2.xml"))
+                .importFrom(BuilderESPDTest.class.getResourceAsStream("/artefacts/regulated/v2/2.1.0/REGULATED-ESPD-Request_2.0.2.xml"))
                 .createESPDRequest();
 
         CriteriaExtractor extractor = new RegulatedCriteriaExtractorBuilder(EDMVersion.V2).build();
@@ -258,7 +258,7 @@ public class BuilderESPDTest {
 
         ESPDResponse espdResponse = BuilderFactory.EDM_V2
                 .createRegulatedModelBuilder()
-                .importFrom(BuilderESPDTest.class.getResourceAsStream("/REGULATED-ESPD-Response_2.0.2.xml"))
+                .importFrom(BuilderESPDTest.class.getResourceAsStream("/artefacts/regulated/v2/2.1.0/REGULATED-ESPD-Response_2.0.2.xml"))
                 .createESPDResponse();
 
         CriteriaExtractor extractor = new RegulatedCriteriaExtractorBuilder(EDMVersion.V2).build();
@@ -303,19 +303,19 @@ public class BuilderESPDTest {
         System.out.println(xmlDocumentBuilderV2.getAsString());
     }
 
-    @Test
-    public void createRegulatedResponseV2FromAnImportedV2ResponseForDAArtefact() throws Exception {
-
-        ESPDResponse espdResponse = BuilderFactory.EDM_V2
-                .createRegulatedModelBuilder()
-                .importFrom(BuilderESPDTest.class.getResourceAsStream("/ESPDResponse_DA_Test-2.0.2-v0.1.xml"))
-                .createESPDResponse();
-
-        XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.EDM_V2
-                .createDocumentBuilderFor(espdResponse);
-
-        System.out.println(xmlDocumentBuilderV2.getAsString());
-    }
+//    @Test
+//    public void createRegulatedResponseV2FromAnImportedV2ResponseForDAArtefact() throws Exception {
+//
+//        ESPDResponse espdResponse = BuilderFactory.EDM_V2
+//                .createRegulatedModelBuilder()
+//                .importFrom(BuilderESPDTest.class.getResourceAsStream("/ESPDResponse_DA_Test-2.0.2-v0.1.xml"))
+//                .createESPDResponse();
+//
+//        XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.EDM_V2
+//                .createDocumentBuilderFor(espdResponse);
+//
+//        System.out.println(xmlDocumentBuilderV2.getAsString());
+//    }
 
     @Test
     public void checkCardinalitiesOfImportedArtefact() throws Exception {
@@ -329,26 +329,26 @@ public class BuilderESPDTest {
         SelectableCriterionPrinter.print(espdResponse.getFullCriterionList());
     }
 
-    @Test
-    public void testCreateESPDResponseFromESPDRequest() throws Exception {
-
-        ESPDResponse espdResponse = BuilderFactory.EDM_V2
-                .createRegulatedModelBuilder()
-                .importFrom(BuilderESPDTest.class.getResourceAsStream("/ESPDRequest_DA_Test-2.0.2-v0.1.xml"))
-                .createESPDResponse();
-
-        XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.EDM_V2
-                .createDocumentBuilderFor(espdResponse);
-
-        System.out.println(xmlDocumentBuilderV2.getAsString());
-    }
+//    @Test
+//    public void testCreateESPDResponseFromESPDRequest() throws Exception {
+//
+//        ESPDResponse espdResponse = BuilderFactory.EDM_V2
+//                .createRegulatedModelBuilder()
+//                .importFrom(BuilderESPDTest.class.getResourceAsStream("/ESPDRequest_DA_Test-2.0.2-v0.1.xml"))
+//                .createESPDResponse();
+//
+//        XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.EDM_V2
+//                .createDocumentBuilderFor(espdResponse);
+//
+//        System.out.println(xmlDocumentBuilderV2.getAsString());
+//    }
 
     @Test
     public void testImportSelfContainedRequest() throws Exception {
 
         ESPDRequest espdRequest = BuilderFactory.EDM_V2
                 .createSelfContainedModelBuilder()
-                .importFrom(BuilderESPDTest.class.getResourceAsStream("/FULL_espd-self-contained-request-full-10-11-2018.xml"))
+                .importFrom(BuilderESPDTest.class.getResourceAsStream("/artefacts/selfcontained/da/2.1.0/UPRC-ESPD-Self-Contained-Request-2.1.0-DA-Artefact.xml"))
                 .createESPDRequest();
 
         XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.EDM_V2
@@ -362,7 +362,7 @@ public class BuilderESPDTest {
 
         ESPDResponse espdResponse = BuilderFactory.EDM_V2
                 .createSelfContainedModelBuilder()
-                .importFrom(BuilderESPDTest.class.getResourceAsStream("/SELFCONTAINED_ESPD_Response_2.0.2.xml"))
+                .importFrom(BuilderESPDTest.class.getResourceAsStream("/artefacts/selfcontained/da/2.1.0/UPRC-ESPD-Self-Contained-Response-2.1.0-DA-Artefact.xml"))
                 .createESPDResponse();
 
         XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.EDM_V2
@@ -399,6 +399,21 @@ public class BuilderESPDTest {
 
         System.out.println(xmlDocumentBuilderV2.getAsString());
 
+    }
+
+    @Test
+    public void testCheckIfBuilderCutCriteriaV1() throws Exception {
+
+        ESPDResponse modelResponse = BuilderFactory.EDM_V1
+                .createRegulatedModelBuilder()
+                .importFrom(BuilderESPDTest.class.getResourceAsStream("/artefacts/regulated/v1/Poyry-ESPDRequest_V1_201812071038.xml"))
+                .createESPDResponse();
+
+        XMLDocumentBuilderV1 xmlDocumentBuilderV1 = BuilderFactory.EDM_V1
+                .createDocumentBuilderFor(modelResponse);
+
+        System.out.println(xmlDocumentBuilderV1.getAsString());
+        Assert.assertEquals(63, modelResponse.getFullCriterionList().size());
     }
 
 }
