@@ -44,22 +44,22 @@ public class ArtefactUtilsTest {
 
     @Before
     public void setUp() throws Exception{
-        espdRequestRegulatedV1_0_2 = ArtefactUtilsTest.class.getResourceAsStream("/espd-request.xml");
+        espdRequestRegulatedV1_0_2 = ArtefactUtilsTest.class.getResourceAsStream("/artefacts/regulated/v1/espd-request.xml");
         Assert.assertNotNull(espdRequestRegulatedV1_0_2);
         espdRequestRegulatedV2_0_1 = ArtefactUtilsTest.class.getResourceAsStream("/espd-request-v2_2018-05-30a.xml");
         Assert.assertNotNull(espdRequestRegulatedV2_0_1);
-        espdResponseRegulatedV1_0_2 = ArtefactUtilsTest.class.getResourceAsStream("/espd-response.xml");
+        espdResponseRegulatedV1_0_2 = ArtefactUtilsTest.class.getResourceAsStream("/artefacts/regulated/v1/espd-response.xml");
         Assert.assertNotNull(espdResponseRegulatedV1_0_2);
-        espdResponseRegulatedV2_0_2 = ArtefactUtilsTest.class.getResourceAsStream("/REGULATED-ESPD-Response_2.0.2.xml");
+        espdResponseRegulatedV2_0_2 = ArtefactUtilsTest.class.getResourceAsStream("/artefacts/regulated/v2/2.1.0/REGULATED-ESPD-Response_2.0.2.xml");
         Assert.assertNotNull(espdResponseRegulatedV2_0_2);
 
-        regulatedRequestV2 = new File(getClass().getClassLoader().getResource("REGULATED-ESPD-Request_2.0.2.xml").toURI());
+        regulatedRequestV2 = new File(getClass().getClassLoader().getResource("artefacts/regulated/v2/2.1.0/REGULATED-ESPD-Request_2.0.2.xml").toURI());
         Assert.assertNotNull(regulatedRequestV2);
 
-        selfContainedRequestV2IS = getClass().getClassLoader().getResourceAsStream("SELFCONTAINED-ESPD-Request_2.0.2.xml");
+        selfContainedRequestV2IS = getClass().getClassLoader().getResourceAsStream("artefacts/selfcontained/da/2.0.2/UPRC-ESPD-Self-Contained-Request-2.0.2-DA-Artefact.xml");
         Assert.assertNotNull(selfContainedRequestV2IS);
 
-        selfContainedRequestV2File = new File(getClass().getClassLoader().getResource("SELFCONTAINED-ESPD-Request_2.0.2.xml").toURI());
+        selfContainedRequestV2File = new File(getClass().getClassLoader().getResource("artefacts/selfcontained/da/2.0.2/UPRC-ESPD-Self-Contained-Response-2.0.2-DA-Artefact.xml").toURI());
         Assert.assertNotNull(selfContainedRequestV2File);
     }
 
