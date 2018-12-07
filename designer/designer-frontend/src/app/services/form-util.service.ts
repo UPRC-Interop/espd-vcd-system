@@ -696,9 +696,10 @@ export class FormUtilService {
               /* FIX: self-contained cannot set evidenceURL of undefined issue */
               if (evi !== undefined) {
                 group[r.uuid + 'evidenceUrl'] = new FormControl({
-                  value: evi.evidenceURL,
-                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO,
-                });
+                    value: evi.evidenceURL,
+                    disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO,
+                  },
+                  [UrlValidation]);
                 group[r.uuid + 'evidenceCode'] = new FormControl({
                   value: evi.description,
                   disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
@@ -711,9 +712,10 @@ export class FormUtilService {
 
               if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
                 group[r.uuid + 'evidenceUrl'] = new FormControl({
-                  value: '',
-                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO,
-                });
+                    value: '',
+                    disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO,
+                  },
+                  [UrlValidation]);
                 group[r.uuid + 'evidenceCode'] = new FormControl({
                   value: '',
                   disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
@@ -889,9 +891,12 @@ export class FormUtilService {
               }
               if (r.responseDataType === 'EVIDENCE_IDENTIFIER') {
                 group[r.uuid + 'evidenceUrl'] = new FormControl({
-                  value: '',
-                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO,
-                });
+                    value: '',
+                    disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO,
+                  },
+                  [UrlValidation]
+                )
+                ;
                 group[r.uuid + 'evidenceCode'] = new FormControl({
                   value: '',
                   disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO

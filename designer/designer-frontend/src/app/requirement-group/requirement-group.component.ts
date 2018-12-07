@@ -40,10 +40,11 @@ export class RequirementGroupComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
+    this.showIndicator = true;
   }
 
   ngOnChanges() {
-    this.showIndicator = this.checkIndicator(this.indicator);
+    setTimeout(()=>{this.showIndicator = this.checkIndicator(this.indicator);})
   }
 
   // console.log('Check Indicator called ' + this.reqGroup.id + ' with value of indicator: ' + this.indicator);
