@@ -37,8 +37,8 @@ public enum XSD {
     XML_SCHEMA("http://www.w3.org/2001/XMLSchema", "xsd", ""),
 
     // xsd version 2
-    ESPD_REQUEST_V2("urn:X-test:UBL:Pre-award:QualificationApplicationRequest", "", "xsd/v2/maindoc/UBL-QualificationApplicationRequest-2.2-Pre-award.xsd"),
-    ESPD_RESPONSE_V2("urn:X-test:UBL:Pre-award:QualificationApplicationResponse", "", "xsd/v2/maindoc/UBL-QualificationApplicationResponse-2.2-Pre-award.xsd"),
+    ESPD_REQUEST_V2("urn:X-test:UBL:Pre-award:QualificationApplicationRequest", "", "xsd/v2/maindoc/UBL-QualificationApplicationRequest-2.2.xsd"),
+    ESPD_RESPONSE_V2("urn:X-test:UBL:Pre-award:QualificationApplicationResponse", "", "xsd/v2/maindoc/UBL-QualificationApplicationResponse-2.2.xsd"),
     UBL_CAC_PRE_AWARD_V2("urn:X-test:UBL:Pre-award:CommonAggregate", "cac", "xsd/v2/common/UBL-CommonAggregateComponents-Pre-award.xsd"),
     UBL_CBC_PRE_AWARD_V2("urn:X-test:UBL:Pre-award:CommonBasic", "cbc", "xsd/v2/common/UBL-CommonBasicComponents-Pre-award.xsd"),
     UBL_EXT_PRE_AWARD_V2("urn:oasis:names:specification:ubl:xsd:xsd:CommonExtensionComponents-2", "ext", "xsd/v2/common/UBL-CommonExtensionComponents-Pre-award.xsd");
