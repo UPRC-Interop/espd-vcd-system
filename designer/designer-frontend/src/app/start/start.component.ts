@@ -36,7 +36,6 @@ import {WizardSteps} from "../base/wizard-steps.enum";
 })
 export class StartComponent implements OnInit, BaseStep {
 
-  // countries: CodeList[];
    @ViewChildren('form') forms: QueryList<NgForm>;
   isCA = false;
   isEO = false;
@@ -51,9 +50,6 @@ export class StartComponent implements OnInit, BaseStep {
 
   @Input()
   parentStepper: MatStepper;
-
-  // procedureTypes:ProcedureType[];
-
   constructor(public dataService: DataService,
               private APIService: ApicallService,
               public utilities: UtilitiesService,
@@ -71,13 +67,10 @@ export class StartComponent implements OnInit, BaseStep {
   }
 
   handleRole(radio: FormControl) {
-    // console.dir(typeof(radio.value));
     if (radio.value === 'CA') {
       this.isCA = true;
       this.isEO = false;
       this.utilities.type = 'ESPD_REQUEST';
-      // console.log("This is CA: "+this.isCA);
-      // console.log("This is EO: "+this.isEO);
     } else if (radio.value === 'EO') {
       this.isEO = true;
       this.isCA = false;

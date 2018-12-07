@@ -16,10 +16,7 @@
 
 import {Component, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {DataService} from '../services/data.service';
-import {ProcedureType} from '../model/procedureType.model';
-import {Country} from '../model/country.model';
 import {FormArray, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
-import {EoRelatedCriterion} from '../model/eoRelatedCriterion.model';
 import {FormUtilService} from '../services/form-util.service';
 import {UtilitiesService} from '../services/utilities.service';
 import {COMMA, ENTER} from '../../../node_modules/@angular/cdk/keycodes';

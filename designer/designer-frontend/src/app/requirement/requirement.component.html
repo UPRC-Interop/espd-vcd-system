@@ -24,16 +24,36 @@
     <label *ngIf="req.responseDataType=='WEIGHT_INDICATOR' && this.utilities.isGloballyWeighted" [attr.for]="req.uuid">{{req.description}}</label>
   </div>
 
-
-    <mat-form-field *ngSwitchDefault>
-      <label [attr.for]="req.uuid">{{req.description}}</label>
-      <br>
-      <input matInput [formControlName]="req.uuid" [id]="req.uuid" [required]="req.mandatory">
-      <mat-error *ngIf="form.get(req.uuid).invalid">
-        <input-validation-error [formControlErrors]="form.get(req.uuid).errors"></input-validation-error>
-      </mat-error>
-    </mat-form-field>
-
+  <!--SELF-CONTAINED: Hide the QUESTION fields if the user is a CA making a Request. Render only the REQUIREMENT and CAPTION fields.
+  Don't show the REQUIREMENT fields if the user has the role of EO and creates a new ESPD response from scratch-->
+  <div [ngSwitch]="req.responseDataType" [hidden]="(this.utilities.isCA && req.type === 'QUESTION')
+  || (this.utilities.isEO && req.type ==='REQUIREMENT' && this.utilities.isCreateResponse)
+  || req.type === 'CAPTION'">
+    <div *ngSwitchDefault>
+      <div *ngIf="req.type === 'CAPTION'">
+        <!-- SKIP captions and deal with question and requirement only -->
+      </div>
+      <div *ngIf="req.type === 'QUESTION'">
+        <mat-form-field>
+          <label [attr.for]="req.uuid">{{req.description}}</label>
+          <br>
+          <input matInput [formControlName]="req.uuid" [id]="req.uuid" [required]="req.mandatory">
+          <mat-error *ngIf="form.get(req.uuid).invalid">
+            <input-validation-error [formControlErrors]="form.get(req.uuid).errors"></input-validation-error>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div *ngIf="req.type === 'REQUIREMENT'">
+        <mat-form-field>
+          <label [attr.for]="req.uuid">{{req.description}}</label>
+          <br>
+          <input matInput [formControlName]="req.uuid" [id]="req.uuid" [required]="req.mandatory">
+          <mat-error *ngIf="form.get(req.uuid).invalid">
+            <input-validation-error [formControlErrors]="form.get(req.uuid).errors"></input-validation-error>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
     <mat-form-field *ngSwitchCase="'QUANTITY_YEAR'">
       <label [attr.for]="req.uuid">{{req.description}}</label>
       <br>
@@ -51,32 +71,6 @@
         <input-validation-error [formControlErrors]="form.get(req.uuid).errors"></input-validation-error>
       </mat-error>
     </mat-form-field>
-
-
-  <!--SELF-CONTAINED: Hide the QUESTION fields if the user is a CA making a Request. Render only the REQUIREMENT and CAPTION fields.
-  Don't show the REQUIREMENT fields if the user has the role of EO and creates a new ESPD response from scratch-->
-  <div [ngSwitch]="req.responseDataType" [hidden]="(this.utilities.isCA && req.type === 'QUESTION')
-  || (this.utilities.isEO && req.type ==='REQUIREMENT' && this.utilities.isCreateResponse)
-  || req.type === 'CAPTION'">
-    <div *ngSwitchDefault>
-      <div *ngIf="req.type === 'CAPTION'">
-        <!-- SKIP captions and deal with question and requirement only -->
-      </div>
-      <div *ngIf="req.type === 'QUESTION'">
-        <mat-form-field>
-          <label [attr.for]="req.uuid">{{req.description}}</label>
-          <br>
-          <input matInput [formControlName]="req.uuid" [id]="req.uuid" >
-        </mat-form-field>
-      </div>
-      <div *ngIf="req.type === 'REQUIREMENT'">
-        <mat-form-field>
-          <label [attr.for]="req.uuid">{{req.description}}</label>
-          <br>
-          <input matInput [formControlName]="req.uuid" [id]="req.uuid" >
-        </mat-form-field>
-      </div>
-    </div>
     <mat-form-field *ngSwitchCase="'DATE'">
       <label [attr.for]="req.uuid">{{req.description}}</label>
       <br>

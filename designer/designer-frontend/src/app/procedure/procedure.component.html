@@ -33,8 +33,7 @@
       </div>
       <mat-form-field>
         <!--<label for="noticeNumber">Received Notice Number</label>-->
-        <input matInput id="noticeNumber" name="receivedNoticeNumber" [(ngModel)]="dataService.receivedNoticeNumber"
-               placeholder="{{'espd.part1.ted.reception.id' | translate}}" [disabled]="this.dataService.isReadOnly()">
+        <input matInput id="noticeNumber" name="receivedNoticeNumber" [(ngModel)]="dataService.receivedNoticeNumber" placeholder="{{'espd.part1.ted.reception.id' | translate}}" [disabled]="this.dataService.isReadOnly()">
       </mat-form-field>
       <mat-form-field>
         <input matInput name="noticeNumberOJS" [(ngModel)]="dataService.CADetails.procurementPublicationNumber"
@@ -160,8 +159,7 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-form-field>
-        <input matInput placeholder="{{'espd.part1.procurer.name' | translate}}" name="title"
-               [(ngModel)]="dataService.CADetails.procurementProcedureTitle" [disabled]="this.dataService.isReadOnly()">
+        <input matInput placeholder="{{'espd.part1.procurer.name' | translate}}" name="title" [(ngModel)]="dataService.CADetails.procurementProcedureTitle" [disabled]="this.dataService.isReadOnly()">
       </mat-form-field>
       <mat-form-field>
         <!--<input matInput placeholder="Short Description">-->
@@ -169,13 +167,13 @@
                   id="shortDesc" cols="30" rows="10"
                   placeholder="{{'espd.part1.title.or.short.desc' | translate}}"
                   name="description"
-                  [(ngModel)]="dataService.CADetails.procurementProcedureDesc"
-                  [disabled]="this.dataService.isReadOnly()"></textarea>
+                  [(ngModel)]="dataService.CADetails.procurementProcedureDesc" [disabled]="this.dataService.isReadOnly()">
+
+        </textarea>
       </mat-form-field>
       <mat-form-field>
         <input matInput placeholder="{{'espd.part1.file.ref.ca' | translate}}" name="fileReferenceNumber"
-               [(ngModel)]="dataService.CADetails.procurementProcedureFileReferenceNo"
-               [disabled]="this.dataService.isReadOnly()">
+               [(ngModel)]="dataService.CADetails.procurementProcedureFileReferenceNo" [disabled]="this.dataService.isReadOnly()">
       </mat-form-field>
       <!-- SELF-CONTAINED: Type of Procedure -->
       <div *ngIf="utilities.qualificationApplicationType === 'selfcontained'">
@@ -232,7 +230,5 @@
     </mat-expansion-panel>
   </mat-accordion>
   <button mat-raised-button color="primary" matStepperPrevious>{{'espd.gui.previous' | translate}}</button>
-  <button type="button" mat-raised-button color="primary" matStepperNext (click)="onProcedureSubmit(form)">
-    {{'espd.gui.next' | translate}}
-  </button>
+  <button type="button" mat-raised-button color="primary" matStepperNext (click)="onProcedureSubmit(form)">{{'espd.gui.next' | translate}}</button>
 </form>

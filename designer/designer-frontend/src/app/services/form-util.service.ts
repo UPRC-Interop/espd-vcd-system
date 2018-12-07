@@ -698,7 +698,6 @@ export class FormUtilService {
                 group[r.uuid + 'evidenceUrl'] = new FormControl({
                   value: evi.evidenceURL,
                   disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO,
-                  [UrlValidation]
                 });
                 group[r.uuid + 'evidenceCode'] = new FormControl({
                   value: evi.description,
@@ -714,7 +713,6 @@ export class FormUtilService {
                 group[r.uuid + 'evidenceUrl'] = new FormControl({
                   value: '',
                   disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO,
-                  [UrlValidation]
                 });
                 group[r.uuid + 'evidenceCode'] = new FormControl({
                   value: '',
@@ -893,7 +891,6 @@ export class FormUtilService {
                 group[r.uuid + 'evidenceUrl'] = new FormControl({
                   value: '',
                   disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO,
-                  [UrlValidation]
                 });
                 group[r.uuid + 'evidenceCode'] = new FormControl({
                   value: '',

@@ -58,13 +58,6 @@ import {PercentageValidationDirective} from './directives/percentage/percentage-
 import {VatNumberValidationDirective} from './directives/vat-number/vat-number-validation.directive';
 import {AmountDirective} from './directives/amount/amount.directive';
 
-/* dates and locale */
-import {MAT_MOMENT_DATE_FORMATS, MatMomentDateModule, MomentDateAdapter} from '@angular/material-moment-adapter';
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material';
-/* translations */
-import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-
 @NgModule({
   declarations: [
     AppComponent,
