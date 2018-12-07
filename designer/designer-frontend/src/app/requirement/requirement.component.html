@@ -199,7 +199,7 @@
         </mat-error>
       </mat-form-field>
       <mat-form-field>
-        <mat-select [formControlName]="req.uuid+'currency'" [id]="req.uuid+'currency'">
+        <mat-select [formControlName]="req.uuid+'currency'" [id]="req.uuid+'currency'" [required]="req.mandatory">
           <mat-option>None</mat-option>
           <mat-option *ngFor="let curr of codelist.currency" [value]="curr.code">{{curr.code}} ( {{curr.name}} )</mat-option>
         </mat-select>

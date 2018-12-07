@@ -397,7 +397,7 @@
                   <mat-form-field class="eoField">
                     <input [appDateValidationFix]="getNaturalPersonFormData().at(i).get('birthDate')"
                            formControlName="birthDate" matInput placeholder="{{'espd.part2.birth.date' | translate}}"
-                           [matDatepicker]="picker" #birthDate>
+                           [matDatepicker]="picker" required #birthDate>
                     <mat-error *ngIf="getNaturalPersonFormData().at(i).get('birthDate').invalid">
                       <input-validation-error [formControlErrors]="getNaturalPersonFormData().at(i).get('birthDate').errors"></input-validation-error>
                     </mat-error>

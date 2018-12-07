@@ -20,8 +20,7 @@ export class DateValidationFixDirective {
     let nativeElementValue = this.elementRef.nativeElement.value;
     if ((this.formControl.value === null || this.formControl.value === "") && !StringHelperService.isBlank(nativeElementValue)) {
       this.formControl.setErrors({'matDatepickerParse': true});
-    }
-    else {
+    } else {
       if (this.formControl.hasError('matDatepickerParse')) {
         delete this.formControl.errors['matDatepickerParse'];
         this.formControl.updateValueAndValidity();
