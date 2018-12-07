@@ -14,22 +14,29 @@
 /// limitations under the License.
 ///
 
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {DataService} from '../services/data.service';
-import {FormArray, FormControl, FormGroup, NgForm} from '@angular/forms';
+import {FormArray, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
+import {FormUtilService} from '../services/form-util.service';
 import {UtilitiesService} from '../services/utilities.service';
 import {COMMA, ENTER} from '../../../node_modules/@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material';
 import {CodeList} from '../model/codeList.model';
 import {CodelistService} from '../services/codelist.service';
+import {ValidationService} from "../services/validation.service";
+import {BaseStep} from "../base/base-step";
+import {WizardSteps} from "../base/wizard-steps.enum";
+import {UrlValidation} from "../validation/url/url-validation";
 
 @Component({
   selector: 'app-procedure-eo',
   templateUrl: './procedure-eo.component.html',
   styleUrls: ['./procedure-eo.component.css']
 })
-export class ProcedureEoComponent implements OnInit {
+export class ProcedureEoComponent implements OnInit, BaseStep {
 
+  @ViewChildren('form') forms: QueryList<NgForm>;
+  @ViewChild('ojs') ojsForm: NgForm;
 
   public EOForm: FormGroup;
 
@@ -43,6 +50,8 @@ export class ProcedureEoComponent implements OnInit {
 
   constructor(public dataService: DataService,
               public utilities: UtilitiesService,
+			  public formUtil: FormUtilService,
+			  private validationService: ValidationService,
               public codelist: CodelistService) {
 
     this.EOForm = new FormGroup({
@@ -62,13 +71,13 @@ export class ProcedureEoComponent implements OnInit {
       }),
       'contactingDetails': new FormGroup({
         'contactPointName': new FormControl(),
-        'emailAddress': new FormControl(),
+        'emailAddress': new FormControl(null, [Validators.email]),
         'faxNumber': new FormControl(),
         'telephoneNumber': new FormControl(),
       }),
       'naturalPersons': new FormArray([this.initNaturalPerson()]),
       'id': new FormControl(),
-      'webSiteURI': new FormControl(),
+      'webSiteURI': new FormControl(null, [UrlValidation]),
       'procurementProjectLot': new FormControl(0)
     });
     this.dataService.EOForm = this.EOForm;
@@ -87,6 +96,13 @@ export class ProcedureEoComponent implements OnInit {
 
   }
 
+  getWizardStep(): WizardSteps {
+    return WizardSteps.PROCEDURE;
+  }
+
+  public areFormsValid(): boolean {
+    return this.validationService.validateFormsInComponent(this.forms) && this.validationService.validateForm(this.ojsForm);
+  }
 
   /* ================================================= natural person form ================================================ */
 
@@ -105,7 +121,7 @@ export class ProcedureEoComponent implements OnInit {
       }),
       'contactDetails': new FormGroup({
         'contactPointName': new FormControl(),
-        'emailAddress': new FormControl(),
+        'emailAddress': new FormControl(null, [Validators.email]),
         'telephoneNumber': new FormControl(),
       })
     });
@@ -131,9 +147,9 @@ export class ProcedureEoComponent implements OnInit {
 
   onProcedureEOSubmit(form: NgForm, eoForm: FormGroup) {
 
-    this.dataService.CADetails.cacountry = form.value.CACountry;
+    this.dataService.CADetails.cacountry = this.dataService.selectedCountry;
     this.dataService.CADetails.receivedNoticeNumber = form.value.receivedNoticeNumber;
-    this.dataService.PostalAddress.countryCode = form.value.CACountry;
+    this.dataService.PostalAddress.countryCode = this.dataService.selectedCountry;
     this.dataService.CADetails.postalAddress = this.dataService.PostalAddress;
     this.dataService.CADetails.contactingDetails = this.dataService.ContactingDetails;
 

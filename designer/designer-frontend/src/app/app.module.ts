@@ -42,12 +42,21 @@ import {RequirementComponent} from './requirement/requirement.component';
 import {RootComponent} from './root/root.component';
 import {CriterionComponent} from './criterion/criterion.component';
 import {FinishEoComponent} from './finish-eo/finish-eo.component';
-/* dates and locale */
-import {MAT_MOMENT_DATE_FORMATS, MatMomentDateModule, MomentDateAdapter} from '@angular/material-moment-adapter';
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material';
 /* translations */
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {NumberOjsValidationDirective} from './directives/number-ojs/number-ojs-validation.directive';
+import {InputValidationErrorComponent} from './shared/input-validation-error/input-validation-error.component';
+import {ValidationErrorDirective} from './directives/validation-error/validation-error.directive';
+import {UrlValidationDirective} from "./directives/url/url-validation.directive";
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from "@angular/material";
+import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from "@angular/material-moment-adapter";
+import {DateValidationFixDirective} from './directives/validation-date-fix/date-validation-fix.directive';
+import {PhoneNumberValidationDirective} from './directives/phone-number/phone-number-validation.directive';
+import {IntegerValidationDirective} from './directives/integer/integer-validation.directive';
+import {PercentageValidationDirective} from './directives/percentage/percentage-validation.directive';
+import {VatNumberValidationDirective} from './directives/vat-number/vat-number-validation.directive';
+import {AmountDirective} from './directives/amount/amount.directive';
 
 @NgModule({
   declarations: [
@@ -66,7 +75,17 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
     RequirementComponent,
     RootComponent,
     CriterionComponent,
-    FinishEoComponent
+    FinishEoComponent,
+    NumberOjsValidationDirective,
+    UrlValidationDirective,
+    InputValidationErrorComponent,
+    ValidationErrorDirective,
+    DateValidationFixDirective,
+    PhoneNumberValidationDirective,
+    IntegerValidationDirective,
+    PercentageValidationDirective,
+    VatNumberValidationDirective,
+    AmountDirective
   ],
   imports: [
     BrowserModule,
@@ -76,10 +95,9 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
     HttpClientModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    MatMomentDateModule,
     NgxLoadingModule.forRoot({}),
     TranslateModule.forRoot({
-      loader : {
+      loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
@@ -89,7 +107,8 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
   providers: [ApicallService, DataService,
     {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
     {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
-    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS}],
+    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

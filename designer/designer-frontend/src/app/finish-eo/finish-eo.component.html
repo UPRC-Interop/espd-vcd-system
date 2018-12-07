@@ -20,7 +20,7 @@
 <mat-accordion multi="true">
 
   <ng-container *ngIf="dataService.reductionCriteriaForm">
-    <form [formGroup]="dataService.reductionCriteriaForm">
+    <form [formGroup]="dataService.reductionCriteriaForm" #form="ngForm">
       <mat-expansion-panel expanded="true" *ngIf="this.dataService.reductionCriteria">
         <mat-expansion-panel-header>
           <mat-panel-title translate>
@@ -64,7 +64,7 @@
       </mat-panel-title>
     </mat-expansion-panel-header>
     <div class="desc">
-      <p translate>espd.part5.concl.statements.text</p>
+      <p [innerHTML]="'espd.part5.concl.statements.text' | translate"></p>
       <!--<p>-->
         <!--The economic operator formally declare that the information stated under Parts II - V above is accurate and-->
         <!--correct and that it has been set out in full awareness of the consequences of serious misrepresentation.-->
@@ -93,7 +93,10 @@
       <p translate>espd.part5.concl.statements.signature</p>
 
       <mat-form-field>
-        <input matInput [matDatepicker]="picker" placeholder="Date">
+        <input [appDateValidationFix]="dateInput.control" matInput [matDatepicker]="picker" placeholder="Date" #dateInput="ngModel" ngModel>
+        <mat-error *ngIf="dateInput.control.invalid">
+          <input-validation-error [formControlErrors]="dateInput.control.errors"></input-validation-error>
+        </mat-error>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
@@ -112,18 +115,18 @@
       </mat-panel-title>
     </mat-expansion-panel-header>
     <div class="desc">
-      <p translate>espd.part5.export.content</p>
+      <p [innerHTML]="'espd.part5.export.content' | translate"></p>
     </div>
   </mat-expansion-panel>
 
 
 </mat-accordion>
 
-<button mat-raised-button color="primary" matStepperPrevious>{{'espd.gui.previous' | translate}}</button>
+<button mat-raised-button color="primary" matStepperPrevious [innerHTML]="'espd.gui.previous' | translate"></button>
 <ng-container *ngIf="!this.dataService.isReadOnly()">
-  <button type="submit" mat-raised-button color="primary" matStepperNext (click)="onXmlExport()">{{'espd.part5.export' | translate}} (XML)</button>
-  <button type="submit" *ngIf="this.dataService.isVersionTwo()" mat-raised-button color="primary" matStepperNext (click)="onHtmlExport()">{{'espd.part5.export' | translate}} (HTML)</button>
-  <button type="submit" *ngIf="this.dataService.isVersionTwo()" mat-raised-button color="primary" matStepperNext (click)="onPdfExport()">{{'espd.part5.export' | translate}} (PDF)</button>
+  <button [disabled]="!isExportPossible()" type="submit" mat-raised-button color="primary" matStepperNext (click)="onXmlExport()">{{'espd.part5.export' | translate}} (XML)</button>
+  <button [disabled]="!isExportPossible()" type="submit" *ngIf="this.dataService.isVersionTwo()" mat-raised-button color="primary" matStepperNext (click)="onHtmlExport()">{{'espd.part5.export' | translate}} (HTML)</button>
+  <button [disabled]="!isExportPossible()" type="submit" *ngIf="this.dataService.isVersionTwo()" mat-raised-button color="primary" matStepperNext (click)="onPdfExport()">{{'espd.part5.export' | translate}} (PDF)</button>
 </ng-container>
 
 <!--<button type="submit" mat-raised-button color="primary" matStepperNext (click)="onExportV2()">Export V2</button>-->

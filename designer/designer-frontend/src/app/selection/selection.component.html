@@ -16,7 +16,7 @@
 
 -->
 <h4 translate>espd.part4.header</h4>
-<form #f="ngForm">
+<form #form="ngForm">
 
   <div *ngIf="this.utilities.qualificationApplicationType === 'regulated'">
     <mat-card>
@@ -280,5 +280,5 @@
 
   </mat-accordion>
   <button mat-raised-button color="primary" matStepperPrevious>{{'espd.gui.previous' | translate}}</button>
-  <button type="submit" mat-raised-button color="primary" matStepperNext (click)="onSelectionSubmit(f)">{{'espd.gui.next' | translate}}</button>
+  <button type="submit" mat-raised-button color="primary" matStepperNext (click)="onSelectionSubmit(form)">{{'espd.gui.next' | translate}}</button>
 </form>
