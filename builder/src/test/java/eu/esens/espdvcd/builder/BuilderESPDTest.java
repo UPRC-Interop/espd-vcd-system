@@ -401,4 +401,19 @@ public class BuilderESPDTest {
 
     }
 
+    @Test
+    public void testCheckIfBuilderCutCriteriaV1() throws Exception {
+
+        ESPDResponse modelResponse = BuilderFactory.EDM_V1
+                .createRegulatedModelBuilder()
+                .importFrom(BuilderESPDTest.class.getResourceAsStream("/artefacts/regulated/v1/Poyry-ESPDRequest_V1_201812071038.xml"))
+                .createESPDResponse();
+
+        XMLDocumentBuilderV1 xmlDocumentBuilderV1 = BuilderFactory.EDM_V1
+                .createDocumentBuilderFor(modelResponse);
+
+        System.out.println(xmlDocumentBuilderV1.getAsString());
+        Assert.assertEquals(63, modelResponse.getFullCriterionList().size());
+    }
+
 }
