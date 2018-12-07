@@ -14,7 +14,7 @@
 /// limitations under the License.
 ///
 
-import {Component, Input, OnChanges, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, ChangeDetectorRef} from '@angular/core';
 import {RequirementGroup} from '../model/requirementGroup.model';
 import {FormGroup} from '@angular/forms';
 import {FormUtilService} from '../services/form-util.service';
@@ -36,15 +36,19 @@ export class RequirementGroupComponent implements OnInit, OnChanges {
 
   public showIndicator: boolean;
 
-  constructor(public formUtil: FormUtilService, public utilities: UtilitiesService) {
+  constructor(public formUtil: FormUtilService, public utilities: UtilitiesService, private cdr: ChangeDetectorRef) {
   }
 
   ngOnInit() {
-    this.showIndicator = true;
   }
 
   ngOnChanges() {
-    setTimeout(()=>{this.showIndicator = this.checkIndicator(this.indicator);})
+
+    setTimeout(()=>{
+      this.showIndicator = this.checkIndicator(this.indicator);
+      this.cdr.detectChanges();
+    })
+
   }
 
   // console.log('Check Indicator called ' + this.reqGroup.id + ' with value of indicator: ' + this.indicator);
