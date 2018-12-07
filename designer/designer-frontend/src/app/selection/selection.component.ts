@@ -14,22 +14,26 @@
 /// limitations under the License.
 ///
 
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {DataService} from '../services/data.service';
-import {FormControl, NgForm} from '@angular/forms/forms';
+import {FormControl, NgForm} from '@angular/forms';
 import {ApicallService} from '../services/apicall.service';
 import {UtilitiesService} from '../services/utilities.service';
 import {CodeList} from '../model/codeList.model';
 import {CodelistService} from '../services/codelist.service';
+import {ValidationService} from "../services/validation.service";
+import {BaseStep} from "../base/base-step";
+import {WizardSteps} from "../base/wizard-steps.enum";
 
 @Component({
   selector: 'app-selection',
   templateUrl: './selection.component.html',
   styleUrls: ['./selection.component.css']
 })
-export class SelectionComponent implements OnInit {
+export class SelectionComponent implements OnInit, BaseStep {
 
-  // isSatisfiedALL = true;
+ @ViewChildren('form') forms: QueryList<NgForm>;  
+// isSatisfiedALL = true;
   // isAtoD = false;
   weightingType: CodeList[] = null;
 
@@ -37,7 +41,8 @@ export class SelectionComponent implements OnInit {
   constructor(public dataService: DataService,
               public APIService: ApicallService,
               public utilities: UtilitiesService,
-              public codelist: CodelistService) {
+              public codelist: CodelistService,
+              private validationService: ValidationService) {
   }
 
   ngOnInit() {
@@ -87,4 +92,11 @@ export class SelectionComponent implements OnInit {
       this.utilities.isSatisfiedALL);
   }
 
+  getWizardStep(): WizardSteps {
+    return WizardSteps.SELECTION;
+  }
+
+  public areFormsValid(): boolean {
+    return this.validationService.validateFormsInComponent(this.forms);
+  }
 }

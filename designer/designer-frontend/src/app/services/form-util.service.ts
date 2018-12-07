@@ -31,6 +31,7 @@ import {FullCriterion} from '../model/fullCriterion.model';
 import {UUID} from 'angular2-uuid';
 import {CaRelatedCriterion} from '../model/caRelatedCriterion.model';
 import {stringify} from 'querystring';
+import {UrlValidation} from "../validation/url/url-validation";
 
 @Injectable({
   providedIn: 'root'
@@ -696,7 +697,8 @@ export class FormUtilService {
               if (evi !== undefined) {
                 group[r.uuid + 'evidenceUrl'] = new FormControl({
                   value: evi.evidenceURL,
-                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO,
+                  [UrlValidation]
                 });
                 group[r.uuid + 'evidenceCode'] = new FormControl({
                   value: evi.description,
@@ -711,7 +713,8 @@ export class FormUtilService {
               if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
                 group[r.uuid + 'evidenceUrl'] = new FormControl({
                   value: '',
-                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO,
+                  [UrlValidation]
                 });
                 group[r.uuid + 'evidenceCode'] = new FormControl({
                   value: '',
@@ -889,7 +892,8 @@ export class FormUtilService {
               if (r.responseDataType === 'EVIDENCE_IDENTIFIER') {
                 group[r.uuid + 'evidenceUrl'] = new FormControl({
                   value: '',
-                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO,
+                  [UrlValidation]
                 });
                 group[r.uuid + 'evidenceCode'] = new FormControl({
                   value: '',

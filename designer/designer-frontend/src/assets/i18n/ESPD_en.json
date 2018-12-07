@@ -399,5 +399,12 @@
    "espd.gui.view.ca": "View: (CA)",
    "espd.gui.view.eo": "View: (EO)",
    "espd.gui.yes": "Yes",
-   "espd.gui.zip.instructions": "This is a short documentation of the ESPD files that you find in this ZIP folder.Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nespd.XML: The XML file is a file that our ESPD service or other compatible ESPD services can understand. The advantage of using the eESPD as a XML file is that buyers and companies can reuse it for other procedures in the future. It should be sent together with the procurement documents (from authority to companies) or as part of the bid (company to authority).Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nespd.PDF: The PDF file is a human readable file of the eESPD. We suggest here as well that it is used alongside the XML format with the procurement documents (from authority to companies) or as part of the bid (company to authority) as a reference document.Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nIf you have questions about the files please do not hesitate to get in contact with us through the following email address: grow-espd@ec.europa.eu."
+  "espd.gui.zip.instructions": "This is a short documentation of the ESPD files that you find in this ZIP folder.Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nespd.XML: The XML file is a file that our ESPD service or other compatible ESPD services can understand. The advantage of using the eESPD as a XML file is that buyers and companies can reuse it for other procedures in the future. It should be sent together with the procurement documents (from authority to companies) or as part of the bid (company to authority).Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nespd.PDF: The PDF file is a human readable file of the eESPD. We suggest here as well that it is used alongside the XML format with the procurement documents (from authority to companies) or as part of the bid (company to authority) as a reference document.Chr(92)Chr(92)rChr(92)nChr(92)rChr(92)nIf you have questions about the files please do not hesitate to get in contact with us through the following email address: grow-espd@ec.europa.eu.",
+  "espd.validator.numberOjs": "Please enter a publication number in the valid format \"yyyy/S sss-nnnnnn\"",
+  "espd.validator.matDatepickerParse": "Please enter a valid date in DD/MM/YYYY format.",
+  "espd.validator.phoneNumber": "Please enter a valid phone number.",
+  "espd.ojs.hint": "Hint: The format corresponds to the scheme \"yyyy/S sss-nnnnnn\"",
+  "espd.validator.percentage": "Please enter a percentage in valid format, e. g. \"1.23\"",
+  "espd.validator.vatNumber": "Please enter a valid VAT identification number.",
+  "espd.validator.amount": "Please enter a valid amount."
 }

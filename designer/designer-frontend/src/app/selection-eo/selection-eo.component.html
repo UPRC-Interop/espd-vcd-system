@@ -42,7 +42,7 @@
 </div>
 
 <mat-accordion multi="true" *ngIf="this.utilities.isSatisfiedALL">
-  <form #f="ngForm">
+  <form #form="ngForm">
     <mat-expansion-panel expanded="true" *ngIf="this.dataService.selectionALLCriteria">
       <mat-expansion-panel-header>
         <mat-panel-title translate>
@@ -85,7 +85,7 @@
 
 <mat-accordion multi="true" *ngIf="this.utilities.isAtoD">
 <ng-container *ngIf="dataService.selectionACriteriaForm">
-  <form [formGroup]="dataService.selectionACriteriaForm">
+  <form [formGroup]="dataService.selectionACriteriaForm" #form="ngForm">
     <mat-expansion-panel expanded="true" *ngIf="this.dataService.selectionACriteria">
       <mat-expansion-panel-header>
         <mat-panel-title translate>
@@ -126,7 +126,7 @@
 </ng-container>
 
 <ng-container *ngIf="dataService.selectionBCriteriaForm">
-  <form [formGroup]="dataService.selectionBCriteriaForm">
+  <form [formGroup]="dataService.selectionBCriteriaForm" #form="ngForm">
     <mat-expansion-panel expanded="true" *ngIf="this.dataService.selectionBCriteria">
       <mat-expansion-panel-header>
         <mat-panel-title translate>
@@ -162,7 +162,7 @@
 </ng-container>
 
   <ng-container *ngIf="dataService.selectionCCriteriaForm">
-    <form [formGroup]="dataService.selectionCCriteriaForm">
+    <form [formGroup]="dataService.selectionCCriteriaForm" #form="ngForm">
       <mat-expansion-panel expanded="true" *ngIf="this.dataService.selectionCCriteria">
         <mat-expansion-panel-header>
           <mat-panel-title translate>
@@ -244,7 +244,7 @@
     </form>
   </ng-container>
   <ng-container *ngIf="dataService.selectionDCriteriaForm">
-    <form [formGroup]="dataService.selectionDCriteriaForm">
+    <form [formGroup]="dataService.selectionDCriteriaForm" #form="ngForm">
       <mat-expansion-panel expanded="true" *ngIf="this.dataService.selectionDCriteria">
         <mat-expansion-panel-header>
           <mat-panel-title translate>

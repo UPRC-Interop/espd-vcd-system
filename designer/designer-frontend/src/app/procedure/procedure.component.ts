@@ -14,20 +14,26 @@
 /// limitations under the License.
 ///
 
-import {Component, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import {Component, OnChanges, OnInit, QueryList, SimpleChanges, ViewChildren} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {NgForm} from '@angular/forms';
 import {UtilitiesService} from '../services/utilities.service';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material';
 import {CodelistService} from '../services/codelist.service';
+import {ProcedureType} from '../model/procedureType.model';
+import {Country} from '../model/country.model';
+import {NgForm} from '@angular/forms';
+import {ValidationService} from "../services/validation.service";
+import {BaseStep} from "../base/base-step";
+import {WizardSteps} from "../base/wizard-steps.enum";
 
 @Component({
   selector: 'app-procedure',
   templateUrl: './procedure.component.html',
   styleUrls: ['./procedure.component.css']
 })
-export class ProcedureComponent implements OnInit, OnChanges {
+export class ProcedureComponent implements OnInit, OnChanges, BaseStep {
 
   /* CPV chips */
   visible = true;
@@ -35,12 +41,19 @@ export class ProcedureComponent implements OnInit, OnChanges {
   removable = true;
   addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  @ViewChildren('form') forms: QueryList<NgForm>;
+
+  countries: Country[] = null;
+  procedureTypes: ProcedureType[] = null;
+  // @Input() eoRelatedCriteria: EoRelatedCriterion[];
+  // @Input() reductionCriteria: ReductionCriterion[];
 
 
   @ViewChild('form') form: NgForm;
 
   constructor(public dataService: DataService,
               public utilities: UtilitiesService,
+			  private validationService: ValidationService,
               public codelist: CodelistService) {
   }
 
@@ -87,6 +100,9 @@ export class ProcedureComponent implements OnInit, OnChanges {
   add(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
+  getWizardStep(): WizardSteps {
+    return WizardSteps.PROCEDURE;
+  }
 
     // Add our cpv
     if ((value || '').trim()) {
@@ -108,4 +124,7 @@ export class ProcedureComponent implements OnInit, OnChanges {
   }
 
 
+  public areFormsValid(): boolean {
+    return this.validationService.validateFormsInComponent(this.forms);
+  }
 }

@@ -38,3 +38,7 @@ mat-radio-button {
 /*.mat-select-content, .mat-select-panel-done-animating {*/
   /*background-color: #3F51B5;*/
 /*}*/
+
+.no-margin {
+  margin: 0;
+}

@@ -14,13 +14,16 @@
 /// limitations under the License.
 ///
 
-import {Component, Input, OnInit} from '@angular/core';
-import {FormControl, NgForm} from '@angular/forms/forms';
+import {Component, Input, OnInit, QueryList, ViewChildren} from '@angular/core';
+import {FormControl, NgForm} from '@angular/forms';
 import {ApicallService} from '../services/apicall.service';
 import {DataService} from '../services/data.service';
 import {UtilitiesService} from '../services/utilities.service';
 import {CodelistService} from '../services/codelist.service';
 import {MatStepper} from '@angular/material';
+import {ValidationService} from "../services/validation.service";
+import {BaseStep} from "../base/base-step";
+import {WizardSteps} from "../base/wizard-steps.enum";
 
 // import {ProcedureType} from "../model/procedureType.model";
 
@@ -28,11 +31,13 @@ import {MatStepper} from '@angular/material';
 @Component({
   selector: 'app-start',
   templateUrl: './start.component.html',
-  styleUrls: ['./start.component.css']
+  styleUrls: ['./start.component.css'],
+  outputs: ['forms']
 })
-export class StartComponent implements OnInit {
+export class StartComponent implements OnInit, BaseStep {
 
   // countries: CodeList[];
+   @ViewChildren('form') forms: QueryList<NgForm>;
   isCA = false;
   isEO = false;
   isCreateNewESPD = false;
@@ -52,13 +57,13 @@ export class StartComponent implements OnInit {
   constructor(public dataService: DataService,
               private APIService: ApicallService,
               public utilities: UtilitiesService,
-              public codelist: CodelistService) {
+              public codelist: CodelistService,
+              private validationService: ValidationService) {
   }
 
   ngOnInit() {
 
   }
-
 
   handleFileUpload(files: FileList) {
     console.log(files);
@@ -171,4 +176,12 @@ export class StartComponent implements OnInit {
         this.isLoading = false;
       });
   }
+  getWizardStep(): WizardSteps {
+    return WizardSteps.START;
+  }
+
+  public areFormsValid(): boolean {
+    return this.validationService.validateFormsInComponent(this.forms);
+  }
+
 }
