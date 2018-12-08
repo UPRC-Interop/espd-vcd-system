@@ -1,4 +1,8 @@
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:cac="urn:X-test:UBL:Pre-award:CommonAggregate" xmlns:cbc="urn:X-test:UBL:Pre-award:CommonBasic">
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+                xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+                xmlns:cacV1="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+                xmlns:cbcV1="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
 
     <xsl:import href="../html/chapter.xsl"/>
     <xsl:import href="../propertyreader/property_reader.xsl"/>
@@ -19,7 +23,7 @@
                         </xsl:call-template>
                     </xsl:with-param>
                     <xsl:with-param name="chapter-content">
-                        <xsl:apply-templates select="//cac:AdditionalDocumentReference" />
+                        <xsl:apply-templates select=".//*[local-name() = 'AdditionalDocumentReference']" />
                     </xsl:with-param>
                 </xsl:call-template>
 
@@ -32,7 +36,7 @@
                     </xsl:with-param>
                     <xsl:with-param name="chapter-content">
 
-                        <xsl:apply-templates select="//cac:ContractingParty"/>
+                        <xsl:apply-templates select=".//*[local-name() = 'ContractingParty']"/>
                     </xsl:with-param>
                 </xsl:call-template>
 
@@ -61,7 +65,7 @@
                 </xsl:call-template>
             </xsl:with-param>
             <xsl:with-param name="text">
-                <xsl:value-of select="//cac:AdditionalDocumentReference/cac:Attachment/cac:ExternalReference/cbc:FileName"/>
+                <xsl:value-of select="(//cac:AdditionalDocumentReference/cac:Attachment/cac:ExternalReference/cbc:FileName) | (//cacV1:AdditionalDocumentReference/cacV1:Attachment/cacV1:ExternalReference/cbcV1:FileName)"/>
             </xsl:with-param>
         </xsl:call-template>
 
@@ -72,7 +76,7 @@
                 </xsl:call-template>
             </xsl:with-param>
             <xsl:with-param name="value">
-                <xsl:for-each select="//cac:AdditionalDocumentReference/cac:Attachment/cac:ExternalReference/cbc:Description">
+                <xsl:for-each select="(//cac:AdditionalDocumentReference/cac:Attachment/cac:ExternalReference/cbc:Description) | //cacV1:AdditionalDocumentReference/cacV1:Attachment/cacV1:ExternalReference/cbcV1:Description">
                     <xsl:if test="position() = 1">
                         <xsl:value-of select="."/>
                     </xsl:if>
@@ -87,7 +91,7 @@
                 </xsl:call-template>
             </xsl:with-param>
             <xsl:with-param name="text">
-                <xsl:value-of select="//cbc:ContractFolderID"/>
+                <xsl:value-of select="//cbc:ContractFolderID | //cbcV1:ContractFolderID"/>
             </xsl:with-param>
         </xsl:call-template>
 
@@ -96,52 +100,52 @@
     <xsl:template match="cac:ContractingParty">
 
         <xsl:call-template name="sectionLabelForValueOfNode">
-            <xsl:with-param name="node" select="cac:Party/cac:PartyName/cbc:Name" />
+            <xsl:with-param name="node" select="(cac:Party/cac:PartyName/cbc:Name) | (cacV1:Party/cacV1:PartyName/cbcV1:Name)" />
             <xsl:with-param name="propertyKey" select="'espd.part1.name'"/>
         </xsl:call-template>
 
         <xsl:call-template name="sectionLabelForValueOfNode">
-            <xsl:with-param name="node" select="cac:Party/cac:PartyIdentification/cbc:ID" />
+            <xsl:with-param name="node" select="(cac:Party/cac:PartyIdentification/cbc:ID) | (cacV1:Party/cacV1:PartyIdentification/cbcV1:ID)" />
             <xsl:with-param name="propertyKey" select="'espd.part2.vat'"/>
         </xsl:call-template>
 
         <xsl:call-template name="sectionLabelForUrlValueOfNode">
-            <xsl:with-param name="node" select="cac:Party/cbc:WebsiteURI" />
+            <xsl:with-param name="node" select="(cac:Party/cbc:WebsiteURI) | (cacV1:Party/cbcV1:WebsiteURI)" />
             <xsl:with-param name="propertyKey" select="'espd.part1.website'"/>
         </xsl:call-template>
 
         <xsl:call-template name="sectionLabelForValueOfNode">
-            <xsl:with-param name="node" select="cac:Party/cac:PostalAddress/cbc:CityName" />
+            <xsl:with-param name="node" select="(cac:Party/cac:PostalAddress/cbc:CityName) | (cacV1:Party/cacV1:PostalAddress/cbcV1:CityName)" />
             <xsl:with-param name="propertyKey" select="'espd.part1.city'"/>
         </xsl:call-template>
 
         <xsl:call-template name="sectionLabelForValueOfNode">
-            <xsl:with-param name="node" select="cac:Party/cac:PostalAddress/cbc:StreetName" />
+            <xsl:with-param name="node" select="(cac:Party/cac:PostalAddress/cbc:StreetName) | (cacV1:Party/cacV1:PostalAddress/cbcV1:StreetName)" />
             <xsl:with-param name="propertyKey" select="'espd.part1.street.and. num'"/>
         </xsl:call-template>
 
         <xsl:call-template name="sectionLabelForValueOfNode">
-            <xsl:with-param name="node" select="cac:Party/cac:PostalAddress/cbc:PostalZone" />
+            <xsl:with-param name="node" select="(cac:Party/cac:PostalAddress/cbc:PostalZone) | (cacV1:Party/cacV1:PostalAddress/cbcV1:PostalZone)" />
             <xsl:with-param name="propertyKey" select="'espd.part1.postcode'"/>
         </xsl:call-template>
 
         <xsl:call-template name="sectionLabelForValueOfNode">
-            <xsl:with-param name="node" select="cac:Party/cac:Contact/cbc:Name" />
+            <xsl:with-param name="node" select="(cac:Party/cac:Contact/cbc:Name) | (cacV1:Party/cacV1:Contact/cbcV1:Name)" />
             <xsl:with-param name="propertyKey" select="'espd.part1.contact.person'"/>
         </xsl:call-template>
 
         <xsl:call-template name="sectionLabelForValueOfNode">
-            <xsl:with-param name="node" select="cac:Party/cac:Contact/cbc:Telephone" />
+            <xsl:with-param name="node" select="(cac:Party/cac:Contact/cbc:Telephone) | (cacV1:Party/cacV1:Contact/cbcV1:Telephone)" />
             <xsl:with-param name="propertyKey" select="'espd.part1.telephone'"/>
         </xsl:call-template>
 
         <xsl:call-template name="sectionLabelForValueOfNode">
-            <xsl:with-param name="node" select="cac:Party/cac:Contact/cbc:Telefax" />
+            <xsl:with-param name="node" select="(cac:Party/cac:Contact/cbc:Telefax) | (cacV1:Party/cacV1:Contact/cbcV1:Telefax)" />
             <xsl:with-param name="propertyKey" select="'espd.part1.fax'"/>
         </xsl:call-template>
 
         <xsl:call-template name="sectionLabelForMailValueOfNode">
-            <xsl:with-param name="node" select="cac:Party/cac:Contact/cbc:ElectronicMail" />
+            <xsl:with-param name="node" select="(cac:Party/cac:Contact/cbc:ElectronicMail) | (cacV1:Party/cacV1:Contact/cbcV1:ElectronicMail)" />
             <xsl:with-param name="propertyKey" select="'espd.part1.email'"/>
         </xsl:call-template>
 
@@ -152,7 +156,7 @@
 
     </xsl:template>
 
-    <xsl:template match="cac:AdditionalDocumentReference">
+    <xsl:template match="cac:AdditionalDocumentReference | cacV1:AdditionalDocumentReference">
         <xsl:call-template name="paragraph">
             <xsl:with-param name="value">
                 <xsl:call-template name="getESPDProperty">
@@ -170,7 +174,7 @@
                 </xsl:call-template>
             </xsl:with-param>
             <xsl:with-param name="text">
-                <xsl:for-each select="cac:Attachment/cac:ExternalReference/cbc:Description">
+                <xsl:for-each select="(cac:Attachment/cac:ExternalReference/cbc:Description) | (cacV1:Attachment/cacV1:ExternalReference/cbcV1:Description)">
                     <xsl:if test="position() = 2">
                         <xsl:value-of select="."/>
                     </xsl:if>
@@ -197,7 +201,7 @@
             </xsl:with-param>
             <xsl:with-param name="text">
                 <xsl:call-template name="formatUrl">
-                    <xsl:with-param name="url" select="cac:Attachment/cac:ExternalReference/cbc:URI" />
+                    <xsl:with-param name="url" select="(cac:Attachment/cac:ExternalReference/cbc:URI) | (cacV1:Attachment/cacV1:ExternalReference/cbcV1:URI)" />
                 </xsl:call-template>
             </xsl:with-param>
         </xsl:call-template>

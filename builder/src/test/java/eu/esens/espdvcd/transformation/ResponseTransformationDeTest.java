@@ -26,17 +26,17 @@ public class ResponseTransformationDeTest {
 
     @Test
     public void hasLocalizedTitle() {
-        assertThat(source, hasXPath("/html/body/div/div[1]/h2/text()", containsString("Einheitliche EuropÃ¤ische EigenerklÃ¤rung (EEE)")));
+        assertThat(source, hasXPath("/html/body/div/div[1]/h2/text()", containsString("Einheitliche Europäische Eigenerklärung (EEE)")));
     }
 
     @Test
     public void hasLocalizedPartOneTitle() {
-        assertThat(source, hasXPath("/html/body/div/div[2]/h3/text()", containsString("Teil I: Angaben zum Vergabeverfahren und zum Ã¶ffentlichen Auftraggeber oder Sektorenauftraggeber")));
+        assertThat(source, hasXPath("/html/body/div/div[2]/h3/text()", containsString("Teil I: Angaben zum Vergabeverfahren und zum öffentlichen Auftraggeber oder Sektorenauftraggeber")));
     }
 
     @Test
     public void hasLocalizedPublicationInfoTitle() {
-        assertThat(source, hasXPath("/html/body/div/div[2]/div[1]/div[1]/text()", containsString("Angaben zur VerÃ¶ffentlichung")));
+        assertThat(source, hasXPath("/html/body/div/div[2]/div[1]/div[1]/text()", containsString("Angaben zur Veröffentlichung")));
     }
 
     @Test
@@ -46,7 +46,7 @@ public class ResponseTransformationDeTest {
 
     @Test
     public void hasLocalizedPartTwoThree() {
-        assertThat(source, hasXPath("/html/body/div/div[4]/h3/text()", containsString("Teil III: AusschlussgrÃ¼nde")));
+        assertThat(source, hasXPath("/html/body/div/div[4]/h3/text()", containsString("Teil III: Ausschlussgründe")));
     }
 
     @Test
@@ -56,6 +56,6 @@ public class ResponseTransformationDeTest {
 
     @Test
     public void hasLocalizedPartTwoFourSubTitle() {
-        assertThat(source, hasXPath("/html/body/div/div[5]/div/div[1]/text()", containsString(": Globalvermerk zur ErfÃ¼llung aller Eignungskriterien")));
+        assertThat(source, hasXPath("/html/body/div/div[5]/div/div[1]/text()", containsString(": Globalvermerk zur Erfüllung aller Eignungskriterien")));
     }
 }

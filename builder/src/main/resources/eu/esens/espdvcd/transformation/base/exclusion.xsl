@@ -1,4 +1,9 @@
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:cac="urn:X-test:UBL:Pre-award:CommonAggregate" xmlns:cbc="urn:X-test:UBL:Pre-award:CommonBasic">
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+                xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+                xmlns:cbcV1="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+                xmlns:ccvV1="urn:isa:names:specification:ubl:schema:xsd:CCV-CommonAggregateComponents-1"
+                xmlns:ccv-cbcV1="urn:isa:names:specification:ubl:schema:xsd:CCV-CommonBasicComponents-1">
 
     <xsl:import href="tender_criterion.xsl"/>
     <xsl:import href="../html/chapter.xsl"/>
@@ -102,12 +107,12 @@
 
 
     <xsl:template name="purelyNationalExclusionGrounds">
-        <xsl:for-each select="//cac:TenderingCriterion">
+        <xsl:for-each select="//cac:TenderingCriterion | //ccvV1:Criterion">
             <xsl:variable name="currentArticle">
-                <xsl:value-of select="current()/cac:Legislation/cbc:Article"/>
+                <xsl:value-of select="current()/cac:Legislation/cbc:Article | current()/ccvV1:LegislationReference/ccv-cbcV1:Article"/>
             </xsl:variable>
             <xsl:variable name="criterionTypeCode" >
-                <xsl:value-of select="current()/cbc:CriterionTypeCode"/>
+                <xsl:value-of select="current()/cbc:CriterionTypeCode | current()/cbcV1:TypeCode"/>
             </xsl:variable>
             <xsl:if test="$currentArticle = '57(4)' and $criterionTypeCode = 'CRITERION.EXCLUSION.NATIONAL.OTHER'">
                 <xsl:apply-templates select="current()"/>

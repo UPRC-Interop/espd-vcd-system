@@ -46,7 +46,9 @@ export class RequirementGroupComponent implements OnInit, OnChanges {
 
     setTimeout(()=>{
       this.showIndicator = this.checkIndicator(this.indicator);
-      this.cdr.detectChanges();
+      if (!this.cdr['destroyed']) {
+        this.cdr.detectChanges();
+      }
     })
 
   }
