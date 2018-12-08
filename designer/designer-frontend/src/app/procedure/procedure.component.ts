@@ -21,9 +21,9 @@ import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material';
 import {CodelistService} from '../services/codelist.service';
 import {NgForm} from '@angular/forms';
-import {ValidationService} from "../services/validation.service";
-import {BaseStep} from "../base/base-step";
-import {WizardSteps} from "../base/wizard-steps.enum";
+import {ValidationService} from '../services/validation.service';
+import {BaseStep} from '../base/base-step';
+import {WizardSteps} from '../base/wizard-steps.enum';
 
 @Component({
   selector: 'app-procedure',
@@ -43,7 +43,7 @@ export class ProcedureComponent implements OnInit, OnChanges, BaseStep {
 
   constructor(public dataService: DataService,
               public utilities: UtilitiesService,
-			  private validationService: ValidationService,
+              private validationService: ValidationService,
               public codelist: CodelistService) {
   }
 

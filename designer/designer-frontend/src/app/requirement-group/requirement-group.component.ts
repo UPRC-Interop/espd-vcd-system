@@ -44,10 +44,10 @@ export class RequirementGroupComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
 
-    setTimeout(()=>{
+    setTimeout(() => {
       this.showIndicator = this.checkIndicator(this.indicator);
       this.cdr.detectChanges();
-    })
+    });
 
   }
 

@@ -16,13 +16,12 @@
 
 import {Component, Input, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {DataService} from '../services/data.service';
-import {ReductionCriterion} from '../model/reductionCriterion.model';
 import {FormGroup, NgForm} from '@angular/forms';
 import {FormUtilService} from '../services/form-util.service';
-import {ValidationService} from "../services/validation.service";
-import {BaseStep} from "../base/base-step";
-import {WizardSteps} from "../base/wizard-steps.enum";
-import {ExportType} from "../export/export-type.enum";
+import {ValidationService} from '../services/validation.service';
+import {BaseStep} from '../base/base-step';
+import {WizardSteps} from '../base/wizard-steps.enum';
+import {ExportType} from '../export/export-type.enum';
 
 @Component({
   selector: 'app-finish-eo',
@@ -33,8 +32,6 @@ export class FinishEoComponent implements OnInit, BaseStep {
 
   @ViewChildren('form') forms: QueryList<NgForm>;
   @ViewChild('dateInput') dateInput: NgForm;
-
-  @Input() reductionCriteria: ReductionCriterion[];
 
   @Input() form: FormGroup;
   @Input() startStepValid: boolean;
@@ -47,7 +44,7 @@ export class FinishEoComponent implements OnInit, BaseStep {
     public dataService: DataService,
     private formUtil: FormUtilService,
     private validationService: ValidationService
-    ) {
+  ) {
   }
 
   ngOnInit() {
@@ -65,6 +62,7 @@ export class FinishEoComponent implements OnInit, BaseStep {
   getWizardStep(): WizardSteps {
     return WizardSteps.FINISH;
   }
+
   onXmlExport() {
     this.dataService.finishEOSubmit(ExportType.XML);
   }

@@ -21,12 +21,11 @@ import {FormUtilService} from '../services/form-util.service';
 import {UtilitiesService} from '../services/utilities.service';
 import {COMMA, ENTER} from '../../../node_modules/@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material';
-import {CodeList} from '../model/codeList.model';
 import {CodelistService} from '../services/codelist.service';
-import {ValidationService} from "../services/validation.service";
-import {BaseStep} from "../base/base-step";
-import {WizardSteps} from "../base/wizard-steps.enum";
-import {UrlValidation} from "../validation/url/url-validation";
+import {ValidationService} from '../services/validation.service';
+import {BaseStep} from '../base/base-step';
+import {WizardSteps} from '../base/wizard-steps.enum';
+import {UrlValidation} from '../validation/url/url-validation';
 
 @Component({
   selector: 'app-procedure-eo',
@@ -50,8 +49,7 @@ export class ProcedureEoComponent implements OnInit, BaseStep {
 
   constructor(public dataService: DataService,
               public utilities: UtilitiesService,
-			  public formUtil: FormUtilService,
-			  private validationService: ValidationService,
+              private validationService: ValidationService,
               public codelist: CodelistService) {
 
     this.EOForm = new FormGroup({

@@ -14,14 +14,12 @@
 /// limitations under the License.
 ///
 
-import {Component, Input, OnInit, QueryList, ViewChildren} from '@angular/core';
-import {ExclusionCriteria} from '../model/exclusionCriteria.model';
+import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {DataService} from '../services/data.service';
-import {FormGroup, NgForm} from '@angular/forms';
-import {FormUtilService} from '../services/form-util.service';
-import {ValidationService} from "../services/validation.service";
-import {BaseStep} from "../base/base-step";
-import {WizardSteps} from "../base/wizard-steps.enum";
+import {NgForm} from '@angular/forms';
+import {ValidationService} from '../services/validation.service';
+import {BaseStep} from '../base/base-step';
+import {WizardSteps} from '../base/wizard-steps.enum';
 
 @Component({
   selector: 'app-exclusion-eo',
@@ -32,22 +30,11 @@ export class ExclusionEoComponent implements OnInit, BaseStep {
 
   @ViewChildren('form') forms: QueryList<NgForm>;
 
-  @Input() exclusionACriteria: ExclusionCriteria[];
-  @Input() exclusionBCriteria: ExclusionCriteria[];
-  @Input() exclusionCCriteria: ExclusionCriteria[];
-  @Input() exclusionDCriteria: ExclusionCriteria[];
-
-  @Input() formA: FormGroup;
-  @Input() formB: FormGroup;
-  @Input() formD: FormGroup;
-  @Input() formC: FormGroup;
-
 
   constructor(
     public dataService: DataService,
-    public formUtil: FormUtilService,
     private validationService: ValidationService
-    ) {
+  ) {
   }
 
   ngOnInit() {

@@ -21,9 +21,9 @@ import {DataService} from '../services/data.service';
 import {UtilitiesService} from '../services/utilities.service';
 import {CodelistService} from '../services/codelist.service';
 import {MatStepper} from '@angular/material';
-import {ValidationService} from "../services/validation.service";
-import {BaseStep} from "../base/base-step";
-import {WizardSteps} from "../base/wizard-steps.enum";
+import {ValidationService} from '../services/validation.service';
+import {BaseStep} from '../base/base-step';
+import {WizardSteps} from '../base/wizard-steps.enum';
 
 // import {ProcedureType} from "../model/procedureType.model";
 
@@ -36,7 +36,7 @@ import {WizardSteps} from "../base/wizard-steps.enum";
 })
 export class StartComponent implements OnInit, BaseStep {
 
-   @ViewChildren('form') forms: QueryList<NgForm>;
+  @ViewChildren('form') forms: QueryList<NgForm>;
   isCA = false;
   isEO = false;
   isCreateNewESPD = false;
@@ -50,6 +50,7 @@ export class StartComponent implements OnInit, BaseStep {
 
   @Input()
   parentStepper: MatStepper;
+
   constructor(public dataService: DataService,
               private APIService: ApicallService,
               public utilities: UtilitiesService,
@@ -151,6 +152,7 @@ export class StartComponent implements OnInit, BaseStep {
 
   onStartSubmit(form: NgForm) {
     this.isLoading = true;
+    console.log(this.isLoading);
     this.dataService.startESPD(form).then(() => {
       this.isLoading = false;
       this.parentStepper.next();
@@ -169,6 +171,7 @@ export class StartComponent implements OnInit, BaseStep {
         this.isLoading = false;
       });
   }
+
   getWizardStep(): WizardSteps {
     return WizardSteps.START;
   }

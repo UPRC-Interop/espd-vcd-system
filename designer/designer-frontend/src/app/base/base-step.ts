@@ -1,10 +1,11 @@
-import {QueryList} from "@angular/core";
-import {NgForm} from "@angular/forms";
-import {WizardSteps} from "./wizard-steps.enum";
+import {QueryList} from '@angular/core';
+import {NgForm} from '@angular/forms';
+import {WizardSteps} from './wizard-steps.enum';
 
 export interface BaseStep {
-  forms: QueryList<NgForm>
+  forms: QueryList<NgForm>;
 
-  areFormsValid(): boolean
-  getWizardStep(): WizardSteps
+  areFormsValid(): boolean;
+
+  getWizardStep(): WizardSteps;
 }

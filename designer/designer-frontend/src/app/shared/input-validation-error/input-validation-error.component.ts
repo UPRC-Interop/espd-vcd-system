@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {ValidationErrors} from "@angular/forms";
+import {ValidationErrors} from '@angular/forms';
 
 @Component({
   selector: 'input-validation-error',

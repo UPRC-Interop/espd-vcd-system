@@ -363,15 +363,6 @@ export class DataService {
   /* ============================= step submit actions =================================*/
 
   selectionSubmit(isSatisfiedALL: boolean) {
-    // console.log('THIS IS SELECTION ISSUE: ');
-    // console.log(isSatisfiedALL);
-    // console.log(this.selectionALLCriteria);
-    // console.log(this.caRelatedCriteria);
-    // console.log(this.selectionACriteria);
-    // console.log(this.selectionBCriteria);
-    // console.log(this.selectionCCriteria);
-    // console.log(this.selectionDCriteria);
-    // console.log(this.utilities.qualificationApplicationType);
 
     /* WORKAROUND-FIX: satisfiesALL Criteria null issue when it's self-contained */
     if (this.utilities.qualificationApplicationType === 'selfcontained') {
@@ -1022,7 +1013,6 @@ export class DataService {
       // console.log(form);
       // console.log(form.value);
       console.log('START ESPD');
-      console.log(form);
 
       // form reset
       if (!this.utilities.isEmpty(this.CADetails) || !this.utilities.isEmpty(this.EODetails)) {
@@ -1061,6 +1051,7 @@ export class DataService {
       }
 
       if (form.value.chooseRole === 'CA') {
+        console.log(form.value);
         this.utilities.isCA = true;
         this.utilities.isEO = false;
         this.receivedNoticeNumber = form.value.noticeNumber;

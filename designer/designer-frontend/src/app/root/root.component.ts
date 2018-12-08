@@ -17,21 +17,21 @@
 import {Component, OnChanges, OnInit, ViewChild} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {UtilitiesService} from '../services/utilities.service';
-import {StartComponent} from "../start/start.component";
-import {ProcedureComponent} from "../procedure/procedure.component";
-import {ProcedureEoComponent} from "../procedure-eo/procedure-eo.component";
-import {ExclusionComponent} from "../exclusion/exclusion.component";
-import {ExclusionEoComponent} from "../exclusion-eo/exclusion-eo.component";
-import {SelectionEoComponent} from "../selection-eo/selection-eo.component";
-import {FinishComponent} from "../finish/finish.component";
-import {FinishEoComponent} from "../finish-eo/finish-eo.component";
-import {SelectionComponent} from "../selection/selection.component";
-import {WizardSteps} from "../base/wizard-steps.enum";
+import {StartComponent} from '../start/start.component';
+import {ProcedureComponent} from '../procedure/procedure.component';
+import {ProcedureEoComponent} from '../procedure-eo/procedure-eo.component';
+import {ExclusionComponent} from '../exclusion/exclusion.component';
+import {ExclusionEoComponent} from '../exclusion-eo/exclusion-eo.component';
+import {SelectionEoComponent} from '../selection-eo/selection-eo.component';
+import {FinishComponent} from '../finish/finish.component';
+import {FinishEoComponent} from '../finish-eo/finish-eo.component';
+import {SelectionComponent} from '../selection/selection.component';
+import {WizardSteps} from '../base/wizard-steps.enum';
 
 @Component({
-selector: 'app-root',
-templateUrl: './root.component.html',
-styleUrls: ['./root.component.css']
+  selector: 'app-root',
+  templateUrl: './root.component.html',
+  styleUrls: ['./root.component.css']
 })
 export class RootComponent implements OnInit, OnChanges {
 
@@ -68,10 +68,10 @@ export class RootComponent implements OnInit, OnChanges {
   }
 
   onLanguageSelection(language: string) {
-      // console.log(language);
-      this.dataService.switchLanguage(language);
-      this.utilities.initLanguage = false;
-      this.utilities.start = true;
+    // console.log(language);
+    this.dataService.switchLanguage(language);
+    this.utilities.initLanguage = false;
+    this.utilities.start = true;
   }
 
   private validateSteps(event) {

@@ -17,9 +17,9 @@
 import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {NgForm} from '@angular/forms';
-import {ValidationService} from "../services/validation.service";
-import {BaseStep} from "../base/base-step";
-import {WizardSteps} from "../base/wizard-steps.enum";
+import {ValidationService} from '../services/validation.service';
+import {BaseStep} from '../base/base-step';
+import {WizardSteps} from '../base/wizard-steps.enum';
 
 @Component({
   selector: 'app-exclusion',
@@ -33,7 +33,7 @@ export class ExclusionComponent implements OnInit, BaseStep {
   constructor(
     public dataService: DataService,
     private validationService: ValidationService
-    ) {
+  ) {
   }
 
   ngOnInit() {

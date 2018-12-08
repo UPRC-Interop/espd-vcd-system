@@ -16,11 +16,11 @@
 
 import {Component, Input, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {DataService} from '../services/data.service';
-import {NgForm} from "@angular/forms";
-import {ValidationService} from "../services/validation.service";
-import {BaseStep} from "../base/base-step";
-import {WizardSteps} from "../base/wizard-steps.enum";
-import {ExportType} from "../export/export-type.enum";
+import {NgForm} from '@angular/forms';
+import {ValidationService} from '../services/validation.service';
+import {BaseStep} from '../base/base-step';
+import {WizardSteps} from '../base/wizard-steps.enum';
+import {ExportType} from '../export/export-type.enum';
 
 @Component({
   selector: 'app-finish',
@@ -40,7 +40,7 @@ export class FinishComponent implements OnInit, BaseStep {
   constructor(
     public dataService: DataService,
     private validationService: ValidationService
-    ) {
+  ) {
   }
 
   ngOnInit() {
@@ -65,15 +65,4 @@ export class FinishComponent implements OnInit, BaseStep {
   public areFormsValid(): boolean {
     return this.validationService.validateFormsInComponent(this.forms);
   }
-
-  // exportFile() {
-  //   this.dataService.version = 'v1';
-  //   this.dataService.saveFile(this.dataService.blob);
-  // }
-  //
-  // exportFileV2() {
-  //   this.dataService.version = 'v2';
-  //   this.dataService.saveFile(this.dataService.blobV2);
-  // }
-
 }

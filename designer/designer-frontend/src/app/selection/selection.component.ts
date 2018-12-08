@@ -21,9 +21,9 @@ import {ApicallService} from '../services/apicall.service';
 import {UtilitiesService} from '../services/utilities.service';
 import {CodeList} from '../model/codeList.model';
 import {CodelistService} from '../services/codelist.service';
-import {ValidationService} from "../services/validation.service";
-import {BaseStep} from "../base/base-step";
-import {WizardSteps} from "../base/wizard-steps.enum";
+import {ValidationService} from '../services/validation.service';
+import {BaseStep} from '../base/base-step';
+import {WizardSteps} from '../base/wizard-steps.enum';
 
 @Component({
   selector: 'app-selection',
@@ -32,9 +32,7 @@ import {WizardSteps} from "../base/wizard-steps.enum";
 })
 export class SelectionComponent implements OnInit, BaseStep {
 
- @ViewChildren('form') forms: QueryList<NgForm>;  
-// isSatisfiedALL = true;
-  // isAtoD = false;
+  @ViewChildren('form') forms: QueryList<NgForm>;
   weightingType: CodeList[] = null;
 
 
@@ -51,17 +49,7 @@ export class SelectionComponent implements OnInit, BaseStep {
       this.utilities.isAtoD = true;
       this.utilities.isSatisfiedALL = false;
     }
-
-    // if (this.utilities.qualificationApplicationType === 'regulated') {
-    //   if (this.APIService.version === 'v2' && this.dataService.selectionALLCriteria !== null) {
-    //     console.log('regulated satisfies all criterion: ');
-    //     console.log(this.utilities.getSatisfiesALLCriterion(this.dataService.selectionALLCriteria, 'f4dc58dd-af45-4602-a4c8-3dca30fac082'));
-    //   }
-    // }
-
     console.log(this.dataService.CADetails);
-
-
   }
 
 

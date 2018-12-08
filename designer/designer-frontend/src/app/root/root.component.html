@@ -39,7 +39,7 @@
           <span>{{'espd.gui.progress.start' | translate}}</span>
         </div>
       </ng-template>
-      <app-start #startComponent [parentStepper]></app-start>
+      <app-start #startComponent [parentStepper]="stepper"></app-start>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>

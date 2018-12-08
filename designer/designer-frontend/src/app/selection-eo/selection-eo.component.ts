@@ -17,11 +17,10 @@
 import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {FormControl, NgForm} from '@angular/forms';
-import {ValidationService} from "../services/validation.service";
-import {BaseStep} from "../base/base-step";
-import {WizardSteps} from "../base/wizard-steps.enum";
-import {UtilitiesService} from "../services/utilities.service";
-import {CodeList} from '../model/codeList.model';
+import {ValidationService} from '../services/validation.service';
+import {BaseStep} from '../base/base-step';
+import {WizardSteps} from '../base/wizard-steps.enum';
+import {UtilitiesService} from '../services/utilities.service';
 import {CodelistService} from '../services/codelist.service';
 
 @Component({
