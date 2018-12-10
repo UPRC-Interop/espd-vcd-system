@@ -15,6 +15,7 @@
  */
 package eu.esens.espdvcd.retriever.criteria.resource;
 
+import eu.esens.espdvcd.builder.util.ArtefactUtils;
 import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
 import eu.esens.espdvcd.codelist.enums.RequirementGroupTypeEnum;
 import eu.esens.espdvcd.codelist.enums.RequirementTypeEnum;
@@ -77,7 +78,63 @@ public abstract class CriteriaTaxonomyResource implements CriteriaResource, Requ
      *
      * @param sc
      */
-    public abstract void applyTaxonomyData(SelectableCriterion sc);
+    public void applyTaxonomyData(SelectableCriterion sc) {
+        // find root RequirementGroup/s of that criterion from taxonomy
+        final List<RequirementGroup> rgListFromTaxonomy = rgMap.get(sc.getID());
+
+        if (rgListFromTaxonomy == null) {
+            LOGGER.log(Level.SEVERE, "SC with ID " + sc.getID() + " cannot be found in rgMap");
+            return;
+        }
+
+        // apply cardinalities to all root RequirementGroup/s
+        sc.getRequirementGroups().forEach(rg -> applyTaxonomyData(
+                rgListFromTaxonomy.stream()
+                        .filter(rgFromTaxonomy -> rg.getID().equals(rgFromTaxonomy.getID()))
+                        .findFirst().orElse(null) // from
+                , rg));                                 //  to
+    }
+
+    protected void applyTaxonomyData(RequirementGroup from, RequirementGroup to) {
+
+        if (from != null && to != null) {
+
+            // do the same for sub-RequirementGroup/s
+            to.getRequirementGroups().forEach(rg -> applyTaxonomyData(
+                    from.getRequirementGroups().stream()
+                            .filter(rgFromTaxonomy -> rg.getID().equals(rgFromTaxonomy.getID()))
+                            .findFirst().orElse(null) // from
+                    , rg));                                 //  to
+
+            // do the same for requirement/s
+            to.getRequirements().forEach(rq -> applyTaxonomyData(
+                    from.getRequirements().stream()
+                            .filter(rqFromTaxonomy -> ArtefactUtils.clearAllWhitespaces(rq.getDescription())
+                                    .equals(ArtefactUtils.clearAllWhitespaces(rqFromTaxonomy.getDescription()))
+                                    && rq.getResponseDataType() == rqFromTaxonomy.getResponseDataType()
+                                    && rq.getType() == rqFromTaxonomy.getType())
+                            .findFirst().orElse(null) // from
+                    , rq));                                 // to
+            // cardinalities
+            to.setMultiple(from.isMultiple());
+            to.setMandatory(from.isMandatory());
+            // requirement group type
+            to.setType(from.getType());
+        }
+    }
+
+    protected void applyTaxonomyData(Requirement from, Requirement to) {
+
+        if (from != null && to != null) {
+            // cardinalities
+            to.setMultiple(from.isMultiple());
+            to.setMandatory(from.isMandatory());
+            // requirement group type
+            to.setType(from.getType());
+            // apply related response value artefact
+            to.setResponseValuesRelatedArtefact(from.getResponseValuesRelatedArtefact());
+        }
+    }
 
     private List<SelectableCriterion> readDataSheet(Sheet dataSheet) {
         // The criteria Column is always the second one
