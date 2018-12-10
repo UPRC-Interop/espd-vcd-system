@@ -17,8 +17,8 @@
     <xsl:template name="tenderingCriterionSection">
         <xsl:param name="article"/>
 
-        <xsl:variable name="articlesInCriterionEspdV1" select="//ccvV1:Criterion[./ccvV1:LegislationReference/ccv-cbcV1:Article = $article and not(./cbcV1:TypeCode = 'CRITERION.EXCLUSION.NATIONAL.OTHER')]" />
-        <xsl:variable name="articlesInCriterionEspdV2" select="//cac:TenderingCriterion[./cac:Legislation/cbc:Article = $article and not(./cbc:CriterionTypeCode = 'CRITERION.EXCLUSION.NATIONAL.OTHER')]" />
+        <xsl:variable name="articlesInCriterionEspdV1" select="//ccvV1:Criterion[contains(./ccvV1:LegislationReference/ccv-cbcV1:Article, $article) and not(./cbcV1:TypeCode = 'CRITERION.EXCLUSION.NATIONAL.OTHER')]" />
+        <xsl:variable name="articlesInCriterionEspdV2" select="//cac:TenderingCriterion[contains(./cac:Legislation/cbc:Article, $article) and not(./cbc:CriterionTypeCode = 'CRITERION.EXCLUSION.NATIONAL.OTHER')]" />
         <xsl:for-each select="$articlesInCriterionEspdV1 | $articlesInCriterionEspdV2">
             <xsl:apply-templates select="current()"/>
         </xsl:for-each>
