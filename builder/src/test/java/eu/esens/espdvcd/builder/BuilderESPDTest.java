@@ -18,10 +18,13 @@ package eu.esens.espdvcd.builder;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDResponse;
+import eu.esens.espdvcd.model.LegislationReference;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.ResponseRequirement;
+import eu.esens.espdvcd.retriever.criteria.CriteriaDataRetriever;
+import eu.esens.espdvcd.retriever.criteria.CriteriaDataRetrieverBuilder;
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
 import eu.esens.espdvcd.retriever.criteria.RegulatedCriteriaExtractorBuilder;
 import eu.esens.espdvcd.retriever.criteria.resource.SelectableCriterionPrinter;
@@ -414,6 +417,27 @@ public class BuilderESPDTest {
 
         System.out.println(xmlDocumentBuilderV1.getAsString());
         Assert.assertEquals(63, modelResponse.getFullCriterionList().size());
+    }
+
+    @Test
+    public void testLegislationReferenceImport() throws Exception {
+        ESPDRequest espdRequest = BuilderFactory.EDM_V2
+                .createSelfContainedModelBuilder()
+                .importFrom(BuilderESPDTest.class.getResourceAsStream("/artefacts/selfcontained/da/2.1.0/UPRC-ESPD-Self-Contained-Request-2.1.0-DA-Artefact.xml"))
+                .createESPDRequest();
+
+        CriteriaDataRetriever criteriaDataRetriever = new CriteriaDataRetrieverBuilder().build();
+
+        LegislationReference artefactLegRef = espdRequest.getFullCriterionList()
+                .stream()
+                .filter(cr -> cr.getID().equals("005eb9ed-1347-4ca3-bb29-9bc0db64e1ab"))
+                .findFirst()
+                .orElseThrow(NullPointerException::new)
+                .getLegislationReference();
+
+        LegislationReference ecertisLegRef = criteriaDataRetriever.getCriterion("005eb9ed-1347-4ca3-bb29-9bc0db64e1ab").getLegislationReference();
+
+        Assert.assertEquals(ecertisLegRef, artefactLegRef);
     }
 
 }

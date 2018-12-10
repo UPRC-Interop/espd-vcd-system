@@ -23,6 +23,7 @@ import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.File;
@@ -47,7 +48,7 @@ public class ImportESPDServiceTest {
 
         espdResponseFile = new File(ImportESPDServiceTest.class.getResource("/espd-response.xml").toURI());
         Assert.assertNotNull(espdResponseFile);
-        espdResponse = new File(this.getClass().getClassLoader().getResource("espd-response-v2-60.xml").toURI());
+        espdResponse = new File(ImportESPDServiceTest.class.getResource("/sfc-210-da-req.xml").toURI());
 
 //        request = BuilderFactory.EDM_V1.createRegulatedModelBuilder().importFrom
 //                (ImportESPDServiceTest.class.getResourceAsStream("/espd-request.xml")).createESPDRequest();
@@ -62,6 +63,7 @@ public class ImportESPDServiceTest {
         writer = new ObjectMapper().writer().withDefaultPrettyPrinter();
     }
 
+    @Ignore
     @Test
     public void testQuantityIntegerImport() throws Exception {
         ImportESPDService service = ImportESPDResponseService.getInstance();
@@ -105,7 +107,7 @@ public class ImportESPDServiceTest {
 
     @Test
     public void requestSelfContainedImport() throws Exception {
-        ESPDRequest request = ImportESPDRequestService.getInstance().importESPDFile(new File(this.getClass().getClassLoader().getResource("espd-self-contained-request-full-8-11-2018.xml").toURI()));
+        ESPDRequest request = ImportESPDRequestService.getInstance().importESPDFile(new File(this.getClass().getClassLoader().getResource("sfc-210-da-req.xml").toURI()));
         System.out.println(writer.writeValueAsString(request));
     }
 }

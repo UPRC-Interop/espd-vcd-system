@@ -71,9 +71,8 @@ public class ExportESPDServiceTest {
 
     @Test
     public void testCriterionNumberAfterImport() throws Exception {
-        File espdRequestFile = new File(this.getClass().getClassLoader()
-                .getResource("espd-response-v2-60.xml")
-                .toURI());
+        File espdRequestFile = new File(ExportESPDServiceTest.class
+                .getResource("/sfc-210-da-req.xml").toURI());
         Assert.assertNotNull(espdRequestFile);
         ESPDRequest req = BuilderFactory
                 .EDM_V2
@@ -84,12 +83,12 @@ public class ExportESPDServiceTest {
         req.setCriterionList(req.getFullCriterionList().subList(0, req.getFullCriterionList().size() / 2));
         System.out.printf("Criteria count before getting the unselected: %s \n", req.getFullCriterionList().size());
 
-        CriteriaService criteriaService = RegulatedCriteriaService.getV2Instance();
+        CriteriaService criteriaService = SelfContainedCriteriaService.getInstance();
         req.setCriterionList(criteriaService.getUnselectedCriteria(req.getFullCriterionList()));
         System.out.printf("Criteria count after getting the unselected: %s, should be: %s\n"
                 ,req.getFullCriterionList().size()
                 ,criteriaService.getCriteria().size());
-        Assert.assertEquals(criteriaService.getCriteria(), req.getFullCriterionList());
+        Assert.assertEquals(criteriaService.getCriteria().size(), req.getFullCriterionList().size());
     }
 
     @Test
