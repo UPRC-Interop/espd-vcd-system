@@ -47,7 +47,8 @@
         <mat-form-field>
           <!--<label [attr.for]="req.uuid">{{req.description}}</label>-->
           <!--<br>-->
-          <input matInput [formControlName]="req.uuid" [id]="req.uuid" [required]="req.mandatory" placeholder={{req.description}}>
+          <input matInput [formControlName]="req.uuid" [id]="req.uuid" [required]="req.mandatory"
+                 placeholder={{req.description}}>
           <mat-error *ngIf="form.get(req.uuid).invalid">
             <input-validation-error [formControlErrors]="form.get(req.uuid).errors"></input-validation-error>
           </mat-error>
