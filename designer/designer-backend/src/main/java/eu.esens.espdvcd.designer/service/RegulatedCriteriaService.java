@@ -51,7 +51,7 @@ public enum RegulatedCriteriaService implements CriteriaService {
 
     @Override
     public List<SelectableCriterion> getUnselectedCriteria(List<SelectableCriterion> initialList) throws RetrieverException {
-        return predefinedExtractor.getFullList(initialList, true);
+        return predefinedExtractor.getFullList(initialList);
     }
 
     @Override
