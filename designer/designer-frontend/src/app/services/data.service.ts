@@ -468,7 +468,7 @@ export class DataService {
 
   finishEOSubmit(exportType: ExportType) {
 
-    /* extract caRelated criteria */
+    /* extract caRelated criteria, and eoLotTenderedCriterion */
     if (this.utilities.qualificationApplicationType === 'selfcontained') {
       /* WORKAROUND-FIX: satisfiesALL Criteria null issue when it's self-contained */
       this.selectionALLCriteria = [];
@@ -483,6 +483,8 @@ export class DataService {
 
     if (this.utilities.qualificationApplicationType === 'regulated' && this.APIService.version === 'v2') {
       this.caRelatedCriteria = [];
+      /* REGULATED 2.1.0: Extract CRITERION.OTHER.EO_DATA.LOTS_TENDERED Criterion */
+      this.formUtil.extractFormValuesFromCriteria(this.eoLotCriterion, this.eoLotCriterionForm, this.formUtil.evidenceList);
     }
 
     /* extract eoRelated criteria */
@@ -1166,8 +1168,30 @@ export class DataService {
               reject();
             });
         } else {
-          this.caRelatedCriteria = [];
-          this.eoLotCriterion = [];
+          if (this.utilities.qualificationApplicationType === 'regulated') {
+            this.caRelatedCriteria = [];
+          }
+          if (this.APIService.version === 'v1') {
+            this.eoLotCriterion = [];
+          }
+        }
+
+        if (this.utilities.qualificationApplicationType === 'regulated' && this.APIService.version === 'v2') {
+          this.getEOLotCriterion()
+            .then(res => {
+              this.eoLotCriterion = res;
+              this.eoLotCriterionForm = this.formUtil.createEORelatedCriterionForm(this.eoLotCriterion);
+              // console.log(this.caRelatedCriteria);
+              resolve();
+            })
+            .catch(err => {
+              console.log(err);
+              const message: string = err.error +
+                ' ' + err.message;
+              const action = 'close';
+              this.utilities.openSnackBar(message, action);
+              reject();
+            });
         }
 
 
