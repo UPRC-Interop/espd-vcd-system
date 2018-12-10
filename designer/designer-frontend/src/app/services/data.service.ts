@@ -369,6 +369,9 @@ export class DataService {
       this.selectionALLCriteria = [];
     }
     console.log(this.selectionALLCriteria);
+    if (this.utilities.qualificationApplicationType === 'regulated' && this.APIService.version === 'v2') {
+      this.caRelatedCriteria = [];
+    }
 
     /* extract caRelated criteria */
     if (this.utilities.qualificationApplicationType === 'selfcontained') {
@@ -656,6 +659,8 @@ export class DataService {
               this.utilities.projectLots = _.range(res.cadetails.procurementProjectLots).map(i => `Lot${i + 1}`);
             }
 
+
+
             // res.cadetails=this.CADetails;
             // console.log(res.fullCriterionList);
             console.log(res.cadetails);
@@ -682,6 +687,7 @@ export class DataService {
               console.log('THIS IS LOTS_TENDERED');
               console.log(this.eoLotCriterion);
             }
+
             console.log(res.fullCriterionList);
             this.exclusionACriteria = this.filterExclusionCriteria(this.EXCLUSION_CONVICTION_REGEXP, res.fullCriterionList);
             this.exclusionBCriteria = this.filterExclusionCriteria(this.EXCLUSION_CONTRIBUTION_REGEXP, res.fullCriterionList);
