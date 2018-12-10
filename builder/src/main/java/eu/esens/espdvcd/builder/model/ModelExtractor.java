@@ -603,9 +603,7 @@ public interface ModelExtractor {
                     String jl = lr.getJurisdictionLevel().stream()
                             .findFirst().orElseThrow(NoSuchElementException::new)
                             .getValue();
-                    return jl.equals(LegislationTypeEnum.EU_DIRECTIVE.name()) |
-                            jl.equals(LegislationTypeEnum.EU_DECISION.name()) |
-                            jl.equals(LegislationTypeEnum.EU_REGULATION.name());
+                    return jl.equalsIgnoreCase("EU");
                 })
                 .findFirst().map(lr -> extractLegalReference(lr))
                 .orElse(null);

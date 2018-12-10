@@ -14,7 +14,7 @@
 /// limitations under the License.
 ///
 
-import {Component, OnChanges, OnInit, QueryList, SimpleChanges, ViewChildren, ViewChild} from '@angular/core';
+import {Component, OnChanges, OnInit, QueryList, SimpleChanges, ViewChild, ViewChildren} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {UtilitiesService} from '../services/utilities.service';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
@@ -71,7 +71,6 @@ export class ProcedureComponent implements OnInit, OnChanges, BaseStep {
 
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(this.dataService.receivedNoticeNumber);
   }
 
 

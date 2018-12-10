@@ -19,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import eu.esens.espdvcd.model.retriever.ECertisLegislationReference;
 
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 /**
  * Created by Ulf Lotzmann on 05/03/2016.
@@ -149,5 +150,17 @@ public class LegislationReference {
 
     public void setURI(String URI) {
         this.URI = URI;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LegislationReference that = (LegislationReference) o;
+        return Objects.equals(title, that.title) &&
+                Objects.equals(description, that.description) &&
+                Objects.equals(jurisdictionLevelCode, that.jurisdictionLevelCode) &&
+                Objects.equals(article, that.article) &&
+                Objects.equals(URI, that.URI);
     }
 }

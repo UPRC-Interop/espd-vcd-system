@@ -17,7 +17,6 @@
 import {Component, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {FormArray, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
-import {FormUtilService} from '../services/form-util.service';
 import {UtilitiesService} from '../services/utilities.service';
 import {COMMA, ENTER} from '../../../node_modules/@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material';
@@ -146,7 +145,7 @@ export class ProcedureEoComponent implements OnInit, BaseStep {
   onProcedureEOSubmit(form: NgForm, eoForm: FormGroup) {
 
     this.dataService.CADetails.cacountry = this.dataService.selectedCountry;
-    this.dataService.CADetails.receivedNoticeNumber = form.value.receivedNoticeNumber;
+    // this.dataService.CADetails.receivedNoticeNumber = form.value.receivedNoticeNumber;
     this.dataService.PostalAddress.countryCode = this.dataService.selectedCountry;
     this.dataService.CADetails.postalAddress = this.dataService.PostalAddress;
     this.dataService.CADetails.contactingDetails = this.dataService.ContactingDetails;
