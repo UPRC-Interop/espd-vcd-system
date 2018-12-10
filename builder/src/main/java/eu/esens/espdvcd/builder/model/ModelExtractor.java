@@ -34,11 +34,11 @@ import eu.espd.schema.v1.commonaggregatecomponents_2.DocumentReferenceType;
 import eu.espd.schema.v1.commonaggregatecomponents_2.ExternalReferenceType;
 import eu.espd.schema.v1.commonaggregatecomponents_2.ServiceProviderPartyType;
 import eu.espd.schema.v1.commonbasiccomponents_2.ContractFolderIDType;
-import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionPropertyGroupType;
-import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionPropertyType;
-import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionType;
-import eu.espd.schema.v2.pre_award.commonbasic.ConfidentialityLevelCodeType;
-import eu.espd.schema.v2.pre_award.commonbasic.ValidatedCriterionPropertyIDType;
+import eu.espd.schema.v2.v210.commonaggregate.TenderingCriterionPropertyGroupType;
+import eu.espd.schema.v2.v210.commonaggregate.TenderingCriterionPropertyType;
+import eu.espd.schema.v2.v210.commonaggregate.TenderingCriterionType;
+import eu.espd.schema.v2.v210.commonbasic.ConfidentialityLevelCodeType;
+import eu.espd.schema.v2.v210.commonbasic.ValidatedCriterionPropertyIDType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -183,11 +183,11 @@ public interface ModelExtractor {
         return cd;
     }
 
-    default CADetails extractCADetails(List<eu.espd.schema.v2.pre_award.commonaggregate.ContractingPartyType> caParty,
-                                       eu.espd.schema.v2.pre_award.commonbasic.ContractFolderIDType contractFolderId,
-                                       eu.espd.schema.v2.pre_award.commonbasic.ProcedureCodeType procedureCodeType,
-                                       eu.espd.schema.v2.pre_award.commonaggregate.ProcurementProjectType procurementProjectType,
-                                       List<eu.espd.schema.v2.pre_award.commonaggregate.DocumentReferenceType> additionalDocumentReferenceList) {
+    default CADetails extractCADetails(List<eu.espd.schema.v2.v210.commonaggregate.ContractingPartyType> caParty,
+                                       eu.espd.schema.v2.v210.commonbasic.ContractFolderIDType contractFolderId,
+                                       eu.espd.schema.v2.v210.commonbasic.ProcedureCodeType procedureCodeType,
+                                       eu.espd.schema.v2.v210.commonaggregate.ProcurementProjectType procurementProjectType,
+                                       List<eu.espd.schema.v2.v210.commonaggregate.DocumentReferenceType> additionalDocumentReferenceList) {
 
         CADetails cd = new CADetails();
 
@@ -304,7 +304,7 @@ public interface ModelExtractor {
         if (!additionalDocumentReferenceList.isEmpty()) {
 
             // Find an entry with TED_CN Value
-            Optional<eu.espd.schema.v2.pre_award.commonaggregate.DocumentReferenceType> optRef = additionalDocumentReferenceList.stream()
+            Optional<eu.espd.schema.v2.v210.commonaggregate.DocumentReferenceType> optRef = additionalDocumentReferenceList.stream()
                     .filter(r -> r.getDocumentTypeCode() != null && r.getDocumentTypeCode().getValue().equals("TED_CN"))
                     .findFirst();
 
@@ -316,7 +316,7 @@ public interface ModelExtractor {
 
                 if (ref.getAttachment() != null && ref.getAttachment().getExternalReference() != null) {
 
-                    eu.espd.schema.v2.pre_award.commonaggregate.ExternalReferenceType ert = ref.getAttachment().getExternalReference();
+                    eu.espd.schema.v2.v210.commonaggregate.ExternalReferenceType ert = ref.getAttachment().getExternalReference();
 
                     if (ert.getFileName() != null) {
                         cd.setProcurementProcedureTitle(ert.getFileName().getValue());
@@ -345,32 +345,6 @@ public interface ModelExtractor {
     }
 
     default ServiceProviderDetails extractServiceProviderDetails(ServiceProviderPartyType sppt) {
-        // modification UL 2018-01-12: discard old service provider information, always use information of the current system
-
-        /*ServiceProviderDetails spd = new ServiceProviderDetails();
-
-        if (sppt != null && sppt.getParty() != null) {
-            if (!sppt.getParty().getPartyName().isEmpty()
-                    && sppt.getParty().getPartyName().get(0).getName() != null) {
-                spd.setName(sppt.getParty().getPartyName().get(0).getName().getValue());
-            }
-
-            if (sppt.getParty().getWebsiteURI() != null) {
-                spd.setWebsiteURI(sppt.getParty().getWebsiteURI().getValue());
-            }
-
-            if (sppt.getParty().getEndpointID() != null) {
-                spd.setEndpointID(sppt.getParty().getEndpointID().getValue());
-            }
-
-            if (!sppt.getParty().getPartyIdentification().isEmpty()
-                    && sppt.getParty().getPartyIdentification().get(0).getID() != null) {
-                spd.setId(sppt.getParty().getPartyIdentification().get(0).getID().getValue());
-            }
-        }
-
-        return spd;
-        */
 
         try {
             // return the default service provider details
@@ -381,12 +355,10 @@ public interface ModelExtractor {
         } catch (BuilderException e) {
             return null;
         }
-
-
     }
 
     default ServiceProviderDetails extractServiceProviderDetails
-            (List<eu.espd.schema.v2.pre_award.commonaggregate.ContractingPartyType> sppt) {
+            (List<eu.espd.schema.v2.v210.commonaggregate.ContractingPartyType> sppt) {
         try {
             return BuilderFactory.EDM_V2
                     .createRegulatedModelBuilder()
@@ -574,7 +546,7 @@ public interface ModelExtractor {
     }
 
     default LegislationReference extractDefaultLegalReferenceV2
-            (List<eu.espd.schema.v2.pre_award.commonaggregate.LegislationType> lrList) {
+            (List<eu.espd.schema.v2.v210.commonaggregate.LegislationType> lrList) {
 
         //First check if there is an EU_* jurisdiction
         LegislationReference lr;
@@ -597,7 +569,7 @@ public interface ModelExtractor {
     }
 
     default LegislationReference extractEULegalReferenceV2
-            (List<eu.espd.schema.v2.pre_award.commonaggregate.LegislationType> lrList) {
+            (List<eu.espd.schema.v2.v210.commonaggregate.LegislationType> lrList) {
         return lrList.stream()
                 .filter(lr -> {
                     String jl = lr.getJurisdictionLevel().stream()
@@ -619,7 +591,7 @@ public interface ModelExtractor {
     }
 
     default LegislationReference extractNationalLegalReferenceV2
-            (List<eu.espd.schema.v2.pre_award.commonaggregate.LegislationType> lrList) {
+            (List<eu.espd.schema.v2.v210.commonaggregate.LegislationType> lrList) {
         return lrList.stream()
                 .filter(lr -> {
                     String jl = lr.getJurisdictionLevel().stream()
@@ -639,7 +611,7 @@ public interface ModelExtractor {
                 .orElse(null);
     }
 
-    default LegislationReference extractLegalReference(eu.espd.schema.v2.pre_award.commonaggregate.LegislationType lt) {
+    default LegislationReference extractLegalReference(eu.espd.schema.v2.v210.commonaggregate.LegislationType lt) {
         LegislationReference lr = new LegislationReference(
                 lt.getTitle().get(0).getValue(),
                 lt.getDescription().get(0).getValue(),

@@ -20,7 +20,7 @@ import eu.esens.espdvcd.designer.service.*;
 import eu.esens.espdvcd.designer.util.Config;
 import eu.esens.espdvcd.designer.util.Errors;
 import eu.esens.espdvcd.designer.util.JsonUtil;
-import eu.esens.espdvcd.schema.EDMVersion;
+import eu.esens.espdvcd.schema.enums.EDMVersion;
 import spark.Service;
 
 import java.util.logging.Level;

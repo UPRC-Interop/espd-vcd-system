@@ -31,7 +31,7 @@ import eu.esens.espdvcd.model.ESPDRequestImpl;
 import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.model.ESPDResponseImpl;
 import eu.esens.espdvcd.model.requirement.Requirement;
-import eu.esens.espdvcd.schema.EDMVersion;
+import eu.esens.espdvcd.schema.enums.EDMVersion;
 import spark.Service;
 
 import java.io.File;

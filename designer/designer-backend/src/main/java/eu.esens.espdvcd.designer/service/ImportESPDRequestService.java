@@ -23,7 +23,7 @@ import eu.esens.espdvcd.designer.exception.ValidationException;
 import eu.esens.espdvcd.designer.util.CriteriaUtil;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
-import eu.esens.espdvcd.schema.EDMVersion;
+import eu.esens.espdvcd.schema.enums.EDMVersion;
 import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBException;

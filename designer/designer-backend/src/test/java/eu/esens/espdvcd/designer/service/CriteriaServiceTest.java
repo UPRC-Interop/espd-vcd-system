@@ -29,7 +29,7 @@ import eu.esens.espdvcd.model.requirement.response.*;
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
 import eu.esens.espdvcd.retriever.criteria.RegulatedCriteriaExtractorBuilder;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
-import eu.esens.espdvcd.schema.EDMVersion;
+import eu.esens.espdvcd.schema.enums.EDMVersion;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;

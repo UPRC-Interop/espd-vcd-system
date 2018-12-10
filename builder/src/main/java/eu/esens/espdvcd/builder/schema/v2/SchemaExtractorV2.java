@@ -20,10 +20,9 @@ import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.response.*;
-import eu.espd.schema.v2.pre_award.commonaggregate.*;
-import eu.espd.schema.v2.pre_award.commonbasic.*;
-import eu.espd.schema.v2.unqualifieddatatypes_2.CodeType;
-import org.bouncycastle.cert.ocsp.Req;
+import eu.espd.schema.v2.v210.commonaggregate.*;
+import eu.espd.schema.v2.v210.commonbasic.*;
+import eu.espd.schema.v2.v210.unqualifieddatatypes_2.CodeType;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -663,11 +662,11 @@ public interface SchemaExtractorV2 {
         switch (type) {
 
             case REGULATED:
-                peIdType.setValue(ProfileExecutionIDEnum.ESPD_EDM_V2_1_0_REGULATED.getValue());
+                peIdType.setValue(ProfileExecutionIDEnum.ESPD_EDM_V210_REGULATED.getValue());
                 break;
 
             case SELFCONTAINED:
-                peIdType.setValue(ProfileExecutionIDEnum.ESPD_EDM_V2_1_0_SELFCONTAINED.getValue());
+                peIdType.setValue(ProfileExecutionIDEnum.ESPD_EDM_V210_SELFCONTAINED.getValue());
                 break;
 
         }

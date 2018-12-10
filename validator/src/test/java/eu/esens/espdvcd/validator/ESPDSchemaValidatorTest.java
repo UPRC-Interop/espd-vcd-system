@@ -1,12 +1,12 @@
 /**
  * Copyright 2016-2018 University of Piraeus Research Center
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,7 +15,7 @@
  */
 package eu.esens.espdvcd.validator;
 
-import eu.esens.espdvcd.schema.EDMVersion;
+import eu.esens.espdvcd.schema.enums.EDMSubVersion;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,12 +30,11 @@ public class ESPDSchemaValidatorTest {
     private File validRegulatedRequestV1;
     private File invalidRegulatedRequestV1;
     private File validRegulatedResponseV1;
-    // private File invalidRegulatedResponseV1;
 
-    private File invalidRegulatedResponseV2_46;
+    private File validSelfContainedRequestV210;
 
     @Before
-    public void setUp() throws Exception{
+    public void setUp() throws Exception {
         validRegulatedRequestV1 = new File(getClass().getClassLoader().getResource("ESPDRequest_DA_Test.xml").toURI());
         Assert.assertNotNull(validRegulatedRequestV1);
 
@@ -45,24 +44,26 @@ public class ESPDSchemaValidatorTest {
         validRegulatedResponseV1 = new File(getClass().getClassLoader().getResource("ESPDResponse_DA_Test.xml").toURI());
         Assert.assertNotNull(validRegulatedResponseV1);
 
-        invalidRegulatedResponseV2_46 = new File(getClass().getClassLoader().getResource("espd-response-v2-46.xml").toURI());
-        Assert.assertNotNull(invalidRegulatedResponseV2_46);
+        validSelfContainedRequestV210 = new File(getClass().getClassLoader()
+                .getResource("xml/v2/self-contained/2.1.0/UPRC-ESPD-Self-Contained-Request-2.1.0-DA-Artefact-5-12-2018.xml")
+                .toURI());
+        Assert.assertNotNull(validSelfContainedRequestV210);
     }
 
     @Test
     public void validateESPDRequest() throws Exception {
         // create ESPD request validator object for valid ESPD request and retrieve test results
-        ArtefactValidator validator = ValidatorFactory.createESPDRequestSchemaValidator(validRegulatedRequestV1, EDMVersion.V1);
+        ArtefactValidator validator = ValidatorFactory.createESPDRequestSchemaValidator(validRegulatedRequestV1, EDMSubVersion.V102);
 
         System.out.println("validateESPDRequest events:");
-        for (ValidationResult event: validator.getValidationMessages()) {
+        for (ValidationResult event : validator.getValidationMessages()) {
             System.out.println(event);
         }
 
         Assert.assertTrue(validator.isValid());
 
         // create ESPD request validator object for invalid ESPD request and retrieve test results
-        validator = ValidatorFactory.createESPDRequestSchemaValidator(invalidRegulatedRequestV1, EDMVersion.V1);
+        validator = ValidatorFactory.createESPDRequestSchemaValidator(invalidRegulatedRequestV1, EDMSubVersion.V102);
         Assert.assertFalse(validator.isValid());
 
         // as there are two errors introduced in the invalid espd request example xml,
@@ -75,10 +76,10 @@ public class ESPDSchemaValidatorTest {
     @Test
     public void checkESPDRequestValidationForESPDResponse() throws Exception {
         // create ESPD request validator object for valid ESPD response and retrieve test results
-        ArtefactValidator validator = ValidatorFactory.createESPDRequestSchemaValidator(validRegulatedResponseV1, EDMVersion.V1);
+        ArtefactValidator validator = ValidatorFactory.createESPDRequestSchemaValidator(validRegulatedResponseV1, EDMSubVersion.V102);
 
         System.out.println("checkESPDRequestValidationForESPDResponse events:");
-        for (ValidationResult event: validator.getValidationMessages()) {
+        for (ValidationResult event : validator.getValidationMessages()) {
             System.out.println(event);
         }
 
@@ -90,10 +91,10 @@ public class ESPDSchemaValidatorTest {
     @Test
     public void validateESPDResponse() throws Exception {
         // create ESPD response validator object for valid ESPD response and retrieve test results
-        ArtefactValidator validator = ValidatorFactory.createESPDResponseSchemaValidator(validRegulatedResponseV1, EDMVersion.V1);
+        ArtefactValidator validator = ValidatorFactory.createESPDResponseSchemaValidator(validRegulatedResponseV1, EDMSubVersion.V102);
 
         System.out.println("validateESPDResponse events:");
-        for (ValidationResult event: validator.getValidationMessages()) {
+        for (ValidationResult event : validator.getValidationMessages()) {
             System.out.println(event);
         }
 
@@ -103,10 +104,10 @@ public class ESPDSchemaValidatorTest {
     @Test
     public void checkESPDResponseValidationForESPDRequest() throws Exception {
         // create ESPD response validator object for valid ESPD request and retrieve test results
-        ArtefactValidator validator = ValidatorFactory.createESPDResponseSchemaValidator(validRegulatedRequestV1, EDMVersion.V1);
+        ArtefactValidator validator = ValidatorFactory.createESPDResponseSchemaValidator(validRegulatedRequestV1, EDMSubVersion.V102);
 
         System.out.println("checkESPDResponseValidationForESPDRequest events:");
-        for (ValidationResult event: validator.getValidationMessages()) {
+        for (ValidationResult event : validator.getValidationMessages()) {
             System.out.println(event);
         }
 
@@ -117,10 +118,10 @@ public class ESPDSchemaValidatorTest {
     @Test
     public void testCreateESPDSchemaValidator() throws Exception {
 
-        ArtefactValidator validator = ValidatorFactory.createESPDSchemaValidator(invalidRegulatedResponseV2_46);
+        ArtefactValidator validator = ValidatorFactory.createESPDSchemaValidator(validSelfContainedRequestV210);
 
         System.out.println("testCreateESPDSchemaValidator events:");
-        for (ValidationResult event: validator.getValidationMessages()) {
+        for (ValidationResult event : validator.getValidationMessages()) {
             System.out.println(event);
         }
 

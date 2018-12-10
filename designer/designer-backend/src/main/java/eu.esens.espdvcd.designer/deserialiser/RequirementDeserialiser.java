@@ -23,7 +23,7 @@ import eu.esens.espdvcd.codelist.enums.RequirementTypeEnum;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.requirement.ResponseRequirement;
 import eu.esens.espdvcd.model.requirement.response.*;
-import eu.esens.espdvcd.schema.EDMVersion;
+import eu.esens.espdvcd.schema.enums.EDMVersion;
 
 import java.io.IOException;
 import java.util.logging.Logger;

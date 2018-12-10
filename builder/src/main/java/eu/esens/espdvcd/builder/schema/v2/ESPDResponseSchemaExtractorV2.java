@@ -26,9 +26,9 @@ import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.response.*;
 import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
-import eu.espd.schema.v2.pre_award.commonaggregate.*;
-import eu.espd.schema.v2.pre_award.commonbasic.*;
-import eu.espd.schema.v2.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
+import eu.espd.schema.v2.v210.commonaggregate.*;
+import eu.espd.schema.v2.v210.commonbasic.*;
+import eu.espd.schema.v2.v210.qualificationapplicationresponse.QualificationApplicationResponseType;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeConstants;

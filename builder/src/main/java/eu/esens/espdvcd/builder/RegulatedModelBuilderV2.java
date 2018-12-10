@@ -16,12 +16,11 @@
 package eu.esens.espdvcd.builder;
 
 import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
-import eu.esens.espdvcd.model.DocumentDetails;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.retriever.criteria.RegulatedCriteriaExtractorBuilder;
 import eu.esens.espdvcd.retriever.criteria.resource.CriteriaTaxonomyResource;
 import eu.esens.espdvcd.retriever.criteria.resource.RegulatedCriteriaTaxonomyResource;
-import eu.esens.espdvcd.schema.EDMVersion;
+import eu.esens.espdvcd.schema.enums.EDMVersion;
 
 import java.util.List;
 import java.util.logging.Level;

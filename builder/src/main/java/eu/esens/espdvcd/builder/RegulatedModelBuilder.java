@@ -23,12 +23,12 @@ import eu.esens.espdvcd.codelist.enums.internal.ArtefactType;
 import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
-import eu.esens.espdvcd.schema.EDMVersion;
+import eu.esens.espdvcd.schema.enums.EDMVersion;
 import eu.esens.espdvcd.schema.SchemaUtil;
 import eu.espd.schema.v1.espdrequest_1.ESPDRequestType;
 import eu.espd.schema.v1.espdresponse_1.ESPDResponseType;
-import eu.espd.schema.v2.pre_award.qualificationapplicationrequest.QualificationApplicationRequestType;
-import eu.espd.schema.v2.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
+import eu.espd.schema.v2.v210.qualificationapplicationrequest.QualificationApplicationRequestType;
+import eu.espd.schema.v2.v210.qualificationapplicationresponse.QualificationApplicationResponseType;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.transform.stream.StreamSource;

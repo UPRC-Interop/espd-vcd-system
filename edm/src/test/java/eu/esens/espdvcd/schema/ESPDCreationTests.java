@@ -18,6 +18,8 @@ package eu.esens.espdvcd.schema;
 import java.io.ByteArrayOutputStream;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.Marshaller;
+
+import eu.esens.espdvcd.schema.enums.EDMVersion;
 import eu.espd.schema.v1.commonaggregatecomponents_2.AddressType;
 import eu.espd.schema.v1.commonaggregatecomponents_2.ContractingPartyType;
 import eu.espd.schema.v1.commonaggregatecomponents_2.PartyType;

@@ -19,7 +19,7 @@ import eu.esens.espdvcd.builder.schema.SchemaFactory;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.schema.SchemaUtil;
-import eu.esens.espdvcd.schema.EDMVersion;
+import eu.esens.espdvcd.schema.enums.EDMVersion;
 import eu.espd.schema.v1.commonbasiccomponents_2.IssueDateType;
 import eu.espd.schema.v1.commonbasiccomponents_2.IssueTimeType;
 import eu.espd.schema.v1.commonbasiccomponents_2.ProfileIDType;

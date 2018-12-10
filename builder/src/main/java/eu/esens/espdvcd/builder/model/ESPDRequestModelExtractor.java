@@ -24,10 +24,10 @@ import eu.esens.espdvcd.model.ESPDRequestImpl;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.response.WeightIndicatorResponse;
-import eu.esens.espdvcd.schema.EDMVersion;
+import eu.esens.espdvcd.schema.enums.EDMVersion;
 import eu.espd.schema.v1.espdrequest_1.ESPDRequestType;
-import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionType;
-import eu.espd.schema.v2.pre_award.qualificationapplicationrequest.QualificationApplicationRequestType;
+import eu.espd.schema.v2.v210.commonaggregate.TenderingCriterionType;
+import eu.espd.schema.v2.v210.qualificationapplicationrequest.QualificationApplicationRequestType;
 
 import java.util.Map;
 import java.util.function.Function;

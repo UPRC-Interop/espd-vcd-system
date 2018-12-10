@@ -37,7 +37,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.List;
 
-import static eu.esens.espdvcd.schema.EDMVersion.V2;
+import static eu.esens.espdvcd.schema.enums.EDMVersion.V2;
 
 public class ExportESPDServiceTest {
 

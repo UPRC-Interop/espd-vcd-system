@@ -15,7 +15,7 @@
  */
 package eu.esens.espdvcd.retriever.criteria.resource;
 
-import eu.esens.espdvcd.schema.EDMVersion;
+import eu.esens.espdvcd.schema.enums.EDMVersion;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

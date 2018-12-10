@@ -25,7 +25,7 @@ import eu.esens.espdvcd.model.requirement.ResponseRequirement;
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
 import eu.esens.espdvcd.retriever.criteria.RegulatedCriteriaExtractorBuilder;
 import eu.esens.espdvcd.retriever.criteria.resource.SelectableCriterionPrinter;
-import eu.esens.espdvcd.schema.EDMVersion;
+import eu.esens.espdvcd.schema.enums.EDMVersion;
 import eu.espd.schema.v1.espdresponse_1.ESPDResponseType;
 import org.junit.Assert;
 import org.junit.Before;
