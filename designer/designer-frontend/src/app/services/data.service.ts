@@ -31,7 +31,6 @@ import {ESPDResponse} from '../model/ESPDResponse.model';
 import * as moment from 'moment';
 import {PostalAddress} from '../model/postalAddress.model';
 import {ContactingDetails} from '../model/contactingDetails.model';
-import {MatSnackBar} from '@angular/material';
 import {FormUtilService} from './form-util.service';
 import {UtilitiesService} from './utilities.service';
 import {TranslateService} from '@ngx-translate/core';
@@ -40,7 +39,6 @@ import {ExportType} from '../export/export-type.enum';
 import {CaRelatedCriterion} from '../model/caRelatedCriterion.model';
 import {DocumentDetails} from '../model/documentDetails.model';
 import {Amount} from '../model/amount.model';
-import {CodeList} from '../model/codeList.model';
 
 import _ from 'lodash';
 
@@ -113,7 +111,6 @@ export class DataService {
   espdRequest: ESPDRequest;
   espdResponse: ESPDResponse;
   version: string;
-  receivedNoticeNumber: string;
   selectedCountry = '';
   selectedEOCountry = '';
   public EOForm: FormGroup;
@@ -658,7 +655,6 @@ export class DataService {
             // console.log(res.fullCriterionList);
             console.log(res.cadetails);
             this.CADetails = res.cadetails;
-            this.receivedNoticeNumber = res.cadetails.receivedNoticeNumber;
             this.PostalAddress = res.cadetails.postalAddress;
             this.ContactingDetails = res.cadetails.contactingDetails;
             // console.log(res.cadetails.postalAddress);
@@ -750,7 +746,6 @@ export class DataService {
             this.CADetails = res.cadetails;
             this.PostalAddress = res.cadetails.postalAddress;
             this.ContactingDetails = res.cadetails.contactingDetails;
-            this.receivedNoticeNumber = res.cadetails.receivedNoticeNumber;
             this.selectedCountry = this.CADetails.cacountry;
             this.EODetails = res.eodetails;
             console.log(this.EODetails);
@@ -1054,7 +1049,6 @@ export class DataService {
         console.log(form.value);
         this.utilities.isCA = true;
         this.utilities.isEO = false;
-        this.receivedNoticeNumber = form.value.noticeNumber;
         if (form.value.CACountry !== '') {
           this.selectedCountry = form.value.CACountry;
         }
