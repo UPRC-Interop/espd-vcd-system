@@ -38,7 +38,7 @@ public class ArtefactUtilsTest {
     private InputStream espdResponseRegulatedV1_0_2;
     private InputStream espdResponseRegulatedV2_0_2;
 
-    private InputStream selfContainedRequestUPRCDA210IS;
+//    private InputStream selfContainedRequestUPRCDA210IS;
 
     private File regulatedRequestV2;
 
@@ -65,8 +65,8 @@ public class ArtefactUtilsTest {
         selfContainedRequestV2File = new File(getClass().getClassLoader().getResource("artefacts/selfcontained/da/2.0.2/UPRC-ESPD-Self-Contained-Response-2.0.2-DA-Artefact.xml").toURI());
         Assert.assertNotNull(selfContainedRequestV2File);
 
-        selfContainedRequestUPRCDA210IS = getClass().getClassLoader().getResourceAsStream("xml/v2/self-contained/2.1.0/UPRC-ESPD-Self-Contained-Request-2.1.0-DA-Artefact-5-12-2018.xml");
-        Assert.assertNotNull(selfContainedRequestUPRCDA210IS);
+//        selfContainedRequestUPRCDA210IS = getClass().getClassLoader().getResourceAsStream("xml/v2/self-contained/2.1.0/UPRC-ESPD-Self-Contained-Request-2.1.0-DA-Artefact-5-12-2018.xml");
+//        Assert.assertNotNull(selfContainedRequestUPRCDA210IS);
     }
 
     @Test
@@ -137,7 +137,7 @@ public class ArtefactUtilsTest {
         Assert.assertEquals(EDMSubVersion.V201, findEDMSubVersion(espdRequestRegulatedV2_0_1));
         Assert.assertEquals(EDMSubVersion.V102, findEDMSubVersion(espdRequestRegulatedV1_0_2));
         Assert.assertEquals(EDMSubVersion.V202, findEDMSubVersion(espdResponseRegulatedV2_0_2));
-        Assert.assertEquals(EDMSubVersion.V210, findEDMSubVersion(selfContainedRequestUPRCDA210IS));
+//        Assert.assertEquals(EDMSubVersion.V210, findEDMSubVersion(selfContainedRequestUPRCDA210IS));
     }
 
 }
