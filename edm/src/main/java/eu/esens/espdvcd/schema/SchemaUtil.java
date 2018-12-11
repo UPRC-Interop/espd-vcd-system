@@ -17,7 +17,6 @@ package eu.esens.espdvcd.schema;
 
 import eu.esens.espdvcd.schema.enums.EDMSubVersion;
 import eu.esens.espdvcd.schema.enums.EDMVersion;
-import eu.esens.espdvcd.schema.exception.SchemaException;
 import eu.espd.schema.v1.espdrequest_1.ESPDRequestType;
 import eu.espd.schema.v1.espdresponse_1.ESPDResponseType;
 
