@@ -813,15 +813,26 @@ public interface SchemaExtractorV2 {
                     break;
 
                 case AMOUNT:
+//                    BigDecimal amount = ((AmountResponse) rq.getResponse()).getAmount();
+//                    String currency = ((AmountResponse) rq.getResponse()).getCurrency();
+//                    if ((amount != null) || (currency != null && !currency.isEmpty())) {
+//                        // Only generate a proper response if for at least one of the variables "amount" and
+//                        // "currency" a value different from the default is detected.
+//
+//                        rqType.setExpectedAmount(new ExpectedAmountType());
+//                        rqType.getExpectedAmount().setValue(amount);
+//                        rqType.getExpectedAmount().setCurrencyID(currency);
+//                    }
+
                     BigDecimal amount = ((AmountResponse) rq.getResponse()).getAmount();
                     String currency = ((AmountResponse) rq.getResponse()).getCurrency();
                     if ((amount != null) || (currency != null && !currency.isEmpty())) {
                         // Only generate a proper response if for at least one of the variables "amount" and
                         // "currency" a value different from the default is detected.
 
-                        rqType.setExpectedAmount(new ExpectedAmountType());
-                        rqType.getExpectedAmount().setValue(amount);
-                        rqType.getExpectedAmount().setCurrencyID(currency);
+                        rqType.setMinimumAmount(new MinimumAmountType());
+                        rqType.getMinimumAmount().setValue(amount);
+                        rqType.getMinimumAmount().setCurrencyID(currency);
                     }
                     break;
 
