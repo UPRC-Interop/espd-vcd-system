@@ -17,7 +17,7 @@ package eu.esens.espdvcd.retriever.criteria.resource;
 
 public class RegulatedCriteriaTaxonomyResource extends CriteriaTaxonomyResource {
 
-    private static final String RESOURCE_PATH = "/templates/v2_regulated/ESPD-CriteriaTaxonomy-REGULATED-V2.1.0.xlsx";
+    private static final String RESOURCE_PATH = "/templates/v2_regulated/ESPD-CriteriaTaxonomy-REGULATED-V2.1.0-002.xlsx";
 
     public RegulatedCriteriaTaxonomyResource() {
         super(RESOURCE_PATH);

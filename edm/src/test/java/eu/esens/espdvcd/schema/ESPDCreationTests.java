@@ -28,8 +28,8 @@ import eu.espd.schema.v1.commonbasiccomponents_2.IDType;
 import eu.espd.schema.v1.espdrequest_1.ESPDRequestType;
 import eu.espd.schema.v1.espdrequest_1.ObjectFactory;
 import eu.espd.schema.v1.espdresponse_1.ESPDResponseType;
-import eu.espd.schema.v2.pre_award.qualificationapplicationrequest.QualificationApplicationRequestType;
-import eu.espd.schema.v2.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
+import eu.espd.schema.v2.v210.qualificationapplicationrequest.QualificationApplicationRequestType;
+import eu.espd.schema.v2.v210.qualificationapplicationresponse.QualificationApplicationResponseType;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -85,18 +85,18 @@ public class ESPDCreationTests {
     @Test
     public void createESPDRequestForV2() {
 
-        eu.espd.schema.v2.pre_award.qualificationapplicationrequest.ObjectFactory of = new eu.espd.schema.v2.pre_award.qualificationapplicationrequest.ObjectFactory();
+        eu.espd.schema.v2.v210.qualificationapplicationrequest.ObjectFactory of = new eu.espd.schema.v2.v210.qualificationapplicationrequest.ObjectFactory();
         QualificationApplicationRequestType req = new QualificationApplicationRequestType();
 
         //Add an ID
-        req.setID(new eu.espd.schema.v2.pre_award.commonbasic.IDType());
+        req.setID(new eu.espd.schema.v2.v210.commonbasic.IDType());
         req.getID().setSchemeID("Lala");
         req.getID().setValue("Value");
 
-        req.getContractingParty().add(new eu.espd.schema.v2.pre_award.commonaggregate.ContractingPartyType());
-        req.getContractingParty().get(0).setParty(new eu.espd.schema.v2.pre_award.commonaggregate.PartyType());
-        req.getContractingParty().get(0).getParty().setPostalAddress(new eu.espd.schema.v2.pre_award.commonaggregate.AddressType());
-        req.getContractingParty().get(0).getParty().getPostalAddress().setBuildingName(new eu.espd.schema.v2.pre_award.commonbasic.BuildingNameType());
+        req.getContractingParty().add(new eu.espd.schema.v2.v210.commonaggregate.ContractingPartyType());
+        req.getContractingParty().get(0).setParty(new eu.espd.schema.v2.v210.commonaggregate.PartyType());
+        req.getContractingParty().get(0).getParty().setPostalAddress(new eu.espd.schema.v2.v210.commonaggregate.AddressType());
+        req.getContractingParty().get(0).getParty().getPostalAddress().setBuildingName(new eu.espd.schema.v2.v210.commonbasic.BuildingNameType());
         req.getContractingParty().get(0).getParty().getPostalAddress().getBuildingName().setValue("Address Building 123");
         //This must be validated using code list for examle
         req.getContractingParty().get(0).getParty().getPostalAddress().getBuildingName().setLanguageID("EN");
@@ -108,9 +108,9 @@ public class ESPDCreationTests {
     @Test
     public void createESPDResponseForV2() {
 
-        eu.espd.schema.v2.pre_award.qualificationapplicationresponse.ObjectFactory of = new eu.espd.schema.v2.pre_award.qualificationapplicationresponse.ObjectFactory();
+        eu.espd.schema.v2.v210.qualificationapplicationresponse.ObjectFactory of = new eu.espd.schema.v2.v210.qualificationapplicationresponse.ObjectFactory();
         QualificationApplicationResponseType res = new QualificationApplicationResponseType();
-        res.setID(new eu.espd.schema.v2.pre_award.commonbasic.IDType());
+        res.setID(new eu.espd.schema.v2.v210.commonbasic.IDType());
         res.getID().setSchemeID("Lala");
         res.getID().setValue("Value");
 

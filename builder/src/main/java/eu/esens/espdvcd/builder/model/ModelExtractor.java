@@ -722,13 +722,26 @@ public interface ModelExtractor {
                     break;
 
                 case AMOUNT:
-                    if (rqType.getExpectedAmount() != null
-                            && rqType.getExpectedAmount().getValue() != null) {
+//                    if (rqType.getExpectedAmount() != null
+//                            && rqType.getExpectedAmount().getValue() != null) {
+//
+//                        AmountResponse amountResp = new AmountResponse();
+//                        amountResp.setAmount(rqType.getExpectedAmount().getValue());
+//                        if (rqType.getExpectedAmount().getCurrencyID() != null) {
+//                            amountResp.setCurrency(rqType.getExpectedAmount().getCurrencyID());
+//                        }
+//                        applyValidatedCriterionPropertyID(rqType.getID().getValue(), amountResp);
+//                        applyConfidentialityLevelCode(ConfidentialityLevelEnum.PUBLIC.name(), amountResp);
+//                        rq.setResponse(amountResp);
+//                    }
+
+                    if (rqType.getMinimumAmount() != null
+                            && rqType.getMinimumAmount().getValue() != null) {
 
                         AmountResponse amountResp = new AmountResponse();
-                        amountResp.setAmount(rqType.getExpectedAmount().getValue());
-                        if (rqType.getExpectedAmount().getCurrencyID() != null) {
-                            amountResp.setCurrency(rqType.getExpectedAmount().getCurrencyID());
+                        amountResp.setAmount(rqType.getMinimumAmount().getValue());
+                        if (rqType.getMinimumAmount().getCurrencyID() != null) {
+                            amountResp.setCurrency(rqType.getMinimumAmount().getCurrencyID());
                         }
                         applyValidatedCriterionPropertyID(rqType.getID().getValue(), amountResp);
                         applyConfidentialityLevelCode(ConfidentialityLevelEnum.PUBLIC.name(), amountResp);
