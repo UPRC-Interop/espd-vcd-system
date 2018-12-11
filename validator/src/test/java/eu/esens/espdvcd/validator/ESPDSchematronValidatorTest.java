@@ -54,10 +54,10 @@ public class ESPDSchematronValidatorTest {
         invalidRegulatedRequestV1 = new File(getClass().getClassLoader().getResource("espd-request-invalid.xml").toURI());
         Assert.assertNotNull(invalidRegulatedRequestV1);
 
-        selfContainedRequest_UPRC_DA_V210 = new File(getClass().getClassLoader().getResource("xml/v2/self-contained/2.1.0/UPRC-ESPD-Self-Contained-Request-2.1.0-DA-Artefact-5-12-2018.xml").toURI());
+        selfContainedRequest_UPRC_DA_V210 = new File(getClass().getClassLoader().getResource("xml/v2/self-contained/2.1.0/UPRC-ESPD-Self-Contained-Request-2.1.0-DA-Artefact.xml").toURI());
         Assert.assertNotNull(selfContainedRequest_UPRC_DA_V210);
 
-        selfContainedResponse_UPRC_DA_210 = new File(getClass().getClassLoader().getResource("xml/v2/self-contained/2.1.0/UPRC-ESPD-Self-Contained-Response-2.1.0-DA-Artefact-5-12-2018.xml").toURI());
+        selfContainedResponse_UPRC_DA_210 = new File(getClass().getClassLoader().getResource("xml/v2/self-contained/2.1.0/UPRC-ESPD-Self-Contained-Response-2.1.0-DA-Artefact.xml").toURI());
         Assert.assertNotNull(selfContainedResponse_UPRC_DA_210);
     }
 
@@ -66,7 +66,7 @@ public class ESPDSchematronValidatorTest {
         ArtefactValidator v = ValidatorFactory.createESPDSchematronValidator(selfContainedRequest_UPRC_DA_V210);
         Assert.assertNotNull(v);
         printErrorsIfExist(v);
-        Assert.assertFalse(v.isValid());
+        Assert.assertTrue(v.isValid());
     }
 
     @Test
@@ -74,7 +74,7 @@ public class ESPDSchematronValidatorTest {
         ArtefactValidator v = ValidatorFactory.createESPDSchematronValidator(selfContainedResponse_UPRC_DA_210);
         Assert.assertNotNull(v);
         printErrorsIfExist(v);
-        Assert.assertFalse(v.isValid());
+        Assert.assertTrue(v.isValid());
     }
 
     private void printErrorsIfExist(ArtefactValidator v) {
