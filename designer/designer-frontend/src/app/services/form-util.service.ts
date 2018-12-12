@@ -213,7 +213,11 @@ export class FormUtilService {
               // console.log(JSON.stringify(this.dataService.evidenceList));
               req.response.uuid = null;
             } else if (req.responseDataType === 'CODE' && this.utilities.qualificationApplicationType === 'regulated') {
-              req.response.evidenceURLCode = formValues[req.uuid.valueOf()];
+              if (req.responseValuesRelatedArtefact === 'CPVCodes') {
+                req.response.evidenceURLCode = this.utilities.cpvTemplate[req.uuid];
+              } else {
+                req.response.evidenceURLCode = formValues[req.uuid.valueOf()];
+              }
               req.response.uuid = null;
             } else if (req.responseDataType === 'CODE' && this.utilities.qualificationApplicationType === 'selfcontained') {
               if (req.responseValuesRelatedArtefact === 'CPVCodes') {

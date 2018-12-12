@@ -143,6 +143,10 @@ export class ProcedureEoComponent implements OnInit, BaseStep {
 
 
   onProcedureEOSubmit(form: NgForm, eoForm: FormGroup) {
+    // console.log('NATURAL PERSON formData: ');
+    // console.log(this.EOForm.controls['naturalPersons']);
+    // console.log(this.getNaturalPersonFormData());
+
 
     this.dataService.CADetails.cacountry = this.dataService.selectedCountry;
     // this.dataService.CADetails.receivedNoticeNumber = form.value.receivedNoticeNumber;

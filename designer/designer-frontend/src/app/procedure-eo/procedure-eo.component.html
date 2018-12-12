@@ -377,7 +377,7 @@
               <mat-panel-title>
                   {{'espd.part2.info.respresent' | translate}} #{{ i + 1}}
               </mat-panel-title>
-              <div class="card-btn-container">
+              <div class="card-btn-container" *ngIf="!this.dataService.isReadOnly()">
                 <div class="add">
                   <a mat-raised-button (click)="addPerson()">+</a>
                 </div>

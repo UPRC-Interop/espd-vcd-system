@@ -26,7 +26,6 @@ import {RequirementGroup} from '../model/requirementGroup.model';
   providedIn: 'root'
 })
 export class UtilitiesService {
-  isLoading = false;
   isCA = false;
   isEO = false;
   isImportESPD = false;

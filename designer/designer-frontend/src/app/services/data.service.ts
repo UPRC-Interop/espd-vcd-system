@@ -934,10 +934,8 @@ export class DataService {
 
   isReadOnly(): boolean {
     if (this.utilities.isReviewESPD) {
-      // console.log('It is REVIEWESPD');
       return true;
     } else {
-      // console.log('It is NOT review espd');
       return false;
     }
   }
@@ -1000,6 +998,8 @@ export class DataService {
     if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
       this.EOForm.reset('');
     }
+
+
   }
 
   caDetailsFormUpdate() {
