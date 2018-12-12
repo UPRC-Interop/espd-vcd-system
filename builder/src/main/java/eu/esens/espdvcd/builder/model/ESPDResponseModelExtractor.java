@@ -663,11 +663,6 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                     eoDetails.setName(eop.getParty().getPartyName().get(0).getName().getValue());
                 }
 
-                // only criterion is used for tenderer role - changed also in BIS
-                /*if (eop.getEconomicOperatorRoleCode() != null) {
-                    eoDetails.setRole(eop.getEconomicOperatorRoleCode().getValue());
-                }*/
-
                 if (eop.getParty().getWebsiteURI() != null) {
                     eoDetails.setWebSiteURI(eop.getParty().getWebsiteURI().getValue());
                 }
@@ -733,7 +728,6 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
             if (!eop.getRepresentativeNaturalPerson().isEmpty()) {
                 eop.getRepresentativeNaturalPerson().forEach(npt -> {
                     NaturalPerson np = new NaturalPerson();
-                    /* We assume only one. We arbitrarily fetch the first one from the list */
 
                     if (npt.getNaturalPersonRoleDescription() != null) {
                         np.setRole(npt.getNaturalPersonRoleDescription().getValue());
@@ -952,9 +946,9 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                     }
 
                     /* in ESPD the only look for the person in agent party in power of attorney */
-                    if (eoPartyType.getParty().getPowerOfAttorney().get(0).getAgentParty() != null
-                            && !eoPartyType.getParty().getPowerOfAttorney().get(0).getAgentParty().getPerson().isEmpty()) {
-                        eu.espd.schema.v2.v210.commonaggregate.PersonType pt = eoPartyType.getParty().getPowerOfAttorney().get(0).getAgentParty().getPerson().get(0);
+                    if (poa.getAgentParty() != null
+                            && !poa.getAgentParty().getPerson().isEmpty()) {
+                        eu.espd.schema.v2.v210.commonaggregate.PersonType pt = poa.getAgentParty().getPerson().get(0);
 
                         if (pt.getFirstName() != null) {
                             np.setFirstName(pt.getFirstName().getValue());
