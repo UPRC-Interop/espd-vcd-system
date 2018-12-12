@@ -18,7 +18,7 @@ import {Injectable} from '@angular/core';
 import {ApicallService} from './apicall.service';
 import {ExclusionCriteria} from '../model/exclusionCriteria.model';
 import {SelectionCriteria} from '../model/selectionCriteria.model';
-import {FormGroup, NgForm} from '@angular/forms';
+import {FormArray, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 import {Cadetails} from '../model/caDetails.model';
 import {ESPDRequest} from '../model/ESPDRequest.model';
 import {FullCriterion} from '../model/fullCriterion.model';
@@ -657,7 +657,6 @@ export class DataService {
             }
 
 
-
             // res.cadetails=this.CADetails;
             // console.log(res.fullCriterionList);
             console.log(res.cadetails);
@@ -988,19 +987,44 @@ export class DataService {
     if (this.EODetails.naturalPersons !== null || this.EODetails.naturalPersons !== undefined) {
       // TODO find better way to handle null fields in naturalperson's objects
       if (this.EODetails.naturalPersons[0].firstName !== null) {
-        this.EOForm.patchValue({
-          'naturalPersons': this.EODetails.naturalPersons
-        });
+        this.updateNaturalPersons();
       }
     }
+    console.log('PATCH VALUE: ');
+    console.log(this.EODetails.naturalPersons);
+    console.log(this.EOForm.controls['naturalPersons']);
 
     /* ====================== FORM RESET in case of creating new ESPD ================================ */
     if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
       this.EOForm.reset('');
     }
-
-
   }
+
+  updateNaturalPersons() {
+    let control = <FormArray>this.EOForm.controls['naturalPersons'];
+    control.controls.splice(0);
+    this.EODetails.naturalPersons.forEach(person => {
+        control.push(new FormGroup({
+          'firstName': new FormControl(person.firstName),
+          'familyName': new FormControl(person.familyName),
+          'role': new FormControl(person.role),
+          'birthPlace': new FormControl(person.birthPlace),
+          'birthDate': new FormControl(person.birthDate),
+          'postalAddress': new FormGroup({
+            'addressLine1': new FormControl(person.postalAddress.addressLine1),
+            'postCode': new FormControl(person.postalAddress.postCode),
+            'city': new FormControl(person.postalAddress.city),
+            'countryCode': new FormControl(person.postalAddress.countryCode),
+          }),
+          'contactDetails': new FormGroup({
+            'contactPointName': new FormControl(person.contactDetails.contactPointName),
+            'emailAddress': new FormControl(person.contactDetails.emailAddress, [Validators.email]),
+            'telephoneNumber': new FormControl(person.contactDetails.telephoneNumber),
+          })
+        }));
+    });
+  }
+
 
   caDetailsFormUpdate() {
     if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
