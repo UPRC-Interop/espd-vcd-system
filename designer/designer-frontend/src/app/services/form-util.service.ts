@@ -596,11 +596,13 @@ export class FormUtilService {
 
             /* SELF-CONTAINED: responseDataType: CODE ---> CpvCodes*/
             if (r.responseDataType === 'CODE' && r.responseValuesRelatedArtefact === 'CPVCodes') {
-              if (r.response.evidenceURLCode) {
+              if (r.response.evidenceURLCode !== null && r.response.evidenceURLCode !== undefined) {
                 // console.log('RENDERING CPVS: ');
                 this.utilities.renderCpvTemplate[r.uuid] = this.utilities.stringToCpvCode(r.response.evidenceURLCode.toString());
                 // console.log(this.utilities.renderCpvTemplate[r.uuid]);
                 // console.log(this.utilities.renderCpvTemplate);
+              } else {
+                this.utilities.renderCpvTemplate[r.uuid] = [];
               }
             }
             if (r.responseDataType === 'CODE' && this.utilities.qualificationApplicationType === 'regulated') {
