@@ -31,7 +31,7 @@ import {FullCriterion} from '../model/fullCriterion.model';
 import {UUID} from 'angular2-uuid';
 import {CaRelatedCriterion} from '../model/caRelatedCriterion.model';
 import {stringify} from 'querystring';
-import {UrlValidation} from "../validation/url/url-validation";
+import {UrlValidation} from '../validation/url/url-validation';
 
 @Injectable({
   providedIn: 'root'
@@ -690,31 +690,32 @@ export class FormUtilService {
             if (r.response.evidenceSuppliedId) {
 
               // FIX: find evidence in EvidenceList object and import it
-              const evi = this.evidenceList.find((ev) => {
-                if (ev.id === r.response.evidenceSuppliedId) {
-                  // this.evidenceList[i].description = 'test';
-                  return true;
+              if (this.evidenceList !== undefined) {
+                const evi = this.evidenceList.find((ev) => {
+                  if (ev.id === r.response.evidenceSuppliedId) {
+                    // this.evidenceList[i].description = 'test';
+                    return true;
+                  }
+                });
+                /* FIX: self-contained cannot set evidenceURL of undefined issue */
+                if (evi !== undefined) {
+                  group[r.uuid + 'evidenceUrl'] = new FormControl({
+                      value: evi.evidenceURL,
+                      disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO,
+                    },
+                    [UrlValidation]);
+                  group[r.uuid + 'evidenceCode'] = new FormControl({
+                    value: evi.description,
+                    disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                  });
+                  group[r.uuid + 'evidenceIssuer'] = new FormControl({
+                    value: evi.evidenceIssuer.name,
+                    disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                  });
                 }
-              });
+              }
               // console.log(evi);
               // console.log(typeof evi);
-
-              /* FIX: self-contained cannot set evidenceURL of undefined issue */
-              if (evi !== undefined) {
-                group[r.uuid + 'evidenceUrl'] = new FormControl({
-                    value: evi.evidenceURL,
-                    disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO,
-                  },
-                  [UrlValidation]);
-                group[r.uuid + 'evidenceCode'] = new FormControl({
-                  value: evi.description,
-                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
-                });
-                group[r.uuid + 'evidenceIssuer'] = new FormControl({
-                  value: evi.evidenceIssuer.name,
-                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
-                });
-              }
 
               if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
                 group[r.uuid + 'evidenceUrl'] = new FormControl({

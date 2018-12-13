@@ -755,10 +755,12 @@ export class DataService {
             this.ContactingDetails = res.cadetails.contactingDetails;
             this.selectedCountry = this.CADetails.cacountry;
             this.EODetails = res.eodetails;
-            console.log(this.EODetails);
-            console.log(this.EODetails.naturalPersons);
+            // console.log(this.EODetails);
+            // console.log(this.EODetails.naturalPersons);
             // console.log(this.EODetails.naturalPersons['birthDate']);
-            this.selectedEOCountry = this.EODetails.postalAddress.countryCode;
+            if (res.eodetails !== undefined) {
+              this.selectedEOCountry = this.EODetails.postalAddress.countryCode;
+            }
             if (this.utilities.qualificationApplicationType === 'selfcontained') {
               this.CADetails.classificationCodes = res.cadetails.classificationCodes;
               this.CADetails.weightScoringMethodologyNote = res.cadetails.weightScoringMethodologyNote;
@@ -767,14 +769,16 @@ export class DataService {
               this.utilities.isAtoD = true;
               this.utilities.isSatisfiedALL = false;
 
-              if (res.eodetails.generalTurnover !== null || res.eodetails.generalTurnover !== undefined) {
-                this.generalTurnover = res.eodetails.generalTurnover;
-              } else if (res.eodetails.generalTurnover === null) {
-                this.generalTurnover = new Amount();
-                // this.generalTurnover.amount = 0;
-                // this.generalTurnover.currency = '';
+              if (res.eodetails !== undefined) {
+                if (res.eodetails.generalTurnover !== null || res.eodetails.generalTurnover !== undefined) {
+                  this.generalTurnover = res.eodetails.generalTurnover;
+                } else if (res.eodetails.generalTurnover === null) {
+                  this.generalTurnover = new Amount();
+                  // this.generalTurnover.amount = 0;
+                  // this.generalTurnover.currency = '';
 
-                this.EODetails.generalTurnover = this.generalTurnover;
+                  this.EODetails.generalTurnover = this.generalTurnover;
+                }
               }
             }
 
@@ -788,7 +792,9 @@ export class DataService {
 
             // Fill in EoDetails Form
 
-            this.eoDetailsFormUpdate();
+            if (res.eodetails !== undefined) {
+              this.eoDetailsFormUpdate();
+            }
             this.caDetailsFormUpdate();
             // console.log(this.EOForm.value);
 
