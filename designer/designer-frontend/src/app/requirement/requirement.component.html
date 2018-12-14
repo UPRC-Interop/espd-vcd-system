@@ -132,7 +132,10 @@
     <div *ngSwitchCase="'CODE'">
       <div *ngIf="this.APIService.version === 'v1' && req.responseValuesRelatedArtefact === null">
         <mat-form-field >
-          <input matInput [formControlName]="req.uuid" [id]="req.uuid" placeholder={{req.description}} >
+          <input matInput [formControlName]="req.uuid" [id]="req.uuid" placeholder={{req.description}} [required]="req.mandatory" >
+          <mat-error *ngIf="form.get(req.uuid).invalid">
+            <input-validation-error [formControlErrors]="form.get(req.uuid).errors"></input-validation-error>
+          </mat-error>
         </mat-form-field>
       </div>
       <div [ngSwitch]="req.responseValuesRelatedArtefact">
