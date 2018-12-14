@@ -59,6 +59,9 @@ public class Server {
 
         dropTrailingSlashes(spark);
 
+        if (Config.isEnchancedSecurityEnabled())
+            addSecurityHeaders(spark);
+
         spark.notFound((request, response) -> JsonUtil.toJson(Errors.notFoundError("Endpoint not found.")));
 
         spark.internalServerError((request, response) -> JsonUtil.toJson(Errors.standardError(
@@ -113,7 +116,7 @@ public class Server {
     }
 
 
-    // Enables CORS on requests.
+    //Enables CORS on requests.
     private static void enableCORS(Service spark) {
 
         spark.options("/*", (request, response) -> {
@@ -145,5 +148,22 @@ public class Server {
             if (path.endsWith("/"))
                 res.redirect(path.substring(0, path.length() - 1), 301);
         });
+    }
+
+    //ESPD-79 Headers
+    private static void addSecurityHeaders(Service spark) {
+        spark.before(((request, response) -> {
+            String contentSecurityPolicyHeaders = " default-src 'none'; font-src 'https://fonts.googleapis.com'; img-src 'self' " +
+                    "object-src 'none'; script-src 'self'; style-src 'self'";
+            if (Config.isFramingAllowed()){
+                response.header("Content-Security-Policy", contentSecurityPolicyHeaders);
+            } else {
+                response.header("Content-Security-Policy", contentSecurityPolicyHeaders+ " ; frame-ancestors 'none'");
+                response.header("X-Frame-Options", "DENY");
+            }
+            response.header("X-XSS-Protection", "1; mode=block");
+            response.header("X-Content-Type-Options", "nosniff");
+            response.header("Strict-Transport-Security", "max-age=63072000; includeSubDomains; preload");
+        }));
     }
 }

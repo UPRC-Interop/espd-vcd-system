@@ -137,4 +137,25 @@ public class Config {
         return Boolean.parseBoolean(prop.getProperty("espd.designer.CORS.enabled"));
     }
 
+    public static boolean isEnchancedSecurityEnabled() {
+        if (instance == null) {
+            try {
+                instance = new Config();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return Boolean.parseBoolean(prop.getProperty("espd.designer.enchancedSecurity.enabled"));
+    }
+
+    public static boolean isFramingAllowed() {
+        if (instance == null) {
+            try {
+                instance = new Config();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return Boolean.parseBoolean(prop.getProperty("espd.designer.allowFraming"));
+    }
 }
