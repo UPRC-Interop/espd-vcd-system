@@ -20,6 +20,7 @@ import eu.esens.espdvcd.designer.service.*;
 import eu.esens.espdvcd.designer.util.Config;
 import eu.esens.espdvcd.designer.util.Errors;
 import eu.esens.espdvcd.designer.util.JsonUtil;
+import eu.esens.espdvcd.designer.util.ServerUtil;
 import eu.esens.espdvcd.schema.enums.EDMVersion;
 import spark.Service;
 
@@ -46,21 +47,21 @@ public class Server {
 
         LOGGER.info("Attempting to bind to port " + portToBind);
         Service spark = Service.ignite().port(portToBind);
-        spark.staticFiles.location("/public");
-
         spark.initExceptionHandler(e -> {
             LOGGER.severe("Failed to ignite the Spark server");
             LOGGER.log(Level.SEVERE, e.getMessage(), e);
             System.exit(-1);
         });
 
-        if (Config.isCORSEnabled())
-            enableCORS(spark);
-
-        dropTrailingSlashes(spark);
+        ServerUtil.configureStaticFiles(spark);
 
         if (Config.isEnchancedSecurityEnabled())
-            addSecurityHeaders(spark);
+            ServerUtil.addSecurityHeaders(spark);
+
+        if (Config.isCORSEnabled())
+            ServerUtil.enableCORS(spark);
+
+        ServerUtil.dropTrailingSlashes(spark);
 
         spark.notFound((request, response) -> JsonUtil.toJson(Errors.notFoundError("Endpoint not found.")));
 
@@ -116,54 +117,4 @@ public class Server {
     }
 
 
-    //Enables CORS on requests.
-    private static void enableCORS(Service spark) {
-
-        spark.options("/*", (request, response) -> {
-
-            String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
-            if (accessControlRequestHeaders != null)
-                response.header("Access-Control-Allow-Headers", accessControlRequestHeaders);
-
-            String accessControlRequestMethod = request.headers("Access-Control-Request-Method");
-            if (accessControlRequestMethod != null)
-                response.header("Access-Control-Allow-Methods", accessControlRequestMethod);
-
-            return "OK";
-        });
-
-        spark.before((request, response) -> {
-            response.header("Access-Control-Allow-Origin", "*");
-            response.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-            response.header("Access-Control-Allow-Headers", "Content-Type, Content-Disposition");
-        });
-
-        LOGGER.info("CORS support is now enabled. Enjoy ;)");
-    }
-
-    //Drop trailing slashes from URLs so that you don't have to specify the routes twice
-    private static void dropTrailingSlashes(Service spark) {
-        spark.before((req, res) -> {
-            String path = req.pathInfo();
-            if (path.endsWith("/"))
-                res.redirect(path.substring(0, path.length() - 1), 301);
-        });
-    }
-
-    //ESPD-79 Headers
-    private static void addSecurityHeaders(Service spark) {
-        spark.before(((request, response) -> {
-            String contentSecurityPolicyHeaders = " default-src 'none'; font-src 'https://fonts.googleapis.com'; img-src 'self' " +
-                    "object-src 'none'; script-src 'self'; style-src 'self'";
-            if (Config.isFramingAllowed()){
-                response.header("Content-Security-Policy", contentSecurityPolicyHeaders);
-            } else {
-                response.header("Content-Security-Policy", contentSecurityPolicyHeaders+ " ; frame-ancestors 'none'");
-                response.header("X-Frame-Options", "DENY");
-            }
-            response.header("X-XSS-Protection", "1; mode=block");
-            response.header("X-Content-Type-Options", "nosniff");
-            response.header("Strict-Transport-Security", "max-age=63072000; includeSubDomains; preload");
-        }));
-    }
 }
