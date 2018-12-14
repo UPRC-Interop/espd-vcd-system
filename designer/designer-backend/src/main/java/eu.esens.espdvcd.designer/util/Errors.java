@@ -30,7 +30,7 @@ public final class Errors {
 //     * @return ErrorResponse object to be serialized in JSON
 //     */
 //    public static ErrorResponse objectError(int code, String message, Object object) {
-//        return new ErrorResponse.ErrorBuilder(code, message).withResponseObject(object).build();
+//        return new ErrorResponse.ErrorBuilder(code, message).withValidationResults(object).build();
 //    }
 
     /**
@@ -91,10 +91,10 @@ public final class Errors {
     }
 
     public static ErrorResponse validationError(List<ValidationResult> errorList) {
-        return new ErrorResponse.ErrorBuilder(406, "Validation failed on the artefact.").withResponseObject(errorList).build();
+        return new ErrorResponse.ErrorBuilder(406, "Validation failed on the artefact.").withValidationResults(errorList).build();
     }
 
     public static ErrorResponse validationError(String message, List<ValidationResult> errorList) {
-        return new ErrorResponse.ErrorBuilder(406, message).withResponseObject(errorList).build();
+        return new ErrorResponse.ErrorBuilder(406, message).withValidationResults(errorList).build();
     }
 }

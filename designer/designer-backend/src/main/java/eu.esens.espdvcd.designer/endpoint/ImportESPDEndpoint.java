@@ -22,6 +22,7 @@ import eu.esens.espdvcd.designer.util.Config;
 import eu.esens.espdvcd.designer.util.Errors;
 import eu.esens.espdvcd.designer.util.JsonUtil;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.poi.util.IOUtils;
 import spark.Service;
 
@@ -33,14 +34,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
+import java.nio.file.*;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.Objects;
+import java.util.Random;
 
 public class ImportESPDEndpoint extends Endpoint {
     private final ImportESPDService service;
@@ -153,9 +152,17 @@ public class ImportESPDEndpoint extends Endpoint {
     private void writeDumpedFile(File espdFile) throws IOException {
         if (Config.isArtefactDumpingEnabled()) {
             Files.createDirectories(Paths.get(Config.dumpIncomingArtefactsLocation() + "/xml/"));
-            File dumpedFile = new File(Config.dumpIncomingArtefactsLocation()
-                    + "/xml/" + ZonedDateTime.now().format(DateTimeFormatter.ofPattern("uuuuMMddHHmmss")) + ".xml");
-            Files.copy(espdFile.toPath(), dumpedFile.toPath());
+            File dumpedFile;
+            try {
+                dumpedFile = new File(Config.dumpIncomingArtefactsLocation()
+                        + "/xml/" + ZonedDateTime.now().format(DateTimeFormatter.ofPattern("uuuuMMdd-HHmmss")) + ".xml");
+                Files.copy(espdFile.toPath(), dumpedFile.toPath());
+            } catch (FileAlreadyExistsException e) {
+                dumpedFile = new File(Config.dumpIncomingArtefactsLocation()
+                        + "/xml/" + ZonedDateTime.now().format(DateTimeFormatter.ofPattern("uuuuMMdd-HHmmss-"))
+                        + RandomStringUtils.randomAlphabetic(3) + ".xml");
+                Files.copy(espdFile.toPath(), dumpedFile.toPath());
+            }
             LOGGER.info("Dumping imported xml artefact to " + dumpedFile.getAbsolutePath());
 
         }

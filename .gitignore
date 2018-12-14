@@ -110,3 +110,7 @@ designer/designer-backend/src/main/resources/public/
 # Ignore artefact dumps
 artefacts/*
 designer/designer-backend/artefacts/*
+
+#Ignore auto-generated properties file
+designer/designer-backend/config.properties
+config.properties

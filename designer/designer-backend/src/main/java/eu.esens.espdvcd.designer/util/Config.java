@@ -2,10 +2,7 @@ package eu.esens.espdvcd.designer.util;
 
 import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Properties;
@@ -28,9 +25,12 @@ public class Config {
                     throw new FileNotFoundException("property file '" + propFileName + "' not found in the classpath");
             }
         } else {
-            try (InputStream is = getClass().getClassLoader().getResourceAsStream(propFileName)) {
-                if (is != null)
+            try (InputStream is = getClass().getClassLoader().getResourceAsStream(propFileName);
+                 OutputStream out = new FileOutputStream("./"+propFileName)) {
+                if (is != null) {
                     prop.load(is);
+//                    prop.store(out, "Automatically generated ESPD Designer configuration file");
+                }
                 else
                     throw new FileNotFoundException("property file '" + propFileName + "' not found in the classpath");
             }

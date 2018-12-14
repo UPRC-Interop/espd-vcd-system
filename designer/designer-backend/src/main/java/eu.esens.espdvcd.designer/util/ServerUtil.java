@@ -12,6 +12,7 @@ public final class ServerUtil {
 
     /**
      * Configures static file hosting
+     * Sets the location and the security headers
      * @param spark Current Spark instance
      */
     public static void configureStaticFiles(Service spark){
@@ -43,8 +44,6 @@ public final class ServerUtil {
             response.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
             response.header("Access-Control-Allow-Headers", "Content-Type, Content-Disposition");
         });
-
-        LOGGER.info("CORS support is now enabled. Enjoy ;)");
     }
 
     /**
@@ -60,18 +59,15 @@ public final class ServerUtil {
     }
 
     /**
-     * Adds headers for all routes to improve security
+     * Adds headers to all routes
      * @param spark Current Spark instance
      */
     public static void addSecurityHeaders(Service spark) {
-        spark.before(((request, response) -> {
-            getSecurityHeaders().forEach(response::header);
-        }));
+        spark.before(((request, response) -> getSecurityHeaders().forEach(response::header)));
     }
 
     /**
      * Gets the security headers
-     * Used internally and for the static file hosting
      * @return Header Map
      */
     private static Map<String, String> getSecurityHeaders(){
@@ -82,7 +78,7 @@ public final class ServerUtil {
     }
 
     /**
-     * Lazy initialisation for the header HashMap
+     * Lazy initialization for the header HashMap
      */
     private static void initHeaderMap(){
         securityHeaders = new HashMap<>();
