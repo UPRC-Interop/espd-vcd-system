@@ -130,6 +130,11 @@
       </div>
     </div>
     <div *ngSwitchCase="'CODE'">
+      <div *ngIf="this.APIService.version === 'v1' && req.responseValuesRelatedArtefact === null">
+        <mat-form-field >
+          <input matInput [formControlName]="req.uuid" [id]="req.uuid" placeholder={{req.description}} >
+        </mat-form-field>
+      </div>
       <div [ngSwitch]="req.responseValuesRelatedArtefact">
         <mat-form-field *ngSwitchCase="'BidType'">
           <!--<label [attr.for]="req.uuid">{{req.description}}</label>-->

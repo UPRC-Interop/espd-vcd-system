@@ -835,6 +835,11 @@ export class FormUtilService {
                   disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
                 });
               }
+
+              // if (r.responseDataType === 'CODE' && this.APIService.version === 'v1') {
+              //   group[r.uuid] = new FormControl();
+              // }
+
               if (r.responseDataType === 'CODE' && r.responseValuesRelatedArtefact === 'CPVCodes') {
                 this.utilities.renderCpvTemplate[r.uuid] = [];
               }
