@@ -347,6 +347,20 @@ public class BuilderESPDTest {
 //    }
 
     @Test
+    public void testCreateESPDRequestFromESPDRequest() throws Exception {
+
+        ESPDRequest modelRequest = BuilderFactory.EDM_V2
+                .createRegulatedModelBuilder()
+                .importFrom(BuilderESPDTest.class.getResourceAsStream("/artefacts/selfcontained/da/2.1.0/ESPDRequest_DA_Test-2.1.0sc-v0.1.xml"))
+                .createESPDRequest();
+
+        XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.EDM_V2
+                .createDocumentBuilderFor(modelRequest);
+
+        System.out.println(xmlDocumentBuilderV2.getAsString());
+    }
+
+    @Test
     public void testImportSelfContainedRequest() throws Exception {
 
         ESPDRequest espdRequest = BuilderFactory.EDM_V2

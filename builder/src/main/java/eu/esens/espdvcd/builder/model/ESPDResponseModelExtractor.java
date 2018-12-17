@@ -169,8 +169,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                                 .forEach(rq -> { // loop thought all of the extracted Requirements
 
                                     if (responseTypeMap.containsKey(rq.getID())) { // try to find a response for that requirement
-                                        rq.setResponse(extractResponse(responseTypeMap.get(rq.getID()), rq.getResponseDataType(),
-                                                criterionTypeMap.get(sc.getID())));
+                                        rq.setResponse(extractResponse(responseTypeMap.get(rq.getID()), rq.getResponseDataType()));
                                     }
 
                                     // Apply Criterion Level Weighting data
@@ -321,8 +320,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
         return r;
     }
 
-    public Response extractResponse(TenderingCriterionResponseType responseType, ResponseTypeEnum theType,
-                                    TenderingCriterionType criterionType) {
+    public Response extractResponse(TenderingCriterionResponseType responseType, ResponseTypeEnum theType) {
 
         switch (theType) {
 
@@ -736,7 +734,8 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                     if (npt.getPowerOfAttorney() != null) {
 
                         /* in ESPD the only look for the person in agent party in power of attorney */
-                        if (npt.getPowerOfAttorney().getAgentParty() != null && !npt.getPowerOfAttorney().getAgentParty().getPerson().isEmpty()) {
+                        if (npt.getPowerOfAttorney().getAgentParty() != null
+                                && !npt.getPowerOfAttorney().getAgentParty().getPerson().isEmpty()) {
                             PersonType pt = npt.getPowerOfAttorney().getAgentParty().getPerson().get(0);
 
                             if (pt.getFirstName() != null) {

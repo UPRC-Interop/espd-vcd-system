@@ -49,7 +49,9 @@ public class RegulatedModelBuilderV2 extends RegulatedModelBuilder {
             taxonomyResource = new RegulatedCriteriaTaxonomyResource();
         }
 
-        LOGGER.log(Level.INFO, "Applying regulated v2 taxonomy cardinalities and REQUIREMENT_GROUP Types to the imported artefact...");
+        LOGGER.log(Level.INFO, "Applying regulated v2 taxonomy cardinalities"
+                + ", REQUIREMENT_GROUP Types and Codelists data"
+                + " to the imported artefact...");
         criterionList.forEach(sc -> taxonomyResource.applyTaxonomyData(sc));
     }
 
