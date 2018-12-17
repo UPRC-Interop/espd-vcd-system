@@ -193,7 +193,7 @@
               <mat-form-field>
                 <mat-select placeholder="Weighting Type"
                             [(ngModel)]="dataService.CADetails.weightingType"
-                            [ngModelOptions]="{standalone: true}" name="weightingType">
+                            [ngModelOptions]="{standalone: true}" name="weightingType" [disabled]="this.dataService.isReadOnly()">
                   <mat-option *ngFor="let type of codelist.weightingType" [value]="type.code">{{type.code}}</mat-option>
                 </mat-select>
               </mat-form-field>

@@ -176,7 +176,7 @@
       <div *ngIf="utilities.qualificationApplicationType === 'selfcontained'">
         <mat-form-field>
           <mat-select placeholder="Type of Procedure" name="typeOfProcedure"
-                      [(ngModel)]="dataService.CADetails.procurementProcedureType">
+                      [(ngModel)]="dataService.CADetails.procurementProcedureType" [disabled]="this.dataService.isReadOnly()">
             <mat-option>None</mat-option>
             <mat-option *ngFor="let proc of codelist.procedureTypes" [value]="proc.code">{{proc.name}}</mat-option>
           </mat-select>
@@ -184,13 +184,13 @@
         <!-- SELF-CONTAINED: Bid Type - Object of Contracts -->
         <mat-form-field>
           <mat-select placeholder="Objects of Contracts: " name="projectType"
-                      [(ngModel)]="dataService.CADetails.projectType">
+                      [(ngModel)]="dataService.CADetails.projectType" [disabled]="this.dataService.isReadOnly()">
             <mat-option>None</mat-option>
             <mat-option *ngFor="let project of codelist.projectTypes" [value]="project.code">{{project.name}}</mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field class="cpv-chip-list">
-          <mat-chip-list #chipList>
+          <mat-chip-list #chipList [disabled]="disabled">
             <mat-chip color='primary' selected=true *ngFor="let cpv of dataService.CADetails.classificationCodes" [selectable]="selectable"
                       [removable]="removable" (removed)="remove(cpv)">
               {{cpv}}

@@ -37,6 +37,7 @@ export class ProcedureComponent implements OnInit, OnChanges, BaseStep {
   selectable = true;
   removable = true;
   addOnBlur = true;
+  disabled = false;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   @ViewChildren('form') forms: QueryList<NgForm>;
   @ViewChild('form') form: NgForm;
@@ -51,6 +52,12 @@ export class ProcedureComponent implements OnInit, OnChanges, BaseStep {
 
     if (this.dataService.CADetails) {
       this.dataService.CADetails.classificationCodes = [];
+    }
+
+    /* Make Chips non editable when user is EO and is requirement, or when the artefact is being reviewed */
+    if (this.dataService.isReadOnly()) {
+      this.disabled = true;
+      this.removable = false;
     }
 
     this.form.form.valueChanges.subscribe(x => {

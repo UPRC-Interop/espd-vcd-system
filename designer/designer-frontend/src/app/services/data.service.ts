@@ -976,13 +976,14 @@ export class DataService {
         this.updateNaturalPersons();
       }
     }
-    console.log('PATCH VALUE: ');
-    console.log(this.EODetails.naturalPersons);
-    console.log(this.EOForm.controls['naturalPersons']);
 
     /* ====================== FORM RESET in case of creating new ESPD ================================ */
     if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
       this.EOForm.reset('');
+    }
+
+    if (this.isReadOnly()) {
+      this.EOForm.controls['naturalPersons'].disable();
     }
   }
 

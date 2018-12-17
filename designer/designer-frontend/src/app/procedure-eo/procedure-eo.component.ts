@@ -43,6 +43,7 @@ export class ProcedureEoComponent implements OnInit, BaseStep {
   selectable = true;
   removable = true;
   addOnBlur = true;
+  disabled = false;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
 
@@ -86,6 +87,12 @@ export class ProcedureEoComponent implements OnInit, BaseStep {
     // make EODetails and Natural Person forms non editable if user selects review ESPD
     if (this.dataService.isReadOnly()) {
       this.EOForm.disable();
+    }
+
+    /* Make Chips non editable when user is EO and is requirement, or when the artefact is being reviewed */
+    if (this.dataService.isReadOnly()) {
+      this.disabled = true;
+      this.removable = false;
     }
 
     /* OTHER_EO_LOT TENDERED CRITERION lot generation */
