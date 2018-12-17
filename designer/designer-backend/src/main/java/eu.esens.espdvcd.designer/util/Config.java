@@ -25,8 +25,8 @@ public class Config {
                     throw new FileNotFoundException("property file '" + propFileName + "' not found in the classpath");
             }
         } else {
-            try (InputStream is = getClass().getClassLoader().getResourceAsStream(propFileName);
-                 OutputStream out = new FileOutputStream("./"+propFileName)) {
+            try (InputStream is = getClass().getClassLoader().getResourceAsStream(propFileName)) {
+//                 ;OutputStream out = new FileOutputStream("./"+propFileName)) {
                 if (is != null) {
                     prop.load(is);
 //                    prop.store(out, "Automatically generated ESPD Designer configuration file");
