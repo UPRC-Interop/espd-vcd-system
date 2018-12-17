@@ -49,49 +49,34 @@ public class ESPDArtefactResourceTest {
 
     @Test
     public void testGetFullListByTypeCodeV1() {
-//        Assert.assertTrue(r1.getCriterionList().stream()
-//                .map(sc -> sc.getTypeCode())
-//                .collect(Collectors.toList())
-//                .containsAll(createCriteriaTypeCodeListV1()));
-//
-//        Assert.assertTrue(createCriteriaTypeCodeListV1()
-//                .containsAll(r1.getCriterionList().stream()
-//                        .map(sc -> sc.getTypeCode())
-//                        .collect(Collectors.toList())));
-
-//        Assert.assertEquals(r1.getCriterionList().stream()
-//                .map(sc -> sc.getTypeCode())
-//                .collect(Collectors.toSet()), createCriteriaTypeCodeSetV1());
-
-//        Assert.assertTrue(r1.getCriterionList().stream()
-//                .map(sc -> sc.getTypeCode())
-//                .collect(Collectors.toSet()).equals(createCriteriaTypeCodeSetV1()));
 
         Set<String> taxonomyTypeCodeSet = createCriteriaTypeCodeSetV1();
         Set<String> resourceTypeCodeSet = r1.getCriterionList().stream()
                 .map(sc -> sc.getTypeCode())
                 .collect(Collectors.toSet());
 
-        System.out.println("TypeCodes that exist in Resource List and does not exist in Taxonomy List");
+        boolean isSame = taxonomyTypeCodeSet.containsAll(resourceTypeCodeSet)
+                && resourceTypeCodeSet.containsAll(taxonomyTypeCodeSet);
 
-        resourceTypeCodeSet.forEach(typeCode -> {
+        if (!isSame) {
+            System.out.println("TypeCodes that exist in Resource List and does not exist in Taxonomy List");
+            printDifferences(resourceTypeCodeSet, taxonomyTypeCodeSet);
+            System.out.println("TypeCodes that exist in Taxonomy List and does not exist in Resource List");
+            printDifferences(taxonomyTypeCodeSet, resourceTypeCodeSet);
+        }
 
-            if (!taxonomyTypeCodeSet.contains(typeCode)) {
+        Assert.assertTrue(isSame);
+    }
+
+    private void printDifferences(Set<String> set1, Set<String> set2) {
+
+        set1.forEach(typeCode -> {
+
+            if (!set2.contains(typeCode)) {
                 System.out.println(typeCode);
             }
 
         });
-
-        System.out.println("TypeCodes that exist in Taxonomy List and does not exist in Resource List");
-
-        taxonomyTypeCodeSet.forEach(typeCode -> {
-
-            if (!resourceTypeCodeSet.contains(typeCode)) {
-                System.out.println(typeCode);
-            }
-
-        });
-
     }
 
     private Set<String> createCriteriaTypeCodeSetV1() {

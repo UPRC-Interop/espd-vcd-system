@@ -34,14 +34,18 @@ public class ArtefactUtils {
     private static final Logger LOGGER = Logger.getLogger(ArtefactUtils.class.getName());
 
     public static String clearCRLF(String stringToClear) {
-        return stringToClear
+        return stringToClear != null
+                ? stringToClear
                 .replace("\n", "")
-                .replace("\r", "");
+                .replace("\r", "")
+                : stringToClear;
     }
 
     public static String clearAllWhitespaces(String stringToClear) {
-        return stringToClear
-                .replaceAll("\\s+", "");
+        return stringToClear != null
+                ? stringToClear
+                .replaceAll("\\s+", "")
+                : stringToClear;
     }
 
     public static InputStream getBufferedInputStream(InputStream xmlESPD) {

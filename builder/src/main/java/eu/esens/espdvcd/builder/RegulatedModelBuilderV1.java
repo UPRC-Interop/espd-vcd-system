@@ -18,8 +18,8 @@ package eu.esens.espdvcd.builder;
 import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.retriever.criteria.RegulatedCriteriaExtractorBuilder;
-import eu.esens.espdvcd.retriever.criteria.resource.CriteriaTaxonomyResource;
-import eu.esens.espdvcd.retriever.criteria.resource.RegulatedCriteriaTaxonomyResource;
+//import eu.esens.espdvcd.retriever.criteria.resource.CriteriaTaxonomyResource;
+//import eu.esens.espdvcd.retriever.criteria.resource.RegulatedCriteriaTaxonomyResource;
 import eu.esens.espdvcd.schema.enums.EDMVersion;
 
 import java.util.List;
@@ -35,7 +35,7 @@ public class RegulatedModelBuilderV1 extends RegulatedModelBuilder {
      * taxonomy v2 regulated will be used in order
      * to add cardinalities to v1 Criteria.
      */
-    private CriteriaTaxonomyResource taxonomyResource;
+//    private CriteriaTaxonomyResource taxonomyResource;
 
     RegulatedModelBuilderV1() {
         super(EDMVersion.V1, QualificationApplicationTypeEnum.REGULATED);
@@ -50,16 +50,18 @@ public class RegulatedModelBuilderV1 extends RegulatedModelBuilder {
     @Override
     protected void applyTaxonomyData(List<SelectableCriterion> criterionList) {
 
-        if (taxonomyResource == null) {
-            taxonomyResource = new RegulatedCriteriaTaxonomyResource();
-        }
+        LOGGER.log(Level.WARNING, "V1 Taxonomy currently does not support cardinalities for Requirements/RequirementGroups");
 
-        LOGGER.log(Level.WARNING, "V1 Taxonomy currently does not support cardinalities for"
-                + " Requirements/RequirementGroups and Codelists data."
-                + " It is also not currently readable from the Retriever."
-                + " Nevertheless, regulated v2 taxonomy will be used instead...");
-
-        criterionList.forEach(sc -> taxonomyResource.applyTaxonomyData(sc));
+//        if (taxonomyResource == null) {
+//            taxonomyResource = new RegulatedCriteriaTaxonomyResource();
+//        }
+//
+//        LOGGER.log(Level.WARNING, "V1 Taxonomy currently does not support cardinalities for"
+//                + " Requirements/RequirementGroups and Codelists data."
+//                + " It is also not currently readable from the Retriever."
+//                + " Nevertheless, regulated v2 taxonomy will be used instead...");
+//
+//        criterionList.forEach(sc -> taxonomyResource.applyTaxonomyData(sc));
     }
 
 }
