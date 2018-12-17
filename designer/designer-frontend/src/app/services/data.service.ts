@@ -41,32 +41,13 @@ import {DocumentDetails} from '../model/documentDetails.model';
 import {Amount} from '../model/amount.model';
 
 import _ from 'lodash';
+import {Filter} from '../filter/filter.enum';
 
 @Injectable()
 export class DataService {
 
   /* ================================= Criterion Filtering Regex ===============================*/
-  EXCLUSION_REGEXP: RegExp = /^CRITERION.EXCLUSION.+/;
-  EXCLUSION_CONVICTION_REGEXP: RegExp = /^CRITERION.EXCLUSION.CONVICTIONS.+/;
-  EXCLUSION_CONTRIBUTION_REGEXP: RegExp = /^CRITERION.EXCLUSION.CONTRIBUTIONS.+/;
-  EXCLUSION_SOCIAL_BUSINESS_MISCONDUCT_CONFLICT_REGEXP: RegExp = /(^CRITERION.EXCLUSION.SOCIAL.+)|(^CRITERION.EXCLUSION.BUSINESS.+)|(^CRITERION.EXCLUSION.MISCONDUCT.+)|(^CRITERION.EXCLUSION.CONFLICT_OF_INTEREST.+)/;
-  EXCLUSION_NATIONAL_REGEXP: RegExp = /^CRITERION.EXCLUSION.NATIONAL.+/;
-
-  SELECTION_REGEXP: RegExp = /^CRITERION.SELECTION.+/;
-  SELECTION_SUITABILITY_REGEXP: RegExp = /^CRITERION.SELECTION.SUITABILITY.+/;
-  SELECTION_ECONOMIC_REGEXP: RegExp = /^CRITERION.SELECTION.ECONOMIC_FINANCIAL_STANDING.+/;
-  SELECTION_TECHNICAL_REGEXP: RegExp = /(?!.*CERTIFICATES*)^CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY.+/;
-  SELECTION_CERTIFICATES_REGEXP: RegExp = /^CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY.CERTIFICATES.+/;
-
-  EO_RELATED_REGEXP: RegExp = /((?!.*MEETS_THE_OBJECTIVE*)(?!.*REDUCTION_OF_CANDIDATES*))^CRITERION.OTHER.EO_DATA.+/;
-  EO_RELATED_A_REGEXP: RegExp = /(^CRITERION.OTHER.EO_DATA.REGISTERED_IN_OFFICIAL_LIST*)|(^CRITERION.OTHER.EO_DATA.SHELTERED_WORKSHOP*)|(^CRITERION.OTHER.EO_DATA.TOGETHER_WITH_OTHERS*)|(^CRITERION.OTHER.EO_DATA.CONTRIBUTIONS_CERTIFICATES*)/;
-  EO_RELATED_C_REGEXP: RegExp = /^CRITERION.OTHER.EO_DATA.RELIES_ON_OTHER_CAPACITIES*/;
-  EO_RELATED_D_REGEXP: RegExp = /^CRITERION.OTHER.EO_DATA.SUBCONTRACTS_WITH_THIRD_PARTIES*/;
-  // REDUCTION_OF_CANDIDATES_REGEXP: RegExp = /^CRITERION.OTHER.EO_DATA.MEETS_THE_OBJECTIVE*/;
-  REDUCTION_OF_CANDIDATES_REGEXP: RegExp = /(^CRITERION.OTHER.EO_DATA.MEETS_THE_OBJECTIVE*)|(^CRITERION.OTHER.EO_DATA.REDUCTION_OF_CANDIDATES)/;
-
-  OTHER_CA_REGEXP: RegExp = /^CRITERION.OTHER.CA_DATA.+/;
-  EO_LOT_REGEXP: RegExp = /^CRITERION.OTHER.EO_DATA.LOTS_TENDERED/;
+  filter = Filter;
 
 
   exclusionACriteria: ExclusionCriteria[] = null;
@@ -152,19 +133,6 @@ export class DataService {
 
 
   /* ================= Merge criterions into one fullcriterion list ================*/
-
-  /* ============================= Filtering Criteria ============================*/
-
-
-  filterExclusionCriteria(regex: RegExp, criteriaList: FullCriterion[]): ExclusionCriteria[] {
-    const filteredList: FullCriterion[] = [];
-    for (const fullCriterion of criteriaList) {
-      if (regex.test(fullCriterion.typeCode)) {
-        filteredList.push(fullCriterion);
-      }
-    }
-    return filteredList;
-  }
 
   makeFullCriterionListCA(caRelatedCriteria: CaRelatedCriterion[],
                           exclusionACriteria: ExclusionCriteria[],
@@ -274,6 +242,18 @@ export class DataService {
     }
   }
 
+  /* ============================= Filtering Criteria ============================*/
+
+
+  filterExclusionCriteria(regex: RegExp, criteriaList: FullCriterion[]): FullCriterion[] {
+    const filteredList: FullCriterion[] = [];
+    for (const fullCriterion of criteriaList) {
+      if (regex.test(fullCriterion.typeCode)) {
+        filteredList.push(fullCriterion);
+      }
+    }
+    return filteredList;
+  }
 
   filterSelectionCriteria(regex: RegExp, criteriaList: FullCriterion[]): SelectionCriteria[] {
     const filteredList: FullCriterion[] = [];
@@ -676,18 +656,18 @@ export class DataService {
               this.utilities.isAtoD = true;
               this.utilities.isSatisfiedALL = false;
 
-              this.caRelatedCriteria = this.filterCARelatedCriteria(this.OTHER_CA_REGEXP, res.fullCriterionList);
+              this.caRelatedCriteria = this.filterCARelatedCriteria(new RegExp(this.filter.OTHER_CA_REGEXP), res.fullCriterionList);
               this.caRelatedCriteriaForm = this.formUtil.createCARelatedCriterionForm(this.caRelatedCriteria);
-              this.eoLotCriterion = this.filterCARelatedCriteria(this.EO_LOT_REGEXP, res.fullCriterionList);
+              this.eoLotCriterion = this.filterCARelatedCriteria(new RegExp(this.filter.EO_LOT_REGEXP), res.fullCriterionList);
               console.log('THIS IS LOTS_TENDERED');
               console.log(this.eoLotCriterion);
             }
 
             console.log(res.fullCriterionList);
-            this.exclusionACriteria = this.filterExclusionCriteria(this.EXCLUSION_CONVICTION_REGEXP, res.fullCriterionList);
-            this.exclusionBCriteria = this.filterExclusionCriteria(this.EXCLUSION_CONTRIBUTION_REGEXP, res.fullCriterionList);
-            this.exclusionCCriteria = this.filterExclusionCriteria(this.EXCLUSION_SOCIAL_BUSINESS_MISCONDUCT_CONFLICT_REGEXP, res.fullCriterionList);
-            this.exclusionDCriteria = this.filterExclusionCriteria(this.EXCLUSION_NATIONAL_REGEXP, res.fullCriterionList);
+            this.exclusionACriteria = this.filterExclusionCriteria(new RegExp(this.filter.EXCLUSION_CONVICTION), res.fullCriterionList);
+            this.exclusionBCriteria = this.filterExclusionCriteria(new RegExp(this.filter.EXCLUSION_CONTRIBUTION), res.fullCriterionList);
+            this.exclusionCCriteria = this.filterExclusionCriteria(new RegExp(this.filter.EXCLUSION_SOCIAL_BUSINESS_MISCONDUCT_CONFLICT), res.fullCriterionList);
+            this.exclusionDCriteria = this.filterExclusionCriteria(new RegExp(this.filter.EXCLUSION_NATIONAL), res.fullCriterionList);
 
             this.exclusionACriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionACriteria);
             // console.log(this.exclusionACriteriaForm);
@@ -700,11 +680,12 @@ export class DataService {
 
             // console.log(this.exclusionDCriteria);
 
-            this.selectionACriteria = this.filterSelectionCriteria(this.SELECTION_SUITABILITY_REGEXP, res.fullCriterionList);
-            this.selectionBCriteria = this.filterSelectionCriteria(this.SELECTION_ECONOMIC_REGEXP, res.fullCriterionList);
-            this.selectionCCriteria = this.filterSelectionCriteria(this.SELECTION_TECHNICAL_REGEXP, res.fullCriterionList);
-            this.selectionDCriteria = this.filterSelectionCriteria(this.SELECTION_CERTIFICATES_REGEXP, res.fullCriterionList);
-            this.selectionALLCriteria = this.filterSelectionCriteria(this.SELECTION_REGEXP, res.fullCriterionList);
+            this.selectionACriteria = this.filterSelectionCriteria(new RegExp(this.filter.SELECTION_SUITABILITY_REGEXP), res.fullCriterionList);
+            this.selectionBCriteria = this.filterSelectionCriteria(new RegExp(this.filter.SELECTION_ECONOMIC_REGEXP), res.fullCriterionList);
+            this.selectionCCriteria = this.filterSelectionCriteria(new RegExp(this.filter.SELECTION_TECHNICAL_REGEXP), res.fullCriterionList);
+            this.selectionDCriteria = this.filterSelectionCriteria(new RegExp(this.filter.SELECTION_CERTIFICATES_REGEXP), res.fullCriterionList);
+            /* satisfies all...*/
+            this.selectionALLCriteria = this.filterSelectionCriteria(new RegExp(this.filter.SELECTION_REGEXP), res.fullCriterionList);
 
             this.selectionACriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionACriteria);
             // console.log(this.selectionACriteriaForm);
@@ -716,11 +697,11 @@ export class DataService {
             // console.log(this.selectionDCriteriaForm);
             this.selectionALLCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionALLCriteria);
 
-            this.eoRelatedCriteria = this.filterEoRelatedCriteria(this.EO_RELATED_REGEXP, res.fullCriterionList);
+            this.eoRelatedCriteria = this.filterEoRelatedCriteria(new RegExp(this.filter.EO_RELATED_REGEXP), res.fullCriterionList);
             // console.log('EO RELATED CRITERIA in REQUEST import');
             // console.log(this.eoRelatedCriteria);
             // this.eoLotCriterionForm = this.formUtil.createEORelatedCriterionForm(this.eoLotCriterion);
-            this.reductionCriteria = this.filterEoRelatedCriteria(this.REDUCTION_OF_CANDIDATES_REGEXP, res.fullCriterionList);
+            this.reductionCriteria = this.filterEoRelatedCriteria(new RegExp(this.filter.REDUCTION_OF_CANDIDATES_REGEXP), res.fullCriterionList);
             // console.log('REDUCTION CRITERIA IN REQUEST IMPORT: ');
             // console.log(this.reductionCriteria);
             this.reductionCriteriaForm = this.formUtil.createReductionCriterionForm(this.reductionCriteria);
@@ -805,7 +786,7 @@ export class DataService {
             console.log(res.fullCriterionList);
 
             if (this.utilities.qualificationApplicationType === 'selfcontained') {
-              this.caRelatedCriteria = this.filterCARelatedCriteria(this.OTHER_CA_REGEXP, res.fullCriterionList);
+              this.caRelatedCriteria = this.filterCARelatedCriteria(new RegExp(this.filter.OTHER_CA_REGEXP), res.fullCriterionList);
               console.log('FILTERED CA RELATED CRITERIA');
               console.log(this.caRelatedCriteria);
 
@@ -813,25 +794,25 @@ export class DataService {
               console.log('FILTERED CA RELATED CRITERIA FORM');
               console.log(this.caRelatedCriteriaForm);
 
-              this.eoLotCriterion = this.filterCARelatedCriteria(this.EO_LOT_REGEXP, res.fullCriterionList);
+              this.eoLotCriterion = this.filterCARelatedCriteria(new RegExp(this.filter.EO_LOT_REGEXP), res.fullCriterionList);
               console.log('FILTERED EO LOT RELATED CRITERIA');
               console.log(this.eoLotCriterion);
               this.eoLotCriterionForm = this.formUtil.createEORelatedCriterionForm(this.eoLotCriterion);
             }
 
             if (this.utilities.qualificationApplicationType === 'regulated' && this.APIService.version === 'v2') {
-              this.eoLotCriterion = this.filterCARelatedCriteria(this.EO_LOT_REGEXP, res.fullCriterionList);
+              this.eoLotCriterion = this.filterCARelatedCriteria(new RegExp(this.filter.EO_LOT_REGEXP), res.fullCriterionList);
               console.log('FILTERED EO LOT RELATED CRITERIA');
               console.log(this.eoLotCriterion);
               this.eoLotCriterionForm = this.formUtil.createEORelatedCriterionForm(this.eoLotCriterion);
             }
 
 
-            this.eoRelatedACriteria = this.filterEoRelatedCriteria(this.EO_RELATED_A_REGEXP, res.fullCriterionList);
+            this.eoRelatedACriteria = this.filterEoRelatedCriteria(new RegExp(this.filter.EO_RELATED_A_REGEXP), res.fullCriterionList);
             // console.log(this.eoRelatedACriteria);
-            this.eoRelatedCCriteria = this.filterEoRelatedCriteria(this.EO_RELATED_C_REGEXP, res.fullCriterionList);
+            this.eoRelatedCCriteria = this.filterEoRelatedCriteria(new RegExp(this.filter.EO_RELATED_C_REGEXP), res.fullCriterionList);
             // console.log(this.eoRelatedCCriteria);
-            this.eoRelatedDCriteria = this.filterEoRelatedCriteria(this.EO_RELATED_D_REGEXP, res.fullCriterionList);
+            this.eoRelatedDCriteria = this.filterEoRelatedCriteria(new RegExp(this.filter.EO_RELATED_D_REGEXP), res.fullCriterionList);
             // console.log(this.eoRelatedDCriteria);
             this.eoRelatedACriteriaForm = this.formUtil.createEORelatedCriterionForm(this.eoRelatedACriteria);
             // console.log(this.eoRelatedACriteriaForm);
@@ -840,15 +821,10 @@ export class DataService {
             this.eoRelatedDCriteriaForm = this.formUtil.createEORelatedCriterionForm(this.eoRelatedDCriteria);
             // console.log(this.eoRelatedDCriteriaForm);
 
-
-            this.exclusionACriteria = this.filterExclusionCriteria(this.EXCLUSION_CONVICTION_REGEXP, res.fullCriterionList);
-            // console.log(this.exclusionACriteria);
-            this.exclusionBCriteria = this.filterExclusionCriteria(this.EXCLUSION_CONTRIBUTION_REGEXP, res.fullCriterionList);
-            // console.log(this.exclusionBCriteria);
-            this.exclusionCCriteria = this.filterExclusionCriteria(this.EXCLUSION_SOCIAL_BUSINESS_MISCONDUCT_CONFLICT_REGEXP, res.fullCriterionList);
-            // console.log(this.exclusionCCriteria);
-            this.exclusionDCriteria = this.filterExclusionCriteria(this.EXCLUSION_NATIONAL_REGEXP, res.fullCriterionList);
-            // console.log(this.exclusionDCriteria);
+            this.exclusionACriteria = this.filterExclusionCriteria(new RegExp(this.filter.EXCLUSION_CONVICTION), res.fullCriterionList);
+            this.exclusionBCriteria = this.filterExclusionCriteria(new RegExp(this.filter.EXCLUSION_CONTRIBUTION), res.fullCriterionList);
+            this.exclusionCCriteria = this.filterExclusionCriteria(new RegExp(this.filter.EXCLUSION_SOCIAL_BUSINESS_MISCONDUCT_CONFLICT), res.fullCriterionList);
+            this.exclusionDCriteria = this.filterExclusionCriteria(new RegExp(this.filter.EXCLUSION_NATIONAL), res.fullCriterionList);
 
             this.exclusionACriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionACriteria);
             console.log(this.exclusionACriteriaForm);
@@ -860,15 +836,15 @@ export class DataService {
             // console.log(this.exclusionDCriteriaForm);
 
 
-            this.selectionACriteria = this.filterSelectionCriteria(this.SELECTION_SUITABILITY_REGEXP, res.fullCriterionList);
+            this.selectionACriteria = this.filterSelectionCriteria(new RegExp(this.filter.SELECTION_SUITABILITY_REGEXP), res.fullCriterionList);
             // console.log(this.selectionACriteria);
-            this.selectionBCriteria = this.filterSelectionCriteria(this.SELECTION_ECONOMIC_REGEXP, res.fullCriterionList);
+            this.selectionBCriteria = this.filterSelectionCriteria(new RegExp(this.filter.SELECTION_ECONOMIC_REGEXP), res.fullCriterionList);
             // console.log(this.selectionBCriteria);
-            this.selectionCCriteria = this.filterSelectionCriteria(this.SELECTION_TECHNICAL_REGEXP, res.fullCriterionList);
+            this.selectionCCriteria = this.filterSelectionCriteria(new RegExp(this.filter.SELECTION_TECHNICAL_REGEXP), res.fullCriterionList);
             // console.log(this.selectionCCriteria);
-            this.selectionDCriteria = this.filterSelectionCriteria(this.SELECTION_CERTIFICATES_REGEXP, res.fullCriterionList);
+            this.selectionDCriteria = this.filterSelectionCriteria(new RegExp(this.filter.SELECTION_CERTIFICATES_REGEXP), res.fullCriterionList);
             // console.log(this.selectionDCriteria);
-            this.selectionALLCriteria = this.filterSelectionCriteria(this.SELECTION_REGEXP, res.fullCriterionList);
+            this.selectionALLCriteria = this.filterSelectionCriteria(new RegExp(this.filter.SELECTION_REGEXP), res.fullCriterionList);
             console.log(this.selectionALLCriteria);
 
 
@@ -883,7 +859,7 @@ export class DataService {
             this.selectionALLCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionALLCriteria);
 
 
-            this.reductionCriteria = this.filterReductionCriteria(this.REDUCTION_OF_CANDIDATES_REGEXP, res.fullCriterionList);
+            this.reductionCriteria = this.filterReductionCriteria(new RegExp(this.filter.REDUCTION_OF_CANDIDATES_REGEXP), res.fullCriterionList);
             if (!this.reductionCriteria) {
 
             }
@@ -1014,24 +990,24 @@ export class DataService {
     let control = <FormArray>this.EOForm.controls['naturalPersons'];
     control.controls.splice(0);
     this.EODetails.naturalPersons.forEach(person => {
-        control.push(new FormGroup({
-          'firstName': new FormControl(person.firstName),
-          'familyName': new FormControl(person.familyName),
-          'role': new FormControl(person.role),
-          'birthPlace': new FormControl(person.birthPlace),
-          'birthDate': new FormControl(person.birthDate),
-          'postalAddress': new FormGroup({
-            'addressLine1': new FormControl(person.postalAddress.addressLine1),
-            'postCode': new FormControl(person.postalAddress.postCode),
-            'city': new FormControl(person.postalAddress.city),
-            'countryCode': new FormControl(person.postalAddress.countryCode),
-          }),
-          'contactDetails': new FormGroup({
-            'contactPointName': new FormControl(person.contactDetails.contactPointName),
-            'emailAddress': new FormControl(person.contactDetails.emailAddress, [Validators.email]),
-            'telephoneNumber': new FormControl(person.contactDetails.telephoneNumber),
-          })
-        }));
+      control.push(new FormGroup({
+        'firstName': new FormControl(person.firstName),
+        'familyName': new FormControl(person.familyName),
+        'role': new FormControl(person.role),
+        'birthPlace': new FormControl(person.birthPlace),
+        'birthDate': new FormControl(person.birthDate),
+        'postalAddress': new FormGroup({
+          'addressLine1': new FormControl(person.postalAddress.addressLine1),
+          'postCode': new FormControl(person.postalAddress.postCode),
+          'city': new FormControl(person.postalAddress.city),
+          'countryCode': new FormControl(person.postalAddress.countryCode),
+        }),
+        'contactDetails': new FormGroup({
+          'contactPointName': new FormControl(person.contactDetails.contactPointName),
+          'emailAddress': new FormControl(person.contactDetails.emailAddress, [Validators.email]),
+          'telephoneNumber': new FormControl(person.contactDetails.telephoneNumber),
+        })
+      }));
     });
   }
 

@@ -74,6 +74,10 @@ export class RequirementComponent implements OnInit, OnChanges {
 
   ngOnInit() {
 
+    if (this.req.type === 'REQUIREMENT' && this.utilities.isImport() && this.utilities.isEO) {
+      this.form.get(this.req.uuid).disable();
+    }
+
     if (this.req.responseDataType === 'WEIGHT_INDICATOR' && this.utilities.isImport()) {
       this.isWeighted = this.utilities.criterionWeightIndicators[this.req.uuid];
     }
