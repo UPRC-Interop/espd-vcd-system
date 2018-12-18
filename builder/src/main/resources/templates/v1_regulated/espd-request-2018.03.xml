@@ -2345,7 +2345,7 @@
     </ccv-cac:Criterion>
     <ccv-cac:Criterion>
         <ubl-cbc:ID schemeID="CriteriaID" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">90a2e100-44cc-45d3-9970-69d6714f1596</ubl-cbc:ID>
-        <ubl-cbc:TypeCode listID="CriteriaTypeCode" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY.TECHNICAL.FACILITIES_FOR_STUDY_RESEARCH</ubl-cbc:TypeCode>
+        <ubl-cbc:TypeCode listID="CriteriaTypeCode" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY.TECHNICAL.FACILITIES.FOR_STUDY_RESEARCH</ubl-cbc:TypeCode>
         <ubl-cbc:Name>Study and research facilities</ubl-cbc:Name>
         <ubl-cbc:Description>It uses the following study and research facilities are as follows:</ubl-cbc:Description>
         <ccv-cac:LegislationReference>
@@ -2449,7 +2449,7 @@
     </ccv-cac:Criterion>
     <ccv-cac:Criterion>
         <ubl-cbc:ID schemeID="CriteriaID" schemeAgencyID="EU-COM-GROW" schemeVersionID="1.0">07301031-2270-41af-8e7e-66fe0c777107</ubl-cbc:ID>
-        <ubl-cbc:TypeCode listID="CriteriaTypeCode" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY.TECHNICAL.PROFESSIONAL_QUALIFICATIONS</ubl-cbc:TypeCode>
+        <ubl-cbc:TypeCode listID="CriteriaTypeCode" listAgencyID="EU-COM-GROW" listVersionID="1.0.2">CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY.PROFESSIONAL.QUALIFICATIONS</ubl-cbc:TypeCode>
         <ubl-cbc:Name>Educational and professional qualifications</ubl-cbc:Name>
         <ubl-cbc:Description>The following educational and professional qualifications are held by the service provider or the contractor itself, and/or (depending on the requirements set out in the relevant notice or the procurement documents by its managerial staff.</ubl-cbc:Description>
         <ccv-cac:LegislationReference>
