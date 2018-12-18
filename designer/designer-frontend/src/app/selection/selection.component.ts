@@ -76,8 +76,6 @@ export class SelectionComponent implements OnInit, BaseStep {
 
   onSelectionSubmit(form: NgForm) {
     console.log(form.value);
-    this.dataService.selectionSubmit(
-      this.utilities.isSatisfiedALL);
   }
 
   getWizardStep(): WizardSteps {

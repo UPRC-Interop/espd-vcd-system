@@ -339,7 +339,8 @@ export class DataService {
 
   /* ============================= step submit actions =================================*/
 
-  selectionSubmit(isSatisfiedALL: boolean) {
+  finishSubmit(exportType: ExportType) {
+
 
     /* WORKAROUND-FIX: satisfiesALL Criteria null issue when it's self-contained */
     if (this.utilities.qualificationApplicationType === 'selfcontained') {
@@ -373,7 +374,7 @@ export class DataService {
       this.exclusionBCriteria,
       this.exclusionCCriteria,
       this.exclusionDCriteria,
-      isSatisfiedALL,
+      this.utilities.isSatisfiedALL,
       this.selectionALLCriteria,
       this.selectionACriteria,
       this.selectionBCriteria,
@@ -383,12 +384,7 @@ export class DataService {
       this.reductionCriteria);
 
     console.log(this.fullCriterionList);
-    // apicall service post
 
-
-  }
-
-  finishSubmit(exportType: ExportType) {
 
     switch (exportType) {
       case ExportType.XML:
