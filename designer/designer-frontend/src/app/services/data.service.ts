@@ -347,7 +347,7 @@ export class DataService {
       this.selectionALLCriteria = [];
     }
     console.log(this.selectionALLCriteria);
-    if (this.utilities.qualificationApplicationType === 'regulated' && this.APIService.version === 'v2') {
+    if (this.utilities.qualificationApplicationType === 'regulated') {
       this.caRelatedCriteria = [];
     }
 
