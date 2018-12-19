@@ -83,6 +83,6 @@ export class SelectionComponent implements OnInit, BaseStep {
   }
 
   public areFormsValid(): boolean {
-    return this.validationService.validateFormsInComponent(this.forms);
+    return this.utilities.isSatisfiedALL ? true : this.validationService.validateFormsInComponent(this.forms);
   }
 }

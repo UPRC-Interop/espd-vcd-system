@@ -17,6 +17,7 @@ package eu.esens.espdvcd.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.apache.logging.log4j.util.Strings;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -432,8 +433,9 @@ public class CADetails implements Serializable {
     }
 
     public void setWeightScoringMethodologyNote(@JsonProperty("weightScoringMethodologyNote") String note) {
+        initWeightScoringMethodologyNoteList();
         getWeightScoringMethodologyNoteList().clear();
-        if (Objects.nonNull(note)) {
+        if (Objects.nonNull(note) && !note.equals(Strings.EMPTY)) {
             String[] descArray = note.split("[\\r\\n]+");
             weightScoringMethodologyNoteList.addAll(Arrays.asList(descArray));
         }

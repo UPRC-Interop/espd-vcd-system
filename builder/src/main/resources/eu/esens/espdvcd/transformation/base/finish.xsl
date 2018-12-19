@@ -1,6 +1,8 @@
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:cac="urn:X-test:UBL:Pre-award:CommonAggregate" xmlns:cbc="urn:X-test:UBL:Pre-award:CommonBasic">
-
-    <xsl:import href="../html/chapter.xsl"/>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+                xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+                xmlns:espd-cacV1="urn:grow:names:specification:ubl:schema:xsd:ESPD-CommonAggregateComponents-1">
+<xsl:import href="../html/chapter.xsl"/>
     <xsl:import href="../html/structure.xsl"/>
     <xsl:import href="../html/chapter.xsl"/>
     <xsl:import href="../propertyreader/property_reader.xsl"/>
@@ -23,6 +25,14 @@
                         </xsl:with-param>
                         <xsl:with-param name="chapter-content">
                             <xsl:call-template name="partFive"/>
+                            <xsl:call-template name="label">
+                                <xsl:with-param name="label">
+                                    <xsl:call-template name="getESPDProperty">
+                                        <xsl:with-param name="key" select="'espd.part5.reduction.question'"/>
+                                    </xsl:call-template>
+                                </xsl:with-param>
+                            </xsl:call-template>
+                            <xsl:apply-templates select="//cac:TenderingCriterion[./cbc:CriterionTypeCode = 'CRITERION.OTHER.EO_DATA.REDUCTION_OF_CANDIDATES']"/>
                         </xsl:with-param>
                     </xsl:call-template>
                 </xsl:if>

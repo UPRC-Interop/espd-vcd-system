@@ -38,7 +38,7 @@ export class UtilitiesService {
   isReset = false;
   isStarted = false;
   satisfiedALLCriterionExists = false;
-  isSatisfiedALL = true;
+  isSatisfiedALL = false;
   isAtoD = false;
   qualificationApplicationType: string;
   isGloballyWeighted = false;

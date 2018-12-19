@@ -1,4 +1,9 @@
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:cac="urn:X-test:UBL:Pre-award:CommonAggregate" xmlns:cbc="urn:X-test:UBL:Pre-award:CommonBasic">
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+                xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+                xmlns:cacV1="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+                xmlns:espd-cacV1="urn:grow:names:specification:ubl:schema:xsd:ESPD-CommonAggregateComponents-1"
+                xmlns:cbcV1="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
 
     <xsl:import href="../html/chapter.xsl"/>
     <xsl:import href="../propertyreader/property_reader.xsl"/>
@@ -21,8 +26,8 @@
                         </xsl:call-template>
                     </xsl:with-param>
                     <xsl:with-param name="chapter-content">
-                        <xsl:apply-templates select="//cac:EconomicOperatorParty" />
-
+                        <xsl:apply-templates select="//*[local-name() = 'EconomicOperatorParty']" />
+                        <xsl:apply-templates select="//*[local-name() = 'EconomicOperatorParty ']| //espd-cacV1:EconomicOperatorParty" />
                     </xsl:with-param>
                 </xsl:call-template>
                 <xsl:call-template name="powerOfAttorney"/>
@@ -61,7 +66,7 @@
 
     <xsl:template name="powerOfAttorney">
 
-        <xsl:for-each select="//cac:EconomicOperatorParty/cac:Party/cac:PowerOfAttorney">
+        <xsl:for-each select="(//*[local-name() = 'EconomicOperatorParty']/*[local-name() = 'Party']/*[local-name() = 'owerOfAttorney']) | (//espd-cacV1:EconomicOperatorParty/espd-cacV1:RepresentativeNaturalPerson/cacV1:PowerOfAttorney)">
 
             <xsl:call-template name="chapterOne">
                 <xsl:with-param name="chapter-number"/>
@@ -74,57 +79,57 @@
                 <xsl:with-param name="chapter-content">
 
                     <xsl:call-template name="sectionLabelForValueOfNode">
-                        <xsl:with-param name="node" select="cac:AgentParty/cac:Person/cbc:FirstName" />
+                        <xsl:with-param name="node" select="*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[locale-name = 'FirstName']" />
                         <xsl:with-param name="propertyKey" select="'espd.part2.first.name'"/>
                     </xsl:call-template>
 
                     <xsl:call-template name="sectionLabelForValueOfNode">
-                        <xsl:with-param name="node" select="cac:AgentParty/cac:Person/cbc:FamilyName" />
+                        <xsl:with-param name="node" select="*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[locale-name = 'FamilyName']" />
                         <xsl:with-param name="propertyKey" select="'espd.part2.last.name'"/>
                     </xsl:call-template>
 
                     <xsl:call-template name="sectionLabelForValueOfNode">
-                        <xsl:with-param name="node" select="cac:AgentParty/cac:Person/cbc:BirthDate" />
+                        <xsl:with-param name="node" select="*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[locale-name = 'BirthDate']" />
                         <xsl:with-param name="propertyKey" select="'espd.part2.birth.date'"/>
                     </xsl:call-template>
 
                     <xsl:call-template name="sectionLabelForValueOfNode">
-                        <xsl:with-param name="node" select="cac:AgentParty/cac:Person/cbc:BirthplaceName" />
+                        <xsl:with-param name="node" select="*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[locale-name = 'BirthplaceName']" />
                         <xsl:with-param name="propertyKey" select="'espd.part2.birth.place'"/>
                     </xsl:call-template>
 
                     <xsl:call-template name="sectionLabelForValueOfNode">
-                        <xsl:with-param name="node" select="cac:AgentParty/cac:Person/cac:ResidenceAddress/cbc:StreetName" />
+                        <xsl:with-param name="node" select="*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[local-name() = 'ResidenceAddress']/*[local-name() = 'StreetName']" />
                         <xsl:with-param name="propertyKey" select="'espd.part1.street.and. num'"/>
                     </xsl:call-template>
 
                     <xsl:call-template name="sectionLabelForValueOfNode">
-                        <xsl:with-param name="node" select="cac:AgentParty/cac:Person/cac:ResidenceAddress/cbc:PostalZone" />
+                        <xsl:with-param name="node" select="*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[local-name() = 'ResidenceAddress']/*[local-name() = 'PostalZone']" />
                         <xsl:with-param name="propertyKey" select="'espd.part1.postcode'"/>
                     </xsl:call-template>
 
                     <xsl:call-template name="sectionLabelForValueOfNode">
-                        <xsl:with-param name="node" select="cac:AgentParty/cac:Person/cac:ResidenceAddress/cbc:CityName" />
+                        <xsl:with-param name="node" select="*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[local-name() = 'ResidenceAddress']/*[local-name() = 'CityName']" />
                         <xsl:with-param name="propertyKey" select="'espd.part1.city'"/>
                     </xsl:call-template>
 
                     <xsl:call-template name="sectionLabelForValueOfNode">
-                        <xsl:with-param name="node" select="cac:AgentParty/cac:Person/cac:ResidenceAddress/cac:Country/cbc:IdentificationCode" />
+                        <xsl:with-param name="node" select="*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[local-name() = 'ResidenceAddress']/*[local-name() = 'Country']/*[local-name() = 'IdentificationCode']" />
                         <xsl:with-param name="propertyKey" select="'espd.part1.country'"/>
                     </xsl:call-template>
 
                     <xsl:call-template name="sectionLabelForValueOfNode">
-                        <xsl:with-param name="node" select="cac:AgentParty/cac:Person/cac:Contact/cbc:Telephone" />
+                        <xsl:with-param name="node" select="*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[local-name() = 'Contact']/*[local-name() = 'Telephone']" />
                         <xsl:with-param name="propertyKey" select="'espd.part2.telephone'"/>
                     </xsl:call-template>
 
                     <xsl:call-template name="sectionLabelForValueOfNode">
-                        <xsl:with-param name="node" select="cac:AgentParty/cac:Person/cac:Contact/cbc:ElectronicMail" />
+                        <xsl:with-param name="node" select="*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[local-name() = 'Contact']/*[local-name() = 'ElectronicMail']" />
                         <xsl:with-param name="propertyKey" select="'espd.part2.email'"/>
                     </xsl:call-template>
 
                     <xsl:call-template name="sectionLabelForValueOfNode">
-                        <xsl:with-param name="node" select="cbc:Description" />
+                        <xsl:with-param name="node" select="*[local-name() = 'Description']" />
                         <xsl:with-param name="propertyKey" select="'espd.part2.pos.act.in.capacity'"/>
                     </xsl:call-template>
 
@@ -135,61 +140,61 @@
 
     </xsl:template>
 
-    <xsl:template match="cac:EconomicOperatorParty">
+    <xsl:template match="*[local-name() = 'EconomicOperatorParty']">
 
         <xsl:call-template name="sectionLabelForValueOfNode">
-            <xsl:with-param name="node" select="cac:Party/cac:PartyName/cbc:Name" />
+            <xsl:with-param name="node" select="*[local-name() = 'Party']/*[local-name() = 'PartyName']/*[local-name() = 'Name']" />
             <xsl:with-param name="propertyKey" select="'espd.part2.name'"/>
         </xsl:call-template>
 
         <xsl:call-template name="sectionLabelForValueOfNode">
-            <xsl:with-param name="node" select="cac:Party/cac:PostalAddress/cbc:StreetName" />
+            <xsl:with-param name="node" select="*[local-name() = 'Party']/*[local-name() = 'PostalAddress']/*[local-name() = 'StreetName']" />
             <xsl:with-param name="propertyKey" select="'espd.part1.street.and. num'"/>
         </xsl:call-template>
 
         <xsl:call-template name="sectionLabelForValueOfNode">
-            <xsl:with-param name="node" select="cac:Party/cac:PostalAddress/cbc:PostalZone" />
+            <xsl:with-param name="node" select="*[local-name() = 'Party']/*[local-name() = 'PostalAddress']/*[local-name() = 'PostalZone']" />
             <xsl:with-param name="propertyKey" select="'espd.part1.postcode'"/>
         </xsl:call-template>
 
         <xsl:call-template name="sectionLabelForValueOfNode">
-            <xsl:with-param name="node" select="cac:Party/cac:PostalAddress/cbc:CityName" />
+            <xsl:with-param name="node" select="*[local-name() = 'Party']/*[local-name() = 'PostalAddress']/*[local-name() = 'CityName']" />
             <xsl:with-param name="propertyKey" select="'espd.part1.city'"/>
         </xsl:call-template>
 
         <xsl:call-template name="sectionLabelForValueOfNode">
-            <xsl:with-param name="node" select="cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode" />
+            <xsl:with-param name="node" select="*[local-name() = 'Party']/*[local-name() = 'PostalAddress']/*[local-name() = 'Country']/*[local-name() = 'IdentificationCode']" />
             <xsl:with-param name="propertyKey" select="'espd.part1.country'"/>
         </xsl:call-template>
 
         <xsl:call-template name="sectionLabelForMailValueOfNode">
-            <xsl:with-param name="node" select="cac:Party/cac:Contact/cbc:ElectronicMail" />
+            <xsl:with-param name="node" select="*[local-name() = 'Party']/*[local-name() = 'Contact']/*[local-name() = 'ElectronicMail']" />
             <xsl:with-param name="propertyKey" select="'espd.part1.email'"/>
         </xsl:call-template>
 
         <xsl:call-template name="sectionLabelForValueOfNode">
-            <xsl:with-param name="node" select="cac:Party/cac:Contact/cbc:Telephone" />
+            <xsl:with-param name="node" select="*[local-name() = 'Party']/*[local-name() = 'Contact']/*[local-name() = 'Telephone']" />
             <xsl:with-param name="propertyKey" select="'espd.part1.telephone'"/>
         </xsl:call-template>
 
         <xsl:call-template name="sectionLabelForValueOfNode">
-            <xsl:with-param name="node" select="cac:Party/cac:Contact/cbc:Telefax" />
+            <xsl:with-param name="node" select="*[local-name() = 'Party']/*[local-name() = 'Contact']/*[local-name() = 'Telefax']" />
             <xsl:with-param name="propertyKey" select="'espd.part1.fax'"/>
         </xsl:call-template>
 
         <xsl:call-template name="sectionLabelForValueOfNode">
-            <xsl:with-param name="node" select="cac:Party/cac:PartyIdentification/cbc:ID" />
+            <xsl:with-param name="node" select="*[local-name() = 'Party']/*[local-name() = 'PartyIdentification']/*[local-name() = 'ID']" />
             <xsl:with-param name="propertyKey" select="'espd.part2.vat'"/>
         </xsl:call-template>
 
         <xsl:call-template name="sectionLabelForUrlValueOfNode">
-            <xsl:with-param name="node" select="cac:Party/cbc:WebsiteURI" />
+            <xsl:with-param name="node" select="*[local-name() = 'Party']/*[local-name() = 'WebsiteURI']" />
             <xsl:with-param name="propertyKey" select="'espd.part1.website'"/>
         </xsl:call-template>
 
         <br />
 
-        <xsl:if test="//cac:ProcurementProjectLot/cbc:ID">
+        <xsl:if test="//*[local-name() = 'ProcurementProjectLot']/*[local-name() = 'ID']">
             <xsl:call-template name="labelAndTextValue">
                 <xsl:with-param name="label">
                     <xsl:call-template name="getESPDProperty">
@@ -197,13 +202,13 @@
                     </xsl:call-template>
                 </xsl:with-param>
                 <xsl:with-param name="value">
-                    <xsl:value-of select="//cac:ProcurementProjectLot/cbc:ID"/>
+                    <xsl:value-of select="//*[local-name() = 'ProcurementProjectLot']/*[local-name() = 'ID']"/>
                 </xsl:with-param>
             </xsl:call-template>
         </xsl:if>
 
         <br />
-        
+
         <xsl:call-template name="labelAndCopyOfValue">
             <xsl:with-param name="label">
                 <xsl:call-template name="getESPDProperty">
@@ -232,7 +237,7 @@
     <xsl:template name="smeIndicator">
         <xsl:variable name="isSME">
             <xsl:choose>
-                <xsl:when test="//cac:EconomicOperatorParty/cac:Party/cbc:IndustryClassificationCode/text() = 'SME'">
+                <xsl:when test="//*[local-name() = 'EconomicOperatorParty']/*[local-name() = 'Party']/*[local-name() = 'IndustryClassificationCode']/text() = 'SME'">
                     <xsl:value-of select="'true'"/>
                 </xsl:when>
                 <xsl:otherwise>
@@ -249,6 +254,6 @@
             </xsl:with-param>
         </xsl:call-template>
     </xsl:template>
-    
+
 
 </xsl:stylesheet>
