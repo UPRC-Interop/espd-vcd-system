@@ -110,8 +110,7 @@
 
           <div class="criteria">
             <mat-checkbox color="primary"
-                          checked="criteria.selected"
-                          name="selectionACriteria"
+                          name='{{criteria.name+i}}'
                           [(ngModel)]="this.dataService.selectionACriteria[i].selected"
                           [disabled]="this.dataService.isReadOnly()">{{criteria.name}}</mat-checkbox>
             <div class="critDesc">{{criteria.description}}</div>
@@ -146,8 +145,7 @@
         <div class="exclusionCriteria">
           <div class="criteria">
             <mat-checkbox color="primary"
-                          checked="criteria.selected"
-                          name="selectionBCriteria"
+                          name='{{criteria.name+i}}'
                           [(ngModel)]="this.dataService.selectionBCriteria[i].selected"
                           [disabled]="this.dataService.isReadOnly()">{{criteria.name}}</mat-checkbox>
             <div class="critDesc">{{criteria.description}}</div>
@@ -222,8 +220,7 @@
         <div class="exclusionCriteria">
           <div class="criteria">
             <mat-checkbox color="primary"
-                          checked="criteria.selected"
-                          name="selectionCCriteria"
+                          name='{{criteria.name+i}}'
                           [(ngModel)]="this.dataService.selectionCCriteria[i].selected"
                           [disabled]="this.dataService.isReadOnly()">{{criteria.name}}</mat-checkbox>
             <div class="critDesc">{{criteria.description}}</div>
@@ -258,8 +255,7 @@
         <div class="exclusionCriteria">
           <div class="criteria">
             <mat-checkbox color="primary"
-                          checked="criteria.selected"
-                          name="selectionDCriteria"
+                          name='{{criteria.name+i}}'
                           [(ngModel)]="this.dataService.selectionDCriteria[i].selected"
                           [disabled]="this.dataService.isReadOnly()">{{criteria.name}}</mat-checkbox>
             <div class="critDesc">{{criteria.description}}</div>
