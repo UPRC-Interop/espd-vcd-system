@@ -42,6 +42,7 @@ import {Amount} from '../model/amount.model';
 
 import _ from 'lodash';
 import {Filter} from '../filter/filter.enum';
+import {CodelistService} from './codelist.service';
 
 @Injectable()
 export class DataService {
@@ -124,7 +125,8 @@ export class DataService {
   constructor(private APIService: ApicallService,
               public formUtil: FormUtilService,
               public utilities: UtilitiesService,
-              public translate: TranslateService) {
+              public translate: TranslateService,
+              public codelist: CodelistService) {
 
     this.AddLanguages();
     translate.setDefaultLang('ESPD_en');
@@ -718,7 +720,7 @@ export class DataService {
             this.utilities.openSnackBar(message, action);
             reject();
           });
-      } else if (filesToUpload.length > 0 && (role === 'EO' || (role === 'CA' && this.isReadOnly() ))) {
+      } else if (filesToUpload.length > 0 && (role === 'EO' || (role === 'CA' && this.isReadOnly()))) {
         this.APIService.postFileResponse(filesToUpload)
           .then(res => {
             console.log('ca_readonly_postfileres');
@@ -1695,6 +1697,7 @@ export class DataService {
     const lang = 'ESPD_' + this.selectedLanguage;
     console.log(lang);
     this.translate.use(lang);
+    this.codelist.reloadCodelists();
     // this.AddLanguages();
   }
 
