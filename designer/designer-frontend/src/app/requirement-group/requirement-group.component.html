@@ -19,14 +19,14 @@
   <mat-card>
     <mat-card-content>
       <div *ngFor="let r of reqGroup.requirements" class="form-row"
-           [hidden]="((r.type === 'QUESTION' && this.utilities.isCA) ||
+           [hidden]="((r.type === 'QUESTION' && this.utilities.isCA && !this.utilities.isReviewESPD) ||
              (this.utilities.isEO && r.type ==='REQUIREMENT' && this.utilities.isCreateResponse))">
         <app-requirement [req]="r"
                          [form] = "form"
                          (indicatorChanged)="childIndicatorChangedHandler($event)"></app-requirement>
       </div>
         <div *ngFor="let rg of reqGroup.requirementGroups; first as isFirst; index as i" class="form-row"
-             [hidden]="(((rg.type === 'QUESTION_SUBGROUP' || rg.type === 'QUESTION_GROUP') && this.utilities.isCA))">
+             [hidden]="(((rg.type === 'QUESTION_SUBGROUP' || rg.type === 'QUESTION_GROUP') && this.utilities.isCA && !this.utilities.isReviewESPD))">
           <app-requirement-group [reqGroup]="rg"
                                  [form] = "form.get(rg.uuid)"
                                  [indicator]="childIndicator"></app-requirement-group>

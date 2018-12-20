@@ -48,8 +48,8 @@
           <span>{{'espd.gui.progress.procedure' | translate}}</span>
         </div>
       </ng-template>
-      <app-procedure *ngIf="utilities.isCA" #procedureCaComponent></app-procedure>
-      <app-procedure-eo *ngIf="utilities.isEO"
+      <app-procedure *ngIf="utilities.isCA && !this.dataService.isReadOnly()" #procedureCaComponent></app-procedure>
+      <app-procedure-eo *ngIf="utilities.isEO || (utilities.isCA && this.dataService.isReadOnly())"
                         #procedureEoComponent></app-procedure-eo>
     </mat-step>
     <mat-step>
@@ -60,10 +60,10 @@
         </div>
       </ng-template>
       <app-exclusion
-                      *ngIf="utilities.isCA"
+                      *ngIf="utilities.isCA && !this.dataService.isReadOnly()"
                       #exclusionCaComponent></app-exclusion>
       <app-exclusion-eo
-                        *ngIf="utilities.isEO"
+                        *ngIf="utilities.isEO || (utilities.isCA && this.dataService.isReadOnly())"
                         #exclusionEoComponent></app-exclusion-eo>
     </mat-step>
     <mat-step>
@@ -74,10 +74,10 @@
         </div>
       </ng-template>
       <app-selection
-                      *ngIf="utilities.isCA"
+                      *ngIf="utilities.isCA && !this.dataService.isReadOnly()"
                       #selectionCaComponent></app-selection>
       <app-selection-eo
-                        *ngIf="utilities.isEO"
+                        *ngIf="utilities.isEO || (utilities.isCA && this.dataService.isReadOnly())"
                         #selectionEoComponent></app-selection-eo>
     </mat-step>
     <mat-step>
@@ -87,14 +87,14 @@
           <span>{{'espd.gui.progress.finish' | translate}}</span>
         </div>
       </ng-template>
-      <app-finish *ngIf="utilities.isCA"
+      <app-finish *ngIf="utilities.isCA && !this.dataService.isReadOnly()"
                   [startStepValid]="startStepValid"
                   [procedureStepValid]="procedureStepValid"
                   [exclusionStepValid]="exclusionStepValid"
                   [selectionStepValid]="selectionStepValid"
                   [finishStepValid]="finishStepValid"
                   #finishCaComponent></app-finish>
-      <app-finish-eo *ngIf="utilities.isEO"
+      <app-finish-eo *ngIf="utilities.isEO || (utilities.isCA && this.dataService.isReadOnly())"
                      [startStepValid]="startStepValid"
                      [procedureStepValid]="procedureStepValid"
                      [exclusionStepValid]="exclusionStepValid"

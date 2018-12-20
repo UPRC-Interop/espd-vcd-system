@@ -16,7 +16,7 @@
 
 -->
 <div *ngFor="let rg of criterion.requirementGroups; first as isFirst; index as i" class="form-row"
-     [hidden]="(((rg.type === 'QUESTION_SUBGROUP' || rg.type === 'QUESTION_GROUP') && this.utilities.isCA))">
+     [hidden]="(((rg.type === 'QUESTION_SUBGROUP' || rg.type === 'QUESTION_GROUP') && this.utilities.isCA && !this.utilities.isReviewESPD))">
   <app-requirement-group [reqGroup]="rg"
                          [form] = "form.get(rg.uuid)"
                          [indicator]="true"></app-requirement-group>

@@ -616,9 +616,10 @@ export class DataService {
   ReuseESPD(filesToUpload: File[], form: NgForm, role: string): Promise<void> {
     const promise = new Promise<void>((resolve, reject) => {
 
-      if (filesToUpload.length > 0 && role === 'CA') {
+      if (filesToUpload.length > 0 && (role === 'CA' && !this.isReadOnly())) {
         this.APIService.postFile(filesToUpload)
           .then(res => {
+            console.log('CA not readonly');
             /* DUMMY ESPD for testing */
             // res = this.utilities.makeDummyESPDRequest();
             // console.log(res);
@@ -626,6 +627,7 @@ export class DataService {
             this.APIService.version = res.documentDetails.version.toLowerCase();
             /* SELF-CONTAINED: if a self-contained artifact is imported then the version is v2 */
             this.utilities.qualificationApplicationType = res.documentDetails.qualificationApplicationType.toLowerCase();
+            this.utilities.type = res.documentDetails.type;
             if (res.documentDetails.qualificationApplicationType === 'SELFCONTAINED') {
               this.APIService.version = 'v2';
               // Create the lots here:
@@ -716,12 +718,14 @@ export class DataService {
             this.utilities.openSnackBar(message, action);
             reject();
           });
-      } else if (filesToUpload.length > 0 && role === 'EO') {
+      } else if (filesToUpload.length > 0 && (role === 'EO' || (role === 'CA' && this.isReadOnly() ))) {
         this.APIService.postFileResponse(filesToUpload)
           .then(res => {
+            console.log('ca_readonly_postfileres');
             console.log(res);
             this.APIService.version = res.documentDetails.version.toLowerCase();
             this.utilities.qualificationApplicationType = res.documentDetails.qualificationApplicationType.toLowerCase();
+            this.utilities.type = res.documentDetails.type;
             /* SELF-CONTAINED: if a self-cointained artifact is imported then the version is v2 */
             if (res.documentDetails.qualificationApplicationType === 'SELFCONTAINED') {
               this.APIService.version = 'v2';
