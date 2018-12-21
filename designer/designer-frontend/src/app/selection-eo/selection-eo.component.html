@@ -24,8 +24,7 @@
       <p translate>espd.part4.alert</p>
       <span translate>espd.gui.question.to.use.alpha</span>
       <mat-radio-group name="satisfiesALL"
-                       [disabled]="this.dataService.isReadOnly() ||
-                     (this.utilities.satisfiedALLCriterionExists && this.utilities.isImportESPD)">
+                       [disabled]="this.utilities.isImport()">
         <mat-radio-button color="primary" name="selALL" value="YES"
                           [checked]="!this.utilities.satisfiedALLCriterionExists && this.utilities.isImportESPD"
                           (change)="handleALL(YES)" #YES>
