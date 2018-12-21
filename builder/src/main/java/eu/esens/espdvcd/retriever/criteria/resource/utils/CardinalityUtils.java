@@ -84,6 +84,7 @@ public class CardinalityUtils {
                 && from.getID() != null && to.getID() != null
                 && from.getID().equals(to.getID())) {
 
+            // apply cardinalities to all root RequirementGroup/s
             to.getRequirementGroups().forEach(toRg -> applyCardinalities(
                     from.getRequirementGroups().stream()
                             .filter(fromRg -> toRg.getID().equals(fromRg.getID()))
@@ -97,16 +98,18 @@ public class CardinalityUtils {
 
     }
 
-    private static void applyCardinalities(RequirementGroup from, RequirementGroup to) {
+    public static void applyCardinalities(RequirementGroup from, RequirementGroup to) {
 
         if (from != null && to != null) {
 
+            // do the same for sub-RequirementGroup/s
             to.getRequirementGroups().forEach(toRg -> applyCardinalities(
                     from.getRequirementGroups().stream()
                             .filter(fromRg -> toRg.getID().equals(fromRg.getID()))
                             .findFirst().orElse(null) // from
                     , toRg));                               // to
 
+            // do the same for requirement/s
             to.getRequirements().stream()
                     .filter(toRq -> isRequirementBasicInfoNotNull(toRq))
                     .forEach(toRq -> applyCardinalities(
@@ -119,22 +122,35 @@ public class CardinalityUtils {
                                     .findFirst().orElse(null) // from
                             , toRq                                  // to
                     ));
-
+            // cardinalities
             to.setMultiple(from.isMultiple());
             to.setMandatory(from.isMandatory());
+            // requirement group type
+            if (from.getType() != null) {
+                to.setType(from.getType());
+            }
         }
     }
 
-    private static void applyCardinalities(Requirement from, Requirement to) {
+    public static void applyCardinalities(Requirement from, Requirement to) {
 
         if (from != null && to != null) {
+            // cardinalities
             to.setMultiple(from.isMultiple());
             to.setMandatory(from.isMandatory());
+            // requirement group type
+            if (from.getType() != null) {
+                to.setType(from.getType());
+            }
+            // apply related response value artefact
+            if (from.getResponseValuesRelatedArtefact() != null) {
+                to.setResponseValuesRelatedArtefact(from.getResponseValuesRelatedArtefact());
+            }
         }
 
     }
 
-    private static boolean isRequirementBasicInfoNotNull(Requirement rq) {
+    public static boolean isRequirementBasicInfoNotNull(Requirement rq) {
         return rq != null
                 && rq.getDescription() != null
                 && rq.getResponseDataType() != null

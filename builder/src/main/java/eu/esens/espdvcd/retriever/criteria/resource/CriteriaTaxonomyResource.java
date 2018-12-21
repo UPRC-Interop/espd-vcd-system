@@ -88,53 +88,53 @@ public abstract class CriteriaTaxonomyResource implements CriteriaResource, Requ
         }
 
         // apply cardinalities to all root RequirementGroup/s
-        sc.getRequirementGroups().forEach(rg -> applyTaxonomyData(
+        sc.getRequirementGroups().forEach(rg -> CardinalityUtils.applyCardinalities(
                 rgListFromTaxonomy.stream()
                         .filter(rgFromTaxonomy -> rg.getID().equals(rgFromTaxonomy.getID()))
                         .findFirst().orElse(null) // from
                 , rg));                                 //  to
     }
 
-    protected void applyTaxonomyData(RequirementGroup from, RequirementGroup to) {
-
-        if (from != null && to != null) {
-
-            // do the same for sub-RequirementGroup/s
-            to.getRequirementGroups().forEach(rg -> applyTaxonomyData(
-                    from.getRequirementGroups().stream()
-                            .filter(rgFromTaxonomy -> rg.getID().equals(rgFromTaxonomy.getID()))
-                            .findFirst().orElse(null) // from
-                    , rg));                                 //  to
-
-            // do the same for requirement/s
-            to.getRequirements().forEach(rq -> applyTaxonomyData(
-                    from.getRequirements().stream()
-                            .filter(rqFromTaxonomy -> ArtefactUtils.clearAllWhitespaces(rq.getDescription())
-                                    .equals(ArtefactUtils.clearAllWhitespaces(rqFromTaxonomy.getDescription()))
-                                    && rq.getResponseDataType() == rqFromTaxonomy.getResponseDataType()
-                                    && rq.getType() == rqFromTaxonomy.getType())
-                            .findFirst().orElse(null) // from
-                    , rq));                                 // to
-            // cardinalities
-            to.setMultiple(from.isMultiple());
-            to.setMandatory(from.isMandatory());
-            // requirement group type
-            to.setType(from.getType());
-        }
-    }
-
-    protected void applyTaxonomyData(Requirement from, Requirement to) {
-
-        if (from != null && to != null) {
-            // cardinalities
-            to.setMultiple(from.isMultiple());
-            to.setMandatory(from.isMandatory());
-            // requirement group type
-            to.setType(from.getType());
-            // apply related response value artefact
-            to.setResponseValuesRelatedArtefact(from.getResponseValuesRelatedArtefact());
-        }
-    }
+//    protected void applyTaxonomyData(RequirementGroup from, RequirementGroup to) {
+//
+//        if (from != null && to != null) {
+//
+//            // do the same for sub-RequirementGroup/s
+//            to.getRequirementGroups().forEach(rg -> applyTaxonomyData(
+//                    from.getRequirementGroups().stream()
+//                            .filter(rgFromTaxonomy -> rg.getID().equals(rgFromTaxonomy.getID()))
+//                            .findFirst().orElse(null) // from
+//                    , rg));                                 //  to
+//
+//            // do the same for requirement/s
+//            to.getRequirements().forEach(rq -> applyTaxonomyData(
+//                    from.getRequirements().stream()
+//                            .filter(rqFromTaxonomy -> ArtefactUtils.clearAllWhitespaces(rq.getDescription())
+//                                    .equals(ArtefactUtils.clearAllWhitespaces(rqFromTaxonomy.getDescription()))
+//                                    && rq.getResponseDataType() == rqFromTaxonomy.getResponseDataType()
+//                                    && rq.getType() == rqFromTaxonomy.getType())
+//                            .findFirst().orElse(null) // from
+//                    , rq));                                 // to
+//            // cardinalities
+//            to.setMultiple(from.isMultiple());
+//            to.setMandatory(from.isMandatory());
+//            // requirement group type
+//            to.setType(from.getType());
+//        }
+//    }
+//
+//    protected void applyTaxonomyData(Requirement from, Requirement to) {
+//
+//        if (from != null && to != null) {
+//            // cardinalities
+//            to.setMultiple(from.isMultiple());
+//            to.setMandatory(from.isMandatory());
+//            // requirement group type
+//            to.setType(from.getType());
+//            // apply related response value artefact
+//            to.setResponseValuesRelatedArtefact(from.getResponseValuesRelatedArtefact());
+//        }
+//    }
 
     private List<SelectableCriterion> readDataSheet(Sheet dataSheet) {
         // The criteria Column is always the second one
