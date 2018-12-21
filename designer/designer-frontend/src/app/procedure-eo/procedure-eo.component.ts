@@ -23,7 +23,6 @@ import {MatChipInputEvent, MatDialog} from '@angular/material';
 import {TOOPDialogComponent} from '../toopdialog/toopdialog.component';
 import {UtilitiesService} from '../services/utilities.service';
 import {COMMA, ENTER} from '../../../node_modules/@angular/cdk/keycodes';
-import {MatChipInputEvent} from '@angular/material';
 import {CodelistService} from '../services/codelist.service';
 import {ValidationService} from '../services/validation.service';
 import {BaseStep} from '../base/base-step';

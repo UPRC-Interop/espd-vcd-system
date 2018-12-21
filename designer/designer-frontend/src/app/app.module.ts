@@ -77,7 +77,7 @@ import { TOOPDialogComponent } from './toopdialog/toopdialog.component';
     RootComponent,
     CriterionComponent,
     FinishEoComponent,
-    TOOPDialogComponent
+    TOOPDialogComponent,
     FinishEoComponent,
     NumberOjsValidationDirective,
     UrlValidationDirective,
