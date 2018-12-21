@@ -15,19 +15,19 @@
  */
 package eu.esens.espdvcd.builder.schema.v2;
 
-import eu.esens.espdvcd.codelist.enums.ProfileExecutionIDEnum;
-import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
-import eu.esens.espdvcd.codelist.enums.RequirementTypeEnum;
+import eu.esens.espdvcd.codelist.enums.*;
 import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.response.*;
-import eu.espd.schema.v2.pre_award.commonaggregate.*;
-import eu.espd.schema.v2.pre_award.commonbasic.*;
-import eu.espd.schema.v2.unqualifieddatatypes_2.CodeType;
+import eu.espd.schema.v2.v210.commonaggregate.*;
+import eu.espd.schema.v2.v210.commonbasic.*;
+import eu.espd.schema.v2.v210.unqualifieddatatypes_2.CodeType;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -108,6 +108,50 @@ public interface SchemaExtractorV2 {
         }
     }
 
+    default boolean isLotIdentifier(Requirement rq) {
+        return rq.getResponseDataType() != null
+                && rq.getResponseDataType() == ResponseTypeEnum.LOT_IDENTIFIER;
+    }
+
+    default boolean isRequirementType(Requirement rq) {
+        return rq.getType() == RequirementTypeEnum.REQUIREMENT;
+    }
+
+    default boolean isQuestionType(Requirement rq) {
+        return rq.getType() == RequirementTypeEnum.QUESTION;
+    }
+
+    default boolean isLotRequirementType(Requirement rq) {
+        return isRequirementType(rq) && isLotIdentifier(rq);
+    }
+
+    default boolean isLotQuestionType(Requirement rq) {
+        return isQuestionType(rq) && isLotIdentifier(rq);
+    }
+
+    default ExpectedIDType createExpectedIDType(String ID) {
+        ExpectedIDType idType = new ExpectedIDType();
+        idType.setSchemeAgencyID("EU-COM-GROW");
+        idType.setValue(ID);
+        return idType;
+    }
+
+    default List<TenderingCriterionPropertyType> createLotRequirements(Requirement rq) {
+
+        if (isLotRequirementType(rq)
+                && rq.getResponse() != null) {
+            return ((LotIdentifierResponse) rq.getResponse()).getLotsList().stream()
+                    .map(lot -> {
+                        TenderingCriterionPropertyType rqType = extractTenderingCriterionPropertyType(rq);
+                        rqType.setExpectedID(createExpectedIDType(lot));
+                        return rqType;
+                    })
+                    .collect(Collectors.toList());
+        }
+
+        return Collections.emptyList();
+    }
+
     default TenderingCriterionPropertyGroupType extractTenderingCriterionPropertyGroupType(RequirementGroup rg) {
 
         TenderingCriterionPropertyGroupType rgType = new TenderingCriterionPropertyGroupType();
@@ -116,9 +160,21 @@ public interface SchemaExtractorV2 {
                 .map(rg1 -> extractTenderingCriterionPropertyGroupType(rg1))
                 .collect(Collectors.toList()));
 
-        rgType.getTenderingCriterionProperty().addAll(rg.getRequirements().stream()
-                .map(r1 -> extractTenderingCriterionPropertyType(r1))
-                .collect(Collectors.toList()));
+        List<TenderingCriterionPropertyType> rqTypeList = new ArrayList<>();
+
+        for (Requirement r1 : rg.getRequirements()) {
+
+            // lot Requirement found
+            // create all lot TenderingCriterionPropertyTypes
+            if (isLotRequirementType(r1)) {
+                rqTypeList.addAll(createLotRequirements(r1));
+            } else {
+                rqTypeList.add(extractTenderingCriterionPropertyType(r1));
+            }
+
+        }
+
+        rgType.getTenderingCriterionProperty().addAll(rqTypeList);
 
         rgType.setID(createDefaultIDType(rg.getID()));
         // RequirementGroup "PI" attribute: the "processing instruction" attribute is not defined in UBL-2.2.
@@ -467,8 +523,6 @@ public interface SchemaExtractorV2 {
 
     default JurisdictionLevelType createJurisdictionLevel(String code) {
         JurisdictionLevelType jlType = new JurisdictionLevelType();
-        // FIXME: not sure if setLanguageID is mandatory here
-        jlType.setLanguageID("en");
         jlType.setValue(code);
         return jlType;
     }
@@ -608,11 +662,11 @@ public interface SchemaExtractorV2 {
         switch (type) {
 
             case REGULATED:
-                peIdType.setValue(ProfileExecutionIDEnum.ESPD_EDM_V2_0_2_REGULATED.getValue());
+                peIdType.setValue(ProfileExecutionIDEnum.ESPD_EDM_V210_REGULATED.getValue());
                 break;
 
             case SELFCONTAINED:
-                peIdType.setValue(ProfileExecutionIDEnum.ESPD_EDM_V2_0_2_SELFCONTAINED.getValue());
+                peIdType.setValue(ProfileExecutionIDEnum.ESPD_EDM_V210_SELFCONTAINED.getValue());
                 break;
 
         }
@@ -741,7 +795,8 @@ public interface SchemaExtractorV2 {
         return idType;
     }
 
-    default void applyCAResponseToXML(Requirement rq, TenderingCriterionPropertyType rqType) {
+    default void applyCAResponseToXML(Requirement rq,
+                                      TenderingCriterionPropertyType rqType) {
 
         if (rq.getType() == RequirementTypeEnum.REQUIREMENT
                 && rq.getResponse() != null
@@ -758,15 +813,26 @@ public interface SchemaExtractorV2 {
                     break;
 
                 case AMOUNT:
+//                    BigDecimal amount = ((AmountResponse) rq.getResponse()).getAmount();
+//                    String currency = ((AmountResponse) rq.getResponse()).getCurrency();
+//                    if ((amount != null) || (currency != null && !currency.isEmpty())) {
+//                        // Only generate a proper response if for at least one of the variables "amount" and
+//                        // "currency" a value different from the default is detected.
+//
+//                        rqType.setExpectedAmount(new ExpectedAmountType());
+//                        rqType.getExpectedAmount().setValue(amount);
+//                        rqType.getExpectedAmount().setCurrencyID(currency);
+//                    }
+
                     BigDecimal amount = ((AmountResponse) rq.getResponse()).getAmount();
                     String currency = ((AmountResponse) rq.getResponse()).getCurrency();
                     if ((amount != null) || (currency != null && !currency.isEmpty())) {
                         // Only generate a proper response if for at least one of the variables "amount" and
                         // "currency" a value different from the default is detected.
 
-                        rqType.setExpectedAmount(new ExpectedAmountType());
-                        rqType.getExpectedAmount().setValue(amount);
-                        rqType.getExpectedAmount().setCurrencyID(currency);
+                        rqType.setMinimumAmount(new MinimumAmountType());
+                        rqType.getMinimumAmount().setValue(amount);
+                        rqType.getMinimumAmount().setCurrencyID(currency);
                     }
                     break;
 
@@ -799,15 +865,6 @@ public interface SchemaExtractorV2 {
                         rqType.getExpectedCode().setListVersionID("1.0");
                         rqType.getExpectedCode().setListAgencyID("EU-COM-GROW");
                         rqType.getExpectedCode().setValue(code);
-                    }
-                    break;
-
-                case LOT_IDENTIFIER:
-                    String lots = ((LotIdentifierResponse) rq.getResponse()).getLots();
-                    if (lots != null && !lots.isEmpty()) {
-                        rqType.setExpectedID(new ExpectedIDType());
-                        rqType.getExpectedID().setSchemeAgencyID("EU-COM-GROW");
-                        rqType.getExpectedID().setValue(lots);
                     }
                     break;
 
@@ -857,6 +914,17 @@ public interface SchemaExtractorV2 {
                     rqType.getExpectedCode().setListAgencyID("EU-COM-OP");
                     rqType.getExpectedCode().setListVersionID("1.0");
                     rqType.getExpectedCode().setValue(indicator);
+                    break;
+
+                case CODE_BOOLEAN:
+                    String codeBoolean = ((IndicatorResponse) rq.getResponse()).isIndicator()
+                            ? BooleanGUIControlTypeEnum.RADIO_BUTTON_TRUE.name()
+                            : BooleanGUIControlTypeEnum.RADIO_BUTTON_FALSE.name();
+                    rqType.setExpectedCode(new ExpectedCodeType());
+                    rqType.getExpectedCode().setListID("BooleanGUIControlType");
+                    rqType.getExpectedCode().setListAgencyID("EU-COM-OP");
+                    rqType.getExpectedCode().setListVersionID("1.0");
+                    rqType.getExpectedCode().setValue(codeBoolean);
                     break;
 
             }

@@ -1,5 +1,9 @@
 package eu.esens.espdvcd.designer.util;
 
+import eu.esens.espdvcd.validator.ValidationResult;
+
+import java.util.List;
+
 public final class Errors {
 
     //Prevent Class Instantiation
@@ -17,17 +21,17 @@ public final class Errors {
         return new ErrorResponse.ErrorBuilder(code, message).build();
     }
 
-    /**
-     * Creates an error with additional information
-     *
-     * @param code    error code
-     * @param message error message
-     * @param object  error object
-     * @return ErrorResponse object to be serialized in JSON
-     */
-    public static ErrorResponse objectError(int code, String message, Object object) {
-        return new ErrorResponse.ErrorBuilder(code, message).withResponseObject(object).build();
-    }
+//    /**
+//     * Creates an error with additional information
+//     *
+//     * @param code    error code
+//     * @param message error message
+//     * @param object  error object
+//     * @return ErrorResponse object to be serialized in JSON
+//     */
+//    public static ErrorResponse objectError(int code, String message, Object object) {
+//        return new ErrorResponse.ErrorBuilder(code, message).withValidationResults(object).build();
+//    }
 
     /**
      * Creates a 404 - Resource not found error
@@ -84,5 +88,13 @@ public final class Errors {
 
     public static ErrorResponse criteriaNotFoundError() {
         return new ErrorResponse.ErrorBuilder(404, "Criteria requested not found.").build();
+    }
+
+    public static ErrorResponse validationError(List<ValidationResult> errorList) {
+        return new ErrorResponse.ErrorBuilder(406, "Validation failed on the artefact.").withValidationResults(errorList).build();
+    }
+
+    public static ErrorResponse validationError(String message, List<ValidationResult> errorList) {
+        return new ErrorResponse.ErrorBuilder(406, message).withValidationResults(errorList).build();
     }
 }

@@ -25,7 +25,7 @@ dependencies {
     compile project(':validator')
 
     compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.7'
-    compile 'com.sparkjava:spark-core:2.7.2'
+    compile 'com.sparkjava:spark-core:2.8.0'
 //    compile 'com.sparkjava:spark-debug-tools:0.5'
     // https://mvnrepository.com/artifact/eu.toop/toop-commons
     compile group: 'eu.toop', name: 'toop-commons', version: '0.9.1'
@@ -69,6 +69,18 @@ task runWebApp(type: Exec) {
  */
 
 jar {
+    manifest {
+        attributes "Main-Class": "eu.esens.espdvcd.designer.Server"
+    }
+
+    doFirst {
+        from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    }
+    exclude 'META-INF/*.RSA', 'META-INF/*.SF', 'META-INF/*.DSA'
+}
+
+
+task jarWithFrontend(type: Jar) {
     dependsOn "buildWebAppDeploy"
 
     manifest {
@@ -78,8 +90,8 @@ jar {
     doFirst {
         from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     }
+    from sourceSets.main.runtimeClasspath
     exclude 'META-INF/*.RSA', 'META-INF/*.SF', 'META-INF/*.DSA'
-
     finalizedBy "deleteWebAppResources"
 }
 
@@ -106,7 +118,7 @@ task createJarFromExistingResources(type: Jar) {
 task npmInstallWebApp(type: Exec) {
     workingDir "$webappDir"
     inputs.dir "$webappDir"
-    group = BasePlugin.BUILD_GROUP
+//    group = BasePlugin.BUILD_GROUP
     if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")) {
         commandLine "npm.cmd", "install"
     } else {
@@ -118,7 +130,7 @@ task buildWebApp(type: Exec) {
     dependsOn "npmInstallWebApp"
     workingDir "$webappDir"
     inputs.dir "$webappDir"
-    group = BasePlugin.BUILD_GROUP
+//    group = BasePlugin.BUILD_GROUP
     if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")) {
         commandLine "ng.cmd", "build"
     } else {
@@ -136,7 +148,7 @@ task buildWebAppDeploy(type: Exec) {
     dependsOn "npmInstallWebApp"
     workingDir "$webappDir"
     inputs.dir "$webappDir"
-    group = BasePlugin.BUILD_GROUP
+//    group = BasePlugin.BUILD_GROUP
     if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")) {
         commandLine "ng.cmd", "build", "--prod", "--optimization", "--build-optimizer"
     } else {

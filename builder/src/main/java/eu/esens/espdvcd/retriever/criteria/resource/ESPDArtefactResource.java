@@ -22,11 +22,11 @@ import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
 import eu.esens.espdvcd.retriever.criteria.resource.enums.ResourceType;
-import eu.esens.espdvcd.schema.EDMVersion;
+import eu.esens.espdvcd.schema.enums.EDMVersion;
 import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.CriterionType;
 import eu.espd.schema.v1.espdrequest_1.ESPDRequestType;
-import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionType;
-import eu.espd.schema.v2.pre_award.qualificationapplicationrequest.QualificationApplicationRequestType;
+import eu.espd.schema.v2.v210.commonaggregate.TenderingCriterionType;
+import eu.espd.schema.v2.v210.qualificationapplicationrequest.QualificationApplicationRequestType;
 
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.JAXB;

@@ -30,14 +30,12 @@ public class ResponseFactory {
 
             case INDICATOR:
             case CODE_BOOLEAN:
-            case ALPHA_INDICATOR:
                 return new IndicatorResponse();
 
             case DATE:
                 return new DateResponse();
 
             case DESCRIPTION:
-            case ECONOMIC_OPERATOR_ROLE_CODE:
                 return new DescriptionResponse();
                 
             case QUANTITY:

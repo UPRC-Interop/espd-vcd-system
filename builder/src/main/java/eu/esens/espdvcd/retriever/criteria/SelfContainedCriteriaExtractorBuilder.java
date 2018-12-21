@@ -16,7 +16,7 @@
 package eu.esens.espdvcd.retriever.criteria;
 
 import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
-import eu.esens.espdvcd.schema.EDMVersion;
+import eu.esens.espdvcd.schema.enums.EDMVersion;
 
 public class SelfContainedCriteriaExtractorBuilder extends CriteriaExtractorBuilder {
 

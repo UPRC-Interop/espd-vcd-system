@@ -23,8 +23,8 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import eu.esens.espdvcd.builder.BuilderFactory;
 import eu.esens.espdvcd.designer.deserialiser.RequirementDeserialiser;
 import eu.esens.espdvcd.model.ESPDRequest;
-import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.model.ESPDRequestImpl;
+import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
@@ -37,7 +37,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.List;
 
-import static eu.esens.espdvcd.schema.EDMVersion.V2;
+import static eu.esens.espdvcd.schema.enums.EDMVersion.V2;
 
 public class ExportESPDServiceTest {
 
@@ -65,15 +65,14 @@ public class ExportESPDServiceTest {
                 (ExportESPDServiceTest.class.getResourceAsStream("/espd-response.xml")).createESPDResponse();
         Assert.assertNotNull(response);
 
-        exportESPDService = RegulatedExportESPDV1Service.getInstance();
+        exportESPDService = ExportESPDV1Service.getInstance();
         writer = new ObjectMapper().writer().withDefaultPrettyPrinter();
     }
 
     @Test
     public void testCriterionNumberAfterImport() throws Exception {
-        File espdRequestFile = new File(this.getClass().getClassLoader()
-                .getResource("espd-response-v2-60.xml")
-                .toURI());
+        File espdRequestFile = new File(ExportESPDServiceTest.class
+                .getResource("/sfc-210-da-req.xml").toURI());
         Assert.assertNotNull(espdRequestFile);
         ESPDRequest req = BuilderFactory
                 .EDM_V2
@@ -84,25 +83,20 @@ public class ExportESPDServiceTest {
         req.setCriterionList(req.getFullCriterionList().subList(0, req.getFullCriterionList().size() / 2));
         System.out.printf("Criteria count before getting the unselected: %s \n", req.getFullCriterionList().size());
 
-        CriteriaService criteriaService = RegulatedCriteriaService.getV2Instance();
+        CriteriaService criteriaService = SelfContainedCriteriaService.getInstance();
         req.setCriterionList(criteriaService.getUnselectedCriteria(req.getFullCriterionList()));
         System.out.printf("Criteria count after getting the unselected: %s, should be: %s\n"
                 ,req.getFullCriterionList().size()
                 ,criteriaService.getCriteria().size());
-        Assert.assertEquals(criteriaService.getCriteria(), req.getFullCriterionList());
+        Assert.assertEquals(criteriaService.getCriteria().size(), req.getFullCriterionList().size());
     }
 
     @Test
     public void XMLStreamFromResponse() throws Exception{
-        InputStream is = exportESPDService.exportESPDResponseAsInputStream(response);
+        InputStream is = exportESPDService.exportESPDResponse(response);
         Assert.assertNotNull(is);
     }
 
-    @Test
-    public void XMLStringFromResponse() throws Exception{
-        String is = exportESPDService.exportESPDResponseAsString(response);
-        Assert.assertNotNull(is);
-    }
 
     @Test
     public void testExportSFC() throws Exception{

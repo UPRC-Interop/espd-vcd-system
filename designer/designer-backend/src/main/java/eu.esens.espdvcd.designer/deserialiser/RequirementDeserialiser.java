@@ -23,7 +23,7 @@ import eu.esens.espdvcd.codelist.enums.RequirementTypeEnum;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.requirement.ResponseRequirement;
 import eu.esens.espdvcd.model.requirement.response.*;
-import eu.esens.espdvcd.schema.EDMVersion;
+import eu.esens.espdvcd.schema.enums.EDMVersion;
 
 import java.io.IOException;
 import java.util.logging.Logger;
@@ -69,7 +69,6 @@ public class RequirementDeserialiser extends StdDeserializer<ResponseRequirement
         switch (responseRequirement.getResponseDataType()) {
             case CODE:
                 response = mapper.treeToValue(root.get("response"), EvidenceURLCodeResponse.class);
-
                 break;
             case AMOUNT:
                 response = mapper.treeToValue(root.get("response"), AmountResponse.class);
@@ -79,14 +78,12 @@ public class RequirementDeserialiser extends StdDeserializer<ResponseRequirement
                 break;
             case INDICATOR:
             case CODE_BOOLEAN:
-            case ALPHA_INDICATOR:
                 response = mapper.treeToValue(root.get("response"), IndicatorResponse.class);
                 break;
             case PERCENTAGE:
                 response = mapper.treeToValue(root.get("response"), PercentageResponse.class);
                 break;
             case DESCRIPTION:
-            case ECONOMIC_OPERATOR_ROLE_CODE:
                 response = mapper.treeToValue(root.get("response"), DescriptionResponse.class);
                 break;
             case CODE_COUNTRY:
@@ -134,7 +131,7 @@ public class RequirementDeserialiser extends StdDeserializer<ResponseRequirement
             default:
                 LOGGER.severe("Response type not found: " + responseRequirement.getResponseDataType().name());
                 throw new IllegalArgumentException(
-                        String.format("Response type %s does not exist.", responseRequirement.getResponseDataType().name()));
+                        String.format("Response type %s cannot be deserialised.", responseRequirement.getResponseDataType().name()));
         }
         responseRequirement.setResponse(response);
         return responseRequirement;

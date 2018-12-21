@@ -16,14 +16,16 @@
 package eu.esens.espdvcd.designer.service;
 
 import eu.esens.espdvcd.designer.typeEnum.CriteriaType;
-import eu.esens.espdvcd.designer.util.CriteriaUtil;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
 import eu.esens.espdvcd.retriever.criteria.RegulatedCriteriaExtractorBuilder;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
-import eu.esens.espdvcd.schema.EDMVersion;
+import eu.esens.espdvcd.schema.enums.EDMVersion;
 
 import java.util.List;
+
+import static eu.esens.espdvcd.designer.util.CriteriaUtil.generateUUIDs;
+import static eu.esens.espdvcd.designer.util.CriteriaUtil.markAsSelected;
 
 public enum RegulatedCriteriaService implements CriteriaService {
     V1(EDMVersion.V1), V2(EDMVersion.V2);
@@ -44,7 +46,7 @@ public enum RegulatedCriteriaService implements CriteriaService {
 
     @Override
     public List<SelectableCriterion> getCriteria() throws RetrieverException {
-        return CriteriaUtil.generateUUIDs(predefinedExtractor.getFullList());
+        return markAsSelected(generateUUIDs(predefinedExtractor.getFullList()));
     }
 
     @Override

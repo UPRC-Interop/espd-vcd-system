@@ -65,7 +65,7 @@ export class RequirementComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    if (this.req.responseDataType === 'INDICATOR') {
+    if (this.req.responseDataType === 'INDICATOR' || this.req.responseDataType === 'CODE_BOOLEAN') {
       this.indicatorChanged.emit(this.form.get(this.req.uuid).value);
     }
     // this.indicatorChanged.emit(this.form.get(this.req.uuid).value);
@@ -73,6 +73,25 @@ export class RequirementComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
+
+    if ((this.req.type === 'REQUIREMENT' && this.utilities.isImport() && this.utilities.isEO) || this.utilities.isReviewESPD) {
+      this.form.get(this.req.uuid).disable();
+      if (this.req.responseDataType === 'WEIGHT_INDICATOR') {
+        this.form.get(this.req.uuid + 'weight').disable();
+        this.form.get(this.req.uuid + 'evaluationMethodDescription').disable();
+      } else if (this.req.responseDataType === 'AMOUNT') {
+        this.form.get(this.req.uuid + 'currency').disable();
+      } else if (this.req.responseDataType === 'PERIOD' && this.APIService.version === 'v2') {
+        this.form.get(this.req.uuid + 'startDate').disable();
+        this.form.get(this.req.uuid + 'endDate').disable();
+      } else if (this.req.responseDataType === 'ECONOMIC_OPERATOR_IDENTIFIER') {
+          this.form.get(this.req.uuid + 'eoidtype').disable();
+      } else if (this.req.responseDataType === 'EVIDENCE_IDENTIFIER') {
+        this.form.get(this.req.uuid + 'evidenceUrl').disable();
+        this.form.get(this.req.uuid + 'evidenceCode').disable();
+        this.form.get(this.req.uuid + 'evidenceIssuer').disable();
+      }
+    }
 
     if (this.req.responseDataType === 'WEIGHT_INDICATOR' && this.utilities.isImport()) {
       this.isWeighted = this.utilities.criterionWeightIndicators[this.req.uuid];
@@ -83,8 +102,8 @@ export class RequirementComponent implements OnInit, OnChanges {
       // init cpvCodes when import
       this.cpvCodes = this.utilities.renderCpvTemplate[this.req.uuid];
 
-      /* Make Chips non editable when user is EO and is requirement */
-      if (this.utilities.isEO && this.req.type === 'REQUIREMENT') {
+      /* Make Chips non editable when user is EO and is requirement, or when the artefact is being reviewed */
+      if ((this.utilities.isEO && this.req.type === 'REQUIREMENT') || this.utilities.isReviewESPD) {
         this.disabled = true;
         this.removable = false;
       }
@@ -94,13 +113,10 @@ export class RequirementComponent implements OnInit, OnChanges {
       }
     }
 
-    if (this.req.responseDataType === 'INDICATOR') {
+    if (this.req.responseDataType === 'INDICATOR' || this.req.responseDataType === 'CODE_BOOLEAN') {
       this.form.get(this.req.uuid)
         .valueChanges
         .subscribe(ev => {
-          console.log('emit: ' + ev);
-          // console.log(ev);
-          // console.log(typeof ev);
           this.indicatorChanged.emit(ev);
         });
     } else {

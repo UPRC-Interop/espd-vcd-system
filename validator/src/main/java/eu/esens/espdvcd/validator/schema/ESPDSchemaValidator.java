@@ -15,7 +15,8 @@
  */
 package eu.esens.espdvcd.validator.schema;
 
-import eu.esens.espdvcd.schema.EDMVersion;
+import eu.esens.espdvcd.schema.enums.EDMSubVersion;
+import eu.esens.espdvcd.schema.enums.EDMVersion;
 import eu.esens.espdvcd.schema.SchemaUtil;
 import eu.esens.espdvcd.schema.XSD;
 import eu.esens.espdvcd.validator.ArtefactValidator;
@@ -44,7 +45,7 @@ public class ESPDSchemaValidator implements ArtefactValidator {
     private String xsdPath;
     private Class jaxbClass;
 
-    public ESPDSchemaValidator(InputStream is, String xsdPath, Class jaxbClass, EDMVersion v) throws SAXException, JAXBException {
+    public ESPDSchemaValidator(InputStream is, String xsdPath, Class jaxbClass, EDMSubVersion v) throws SAXException, JAXBException {
 
         this.xsdPath = xsdPath;
         this.jaxbClass = jaxbClass;
@@ -58,7 +59,7 @@ public class ESPDSchemaValidator implements ArtefactValidator {
         validateXML(is, schema, v);
     }
 
-    private void validateXML(InputStream is, Schema schema, EDMVersion v) throws JAXBException {
+    private void validateXML(InputStream is, Schema schema, EDMSubVersion v) throws JAXBException {
 
         // creating unmarshaller
         Unmarshaller unmarshaller = SchemaUtil.getUnmarshaller(v);
@@ -74,16 +75,6 @@ public class ESPDSchemaValidator implements ArtefactValidator {
                     .build());
             return true;
         });
-        /*unmarshaller.setEventHandler(new ValidationEventHandler() {
-            @Override
-            public boolean handleEvent(ValidationEvent validationEvent) {
-                // add all validation event messages to list for later evaluation
-                validationMessages.add(validationEvent.getMessage() +
-                        " (line " + validationEvent.getLocator().getLineNumber() +
-                        ", column " + validationEvent.getLocator().getColumnNumber() + ")");
-                return true;
-            }
-        });*/
 
         // validate the given input stream against the specified schema
         try {

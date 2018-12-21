@@ -16,12 +16,11 @@
 package eu.esens.espdvcd.builder;
 
 import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
-import eu.esens.espdvcd.model.DocumentDetails;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.retriever.criteria.RegulatedCriteriaExtractorBuilder;
 import eu.esens.espdvcd.retriever.criteria.resource.CriteriaTaxonomyResource;
 import eu.esens.espdvcd.retriever.criteria.resource.RegulatedCriteriaTaxonomyResource;
-import eu.esens.espdvcd.schema.EDMVersion;
+import eu.esens.espdvcd.schema.enums.EDMVersion;
 
 import java.util.List;
 import java.util.logging.Level;
@@ -50,7 +49,9 @@ public class RegulatedModelBuilderV2 extends RegulatedModelBuilder {
             taxonomyResource = new RegulatedCriteriaTaxonomyResource();
         }
 
-        LOGGER.log(Level.INFO, "Applying regulated v2 taxonomy cardinalities and REQUIREMENT_GROUP Types to the imported artefact...");
+        LOGGER.log(Level.INFO, "Applying regulated v2 taxonomy cardinalities"
+                + ", REQUIREMENT_GROUP Types and Codelists data"
+                + " to the imported artefact...");
         criterionList.forEach(sc -> taxonomyResource.applyTaxonomyData(sc));
     }
 

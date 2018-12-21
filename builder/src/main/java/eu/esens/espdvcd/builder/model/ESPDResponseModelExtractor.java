@@ -24,17 +24,17 @@ import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.response.*;
 import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
-import eu.esens.espdvcd.schema.EDMVersion;
+import eu.esens.espdvcd.schema.enums.EDMVersion;
 import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.RequirementType;
 import eu.espd.schema.v1.commonaggregatecomponents_2.DocumentReferenceType;
 import eu.espd.schema.v1.commonaggregatecomponents_2.PersonType;
 import eu.espd.schema.v1.commonaggregatecomponents_2.ProcurementProjectLotType;
 import eu.espd.schema.v1.espd_commonaggregatecomponents_1.EconomicOperatorPartyType;
 import eu.espd.schema.v1.espdresponse_1.ESPDResponseType;
-import eu.espd.schema.v2.pre_award.commonaggregate.EvidenceType;
-import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionResponseType;
-import eu.espd.schema.v2.pre_award.commonaggregate.TenderingCriterionType;
-import eu.espd.schema.v2.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
+import eu.espd.schema.v2.v210.commonaggregate.EvidenceType;
+import eu.espd.schema.v2.v210.commonaggregate.TenderingCriterionResponseType;
+import eu.espd.schema.v2.v210.commonaggregate.TenderingCriterionType;
+import eu.espd.schema.v2.v210.qualificationapplicationresponse.QualificationApplicationResponseType;
 
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -169,8 +169,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                                 .forEach(rq -> { // loop thought all of the extracted Requirements
 
                                     if (responseTypeMap.containsKey(rq.getID())) { // try to find a response for that requirement
-                                        rq.setResponse(extractResponse(responseTypeMap.get(rq.getID()), rq.getResponseDataType(),
-                                                criterionTypeMap.get(sc.getID())));
+                                        rq.setResponse(extractResponse(responseTypeMap.get(rq.getID()), rq.getResponseDataType()));
                                     }
 
                                     // Apply Criterion Level Weighting data
@@ -194,7 +193,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
             if (qarType.getAdditionalDocumentReference() != null && !qarType.getAdditionalDocumentReference().isEmpty()) {
 
                 // Find an entry with ESPD_REQUEST Value
-                Optional<eu.espd.schema.v2.pre_award.commonaggregate.DocumentReferenceType> optRef = qarType.getAdditionalDocumentReference().stream().
+                Optional<eu.espd.schema.v2.v210.commonaggregate.DocumentReferenceType> optRef = qarType.getAdditionalDocumentReference().stream().
                         filter(r -> r.getDocumentTypeCode() != null && r.getDocumentTypeCode().getValue().
                                 equals("ESPD_REQUEST")).findFirst();
                 optRef.ifPresent(documentReferenceType -> modelResponse.setESPDRequestDetails(extractESPDRequestDetails(documentReferenceType)));
@@ -321,14 +320,11 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
         return r;
     }
 
-    public Response extractResponse(TenderingCriterionResponseType responseType, ResponseTypeEnum theType,
-                                    TenderingCriterionType criterionType) {
+    public Response extractResponse(TenderingCriterionResponseType responseType, ResponseTypeEnum theType) {
 
         switch (theType) {
 
             case INDICATOR:
-            case CODE_BOOLEAN:
-            case ALPHA_INDICATOR:
                 IndicatorResponse indicatorResp = new IndicatorResponse();
                 if (responseType.getResponseValue().get(0).getResponseIndicator() != null) {
                     indicatorResp.setIndicator(responseType.getResponseValue().get(0).getResponseIndicator().isValue());
@@ -348,7 +344,6 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 return dateResp;
 
             case DESCRIPTION:
-            case ECONOMIC_OPERATOR_ROLE_CODE:
                 DescriptionResponse descriptionResp = new DescriptionResponse();
                 if (responseType.getResponseValue().get(0).getDescription().get(0) != null &&
                         responseType.getResponseValue().get(0).getDescription().get(0).getValue() != null) {
@@ -666,11 +661,6 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                     eoDetails.setName(eop.getParty().getPartyName().get(0).getName().getValue());
                 }
 
-                // only criterion is used for tenderer role - changed also in BIS
-                /*if (eop.getEconomicOperatorRoleCode() != null) {
-                    eoDetails.setRole(eop.getEconomicOperatorRoleCode().getValue());
-                }*/
-
                 if (eop.getParty().getWebsiteURI() != null) {
                     eoDetails.setWebSiteURI(eop.getParty().getWebsiteURI().getValue());
                 }
@@ -736,7 +726,6 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
             if (!eop.getRepresentativeNaturalPerson().isEmpty()) {
                 eop.getRepresentativeNaturalPerson().forEach(npt -> {
                     NaturalPerson np = new NaturalPerson();
-                    /* We assume only one. We arbitrarily fetch the first one from the list */
 
                     if (npt.getNaturalPersonRoleDescription() != null) {
                         np.setRole(npt.getNaturalPersonRoleDescription().getValue());
@@ -745,7 +734,8 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                     if (npt.getPowerOfAttorney() != null) {
 
                         /* in ESPD the only look for the person in agent party in power of attorney */
-                        if (npt.getPowerOfAttorney().getAgentParty() != null && !npt.getPowerOfAttorney().getAgentParty().getPerson().isEmpty()) {
+                        if (npt.getPowerOfAttorney().getAgentParty() != null
+                                && !npt.getPowerOfAttorney().getAgentParty().getPerson().isEmpty()) {
                             PersonType pt = npt.getPowerOfAttorney().getAgentParty().getPerson().get(0);
 
                             if (pt.getFirstName() != null) {
@@ -826,9 +816,9 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
         return eoDetails;
     }
 
-    public EODetails extractEODetails(eu.espd.schema.v2.pre_award.commonaggregate.EconomicOperatorPartyType eoPartyType,
-                                      eu.espd.schema.v2.pre_award.commonaggregate.ProcurementProjectLotType pplType,
-                                      eu.espd.schema.v2.pre_award.commonbasic.EconomicOperatorGroupNameType eoGroupNameType) {
+    public EODetails extractEODetails(eu.espd.schema.v2.v210.commonaggregate.EconomicOperatorPartyType eoPartyType,
+                                      eu.espd.schema.v2.v210.commonaggregate.ProcurementProjectLotType pplType,
+                                      eu.espd.schema.v2.v210.commonbasic.EconomicOperatorGroupNameType eoGroupNameType) {
 
         final EODetails eoDetails = new EODetails();
 
@@ -955,9 +945,9 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                     }
 
                     /* in ESPD the only look for the person in agent party in power of attorney */
-                    if (eoPartyType.getParty().getPowerOfAttorney().get(0).getAgentParty() != null
-                            && !eoPartyType.getParty().getPowerOfAttorney().get(0).getAgentParty().getPerson().isEmpty()) {
-                        eu.espd.schema.v2.pre_award.commonaggregate.PersonType pt = eoPartyType.getParty().getPowerOfAttorney().get(0).getAgentParty().getPerson().get(0);
+                    if (poa.getAgentParty() != null
+                            && !poa.getAgentParty().getPerson().isEmpty()) {
+                        eu.espd.schema.v2.v210.commonaggregate.PersonType pt = poa.getAgentParty().getPerson().get(0);
 
                         if (pt.getFirstName() != null) {
                             np.setFirstName(pt.getFirstName().getValue());
@@ -1079,7 +1069,7 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
      * @param drt
      * @return
      */
-    private ESPDRequestDetails extractESPDRequestDetails(eu.espd.schema.v2.pre_award.commonaggregate.DocumentReferenceType drt) {
+    private ESPDRequestDetails extractESPDRequestDetails(eu.espd.schema.v2.v210.commonaggregate.DocumentReferenceType drt) {
         ESPDRequestDetails erd = new ESPDRequestDetails();
 
         if (drt.getID() != null) {

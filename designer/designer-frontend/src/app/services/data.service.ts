@@ -18,7 +18,7 @@ import {Injectable} from '@angular/core';
 import {ApicallService} from './apicall.service';
 import {ExclusionCriteria} from '../model/exclusionCriteria.model';
 import {SelectionCriteria} from '../model/selectionCriteria.model';
-import {FormGroup, NgForm} from '@angular/forms';
+import {FormArray, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 import {Cadetails} from '../model/caDetails.model';
 import {ESPDRequest} from '../model/ESPDRequest.model';
 import {FullCriterion} from '../model/fullCriterion.model';
@@ -31,7 +31,6 @@ import {ESPDResponse} from '../model/ESPDResponse.model';
 import * as moment from 'moment';
 import {PostalAddress} from '../model/postalAddress.model';
 import {ContactingDetails} from '../model/contactingDetails.model';
-import {MatSnackBar} from '@angular/material';
 import {FormUtilService} from './form-util.service';
 import {UtilitiesService} from './utilities.service';
 import {TranslateService} from '@ngx-translate/core';
@@ -40,35 +39,16 @@ import {ExportType} from '../export/export-type.enum';
 import {CaRelatedCriterion} from '../model/caRelatedCriterion.model';
 import {DocumentDetails} from '../model/documentDetails.model';
 import {Amount} from '../model/amount.model';
-import {CodeList} from '../model/codeList.model';
 
 import _ from 'lodash';
+import {Filter} from '../filter/filter.enum';
+import {CodelistService} from './codelist.service';
 
 @Injectable()
 export class DataService {
 
   /* ================================= Criterion Filtering Regex ===============================*/
-  EXCLUSION_REGEXP: RegExp = /^CRITERION.EXCLUSION.+/;
-  EXCLUSION_CONVICTION_REGEXP: RegExp = /^CRITERION.EXCLUSION.CONVICTIONS.+/;
-  EXCLUSION_CONTRIBUTION_REGEXP: RegExp = /^CRITERION.EXCLUSION.CONTRIBUTIONS.+/;
-  EXCLUSION_SOCIAL_BUSINESS_MISCONDUCT_CONFLICT_REGEXP: RegExp = /(^CRITERION.EXCLUSION.SOCIAL.+)|(^CRITERION.EXCLUSION.BUSINESS.+)|(^CRITERION.EXCLUSION.MISCONDUCT.+)|(^CRITERION.EXCLUSION.CONFLICT_OF_INTEREST.+)/;
-  EXCLUSION_NATIONAL_REGEXP: RegExp = /^CRITERION.EXCLUSION.NATIONAL.+/;
-
-  SELECTION_REGEXP: RegExp = /^CRITERION.SELECTION.+/;
-  SELECTION_SUITABILITY_REGEXP: RegExp = /^CRITERION.SELECTION.SUITABILITY.+/;
-  SELECTION_ECONOMIC_REGEXP: RegExp = /^CRITERION.SELECTION.ECONOMIC_FINANCIAL_STANDING.+/;
-  SELECTION_TECHNICAL_REGEXP: RegExp = /(?!.*CERTIFICATES*)^CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY.+/;
-  SELECTION_CERTIFICATES_REGEXP: RegExp = /^CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY.CERTIFICATES.+/;
-
-  EO_RELATED_REGEXP: RegExp = /(?!.*MEETS_THE_OBJECTIVE*)^CRITERION.OTHER.EO_DATA.+/;
-  EO_RELATED_A_REGEXP: RegExp = /(^CRITERION.OTHER.EO_DATA.REGISTERED_IN_OFFICIAL_LIST*)|(^CRITERION.OTHER.EO_DATA.SHELTERED_WORKSHOP*)|(^CRITERION.OTHER.EO_DATA.TOGETHER_WITH_OTHERS*)|(^CRITERION.OTHER.EO_DATA.CONTRIBUTIONS_CERTIFICATES*)/;
-  EO_RELATED_C_REGEXP: RegExp = /^CRITERION.OTHER.EO_DATA.RELIES_ON_OTHER_CAPACITIES*/;
-  EO_RELATED_D_REGEXP: RegExp = /^CRITERION.OTHER.EO_DATA.SUBCONTRACTS_WITH_THIRD_PARTIES*/;
-  REDUCTION_OF_CANDIDATES_REGEXP: RegExp = /^CRITERION.OTHER.EO_DATA.MEETS_THE_OBJECTIVE*/;
-  // REDUCTION_OF_CANDIDATES_REGEXP: RegExp = /(^CRITERION.OTHER.EO_DATA.MEETS_THE_OBJECTIVE*)|(^CRITERION.OTHER.EO_DATA.REDUCTION_OF_CANDIDATES)/;
-
-  OTHER_CA_REGEXP: RegExp = /^CRITERION.OTHER.CA_DATA.+/;
-  EO_LOT_REGEXP: RegExp = /^CRITERION.OTHER.EO_DATA.LOTS_TENDERED/;
+  filter = Filter;
 
 
   exclusionACriteria: ExclusionCriteria[] = null;
@@ -113,7 +93,6 @@ export class DataService {
   espdRequest: ESPDRequest;
   espdResponse: ESPDResponse;
   version: string;
-  receivedNoticeNumber: string;
   selectedCountry = '';
   selectedEOCountry = '';
   public EOForm: FormGroup;
@@ -146,7 +125,8 @@ export class DataService {
   constructor(private APIService: ApicallService,
               public formUtil: FormUtilService,
               public utilities: UtilitiesService,
-              public translate: TranslateService) {
+              public translate: TranslateService,
+              public codelist: CodelistService) {
 
     this.AddLanguages();
     translate.setDefaultLang('ESPD_en');
@@ -155,19 +135,6 @@ export class DataService {
 
 
   /* ================= Merge criterions into one fullcriterion list ================*/
-
-  /* ============================= Filtering Criteria ============================*/
-
-
-  filterExclusionCriteria(regex: RegExp, criteriaList: FullCriterion[]): ExclusionCriteria[] {
-    const filteredList: FullCriterion[] = [];
-    for (const fullCriterion of criteriaList) {
-      if (regex.test(fullCriterion.typeCode)) {
-        filteredList.push(fullCriterion);
-      }
-    }
-    return filteredList;
-  }
 
   makeFullCriterionListCA(caRelatedCriteria: CaRelatedCriterion[],
                           exclusionACriteria: ExclusionCriteria[],
@@ -277,6 +244,18 @@ export class DataService {
     }
   }
 
+  /* ============================= Filtering Criteria ============================*/
+
+
+  filterExclusionCriteria(regex: RegExp, criteriaList: FullCriterion[]): FullCriterion[] {
+    const filteredList: FullCriterion[] = [];
+    for (const fullCriterion of criteriaList) {
+      if (regex.test(fullCriterion.typeCode)) {
+        filteredList.push(fullCriterion);
+      }
+    }
+    return filteredList;
+  }
 
   filterSelectionCriteria(regex: RegExp, criteriaList: FullCriterion[]): SelectionCriteria[] {
     const filteredList: FullCriterion[] = [];
@@ -362,22 +341,17 @@ export class DataService {
 
   /* ============================= step submit actions =================================*/
 
-  selectionSubmit(isSatisfiedALL: boolean) {
-    // console.log('THIS IS SELECTION ISSUE: ');
-    // console.log(isSatisfiedALL);
-    // console.log(this.selectionALLCriteria);
-    // console.log(this.caRelatedCriteria);
-    // console.log(this.selectionACriteria);
-    // console.log(this.selectionBCriteria);
-    // console.log(this.selectionCCriteria);
-    // console.log(this.selectionDCriteria);
-    // console.log(this.utilities.qualificationApplicationType);
+  finishSubmit(exportType: ExportType) {
+
 
     /* WORKAROUND-FIX: satisfiesALL Criteria null issue when it's self-contained */
     if (this.utilities.qualificationApplicationType === 'selfcontained') {
       this.selectionALLCriteria = [];
     }
     console.log(this.selectionALLCriteria);
+    if (this.utilities.qualificationApplicationType === 'regulated') {
+      this.caRelatedCriteria = [];
+    }
 
     /* extract caRelated criteria */
     if (this.utilities.qualificationApplicationType === 'selfcontained') {
@@ -402,7 +376,7 @@ export class DataService {
       this.exclusionBCriteria,
       this.exclusionCCriteria,
       this.exclusionDCriteria,
-      isSatisfiedALL,
+      this.utilities.isSatisfiedALL,
       this.selectionALLCriteria,
       this.selectionACriteria,
       this.selectionBCriteria,
@@ -412,12 +386,7 @@ export class DataService {
       this.reductionCriteria);
 
     console.log(this.fullCriterionList);
-    // apicall service post
 
-
-  }
-
-  finishSubmit(exportType: ExportType) {
 
     switch (exportType) {
       case ExportType.XML:
@@ -480,19 +449,29 @@ export class DataService {
 
   finishEOSubmit(exportType: ExportType) {
 
-    /* extract caRelated criteria */
+    /* extract caRelated criteria, and eoLotTenderedCriterion */
     if (this.utilities.qualificationApplicationType === 'selfcontained') {
       /* WORKAROUND-FIX: satisfiesALL Criteria null issue when it's self-contained */
       this.selectionALLCriteria = [];
       this.formUtil.extractFormValuesFromCriteria(this.caRelatedCriteria, this.caRelatedCriteriaForm, this.formUtil.evidenceList);
+      this.formUtil.extractFormValuesFromCriteria(this.eoLotCriterion, this.eoLotCriterionForm, this.formUtil.evidenceList);
+    }
+
+    if (this.utilities.qualificationApplicationType === 'regulated' && this.APIService.version === 'v1') {
+      this.caRelatedCriteria = [];
+      this.eoLotCriterion = [];
+    }
+
+    if (this.utilities.qualificationApplicationType === 'regulated' && this.APIService.version === 'v2') {
+      this.caRelatedCriteria = [];
+      /* REGULATED 2.1.0: Extract CRITERION.OTHER.EO_DATA.LOTS_TENDERED Criterion */
+      this.formUtil.extractFormValuesFromCriteria(this.eoLotCriterion, this.eoLotCriterionForm, this.formUtil.evidenceList);
     }
 
     /* extract eoRelated criteria */
     this.formUtil.extractFormValuesFromCriteria(this.eoRelatedACriteria, this.eoRelatedACriteriaForm, this.formUtil.evidenceList);
     this.formUtil.extractFormValuesFromCriteria(this.eoRelatedCCriteria, this.eoRelatedCCriteriaForm, this.formUtil.evidenceList);
     this.formUtil.extractFormValuesFromCriteria(this.eoRelatedDCriteria, this.eoRelatedDCriteriaForm, this.formUtil.evidenceList);
-    this.formUtil.extractFormValuesFromCriteria(this.eoLotCriterion, this.eoLotCriterionForm, this.formUtil.evidenceList);
-
     /* extract exclusion criteria */
     this.formUtil.extractFormValuesFromCriteria(this.exclusionACriteria, this.exclusionACriteriaForm, this.formUtil.evidenceList);
     this.formUtil.extractFormValuesFromCriteria(this.exclusionBCriteria, this.exclusionBCriteriaForm, this.formUtil.evidenceList);
@@ -511,6 +490,7 @@ export class DataService {
 
     /* extract reduction criteria */
     this.formUtil.extractFormValuesFromCriteria(this.reductionCriteria, this.reductionCriteriaForm, this.formUtil.evidenceList);
+
 
     // make full criterion list
     this.fullCriterionList = this.makeFullCriterionListEO(this.caRelatedCriteria,
@@ -638,9 +618,10 @@ export class DataService {
   ReuseESPD(filesToUpload: File[], form: NgForm, role: string): Promise<void> {
     const promise = new Promise<void>((resolve, reject) => {
 
-      if (filesToUpload.length > 0 && role === 'CA') {
+      if (filesToUpload.length > 0 && (role === 'CA' && !this.isReadOnly())) {
         this.APIService.postFile(filesToUpload)
           .then(res => {
+            console.log('CA not readonly');
             /* DUMMY ESPD for testing */
             // res = this.utilities.makeDummyESPDRequest();
             // console.log(res);
@@ -648,17 +629,18 @@ export class DataService {
             this.APIService.version = res.documentDetails.version.toLowerCase();
             /* SELF-CONTAINED: if a self-contained artifact is imported then the version is v2 */
             this.utilities.qualificationApplicationType = res.documentDetails.qualificationApplicationType.toLowerCase();
+            this.utilities.type = res.documentDetails.type;
             if (res.documentDetails.qualificationApplicationType === 'SELFCONTAINED') {
               this.APIService.version = 'v2';
               // Create the lots here:
               this.utilities.projectLots = _.range(res.cadetails.procurementProjectLots).map(i => `Lot${i + 1}`);
             }
 
+
             // res.cadetails=this.CADetails;
             // console.log(res.fullCriterionList);
             console.log(res.cadetails);
             this.CADetails = res.cadetails;
-            this.receivedNoticeNumber = res.cadetails.receivedNoticeNumber;
             this.PostalAddress = res.cadetails.postalAddress;
             this.ContactingDetails = res.cadetails.contactingDetails;
             // console.log(res.cadetails.postalAddress);
@@ -674,17 +656,18 @@ export class DataService {
               this.utilities.isAtoD = true;
               this.utilities.isSatisfiedALL = false;
 
-              this.caRelatedCriteria = this.filterCARelatedCriteria(this.OTHER_CA_REGEXP, res.fullCriterionList);
+              this.caRelatedCriteria = this.filterCARelatedCriteria(new RegExp(this.filter.OTHER_CA_REGEXP), res.fullCriterionList);
               this.caRelatedCriteriaForm = this.formUtil.createCARelatedCriterionForm(this.caRelatedCriteria);
-              this.eoLotCriterion = this.filterCARelatedCriteria(this.EO_LOT_REGEXP, res.fullCriterionList);
+              this.eoLotCriterion = this.filterCARelatedCriteria(new RegExp(this.filter.EO_LOT_REGEXP), res.fullCriterionList);
               console.log('THIS IS LOTS_TENDERED');
               console.log(this.eoLotCriterion);
             }
+
             console.log(res.fullCriterionList);
-            this.exclusionACriteria = this.filterExclusionCriteria(this.EXCLUSION_CONVICTION_REGEXP, res.fullCriterionList);
-            this.exclusionBCriteria = this.filterExclusionCriteria(this.EXCLUSION_CONTRIBUTION_REGEXP, res.fullCriterionList);
-            this.exclusionCCriteria = this.filterExclusionCriteria(this.EXCLUSION_SOCIAL_BUSINESS_MISCONDUCT_CONFLICT_REGEXP, res.fullCriterionList);
-            this.exclusionDCriteria = this.filterExclusionCriteria(this.EXCLUSION_NATIONAL_REGEXP, res.fullCriterionList);
+            this.exclusionACriteria = this.filterExclusionCriteria(new RegExp(this.filter.EXCLUSION_CONVICTION), res.fullCriterionList);
+            this.exclusionBCriteria = this.filterExclusionCriteria(new RegExp(this.filter.EXCLUSION_CONTRIBUTION), res.fullCriterionList);
+            this.exclusionCCriteria = this.filterExclusionCriteria(new RegExp(this.filter.EXCLUSION_SOCIAL_BUSINESS_MISCONDUCT_CONFLICT), res.fullCriterionList);
+            this.exclusionDCriteria = this.filterExclusionCriteria(new RegExp(this.filter.EXCLUSION_NATIONAL), res.fullCriterionList);
 
             this.exclusionACriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionACriteria);
             // console.log(this.exclusionACriteriaForm);
@@ -697,11 +680,12 @@ export class DataService {
 
             // console.log(this.exclusionDCriteria);
 
-            this.selectionACriteria = this.filterSelectionCriteria(this.SELECTION_SUITABILITY_REGEXP, res.fullCriterionList);
-            this.selectionBCriteria = this.filterSelectionCriteria(this.SELECTION_ECONOMIC_REGEXP, res.fullCriterionList);
-            this.selectionCCriteria = this.filterSelectionCriteria(this.SELECTION_TECHNICAL_REGEXP, res.fullCriterionList);
-            this.selectionDCriteria = this.filterSelectionCriteria(this.SELECTION_CERTIFICATES_REGEXP, res.fullCriterionList);
-            this.selectionALLCriteria = this.filterSelectionCriteria(this.SELECTION_REGEXP, res.fullCriterionList);
+            this.selectionACriteria = this.filterSelectionCriteria(new RegExp(this.filter.SELECTION_SUITABILITY_REGEXP), res.fullCriterionList);
+            this.selectionBCriteria = this.filterSelectionCriteria(new RegExp(this.filter.SELECTION_ECONOMIC_REGEXP), res.fullCriterionList);
+            this.selectionCCriteria = this.filterSelectionCriteria(new RegExp(this.filter.SELECTION_TECHNICAL_REGEXP), res.fullCriterionList);
+            this.selectionDCriteria = this.filterSelectionCriteria(new RegExp(this.filter.SELECTION_CERTIFICATES_REGEXP), res.fullCriterionList);
+            /* satisfies all...*/
+            this.selectionALLCriteria = this.filterSelectionCriteria(new RegExp(this.filter.SELECTION_REGEXP), res.fullCriterionList);
 
             this.selectionACriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionACriteria);
             // console.log(this.selectionACriteriaForm);
@@ -713,13 +697,55 @@ export class DataService {
             // console.log(this.selectionDCriteriaForm);
             this.selectionALLCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionALLCriteria);
 
-            this.eoRelatedCriteria = this.filterEoRelatedCriteria(this.EO_RELATED_REGEXP, res.fullCriterionList);
+            this.eoRelatedCriteria = this.filterEoRelatedCriteria(new RegExp(this.filter.EO_RELATED_REGEXP), res.fullCriterionList);
+            // console.log('EO RELATED CRITERIA in REQUEST import');
+            // console.log(this.eoRelatedCriteria);
             // this.eoLotCriterionForm = this.formUtil.createEORelatedCriterionForm(this.eoLotCriterion);
-            this.reductionCriteria = this.filterEoRelatedCriteria(this.REDUCTION_OF_CANDIDATES_REGEXP, res.fullCriterionList);
+            this.reductionCriteria = this.filterEoRelatedCriteria(new RegExp(this.filter.REDUCTION_OF_CANDIDATES_REGEXP), res.fullCriterionList);
+            // console.log('REDUCTION CRITERIA IN REQUEST IMPORT: ');
+            // console.log(this.reductionCriteria);
             this.reductionCriteriaForm = this.formUtil.createReductionCriterionForm(this.reductionCriteria);
 
             // create requirementGroup template objects required for multiple instances (cardinalities) function
             this.formUtil.createTemplateReqGroups(res.fullCriterionList);
+
+            /* find if CRITERION.SELECTION.ALL_SATISFIED exists */
+            if (this.APIService.version === 'v1') {
+              this.utilities.satisfiedALLCriterionExists = this.utilities
+                .findCriterion(this.selectionALLCriteria, '7e7db838-eeac-46d9-ab39-42927486f22d');
+            } else if (this.APIService.version === 'v2') {
+              this.utilities.satisfiedALLCriterionExists = this.utilities
+                .findCriterion(this.selectionALLCriteria, 'f4dc58dd-af45-4602-a4c8-3dca30fac082');
+            }
+
+            if (this.utilities.satisfiedALLCriterionExists) {
+              /* check whether the SATISFIES_ALL criterion is selected or not */
+              if (this.APIService.version === 'v1') {
+                this.utilities.isSatisfiedALLSelected = this.utilities
+                  .getSatisfiesALLCriterion(this.selectionALLCriteria, '7e7db838-eeac-46d9-ab39-42927486f22d').selected;
+                if (this.utilities.isSatisfiedALLSelected) {
+                  this.utilities.isSatisfiedALL = true;
+                  this.utilities.isAtoD = false;
+                } else {
+                  this.utilities.isSatisfiedALL = false;
+                  this.utilities.isAtoD = true;
+                }
+              } else if (this.APIService.version === 'v2') {
+                this.utilities.isSatisfiedALLSelected = this.utilities
+                  .getSatisfiesALLCriterion(this.selectionALLCriteria, 'f4dc58dd-af45-4602-a4c8-3dca30fac082').selected;
+                if (this.utilities.isSatisfiedALLSelected) {
+                  this.utilities.isSatisfiedALL = true;
+                  this.utilities.isAtoD = false;
+                } else {
+                  this.utilities.isSatisfiedALL = false;
+                  this.utilities.isAtoD = true;
+                }
+              }
+            } else {
+              this.utilities.isSatisfiedALL = false;
+              this.utilities.isAtoD = true;
+            }
+
             console.log(res);
             console.log(this.CADetails);
             resolve();
@@ -732,12 +758,13 @@ export class DataService {
             this.utilities.openSnackBar(message, action);
             reject();
           });
-      } else if (filesToUpload.length > 0 && role === 'EO') {
+      } else if (filesToUpload.length > 0 && (role === 'EO' || (role === 'CA' && this.isReadOnly()))) {
         this.APIService.postFileResponse(filesToUpload)
           .then(res => {
             console.log(res);
             this.APIService.version = res.documentDetails.version.toLowerCase();
             this.utilities.qualificationApplicationType = res.documentDetails.qualificationApplicationType.toLowerCase();
+            this.utilities.type = res.documentDetails.type;
             /* SELF-CONTAINED: if a self-cointained artifact is imported then the version is v2 */
             if (res.documentDetails.qualificationApplicationType === 'SELFCONTAINED') {
               this.APIService.version = 'v2';
@@ -750,13 +777,14 @@ export class DataService {
             this.CADetails = res.cadetails;
             this.PostalAddress = res.cadetails.postalAddress;
             this.ContactingDetails = res.cadetails.contactingDetails;
-            this.receivedNoticeNumber = res.cadetails.receivedNoticeNumber;
             this.selectedCountry = this.CADetails.cacountry;
             this.EODetails = res.eodetails;
-            console.log(this.EODetails);
-            console.log(this.EODetails.naturalPersons);
+            // console.log(this.EODetails);
+            // console.log(this.EODetails.naturalPersons);
             // console.log(this.EODetails.naturalPersons['birthDate']);
-            this.selectedEOCountry = this.EODetails.postalAddress.countryCode;
+            if (res.eodetails !== undefined) {
+              this.selectedEOCountry = this.EODetails.postalAddress.countryCode;
+            }
             if (this.utilities.qualificationApplicationType === 'selfcontained') {
               this.CADetails.classificationCodes = res.cadetails.classificationCodes;
               this.CADetails.weightScoringMethodologyNote = res.cadetails.weightScoringMethodologyNote;
@@ -765,14 +793,16 @@ export class DataService {
               this.utilities.isAtoD = true;
               this.utilities.isSatisfiedALL = false;
 
-              if (res.eodetails.generalTurnover !== null || res.eodetails.generalTurnover !== undefined) {
-                this.generalTurnover = res.eodetails.generalTurnover;
-              } else if (res.eodetails.generalTurnover === null) {
-                this.generalTurnover = new Amount();
-                // this.generalTurnover.amount = 0;
-                // this.generalTurnover.currency = '';
+              if (res.eodetails !== undefined) {
+                if (res.eodetails.generalTurnover !== null || res.eodetails.generalTurnover !== undefined) {
+                  this.generalTurnover = res.eodetails.generalTurnover;
+                } else if (res.eodetails.generalTurnover === null) {
+                  this.generalTurnover = new Amount();
+                  // this.generalTurnover.amount = 0;
+                  // this.generalTurnover.currency = '';
 
-                this.EODetails.generalTurnover = this.generalTurnover;
+                  this.EODetails.generalTurnover = this.generalTurnover;
+                }
               }
             }
 
@@ -786,14 +816,16 @@ export class DataService {
 
             // Fill in EoDetails Form
 
-            this.eoDetailsFormUpdate();
+            if (res.eodetails !== undefined) {
+              this.eoDetailsFormUpdate();
+            }
             this.caDetailsFormUpdate();
             // console.log(this.EOForm.value);
 
             console.log(res.fullCriterionList);
 
             if (this.utilities.qualificationApplicationType === 'selfcontained') {
-              this.caRelatedCriteria = this.filterCARelatedCriteria(this.OTHER_CA_REGEXP, res.fullCriterionList);
+              this.caRelatedCriteria = this.filterCARelatedCriteria(new RegExp(this.filter.OTHER_CA_REGEXP), res.fullCriterionList);
               console.log('FILTERED CA RELATED CRITERIA');
               console.log(this.caRelatedCriteria);
 
@@ -801,18 +833,25 @@ export class DataService {
               console.log('FILTERED CA RELATED CRITERIA FORM');
               console.log(this.caRelatedCriteriaForm);
 
-              this.eoLotCriterion = this.filterCARelatedCriteria(this.EO_LOT_REGEXP, res.fullCriterionList);
+              this.eoLotCriterion = this.filterCARelatedCriteria(new RegExp(this.filter.EO_LOT_REGEXP), res.fullCriterionList);
+              console.log('FILTERED EO LOT RELATED CRITERIA');
+              console.log(this.eoLotCriterion);
+              this.eoLotCriterionForm = this.formUtil.createEORelatedCriterionForm(this.eoLotCriterion);
+            }
+
+            if (this.utilities.qualificationApplicationType === 'regulated' && this.APIService.version === 'v2') {
+              this.eoLotCriterion = this.filterCARelatedCriteria(new RegExp(this.filter.EO_LOT_REGEXP), res.fullCriterionList);
               console.log('FILTERED EO LOT RELATED CRITERIA');
               console.log(this.eoLotCriterion);
               this.eoLotCriterionForm = this.formUtil.createEORelatedCriterionForm(this.eoLotCriterion);
             }
 
 
-            this.eoRelatedACriteria = this.filterEoRelatedCriteria(this.EO_RELATED_A_REGEXP, res.fullCriterionList);
+            this.eoRelatedACriteria = this.filterEoRelatedCriteria(new RegExp(this.filter.EO_RELATED_A_REGEXP), res.fullCriterionList);
             // console.log(this.eoRelatedACriteria);
-            this.eoRelatedCCriteria = this.filterEoRelatedCriteria(this.EO_RELATED_C_REGEXP, res.fullCriterionList);
+            this.eoRelatedCCriteria = this.filterEoRelatedCriteria(new RegExp(this.filter.EO_RELATED_C_REGEXP), res.fullCriterionList);
             // console.log(this.eoRelatedCCriteria);
-            this.eoRelatedDCriteria = this.filterEoRelatedCriteria(this.EO_RELATED_D_REGEXP, res.fullCriterionList);
+            this.eoRelatedDCriteria = this.filterEoRelatedCriteria(new RegExp(this.filter.EO_RELATED_D_REGEXP), res.fullCriterionList);
             // console.log(this.eoRelatedDCriteria);
             this.eoRelatedACriteriaForm = this.formUtil.createEORelatedCriterionForm(this.eoRelatedACriteria);
             // console.log(this.eoRelatedACriteriaForm);
@@ -821,15 +860,10 @@ export class DataService {
             this.eoRelatedDCriteriaForm = this.formUtil.createEORelatedCriterionForm(this.eoRelatedDCriteria);
             // console.log(this.eoRelatedDCriteriaForm);
 
-
-            this.exclusionACriteria = this.filterExclusionCriteria(this.EXCLUSION_CONVICTION_REGEXP, res.fullCriterionList);
-            // console.log(this.exclusionACriteria);
-            this.exclusionBCriteria = this.filterExclusionCriteria(this.EXCLUSION_CONTRIBUTION_REGEXP, res.fullCriterionList);
-            // console.log(this.exclusionBCriteria);
-            this.exclusionCCriteria = this.filterExclusionCriteria(this.EXCLUSION_SOCIAL_BUSINESS_MISCONDUCT_CONFLICT_REGEXP, res.fullCriterionList);
-            // console.log(this.exclusionCCriteria);
-            this.exclusionDCriteria = this.filterExclusionCriteria(this.EXCLUSION_NATIONAL_REGEXP, res.fullCriterionList);
-            // console.log(this.exclusionDCriteria);
+            this.exclusionACriteria = this.filterExclusionCriteria(new RegExp(this.filter.EXCLUSION_CONVICTION), res.fullCriterionList);
+            this.exclusionBCriteria = this.filterExclusionCriteria(new RegExp(this.filter.EXCLUSION_CONTRIBUTION), res.fullCriterionList);
+            this.exclusionCCriteria = this.filterExclusionCriteria(new RegExp(this.filter.EXCLUSION_SOCIAL_BUSINESS_MISCONDUCT_CONFLICT), res.fullCriterionList);
+            this.exclusionDCriteria = this.filterExclusionCriteria(new RegExp(this.filter.EXCLUSION_NATIONAL), res.fullCriterionList);
 
             this.exclusionACriteriaForm = this.formUtil.createExclusionCriterionForm(this.exclusionACriteria);
             console.log(this.exclusionACriteriaForm);
@@ -841,15 +875,15 @@ export class DataService {
             // console.log(this.exclusionDCriteriaForm);
 
 
-            this.selectionACriteria = this.filterSelectionCriteria(this.SELECTION_SUITABILITY_REGEXP, res.fullCriterionList);
+            this.selectionACriteria = this.filterSelectionCriteria(new RegExp(this.filter.SELECTION_SUITABILITY_REGEXP), res.fullCriterionList);
             // console.log(this.selectionACriteria);
-            this.selectionBCriteria = this.filterSelectionCriteria(this.SELECTION_ECONOMIC_REGEXP, res.fullCriterionList);
+            this.selectionBCriteria = this.filterSelectionCriteria(new RegExp(this.filter.SELECTION_ECONOMIC_REGEXP), res.fullCriterionList);
             // console.log(this.selectionBCriteria);
-            this.selectionCCriteria = this.filterSelectionCriteria(this.SELECTION_TECHNICAL_REGEXP, res.fullCriterionList);
+            this.selectionCCriteria = this.filterSelectionCriteria(new RegExp(this.filter.SELECTION_TECHNICAL_REGEXP), res.fullCriterionList);
             // console.log(this.selectionCCriteria);
-            this.selectionDCriteria = this.filterSelectionCriteria(this.SELECTION_CERTIFICATES_REGEXP, res.fullCriterionList);
+            this.selectionDCriteria = this.filterSelectionCriteria(new RegExp(this.filter.SELECTION_CERTIFICATES_REGEXP), res.fullCriterionList);
             // console.log(this.selectionDCriteria);
-            this.selectionALLCriteria = this.filterSelectionCriteria(this.SELECTION_REGEXP, res.fullCriterionList);
+            this.selectionALLCriteria = this.filterSelectionCriteria(new RegExp(this.filter.SELECTION_REGEXP), res.fullCriterionList);
             console.log(this.selectionALLCriteria);
 
 
@@ -864,7 +898,7 @@ export class DataService {
             this.selectionALLCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionALLCriteria);
 
 
-            this.reductionCriteria = this.filterReductionCriteria(this.REDUCTION_OF_CANDIDATES_REGEXP, res.fullCriterionList);
+            this.reductionCriteria = this.filterReductionCriteria(new RegExp(this.filter.REDUCTION_OF_CANDIDATES_REGEXP), res.fullCriterionList);
             if (!this.reductionCriteria) {
 
             }
@@ -891,8 +925,13 @@ export class DataService {
             this.formUtil.createTemplateReqGroups(res.fullCriterionList);
 
             /* find if CRITERION.SELECTION.ALL_SATISFIED exists */
-            this.utilities.satisfiedALLCriterionExists = this.utilities
-              .findCriterion(this.selectionALLCriteria, '7e7db838-eeac-46d9-ab39-42927486f22d');
+            if (this.APIService.version === 'v1') {
+              this.utilities.satisfiedALLCriterionExists = this.utilities
+                .findCriterion(this.selectionALLCriteria, '7e7db838-eeac-46d9-ab39-42927486f22d');
+            } else if (this.APIService.version === 'v2') {
+              this.utilities.satisfiedALLCriterionExists = this.utilities
+                .findCriterion(this.selectionALLCriteria, 'f4dc58dd-af45-4602-a4c8-3dca30fac082');
+            }
 
             if (this.utilities.satisfiedALLCriterionExists) {
               this.utilities.isSatisfiedALL = true;
@@ -919,10 +958,8 @@ export class DataService {
 
   isReadOnly(): boolean {
     if (this.utilities.isReviewESPD) {
-      // console.log('It is REVIEWESPD');
       return true;
     } else {
-      // console.log('It is NOT review espd');
       return false;
     }
   }
@@ -975,9 +1012,7 @@ export class DataService {
     if (this.EODetails.naturalPersons !== null || this.EODetails.naturalPersons !== undefined) {
       // TODO find better way to handle null fields in naturalperson's objects
       if (this.EODetails.naturalPersons[0].firstName !== null) {
-        this.EOForm.patchValue({
-          'naturalPersons': this.EODetails.naturalPersons
-        });
+        this.updateNaturalPersons();
       }
     }
 
@@ -985,7 +1020,37 @@ export class DataService {
     if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
       this.EOForm.reset('');
     }
+
+    if (this.isReadOnly()) {
+      this.EOForm.controls['naturalPersons'].disable();
+    }
   }
+
+  updateNaturalPersons() {
+    let control = <FormArray>this.EOForm.controls['naturalPersons'];
+    control.controls.splice(0);
+    this.EODetails.naturalPersons.forEach(person => {
+      control.push(new FormGroup({
+        'firstName': new FormControl(person.firstName),
+        'familyName': new FormControl(person.familyName),
+        'role': new FormControl(person.role),
+        'birthPlace': new FormControl(person.birthPlace),
+        'birthDate': new FormControl(person.birthDate),
+        'postalAddress': new FormGroup({
+          'addressLine1': new FormControl(person.postalAddress.addressLine1),
+          'postCode': new FormControl(person.postalAddress.postCode),
+          'city': new FormControl(person.postalAddress.city),
+          'countryCode': new FormControl(person.postalAddress.countryCode),
+        }),
+        'contactDetails': new FormGroup({
+          'contactPointName': new FormControl(person.contactDetails.contactPointName),
+          'emailAddress': new FormControl(person.contactDetails.emailAddress, [Validators.email]),
+          'telephoneNumber': new FormControl(person.contactDetails.telephoneNumber),
+        })
+      }));
+    });
+  }
+
 
   eoDetailsFromTOOPFormUpdate() {
 
@@ -1016,7 +1081,6 @@ export class DataService {
       // console.log(form);
       // console.log(form.value);
       console.log('START ESPD');
-      console.log(form);
 
       // form reset
       if (!this.utilities.isEmpty(this.CADetails) || !this.utilities.isEmpty(this.EODetails)) {
@@ -1055,9 +1119,9 @@ export class DataService {
       }
 
       if (form.value.chooseRole === 'CA') {
+        console.log(form.value);
         this.utilities.isCA = true;
         this.utilities.isEO = false;
-        this.receivedNoticeNumber = form.value.noticeNumber;
         if (form.value.CACountry !== '') {
           this.selectedCountry = form.value.CACountry;
         }
@@ -1175,8 +1239,30 @@ export class DataService {
               reject();
             });
         } else {
-          this.caRelatedCriteria = [];
-          this.eoLotCriterion = [];
+          if (this.utilities.qualificationApplicationType === 'regulated') {
+            this.caRelatedCriteria = [];
+          }
+          if (this.APIService.version === 'v1') {
+            this.eoLotCriterion = [];
+          }
+        }
+
+        if (this.utilities.qualificationApplicationType === 'regulated' && this.APIService.version === 'v2') {
+          this.getEOLotCriterion()
+            .then(res => {
+              this.eoLotCriterion = res;
+              this.eoLotCriterionForm = this.formUtil.createEORelatedCriterionForm(this.eoLotCriterion);
+              // console.log(this.caRelatedCriteria);
+              resolve();
+            })
+            .catch(err => {
+              console.log(err);
+              const message: string = err.error +
+                ' ' + err.message;
+              const action = 'close';
+              this.utilities.openSnackBar(message, action);
+              reject();
+            });
         }
 
 
@@ -1663,6 +1749,7 @@ export class DataService {
     const lang = 'ESPD_' + this.selectedLanguage;
     console.log(lang);
     this.translate.use(lang);
+    this.codelist.reloadCodelists();
     // this.AddLanguages();
   }
 

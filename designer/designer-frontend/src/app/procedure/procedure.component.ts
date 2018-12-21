@@ -14,33 +14,37 @@
 /// limitations under the License.
 ///
 
-import {Component, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import {Component, OnChanges, OnInit, QueryList, SimpleChanges, ViewChild, ViewChildren} from '@angular/core';
 import {DataService} from '../services/data.service';
-import {NgForm} from '@angular/forms';
 import {UtilitiesService} from '../services/utilities.service';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material';
 import {CodelistService} from '../services/codelist.service';
+import {NgForm} from '@angular/forms';
+import {ValidationService} from '../services/validation.service';
+import {BaseStep} from '../base/base-step';
+import {WizardSteps} from '../base/wizard-steps.enum';
 
 @Component({
   selector: 'app-procedure',
   templateUrl: './procedure.component.html',
   styleUrls: ['./procedure.component.css']
 })
-export class ProcedureComponent implements OnInit, OnChanges {
+export class ProcedureComponent implements OnInit, OnChanges, BaseStep {
 
   /* CPV chips */
   visible = true;
   selectable = true;
   removable = true;
   addOnBlur = true;
+  disabled = false;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-
-
+  @ViewChildren('form') forms: QueryList<NgForm>;
   @ViewChild('form') form: NgForm;
 
   constructor(public dataService: DataService,
               public utilities: UtilitiesService,
+              private validationService: ValidationService,
               public codelist: CodelistService) {
   }
 
@@ -48,6 +52,12 @@ export class ProcedureComponent implements OnInit, OnChanges {
 
     if (this.dataService.CADetails) {
       this.dataService.CADetails.classificationCodes = [];
+    }
+
+    /* Make Chips non editable when user is EO and is requirement, or when the artefact is being reviewed */
+    if (this.dataService.isReadOnly()) {
+      this.disabled = true;
+      this.removable = false;
     }
 
     this.form.form.valueChanges.subscribe(x => {
@@ -68,7 +78,6 @@ export class ProcedureComponent implements OnInit, OnChanges {
 
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(this.dataService.receivedNoticeNumber);
   }
 
 
@@ -84,9 +93,14 @@ export class ProcedureComponent implements OnInit, OnChanges {
     // this.dataService.procedureSubmit(this.eoRelatedCriteria, this.reductionCriteria);
   }
 
+  getWizardStep(): WizardSteps {
+    return WizardSteps.PROCEDURE;
+  }
+
   add(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
+
 
     // Add our cpv
     if ((value || '').trim()) {
@@ -108,4 +122,7 @@ export class ProcedureComponent implements OnInit, OnChanges {
   }
 
 
+  public areFormsValid(): boolean {
+    return this.validationService.validateFormsInComponent(this.forms);
+  }
 }

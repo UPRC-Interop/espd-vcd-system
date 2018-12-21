@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns4:QualificationApplicationRequest xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:ns5="urn:oasis:names:specification:ubl:schema:xsd:QualificationApplicationResponse-2" xmlns:ns2="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns:ns4="urn:oasis:names:specification:ubl:schema:xsd:QualificationApplicationRequest-2" xmlns:ns3="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2">
+    <UBLVersionID schemeAgencyID="OASIS-UBL-TC">2.2</UBLVersionID>
+    <CustomizationID schemeName="CustomizationID" schemeAgencyID="CEN-BII" schemeVersionID="2.0">urn:www.cenbii.eu:transaction:biitrdm070:ver3.0</CustomizationID>
+    <ProfileID schemeAgencyID="CEN-BII" schemeVersionID="2.0">4.1</ProfileID>
+    <ProfileExecutionID schemeAgencyID="EU-COM-GROW" schemeVersionID="2.0.2">ESPD-EDMv2.1.0-SELFCONTAINED</ProfileExecutionID>
+    <ID schemeID="ISO/IEC 9834-8:2008 - 4UUID" schemeAgencyID="EU-COM-GROW" schemeAgencyName="DG GROW (European Commission)" schemeVersionID="1.1">e1de3fc3-e246-4a43-85a3-8fb31468e5b4</ID>
+    <CopyIndicator>false</CopyIndicator>
+    <UUID schemeID="ISO/IEC 9834-8:2008 - 4UUID" schemeAgencyID="EU-COM-GROW" schemeVersionID="2.0">85f08ec6-7d0b-4dfc-94a8-69fd6dada8f2</UUID>
+    <ContractFolderID schemeAgencyID="TeD">__ProcurementProcedureFileRefNumber</ContractFolderID>
+    <IssueDate>2018-11-29</IssueDate>
+    <IssueTime>16:30:31</IssueTime>
+    <VersionID schemeAgencyID="EU-COM-GROW" schemeVersionID="2.0.2">2018.01.01</VersionID>
+    <ProcedureCode listID="ProcedureType" listAgencyID="EU-COM-OP" listVersionID="1.0">NEGOTIATED_ACCELERATED</ProcedureCode>
+    <QualificationApplicationTypeCode listID="QualificationApplicationType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">SELFCONTAINED</QualificationApplicationTypeCode>
+    <WeightScoringMethodologyNote>__WeightingScoringMethodologyDescription</WeightScoringMethodologyNote>
+    <WeightingTypeCode listID="WeightingType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">PERCENTAGE</WeightingTypeCode>
+    <ns3:ContractingParty>
+        <ns3:Party>
+            <WebsiteURI>__www.Procurer.com</WebsiteURI>
+            <ns3:PartyIdentification>
+                <ID schemeAgencyID="EU-COM-GROW">__ProcurerID</ID>
+            </ns3:PartyIdentification>
+            <ns3:PartyName>
+                <Name>__ProcurerName</Name>
+            </ns3:PartyName>
+            <ns3:PostalAddress>
+                <StreetName>__ProcurerStreet</StreetName>
+                <CityName>__ProcurerCity</CityName>
+                <PostalZone>12345</PostalZone>
+                <ns3:Country>
+                    <IdentificationCode listID="CountryCodeIdentifier" listAgencyID="ISO" listName="CountryCodeIdentifier" listVersionID="1.0">AF</IdentificationCode>
+                </ns3:Country>
+            </ns3:PostalAddress>
+            <ns3:Contact>
+                <Name>__ProcurerContactName</Name>
+                <Telephone>654321</Telephone>
+                <Telefax>098765</Telefax>
+                <ElectronicMail>__ProcurerContact@pr.com</ElectronicMail>
+            </ns3:Contact>
+        </ns3:Party>
+    </ns3:ContractingParty>
+    <ns3:ProcurementProject>
+        <Name>__ProcurementProcedureTitle</Name>
+        <Description>__ProcurementProcedureDescription</Description>
+        <ProcurementTypeCode listID="ProjectType" listAgencyID="EU-COM-OP" listVersionID="1.0">NOT_APPLICABLE</ProcurementTypeCode>
+        <ns3:MainCommodityClassification>
+            <ItemClassificationCode>03110000-5</ItemClassificationCode>
+        </ns3:MainCommodityClassification>
+        <ns3:MainCommodityClassification>
+            <ItemClassificationCode>03111000-2</ItemClassificationCode>
+        </ns3:MainCommodityClassification>
+        <ns3:MainCommodityClassification>
+            <ItemClassificationCode>03111000-4</ItemClassificationCode>
+        </ns3:MainCommodityClassification>
+        <ns3:MainCommodityClassification>
+            <ItemClassificationCode>03111000-6</ItemClassificationCode>
+        </ns3:MainCommodityClassification>
+    </ns3:ProcurementProject>
+    <ns3:ProcurementProjectLot>
+        <ID schemeAgencyID="EU-COM-GROW">Lot1</ID>
+    </ns3:ProcurementProjectLot>
+    <ns3:ProcurementProjectLot>
+        <ID schemeAgencyID="EU-COM-GROW">Lot2</ID>
+    </ns3:ProcurementProjectLot>
+    <ns3:ProcurementProjectLot>
+        <ID schemeAgencyID="EU-COM-GROW">Lot3</ID>
+    </ns3:ProcurementProjectLot>
+    <ns3:ProcurementProjectLot>
+        <ID schemeAgencyID="EU-COM-GROW">Lot4</ID>
+    </ns3:ProcurementProjectLot>
+    <ns3:ProcurementProjectLot>
+        <ID schemeAgencyID="EU-COM-GROW">Lot5</ID>
+    </ns3:ProcurementProjectLot>
+    <ns3:TenderingCriterion>
+        <ID schemeID="CriteriaTaxonomy" schemeAgencyID="EU-COM-GROW" schemeVersionID="2.0.2">6ee55a59-6adb-4c3a-b89f-e62a7ad7be7f</ID>
+        <CriterionTypeCode listID="CriteriaTypeCode" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">CRITERION.SELECTION.SUITABILITY.PROFESSIONAL_REGISTER_ENROLMENT</CriterionTypeCode>
+        <Name>Enrolment in a relevant professional register</Name>
+        <Description>It is enrolled in relevant professional registers kept in the Member State of its establishment as described in Annex XI of Directive 2014/24/EU; economic operators from certain Member States may have to comply with other requirements set out in that Annex.</Description>
+        <ns3:Legislation>
+            <Title>DIRECTIVE 2014/24/EU OF THE EUROPEAN PARLIAMENT AND OF THE COUNCIL of 26 February 2014 on public procurement and repealing Directive 2004/18/EC</Title>
+            <Description>Directive 2014/24/EU</Description>
+            <JurisdictionLevel languageID="en">EU_DIRECTIVE</JurisdictionLevel>
+            <Article>58(2)</Article>
+            <URI>http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32014L0024</URI>
+        </ns3:Legislation>
+        <ns3:TenderingCriterionPropertyGroup>
+            <ID schemeAgencyID="EU-COM-GROW" schemeVersionID="2.0.2">a53561d5-6614-4dbe-987e-b96f35387f46</ID>
+            <PropertyGroupTypeCode listID="PropertyGroupType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">ON*</PropertyGroupTypeCode>
+            <ns3:TenderingCriterionProperty>
+                <ID schemeID="CriteriaTaxonomy" schemeAgencyID="EU-COM-GROW" schemeVersionID="2.0.2">4dec8bcf-9279-499c-b7ea-a4fce047bd86</ID>
+                <Description>Lots the requirement apply to</Description>
+                <TypeCode listID="CriterionElementType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">CAPTION</TypeCode>
+                <ValueDataTypeCode listID="ResponseDataType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">NONE</ValueDataTypeCode>
+            </ns3:TenderingCriterionProperty>
+            <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+            <!-- LOT 1 -->
+            <ns3:TenderingCriterionProperty>
+                <ID schemeID="CriteriaTaxonomy" schemeAgencyID="EU-COM-GROW" schemeVersionID="2.0.2">dbdb8004-1f18-4158-8e85-0e7ad41ed68a</ID>
+                <Description>LotIDs</Description>
+                <TypeCode listID="CriterionElementType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">REQUIREMENT</TypeCode>
+                <ValueDataTypeCode listID="ResponseDataType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">LOT_IDENTIFIER</ValueDataTypeCode>
+                <ExpectedID schemeAgencyID="EU-COM-GROW">Lot1</ExpectedID>
+            </ns3:TenderingCriterionProperty>
+            <!-- LOT 2 -->
+            <ns3:TenderingCriterionProperty>
+                <ID schemeID="CriteriaTaxonomy" schemeAgencyID="EU-COM-GROW" schemeVersionID="2.0.2">dbdb8004-1f18-4158-8e85-0e7ad41ed68a</ID>
+                <Description>LotIDs</Description>
+                <TypeCode listID="CriterionElementType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">REQUIREMENT</TypeCode>
+                <ValueDataTypeCode listID="ResponseDataType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">LOT_IDENTIFIER</ValueDataTypeCode>
+                <ExpectedID schemeAgencyID="EU-COM-GROW">Lot2</ExpectedID>
+            </ns3:TenderingCriterionProperty>
+            <!-- LOT 5 -->
+            <ns3:TenderingCriterionProperty>
+                <ID schemeID="CriteriaTaxonomy" schemeAgencyID="EU-COM-GROW" schemeVersionID="2.0.2">dbdb8004-1f18-4158-8e85-0e7ad41ed68a</ID>
+                <Description>LotIDs</Description>
+                <TypeCode listID="CriterionElementType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">REQUIREMENT</TypeCode>
+                <ValueDataTypeCode listID="ResponseDataType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">LOT_IDENTIFIER</ValueDataTypeCode>
+                <ExpectedID schemeAgencyID="EU-COM-GROW">Lot5</ExpectedID>
+            </ns3:TenderingCriterionProperty>
+            <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+            <ns3:SubsidiaryTenderingCriterionPropertyGroup>
+                <ID schemeAgencyID="EU-COM-GROW" schemeVersionID="2.0.2">3aacb82e-afba-440c-b64e-1834007965a2</ID>
+                <PropertyGroupTypeCode listID="PropertyGroupType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">ON*</PropertyGroupTypeCode>
+                <ns3:TenderingCriterionProperty>
+                    <ID schemeID="CriteriaTaxonomy" schemeAgencyID="EU-COM-GROW" schemeVersionID="2.0.2">110c749d-87b3-4619-b798-960e3988fd8f</ID>
+                    <Description>Register name</Description>
+                    <TypeCode listID="CriterionElementType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">REQUIREMENT</TypeCode>
+                    <ValueDataTypeCode listID="ResponseDataType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">DESCRIPTION</ValueDataTypeCode>
+                    <ExpectedDescription>__RegisteredName</ExpectedDescription>
+                </ns3:TenderingCriterionProperty>
+                <ns3:TenderingCriterionProperty>
+                    <ID schemeID="CriteriaTaxonomy" schemeAgencyID="EU-COM-GROW" schemeVersionID="2.0.2">daf677c5-f7f7-4796-9d90-d316ded21da1</ID>
+                    <Description>URL</Description>
+                    <TypeCode listID="CriterionElementType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">REQUIREMENT</TypeCode>
+                    <ValueDataTypeCode listID="ResponseDataType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">URL</ValueDataTypeCode>
+                    <ExpectedID schemeID="URI" schemeAgencyID="EU-COM-GROW">__RegisteredURL</ExpectedID>
+                </ns3:TenderingCriterionProperty>
+            </ns3:SubsidiaryTenderingCriterionPropertyGroup>
+            <ns3:SubsidiaryTenderingCriterionPropertyGroup>
+                <ID schemeAgencyID="EU-COM-GROW" schemeVersionID="2.0.2">6cce6b8e-c53d-4598-8150-ac49aba3b9c7</ID>
+                <PropertyGroupTypeCode listID="PropertyGroupType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">ON*</PropertyGroupTypeCode>
+                <ns3:TenderingCriterionProperty>
+                    <ID schemeID="CriteriaTaxonomy" schemeAgencyID="EU-COM-GROW" schemeVersionID="2.0.2">4e4228b3-2c2f-4a84-961e-47cc21c3bdf2</ID>
+                    <Description>Your Answer</Description>
+                    <TypeCode listID="CriterionElementType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">QUESTION</TypeCode>
+                    <ValueDataTypeCode listID="ResponseDataType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">INDICATOR</ValueDataTypeCode>
+                </ns3:TenderingCriterionProperty>
+                <ns3:SubsidiaryTenderingCriterionPropertyGroup>
+                    <ID schemeAgencyID="EU-COM-GROW" schemeVersionID="2.0.2">70d5bbcf-0581-4d0f-b5c7-8b604a791972</ID>
+                    <PropertyGroupTypeCode listID="PropertyGroupType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">ONTRUE</PropertyGroupTypeCode>
+                    <ns3:TenderingCriterionProperty>
+                        <ID schemeID="CriteriaTaxonomy" schemeAgencyID="EU-COM-GROW" schemeVersionID="2.0.2">11d4e6aa-2ca8-478b-9d31-0f79613cae15</ID>
+                        <Description>Registration number</Description>
+                        <TypeCode listID="CriterionElementType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">QUESTION</TypeCode>
+                        <ValueDataTypeCode listID="ResponseDataType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">DESCRIPTION</ValueDataTypeCode>
+                    </ns3:TenderingCriterionProperty>
+                </ns3:SubsidiaryTenderingCriterionPropertyGroup>
+                <ns3:SubsidiaryTenderingCriterionPropertyGroup>
+                    <ID schemeAgencyID="EU-COM-GROW" schemeVersionID="2.0.2">3a4a5421-81cc-468e-b69f-b86bf8c7932d</ID>
+                    <PropertyGroupTypeCode listID="PropertyGroupType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">ONFALSE</PropertyGroupTypeCode>
+                    <ns3:TenderingCriterionProperty>
+                        <ID schemeID="CriteriaTaxonomy" schemeAgencyID="EU-COM-GROW" schemeVersionID="2.0.2">b39a465a-d860-4c3a-88bb-526e21a38564</ID>
+                        <Description>Reasons why your are not registered</Description>
+                        <TypeCode listID="CriterionElementType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">QUESTION</TypeCode>
+                        <ValueDataTypeCode listID="ResponseDataType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">DESCRIPTION</ValueDataTypeCode>
+                    </ns3:TenderingCriterionProperty>
+                </ns3:SubsidiaryTenderingCriterionPropertyGroup>
+                <ns3:SubsidiaryTenderingCriterionPropertyGroup>
+                    <ID schemeAgencyID="EU-COM-GROW" schemeVersionID="2.0.2">7458d42a-e581-4640-9283-34ceb3ad4345</ID>
+                    <PropertyGroupTypeCode listID="PropertyGroupType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">ON*</PropertyGroupTypeCode>
+                    <ns3:TenderingCriterionProperty>
+                        <ID schemeID="CriteriaTaxonomy" schemeAgencyID="EU-COM-GROW" schemeVersionID="2.0.2">d751d65a-fc41-420e-9ff9-365984272a9d</ID>
+                        <Description>Is this information available electronically?</Description>
+                        <TypeCode listID="CriterionElementType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">QUESTION</TypeCode>
+                        <ValueDataTypeCode listID="ResponseDataType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">INDICATOR</ValueDataTypeCode>
+                    </ns3:TenderingCriterionProperty>
+                    <ns3:SubsidiaryTenderingCriterionPropertyGroup>
+                        <ID schemeAgencyID="EU-COM-GROW" schemeVersionID="2.0.2">41dd2e9b-1bfd-44c7-93ee-56bd74a4334b</ID>
+                        <PropertyGroupTypeCode listID="PropertyGroupType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">ONTRUE</PropertyGroupTypeCode>
+                        <ns3:TenderingCriterionProperty>
+                            <ID schemeID="CriteriaTaxonomy" schemeAgencyID="EU-COM-GROW" schemeVersionID="2.0.2">5871e763-9b6c-43cb-8d4f-0a50ab436e9a</ID>
+                            <Description>Evidence supplied</Description>
+                            <TypeCode listID="CriterionElementType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">QUESTION</TypeCode>
+                            <ValueDataTypeCode listID="ResponseDataType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">EVIDENCE_IDENTIFIER</ValueDataTypeCode>
+                        </ns3:TenderingCriterionProperty>
+                    </ns3:SubsidiaryTenderingCriterionPropertyGroup>
+                </ns3:SubsidiaryTenderingCriterionPropertyGroup>
+            </ns3:SubsidiaryTenderingCriterionPropertyGroup>
+        </ns3:TenderingCriterionPropertyGroup>
+    </ns3:TenderingCriterion>
+    <ns3:AdditionalDocumentReference>
+        <ID schemeID="ISO/IEC 9834-8:2008 - 4UUID" schemeAgencyID="EU-COM-GROW" schemeAgencyName="DG GROW (European Commission)" schemeVersionID="1.1">2018/S 123-123456</ID>
+        <DocumentTypeCode listID="ReferencesTypeCodes" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">TED_CN</DocumentTypeCode>
+        <ns3:Attachment>
+            <ns3:ExternalReference>
+                <URI>__OJS URL</URI>
+                <FileName>__ProcurementProcedureTitle</FileName>
+                <Description>__ProcurementProcedureDescription</Description>
+                <Description>11-1010_17-049</Description>
+            </ns3:ExternalReference>
+        </ns3:Attachment>
+    </ns3:AdditionalDocumentReference>
+</ns4:QualificationApplicationRequest>

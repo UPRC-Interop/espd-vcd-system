@@ -31,6 +31,7 @@ import {FullCriterion} from '../model/fullCriterion.model';
 import {UUID} from 'angular2-uuid';
 import {CaRelatedCriterion} from '../model/caRelatedCriterion.model';
 import {stringify} from 'querystring';
+import {UrlValidation} from '../validation/url/url-validation';
 
 @Injectable({
   providedIn: 'root'
@@ -100,7 +101,7 @@ export class FormUtilService {
             }
             // console.log(req.response);
             // req.response = new RequirementResponse();
-            if (req.responseDataType === 'INDICATOR') {
+            if (req.responseDataType === 'INDICATOR' || req.responseDataType === 'CODE_BOOLEAN') {
               if (formValues[req.uuid.valueOf()] === true) {
                 req.response.indicator = true;
                 req.response.uuid = null;
@@ -212,7 +213,11 @@ export class FormUtilService {
               // console.log(JSON.stringify(this.dataService.evidenceList));
               req.response.uuid = null;
             } else if (req.responseDataType === 'CODE' && this.utilities.qualificationApplicationType === 'regulated') {
-              req.response.evidenceURLCode = formValues[req.uuid.valueOf()];
+              if (req.responseValuesRelatedArtefact === 'CPVCodes') {
+                req.response.evidenceURLCode = this.utilities.cpvTemplate[req.uuid];
+              } else {
+                req.response.evidenceURLCode = formValues[req.uuid.valueOf()];
+              }
               req.response.uuid = null;
             } else if (req.responseDataType === 'CODE' && this.utilities.qualificationApplicationType === 'selfcontained') {
               if (req.responseValuesRelatedArtefact === 'CPVCodes') {
@@ -300,8 +305,8 @@ export class FormUtilService {
               const eoidtypeID = req.uuid + 'eoidtype';
               req.response.eoidtype = formValues[eoidtypeID.valueOf()];
               req.response.uuid = null;
-            } else if (req.responseDataType === 'ECONOMIC_OPERATOR_ROLE_CODE') {
-              req.response.description = formValues[req.uuid.valueOf()];
+              // else if (req.responseDataType === 'ECONOMIC_OPERATOR_ROLE_CODE') {
+              //   req.response.description = formValues[req.uuid.valueOf()];
             } else if (req.responseDataType === 'LOT_IDENTIFIER') {
               // req.response.lots = this.utilities.lotTemplate[req.uuid];
               if (formValues[req.uuid.valueOf()] === null || formValues[req.uuid.valueOf()] === '' || formValues[req.uuid.valueOf()].length === 0) {
@@ -402,7 +407,7 @@ export class FormUtilService {
           } else if (r.responseDataType === 'PERIOD' && this.APIService.version === 'v2') {
             group[r.uuid + 'startDate'] = new FormControl();
             group[r.uuid + 'endDate'] = new FormControl();
-          } else if (r.responseDataType === 'INDICATOR') {
+          } else if (r.responseDataType === 'INDICATOR' || r.responseDataType === 'CODE_BOOLEAN') {
             group[r.uuid] = new FormControl(false);
           } else if (r.responseDataType === 'WEIGHT_INDICATOR') {
             group[r.uuid] = new FormControl(false);
@@ -411,8 +416,6 @@ export class FormUtilService {
             group[r.uuid + 'evaluationMethodDescription'] = new FormControl();
           } else if (r.responseDataType === 'AMOUNT') {
             group[r.uuid + 'currency'] = new FormControl();
-          } else if (r.responseDataType === 'ECONOMIC_OPERATOR_IDENTIFIER') {
-            group[r.uuid + 'eoidtype'] = new FormControl();
           } else if (r.responseDataType === 'LOT_IDENTIFIER') {
             group[r.uuid] = new FormControl();
             this.utilities.renderLotTemplate[r.uuid] = [];
@@ -532,7 +535,7 @@ export class FormUtilService {
 
 
             // YES/NO if responseDataType is indicator then pass indicator value to formControl. (initial state problem fixed)
-            if (r.responseDataType === 'INDICATOR') {
+            if (r.responseDataType === 'INDICATOR' || r.responseDataType === 'CODE_BOOLEAN') {
               if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
                 group[r.uuid] = new FormControl(false);
               } else {
@@ -593,11 +596,13 @@ export class FormUtilService {
 
             /* SELF-CONTAINED: responseDataType: CODE ---> CpvCodes*/
             if (r.responseDataType === 'CODE' && r.responseValuesRelatedArtefact === 'CPVCodes') {
-              if (r.response.evidenceURLCode) {
+              if (r.response.evidenceURLCode !== null && r.response.evidenceURLCode !== undefined) {
                 // console.log('RENDERING CPVS: ');
                 this.utilities.renderCpvTemplate[r.uuid] = this.utilities.stringToCpvCode(r.response.evidenceURLCode.toString());
                 // console.log(this.utilities.renderCpvTemplate[r.uuid]);
                 // console.log(this.utilities.renderCpvTemplate);
+              } else {
+                this.utilities.renderCpvTemplate[r.uuid] = [];
               }
             }
             if (r.responseDataType === 'CODE' && this.utilities.qualificationApplicationType === 'regulated') {
@@ -685,36 +690,39 @@ export class FormUtilService {
             if (r.response.evidenceSuppliedId) {
 
               // FIX: find evidence in EvidenceList object and import it
-              const evi = this.evidenceList.find((ev) => {
-                if (ev.id === r.response.evidenceSuppliedId) {
-                  // this.evidenceList[i].description = 'test';
-                  return true;
+              if (this.evidenceList !== undefined) {
+                const evi = this.evidenceList.find((ev) => {
+                  if (ev.id === r.response.evidenceSuppliedId) {
+                    // this.evidenceList[i].description = 'test';
+                    return true;
+                  }
+                });
+                /* FIX: self-contained cannot set evidenceURL of undefined issue */
+                if (evi !== undefined) {
+                  group[r.uuid + 'evidenceUrl'] = new FormControl({
+                      value: evi.evidenceURL,
+                      disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO,
+                    },
+                    [UrlValidation]);
+                  group[r.uuid + 'evidenceCode'] = new FormControl({
+                    value: evi.description,
+                    disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                  });
+                  group[r.uuid + 'evidenceIssuer'] = new FormControl({
+                    value: evi.evidenceIssuer.name,
+                    disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                  });
                 }
-              });
+              }
               // console.log(evi);
               // console.log(typeof evi);
 
-              /* FIX: self-contained cannot set evidenceURL of undefined issue */
-              if (evi !== undefined) {
-                group[r.uuid + 'evidenceUrl'] = new FormControl({
-                  value: evi.evidenceURL,
-                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
-                });
-                group[r.uuid + 'evidenceCode'] = new FormControl({
-                  value: evi.description,
-                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
-                });
-                group[r.uuid + 'evidenceIssuer'] = new FormControl({
-                  value: evi.evidenceIssuer.name,
-                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
-                });
-              }
-
               if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
                 group[r.uuid + 'evidenceUrl'] = new FormControl({
-                  value: '',
-                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
-                });
+                    value: '',
+                    disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO,
+                  },
+                  [UrlValidation]);
                 group[r.uuid + 'evidenceCode'] = new FormControl({
                   value: '',
                   disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
@@ -738,13 +746,13 @@ export class FormUtilService {
             }
 
             /* SELF-CONTAINED 2.1.0 : ECONOMIC_OPERATOR_ROLE_CODE */
-            if (r.responseDataType === 'ECONOMIC_OPERATOR_ROLE_CODE') {
-              if (r.response.description !== null) {
-                group[r.uuid] = new FormControl(r.response.description);
-              } else {
-                group[r.uuid] = new FormControl();
-              }
-            }
+            // if (r.responseDataType === 'ECONOMIC_OPERATOR_ROLE_CODE') {
+            //   if (r.response.description !== null) {
+            //     group[r.uuid] = new FormControl(r.response.description);
+            //   } else {
+            //     group[r.uuid] = new FormControl();
+            //   }
+            // }
 
             if (r.response.currency || r.response.amount) {
               if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
@@ -793,6 +801,12 @@ export class FormUtilService {
                 group[r.uuid + 'weight'] = new FormControl();
                 group[r.uuid + 'evaluationMethodDescription'] = new FormControl();
               }
+              if (r.responseDataType === 'INDICATOR' || r.responseDataType === 'CODE_BOOLEAN') {
+                group[r.uuid] = new FormControl({
+                  value: false,
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
+              }
               if (r.responseDataType === 'AMOUNT') {
                 group[r.uuid] = new FormControl({
                   value: '',
@@ -815,8 +829,19 @@ export class FormUtilService {
               }
             }
             if (this.utilities.isEO) {
-              if (r.responseDataType === 'INDICATOR') {
-                group[r.uuid] = new FormControl(false);
+              if (r.responseDataType === 'INDICATOR' || r.responseDataType === 'CODE_BOOLEAN') {
+                group[r.uuid] = new FormControl({
+                  value: false,
+                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                });
+              }
+
+              // if (r.responseDataType === 'CODE' && this.APIService.version === 'v1') {
+              //   group[r.uuid] = new FormControl();
+              // }
+
+              if (r.responseDataType === 'CODE' && r.responseValuesRelatedArtefact === 'CPVCodes') {
+                this.utilities.renderCpvTemplate[r.uuid] = [];
               }
               if (r.responseDataType === 'AMOUNT') {
                 group[r.uuid] = new FormControl({
@@ -840,12 +865,12 @@ export class FormUtilService {
                 });
               }
               /* SELF-CONTAINED 2.1.0: ECONOMIC_OPERATOR_ROLE_CODE */
-              if (r.responseDataType === 'ECONOMIC_OPERATOR_ROLE_CODE') {
-                group[r.uuid] = new FormControl({
-                  value: '',
-                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
-                });
-              }
+              // if (r.responseDataType === 'ECONOMIC_OPERATOR_ROLE_CODE') {
+              //   group[r.uuid] = new FormControl({
+              //     value: '',
+              //     disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+              //   });
+              // }
 
 
               if (r.responseDataType === 'WEIGHT_INDICATOR') {
@@ -878,9 +903,12 @@ export class FormUtilService {
               }
               if (r.responseDataType === 'EVIDENCE_IDENTIFIER') {
                 group[r.uuid + 'evidenceUrl'] = new FormControl({
-                  value: '',
-                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
-                });
+                    value: '',
+                    disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO,
+                  },
+                  [UrlValidation]
+                )
+                ;
                 group[r.uuid + 'evidenceCode'] = new FormControl({
                   value: '',
                   disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO

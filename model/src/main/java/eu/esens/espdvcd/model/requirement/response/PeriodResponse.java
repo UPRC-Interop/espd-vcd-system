@@ -30,7 +30,7 @@ public class PeriodResponse extends DescriptionResponse implements Serializable 
 
     private static final long serialVersionUID = -1738098273888763636L;
 
-    /*
+    /**
      * Criterion response description - Criterion fulfillment period
      * <p>
      * Description of the period that is declared to fulfil this criterion.
@@ -43,12 +43,17 @@ public class PeriodResponse extends DescriptionResponse implements Serializable 
      * ccv:Criterion.RequirementGroup.Requirement.Response.Description<br>
      */
 
-
     public PeriodResponse() {
     }
 
     public PeriodResponse(@JsonProperty("period") String description) {
         this.description = description;
+    }
+
+    @Override
+    @JsonProperty("period")
+    public String getDescription() {
+        return this.description;
     }
 
 }

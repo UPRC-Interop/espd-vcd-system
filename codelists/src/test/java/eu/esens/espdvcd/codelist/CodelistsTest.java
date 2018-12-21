@@ -1,12 +1,12 @@
 /**
  * Copyright 2016-2018 University of Piraeus Research Center
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -55,7 +55,7 @@ public class CodelistsTest {
         Assert.assertEquals("Submission for all lots", CodelistsV2.BidType.getDataMap("lala").get("LOT_ALL"));
         Assert.assertEquals("Submission for all lots", CodelistsV2.BidType.getDataMap(null).get("LOT_ALL"));
     }
-    
+
     @Test
     public void testGetValueForIdV1() {
         // valid input
@@ -65,7 +65,7 @@ public class CodelistsTest {
         Assert.assertEquals(null, CodelistsV1.CountryIdentification.getValueForId(null));
         Assert.assertEquals(null, CodelistsV1.TenderingRole.getValueForId("lala"));
     }
-    
+
     @Test
     public void testGetValueForIdV2() {
         // valid input
@@ -103,7 +103,7 @@ public class CodelistsTest {
         Assert.assertEquals(false, CodelistsV2.CountryIdentification.containsId("GR", null));
         Assert.assertEquals(false, CodelistsV2.CountryIdentification.containsId("GR", "lala"));
     }
-    
+
     @Test
     public void testContainsValueV1() {
         // valid input
@@ -127,7 +127,7 @@ public class CodelistsTest {
         Assert.assertEquals(false, CodelistsV2.CountryIdentification.containsValue("Greece", null));
         Assert.assertEquals(false, CodelistsV2.CountryIdentification.containsValue("Greece", "lala"));
     }
-    
+
     @Test
     public void testAllGCV1() {
         String theCodelist = "";

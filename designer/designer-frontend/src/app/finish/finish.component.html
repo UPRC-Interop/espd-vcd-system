@@ -18,35 +18,35 @@
 -->
 <h4 translate>espd.part5.header</h4>
 
-<form #f="ngForm">
+<form #form="ngForm">
 
   <mat-accordion multi="true">
     <mat-expansion-panel expanded="true">
       <mat-expansion-panel-header>
-        <mat-panel-title translate>
-          espd.part5.concl.statements
-        </mat-panel-title>
+        <mat-panel-title [innerHTML]="'espd.part5.concl.statements' | translate"></mat-panel-title>
       </mat-expansion-panel-header>
       <div class="desc">
         <!--<p>The economic operator formally declare that the information stated under Parts II - V above is accurate and correct and that it has been set out in full awareness of the consequences of serious misrepresentation.</p>-->
-          <p translate>espd.part5.concl.statements.text</p>
+          <p translate>espd.part5.concl.statements.text.part1</p>
+          <p translate>espd.part5.concl.statements.text.part2</p>
+          <p translate>espd.part5.concl.statements.text.part3</p>
+          <p translate>espd.part5.concl.statements.text.part4</p>
+          <p translate>espd.part5.concl.statements.text.part5</p>
         <!--<ol>-->
           <!--<li>The contracting authority or contracting entity has the possibility of obtaining the supporting documentation concerned directly by accessing a national database in any Member State that is available free of charge (on condition that the economic operator has provided the necessary information (web address, issuing authority or body, precise reference of the documentation) allowing the contracting authority or contracting entity to do so. Where required, this must be accompanied by the relevant  consent to such access), or</li>-->
           <!--<li>As of 18 October 2018 at the latest (depending on the national implementation of the second subparagraph of Article 59(5) of Directive 2014/24/EU), the contracting authority or contracting entity already possesses the documentation concerned.</li>-->
         <!--</ol>-->
         <!--<p>The undersigned formally consent to [identify the contracting authority or contracting entity as set out in Part I, Section A], gaining access to documents supporting the information, which has been provided in [identify the Part/Section/Point(s) concerned] of this European Single Procurement Document for the purposes of [identify the procurement procedure: (summary description, reference of publication in the Official Journal of the European Union, reference number)].</p>-->
-        <p translate>espd.part5.concl.statements.signature</p>
+        <p [innerHTML]="'espd.part5.concl.statements.signature' | translate"></p>
       </div>
     </mat-expansion-panel>
 
     <mat-expansion-panel expanded="true">
       <mat-expansion-panel-header>
-        <mat-panel-title translate>
-          espd.part5.export
-        </mat-panel-title>
+        <mat-panel-title [innerHTML]="'espd.part5.export' | translate"></mat-panel-title>
       </mat-expansion-panel-header>
       <div class="desc">
-        <p translate>espd.part5.export.content</p>
+        <p [innerHTML]="'espd.part5.export.content' | translate"></p>
       </div>
     </mat-expansion-panel>
 
@@ -54,7 +54,7 @@
 
   </mat-accordion>
 
-  <button mat-raised-button color="primary" matStepperPrevious>{{'espd.gui.previous' | translate}}</button>
+  <button mat-raised-button color="primary" matStepperPrevious [innerHTML]="'espd.gui.previous' | translate"></button>
   <ng-container *ngIf="!this.dataService.isReadOnly()">
     <button type="submit" mat-raised-button color="primary" matStepperNext (click)="exportXmlFile()">{{'espd.part5.export' | translate}} (XML)</button>
     <button type="submit" *ngIf="this.dataService.isVersionTwo()" mat-raised-button color="primary" matStepperNext (click)="exportHtmlFile()">{{'espd.part5.export' | translate}} (HTML)</button>

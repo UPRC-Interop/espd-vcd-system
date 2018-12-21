@@ -19,7 +19,7 @@ import eu.esens.espdvcd.retriever.criteria.resource.RegulatedCriteriaTaxonomyRes
 import eu.esens.espdvcd.retriever.criteria.resource.ECertisResource;
 import eu.esens.espdvcd.retriever.criteria.resource.ESPDArtefactResource;
 import eu.esens.espdvcd.retriever.criteria.resource.SelectableCriterionPrinter;
-import eu.esens.espdvcd.schema.EDMVersion;
+import eu.esens.espdvcd.schema.enums.EDMVersion;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

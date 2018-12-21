@@ -21,24 +21,11 @@ public enum SelfContainedCriteriaService implements CriteriaService {
 
     @Override
     public List<SelectableCriterion> getCriteria() throws RetrieverException {
-        List<SelectableCriterion> criteria = extractor.getFullList();
         extractor.setLang(EULanguageCodeEnum.EN);
+        List<SelectableCriterion> criteria = extractor.getFullList();
         CriteriaUtil.generateUUIDs(criteria);
-        return criteria;
+        return CriteriaUtil.markAsSelected(criteria);
     }
-
-//    @Override
-//    public List<SelectableCriterion> getCriteria(String euCountryCode) throws RetrieverException {
-//        List<SelectableCriterion> criteria = extractor.getFullList();
-//        for (SelectableCriterion cr : criteria) {
-//            try {
-//                cr.setSubCriterionList(nationalCriteriaMappingService.getNationalCriteria(cr.getID().trim(), euCountryCode));
-//            } catch (RetrieverException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        return criteria;
-//    }
 
     @Override
     public List<SelectableCriterion> getUnselectedCriteria(List<SelectableCriterion> initialList) throws RetrieverException {
@@ -51,20 +38,6 @@ public enum SelfContainedCriteriaService implements CriteriaService {
         extractor.setLang(EULanguageCodeEnum.valueOf(lang.toUpperCase()));
         return extractor.getFullList();
     }
-
-//    @Override
-//    public List<SelectableCriterion> getTranslatedCriteria(String euCountryCode, String lang) throws RetrieverException {
-//        extractor.setLang(EULanguageCodeEnum.valueOf(lang.toUpperCase()));
-//        List<SelectableCriterion> criteria = extractor.getFullList();
-//        for (SelectableCriterion cr : criteria) {
-//            try {
-//                cr.setSubCriterionList(nationalCriteriaMappingService.getTranslatedNationalCriteria(cr.getID().trim(), euCountryCode, lang));
-//            } catch (RetrieverException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        return criteria;
-//    }
 
     @Override
     public CriteriaType[] getCriteriaFilters() {

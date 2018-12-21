@@ -22,7 +22,10 @@ export class CodelistService {
 
 
   constructor(private APIService: ApicallService, public utilities: UtilitiesService) {
+    this.getCodelists();
+  }
 
+  getCodelists() {
     if (this.currency === null) {
       this.getCurrency()
         .then(res => {
@@ -123,7 +126,6 @@ export class CodelistService {
     }
 
 
-
     // if (this.evaluationMethodType === null) {
     //   this.getEvalutationMethodTypes()
     //     .then(res => {
@@ -134,8 +136,21 @@ export class CodelistService {
     //       console.log(err);
     //     });
     // }
+  }
 
+  reloadCodelists() {
+    this.currency = null;
+    this.countries = null;
+    this.procedureTypes = null;
+    this.projectTypes = null;
+    this.bidTypes = null;
+    this.eoRoleTypes = null;
+    this.eoIDType = null;
+    this.financialRatioTypes = null;
+    this.weightingType = null;
+    this.evaluationMethodType = null;
 
+    this.getCodelists();
   }
 
 

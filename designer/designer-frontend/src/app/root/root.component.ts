@@ -14,10 +14,20 @@
 /// limitations under the License.
 ///
 
-import {Component, OnChanges, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit, ViewChild} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {UtilitiesService} from '../services/utilities.service';
 import {Title} from '@angular/platform-browser';
+import {StartComponent} from '../start/start.component';
+import {ProcedureComponent} from '../procedure/procedure.component';
+import {ProcedureEoComponent} from '../procedure-eo/procedure-eo.component';
+import {ExclusionComponent} from '../exclusion/exclusion.component';
+import {ExclusionEoComponent} from '../exclusion-eo/exclusion-eo.component';
+import {SelectionEoComponent} from '../selection-eo/selection-eo.component';
+import {FinishComponent} from '../finish/finish.component';
+import {FinishEoComponent} from '../finish-eo/finish-eo.component';
+import {SelectionComponent} from '../selection/selection.component';
+import {WizardSteps} from '../base/wizard-steps.enum';
 
 @Component({
   selector: 'app-root',
@@ -26,27 +36,46 @@ import {Title} from '@angular/platform-browser';
 })
 export class RootComponent implements OnInit, OnChanges {
 
+  @ViewChild('startComponent') startComponent: StartComponent;
+  @ViewChild('procedureCaComponent') procedureCaComponent: ProcedureComponent;
+  @ViewChild('procedureEoComponent') procedureEoComponent: ProcedureEoComponent;
+  @ViewChild('exclusionCaComponent') exclusionCaComponent: ExclusionComponent;
+  @ViewChild('exclusionEoComponent') exclusionEoComponent: ExclusionEoComponent;
+  @ViewChild('selectionCaComponent') selectionCaComponent: SelectionComponent;
+  @ViewChild('selectionEoComponent') selectionEoComponent: SelectionEoComponent;
+  @ViewChild('finishCaComponent') finishCaComponent: FinishComponent;
+  @ViewChild('finishEoComponent') finishEoComponent: FinishEoComponent;
+
+  startStepValid: boolean;
+  procedureStepValid: boolean;
+  exclusionStepValid: boolean;
+  selectionStepValid: boolean;
+  finishStepValid: boolean;
+
   isLinear = true;
   elTitle = 'Προμηθεύς ESPDint – ηλεκτρονική υπηρεσία σύνταξης του Ενιαίου Ευρωπαϊκού Εγγράφου Σύμβασης (ΕΕΕΣ)';
   enTitle = 'Promitheus ESPDint – e-Service to fill out the European Single Procurement Document (ESPD)';
-
-  // eoRelatedFormA = this.dataService.eoRelatedACriteriaForm;
 
   constructor(public dataService: DataService,
               public utilities: UtilitiesService, private titleService: Title) {
   }
 
   ngOnInit() {
+    this.startStepValid = true;
+    this.procedureStepValid = true;
+    this.exclusionStepValid = true;
+    this.selectionStepValid = true;
+    this.finishStepValid = true;
   }
 
   ngOnChanges() {
   }
 
   onLanguageSelection(language: string) {
-      // console.log(language);
-      this.dataService.switchLanguage(language);
-      this.utilities.initLanguage = false;
-      this.utilities.start = true;
+    // console.log(language);
+    this.dataService.switchLanguage(language);
+    this.utilities.initLanguage = false;
+    this.utilities.start = true;
     this.setTitle(this.utilities.selectedLang);
   }
 
@@ -55,4 +84,16 @@ export class RootComponent implements OnInit, OnChanges {
     this.titleService.setTitle(title);
   }
 
+  private validateSteps(event) {
+    let isCA = this.startComponent.isCA;
+    this.startStepValid = event.selectedIndex === WizardSteps.START || this.startComponent.areFormsValid();
+    this.procedureStepValid = event.selectedIndex === WizardSteps.PROCEDURE || RootComponent.isComponentValid(isCA ? this.procedureCaComponent : this.procedureEoComponent);
+    this.exclusionStepValid = event.selectedIndex === WizardSteps.EXCLUSION || RootComponent.isComponentValid(isCA ? this.exclusionCaComponent : this.exclusionEoComponent);
+    this.selectionStepValid = event.selectedIndex === WizardSteps.SELECTION || RootComponent.isComponentValid(isCA ? this.selectionCaComponent : this.selectionEoComponent);
+    this.finishStepValid = event.selectedIndex === WizardSteps.FINISH || RootComponent.isComponentValid(isCA ? this.finishCaComponent : this.finishEoComponent);
+  }
+
+  private static isComponentValid(component) {
+    return 'undefined' === typeof  component || component.areFormsValid();
+  }
 }

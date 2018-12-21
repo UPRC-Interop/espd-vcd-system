@@ -15,12 +15,44 @@
  */
 package eu.esens.espdvcd.designer.service;
 
+import eu.esens.espdvcd.designer.exception.ValidationException;
 import eu.esens.espdvcd.validator.ArtefactValidator;
+import eu.esens.espdvcd.validator.ValidationResult;
 import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBException;
 import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
 
 public interface ValidatorService {
-    ArtefactValidator validateESPDFile(File request) throws JAXBException, SAXException;
+    ArtefactValidator validateESPDFile(File request) throws JAXBException, SAXException, ValidationException;
+
+    default ArtefactValidator validateESPDString(String theXML) throws IOException, JAXBException, SAXException, ValidationException {
+        Path tempFile = Files.createTempFile("espd", ".tmp");
+        Files.write(tempFile, theXML.getBytes(StandardCharsets.UTF_8));
+        return validateESPDFile(tempFile.toFile());
+    }
+
+    default ArtefactValidator disabledValidationResponse() {
+        return new ArtefactValidator() {
+            @Override
+            public boolean isValid() {
+                return true;
+            }
+
+            @Override
+            public List<ValidationResult> getValidationMessages() {
+                return null;
+            }
+
+            @Override
+            public List<ValidationResult> getValidationMessagesFiltered(String keyWord) {
+                return null;
+            }
+        };
+    }
 }

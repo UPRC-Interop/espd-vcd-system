@@ -26,9 +26,9 @@ import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.response.*;
 import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
-import eu.espd.schema.v2.pre_award.commonaggregate.*;
-import eu.espd.schema.v2.pre_award.commonbasic.*;
-import eu.espd.schema.v2.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
+import eu.espd.schema.v2.v210.commonaggregate.*;
+import eu.espd.schema.v2.v210.commonbasic.*;
+import eu.espd.schema.v2.v210.qualificationapplicationresponse.QualificationApplicationResponseType;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeConstants;
@@ -197,7 +197,7 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
                     if (rq.getResponse() != null) {
                         rq.getResponse().setValidatedCriterionPropertyID(rq.getID());
                     }
-                    return extractTenderingCriterionResponse(rq.getResponse(), rq.getResponseDataType(), criterionType);
+                    return extractTenderingCriterionResponse(rq.getResponse(), rq.getResponseDataType());
                 })
                 .collect(Collectors.toList());
     }
@@ -477,8 +477,7 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
     }
 
     private TenderingCriterionResponseType extractTenderingCriterionResponse(Response response,
-                                                                             ResponseTypeEnum respType,
-                                                                             final TenderingCriterionType criterionType) {
+                                                                             ResponseTypeEnum respType) {
 
         TenderingCriterionResponseType tcrType = new TenderingCriterionResponseType();
         EvidenceSuppliedType evsType = new EvidenceSuppliedType();
@@ -500,7 +499,6 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
 
         switch (respType) {
             case DESCRIPTION:
-            case ECONOMIC_OPERATOR_ROLE_CODE:
                 ResponseValueType descRvType = createResponseValueType();
                 String description = ((DescriptionResponse) response).getDescription();
                 descRvType.getDescription().add(new DescriptionType());
@@ -552,8 +550,6 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
                 return tcrType;
 
             case INDICATOR:
-            case CODE_BOOLEAN:
-            case ALPHA_INDICATOR:
                 ResponseValueType indRvType = createResponseValueType();
                 indRvType.setResponseIndicator(new ResponseIndicatorType());
                 indRvType.getResponseIndicator().setValue(((IndicatorResponse) response).isIndicator());

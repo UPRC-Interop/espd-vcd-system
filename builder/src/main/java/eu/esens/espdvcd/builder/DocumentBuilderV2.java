@@ -19,12 +19,12 @@ import eu.esens.espdvcd.builder.schema.SchemaFactory;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.schema.SchemaUtil;
-import eu.esens.espdvcd.schema.EDMVersion;
-import eu.espd.schema.v2.pre_award.commonbasic.IssueDateType;
-import eu.espd.schema.v2.pre_award.commonbasic.IssueTimeType;
-import eu.espd.schema.v2.pre_award.commonbasic.ProfileIDType;
-import eu.espd.schema.v2.pre_award.qualificationapplicationrequest.QualificationApplicationRequestType;
-import eu.espd.schema.v2.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
+import eu.esens.espdvcd.schema.enums.EDMVersion;
+import eu.espd.schema.v2.v210.commonbasic.IssueDateType;
+import eu.espd.schema.v2.v210.commonbasic.IssueTimeType;
+import eu.espd.schema.v2.v210.commonbasic.ProfileIDType;
+import eu.espd.schema.v2.v210.qualificationapplicationrequest.QualificationApplicationRequestType;
+import eu.espd.schema.v2.v210.qualificationapplicationresponse.QualificationApplicationResponseType;
 
 import javax.xml.bind.JAXBException;
 import java.io.ByteArrayInputStream;
@@ -60,8 +60,8 @@ public class DocumentBuilderV2 {
      * @return a JAXB QualificationApplicationRequestType instance from an ESPDRequest Model instance
      */
     private QualificationApplicationRequestType createXML(ESPDRequest req) {
-        QualificationApplicationRequestType reqType = finalize(SchemaFactory.withEDM_V2().ESPD_REQUEST
-                .extractQualificationApplicationRequestType(req));
+        QualificationApplicationRequestType reqType = finalize(SchemaFactory.EDM_V2
+                .ESPD_REQUEST.extractQualificationApplicationRequestType(req));
         return reqType;
     }
 
@@ -70,8 +70,8 @@ public class DocumentBuilderV2 {
      * @return a JAXB QualificationApplicationResponseType instance from an ESPDResponse Model instance
      */
     protected QualificationApplicationResponseType createXML(ESPDResponse res) {
-        QualificationApplicationResponseType resType = finalize(SchemaFactory.withEDM_V2().ESPD_RESPONSE
-                .extractQualificationApplicationResponseType(res));
+        QualificationApplicationResponseType resType = finalize(SchemaFactory.EDM_V2
+                .ESPD_RESPONSE.extractQualificationApplicationResponseType(res));
         return resType;
     }
 
@@ -93,10 +93,10 @@ public class DocumentBuilderV2 {
 
 
         reqType.setProfileID(createCENBIIProfileIdType(getProfileID()));
-        reqType.setID(SchemaFactory.withEDM_V2().ESPD_REQUEST
-                .createISOIECIDType(UUID.randomUUID().toString()));
-        reqType.setUUID(SchemaFactory.withEDM_V2().ESPD_REQUEST
-                .createISOIECUUIDType(UUID.randomUUID().toString()));
+        reqType.setID(SchemaFactory.EDM_V2
+                .ESPD_REQUEST.createISOIECIDType(UUID.randomUUID().toString()));
+        reqType.setUUID(SchemaFactory.EDM_V2
+                .ESPD_REQUEST.createISOIECUUIDType(UUID.randomUUID().toString()));
 
         return reqType;
     }
@@ -118,10 +118,10 @@ public class DocumentBuilderV2 {
         resType.getIssueTime().setValue(LocalTime.now());
 
         resType.setProfileID(createCENBIIProfileIdType(getProfileID()));
-        resType.setID(SchemaFactory.withEDM_V2().ESPD_RESPONSE
-                .createISOIECIDType(UUID.randomUUID().toString()));
-        resType.setUUID(SchemaFactory.withEDM_V2().ESPD_RESPONSE
-                .createISOIECUUIDType(UUID.randomUUID().toString()));
+        resType.setID(SchemaFactory.EDM_V2
+                .ESPD_RESPONSE.createISOIECIDType(UUID.randomUUID().toString()));
+        resType.setUUID(SchemaFactory.EDM_V2
+                .ESPD_RESPONSE.createISOIECUUIDType(UUID.randomUUID().toString()));
 
         return resType;
     }
@@ -138,11 +138,11 @@ public class DocumentBuilderV2 {
         //Return the Object
         try {
             if (theReq instanceof ESPDResponse) {
-                eu.espd.schema.v2.pre_award.qualificationapplicationresponse.ObjectFactory of = new eu.espd.schema.v2.pre_award.qualificationapplicationresponse.ObjectFactory();
+                eu.espd.schema.v2.v210.qualificationapplicationresponse.ObjectFactory of = new eu.espd.schema.v2.v210.qualificationapplicationresponse.ObjectFactory();
                 SchemaUtil.getMarshaller(EDMVersion.V2).marshal(of.createQualificationApplicationResponse(createXML((ESPDResponse) theReq)), result);
 
             } else {
-                eu.espd.schema.v2.pre_award.qualificationapplicationrequest.ObjectFactory of = new eu.espd.schema.v2.pre_award.qualificationapplicationrequest.ObjectFactory();
+                eu.espd.schema.v2.v210.qualificationapplicationrequest.ObjectFactory of = new eu.espd.schema.v2.v210.qualificationapplicationrequest.ObjectFactory();
                 SchemaUtil.getMarshaller(EDMVersion.V2).marshal(of.createQualificationApplicationRequest(createXML(theReq)), result);
             }
         } catch (JAXBException ex) {

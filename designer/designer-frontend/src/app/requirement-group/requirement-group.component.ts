@@ -14,7 +14,7 @@
 /// limitations under the License.
 ///
 
-import {Component, Input, OnChanges, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, ChangeDetectorRef} from '@angular/core';
 import {RequirementGroup} from '../model/requirementGroup.model';
 import {FormGroup} from '@angular/forms';
 import {FormUtilService} from '../services/form-util.service';
@@ -36,36 +36,53 @@ export class RequirementGroupComponent implements OnInit, OnChanges {
 
   public showIndicator: boolean;
 
-  constructor(public formUtil: FormUtilService, public utilities: UtilitiesService) {
+  constructor(public formUtil: FormUtilService, public utilities: UtilitiesService, private cdr: ChangeDetectorRef) {
   }
 
   ngOnInit() {
   }
 
   ngOnChanges() {
-    this.showIndicator = this.checkIndicator(this.indicator);
+
+    setTimeout(()=>{
+      this.showIndicator = this.checkIndicator(this.indicator);
+      if (!this.cdr['destroyed']) {
+        this.cdr.detectChanges();
+      }
+    })
+
   }
 
-  checkIndicator(b: boolean): boolean {
+  // console.log('Check Indicator called ' + this.reqGroup.id + ' with value of indicator: ' + this.indicator);
 
-    // console.log('Check Indicator called ' + this.reqGroup.id + ' with value of indicator: ' + this.indicator);
+  checkIndicator(indicatorState: boolean): boolean {
+    // console.log(this.reqGroup.condition === 'ONTRUE');
     if (this.reqGroup.condition) {
-      // console.log(this.reqGroup.condition === 'ONTRUE');
       // console.log(this.reqGroup.condition === 'ONFALSE');
       if (this.reqGroup.condition.endsWith('ON_FALSE') || this.reqGroup.condition === 'ONFALSE') {
-        return !b;
+        this.setFormState(!indicatorState);
+        return !indicatorState;
       } else {
-        return b;
+        this.setFormState(indicatorState);
+        return indicatorState;
       }
     }
     return true;
+  }
+
+  private setFormState(state: boolean) {
+    if (!state) {
+      this.form.disable();
+    } else {
+      this.form.enable();
+    }
   }
 
   childIndicatorChangedHandler(event: boolean) {
     this.childIndicator = (event);
   }
 
-  onAdd(rg: RequirementGroup) {
+  onAdd(rg: RequirementGroup, i: number) {
     // console.log(`Called onAdd with groupId ${rg.uuid}:`);
     // console.log(this.formUtil.template[rg.uuid]);
 
@@ -95,7 +112,8 @@ export class RequirementGroupComponent implements OnInit, OnChanges {
       // change requirement ids
       this.formUtil.changeReqId(this.placeHolder);
 
-      this.reqGroup.requirementGroups.push(this.placeHolder);
+      // this.reqGroup.requirementGroups.push(this.placeHolder);
+      this.reqGroup.requirementGroups.splice(i + 1, 0, this.placeHolder);
       console.log('NEW Local ReqGroup:');
       console.log(this.reqGroup);
       // add formGroup to Form object

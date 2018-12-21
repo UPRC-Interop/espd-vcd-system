@@ -149,3 +149,13 @@ iframe {
 .langBlock:hover {
   cursor: pointer;
 }
+
+.invalid {
+  color: red;
+}
+
+.invalid-icon {
+  color: red;
+  display: inline-flex;
+  vertical-align: middle;
+}

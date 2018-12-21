@@ -2291,173 +2291,7 @@
       </Row>
       <Row>
          <Value ColumnRef="code">
-            <SimpleValue>ALPHA_INDICATOR</SimpleValue>
-         </Value>
-         <Value ColumnRef="context">
-            <SimpleValue>ESPD REGULATED</SimpleValue>
-         </Value>
-         <Value ColumnRef="status">
-            <SimpleValue>ACTIVE</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-bul">
-            <SimpleValue>Code used to state that all the selection criteria are met.</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-spa">
-            <SimpleValue>Code used to state that all the selection criteria are met.</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-ces">
-            <SimpleValue>Code used to state that all the selection criteria are met.</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-dan">
-            <SimpleValue>Code used to state that all the selection criteria are met.</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-deu">
-            <SimpleValue>Code used to state that all the selection criteria are met.</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-est">
-            <SimpleValue>Code used to state that all the selection criteria are met.</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-ell">
-            <SimpleValue>Code used to state that all the selection criteria are met.</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-eng">
-            <SimpleValue>Code used to state that all the selection criteria are met.</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-fra">
-            <SimpleValue>Code used to state that all the selection criteria are met.</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-gle">
-            <SimpleValue>Code used to state that all the selection criteria are met.</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-hrv">
-            <SimpleValue>Code used to state that all the selection criteria are met.</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-ita">
-            <SimpleValue>Code used to state that all the selection criteria are met.</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-lav">
-            <SimpleValue>Code used to state that all the selection criteria are met.</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-lit">
-            <SimpleValue>Code used to state that all the selection criteria are met.</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-hun">
-            <SimpleValue>Code used to state that all the selection criteria are met.</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-mlt">
-            <SimpleValue>Code used to state that all the selection criteria are met.</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-nld">
-            <SimpleValue>Code used to state that all the selection criteria are met.</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-pol">
-            <SimpleValue>Code used to state that all the selection criteria are met.</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-por">
-            <SimpleValue>Code used to state that all the selection criteria are met.</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-ron">
-            <SimpleValue>Code used to state that all the selection criteria are met.</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-slk">
-            <SimpleValue>Code used to state that all the selection criteria are met.</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-slv">
-            <SimpleValue>Code used to state that all the selection criteria are met.</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-fin">
-            <SimpleValue>Code used to state that all the selection criteria are met.</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-swe">
-            <SimpleValue>Code used to state that all the selection criteria are met.</SimpleValue>
-         </Value>
-      </Row>
-      <Row>
-         <Value ColumnRef="code">
             <SimpleValue>ECONOMIC_OPERATOR_IDENTIFIER</SimpleValue>
-         </Value>
-         <Value ColumnRef="context">
-            <SimpleValue>ESPD SELF-CONTAINED</SimpleValue>
-         </Value>
-         <Value ColumnRef="status">
-            <SimpleValue>ACTIVE</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-bul">
-            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-spa">
-            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-ces">
-            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-dan">
-            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-deu">
-            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-est">
-            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-ell">
-            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-eng">
-            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-fra">
-            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-gle">
-            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-hrv">
-            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-ita">
-            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-lav">
-            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-lit">
-            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-hun">
-            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-mlt">
-            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-nld">
-            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-pol">
-            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-por">
-            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-ron">
-            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-slk">
-            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-slv">
-            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-fin">
-            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
-         </Value>
-         <Value ColumnRef="name-swe">
-            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
-         </Value>
-      </Row>
-      <Row>
-         <Value ColumnRef="code">
-            <SimpleValue>ECONOMIC_OPERATOR_ROLE_CODE</SimpleValue>
          </Value>
          <Value ColumnRef="context">
             <SimpleValue>ESPD REGULATED, ESPD SELF-CONTAINED</SimpleValue>
@@ -2466,76 +2300,76 @@
             <SimpleValue>ACTIVE</SimpleValue>
          </Value>
          <Value ColumnRef="name-bul">
-            <SimpleValue>Code used to detect the code that identifies the role of an Economic Operator in the Procurement Procedure.</SimpleValue>
+            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
          </Value>
          <Value ColumnRef="name-spa">
-            <SimpleValue>Code used to detect the code that identifies the role of an Economic Operator in the Procurement Procedure.</SimpleValue>
+            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
          </Value>
          <Value ColumnRef="name-ces">
-            <SimpleValue>Code used to detect the code that identifies the role of an Economic Operator in the Procurement Procedure.</SimpleValue>
+            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
          </Value>
          <Value ColumnRef="name-dan">
-            <SimpleValue>Code used to detect the code that identifies the role of an Economic Operator in the Procurement Procedure.</SimpleValue>
+            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
          </Value>
          <Value ColumnRef="name-deu">
-            <SimpleValue>Code used to detect the code that identifies the role of an Economic Operator in the Procurement Procedure.</SimpleValue>
+            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
          </Value>
          <Value ColumnRef="name-est">
-            <SimpleValue>Code used to detect the code that identifies the role of an Economic Operator in the Procurement Procedure.</SimpleValue>
+            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
          </Value>
          <Value ColumnRef="name-ell">
-            <SimpleValue>Code used to detect the code that identifies the role of an Economic Operator in the Procurement Procedure.</SimpleValue>
+            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
          </Value>
          <Value ColumnRef="name-eng">
-            <SimpleValue>Code used to detect the code that identifies the role of an Economic Operator in the Procurement Procedure.</SimpleValue>
+            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
          </Value>
          <Value ColumnRef="name-fra">
-            <SimpleValue>Code used to detect the code that identifies the role of an Economic Operator in the Procurement Procedure.</SimpleValue>
+            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
          </Value>
          <Value ColumnRef="name-gle">
-            <SimpleValue>Code used to detect the code that identifies the role of an Economic Operator in the Procurement Procedure.</SimpleValue>
+            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
          </Value>
          <Value ColumnRef="name-hrv">
-            <SimpleValue>Code used to detect the code that identifies the role of an Economic Operator in the Procurement Procedure.</SimpleValue>
+            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
          </Value>
          <Value ColumnRef="name-ita">
-            <SimpleValue>Code used to detect the code that identifies the role of an Economic Operator in the Procurement Procedure.</SimpleValue>
+            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
          </Value>
          <Value ColumnRef="name-lav">
-            <SimpleValue>Code used to detect the code that identifies the role of an Economic Operator in the Procurement Procedure.</SimpleValue>
+            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
          </Value>
          <Value ColumnRef="name-lit">
-            <SimpleValue>Code used to detect the code that identifies the role of an Economic Operator in the Procurement Procedure.</SimpleValue>
+            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
          </Value>
          <Value ColumnRef="name-hun">
-            <SimpleValue>Code used to detect the code that identifies the role of an Economic Operator in the Procurement Procedure.</SimpleValue>
+            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
          </Value>
          <Value ColumnRef="name-mlt">
-            <SimpleValue>Code used to detect the code that identifies the role of an Economic Operator in the Procurement Procedure.</SimpleValue>
+            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
          </Value>
          <Value ColumnRef="name-nld">
-            <SimpleValue>Code used to detect the code that identifies the role of an Economic Operator in the Procurement Procedure.</SimpleValue>
+            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
          </Value>
          <Value ColumnRef="name-pol">
-            <SimpleValue>Code used to detect the code that identifies the role of an Economic Operator in the Procurement Procedure.</SimpleValue>
+            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
          </Value>
          <Value ColumnRef="name-por">
-            <SimpleValue>Code used to detect the code that identifies the role of an Economic Operator in the Procurement Procedure.</SimpleValue>
+            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
          </Value>
          <Value ColumnRef="name-ron">
-            <SimpleValue>Code used to detect the code that identifies the role of an Economic Operator in the Procurement Procedure.</SimpleValue>
+            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
          </Value>
          <Value ColumnRef="name-slk">
-            <SimpleValue>Code used to detect the code that identifies the role of an Economic Operator in the Procurement Procedure.</SimpleValue>
+            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
          </Value>
          <Value ColumnRef="name-slv">
-            <SimpleValue>Code used to detect the code that identifies the role of an Economic Operator in the Procurement Procedure.</SimpleValue>
+            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
          </Value>
          <Value ColumnRef="name-fin">
-            <SimpleValue>Code used to detect the code that identifies the role of an Economic Operator in the Procurement Procedure.</SimpleValue>
+            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
          </Value>
          <Value ColumnRef="name-swe">
-            <SimpleValue>Code used to detect the code that identifies the role of an Economic Operator in the Procurement Procedure.</SimpleValue>
+            <SimpleValue>Code used to detect an identifier referred to an Economic Operator</SimpleValue>
          </Value>
       </Row>
    </SimpleCodeList>

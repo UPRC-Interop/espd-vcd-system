@@ -15,8 +15,8 @@
     limitations under the License.
 
 -->
-<div *ngFor="let rg of criterion.requirementGroups" class="form-row"
-     [hidden]="(((rg.type === 'QUESTION_SUBGROUP' || rg.type === 'QUESTION_GROUP') && this.utilities.isCA))">
+<div *ngFor="let rg of criterion.requirementGroups; first as isFirst; index as i" class="form-row"
+     [hidden]="(((rg.type === 'QUESTION_SUBGROUP' || rg.type === 'QUESTION_GROUP') && this.utilities.isCA && !this.utilities.isReviewESPD))">
   <app-requirement-group [reqGroup]="rg"
                          [form] = "form.get(rg.uuid)"
                          [indicator]="true"></app-requirement-group>
@@ -25,7 +25,13 @@
     <!--<button type="button" (click)="onRemove(rg)"><span class="material-icons" style="vertical-align: middle;">remove_circle_outline</span></button>-->
   <!--</div>-->
   <div *ngIf="rg.multiple && !(this.utilities.CAReqExists(rg) && this.utilities.isEO)" style="text-align: right">
-    <button type="button" (click)="onAdd(rg)"><span class="material-icons" style="vertical-align: middle;">add_circle_outline</span></button>
-    <button type="button" (click)="onRemove(rg)"><span class="material-icons" style="vertical-align: middle;">remove_circle_outline</span></button>
+    <div *ngIf="!this.dataService.isReadOnly()">
+      <button type="button" (click)="onAdd(rg, i)"><span class="material-icons" style="vertical-align: middle;">add_circle_outline</span>
+      </button>
+      <div *ngIf="!isFirst" class="remove-btn">
+        <button type="button" (click)="onRemove(rg)"><span class="material-icons" style="vertical-align: middle;">remove_circle_outline</span>
+        </button>
+      </div>
+    </div>
   </div>
 </div>

@@ -16,17 +16,20 @@
 package eu.esens.espdvcd.designer.util;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import eu.esens.espdvcd.validator.ValidationResult;
+
+import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ErrorResponse {
     private final int code;
     private final String message;
-    private final Object responseObject;
+    private final List<ValidationResult> validationResults;
 
     private ErrorResponse(ErrorBuilder builder) {
         this.code = builder.code;
         this.message = builder.message;
-        this.responseObject = builder.responseObject;
+        this.validationResults = builder.validationResults;
     }
 
     public int getCode() {
@@ -37,8 +40,8 @@ public class ErrorResponse {
         return message;
     }
 
-    public Object getResponseObject() {
-        return responseObject;
+    public  List<ValidationResult> getValidationResults() {
+        return validationResults;
     }
 
     static class ErrorBuilder {
@@ -48,7 +51,7 @@ public class ErrorResponse {
         private String message;
 
         //optional params
-        private Object responseObject;
+        private List<ValidationResult> validationResults;
 
         private ErrorBuilder(){
 
@@ -59,8 +62,8 @@ public class ErrorResponse {
             this.message = message;
         }
 
-        ErrorBuilder withResponseObject(Object responseObject) {
-            this.responseObject = responseObject;
+        ErrorBuilder withValidationResults(List<ValidationResult>  validationResults) {
+            this.validationResults = validationResults;
             return this;
         }
 

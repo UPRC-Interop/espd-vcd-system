@@ -232,7 +232,7 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
 
         initCriterionMap();
         return criterionMap.containsKey(ID)
-                ? criterionMap.get(ID).getLegislationReference()
+                ? new LegislationReference(criterionMap.get(ID).getLegislationReference())
                 : null;
     }
 

@@ -17,11 +17,13 @@ package eu.esens.espdvcd.designer;
 
 import eu.esens.espdvcd.designer.endpoint.*;
 import eu.esens.espdvcd.designer.service.*;
+import eu.esens.espdvcd.designer.util.Config;
 import eu.esens.espdvcd.designer.util.Errors;
 import eu.esens.espdvcd.designer.util.JsonUtil;
+import eu.esens.espdvcd.designer.util.ServerUtil;
+import eu.esens.espdvcd.schema.enums.EDMVersion;
 import eu.esens.espdvcd.designer.util.Message;
 import eu.esens.espdvcd.model.EODetails;
-import eu.esens.espdvcd.schema.EDMVersion;
 import spark.Service;
 
 import java.util.concurrent.ConcurrentHashMap;
@@ -34,46 +36,37 @@ public class Server {
     private final static Logger LOGGER = Logger.getLogger(Server.class.getName());
     public final static ConcurrentMap<String, Message<EODetails>> TOOP_RESPONSE_MAP = new ConcurrentHashMap<>();
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
 
         LOGGER.info("Starting up espd-designer server");
 
         //SERVER CONFIGURATION
         LOGGER.info("Starting port configuration");
-        int portToBind = 0;
+        int portToBind = Config.getServerPort();
         String initialPath = "";
-        if (args.length == 0) {
-            LOGGER.warning("No port specified in the parameters, defaulting to 8080");
-            portToBind = 8080;
-        } else {
-            try {
-                portToBind = Integer.parseInt(args[0]);
-                if ((portToBind < 0) || (portToBind > 65535)) {
-                    LOGGER.severe("Invalid port specified");
-                    System.exit(1);
-                }
-            } catch (NumberFormatException e) {
-                LOGGER.severe("Invalid port argument");
-                System.exit(1);
-            }
-//            if (args.length > 1) {
-//                initialPath = args[1];
-//            }
+
+        if ((portToBind < 0) || (portToBind > 65535)) {
+            LOGGER.severe("Invalid port specified");
+            System.exit(1);
         }
 
         LOGGER.info("Attempting to bind to port " + portToBind);
         Service spark = Service.ignite().port(portToBind);
-        spark.staticFiles.location("/public");
-
         spark.initExceptionHandler(e -> {
             LOGGER.severe("Failed to ignite the Spark server");
             LOGGER.log(Level.SEVERE, e.getMessage(), e);
             System.exit(-1);
         });
 
-        enableCORS(spark);
+        ServerUtil.configureStaticFiles(spark);
 
-        dropTrailingSlashes(spark);
+        if (Config.isEnchancedSecurityEnabled())
+            ServerUtil.addSecurityHeaders(spark);
+
+        if (Config.isCORSEnabled())
+            ServerUtil.enableCORS(spark);
+
+        ServerUtil.dropTrailingSlashes(spark);
 
         spark.notFound((request, response) -> JsonUtil.toJson(Errors.notFoundError("Endpoint not found.")));
 
@@ -135,37 +128,4 @@ public class Server {
     }
 
 
-    // Enables CORS on requests.
-    private static void enableCORS(Service spark) {
-
-        spark.options("/*", (request, response) -> {
-
-            String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
-            if (accessControlRequestHeaders != null)
-                response.header("Access-Control-Allow-Headers", accessControlRequestHeaders);
-
-            String accessControlRequestMethod = request.headers("Access-Control-Request-Method");
-            if (accessControlRequestMethod != null)
-                response.header("Access-Control-Allow-Methods", accessControlRequestMethod);
-
-            return "OK";
-        });
-
-        spark.before((request, response) -> {
-            response.header("Access-Control-Allow-Origin", "*");
-            response.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-            response.header("Access-Control-Allow-Headers", "Content-Type, Content-Disposition");
-        });
-
-        LOGGER.info("CORS support is now enabled. Enjoy ;)");
-    }
-
-    //Drop trailing slashes from URLs so that you don't have to specify the routes twice
-    private static void dropTrailingSlashes(Service spark) {
-        spark.before((req, res) -> {
-            String path = req.pathInfo();
-            if (path.endsWith("/"))
-                res.redirect(path.substring(0, path.length() - 1), 301);
-        });
-    }
 }

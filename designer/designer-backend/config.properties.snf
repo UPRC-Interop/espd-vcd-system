@@ -1,0 +1,10 @@
+#Config file for deployed designer
+espd.designer.CORS.enabled=false
+espd.designer.debug.enabled=false
+espd.designer.enchancedSecurity.enabled=true
+espd.designer.allowFraming=false
+espd.designer.lang=EN
+espd.designer.port=8080
+espd.designer.artefactDump.enabled=false
+espd.designer.artefactDump.location=artefacts
+espd.designer.validator.enabled=false

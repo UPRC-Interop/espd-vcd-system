@@ -155,8 +155,8 @@ public class VCDDocumentBuilder extends DocumentBuilderV1 {
 
     @Override
     protected ESPDResponseType createXML(ESPDResponse res) {
-        ESPDResponseType resType = finalize(SchemaFactory.withEDM_V1().VCD_RESPONSE
-                .extractESPDResponseType(res));
+        ESPDResponseType resType = finalize(SchemaFactory.EDM_V1
+                .VCD_RESPONSE.extractESPDResponseType(res));
         return resType;
     }
 }

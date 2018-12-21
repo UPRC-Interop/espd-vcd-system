@@ -14,8 +14,12 @@
 /// limitations under the License.
 ///
 
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {DataService} from '../services/data.service';
+import {NgForm} from '@angular/forms';
+import {ValidationService} from '../services/validation.service';
+import {BaseStep} from '../base/base-step';
+import {WizardSteps} from '../base/wizard-steps.enum';
 import {ExportType} from '../export/export-type.enum';
 
 @Component({
@@ -23,9 +27,20 @@ import {ExportType} from '../export/export-type.enum';
   templateUrl: './finish.component.html',
   styleUrls: ['./finish.component.css']
 })
-export class FinishComponent implements OnInit {
+export class FinishComponent implements OnInit, BaseStep {
 
-  constructor(public dataService: DataService) {
+  @ViewChildren('form') forms: QueryList<NgForm>;
+
+  @Input() startStepValid: boolean;
+  @Input() procedureStepValid: boolean;
+  @Input() exclusionStepValid: boolean;
+  @Input() selectionStepValid: boolean;
+  @Input() finishStepValid: boolean;
+
+  constructor(
+    public dataService: DataService,
+    private validationService: ValidationService
+  ) {
   }
 
   ngOnInit() {
@@ -43,14 +58,11 @@ export class FinishComponent implements OnInit {
     this.dataService.finishSubmit(ExportType.XML);
   }
 
-  // exportFile() {
-  //   this.dataService.version = 'v1';
-  //   this.dataService.saveFile(this.dataService.blob);
-  // }
-  //
-  // exportFileV2() {
-  //   this.dataService.version = 'v2';
-  //   this.dataService.saveFile(this.dataService.blobV2);
-  // }
+  getWizardStep(): WizardSteps {
+    return WizardSteps.FINISH;
+  }
 
+  public areFormsValid(): boolean {
+    return this.validationService.validateFormsInComponent(this.forms);
+  }
 }

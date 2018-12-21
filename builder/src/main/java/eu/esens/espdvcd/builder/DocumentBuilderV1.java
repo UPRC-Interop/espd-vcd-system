@@ -19,7 +19,7 @@ import eu.esens.espdvcd.builder.schema.SchemaFactory;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.schema.SchemaUtil;
-import eu.esens.espdvcd.schema.EDMVersion;
+import eu.esens.espdvcd.schema.enums.EDMVersion;
 import eu.espd.schema.v1.commonbasiccomponents_2.IssueDateType;
 import eu.espd.schema.v1.commonbasiccomponents_2.IssueTimeType;
 import eu.espd.schema.v1.commonbasiccomponents_2.ProfileIDType;
@@ -63,8 +63,8 @@ public class DocumentBuilderV1 {
      * @return a JAXB ESPDRequestType instance from an ESPDRequest Model instance
      */
     private ESPDRequestType createXML(ESPDRequest req) {
-        ESPDRequestType reqType = finalize(SchemaFactory.withEDM_V1().ESPD_REQUEST
-                .extractESPDRequestType(req));
+        ESPDRequestType reqType = finalize(SchemaFactory.EDM_V1
+                .ESPD_REQUEST.extractESPDRequestType(req));
         return reqType;
 
     }
@@ -74,8 +74,8 @@ public class DocumentBuilderV1 {
      * @return a JAXB ESPDResponseType instance from an ESPDResponse Model instance
      */
     protected ESPDResponseType createXML(ESPDResponse res) {
-        ESPDResponseType resType = finalize(SchemaFactory.withEDM_V1().ESPD_RESPONSE
-                .extractESPDResponseType(res));
+        ESPDResponseType resType = finalize(SchemaFactory.EDM_V1
+                .ESPD_RESPONSE.extractESPDResponseType(res));
         return resType;
     }
 
@@ -97,8 +97,8 @@ public class DocumentBuilderV1 {
 
         reqType.setProfileID(createBIIProfileIdType(getProfileID()));
 
-        reqType.setID(SchemaFactory.withEDM_V1().ESPD_REQUEST
-                .createISOIECIDType(UUID.randomUUID().toString()));
+        reqType.setID(SchemaFactory.EDM_V1
+                .ESPD_REQUEST.createISOIECIDType(UUID.randomUUID().toString()));
         return reqType;
     }
 
@@ -120,8 +120,8 @@ public class DocumentBuilderV1 {
 
         resType.setProfileID(createBIIProfileIdType(getProfileID()));
 
-        resType.setID(SchemaFactory.withEDM_V1().ESPD_RESPONSE
-                .createISOIECIDType(UUID.randomUUID().toString()));
+        resType.setID(SchemaFactory.EDM_V1
+                .ESPD_RESPONSE.createISOIECIDType(UUID.randomUUID().toString()));
         return resType;
     }
 

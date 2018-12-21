@@ -14,19 +14,38 @@
 /// limitations under the License.
 ///
 
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {DataService} from '../services/data.service';
+import {NgForm} from '@angular/forms';
+import {ValidationService} from '../services/validation.service';
+import {BaseStep} from '../base/base-step';
+import {WizardSteps} from '../base/wizard-steps.enum';
 
 @Component({
   selector: 'app-exclusion-eo',
   templateUrl: './exclusion-eo.component.html',
   styleUrls: ['./exclusion-eo.component.css']
 })
-export class ExclusionEoComponent implements OnInit {
-  constructor(public dataService: DataService) {
+export class ExclusionEoComponent implements OnInit, BaseStep {
+
+  @ViewChildren('form') forms: QueryList<NgForm>;
+
+
+  constructor(
+    public dataService: DataService,
+    private validationService: ValidationService
+  ) {
   }
 
   ngOnInit() {
 
+  }
+
+  getWizardStep(): WizardSteps {
+    return WizardSteps.EXCLUSION;
+  }
+
+  public areFormsValid(): boolean {
+    return this.validationService.validateFormsInComponent(this.forms);
   }
 }

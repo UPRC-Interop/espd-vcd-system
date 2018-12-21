@@ -24,10 +24,9 @@
       <p translate>espd.part4.alert</p>
       <span translate>espd.gui.question.to.use.alpha</span>
       <mat-radio-group name="satisfiesALL"
-                       [disabled]="this.dataService.isReadOnly() ||
-                     (this.utilities.satisfiedALLCriterionExists && this.utilities.isImportESPD)">
+                       [disabled]="this.utilities.isImport()">
         <mat-radio-button color="primary" name="selALL" value="YES"
-                          [checked]="!this.utilities.satisfiedALLCriterionExists && this.utilities.isImportESPD "
+                          [checked]="!this.utilities.satisfiedALLCriterionExists && this.utilities.isImportESPD"
                           (change)="handleALL(YES)" #YES>
           {{'espd.gui.yes' | translate}}
         </mat-radio-button>
@@ -42,7 +41,7 @@
 </div>
 
 <mat-accordion multi="true" *ngIf="this.utilities.isSatisfiedALL">
-  <form #f="ngForm">
+  <form #form="ngForm">
     <mat-expansion-panel expanded="true" *ngIf="this.dataService.selectionALLCriteria">
       <mat-expansion-panel-header>
         <mat-panel-title translate>
@@ -85,7 +84,7 @@
 
 <mat-accordion multi="true" *ngIf="this.utilities.isAtoD">
 <ng-container *ngIf="dataService.selectionACriteriaForm">
-  <form [formGroup]="dataService.selectionACriteriaForm">
+  <form [formGroup]="dataService.selectionACriteriaForm" #form="ngForm">
     <mat-expansion-panel expanded="true" *ngIf="this.dataService.selectionACriteria">
       <mat-expansion-panel-header>
         <mat-panel-title translate>
@@ -126,7 +125,7 @@
 </ng-container>
 
 <ng-container *ngIf="dataService.selectionBCriteriaForm">
-  <form [formGroup]="dataService.selectionBCriteriaForm">
+  <form [formGroup]="dataService.selectionBCriteriaForm" #form="ngForm">
     <mat-expansion-panel expanded="true" *ngIf="this.dataService.selectionBCriteria">
       <mat-expansion-panel-header>
         <mat-panel-title translate>
@@ -162,7 +161,7 @@
 </ng-container>
 
   <ng-container *ngIf="dataService.selectionCCriteriaForm">
-    <form [formGroup]="dataService.selectionCCriteriaForm">
+    <form [formGroup]="dataService.selectionCCriteriaForm" #form="ngForm">
       <mat-expansion-panel expanded="true" *ngIf="this.dataService.selectionCCriteria">
         <mat-expansion-panel-header>
           <mat-panel-title translate>
@@ -193,7 +192,8 @@
                     <mat-select placeholder="Weighting Type"
                                 name="weightingType"
                                 [(ngModel)]="dataService.CADetails.weightingType"
-                                [ngModelOptions]="{standalone: true}">
+                                [ngModelOptions]="{standalone: true}"
+                                [disabled]="this.dataService.isReadOnly()">
                       <mat-option *ngFor="let type of codelist.weightingType" [value]="type.code">{{type.code}}</mat-option>
                     </mat-select>
                   </mat-form-field>
@@ -244,7 +244,7 @@
     </form>
   </ng-container>
   <ng-container *ngIf="dataService.selectionDCriteriaForm">
-    <form [formGroup]="dataService.selectionDCriteriaForm">
+    <form [formGroup]="dataService.selectionDCriteriaForm" #form="ngForm">
       <mat-expansion-panel expanded="true" *ngIf="this.dataService.selectionDCriteria">
         <mat-expansion-panel-header>
           <mat-panel-title translate>

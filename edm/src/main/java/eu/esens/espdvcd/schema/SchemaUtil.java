@@ -1,12 +1,12 @@
 /**
  * Copyright 2016-2018 University of Piraeus Research Center
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,17 +15,10 @@
  */
 package eu.esens.espdvcd.schema;
 
-//import grow.names.specification.ubl.edm.xsd.espdrequest_1.ESPDRequestType;
-//import grow.names.specification.ubl.edm.xsd.espdresponse_1.ESPDResponseType;
-//
-//import test.x.ubl.pre_award.qualificationapplicationrequest.QualificationApplicationRequestType;
-//import test.x.ubl.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
-
-import eu.esens.espdvcd.schema.exception.SchemaException;
+import eu.esens.espdvcd.schema.enums.EDMSubVersion;
+import eu.esens.espdvcd.schema.enums.EDMVersion;
 import eu.espd.schema.v1.espdrequest_1.ESPDRequestType;
 import eu.espd.schema.v1.espdresponse_1.ESPDResponseType;
-import eu.espd.schema.v2.pre_award.qualificationapplicationrequest.QualificationApplicationRequestType;
-import eu.espd.schema.v2.pre_award.qualificationapplicationresponse.QualificationApplicationResponseType;
 
 import javax.xml.bind.*;
 import java.util.logging.Level;
@@ -37,18 +30,30 @@ import java.util.logging.Logger;
  */
 public class SchemaUtil {
 
-    private static final JAXBContext JCV1;
-    private static final JAXBContext JCV2;
+    private static final Logger LOGGER = Logger.getLogger(SchemaUtil.class.getName());
+
+    private static final JAXBContext JCV102; // 1.0.2
+    private static final JAXBContext JCV202; // 2.0.2
+    private static final JAXBContext JCV210; // 2.1.0
 
     static {
         try {
-            JCV1 = JAXBContext.newInstance(ESPDRequestType.class.getPackage().getName()
+
+            JCV102 = JAXBContext.newInstance(ESPDRequestType.class.getPackage().getName()
                     + ":" + ESPDResponseType.class.getPackage().getName());
 
-            JCV2 = JAXBContext.newInstance(QualificationApplicationRequestType.class.getPackage().getName()
-                    + ":" + QualificationApplicationResponseType.class.getPackage().getName());
+            JCV202 = JAXBContext.newInstance(eu.espd.schema.v2.v202.pre_award.qualificationapplicationrequest
+                    .QualificationApplicationRequestType.class.getPackage().getName()
+                    + ":" + eu.espd.schema.v2.v202.pre_award.qualificationapplicationresponse
+                    .QualificationApplicationResponseType.class.getPackage().getName());
+
+            JCV210 = JAXBContext.newInstance(eu.espd.schema.v2.v210.qualificationapplicationrequest
+                    .QualificationApplicationRequestType.class.getPackage().getName()
+                    + ":" + eu.espd.schema.v2.v210.qualificationapplicationresponse
+                    .QualificationApplicationResponseType.class.getPackage().getName());
+
         } catch (JAXBException ex) {
-            Logger.getLogger(SchemaUtil.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.log(Level.SEVERE, null, ex);
             throw new ExceptionInInitializerError(ex);
         }
     }
@@ -61,26 +66,61 @@ public class SchemaUtil {
      */
     public static Marshaller getMarshaller(EDMVersion version) throws JAXBException {
 
+        switch (version) {
+
+            case V1:
+
+                return getMarshaller(EDMSubVersion.V102);
+
+            case V2:
+
+                return getMarshaller(EDMSubVersion.V210);
+
+            default:
+                throw new IllegalStateException("Error... Unknown edm version.");
+        }
+    }
+
+    /**
+     * Factory Method that gets a proper marshaller for the ESPD/VCD Artifacts
+     *
+     * @return an ESPD/VCD Marshaller
+     * @throws JAXBException when the marshaller cannot be initialized
+     */
+    public static Marshaller getMarshaller(EDMSubVersion version) throws JAXBException {
+
         Marshaller marshaller = null;
 
         try {
 
             switch (version) {
-                case V1:
-                    marshaller = JCV1.createMarshaller();
+
+                case V102:
+
+                    marshaller = JCV102.createMarshaller();
+                    marshaller.setProperty("com.sun.xml.bind.namespacePrefixMapper", new ESPDPrefixMapper());
                     break;
-                case V2:
-                    marshaller = JCV2.createMarshaller();
+
+                case V202:
+
+                    marshaller = JCV202.createMarshaller();
+                    marshaller.setProperty("com.sun.xml.bind.namespacePrefixMapper", new ESPDPrefixMapper());
                     break;
+
+                case V210:
+
+                    marshaller = JCV210.createMarshaller();
+                    marshaller.setProperty("com.sun.xml.bind.namespacePrefixMapper", new ESPDPrefixMapper());
+                    break;
+
                 default:
-                    throw new SchemaException("Error... Unknown edm version.");
+                    throw new IllegalStateException("Error... Unknown edm version.");
             }
 
-            marshaller.setProperty("com.sun.xml.bind.namespacePrefixMapper", new ESPDPrefixMapper());
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 
-        } catch (PropertyException | SchemaException e) {
-            Logger.getLogger(SchemaUtil.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+        } catch (PropertyException e) {
+            LOGGER.log(Level.SEVERE, e.getMessage(), e);
         }
         return marshaller;
     }
@@ -93,26 +133,48 @@ public class SchemaUtil {
      */
     public static Unmarshaller getUnmarshaller(EDMVersion version) throws JAXBException {
 
-        Unmarshaller unmarshaller = null;
+        switch (version) {
 
-        try {
+            case V1:
 
-            switch (version) {
-                case V1:
-                    unmarshaller = JCV1.createUnmarshaller();
-                    break;
-                case V2:
-                    unmarshaller = JCV2.createUnmarshaller();
-                    break;
-                default:
-                    throw new SchemaException("Error... Unknown edm version.");
-            }
+                return getUnmarshaller(EDMSubVersion.V102);
 
-        } catch (SchemaException e) {
-            Logger.getLogger(SchemaUtil.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+            case V2:
+
+                return getUnmarshaller(EDMSubVersion.V210);
+
+            default:
+                throw new IllegalStateException("Error... Unknown edm version.");
         }
 
-        return unmarshaller;
+    }
+
+    /**
+     * Factory Method that gets a proper unmarshaller for the ESPD/VCD Artifacts
+     *
+     * @return an ESPD/VCD Marshaller
+     * @throws JAXBException when the marshaller cannot be initialized
+     */
+    public static Unmarshaller getUnmarshaller(EDMSubVersion version) throws JAXBException {
+
+        switch (version) {
+
+            case V102:
+
+                return JCV102.createUnmarshaller();
+
+            case V202:
+
+                return JCV202.createUnmarshaller();
+
+            case V210:
+
+                return JCV210.createUnmarshaller();
+
+            default:
+                throw new IllegalStateException("Error... Unknown edm version.");
+        }
+
     }
 
 }

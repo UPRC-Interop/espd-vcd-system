@@ -14,30 +14,33 @@
 /// limitations under the License.
 ///
 
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {DataService} from '../services/data.service';
-import {FormControl, NgForm} from '@angular/forms/forms';
+import {FormControl, NgForm} from '@angular/forms';
 import {ApicallService} from '../services/apicall.service';
 import {UtilitiesService} from '../services/utilities.service';
 import {CodeList} from '../model/codeList.model';
 import {CodelistService} from '../services/codelist.service';
+import {ValidationService} from '../services/validation.service';
+import {BaseStep} from '../base/base-step';
+import {WizardSteps} from '../base/wizard-steps.enum';
 
 @Component({
   selector: 'app-selection',
   templateUrl: './selection.component.html',
   styleUrls: ['./selection.component.css']
 })
-export class SelectionComponent implements OnInit {
+export class SelectionComponent implements OnInit, BaseStep {
 
-  // isSatisfiedALL = true;
-  // isAtoD = false;
+  @ViewChildren('form') forms: QueryList<NgForm>;
   weightingType: CodeList[] = null;
 
 
   constructor(public dataService: DataService,
               public APIService: ApicallService,
               public utilities: UtilitiesService,
-              public codelist: CodelistService) {
+              public codelist: CodelistService,
+              private validationService: ValidationService) {
   }
 
   ngOnInit() {
@@ -46,10 +49,7 @@ export class SelectionComponent implements OnInit {
       this.utilities.isAtoD = true;
       this.utilities.isSatisfiedALL = false;
     }
-
     console.log(this.dataService.CADetails);
-
-
   }
 
 
@@ -76,8 +76,13 @@ export class SelectionComponent implements OnInit {
 
   onSelectionSubmit(form: NgForm) {
     console.log(form.value);
-    this.dataService.selectionSubmit(
-      this.utilities.isSatisfiedALL);
   }
 
+  getWizardStep(): WizardSteps {
+    return WizardSteps.SELECTION;
+  }
+
+  public areFormsValid(): boolean {
+    return this.utilities.isSatisfiedALL ? true : this.validationService.validateFormsInComponent(this.forms);
+  }
 }

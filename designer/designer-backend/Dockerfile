@@ -3,6 +3,7 @@ FROM java:8-alpine
 WORKDIR /designer
 
 COPY artifact-designer.jar /designer
+COPY config.properties.snf /designer/config.properties
 
 EXPOSE 80
 
