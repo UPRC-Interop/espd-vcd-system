@@ -45,7 +45,7 @@ public class ESPDArtefactResource implements CriteriaResource, LegislationResour
     private static final Logger LOGGER = Logger.getLogger(ESPDArtefactResource.class.getName());
 
     private static final String ESPD_REQUEST_V1_REGULATED_RESOURCE = "/templates/v1_regulated/espd-request-2018.03.xml";
-    private static final String ESPD_REQUEST_V2_REGULATED_RESOURCE = "/templates/v2_regulated/espd-request-v2_2018-05-30a.xml";
+    private static final String ESPD_REQUEST_V2_REGULATED_RESOURCE = "/templates/v2_regulated/ESPDRequest_DA_Test-2.1.0-v0.5.xml";
 
     private Map<String, SelectableCriterion> criterionMap;
 

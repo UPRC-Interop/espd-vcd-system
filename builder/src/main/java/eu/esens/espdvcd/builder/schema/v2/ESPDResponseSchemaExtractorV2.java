@@ -81,7 +81,7 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
         // apply global weighting
         qarType.getWeightScoringMethodologyNote().addAll(modelResponse.getCADetails()
                 .getWeightScoringMethodologyNoteList().stream()
-                .map(note -> createWeightScoringMethodologyNoteType(note))
+                .map(this::createWeightScoringMethodologyNoteType)
                 .collect(Collectors.toList()));
 
         if (modelResponse.getCADetails().getWeightingType() != null) {

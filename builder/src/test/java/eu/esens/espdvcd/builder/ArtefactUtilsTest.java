@@ -132,6 +132,9 @@ public class ArtefactUtilsTest {
 
         Assert.assertEquals(QualificationApplicationTypeEnum.SELFCONTAINED, findQualificationApplicationType(getClass().getClassLoader()
                 .getResourceAsStream("artefacts/selfcontained/da/2.1.0/UPRC-ESPD-Self-Contained-Response-2.1.0-DA-Artefact-5-12-2018.xml")));
+
+        Assert.assertEquals(QualificationApplicationTypeEnum.REGULATED, findQualificationApplicationType(getClass().getClassLoader()
+                .getResourceAsStream("artefacts/regulated/v2/2.1.0/ESPDResponse_DA_Test-2.1.0-v0.5.xml")));
     }
 
     @Test

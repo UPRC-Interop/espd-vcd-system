@@ -37,6 +37,8 @@ public class ESPDSchematronValidatorTest {
     private File selfContainedRequest_UPRC_DA_V210;
     private File selfContainedResponse_UPRC_DA_210;
 
+    private File regulatedResponse_DA_210;
+
     public ESPDSchematronValidatorTest() {
     }
 
@@ -59,6 +61,17 @@ public class ESPDSchematronValidatorTest {
 
         selfContainedResponse_UPRC_DA_210 = new File(getClass().getClassLoader().getResource("xml/v2/self-contained/2.1.0/UPRC-ESPD-Self-Contained-Response-2.1.0-DA-Artefact.xml").toURI());
         Assert.assertNotNull(selfContainedResponse_UPRC_DA_210);
+
+        regulatedResponse_DA_210 = new File(getClass().getClassLoader().getResource("xml/v2/regulated/2.1.0/ESPDResponse_DA_Test-2.1.0-v0.5.xml").toURI());
+        Assert.assertNotNull(regulatedResponse_DA_210);
+    }
+
+    @Test
+    public void testRegulatedResponse() {
+        ArtefactValidator v = ValidatorFactory.createESPDSchematronValidator(regulatedResponse_DA_210);
+        Assert.assertNotNull(v);
+        printErrorsIfExist(v);
+        Assert.assertTrue(v.isValid());
     }
 
     @Test
