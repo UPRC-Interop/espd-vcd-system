@@ -25,7 +25,7 @@
     <!--<button type="button" (click)="onRemove(rg)"><span class="material-icons" style="vertical-align: middle;">remove_circle_outline</span></button>-->
   <!--</div>-->
   <div *ngIf="rg.multiple && !(this.utilities.CAReqExists(rg) && this.utilities.isEO)" style="text-align: right">
-    <div *ngIf="!this.dataService.isReadOnly()">
+    <div *ngIf="!this.utilities.isReviewESPD">
       <button type="button" (click)="onAdd(rg, i)"><span class="material-icons" style="vertical-align: middle;">add_circle_outline</span>
       </button>
       <div *ngIf="!isFirst" class="remove-btn">
