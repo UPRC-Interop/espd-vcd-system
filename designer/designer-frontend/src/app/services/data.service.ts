@@ -708,6 +708,44 @@ export class DataService {
 
             // create requirementGroup template objects required for multiple instances (cardinalities) function
             this.formUtil.createTemplateReqGroups(res.fullCriterionList);
+
+            /* find if CRITERION.SELECTION.ALL_SATISFIED exists */
+            if (this.APIService.version === 'v1') {
+              this.utilities.satisfiedALLCriterionExists = this.utilities
+                .findCriterion(this.selectionALLCriteria, '7e7db838-eeac-46d9-ab39-42927486f22d');
+            } else if (this.APIService.version === 'v2') {
+              this.utilities.satisfiedALLCriterionExists = this.utilities
+                .findCriterion(this.selectionALLCriteria, 'f4dc58dd-af45-4602-a4c8-3dca30fac082');
+            }
+
+            if (this.utilities.satisfiedALLCriterionExists) {
+              /* check whether the SATISFIES_ALL criterion is selected or not */
+              if (this.APIService.version === 'v1') {
+                this.utilities.isSatisfiedALLSelected = this.utilities
+                  .getSatisfiesALLCriterion(this.selectionALLCriteria, '7e7db838-eeac-46d9-ab39-42927486f22d').selected;
+                if (this.utilities.isSatisfiedALLSelected) {
+                  this.utilities.isSatisfiedALL = true;
+                  this.utilities.isAtoD = false;
+                } else {
+                  this.utilities.isSatisfiedALL = false;
+                  this.utilities.isAtoD = true;
+                }
+              } else if (this.APIService.version === 'v2') {
+                this.utilities.isSatisfiedALLSelected = this.utilities
+                  .getSatisfiesALLCriterion(this.selectionALLCriteria, 'f4dc58dd-af45-4602-a4c8-3dca30fac082').selected;
+                if (this.utilities.isSatisfiedALLSelected) {
+                  this.utilities.isSatisfiedALL = true;
+                  this.utilities.isAtoD = false;
+                } else {
+                  this.utilities.isSatisfiedALL = false;
+                  this.utilities.isAtoD = true;
+                }
+              }
+            } else {
+              this.utilities.isSatisfiedALL = false;
+              this.utilities.isAtoD = true;
+            }
+
             console.log(res);
             console.log(this.CADetails);
             resolve();
@@ -723,7 +761,6 @@ export class DataService {
       } else if (filesToUpload.length > 0 && (role === 'EO' || (role === 'CA' && this.isReadOnly()))) {
         this.APIService.postFileResponse(filesToUpload)
           .then(res => {
-            console.log('ca_readonly_postfileres');
             console.log(res);
             this.APIService.version = res.documentDetails.version.toLowerCase();
             this.utilities.qualificationApplicationType = res.documentDetails.qualificationApplicationType.toLowerCase();

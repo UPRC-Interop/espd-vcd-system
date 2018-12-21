@@ -40,6 +40,7 @@ export class UtilitiesService {
   satisfiedALLCriterionExists = false;
   isSatisfiedALL = false;
   isAtoD = false;
+  isSatisfiedALLSelected = false;
   qualificationApplicationType: string;
   isGloballyWeighted = false;
   isDividedIntoLots = false;
@@ -106,7 +107,6 @@ export class UtilitiesService {
       return cr.id === id;
     });
   }
-
 
   setAllFields(obj: Object, val: any) {
     Object.keys(obj).forEach(function (k) {

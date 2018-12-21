@@ -86,7 +86,6 @@ export class StartComponent implements OnInit, BaseStep {
       this.utilities.isImportReq = false;
       this.isReuseESPD = false;
       this.isReviewESPD = false;
-      this.utilities.isImportReq = false;
       this.utilities.isReviewESPD = false;
     } else if (radio.value === 'reuseESPD') {
       this.isCreateNewESPD = false;

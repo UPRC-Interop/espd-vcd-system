@@ -23,12 +23,15 @@
       <mat-card-content>
         <p translate>espd.part4.alert</p>
         <span translate>espd.gui.question.to.use.alpha</span>
-        <mat-radio-group name="satisfiesALL" [disabled]="this.dataService.isReadOnly()">
-          <mat-radio-button color="primary" name="selALL" value="YES" [checked]="this.dataService.isReadOnly()"
+        <mat-radio-group name="satisfiesALL"
+                         [disabled]="this.dataService.isReadOnly()">
+          <mat-radio-button color="primary" name="selALL" value="YES"
+                            [checked]="!this.utilities.isSatisfiedALLSelected && this.utilities.isImportReq"
                             (change)="handleALL(YES)" #YES>
             {{'espd.gui.yes' | translate}}
           </mat-radio-button>
-          <mat-radio-button color="primary" name="selALL" value="NO" [checked]="!this.dataService.isReadOnly()"
+          <mat-radio-button color="primary" name="selALL" value="NO"
+                            [checked]="this.utilities.isSatisfiedALLSelected && this.utilities.isImportReq"
                             (change)="handleALL(NO)" #NO>
             {{'espd.gui.no' | translate}}
           </mat-radio-button>
@@ -56,12 +59,12 @@
           <div class="exclusionCriteria" >
             <div class="criteria">
               <mat-checkbox color="primary"
-                            checked="selectionALLCriteria['0'].selected"
-                            disabled
                             name="selectionSatisfiedALL"
-                            [(ngModel)]="this.dataService.selectionALLCriteria['0'].selected">{{this.dataService.selectionALLCriteria['0'].name}}
+                            [(ngModel)]="this.utilities.getSatisfiesALLCriterion(this.dataService.selectionALLCriteria, '7e7db838-eeac-46d9-ab39-42927486f22d').selected">
+                <div class="critDesc" translate>
+                  espd.part4.crit.selection.eo.satisfies.all.criteria
+                </div>
               </mat-checkbox>
-              <div class="critDesc">{{this.dataService.selectionALLCriteria['0'].description}}</div>
             </div>
           </div>
         </ng-container>
@@ -71,8 +74,6 @@
           <div class="exclusionCriteria" >
             <div class="criteria">
               <mat-checkbox color="primary"
-                            checked="this.utilities.getSatisfiesALLCriterion(this.dataService.selectionALLCriteria, 'f4dc58dd-af45-4602-a4c8-3dca30fac082').selected"
-                            disabled="true"
                             name="selectionSatisfiedALL"
                             [(ngModel)]="this.utilities.getSatisfiesALLCriterion(this.dataService.selectionALLCriteria, 'f4dc58dd-af45-4602-a4c8-3dca30fac082').selected">
                 <div class="critDesc" translate>
@@ -85,10 +86,6 @@
       </mat-card>
     </mat-expansion-panel>
   </mat-accordion>
-
-
-
-
   <mat-accordion multi="true" *ngIf="this.utilities.isAtoD">
     <mat-expansion-panel expanded="true" *ngIf="this.dataService.selectionACriteria">
       <mat-expansion-panel-header>
