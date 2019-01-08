@@ -72,7 +72,8 @@
       <p translate>espd.part5.concl.statements.signature</p>
 
       <mat-form-field>
-        <input [appDateValidationFix]="dateInput.control" matInput [matDatepicker]="picker" placeholder="Date" #dateInput="ngModel" ngModel>
+        <input [appDateValidationFix]="dateInput.control" matInput [matDatepicker]="picker" placeholder="Date" #dateInput="ngModel" ngModel
+               [disabled]="this.dataService.isReadOnly()">
         <mat-error *ngIf="dateInput.control.invalid">
           <input-validation-error [formControlErrors]="dateInput.control.errors"></input-validation-error>
         </mat-error>
@@ -81,7 +82,7 @@
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput placeholder="{{'espd.gui.place' | translate}}">
+        <input matInput placeholder="{{'espd.gui.place' | translate}}" [disabled]="this.dataService.isReadOnly()">
       </mat-form-field>
       <p translate>espd.part5.concl.statements.signature</p>
     </div>
