@@ -23,8 +23,8 @@
     <form [formGroup]="dataService.reductionCriteriaForm" #form="ngForm">
       <mat-expansion-panel expanded="true" *ngIf="this.dataService.reductionCriteria">
         <mat-expansion-panel-header>
-          <mat-panel-title translate>
-            espd.part5.reduction
+          <mat-panel-title>
+            {{'espd.part5.reduction' | translate}}
           </mat-panel-title>
         </mat-expansion-panel-header>
         <div class="desc">
@@ -59,8 +59,8 @@
   </ng-container>
   <mat-expansion-panel expanded="true">
     <mat-expansion-panel-header>
-      <mat-panel-title translate>
-        espd.part5.concl.statements
+      <mat-panel-title>
+        {{'espd.part5.concl.statements' | translate}}
       </mat-panel-title>
     </mat-expansion-panel-header>
     <div class="desc">
@@ -90,8 +90,8 @@
 
   <mat-expansion-panel expanded="true">
     <mat-expansion-panel-header>
-      <mat-panel-title translate>
-        espd.part5.export
+      <mat-panel-title>
+        {{'espd.part5.export' | translate}}
       </mat-panel-title>
     </mat-expansion-panel-header>
     <div class="desc">

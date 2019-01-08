@@ -23,8 +23,8 @@
   <form [formGroup]="dataService.exclusionACriteriaForm" #form="ngForm">
     <mat-expansion-panel expanded="true" *ngIf="this.dataService.exclusionACriteria">
       <mat-expansion-panel-header>
-        <mat-panel-title translate>
-          espd.part3.crit.grounds.criminal.conv.top.title
+        <mat-panel-title>
+          {{'espd.part3.crit.grounds.criminal.conv.top.title' | translate}}
         </mat-panel-title>
         <mat-panel-description>
 
@@ -66,8 +66,8 @@
   <form [formGroup]="dataService.exclusionBCriteriaForm" #form="ngForm">
     <mat-expansion-panel expanded="true" *ngIf="this.dataService.exclusionBCriteria">
       <mat-expansion-panel-header>
-        <mat-panel-title translate>
-          espd.part3.crit.top.grounds.payment.taxes.title
+        <mat-panel-title>
+          {{'espd.part3.crit.top.grounds.payment.taxes.title' | translate}}
         </mat-panel-title>
         <mat-panel-description>
 
@@ -106,8 +106,8 @@
   <form [formGroup]="dataService.exclusionCCriteriaForm" #form="ngForm">
     <mat-expansion-panel expanded="true" *ngIf="this.dataService.exclusionCCriteria">
       <mat-expansion-panel-header>
-        <mat-panel-title translate>
-          espd.part3.crit.insolvency.conflicts.top.title
+        <mat-panel-title>
+          {{'espd.part3.crit.insolvency.conflicts.top.title' | translate}}
         </mat-panel-title>
         <mat-panel-description>
 
@@ -146,8 +146,8 @@
   <form [formGroup]="dataService.exclusionDCriteriaForm" #form="ngForm">
     <mat-expansion-panel expanded="true" *ngIf="this.dataService.exclusionDCriteria">
       <mat-expansion-panel-header>
-        <mat-panel-title translate>
-          espd.part3.crit.purely.national.top.title
+        <mat-panel-title>
+          {{'espd.part3.crit.purely.national.top.title' | translate}}
         </mat-panel-title>
         <mat-panel-description>
 
@@ -155,7 +155,7 @@
       </mat-expansion-panel-header>
       <ng-container *ngIf="this.dataService.exclusionDCriteria.length !== 0">
         <div class="desc">
-          <h4 translate>espd.part3.crit.eu.main.purely.national</h4>
+          <h4 translate>espd.part3.purely.national.main</h4>
         </div>
       </ng-container>
       <mat-card *ngFor="let cr of this.dataService.exclusionDCriteria; let i=index">
