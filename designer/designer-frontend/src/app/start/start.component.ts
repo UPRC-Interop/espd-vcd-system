@@ -14,7 +14,7 @@
 /// limitations under the License.
 ///
 
-import {Component, Input, OnInit, QueryList, ViewChildren} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {FormControl, NgForm} from '@angular/forms';
 import {ApicallService} from '../services/apicall.service';
 import {DataService} from '../services/data.service';
@@ -63,8 +63,12 @@ export class StartComponent implements OnInit, BaseStep {
   }
 
   handleFileUpload(files: FileList) {
-    console.log(files);
+
+    if (this.fileToUpload.length !== 0) {
+      this.fileToUpload = [];
+    }
     this.fileToUpload.push(files.item(0));
+    console.log(this.fileToUpload);
   }
 
   handleRole(radio: FormControl) {
@@ -147,6 +151,10 @@ export class StartComponent implements OnInit, BaseStep {
       this.isReviewESPD = true;
       this.utilities.isReviewESPD = true;
     }
+  }
+
+  isEmptyFile(): boolean {
+    return this.fileToUpload.length === 0 && this.utilities.isImport();
   }
 
   onStartSubmit(form: NgForm) {
