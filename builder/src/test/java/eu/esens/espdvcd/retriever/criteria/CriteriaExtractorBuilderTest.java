@@ -78,7 +78,7 @@ public class CriteriaExtractorBuilderTest {
     }
 
     @Test
-    public void testDefaultCriteriaExtractorBuilderForEDMV1() throws Exception {
+    public void testDefaultRegulatedV1CriteriaExtractorBuilder() throws Exception {
 
         CriteriaExtractor e = regulatedBuilder1.build();
         Assert.assertNotNull(e);
@@ -87,7 +87,7 @@ public class CriteriaExtractorBuilderTest {
     }
 
     @Test
-    public void testDefaultCriteriaExtractorBuilderForEDMV2() throws Exception {
+    public void testDefaultRegulatedV2CriteriaExtractorBuilder() throws Exception {
 
         CriteriaExtractor e = regulatedBuilder2.build();
         Assert.assertNotNull(e);

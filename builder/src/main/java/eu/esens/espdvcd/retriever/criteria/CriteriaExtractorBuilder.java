@@ -28,6 +28,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 /**
  * @author konstantinos Raptis
@@ -160,7 +161,9 @@ abstract class CriteriaExtractorBuilder {
     private CriteriaResource createDefaultCriteriaResourceV2() {
 
         initCriteriaTaxonomyResource();
-        initECertisResource();
+        initECertisResource(taxonomyResource.getCriterionList().stream()
+                .map(sc -> sc.getID())
+                .collect(Collectors.toList()));
 
         taxonomyResource.getCriterionList()
                 .forEach(sc -> {
@@ -205,7 +208,9 @@ abstract class CriteriaExtractorBuilder {
     private List<LegislationResource> createDefaultLegislationResourcesV2() {
 
         initESPDArtefactResource();
-        initECertisResource();
+        initECertisResource(artefactResource.getCriterionList().stream()
+                .map(sc -> sc.getID())
+                .collect(Collectors.toList()));
 
         List<LegislationResource> resourceList = new ArrayList<>();
         resourceList.add(artefactResource);
@@ -301,12 +306,21 @@ abstract class CriteriaExtractorBuilder {
     /**
      * Lazy initialization of default eCertis resource
      */
-    private void initECertisResource() {
+//    private void initECertisResource() {
+//
+//        if (eCertisResource == null) {
+//            eCertisResource = new ECertisResource();
+//            LOGGER.log(Level.INFO, "eCertis resource initialized with default ID list");
+//        }
+//    }
+
+    private void initECertisResource(List<String> initialIDList) {
 
         if (eCertisResource == null) {
-            eCertisResource = new ECertisResource();
-            LOGGER.log(Level.INFO, "eCertis resource initialized");
+            eCertisResource = new ECertisResource(initialIDList);
+            LOGGER.log(Level.INFO, "eCertis resource initialized with initial ID list");
         }
+
     }
 
     /**

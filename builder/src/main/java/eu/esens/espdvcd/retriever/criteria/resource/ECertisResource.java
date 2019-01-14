@@ -1,12 +1,12 @@
 /**
  * Copyright 2016-2018 University of Piraeus Research Center
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -29,6 +29,8 @@ import eu.esens.espdvcd.retriever.criteria.resource.tasks.GetECertisCriterionRet
 import eu.esens.espdvcd.retriever.criteria.resource.tasks.GetFromECertisRetryingTask;
 import eu.esens.espdvcd.retriever.criteria.resource.tasks.GetFromECertisTask;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
+import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.apache.http.client.ClientProtocolException;
 
 import java.io.IOException;
 import java.util.*;
@@ -53,14 +55,16 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
 
     // Contains all European criteria
     private Map<String, ECertisCriterion> criterionMap;
-    private List<String> initialIDList;
+    private Set<String> initialIDSet;
 
     public ECertisResource() {
         this(null);
     }
 
     public ECertisResource(List<String> initialIDList) {
-        this.initialIDList = initialIDList;
+        if (initialIDList != null) {
+            this.initialIDSet = new HashSet<>(initialIDList);
+        }
     }
 
     /**
@@ -81,12 +85,18 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
         return commonIDList;
     }
 
+    private List<String> extractFullIDList(Set<String> set1, List<String> list2) {
+        set1.addAll(list2);
+        return new ArrayList<>(set1);
+    }
+
     Map<String, ECertisCriterion> createECertisCriterionMap() throws RetrieverException {
 
         Map<String, ECertisCriterion> eCertisCriterionMap = new LinkedHashMap<>();
 
-        List<String> fullIDList = initialIDList != null
-                ? extractCommonIDList(initialIDList, getAllCriteriaID())
+        List<String> fullIDList = initialIDSet != null
+                // ? extractCommonIDList(initialIDList, getAllCriteriaID())
+                ? extractFullIDList(initialIDSet, getAllCriteriaID())
                 : getAllCriteriaID();
 
         ExecutorService executorService = Executors.newCachedThreadPool();
@@ -106,8 +116,20 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
             for (Future f : futures) {
 
                 if (f.isDone()) {
-                    ECertisCriterion ec = (ECertisCriterion) f.get();
-                    eCertisCriterionMap.put(ec.getID(), ec);
+
+                    try {
+                        ECertisCriterion ec = (ECertisCriterion) f.get();
+                        eCertisCriterionMap.put(ec.getID(), ec);
+
+                    } catch (ExecutionException e) {
+
+                        if (ExceptionUtils.getRootCause(e) instanceof ClientProtocolException) {
+                            System.out.println(ExceptionUtils.getRootCauseMessage(e));
+                        } else {
+                            throw new ExecutionException(e);
+                        }
+                    }
+
                 }
 
             }
