@@ -31,7 +31,7 @@
             {{'espd.gui.yes' | translate}}
           </mat-radio-button>
           <mat-radio-button color="primary" name="selALL" value="NO"
-                            [checked]="this.utilities.isSatisfiedALLSelected && this.utilities.isImportReq"
+                            [checked]="(this.utilities.isSatisfiedALLSelected && this.utilities.isImportReq) || this.utilities.isCreateNewESPD"
                             (change)="handleALL(NO)" #NO>
             {{'espd.gui.no' | translate}}
           </mat-radio-button>
@@ -40,7 +40,7 @@
     </mat-card>
   </div>
 
-  <mat-accordion multi="true" *ngIf="this.utilities.isSatisfiedALL">
+  <mat-accordion multi="true" *ngIf="this.utilities.isSatisfiedALL || (this.utilities.isSatisfiedALL && this.utilities.isCreateNewESPD)">
     <mat-expansion-panel expanded="true" *ngIf="this.dataService.selectionALLCriteria">
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -60,6 +60,7 @@
             <div class="criteria">
               <mat-checkbox color="primary"
                             name="selectionSatisfiedALL"
+                            disabled="true"
                             [(ngModel)]="this.utilities.getSatisfiesALLCriterion(this.dataService.selectionALLCriteria, '7e7db838-eeac-46d9-ab39-42927486f22d').selected">
                 <div class="critDesc" translate>
                   espd.part4.crit.selection.eo.satisfies.all.criteria
@@ -75,6 +76,7 @@
             <div class="criteria">
               <mat-checkbox color="primary"
                             name="selectionSatisfiedALL"
+                            disabled="true"
                             [(ngModel)]="this.utilities.getSatisfiesALLCriterion(this.dataService.selectionALLCriteria, 'f4dc58dd-af45-4602-a4c8-3dca30fac082').selected">
                 <div class="critDesc" translate>
                   espd.part4.crit.selection.eo.satisfies.all.criteria

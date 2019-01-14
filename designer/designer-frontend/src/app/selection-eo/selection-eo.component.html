@@ -31,7 +31,7 @@
           {{'espd.gui.yes' | translate}}
         </mat-radio-button>
         <mat-radio-button color="primary" name="selALL" value="NO"
-                          [checked]="this.utilities.satisfiedALLCriterionExists && this.utilities.isImportESPD"
+                          [checked]="(this.utilities.satisfiedALLCriterionExists && this.utilities.isImportESPD) || this.utilities.isCreateResponse"
                           (change)="handleALL(NO)" #NO>
           {{'espd.gui.no' | translate}}
         </mat-radio-button>

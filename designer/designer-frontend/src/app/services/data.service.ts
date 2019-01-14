@@ -1130,6 +1130,7 @@ export class DataService {
 
       /* ===================== create forms in case of predefined criteria ================== */
       if (this.utilities.isCreateResponse) {
+        this.utilities.isSatisfiedALL = true;
         this.getEoRelatedACriteria()
           .then(res => {
 
@@ -1437,7 +1438,7 @@ export class DataService {
       }
       // get predefined criteria (ca)
       if (this.utilities.isCreateNewESPD) {
-
+        this.utilities.isSatisfiedALL = true;
         /* =========================== predefined reduction criteria ================================= */
         this.getReductionCriteria()
           .then(res => {
