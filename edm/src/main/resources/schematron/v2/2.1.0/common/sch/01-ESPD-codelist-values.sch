@@ -6,23 +6,13 @@
         xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
         xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
         xmlns:espd-req="urn:oasis:names:specification:ubl:schema:xsd:QualificationApplicationRequest-2">
-
-      <title>ESPD Code List Business Rules</title>
-      <ns prefix="cac" uri="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"/>
-      <ns prefix="cbc" uri="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"/>
-      <ns prefix="ext" uri="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"/>
-      <ns prefix="espd-req" uri="urn:oasis:names:specification:ubl:schema:xsd:QualificationApplicationRequest-2"/>
-      <ns prefix="espd-resp" uri="urn:oasis:names:specification:ubl:schema:xsd:QualificationApplicationResponse-2"/>
-      <ns prefix="fn" uri="http://www.w3.org/2005/xpath-functions"/>
-
-      <pattern id="code-list-values">
-   
-   
-      <!-- ESPD code list values constraints - ESPD-codelist-values.cva Version 2.1.0
+   <pattern id="code-list-values"><!--
+		ESPD code list values constraints - ESPD-codelist-values.cva
+		Version 2.1.0
 	
-      $Id: ESPD-codelist-values.cva,v 2.1.0 $
+$Id: ESPD-codelist-values.cva,v 2.1.0 $
 
-      Required namespace declarations as indicated in this set of rules:
+    Required namespace declarations as indicated in this set of rules:
 
 <ns prefix="cac" uri="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"/>
 <ns prefix="cbc" uri="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"/>
