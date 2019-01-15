@@ -241,7 +241,7 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
             evType.setConfidentialityLevelCode(new ConfidentialityLevelCodeType());
             evType.getConfidentialityLevelCode().setListID("ConfidentialityLevel");
             evType.getConfidentialityLevelCode().setListAgencyID("EU-COM-GROW");
-            evType.getConfidentialityLevelCode().setListVersionID("2.0.2");
+            evType.getConfidentialityLevelCode().setListVersionID(CURRENT_VERSION_TAG);
             evType.getConfidentialityLevelCode().setValue(evidence.getConfidentialityLevelCode());
         }
 
@@ -323,7 +323,7 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
             eoPartyType.getEconomicOperatorRole().getRoleCode().setListID("EORoleType");
             eoPartyType.getEconomicOperatorRole().getRoleCode().setListAgencyName("DG GROW (European Commission)");
             eoPartyType.getEconomicOperatorRole().getRoleCode().setListAgencyID("EU-COM-GROW");
-            eoPartyType.getEconomicOperatorRole().getRoleCode().setListVersionID("2.0.2");
+            eoPartyType.getEconomicOperatorRole().getRoleCode().setListVersionID(CURRENT_VERSION_TAG);
             eoPartyType.getEconomicOperatorRole().getRoleCode().setValue(eoDetails.getEoRole().name());
         }
 
@@ -617,7 +617,7 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
                     codeCouRvType.setResponseCode(new ResponseCodeType());
                     codeCouRvType.getResponseCode().setListAgencyID("ISO");
                     codeCouRvType.getResponseCode().setListID("ISO 3166-1");
-                    codeCouRvType.getResponseCode().setListVersionID("2.0.2");
+                    codeCouRvType.getResponseCode().setListVersionID(CURRENT_VERSION_TAG);
                     codeCouRvType.getResponseCode().setValue(countryCode);
                 }
                 tcrType.getResponseValue().add(codeCouRvType);

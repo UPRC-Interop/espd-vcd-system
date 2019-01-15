@@ -56,10 +56,10 @@ public class ESPDSchematronValidatorTest {
         invalidRegulatedRequestV1 = new File(getClass().getClassLoader().getResource("espd-request-invalid.xml").toURI());
         Assert.assertNotNull(invalidRegulatedRequestV1);
 
-        selfContainedRequest_UPRC_DA_V210 = new File(getClass().getClassLoader().getResource("xml/v2/self-contained/2.1.0/UPRC-ESPD-Self-Contained-Request-2.1.0-DA-Artefact.xml").toURI());
+        selfContainedRequest_UPRC_DA_V210 = new File(getClass().getClassLoader().getResource("xml/v2/self-contained/2.1.0/UPRC-ESPD-Self-Contained-Request-2.1.0-Artefact-14-1-2019.xml").toURI());
         Assert.assertNotNull(selfContainedRequest_UPRC_DA_V210);
 
-        selfContainedResponse_UPRC_DA_210 = new File(getClass().getClassLoader().getResource("xml/v2/self-contained/2.1.0/UPRC-ESPD-Self-Contained-Response-2.1.0-DA-Artefact.xml").toURI());
+        selfContainedResponse_UPRC_DA_210 = new File(getClass().getClassLoader().getResource("xml/v2/self-contained/2.1.0/UPRC-ESPD-Self-Contained-Response-2.1.0-Artefact-14-1-2019.xml").toURI());
         Assert.assertNotNull(selfContainedResponse_UPRC_DA_210);
 
         regulatedResponse_DA_210 = new File(getClass().getClassLoader().getResource("xml/v2/regulated/2.1.0/ESPDResponse_DA_Test-2.1.0-v0.5.xml").toURI());

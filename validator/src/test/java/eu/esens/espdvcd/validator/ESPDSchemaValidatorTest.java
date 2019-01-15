@@ -45,7 +45,7 @@ public class ESPDSchemaValidatorTest {
         Assert.assertNotNull(validRegulatedResponseV1);
 
         validSelfContainedRequestV210 = new File(getClass().getClassLoader()
-                .getResource("xml/v2/self-contained/2.1.0/UPRC-ESPD-Self-Contained-Request-2.1.0-DA-Artefact-5-12-2018.xml")
+                .getResource("xml/v2/self-contained/2.1.0/UPRC-ESPD-Self-Contained-Request-2.1.0-Artefact-14-1-2019.xml")
                 .toURI());
         Assert.assertNotNull(validSelfContainedRequestV210);
     }

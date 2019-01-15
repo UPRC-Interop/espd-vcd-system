@@ -20,6 +20,7 @@ import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.response.*;
+import eu.esens.espdvcd.schema.enums.EDMSubVersion;
 import eu.espd.schema.v2.v210.commonaggregate.*;
 import eu.espd.schema.v2.v210.commonbasic.*;
 import eu.espd.schema.v2.v210.unqualifieddatatypes_2.CodeType;
@@ -38,6 +39,8 @@ import java.util.stream.IntStream;
 public interface SchemaExtractorV2 {
 
     Logger LOGGER = Logger.getLogger(SchemaExtractorV2.class.getCanonicalName());
+
+    String CURRENT_VERSION_TAG = EDMSubVersion.V210.getTag();
 
     TenderingCriterionPropertyType extractTenderingCriterionPropertyType(Requirement rq);
 
@@ -419,7 +422,7 @@ public interface SchemaExtractorV2 {
         DocumentTypeCodeType dtc = new DocumentTypeCodeType();
         dtc.setListAgencyID("EU-COM-GROW");
         dtc.setListID("ReferencesTypeCodes");
-        dtc.setListVersionID("2.0.2");
+        dtc.setListVersionID(CURRENT_VERSION_TAG);
         dtc.setValue(code);
         return dtc;
     }
@@ -437,7 +440,7 @@ public interface SchemaExtractorV2 {
         ValidatedCriterionPropertyIDType propertyIDType = new ValidatedCriterionPropertyIDType();
         propertyIDType.setSchemeID("CriteriaTaxonomy");
         propertyIDType.setSchemeAgencyID("EU-COM-GROW");
-        propertyIDType.setSchemeVersionID("2.0.2");
+        propertyIDType.setSchemeVersionID(CURRENT_VERSION_TAG);
         propertyIDType.setValue(id);
         return propertyIDType;
     }
@@ -447,7 +450,7 @@ public interface SchemaExtractorV2 {
         codeType.setValue(code);
         codeType.setListID("ConfidentialityLevel");
         codeType.setListAgencyID("EU-COM-GROW");
-        codeType.setListVersionID("2.0.2");
+        codeType.setListVersionID(CURRENT_VERSION_TAG);
         return codeType;
     }
 
@@ -464,7 +467,7 @@ public interface SchemaExtractorV2 {
     default VersionIDType createVersionIDType(String id) {
         VersionIDType versionID = new VersionIDType();
         versionID.setSchemeAgencyID("EU-COM-GROW");
-        versionID.setSchemeVersionID("2.0.2");
+        versionID.setSchemeVersionID(CURRENT_VERSION_TAG);
         versionID.setValue(id);
         return versionID;
     }
@@ -494,7 +497,7 @@ public interface SchemaExtractorV2 {
         CriterionTypeCodeType tc = new CriterionTypeCodeType();
         tc.setListAgencyID("EU-COM-GROW");
         tc.setListID("CriteriaTypeCode");
-        tc.setListVersionID("2.0.2");
+        tc.setListVersionID(CURRENT_VERSION_TAG);
         tc.setValue(code);
         return tc;
     }
@@ -543,7 +546,7 @@ public interface SchemaExtractorV2 {
     default IDType createDefaultIDType(String id) {
         IDType idType = new IDType();
         idType.setSchemeAgencyID("EU-COM-GROW");
-        idType.setSchemeVersionID("2.0.2");
+        idType.setSchemeVersionID(CURRENT_VERSION_TAG);
         idType.setValue(id);
         return idType;
     }
@@ -557,7 +560,7 @@ public interface SchemaExtractorV2 {
     default CodeType createDefaultCodeType(String code) {
         CodeType codeType = new CodeType();
         codeType.setListAgencyID("EU-COM-GROW");
-        codeType.setListVersionID("2.0.2");
+        codeType.setListVersionID(CURRENT_VERSION_TAG);
         codeType.setValue(code);
         return codeType;
     }
@@ -566,7 +569,7 @@ public interface SchemaExtractorV2 {
         PropertyGroupTypeCodeType ptc = new PropertyGroupTypeCodeType();
         ptc.setListID("PropertyGroupType");
         ptc.setListAgencyID("EU-COM-GROW");
-        ptc.setListVersionID("2.0.2");
+        ptc.setListVersionID(CURRENT_VERSION_TAG);
         ptc.setValue(code);
         return ptc;
     }
@@ -575,7 +578,7 @@ public interface SchemaExtractorV2 {
         IndustryClassificationCodeType icCodeType = new IndustryClassificationCodeType();
         icCodeType.setListID("EOIndustryClassificationCode");
         icCodeType.setListAgencyID("EU-COM-GROW");
-        icCodeType.setListVersionID("2.0.2");
+        icCodeType.setListVersionID(CURRENT_VERSION_TAG);
         icCodeType.setValue(code);
         return icCodeType;
     }
@@ -584,7 +587,7 @@ public interface SchemaExtractorV2 {
         ValueDataTypeCodeType vdTypeCode = new ValueDataTypeCodeType();
         vdTypeCode.setListID("ResponseDataType");
         vdTypeCode.setListAgencyID("EU-COM-GROW");
-        vdTypeCode.setListVersionID("2.0.2");
+        vdTypeCode.setListVersionID(CURRENT_VERSION_TAG);
         vdTypeCode.setValue(code);
         return vdTypeCode;
     }
@@ -593,7 +596,7 @@ public interface SchemaExtractorV2 {
         TypeCodeType tCodeType = new TypeCodeType();
         tCodeType.setListID("CriterionElementType");
         tCodeType.setListAgencyID("EU-COM-GROW");
-        tCodeType.setListVersionID("2.0.2");
+        tCodeType.setListVersionID(CURRENT_VERSION_TAG);
         tCodeType.setValue(code);
         return tCodeType;
     }
@@ -609,7 +612,7 @@ public interface SchemaExtractorV2 {
         qaTypeCode.setValue(code.name());
         qaTypeCode.setListID("QualificationApplicationType");
         qaTypeCode.setListAgencyID("EU-COM-GROW");
-        qaTypeCode.setListVersionID("2.0.2");
+        qaTypeCode.setListVersionID(CURRENT_VERSION_TAG);
         return qaTypeCode;
     }
 
@@ -657,7 +660,7 @@ public interface SchemaExtractorV2 {
     default ProfileExecutionIDType createProfileExecutionIDType(QualificationApplicationTypeEnum type) {
         ProfileExecutionIDType peIdType = new ProfileExecutionIDType();
         peIdType.setSchemeAgencyID("EU-COM-GROW");
-        peIdType.setSchemeVersionID("2.0.2");
+        peIdType.setSchemeVersionID(CURRENT_VERSION_TAG);
 
         switch (type) {
 
@@ -682,7 +685,7 @@ public interface SchemaExtractorV2 {
     default ProfileExecutionIDType createProfileExecutionIDType(ProfileExecutionIDEnum id) {
         ProfileExecutionIDType peIdType = new ProfileExecutionIDType();
         peIdType.setSchemeAgencyID("EU-COM-GROW");
-        peIdType.setSchemeVersionID("2.0.2");
+        peIdType.setSchemeVersionID(CURRENT_VERSION_TAG);
         peIdType.setValue(id.getValue());
         return peIdType;
     }
@@ -704,7 +707,7 @@ public interface SchemaExtractorV2 {
         EvaluationMethodTypeCodeType codeType = new EvaluationMethodTypeCodeType();
         codeType.setListID("EvaluationMethodType");
         codeType.setListAgencyID("EU-COM-GROW");
-        codeType.setListVersionID("2.0.2");
+        codeType.setListVersionID(CURRENT_VERSION_TAG);
         codeType.setValue(code);
         return codeType;
     }
@@ -725,7 +728,7 @@ public interface SchemaExtractorV2 {
         WeightingTypeCodeType codeType = new WeightingTypeCodeType();
         codeType.setListID("WeightingType");
         codeType.setListAgencyID("EU-COM-GROW");
-        codeType.setListVersionID("2.0.2");
+        codeType.setListVersionID(CURRENT_VERSION_TAG);
         codeType.setValue(code);
         return codeType;
     }
@@ -755,7 +758,6 @@ public interface SchemaExtractorV2 {
     /**
      * Extract the lots for which the economic operator wishes to tender.
      * <p>
-     * (used in regulated 2.0.2)
      *
      * @param eoDetails
      * @return The lot
@@ -769,7 +771,6 @@ public interface SchemaExtractorV2 {
      * Extract a list which contains the lots in which the
      * contracting authority wishes to divide the tender.
      * <p>
-     * (used in self-contained 2.0.2)
      *
      * @param caDetails
      * @return A list which contains contracting authority lots
