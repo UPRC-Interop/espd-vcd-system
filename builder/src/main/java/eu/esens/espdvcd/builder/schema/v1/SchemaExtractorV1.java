@@ -18,6 +18,7 @@ package eu.esens.espdvcd.builder.schema.v1;
 import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
+import eu.esens.espdvcd.schema.enums.EDMSubVersion;
 import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.CriterionType;
 import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.LegislationType;
 import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.RequirementGroupType;
@@ -30,6 +31,8 @@ import java.util.stream.Collectors;
 public interface SchemaExtractorV1 {
 
     RequirementType extractRequirementType(Requirement r);
+
+    String CURRENT_VERSION_TAG = EDMSubVersion.V102.getTag();
 
     default CriterionType extractCriterion(Criterion c) {
 
@@ -334,7 +337,7 @@ public interface SchemaExtractorV1 {
     }
 
     default IDType createGROWTemporaryId(String id) {
-        // mod 2018-01-16: changed schemeID to "ISO/IEC 9834-8:2008 - 4UUID" according to ESPD 1.0.2 EDM
+        // mod 2018-01-16: changed schemeID to "ISO/IEC 9834-8:2008 - 4UUID" according to ESPD CURRENT_VERSION_TAG EDM
         // remark: the DG GROW system uses "COM-GROW-TEMPORARY-ID", if no valid OJS number is entered
         //IDType reqGroupIDType = createCustomSchemeIDIDType(id, "COM-GROW-TEMPORARY-ID");
         IDType reqGroupIDType = createCustomSchemeIDIDType(id, "ISO/IEC 9834-8:2008 - 4UUID");
@@ -363,7 +366,7 @@ public interface SchemaExtractorV1 {
         countryCodeType.setListName("CountryCodeIdentifier");
         //countryCodeType.setListVersionID("1.0");
         // modification UL_2016-12-22: updated list version and added listID
-        countryCodeType.setListVersionID("1.0.2");
+        countryCodeType.setListVersionID(CURRENT_VERSION_TAG);
         countryCodeType.setListID("CountryCodeIdentifier");
 
 
@@ -381,7 +384,7 @@ public interface SchemaExtractorV1 {
 
         //tc.setListVersionID("1.0");
         // modification UL_2016-12-22: updated list version
-        tc.setListVersionID("1.0.2");
+        tc.setListVersionID(CURRENT_VERSION_TAG);
 
         tc.setValue(code);
         return tc;
@@ -393,7 +396,7 @@ public interface SchemaExtractorV1 {
         tc.setListID("CriteriaTypeCode");
         //tc.setListVersionID("1.0");
         // modification UL_2016-12-22: updated list version
-        tc.setListVersionID("1.0.2");
+        tc.setListVersionID(CURRENT_VERSION_TAG);
 
         tc.setValue(code);
         return tc;
@@ -405,7 +408,7 @@ public interface SchemaExtractorV1 {
         dtc.setListID("ReferencesTypeCodes");
         dtc.setListVersionID("1.0");
         // modification UL_2016-12-22: updated list version
-        //dtc.setListVersionID("1.0.2");
+        //dtc.setListVersionID(CURRENT_VERSION_TAG);
 
         dtc.setValue(code);
         return dtc;

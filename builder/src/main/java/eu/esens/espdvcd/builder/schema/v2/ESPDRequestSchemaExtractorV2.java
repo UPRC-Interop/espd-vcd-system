@@ -23,7 +23,6 @@ import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.response.WeightIndicatorResponse;
 import eu.espd.schema.v2.v210.commonaggregate.DocumentReferenceType;
-import eu.espd.schema.v2.v210.commonaggregate.TenderingCriterionPropertyGroupType;
 import eu.espd.schema.v2.v210.commonaggregate.TenderingCriterionPropertyType;
 import eu.espd.schema.v2.v210.commonaggregate.TenderingCriterionType;
 import eu.espd.schema.v2.v210.commonbasic.CopyIndicatorType;
@@ -167,14 +166,14 @@ public class ESPDRequestSchemaExtractorV2 implements SchemaExtractorV2 {
 
         rqType.getTypeCode().setListID("CriterionElementType");
         rqType.getTypeCode().setListAgencyID("EU-COM-GROW");
-        rqType.getTypeCode().setListVersionID("2.0.2");
+        rqType.getTypeCode().setListVersionID(CURRENT_VERSION_TAG);
 
         // tbr070-013
         rqType.setValueDataTypeCode(new ValueDataTypeCodeType());
         rqType.getValueDataTypeCode().setValue(rq.getResponseDataType().name());
         rqType.getValueDataTypeCode().setListID("ResponseDataType");
         rqType.getValueDataTypeCode().setListAgencyID("EU-COM-GROW");
-        rqType.getValueDataTypeCode().setListVersionID("2.0.2");
+        rqType.getValueDataTypeCode().setListVersionID(CURRENT_VERSION_TAG);
 
         applyCAResponseToXML(rq, rqType);
 
