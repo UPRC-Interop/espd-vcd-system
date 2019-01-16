@@ -102,6 +102,10 @@
         </div>
       </ng-container>
 
+      <ng-container *ngIf="this.dataService.selectionACriteria.length === 0">
+        <h4>No criteria selected</h4>
+      </ng-container>
+
       <mat-card *ngFor="let cr of this.dataService.selectionACriteria; let i=index">
         <div class="selectionCriteria">
 
@@ -138,6 +142,9 @@
           <!--<h4>Article {{selectionBCriteria['0'].legislationReference.article}} of-->
             <!--{{selectionBCriteria['0'].legislationReference.title}} sets out the following selection criteria </h4>-->
         </div>
+      </ng-container>
+      <ng-container *ngIf="this.dataService.selectionBCriteria.length === 0">
+        <h4>No criteria selected</h4>
       </ng-container>
       <mat-card *ngFor="let cr of this.dataService.selectionBCriteria; let i=index">
         <div class="selectionCriteria">
@@ -223,6 +230,9 @@
               {{selectionCCriteria['0'].legislationReference.title}} sets out the following selection criteria </h4>-->
           </div>
         </ng-container>
+        <ng-container *ngIf="this.dataService.selectionCCriteria.length === 0">
+          <h4>No criteria selected</h4>
+        </ng-container>
         <mat-card *ngFor="let cr of this.dataService.selectionCCriteria; let i=index">
           <div class="selectionCriteria">
             <div class="criterion-wrap">
@@ -258,7 +268,9 @@
               <!--{{selectionDCriteria['0'].legislationReference.title}} sets out the following selection criteria </h4>-->
           </div>
         </ng-container>
-
+        <ng-container *ngIf="this.dataService.selectionDCriteria.length === 0">
+          <h4>No criteria selected</h4>
+        </ng-container>
         <mat-card *ngFor="let cr of this.dataService.selectionDCriteria; let i=index">
           <div class="selectionCriteria">
             <div class="criterion-wrap">
