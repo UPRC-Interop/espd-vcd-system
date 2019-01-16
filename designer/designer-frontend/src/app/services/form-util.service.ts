@@ -71,6 +71,10 @@ export class FormUtilService {
       if (rg.requirements !== undefined) {
         rg.requirements.forEach(r => {
           r.id = UUID.UUID();
+          if (r.responseDataType === 'CODE' && r.responseValuesRelatedArtefact === 'CPVCodes') {
+            r.uuid = r.id;
+            this.utilities.renderCpvTemplate[r.uuid] = [];
+          }
         });
       }
       if (rg.requirementGroups !== null || rg.requirementGroups !== undefined) {
@@ -419,6 +423,9 @@ export class FormUtilService {
           } else if (r.responseDataType === 'LOT_IDENTIFIER') {
             group[r.uuid] = new FormControl();
             this.utilities.renderLotTemplate[r.uuid] = [];
+          } else if (r.responseDataType === 'ECONOMIC_OPERATOR_IDENTIFIER') {
+            group[r.uuid] = new FormControl();
+            group[r.uuid + 'eoidtype'] = new FormControl();
           } else {
             group[r.uuid] = new FormControl();
           }
