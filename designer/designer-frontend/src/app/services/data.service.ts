@@ -328,11 +328,17 @@ export class DataService {
       this.formUtil.evidenceList,
       this.documentDetails);
 
-    if (typeof this.espdResponse.eodetails.naturalPersons[0].birthDate !== 'string'
-      && this.espdResponse.eodetails.naturalPersons[0].birthDate !== null) {
-      let utcDate = this.utilities.toUTCDate(this.espdResponse.eodetails.naturalPersons[0].birthDate);
-      this.espdResponse.eodetails.naturalPersons[0].birthDate = moment(utcDate);
+
+    if (this.espdResponse.eodetails.naturalPersons !== null && this.espdResponse.eodetails.naturalPersons !== undefined) {
+      this.espdResponse.eodetails.naturalPersons.forEach(person => {
+        if (typeof person.birthDate !== 'string'
+          && person.birthDate !== null) {
+          let utcDate = this.utilities.toUTCDate(person.birthDate);
+          person.birthDate = moment(utcDate);
+        }
+      });
     }
+
 
     console.log(this.espdResponse);
     return this.espdResponse;
