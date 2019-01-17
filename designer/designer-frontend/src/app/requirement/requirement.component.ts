@@ -163,6 +163,8 @@ export class RequirementComponent implements OnInit, OnChanges {
     if (input) {
       input.value = '';
     }
+
+    this.createChips();
   }
 
   remove(cpv: string): void {
