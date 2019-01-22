@@ -40,12 +40,12 @@ public enum XSD {
     XML_SCHEMA("http://www.w3.org/2001/XMLSchema", "xsd", "", EDMSubVersion.V102.getTag()),
 
     // 2.0.2
-    ESPD_REQUEST_V202("urn:X-test:UBL:Pre-award:QualificationApplicationRequest", "", "xsd/v2/2.0.2/maindoc/UBL-QualificationApplicationRequest-2.2-Pre-award.xsd", EDMSubVersion.V202.getTag()),
-    ESPD_RESPONSE_V202("urn:X-test:UBL:Pre-award:QualificationApplicationResponse", "", "xsd/v2/2.0.2/maindoc/UBL-QualificationApplicationResponse-2.2-Pre-award.xsd", EDMSubVersion.V202.getTag()),
+    ESPD_REQUEST_V202("urn:X-test:UBL:Pre-award:QualificationApplicationRequest", "ubl-qareq", "xsd/v2/2.0.2/maindoc/UBL-QualificationApplicationRequest-2.2-Pre-award.xsd", EDMSubVersion.V202.getTag()),
+    ESPD_RESPONSE_V202("urn:X-test:UBL:Pre-award:QualificationApplicationResponse", "ubl-qares", "xsd/v2/2.0.2/maindoc/UBL-QualificationApplicationResponse-2.2-Pre-award.xsd", EDMSubVersion.V202.getTag()),
 
     // 2.1.0
-    ESPD_REQUEST_V210("urn:oasis:names:specification:ubl:schema:xsd:QualificationApplicationRequest-2", "", "xsd/v2/2.1.0/maindoc/UBL-QualificationApplicationRequest-2.2.xsd", EDMSubVersion.V210.getTag()),
-    ESPD_RESPONSE_V210("urn:oasis:names:specification:ubl:schema:xsd:QualificationApplicationResponse-2", "", "xsd/v2/2.1.0/maindoc/UBL-QualificationApplicationResponse-2.2.xsd", EDMSubVersion.V210.getTag()),
+    ESPD_REQUEST_V210("urn:oasis:names:specification:ubl:schema:xsd:QualificationApplicationRequest-2", "ubl-qareq", "xsd/v2/2.1.0/maindoc/UBL-QualificationApplicationRequest-2.2.xsd", EDMSubVersion.V210.getTag()),
+    ESPD_RESPONSE_V210("urn:oasis:names:specification:ubl:schema:xsd:QualificationApplicationResponse-2", "ubl-qares", "xsd/v2/2.1.0/maindoc/UBL-QualificationApplicationResponse-2.2.xsd", EDMSubVersion.V210.getTag()),
 
     UBL_CAC_22("urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2", "cac", "xsd/v2/2.1.0/common/UBL-CommonAggregateComponents-2.2.xsd", EDMSubVersion.V210.getTag()),
     UBL_CBC_22("urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2", "cbc", "xsd/v2/2.1.0/common/UBL-CommonBasicComponents-2.2.xsd", EDMSubVersion.V210.getTag()),
