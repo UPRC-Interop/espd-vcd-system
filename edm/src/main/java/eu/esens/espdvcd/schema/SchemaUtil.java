@@ -98,19 +98,22 @@ public class SchemaUtil {
                 case V102:
 
                     marshaller = JCV102.createMarshaller();
-                    marshaller.setProperty("com.sun.xml.bind.namespacePrefixMapper", new ESPDPrefixMapper());
+                    marshaller.setProperty("com.sun.xml.bind.namespacePrefixMapper"
+                            , new ESPDPrefixMapper(EDMSubVersion.V102));
                     break;
 
                 case V202:
 
                     marshaller = JCV202.createMarshaller();
-                    marshaller.setProperty("com.sun.xml.bind.namespacePrefixMapper", new ESPDPrefixMapper());
+                    marshaller.setProperty("com.sun.xml.bind.namespacePrefixMapper"
+                            , new ESPDPrefixMapper(EDMSubVersion.V202));
                     break;
 
                 case V210:
 
                     marshaller = JCV210.createMarshaller();
-                    marshaller.setProperty("com.sun.xml.bind.namespacePrefixMapper", new ESPDPrefixMapper());
+                    marshaller.setProperty("com.sun.xml.bind.namespacePrefixMapper"
+                            , new ESPDPrefixMapper(EDMSubVersion.V210));
                     break;
 
                 default:

@@ -16,6 +16,7 @@
 package eu.esens.espdvcd.schema;
 
 import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
+import eu.esens.espdvcd.schema.enums.EDMSubVersion;
 
 /**
  * Prefix Mapper for the JAXB Classes. Used in {@link SchemaUtil} marshallers.
@@ -24,10 +25,16 @@ import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
  */
 public class ESPDPrefixMapper extends NamespacePrefixMapper {
 
+    private EDMSubVersion version;
+
+    public ESPDPrefixMapper(EDMSubVersion version) {
+        this.version = version;
+    }
+
     @Override
     public String getPreferredPrefix(String namespaceUri, String suggestion, boolean requirePrefix) {
         try {
-            return XSD.fromString(namespaceUri).namespacePrefix();
+            return XSD.fromString(namespaceUri, version.getTag()).namespacePrefix();
         } catch (IllegalArgumentException ex) {
             return suggestion;
         }
