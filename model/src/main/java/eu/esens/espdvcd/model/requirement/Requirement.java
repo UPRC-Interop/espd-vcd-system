@@ -20,6 +20,7 @@ import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.requirement.response.Response;
 
 import java.io.Serializable;
+import java.util.Map;
 
 /**
  * Criterion requirement interface
@@ -78,5 +79,7 @@ public interface Requirement extends Serializable {
     String getResponseValuesRelatedArtefact();
 
     void setResponseValuesRelatedArtefact(String responseValuesRelatedArtefact);
+
+    Map<String, String> getPropertyKeyMap();
 
 }

@@ -51,6 +51,9 @@ public abstract class CriteriaTaxonomyResource implements CriteriaResource, Requ
     private final static int elementUUIDColumnIndex = 22;
     private final static int elementCodeColumnIndex = 23;
     private final static int codelistColumnIndex = 24;
+    private final static int propertyKey1ColumnIndex = 26;
+    private final static int propertyKey2ColumnIndex = 27;
+    private final static int propertyKey3ColumnIndex = 28;
 
     protected List<SelectableCriterion> criterionList;
     protected Map<String, List<RequirementGroup>> rgMap;
@@ -160,6 +163,8 @@ public abstract class CriteriaTaxonomyResource implements CriteriaResource, Requ
                         sc.setID(getRowUUID(r));
                         sc.setTypeCode(getRowCode(r));
                         sc.setSelected(true);
+                        sc.getPropertyKeyMap().put("pk1", getRowPropertyKey(r, 1)); // property key for Name
+                        sc.getPropertyKeyMap().put("pk2", getRowPropertyKey(r, 2)); // property key for Description
 
                         sc.getRequirementGroups().addAll(
                                 extractAllRequirementGroupType(dataSheet, r.getRowNum() + 1,
@@ -305,6 +310,12 @@ public abstract class CriteriaTaxonomyResource implements CriteriaResource, Requ
                 applyCardinality(r, c);
                 // set codelist
                 r.setResponseValuesRelatedArtefact(getRowCodelist(d.getRow(i)));
+                // set Property keys
+                // The number of property keys depends on element. For example for an evidence compound element
+                // there are 3 property keys.
+                r.getPropertyKeyMap().put("pk1", getRowPropertyKey(d.getRow(i), 1));
+                r.getPropertyKeyMap().put("pk2", getRowPropertyKey(d.getRow(i), 2));
+                r.getPropertyKeyMap().put("pk3", getRowPropertyKey(d.getRow(i), 3));
                 rList.add(r);
             }
 
@@ -323,6 +334,21 @@ public abstract class CriteriaTaxonomyResource implements CriteriaResource, Requ
 
     private String getRowDescription(Row r) {
         return getCellStringValueOrNull(r, descriptionColumnIndex);
+    }
+
+    private String getRowPropertyKey(Row r, int keyNumber) {
+
+        switch (keyNumber) {
+
+            case 1:
+                return getCellStringValueOrNull(r, propertyKey1ColumnIndex);
+            case 2:
+                return getCellStringValueOrNull(r, propertyKey2ColumnIndex);
+            case 3:
+                return getCellStringValueOrNull(r, propertyKey3ColumnIndex);
+            default:
+                return null;
+        }
     }
 
     private String getRowCode(Row r) {

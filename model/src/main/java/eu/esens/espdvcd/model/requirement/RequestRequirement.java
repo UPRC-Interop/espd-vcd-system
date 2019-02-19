@@ -1,12 +1,12 @@
 /**
  * Copyright 2016-2018 University of Piraeus Research Center
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -21,6 +21,8 @@ import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.requirement.response.Response;
 
 import javax.validation.constraints.NotNull;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Criterion requirement
@@ -87,6 +89,8 @@ public class RequestRequirement implements Requirement {
     private boolean multiple;
 
     private String responseValuesRelatedArtefact;
+
+    private Map<String, String> propertyKeyMap;
 
     public RequestRequirement(String ID,
                               ResponseTypeEnum responseDataType,
@@ -202,4 +206,11 @@ public class RequestRequirement implements Requirement {
         this.responseValuesRelatedArtefact = responseValuesRelatedArtefact;
     }
 
+    @Override
+    public Map<String, String> getPropertyKeyMap() {
+        if (propertyKeyMap == null) {
+            propertyKeyMap = new HashMap<>();
+        }
+        return propertyKeyMap;
+    }
 }

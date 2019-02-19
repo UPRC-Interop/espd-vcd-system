@@ -21,9 +21,7 @@ import eu.esens.espdvcd.model.requirement.RequirementGroup;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Criterion
@@ -146,6 +144,8 @@ public class Criterion implements Serializable {
      */
     protected List<SelectableCriterion> subCriterionList;
 
+    protected Map<String, String> propertyKeyMap;
+
     public Criterion() {
         this.ID = java.util.UUID.randomUUID().toString();
     }
@@ -266,6 +266,13 @@ public class Criterion implements Serializable {
             sb.append(".");
         }
         return sb.delete(sb.lastIndexOf("."), sb.length()).toString();
+    }
+
+    public Map<String, String> getPropertyKeyMap() {
+        if (propertyKeyMap == null) {
+            propertyKeyMap = new HashMap<>();
+        }
+        return propertyKeyMap;
     }
 
     @Override

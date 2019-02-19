@@ -1,12 +1,12 @@
 /**
  * Copyright 2016-2018 University of Piraeus Research Center
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -51,7 +51,7 @@ public class SelectableCriterionPrinter {
     public static void printSelectableCriterionBasicInfo(SelectableCriterion sc) {
 
         if (sc != null) {
-            System.out.printf("ID: %s\nName: %s\nDesc: %s\nTypeCode: %s\n", sc.getID(), sc.getName(), sc.getDescription(), sc.getTypeCode());
+            System.out.printf("ID: %s\nName: %s\nDesc: %s\nTypeCode: %s\nProperty Keys: %s\n", sc.getID(), sc.getName(), sc.getDescription(), sc.getTypeCode(), sc.getPropertyKeyMap().toString());
         }
     }
 
@@ -91,7 +91,8 @@ public class SelectableCriterionPrinter {
             System.out.println(finalTabs + "\t[" + r.getType().name() + "] Req ID: " + r.getID()
                     + ", Cardinality: " + CardinalityUtils.extractCardinality(r.isMandatory(), r.isMultiple())
                     + ", Req Type: " + r.getResponseDataType() + ", Req Desc: " + r.getDescription()
-                    + ", Code Type: " + r.getResponseValuesRelatedArtefact());
+                    + ", Code Type: " + r.getResponseValuesRelatedArtefact()
+                    + ", Property Keys: " + r.getPropertyKeyMap().toString());
         });
         final int innerDepth = depth + 1;
         rg.getRequirementGroups().forEach(rg1 -> printRequirementGroup(rg1, innerDepth));
