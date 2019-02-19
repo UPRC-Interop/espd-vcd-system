@@ -83,9 +83,9 @@ public final class ServerUtil {
     private static void initHeaderMap(){
         securityHeaders = new HashMap<>();
 
-        String contentSecurityPolicyHeaders = "default-src 'self'; " +
+        String contentSecurityPolicyHeaders = "default-src 'self' http://83.212.109.183/ https://europa.eu/ http://ec.europa.eu/; " +
                 "font-src https://fonts.googleapis.com https://fonts.gstatic.com; " +
-                "img-src 'self' " +
+                "img-src 'self' ;" +
                 "object-src 'none'; " +
                 "script-src 'self' 'unsafe-inline' 'unsafe-eval' ; " +
                 "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com";
