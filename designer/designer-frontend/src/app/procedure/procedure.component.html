@@ -180,7 +180,7 @@
       <!-- SELF-CONTAINED: Type of Procedure -->
       <div *ngIf="utilities.qualificationApplicationType === 'selfcontained'">
         <mat-form-field>
-          <mat-select placeholder="Type of Procedure: " name="typeOfProcedure"
+          <mat-select placeholder="{{'espd.part1.info.procedure' | translate}}" name="typeOfProcedure"
                       [(ngModel)]="dataService.CADetails.procurementProcedureType" [disabled]="this.dataService.isReadOnly()">
             <mat-option>None</mat-option>
             <mat-option *ngFor="let proc of codelist.procedureTypes" [value]="proc.code">{{proc.name}}</mat-option>
@@ -188,7 +188,7 @@
         </mat-form-field>
         <!-- SELF-CONTAINED: Bid Type - Object of Contracts -->
         <mat-form-field>
-          <mat-select placeholder="Objects of Contracts: " name="projectType"
+          <mat-select placeholder="{{'espd.part1.objects.of.contracts' | translate}}" name="projectType"
                       [(ngModel)]="dataService.CADetails.projectType" [disabled]="this.dataService.isReadOnly()">
             <mat-option>None</mat-option>
             <mat-option *ngFor="let project of codelist.projectTypes" [value]="project.code">{{project.name}}</mat-option>
@@ -202,7 +202,7 @@
               {{cpv}}
               <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
             </mat-chip>
-            <input placeholder="CPV Codes: "
+            <input placeholder="{{'espd.crit.cpv.code' | translate}}"
                    [matChipInputFor]="chipList"
                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                    [matChipInputAddOnBlur]="addOnBlur"
@@ -211,7 +211,7 @@
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput name="procurementProjectLots" placeholder="Number of Lots: " [(ngModel)]="dataService.CADetails.procurementProjectLots"
+          <input matInput name="procurementProjectLots" placeholder="{{'espd.part2.number.lots' | translate}}" [(ngModel)]="dataService.CADetails.procurementProjectLots"
                  [disabled]="this.dataService.isReadOnly()">
         </mat-form-field>
         <div *ngIf="this.utilities.isDividedIntoLots">

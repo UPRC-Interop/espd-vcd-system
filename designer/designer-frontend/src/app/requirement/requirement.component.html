@@ -101,7 +101,7 @@
         <!--<label [attr.for]="req.uuid+'startDate'">Start Date: </label>-->
         <!--<br>-->
         <mat-form-field >
-          <input placeholder="{{req.propertyKeyMap.pk1 | translate}}" [appDateValidationFix]="form.get(req.uuid+'startDate')" matInput [matDatepicker]="startPicker"
+          <input placeholder="{{'espd.crit.start.date' | translate}}" [appDateValidationFix]="form.get(req.uuid+'startDate')" matInput [matDatepicker]="startPicker"
                  [formControlName]="req.uuid+'startDate'" [id]="req.uuid+'startDate'" [required]="req.mandatory">
           <mat-error *ngIf="form.get(req.uuid+'startDate').invalid">
             <input-validation-error [formControlErrors]="form.get(req.uuid+'startDate').errors"></input-validation-error>
@@ -113,7 +113,7 @@
         <!--<label [attr.for]="req.uuid+'endDate'">End Date: </label>-->
         <!--<br>-->
         <mat-form-field >
-          <input  placeholder="{{req.propertyKeyMap.pk2 | translate}}" [appDateValidationFix]="form.get(req.uuid+'endDate')" matInput [matDatepicker]="endPicker"
+          <input  placeholder="{{'espd.crit.end.date' | translate}}" [appDateValidationFix]="form.get(req.uuid+'endDate')" matInput [matDatepicker]="endPicker"
                  [formControlName]="req.uuid+'endDate'" [id]="req.uuid+'endDate'" [required]="req.mandatory">
           <mat-error *ngIf="form.get(req.uuid+'endDate').invalid">
             <input-validation-error [formControlErrors]="form.get(req.uuid+'endDate').errors"></input-validation-error>
@@ -173,7 +173,7 @@
                 {{cpv}}
                 <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
               </mat-chip>
-              <input placeholder="{{req.propertyKeyMap.pk1 | translate}}"
+              <input placeholder="{{'espd.crit.cpv.code' | translate}}"
                      [matChipInputFor]="chipList"
                      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                      [matChipInputAddOnBlur]="addOnBlur"
@@ -276,10 +276,10 @@
       <div *ngIf="this.utilities.isGloballyWeighted">
         <mat-radio-group [id]="req.uuid" [formControlName]="req.uuid">
           <mat-radio-button color="primary"
-                            [value]=true>YES
+                            [value]=true>{{"espd.gui.yes" | translate}}
           </mat-radio-button>
           <mat-radio-button color="primary"
-                            [value]=false>NO
+                            [value]=false>{{"espd.gui.no" | translate}}
           </mat-radio-button>
         </mat-radio-group>
       </div>
