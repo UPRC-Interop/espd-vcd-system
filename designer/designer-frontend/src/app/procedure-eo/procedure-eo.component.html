@@ -175,7 +175,7 @@
       <!-- SELF-CONTAINED: Type of Procedure -->
       <div *ngIf="utilities.qualificationApplicationType === 'selfcontained'">
         <mat-form-field>
-          <mat-select placeholder="Type of Procedure" name="typeOfProcedure"
+          <mat-select placeholder="{{'espd.part1.info.procedure' | translate}}" name="typeOfProcedure"
                       [(ngModel)]="dataService.CADetails.procurementProcedureType" [disabled]="this.dataService.isReadOnly()">
             <mat-option>None</mat-option>
             <mat-option *ngFor="let proc of codelist.procedureTypes" [value]="proc.code">{{proc.name}}</mat-option>
@@ -183,7 +183,7 @@
         </mat-form-field>
         <!-- SELF-CONTAINED: Bid Type - Object of Contracts -->
         <mat-form-field>
-          <mat-select placeholder="Objects of Contracts: " name="projectType"
+          <mat-select placeholder="{{'espd.part1.objects.of.contracts' | translate}} " name="projectType"
                       [(ngModel)]="dataService.CADetails.projectType" [disabled]="this.dataService.isReadOnly()">
             <mat-option>None</mat-option>
             <mat-option *ngFor="let project of codelist.projectTypes" [value]="project.code">{{project.name}}</mat-option>
@@ -196,7 +196,7 @@
               {{cpv}}
               <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
             </mat-chip>
-            <input placeholder="CPV Codes: "
+            <input placeholder="{{'espd.crit.cpv.code' | translate}} "
                    [matChipInputFor]="chipList"
                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                    [matChipInputAddOnBlur]="addOnBlur"
@@ -267,7 +267,7 @@
             <div *ngIf="this.utilities.qualificationApplicationType === 'selfcontained'">
               <mat-form-field class="eoField">
                 <mat-select formControlName="eoRole"
-                            placeholder="Role: ">
+                            placeholder="{{'espd.part2.role' | translate}}">
                   <mat-option>None</mat-option>
                   <mat-option *ngFor="let role of codelist.eoRoleTypes" [value]="role.code">{{role.name}}</mat-option>
                 </mat-select>
@@ -328,14 +328,14 @@
         </div>
         <div *ngIf="this.utilities.qualificationApplicationType === 'selfcontained'">
           <mat-form-field>
-            <input formControlName="employeeQuantity" matInput placeholder="Number of Employees: ">
+            <input formControlName="employeeQuantity" matInput placeholder="{{'espd.part2.number.employees' | translate}}">
           </mat-form-field>
           <div class="generalTurnover" formGroupName="generalTurnover">
             <mat-form-field>
-              <input formControlName="amount" matInput placeholder="Turnover: ">
+              <input formControlName="amount" matInput placeholder="{{'espd.part2.turnover' | translate}}">
             </mat-form-field>
             <mat-form-field>
-              <mat-select formControlName="currency" matInput placeholder="Currency: ">
+              <mat-select formControlName="currency" matInput placeholder="{{'espd.part2.currency' | translate}}">
                 <mat-option>None</mat-option>
                 <mat-option *ngFor="let curr of codelist.currency" [value]="curr.code">{{curr.code}} ( {{curr.name}} )</mat-option>
               </mat-select>
@@ -346,7 +346,7 @@
           <form [formGroup]="dataService.eoRelatedACriteriaForm" #form="ngForm">
             <div class="eoRelatedCriteria" *ngFor="let cr of this.dataService.eoRelatedACriteria; let i=index">
               <mat-card>
-                <h4>{{cr.description}}</h4>
+                <h4>{{cr.propertyKeyMap.pk1 | translate}}</h4>
                 <div class="answer">
                   <app-criterion [criterion]="cr" [form]="dataService.eoRelatedACriteriaForm.controls" [indicator]="true"></app-criterion>
                 </div>
@@ -359,7 +359,7 @@
           <form [formGroup]="dataService.eoLotCriterionForm">
             <div class="eoRelatedCriteria" *ngFor="let cr of this.dataService.eoLotCriterion; let i=index">
               <mat-card>
-                <h4>{{cr.description}}</h4>
+                <h4>{{cr.propertyKeyMap.pk1 | translate}}</h4>
                 <div class="answer">
                   <app-criterion [criterion]="cr" [form]="dataService.eoLotCriterionForm.controls" [indicator]="true"></app-criterion>
                 </div>
@@ -480,7 +480,7 @@
         <ng-container *ngIf='this.dataService.eoRelatedCCriteriaForm!=null'>
           <form [formGroup]="dataService.eoRelatedCCriteriaForm" #form="ngForm">
             <div class="eoRelatedCriteria" *ngFor="let cr of this.dataService.eoRelatedCCriteria; let i=index">
-              <span>{{cr.description}}</span>
+              <span>{{cr.propertyKeyMap.pk1 | translate}}</span>
               <div class="answer">
                 <app-criterion [criterion]="cr" [form]="dataService.eoRelatedCCriteriaForm.controls" [indicator]="true"></app-criterion>
               </div>
@@ -497,7 +497,7 @@
         <ng-container *ngIf='this.dataService.eoRelatedDCriteriaForm!=null'>
           <form [formGroup]="dataService.eoRelatedDCriteriaForm" #form="ngForm">
             <div class="eoRelatedCriteria" *ngFor="let cr of this.dataService.eoRelatedDCriteria; let i=index">
-              <span>{{cr.description}}</span>
+              <span>{{cr.propertyKeyMap.pk1 | translate}}</span>
               <div class="answer">
                 <app-criterion [criterion]="cr" [form]="dataService.eoRelatedDCriteriaForm.controls" [indicator]="true"></app-criterion>
               </div>

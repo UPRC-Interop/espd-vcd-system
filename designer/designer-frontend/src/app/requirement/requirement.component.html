@@ -19,9 +19,9 @@
 
 <div [formGroup]="form">
   <div>
-    <label *ngIf="req.responseDataType=='INDICATOR'" [attr.for]="req.uuid">{{req.description}}</label>
-    <label *ngIf="req.responseDataType=='CODE_BOOLEAN'" [attr.for]="req.uuid">{{req.description}}</label>
-    <label *ngIf="req.responseDataType=='WEIGHT_INDICATOR' && this.utilities.isGloballyWeighted" [attr.for]="req.uuid">{{req.description}}</label>
+    <label *ngIf="req.responseDataType=='INDICATOR'" [attr.for]="req.uuid">{{req.propertyKeyMap.pk1 | translate}}</label>
+    <label *ngIf="req.responseDataType=='CODE_BOOLEAN'" [attr.for]="req.uuid">{{req.propertyKeyMap.pk1 | translate}}</label>
+    <label *ngIf="req.responseDataType=='WEIGHT_INDICATOR' && this.utilities.isGloballyWeighted" [attr.for]="req.uuid">{{req.propertyKeyMap.pk1 | translate}}</label>
   </div>
 
   <!--SELF-CONTAINED: Hide the QUESTION fields if the user is a CA making a Request. Render only the REQUIREMENT and CAPTION fields.
@@ -37,7 +37,7 @@
         <mat-form-field>
           <!--<label [attr.for]="req.uuid">{{req.description}}</label>-->
           <!--<br>-->
-          <input matInput [formControlName]="req.uuid" [id]="req.uuid" [required]="req.mandatory" placeholder={{req.description}}>
+          <input matInput [formControlName]="req.uuid" [id]="req.uuid" [required]="req.mandatory" placeholder="{{req.propertyKeyMap.pk1 | translate }}">
           <mat-error *ngIf="form.get(req.uuid).invalid">
             <input-validation-error [formControlErrors]="form.get(req.uuid).errors"></input-validation-error>
           </mat-error>
@@ -48,7 +48,7 @@
           <!--<label [attr.for]="req.uuid">{{req.description}}</label>-->
           <!--<br>-->
           <input matInput [formControlName]="req.uuid" [id]="req.uuid" [required]="req.mandatory"
-                 placeholder={{req.description}} >
+                 placeholder="{{req.propertyKeyMap.pk1 | translate}}" >
           <mat-error *ngIf="form.get(req.uuid).invalid">
             <input-validation-error [formControlErrors]="form.get(req.uuid).errors"></input-validation-error>
           </mat-error>
@@ -56,7 +56,7 @@
       </div>
     </div>
     <mat-form-field *ngSwitchCase="'QUANTITY_YEAR'">
-      <label [attr.for]="req.uuid">{{req.description}}</label>
+      <label [attr.for]="req.uuid">{{req.propertyKeyMap.pk1 | translate}}</label>
       <br>
       <input matInput [formControlName]="req.uuid" [id]="req.uuid" [required]="req.mandatory" integer>
       <mat-error *ngIf="form.get(req.uuid).invalid">
@@ -65,7 +65,7 @@
     </mat-form-field>
 
     <mat-form-field *ngSwitchCase="'QUANTITY_INTEGER'">
-      <label [attr.for]="req.uuid">{{req.description}}</label>
+      <label [attr.for]="req.uuid">{{req.propertyKeyMap.pk1 | translate}}</label>
       <br>
       <input matInput [formControlName]="req.uuid" [id]="req.uuid" [required]="req.mandatory" integer>
       <mat-error *ngIf="form.get(req.uuid).invalid">
@@ -75,7 +75,8 @@
     <mat-form-field *ngSwitchCase="'DATE'">
       <!--<label [attr.for]="req.uuid">{{req.description}}</label>-->
       <!--<br>-->
-      <input [appDateValidationFix]="form.get(req.uuid)" matInput [matDatepicker]="picker" [formControlName]="req.uuid" placeholder={{req.description}}
+      <input [appDateValidationFix]="form.get(req.uuid)" matInput [matDatepicker]="picker" [formControlName]="req.uuid"
+             placeholder="{{req.propertyKeyMap.pk1 | translate}}"
              [id]="req.uuid" [required]="req.mandatory">
       <mat-error *ngIf="form.get(req.uuid).invalid">
         <input-validation-error [formControlErrors]="form.get(req.uuid).errors"></input-validation-error>
@@ -85,7 +86,7 @@
     </mat-form-field>
 
     <div *ngSwitchCase="'PERCENTAGE'">
-      <label class="no-margin" [attr.for]="req.uuid">{{req.description}}</label>
+      <label class="no-margin" [attr.for]="req.uuid">{{req.propertyKeyMap.pk1 | translate}}</label>
       <mat-form-field>
         <input matInput [formControlName]="req.uuid" [id]="req.uuid" percentage [required]="req.mandatory">
         <span matPrefix>%&nbsp;</span>
@@ -100,7 +101,7 @@
         <!--<label [attr.for]="req.uuid+'startDate'">Start Date: </label>-->
         <!--<br>-->
         <mat-form-field >
-          <input placeholder="Start Date" [appDateValidationFix]="form.get(req.uuid+'startDate')" matInput [matDatepicker]="startPicker"
+          <input placeholder="{{'espd.crit.start.date' | translate}}" [appDateValidationFix]="form.get(req.uuid+'startDate')" matInput [matDatepicker]="startPicker"
                  [formControlName]="req.uuid+'startDate'" [id]="req.uuid+'startDate'" [required]="req.mandatory">
           <mat-error *ngIf="form.get(req.uuid+'startDate').invalid">
             <input-validation-error [formControlErrors]="form.get(req.uuid+'startDate').errors"></input-validation-error>
@@ -112,7 +113,7 @@
         <!--<label [attr.for]="req.uuid+'endDate'">End Date: </label>-->
         <!--<br>-->
         <mat-form-field >
-          <input  placeholder="End Date" [appDateValidationFix]="form.get(req.uuid+'endDate')" matInput [matDatepicker]="endPicker"
+          <input  placeholder="{{'espd.crit.end.date' | translate}}" [appDateValidationFix]="form.get(req.uuid+'endDate')" matInput [matDatepicker]="endPicker"
                  [formControlName]="req.uuid+'endDate'" [id]="req.uuid+'endDate'" [required]="req.mandatory">
           <mat-error *ngIf="form.get(req.uuid+'endDate').invalid">
             <input-validation-error [formControlErrors]="form.get(req.uuid+'endDate').errors"></input-validation-error>
@@ -125,14 +126,14 @@
         <!--<label [attr.for]="req.uuid">{{req.description}}</label>-->
         <!--<br>-->
         <mat-form-field >
-          <input matInput [formControlName]="req.uuid" [id]="req.uuid" placeholder={{req.description}} >
+          <input matInput [formControlName]="req.uuid" [id]="req.uuid" placeholder="{{req.propertyKeyMap.pk1 | translate}}" >
         </mat-form-field>
       </div>
     </div>
     <div *ngSwitchCase="'CODE'">
       <div *ngIf="this.APIService.version === 'v1' && req.responseValuesRelatedArtefact === null">
         <mat-form-field >
-          <input matInput [formControlName]="req.uuid" [id]="req.uuid" placeholder={{req.description}} [required]="req.mandatory" >
+          <input matInput [formControlName]="req.uuid" [id]="req.uuid" placeholder="{{req.propertyKeyMap.pk1 | translate}}" [required]="req.mandatory" >
           <mat-error *ngIf="form.get(req.uuid).invalid">
             <input-validation-error [formControlErrors]="form.get(req.uuid).errors"></input-validation-error>
           </mat-error>
@@ -142,7 +143,7 @@
         <mat-form-field *ngSwitchCase="'BidType'">
           <!--<label [attr.for]="req.uuid">{{req.description}}</label>-->
           <!--<br>-->
-          <mat-select [formControlName]="req.uuid" [id]="req.uuid" placeholder={{req.description}}>
+          <mat-select [formControlName]="req.uuid" [id]="req.uuid" placeholder="{{req.propertyKeyMap.pk1 | translate}}">
             <mat-option>None</mat-option>
             <mat-option *ngFor="let bid of codelist.bidTypes" [value]="bid.code">{{bid.name}}</mat-option>
           </mat-select>
@@ -150,7 +151,7 @@
         <mat-form-field *ngSwitchCase="'FinancialRatioType'">
           <!--<label [attr.for]="req.uuid">{{req.description}}</label>-->
           <!--<br>-->
-          <mat-select [formControlName]="req.uuid" [id]="req.uuid" placeholder={{req.description}}>
+          <mat-select [formControlName]="req.uuid" [id]="req.uuid" placeholder="{{req.propertyKeyMap.pk1 | translate}}">
             <mat-option>None</mat-option>
             <mat-option *ngFor="let type of codelist.financialRatioTypes" [value]="type.code">{{type.name}}</mat-option>
           </mat-select>
@@ -158,7 +159,7 @@
         <mat-form-field *ngSwitchCase="'EORoleType'">
           <!--<label [attr.for]="req.uuid">{{req.description}}</label>-->
           <!--<br>-->
-          <mat-select  [formControlName]="req.uuid" [id]="req.uuid" placeholder={{req.description}}>
+          <mat-select  [formControlName]="req.uuid" [id]="req.uuid" placeholder="{{req.propertyKeyMap.pk1 | translate}}">
             <mat-option>None</mat-option>
             <mat-option *ngFor="let role of codelist.eoRoleTypes" [value]="role.code">{{role.name}}</mat-option>
           </mat-select>
@@ -172,7 +173,7 @@
                 {{cpv}}
                 <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
               </mat-chip>
-              <input placeholder="CPV Codes: "
+              <input placeholder="{{'espd.crit.cpv.code' | translate}}"
                      [matChipInputFor]="chipList"
                      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                      [matChipInputAddOnBlur]="addOnBlur"
@@ -188,7 +189,7 @@
     <mat-form-field *ngSwitchCase="'CODE_COUNTRY'">
       <!--<label [attr.for]="req.uuid">{{req.description}}</label>-->
       <!--<br>-->
-      <mat-select [formControlName]="req.uuid" [id]="req.uuid" [required]="req.mandatory" placeholder={{req.description}}>
+      <mat-select [formControlName]="req.uuid" [id]="req.uuid" [required]="req.mandatory" placeholder="{{req.propertyKeyMap.pk1 | translate}}">
         <mat-option>None</mat-option>
         <mat-option *ngFor="let country of codelist.countries" [value]="country.code">{{country.name}}</mat-option>
       </mat-select>
@@ -201,7 +202,7 @@
       <!--<label [attr.for]="req.uuid">{{req.description}}</label>-->
       <!--<br>-->
       <mat-form-field>
-        <input matInput [formControlName]="req.uuid" [id]="req.uuid" amount [required]="req.mandatory" placeholder={{req.description}}>
+        <input matInput [formControlName]="req.uuid" [id]="req.uuid" amount [required]="req.mandatory" placeholder="{{req.propertyKeyMap.pk1 | translate}}">
         <mat-error *ngIf="form.get(req.uuid).invalid">
           <input-validation-error [formControlErrors]="form.get(req.uuid).errors"></input-validation-error>
         </mat-error>
@@ -221,7 +222,7 @@
       <!--<label [attr.for]="req.uuid+'evidenceUrl'">URL: </label>-->
       <!--<br>-->
       <mat-form-field>
-        <input matInput [formControlName]="req.uuid+'evidenceUrl'" [id]="req.uuid+'evidenceUrl'" placeholder="URL"
+        <input matInput [formControlName]="req.uuid+'evidenceUrl'" [id]="req.uuid+'evidenceUrl'" placeholder="{{req.propertyKeyMap.pk1 | translate}}"
                [required]="req.mandatory">
         <mat-error *ngIf="form.controls[''+ req.uuid+'evidenceUrl'].invalid">
           <input-validation-error
@@ -231,7 +232,7 @@
       <!--<label [attr.for]="req.uuid+'evidenceCode'">Reference/Code: </label>-->
       <!--<br>-->
       <mat-form-field>
-        <input matInput [formControlName]="req.uuid+'evidenceCode'" [id]="req.uuid+'evidenceCode'" placeholder="Reference/Code"
+        <input matInput [formControlName]="req.uuid+'evidenceCode'" [id]="req.uuid+'evidenceCode'" placeholder="{{req.propertyKeyMap.pk2 | translate}}"
                [required]="req.mandatory">
         <mat-error *ngIf="form.controls[''+ req.uuid+'evidenceCode'].invalid">
           <input-validation-error
@@ -241,7 +242,7 @@
       <!--<label [attr.for]="req.uuid+'evidenceIssuer'">Issuer: </label>-->
       <!--<br>-->
       <mat-form-field>
-        <input matInput [formControlName]="req.uuid+'evidenceIssuer'" [id]="req.uuid+'evidenceIssuer'" placeholder="Issuer"
+        <input matInput [formControlName]="req.uuid+'evidenceIssuer'" [id]="req.uuid+'evidenceIssuer'" placeholder="{{req.propertyKeyMap.pk3 | translate}}"
                [required]="req.mandatory">
         <mat-error *ngIf="form.controls[''+ req.uuid+'evidenceIssuer'].invalid">
           <input-validation-error
@@ -253,20 +254,20 @@
 
     <mat-radio-group [id]="req.uuid" *ngSwitchCase="'INDICATOR'" [formControlName]="req.uuid">
       <mat-radio-button color="primary"
-                        [value]=true>YES
+                        [value]=true>{{"espd.gui.yes" | translate}}
       </mat-radio-button>
       <mat-radio-button color="primary"
-                        [value]=false>NO
+                        [value]=false>{{"espd.gui.no" | translate}}
       </mat-radio-button>
     </mat-radio-group>
 
     <!-- SELF-CONTAINED 2.1.0: CODE_BOOLEAN PropertyDataType -->
     <mat-radio-group [id]="req.uuid" *ngSwitchCase="'CODE_BOOLEAN'" [formControlName]="req.uuid">
       <mat-radio-button color="primary"
-                        [value]=true>YES
+                        [value]=true>{{"espd.gui.yes" | translate}}
       </mat-radio-button>
       <mat-radio-button color="primary"
-                        [value]=false>NO
+                        [value]=false>{{"epsd.gui.no" | translate}}
       </mat-radio-button>
     </mat-radio-group>
 
@@ -275,10 +276,10 @@
       <div *ngIf="this.utilities.isGloballyWeighted">
         <mat-radio-group [id]="req.uuid" [formControlName]="req.uuid">
           <mat-radio-button color="primary"
-                            [value]=true>YES
+                            [value]=true>{{"espd.gui.yes" | translate}}
           </mat-radio-button>
           <mat-radio-button color="primary"
-                            [value]=false>NO
+                            [value]=false>{{"espd.gui.no" | translate}}
           </mat-radio-button>
         </mat-radio-group>
       </div>
@@ -315,12 +316,12 @@
       <!--<label [attr.for]="req.uuid">{{req.description}}</label>-->
       <!--<br>-->
       <mat-form-field>
-        <input matInput [formControlName]="req.uuid" [id]="req.uuid" placeholder="{{req.description}}">
+        <input matInput [formControlName]="req.uuid" [id]="req.uuid" placeholder="{{req.propertyKeyMap.pk1 | translate}}">
       </mat-form-field>
       <!--<label [attr.for]="req.uuid+'eoidtype'">Type of ID: </label>-->
       <!--<br>-->
       <mat-form-field>
-        <mat-select [formControlName]="req.uuid+'eoidtype'" [id]="req.uuid+'eoidtype'" placeholder="Type of ID ">
+        <mat-select [formControlName]="req.uuid+'eoidtype'" [id]="req.uuid+'eoidtype'">
           <mat-option>None</mat-option>
           <mat-option *ngFor="let type of codelist.eoIDType" [value]="type.code">{{type.code}} ( {{type.name}} )</mat-option>
         </mat-select>

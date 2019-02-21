@@ -61,40 +61,40 @@
 
   <mat-card *ngIf="isCreateNewESPD && isCA">
     <!-- SELF-CONTAINED: select whether the document is REGULATED or SELF-CONTAINED -->
-    <mat-card-title>Is the ESPD "Regulated" or "Self-Contained"?</mat-card-title>
+    <mat-card-title>{{'espd.init.reg.or.self' | translate}}</mat-card-title>
     <mat-card-content>
       <mat-radio-group name="qaTypes" ngModel>
         <mat-radio-button color="primary"
                           name="qualificationApplicationType"
                           value="REGULATED"
                           (change)="handleQATypeSelection(createRegulated)"
-                          #createRegulated>Create Regulated
+                          #createRegulated>{{'espd.init.create.requlated' | translate}}
         </mat-radio-button>
         <mat-radio-button color="primary"
                           name="qualificationApplicationType"
                           value="SELF-CONTAINED"
                           (change)="handleQATypeSelection(createSelfContained)"
-                          #createSelfContained>Create Self-Contained
+                          #createSelfContained>{{'espd.init.create.selfcontained' | translate}}
         </mat-radio-button>
       </mat-radio-group>
     </mat-card-content>
 
     <!-- REGULATED: You can choose the version only if the qualificationApplication type is REGULATED -->
     <div class="version" *ngIf="this.utilities.qualificationApplicationType === 'regulated'">
-      <mat-card-title>Select Version</mat-card-title>
+      <mat-card-title>{{'espd.select.version' | translate}}</mat-card-title>
       <mat-card-content>
         <mat-radio-group name="versions" ngModel>
           <mat-radio-button color="primary"
                             name="version"
                             value="v1"
                             (change)="handleVersionSelection(createV1)"
-                            #createV1>Create v1
+                            #createV1>{{'espd.init.create.v1' | translate}}
           </mat-radio-button>
           <mat-radio-button color="primary"
                             name="version"
                             value="v2"
                             (change)="handleVersionSelection(createV2)"
-                            #createV2>Create v2
+                            #createV2>{{'espd.create.v2' | translate}}
           </mat-radio-button>
         </mat-radio-group>
       </mat-card-content>
@@ -161,40 +161,40 @@
 
   <mat-card *ngIf="isCreateResponse && isEO">
     <!-- SELF-CONTAINED: select whether the document is REGULATED or SELF-CONTAINED -->
-    <mat-card-title>Is the ESPD "Regulated" or "Self-Contained"?</mat-card-title>
+    <mat-card-title>{{'espd.init.reg.or.self' | translate}}</mat-card-title>
     <mat-card-content>
       <mat-radio-group name="qaTypes" ngModel>
         <mat-radio-button color="primary"
                           name="qualificationApplicationType"
                           value="REGULATED"
                           (change)="handleQATypeSelection(createRegulated)"
-                          #createRegulated>Create Regulated
+                          #createRegulated>{{'espd.init.create.requlated' | translate}}
         </mat-radio-button>
         <mat-radio-button color="primary"
                           name="qualificationApplicationType"
                           value="SELF-CONTAINED"
                           (change)="handleQATypeSelection(createSelfContained)"
-                          #createSelfContained>Create Self-Contained
+                          #createSelfContained>{{'espd.init.create.selfcontained' | translate}}
         </mat-radio-button>
       </mat-radio-group>
     </mat-card-content>
 
     <!-- REGULATED: You can choose the version only if the qualificationApplication type is REGULATED -->
     <div class="version" *ngIf="this.utilities.qualificationApplicationType === 'regulated'">
-      <mat-card-title>Select Version</mat-card-title>
+      <mat-card-title>{{'espd.select.version' | translate}}</mat-card-title>
       <mat-card-content>
         <mat-radio-group name="versions" ngModel>
           <mat-radio-button color="primary"
                             name="version"
                             value="v1"
                             (change)="handleVersionSelection(createV1)"
-                            #createV1>Create v1
+                            #createV1>{{'espd.init.create.v1' | translate}}
           </mat-radio-button>
           <mat-radio-button color="primary"
                             name="version"
                             value="v2"
                             (change)="handleVersionSelection(createV2)"
-                            #createV2>Create v2
+                            #createV2>{{'espd.create.v2' | translate}}
           </mat-radio-button>
         </mat-radio-group>
       </mat-card-content>
@@ -214,7 +214,7 @@
   <ng-container *ngIf="this.utilities.isStarted">
     <mat-card class="reset">
       <mat-card-content>
-        <p><span class="warning">Warning:</span> Starting a new procedure will result on losing the previously filled in data.</p>
+        <p>{{'espd.init.dataloss.warning' | translate}}</p>
       </mat-card-content>
     </mat-card>
   </ng-container>
