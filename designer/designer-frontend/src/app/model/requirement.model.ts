@@ -15,6 +15,7 @@
 ///
 
 import {RequirementResponse} from './requirement-response.model';
+import {PropertyKeyMap} from './propertyKeyMap.model';
 
 export class Requirement {
   description: string;
@@ -28,4 +29,5 @@ export class Requirement {
   mandatory?: boolean;
   multiple?: boolean;
   responseValuesRelatedArtefact?: string;
+  propertyKeyMap: PropertyKeyMap;
 }

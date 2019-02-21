@@ -14,23 +14,8 @@
 /// limitations under the License.
 ///
 
-import {LegislationReference} from './legislationReference.model';
-import {RequirementGroup} from './requirementGroup.model';
-import {RequirementResponse} from './requirement-response.model';
-import {PropertyKeyMap} from './propertyKeyMap.model';
-
-export class ExclusionCriteria {
-  type: string;
-  typeCode: string;
-  name: string;
-  description: string;
-  selected: boolean;
-  legislationReference: LegislationReference;
-  requirementGroups: RequirementGroup[];
-  id: string;
-  uuid: string;
-  criterionGroup: string;
-  ruleset?: string;
-  response?: RequirementResponse;
-  propertyKeyMap: PropertyKeyMap;
+export class PropertyKeyMap {
+  pk1: string;
+  pk2?: string;
+  pk3?: string;
 }

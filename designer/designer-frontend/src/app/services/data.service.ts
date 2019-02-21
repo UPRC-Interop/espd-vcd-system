@@ -1449,6 +1449,7 @@ export class DataService {
         this.getReductionCriteria()
           .then(res => {
             this.reductionCriteria = res;
+            // this.reductionCriteriaForm = this.formUtil.createReductionCriterionForm(this.reductionCriteria);
             // console.log(this.reductionCriteria);
             /* [cardinalities]: create template requirementGroup */
             this.formUtil.createTemplateReqGroups(this.reductionCriteria);

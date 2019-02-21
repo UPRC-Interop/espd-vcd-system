@@ -197,7 +197,7 @@ export class FormUtilService {
                 evidence.evidenceIssuer = evidenceIssuer;
                 evidence.confidentialityLevelCode = 'PUBLIC';
 
-                console.log(evidence);
+                // console.log(evidence);
                 // check if evidence already exists, if exists edit evidence object else push new evidence
 
                 const evi = evidenceList.find((ev, i) => {
@@ -209,7 +209,7 @@ export class FormUtilService {
                 if (!evi) {
                   evidenceList.push(evidence);
                 }
-                console.log(evidenceList);
+                // console.log(evidenceList);
               }
 
               // console.log(evidenceList);

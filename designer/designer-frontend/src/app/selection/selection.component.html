@@ -62,8 +62,8 @@
                             name="selectionSatisfiedALL"
                             disabled="true"
                             [(ngModel)]="this.utilities.getSatisfiesALLCriterion(this.dataService.selectionALLCriteria, '7e7db838-eeac-46d9-ab39-42927486f22d').selected">
-                <div class="critDesc" translate>
-                  espd.part4.crit.selection.eo.satisfies.all.criteria
+                <div class="critDesc">
+                  {{'espd.part4.crit.selection.eo.satisfies.all.criteria' | translate}}
                 </div>
               </mat-checkbox>
             </div>
@@ -78,8 +78,8 @@
                             name="selectionSatisfiedALL"
                             disabled="true"
                             [(ngModel)]="this.utilities.getSatisfiesALLCriterion(this.dataService.selectionALLCriteria, 'f4dc58dd-af45-4602-a4c8-3dca30fac082').selected">
-                <div class="critDesc" translate>
-                  espd.part4.crit.selection.eo.satisfies.all.criteria
+                <div class="critDesc">
+                  {{'espd.part4.crit.selection.eo.satisfies.all.criteria' | translate}}
                 </div>
               </mat-checkbox>
             </div>
@@ -111,8 +111,8 @@
             <mat-checkbox color="primary"
                           name='{{criteria.name+i}}'
                           [(ngModel)]="this.dataService.selectionACriteria[i].selected"
-                          [disabled]="this.dataService.isReadOnly()">{{criteria.name}}</mat-checkbox>
-            <div class="critDesc">{{criteria.description}}</div>
+                          [disabled]="this.dataService.isReadOnly()">{{criteria.propertyKeyMap.pk1 | translate}}</mat-checkbox>
+            <div class="critDesc">{{criteria.propertyKeyMap.pk2 | translate}}</div>
           </div>
           <div class="eCertis">
             <!--<h5>eCertis Information ...</h5>-->
@@ -146,8 +146,8 @@
             <mat-checkbox color="primary"
                           name='{{criteria.name+i}}'
                           [(ngModel)]="this.dataService.selectionBCriteria[i].selected"
-                          [disabled]="this.dataService.isReadOnly()">{{criteria.name}}</mat-checkbox>
-            <div class="critDesc">{{criteria.description}}</div>
+                          [disabled]="this.dataService.isReadOnly()">{{criteria.propertyKeyMap.pk1 | translate}}</mat-checkbox>
+            <div class="critDesc">{{criteria.propertyKeyMap.pk2 | translate}}</div>
           </div>
           <div class="eCertis">
             <!--<h5>eCertis Information ...</h5>-->
@@ -221,8 +221,8 @@
             <mat-checkbox color="primary"
                           name='{{criteria.name+i}}'
                           [(ngModel)]="this.dataService.selectionCCriteria[i].selected"
-                          [disabled]="this.dataService.isReadOnly()">{{criteria.name}}</mat-checkbox>
-            <div class="critDesc">{{criteria.description}}</div>
+                          [disabled]="this.dataService.isReadOnly()">{{criteria.propertyKeyMap.pk1 | translate}}</mat-checkbox>
+            <div class="critDesc">{{criteria.propertyKeyMap.pk2 | translate}}</div>
           </div>
           <div class="eCertis">
             <!--<h5>eCertis Information ...</h5>-->
@@ -256,8 +256,8 @@
             <mat-checkbox color="primary"
                           name='{{criteria.name+i}}'
                           [(ngModel)]="this.dataService.selectionDCriteria[i].selected"
-                          [disabled]="this.dataService.isReadOnly()">{{criteria.name}}</mat-checkbox>
-            <div class="critDesc">{{criteria.description}}</div>
+                          [disabled]="this.dataService.isReadOnly()">{{criteria.propertyKeyMap.pk1 | translate}}</mat-checkbox>
+            <div class="critDesc">{{criteria.propertyKeyMap.pk2 | translate}}</div>
           </div>
           <div class="eCertis">
             <!--<h5>eCertis Information ...</h5>-->

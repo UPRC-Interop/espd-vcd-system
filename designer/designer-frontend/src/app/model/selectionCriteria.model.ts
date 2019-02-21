@@ -17,6 +17,7 @@
 import {LegislationReference} from './legislationReference.model';
 import {RequirementGroup} from './requirementGroup.model';
 import {RequirementResponse} from './requirement-response.model';
+import {PropertyKeyMap} from './propertyKeyMap.model';
 
 export class SelectionCriteria {
   type: string;
@@ -31,4 +32,5 @@ export class SelectionCriteria {
   criterionGroup: string;
   ruleset?: string;
   response?: RequirementResponse;
+  propertyKeyMap: PropertyKeyMap;
 }
