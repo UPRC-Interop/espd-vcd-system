@@ -84,7 +84,7 @@ public class CardinalityUtils {
                 && from.getID() != null && to.getID() != null
                 && from.getID().equals(to.getID())) {
 
-            // apply property keys
+            // apply the property keys
             to.getPropertyKeyMap().putAll(from.getPropertyKeyMap());
 
             // apply cardinalities to all root RequirementGroup/s
