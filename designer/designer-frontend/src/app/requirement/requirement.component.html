@@ -208,7 +208,7 @@
         </mat-error>
       </mat-form-field>
       <mat-form-field>
-        <mat-select [formControlName]="req.uuid+'currency'" [id]="req.uuid+'currency'" [required]="req.mandatory">
+        <mat-select [formControlName]="req.uuid+'currency'" [id]="req.uuid+'currency'" [required]="req.mandatory" placeholder="{{'espd.part2.currency' | translate}}">
           <mat-option>None</mat-option>
           <mat-option *ngFor="let curr of codelist.currency" [value]="curr.code">{{curr.code}} ( {{curr.name}} )</mat-option>
         </mat-select>
@@ -222,7 +222,7 @@
       <!--<label [attr.for]="req.uuid+'evidenceUrl'">URL: </label>-->
       <!--<br>-->
       <mat-form-field>
-        <input matInput [formControlName]="req.uuid+'evidenceUrl'" [id]="req.uuid+'evidenceUrl'" placeholder="{{req.propertyKeyMap.pk1 | translate}}"
+        <input matInput [formControlName]="req.uuid+'evidenceUrl'" [id]="req.uuid+'evidenceUrl'" placeholder="{{'espd.crit.url' | translate}}"
                [required]="req.mandatory">
         <mat-error *ngIf="form.controls[''+ req.uuid+'evidenceUrl'].invalid">
           <input-validation-error
@@ -232,7 +232,7 @@
       <!--<label [attr.for]="req.uuid+'evidenceCode'">Reference/Code: </label>-->
       <!--<br>-->
       <mat-form-field>
-        <input matInput [formControlName]="req.uuid+'evidenceCode'" [id]="req.uuid+'evidenceCode'" placeholder="{{req.propertyKeyMap.pk2 | translate}}"
+        <input matInput [formControlName]="req.uuid+'evidenceCode'" [id]="req.uuid+'evidenceCode'" placeholder="{{'espd.crit.code' | translate}}"
                [required]="req.mandatory">
         <mat-error *ngIf="form.controls[''+ req.uuid+'evidenceCode'].invalid">
           <input-validation-error
@@ -242,7 +242,7 @@
       <!--<label [attr.for]="req.uuid+'evidenceIssuer'">Issuer: </label>-->
       <!--<br>-->
       <mat-form-field>
-        <input matInput [formControlName]="req.uuid+'evidenceIssuer'" [id]="req.uuid+'evidenceIssuer'" placeholder="{{req.propertyKeyMap.pk3 | translate}}"
+        <input matInput [formControlName]="req.uuid+'evidenceIssuer'" [id]="req.uuid+'evidenceIssuer'" placeholder="{{'espd.crit.issuer' | translate}}"
                [required]="req.mandatory">
         <mat-error *ngIf="form.controls[''+ req.uuid+'evidenceIssuer'].invalid">
           <input-validation-error
