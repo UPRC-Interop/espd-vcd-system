@@ -94,6 +94,14 @@ export class ApicallService {
   }
 
 
+
+  /* eCertis national criteria */
+  get_eCertisCriteria() {
+
+  }
+
+
+
   /* ==================== EO related criteria ========================= */
 
   getEO_RelatedCriteria() {
