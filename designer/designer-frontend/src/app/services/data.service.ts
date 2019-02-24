@@ -43,6 +43,7 @@ import {Amount} from '../model/amount.model';
 import _ from 'lodash';
 import {Filter} from '../filter/filter.enum';
 import {CodelistService} from './codelist.service';
+import {ECertisCriterion} from '../model/eCertisCriterion.model';
 
 @Injectable()
 export class DataService {
@@ -2103,6 +2104,22 @@ export class DataService {
           return Promise.reject(err);
         });
     }
+  }
+
+  onGetECertisData(subCriterionList: ECertisCriterion[], euID: string, countryCode: string, language: string) {
+    this.APIService.getECertisData(subCriterionList, euID, countryCode, language)
+      .then(res => {
+        console.log('ECertis Data for EU id: ' + euID);
+        console.log(res);
+        subCriterionList = res;
+      })
+      .catch(err => {
+        console.log(err);
+        const message: string = err.error +
+          ' ' + err.message;
+        const action = 'close';
+        this.utilities.openSnackBar(message, action);
+      });
   }
 
 

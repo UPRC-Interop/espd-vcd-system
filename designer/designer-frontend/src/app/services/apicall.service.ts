@@ -27,6 +27,7 @@ import {environment} from '../../environments/environment';
 import {Language} from '../model/language.model';
 import {UtilitiesService} from './utilities.service';
 import {CodeList} from '../model/codeList.model';
+import {ECertisCriterion} from '../model/eCertisCriterion.model';
 
 // import {DataService} from '../services/data.service';
 
@@ -94,12 +95,31 @@ export class ApicallService {
   }
 
 
-
   /* eCertis national criteria */
-  get_eCertisCriteria() {
 
+  getECertisData(subCriterionList: ECertisCriterion[], euID: string, countryCode: string, language: string): Promise<ECertisCriterion[]> {
+    if (!this.utilities.isEmpty(subCriterionList)) {
+      return Promise.resolve(subCriterionList);
+    } else {
+      return this.get_eCertisCriteria(euID, countryCode, language)
+        .then(res => {
+          subCriterionList = res;
+          return Promise.resolve(res);
+        }).catch(err => {
+          console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.utilities.openSnackBar(message, action);
+          return Promise.reject(err);
+        });
+    }
   }
 
+  get_eCertisCriteria(euId: string, countryCode: string, language: string) {
+    return this.http.get<ECertisCriterion[]>(environment.apiUrl + this.version + '/' + this.utilities.qualificationApplicationType +
+      '/criteria/eCertisData/' + euId + '/country/' + countryCode + '/lang/' + language).toPromise();
+  }
 
 
   /* ==================== EO related criteria ========================= */
