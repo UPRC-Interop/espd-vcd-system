@@ -57,6 +57,7 @@ import {IntegerValidationDirective} from './directives/integer/integer-validatio
 import {PercentageValidationDirective} from './directives/percentage/percentage-validation.directive';
 import {VatNumberValidationDirective} from './directives/vat-number/vat-number-validation.directive';
 import {AmountDirective} from './directives/amount/amount.directive';
+import { ECertisCriterionComponent } from './e-certis-criterion/e-certis-criterion.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +86,8 @@ import {AmountDirective} from './directives/amount/amount.directive';
     IntegerValidationDirective,
     PercentageValidationDirective,
     VatNumberValidationDirective,
-    AmountDirective
+    AmountDirective,
+    ECertisCriterionComponent
   ],
   imports: [
     BrowserModule,

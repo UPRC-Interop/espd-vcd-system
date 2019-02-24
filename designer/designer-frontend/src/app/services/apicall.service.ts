@@ -28,6 +28,7 @@ import {Language} from '../model/language.model';
 import {UtilitiesService} from './utilities.service';
 import {CodeList} from '../model/codeList.model';
 import {ECertisCriterion} from '../model/eCertisCriterion.model';
+import {FullCriterion} from '../model/fullCriterion.model';
 
 // import {DataService} from '../services/data.service';
 
@@ -97,14 +98,14 @@ export class ApicallService {
 
   /* eCertis national criteria */
 
-  getECertisData(subCriterionList: ECertisCriterion[], euID: string, countryCode: string, language: string): Promise<ECertisCriterion[]> {
-    if (!this.utilities.isEmpty(subCriterionList)) {
-      return Promise.resolve(subCriterionList);
+  getECertisData(criterion: FullCriterion, euID: string, countryCode: string, language: string): Promise<ECertisCriterion[]> {
+    if (!this.utilities.isEmpty(criterion.subCriterionList)) {
+      return Promise.resolve(criterion.subCriterionList);
     } else {
       return this.get_eCertisCriteria(euID, countryCode, language)
         .then(res => {
-          subCriterionList = res;
-          return Promise.resolve(res);
+          criterion.subCriterionList = res.map(x => ({...x}));
+          return Promise.resolve(criterion.subCriterionList);
         }).catch(err => {
           console.log(err);
           const message: string = err.error +

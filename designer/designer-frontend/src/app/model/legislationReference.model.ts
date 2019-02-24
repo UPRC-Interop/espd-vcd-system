@@ -16,8 +16,8 @@
 
 export class LegislationReference {
   title: string;
+  description: string;
   jurisdictionLevelCode: string;
   article: string;
-  description: string;
   uri: string;
 }
