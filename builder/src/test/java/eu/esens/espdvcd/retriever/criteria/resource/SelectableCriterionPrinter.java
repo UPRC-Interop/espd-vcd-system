@@ -19,7 +19,7 @@ import eu.esens.espdvcd.model.LegislationReference;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
-import eu.esens.espdvcd.retriever.criteria.resource.utils.CardinalityUtils;
+import eu.esens.espdvcd.retriever.criteria.resource.utils.TaxonomyDataUtils;
 
 import java.util.List;
 
@@ -83,13 +83,13 @@ public class SelectableCriterionPrinter {
         }
         final String finalTabs = tabs;
         System.out.println("\n" + tabs + "[" + rg.getType().name() + "] RequirementGroup: " + rg.getID()
-                + " Cardinality: " + CardinalityUtils.extractCardinality(rg.isMandatory(), rg.isMultiple())
+                + " Cardinality: " + TaxonomyDataUtils.extractCardinality(rg.isMandatory(), rg.isMultiple())
                 + " Condition: " + rg.getCondition());
 
         System.out.println(tabs + "Requirements: ");
         rg.getRequirements().forEach(r -> {
             System.out.println(finalTabs + "\t[" + r.getType().name() + "] Req ID: " + r.getID()
-                    + ", Cardinality: " + CardinalityUtils.extractCardinality(r.isMandatory(), r.isMultiple())
+                    + ", Cardinality: " + TaxonomyDataUtils.extractCardinality(r.isMandatory(), r.isMultiple())
                     + ", Req Type: " + r.getResponseDataType() + ", Req Desc: " + r.getDescription()
                     + ", Code Type: " + r.getResponseValuesRelatedArtefact()
                     + ", Property Keys: " + r.getPropertyKeyMap().toString());
@@ -100,7 +100,7 @@ public class SelectableCriterionPrinter {
 
     public static void printRequirement(Requirement rq) {
         System.out.println("\t[" + rq.getType().name() + "] Req ID: " + rq.getID()
-                + ", Cardinality: " + CardinalityUtils.extractCardinality(rq.isMandatory(), rq.isMultiple())
+                + ", Cardinality: " + TaxonomyDataUtils.extractCardinality(rq.isMandatory(), rq.isMultiple())
                 + ", Req Type: " + rq.getResponseDataType() + ", Req Desc: " + rq.getDescription()
                 + ", Code Type: " + rq.getResponseValuesRelatedArtefact());
     }

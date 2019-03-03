@@ -27,7 +27,6 @@ import eu.esens.espdvcd.retriever.criteria.CriteriaDataRetriever;
 import eu.esens.espdvcd.retriever.criteria.CriteriaDataRetrieverBuilder;
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
 import eu.esens.espdvcd.retriever.criteria.RegulatedCriteriaExtractorBuilder;
-import eu.esens.espdvcd.retriever.criteria.resource.SelectableCriterionPrinter;
 import eu.esens.espdvcd.schema.enums.EDMVersion;
 import eu.espd.schema.v1.espdresponse_1.ESPDResponseType;
 import org.junit.Assert;
@@ -320,17 +319,17 @@ public class BuilderESPDTest {
 //        System.out.println(xmlDocumentBuilderV2.getAsString());
 //    }
 
-    @Test
-    public void checkCardinalitiesOfImportedArtefact() throws Exception {
-
-        ESPDResponse espdResponse = BuilderFactory.EDM_V2
-                .createRegulatedModelBuilder()
-                .importFrom(BuilderESPDTest.class.getResourceAsStream("/espd-response-v2-81.xml"))
-                // .importFrom(BuilderESPDTest.class.getResourceAsStream("/espd-response.xml"))
-                .createESPDResponse();
-
-        SelectableCriterionPrinter.print(espdResponse.getFullCriterionList());
-    }
+//    @Test
+//    public void checkCardinalitiesOfImportedArtefact() throws Exception {
+//
+//        ESPDResponse espdResponse = BuilderFactory.EDM_V2
+//                .createRegulatedModelBuilder()
+//                .importFrom(BuilderESPDTest.class.getResourceAsStream("/espd-response-v2-81.xml"))
+//                // .importFrom(BuilderESPDTest.class.getResourceAsStream("/espd-response.xml"))
+//                .createESPDResponse();
+//
+//        SelectableCriterionPrinter.print(espdResponse.getFullCriterionList());
+//    }
 
 //    @Test
 //    public void testCreateESPDResponseFromESPDRequest() throws Exception {
@@ -415,7 +414,6 @@ public class BuilderESPDTest {
                 .createDocumentBuilderFor(espdRequest);
 
         System.out.println(xmlDocumentBuilderV2.getAsString());
-
     }
 
     @Test
@@ -453,5 +451,61 @@ public class BuilderESPDTest {
 
         Assert.assertEquals(ecertisLegRef, artefactLegRef);
     }
+
+//    @Test
+//    public void testPropertyKeysForRegulatedRequest() throws Exception {
+//        ESPDRequest espdRequest = BuilderFactory.EDM_V2
+//                .createRegulatedModelBuilder()
+//                .importFrom(BuilderESPDTest.class.getResourceAsStream("/artefacts/regulated/v2/2.1.0/ESPDRequest_DA_Test-2.1.0-v0.5.xml"))
+//                .createESPDRequest();
+//
+//
+//        XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.EDM_V2
+//                .createDocumentBuilderFor(espdRequest);
+//
+//        System.out.println(xmlDocumentBuilderV2.getAsString());
+//    }
+//
+//    @Test
+//    public void testPropertyKeysForRegulatedResponse() throws Exception {
+//        ESPDResponse espdResponse = BuilderFactory.EDM_V2
+//                .createRegulatedModelBuilder()
+//                .importFrom(BuilderESPDTest.class.getResourceAsStream("/artefacts/regulated/v2/2.1.0/ESPDResponse_DA_Test-2.1.0-v0.5.xml"))
+//                .createESPDResponse();
+//
+//
+//        XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.EDM_V2
+//                .createDocumentBuilderFor(espdResponse);
+//
+//        System.out.println(xmlDocumentBuilderV2.getAsString());
+//    }
+//
+//    @Test
+//    public void testPropertyKeysForSelfContainedRequest() throws Exception {
+//        ESPDRequest espdRequest = BuilderFactory.EDM_V2
+//                .createSelfContainedModelBuilder()
+//                .importFrom(BuilderESPDTest.class.getResourceAsStream("/artefacts/selfcontained/da/2.1.0/UPRC-ESPD-Self-Contained-Request-2.1.0-Artefact-27-2-2019.xml"))
+//                .createESPDRequest();
+//
+//
+//        XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.EDM_V2
+//                .createDocumentBuilderFor(espdRequest);
+//
+//        System.out.println(xmlDocumentBuilderV2.getAsString());
+//    }
+//
+//    @Test
+//    public void testPropertyKeysForSelfContainedResponse() throws Exception {
+//        ESPDResponse espdResponse = BuilderFactory.EDM_V2
+//                .createSelfContainedModelBuilder()
+//                .importFrom(BuilderESPDTest.class.getResourceAsStream("/artefacts/selfcontained/da/2.1.0/UPRC-ESPD-Self-Contained-Response-2.1.0-Artefact-14-1-2019.xml"))
+//                .createESPDResponse();
+//
+//
+//        XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.EDM_V2
+//                .createDocumentBuilderFor(espdResponse);
+//
+//        System.out.println(xmlDocumentBuilderV2.getAsString());
+//    }
 
 }
