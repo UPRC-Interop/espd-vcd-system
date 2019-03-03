@@ -68,7 +68,6 @@ public class CriteriaDataRetrieverBuilderTest {
 
         String ID = "005eb9ed-1347-4ca3-bb29-9bc0db64e1ab";
 
-
         String code = EULanguageCodeEnum.DE.name();
 
         List<String> ncList = r.getNationalCriterionMapping(ID, code)
@@ -86,7 +85,8 @@ public class CriteriaDataRetrieverBuilderTest {
         String ID = "14df34e8-15a9-411c-8c05-8c051693e277";
         String code = EULanguageCodeEnum.DE.name();
 
-        r.setLang(EULanguageCodeEnum.DE);
+        r.setLang(EULanguageCodeEnum.EN);
+        // r.setLang(EULanguageCodeEnum.DE);
 
         SelectableCriterionPrinter.print(r.getNationalCriterionMapping(ID, code));
     }

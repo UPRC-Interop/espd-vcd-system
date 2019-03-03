@@ -15,13 +15,16 @@
  */
 package eu.esens.espdvcd.retriever.criteria.resource;
 
+import eu.esens.espdvcd.model.EvidenceIssuerDetails;
 import eu.esens.espdvcd.model.LegislationReference;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
+import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
 import eu.esens.espdvcd.retriever.criteria.resource.utils.TaxonomyDataUtils;
 
 import java.util.List;
+import java.util.Optional;
 
 public class SelectableCriterionPrinter {
 
@@ -31,6 +34,7 @@ public class SelectableCriterionPrinter {
             printSelectableCriterionBasicInfo(sc);
             printLegislationReference(sc.getLegislationReference());
             sc.getRequirementGroups().forEach(rqg -> printRequirementGroup(rqg, 3));
+            sc.getEvidenceList().forEach(ev -> printEvidence(ev));
         } else {
             System.out.println(sc);
         }
@@ -105,5 +109,19 @@ public class SelectableCriterionPrinter {
                 + ", Code Type: " + rq.getResponseValuesRelatedArtefact());
     }
 
+    public static void printEvidence(Evidence e) {
+        System.out.print("\n\t\t[EVIDENCE] Req ID: " + e.getID()
+                + ", Desc: " + e.getDescription()
+                + ", Conf Code: " + e.getConfidentialityLevelCode()
+                + ", Evidence URL: " + e.getEvidenceURL());
+
+        Optional.ofNullable(e.getEvidenceIssuer()).ifPresent(issuer -> printEvidenceIssuer(issuer));
+    }
+
+    public static void printEvidenceIssuer(EvidenceIssuerDetails issuerDetails) {
+        System.out.print(", Evidence Issuer [ID: " + issuerDetails.getID()
+                + ", Name: " + Optional.ofNullable(issuerDetails.getName()).orElse("null").trim()
+                + ", Website: " + issuerDetails.getWebsite() + "]");
+    }
 
 }

@@ -428,6 +428,13 @@ public interface ModelExtractor {
 
         SelectableCriterion sc = new SelectableCriterion(id, null, name, desc, new LegislationReference(lr), null);
         sc.setSelected(isSelected);
+        // Add Criterion's Evidences. Currently only national criteria have Evidences
+        if (sc.getLegislationReference() != null
+                && !sc.getLegislationReference()
+                .getJurisdictionLevelCode().trim()
+                .equals("eu")) {
+            sc.getEvidenceList().addAll(extractEvidences(ec.getEvidenceGroups()));
+        }
         return sc;
     }
 
