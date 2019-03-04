@@ -18,7 +18,7 @@ package eu.esens.espdvcd.retriever.criteria;
 import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.retriever.criteria.resource.*;
-import eu.esens.espdvcd.retriever.criteria.resource.utils.CardinalityUtils;
+import eu.esens.espdvcd.retriever.criteria.resource.utils.TaxonomyDataUtils;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import eu.esens.espdvcd.schema.enums.EDMVersion;
 
@@ -242,8 +242,8 @@ abstract class CriteriaExtractorBuilder {
         initESPDArtefactResource();
 
         artefactResource.getCriterionList()
-                .forEach(sc -> CardinalityUtils
-                        .applyCardinalities(taxonomyResource.getCriterionMap().get(sc.getID()), sc));
+                .forEach(sc -> TaxonomyDataUtils
+                        .applyTaxonomyData(taxonomyResource.getCriterionMap().get(sc.getID()), sc));
 
         List<RequirementsResource> resourceList = new ArrayList<>();
         resourceList.add(artefactResource);

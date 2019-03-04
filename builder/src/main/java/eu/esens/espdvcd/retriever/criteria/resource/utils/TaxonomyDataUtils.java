@@ -15,7 +15,6 @@
  */
 package eu.esens.espdvcd.retriever.criteria.resource.utils;
 
-import eu.esens.espdvcd.builder.util.ArtefactUtils;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
@@ -24,9 +23,9 @@ import eu.esens.espdvcd.retriever.criteria.resource.enums.CardinalityEnum;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class CardinalityUtils {
+public class TaxonomyDataUtils {
 
-    private static final Logger LOGGER = Logger.getLogger(CardinalityUtils.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(TaxonomyDataUtils.class.getName());
 
     public static CardinalityEnum extractCardinality(boolean mandatory, boolean multiple) {
 
@@ -73,12 +72,14 @@ public class CardinalityUtils {
                 return CardinalityEnum.ONE_TO_MANY;
 
             default:
+                LOGGER.log(Level.WARNING, "Warning... Unknown cardinality tag:" + cardinality
+                        + " . Cardinality set to ONE");
                 return CardinalityEnum.ONE;
 
         }
     }
 
-    public static void applyCardinalities(SelectableCriterion from, SelectableCriterion to) {
+    public static void applyTaxonomyData(SelectableCriterion from, SelectableCriterion to) {
 
         if (from != null && to != null
                 && from.getID() != null && to.getID() != null
@@ -88,38 +89,42 @@ public class CardinalityUtils {
             to.getPropertyKeyMap().putAll(from.getPropertyKeyMap());
 
             // apply cardinalities to all root RequirementGroup/s
-            to.getRequirementGroups().forEach(toRg -> applyCardinalities(
+            to.getRequirementGroups().forEach(toRg -> applyTaxonomyData(
                     from.getRequirementGroups().stream()
-                            .filter(fromRg -> toRg.getID().equals(fromRg.getID()))
+                            .filter(fromRg -> toRg.getID().trim().equals(fromRg.getID().trim()))
                             .findFirst().orElse(null) // from
                     , toRg                                  // to
+                    , to.getID()
             ));
 
         } else {
-            LOGGER.log(Level.SEVERE, "Error... Cardinalities failed to be applied.");
+            LOGGER.log(Level.SEVERE, "Error... Cardinalities failed been applied at Criterion level:" + to.getID());
         }
 
     }
 
-    public static void applyCardinalities(RequirementGroup from, RequirementGroup to) {
+    public static void applyTaxonomyData(RequirementGroup from, RequirementGroup to, String criterionId) {
 
         if (from != null && to != null) {
 
             // do the same for sub-RequirementGroup/s
-            to.getRequirementGroups().forEach(toRg -> applyCardinalities(
+            to.getRequirementGroups().forEach(toRg -> applyTaxonomyData(
                     from.getRequirementGroups().stream()
-                            .filter(fromRg -> toRg.getID().equals(fromRg.getID()))
+                            .filter(fromRg -> toRg.getID().trim().equals(fromRg.getID().trim()))
                             .findFirst().orElse(null) // from
-                    , toRg));                               // to
+                    , toRg                                  // to
+                    , criterionId));
 
             // do the same for requirement/s
             to.getRequirements().stream()
                     .filter(toRq -> isRequirementBasicInfoNotNull(toRq))
-                    .forEach(toRq -> applyCardinalities(
+                    .forEach(toRq -> applyTaxonomyData(
                             from.getRequirements().stream()
                                     .filter(fromRq -> isRequirementBasicInfoNotNull(fromRq)
-                                            && ArtefactUtils.clearAllWhitespaces(toRq.getDescription())
-                                            .equals(ArtefactUtils.clearAllWhitespaces(fromRq.getDescription()))
+                                            // && ArtefactUtils.clearAllWhitespaces(toRq.getDescription())
+                                            // .equals(ArtefactUtils.clearAllWhitespaces(fromRq.getDescription()))
+                                            && toRq.getDescription().trim()
+                                            .equals(fromRq.getDescription().trim())
                                             && toRq.getResponseDataType() == fromRq.getResponseDataType()
                                             && toRq.getType() == fromRq.getType())
                                     .findFirst().orElse(null) // from
@@ -132,10 +137,15 @@ public class CardinalityUtils {
             if (from.getType() != null) {
                 to.setType(from.getType());
             }
+        } else {
+            LOGGER.log(Level.SEVERE, "Error... Taxonomy data failed been applied at Requirement Group level:"
+                    + to.getID() + ", "
+                    + to.getType().name()
+                    + " at criterion:" + criterionId);
         }
     }
 
-    public static void applyCardinalities(Requirement from, Requirement to) {
+    public static void applyTaxonomyData(Requirement from, Requirement to) {
 
         if (from != null && to != null) {
             // cardinalities
@@ -151,6 +161,11 @@ public class CardinalityUtils {
             }
             // apply the property keys
             to.getPropertyKeyMap().putAll(from.getPropertyKeyMap());
+        } else {
+            LOGGER.log(Level.SEVERE, "Error... Taxonomy data failed been applied at Requirement level:"
+                    + to.getID() + ", "
+                    + to.getType().name() + ", "
+                    + to.getResponseDataType());
         }
 
     }

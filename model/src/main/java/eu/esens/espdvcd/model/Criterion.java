@@ -18,6 +18,7 @@ package eu.esens.espdvcd.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import eu.esens.espdvcd.codelist.enums.CriterionTypeEnum;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
+import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -144,7 +145,30 @@ public class Criterion implements Serializable {
      */
     protected List<SelectableCriterion> subCriterionList;
 
+    /**
+     * The property keys map contains the criterion's property keys,
+     * which are used for multilinguality purposes. Currently there are 2
+     * property keys at Criterion level, 1 for Criterion's Name and 1 for
+     * Criterion's Description.
+     * <p>
+     * Data type: Text<br>
+     * Cardinality: 2<br>
+     * InfReqID:<br>
+     * BusReqID:<br>
+     * UBL syntax path:<br>
+     */
     protected Map<String, String> propertyKeyMap;
+
+    /**
+     * The Evidence list contains the criterion's evidences.
+     * <p>
+     * Data type: Class<br>
+     * Cardinality: 0..n<br>
+     * InfReqID:<br>
+     * BusReqID:<br>
+     * UBL syntax path:<br>
+     */
+    protected List<Evidence> evidenceList;
 
     public Criterion() {
         this.ID = java.util.UUID.randomUUID().toString();
@@ -273,6 +297,13 @@ public class Criterion implements Serializable {
             propertyKeyMap = new HashMap<>();
         }
         return propertyKeyMap;
+    }
+
+    public List<Evidence> getEvidenceList() {
+        if (evidenceList == null) {
+            evidenceList = new ArrayList<>();
+        }
+        return evidenceList;
     }
 
     @Override
