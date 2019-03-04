@@ -868,22 +868,24 @@ public interface ModelExtractor {
         return r;
     }
 
-    default Evidence extractEvidence(ECertisEvidence evidence) {
+    default Evidence extractEvidence(ECertisEvidence ece) {
         Evidence e = new Evidence();
-        e.setID(evidence.getID());
-        e.setDescription(evidence.getDescription());
+        e.setID(ece.getID());
+        e.setName(ece.getName());
+        e.setTypeCode(ece.getTypeCode());
+        e.setDescription(ece.getDescription());
         e.setConfidentialityLevelCode(ConfidentialityLevelEnum.PUBLIC.name());
 
-        if (!evidence.getEvidenceDocumentReference().isEmpty()
-                && evidence.getEvidenceDocumentReference().get(0).getAttachment() != null
-                && evidence.getEvidenceDocumentReference().get(0).getAttachment().getExternalReference() != null
-                && evidence.getEvidenceDocumentReference().get(0).getAttachment().getExternalReference().getURI() != null) {
+        if (!ece.getEvidenceDocumentReference().isEmpty()
+                && ece.getEvidenceDocumentReference().get(0).getAttachment() != null
+                && ece.getEvidenceDocumentReference().get(0).getAttachment().getExternalReference() != null
+                && ece.getEvidenceDocumentReference().get(0).getAttachment().getExternalReference().getURI() != null) {
 
-            e.setEvidenceURL(evidence.getEvidenceDocumentReference().get(0).getAttachment().getExternalReference().getURI());
+            e.setEvidenceURL(ece.getEvidenceDocumentReference().get(0).getAttachment().getExternalReference().getURI());
         }
 
-        if (!evidence.getEvidenceIssuerParty().isEmpty()) {
-            e.setEvidenceIssuer(extractEvidenceIssuerDetails(evidence.getEvidenceIssuerParty().get(0)));
+        if (!ece.getEvidenceIssuerParty().isEmpty()) {
+            e.setEvidenceIssuer(extractEvidenceIssuerDetails(ece.getEvidenceIssuerParty().get(0)));
         }
 
         return e;

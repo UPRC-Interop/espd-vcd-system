@@ -111,6 +111,8 @@ public class SelectableCriterionPrinter {
 
     public static void printEvidence(Evidence e) {
         System.out.print("\n\t\t[EVIDENCE] Req ID: " + e.getID()
+                + ", Name: " + e.getName()
+                + ", TypeCode: " + e.getTypeCode()
                 + ", Desc: " + e.getDescription()
                 + ", Conf Code: " + e.getConfidentialityLevelCode()
                 + ", Evidence URL: " + e.getEvidenceURL());

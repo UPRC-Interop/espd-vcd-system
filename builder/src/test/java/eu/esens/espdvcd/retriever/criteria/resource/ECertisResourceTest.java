@@ -72,7 +72,8 @@ public class ECertisResourceTest {
 
         ECertisResource r = new ECertisResource();
 
-        ECertisCriterion ec = r.getECertisCriterion("7c351fc0-1fd0-4bad-bfd8-1717a9dcf9d1");
+        // ECertisCriterion ec = r.getECertisCriterion("7c351fc0-1fd0-4bad-bfd8-1717a9dcf9d1"); // gr national
+        ECertisCriterion ec = r.getECertisCriterion("e27abb31-c158-4821-8b32-ec2204f01176");
 
         ObjectMapper mapper = new ObjectMapper();
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
