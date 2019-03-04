@@ -885,7 +885,11 @@ public interface ModelExtractor {
         }
 
         if (!ece.getEvidenceIssuerParty().isEmpty()) {
-            e.setEvidenceIssuer(extractEvidenceIssuerDetails(ece.getEvidenceIssuerParty().get(0)));
+
+            // FIXME temporary workaround for EvidenceIssuerParty empty elements
+            e.setEvidenceIssuer(extractEvidenceIssuerDetails(ece.getEvidenceIssuerParty().stream()
+                    .filter(issuer -> !issuer.getPartyName().isEmpty()
+                            || issuer.getWebsiteURI() != null).findFirst().get()));
         }
 
         return e;

@@ -122,7 +122,7 @@ public class SelectableCriterionPrinter {
 
     public static void printEvidenceIssuer(EvidenceIssuerDetails issuerDetails) {
         System.out.print(", Evidence Issuer [ID: " + issuerDetails.getID()
-                + ", Name: " + Optional.ofNullable(issuerDetails.getName()).orElse("null").trim()
+                + ", Name: " + Optional.ofNullable(issuerDetails.getName()).orElse("NULL").trim()
                 + ", Website: " + issuerDetails.getWebsite() + "]");
     }
 
