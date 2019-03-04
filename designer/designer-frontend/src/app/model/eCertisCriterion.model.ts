@@ -15,6 +15,7 @@
 ///
 
 import {LegislationReference} from './legislationReference.model';
+import {Evidence} from './evidence.model';
 
 export class ECertisCriterion {
   type: string;
@@ -25,4 +26,5 @@ export class ECertisCriterion {
   legislationReference: LegislationReference;
   id: string;
   uuid: string;
+  evidenceList?: Evidence[];
 }

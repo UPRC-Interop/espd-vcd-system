@@ -2106,11 +2106,6 @@ export class DataService {
     }
   }
 
-  changeData(criterion: FullCriterion) {
-    console.log('criterion name changed');
-    criterion.name = 'niar';
-  }
-
   onGetECertisData(criterion: FullCriterion, euID: string, countryCode: string, language: string) {
     this.APIService.getECertisData(criterion, euID, countryCode, language)
       .then(res => {

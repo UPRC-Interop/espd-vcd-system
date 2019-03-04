@@ -22,4 +22,5 @@ export class Evidence {
   evidenceURL?: string;
   id: string;
   evidenceIssuer?: EvidenceIssuer;
+  name?: string;
 }
