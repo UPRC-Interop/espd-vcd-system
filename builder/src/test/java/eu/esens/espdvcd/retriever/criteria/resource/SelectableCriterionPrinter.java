@@ -111,6 +111,8 @@ public class SelectableCriterionPrinter {
 
     public static void printEvidence(Evidence e) {
         System.out.print("\n\t\t[EVIDENCE] Req ID: " + e.getID()
+                + ", Name: " + e.getName()
+                + ", TypeCode: " + e.getTypeCode()
                 + ", Desc: " + e.getDescription()
                 + ", Conf Code: " + e.getConfidentialityLevelCode()
                 + ", Evidence URL: " + e.getEvidenceURL());
@@ -120,7 +122,7 @@ public class SelectableCriterionPrinter {
 
     public static void printEvidenceIssuer(EvidenceIssuerDetails issuerDetails) {
         System.out.print(", Evidence Issuer [ID: " + issuerDetails.getID()
-                + ", Name: " + Optional.ofNullable(issuerDetails.getName()).orElse("null").trim()
+                + ", Name: " + Optional.ofNullable(issuerDetails.getName()).orElse("NULL").trim()
                 + ", Website: " + issuerDetails.getWebsite() + "]");
     }
 
