@@ -67,7 +67,7 @@ public class CriteriaDataRetrieverImpl implements CriteriaDataRetriever {
     @Override
     public void setLang(EULanguageCodeEnum lang) throws RetrieverException {
 
-        if (isIdentificationCodeExist(lang)) {
+        if (isEULanguageCodeExist(lang)) {
             this.lang = lang;
         } else {
             throw new RetrieverException(String.format("Error... Provided language Code %s is not Included in codelists", lang));
@@ -99,14 +99,23 @@ public class CriteriaDataRetrieverImpl implements CriteriaDataRetriever {
     }
 
     /**
-     * Check if the given identification code, exist in the codelists.
+     * Check if the given EU language code, exist in the codelists.
      *
-     * @param code The identification code (ISO 639-1:2002)
+     * @param code The EU language code (ISO 3166-1 alpha 2 country code identifier)
      * @return true if exists, false if not
      */
-    private boolean isIdentificationCodeExist(String code) {
-        String codeUpperCase = code.toUpperCase();
+    private boolean isEULanguageCodeExist(EULanguageCodeEnum code) {
+        return CodelistsV2.LanguageCodeEU.containsId(code.name());
+    }
 
+    /**
+     * Check if the given EU language code, exist in the codelists.
+     *
+     * @param code The EU language code (ISO 3166-1 alpha 2 country code identifier)
+     * @return true if exists, false if not
+     */
+    private boolean isEULanguageCodeExist(String code) {
+        String codeUpperCase = code.toUpperCase();
         return CodelistsV2.LanguageCodeEU
                 .containsId(codeUpperCase);
     }
@@ -117,8 +126,9 @@ public class CriteriaDataRetrieverImpl implements CriteriaDataRetriever {
      * @param code The identification code (ISO 639-1:2002)
      * @return true if exists, false if not
      */
-    private boolean isIdentificationCodeExist(EULanguageCodeEnum code) {
-        return CodelistsV2.LanguageCodeEU.containsId(code.name());
+    private boolean isIdentificationCodeExist(String code) {
+        String codeUpperCase = code.toUpperCase();
+        return CodelistsV2.CountryIdentification.containsId(codeUpperCase);
     }
 
     /**

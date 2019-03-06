@@ -886,7 +886,7 @@ public interface ModelExtractor {
 
         if (!ece.getEvidenceIssuerParty().isEmpty()) {
 
-            // FIXME temporary workaround for EvidenceIssuerParty empty elements
+            // workaround in order to discard EvidenceIssuerParty empty elements
             e.setEvidenceIssuer(extractEvidenceIssuerDetails(ece.getEvidenceIssuerParty().stream()
                     .filter(issuer -> !issuer.getPartyName().isEmpty()
                             || issuer.getWebsiteURI() != null).findFirst().get()));

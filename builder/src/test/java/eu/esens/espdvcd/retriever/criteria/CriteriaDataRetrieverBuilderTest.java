@@ -83,9 +83,10 @@ public class CriteriaDataRetrieverBuilderTest {
     public void testEuToNationalMappingWithLangParam() throws Exception {
 
         String ID = "005eb9ed-1347-4ca3-bb29-9bc0db64e1ab";
-        String code = EULanguageCodeEnum.DE.name();
+        // String code = EULanguageCodeEnum.DE.name();
+        String code = "gr";
 
-        r.setLang(EULanguageCodeEnum.EN);
+        r.setLang(EULanguageCodeEnum.EL);
         // r.setLang(EULanguageCodeEnum.DE);
 
         SelectableCriterionPrinter.print(r.getNationalCriterionMapping(ID, code));
