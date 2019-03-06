@@ -117,7 +117,9 @@
           <div class="eCertis">
             <!--<h5>eCertis Information ...</h5>-->
             <ng-container *ngIf="criteria.subCriterionList.length === 0">
-              <!--<button mat-raised-button (click)="this.dataService.onGetECertisData(criteria, criteria.id, 'DE', this.utilities.selectedLang)">More Information</button>-->
+              <!--<button mat-raised-button-->
+                      <!--(click)="this.dataService.onGetECertisData(criteria, criteria.id, this.dataService.getCountryCode(), this.utilities.selectedLang)">More Information-->
+              <!--</button>-->
               <!--<button mat-raised-button (click)="this.dataService.changeData(criteria)">change</button>-->
             </ng-container>
             <ng-container *ngIf="criteria.subCriterionList.length !== 0">

@@ -2122,5 +2122,16 @@ export class DataService {
       });
   }
 
+  getCountryCode(): string {
+    if (this.utilities.isCA) {
+      return this.selectedCountry;
+    } else if (this.utilities.isEO) {
+      if (this.EOForm.controls['postalAddress'].get('countryCode').value !== null) {
+        this.selectedEOCountry = this.EOForm.controls['postalAddress'].get('countryCode').value;
+      }
+      return this.selectedEOCountry;
+    }
+  }
+
 
 }

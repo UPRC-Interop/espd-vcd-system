@@ -116,7 +116,20 @@
             </div>
             <div class="eCertis">
               <!--<h5>eCertis Information ...</h5>-->
-              <div class="eCertDesc" translate>espd.ecertis.404</div>
+              <ng-container *ngIf="cr.subCriterionList.length === 0">
+                <!--<button mat-raised-button-->
+                        <!--(click)="this.dataService.onGetECertisData(cr, cr.id, this.dataService.getCountryCode(), this.utilities.selectedLang)">More Information-->
+                <!--</button>-->
+                <!--<button mat-raised-button (click)="this.dataService.changeData(criteria)">change</button>-->
+              </ng-container>
+              <ng-container *ngIf="cr.subCriterionList.length !== 0">
+                <div *ngIf="!this.utilities.isEmpty(cr.subCriterionList)">
+                  <div *ngFor="let nationalCriterion of cr.subCriterionList; let i=index" class="ecertis-crit">
+                    <app-e-certis-criterion [criterion]="nationalCriterion"></app-e-certis-criterion>
+                  </div>
+                </div>
+              </ng-container>
+              <!--<div class="eCertDesc" translate>espd.ecertis.404</div>-->
             </div>
           </div>
           <div class="answer">
