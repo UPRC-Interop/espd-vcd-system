@@ -20,6 +20,7 @@ import {Moment} from 'moment';
 import {SelectionCriteria} from '../model/selectionCriteria.model';
 import {MatListOption, MatSnackBar} from '@angular/material';
 import {RequirementGroup} from '../model/requirementGroup.model';
+import {FullCriterion} from '../model/fullCriterion.model';
 
 
 @Injectable({
@@ -53,6 +54,7 @@ export class UtilitiesService {
   cpvString = [];
   type: string;
   selectedLang = 'en';
+  eCertisTemplate = [];
   // qualificationApplicationType = 'SELF-CONTAINED';
   // qualificationApplicationType = 'REGULATED';
 
@@ -174,6 +176,18 @@ export class UtilitiesService {
   //   const json = JSON.parse(this.requestJSON);
   //   return new ESPDRequest(json.cadetails, json.fullCriterionList, json.documentDetails);
   // }
+
+  /* Show/hide eCertis criteria and related buttons */
+
+  createShowECertisTemplate(criteria: FullCriterion[]) {
+    criteria.forEach(cr => {
+      this.eCertisTemplate[cr.id] = false;
+    });
+  }
+
+  toggleECertis(id: string) {
+    this.eCertisTemplate[id] = !this.eCertisTemplate[id];
+  }
 
 
   /* ============================ snackbar ===================================== */

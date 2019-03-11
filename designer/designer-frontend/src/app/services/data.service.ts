@@ -715,6 +715,7 @@ export class DataService {
 
             // create requirementGroup template objects required for multiple instances (cardinalities) function
             this.formUtil.createTemplateReqGroups(res.fullCriterionList);
+            this.utilities.createShowECertisTemplate(res.fullCriterionList);
 
             /* find if CRITERION.SELECTION.ALL_SATISFIED exists */
             if (this.APIService.version === 'v1') {
@@ -930,6 +931,7 @@ export class DataService {
 
             // create requirementGroup template objects required for multiple instances (cardinalities) function
             this.formUtil.createTemplateReqGroups(res.fullCriterionList);
+            this.utilities.createShowECertisTemplate(res.fullCriterionList);
 
             /* find if CRITERION.SELECTION.ALL_SATISFIED exists */
             if (this.APIService.version === 'v1') {
@@ -1268,6 +1270,7 @@ export class DataService {
 
             /* [cardinalities]: create template requirementGroup */
             this.formUtil.createTemplateReqGroups(this.exclusionACriteria);
+            this.utilities.createShowECertisTemplate(this.exclusionACriteria);
             resolve();
 
           })
@@ -1287,6 +1290,7 @@ export class DataService {
             console.log(this.exclusionBCriteriaForm);
             /* [cardinalities]: create template requirementGroup */
             this.formUtil.createTemplateReqGroups(this.exclusionBCriteria);
+            this.utilities.createShowECertisTemplate(this.exclusionBCriteria);
             resolve();
           })
           .catch(err => {
@@ -1305,6 +1309,7 @@ export class DataService {
             // console.log(res);
             /* [cardinalities]: create template requirementGroup */
             this.formUtil.createTemplateReqGroups(this.exclusionCCriteria);
+            this.utilities.createShowECertisTemplate(this.exclusionCCriteria);
             resolve();
           })
           .catch(err => {
@@ -1323,6 +1328,7 @@ export class DataService {
             // console.log(res);
             /* [cardinalities]: create template requirementGroup */
             this.formUtil.createTemplateReqGroups(this.exclusionDCriteria);
+            this.utilities.createShowECertisTemplate(this.exclusionDCriteria);
             resolve();
           })
           .catch(err => {
@@ -1359,6 +1365,7 @@ export class DataService {
             this.selectionACriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionACriteria);
             /* [cardinalities]: create template requirementGroup */
             this.formUtil.createTemplateReqGroups(this.selectionACriteria);
+            this.utilities.createShowECertisTemplate(this.selectionACriteria);
             resolve();
           })
           .catch(err => {
@@ -1377,6 +1384,7 @@ export class DataService {
             this.selectionBCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionBCriteria);
             /* [cardinalities]: create template requirementGroup */
             this.formUtil.createTemplateReqGroups(this.selectionBCriteria);
+            this.utilities.createShowECertisTemplate(this.selectionBCriteria);
             resolve();
           })
           .catch(err => {
@@ -1394,6 +1402,7 @@ export class DataService {
             this.selectionCCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionCCriteria);
             /* [cardinalities]: create template requirementGroup */
             this.formUtil.createTemplateReqGroups(this.selectionCCriteria);
+            this.utilities.createShowECertisTemplate(this.selectionCCriteria);
             resolve();
           })
           .catch(err => {
@@ -1411,6 +1420,7 @@ export class DataService {
             this.selectionDCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionDCriteria);
             /* [cardinalities]: create template requirementGroup */
             this.formUtil.createTemplateReqGroups(this.selectionDCriteria);
+            this.utilities.createShowECertisTemplate(this.selectionDCriteria);
             resolve();
           })
           .catch(err => {
@@ -1429,8 +1439,7 @@ export class DataService {
             this.reductionCriteriaForm = this.formUtil.createReductionCriterionForm(this.reductionCriteria);
             /* [cardinalities]: create template requirementGroup */
             this.formUtil.createTemplateReqGroups(this.reductionCriteria);
-            console.log('TEMPLATE ARRAY: ');
-            console.log(this.formUtil.template);
+            this.utilities.createShowECertisTemplate(this.reductionCriteria);
             resolve();
           })
           .catch(err => {
@@ -1454,6 +1463,7 @@ export class DataService {
             // console.log(this.reductionCriteria);
             /* [cardinalities]: create template requirementGroup */
             this.formUtil.createTemplateReqGroups(this.reductionCriteria);
+            this.utilities.createShowECertisTemplate(this.reductionCriteria);
             resolve();
           })
           .catch(err => {
@@ -1534,6 +1544,7 @@ export class DataService {
             // console.log("This is exclusionACriteria: ");
             /* [cardinalities]: create template requirementGroup */
             this.formUtil.createTemplateReqGroups(this.exclusionACriteria);
+            this.utilities.createShowECertisTemplate(this.exclusionACriteria);
             resolve();
           })
           .catch(err => {
@@ -1552,6 +1563,7 @@ export class DataService {
             // console.log(res);
             /* [cardinalities]: create template requirementGroup */
             this.formUtil.createTemplateReqGroups(this.exclusionBCriteria);
+            this.utilities.createShowECertisTemplate(this.exclusionBCriteria);
             resolve();
           })
           .catch(err => {
@@ -1570,6 +1582,7 @@ export class DataService {
             // console.log(res);
             /* [cardinalities]: create template requirementGroup */
             this.formUtil.createTemplateReqGroups(this.exclusionCCriteria);
+            this.utilities.createShowECertisTemplate(this.exclusionCCriteria);
             resolve();
           })
           .catch(err => {
@@ -1588,6 +1601,7 @@ export class DataService {
             // console.log(res);
             /* [cardinalities]: create template requirementGroup */
             this.formUtil.createTemplateReqGroups(this.exclusionDCriteria);
+            this.utilities.createShowECertisTemplate(this.exclusionDCriteria);
             resolve();
           })
           .catch(err => {
@@ -1623,6 +1637,7 @@ export class DataService {
             this.selectionACriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionACriteria);
             /* [cardinalities]: create template requirementGroup */
             this.formUtil.createTemplateReqGroups(this.selectionACriteria);
+            this.utilities.createShowECertisTemplate(this.selectionACriteria);
             // console.log(res);
             resolve();
           })
@@ -1642,6 +1657,7 @@ export class DataService {
             this.selectionBCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionBCriteria);
             // console.log(res);
             this.formUtil.createTemplateReqGroups(this.selectionBCriteria);
+            this.utilities.createShowECertisTemplate(this.selectionBCriteria);
             resolve();
           })
           .catch(err => {
@@ -1661,6 +1677,7 @@ export class DataService {
             // console.log(this.selectionCCriteriaForm);
             // console.log(res);
             this.formUtil.createTemplateReqGroups(this.selectionCCriteria);
+            this.utilities.createShowECertisTemplate(this.selectionCCriteria);
             resolve();
           })
           .catch(err => {
@@ -1677,6 +1694,7 @@ export class DataService {
             this.selectionDCriteria = res;
             this.selectionDCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionDCriteria);
             this.formUtil.createTemplateReqGroups(this.selectionDCriteria);
+            this.utilities.createShowECertisTemplate(this.selectionDCriteria);
             // console.log(res);
             resolve();
           })
@@ -2111,6 +2129,7 @@ export class DataService {
       .then(res => {
         console.log('ECertis Data for EU id: ' + euID);
         criterion.subCriterionList = res.map(x => ({...x}));
+        this.utilities.toggleECertis(euID);
         console.log(criterion);
       })
       .catch(err => {
