@@ -27,6 +27,8 @@ import {environment} from '../../environments/environment';
 import {Language} from '../model/language.model';
 import {UtilitiesService} from './utilities.service';
 import {CodeList} from '../model/codeList.model';
+import {ECertisCriterion} from '../model/eCertisCriterion.model';
+import {FullCriterion} from '../model/fullCriterion.model';
 
 // import {DataService} from '../services/data.service';
 
@@ -91,6 +93,33 @@ export class ApicallService {
   get_financialRatioType() {
     return this.http.get<CodeList[]>(environment.apiUrl + 'v2/codelists/FinancialRatioType/lang/'
       + this.utilities.selectedLang).toPromise();
+  }
+
+
+  /* eCertis national criteria */
+
+  getECertisData(criterion: FullCriterion, euID: string, countryCode: string, language: string): Promise<ECertisCriterion[]> {
+    if (!this.utilities.isEmpty(criterion.subCriterionList)) {
+      return Promise.resolve(criterion.subCriterionList);
+    } else {
+      return this.get_eCertisCriteria(euID, countryCode, language)
+        .then(res => {
+          criterion.subCriterionList = res.map(x => ({...x}));
+          return Promise.resolve(criterion.subCriterionList);
+        }).catch(err => {
+          console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.utilities.openSnackBar(message, action);
+          return Promise.reject(err);
+        });
+    }
+  }
+
+  get_eCertisCriteria(euId: string, countryCode: string, language: string) {
+    return this.http.get<ECertisCriterion[]>(environment.apiUrl + this.version + '/' + this.utilities.qualificationApplicationType +
+      '/criteria/eCertisData/' + euId + '/country/' + countryCode + '/lang/' + language).toPromise();
   }
 
 

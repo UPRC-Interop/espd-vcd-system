@@ -22,6 +22,7 @@ import {ValidationService} from '../services/validation.service';
 import {BaseStep} from '../base/base-step';
 import {WizardSteps} from '../base/wizard-steps.enum';
 import {ExportType} from '../export/export-type.enum';
+import {UtilitiesService} from '../services/utilities.service';
 
 @Component({
   selector: 'app-finish-eo',
@@ -43,7 +44,8 @@ export class FinishEoComponent implements OnInit, BaseStep {
   constructor(
     public dataService: DataService,
     private formUtil: FormUtilService,
-    private validationService: ValidationService
+    private validationService: ValidationService,
+    public utilities: UtilitiesService
   ) {
   }
 

@@ -116,7 +116,22 @@
             </div>
             <div class="eCertis">
               <!--<h5>eCertis Information ...</h5>-->
-              <div class="eCertDesc" translate>espd.ecertis.404</div>
+              <ng-container *ngIf="!this.utilities.eCertisTemplate[cr.id]">
+                <button mat-raised-button
+                        (click)="this.dataService.onGetECertisData(cr, cr.id, this.dataService.getCountryCode(), this.utilities.selectedLang)">More Information
+                </button>
+              </ng-container>
+              <ng-container *ngIf="cr.subCriterionList.length !== 0 && this.utilities.eCertisTemplate[cr.id]">
+                <div *ngIf="!this.utilities.isEmpty(cr.subCriterionList)">
+                  <div *ngFor="let nationalCriterion of cr.subCriterionList; let i=index" class="ecertis-crit">
+                    <app-e-certis-criterion [criterion]="nationalCriterion"></app-e-certis-criterion>
+                  </div>
+                </div>
+                <ng-container *ngIf="this.utilities.eCertisTemplate[cr.id]">
+                  <button mat-raised-button (click)="this.utilities.toggleECertis(cr.id)">Less Information</button>
+                </ng-container>
+              </ng-container>
+              <!--<div class="eCertDesc" translate>espd.ecertis.404</div>-->
             </div>
           </div>
           <div class="answer">
@@ -155,7 +170,22 @@
             </div>
             <div class="eCertis">
               <!--<h5>eCertis Information ...</h5>-->
-              <div class="eCertDesc" translate>espd.ecertis.404</div>
+              <ng-container *ngIf="!this.utilities.eCertisTemplate[cr.id]">
+                <button mat-raised-button
+                        (click)="this.dataService.onGetECertisData(cr, cr.id, this.dataService.getCountryCode(), this.utilities.selectedLang)">More Information
+                </button>
+              </ng-container>
+              <ng-container *ngIf="cr.subCriterionList.length !== 0 && this.utilities.eCertisTemplate[cr.id]">
+                <div *ngIf="!this.utilities.isEmpty(cr.subCriterionList)">
+                  <div *ngFor="let nationalCriterion of cr.subCriterionList; let i=index" class="ecertis-crit">
+                    <app-e-certis-criterion [criterion]="nationalCriterion"></app-e-certis-criterion>
+                  </div>
+                </div>
+                <ng-container *ngIf="this.utilities.eCertisTemplate[cr.id]">
+                  <button mat-raised-button (click)="this.utilities.toggleECertis(cr.id)">Less Information</button>
+                </ng-container>
+              </ng-container>
+              <!--<div class="eCertDesc" translate>espd.ecertis.404</div>-->
             </div>
           </div>
           <div class="answer">
@@ -242,7 +272,22 @@
               </div>
               <div class="eCertis">
                 <!--<h5>eCertis Information ...</h5>-->
-                <div class="eCertDesc">espd.ecertis.404</div>
+                <ng-container *ngIf="!this.utilities.eCertisTemplate[cr.id]">
+                  <button mat-raised-button
+                          (click)="this.dataService.onGetECertisData(cr, cr.id, this.dataService.getCountryCode(), this.utilities.selectedLang)">More Information
+                  </button>
+                </ng-container>
+                <ng-container *ngIf="cr.subCriterionList.length !== 0 && this.utilities.eCertisTemplate[cr.id]">
+                  <div *ngIf="!this.utilities.isEmpty(cr.subCriterionList)">
+                    <div *ngFor="let nationalCriterion of cr.subCriterionList; let i=index" class="ecertis-crit">
+                      <app-e-certis-criterion [criterion]="nationalCriterion"></app-e-certis-criterion>
+                    </div>
+                  </div>
+                  <ng-container *ngIf="this.utilities.eCertisTemplate[cr.id]">
+                    <button mat-raised-button (click)="this.utilities.toggleECertis(cr.id)">Less Information</button>
+                  </ng-container>
+                </ng-container>
+                <!--<div class="eCertDesc" translate>espd.ecertis.404</div>-->
               </div>
             </div>
             <div class="answer">
@@ -280,7 +325,22 @@
               </div>
               <div class="eCertis">
                 <!--<h5>eCertis Information ...</h5>-->
-                <div class="eCertDesc">espd.ecertis.404</div>
+                <ng-container *ngIf="!this.utilities.eCertisTemplate[cr.id]">
+                  <button mat-raised-button
+                          (click)="this.dataService.onGetECertisData(cr, cr.id, this.dataService.getCountryCode(), this.utilities.selectedLang)">More Information
+                  </button>
+                </ng-container>
+                <ng-container *ngIf="cr.subCriterionList.length !== 0 && this.utilities.eCertisTemplate[cr.id]">
+                  <div *ngIf="!this.utilities.isEmpty(cr.subCriterionList)">
+                    <div *ngFor="let nationalCriterion of cr.subCriterionList; let i=index" class="ecertis-crit">
+                      <app-e-certis-criterion [criterion]="nationalCriterion"></app-e-certis-criterion>
+                    </div>
+                  </div>
+                  <ng-container *ngIf="this.utilities.eCertisTemplate[cr.id]">
+                    <button mat-raised-button (click)="this.utilities.toggleECertis(cr.id)">Less Information</button>
+                  </ng-container>
+                </ng-container>
+                <!--<div class="eCertDesc" translate>espd.ecertis.404</div>-->
               </div>
             </div>
             <div class="answer">

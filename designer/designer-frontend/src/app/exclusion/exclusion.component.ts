@@ -20,6 +20,7 @@ import {NgForm} from '@angular/forms';
 import {ValidationService} from '../services/validation.service';
 import {BaseStep} from '../base/base-step';
 import {WizardSteps} from '../base/wizard-steps.enum';
+import {UtilitiesService} from '../services/utilities.service';
 
 @Component({
   selector: 'app-exclusion',
@@ -32,7 +33,8 @@ export class ExclusionComponent implements OnInit, BaseStep {
 
   constructor(
     public dataService: DataService,
-    private validationService: ValidationService
+    private validationService: ValidationService,
+    public utilities: UtilitiesService
   ) {
   }
 

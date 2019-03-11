@@ -18,6 +18,7 @@ import {LegislationReference} from './legislationReference.model';
 import {RequirementGroup} from './requirementGroup.model';
 import {RequirementResponse} from './requirement-response.model';
 import {PropertyKeyMap} from './propertyKeyMap.model';
+import {ECertisCriterion} from './eCertisCriterion.model';
 
 export class ExclusionCriteria {
   type: string;
@@ -29,6 +30,7 @@ export class ExclusionCriteria {
   requirementGroups: RequirementGroup[];
   id: string;
   uuid: string;
+  subCriterionList?: ECertisCriterion[];
   criterionGroup: string;
   ruleset?: string;
   response?: RequirementResponse;

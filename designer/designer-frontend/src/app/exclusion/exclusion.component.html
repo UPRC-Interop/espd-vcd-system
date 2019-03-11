@@ -46,7 +46,22 @@
 
          <div class="eCertis">
            <!--<h5>eCertis Information ...</h5>-->
-           <div class="eCertDesc" translate>espd.ecertis.404</div>
+           <ng-container *ngIf="!this.utilities.eCertisTemplate[criteria.id]">
+             <button mat-raised-button
+                     (click)="this.dataService.onGetECertisData(criteria, criteria.id, this.dataService.getCountryCode(), this.utilities.selectedLang)">More Information
+             </button>
+           </ng-container>
+           <ng-container *ngIf="criteria.subCriterionList.length !== 0 && this.utilities.eCertisTemplate[criteria.id]">
+             <div *ngIf="!this.utilities.isEmpty(criteria.subCriterionList)">
+               <div *ngFor="let nationalCriterion of criteria.subCriterionList; let i=index" class="ecertis-crit">
+                 <app-e-certis-criterion [criterion]="nationalCriterion"></app-e-certis-criterion>
+               </div>
+             </div>
+             <ng-container *ngIf="this.utilities.eCertisTemplate[criteria.id]">
+               <button mat-raised-button (click)="this.utilities.toggleECertis(criteria.id)">Less Information</button>
+             </ng-container>
+           </ng-container>
+           <!--<div class="eCertDesc" translate>espd.ecertis.404</div>-->
          </div>
          <div *ngIf="dataService.exclusionACriteriaForm">
            <div class="answer">
@@ -81,10 +96,24 @@
                           [disabled]="this.dataService.exclusionBCriteria[i].selected">{{criteria.propertyKeyMap.pk1 | translate}}</mat-checkbox>
             <div class="critDesc">{{criteria.propertyKeyMap.pk2 | translate}}</div>
           </div>
-
           <div class="eCertis">
             <!--<h5>eCertis Information ...</h5>-->
-            <div class="eCertDesc" translate>espd.ecertis.404</div>
+            <ng-container *ngIf="!this.utilities.eCertisTemplate[criteria.id]">
+              <button mat-raised-button
+                      (click)="this.dataService.onGetECertisData(criteria, criteria.id, this.dataService.getCountryCode(), this.utilities.selectedLang)">More Information
+              </button>
+            </ng-container>
+            <ng-container *ngIf="criteria.subCriterionList.length !== 0 && this.utilities.eCertisTemplate[criteria.id]">
+              <div *ngIf="!this.utilities.isEmpty(criteria.subCriterionList)">
+                <div *ngFor="let nationalCriterion of criteria.subCriterionList; let i=index" class="ecertis-crit">
+                  <app-e-certis-criterion [criterion]="nationalCriterion"></app-e-certis-criterion>
+                </div>
+              </div>
+              <ng-container *ngIf="this.utilities.eCertisTemplate[criteria.id]">
+                <button mat-raised-button (click)="this.utilities.toggleECertis(criteria.id)">Less Information</button>
+              </ng-container>
+            </ng-container>
+            <!--<div class="eCertDesc" translate>espd.ecertis.404</div>-->
           </div>
           <div *ngIf="dataService.exclusionBCriteriaForm">
             <div class="answer">
@@ -120,7 +149,22 @@
           </div>
           <div class="eCertis">
             <!--<h5>eCertis Information ...</h5>-->
-            <div class="eCertDesc" translate>espd.ecertis.404</div>
+            <ng-container *ngIf="!this.utilities.eCertisTemplate[criteria.id]">
+              <button mat-raised-button
+                      (click)="this.dataService.onGetECertisData(criteria, criteria.id, this.dataService.getCountryCode(), this.utilities.selectedLang)">More Information
+              </button>
+            </ng-container>
+            <ng-container *ngIf="criteria.subCriterionList.length !== 0 && this.utilities.eCertisTemplate[criteria.id]">
+              <div *ngIf="!this.utilities.isEmpty(criteria.subCriterionList)">
+                <div *ngFor="let nationalCriterion of criteria.subCriterionList; let i=index" class="ecertis-crit">
+                  <app-e-certis-criterion [criterion]="nationalCriterion"></app-e-certis-criterion>
+                </div>
+              </div>
+              <ng-container *ngIf="this.utilities.eCertisTemplate[criteria.id]">
+                <button mat-raised-button (click)="this.utilities.toggleECertis(criteria.id)">Less Information</button>
+              </ng-container>
+            </ng-container>
+            <!--<div class="eCertDesc" translate>espd.ecertis.404</div>-->
           </div>
           <div *ngIf="dataService.exclusionCCriteriaForm">
             <div class="answer">
@@ -156,7 +200,22 @@
           </div>
           <div class="eCertis">
             <!--<h5>eCertis Information ...</h5>-->
-            <div class="eCertDesc" translate>espd.ecertis.404</div>
+            <ng-container *ngIf="!this.utilities.eCertisTemplate[criteria.id]">
+              <button mat-raised-button
+                      (click)="this.dataService.onGetECertisData(criteria, criteria.id, this.dataService.getCountryCode(), this.utilities.selectedLang)">More Information
+              </button>
+            </ng-container>
+            <ng-container *ngIf="criteria.subCriterionList.length !== 0 && this.utilities.eCertisTemplate[criteria.id]">
+              <div *ngIf="!this.utilities.isEmpty(criteria.subCriterionList)">
+                <div *ngFor="let nationalCriterion of criteria.subCriterionList; let i=index" class="ecertis-crit">
+                  <app-e-certis-criterion [criterion]="nationalCriterion"></app-e-certis-criterion>
+                </div>
+              </div>
+              <ng-container *ngIf="this.utilities.eCertisTemplate[criteria.id]">
+                <button mat-raised-button (click)="this.utilities.toggleECertis(criteria.id)">Less Information</button>
+              </ng-container>
+            </ng-container>
+            <!--<div class="eCertDesc" translate>espd.ecertis.404</div>-->
           </div>
           <div *ngIf="dataService.exclusionDCriteriaForm">
             <div class="answer">

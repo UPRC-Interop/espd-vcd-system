@@ -40,8 +40,23 @@
                   <h4>{{cr.propertyKeyMap.pk1 | translate}}</h4>
                   <div class="critDesc">{{cr.propertyKeyMap.pk2 | translate}}</div>
                   <!--<div class="eCertis">-->
-                  <!--<h5>eCertis Information ...</h5>-->
-                  <!--<div class="eCertDesc">no information...</div>-->
+                    <!--&lt;!&ndash;<h5>eCertis Information ...</h5>&ndash;&gt;-->
+                    <!--<ng-container *ngIf="!this.utilities.eCertisTemplate[cr.id]">-->
+                      <!--<button mat-raised-button-->
+                              <!--(click)="this.dataService.onGetECertisData(cr, cr.id, this.dataService.getCountryCode(), this.utilities.selectedLang)">More Information-->
+                      <!--</button>-->
+                    <!--</ng-container>-->
+                    <!--<ng-container *ngIf="cr.subCriterionList.length !== 0 && this.utilities.eCertisTemplate[cr.id]">-->
+                      <!--<div *ngIf="!this.utilities.isEmpty(cr.subCriterionList)">-->
+                        <!--<div *ngFor="let nationalCriterion of cr.subCriterionList; let i=index" class="ecertis-crit">-->
+                          <!--<app-e-certis-criterion [criterion]="nationalCriterion"></app-e-certis-criterion>-->
+                        <!--</div>-->
+                      <!--</div>-->
+                      <!--<ng-container *ngIf="this.utilities.eCertisTemplate[cr.id]">-->
+                        <!--<button mat-raised-button (click)="this.utilities.toggleECertis(cr.id)">Less Information</button>-->
+                      <!--</ng-container>-->
+                    <!--</ng-container>-->
+                    <!--&lt;!&ndash;<div class="eCertDesc" translate>espd.ecertis.404</div>&ndash;&gt;-->
                   <!--</div>-->
                 </div>
               </div>
