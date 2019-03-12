@@ -1,12 +1,12 @@
 /**
  * Copyright 2016-2018 University of Piraeus Research Center
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -18,6 +18,7 @@ package eu.esens.espdvcd.retriever.criteria;
 import com.github.rholder.retry.RetryException;
 import eu.esens.espdvcd.builder.model.ModelFactory;
 import eu.esens.espdvcd.codelist.CodelistsV2;
+import eu.esens.espdvcd.codelist.enums.CountryIdentificationEnum;
 import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
 import eu.esens.espdvcd.model.LegislationReference;
 import eu.esens.espdvcd.model.SelectableCriterion;
@@ -129,6 +130,16 @@ public class CriteriaDataRetrieverImpl implements CriteriaDataRetriever {
     private boolean isIdentificationCodeExist(String code) {
         String codeUpperCase = code.toUpperCase();
         return CodelistsV2.CountryIdentification.containsId(codeUpperCase);
+    }
+
+    /**
+     * Check if the given identification code, exist in the codelists.
+     *
+     * @param code The identification code (ISO 639-1:2002)
+     * @return true if exists, false if not
+     */
+    private boolean isIdentificationCodeExist(CountryIdentificationEnum code) {
+        return CodelistsV2.CountryIdentification.containsId(code.name());
     }
 
     /**
