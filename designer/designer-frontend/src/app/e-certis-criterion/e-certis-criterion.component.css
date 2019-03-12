@@ -1,0 +1,19 @@
+.ecertis-wrap {
+  display: inline-block;
+}
+.ecertis-wrap>.ecertis-text {
+  display: inline-block;
+  margin-left: 25px;
+}
+.ecertis-wrap>.ecertis-name {
+  font-weight: bold;
+  display: inline;
+}
+
+.evidence {
+  font-size: small;
+}
+
+.evidence-wrap>.evidence-text {
+  text-indent: 50px;
+}
