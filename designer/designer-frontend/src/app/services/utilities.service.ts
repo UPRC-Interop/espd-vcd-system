@@ -189,6 +189,15 @@ export class UtilitiesService {
     this.eCertisTemplate[id] = !this.eCertisTemplate[id];
   }
 
+  resetSubCriterionList(criteria: FullCriterion[]) {
+     criteria.forEach(cr => {
+       if (cr.subCriterionList.length > 0) {
+         cr.subCriterionList.length = 0;
+         this.eCertisTemplate[cr.id] = false;
+       }
+     });
+    }
+
 
   /* ============================ snackbar ===================================== */
   openSnackBar(message: string, action: string) {

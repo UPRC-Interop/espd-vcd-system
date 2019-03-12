@@ -1761,6 +1761,9 @@ export class DataService {
     const lang = 'ESPD_' + this.selectedLanguage;
     console.log(lang);
     this.translate.use(lang);
+    if (this.exclusionACriteria !== null) {
+      this.utilities.resetSubCriterionList(this.exclusionACriteria);
+    }
     this.codelist.reloadCodelists();
     // this.AddLanguages();
   }

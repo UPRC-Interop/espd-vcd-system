@@ -69,9 +69,10 @@ export class RootComponent implements OnInit, OnChanges {
 
   onLanguageSelection(language: string) {
     // console.log(language);
-    this.dataService.switchLanguage(language);
+
     this.utilities.initLanguage = false;
     this.utilities.start = true;
+    this.dataService.switchLanguage(language);
   }
 
   private validateSteps(event) {
