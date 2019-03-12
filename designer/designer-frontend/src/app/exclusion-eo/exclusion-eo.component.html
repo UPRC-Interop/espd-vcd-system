@@ -49,7 +49,8 @@
                 <!--<h5>eCertis Information ...</h5>-->
                 <ng-container *ngIf="!this.utilities.eCertisTemplate[cr.id]">
                   <button mat-raised-button
-                          (click)="this.dataService.onGetECertisData(cr, cr.id, this.dataService.getCountryCode(), this.utilities.selectedLang)">More Information
+                          (click)="this.dataService.onGetECertisData(cr, cr.id, this.dataService.getCountryCode(), this.utilities.selectedLang)">
+                    {{'espd.ecertis.more.information' | translate}}
                   </button>
                 </ng-container>
                 <ng-container *ngIf="cr.subCriterionList.length !== 0 && this.utilities.eCertisTemplate[cr.id]">
@@ -59,7 +60,7 @@
                     </div>
                   </div>
                   <ng-container *ngIf="this.utilities.eCertisTemplate[cr.id]">
-                    <button mat-raised-button (click)="this.utilities.toggleECertis(cr.id)">Less Information</button>
+                    <button mat-raised-button (click)="this.utilities.toggleECertis(cr.id)">{{'espd.ecertis.less.information' | translate}}</button>
                   </ng-container>
                 </ng-container>
                 <!--<div class="eCertDesc" translate>espd.ecertis.404</div>-->
@@ -107,7 +108,8 @@
               <!--<h5>eCertis Information ...</h5>-->
               <ng-container *ngIf="!this.utilities.eCertisTemplate[cr.id]">
                 <button mat-raised-button
-                        (click)="this.dataService.onGetECertisData(cr, cr.id, this.dataService.getCountryCode(), this.utilities.selectedLang)">More Information
+                        (click)="this.dataService.onGetECertisData(cr, cr.id, this.dataService.getCountryCode(), this.utilities.selectedLang)">
+                  {{'espd.ecertis.more.information' | translate}}
                 </button>
               </ng-container>
               <ng-container *ngIf="cr.subCriterionList.length !== 0 && this.utilities.eCertisTemplate[cr.id]">
@@ -117,7 +119,7 @@
                   </div>
                 </div>
                 <ng-container *ngIf="this.utilities.eCertisTemplate[cr.id]">
-                  <button mat-raised-button (click)="this.utilities.toggleECertis(cr.id)">Less Information</button>
+                  <button mat-raised-button (click)="this.utilities.toggleECertis(cr.id)">{{'espd.ecertis.less.information' | translate}}</button>
                 </ng-container>
               </ng-container>
               <!--<div class="eCertDesc" translate>espd.ecertis.404</div>-->
@@ -161,7 +163,8 @@
               <!--<h5>eCertis Information ...</h5>-->
               <ng-container *ngIf="!this.utilities.eCertisTemplate[cr.id]">
                 <button mat-raised-button
-                        (click)="this.dataService.onGetECertisData(cr, cr.id, this.dataService.getCountryCode(), this.utilities.selectedLang)">More Information
+                        (click)="this.dataService.onGetECertisData(cr, cr.id, this.dataService.getCountryCode(), this.utilities.selectedLang)">
+                  {{'espd.ecertis.more.information' | translate}}
                 </button>
               </ng-container>
               <ng-container *ngIf="cr.subCriterionList.length !== 0 && this.utilities.eCertisTemplate[cr.id]">
@@ -171,7 +174,7 @@
                   </div>
                 </div>
                 <ng-container *ngIf="this.utilities.eCertisTemplate[cr.id]">
-                  <button mat-raised-button (click)="this.utilities.toggleECertis(cr.id)">Less Information</button>
+                  <button mat-raised-button (click)="this.utilities.toggleECertis(cr.id)">{{'espd.ecertis.less.information' | translate}}</button>
                 </ng-container>
               </ng-container>
               <!--<div class="eCertDesc" translate>espd.ecertis.404</div>-->
@@ -214,7 +217,8 @@
               <!--<h5>eCertis Information ...</h5>-->
               <ng-container *ngIf="!this.utilities.eCertisTemplate[cr.id]">
                 <button mat-raised-button
-                        (click)="this.dataService.onGetECertisData(cr, cr.id, this.dataService.getCountryCode(), this.utilities.selectedLang)">More Information
+                        (click)="this.dataService.onGetECertisData(cr, cr.id, this.dataService.getCountryCode(), this.utilities.selectedLang)">
+                  {{'espd.ecertis.more.information' | translate}}
                 </button>
               </ng-container>
               <ng-container *ngIf="cr.subCriterionList.length !== 0 && this.utilities.eCertisTemplate[cr.id]">
@@ -224,7 +228,7 @@
                   </div>
                 </div>
                 <ng-container *ngIf="this.utilities.eCertisTemplate[cr.id]">
-                  <button mat-raised-button (click)="this.utilities.toggleECertis(cr.id)">Less Information</button>
+                  <button mat-raised-button (click)="this.utilities.toggleECertis(cr.id)">{{'espd.ecertis.less.information' | translate}}</button>
                 </ng-container>
               </ng-container>
               <!--<div class="eCertDesc" translate>espd.ecertis.404</div>-->
