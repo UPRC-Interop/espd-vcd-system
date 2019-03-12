@@ -52,6 +52,7 @@
                {{'espd.ecertis.more.information' | translate}}
              </button>
            </ng-container>
+             <div *ngIf="criteria.subCriterionList.length === 0 && this.utilities.eCertisTemplate[criteria.id]" class="eCertDesc" translate>espd.ecertis.404</div>
            <ng-container *ngIf="criteria.subCriterionList.length !== 0 && this.utilities.eCertisTemplate[criteria.id]">
              <div *ngIf="!this.utilities.isEmpty(criteria.subCriterionList)">
                <div *ngFor="let nationalCriterion of criteria.subCriterionList; let i=index" class="ecertis-crit">
@@ -105,6 +106,7 @@
                 {{'espd.ecertis.more.information' | translate}}
               </button>
             </ng-container>
+            <div *ngIf="criteria.subCriterionList.length === 0 && this.utilities.eCertisTemplate[criteria.id]" class="eCertDesc" translate>espd.ecertis.404</div>
             <ng-container *ngIf="criteria.subCriterionList.length !== 0 && this.utilities.eCertisTemplate[criteria.id]">
               <div *ngIf="!this.utilities.isEmpty(criteria.subCriterionList)">
                 <div *ngFor="let nationalCriterion of criteria.subCriterionList; let i=index" class="ecertis-crit">
@@ -157,6 +159,7 @@
                 {{'espd.ecertis.more.information' | translate}}
               </button>
             </ng-container>
+            <div *ngIf="criteria.subCriterionList.length === 0 && this.utilities.eCertisTemplate[criteria.id]" class="eCertDesc" translate>espd.ecertis.404</div>
             <ng-container *ngIf="criteria.subCriterionList.length !== 0 && this.utilities.eCertisTemplate[criteria.id]">
               <div *ngIf="!this.utilities.isEmpty(criteria.subCriterionList)">
                 <div *ngFor="let nationalCriterion of criteria.subCriterionList; let i=index" class="ecertis-crit">
@@ -209,6 +212,7 @@
                 {{'espd.ecertis.more.information' | translate}}
               </button>
             </ng-container>
+            <div *ngIf="criteria.subCriterionList.length === 0 && this.utilities.eCertisTemplate[criteria.id]" class="eCertDesc" translate>espd.ecertis.404</div>
             <ng-container *ngIf="criteria.subCriterionList.length !== 0 && this.utilities.eCertisTemplate[criteria.id]">
               <div *ngIf="!this.utilities.isEmpty(criteria.subCriterionList)">
                 <div *ngFor="let nationalCriterion of criteria.subCriterionList; let i=index" class="ecertis-crit">
