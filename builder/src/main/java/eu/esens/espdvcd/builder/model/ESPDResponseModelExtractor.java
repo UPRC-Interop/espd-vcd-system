@@ -37,6 +37,7 @@ import eu.espd.schema.v2.v210.commonaggregate.TenderingCriterionType;
 import eu.espd.schema.v2.v210.qualificationapplicationresponse.QualificationApplicationResponseType;
 
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -408,7 +409,8 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
                 PercentageResponse percentageResp = new PercentageResponse();
                 if (responseType.getResponseValue().get(0).getResponseQuantity() != null &&
                         responseType.getResponseValue().get(0).getResponseQuantity().getValue() != null) {
-                    percentageResp.setPercentage(responseType.getResponseValue().get(0).getResponseQuantity().getValue());
+                    percentageResp.setPercentage(responseType.getResponseValue().get(0).getResponseQuantity().getValue()
+                            .multiply(BigDecimal.valueOf(100))); // ESPD-46
                 }
                 applyValidatedCriterionPropertyID(responseType.getValidatedCriterionPropertyID(), percentageResp);
                 applyConfidentialityLevelCode(responseType.getConfidentialityLevelCode(), percentageResp);
