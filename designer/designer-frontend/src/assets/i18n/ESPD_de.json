@@ -415,7 +415,7 @@
    "espd.crit.reasons": "Gründe aus denen sie nicht registriert sind",
    "espd.crit.ave.period": "Durchschnitt für die benötigte Periode",
    "espd.crit.add.information": "Zusätzliche Informationen",
-   "espd.crit.ratio": "Bitte geben sie ihr Verhältnis an ",
+   "espd.crit.provide.ratio": "Bitte geben sie ihr Verhältnis an ",
    "espd.crit.obtain.minimum": "Als Wirtschaftsteilnehmer werde ich mich dazu verpflichten den Mindestbetrag zu erhalten",
    "espd.crit.exempt": "Ich bin befreit",
    "espd.crit.rating": "Bewertung",
@@ -446,6 +446,7 @@
    "espd.crit.allow.checks": "Sind Schecks erlaubt?",
    "espd.crit.describe.educational": "Bitte beschreiben Sie die Bildungs- oder Berufsqualifikation",
    "espd.crit.esco.code": "Wenn möglich, bitte den ESCO-Code dieser Qualifikation angeben",
+   "espd.crit.esco.description": "Wenn möglich, bitte beschreiben sie die ESCO Qualifikation",
    "espd.crit.qualification.name": "Name der Qualifikation",
    "espd.crit.qualification.number": "Qualifikationsnummer",
    "espd.crit.qualification.issuing.date": "Ausstellungsdatum der Qualifikation",
@@ -550,8 +551,6 @@
    "espd.ecertis.legislation_article": "Artikel",
    "espd.ecertis.national_mapping": "eCertis Nationales Mapping",
    "espd.ecertis.show": "eCertis Daten anzeigen",
-   "espd.part1.info.procedure": "Art des Verfahrens",
-   "espd.part1.fax": "Fax:",
    "espd.mapping.prefill_suggestion": "Wir schlagen vor {0} als Nachweis für dieses Kriterium zu nutzen",
    "espd.mapping.prefill_no_fitting_suggestions_found": "Für dieses Kriterium wurden keine passenden Dokumente gefunden.",
    "espd.common.warn.browser.pdferror": "Ihr Browser ist nicht in der Lage PDF anzuzeigen, Klicken sie diesen Link um das PDF herunterzuladen.",
@@ -607,5 +606,8 @@
    "espd.landing_page.learnMore": "Erfahren Sie mehr über die EEE und die Präqualifikation für Bauleistungen.",
    "espd.landing_page.directLinks_first_ESPD": "Melden sie sich an um eine EEE erstellen zu können.",
    "espd.landing_page.directLinks_second_ESPD": "Klicken sie hier für freigen Zugang zu unserem EEE Werkzeug",
-   "espd.landing_page.directLinks_second_intra": "Anmeldung als Nutzer oder um die Plattform zu testen."
+   "espd.landing_page.directLinks_second_intra": "Anmeldung als Nutzer oder um die Plattform zu testen.",
+   "espd.crit.type.id": "Art der ID",
+   "espd.part4.crit.weighting.allocated": "Gewichtung, die diesem Kriterium zugeordnet wurde",
+   "espd.part4.crit.weigthing.information": "Bitte stellen sie ergänzende Informationen zur Bewertung dieses Kriteriums zur Verfügung"
 }

@@ -415,7 +415,7 @@
    "espd.crit.reasons": "Reasons why your are not registered",
    "espd.crit.ave.period": "Average for the required period",
    "espd.crit.add.information": "Additional information",
-   "espd.crit.ratio": "Please provide your ratio",
+   "espd.crit.provide.ratio": "Please provide your ratio",
    "espd.crit.obtain.minimum": "As an EO I will commit to obtain the minimum amount required",
    "espd.crit.exempt": "I am exempt",
    "espd.crit.rating": "Rating",
@@ -446,6 +446,7 @@
    "espd.crit.allow.checks": "Do you allow checks?",
    "espd.crit.describe.educational": "Please describe the educational or professional qualification",
    "espd.crit.esco.code": "If possible please indicate the ESCO code of this qualification",
+   "espd.crit.esco.description": "If possible please describe the ESCO qualification",
    "espd.crit.qualification.name": "Qualification name",
    "espd.crit.qualification.number": "Qualification number",
    "espd.crit.qualification.issuing.date": "Qualification issuing date",
@@ -550,8 +551,6 @@
    "espd.ecertis.legislation_article": "Article",
    "espd.ecertis.national_mapping": "eCertis National Mapping",
    "espd.ecertis.show": "Show eCertis-Data",
-   "espd.part1.info.procedure": "Type of Procedure",
-   "espd.part1.fax": "Fax:",
    "espd.mapping.prefill_suggestion": "We suggest to use {0} as evidence for this criterion.",
    "espd.mapping.prefill_no_fitting_suggestions_found": "No fitting documents found for this criterion.",
    "espd.common.warn.browser.pdferror": "Your Browser can't preview PDF. Click the following Link to download the PDF.",
@@ -607,5 +606,8 @@
    "espd.landing_page.learnMore": "Learn more about the EPSD and the prequalification for construction services.",
    "espd.landing_page.directLinks_first_ESPD": "Login to create an ESPD",
    "espd.landing_page.directLinks_second_ESPD": "Click here for free access to our ESPD tool",
-   "espd.landing_page.directLinks_second_intra": "Login as customer or test the platform."
+   "espd.landing_page.directLinks_second_intra": "Login as customer or test the platform.",
+   "espd.crit.type.id": "Type of ID",
+   "espd.part4.crit.weighting.allocated": "Weight allocated to this criterion",
+   "espd.part4.crit.weigthing.information": "Provide complementary information about the evaluation of the criterion"
 }

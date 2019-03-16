@@ -267,7 +267,7 @@
                         [value]=true>{{"espd.gui.yes" | translate}}
       </mat-radio-button>
       <mat-radio-button color="primary"
-                        [value]=false>{{"epsd.gui.no" | translate}}
+                        [value]=false>{{"espd.gui.no" | translate}}
       </mat-radio-button>
     </mat-radio-group>
 
@@ -316,12 +316,12 @@
       <!--<label [attr.for]="req.uuid">{{req.description}}</label>-->
       <!--<br>-->
       <mat-form-field>
-        <input matInput [formControlName]="req.uuid" [id]="req.uuid" placeholder="{{req.propertyKeyMap.pk1 | translate}}">
+        <input matInput [formControlName]="req.uuid" [id]="req.uuid" placeholder="{{'espd.crit.entity.ID' | translate}}">
       </mat-form-field>
       <!--<label [attr.for]="req.uuid+'eoidtype'">Type of ID: </label>-->
       <!--<br>-->
       <mat-form-field>
-        <mat-select [formControlName]="req.uuid+'eoidtype'" [id]="req.uuid+'eoidtype'">
+        <mat-select [formControlName]="req.uuid+'eoidtype'" [id]="req.uuid+'eoidtype'" placeholder="{{'espd.crit.type.id' | translate}}">
           <mat-option>None</mat-option>
           <mat-option *ngFor="let type of codelist.eoIDType" [value]="type.code">{{type.code}} ( {{type.name}} )</mat-option>
         </mat-select>
