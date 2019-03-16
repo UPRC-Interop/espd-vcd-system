@@ -574,7 +574,9 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
                 ResponseValueType perRvType = createResponseValueType();
                 perRvType.setResponseQuantity(new ResponseQuantityType());
                 perRvType.getResponseQuantity().setUnitCode("PERCENTAGE");
-                perRvType.getResponseQuantity().setValue(((PercentageResponse) response).getPercentage());
+                perRvType.getResponseQuantity().setValue(((PercentageResponse) response)
+                        .getPercentage()
+                        .divide(BigDecimal.valueOf(100)));  // ESPD-46
                 tcrType.getResponseValue().add(perRvType);
                 return tcrType;
 

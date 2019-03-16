@@ -18,13 +18,11 @@ package eu.esens.espdvcd.model.retriever;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-
-import java.util.List;
-
 import eu.esens.espdvcd.model.util.CustomStringValueDeserializer;
 import eu.esens.espdvcd.model.util.CustomTextValueDeserializer;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
