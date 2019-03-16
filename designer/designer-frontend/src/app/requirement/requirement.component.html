@@ -297,12 +297,12 @@
         <!--<label [attr.for]="req.uuid+'weight'">Weight allocated to this criterion: </label>-->
         <!--<br>-->
         <mat-form-field>
-          <input matInput [formControlName]="req.uuid+'weight'" [id]="req.uuid+'weight'" placeholder="Weight allocated to this criterion ">
+          <input matInput [formControlName]="req.uuid+'weight'" [id]="req.uuid+'weight'" placeholder="{{'espd.part4.crit.weighting.allocated' | translate}}">
         </mat-form-field>
         <!--<label [attr.for]="req.uuid+'evaluationMethodDescription'">Provide complementary information about the evaluation of the criterion: </label>-->
         <!--<br>-->
         <mat-form-field>
-          <textarea matInput placeholder="Provide complementary information about the evaluation of the criterion"
+          <textarea matInput placeholder="{{'espd.part4.crit.weigthing.information' | translate}}"
                     [formControlName]="req.uuid+'evaluationMethodDescription'" [id]="req.uuid+'evaluationMethodDescription'"
                     id="shortDesc" cols="30" rows="10">
           </textarea>
