@@ -27,6 +27,7 @@ import org.apache.poi.util.IOUtils;
 import spark.Service;
 
 import javax.servlet.MultipartConfigElement;
+import javax.servlet.ServletException;
 import javax.servlet.http.Part;
 import javax.xml.bind.UnmarshalException;
 import java.io.File;
@@ -63,11 +64,16 @@ public class ImportESPDEndpoint extends Endpoint {
                     if (rq.contentType().contains("multipart/form-data")) {
                         MultipartConfigElement multipartConfigElement = new MultipartConfigElement(
                                 "file-uploads",
-                                1024 * 1024 * 2,
-                                1024 * 1024 * 3,
+                                1024 * 1024 * Config.getMaxFileSize(),
+                                1024 * 1024 * Config.getMaxFileSize(),
                                 0);
                         rq.raw().setAttribute("org.eclipse.jetty.multipartConfig", multipartConfigElement);
-                        Collection<Part> parts = rq.raw().getParts();
+                        Collection<Part> parts;
+                        try {
+                            parts = rq.raw().getParts();
+                        } catch (IllegalStateException e) {
+                            return Errors.standardError(422, "Your file is too large, please upload a file up to 2MB.");
+                        }
                         if (parts.iterator().hasNext()) {
                             Part part = parts.iterator().next();
                             File tempFile = File.createTempFile("espd-file", ".tmp");
@@ -84,6 +90,8 @@ public class ImportESPDEndpoint extends Endpoint {
 
                             if (part.getSubmittedFileName().endsWith("json")) {
                                 return new String(IOUtils.toByteArray(part.getInputStream()));
+                            }else if (!(part.getSubmittedFileName().endsWith("xml") && part.getContentType().contains("xml"))){
+                                return Errors.standardError(422, "Please upload an XML file.");
                             }
                             writeDumpedFile(tempFile);
                             try {

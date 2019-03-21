@@ -158,4 +158,26 @@ public class Config {
         }
         return Boolean.parseBoolean(prop.getProperty("espd.designer.allowFraming"));
     }
+
+    public static boolean isSelectionCriteriaPreselected() {
+        if (instance == null) {
+            try {
+                instance = new Config();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return Boolean.parseBoolean(prop.getProperty("espd.designer.criteria.selection.selected"));
+    }
+
+    public static int getMaxFileSize() {
+        if (instance == null) {
+            try {
+                instance = new Config();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return Integer.parseInt(prop.getProperty("espd.designer.maxFileSizeUpload"));
+    }
 }

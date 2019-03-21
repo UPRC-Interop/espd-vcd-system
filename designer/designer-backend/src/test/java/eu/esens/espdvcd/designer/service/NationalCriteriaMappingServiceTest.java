@@ -1,9 +1,13 @@
 package eu.esens.espdvcd.designer.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.esens.espdvcd.model.SelectableCriterion;
+import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
 import eu.esens.espdvcd.retriever.criteria.CriteriaDataRetriever;
 import eu.esens.espdvcd.retriever.criteria.CriteriaDataRetrieverBuilder;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
+import org.apache.poi.ss.formula.functions.Na;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -48,5 +52,14 @@ public class NationalCriteriaMappingServiceTest {
                     "§ 129a StGB (Bildung terroristischer Vereinigungen) oder " +
                     "§ 129b StGB (kriminelle und terroristische Vereinigungen im Ausland),\"\n", criterion.getDescription());
         });
+    }
+
+    @Test
+    public void getEvidences() throws RetrieverException, JsonProcessingException {
+        NationalCriteriaMappingService service = NationalCriteriaMappingService.getInstance();
+        System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(service.getNationalCriteria("14df34e8-15a9-411c-8c05-8c051693e277", "DE")));
+
+        List<Evidence> evidences = service.getTranslatedEvidences("14df34e8-15a9-411c-8c05-8c051693e277", "EL");
+        System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(evidences));
     }
 }

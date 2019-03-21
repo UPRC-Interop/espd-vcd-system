@@ -13,16 +13,17 @@ public final class ServerUtil {
     /**
      * Configures static file hosting
      * Sets the location and the security headers
+     *
      * @param spark Current Spark instance
      */
-    public static void configureStaticFiles(Service spark){
+    public static void configureStaticFiles(Service spark) {
         spark.staticFiles.location("/public");
-        spark.staticFiles.headers(getSecurityHeaders());
     }
 
     /**
      * Enables Cross Origin Requests
      * While in production this should be disabled
+     *
      * @param spark Current Spark instance
      */
     public static void enableCORS(Service spark) {
@@ -48,6 +49,7 @@ public final class ServerUtil {
 
     /**
      * Redirect URLs with trailing slashes back to the "unslashed" routes
+     *
      * @param spark Current Spark instance
      */
     public static void dropTrailingSlashes(Service spark) {
@@ -60,18 +62,21 @@ public final class ServerUtil {
 
     /**
      * Adds headers to all routes
+     *
      * @param spark Current Spark instance
      */
     public static void addSecurityHeaders(Service spark) {
         spark.before(((request, response) -> getSecurityHeaders().forEach(response::header)));
+        spark.staticFiles.headers(getSecurityHeaders());
     }
 
     /**
      * Gets the security headers
+     *
      * @return Header Map
      */
-    private static Map<String, String> getSecurityHeaders(){
-        if(securityHeaders == null){
+    private static Map<String, String> getSecurityHeaders() {
+        if (securityHeaders == null) {
             initHeaderMap();
         }
         return securityHeaders;
@@ -80,7 +85,7 @@ public final class ServerUtil {
     /**
      * Lazy initialization for the header HashMap
      */
-    private static void initHeaderMap(){
+    private static void initHeaderMap() {
         securityHeaders = new HashMap<>();
 
         String contentSecurityPolicyHeaders = "default-src 'self'; " +
@@ -89,11 +94,10 @@ public final class ServerUtil {
                 "object-src 'none'; " +
                 "script-src 'self' 'unsafe-inline' 'unsafe-eval' ; " +
                 "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com";
-        if(Config.isFramingAllowed()){
+        if (Config.isFramingAllowed()) {
             securityHeaders.put("Content-Security-Policy", contentSecurityPolicyHeaders);
-        }
-        else {
-            securityHeaders.put("Content-Security-Policy", contentSecurityPolicyHeaders+ " ; frame-ancestors 'none'");
+        } else {
+            securityHeaders.put("Content-Security-Policy", contentSecurityPolicyHeaders + " ; frame-ancestors 'none'");
             securityHeaders.put("X-Frame-Options", "DENY");
         }
         securityHeaders.put("X-XSS-Protection", "1; mode=block");

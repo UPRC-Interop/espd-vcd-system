@@ -36,7 +36,7 @@ public final class CriteriaUtil {
             return 0;
     }
 
-    public static ESPDRequest removeSelectionCriteriaIfAlpha(ESPDRequest model) {
+    public static ESPDRequest removeSelectionCriteriaIfAlpha(final ESPDRequest model) {
         model.getFullCriterionList()
                 .stream()
                 .filter(cr -> cr
@@ -54,11 +54,11 @@ public final class CriteriaUtil {
         return model;
     }
 
-    public static List<SelectableCriterion> markAsSelected(List<SelectableCriterion> criteria) {
+    public static List<SelectableCriterion> markAsSelected(final List<SelectableCriterion> criteria) {
         return criteria.stream()
                 .peek(selectableCriterion -> {
                     if (selectableCriterion.getTypeCode().matches(CriteriaType.SELECTION_NO_ALPHA.getRegex())) {
-                        selectableCriterion.setSelected(false);
+                        selectableCriterion.setSelected(Config.isSelectionCriteriaPreselected());
                     } else {
                         selectableCriterion.setSelected(true);
                     }

@@ -30,6 +30,7 @@ import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.File;
@@ -69,6 +70,7 @@ public class ExportESPDServiceTest {
         writer = new ObjectMapper().writer().withDefaultPrettyPrinter();
     }
 
+    @Ignore
     @Test
     public void testCriterionNumberAfterImport() throws Exception {
         File espdRequestFile = new File(ExportESPDServiceTest.class
