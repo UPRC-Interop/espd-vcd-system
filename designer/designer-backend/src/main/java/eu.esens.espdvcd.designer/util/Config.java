@@ -60,7 +60,7 @@ public class Config {
             return Integer.parseInt(prop.getProperty("espd.designer.port"));
         } catch (NumberFormatException e) {
             Logger.getLogger(Config.class.getName())
-                    .severe("Could not load port setting from config.properties, defaulting to 8080.");
+                    .warning("Could not load port setting from config.properties, defaulting to 8080.");
             return 8080;
         }
     }
@@ -88,7 +88,7 @@ public class Config {
             return EULanguageCodeEnum.valueOf(prop.getProperty("espd.designer.lang").toUpperCase());
         } catch (IllegalArgumentException e) {
             Logger.getLogger(Config.class.getName())
-                    .severe("Could not load language setting from config.properties, defaulting to EN.");
+                    .warning("Could not load language setting from config.properties, defaulting to EN.");
             return EULanguageCodeEnum.EN;
         }
     }
@@ -178,6 +178,12 @@ public class Config {
                 e.printStackTrace();
             }
         }
-        return Integer.parseInt(prop.getProperty("espd.designer.maxFileSizeUpload"));
+        try {
+            return Integer.parseInt(prop.getProperty("espd.designer.maxFileSizeUpload"));
+        } catch (NumberFormatException e) {
+            Logger.getLogger(Config.class.getName())
+                    .warning("Defaulting to 4MB file upload limit");
+            return 4;
+        }
     }
 }
