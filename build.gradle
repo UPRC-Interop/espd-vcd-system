@@ -123,8 +123,8 @@ configure(subprojects)
         }
 
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '3.5'
+wrapper {
+    gradleVersion = '5.3'
 }
 
 task licenseFormatDesignerFrontend(type: com.hierynomus.gradle.license.tasks.LicenseFormat) {
