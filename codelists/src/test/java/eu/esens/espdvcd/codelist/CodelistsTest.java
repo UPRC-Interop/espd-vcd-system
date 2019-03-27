@@ -1,12 +1,12 @@
 /**
- * Copyright 2016-2018 University of Piraeus Research Center
- * <p>
+ * Copyright 2016-2019 University of Piraeus Research Center
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -48,7 +48,7 @@ public class CodelistsTest {
     public void testDataMapV2() {
         // valid input
         Assert.assertEquals("Submission for all lots", CodelistsV2.BidType.getDataMap().get("LOT_ALL"));
-        Assert.assertEquals("Υποβολή για όλες τις παρτίδες", CodelistsV2.BidType.getDataMap("ell").get("LOT_ALL"));
+        Assert.assertEquals("Υποβολή για �?λες τις πα�?τίδες", CodelistsV2.BidType.getDataMap("ell").get("LOT_ALL"));
         // Invalid input
         Assert.assertEquals(null, CodelistsV2.BidType.getDataMap().get(null));
         Assert.assertEquals(null, CodelistsV2.BidType.getDataMap().get("lala"));
@@ -72,7 +72,7 @@ public class CodelistsTest {
         Assert.assertEquals("Greece", CodelistsV2.CountryIdentification.getValueForId("GR"));
         Assert.assertEquals("Submission for all lots", CodelistsV2.BidType.getValueForId("LOT_ALL"));
         Assert.assertEquals("Greece", CodelistsV2.CountryIdentification.getValueForId("GR", "ell"));
-        Assert.assertEquals("Υποβολή για όλες τις παρτίδες", CodelistsV2.BidType.getValueForId("LOT_ALL", "ell"));
+        Assert.assertEquals("Υποβολή για �?λες τις πα�?τίδες", CodelistsV2.BidType.getValueForId("LOT_ALL", "ell"));
         // Invalid input
         Assert.assertEquals(null, CodelistsV2.CountryIdentification.getValueForId(null));
         Assert.assertEquals(null, CodelistsV2.BidType.getValueForId("lala"));
@@ -205,7 +205,7 @@ public class CodelistsTest {
         // valid input
         Assert.assertTrue(CodelistsV2.BidType._getDataMap("ell").isPresent());
         Assert.assertEquals("Submission for all lots", CodelistsV2.BidType._getDataMap().get().get("LOT_ALL"));
-        Assert.assertEquals("Υποβολή για όλες τις παρτίδες", CodelistsV2.BidType._getDataMap("ell").get().get("LOT_ALL"));
+        Assert.assertEquals("Υποβολή για �?λες τις πα�?τίδες", CodelistsV2.BidType._getDataMap("ell").get().get("LOT_ALL"));
 
         // Invalid input
         Assert.assertTrue(CodelistsV2.BidType._getDataMap(null).isPresent());
@@ -232,7 +232,7 @@ public class CodelistsTest {
         Assert.assertEquals(Optional.of("Greece"), CodelistsV2.CountryIdentification._getValueForId("GR"));
         Assert.assertEquals(Optional.of("Submission for all lots"), CodelistsV2.BidType._getValueForId("LOT_ALL"));
         Assert.assertEquals(Optional.of("Greece"), CodelistsV2.CountryIdentification._getValueForId("GR", "ell"));
-        Assert.assertEquals(Optional.of("Υποβολή για όλες τις παρτίδες"), CodelistsV2.BidType._getValueForId("LOT_ALL", "ell"));
+        Assert.assertEquals(Optional.of("Υποβολή για �?λες τις πα�?τίδες"), CodelistsV2.BidType._getValueForId("LOT_ALL", "ell"));
         // Invalid input
         Assert.assertEquals(Optional.empty(), CodelistsV2.CountryIdentification._getValueForId(null));
         Assert.assertEquals(Optional.empty(), CodelistsV2.BidType._getValueForId("lala"));
