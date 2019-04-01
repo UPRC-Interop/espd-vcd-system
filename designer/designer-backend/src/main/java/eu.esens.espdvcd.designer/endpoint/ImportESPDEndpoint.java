@@ -18,7 +18,7 @@ package eu.esens.espdvcd.designer.endpoint;
 import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.designer.exception.ValidationException;
 import eu.esens.espdvcd.designer.service.ImportESPDService;
-import eu.esens.espdvcd.designer.util.Config;
+import eu.esens.espdvcd.designer.util.AppConfig;
 import eu.esens.espdvcd.designer.util.Errors;
 import eu.esens.espdvcd.designer.util.JsonUtil;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
@@ -27,7 +27,6 @@ import org.apache.poi.util.IOUtils;
 import spark.Service;
 
 import javax.servlet.MultipartConfigElement;
-import javax.servlet.ServletException;
 import javax.servlet.http.Part;
 import javax.xml.bind.UnmarshalException;
 import java.io.File;
@@ -40,7 +39,6 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.Objects;
-import java.util.Random;
 
 public class ImportESPDEndpoint extends Endpoint {
     private final ImportESPDService service;
@@ -64,8 +62,8 @@ public class ImportESPDEndpoint extends Endpoint {
                     if (rq.contentType().contains("multipart/form-data")) {
                         MultipartConfigElement multipartConfigElement = new MultipartConfigElement(
                                 "file-uploads",
-                                1024 * 1024 * Config.getMaxFileSize(),
-                                1024 * 1024 * Config.getMaxFileSize(),
+                                1024 * 1024 * AppConfig.getInstance().getMaxFileSize(),
+                                1024 * 1024 * AppConfig.getInstance().getMaxFileSize(),
                                 0);
                         rq.raw().setAttribute("org.eclipse.jetty.multipartConfig", multipartConfigElement);
                         Collection<Part> parts;
@@ -158,15 +156,15 @@ public class ImportESPDEndpoint extends Endpoint {
     }
 
     private void writeDumpedFile(File espdFile) throws IOException {
-        if (Config.isArtefactDumpingEnabled()) {
-            Files.createDirectories(Paths.get(Config.dumpIncomingArtefactsLocation() + "/xml/"));
+        if (AppConfig.getInstance().isArtefactDumpingEnabled()) {
+            Files.createDirectories(Paths.get(AppConfig.getInstance().dumpIncomingArtefactsLocation() + "/xml/"));
             File dumpedFile;
             try {
-                dumpedFile = new File(Config.dumpIncomingArtefactsLocation()
+                dumpedFile = new File(AppConfig.getInstance().dumpIncomingArtefactsLocation()
                         + "/xml/" + ZonedDateTime.now().format(DateTimeFormatter.ofPattern("uuuuMMdd-HHmmss")) + ".xml");
                 Files.copy(espdFile.toPath(), dumpedFile.toPath());
             } catch (FileAlreadyExistsException e) {
-                dumpedFile = new File(Config.dumpIncomingArtefactsLocation()
+                dumpedFile = new File(AppConfig.getInstance().dumpIncomingArtefactsLocation()
                         + "/xml/" + ZonedDateTime.now().format(DateTimeFormatter.ofPattern("uuuuMMdd-HHmmss-"))
                         + RandomStringUtils.randomAlphabetic(3) + ".xml");
                 Files.copy(espdFile.toPath(), dumpedFile.toPath());

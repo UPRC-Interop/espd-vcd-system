@@ -73,7 +73,7 @@ public final class CriteriaUtil {
         return criteria.stream()
                 .peek(selectableCriterion -> {
                     if (selectableCriterion.getTypeCode().matches(CriteriaType.SELECTION_NO_ALPHA.getRegex())) {
-                        selectableCriterion.setSelected(Config.isSelectionCriteriaPreselected());
+                        selectableCriterion.setSelected(AppConfig.getInstance().isSelectionCriteriaPreselected());
                     } else {
                         selectableCriterion.setSelected(true);
                     }

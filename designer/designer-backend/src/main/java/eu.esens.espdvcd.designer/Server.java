@@ -1,12 +1,12 @@
 /**
  * Copyright 2016-2019 University of Piraeus Research Center
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,19 +17,20 @@ package eu.esens.espdvcd.designer;
 
 import eu.esens.espdvcd.designer.endpoint.*;
 import eu.esens.espdvcd.designer.service.*;
-import eu.esens.espdvcd.designer.util.Config;
-import eu.esens.espdvcd.designer.util.Errors;
-import eu.esens.espdvcd.designer.util.JsonUtil;
-import eu.esens.espdvcd.designer.util.ServerUtil;
+import eu.esens.espdvcd.designer.util.*;
 import eu.esens.espdvcd.schema.enums.EDMVersion;
 import spark.Service;
 
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Server {
 
     private final static Logger LOGGER = Logger.getLogger(Server.class.getName());
+    private static final AppConfig CONFIG = AppConfig.getInstance();
 
     public static void main(String[] args) {
 
@@ -37,7 +38,7 @@ public class Server {
 
         //SERVER CONFIGURATION
         LOGGER.info("Starting port configuration");
-        int portToBind = Config.getServerPort();
+        int portToBind = CONFIG.getServerPort();
         String initialPath = "";
 
         if ((portToBind < 0) || (portToBind > 65535)) {
@@ -55,10 +56,10 @@ public class Server {
 
         ServerUtil.configureStaticFiles(spark);
 
-        if (Config.isEnchancedSecurityEnabled())
+        if (CONFIG.isEnchancedSecurityEnabled())
             ServerUtil.addSecurityHeaders(spark);
 
-        if (Config.isCORSEnabled())
+        if (CONFIG.isCORSEnabled())
             ServerUtil.enableCORS(spark);
 
         ServerUtil.dropTrailingSlashes(spark);
@@ -113,7 +114,62 @@ public class Server {
         Endpoint importESPDResp = new ImportESPDEndpoint(ImportESPDResponseService.getInstance());
         baseContext.addEndpointWithPath(importESPDResp, "/importESPD/response");
 
+        LOGGER.info("Configuring ImportESPDResponse endpoint...");
+        Endpoint platformInfoEndpoint = new PlatformInfoEndpoint();
+        baseContext.addEndpointWithPath(platformInfoEndpoint, "/platform-info");
+
         LOGGER.info("Server is up and running at port " + portToBind);
+
+        if (AppConfig.getInstance().isDebugEnabled()) {
+            System.out.println("Debug menu has been enabled, type help for available commands.");
+            Scanner sc = new Scanner(System.in);
+            while (true) {
+                String input = sc.next();
+                CLIOption option;
+                try {
+                    option = CLIOption.valueOf(input.toUpperCase());
+                } catch (IllegalArgumentException e) {
+                    System.out.println("------------------");
+                    System.out.println("Invalid option " + input);
+                    System.out.println("------------------");
+                    continue;
+                }
+                switch (option) {
+                    case Q:
+                    case QUIT:
+                    case EXIT:
+                        spark.stop();
+                        System.exit(0);
+                    case STATUS:
+                        System.out.println("------------------");
+                        System.out.println("Server active thread count: " + spark.activeThreadCount());
+                        System.out.println("Server port: " + AppConfig.getInstance().getServerPort());
+                        System.out.println("Max upload file size: " + AppConfig.getInstance().getMaxFileSize() + "M");
+                        System.out.println("Artefact dumping enabled: " + AppConfig.getInstance().isArtefactDumpingEnabled());
+                        System.out.println("CORS enabled: " + AppConfig.getInstance().isCORSEnabled());
+                        System.out.println("Artefact dumping location: " + Paths.get(
+                                AppConfig.getInstance().dumpIncomingArtefactsLocation()).toAbsolutePath().toString());
+                        System.out.println("Enchanced security enabled: "+ AppConfig.getInstance().isEnchancedSecurityEnabled());
+                        System.out.println("Validation enabled: " +AppConfig.getInstance().isValidatorEnabled());
+                        System.out.println("------------------");
+                        break;
+                    case ABOUT:
+                        System.out.println("------------------");
+                        System.out.println("Application info ");
+                        System.out.println("Name:  "+AppInfo.getInstance().getAppName());
+                        System.out.println("Version: "+AppInfo.getInstance().getAppVersion());
+                        System.out.println("Revision: "+AppInfo.getInstance().getAppRevision());
+                        System.out.println("Build time: "+AppInfo.getInstance().getBuildTime());
+                        System.out.println("------------------");
+                        break;
+                    case HELP:
+                        System.out.println("------------------");
+                        System.out.println("Available commands are: " + Arrays.toString(CLIOption.values()));
+                        System.out.println("------------------");
+                        break;
+                }
+            }
+        }
     }
 
 
