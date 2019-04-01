@@ -40,18 +40,15 @@ sourceSets {
 apply plugin: 'org.openrepose.gradle.plugins.jaxb'
 
 dependencies {
-    jaxb "com.sun.xml.bind:jaxb-core:2.3.0.1"
-    jaxb "com.sun.xml.bind:jaxb-impl:2.3.0.1"
-    jaxb "com.sun.xml.bind:jaxb-xjc:2.3.2"
-    jaxb "javax.xml.bind:jaxb-api:2.3.1"
-
+    jaxb group: "com.sun.xml.bind", name: "jaxb-core", version: "$project.jaxb_impl_version"
+    jaxb group: "com.sun.xml.bind", name: "jaxb-impl", version: "$project.jaxb_impl_version"
+    jaxb group: "com.sun.xml.bind", name: "jaxb-xjc", version: "$project.jaxb_xjc_version"
+    jaxb group: "javax.xml.bind", name: "jaxb-api", version: "$project.jaxb_api_version"
 
     compile group: 'com.googlecode.jaxb-namespaceprefixmapper-interfaces', name: 'JAXBNamespacePrefixMapper', version: '2.2.4'
-    jaxb "javax.activation:javax.activation-api:1.2.0"
-
-    compile('javax.xml.bind:jaxb-api:2.3.1')
-    compile('javax.activation:activation:1.1')
-    compile('org.glassfish.jaxb:jaxb-runtime:2.3.0')
+    compile group: "com.sun.xml.bind", name: "jaxb-impl", version: "$project.jaxb_impl_version"
+    compile group: "com.sun.xml.bind", name: "jaxb-core", version: "$project.jaxb_impl_version"
+    compile group: "javax.xml.bind", name: "jaxb-api", version: "$project.jaxb_api_version"
 }
 
 task genEspdEdmV102(type: GradleBuild) {
