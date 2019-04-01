@@ -109,7 +109,7 @@ public final class ServerUtil {
                 "object-src 'none'; " +
                 "script-src 'self' 'unsafe-inline' 'unsafe-eval' ; " +
                 "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com";
-        if (Config.isFramingAllowed()) {
+        if (AppConfig.getInstance().isFramingAllowed()) {
             securityHeaders.put("Content-Security-Policy", contentSecurityPolicyHeaders);
         } else {
             securityHeaders.put("Content-Security-Policy", contentSecurityPolicyHeaders + " ; frame-ancestors 'none'");

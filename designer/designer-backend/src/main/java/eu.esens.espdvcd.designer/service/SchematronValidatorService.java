@@ -16,7 +16,7 @@
 package eu.esens.espdvcd.designer.service;
 
 import eu.esens.espdvcd.designer.exception.ValidationException;
-import eu.esens.espdvcd.designer.util.Config;
+import eu.esens.espdvcd.designer.util.AppConfig;
 import eu.esens.espdvcd.validator.ArtefactValidator;
 import eu.esens.espdvcd.validator.ValidatorFactory;
 
@@ -32,7 +32,7 @@ public enum SchematronValidatorService implements ValidatorService {
 
     @Override
     public ArtefactValidator validateESPDFile(File request) throws ValidationException {
-        if (Config.isValidatorEnabled()) {
+        if (AppConfig.getInstance().isValidatorEnabled()) {
             ArtefactValidator validationResult = ValidatorFactory.createESPDSchematronValidator(request);
             if (validationResult != null && !validationResult.isValid())
                 throw new ValidationException("Schematron validation failed on the supplied xml document.", validationResult.getValidationMessages());

@@ -23,7 +23,7 @@ import eu.esens.espdvcd.designer.service.ExportESPDService;
 import eu.esens.espdvcd.designer.service.ExportESPDV1Service;
 import eu.esens.espdvcd.designer.service.ExportESPDV2Service;
 import eu.esens.espdvcd.designer.typeEnum.ExportType;
-import eu.esens.espdvcd.designer.util.Config;
+import eu.esens.espdvcd.designer.util.AppConfig;
 import eu.esens.espdvcd.designer.util.Errors;
 import eu.esens.espdvcd.designer.util.JsonUtil;
 import eu.esens.espdvcd.model.ESPDRequest;
@@ -94,9 +94,9 @@ public class ExportESPDEndpoint extends Endpoint {
                         String artefactType = rq.params("artefactType");
                         if (rq.contentType().contains("application/json")) {
 
-                            if (Config.isArtefactDumpingEnabled()) {
-                                Files.createDirectories(Paths.get(Config.dumpIncomingArtefactsLocation() + "/json/"));
-                                File dumpedFile = new File(Config.dumpIncomingArtefactsLocation()
+                            if (AppConfig.getInstance().isArtefactDumpingEnabled()) {
+                                Files.createDirectories(Paths.get(AppConfig.getInstance().dumpIncomingArtefactsLocation() + "/json/"));
+                                File dumpedFile = new File(AppConfig.getInstance().dumpIncomingArtefactsLocation()
                                         + "/json/" + ZonedDateTime.now().format(DateTimeFormatter.ofPattern("uuuuMMddHHmmss")) + ".json");
                                 byte[] jsonStream = rq.body().getBytes(StandardCharsets.UTF_8);
                                 Files.write(dumpedFile.toPath(), jsonStream, StandardOpenOption.CREATE);
