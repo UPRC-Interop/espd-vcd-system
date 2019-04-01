@@ -23,7 +23,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'org.openrepose:gradle-jaxb-plugin:2.4.1'
+        classpath 'org.openrepose:gradle-jaxb-plugin:2.5.0'
     }
 
 }
@@ -41,11 +41,16 @@ def generatedDir = "${project.buildDir}/generated-sources/xjc"
 apply plugin: 'org.openrepose.gradle.plugins.jaxb'
 
 dependencies {
-    jaxb "com.sun.xml.bind:jaxb-core:${project.jaxb_impl_version}"
-    jaxb "com.sun.xml.bind:jaxb-xjc:${project.jaxb_impl_version}"
-    jaxb "com.sun.xml.bind:jaxb-impl:${project.jaxb_impl_version}"
-    jaxb "javax.xml.bind:jaxb-api:${project.jaxb_impl_version}"
+    jaxb "com.sun.xml.bind:jaxb-core:2.3.0.1"
+    jaxb "com.sun.xml.bind:jaxb-impl:2.3.0.1"
+    jaxb "com.sun.xml.bind:jaxb-xjc:2.3.2"
+    jaxb "javax.xml.bind:jaxb-api:2.3.1"
     // compile 'com.google.guava:guava:14.0'
+    jaxb "javax.activation:javax.activation-api:1.2.0"
+
+    compile('javax.xml.bind:jaxb-api:2.3.1')
+    compile('javax.activation:activation:1.1')
+    compile('org.glassfish.jaxb:jaxb-runtime:2.3.0')
 }
 
 tasks.withType(JavaCompile) {
