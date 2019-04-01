@@ -39,10 +39,10 @@ dependencies {
     compile project(':edm')
     compile project(':model')
 	compile 'no.difi.commons:commons-asic:0.9.2'
-        
-    compile "com.sun.xml.bind:jaxb-impl:${project.jaxb_impl_version}"
-    compile "javax.xml.bind:jaxb-api:${project.jaxb_impl_version}"
-    compile "com.sun.xml.bind:jaxb-core:${project.jaxb_impl_version}"
+
+    compile group: "com.sun.xml.bind", name: "jaxb-core", version: "$project.jaxb_impl_version"
+    compile group: "com.sun.xml.bind", name: "jaxb-impl", version: "$project.jaxb_impl_version"
+    compile group: "javax.xml.bind", name: "jaxb-api", version: "$project.jaxb_api_version"
 
     compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.5'
     compile "com.github.rholder:guava-retrying:2.0.0"

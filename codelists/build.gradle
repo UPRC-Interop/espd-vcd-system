@@ -13,48 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-buildscript {
-
-    repositories {
-        jcenter()
-        maven {
-            url "https://maven.research.rackspacecloud.com/content/repositories/public/"
-        }
-    }
-
-    dependencies {
-        classpath 'org.openrepose:gradle-jaxb-plugin:2.5.0'
-    }
-
+plugins {
+    id "org.openrepose.gradle.plugins.jaxb" version "2.5.0"
 }
 
 def generatedDir = "${project.buildDir}/generated-sources/xjc"
 
-    sourceSets {
-        main {
-            java {
-                srcDirs += "$generatedDir"
-            }
+sourceSets {
+    main {
+        java {
+            srcDirs += "$generatedDir"
         }
     }
-    
-apply plugin: 'org.openrepose.gradle.plugins.jaxb'
+}
 
 dependencies {
-    jaxb "com.sun.xml.bind:jaxb-core:2.3.0.1"
-    jaxb "com.sun.xml.bind:jaxb-impl:2.3.0.1"
-    jaxb "com.sun.xml.bind:jaxb-xjc:2.3.2"
-    jaxb "javax.xml.bind:jaxb-api:2.3.1"
-    // compile 'com.google.guava:guava:14.0'
-    jaxb "javax.activation:javax.activation-api:1.2.0"
+    jaxb group: "com.sun.xml.bind", name: "jaxb-core", version: "$project.jaxb_impl_version"
+    jaxb group: "com.sun.xml.bind", name: "jaxb-impl", version: "$project.jaxb_impl_version"
+    jaxb group: "com.sun.xml.bind", name: "jaxb-xjc", version: "$project.jaxb_xjc_version"
+    jaxb group: "javax.xml.bind", name: "jaxb-api", version: "$project.jaxb_api_version"
 
-    compile('javax.xml.bind:jaxb-api:2.3.1')
-    compile('javax.activation:activation:1.1')
-    compile('org.glassfish.jaxb:jaxb-runtime:2.3.0')
+    compile group: "com.sun.xml.bind", name: "jaxb-impl", version: "$project.jaxb_impl_version"
+    compile group: "com.sun.xml.bind", name: "jaxb-core", version: "$project.jaxb_impl_version"
+    compile group: "javax.xml.bind", name: "jaxb-api", version: "$project.jaxb_api_version"
 }
 
 tasks.withType(JavaCompile) {
-  options.encoding = "utf-8" // adapt as necessary
+    options.encoding = "utf-8" // adapt as necessary
 }
 
 jaxb {
