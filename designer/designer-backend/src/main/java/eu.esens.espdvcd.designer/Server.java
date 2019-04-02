@@ -120,9 +120,13 @@ public class Server {
 
         LOGGER.info("Server is up and running at port " + portToBind);
 
-        if (AppConfig.getInstance().isDebugEnabled()) {
+
+        /*
+         * MINI CLI
+         */
+        Scanner sc = new Scanner(System.in);
+        if (AppConfig.getInstance().isDebugEnabled() && sc.hasNext()) {
             System.out.println("Debug menu has been enabled, type help for available commands.");
-            Scanner sc = new Scanner(System.in);
             while (true) {
                 String input = sc.next();
                 CLIOption option;
@@ -169,6 +173,8 @@ public class Server {
                         break;
                 }
             }
+        }else{
+            sc.close();
         }
     }
 
