@@ -111,6 +111,9 @@ designer/designer-backend/src/main/resources/public/
 artefacts/*
 designer/designer-backend/artefacts/*
 
-#Ignore auto-generated properties file
+# Ignore auto-generated properties file
 designer/designer-backend/config.properties
 config.properties
+
+# Ignore auto-generated version file
+designer/designer-backend/src/main/resources/application.version
