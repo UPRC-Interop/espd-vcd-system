@@ -103,11 +103,12 @@ public final class ServerUtil {
     private static void initHeaderMap() {
         securityHeaders = new HashMap<>();
 
-        String contentSecurityPolicyHeaders = "default-src 'self'; " +
-                "font-src https://fonts.googleapis.com https://fonts.gstatic.com; " +
+        String contentSecurityPolicyHeaders = "default-src 'none'; " +
+                "font-src https://fonts.gstatic.com; " +
                 "img-src 'self' " +
                 "object-src 'none'; " +
-                "script-src 'self' 'unsafe-inline' 'unsafe-eval' ; " +
+                "script-src 'self' ; " +
+                "connect-src 'self'; " +
                 "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com";
         if (AppConfig.getInstance().isFramingAllowed()) {
             securityHeaders.put("Content-Security-Policy", contentSecurityPolicyHeaders);
