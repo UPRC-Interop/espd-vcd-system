@@ -16,5 +16,5 @@
 
 export const environment = {
   production: true,
-  apiUrl: 'http://espdint.ds.unipi.gr/api/'
+  apiUrl: 'https://espdint.ds.unipi.gr/api/'
 };
