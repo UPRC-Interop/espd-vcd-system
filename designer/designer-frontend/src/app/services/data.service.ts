@@ -1112,7 +1112,7 @@ export class DataService {
         this.utilities.isReset = true;
       }
 
-      if (form.value.chooseRole === 'CA') {
+      if (form.value.chooseRole === 'CA' || form.value.chooseRole === 'CE') {
         console.log(form.value);
         this.utilities.isCA = true;
         this.utilities.isEO = false;

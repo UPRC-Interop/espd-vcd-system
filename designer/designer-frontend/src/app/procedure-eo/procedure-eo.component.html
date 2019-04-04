@@ -34,12 +34,12 @@
         <!--<label for="noticeNumber">Received Notice Number</label>-->
         <input matInput id="noticeNumber" name="receivedNoticeNumber"
                [(ngModel)]="dataService.CADetails.receivedNoticeNumber"
-               placeholder="{{'espd.part1.ted.reception.id' | translate}}" [disabled]="this.dataService.isReadOnly()">
+               placeholder="{{'espd.part1.ted.reception.id' | translate}}" [disabled]="dataService.isReadOnly()">
       </mat-form-field>
       <mat-form-field>
         <input #ojs="ngModel" matInput name="noticeNumberOJS"
                [(ngModel)]="dataService.CADetails.procurementPublicationNumber"
-               placeholder="{{'espd.part1.ojs.label' | translate}}" [disabled]="this.dataService.isReadOnly()" numberOjs required>
+               placeholder="{{'espd.part1.ojs.label' | translate}}" [disabled]="dataService.isReadOnly()" numberOjs required>
         <mat-hint>{{'espd.ojs.hint' | translate }}</mat-hint>
         <mat-error *ngIf="ojs.invalid">
           <input-validation-error [formControlErrors]="ojs.errors"></input-validation-error>
@@ -47,7 +47,7 @@
       </mat-form-field>
       <mat-form-field>
         <input #url="ngModel" matInput name="ojsURL" placeholder="{{'espd.part1.ojs.url' | translate}}"
-               [(ngModel)]="dataService.CADetails.procurementPublicationURI" [disabled]="this.dataService.isReadOnly()"
+               [(ngModel)]="dataService.CADetails.procurementPublicationURI" [disabled]="dataService.isReadOnly()"
                url>
         <mat-error *ngIf="url.invalid">
           <input-validation-error [formControlErrors]="url.errors"></input-validation-error>
@@ -73,14 +73,14 @@
       </mat-expansion-panel-header>
       <mat-form-field>
         <input matInput #CAofficialName="ngModel" placeholder="{{'espd.part1.name' | translate}}" name="CAofficialName"
-               [(ngModel)]="dataService.CADetails.caofficialName" required [disabled]="this.dataService.isReadOnly()">
+               [(ngModel)]="dataService.CADetails.caofficialName" required [disabled]="dataService.isReadOnly()">
         <mat-error *ngIf="CAofficialName.invalid">
           <input-validation-error [formControlErrors]="CAofficialName.errors"></input-validation-error>
         </mat-error>
       </mat-form-field>
       <mat-form-field>
         <input matInput placeholder="{{'espd.part2.vat'| translate}}" name="CAofficialID"
-               [(ngModel)]="dataService.CADetails.id" [disabled]="this.dataService.isReadOnly()" #vat="ngModel"
+               [(ngModel)]="dataService.CADetails.id" [disabled]="dataService.isReadOnly()" #vat="ngModel"
                vatNumber>
         <mat-error *ngIf="vat.invalid">
           <input-validation-error [formControlErrors]="vat.errors"></input-validation-error>
@@ -89,29 +89,29 @@
       <mat-form-field>
         <input matInput #website="ngModel" url placeholder="{{'espd.part1.website' | translate}}"
                name="CAofficialWebSite" [(ngModel)]="dataService.CADetails.webSiteURI"
-               [disabled]="this.dataService.isReadOnly()">
+               [disabled]="dataService.isReadOnly()">
         <mat-error *ngIf="website.invalid">
           <input-validation-error [formControlErrors]="website.errors"></input-validation-error>
         </mat-error>
       </mat-form-field>
       <ng-container *ngIf="dataService.CADetails.postalAddress || dataService.PostalAddress">
         <mat-form-field>
-          <input matInput placeholder="{{'espd.part1.city' | translate}}" name="CAofficialCity" [(ngModel)]="dataService.PostalAddress.city" [disabled]="this.dataService.isReadOnly()">
+          <input matInput placeholder="{{'espd.part1.city' | translate}}" name="CAofficialCity" [(ngModel)]="dataService.PostalAddress.city" [disabled]="dataService.isReadOnly()">
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="{{'espd.part1.street.and. num' | translate}}" name="CAofficialStreet" [(ngModel)]="dataService.PostalAddress.addressLine1" [disabled]="this.dataService.isReadOnly()">
+          <input matInput placeholder="{{'espd.part1.street.and. num' | translate}}" name="CAofficialStreet" [(ngModel)]="dataService.PostalAddress.addressLine1" [disabled]="dataService.isReadOnly()">
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="{{'espd.part1.postcode' | translate}}" name="CAofficialPostCode" [(ngModel)]="dataService.PostalAddress.postCode" [disabled]="this.dataService.isReadOnly()">
+          <input matInput placeholder="{{'espd.part1.postcode' | translate}}" name="CAofficialPostCode" [(ngModel)]="dataService.PostalAddress.postCode" [disabled]="dataService.isReadOnly()">
         </mat-form-field>
       </ng-container>
       <ng-container *ngIf="dataService.CADetails.contactingDetails || dataService.ContactingDetails">
         <mat-form-field>
-          <input matInput placeholder="{{'espd.part1.contact.person' | translate}}" name="CAofficialContactName" [(ngModel)]="dataService.ContactingDetails.contactPointName" [disabled]="this.dataService.isReadOnly()">
+          <input matInput placeholder="{{'espd.part1.contact.person' | translate}}" name="CAofficialContactName" [(ngModel)]="dataService.ContactingDetails.contactPointName" [disabled]="dataService.isReadOnly()">
         </mat-form-field>
         <mat-form-field>
           <input matInput placeholder="{{'espd.part1.telephone' | translate}}" name="CAofficialContactTelephone"
-                 [(ngModel)]="dataService.ContactingDetails.telephoneNumber" [disabled]="this.dataService.isReadOnly()"
+                 [(ngModel)]="dataService.ContactingDetails.telephoneNumber" [disabled]="dataService.isReadOnly()"
                  #telephone="ngModel" phoneNumber>
           <mat-error *ngIf="telephone.invalid">
             <input-validation-error [formControlErrors]="telephone.errors"></input-validation-error>
@@ -119,7 +119,7 @@
         </mat-form-field>
         <mat-form-field>
           <input matInput placeholder="{{'espd.part1.fax' | translate}}" name="CAofficialContactFaxNumber"
-                 [(ngModel)]="dataService.ContactingDetails.faxNumber" [disabled]="this.dataService.isReadOnly()"
+                 [(ngModel)]="dataService.ContactingDetails.faxNumber" [disabled]="dataService.isReadOnly()"
                  phoneNumber #fax="ngModel">
           <mat-error *ngIf="fax.invalid">
             <input-validation-error [formControlErrors]="fax.errors"></input-validation-error>
@@ -128,14 +128,14 @@
         <mat-form-field>
           <input #contactMail="ngModel" matInput placeholder="{{'espd.part1.email' | translate}}"
                  name="CAofficialContactEmail" [(ngModel)]="dataService.ContactingDetails.emailAddress" email
-                 [disabled]="this.dataService.isReadOnly()">
+                 [disabled]="dataService.isReadOnly()">
           <mat-error *ngIf="contactMail.invalid">
             <input-validation-error [formControlErrors]="contactMail.errors"></input-validation-error>
           </mat-error>
         </mat-form-field>
       </ng-container>
       <mat-form-field>
-        <mat-select #caCountry="ngModel" name="CACountry" placeholder="{{'espd.part1.country' | translate}}" [(ngModel)]="dataService.selectedCountry" required [disabled]="this.dataService.isReadOnly()">
+        <mat-select #caCountry="ngModel" name="CACountry" placeholder="{{'espd.part1.country' | translate}}" [(ngModel)]="dataService.selectedCountry" required [disabled]="dataService.isReadOnly()">
           <mat-option>None</mat-option>
           <mat-option *ngFor="let country of codelist.countries" [value]="country.code">{{country.name}}</mat-option>
         </mat-select>
@@ -156,7 +156,7 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-form-field>
-        <input matInput placeholder="{{'espd.part1.procurer.name' | translate}}" name="title" [(ngModel)]="dataService.CADetails.procurementProcedureTitle" [disabled]="this.dataService.isReadOnly()">
+        <input matInput placeholder="{{'espd.part1.procurer.name' | translate}}" name="title" [(ngModel)]="dataService.CADetails.procurementProcedureTitle" [disabled]="dataService.isReadOnly()">
       </mat-form-field>
       <mat-form-field>
         <!--<input matInput placeholder="Short Description">-->
@@ -165,18 +165,18 @@
                   placeholder="{{'espd.part1.title.or.short.desc' | translate}}"
                   name="description"
                   [(ngModel)]="dataService.CADetails.procurementProcedureDesc"
-                  [disabled]="this.dataService.isReadOnly()"></textarea>
+                  [disabled]="dataService.isReadOnly()"></textarea>
       </mat-form-field>
       <mat-form-field>
         <input matInput placeholder="{{'espd.part1.file.ref.ca' | translate}}" name="fileReferenceNumber"
                [(ngModel)]="dataService.CADetails.procurementProcedureFileReferenceNo"
-               [disabled]="this.dataService.isReadOnly()">
+               [disabled]="dataService.isReadOnly()">
       </mat-form-field>
       <!-- SELF-CONTAINED: Type of Procedure -->
       <div *ngIf="utilities.qualificationApplicationType === 'selfcontained'">
         <mat-form-field>
           <mat-select placeholder="{{'espd.part1.info.procedure' | translate}}" name="typeOfProcedure"
-                      [(ngModel)]="dataService.CADetails.procurementProcedureType" [disabled]="this.dataService.isReadOnly()">
+                      [(ngModel)]="dataService.CADetails.procurementProcedureType" [disabled]="dataService.isReadOnly()">
             <mat-option>None</mat-option>
             <mat-option *ngFor="let proc of codelist.procedureTypes" [value]="proc.code">{{proc.name}}</mat-option>
           </mat-select>
@@ -184,7 +184,7 @@
         <!-- SELF-CONTAINED: Bid Type - Object of Contracts -->
         <mat-form-field>
           <mat-select placeholder="{{'espd.part1.objects.of.contracts' | translate}} " name="projectType"
-                      [(ngModel)]="dataService.CADetails.projectType" [disabled]="this.dataService.isReadOnly()">
+                      [(ngModel)]="dataService.CADetails.projectType" [disabled]="dataService.isReadOnly()">
             <mat-option>None</mat-option>
             <mat-option *ngFor="let project of codelist.projectTypes" [value]="project.code">{{project.name}}</mat-option>
           </mat-select>
@@ -255,7 +255,7 @@
               </mat-error>
             </mat-form-field>
             <!-- REGULATED 2.1.0: Removed field due to redundancy. Now the 2.1.0 taxonomy provides CRITERION.OTHER.EO_DATA.LOTS_TENDERED criterion -->
-            <!--<div *ngIf="this.utilities.qualificationApplicationType === 'regulated'">-->
+            <!--<div *ngIf="utilities.qualificationApplicationType === 'regulated'">-->
               <!--<mat-form-field class="eoField">-->
                 <!--<input matInput placeholder="{{'espd.part2.lots.concerned' | translate}}" formControlName="procurementProjectLot" integer>-->
 				<!--<mat-error *ngIf="EOForm.get('procurementProjectLot').invalid">-->
@@ -264,7 +264,7 @@
               	<!--</mat-error>-->
               <!--</mat-form-field>-->
             <!--</div>-->
-            <div *ngIf="this.utilities.qualificationApplicationType === 'selfcontained'">
+            <div *ngIf="utilities.qualificationApplicationType === 'selfcontained'">
               <mat-form-field class="eoField">
                 <mat-select formControlName="eoRole"
                             placeholder="{{'espd.part2.role' | translate}}">
@@ -326,7 +326,7 @@
             </mat-radio-button>
           </mat-radio-group>
         </div>
-        <div *ngIf="this.utilities.qualificationApplicationType === 'selfcontained'">
+        <div *ngIf="utilities.qualificationApplicationType === 'selfcontained'">
           <mat-form-field>
             <input formControlName="employeeQuantity" matInput placeholder="{{'espd.part2.number.employees' | translate}}">
           </mat-form-field>
@@ -344,7 +344,7 @@
         </div>
         <ng-container *ngIf="dataService.eoRelatedACriteriaForm">
           <form [formGroup]="dataService.eoRelatedACriteriaForm" #form="ngForm">
-            <div class="eoRelatedCriteria" *ngFor="let cr of this.dataService.eoRelatedACriteria; let i=index">
+            <div class="eoRelatedCriteria" *ngFor="let cr of dataService.eoRelatedACriteria; let i=index">
               <mat-card>
                 <h4>{{cr.propertyKeyMap.pk1 | translate}}</h4>
                 <div class="answer">
@@ -357,7 +357,7 @@
 
         <ng-container *ngIf="dataService.eoLotCriterionForm">
           <form [formGroup]="dataService.eoLotCriterionForm">
-            <div class="eoRelatedCriteria" *ngFor="let cr of this.dataService.eoLotCriterion; let i=index">
+            <div class="eoRelatedCriteria" *ngFor="let cr of dataService.eoLotCriterion; let i=index">
               <mat-card>
                 <h4>{{cr.propertyKeyMap.pk1 | translate}}</h4>
                 <div class="answer">
@@ -377,7 +377,7 @@
               <mat-panel-title>
                   {{'espd.part2.info.respresent' | translate}} #{{ i + 1}}
               </mat-panel-title>
-              <div class="card-btn-container" *ngIf="!this.dataService.isReadOnly()">
+              <div class="card-btn-container" *ngIf="!dataService.isReadOnly()">
                 <div class="add">
                   <a mat-raised-button (click)="addPerson()">+</a>
                 </div>
@@ -477,9 +477,9 @@
             {{'espd.part2.info.reliance' | translate}}
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <ng-container *ngIf='this.dataService.eoRelatedCCriteriaForm!=null'>
+        <ng-container *ngIf='dataService.eoRelatedCCriteriaForm!=null'>
           <form [formGroup]="dataService.eoRelatedCCriteriaForm" #form="ngForm">
-            <div class="eoRelatedCriteria" *ngFor="let cr of this.dataService.eoRelatedCCriteria; let i=index">
+            <div class="eoRelatedCriteria" *ngFor="let cr of dataService.eoRelatedCCriteria; let i=index">
               <span>{{cr.propertyKeyMap.pk1 | translate}}</span>
               <div class="answer">
                 <app-criterion [criterion]="cr" [form]="dataService.eoRelatedCCriteriaForm.controls" [indicator]="true"></app-criterion>
@@ -494,9 +494,9 @@
             {{'espd.part2.information.subcontractors' | translate}}
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <ng-container *ngIf='this.dataService.eoRelatedDCriteriaForm!=null'>
+        <ng-container *ngIf='dataService.eoRelatedDCriteriaForm!=null'>
           <form [formGroup]="dataService.eoRelatedDCriteriaForm" #form="ngForm">
-            <div class="eoRelatedCriteria" *ngFor="let cr of this.dataService.eoRelatedDCriteria; let i=index">
+            <div class="eoRelatedCriteria" *ngFor="let cr of dataService.eoRelatedDCriteria; let i=index">
               <span>{{cr.propertyKeyMap.pk1 | translate}}</span>
               <div class="answer">
                 <app-criterion [criterion]="cr" [form]="dataService.eoRelatedDCriteriaForm.controls" [indicator]="true"></app-criterion>

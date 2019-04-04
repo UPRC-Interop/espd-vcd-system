@@ -21,13 +21,13 @@
   <div>
     <label *ngIf="req.responseDataType=='INDICATOR'" [attr.for]="req.uuid">{{req.propertyKeyMap.pk1 | translate}}</label>
     <label *ngIf="req.responseDataType=='CODE_BOOLEAN'" [attr.for]="req.uuid">{{req.propertyKeyMap.pk1 | translate}}</label>
-    <label *ngIf="req.responseDataType=='WEIGHT_INDICATOR' && this.utilities.isGloballyWeighted" [attr.for]="req.uuid">{{req.propertyKeyMap.pk1 | translate}}</label>
+    <label *ngIf="req.responseDataType=='WEIGHT_INDICATOR' && utilities.isGloballyWeighted" [attr.for]="req.uuid">{{req.propertyKeyMap.pk1 | translate}}</label>
   </div>
 
   <!--SELF-CONTAINED: Hide the QUESTION fields if the user is a CA making a Request. Render only the REQUIREMENT and CAPTION fields.
   Don't show the REQUIREMENT fields if the user has the role of EO and creates a new ESPD response from scratch-->
-  <div [ngSwitch]="req.responseDataType" [hidden]="(this.utilities.isCA && req.type === 'QUESTION' && !this.utilities.isReviewESPD)
-  || (this.utilities.isEO && req.type ==='REQUIREMENT' && this.utilities.isCreateResponse)
+  <div [ngSwitch]="req.responseDataType" [hidden]="(utilities.isCA && req.type === 'QUESTION' && !utilities.isReviewESPD)
+  || (utilities.isEO && req.type ==='REQUIREMENT' && utilities.isCreateResponse)
   || req.type === 'CAPTION'">
     <div *ngSwitchDefault>
       <div *ngIf="req.type === 'CAPTION'">
@@ -131,7 +131,7 @@
       </div>
     </div>
     <div *ngSwitchCase="'CODE'">
-      <div *ngIf="this.APIService.version === 'v1' && req.responseValuesRelatedArtefact === null">
+      <div *ngIf="APIService.version === 'v1' && req.responseValuesRelatedArtefact === null">
         <mat-form-field >
           <input matInput [formControlName]="req.uuid" [id]="req.uuid" placeholder="{{req.propertyKeyMap.pk1 | translate}}" [required]="req.mandatory" >
           <mat-error *ngIf="form.get(req.uuid).invalid">
@@ -273,7 +273,7 @@
 
     <!-- SELF-CONTAINED: WEIGHT_INDICATOR -->
     <div class="weight_indicator" *ngSwitchCase="'WEIGHT_INDICATOR'">
-      <div *ngIf="this.utilities.isGloballyWeighted">
+      <div *ngIf="utilities.isGloballyWeighted">
         <mat-radio-group [id]="req.uuid" [formControlName]="req.uuid">
           <mat-radio-button color="primary"
                             [value]=true>{{"espd.gui.yes" | translate}}
@@ -330,7 +330,7 @@
     <!-- SELF-CONTAINED: LOT_IDENTIFIER -->
     <div class="lots_identifier" *ngSwitchCase="'LOT_IDENTIFIER'">
       <mat-selection-list [formControlName]="req.uuid">
-        <mat-list-option *ngFor="let lot of this.utilities.projectLots" [value]="lot">
+        <mat-list-option *ngFor="let lot of utilities.projectLots" [value]="lot">
           {{lot}}
         </mat-list-option>
       </mat-selection-list>
