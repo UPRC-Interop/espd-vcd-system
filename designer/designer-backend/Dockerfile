@@ -7,4 +7,4 @@ COPY config.properties.snf /designer/config.properties
 
 EXPOSE 80
 
-CMD ["java","-jar","artifact-designer.jar","8080"]
+CMD ["java","-jar","artifact-designer.jar"]

@@ -5,7 +5,7 @@ This README would normally document whatever steps are necessary to get your app
 ## First steps
 
 #### Prerequisites ####
-- **Java 8 JDK**
+- **Java 11 JDK**
 
 ##### For the designer-frontend submodule #####
 - **NPM** - Node package manager, can be installed by installing [NodeJS LTS](http://nodejs.org)
@@ -35,8 +35,8 @@ The **ESPD designer** has two parts:
 3. ```$ gradlew :designer:designer-backend:jar```
     This will create a (fat) jar in the `designer/designer-backend/build/libs/` folder that contains the designer-backend and all of its dependencies, including the ESPD/VCD framework. 
     To start the server from the jar file, simply run:
-    ```$ java -jar designer-backend-2.0.2.jar 8080``` 
-    8080 being the port that the server will listen to. If you do not specify a port argument, it will default to 8080.
+    ```$ java -jar designer-backend-2.1.0.jar``` 
+    8080 is the port that the server will listen to by default.
 
 ## How to run the designer ##
 The actual deployable artifact is the ESPD/VCD Designer, found in the designer submodule. 
@@ -47,6 +47,10 @@ A quick deployment for testing can be achieved through gradle:
 ``` $ gradlew run```  
 
 If all goes well, the designer-backend REST API server should be up and running at <http://localhost:8080/api>
+
+###### Configuration 
+
+----TODO----
 
 ##### Designer-frontend #####
 A quick deployment for testing can be achieved though the angular-CLI. From the designer-frontend directory, run the following:

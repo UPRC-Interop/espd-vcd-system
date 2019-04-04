@@ -103,18 +103,22 @@ public final class ServerUtil {
     private static void initHeaderMap() {
         securityHeaders = new HashMap<>();
 
-        String contentSecurityPolicyHeaders = "default-src 'self'; " +
-                "font-src https://fonts.googleapis.com https://fonts.gstatic.com; " +
-                "img-src 'self' " +
+        String contentSecurityPolicyHeaders = "default-src 'none'; " +
+                "font-src https://fonts.gstatic.com; " +
+                "img-src 'self'; " +
                 "object-src 'none'; " +
-                "script-src 'self' 'unsafe-inline' 'unsafe-eval' ; " +
-                "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com";
+                "script-src 'self' ; " +
+                "connect-src 'self'; " +
+                "base-uri 'self'; " +
+                "form-action 'self'; " +
+                "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;";
         if (AppConfig.getInstance().isFramingAllowed()) {
             securityHeaders.put("Content-Security-Policy", contentSecurityPolicyHeaders);
         } else {
             securityHeaders.put("Content-Security-Policy", contentSecurityPolicyHeaders + " ; frame-ancestors 'none'");
             securityHeaders.put("X-Frame-Options", "DENY");
         }
+        securityHeaders.put("Referrer-Policy", "same-origin");
         securityHeaders.put("X-XSS-Protection", "1; mode=block");
         securityHeaders.put("X-Content-Type-Options", "nosniff");
         securityHeaders.put("Strict-Transport-Security", "max-age=63072000; includeSubDomains; preload");
