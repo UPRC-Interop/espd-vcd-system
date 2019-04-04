@@ -160,6 +160,42 @@ task buildWebAppDeploy(type: Exec) {
     }
 }
 
+task buildWebAppDeploySnf(type: Exec) {
+    dependsOn "npmInstallWebApp"
+    workingDir "$webappDir"
+    inputs.dir "$webappDir"
+//    group = BasePlugin.BUILD_GROUP
+    if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")) {
+        commandLine "ng.cmd", "build", "--configuration=snf"
+    } else {
+        commandLine "ng", "build", "--configuration=snf"
+    }
+    doLast {
+        copy {
+            from "$webappDir/dist"
+            into "$projectDir/src/main/resources/public"
+        }
+    }
+}
+
+task buildWebAppDeploySnfDev(type: Exec) {
+    dependsOn "npmInstallWebApp"
+    workingDir "$webappDir"
+    inputs.dir "$webappDir"
+//    group = BasePlugin.BUILD_GROUP
+    if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")) {
+        commandLine "ng.cmd", "build", "--configuration=snf-dev"
+    } else {
+        commandLine "ng", "build", "--configuration=snf-dev"
+    }
+    doLast {
+        copy {
+            from "$webappDir/dist"
+            into "$projectDir/src/main/resources/public"
+        }
+    }
+}
+
 /**
  * * * * * HELPER TASKS * * * * *
  */
