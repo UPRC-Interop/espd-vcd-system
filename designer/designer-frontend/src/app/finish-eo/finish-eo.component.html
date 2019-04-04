@@ -21,7 +21,7 @@
 
   <ng-container *ngIf="dataService.reductionCriteriaForm">
     <form [formGroup]="dataService.reductionCriteriaForm" #form="ngForm">
-      <mat-expansion-panel expanded="true" *ngIf="this.dataService.reductionCriteria">
+      <mat-expansion-panel expanded="true" *ngIf="dataService.reductionCriteria">
         <mat-expansion-panel-header>
           <mat-panel-title>
             {{'espd.part5.reduction' | translate}}
@@ -31,7 +31,7 @@
           <mat-card>
             {{'espd.part5.toptext' | translate}}
           </mat-card>
-          <mat-card *ngFor="let cr of this.dataService.reductionCriteria; let i = index">
+          <mat-card *ngFor="let cr of dataService.reductionCriteria; let i = index">
             <div class="reductionCriteria">
 
               <div class="criterion-wrap">
@@ -41,19 +41,19 @@
                   <div class="critDesc">{{cr.propertyKeyMap.pk2 | translate}}</div>
                   <!--<div class="eCertis">-->
                     <!--&lt;!&ndash;<h5>eCertis Information ...</h5>&ndash;&gt;-->
-                    <!--<ng-container *ngIf="!this.utilities.eCertisTemplate[cr.id]">-->
+                    <!--<ng-container *ngIf="!utilities.eCertisTemplate[cr.id]">-->
                       <!--<button mat-raised-button-->
-                              <!--(click)="this.dataService.onGetECertisData(cr, cr.id, this.dataService.getCountryCode(), this.utilities.selectedLang)">More Information-->
+                              <!--(click)="dataService.onGetECertisData(cr, cr.id, dataService.getCountryCode(), utilities.selectedLang)">More Information-->
                       <!--</button>-->
                     <!--</ng-container>-->
-                    <!--<ng-container *ngIf="cr.subCriterionList.length !== 0 && this.utilities.eCertisTemplate[cr.id]">-->
-                      <!--<div *ngIf="!this.utilities.isEmpty(cr.subCriterionList)">-->
+                    <!--<ng-container *ngIf="cr.subCriterionList.length !== 0 && utilities.eCertisTemplate[cr.id]">-->
+                      <!--<div *ngIf="!utilities.isEmpty(cr.subCriterionList)">-->
                         <!--<div *ngFor="let nationalCriterion of cr.subCriterionList; let i=index" class="ecertis-crit">-->
                           <!--<app-e-certis-criterion [criterion]="nationalCriterion"></app-e-certis-criterion>-->
                         <!--</div>-->
                       <!--</div>-->
-                      <!--<ng-container *ngIf="this.utilities.eCertisTemplate[cr.id]">-->
-                        <!--<button mat-raised-button (click)="this.utilities.toggleECertis(cr.id)">Less Information</button>-->
+                      <!--<ng-container *ngIf="utilities.eCertisTemplate[cr.id]">-->
+                        <!--<button mat-raised-button (click)="utilities.toggleECertis(cr.id)">Less Information</button>-->
                       <!--</ng-container>-->
                     <!--</ng-container>-->
                     <!--&lt;!&ndash;<div class="eCertDesc" translate>espd.ecertis.404</div>&ndash;&gt;-->
@@ -88,7 +88,7 @@
 
       <mat-form-field>
         <input [appDateValidationFix]="dateInput.control" matInput [matDatepicker]="picker" placeholder="Date" #dateInput="ngModel" ngModel
-               [disabled]="this.dataService.isReadOnly()">
+               [disabled]="dataService.isReadOnly()">
         <mat-error *ngIf="dateInput.control.invalid">
           <input-validation-error [formControlErrors]="dateInput.control.errors"></input-validation-error>
         </mat-error>
@@ -97,7 +97,7 @@
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput placeholder="{{'espd.gui.place' | translate}}" [disabled]="this.dataService.isReadOnly()">
+        <input matInput placeholder="{{'espd.gui.place' | translate}}" [disabled]="dataService.isReadOnly()">
       </mat-form-field>
       <p translate>espd.part5.concl.statements.signature</p>
     </div>
@@ -118,10 +118,10 @@
 </mat-accordion>
 
 <button mat-raised-button color="primary" matStepperPrevious [innerHTML]="'espd.gui.previous' | translate"></button>
-<ng-container *ngIf="!this.dataService.isReadOnly()">
+<ng-container *ngIf="!dataService.isReadOnly()">
   <button [disabled]="!isExportPossible()" type="submit" mat-raised-button color="primary" matStepperNext (click)="onXmlExport()">{{'espd.part5.export' | translate}} (XML)</button>
-  <button [disabled]="!isExportPossible()" type="submit" *ngIf="this.dataService.isVersionTwo()" mat-raised-button color="primary" matStepperNext (click)="onHtmlExport()">{{'espd.part5.export' | translate}} (HTML)</button>
-  <button [disabled]="!isExportPossible()" type="submit" *ngIf="this.dataService.isVersionTwo()" mat-raised-button color="primary" matStepperNext (click)="onPdfExport()">{{'espd.part5.export' | translate}} (PDF)</button>
+  <button [disabled]="!isExportPossible()" type="submit" *ngIf="dataService.isVersionTwo()" mat-raised-button color="primary" matStepperNext (click)="onHtmlExport()">{{'espd.part5.export' | translate}} (HTML)</button>
+  <button [disabled]="!isExportPossible()" type="submit" *ngIf="dataService.isVersionTwo()" mat-raised-button color="primary" matStepperNext (click)="onPdfExport()">{{'espd.part5.export' | translate}} (PDF)</button>
 </ng-container>
 
 <!--<button type="submit" mat-raised-button color="primary" matStepperNext (click)="onExportV2()">Export V2</button>-->

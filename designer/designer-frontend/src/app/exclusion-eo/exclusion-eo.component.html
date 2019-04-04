@@ -19,7 +19,7 @@
 <mat-accordion multi="true">
 <ng-container *ngIf="dataService.exclusionACriteriaForm">
   <form [formGroup]="dataService.exclusionACriteriaForm" #form="ngForm">
-    <mat-expansion-panel expanded="true" *ngIf="this.dataService.exclusionACriteria">
+    <mat-expansion-panel expanded="true" *ngIf="dataService.exclusionACriteria">
       <mat-expansion-panel-header>
         <mat-panel-title>
           {{'espd.part3.crit.grounds.criminal.conv.top.title' | translate}}
@@ -28,7 +28,7 @@
 
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <ng-container *ngIf="this.dataService.exclusionACriteria.length !== 0">
+      <ng-container *ngIf="dataService.exclusionACriteria.length !== 0">
         <div class="desc">
           <h4 translate>espd.part3.crit.eu.eo.grounds.criminal.conv.main.title</h4>
           <!--<h4>Article {{exclusionACriteria['0'].legislationReference.article}} of-->
@@ -36,7 +36,7 @@
         </div>
       </ng-container>
 
-      <mat-card *ngFor="let cr of this.dataService.exclusionACriteria; let i = index">
+      <mat-card *ngFor="let cr of dataService.exclusionACriteria; let i = index">
         <div class="exclusionCriteria">
 
           <div class="criterion-wrap">
@@ -45,21 +45,21 @@
               <div class="critDesc">{{cr.propertyKeyMap.pk2  | translate}}</div>
               <div class="eCertis">
                 <!--<h5>eCertis Information ...</h5>-->
-                <ng-container *ngIf="!this.utilities.eCertisTemplate[cr.id]">
+                <ng-container *ngIf="!utilities.eCertisTemplate[cr.id]">
                   <button mat-raised-button
-                          (click)="this.dataService.onGetECertisData(cr, cr.id, this.dataService.getCountryCode(), this.utilities.selectedLang)">
+                          (click)="dataService.onGetECertisData(cr, cr.id, dataService.getCountryCode(), utilities.selectedLang)">
                     {{'espd.ecertis.more.information' | translate}}
                   </button>
                 </ng-container>
-                <div *ngIf="cr.subCriterionList.length === 0 && this.utilities.eCertisTemplate[cr.id]" class="eCertDesc" translate>espd.ecertis.404</div>
-                <ng-container *ngIf="cr.subCriterionList.length !== 0 && this.utilities.eCertisTemplate[cr.id]">
-                  <div *ngIf="!this.utilities.isEmpty(cr.subCriterionList)">
+                <div *ngIf="cr.subCriterionList.length === 0 && utilities.eCertisTemplate[cr.id]" class="eCertDesc" translate>espd.ecertis.404</div>
+                <ng-container *ngIf="cr.subCriterionList.length !== 0 && utilities.eCertisTemplate[cr.id]">
+                  <div *ngIf="!utilities.isEmpty(cr.subCriterionList)">
                     <div *ngFor="let nationalCriterion of cr.subCriterionList; let i=index" class="ecertis-crit">
                       <app-e-certis-criterion [criterion]="nationalCriterion"></app-e-certis-criterion>
                     </div>
                   </div>
-                  <ng-container *ngIf="this.utilities.eCertisTemplate[cr.id]">
-                    <button mat-raised-button (click)="this.utilities.toggleECertis(cr.id)">{{'espd.ecertis.less.information' | translate}}</button>
+                  <ng-container *ngIf="utilities.eCertisTemplate[cr.id]">
+                    <button mat-raised-button (click)="utilities.toggleECertis(cr.id)">{{'espd.ecertis.less.information' | translate}}</button>
                   </ng-container>
                 </ng-container>
                 <!--<div class="eCertDesc" translate>espd.ecertis.404</div>-->
@@ -79,7 +79,7 @@
 
 <ng-container *ngIf="dataService.exclusionBCriteriaForm">
   <form [formGroup]="dataService.exclusionBCriteriaForm" #form="ngForm">
-    <mat-expansion-panel expanded="true" *ngIf="this.dataService.exclusionBCriteria">
+    <mat-expansion-panel expanded="true" *ngIf="dataService.exclusionBCriteria">
       <mat-expansion-panel-header>
         <mat-panel-title>
           {{'espd.part3.crit.top.grounds.payment.taxes.title' | translate}}
@@ -88,14 +88,14 @@
 
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <ng-container *ngIf="this.dataService.exclusionBCriteria.length !== 0">
+      <ng-container *ngIf="dataService.exclusionBCriteria.length !== 0">
         <div class="desc">
           <h4 translate>espd.part3.crit.eu.eo.payment.taxes.main.title</h4>
           <!--<h4>Article {{exclusionBCriteria['0'].legislationReference.article}} of-->
             <!--{{exclusionBCriteria['0'].legislationReference.title}} sets out the following reasons for exclusion</h4>-->
         </div>
       </ng-container>
-      <mat-card *ngFor="let cr of this.dataService.exclusionBCriteria">
+      <mat-card *ngFor="let cr of dataService.exclusionBCriteria">
         <div class="exclusionCriteria">
           <div class="criterion-wrap">
             <div class="criteria">
@@ -105,21 +105,21 @@
 
             <div class="eCertis">
               <!--<h5>eCertis Information ...</h5>-->
-              <ng-container *ngIf="!this.utilities.eCertisTemplate[cr.id]">
+              <ng-container *ngIf="!utilities.eCertisTemplate[cr.id]">
                 <button mat-raised-button
-                        (click)="this.dataService.onGetECertisData(cr, cr.id, this.dataService.getCountryCode(), this.utilities.selectedLang)">
+                        (click)="dataService.onGetECertisData(cr, cr.id, dataService.getCountryCode(), utilities.selectedLang)">
                   {{'espd.ecertis.more.information' | translate}}
                 </button>
               </ng-container>
-              <div *ngIf="cr.subCriterionList.length === 0 && this.utilities.eCertisTemplate[cr.id]" class="eCertDesc" translate>espd.ecertis.404</div>
-              <ng-container *ngIf="cr.subCriterionList.length !== 0 && this.utilities.eCertisTemplate[cr.id]">
-                <div *ngIf="!this.utilities.isEmpty(cr.subCriterionList)">
+              <div *ngIf="cr.subCriterionList.length === 0 && utilities.eCertisTemplate[cr.id]" class="eCertDesc" translate>espd.ecertis.404</div>
+              <ng-container *ngIf="cr.subCriterionList.length !== 0 && utilities.eCertisTemplate[cr.id]">
+                <div *ngIf="!utilities.isEmpty(cr.subCriterionList)">
                   <div *ngFor="let nationalCriterion of cr.subCriterionList; let i=index" class="ecertis-crit">
                     <app-e-certis-criterion [criterion]="nationalCriterion"></app-e-certis-criterion>
                   </div>
                 </div>
-                <ng-container *ngIf="this.utilities.eCertisTemplate[cr.id]">
-                  <button mat-raised-button (click)="this.utilities.toggleECertis(cr.id)">{{'espd.ecertis.less.information' | translate}}</button>
+                <ng-container *ngIf="utilities.eCertisTemplate[cr.id]">
+                  <button mat-raised-button (click)="utilities.toggleECertis(cr.id)">{{'espd.ecertis.less.information' | translate}}</button>
                 </ng-container>
               </ng-container>
               <!--<div class="eCertDesc" translate>espd.ecertis.404</div>-->
@@ -136,7 +136,7 @@
 
 <ng-container *ngIf="dataService.exclusionCCriteriaForm">
   <form [formGroup]="dataService.exclusionCCriteriaForm" #form="ngForm">
-    <mat-expansion-panel expanded="true" *ngIf="this.dataService.exclusionCCriteria">
+    <mat-expansion-panel expanded="true" *ngIf="dataService.exclusionCCriteria">
       <mat-expansion-panel-header>
         <mat-panel-title>
           {{'espd.part3.crit.insolvency.conflicts.top.title' | translate}}
@@ -145,14 +145,14 @@
 
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <ng-container *ngIf="this.dataService.exclusionCCriteria.length !== 0">
+      <ng-container *ngIf="dataService.exclusionCCriteria.length !== 0">
         <div class="desc">
           <h4 translate>espd.part3.crit.eu.eo.main.breaching.obligations</h4>
           <!--<h4>Article {{exclusionCCriteria['0'].legislationReference.article}} of-->
             <!--{{exclusionCCriteria['0'].legislationReference.title}} sets out the following reasons for exclusion</h4>-->
         </div>
       </ng-container>
-      <mat-card *ngFor="let cr of this.dataService.exclusionCCriteria">
+      <mat-card *ngFor="let cr of dataService.exclusionCCriteria">
         <div class="exclusionCriteria">
           <div class="criterion-wrap">
             <div class="criteria">
@@ -161,21 +161,21 @@
             </div>
             <div class="eCertis">
               <!--<h5>eCertis Information ...</h5>-->
-              <ng-container *ngIf="!this.utilities.eCertisTemplate[cr.id]">
+              <ng-container *ngIf="!utilities.eCertisTemplate[cr.id]">
                 <button mat-raised-button
-                        (click)="this.dataService.onGetECertisData(cr, cr.id, this.dataService.getCountryCode(), this.utilities.selectedLang)">
+                        (click)="dataService.onGetECertisData(cr, cr.id, dataService.getCountryCode(), utilities.selectedLang)">
                   {{'espd.ecertis.more.information' | translate}}
                 </button>
               </ng-container>
-              <div *ngIf="cr.subCriterionList.length === 0 && this.utilities.eCertisTemplate[cr.id]" class="eCertDesc" translate>espd.ecertis.404</div>
-              <ng-container *ngIf="cr.subCriterionList.length !== 0 && this.utilities.eCertisTemplate[cr.id]">
-                <div *ngIf="!this.utilities.isEmpty(cr.subCriterionList)">
+              <div *ngIf="cr.subCriterionList.length === 0 && utilities.eCertisTemplate[cr.id]" class="eCertDesc" translate>espd.ecertis.404</div>
+              <ng-container *ngIf="cr.subCriterionList.length !== 0 && utilities.eCertisTemplate[cr.id]">
+                <div *ngIf="!utilities.isEmpty(cr.subCriterionList)">
                   <div *ngFor="let nationalCriterion of cr.subCriterionList; let i=index" class="ecertis-crit">
                     <app-e-certis-criterion [criterion]="nationalCriterion"></app-e-certis-criterion>
                   </div>
                 </div>
-                <ng-container *ngIf="this.utilities.eCertisTemplate[cr.id]">
-                  <button mat-raised-button (click)="this.utilities.toggleECertis(cr.id)">{{'espd.ecertis.less.information' | translate}}</button>
+                <ng-container *ngIf="utilities.eCertisTemplate[cr.id]">
+                  <button mat-raised-button (click)="utilities.toggleECertis(cr.id)">{{'espd.ecertis.less.information' | translate}}</button>
                 </ng-container>
               </ng-container>
               <!--<div class="eCertDesc" translate>espd.ecertis.404</div>-->
@@ -193,7 +193,7 @@
 
 <ng-container *ngIf="dataService.exclusionDCriteriaForm">
   <form [formGroup]="dataService.exclusionDCriteriaForm" #form="ngForm">
-    <mat-expansion-panel expanded="true" *ngIf="this.dataService.exclusionDCriteria">
+    <mat-expansion-panel expanded="true" *ngIf="dataService.exclusionDCriteria">
       <mat-expansion-panel-header>
         <mat-panel-title>
           {{'espd.part3.crit.purely.national.top.title' | translate}}
@@ -202,12 +202,12 @@
 
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <ng-container *ngIf="this.dataService.exclusionDCriteria.length !== 0">
+      <ng-container *ngIf="dataService.exclusionDCriteria.length !== 0">
         <div class="desc">
           <h4 translate>espd.part3.purely.national.main</h4>
         </div>
       </ng-container>
-      <mat-card *ngFor="let cr of this.dataService.exclusionDCriteria; let i=index">
+      <mat-card *ngFor="let cr of dataService.exclusionDCriteria; let i=index">
         <div class="exclusionCriteria">
           <div class="criterion-wrap">
             <div class="criteria">
@@ -216,21 +216,21 @@
             </div>
             <div class="eCertis">
               <!--<h5>eCertis Information ...</h5>-->
-              <ng-container *ngIf="!this.utilities.eCertisTemplate[cr.id]">
+              <ng-container *ngIf="!utilities.eCertisTemplate[cr.id]">
                 <button mat-raised-button
-                        (click)="this.dataService.onGetECertisData(cr, cr.id, this.dataService.getCountryCode(), this.utilities.selectedLang)">
+                        (click)="dataService.onGetECertisData(cr, cr.id, dataService.getCountryCode(), utilities.selectedLang)">
                   {{'espd.ecertis.more.information' | translate}}
                 </button>
               </ng-container>
-              <div *ngIf="cr.subCriterionList.length === 0 && this.utilities.eCertisTemplate[cr.id]" class="eCertDesc" translate>espd.ecertis.404</div>
-              <ng-container *ngIf="cr.subCriterionList.length !== 0 && this.utilities.eCertisTemplate[cr.id]">
-                <div *ngIf="!this.utilities.isEmpty(cr.subCriterionList)">
+              <div *ngIf="cr.subCriterionList.length === 0 && utilities.eCertisTemplate[cr.id]" class="eCertDesc" translate>espd.ecertis.404</div>
+              <ng-container *ngIf="cr.subCriterionList.length !== 0 && utilities.eCertisTemplate[cr.id]">
+                <div *ngIf="!utilities.isEmpty(cr.subCriterionList)">
                   <div *ngFor="let nationalCriterion of cr.subCriterionList; let i=index" class="ecertis-crit">
                     <app-e-certis-criterion [criterion]="nationalCriterion"></app-e-certis-criterion>
                   </div>
                 </div>
-                <ng-container *ngIf="this.utilities.eCertisTemplate[cr.id]">
-                  <button mat-raised-button (click)="this.utilities.toggleECertis(cr.id)">{{'espd.ecertis.less.information' | translate}}</button>
+                <ng-container *ngIf="utilities.eCertisTemplate[cr.id]">
+                  <button mat-raised-button (click)="utilities.toggleECertis(cr.id)">{{'espd.ecertis.less.information' | translate}}</button>
                 </ng-container>
               </ng-container>
               <!--<div class="eCertDesc" translate>espd.ecertis.404</div>-->
