@@ -26,7 +26,7 @@ allprojects {
         ext.name = 'University of Piraeus Research Center'
         excludes(["**/*.xlsx", "**/*.xml", "**/*.xsl", "**/*.doc", "**/*.pdf",
                   "**/*.jks", "**/*.gc", "**/*.cva", "**/*.sch", "**/*.xslt",
-                  "**/*.xjb", "**/*.xsd", "**/*.json"])
+                  "**/*.xjb", "**/*.xsd", "**/*.json", "**/*.css", "**/*.version,", "**/*.conf"])
         skipExistingHeaders = true
         ignoreFailures = true
     }
@@ -120,11 +120,11 @@ configure(subprojects)
 
 
 wrapper {
-    gradleVersion = '5.3'
+    gradleVersion = '5.3.1'
 }
 
 task licenseFormatDesignerFrontend(type: com.hierynomus.gradle.license.tasks.LicenseFormat) {
-    source = fileTree(dir: "designer/designer-frontend/src").exclude(["**/*.json", "**/*.ico"])
+    source = fileTree(dir: "designer/designer-frontend/src").exclude(["**/*.json", "**/*.ico", "**/*.css"])
 
     license {
         header = rootProject.file('LICENSE-HEADER-2.0.txt')
