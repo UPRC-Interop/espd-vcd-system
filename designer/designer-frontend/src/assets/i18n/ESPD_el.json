@@ -342,7 +342,7 @@
    "espd.init.upload.request.response": "Τηλεφορτώστε αίτηση ΕΕΕΣ/ΤΕΥΔ από την αναθέτουσα αρχή",
    "espd.init.upload.response": "Τηλεφορτώστε παλιά σας απάντηση ΕΕΕΣ/ΤΕΥΔ",
    "espd.init.what.you.do": "Τι θέλετε να κάνετε;",
-   "espd.init.where.are.you.from.ca": "Πού εδρεύει η αρχή σας;",
+   "espd.init.where.are.you.from.ca": "Που εδρεύει η αρχή / ο φορέας σας;",
    "espd.init.where.are.you.from.eo": "Πού εδρεύει η επιχείρησή σας;",
    "espd.init.who.are.you": "Ποιος είστε;",
    "espd.gui.footer.last.update": "Τελευταία ενημέρωση:",
