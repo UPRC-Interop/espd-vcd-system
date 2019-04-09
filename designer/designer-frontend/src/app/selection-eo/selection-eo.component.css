@@ -82,6 +82,13 @@ mat-checkbox {
   flex:2;
 }
 
+
+.yes_btn {
+  margin-right: 5px;
+  padding-right: 5px;
+}
+
+
 /*.mat-expansion-panel {*/
   /*border:1px solid rgba(0,0,0,0.1);*/
 /*}*/

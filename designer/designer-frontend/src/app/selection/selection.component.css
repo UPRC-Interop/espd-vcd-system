@@ -81,3 +81,8 @@ mat-checkbox {
   display: inline;
 }
 
+.yes_btn {
+  margin-right: 5px;
+  padding-right: 5px;
+}
+

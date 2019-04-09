@@ -27,7 +27,7 @@
                          [disabled]="dataService.isReadOnly()">
           <mat-radio-button color="primary" name="selALL" value="YES"
                             [checked]="!utilities.isSatisfiedALLSelected && utilities.isImportReq"
-                            (change)="handleALL(YES)" #YES>
+                            (change)="handleALL(YES)"  class="yes_btn" #YES>
             {{'espd.gui.yes' | translate}}
           </mat-radio-button>
           <mat-radio-button color="primary" name="selALL" value="NO"
