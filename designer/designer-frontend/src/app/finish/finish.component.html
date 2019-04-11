@@ -20,6 +20,47 @@
 <form #form="ngForm">
 
   <mat-accordion multi="true">
+
+    <mat-expansion-panel expanded="true" *ngIf="dataService.reductionCriteria">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{'espd.part5.reduction' | translate}}
+        </mat-panel-title>
+        <mat-panel-description>
+
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="desc">
+        <mat-card>
+          {{'espd.part5.toptext' | translate}}
+        </mat-card>
+        <h4 translate>espd.part5.reduction.question</h4>
+      </div>
+      <ng-container *ngIf="dataService.reductionCriteria.length !== 0">
+        <mat-card *ngFor="let criteria of dataService.reductionCriteria; let i = index">
+          <div class="exclusionCriteria" >
+<!--            <h4>{{criteria.propertyKeyMap.pk1 | translate}}</h4>-->
+            <div class="criteria">
+              <mat-checkbox color="primary"
+                            name='{{criteria.name+i}}'
+                            [(ngModel)]="dataService.reductionCriteria[i].selected"
+                            [disabled]="dataService.isReadOnly()"></mat-checkbox>
+              {{criteria.propertyKeyMap.pk1 | translate}}
+<!--              <div class="critDesc">{{criteria.propertyKeyMap.pk2 | translate}}</div>-->
+            </div>
+            <div *ngIf="dataService.reductionCriteriaForm">
+              <div class="answer">
+                <app-criterion [criterion]="criteria" [form]="dataService.reductionCriteriaForm.controls"
+                               [indicator]="true"></app-criterion>
+              </div>
+            </div>
+          </div>
+        </mat-card>
+      </ng-container>
+
+    </mat-expansion-panel>
+
+
     <mat-expansion-panel expanded="true">
       <mat-expansion-panel-header>
         <mat-panel-title [innerHTML]="'espd.part5.concl.statements' | translate"></mat-panel-title>
