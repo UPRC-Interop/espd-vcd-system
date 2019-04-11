@@ -16,6 +16,7 @@
 package eu.esens.espdvcd.designer.service;
 
 import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
+import eu.esens.espdvcd.codelist.enums.internal.ContractingOperatorEnum;
 import eu.esens.espdvcd.designer.typeEnum.CriteriaType;
 import eu.esens.espdvcd.designer.util.CriteriaUtil;
 import eu.esens.espdvcd.model.SelectableCriterion;
@@ -28,14 +29,21 @@ import java.util.List;
 public enum SelfContainedCriteriaService implements CriteriaService {
     INSTANCE;
 
-    private final CriteriaExtractor extractor = new SelfContainedCriteriaExtractorBuilder().build();
+    private final CriteriaExtractor CA_EXTRACTOR = new SelfContainedCriteriaExtractorBuilder()
+            .withContractingOperator(ContractingOperatorEnum.CONTRACTING_AUTHORITY)
+            .build();
+    private final CriteriaExtractor CE_EXTRACTOR = new SelfContainedCriteriaExtractorBuilder()
+            .withContractingOperator(ContractingOperatorEnum.CONTRACTING_ENTITY)
+            .build();
+
 
     public static SelfContainedCriteriaService getInstance() {
         return INSTANCE;
     }
 
     @Override
-    public List<SelectableCriterion> getCriteria() throws RetrieverException {
+    public List<SelectableCriterion> getCriteria(ContractingOperatorEnum contractingOperatorEnum) throws RetrieverException {
+        CriteriaExtractor extractor = contractingOperatorEnum.equals(ContractingOperatorEnum.CONTRACTING_AUTHORITY) ? CA_EXTRACTOR : CE_EXTRACTOR;
         extractor.setLang(EULanguageCodeEnum.EN);
         List<SelectableCriterion> criteria = extractor.getFullList();
         CriteriaUtil.generateUUIDs(criteria);
@@ -43,15 +51,11 @@ public enum SelfContainedCriteriaService implements CriteriaService {
     }
 
     @Override
-    public List<SelectableCriterion> getUnselectedCriteria(List<SelectableCriterion> initialList) throws RetrieverException {
+    public List<SelectableCriterion> getUnselectedCriteria(List<SelectableCriterion> initialList,
+                                                           ContractingOperatorEnum contractingOperatorEnum) throws RetrieverException {
+        CriteriaExtractor extractor = contractingOperatorEnum.equals(ContractingOperatorEnum.CONTRACTING_AUTHORITY) ? CA_EXTRACTOR : CE_EXTRACTOR;
         extractor.setLang(EULanguageCodeEnum.EN);
         return extractor.getFullList(initialList);
-    }
-
-    @Override
-    public List<SelectableCriterion> getTranslatedCriteria(String lang) throws RetrieverException {
-        extractor.setLang(EULanguageCodeEnum.valueOf(lang.toUpperCase()));
-        return extractor.getFullList();
     }
 
     @Override
