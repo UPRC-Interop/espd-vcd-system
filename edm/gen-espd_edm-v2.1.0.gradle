@@ -51,6 +51,7 @@ jaxb {
     
     // espd edm v 2.0.2
     bindingsDir = "${project.rootDir}/src/main/resources/xsd/bindings"
+    episodesDir = "${project.buildDir}/generated-resources/episodes/210"
     xsdDir = "${project.projectDir}/src/main/resources/xsd/v2/2.1.0"
     bindings = ["binding_espdedm_v2.1.0.xjb"]
     
