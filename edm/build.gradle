@@ -27,14 +27,12 @@ buildscript {
     }
 }
 
-def generatedDir102 = "${project.buildDir}/generated-sources/xjc/102"
-def generatedDir202 = "${project.buildDir}/generated-sources/xjc/202"
-def generatedDir210 = "${project.buildDir}/generated-sources/xjc/210"
+def generatedDir = "${project.buildDir}/generated-sources/xjc"
 
 sourceSets {
     main {
         java {
-            srcDirs += "$generatedDir102" + "$generatedDir202" + "$generatedDir210"
+            srcDirs ("$generatedDir")
         }
     }
 }
