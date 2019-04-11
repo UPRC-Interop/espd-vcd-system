@@ -22,7 +22,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath "gradle.plugin.org.openrepose:gradle-jaxb-plugin:2.2.3"
+        classpath "gradle.plugin.org.openrepose:gradle-jaxb-plugin:2.5.0"
     }
 }
 
@@ -56,7 +56,7 @@ jaxb {
     
     xjc {
         // taskClassname = "com.sun.tools.xjc.XJC2Task"
-        destinationDir = "${project.buildDir}/generated-sources/xjc"
+        destinationDir = "${project.buildDir}/generated-sources/xjc/202"
         args = ["-verbose"]
     }
         
