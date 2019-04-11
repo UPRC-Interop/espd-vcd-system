@@ -15,6 +15,6 @@
 ///
 
 export const environment = {
-  production: true,
+  production: false,
   apiUrl: 'https://espdint.ds.unipi.gr/nightly_dev/api/'
 };
