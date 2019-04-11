@@ -19,12 +19,6 @@ import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
 
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Properties;
-import java.util.logging.Logger;
-
 public enum AppConfig {
     INSTANCE;
 
