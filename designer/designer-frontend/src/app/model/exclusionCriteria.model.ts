@@ -35,4 +35,5 @@ export class ExclusionCriteria {
   ruleset?: string;
   response?: RequirementResponse;
   propertyKeyMap: PropertyKeyMap;
+  compulsory?: boolean;
 }
