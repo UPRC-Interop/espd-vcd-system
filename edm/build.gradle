@@ -85,8 +85,8 @@ task genAllEspdEdm {
     }
 
     dependsOn genEspdEdmV102, genEspdEdmV202, genEspdEdmV210
-//    genEspdEdmV210.mustRunAfter genEspdEdmV202
-//    genEspdEdmV202.mustRunAfter genEspdEdmV102
+    genEspdEdmV210.mustRunAfter genEspdEdmV202
+    genEspdEdmV202.mustRunAfter genEspdEdmV102
 }
 
 // compileJava.dependsOn genAllEspdEdm
