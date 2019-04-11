@@ -172,49 +172,49 @@ export class ApicallService {
 
   getExclusionCriteria_A() {
     return this.http.get<ExclusionCriteria[]>(environment.apiUrl + this.version + '/' + this.utilities.qualificationApplicationType +
-      '/criteria/exclusion_a').toPromise();
+      '/criteria/exclusion_a?contractingOperator=' + this.utilities.role).toPromise();
   }
 
   getExclusionCriteria_B() {
     return this.http.get<ExclusionCriteria[]>(environment.apiUrl + this.version + '/' + this.utilities.qualificationApplicationType +
-      '/criteria/exclusion_b').toPromise();
+      '/criteria/exclusion_b?contractingOperator=' + this.utilities.role).toPromise();
   }
 
   getExclusionCriteria_C() {
     return this.http.get<ExclusionCriteria[]>(environment.apiUrl + this.version + '/' + this.utilities.qualificationApplicationType +
-      '/criteria/exclusion_c').toPromise();
+      '/criteria/exclusion_c?contractingOperator=' + this.utilities.role).toPromise();
   }
 
   getExclusionCriteria_D() {
     return this.http.get<ExclusionCriteria[]>(environment.apiUrl + this.version + '/' + this.utilities.qualificationApplicationType +
-      '/criteria/exclusion_d').toPromise();
+      '/criteria/exclusion_d?contractingOperator=' + this.utilities.role).toPromise();
   }
 
   /* ============= SELECTION CRITERIA ===================*/
 
   getSelectionCriteria() {
     return this.http.get<SelectionCriteria[]>(environment.apiUrl + this.version + '/' + this.utilities.qualificationApplicationType +
-      '/criteria/selection').toPromise();
+      '/criteria/selection?contractingOperator=' + this.utilities.role).toPromise();
   }
 
   getSelectionCriteria_A() {
     return this.http.get<SelectionCriteria[]>(environment.apiUrl + this.version + '/' + this.utilities.qualificationApplicationType +
-      '/criteria/selection_a').toPromise();
+      '/criteria/selection_a?contractingOperator=' + this.utilities.role).toPromise();
   }
 
   getSelectionCriteria_B() {
     return this.http.get<SelectionCriteria[]>(environment.apiUrl + this.version + '/' + this.utilities.qualificationApplicationType +
-      '/criteria/selection_b').toPromise();
+      '/criteria/selection_b?contractingOperator=' + this.utilities.role).toPromise();
   }
 
   getSelectionCriteria_C() {
     return this.http.get<SelectionCriteria[]>(environment.apiUrl + this.version + '/' + this.utilities.qualificationApplicationType +
-      '/criteria/selection_c').toPromise();
+      '/criteria/selection_c?contractingOperator=' + this.utilities.role).toPromise();
   }
 
   getSelectionCriteria_D() {
     return this.http.get<SelectionCriteria[]>(environment.apiUrl + this.version + '/' + this.utilities.qualificationApplicationType +
-      '/criteria/selection_d').toPromise();
+      '/criteria/selection_d?contractingOperator=' + this.utilities.role).toPromise();
   }
 
   /* ============ UPLOAD XML GET JSON ================= */

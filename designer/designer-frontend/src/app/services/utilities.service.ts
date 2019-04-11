@@ -55,6 +55,8 @@ export class UtilitiesService {
   type: string;
   selectedLang = 'en';
   eCertisTemplate = [];
+
+  role: string;
   // qualificationApplicationType = 'SELF-CONTAINED';
   // qualificationApplicationType = 'REGULATED';
 
@@ -190,13 +192,13 @@ export class UtilitiesService {
   }
 
   resetSubCriterionList(criteria: FullCriterion[]) {
-     criteria.forEach(cr => {
-       if (cr.subCriterionList.length > 0) {
-         cr.subCriterionList.length = 0;
-         this.eCertisTemplate[cr.id] = false;
-       }
-     });
-    }
+    criteria.forEach(cr => {
+      if (cr.subCriterionList.length > 0) {
+        cr.subCriterionList.length = 0;
+        this.eCertisTemplate[cr.id] = false;
+      }
+    });
+  }
 
 
   /* ============================ snackbar ===================================== */
