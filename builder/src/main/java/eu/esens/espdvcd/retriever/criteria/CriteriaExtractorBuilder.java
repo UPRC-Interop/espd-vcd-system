@@ -34,7 +34,7 @@ import java.util.stream.Collectors;
 /**
  * @author konstantinos Raptis
  */
-abstract class CriteriaExtractorBuilder {
+public abstract class CriteriaExtractorBuilder {
 
     private static final Logger LOGGER = Logger.getLogger(CriteriaExtractorBuilder.class.getName());
 
@@ -114,7 +114,7 @@ abstract class CriteriaExtractorBuilder {
     public CriteriaExtractorBuilder addRequirementsResource(RequirementsResource resource) {
         initResourceLists();
         rgResourceList.add(resource);
-        return CriteriaExtractorBuilder.this;
+        return this;
     }
 
     public CriteriaExtractorBuilder withContractingOperator(ContractingOperatorEnum operator) {

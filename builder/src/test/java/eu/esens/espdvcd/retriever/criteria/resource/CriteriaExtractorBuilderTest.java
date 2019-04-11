@@ -13,10 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package eu.esens.espdvcd.retriever.criteria;
+package eu.esens.espdvcd.retriever.criteria.resource;
 
 import eu.esens.espdvcd.codelist.enums.internal.ContractingOperatorEnum;
 import eu.esens.espdvcd.model.SelectableCriterion;
+import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
+import eu.esens.espdvcd.retriever.criteria.CriteriaExtractorBuilder;
+import eu.esens.espdvcd.retriever.criteria.RegulatedCriteriaExtractorBuilder;
+import eu.esens.espdvcd.retriever.criteria.SelfContainedCriteriaExtractorBuilder;
 import eu.esens.espdvcd.retriever.criteria.resource.RegulatedCriteriaTaxonomyResource;
 import eu.esens.espdvcd.retriever.criteria.resource.ECertisResource;
 import eu.esens.espdvcd.retriever.criteria.resource.ESPDArtefactResource;
