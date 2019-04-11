@@ -1,12 +1,12 @@
 /**
  * Copyright 2016-2019 University of Piraeus Research Center
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,6 +15,8 @@
  */
 package eu.esens.espdvcd.retriever.criteria;
 
+import eu.esens.espdvcd.codelist.enums.internal.ContractingOperatorEnum;
+import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.retriever.criteria.resource.RegulatedCriteriaTaxonomyResource;
 import eu.esens.espdvcd.retriever.criteria.resource.ECertisResource;
 import eu.esens.espdvcd.retriever.criteria.resource.ESPDArtefactResource;
@@ -75,6 +77,21 @@ public class CriteriaExtractorBuilderTest {
                 .build();
 
         SelectableCriterionPrinter.print(e.getFullList());
+    }
+
+    @Test
+    public void testBuilderWithOperatorParam() throws Exception {
+
+        CriteriaExtractor e = new SelfContainedCriteriaExtractorBuilder()
+                .withContractingOperator(ContractingOperatorEnum.CONTRACTING_AUTHORITY)
+                .build();
+
+        String id = "005eb9ed-1347-4ca3-bb29-9bc0db64e1ab";
+        SelectableCriterion sc = e.getFullList().stream()
+                .filter(c -> id.equals(c.getID())).findFirst()
+                .orElse(null);
+
+        Assert.assertTrue(sc.isCompulsory());
     }
 
     @Test
