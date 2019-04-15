@@ -229,8 +229,6 @@
             [formControlErrors]="form.controls[''+ req.uuid+'evidenceUrl'].errors"></input-validation-error>
         </mat-error>
       </mat-form-field>
-      <!--<label [attr.for]="req.uuid+'evidenceCode'">Reference/Code: </label>-->
-      <!--<br>-->
       <mat-form-field>
         <input matInput [formControlName]="req.uuid+'evidenceIssuer'" [id]="req.uuid+'evidenceIssuer'" placeholder="{{'espd.crit.issuer' | translate}}"
                [required]="req.mandatory">
