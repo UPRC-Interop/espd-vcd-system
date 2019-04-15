@@ -18,7 +18,7 @@
 <div class="ecertis-wrap">
   <div class="ecertis-name">
     {{criterion.name + '( ' + criterion.legislationReference.title + ' '}} <a
-    href="{{criterion.legislationReference.uri}}">
+    href="{{criterion.legislationReference.uri}}" target="_blank">
     {{criterion.legislationReference.article + ' )'}}</a>
   </div>
   <div class="ecertis-text">
@@ -29,7 +29,7 @@
 <!-- TODO evidence handling-->
 
 <div *ngFor="let evidence of criterion.evidenceList; let i=index " class="evidence-wrap">
-  <div class="evidence-text">{{i+1 +". "}}<a href="{{evidence.evidenceURL}}">{{evidence.name}}</a>
+  <div class="evidence-text">{{i+1 +". "}}<a href="{{evidence.evidenceURL}}" target="_blank">{{evidence.name}}</a>
     <div *ngIf="evidence.evidenceIssuer !== null">
       <span translate>espd.ecertis.issued</span> {{": "+ evidence.evidenceIssuer.name}}
     </div>

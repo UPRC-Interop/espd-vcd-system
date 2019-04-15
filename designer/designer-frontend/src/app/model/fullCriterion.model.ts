@@ -35,4 +35,5 @@ export class FullCriterion {
   ruleset?: string;
   response?: RequirementResponse;
   propertyKeyMap: PropertyKeyMap;
+  compulsory?: boolean;
 }

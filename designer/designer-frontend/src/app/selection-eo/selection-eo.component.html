@@ -19,14 +19,14 @@
 
 <div *ngIf="utilities.qualificationApplicationType === 'regulated'">
   <mat-card>
-    <mat-card-content>
+    <mat-card-content class="space-fix">
       <p translate>espd.part4.alert</p>
       <span translate>espd.gui.question.to.use.alpha</span>
       <mat-radio-group name="satisfiesALL"
                        [disabled]="utilities.isImport()">
         <mat-radio-button color="primary" name="selALL" value="YES"
                           [checked]="!utilities.satisfiedALLCriterionExists && utilities.isImport()"
-                          (change)="handleALL(YES)" #YES>
+                          (change)="handleALL(YES)" class="yes_btn" #YES>
           {{'espd.gui.yes' | translate}}
         </mat-radio-button>
         <mat-radio-button color="primary" name="selALL" value="NO"

@@ -27,7 +27,7 @@
                          [disabled]="dataService.isReadOnly()">
           <mat-radio-button color="primary" name="selALL" value="YES"
                             [checked]="!utilities.isSatisfiedALLSelected && utilities.isImportReq"
-                            (change)="handleALL(YES)" #YES>
+                            (change)="handleALL(YES)"  class="yes_btn" #YES>
             {{'espd.gui.yes' | translate}}
           </mat-radio-button>
           <mat-radio-button color="primary" name="selALL" value="NO"
@@ -297,7 +297,7 @@
       </mat-expansion-panel-header>
       <ng-container *ngIf="dataService.selectionDCriteria.length !== 0">
         <div class="desc">
-          <h4 translate>espd.part4.crit.selection.technical.professional.ability.article</h4>
+          <h4 translate>espd.part4.crit.selection.quality.assurance.article</h4>
           <!--<h4>Article {{selectionDCriteria['0'].legislationReference.article}} of {{selectionDCriteria['0'].legislationReference.title}} sets out the following selection criteria </h4>-->
         </div>
       </ng-container>

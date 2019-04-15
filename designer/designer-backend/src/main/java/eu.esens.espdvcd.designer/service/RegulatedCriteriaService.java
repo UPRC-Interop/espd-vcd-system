@@ -15,6 +15,7 @@
  */
 package eu.esens.espdvcd.designer.service;
 
+import eu.esens.espdvcd.codelist.enums.internal.ContractingOperatorEnum;
 import eu.esens.espdvcd.designer.typeEnum.CriteriaType;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
@@ -30,10 +31,16 @@ import static eu.esens.espdvcd.designer.util.CriteriaUtil.markAsSelected;
 public enum RegulatedCriteriaService implements CriteriaService {
     V1(EDMVersion.V1), V2(EDMVersion.V2);
 
-    private final CriteriaExtractor predefinedExtractor;
+    private final CriteriaExtractor PREDEFINED_CA_EXTRACTOR;
+    private final CriteriaExtractor PREDEFINED_CE_EXTRACTOR;
 
     RegulatedCriteriaService(EDMVersion version) {
-        predefinedExtractor = new RegulatedCriteriaExtractorBuilder(version).build();
+        PREDEFINED_CA_EXTRACTOR = new RegulatedCriteriaExtractorBuilder(version)
+                .withContractingOperator(ContractingOperatorEnum.CONTRACTING_AUTHORITY)
+                .build();
+        PREDEFINED_CE_EXTRACTOR = new RegulatedCriteriaExtractorBuilder(version)
+                .withContractingOperator(ContractingOperatorEnum.CONTRACTING_ENTITY)
+                .build();
     }
 
     public static RegulatedCriteriaService getV1Instance() {
@@ -45,18 +52,20 @@ public enum RegulatedCriteriaService implements CriteriaService {
     }
 
     @Override
-    public List<SelectableCriterion> getCriteria() throws RetrieverException {
+    public List<SelectableCriterion> getCriteria(ContractingOperatorEnum contractingOperatorEnum) throws RetrieverException {
+        CriteriaExtractor predefinedExtractor =
+                contractingOperatorEnum.equals(ContractingOperatorEnum.CONTRACTING_AUTHORITY) ? PREDEFINED_CA_EXTRACTOR
+                        : PREDEFINED_CE_EXTRACTOR;
         return markAsSelected(generateUUIDs(predefinedExtractor.getFullList()));
     }
 
     @Override
-    public List<SelectableCriterion> getUnselectedCriteria(List<SelectableCriterion> initialList) throws RetrieverException {
+    public List<SelectableCriterion> getUnselectedCriteria(List<SelectableCriterion> initialList,
+                                                           ContractingOperatorEnum contractingOperatorEnum) throws RetrieverException {
+        CriteriaExtractor predefinedExtractor =
+                contractingOperatorEnum.equals(ContractingOperatorEnum.CONTRACTING_AUTHORITY) ? PREDEFINED_CA_EXTRACTOR
+                        : PREDEFINED_CE_EXTRACTOR;
         return predefinedExtractor.getFullList(initialList);
-    }
-
-    @Override
-    public List<SelectableCriterion> getTranslatedCriteria(String lang) {
-        throw new UnsupportedOperationException("Translation is not yet supported for the EU criteria");
     }
 
     @Override

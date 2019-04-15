@@ -1,12 +1,12 @@
 /**
  * Copyright 2016-2019 University of Piraeus Research Center
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,6 +16,7 @@
 package eu.esens.espdvcd.retriever.criteria;
 
 import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
+import eu.esens.espdvcd.codelist.enums.internal.ContractingOperatorEnum;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.retriever.criteria.resource.*;
 import eu.esens.espdvcd.retriever.criteria.resource.utils.TaxonomyDataUtils;
@@ -33,7 +34,7 @@ import java.util.stream.Collectors;
 /**
  * @author konstantinos Raptis
  */
-abstract class CriteriaExtractorBuilder {
+public abstract class CriteriaExtractorBuilder {
 
     private static final Logger LOGGER = Logger.getLogger(CriteriaExtractorBuilder.class.getName());
 
@@ -41,6 +42,7 @@ abstract class CriteriaExtractorBuilder {
     private List<LegislationResource> lResourceList;
     private List<RequirementsResource> rgResourceList;
 
+    private ContractingOperatorEnum operator = ContractingOperatorEnum.CONTRACTING_ENTITY;
     private EDMVersion version;
     private QualificationApplicationTypeEnum type;
 
@@ -112,6 +114,11 @@ abstract class CriteriaExtractorBuilder {
     public CriteriaExtractorBuilder addRequirementsResource(RequirementsResource resource) {
         initResourceLists();
         rgResourceList.add(resource);
+        return this;
+    }
+
+    public CriteriaExtractorBuilder withContractingOperator(ContractingOperatorEnum operator) {
+        this.operator = operator;
         return CriteriaExtractorBuilder.this;
     }
 
@@ -130,7 +137,7 @@ abstract class CriteriaExtractorBuilder {
             rgResourceList.addAll(createDefaultRequirementsResources());
         }
 
-        return new CriteriaExtractorImpl(cResourceList, lResourceList, rgResourceList);
+        return new CriteriaExtractorImpl(cResourceList, lResourceList, rgResourceList, operator);
     }
 
     private CriteriaResource createDefaultCriteriaResource() {
@@ -313,7 +320,6 @@ abstract class CriteriaExtractorBuilder {
 //            LOGGER.log(Level.INFO, "eCertis resource initialized with default ID list");
 //        }
 //    }
-
     private void initECertisResource(List<String> initialIDList) {
 
         if (eCertisResource == null) {

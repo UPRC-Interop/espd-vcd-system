@@ -1,12 +1,12 @@
 /**
  * Copyright 2016-2019 University of Piraeus Research Center
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,6 +16,7 @@
 package eu.esens.espdvcd.designer.endpoint;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import eu.esens.espdvcd.codelist.enums.internal.ContractingOperatorEnum;
 import eu.esens.espdvcd.designer.service.CriteriaService;
 import eu.esens.espdvcd.designer.service.NationalCriteriaMappingService;
 import eu.esens.espdvcd.designer.util.Errors;
@@ -30,6 +31,7 @@ import java.util.Objects;
 public class CriteriaEndpoint extends Endpoint {
 
     private final CriteriaService service;
+    private static final String CONTRACTING_OPERATOR_PARAM = "contractingOperator";
 
     public CriteriaEndpoint(CriteriaService service) {
         this.service = service;
@@ -39,16 +41,8 @@ public class CriteriaEndpoint extends Endpoint {
     public void configure(Service spark, String basePath) {
 
         spark.path(basePath + "/criteria", () -> {
-            spark.get("/lang/:lang", (request, response) -> {
-                String lang = request.params("lang");
-                return getNoFilter(response, lang);
-            }, JsonUtil.json());
-            spark.get("", (request, response) -> {
-                String lang = request.params("lang");
-                return getNoFilter(response, lang);
-            }, JsonUtil.json());
+            spark.get("", this::getNoFilter, JsonUtil.json());
             spark.get("/getFilters", this::getFilters, JsonUtil.json());
-            spark.get("/:filter/lang/:lang", this::getFilter, JsonUtil.json());
             spark.get("/:filter", this::getFilter, JsonUtil.json());
             spark.get("/eCertisData/:criterionID/country/:countryCode", this::getNational, JsonUtil.json());
             spark.get("/eCertisData/:criterionID/country/:countryCode/lang/:lang", this::getNational, JsonUtil.json());
@@ -57,60 +51,42 @@ public class CriteriaEndpoint extends Endpoint {
         spark.after((req, res) -> res.type("application/json"));
     }
 
-    private Object getNoFilter(Response response, String lang) throws JsonProcessingException {
-        if (Objects.isNull(lang)) {
-            try {
-                return service.getCriteria();
-            } catch (RetrieverException e) {
-                response.status(502);
-                LOGGER.severe(e.getMessage());
-                return Errors.retrieverError(e.getMessage());
-            }
-        } else {
-            try {
-                return service.getTranslatedCriteria(lang);
-            } catch (UnsupportedOperationException e) {
-                response.status(406);
-                LOGGER.warning(e.getMessage());
-                return Errors.notAcceptableError(e.getMessage());
-            } catch (RetrieverException e) {
-                response.status(502);
-                LOGGER.severe(e.getMessage());
-                return Errors.retrieverError(e.getMessage());
-            }
+    private Object getNoFilter(Request request, Response response) throws JsonProcessingException {
+        ContractingOperatorEnum contractingOperatorEnum;
+        try {
+            contractingOperatorEnum = ContractingOperatorEnum.valueOf(
+                    request.queryParams(CONTRACTING_OPERATOR_PARAM));
+        } catch (IllegalArgumentException | NullPointerException e) {
+            contractingOperatorEnum = ContractingOperatorEnum.CONTRACTING_ENTITY;
         }
+        try {
+            return service.getCriteria(contractingOperatorEnum);
+        } catch (RetrieverException e) {
+            response.status(502);
+            LOGGER.severe(e.getMessage());
+            return Errors.retrieverError(e.getMessage());
+        }
+
     }
 
     private Object getFilter(Request request, Response response) throws JsonProcessingException {
-        String lang = request.params("lang");
-        if (Objects.isNull(lang)) {
-            try {
-                return service.getFilteredCriteriaList(request.params("filter").toUpperCase());
-            } catch (IllegalArgumentException e) {
-                response.status(404);
-                LOGGER.warning(e.getMessage());
-                return Errors.criteriaNotFoundError();
-            } catch (RetrieverException e) {
-                response.status(502);
-                LOGGER.severe(e.getMessage());
-                return Errors.retrieverError(e.getMessage());
-            }
-        } else {
-            try {
-                return service.getFilteredTranslatedCriteriaList(request.params("filter").toUpperCase(), lang);
-            } catch (IllegalArgumentException e) {
-                response.status(404);
-                LOGGER.warning(e.getMessage());
-                return Errors.criteriaNotFoundError();
-            } catch (UnsupportedOperationException e) {
-                response.status(406);
-                LOGGER.warning(e.getMessage());
-                return Errors.notAcceptableError(e.getMessage());
-            } catch (RetrieverException e) {
-                response.status(502);
-                LOGGER.severe(e.getMessage());
-                return Errors.retrieverError(e.getMessage());
-            }
+        ContractingOperatorEnum contractingOperatorEnum;
+        try {
+            contractingOperatorEnum = ContractingOperatorEnum.valueOf(
+                    request.queryParams(CONTRACTING_OPERATOR_PARAM));
+        } catch (IllegalArgumentException | NullPointerException e) {
+            contractingOperatorEnum = ContractingOperatorEnum.CONTRACTING_ENTITY;
+        }
+        try {
+            return service.getFilteredCriteriaList(request.params("filter").toUpperCase(), contractingOperatorEnum);
+        } catch (IllegalArgumentException e) {
+            response.status(404);
+            LOGGER.warning(e.getMessage());
+            return Errors.criteriaNotFoundError();
+        } catch (RetrieverException e) {
+            response.status(502);
+            LOGGER.severe(e.getMessage());
+            return Errors.retrieverError(e.getMessage());
         }
     }
 

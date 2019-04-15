@@ -23,7 +23,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'gradle.plugin.org.openrepose:gradle-jaxb-plugin:2.2.3'
+        classpath 'gradle.plugin.org.openrepose:gradle-jaxb-plugin:2.5.0'
     }
 }
 
@@ -32,7 +32,7 @@ def generatedDir = "${project.buildDir}/generated-sources/xjc"
 sourceSets {
     main {
         java {
-            srcDirs += "$generatedDir"
+            srcDirs ("$generatedDir/102", "$generatedDir/202", "$generatedDir/210")
         }
     }
 }
@@ -85,6 +85,8 @@ task genAllEspdEdm {
     }
 
     dependsOn genEspdEdmV102, genEspdEdmV202, genEspdEdmV210
+    genEspdEdmV210.mustRunAfter genEspdEdmV202
+    genEspdEdmV202.mustRunAfter genEspdEdmV102
 }
 
 // compileJava.dependsOn genAllEspdEdm

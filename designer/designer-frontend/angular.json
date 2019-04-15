@@ -63,15 +63,15 @@
               ]
             },
             "snf-dev": {
-              "optimization": true,
+              "optimization": false,
               "outputHashing": "all",
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
+              "aot": false,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": true,
+              "buildOptimizer": false,
               "subresourceIntegrity": true,
               "baseHref": "/nightly_dev/",
               "fileReplacements": [

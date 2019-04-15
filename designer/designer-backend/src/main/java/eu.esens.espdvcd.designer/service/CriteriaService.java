@@ -15,6 +15,7 @@
  */
 package eu.esens.espdvcd.designer.service;
 
+import eu.esens.espdvcd.codelist.enums.internal.ContractingOperatorEnum;
 import eu.esens.espdvcd.designer.typeEnum.CriteriaType;
 import eu.esens.espdvcd.designer.util.CriteriaUtil;
 import eu.esens.espdvcd.model.SelectableCriterion;
@@ -25,25 +26,24 @@ import java.util.stream.Collectors;
 
 public interface CriteriaService {
 
-    List<SelectableCriterion> getCriteria() throws RetrieverException;
+    List<SelectableCriterion> getCriteria(ContractingOperatorEnum contractingOperatorEnum) throws RetrieverException;
 
-    List<SelectableCriterion> getUnselectedCriteria(List<SelectableCriterion> initialList) throws RetrieverException;
-
-    List<SelectableCriterion> getTranslatedCriteria(String lang) throws RetrieverException;
+    List<SelectableCriterion> getUnselectedCriteria(List<SelectableCriterion> initialList, ContractingOperatorEnum contractingOperatorEnum) throws RetrieverException;
 
     CriteriaType[] getCriteriaFilters();
 
-    default List<SelectableCriterion> getFilteredCriteriaList(String criteriaType) throws RetrieverException, IllegalArgumentException {
-        return getCriteria().stream()
+    default List<SelectableCriterion> getFilteredCriteriaList(String criteriaType, ContractingOperatorEnum contractingOperatorEnum) throws RetrieverException, IllegalArgumentException {
+        return getCriteria(contractingOperatorEnum).stream()
                 .filter(cr -> cr.getTypeCode().matches(CriteriaType.valueOf(criteriaType).getRegex()))
                 .sorted(CriteriaUtil::satisfiesAllComparator)
                 .collect(Collectors.toList());
     }
 
-    default List<SelectableCriterion> getFilteredTranslatedCriteriaList(String criteriaType, String lang) throws RetrieverException, IllegalArgumentException {
-        return getTranslatedCriteria(lang).stream()
-                .filter(cr -> cr.getTypeCode().matches(CriteriaType.valueOf(criteriaType).getRegex()))
-                .sorted(CriteriaUtil::satisfiesAllComparator)
-                .collect(Collectors.toList());
+    default  List<SelectableCriterion> getUnselectedCriteria(List<SelectableCriterion> initialList) throws RetrieverException {
+        return getUnselectedCriteria(initialList, ContractingOperatorEnum.CONTRACTING_ENTITY);
+    }
+
+    default List<SelectableCriterion> getCriteria() throws RetrieverException{
+        return getCriteria(ContractingOperatorEnum.CONTRACTING_ENTITY);
     }
 }

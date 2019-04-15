@@ -54,7 +54,7 @@ public class NationalCriteriaMappingServiceTest {
                 "DE");
         criteria.forEach(criterion -> {
             Assert.assertEquals("Kriminelle Vereinigungen", criterion.getName());
-            Assert.assertEquals("\"Der öffentliche Auftraggeber schlie�?t ein Unternehmen " +
+            Assert.assertEquals("\"Der öffentliche Auftraggeber schließt ein Unternehmen " +
                     "zu jedem Zeitpunkt des Vergabeverfahrens von der Teilnahme aus, wenn er Kenntnis davon hat, " +
                     "dass eine Person, deren Verhalten nach Absatz 3 dem Unternehmen zuzurechnen " +
                     "ist, rechtskräftig verurteilt worden ist nach:\n" +

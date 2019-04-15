@@ -35,4 +35,5 @@ export class SelectionCriteria {
   ruleset?: string;
   response?: RequirementResponse;
   propertyKeyMap: PropertyKeyMap;
+  compulsory?: boolean;
 }
