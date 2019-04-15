@@ -232,6 +232,14 @@
       <!--<label [attr.for]="req.uuid+'evidenceCode'">Reference/Code: </label>-->
       <!--<br>-->
       <mat-form-field>
+        <input matInput [formControlName]="req.uuid+'evidenceIssuer'" [id]="req.uuid+'evidenceIssuer'" placeholder="{{'espd.crit.issuer' | translate}}"
+               [required]="req.mandatory">
+        <mat-error *ngIf="form.controls[''+ req.uuid+'evidenceIssuer'].invalid">
+          <input-validation-error
+            [formControlErrors]="form.controls[''+ req.uuid+'evidenceIssuer'].errors"></input-validation-error>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
         <input matInput [formControlName]="req.uuid+'evidenceCode'" [id]="req.uuid+'evidenceCode'" placeholder="{{'espd.crit.code' | translate}}"
                [required]="req.mandatory">
         <mat-error *ngIf="form.controls[''+ req.uuid+'evidenceCode'].invalid">
@@ -241,14 +249,6 @@
       </mat-form-field>
       <!--<label [attr.for]="req.uuid+'evidenceIssuer'">Issuer: </label>-->
       <!--<br>-->
-      <mat-form-field>
-        <input matInput [formControlName]="req.uuid+'evidenceIssuer'" [id]="req.uuid+'evidenceIssuer'" placeholder="{{'espd.crit.issuer' | translate}}"
-               [required]="req.mandatory">
-        <mat-error *ngIf="form.controls[''+ req.uuid+'evidenceIssuer'].invalid">
-          <input-validation-error
-            [formControlErrors]="form.controls[''+ req.uuid+'evidenceIssuer'].errors"></input-validation-error>
-        </mat-error>
-      </mat-form-field>
     </div>
 
 
