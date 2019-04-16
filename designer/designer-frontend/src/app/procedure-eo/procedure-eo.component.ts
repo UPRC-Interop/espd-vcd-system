@@ -20,7 +20,6 @@ import {DataService} from '../services/data.service';
 // import {Country} from '../model/country.model';
 import {FormArray, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 import {MatChipInputEvent, MatDialog} from '@angular/material';
-import {TOOPDialogComponent} from '../toopdialog/toopdialog.component';
 import {UtilitiesService} from '../services/utilities.service';
 import {COMMA, ENTER} from '../../../node_modules/@angular/cdk/keycodes';
 import {CodelistService} from '../services/codelist.service';
@@ -168,20 +167,6 @@ export class ProcedureEoComponent implements OnInit, BaseStep {
     console.log(this.dataService.CADetails);
     this.dataService.EODetails = eoForm.value;
     console.log(this.dataService.EODetails);
-  }
-
-
-  openTOOPDialog() {
-    console.log('this is toop test');
-    const dialogRef = this.dialog.open(TOOPDialogComponent, {
-      width: '500px',
-      id: ''
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-      console.log('closed dialog');
-    });
   }
 
   add(event: MatChipInputEvent): void {
