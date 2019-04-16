@@ -121,7 +121,7 @@
    "espd.crit.decision.final.and.binding": "H εν λόγω απόφαση είναι τελεσίδικη και δεσμευτική;",
    "espd.crit.description": "Περιγραφή",
    "espd.crit.do.you.allow.checks": "Επιτρέπετε ελέγχους;",
-   "espd.crit.end.date": "Ημερομηνία λήξης",
+   "espd.crit.end.date": "Ημερομηνία Λήξης",
    "espd.part3.crit.eu.main.breaching.obligations": "Πληροφορίες σχετικά με πιθανή αφερεγγυότητα, σύγκρουση συμφερόντων ή επαγγελματικό παράπτωμα",
    "espd.part3.crit.eu.eo.main.breaching.obligations": "Πληροφορίες σχετικά με πιθανή αφερεγγυότητα, σύγκρουση συμφερόντων ή επαγγελματικό παράπτωμα",
    "espd.part3.purely.national.main": "Ισχύουν οι αμιγώς εθνικοί λόγοι αποκλεισμού που ορίζονται στη σχετική προκήρυξη ή στα έγγραφα σύναψης της σύμβασης;",
@@ -288,7 +288,7 @@
    "espd.crit.selection.technical.work.contracts.performance.works.main": "Για τις συμβάσεις έργων: εκτέλεση έργων του είδους που έχει προσδιοριστεί",
    "espd.crit.selection.technical.work.contracts.technicians.description": "Στην περίπτωση δημόσιων συμβάσεων έργων, ο οικονομικός φορέας θα μπορεί να χρησιμοποιήσει το ακόλουθο τεχνικό προσωπικό ή τις ακόλουθες τεχνικές υπηρεσίες για την εκτέλεση του έργου:",
    "espd.crit.selection.technical.work.contracts.technicians.main": "Για τις συμβάσεις έργων: Τεχνικό προσωπικό ή τεχνικές υπηρεσίες για την εκτέλεση του έργου",
-   "espd.crit.start.date": "Ημερομηνία λήξης",
+   "espd.crit.start.date": "Ημερομηνία Έναρξης",
    "espd.crit.taken.self.cleaning.measures": "Σε περίπτωση καταδικης, ο οικονομικός φορέας έχει λάβει μέτρα που να αποδεικνύουν την αξιοπιστία του παρά την ύπαρξη σχετικού λόγου αποκλεισμού (“αυτοκάθαρση”);",
    "espd.crit.taxes.eo.fulfilled.obligations": "Ο οικονομικός φορέας έχει εκπληρώσει τις υποχρεώσεις του, είτε καταβάλλοντας τους φόρους ή τις εισφορές κοινωνικής ασφάλισης που οφείλει, συμπεριλαμβανομένων, κατά περίπτωση, των δεδουλευμένων τόκων ή των προστίμων, είτε υπαγόμενος σε δεσμευτικό διακανονισμό για την καταβολή τους;",
    "espd.crit.taxes.length.period.of.exclusion": "Σε περίπτωση καταδικαστικής απόφασης, εφόσον ορίζεται απευθείας σε αυτήν, η διάρκεια της περιόδου αποκλεισμού:",
@@ -488,7 +488,7 @@
    "espd.part2.role": "Role:",
    "espd.part2.number.employees": "Number of Employees:",
    "espd.part2.turnover": "Turnover:",
-   "espd.part2.currency": "Currency",
+   "espd.part2.currency": "Νόμισμα",
    "espd.part2.number.lots": "Number of Lots:",
    "espd.init.reg.or.self": "Το έγγραφο που επιθυμείτε να δημιουργήσετε είναι ΕΕΕΣ/ΤΕΥΔ βάσει του Κανονισμού της ΕΕ ή νέου αυτοτελούς τύπου (self-contained);",
    "espd.init.create.requlated": "Βάσει Κανονισμού της ΕΕ (regulated)",
@@ -609,5 +609,7 @@
    "espd.landing_page.directLinks_second_intra": "Login as customer or test the platform.",
    "espd.crit.type.id": "Type of ID",
    "espd.part4.crit.weighting.allocated": "Weight allocated to this criterion",
-   "espd.part4.crit.weigthing.information": "Provide complementary information about the evaluation of the criterion"
+   "espd.part4.crit.weigthing.information": "Provide complementary information about the evaluation of the criterion",
+   "divider" : "------------------------------------------",
+"espd.createeo.eo.group.role": "adgadgdgadg"
 }
