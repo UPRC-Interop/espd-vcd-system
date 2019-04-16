@@ -78,16 +78,19 @@ export class StartComponent implements OnInit, BaseStep {
       this.isEO = false;
       this.isCE = false;
       this.utilities.type = 'ESPD_REQUEST';
+      this.utilities.role = 'CONTRACTING_AUTHORITY';
     } else if (radio.value === 'EO') {
       this.isEO = true;
       this.isCA = false;
       this.isCE = false;
       this.utilities.type = 'ESPD_RESPONSE';
+      this.utilities.role = 'ECONOMIC_OPERATOR';
     } else if (radio.value === 'CE') {
       this.isCE = true;
       this.isEO = false;
       this.isCA = false;
       this.utilities.type = 'ESPD_REQUEST';
+      this.utilities.role = 'CONTRACTING_ENTITY';
     }
   }
 

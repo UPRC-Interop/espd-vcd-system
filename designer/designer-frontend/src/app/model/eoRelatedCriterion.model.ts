@@ -35,4 +35,5 @@ export class EoRelatedCriterion {
   ruleset?: string;
   response?: RequirementResponse;
   propertyKeyMap: PropertyKeyMap;
+  compulsory?: boolean;
 }
