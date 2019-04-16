@@ -47,12 +47,11 @@ public class CriteriaEndpoint extends Endpoint {
             spark.get("/eCertisData/:criterionID/country/:countryCode", this::getNational, JsonUtil.json());
             spark.get("/eCertisData/:criterionID/country/:countryCode/lang/:lang", this::getNational, JsonUtil.json());
         });
-
-        spark.after((req, res) -> res.type("application/json"));
     }
 
     private Object getNoFilter(Request request, Response response) throws JsonProcessingException {
         ContractingOperatorEnum contractingOperatorEnum;
+        response.type("application/json");
         try {
             contractingOperatorEnum = ContractingOperatorEnum.valueOf(
                     request.queryParams(CONTRACTING_OPERATOR_PARAM));
@@ -71,6 +70,7 @@ public class CriteriaEndpoint extends Endpoint {
 
     private Object getFilter(Request request, Response response) throws JsonProcessingException {
         ContractingOperatorEnum contractingOperatorEnum;
+        response.type("application/json");
         try {
             contractingOperatorEnum = ContractingOperatorEnum.valueOf(
                     request.queryParams(CONTRACTING_OPERATOR_PARAM));
@@ -94,6 +94,7 @@ public class CriteriaEndpoint extends Endpoint {
         String lang = request.params("lang");
         String countryCode = request.params("countryCode");
         String criterionID = request.params("criterionID");
+        response.type("application/json");
         if (Objects.nonNull(lang) && Objects.nonNull(countryCode) && Objects.nonNull(criterionID)) {
             try {
                 return NationalCriteriaMappingService.getInstance().getTranslatedNationalCriteria(criterionID, countryCode, lang);
@@ -125,6 +126,7 @@ public class CriteriaEndpoint extends Endpoint {
     }
 
     private Object getFilters(Request request, Response response) throws JsonProcessingException {
+        response.type("application/json");
         return service.getCriteriaFilters();
     }
 }

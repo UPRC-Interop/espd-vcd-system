@@ -52,6 +52,7 @@ public class ImportESPDEndpoint extends Endpoint {
         spark.path(basePath, () -> {
             spark.get("", ((request, response) -> {
                 response.status(405);
+                response.type("application/json");
                 return Errors.standardError(405, "You need to POST an XML artefact.");
             }), JsonUtil.json());
 
@@ -151,8 +152,6 @@ public class ImportESPDEndpoint extends Endpoint {
                 }
             }, JsonUtil.json());
         });
-
-        spark.after((req, res) -> res.type("application/json"));
     }
 
     private void writeDumpedFile(File espdFile) throws IOException {
@@ -170,7 +169,6 @@ public class ImportESPDEndpoint extends Endpoint {
                 Files.copy(espdFile.toPath(), dumpedFile.toPath());
             }
             LOGGER.info("Dumping imported xml artefact to " + dumpedFile.getAbsolutePath());
-
         }
     }
 }
