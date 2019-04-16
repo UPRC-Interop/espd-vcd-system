@@ -121,7 +121,7 @@
 <ng-container *ngIf="!dataService.isReadOnly()">
   <button [disabled]="!isExportPossible()" type="submit" mat-raised-button color="primary" matStepperNext (click)="onXmlExport()">{{'espd.part5.export' | translate}} (XML)</button>
   <button [disabled]="!isExportPossible()" type="submit" *ngIf="dataService.isVersionTwo()" mat-raised-button color="primary" matStepperNext (click)="onHtmlExport()">{{'espd.part5.export' | translate}} (HTML)</button>
-  <button [disabled]="!isExportPossible()" type="submit" *ngIf="dataService.isVersionTwo()" mat-raised-button color="primary" matStepperNext (click)="onPdfExport()">{{'espd.part5.export' | translate}} (PDF)</button>
+  <button [disabled]="!isExportPossible()" type="submit"  mat-raised-button color="primary" matStepperNext (click)="onPdfExport()">{{'espd.part5.export' | translate}} (PDF)</button>
 </ng-container>
 
 <!--<button type="submit" mat-raised-button color="primary" matStepperNext (click)="onExportV2()">Export V2</button>-->
