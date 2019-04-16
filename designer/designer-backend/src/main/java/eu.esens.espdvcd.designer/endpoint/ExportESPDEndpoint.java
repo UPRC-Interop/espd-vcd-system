@@ -16,6 +16,7 @@
 package eu.esens.espdvcd.designer.endpoint;
 
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.typesafe.config.ConfigException;
 import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
 import eu.esens.espdvcd.designer.deserialiser.RequirementDeserialiser;
 import eu.esens.espdvcd.designer.exception.ValidationException;
@@ -89,11 +90,13 @@ public class ExportESPDEndpoint extends Endpoint {
                         } catch (IllegalArgumentException e) {
                             rsp.status(404);
                             return JsonUtil.toJson(Errors.standardError(404, "Requested language not found."));
+                        } catch (NullPointerException ex){
+                            rsp.status(400);
+                            return JsonUtil.toJson(Errors.standardError(400, "Language was not specified in the parameters."));
                         }
 
                         String artefactType = rq.params("artefactType");
                         if (rq.contentType().contains("application/json")) {
-
                             if (AppConfig.getInstance().isArtefactDumpingEnabled()) {
                                 Files.createDirectories(Paths.get(AppConfig.getInstance().dumpIncomingArtefactsLocation() + "/json/"));
                                 File dumpedFile = new File(AppConfig.getInstance().dumpIncomingArtefactsLocation()
@@ -120,7 +123,10 @@ public class ExportESPDEndpoint extends Endpoint {
                                             400,
                                             "You need to specify if the ESPD is a request or response."));
                                 }
-                                rsp.type("application/xml");
+//                                rsp.raw().getHeader("Content-Type");
+//                                LOGGER.info("HEADER IS "+rsp.raw().getHeader("Content-Type"));
+                                rsp.raw().setHeader("Content-Type","application/octet-stream");
+//                                LOGGER.info("HEADER IS "+rsp.raw().getHeader("Content-Type"));
                                 rsp.header("Content-Disposition", String.format(
                                         "attachment; filename=\"%s.%s\";", artefactType.toLowerCase(), exportType.name().toLowerCase()));
                                 return streamToReturn;

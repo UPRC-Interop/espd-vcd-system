@@ -63,8 +63,5 @@ public class CodelistsEndpoint extends Endpoint {
                 return service.getAvailableCodelists();
             }, JsonUtil.json());
         });
-
-        spark.after((req, res) -> res.type("application/json"));
-
     }
 }
