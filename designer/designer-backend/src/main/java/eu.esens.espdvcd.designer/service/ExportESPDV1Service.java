@@ -21,9 +21,11 @@ import eu.esens.espdvcd.designer.exception.ValidationException;
 import eu.esens.espdvcd.designer.typeEnum.ExportType;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDResponse;
+import eu.esens.espdvcd.transformation.TransformationService;
 import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBException;
+import javax.xml.transform.stream.StreamSource;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,6 +39,8 @@ public enum ExportESPDV1Service implements ExportESPDService {
 
     private final ValidatorService schemaValidationService = SchemaValidatorService.getInstance();
     private final ValidatorService schematronValidationService = SchematronValidatorService.getInstance();
+    private final TransformationService transformationService = new TransformationService();
+
 
     public static ExportESPDV1Service getInstance() {
         return INSTANCE;
@@ -64,16 +68,23 @@ public enum ExportESPDV1Service implements ExportESPDService {
         String theXML = BuilderFactory.EDM_V1.createDocumentBuilderFor(finalizeBeforeExport(model)).getAsString();
         schematronValidationService.validateESPDString(theXML);
         schemaValidationService.validateESPDString(theXML);
+
         return new ByteArrayInputStream(theXML.getBytes(StandardCharsets.UTF_8));
     }
 
     @Override
     public InputStream exportESPDResponseAs(ESPDResponse model, EULanguageCodeEnum languageCodeEnum, ExportType exportType) throws ValidationException, JAXBException, IOException, SAXException {
         Objects.requireNonNull(exportType);
-        if (exportType == ExportType.XML) {
-            return exportESPDResponse(model);
+        switch (exportType) {
+            case XML:
+                return exportESPDResponse(model);
+            case PDF:
+                return transformationService.createPdfStream(new StreamSource(exportESPDResponse(model)), languageCodeEnum);
+            case HTML:
+                return transformationService.createHtmlStream(new StreamSource(exportESPDResponse(model)), languageCodeEnum);
+            default:
+                throw new UnsupportedOperationException(String.format("Exporting to %s is not supported.", exportType.name()));
         }
-        throw new UnsupportedOperationException(String.format("Exporting to %s is not supported.", exportType.name()));
     }
 
     private ESPDRequest finalizeBeforeExport(final ESPDRequest model) throws ValidationException {
