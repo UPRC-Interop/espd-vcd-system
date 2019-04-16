@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2018 University of Piraeus Research Center
+ * Copyright 2016-2019 University of Piraeus Research Center
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.requirement.response.Response;
 
 import java.io.Serializable;
+import java.util.Map;
 
 /**
  * Criterion requirement interface
@@ -78,5 +79,7 @@ public interface Requirement extends Serializable {
     String getResponseValuesRelatedArtefact();
 
     void setResponseValuesRelatedArtefact(String responseValuesRelatedArtefact);
+
+    Map<String, String> getPropertyKeyMap();
 
 }

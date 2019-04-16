@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2018 University of Piraeus Research Center
+ * Copyright 2016-2019 University of Piraeus Research Center
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,12 +20,14 @@ import org.apache.http.HttpStatus;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.conn.ConnectTimeoutException;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
-import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.util.concurrent.Callable;
+import java.util.concurrent.TimeoutException;
 import java.util.logging.Logger;
 
 /**
@@ -41,7 +43,7 @@ public class GetFromECertisTask implements Callable<String> {
     }
 
     @Override
-    public String call() throws IOException {
+    public String call() throws Exception {
 
         // LOGGER.log(Level.INFO, String.format("%-16s Task: %s START", Thread.currentThread().getName(), url));
         System.out.printf("%-16s Task: %s START\n", Thread.currentThread().getName(), url);
@@ -53,23 +55,30 @@ public class GetFromECertisTask implements Callable<String> {
 
             ResponseHandler<String> responseHandler = response -> {
                 int status = response.getStatusLine().getStatusCode();
+                long endTime;
 
-                if (status == HttpStatus.SC_OK) {
-                    HttpEntity entity = response.getEntity();
-                    long endTime = System.currentTimeMillis();
-                    // LOGGER.log(Level.INFO, String.format("%-16s Task: %s FINISH %d ms", Thread.currentThread().getName(), url, (endTime - startTime)));
-                    System.out.printf("%-16s Task: %s FINISH %d ms\n", Thread.currentThread().getName(), url, (endTime - startTime));
-                    return entity != null ? EntityUtils.toString(entity) : null;
-                } else {
-                    long endTime = System.currentTimeMillis();
-                    // LOGGER.log(Level.SEVERE, String.format("%-16s Task: %s FINISH with exception %d ms", Thread.currentThread().getName(), url, (endTime - startTime)));
-                    System.out.printf("%-16s Task: %s FINISH with exception %d ms\n", Thread.currentThread().getName(), url, (endTime - startTime));
-                    throw new ClientProtocolException("Unexpected response status: " + status);
+                switch (status) {
+
+                    case HttpStatus.SC_OK:
+                        HttpEntity entity = response.getEntity();
+                        endTime = System.currentTimeMillis();
+                        // LOGGER.log(Level.INFO, String.format("%-16s Task: %s FINISH %d ms", Thread.currentThread().getName(), url, (endTime - startTime)));
+                        System.out.printf("%-16s Task: %s FINISH with [%d] status code at %d ms\n", Thread.currentThread().getName(), url, status, (endTime - startTime));
+                        return entity != null ? EntityUtils.toString(entity) : null;
+
+                    default:
+                        endTime = System.currentTimeMillis();
+                        // LOGGER.log(Level.SEVERE, String.format("%-16s Task: %s FINISH with exception %d ms", Thread.currentThread().getName(), url, (endTime - startTime)));
+                        System.out.printf("%-16s Task: %s FINISH with [%d] status code at %d ms\n", Thread.currentThread().getName(), url, status, (endTime - startTime));
+                        throw new ClientProtocolException("Unexpected response status: [" + status + "] for URL: " + url);
                 }
 
             };
 
             return httpClient.execute(httpGet, responseHandler);
+
+        } catch (ConnectTimeoutException | SocketTimeoutException e) {
+            throw new TimeoutException(e.getMessage());
         }
 
     }

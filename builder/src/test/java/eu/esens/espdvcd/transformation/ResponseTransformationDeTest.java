@@ -1,3 +1,18 @@
+/**
+ * Copyright 2016-2019 University of Piraeus Research Center
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package eu.esens.espdvcd.transformation;
 
 import org.junit.BeforeClass;
@@ -28,19 +43,19 @@ public class ResponseTransformationDeTest {
     @Ignore
     @Test
     public void hasLocalizedTitle() {
-        assertThat(source, hasXPath("/html/body/div/div[1]/h2/text()", containsString("Einheitliche Europäische Eigenerklärung (EEE)")));
+        assertThat(source, hasXPath("/html/body/div/div[1]/h2/text()", containsString("Einheitliche Europï¿½ische Eigenerklï¿½rung (EEE)")));
     }
 
     @Ignore
     @Test
     public void hasLocalizedPartOneTitle() {
-        assertThat(source, hasXPath("/html/body/div/div[2]/h3/text()", containsString("Teil I: Angaben zum Vergabeverfahren und zum öffentlichen Auftraggeber oder Sektorenauftraggeber")));
+        assertThat(source, hasXPath("/html/body/div/div[2]/h3/text()", containsString("Teil I: Angaben zum Vergabeverfahren und zum ï¿½ffentlichen Auftraggeber oder Sektorenauftraggeber")));
     }
 
     @Ignore
     @Test
     public void hasLocalizedPublicationInfoTitle() {
-        assertThat(source, hasXPath("/html/body/div/div[2]/div[1]/div[1]/text()", containsString("Angaben zur Veröffentlichung")));
+        assertThat(source, hasXPath("/html/body/div/div[2]/div[1]/div[1]/text()", containsString("Angaben zur Verï¿½ffentlichung")));
     }
 
     @Ignore
@@ -52,7 +67,7 @@ public class ResponseTransformationDeTest {
     @Ignore
     @Test
     public void hasLocalizedPartTwoThree() {
-        assertThat(source, hasXPath("/html/body/div/div[4]/h3/text()", containsString("Teil III: Ausschlussgründe")));
+        assertThat(source, hasXPath("/html/body/div/div[4]/h3/text()", containsString("Teil III: Ausschlussgrï¿½nde")));
     }
 
     @Ignore
@@ -64,6 +79,6 @@ public class ResponseTransformationDeTest {
     @Ignore
     @Test
     public void hasLocalizedPartTwoFourSubTitle() {
-        assertThat(source, hasXPath("/html/body/div/div[5]/div/div[1]/text()", containsString(": Globalvermerk zur Erfüllung aller Eignungskriterien")));
+        assertThat(source, hasXPath("/html/body/div/div[5]/div/div[1]/text()", containsString(": Globalvermerk zur Erfï¿½llung aller Eignungskriterien")));
     }
 }

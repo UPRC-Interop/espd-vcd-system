@@ -1,12 +1,12 @@
 /**
- * Copyright 2016-2018 University of Piraeus Research Center
- * <p>
+ * Copyright 2016-2019 University of Piraeus Research Center
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -37,6 +37,8 @@ public class ESPDSchematronValidatorTest {
     private File selfContainedRequest_UPRC_DA_V210;
     private File selfContainedResponse_UPRC_DA_210;
 
+    private File regulatedResponse_DA_210;
+
     public ESPDSchematronValidatorTest() {
     }
 
@@ -54,11 +56,22 @@ public class ESPDSchematronValidatorTest {
         invalidRegulatedRequestV1 = new File(getClass().getClassLoader().getResource("espd-request-invalid.xml").toURI());
         Assert.assertNotNull(invalidRegulatedRequestV1);
 
-        selfContainedRequest_UPRC_DA_V210 = new File(getClass().getClassLoader().getResource("xml/v2/self-contained/2.1.0/UPRC-ESPD-Self-Contained-Request-2.1.0-DA-Artefact.xml").toURI());
+        selfContainedRequest_UPRC_DA_V210 = new File(getClass().getClassLoader().getResource("xml/v2/self-contained/2.1.0/UPRC-ESPD-Self-Contained-Request-2.1.0-Artefact-14-1-2019.xml").toURI());
         Assert.assertNotNull(selfContainedRequest_UPRC_DA_V210);
 
-        selfContainedResponse_UPRC_DA_210 = new File(getClass().getClassLoader().getResource("xml/v2/self-contained/2.1.0/UPRC-ESPD-Self-Contained-Response-2.1.0-DA-Artefact.xml").toURI());
+        selfContainedResponse_UPRC_DA_210 = new File(getClass().getClassLoader().getResource("xml/v2/self-contained/2.1.0/UPRC-ESPD-Self-Contained-Response-2.1.0-Artefact-14-1-2019.xml").toURI());
         Assert.assertNotNull(selfContainedResponse_UPRC_DA_210);
+
+        regulatedResponse_DA_210 = new File(getClass().getClassLoader().getResource("xml/v2/regulated/2.1.0/ESPDResponse_DA_Test-2.1.0-v0.5.xml").toURI());
+        Assert.assertNotNull(regulatedResponse_DA_210);
+    }
+
+    @Test
+    public void testRegulatedResponse() {
+        ArtefactValidator v = ValidatorFactory.createESPDSchematronValidator(regulatedResponse_DA_210);
+        Assert.assertNotNull(v);
+        printErrorsIfExist(v);
+        Assert.assertTrue(v.isValid());
     }
 
     @Test

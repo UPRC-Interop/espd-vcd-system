@@ -1,5 +1,5 @@
 ///
-/// Copyright 2016-2018 University of Piraeus Research Center
+/// Copyright 2016-2019 University of Piraeus Research Center
 ///
 /// Licensed under the Apache License, Version 2.0 (the "License");
 /// you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
 ///
 
 import {RequirementResponse} from './requirement-response.model';
+import {PropertyKeyMap} from './propertyKeyMap.model';
 
 export class Requirement {
   description: string;
@@ -28,4 +29,5 @@ export class Requirement {
   mandatory?: boolean;
   multiple?: boolean;
   responseValuesRelatedArtefact?: string;
+  propertyKeyMap: PropertyKeyMap;
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2018 University of Piraeus Research Center
+ * Copyright 2016-2019 University of Piraeus Research Center
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,10 +18,10 @@ package eu.esens.espdvcd.retriever.criteria.resource.tasks;
 import com.github.rholder.retry.*;
 import com.google.common.base.Predicates;
 
-import java.io.IOException;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 /**
  * @author Konstantinos Raptis
@@ -39,7 +39,7 @@ public class GetFromECertisRetryingTask implements Callable<String> {
 
         Retryer<String> retryer = RetryerBuilder.<String>newBuilder()
                 .retryIfResult(Predicates.<String>isNull())
-                .retryIfExceptionOfType(IOException.class)
+                .retryIfExceptionOfType(TimeoutException.class)
                 .retryIfRuntimeException()
                 .withWaitStrategy(WaitStrategies.fibonacciWait(100, 2, TimeUnit.MINUTES))
                 .withStopStrategy(StopStrategies.stopAfterDelay(4, TimeUnit.SECONDS))

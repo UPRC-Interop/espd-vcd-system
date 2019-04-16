@@ -1,5 +1,5 @@
 ///
-/// Copyright 2016-2018 University of Piraeus Research Center
+/// Copyright 2016-2019 University of Piraeus Research Center
 ///
 /// Licensed under the Apache License, Version 2.0 (the "License");
 /// you may not use this file except in compliance with the License.
@@ -73,10 +73,11 @@ export class RootComponent implements OnInit, OnChanges {
 
   onLanguageSelection(language: string) {
     // console.log(language);
-    this.dataService.switchLanguage(language);
+
     this.utilities.initLanguage = false;
     this.utilities.start = true;
     this.setTitle(this.utilities.selectedLang);
+    this.dataService.switchLanguage(language);
   }
 
    setTitle( lang: string) {

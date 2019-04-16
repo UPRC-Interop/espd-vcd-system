@@ -1,5 +1,5 @@
 ///
-/// Copyright 2016-2018 University of Piraeus Research Center
+/// Copyright 2016-2019 University of Piraeus Research Center
 ///
 /// Licensed under the Apache License, Version 2.0 (the "License");
 /// you may not use this file except in compliance with the License.
@@ -71,6 +71,10 @@ export class FormUtilService {
       if (rg.requirements !== undefined) {
         rg.requirements.forEach(r => {
           r.id = UUID.UUID();
+          if (r.responseDataType === 'CODE' && r.responseValuesRelatedArtefact === 'CPVCodes') {
+            r.uuid = r.id;
+            this.utilities.renderCpvTemplate[r.uuid] = [];
+          }
         });
       }
       if (rg.requirementGroups !== null || rg.requirementGroups !== undefined) {
@@ -193,7 +197,7 @@ export class FormUtilService {
                 evidence.evidenceIssuer = evidenceIssuer;
                 evidence.confidentialityLevelCode = 'PUBLIC';
 
-                console.log(evidence);
+                // console.log(evidence);
                 // check if evidence already exists, if exists edit evidence object else push new evidence
 
                 const evi = evidenceList.find((ev, i) => {
@@ -205,7 +209,7 @@ export class FormUtilService {
                 if (!evi) {
                   evidenceList.push(evidence);
                 }
-                console.log(evidenceList);
+                // console.log(evidenceList);
               }
 
               // console.log(evidenceList);
@@ -419,6 +423,9 @@ export class FormUtilService {
           } else if (r.responseDataType === 'LOT_IDENTIFIER') {
             group[r.uuid] = new FormControl();
             this.utilities.renderLotTemplate[r.uuid] = [];
+          } else if (r.responseDataType === 'ECONOMIC_OPERATOR_IDENTIFIER') {
+            group[r.uuid] = new FormControl();
+            group[r.uuid + 'eoidtype'] = new FormControl();
           } else {
             group[r.uuid] = new FormControl();
           }

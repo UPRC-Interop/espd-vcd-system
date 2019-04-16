@@ -1,5 +1,5 @@
 ///
-/// Copyright 2016-2018 University of Piraeus Research Center
+/// Copyright 2016-2019 University of Piraeus Research Center
 ///
 /// Licensed under the Apache License, Version 2.0 (the "License");
 /// you may not use this file except in compliance with the License.
@@ -27,7 +27,8 @@ import {environment} from '../../environments/environment';
 import {Language} from '../model/language.model';
 import {UtilitiesService} from './utilities.service';
 import {CodeList} from '../model/codeList.model';
-import {ToopCompanyData} from "../model/toopCompanyData.model";
+import {ECertisCriterion} from '../model/eCertisCriterion.model';
+import {FullCriterion} from '../model/fullCriterion.model';
 
 // import {DataService} from '../services/data.service';
 
@@ -95,6 +96,33 @@ export class ApicallService {
   }
 
 
+  /* eCertis national criteria */
+
+  getECertisData(criterion: FullCriterion, euID: string, countryCode: string, language: string): Promise<ECertisCriterion[]> {
+    if (!this.utilities.isEmpty(criterion.subCriterionList)) {
+      return Promise.resolve(criterion.subCriterionList);
+    } else {
+      return this.get_eCertisCriteria(euID, countryCode, language)
+        .then(res => {
+          criterion.subCriterionList = res.map(x => ({...x}));
+          return Promise.resolve(criterion.subCriterionList);
+        }).catch(err => {
+          console.log(err);
+          const message: string = err.error +
+            ' ' + err.message;
+          const action = 'close';
+          this.utilities.openSnackBar(message, action);
+          return Promise.reject(err);
+        });
+    }
+  }
+
+  get_eCertisCriteria(euId: string, countryCode: string, language: string) {
+    return this.http.get<ECertisCriterion[]>(environment.apiUrl + this.version + '/' + this.utilities.qualificationApplicationType +
+      '/criteria/eCertisData/' + euId + '/country/' + countryCode + '/lang/' + language).toPromise();
+  }
+
+
   /* ==================== EO related criteria ========================= */
 
   getEO_RelatedCriteria() {
@@ -144,49 +172,49 @@ export class ApicallService {
 
   getExclusionCriteria_A() {
     return this.http.get<ExclusionCriteria[]>(environment.apiUrl + this.version + '/' + this.utilities.qualificationApplicationType +
-      '/criteria/exclusion_a').toPromise();
+      '/criteria/exclusion_a?contractingOperator=' + this.utilities.role).toPromise();
   }
 
   getExclusionCriteria_B() {
     return this.http.get<ExclusionCriteria[]>(environment.apiUrl + this.version + '/' + this.utilities.qualificationApplicationType +
-      '/criteria/exclusion_b').toPromise();
+      '/criteria/exclusion_b?contractingOperator=' + this.utilities.role).toPromise();
   }
 
   getExclusionCriteria_C() {
     return this.http.get<ExclusionCriteria[]>(environment.apiUrl + this.version + '/' + this.utilities.qualificationApplicationType +
-      '/criteria/exclusion_c').toPromise();
+      '/criteria/exclusion_c?contractingOperator=' + this.utilities.role).toPromise();
   }
 
   getExclusionCriteria_D() {
     return this.http.get<ExclusionCriteria[]>(environment.apiUrl + this.version + '/' + this.utilities.qualificationApplicationType +
-      '/criteria/exclusion_d').toPromise();
+      '/criteria/exclusion_d?contractingOperator=' + this.utilities.role).toPromise();
   }
 
   /* ============= SELECTION CRITERIA ===================*/
 
   getSelectionCriteria() {
     return this.http.get<SelectionCriteria[]>(environment.apiUrl + this.version + '/' + this.utilities.qualificationApplicationType +
-      '/criteria/selection').toPromise();
+      '/criteria/selection?contractingOperator=' + this.utilities.role).toPromise();
   }
 
   getSelectionCriteria_A() {
     return this.http.get<SelectionCriteria[]>(environment.apiUrl + this.version + '/' + this.utilities.qualificationApplicationType +
-      '/criteria/selection_a').toPromise();
+      '/criteria/selection_a?contractingOperator=' + this.utilities.role).toPromise();
   }
 
   getSelectionCriteria_B() {
     return this.http.get<SelectionCriteria[]>(environment.apiUrl + this.version + '/' + this.utilities.qualificationApplicationType +
-      '/criteria/selection_b').toPromise();
+      '/criteria/selection_b?contractingOperator=' + this.utilities.role).toPromise();
   }
 
   getSelectionCriteria_C() {
     return this.http.get<SelectionCriteria[]>(environment.apiUrl + this.version + '/' + this.utilities.qualificationApplicationType +
-      '/criteria/selection_c').toPromise();
+      '/criteria/selection_c?contractingOperator=' + this.utilities.role).toPromise();
   }
 
   getSelectionCriteria_D() {
     return this.http.get<SelectionCriteria[]>(environment.apiUrl + this.version + '/' + this.utilities.qualificationApplicationType +
-      '/criteria/selection_d').toPromise();
+      '/criteria/selection_d?contractingOperator=' + this.utilities.role).toPromise();
   }
 
   /* ============ UPLOAD XML GET JSON ================= */
@@ -308,21 +336,6 @@ export class ApicallService {
   //   // headers = header.append('Content-Type', 'application/json; charset=utf-8');
   //   return this.http.post<any>(environment.apiUrl + 'v2/espd/response', ESPDResponse, options).toPromise();
   // }
-
-  getTOOPData(id: string, country: string) {
-    // ELONIA test request
-    // country = 'SV';
-
-    let header = new HttpHeaders();
-    header = header.set('Content-Type', 'application/json; charset=utf-8');
-
-    let TOOPReq = {'companyID': id, 'countryCode': country};
-    const TOOPReqJSON = JSON.stringify(TOOPReq);
-
-    console.log(TOOPReqJSON);
-
-    return this.http.post<ToopCompanyData>('http://snf-819447.vm.okeanos.grnet.gr:9090/api/toopDataRequest', TOOPReqJSON).toPromise();
-  }
 
 
 }

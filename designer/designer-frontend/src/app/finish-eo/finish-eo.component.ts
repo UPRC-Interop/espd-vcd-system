@@ -1,5 +1,5 @@
 ///
-/// Copyright 2016-2018 University of Piraeus Research Center
+/// Copyright 2016-2019 University of Piraeus Research Center
 ///
 /// Licensed under the Apache License, Version 2.0 (the "License");
 /// you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ import {ValidationService} from '../services/validation.service';
 import {BaseStep} from '../base/base-step';
 import {WizardSteps} from '../base/wizard-steps.enum';
 import {ExportType} from '../export/export-type.enum';
+import {UtilitiesService} from '../services/utilities.service';
 
 @Component({
   selector: 'app-finish-eo',
@@ -43,7 +44,8 @@ export class FinishEoComponent implements OnInit, BaseStep {
   constructor(
     public dataService: DataService,
     private formUtil: FormUtilService,
-    private validationService: ValidationService
+    private validationService: ValidationService,
+    public utilities: UtilitiesService
   ) {
   }
 

@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2018 University of Piraeus Research Center
+ * Copyright 2016-2019 University of Piraeus Research Center
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package eu.esens.espdvcd.builder.schema.v1;
 import eu.esens.espdvcd.model.*;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
+import eu.esens.espdvcd.schema.enums.EDMSubVersion;
 import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.CriterionType;
 import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.LegislationType;
 import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.RequirementGroupType;
@@ -30,6 +31,8 @@ import java.util.stream.Collectors;
 public interface SchemaExtractorV1 {
 
     RequirementType extractRequirementType(Requirement r);
+
+    String CURRENT_VERSION_TAG = EDMSubVersion.V102.getTag();
 
     default CriterionType extractCriterion(Criterion c) {
 
@@ -98,47 +101,51 @@ public interface SchemaExtractorV1 {
 
     }
 
-    default DocumentReferenceType extractCADetailsDocumentReference(CADetails cd) {
+    default DocumentReferenceType extractCADetailsDocumentReference(CADetails caDetails) {
 
         DocumentReferenceType dr = new DocumentReferenceType();
 
-        if (cd != null) {
+        if (caDetails != null) {
 
-            if (cd.getProcurementPublicationNumber() != null) {
-                dr.setID(createGROWTemporaryId(cd.getProcurementPublicationNumber()));
-            }
+//            if (caDetails.getProcurementPublicationNumber() != null) {
+            // No need to check for a null procurement publication number.
+            // Business logic has been moved to model class {@link CADetails#getProcurementPublicationNumber}
+            dr.setID(createGROWTemporaryId(caDetails.getProcurementPublicationNumber()));
+//            } else {
+//                dr.setID(createGROWTemporaryId("0000/S 000-0000000"));
+//            }
 
             dr.setDocumentTypeCode(createDocumentTypeCode("TED_CN"));
 
             //dr.setDocumentType(createDocumentType("")); // to be filled with official description, when available
 
-            if (cd.getProcurementProcedureTitle() != null || cd.getProcurementProcedureDesc() != null) {
+            if (caDetails.getProcurementProcedureTitle() != null || caDetails.getProcurementProcedureDesc() != null) {
                 dr.setAttachment(new AttachmentType());
 
-                if (cd.getProcurementProcedureTitle() != null) {
+                if (caDetails.getProcurementProcedureTitle() != null) {
                     dr.getAttachment().setExternalReference(new ExternalReferenceType());
                     dr.getAttachment().getExternalReference().setFileName(new FileNameType());
-                    dr.getAttachment().getExternalReference().getFileName().setValue(cd.getProcurementProcedureTitle());
-                    if (cd.getProcurementPublicationURI() != null) {
+                    dr.getAttachment().getExternalReference().getFileName().setValue(caDetails.getProcurementProcedureTitle());
+                    if (caDetails.getProcurementPublicationURI() != null) {
                         dr.getAttachment().getExternalReference().setURI(new URIType());
-                        dr.getAttachment().getExternalReference().getURI().setValue(cd.getProcurementPublicationURI());
+                        dr.getAttachment().getExternalReference().getURI().setValue(caDetails.getProcurementPublicationURI());
                     }
 
                 }
 
                 // 2018-03-20 UL: modifications to add capabilities to handle Received Notice Number
-                if ((cd.getProcurementProcedureDesc() != null && !cd.getProcurementProcedureDesc().isEmpty()) ||
-                        (cd.getReceivedNoticeNumber() != null && !cd.getReceivedNoticeNumber().isEmpty())) {
+                if ((caDetails.getProcurementProcedureDesc() != null && !caDetails.getProcurementProcedureDesc().isEmpty()) ||
+                        (caDetails.getReceivedNoticeNumber() != null && !caDetails.getReceivedNoticeNumber().isEmpty())) {
                     DescriptionType dt = new DescriptionType();
-                    dt.setValue(cd.getProcurementProcedureDesc() != null ? cd.getProcurementProcedureDesc() : "");
+                    dt.setValue(caDetails.getProcurementProcedureDesc() != null ? caDetails.getProcurementProcedureDesc() : "");
                     if (dr.getAttachment().getExternalReference() == null) {
                         dr.getAttachment().setExternalReference(new ExternalReferenceType());
                     }
                     dr.getAttachment().getExternalReference().getDescription().add(0, dt);
 
-                    if (cd.getReceivedNoticeNumber() != null && !cd.getReceivedNoticeNumber().isEmpty()) {
+                    if (caDetails.getReceivedNoticeNumber() != null && !caDetails.getReceivedNoticeNumber().isEmpty()) {
                         DescriptionType dtRNN = new DescriptionType();
-                        dtRNN.setValue(cd.getReceivedNoticeNumber());
+                        dtRNN.setValue(caDetails.getReceivedNoticeNumber());
                         dr.getAttachment().getExternalReference().getDescription().add(1, dtRNN);
                     }
                 }
@@ -334,7 +341,7 @@ public interface SchemaExtractorV1 {
     }
 
     default IDType createGROWTemporaryId(String id) {
-        // mod 2018-01-16: changed schemeID to "ISO/IEC 9834-8:2008 - 4UUID" according to ESPD 1.0.2 EDM
+        // mod 2018-01-16: changed schemeID to "ISO/IEC 9834-8:2008 - 4UUID" according to ESPD CURRENT_VERSION_TAG EDM
         // remark: the DG GROW system uses "COM-GROW-TEMPORARY-ID", if no valid OJS number is entered
         //IDType reqGroupIDType = createCustomSchemeIDIDType(id, "COM-GROW-TEMPORARY-ID");
         IDType reqGroupIDType = createCustomSchemeIDIDType(id, "ISO/IEC 9834-8:2008 - 4UUID");
@@ -363,7 +370,7 @@ public interface SchemaExtractorV1 {
         countryCodeType.setListName("CountryCodeIdentifier");
         //countryCodeType.setListVersionID("1.0");
         // modification UL_2016-12-22: updated list version and added listID
-        countryCodeType.setListVersionID("1.0.2");
+        countryCodeType.setListVersionID(CURRENT_VERSION_TAG);
         countryCodeType.setListID("CountryCodeIdentifier");
 
 
@@ -381,7 +388,7 @@ public interface SchemaExtractorV1 {
 
         //tc.setListVersionID("1.0");
         // modification UL_2016-12-22: updated list version
-        tc.setListVersionID("1.0.2");
+        tc.setListVersionID(CURRENT_VERSION_TAG);
 
         tc.setValue(code);
         return tc;
@@ -393,7 +400,7 @@ public interface SchemaExtractorV1 {
         tc.setListID("CriteriaTypeCode");
         //tc.setListVersionID("1.0");
         // modification UL_2016-12-22: updated list version
-        tc.setListVersionID("1.0.2");
+        tc.setListVersionID(CURRENT_VERSION_TAG);
 
         tc.setValue(code);
         return tc;
@@ -405,7 +412,7 @@ public interface SchemaExtractorV1 {
         dtc.setListID("ReferencesTypeCodes");
         dtc.setListVersionID("1.0");
         // modification UL_2016-12-22: updated list version
-        //dtc.setListVersionID("1.0.2");
+        //dtc.setListVersionID(CURRENT_VERSION_TAG);
 
         dtc.setValue(code);
         return dtc;

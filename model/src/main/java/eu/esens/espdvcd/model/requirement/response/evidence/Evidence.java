@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2018 University of Piraeus Research Center
+ * Copyright 2016-2019 University of Piraeus Research Center
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ public class Evidence implements Serializable {
     /**
      * Evidence identifier
      * <p>
-     * Identifier for an evidence.
+     * Identifier of the evidence.
      * <p>
      * Data type: Identifier<br>
      * Cardinality: 1..1<br>
@@ -40,12 +40,32 @@ public class Evidence implements Serializable {
      */
     private String ID;
 
-    // TypeCode in self-contained only
+    /**
+     * Evidence name
+     * <p>
+     * Name of the evidence.
+     * <p>
+     * Data type: Text<br>
+     * Cardinality: 0..1<br>
+     * InfReqID: tir92-139<br>
+     * BusReqID: tbr92-017tbr9<br>
+     * UBL syntax path: cac:Evidence/cbc:Name<br>
+     */
+    private String Name;
 
     /**
-     * Use this field to keep the Reference/Code of the Evidence.
-     *
+     * Evidence type code
+     * <p>
+     * Name of the evidence.
+     * <p>
+     * Data type: Text<br>
+     * Cardinality: 0..1<br>
+     * InfReqID: tir92-138<br>
+     * BusReqID: tbr92-017tbr9<br>
+     * UBL syntax path: cac:Evidence/cbc:EvidenceTypeCode<br>
      */
+    private String typeCode;
+
     /**
      * Evidence description
      * <p>
@@ -155,4 +175,19 @@ public class Evidence implements Serializable {
         this.evidenceIssuer = evidenceIssuer;
     }
 
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String name) {
+        Name = name;
+    }
+
+    public String getTypeCode() {
+        return typeCode;
+    }
+
+    public void setTypeCode(String typeCode) {
+        this.typeCode = typeCode;
+    }
 }

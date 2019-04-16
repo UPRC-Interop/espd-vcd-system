@@ -1,5 +1,5 @@
 ///
-/// Copyright 2016-2018 University of Piraeus Research Center
+/// Copyright 2016-2019 University of Piraeus Research Center
 ///
 /// Licensed under the Apache License, Version 2.0 (the "License");
 /// you may not use this file except in compliance with the License.
@@ -17,6 +17,8 @@
 import {LegislationReference} from './legislationReference.model';
 import {RequirementGroup} from './requirementGroup.model';
 import {RequirementResponse} from './requirement-response.model';
+import {PropertyKeyMap} from './propertyKeyMap.model';
+import {ECertisCriterion} from './eCertisCriterion.model';
 
 export class FullCriterion {
   type: string;
@@ -28,7 +30,10 @@ export class FullCriterion {
   requirementGroups: RequirementGroup[];
   id: string;
   uuid: string;
+  subCriterionList?: ECertisCriterion[];
   criterionGroup: string;
   ruleset?: string;
   response?: RequirementResponse;
+  propertyKeyMap: PropertyKeyMap;
+  compulsory?: boolean;
 }

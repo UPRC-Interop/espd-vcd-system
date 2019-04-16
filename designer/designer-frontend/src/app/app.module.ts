@@ -1,5 +1,5 @@
 ///
-/// Copyright 2016-2018 University of Piraeus Research Center
+/// Copyright 2016-2019 University of Piraeus Research Center
 ///
 /// Licensed under the Apache License, Version 2.0 (the "License");
 /// you may not use this file except in compliance with the License.
@@ -57,7 +57,7 @@ import {IntegerValidationDirective} from './directives/integer/integer-validatio
 import {PercentageValidationDirective} from './directives/percentage/percentage-validation.directive';
 import {VatNumberValidationDirective} from './directives/vat-number/vat-number-validation.directive';
 import {AmountDirective} from './directives/amount/amount.directive';
-import { TOOPDialogComponent } from './toopdialog/toopdialog.component';
+import { ECertisCriterionComponent } from './e-certis-criterion/e-certis-criterion.component';
 
 @NgModule({
   declarations: [
@@ -77,8 +77,6 @@ import { TOOPDialogComponent } from './toopdialog/toopdialog.component';
     RootComponent,
     CriterionComponent,
     FinishEoComponent,
-    TOOPDialogComponent,
-    FinishEoComponent,
     NumberOjsValidationDirective,
     UrlValidationDirective,
     InputValidationErrorComponent,
@@ -88,7 +86,8 @@ import { TOOPDialogComponent } from './toopdialog/toopdialog.component';
     IntegerValidationDirective,
     PercentageValidationDirective,
     VatNumberValidationDirective,
-    AmountDirective
+    AmountDirective,
+    ECertisCriterionComponent
   ],
   imports: [
     BrowserModule,
@@ -106,8 +105,6 @@ import { TOOPDialogComponent } from './toopdialog/toopdialog.component';
         deps: [HttpClient]
       }
     })
-  ], entryComponents: [
-    TOOPDialogComponent
   ],
   providers: [ApicallService, DataService, Title,
     {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},

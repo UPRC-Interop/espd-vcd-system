@@ -1,12 +1,12 @@
 /**
- * Copyright 2016-2018 University of Piraeus Research Center
- * <p>
+ * Copyright 2016-2019 University of Piraeus Research Center
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -428,6 +428,13 @@ public interface ModelExtractor {
 
         SelectableCriterion sc = new SelectableCriterion(id, null, name, desc, new LegislationReference(lr), null);
         sc.setSelected(isSelected);
+        // Add Criterion's Evidences. Currently only national criteria have Evidences
+        if (sc.getLegislationReference() != null
+                && !sc.getLegislationReference()
+                .getJurisdictionLevelCode().trim()
+                .equals("eu")) {
+            sc.getEvidenceList().addAll(extractEvidences(ec.getEvidenceGroups()));
+        }
         return sc;
     }
 
@@ -861,22 +868,28 @@ public interface ModelExtractor {
         return r;
     }
 
-    default Evidence extractEvidence(ECertisEvidence evidence) {
+    default Evidence extractEvidence(ECertisEvidence ece) {
         Evidence e = new Evidence();
-        e.setID(evidence.getID());
-        e.setDescription(evidence.getDescription());
+        e.setID(ece.getID());
+        e.setName(ece.getName());
+        e.setTypeCode(ece.getTypeCode());
+        e.setDescription(ece.getDescription());
         e.setConfidentialityLevelCode(ConfidentialityLevelEnum.PUBLIC.name());
 
-        if (!evidence.getEvidenceDocumentReference().isEmpty()
-                && evidence.getEvidenceDocumentReference().get(0).getAttachment() != null
-                && evidence.getEvidenceDocumentReference().get(0).getAttachment().getExternalReference() != null
-                && evidence.getEvidenceDocumentReference().get(0).getAttachment().getExternalReference().getURI() != null) {
+        if (!ece.getEvidenceDocumentReference().isEmpty()
+                && ece.getEvidenceDocumentReference().get(0).getAttachment() != null
+                && ece.getEvidenceDocumentReference().get(0).getAttachment().getExternalReference() != null
+                && ece.getEvidenceDocumentReference().get(0).getAttachment().getExternalReference().getURI() != null) {
 
-            e.setEvidenceURL(evidence.getEvidenceDocumentReference().get(0).getAttachment().getExternalReference().getURI());
+            e.setEvidenceURL(ece.getEvidenceDocumentReference().get(0).getAttachment().getExternalReference().getURI());
         }
 
-        if (!evidence.getEvidenceIssuerParty().isEmpty()) {
-            e.setEvidenceIssuer(extractEvidenceIssuerDetails(evidence.getEvidenceIssuerParty().get(0)));
+        if (!ece.getEvidenceIssuerParty().isEmpty()) {
+
+            // workaround in order to discard EvidenceIssuerParty empty elements
+            e.setEvidenceIssuer(extractEvidenceIssuerDetails(ece.getEvidenceIssuerParty().stream()
+                    .filter(issuer -> !issuer.getPartyName().isEmpty()
+                            || issuer.getWebsiteURI() != null).findFirst().get()));
         }
 
         return e;

@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2018 University of Piraeus Research Center
+ * Copyright 2016-2019 University of Piraeus Research Center
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package eu.esens.espdvcd.retriever.criteria;
 import com.github.rholder.retry.RetryException;
 import eu.esens.espdvcd.builder.model.ModelFactory;
 import eu.esens.espdvcd.codelist.CodelistsV2;
+import eu.esens.espdvcd.codelist.enums.CountryIdentificationEnum;
 import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
 import eu.esens.espdvcd.model.LegislationReference;
 import eu.esens.espdvcd.model.SelectableCriterion;
@@ -67,7 +68,7 @@ public class CriteriaDataRetrieverImpl implements CriteriaDataRetriever {
     @Override
     public void setLang(EULanguageCodeEnum lang) throws RetrieverException {
 
-        if (isIdentificationCodeExist(lang)) {
+        if (isEULanguageCodeExist(lang)) {
             this.lang = lang;
         } else {
             throw new RetrieverException(String.format("Error... Provided language Code %s is not Included in codelists", lang));
@@ -99,14 +100,23 @@ public class CriteriaDataRetrieverImpl implements CriteriaDataRetriever {
     }
 
     /**
-     * Check if the given identification code, exist in the codelists.
+     * Check if the given EU language code, exist in the codelists.
      *
-     * @param code The identification code (ISO 639-1:2002)
+     * @param code The EU language code (ISO 3166-1 alpha 2 country code identifier)
      * @return true if exists, false if not
      */
-    private boolean isIdentificationCodeExist(String code) {
-        String codeUpperCase = code.toUpperCase();
+    private boolean isEULanguageCodeExist(EULanguageCodeEnum code) {
+        return CodelistsV2.LanguageCodeEU.containsId(code.name());
+    }
 
+    /**
+     * Check if the given EU language code, exist in the codelists.
+     *
+     * @param code The EU language code (ISO 3166-1 alpha 2 country code identifier)
+     * @return true if exists, false if not
+     */
+    private boolean isEULanguageCodeExist(String code) {
+        String codeUpperCase = code.toUpperCase();
         return CodelistsV2.LanguageCodeEU
                 .containsId(codeUpperCase);
     }
@@ -117,8 +127,19 @@ public class CriteriaDataRetrieverImpl implements CriteriaDataRetriever {
      * @param code The identification code (ISO 639-1:2002)
      * @return true if exists, false if not
      */
-    private boolean isIdentificationCodeExist(EULanguageCodeEnum code) {
-        return CodelistsV2.LanguageCodeEU.containsId(code.name());
+    private boolean isIdentificationCodeExist(String code) {
+        String codeUpperCase = code.toUpperCase();
+        return CodelistsV2.CountryIdentification.containsId(codeUpperCase);
+    }
+
+    /**
+     * Check if the given identification code, exist in the codelists.
+     *
+     * @param code The identification code (ISO 639-1:2002)
+     * @return true if exists, false if not
+     */
+    private boolean isIdentificationCodeExist(CountryIdentificationEnum code) {
+        return CodelistsV2.CountryIdentification.containsId(code.name());
     }
 
     /**

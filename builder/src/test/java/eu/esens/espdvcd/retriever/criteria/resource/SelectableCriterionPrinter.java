@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2018 University of Piraeus Research Center
+ * Copyright 2016-2019 University of Piraeus Research Center
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,13 +15,16 @@
  */
 package eu.esens.espdvcd.retriever.criteria.resource;
 
+import eu.esens.espdvcd.model.EvidenceIssuerDetails;
 import eu.esens.espdvcd.model.LegislationReference;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
-import eu.esens.espdvcd.retriever.criteria.resource.utils.CardinalityUtils;
+import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
+import eu.esens.espdvcd.retriever.criteria.resource.utils.TaxonomyDataUtils;
 
 import java.util.List;
+import java.util.Optional;
 
 public class SelectableCriterionPrinter {
 
@@ -31,6 +34,7 @@ public class SelectableCriterionPrinter {
             printSelectableCriterionBasicInfo(sc);
             printLegislationReference(sc.getLegislationReference());
             sc.getRequirementGroups().forEach(rqg -> printRequirementGroup(rqg, 3));
+            sc.getEvidenceList().forEach(ev -> printEvidence(ev));
         } else {
             System.out.println(sc);
         }
@@ -51,7 +55,7 @@ public class SelectableCriterionPrinter {
     public static void printSelectableCriterionBasicInfo(SelectableCriterion sc) {
 
         if (sc != null) {
-            System.out.printf("ID: %s\nName: %s\nDesc: %s\nTypeCode: %s\n", sc.getID(), sc.getName(), sc.getDescription(), sc.getTypeCode());
+            System.out.printf("ID: %s\nName: %s\nDesc: %s\nTypeCode: %s\nProperty Keys: %s\n", sc.getID(), sc.getName(), sc.getDescription(), sc.getTypeCode(), sc.getPropertyKeyMap().toString());
         }
     }
 
@@ -83,15 +87,16 @@ public class SelectableCriterionPrinter {
         }
         final String finalTabs = tabs;
         System.out.println("\n" + tabs + "[" + rg.getType().name() + "] RequirementGroup: " + rg.getID()
-                + " Cardinality: " + CardinalityUtils.extractCardinality(rg.isMandatory(), rg.isMultiple())
+                + " Cardinality: " + TaxonomyDataUtils.extractCardinality(rg.isMandatory(), rg.isMultiple())
                 + " Condition: " + rg.getCondition());
 
         System.out.println(tabs + "Requirements: ");
         rg.getRequirements().forEach(r -> {
             System.out.println(finalTabs + "\t[" + r.getType().name() + "] Req ID: " + r.getID()
-                    + ", Cardinality: " + CardinalityUtils.extractCardinality(r.isMandatory(), r.isMultiple())
+                    + ", Cardinality: " + TaxonomyDataUtils.extractCardinality(r.isMandatory(), r.isMultiple())
                     + ", Req Type: " + r.getResponseDataType() + ", Req Desc: " + r.getDescription()
-                    + ", Code Type: " + r.getResponseValuesRelatedArtefact());
+                    + ", Code Type: " + r.getResponseValuesRelatedArtefact()
+                    + ", Property Keys: " + r.getPropertyKeyMap().toString());
         });
         final int innerDepth = depth + 1;
         rg.getRequirementGroups().forEach(rg1 -> printRequirementGroup(rg1, innerDepth));
@@ -99,10 +104,26 @@ public class SelectableCriterionPrinter {
 
     public static void printRequirement(Requirement rq) {
         System.out.println("\t[" + rq.getType().name() + "] Req ID: " + rq.getID()
-                + ", Cardinality: " + CardinalityUtils.extractCardinality(rq.isMandatory(), rq.isMultiple())
+                + ", Cardinality: " + TaxonomyDataUtils.extractCardinality(rq.isMandatory(), rq.isMultiple())
                 + ", Req Type: " + rq.getResponseDataType() + ", Req Desc: " + rq.getDescription()
                 + ", Code Type: " + rq.getResponseValuesRelatedArtefact());
     }
 
+    public static void printEvidence(Evidence e) {
+        System.out.print("\n\t\t[EVIDENCE] Req ID: " + e.getID()
+                + ", Name: " + e.getName()
+                + ", TypeCode: " + e.getTypeCode()
+                + ", Desc: " + e.getDescription()
+                + ", Conf Code: " + e.getConfidentialityLevelCode()
+                + ", Evidence URL: " + e.getEvidenceURL());
+
+        Optional.ofNullable(e.getEvidenceIssuer()).ifPresent(issuer -> printEvidenceIssuer(issuer));
+    }
+
+    public static void printEvidenceIssuer(EvidenceIssuerDetails issuerDetails) {
+        System.out.print(", Evidence Issuer [ID: " + issuerDetails.getID()
+                + ", Name: " + Optional.ofNullable(issuerDetails.getName()).orElse("NULL").trim()
+                + ", Website: " + issuerDetails.getWebsite() + "]");
+    }
 
 }

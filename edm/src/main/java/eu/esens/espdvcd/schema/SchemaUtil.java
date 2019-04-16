@@ -1,12 +1,12 @@
 /**
- * Copyright 2016-2018 University of Piraeus Research Center
- * <p>
+ * Copyright 2016-2019 University of Piraeus Research Center
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -98,19 +98,22 @@ public class SchemaUtil {
                 case V102:
 
                     marshaller = JCV102.createMarshaller();
-                    marshaller.setProperty("com.sun.xml.bind.namespacePrefixMapper", new ESPDPrefixMapper());
+                    marshaller.setProperty("com.sun.xml.bind.namespacePrefixMapper"
+                            , new ESPDPrefixMapper(EDMSubVersion.V102));
                     break;
 
                 case V202:
 
                     marshaller = JCV202.createMarshaller();
-                    marshaller.setProperty("com.sun.xml.bind.namespacePrefixMapper", new ESPDPrefixMapper());
+                    marshaller.setProperty("com.sun.xml.bind.namespacePrefixMapper"
+                            , new ESPDPrefixMapper(EDMSubVersion.V202));
                     break;
 
                 case V210:
 
                     marshaller = JCV210.createMarshaller();
-                    marshaller.setProperty("com.sun.xml.bind.namespacePrefixMapper", new ESPDPrefixMapper());
+                    marshaller.setProperty("com.sun.xml.bind.namespacePrefixMapper"
+                            , new ESPDPrefixMapper(EDMSubVersion.V210));
                     break;
 
                 default:

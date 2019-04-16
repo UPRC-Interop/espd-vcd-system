@@ -1,12 +1,12 @@
 /**
- * Copyright 2016-2018 University of Piraeus Research Center
- * <p>
+ * Copyright 2016-2019 University of Piraeus Research Center
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,7 +15,6 @@
  */
 package eu.esens.espdvcd.retriever.criteria.resource;
 
-import eu.esens.espdvcd.builder.util.ArtefactUtils;
 import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
 import eu.esens.espdvcd.codelist.enums.RequirementGroupTypeEnum;
 import eu.esens.espdvcd.codelist.enums.RequirementTypeEnum;
@@ -26,7 +25,7 @@ import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.ResponseRequirement;
 import eu.esens.espdvcd.retriever.criteria.resource.enums.CardinalityEnum;
 import eu.esens.espdvcd.retriever.criteria.resource.enums.ResourceType;
-import eu.esens.espdvcd.retriever.criteria.resource.utils.CardinalityUtils;
+import eu.esens.espdvcd.retriever.criteria.resource.utils.TaxonomyDataUtils;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -51,8 +50,12 @@ public abstract class CriteriaTaxonomyResource implements CriteriaResource, Requ
     private final static int elementUUIDColumnIndex = 22;
     private final static int elementCodeColumnIndex = 23;
     private final static int codelistColumnIndex = 24;
+    private final static int propertyKey1ColumnIndex = 26;
+    private final static int propertyKey2ColumnIndex = 27;
+    private final static int propertyKey3ColumnIndex = 28;
 
     protected List<SelectableCriterion> criterionList;
+    protected Map<String, SelectableCriterion> criterionMap;
     protected Map<String, List<RequirementGroup>> rgMap;
 
     public CriteriaTaxonomyResource(String path) {
@@ -62,10 +65,12 @@ public abstract class CriteriaTaxonomyResource implements CriteriaResource, Requ
 
             Workbook workbook = new XSSFWorkbook(CriteriaTaxonomyResource.class.getResourceAsStream(path));
             criterionList = new ArrayList<>(65);
+            criterionMap = new HashMap<>(65);
             workbook.forEach(sheet -> criterionList.addAll(readDataSheet(sheet)));
             workbook.close();
 
             criterionList.forEach(sc -> rgMap.put(sc.getID(), sc.getRequirementGroups()));
+            criterionList.forEach(sc -> criterionMap.put(sc.getID(), sc));
 
         } catch (IOException e) {
             Logger.getLogger(CriteriaTaxonomyResource.class.getName()).log(Level.SEVERE, null, e);
@@ -80,60 +85,15 @@ public abstract class CriteriaTaxonomyResource implements CriteriaResource, Requ
      */
     public void applyTaxonomyData(SelectableCriterion sc) {
         // find root RequirementGroup/s of that criterion from taxonomy
-        final List<RequirementGroup> rgListFromTaxonomy = rgMap.get(sc.getID());
+        final SelectableCriterion from = criterionMap.get(sc.getID());
 
-        if (rgListFromTaxonomy == null) {
+        if (from == null) {
             LOGGER.log(Level.SEVERE, "SC with ID " + sc.getID() + " cannot be found in rgMap");
             return;
         }
 
-        // apply cardinalities to all root RequirementGroup/s
-        sc.getRequirementGroups().forEach(rg -> applyTaxonomyData(
-                rgListFromTaxonomy.stream()
-                        .filter(rgFromTaxonomy -> rg.getID().equals(rgFromTaxonomy.getID()))
-                        .findFirst().orElse(null) // from
-                , rg));                                 //  to
-    }
-
-    protected void applyTaxonomyData(RequirementGroup from, RequirementGroup to) {
-
-        if (from != null && to != null) {
-
-            // do the same for sub-RequirementGroup/s
-            to.getRequirementGroups().forEach(rg -> applyTaxonomyData(
-                    from.getRequirementGroups().stream()
-                            .filter(rgFromTaxonomy -> rg.getID().equals(rgFromTaxonomy.getID()))
-                            .findFirst().orElse(null) // from
-                    , rg));                                 //  to
-
-            // do the same for requirement/s
-            to.getRequirements().forEach(rq -> applyTaxonomyData(
-                    from.getRequirements().stream()
-                            .filter(rqFromTaxonomy -> ArtefactUtils.clearAllWhitespaces(rq.getDescription())
-                                    .equals(ArtefactUtils.clearAllWhitespaces(rqFromTaxonomy.getDescription()))
-                                    && rq.getResponseDataType() == rqFromTaxonomy.getResponseDataType()
-                                    && rq.getType() == rqFromTaxonomy.getType())
-                            .findFirst().orElse(null) // from
-                    , rq));                                 // to
-            // cardinalities
-            to.setMultiple(from.isMultiple());
-            to.setMandatory(from.isMandatory());
-            // requirement group type
-            to.setType(from.getType());
-        }
-    }
-
-    protected void applyTaxonomyData(Requirement from, Requirement to) {
-
-        if (from != null && to != null) {
-            // cardinalities
-            to.setMultiple(from.isMultiple());
-            to.setMandatory(from.isMandatory());
-            // requirement group type
-            to.setType(from.getType());
-            // apply related response value artefact
-            to.setResponseValuesRelatedArtefact(from.getResponseValuesRelatedArtefact());
-        }
+        // apply taxonomy data to sc
+        TaxonomyDataUtils.applyTaxonomyData(from, sc);
     }
 
     private List<SelectableCriterion> readDataSheet(Sheet dataSheet) {
@@ -160,6 +120,8 @@ public abstract class CriteriaTaxonomyResource implements CriteriaResource, Requ
                         sc.setID(getRowUUID(r));
                         sc.setTypeCode(getRowCode(r));
                         sc.setSelected(true);
+                        sc.getPropertyKeyMap().put("pk1", getRowPropertyKey(r, 1)); // property key for Name
+                        sc.getPropertyKeyMap().put("pk2", getRowPropertyKey(r, 2)); // property key for Description
 
                         sc.getRequirementGroups().addAll(
                                 extractAllRequirementGroupType(dataSheet, r.getRowNum() + 1,
@@ -197,7 +159,7 @@ public abstract class CriteriaTaxonomyResource implements CriteriaResource, Requ
                         rg.setCondition(getRowCode(d.getRow(sRow)));
                         rg.setType(extractRequirementGroupType(cellValue));
                         // setting cardinality here
-                        CardinalityEnum c = CardinalityUtils.extractCardinality(getRowCardinality(d.getRow(sRow)));
+                        CardinalityEnum c = TaxonomyDataUtils.extractCardinality(getRowCardinality(d.getRow(sRow)));
                         applyCardinality(rg, c);
                         rg.getRequirementGroups().addAll(extractAllRequirementGroupType(d, sRow, (j), colNum + 1));
                         rg.getRequirements().addAll(extractAllRequirementType(d, sRow, j, colNum + 1));
@@ -301,10 +263,16 @@ public abstract class CriteriaTaxonomyResource implements CriteriaResource, Requ
                 );
 
                 // set cardinality here
-                CardinalityEnum c = CardinalityUtils.extractCardinality(getRowCardinality(d.getRow(i)));
+                CardinalityEnum c = TaxonomyDataUtils.extractCardinality(getRowCardinality(d.getRow(i)));
                 applyCardinality(r, c);
                 // set codelist
                 r.setResponseValuesRelatedArtefact(getRowCodelist(d.getRow(i)));
+                // set Property keys
+                // The number of property keys depends on element. For example for an evidence compound element
+                // there are 3 property keys.
+                r.getPropertyKeyMap().put("pk1", getRowPropertyKey(d.getRow(i), 1));
+                r.getPropertyKeyMap().put("pk2", getRowPropertyKey(d.getRow(i), 2));
+                r.getPropertyKeyMap().put("pk3", getRowPropertyKey(d.getRow(i), 3));
                 rList.add(r);
             }
 
@@ -323,6 +291,21 @@ public abstract class CriteriaTaxonomyResource implements CriteriaResource, Requ
 
     private String getRowDescription(Row r) {
         return getCellStringValueOrNull(r, descriptionColumnIndex);
+    }
+
+    private String getRowPropertyKey(Row r, int keyNumber) {
+
+        switch (keyNumber) {
+
+            case 1:
+                return getCellStringValueOrNull(r, propertyKey1ColumnIndex);
+            case 2:
+                return getCellStringValueOrNull(r, propertyKey2ColumnIndex);
+            case 3:
+                return getCellStringValueOrNull(r, propertyKey3ColumnIndex);
+            default:
+                return null;
+        }
     }
 
     private String getRowCode(Row r) {
@@ -347,7 +330,9 @@ public abstract class CriteriaTaxonomyResource implements CriteriaResource, Requ
         if (c == null) {
             return null;
         }
-        return CellType.STRING.equals(c.getCellTypeEnum()) ? c.getStringCellValue() : null;
+        return CellType.STRING.equals(c.getCellTypeEnum())
+                ? c.getStringCellValue().trim()
+                : null;
     }
 
     private String getCellStringOrNumericValueOrNull(Row r, int index) {
@@ -357,7 +342,7 @@ public abstract class CriteriaTaxonomyResource implements CriteriaResource, Requ
         }
 
         if (CellType.STRING.equals(c.getCellTypeEnum())) {
-            return c.getStringCellValue();
+            return c.getStringCellValue().trim();
         }
 
         if (CellType.NUMERIC.equals(c.getCellTypeEnum())) {
@@ -375,7 +360,7 @@ public abstract class CriteriaTaxonomyResource implements CriteriaResource, Requ
     @Override
     public List<SelectableCriterion> getCriterionList(EULanguageCodeEnum lang) {
 
-        // fallback
+        // failsafe
         if (lang == null || lang != EULanguageCodeEnum.EN) {
             LOGGER.log(Level.WARNING, "Warning... European Criteria Multilinguality not supported yet. Language set back to English");
         }
@@ -391,7 +376,7 @@ public abstract class CriteriaTaxonomyResource implements CriteriaResource, Requ
     @Override
     public Map<String, SelectableCriterion> getCriterionMap(EULanguageCodeEnum lang) {
 
-        // fallback
+        // failsafe
         if (lang == null || lang != EULanguageCodeEnum.EN) {
             LOGGER.log(Level.WARNING, "Warning... European Criteria Multilinguality not supported yet. Language set back to English");
         }
@@ -407,7 +392,7 @@ public abstract class CriteriaTaxonomyResource implements CriteriaResource, Requ
     @Override
     public List<RequirementGroup> getRequirementsForCriterion(String ID, EULanguageCodeEnum lang) {
 
-        // fallback
+        // failsafe
         if (lang == null || lang != EULanguageCodeEnum.EN) {
             LOGGER.log(Level.WARNING, "Warning... European Criteria Multilinguality not supported yet. Language set back to English");
         }

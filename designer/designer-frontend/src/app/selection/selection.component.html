@@ -1,6 +1,6 @@
 <!--
 
-    Copyright 2016-2018 University of Piraeus Research Center
+    Copyright 2016-2019 University of Piraeus Research Center
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -18,20 +18,20 @@
 <h4 translate>espd.part4.header</h4>
 <form #form="ngForm">
 
-  <div *ngIf="this.utilities.qualificationApplicationType === 'regulated'">
+  <div *ngIf="utilities.qualificationApplicationType === 'regulated'">
     <mat-card>
       <mat-card-content>
         <p translate>espd.part4.alert</p>
         <span translate>espd.gui.question.to.use.alpha</span>
         <mat-radio-group name="satisfiesALL"
-                         [disabled]="this.dataService.isReadOnly()">
+                         [disabled]="dataService.isReadOnly()">
           <mat-radio-button color="primary" name="selALL" value="YES"
-                            [checked]="!this.utilities.isSatisfiedALLSelected && this.utilities.isImportReq"
-                            (change)="handleALL(YES)" #YES>
+                            [checked]="!utilities.isSatisfiedALLSelected && utilities.isImportReq"
+                            (change)="handleALL(YES)"  class="yes_btn" #YES>
             {{'espd.gui.yes' | translate}}
           </mat-radio-button>
           <mat-radio-button color="primary" name="selALL" value="NO"
-                            [checked]="this.utilities.isSatisfiedALLSelected && this.utilities.isImportReq"
+                            [checked]="(utilities.isSatisfiedALLSelected && utilities.isImportReq) || utilities.isCreateNewESPD"
                             (change)="handleALL(NO)" #NO>
             {{'espd.gui.no' | translate}}
           </mat-radio-button>
@@ -40,11 +40,11 @@
     </mat-card>
   </div>
 
-  <mat-accordion multi="true" *ngIf="this.utilities.isSatisfiedALL">
-    <mat-expansion-panel expanded="true" *ngIf="this.dataService.selectionALLCriteria">
+  <mat-accordion multi="true" *ngIf="utilities.isSatisfiedALL || (utilities.isSatisfiedALL && utilities.isCreateNewESPD)">
+    <mat-expansion-panel expanded="true" *ngIf="dataService.selectionALLCriteria">
       <mat-expansion-panel-header>
-        <mat-panel-title translate>
-          espd.part4.all.selection.switch
+        <mat-panel-title>
+          {{'espd.part4.all.selection.switch' | translate}}
         </mat-panel-title>
         <mat-panel-description>
         </mat-panel-description>
@@ -55,14 +55,15 @@
       <mat-card>
 
         <!-- Regulated v1 SatisfiesALL Criterion-->
-        <ng-container *ngIf="this.APIService.version==='v1'">
+        <ng-container *ngIf="APIService.version==='v1'">
           <div class="exclusionCriteria" >
             <div class="criteria">
               <mat-checkbox color="primary"
                             name="selectionSatisfiedALL"
-                            [(ngModel)]="this.utilities.getSatisfiesALLCriterion(this.dataService.selectionALLCriteria, '7e7db838-eeac-46d9-ab39-42927486f22d').selected">
-                <div class="critDesc" translate>
-                  espd.part4.crit.selection.eo.satisfies.all.criteria
+                            disabled="true"
+                            [(ngModel)]="utilities.getSatisfiesALLCriterion(dataService.selectionALLCriteria, '7e7db838-eeac-46d9-ab39-42927486f22d').selected">
+                <div class="critDesc">
+                  {{'espd.part4.crit.selection.eo.satisfies.all.criteria' | translate}}
                 </div>
               </mat-checkbox>
             </div>
@@ -70,14 +71,15 @@
         </ng-container>
 
         <!-- Regulated v2 SatisfiesALL Criterion -->
-        <ng-container *ngIf="this.APIService.version==='v2'">
+        <ng-container *ngIf="APIService.version==='v2'">
           <div class="exclusionCriteria" >
             <div class="criteria">
               <mat-checkbox color="primary"
                             name="selectionSatisfiedALL"
-                            [(ngModel)]="this.utilities.getSatisfiesALLCriterion(this.dataService.selectionALLCriteria, 'f4dc58dd-af45-4602-a4c8-3dca30fac082').selected">
-                <div class="critDesc" translate>
-                  espd.part4.crit.selection.eo.satisfies.all.criteria
+                            disabled="true"
+                            [(ngModel)]="utilities.getSatisfiesALLCriterion(dataService.selectionALLCriteria, 'f4dc58dd-af45-4602-a4c8-3dca30fac082').selected">
+                <div class="critDesc">
+                  {{'espd.part4.crit.selection.eo.satisfies.all.criteria' | translate}}
                 </div>
               </mat-checkbox>
             </div>
@@ -86,35 +88,52 @@
       </mat-card>
     </mat-expansion-panel>
   </mat-accordion>
-  <mat-accordion multi="true" *ngIf="this.utilities.isAtoD">
-    <mat-expansion-panel expanded="true" *ngIf="this.dataService.selectionACriteria">
+  <mat-accordion multi="true" *ngIf="utilities.isAtoD">
+    <mat-expansion-panel expanded="true" *ngIf="dataService.selectionACriteria">
       <mat-expansion-panel-header>
-        <mat-panel-title translate>
-          espd.part4.suitability
+        <mat-panel-title>
+          {{'espd.part4.suitability' | translate}}
         </mat-panel-title>
         <mat-panel-description>
 
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <ng-container *ngIf="this.dataService.selectionACriteria.length !== 0">
+      <ng-container *ngIf="dataService.selectionACriteria.length !== 0">
         <div class="desc">
           <h4 translate>espd.part4.crit.selection.eo.suitability.article</h4>
           <!--<h4>Article {{selectionACriteria['0'].legislationReference.article}} of {{selectionACriteria['0'].legislationReference.title}} sets out the following selection criteria </h4>-->
         </div>
       </ng-container>
-      <mat-card *ngFor="let criteria of this.dataService.selectionACriteria; let i=index">
+      <mat-card *ngFor="let criteria of dataService.selectionACriteria; let i=index">
         <div class="exclusionCriteria" >
 
           <div class="criteria">
             <mat-checkbox color="primary"
                           name='{{criteria.name+i}}'
-                          [(ngModel)]="this.dataService.selectionACriteria[i].selected"
-                          [disabled]="this.dataService.isReadOnly()">{{criteria.name}}</mat-checkbox>
-            <div class="critDesc">{{criteria.description}}</div>
+                          [(ngModel)]="dataService.selectionACriteria[i].selected"
+                          [disabled]="dataService.isReadOnly()">{{criteria.propertyKeyMap.pk1 | translate}}</mat-checkbox>
+            <div class="critDesc">{{criteria.propertyKeyMap.pk2 | translate}}</div>
           </div>
           <div class="eCertis">
             <!--<h5>eCertis Information ...</h5>-->
-            <div class="eCertDesc" translate>espd.ecertis.404</div>
+            <ng-container *ngIf="!utilities.eCertisTemplate[criteria.id]">
+              <button mat-raised-button
+                      (click)="dataService.onGetECertisData(criteria, criteria.id, dataService.getCountryCode(), utilities.selectedLang)">
+                {{'espd.ecertis.more.information' | translate}}
+              </button>
+            </ng-container>
+            <div *ngIf="criteria.subCriterionList.length === 0 && utilities.eCertisTemplate[criteria.id]" class="eCertDesc" translate>espd.ecertis.404</div>
+            <ng-container *ngIf="criteria.subCriterionList.length !== 0 && utilities.eCertisTemplate[criteria.id]">
+              <div *ngIf="!utilities.isEmpty(criteria.subCriterionList)">
+                <div *ngFor="let nationalCriterion of criteria.subCriterionList; let i=index" class="ecertis-crit">
+                  <app-e-certis-criterion [criterion]="nationalCriterion"></app-e-certis-criterion>
+                </div>
+              </div>
+              <ng-container *ngIf="utilities.eCertisTemplate[criteria.id]">
+                <button mat-raised-button (click)="utilities.toggleECertis(criteria.id)">{{'espd.ecertis.less.information' | translate}}</button>
+              </ng-container>
+            </ng-container>
+            <!--<div class="eCertDesc" translate>espd.ecertis.404</div>-->
           </div>
           <div *ngIf="dataService.selectionACriteriaForm">
             <div class="answer">
@@ -126,30 +145,47 @@
       </mat-card>
     </mat-expansion-panel>
 
-    <mat-expansion-panel expanded="true" *ngIf="this.dataService.selectionBCriteria">
+    <mat-expansion-panel expanded="true" *ngIf="dataService.selectionBCriteria">
       <mat-expansion-panel-header>
-        <mat-panel-title translate>
-          espd.part4.economic.and.financial.standing
+        <mat-panel-title>
+          {{'espd.part4.economic.and.financial.standing' | translate}}
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <ng-container *ngIf="this.dataService.selectionBCriteria.length !== 0">
+      <ng-container *ngIf="dataService.selectionBCriteria.length !== 0">
         <div class="desc">
           <h4 translate>espd.part4.crit.selection.ca.economic.article</h4>
           <!--<h4>Article {{selectionBCriteria['0'].legislationReference.article}} of {{selectionBCriteria['0'].legislationReference.title}} sets out the following selection criteria </h4>-->
         </div>
       </ng-container>
-      <mat-card *ngFor="let criteria of this.dataService.selectionBCriteria; let i=index">
+      <mat-card *ngFor="let criteria of dataService.selectionBCriteria; let i=index">
         <div class="exclusionCriteria">
           <div class="criteria">
             <mat-checkbox color="primary"
                           name='{{criteria.name+i}}'
-                          [(ngModel)]="this.dataService.selectionBCriteria[i].selected"
-                          [disabled]="this.dataService.isReadOnly()">{{criteria.name}}</mat-checkbox>
-            <div class="critDesc">{{criteria.description}}</div>
+                          [(ngModel)]="dataService.selectionBCriteria[i].selected"
+                          [disabled]="dataService.isReadOnly()">{{criteria.propertyKeyMap.pk1 | translate}}</mat-checkbox>
+            <div class="critDesc">{{criteria.propertyKeyMap.pk2 | translate}}</div>
           </div>
           <div class="eCertis">
             <!--<h5>eCertis Information ...</h5>-->
-            <div class="eCertDesc" translate>espd.ecertis.404</div>
+            <ng-container *ngIf="!utilities.eCertisTemplate[criteria.id]">
+              <button mat-raised-button
+                      (click)="dataService.onGetECertisData(criteria, criteria.id, dataService.getCountryCode(), utilities.selectedLang)">
+                {{'espd.ecertis.more.information' | translate}}
+              </button>
+            </ng-container>
+            <div *ngIf="criteria.subCriterionList.length === 0 && utilities.eCertisTemplate[criteria.id]" class="eCertDesc" translate>espd.ecertis.404</div>
+            <ng-container *ngIf="criteria.subCriterionList.length !== 0 && utilities.eCertisTemplate[criteria.id]">
+              <div *ngIf="!utilities.isEmpty(criteria.subCriterionList)">
+                <div *ngFor="let nationalCriterion of criteria.subCriterionList; let i=index" class="ecertis-crit">
+                  <app-e-certis-criterion [criterion]="nationalCriterion"></app-e-certis-criterion>
+                </div>
+              </div>
+              <ng-container *ngIf="utilities.eCertisTemplate[criteria.id]">
+                <button mat-raised-button (click)="utilities.toggleECertis(criteria.id)">{{'espd.ecertis.less.information' | translate}}</button>
+              </ng-container>
+            </ng-container>
+            <!--<div class="eCertDesc" translate>espd.ecertis.404</div>-->
           </div>
           <div *ngIf="dataService.selectionBCriteriaForm">
             <div class="answer">
@@ -161,46 +197,46 @@
       </mat-card>
     </mat-expansion-panel>
 
-    <mat-expansion-panel expanded="true" *ngIf="this.dataService.selectionCCriteria">
+    <mat-expansion-panel expanded="true" *ngIf="dataService.selectionCCriteria">
       <mat-expansion-panel-header>
-        <mat-panel-title translate>
-          espd.part4.technical.professional.ability
+        <mat-panel-title>
+          {{'espd.part4.technical.professional.ability' | translate}}
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <div *ngIf="this.utilities.qualificationApplicationType === 'selfcontained'">
+      <div *ngIf="utilities.qualificationApplicationType === 'selfcontained'">
         <mat-card>
           <mat-card-content>
-            <span class="weight">One or More Criteria will be weighted: </span>
-            <mat-radio-group name="isGloballyWeighted" [disabled]="this.dataService.isReadOnly()">
+            <span class="weight">{{'espd.part4.crit.weigthing.criteria' | translate}} </span>
+            <mat-radio-group name="isGloballyWeighted" [disabled]="dataService.isReadOnly()">
               <mat-radio-button color="primary" name="globalWeight" value="YES"
-                                [checked]="this.utilities.isGloballyWeighted" (change)="handleGlobalWeight(YES)" #YES>
+                                [checked]="utilities.isGloballyWeighted" (change)="handleGlobalWeight(YES)" #YES>
                 {{'espd.gui.yes' | translate}}
               </mat-radio-button>
               <mat-radio-button color="primary" name="globalWeight" value="NO"
-                                [checked]="!this.utilities.isGloballyWeighted" (change)="handleGlobalWeight(NO)" #NO>
+                                [checked]="!utilities.isGloballyWeighted" (change)="handleGlobalWeight(NO)" #NO>
                 {{'espd.gui.no' | translate}}
               </mat-radio-button>
             </mat-radio-group>
             <br>
             <br>
-            <div *ngIf="this.utilities.isGloballyWeighted">
-              <span class="weight">Criterion Weighting Type: </span>
+            <div *ngIf="utilities.isGloballyWeighted">
+              <span class="weight">{{'espd.part4.crit.weigthing.type.title' | translate}} </span>
               <mat-form-field>
-                <mat-select placeholder="Weighting Type"
+                <mat-select placeholder="{{'espd.part4.crit.weighting.type' | translate}}"
                             [(ngModel)]="dataService.CADetails.weightingType"
-                            [ngModelOptions]="{standalone: true}" name="weightingType" [disabled]="this.dataService.isReadOnly()">
+                            [ngModelOptions]="{standalone: true}" name="weightingType" [disabled]="dataService.isReadOnly()">
                   <mat-option *ngFor="let type of codelist.weightingType" [value]="type.code">{{type.code}}</mat-option>
                 </mat-select>
               </mat-form-field>
               <br>
-              <span class="weight">Provide the general method used to score and evaluate the weighted criteria: </span>
+              <span class="weight">{{'espd.part4.crit.weigthing.method' | translate}} </span>
               <mat-form-field>
                     <textarea matInput
                               name="weightScoringMethodologyNote"
                               id="shortDesc" cols="30" rows="10"
-                              placeholder="Weighting Scoring methodology note"
-                              [(ngModel)]="this.dataService.CADetails.weightScoringMethodologyNote"
-                              [disabled]="this.dataService.isReadOnly()">
+                              placeholder="{{'espd.part4.crit.weighting.score' | translate}}"
+                              [(ngModel)]="dataService.CADetails.weightScoringMethodologyNote"
+                              [disabled]="dataService.isReadOnly()">
                     </textarea>
               </mat-form-field>
               <br>
@@ -208,23 +244,40 @@
           </mat-card-content>
         </mat-card>
       </div>
-      <ng-container *ngIf="this.dataService.selectionCCriteria.length !== 0">
+      <ng-container *ngIf="dataService.selectionCCriteria.length !== 0">
         <div class="desc">
           <h4 translate>espd.part4.crit.selection.technical.professional.ability.article</h4>
         </div>
       </ng-container>
-      <mat-card *ngFor="let criteria of this.dataService.selectionCCriteria; let i=index">
+      <mat-card *ngFor="let criteria of dataService.selectionCCriteria; let i=index">
         <div class="exclusionCriteria">
           <div class="criteria">
             <mat-checkbox color="primary"
                           name='{{criteria.name+i}}'
-                          [(ngModel)]="this.dataService.selectionCCriteria[i].selected"
-                          [disabled]="this.dataService.isReadOnly()">{{criteria.name}}</mat-checkbox>
-            <div class="critDesc">{{criteria.description}}</div>
+                          [(ngModel)]="dataService.selectionCCriteria[i].selected"
+                          [disabled]="dataService.isReadOnly()">{{criteria.propertyKeyMap.pk1 | translate}}</mat-checkbox>
+            <div class="critDesc">{{criteria.propertyKeyMap.pk2 | translate}}</div>
           </div>
           <div class="eCertis">
             <!--<h5>eCertis Information ...</h5>-->
-            <div class="eCertDesc" translate>espd.ecertis.404</div>
+            <ng-container *ngIf="!utilities.eCertisTemplate[criteria.id]">
+              <button mat-raised-button
+                      (click)="dataService.onGetECertisData(criteria, criteria.id, dataService.getCountryCode(), utilities.selectedLang)">
+                {{'espd.ecertis.more.information' | translate}}
+              </button>
+            </ng-container>
+            <div *ngIf="criteria.subCriterionList.length === 0 && utilities.eCertisTemplate[criteria.id]" class="eCertDesc" translate>espd.ecertis.404</div>
+            <ng-container *ngIf="criteria.subCriterionList.length !== 0 && utilities.eCertisTemplate[criteria.id]">
+              <div *ngIf="!utilities.isEmpty(criteria.subCriterionList)">
+                <div *ngFor="let nationalCriterion of criteria.subCriterionList; let i=index" class="ecertis-crit">
+                  <app-e-certis-criterion [criterion]="nationalCriterion"></app-e-certis-criterion>
+                </div>
+              </div>
+              <ng-container *ngIf="utilities.eCertisTemplate[criteria.id]">
+                <button mat-raised-button (click)="utilities.toggleECertis(criteria.id)">{{'espd.ecertis.less.information' | translate}}</button>
+              </ng-container>
+            </ng-container>
+            <!--<div class="eCertDesc" translate>espd.ecertis.404</div>-->
           </div>
           <div *ngIf="dataService.selectionCCriteriaForm">
             <div class="answer">
@@ -236,30 +289,47 @@
       </mat-card>
     </mat-expansion-panel>
 
-    <mat-expansion-panel expanded="true" *ngIf="this.dataService.selectionDCriteria">
+    <mat-expansion-panel expanded="true" *ngIf="dataService.selectionDCriteria">
       <mat-expansion-panel-header>
-        <mat-panel-title translate>
-          espd.part4.quality.assurance
+        <mat-panel-title>
+          {{'espd.part4.quality.assurance' | translate}}
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <ng-container *ngIf="this.dataService.selectionDCriteria.length !== 0">
+      <ng-container *ngIf="dataService.selectionDCriteria.length !== 0">
         <div class="desc">
-          <h4 translate>espd.part4.crit.selection.technical.professional.ability.article</h4>
+          <h4 translate>espd.part4.crit.selection.quality.assurance.article</h4>
           <!--<h4>Article {{selectionDCriteria['0'].legislationReference.article}} of {{selectionDCriteria['0'].legislationReference.title}} sets out the following selection criteria </h4>-->
         </div>
       </ng-container>
-      <mat-card *ngFor="let criteria of this.dataService.selectionDCriteria; let i=index">
+      <mat-card *ngFor="let criteria of dataService.selectionDCriteria; let i=index">
         <div class="exclusionCriteria">
           <div class="criteria">
             <mat-checkbox color="primary"
                           name='{{criteria.name+i}}'
-                          [(ngModel)]="this.dataService.selectionDCriteria[i].selected"
-                          [disabled]="this.dataService.isReadOnly()">{{criteria.name}}</mat-checkbox>
-            <div class="critDesc">{{criteria.description}}</div>
+                          [(ngModel)]="dataService.selectionDCriteria[i].selected"
+                          [disabled]="dataService.isReadOnly()">{{criteria.propertyKeyMap.pk1 | translate}}</mat-checkbox>
+            <div class="critDesc">{{criteria.propertyKeyMap.pk2 | translate}}</div>
           </div>
           <div class="eCertis">
             <!--<h5>eCertis Information ...</h5>-->
-            <div class="eCertDesc" translate>espd.ecertis.404</div>
+            <ng-container *ngIf="!utilities.eCertisTemplate[criteria.id]">
+              <button mat-raised-button
+                      (click)="dataService.onGetECertisData(criteria, criteria.id, dataService.getCountryCode(), utilities.selectedLang)">
+                {{'espd.ecertis.more.information' | translate}}
+              </button>
+            </ng-container>
+            <div *ngIf="criteria.subCriterionList.length === 0 && utilities.eCertisTemplate[criteria.id]" class="eCertDesc" translate>espd.ecertis.404</div>
+            <ng-container *ngIf="criteria.subCriterionList.length !== 0 && utilities.eCertisTemplate[criteria.id]">
+              <div *ngIf="!utilities.isEmpty(criteria.subCriterionList)">
+                <div *ngFor="let nationalCriterion of criteria.subCriterionList; let i=index" class="ecertis-crit">
+                  <app-e-certis-criterion [criterion]="nationalCriterion"></app-e-certis-criterion>
+                </div>
+              </div>
+              <ng-container *ngIf="utilities.eCertisTemplate[criteria.id]">
+                <button mat-raised-button (click)="utilities.toggleECertis(criteria.id)">{{'espd.ecertis.less.information' | translate}}</button>
+              </ng-container>
+            </ng-container>
+            <!--<div class="eCertDesc" translate>espd.ecertis.404</div>-->
           </div>
           <div *ngIf="dataService.selectionDCriteriaForm">
             <div class="answer">

@@ -1,3 +1,18 @@
+/**
+ * Copyright 2016-2019 University of Piraeus Research Center
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package eu.esens.espdvcd.designer.util;
 
 import spark.Service;
@@ -13,16 +28,17 @@ public final class ServerUtil {
     /**
      * Configures static file hosting
      * Sets the location and the security headers
+     *
      * @param spark Current Spark instance
      */
-    public static void configureStaticFiles(Service spark){
+    public static void configureStaticFiles(Service spark) {
         spark.staticFiles.location("/public");
-        spark.staticFiles.headers(getSecurityHeaders());
     }
 
     /**
      * Enables Cross Origin Requests
      * While in production this should be disabled
+     *
      * @param spark Current Spark instance
      */
     public static void enableCORS(Service spark) {
@@ -48,6 +64,7 @@ public final class ServerUtil {
 
     /**
      * Redirect URLs with trailing slashes back to the "unslashed" routes
+     *
      * @param spark Current Spark instance
      */
     public static void dropTrailingSlashes(Service spark) {
@@ -60,18 +77,21 @@ public final class ServerUtil {
 
     /**
      * Adds headers to all routes
+     *
      * @param spark Current Spark instance
      */
     public static void addSecurityHeaders(Service spark) {
         spark.before(((request, response) -> getSecurityHeaders().forEach(response::header)));
+        spark.staticFiles.headers(getSecurityHeaders());
     }
 
     /**
      * Gets the security headers
+     *
      * @return Header Map
      */
-    private static Map<String, String> getSecurityHeaders(){
-        if(securityHeaders == null){
+    private static Map<String, String> getSecurityHeaders() {
+        if (securityHeaders == null) {
             initHeaderMap();
         }
         return securityHeaders;
@@ -80,22 +100,25 @@ public final class ServerUtil {
     /**
      * Lazy initialization for the header HashMap
      */
-    private static void initHeaderMap(){
+    private static void initHeaderMap() {
         securityHeaders = new HashMap<>();
 
-        String contentSecurityPolicyHeaders = "default-src 'self' http://83.212.109.183/ https://europa.eu/ http://ec.europa.eu/; " +
-                "font-src https://fonts.googleapis.com https://fonts.gstatic.com; " +
-                "img-src 'self' ;" +
+        String contentSecurityPolicyHeaders = "default-src 'none'; " +
+                "font-src https://fonts.gstatic.com; " +
+                "img-src 'self'; " +
                 "object-src 'none'; " +
-                "script-src 'self' 'unsafe-inline' 'unsafe-eval' ; " +
-                "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com";
-        if(Config.isFramingAllowed()){
+                "script-src 'self' ; " +
+                "connect-src 'self'; " +
+                "base-uri 'self'; " +
+                "form-action 'self'; " +
+                "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;";
+        if (AppConfig.getInstance().isFramingAllowed()) {
             securityHeaders.put("Content-Security-Policy", contentSecurityPolicyHeaders);
-        }
-        else {
-            securityHeaders.put("Content-Security-Policy", contentSecurityPolicyHeaders+ " ; frame-ancestors 'none'");
+        } else {
+            securityHeaders.put("Content-Security-Policy", contentSecurityPolicyHeaders + " ; frame-ancestors 'none'");
             securityHeaders.put("X-Frame-Options", "DENY");
         }
+        securityHeaders.put("Referrer-Policy", "same-origin");
         securityHeaders.put("X-XSS-Protection", "1; mode=block");
         securityHeaders.put("X-Content-Type-Options", "nosniff");
         securityHeaders.put("Strict-Transport-Security", "max-age=63072000; includeSubDomains; preload");

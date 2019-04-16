@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2018 University of Piraeus Research Center
+ * Copyright 2016-2019 University of Piraeus Research Center
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,6 +30,7 @@ import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.File;
@@ -69,6 +70,7 @@ public class ExportESPDServiceTest {
         writer = new ObjectMapper().writer().withDefaultPrettyPrinter();
     }
 
+    @Ignore
     @Test
     public void testCriterionNumberAfterImport() throws Exception {
         File espdRequestFile = new File(ExportESPDServiceTest.class

@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2018 University of Piraeus Research Center
+ * Copyright 2016-2019 University of Piraeus Research Center
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,18 +37,6 @@ public class ECertisResourceTest {
         Assert.assertNotNull(r);
     }
 
-    @Test
-    public void testECertisCriterionResourceWithInitialIDList() throws Exception {
-
-        CriteriaTaxonomyResource taxonomyResource = new RegulatedCriteriaTaxonomyResource();
-
-        ECertisResource eCertisResource = new ECertisResource(taxonomyResource
-                .getCriterionList()
-                .stream().map(sc -> sc.getID()).collect(Collectors.toList()));
-
-        SelectableCriterionPrinter.print(eCertisResource.getCriterionList());
-    }
-
     /**
      * Print all European criteria ID
      *
@@ -84,7 +72,8 @@ public class ECertisResourceTest {
 
         ECertisResource r = new ECertisResource();
 
-        ECertisCriterion ec = r.getECertisCriterion("7c351fc0-1fd0-4bad-bfd8-1717a9dcf9d1");
+        // ECertisCriterion ec = r.getECertisCriterion("7c351fc0-1fd0-4bad-bfd8-1717a9dcf9d1"); // gr national
+        ECertisCriterion ec = r.getECertisCriterion("e27abb31-c158-4821-8b32-ec2204f01176");
 
         ObjectMapper mapper = new ObjectMapper();
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
@@ -93,6 +82,19 @@ public class ECertisResourceTest {
         // Print JSON String
         String prettyCt = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(ec);
         System.out.println(prettyCt);
+    }
+
+    @Test
+    public void testECertisCriterionResourceWithInitialIDList() throws Exception {
+
+        CriteriaTaxonomyResource taxonomyResource = new RegulatedCriteriaTaxonomyResource();
+
+        ECertisResource eCertisResource = new ECertisResource(taxonomyResource
+                .getCriterionList().stream()
+                .map(sc -> sc.getID())
+                .collect(Collectors.toList()));
+
+        SelectableCriterionPrinter.print(eCertisResource.getCriterionList());
     }
 
 }

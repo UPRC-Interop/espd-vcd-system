@@ -1,12 +1,12 @@
 /**
- * Copyright 2016-2018 University of Piraeus Research Center
- * <p>
+ * Copyright 2016-2019 University of Piraeus Research Center
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,6 +16,7 @@
 package eu.esens.espdvcd.designer.endpoint;
 
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.typesafe.config.ConfigException;
 import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
 import eu.esens.espdvcd.designer.deserialiser.RequirementDeserialiser;
 import eu.esens.espdvcd.designer.exception.ValidationException;
@@ -23,7 +24,7 @@ import eu.esens.espdvcd.designer.service.ExportESPDService;
 import eu.esens.espdvcd.designer.service.ExportESPDV1Service;
 import eu.esens.espdvcd.designer.service.ExportESPDV2Service;
 import eu.esens.espdvcd.designer.typeEnum.ExportType;
-import eu.esens.espdvcd.designer.util.Config;
+import eu.esens.espdvcd.designer.util.AppConfig;
 import eu.esens.espdvcd.designer.util.Errors;
 import eu.esens.espdvcd.designer.util.JsonUtil;
 import eu.esens.espdvcd.model.ESPDRequest;
@@ -89,14 +90,16 @@ public class ExportESPDEndpoint extends Endpoint {
                         } catch (IllegalArgumentException e) {
                             rsp.status(404);
                             return JsonUtil.toJson(Errors.standardError(404, "Requested language not found."));
+                        } catch (NullPointerException ex){
+                            rsp.status(400);
+                            return JsonUtil.toJson(Errors.standardError(400, "Language was not specified in the parameters."));
                         }
 
                         String artefactType = rq.params("artefactType");
                         if (rq.contentType().contains("application/json")) {
-
-                            if (Config.isArtefactDumpingEnabled()) {
-                                Files.createDirectories(Paths.get(Config.dumpIncomingArtefactsLocation() + "/json/"));
-                                File dumpedFile = new File(Config.dumpIncomingArtefactsLocation()
+                            if (AppConfig.getInstance().isArtefactDumpingEnabled()) {
+                                Files.createDirectories(Paths.get(AppConfig.getInstance().dumpIncomingArtefactsLocation() + "/json/"));
+                                File dumpedFile = new File(AppConfig.getInstance().dumpIncomingArtefactsLocation()
                                         + "/json/" + ZonedDateTime.now().format(DateTimeFormatter.ofPattern("uuuuMMddHHmmss")) + ".json");
                                 byte[] jsonStream = rq.body().getBytes(StandardCharsets.UTF_8);
                                 Files.write(dumpedFile.toPath(), jsonStream, StandardOpenOption.CREATE);
@@ -120,7 +123,10 @@ public class ExportESPDEndpoint extends Endpoint {
                                             400,
                                             "You need to specify if the ESPD is a request or response."));
                                 }
-                                rsp.type("application/xml");
+//                                rsp.raw().getHeader("Content-Type");
+//                                LOGGER.info("HEADER IS "+rsp.raw().getHeader("Content-Type"));
+                                rsp.raw().setHeader("Content-Type","application/octet-stream");
+//                                LOGGER.info("HEADER IS "+rsp.raw().getHeader("Content-Type"));
                                 rsp.header("Content-Disposition", String.format(
                                         "attachment; filename=\"%s.%s\";", artefactType.toLowerCase(), exportType.name().toLowerCase()));
                                 return streamToReturn;

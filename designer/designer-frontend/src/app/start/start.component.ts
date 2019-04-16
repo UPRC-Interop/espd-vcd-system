@@ -1,5 +1,5 @@
 ///
-/// Copyright 2016-2018 University of Piraeus Research Center
+/// Copyright 2016-2019 University of Piraeus Research Center
 ///
 /// Licensed under the Apache License, Version 2.0 (the "License");
 /// you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
 /// limitations under the License.
 ///
 
-import {Component, Input, OnInit, QueryList, ViewChildren} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {FormControl, NgForm} from '@angular/forms';
 import {ApicallService} from '../services/apicall.service';
 import {DataService} from '../services/data.service';
@@ -39,6 +39,7 @@ export class StartComponent implements OnInit, BaseStep {
   @ViewChildren('form') forms: QueryList<NgForm>;
   isCA = false;
   isEO = false;
+  isCE = false;
   isCreateNewESPD = false;
   isReuseESPD = false;
   isReviewESPD = false;
@@ -63,23 +64,63 @@ export class StartComponent implements OnInit, BaseStep {
   }
 
   handleFileUpload(files: FileList) {
-    console.log(files);
+
+    if (this.fileToUpload.length !== 0) {
+      this.fileToUpload = [];
+    }
     this.fileToUpload.push(files.item(0));
+    console.log(this.fileToUpload);
   }
 
   handleRole(radio: FormControl) {
     if (radio.value === 'CA') {
       this.isCA = true;
       this.isEO = false;
+      this.isCE = false;
       this.utilities.type = 'ESPD_REQUEST';
+      this.utilities.role = 'CONTRACTING_AUTHORITY';
     } else if (radio.value === 'EO') {
       this.isEO = true;
       this.isCA = false;
+      this.isCE = false;
       this.utilities.type = 'ESPD_RESPONSE';
+      this.utilities.role = 'ECONOMIC_OPERATOR';
+    } else if (radio.value === 'CE') {
+      this.isCE = true;
+      this.isEO = false;
+      this.isCA = false;
+      this.utilities.type = 'ESPD_REQUEST';
+      this.utilities.role = 'CONTRACTING_ENTITY';
     }
   }
 
   handleCASelection(radio: FormControl) {
+    if (radio.value === 'createNewESPD') {
+      this.isCreateNewESPD = true;
+      this.utilities.isCreateNewESPD = true;
+      this.utilities.isImportReq = false;
+      this.isReuseESPD = false;
+      this.isReviewESPD = false;
+      this.utilities.isReviewESPD = false;
+    } else if (radio.value === 'reuseESPD') {
+      this.isCreateNewESPD = false;
+      this.utilities.isCreateNewESPD = false;
+      this.utilities.isImportReq = true;
+      this.isReuseESPD = true;
+      this.isReviewESPD = false;
+      this.utilities.isReviewESPD = false;
+    } else if (radio.value === 'reviewESPD') {
+      this.isCreateNewESPD = false;
+      this.utilities.isCreateNewESPD = false;
+      this.utilities.isImportReq = false;
+      this.isReuseESPD = false;
+      this.isReviewESPD = true;
+      this.utilities.isImportReq = false;
+      this.utilities.isReviewESPD = true;
+    }
+  }
+
+  handleCESelection(radio: FormControl) {
     if (radio.value === 'createNewESPD') {
       this.isCreateNewESPD = true;
       this.utilities.isCreateNewESPD = true;
@@ -149,6 +190,10 @@ export class StartComponent implements OnInit, BaseStep {
     }
   }
 
+  isEmptyFile(): boolean {
+    return this.fileToUpload.length === 0 && this.utilities.isImport();
+  }
+
   onStartSubmit(form: NgForm) {
     this.isLoading = true;
     console.log(this.isLoading);
@@ -159,7 +204,8 @@ export class StartComponent implements OnInit, BaseStep {
     }).catch(() => {
       this.isLoading = false;
     });
-    const role = (this.isCA ? 'CA' : 'EO');
+    // TODO: update for CE role
+    const role = (this.isCA || this.isCE ? 'CA' : 'EO');
     this.dataService.ReuseESPD(this.fileToUpload, form, role)
       .then(() => {
         this.isLoading = false;

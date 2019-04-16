@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2018 University of Piraeus Research Center
+ * Copyright 2016-2019 University of Piraeus Research Center
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,11 +16,14 @@
 package eu.esens.espdvcd.retriever.criteria;
 
 import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
+import eu.esens.espdvcd.codelist.enums.internal.ContractingOperatorEnum;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.retriever.criteria.resource.*;
+import eu.esens.espdvcd.retriever.criteria.resource.enums.CriteriaConfig;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.NotNull;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,11 +45,13 @@ public class CriteriaExtractorImpl implements CriteriaExtractor {
     private List<SelectableCriterion> criterionList;
 
     private EULanguageCodeEnum lang;
+    private ContractingOperatorEnum operator;
 
     /* package private constructor. Create only through factory */
     CriteriaExtractorImpl(@NotEmpty List<CriteriaResource> cResourceList,
                           @NotEmpty List<LegislationResource> lResourceList,
-                          @NotEmpty List<RequirementsResource> rgResourceList) {
+                          @NotEmpty List<RequirementsResource> rgResourceList,
+                          @NotNull ContractingOperatorEnum operator) {
 
         ResourceComparator resourceComparator = new ResourceComparator();
         cResourceList.sort(resourceComparator);
@@ -56,6 +61,7 @@ public class CriteriaExtractorImpl implements CriteriaExtractor {
         this.cResourceList = cResourceList;
         this.lResourceList = lResourceList;
         this.rgResourceList = rgResourceList;
+        this.operator = operator;
     }
 
     /**
@@ -69,14 +75,19 @@ public class CriteriaExtractorImpl implements CriteriaExtractor {
             criterionList.forEach(this::addLegislationReference);
             // add all requirement groups to that criteria from requirement group resources
             criterionList.forEach(this::addRequirementGroups);
+            // set pre-selected and compulsoriness
+            criterionList.forEach(sc -> {
+                sc.setSelected(CriteriaConfig.getInstance().isPreSelected(operator, sc.getID()));
+                sc.setCompulsory(CriteriaConfig.getInstance().isCompulsory(operator, sc.getID()));
+            });
         }
     }
 
     @Override
     public void setLang(EULanguageCodeEnum lang) {
 
-        // failback check
-        if (lang == null || lang != EULanguageCodeEnum.EN) {
+        // fallback check
+        if (lang != EULanguageCodeEnum.EN) {
             lang = EULanguageCodeEnum.EN;
             LOGGER.log(Level.WARNING, "Warning... European Criteria Multilinguality not supported yet. Language set back to English");
         }

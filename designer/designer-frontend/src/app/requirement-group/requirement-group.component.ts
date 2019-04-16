@@ -1,5 +1,5 @@
 ///
-/// Copyright 2016-2018 University of Piraeus Research Center
+/// Copyright 2016-2019 University of Piraeus Research Center
 ///
 /// Licensed under the Apache License, Version 2.0 (the "License");
 /// you may not use this file except in compliance with the License.
@@ -44,12 +44,12 @@ export class RequirementGroupComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
 
-    setTimeout(()=>{
+    setTimeout(() => {
       this.showIndicator = this.checkIndicator(this.indicator);
       if (!this.cdr['destroyed']) {
         this.cdr.detectChanges();
       }
-    })
+    });
 
   }
 

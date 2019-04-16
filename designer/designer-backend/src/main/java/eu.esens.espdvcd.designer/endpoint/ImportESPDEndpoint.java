@@ -1,12 +1,12 @@
 /**
- * Copyright 2016-2018 University of Piraeus Research Center
- * <p>
+ * Copyright 2016-2019 University of Piraeus Research Center
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -18,7 +18,7 @@ package eu.esens.espdvcd.designer.endpoint;
 import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.designer.exception.ValidationException;
 import eu.esens.espdvcd.designer.service.ImportESPDService;
-import eu.esens.espdvcd.designer.util.Config;
+import eu.esens.espdvcd.designer.util.AppConfig;
 import eu.esens.espdvcd.designer.util.Errors;
 import eu.esens.espdvcd.designer.util.JsonUtil;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
@@ -39,7 +39,6 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.Objects;
-import java.util.Random;
 
 public class ImportESPDEndpoint extends Endpoint {
     private final ImportESPDService service;
@@ -53,6 +52,7 @@ public class ImportESPDEndpoint extends Endpoint {
         spark.path(basePath, () -> {
             spark.get("", ((request, response) -> {
                 response.status(405);
+                response.type("application/json");
                 return Errors.standardError(405, "You need to POST an XML artefact.");
             }), JsonUtil.json());
 
@@ -63,11 +63,16 @@ public class ImportESPDEndpoint extends Endpoint {
                     if (rq.contentType().contains("multipart/form-data")) {
                         MultipartConfigElement multipartConfigElement = new MultipartConfigElement(
                                 "file-uploads",
-                                1024 * 1024 * 2,
-                                1024 * 1024 * 3,
+                                1024 * 1024 * AppConfig.getInstance().getMaxFileSize(),
+                                1024 * 1024 * AppConfig.getInstance().getMaxFileSize(),
                                 0);
                         rq.raw().setAttribute("org.eclipse.jetty.multipartConfig", multipartConfigElement);
-                        Collection<Part> parts = rq.raw().getParts();
+                        Collection<Part> parts;
+                        try {
+                            parts = rq.raw().getParts();
+                        } catch (IllegalStateException e) {
+                            return Errors.standardError(422, "Your file is too large, please upload a file up to 2MB.");
+                        }
                         if (parts.iterator().hasNext()) {
                             Part part = parts.iterator().next();
                             File tempFile = File.createTempFile("espd-file", ".tmp");
@@ -84,6 +89,8 @@ public class ImportESPDEndpoint extends Endpoint {
 
                             if (part.getSubmittedFileName().endsWith("json")) {
                                 return new String(IOUtils.toByteArray(part.getInputStream()));
+                            }else if (!(part.getSubmittedFileName().endsWith("xml") && part.getContentType().contains("xml"))){
+                                return Errors.standardError(422, "Please upload an XML file.");
                             }
                             writeDumpedFile(tempFile);
                             try {
@@ -145,26 +152,23 @@ public class ImportESPDEndpoint extends Endpoint {
                 }
             }, JsonUtil.json());
         });
-
-        spark.after((req, res) -> res.type("application/json"));
     }
 
     private void writeDumpedFile(File espdFile) throws IOException {
-        if (Config.isArtefactDumpingEnabled()) {
-            Files.createDirectories(Paths.get(Config.dumpIncomingArtefactsLocation() + "/xml/"));
+        if (AppConfig.getInstance().isArtefactDumpingEnabled()) {
+            Files.createDirectories(Paths.get(AppConfig.getInstance().dumpIncomingArtefactsLocation() + "/xml/"));
             File dumpedFile;
             try {
-                dumpedFile = new File(Config.dumpIncomingArtefactsLocation()
+                dumpedFile = new File(AppConfig.getInstance().dumpIncomingArtefactsLocation()
                         + "/xml/" + ZonedDateTime.now().format(DateTimeFormatter.ofPattern("uuuuMMdd-HHmmss")) + ".xml");
                 Files.copy(espdFile.toPath(), dumpedFile.toPath());
             } catch (FileAlreadyExistsException e) {
-                dumpedFile = new File(Config.dumpIncomingArtefactsLocation()
+                dumpedFile = new File(AppConfig.getInstance().dumpIncomingArtefactsLocation()
                         + "/xml/" + ZonedDateTime.now().format(DateTimeFormatter.ofPattern("uuuuMMdd-HHmmss-"))
                         + RandomStringUtils.randomAlphabetic(3) + ".xml");
                 Files.copy(espdFile.toPath(), dumpedFile.toPath());
             }
             LOGGER.info("Dumping imported xml artefact to " + dumpedFile.getAbsolutePath());
-
         }
     }
 }

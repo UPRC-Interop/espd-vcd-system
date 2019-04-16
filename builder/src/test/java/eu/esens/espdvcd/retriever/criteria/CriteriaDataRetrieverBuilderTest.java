@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2018 University of Piraeus Research Center
+ * Copyright 2016-2019 University of Piraeus Research Center
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -68,7 +68,6 @@ public class CriteriaDataRetrieverBuilderTest {
 
         String ID = "005eb9ed-1347-4ca3-bb29-9bc0db64e1ab";
 
-
         String code = EULanguageCodeEnum.DE.name();
 
         List<String> ncList = r.getNationalCriterionMapping(ID, code)
@@ -83,10 +82,12 @@ public class CriteriaDataRetrieverBuilderTest {
     @Test
     public void testEuToNationalMappingWithLangParam() throws Exception {
 
-        String ID = "14df34e8-15a9-411c-8c05-8c051693e277";
-        String code = EULanguageCodeEnum.DE.name();
+        String ID = "005eb9ed-1347-4ca3-bb29-9bc0db64e1ab";
+        // String code = EULanguageCodeEnum.DE.name();
+        String code = "gr";
 
-        r.setLang(EULanguageCodeEnum.DE);
+        r.setLang(EULanguageCodeEnum.EL);
+        // r.setLang(EULanguageCodeEnum.DE);
 
         SelectableCriterionPrinter.print(r.getNationalCriterionMapping(ID, code));
     }

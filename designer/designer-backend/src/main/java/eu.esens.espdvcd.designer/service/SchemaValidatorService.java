@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2018 University of Piraeus Research Center
+ * Copyright 2016-2019 University of Piraeus Research Center
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 package eu.esens.espdvcd.designer.service;
 
 import eu.esens.espdvcd.designer.exception.ValidationException;
-import eu.esens.espdvcd.designer.util.Config;
+import eu.esens.espdvcd.designer.util.AppConfig;
 import eu.esens.espdvcd.validator.ArtefactValidator;
 import eu.esens.espdvcd.validator.ValidatorFactory;
 import org.xml.sax.SAXException;
@@ -34,7 +34,7 @@ public enum SchemaValidatorService implements ValidatorService {
 
     @Override
     public ArtefactValidator validateESPDFile(File request) throws JAXBException, SAXException, ValidationException {
-        if (Config.isValidatorEnabled()) {
+        if (AppConfig.getInstance().isValidatorEnabled()) {
             ArtefactValidator validationResult = ValidatorFactory.createESPDSchemaValidator(request);
             if (validationResult != null && !validationResult.isValid())
                 throw new ValidationException("Schema validation failed on the supplied xml document.", validationResult.getValidationMessages());

@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2018 University of Piraeus Research Center
+ * Copyright 2016-2019 University of Piraeus Research Center
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,43 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-buildscript {
-
-    repositories {
-        jcenter()
-        maven {
-            url "https://maven.research.rackspacecloud.com/content/repositories/public/"
-        }
-    }
-
-    dependencies {
-        classpath 'org.openrepose:gradle-jaxb-plugin:2.4.1'
-    }
-
+plugins {
+    id "org.openrepose.gradle.plugins.jaxb" version "2.5.0"
 }
 
 def generatedDir = "${project.buildDir}/generated-sources/xjc"
 
-    sourceSets {
-        main {
-            java {
-                srcDirs += "$generatedDir"
-            }
+sourceSets {
+    main {
+        java {
+            srcDirs += "$generatedDir"
         }
     }
-    
-apply plugin: 'org.openrepose.gradle.plugins.jaxb'
+}
 
 dependencies {
-    jaxb "com.sun.xml.bind:jaxb-core:${project.jaxb_impl_version}"
-    jaxb "com.sun.xml.bind:jaxb-xjc:${project.jaxb_impl_version}"
-    jaxb "com.sun.xml.bind:jaxb-impl:${project.jaxb_impl_version}"
-    jaxb "javax.xml.bind:jaxb-api:${project.jaxb_impl_version}"
-    // compile 'com.google.guava:guava:14.0'
+    jaxb group: "com.sun.xml.bind", name: "jaxb-core", version: "$project.jaxb_impl_version"
+    jaxb group: "com.sun.xml.bind", name: "jaxb-impl", version: "$project.jaxb_impl_version"
+    jaxb group: "com.sun.xml.bind", name: "jaxb-xjc", version: "$project.jaxb_xjc_version"
+    jaxb group: "javax.xml.bind", name: "jaxb-api", version: "$project.jaxb_api_version"
+
+    compile group: "com.sun.xml.bind", name: "jaxb-impl", version: "$project.jaxb_impl_version"
+    compile group: "com.sun.xml.bind", name: "jaxb-core", version: "$project.jaxb_impl_version"
+    compile group: "javax.xml.bind", name: "jaxb-api", version: "$project.jaxb_api_version"
 }
 
 tasks.withType(JavaCompile) {
-  options.encoding = "utf-8" // adapt as necessary
+    options.encoding = "utf-8" // adapt as necessary
 }
 
 jaxb {

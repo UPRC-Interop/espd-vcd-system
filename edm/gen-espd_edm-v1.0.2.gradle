@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2018 University of Piraeus Research Center
+ * Copyright 2016-2019 University of Piraeus Research Center
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath "gradle.plugin.org.openrepose:gradle-jaxb-plugin:2.2.3"
+        classpath "gradle.plugin.org.openrepose:gradle-jaxb-plugin:2.5.0"
     }
 }
 
@@ -33,12 +33,17 @@ repositories {
 apply plugin: 'org.openrepose.gradle.plugins.jaxb'
 
 dependencies {
-    jaxb "com.sun.xml.bind:jaxb-core:${jaxb_impl_version}"
-    jaxb "com.sun.xml.bind:jaxb-xjc:${jaxb_impl_version}"
-    jaxb "com.sun.xml.bind:jaxb-impl:${jaxb_impl_version}"
-    jaxb "javax.xml.bind:jaxb-api:${jaxb_impl_version}"
+    jaxb "com.sun.xml.bind:jaxb-core:2.3.0.1"
+    jaxb "com.sun.xml.bind:jaxb-impl:2.3.0.1"
+    jaxb "com.sun.xml.bind:jaxb-xjc:2.3.2"
+    jaxb "javax.xml.bind:jaxb-api:2.3.1"
     
     compile group: 'com.googlecode.jaxb-namespaceprefixmapper-interfaces', name: 'JAXBNamespacePrefixMapper', version: '2.2.4'
+    jaxb "javax.activation:javax.activation-api:1.2.0"
+
+    compile('javax.xml.bind:jaxb-api:2.3.1')
+    compile('javax.activation:activation:1.1')
+    compile('org.glassfish.jaxb:jaxb-runtime:2.3.0')
 }
 
 jaxb {
@@ -48,6 +53,7 @@ jaxb {
     
     // espd edm v 1.0.2
     bindingsDir = "${project.rootDir}/src/main/resources/xsd/bindings"
+    episodesDir = "${project.buildDir}/generated-resources/episodes/102"
     xsdDir = "${project.projectDir}/src/main/resources/xsd/v1/1.0.2"
     bindings = ["binding_espdedm_v1.0.2.xjb"]
     
@@ -55,11 +61,11 @@ jaxb {
     
     xjc {
         // taskClassname = "com.sun.tools.xjc.XJC2Task"
-        destinationDir = "${project.buildDir}/generated-sources/xjc"
+        destinationDir = "${project.buildDir}/generated-sources/xjc/102"
         args = ["-verbose"]
     }
         
 }
 
-compileJava.dependsOn xjc
+ compileJava.dependsOn xjc
 

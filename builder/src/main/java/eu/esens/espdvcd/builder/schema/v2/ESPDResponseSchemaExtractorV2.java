@@ -1,12 +1,12 @@
 /**
- * Copyright 2016-2018 University of Piraeus Research Center
- * <p>
+ * Copyright 2016-2019 University of Piraeus Research Center
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -81,7 +81,7 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
         // apply global weighting
         qarType.getWeightScoringMethodologyNote().addAll(modelResponse.getCADetails()
                 .getWeightScoringMethodologyNoteList().stream()
-                .map(note -> createWeightScoringMethodologyNoteType(note))
+                .map(this::createWeightScoringMethodologyNoteType)
                 .collect(Collectors.toList()));
 
         if (modelResponse.getCADetails().getWeightingType() != null) {
@@ -241,7 +241,7 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
             evType.setConfidentialityLevelCode(new ConfidentialityLevelCodeType());
             evType.getConfidentialityLevelCode().setListID("ConfidentialityLevel");
             evType.getConfidentialityLevelCode().setListAgencyID("EU-COM-GROW");
-            evType.getConfidentialityLevelCode().setListVersionID("2.0.2");
+            evType.getConfidentialityLevelCode().setListVersionID(CURRENT_VERSION_TAG);
             evType.getConfidentialityLevelCode().setValue(evidence.getConfidentialityLevelCode());
         }
 
@@ -323,7 +323,7 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
             eoPartyType.getEconomicOperatorRole().getRoleCode().setListID("EORoleType");
             eoPartyType.getEconomicOperatorRole().getRoleCode().setListAgencyName("DG GROW (European Commission)");
             eoPartyType.getEconomicOperatorRole().getRoleCode().setListAgencyID("EU-COM-GROW");
-            eoPartyType.getEconomicOperatorRole().getRoleCode().setListVersionID("2.0.2");
+            eoPartyType.getEconomicOperatorRole().getRoleCode().setListVersionID(CURRENT_VERSION_TAG);
             eoPartyType.getEconomicOperatorRole().getRoleCode().setValue(eoDetails.getEoRole().name());
         }
 
@@ -574,7 +574,9 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
                 ResponseValueType perRvType = createResponseValueType();
                 perRvType.setResponseQuantity(new ResponseQuantityType());
                 perRvType.getResponseQuantity().setUnitCode("PERCENTAGE");
-                perRvType.getResponseQuantity().setValue(((PercentageResponse) response).getPercentage());
+                perRvType.getResponseQuantity().setValue(((PercentageResponse) response)
+                        .getPercentage()
+                        .divide(BigDecimal.valueOf(100)));  // ESPD-46
                 tcrType.getResponseValue().add(perRvType);
                 return tcrType;
 
@@ -617,7 +619,7 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
                     codeCouRvType.setResponseCode(new ResponseCodeType());
                     codeCouRvType.getResponseCode().setListAgencyID("ISO");
                     codeCouRvType.getResponseCode().setListID("ISO 3166-1");
-                    codeCouRvType.getResponseCode().setListVersionID("2.0.2");
+                    codeCouRvType.getResponseCode().setListVersionID(CURRENT_VERSION_TAG);
                     codeCouRvType.getResponseCode().setValue(countryCode);
                 }
                 tcrType.getResponseValue().add(codeCouRvType);

@@ -1,5 +1,5 @@
 ///
-/// Copyright 2016-2018 University of Piraeus Research Center
+/// Copyright 2016-2019 University of Piraeus Research Center
 ///
 /// Licensed under the Apache License, Version 2.0 (the "License");
 /// you may not use this file except in compliance with the License.
@@ -16,5 +16,5 @@
 
 export const environment = {
   production: true,
-  apiUrl: 'http://83.212.107.143:9090/api/'
+  apiUrl: 'https://espdint.ds.unipi.gr/api/'
 };

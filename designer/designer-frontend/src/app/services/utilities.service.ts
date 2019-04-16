@@ -1,5 +1,5 @@
 ///
-/// Copyright 2016-2018 University of Piraeus Research Center
+/// Copyright 2016-2019 University of Piraeus Research Center
 ///
 /// Licensed under the Apache License, Version 2.0 (the "License");
 /// you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import {Moment} from 'moment';
 import {SelectionCriteria} from '../model/selectionCriteria.model';
 import {MatListOption, MatSnackBar} from '@angular/material';
 import {RequirementGroup} from '../model/requirementGroup.model';
+import {FullCriterion} from '../model/fullCriterion.model';
 
 
 @Injectable({
@@ -53,6 +54,9 @@ export class UtilitiesService {
   cpvString = [];
   type: string;
   selectedLang = 'en';
+  eCertisTemplate = [];
+
+  role: string;
   // qualificationApplicationType = 'SELF-CONTAINED';
   // qualificationApplicationType = 'REGULATED';
 
@@ -174,6 +178,27 @@ export class UtilitiesService {
   //   const json = JSON.parse(this.requestJSON);
   //   return new ESPDRequest(json.cadetails, json.fullCriterionList, json.documentDetails);
   // }
+
+  /* Show/hide eCertis criteria and related buttons */
+
+  createShowECertisTemplate(criteria: FullCriterion[]) {
+    criteria.forEach(cr => {
+      this.eCertisTemplate[cr.id] = false;
+    });
+  }
+
+  toggleECertis(id: string) {
+    this.eCertisTemplate[id] = !this.eCertisTemplate[id];
+  }
+
+  resetSubCriterionList(criteria: FullCriterion[]) {
+    criteria.forEach(cr => {
+      if (cr.subCriterionList.length > 0) {
+        cr.subCriterionList.length = 0;
+        this.eCertisTemplate[cr.id] = false;
+      }
+    });
+  }
 
 
   /* ============================ snackbar ===================================== */

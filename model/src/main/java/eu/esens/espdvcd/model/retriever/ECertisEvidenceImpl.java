@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2018 University of Piraeus Research Center
+ * Copyright 2016-2019 University of Piraeus Research Center
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,31 +18,32 @@ package eu.esens.espdvcd.model.retriever;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import java.util.List;
 import eu.esens.espdvcd.model.util.CustomStringValueDeserializer;
 import eu.esens.espdvcd.model.util.CustomTextValueDeserializer;
+
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Konstantinos Raptis
  */
-@JsonPropertyOrder( 
+@JsonPropertyOrder(
         {
-            "ID", 
-            "typeCode", 
-            "name", 
-            "description", 
-            "versionID",
-            "feeAmount",
-            "evidenceIntendedUse", 
-            "evidenceIssuerParty", 
-            "addresseeDescription", 
-            "jurisdictionLevelCode", 
-            "evidenceDocumentReference"
-        } )
+                "ID",
+                "typeCode",
+                "name",
+                "description",
+                "versionID",
+                "feeAmount",
+                "evidenceIntendedUse",
+                "evidenceIssuerParty",
+                "addresseeDescription",
+                "jurisdictionLevelCode",
+                "evidenceDocumentReference"
+        })
 public class ECertisEvidenceImpl implements ECertisEvidence {
-    
+
     private String ID;
     private String typeCode;
     private String name;
@@ -78,7 +79,7 @@ public class ECertisEvidenceImpl implements ECertisEvidence {
     public String getTypeCode() {
         return typeCode;
     }
-    
+
     @Override
     @JsonDeserialize(using = CustomTextValueDeserializer.class)
     public void setName(String name) {
@@ -102,7 +103,7 @@ public class ECertisEvidenceImpl implements ECertisEvidence {
     public String getDescription() {
         return description;
     }
-    
+
     @Override
     @JsonDeserialize(using = CustomStringValueDeserializer.class)
     public void setVersionID(String versionID) {
@@ -126,7 +127,7 @@ public class ECertisEvidenceImpl implements ECertisEvidence {
     public ECertisAmount getFeeAmount() {
         return feeAmount;
     }
-    
+
     @Override
     @JsonDeserialize(as = ECertisEvidenceIntendedUseImpl.class)
     public void setEvidenceIntendedUse(ECertisEvidenceIntendedUse evidenceIntendedUse) {
@@ -142,19 +143,18 @@ public class ECertisEvidenceImpl implements ECertisEvidence {
     @Override
     @JsonDeserialize(as = List.class, contentAs = ECertisEvidenceIssuerPartyImpl.class)
     public void setEvidenceIssuerParty(List<ECertisEvidenceIssuerParty> evidenceIssuerParty) {
-        if (evidenceIssuerParty == null) {
-            evidenceIssuerParty = new ArrayList<>();
-        }
         this.evidenceIssuerParty = evidenceIssuerParty;
     }
 
     @Override
     @JsonProperty("EvidenceIssuerParty")
     public List<ECertisEvidenceIssuerParty> getEvidenceIssuerParty() {
+        if (evidenceIssuerParty == null) {
+            evidenceIssuerParty = new ArrayList<>();
+        }
         return evidenceIssuerParty;
     }
-        
-    
+
     @Override
     @JsonDeserialize(using = CustomStringValueDeserializer.class)
     public void setAddresseeDescription(String addresseeDescription) {

@@ -1,12 +1,12 @@
 /**
- * Copyright 2016-2018 University of Piraeus Research Center
- * <p>
+ * Copyright 2016-2019 University of Piraeus Research Center
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -18,12 +18,11 @@ package eu.esens.espdvcd.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import eu.esens.espdvcd.codelist.enums.CriterionTypeEnum;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
+import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Criterion
@@ -146,6 +145,31 @@ public class Criterion implements Serializable {
      */
     protected List<SelectableCriterion> subCriterionList;
 
+    /**
+     * The property keys map contains the criterion's property keys,
+     * which are used for multilinguality purposes. Currently there are 2
+     * property keys at Criterion level, 1 for Criterion's Name and 1 for
+     * Criterion's Description.
+     * <p>
+     * Data type: Text<br>
+     * Cardinality: 2<br>
+     * InfReqID:<br>
+     * BusReqID:<br>
+     * UBL syntax path:<br>
+     */
+    protected Map<String, String> propertyKeyMap;
+
+    /**
+     * The Evidence list contains the criterion's evidences.
+     * <p>
+     * Data type: Class<br>
+     * Cardinality: 0..n<br>
+     * InfReqID:<br>
+     * BusReqID:<br>
+     * UBL syntax path:<br>
+     */
+    protected List<Evidence> evidenceList;
+
     public Criterion() {
         this.ID = java.util.UUID.randomUUID().toString();
     }
@@ -266,6 +290,20 @@ public class Criterion implements Serializable {
             sb.append(".");
         }
         return sb.delete(sb.lastIndexOf("."), sb.length()).toString();
+    }
+
+    public Map<String, String> getPropertyKeyMap() {
+        if (propertyKeyMap == null) {
+            propertyKeyMap = new HashMap<>();
+        }
+        return propertyKeyMap;
+    }
+
+    public List<Evidence> getEvidenceList() {
+        if (evidenceList == null) {
+            evidenceList = new ArrayList<>();
+        }
+        return evidenceList;
     }
 
     @Override

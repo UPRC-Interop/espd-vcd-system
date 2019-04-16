@@ -1,19 +1,12 @@
 #Config file for deployed designer
-
-toop.connector.dp.url = http://snf-819447.vm.okeanos.grnet.gr:8081/tc/from-dc
-toop.keystore.path = gsccp_authority.jks
-toop.keystore.password = P1l0t!ng
-toop.keystore.key.alias = espd-esidis
-toop.keystore.key.password = P1l0t!ng
-
-espd.designer.debug.enabled=true
-espd.designer.port=8080
+espd.designer.CORS.enabled=false
+espd.designer.debug.enabled=false
+espd.designer.enchancedSecurity.enabled=true
+espd.designer.criteria.selection.selected=true
+espd.designer.maxFileSizeUpload=2
+espd.designer.allowFraming=false
 espd.designer.lang=EN
-espd.designer.validator.enabled=false
-espd.designer.artefactDump.enabled=true
+espd.designer.port=8080
+espd.designer.artefactDump.enabled=false
 espd.designer.artefactDump.location=artefacts
-
-### SECURITY CONFIG
-espd.designer.CORS.enabled=true
-espd.designer.enchancedSecurity.enabled=false
-espd.designer.allowFraming=true
+espd.designer.validator.enabled=false
