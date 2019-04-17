@@ -106,7 +106,7 @@ public final class ServerUtil {
         String contentSecurityPolicyHeaders = "default-src 'none'; " +
                 "font-src https://fonts.gstatic.com; " +
                 "img-src 'self'; " +
-                "child-src 'http://audiovisual.ec.europa.eu/avservices/play.cfm?ref=I125339&lg=EN/EN&sublg=none&autoplay=false'; " +
+                "child-src 'http://audiovisual.ec.europa.eu'; " +
                 "object-src 'none'; " +
                 "script-src 'self' ; " +
                 "connect-src 'self'; " +
