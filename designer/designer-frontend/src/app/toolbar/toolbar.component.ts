@@ -17,6 +17,9 @@
 import { Component, OnInit } from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {DataService} from '../services/data.service';
+import {ApicallService} from '../services/apicall.service';
+import {PlatformInfo} from '../model/platform-info';
+import {log} from 'util';
 
 @Component({
   selector: 'app-toolbar',
@@ -25,9 +28,15 @@ import {DataService} from '../services/data.service';
 })
 export class ToolbarComponent implements OnInit {
 
-  constructor(public translate: TranslateService, public dataService: DataService) { }
+  platformInfo: PlatformInfo = null;
+
+  constructor(public translate: TranslateService, public dataService: DataService, private APIService: ApicallService) { }
 
   ngOnInit() {
+    this.APIService.getPlatformInfo().then(res => {
+      this.platformInfo = res;
+      console.log(this.platformInfo);
+    }).catch(err => console.log(err));
   }
 
 }

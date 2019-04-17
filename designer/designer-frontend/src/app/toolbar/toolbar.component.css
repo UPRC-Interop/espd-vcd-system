@@ -91,3 +91,7 @@ ul li a:active {
   overflow: hidden;
   width: 200px;
 }
+.platformInfo {
+  margin-right: 20px;
+  font-size: 12px;
+}

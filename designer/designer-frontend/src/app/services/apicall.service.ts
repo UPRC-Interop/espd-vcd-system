@@ -29,6 +29,7 @@ import {UtilitiesService} from './utilities.service';
 import {CodeList} from '../model/codeList.model';
 import {ECertisCriterion} from '../model/eCertisCriterion.model';
 import {FullCriterion} from '../model/fullCriterion.model';
+import {PlatformInfo} from '../model/platform-info';
 
 // import {DataService} from '../services/data.service';
 
@@ -43,6 +44,10 @@ export class ApicallService {
 
 
   constructor(private http: HttpClient, public utilities: UtilitiesService) {
+  }
+
+  getPlatformInfo() {
+    return this.http.get<PlatformInfo>(environment.apiUrl + 'platform-info').toPromise();
   }
 
   getCountryList() {

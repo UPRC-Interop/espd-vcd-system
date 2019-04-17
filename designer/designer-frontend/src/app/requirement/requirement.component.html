@@ -56,18 +56,18 @@
       </div>
     </div>
     <mat-form-field *ngSwitchCase="'QUANTITY_YEAR'">
-      <label [attr.for]="req.uuid">{{req.propertyKeyMap.pk1 | translate}}</label>
-      <br>
-      <input matInput [formControlName]="req.uuid" [id]="req.uuid" [required]="req.mandatory" integer>
+<!--      <label [attr.for]="req.uuid">{{req.propertyKeyMap.pk1 | translate}}</label>-->
+<!--      <br>-->
+      <input matInput [formControlName]="req.uuid" [id]="req.uuid" [required]="req.mandatory" placeholder="{{req.propertyKeyMap.pk1 | translate }}" integer>
       <mat-error *ngIf="form.get(req.uuid).invalid">
         <input-validation-error [formControlErrors]="form.get(req.uuid).errors"></input-validation-error>
       </mat-error>
     </mat-form-field>
 
     <mat-form-field *ngSwitchCase="'QUANTITY_INTEGER'">
-      <label [attr.for]="req.uuid">{{req.propertyKeyMap.pk1 | translate}}</label>
-      <br>
-      <input matInput [formControlName]="req.uuid" [id]="req.uuid" [required]="req.mandatory" integer>
+<!--      <label [attr.for]="req.uuid">{{req.propertyKeyMap.pk1 | translate}}</label>-->
+<!--      <br>-->
+      <input matInput [formControlName]="req.uuid" [id]="req.uuid" [required]="req.mandatory" placeholder="{{req.propertyKeyMap.pk1 | translate }}" integer>
       <mat-error *ngIf="form.get(req.uuid).invalid">
         <input-validation-error [formControlErrors]="form.get(req.uuid).errors"></input-validation-error>
       </mat-error>
