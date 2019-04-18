@@ -95,3 +95,8 @@ ul li a:active {
   margin-right: 20px;
   font-size: 12px;
 }
+
+ul > li {
+  display: inline-block;
+  margin-right: 10px;
+}
