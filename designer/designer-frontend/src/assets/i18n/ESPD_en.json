@@ -609,5 +609,7 @@
    "espd.landing_page.directLinks_second_intra": "Login as customer or test the platform.",
    "espd.crit.type.id": "Type of ID",
    "espd.part4.crit.weighting.allocated": "Weight allocated to this criterion",
-   "espd.part4.crit.weigthing.information": "Provide complementary information about the evaluation of the criterion"
+   "espd.part4.crit.weigthing.information": "Provide complementary information about the evaluation of the criterion",
+   "divider" : "------------------------------------------",
+   "ges.landing.page.choose.language": "Choose your language to use our service and fill out your ESPD request or response:"
 }

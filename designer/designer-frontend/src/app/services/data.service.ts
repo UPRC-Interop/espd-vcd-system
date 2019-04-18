@@ -132,6 +132,7 @@ export class DataService {
 
     this.AddLanguages();
     translate.setDefaultLang('ESPD_el');
+    translate.currentLang = 'ESPD_el';
     console.log(this.translate.getLangs());
   }
 
