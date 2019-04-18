@@ -25,12 +25,12 @@
       <mat-radio-group name="satisfiesALL"
                        [disabled]="utilities.isImport()">
         <mat-radio-button color="primary" name="selALL" value="YES"
-                          [checked]="!utilities.satisfiedALLCriterionExists && utilities.isImport()"
+                          [checked]="(!utilities.satisfiedALLCriterionExists && utilities.isImport()) || utilities.isCreateResponse"
                           (change)="handleALL(YES)" class="yes_btn" #YES>
           {{'espd.gui.yes' | translate}}
         </mat-radio-button>
         <mat-radio-button color="primary" name="selALL" value="NO"
-                          [checked]="(utilities.satisfiedALLCriterionExists && utilities.isImport()) || utilities.isCreateResponse"
+                          [checked]="(utilities.satisfiedALLCriterionExists && utilities.isImport())"
                           (change)="handleALL(NO)" #NO>
           {{'espd.gui.no' | translate}}
         </mat-radio-button>
