@@ -44,6 +44,7 @@ import _ from 'lodash';
 import {Filter} from '../filter/filter.enum';
 import {CodelistService} from './codelist.service';
 import {ECertisCriterion} from '../model/eCertisCriterion.model';
+import {PlatformInfo} from '../model/platform-info';
 
 @Injectable()
 export class DataService {
