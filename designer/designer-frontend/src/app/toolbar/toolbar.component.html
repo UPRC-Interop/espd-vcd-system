@@ -36,8 +36,7 @@
       version: {{platformInfo.version}}
     </div>
     <select #langSelect (change)="dataService.switchLanguage(langSelect.value)">
-      <option value="">Select Language</option>
-      <option *ngFor="let lang of dataService.langNames" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>
+      <option *ngFor="let lang of dataService.langNames" [value]="lang" [selected]="lang">{{ lang }}</option>
     </select>
   </mat-toolbar-row>
 

@@ -131,7 +131,7 @@ export class DataService {
               public codelist: CodelistService) {
 
     this.AddLanguages();
-    translate.setDefaultLang('ESPD_en');
+    translate.setDefaultLang('ESPD_el');
     console.log(this.translate.getLangs());
   }
 
