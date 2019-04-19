@@ -445,10 +445,10 @@ export class FormUtilService {
 
   /* ========================================= CREATE CRITERION FORMS =================================== */
 
-  createExclusionCriterionForm(criteria: ExclusionCriteria[]) {
+  createExclusionCriterionForm(criteria: ExclusionCriteria[], isSelection: boolean) {
     let group: any = {};
     criteria.forEach(cr => {
-      group[cr.uuid] = this.createFormGroups(cr.requirementGroups);
+      group[cr.uuid] = this.createFormGroups(cr.requirementGroups, isSelection);
       // console.log(group[cr.typeCode]);
     });
     let fg = new FormGroup(group);
@@ -456,10 +456,10 @@ export class FormUtilService {
     return fg;
   }
 
-  createSelectionCriterionForm(criteria: SelectionCriteria[]) {
+  createSelectionCriterionForm(criteria: SelectionCriteria[], isSelection: boolean) {
     let group: any = {};
     criteria.forEach(cr => {
-      group[cr.uuid] = this.createFormGroups(cr.requirementGroups);
+      group[cr.uuid] = this.createFormGroups(cr.requirementGroups, isSelection);
       // console.log(group[cr.typeCode]);
     });
     let fg = new FormGroup(group);
@@ -467,22 +467,10 @@ export class FormUtilService {
     return fg;
   }
 
-  createReductionCriterionForm(criteria: ReductionCriterion[]) {
+  createReductionCriterionForm(criteria: ReductionCriterion[], isSelection: boolean) {
     let group: any = {};
     criteria.forEach(cr => {
-      group[cr.uuid] = this.createFormGroups(cr.requirementGroups);
-      // console.log(group[cr.typeCode]);
-    });
-    let fg = new FormGroup(group);
-
-    // console.log(fg);
-    return fg;
-  }
-
-  createEORelatedCriterionForm(criteria: EoRelatedCriterion[]) {
-    let group: any = {};
-    criteria.forEach(cr => {
-      group[cr.uuid] = this.createFormGroups(cr.requirementGroups);
+      group[cr.uuid] = this.createFormGroups(cr.requirementGroups, isSelection);
       // console.log(group[cr.typeCode]);
     });
     let fg = new FormGroup(group);
@@ -491,10 +479,22 @@ export class FormUtilService {
     return fg;
   }
 
-  createCARelatedCriterionForm(criteria: CaRelatedCriterion[]) {
+  createEORelatedCriterionForm(criteria: EoRelatedCriterion[], isSelection: boolean) {
     let group: any = {};
     criteria.forEach(cr => {
-      group[cr.uuid] = this.createFormGroups(cr.requirementGroups);
+      group[cr.uuid] = this.createFormGroups(cr.requirementGroups, isSelection);
+      // console.log(group[cr.typeCode]);
+    });
+    let fg = new FormGroup(group);
+
+    // console.log(fg);
+    return fg;
+  }
+
+  createCARelatedCriterionForm(criteria: CaRelatedCriterion[], isSelection: boolean) {
+    let group: any = {};
+    criteria.forEach(cr => {
+      group[cr.uuid] = this.createFormGroups(cr.requirementGroups, isSelection);
       // console.log(group[cr.typeCode]);
     });
     let fg = new FormGroup(group);
@@ -504,10 +504,10 @@ export class FormUtilService {
   }
 
 
-  createFormGroups(reqGroups: RequirementGroup[]) {
+  createFormGroups(reqGroups: RequirementGroup[], isSelection: boolean) {
     let group: any = {};
     reqGroups.forEach(rg => {
-      group[rg.uuid] = this.toFormGroup(rg);
+      group[rg.uuid] = this.toFormGroup(rg, isSelection);
     });
     // console.log(group);
     let fg = new FormGroup(group);
@@ -515,7 +515,7 @@ export class FormUtilService {
     return fg;
   }
 
-  toFormGroup(rg: RequirementGroup) {
+  toFormGroup(rg: RequirementGroup, isSelection: boolean) {
     let group: any = {};
     if (rg) {
       // console.log('In Req Group: ' + rg.id);
@@ -544,7 +544,12 @@ export class FormUtilService {
             // YES/NO if responseDataType is indicator then pass indicator value to formControl. (initial state problem fixed)
             if (r.responseDataType === 'INDICATOR' || r.responseDataType === 'CODE_BOOLEAN') {
               if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
-                group[r.uuid] = new FormControl(false);
+                if (isSelection) {
+                  group[r.uuid] = new FormControl(true);
+                } else {
+                  group[r.uuid] = new FormControl(false);
+                }
+
               } else {
                 group[r.uuid] = new FormControl(r.response.indicator);
               }
@@ -836,11 +841,20 @@ export class FormUtilService {
               }
             }
             if (this.utilities.isEO) {
-              if (r.responseDataType === 'INDICATOR' || r.responseDataType === 'CODE_BOOLEAN') {
-                group[r.uuid] = new FormControl({
-                  value: false,
-                  disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
-                });
+              if (isSelection) {
+                if (r.responseDataType === 'INDICATOR' || r.responseDataType === 'CODE_BOOLEAN') {
+                  group[r.uuid] = new FormControl({
+                    value: true,
+                    disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                  });
+                }
+              } else {
+                if (r.responseDataType === 'INDICATOR' || r.responseDataType === 'CODE_BOOLEAN') {
+                  group[r.uuid] = new FormControl({
+                    value: false,
+                    disabled: (r.type === 'REQUIREMENT' || r.type === 'CAPTION') && this.utilities.isEO
+                  });
+                }
               }
 
               // if (r.responseDataType === 'CODE' && this.APIService.version === 'v1') {
@@ -936,7 +950,7 @@ export class FormUtilService {
       if (rg.requirementGroups != null || rg.requirementGroups != undefined) {
         rg.requirementGroups.forEach(rg => {
           // console.log('Req Group ' + rg.uuid);
-          group[rg.uuid] = this.toFormGroup(rg);
+          group[rg.uuid] = this.toFormGroup(rg, isSelection);
         });
       }
     }

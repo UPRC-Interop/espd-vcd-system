@@ -67,6 +67,7 @@ export class RootComponent implements OnInit, OnChanges {
     this.exclusionStepValid = true;
     this.selectionStepValid = true;
     this.finishStepValid = true;
+
   }
 
   ngOnChanges() {
