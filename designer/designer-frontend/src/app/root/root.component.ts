@@ -56,6 +56,7 @@ export class RootComponent implements OnInit, OnChanges {
   elTitle = 'Προμηθεύς ESPDint – ηλεκτρονική υπηρεσία σύνταξης του Ενιαίου Ευρωπαϊκού Εγγράφου Σύμβασης (ΕΕΕΣ)';
   enTitle = 'Promitheus ESPDint – e-Service to fill out the European Single Procurement Document (ESPD)';
 
+
   constructor(public dataService: DataService,
               public utilities: UtilitiesService, private titleService: Title) {
   }
@@ -80,10 +81,12 @@ export class RootComponent implements OnInit, OnChanges {
     this.dataService.switchLanguage(language);
   }
 
-   setTitle( lang: string) {
-     const title = ( lang === 'el' ? this.elTitle : this.enTitle);
+  setTitle(lang: string) {
+    const title = (lang === 'el' ? this.elTitle : this.enTitle);
     this.titleService.setTitle(title);
   }
+
+
 
   private validateSteps(event) {
     let isCA = this.startComponent.isCA;
@@ -95,6 +98,6 @@ export class RootComponent implements OnInit, OnChanges {
   }
 
   private static isComponentValid(component) {
-    return 'undefined' === typeof  component || component.areFormsValid();
+    return 'undefined' === typeof component || component.areFormsValid();
   }
 }

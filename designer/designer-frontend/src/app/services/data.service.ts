@@ -133,6 +133,8 @@ export class DataService {
     this.AddLanguages();
     translate.setDefaultLang('ESPD_el');
     translate.currentLang = 'ESPD_el';
+    // this.utilities.selectedLang = 'el';
+    this.utilities.setLogo('el');
     console.log(this.translate.getLangs());
   }
 
@@ -1775,6 +1777,7 @@ export class DataService {
   switchLanguage(language: string) {
     this.selectedLanguage = this.langTemplate[language].toLowerCase();
     this.utilities.selectedLang = this.selectedLanguage;
+    this.utilities.setLogo(this.selectedLanguage);
     const lang = 'ESPD_' + this.selectedLanguage;
     console.log(lang);
     this.translate.use(lang);
