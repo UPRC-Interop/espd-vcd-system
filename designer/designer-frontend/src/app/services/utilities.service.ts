@@ -55,6 +55,9 @@ export class UtilitiesService {
   type: string;
   selectedLang = 'en';
   eCertisTemplate = [];
+  elLogo = 'el_horizontal_cef_logo.png';
+  enLogo = 'en_horizontal_cef_logo_2.png';
+  logo = 'el_horizontal_cef_logo.png';
 
   role: string;
   // qualificationApplicationType = 'SELF-CONTAINED';
@@ -204,6 +207,10 @@ export class UtilitiesService {
   /* ============================ snackbar ===================================== */
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action);
+  }
+
+  setLogo(lang: string) {
+    this.logo = (lang === 'el' ? this.elLogo : this.enLogo);
   }
 
 }

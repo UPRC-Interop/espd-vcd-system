@@ -1,4 +1,4 @@
-﻿{
+{
    "espd.gui.about": "About",
    "espd.part4.all.selection.switch": "a: Global indication for all selection criteria",
    "espd.gui.app.environment": "Dear user, you are using our testing environment. Please use",
@@ -322,7 +322,7 @@
    "espd.gui.faq.leaflet": "FAQ leaflet",
    "espd.gui.faq.text.answers": "If you are interested in the answers to the most frequently asked questions about the ESPD, please have a look at the",
    "espd.gui.faq.text.more.info": "For more information on ESPD, please",
-   "espd.init.alert.part1": "European Single Procurement Document (ESPD) is a self-declaration of the businesses' financial status, abilities and suitability for a public procurement procedure. It is available in all EU languages and used as a preliminary evidence of fulfilment of the conditions required in public procurement procedures across the EU. Thanks to the ESPD, the tenderers no longer have to provide full documentary evidence and different forms previously used in the EU procurement, which means a significant simplification of access to cross-border tendering opportunities. From October 2018 onwards the ESPD shall be provided exclusively in an electronic form.",
+   "espd.init.alert.part1": "European Single Procurement Document (ESPD) is a self-declaration of the businesses' financial status, abilities and suitability for a public procurement procedure. It is available in all EU languages and used as a preliminary evidence of fulfilment of the conditions required in public procurement procedures across the EU. Thanks to the ESPD, the tenderers no longer have to provide full documentary evidence and different forms previously used in the EU procurement, which means a significant simplification of access to cross-border tendering opportunities. From October 2018 onwards the ESPD shall be provided exclusively in an electronic form. <p>National Electronic Public Procurement System (NEPPS) provides the current free web service (Promitheus ESPDint) for the buyers, bidders and other parties interested in filling in the ESPD/SSDD electronically. The online form can be filled in, printed and then sent to the buyer together with the rest of the bid.</p>",
    "espd.init.alert.part2": "If the procedure is run electronically, the ESPD can be exported, stored and submitted electronically. The ESPD provided in a previous public procurement procedure can be reused as long as the information remains correct. Bidders may be excluded from the procedure or be subject to prosecution if the information in the ESPD is seriously misrepresented, withheld or cannot be complemented with supporting documents.",
    "espd.init.create.espd": "Create a new ESPD",
    "espd.init.create.response": "Create response",
@@ -609,5 +609,11 @@
    "espd.landing_page.directLinks_second_intra": "Login as customer or test the platform.",
    "espd.crit.type.id": "Type of ID",
    "espd.part4.crit.weighting.allocated": "Weight allocated to this criterion",
-   "espd.part4.crit.weigthing.information": "Provide complementary information about the evaluation of the criterion"
+   "espd.part4.crit.weigthing.information": "Provide complementary information about the evaluation of the criterion",
+   "divider" : "------------------------------------------",
+   "ges.landing.page.choose.language": "Choose your language to use our service and fill out your ESPD request or response:",
+   "ges.landing.page.text": "<b>The European Single Procurement Document (ESPD)</b> is a <b>self-declaration form</b> used in public procurement procedures by public buyers and businesses in the EU. Before the introduction of the ESPD, companies were required to submit various documents to prove that they fulfil the exclusion and selection criteria of a tender, for example have paid taxes and have not been convicted of criminal activity. Now, companies are able to meet these obligations with a single ESPD self-declaration form. The actual documents will only have to be provided by the winner of the tender. The Promitheus ESPDint e-Service is also integrated with <b>e-Certis</b> - a mapping tool used to identify and compare certificates requested in public procurement procedures across the EU.",
+   "espd.crit.please.give.more.details": "Please describe them",
+   "espd.part4.crit.explain.supply.contracts.environmental.law":"If not, please explain why and state which other means of proof can be provided:",
+   "espd.crit.please.describe": "Please describe them"
 }

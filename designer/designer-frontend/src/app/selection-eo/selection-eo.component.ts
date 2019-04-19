@@ -45,6 +45,11 @@ export class SelectionEoComponent implements OnInit, BaseStep {
       this.utilities.isAtoD = true;
       this.utilities.isSatisfiedALL = false;
     }
+    /* GES - 82 make yes as default answer*/
+    if (this.dataService.isReadOnly() || this.utilities.qualificationApplicationType === 'regulated') {
+      this.utilities.isAtoD = true;
+      this.utilities.isSatisfiedALL = false;
+    }
   }
 
   handleALL(radio: FormControl) {

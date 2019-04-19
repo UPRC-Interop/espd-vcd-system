@@ -107,7 +107,7 @@ import { ECertisCriterionComponent } from './e-certis-criterion/e-certis-criteri
     })
   ],
   providers: [ApicallService, DataService, Title,
-    {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
+    {provide: MAT_DATE_LOCALE, useValue: 'el-GR'},
     {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
     {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS}
   ],
