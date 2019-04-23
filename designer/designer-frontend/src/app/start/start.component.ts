@@ -208,11 +208,13 @@ export class StartComponent implements OnInit, BaseStep {
     }
   }
 
-  isNextDisabled() {
+  isNextDisabled(): boolean {
     if (this.utilities.isImport()) {
       return this.isEmptyFile();
-    } else {
+    } else if (this.utilities.isCreateNewESPD || this.utilities.isCreateResponse) {
       return !this.countryExists;
+    } else {
+      return true;
     }
   }
 
@@ -221,7 +223,6 @@ export class StartComponent implements OnInit, BaseStep {
   }
 
   onStartSubmit(form: NgForm) {
-    this.isNextDisabled();
     this.isLoading = true;
     console.log(this.isLoading);
     this.dataService.startESPD(form).then(() => {
