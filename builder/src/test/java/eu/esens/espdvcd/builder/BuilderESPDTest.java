@@ -529,7 +529,7 @@ public class BuilderESPDTest {
         // System.out.println(pdfDocumentBuilderV2.theXML);
 
         TransformationService transformationService = new TransformationService();
-        InputStream pdfStream = transformationService.createPdfStream(new StreamSource(new ByteArrayInputStream(pdfDocumentBuilderV2.theXML.getBytes(StandardCharsets.UTF_8))), EULanguageCodeEnum.EL);
+        InputStream pdfStream = transformationService.createPdfStream(new StreamSource(new ByteArrayInputStream(pdfDocumentBuilderV2.getAsString().getBytes(StandardCharsets.UTF_8))), EULanguageCodeEnum.EL);
         File targetFile = new File("D:\\Downloads\\espd-request-210.pdf");
         FileUtils.copyInputStreamToFile(pdfStream, targetFile);
     }
@@ -548,7 +548,7 @@ public class BuilderESPDTest {
         // System.out.println(pdfDocumentBuilderV2.theXML);
 
         TransformationService transformationService = new TransformationService();
-        InputStream pdfStream = transformationService.createPdfStream(new StreamSource(new ByteArrayInputStream(pdfDocumentBuilderV2.theXML.getBytes(StandardCharsets.UTF_8))), EULanguageCodeEnum.EL);
+        InputStream pdfStream = transformationService.createPdfStream(new StreamSource(new ByteArrayInputStream(pdfDocumentBuilderV2.getAsString().getBytes(StandardCharsets.UTF_8))), EULanguageCodeEnum.EL);
         File targetFile = new File("D:\\Downloads\\espd-response-210.pdf");
         FileUtils.copyInputStreamToFile(pdfStream, targetFile);
     }

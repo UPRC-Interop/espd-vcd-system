@@ -220,8 +220,8 @@ public abstract class CriteriaExtractorBuilder {
                 .collect(Collectors.toList()));
 
         List<LegislationResource> resourceList = new ArrayList<>();
-        resourceList.add(artefactResource);
         resourceList.add(eCertisResource);
+        resourceList.add(artefactResource);
 
         return resourceList;
     }
