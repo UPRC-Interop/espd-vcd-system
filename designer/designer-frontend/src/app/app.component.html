@@ -19,4 +19,8 @@
 
 <router-outlet></router-outlet>
 
+<div *ngIf="platformInfo" class="platformInfo">
+  <a href="{{platformInfoUrl}}">Version {{platformInfo.version}}</a>
+</div>
+
 

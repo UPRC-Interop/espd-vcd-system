@@ -14,5 +14,15 @@
  * limitations under the License.
  */
 
+.platformInfo {
+  font: 12px Roboto, "Helvetica Neue", sans-serif;
+  text-align: center;
+  color: lightgray;
+  margin-top: 8px;
+}
 
+.platformInfo > a {
+  color: lightgray;
+  text-decoration: none;
+}
 

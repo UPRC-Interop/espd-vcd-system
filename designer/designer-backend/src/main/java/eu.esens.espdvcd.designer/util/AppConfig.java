@@ -19,6 +19,9 @@ import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 public enum AppConfig {
     INSTANCE;
 
@@ -27,8 +30,8 @@ public enum AppConfig {
 
     AppConfig(){
         Config defaultConfig = ConfigFactory.parseResources(defaultConfigFile);
-        Config externalConfig = ConfigFactory.defaultApplication();
-        appConfig = ConfigFactory.load(externalConfig)
+        Path f = Paths.get("./application.properties");
+        appConfig = ConfigFactory.parseFile(f.toFile())
                 .withFallback(defaultConfig)
                 .resolve();
     }
