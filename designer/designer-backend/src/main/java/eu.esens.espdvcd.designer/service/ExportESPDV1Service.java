@@ -58,10 +58,18 @@ public enum ExportESPDV1Service implements ExportESPDService {
     @Override
     public InputStream exportESPDRequestAs(ESPDRequest model, EULanguageCodeEnum languageCodeEnum, ExportType exportType) throws ValidationException, JAXBException, IOException, SAXException {
         Objects.requireNonNull(exportType);
-        if (exportType == ExportType.XML) {
-            return exportESPDRequest(model);
+        switch (exportType) {
+            case XML:
+                return exportESPDRequest(model);
+            case PDF:
+                PDFDocumentBuilderV1 pdfDocumentBuilderV1 = BuilderFactory.EDM_V1
+                        .createPDFDocumentBuilderFor(model);
+                return transformationService.createPdfStream(new StreamSource(new ByteArrayInputStream(pdfDocumentBuilderV1.getAsString().getBytes(StandardCharsets.UTF_8))), languageCodeEnum);
+            case HTML:
+                return transformationService.createHtmlStream(new StreamSource(exportESPDRequest(model)), languageCodeEnum);
+            default:
+                throw new UnsupportedOperationException(String.format("Exporting to %s is not supported.", exportType.name()));
         }
-        throw new UnsupportedOperationException(String.format("Exporting to %s is not supported.", exportType.name()));
     }
 
     @Override
