@@ -1,12 +1,12 @@
 /**
  * Copyright 2016-2019 University of Piraeus Research Center
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -200,7 +200,7 @@ public class BuilderESPDTest {
         resp.getFullCriterionList().add(cri);
 
         ESPDResponseType et = BuilderFactory.EDM_V1
-                .createDocumentBuilderFor(resp)
+                .createXMLDocumentBuilderFor(resp)
                 .createXML(resp);
 
         et.getCriterion().get(0).getRequirementGroup().get(0).getRequirement().forEach(r -> {
@@ -219,7 +219,7 @@ public class BuilderESPDTest {
                 .createESPDRequest();
 
         XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.EDM_V2
-                .createDocumentBuilderFor(espdRequest);
+                .createXMLDocumentBuilderFor(espdRequest);
 
         System.out.println(xmlDocumentBuilderV2.getAsString());
     }
@@ -233,7 +233,7 @@ public class BuilderESPDTest {
                 .createESPDRequest();
 
         XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.EDM_V2
-                .createDocumentBuilderFor(espdRequest);
+                .createXMLDocumentBuilderFor(espdRequest);
         System.out.println(xmlDocumentBuilderV2.getAsString());
     }
 
@@ -250,7 +250,7 @@ public class BuilderESPDTest {
         espdRequest.setCriterionList(extractor.getFullList(espdRequest.getFullCriterionList()));
 
         XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.EDM_V2
-                .createDocumentBuilderFor(espdRequest);
+                .createXMLDocumentBuilderFor(espdRequest);
 
         System.out.println(xmlDocumentBuilderV2.getAsString());
     }
@@ -267,7 +267,7 @@ public class BuilderESPDTest {
         espdResponse.setCriterionList(extractor.getFullList());
 
         XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.EDM_V2
-                .createDocumentBuilderFor(espdResponse);
+                .createXMLDocumentBuilderFor(espdResponse);
 
         System.out.println(xmlDocumentBuilderV2.getAsString());
     }
@@ -282,7 +282,7 @@ public class BuilderESPDTest {
                 .createESPDResponse();
 
         XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.EDM_V2
-                .createDocumentBuilderFor(espdResponse);
+                .createXMLDocumentBuilderFor(espdResponse);
 
         System.out.println(xmlDocumentBuilderV2.getAsString());
     }
@@ -300,7 +300,7 @@ public class BuilderESPDTest {
 //        espdResponse.setCriterionList(extractor.getFullList());
 
         XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.EDM_V2
-                .createDocumentBuilderFor(espdResponse);
+                .createXMLDocumentBuilderFor(espdResponse);
 
         System.out.println(xmlDocumentBuilderV2.getAsString());
     }
@@ -314,7 +314,7 @@ public class BuilderESPDTest {
 //                .createESPDResponse();
 //
 //        XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.EDM_V2
-//                .createDocumentBuilderFor(espdResponse);
+//                .createXMLDocumentBuilderFor(espdResponse);
 //
 //        System.out.println(xmlDocumentBuilderV2.getAsString());
 //    }
@@ -340,7 +340,7 @@ public class BuilderESPDTest {
 //                .createESPDResponse();
 //
 //        XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.EDM_V2
-//                .createDocumentBuilderFor(espdResponse);
+//                .createXMLDocumentBuilderFor(espdResponse);
 //
 //        System.out.println(xmlDocumentBuilderV2.getAsString());
 //    }
@@ -354,7 +354,7 @@ public class BuilderESPDTest {
                 .createESPDRequest();
 
         XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.EDM_V2
-                .createDocumentBuilderFor(modelRequest);
+                .createXMLDocumentBuilderFor(modelRequest);
 
         System.out.println(xmlDocumentBuilderV2.getAsString());
     }
@@ -368,7 +368,7 @@ public class BuilderESPDTest {
                 .createESPDRequest();
 
         XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.EDM_V2
-                .createDocumentBuilderFor(espdRequest);
+                .createXMLDocumentBuilderFor(espdRequest);
 
         System.out.println(xmlDocumentBuilderV2.getAsString());
     }
@@ -382,7 +382,7 @@ public class BuilderESPDTest {
                 .createESPDResponse();
 
         XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.EDM_V2
-                .createDocumentBuilderFor(espdResponse);
+                .createXMLDocumentBuilderFor(espdResponse);
 
         System.out.println(xmlDocumentBuilderV2.getAsString());
     }
@@ -397,7 +397,7 @@ public class BuilderESPDTest {
         modelRequest.getCADetails().setProcurementProjectLots(5);
 
         XMLDocumentBuilderV2 xmlDocBuilder = BuilderFactory.EDM_V2
-                .createDocumentBuilderFor(modelRequest);
+                .createXMLDocumentBuilderFor(modelRequest);
 
         System.out.println(xmlDocBuilder.getAsString());
     }
@@ -411,7 +411,7 @@ public class BuilderESPDTest {
                 .createESPDRequest();
 
         XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.EDM_V2
-                .createDocumentBuilderFor(espdRequest);
+                .createXMLDocumentBuilderFor(espdRequest);
 
         System.out.println(xmlDocumentBuilderV2.getAsString());
     }
@@ -425,7 +425,7 @@ public class BuilderESPDTest {
                 .createESPDResponse();
 
         XMLDocumentBuilderV1 xmlDocumentBuilderV1 = BuilderFactory.EDM_V1
-                .createDocumentBuilderFor(modelResponse);
+                .createXMLDocumentBuilderFor(modelResponse);
 
         System.out.println(xmlDocumentBuilderV1.getAsString());
         Assert.assertEquals(63, modelResponse.getFullCriterionList().size());
@@ -461,7 +461,7 @@ public class BuilderESPDTest {
 //
 //
 //        XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.EDM_V2
-//                .createDocumentBuilderFor(espdRequest);
+//                .createXMLDocumentBuilderFor(espdRequest);
 //
 //        System.out.println(xmlDocumentBuilderV2.getAsString());
 //    }
@@ -475,7 +475,7 @@ public class BuilderESPDTest {
 //
 //
 //        XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.EDM_V2
-//                .createDocumentBuilderFor(espdResponse);
+//                .createXMLDocumentBuilderFor(espdResponse);
 //
 //        System.out.println(xmlDocumentBuilderV2.getAsString());
 //    }
@@ -489,7 +489,7 @@ public class BuilderESPDTest {
 //
 //
 //        XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.EDM_V2
-//                .createDocumentBuilderFor(espdRequest);
+//                .createXMLDocumentBuilderFor(espdRequest);
 //
 //        System.out.println(xmlDocumentBuilderV2.getAsString());
 //    }
@@ -503,9 +503,47 @@ public class BuilderESPDTest {
 //
 //
 //        XMLDocumentBuilderV2 xmlDocumentBuilderV2 = BuilderFactory.EDM_V2
-//                .createDocumentBuilderFor(espdResponse);
+//                .createXMLDocumentBuilderFor(espdResponse);
 //
 //        System.out.println(xmlDocumentBuilderV2.getAsString());
 //    }
+
+    @Ignore
+    @Test
+    public void testPDFDocumentBuilderV2ForRequest() throws Exception {
+        ESPDRequest espdRequest = BuilderFactory.EDM_V2
+                .createRegulatedModelBuilder()
+                .importFrom(BuilderESPDTest.class.getResourceAsStream("/artefacts/regulated/v2/2.1.0/ESPDRequest_DA_Test-2.1.0-v0.5.xml"))
+                .createESPDRequest();
+
+        PDFDocumentBuilderV2 pdfDocumentBuilderV2 = BuilderFactory.EDM_V2
+                .createPDFDocumentBuilderFor(espdRequest);
+
+        System.out.println(pdfDocumentBuilderV2.theXML);
+
+//        TransformationService transformationService = new TransformationService();
+//        InputStream pdfStream = transformationService.createPdfStream(new StreamSource(new ByteArrayInputStream(pdfDocumentBuilderV2.theXML.getBytes(StandardCharsets.UTF_8))), EULanguageCodeEnum.EL);
+//        File targetFile = new File("D:\\Downloads\\espd-request-210.pdf");
+//        FileUtils.copyInputStreamToFile(pdfStream, targetFile);
+    }
+
+    @Ignore
+    @Test
+    public void testPDFDocumentBuilderV2ForResponse() throws Exception {
+        ESPDResponse espdResponse = BuilderFactory.EDM_V2
+                .createRegulatedModelBuilder()
+                .importFrom(BuilderESPDTest.class.getResourceAsStream("/artefacts/regulated/v2/2.1.0/ESPDResponse_DA_Test-2.1.0-v0.5.xml"))
+                .createESPDResponse();
+
+        PDFDocumentBuilderV2 pdfDocumentBuilderV2 = BuilderFactory.EDM_V2
+                .createPDFDocumentBuilderFor(espdResponse);
+
+        System.out.println(pdfDocumentBuilderV2.theXML);
+
+//        TransformationService transformationService = new TransformationService();
+//        InputStream pdfStream = transformationService.createPdfStream(new StreamSource(new ByteArrayInputStream(pdfDocumentBuilderV2.theXML.getBytes(StandardCharsets.UTF_8))), EULanguageCodeEnum.EL);
+//        File targetFile = new File("D:\\Downloads\\espd-response-210.pdf");
+//        FileUtils.copyInputStreamToFile(pdfStream, targetFile);
+    }
 
 }

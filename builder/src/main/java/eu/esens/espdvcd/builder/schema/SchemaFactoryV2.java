@@ -17,10 +17,14 @@ package eu.esens.espdvcd.builder.schema;
 
 import eu.esens.espdvcd.builder.schema.v2.ESPDRequestSchemaExtractorV2;
 import eu.esens.espdvcd.builder.schema.v2.ESPDResponseSchemaExtractorV2;
+import eu.esens.espdvcd.builder.schema.v2.PDFRequestSchemaExtractorV2;
+import eu.esens.espdvcd.builder.schema.v2.PDFResponseSchemaExtractorV2;
 
 public class SchemaFactoryV2 {
 
     public static final ESPDRequestSchemaExtractorV2 ESPD_REQUEST = new ESPDRequestSchemaExtractorV2();
     public static final ESPDResponseSchemaExtractorV2 ESPD_RESPONSE = new ESPDResponseSchemaExtractorV2();
+    public static final PDFRequestSchemaExtractorV2 ESPD_REQUEST_FOR_PDF = new PDFRequestSchemaExtractorV2();
+    public static final PDFResponseSchemaExtractorV2 ESPD_RESPONSE_FOR_PDF = new PDFResponseSchemaExtractorV2();
 
 }

@@ -21,10 +21,6 @@ import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractorBuilder;
 import eu.esens.espdvcd.retriever.criteria.RegulatedCriteriaExtractorBuilder;
 import eu.esens.espdvcd.retriever.criteria.SelfContainedCriteriaExtractorBuilder;
-import eu.esens.espdvcd.retriever.criteria.resource.RegulatedCriteriaTaxonomyResource;
-import eu.esens.espdvcd.retriever.criteria.resource.ECertisResource;
-import eu.esens.espdvcd.retriever.criteria.resource.ESPDArtefactResource;
-import eu.esens.espdvcd.retriever.criteria.resource.SelectableCriterionPrinter;
 import eu.esens.espdvcd.schema.enums.EDMVersion;
 import org.junit.Assert;
 import org.junit.Before;
@@ -96,6 +92,17 @@ public class CriteriaExtractorBuilderTest {
                 .orElse(null);
 
         Assert.assertTrue(sc.isCompulsory());
+    }
+
+    @Test
+    public void testBuilderWithContractingAuthorityOperatorParam() throws Exception {
+
+        CriteriaExtractor e = new SelfContainedCriteriaExtractorBuilder()
+                .withContractingOperator(ContractingOperatorEnum.CONTRACTING_AUTHORITY)
+                .build();
+
+       e.getFullList().forEach(sc -> System.out.printf("ID:%s, TYPECODE:%s, isCompulsory:%b, isPreselected:%b\n"
+               , sc.getID(), sc.getTypeCode(), sc.isCompulsory(), sc.isSelected()));
     }
 
     @Test
