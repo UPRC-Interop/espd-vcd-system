@@ -1,4 +1,5 @@
 #Config file for deployed designer
+### DO NOT MERGE THIS FILE WITH THE ONES FROM OTHER BRANCHES
 espd.designer.CORS.enabled=false
 espd.designer.debug.enabled=false
 espd.designer.enchancedSecurity.enabled=false
