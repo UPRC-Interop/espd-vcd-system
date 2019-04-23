@@ -16,6 +16,7 @@
 package eu.esens.espdvcd.designer.service;
 
 import eu.esens.espdvcd.builder.BuilderFactory;
+import eu.esens.espdvcd.builder.PDFDocumentBuilderV1;
 import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
 import eu.esens.espdvcd.designer.exception.ValidationException;
 import eu.esens.espdvcd.designer.typeEnum.ExportType;
@@ -79,7 +80,9 @@ public enum ExportESPDV1Service implements ExportESPDService {
             case XML:
                 return exportESPDResponse(model);
             case PDF:
-                return transformationService.createPdfStream(new StreamSource(exportESPDResponse(model)), languageCodeEnum);
+                PDFDocumentBuilderV1 pdfDocumentBuilderV1 = BuilderFactory.EDM_V1
+                        .createPDFDocumentBuilderFor(model);
+                return transformationService.createPdfStream(new StreamSource(new ByteArrayInputStream(pdfDocumentBuilderV1.getAsString().getBytes(StandardCharsets.UTF_8))), languageCodeEnum);
             case HTML:
                 return transformationService.createHtmlStream(new StreamSource(exportESPDResponse(model)), languageCodeEnum);
             default:
