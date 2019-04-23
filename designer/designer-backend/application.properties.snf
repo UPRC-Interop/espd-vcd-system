@@ -1,7 +1,7 @@
 #Config file for deployed designer
 espd.designer.CORS.enabled=false
 espd.designer.debug.enabled=false
-espd.designer.enchancedSecurity.enabled=true
+espd.designer.enchancedSecurity.enabled=false
 espd.designer.criteria.selection.selected=true
 espd.designer.maxFileSizeUpload=4
 espd.designer.allowFraming=false
