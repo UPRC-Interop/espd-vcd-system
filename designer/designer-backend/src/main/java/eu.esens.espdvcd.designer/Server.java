@@ -86,6 +86,10 @@ public class Server {
         RestContext v2Context = new RestContext(initialPath + "/api/v2", spark);
         RestContext baseContext = new RestContext(initialPath + "/api", spark);
 
+        LOGGER.info("Configuring PlatformInfo endpoint...");
+        Endpoint platformInfoEndpoint = new PlatformInfoEndpoint();
+        baseContext.addEndpointWithPath(platformInfoEndpoint, "/platform-info");
+
         LOGGER.info("Configuring codelistsV1 endpoint...");
         Endpoint v1Codelists = new CodelistsEndpoint(CodelistsV1Service.getInstance());
         v1Context.addEndpoint(v1Codelists);
@@ -119,10 +123,6 @@ public class Server {
         LOGGER.info("Configuring ImportESPDResponse endpoint...");
         Endpoint importESPDResp = new ImportESPDEndpoint(ImportESPDResponseService.getInstance());
         baseContext.addEndpointWithPath(importESPDResp, "/importESPD/response");
-
-        LOGGER.info("Configuring ImportESPDResponse endpoint...");
-        Endpoint platformInfoEndpoint = new PlatformInfoEndpoint();
-        baseContext.addEndpointWithPath(platformInfoEndpoint, "/platform-info");
 
         LOGGER.info("Server is up and running at port " + portToBind);
 
