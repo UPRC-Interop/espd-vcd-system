@@ -64,11 +64,17 @@ public class Server {
 
         ServerUtil.dropTrailingSlashes(spark);
 
-        spark.notFound((request, response) -> JsonUtil.toJson(Errors.notFoundError("Endpoint not found.")));
+        spark.notFound((request, response) -> {
+            response.type("application/json");
+            return JsonUtil.toJson(Errors.notFoundError("Endpoint not found."));
+        });
 
-        spark.internalServerError((request, response) -> JsonUtil.toJson(Errors.standardError(
-                500,
-                "An internal error has occured. Please check your inputs. If this keeps happening, contact the server administrator.")));
+        spark.internalServerError((request, response) -> {
+            response.type("application/json");
+            return JsonUtil.toJson(Errors.standardError(
+                    500,
+                    "An internal error has occured. Please check your inputs. If this keeps happening, contact the server administrator."));
+        });
 
         LOGGER.info("Starting endpoint configuration");
 

@@ -98,7 +98,7 @@ public final class ServerUtil {
     }
 
     /**
-     * Lazy initialization for the header HashMap
+     * Lazy initialization for the header Map
      */
     private static void initHeaderMap() {
         securityHeaders = new HashMap<>();
