@@ -1,12 +1,12 @@
 /**
  * Copyright 2016-2019 University of Piraeus Research Center
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,6 +17,7 @@ package eu.esens.espdvcd.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import eu.esens.espdvcd.codelist.enums.CriterionTypeEnum;
+import eu.esens.espdvcd.codelist.enums.internal.CriterionPropertyKey;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
 
@@ -152,7 +153,7 @@ public class Criterion implements Serializable {
      * Criterion's Description.
      * <p>
      * Data type: Text<br>
-     * Cardinality: 2<br>
+     * Cardinality: 1<br>
      * InfReqID:<br>
      * BusReqID:<br>
      * UBL syntax path:<br>
@@ -169,6 +170,17 @@ public class Criterion implements Serializable {
      * UBL syntax path:<br>
      */
     protected List<Evidence> evidenceList;
+
+    /**
+     * Work as a cascade switch.
+     * <p>
+     * Data type: Boolean<br>
+     * Cardinality: 1<br>
+     * InfReqID:<br>
+     * BusReqID:<br>
+     * UBL syntax path:<br>
+     */
+    protected boolean useKeyAsValue = false;
 
     public Criterion() {
         this.ID = java.util.UUID.randomUUID().toString();
@@ -234,7 +246,7 @@ public class Criterion implements Serializable {
     }
 
     public String getName() {
-        return name;
+        return useKeyAsValue ? getPropertyKeyOrNull(CriterionPropertyKey.NAME) : name;
     }
 
     public void setName(String name) {
@@ -242,7 +254,7 @@ public class Criterion implements Serializable {
     }
 
     public String getDescription() {
-        return description;
+        return useKeyAsValue ? getPropertyKeyOrNull(CriterionPropertyKey.DESCRIPTION) : description;
     }
 
     public void setDescription(String description) {
@@ -299,6 +311,10 @@ public class Criterion implements Serializable {
         return propertyKeyMap;
     }
 
+    public String getPropertyKeyOrNull(CriterionPropertyKey key) {
+        return propertyKeyMap.get(key.getCode().getValue());
+    }
+
     public List<Evidence> getEvidenceList() {
         if (evidenceList == null) {
             evidenceList = new ArrayList<>();
@@ -330,6 +346,10 @@ public class Criterion implements Serializable {
         final Criterion other = (Criterion) obj;
 
         return Objects.equals(this.ID, other.ID);
+    }
+
+    public void setKeyAsResponseValue(boolean useKeyAsValue) {
+        this.useKeyAsValue = useKeyAsValue;
     }
 
 }

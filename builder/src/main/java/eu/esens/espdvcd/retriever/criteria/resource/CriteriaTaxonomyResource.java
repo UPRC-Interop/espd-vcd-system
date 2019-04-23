@@ -19,6 +19,7 @@ import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
 import eu.esens.espdvcd.codelist.enums.RequirementGroupTypeEnum;
 import eu.esens.espdvcd.codelist.enums.RequirementTypeEnum;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
+import eu.esens.espdvcd.codelist.enums.internal.PropertyKeyCodeEnum;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
@@ -120,8 +121,8 @@ public abstract class CriteriaTaxonomyResource implements CriteriaResource, Requ
                         sc.setID(getRowUUID(r));
                         sc.setTypeCode(getRowCode(r));
                         sc.setSelected(true);
-                        sc.getPropertyKeyMap().put("pk1", getRowPropertyKey(r, 1)); // property key for Name
-                        sc.getPropertyKeyMap().put("pk2", getRowPropertyKey(r, 2)); // property key for Description
+                        sc.getPropertyKeyMap().put(PropertyKeyCodeEnum.PK_1.getValue(), getRowPropertyKey(r, 1)); // property key for Name
+                        sc.getPropertyKeyMap().put(PropertyKeyCodeEnum.PK_2.getValue(), getRowPropertyKey(r, 2)); // property key for Description
 
                         sc.getRequirementGroups().addAll(
                                 extractAllRequirementGroupType(dataSheet, r.getRowNum() + 1,
@@ -270,9 +271,9 @@ public abstract class CriteriaTaxonomyResource implements CriteriaResource, Requ
                 // set Property keys
                 // The number of property keys depends on element. For example for an evidence compound element
                 // there are 3 property keys.
-                r.getPropertyKeyMap().put("pk1", getRowPropertyKey(d.getRow(i), 1));
-                r.getPropertyKeyMap().put("pk2", getRowPropertyKey(d.getRow(i), 2));
-                r.getPropertyKeyMap().put("pk3", getRowPropertyKey(d.getRow(i), 3));
+                r.getPropertyKeyMap().put(PropertyKeyCodeEnum.PK_1.getValue(), getRowPropertyKey(d.getRow(i), 1));
+                r.getPropertyKeyMap().put(PropertyKeyCodeEnum.PK_2.getValue(), getRowPropertyKey(d.getRow(i), 2));
+                r.getPropertyKeyMap().put(PropertyKeyCodeEnum.PK_3.getValue(), getRowPropertyKey(d.getRow(i), 3));
                 rList.add(r);
             }
 

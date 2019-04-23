@@ -36,12 +36,16 @@
     <xsl:template match="cac:TenderingCriterion | ccvV1:Criterion">
         <xsl:call-template name="label">
             <xsl:with-param name="label" >
-                <xsl:value-of select="*[local-name()='Name']"/>
+                <xsl:call-template name="getESPDProperty">
+                    <xsl:with-param name="key" select="*[local-name()='Name']"/>
+                </xsl:call-template>
             </xsl:with-param>
         </xsl:call-template>
         <xsl:call-template name="paragraph">
             <xsl:with-param name="value">
-                <xsl:value-of select="*[local-name()='Description']"/>
+                <xsl:call-template name="getESPDProperty">
+                    <xsl:with-param name="key" select="*[local-name()='Description']"/>
+                </xsl:call-template>
             </xsl:with-param>
         </xsl:call-template>
         <xsl:apply-templates select="cac:TenderingCriterionPropertyGroup | ccvV1:RequirementGroup"/>
@@ -90,7 +94,16 @@
                         <xsl:call-template name="evidenceIdentifier"/>
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:call-template name="getDescription" />
+
+                        <!-- Description -->
+                        <xsl:choose>
+                            <xsl:when test="cbc:ValueDataTypeCode = 'PERIOD' or @responseDataType = 'PERIOD'">
+                                <xsl:call-template name="getPeriodDescription" />
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:call-template name="getDescription" />
+                            </xsl:otherwise>
+                        </xsl:choose>
 
                         <xsl:choose>
                             <xsl:when test="cbc:ValueDataTypeCode = 'INDICATOR' or @responseDataType = 'INDICATOR'">
@@ -145,7 +158,22 @@
     <xsl:template name="getDescription">
         <xsl:call-template name="label">
             <xsl:with-param name="label">
-                <xsl:value-of select="*[local-name() = 'Description']"/>
+                <xsl:call-template name="getESPDProperty">
+                    <xsl:with-param name="key" select="*[local-name() = 'Description']"/>
+                </xsl:call-template>
+            </xsl:with-param>
+        </xsl:call-template>
+    </xsl:template>
+
+    <xsl:template name="getPeriodDescription">
+        <xsl:call-template name="label">
+            <xsl:with-param name="label">
+                <xsl:call-template name="getESPDProperty">
+                    <xsl:with-param name="key" select="'espd.crit.start.date'"/>
+                </xsl:call-template> -
+                <xsl:call-template name="getESPDProperty">
+                    <xsl:with-param name="key" select="'espd.crit.end.date'"/>
+                </xsl:call-template>
             </xsl:with-param>
         </xsl:call-template>
     </xsl:template>
