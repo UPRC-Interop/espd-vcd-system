@@ -15,16 +15,13 @@
  */
 package eu.esens.espdvcd.builder;
 
-/**
- * Factory class that can be used to create the available Builder
- * Factories for both exchange data model (EDM) versions.
- *
- * @since 2.0.2
- */
-public class BuilderFactory {
+import eu.esens.espdvcd.codelist.enums.internal.DocumentType;
+import eu.esens.espdvcd.model.ESPDRequest;
 
-    public static final BuilderFactoryV1 EDM_V1 = new BuilderFactoryV1();
+public class PDFDocumentBuilderV1 extends DocumentBuilderV1 {
 
-    public static final BuilderFactoryV2 EDM_V2 = new BuilderFactoryV2();
+    public PDFDocumentBuilderV1(ESPDRequest espdRequest) {
+        super(espdRequest, DocumentType.PDF);
+    }
 
 }

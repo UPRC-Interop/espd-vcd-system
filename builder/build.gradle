@@ -55,6 +55,8 @@ dependencies {
     compile group: 'com.openhtmltopdf', name: 'openhtmltopdf-pdfbox', version: '0.0.1-RC17'
     compile group: 'org.apache.xmlgraphics', name: 'fop', version: '0.93'
     compile group: 'org.xmlunit', name: 'xmlunit-matchers', version: '2.2.1'
+
+    compile group: 'commons-io', name: 'commons-io', version: '2.6'
 }
 
 task copyTask(type: Copy) {

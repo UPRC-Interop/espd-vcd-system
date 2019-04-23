@@ -89,7 +89,7 @@ task genAllEspdEdm {
     genEspdEdmV202.mustRunAfter genEspdEdmV102
 }
 
-// compileJava.dependsOn genAllEspdEdm
+compileJava.dependsOn genAllEspdEdm
 
 
 

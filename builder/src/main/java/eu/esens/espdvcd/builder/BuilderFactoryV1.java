@@ -40,8 +40,12 @@ public class BuilderFactoryV1 {
      * @param req an {@link ESPDRequest} implementing class or one of its subclasses
      * @return an instance of the {@link XMLDocumentBuilderV1}
      */
-    public XMLDocumentBuilderV1 createDocumentBuilderFor(ESPDRequest req) {
+    public XMLDocumentBuilderV1 createXMLDocumentBuilderFor(ESPDRequest req) {
         return new XMLDocumentBuilderV1(req);
+    }
+
+    public PDFDocumentBuilderV1 createPDFDocumentBuilderFor(ESPDRequest espdRequest) {
+        return new PDFDocumentBuilderV1(espdRequest);
     }
 
 }
