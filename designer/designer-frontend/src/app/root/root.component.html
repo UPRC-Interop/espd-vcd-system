@@ -51,7 +51,7 @@
 
 <div class="container" *ngIf="utilities.start">
 
-  <mat-horizontal-stepper (selectionChange)="validateSteps($event)" [linear]="isLinear" #stepper="matHorizontalStepper">
+  <mat-horizontal-stepper (selectionChange)="validateSteps($event)" (animationDone)="changeURL()" [linear]="isLinear" #stepper="matHorizontalStepper">
     <mat-step>
       <ng-template matStepLabel>
         <div [class.invalid]="!startStepValid">
