@@ -15,6 +15,7 @@
  */
 package eu.esens.espdvcd.designer.service;
 
+import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
 import eu.esens.espdvcd.designer.exception.ValidationException;
 import eu.esens.espdvcd.designer.typeEnum.ExportType;
@@ -29,9 +30,9 @@ import java.io.InputStream;
 public interface ExportESPDService {
     InputStream exportESPDRequest(ESPDRequest model) throws ValidationException, JAXBException, IOException, SAXException;
 
-    InputStream exportESPDRequestAs(ESPDRequest model, EULanguageCodeEnum languageCodeEnum, ExportType exportType) throws ValidationException, JAXBException, IOException, SAXException;
+    InputStream exportESPDRequestAs(ESPDRequest model, EULanguageCodeEnum languageCodeEnum, ExportType exportType) throws ValidationException, JAXBException, IOException, SAXException, BuilderException;
 
     InputStream exportESPDResponse(ESPDResponse model) throws ValidationException, JAXBException, IOException, SAXException;
 
-    InputStream exportESPDResponseAs(ESPDResponse model, EULanguageCodeEnum languageCodeEnum, ExportType exportType) throws ValidationException, JAXBException, IOException, SAXException;
+    InputStream exportESPDResponseAs(ESPDResponse model, EULanguageCodeEnum languageCodeEnum, ExportType exportType) throws ValidationException, JAXBException, IOException, SAXException, BuilderException;
 }
