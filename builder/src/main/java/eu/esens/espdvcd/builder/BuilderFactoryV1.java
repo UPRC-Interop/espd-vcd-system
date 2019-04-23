@@ -44,4 +44,8 @@ public class BuilderFactoryV1 {
         return new XMLDocumentBuilderV1(req);
     }
 
+    public PDFDocumentBuilderV1 createPDFDocumentBuilderFor(ESPDRequest espdRequest) {
+        return new PDFDocumentBuilderV1(espdRequest);
+    }
+
 }

@@ -1,12 +1,12 @@
 /**
  * Copyright 2016-2019 University of Piraeus Research Center
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,6 +16,7 @@
 package eu.esens.espdvcd.builder;
 
 import eu.esens.espdvcd.builder.schema.SchemaFactory;
+import eu.esens.espdvcd.codelist.enums.internal.DocumentType;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.schema.SchemaUtil;
@@ -48,6 +49,10 @@ public class DocumentBuilderV1 {
         theXML = createXMLasString(req);
     }
 
+    public DocumentBuilderV1(ESPDRequest request, DocumentType type) {
+        theXML = createXMLasString(request, type);
+    }
+
     /**
      * Transforms the XML Representation of the data to an input stream.
      *
@@ -63,9 +68,27 @@ public class DocumentBuilderV1 {
      * @return a JAXB ESPDRequestType instance from an ESPDRequest Model instance
      */
     private ESPDRequestType createXML(ESPDRequest req) {
-        ESPDRequestType reqType = finalize(SchemaFactory.EDM_V1
-                .ESPD_REQUEST.extractESPDRequestType(req));
-        return reqType;
+        return createXML(req, DocumentType.XML);
+    }
+
+    private ESPDRequestType createXML(ESPDRequest req, DocumentType type) {
+        ESPDRequestType reqType;
+
+        switch (type) {
+
+            case XML:
+                reqType = finalize(SchemaFactory.EDM_V1
+                        .ESPD_REQUEST.extractESPDRequestType(req));
+                return reqType;
+
+            case PDF:
+                reqType = finalize(SchemaFactory.EDM_V1
+                        .ESPD_REQUEST_FOR_PDF.extractESPDRequestType(req));
+                return reqType;
+
+            default:
+                throw new IllegalStateException("Supported document types are: XML and PDF");
+        }
 
     }
 
@@ -77,6 +100,26 @@ public class DocumentBuilderV1 {
         ESPDResponseType resType = finalize(SchemaFactory.EDM_V1
                 .ESPD_RESPONSE.extractESPDResponseType(res));
         return resType;
+    }
+
+    protected ESPDResponseType createXML(ESPDResponse res, DocumentType type) {
+        ESPDResponseType resType;
+
+        switch (type) {
+
+            case XML:
+                resType = finalize(SchemaFactory.EDM_V1
+                        .ESPD_RESPONSE.extractESPDResponseType(res));
+                return resType;
+
+            case PDF:
+                resType = finalize(SchemaFactory.EDM_V1
+                        .ESPD_RESPONSE_FOR_PDF.extractESPDResponseType(res));
+                return resType;
+
+            default:
+                throw new IllegalStateException("Supported document types are: XML and PDF");
+        }
     }
 
     /**
@@ -132,17 +175,21 @@ public class DocumentBuilderV1 {
      * @return the Finalized ESPDRequestType Instance
      */
     private String createXMLasString(ESPDRequest theReq) {
+        return createXMLasString(theReq, DocumentType.XML);
+    }
+
+    private String createXMLasString(ESPDRequest theReq, DocumentType type) {
         StringWriter result = new StringWriter();
 
         //Return the Object
         try {
             if (theReq instanceof ESPDResponse) {
                 eu.espd.schema.v1.espdresponse_1.ObjectFactory of = new eu.espd.schema.v1.espdresponse_1.ObjectFactory();
-                SchemaUtil.getMarshaller(EDMVersion.V1).marshal(of.createESPDResponse(createXML((ESPDResponse) theReq)), result);
+                SchemaUtil.getMarshaller(EDMVersion.V1).marshal(of.createESPDResponse(createXML((ESPDResponse) theReq, type)), result);
 
             } else {
                 eu.espd.schema.v1.espdrequest_1.ObjectFactory of = new eu.espd.schema.v1.espdrequest_1.ObjectFactory();
-                SchemaUtil.getMarshaller(EDMVersion.V1).marshal(of.createESPDRequest(createXML(theReq)), result);
+                SchemaUtil.getMarshaller(EDMVersion.V1).marshal(of.createESPDRequest(createXML(theReq, type)), result);
             }
         } catch (JAXBException ex) {
             Logger.getLogger(XMLDocumentBuilderV1.class.getName()).log(Level.SEVERE, null, ex);
