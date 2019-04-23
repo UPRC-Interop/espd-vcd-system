@@ -27,7 +27,8 @@ public enum AppConfig {
 
     AppConfig(){
         Config defaultConfig = ConfigFactory.parseResources(defaultConfigFile);
-        appConfig = ConfigFactory.load()
+        Config externalConfig = ConfigFactory.defaultApplication();
+        appConfig = ConfigFactory.load(externalConfig)
                 .withFallback(defaultConfig)
                 .resolve();
     }
