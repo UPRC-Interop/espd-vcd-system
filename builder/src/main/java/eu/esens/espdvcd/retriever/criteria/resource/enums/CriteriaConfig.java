@@ -19,6 +19,9 @@ import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import eu.esens.espdvcd.codelist.enums.internal.ContractingOperatorEnum;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 public enum CriteriaConfig {
 
     INSTANCE;
@@ -28,7 +31,8 @@ public enum CriteriaConfig {
 
     CriteriaConfig() {
         Config config = ConfigFactory.parseResources(CONFIG_FILE);
-        criteriaConfig = ConfigFactory.load()
+        Path f = Paths.get("./" + CONFIG_FILE);
+        criteriaConfig = ConfigFactory.parseFile(f.toFile())
                 .withFallback(config)
                 .resolve();
     }
