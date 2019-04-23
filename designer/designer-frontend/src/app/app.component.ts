@@ -14,10 +14,14 @@
 /// limitations under the License.
 ///
 
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DataService} from './services/data.service';
 import {TranslateService} from '@ngx-translate/core';
 import {Language} from './model/language.model';
+import {PlatformInfo} from "./model/platform-info";
+import {ApicallService} from "./services/apicall.service";
+import {environment} from '../environments/environment';
+
 
 // import {NgForm, FormControl} from "@angular/forms";
 
@@ -26,15 +30,25 @@ import {Language} from './model/language.model';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   isLinear = true;
   language: Language[];
+  platformInfo: PlatformInfo = null;
+  platformInfoUrl: String = environment.apiUrl + 'platform-info';
 
-  constructor(public dataService: DataService, public translate: TranslateService) {
+
+  constructor(public dataService: DataService, public translate: TranslateService, private APIService: ApicallService) {
     // translate.setDefaultLang('ESPD_en');
     // translate.setDefaultLang('ESPD_de');
     // console.log(this.translate.getLangs());
 
+  }
+
+  ngOnInit() {
+    this.APIService.getPlatformInfo().then(res => {
+      this.platformInfo = res;
+      console.log(this.platformInfo);
+    }).catch(err => console.log(err));
   }
 
   // switchLanguage(language: string) {

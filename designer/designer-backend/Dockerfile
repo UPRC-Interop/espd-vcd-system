@@ -3,7 +3,7 @@ FROM openjdk:11-jre-slim
 WORKDIR /designer
 
 COPY artifact-designer.jar /designer
-COPY config.properties.snf /designer/config.properties
+COPY application.properties.snf /designer/application.properties
 
 EXPOSE 80
 

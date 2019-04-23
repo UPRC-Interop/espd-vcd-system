@@ -28,9 +28,6 @@
       <!--<option value="">Select Language</option>-->
       <!--<option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>-->
     <!--</select>-->
-    <div *ngIf="platformInfo" class="platformInfo">
-      version: {{platformInfo.version}}
-    </div>
     <select #langSelect (change)="dataService.switchLanguage(langSelect.value)">
       <option value="">Select Language</option>
       <option *ngFor="let lang of dataService.langNames" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>
