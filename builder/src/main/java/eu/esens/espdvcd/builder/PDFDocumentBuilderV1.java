@@ -24,4 +24,12 @@ public class PDFDocumentBuilderV1 extends DocumentBuilderV1 {
         super(espdRequest, DocumentType.PDF);
     }
 
+    /**
+     * Transforms the XML Representation of the data to a string.
+     * @return the String representation of the XML Data
+     */
+    public String getAsString() {
+        return theXML;
+    }
+
 }
