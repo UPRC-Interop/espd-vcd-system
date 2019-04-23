@@ -24,7 +24,7 @@ import {MatStepper} from '@angular/material';
 import {ValidationService} from '../services/validation.service';
 import {BaseStep} from '../base/base-step';
 import {WizardSteps} from '../base/wizard-steps.enum';
-
+import {Location} from '@angular/common';
 // import {ProcedureType} from "../model/procedureType.model";
 
 
@@ -56,7 +56,7 @@ export class StartComponent implements OnInit, BaseStep {
               private APIService: ApicallService,
               public utilities: UtilitiesService,
               public codelist: CodelistService,
-              private validationService: ValidationService) {
+              private validationService: ValidationService, public location: Location) {
   }
 
   ngOnInit() {
@@ -224,5 +224,8 @@ export class StartComponent implements OnInit, BaseStep {
   public areFormsValid(): boolean {
     return this.validationService.validateFormsInComponent(this.forms);
   }
+
+
+
 
 }

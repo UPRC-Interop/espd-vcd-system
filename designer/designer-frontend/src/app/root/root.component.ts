@@ -14,7 +14,7 @@
 /// limitations under the License.
 ///
 
-import {Component, OnChanges, OnInit, ViewChild} from '@angular/core';
+import {Component, OnChanges, OnInit, ViewChild, AfterViewInit} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {UtilitiesService} from '../services/utilities.service';
 import {Title} from '@angular/platform-browser';
@@ -28,13 +28,16 @@ import {FinishComponent} from '../finish/finish.component';
 import {FinishEoComponent} from '../finish-eo/finish-eo.component';
 import {SelectionComponent} from '../selection/selection.component';
 import {WizardSteps} from '../base/wizard-steps.enum';
+import {Location} from '@angular/common';
+import {MatHorizontalStepper, MatStepper} from '@angular/material';
+import {NavigationEnd, Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './root.component.html',
   styleUrls: ['./root.component.css']
 })
-export class RootComponent implements OnInit, OnChanges {
+export class RootComponent implements OnInit, OnChanges, AfterViewInit {
 
   @ViewChild('startComponent') startComponent: StartComponent;
   @ViewChild('procedureCaComponent') procedureCaComponent: ProcedureComponent;
@@ -45,6 +48,7 @@ export class RootComponent implements OnInit, OnChanges {
   @ViewChild('selectionEoComponent') selectionEoComponent: SelectionEoComponent;
   @ViewChild('finishCaComponent') finishCaComponent: FinishComponent;
   @ViewChild('finishEoComponent') finishEoComponent: FinishEoComponent;
+  @ViewChild('stepper') stepper: MatHorizontalStepper;
 
   startStepValid: boolean;
   procedureStepValid: boolean;
@@ -58,7 +62,9 @@ export class RootComponent implements OnInit, OnChanges {
 
 
   constructor(public dataService: DataService,
-              public utilities: UtilitiesService, private titleService: Title) {
+              public utilities: UtilitiesService, private titleService: Title,
+              public location: Location, public router: Router) {
+
   }
 
   ngOnInit() {
@@ -67,6 +73,11 @@ export class RootComponent implements OnInit, OnChanges {
     this.exclusionStepValid = true;
     this.selectionStepValid = true;
     this.finishStepValid = true;
+
+
+  }
+
+  ngAfterViewInit(): void {
 
   }
 
@@ -88,7 +99,6 @@ export class RootComponent implements OnInit, OnChanges {
   }
 
 
-
   private validateSteps(event) {
     let isCA = this.startComponent.isCA;
     this.startStepValid = event.selectedIndex === WizardSteps.START || this.startComponent.areFormsValid();
@@ -96,7 +106,53 @@ export class RootComponent implements OnInit, OnChanges {
     this.exclusionStepValid = event.selectedIndex === WizardSteps.EXCLUSION || RootComponent.isComponentValid(isCA ? this.exclusionCaComponent : this.exclusionEoComponent);
     this.selectionStepValid = event.selectedIndex === WizardSteps.SELECTION || RootComponent.isComponentValid(isCA ? this.selectionCaComponent : this.selectionEoComponent);
     this.finishStepValid = event.selectedIndex === WizardSteps.FINISH || RootComponent.isComponentValid(isCA ? this.finishCaComponent : this.finishEoComponent);
+
+
   }
+
+  changeURL() {
+    if (this.stepper.selectedIndex === WizardSteps.START) {
+      this.location.go('/#/start');
+      // this.moveStep(0);
+    } else if (this.stepper.selectedIndex === WizardSteps.PROCEDURE) {
+      this.location.go('/#/procedure');
+      // this.moveStep(1);
+    } else if (this.stepper.selectedIndex === WizardSteps.EXCLUSION) {
+      this.location.go('/#/exclusion');
+      // this.moveStep(2);
+    } else if (this.stepper.selectedIndex === WizardSteps.SELECTION) {
+      this.location.go('/#/selection');
+      // this.moveStep(3);
+    } else if (this.stepper.selectedIndex === WizardSteps.FINISH) {
+      this.location.go('/#/finish');
+      // this.moveStep(4);
+    }
+
+    this.router.events.subscribe(value => {
+      console.log(value);
+
+      if (value instanceof NavigationEnd) {
+        // console.log('ROUTER CHANGED');
+        // console.log(value);
+        // console.log(value.url);
+        if (value.url === '/#/start') {
+          this.stepper.selectedIndex = WizardSteps.START;
+        } else if (value.url === '/#/procedure') {
+          this.stepper.selectedIndex = WizardSteps.PROCEDURE;
+        } else if (value.url === '/#/exclusion') {
+          this.stepper.selectedIndex = WizardSteps.EXCLUSION;
+        } else if (value.url === '/#/selection') {
+          this.stepper.selectedIndex = WizardSteps.SELECTION;
+        } else if (value.url === '/#/finish') {
+          this.stepper.selectedIndex = WizardSteps.FINISH;
+        }
+
+
+      }
+
+    });
+  }
+
 
   private static isComponentValid(component) {
     return 'undefined' === typeof component || component.areFormsValid();

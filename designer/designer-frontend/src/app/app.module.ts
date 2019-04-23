@@ -25,6 +25,7 @@ import {NgxLoadingModule} from 'ngx-loading';
 
 import {DataService} from './services/data.service';
 import {ApicallService} from './services/apicall.service';
+import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 
 import {AppComponent} from './app.component';
 import {ToolbarComponent} from './toolbar/toolbar.component';
@@ -106,10 +107,11 @@ import { ECertisCriterionComponent } from './e-certis-criterion/e-certis-criteri
       }
     })
   ],
-  providers: [ApicallService, DataService, Title,
+  providers: [ApicallService, DataService, Title, Location,
     {provide: MAT_DATE_LOCALE, useValue: 'el-GR'},
     {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
-    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS}
+    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
+    {provide: LocationStrategy, useClass: PathLocationStrategy}
   ],
   bootstrap: [AppComponent]
 })
