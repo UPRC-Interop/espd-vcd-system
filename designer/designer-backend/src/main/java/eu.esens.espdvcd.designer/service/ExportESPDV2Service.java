@@ -86,7 +86,9 @@ public enum ExportESPDV2Service implements ExportESPDService {
             case XML:
                 return exportESPDResponse(model);
             case PDF:
-                return transformationService.createPdfStream(new StreamSource(exportESPDResponse(model)), languageCodeEnum);
+                PDFDocumentBuilderV2 pdfDocumentBuilderV2 = BuilderFactory.EDM_V2
+                        .createPDFDocumentBuilderFor(model);
+                return transformationService.createPdfStream(new StreamSource(new ByteArrayInputStream(pdfDocumentBuilderV2.getAsString().getBytes(StandardCharsets.UTF_8))), languageCodeEnum);
             case HTML:
                 return transformationService.createHtmlStream(new StreamSource(exportESPDResponse(model)), languageCodeEnum);
             default:
