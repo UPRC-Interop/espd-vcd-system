@@ -66,7 +66,7 @@
 
     <xsl:template name="powerOfAttorney">
 
-        <xsl:for-each select="(//*[local-name() = 'EconomicOperatorParty']/*[local-name() = 'Party']/*[local-name() = 'owerOfAttorney']) | (//espd-cacV1:EconomicOperatorParty/espd-cacV1:RepresentativeNaturalPerson/cacV1:PowerOfAttorney)">
+        <xsl:for-each select="(//*[local-name() = 'EconomicOperatorParty']/*[local-name() = 'Party']/*[local-name() = 'PowerOfAttorney']) | (//espd-cacV1:EconomicOperatorParty/espd-cacV1:RepresentativeNaturalPerson/cacV1:PowerOfAttorney)">
 
             <xsl:call-template name="chapterOne">
                 <xsl:with-param name="chapter-number"/>
