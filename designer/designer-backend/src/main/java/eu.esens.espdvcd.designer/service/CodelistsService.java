@@ -19,9 +19,7 @@ import eu.esens.espdvcd.codelist.Codelists;
 import eu.esens.espdvcd.designer.exception.LanguageNotExistsException;
 import eu.esens.espdvcd.designer.util.CodelistItem;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 
 public interface CodelistsService {
     List<CodelistItem> getCodelist(String codelist) throws IllegalArgumentException;
@@ -29,13 +27,4 @@ public interface CodelistsService {
     List<CodelistItem> getTranslatedCodelist(String codelist, String language) throws IllegalArgumentException, LanguageNotExistsException;
 
     Codelists[] getAvailableCodelists();
-
-    default String findISO6393LangCode(String ISO6391LangCode) throws LanguageNotExistsException {
-        for (Locale locale : Locale.getAvailableLocales()){
-            if(locale.getLanguage().equals(ISO6391LangCode)){
-                return locale.getISO3Language();
-            }
-        }
-        throw new LanguageNotExistsException("Language does not exist.");
-    }
 }
