@@ -1784,6 +1784,13 @@
         <cbc:CriterionTypeCode listID="CriteriaTypeCode" listAgencyID="EU-COM-GROW" listVersionID="2.1.0">CRITERION.EXCLUSION.CONFLICT_OF_INTEREST.MISINTERPRETATION</cbc:CriterionTypeCode>
         <cbc:Name>Guilty of misinterpretation, withheld information, unable to provide required documents and obtained confidential information of this procedure</cbc:Name>
         <cbc:Description>Can the economic operator confirm the four exclusion grounds, that it has not been guilty of serious misrepresentation in supplying the information required for the verification of the absence of grounds for exclusion or the fulfilment of the selection criteria, that it has not withheld such information, it has been able, without delay, to submit the supporting documents required by a contracting authority or contracting entity, and it has not undertaken to unduly influence the decision making process of the contracting authority or contracting entity, to obtain confidential information that may confer upon it undue advantages in the procurement procedure or to negligently provide misleading information that may have a material influence on decisions concerning exclusion, selection or award?</cbc:Description>
+        <cac:Legislation>
+            <cbc:Title>Public Procurement Directive 2014/24/EU</cbc:Title>
+            <cbc:Description>Directive 2014/24/EU of the European Parliament and of the Council of 26 February 2014 on public procurement and repealing Directive 2004/18/EC</cbc:Description>
+            <cbc:JurisdictionLevel>eu</cbc:JurisdictionLevel>
+            <cbc:Article>Article 57(4)</cbc:Article>
+            <cbc:URI>http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv:OJ.L_.2014.094.01.0065.01.ENG</cbc:URI>
+        </cac:Legislation>
         <cac:TenderingCriterionPropertyGroup>
             <cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="2.1.0">30450436-f559-4dfa-98ba-f0842ed9d2a0</cbc:ID>
             <cbc:PropertyGroupTypeCode listID="PropertyGroupType" listAgencyID="EU-COM-GROW" listVersionID="2.1.0">ON*</cbc:PropertyGroupTypeCode>
