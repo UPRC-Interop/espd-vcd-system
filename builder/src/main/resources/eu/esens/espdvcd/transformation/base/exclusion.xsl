@@ -114,7 +114,7 @@
             <xsl:variable name="criterionTypeCode" >
                 <xsl:value-of select="current()/cbc:CriterionTypeCode | current()/cbcV1:TypeCode"/>
             </xsl:variable>
-            <xsl:if test="$currentArticle = '57(4)' and $criterionTypeCode = 'CRITERION.EXCLUSION.NATIONAL.OTHER'">
+            <xsl:if test="$currentArticle = 'Article 57(3)' and $criterionTypeCode = 'CRITERION.EXCLUSION.NATIONAL.OTHER'">
                 <xsl:apply-templates select="current()"/>
             </xsl:if>
         </xsl:for-each>
