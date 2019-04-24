@@ -615,5 +615,6 @@
    "ges.landing.page.text": "<b>The European Single Procurement Document (ESPD)</b> is a <b>self-declaration form</b> used in public procurement procedures by public buyers and businesses in the EU. Before the introduction of the ESPD, companies were required to submit various documents to prove that they fulfil the exclusion and selection criteria of a tender, for example have paid taxes and have not been convicted of criminal activity. Now, companies are able to meet these obligations with a single ESPD self-declaration form. The actual documents will only have to be provided by the winner of the tender. The Promitheus ESPDint e-Service is also integrated with <b>e-Certis</b> - a mapping tool used to identify and compare certificates requested in public procurement procedures across the EU.",
    "espd.crit.please.give.more.details": "Please describe them",
    "espd.part4.crit.explain.supply.contracts.environmental.law":"If not, please explain why and state which other means of proof can be provided:",
-   "espd.crit.please.describe": "Please describe them"
+   "espd.crit.please.describe": "Please describe them",
+   "espd.part5.reduction.hint": "-"
 }
