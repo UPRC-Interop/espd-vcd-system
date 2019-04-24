@@ -40,11 +40,13 @@
         <input matInput name="noticeNumberOJS" [(ngModel)]="dataService.CADetails.procurementPublicationNumber"
                placeholder="{{'espd.part1.ojs.label' | translate}}" [disabled]="dataService.isReadOnly()"
                #numberOjs="ngModel" numberOjs>
-        <mat-hint>{{'espd.ojs.hint' | translate }}</mat-hint>
         <mat-error *ngIf="numberOjs.invalid">
           <input-validation-error [formControlErrors]="numberOjs.errors"></input-validation-error>
         </mat-error>
       </mat-form-field>
+      <div class="desc">
+        <p translate>espd.part1.official.journal.alert</p>
+      </div>
       <mat-form-field>
         <input matInput name="ojsURL" placeholder="{{'espd.part1.ojs.url' | translate}}"
                [(ngModel)]="dataService.CADetails.procurementPublicationURI" [disabled]="dataService.isReadOnly()"
@@ -53,13 +55,14 @@
           <input-validation-error [formControlErrors]="ojsurl.errors"></input-validation-error>
         </mat-error>
       </mat-form-field>
+      <div class="desc">
+        <p translate>espd.part1.official.journal.alert2</p>
+      </div>
       <!--<mat-form-field>-->
       <!--<input matInput name="nationalJournal" placeholder="National Official Journal" [(ngModel)]="dataService.CADetails.nationalOfficialJournal">-->
       <!--</mat-form-field>-->
 
-      <div class="desc">
-        <p translate>espd.part1.official.journal.alert</p>
-      </div>
+
     </mat-expansion-panel>
     <mat-expansion-panel expanded="true">
       <mat-expansion-panel-header>
