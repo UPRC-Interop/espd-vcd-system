@@ -19,10 +19,14 @@ import eu.esens.espdvcd.codelist.Codelists;
 import eu.esens.espdvcd.codelist.CodelistsV2;
 import eu.esens.espdvcd.designer.exception.LanguageNotExistsException;
 import eu.esens.espdvcd.designer.util.CodelistItem;
+import eu.esens.espdvcd.designer.util.CriteriaUtil;
 
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+
+import static eu.esens.espdvcd.designer.util.CriteriaUtil.findISO6393LangCode;
 
 public enum CodelistsV2Service implements CodelistsService {
     INSTANCE;
@@ -48,6 +52,15 @@ public enum CodelistsV2Service implements CodelistsService {
             }
             List<CodelistItem> theCodelistList = new ArrayList<>(theCodelistMap.size());
             putToList(theCodelistMap, theCodelistList);
+            theCodelistList.sort(Comparator.comparing(CodelistItem::getName));
+            if (codelist.equalsIgnoreCase(CodelistsV2.CountryIdentification.name())) {
+                List<CodelistItem> theCountriesList = theCodelistList
+                        .stream()
+                        .sorted(CriteriaUtil::countryListComparator)
+                        .collect(Collectors.toList());
+                CODELISTS_MAP.putIfAbsent(codelist, theCountriesList);
+                return theCountriesList;
+            }
             CODELISTS_MAP.putIfAbsent(codelist, theCodelistList);
             return theCodelistList;
         }
@@ -74,6 +87,15 @@ public enum CodelistsV2Service implements CodelistsService {
 
             List<CodelistItem> theCodelistList = new ArrayList<>(theCodelistMap.size());
             putToList(theCodelistMap, theCodelistList);
+            theCodelistList.sort(Comparator.comparing(CodelistItem::getName));
+            if (codelist.equalsIgnoreCase(CodelistsV2.CountryIdentification.name())) {
+                List<CodelistItem> theCountriesList = theCodelistList
+                        .stream()
+                        .sorted(CriteriaUtil::countryListComparator)
+                        .collect(Collectors.toList());
+                CODELISTS_MAP.putIfAbsent(codelist, theCountriesList);
+                return theCountriesList;
+            }
             CODELISTS_MAP.putIfAbsent(codelist + '.' + language, theCodelistList);
             return theCodelistList;
         }

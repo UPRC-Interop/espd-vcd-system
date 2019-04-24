@@ -18,8 +18,10 @@ package eu.esens.espdvcd.designer.service;
 import eu.esens.espdvcd.codelist.Codelists;
 import eu.esens.espdvcd.codelist.CodelistsV1;
 import eu.esens.espdvcd.designer.util.CodelistItem;
+import eu.esens.espdvcd.designer.util.CriteriaUtil;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public enum CodelistsV1Service implements CodelistsService {
     INSTANCE;
@@ -39,6 +41,14 @@ public enum CodelistsV1Service implements CodelistsService {
             List<CodelistItem> theCodelistList = new ArrayList<>(theCodelistMap.size());
             theCodelistMap.forEach((key, value) -> theCodelistList.add(new CodelistItem(key, value)));
             theCodelistList.sort(Comparator.comparing(CodelistItem::getName));
+            if (codelist.equalsIgnoreCase(CodelistsV1.CountryIdentification.name())) {
+                List<CodelistItem> theCountriesList = theCodelistList
+                        .stream()
+                        .sorted(CriteriaUtil::countryListComparator)
+                        .collect(Collectors.toList());
+                CODELISTS_MAP.putIfAbsent(codelist, theCountriesList);
+                return theCountriesList;
+            }
             CODELISTS_MAP.putIfAbsent(codelist, theCodelistList);
             return theCodelistList;
         }
