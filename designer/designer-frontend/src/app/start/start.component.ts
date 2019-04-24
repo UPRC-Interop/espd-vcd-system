@@ -20,11 +20,12 @@ import {ApicallService} from '../services/apicall.service';
 import {DataService} from '../services/data.service';
 import {UtilitiesService} from '../services/utilities.service';
 import {CodelistService} from '../services/codelist.service';
-import {MatStepper} from '@angular/material';
+import {MatSelect, MatSelectChange, MatStepper} from '@angular/material';
 import {ValidationService} from '../services/validation.service';
 import {BaseStep} from '../base/base-step';
 import {WizardSteps} from '../base/wizard-steps.enum';
 import {Location} from '@angular/common';
+
 // import {ProcedureType} from "../model/procedureType.model";
 
 
@@ -48,6 +49,9 @@ export class StartComponent implements OnInit, BaseStep {
   fileToUpload: File[] = [];
   reset = false;
   isLoading = false;
+  isCACountrySelected = false;
+  isCECountrySelected = false;
+  isEOCountrySelected = false;
 
   @Input()
   parentStepper: MatStepper;
@@ -194,6 +198,30 @@ export class StartComponent implements OnInit, BaseStep {
     return this.fileToUpload.length === 0 && this.utilities.isImport();
   }
 
+  CountrySelection(event: MatSelectChange) {
+    if (this.isCA) {
+      this.isCACountrySelected = event.value !== undefined;
+    } else if (this.isCE) {
+      this.isCECountrySelected = event.value !== undefined;
+    } else if (this.isEO) {
+      this.isEOCountrySelected = event.value !== undefined;
+    }
+  }
+
+  isNextDisabled(): boolean {
+    if (this.utilities.isImport()) {
+      return this.isEmptyFile();
+    } else if (this.utilities.isCreateNewESPD || this.utilities.isCreateResponse) {
+      return !this.countryExists;
+    } else {
+      return true;
+    }
+  }
+
+  countryExists(): boolean {
+    return (this.isCACountrySelected || this.isCECountrySelected || this.isEOCountrySelected) && (this.isCreateNewESPD || this.isCreateResponse);
+  }
+
   onStartSubmit(form: NgForm) {
     this.isLoading = true;
     console.log(this.isLoading);
@@ -224,8 +252,6 @@ export class StartComponent implements OnInit, BaseStep {
   public areFormsValid(): boolean {
     return this.validationService.validateFormsInComponent(this.forms);
   }
-
-
 
 
 }
