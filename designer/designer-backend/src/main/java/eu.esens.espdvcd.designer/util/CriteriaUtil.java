@@ -16,6 +16,7 @@
 package eu.esens.espdvcd.designer.util;
 
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
+import eu.esens.espdvcd.designer.exception.LanguageNotExistsException;
 import eu.esens.espdvcd.designer.service.ExportESPDService;
 import eu.esens.espdvcd.designer.typeEnum.CriteriaType;
 import eu.esens.espdvcd.model.ESPDRequest;
@@ -27,6 +28,7 @@ import eu.esens.espdvcd.model.requirement.response.IndicatorResponse;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -45,9 +47,20 @@ public final class CriteriaUtil {
     public static int satisfiesAllComparator(final SelectableCriterion cr1, final SelectableCriterion cr2) {
         if (cr1.getTypeCode().matches(CriteriaType.ALL_SATISFIED.getRegex()))
             return -1;
-        else if (cr2.getTypeCode().equals(CriteriaType.ALL_SATISFIED.getRegex()))
+        else if (cr2.getTypeCode().matches(CriteriaType.ALL_SATISFIED.getRegex()))
             return 1;
         else
+            return 0;
+    }
+
+    public static int countryListComparator(final CodelistItem item1, final CodelistItem item2) {
+        if (item1.getCode().equals(
+                AppConfig.getInstance().getDefaultCountry())) {
+            return -1;
+        } else if (item2.getCode().equals(
+                AppConfig.getInstance().getDefaultCountry())) {
+            return 1;
+        } else
             return 0;
     }
 
@@ -148,5 +161,15 @@ public final class CriteriaUtil {
                 req.setUUID(String.format("%s-%d", req.getID(), i));
             }
         }
+    }
+
+
+    public static String findISO6393LangCode(String ISO6391LangCode) throws LanguageNotExistsException {
+        for (Locale locale : Locale.getAvailableLocales()) {
+            if (locale.getLanguage().equals(ISO6391LangCode)) {
+                return locale.getISO3Language();
+            }
+        }
+        throw new LanguageNotExistsException("Language does not exist.");
     }
 }

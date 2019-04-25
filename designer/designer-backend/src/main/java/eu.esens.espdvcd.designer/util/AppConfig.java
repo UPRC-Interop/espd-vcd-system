@@ -17,10 +17,11 @@ package eu.esens.espdvcd.designer.util;
 
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
-import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
+import eu.esens.espdvcd.codelist.CodelistsV2;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.logging.Logger;
 
 public enum AppConfig {
     INSTANCE;
@@ -48,8 +49,15 @@ public enum AppConfig {
         return appConfig.getInt("espd.designer.port");
     }
 
-    public EULanguageCodeEnum getDefaultLang() {
-        return appConfig.getEnum(EULanguageCodeEnum.class, "espd.designer.lang");
+    public String getDefaultCountry() {
+        String country = appConfig.getString("espd.designer.country");
+        if (CodelistsV2.CountryIdentification.containsId(country)) {
+            return country;
+        } else {
+            Logger.getLogger(AppConfig.class.getName())
+                    .warning(String.format("Country %s does not exists in the codelists. Defaulting to AD.", country));
+            return "AD";
+        }
     }
 
     public boolean isValidatorEnabled() {

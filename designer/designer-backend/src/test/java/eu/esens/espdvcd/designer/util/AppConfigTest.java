@@ -1,10 +1,7 @@
 package eu.esens.espdvcd.designer.util;
 
-import com.typesafe.config.Config;
-import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
 import org.junit.Before;
 import org.junit.Test;
-import spark.utils.Assert;
 
 import static org.junit.Assert.*;
 
@@ -25,11 +22,6 @@ public class AppConfigTest {
     @Test
     public void getServerPort() {
         assertEquals(8080, theConfig.getServerPort());
-    }
-
-    @Test
-    public void getDefaultLang() {
-        assertEquals(EULanguageCodeEnum.EN, theConfig.getDefaultLang());
     }
 
     @Test
