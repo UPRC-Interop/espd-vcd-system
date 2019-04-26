@@ -68,7 +68,47 @@
         <xsl:call-template name="multiLineText">
             <xsl:with-param name="pText">
                 <xsl:call-template name="getESPDProperty">
-                    <xsl:with-param name="key" select="'espd.part5.concl.statements.text'"/>
+                    <xsl:with-param name="key" select="'espd.part5.concl.statements.text.part1'"/>
+                </xsl:call-template>
+            </xsl:with-param>
+        </xsl:call-template>
+
+        <br />
+
+        <xsl:call-template name="multiLineText">
+            <xsl:with-param name="pText">
+                <xsl:call-template name="getESPDProperty">
+                    <xsl:with-param name="key" select="'espd.part5.concl.statements.text.part2'"/>
+                </xsl:call-template>
+            </xsl:with-param>
+        </xsl:call-template>
+
+        <br />
+
+        <xsl:call-template name="multiLineText">
+            <xsl:with-param name="pText">
+                <xsl:call-template name="getESPDProperty">
+                    <xsl:with-param name="key" select="'espd.part5.concl.statements.text.part3'"/>
+                </xsl:call-template>
+            </xsl:with-param>
+        </xsl:call-template>
+
+        <br />
+
+        <xsl:call-template name="multiLineText">
+            <xsl:with-param name="pText">
+                <xsl:call-template name="getESPDProperty">
+                    <xsl:with-param name="key" select="'espd.part5.concl.statements.text.part4'"/>
+                </xsl:call-template>
+            </xsl:with-param>
+        </xsl:call-template>
+
+        <br />
+
+        <xsl:call-template name="multiLineText">
+            <xsl:with-param name="pText">
+                <xsl:call-template name="getESPDProperty">
+                    <xsl:with-param name="key" select="'espd.part5.concl.statements.text.part5'"/>
                 </xsl:call-template>
             </xsl:with-param>
         </xsl:call-template>
