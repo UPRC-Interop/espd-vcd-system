@@ -87,6 +87,8 @@ public final class CriteriaUtil {
                 .peek(selectableCriterion -> {
                     if (selectableCriterion.getTypeCode().matches(CriteriaType.SELECTION_NO_ALPHA.getRegex())) {
                         selectableCriterion.setSelected(AppConfig.getInstance().isSelectionCriteriaPreselected());
+                    } else if (selectableCriterion.getTypeCode().matches(CriteriaType.EXCLUSION_D.getRegex())) {
+                        selectableCriterion.setSelected(AppConfig.getInstance().isPurelyNationalPreselected());
                     } else {
                         selectableCriterion.setSelected(true);
                     }

@@ -88,6 +88,10 @@ public enum AppConfig {
         return appConfig.getBoolean("espd.designer.criteria.selection.selected");
     }
 
+    public boolean isPurelyNationalPreselected() {
+        return appConfig.getBoolean("espd.designer.criteria.purelyNational.selected");
+    }
+
     public int getMaxFileSize() {
         return appConfig.getInt("espd.designer.maxFileSizeUpload");
     }
