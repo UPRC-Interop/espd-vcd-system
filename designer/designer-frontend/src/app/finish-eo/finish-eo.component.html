@@ -20,7 +20,7 @@
 <div *ngIf="dataService.reductionCriteria != null">
   <div *ngIf="utilities.isCreateResponse">
     <mat-card>
-      {{'espd.part5.reduction.hint' | translate}}
+      <h4>{{'espd.part5.toptext' | translate}}</h4>
     </mat-card>
     <ng-container *ngIf="dataService.reductionCriteria.length !== 0">
       <mat-card *ngFor="let criteria of dataService.reductionCriteria; let i = index">
@@ -30,7 +30,7 @@
                           name='{{criteria.name+i}}'
                           [(ngModel)]="dataService.reductionCriteria[i].selected"
                           [disabled]="dataService.isReadOnly()"></mat-checkbox>
-            {{criteria.propertyKeyMap.pk1 | translate}}
+            {{'espd.part5.reduction.hint' | translate}}
           </div>
         </div>
       </mat-card>
@@ -50,9 +50,11 @@
               </mat-panel-title>
             </mat-expansion-panel-header>
             <div class="desc">
-              <mat-card>
-                {{'espd.part5.toptext' | translate}}
-              </mat-card>
+              <div *ngIf="!utilities.isCreateResponse">
+                <mat-card>
+                  <h4>{{'espd.part5.toptext' | translate}}</h4>
+                </mat-card>
+              </div>
               <mat-card *ngFor="let cr of dataService.reductionCriteria; let i = index">
                 <div class="reductionCriteria">
                   <div class="criterion-wrap">
