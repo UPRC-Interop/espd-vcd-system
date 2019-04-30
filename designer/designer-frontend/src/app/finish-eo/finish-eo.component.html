@@ -17,64 +17,64 @@
 
 -->
 <h4 translate>espd.part5.header</h4>
-<mat-accordion multi="true">
-
-  <ng-container *ngIf="dataService.reductionCriteriaForm">
-    <form [formGroup]="dataService.reductionCriteriaForm" #form="ngForm">
-      <mat-expansion-panel expanded="true" *ngIf="dataService.reductionCriteria">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            {{'espd.part5.reduction' | translate}}
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <div class="desc">
-          <mat-card>
-            {{'espd.part5.toptext' | translate}}
-          </mat-card>
-          <mat-card>
-            {{'espd.part5.reduction.hint' | translate}}
-          </mat-card>
-          <mat-card *ngFor="let cr of dataService.reductionCriteria; let i = index">
-            <div class="reductionCriteria">
-
-              <div class="criterion-wrap">
-                <div class="criteria">
-                  <h4 translate>espd.part5.reduction.question</h4>
-                  <h4>{{cr.propertyKeyMap.pk1 | translate}}</h4>
-                  <div class="critDesc">{{cr.propertyKeyMap.pk2 | translate}}</div>
-                  <!--<div class="eCertis">-->
-                    <!--&lt;!&ndash;<h5>eCertis Information ...</h5>&ndash;&gt;-->
-                    <!--<ng-container *ngIf="!utilities.eCertisTemplate[cr.id]">-->
-                      <!--<button mat-raised-button-->
-                              <!--(click)="dataService.onGetECertisData(cr, cr.id, dataService.getCountryCode(), utilities.selectedLang)">More Information-->
-                      <!--</button>-->
-                    <!--</ng-container>-->
-                    <!--<ng-container *ngIf="cr.subCriterionList.length !== 0 && utilities.eCertisTemplate[cr.id]">-->
-                      <!--<div *ngIf="!utilities.isEmpty(cr.subCriterionList)">-->
-                        <!--<div *ngFor="let nationalCriterion of cr.subCriterionList; let i=index" class="ecertis-crit">-->
-                          <!--<app-e-certis-criterion [criterion]="nationalCriterion"></app-e-certis-criterion>-->
-                        <!--</div>-->
-                      <!--</div>-->
-                      <!--<ng-container *ngIf="utilities.eCertisTemplate[cr.id]">-->
-                        <!--<button mat-raised-button (click)="utilities.toggleECertis(cr.id)">Less Information</button>-->
-                      <!--</ng-container>-->
-                    <!--</ng-container>-->
-                    <!--&lt;!&ndash;<div class="eCertDesc" translate>espd.ecertis.404</div>&ndash;&gt;-->
-                  <!--</div>-->
-                </div>
-              </div>
-              <div class="answer">
-                <app-criterion [criterion]="cr" [form]="dataService.reductionCriteriaForm.controls" [indicator]="true"></app-criterion>
-              </div>
-
-            </div>
-          </mat-card>
-
-
+<div *ngIf="dataService.reductionCriteria != null">
+  <div *ngIf="utilities.isCreateResponse">
+    <mat-card>
+      {{'espd.part5.reduction.hint' | translate}}
+    </mat-card>
+    <ng-container *ngIf="dataService.reductionCriteria.length !== 0">
+      <mat-card *ngFor="let criteria of dataService.reductionCriteria; let i = index">
+        <div class="exclusionCriteria" >
+          <div class="criteria">
+            <mat-checkbox color="primary"
+                          name='{{criteria.name+i}}'
+                          [(ngModel)]="dataService.reductionCriteria[i].selected"
+                          [disabled]="dataService.isReadOnly()"></mat-checkbox>
+            {{criteria.propertyKeyMap.pk1 | translate}}
+          </div>
         </div>
-      </mat-expansion-panel>
-    </form>
-  </ng-container>
+      </mat-card>
+    </ng-container>
+  </div>
+
+</div>
+<mat-accordion multi="true">
+  <div *ngIf="dataService.reductionCriteria != null">
+    <div *ngIf="utilities.isImportandReductionExists(dataService.reductionCriteria, reductionUUID) || utilities.isCriterionSelected(dataService.reductionCriteria, reductionUUID)">
+      <ng-container *ngIf="dataService.reductionCriteriaForm">
+        <form [formGroup]="dataService.reductionCriteriaForm" #form="ngForm">
+          <mat-expansion-panel expanded="true" *ngIf="dataService.reductionCriteria">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{'espd.part5.reduction' | translate}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="desc">
+              <mat-card>
+                {{'espd.part5.toptext' | translate}}
+              </mat-card>
+              <mat-card *ngFor="let cr of dataService.reductionCriteria; let i = index">
+                <div class="reductionCriteria">
+                  <div class="criterion-wrap">
+                    <div class="criteria">
+                      <h4 translate>espd.part5.reduction.question</h4>
+                      <h4>{{cr.propertyKeyMap.pk1 | translate}}</h4>
+                      <div class="critDesc">{{cr.propertyKeyMap.pk2 | translate}}</div>
+                    </div>
+                  </div>
+                  <div class="answer">
+                    <app-criterion [criterion]="cr" [form]="dataService.reductionCriteriaForm.controls"
+                                   [indicator]="true"></app-criterion>
+                  </div>
+
+                </div>
+              </mat-card>
+            </div>
+          </mat-expansion-panel>
+        </form>
+      </ng-container>
+    </div>
+  </div>
   <mat-expansion-panel expanded="true">
     <mat-expansion-panel-header>
       <mat-panel-title>

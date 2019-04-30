@@ -41,6 +41,8 @@ export class FinishEoComponent implements OnInit, BaseStep {
   @Input() selectionStepValid: boolean;
   @Input() finishStepValid: boolean;
 
+  reductionUUID: string = '51c39ba9-0444-4967-afe9-36f753b30175';
+
   constructor(
     public dataService: DataService,
     private formUtil: FormUtilService,

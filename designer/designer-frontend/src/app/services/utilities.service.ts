@@ -21,6 +21,7 @@ import {SelectionCriteria} from '../model/selectionCriteria.model';
 import {MatListOption, MatSnackBar} from '@angular/material';
 import {RequirementGroup} from '../model/requirementGroup.model';
 import {FullCriterion} from '../model/fullCriterion.model';
+import {ReductionCriterion} from '../model/reductionCriterion.model';
 
 
 @Injectable({
@@ -108,11 +109,33 @@ export class UtilitiesService {
 
   }
 
+  isImportandReductionExists(criteria: ReductionCriterion[], id: string): boolean {
+    if (this.isImport() && this.findCriterion(criteria, id)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
 
   getSatisfiesALLCriterion(criteria: SelectionCriteria[], id: string): SelectionCriteria {
     return criteria.find((cr) => {
       return cr.id === id;
     });
+  }
+
+  getCriterion(criteria: SelectionCriteria[], id: string): SelectionCriteria {
+    return criteria.find((cr) => {
+      return cr.id === id;
+    });
+  }
+
+  isCriterionSelected(criteria: SelectionCriteria[], id: string): boolean {
+    if (this.getCriterion(criteria, id) !== undefined) {
+      return this.getCriterion(criteria, id).selected;
+    } else {
+      return false;
+    }
   }
 
   setAllFields(obj: Object, val: any) {
