@@ -71,9 +71,9 @@ export class SelectionEoComponent implements OnInit, BaseStep {
   }
 
 
-  onSelectionEOSubmit() {
-    this.dataService.selectionEOSubmit(this.utilities.isSatisfiedALL);
-  }
+  // onSelectionEOSubmit() {
+  //   this.dataService.selectionEOSubmit(this.utilities.isSatisfiedALL);
+  // }
 
   getWizardStep(): WizardSteps {
     return WizardSteps.SELECTION;

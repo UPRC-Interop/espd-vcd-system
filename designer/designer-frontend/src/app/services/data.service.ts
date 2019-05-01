@@ -460,6 +460,8 @@ export class DataService {
 
   finishEOSubmit(exportType: ExportType) {
 
+    this.selectionEOSubmit(this.utilities.isSatisfiedALL);
+
     /* extract caRelated criteria, and eoLotTenderedCriterion */
     if (this.utilities.qualificationApplicationType === 'selfcontained') {
       /* WORKAROUND-FIX: satisfiesALL Criteria null issue when it's self-contained */
