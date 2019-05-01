@@ -4,13 +4,25 @@
 
     <xsl:import href="../procedure/part_one.xsl"/>
     <xsl:import href="../procedure/part_two.xsl"/>
+    <xsl:import href="../procedure/part_two_for_request.xsl"/>
     <xsl:import href="../html/chapter.xsl"/>
 
     <xsl:template name="procedureSection">
         <xsl:call-template name="partOne"/>
+
         <xsl:if test=".//*[local-name() = 'EconomicOperatorParty']">
             <xsl:call-template name="partTwo"/>
         </xsl:if>
+
+        <xsl:choose>
+            <xsl:when test=".//*[local-name() = 'EconomicOperatorParty']">
+                <xsl:call-template name="partTwo"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <!-- workaround in order to apply blank eo part II in espd request PDF -->
+                <xsl:call-template name="partTwoForRequest"/>
+            </xsl:otherwise>
+        </xsl:choose>
 
     </xsl:template>
 
