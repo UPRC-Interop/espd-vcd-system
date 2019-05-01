@@ -63,6 +63,16 @@ export class SelectionComponent implements OnInit, BaseStep {
     } else if (radio.value === 'NO') {
       this.utilities.isSatisfiedALL = true;
       this.utilities.isAtoD = false;
+
+      if (this.utilities.isCA && this.utilities.isImportReq) {
+        if (this.APIService.version === 'v2') {
+          this.utilities.getSatisfiesALLCriterion(this.dataService.selectionALLCriteria, 'f4dc58dd-af45-4602-a4c8-3dca30fac082').selected = true;
+        } else if (this.APIService.version === 'v1') {
+          this.utilities.getSatisfiesALLCriterion(this.dataService.selectionALLCriteria, '7e7db838-eeac-46d9-ab39-42927486f22d').selected = true;
+        }
+
+      }
+
     }
   }
 
