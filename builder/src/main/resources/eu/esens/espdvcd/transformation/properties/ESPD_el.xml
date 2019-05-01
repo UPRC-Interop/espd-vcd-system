@@ -30,8 +30,8 @@
     <entry key="espd.part1.name">Επίσημη ονομασία:</entry>
     <entry key="espd.part1.nat.regnum">Εθνικός αριθμός καταχώρισης (εάν είναι γνωστός):</entry>
     <entry key="espd.part1.official.journal.alert">Εάν δεν έχει δημοσιευθεί προκήρυξη διαγωνισμού στην Επίσημη Εφημερίδα της Ευρωπαϊκής Ένωσης ή αν δεν υπάρχει υποχρέωση δημοσίευσης εκεί, η αναθέτουσα αρχή ή ο αναθέτων φορέας θα πρέπει να συμπληρώσει πληροφορίες με τις οποίες θα είναι δυνατή η αδιαμφισβήτητη ταυτοποίηση της διαδικασίας σύναψης σύμβασης (π.χ. παραπομπή σε δημοσίευση σε εθνικό επίπεδο)</entry>
-    <entry key="espd.part1.ojs.label">Αριθμός ανακοίνωσης στην ΕΕ:</entry>
-    <entry key="espd.part1.ojs.url">URL της ΕΕ</entry>
+    <entry key="espd.part1.ojs.label">Αριθμός προκήρυξης στην ΕΕ: [][][][]/S[][][]-[][][][][][][][]</entry>
+    <entry key="espd.part1.ojs.url">Δημοσίευση σε εθνικό επίπεδο: ΑΔΑΜ Προκήρυξης στο ΚΗΜΔΗΣ</entry>
     <entry key="espd.part1.postcode">Ταχ. κωδ.:</entry>
     <entry key="espd.part1.procurer.name">Τίτλος:</entry>
     <entry key="espd.part1.street.and. num">Οδός και αριθμός:</entry>
@@ -409,7 +409,7 @@
     <entry key="espd.gui.zip.instructions.part2">XML: Το αρχείο XML είναι αρχείο που η υπηρεσία μας ΕΕΕΣ/ΤΕΥΔ ή άλλες συμβατές υπηρεσίες ΕΕΕΣ/ΤΕΥΔ μπορούν να κατανοήσουν. Το πλεονέκτημα της χρήσης του eΕΕΕΣ/eΤΕΥΔ με τη μορφή αρχείου XML έγκειται στο ότι οι αγοραστές και οι εταιρείες μπορούν να το χρησιμοποιήσουν εκ νέου σε άλλες διαδικασίες στο μέλλον. Θα πρέπει να αποστέλλεται μαζί με τα έγγραφα της προμήθειας (από την αναθέτουσα αρχή σε εταιρείες) ή στο πλαίσιο της προσφοράς (από εταιρεία στην αναθέτουσα αρχή).</entry>
     <entry key="espd.gui.zip.instructions.part3">PDF: Το αρχείο PDF είναι αρχείο του eΕΕΕΣ/eΤΕΥΔ σε μορφή αναγνώσιμη από άνθρωπο. Προτείνουμε, και σε αυτή την περίπτωση, να χρησιμοποιείται παράλληλα με το μορφότυπο XML, με τα έγγραφα της προμήθειας (από την αναθέτουσα αρχή σε εταιρείες) ή στο πλαίσιο της προσφοράς (από εταιρεία στην αναθέτουσα αρχή) ως έγγραφο αναφοράς.</entry>
     <entry key="espd.gui.zip.instructions.part4">Εάν έχετε ερωτήσεις σχετικά με τα αρχεία μη διστάσετε να έρθετε σε επαφή μαζί μας μέσω ηλεκτρονικού ταχυδρομείου στη διεύθυνση: ESPDint@eprocurement.gov.gr</entry>
-    <entry key="espd.crit.entity.name">Name of the entity</entry>
+    <entry key="espd.crit.entity.name">Όνομα της οντότητας</entry>
     <entry key="espd.crit.entity.ID">ID of the entity</entry>
     <entry key="espd.crit.entity.Activity">Activity of the entity</entry>
     <entry key="espd.crit.reg.number">Registration number</entry>
@@ -458,7 +458,7 @@
     <entry key="espd.crit.number.fiscal.years">Number of fiscal years</entry>
     <entry key="espd.crit.business.domain.description">Business domain description</entry>
     <entry key="espd.crit.cpvs">CPVs:</entry>
-    <entry key="espd.crit.cpv.code">CPV Codes:</entry>
+    <entry key="espd.crit.cpv.code">Κωδικοί CPV</entry>
     <entry key="espd.crit.applicable.ratios">Select the periods applicable for all ratios</entry>
     <entry key="espd.crit.ratio.type">Προσδιορισμός της απαιτούμενης αναλογίας (δείκτη)- αναλογία (δείκτης) μεταξύ x και y:</entry>
     <entry key="espd.crit.definition">Definition</entry>
