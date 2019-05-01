@@ -156,7 +156,7 @@
 
     </xsl:template>
 
-    <xsl:template match="cac:AdditionalDocumentReference | cacV1:AdditionalDocumentReference">
+    <xsl:template match="cac:AdditionalDocumentReference[1] | cacV1:AdditionalDocumentReference[1]">
         <xsl:call-template name="paragraph">
             <xsl:with-param name="value">
                 <xsl:call-template name="getESPDProperty">
