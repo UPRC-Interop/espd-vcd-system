@@ -156,7 +156,7 @@
 
     </xsl:template>
 
-    <xsl:template match="cac:AdditionalDocumentReference[1] | cacV1:AdditionalDocumentReference[1]">
+    <xsl:template match="cac:AdditionalDocumentReference | cacV1:AdditionalDocumentReference">
         <xsl:call-template name="paragraph">
             <xsl:with-param name="value">
                 <xsl:call-template name="getESPDProperty">
@@ -193,6 +193,18 @@
             </xsl:with-param>
         </xsl:call-template>
 
+        <br />
+
+        <xsl:call-template name="paragraph">
+            <xsl:with-param name="value">
+                <xsl:call-template name="getESPDProperty">
+                    <xsl:with-param name="key" select="'espd.part1.official.journal.alert'"/>
+                </xsl:call-template>
+            </xsl:with-param>
+        </xsl:call-template>
+
+        <br />
+
         <xsl:call-template name="sectionLabel">
             <xsl:with-param name="label">
                 <xsl:call-template name="getESPDProperty">
@@ -211,10 +223,12 @@
         <xsl:call-template name="paragraph">
             <xsl:with-param name="value">
                 <xsl:call-template name="getESPDProperty">
-                    <xsl:with-param name="key" select="'espd.part1.official.journal.alert'"/>
+                    <xsl:with-param name="key" select="'espd.part1.official.journal.alert2'"/>
                 </xsl:call-template>
             </xsl:with-param>
         </xsl:call-template>
+
+        <br />
 
     </xsl:template>
 
