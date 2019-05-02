@@ -30,6 +30,7 @@ import {CodeList} from '../model/codeList.model';
 import {ECertisCriterion} from '../model/eCertisCriterion.model';
 import {FullCriterion} from '../model/fullCriterion.model';
 import {PlatformInfo} from '../model/platform-info';
+import {ErrorResponse} from "../model/error-response";
 
 // import {DataService} from '../services/data.service';
 
@@ -111,12 +112,12 @@ export class ApicallService {
         .then(res => {
           criterion.subCriterionList = res.map(x => ({...x}));
           return Promise.resolve(criterion.subCriterionList);
-        }).catch(err => {
+        }).catch((err) => {
           console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
+          const error: ErrorResponse = err.error;
+          console.log(err.error);
           const action = 'close';
-          this.utilities.openSnackBar(message, action);
+          this.utilities.openSnackBar(error, action);
           return Promise.reject(err);
         });
     }
