@@ -17,8 +17,8 @@
 import {Injectable} from '@angular/core';
 import {CodeList} from '../model/codeList.model';
 import {ApicallService} from './apicall.service';
-import {DataService} from './data.service';
 import {UtilitiesService} from './utilities.service';
+import {ErrorResponse} from "../model/error-response";
 
 @Injectable({
   providedIn: 'root'
@@ -181,10 +181,10 @@ export class CodelistService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
+          const error: ErrorResponse = err.error;
+          console.log(err.error);
           const action = 'close';
-          this.utilities.openSnackBar(message, action);
+          this.utilities.openSnackBar(error, action);
           return Promise.reject(err);
         });
     }
@@ -201,10 +201,10 @@ export class CodelistService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
+          const error: ErrorResponse = err.error;
+          console.log(err.error);
           const action = 'close';
-          this.utilities.openSnackBar(message, action);
+          this.utilities.openSnackBar(error, action);
           return Promise.reject(err);
         });
     }
@@ -223,10 +223,10 @@ export class CodelistService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
+          const error: ErrorResponse = err.error;
+          console.log(err.error);
           const action = 'close';
-          this.utilities.openSnackBar(message, action);
+          this.utilities.openSnackBar(error, action);
           return Promise.reject(err);
         });
     }
@@ -243,10 +243,10 @@ export class CodelistService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
+          const error: ErrorResponse = err.error;
+          console.log(err.error);
           const action = 'close';
-          this.utilities.openSnackBar(message, action);
+          this.utilities.openSnackBar(error, action);
           return Promise.reject(err);
         });
     }
@@ -263,10 +263,10 @@ export class CodelistService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
+          const error: ErrorResponse = err.error;
+          console.log(err.error);
           const action = 'close';
-          this.utilities.openSnackBar(message, action);
+          this.utilities.openSnackBar(error, action);
           return Promise.reject(err);
         });
     }
@@ -283,10 +283,10 @@ export class CodelistService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
+          const error: ErrorResponse = err.error;
+          console.log(err.error);
           const action = 'close';
-          this.utilities.openSnackBar(message, action);
+          this.utilities.openSnackBar(error, action);
           return Promise.reject(err);
         });
     }
@@ -303,10 +303,10 @@ export class CodelistService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
+          const error: ErrorResponse = err.error;
+          console.log(err.error);
           const action = 'close';
-          this.utilities.openSnackBar(message, action);
+          this.utilities.openSnackBar(error, action);
           return Promise.reject(err);
         });
     }
@@ -323,10 +323,10 @@ export class CodelistService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
+          const error: ErrorResponse = err.error;
+          console.log(err.error);
           const action = 'close';
-          this.utilities.openSnackBar(message, action);
+          this.utilities.openSnackBar(error, action);
           return Promise.reject(err);
         });
     }
@@ -343,10 +343,10 @@ export class CodelistService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
+          const error: ErrorResponse = err.error;
+          console.log(err.error);
           const action = 'close';
-          this.utilities.openSnackBar(message, action);
+          this.utilities.openSnackBar(error, action);
           return Promise.reject(err);
         });
     }
@@ -363,10 +363,10 @@ export class CodelistService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
+          const error: ErrorResponse = err.error;
+          console.log(err.error);
           const action = 'close';
-          this.utilities.openSnackBar(message, action);
+          this.utilities.openSnackBar(error, action);
           return Promise.reject(err);
         });
     }
