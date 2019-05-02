@@ -114,6 +114,9 @@
                     <xsl:when test="cbc:ValueDataTypeCode = 'EVIDENCE_IDENTIFIER' or @responseDataType = 'EVIDENCE_URL'">
                         <xsl:call-template name="evidenceIdentifier"/>
                     </xsl:when>
+                    <xsl:when test="cbc:ValueDataTypeCode = 'ECONOMIC_OPERATOR_IDENTIFIER'">
+                        <xsl:call-template name="economicOperatorIdentifier"/>
+                    </xsl:when>
                     <xsl:otherwise>
 
                         <!-- Description -->
@@ -384,6 +387,37 @@
         <xsl:call-template name="responseValue">
             <xsl:with-param name="responseValue">
                 <xsl:value-of select="$evidence/cac:DocumentReference/cac:IssuerParty/cac:PartyName/cbc:Name | ../ccv-cacV1:Requirement[3]/ccv-cacV1:Response/ubl-cbcV1:Description"/>
+            </xsl:with-param>
+        </xsl:call-template>
+    </xsl:template>
+
+    <xsl:template name="economicOperatorIdentifier">
+
+        <xsl:variable name="tenderingCriterionResponse" select="//cac:TenderingCriterionResponse[./cbc:ValidatedCriterionPropertyID = current()/cbc:ID]"/>
+
+        <xsl:call-template name="label">
+            <xsl:with-param name="label">
+                <xsl:call-template name="getESPDProperty">
+                    <xsl:with-param name="key" select="'espd.crit.entity.ID'"/>
+                </xsl:call-template>
+            </xsl:with-param>
+        </xsl:call-template>
+        <xsl:call-template name="responseValue">
+            <xsl:with-param name="responseValue">
+                <xsl:value-of select="$tenderingCriterionResponse/cac:ResponseValue/cbc:ResponseID"/>
+            </xsl:with-param>
+        </xsl:call-template>
+
+        <xsl:call-template name="label">
+            <xsl:with-param name="label">
+                <xsl:call-template name="getESPDProperty">
+                    <xsl:with-param name="key" select="'espd.crit.type.id'"/>
+                </xsl:call-template>
+            </xsl:with-param>
+        </xsl:call-template>
+        <xsl:call-template name="responseValue">
+            <xsl:with-param name="responseValue">
+                <xsl:value-of select="$tenderingCriterionResponse/cac:ResponseValue/cbc:ResponseID/@schemeName"/>
             </xsl:with-param>
         </xsl:call-template>
     </xsl:template>
