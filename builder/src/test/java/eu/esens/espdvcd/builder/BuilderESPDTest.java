@@ -524,7 +524,7 @@ public class BuilderESPDTest {
         PDFDocumentBuilderV2 pdfDocumentBuilderV2 = BuilderFactory.EDM_V2
                 .createPDFDocumentBuilderFor(espdRequest);
 
-        // System.out.println(pdfDocumentBuilderV2.theXML);
+        System.out.println(pdfDocumentBuilderV2.theXML);
 
         TransformationService transformationService = new TransformationService();
         InputStream pdfStream = transformationService.createPdfStream(new StreamSource(new ByteArrayInputStream(pdfDocumentBuilderV2.getAsString().getBytes(StandardCharsets.UTF_8))), EULanguageCodeEnum.EL);

@@ -79,22 +79,22 @@
                 <xsl:with-param name="chapter-content">
 
                     <xsl:call-template name="sectionLabelForValueOfNode">
-                        <xsl:with-param name="node" select="*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[locale-name = 'FirstName']" />
+                        <xsl:with-param name="node" select="*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[local-name() = 'FirstName']" />
                         <xsl:with-param name="propertyKey" select="'espd.part2.first.name'"/>
                     </xsl:call-template>
 
                     <xsl:call-template name="sectionLabelForValueOfNode">
-                        <xsl:with-param name="node" select="*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[locale-name = 'FamilyName']" />
+                        <xsl:with-param name="node" select="*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[local-name() = 'FamilyName']" />
                         <xsl:with-param name="propertyKey" select="'espd.part2.last.name'"/>
                     </xsl:call-template>
 
                     <xsl:call-template name="sectionLabelForValueOfNode">
-                        <xsl:with-param name="node" select="*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[locale-name = 'BirthDate']" />
+                        <xsl:with-param name="node" select="*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[local-name() = 'BirthDate']" />
                         <xsl:with-param name="propertyKey" select="'espd.part2.birth.date'"/>
                     </xsl:call-template>
 
                     <xsl:call-template name="sectionLabelForValueOfNode">
-                        <xsl:with-param name="node" select="*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[locale-name = 'BirthplaceName']" />
+                        <xsl:with-param name="node" select="*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[local-name() = 'BirthplaceName']" />
                         <xsl:with-param name="propertyKey" select="'espd.part2.birth.place'"/>
                     </xsl:call-template>
 

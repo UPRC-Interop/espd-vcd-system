@@ -15,7 +15,7 @@
                 </xsl:call-template>
             </xsl:with-param>
             <xsl:with-param name="content">
-                <xsl:if test="//cac:EconomicOperatorParty">
+                <!-- <xsl:if test="//cac:EconomicOperatorParty"> -->
                     <xsl:call-template name="chapterOne">
                         <xsl:with-param name="chapter-number"/>
                         <xsl:with-param name="chapter-headline">
@@ -35,7 +35,7 @@
                             <xsl:apply-templates select="//cac:TenderingCriterion[./cbc:CriterionTypeCode = 'CRITERION.OTHER.EO_DATA.REDUCTION_OF_CANDIDATES']"/>
                         </xsl:with-param>
                     </xsl:call-template>
-                </xsl:if>
+                <!-- </xsl:if> -->
 
                 <xsl:call-template name="chapterOne">
                     <xsl:with-param name="chapter-number"/>
