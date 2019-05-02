@@ -112,9 +112,9 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
                 .collect(Collectors.toList()));
 
         // Additional Document Reference extraction
-        if (modelResponse.getESPDRequestDetails() != null) {
-            qarType.getAdditionalDocumentReference().add(extractESPDRequestDetails(modelResponse.getESPDRequestDetails()));
-        }
+//        if (modelResponse.getESPDRequestDetails() != null) {
+//            qarType.getAdditionalDocumentReference().add(extractESPDRequestDetails(modelResponse.getESPDRequestDetails()));
+//        }
 
         qarType.setUBLVersionID(createUBL22VersionIdType());
         qarType.setCustomizationID(createCENBIICustomizationIdType("urn:www.cenbii.eu:transaction:biitrdm092:ver3.0"));
