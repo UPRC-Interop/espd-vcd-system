@@ -22,6 +22,7 @@ import {MatListOption, MatSnackBar} from '@angular/material';
 import {RequirementGroup} from '../model/requirementGroup.model';
 import {FullCriterion} from '../model/fullCriterion.model';
 import {ReductionCriterion} from '../model/reductionCriterion.model';
+import {ErrorResponse} from "../model/error-response";
 
 
 @Injectable({
@@ -228,7 +229,13 @@ export class UtilitiesService {
 
 
   /* ============================ snackbar ===================================== */
-  openSnackBar(message: string, action: string) {
+  openSnackBar(error: ErrorResponse, action: string) {
+    let message: string;
+    if (error.message != null) {
+      message = error.message;
+    } else {
+      message = "Connection to the backend server could not be established";
+    }
     this.snackBar.open(message, action);
   }
 

@@ -43,8 +43,7 @@ import {Amount} from '../model/amount.model';
 import _ from 'lodash';
 import {Filter} from '../filter/filter.enum';
 import {CodelistService} from './codelist.service';
-import {ECertisCriterion} from '../model/eCertisCriterion.model';
-import {PlatformInfo} from '../model/platform-info';
+import {ErrorResponse} from "../model/error-response";
 
 @Injectable()
 export class DataService {
@@ -418,10 +417,14 @@ export class DataService {
         this.saveFile(this.blob, '.xml');
       })
       .catch(err => {
-        const message: string = err.error +
-          ' ' + err.message;
-        const action = 'close';
-        this.utilities.openSnackBar(message, action);
+        const fr: FileReader = new FileReader();
+        fr.onload = e => {
+          const error: ErrorResponse = JSON.parse(fr.result as string);
+          console.log(err.error);
+          const action = 'close';
+          this.utilities.openSnackBar(error, action);
+        };
+        fr.readAsText(err.error);
       });
   }
 
@@ -432,10 +435,14 @@ export class DataService {
         this.saveFile(this.blob, '.html');
       })
       .catch(err => {
-        const message: string = err.error +
-          ' ' + err.message;
-        const action = 'close';
-        this.utilities.openSnackBar(message, action);
+        const fr: FileReader = new FileReader();
+        fr.onload = e => {
+          const error: ErrorResponse = JSON.parse(fr.result as string);
+          console.log(err.error);
+          const action = 'close';
+          this.utilities.openSnackBar(error, action);
+        };
+        fr.readAsText(err.error);
       });
   }
 
@@ -446,10 +453,14 @@ export class DataService {
         this.saveFile(this.blob, '.pdf');
       })
       .catch(err => {
-        const message: string = err.error +
-          ' ' + err.message;
-        const action = 'close';
-        this.utilities.openSnackBar(message, action);
+        const fr: FileReader = new FileReader();
+        fr.onload = e => {
+          const error: ErrorResponse = JSON.parse(fr.result as string);
+          console.log(err.error);
+          const action = 'close';
+          this.utilities.openSnackBar(error, action);
+        };
+        fr.readAsText(err.error);
       });
   }
 
@@ -546,10 +557,14 @@ export class DataService {
         this.saveFile(this.blob, '.pdf');
       })
       .catch(err => {
-        const message: string = err.error +
-          ' ' + err.message;
-        const action = 'close';
-        this.utilities.openSnackBar(message, action);
+        const fr: FileReader = new FileReader();
+        fr.onload = e => {
+          const error: ErrorResponse = JSON.parse(fr.result as string);
+          console.log(err.error);
+          const action = 'close';
+          this.utilities.openSnackBar(error, action);
+        };
+        fr.readAsText(err.error);
       });
   }
 
@@ -560,10 +575,14 @@ export class DataService {
         this.saveFile(this.blob, '.html');
       })
       .catch(err => {
-        const message: string = err.error +
-          ' ' + err.message;
-        const action = 'close';
-        this.utilities.openSnackBar(message, action);
+        const fr: FileReader = new FileReader();
+        fr.onload = e => {
+          const error: ErrorResponse = JSON.parse(fr.result as string);
+          console.log(err.error);
+          const action = 'close';
+          this.utilities.openSnackBar(error, action);
+        };
+        fr.readAsText(err.error);
       });
   }
 
@@ -575,12 +594,14 @@ export class DataService {
         this.saveFile(this.blob, '.xml');
       })
       .catch(err => {
-        console.log(err);
-        console.log(err.error);
-        const message: string = err.error +
-          ' ' + err.message;
-        const action = 'close';
-        this.utilities.openSnackBar(message, action);
+        const fr: FileReader = new FileReader();
+        fr.onload = e => {
+          const error: ErrorResponse = JSON.parse(fr.result as string);
+          console.log(err.error);
+          const action = 'close';
+          this.utilities.openSnackBar(error, action);
+        };
+        fr.readAsText(err.error);
       });
   }
 
@@ -766,10 +787,10 @@ export class DataService {
           })
           .catch(err => {
             console.log(err);
-            const message: string = err.error +
-              ' ' + err.message;
+            const error: ErrorResponse = err.error;
+            console.log(err.error);
             const action = 'close';
-            this.utilities.openSnackBar(message, action);
+            this.utilities.openSnackBar(error, action);
             reject();
           });
       } else if (filesToUpload.length > 0 && (role === 'EO' || (role === 'CA' && this.isReadOnly()))) {
@@ -960,10 +981,10 @@ export class DataService {
           })
           .catch(err => {
             console.log(err);
-            const message: string = err.error +
-              ' ' + err.message;
+            const error: ErrorResponse = err.error;
+            console.log(err.error);
             const action = 'close';
-            this.utilities.openSnackBar(message, action);
+            this.utilities.openSnackBar(error, action);
             reject();
           });
       }
@@ -1177,10 +1198,10 @@ export class DataService {
           })
           .catch(err => {
             console.log(err);
-            const message: string = err.error +
-              ' ' + err.message;
+            const error: ErrorResponse = err.error;
+            console.log(err.error);
             const action = 'close';
-            this.utilities.openSnackBar(message, action);
+            this.utilities.openSnackBar(error, action);
             reject();
           });
 
@@ -1195,10 +1216,10 @@ export class DataService {
           })
           .catch(err => {
             console.log(err);
-            const message: string = err.error +
-              ' ' + err.message;
+            const error: ErrorResponse = err.error;
+            console.log(err.error);
             const action = 'close';
-            this.utilities.openSnackBar(message, action);
+            this.utilities.openSnackBar(error, action);
             reject();
           });
 
@@ -1213,10 +1234,10 @@ export class DataService {
           })
           .catch(err => {
             console.log(err);
-            const message: string = err.error +
-              ' ' + err.message;
+            const error: ErrorResponse = err.error;
+            console.log(err.error);
             const action = 'close';
-            this.utilities.openSnackBar(message, action);
+            this.utilities.openSnackBar(error, action);
             reject();
           });
 
@@ -1232,10 +1253,10 @@ export class DataService {
             })
             .catch(err => {
               console.log(err);
-              const message: string = err.error +
-                ' ' + err.message;
+              const error: ErrorResponse = err.error;
+              console.log(err.error);
               const action = 'close';
-              this.utilities.openSnackBar(message, action);
+              this.utilities.openSnackBar(error, action);
               reject();
             });
 
@@ -1248,10 +1269,10 @@ export class DataService {
             })
             .catch(err => {
               console.log(err);
-              const message: string = err.error +
-                ' ' + err.message;
+              const error: ErrorResponse = err.error;
+              console.log(err.error);
               const action = 'close';
-              this.utilities.openSnackBar(message, action);
+              this.utilities.openSnackBar(error, action);
               reject();
             });
         } else {
@@ -1273,10 +1294,10 @@ export class DataService {
             })
             .catch(err => {
               console.log(err);
-              const message: string = err.error +
-                ' ' + err.message;
+              const error: ErrorResponse = err.error;
+              console.log(err.error);
               const action = 'close';
-              this.utilities.openSnackBar(message, action);
+              this.utilities.openSnackBar(error, action);
               reject();
             });
         }
@@ -1297,10 +1318,10 @@ export class DataService {
           })
           .catch(err => {
             console.log(err);
-            const message: string = err.error +
-              ' ' + err.message;
+            const error: ErrorResponse = err.error;
+            console.log(err.error);
             const action = 'close';
-            this.utilities.openSnackBar(message, action);
+            this.utilities.openSnackBar(error, action);
             reject();
           });
 
@@ -1316,10 +1337,10 @@ export class DataService {
           })
           .catch(err => {
             console.log(err);
-            const message: string = err.error +
-              ' ' + err.message;
+            const error: ErrorResponse = err.error;
+            console.log(err.error);
             const action = 'close';
-            this.utilities.openSnackBar(message, action);
+            this.utilities.openSnackBar(error, action);
             reject();
           });
 
@@ -1335,10 +1356,10 @@ export class DataService {
           })
           .catch(err => {
             console.log(err);
-            const message: string = err.error +
-              ' ' + err.message;
+            const error: ErrorResponse = err.error;
+            console.log(err.error);
             const action = 'close';
-            this.utilities.openSnackBar(message, action);
+            this.utilities.openSnackBar(error, action);
             reject();
           });
 
@@ -1354,10 +1375,10 @@ export class DataService {
           })
           .catch(err => {
             console.log(err);
-            const message: string = err.error +
-              ' ' + err.message;
+            const error: ErrorResponse = err.error;
+            console.log(err.error);
             const action = 'close';
-            this.utilities.openSnackBar(message, action);
+            this.utilities.openSnackBar(error, action);
             reject();
           });
 
@@ -1372,10 +1393,10 @@ export class DataService {
           })
           .catch(err => {
             console.log(err);
-            const message: string = err.error +
-              ' ' + err.message;
+            const error: ErrorResponse = err.error;
+            console.log(err.error);
             const action = 'close';
-            this.utilities.openSnackBar(message, action);
+            this.utilities.openSnackBar(error, action);
             reject();
           });
 
@@ -1391,10 +1412,10 @@ export class DataService {
           })
           .catch(err => {
             console.log(err);
-            const message: string = err.error +
-              ' ' + err.message;
+            const error: ErrorResponse = err.error;
+            console.log(err.error);
             const action = 'close';
-            this.utilities.openSnackBar(message, action);
+            this.utilities.openSnackBar(error, action);
             reject();
           });
 
@@ -1410,10 +1431,10 @@ export class DataService {
           })
           .catch(err => {
             console.log(err);
-            const message: string = err.error +
-              ' ' + err.message;
+            const error: ErrorResponse = err.error;
+            console.log(err.error);
             const action = 'close';
-            this.utilities.openSnackBar(message, action);
+            this.utilities.openSnackBar(error, action);
             reject();
           });
 
@@ -1428,10 +1449,10 @@ export class DataService {
           })
           .catch(err => {
             console.log(err);
-            const message: string = err.error +
-              ' ' + err.message;
+            const error: ErrorResponse = err.error;
+            console.log(err.error);
             const action = 'close';
-            this.utilities.openSnackBar(message, action);
+            this.utilities.openSnackBar(error, action);
             reject();
           });
 
@@ -1446,10 +1467,10 @@ export class DataService {
           })
           .catch(err => {
             console.log(err);
-            const message: string = err.error +
-              ' ' + err.message;
+            const error: ErrorResponse = err.error;
+            console.log(err.error);
             const action = 'close';
-            this.utilities.openSnackBar(message, action);
+            this.utilities.openSnackBar(error, action);
             reject();
           });
 
@@ -1465,10 +1486,10 @@ export class DataService {
           })
           .catch(err => {
             console.log(err);
-            const message: string = err.error +
-              ' ' + err.message;
+            const error: ErrorResponse = err.error;
+            console.log(err.error);
             const action = 'close';
-            this.utilities.openSnackBar(message, action);
+            this.utilities.openSnackBar(error, action);
             reject();
           });
 
@@ -1489,10 +1510,10 @@ export class DataService {
           })
           .catch(err => {
             console.log(err);
-            const message: string = err.error +
-              ' ' + err.message;
+            const error: ErrorResponse = err.error;
+            console.log(err.error);
             const action = 'close';
-            this.utilities.openSnackBar(message, action);
+            this.utilities.openSnackBar(error, action);
             reject();
           });
 
@@ -1507,10 +1528,10 @@ export class DataService {
           })
           .catch(err => {
             console.log(err);
-            const message: string = err.error +
-              ' ' + err.message;
+            const error: ErrorResponse = err.error;
+            console.log(err.error);
             const action = 'close';
-            this.utilities.openSnackBar(message, action);
+            this.utilities.openSnackBar(error, action);
             reject();
           });
 
@@ -1528,10 +1549,10 @@ export class DataService {
             })
             .catch(err => {
               console.log(err);
-              const message: string = err.error +
-                ' ' + err.message;
+              const error: ErrorResponse = err.error;
+              console.log(err.error);
               const action = 'close';
-              this.utilities.openSnackBar(message, action);
+              this.utilities.openSnackBar(error, action);
               reject();
             });
 
@@ -1545,10 +1566,10 @@ export class DataService {
             })
             .catch(err => {
               console.log(err);
-              const message: string = err.error +
-                ' ' + err.message;
+              const error: ErrorResponse = err.error;
+              console.log(err.error);
               const action = 'close';
-              this.utilities.openSnackBar(message, action);
+              this.utilities.openSnackBar(error, action);
               reject();
             });
         } else {
@@ -1570,10 +1591,10 @@ export class DataService {
           })
           .catch(err => {
             console.log(err);
-            const message: string = err.error +
-              ' ' + err.message;
+            const error: ErrorResponse = err.error;
+            console.log(err.error);
             const action = 'close';
-            this.utilities.openSnackBar(message, action);
+            this.utilities.openSnackBar(error, action);
             reject();
           });
 
@@ -1589,10 +1610,10 @@ export class DataService {
           })
           .catch(err => {
             console.log(err);
-            const message: string = err.error +
-              ' ' + err.message;
+            const error: ErrorResponse = err.error;
+            console.log(err.error);
             const action = 'close';
-            this.utilities.openSnackBar(message, action);
+            this.utilities.openSnackBar(error, action);
             reject();
           });
 
@@ -1608,10 +1629,10 @@ export class DataService {
           })
           .catch(err => {
             console.log(err);
-            const message: string = err.error +
-              ' ' + err.message;
+            const error: ErrorResponse = err.error;
+            console.log(err.error);
             const action = 'close';
-            this.utilities.openSnackBar(message, action);
+            this.utilities.openSnackBar(error, action);
             reject();
           });
 
@@ -1627,10 +1648,10 @@ export class DataService {
           })
           .catch(err => {
             console.log(err);
-            const message: string = err.error +
-              ' ' + err.message;
+            const error: ErrorResponse = err.error;
+            console.log(err.error);
             const action = 'close';
-            this.utilities.openSnackBar(message, action);
+            this.utilities.openSnackBar(error, action);
             reject();
           });
 
@@ -1645,10 +1666,10 @@ export class DataService {
           })
           .catch(err => {
             console.log(err);
-            const message: string = err.error +
-              ' ' + err.message;
+            const error: ErrorResponse = err.error;
+            console.log(err.error);
             const action = 'close';
-            this.utilities.openSnackBar(message, action);
+            this.utilities.openSnackBar(error, action);
             reject();
           });
 
@@ -1664,10 +1685,10 @@ export class DataService {
           })
           .catch(err => {
             console.log(err);
-            const message: string = err.error +
-              ' ' + err.message;
+            const error: ErrorResponse = err.error;
+            console.log(err.error);
             const action = 'close';
-            this.utilities.openSnackBar(message, action);
+            this.utilities.openSnackBar(error, action);
             reject();
           });
 
@@ -1683,10 +1704,10 @@ export class DataService {
           })
           .catch(err => {
             console.log(err);
-            const message: string = err.error +
-              ' ' + err.message;
+            const error: ErrorResponse = err.error;
+            console.log(err.error);
             const action = 'close';
-            this.utilities.openSnackBar(message, action);
+            this.utilities.openSnackBar(error, action);
             reject();
           });
 
@@ -1703,10 +1724,10 @@ export class DataService {
           })
           .catch(err => {
             console.log(err);
-            const message: string = err.error +
-              ' ' + err.message;
+            const error: ErrorResponse = err.error;
+            console.log(err.error);
             const action = 'close';
-            this.utilities.openSnackBar(message, action);
+            this.utilities.openSnackBar(error, action);
             reject();
           });
 
@@ -1721,10 +1742,10 @@ export class DataService {
           })
           .catch(err => {
             console.log(err);
-            const message: string = err.error +
-              ' ' + err.message;
+            const error: ErrorResponse = err.error;
+            console.log(err.error);
             const action = 'close';
-            this.utilities.openSnackBar(message, action);
+            this.utilities.openSnackBar(error, action);
             reject();
           });
       }
@@ -1769,10 +1790,10 @@ export class DataService {
     })
       .catch(err => {
         console.log(err);
-        const message: string = err.error +
-          ' ' + err.message;
+        const error: ErrorResponse = err.error;
+        console.log(err.error);
         const action = 'close';
-        this.utilities.openSnackBar(message, action);
+        this.utilities.openSnackBar(error, action);
       });
   }
 
@@ -1803,10 +1824,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
+          const error: ErrorResponse = err.error;
+          console.log(err.error);
           const action = 'close';
-          this.utilities.openSnackBar(message, action);
+          this.utilities.openSnackBar(error, action);
           return Promise.reject(err);
         });
     }
@@ -1827,10 +1848,10 @@ export class DataService {
           }
         ).catch(err => {
           console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
+          const error: ErrorResponse = err.error;
+          console.log(err.error);
           const action = 'close';
-          this.utilities.openSnackBar(message, action);
+          this.utilities.openSnackBar(error, action);
           return Promise.reject(err);
         });
     }
@@ -1848,10 +1869,10 @@ export class DataService {
           }
         ).catch(err => {
           console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
+          const error: ErrorResponse = err.error;
+          console.log(err.error);
           const action = 'close';
-          this.utilities.openSnackBar(message, action);
+          this.utilities.openSnackBar(error, action);
           return Promise.reject(err);
         });
     }
@@ -1869,10 +1890,10 @@ export class DataService {
           }
         ).catch(err => {
           console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
+          const error: ErrorResponse = err.error;
+          console.log(err.error);
           const action = 'close';
-          this.utilities.openSnackBar(message, action);
+          this.utilities.openSnackBar(error, action);
           return Promise.reject(err);
         });
     }
@@ -1890,10 +1911,10 @@ export class DataService {
           }
         ).catch(err => {
           console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
+          const error: ErrorResponse = err.error;
+          console.log(err.error);
           const action = 'close';
-          this.utilities.openSnackBar(message, action);
+          this.utilities.openSnackBar(error, action);
           return Promise.reject(err);
         });
     }
@@ -1911,10 +1932,10 @@ export class DataService {
           }
         ).catch(err => {
           console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
+          const error: ErrorResponse = err.error;
+          console.log(err.error);
           const action = 'close';
-          this.utilities.openSnackBar(message, action);
+          this.utilities.openSnackBar(error, action);
           return Promise.reject(err);
         });
     }
@@ -1933,10 +1954,10 @@ export class DataService {
           }
         ).catch(err => {
           console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
+          const error: ErrorResponse = err.error;
+          console.log(err.error);
           const action = 'close';
-          this.utilities.openSnackBar(message, action);
+          this.utilities.openSnackBar(error, action);
           return Promise.reject(err);
         });
     }
@@ -1955,10 +1976,10 @@ export class DataService {
           }
         ).catch(err => {
           console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
+          const error: ErrorResponse = err.error;
+          console.log(err.error);
           const action = 'close';
-          this.utilities.openSnackBar(message, action);
+          this.utilities.openSnackBar(error, action);
           return Promise.reject(err);
         });
     }
@@ -1977,10 +1998,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
+          const error: ErrorResponse = err.error;
+          console.log(err.error);
           const action = 'close';
-          this.utilities.openSnackBar(message, action);
+          this.utilities.openSnackBar(error, action);
           return Promise.reject(err);
         });
     }
@@ -1997,10 +2018,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
+          const error: ErrorResponse = err.error;
+          console.log(err.error);
           const action = 'close';
-          this.utilities.openSnackBar(message, action);
+          this.utilities.openSnackBar(error, action);
           return Promise.reject(err);
         });
     }
@@ -2017,10 +2038,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
+          const error: ErrorResponse = err.error;
+          console.log(err.error);
           const action = 'close';
-          this.utilities.openSnackBar(message, action);
+          this.utilities.openSnackBar(error, action);
           return Promise.reject(err);
         });
     }
@@ -2037,10 +2058,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
+          const error: ErrorResponse = err.error;
+          console.log(err.error);
           const action = 'close';
-          this.utilities.openSnackBar(message, action);
+          this.utilities.openSnackBar(error, action);
           return Promise.reject(err);
         });
     }
@@ -2059,10 +2080,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
+          const error: ErrorResponse = err.error;
+          console.log(err.error);
           const action = 'close';
-          this.utilities.openSnackBar(message, action);
+          this.utilities.openSnackBar(error, action);
           return Promise.reject(err);
         });
     }
@@ -2080,10 +2101,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
+          const error: ErrorResponse = err.error;
+          console.log(err.error);
           const action = 'close';
-          this.utilities.openSnackBar(message, action);
+          this.utilities.openSnackBar(error, action);
           return Promise.reject(err);
         });
     }
@@ -2100,10 +2121,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
+          const error: ErrorResponse = err.error;
+          console.log(err.error);
           const action = 'close';
-          this.utilities.openSnackBar(message, action);
+          this.utilities.openSnackBar(error, action);
           return Promise.reject(err);
         });
     }
@@ -2120,10 +2141,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
+          const error: ErrorResponse = err.error;
+          console.log(err.error);
           const action = 'close';
-          this.utilities.openSnackBar(message, action);
+          this.utilities.openSnackBar(error, action);
           return Promise.reject(err);
         });
     }
@@ -2140,10 +2161,10 @@ export class DataService {
         })
         .catch(err => {
           console.log(err);
-          const message: string = err.error +
-            ' ' + err.message;
+          const error: ErrorResponse = err.error;
+          console.log(err.error);
           const action = 'close';
-          this.utilities.openSnackBar(message, action);
+          this.utilities.openSnackBar(error, action);
           return Promise.reject(err);
         });
     }
@@ -2159,10 +2180,10 @@ export class DataService {
       })
       .catch(err => {
         console.log(err);
-        const message: string = err.error +
-          ' ' + err.message;
+        const error: ErrorResponse = err.error;
+        console.log(err.error);
         const action = 'close';
-        this.utilities.openSnackBar(message, action);
+        this.utilities.openSnackBar(error, action);
       });
   }
 

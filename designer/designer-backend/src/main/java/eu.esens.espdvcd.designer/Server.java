@@ -73,7 +73,7 @@ public class Server {
             response.type("application/json");
             return JsonUtil.toJson(Errors.standardError(
                     500,
-                    "An internal error has occured. Please check your inputs. If this keeps happening, contact the server administrator."));
+                    "The ESPD tool is temporarily out of service"));
         });
 
         LOGGER.info("Starting endpoint configuration");
