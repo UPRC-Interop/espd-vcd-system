@@ -14,6 +14,16 @@
     <xsl:import href="../html/date.xsl"/>
     <xsl:import href="../propertyreader/property_reader.xsl"/>
 
+    <xsl:template name="searchForTenderingCriterionSectionByArticle">
+        <xsl:param name="article"/>
+
+        <xsl:variable name="articlesInCriterionEspdV1" select="//ccvV1:Criterion[contains(./ccvV1:LegislationReference/ccv-cbcV1:Article, $article) and not(./cbcV1:TypeCode = 'CRITERION.EXCLUSION.NATIONAL.OTHER')]" />
+        <xsl:variable name="articlesInCriterionEspdV2" select="//cac:TenderingCriterion[contains(./cac:Legislation/cbc:Article, $article) and not(./cbc:CriterionTypeCode = 'CRITERION.EXCLUSION.NATIONAL.OTHER')]" />
+        <xsl:for-each select="$articlesInCriterionEspdV1 | $articlesInCriterionEspdV2">
+            <xsl:value-of select="current()"/>
+        </xsl:for-each>
+    </xsl:template>
+
     <xsl:template name="tenderingCriterionSection">
         <xsl:param name="article"/>
 
@@ -23,6 +33,17 @@
             <xsl:apply-templates select="current()"/>
         </xsl:for-each>
     </xsl:template>
+
+    <xsl:template name="SearchForTenderingCriterionSectionByCriterionTypeCode">
+        <xsl:param name="criterionTypeCode"/>
+
+        <xsl:variable name="typeCodesEspdV2" select="//cac:TenderingCriterion[starts-with(./cbc:CriterionTypeCode, $criterionTypeCode)]" />
+        <xsl:variable name="typeCodesEspdV1" select="//ccvV1:Criterion[starts-with(./cbcV1:TypeCode, $criterionTypeCode)]" />
+        <xsl:for-each select="$typeCodesEspdV1 | $typeCodesEspdV2">
+            <xsl:value-of select="current()"/>
+        </xsl:for-each>
+    </xsl:template>
+
     <xsl:template name="tenderingCriterionSectionByCriterionTypeCode">
         <xsl:param name="criterionTypeCode"/>
 
