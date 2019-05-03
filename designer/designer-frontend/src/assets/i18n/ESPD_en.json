@@ -617,5 +617,12 @@
    "espd.part4.crit.explain.supply.contracts.environmental.law":"If not, please explain why and state which other means of proof can be provided:",
    "espd.crit.please.describe": "Please describe them",
    "espd.part5.reduction.hint": "Please select the following checkbox for restricted procedures, competitive procedures with negotiation, competitive dialogue procedures and innovation partnerships only, it doesn't concern open procedures",
-  "espd.part1.official.journal.alert2": " "
+   "espd.part1.official.journal.alert2": " ",
+   "espd.part2.if.proc.reserved.main": "EO is a sheltered workshop",
+   "espd.part2.eo.approved.cert.main": "EO registered in a PQS",
+   "espd.part2.is.eo.proc.together.main": "EO together with others",
+   "espd.part2.eo.rely.other.entities.main": "Relied on entities",
+   "espd.part2.information.subcontractors.main": "Not relied on entities",
+   "espd.part2.lots.concerned.main": "Lots the EO tenders to",
+   "espd.part5.title.eo.declares.that.main": "Reduction of the number of qualified candidates"
 }

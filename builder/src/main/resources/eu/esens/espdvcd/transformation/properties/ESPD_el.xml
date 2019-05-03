@@ -619,4 +619,11 @@
     <entry key="espd.crit.please.describe">Παρακαλώ περιγράψτε</entry>
     <entry key="espd.part5.reduction.hint">Επιλέξτε το παρακάτω πλαίσιο ελέγχου (checkbox) για κλειστές διαδικασίες, ανταγωνιστικές διαδικασίες με διαπραγμάτευση, διαδικασίες ανταγωνιστικού διαλόγου και συμπράξεις καινοτομίας μόνο, ήτοι δεν αφορά ανοιχτές διαδικασίες</entry>
     <entry key="espd.part1.official.journal.alert2">Στην περίπτωση που δεν απαιτείται δημοσίευση γνωστοποίησης στην Επίσημη Εφημερίδα της Ευρωπαϊκής Ένωσης παρακαλείστε να παράσχετε άλλες πληροφορίες με τις οποίες θα είναι δυνατή η αδιαμφισβήτητη ταυτοποίηση της διαδικασίας σύναψης δημόσιας σύμβασης.</entry>
+    <entry key="espd.part2.if.proc.reserved.main">Ο ΟΦ αποτελεί προστατευόμενο εργαστήριο</entry>
+    <entry key="espd.part2.eo.approved.cert.main">Ο ΟΦ είναι εγγεγραμμένος σε Εθνικό Σύστημα (Προ)Επιλογής</entry>
+    <entry key="espd.part2.is.eo.proc.together.main">O ΟΦ συμμετάσχει στη διαδικασία μαζί με άλλους Οικονομικούς Φορείς</entry>
+    <entry key="espd.part2.eo.rely.other.entities.main">Βασίζεται σε ικανότητες άλλων οντοτήτων</entry>
+    <entry key="espd.part2.information.subcontractors.main">Δεν βασίζεται σε ικανότητες άλλων οντοτήτων</entry>
+    <entry key="espd.part2.lots.concerned.main">Τμήματα που συμμετάσχει ο ΟΦ</entry>
+    <entry key="espd.part5.title.eo.declares.that.main">Περιορισμός του αριθμού των (προ)επιλεγμένων υποψηφίων</entry>
 </properties>

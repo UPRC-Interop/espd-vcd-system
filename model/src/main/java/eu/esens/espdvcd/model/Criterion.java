@@ -18,6 +18,7 @@ package eu.esens.espdvcd.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import eu.esens.espdvcd.codelist.enums.CriterionTypeEnum;
 import eu.esens.espdvcd.codelist.enums.internal.CriterionPropertyKey;
+import eu.esens.espdvcd.codelist.enums.internal.PropertyKeyConfigEnum;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
 
@@ -246,7 +247,12 @@ public class Criterion implements Serializable {
     }
 
     public String getName() {
-        return useKeyAsValue ? getPropertyKeyOrNull(CriterionPropertyKey.NAME) : name;
+        if (useKeyAsValue) {
+            String pk = getPropertyKeyOrNull(CriterionPropertyKey.NAME);
+            return pk != null ? pk : PropertyKeyConfigEnum.getInstance().getCriterionNamePropertyKey(ID);
+        }
+        return name;
+        // return useKeyAsValue ? getPropertyKeyOrNull(CriterionPropertyKey.NAME) : name;
     }
 
     public void setName(String name) {
@@ -254,7 +260,12 @@ public class Criterion implements Serializable {
     }
 
     public String getDescription() {
-        return useKeyAsValue ? getPropertyKeyOrNull(CriterionPropertyKey.DESCRIPTION) : description;
+        if (useKeyAsValue) {
+            String pk = getPropertyKeyOrNull(CriterionPropertyKey.DESCRIPTION);
+            return pk != null ? pk : PropertyKeyConfigEnum.getInstance().getCriterionDescriptionPropertyKey(ID);
+        }
+        return description;
+        // return useKeyAsValue ? getPropertyKeyOrNull(CriterionPropertyKey.DESCRIPTION) : description;
     }
 
     public void setDescription(String description) {
@@ -312,7 +323,7 @@ public class Criterion implements Serializable {
     }
 
     public String getPropertyKeyOrNull(CriterionPropertyKey key) {
-        return propertyKeyMap.get(key.getCode().getValue());
+        return getPropertyKeyMap().get(key.getCode().getValue());
     }
 
     public List<Evidence> getEvidenceList() {

@@ -19,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import eu.esens.espdvcd.codelist.enums.RequirementTypeEnum;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.codelist.enums.internal.PropertyKeyCodeEnum;
+import eu.esens.espdvcd.codelist.enums.internal.PropertyKeyConfigEnum;
 import eu.esens.espdvcd.model.requirement.response.Response;
 
 import javax.validation.constraints.NotNull;
@@ -157,7 +158,9 @@ public class RequestRequirement implements Requirement {
                 && responseDataType != ResponseTypeEnum.EVIDENCE_IDENTIFIER) {
 
             if (useKeyAsValue && getPropertyKeyOrNull() != null) {
-                return getPropertyKeyOrNull();
+                String pk = getPropertyKeyOrNull();
+                return pk != null ? pk : PropertyKeyConfigEnum.getInstance().getRequirementDescriptionPropertyKey(description).
+                        replaceAll("\\?", ""); // workaround in oder to deal with ? special char
             }
         }
 

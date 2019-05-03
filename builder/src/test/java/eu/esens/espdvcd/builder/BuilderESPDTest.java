@@ -570,4 +570,23 @@ public class BuilderESPDTest {
         FileUtils.copyInputStreamToFile(pdfStream, targetFile);
     }
 
+    @Ignore
+    @Test
+    public void testPDFDocumentBuilderV1ForResponse() throws Exception {
+        ESPDResponse espdResponse = BuilderFactory.EDM_V1
+                .createRegulatedModelBuilder()
+                .importFrom(BuilderESPDTest.class.getResourceAsStream("/artefacts/regulated/v1/ESPDResponse_DA_Test-1.0.2-v1.0.xml"))
+                .createESPDResponse();
+
+        PDFDocumentBuilderV1 pdfDocumentBuilderV1 = BuilderFactory.EDM_V1
+                .createPDFDocumentBuilderFor(espdResponse);
+
+        // System.out.println(pdfDocumentBuilderV1.theXML);
+
+        TransformationService transformationService = new TransformationService();
+        InputStream pdfStream = transformationService.createPdfStream(new StreamSource(new ByteArrayInputStream(pdfDocumentBuilderV1.getAsString().getBytes(StandardCharsets.UTF_8))), EULanguageCodeEnum.EL);
+        File targetFile = new File("D:\\Downloads\\espd-response-102.pdf");
+        FileUtils.copyInputStreamToFile(pdfStream, targetFile);
+    }
+
 }
