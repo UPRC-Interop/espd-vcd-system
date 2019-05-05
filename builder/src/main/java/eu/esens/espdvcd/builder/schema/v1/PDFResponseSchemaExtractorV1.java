@@ -15,10 +15,15 @@
  */
 package eu.esens.espdvcd.builder.schema.v1;
 
+import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.Criterion;
 import eu.esens.espdvcd.model.requirement.Requirement;
+import eu.esens.espdvcd.model.requirement.response.PercentageResponse;
+import eu.esens.espdvcd.model.requirement.response.Response;
 import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.CriterionType;
 import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.RequirementType;
+import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.ResponseType;
+import eu.espd.schema.v1.commonbasiccomponents_2.PercentType;
 
 public class PDFResponseSchemaExtractorV1 extends ESPDResponseSchemaExtractorV1 {
 
@@ -32,6 +37,20 @@ public class PDFResponseSchemaExtractorV1 extends ESPDResponseSchemaExtractorV1 
     public RequirementType extractRequirementType(Requirement r) {
         r.setKeyAsResponseValue(true);
         return super.extractRequirementType(r);
+    }
+
+    @Override
+    protected ResponseType extractResponse(Response response, ResponseTypeEnum respType) {
+
+        ResponseType theRespType = super.extractResponse(response, respType);
+
+        if (respType == ResponseTypeEnum.PERCENTAGE && theRespType != null &&
+                ((PercentageResponse) response).getPercentage() != null) {
+            theRespType.setPercent(new PercentType());
+            theRespType.getPercent().setValue(((PercentageResponse) response).getPercentage());
+        }
+
+        return theRespType;
     }
 
 }

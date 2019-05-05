@@ -476,7 +476,7 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
         return reqType;
     }
 
-    private TenderingCriterionResponseType extractTenderingCriterionResponse(Response response,
+    protected TenderingCriterionResponseType extractTenderingCriterionResponse(Response response,
                                                                              ResponseTypeEnum respType) {
 
         TenderingCriterionResponseType tcrType = new TenderingCriterionResponseType();

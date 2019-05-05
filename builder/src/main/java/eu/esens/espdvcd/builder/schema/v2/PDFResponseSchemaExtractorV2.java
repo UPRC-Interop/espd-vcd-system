@@ -15,9 +15,13 @@
  */
 package eu.esens.espdvcd.builder.schema.v2;
 
+import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.model.Criterion;
 import eu.esens.espdvcd.model.requirement.Requirement;
+import eu.esens.espdvcd.model.requirement.response.PercentageResponse;
+import eu.esens.espdvcd.model.requirement.response.Response;
 import eu.espd.schema.v2.v210.commonaggregate.TenderingCriterionPropertyType;
+import eu.espd.schema.v2.v210.commonaggregate.TenderingCriterionResponseType;
 import eu.espd.schema.v2.v210.commonaggregate.TenderingCriterionType;
 
 public class PDFResponseSchemaExtractorV2 extends ESPDResponseSchemaExtractorV2 {
@@ -32,6 +36,20 @@ public class PDFResponseSchemaExtractorV2 extends ESPDResponseSchemaExtractorV2 
     public TenderingCriterionPropertyType extractTenderingCriterionPropertyType(Requirement rq) {
         rq.setKeyAsResponseValue(true);
         return super.extractTenderingCriterionPropertyType(rq);
+    }
+
+    @Override
+    protected TenderingCriterionResponseType extractTenderingCriterionResponse(Response response, ResponseTypeEnum respType) {
+
+        TenderingCriterionResponseType theRespType = super.extractTenderingCriterionResponse(response, respType);
+
+        if (respType == ResponseTypeEnum.PERCENTAGE && theRespType != null) {
+            theRespType.getResponseValue().get(0).getResponseQuantity()
+                    .setValue(((PercentageResponse) response)
+                            .getPercentage());
+        }
+
+        return theRespType;
     }
 
 }
