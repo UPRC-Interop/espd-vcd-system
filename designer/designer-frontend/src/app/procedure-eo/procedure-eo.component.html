@@ -348,7 +348,7 @@
           <form [formGroup]="dataService.eoRelatedACriteriaForm" #form="ngForm">
             <div class="eoRelatedCriteria" *ngFor="let cr of dataService.eoRelatedACriteria; let i=index">
               <mat-card>
-                <h4>{{cr.propertyKeyMap.pk1 | translate}}</h4>
+                <h4>{{cr.propertyKeyMap.pk2 | translate}}</h4>
                 <div class="answer">
                   <app-criterion [criterion]="cr" [form]="dataService.eoRelatedACriteriaForm.controls" [indicator]="true"></app-criterion>
                 </div>
@@ -361,7 +361,7 @@
           <form [formGroup]="dataService.eoLotCriterionForm">
             <div class="eoRelatedCriteria" *ngFor="let cr of dataService.eoLotCriterion; let i=index">
               <mat-card>
-                <h4>{{cr.propertyKeyMap.pk1 | translate}}</h4>
+                <h4>{{cr.propertyKeyMap.pk2 | translate}}</h4>
                 <div class="answer">
                   <app-criterion [criterion]="cr" [form]="dataService.eoLotCriterionForm.controls" [indicator]="true"></app-criterion>
                 </div>
@@ -482,7 +482,7 @@
         <ng-container *ngIf='dataService.eoRelatedCCriteriaForm!=null'>
           <form [formGroup]="dataService.eoRelatedCCriteriaForm" #form="ngForm">
             <div class="eoRelatedCriteria" *ngFor="let cr of dataService.eoRelatedCCriteria; let i=index">
-              <span>{{cr.propertyKeyMap.pk1 | translate}}</span>
+              <span>{{cr.propertyKeyMap.pk2 | translate}}</span>
               <div class="answer">
                 <app-criterion [criterion]="cr" [form]="dataService.eoRelatedCCriteriaForm.controls" [indicator]="true"></app-criterion>
               </div>
@@ -499,7 +499,7 @@
         <ng-container *ngIf='dataService.eoRelatedDCriteriaForm!=null'>
           <form [formGroup]="dataService.eoRelatedDCriteriaForm" #form="ngForm">
             <div class="eoRelatedCriteria" *ngFor="let cr of dataService.eoRelatedDCriteria; let i=index">
-              <span>{{cr.propertyKeyMap.pk1 | translate}}</span>
+              <span>{{cr.propertyKeyMap.pk2 | translate}}</span>
               <div class="answer">
                 <app-criterion [criterion]="cr" [form]="dataService.eoRelatedDCriteriaForm.controls" [indicator]="true"></app-criterion>
               </div>
