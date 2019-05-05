@@ -155,6 +155,9 @@
                                     <xsl:call-template name="SearchForTenderingCriterionSectionByCriterionTypeCode">
                                         <xsl:with-param name="criterionTypeCode"  select="'CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY.MANAGEMENT.'"/>
                                     </xsl:call-template>
+                                    <xsl:call-template name="SearchForTenderingCriterionSectionByCriterionTypeCode">
+                                        <xsl:with-param name="criterionTypeCode"  select="'CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY.CERTIFICATES.QUALITY_ASSURANCE.QA_INSTITUTES_CERTIFICATE'"/>
+                                    </xsl:call-template>
                                 </xsl:variable>
                                 <xsl:if test="$isChapterCExist != ''">
                                     <xsl:call-template name="chapterOne">
@@ -181,6 +184,10 @@
                                             <xsl:call-template name="tenderingCriterionSectionByCriterionTypeCode">
                                                 <xsl:with-param name="criterionTypeCode"  select="'CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY.MANAGEMENT.'"/>
                                             </xsl:call-template>
+                                            <!-- GES-111 -->
+                                            <xsl:call-template name="tenderingCriterionSectionByCriterionTypeCode">
+                                                <xsl:with-param name="criterionTypeCode"  select="'CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY.CERTIFICATES.QUALITY_ASSURANCE.QA_INSTITUTES_CERTIFICATE'"/>
+                                            </xsl:call-template>
                                         </xsl:with-param>
                                     </xsl:call-template>
                                 </xsl:if>
@@ -188,7 +195,10 @@
                                 <!-- Chapter D: Certificate -->
                                 <xsl:variable name="isChapterDExist">
                                     <xsl:call-template name="SearchForTenderingCriterionSectionByCriterionTypeCode">
-                                        <xsl:with-param name="criterionTypeCode"  select="'CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY.CERTIFICATES.'"/>
+                                        <xsl:with-param name="criterionTypeCode"  select="'CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY.CERTIFICATES.QUALITY_ASSURANCE.QA_INDEPENDENT_CERTIFICATE'"/>
+                                    </xsl:call-template>
+                                    <xsl:call-template name="SearchForTenderingCriterionSectionByCriterionTypeCode">
+                                        <xsl:with-param name="criterionTypeCode"  select="'CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY.CERTIFICATES.ENVIRONMENTAL_MANAGEMENT.ENV_INDEPENDENT_CERTIFICATE'"/>
                                     </xsl:call-template>
                                 </xsl:variable>
                                 <xsl:if test="$isChapterDExist != ''">
@@ -207,8 +217,12 @@
                                                     </xsl:call-template>
                                                 </xsl:with-param>
                                             </xsl:call-template>
+                                            <!-- GES-111 -->
                                             <xsl:call-template name="tenderingCriterionSectionByCriterionTypeCode">
-                                                <xsl:with-param name="criterionTypeCode"  select="'CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY.CERTIFICATES.'"/>
+                                                <xsl:with-param name="criterionTypeCode"  select="'CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY.CERTIFICATES.QUALITY_ASSURANCE.QA_INDEPENDENT_CERTIFICATE'"/>
+                                            </xsl:call-template>
+                                            <xsl:call-template name="tenderingCriterionSectionByCriterionTypeCode">
+                                                <xsl:with-param name="criterionTypeCode"  select="'CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY.CERTIFICATES.ENVIRONMENTAL_MANAGEMENT.ENV_INDEPENDENT_CERTIFICATE'"/>
                                             </xsl:call-template>
                                         </xsl:with-param>
                                     </xsl:call-template>
