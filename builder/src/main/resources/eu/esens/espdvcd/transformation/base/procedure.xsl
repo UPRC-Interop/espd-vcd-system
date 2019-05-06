@@ -10,10 +10,6 @@
     <xsl:template name="procedureSection">
         <xsl:call-template name="partOne"/>
 
-        <xsl:if test=".//*[local-name() = 'EconomicOperatorParty']">
-            <xsl:call-template name="partTwo"/>
-        </xsl:if>
-
         <xsl:choose>
             <xsl:when test=".//*[local-name() = 'EconomicOperatorParty']">
                 <xsl:call-template name="partTwo"/>

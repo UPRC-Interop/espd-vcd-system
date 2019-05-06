@@ -585,7 +585,8 @@ public class ESPDResponseModelExtractor implements ModelExtractor {
             case PERCENTAGE:
                 PercentageResponse pResp = new PercentageResponse();
                 if (res.getPercent() != null && res.getPercent().getValue() != null) {
-                    pResp.setPercentage(res.getPercent().getValue());
+                    pResp.setPercentage(res.getPercent().getValue()
+                            .multiply(BigDecimal.valueOf(100))); // ESPD-46
                 }
                 return pResp;
 
