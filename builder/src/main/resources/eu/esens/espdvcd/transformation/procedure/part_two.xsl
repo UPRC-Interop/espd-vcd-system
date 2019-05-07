@@ -240,10 +240,9 @@
                 <xsl:when test="//*[local-name() = 'EconomicOperatorParty']/*[local-name() = 'Party']/*[local-name() = 'IndustryClassificationCode']/text() = 'SME'">
                     <xsl:value-of select="'true'"/>
                 </xsl:when>
-                <!-- <xsl:when test="//*[local-name() = 'EconomicOperatorParty']/*[local-name() = 'SMEIndicator']/text() = 'true'">
                 <xsl:when test="//espd-cacV1:EconomicOperatorParty/espd-cbc:SMEIndicator/text() = 'true'">
                     <xsl:value-of select="'true'"/>
-                </xsl:when> -->
+                </xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of select="'false'"/>
                 </xsl:otherwise>
