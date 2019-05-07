@@ -163,7 +163,7 @@
                             <xsl:when test="cbc:ValueDataTypeCode = 'QUANTITY_INTEGER' or @responseDataType = 'QUANTITY_INTEGER'">
                                 <xsl:call-template name="quantityIntegerValue" />
                             </xsl:when>
-                            <xsl:when test="cbc:ValueDataTypeCode = 'QUANTITY_YEAR'">
+                            <xsl:when test="cbc:ValueDataTypeCode = 'QUANTITY_YEAR' or @responseDataType = 'QUANTITY_YEAR'">
                                 <xsl:call-template name="quantityIntegerValue" />
                             </xsl:when>
                             <xsl:when test="cbc:ValueDataTypeCode = 'PERIOD'">
