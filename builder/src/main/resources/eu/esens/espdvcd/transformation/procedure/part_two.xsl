@@ -66,7 +66,7 @@
 
     <xsl:template name="powerOfAttorney">
 
-        <xsl:for-each select="(//*[local-name() = 'EconomicOperatorParty']/*[local-name() = 'Party']/*[local-name() = 'PowerOfAttorney']) | (//espd-cacV1:EconomicOperatorParty/espd-cacV1:RepresentativeNaturalPerson/cacV1:PowerOfAttorney)">
+        <xsl:for-each select="(//*[local-name() = 'EconomicOperatorParty']/*[local-name() = 'Party']/*[local-name() = 'PowerOfAttorney']) | (//espd-cacV1:EconomicOperatorParty/espd-cacV1:RepresentativeNaturalPerson)">
 
             <xsl:call-template name="chapterOne">
                 <xsl:with-param name="chapter-number"/>
@@ -79,57 +79,68 @@
                 <xsl:with-param name="chapter-content">
 
                     <xsl:call-template name="sectionLabelForValueOfNode">
-                        <xsl:with-param name="node" select="*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[local-name() = 'FirstName']" />
+                        <xsl:with-param name="node" select="*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[local-name() = 'FirstName']
+                        | *[local-name() = 'PowerOfAttorney']/*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[local-name() = 'FirstName']" />
                         <xsl:with-param name="propertyKey" select="'espd.part2.first.name'"/>
                     </xsl:call-template>
 
                     <xsl:call-template name="sectionLabelForValueOfNode">
-                        <xsl:with-param name="node" select="*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[local-name() = 'FamilyName']" />
+                        <xsl:with-param name="node" select="*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[local-name() = 'FamilyName']
+                        | *[local-name() = 'PowerOfAttorney']/*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[local-name() = 'FamilyName']" />
                         <xsl:with-param name="propertyKey" select="'espd.part2.last.name'"/>
                     </xsl:call-template>
 
                     <xsl:call-template name="sectionLabelForValueOfNode">
-                        <xsl:with-param name="node" select="*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[local-name() = 'BirthDate']" />
+                        <xsl:with-param name="node" select="*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[local-name() = 'BirthDate']
+                        | *[local-name() = 'PowerOfAttorney']/*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[local-name() = 'BirthDate']" />
                         <xsl:with-param name="propertyKey" select="'espd.part2.birth.date'"/>
                     </xsl:call-template>
 
                     <xsl:call-template name="sectionLabelForValueOfNode">
-                        <xsl:with-param name="node" select="*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[local-name() = 'BirthplaceName']" />
+                        <xsl:with-param name="node" select="*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[local-name() = 'BirthplaceName']
+                        | *[local-name() = 'PowerOfAttorney']/*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[local-name() = 'BirthplaceName']" />
                         <xsl:with-param name="propertyKey" select="'espd.part2.birth.place'"/>
                     </xsl:call-template>
 
                     <xsl:call-template name="sectionLabelForValueOfNode">
-                        <xsl:with-param name="node" select="*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[local-name() = 'ResidenceAddress']/*[local-name() = 'StreetName']" />
+                        <xsl:with-param name="node" select="*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[local-name() = 'ResidenceAddress']/*[local-name() = 'StreetName']
+                        | *[local-name() = 'PowerOfAttorney']/*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[local-name() = 'ResidenceAddress']/*[local-name() = 'StreetName']" />
                         <xsl:with-param name="propertyKey" select="'espd.part1.street.and. num'"/>
                     </xsl:call-template>
 
                     <xsl:call-template name="sectionLabelForValueOfNode">
-                        <xsl:with-param name="node" select="*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[local-name() = 'ResidenceAddress']/*[local-name() = 'PostalZone']" />
+                        <xsl:with-param name="node" select="*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[local-name() = 'ResidenceAddress']/*[local-name() = 'PostalZone']
+                        | *[local-name() = 'PowerOfAttorney']/*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[local-name() = 'ResidenceAddress']/*[local-name() = 'PostalZone']" />
                         <xsl:with-param name="propertyKey" select="'espd.part1.postcode'"/>
                     </xsl:call-template>
 
                     <xsl:call-template name="sectionLabelForValueOfNode">
-                        <xsl:with-param name="node" select="*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[local-name() = 'ResidenceAddress']/*[local-name() = 'CityName']" />
+                        <xsl:with-param name="node" select="*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[local-name() = 'ResidenceAddress']/*[local-name() = 'CityName']
+                        | *[local-name() = 'PowerOfAttorney']/*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[local-name() = 'ResidenceAddress']/*[local-name() = 'CityName']" />
                         <xsl:with-param name="propertyKey" select="'espd.part1.city'"/>
                     </xsl:call-template>
 
                     <xsl:call-template name="sectionLabelForValueOfNode">
-                        <xsl:with-param name="node" select="*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[local-name() = 'ResidenceAddress']/*[local-name() = 'Country']/*[local-name() = 'IdentificationCode']" />
+                        <xsl:with-param name="node" select="*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[local-name() = 'ResidenceAddress']/*[local-name() = 'Country']/*[local-name() = 'IdentificationCode']
+                        | *[local-name() = 'PowerOfAttorney']/*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[local-name() = 'ResidenceAddress']/*[local-name() = 'Country']/*[local-name() = 'IdentificationCode']" />
                         <xsl:with-param name="propertyKey" select="'espd.part1.country'"/>
                     </xsl:call-template>
 
                     <xsl:call-template name="sectionLabelForValueOfNode">
-                        <xsl:with-param name="node" select="*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[local-name() = 'Contact']/*[local-name() = 'Telephone']" />
+                        <xsl:with-param name="node" select="*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[local-name() = 'Contact']/*[local-name() = 'Telephone']
+                        | *[local-name() = 'PowerOfAttorney']/*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[local-name() = 'Contact']/*[local-name() = 'Telephone']" />
                         <xsl:with-param name="propertyKey" select="'espd.part2.telephone'"/>
                     </xsl:call-template>
 
                     <xsl:call-template name="sectionLabelForValueOfNode">
-                        <xsl:with-param name="node" select="*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[local-name() = 'Contact']/*[local-name() = 'ElectronicMail']" />
+                        <xsl:with-param name="node" select="*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[local-name() = 'Contact']/*[local-name() = 'ElectronicMail']
+                        | *[local-name() = 'PowerOfAttorney']/*[local-name() = 'AgentParty']/*[local-name() = 'Person']/*[local-name() = 'Contact']/*[local-name() = 'ElectronicMail']" />
                         <xsl:with-param name="propertyKey" select="'espd.part2.email'"/>
                     </xsl:call-template>
 
                     <xsl:call-template name="sectionLabelForValueOfNode">
-                        <xsl:with-param name="node" select="*[local-name() = 'Description']" />
+                        <!-- <xsl:with-param name="node" select="*[local-name() = 'Description'] | //espd-cacV1:EconomicOperatorParty/espd-cacV1:RepresentativeNaturalPerson/espd-cbc:NaturalPersonRoleDescription" /> -->
+                        <xsl:with-param name="node" select="*[local-name() = 'Description'] | *[local-name() = 'NaturalPersonRoleDescription']" />
                         <xsl:with-param name="propertyKey" select="'espd.part2.pos.act.in.capacity'"/>
                     </xsl:call-template>
 
