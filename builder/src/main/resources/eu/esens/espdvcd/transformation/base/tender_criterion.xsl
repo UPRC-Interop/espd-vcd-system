@@ -157,6 +157,9 @@
                             <xsl:when test="cbc:ValueDataTypeCode = 'PERCENTAGE' or @responseDataType = 'PERCENTAGE'">
                                 <xsl:call-template name="percentageValue" />
                             </xsl:when>
+                            <xsl:when test="cbc:ValueDataTypeCode = 'QUANTITY' or @responseDataType = 'QUANTITY'">
+                                <xsl:call-template name="quantityIntegerValue" />
+                            </xsl:when>
                             <xsl:when test="cbc:ValueDataTypeCode = 'QUANTITY_INTEGER' or @responseDataType = 'QUANTITY_INTEGER'">
                                 <xsl:call-template name="quantityIntegerValue" />
                             </xsl:when>
@@ -308,7 +311,7 @@
         <xsl:variable name="tenderingCriterionResponse" select="//cac:TenderingCriterionResponse[./cbc:ValidatedCriterionPropertyID = current()/cbc:ID]"/>
 
         <xsl:call-template name="responseValueNode">
-            <xsl:with-param name="responseValueNode" select="$tenderingCriterionResponse/cac:ResponseValue/cbc:ResponseQuantity"/>
+            <xsl:with-param name="responseValueNode" select="$tenderingCriterionResponse/cac:ResponseValue/cbc:ResponseQuantity | ./ccvV1:Response/ubl-cbcV1:Quantity"/>
         </xsl:call-template>
     </xsl:template>
 
