@@ -1,7 +1,7 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
                 xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
-                xmlns:espd-cacV1="urn:grow:names:specification:ubl:schema:xsd:ESPD-CommonAggregateComponents-1">
+>
 <xsl:import href="../html/chapter.xsl"/>
     <xsl:import href="../html/structure.xsl"/>
     <xsl:import href="../html/chapter.xsl"/>
@@ -15,7 +15,7 @@
                 </xsl:call-template>
             </xsl:with-param>
             <xsl:with-param name="content">
-                <!-- <xsl:if test="//cac:EconomicOperatorParty"> -->
+                <xsl:if test="//cac:TenderingCriterion[./cbc:CriterionTypeCode = 'CRITERION.OTHER.EO_DATA.REDUCTION_OF_CANDIDATES']">
                     <xsl:call-template name="chapterOne">
                         <xsl:with-param name="chapter-number"/>
                         <xsl:with-param name="chapter-headline">
@@ -35,7 +35,7 @@
                             <xsl:apply-templates select="//cac:TenderingCriterion[./cbc:CriterionTypeCode = 'CRITERION.OTHER.EO_DATA.REDUCTION_OF_CANDIDATES']"/>
                         </xsl:with-param>
                     </xsl:call-template>
-                <!-- </xsl:if> -->
+                </xsl:if>
 
                 <xsl:call-template name="chapterOne">
                     <xsl:with-param name="chapter-number"/>
