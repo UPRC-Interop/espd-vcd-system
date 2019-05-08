@@ -61,6 +61,31 @@
                 </ns3:AgentParty>
             </ns3:PowerOfAttorney>
         </ns9:RepresentativeNaturalPerson>
+        <ns9:RepresentativeNaturalPerson>
+            <ns8:NaturalPersonRoleDescription>__EoRepresRole2</ns8:NaturalPersonRoleDescription>
+            <ns3:PowerOfAttorney>
+                <ns3:AgentParty>
+                    <ns3:Person>
+                        <FirstName>__EoRepresName2</FirstName>
+                        <FamilyName>__EoRepresFamName2</FamilyName>
+                        <BirthDate>2017-02-02</BirthDate>
+                        <BirthplaceName>__EoRepresBirthPlace2</BirthplaceName>
+                        <ns3:Contact>
+                            <Telephone>540923</Telephone>
+                            <ElectronicMail>__EoRepres2@eo.com</ElectronicMail>
+                        </ns3:Contact>
+                        <ns3:ResidenceAddress>
+                            <StreetName>__EoRepresStreet2</StreetName>
+                            <CityName>__EoRepresCity2</CityName>
+                            <PostalZone>54321</PostalZone>
+                            <ns3:Country>
+                                <IdentificationCode listID="CountryCodeIdentifier" listAgencyID="EU-COM-GROW" listName="CountryCodeIdentifier" listVersionID="1.0.2">GR</IdentificationCode>
+                            </ns3:Country>
+                        </ns3:ResidenceAddress>
+                    </ns3:Person>
+                </ns3:AgentParty>
+            </ns3:PowerOfAttorney>
+        </ns9:RepresentativeNaturalPerson>
         <ns3:Party>
             <WebsiteURI>www.eo.com</WebsiteURI>
             <ns3:PartyIdentification>
