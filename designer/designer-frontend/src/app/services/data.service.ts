@@ -472,6 +472,17 @@ export class DataService {
   finishEOSubmit(exportType: ExportType) {
 
     this.selectionEOSubmit(this.utilities.isSatisfiedALL);
+    this.CADetails.cacountry = this.selectedCountry;
+    // this.dataService.CADetails.receivedNoticeNumber = form.value.receivedNoticeNumber;
+    this.PostalAddress.countryCode = this.selectedCountry;
+    this.CADetails.postalAddress = this.PostalAddress;
+    this.CADetails.contactingDetails = this.ContactingDetails;
+
+    console.log(this.selectedEOCountry);
+
+    console.log(this.CADetails);
+    this.EODetails = this.EOForm.value;
+    console.log(this.EODetails);
 
     /* extract caRelated criteria, and eoLotTenderedCriterion */
     if (this.utilities.qualificationApplicationType === 'selfcontained') {
