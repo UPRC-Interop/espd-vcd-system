@@ -15,6 +15,7 @@
  */
 package eu.esens.espdvcd.designer.service;
 
+import com.typesafe.config.ConfigException;
 import eu.esens.espdvcd.builder.BuilderFactory;
 import eu.esens.espdvcd.builder.PDFDocumentBuilderV1;
 import eu.esens.espdvcd.builder.exception.BuilderException;
@@ -57,7 +58,7 @@ public enum ExportESPDV1Service implements ExportESPDService {
     }
 
     @Override
-    public InputStream exportESPDRequestAs(ESPDRequest model, EULanguageCodeEnum languageCodeEnum, ExportType exportType) throws ValidationException, JAXBException, IOException, SAXException, BuilderException {
+    public InputStream exportESPDRequestAs(ESPDRequest model, EULanguageCodeEnum languageCodeEnum, ExportType exportType) throws ValidationException, JAXBException, IOException, SAXException, BuilderException, ConfigException {
         Objects.requireNonNull(exportType);
         switch (exportType) {
             case XML:
@@ -72,7 +73,12 @@ public enum ExportESPDV1Service implements ExportESPDService {
                         .createESPDRequest();
                 PDFDocumentBuilderV1 pdfDocumentBuilderV1 = BuilderFactory.EDM_V1
                         .createPDFDocumentBuilderFor(importExportModel);
-                return transformationService.createPdfStream(new StreamSource(new ByteArrayInputStream(pdfDocumentBuilderV1.getAsString().getBytes(StandardCharsets.UTF_8))), languageCodeEnum);
+                return transformationService.createPdfStream(
+                        new StreamSource(
+                                new ByteArrayInputStream(
+                                        pdfDocumentBuilderV1
+                                                .getAsString()
+                                                .getBytes(StandardCharsets.UTF_8))), languageCodeEnum);
             case HTML:
                 return transformationService.createHtmlStream(new StreamSource(exportESPDRequest(model)), languageCodeEnum);
             default:

@@ -144,6 +144,10 @@ public class ExportESPDEndpoint extends Endpoint {
                                 rsp.status(406);
                                 rsp.type("application/json");
                                 return JsonUtil.toJson(Errors.notAcceptableError(e.getMessage()));
+                            } catch (ConfigException ex) {
+                                rsp.status(500);
+                                rsp.type("application/json");
+                                return JsonUtil.toJson(Errors.standardError(500, ex.getMessage()));
                             }
                         } else {
                             LOGGER.warning("Got unexpected content-type: " + rq.contentType());

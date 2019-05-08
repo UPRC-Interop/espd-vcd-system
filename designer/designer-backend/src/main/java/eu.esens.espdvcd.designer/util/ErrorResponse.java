@@ -48,7 +48,7 @@ public class ErrorResponse {
 
         //required params
         private int code;
-        private String message;
+        private String message = "An error has occured. Please contact support providing your ESPD in XML. More info: \n";
 
         //optional params
         private List<ValidationResult> validationResults;
@@ -59,7 +59,7 @@ public class ErrorResponse {
 
         ErrorBuilder(int code, String message) {
             this.code = code;
-            this.message = message;
+            this.message += message;
         }
 
         ErrorBuilder withValidationResults(List<ValidationResult>  validationResults) {
