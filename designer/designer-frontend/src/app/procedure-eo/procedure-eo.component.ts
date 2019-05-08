@@ -38,7 +38,7 @@ export class ProcedureEoComponent implements OnInit, BaseStep {
   @ViewChildren('form') forms: QueryList<NgForm>;
   @ViewChild('ojs') ojsForm: NgForm;
 
-  public EOForm: FormGroup;
+  // public EOForm: FormGroup;
 
   /* CPV chips */
   visible = true;
@@ -53,7 +53,7 @@ export class ProcedureEoComponent implements OnInit, BaseStep {
               public dialog: MatDialog, public utilities: UtilitiesService,
               private validationService: ValidationService,
               public codelist: CodelistService) {
-    this.EOForm = new FormGroup({
+    this.dataService.EOForm = new FormGroup({
       'name': new FormControl(this.dataService.EODetails.name),
       'smeIndicator': new FormControl(false),
       'employeeQuantity': new FormControl(),
@@ -79,7 +79,7 @@ export class ProcedureEoComponent implements OnInit, BaseStep {
       'webSiteURI': new FormControl(null, [UrlValidation]),
       'procurementProjectLot': new FormControl(0)
     });
-    this.dataService.EOForm = this.EOForm;
+    this.dataService.EOForm = this.dataService.EOForm;
 
   }
 
@@ -87,7 +87,7 @@ export class ProcedureEoComponent implements OnInit, BaseStep {
 
     // make EODetails and Natural Person forms non editable if user selects review ESPD
     if (this.dataService.isReadOnly()) {
-      this.EOForm.disable();
+      this.dataService.EOForm.disable();
     }
 
     /* Make Chips non editable when user is EO and is requirement, or when the artefact is being reviewed */
@@ -133,17 +133,17 @@ export class ProcedureEoComponent implements OnInit, BaseStep {
   }
 
   addPerson() {
-    const control = <FormArray>this.EOForm.controls['naturalPersons'];
+    const control = <FormArray>this.dataService.EOForm.controls['naturalPersons'];
     control.push(this.initNaturalPerson());
   }
 
   removePerson(i: number) {
-    const control = <FormArray>this.EOForm.controls['naturalPersons'];
+    const control = <FormArray>this.dataService.EOForm.controls['naturalPersons'];
     control.removeAt(i);
   }
 
   getNaturalPersonFormData() {
-    return <FormArray>this.EOForm.controls['naturalPersons'];
+    return <FormArray>this.dataService.EOForm.controls['naturalPersons'];
   }
 
 
