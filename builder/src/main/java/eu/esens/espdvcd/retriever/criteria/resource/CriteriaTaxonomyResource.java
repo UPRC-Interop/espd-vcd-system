@@ -88,7 +88,11 @@ public abstract class CriteriaTaxonomyResource implements CriteriaResource, Requ
         // find root RequirementGroup/s of that criterion from taxonomy
         final SelectableCriterion from = criterionMap.get(sc.getID());
 
-        if (from == null) {
+        if (sc.getID().equals("7e7db838-eeac-46d9-ab39-42927486f22d")) {
+            LOGGER.log(Level.INFO, "APPLYING MEETS THE OBJECTIVE V1 CRITERION WORKAROUND");
+            TaxonomyDataUtils.applyTaxonomyData(null, sc);
+            return;
+        } else if (from == null) {
             LOGGER.log(Level.SEVERE, "SC with ID " + sc.getID() + " cannot be found in rgMap");
             return;
         }

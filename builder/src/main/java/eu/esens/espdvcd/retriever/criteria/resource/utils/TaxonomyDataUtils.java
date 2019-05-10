@@ -1,12 +1,12 @@
 /**
  * Copyright 2016-2019 University of Piraeus Research Center
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,6 +15,8 @@
  */
 package eu.esens.espdvcd.retriever.criteria.resource.utils;
 
+import com.typesafe.config.ConfigException;
+import eu.esens.espdvcd.codelist.enums.internal.PropertyKeyConfigEnum;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
@@ -96,7 +98,15 @@ public class TaxonomyDataUtils {
                     , toRg                                  // to
                     , to.getID()
             ));
-
+        } else if (to != null &&
+                to.getID() != null &&
+                to.getID().equals("7e7db838-eeac-46d9-ab39-42927486f22d")) {
+            // MEETS THE OBJECTIVE V1
+            LOGGER.log(Level.INFO, "APPLYING TAXONOMY DATA FOR MEETS THE OBJECTIVE CRITERION");
+            to.getRequirementGroups().forEach(requirementGroup -> applyTaxonomyData(
+                    null,
+                    requirementGroup,
+                    null));
         } else {
             LOGGER.log(Level.SEVERE, "Error... Cardinalities failed been applied at Criterion level:" + to.getID());
         }
@@ -115,6 +125,7 @@ public class TaxonomyDataUtils {
                     , toRg                                  // to
                     , criterionId));
 
+
             // do the same for requirement/s
             to.getRequirements().stream()
                     .filter(toRq -> isRequirementBasicInfoNotNull(toRq))
@@ -123,9 +134,9 @@ public class TaxonomyDataUtils {
                                     .filter(fromRq -> isRequirementBasicInfoNotNull(fromRq)
                                             // && ArtefactUtils.clearAllWhitespaces(toRq.getDescription())
                                             // .equals(ArtefactUtils.clearAllWhitespaces(fromRq.getDescription()))
-                                            && toRq.getDescription().trim()
-                                            .equals(fromRq.getDescription().trim())
-                                            && toRq.getResponseDataType() == fromRq.getResponseDataType()
+                                            && toRq.getDescription().replace('?', ' ').trim()
+                                            .equalsIgnoreCase(fromRq.getDescription().replace('?', ' ').trim())
+//                                            && toRq.getResponseDataType() == fromRq.getResponseDataType()
                                             && toRq.getType() == fromRq.getType())
                                     .findFirst().orElse(null) // from
                             , toRq                                  // to
@@ -136,6 +147,16 @@ public class TaxonomyDataUtils {
             // requirement group type
             if (from.getType() != null) {
                 to.setType(from.getType());
+            }
+        } else if (to != null) {
+            try {
+                to.getRequirements().stream()
+                        .filter(TaxonomyDataUtils::isRequirementBasicInfoNotNull)
+                        .filter(rq -> rq.getPropertyKeyMap().isEmpty())
+                        .forEach(TaxonomyDataUtils::applyV1PropertyKeysFromConf);
+                System.out.println(to.getID());
+            } catch (ConfigException e) {
+                LOGGER.log(Level.SEVERE, e.getMessage());
             }
         } else {
             LOGGER.log(Level.SEVERE, "Error... Taxonomy data failed been applied at Requirement Group level:"
@@ -161,6 +182,8 @@ public class TaxonomyDataUtils {
             }
             // apply the property keys
             to.getPropertyKeyMap().putAll(from.getPropertyKeyMap());
+        } else if (to != null) {
+            applyV1PropertyKeysFromConf(to);
         } else {
             LOGGER.log(Level.SEVERE, "Error... Taxonomy data failed been applied at Requirement level:"
                     + to.getID() + ", "
@@ -175,6 +198,18 @@ public class TaxonomyDataUtils {
                 && rq.getDescription() != null
                 && rq.getResponseDataType() != null
                 && rq.getType() != null;
+    }
+
+    private static void applyV1PropertyKeysFromConf(Requirement rq) {
+        // apply v1 property keys from descriptions
+
+        // workaround for reserved characters
+        rq.getPropertyKeyMap().put("pk1", PropertyKeyConfigEnum.INSTANCE.getRequirementDescriptionPropertyKey(rq.getDescription()
+                .replace('?', ' ')
+                .replace(',', ' ')
+                .replace(':', ' ')
+                .replace('.', ' ')
+                .trim()));
     }
 
 }

@@ -73,7 +73,7 @@ public class Server {
             response.type("application/json");
             return JsonUtil.toJson(Errors.standardError(
                     500,
-                    "An unexpected error has occured. Please contact support providing your ESPD in XML."));
+                    "Unexpected error."));
         });
 
         LOGGER.info("Starting endpoint configuration");

@@ -45,6 +45,7 @@ public class PDFResponseSchemaExtractorV1 extends ESPDResponseSchemaExtractorV1 
         ResponseType theRespType = super.extractResponse(response, respType);
 
         if (respType == ResponseTypeEnum.PERCENTAGE && theRespType != null &&
+                response != null &&
                 ((PercentageResponse) response).getPercentage() != null) {
             theRespType.setPercent(new PercentType());
             theRespType.getPercent().setValue(((PercentageResponse) response).getPercentage());
