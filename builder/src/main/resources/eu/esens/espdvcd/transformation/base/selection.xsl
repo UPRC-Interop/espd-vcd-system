@@ -54,15 +54,21 @@
                                         </xsl:call-template>
                                     </xsl:with-param>
                                 </xsl:call-template>
-                                <xsl:call-template name="label">
-                                    <xsl:with-param name="label">
-                                        <xsl:call-template name="tenderingCriterionSectionByCriterionTypeCode">
-                                            <xsl:with-param name="criterionTypeCode"  select="'CRITERION.SELECTION.ALL'"/>
+                                <xsl:call-template name="paragraph">
+                                    <xsl:with-param name="value">
+                                        <xsl:call-template name="getESPDProperty">
+                                            <xsl:with-param name="key" select="'espd.gui.yes'"/>
                                         </xsl:call-template>
                                     </xsl:with-param>
                                 </xsl:call-template>
+                                <!--                                <xsl:call-template name="label">-->
+                                <!--                                    <xsl:with-param name="label">-->
+                                <!--                                        <xsl:call-template name="tenderingCriterionSectionByCriterionTypeCode">-->
+                                <!--                                            <xsl:with-param name="criterionTypeCode"  select="'CRITERION.SELECTION.ALL'"/>-->
+                                <!--                                        </xsl:call-template>-->
+                                <!--                                    </xsl:with-param>-->
+                                <!--                                </xsl:call-template>-->
                             </xsl:with-param>
-
                         </xsl:call-template>
                     </xsl:with-param>
                 </xsl:call-template>

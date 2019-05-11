@@ -72,7 +72,7 @@ public enum ExportESPDV1Service implements ExportESPDService {
                                         .getAsInputStream())
                         .createESPDRequest();
                 PDFDocumentBuilderV1 pdfDocumentBuilderV1 = BuilderFactory.EDM_V1
-                        .createPDFDocumentBuilderFor(importExportModel);
+                        .createPDFDocumentBuilderFor(finalizeBeforeExport(importExportModel));
                 return transformationService.createPdfStream(
                         new StreamSource(
                                 new ByteArrayInputStream(
@@ -110,7 +110,7 @@ public enum ExportESPDV1Service implements ExportESPDService {
                                         .getAsInputStream())
                         .createESPDResponse();
                 PDFDocumentBuilderV1 pdfDocumentBuilderV1 = BuilderFactory.EDM_V1
-                        .createPDFDocumentBuilderFor(importExportModel);
+                        .createPDFDocumentBuilderFor(finalizeBeforeExport(importExportModel));
                 return transformationService.createPdfStream(new StreamSource(new ByteArrayInputStream(pdfDocumentBuilderV1.getAsString().getBytes(StandardCharsets.UTF_8))), languageCodeEnum);
             case HTML:
                 return transformationService.createHtmlStream(new StreamSource(exportESPDResponse(model)), languageCodeEnum);
