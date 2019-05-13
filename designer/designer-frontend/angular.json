@@ -82,15 +82,15 @@
               ]
             },
             "snf-gsccp-dev": {
-              "optimization": false,
+              "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": false,
+              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": false,
+              "buildOptimizer": true,
               "subresourceIntegrity": true,
               "baseHref": "/gsccp_dev/",
               "fileReplacements": [
