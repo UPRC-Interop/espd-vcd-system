@@ -196,6 +196,24 @@ task buildWebAppDeploySnfDev(type: Exec) {
     }
 }
 
+task buildWebAppDeployGSCCPDev(type: Exec) {
+    dependsOn "npmInstallWebApp"
+    workingDir "$webappDir"
+    inputs.dir "$webappDir"
+//    group = BasePlugin.BUILD_GROUP
+    if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")) {
+        commandLine "ng.cmd", "build", "--configuration=snf-gsccp-dev"
+    } else {
+        commandLine "ng", "build", "--configuration=snf-gsccp-dev"
+    }
+    doLast {
+        copy {
+            from "$webappDir/dist"
+            into "$projectDir/src/main/resources/public"
+        }
+    }
+}
+
 /**
  * * * * * HELPER TASKS * * * * *
  */
