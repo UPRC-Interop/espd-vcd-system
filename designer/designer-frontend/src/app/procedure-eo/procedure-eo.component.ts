@@ -27,6 +27,7 @@ import {ValidationService} from '../services/validation.service';
 import {BaseStep} from '../base/base-step';
 import {WizardSteps} from '../base/wizard-steps.enum';
 import {UrlValidation} from '../validation/url/url-validation';
+import {ApicallService} from '../services/apicall.service';
 
 @Component({
   selector: 'app-procedure-eo',
@@ -52,7 +53,7 @@ export class ProcedureEoComponent implements OnInit, BaseStep {
   constructor(public dataService: DataService,
               public dialog: MatDialog, public utilities: UtilitiesService,
               private validationService: ValidationService,
-              public codelist: CodelistService) {
+              public codelist: CodelistService, public APIService: ApicallService) {
     this.dataService.EOForm = new FormGroup({
       'name': new FormControl(this.dataService.EODetails.name),
       'smeIndicator': new FormControl(false),
