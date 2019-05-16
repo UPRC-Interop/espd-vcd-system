@@ -89,22 +89,25 @@
       <p translate>espd.part5.concl.statements.text.part3</p>
       <p translate>espd.part5.concl.statements.text.part4</p>
       <p translate>espd.part5.concl.statements.text.part5</p>
-      <p translate>espd.part5.concl.statements.signature</p>
+<!--      <p translate>espd.part5.concl.statements.signature</p>-->
 
-      <mat-form-field>
-        <input [appDateValidationFix]="dateInput.control" matInput [matDatepicker]="picker" placeholder="Date" #dateInput="ngModel" ngModel
-               [disabled]="dataService.isReadOnly()">
-        <mat-error *ngIf="dateInput.control.invalid">
-          <input-validation-error [formControlErrors]="dateInput.control.errors"></input-validation-error>
-        </mat-error>
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
+      <div [hidden]="true">
+        <mat-form-field>
+          <input [appDateValidationFix]="dateInput.control" matInput [matDatepicker]="picker" placeholder="Date"
+                 #dateInput="ngModel" ngModel
+                 [disabled]="dataService.isReadOnly()">
+          <mat-error *ngIf="dateInput.control.invalid">
+            <input-validation-error [formControlErrors]="dateInput.control.errors"></input-validation-error>
+          </mat-error>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
 
-      <mat-form-field>
-        <input matInput placeholder="{{'espd.gui.place' | translate}}" [disabled]="dataService.isReadOnly()">
-      </mat-form-field>
-      <p translate>espd.part5.concl.statements.signature</p>
+<!--      <mat-form-field>-->
+<!--        <input matInput placeholder="{{'espd.gui.place' | translate}}" [disabled]="dataService.isReadOnly()">-->
+<!--      </mat-form-field>-->
+<!--      <p translate>espd.part5.concl.statements.signature</p>-->
     </div>
   </mat-expansion-panel>
 
