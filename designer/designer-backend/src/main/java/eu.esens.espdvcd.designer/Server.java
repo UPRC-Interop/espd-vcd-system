@@ -66,7 +66,7 @@ public class Server {
 
         spark.notFound((request, response) -> {
             response.type("application/json");
-            return JsonUtil.toJson(Errors.notFoundError("Endpoint not found."));
+            return JsonUtil.toJson(Errors.notFoundError("Endpoint not found or not yet initialized."));
         });
 
         spark.internalServerError((request, response) -> {
