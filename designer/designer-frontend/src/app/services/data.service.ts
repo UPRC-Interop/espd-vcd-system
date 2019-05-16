@@ -663,6 +663,10 @@ export class DataService {
   ReuseESPD(filesToUpload: File[], form: NgForm, role: string): Promise<void> {
     const promise = new Promise<void>((resolve, reject) => {
 
+      if (this.utilities.isReset && (this.utilities.isCreateResponse || this.utilities.isCreateNewESPD)) {
+        filesToUpload = [];
+      }
+
       if (filesToUpload.length > 0 && (role === 'CA' && !this.isReadOnly())) {
         this.APIService.postFile(filesToUpload)
           .then(res => {
@@ -1128,9 +1132,17 @@ export class DataService {
       // console.log(form);
       // console.log(form.value);
       console.log('START ESPD');
+      console.log('QUALIFICATION APPLICATION TYPE');
+      console.log(this.utilities.qualificationApplicationType);
 
       // form reset
       if (!this.utilities.isEmpty(this.CADetails) || !this.utilities.isEmpty(this.EODetails)) {
+        this.utilities.isReset = true;
+        // this.utilities.fileToUpload = [];
+        this.utilities.satisfiedALLCriterionExists = false;
+        this.utilities.isSatisfiedALL = false;
+        this.utilities.isAtoD = false;
+        this.utilities.isSatisfiedALLSelected = false;
         this.eoRelatedACriteriaForm = JSON.parse(JSON.stringify(null));
         this.eoRelatedCCriteriaForm = JSON.parse(JSON.stringify(null));
         this.eoRelatedDCriteriaForm = JSON.parse(JSON.stringify(null));
@@ -1144,6 +1156,8 @@ export class DataService {
         this.selectionCCriteriaForm = JSON.parse(JSON.stringify(null));
         this.selectionDCriteriaForm = JSON.parse(JSON.stringify(null));
         this.reductionCriteriaForm = JSON.parse(JSON.stringify(null));
+        this.caRelatedCriteriaForm = JSON.parse(JSON.stringify(null));
+        this.eoLotCriterionForm = JSON.parse(JSON.stringify(null));
         this.eoRelatedACriteria = JSON.parse(JSON.stringify(null));
         this.eoRelatedCCriteria = JSON.parse(JSON.stringify(null));
         this.eoRelatedDCriteria = JSON.parse(JSON.stringify(null));
@@ -1157,12 +1171,20 @@ export class DataService {
         this.selectionCCriteria = JSON.parse(JSON.stringify(null));
         this.selectionDCriteria = JSON.parse(JSON.stringify(null));
         this.reductionCriteria = JSON.parse(JSON.stringify(null));
+        this.caRelatedCriteria = JSON.parse(JSON.stringify(null));
+        this.eoLotCriterion = JSON.parse(JSON.stringify(null));
+        this.eoRelatedCriteria = JSON.parse(JSON.stringify(null));
+        this.CADetails.classificationCodes = [];
         this.utilities.setAllFields(this.PostalAddress, '');
         this.utilities.setAllFields(this.ContactingDetails, '');
         this.utilities.setAllFields(this.CADetails, '');
         this.utilities.setAllFields(this.EODetails, '');
+        this.CADetails = new Cadetails();
+        this.EODetails = new EoDetails();
+        this.PostalAddress = new PostalAddress();
+        this.ContactingDetails = new ContactingDetails();
+
         this.formUtil.evidenceList = [];
-        this.utilities.isReset = true;
       }
 
       if (form.value.chooseRole === 'CA' || form.value.chooseRole === 'CE') {
