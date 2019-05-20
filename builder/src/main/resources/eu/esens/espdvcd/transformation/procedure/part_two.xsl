@@ -1,9 +1,7 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
                 xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
                 xmlns:cacV1="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
                 xmlns:espd-cacV1="urn:grow:names:specification:ubl:schema:xsd:ESPD-CommonAggregateComponents-1"
-                xmlns:cbcV1="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
                 xmlns:espd-cbc="urn:grow:names:specification:ubl:schema:xsd:ESPD-CommonBasicComponents-1">
 
     <xsl:import href="../html/chapter.xsl"/>
@@ -176,6 +174,12 @@
         <xsl:call-template name="sectionLabelForValueOfNode">
             <xsl:with-param name="node" select="*[local-name() = 'Party']/*[local-name() = 'PostalAddress']/*[local-name() = 'Country']/*[local-name() = 'IdentificationCode']" />
             <xsl:with-param name="propertyKey" select="'espd.part1.country'"/>
+        </xsl:call-template>
+
+        <xsl:call-template name="sectionLabelForValueOfNode">
+            <xsl:with-param name="node"
+                            select="*[local-name() = 'Party']/*[local-name() = 'Contact']/*[local-name() = 'Name']"/>
+            <xsl:with-param name="propertyKey" select="'espd.part2.contact.person'"/>
         </xsl:call-template>
 
         <xsl:call-template name="sectionLabelForMailValueOfNode">

@@ -99,10 +99,10 @@ public class TaxonomyDataUtils {
                     , to.getID()
             ));
         } else if (to != null &&
-                to.getID() != null &&
-                to.getID().equals("7e7db838-eeac-46d9-ab39-42927486f22d")) {
+                to.getTypeCode() != null &&
+                to.getTypeCode().equals("CRITERION.OTHER.EO_DATA.MEETS_THE_OBJECTIVE")) {
+            System.out.println("APPLYING MEETS THE OBJECTIVE");
             // MEETS THE OBJECTIVE V1
-            LOGGER.log(Level.INFO, "APPLYING TAXONOMY DATA FOR MEETS THE OBJECTIVE CRITERION");
             to.getRequirementGroups().forEach(requirementGroup -> applyTaxonomyData(
                     null,
                     requirementGroup,
@@ -134,8 +134,8 @@ public class TaxonomyDataUtils {
                                     .filter(fromRq -> isRequirementBasicInfoNotNull(fromRq)
                                             // && ArtefactUtils.clearAllWhitespaces(toRq.getDescription())
                                             // .equals(ArtefactUtils.clearAllWhitespaces(fromRq.getDescription()))
-                                            && toRq.getDescription().replace('?', ' ').trim()
-                                            .equalsIgnoreCase(fromRq.getDescription().replace('?', ' ').trim())
+                                            && toRq.getDescription().replaceAll("\\?", "").trim()
+                                            .equalsIgnoreCase(fromRq.getDescription().replaceAll("\\?", "").trim())
 //                                            && toRq.getResponseDataType() == fromRq.getResponseDataType()
                                             && toRq.getType() == fromRq.getType())
                                     .findFirst().orElse(null) // from
@@ -154,7 +154,6 @@ public class TaxonomyDataUtils {
                         .filter(TaxonomyDataUtils::isRequirementBasicInfoNotNull)
                         .filter(rq -> rq.getPropertyKeyMap().isEmpty())
                         .forEach(TaxonomyDataUtils::applyV1PropertyKeysFromConf);
-                System.out.println(to.getID());
             } catch (ConfigException e) {
                 LOGGER.log(Level.SEVERE, e.getMessage());
             }
@@ -205,10 +204,10 @@ public class TaxonomyDataUtils {
 
         // workaround for reserved characters
         rq.getPropertyKeyMap().put("pk1", PropertyKeyConfigEnum.INSTANCE.getRequirementDescriptionPropertyKey(rq.getDescription()
-                .replace('?', ' ')
-                .replace(',', ' ')
-                .replace(':', ' ')
-                .replace('.', ' ')
+                .replaceAll("\\?", "")
+                .replaceAll(",", "")
+                .replaceAll(":", "")
+                .replaceAll("\\.", "")
                 .trim()));
     }
 
