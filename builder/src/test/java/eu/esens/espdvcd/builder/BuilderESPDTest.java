@@ -28,7 +28,6 @@ import eu.esens.espdvcd.retriever.criteria.CriteriaDataRetriever;
 import eu.esens.espdvcd.retriever.criteria.CriteriaDataRetrieverBuilder;
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
 import eu.esens.espdvcd.retriever.criteria.RegulatedCriteriaExtractorBuilder;
-import eu.esens.espdvcd.retriever.criteria.resource.SelectableCriterionPrinter;
 import eu.esens.espdvcd.schema.enums.EDMVersion;
 import eu.esens.espdvcd.transformation.TransformationService;
 import eu.espd.schema.v1.espdresponse_1.ESPDResponseType;
@@ -547,7 +546,7 @@ public class BuilderESPDTest {
 
         TransformationService transformationService = new TransformationService();
         InputStream pdfStream = transformationService.createPdfStream(new StreamSource(new ByteArrayInputStream(pdfDocumentBuilderV2.getAsString().getBytes(StandardCharsets.UTF_8))), EULanguageCodeEnum.EL);
-        File targetFile = new File("D:\\Downloads\\espd-response-210.pdf");
+        File targetFile = new File("espd-response-210.pdf");
         FileUtils.copyInputStreamToFile(pdfStream, targetFile);
     }
 
@@ -581,11 +580,11 @@ public class BuilderESPDTest {
         PDFDocumentBuilderV1 pdfDocumentBuilderV1 = BuilderFactory.EDM_V1
                 .createPDFDocumentBuilderFor(espdResponse);
 
-        // System.out.println(pdfDocumentBuilderV1.theXML);
+//         System.out.println(pdfDocumentBuilderV1.theXML);
 
         TransformationService transformationService = new TransformationService();
         InputStream pdfStream = transformationService.createPdfStream(new StreamSource(new ByteArrayInputStream(pdfDocumentBuilderV1.getAsString().getBytes(StandardCharsets.UTF_8))), EULanguageCodeEnum.EL);
-        File targetFile = new File("D:\\Downloads\\espd-response-102.pdf");
+        File targetFile = new File("espd-response-102.pdf");
         FileUtils.copyInputStreamToFile(pdfStream, targetFile);
     }
 
