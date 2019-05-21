@@ -356,6 +356,10 @@ export class FormUtilService {
     criteria.forEach(cr => {
       let formValues = form.getRawValue();
       formValues = formValues[cr.uuid.valueOf()];
+      /* GES-131 Fix: set selected true because of server config file in create response from scratch */
+      if (this.utilities.isCreateResponse) {
+        cr.selected = true;
+      }
       // console.log(formValues);
 
       // let testFormValues = formValues[cr.uuid.valueOf()];
