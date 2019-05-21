@@ -16,7 +16,7 @@
                 </xsl:call-template>
             </xsl:with-param>
             <xsl:with-param name="content">
-                <xsl:if test="//cac:TenderingCriterion[./cbc:CriterionTypeCode = 'CRITERION.OTHER.EO_DATA.REDUCTION_OF_CANDIDATES'] | //*[local-name() = 'Criterion']/*[local-name() = 'TypeCode'] = 'CRITERION.OTHER.EO_DATA.MEETS_THE_OBJECTIVE'">
+                <xsl:if test="//cac:TenderingCriterion[./cbc:CriterionTypeCode = 'CRITERION.OTHER.EO_DATA.REDUCTION_OF_CANDIDATES'] or //*[local-name() = 'Criterion']/*[local-name() = 'TypeCode'] = 'CRITERION.OTHER.EO_DATA.MEETS_THE_OBJECTIVE'">
                     <xsl:call-template name="chapterOne">
                         <xsl:with-param name="chapter-number"/>
                         <xsl:with-param name="chapter-headline">
