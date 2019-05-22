@@ -55,8 +55,19 @@ public enum AppConfig {
             return country;
         } else {
             Logger.getLogger(AppConfig.class.getName())
-                    .warning(String.format("Country %s does not exists in the codelists. Defaulting to AD.", country));
+                    .warning(String.format("Country %s does not exist in the codelists. Defaulting to AD.", country));
             return "AD";
+        }
+    }
+
+    public String getDefaultCurrency() {
+        String currency = appConfig.getString("espd.designer.currency");
+        if (CodelistsV2.Currency.containsId(currency)) {
+            return currency;
+        } else {
+            Logger.getLogger(AppConfig.class.getName())
+                    .warning(String.format("Currency %s does not exist in the codelists. Defaulting to EUR.", currency));
+            return "EUR";
         }
     }
 

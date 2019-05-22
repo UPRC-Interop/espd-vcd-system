@@ -8,6 +8,7 @@ espd.designer.criteria.purelyNational.selected=false
 espd.designer.maxFileSizeUpload=4
 espd.designer.allowFraming=false
 espd.designer.country=GR
+espd.designer.currency=EUR
 espd.designer.port=8080
 espd.designer.artefactDump.enabled=false
 espd.designer.artefactDump.location=artefacts

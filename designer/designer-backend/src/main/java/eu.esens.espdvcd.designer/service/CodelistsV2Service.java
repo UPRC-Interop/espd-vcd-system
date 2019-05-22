@@ -60,9 +60,17 @@ public enum CodelistsV2Service implements CodelistsService {
                         .collect(Collectors.toList());
                 CODELISTS_MAP.putIfAbsent(codelist, theCountriesList);
                 return theCountriesList;
+            } else if (codelist.equalsIgnoreCase(CodelistsV2.Currency.name())) {
+                List<CodelistItem> theCurrencyList = theCodelistList
+                        .stream()
+                        .sorted(CriteriaUtil::currencyListComparator)
+                        .collect(Collectors.toList());
+                CODELISTS_MAP.putIfAbsent(codelist, theCurrencyList);
+                return theCurrencyList;
+            } else {
+                CODELISTS_MAP.putIfAbsent(codelist, theCodelistList);
+                return theCodelistList;
             }
-            CODELISTS_MAP.putIfAbsent(codelist, theCodelistList);
-            return theCodelistList;
         }
     }
 
@@ -95,9 +103,17 @@ public enum CodelistsV2Service implements CodelistsService {
                         .collect(Collectors.toList());
                 CODELISTS_MAP.putIfAbsent(codelist, theCountriesList);
                 return theCountriesList;
+            } else if (codelist.equalsIgnoreCase(CodelistsV2.Currency.name())) {
+                List<CodelistItem> theCurrencyList = theCodelistList
+                        .stream()
+                        .sorted(CriteriaUtil::currencyListComparator)
+                        .collect(Collectors.toList());
+                CODELISTS_MAP.putIfAbsent(codelist, theCurrencyList);
+                return theCurrencyList;
+            } else {
+                CODELISTS_MAP.putIfAbsent(codelist, theCodelistList);
+                return theCodelistList;
             }
-            CODELISTS_MAP.putIfAbsent(codelist + '.' + language, theCodelistList);
-            return theCodelistList;
         }
     }
 

@@ -209,7 +209,7 @@
 
         <br />
 
-        <xsl:if test="//*[local-name() = 'ProcurementProjectLot']/*[local-name() = 'ID']">
+        <xsl:if test="//*[local-name() = 'ProcurementProjectLot']/*[local-name() = 'ID'] and //*[local-name() = 'ESPDResponse']">
             <xsl:call-template name="labelAndTextValue">
                 <xsl:with-param name="label">
                     <xsl:call-template name="getESPDProperty">
@@ -245,6 +245,10 @@
 
         <xsl:call-template name="tenderingCriterionSectionByCriterionTypeCode">
             <xsl:with-param name="criterionTypeCode"  select="'CRITERION.OTHER.EO_DATA.TOGETHER_WITH_OTHERS'"/>
+        </xsl:call-template>
+
+        <xsl:call-template name="tenderingCriterionSectionByCriterionTypeCode">
+            <xsl:with-param name="criterionTypeCode" select="'CRITERION.OTHER.EO_DATA.LOTS_TENDERED'"/>
         </xsl:call-template>
 
     </xsl:template>

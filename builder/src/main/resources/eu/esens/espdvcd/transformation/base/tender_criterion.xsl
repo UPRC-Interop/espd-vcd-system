@@ -386,7 +386,7 @@
         <xsl:variable name="evidence" select="//cac:Evidence[./cbc:ID = $tenderingCriterionResponse/cac:EvidenceSupplied/cbc:ID] | ./ccv-cacV1:Response/cev-cacV1:Evidence"/>
 
         <xsl:if test="$evidence or not(.//*[local-name() = 'EconomicOperatorParty'] | //cac:EconomicOperatorParty | //espd-cacV1:EconomicOperatorParty)">
-            <xsl:if test="$tenderingCriterionResponse">
+            <xsl:if test="$tenderingCriterionResponse  or //*[local-name() = 'QualificationApplicationRequest']">
             <xsl:call-template name="label">
                 <xsl:with-param name="label">
                     <xsl:call-template name="getESPDProperty">
@@ -401,7 +401,7 @@
                 </xsl:with-param>
             </xsl:call-template>
 
-            <xsl:if test="$tenderingCriterionResponse">
+            <xsl:if test="$tenderingCriterionResponse  or //*[local-name() = 'QualificationApplicationRequest']">
                 <xsl:call-template name="label">
                     <xsl:with-param name="label">
                         <xsl:call-template name="getESPDProperty">

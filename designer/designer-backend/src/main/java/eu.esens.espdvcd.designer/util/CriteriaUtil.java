@@ -64,6 +64,17 @@ public final class CriteriaUtil {
             return 0;
     }
 
+    public static int currencyListComparator(final CodelistItem item1, final CodelistItem item2) {
+        if (item1.getCode().equals(
+                AppConfig.getInstance().getDefaultCurrency())) {
+            return -1;
+        } else if (item2.getCode().equals(
+                AppConfig.getInstance().getDefaultCurrency())) {
+            return 1;
+        } else
+            return 0;
+    }
+
     public static ESPDRequest removeSelectionCriteriaIfAlpha(final ESPDRequest model) {
         model.getFullCriterionList()
                 .stream()
