@@ -259,11 +259,8 @@
             <!-- REGULATED 2.1.0: Removed field due to redundancy. Now the 2.1.0 taxonomy provides CRITERION.OTHER.EO_DATA.LOTS_TENDERED criterion -->
             <div *ngIf="APIService.version === 'v1'">
               <mat-form-field class="eoField">
-                <input matInput placeholder="{{'espd.part2.lots.concerned' | translate}}" formControlName="procurementProjectLot" integer>
-				        <mat-error *ngIf="dataService.EOForm.get('procurementProjectLot').invalid">
-                	<input-validation-error
-                  	[formControlErrors]="dataService.EOForm.get('procurementProjectLot').errors"></input-validation-error>
-              	</mat-error>
+                <input formControlName="procurementProjectLot" matInput
+                       placeholder="{{'espd.part2.lots.concerned' | translate}}">
               </mat-form-field>
             </div>
             <div *ngIf="utilities.qualificationApplicationType === 'selfcontained'">
