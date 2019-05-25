@@ -98,11 +98,12 @@ public class TaxonomyDataUtils {
                     , toRg                                  // to
                     , to.getID()
             ));
-        } else if (to != null &&
-                to.getTypeCode() != null &&
-                to.getTypeCode().equals("CRITERION.OTHER.EO_DATA.MEETS_THE_OBJECTIVE")) {
-            System.out.println("APPLYING MEETS THE OBJECTIVE");
-            // MEETS THE OBJECTIVE V1
+        } else if (to != null
+                && to.getTypeCode() != null
+                && to.getTypeCode().equalsIgnoreCase("CRITERION.OTHER.EO_DATA.MEETS_THE_OBJECTIVE")) {
+            // MEETS THE OBJECTIVE V1 WORKAROUND
+            to.getPropertyKeyMap().put("pk2", "espd.part5.title.eo.declares.that");
+            to.getPropertyKeyMap().put("pk1", "espd.part5.title.eo.declares.that.main");
             to.getRequirementGroups().forEach(requirementGroup -> applyTaxonomyData(
                     null,
                     requirementGroup,
@@ -137,7 +138,8 @@ public class TaxonomyDataUtils {
                                             && toRq.getDescription().replaceAll("\\?", "").trim()
                                             .equalsIgnoreCase(fromRq.getDescription().replaceAll("\\?", "").trim())
 //                                            && toRq.getResponseDataType() == fromRq.getResponseDataType()
-                                            && toRq.getType() == fromRq.getType())
+//                                            && toRq.getType() == fromRq.getType())
+                                    )
                                     .findFirst().orElse(null) // from
                             , toRq                                  // to
                     ));
@@ -150,8 +152,13 @@ public class TaxonomyDataUtils {
             }
         } else if (to != null) {
             try {
+                to.getRequirementGroups().forEach(toRg -> applyTaxonomyData(
+                        null // from
+                        , toRg                                  // to
+                        , criterionId));
+
                 to.getRequirements().stream()
-                        .filter(TaxonomyDataUtils::isRequirementBasicInfoNotNull)
+//                        .filter(TaxonomyDataUtils::isRequirementBasicInfoNotNull)
                         .filter(rq -> rq.getPropertyKeyMap().isEmpty())
                         .forEach(TaxonomyDataUtils::applyV1PropertyKeysFromConf);
             } catch (ConfigException e) {

@@ -88,7 +88,7 @@ public abstract class CriteriaTaxonomyResource implements CriteriaResource, Requ
         // find root RequirementGroup/s of that criterion from taxonomy
         final SelectableCriterion from = criterionMap.get(sc.getID());
 
-        if (sc.getID().equals("7e7db838-eeac-46d9-ab39-42927486f22d")) {
+        if (sc.getTypeCode().equals("CRITERION.OTHER.EO_DATA.MEETS_THE_OBJECTIVE")) {
             LOGGER.log(Level.INFO, "APPLYING MEETS THE OBJECTIVE V1 CRITERION WORKAROUND");
             TaxonomyDataUtils.applyTaxonomyData(null, sc);
             return;

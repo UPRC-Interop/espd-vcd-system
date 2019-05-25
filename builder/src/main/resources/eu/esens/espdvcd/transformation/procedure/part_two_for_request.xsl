@@ -254,21 +254,6 @@
 
         <br />
 
-        <xsl:if test="//*[local-name() = 'ProcurementProjectLot']/*[local-name() = 'ID'] and //*[local-name() = 'ESPDRequest']">
-            <xsl:call-template name="labelAndTextValue">
-                <xsl:with-param name="label">
-                    <xsl:call-template name="getESPDProperty">
-                        <xsl:with-param name="key" select="'espd.part2.lots.concerned'"/>
-                    </xsl:call-template>
-                </xsl:with-param>
-                <xsl:with-param name="value">
-                    <xsl:value-of select="//*[local-name() = 'ProcurementProjectLot']/*[local-name() = 'ID']"/>
-                </xsl:with-param>
-            </xsl:call-template>
-        </xsl:if>
-
-        <br />
-
         <xsl:call-template name="labelAndCopyOfValue">
             <xsl:with-param name="label">
                 <xsl:call-template name="getESPDProperty">
@@ -298,6 +283,21 @@
         <xsl:call-template name="tenderingCriterionSectionByCriterionTypeCode">
             <xsl:with-param name="criterionTypeCode"  select="'CRITERION.OTHER.EO_DATA.TOGETHER_WITH_OTHERS'"/>
         </xsl:call-template>
+
+        <xsl:if test="//*[local-name() = 'ProcurementProjectLot']/*[local-name() = 'ID'] and //*[local-name() = 'ESPDRequest']">
+            <xsl:call-template name="labelAndTextValue">
+                <xsl:with-param name="label">
+                    <xsl:call-template name="getESPDProperty">
+                        <xsl:with-param name="key" select="'espd.part2.lots.concerned'"/>
+                    </xsl:call-template>
+                </xsl:with-param>
+                <xsl:with-param name="value">
+                    <xsl:value-of select="//*[local-name() = 'ProcurementProjectLot']/*[local-name() = 'ID']"/>
+                </xsl:with-param>
+            </xsl:call-template>
+        </xsl:if>
+
+        <br/>
 
         <xsl:call-template name="tenderingCriterionSectionByCriterionTypeCode">
             <xsl:with-param name="criterionTypeCode" select="'CRITERION.OTHER.EO_DATA.LOTS_TENDERED'"/>
