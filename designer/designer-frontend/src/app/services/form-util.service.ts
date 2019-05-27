@@ -473,6 +473,10 @@ export class FormUtilService {
 
   createReductionCriterionForm(criteria: ReductionCriterion[], isSelection: boolean) {
     let group: any = {};
+    /* GES-2: Make the default answer as YES when it's v2 reduction.*/
+    if (this.APIService.version === 'v2') {
+      isSelection = true;
+    }
     criteria.forEach(cr => {
       group[cr.uuid] = this.createFormGroups(cr.requirementGroups, isSelection);
       // console.log(group[cr.typeCode]);

@@ -43,7 +43,7 @@ import {Amount} from '../model/amount.model';
 import _ from 'lodash';
 import {Filter} from '../filter/filter.enum';
 import {CodelistService} from './codelist.service';
-import {ErrorResponse} from "../model/error-response";
+import {ErrorResponse} from '../model/error-response';
 
 @Injectable()
 export class DataService {
@@ -676,6 +676,8 @@ export class DataService {
             // console.log(res);
             console.log('REUSE EPSD');
             this.APIService.version = res.documentDetails.version.toLowerCase();
+            /* GES-2 */
+            this.utilities.reductionUUID = (this.APIService.version === 'v2') ? '51c39ba9-0444-4967-afe9-36f753b30175' : '9c70375e-1264-407e-8b50-b9736bc08901';
             /* SELF-CONTAINED: if a self-contained artifact is imported then the version is v2 */
             this.utilities.qualificationApplicationType = res.documentDetails.qualificationApplicationType.toLowerCase();
             this.utilities.type = res.documentDetails.type;
@@ -947,6 +949,9 @@ export class DataService {
             // console.log(this.selectionDCriteriaForm);
             this.selectionALLCriteriaForm = this.formUtil.createSelectionCriterionForm(this.selectionALLCriteria, true);
 
+            /* GES-2 */
+            this.utilities.reductionUUID = (this.APIService.version === 'v2') ? '51c39ba9-0444-4967-afe9-36f753b30175' : '9c70375e-1264-407e-8b50-b9736bc08901';
+
 
             this.reductionCriteria = this.filterReductionCriteria(new RegExp(this.filter.REDUCTION_OF_CANDIDATES_REGEXP), res.fullCriterionList);
             if (!this.reductionCriteria) {
@@ -1215,6 +1220,10 @@ export class DataService {
       /* ===================== create forms in case of predefined criteria ================== */
       if (this.utilities.isCreateResponse) {
         this.utilities.isSatisfiedALL = true;
+
+        /* GES-2 */
+        this.utilities.reductionUUID = (this.APIService.version === 'v2') ? '51c39ba9-0444-4967-afe9-36f753b30175' : '9c70375e-1264-407e-8b50-b9736bc08901';
+
         this.getEoRelatedACriteria()
           .then(res => {
 

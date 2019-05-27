@@ -61,6 +61,9 @@ export class UtilitiesService {
   enLogo = 'en_horizontal_cef_logo_2.png';
   logo = 'el_horizontal_cef_logo.png';
 
+  /* GES-2 Fixing reduction of candidates v1 rendering and default answer YES at v2 */
+  reductionUUID: string;
+
   role: string;
   // qualificationApplicationType = 'SELF-CONTAINED';
   // qualificationApplicationType = 'REGULATED';

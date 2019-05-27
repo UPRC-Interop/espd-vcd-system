@@ -42,7 +42,6 @@ export class FinishEoComponent implements OnInit, BaseStep {
   @Input() selectionStepValid: boolean;
   @Input() finishStepValid: boolean;
 
-  reductionUUID: string;
 
   constructor(
     public dataService: DataService,
@@ -51,8 +50,6 @@ export class FinishEoComponent implements OnInit, BaseStep {
     public utilities: UtilitiesService,
     public APIService: ApicallService
   ) {
-    this.reductionUUID = this.APIService.version === 'v2' ? '51c39ba9-0444-4967-afe9-36f753b30175' : '9c70375e-1264-407e-8b50-b9736bc08901';
-
   }
 
   ngOnInit() {

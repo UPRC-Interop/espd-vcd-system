@@ -40,7 +40,7 @@
 </div>
 <mat-accordion multi="true">
   <div *ngIf="dataService.reductionCriteria != null">
-    <div *ngIf="utilities.isImportandReductionExists(dataService.reductionCriteria, reductionUUID) || utilities.isCriterionSelected(dataService.reductionCriteria, reductionUUID)">
+    <div *ngIf="utilities.isImportandReductionExists(dataService.reductionCriteria, utilities.reductionUUID) || utilities.isCriterionSelected(dataService.reductionCriteria, utilities.reductionUUID)">
       <ng-container *ngIf="dataService.reductionCriteriaForm">
         <form [formGroup]="dataService.reductionCriteriaForm" #form="ngForm">
           <mat-expansion-panel expanded="true" *ngIf="dataService.reductionCriteria">
