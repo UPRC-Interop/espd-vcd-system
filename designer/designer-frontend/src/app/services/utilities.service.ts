@@ -64,6 +64,9 @@ export class UtilitiesService {
   /* GES-2 Fixing reduction of candidates v1 rendering and default answer YES at v2 */
   reductionUUID: string;
 
+  /* UX feedback to the user when artifacts are being exported */
+  isLoading = false;
+
   role: string;
   // qualificationApplicationType = 'SELF-CONTAINED';
   // qualificationApplicationType = 'REGULATED';

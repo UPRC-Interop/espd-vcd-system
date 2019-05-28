@@ -411,10 +411,12 @@ export class DataService {
   }
 
   createRequestXmlFile() {
+    this.utilities.isLoading = true;
     this.APIService.getXMLRequest(JSON.stringify(this.createESPDRequest()), this.selectedLanguage)
       .then(res => {
         this.createXmlFile(res);
         this.saveFile(this.blob, '.xml');
+        this.utilities.isLoading = false;
       })
       .catch(err => {
         const fr: FileReader = new FileReader();
@@ -423,16 +425,19 @@ export class DataService {
           console.log(err.error);
           const action = 'close';
           this.utilities.openSnackBar(error, action);
+          this.utilities.isLoading = false;
         };
         fr.readAsText(err.error);
       });
   }
 
   createRequestHtmlFile() {
+    this.utilities.isLoading = true;
     this.APIService.getHTMLRequest(JSON.stringify(this.createESPDRequest()), this.selectedLanguage)
       .then(res => {
         this.createHtmlFile(res);
         this.saveFile(this.blob, '.html');
+        this.utilities.isLoading = false;
       })
       .catch(err => {
         const fr: FileReader = new FileReader();
@@ -441,16 +446,19 @@ export class DataService {
           console.log(err.error);
           const action = 'close';
           this.utilities.openSnackBar(error, action);
+          this.utilities.isLoading = false;
         };
         fr.readAsText(err.error);
       });
   }
 
   createRequestPdfFile() {
+    this.utilities.isLoading = true;
     this.APIService.getPDFRequest(JSON.stringify(this.createESPDRequest()), this.selectedLanguage)
       .then(res => {
         this.createPdfFile(res);
         this.saveFile(this.blob, '.pdf');
+        this.utilities.isLoading = false;
       })
       .catch(err => {
         const fr: FileReader = new FileReader();
@@ -459,6 +467,7 @@ export class DataService {
           console.log(err.error);
           const action = 'close';
           this.utilities.openSnackBar(error, action);
+          this.utilities.isLoading = false;
         };
         fr.readAsText(err.error);
       });
@@ -562,10 +571,12 @@ export class DataService {
   }
 
   createPdf() {
+    this.utilities.isLoading = true;
     this.APIService.getPDFResponse(JSON.stringify(this.createESPDResponse()), this.selectedLanguage)
       .then(res => {
         this.createPdfFile(res);
         this.saveFile(this.blob, '.pdf');
+        this.utilities.isLoading = false;
       })
       .catch(err => {
         const fr: FileReader = new FileReader();
@@ -574,16 +585,19 @@ export class DataService {
           console.log(err.error);
           const action = 'close';
           this.utilities.openSnackBar(error, action);
+          this.utilities.isLoading = false;
         };
         fr.readAsText(err.error);
       });
   }
 
   createHtml() {
+    this.utilities.isLoading = true;
     this.APIService.getHTMLResponse(JSON.stringify(this.createESPDResponse()), this.selectedLanguage)
       .then(res => {
         this.createHtmlFile(res);
         this.saveFile(this.blob, '.html');
+        this.utilities.isLoading = false;
       })
       .catch(err => {
         const fr: FileReader = new FileReader();
@@ -592,17 +606,20 @@ export class DataService {
           console.log(err.error);
           const action = 'close';
           this.utilities.openSnackBar(error, action);
+          this.utilities.isLoading = false;
         };
         fr.readAsText(err.error);
       });
   }
 
   createXml() {
+    this.utilities.isLoading = true;
     this.APIService.getXMLResponse(JSON.stringify(this.createESPDResponse()), this.selectedLanguage)
       .then(res => {
         console.log(res);
         this.createXmlFile(res);
         this.saveFile(this.blob, '.xml');
+        this.utilities.isLoading = false;
       })
       .catch(err => {
         const fr: FileReader = new FileReader();
@@ -611,6 +628,7 @@ export class DataService {
           console.log(err.error);
           const action = 'close';
           this.utilities.openSnackBar(error, action);
+          this.utilities.isLoading = false;
         };
         fr.readAsText(err.error);
       });
