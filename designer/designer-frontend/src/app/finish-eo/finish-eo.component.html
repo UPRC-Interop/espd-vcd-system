@@ -18,7 +18,7 @@
 -->
 <h4 translate>espd.part5.header</h4>
 <div *ngIf="dataService.reductionCriteria != null">
-  <div *ngIf="utilities.isCreateResponse">
+  <div *ngIf="utilities.isCreateResponse || (APIService.version === 'v1')">
     <mat-card>
       <h4>{{'espd.part5.toptext' | translate}}</h4>
     </mat-card>
@@ -40,7 +40,7 @@
 </div>
 <mat-accordion multi="true">
   <div *ngIf="dataService.reductionCriteria != null">
-    <div *ngIf="utilities.isImportandReductionExists(dataService.reductionCriteria, utilities.reductionUUID) || utilities.isCriterionSelected(dataService.reductionCriteria, utilities.reductionUUID)">
+    <div *ngIf="(utilities.isImportandReductionExists(dataService.reductionCriteria, utilities.reductionUUID) || utilities.isCreateResponse) && utilities.isCriterionSelected(dataService.reductionCriteria, utilities.reductionUUID)">
       <ng-container *ngIf="dataService.reductionCriteriaForm">
         <form [formGroup]="dataService.reductionCriteriaForm" #form="ngForm">
           <mat-expansion-panel expanded="true" *ngIf="dataService.reductionCriteria">
@@ -50,7 +50,7 @@
               </mat-panel-title>
             </mat-expansion-panel-header>
             <div class="desc">
-              <div *ngIf="!utilities.isCreateResponse">
+              <div *ngIf="!utilities.isCreateResponse && !(APIService.version === 'v1')">
                 <mat-card>
                   <h4>{{'espd.part5.toptext' | translate}}</h4>
                 </mat-card>
