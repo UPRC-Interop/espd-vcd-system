@@ -58,7 +58,8 @@ import {IntegerValidationDirective} from './directives/integer/integer-validatio
 import {PercentageValidationDirective} from './directives/percentage/percentage-validation.directive';
 import {VatNumberValidationDirective} from './directives/vat-number/vat-number-validation.directive';
 import {AmountDirective} from './directives/amount/amount.directive';
-import { ECertisCriterionComponent } from './e-certis-criterion/e-certis-criterion.component';
+import {ECertisCriterionComponent} from './e-certis-criterion/e-certis-criterion.component';
+import {SurveydialogComponent} from './surveydialog/surveydialog.component';
 
 @NgModule({
   declarations: [
@@ -88,7 +89,8 @@ import { ECertisCriterionComponent } from './e-certis-criterion/e-certis-criteri
     PercentageValidationDirective,
     VatNumberValidationDirective,
     AmountDirective,
-    ECertisCriterionComponent
+    ECertisCriterionComponent,
+    SurveydialogComponent
   ],
   imports: [
     BrowserModule,
@@ -107,6 +109,7 @@ import { ECertisCriterionComponent } from './e-certis-criterion/e-certis-criteri
       }
     })
   ],
+  entryComponents: [SurveydialogComponent],
   providers: [ApicallService, DataService, Title, Location,
     {provide: MAT_DATE_LOCALE, useValue: 'el-GR'},
     {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},

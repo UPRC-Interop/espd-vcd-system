@@ -20,11 +20,12 @@ import {ApicallService} from '../services/apicall.service';
 import {DataService} from '../services/data.service';
 import {UtilitiesService} from '../services/utilities.service';
 import {CodelistService} from '../services/codelist.service';
-import {MatSelect, MatSelectChange, MatStepper} from '@angular/material';
+import {MatDialog, MatSelect, MatSelectChange, MatStepper} from '@angular/material';
 import {ValidationService} from '../services/validation.service';
 import {BaseStep} from '../base/base-step';
 import {WizardSteps} from '../base/wizard-steps.enum';
 import {Location} from '@angular/common';
+import {SurveydialogComponent} from '../surveydialog/surveydialog.component';
 
 // import {ProcedureType} from "../model/procedureType.model";
 
@@ -60,10 +61,16 @@ export class StartComponent implements OnInit, BaseStep {
               private APIService: ApicallService,
               public utilities: UtilitiesService,
               public codelist: CodelistService,
-              private validationService: ValidationService, public location: Location) {
+              private validationService: ValidationService,
+              public location: Location,
+              public dialog: MatDialog) {
   }
 
   ngOnInit() {
+
+    setTimeout(() => {
+      this.openSurveyDialog();
+    }, 1000);
 
   }
 
@@ -252,6 +259,11 @@ export class StartComponent implements OnInit, BaseStep {
 
   public areFormsValid(): boolean {
     return this.validationService.validateFormsInComponent(this.forms);
+  }
+
+
+  openSurveyDialog() {
+    this.dialog.open(SurveydialogComponent, {id: ''});
   }
 
 

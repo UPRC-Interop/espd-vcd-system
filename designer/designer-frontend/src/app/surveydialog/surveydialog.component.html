@@ -1,0 +1,58 @@
+<div mat-dialog-content *ngIf="dataService.selectedLanguage === 'el'">
+  <h2>Έρευνα ικανοποίησης για το ΕΕΕΣ</h2>
+  <p>Η Ευρωπαϊκή Επιτροπή διεξάγει έρευνα μέσω επιγραμμικού (online) ερωτηματολογίου σχετικά με την εφαρμογή και χρήση
+    του Ευρωπαϊκού Ενιαίου Εγγράφου Σύμβασης (ΕΕΕΣ) και ειδικότερα τις σχετικές ηλεκτρονικές υπηρεσίες για τη σύνταξη
+    και διαχείριση του.</p>
+  <p> Παρακαλείσθε να συμμετέχετε σε αυτή τη διαδικτυακή έρευνα, η οποία σας επιτρέπει να εκφράσετε τις απόψεις σας
+    σχετικά με το Ευρωπαϊκό Ενιαίο Έντυπο Σύμβασης (ΕΕΕΣ), το οποίο καθιερώθηκε με τον Εκτελεστικό Κανονισμό (ΕΕ) της
+    Επιτροπής της 5ης Ιανουαρίου 2016.</p>
+  <p>Εάν χρησιμοποιείτε μια ηλεκτρονική υπηρεσία ΕΕΕΣ ως οικονομικός φορέας ή αναθέτουσα αρχή/αναθέτων φορέας, η
+    συμμετοχή
+    σας είναι σημαντική, καθώς αυτή η έρευνα σας παρέχει τη δυνατότητα να επιδράσετε σε μελλοντική/ές της
+    ανάπτυξη/βελτιώσεις.</p>
+  <p>Το ΕΕΕΣ αποτελεί υπεύθυνη δήλωση σχετικά με την οικονομική κατάσταση, τις ικανότητες και την καταλληλότητα
+    επιχειρήσεων για διαδικασίες σύναψης σύμβασης. Χρησιμοποιείται ως προκαταρκτική απόδειξη εκπλήρωσης όλων των
+    απαιτούμενων όρων στις διαδικασίες δημοσίων συμβάσεων σε ολόκληρη την ΕE </p>
+  <p> Το ερωτηματολόγιο σχετικά με το ΕΕΕΣ παρέχεται στα αγγλικά και σε όλες τις άλλες επίσημες γλώσσες τις ΕΕ
+    χρησιμοποιώντας αυτόματη μετάφραση. Σε περίπτωση αμφιβολίας, η αγγλική εκδοχή θα πρέπει να επικρατεί σε σχέση με
+    όλες τις άλλες μεταφράσεις.
+    Το ερωτηματολόγιο είναι διαθέσιμο στον ακόλουθο σύνδεσμο: <a
+      href="https://ec.europa.eu/eusurvey/runner/ESPD-satisfaction-survey" target="_blank">https://ec.europa.eu/eusurvey/runner/ESPD-satisfaction-survey</a>
+  </p>
+
+  <p> Το ερωτηματολόγιο για το ΕΕΕΣ θα είναι ανοιχτό μέχρι τις 15 Σεπτεμβρίου 2019. Είναι αρκετά σύντομο και δε θα
+    πρέπει να
+    σας πάρει περισσότερο από μερικά λεπτά για να το συμπληρώσετε.</p>
+
+  <p> Η συμβολή σας θα είναι ανώνυμη και θα συγκεντρωθεί από τις υπηρεσίες της Ευρωπαϊκής Επιτροπής.</p>
+  <p>Για διευκρινίσεις, παρακαλείσθε να επικοινωνήσετε μέσω ηλεκτρονικού ταχυδρομείου στη διεύθυνση
+    GROW-ESPD@ec.europa.eu.</p>
+  <p>Σας ευχαριστούμε πολύ για το χρόνο και τη συνεργασία σας.</p>
+</div>
+
+<div mat-dialog-content *ngIf="dataService.selectedLanguage === 'en'">
+  <h2>ESPD satisfaction survey</h2>
+  <p>The European Commission is conducting an online questionnaire on the implementation and use of the European Single
+    Procurement Document (ESPD), and in particular on the related electronic services for its drafting and
+    management.</p>
+  <p>You are kindly invited to participate in this online survey that allows you to express your views on the electronic
+    European Single Procurement Document (ESPD) introduced through the Commission Implementing Regulation (EU) 2016/7 of
+    5 January 2016.</p>
+  <p>If you are using an ESPD service, as a supplier or a public sector entity, your participation is important, as this
+    survey provides you with the opportunity to make an impact on its future development and improvements. </p>
+  <p>The ESPD is a self-declaration of the businesses' financial status, abilities and suitability for a public
+    procurement procedure. It is used as a preliminary evidence of fulfillment of the conditions required in public
+    procurement procedures across the EU.</p>
+  <p>
+    The ESPD survey is provided in English and in all the other official EU languages using automated translation. In
+    case of any doubt, the English version should have prevalence over any translations. It is available at: <a
+    href="https://ec.europa.eu/eusurvey/runner/ESPD-satisfaction-survey" target="_blank">https://ec.europa.eu/eusurvey/runner/ESPD-satisfaction-survey</a>
+  </p>
+  <p>Your contribution will be anonymous and will be gathered by the European Commission services.</p>
+  <p>For further clarifications, please contact GROW-ESPD@ec.europa.eu</p>
+  <p>Thank you very much for your time and cooperation.</p>
+</div>
+
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close (click)="onClose()">Close</button>
+</mat-dialog-actions>
