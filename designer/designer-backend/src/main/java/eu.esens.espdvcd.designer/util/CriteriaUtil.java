@@ -148,6 +148,8 @@ public final class CriteriaUtil {
                     }
                     finalizeRequirementGroups(rg.getRequirementGroups());
                 }
+            } else {
+                finalizeRequirementGroups(rg.getRequirementGroups());
             }
         }
     }

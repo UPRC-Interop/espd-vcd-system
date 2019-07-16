@@ -108,7 +108,7 @@ public final class ServerUtil {
                 "img-src 'self'; " +
                 "object-src 'none'; " +
                 "child-src https://*.europa.eu; " +
-                "script-src 'self' ; " +
+                "script-src 'self' 'kdoul.me'; " +
                 "connect-src 'self'; " +
                 "base-uri 'self'; " +
                 "form-action 'self'; " +
