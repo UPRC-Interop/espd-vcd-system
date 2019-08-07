@@ -37,7 +37,7 @@
        <div class="exclusionCriteria" >
 
          <div class="criteria">
-           <mat-checkbox name=exclusionACriteria[i] color="primary" checked="exclusionACriteria[i].selected"
+           <mat-checkbox name="{{criteria.selected}}" color="primary"
                          [(ngModel)]="dataService.exclusionACriteria[i].selected"
                          [disabled]="dataService.exclusionACriteria[i].compulsory">{{criteria.propertyKeyMap.pk1 | translate}}</mat-checkbox>
            <div class="critDesc">{{criteria.propertyKeyMap.pk2 | translate}}</div>
@@ -93,7 +93,7 @@
         <div class="exclusionCriteria" >
 
           <div class="criteria">
-            <mat-checkbox name=exclusionBCriteria[i] color="primary" checked="exclusionBCriteria[i].selected"
+            <mat-checkbox name="{{criteria.selected}}" color="primary"
                           [(ngModel)]="dataService.exclusionBCriteria[i].selected"
                           [disabled]="dataService.exclusionBCriteria[i].compulsory">{{criteria.propertyKeyMap.pk1 | translate}}</mat-checkbox>
             <div class="critDesc">{{criteria.propertyKeyMap.pk2 | translate}}</div>
@@ -147,7 +147,7 @@
       <mat-card *ngFor="let criteria of dataService.exclusionCCriteria; let i = index">
         <div class="exclusionCriteria" >
           <div class="criteria">
-            <mat-checkbox name=exclusionCCriteria[i] color="primary" checked="exclusionCCriteria[i].selected"
+            <mat-checkbox color="primary" name="{{criteria.name}}"
                           [(ngModel)]="dataService.exclusionCCriteria[i].selected"
                           [disabled]="dataService.exclusionCCriteria[i].compulsory">{{criteria.propertyKeyMap.pk1 | translate}}</mat-checkbox>
             <div class="critDesc">{{criteria.propertyKeyMap.pk2  | translate}}</div>
@@ -200,7 +200,7 @@
       <mat-card *ngFor="let criteria of dataService.exclusionDCriteria; let i=index">
         <div class="exclusionCriteria" >
           <div class="criteria">
-            <mat-checkbox color="primary" checked="criteria.selected" name="exclusionDCriteria"
+            <mat-checkbox color="primary" name="{{criteria.selected}}"
                           [(ngModel)]="dataService.exclusionDCriteria[i].selected"
                           [disabled]="dataService.isReadOnly()">{{criteria.propertyKeyMap.pk1 | translate}}</mat-checkbox>
             <div class="critDesc">{{criteria.propertyKeyMap.pk2 | translate}}</div>
