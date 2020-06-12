@@ -13,18 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 plugins {
-    id "org.openrepose.gradle.plugins.jaxb" version "2.5.0"
     id 'java-library'
 }
 
-dependencies {
-    implementation group: 'com.googlecode.jaxb-namespaceprefixmapper-interfaces', name: 'JAXBNamespacePrefixMapper', version: '2.2.4'
-    implementation "com.sun.xml.bind:jaxb-core:${project.jaxb_impl_version}"
-    implementation "com.sun.xml.bind:jaxb-impl:${project.jaxb_impl_version}"
-    implementation "javax.xml.bind:jaxb-api:${project.jaxb_impl_version}"
-
-    api project (":edm:edm102")
-    api project (":edm:edm202")
-    api project (":edm:edm210")
-}
