@@ -1,7 +1,5 @@
-import java.text.SimpleDateFormat
-
 /**
- * Copyright 2016-2019 University of Piraeus Research Center
+ * Copyright 2016-2018 University of Piraeus Research Center
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,13 +13,10 @@ import java.text.SimpleDateFormat
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-plugins {
-    id 'application'
-    id "org.ajoberstar.grgit" version "4.0.2"
-}
+apply plugin: 'application'
 
-//final sourceCompatibility = 1.11
-final mainClassName = 'eu.esens.espdvcd.designer.Server'
+sourceCompatibility = 11
+mainClassName = 'eu.esens.espdvcd.designer.Server'
 
 dependencies {
     compile project(':builder')
@@ -30,9 +25,17 @@ dependencies {
     compile project(':validator')
 
     compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.7'
-    compile 'com.sparkjava:spark-core:2.9.0'
- // https://mvnrepository.com/artifact/com.typesafe/config
-    compile group: 'com.typesafe', name: 'config', version: '1.3.3'
+    compile 'com.sparkjava:spark-core:2.8.0'
+//    compile 'com.sparkjava:spark-debug-tools:0.5'
+    // https://mvnrepository.com/artifact/eu.toop/toop-commons
+    compile group: 'eu.toop', name: 'toop-commons', version: '0.9.1'
+// https://mvnrepository.com/artifact/com.helger/ph-web
+    compile group: 'com.helger', name: 'ph-web', version: '9.0.1'
+    // https://mvnrepository.com/artifact/com.helger/ph-commons
+    compile group: 'com.helger', name: 'ph-commons', version: '9.1.2'
+    // https://mvnrepository.com/artifact/com.helger/ph-httpclient
+    compile group: 'com.helger', name: 'ph-httpclient', version: '9.0.1'
+
 }
 
 /**
@@ -40,7 +43,6 @@ dependencies {
  */
 
 run {
-    this.mainClassName = mainClassName
     dependsOn "buildWebApp"
     finalizedBy "deleteWebAppResources"
 }
@@ -68,7 +70,7 @@ task runWebApp(type: Exec) {
 
 jar {
     manifest {
-        attributes "Main-Class": mainClassName
+        attributes "Main-Class": "eu.esens.espdvcd.designer.Server"
     }
 
     doFirst {
@@ -82,7 +84,7 @@ task jarWithFrontend(type: Jar) {
     dependsOn "buildWebAppDeploy"
 
     manifest {
-        attributes "Main-Class": mainClassName
+        attributes "Main-Class": "eu.esens.espdvcd.designer.Server"
     }
 
     doFirst {
@@ -98,7 +100,7 @@ task createJarFromExistingResources(type: Jar) {
     dependsOn "copyWebAppResources"
 
     manifest {
-        attributes "Main-Class": mainClassName
+        attributes "Main-Class": "eu.esens.espdvcd.designer.Server"
     }
 
     doFirst {
@@ -148,45 +150,9 @@ task buildWebAppDeploy(type: Exec) {
     inputs.dir "$webappDir"
 //    group = BasePlugin.BUILD_GROUP
     if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")) {
-        commandLine "ng.cmd", "build", "--prod", "--optimization", "--build-optimizer",  "--subresource-integrity"
+        commandLine "ng.cmd", "build", "--prod", "--optimization", "--build-optimizer"
     } else {
-        commandLine "ng", "build", "--prod", "--optimization", "--build-optimizer",  "--subresource-integrity"
-    }
-    doLast {
-        copy {
-            from "$webappDir/dist"
-            into "$projectDir/src/main/resources/public"
-        }
-    }
-}
-
-task buildWebAppDeploySnf(type: Exec) {
-    dependsOn "npmInstallWebApp"
-    workingDir "$webappDir"
-    inputs.dir "$webappDir"
-//    group = BasePlugin.BUILD_GROUP
-    if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")) {
-        commandLine "ng.cmd", "build", "--configuration=snf"
-    } else {
-        commandLine "ng", "build", "--configuration=snf"
-    }
-    doLast {
-        copy {
-            from "$webappDir/dist"
-            into "$projectDir/src/main/resources/public"
-        }
-    }
-}
-
-task buildWebAppDeploySnfDev(type: Exec) {
-    dependsOn "npmInstallWebApp"
-    workingDir "$webappDir"
-    inputs.dir "$webappDir"
-//    group = BasePlugin.BUILD_GROUP
-    if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")) {
-        commandLine "ng.cmd", "build", "--configuration=snf-dev"
-    } else {
-        commandLine "ng", "build", "--configuration=snf-dev"
+        commandLine "ng", "build", "--prod", "--optimization", "--build-optimizer"
     }
     doLast {
         copy {
@@ -216,16 +182,3 @@ task copyWebAppResources {
         }
     }
 }
-
-task generateVersionFile {
-    doLast {
-        file("$projectDir/src/main/resources/application.version").text = """
-eu.esens.espdvcd.build.version="$version"
-eu.esens.espdvcd.build.revision=${grgit.open(dir: "${rootProject.projectDir}").head().id}
-eu.esens.espdvcd.build.time="${new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date())}"
-eu.esens.espdvcd.build.name="ESPD/VCD System"
-"""
-    }
-}
-
-compileJava.dependsOn generateVersionFile
