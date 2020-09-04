@@ -16,24 +16,34 @@
 package eu.esens.espdvcd.model.util;
 
 import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- *
- * @author Konstantinos Raptis
+ * @author Konstantinos Raptis [kraptis at unipi.gr] on 3/9/2020.
  */
-public class CustomTextValueDeserializer extends JsonDeserializer<String> {
+public class CustomArrayOfObjectsDeserializer extends JsonDeserializer<List<String>> {
 
     @Override
-    public String deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+    public List<String> deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         JsonNode root = mapper.readTree(p);
-        return root.path("value").asText();
+        List<String> resultList = new ArrayList<>();
+        for (JsonNode currentNode : root) {
+            JsonToken currentToken = p.getCurrentToken();
+
+            if (currentToken == JsonToken.START_OBJECT) {
+                resultList.add(currentNode.path("value").asText());
+            }
+        }
+        return resultList;
     }
-    
+
 }
