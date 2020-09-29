@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-2019 University of Piraeus Research Center
+ * Copyright 2016-2018 University of Piraeus Research Center
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,39 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-plugins {
-    id "com.github.hierynomus.license" version "0.15.0"
-}
-
-allprojects {
-    apply plugin: "license"
-
-    license {
-        header = rootProject.file('LICENSE-HEADER-2.0.txt')
-        ext.year = '2016-2019'
-        ext.name = 'University of Piraeus Research Center'
-        excludes(["**/*.xlsx", "**/*.xml", "**/*.xsl", "**/*.doc", "**/*.pdf",
-                  "**/*.jks", "**/*.gc", "**/*.cva", "**/*.sch", "**/*.xslt",
-                  "**/*.xjb", "**/*.xsd", "**/*.json", "**/*.css", "**/*.version,", "**/*.conf"])
-        skipExistingHeaders = true
-        ignoreFailures = true
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "gradle.plugin.nl.javadude.gradle.plugins:license-gradle-plugin:0.14.0"
     }
 }
 
-subprojects {
+apply plugin: "com.github.hierynomus.license"
+
+subprojects { project ->
     apply plugin: 'java'
     apply plugin: 'maven'
     apply plugin: 'maven-publish'
+    apply plugin: "com.github.hierynomus.license"
 
     version = '2.1.0'
-    group = 'eu.esens.espdvcd'
+    group = 'eu.espdint.espdvcd'
     
     project.ext.webappDir = "$rootProject.projectDir/designer/designer-frontend"
     project.ext.slf4j_version = '1.7.13'
     project.ext.log4j2_version = '2.4.1'
-    project.ext.jaxb_impl_version = '2.3.0.1'
-    project.ext.jaxb_api_version = '2.3.1'
-    project.ext.jaxb_xjc_version = '2.3.2'
+    project.ext.jaxb_impl_version = '2.2.11'
+    project.ext.jaxb_api_version = '2.2.12'
 
     project.ext.libraries = [
             /* logging */
@@ -60,9 +54,19 @@ subprojects {
         jcenter()
     }
 
-    test {
+    license {
+        header = rootProject.file('LICENSE-HEADER-2.0.txt')
+        ext.year = '2016-2018'
+        ext.name = 'University of Piraeus Research Center'
+        excludes(["**/*.xlsx", "**/*.xml", "**/*.xsl", "**/*.doc", "**/*.pdf", "**/*.jks", "**/*.gc", "**/*.cva", "**/*.sch", "**/*.xslt", "**/*.xjb"])
+        skipExistingHeaders = true
+        ignoreFailures = true
+    }
+
+    test{
         maxHeapSize = "512m"
     }
+
 }
 
 // publishing definition
@@ -119,16 +123,12 @@ configure(subprojects)
         }
 
 
-wrapper {
-    gradleVersion = '5.3.1'
-}
-
 task licenseFormatDesignerFrontend(type: com.hierynomus.gradle.license.tasks.LicenseFormat) {
-    source = fileTree(dir: "designer/designer-frontend/src").exclude(["**/*.json", "**/*.ico", "**/*.css"])
+    source = fileTree(dir: "designer/designer-frontend/src").exclude(["**/*.json", "**/*.ico"])
 
     license {
         header = rootProject.file('LICENSE-HEADER-2.0.txt')
-        ext.year = '2016-2019'
+        ext.year = '2016-2018'
         ext.name = 'University of Piraeus Research Center'
         skipExistingHeaders = true
         ignoreFailures = true

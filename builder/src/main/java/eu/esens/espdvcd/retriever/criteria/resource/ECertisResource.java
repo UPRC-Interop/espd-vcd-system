@@ -158,7 +158,11 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
             JsonNode criteria = root.path("Criterion");
 
             for (JsonNode criterion : criteria) {
-                String tempID = criterion.path("ID").asText();
+//                String tempID = criterion.path("ID").asText();
+//                criterionIDList.add(tempID);
+
+                // Konstantinos Raptis: After EU e-Certis Update 03-09-2020
+                String tempID = criterion.path("ID").path("value").asText();
                 criterionIDList.add(tempID);
             }
 
