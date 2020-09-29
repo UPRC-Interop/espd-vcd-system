@@ -18,7 +18,6 @@ package eu.esens.espdvcd.retriever.criteria.resource;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.esens.espdvcd.model.retriever.ECertisCriterion;
-import eu.esens.espdvcd.schema.enums.EDMVersion;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -65,6 +64,7 @@ public class ECertisResourceTest {
 
     @Test
     public void testGetEvidencesForCriterion() throws Exception {
+        // r.getEvidencesForCriterion("14df34e8-15a9-411c-8c05-8c051693e277").forEach(evidence -> SelectableCriterionPrinter.printEvidence(evidence));
         Assert.assertFalse(r.getEvidencesForCriterion("a205fa3b-0719-4c8a-b09d-8f6b2cbf8bd2").isEmpty());
     }
 
@@ -74,7 +74,8 @@ public class ECertisResourceTest {
         ECertisResource r = new ECertisResource();
 
         // ECertisCriterion ec = r.getECertisCriterion("7c351fc0-1fd0-4bad-bfd8-1717a9dcf9d1"); // gr national
-        ECertisCriterion ec = r.getECertisCriterion("e27abb31-c158-4821-8b32-ec2204f01176");
+        ECertisCriterion ec = r.getECertisCriterion("005eb9ed-1347-4ca3-bb29-9bc0db64e1ab");
+        // ECertisCriterion ec = r.getECertisCriterion("005eb9ed-1347-4ca3-bb29-9bc0db64e1ab");
 
         ObjectMapper mapper = new ObjectMapper();
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
