@@ -21,6 +21,7 @@ import com.github.rholder.retry.RetryException;
 import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
 import eu.esens.espdvcd.model.retriever.ECertisCriterion;
 import eu.esens.espdvcd.model.retriever.ECertisCriterionImpl;
+import eu.esens.espdvcd.retriever.criteria.resource.enums.ResourceConfig;
 
 import java.io.IOException;
 import java.util.concurrent.Callable;
@@ -30,9 +31,6 @@ import java.util.concurrent.ExecutionException;
  * @author Konstantinos Raptis
  */
 public class GetECertisCriterionRetryingTask implements Callable<ECertisCriterion> {
-
-    private static final String ECERTIS_URL = "https://ec.europa.eu/growth/tools-databases/ecertisrest";
-    private static final String ALL_CRITERIA_URL = ECERTIS_URL + "/criteria";
 
     private String ID;
     private EULanguageCodeEnum lang;
@@ -50,7 +48,7 @@ public class GetECertisCriterionRetryingTask implements Callable<ECertisCriterio
     public ECertisCriterion call() throws ExecutionException, RetryException, IOException {
         String theLang = lang.name().toLowerCase();
 
-        GetFromECertisTask task = new GetFromECertisTask(ALL_CRITERIA_URL + "/" + ID + "?lang=" + theLang);
+        GetFromECertisTask task = new GetFromECertisTask(ResourceConfig.INSTANCE.getECertisCriteriaURL() + "/" + ID + "?lang=" + theLang);
         GetFromECertisRetryingTask rTask = new GetFromECertisRetryingTask(task);
 
         ObjectMapper mapper = new ObjectMapper();

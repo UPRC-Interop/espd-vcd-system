@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  * <p>
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,6 +21,7 @@ import eu.esens.espdvcd.model.LegislationReference;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
 import eu.esens.espdvcd.retriever.criteria.CriteriaExtractor;
+import eu.esens.espdvcd.retriever.criteria.resource.enums.ResourceConfig;
 import eu.esens.espdvcd.retriever.criteria.resource.enums.ResourceType;
 import eu.esens.espdvcd.schema.enums.EDMVersion;
 import eu.espd.schema.v1.ccv_commonaggregatecomponents_1.CriterionType;
@@ -44,9 +45,6 @@ public class ESPDArtefactResource implements CriteriaResource, LegislationResour
 
     private static final Logger LOGGER = Logger.getLogger(ESPDArtefactResource.class.getName());
 
-    private static final String ESPD_REQUEST_V1_REGULATED_RESOURCE = "/templates/v1_regulated/espd-request-2018.03.xml";
-    private static final String ESPD_REQUEST_V2_REGULATED_RESOURCE = "/templates/v2_regulated/ESPDRequest_DA_Test-2.1.0-v0.5.xml";
-
     private Map<String, SelectableCriterion> criterionMap;
 
     public ESPDArtefactResource(@NotNull EDMVersion version) {
@@ -54,12 +52,12 @@ public class ESPDArtefactResource implements CriteriaResource, LegislationResour
 
         switch (version) {
             case V1:
-                ESPDRequestType requestV1Template = JAXB.unmarshal(CriteriaExtractor.class.getResourceAsStream(ESPD_REQUEST_V1_REGULATED_RESOURCE), ESPDRequestType.class);
+                ESPDRequestType requestV1Template = JAXB.unmarshal(CriteriaExtractor.class.getResourceAsStream(ResourceConfig.INSTANCE.getESPDArtefactRegulatedV102()), ESPDRequestType.class);
                 requestV1Template.getCriterion()
                         .forEach(this::addToCriterionMap);
                 break;
             case V2:
-                QualificationApplicationRequestType requestV2Template = JAXB.unmarshal(CriteriaExtractor.class.getResourceAsStream(ESPD_REQUEST_V2_REGULATED_RESOURCE), QualificationApplicationRequestType.class);
+                QualificationApplicationRequestType requestV2Template = JAXB.unmarshal(CriteriaExtractor.class.getResourceAsStream(ResourceConfig.INSTANCE.getESPDArtefactRegulatedV210()), QualificationApplicationRequestType.class);
                 requestV2Template.getTenderingCriterion()
                         .forEach(this::addToCriterionMap);
                 break;

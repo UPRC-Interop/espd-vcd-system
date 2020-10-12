@@ -15,12 +15,12 @@
  */
 package eu.esens.espdvcd.retriever.criteria.resource;
 
+import eu.esens.espdvcd.retriever.criteria.resource.enums.ResourceConfig;
+
 public class SelfContainedCriteriaTaxonomyResource extends CriteriaTaxonomyResource {
 
-    private static final String RESOURCE_PATH = "/templates/v2_selfcontained/ESPD-CriteriaTaxonomy-SELFCONTAINED-V2.1.0_Property_03.xlsx";
-
     public SelfContainedCriteriaTaxonomyResource() {
-        super(RESOURCE_PATH);
+        super(ResourceConfig.INSTANCE.getTaxonomySelfContainedV210());
     }
 
 }

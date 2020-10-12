@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  * <p>
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,6 +24,7 @@ import eu.esens.espdvcd.model.LegislationReference;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
 import eu.esens.espdvcd.model.retriever.ECertisCriterion;
+import eu.esens.espdvcd.retriever.criteria.resource.enums.ResourceConfig;
 import eu.esens.espdvcd.retriever.criteria.resource.enums.ResourceType;
 import eu.esens.espdvcd.retriever.criteria.resource.tasks.GetECertisCriterionRetryingTask;
 import eu.esens.espdvcd.retriever.criteria.resource.tasks.GetFromECertisRetryingTask;
@@ -49,9 +50,6 @@ import java.util.stream.Collectors;
 public class ECertisResource implements CriteriaResource, LegislationResource, EvidencesResource {
 
     private static final Logger LOGGER = Logger.getLogger(ECertisResource.class.getName());
-
-    private static final String ECERTIS_URL = "https://ec.europa.eu/growth/tools-databases/ecertisrest";
-    private static final String ALL_CRITERIA_URL = ECERTIS_URL + "/criteria";
 
     // Contains all European criteria
     private Map<String, ECertisCriterion> criterionMap;
@@ -152,7 +150,7 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
         List<String> criterionIDList = new ArrayList<>();
 
         try {
-            GetFromECertisRetryingTask task = new GetFromECertisRetryingTask(new GetFromECertisTask(ALL_CRITERIA_URL));
+            GetFromECertisRetryingTask task = new GetFromECertisRetryingTask(new GetFromECertisTask(ResourceConfig.INSTANCE.getECertisCriteriaURL()));
             ObjectMapper mapper = new ObjectMapper();
             JsonNode root = mapper.readTree(task.call());
             JsonNode criteria = root.path("Criterion");
@@ -184,7 +182,7 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
         List<SelectableCriterion> cList = new ArrayList<>();
 
         try {
-            GetFromECertisRetryingTask task = new GetFromECertisRetryingTask(new GetFromECertisTask(ALL_CRITERIA_URL));
+            GetFromECertisRetryingTask task = new GetFromECertisRetryingTask(new GetFromECertisTask(ResourceConfig.INSTANCE.getECertisCriteriaURL()));
             ObjectMapper mapper = new ObjectMapper();
             JsonNode root = mapper.readTree(task.call());
             JsonNode criteria = root.path("Criterion");
