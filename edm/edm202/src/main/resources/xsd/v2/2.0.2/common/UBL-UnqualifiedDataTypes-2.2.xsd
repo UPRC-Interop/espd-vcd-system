@@ -17,12 +17,12 @@
   Per table 8-3, the value, rate and percentage types are based on
   "Numeric. Type" as they are secondary representation terms.
 
-  Per table 8-3, the name type is based on "Text. Type" as it is a 
+  Per table 8-3, the name type is based on "Text. Type" as it is a
   secondary representation term.
 
-  Per XSD lexical constraints, the following unqualified data types 
-  corresponding to core component types and secondary representation terms 
-  are based on XSD types (accordingly, the supplementary component "format" 
+  Per XSD lexical constraints, the following unqualified data types
+  corresponding to core component types and secondary representation terms
+  are based on XSD types (accordingly, the supplementary component "format"
   is not made available for these types):
 
         Date Time. Type  on  xsd:dateTime
@@ -33,16 +33,6 @@
   Per UBL 2.0 the following supplementary components are restricted to be
   required rather than optional:
 
-   Amount. Currency. Identifier  as  (AmountType)/@currencyID
-   Binary Object. Mime. Code     as  (BinaryObjectType)/@mimeCode
-   Graphic. Mime. Code           as  (GraphicType)/@mimeCode
-   Picture. Mime. Code           as  (PictureType)/@mimeCode
-   Sound. Mime. Code             as  (SoundType)/@mimeCode
-   Video. Mime. Code             as  (VideoType)/@mimeCode
-   Measure. Unit. Code           as  (MeasureType)/@unitCode
-
-  All other unqualified data types inherit the core component types complete
-  with their supplementary components.
 -->
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
 targetNamespace="urn:oasis:names:specification:ubl:schema:xsd:UnqualifiedDataTypes-2" 

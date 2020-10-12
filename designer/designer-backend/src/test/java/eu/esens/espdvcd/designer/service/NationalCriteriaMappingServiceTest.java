@@ -1,12 +1,12 @@
 /**
- * Copyright 2016-2019 University of Piraeus Research Center
- *
+ * Copyright 2016-2020 University of Piraeus Research Center
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * <p>
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -54,7 +54,7 @@ public class NationalCriteriaMappingServiceTest {
                 "DE");
         criteria.forEach(criterion -> {
             Assert.assertEquals("Kriminelle Vereinigungen", criterion.getName());
-            Assert.assertEquals("\"Der öffentliche Auftraggeber schließt ein Unternehmen " +
+            Assert.assertEquals("\"Der öffentliche Auftraggeber schlie�?t ein Unternehmen " +
                     "zu jedem Zeitpunkt des Vergabeverfahrens von der Teilnahme aus, wenn er Kenntnis davon hat, " +
                     "dass eine Person, deren Verhalten nach Absatz 3 dem Unternehmen zuzurechnen " +
                     "ist, rechtskräftig verurteilt worden ist nach:\n" +
