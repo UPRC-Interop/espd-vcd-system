@@ -16,6 +16,7 @@
 package eu.esens.espdvcd.retriever.criteria.resource;
 
 import eu.esens.espdvcd.retriever.criteria.resource.enums.ResourceConfig;
+import org.apache.http.client.utils.URIBuilder;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -30,14 +31,20 @@ public class ResourceConfigTest {
     private static final Logger LOGGER = Logger.getLogger(ResourceConfigTest.class.getName());
 
     @Test
-    public void testGetAllCriteriaURL() {
+    public void testGetAllCriteriaURL() throws Exception {
 
         if (ResourceConfig.INSTANCE.useProduction()) {
             Assert.assertEquals("https://ec.europa.eu/growth/tools-databases/ecertisrest/criteria",
-                    ResourceConfig.INSTANCE.getECertisCriteriaURL());
+                    new URIBuilder().setScheme(ResourceConfig.INSTANCE.getECertisScheme())
+                            .setHost(ResourceConfig.INSTANCE.getECertisHost())
+                            .setPath(ResourceConfig.INSTANCE.getECertisCriteriaPath())
+                            .build().toString());
         } else {
             Assert.assertEquals("https://webgate.acceptance.ec.europa.eu/growth/tools-databases/ecertisrest3/criteria",
-                    ResourceConfig.INSTANCE.getECertisCriteriaURL());
+                    new URIBuilder().setScheme(ResourceConfig.INSTANCE.getECertisScheme())
+                            .setHost(ResourceConfig.INSTANCE.getECertisHost())
+                            .setPath(ResourceConfig.INSTANCE.getECertisCriteriaPath())
+                            .build().toString());
         }
     }
 

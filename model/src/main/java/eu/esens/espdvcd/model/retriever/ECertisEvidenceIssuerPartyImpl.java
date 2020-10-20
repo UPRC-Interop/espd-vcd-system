@@ -15,6 +15,8 @@
  */
 package eu.esens.espdvcd.model.retriever;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import eu.esens.espdvcd.model.util.CustomStringValueDeserializer;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -31,6 +33,7 @@ import java.util.ArrayList;
             "websiteURI", 
             "partyName"
         })
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ECertisEvidenceIssuerPartyImpl implements ECertisEvidenceIssuerParty {
        
     private String websiteURI;
@@ -44,6 +47,7 @@ public class ECertisEvidenceIssuerPartyImpl implements ECertisEvidenceIssuerPart
 
     @Override
     @JsonProperty("WebsiteURI")
+    @JsonAlias({"websiteURI"})
     public String getWebsiteURI() {
         return websiteURI;
     }
@@ -56,6 +60,7 @@ public class ECertisEvidenceIssuerPartyImpl implements ECertisEvidenceIssuerPart
 
     @Override
     @JsonProperty("PartyName")
+    @JsonAlias({"partyName"})
     public List<ECertisPartyName> getPartyName() {
         if (partyName == null) {
             partyName = new ArrayList<>();

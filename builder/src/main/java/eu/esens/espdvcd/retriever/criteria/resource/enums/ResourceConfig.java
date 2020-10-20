@@ -44,16 +44,53 @@ public enum ResourceConfig {
         return getECertisConfig().getBoolean("use-production");
     }
 
-    public String getECertisBaseURL() {
+    public String getECertisHost() {
         return useProduction()
-                ? getProductionConfig().getString("base-url")
-                : getAcceptanceConfig().getString("base-url");
+                ? getProductionConfig().getString("host")
+                : getAcceptanceConfig().getString("host");
     }
 
-    public String getECertisCriteriaURL() {
+    /**
+     * http or https
+     *
+     * @return
+     */
+    public String getECertisScheme() {
+        return useProduction()
+                ? getProductionConfig().getString("scheme")
+                : getAcceptanceConfig().getString("scheme");
+    }
+
+    public String getECertisCriteriaPath() {
         return useProduction()
                 ? getProductionConfig().getString("criteria")
                 : getAcceptanceConfig().getString("criteria");
+    }
+
+    private Config getECertisJsonElement() {
+        return useProduction()
+                ? getProductionConfig().getConfig("jsonelements")
+                : getAcceptanceConfig().getConfig("jsonelements");
+    }
+
+    public String getECertisCriterionJsonElement() {
+        return getECertisJsonElement().getString("criterion");
+    }
+
+    public String getECertisIDJsonElement() {
+        return getECertisJsonElement().getString("id");
+    }
+
+    public String getECertisValueJsonElement() {
+        return getECertisJsonElement().getString("value");
+    }
+
+    public String getECertisNameJsonElement() {
+        return getECertisJsonElement().getString("name");
+    }
+
+    public String getECertisDescriptionJsonElement() {
+        return getECertisJsonElement().getString("description");
     }
 
     public String getTaxonomyRegulatedV210() {

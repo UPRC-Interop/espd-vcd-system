@@ -15,6 +15,7 @@
  */
 package eu.esens.espdvcd.model.retriever;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -30,6 +31,7 @@ import eu.esens.espdvcd.model.util.CustomStringValueDeserializer;
             "currencyID", 
             "currencyCodeListVersionID"
         })
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ECertisAmountImpl implements ECertisAmount {
         
     private String value;

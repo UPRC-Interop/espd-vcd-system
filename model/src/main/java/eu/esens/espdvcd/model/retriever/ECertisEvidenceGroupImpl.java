@@ -15,6 +15,8 @@
  */
 package eu.esens.espdvcd.model.retriever;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import eu.esens.espdvcd.model.util.CustomStringValueDeserializer;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -31,6 +33,7 @@ import java.util.List;
              "ID", 
              "evidences"
          })
+ @JsonIgnoreProperties(ignoreUnknown = true)
  public class ECertisEvidenceGroupImpl implements ECertisEvidenceGroup {
        
     private String ID; 
@@ -38,6 +41,7 @@ import java.util.List;
 
     @Override
     @JsonProperty("ID")
+    @JsonAlias({"id"})
     public String getID() {
         return ID;
     }
@@ -50,6 +54,7 @@ import java.util.List;
     
     @Override
     @JsonProperty("TypeOfEvidence")
+    @JsonAlias({"typeOfEvidence"})
     public List<ECertisEvidence> getEvidences() {
         if (evidences == null) {
             evidences = new ArrayList<>();

@@ -20,6 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.rholder.retry.RetryException;
 import eu.esens.espdvcd.builder.model.ModelFactory;
 import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
+import eu.esens.espdvcd.codelist.enums.ecertis.ECertisNationalEntityEnum;
 import eu.esens.espdvcd.model.LegislationReference;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
@@ -29,11 +30,13 @@ import eu.esens.espdvcd.retriever.criteria.resource.enums.ResourceType;
 import eu.esens.espdvcd.retriever.criteria.resource.tasks.GetECertisCriterionRetryingTask;
 import eu.esens.espdvcd.retriever.criteria.resource.tasks.GetFromECertisRetryingTask;
 import eu.esens.espdvcd.retriever.criteria.resource.tasks.GetFromECertisTask;
+import eu.esens.espdvcd.retriever.criteria.resource.utils.ECertisURIBuilder;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.http.client.ClientProtocolException;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -150,21 +153,23 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
         List<String> criterionIDList = new ArrayList<>();
 
         try {
-            GetFromECertisRetryingTask task = new GetFromECertisRetryingTask(new GetFromECertisTask(ResourceConfig.INSTANCE.getECertisCriteriaURL()));
+            GetFromECertisRetryingTask task = new GetFromECertisRetryingTask(
+                    new GetFromECertisTask(
+                            new ECertisURIBuilder()
+                                    .buildCriteriaURI()));
             ObjectMapper mapper = new ObjectMapper();
             JsonNode root = mapper.readTree(task.call());
-            JsonNode criteria = root.path("Criterion");
+            JsonNode criteria = root.path(ResourceConfig.INSTANCE.getECertisCriterionJsonElement());
 
             for (JsonNode criterion : criteria) {
-//                String tempID = criterion.path("ID").asText();
-//                criterionIDList.add(tempID);
-
-                // Konstantinos Raptis: After EU e-Certis Update 03-09-2020
-                String tempID = criterion.path("ID").path("value").asText();
+                String tempID = criterion
+                        .path(ResourceConfig.INSTANCE.getECertisIDJsonElement())
+                        .path(ResourceConfig.INSTANCE.getECertisValueJsonElement())
+                        .asText();
                 criterionIDList.add(tempID);
             }
 
-        } catch (RetryException | ExecutionException | IOException e) {
+        } catch (RetryException | ExecutionException | IOException | URISyntaxException e) {
             throw new RetrieverException(e);
         }
 
@@ -182,21 +187,24 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
         List<SelectableCriterion> cList = new ArrayList<>();
 
         try {
-            GetFromECertisRetryingTask task = new GetFromECertisRetryingTask(new GetFromECertisTask(ResourceConfig.INSTANCE.getECertisCriteriaURL()));
+            GetFromECertisRetryingTask task = new GetFromECertisRetryingTask(
+                    new GetFromECertisTask(new ECertisURIBuilder().buildCriteriaURI()));
             ObjectMapper mapper = new ObjectMapper();
             JsonNode root = mapper.readTree(task.call());
-            JsonNode criteria = root.path("Criterion");
+            JsonNode criteria = root.path(ResourceConfig.INSTANCE.getECertisCriterionJsonElement());
 
             for (JsonNode criterion : criteria) {
                 SelectableCriterion sc = new SelectableCriterion();
-                sc.setID(criterion.path("ID").asText());
-                sc.setName(criterion.path("Name").findValue("value").asText());
-                sc.setDescription(criterion.path("Description").findValue("value").asText());
+                sc.setID(criterion.path(ResourceConfig.INSTANCE.getECertisIDJsonElement()).asText());
+                sc.setName(criterion.path(ResourceConfig.INSTANCE.getECertisNameJsonElement())
+                        .findValue(ResourceConfig.INSTANCE.getECertisValueJsonElement()).asText());
+                sc.setDescription(criterion.path(ResourceConfig.INSTANCE.getECertisDescriptionJsonElement())
+                        .findValue(ResourceConfig.INSTANCE.getECertisValueJsonElement()).asText());
                 sc.setSelected(true);
                 cList.add(sc);
             }
 
-        } catch (RetryException | ExecutionException | IOException e) {
+        } catch (RetryException | ExecutionException | IOException | URISyntaxException e) {
             throw new RetrieverException(e);
         }
 
@@ -287,6 +295,22 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
             throw new RetrieverException(e);
         }
 
+    }
+
+    @Override
+    public List<Evidence> getEvidencesForCriterion(String ID,
+                                                   ECertisNationalEntityEnum nationalEntity,
+                                                   EULanguageCodeEnum lang) throws RetrieverException {
+
+        GetECertisCriterionRetryingTask task = new GetECertisCriterionRetryingTask(ID, lang, nationalEntity);
+
+        try {
+            ECertisCriterion ec = task.call();
+            return ModelFactory.ESPD_REQUEST.extractEvidences(ec.getEvidenceGroups());
+
+        } catch (ExecutionException | RetryException | IOException e) {
+            throw new RetrieverException(e);
+        }
     }
 
     @Override

@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  * <p>
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,6 +16,7 @@
 package eu.esens.espdvcd.retriever.criteria.resource;
 
 import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
+import eu.esens.espdvcd.codelist.enums.ecertis.ECertisNationalEntityEnum;
 import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 
@@ -42,5 +43,17 @@ public interface EvidencesResource extends Resource {
      * @return The List of Evidences
      */
     List<Evidence> getEvidencesForCriterion(String ID, EULanguageCodeEnum lang) throws RetrieverException;
+
+    /**
+     * Get the Evidences of a Criterion for the selected national entity, in the selected language.
+     *
+     * @param ID   The National Criterion ID.
+     * @param nationalEntity The National entity, for which the retrieved evidences will refers to.
+     * @param lang The language code (ISO 639-1:2002).
+     * @return The List of Evidences
+     */
+    List<Evidence> getEvidencesForCriterion(String ID,
+                                            ECertisNationalEntityEnum nationalEntity,
+                                            EULanguageCodeEnum lang) throws RetrieverException;
 
 }

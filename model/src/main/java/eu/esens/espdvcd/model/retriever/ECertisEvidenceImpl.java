@@ -15,6 +15,8 @@
  */
 package eu.esens.espdvcd.model.retriever;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -43,6 +45,7 @@ import java.util.List;
                 "jurisdictionLevelCode",
                 "evidenceDocumentReference"
         })
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ECertisEvidenceImpl implements ECertisEvidence {
 
     private String ID;
@@ -65,6 +68,7 @@ public class ECertisEvidenceImpl implements ECertisEvidence {
 
     @Override
     @JsonProperty("ID")
+    @JsonAlias({"id"})
     public String getID() {
         return ID;
     }
@@ -77,6 +81,7 @@ public class ECertisEvidenceImpl implements ECertisEvidence {
 
     @Override
     @JsonProperty("TypeCode")
+    @JsonAlias({"TypeCode"})
     public String getTypeCode() {
         return typeCode;
     }
@@ -89,6 +94,7 @@ public class ECertisEvidenceImpl implements ECertisEvidence {
 
     @Override
     @JsonProperty("Name")
+    @JsonAlias({"name"})
     public String getName() {
         return name;
     }
@@ -101,6 +107,7 @@ public class ECertisEvidenceImpl implements ECertisEvidence {
 
     @Override
     @JsonProperty("Description")
+    @JsonAlias({"description"})
     public String getDescription() {
         return description;
     }
@@ -113,6 +120,7 @@ public class ECertisEvidenceImpl implements ECertisEvidence {
 
     @Override
     @JsonProperty("VersionID")
+    @JsonAlias({"versionID"})
     public String getVersionID() {
         return versionID;
     }
@@ -125,6 +133,7 @@ public class ECertisEvidenceImpl implements ECertisEvidence {
 
     @Override
     @JsonProperty("FeeAmount")
+    @JsonAlias({"feeAmount"})
     public ECertisAmount getFeeAmount() {
         return feeAmount;
     }
@@ -137,6 +146,7 @@ public class ECertisEvidenceImpl implements ECertisEvidence {
 
     @Override
     @JsonProperty("EvidenceIntendedUse")
+    @JsonAlias({"evidenceIntendedUse"})
     public ECertisEvidenceIntendedUse getEvidenceIntendedUse() {
         return evidenceIntendedUse;
     }
@@ -149,6 +159,7 @@ public class ECertisEvidenceImpl implements ECertisEvidence {
 
     @Override
     @JsonProperty("EvidenceIssuerParty")
+    @JsonAlias({"evidenceIssuerParty"})
     public List<ECertisEvidenceIssuerParty> getEvidenceIssuerParty() {
         if (evidenceIssuerParty == null) {
             evidenceIssuerParty = new ArrayList<>();
@@ -164,6 +175,7 @@ public class ECertisEvidenceImpl implements ECertisEvidence {
 
     @Override
     @JsonProperty("AddresseeDescription")
+    @JsonAlias({"addresseeDescription"})
     public String getAddresseeDescription() {
         return addresseeDescription;
     }
@@ -176,6 +188,7 @@ public class ECertisEvidenceImpl implements ECertisEvidence {
 
     @Override
     @JsonProperty("JurisdictionLevelCode")
+    @JsonAlias({"jurisdictionLevelCode"})
     public List<String> getJurisdictionLevelCode() {
         if (jurisdictionLevelCode == null) {
             jurisdictionLevelCode = new ArrayList<>();
@@ -191,6 +204,7 @@ public class ECertisEvidenceImpl implements ECertisEvidence {
 
     @Override
     @JsonProperty("EvidenceDocumentReference")
+    @JsonAlias({"evidenceDocumentReference"})
     public List<ECertisEvidenceDocumentReference> getEvidenceDocumentReference() {
         if (evidenceDocumentReference == null) {
             evidenceDocumentReference = new ArrayList<>();

@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  * <p>
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,11 +15,14 @@
  */
 package eu.esens.espdvcd.retriever.criteria;
 
+import eu.esens.espdvcd.codelist.enums.CountryIdentificationEnum;
 import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
+import eu.esens.espdvcd.codelist.enums.ecertis.ECertisNationalEntityEnum;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -66,8 +69,16 @@ public interface CriteriaDataRetriever {
      * Specifies the language of the retrieved data.
      *
      * @param lang The language code (ISO 639-1:2002)
-     * @throws RetrieverException In case language code does not exist in relevant codelists.
+     * @throws RetrieverException In case the language code does not exists in the relevant codelists.
      */
     void setLang(EULanguageCodeEnum lang) throws RetrieverException;
+
+    /**
+     * Specifies the national entity the retrieved data will refers to.
+     *
+     * @param nationalEntity The national entity code.
+     * @throws RetrieverException
+     */
+    void setNationalEntity(ECertisNationalEntityEnum nationalEntity);
 
 }

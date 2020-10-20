@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  * <p>
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -26,6 +26,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 import java.net.SocketTimeoutException;
+import java.net.URI;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeoutException;
 import java.util.logging.Logger;
@@ -38,8 +39,8 @@ public class GetFromECertisTask implements Callable<String> {
     private static final Logger LOGGER = Logger.getLogger(GetFromECertisTask.class.getName());
     private final String url;
 
-    public GetFromECertisTask(String url) {
-        this.url = url;
+    public GetFromECertisTask(URI uri) {
+        this.url = uri.toString();
     }
 
     @Override

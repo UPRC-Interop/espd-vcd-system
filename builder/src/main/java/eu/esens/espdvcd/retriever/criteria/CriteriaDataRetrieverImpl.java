@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  * <p>
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,12 +20,14 @@ import eu.esens.espdvcd.builder.model.ModelFactory;
 import eu.esens.espdvcd.codelist.CodelistsV2;
 import eu.esens.espdvcd.codelist.enums.CountryIdentificationEnum;
 import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
+import eu.esens.espdvcd.codelist.enums.ecertis.ECertisNationalEntityEnum;
 import eu.esens.espdvcd.model.LegislationReference;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
 import eu.esens.espdvcd.model.retriever.ECertisCriterion;
 import eu.esens.espdvcd.retriever.criteria.resource.ECertisResource;
 import eu.esens.espdvcd.retriever.criteria.resource.EvidencesResource;
+import eu.esens.espdvcd.retriever.criteria.resource.enums.ResourceConfig;
 import eu.esens.espdvcd.retriever.criteria.resource.tasks.GetECertisCriterionRetryingTask;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -49,6 +51,7 @@ public class CriteriaDataRetrieverImpl implements CriteriaDataRetriever {
     private ECertisResource eCertisResource;
 
     private EULanguageCodeEnum lang;
+    private ECertisNationalEntityEnum nationalEntity;
 
     private enum CriterionOrigin {EUROPEAN, NATIONAL}
 
@@ -73,6 +76,12 @@ public class CriteriaDataRetrieverImpl implements CriteriaDataRetriever {
         } else {
             throw new RetrieverException(String.format("Error... Provided language Code %s is not Included in codelists", lang));
         }
+    }
+
+
+    @Override
+    public void setNationalEntity(@NotNull ECertisNationalEntityEnum nationalEntity) {
+        this.nationalEntity = nationalEntity;
     }
 
     /**
@@ -223,7 +232,11 @@ public class CriteriaDataRetrieverImpl implements CriteriaDataRetriever {
         List<Evidence> evidenceList = new ArrayList<>();
 
         for (EvidencesResource eResource : eResourceList) {
-            evidenceList.addAll(eResource.getEvidencesForCriterion(ID, lang));
+            if (ResourceConfig.INSTANCE.useProduction()) {
+                evidenceList.addAll(eResource.getEvidencesForCriterion(ID, lang));
+            } else {
+                evidenceList.addAll(eResource.getEvidencesForCriterion(ID, nationalEntity, lang));
+            }
         }
 
         return evidenceList;

@@ -13,9 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package eu.esens.espdvcd.codelist.enums;
+package eu.esens.espdvcd.codelist.enums.ecertis;
 
-public enum EULanguageCodeEnum {
+/**
+ * @author Konstantinos Raptis [kraptis at unipi.gr] on 17/10/2020.
+ */
+public enum ECertisLanguageCodeEnum {
 
     /**
      * Polski
@@ -112,6 +115,10 @@ public enum EULanguageCodeEnum {
     /**
      * Hrvatski
      */
-    HR
+    HR,
+    /**
+     * Norsk
+     */
+    NO
 
 }
