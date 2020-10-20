@@ -16,16 +16,19 @@
 package eu.esens.espdvcd.designer.service;
 
 import eu.esens.espdvcd.model.SelectableCriterion;
+import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
 import eu.esens.espdvcd.retriever.criteria.CriteriaDataRetriever;
 import eu.esens.espdvcd.retriever.criteria.CriteriaDataRetrieverBuilder;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
 
-public class NationalCriteriaMappingServiceTest {
+public class NationalCriteriaEvidenceServiceTest {
 
+    @Ignore
     @Test
     public void getNationalCriteria() throws RetrieverException {
         CriteriaDataRetriever retriever = new CriteriaDataRetrieverBuilder().build();
@@ -45,16 +48,17 @@ public class NationalCriteriaMappingServiceTest {
         });
     }
 
+    @Ignore
     @Test
     public void getTranslatedNationalCriteria() throws RetrieverException {
-        NationalCriteriaMappingService service = NationalCriteriaMappingService.getInstance();
-        List<SelectableCriterion> criteria = service.getTranslatedNationalCriteria(
+        NationalCriteriaEvidenceService service = NationalCriteriaEvidenceService.getInstance();
+        List<Evidence> evidences = service.getTranslatedEvidence(
                 "14df34e8-15a9-411c-8c05-8c051693e277",
                 "DE",
                 "DE");
-        criteria.forEach(criterion -> {
+        evidences.forEach(criterion -> {
             Assert.assertEquals("Kriminelle Vereinigungen", criterion.getName());
-            Assert.assertEquals("\"Der öffentliche Auftraggeber schlie�?t ein Unternehmen " +
+            Assert.assertEquals("\"Der öffentliche Auftraggeber schlie�?t ein Unternehmen " +
                     "zu jedem Zeitpunkt des Vergabeverfahrens von der Teilnahme aus, wenn er Kenntnis davon hat, " +
                     "dass eine Person, deren Verhalten nach Absatz 3 dem Unternehmen zuzurechnen " +
                     "ist, rechtskräftig verurteilt worden ist nach:\n" +
@@ -62,6 +66,19 @@ public class NationalCriteriaMappingServiceTest {
                     "1. § 129 des Strafgesetzbuchs (StGB) (Bildung krimineller Vereinigungen), " +
                     "§ 129a StGB (Bildung terroristischer Vereinigungen) oder " +
                     "§ 129b StGB (kriminelle und terroristische Vereinigungen im Ausland),\"\n", criterion.getDescription());
+        });
+    }
+
+    @Test
+    public void getTranslatedEvidenceTest() throws RetrieverException {
+        NationalCriteriaEvidenceService service = NationalCriteriaEvidenceService.getInstance();
+        List<Evidence> evidences = service.getTranslatedEvidence(
+                "005eb9ed-1347-4ca3-bb29-9bc0db64e1ab",
+                "DE",
+                "EL");
+        evidences.forEach(e -> {
+            System.out.println(e.getName());
+            System.out.println(e.getDescription());
         });
     }
 }

@@ -16,29 +16,33 @@
 package eu.esens.espdvcd.designer.service;
 
 import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
+import eu.esens.espdvcd.codelist.enums.ecertis.ECertisNationalEntityEnum;
 import eu.esens.espdvcd.model.SelectableCriterion;
+import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
 import eu.esens.espdvcd.retriever.criteria.CriteriaDataRetriever;
 import eu.esens.espdvcd.retriever.criteria.CriteriaDataRetrieverBuilder;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 
 import java.util.List;
 
-public enum NationalCriteriaMappingService {
+public enum NationalCriteriaEvidenceService {
     INSTANCE;
 
     final CriteriaDataRetriever retriever = new CriteriaDataRetrieverBuilder().build();
 
-    public static NationalCriteriaMappingService getInstance() {
+    public static NationalCriteriaEvidenceService getInstance() {
         return INSTANCE;
     }
 
-    public List<SelectableCriterion> getNationalCriteria(String euCriterionID, String euCountryCode) throws RetrieverException {
+    public List<Evidence> getEvidence(String euCriterionID, String euCountryCode) throws RetrieverException {
         retriever.setLang(EULanguageCodeEnum.EN);
-        return retriever.getNationalCriterionMapping(euCriterionID, euCountryCode);
+        retriever.setNationalEntity(ECertisNationalEntityEnum.valueOf(euCountryCode.toUpperCase()));
+        return retriever.getEvidences(euCriterionID);
     }
 
-    public List<SelectableCriterion> getTranslatedNationalCriteria(String euCriterionID, String euCountryCode, String lang) throws RetrieverException, IllegalArgumentException {
+    public List<Evidence> getTranslatedEvidence(String euCriterionID, String euCountryCode, String lang) throws RetrieverException, IllegalArgumentException {
         retriever.setLang(EULanguageCodeEnum.valueOf(lang.toUpperCase()));
-        return retriever.getNationalCriterionMapping(euCriterionID, euCountryCode);
+        retriever.setNationalEntity(ECertisNationalEntityEnum.valueOf(euCountryCode.toUpperCase()));
+        return retriever.getEvidences(euCriterionID);
     }
 }

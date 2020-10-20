@@ -18,7 +18,7 @@ package eu.esens.espdvcd.designer.endpoint;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import eu.esens.espdvcd.codelist.enums.internal.ContractingOperatorEnum;
 import eu.esens.espdvcd.designer.service.CriteriaService;
-import eu.esens.espdvcd.designer.service.NationalCriteriaMappingService;
+import eu.esens.espdvcd.designer.service.NationalCriteriaEvidenceService;
 import eu.esens.espdvcd.designer.util.Errors;
 import eu.esens.espdvcd.designer.util.JsonUtil;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
@@ -97,7 +97,7 @@ public class CriteriaEndpoint extends Endpoint {
         response.type("application/json");
         if (Objects.nonNull(lang) && Objects.nonNull(countryCode) && Objects.nonNull(criterionID)) {
             try {
-                return NationalCriteriaMappingService.getInstance().getTranslatedNationalCriteria(criterionID, countryCode, lang);
+                return NationalCriteriaEvidenceService.getInstance().getTranslatedEvidence(criterionID, countryCode, lang);
             } catch (RetrieverException e) {
                 response.status(502);
                 LOGGER.severe(e.getMessage());
@@ -109,7 +109,7 @@ public class CriteriaEndpoint extends Endpoint {
             }
         } else if (Objects.isNull(lang) && Objects.nonNull(countryCode) && Objects.nonNull(criterionID)) {
             try {
-                return NationalCriteriaMappingService.getInstance().getNationalCriteria(criterionID, countryCode);
+                return NationalCriteriaEvidenceService.getInstance().getEvidence(criterionID, countryCode);
             } catch (RetrieverException e) {
                 response.status(502);
                 LOGGER.severe(e.getMessage());
