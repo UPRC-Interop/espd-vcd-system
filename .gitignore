@@ -16,7 +16,7 @@ gradle.properties
 /.nb-gradle/
 /artifacts/
 .DS_Store
-
+*.hprof
 **/out/
 
 # Created by https://www.gitignore.io/api/eclipse
