@@ -66,6 +66,10 @@ public class CriteriaDataRetrieverBuilderTest {
         retriever.setLang(EULanguageCodeEnum.EL);
         SelectableCriterion sc = retriever.getCriterion(firstCriterionId);
         Assert.assertNotNull(sc);
+        Assert.assertNotNull(sc.getLegislationReference());
+        Assert.assertNotNull(sc.getLegislationReference().getJurisdictionLevelCode());
+        Assert.assertNotNull(sc.getLegislationReference().getDescription());
+        Assert.assertNotNull(sc.getLegislationReference().getURI());
         SelectableCriterionPrinter.print(sc);
     }
 

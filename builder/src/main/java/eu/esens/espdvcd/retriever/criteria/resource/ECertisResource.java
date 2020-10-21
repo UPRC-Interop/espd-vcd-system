@@ -354,6 +354,30 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
     }
 
     /**
+     * Retrieves an e-Certis Criterion with full data for the specified national entity in the specified language.
+     * <p>
+     * *** Use this method for e-Certis Multi Domain ***
+     *
+     * @param ID             The Criterion ID
+     * @param nationalEntity
+     * @param lang           The Criterion Language (ISO 639-1:2002)
+     * @return The e-Certis Criterion
+     * @throws RetrieverException
+     */
+    public ECertisCriterion getECertisCriterion(String ID,
+                                                EULanguageCodeEnum lang,
+                                                ECertisNationalEntityEnum nationalEntity) throws RetrieverException {
+
+        GetECertisCriterionRetryingTask task = new GetECertisCriterionRetryingTask(ID, lang, nationalEntity);
+
+        try {
+            return task.call();
+        } catch (ExecutionException | RetryException | IOException e) {
+            throw new RetrieverException(e);
+        }
+    }
+
+    /**
      * Get Parent Criterion of a National Criterion in the specified language.
      *
      * @param ec

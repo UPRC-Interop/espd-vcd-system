@@ -20,6 +20,7 @@ import eu.esens.espdvcd.builder.model.ModelFactory;
 import eu.esens.espdvcd.codelist.CodelistsV2;
 import eu.esens.espdvcd.codelist.enums.CountryIdentificationEnum;
 import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
+import eu.esens.espdvcd.codelist.enums.ecertis.ECertisLanguageCodeEnum;
 import eu.esens.espdvcd.codelist.enums.ecertis.ECertisNationalEntityEnum;
 import eu.esens.espdvcd.model.LegislationReference;
 import eu.esens.espdvcd.model.SelectableCriterion;
@@ -217,7 +218,17 @@ public class CriteriaDataRetrieverImpl implements CriteriaDataRetriever {
      */
     @Override
     public SelectableCriterion getCriterion(String ID) throws RetrieverException {
-        return ModelFactory.ESPD_REQUEST.extractSelectableCriterion(eCertisResource.getECertisCriterion(ID, lang), true);
+        if (ResourceConfig.INSTANCE.useProduction()) {
+            return ModelFactory.ESPD_REQUEST.extractSelectableCriterion(
+                    eCertisResource.getECertisCriterion(ID, lang), true);
+        } else {
+            ECertisNationalEntityEnum nationalEntity = this.nationalEntity == null
+                    ? ECertisNationalEntityEnum.EU
+                    : this.nationalEntity;
+
+            return ModelFactory.ESPD_REQUEST.extractSelectableCriterion(
+                    eCertisResource.getECertisCriterion(ID, lang, nationalEntity), true);
+        }
     }
 
     /**
