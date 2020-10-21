@@ -109,7 +109,7 @@ public class CriteriaEndpoint extends Endpoint {
             }
         } else if (Objects.isNull(lang) && Objects.nonNull(countryCode) && Objects.nonNull(criterionID)) {
             try {
-                return NationalCriteriaEvidenceService.getInstance().getEvidence(criterionID, countryCode);
+                return NationalCriteriaEvidenceService.getInstance().getDefaultEvidence(criterionID, countryCode);
             } catch (RetrieverException e) {
                 response.status(502);
                 LOGGER.severe(e.getMessage());

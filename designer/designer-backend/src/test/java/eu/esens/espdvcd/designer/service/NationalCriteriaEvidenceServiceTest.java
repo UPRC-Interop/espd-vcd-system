@@ -52,7 +52,7 @@ public class NationalCriteriaEvidenceServiceTest {
     @Test
     public void getTranslatedNationalCriteria() throws RetrieverException {
         NationalCriteriaEvidenceService service = NationalCriteriaEvidenceService.getInstance();
-        List<Evidence> evidences = service.getTranslatedEvidence(
+        List<SelectableCriterion> evidences = service.getTranslatedEvidence(
                 "14df34e8-15a9-411c-8c05-8c051693e277",
                 "DE",
                 "DE");
@@ -72,11 +72,12 @@ public class NationalCriteriaEvidenceServiceTest {
     @Test
     public void getTranslatedEvidenceTest() throws RetrieverException {
         NationalCriteriaEvidenceService service = NationalCriteriaEvidenceService.getInstance();
-        List<Evidence> evidences = service.getTranslatedEvidence(
+        List<SelectableCriterion> sc = service.getTranslatedEvidence(
                 "005eb9ed-1347-4ca3-bb29-9bc0db64e1ab",
                 "DE",
                 "EL");
-        evidences.forEach(e -> {
+
+        sc.get(0).getEvidenceList().forEach(e -> {
             System.out.println(e.getName());
             System.out.println(e.getDescription());
         });

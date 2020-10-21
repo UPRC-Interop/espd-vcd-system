@@ -23,6 +23,7 @@ import eu.esens.espdvcd.retriever.criteria.CriteriaDataRetriever;
 import eu.esens.espdvcd.retriever.criteria.CriteriaDataRetrieverBuilder;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 
+import java.util.Collections;
 import java.util.List;
 
 public enum NationalCriteriaEvidenceService {
@@ -34,15 +35,24 @@ public enum NationalCriteriaEvidenceService {
         return INSTANCE;
     }
 
-    public List<Evidence> getEvidence(String euCriterionID, String euCountryCode) throws RetrieverException {
+    public List<SelectableCriterion> getDefaultEvidence(String euCriterionID, String euCountryCode) throws RetrieverException {
         retriever.setLang(EULanguageCodeEnum.EN);
-        retriever.setNationalEntity(ECertisNationalEntityEnum.valueOf(euCountryCode.toUpperCase()));
-        return retriever.getEvidences(euCriterionID);
+        return getEvidence(euCriterionID, euCountryCode);
     }
 
-    public List<Evidence> getTranslatedEvidence(String euCriterionID, String euCountryCode, String lang) throws RetrieverException, IllegalArgumentException {
+    public List<SelectableCriterion> getTranslatedEvidence(String euCriterionID, String euCountryCode, String lang) throws RetrieverException, IllegalArgumentException {
         retriever.setLang(EULanguageCodeEnum.valueOf(lang.toUpperCase()));
+        return getEvidence(euCriterionID, euCountryCode);
+    }
+
+    private List<SelectableCriterion> getEvidence(String euCriterionID, String euCountryCode) throws RetrieverException {
         retriever.setNationalEntity(ECertisNationalEntityEnum.valueOf(euCountryCode.toUpperCase()));
-        return retriever.getEvidences(euCriterionID);
+        List<Evidence> evidenceList = retriever.getEvidences(euCriterionID);
+        SelectableCriterion criterion = retriever.getCriterion(euCriterionID);
+        criterion.getLegislationReference().setArticle("Link");
+        criterion.getEvidenceList().clear();
+        criterion.getEvidenceList().addAll(evidenceList);
+        criterion.setID(euCriterionID);
+        return Collections.singletonList(criterion);
     }
 }
