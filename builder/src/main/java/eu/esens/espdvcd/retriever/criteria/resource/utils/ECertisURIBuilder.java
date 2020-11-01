@@ -77,7 +77,9 @@ public class ECertisURIBuilder {
     public URI buildCriterionURI(String id) throws URISyntaxException {
         URIBuilder uriBuilder = new URIBuilder().setScheme(ResourceConfig.INSTANCE.getECertisScheme())
                 .setHost(ResourceConfig.INSTANCE.getECertisHost())
-                .setPath(ResourceConfig.INSTANCE.getECertisCriteriaPath() + "/" + id);
+                .setPath(ResourceConfig.INSTANCE.useBackwardsCompatibleECertis()
+                        ? ResourceConfig.INSTANCE.getECertisCriteriaPath() + "/espd/" + id
+                        : ResourceConfig.INSTANCE.getECertisCriteriaPath() + "/" + id);
         applyParamsIfNotNull(uriBuilder);
         return uriBuilder.build();
     }

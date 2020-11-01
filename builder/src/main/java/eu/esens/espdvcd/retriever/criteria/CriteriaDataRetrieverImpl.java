@@ -218,17 +218,8 @@ public class CriteriaDataRetrieverImpl implements CriteriaDataRetriever {
      */
     @Override
     public SelectableCriterion getCriterion(String ID) throws RetrieverException {
-        if (ResourceConfig.INSTANCE.useProduction()) {
-            return ModelFactory.ESPD_REQUEST.extractSelectableCriterion(
-                    eCertisResource.getECertisCriterion(ID, lang), true);
-        } else {
-            ECertisNationalEntityEnum nationalEntity = this.nationalEntity == null
-                    ? ECertisNationalEntityEnum.EU
-                    : this.nationalEntity;
-
-            return ModelFactory.ESPD_REQUEST.extractSelectableCriterion(
-                    eCertisResource.getECertisCriterion(ID, lang, nationalEntity), true);
-        }
+        return ModelFactory.ESPD_REQUEST.extractSelectableCriterion(
+                eCertisResource.getECertisCriterion(ID, lang), true);
     }
 
     /**

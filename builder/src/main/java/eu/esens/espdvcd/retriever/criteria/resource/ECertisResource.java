@@ -188,18 +188,32 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
 
         try {
             GetFromECertisRetryingTask task = new GetFromECertisRetryingTask(
-                    new GetFromECertisTask(new ECertisURIBuilder().buildCriteriaURI()));
+                    new GetFromECertisTask(new ECertisURIBuilder()
+                            .buildCriteriaURI()));
+
             ObjectMapper mapper = new ObjectMapper();
             JsonNode root = mapper.readTree(task.call());
             JsonNode criteria = root.path(ResourceConfig.INSTANCE.getECertisCriterionJsonElement());
 
             for (JsonNode criterion : criteria) {
+
                 SelectableCriterion sc = new SelectableCriterion();
-                sc.setID(criterion.path(ResourceConfig.INSTANCE.getECertisIDJsonElement()).asText());
-                sc.setName(criterion.path(ResourceConfig.INSTANCE.getECertisNameJsonElement())
-                        .findValue(ResourceConfig.INSTANCE.getECertisValueJsonElement()).asText());
-                sc.setDescription(criterion.path(ResourceConfig.INSTANCE.getECertisDescriptionJsonElement())
-                        .findValue(ResourceConfig.INSTANCE.getECertisValueJsonElement()).asText());
+
+                sc.setID(criterion
+                        .path(ResourceConfig.INSTANCE.getECertisIDJsonElement())
+                        .path(ResourceConfig.INSTANCE.getECertisValueJsonElement())
+                        .asText());
+
+                sc.setName(criterion
+                        .path(ResourceConfig.INSTANCE.getECertisNameJsonElement())
+                        .path(ResourceConfig.INSTANCE.getECertisValueJsonElement())
+                        .asText());
+
+                sc.setDescription(criterion
+                        .path(ResourceConfig.INSTANCE.getECertisDescriptionJsonElement())
+                        .path(ResourceConfig.INSTANCE.getECertisValueJsonElement())
+                        .asText());
+
                 sc.setSelected(true);
                 cList.add(sc);
             }
@@ -358,9 +372,9 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
      * <p>
      * *** Use this method for e-Certis Multi Domain ***
      *
-     * @param ID             The Criterion ID
-     * @param nationalEntity
-     * @param lang           The Criterion Language (ISO 639-1:2002)
+     * @param ID             The Criterion ID.
+     * @param nationalEntity The national entity, in which the criterions legislation will refer to (default is EU).
+     * @param lang           The Criterion Language (ISO 639-1:2002).
      * @return The e-Certis Criterion
      * @throws RetrieverException
      */
@@ -410,7 +424,7 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
      * Get sub-Criteria of a European Criterion by identification code.
      *
      * @param ec   The European Criterion
-     * @param code The identification code (ISO 639-1:2002)
+     * @param code The national entity identification code (ISO 639-1:2002)
      * @return List of subCriteria
      */
     public List<ECertisCriterion> getSubCriterionList(ECertisCriterion ec, String code) {

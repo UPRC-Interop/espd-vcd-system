@@ -44,6 +44,10 @@ public enum ResourceConfig {
         return getECertisConfig().getBoolean("use-production");
     }
 
+    public boolean useBackwardsCompatibleECertis() {
+        return !useProduction() && getAcceptanceConfig().getBoolean("use-backwards-compatible");
+    }
+
     public String getECertisHost() {
         return useProduction()
                 ? getProductionConfig().getString("host")
