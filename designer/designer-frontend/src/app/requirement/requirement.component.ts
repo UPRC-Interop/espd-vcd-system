@@ -85,12 +85,18 @@ export class RequirementComponent implements OnInit, OnChanges {
         this.form.get(this.req.uuid + 'startDate').disable();
         this.form.get(this.req.uuid + 'endDate').disable();
       } else if (this.req.responseDataType === 'ECONOMIC_OPERATOR_IDENTIFIER') {
-          this.form.get(this.req.uuid + 'eoidtype').disable();
+        this.form.get(this.req.uuid + 'eoidtype').disable();
       } else if (this.req.responseDataType === 'EVIDENCE_IDENTIFIER') {
         this.form.get(this.req.uuid + 'evidenceUrl').disable();
         this.form.get(this.req.uuid + 'evidenceCode').disable();
         this.form.get(this.req.uuid + 'evidenceIssuer').disable();
       }
+    }
+
+    /*======================= ESPD-114 JIRA issue FIX ========================== */
+    if (this.req.responseDataType === 'AMOUNT' && this.utilities.isImport()) {
+       const tempValue = this.utilities.amountTransformReverse(this.form.get(this.req.uuid).value.toString());
+      this.form.get(this.req.uuid).patchValue(tempValue);
     }
 
     if (this.req.responseDataType === 'WEIGHT_INDICATOR' && this.utilities.isImport()) {
