@@ -270,7 +270,7 @@ export class FormUtilService {
               if (formValues[req.uuid.valueOf()] === '' && formValues[currencyid.valueOf()] === null) {
                 req.response = null;
               } else {
-                req.response.amount = formValues[req.uuid.valueOf()];
+                req.response.amount = this.utilities.amountTransform(formValues[req.uuid.valueOf()].toString());
                 // console.log(formValues[currencyid.valueOf()]);
                 req.response.currency = formValues[currencyid.valueOf()];
                 req.response.uuid = null;

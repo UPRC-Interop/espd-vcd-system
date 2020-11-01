@@ -17,7 +17,7 @@
 import {AbstractControl} from '@angular/forms';
 import {StringHelperService} from '../../services/string-helper.service';
 
-const amountRegEx: RegExp = new RegExp('^[+-]?\\d+(\\,\\d{1,2})?$');
+const amountRegEx: RegExp = new RegExp('^[+-]?\\d+((\\,|\\.)\\d{1,2})?$');
 
 export function AmountValidation(control: AbstractControl): { [key: string]: boolean } | null {
 

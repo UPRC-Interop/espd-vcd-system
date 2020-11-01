@@ -249,4 +249,17 @@ export class UtilitiesService {
     this.logo = (lang === 'el' ? this.elLogo : this.enLogo);
   }
 
+  /* ========================= ESPD-141 Amount Decimal fix =================== */
+  // amountTransform(amount: any): any {
+  //   if ((amount.toString()).contains(',')) {
+  //   return (amount.toString()).replace(/,/g, '.');
+  //   } else {
+  //     return amount;
+  //   }
+  // }
+
+  amountTransform(amount: any): any {
+    return amount.replace(/,/g, '.');
+  }
+
 }
