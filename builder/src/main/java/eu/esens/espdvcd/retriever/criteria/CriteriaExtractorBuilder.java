@@ -48,7 +48,7 @@ public abstract class CriteriaExtractorBuilder {
 
     private ESPDArtefactResource artefactResource;
     private CriteriaTaxonomyResource taxonomyResource;
-//    private ECertisResource eCertisResource;
+    private ECertisResource eCertisResource;
 
     CriteriaExtractorBuilder() {
 
@@ -168,18 +168,18 @@ public abstract class CriteriaExtractorBuilder {
     private CriteriaResource createDefaultCriteriaResourceV2() {
 
         initCriteriaTaxonomyResource();
-//        initECertisResource(taxonomyResource.getCriterionList().stream()
-//                .map(sc -> sc.getID())
-//                .collect(Collectors.toList()));
+        initECertisResource(taxonomyResource.getCriterionList().stream()
+                .map(sc -> sc.getID())
+                .collect(Collectors.toList()));
 
-//        taxonomyResource.getCriterionList()
-//                .forEach(sc -> {
-//                    try {
-//                        applyNameAndDescription(eCertisResource.getCriterionMap().get(sc.getID()), sc);
-//                    } catch (RetrieverException e) {
-//                        LOGGER.log(Level.SEVERE, e.getMessage());
-//                    }
-//                });
+        taxonomyResource.getCriterionList()
+                .forEach(sc -> {
+                    try {
+                        applyNameAndDescription(eCertisResource.getCriterionMap().get(sc.getID()), sc);
+                    } catch (RetrieverException e) {
+                        LOGGER.log(Level.SEVERE, e.getMessage());
+                    }
+                });
 
         return taxonomyResource;
     }
@@ -215,12 +215,12 @@ public abstract class CriteriaExtractorBuilder {
     private List<LegislationResource> createDefaultLegislationResourcesV2() {
 
         initESPDArtefactResource();
-//        initECertisResource(artefactResource.getCriterionList().stream()
-//                .map(sc -> sc.getID())
-//                .collect(Collectors.toList()));
+        initECertisResource(artefactResource.getCriterionList().stream()
+                .map(sc -> sc.getID())
+                .collect(Collectors.toList()));
 
         List<LegislationResource> resourceList = new ArrayList<>();
-//        resourceList.add(eCertisResource);
+        resourceList.add(eCertisResource);
         resourceList.add(artefactResource);
 
         return resourceList;
@@ -320,14 +320,14 @@ public abstract class CriteriaExtractorBuilder {
 //            LOGGER.log(Level.INFO, "eCertis resource initialized with default ID list");
 //        }
 //    }
-//    private void initECertisResource(List<String> initialIDList) {
-//
-//        if (eCertisResource == null) {
-//            eCertisResource = new ECertisResource(initialIDList);
-//            LOGGER.log(Level.INFO, "eCertis resource initialized with initial ID list");
-//        }
-//
-//    }
+    private void initECertisResource(List<String> initialIDList) {
+
+        if (eCertisResource == null) {
+            eCertisResource = new ECertisResource(initialIDList);
+            LOGGER.log(Level.INFO, "eCertis resource initialized with initial ID list");
+        }
+
+    }
 
     /**
      * Lazy initialization of default ESPD artefact resource
