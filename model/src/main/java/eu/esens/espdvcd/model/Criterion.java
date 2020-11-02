@@ -338,7 +338,7 @@ public class Criterion implements Serializable {
         int hash = 5;
         hash = 29 * hash + Objects.hashCode(this.ID);
         hash = 29 * hash + Objects.hashCode(this.typeCode);
-        hash = 29 * hash + Objects.hashCode(this.name);
+        // hash = 29 * hash + Objects.hashCode(this.name);
         // hash = 29 * hash + Objects.hashCode(this.description);
         return hash;
     }

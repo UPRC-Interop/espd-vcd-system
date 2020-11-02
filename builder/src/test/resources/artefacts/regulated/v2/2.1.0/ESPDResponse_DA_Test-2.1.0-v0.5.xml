@@ -1666,6 +1666,13 @@
         <CriterionTypeCode listID="CriteriaTypeCode" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">CRITERION.EXCLUSION.CONFLICT_OF_INTEREST.PROCEDURE_PREPARATION</CriterionTypeCode>
         <Name>Direct or indirect involvement in the preparation of this procurement procedure</Name>
         <Description>Has the economic operator or an undertaking related to it advised the contracting authority or contracting entity or otherwise been involved in the preparation of the procurement procedure?</Description>
+        <ns3:Legislation>
+            <Title>Public Procurement Directive 2014/24/EU</Title>
+            <Description>Directive 2014/24/EU of the European Parliament and of the Council of 26 February 2014 on public procurement and repealing Directive 2004/18/EC</Description>
+            <JurisdictionLevel>eu</JurisdictionLevel>
+            <Article>Article 57(4)</Article>
+            <URI>http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv:OJ.L_.2014.094.01.0065.01.ENG</URI>
+        </ns3:Legislation>
         <ns3:TenderingCriterionPropertyGroup>
             <ID schemeAgencyID="EU-COM-GROW" schemeVersionID="2.0.2">30450436-f559-4dfa-98ba-f0842ed9d2a0</ID>
             <PropertyGroupTypeCode listID="PropertyGroupType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">ON*</PropertyGroupTypeCode>
@@ -1785,6 +1792,13 @@
         <CriterionTypeCode listID="CriteriaTypeCode" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">CRITERION.EXCLUSION.CONFLICT_OF_INTEREST.MISINTERPRETATION</CriterionTypeCode>
         <Name>Guilty of misinterpretation, withheld information, unable to provide required documents and obtained confidential information of this procedure</Name>
         <Description>Can the economic operator confirm the four exclusion grounds, that it has not been guilty of serious misrepresentation in supplying the information required for the verification of the absence of grounds for exclusion or the fulfilment of the selection criteria, that it has not withheld such information, it has been able, without delay, to submit the supporting documents required by a contracting authority or contracting entity, and it has not undertaken to unduly influence the decision making process of the contracting authority or contracting entity, to obtain confidential information that may confer upon it undue advantages in the procurement procedure or to negligently provide misleading information that may have a material influence on decisions concerning exclusion, selection or award?</Description>
+        <ns3:Legislation>
+            <Title>Public Procurement Directive 2014/24/EU</Title>
+            <Description>Directive 2014/24/EU of the European Parliament and of the Council of 26 February 2014 on public procurement and repealing Directive 2004/18/EC</Description>
+            <JurisdictionLevel>eu</JurisdictionLevel>
+            <Article>Article 57(4)</Article>
+            <URI>http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv:OJ.L_.2014.094.01.0065.01.ENG</URI>
+        </ns3:Legislation>
         <ns3:TenderingCriterionPropertyGroup>
             <ID schemeAgencyID="EU-COM-GROW" schemeVersionID="2.0.2">30450436-f559-4dfa-98ba-f0842ed9d2a0</ID>
             <PropertyGroupTypeCode listID="PropertyGroupType" listAgencyID="EU-COM-GROW" listVersionID="2.0.2">ON*</PropertyGroupTypeCode>

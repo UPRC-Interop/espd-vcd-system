@@ -28,14 +28,14 @@ import org.junit.Test;
 
 public class CriteriaExtractorBuilderTest {
 
-    private CriteriaExtractorBuilder regulatedBuilder1;
-    private CriteriaExtractorBuilder regulatedBuilder2;
+    private CriteriaExtractorBuilder regulatedBuilderV1;
+    private CriteriaExtractorBuilder regulatedBuilderV2;
     private CriteriaExtractorBuilder selfContainedBuilder;
 
     @Before
     public void setUp() {
-        regulatedBuilder1 = new RegulatedCriteriaExtractorBuilder(EDMVersion.V1);
-        regulatedBuilder2 = new RegulatedCriteriaExtractorBuilder(EDMVersion.V2);
+        regulatedBuilderV1 = new RegulatedCriteriaExtractorBuilder(EDMVersion.V1);
+        regulatedBuilderV2 = new RegulatedCriteriaExtractorBuilder(EDMVersion.V2);
         selfContainedBuilder = new SelfContainedCriteriaExtractorBuilder();
     }
 
@@ -46,7 +46,7 @@ public class CriteriaExtractorBuilderTest {
         ECertisResource r2 = new ECertisResource();
         ESPDArtefactResource r3 = new ESPDArtefactResource(EDMVersion.V2);
 
-        CriteriaExtractor e = regulatedBuilder2
+        CriteriaExtractor e = regulatedBuilderV2
                 // Criteria resources
                 .addCriteriaResource(r1)
                 .addCriteriaResource(r2)
@@ -67,7 +67,7 @@ public class CriteriaExtractorBuilderTest {
 
         ESPDArtefactResource r = new ESPDArtefactResource(EDMVersion.V1);
 
-        CriteriaExtractor e = regulatedBuilder2
+        CriteriaExtractor e = regulatedBuilderV2
                 // Criteria resources
                 .addCriteriaResource(r)
                 // Legislation resources
@@ -108,7 +108,7 @@ public class CriteriaExtractorBuilderTest {
     @Test
     public void testDefaultRegulatedV1CriteriaExtractorBuilder() throws Exception {
 
-        CriteriaExtractor e = regulatedBuilder1.build();
+        CriteriaExtractor e = regulatedBuilderV1.build();
         Assert.assertNotNull(e);
         Assert.assertFalse(e.getFullList().isEmpty());
         SelectableCriterionPrinter.print(e.getFullList());
@@ -117,7 +117,7 @@ public class CriteriaExtractorBuilderTest {
     @Test
     public void testDefaultRegulatedV2CriteriaExtractorBuilder() throws Exception {
 
-        CriteriaExtractor e = regulatedBuilder2.build();
+        CriteriaExtractor e = regulatedBuilderV2.build();
         Assert.assertNotNull(e);
         Assert.assertFalse(e.getFullList().isEmpty());
         SelectableCriterionPrinter.print(e.getFullList());
