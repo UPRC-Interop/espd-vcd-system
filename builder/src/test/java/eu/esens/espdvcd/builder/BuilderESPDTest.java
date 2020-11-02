@@ -71,7 +71,7 @@ public class BuilderESPDTest {
                 .createESPDRequest();
         Assert.assertNotNull(espd);
 
-        // We create an XML from our simple model 
+        // We create an XML from our simple model
         String XML = new XMLDocumentBuilderV1(espd).getAsString();
         Assert.assertNotNull(XML);
         //    System.out.println(XML);
@@ -89,7 +89,7 @@ public class BuilderESPDTest {
                 .createESPDResponse();
         Assert.assertNotNull(espd);
 
-        // We create an XML from our simple model 
+        // We create an XML from our simple model
         String XML = new XMLDocumentBuilderV1(espd).getAsString();
         Assert.assertNotNull(XML);
 //        System.out.println(XML);
@@ -105,7 +105,7 @@ public class BuilderESPDTest {
                 .createESPDResponse();
         Assert.assertNotNull(espd);
 
-        // We create an XML from our simple model 
+        // We create an XML from our simple model
         String XML = new XMLDocumentBuilderV1(espd).getAsString();
         Assert.assertNotNull(XML);
 //        System.out.println(XML);
@@ -517,38 +517,28 @@ public class BuilderESPDTest {
 
     @Ignore
     @Test
-    public void testPDFDocumentBuilderV2ForRequest() throws Exception {
+    public void testESPDRequestPDFV2() throws Exception {
         ESPDRequest espdRequest = BuilderFactory.EDM_V2
                 .createRegulatedModelBuilder()
                 .importFrom(BuilderESPDTest.class.getResourceAsStream("/artefacts/regulated/v2/2.1.0/UPRC-ESPD-Regulated-Request-2.1.0-Artefact-22-4-2019.xml"))
                 .createESPDRequest();
 
-        PDFDocumentBuilderV2 pdfDocumentBuilderV2 = BuilderFactory.EDM_V2
-                .createPDFDocumentBuilderFor(espdRequest);
-
-        // System.out.println(pdfDocumentBuilderV2.theXML);
-
         TransformationService transformationService = new TransformationService();
-        InputStream pdfStream = transformationService.createPdfStream(new StreamSource(new ByteArrayInputStream(pdfDocumentBuilderV2.getAsString().getBytes(StandardCharsets.UTF_8))), EULanguageCodeEnum.EL);
+        InputStream pdfStream = transformationService.createPdfStream(espdRequest, EULanguageCodeEnum.EL);
         File targetFile = new File("D:\\Downloads\\espd-request-210.pdf");
         FileUtils.copyInputStreamToFile(pdfStream, targetFile);
     }
 
     @Ignore
     @Test
-    public void testPDFDocumentBuilderV2ForResponse() throws Exception {
+    public void testESPDResponsePDFV2() throws Exception {
         ESPDResponse espdResponse = BuilderFactory.EDM_V2
                 .createRegulatedModelBuilder()
                 .importFrom(BuilderESPDTest.class.getResourceAsStream("/artefacts/regulated/v2/2.1.0/UPRC-ESPD-Regulated-Response-2.1.0-Artefact-22-4-2019.xml"))
                 .createESPDResponse();
 
-        PDFDocumentBuilderV2 pdfDocumentBuilderV2 = BuilderFactory.EDM_V2
-                .createPDFDocumentBuilderFor(espdResponse);
-
-        // System.out.println(pdfDocumentBuilderV2.theXML);
-
         TransformationService transformationService = new TransformationService();
-        InputStream pdfStream = transformationService.createPdfStream(new StreamSource(new ByteArrayInputStream(pdfDocumentBuilderV2.getAsString().getBytes(StandardCharsets.UTF_8))), EULanguageCodeEnum.EL);
+        InputStream pdfStream = transformationService.createPdfStream(espdResponse, EULanguageCodeEnum.EL);
         File targetFile = new File("D:\\Downloads\\espd-response-210.pdf");
         FileUtils.copyInputStreamToFile(pdfStream, targetFile);
     }

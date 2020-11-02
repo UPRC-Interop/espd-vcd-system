@@ -18,6 +18,7 @@ package eu.esens.espdvcd.model.requirement.response;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 /**
  * Period response
@@ -42,8 +43,15 @@ public class PeriodResponse extends DescriptionResponse implements Serializable 
      * UBL syntax path:
      * ccv:Criterion.RequirementGroup.Requirement.Response.Description<br>
      */
+    private LocalDate startDate;
+    private LocalDate endDate;
 
     public PeriodResponse() {
+    }
+
+    public PeriodResponse(LocalDate startDate, LocalDate endDate) {
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     public PeriodResponse(@JsonProperty("period") String description) {
@@ -52,8 +60,22 @@ public class PeriodResponse extends DescriptionResponse implements Serializable 
 
     @Override
     @JsonProperty("period")
-    public String getDescription() {
-        return this.description;
+    public String getDescription() {  return this.description; }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
     }
 
 }

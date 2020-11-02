@@ -16,53 +16,91 @@
 package eu.esens.espdvcd.transformation;
 
 import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
-import org.w3c.dom.Document;
-
-import javax.xml.transform.Source;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamSource;
+import eu.esens.espdvcd.model.ESPDRequest;
+import eu.esens.espdvcd.model.ESPDResponse;
+import freemarker.template.TemplateException;
+import org.xml.sax.SAXException;
+import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
 import java.io.IOException;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
+import java.net.URISyntaxException;
 import java.nio.file.Path;
 
 public class AbstractTransformationTest {
 
     /**
-     * Gibt die DomSource als String in UTF-8 zurueck ohne INDENT
+     * Gets the path of ESPD Request HTML document.
+     * @param espdRequest is the ESPD Request model.
+     * @param lang is the selected language for HTML document.
+     * @throws IOException
+     * @throws TemplateException
+     * @throws ParserConfigurationException
+     * @throws SAXException
+     * @throws URISyntaxException
+     * @return java.nio.file.Path
      */
-    private String convertToString(Source source) throws TransformerException {
-        return new TransformationHelper().convertToString(source);
+    Path writeHtml(ESPDRequest espdRequest,EULanguageCodeEnum lang) throws IOException,
+            TemplateException, ParserConfigurationException, SAXException, URISyntaxException {
+        final HtmlHelperTest htmlHelperTest = new HtmlHelperTest();
+        return htmlHelperTest.generateTempHtml(espdRequest,lang);
     }
 
     /**
-     * Nimmt das HTML entgegen und ersetzt die Labels mit Velocity
+     * Gets the path of ESPD Response HTML document.
+     * @param espdResponse is the ESPD Response model.
+     * @param lang is the selected language for HTML document.
+     * @throws IOException
+     * @throws TemplateException
+     * @throws ParserConfigurationException
+     * @throws SAXException
+     * @throws URISyntaxException
+     * @return java.nio.file.Path
      */
-    private Path writeHtml(String htmlContent) throws IOException {
-        final Path tempFile = Files.createTempFile("testfile", ".html");
-        Files.write(tempFile, htmlContent.getBytes(StandardCharsets.UTF_8));
-        return tempFile;
+    Path writeHtml(ESPDResponse espdResponse,EULanguageCodeEnum lang) throws IOException,
+            TemplateException, ParserConfigurationException, SAXException, URISyntaxException {
+        final HtmlHelperTest htmlHelperTest = new HtmlHelperTest();
+        return htmlHelperTest.generateTempHtml(espdResponse,lang);
     }
 
+
     /**
-     * Nimmt das HTML entgegen und ersetzt die Labels mit Velocity
+     * Gets the path of ESPD Request PDF document.
+     * @param espdRequest is the ESPD Request model.
+     * @param lang is the selected language for PDF document.
+     * @throws IOException
+     * @throws TemplateException
+     * @throws ParserConfigurationException
+     * @throws SAXException
+     * @throws URISyntaxException
+     * @return java.nio.file.Path
      */
-    Path writeHtml(DOMSource domSource) throws TransformerException, IOException {
-        return writeHtml(convertToString(domSource));
-    }
-    /**
-     * Erzeugt eine Tempfile mit der PDF und gibt dessen Pfad zur?ck
-     */
-    Path writePdf(Source source, EULanguageCodeEnum lang) throws IOException {
+    Path writePdf(ESPDRequest espdRequest, EULanguageCodeEnum lang) throws IOException,
+            TemplateException, ParserConfigurationException, SAXException, URISyntaxException {
         final PdfHelperTest pdfHelperTest = new PdfHelperTest();
-        return pdfHelperTest.generateTempPDF(source, lang);
+        return pdfHelperTest.generateTempPDF(espdRequest, lang);
     }
 
     /**
-     * Zeigt den ?bergebenen Pfad mit der Default-App an, wenn ein Head vorhanden ist.
+     * Gets the path of ESPD Response PDF document.
+     * @param espdResponse is the ESPD Response model.
+     * @param lang is the selected language for PDF document.
+     * @throws IOException
+     * @throws TemplateException
+     * @throws ParserConfigurationException
+     * @throws SAXException
+     * @throws URISyntaxException
+     * @return java.nio.file.Path
+     */
+    Path writePdf(ESPDResponse espdResponse, EULanguageCodeEnum lang) throws IOException,
+            TemplateException, ParserConfigurationException, SAXException, URISyntaxException {
+        final PdfHelperTest pdfHelperTest = new PdfHelperTest();
+        return pdfHelperTest.generateTempPDF(espdResponse, lang);
+    }
+
+    /**
+     * Shows the transferred path with the default app if a head is available.
+     * @param path
+     * @throws IOException
      */
     void openPath(Path path) throws IOException {
         if (!GraphicsEnvironment.isHeadless()) {

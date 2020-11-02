@@ -1087,7 +1087,7 @@
                 </cac:TenderingCriterionProperty>
                 <cac:TenderingCriterionProperty>
                     <cbc:ID schemeID="CriteriaTaxonomy" schemeAgencyID="EU-COM-GROW" schemeVersionID="2.1.0">76c3655d-2271-4ef7-b41b-9be436c55dc7</cbc:ID>
-                    <cbc:Description>Indicate reasons for being nevertheless to perform the contract</cbc:Description>
+                    <cbc:Description>Indicate reasons for being able nevertheless to perform the contract</cbc:Description>
                     <cbc:TypeCode listID="CriterionElementType" listAgencyID="EU-COM-GROW" listVersionID="2.1.0">QUESTION</cbc:TypeCode>
                     <cbc:ValueDataTypeCode listID="ResponseDataType" listAgencyID="EU-COM-GROW" listVersionID="2.1.0">DESCRIPTION</cbc:ValueDataTypeCode>
                 </cac:TenderingCriterionProperty>
@@ -1146,7 +1146,7 @@
                 </cac:TenderingCriterionProperty>
                 <cac:TenderingCriterionProperty>
                     <cbc:ID schemeID="CriteriaTaxonomy" schemeAgencyID="EU-COM-GROW" schemeVersionID="2.1.0">73c04673-e218-4c1c-8c40-4038a877a991</cbc:ID>
-                    <cbc:Description>Indicate reasons for being nevertheless to perform the contract</cbc:Description>
+                    <cbc:Description>Indicate reasons for being able nevertheless to perform the contract</cbc:Description>
                     <cbc:TypeCode listID="CriterionElementType" listAgencyID="EU-COM-GROW" listVersionID="2.1.0">QUESTION</cbc:TypeCode>
                     <cbc:ValueDataTypeCode listID="ResponseDataType" listAgencyID="EU-COM-GROW" listVersionID="2.1.0">DESCRIPTION</cbc:ValueDataTypeCode>
                 </cac:TenderingCriterionProperty>
@@ -1205,7 +1205,7 @@
                 </cac:TenderingCriterionProperty>
                 <cac:TenderingCriterionProperty>
                     <cbc:ID schemeID="CriteriaTaxonomy" schemeAgencyID="EU-COM-GROW" schemeVersionID="2.1.0">75dca5cb-0237-482d-9325-1afbafe12152</cbc:ID>
-                    <cbc:Description>Indicate reasons for being nevertheless to perform the contract</cbc:Description>
+                    <cbc:Description>Indicate reasons for being able nevertheless to perform the contract</cbc:Description>
                     <cbc:TypeCode listID="CriterionElementType" listAgencyID="EU-COM-GROW" listVersionID="2.1.0">QUESTION</cbc:TypeCode>
                     <cbc:ValueDataTypeCode listID="ResponseDataType" listAgencyID="EU-COM-GROW" listVersionID="2.1.0">DESCRIPTION</cbc:ValueDataTypeCode>
                 </cac:TenderingCriterionProperty>
@@ -1264,7 +1264,7 @@
                 </cac:TenderingCriterionProperty>
                 <cac:TenderingCriterionProperty>
                     <cbc:ID schemeID="CriteriaTaxonomy" schemeAgencyID="EU-COM-GROW" schemeVersionID="2.1.0">46b84610-e909-4711-8ec0-1580cd91d565</cbc:ID>
-                    <cbc:Description>Indicate reasons for being nevertheless to perform the contract</cbc:Description>
+                    <cbc:Description>Indicate reasons for being able nevertheless to perform the contract</cbc:Description>
                     <cbc:TypeCode listID="CriterionElementType" listAgencyID="EU-COM-GROW" listVersionID="2.1.0">QUESTION</cbc:TypeCode>
                     <cbc:ValueDataTypeCode listID="ResponseDataType" listAgencyID="EU-COM-GROW" listVersionID="2.1.0">DESCRIPTION</cbc:ValueDataTypeCode>
                 </cac:TenderingCriterionProperty>
@@ -1323,7 +1323,7 @@
                 </cac:TenderingCriterionProperty>
                 <cac:TenderingCriterionProperty>
                     <cbc:ID schemeID="CriteriaTaxonomy" schemeAgencyID="EU-COM-GROW" schemeVersionID="2.1.0">dc7e1616-d145-4b1b-b3ca-27a8884202bc</cbc:ID>
-                    <cbc:Description>Indicate reasons for being nevertheless to perform the contract</cbc:Description>
+                    <cbc:Description>Indicate reasons for being able nevertheless to perform the contract</cbc:Description>
                     <cbc:TypeCode listID="CriterionElementType" listAgencyID="EU-COM-GROW" listVersionID="2.1.0">QUESTION</cbc:TypeCode>
                     <cbc:ValueDataTypeCode listID="ResponseDataType" listAgencyID="EU-COM-GROW" listVersionID="2.1.0">DESCRIPTION</cbc:ValueDataTypeCode>
                 </cac:TenderingCriterionProperty>
@@ -1382,7 +1382,7 @@
                 </cac:TenderingCriterionProperty>
                 <cac:TenderingCriterionProperty>
                     <cbc:ID schemeID="CriteriaTaxonomy" schemeAgencyID="EU-COM-GROW" schemeVersionID="2.1.0">6543726b-d493-4129-8e9b-0fcdecb70a28</cbc:ID>
-                    <cbc:Description>Indicate reasons for being nevertheless to perform the contract</cbc:Description>
+                    <cbc:Description>Indicate reasons for being able nevertheless to perform the contract</cbc:Description>
                     <cbc:TypeCode listID="CriterionElementType" listAgencyID="EU-COM-GROW" listVersionID="2.1.0">QUESTION</cbc:TypeCode>
                     <cbc:ValueDataTypeCode listID="ResponseDataType" listAgencyID="EU-COM-GROW" listVersionID="2.1.0">DESCRIPTION</cbc:ValueDataTypeCode>
                 </cac:TenderingCriterionProperty>
@@ -3746,7 +3746,7 @@
         <cbc:ID schemeID="CriteriaTaxonomy" schemeAgencyID="EU-COM-GROW" schemeVersionID="2.1.0">51c39ba9-0444-4967-afe9-36f753b30175</cbc:ID>
         <cbc:CriterionTypeCode listID="CriteriaTypeCode" listAgencyID="EU-COM-GROW" listVersionID="2.1.0">CRITERION.OTHER.EO_DATA.REDUCTION_OF_CANDIDATES</cbc:CriterionTypeCode>
         <cbc:Name>Reduction of the number of qualified candidates</cbc:Name>
-        <cbc:Description>The economic operator declares that It meets the objective and non discriminatory criteria or rules to be applied in order to limit the number of candidates in the following way:</cbc:Description>
+        <cbc:Description>It meets the objective and non discriminatory criteria or rules to be applied in order to limit the number of candidates in the following way:</cbc:Description>
         <cac:TenderingCriterionPropertyGroup>
             <cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="2.1.0">ecc69670-f428-4446-908f-689568ca0d0d</cbc:ID>
             <cbc:PropertyGroupTypeCode listID="PropertyGroupType" listAgencyID="EU-COM-GROW" listVersionID="2.1.0">ON*</cbc:PropertyGroupTypeCode>

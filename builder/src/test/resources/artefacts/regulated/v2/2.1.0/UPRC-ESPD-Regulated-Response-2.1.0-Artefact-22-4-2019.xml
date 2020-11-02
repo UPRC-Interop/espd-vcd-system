@@ -3091,7 +3091,7 @@
         <cbc:ID schemeID="CriteriaTaxonomy" schemeAgencyID="EU-COM-GROW" schemeVersionID="2.1.0">07301031-2270-41af-8e7e-66fe0c777107</cbc:ID>
         <cbc:CriterionTypeCode listID="CriteriaTypeCode" listAgencyID="EU-COM-GROW" listVersionID="2.1.0">CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY.TECHNICAL.PROFESSIONAL_QUALIFICATIONS</cbc:CriterionTypeCode>
         <cbc:Name>Educational and professional qualifications</cbc:Name>
-        <cbc:Description>The following educational and professional qualifications are held by the service provider or the contractor itself, and/or (depending on the requirements set out in the relevant notice or the in the ESPD, the relevant notice or  by its managerial staff.</cbc:Description>
+        <cbc:Description>The following educational and professional qualifications are held by the service provider or the contractor itself, and/or (depending on the requirements set out in the relevant notice or the in the ESPD, the relevant notice or  by its managerial staff.)</cbc:Description>
         <cac:Legislation>
             <cbc:Title>Public Procurement Directive 2014/24/EU</cbc:Title>
             <cbc:Description>Directive 2014/24/EU of the European Parliament and of the Council of 26 February 2014 on public procurement and repealing Directive 2004/18/EC</cbc:Description>
@@ -4033,7 +4033,7 @@
         <cbc:ID schemeID="CriteriaTaxonomy" schemeAgencyID="EU-COM-GROW" schemeVersionID="2.1.0">51c39ba9-0444-4967-afe9-36f753b30175</cbc:ID>
         <cbc:CriterionTypeCode listID="CriteriaTypeCode" listAgencyID="EU-COM-GROW" listVersionID="2.1.0">CRITERION.OTHER.EO_DATA.REDUCTION_OF_CANDIDATES</cbc:CriterionTypeCode>
         <cbc:Name>Reduction of the number of qualified candidates</cbc:Name>
-        <cbc:Description>The economic operator declares that It meets the objective and non discriminatory criteria or rules to be applied in order to limit the number of candidates in the following way:</cbc:Description>
+        <cbc:Description>It meets the objective and non discriminatory criteria or rules to be applied in order to limit the number of candidates in the following way:</cbc:Description>
         <cac:TenderingCriterionPropertyGroup>
             <cbc:ID schemeAgencyID="EU-COM-GROW" schemeVersionID="2.1.0">ecc69670-f428-4446-908f-689568ca0d0d</cbc:ID>
             <cbc:PropertyGroupTypeCode listID="PropertyGroupType" listAgencyID="EU-COM-GROW" listVersionID="2.1.0">ON*</cbc:PropertyGroupTypeCode>
