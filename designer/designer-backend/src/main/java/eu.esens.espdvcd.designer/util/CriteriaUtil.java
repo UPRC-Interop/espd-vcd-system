@@ -192,32 +192,39 @@ public final class CriteriaUtil {
     public static List<Evidence> generateEvidenceList(List<SelectableCriterion> criterionList){
         List<Evidence> evidenceList = new ArrayList<>();
         for (SelectableCriterion criterion : criterionList) {
-            for (RequirementGroup requirementGroup : criterion.getRequirementGroups()) {
-                for (Requirement requirement : requirementGroup.getRequirements()) {
-                    if(requirement.getResponseDataType().equals(ResponseTypeEnum.EVIDENCE_IDENTIFIER)){
-                        UUID id = UUID.randomUUID();
+            evidenceList.addAll(generateEvidenceListFromReqGroup(criterion.getRequirementGroups()));
+        }
+        return evidenceList;
+    }
 
-                        EvidenceIdentifierResponse evidenceIdentifierResponse = new EvidenceIdentifierResponse();
-                        evidenceIdentifierResponse.setEvidenceSuppliedId(id.toString());
-                        requirement.setResponse(evidenceIdentifierResponse);
+    private static List<Evidence> generateEvidenceListFromReqGroup(List<RequirementGroup> requirementGroups){
+        List<Evidence> evidenceList = new ArrayList<>();
+        for (RequirementGroup requirementGroup : requirementGroups) {
+            evidenceList.addAll(generateEvidenceListFromReqGroup(requirementGroup.getRequirementGroups()));
+            for (Requirement requirement : requirementGroup.getRequirements()) {
+                if(requirement.getResponseDataType().equals(ResponseTypeEnum.EVIDENCE_IDENTIFIER)){
+                    UUID id = UUID.randomUUID();
 
-                        Evidence evidence = new Evidence();
-                        evidence.setConfidentialityLevelCode("");
-                        evidence.setDescription("");
-                        evidence.setEvidenceURL("");
-                        evidence.setID(id.toString());
-                        evidence.setName("");
-                        evidence.setTypeCode("");
+                    EvidenceIdentifierResponse evidenceIdentifierResponse = new EvidenceIdentifierResponse();
+                    evidenceIdentifierResponse.setEvidenceSuppliedId(id.toString());
+                    requirement.setResponse(evidenceIdentifierResponse);
 
-                        EvidenceIssuerDetails evidenceIssuerDetails = new EvidenceIssuerDetails();
-                        evidenceIssuerDetails.setID("");
-                        evidenceIssuerDetails.setWebsite("");
-                        evidenceIssuerDetails.setName("");
+                    Evidence evidence = new Evidence();
+                    evidence.setConfidentialityLevelCode("");
+                    evidence.setDescription("");
+                    evidence.setEvidenceURL("");
+                    evidence.setID(id.toString());
+                    evidence.setName("");
+                    evidence.setTypeCode("");
 
-                        evidence.setEvidenceIssuer(evidenceIssuerDetails);
+                    EvidenceIssuerDetails evidenceIssuerDetails = new EvidenceIssuerDetails();
+                    evidenceIssuerDetails.setID("");
+                    evidenceIssuerDetails.setWebsite("");
+                    evidenceIssuerDetails.setName("");
 
-                        evidenceList.add(evidence);
-                    }
+                    evidence.setEvidenceIssuer(evidenceIssuerDetails);
+
+                    evidenceList.add(evidence);
                 }
             }
         }
