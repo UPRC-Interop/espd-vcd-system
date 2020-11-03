@@ -21,15 +21,16 @@ import eu.esens.espdvcd.designer.service.ExportESPDService;
 import eu.esens.espdvcd.designer.typeEnum.CriteriaType;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDResponse;
+import eu.esens.espdvcd.model.EvidenceIssuerDetails;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
+import eu.esens.espdvcd.model.requirement.response.EvidenceIdentifierResponse;
 import eu.esens.espdvcd.model.requirement.response.IndicatorResponse;
+import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
 
 import javax.validation.constraints.NotNull;
-import java.util.List;
-import java.util.Locale;
-import java.util.Objects;
+import java.util.*;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -186,6 +187,41 @@ public final class CriteriaUtil {
             }
         }
         throw new LanguageNotExistsException("Language does not exist.");
+    }
+
+    public static List<Evidence> generateEvidenceList(List<SelectableCriterion> criterionList){
+        List<Evidence> evidenceList = new ArrayList<>();
+        for (SelectableCriterion criterion : criterionList) {
+            for (RequirementGroup requirementGroup : criterion.getRequirementGroups()) {
+                for (Requirement requirement : requirementGroup.getRequirements()) {
+                    if(requirement.getResponseDataType().equals(ResponseTypeEnum.EVIDENCE_IDENTIFIER)){
+                        UUID id = UUID.randomUUID();
+
+                        EvidenceIdentifierResponse evidenceIdentifierResponse = new EvidenceIdentifierResponse();
+                        evidenceIdentifierResponse.setEvidenceSuppliedId(id.toString());
+                        requirement.setResponse(evidenceIdentifierResponse);
+
+                        Evidence evidence = new Evidence();
+                        evidence.setConfidentialityLevelCode("");
+                        evidence.setDescription("");
+                        evidence.setEvidenceURL("");
+                        evidence.setID(id.toString());
+                        evidence.setName("");
+                        evidence.setTypeCode("");
+
+                        EvidenceIssuerDetails evidenceIssuerDetails = new EvidenceIssuerDetails();
+                        evidenceIssuerDetails.setID("");
+                        evidenceIssuerDetails.setWebsite("");
+                        evidenceIssuerDetails.setName("");
+
+                        evidence.setEvidenceIssuer(evidenceIssuerDetails);
+
+                        evidenceList.add(evidence);
+                    }
+                }
+            }
+        }
+        return evidenceList;
     }
 
     private static void nullifier(RequirementGroup requirementGroup) {
