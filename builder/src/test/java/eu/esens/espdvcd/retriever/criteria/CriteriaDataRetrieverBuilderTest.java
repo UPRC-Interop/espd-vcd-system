@@ -172,6 +172,7 @@ public class CriteriaDataRetrieverBuilderTest {
                 // SelectableCriterionPrinter.printEvidence(e);
             }
         } else { //  Multi-Domain e-Certis evidences
+            retriever.setCountryFilter(ECertisNationalEntityEnum.GR);
             List<Evidence> eList = retriever.getEvidences(firstCriterionId);
             Assert.assertFalse(eList.isEmpty());
 
@@ -230,7 +231,7 @@ public class CriteriaDataRetrieverBuilderTest {
 
         if (!ResourceConfig.INSTANCE.useProduction()) { //  Multi-Domain e-Certis evidences
             retriever.setLang(EULanguageCodeEnum.EL);
-            retriever.setNationalEntity(ECertisNationalEntityEnum.GR);
+            retriever.setCountryFilter(ECertisNationalEntityEnum.GR);
             List<Evidence> eList = retriever.getEvidences(firstCriterionId);
             Assert.assertFalse(eList.isEmpty());
 

@@ -74,6 +74,9 @@ public class ECertisMDResourceTest {
         eCertisResource.getEvidencesForCriterion("9b29b151-9102-40bd-b01c-11949abbb17e", EULanguageCodeEnum.EN)
                 .forEach(e -> SelectableCriterionPrinter.printEvidence(e));
 
+        eCertisResource.getEvidencesForCriterion("9b29b151-9102-40bd-b01c-11949abbb17e", null ,EULanguageCodeEnum.EN)
+                .forEach(e -> SelectableCriterionPrinter.printEvidence(e));
+
     }
 
     @Test

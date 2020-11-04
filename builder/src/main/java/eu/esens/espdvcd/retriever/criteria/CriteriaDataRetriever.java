@@ -72,11 +72,11 @@ public interface CriteriaDataRetriever {
     void setLang(EULanguageCodeEnum lang) throws RetrieverException;
 
     /**
-     * Specifies the national entity the retrieved data will refers to.
+     * Specifies the country the retrieved data will refers to.
      *
-     * @param nationalEntity The national entity code.
+     * @param countryFilter The country code.
      * @throws RetrieverException
      */
-    void setNationalEntity(ECertisNationalEntityEnum nationalEntity);
+    void setCountryFilter(ECertisNationalEntityEnum countryFilter);
 
 }

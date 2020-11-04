@@ -46,7 +46,7 @@ public enum NationalCriteriaEvidenceService {
     }
 
     private List<SelectableCriterion> getEvidence(String euCriterionID, String euCountryCode) throws RetrieverException {
-        retriever.setNationalEntity(ECertisNationalEntityEnum.valueOf(euCountryCode.toUpperCase()));
+        retriever.setCountryFilter(ECertisNationalEntityEnum.valueOf(euCountryCode.toUpperCase()));
         List<Evidence> evidenceList = retriever.getEvidences(euCriterionID);
         SelectableCriterion criterion = retriever.getCriterion(euCriterionID);
         criterion.getLegislationReference().setArticle("Link");

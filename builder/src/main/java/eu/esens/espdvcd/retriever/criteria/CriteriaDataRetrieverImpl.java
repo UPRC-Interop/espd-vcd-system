@@ -20,7 +20,6 @@ import eu.esens.espdvcd.builder.model.ModelFactory;
 import eu.esens.espdvcd.codelist.CodelistsV2;
 import eu.esens.espdvcd.codelist.enums.CountryIdentificationEnum;
 import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
-import eu.esens.espdvcd.codelist.enums.ecertis.ECertisLanguageCodeEnum;
 import eu.esens.espdvcd.codelist.enums.ecertis.ECertisNationalEntityEnum;
 import eu.esens.espdvcd.model.LegislationReference;
 import eu.esens.espdvcd.model.SelectableCriterion;
@@ -52,7 +51,7 @@ public class CriteriaDataRetrieverImpl implements CriteriaDataRetriever {
     private ECertisResource eCertisResource;
 
     private EULanguageCodeEnum lang;
-    private ECertisNationalEntityEnum nationalEntity;
+    private ECertisNationalEntityEnum countryFilter;
 
     private enum CriterionOrigin {EUROPEAN, NATIONAL}
 
@@ -81,8 +80,8 @@ public class CriteriaDataRetrieverImpl implements CriteriaDataRetriever {
 
 
     @Override
-    public void setNationalEntity(@NotNull ECertisNationalEntityEnum nationalEntity) {
-        this.nationalEntity = nationalEntity;
+    public void setCountryFilter(@NotNull ECertisNationalEntityEnum countryFilter) {
+        this.countryFilter = countryFilter;
     }
 
     /**
@@ -173,7 +172,10 @@ public class CriteriaDataRetrieverImpl implements CriteriaDataRetriever {
 
         if (isIdentificationCodeExist(code)) {
 
-            GetECertisCriterionRetryingTask task = new GetECertisCriterionRetryingTask(ID, lang);
+            GetECertisCriterionRetryingTask task = new GetECertisCriterionRetryingTask.Builder(ID)
+                    .lang(lang)
+                    .build();
+
             String codeLowerCase = code.toLowerCase();
 
             try {
@@ -234,11 +236,7 @@ public class CriteriaDataRetrieverImpl implements CriteriaDataRetriever {
         List<Evidence> evidenceList = new ArrayList<>();
 
         for (EvidencesResource eResource : eResourceList) {
-            if (ResourceConfig.INSTANCE.useProduction()) {
-                evidenceList.addAll(eResource.getEvidencesForCriterion(ID, lang));
-            } else {
-                evidenceList.addAll(eResource.getEvidencesForCriterion(ID, nationalEntity, lang));
-            }
+            evidenceList.addAll(eResource.getEvidencesForCriterion(ID, countryFilter, lang));
         }
 
         return evidenceList;

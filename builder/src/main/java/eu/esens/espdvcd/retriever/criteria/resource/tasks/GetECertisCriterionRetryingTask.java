@@ -19,7 +19,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.rholder.retry.RetryException;
 import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
-import eu.esens.espdvcd.codelist.enums.ecertis.ECertisDomainIdEnum;
 import eu.esens.espdvcd.codelist.enums.ecertis.ECertisLanguageCodeEnum;
 import eu.esens.espdvcd.codelist.enums.ecertis.ECertisNationalEntityEnum;
 import eu.esens.espdvcd.model.retriever.ECertisCriterion;
@@ -43,35 +42,12 @@ public class GetECertisCriterionRetryingTask implements Callable<ECertisCriterio
 
     private URI uri;
 
-    public GetECertisCriterionRetryingTask(String ID) {
-        this(ID, EULanguageCodeEnum.EN);
-    }
-
-    public GetECertisCriterionRetryingTask(String ID, EULanguageCodeEnum lang) {
-        this(ID, lang, null);
-    }
-
-    public GetECertisCriterionRetryingTask(String ID,
-                                           EULanguageCodeEnum lang,
-                                           ECertisNationalEntityEnum nationalEntity) {
-
-        this(ID, lang, nationalEntity, null, null);
-    }
-
-    public GetECertisCriterionRetryingTask(String ID,
-                                           EULanguageCodeEnum lang,
-                                           ECertisNationalEntityEnum nationalEntity,
-                                           ECertisDomainIdEnum.ECertisScenarioIdEnum scenarioID,
-                                           ECertisDomainIdEnum domainID) {
-
+    private GetECertisCriterionRetryingTask(Builder builder) {
         try {
-            uri = new ECertisURIBuilder()
-                    .lang(ECertisLanguageCodeEnum.valueOf(lang.name()))
-                    .nationalEntity(nationalEntity)
-                    .domainId(domainID)
-                    .scenarioId(scenarioID)
-                    .buildCriterionURI(ID);
-
+            this.uri = new ECertisURIBuilder()
+                    .lang(ECertisLanguageCodeEnum.valueOf(builder.lang.name()))
+                    .countryFilter(builder.countryFilter)
+                    .buildCriterionURI(builder.id);
         } catch (URISyntaxException e) {
             LOGGER.log(Level.SEVERE, e.getMessage());
         }
@@ -86,6 +62,45 @@ public class GetECertisCriterionRetryingTask implements Callable<ECertisCriterio
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
         return mapper.readValue(rTask.call(), ECertisCriterionImpl.class);
+    }
+
+    public static class Builder {
+
+        /* mandatory params */
+        private final String id;
+        /* optional params */
+        private EULanguageCodeEnum lang = EULanguageCodeEnum.EN;
+        private ECertisNationalEntityEnum countryFilter;
+
+        /**
+         * @param id The Criterion id (UUID).
+         */
+        public Builder(String id) {
+            this.id = id;
+        }
+
+        /**
+         * @param lang The language that the criterions data will be returned.
+         * @return
+         */
+        public Builder lang(EULanguageCodeEnum lang) {
+            this.lang = lang;
+            return Builder.this;
+        }
+
+        /**
+         * @param countryFilter The country for which criterion data will be returned.
+         * @return
+         */
+        public Builder countryFilter(ECertisNationalEntityEnum countryFilter) {
+            this.countryFilter = countryFilter;
+            return Builder.this;
+        }
+
+        public GetECertisCriterionRetryingTask build() {
+            return new GetECertisCriterionRetryingTask(Builder.this);
+        }
+
     }
 
 }

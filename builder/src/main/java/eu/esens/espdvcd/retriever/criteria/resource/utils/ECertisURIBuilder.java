@@ -30,6 +30,7 @@ import java.net.URISyntaxException;
 public class ECertisURIBuilder {
 
     private ECertisNationalEntityEnum nationalEntity;
+    private ECertisNationalEntityEnum countryFilter;
     private ECertisLanguageCodeEnum lang;
     private ECertisDomainIdEnum domainId;
     private ECertisDomainIdEnum.ECertisScenarioIdEnum scenarioId;
@@ -39,8 +40,29 @@ public class ECertisURIBuilder {
         return ECertisURIBuilder.this;
     }
 
+    /**
+     * Set the {@link ECertisURIBuilder#nationalEntity} parameter to given nationalEntity
+     * value and set the {@link ECertisURIBuilder#countryFilter} to null.
+     *
+     * @param nationalEntity
+     * @return
+     */
     public ECertisURIBuilder nationalEntity(ECertisNationalEntityEnum nationalEntity) {
         this.nationalEntity = nationalEntity;
+        this.countryFilter = null;
+        return ECertisURIBuilder.this;
+    }
+
+    /**
+     * Set the {@link ECertisURIBuilder#countryFilter} parameter to given countryFilter
+     * value and set the {@link ECertisURIBuilder#nationalEntity} to null.
+     *
+     * @param countryFilter
+     * @return
+     */
+    public ECertisURIBuilder countryFilter(ECertisNationalEntityEnum countryFilter) {
+        this.countryFilter = countryFilter;
+        this.nationalEntity = null;
         return ECertisURIBuilder.this;
     }
 
@@ -92,6 +114,10 @@ public class ECertisURIBuilder {
 
         if (nationalEntity != null) {
             uriBuilder.setParameter("nationalEntity", nationalEntity.name().toLowerCase());
+        }
+
+        if (countryFilter != null) {
+            uriBuilder.setParameter("countryFilter", countryFilter.name().toLowerCase());
         }
 
         if (domainId != null && scenarioId != null) {
