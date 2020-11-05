@@ -30,6 +30,7 @@ import eu.esens.espdvcd.retriever.criteria.resource.enums.ResourceType;
 import eu.esens.espdvcd.retriever.criteria.resource.tasks.GetECertisCriterionRetryingTask;
 import eu.esens.espdvcd.retriever.criteria.resource.tasks.GetFromECertisRetryingTask;
 import eu.esens.espdvcd.retriever.criteria.resource.tasks.GetFromECertisTask;
+import eu.esens.espdvcd.retriever.criteria.resource.utils.CriteriaUtils;
 import eu.esens.espdvcd.retriever.criteria.resource.utils.ECertisURIBuilder;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import org.apache.commons.lang3.exception.ExceptionUtils;
@@ -287,17 +288,7 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
 
     @Override
     public List<Evidence> getEvidencesForCriterion(String ID) throws RetrieverException {
-
-        GetECertisCriterionRetryingTask task = new GetECertisCriterionRetryingTask.Builder(ID)
-                .build();
-
-        try {
-            ECertisCriterion ec = task.call();
-            return ModelFactory.ESPD_REQUEST.extractEvidences(ec.getEvidenceGroups());
-
-        } catch (ExecutionException | RetryException | IOException e) {
-            throw new RetrieverException(e);
-        }
+        return getEvidencesForCriterion(ID, EULanguageCodeEnum.EN);
     }
 
     @Override
@@ -309,9 +300,17 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
 
         try {
             ECertisCriterion ec = task.call();
-            return ModelFactory.ESPD_REQUEST.extractEvidences(ec.getEvidenceGroups());
 
-        } catch (ExecutionException | RetryException | IOException e) {
+            // Check if its a National criterion
+            if (!CriteriaUtils.isEuropean(ec)) {
+                return ModelFactory.ESPD_REQUEST.extractEvidences(ec.getEvidenceGroups());
+            } else { // if not throw an exception
+                throw new IllegalArgumentException("Error... Wrong API call. The ID: " + ID +
+                        " belong to a European Criterion. Only call getEvidencesForCriterion " +
+                        "for a National Criterion");
+            }
+
+        } catch (ExecutionException | RetryException | IOException | IllegalArgumentException e) {
             throw new RetrieverException(e);
         }
 

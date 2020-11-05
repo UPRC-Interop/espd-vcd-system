@@ -84,7 +84,9 @@ public class GetECertisCriterionRetryingTask implements Callable<ECertisCriterio
          * @return
          */
         public Builder lang(EULanguageCodeEnum lang) {
-            this.lang = lang;
+            if (lang != null) {
+                this.lang = lang;
+            }
             return Builder.this;
         }
 

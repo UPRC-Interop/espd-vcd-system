@@ -50,7 +50,7 @@ public interface EvidencesResource extends Resource {
      * to a European criterion, the method will return all the evidences for the country, that is
      * specified through countryFilter parameter.
      *
-     * @param ID   The National Criterion ID.
+     * @param ID   The European or National Criterion ID.
      * @param countryFilter The country the retrieved evidences will refers to.
      * @param lang The language code (ISO 639-1:2002).
      * @return The List of Evidences
