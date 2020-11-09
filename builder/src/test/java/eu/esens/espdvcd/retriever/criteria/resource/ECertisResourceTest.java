@@ -103,7 +103,7 @@ public class ECertisResourceTest {
     @Test
     public void testGetEvidencesForCriterion() throws Exception {
         // r.getEvidencesForCriterion("14df34e8-15a9-411c-8c05-8c051693e277").forEach(evidence -> SelectableCriterionPrinter.printEvidence(evidence));
-        Assert.assertFalse(eCertisResource.getEvidencesForCriterion("a205fa3b-0719-4c8a-b09d-8f6b2cbf8bd2").isEmpty());
+        Assert.assertFalse(eCertisResource.getEvidencesForNationalCriterion("a205fa3b-0719-4c8a-b09d-8f6b2cbf8bd2").isEmpty());
     }
 
     @Test

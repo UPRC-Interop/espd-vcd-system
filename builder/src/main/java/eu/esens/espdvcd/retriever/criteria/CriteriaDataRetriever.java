@@ -16,7 +16,6 @@
 package eu.esens.espdvcd.retriever.criteria;
 
 import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
-import eu.esens.espdvcd.codelist.enums.ecertis.ECertisNationalEntityEnum;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
@@ -29,54 +28,54 @@ import java.util.List;
 public interface CriteriaDataRetriever {
 
     /**
-     * Identifies the origin of given criterion ID (European or National). If
-     * the criterion ID found to belong to a European criterion, then method
+     * Identifies the origin of given criterion id (European or National). If
+     * the criterion id found to belong to a European criterion, then method
      * return all its National sub-Criteria, filtered by given country code. If
-     * the criterion ID found to belong to a National criterion, then method
+     * the criterion id found to belong to a National criterion, then method
      * first searches for the parent European Criterion and then return parent
      * European Criterion National sub-Criteria, filtered again by given country
      * code.
      *
-     * @param ID   The source Criterion ID (European or National)
-     * @param code The country identification Code (ISO 639-1:2002)
+     * @param id          The source Criterion id (European or National)
+     * @param countryCode The country identification Code (ISO 639-1:2002)
      * @return All National Criteria which mapped with source Criterion
      * @throws eu.esens.espdvcd.retriever.exception.RetrieverException
      */
-    List<SelectableCriterion> getNationalCriterionMapping(String ID, String code) throws RetrieverException;
+    List<SelectableCriterion> getNationalCriterionMapping(String id, String countryCode) throws RetrieverException;
 
     /**
-     * Retrieves an e-Certis Criterion, which maps to
-     * the related {@link SelectableCriterion} model class.
+     * Retrieve a Criterion by given id.
      *
-     * @param ID The Criterion ID (European or National)
-     * @return The Criterion with given ID
+     * @param id The Criterion id (European or National)
+     * @return The Criterion
      * @throws eu.esens.espdvcd.retriever.exception.RetrieverException
      */
-    SelectableCriterion getCriterion(String ID) throws RetrieverException;
+    SelectableCriterion getCriterion(String id) throws RetrieverException;
 
     /**
-     * Retrieves all the Evidences of criterion with given ID.
+     * Retrieve all the Evidences of a National Criterion.
      *
-     * @param ID The Criterion ID (European or National)
+     * @param id The Criterion id (European or National)
      * @return The Evidences
      * @throws eu.esens.espdvcd.retriever.exception.RetrieverException
      */
-    List<Evidence> getEvidences(String ID) throws RetrieverException;
+    List<Evidence> getEvidencesForNationalCriterion(String id) throws RetrieverException;
 
     /**
-     * Specifies the language of the retrieved data.
+     * Retrieve all the Evidences of a European Criterion for the specified country.
+     *
+     * @param id The Criterion id (European or National)
+     * @return The Evidences
+     * @throws eu.esens.espdvcd.retriever.exception.RetrieverException
+     */
+    List<Evidence> getEvidencesForEuropeanCriterion(String id, String countryCode) throws RetrieverException;
+
+    /**
+     * Specify the language of the retrieved data.
      *
      * @param lang The language code (ISO 639-1:2002)
-     * @throws RetrieverException In case the language code does not exists in the relevant codelists.
+     * @throws RetrieverException In case the language code does not exists in the relevant codelist.
      */
     void setLang(EULanguageCodeEnum lang) throws RetrieverException;
-
-    /**
-     * Specifies the country the retrieved data will refers to.
-     *
-     * @param countryFilter The country code.
-     * @throws RetrieverException
-     */
-    void setCountryFilter(ECertisNationalEntityEnum countryFilter);
 
 }

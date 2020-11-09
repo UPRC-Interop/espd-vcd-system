@@ -162,7 +162,7 @@ public class CriteriaDataRetrieverBuilderTest {
         if (ResourceConfig.INSTANCE.useProduction()) {
             final String ID = "fdab2c29-ab6d-4ce1-92c2-5663732dd022";
 
-            List<Evidence> eList = retriever.getEvidences(ID);
+            List<Evidence> eList = retriever.getEvidencesForNationalCriterion(ID);
             Assert.assertFalse(eList.isEmpty());
 
             int index = 1;
@@ -172,8 +172,7 @@ public class CriteriaDataRetrieverBuilderTest {
                 // SelectableCriterionPrinter.printEvidence(e);
             }
         } else { //  Multi-Domain e-Certis evidences
-            retriever.setCountryFilter(ECertisNationalEntityEnum.GR);
-            List<Evidence> eList = retriever.getEvidences(firstCriterionId);
+            List<Evidence> eList = retriever.getEvidencesForEuropeanCriterion(firstCriterionId, ECertisNationalEntityEnum.GR.name());
             Assert.assertFalse(eList.isEmpty());
 
             Evidence firstEvidence = eList.get(0);
@@ -198,17 +197,17 @@ public class CriteriaDataRetrieverBuilderTest {
             final String ID = "14df34e8-15a9-411c-8c05-8c051693e277";
             retriever.setLang(EULanguageCodeEnum.EL);
 
-            List<Evidence> eList = retriever.getEvidences(ID);
+            List<Evidence> eList = retriever.getEvidencesForNationalCriterion(ID);
             Assert.assertFalse(eList.isEmpty());
 
             int index = 1;
 
-            for (Evidence e : retriever.getEvidences(ID)) {
+            for (Evidence e : eList) {
                 System.out.printf("#Evidence %-2d\nID: %s Description: %s Evidence Url: %s\n", index++, e.getID(), e.getDescription(), e.getEvidenceURL());
             }
         } else { //  Multi-Domain e-Certis evidences
             retriever.setLang(EULanguageCodeEnum.EL);
-            List<Evidence> eList = retriever.getEvidences(firstCriterionId);
+            List<Evidence> eList = retriever.getEvidencesForNationalCriterion(firstCriterionId);
             Assert.assertFalse(eList.isEmpty());
 
             Evidence firstEvidence = eList.get(0);
@@ -231,8 +230,7 @@ public class CriteriaDataRetrieverBuilderTest {
 
         if (!ResourceConfig.INSTANCE.useProduction()) { //  Multi-Domain e-Certis evidences
             retriever.setLang(EULanguageCodeEnum.EL);
-            retriever.setCountryFilter(ECertisNationalEntityEnum.GR);
-            List<Evidence> eList = retriever.getEvidences(firstCriterionId);
+            List<Evidence> eList = retriever.getEvidencesForEuropeanCriterion(firstCriterionId, ECertisNationalEntityEnum.GR.name());
             Assert.assertFalse(eList.isEmpty());
 
             Evidence firstEvidence = eList.get(0);
@@ -240,12 +238,12 @@ public class CriteriaDataRetrieverBuilderTest {
             Assert.assertNotNull(firstEvidence.getDescription());
             Assert.assertNotNull(firstEvidence.getEvidenceURL());
 
-//            int index = 1;
-//
-//            for (Evidence e : eList) {
-//                // System.out.printf("#Evidence %-2d\nID: %s Description: %s Evidence Url: %s\n", index++, e.getID(), e.getDescription(), e.getEvidenceURL());
-//                SelectableCriterionPrinter.printEvidence(e);
-//            }
+            int index = 1;
+
+            for (Evidence e : eList) {
+                // System.out.printf("#Evidence %-2d\nID: %s Description: %s Evidence Url: %s\n", index++, e.getID(), e.getDescription(), e.getEvidenceURL());
+                SelectableCriterionPrinter.printEvidence(e);
+            }
         }
 
     }

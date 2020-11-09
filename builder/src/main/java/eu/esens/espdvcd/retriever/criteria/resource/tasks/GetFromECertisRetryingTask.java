@@ -16,8 +16,8 @@
 package eu.esens.espdvcd.retriever.criteria.resource.tasks;
 
 import com.github.rholder.retry.*;
-import com.google.common.base.Predicates;
 
+import java.util.Objects;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -28,7 +28,7 @@ import java.util.concurrent.TimeoutException;
  */
 public class GetFromECertisRetryingTask implements Callable<String> {
 
-    private GetFromECertisTask task;
+    private final GetFromECertisTask task;
 
     public GetFromECertisRetryingTask(GetFromECertisTask task) {
         this.task = task;
@@ -38,7 +38,7 @@ public class GetFromECertisRetryingTask implements Callable<String> {
     public String call() throws ExecutionException, RetryException {
 
         Retryer<String> retryer = RetryerBuilder.<String>newBuilder()
-                .retryIfResult(Predicates.<String>isNull())
+                .retryIfResult(Objects::isNull)
                 .retryIfExceptionOfType(TimeoutException.class)
                 .retryIfRuntimeException()
                 .withWaitStrategy(WaitStrategies.fibonacciWait(100, 2, TimeUnit.MINUTES))

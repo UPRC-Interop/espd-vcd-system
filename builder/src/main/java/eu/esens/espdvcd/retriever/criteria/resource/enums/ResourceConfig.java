@@ -26,14 +26,13 @@ import java.nio.file.Paths;
  */
 public enum ResourceConfig {
 
-    INSTANCE;
+    INSTANCE("resource.conf");
 
-    private final String CONFIG_FILE = "resource.conf";
     private final Config config;
 
-    ResourceConfig() {
-        Config config = ConfigFactory.parseResources(CONFIG_FILE);
-        Path f = Paths.get("./" + CONFIG_FILE);
+    ResourceConfig(String filename) {
+        Config config = ConfigFactory.parseResources(filename);
+        Path f = Paths.get("./" + filename);
         this.config =
                 ConfigFactory.parseFile(f.toFile())
                         .withFallback(config)

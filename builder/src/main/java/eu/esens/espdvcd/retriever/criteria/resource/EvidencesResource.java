@@ -30,33 +30,43 @@ public interface EvidencesResource extends Resource {
     /**
      * Get Evidences of a National Criterion in default language (EN).
      *
-     * @param ID The National Criterion ID
+     * @param id The National Criterion id
      * @return The List of Evidences
      */
-    List<Evidence> getEvidencesForCriterion(String ID) throws RetrieverException;
+    List<Evidence> getEvidencesForNationalCriterion(String id) throws RetrieverException;
 
     /**
      * Get Evidences of a National Criterion in the selected language.
      *
-     * @param ID   The National Criterion ID
+     * @param id   The National Criterion id
      * @param lang The language code (ISO 639-1:2002)
      * @return The List of Evidences
      */
-    List<Evidence> getEvidencesForCriterion(String ID, EULanguageCodeEnum lang) throws RetrieverException;
+    List<Evidence> getEvidencesForNationalCriterion(String id, EULanguageCodeEnum lang) throws RetrieverException;
 
     /**
-     * If the given criterion ID belongs to a national criterion, the method will return all
-     * the Evidences of that national criterion. In contrary, if the given criterion ID belongs
-     * to a European criterion, the method will return all the evidences for the country, that is
-     * specified through countryFilter parameter.
+     * Get Evidences of a European Criterion in default language (EN) for the specified country.
      *
-     * @param ID   The European or National Criterion ID.
-     * @param countryFilter The country the retrieved evidences will refers to.
-     * @param lang The language code (ISO 639-1:2002).
-     * @return The List of Evidences
+     * @param id The European Criterion id
+     * @param countryCode The country code
+     * @return
+     * @throws RetrieverException
      */
-    List<Evidence> getEvidencesForCriterion(String ID,
-                                            ECertisNationalEntityEnum countryFilter,
-                                            EULanguageCodeEnum lang) throws RetrieverException;
+    List<Evidence> getEvidencesForEuropeanCriterion(String id,
+                                                    ECertisNationalEntityEnum countryCode) throws RetrieverException;
+
+    /**
+     * Get Evidences of a European Criterion in the selected language, for the specified country.
+     *
+     * @param europeanCriterionId
+     * @param countryCode The country code
+     * @param lang The language code (ISO 639-1:2002)
+     * @return
+     * @throws RetrieverException
+     */
+    List<Evidence> getEvidencesForEuropeanCriterion(String europeanCriterionId,
+                                                    ECertisNationalEntityEnum countryCode,
+                                                    EULanguageCodeEnum lang) throws RetrieverException;
+
 
 }

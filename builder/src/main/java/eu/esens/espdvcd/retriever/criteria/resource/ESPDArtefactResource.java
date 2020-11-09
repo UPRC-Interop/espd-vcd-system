@@ -31,12 +31,12 @@ import eu.espd.schema.v2.v210.qualificationapplicationrequest.QualificationAppli
 
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.JAXB;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 /**
  * @author Konstantinos Raptis
@@ -90,12 +90,11 @@ public class ESPDArtefactResource implements CriteriaResource, LegislationResour
     public List<SelectableCriterion> getCriterionList(EULanguageCodeEnum lang) {
 
         // failback check
-        if (lang == null || lang != EULanguageCodeEnum.EN) {
+        if (lang != EULanguageCodeEnum.EN) {
             LOGGER.log(Level.WARNING, "Warning... European Criteria Multilinguality not supported yet. Language set back to English");
         }
 
-        return criterionMap.values().stream()
-                .collect(Collectors.toList());
+        return new ArrayList<>(criterionMap.values());
     }
 
     @Override
@@ -107,7 +106,7 @@ public class ESPDArtefactResource implements CriteriaResource, LegislationResour
     public Map<String, SelectableCriterion> getCriterionMap(EULanguageCodeEnum lang) {
 
         // failback check
-        if (lang == null || lang != EULanguageCodeEnum.EN) {
+        if (lang != EULanguageCodeEnum.EN) {
             LOGGER.log(Level.WARNING, "Warning... European Criteria Multilinguality not supported yet. Language set back to English");
         }
 
@@ -123,7 +122,7 @@ public class ESPDArtefactResource implements CriteriaResource, LegislationResour
     public LegislationReference getLegislationForCriterion(String ID, EULanguageCodeEnum lang) {
 
         // failback check
-        if (lang == null || lang != EULanguageCodeEnum.EN) {
+        if (lang != EULanguageCodeEnum.EN) {
             LOGGER.log(Level.WARNING, "Warning... European Criteria Multilinguality not supported yet. Language set back to English");
         }
 
@@ -141,7 +140,7 @@ public class ESPDArtefactResource implements CriteriaResource, LegislationResour
     public List<RequirementGroup> getRequirementsForCriterion(String ID, EULanguageCodeEnum lang) {
 
         // failback check
-        if (lang == null || lang != EULanguageCodeEnum.EN) {
+        if (lang != EULanguageCodeEnum.EN) {
             LOGGER.log(Level.WARNING, "Warning... European Criteria Multilinguality not supported yet. Language set back to English");
         }
 

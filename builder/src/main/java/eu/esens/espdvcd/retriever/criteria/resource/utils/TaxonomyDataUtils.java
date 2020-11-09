@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  * <p>
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -31,23 +31,19 @@ public class TaxonomyDataUtils {
 
     public static CardinalityEnum extractCardinality(boolean mandatory, boolean multiple) {
 
-        if (mandatory == true && multiple == false) {
+        if (mandatory && !multiple) {
             return CardinalityEnum.ONE;
         }
 
-        if (mandatory == false && multiple == false) {
+        if (!mandatory && !multiple) {
             return CardinalityEnum.ZERO_OR_ONE;
         }
 
-        if (mandatory == false && multiple == true) {
+        if (!mandatory) {
             return CardinalityEnum.ZERO_TO_MANY;
         }
 
-        if (mandatory == true && multiple == true) {
-            return CardinalityEnum.ONE_TO_MANY;
-        }
-
-        return CardinalityEnum.ONE;
+        return CardinalityEnum.ONE_TO_MANY;
     }
 
     public static CardinalityEnum extractCardinality(String cardinality) {
@@ -129,16 +125,12 @@ public class TaxonomyDataUtils {
 
             // do the same for requirement/s
             to.getRequirements().stream()
-                    .filter(toRq -> isRequirementBasicInfoNotNull(toRq))
+                    .filter(TaxonomyDataUtils::isRequirementBasicInfoNotNull)
                     .forEach(toRq -> applyTaxonomyData(
                             from.getRequirements().stream()
                                     .filter(fromRq -> isRequirementBasicInfoNotNull(fromRq)
-                                            // && ArtefactUtils.clearAllWhitespaces(toRq.getDescription())
-                                            // .equals(ArtefactUtils.clearAllWhitespaces(fromRq.getDescription()))
                                             && toRq.getDescription().replaceAll("\\?", "").trim()
                                             .equalsIgnoreCase(fromRq.getDescription().replaceAll("\\?", "").trim())
-//                                            && toRq.getResponseDataType() == fromRq.getResponseDataType()
-//                                            && toRq.getType() == fromRq.getType())
                                     )
                                     .findFirst().orElse(null) // from
                             , toRq                                  // to

@@ -46,7 +46,7 @@ public class GetECertisCriterionRetryingTask implements Callable<ECertisCriterio
         try {
             this.uri = new ECertisURIBuilder()
                     .lang(ECertisLanguageCodeEnum.valueOf(builder.lang.name()))
-                    .countryFilter(builder.countryFilter)
+                    .countryFilter(builder.countryCode)
                     .buildCriterionURI(builder.id);
         } catch (URISyntaxException e) {
             LOGGER.log(Level.SEVERE, e.getMessage());
@@ -70,7 +70,7 @@ public class GetECertisCriterionRetryingTask implements Callable<ECertisCriterio
         private final String id;
         /* optional params */
         private EULanguageCodeEnum lang = EULanguageCodeEnum.EN;
-        private ECertisNationalEntityEnum countryFilter;
+        private ECertisNationalEntityEnum countryCode;
 
         /**
          * @param id The Criterion id (UUID).
@@ -91,11 +91,11 @@ public class GetECertisCriterionRetryingTask implements Callable<ECertisCriterio
         }
 
         /**
-         * @param countryFilter The country for which criterion data will be returned.
+         * @param countryCode The country for which criterion data will be returned.
          * @return
          */
-        public Builder countryFilter(ECertisNationalEntityEnum countryFilter) {
-            this.countryFilter = countryFilter;
+        public Builder countryFilter(ECertisNationalEntityEnum countryCode) {
+            this.countryCode = countryCode;
             return Builder.this;
         }
 

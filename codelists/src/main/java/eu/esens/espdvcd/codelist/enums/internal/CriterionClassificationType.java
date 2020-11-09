@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  * <p>
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,22 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package eu.esens.espdvcd.retriever.criteria.resource.enums;
+package eu.esens.espdvcd.codelist.enums.internal;
 
 /**
- * @author Konstantinos Raptis
+ * @author Konstantinos Raptis [kraptis at unipi.gr] on 5/11/2020.
  */
-public enum ResourceType {
-
-    ECERTIS(1), ARTEFACT(2), TAXONOMY(3);
-
-    private final int priority;
-
-    ResourceType(int priority) {
-        this.priority = priority;
-    }
-
-    public int getPriority() {
-        return priority;
-    }
+public enum CriterionClassificationType {
+    EUROPEAN, NATIONAL
 }

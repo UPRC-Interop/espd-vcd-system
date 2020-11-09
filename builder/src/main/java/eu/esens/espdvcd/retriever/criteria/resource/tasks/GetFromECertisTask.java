@@ -58,21 +58,18 @@ public class GetFromECertisTask implements Callable<String> {
                 int status = response.getStatusLine().getStatusCode();
                 long endTime;
 
-                switch (status) {
-
-                    case HttpStatus.SC_OK:
-                        HttpEntity entity = response.getEntity();
-                        endTime = System.currentTimeMillis();
-                        // LOGGER.log(Level.INFO, String.format("%-16s Task: %s FINISH %d ms", Thread.currentThread().getName(), url, (endTime - startTime)));
-                        System.out.printf("%-16s Task: %s FINISH with [%d] status code at %d ms\n", Thread.currentThread().getName(), url, status, (endTime - startTime));
-                        return entity != null ? EntityUtils.toString(entity) : null;
-
-                    default:
-                        endTime = System.currentTimeMillis();
-                        // LOGGER.log(Level.SEVERE, String.format("%-16s Task: %s FINISH with exception %d ms", Thread.currentThread().getName(), url, (endTime - startTime)));
-                        System.out.printf("%-16s Task: %s FINISH with [%d] status code at %d ms\n", Thread.currentThread().getName(), url, status, (endTime - startTime));
-                        throw new ClientProtocolException("Unexpected response status: [" + status + "] for URL: " + url);
+                if (status == HttpStatus.SC_OK) {
+                    HttpEntity entity = response.getEntity();
+                    endTime = System.currentTimeMillis();
+                    // LOGGER.log(Level.INFO, String.format("%-16s Task: %s FINISH %d ms", Thread.currentThread().getName(), url, (endTime - startTime)));
+                    System.out.printf("%-16s Task: %s FINISH with [%d] status code at %d ms\n", Thread.currentThread().getName(), url, status, (endTime - startTime));
+                    return entity != null ? EntityUtils.toString(entity) : null;
                 }
+
+                endTime = System.currentTimeMillis();
+                // LOGGER.log(Level.SEVERE, String.format("%-16s Task: %s FINISH with exception %d ms", Thread.currentThread().getName(), url, (endTime - startTime)));
+                System.out.printf("%-16s Task: %s FINISH with [%d] status code at %d ms\n", Thread.currentThread().getName(), url, status, (endTime - startTime));
+                throw new ClientProtocolException("Unexpected response status: [" + status + "] for URL: " + url);
 
             };
 
