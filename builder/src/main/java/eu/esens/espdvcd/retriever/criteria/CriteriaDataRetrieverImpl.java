@@ -20,7 +20,7 @@ import eu.esens.espdvcd.builder.model.ModelFactory;
 import eu.esens.espdvcd.codelist.CodelistsV2;
 import eu.esens.espdvcd.codelist.enums.CountryIdentificationEnum;
 import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
-import eu.esens.espdvcd.codelist.enums.ecertis.ECertisNationalEntityEnum;
+import eu.esens.espdvcd.codelist.enums.ecertis.ECertisLanguageCodeEnum;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
 import eu.esens.espdvcd.model.retriever.ECertisCriterion;
@@ -31,6 +31,8 @@ import eu.esens.espdvcd.retriever.criteria.resource.utils.CriterionUtils;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.annotation.Nullable;
+import javax.validation.constraints.NotNull;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -131,14 +133,15 @@ public class CriteriaDataRetrieverImpl implements CriteriaDataRetriever {
      * @throws RetrieverException
      */
     @Override
-    public List<SelectableCriterion> getNationalCriterionMapping(String id, String countryCode) throws RetrieverException {
+    public List<SelectableCriterion> getNationalCriterionMapping(@NotNull String id,
+                                                                 @NotNull String countryCode) throws RetrieverException {
 
         List<ECertisCriterion> nationalCriterionTypeList;
 
         if (isIdentificationCodeExist(countryCode)) {
 
             GetECertisCriterionRetryingTask task = new GetECertisCriterionRetryingTask.Builder(id)
-                    .lang(lang)
+                    .lang(ECertisLanguageCodeEnum.valueOf(countryCode.toUpperCase()))
                     .build();
 
             String codeLowerCase = countryCode.toLowerCase();
@@ -148,12 +151,12 @@ public class CriteriaDataRetrieverImpl implements CriteriaDataRetriever {
 
                 if (CriterionUtils.isEuropean(source)) {
                     // Extract National Criteria
-                    nationalCriterionTypeList = eCertisResource.getSubCriterionList(source, codeLowerCase);
+                    nationalCriterionTypeList = eCertisResource.getNationalCriteriaByCountryCode(source, codeLowerCase);
                 } else {
                     // Get the EU Parent Criterion
-                    ECertisCriterion parent = eCertisResource.getParentCriterion(source, lang);
+                    ECertisCriterion parent = eCertisResource.getParentCriterion(source, ECertisLanguageCodeEnum.valueOf(lang.name()));
                     // Extract National Criteria
-                    nationalCriterionTypeList = eCertisResource.getSubCriterionList(parent, codeLowerCase);
+                    nationalCriterionTypeList = eCertisResource.getNationalCriteriaByCountryCode(parent, codeLowerCase);
                 }
 
             } catch (ExecutionException | RetryException | IOException e) {
@@ -180,7 +183,7 @@ public class CriteriaDataRetrieverImpl implements CriteriaDataRetriever {
     @Override
     public SelectableCriterion getCriterion(String id) throws RetrieverException {
         return ModelFactory.ESPD_REQUEST.extractSelectableCriterion(
-                eCertisResource.getECertisCriterion(id, lang), true);
+                eCertisResource.getECertisCriterion(id, ECertisLanguageCodeEnum.valueOf(lang.name())), true);
     }
 
     /**
@@ -204,14 +207,12 @@ public class CriteriaDataRetrieverImpl implements CriteriaDataRetriever {
 
 
     @Override
-    public List<Evidence> getEvidencesForEuropeanCriterion(String id, String countryCode) throws RetrieverException {
+    public List<Evidence> getEvidencesForEuropeanCriterion(@NotNull String id, @Nullable String countryCode) throws RetrieverException {
 
         List<Evidence> evidenceList = new ArrayList<>();
 
         for (EvidencesResource eResource : eResourceList) {
-            evidenceList.addAll(eResource.getEvidencesForEuropeanCriterion(id,
-                    ECertisNationalEntityEnum.valueOf(countryCode.toUpperCase()),
-                    lang));
+            evidenceList.addAll(eResource.getEvidencesForEuropeanCriterion(id, countryCode, lang));
         }
 
         return evidenceList;

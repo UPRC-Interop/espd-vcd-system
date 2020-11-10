@@ -20,6 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.rholder.retry.RetryException;
 import eu.esens.espdvcd.builder.model.ModelFactory;
 import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
+import eu.esens.espdvcd.codelist.enums.ecertis.ECertisLanguageCodeEnum;
 import eu.esens.espdvcd.codelist.enums.ecertis.ECertisNationalEntityEnum;
 import eu.esens.espdvcd.model.Criterion;
 import eu.esens.espdvcd.model.LegislationReference;
@@ -37,6 +38,7 @@ import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.http.client.ClientProtocolException;
 
+import javax.annotation.Nullable;
 import javax.validation.constraints.NotNull;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -288,16 +290,11 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
     }
 
     @Override
-    public List<Evidence> getEvidencesForNationalCriterion(String ID) throws RetrieverException {
-        return getEvidencesForNationalCriterion(ID, EULanguageCodeEnum.EN);
-    }
-
-    @Override
-    public List<Evidence> getEvidencesForNationalCriterion(String ID,
-                                                           @NotNull EULanguageCodeEnum lang) throws RetrieverException {
+    public List<Evidence> getEvidencesForNationalCriterion(@NotNull String ID,
+                                                           @Nullable EULanguageCodeEnum lang) throws RetrieverException {
 
         GetECertisCriterionRetryingTask task = new GetECertisCriterionRetryingTask.Builder(ID)
-                .lang(lang)
+                .lang(ECertisLanguageCodeEnum.valueOf(lang.name()))
                 .build();
 
         try {
@@ -318,20 +315,12 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
     }
 
     @Override
-    public List<Evidence> getEvidencesForEuropeanCriterion(String id,
-                                                           @NotNull ECertisNationalEntityEnum countryCode) throws RetrieverException {
-
-        return getEvidencesForEuropeanCriterion(id, countryCode, EULanguageCodeEnum.EN);
-    }
-
-    @Override
-    public List<Evidence> getEvidencesForEuropeanCriterion(String id,
-                                                           @NotNull ECertisNationalEntityEnum countryCode,
+    public List<Evidence> getEvidencesForEuropeanCriterion(@NotNull String id,
+                                                           @Nullable String countryCode,
                                                            @NotNull EULanguageCodeEnum lang) throws RetrieverException {
 
         GetECertisCriterionRetryingTask task = new GetECertisCriterionRetryingTask.Builder(id)
-                .lang(lang)
-                // .countryFilter(countryCode)
+                .lang(ECertisLanguageCodeEnum.valueOf(lang.name()))
                 .build();
 
         try {
@@ -340,7 +329,7 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
             if (CriterionUtils.isEuropean(ec)) { // if it is European
 
                 return ModelFactory.ESPD_REQUEST.extractEvidences(
-                        getSubCriterionList(ec, countryCode.name().toLowerCase()) // Get National sub-Criteria by country code
+                        getNationalCriteriaByCountryCode(ec, countryCode) // Get National sub-Criteria by country code
                                 .stream()
                                 .map(ECertisCriterion::getEvidenceGroups) // Get the evidences of that National sub-Criterion
                                 .flatMap(List::stream)
@@ -365,61 +354,44 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
     /**
      * Retrieves an e-Certis Criterion with full data.
      *
-     * @param ID The Criterion ID
+     * @param id The Criterion id (European or National)
      * @return The e-Certis Criterion
      * @throws RetrieverException
      */
-    public ECertisCriterion getECertisCriterion(String ID) throws RetrieverException {
-
-        GetECertisCriterionRetryingTask task = new GetECertisCriterionRetryingTask.Builder(ID)
-                .build();
-
-        try {
-            return task.call();
-        } catch (ExecutionException | RetryException | IOException e) {
-            throw new RetrieverException(e);
-        }
+    public ECertisCriterion getECertisCriterion(@NotNull String id) throws RetrieverException {
+        return getECertisCriterion(id, ECertisLanguageCodeEnum.EN);
     }
 
     /**
      * Retrieves an e-Certis Criterion with full data in the specified language.
      *
-     * @param ID   The Criterion ID
-     * @param lang The Criterion Language (ISO 639-1:2002)
+     * @param id   The Criterion id (European or National)
+     * @param lang The language code (ISO 639-1:2002)
      * @return The e-Certis Criterion
      * @throws RetrieverException
      */
-    public ECertisCriterion getECertisCriterion(String ID, EULanguageCodeEnum lang) throws RetrieverException {
+    public ECertisCriterion getECertisCriterion(@NotNull String id,
+                                                @NotNull ECertisLanguageCodeEnum lang) throws RetrieverException {
 
-        GetECertisCriterionRetryingTask task = new GetECertisCriterionRetryingTask.Builder(ID)
-                .lang(lang)
-                .build();
-
-        try {
-            return task.call();
-        } catch (ExecutionException | RetryException | IOException e) {
-            throw new RetrieverException(e);
-        }
+        return getECertisCriterion(id, lang, null);
     }
 
     /**
      * Retrieves an e-Certis Criterion with full data for the specified national entity in the specified language.
-     * <p>
-     * *** Use this method for e-Certis Multi Domain ***
      *
-     * @param ID            The Criterion ID.
-     * @param countryFilter The country, for which the criterions legislation will refer to (default is EU).
-     * @param lang          The Criterion language (ISO 639-1:2002).
+     * @param id          The Criterion id (European or National)
+     * @param lang        The language code (ISO 639-1:2002)
+     * @param countryCode The country code (ISO 2A)
      * @return The e-Certis Criterion
      * @throws RetrieverException
      */
-    public ECertisCriterion getECertisCriterion(String ID,
-                                                EULanguageCodeEnum lang,
-                                                ECertisNationalEntityEnum countryFilter) throws RetrieverException {
+    public ECertisCriterion getECertisCriterion(@NotNull String id,
+                                                @NotNull ECertisLanguageCodeEnum lang,
+                                                @Nullable ECertisNationalEntityEnum countryCode) throws RetrieverException {
 
-        GetECertisCriterionRetryingTask task = new GetECertisCriterionRetryingTask.Builder(ID)
+        GetECertisCriterionRetryingTask task = new GetECertisCriterionRetryingTask.Builder(id)
                 .lang(lang)
-                .countryFilter(countryFilter)
+                .countryFilter(countryCode)
                 .build();
 
         try {
@@ -437,7 +409,7 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
      * @return
      * @throws RetrieverException
      */
-    public ECertisCriterion getParentCriterion(ECertisCriterion ec, EULanguageCodeEnum lang) throws RetrieverException {
+    public ECertisCriterion getParentCriterion(ECertisCriterion ec, ECertisLanguageCodeEnum lang) throws RetrieverException {
         if (ec.getParentCriterion() == null) {
             throw new RetrieverException("Error... Unable to Extract Parent Criterion of " + ec.getID());
         }
@@ -459,18 +431,36 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
     }
 
     /**
-     * Get sub-Criteria of a European Criterion by identification countryCode.
+     * Get National Criteria (sub-Criteria) of a European Criterion filtered by country code.
      *
-     * @param ec          The European Criterion
-     * @param countryCode The national entity identification countryCode (ISO 639-1:2002)
-     * @return List of subCriteria
+     * @param ec          The Criterion (European)
+     * @param countryCode The country code (ISO 2A)
+     * @return The National Criteria
      */
-    public List<ECertisCriterion> getSubCriterionList(ECertisCriterion ec, String countryCode) {
-        return ec.getSubCriterions().stream()
-                .filter(c -> c.getLegislationReference() != null)
-                .filter(c -> c.getLegislationReference()
-                        .getJurisdictionLevelCode().equals(countryCode))
-                .collect(Collectors.toList());
+    public List<ECertisCriterion> getNationalCriteriaByCountryCode(@NotNull ECertisCriterion ec,
+                                                                   @Nullable String countryCode)
+            throws RetrieverException, IllegalArgumentException {
+
+        if (CriterionUtils.isEuropean(ec)) { // Check if it is a European criterion
+
+            if (countryCode != null) { // Use filter only if param is not null
+
+                return ec.getSubCriterions().stream()
+                        .filter(subCriterion -> subCriterion.getLegislationReference() != null
+                                && subCriterion.getLegislationReference().getJurisdictionLevelCode() != null
+                                && subCriterion.getLegislationReference().getJurisdictionLevelCode()
+                                .equals(countryCode))
+                        .collect(Collectors.toList());
+            } else {
+
+                return ec.getSubCriterions();
+            }
+
+        } else {
+            throw new IllegalArgumentException("Error... Given Criterion id "
+                    + ec.getID()
+                    + " belongs to a National Criterion.");
+        }
     }
 
 }

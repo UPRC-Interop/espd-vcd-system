@@ -18,8 +18,11 @@ package eu.esens.espdvcd.retriever.criteria;
 import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
+import eu.esens.espdvcd.retriever.criteria.resource.utils.CriterionUtils;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 
+import javax.annotation.Nullable;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -41,7 +44,8 @@ public interface CriteriaDataRetriever {
      * @return All National Criteria which mapped with source Criterion
      * @throws eu.esens.espdvcd.retriever.exception.RetrieverException
      */
-    List<SelectableCriterion> getNationalCriterionMapping(String id, String countryCode) throws RetrieverException;
+    List<SelectableCriterion> getNationalCriterionMapping(@NotNull String id,
+                                                          @NotNull String countryCode) throws RetrieverException;
 
     /**
      * Retrieve a Criterion by given id.
@@ -50,25 +54,27 @@ public interface CriteriaDataRetriever {
      * @return The Criterion
      * @throws eu.esens.espdvcd.retriever.exception.RetrieverException
      */
-    SelectableCriterion getCriterion(String id) throws RetrieverException;
+    SelectableCriterion getCriterion(@NotNull String id) throws RetrieverException;
 
     /**
      * Retrieve all the Evidences of a National Criterion.
      *
-     * @param id The Criterion id (European or National)
+     * @param id The Criterion id (National)
      * @return The Evidences
      * @throws eu.esens.espdvcd.retriever.exception.RetrieverException
      */
-    List<Evidence> getEvidencesForNationalCriterion(String id) throws RetrieverException;
+    List<Evidence> getEvidencesForNationalCriterion(@NotNull String id) throws RetrieverException;
 
     /**
-     * Retrieve all the Evidences of a European Criterion for the specified country.
+     * Retrieve all the Evidences of a European Criterion filtered by specified country code.
      *
-     * @param id The Criterion id (European or National)
+     * @param id          The Criterion id (European)
+     * @param countryCode The country code (null to ignore filter)
      * @return The Evidences
      * @throws eu.esens.espdvcd.retriever.exception.RetrieverException
      */
-    List<Evidence> getEvidencesForEuropeanCriterion(String id, String countryCode) throws RetrieverException;
+    List<Evidence> getEvidencesForEuropeanCriterion(@NotNull String id,
+                                                    @Nullable String countryCode) throws RetrieverException;
 
     /**
      * Specify the language of the retrieved data.
@@ -76,6 +82,6 @@ public interface CriteriaDataRetriever {
      * @param lang The language code (ISO 639-1:2002)
      * @throws RetrieverException In case the language code does not exists in the relevant codelist.
      */
-    void setLang(EULanguageCodeEnum lang) throws RetrieverException;
+    void setLang(@NotNull EULanguageCodeEnum lang) throws RetrieverException;
 
 }
