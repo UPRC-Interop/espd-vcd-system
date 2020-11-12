@@ -81,7 +81,7 @@ public class ECertisEvidenceImpl implements ECertisEvidence {
 
     @Override
     @JsonProperty("TypeCode")
-    @JsonAlias({"TypeCode"})
+    @JsonAlias({"typeCode"})
     public String getTypeCode() {
         return typeCode;
     }

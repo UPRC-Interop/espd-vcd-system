@@ -15,237 +15,189 @@
  */
 package eu.esens.espdvcd.retriever.criteria;
 
-import eu.esens.espdvcd.codelist.CodelistsV2;
 import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
 import eu.esens.espdvcd.codelist.enums.ecertis.ECertisNationalEntityEnum;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
-import eu.esens.espdvcd.retriever.criteria.resource.CriteriaTaxonomyResource;
-import eu.esens.espdvcd.retriever.criteria.resource.RegulatedCriteriaTaxonomyResource;
 import eu.esens.espdvcd.retriever.criteria.resource.SelectableCriterionPrinter;
-import eu.esens.espdvcd.retriever.criteria.resource.enums.ResourceConfig;
+import eu.esens.espdvcd.retriever.criteria.resource.utils.AssertUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author konstantinos Raptis
  */
 public class CriteriaDataRetrieverBuilderTest {
 
-
     private CriteriaDataRetriever retriever;
-    private CriteriaTaxonomyResource regulatedTaxonomy;
-    private String firstCriterionId;
-    private static boolean setUpIsDone = false;
-
 
     @Before
     public void setUp() {
         retriever = new CriteriaDataRetrieverBuilder().build();
-        if (setUpIsDone) {
-            return;
-        }
-        regulatedTaxonomy = new RegulatedCriteriaTaxonomyResource();
-        firstCriterionId = regulatedTaxonomy.getCriterionList().get(0).getID();
-        setUpIsDone = true;
     }
 
     @Test
-    public void testGetCriterionForDefaultLang() throws Exception {
-        SelectableCriterion sc = retriever.getCriterion(firstCriterionId);
+    public void testGetEuCriterionInDefaultLang() throws Exception {
+
+        final String id = "005eb9ed-1347-4ca3-bb29-9bc0db64e1ab";
+
+        SelectableCriterion sc = retriever.getCriterion(id);
         Assert.assertNotNull(sc);
-        SelectableCriterionPrinter.print(sc);
+
+        AssertUtils.assertLegislationAndItsFieldsNotNull(sc.getLegislationReference());
+        // SelectableCriterionPrinter.print(sc);
     }
 
     @Test
     public void testGetNationalCriterionWithGreekLangParam() throws Exception {
+
+        final String id = "14df34e8-15a9-411c-8c05-8c051693e277";
+
         retriever.setLang(EULanguageCodeEnum.EL);
-        SelectableCriterion sc = retriever.getCriterion(firstCriterionId);
+        SelectableCriterion sc = retriever.getCriterion(id);
         Assert.assertNotNull(sc);
-        Assert.assertNotNull(sc.getLegislationReference());
-        Assert.assertNotNull(sc.getLegislationReference().getJurisdictionLevelCode());
-        Assert.assertNotNull(sc.getLegislationReference().getDescription());
-        Assert.assertNotNull(sc.getLegislationReference().getURI());
-        SelectableCriterionPrinter.print(sc);
+
+        AssertUtils.assertLegislationAndItsFieldsNotNull(sc.getLegislationReference());
+        // SelectableCriterionPrinter.print(sc);
     }
 
     @Test
     public void testGetNationalCriterionWithGermanLangParam() throws Exception {
+
+        final String id = "14df34e8-15a9-411c-8c05-8c051693e277";
+
         retriever.setLang(EULanguageCodeEnum.DE);
-        SelectableCriterion sc = retriever.getCriterion(firstCriterionId);
+        SelectableCriterion sc = retriever.getCriterion(id);
         Assert.assertNotNull(sc);
-        SelectableCriterionPrinter.print(sc);
+
+        AssertUtils.assertLegislationAndItsFieldsNotNull(sc.getLegislationReference());
+        // SelectableCriterionPrinter.print(sc);
     }
 
     @Test
-    public void testEuToNationalMapping() throws Exception {
+    public void testEuToNationalMappingInDefaultLang() throws Exception {
 
-        if (ResourceConfig.INSTANCE.useProduction()) {
-            String ID = "005eb9ed-1347-4ca3-bb29-9bc0db64e1ab";
+        final String id = "005eb9ed-1347-4ca3-bb29-9bc0db64e1ab";
+        final String countryCode = ECertisNationalEntityEnum.DE.name();
 
-            String code = EULanguageCodeEnum.DE.name();
+        List<SelectableCriterion> mappedCriteriaList = retriever.getNationalCriterionMapping(id, countryCode);
 
-            List<String> ncList = retriever.getNationalCriterionMapping(ID, code)
-                    .stream()
-                    .map(c -> c.getID())
-                    .collect(Collectors.toList());
-
-            System.out.printf("European Criterion with ID %s mapped to National (%s) Criterion/s --> %s\n"
-                    , ID, CodelistsV2.LanguageCodeEU.getValueForId(code), ncList);
-        } else {
-            System.out.println("CriteriaDataRetrieverBuilderTest.testEuToNationalMapping has been ignored, " +
-                    "because Multi Domain e-Certis does not have national criteria");
+        for (SelectableCriterion mappedCriterion : mappedCriteriaList) {
+            AssertUtils.assertLegislationAndItsFieldsNotNull(mappedCriterion.getLegislationReference());
+            mappedCriterion.getEvidenceList().forEach(e -> AssertUtils.assertEvidenceAndItsFieldsNotNull(e));
+            // SelectableCriterionPrinter.print(mappedCriterion);
         }
     }
 
     @Test
     public void testEuToNationalMappingWithLangParam() throws Exception {
 
-        if (ResourceConfig.INSTANCE.useProduction()) {
-            String ID = "005eb9ed-1347-4ca3-bb29-9bc0db64e1ab";
-            // String code = EULanguageCodeEnum.DE.name();
-            String code = "gr";
+        final String id = "005eb9ed-1347-4ca3-bb29-9bc0db64e1ab";
+        final String countryCode = ECertisNationalEntityEnum.GR.name();
 
-            retriever.setLang(EULanguageCodeEnum.EL);
-            // r.setLang(EULanguageCodeEnum.DE);
+        retriever.setLang(EULanguageCodeEnum.EL);
+        List<SelectableCriterion> mappedCriteriaList = retriever.getNationalCriterionMapping(id, countryCode);
 
-            SelectableCriterionPrinter.print(retriever.getNationalCriterionMapping(ID, code));
-        } else {
-            System.out.println("CriteriaDataRetrieverBuilderTest.testEuToNationalMappingWithLangParam has been ignored, " +
-                    "because Multi Domain e-Certis does not have national criteria");
+        for (SelectableCriterion mappedCriterion : mappedCriteriaList) {
+            AssertUtils.assertLegislationAndItsFieldsNotNull(mappedCriterion.getLegislationReference());
+            mappedCriterion.getEvidenceList().forEach(e -> AssertUtils.assertEvidenceAndItsFieldsNotNull(e));
+            // SelectableCriterionPrinter.print(mappedCriterion);
         }
     }
 
     @Test
-    public void testNationalToNationalMapping() throws Exception {
+    public void testNationalToNationalMappingInDefaultLang() throws Exception {
 
-        if (ResourceConfig.INSTANCE.useProduction()) {
-            String ID = "fdab2c29-ab6d-4ce1-92c2-5663732dd022";
-            String code = EULanguageCodeEnum.HU.name();
+        final String id = "fdab2c29-ab6d-4ce1-92c2-5663732dd022";
+        final String countryCode = ECertisNationalEntityEnum.HU.name();
 
-            List<String> ncList = retriever.getNationalCriterionMapping(ID, code)
-                    .stream()
-                    .map(c -> c.getID())
-                    .collect(Collectors.toList());
+        List<SelectableCriterion> mappedCriteriaList = retriever.getNationalCriterionMapping(id, countryCode);
 
-            System.out.printf("National Criterion with ID %s mapped to National (%s) Criterion/s --> %s\n"
-                    , ID, CodelistsV2.LanguageCodeEU.getValueForId(code), ncList);
-        } else {
-            System.out.println("CriteriaDataRetrieverBuilderTest.testEuToNationalMappingWithLangParam has been ignored, " +
-                    "because Multi Domain e-Certis does not have national criteria");
+        for (SelectableCriterion mappedCriterion : mappedCriteriaList) {
+            AssertUtils.assertLegislationAndItsFieldsNotNull(mappedCriterion.getLegislationReference());
+            mappedCriterion.getEvidenceList().forEach(e -> AssertUtils.assertEvidenceAndItsFieldsNotNull(e));
+            // SelectableCriterionPrinter.print(mappedCriterion);
         }
     }
 
     @Test
     public void testNationalToNationalMappingWithLangParam() throws Exception {
 
-        if (ResourceConfig.INSTANCE.useProduction()) {
-            String ID = "14df34e8-15a9-411c-8c05-8c051693e277";
-            String code = EULanguageCodeEnum.DE.name();
+        final String id = "14df34e8-15a9-411c-8c05-8c051693e277";
+        final String countryCode = ECertisNationalEntityEnum.HU.name();
 
-            retriever.setLang(EULanguageCodeEnum.DE);
+        retriever.setLang(EULanguageCodeEnum.DE);
+        List<SelectableCriterion> mappedCriteriaList = retriever.getNationalCriterionMapping(id, countryCode);
 
-            SelectableCriterionPrinter.print(retriever.getNationalCriterionMapping(ID, code));
-        } else {
-            System.out.println("CriteriaDataRetrieverBuilderTest.testEuToNationalMappingWithLangParam has been ignored, " +
-                    "because Multi Domain e-Certis does not have national criteria");
+        for (SelectableCriterion mappedCriterion : mappedCriteriaList) {
+            AssertUtils.assertLegislationAndItsFieldsNotNull(mappedCriterion.getLegislationReference());
+            mappedCriterion.getEvidenceList().forEach(e -> AssertUtils.assertEvidenceAndItsFieldsNotNull(e));
+            // SelectableCriterionPrinter.print(mappedCriterion);
         }
     }
 
     @Test
-    public void testGetEvidencesForDefaultLang() throws Exception {
+    public void testGetEvidencesForNationalCriterionInDefaultLang() throws Exception {
 
-        if (ResourceConfig.INSTANCE.useProduction()) {
-            final String ID = "fdab2c29-ab6d-4ce1-92c2-5663732dd022";
+        final String id = "fdab2c29-ab6d-4ce1-92c2-5663732dd022";
 
-            List<Evidence> eList = retriever.getEvidencesForNationalCriterion(ID);
-            Assert.assertFalse(eList.isEmpty());
+        List<Evidence> eList = retriever.getEvidencesForNationalCriterion(id);
+        Assert.assertFalse(eList.isEmpty());
 
-            int index = 1;
-
-            for (Evidence e : eList) {
-                System.out.printf("#Evidence %-2d\nID: %s Description: %s Evidence Url: %s\n", index++, e.getID(), e.getDescription(), e.getEvidenceURL());
-                // SelectableCriterionPrinter.printEvidence(e);
-            }
-        } else { //  Multi-Domain e-Certis evidences
-            List<Evidence> eList = retriever.getEvidencesForEuropeanCriterion(firstCriterionId, ECertisNationalEntityEnum.GR.name());
-            Assert.assertFalse(eList.isEmpty());
-
-            Evidence firstEvidence = eList.get(0);
-            Assert.assertNotNull(firstEvidence.getID());
-            Assert.assertNotNull(firstEvidence.getDescription());
-            Assert.assertNotNull(firstEvidence.getEvidenceURL());
-
-//            int index = 1;
-//
-//            for (Evidence e : eList) {
-//                // System.out.printf("#Evidence %-2d\nID: %s Description: %s Evidence Url: %s\n", index++, e.getID(), e.getDescription(), e.getEvidenceURL());
-//                SelectableCriterionPrinter.printEvidence(e);
-//            }
+        for (Evidence e : eList) {
+            AssertUtils.assertEvidenceAndItsFieldsNotNull(e);
+            // SelectableCriterionPrinter.printEvidence(e);
         }
 
     }
 
     @Test
-    public void testGetEvidencesWithLangParam() throws Exception {
+    public void testGetEvidencesForEuropeanCriterionInDefaultLang() throws Exception {
 
-        if (ResourceConfig.INSTANCE.useProduction()) {
-            final String ID = "14df34e8-15a9-411c-8c05-8c051693e277";
-            retriever.setLang(EULanguageCodeEnum.EL);
+        final String id = "005eb9ed-1347-4ca3-bb29-9bc0db64e1ab";
+        final String countryCode = ECertisNationalEntityEnum.GR.name();
 
-            List<Evidence> eList = retriever.getEvidencesForNationalCriterion(ID);
-            Assert.assertFalse(eList.isEmpty());
+        List<Evidence> eList = retriever.getEvidencesForEuropeanCriterion(id, countryCode);
+        Assert.assertFalse(eList.isEmpty());
 
-            int index = 1;
-
-            for (Evidence e : eList) {
-                System.out.printf("#Evidence %-2d\nID: %s Description: %s Evidence Url: %s\n", index++, e.getID(), e.getDescription(), e.getEvidenceURL());
-            }
-        } else { //  Multi-Domain e-Certis evidences
-            retriever.setLang(EULanguageCodeEnum.EL);
-            List<Evidence> eList = retriever.getEvidencesForNationalCriterion(firstCriterionId);
-            Assert.assertFalse(eList.isEmpty());
-
-            Evidence firstEvidence = eList.get(0);
-            Assert.assertNotNull(firstEvidence.getID());
-            Assert.assertNotNull(firstEvidence.getDescription());
-            Assert.assertNotNull(firstEvidence.getEvidenceURL());
-
-//            int index = 1;
-//
-//            for (Evidence e : eList) {
-//                // System.out.printf("#Evidence %-2d\nID: %s Description: %s Evidence Url: %s\n", index++, e.getID(), e.getDescription(), e.getEvidenceURL());
-//                SelectableCriterionPrinter.printEvidence(e);
-//            }
+        for (Evidence e : eList) {
+            AssertUtils.assertEvidenceAndItsFieldsNotNull(e);
+            // SelectableCriterionPrinter.printEvidence(e);
         }
-
     }
 
     @Test
-    public void testGetEvidencesWithNationalEntityAndLangParam() throws Exception {
+    public void testGetEvidencesForNationalCriterionWithLangParam() throws Exception {
 
-        if (!ResourceConfig.INSTANCE.useProduction()) { //  Multi-Domain e-Certis evidences
-            retriever.setLang(EULanguageCodeEnum.EL);
-            List<Evidence> eList = retriever.getEvidencesForEuropeanCriterion(firstCriterionId, ECertisNationalEntityEnum.GR.name());
-            Assert.assertFalse(eList.isEmpty());
+        final String id = "14df34e8-15a9-411c-8c05-8c051693e277";
+        retriever.setLang(EULanguageCodeEnum.EL);
 
-            Evidence firstEvidence = eList.get(0);
-            Assert.assertNotNull(firstEvidence.getID());
-            Assert.assertNotNull(firstEvidence.getDescription());
-            Assert.assertNotNull(firstEvidence.getEvidenceURL());
+        List<Evidence> eList = retriever.getEvidencesForNationalCriterion(id);
+        Assert.assertFalse(eList.isEmpty());
 
-            int index = 1;
-
-            for (Evidence e : eList) {
-                // System.out.printf("#Evidence %-2d\nID: %s Description: %s Evidence Url: %s\n", index++, e.getID(), e.getDescription(), e.getEvidenceURL());
-                SelectableCriterionPrinter.printEvidence(e);
-            }
+        for (Evidence e : eList) {
+            AssertUtils.assertEvidenceAndItsFieldsNotNull(e);
+            // SelectableCriterionPrinter.printEvidence(e);
         }
+    }
 
+    @Test
+    public void testGetEvidencesForEuropeanCriterionWithLangParam() throws Exception {
+
+        final String id = "005eb9ed-1347-4ca3-bb29-9bc0db64e1ab";
+        final String countryCode = ECertisNationalEntityEnum.DE.name();
+        retriever.setLang(EULanguageCodeEnum.EL);
+
+        List<Evidence> eList = retriever.getEvidencesForEuropeanCriterion(id, countryCode);
+        Assert.assertFalse(eList.isEmpty());
+
+        for (Evidence e : eList) {
+            AssertUtils.assertEvidenceAndItsFieldsNotNull(e);
+            // SelectableCriterionPrinter.printEvidence(e);
+        }
     }
 
 }

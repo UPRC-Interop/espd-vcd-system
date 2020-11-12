@@ -141,22 +141,20 @@ public class CriteriaDataRetrieverImpl implements CriteriaDataRetriever {
         if (isIdentificationCodeExist(countryCode)) {
 
             GetECertisCriterionRetryingTask task = new GetECertisCriterionRetryingTask.Builder(id)
-                    .lang(ECertisLanguageCodeEnum.valueOf(countryCode.toUpperCase()))
+                    .lang(ECertisLanguageCodeEnum.valueOf(lang.name()))
                     .build();
-
-            String codeLowerCase = countryCode.toLowerCase();
 
             try {
                 ECertisCriterion source = task.call();
 
                 if (CriterionUtils.isEuropean(source)) {
                     // Extract National Criteria
-                    nationalCriterionTypeList = eCertisResource.getNationalCriteriaByCountryCode(source, codeLowerCase);
+                    nationalCriterionTypeList = eCertisResource.getNationalCriteriaByCountryCode(source, countryCode);
                 } else {
                     // Get the EU Parent Criterion
                     ECertisCriterion parent = eCertisResource.getParentCriterion(source, ECertisLanguageCodeEnum.valueOf(lang.name()));
                     // Extract National Criteria
-                    nationalCriterionTypeList = eCertisResource.getNationalCriteriaByCountryCode(parent, codeLowerCase);
+                    nationalCriterionTypeList = eCertisResource.getNationalCriteriaByCountryCode(parent, countryCode);
                 }
 
             } catch (ExecutionException | RetryException | IOException e) {

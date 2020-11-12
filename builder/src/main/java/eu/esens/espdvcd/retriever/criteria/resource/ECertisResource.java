@@ -449,7 +449,7 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
                         .filter(subCriterion -> subCriterion.getLegislationReference() != null
                                 && subCriterion.getLegislationReference().getJurisdictionLevelCode() != null
                                 && subCriterion.getLegislationReference().getJurisdictionLevelCode()
-                                .equals(countryCode))
+                                .equals(countryCode.toLowerCase()))
                         .collect(Collectors.toList());
             } else {
 

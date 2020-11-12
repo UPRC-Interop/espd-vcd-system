@@ -19,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.retriever.ECertisCriterion;
+import eu.esens.espdvcd.retriever.criteria.resource.utils.AssertUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -112,13 +113,16 @@ public class ECertisResourceTest {
         ECertisCriterion ec = eCertisResource.getECertisCriterion("005eb9ed-1347-4ca3-bb29-9bc0db64e1ab");
         // ECertisCriterion ec = r.getECertisCriterion("005eb9ed-1347-4ca3-bb29-9bc0db64e1ab");
 
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-        mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+        Assert.assertNotNull(ec);
+        Assert.assertFalse(ec.getSubCriterions().isEmpty());
+
+//        ObjectMapper mapper = new ObjectMapper();
+//        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+//        mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
 
         // Print JSON String
-        // String prettyCt = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(ec);
-        // System.out.println(prettyCt);
+//        String prettyCt = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(ec);
+//        System.out.println(prettyCt);
     }
 
     @Test
