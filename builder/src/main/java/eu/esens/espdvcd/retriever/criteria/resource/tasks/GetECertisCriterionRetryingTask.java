@@ -17,6 +17,7 @@ package eu.esens.espdvcd.retriever.criteria.resource.tasks;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import com.github.rholder.retry.RetryException;
 import eu.esens.espdvcd.codelist.enums.ecertis.ECertisLanguageCodeEnum;
 import eu.esens.espdvcd.codelist.enums.ecertis.ECertisNationalEntityEnum;
@@ -63,7 +64,13 @@ public class GetECertisCriterionRetryingTask implements Callable<ECertisCriterio
         ObjectMapper mapper = new ObjectMapper();
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
-        return mapper.readValue(rTask.call(), ECertisCriterionImpl.class);
+
+        try {
+            return mapper.readValue(rTask.call(), ECertisCriterionImpl.class);
+        } catch (MismatchedInputException e) {
+            LOGGER.log(Level.SEVERE, "MismatchedInputException when reading " + uri.toString());
+            throw e;
+        }
     }
 
     public static class Builder {

@@ -21,15 +21,12 @@ import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import java.util.logging.Logger;
-
 /**
  * @author Konstantinos Raptis [kraptis at unipi.gr] on 12/10/2020.
  */
 public class ResourceConfigTest {
 
-    private static final Logger LOGGER = Logger.getLogger(ResourceConfigTest.class.getName());
-
+    @Ignore
     @Test
     public void testGetAllCriteriaURL() throws Exception {
 
@@ -46,17 +43,6 @@ public class ResourceConfigTest {
                             .setPath(ResourceConfig.INSTANCE.getECertisCriteriaPath())
                             .build().toString());
         }
-    }
-
-    @Ignore
-    @Test
-    public void testGetResourcesPath() {
-
-        LOGGER.info(ResourceConfig.INSTANCE.getTaxonomyRegulatedV210());
-        LOGGER.info(ResourceConfig.INSTANCE.getTaxonomySelfContainedV210());
-        LOGGER.info(ResourceConfig.INSTANCE.getESPDArtefactRegulatedV102());
-        LOGGER.info(ResourceConfig.INSTANCE.getESPDArtefactRegulatedV210());
-
     }
 
 }

@@ -15,15 +15,15 @@
  */
 package eu.esens.espdvcd.retriever.criteria.resource;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import eu.esens.espdvcd.model.Criterion;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.retriever.ECertisCriterion;
-import eu.esens.espdvcd.retriever.criteria.resource.utils.AssertUtils;
+import eu.esens.espdvcd.retriever.criteria.filters.CriterionFilters;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.validation.constraints.AssertFalse;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -128,15 +128,19 @@ public class ECertisResourceTest {
     @Test
     public void testECertisCriterionResourceWithInitialIDList() throws Exception {
 
-        CriteriaTaxonomyResource resource = new RegulatedCriteriaTaxonomyResource();
-        // ESPDArtefactResource resource = new ESPDArtefactResource(EDMVersion.V2);
+        CriteriaTaxonomyResource taxonomyResourceV2 = new RegulatedCriteriaTaxonomyResource();
 
-        ECertisResource eCertisResource = new ECertisResource(resource
-                .getCriterionList().stream()
-                .map(sc -> sc.getID())
-                .collect(Collectors.toList()));
+        ECertisResource eCertisResource = new ECertisResource(
+                taxonomyResourceV2.getCriterionList()
+                        .stream()
+                        // Remove Criteria that are on provided by e-Certis service
+                        .filter(CriterionFilters::isProvidedByECertis)
+                        .map(Criterion::getID)
+                        .collect(Collectors.toList()));
 
-        SelectableCriterionPrinter.print(eCertisResource.getCriterionList());
+        Assert.assertFalse(eCertisResource.getAllCriteriaID().isEmpty());
+        Assert.assertEquals(59, eCertisResource.getAllCriteriaID().size());
+        // SelectableCriterionPrinter.print(eCertisResource.getCriterionList());
     }
 
 }
