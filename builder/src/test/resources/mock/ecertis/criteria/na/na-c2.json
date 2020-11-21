@@ -1,0 +1,359 @@
+{
+    "id": {
+        "value": "ef6d23c5-03ad-4cf8-8869-ece68b20b729"
+    },
+    "typeCode": {
+        "value": "Exclusion Ground: Criminal convictions"
+    },
+    "name": {
+        "value": "Participation in a criminal organisation",
+        "languageID": "en"
+    },
+    "description": {
+        "value": "Participation in a criminal organisation, as defined in Article 2 of Council Framework Decision 2008/841/JHA of 24 October 2008 on the fight against organised crime",
+        "languageID": "en"
+    },
+    "domainID": {
+        "value": "eproc"
+    },
+    "versionID": {
+        "value": "3"
+    },
+    "legislationReference": [
+        {
+            "title": {
+                "value": "Penal Code",
+                "languageID": "en"
+            },
+            "description": {
+                "value": "Penal Code",
+                "languageID": "en"
+            },
+            "jurisdictionLevelCode": {
+                "value": "fr"
+            },
+            "article": {
+                "value": "Art. 450-1",
+                "languageID": "en"
+            },
+            "uri": {
+                "value": "https://www.legifrance.gouv.fr/affichCode.do?cidTexte=LEGITEXT000006070719"
+            }
+        }
+    ],
+    "requirementGroup": [
+        {
+            "id": {
+                "value": "026dbc42-b25f-4546-b7e6-27aadfc909ad"
+            },
+            "typeOfEvidence": [
+                {
+                    "id": {
+                        "value": "efdb28c5-880d-4ff2-8449-b21d4b45ce06"
+                    },
+                    "typeCode": {
+                        "value": "Self-declaration"
+                    },
+                    "name": {
+                        "value": "Candidate Declaration Form (DC1, DC2)",
+                        "languageID": "en"
+                    },
+                    "description": {
+                        "value": "The DC forms are a sample letter of application, and declaration (of the candidate or candidates) which can be used by candidates for public procurement (contracts or framework agreements) to apply.",
+                        "languageID": "en"
+                    },
+                    "versionID": {
+                        "value": "1"
+                    },
+                    "feeAmount": {},
+                    "evidenceIntendedUse": {
+                        "description": {
+                            "value": "All areas"
+                        }
+                    },
+                    "addresseeDescription": {
+                        "value": "For all entities"
+                    },
+                    "jurisdictionLevelCode": [
+                        {
+                            "value": "fr"
+                        }
+                    ],
+                    "evidenceDocumentReference": [
+                        {
+                            "attachment": {
+                                "externalReference": {
+                                    "uri": {
+                                        "value": "https://webgate.acceptance.ec.europa.eu/tools3/ecertis2/evidence/17862?lang=en"
+                                    }
+                                }
+                            },
+                            "validityPeriod": {
+                                "description": [
+                                    {
+                                        "value": "Only for the specified tender ",
+                                        "languageID": "en"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": {
+                "value": "4be1a85c-f865-48c3-9ecc-01a977288214"
+            },
+            "typeOfEvidence": [
+                {
+                    "id": {
+                        "value": "10530588-503c-43e1-9613-4ddcb575c8cc"
+                    },
+                    "typeCode": {
+                        "value": "Declaration on oath"
+                    },
+                    "name": {
+                        "value": "Simplified European Single Procurement Document (ESPD)",
+                        "languageID": "en"
+                    },
+                    "description": {
+                        "value": "Simplified ESPD is a way to request participation to a public procurement procedure, just filling two informations : annual turnover and staff.\nThe condition for using this simplified ESPD is that the buyer himself, permitted to do so on his buyer's profile. ",
+                        "languageID": "en"
+                    },
+                    "versionID": {
+                        "value": "2"
+                    },
+                    "feeAmount": {},
+                    "evidenceIntendedUse": {
+                        "description": {
+                            "value": "All areas"
+                        }
+                    },
+                    "evidenceIssuerParty": [
+                        {
+                            "websiteURI": {
+                                "value": "https://www.economie.gouv.fr/daj"
+                            },
+                            "partyName": [
+                                {
+                                    "name": {
+                                        "value": "Directorate of Legal Affairs (MEF)",
+                                        "languageID": "en"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "websiteURI": {
+                                "value": "https://ec.europa.eu/"
+                            },
+                            "partyName": [
+                                {
+                                    "name": {
+                                        "value": "European Union",
+                                        "languageID": "en"
+                                    }
+                                }
+                            ]
+                        }
+                    ],
+                    "addresseeDescription": {
+                        "value": "For all entities"
+                    },
+                    "jurisdictionLevelCode": [
+                        {
+                            "value": "fr"
+                        }
+                    ],
+                    "evidenceDocumentReference": [
+                        {
+                            "attachment": {
+                                "externalReference": {
+                                    "uri": {
+                                        "value": "https://webgate.acceptance.ec.europa.eu/tools3/ecertis2/evidence/22221?lang=en"
+                                    }
+                                }
+                            },
+                            "validityPeriod": {
+                                "description": [
+                                    {
+                                        "languageID": "en"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": {
+                "value": "abed9a8c-1b32-4432-810c-2f919a31b186"
+            },
+            "typeOfEvidence": [
+                {
+                    "id": {
+                        "value": "886362e8-622d-4bb6-bb84-afbee846ba0c"
+                    },
+                    "typeCode": {
+                        "value": "Online evidence"
+                    },
+                    "name": {
+                        "value": "European Single Procurement Document (ESPD)",
+                        "languageID": "en"
+                    },
+                    "description": {
+                        "value": "Allows a company applying for a public procurement to declare its financial status, capacity and ability to participate in the procurement process. If the procedure is electronic, the DUME available to the candidates can be exported, stored and sent electronically, but this form can also be completed, printed and attached to the file if the company wants and can transmit its response in paper version (with the exception of central purchasing organizations).",
+                        "languageID": "en"
+                    },
+                    "versionID": {
+                        "value": "2"
+                    },
+                    "feeAmount": {},
+                    "evidenceIntendedUse": {
+                        "description": {
+                            "value": "All areas"
+                        }
+                    },
+                    "evidenceIssuerParty": [
+                        {
+                            "websiteURI": {
+                                "value": "https://www.economie.gouv.fr/daj"
+                            },
+                            "partyName": [
+                                {
+                                    "name": {
+                                        "value": "Directorate of Legal Affairs (MEF)",
+                                        "languageID": "en"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "websiteURI": {
+                                "value": "https://ec.europa.eu/"
+                            },
+                            "partyName": [
+                                {
+                                    "name": {
+                                        "value": "European Union",
+                                        "languageID": "en"
+                                    }
+                                }
+                            ]
+                        }
+                    ],
+                    "addresseeDescription": {
+                        "value": "For all entities"
+                    },
+                    "jurisdictionLevelCode": [
+                        {
+                            "value": "fr"
+                        }
+                    ],
+                    "evidenceDocumentReference": [
+                        {
+                            "attachment": {
+                                "externalReference": {
+                                    "uri": {
+                                        "value": "https://webgate.acceptance.ec.europa.eu/tools3/ecertis2/evidence/21242?lang=en"
+                                    }
+                                }
+                            },
+                            "validityPeriod": {
+                                "description": [
+                                    {
+                                        "value": "Only for the specified tender ",
+                                        "languageID": "en"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": {
+                "value": "33119d8f-babf-4d3e-8fcb-de22517a9d3c"
+            },
+            "typeOfEvidence": [
+                {
+                    "id": {
+                        "value": "28262c46-0feb-4390-957e-008f0ba9247d"
+                    },
+                    "typeCode": {
+                        "value": "Self-declaration"
+                    },
+                    "name": {
+                        "value": "Candidate declaration form provided by the buyer",
+                        "languageID": "en"
+                    },
+                    "description": {
+                        "value": "In the case where the buyer provides a form, the latter is the model letter of application which must be used by the candidates for public procurements to submit their application.",
+                        "languageID": "en"
+                    },
+                    "versionID": {
+                        "value": "1"
+                    },
+                    "feeAmount": {},
+                    "evidenceIntendedUse": {
+                        "description": {
+                            "value": "All areas"
+                        }
+                    },
+                    "addresseeDescription": {
+                        "value": "For all entities"
+                    },
+                    "jurisdictionLevelCode": [
+                        {
+                            "value": "fr"
+                        }
+                    ],
+                    "evidenceDocumentReference": [
+                        {
+                            "attachment": {
+                                "externalReference": {
+                                    "uri": {
+                                        "value": "https://webgate.acceptance.ec.europa.eu/tools3/ecertis2/evidence/17863?lang=en"
+                                    }
+                                }
+                            },
+                            "validityPeriod": {
+                                "description": [
+                                    {
+                                        "value": "Only for the specified tender ",
+                                        "languageID": "en"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "parentCriterion": {
+        "id": {
+            "value": "005eb9ed-1347-4ca3-bb29-9bc0db64e1ab"
+        },
+        "typeCode": {
+            "value": "Exclusion Ground: Criminal convictions"
+        },
+        "name": {
+            "value": "Participation in a criminal organisation",
+            "languageID": "en"
+        },
+        "description": {
+            "value": "Participation in a criminal organisation, as defined in Article 2 of Council Framework Decision 2008/841/JHA of 24 October 2008 on the fight against organised crime",
+            "languageID": "en"
+        },
+        "domainID": {
+            "value": "eproc"
+        },
+        "versionID": {
+            "value": "3"
+        }
+    }
+}
