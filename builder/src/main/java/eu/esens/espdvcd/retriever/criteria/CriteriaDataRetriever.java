@@ -18,7 +18,6 @@ package eu.esens.espdvcd.retriever.criteria;
 import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
-import eu.esens.espdvcd.retriever.criteria.resource.utils.CriterionUtils;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 
 import javax.annotation.Nullable;
