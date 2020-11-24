@@ -31,58 +31,40 @@ public class ResponseFactory {
             case INDICATOR:
             case CODE_BOOLEAN:
                 return new IndicatorResponse();
-
             case DATE:
                 return new DateResponse();
-
             case DESCRIPTION:
                 return new DescriptionResponse();
-                
             case QUANTITY:
                 return new QuantityResponse();
-
             case QUANTITY_YEAR:
                 return new QuantityYearResponse();
-                
             case QUANTITY_INTEGER:
                 return new QuantityIntegerResponse();
-
             case AMOUNT:
                 return new AmountResponse();
-                
             case CODE_COUNTRY:
                 return new CountryCodeResponse();
-                
             case PERCENTAGE:
                 return new PercentageResponse();
-                
             case PERIOD:
                 return new PeriodResponse();
-                
             case EVIDENCE_URL:
                 return new EvidenceURLResponse();
-
             case CODE:
                 return new EvidenceURLCodeResponse();
-
             case URL:
                 return new URLResponse();
-
             case IDENTIFIER:
                 return new IdentifierResponse();
-
             case WEIGHT_INDICATOR:
                 return new WeightIndicatorResponse();
-
             case LOT_IDENTIFIER:
                 return new LotIdentifierResponse();
-
             case ECONOMIC_OPERATOR_IDENTIFIER:
                 return new EOIdentifierResponse();
-
             default:
                 return null;
-                   
         }
     }
 }

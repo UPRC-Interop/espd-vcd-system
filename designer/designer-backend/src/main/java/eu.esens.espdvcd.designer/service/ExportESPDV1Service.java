@@ -80,7 +80,7 @@ public enum ExportESPDV1Service implements ExportESPDService {
                                                 .getAsString()
                                                 .getBytes(StandardCharsets.UTF_8))), languageCodeEnum);
             case HTML:
-                return transformationService.createHtmlStream(new StreamSource(exportESPDRequest(model)), languageCodeEnum);
+                return transformationService.createHtmlStream(model, languageCodeEnum);
             default:
                 throw new UnsupportedOperationException(String.format("Exporting to %s is not supported.", exportType.name()));
         }
@@ -113,7 +113,7 @@ public enum ExportESPDV1Service implements ExportESPDService {
                         .createPDFDocumentBuilderFor(finalizeBeforeExport(importExportModel));
                 return transformationService.createPdfStream(new StreamSource(new ByteArrayInputStream(pdfDocumentBuilderV1.getAsString().getBytes(StandardCharsets.UTF_8))), languageCodeEnum);
             case HTML:
-                return transformationService.createHtmlStream(new StreamSource(exportESPDResponse(model)), languageCodeEnum);
+                return transformationService.createHtmlStream(model, languageCodeEnum);
             default:
                 throw new UnsupportedOperationException(String.format("Exporting to %s is not supported.", exportType.name()));
         }

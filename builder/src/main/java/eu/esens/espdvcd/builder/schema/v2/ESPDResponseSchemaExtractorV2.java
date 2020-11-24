@@ -558,13 +558,13 @@ public class ESPDResponseSchemaExtractorV2 implements SchemaExtractorV2 {
 
             case PERIOD:
                 PeriodType periodType = new PeriodType();
-                if (((ApplicablePeriodResponse) response).getStartDate() != null
-                        && ((ApplicablePeriodResponse) response).getEndDate() != null) {
+                if (((PeriodResponse) response).getStartDate() != null
+                        && ((PeriodResponse) response).getEndDate() != null) {
 
                     periodType.setStartDate(new StartDateType());
                     periodType.setEndDate(new EndDateType());
-                    periodType.getStartDate().setValue(((ApplicablePeriodResponse) response).getStartDate());
-                    periodType.getEndDate().setValue(((ApplicablePeriodResponse) response).getEndDate());
+                    periodType.getStartDate().setValue(((PeriodResponse) response).getStartDate());
+                    periodType.getEndDate().setValue(((PeriodResponse) response).getEndDate());
 
                 }
                 tcrType.getApplicablePeriod().add(periodType);

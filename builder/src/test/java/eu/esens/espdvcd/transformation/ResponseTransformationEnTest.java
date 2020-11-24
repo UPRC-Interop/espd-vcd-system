@@ -15,15 +15,19 @@
  */
 package eu.esens.espdvcd.transformation;
 
+import eu.esens.espdvcd.builder.exception.BuilderException;
+import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
+import eu.esens.espdvcd.model.ESPDResponse;
+import freemarker.template.TemplateException;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
-
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamSource;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
+import java.io.IOException;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertThat;
 import static org.xmlunit.matchers.EvaluateXPathMatcher.hasXPath;
@@ -31,17 +35,19 @@ import static org.xmlunit.matchers.EvaluateXPathMatcher.hasXPath;
 
 public class ResponseTransformationEnTest {
 
+    private static ESPDResponse espdResponse;
     private static DOMSource source;
-    private final static Logger logger = LoggerFactory.getLogger(ResponseTransformationEnTest.class);
+    private static final String XML_REF = "artefacts/regulated/v2/2.1.0/UPRC-ESPD-Regulated-Response-2.1.0-Artefact-22-4-2019.xml";
 
     @BeforeClass
-    public static void transform() {
-        String xmlRef = "espd-response-v2.xml";
-        String xslRef = "espd_document_en.xsl";
-
-        StreamSource xmlSource = new StreamSource(ResponseTransformationIT.class.getResource(xmlRef).toExternalForm());
-        StreamSource xslSource = new StreamSource(ResponseTransformationIT.class.getResource(xslRef).toExternalForm());
-        source =  new TransformationHelper().transform(xmlSource, xslSource);
+    public static void transform() throws BuilderException,
+            TemplateException, ParserConfigurationException, SAXException, IOException {
+        StreamSource xmlSource = new StreamSource(ResponseTransformationEnTest.class.getClassLoader().getResourceAsStream(XML_REF));
+        TransformationHelper th = new TransformationHelper();
+        espdResponse = th.getESPDResponseV2(xmlSource);
+        TransformationService ts = new TransformationService();
+        Document doc = ts.transformToW3CDoc(espdResponse, EULanguageCodeEnum.EN);
+        source = new DOMSource(doc);
     }
 
     @Test
@@ -56,7 +62,7 @@ public class ResponseTransformationEnTest {
 
     @Test
     public void hasLocalizedPublicationInfoTitle() {
-        assertThat(source, hasXPath("/html/body/div/div[2]/div[1]/div[1]/text()", containsString("Information about publication")));
+        assertThat(source, hasXPath("/html/body/div/div[2]/div[1]/div[1]/text()", containsString("Part I: Information concerning the procurement procedure and the contracting authority or contracting entity")));
     }
 
     /* Moves to Part III instead of Part II */
