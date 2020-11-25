@@ -66,7 +66,7 @@
     <br>
     <@s.sectionLabel tedRecId model.getCADetails().getReceivedNoticeNumber() />
     <@s.sectionLabel ojsLabel model.getCADetails().getProcurementPublicationNumber() />
-    <@s.sectionLabelForUrl ojsUrl model.getCADetails().getProcurementPublicationURI() />
+    <@s.sectionLabelForUrl ojsUrl model.getCADetails().getProcurementPublicationURI()!"" />
     <br>
     <p>${officialJournalAlert}</p>
 </#macro>
@@ -74,7 +74,7 @@
 <#macro contractingParty model props >
     <#assign officialName = model.getCADetails().getCAOfficialName()>
     <#assign vatId = model.getCADetails().getID()>
-    <#assign websiteURI = model.getCADetails().getWebSiteURI()>
+    <#assign websiteURI = model.getCADetails().getWebSiteURI()!"">
     <#assign city = model.getCADetails().getPostalAddress().getCity()>
     <#assign address = model.getCADetails().getPostalAddress().getAddressLine1()>
     <#assign postcode = model.getCADetails().getPostalAddress().getPostCode()>
