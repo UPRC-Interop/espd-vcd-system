@@ -23,6 +23,6 @@ package eu.esens.espdvcd.codelist.enums;
  */
 public enum  EORoleTypeEnum {
 
-    SCLE, GM, OERON, OENRON
+    SCLE, GM, OERON, OENRON, SC, LE
 
 }
