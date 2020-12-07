@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  * <p>
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,7 +17,7 @@ package eu.esens.espdvcd.retriever.criteria;
 
 import eu.esens.espdvcd.retriever.criteria.resource.CriteriaTaxonomyResource;
 import eu.esens.espdvcd.retriever.criteria.resource.RegulatedCriteriaTaxonomyResource;
-import eu.esens.espdvcd.retriever.criteria.resource.utils.TypeCodeUtils;
+import eu.esens.espdvcd.retriever.criteria.resource.utils.SetDifferencesUtils;
 import eu.esens.espdvcd.schema.enums.EDMVersion;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -59,9 +59,9 @@ public class CriteriaIssuesTest {
 
         if (!isSame) {
             System.out.println("TypeCodes that exist in typeCodeV1Set and does not exist in typeCodeV2Set");
-            TypeCodeUtils.printDifferences(typeCodeV1Set, typeCodeV2Set);
+            SetDifferencesUtils.printDifferences(typeCodeV1Set, typeCodeV2Set);
             System.out.println("TypeCodes that exist in typeCodeV2Set and does not exist in typeCodeV1Set");
-            TypeCodeUtils.printDifferences(typeCodeV2Set, typeCodeV1Set);
+            SetDifferencesUtils.printDifferences(typeCodeV2Set, typeCodeV1Set);
         }
 
     }

@@ -21,10 +21,11 @@ import eu.esens.espdvcd.model.retriever.ECertisCriterion;
 import eu.esens.espdvcd.retriever.criteria.filters.CriterionFilters;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
-import javax.validation.constraints.AssertFalse;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -125,22 +126,64 @@ public class ECertisResourceTest {
 //        System.out.println(prettyCt);
     }
 
+    @Ignore
     @Test
     public void testECertisCriterionResourceWithInitialIDList() throws Exception {
 
         CriteriaTaxonomyResource taxonomyResourceV2 = new RegulatedCriteriaTaxonomyResource();
 
-        ECertisResource eCertisResource = new ECertisResource(
-                taxonomyResourceV2.getCriterionList()
-                        .stream()
-                        // Remove Criteria that are on provided by e-Certis service
-                        .filter(CriterionFilters::isProvidedByECertis)
-                        .map(Criterion::getID)
-                        .collect(Collectors.toList()));
 
-        Assert.assertFalse(eCertisResource.getAllCriteriaID().isEmpty());
-        Assert.assertEquals(59, eCertisResource.getAllCriteriaID().size());
+        List<String> IdInitialList = taxonomyResourceV2.getCriterionList()
+                .stream()
+                // Remove Criteria that are not provided by e-Certis service
+                .filter(CriterionFilters::isProvidedByECertis)
+                .map(Criterion::getID)
+                .collect(Collectors.toList());
+
+        // the initial list
+        final int initialSize = 56;
+        Assert.assertEquals(initialSize, IdInitialList.size());
+
+        ECertisResource eCertisResource = new ECertisResource(IdInitialList);
+
+        Assert.assertTrue(eCertisResource.getCriterionList().size() > initialSize);
+
         // SelectableCriterionPrinter.print(eCertisResource.getCriterionList());
+    }
+
+    @Ignore
+    @Test
+    public void testECertisCriterionResourceWithInitialIDListIssue() throws Exception {
+
+        CriteriaTaxonomyResource taxonomyResourceV2 = new RegulatedCriteriaTaxonomyResource();
+
+        List<String> IdInitialList = taxonomyResourceV2.getCriterionList()
+                .stream()
+                // Remove Criteria that are not provided by e-Certis service
+                .filter(CriterionFilters::isProvidedByECertis)
+                .map(Criterion::getID)
+                .collect(Collectors.toList());
+
+        // the initial list
+        final int initialSize = 56;
+        Assert.assertEquals(initialSize, IdInitialList.size());
+
+        ECertisResource eCertisResource = new ECertisResource(IdInitialList);
+
+        final int resultSize = 55;
+        Assert.assertFalse(eCertisResource.getCriterionList().isEmpty());
+        // what e-Certis actually provides
+        Assert.assertEquals(resultSize, eCertisResource.getAllCriteriaID().size());
+        // the result
+        Assert.assertEquals(resultSize, eCertisResource.getCriterionList().size());
+        //SelectableCriterionPrinter.print(eCertisResource.getCriterionList());
+
+        Set<String> idSet = eCertisResource.getCriterionList().stream()
+                .map(sc -> sc.getID())
+                .collect(Collectors.toSet());
+
+        Assert.assertEquals(resultSize, idSet.size());
+
     }
 
 }

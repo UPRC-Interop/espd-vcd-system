@@ -15,7 +15,7 @@
  */
 package eu.esens.espdvcd.retriever.criteria.resource;
 
-import eu.esens.espdvcd.retriever.criteria.resource.utils.TypeCodeUtils;
+import eu.esens.espdvcd.retriever.criteria.resource.utils.SetDifferencesUtils;
 import eu.esens.espdvcd.schema.enums.EDMVersion;
 import org.junit.Assert;
 import org.junit.Before;
@@ -77,9 +77,9 @@ public class ESPDArtefactResourceTest {
 
         if (!isSame) {
             System.out.println("TypeCodes that exist in Resource V1 Set and does not exist in Resource V2 Set");
-            TypeCodeUtils.printDifferences(artefactResourceV1, artefactResourceV2);
+            SetDifferencesUtils.printDifferences(artefactResourceV1, artefactResourceV2);
             System.out.println("TypeCodes that exist in Resource V2 Set and does not exist in Resource V1 Set");
-            TypeCodeUtils.printDifferences(artefactResourceV2, artefactResourceV1);
+            SetDifferencesUtils.printDifferences(artefactResourceV2, artefactResourceV1);
         }
 
         Assert.assertTrue(isSame);
@@ -111,9 +111,9 @@ public class ESPDArtefactResourceTest {
 
         if (!isSame) {
             System.out.println("IDs that exist in Resource V1 Set and does not exist in Resource V2 Set");
-            TypeCodeUtils.printDifferences(artefactResourceV1, artefactResourceV2);
+            SetDifferencesUtils.printDifferences(artefactResourceV1, artefactResourceV2);
             System.out.println("IDs that exist in Resource V2 Set and does not exist in Resource V1 Set");
-            TypeCodeUtils.printDifferences(artefactResourceV2, artefactResourceV1);
+            SetDifferencesUtils.printDifferences(artefactResourceV2, artefactResourceV1);
         }
 
         Assert.assertTrue(isSame);
