@@ -20,7 +20,7 @@ import com.google.gson.Gson;
 import eu.esens.espdvcd.codelist.enums.ecertis.ECertisNationalEntityEnum;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
-import eu.esens.espdvcd.retriever.criteria.resource.tasks.GetFromECertisTaskTest;
+import eu.esens.espdvcd.retriever.criteria.resource.tasks.GetFromECertisTaskWiremockTest;
 import eu.esens.espdvcd.retriever.criteria.resource.utils.AssertUtils;
 import org.junit.Assert;
 import org.junit.Before;
@@ -54,7 +54,7 @@ public class CriteriaDataRetrieverWiremockTest {
     public void testGetEUCriterionInDefaultLang() throws Exception {
 
         InputStream inputStream =
-                GetFromECertisTaskTest.class.getResourceAsStream("/mock/ecertis/criteria/eu/en/eu-c1.json");
+                GetFromECertisTaskWiremockTest.class.getResourceAsStream("/mock/ecertis/criteria/eu/en/eu-c1.json");
 
         final String id = "005eb9ed-1347-4ca3-bb29-9bc0db64e1ab";
         final String url = "/growth/tools-databases/ecertisrest3/criteria/espd/" + id + "?lang=en";
@@ -71,7 +71,7 @@ public class CriteriaDataRetrieverWiremockTest {
     public void testGetEvidencesForEuropeanCriterion() throws Exception {
 
         InputStream inputStream =
-                GetFromECertisTaskTest.class.getResourceAsStream("/mock/ecertis/criteria/eu/en/eu-c1.json");
+                GetFromECertisTaskWiremockTest.class.getResourceAsStream("/mock/ecertis/criteria/eu/en/eu-c1.json");
 
         final String id = "005eb9ed-1347-4ca3-bb29-9bc0db64e1ab";
         final String url = "/growth/tools-databases/ecertisrest3/criteria/espd/" + id + "?lang=en";
@@ -95,7 +95,7 @@ public class CriteriaDataRetrieverWiremockTest {
     public void testGetEvidencesForEuropeanCriterionByCountryCode() throws Exception {
 
         InputStream inputStream =
-                GetFromECertisTaskTest.class.getResourceAsStream("/mock/ecertis/criteria/eu/en/eu-c1.json");
+                GetFromECertisTaskWiremockTest.class.getResourceAsStream("/mock/ecertis/criteria/eu/en/eu-c1.json");
 
         final String id = "005eb9ed-1347-4ca3-bb29-9bc0db64e1ab";
         final String url = "/growth/tools-databases/ecertisrest3/criteria/espd/" + id + "?lang=en";
@@ -121,7 +121,7 @@ public class CriteriaDataRetrieverWiremockTest {
     public void testGetEvidencesForNationalCriterionByCountryCode() throws Exception {
 
         InputStream inputStream =
-                GetFromECertisTaskTest.class.getResourceAsStream("/mock/ecertis/criteria/na/en/na-c1.json");
+                GetFromECertisTaskWiremockTest.class.getResourceAsStream("/mock/ecertis/criteria/na/en/na-c1.json");
 
         final String id = "c86d7f2d-f753-4c8f-a1e4-d54855fe7b46";
         final String url = "/growth/tools-databases/ecertisrest3/criteria/espd/" + id + "?lang=en";
@@ -144,7 +144,7 @@ public class CriteriaDataRetrieverWiremockTest {
     public void testGetNationalCriterionMappingForEuropeanCriterion() throws Exception {
 
         InputStream inputStream1 =
-                GetFromECertisTaskTest.class.getResourceAsStream("/mock/ecertis/criteria/eu/en/eu-c1.json");
+                GetFromECertisTaskWiremockTest.class.getResourceAsStream("/mock/ecertis/criteria/eu/en/eu-c1.json");
 
         final String id1 = "005eb9ed-1347-4ca3-bb29-9bc0db64e1ab";
         final String url1 = "/growth/tools-databases/ecertisrest3/criteria/espd/" + id1 + "?lang=en";
@@ -164,14 +164,14 @@ public class CriteriaDataRetrieverWiremockTest {
     public void testGetNationalCriterionMappingForNationalCriterion() throws Exception {
 
         InputStream inputStream1 =
-                GetFromECertisTaskTest.class.getResourceAsStream("/mock/ecertis/criteria/eu/en/eu-c1.json");
+                GetFromECertisTaskWiremockTest.class.getResourceAsStream("/mock/ecertis/criteria/eu/en/eu-c1.json");
 
         final String id1 = "005eb9ed-1347-4ca3-bb29-9bc0db64e1ab";
         final String url1 = "/growth/tools-databases/ecertisrest3/criteria/espd/" + id1 + "?lang=en";
         doTheStubbing(inputStream1, url1, 1);
 
         InputStream inputStream2 =
-                GetFromECertisTaskTest.class.getResourceAsStream("/mock/ecertis/criteria/na/el/na-c1.json");
+                GetFromECertisTaskWiremockTest.class.getResourceAsStream("/mock/ecertis/criteria/na/el/na-c1.json");
 
         final String id2 = "14df34e8-15a9-411c-8c05-8c051693e277";
         final String url2 = "/growth/tools-databases/ecertisrest3/criteria/espd/" + id2 + "?lang=en";
