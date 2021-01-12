@@ -22,10 +22,7 @@ import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
 import eu.esens.espdvcd.retriever.criteria.resource.tasks.GetFromECertisTaskWiremockTest;
 import eu.esens.espdvcd.retriever.criteria.resource.utils.AssertUtils;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.*;
 
 import javax.validation.constraints.Min;
 import java.io.InputStream;
@@ -50,6 +47,7 @@ public class CriteriaDataRetrieverWiremockTest {
         retriever = new CriteriaDataRetrieverBuilder().build();
     }
 
+    @Ignore
     @Test
     public void testGetEUCriterionInDefaultLang() throws Exception {
 
@@ -67,6 +65,7 @@ public class CriteriaDataRetrieverWiremockTest {
         // SelectableCriterionPrinter.print(sc);
     }
 
+    @Ignore
     @Test
     public void testGetEvidencesForEuropeanCriterion() throws Exception {
 
@@ -91,6 +90,7 @@ public class CriteriaDataRetrieverWiremockTest {
         // evidenceList.forEach(SelectableCriterionPrinter::printEvidence);
     }
 
+    @Ignore
     @Test
     public void testGetEvidencesForEuropeanCriterionByCountryCode() throws Exception {
 
@@ -117,6 +117,7 @@ public class CriteriaDataRetrieverWiremockTest {
         // evidenceList.forEach(SelectableCriterionPrinter::printEvidence);
     }
 
+    @Ignore
     @Test
     public void testGetEvidencesForNationalCriterionByCountryCode() throws Exception {
 
@@ -140,6 +141,7 @@ public class CriteriaDataRetrieverWiremockTest {
         // evidenceList.forEach(SelectableCriterionPrinter::printEvidence);
     }
 
+    @Ignore
     @Test
     public void testGetNationalCriterionMappingForEuropeanCriterion() throws Exception {
 
@@ -160,6 +162,7 @@ public class CriteriaDataRetrieverWiremockTest {
         // SelectableCriterionPrinter.print(criterionList);
     }
 
+    @Ignore
     @Test
     public void testGetNationalCriterionMappingForNationalCriterion() throws Exception {
 
