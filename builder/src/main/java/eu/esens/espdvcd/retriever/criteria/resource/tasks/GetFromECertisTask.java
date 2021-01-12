@@ -15,6 +15,7 @@
  */
 package eu.esens.espdvcd.retriever.criteria.resource.tasks;
 
+import eu.esens.espdvcd.retriever.criteria.resource.utils.ECertisURI;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.ClientProtocolException;
@@ -25,8 +26,11 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
+import java.io.IOException;
 import java.net.SocketTimeoutException;
 import java.net.URI;
+import java.net.URISyntaxException;
+import java.sql.Time;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeoutException;
 import java.util.logging.Logger;
@@ -39,12 +43,16 @@ public class GetFromECertisTask implements Callable<String> {
     private static final Logger LOGGER = Logger.getLogger(GetFromECertisTask.class.getName());
     private final String uri;
 
+    public GetFromECertisTask(ECertisURI uri) {
+        this.uri = uri.asURI().toString();
+    }
+
     public GetFromECertisTask(URI uri) {
         this.uri = uri.toString();
     }
 
     @Override
-    public String call() throws Exception {
+    public String call() throws IOException, TimeoutException, URISyntaxException {
 
         // LOGGER.log(Level.INFO, String.format("%-16s Task: %s START", Thread.currentThread().getName(), url));
         System.out.printf("%-16s Task: %s START\n", Thread.currentThread().getName(), uri);

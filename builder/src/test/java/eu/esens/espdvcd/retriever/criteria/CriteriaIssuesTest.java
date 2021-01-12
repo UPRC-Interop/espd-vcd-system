@@ -15,6 +15,7 @@
  */
 package eu.esens.espdvcd.retriever.criteria;
 
+import eu.esens.espdvcd.model.Criterion;
 import eu.esens.espdvcd.retriever.criteria.resource.CriteriaTaxonomyResource;
 import eu.esens.espdvcd.retriever.criteria.resource.RegulatedCriteriaTaxonomyResource;
 import eu.esens.espdvcd.retriever.criteria.resource.utils.SetDifferencesUtils;
@@ -47,11 +48,11 @@ public class CriteriaIssuesTest {
         CriteriaTaxonomyResource taxonomyResourceV2 = new RegulatedCriteriaTaxonomyResource();
 
         Set<String> typeCodeV1Set = criteriaExtractorV1.getFullList().stream()
-                .map(sc -> sc.getTypeCode())
+                .map(Criterion::getTypeCode)
                 .collect(Collectors.toSet());
 
         Set<String> typeCodeV2Set = taxonomyResourceV2.getCriterionList().stream()
-                .map(sc -> sc.getTypeCode())
+                .map(Criterion::getTypeCode)
                 .collect(Collectors.toSet());
 
         boolean isSame = typeCodeV1Set.containsAll(typeCodeV2Set)

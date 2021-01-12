@@ -15,6 +15,7 @@
  */
 package eu.esens.espdvcd.model.retriever;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -58,6 +59,7 @@ public class ECertisAmountImpl implements ECertisAmount {
 
     @Override
     @JsonProperty("currencyID")
+    @JsonAlias({"currencyId"})
     public String getCurrencyID() {
         return currencyID;
     }

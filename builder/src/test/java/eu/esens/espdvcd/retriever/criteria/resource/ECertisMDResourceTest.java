@@ -25,7 +25,7 @@ import eu.esens.espdvcd.codelist.enums.ecertis.ECertisNationalEntityEnum;
 import eu.esens.espdvcd.retriever.criteria.CriteriaDataRetriever;
 import eu.esens.espdvcd.retriever.criteria.CriteriaDataRetrieverBuilder;
 import eu.esens.espdvcd.retriever.criteria.resource.tasks.GetFromECertisTask;
-import eu.esens.espdvcd.retriever.criteria.resource.utils.ECertisURIBuilder;
+import eu.esens.espdvcd.retriever.criteria.resource.utils.ECertisURI;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -72,7 +72,7 @@ public class ECertisMDResourceTest {
     @Test
     public void testGetEvidencesForCriterion() throws Exception {
         eCertisResource.getEvidencesForNationalCriterion("9b29b151-9102-40bd-b01c-11949abbb17e", EULanguageCodeEnum.EN)
-                .forEach(e -> SelectableCriterionPrinter.printEvidence(e));
+            .forEach(SelectableCriterionPrinter::printEvidence);
 
 //        eCertisResource.getEvidencesForNationalCriterion("9b29b151-9102-40bd-b01c-11949abbb17e", null ,EULanguageCodeEnum.EN)
 //                .forEach(e -> SelectableCriterionPrinter.printEvidence(e));
@@ -87,9 +87,9 @@ public class ECertisMDResourceTest {
     @Ignore
     @Test
     public void testECertisURIBuilderAPI() throws Exception {
-        System.out.println(new ECertisURIBuilder()
-                .lang(ECertisLanguageCodeEnum.EL)
-                .buildCriteriaURI());
+        System.out.println(ECertisURI.baseURL()
+            .withLang(ECertisLanguageCodeEnum.EL)
+            .build());
     }
 
     @Ignore
@@ -112,18 +112,19 @@ public class ECertisMDResourceTest {
                 try {
                     // Create the ecertis task
                     GetFromECertisTask getFromECertisTask = new GetFromECertisTask(
-                            new ECertisURIBuilder()
-                                    .lang(lang)
-                                    .buildCriterionURI(id));
+                        ECertisURI.baseURL()
+                            .withLang(lang)
+                            .withCriterionId(id)
+                            .build());
 
                     ObjectMapper mapper = new ObjectMapper();
                     Object jsonObject = mapper.readValue(getFromECertisTask.call(), Object.class);
                     mapper
-                            .writerWithDefaultPrettyPrinter()
+                        .writerWithDefaultPrettyPrinter()
 //        String prettyJson = mapper.writerWithDefaultPrettyPrinter()
 //                .writeValueAsString(jsonObject);
 //        System.out.println(prettyJson);
-                            .writeValue(Paths.get(System.getProperty("user.home") + "/ecertis/criteria-eu/lang/" + lang.name().toLowerCase() + "/" + id + ".json").toFile(), jsonObject);
+                        .writeValue(Paths.get(System.getProperty("user.home") + "/ecertis/criteria-eu/lang/" + lang.name().toLowerCase() + "/" + id + ".json").toFile(), jsonObject);
 
                 } catch (URISyntaxException e) {
                     System.err.println(e.getMessage());
@@ -157,10 +158,10 @@ public class ECertisMDResourceTest {
         for (ECertisNationalEntityEnum nationalEntity : ECertisNationalEntityEnum.values()) {
 
             if (nationalEntity != ECertisNationalEntityEnum.GR
-                    && nationalEntity != ECertisNationalEntityEnum.GB
-                    && nationalEntity != ECertisNationalEntityEnum.LI
-                    && nationalEntity != ECertisNationalEntityEnum.FR
-                    && nationalEntity != ECertisNationalEntityEnum.ES) {
+                && nationalEntity != ECertisNationalEntityEnum.GB
+                && nationalEntity != ECertisNationalEntityEnum.LI
+                && nationalEntity != ECertisNationalEntityEnum.FR
+                && nationalEntity != ECertisNationalEntityEnum.ES) {
 
                 // Create the currents national entity directory
                 Files.createDirectories(Paths.get(System.getProperty("user.home") + "/ecertis/criteria-na/nationalentity/" + nationalEntity.name().toLowerCase()));
@@ -170,7 +171,7 @@ public class ECertisMDResourceTest {
 
                     // Create the currents lang directory inside the current national entity directory
                     Files.createDirectories(Paths.get(System.getProperty("user.home") + "/ecertis/criteria-na/nationalentity/"
-                            + nationalEntity.name().toLowerCase() + "/lang/" + lang.name().toLowerCase()));
+                        + nationalEntity.name().toLowerCase() + "/lang/" + lang.name().toLowerCase()));
 
                     for (String euCriterionId : eCertisResource.getAllCriteriaID()) {
 
@@ -181,20 +182,21 @@ public class ECertisMDResourceTest {
                             try {
                                 // Create the ecertis task
                                 GetFromECertisTask getFromECertisTask = new GetFromECertisTask(
-                                        new ECertisURIBuilder()
-                                                .lang(lang)
-                                                .buildCriterionURI(nationalCriterion.getID()));
+                                    ECertisURI.baseURL()
+                                        .withLang(lang)
+                                        .withCriterionId(nationalCriterion.getID())
+                                        .build());
 
                                 ObjectMapper mapper = new ObjectMapper();
                                 Object jsonObject = mapper.readValue(getFromECertisTask.call(), Object.class);
                                 mapper
-                                        .writerWithDefaultPrettyPrinter()
+                                    .writerWithDefaultPrettyPrinter()
 //        String prettyJson = mapper.writerWithDefaultPrettyPrinter()
 //                .writeValueAsString(jsonObject);
 //        System.out.println(prettyJson);
-                                        .writeValue(Paths.get(System.getProperty("user.home") + "/ecertis/criteria-na/nationalentity/"
-                                                + nationalEntity.name().toLowerCase() + "/lang/" + lang.name().toLowerCase() + "/"
-                                                + nationalCriterion.getID() + ".json").toFile(), jsonObject);
+                                    .writeValue(Paths.get(System.getProperty("user.home") + "/ecertis/criteria-na/nationalentity/"
+                                        + nationalEntity.name().toLowerCase() + "/lang/" + lang.name().toLowerCase() + "/"
+                                        + nationalCriterion.getID() + ".json").toFile(), jsonObject);
 
                             } catch (URISyntaxException e) {
                                 System.err.println(e.getMessage());

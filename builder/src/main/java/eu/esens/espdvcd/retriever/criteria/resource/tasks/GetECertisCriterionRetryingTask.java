@@ -20,15 +20,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import com.github.rholder.retry.RetryException;
 import eu.esens.espdvcd.codelist.enums.ecertis.ECertisLanguageCodeEnum;
-import eu.esens.espdvcd.codelist.enums.ecertis.ECertisNationalEntityEnum;
 import eu.esens.espdvcd.model.retriever.ECertisCriterion;
 import eu.esens.espdvcd.model.retriever.ECertisCriterionImpl;
-import eu.esens.espdvcd.retriever.criteria.resource.utils.ECertisURIBuilder;
+import eu.esens.espdvcd.retriever.criteria.resource.utils.ECertisURI;
 
 import javax.annotation.Nullable;
 import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.Optional;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -42,17 +40,14 @@ public class GetECertisCriterionRetryingTask implements Callable<ECertisCriterio
 
     private static final Logger LOGGER = Logger.getLogger(GetECertisCriterionRetryingTask.class.getName());
 
-    private URI uri;
+    private final URI uri;
 
     private GetECertisCriterionRetryingTask(Builder builder) {
-        try {
-            this.uri = new ECertisURIBuilder()
-                    .lang(builder.lang)
-                    .countryFilter(builder.countryCode)
-                    .buildCriterionURI(builder.id);
-        } catch (URISyntaxException e) {
-            LOGGER.log(Level.SEVERE, e.getMessage());
-        }
+        this.uri = ECertisURI.baseURL()
+            .withLang(builder.lang)
+            .withCriterionId(builder.id)
+            .build().asURI();
+        System.out.println("URI " + uri.toString());
     }
 
     @Override
@@ -73,13 +68,16 @@ public class GetECertisCriterionRetryingTask implements Callable<ECertisCriterio
         }
     }
 
+    public static Builder forCriterion(String id) {
+        return new Builder(id);
+    }
+
     public static class Builder {
 
         /* mandatory params */
         private final String id;
         /* optional params */
         private ECertisLanguageCodeEnum lang;
-        private ECertisNationalEntityEnum countryCode;
 
         /**
          * @param id The Criterion id (UUID).
@@ -94,15 +92,6 @@ public class GetECertisCriterionRetryingTask implements Callable<ECertisCriterio
          */
         public Builder lang(@Nullable ECertisLanguageCodeEnum lang) {
             this.lang = Optional.ofNullable(lang).orElse(ECertisLanguageCodeEnum.EN);
-            return Builder.this;
-        }
-
-        /**
-         * @param countryCode The country for which criterion data will be returned.
-         * @return
-         */
-        public Builder countryFilter(@Nullable ECertisNationalEntityEnum countryCode) {
-            this.countryCode = countryCode;
             return Builder.this;
         }
 

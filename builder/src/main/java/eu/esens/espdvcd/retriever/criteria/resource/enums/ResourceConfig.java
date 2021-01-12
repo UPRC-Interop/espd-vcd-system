@@ -20,6 +20,8 @@ import com.typesafe.config.ConfigFactory;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author Konstantinos Raptis [kraptis at unipi.gr] on 12/10/2020.
@@ -28,29 +30,49 @@ public enum ResourceConfig {
 
     INSTANCE("resource.conf");
 
+    private final Logger LOGGER = Logger.getLogger(ResourceConfig.class.getName());
+
     private final Config config;
 
     ResourceConfig(String filename) {
         Config config = ConfigFactory.parseResources(filename);
         Path f = Paths.get("./" + filename);
         this.config =
-                ConfigFactory.parseFile(f.toFile())
-                        .withFallback(config)
-                        .resolve();
+            ConfigFactory.parseFile(f.toFile())
+                .withFallback(config)
+                .resolve();
     }
 
     public boolean useProduction() {
-        return getECertisConfig().getBoolean("use-production");
+        return getECertisMode().equals("production");
+    }
+
+    public String getECertisMode() {
+        return getECertisConfig().getString("mode");
     }
 
     public boolean useBackwardsCompatibleECertis() {
-        return !useProduction() && getAcceptanceConfig().getBoolean("use-backwards-compatible");
+        return useProduction() && getProductionConfig().getBoolean("use-backwards-compatible");
     }
 
     public String getECertisHost() {
-        return useProduction()
-                ? getProductionConfig().getString("host")
-                : getAcceptanceConfig().getString("host");
+
+        switch (getECertisMode()) {
+
+            case "production":
+                return getProductionConfig().getString("host");
+
+            case "replica":
+                return getReplicaConfig().getString("host");
+
+            case "wiremock":
+                return getWiremockConfig().getString("host");
+
+            default:
+                LOGGER.log(Level.SEVERE, "");
+                throw new IllegalStateException("Error... Unable to specify e-Certis mode. " +
+                    "Allowed modes are: production, replica, wiremock.");
+        }
     }
 
     /**
@@ -59,21 +81,63 @@ public enum ResourceConfig {
      * @return
      */
     public String getECertisScheme() {
-        return useProduction()
-                ? getProductionConfig().getString("scheme")
-                : getAcceptanceConfig().getString("scheme");
+
+        switch (getECertisMode()) {
+
+            case "production":
+                return getProductionConfig().getString("scheme");
+
+            case "replica":
+                return getReplicaConfig().getString("scheme");
+
+            case "wiremock":
+                return getWiremockConfig().getString("scheme");
+
+            default:
+                LOGGER.log(Level.SEVERE, "");
+                throw new IllegalStateException("Error... Unable to specify e-Certis mode. " +
+                    "Allowed modes are: production, replica, wiremock.");
+        }
     }
 
     public String getECertisCriteriaPath() {
-        return useProduction()
-                ? getProductionConfig().getString("criteria")
-                : getAcceptanceConfig().getString("criteria");
+
+        switch (getECertisMode()) {
+
+            case "production":
+                return getProductionConfig().getString("criteria");
+
+            case "replica":
+                return getReplicaConfig().getString("criteria");
+
+            case "wiremock":
+                return getWiremockConfig().getString("criteria");
+
+            default:
+                LOGGER.log(Level.SEVERE, "");
+                throw new IllegalStateException("Error... Unable to specify e-Certis mode. " +
+                    "Allowed modes are: production, replica, wiremock.");
+        }
     }
 
     private Config getECertisJsonElement() {
-        return useProduction()
-                ? getProductionConfig().getConfig("jsonelements")
-                : getAcceptanceConfig().getConfig("jsonelements");
+
+        switch (getECertisMode()) {
+
+            case "production":
+                return getProductionConfig().getConfig("jsonelements");
+
+            case "replica":
+                return getReplicaConfig().getConfig("jsonelements");
+
+            case "wiremock":
+                return getWiremockConfig().getConfig("jsonelements");
+
+            default:
+                LOGGER.log(Level.SEVERE, "");
+                throw new IllegalStateException("Error... Unable to specify e-Certis mode. " +
+                    "Allowed modes are: production, replica, wiremock.");
+        }
     }
 
     public String getECertisCriterionJsonElement() {
@@ -116,8 +180,16 @@ public enum ResourceConfig {
         return getECertisConfig().getConfig("production");
     }
 
-    private Config getAcceptanceConfig() {
-        return getECertisConfig().getConfig("acceptance");
+    // private Config getAcceptanceConfig() {
+    //    return getECertisConfig().getConfig("acceptance");
+    //}
+
+    private Config getReplicaConfig() {
+        return getECertisConfig().getConfig("replica");
+    }
+
+    private Config getWiremockConfig() {
+        return getECertisConfig().getConfig("wiremock");
     }
 
     private Config getTaxonomyRegulatedConfig() {

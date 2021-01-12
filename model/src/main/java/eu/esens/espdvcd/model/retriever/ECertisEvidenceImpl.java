@@ -68,7 +68,7 @@ public class ECertisEvidenceImpl implements ECertisEvidence {
 
     @Override
     @JsonProperty("ID")
-    @JsonAlias({"id"})
+    @JsonAlias({"id", "Id"})
     public String getID() {
         return ID;
     }

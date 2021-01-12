@@ -87,7 +87,7 @@ public class CriteriaDataRetrieverBuilderTest {
 
         for (SelectableCriterion mappedCriterion : mappedCriteriaList) {
             AssertUtils.assertLegislationAndItsFieldsNotNull(mappedCriterion.getLegislationReference());
-            mappedCriterion.getEvidenceList().forEach(e -> AssertUtils.assertEvidenceAndItsFieldsNotNull(e));
+            mappedCriterion.getEvidenceList().forEach(AssertUtils::assertEvidenceAndItsFieldsNotNull);
             // SelectableCriterionPrinter.print(mappedCriterion);
         }
     }
@@ -103,7 +103,7 @@ public class CriteriaDataRetrieverBuilderTest {
 
         for (SelectableCriterion mappedCriterion : mappedCriteriaList) {
             AssertUtils.assertLegislationAndItsFieldsNotNull(mappedCriterion.getLegislationReference());
-            mappedCriterion.getEvidenceList().forEach(e -> AssertUtils.assertEvidenceAndItsFieldsNotNull(e));
+            mappedCriterion.getEvidenceList().forEach(AssertUtils::assertEvidenceAndItsFieldsNotNull);
             // SelectableCriterionPrinter.print(mappedCriterion);
         }
     }
@@ -118,7 +118,7 @@ public class CriteriaDataRetrieverBuilderTest {
 
         for (SelectableCriterion mappedCriterion : mappedCriteriaList) {
             AssertUtils.assertLegislationAndItsFieldsNotNull(mappedCriterion.getLegislationReference());
-            mappedCriterion.getEvidenceList().forEach(e -> AssertUtils.assertEvidenceAndItsFieldsNotNull(e));
+            mappedCriterion.getEvidenceList().forEach(AssertUtils::assertEvidenceAndItsFieldsNotNull);
             // SelectableCriterionPrinter.print(mappedCriterion);
         }
     }
@@ -134,7 +134,7 @@ public class CriteriaDataRetrieverBuilderTest {
 
         for (SelectableCriterion mappedCriterion : mappedCriteriaList) {
             AssertUtils.assertLegislationAndItsFieldsNotNull(mappedCriterion.getLegislationReference());
-            mappedCriterion.getEvidenceList().forEach(e -> AssertUtils.assertEvidenceAndItsFieldsNotNull(e));
+            mappedCriterion.getEvidenceList().forEach(AssertUtils::assertEvidenceAndItsFieldsNotNull);
             // SelectableCriterionPrinter.print(mappedCriterion);
         }
     }
