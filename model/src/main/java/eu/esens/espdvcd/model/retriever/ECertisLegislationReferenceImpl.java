@@ -15,6 +15,8 @@
  */
 package eu.esens.espdvcd.model.retriever;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import eu.esens.espdvcd.model.util.CustomStringValueDeserializer;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -34,6 +36,7 @@ import eu.esens.espdvcd.model.util.CustomTextValueDeserializer;
             "article",
             "URI"
         })
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ECertisLegislationReferenceImpl extends LegislationReference implements ECertisLegislationReference {
 
     public ECertisLegislationReferenceImpl() {
@@ -46,6 +49,7 @@ public class ECertisLegislationReferenceImpl extends LegislationReference implem
     
     @Override
     @JsonProperty("Title")
+    @JsonAlias({"title"})
     public String getTitle() {
         return title;
     }
@@ -58,6 +62,7 @@ public class ECertisLegislationReferenceImpl extends LegislationReference implem
 
     @Override
     @JsonProperty("Description")
+    @JsonAlias({"description"})
     public String getDescription() {
         return description;
     }
@@ -70,6 +75,7 @@ public class ECertisLegislationReferenceImpl extends LegislationReference implem
 
     @Override
     @JsonProperty("JurisdictionLevelCode")
+    @JsonAlias({"jurisdictionLevelCode"})
     public String getJurisdictionLevelCode() {
         return jurisdictionLevelCode;
     }
@@ -82,6 +88,7 @@ public class ECertisLegislationReferenceImpl extends LegislationReference implem
 
     @Override
     @JsonProperty("Article")
+    @JsonAlias({"article"})
     public String getArticle() {
         return article;
     }
@@ -94,6 +101,7 @@ public class ECertisLegislationReferenceImpl extends LegislationReference implem
 
     @Override
     @JsonProperty("URI")
+    @JsonAlias({"uri"})
     public String getURI() {
         return URI;
     }

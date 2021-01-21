@@ -15,6 +15,8 @@
  */
 package eu.esens.espdvcd.model.retriever;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import eu.esens.espdvcd.model.util.CustomTextValueDeserializer;
@@ -23,6 +25,7 @@ import eu.esens.espdvcd.model.util.CustomTextValueDeserializer;
  *
  * @author Konstantinos Raptis
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ECertisPartyNameImpl implements ECertisPartyName {
     
     private String name;
@@ -35,6 +38,7 @@ public class ECertisPartyNameImpl implements ECertisPartyName {
 
     @Override
     @JsonProperty("Name")
+    @JsonAlias({"name"})
     public String getName() {
         return name;
     }

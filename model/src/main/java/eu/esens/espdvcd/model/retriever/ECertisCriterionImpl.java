@@ -15,9 +15,7 @@
  */
 package eu.esens.espdvcd.model.retriever;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import eu.esens.espdvcd.model.util.CustomLegislationReferenceDeserializer;
 import eu.esens.espdvcd.model.util.CustomStringValueDeserializer;
@@ -43,6 +41,7 @@ import java.util.List;
             "subCriterions",
             "parentCriterion"
         })
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ECertisCriterionImpl implements ECertisCriterion {
 
     private String ID;
@@ -53,7 +52,7 @@ public class ECertisCriterionImpl implements ECertisCriterion {
     private String versionID;
     private ECertisLegislationReference legislationReference;
     private List<ECertisEvidenceGroup> evidenceGroups;
-    private List<ECertisCriterion> subCriterions;
+    private List<ECertisCriterion> subCriteria;
     private ECertisCriterion parentCriterion;
 
     @Override
@@ -64,6 +63,7 @@ public class ECertisCriterionImpl implements ECertisCriterion {
 
     @Override
     @JsonProperty("ID")
+    @JsonAlias({"id", "Id"})
     public String getID() {
         return ID;
     }
@@ -76,6 +76,7 @@ public class ECertisCriterionImpl implements ECertisCriterion {
 
     @Override
     @JsonProperty("TypeCode")
+    @JsonAlias({"typeCode"})
     public String getTypeCode() {
         return typeCode;
     }
@@ -88,6 +89,7 @@ public class ECertisCriterionImpl implements ECertisCriterion {
 
     @Override
     @JsonProperty("Name")
+    @JsonAlias({"name"})
     public String getName() {
         return name;
     }
@@ -100,6 +102,7 @@ public class ECertisCriterionImpl implements ECertisCriterion {
 
     @Override
     @JsonProperty("Description")
+    @JsonAlias({"description"})
     public String getDescription() {
         return description;
     }
@@ -112,6 +115,7 @@ public class ECertisCriterionImpl implements ECertisCriterion {
 
     @Override
     @JsonProperty("DomainID")
+    @JsonAlias({"domainID"})
     public String getDomainID() {
         return domainID;
     }
@@ -124,18 +128,21 @@ public class ECertisCriterionImpl implements ECertisCriterion {
 
     @Override
     @JsonProperty("VersionID")
+    @JsonAlias({"versionID"})
     public String getVersionID() {
         return versionID;
     }
 
     @Override
     @JsonProperty("LegislationReference")
+    @JsonAlias({"legislationReference"})
     public ECertisLegislationReference getLegislationReference() {
         return legislationReference;
     }
         
     @Override
     @JsonSetter("LegislationReference")
+    @JsonAlias({"legislationReference"})
     @JsonDeserialize(as = ECertisLegislationReferenceImpl.class, using = CustomLegislationReferenceDeserializer.class)
     public void setLegislationReference(ECertisLegislationReference legislationReference) {
         this.legislationReference = legislationReference;
@@ -143,6 +150,7 @@ public class ECertisCriterionImpl implements ECertisCriterion {
    
     @Override
     @JsonSetter("RequirementGroup")
+    @JsonAlias({"requirementGroup"})
     @JsonDeserialize(as = List.class, contentAs = ECertisEvidenceGroupImpl.class)
     public void setEvidenceGroups(List<ECertisEvidenceGroup> evidenceGroups) {
         this.evidenceGroups = evidenceGroups;
@@ -150,6 +158,7 @@ public class ECertisCriterionImpl implements ECertisCriterion {
 
     @Override
     @JsonProperty("RequirementGroup")
+    @JsonAlias({"requirementGroup"})
     public List<ECertisEvidenceGroup> getEvidenceGroups() {
         if (evidenceGroups == null) {
             evidenceGroups = new ArrayList<>();
@@ -159,22 +168,25 @@ public class ECertisCriterionImpl implements ECertisCriterion {
 
     @Override
     @JsonSetter("SubCriterion")
+    @JsonAlias({"subCriterion"})
     @JsonDeserialize(as = List.class, contentAs = ECertisCriterionImpl.class)
     public void setSubCriterions(List<ECertisCriterion> subCriterions) {
-        this.subCriterions = subCriterions;
+        this.subCriteria = subCriterions;
     }
 
     @Override
     @JsonProperty("SubCriterion")
-    public List<ECertisCriterion> getSubCriterions() {
-        if (subCriterions == null) {
-            subCriterions = new ArrayList<>();
+    @JsonAlias({"subCriterion"})
+    public List<ECertisCriterion> getSubCriteria() {
+        if (subCriteria == null) {
+            subCriteria = new ArrayList<>();
         }
-        return subCriterions;
+        return subCriteria;
     }
 
     @Override
     @JsonSetter("ParentCriterion")
+    @JsonAlias({"parentCriterion"})
     @JsonDeserialize(as = ECertisCriterionImpl.class)
     public void setParentCriterion(ECertisCriterion parentCriterion) {
         this.parentCriterion = parentCriterion;
@@ -182,6 +194,7 @@ public class ECertisCriterionImpl implements ECertisCriterion {
 
     @Override
     @JsonProperty("ParentCriterion")
+    @JsonAlias({"parentCriterion"})
     public ECertisCriterion getParentCriterion() {
         return parentCriterion;
     }

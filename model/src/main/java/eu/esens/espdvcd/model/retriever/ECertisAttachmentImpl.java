@@ -15,6 +15,8 @@
  */
 package eu.esens.espdvcd.model.retriever;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
@@ -22,6 +24,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  *
  * @author Konstantinos Raptis
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ECertisAttachmentImpl implements ECertisAttachment {
         
     private ECertisExternalReference externalReference;
@@ -34,6 +37,7 @@ public class ECertisAttachmentImpl implements ECertisAttachment {
 
     @Override
     @JsonProperty("ExternalReference")
+    @JsonAlias({"externalReference"})
     public ECertisExternalReference getExternalReference() {
         return externalReference;
     }
