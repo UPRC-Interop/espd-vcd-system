@@ -15,6 +15,8 @@
  */
 package eu.esens.espdvcd.model.retriever;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import eu.esens.espdvcd.model.util.CustomStringValueDeserializer;
@@ -23,6 +25,7 @@ import eu.esens.espdvcd.model.util.CustomStringValueDeserializer;
  *
  * @author Konstantinos Raptis
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ECertisIssuerPartyImpl implements ECertisIssuerParty {
 
     private String websiteURI;
@@ -35,6 +38,7 @@ public class ECertisIssuerPartyImpl implements ECertisIssuerParty {
 
     @Override
     @JsonProperty("WebsiteURI")
+    @JsonAlias({"websiteURI"})
     public String getWebsiteURI() {
         return websiteURI;
     }

@@ -368,7 +368,7 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
      * @return List of subCriteria
      */
     public List<ECertisCriterion> getSubCriterionList(ECertisCriterion ec, String code) {
-        return ec.getSubCriterions().stream()
+        return ec.getSubCriteria().stream()
                 .filter(c -> c.getLegislationReference() != null)
                 .filter(c -> c.getLegislationReference()
                         .getJurisdictionLevelCode().equals(code))

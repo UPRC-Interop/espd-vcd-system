@@ -55,9 +55,9 @@ public interface ECertisCriterion {
     
     List<ECertisEvidenceGroup> getEvidenceGroups();
     
-    void setSubCriterions(List<ECertisCriterion> subCriterions);
+    void setSubCriterions(List<ECertisCriterion> subCriteria);
     
-    List<ECertisCriterion> getSubCriterions();
+    List<ECertisCriterion> getSubCriteria();
     
     void setParentCriterion(ECertisCriterion parentCriterion);
     

@@ -15,6 +15,8 @@
  */
 package eu.esens.espdvcd.model.retriever;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -29,6 +31,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
             "validityPeriod", 
             "issuerParty"
         })
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ECertisEvidenceDocumentReferenceImpl implements ECertisEvidenceDocumentReference {
         
     private ECertisAttachment attachment;
@@ -43,6 +46,7 @@ public class ECertisEvidenceDocumentReferenceImpl implements ECertisEvidenceDocu
 
     @Override
     @JsonProperty("Attachment")
+    @JsonAlias({"attachment"})
     public ECertisAttachment getAttachment() {
         return attachment;
     }
@@ -55,6 +59,7 @@ public class ECertisEvidenceDocumentReferenceImpl implements ECertisEvidenceDocu
 
     @Override
     @JsonProperty("ValidityPeriod")
+    @JsonAlias({"validityPeriod"})
     public ECertisValidityPeriod getValidityPeriod() {
         return validityPeriod;
     }
@@ -67,6 +72,7 @@ public class ECertisEvidenceDocumentReferenceImpl implements ECertisEvidenceDocu
 
     @Override
     @JsonProperty("IssuerParty")
+    @JsonAlias({"issuerParty"})
     public ECertisIssuerParty getIssuerParty() {
         return issuerParty;
     }
