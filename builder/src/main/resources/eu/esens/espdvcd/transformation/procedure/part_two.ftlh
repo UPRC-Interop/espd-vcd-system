@@ -97,15 +97,16 @@
 <#macro sectionForEO model modelType enProps props version>
     <#if modelType == "ESPD_RESPONSE">
         <#assign name = model.getEODetails().getName()>
-        <#assign address = model.getEODetails().getPostalAddress().getAddressLine1()>
-        <#assign postcode = model.getEODetails().getPostalAddress().getPostCode()>
-        <#assign city = model.getEODetails().getPostalAddress().getCity()>
+        <#assign address = model.getEODetails().getPostalAddress().getAddressLine1()!"">
+        <#assign postcode = model.getEODetails().getPostalAddress().getPostCode()!"">
+        <#assign city = model.getEODetails().getPostalAddress().getCity()!"">
         <#assign countryCode = model.getEODetails().getPostalAddress().getCountryCode()>
-        <#assign email = model.getEODetails().getContactingDetails().getEmailAddress()>
-        <#assign tel = model.getEODetails().getContactingDetails().getTelephoneNumber()>
-        <#assign fax = model.getEODetails().getContactingDetails().getFaxNumber()>
-        <#assign id = model.getEODetails().getID()>
-        <#assign websiteURI = model.getEODetails().getWebSiteURI()>
+        <#assign contactPointName = model.getEODetails().getContactingDetails().getContactPointName()!"">
+        <#assign email = model.getEODetails().getContactingDetails().getEmailAddress()!"">
+        <#assign tel = model.getEODetails().getContactingDetails().getTelephoneNumber()!"">
+        <#assign fax = model.getEODetails().getContactingDetails().getFaxNumber()!"">
+        <#assign id = model.getEODetails().getID()!"">
+        <#assign websiteURI = model.getEODetails().getWebSiteURI()!"">
         <#assign projLot = model.getEODetails().getProcurementProjectLot()>
 
         <@s.sectionLabelForValueOfNode name "espd.part2.name" props />
@@ -113,6 +114,7 @@
         <@s.sectionLabelForValueOfNode postcode "espd.part1.postcode" props />
         <@s.sectionLabelForValueOfNode city "espd.part1.city" props />
         <@s.sectionLabelForValueOfNode countryCode "espd.part1.country" props />
+        <@s.sectionLabelForValueOfNode contactPointName "espd.part1.contact.person" props />
         <@s.sectionLabelForMailValueOfNode  email "espd.part1.email" props />
         <@s.sectionLabelForValueOfNode  tel "espd.part1.telephone" props />
         <@s.sectionLabelForValueOfNode  fax "espd.part1.fax" props />

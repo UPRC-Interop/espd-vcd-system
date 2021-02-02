@@ -26,7 +26,7 @@ import java.nio.file.Path;
 public class ResponseTransformationV2 extends AbstractTransformationTest{
 
     private static ESPDResponse espdResponse;
-    private static final String XML_REF = "artefacts/regulated/v2/2.1.0/UPRC-ESPD-Regulated-Response-2.1.0-Artefact-22-4-2019.xml";
+    private static final String XML_REF = "artefacts/regulated/v2/2.1.0/UPRC-ESPD-Regulated-Response-2.1.0-Artefact-24-4-2019.xml";
 
     @BeforeClass
     public static void transform() throws BuilderException {

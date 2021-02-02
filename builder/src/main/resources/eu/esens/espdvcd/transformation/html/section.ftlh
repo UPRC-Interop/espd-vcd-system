@@ -38,7 +38,7 @@
     </#if>
 </#macro>
 
-<#macro sectionLabel label text>
+<#macro sectionLabel label text="">
     <#if text?length gt 56>
         <div>
             <span class="content-left">${label}</span>
@@ -52,7 +52,7 @@
     </#if>
 </#macro>
 
-<#macro sectionLabelForUrl label text>
+<#macro sectionLabelForUrl label text="">
     <#if text?length gt 56>
         <div>
             <span class="content-left">${label}</span>
@@ -66,7 +66,7 @@
     </#if>
 </#macro>
 
-<#macro sectionLabelForMail label text>
+<#macro sectionLabelForMail label text="">
     <#if text?length gt 56>
         <div>
             <span class="content-left">${label}</span>

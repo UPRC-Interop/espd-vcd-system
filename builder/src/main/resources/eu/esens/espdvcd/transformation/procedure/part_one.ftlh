@@ -61,27 +61,32 @@
     <#assign ojsLabel = pr.getESPDProperty('espd.part1.ojs.label',props)>
     <#assign ojsUrl = pr.getESPDProperty('espd.part1.ojs.url',props)>
     <#assign officialJournalAlert = pr.getESPDProperty('espd.part1.official.journal.alert',props)>
+    <#assign officialJournalAlert2 = pr.getESPDProperty('espd.part1.official.journal.alert2',props)>
 
     <p>${filledAlert}</p>
     <br>
     <@s.sectionLabel tedRecId model.getCADetails().getReceivedNoticeNumber() />
     <@s.sectionLabel ojsLabel model.getCADetails().getProcurementPublicationNumber() />
-    <@s.sectionLabelForUrl ojsUrl model.getCADetails().getProcurementPublicationURI()!"" />
     <br>
     <p>${officialJournalAlert}</p>
+    <br>
+    <@s.sectionLabelForUrl ojsUrl model.getCADetails().getProcurementPublicationURI() />
+    <br>
+    <p>${officialJournalAlert2}</p>
+    <br>
 </#macro>
 
 <#macro contractingParty model props >
     <#assign officialName = model.getCADetails().getCAOfficialName()>
-    <#assign vatId = model.getCADetails().getID()>
+    <#assign vatId = model.getCADetails().getID()!"">
     <#assign websiteURI = model.getCADetails().getWebSiteURI()!"">
-    <#assign city = model.getCADetails().getPostalAddress().getCity()>
-    <#assign address = model.getCADetails().getPostalAddress().getAddressLine1()>
-    <#assign postcode = model.getCADetails().getPostalAddress().getPostCode()>
-    <#assign contactPointName = model.getCADetails().getContactingDetails().getContactPointName()>
-    <#assign tel = model.getCADetails().getContactingDetails().getTelephoneNumber()>
-    <#assign fax = model.getCADetails().getContactingDetails().getFaxNumber()>
-    <#assign email = model.getCADetails().getContactingDetails().getEmailAddress()>
+    <#assign city = model.getCADetails().getPostalAddress().getCity()!"">
+    <#assign address = model.getCADetails().getPostalAddress().getAddressLine1()!"">
+    <#assign postcode = model.getCADetails().getPostalAddress().getPostCode()!"">
+    <#assign contactPointName = model.getCADetails().getContactingDetails().getContactPointName()!"">
+    <#assign tel = model.getCADetails().getContactingDetails().getTelephoneNumber()!"">
+    <#assign fax = model.getCADetails().getContactingDetails().getFaxNumber()!"">
+    <#assign email = model.getCADetails().getContactingDetails().getEmailAddress()!"">
     <#assign countryCode = model.getCADetails().getPostalAddress().getCountryCode()>
 
     <@s.sectionLabelForValueOfNode officialName "espd.part1.name" props />

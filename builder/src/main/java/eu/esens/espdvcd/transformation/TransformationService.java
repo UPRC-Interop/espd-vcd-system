@@ -28,6 +28,7 @@ import org.jsoup.helper.W3CDom;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Result;
@@ -74,6 +75,7 @@ public class TransformationService {
         ftlModel.put("espdModel", espdRequestModel);
         ftlModel.put("espdProperties",NodeModel.parse(findPropFile(ESPD_PROP_DOC+lang.name().toLowerCase()+XML)));
         ftlModel.put("espdEnProperties",NodeModel.parse(findPropFile(ESPD_EN_PROP_DOC+XML)));
+
         /*--------------------------------------------------------------------------------------------------------------*/
 
         StringWriter sw = new StringWriter();
@@ -122,10 +124,10 @@ public class TransformationService {
      * @param path is the path of properties file.
      * @return java.io.File
      * */
-    private File findPropFile(String path){
-        String pathForTesting = TransformationService.class.getResource(path).getPath();
-        String pathForBuildingProj = "../../builder/build/resources/main/eu/esens/espdvcd/transformation/";
-        return new File(pathForTesting).exists() ? new File(pathForTesting) : new File(pathForBuildingProj+path);
+    private InputSource findPropFile(String path){
+        String pathForBuildingProj = "eu/esens/espdvcd/transformation/";
+        InputStream isResource = this.getClass().getClassLoader().getResourceAsStream(pathForBuildingProj+path);
+        return new InputSource(isResource);
     }
 
     /**
