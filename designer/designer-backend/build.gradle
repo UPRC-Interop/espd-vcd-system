@@ -246,7 +246,17 @@ eu.esens.espdvcd.build.name="ESPD/VCD System"
     }
 }
 
-compileJava.dependsOn generateVersionFile
+task copyGSCCPProperties {
+    doFirst{
+        copy {
+            from "$projectDir/application.properties.snf"
+            into "$projectDir/src/main/resources/"
+            rename ('application.properties.snf','defaults.conf')
+        }
+    }
+}
+
+compileJava.dependsOn generateVersionFile, copyGSCCPProperties
 jar.dependsOn ':edm:edm102:build'
 jar.dependsOn ':edm:edm202:build'
 jar.dependsOn ':edm:edm210:build'
