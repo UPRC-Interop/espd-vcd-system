@@ -28,7 +28,6 @@ apply plugin: "com.github.hierynomus.license"
 
 subprojects { project ->
     apply plugin: 'java'
-    apply plugin: 'maven'
     apply plugin: 'maven-publish'
     apply plugin: "com.github.hierynomus.license"
 
@@ -38,8 +37,8 @@ subprojects { project ->
     project.ext.webappDir = "$rootProject.projectDir/designer/designer-frontend"
     project.ext.slf4j_version = '1.7.13'
     project.ext.log4j2_version = '2.4.1'
-    project.ext.jaxb_impl_version = '2.2.11'
-    project.ext.jaxb_api_version = '2.2.12'
+    project.ext.jaxb_impl_version = '3.0.2'
+    project.ext.jaxb_api_version = '2.4.0-b180830.0359'
 
     project.ext.libraries = [
             /* logging */
@@ -113,12 +112,12 @@ configure(subprojects - project(':designer')) {
 configure(subprojects)
         {
             dependencies {
-                compile libraries.slf4j_api
-                compile libraries.log4j_slf4j_impl
-                compile libraries.log4j_core
-                compile libraries.log4j_api
-                compile 'com.google.guava:guava:14.0'
-                testCompile group: 'junit', name: 'junit', version: '4.12'
+                implementation libraries.slf4j_api
+                implementation libraries.log4j_slf4j_impl
+                implementation libraries.log4j_core
+                implementation libraries.log4j_api
+                implementation 'com.google.guava:guava:14.0'
+                testImplementation group: 'junit', name: 'junit', version: '4.12'
             }
         }
 

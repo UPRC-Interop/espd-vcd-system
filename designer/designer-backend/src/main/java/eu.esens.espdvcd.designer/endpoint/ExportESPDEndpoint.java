@@ -125,7 +125,7 @@ public class ExportESPDEndpoint extends Endpoint {
                                 }
 //                                rsp.raw().getHeader("Content-Type");
 //                                LOGGER.info("HEADER IS "+rsp.raw().getHeader("Content-Type"));
-                                rsp.raw().setHeader("Content-Type","application/octet-stream");
+                                rsp.header("Content-Type","application/octet-stream");
 //                                LOGGER.info("HEADER IS "+rsp.raw().getHeader("Content-Type"));
                                 rsp.header("Content-Disposition", String.format(
                                         "attachment; filename=\"%s.%s\";", artefactType.toLowerCase(), exportType.name().toLowerCase()));

@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 dependencies {
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.11.3'
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.11.3'
-    compile project(':codelists')
-    compile project(':edm')
-    compile 'org.hibernate:hibernate-validator:5.4.1.Final'
-    compile 'org.glassfish:javax.el:3.0.1-b08'
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.11.3'
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.11.3'
+    implementation project(':codelists')
+    implementation project(':edm')
+    implementation 'org.hibernate:hibernate-validator:5.4.1.Final'
+    implementation 'org.glassfish:javax.el:3.0.1-b08'
 }

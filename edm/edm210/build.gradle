@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 plugins {
-    id "org.openrepose.gradle.plugins.jaxb"
+    id "com.github.seanrl.jaxb"
     id 'java-library'
 }
 
@@ -22,7 +22,7 @@ dependencies {
     jaxb "com.sun.xml.bind:jaxb-core:${project.jaxb_impl_version}"
     jaxb "com.sun.xml.bind:jaxb-xjc:${project.jaxb_impl_version}"
     jaxb "com.sun.xml.bind:jaxb-impl:${project.jaxb_impl_version}"
-    jaxb "javax.xml.bind:jaxb-api:${project.jaxb_impl_version}"
+    jaxb "javax.xml.bind:jaxb-api:${project.jaxb_api_version}"
     jaxb "javax.activation:activation:1.1.1"
 
     implementation project (":edm:common")
@@ -30,7 +30,7 @@ dependencies {
     implementation "com.sun.xml.bind:jaxb-core:${project.jaxb_impl_version}"
     implementation "com.sun.xml.bind:jaxb-xjc:${project.jaxb_impl_version}"
     implementation "com.sun.xml.bind:jaxb-impl:${project.jaxb_impl_version}"
-    api "javax.xml.bind:jaxb-api:${project.jaxb_impl_version}"
+    api "javax.xml.bind:jaxb-api:${project.jaxb_api_version}"
     implementation "javax.activation:activation:1.1.1"
 }
 

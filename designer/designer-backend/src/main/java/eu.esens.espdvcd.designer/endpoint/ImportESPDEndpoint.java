@@ -23,8 +23,8 @@ import eu.esens.espdvcd.designer.util.Errors;
 import eu.esens.espdvcd.designer.util.JsonUtil;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.poi.util.IOUtils;
 import spark.Service;
+import spark.utils.IOUtils;
 
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.http.Part;
