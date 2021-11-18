@@ -22,7 +22,7 @@ dependencies {
     jaxb "com.sun.xml.bind:jaxb-core:${project.jaxb_impl_version}"
     jaxb "com.sun.xml.bind:jaxb-xjc:${project.jaxb_impl_version}"
     jaxb "com.sun.xml.bind:jaxb-impl:${project.jaxb_impl_version}"
-    jaxb "javax.xml.bind:jaxb-api:${project.jaxb_impl_version}"
+    jaxb "javax.xml.bind:jaxb-api:${project.jaxb_api_version}"
     jaxb "javax.activation:activation:1.1.1"
     //project (":edm:common")
 
@@ -52,7 +52,7 @@ dependencies {
     jaxb "com.sun.xml.bind:jaxb-core:${project.jaxb_impl_version}"
     jaxb "com.sun.xml.bind:jaxb-xjc:${project.jaxb_impl_version}"
     jaxb "com.sun.xml.bind:jaxb-impl:${project.jaxb_impl_version}"
-    jaxb "javax.xml.bind:jaxb-api:${project.jaxb_impl_version}"
+    jaxb "javax.xml.bind:jaxb-api:${project.jaxb_api_version}"
     // compile 'com.google.guava:guava:14.0'
 }
 
