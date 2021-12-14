@@ -79,16 +79,22 @@ task runWebApp(type: Exec) {
 /**
  * * * * * JAR TASKS * * * * *
  */
+configurations.implementation.setCanBeResolved(true)
 
 jar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     manifest {
         attributes "Main-Class": mainClassName
     }
 
     doFirst {
-        from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+        from { configurations.implementation.collect { it.isDirectory() ? it : zipTree(it) } }
     }
     exclude 'META-INF/*.RSA', 'META-INF/*.SF', 'META-INF/*.DSA'
+}
+
+installDist{
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
 
