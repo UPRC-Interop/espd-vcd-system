@@ -20,11 +20,9 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'gradle.plugin.com.hierynomus.gradle.plugins:license-gradle-plugin:0.15.0'
+        classpath 'gradle.plugin.com.hierynomus.gradle.plugins:license-gradle-plugin:0.16.1'
     }
 }
-
-apply plugin: "com.github.hierynomus.license"
 
 subprojects { project ->
     apply plugin: 'java'
