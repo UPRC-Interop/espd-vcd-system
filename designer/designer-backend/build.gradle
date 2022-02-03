@@ -118,6 +118,8 @@ task jarWithFrontend(type: Jar) {
 
 task createJarFromExistingResources(type: Jar) {
     dependsOn "copyWebAppResources"
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
 
     manifest {
         attributes "Main-Class": mainClassName
