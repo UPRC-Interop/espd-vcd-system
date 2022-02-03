@@ -59,6 +59,7 @@ import {PercentageValidationDirective} from './directives/percentage/percentage-
 import {VatNumberValidationDirective} from './directives/vat-number/vat-number-validation.directive';
 import {AmountDirective} from './directives/amount/amount.directive';
 import {ECertisCriterionComponent} from './e-certis-criterion/e-certis-criterion.component';
+import { MessageAlertComponent } from './message-alert/message-alert.component';
 
 @NgModule({
   declarations: [
@@ -88,7 +89,8 @@ import {ECertisCriterionComponent} from './e-certis-criterion/e-certis-criterion
     PercentageValidationDirective,
     VatNumberValidationDirective,
     AmountDirective,
-    ECertisCriterionComponent
+    ECertisCriterionComponent,
+    MessageAlertComponent
   ],
   imports: [
     BrowserModule,
@@ -107,6 +109,7 @@ import {ECertisCriterionComponent} from './e-certis-criterion/e-certis-criterion
       }
     })
   ],
+  entryComponents: [MessageAlertComponent],
   providers: [ApicallService, DataService, Title, Location,
     {provide: MAT_DATE_LOCALE, useValue: 'el-GR'},
     {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
