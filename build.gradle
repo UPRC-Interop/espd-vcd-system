@@ -28,7 +28,6 @@ apply plugin: "com.github.hierynomus.license"
 
 subprojects { project ->
     apply plugin: 'java'
-    apply plugin: 'maven'
     apply plugin: 'maven-publish'
     apply plugin: "com.github.hierynomus.license"
 
@@ -36,7 +35,7 @@ subprojects { project ->
     group = 'eu.espdint.espdvcd'
     
     project.ext.webappDir = "$rootProject.projectDir/designer/designer-frontend"
-    project.ext.slf4j_version = '1.7.13'
+    project.ext.slf4j_version = '1.8.0-beta4'
     project.ext.log4j2_version = '2.17.1'
     project.ext.jaxb_impl_version = '2.2.11'
     project.ext.jaxb_api_version = '2.2.12'
@@ -51,7 +50,6 @@ subprojects { project ->
 
     repositories {
         mavenCentral()
-        jcenter()
     }
 
     license {
