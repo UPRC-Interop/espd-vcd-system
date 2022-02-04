@@ -23,7 +23,7 @@ include ':builder',
         'edm:edm210',
         ':designer',
         ':validator',
-        'designer:designer-backend',
+        'designer:designer-backend'
 
-findProject(':designer:designer-backend')?.name = 'designer-backend'
+//findProject(':designer:designer-backend')?.name = 'designer-backend'
 
