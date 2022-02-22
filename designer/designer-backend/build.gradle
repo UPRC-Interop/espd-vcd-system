@@ -65,8 +65,10 @@ task runWebApp(type: Exec) {
 /**
  * * * * * JAR TASKS * * * * *
  */
+configurations.implementation.setCanBeResolved(true)
 
 jar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     manifest {
         attributes "Main-Class": mainClassName
     }
@@ -77,9 +79,26 @@ jar {
     exclude 'META-INF/*.RSA', 'META-INF/*.SF', 'META-INF/*.DSA'
 }
 
+installDist{
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+/**
+ *  the 2 tasks.withType below are fixes for the issue with gradle 7 and duplicate strategy inconsistency
+ */
+
+tasks.withType(Tar) {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+tasks.withType(Zip) {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
 
 task jarWithFrontend(type: Jar) {
     dependsOn "buildWebAppDeploy"
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
 
     manifest {
         attributes "Main-Class": mainClassName
@@ -96,6 +115,8 @@ task jarWithFrontend(type: Jar) {
 
 task createJarFromExistingResources(type: Jar) {
     dependsOn "copyWebAppResources"
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
 
     manifest {
         attributes "Main-Class": mainClassName

@@ -45,7 +45,7 @@ sourceSets {
 }
 
 jaxb {
-          // espd edm v 2.0.2
+      // espd edm v 2.1.0
       bindingsDir = "${project.projectDir}/src/main/resources/xsd/bindings"
       xsdDir = "${project.projectDir}/src/main/resources/xsd/"
       bindings = ["binding_espdedm_v2.1.0.xjb" ]
