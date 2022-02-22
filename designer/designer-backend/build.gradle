@@ -97,6 +97,17 @@ installDist{
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
+/**
+ *  the 2 tasks.withType below are fixes for the issue with gradle 7 and duplicate strategy inconsistency
+ */
+
+tasks.withType(Tar) {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+tasks.withType(Zip) {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
 
 task jarWithFrontend(type: Jar) {
     dependsOn "buildWebAppDeploy"
