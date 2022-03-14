@@ -20,7 +20,6 @@ import eu.esens.espdvcd.codelist.enums.internal.ContractingOperatorEnum;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.retriever.criteria.resource.*;
 import eu.esens.espdvcd.retriever.criteria.resource.utils.TaxonomyDataUtils;
-import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import eu.esens.espdvcd.schema.enums.EDMVersion;
 
 import javax.validation.constraints.NotNull;
@@ -29,7 +28,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 /**
  * @author konstantinos Raptis
@@ -73,7 +71,7 @@ public abstract class CriteriaExtractorBuilder {
         // version 1 does not support self-contained
         if (version == EDMVersion.V1 && type == QualificationApplicationTypeEnum.SELFCONTAINED) {
             LOGGER.log(Level.WARNING, "Warning... Exchange Data Model (EDM) v1 does not " +
-                    "support self-contained type. Type was set to regulated");
+                "support self-contained type. Type was set to regulated");
             this.type = QualificationApplicationTypeEnum.REGULATED;
         } else {
             this.type = type;
@@ -168,18 +166,28 @@ public abstract class CriteriaExtractorBuilder {
     private CriteriaResource createDefaultCriteriaResourceV2() {
 
         initCriteriaTaxonomyResource();
-        initECertisResource(taxonomyResource.getCriterionList().stream()
-                .map(sc -> sc.getID())
-                .collect(Collectors.toList()));
+        // K. Raptis : Remove e-Certis from initialization of the criteria resource v2, as a fix to e-Certis hanging
+        initESPDArtefactResource();
+//        initECertisResource(taxonomyResource.getCriterionList().stream()
+//                .map(Criterion::getID)
+//                .collect(Collectors.toList()));
+
+//        taxonomyResource.getCriterionList()
+//                .forEach(sc -> {
+//                    try {
+//                        // apply name and description from e-Certis criteria to taxonomy criteria
+//                        applyNameAndDescription(eCertisResource.getCriterionMap().get(sc.getID()), sc);
+//                    } catch (RetrieverException e) {
+//                        LOGGER.log(Level.SEVERE, e.getMessage());
+//                    }
+//                });
+
 
         taxonomyResource.getCriterionList()
-                .forEach(sc -> {
-                    try {
-                        applyNameAndDescription(eCertisResource.getCriterionMap().get(sc.getID()), sc);
-                    } catch (RetrieverException e) {
-                        LOGGER.log(Level.SEVERE, e.getMessage());
-                    }
-                });
+            .forEach(sc -> {
+                // apply name and description from ESPD artefact criteria to taxonomy criteria
+                applyNameAndDescription(artefactResource.getCriterionMap().get(sc.getID()), sc);
+            });
 
         return taxonomyResource;
     }
@@ -215,12 +223,13 @@ public abstract class CriteriaExtractorBuilder {
     private List<LegislationResource> createDefaultLegislationResourcesV2() {
 
         initESPDArtefactResource();
-        initECertisResource(artefactResource.getCriterionList().stream()
-                .map(sc -> sc.getID())
-                .collect(Collectors.toList()));
+        // K. Raptis : Remove e-Certis from initialization of the legislation resource v2, as a fix to e-Certis hanging
+//        initECertisResource(artefactResource.getCriterionList().stream()
+//            .map(Criterion::getID)
+//            .collect(Collectors.toList()));
 
         List<LegislationResource> resourceList = new ArrayList<>();
-        resourceList.add(eCertisResource);
+//        resourceList.add(eCertisResource);
         resourceList.add(artefactResource);
 
         return resourceList;
@@ -249,8 +258,8 @@ public abstract class CriteriaExtractorBuilder {
         initESPDArtefactResource();
 
         artefactResource.getCriterionList()
-                .forEach(sc -> TaxonomyDataUtils
-                        .applyTaxonomyData(taxonomyResource.getCriterionMap().get(sc.getID()), sc));
+            .forEach(sc -> TaxonomyDataUtils
+                .applyTaxonomyData(taxonomyResource.getCriterionMap().get(sc.getID()), sc));
 
         List<RequirementsResource> resourceList = new ArrayList<>();
         resourceList.add(artefactResource);
