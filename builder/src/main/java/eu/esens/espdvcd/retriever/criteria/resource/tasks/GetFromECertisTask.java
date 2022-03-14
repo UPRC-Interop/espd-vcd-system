@@ -30,7 +30,6 @@ import java.io.IOException;
 import java.net.SocketTimeoutException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.sql.Time;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeoutException;
 import java.util.logging.Logger;
