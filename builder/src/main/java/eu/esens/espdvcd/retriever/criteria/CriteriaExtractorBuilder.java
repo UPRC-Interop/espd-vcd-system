@@ -17,6 +17,7 @@ package eu.esens.espdvcd.retriever.criteria;
 
 import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
 import eu.esens.espdvcd.codelist.enums.internal.ContractingOperatorEnum;
+import eu.esens.espdvcd.model.Criterion;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.retriever.criteria.resource.*;
 import eu.esens.espdvcd.retriever.criteria.resource.utils.TaxonomyDataUtils;
