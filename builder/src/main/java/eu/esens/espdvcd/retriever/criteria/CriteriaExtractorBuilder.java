@@ -17,6 +17,7 @@ package eu.esens.espdvcd.retriever.criteria;
 
 import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
 import eu.esens.espdvcd.codelist.enums.internal.ContractingOperatorEnum;
+import eu.esens.espdvcd.model.Criterion;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.retriever.criteria.resource.*;
 import eu.esens.espdvcd.retriever.criteria.resource.utils.TaxonomyDataUtils;
@@ -168,18 +169,28 @@ public abstract class CriteriaExtractorBuilder {
     private CriteriaResource createDefaultCriteriaResourceV2() {
 
         initCriteriaTaxonomyResource();
-        initECertisResource(taxonomyResource.getCriterionList().stream()
-                .map(sc -> sc.getID())
-                .collect(Collectors.toList()));
+        // K. Raptis : Remove e-Certis from initialization of the criteria resource v2, as a fix to e-Certis hanging
+        initESPDArtefactResource();
+//        initECertisResource(taxonomyResource.getCriterionList().stream()
+//                .map(Criterion::getID)
+//                .collect(Collectors.toList()));
+
+//        taxonomyResource.getCriterionList()
+//                .forEach(sc -> {
+//                    try {
+//                        // apply name and description from e-Certis criteria to taxonomy criteria
+//                        applyNameAndDescription(eCertisResource.getCriterionMap().get(sc.getID()), sc);
+//                    } catch (RetrieverException e) {
+//                        LOGGER.log(Level.SEVERE, e.getMessage());
+//                    }
+//                });
+
 
         taxonomyResource.getCriterionList()
-                .forEach(sc -> {
-                    try {
-                        applyNameAndDescription(eCertisResource.getCriterionMap().get(sc.getID()), sc);
-                    } catch (RetrieverException e) {
-                        LOGGER.log(Level.SEVERE, e.getMessage());
-                    }
-                });
+            .forEach(sc -> {
+                // apply name and description from ESPD artefact criteria to taxonomy criteria
+                applyNameAndDescription(artefactResource.getCriterionMap().get(sc.getID()), sc);
+            });
 
         return taxonomyResource;
     }
@@ -215,12 +226,13 @@ public abstract class CriteriaExtractorBuilder {
     private List<LegislationResource> createDefaultLegislationResourcesV2() {
 
         initESPDArtefactResource();
-        initECertisResource(artefactResource.getCriterionList().stream()
-                .map(sc -> sc.getID())
-                .collect(Collectors.toList()));
+        // K. Raptis : Remove e-Certis from initialization of the legislation resource v2, as a fix to e-Certis hanging
+//        initECertisResource(artefactResource.getCriterionList().stream()
+//            .map(Criterion::getID)
+//            .collect(Collectors.toList()));
 
         List<LegislationResource> resourceList = new ArrayList<>();
-        resourceList.add(eCertisResource);
+//        resourceList.add(eCertisResource);
         resourceList.add(artefactResource);
 
         return resourceList;
