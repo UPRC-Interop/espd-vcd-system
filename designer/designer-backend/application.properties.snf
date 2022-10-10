@@ -5,6 +5,7 @@ espd.designer.debug.enabled=false
 espd.designer.enchancedSecurity.enabled=true
 espd.designer.criteria.selection.selected=false
 espd.designer.criteria.purelyNational.selected=false
+espd.designer.criteria.reduction.selected=false
 espd.designer.maxFileSizeUpload=4
 espd.designer.allowFraming=false
 espd.designer.country=GR
